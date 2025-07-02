@@ -4,73 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AD96C83013
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 06:49:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64EB4C83013
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 06:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E82A81FEE;
-	Wed,  2 Jul 2025 08:49:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C846F81FEE;
+	Wed,  2 Jul 2025 08:53:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fJOCxFAn";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="b8zS//Ro";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D58F68003E; Wed,  2 Jul 2025 08:49:33 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 255978003E
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 08:49:31 +0200 (CEST)
+ id 3DBE482ADA; Wed,  2 Jul 2025 08:53:48 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 465DB8003E
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 08:53:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-kaur@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5626nO953853485;
- Wed, 2 Jul 2025 01:49:24 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751438964;
- bh=j12JKStlonyeMPewyqwf8RIfQjpzQU7vUUytMDs33Fc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=fJOCxFAnBhld2NMiJH608kFQlYJCC6jB3aYYyvNrVOmA3zejEYtQW5AoY2qwSMB/N
- GdG3dnvKT9wy1DWMkmYc/XuX2WtWoMYgGwu3X2qYymBuZpkB+v2mQaR2w5P46X1Mqx
- WPb+Rg9IGcit/JS9+/Bh4viZaNTthNWkUG6rtg/U=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5626nOKK608355
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 2 Jul 2025 01:49:24 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 2
- Jul 2025 01:49:24 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 2 Jul 2025 01:49:24 -0500
-Received: from [172.24.227.249]
- (akashdeep-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.249])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5626nJhO2684005;
- Wed, 2 Jul 2025 01:49:20 -0500
-Message-ID: <cd4f6a21-74c3-45e1-bece-426efb2b0705@ti.com>
-Date: Wed, 2 Jul 2025 12:19:19 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1751439225; x=1752044025; i=xypron.glpk@gmx.de;
+ bh=OiKWF38HQBhIbmpz2h2crVuJi2t/w1lwq5F1r9Yi9A4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=b8zS//RoOxJgdecQ+unWc6X+0ODvebhUs/N6A5Qp+64tiiFlpsDI6YOq3LGVY8eb
+ 6YBjB37w514bO0p+mLadhvNp+ChGgftXZYM1mcmAdmN2QVewb34cFuGD3vSNVKwWw
+ OJrTjyNn0o81zlPQKm+1Nb8ZTl+xM4hrJkvHLxV6WfZb8Eae4R9iYc99lmomrcGM9
+ Dq+RJ09n8hVCDzjflvGs7iMGr7O/oHHpWRgiEP38R9r2YZJ5VyfZcQjVLPx0jREPt
+ cyqBnSnnn73J0fXjWpSbAllWqOIhLPccliMdZVVjrHp5/1zWnj2NsgjGmnLS+wJGV
+ 8pt1bPXL5Mw3p254pg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N0Fxf-1usLuR3yfH-017kKQ; Wed, 02
+ Jul 2025 08:53:45 +0200
+Message-ID: <b07aca56-9fde-4660-91b2-0a8b4448fe44@gmx.de>
+Date: Wed, 2 Jul 2025 08:53:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/22] ram: k3-ddrss: Add support for DDR in
- self-refresh
-To: Markus Schneider-Pargmann <msp@baylibre.com>, Sumit Garg
- <sumit.garg@kernel.org>, Nishanth Menon <nm@ti.com>, Bryan Brattlof
- <bb@ti.com>, Tom Rini <trini@konsulko.com>, Robert Nelson
- <robertcnelson@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>
-CC: Sebin Francis <sebin.francis@ti.com>, Dhruva Gole <d-gole@ti.com>,
- <u-boot@lists.denx.de>, Kevin Hilman <khilman@baylibre.com>,
- Vishal Mahaveer <vishalm@ti.com>, Kendall Willis <k-willis@ti.com>
-References: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-0-a4da322c16af@baylibre.com>
- <20250623-topic-am62-ioddr-v2025-04-rc1-v3-3-a4da322c16af@baylibre.com>
+Subject: Re: [PATCH 1/3] efi_loader: Prevent dereferencing NULL pointer
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250701-efiloader_fix-v1-0-f3c6e0b0ae43@linaro.org>
+ <20250701-efiloader_fix-v1-1-f3c6e0b0ae43@linaro.org>
 Content-Language: en-US
-From: Akashdeep Kaur <a-kaur@ti.com>
-In-Reply-To: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-3-a4da322c16af@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250701-efiloader_fix-v1-1-f3c6e0b0ae43@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:sEcGy1k9/a4trTRQkHBzoXn4oWQRcCAzitk72L5AEztytTtu6b0
+ +DhVnBCFdXVnmNw6xRBYZWQqEdN5g1DNp0o37VxsyQaWEYdNrBmWaH1DMQYDFncG7j7FiXF
+ ipG0gK/xYmU/g6Y7xBqdgcvhLy2Gajm2FwonrS25ekK2Fh6mn+51tH2vMkagonR5LC0mZb7
+ JyW0cj7S/Ycub+X9sCf3Q==
+UI-OutboundReport: notjunk:1;M01:P0:vl2aBp53hcM=;hdJB25AOIz4/fJdmnNwWO3a98LZ
+ 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
+ 3qC1OUR2ZTSHa7+zCLjw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,141 +127,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
-
-On 23/06/25 17:38, Markus Schneider-Pargmann wrote:
-> In IO+DDR the DDR is kept in self-refresh while the SoC cores are
-> powered off completely. During boot the normal initialization routine of
-> DDR is slightly different to exit self-refresh and keep the DDR contents.
-> 
-> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
+On 01.07.25 15:38, Andrew Goodbody wrote:
+> Taking the first goto error: in file_open could either result in an
+> attempt to dereference fh when NULL or else free fh->path which has
+> not been assigned to and so will be unknown. Avoid both of these
+> problems by passing path to free instead of fh->path.
+>=20
+> This issue found by Smatch.
+>=20
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->   drivers/ram/k3-ddrss/k3-ddrss.c | 177 ++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 177 insertions(+)
-> 
-> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-> index 6590d57ad84f3c4dc5c72c6c5889038c463b0469..874614140c6d4a785fcca6eda4a8736e1183e193 100644
-> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
-> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-> @@ -57,6 +57,16 @@
->   #define DDRSS_V2A_INT_SET_REG_ECC2BERR_EN	BIT(4)
->   #define DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN	BIT(5
-> +static void k3_ddrss_self_refresh_exit(struct k3_ddrss_desc *ddrss)
-> +{
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_169,
-> +				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK |
-> +				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK,
-> +				 0x0);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_PHY_1820,
-> +				 0,
-> +				 BIT(2) << K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_106,
-> +				 0,
-> +				 K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT);
-> +	writel(0, ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_PI_146);
+>   lib/efi_loader/efi_file.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
+> index 7d81da8f2d8..19b43c4a625 100644
+> --- a/lib/efi_loader/efi_file.c
+> +++ b/lib/efi_loader/efi_file.c
+> @@ -248,7 +248,7 @@ static struct efi_file_handle *file_open(struct file=
+_system *fs,
+>   	return &fh->base;
+>  =20
+>   error:
+> -	free(fh->path);
+> +	free(path);
 
-Can we change this writel also to reg update function based call?
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_PI_150,
-> +				 K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN,
-> +				 0x0);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_PI_6,
-> +				 0,
-> +				 K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_21,
-> +				 K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE,
-> +				 0);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_20,
-> +				 0,
-> +				 K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE);
-> +}
-> +
-> +static void k3_ddrss_lpm_resume(struct k3_ddrss_desc *ddrss)
-> +{
-> +	int ret;
-> +	unsigned long timeout_start;
-> +
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY);
-> +	ret = wait_for_bit_32(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_345,
-> +			      (1 << K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT),
-> +			      true, 5000, false);
-> +	if (ret)
-> +		panic("Failed waiting for low power command %d\n", ret);
-> +
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_353,
-> +				 0,
-> +				 1 << K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT);
-> +
-> +	timeout_start = get_timer(0);
-> +	while (1) {
-> +		if (get_timer(timeout_start) > 5000)
-> +			panic("Failed waiting for low power state\n");
-> +
-> +		if ((readl(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_169) &
-> +		     K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK) ==
-> +		    0x40 << K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT)
-> +			break;
-
-As i see, wait for bit function can wait on mask also, can we use wait 
-on the bit transition with timeout in this case?
-> +	}
-> +}
-> +
-> +static void k3_ddrss_deassert_retention(struct k3_ddrss_desc *ddrss)
-> +{
-> +	int ret;
-> +
-> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +				 0x0,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD |
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK,
-> +				 0);
-> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +				 0x0,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD);
-> +
-> +	ret = wait_for_bit_32((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +			      K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-> +			      true, 5000, false);
-> +	if (ret)
-> +		panic("Failed waiting for latching of retention %d\n", ret);
-> +
-> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +				 0x0,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-> +				 0);
-> +}
-> +
-> +static bool k3_ddrss_wkup_conf_canuart_wakeup_active(struct k3_ddrss_desc *ddrss)
-> +{
-> +	u32 active;
-> +
-> +	active = readl(ddrss->ddrss_ctrl_mmr + K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1);
-
-As seen in 
-https://elixir.bootlin.com/u-boot/v2025.07-rc5/source/arch/arm/dts/k3-am62a-ddr.dtsi#L10 
-- the address range for CTRL MMR is starting from 0x43014000 and has a 
-size of 0x100 but the address we want to access is outside that range. 
-(0x43018318)
-We need to increase the address range in this node in dt file as well.
-
-> +
-> +	return !!(active & K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
-> +}
-> +
-
-Regards,
-Akashdeep Kaur
+>   	free(fh);
+>   	return NULL;
+>   }
+>=20
 
