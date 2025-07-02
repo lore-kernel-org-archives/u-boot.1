@@ -4,113 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64EB4C83013
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 06:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E41E2C7EE30
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 06:57:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C846F81FEE;
-	Wed,  2 Jul 2025 08:53:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1FD4B81FEE;
+	Wed,  2 Jul 2025 08:57:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="b8zS//Ro";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="op5Wnl9R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DBE482ADA; Wed,  2 Jul 2025 08:53:48 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id D16A982103; Wed,  2 Jul 2025 08:57:44 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::628])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 465DB8003E
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 08:53:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D98D8003E
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 08:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1751439225; x=1752044025; i=xypron.glpk@gmx.de;
- bh=OiKWF38HQBhIbmpz2h2crVuJi2t/w1lwq5F1r9Yi9A4=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=b8zS//RoOxJgdecQ+unWc6X+0ODvebhUs/N6A5Qp+64tiiFlpsDI6YOq3LGVY8eb
- 6YBjB37w514bO0p+mLadhvNp+ChGgftXZYM1mcmAdmN2QVewb34cFuGD3vSNVKwWw
- OJrTjyNn0o81zlPQKm+1Nb8ZTl+xM4hrJkvHLxV6WfZb8Eae4R9iYc99lmomrcGM9
- Dq+RJ09n8hVCDzjflvGs7iMGr7O/oHHpWRgiEP38R9r2YZJ5VyfZcQjVLPx0jREPt
- cyqBnSnnn73J0fXjWpSbAllWqOIhLPccliMdZVVjrHp5/1zWnj2NsgjGmnLS+wJGV
- 8pt1bPXL5Mw3p254pg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N0Fxf-1usLuR3yfH-017kKQ; Wed, 02
- Jul 2025 08:53:45 +0200
-Message-ID: <b07aca56-9fde-4660-91b2-0a8b4448fe44@gmx.de>
-Date: Wed, 2 Jul 2025 08:53:40 +0200
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yyxCfbSdysONzkvP4WkMQqE6zI1iTHhsRUVfjUX2lhGoiFY2O6gmDibFUWcPPoEZtr8z+vfKkRB3y1XJZUH+em6IN6chnMbYz+ZF/iVIwvucT4qO4MHfqIH40m0mo4nq4+bn7dRPT36FJmX3T+w1sX6D8ACukspPdQ0X8Q6zMhzTvo57H5cilETt0u8qqXNHayFqurA3bpOZ6Umft0yCZJCyAcKbfVH5udEu2nlKBRVX6jD3KzYnjS5SpN4xtVC9aS/BkUAjoJ/1ikSQdJtgI4LbJa9sBM95glqYWbJ1RBqgbFQVnTTeB//1xDAoi1h2UB431gTJUoLOK72wZFIN1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=07vToAXC9ApeA85JWIeug2N3IEtrOJImi/kPzJBFXPA=;
+ b=nTD9qkRbrjrRNsQzmCKnZ5k6lY+a4h2QQjnyiwbjTScNZvZM9onoZQBeNEmzyhZB7vh9Ph0s9WzlkjzCttYwzSEG3C5Z412urg+GIFc7pqBod2y2bNrg7iQYlTf884rQyiLr6kMxmKFBL84fujImr8ijT/O9ngHOa5lFis6+bvXOtIkWgvsFx/vzNZARslPCD9vcudVx/I3UC4NMiQGwFUL7ho4ngQuSpXXn/j+NSz/tISd9KAJp74a/GeUzvbTqJjrPfEYsZ+rKM/J7+VLvIBIFSciH1YKIVgOu5Sdp1OYgw0k0DL8Qx9xzpWgNsirjEo72vT7oYpUAx5vUl2iXfA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=07vToAXC9ApeA85JWIeug2N3IEtrOJImi/kPzJBFXPA=;
+ b=op5Wnl9R0pT74KZwxuxenV9Ro4k46ZTgiUunK/HyP/o0HQy5BDEsKTTDUHy9My2lKaHLR3YHrGvKVaTzoDo7vHRzllos9BjH+3Ghl4h4N8/xUR90i753/p+T4OjICLxNpUD2GmTD/oWM1h/A1zjWwHltbzcnDphfmICLIKlbcWY=
+Received: from BN9PR03CA0360.namprd03.prod.outlook.com (2603:10b6:408:f6::35)
+ by MW5PR12MB5622.namprd12.prod.outlook.com (2603:10b6:303:198::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.19; Wed, 2 Jul
+ 2025 06:57:37 +0000
+Received: from BN2PEPF000055DB.namprd21.prod.outlook.com
+ (2603:10b6:408:f6:cafe::b6) by BN9PR03CA0360.outlook.office365.com
+ (2603:10b6:408:f6::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.30 via Frontend Transport; Wed,
+ 2 Jul 2025 06:57:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN2PEPF000055DB.mail.protection.outlook.com (10.167.245.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8922.1 via Frontend Transport; Wed, 2 Jul 2025 06:57:35 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 2 Jul
+ 2025 01:57:34 -0500
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Wed, 2 Jul 2025 01:57:29 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <tudor.ambarus@linaro.org>, <j-humphreys@ti.com>, <marex@denx.de>,
+ <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
+ <caleb.connolly@linaro.org>, <sjg@chromium.org>,
+ <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
+ <quentin.schulz@cherry.de>, <Takahiro.Kuwano@infineon.com>,
+ <p-mantena@ti.com>, <git@amd.com>, Ashok Reddy Soma
+ <ashok.reddy.soma@amd.com>
+Subject: [PATCH] spi: cadence_qspi: Set tshsl_ns to at least one sclk_ns
+Date: Wed, 2 Jul 2025 12:27:17 +0530
+Message-ID: <20250702065717.3871435-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] efi_loader: Prevent dereferencing NULL pointer
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250701-efiloader_fix-v1-0-f3c6e0b0ae43@linaro.org>
- <20250701-efiloader_fix-v1-1-f3c6e0b0ae43@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250701-efiloader_fix-v1-1-f3c6e0b0ae43@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:sEcGy1k9/a4trTRQkHBzoXn4oWQRcCAzitk72L5AEztytTtu6b0
- +DhVnBCFdXVnmNw6xRBYZWQqEdN5g1DNp0o37VxsyQaWEYdNrBmWaH1DMQYDFncG7j7FiXF
- ipG0gK/xYmU/g6Y7xBqdgcvhLy2Gajm2FwonrS25ekK2Fh6mn+51tH2vMkagonR5LC0mZb7
- JyW0cj7S/Ycub+X9sCf3Q==
-UI-OutboundReport: notjunk:1;M01:P0:vl2aBp53hcM=;hdJB25AOIz4/fJdmnNwWO3a98LZ
- zJBFI2Kcs/kr7ktzKl4gYTEP35FARP37ebAIY67vRb7T0T2k4ncf3wdwrBX9IxRfh6o2nW5WY
- 2HfKE+lWZicNqvoCJJKm669VjxrSaRDM9sSxGHLMYrApW1TQpw2mtOlprfTfTUi+sICJwRIfu
- dUoLw7/voTWabOExGohF9GmzNkXvp9LwFLwOKZUtgjMAEuvEJZqaZH3fzO1BCJyDU4dhnGc4D
- FykIi2/kf9QoWHyFbOREoINq5YYHmwjBUlcrNpuwfINqczR1RDrP5MOsFTWSX9SU9D6HoYm1D
- sLA8zUjAbT63XjE0r2WaF6jE4tQ0nBv2wvsQiDD+XCcx5f2ER4RT2D6nRYeqsXCdreBnSAX6S
- gOEvUY1NU4zmt9ZqWswrgkeo9/PCp2nx4z9QBU880igGpGm0A6JxmMLTpQXru4QGVJWXRECcl
- 4v19T7zPR/TWoFbx8qTVpEZ/jNPgH5ZgEwEWRzKrOijrNC0buERz60wXjkS14pJTT2ss9upIc
- ox0/MPCEjUeGvgIPL9gBBBLwAGAZfQxXYubH9GpNLKLJlRf2XazmN7gz5mJ2o+kxGpxNwvE+7
- qyUneMddDAj2hjUFua8+DyWgIcunX5HTGDSLMRgYflpfauT1+6+t8OR77Qgwp5Tv0BZTraF+s
- yumCL+M3m9rIzrXO88T7PW0t900rGpsocnTDRA4ZyfIiQJQ2Jo9NyW8Q8fqhQLtUAaF0TI6ba
- e4I10Zk/l6OTXAz5KP4+8dNdIic79lp10KjKyhm8YYq02KhcVW9+DDanA0OlsvT6pGwRL99he
- r3noQgYRWIhdam4K4XeUfXIIyOpA11/6SAuue/QB1Z39+irm3kS1cEvEWx2fh/XGiWrqHjcHe
- xgvQJ/9I30Ae7ooT46wr7XdxkuwXwuvqvcOcG4WiYp4HnNDZ3LsbzcXvwWhy+EzIL1KFKAmGR
- 3rFNpNM8fn+GxShUYDWd3rtVHoR9L5LldsWoev1GLudqFbvObtNk7rBARhm51yJx29D9LzvIV
- p/Nk4Zf2t/QgJkcjqJZVbcq2YSp7M74cWxzXdqCrrG5f12tjdLDixYsmrDJuJbYPL+LrFsJBr
- 9B9uTtm4I10yvmDUMaF7vhc0AnBaFpPQRcg+w7jDjdqluFglfhsVPvybX41E/LymYK1HmJxoe
- Twf4TlbvotTH4LkDGhBXOl3KjGU0EwAZVDuyprNgIJx3gFv3F6zA1ivFdczW7EaQe0TXzU4pe
- JKVngFPmkMtb6EUgwhldcuNgIIJ3GGK9lZoyVNeCVc3unuuxyrJclT5eulvJigQMEdpjhmgBH
- 82ie9Bf9D432xK0z8NA+t91POo0WD/qf3MZL5FBUqSC+0wrxoJLcM6iwdWTO0ofngUtq2QDt6
- Q2hF5aulJWUmNoo2O2STLjcLqDgYE/aCEdTKD9EFTZZggYEzQZbx7VJ0xow8SvVg6Kipxu07o
- FPkH3yiLtxljT9M8C2cuEtST72FrlORZ9nlrPyS6O6tzGBm7u2IoTWSpb8MAA/JTmwP2OEnxK
- AwhXcw/lRt0ofzbFBSpicDu0CBZhAIXjW/Ra/r3dfOwlVc0SMvKdOqqT0fzG9s+U3isBw2Ga5
- UBq31gAAjSyFcrRQPM/YTd06gQXF6HDM+ob5gjl7KhGuEcy5gjmYbDFVlvSJj2kLjloxpMKpV
- mrFDBOB7tLPPEmZMKxG7bS0ysxJoe6UuTxzZzgfVtKFV19IHKIxIxB9vW4VNC3iKCrIuGsPk0
- WvsMADGY3MphSknOqJBbA7r2aOQlMonec3Ve/4hT4rpXdwzgKzfbRIvPMuQkmklc5SAuQQO3X
- hGVOU9fu/Qv0wZQcv4CuIw3ug4+3pua9jTHFLq5Lfby9ysN5VepeA2sFtxVoTLo4U/T4pK5LW
- //8CvsBhCbOgzJd7oa91sBUBWcPEaWV4Q+ILWTLo2WjNvdm2RFBc2DjF/Kixd25B+OJb6e/S+
- dfbF8NsG7OOJCp3bpA9rdBpNxfTehQwVHcHcpoOZG42lh+VG3I5JHvg7eJq654JlQC5hT1KBO
- sY3we5dpeVZOqCYPG8As/WwFfyu1m0gSeWdk37WZgAeDriaWOA+3UvhLMKoKX5/IR8DeOdOjr
- UuoCHkWXLZH2L96eNQZDhCAJgP0iyKxOPRVMsPnkW8Hd5GDZAGX2idE2mjBxr3dKOqeaWGjGB
- pr8Z+9Hf8Sap0IERJ2hvDgd9U7tJfJ7+u0GxCW/cuy89ZeHCrA2omT7iZLC7Jgi/VCXbqAXH2
- 1vhtZScZzAbYysXuym25QGdryV1UDHUV/BXSXJa23sQ/i1ki3wJ1bidh0JjXIMifvubNtdOZW
- dJuTr40j2LsTvv77anaF/joqaYFxkKz8w4SNQVA+r4cxxeA7lKiz1qT5sAix9IMCUPHniK/rR
- wPEf2hsVX3HKktPKNW+tTE0lR7Nhy1nwssGkYlo+u/lBS4CRbVK1PJU8vAvoQh17kS/E9oiYi
- VfFaKGcPTLuxhEPO86T4Z8c8G3cPAAW9RQbOj1LmH9fvvDhDtRGziGUPQ5t39I/9RzjfKQY5W
- LNxonOe3IGiIOCW1YA4INhXB8UvN8KMSo0FvvPs52soERa2Di/YnMG4GYaT+akcifTTx1gaMd
- bXqGPcheWheZSs7zL2zA/EfBiIWlw2p0MTddK7ahSyGI2wGVYgCRdlcarcnPRLW3IuS8jY82O
- uGK3dqKqWhe3lfUpN5wtSi1PDPDtgNG5CvscVV5/ck3ffdzZI5WjXdV3PtkSxYu/0V/Y4qm+h
- 11DxnEuhnSzMy4zkiOt1pW2LXlpkJ4397a6rSsBFrz6fHkzgPGMGAhYt2dwuLdmbe+inaFiJ/
- +OHJkcf/UqyFsim+cWrNYex11/qLjHH/RUEXQ1SyGzjDzSYYiMIz+0h83mkbBbYh5Wz+yTpVV
- 54CXUj09EIYRlkUEZpzjXrEgXJXPQ7H0mxzTfqUTEk+jb6u9eu1egH4GmsnUX/otIFxPfEcp0
- wgVFl8+HkU1SSALdL4GRa0wmneOQwkioYtgKo+cMFYsQIexNnKPIdREY4teih8DEXqP83QRlC
- 0yrlFP9+09N5gEukD+kHsw7981HIEyudJxWOXWbhSYVTdDw9Q+tRespjwcDLIojNlIEGOmEah
- MhDKY1d+4z3/UMTwUu8HzxJRXBziAJSv65/wHxQ9KHmFEQyXWtHCSB3/Ilq6T56Nmc3f4ToRj
- pCHTuEfQxqAp7bTWJKd5dCKrLjY9ddMdqP4+BscfuwobML9ELM/aHOC+Oe5Z0cGLyr+hkhVHg
- h/QBH4SXHXMYypX9TWfH+pgqlSLh3ZMllq7xAAdPcVJA7UKxN80wFJpLbAAXsOKDetCZixwea
- D10VfgNR26WyFx1qtdl68iAgDBHlGXluzhculKEbmjncgs49C0DW+tjJI8YJ8FYxTRVOPSFPK
- 3qC1OUR2ZTSHa7+zCLjw==
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DB:EE_|MW5PR12MB5622:EE_
+X-MS-Office365-Filtering-Correlation-Id: 613aedca-e0be-4c07-8a3b-08ddb935b9b5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|7416014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2moqazWZ2b5y0iRylWXbMRCTbtSfl6bQzuMub2qm68D9NvHn4cl1SPnIe7Ui?=
+ =?us-ascii?Q?VXLjZfkqR8IKCf8zFJzfnDdJySY67nzCmDHXfZ/coFlL1S23EN4T6eeZyYHl?=
+ =?us-ascii?Q?tx2GSWSTxQT88b4+RcNSgXeRaoWFyq1FPZEfdmkjwqYtkGlQtvh9Fsf8xkxF?=
+ =?us-ascii?Q?NL2Bg3rTBZcroWYS3jHCoGPVCaDpDWsZrmRel+WTUKJuyAx0aOMaE8INZqfz?=
+ =?us-ascii?Q?NEH1XWzrE2ZwOFB2DkJYAodWsRlJEgovH/A6YAbmSGjra/NK7KVnzm2XUsEe?=
+ =?us-ascii?Q?571PfkX9bOntn9w5j4kTmHKlmVhsPB/6ZCd+7kPimYl4DzeZtaKuwUth/EsW?=
+ =?us-ascii?Q?lz8Q9miAF4bT5LNv9mWWJiCIwdeWHFIRURMJjQKNzGWaTHaZpQLp9SyqDLe5?=
+ =?us-ascii?Q?TZrq2JMFuJ9YxB0SXO6OtwrSF03fMaTeBcEmTkFd04aOu2r/BHgwF3hGralO?=
+ =?us-ascii?Q?1UN5P41Oo4kaS24oc6xBKj52lmZwMWT7RHvFr2l+HXqPOqNUUS+utWSEbLUx?=
+ =?us-ascii?Q?2MtFFgGVlI9hhzWAdUMa6w1yEqrlv9pbMlXhzmMVjAa6olkE/MwuPpQ0gzMk?=
+ =?us-ascii?Q?KWXKrqLVsY9RI6Zx3W3JDHdxjq1PBjnoxoJjKoK1Zxhk3AIpy0tRzzKh7abt?=
+ =?us-ascii?Q?C7vDHRS7D8u1IWNKG2fL3VS3333aZJ5MA3oCP4cszTdV+LYYZnsR46hJihzY?=
+ =?us-ascii?Q?bMp9C8WNWEObNmF6jGvlOCqlIVoMq3XxD6JbJf28zSHrtAFNyWp8xhYMFAPy?=
+ =?us-ascii?Q?zJrqRiF4TFADBsU26b9srO3j8JmNhOzr2V6lRotyUbT+4hiCF6MChrMCLMOn?=
+ =?us-ascii?Q?DC0HhNSiwxSyYyJg+delwZWeLEhBFt20bmRt+U2hR4yE2KJ70z7Euq/gkcua?=
+ =?us-ascii?Q?5jqA4ruQ+SsRz5GOklx6nRhGBykg9miiOcbWnuTuX5l0cRKceGdGTv6LvNmB?=
+ =?us-ascii?Q?7PcdsNEaVdUBUcbbIqcFn/DNzXw41NBeY9Zk+1TkJMIAapIWt79xz41Q8ysT?=
+ =?us-ascii?Q?Yg/8P4eN0eDLvZIFqXIKJjh5OWHlHWDtgZ2Vhh9Vwr4fq14F+S1iVe86ZWd9?=
+ =?us-ascii?Q?NSv6tXVPpDqrfEHuW95LdGdy+Xn1wrFsAu87YNyFKkolH1Y2byAmXzBehyJI?=
+ =?us-ascii?Q?P4W7WdDJwX6q7fW648DEjJwuvnhkiK5ui57qIMXd0dG/KGHRgwvzOFN3+I0o?=
+ =?us-ascii?Q?mTk+QLlrPIa5s5ZUhDKzRFdU/5vDircGCZuxXiCOMSdPJHlvLLjjaCZUUs5Y?=
+ =?us-ascii?Q?omP2OkVxBT/4KwbmIF79NU9Gp8GGISx+7RtvL1LLBcayloehaOAWOtB5tBIa?=
+ =?us-ascii?Q?l131EsIV4HAkuUS0NJ7IyrAuOZ9rVozpUxm75yhsiuDI5e4/aWV3Uirl2tjQ?=
+ =?us-ascii?Q?l86sCLhMYZCRBgMLZXJiXc/7R8t2FaqLsP5qOHrLIDJgxXOQMqpht8L83Pnw?=
+ =?us-ascii?Q?tq3t/+YAm/fqHwGQ/j7P5V+77E2LzOV0fXmH57Fj2SD6k4PjHyy1wHmh31uu?=
+ =?us-ascii?Q?zrs7PDe5isMGEy6UuKS0TTMsVEZyK2YOZH1T?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(7416014)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2025 06:57:35.6140 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 613aedca-e0be-4c07-8a3b-08ddb935b9b5
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DB.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR12MB5622
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,35 +153,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 01.07.25 15:38, Andrew Goodbody wrote:
-> Taking the first goto error: in file_open could either result in an
-> attempt to dereference fh when NULL or else free fh->path which has
-> not been assigned to and so will be unknown. Avoid both of these
-> problems by passing path to free instead of fh->path.
->=20
-> This issue found by Smatch.
->=20
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   lib/efi_loader/efi_file.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
-> index 7d81da8f2d8..19b43c4a625 100644
-> --- a/lib/efi_loader/efi_file.c
-> +++ b/lib/efi_loader/efi_file.c
-> @@ -248,7 +248,7 @@ static struct efi_file_handle *file_open(struct file=
-_system *fs,
->   	return &fh->base;
->  =20
->   error:
-> -	free(fh->path);
-> +	free(path);
+tshsl_ns is the clock delay for chip select deassert. This is the delay in
+master reference clocks for the length that the master mode chip select
+outputs are de-asserted between transactions.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+The minimum delay is always SCLK period to ensure the chip select is never
+re-asserted within one SCLK period.
 
->   	free(fh);
->   	return NULL;
->   }
->=20
+That is why tshsl_ns delay should be at least one sclk_ns value. If it is
+less than sclk_ns, set it equal to sclk_ns.
+
+Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/spi/cadence_qspi_apb.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
+index 65fb2d8f9fb..4696c09f754 100644
+--- a/drivers/spi/cadence_qspi_apb.c
++++ b/drivers/spi/cadence_qspi_apb.c
+@@ -303,6 +303,10 @@ void cadence_qspi_apb_delay(void *reg_base,
+ 		tshsl_ns -= sclk_ns + ref_clk_ns;
+ 	if (tchsh_ns >= sclk_ns + 3 * ref_clk_ns)
+ 		tchsh_ns -= sclk_ns + 3 * ref_clk_ns;
++
++	if (tshsl_ns < sclk_ns)
++		tshsl_ns = sclk_ns;
++
+ 	tshsl = DIV_ROUND_UP(tshsl_ns, ref_clk_ns);
+ 	tchsh = DIV_ROUND_UP(tchsh_ns, ref_clk_ns);
+ 	tslch = DIV_ROUND_UP(tslch_ns, ref_clk_ns);
+-- 
+2.25.1
 
