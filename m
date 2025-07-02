@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A66C83038
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4CAFC83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E762582F35;
-	Wed,  2 Jul 2025 03:04:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40AB982F30;
+	Wed,  2 Jul 2025 03:04:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FfME6G95";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rpHlqY0h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EEAE82F2B; Wed,  2 Jul 2025 03:04:10 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 420BC82F5D; Wed,  2 Jul 2025 03:04:13 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29D4181E13
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2138382EB8
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-73ac5680bb0so1679157a34.3
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:08 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-2eacb421554so1146082fac.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418247; x=1752023047; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751418250; x=1752023050; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P1Y6nFjRjiBYKQneCLWRa41OaeGerR8ZgpGf4bxzHO4=;
- b=FfME6G959hoWqMpaJ7ItHP0pNBhUF9LbMre0z+62PMO6cRBBgxHNJDziRaF6U1MYMR
- 8mavHNf+lOtBDisiSVoPI/HxV2gGjXfrxnqIjTO7WehQ73tji5xUx7LE7B6juzrgqERR
- 1CWx17do/7WQmFIIxGL60eJwu/QVAvl4UFduM=
+ bh=cneBCC6Bd5qhG5mhbRLHDMbyWw8RLDPlwhnTXVswQfY=;
+ b=rpHlqY0hy94XqX1gYSRWLcEHRynph0dSOqQxT2kRYeJZ+LncUkW9hyCnmBmquS1fZC
+ QcIUy45QO2JNintdRSiZbSh3tEwSvwWjxCmSUAvoA2IMGPXy7mAGOf0LOWfxWdhWBBLc
+ PZ1hkZ4YzjPKrRYq+dR6/VnIX1c/R3uzKW1EQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418247; x=1752023047;
+ d=1e100.net; s=20230601; t=1751418250; x=1752023050;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=P1Y6nFjRjiBYKQneCLWRa41OaeGerR8ZgpGf4bxzHO4=;
- b=KoYmt8hIIAaplXBJr3OBKIogtdKwWNSWbiRD/NLO1qD3HP95D8WgEf9vuIsZAftAQJ
- PaVQAwfmcvSClgDsZtQW4dj3wOUN/ErPJYm6fERwsj3ymF758VKOkYbWTK5Wt/hqgiOH
- 0fF/EEMdQv6dKOwmmafEwLReDOn6479S2F3omgjsECI81KZUKPXr0wMiT4bnp1RmZ1qh
- rTwhYxRCI/+QjQKfkXy2xs15GvykwkOvJuqeF5V0WUgJjAb5nPcW+1rewByW0YsppJtZ
- ILj8oZeYZZEZrQCRRU9IJDUVvTK9EJK5CsMBk6O+nhndL1UcG2PnokarTvV+kObM5I7e
- iLhQ==
-X-Gm-Message-State: AOJu0YyUPXv3sI1+q9ECSAGgB0hXOTMoe76A6mytFkemGljrWgc40k12
- P4WGM1do4IpKJPpO9VKdh0uRDSVtFOAIAyC5k7K3JinWyYJG0ZJliAaMhPi5QL+aWcyEaK41mFw
- sXCQpk9Q=
-X-Gm-Gg: ASbGncvRjSTgmoaw487PEFeZnk2UTCj/Cu08n/y7ePX4McgVNEA55hjEOVy6/DQhkkf
- LsNKQGrGk2BwHTcnef7GArWY0/uQhVqTnlX2XMW1o7u+t8IWwAq7wLidig+/ncwSn6OxrgBc3dG
- /vu5DNCLsppLc23ZK7yYaUOuLzg1bS9oclqqhef6MiwuTybz3hK0vZwLjD027T+YfyCmumq/Lpw
- l8/TzOo6fDV5p+IPXHZNMEh+x9WiOlbcKpkJLJz0tlxoJAwu3/VcTId4/ilWlpTDo1WQsv4Ltbq
- hDoZwEnf8M1Pe8Y2jbNupmgpF0s2uCX5IZosBqc0fVgQChGLlpzbKKZCvjoI0cFw7XhtVINe4Wb
- AH3Nv0d3EjyDw/NEX/RWSLDtAWtd1Pcu+Kg==
-X-Google-Smtp-Source: AGHT+IHsJ3tybq6tQcPobUZiO4TBNLQArF+9ChjODHhH4pgCV4ACLNjvPTrn09Lv3EXK56B8843yYQ==
-X-Received: by 2002:a05:6820:8c5:b0:611:e30a:f9c7 with SMTP id
- 006d021491bc7-612010ace40mr768556eaf.7.1751418246852; 
- Tue, 01 Jul 2025 18:04:06 -0700 (PDT)
+ bh=cneBCC6Bd5qhG5mhbRLHDMbyWw8RLDPlwhnTXVswQfY=;
+ b=wlpM+G0pHIvT0wAwaf94tWfAURkrX4wrbHnJkLZBUI1byontio6zv97czY/pixOmh6
+ /hyWF0czgt5wdH7oEJT1JG61pmzNXDQUUKQupDtr0VmZqjvu9VJUW7kCs/QNw0XZ9ZXY
+ yeJqP5sS+00UV/2y3rPq5F3/p8Urj+sT0XyaGkPzI6vvVeLT0RNeJV34C2yEvVCFcSkH
+ VhvgX1BUXaLQFjsibXVerI8BbXt+BGpcN0gqFHCK262vTUwdXwOlWfoGWJKHv9gl8tSG
+ +k5OuxNBw1/IHFgyBB8rYrWtpjRDW9380WBqKlu6qiGNABp2FvNF4YU3h6dTNfVHnFou
+ Z8wg==
+X-Gm-Message-State: AOJu0YyOW5QYga+DsTUfZAFWPv7owRFZ/KWcTjBGlkJJO3jKy1mVCEG7
+ jDqWxVkSHlALH+QhoDyHFKIJ53pntQzAxqbtbO0n9CbuTNd3xSKqOqpLtbxXzrJ18bZGRHXG5K6
+ inqTukUw=
+X-Gm-Gg: ASbGncviTopfuyNtVutZsFJ3xHeWhJAIVKCzIQEfKYyNLCg6hrkIZuGIeleZB0KHkSw
+ xSLM9vXZMFLQHYiSQa1+xNhYIo+aCMCp/55nPV1JSl3V+G3VD1C2zPsKxEDTkS3guVrZH0WKmLP
+ 4QYyeDSk37rFWBajVwwFkR3SDrlk/Cy676MdTyBVQOnjFa/owC6AO9ujpyWMqn/FQOiZw/eg/xQ
+ q42kKJ1Ybt27keJGx3XxYsS53sDEJCYPZV0s3mWNLvvdX5o0qf8P1TcOrzUIaihZg5grMjcZZIY
+ u78DVKVxYNicX67fQw1q9DCkkRgIZDawrh+12+UhV1Oe8N5PVYtM8yNxtWh2pKqf6W2chTVlDzw
+ 0ZVNPbpNn9jgu4Td7qTUUHdo=
+X-Google-Smtp-Source: AGHT+IG/PY9uDqA31mIaFfQlpLjNHHd1TYS8ReMcxBnqYp6wBQHJErxR5IvMkoQKPl0zv3TV7rXzmQ==
+X-Received: by 2002:a05:6870:1b18:b0:2ea:6f56:5c1d with SMTP id
+ 586e51a60fabf-2f588923c2dmr839678fac.0.1751418249770; 
+ Tue, 01 Jul 2025 18:04:09 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-611b85c79e6sm1645638eaf.38.2025.07.01.18.04.06
+ 586e51a60fabf-2efd4ef71e3sm3551937fac.19.2025.07.01.18.04.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:04:06 -0700 (PDT)
+ Tue, 01 Jul 2025 18:04:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Stefan Roese <sr@denx.de>
-Subject: [PATCH] spi: mvebu: Correct dependencies on MVEBU_A3700_SPI
-Date: Tue,  1 Jul 2025 19:04:05 -0600
-Message-ID: <20250702010405.18791-1-trini@konsulko.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH] nand: raw: Kconfig: Correct some dependency issues
+Date: Tue,  1 Jul 2025 19:04:07 -0600
+Message-ID: <20250702010407.18808-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,30 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A dependency exposed by "make allyesconfig" is that the logic around
-this symbol was not quite correct. It needs to depend on ARCH_MVEBU and
-ARM64 and then select CLK_MVEBU.
+The hidden symbol SPL_SYS_NAND_SELF_INIT was not being used correctly
+leading to Kconfig dependency issues seen with "make allyesconfig". As
+it's a select'd symbol we don't need to have a depends line on it, and
+then in turn we need to also update the logic on SYS_NAND_PAGE_SIZE and
+SYS_NAND_OOBSIZE.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Stefan Roese <sr@denx.de>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>
 ---
- drivers/spi/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/mtd/nand/raw/Kconfig | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index a3513f0a3ef8..1ae36b5a348b 100644
---- a/drivers/spi/Kconfig
-+++ b/drivers/spi/Kconfig
-@@ -351,6 +351,8 @@ config MTK_SPIM
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index adb271dfb8fb..c9b4450aafa1 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -11,7 +11,6 @@ config SYS_NAND_SELF_INIT
  
- config MVEBU_A3700_SPI
- 	bool "Marvell Armada 3700 SPI driver"
-+	depends on ARCH_MVEBU && ARM64
-+	select CLK_MVEBU
- 	select CLK_ARMADA_3720
+ config SPL_SYS_NAND_SELF_INIT
+ 	bool
+-	depends on !SPL_NAND_SIMPLE
  	help
- 	  Enable the Marvell Armada 3700 SPI driver. This driver can be
+ 	  This option, if enabled, provides more flexible and linux-like
+ 	  NAND initialization process, in SPL.
+@@ -689,7 +688,6 @@ config SYS_NAND_PAGE_SIZE
+ 		MVEBU_SPL_BOOT_DEVICE_NAND || \
+ 		(NAND_ATMEL && SPL_NAND_SUPPORT) || \
+ 		SPL_GENERATE_ATMEL_PMECC_HEADER || NAND_SANDBOX || NAND_CADENCE
+-	depends on !NAND_MXS && !NAND_DENALI_DT && !NAND_LPC32XX_MLC && !NAND_MT7621
+ 	help
+ 	  Number of data bytes in one page for the NAND chip on the
+ 	  board, not including the OOB area.
+@@ -699,7 +697,6 @@ config SYS_NAND_OOBSIZE
+ 	depends on ARCH_SUNXI || NAND_OMAP_GPMC || NAND_LPC32XX_SLC || \
+ 		SPL_NAND_SIMPLE || (NAND_MXC && SPL_NAND_SUPPORT) || \
+ 		(NAND_ATMEL && SPL_NAND_SUPPORT) || SPL_GENERATE_ATMEL_PMECC_HEADER
+-	depends on !NAND_MXS && !NAND_DENALI_DT && !NAND_LPC32XX_MLC
+ 	help
+ 	  Number of bytes in the Out-Of-Band area for the NAND chip on
+ 	  the board.
 -- 
 2.43.0
 
