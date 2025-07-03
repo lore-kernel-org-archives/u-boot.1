@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97DB5C83F03
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 16:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0598AC77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 17:20:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E71B082F49;
-	Thu,  3 Jul 2025 18:29:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E2E280E9A;
+	Thu,  3 Jul 2025 19:20:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NU4zIFyp";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZQOcrZkG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED4AE81D5D; Thu,  3 Jul 2025 18:29:37 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 9775081D5D; Thu,  3 Jul 2025 19:20:00 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D843182063
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 18:29:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 454DE8091A
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 19:19:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-73b1b1b3cb8so35514a34.2
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 09:29:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-b2fca9dc5f8so126196a12.1
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 10:19:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751560174; x=1752164974; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=amarulasolutions.com; s=google; t=1751563197; x=1752167997;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ut9sCETdCyI+o6EBE6MD7APkTO/1/P8XbHj2iS2j0aY=;
- b=NU4zIFypK/jWUzq22FBlBmcQ6TFAAylmVmmFQ7aMbtV4juS76anTBs+DecOxqCYqpe
- TTts3P4tzp7O37Ox0rT4W6Eh2iyey9t9oUzrcMvg0rIsV7CJTv7PnIIjj7OQlAD77NPX
- M1F8XuiSAcqUWKVHE+b+bz0tIFE7xKw7v/f7s=
+ bh=4UIgQqhRZ7HTXjcJ2iMk9KWLAZu07Degy1wUoombKxc=;
+ b=ZQOcrZkG8oB+yiW21SGFYy9TN451umDMdl99OI45y5jAEnTxm5CGPz/1ZPRGIw6sx0
+ WR+W15982DmWh3ZZ6nx9Pm+Xtc0T9cm3+H5H1fSsaGR3KJHpBoKoPt0zH8bv5RWZq7kG
+ 0u3mKMVopWF3X1qOaZaMETcthDJ6gp4c82tcU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751560174; x=1752164974;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1751563197; x=1752167997;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ut9sCETdCyI+o6EBE6MD7APkTO/1/P8XbHj2iS2j0aY=;
- b=DiHG/ak2DIDZIkUThAJ+XUAvZAglC3F+U8BOa8eefFJJbK8GdB46uEUNO5x2ylAGdR
- Q2Z/FWa5z9Qlpwezqd4w6VGQywyHKpn8B1/jXWcgFGA3QimY3uSB5Uymc3SWMEwLbrF6
- 7jj5kfKz3VDqZRAoYfooTinTlI3j3qCYiPciQsBZHzL1DM6tL5wVYt/MjxhajpcolgDS
- 8BdDzfAOdA/GLJZYyphigfm5hIg8WBR3vGsay94u/oFLWXzx7XxlICUD3MMo2say6cJA
- 2dpkf32mhShWXl4lILppmZ7pBBb2cbXh6luxpNP8VWKdZENW76uXBZA4TIW9a7cbD8/4
- 6ZjA==
-X-Gm-Message-State: AOJu0YzPJBeU94btSXEA/ZzudUeCwnCo8Ue8LG1eqQRwQZwnROyhox9L
- 5CPXj9Qwp0ULB7XarIlDfSYPTQCJlHSgwpMw+eYG5Rx3S/jukw5F1ecN1QWT+vYsIjqv9B5xxhz
- gDttO2+w=
-X-Gm-Gg: ASbGnctg0F9gLIlhiIbnl+/8cYw2pfd9k7rQzErwFlvkS9anyeAGE5hNmmonPVtMMU6
- f/Huc1xxRWZLxyUSpeZrnSLpuNoNqrO17ZQ5n1Y92rb/q8nkhCOX+bH62ijsi9V33cqFEADx24M
- QABvkmZ8qgoyfH77vll162qd+ToJGtYjNC0Ml+bxHE5lWHhJuDxjb+p56hCjtejHdLH2cUy3LcQ
- hImfQ9GYyCDXM5+19ZLXnbvMVz8mSSJLtIFekhH9bCHuf/MtpaXK2oeQgadkyDj22ZfhKyxCc7r
- uOOxy/6abocyT1GfKvEo0RQdto+Shvbcj8WJiKN92jKRirfqKr7XkSaKh/WkC2WaEBLtk0s1b43
- jh5/dehW/F1C6hIeXgLU=
-X-Google-Smtp-Source: AGHT+IEiuUrZrXjzIuZtg77LBqLRsWTZ7GFsQNmXZcTDIp1eHzfoQRl6eFDBPWsyiJ5gVRuJU8U1SQ==
-X-Received: by 2002:a05:6830:8104:b0:73a:6eb4:e8d3 with SMTP id
- 46e09a7af769-73c89625b1emr2668939a34.10.1751560174422; 
- Thu, 03 Jul 2025 09:29:34 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f7714c4sm19400a34.28.2025.07.03.09.29.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Jul 2025 09:29:34 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Lukasz Majewski <lukma@denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <87pleh4b55.fsf@kernel.org>
-References: <87pleh4b55.fsf@kernel.org>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-next-20250703 into next
-Message-Id: <175156017376.3012248.13402196931900559534.b4-ty@konsulko.com>
-Date: Thu, 03 Jul 2025 10:29:33 -0600
+ bh=4UIgQqhRZ7HTXjcJ2iMk9KWLAZu07Degy1wUoombKxc=;
+ b=iXzYr8n8SbmwIgBEp/NpECIaUKpgLinsOuMW+biKIY3jd+w4Gdy6X1yMvp6sAVV7/M
+ RUaybWDL0DhqxY7j3KtzsBpT2fIqiwLfg7NWiY9GWZbLqDSdVWweselNfYfUdITiF+/9
+ tURNzHO1WCuDn3Vfnmut3cFnDuySBs5E9tsiBvwCUDbdT3/vYkd0kHF17kfeEOjOEbaP
+ V9gAPVGyfu+KBl0vRiYgsCTryicOgNaQ3AJRChG9l4eWOmleFr7ef719N3/Fb0Bpo3D3
+ 2mvRE0nBt77jJQNHLJj3vriDx6KxPIYoW4Nm05wIO/et9LQV+R/Ks3WOJRnY0lj7Iruf
+ TEGw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXO95cu4JsLVIpg1Vsq7BSmP4kyrlUJsRf2ObacXQmnNOfNoWBQBXFRDv6V/Y2fzJuzm/+lJOk=@lists.denx.de
+X-Gm-Message-State: AOJu0YztkSoPALwQpDdGqMm1A+6SqwI4e1JwxFcFoy+cWqcjBuSrei6h
+ z9rEtDYFqdflDbj/phqsrcJfY7wwnNeg2qLSxUkiZYRrS5zkYfJnu+9rmV/0gRe0u9IvxjI4KpH
+ EaeJ8zxBqpgwwHTCXHSytUfaFXhXIceIJFskEFLJYLA==
+X-Gm-Gg: ASbGncsDcapU4nJ6nJtrrVenA9xVn5nZYOfaSY2z3w3jCarg/EsQaxKhEVuYIWmKWUB
+ L2JJ7G05T6xMGll0iDbfhivRdFPKCrmuk/u1dFDjxNw3tWg0V+SXrRoTyNBll2UrnXgPJiPJMCn
+ LY//YhT/ARgiJqPjDmOqblKxb7IunVgemb5ekEHNeLEnE5F5XYvffLeGNJJ6MUNS6dqxxj3lPKB
+ Km4
+X-Google-Smtp-Source: AGHT+IEEpo2cNrPXgbStXVUpk2InM/3mVIhkFErX47mrL04nKhxnm6RmP5qoQUQtn3CPvVyZTP5+tC6ZDqeWpo2jfA8=
+X-Received: by 2002:a17:90b:384b:b0:313:271a:af56 with SMTP id
+ 98e67ed59e1d1-31a9d64dd41mr4666156a91.30.1751563196472; Thu, 03 Jul 2025
+ 10:19:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250703165841.1230515-1-miquel.raynal@bootlin.com>
+In-Reply-To: <20250703165841.1230515-1-miquel.raynal@bootlin.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 3 Jul 2025 19:19:45 +0200
+X-Gm-Features: Ac12FXzGVpSQlZw3b9FrcCXnqhQn4QGOpkBLe5OBL5j7HjfL9IlODeJnRa-JqqQ
+Message-ID: <CAOf5uwnju+Z4bY0Cx0fy05TOLtaQqikq3z51zqDf2nDgCzQyWw@mail.gmail.com>
+Subject: Re: [PATCH] cmd: mtd: Enable speed benchmarking
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Steam Lin <stlin2@winbond.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,22 +95,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 03 Jul 2025 16:11:34 +0200, Mattijs Korpershoek wrote:
+Hi Miquel
 
-> Please find the following fixes/developments for next:
-> 
-> Android:
-> - Fix uninitialized vhdr pointer in image-android.c
-> - Fix uninitialized vhdr pointer in abootimg cmd
-> 
-> DFU:
-> - Update maintainers file to include spl/spl_dfu
-> 
-> [...]
+On Thu, Jul 3, 2025 at 6:58=E2=80=AFPM Miquel Raynal <miquel.raynal@bootlin=
+.com> wrote:
+>
+> Linux features a flash_speed speed test from the mtd-utils suite, U-Boot
+> does not. Benchmarks are useful for speed improvement developments as
+> well as troubleshooting or regression testing sometimes.
+>
+> Enable a benchmark option to enable this feature.
+>
+> Example of output on a Nuvoton platform:
+>
+> MA35D1> mtd read nor0 0x81000000 0 0x10000
+> Reading 65536 byte(s) at offset 0x00000000
+> MA35D1> mtd read.benchmark nor0 0x81000000 0 0x10000
+> Reading 65536 byte(s) at offset 0x00000000
+> Read speed: 3752kiB/s
+>
 
-Merged into u-boot/next, thanks!
+I was using time and reading but this looked much nicer. I will give it a t=
+ry
+and review.
 
--- 
-Tom
+
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> ---
+>  cmd/mtd.c | 15 ++++++++++++++-
+>  1 file changed, 14 insertions(+), 1 deletion(-)
+>
+> diff --git a/cmd/mtd.c b/cmd/mtd.c
+> index c25997cfb246..d5843db663d7 100644
+> --- a/cmd/mtd.c
+> +++ b/cmd/mtd.c
+> @@ -17,6 +17,7 @@
+>  #include <malloc.h>
+>  #include <mapmem.h>
+>  #include <mtd.h>
+> +#include <time.h>
+>  #include <dm/devres.h>
+>  #include <linux/err.h>
+>
+> @@ -466,10 +467,11 @@ static int mtd_special_write_oob(struct mtd_info *m=
+td, u64 off,
+>  static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+>                      char *const argv[])
+>  {
+> -       bool dump, read, raw, woob, write_empty_pages, has_pages =3D fals=
+e;
+> +       bool dump, read, raw, woob, benchmark, write_empty_pages, has_pag=
+es =3D false;
+>         u64 start_off, off, len, remaining, default_len;
+>         struct mtd_oob_ops io_op =3D {};
+>         uint user_addr =3D 0, npages;
+> +       u32 bench_start, bench_end;
+
+unsigned long
+
+>         const char *cmd =3D argv[0];
+>         struct mtd_info *mtd;
+>         u32 oob_len;
+> @@ -490,6 +492,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag,=
+ int argc,
+>         read =3D dump || !strncmp(cmd, "read", 4);
+>         raw =3D strstr(cmd, ".raw");
+>         woob =3D strstr(cmd, ".oob");
+> +       benchmark =3D strstr(cmd, ".benchmark");
+>         write_empty_pages =3D !has_pages || strstr(cmd, ".dontskipff");
+>
+>         argc -=3D 2;
+> @@ -559,6 +562,9 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag,=
+ int argc,
+>
+>         led_activity_blink();
+>
+> +       if (benchmark)
+> +               bench_start =3D timer_get_us();
+> +
+>         /* Loop over the pages to do the actual read/write */
+>         while (remaining) {
+>                 /* Skip the block if it is bad */
+> @@ -586,6 +592,13 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
+, int argc,
+>                 io_op.oobbuf +=3D io_op.oobretlen;
+>         }
+>
+> +       if (benchmark && bench_start) {
+> +               bench_end =3D timer_get_us();
+> +               printf("%s speed: %lukiB/s\n",
+> +                      read ? "Read" : "Write",
+> +                      ((io_op.len * 1000000) / (bench_end - bench_start)=
+) / 1024);
+
+Did you check if it can not wrap?
+
+Michael
+
+> +       }
+> +
+>         led_activity_off();
+>
+>         if (!ret && dump)
+> --
+> 2.49.0
+>
 
 
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
