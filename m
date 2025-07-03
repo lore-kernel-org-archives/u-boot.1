@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45751C77B7C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 06:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65568C77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 06:29:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E3A182F30;
-	Thu,  3 Jul 2025 08:28:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
+	by phobos.denx.de (Postfix) with ESMTP id EEB3580E9A;
+	Thu,  3 Jul 2025 08:29:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FB4phmC0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gM0HUnQJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 913DB81FEE; Thu,  3 Jul 2025 08:28:27 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id AFFF381FEE; Thu,  3 Jul 2025 08:29:51 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9473382E08
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 08:28:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7188580194
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 08:29:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=debian.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=grandpaul@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4538bc52a8dso52543215e9.2
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 23:28:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=alexthreed@gmail.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-40a4de1753fso439071b6e.1
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 23:29:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751524105; x=1752128905; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1751524188; x=1752128988; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UwIjXfw10tzvAQDCt9shPWVnIg8BBp5MmBWpMrCnUkE=;
- b=FB4phmC04hYBEtcCLVDoPPwt9RF0nU2KwLsT1qyblJi6QcgXEaL559M7JsIaLBaC85
- Th7G+VDt5A00xRhS5yCmpfpYrjHzifBXG2hZ3805RCtzEn3iFAgtYdgWNXBemhOce8H6
- q6fMYN5pGtW2noYQ6xP1ikLsC5J/szDBcflmkM/FGW3VHS700B893APLuNq+BjF17P8w
- U9+xN4/tYykvtlxpiRKIKhgbXYr9OJruuIZJfLDCL1xbSRM+XTCrt+oqVLjqy9ScF09K
- ao7GJCWqj+9zYsrD3vNqQmzA180SqxvAtFwRBuLxy6Bp1rEL+OpYlI/nJomUrP+ZMQl9
- JQfg==
+ bh=HukX30uFytXJ8ZyrBySmSH6dbzr895qMsCH56VRD5R4=;
+ b=gM0HUnQJZX26JH8Y/2rtp34n+37PWm7fxmWT8f21WRB/+kETez3xry73M0gNJCkQfO
+ mGKs3Cz89UD8T1GxD1GL/TajmyZy6HX4OngTeTJ93aFMXtmix3f7PwoS0JWO+e2ZsYLU
+ lJOhHC9D4aNkWL03rBhyqQyR/HKCGqr+20l4ypYRfvqT4WA6PM06mZTuAg5zigpWQxG8
+ xmElGiOpGUgoVmZyuDqmbYiWy4EVbrLr3IgQLz08bDkYK2UGfpCus2arq9gw+hg6O2T7
+ h/iB+4JL5LoNDj/6zzVG0sqXB43mn0FqHib8m+e98waTSeeY/JUYNUQB+5NPoSc1xigi
+ T3dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751524105; x=1752128905;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=UwIjXfw10tzvAQDCt9shPWVnIg8BBp5MmBWpMrCnUkE=;
- b=dwO878rpRyrBpV2VnEmepPiCx9Hi++wPNgH3IIhQ1sb3KEzzn9ks8x91mhQPKEzdHf
- ui//H25lsroRo1H2WyLAG28FW2s6VOCipDIOGttJDM/qxVR3Mn1VJa/8lCY9udWe/1hn
- lpUiERLoBikA4tHx7/K0t+Q2lNC6+oSOxQnz0JZXl/7tTdMmw1Stkwac+/qpK48cKyr6
- wPd+1Wu/r8XyAJzmczoDNmI3YW59ipHYredAwXAygeN7jywM6X6EVQQ/ieDV3t2azMhM
- MwXF5Z0x+gIlTVvA7H7gHDgVrxDooxHaOqnokVaCJdpl3jCfLnj+YZk8vbc3mJatUrRj
- fdBQ==
-X-Gm-Message-State: AOJu0YwUZMoTwEkNbWKNkNDQrbMTRfjNcaVJB0yGiJFv5BkhQyml+9zU
- Mt25y4dEMSQeyX9vOwWqgi7aLF9NtV3gqTegJmaXq1wcgmmrVeOwe8mxWlPdKPtW
-X-Gm-Gg: ASbGncspvjCQwHZqPZ0wJyIRDKoR1vtHzbSfxauRX0UxhQjcfGuSL4Sh7Hr9g6j6Af6
- o0ouJIWZJQ87aW9dYW0M4HwVgN0UsetfmdDzdPzpafsqZoHAQt4L9Q6CNHLiC4ly6uq7mAyciHM
- 7kcEfD5svbwJaXPq1i047UoK93puk8LNRRRoB0PwSMyHL8PWqQmvhv8UwZ/iSPKypKqT3o+i2Qr
- hrQThqWkvpZ/YTAWNVZ8xm0x7zFN9zqslS9KjQlv7g4GVHGDNyr9ysf6Pt6OVrxlH+ozcOvyZ3V
- odYWZXDKELjKjIMFbvnZrqOqxa7YkOmkO1vQ3Xth5geIH/5IyP/3DNN6b1iHMw==
-X-Google-Smtp-Source: AGHT+IH/mepcK+Re4jCTUO8A4KlIhd5cBujdLcOXzffnZaWf5RwttX7Dp6XO+aJHkiQPw7h1hMU79g==
-X-Received: by 2002:a05:600c:468b:b0:453:483b:6272 with SMTP id
- 5b1f17b1804b1-454ab52041cmr10613055e9.7.1751524104557; 
- Wed, 02 Jul 2025 23:28:24 -0700 (PDT)
-Received: from localhost ([2001:8a0:6a5a:6c00:eb29:af93:a639:c827])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454a9bdf038sm17109315e9.27.2025.07.02.23.28.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 23:28:24 -0700 (PDT)
-From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-To: u-boot@lists.denx.de
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v8 5/5] efi: selftest: add selftest for EFI_DEBUG_SUPPORT
-Date: Thu,  3 Jul 2025 07:28:11 +0100
-Message-Id: <20250703062811.72871-6-paulliu@debian.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250703062811.72871-1-paulliu@debian.org>
-References: <20250703062811.72871-1-paulliu@debian.org>
+ d=1e100.net; s=20230601; t=1751524188; x=1752128988;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HukX30uFytXJ8ZyrBySmSH6dbzr895qMsCH56VRD5R4=;
+ b=MAOttDJQ2FdM4JlKtWnNwULVQsd2aWj4t396zzZeiAxi/2HRS92XqaGQL+9CKFXVTT
+ YOa0nI87z8XAWjv6OFATv5PZKc/KQ3IV7/gRCnXtbcbg3F/NzluPDCl03+9it50xFfGy
+ M/0N4guUt/4iYakmmHJHi2fgvrwY0oy7oNOKN+5d9FALqztMMwXBqy53Q9PpXatUG8VQ
+ t+dMM9xABCdKdoHZEhEkctC+i+2hr1DlmBm82MxPcdcedE4o3FNu4qJ2DhyjlNHrPYgw
+ 7RE2JrnKdDby7x0HNb1EH1Npgveem3ernOOWd3uGwcugATCnkX/Oa9bgpfJ7JZrGUteL
+ jx5w==
+X-Gm-Message-State: AOJu0Yx2Yid1FE681ChLe8j8aH/TP50DiJ4tnY1hJR7ohQV2jtrFK3cc
+ q7S4Q1gCbywCbzYyI1B7jVh9aD0Ab0rM0Kwaa8O6uONLgdYfjL4041RfCk8q4U5Pd9YivyWFqFO
+ pabdHLfqYIyrv1aQQhhCe+I5EQs3GnqLadNtQ/P1wNQ==
+X-Gm-Gg: ASbGncvPLqQijgPrSs4D8hG112c+1/Lr8KdKZjPHq99BYusrmvFTRL9nbaiEmNGz1m+
+ uxdoDLjVcCbvDPp/RMppVMa/uRG1JpK74pQYFnBdUkMUiXTUYnUKNnuLvYqN1gw2ouXcZEz+zw4
+ zK02pqvRruMt9yUekKsIhAjg8tA3M/2IIBJDO4Vi5lzw==
+X-Google-Smtp-Source: AGHT+IGI4OGPStZZ9AuKdBOiLxjncJX7P0bn7h3VPOEDVH5NCO17OZXiOhEZgiFPQ0OH/mAeGPAazdr4EylkSmvDVRE=
+X-Received: by 2002:a05:6808:6d8e:b0:40b:a4ca:f7cb with SMTP id
+ 5614622812f47-40cf31e2e60mr631154b6e.15.1751524187852; Wed, 02 Jul 2025
+ 23:29:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250703060517.3909695-1-alexthreed@gmail.com>
+In-Reply-To: <20250703060517.3909695-1-alexthreed@gmail.com>
+From: Alex Shumsky <alexthreed@gmail.com>
+Date: Thu, 3 Jul 2025 09:29:36 +0300
+X-Gm-Features: Ac12FXxiTJK9KERhSzHwWPAo7Slmzyu-gb6jqMUeip1RYfLyuvRHaRsx8-89NwM
+Message-ID: <CAF4oh-NPW_nYdMoeh0y0wVK3e1c4gyroTvJUKh5tuXFNFvDOnw@mail.gmail.com>
+Subject: Re: [PATCH v2] rockchip: rockchip-inno-usb2: Fix Synchronous Abort on
+ usb start
+To: u-boot@lists.denx.de
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,82 +95,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Hi Jonas,
 
-Add selftest to check the installed configuration table that has
-the correct GUID.
+This time I had difficulties to reproduce Synchronous Abort on a real board=
+, but
+then I spotted a difference with my previous tests.
+"usb start" abort happen when I boot upstream/current u-boot proper from
+SD-card by older SPL/TPL installed on eMMC (stock/proprietary u-boot from 2=
+019
+installed by STB manufacturer).
+There is no Sync Abort with upstream SPL/TPL. Looks like NULL dereference a=
+re
+still there but some SPL/TPL init code prevents it from aborting.
 
-Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-V7: add selftest for EFI_DEBUG_SUPPORT
-V8: refine the selftest.
----
- lib/efi_selftest/Makefile                     |  2 +
- lib/efi_selftest/efi_selftest_debug_support.c | 40 +++++++++++++++++++
- 2 files changed, 42 insertions(+)
- create mode 100644 lib/efi_selftest/efi_selftest_debug_support.c
-
-diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index d78bf7d6191..842433f68aa 100644
---- a/lib/efi_selftest/Makefile
-+++ b/lib/efi_selftest/Makefile
-@@ -78,6 +78,8 @@ endif
- 
- obj-$(CONFIG_EFI_ESRT) += efi_selftest_esrt.o
- 
-+obj-$(CONFIG_EFI_DEBUG_SUPPORT) += efi_selftest_debug_support.o
-+
- targets += \
- efi_miniapp_file_image_exception.h \
- efi_miniapp_file_image_exit.h \
-diff --git a/lib/efi_selftest/efi_selftest_debug_support.c b/lib/efi_selftest/efi_selftest_debug_support.c
-new file mode 100644
-index 00000000000..9ca8b3f82f5
---- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_debug_support.c
-@@ -0,0 +1,40 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * efi_selftest_debug_support
-+ *
-+ * Copyright (c) 2025 Ying-Chun Liu, Linaro Ltd. <paul.liu@linaro.org>
-+ *
-+ * Test the EFI_DEBUG_SUPPORT
-+ */
-+
-+#include <efi_loader.h>
-+#include <efi_selftest.h>
-+
-+/**
-+ * efi_st_debug_support_execute() - execute test
-+ *
-+ * Test EFI_DEBUG_SUPPORT tables.
-+ *
-+ * Return:	status code
-+ */
-+static int efi_st_debug_support_execute(void)
-+{
-+	struct efi_debug_image_info_table_header *efi_st_debug_info_table_header = NULL;
-+	efi_guid_t efi_debug_image_info_table_guid = EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
-+
-+	/* get EFI_DEBUG_IMAGE_INFO_TABLE */
-+	efi_st_debug_info_table_header = efi_st_get_config_table(&efi_debug_image_info_table_guid);
-+
-+	if (!efi_st_debug_info_table_header) {
-+		efi_st_error("Missing EFI_DEBUG_IMAGE_INFO_TABLE\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	return EFI_ST_SUCCESS;
-+}
-+
-+EFI_UNIT_TEST(debug_support) = {
-+	.name = "debug_support",
-+	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-+	.execute = efi_st_debug_support_execute,
-+};
--- 
-2.39.5
-
+On Thu, Jul 3, 2025 at 9:05=E2=80=AFAM Alex Shumsky <alexthreed@gmail.com> =
+wrote:
+>
+> Fix NULL pointer dereference that happen when rockchip-inno-usb2 clock
+> enabled before device probe. This early clock enable call happen in proce=
+ss
+> of parent clock activation added in ac30d90f3367.
+>
+> Fixes: 229218373c22 ("phy: rockchip-inno-usb2: Add support for clkout_ctl=
+_phy").
+> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while rep=
+arenting")
+> Co-authored-by: Jonas Karlman <jonas@kwiboo.se>
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> ---
+>
+> Changes in v2:
+> - rework patch (add NULL check to code instead of dts modification)
+>
+>  drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 19 ++++++++++++++-----
+>  1 file changed, 14 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/=
+rockchip/phy-rockchip-inno-usb2.c
+> index 88b33de1b2..3cc5956aed 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> @@ -167,20 +167,27 @@ static struct phy_ops rockchip_usb2phy_ops =3D {
+>         .of_xlate =3D rockchip_usb2phy_of_xlate,
+>  };
+>
+> -static void rockchip_usb2phy_clkout_ctl(struct clk *clk, struct regmap *=
+*base,
+> -                                       const struct usb2phy_reg **clkout=
+_ctl)
+> +static int rockchip_usb2phy_clkout_ctl(struct clk *clk, struct regmap **=
+base,
+> +                                      const struct usb2phy_reg **clkout_=
+ctl)
+>  {
+>         struct udevice *parent =3D dev_get_parent(clk->dev);
+>         struct rockchip_usb2phy *priv =3D dev_get_priv(parent);
+>         const struct rockchip_usb2phy_cfg *phy_cfg =3D priv->phy_cfg;
+>
+> -       if (priv->phy_cfg->clkout_ctl_phy.enable) {
+> +       // phy_cfg can be NULL if this function called before probe (when=
+ parent
+> +       // clocks are enabled)
+> +       if (!phy_cfg)
+> +               return -EINVAL;
+> +
+> +       if (phy_cfg->clkout_ctl_phy.enable) {
+>                 *base =3D priv->phy_base;
+>                 *clkout_ctl =3D &phy_cfg->clkout_ctl_phy;
+>         } else {
+>                 *base =3D priv->reg_base;
+>                 *clkout_ctl =3D &phy_cfg->clkout_ctl;
+>         }
+> +
+> +       return 0;
+>  }
+>
+>  /**
+> @@ -206,7 +213,8 @@ int rockchip_usb2phy_clk_enable(struct clk *clk)
+>         const struct usb2phy_reg *clkout_ctl;
+>         struct regmap *base;
+>
+> -       rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
+> +       if (rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl))
+> +               return -ENOSYS;
+>
+>         /* turn on 480m clk output if it is off */
+>         if (!property_enabled(base, clkout_ctl)) {
+> @@ -230,7 +238,8 @@ int rockchip_usb2phy_clk_disable(struct clk *clk)
+>         const struct usb2phy_reg *clkout_ctl;
+>         struct regmap *base;
+>
+> -       rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
+> +       if (rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl))
+> +               return -ENOSYS;
+>
+>         /* turn off 480m clk output */
+>         property_enable(base, clkout_ctl, false);
+> --
+> 2.43.0
+>
+> base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
+> branch: fix-rk3328-usb2phy-clock-v2
