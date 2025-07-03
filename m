@@ -4,62 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5270CC83030
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:03:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D44B4C77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:23:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EE0180E9A;
-	Thu,  3 Jul 2025 15:03:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1524E80E9A;
+	Thu,  3 Jul 2025 15:23:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lkqVWbfh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UCbaMlru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D31838206E; Thu,  3 Jul 2025 15:03:48 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BCA58091A
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:03:46 +0200 (CEST)
+ id 7616F82063; Thu,  3 Jul 2025 15:23:06 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4186C8091A
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:23:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 563D3ie6026800;
- Thu, 3 Jul 2025 08:03:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751547824;
- bh=5GhdqjE23H9al++tpPWLJAIAnpe6DGLmG8GvYC54Drs=;
- h=From:To:CC:Subject:Date;
- b=lkqVWbfhmLNA9uURaIwi+o95kWQRn+39PqUegu89HvD0xniFpSW67jHs4p4xpjAVq
- NkR38R2HX+qFMtCWRkA8f2mB/xlVYTM/OICvKrbpTI8NO07U4oWLDWtjYc4ZBQSaoB
- Jw93+ZWPck+MTLghPnpLDkyZyVwBy6hIAc+/2Y0U=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 563D3HKv1850902
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 3 Jul 2025 08:03:17 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 3
- Jul 2025 08:03:16 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 3 Jul 2025 08:03:17 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 563D3GP31152977;
- Thu, 3 Jul 2025 08:03:17 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH v1] configs: am62x: fix CONFIG_NR_DRAM_BANKS to 1
-Date: Thu, 3 Jul 2025 18:32:26 +0530
-Message-ID: <20250703130227.4106816-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-714066c7bbbso91005357b3.3
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 06:23:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751548983; x=1752153783; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=07bLDUYM9y4Cqt8lFqFg7DLzhArxIBfddkPObA+3IaA=;
+ b=UCbaMlruzhRPv6xqQUReCiGLWwfzZLMDIuW5Zb852hhopFlSyvvJAOGS6N7ONmhEWk
+ h1xE95AnSTCJ8r10uFk0KYMnX/CyZ3RyER0XHcu9k8pL7OiOOjBGUPivAH866L4rgnfm
+ 4ZegJnRFvUs5I+bvI4+p9gcEH0roiWzbXImhxlNmWp3qTFnQYAzXZ1GZc1egD4C1tJoy
+ AuOHd974WonBPiMeUKpyMjjzWyf04IiO4Hf9vLso+k7R79YYla2kUDFZVTIzhQ6wn/my
+ IgwxxUsJhZie8MiEuZrBwMRJN0vEi1WYd3UJG/mNm4l1SeB7T3jw5x6lzBkNGh7xBRUr
+ RRyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751548983; x=1752153783;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=07bLDUYM9y4Cqt8lFqFg7DLzhArxIBfddkPObA+3IaA=;
+ b=m4dCFiHpRn7ku3YOeItFuoM3SmMLQlA2XQkbcWG28Zk8oIUbl2Xg8CmtBG+ILX2sAO
+ OY5UavrOVJ5O1hMwubaeuSn61qIPWzfSvg9HDYNw9gQ7oY8ENGgeLEx2XRSFydAdNKwU
+ OznJo8g1p1I2aMOn37lz7suW4+TEpBGxbImy6gFAFVrx4UjjiDzg/QTeAuqgCNGyAc9Y
+ aDn09sq0uBHJoZeeSvqsdbKr0CG4ZCzNjXZ8a08eTwmA09j+KOxJba+CV/Jt1mz84PxX
+ xufp90NECDxzpEj/zaFjW4BsMciwkYVa8k8PpnOAwU+BjWE2rJIwvSp4lbe6aub8uK6n
+ bxiQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWPo2kA3Lj9pGni8KlfPjw8Gq7BToQDUeJ2rx/S4FGhtUjQFS0AMeNJPAIxGdmg6/ukd8HCXM8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwS25yJhIzS5/vLJi3bghGlCBB70gExRQQvIcViN7R2J5MWlFf2
+ DQbtZ/yid80fjhbnz4R0cWhQdHHLj3Wqj1pa79OwF4bMhDpDuh8BGwgNMOnHmbeK07GH7HmyTIi
+ E8YdMwTKwB0/1+LNsSTRmmKJznKRYXqqiDV/PwP8igw==
+X-Gm-Gg: ASbGncs2rV4oNx2+DusmixSJQ2Rr1H7nYqR+QsLGLNxEw4SAqSnp6gCj2raQ5vLKrCo
+ zeXOcPe7XQCMG3RudXI9pbeuFEWnAFrzFEsHbnhSAKQxgLTfr4LlHhG8eUo61qWKgEX7oeb58fP
+ fSYJclqVSEPFKo7KjGsGr8f6TCICRykJn/pDO3bLK5qOGF
+X-Google-Smtp-Source: AGHT+IHp3IKMEA6VL9L1Tln1nxFp9pu0gCO+/bYMg5fntY6K+NuX7cRioYLAGLJlODFRZ8Q3Wiwioo6mNSwv2kpFliw=
+X-Received: by 2002:a05:690c:6e04:b0:70e:7a67:b4b5 with SMTP id
+ 00721157ae682-716590aea79mr51498627b3.22.1751548983029; Thu, 03 Jul 2025
+ 06:23:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250703051951.43372-1-heinrich.schuchardt@canonical.com>
+ <20250703051951.43372-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250703051951.43372-3-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 3 Jul 2025 16:22:25 +0300
+X-Gm-Features: Ac12FXzZumzFEzfB4MDKRYV1jaWj4988RMl3mcJTD-aeBSZNdQiKYhL6ILR3Yck
+Message-ID: <CAC_iWjKobrJsF6yndiexeYBfgoaQLmjiOAc+zPx1qrXzUHarzQ@mail.gmail.com>
+Subject: Re: [PATCH 2/5] arm64: initialize the frame pointer register
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ben Dooks <ben.dooks@codethink.co.uk>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,126 +96,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_NR_DRAM_BANKS defines the number of DRAM banks on the
-device. The default value of NR_DRAM_BANKS for ARCH_K3 is set to 2
-(arch/arm/mach-k3/Kconfig:199) but should be 1 for am62x platforms.
+On Thu, 3 Jul 2025 at 08:20, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> U-Boot may be compiled with frame pointers depending on defaults built into
+> compilers are via explicitly passing -fno-omit-frame-pointer.
+>
+> To stop walking frames it is necessary that the initial value of the frame
+> pointer register is 0.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-This patch updates NR_DRAM_BANKS value for all am62x platforms to 1.
-
-Fixes: 2969ed31b893 ("configs: Add am62x_beagleplay_*_defconfig")
-Fixes: 2d257d9279e3 ("configs: Add configs for AM62x SK")
-Fixes: 085cd6459dae ("board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM")
-Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
-
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- configs/am62x_beagleplay_a53_defconfig | 2 +-
- configs/am62x_beagleplay_r5_defconfig  | 1 +
- configs/am62x_evm_a53_defconfig        | 1 +
- configs/am62x_evm_r5_defconfig         | 1 +
- configs/phycore_am62x_a53_defconfig    | 1 +
- configs/phycore_am62x_r5_defconfig     | 1 +
- configs/verdin-am62_a53_defconfig      | 1 +
- configs/verdin-am62_r5_defconfig       | 1 +
- 8 files changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index f61e701e3c9..05853317fea 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_NR_DRAM_BANKS=2
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_TARGET_AM625_A53_BEAGLEPLAY=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
-index 7ca5f58ea0c..a4e680240c6 100644
---- a/configs/am62x_beagleplay_r5_defconfig
-+++ b/configs/am62x_beagleplay_r5_defconfig
-@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
- CONFIG_SYS_MALLOC_F_LEN=0x9000
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_TARGET_AM625_R5_BEAGLEPLAY=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-index 2c04d32195d..4da668396d0 100644
---- a/configs/am62x_evm_a53_defconfig
-+++ b/configs/am62x_evm_a53_defconfig
-@@ -5,6 +5,7 @@ CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_TARGET_AM625_A53_EVM=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-diff --git a/configs/am62x_evm_r5_defconfig b/configs/am62x_evm_r5_defconfig
-index 4e3ed7801e6..b23b816e540 100644
---- a/configs/am62x_evm_r5_defconfig
-+++ b/configs/am62x_evm_r5_defconfig
-@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
- CONFIG_SYS_MALLOC_F_LEN=0x9000
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_TARGET_AM625_R5_EVM=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
-index 487eafb0e17..0a4904c1541 100644
---- a/configs/phycore_am62x_a53_defconfig
-+++ b/configs/phycore_am62x_a53_defconfig
-@@ -6,6 +6,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_PHYTEC_SOM_DETECTION=y
- CONFIG_TARGET_PHYCORE_AM62X_A53=y
-diff --git a/configs/phycore_am62x_r5_defconfig b/configs/phycore_am62x_r5_defconfig
-index a5d494cf87a..b3681993d49 100644
---- a/configs/phycore_am62x_r5_defconfig
-+++ b/configs/phycore_am62x_r5_defconfig
-@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
- CONFIG_SYS_MALLOC_F_LEN=0x9000
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_PHYTEC_SOM_DETECTION=y
- CONFIG_TARGET_PHYCORE_AM62X_R5=y
-diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
-index 4bdcb4b6c46..da384598ef7 100644
---- a/configs/verdin-am62_a53_defconfig
-+++ b/configs/verdin-am62_a53_defconfig
-@@ -6,6 +6,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_TARGET_VERDIN_AM62_A53=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-diff --git a/configs/verdin-am62_r5_defconfig b/configs/verdin-am62_r5_defconfig
-index f9580e697ff..175e2d6a9a7 100644
---- a/configs/verdin-am62_r5_defconfig
-+++ b/configs/verdin-am62_r5_defconfig
-@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
- CONFIG_SYS_MALLOC_F_LEN=0x9000
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
- CONFIG_SOC_K3_AM625=y
- CONFIG_TARGET_VERDIN_AM62_R5=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--- 
-2.49.0
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  arch/arm/lib/crt0_64.S | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
+> index f3f279f2c39..3ff0577e9c8 100644
+> --- a/arch/arm/lib/crt0_64.S
+> +++ b/arch/arm/lib/crt0_64.S
+> @@ -168,6 +168,7 @@ clear_loop:
+>         /* call board_init_r(gd_t *id, ulong dest_addr) */
+>         mov     x0, x18                         /* gd_t */
+>         ldr     x1, [x18, #GD_RELOCADDR]        /* dest_addr */
+> +       mov     x29, 0                          /* frame pointer */
+>         b       board_init_r                    /* PC relative jump */
+>
+>         /* NOTREACHED - board_init_r() does not return */
+> --
+> 2.48.1
+>
