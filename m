@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 314C5C77B7C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 14:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A35C83F03
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 14:11:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F6A382063;
-	Thu,  3 Jul 2025 16:10:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 1731D8206E;
+	Thu,  3 Jul 2025 16:11:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GOxl7ly4";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6219E8206E; Thu,  3 Jul 2025 16:10:12 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id 767DE82E08; Thu,  3 Jul 2025 16:11:40 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7526080E9A
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 16:10:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1EB0A82063
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 16:11:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 563E9WJR082563
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 3 Jul 2025 22:09:32 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 3 Jul
- 2025 22:09:32 +0800
-Date: Thu, 3 Jul 2025 22:09:24 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ziyao@disroot.org>,
- <conor@kernel.org>, <ben.dooks@codethink.co.uk>
-Subject: [GIT PULL] u-boot-riscv/next
-Message-ID: <aGaPFKZQNGrEbCnV@swlinux02>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2F8A3A5387B;
+ Thu,  3 Jul 2025 14:11:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63B82C4CEED;
+ Thu,  3 Jul 2025 14:11:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1751551896;
+ bh=ii+6zZ7gPCLM7Th5hpEZ0QbKx+YcBxor6tlL37sqc68=;
+ h=From:To:Cc:Subject:Date:From;
+ b=GOxl7ly4ZgZwcXRapyuT537CmjegKsH9Y9ghgR8qLihuPAAsKl5xW69uMYxk1y/dM
+ DbOr5XwRYzHzcnL5yQMT7FrzSvLF0XhHAKdAZzzJWGcksJ7JlO57SeRF/eKSnQYfE2
+ nrvaHBvUlgwLNDiZKeohd9A4Na0qsDaXCuQzitDhl0uunIG8jGfWDIKvKd/DCNvw3B
+ YsZ3+LMo22Vt69aVcou9SHk6WjKkziwTH35WZuZyipsu/9eH1i4vw4DoPD9srXbONt
+ P4Crs4reAmHpWUe7kvUp6Tnd6zv6sExJSMk3m+SzmjSCz+i1eEmprwRi4+anTahuwr
+ nRM1WJwN+n8PQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Andrew Goodbody
+ <andrew.goodbody@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-dfu-next-20250703 into next
+Date: Thu, 03 Jul 2025 16:11:34 +0200
+Message-ID: <87pleh4b55.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 563E9WJR082563
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,64 +68,53 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-The following changes since commit c405bab7661dd60420e97a4edeb3162e9d7e02c5:
+Please find the following fixes/developments for next:
 
-  Merge tag 'mmc-next-2025-07-02' of https://source.denx.de/u-boot/custodians/u-boot-mmc into next (2025-07-02 07:51:57 -0600)
+Android:
+- Fix uninitialized vhdr pointer in image-android.c
+- Fix uninitialized vhdr pointer in abootimg cmd
+
+DFU:
+- Update maintainers file to include spl/spl_dfu
+
+CI Job:
+- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26938
+
+Thanks,
+Mattijs
+
+The following changes since commit cbb5672790d400e9ec6e9fceaf89ece2660c0117:
+
+  Merge patch series "binman: properly error out if path provided to key-name-hint in signature nodes" (2025-07-01 10:52:04 -0600)
 
 are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-next-20250703
 
-for you to fetch changes up to f62062a64daeb3f3b148372d0afae3821aff16de:
+for you to fetch changes up to 4b489f517366595cd3f003d4175e721bd927a18b:
 
-  cache: Update dependency for ANDES_L2_CACHE (2025-07-03 18:11:06 +0800)
+  boot: android: Prevent use of unintialised variable (2025-07-02 12:10:25 +0200)
 
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/26936
 ----------------------------------------------------------------
-- RISC-V: Add big-endian build support
-- Board: aclint_ipi: Support T-Head C900 CLINT
-- Board: mpfs_icicle: Implement board_fdt_blob_setup()/board_fit_config_name_match()
-- Driver: pinctrl: Port pin controller driver for T-Head TH1520 SoC
-- Driver: cache: Update dependency for ANDES_L2_CACHE
+u-boot-dfu-next-20250703
+
+Android:
+- Fix uninitialized vhdr pointer in image-android.c
+- Fix uninitialized vhdr pointer in abootimg cmd
+
+DFU:
+- Update maintainers file to include spl/spl_dfu
+
 ----------------------------------------------------------------
-Ben Dooks (2):
-      riscv: add build support for big-endian
-      riscv: byteorder: add test for big-endian
+Andrew Goodbody (2):
+      cmd: abootimg: Prevent use of unintialised variable
+      boot: android: Prevent use of unintialised variable
 
-Conor Dooley (1):
-      board: mpfs_icicle: implement board_fdt_blob_setup()/board_fit_config_name_match()
+Mattijs Korpershoek (1):
+      MAINTAINERS: Add common/spl/spl_dfu to DFU entry
 
-Tom Rini (1):
-      cache: Update dependency for ANDES_L2_CACHE
+ MAINTAINERS          | 1 +
+ boot/image-android.c | 2 +-
+ cmd/abootimg.c       | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
-Yao Zi (8):
-      riscv: aclint_ipi: Support T-Head C900 CLINT
-      riscv: cpu: th1520: Setup CPU feature CSRs in harts_early_init
-      riscv: cpu: th1520: Add a routine to bring up secondary cores
-      riscv: dts: th1520: Preserve CLINT node for SPL
-      board: thead: licheepi4a: Bring up secondary cores in SPL
-      pinctrl: Port pin controller driver for T-Head TH1520 SoC
-      riscv: dts: th1520: Add pin controllers
-      riscv: cpu: th1520: Enable pinctrl by default
-
- MAINTAINERS                               |   1 +
- arch/riscv/config.mk                      |  18 +-
- arch/riscv/cpu/th1520/Kconfig             |   1 +
- arch/riscv/cpu/th1520/cpu.c               |  29 +-
- arch/riscv/cpu/th1520/spl.c               |  83 ++++
- arch/riscv/dts/th1520.dtsi                |  29 ++
- arch/riscv/include/asm/arch-th1520/cpu.h  |   1 +
- arch/riscv/include/asm/byteorder.h        |   2 +-
- arch/riscv/lib/aclint_ipi.c               |   5 +
- board/microchip/mpfs_icicle/mpfs_icicle.c |  63 +++
- board/thead/th1520_lpi4a/spl.c            |   3 +
- configs/th1520_lpi4a_defconfig            |   1 +
- drivers/cache/Kconfig                     |   1 +
- drivers/pinctrl/Kconfig                   |   8 +
- drivers/pinctrl/Makefile                  |   1 +
- drivers/pinctrl/pinctrl-th1520.c          | 700 ++++++++++++++++++++++++++++++
- 16 files changed, 940 insertions(+), 6 deletions(-)
- create mode 100644 drivers/pinctrl/pinctrl-th1520.c
-
-Best regards,
-Leo
