@@ -4,82 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 225B1C77B7C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:27:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDE7C83F03
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:36:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E42882063;
-	Thu,  3 Jul 2025 15:27:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E30D282F30;
+	Thu,  3 Jul 2025 15:36:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="STGyrPHc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UXN+mHzr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEDBD822D7; Thu,  3 Jul 2025 15:27:28 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9A1E8091A
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:27:26 +0200 (CEST)
+ id 7272C82F14; Thu,  3 Jul 2025 15:36:24 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EBFD380E9A
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:36:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e84207a8aa3so3696091276.3
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 06:27:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751549245; x=1752154045; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IILFGeLhhYpXfGeORFMPdGpkB1j4YKFKmKZbf4mR014=;
- b=STGyrPHc1dQUNCB866x5TuYnn5iVVKxVCFpnVxb3YL/9BGzbYbJXT/ep35qddDGU0m
- al+zqETUZkDPqqg47AsDrri8o+NkZes/qJA0giDAJkxu52lN44djcbw+BU/gPmTYJK6w
- 0eHMWlOv//htq+qdwxV/OgVNLCLdCRH8rAUzmJP3BUxzTG2ZCAmDheNaj6EVx23Xr1y2
- eds2Tqydg8HGbVt6KyKBVX3R/VTeRConYzUaxT4YdJGTdMsfv2w0K/hz2ASP4HQX8cfG
- fqPGWYKezHHzvV10mFejWf+UBph+ElW4urC4AdqtJ5qDKliPx3bxFcy7DITIvqVSjQYy
- 2VkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751549245; x=1752154045;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IILFGeLhhYpXfGeORFMPdGpkB1j4YKFKmKZbf4mR014=;
- b=DzqTnnFHlGI0TUKQBgFiuOWHwaaT4r60tDTjmvRog/PnydhOPMC2GsZ5leButI9DeT
- CfuY6ulljzx65MTMXU4JJZnet3PccS3RxFT3IWvso0I7c9WerH1anEVcuaVuyhoAXufh
- o0YlQSTKPUsA3QcOCTD7biMKvPq0r93AahlHtO9GUzvOBSsOqh1iRXB6JktfPBrJl8O/
- dW3sV31ouVEr3oRy2SlwMxgsHjiw5moI85+A677fRmIRh8BLKNcQkFaZ4FyvO02sxVlL
- krPt9YYR0XoVof8xrwcCDp6ABDpx5i7FpqMD1uHfF1IFvdwqbkRc6KvrGNsZscVrUS4j
- 2cuQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUWVDA/YSli9y/X+59GoYhR5hjW6vVj1CF6WZXjxiapkBCr4NYaP2XjH5Arvkp76svSe89Ra5k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7iLUPVN5HMaBJO/3v+ZBuTN4XVRLfsJ8Y0g0S1HKbxBufaNZZ
- MdMhRKDhlaA9Dh0luxcS1lq/D3ZZtfQxNEtsOQw38M6fNa9oNkdbKD3pZEjjYKL7beEJS2d0/iT
- BEhDd3SOz4myNGrITtKVDES7iWv6vN1lr6+W2adDoJJD61q9WrKzPUWo=
-X-Gm-Gg: ASbGncvMwgycU4ysf0LUJo/lFlxhl6m+qAmFwuB9o/14HxmYhEwUxTZpmLNyqqkW9hS
- mBoAkoYP4bE6DG2y4IglrcND4hDj4X7LdaWdqOMgBoNFoVBG7Qn+mZ4lSD+aqfThsOR5fHbM7ag
- 4fHf284H8qm3XbGrwB9ub7aagsC2Hus2d540k9SxHwqYLi
-X-Google-Smtp-Source: AGHT+IFA5LTogIvgrNkHZqR1VS6At/2PFjCL1JS/FgCofGGo6VX9CbyG6jzx7AOjOb/qa21WMsZ6Y7LKwj22fd5tUok=
-X-Received: by 2002:a05:690c:6a11:b0:712:d70b:45d5 with SMTP id
- 00721157ae682-7164d4cdff0mr95682267b3.33.1751549245467; Thu, 03 Jul 2025
- 06:27:25 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 563DaIaP018329;
+ Thu, 3 Jul 2025 08:36:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1751549778;
+ bh=LqlSFd9uZPn74ENwp2gtJTfBwmgc2vvDi/cy61cVy0w=;
+ h=From:To:CC:Subject:Date;
+ b=UXN+mHzrXVkTorWTo2ca9+NoiXIsPgUB+CoG85/c6R1P7fNLiI5f0eaDWADZ/Ezxl
+ cRhYgfAT1lvnBLgE41qJk66rxXs+9XwslS28KyMJEIxVyKEd4FW1dAEoKFSR14S07n
+ vGulfoy7Hoqe532srAHROiPJDdYgNdZgPAdeX62k=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 563DaIfT405931
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 3 Jul 2025 08:36:18 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 3
+ Jul 2025 08:36:18 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 3 Jul 2025 08:36:18 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 563DaHK0912222;
+ Thu, 3 Jul 2025 08:36:17 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
+ <nm@ti.com>, <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>
+Subject: [PATCH v5 0/4] Add support for dynamic MMU configuration
+Date: Thu, 3 Jul 2025 19:05:25 +0530
+Message-ID: <20250703133533.104758-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250703051951.43372-1-heinrich.schuchardt@canonical.com>
- <20250703051951.43372-6-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250703051951.43372-6-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 3 Jul 2025 16:26:49 +0300
-X-Gm-Features: Ac12FXx3J4Q7MQPRNDFF1tAtxyPppZoc3nMpbsjlBCV-3V5dlWRHwOj4lfedJV4
-Message-ID: <CAC_iWjKynGnRKmzc9y=m3EXDNZTOPVWB10zhw=s1zc4EtE2g_A@mail.gmail.com>
-Subject: Re: [PATCH 5/5] arm64: simplify interrupt code
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, 
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,161 +80,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 3 Jul 2025 at 08:20, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Carve out a function except_msg() to handle the output for most type of
-> interrupts.
->
-> Consistently use 16 digits for printing the exception syndrome register
-> esr to match the register size.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
+Hi all,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In u-boot we only provide a single MMU table for all k3 platforms, this   does
+not scale for devices where atf and optee lie outside the range   0x80000000 -
+0x80080000 and 0x9e780000 - 0xa0000000 respectively.
 
->  arch/arm/lib/interrupts_64.c | 72 ++++++++++++------------------------
->  1 file changed, 24 insertions(+), 48 deletions(-)
->
-> diff --git a/arch/arm/lib/interrupts_64.c b/arch/arm/lib/interrupts_64.c
-> index 970f8b6831f..cc20528327b 100644
-> --- a/arch/arm/lib/interrupts_64.c
-> +++ b/arch/arm/lib/interrupts_64.c
-> @@ -170,14 +170,18 @@ static bool smh_emulate_trap(struct pt_regs *regs)
->         return true;
->  }
->
-> -/*
-> - * do_bad_sync handles the impossible case in the Synchronous Abort vector.
-> +/**
-> + * except_msg() - print exception message
-> + *
-> + * Print exception message, register contents, backtrace, loaded EFI images.
-> + *
-> + * @msg:       message describing exception type
-> + * @pt_regs:   registers
->   */
-> -void do_bad_sync(struct pt_regs *pt_regs)
-> +static void except_msg(const char *msg, struct pt_regs *pt_regs)
->  {
->         efi_restore_gd();
-> -       printf("Bad mode in \"Synchronous Abort\" handler, esr 0x%08lx\n",
-> -              pt_regs->esr);
-> +       printf("%s handler, esr 0x%016lx\n", msg, pt_regs->esr);
->         show_regs(pt_regs);
->         if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->                 show_backtrace(pt_regs);
-> @@ -185,18 +189,20 @@ void do_bad_sync(struct pt_regs *pt_regs)
->         panic("Resetting CPU ...\n");
->  }
->
-> +/*
-> + * do_bad_sync handles the impossible case in the Synchronous Abort vector.
-> + */
-> +void do_bad_sync(struct pt_regs *pt_regs)
-> +{
-> +       except_msg("Bad mode in \"Synchronous Abort\"", pt_regs);
-> +}
-> +
->  /*
->   * do_bad_irq handles the impossible case in the Irq vector.
->   */
->  void do_bad_irq(struct pt_regs *pt_regs)
->  {
-> -       efi_restore_gd();
-> -       printf("Bad mode in \"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
-> -       show_regs(pt_regs);
-> -       if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> -               show_backtrace(pt_regs);
-> -       show_efi_loaded_images(pt_regs);
-> -       panic("Resetting CPU ...\n");
-> +       except_msg("Bad mode in \"Irq\"", pt_regs);
->  }
->
->  /*
-> @@ -204,13 +210,7 @@ void do_bad_irq(struct pt_regs *pt_regs)
->   */
->  void do_bad_fiq(struct pt_regs *pt_regs)
->  {
-> -       efi_restore_gd();
-> -       printf("Bad mode in \"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
-> -       show_regs(pt_regs);
-> -       if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> -               show_backtrace(pt_regs);
-> -       show_efi_loaded_images(pt_regs);
-> -       panic("Resetting CPU ...\n");
-> +       except_msg("Bad mode in \"Fiq\"", pt_regs);
->  }
->
->  /*
-> @@ -218,13 +218,7 @@ void do_bad_fiq(struct pt_regs *pt_regs)
->   */
->  void do_bad_error(struct pt_regs *pt_regs)
->  {
-> -       efi_restore_gd();
-> -       printf("Bad mode in \"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
-> -       show_regs(pt_regs);
-> -       if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> -               show_backtrace(pt_regs);
-> -       show_efi_loaded_images(pt_regs);
-> -       panic("Resetting CPU ...\n");
-> +       except_msg("Bad mode in \"Error\"", pt_regs);
->  }
->
->  /*
-> @@ -236,7 +230,7 @@ void do_sync(struct pt_regs *pt_regs)
->             smh_emulate_trap(pt_regs))
->                 return;
->         efi_restore_gd();
-> -       printf("\"Synchronous Abort\" handler, esr 0x%08lx", pt_regs->esr);
-> +       printf("\"Synchronous Abort\" handler, esr 0x%016lx", pt_regs->esr);
->         dump_far(pt_regs->esr);
->         printf("\n");
->         show_regs(pt_regs);
-> @@ -251,13 +245,7 @@ void do_sync(struct pt_regs *pt_regs)
->   */
->  void do_irq(struct pt_regs *pt_regs)
->  {
-> -       efi_restore_gd();
-> -       printf("\"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
-> -       show_regs(pt_regs);
-> -       if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> -               show_backtrace(pt_regs);
-> -       show_efi_loaded_images(pt_regs);
-> -       panic("Resetting CPU ...\n");
-> +       except_msg("\"Irq\"", pt_regs);
->  }
->
->  /*
-> @@ -265,13 +253,7 @@ void do_irq(struct pt_regs *pt_regs)
->   */
->  void do_fiq(struct pt_regs *pt_regs)
->  {
-> -       efi_restore_gd();
-> -       printf("\"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
-> -       show_regs(pt_regs);
-> -       if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> -               show_backtrace(pt_regs);
-> -       show_efi_loaded_images(pt_regs);
-> -       panic("Resetting CPU ...\n");
-> +       except_msg("\"Fiq\"", pt_regs);
->  }
->
->  /*
-> @@ -282,11 +264,5 @@ void do_fiq(struct pt_regs *pt_regs)
->   */
->  void __weak do_error(struct pt_regs *pt_regs)
->  {
-> -       efi_restore_gd();
-> -       printf("\"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
-> -       show_regs(pt_regs);
-> -       if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> -               show_backtrace(pt_regs);
-> -       show_efi_loaded_images(pt_regs);
-> -       panic("Resetting CPU ...\n");
-> +       except_msg("\"Error\"", pt_regs);
->  }
-> --
-> 2.48.1
->
+There are also issues for devices with < 2GiB of memory (eg am62SiP with 512MiB
+of RAM) as the maximum size is hardcoded to 2GiB. Furthermore higher DDR banks
+are mapped even for devices with NR_DRAM_BANKS < 2.
+
+Therefore this patch set adds the required functionality to create the MMU table
+at runtime with proper configuration for the spl stage as well an added entry
+for the framebuffer for supported platforms.
+
+The patch set has been build tested on all effected platforms but boot-tested
+only on TI's K3 EVMs and the beagleplay.
+
+The following effected boards have not been boot tested:
+ - phycore-am62a
+ - phycore-am62x
+ - phycore-am64x
+ - verdin-am62
+ - iot2050
+
+Best Wishes,
+Anshul
+---
+Changes in v5:
+ - Don't create carveouts for every reserved-memory node
+ - Only create carveouts for ATF/OP-TEE
+ - Expand the call to k3_mem_map_init to vendor boards as well
+ - Map area for framebuffer for CONFIG_VIDEO=y platforms
+v4: https://lore.kernel.org/u-boot/20250618124210.1936140-1-anshuld@ti.com/
+
+Changes for v4:
+ - Add call to k3_mem_map_init for beagleplay
+ - Mark reserved regions as non-cacheable
+ - More debug logs
+v3: https://lore.kernel.org/u-boot/20250617135844.2873701-1-anshuld@ti.com/
+
+Changes for v3:
+ - Remove unused memory regions in SPL's map
+ - Add runtime addition of MMU entry for the framebuffer in SPL
+ - Refactor k3_mem_map_init to use standard u-boot APIs
+ - Unmap reserved-memory regions instead of keeping them uncached
+v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.com/
+
+Changes in v2:
+- Removed dependency to:
+  https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.com/
+---
+Anshul Dalal (4):
+  mach-k3: use minimal MMU table for all k3
+  mach-k3: add runtime configuration of MMU table
+  mach-k3: add dynamic mmu fixups for SPL stage
+  board: add call to k3_mem_map_init for all k3 boards
+
+ arch/arm/mach-k3/arm64/arm64-mmu.c           | 182 ++++++++++++++++---
+ arch/arm/mach-k3/common.c                    |  17 +-
+ arch/arm/mach-k3/include/mach/k3-ddr.h       |   1 +
+ arch/arm/mach-k3/r5/common.c                 |   5 +
+ board/beagle/beagleplay/beagleplay.c         |   9 +-
+ board/phytec/phycore_am62ax/phycore-am62ax.c |   9 +-
+ board/phytec/phycore_am62x/phycore-am62x.c   |   3 +-
+ board/phytec/phycore_am64x/phycore-am64x.c   |   3 +-
+ board/siemens/iot2050/board.c                |   3 +-
+ board/ti/common/k3-ddr.c                     |   9 +-
+ board/toradex/verdin-am62/verdin-am62.c      |   3 +-
+ 11 files changed, 211 insertions(+), 33 deletions(-)
+
+-- 
+2.49.0
+
