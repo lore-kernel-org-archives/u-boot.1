@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0922C83F03
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 16:29:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97DB5C83F03
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 16:29:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9862081D5D;
+	by phobos.denx.de (Postfix) with ESMTP id E71B082F49;
 	Thu,  3 Jul 2025 18:29:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="neHHzRnE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NU4zIFyp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6178282F00; Thu,  3 Jul 2025 18:29:37 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id ED4AE81D5D; Thu,  3 Jul 2025 18:29:37 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E733380E9A
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 18:29:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D843182063
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 18:29:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-2ea08399ec8so115173fac.1
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 09:29:34 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-73b1b1b3cb8so35514a34.2
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 09:29:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751560173; x=1752164973; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751560174; x=1752164974; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a7mexDc1JTwRqZxtrvO+1QgkpyK07FlJMUqZROePaaQ=;
- b=neHHzRnEOdC5XzbTJXYRgEuCDmM3opR/qJxMxw6DW3EfDf2LtNOO94pFs8JqA/m9nQ
- LAEI5qV7GnFIRlxltAZa0yvzq60I6SAsPZTcJ3+8tdpZ8Xk9k/BUlN698fZbnfjv6/bo
- LxLdZrh0hgFB4htoBBvkCksWg1FVsHZ2vi4Jw=
+ bh=Ut9sCETdCyI+o6EBE6MD7APkTO/1/P8XbHj2iS2j0aY=;
+ b=NU4zIFypK/jWUzq22FBlBmcQ6TFAAylmVmmFQ7aMbtV4juS76anTBs+DecOxqCYqpe
+ TTts3P4tzp7O37Ox0rT4W6Eh2iyey9t9oUzrcMvg0rIsV7CJTv7PnIIjj7OQlAD77NPX
+ M1F8XuiSAcqUWKVHE+b+bz0tIFE7xKw7v/f7s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751560173; x=1752164973;
+ d=1e100.net; s=20230601; t=1751560174; x=1752164974;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a7mexDc1JTwRqZxtrvO+1QgkpyK07FlJMUqZROePaaQ=;
- b=mf8HYQZATgP8HGo6xButEm1naZhcXoAVC2jWWtTZM/r4+yTaVzE5mqq+FKs4IfiMba
- 6P5UqHM5dAohQ5/9U9KnCDOdJNLZ4kzddAivB08voVyerNMFxmEpy7bT0TaQAYj27lhQ
- 3vrN5W4/xiFnErlqMyF3ah++ATcEegX5WqWRvLc6sexjGLbet7RrOP+bC2tAtU2nYDYA
- Xou46ZvvDL4TyoiDe6nAP5x9wX4VVlKydh5WnTBBwADiTK9VO4FgBEr8qLijOyi54bnT
- vGk8XA7OqT9zYZKNLhrC7WTgRZ/+wT+UJLVVyQCG8CymmH/Rm7dLYWx3hFqua3Yrt4Fo
- /FDQ==
-X-Gm-Message-State: AOJu0Yyl1oRnN9rFvDFOJv5FQCiRslqdf4vookLFNzOsiuNhWZpZviHc
- bTahvFDpsLT7gm1TICP+v6DiT8ekFnzsUixTLDOT2/zpiT7tthNPVnaTACT6cdviU5w=
-X-Gm-Gg: ASbGncv6oPBQ0gW0Ul9iym2qHgYz9qIOCyknv7lwr+xW9vW7ZaeunlA0+K59mBFbIYC
- OvjOyaw7UIBzPtnHaBEtSYKZCmtkC9Eim0sEmsV4Dl+nomBPgsnYci7PICw53SP0LnCqZ+OLwZy
- j/JwGWlKrFkctMmHnlTVJtIsODn69toGUsfTAfYInfVVpgYT/vj7hkFN9cYlPUQwKbqkyfi1Fgc
- DHZtWhF1eKkhTKi53mUeVPdFH6rP1EkKPjNq2ahhD5+FHDCP6yaqF1IBULBva7ahTEHNAh3xEl6
- Qc7ukG53C67OUcFp/ueUHFeTSyCmjYCnqEmKjgRInIm19OCZerVUM/CEWev064wTy/ilIFEXeK2
- W3pdasfMKCIYEX8KbN0E=
-X-Google-Smtp-Source: AGHT+IFCcMgxHrXXkPfLkn+zaMsyzQYOZRGJIMHgzm+TpGFs/xGE0CpDWCN5erVA8mqYwMIx8v836Q==
-X-Received: by 2002:a05:6870:948c:b0:2d5:25b6:ec14 with SMTP id
- 586e51a60fabf-2f76ed921bamr2515556fac.15.1751560173615; 
- Thu, 03 Jul 2025 09:29:33 -0700 (PDT)
+ bh=Ut9sCETdCyI+o6EBE6MD7APkTO/1/P8XbHj2iS2j0aY=;
+ b=DiHG/ak2DIDZIkUThAJ+XUAvZAglC3F+U8BOa8eefFJJbK8GdB46uEUNO5x2ylAGdR
+ Q2Z/FWa5z9Qlpwezqd4w6VGQywyHKpn8B1/jXWcgFGA3QimY3uSB5Uymc3SWMEwLbrF6
+ 7jj5kfKz3VDqZRAoYfooTinTlI3j3qCYiPciQsBZHzL1DM6tL5wVYt/MjxhajpcolgDS
+ 8BdDzfAOdA/GLJZYyphigfm5hIg8WBR3vGsay94u/oFLWXzx7XxlICUD3MMo2say6cJA
+ 2dpkf32mhShWXl4lILppmZ7pBBb2cbXh6luxpNP8VWKdZENW76uXBZA4TIW9a7cbD8/4
+ 6ZjA==
+X-Gm-Message-State: AOJu0YzPJBeU94btSXEA/ZzudUeCwnCo8Ue8LG1eqQRwQZwnROyhox9L
+ 5CPXj9Qwp0ULB7XarIlDfSYPTQCJlHSgwpMw+eYG5Rx3S/jukw5F1ecN1QWT+vYsIjqv9B5xxhz
+ gDttO2+w=
+X-Gm-Gg: ASbGnctg0F9gLIlhiIbnl+/8cYw2pfd9k7rQzErwFlvkS9anyeAGE5hNmmonPVtMMU6
+ f/Huc1xxRWZLxyUSpeZrnSLpuNoNqrO17ZQ5n1Y92rb/q8nkhCOX+bH62ijsi9V33cqFEADx24M
+ QABvkmZ8qgoyfH77vll162qd+ToJGtYjNC0Ml+bxHE5lWHhJuDxjb+p56hCjtejHdLH2cUy3LcQ
+ hImfQ9GYyCDXM5+19ZLXnbvMVz8mSSJLtIFekhH9bCHuf/MtpaXK2oeQgadkyDj22ZfhKyxCc7r
+ uOOxy/6abocyT1GfKvEo0RQdto+Shvbcj8WJiKN92jKRirfqKr7XkSaKh/WkC2WaEBLtk0s1b43
+ jh5/dehW/F1C6hIeXgLU=
+X-Google-Smtp-Source: AGHT+IEiuUrZrXjzIuZtg77LBqLRsWTZ7GFsQNmXZcTDIp1eHzfoQRl6eFDBPWsyiJ5gVRuJU8U1SQ==
+X-Received: by 2002:a05:6830:8104:b0:73a:6eb4:e8d3 with SMTP id
+ 46e09a7af769-73c89625b1emr2668939a34.10.1751560174422; 
+ Thu, 03 Jul 2025 09:29:34 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f7714c4sm19400a34.28.2025.07.03.09.29.32
+ 46e09a7af769-73c9f7714c4sm19400a34.28.2025.07.03.09.29.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Jul 2025 09:29:33 -0700 (PDT)
+ Thu, 03 Jul 2025 09:29:34 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com, ziyao@disroot.org, 
- conor@kernel.org, ben.dooks@codethink.co.uk
-In-Reply-To: <aGaPFKZQNGrEbCnV@swlinux02>
-References: <aGaPFKZQNGrEbCnV@swlinux02>
-Subject: Re: [GIT PULL] u-boot-riscv/next
-Message-Id: <175156017281.3012248.548651943497669024.b4-ty@konsulko.com>
-Date: Thu, 03 Jul 2025 10:29:32 -0600
+To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Lukasz Majewski <lukma@denx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <87pleh4b55.fsf@kernel.org>
+References: <87pleh4b55.fsf@kernel.org>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-next-20250703 into next
+Message-Id: <175156017376.3012248.13402196931900559534.b4-ty@konsulko.com>
+Date: Thu, 03 Jul 2025 10:29:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,15 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 03 Jul 2025 22:09:24 +0800, Leo Liang wrote:
+On Thu, 03 Jul 2025 16:11:34 +0200, Mattijs Korpershoek wrote:
 
-> The following changes since commit c405bab7661dd60420e97a4edeb3162e9d7e02c5:
+> Please find the following fixes/developments for next:
 > 
->   Merge tag 'mmc-next-2025-07-02' of https://source.denx.de/u-boot/custodians/u-boot-mmc into next (2025-07-02 07:51:57 -0600)
+> Android:
+> - Fix uninitialized vhdr pointer in image-android.c
+> - Fix uninitialized vhdr pointer in abootimg cmd
 > 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+> DFU:
+> - Update maintainers file to include spl/spl_dfu
 > 
 > [...]
 
