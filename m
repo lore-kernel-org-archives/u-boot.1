@@ -4,68 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82028C83F03
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:37:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DDBDC83F03
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 14:03:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84E0D82ED0;
-	Thu,  3 Jul 2025 15:36:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 406C982063;
+	Thu,  3 Jul 2025 16:03:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RPZFIQ1D";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EifTQSq4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C47080E9A; Thu,  3 Jul 2025 15:36:31 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C72982ED0
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:36:28 +0200 (CEST)
+ id CE6948206E; Thu,  3 Jul 2025 16:03:35 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CA24280E9A
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 16:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 563DaQPs018345;
- Thu, 3 Jul 2025 08:36:26 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751549786;
- bh=SLnIap3K2QhuIfvYkqSBef2XRyZXOpSXsip2wBDybX4=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=RPZFIQ1DHr6coDmrASeS1eKrrp9XGLD8Gyrjcf0d2mPzVxuyAAZ7rJzNnsEzgXto+
- oTOq7R6Wq1bIVyVis+8wFE5xH/bEUfg496RkygA4OBoDywbqRq4+Oq1LSeRYlrzxas
- bduEXldRaxr9MDBqHjMyncrvJRAJWWzUXK+qZJek=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 563DaPRq2380949
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 3 Jul 2025 08:36:25 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 3
- Jul 2025 08:36:24 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 3 Jul 2025 08:36:24 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 563DaN0r912306;
- Thu, 3 Jul 2025 08:36:23 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <nm@ti.com>, <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>, <devarsht@ti.com>
-Subject: [PATCH v5 4/4] board: add call to k3_mem_map_init for all k3 boards
-Date: Thu, 3 Jul 2025 19:05:29 +0530
-Message-ID: <20250703133533.104758-5-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250703133533.104758-1-anshuld@ti.com>
-References: <20250703133533.104758-1-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4539cd7990cso6544905e9.0
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 07:03:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751551413; x=1752156213; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=H0N+EGbXJIFTx6/chCG2UYIN/cbCjTjHeUaOWOGmKJ4=;
+ b=EifTQSq4hk95WNTlT/8rwfc652krlU3e5x6xt1tCXlvPhl31pgPVftLFYSmFabkeWl
+ GMNiqKmRqRbRpAPkhdjGOmiLDiMSUDrEf8QC3hgZrlXLSUoj+Fc8vspa2vJVr4fvaCko
+ T1BTF61czHBLBfM4BfSpTchrfJ5avXXZ26s/X3t3ev47rfMVEprIEqGHkpspyqZkIoHt
+ 82ay6dnr4uZi0UJws223pSHOf/D7ITMq/ANs2uwctFHbkoxLgUeWRmnUTIffGyCQdRXN
+ gZjqVhnWMSLpXYyPd/ZvKq/HLE9R37QEvKayRt+OAs2ijvMFsIAidhdwOOlWqRvXAb0W
+ PLEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751551413; x=1752156213;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=H0N+EGbXJIFTx6/chCG2UYIN/cbCjTjHeUaOWOGmKJ4=;
+ b=oTENFIJ2dML0NQNx7RgrU7UArURE+/EqrIIPAx2aoJR84MfmEihkt9GET5QxgZVdgY
+ YkglurPWEVzmYSn6/knnO9U/impWptc9LufKTsRyj0mQsi8Mp6DS8lAoSKcEKEPe8wGL
+ zLYFaMc0TWR4/XTIDob07/U1lGULYKHeYi16clOq1Z27d2abNjDQ5b0YD5YiwEW75chn
+ inT2QngwCg6JYNV9tgpr39EVbv/+8BHNWqpu3bnCBNRRjkFkG7y7oJJO7zH4uu9si7T8
+ Bh8JH4Hm4bHGfwDHruNf1F1Y2caqeJSYKZwZzAHpD6GazkzEqYAgDUHlQmFgoK3OKLcd
+ X5lA==
+X-Gm-Message-State: AOJu0YyaUgUPcVn7TMBgPLhxNCIiV0jLgHlK5PX5auHpqoL4A23fRG2n
+ qRL1nP065XFlIQyjdR6BIc0/hztCtkbgYDFaxoQ0zM5X+vsPJKLzoZBwxLs8lIU26HPWXES0KYA
+ RoAKH
+X-Gm-Gg: ASbGncsyEYtc5TV5CdA9zFqG+wtvmi6iVieqLqV/j6DP2q7qqq8Eh6DECokfIwfRUxf
+ 3HFRIBwNVQRwpMlax9sUYtxxX8051r4pzP7w8unOOlyXsmOoEC/aAjbPJirmhmlikwgWQfKrn9W
+ j/FOAZZ1IQ2xtgTFE0NlvDtXWoEdsaoFAo21n7Q2kMzMqFv7aFdPvwkIjtYHB2F1uK8Y9TB/UHB
+ xTt/tmQ/Kb5yU/RrpfD6cPADV61gDbfA3kBjJERXh2JgAbyIzj3lZ0iSKIAsFY72PGyjWHGJIRa
+ fQtk7AJuoXX44bHiX0LVYaUkrU4PtfLftijZDxBjplDRv6ocpNdG3RzvIsByWkx1O66cFiG6ZD0
+ UNvxbXaQLHmHcSQSYMUEiNt8=
+X-Google-Smtp-Source: AGHT+IH/TZ0a4X0EMv5TkHIX62SkO6WfJToja7lb1778RROYjouN6RtSDNQGcLbHql/cbi89VmtcYg==
+X-Received: by 2002:a05:600c:c170:b0:442:f904:1305 with SMTP id
+ 5b1f17b1804b1-454ab3200f4mr27833395e9.6.1751551411326; 
+ Thu, 03 Jul 2025 07:03:31 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:b5c8:44f:55cc:3182])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-454a9bac48esm27425635e9.37.2025.07.03.07.03.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Jul 2025 07:03:30 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 03 Jul 2025 15:03:30 +0100
+Subject: [PATCH] mmc: Take cleanup path to free memory on error exit
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250703-mmc_driver_fix-v1-1-4fc57fded698@linaro.org>
+X-B4-Tracking: v=1; b=H4sIALGNZmgC/x2N0QqDMBAEf0XuuYFEEdv+SilyJmu9h6TlrkhB/
+ HdjH4fZYTcyqMDo3mykWMXkXSqES0Nx4fKCk1SZWt/2fvCdyzmOSWWFjrP8HIbbdQ6JETpQjSY
+ 2uEm5xOXMMtsXeoqPou7/T4/nvh/cPm//eQAAAA==
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,161 +101,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-k3_mem_map_init configures the MMU at runtime by querying the
-device-tree for DDR size for each bank as well as creating carveouts for
-OPTEE and ATF in the first bank.
+Instead of returning -EINVAL directly which will not call the cleanup
+path to free memory, fix the code to set the error and then goto the
+cleanup code.
 
-Therefore add a call to k3_mem_map_init in dram_init for all k3 vendor
-boards.
+This issue found by Smatch.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- board/beagle/beagleplay/beagleplay.c         | 9 ++++++++-
- board/phytec/phycore_am62ax/phycore-am62ax.c | 9 ++++++++-
- board/phytec/phycore_am62x/phycore-am62x.c   | 3 ++-
- board/phytec/phycore_am64x/phycore-am64x.c   | 3 ++-
- board/siemens/iot2050/board.c                | 3 ++-
- board/toradex/verdin-am62/verdin-am62.c      | 3 ++-
- 6 files changed, 24 insertions(+), 6 deletions(-)
+ drivers/mmc/mmc.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/board/beagle/beagleplay/beagleplay.c b/board/beagle/beagleplay/beagleplay.c
-index 78635810585..c87ed925da8 100644
---- a/board/beagle/beagleplay/beagleplay.c
-+++ b/board/beagle/beagleplay/beagleplay.c
-@@ -13,6 +13,7 @@
- #include <spl.h>
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index cdcf2e0c8fe..eddcf86bb32 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -2364,8 +2364,10 @@ static int mmc_startup_v4(struct mmc *mmc)
+ 		return -ENOMEM;
+ 	memcpy(mmc->ext_csd, ext_csd, MMC_MAX_BLOCK_LEN);
+ #endif
+-	if (ext_csd[EXT_CSD_REV] >= ARRAY_SIZE(mmc_versions))
+-		return -EINVAL;
++	if (ext_csd[EXT_CSD_REV] >= ARRAY_SIZE(mmc_versions)) {
++		err = -EINVAL;
++		goto error;
++	}
  
- #include <asm/arch/hardware.h>
-+#include <mach/k3-ddr.h>
+ 	mmc->version = mmc_versions[ext_csd[EXT_CSD_REV]];
  
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -48,7 +49,13 @@ int board_init(void)
- 
- int dram_init(void)
- {
--	return fdtdec_setup_mem_size_base();
-+	int ret;
-+
-+	ret = fdtdec_setup_mem_size_base();
-+	if (ret)
-+		return ret;
-+
-+	return k3_mem_map_init();
- }
- 
- int dram_init_banksize(void)
-diff --git a/board/phytec/phycore_am62ax/phycore-am62ax.c b/board/phytec/phycore_am62ax/phycore-am62ax.c
-index 14b8959c07a..5d61866d556 100644
---- a/board/phytec/phycore_am62ax/phycore-am62ax.c
-+++ b/board/phytec/phycore_am62ax/phycore-am62ax.c
-@@ -8,6 +8,7 @@
- #include <asm/io.h>
- #include <spl.h>
- #include <fdt_support.h>
-+#include <mach/k3-ddr.h>
- 
- #include "../common/am6_som_detection.h"
- 
-@@ -18,7 +19,13 @@ int board_init(void)
- 
- int dram_init(void)
- {
--	return fdtdec_setup_mem_size_base();
-+	int ret;
-+
-+	ret = fdtdec_setup_mem_size_base();
-+	if (ret)
-+		return ret;
-+
-+	return k3_mem_map_init();
- }
- 
- int dram_init_banksize(void)
-diff --git a/board/phytec/phycore_am62x/phycore-am62x.c b/board/phytec/phycore_am62x/phycore-am62x.c
-index b199fdaa59b..ebf7697709d 100644
---- a/board/phytec/phycore_am62x/phycore-am62x.c
-+++ b/board/phytec/phycore_am62x/phycore-am62x.c
-@@ -9,6 +9,7 @@
- #include <spl.h>
- #include <asm/arch/k3-ddr.h>
- #include <fdt_support.h>
-+#include <mach/k3-ddr.h>
- 
- #include "phycore-ddr-data.h"
- #include "../common/k3/k3_ddrss_patch.h"
-@@ -81,7 +82,7 @@ int dram_init(void)
- 		gd->ram_size = 0x80000000;
- 	}
- 
--	return 0;
-+	return k3_mem_map_init();
- }
- 
- phys_size_t board_get_usable_ram_top(phys_size_t total_size)
-diff --git a/board/phytec/phycore_am64x/phycore-am64x.c b/board/phytec/phycore_am64x/phycore-am64x.c
-index f14c87f5c72..4cd44d6e538 100644
---- a/board/phytec/phycore_am64x/phycore-am64x.c
-+++ b/board/phytec/phycore_am64x/phycore-am64x.c
-@@ -16,6 +16,7 @@
- #include <asm/arch/hardware.h>
- 
- #include "../common/am6_som_detection.h"
-+#include <mach/k3-ddr.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -64,7 +65,7 @@ int dram_init(void)
- 		gd->ram_size = 0x80000000;
- 	}
- 
--	return 0;
-+	return k3_mem_map_init();
- }
- 
- int dram_init_banksize(void)
-diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
-index d827f728a08..fca8270fda9 100644
---- a/board/siemens/iot2050/board.c
-+++ b/board/siemens/iot2050/board.c
-@@ -24,6 +24,7 @@
- #include <asm/arch/hardware.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
-+#include <mach/k3-ddr.h>
- 
- #include "../../../../drivers/sysinfo/iot2050.h"
- 
-@@ -383,7 +384,7 @@ int dram_init(void)
- 
- 	gd->ram_size = ((phys_size_t)(ddr_size_mb)) << 20;
- 
--	return 0;
-+	return k3_mem_map_init();
- }
- 
- ulong board_get_usable_ram_top(ulong total_size)
-diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
-index 7b2eecbf659..4c900663506 100644
---- a/board/toradex/verdin-am62/verdin-am62.c
-+++ b/board/toradex/verdin-am62/verdin-am62.c
-@@ -16,6 +16,7 @@
- #include <k3-ddrss.h>
- #include <spl.h>
- #include <asm/arch/k3-ddr.h>
-+#include <mach/k3-ddr.h>
- 
- #include "../common/tdx-cfg-block.h"
- 
-@@ -33,7 +34,7 @@ int dram_init(void)
- 	if (gd->ram_size < SZ_512M)
- 		puts("## WARNING: Less than 512MB RAM detected\n");
- 
--	return 0;
-+	return k3_mem_map_init();
- }
- 
- int dram_init_banksize(void)
+
+---
+base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
+change-id: 20250703-mmc_driver_fix-e798f1dae13e
+
+Best regards,
 -- 
-2.49.0
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
