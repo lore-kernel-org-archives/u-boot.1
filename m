@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607CFC83030
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 08:38:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA3EC77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 08:42:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C04FA81FEE;
-	Thu,  3 Jul 2025 10:38:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8F86B8091A;
+	Thu,  3 Jul 2025 10:42:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZzxJ6725";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dsMuwgBX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD15B80194; Thu,  3 Jul 2025 10:38:47 +0200 (CEST)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id 2E31181FEE; Thu,  3 Jul 2025 10:42:10 +0200 (CEST)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B67B480194
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 10:38:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0344880194
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 10:42:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-4a97a67aa97so10058391cf.2
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 01:38:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e81cf6103a6so5318438276.3
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 01:42:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751531924; x=1752136724; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751532127; x=1752136927; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4zchUOVl07oV6m0LBhnMxKorL8V6xOxtrvklHnsQBDA=;
- b=ZzxJ6725q6teS4vYnyKwPPZcruy9RSkcKlnOgcTLy84Z4IUjAmVLFNvOKR0Imi2kAl
- ywICbmLTEUtLWqidTj8FGUXMiOIB0XYuR62NzHF+YsHw/dFLIF+5Ri8vn7Bp/q1SQrPl
- 5XYn+ANiJpjmoS6VwRnGrd8BN5LUCJxgKnjbmvPZ/OF3eScbNQzZX6UcWbraTZkMB07u
- gCQdnfjaxaZqM+di2WX1uKD4ey9ckFJ8JJkFPGTAQHG6suiCcS/YSxZKZGCwjPHKjOHf
- EAVhshCBLMK4obLREe6XO5i2fNxalKiWavN9k2s/UFlsPUdHmQRy+NBD0qMYYMMbExWn
- DO0g==
+ bh=6pdqG/QblyWqt7A2pyEzYsY7aTrS2tnW/YB5mMWEnkA=;
+ b=dsMuwgBXNQKdFLormK58bhoWlL1bUyUj0DZ1y2HBoYYdU30gP5ea1cQ9vH9vjcvRmf
+ M3u6LPjx7Hqo722TYuChV5CEA5T/NdLk9lNm+eAA9+WXl5r2nPg1d0/A9Y+99M7skWNf
+ f0Jf0k4M2MyR0+ik5hjL/PbEY4LhU01j5oS60P2Gj7nBrvhUvKGGw5dAkF6ls4ONYuUc
+ I1lju0it9+Q00PWE8bJA+4RSkLzRorqHsd5DBeTuHjxXt3t6zT2QyAkQUpyUDalT+6KU
+ fxSRUV0hQFWKZLiRem6j28cts2k8lEXYkm2X9Dxnw+V+J9h61WWvpGzEgTZXuEFaSAkh
+ CxUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751531924; x=1752136724;
+ d=1e100.net; s=20230601; t=1751532127; x=1752136927;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4zchUOVl07oV6m0LBhnMxKorL8V6xOxtrvklHnsQBDA=;
- b=Nwj+jZwM7tpewvptpvDHDWi+jTrxsljk9nkIUb6buYe0tONv3GOYWLe3+rSKFzlDl1
- 8J3wOJz+3ynTfmqLcU+QpalcKv87+DP9C8fEJqqHC2BkYVi9NygD+t0lIopH0D9bu0ch
- p6pppDSCHM5ztUtbNckaOYK4c3ec/P2z/dpDWSl7My4kXSHBH3lo4DyfvfyE3dfijlcG
- Utpa8mvRb/IalEpjble3OjsvbF45Mv9TEL4kXJ6QkkDsDsDOUwUJtavHIlFbRYqecY2v
- 79mVEPM/0mpspQmXLjE/HRX6AbSfzfvDbWI8E8Z4X21yZY7vLYVdKzPzr9Zd4vuxIIzp
- qPAA==
-X-Gm-Message-State: AOJu0YypP67d8I69xWJArps2scaWiGQvax2hWaPmVPM7SxyQk5efqab7
- Iu1B99p80rZJCcWK9W2X2fVumCOgR6P+36ktmOUb1scS4Y2m93Il9EvWqdM8GkmK/qWD0jEwo0V
- EVjpqyVpFy6RQ54JwEmZBvqtxciwkkJmlyAbO2b9MxWToslqUIHui
-X-Gm-Gg: ASbGncvzD7xEtqkTmz3bweMzJbOFGuDX1FC/kWEnXHEMkbNIZROT5+cwfJFUmfiWofn
- KqfcSQWjVwW4xhWzzfJWDogycPTOyXv5LrMLWXU+OLmmX6gy10YqIlRFlR7m+m5yvzKizmDQyjH
- kR3HRErzo7xSEFI4H9Od/YyKU8+2aGkbf1zlxWkXOdS8+G
-X-Google-Smtp-Source: AGHT+IHIRB5ytkKPRpSAjK+urT7ekZt2vAoM4NyH64TowwjiS0IAKbV9fodDwe23psoEpRxbPL+JBShCOFk5seD2Zws=
-X-Received: by 2002:a05:622a:d10:b0:4a6:e7f7:5742 with SMTP id
- d75a77b69052e-4a9871f98eamr47500211cf.33.1751531924525; Thu, 03 Jul 2025
- 01:38:44 -0700 (PDT)
+ bh=6pdqG/QblyWqt7A2pyEzYsY7aTrS2tnW/YB5mMWEnkA=;
+ b=jzBwCiSctU/mXoaYOkQc15SKEtNDroJwcl0mimMn7o62PjoT5ZVpvs/uxWW3Dm2q0r
+ t7v3M2amChGRw/TepwxAU0V0V07loX1ItamG+a/RS/j7jAdVXF8EN09mvk7IXmT1DoNY
+ /cp5qStnfelJqhNyS4JPpnoqj8aH/BYPdLt9tUSTMX9/uiYgNW+lDgx11AgGCKmTwBj1
+ 5eCKYoo46YKsNz4O+IJbpp8PtKaCc7dDW6fQkNOvTzTjKaxVHTmWu8ehd0qi6MA1U9Wo
+ koVNg9ucgJuQl1tDzlysbIF59qMYIs572+7OuncbUrzqFa7+iwdfhJsph2uH8CPzL2cJ
+ Gdpw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfRdKeMGLpG/9wZvPMXV4pKWerQcQopSJ8eaAwFyRYY+U1pADwMYtPhvwocQ093w+dmwdLt9Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YzsX91hlAF+5z6eTKxdGn70zBaAzlRJiSW40FIZO3zXxFw69LQi
+ ib87QEjdRehZxyzEQ34rZuxr7uBRZwKkzLuVUkpZ/TyEuaD8aXfo+0KXeLnAZP1+/Gx7//UOUcI
+ Ys4XKhMHIxZQMqsP6NQxmcdjOgahQOSW1B3lr749umg==
+X-Gm-Gg: ASbGncsa4H4roN518NJaPu8arUO6o9GCofEJKI/SDm96552unOI+HuqzmaS1BqBT7KG
+ hy/nN1CR43zTp2pTHWu5xBmoE3GvbuM5ybnDRx0IM7H6TKWfmApFNbUpwTmLEseUfYKyegLMnGo
+ eOPCXC09JNEnLIdcEgRvtvLGdjSAHjZdMp48QvJnv4hjJj
+X-Google-Smtp-Source: AGHT+IEsz6albGbKT4nWsP64CPvMmFGTiaZ/pwpBZO+tpuVfOAeNQxRAc8fnX6dPe9NWYS7I+4wDzWIk92QxTbey4qo=
+X-Received: by 2002:a05:690c:48c6:b0:70c:a5c2:ceed with SMTP id
+ 00721157ae682-716590e59ccmr38776037b3.25.1751532126843; Thu, 03 Jul 2025
+ 01:42:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250616094531.4158505-1-padmarao.begari@amd.com>
- <20250616094531.4158505-3-padmarao.begari@amd.com>
-In-Reply-To: <20250616094531.4158505-3-padmarao.begari@amd.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 3 Jul 2025 14:08:33 +0530
-X-Gm-Features: Ac12FXzIf0tqjw4I31u8gNFB2eYk8Ty1-8xLTTvh_UsFdsNuLFFF775lUhwap9g
-Message-ID: <CADg8p96OGTaLeD+dCpFhf-z6k_Kb9=y1XB+6N-mtAXKw+s+b8g@mail.gmail.com>
-Subject: Re: [PATCH 2/2] board: xilinx: update guid based on metadata
-To: Padmarao Begari <padmarao.begari@amd.com>
-Cc: u-boot@lists.denx.de, git@amd.com, michal.simek@amd.com, 
- venkatesh.abbarapu@amd.com, ilias.apalodimas@linaro.org
+References: <20250703062811.72871-1-paulliu@debian.org>
+ <20250703062811.72871-2-paulliu@debian.org>
+ <1e2e7d6d-2704-467a-b2a0-58a99600378f@gmx.de>
+In-Reply-To: <1e2e7d6d-2704-467a-b2a0-58a99600378f@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 3 Jul 2025 11:41:30 +0300
+X-Gm-Features: Ac12FXyGWH-sJDfaDrViXBhR-H6n_JFVsKf8VKbsobz1eXUiovcbXEY5Ey9J5nM
+Message-ID: <CAC_iWjKmQpzD-DbDRTs1UbZoQheqFNpLEoWCR6m1iEZwHfyuLg@mail.gmail.com>
+Subject: Re: [PATCH v8 1/5] efi: add EFI_SYSTEM_TABLE_POINTER for debug
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,47 +96,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Jun 2025 at 15:15, Padmarao Begari <padmarao.begari@amd.com> wrote:
+On Thu, 3 Jul 2025 at 10:25, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> The generated GUID applies to all Xilinx platforms but is not
-> specific to any individual board. For FWU multi bank update,
-> use the image UUID (GUID) from the FWU metadata structure
-> rather than embedding a generated GUID into the U-Boot build.
->
-> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-> ---
->  board/xilinx/common/board.c | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
-> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> index 8ffe7429901..3d22149d429 100644
-> --- a/board/xilinx/common/board.c
-> +++ b/board/xilinx/common/board.c
-> @@ -712,3 +712,16 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->  }
->
->  #endif
-> +
-> +#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
-> +int fwu_mtd_platform_hook(struct udevice *dev, struct fwu_data *data)
-> +{
-> +       struct fwu_image_entry *img_entry = &data->fwu_images[0];
-> +
-> +       /* Copy image type GUID */
-> +       memcpy(&fw_images[0].image_type_id, &img_entry->image_type_guid, 16);
+> On 03.07.25 08:28, Ying-Chun Liu (PaulLiu) wrote:
+> > From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+> >
+> > Add EFI_SYSTEM_TABLE_POINTER structure for remote debugger to locate
+> > the address of EFI_SYSTEM_TABLE.
+> >
+> > This feature is described in UEFI SPEC version 2.10. Section 18.4.2.
+> > The implementation ensures support for hardware-assisted debugging and
+> > provides a standardized mechanism for debuggers to discover the EFI
+> > system table.
+> >
+> > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > ---
+> > V2: add Kconfig options to turn on/off this feature.
+> > V3: make efi_initialize_system_table_pointer() do the job as described.
+> > V4: use efi_alloc_aligned_pages() for system_table_pointer.
+> > V5: move the code into a separate module.
+> > V6: Use macros to replace size_4MB
+> > V7: Fix the code based on the review. Update license field.
+> > V8: Fix pointer casting that causes qemu_arm_defconfig failed. Modify KConfig
+> >      so that more defconfigs enabled by default.
+> > ---
 
-As we had discussed this offline, this is not a robust thing to do as
-the FWU metadata is not secure, whereas the U-Boot image might be
-booted as part of a trusted boot chain. This should be highlighted at
-least with a comment saying so.
+[...]
 
--sughosh
+> > +
+> > +     if (!systab_pointer) {
+> > +             log_err("Installing EFI system table pointer failed\n");
+> > +             return EFI_OUT_OF_RESOURCES;
+> > +     }
+> > +
+> > +     memset(systab_pointer, 0, sizeof(struct efi_system_table_pointer));
+>
+> systab_pointer->crc32 = 0;
+>
+> would have been an alternative. Maybe Ilias wants to change that when
+> merging.
+>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-> +
-> +       return 0;
-> +}
-> +
-> +#endif
-> --
-> 2.25.1
+Thanks Heinrich. I'll have a look at the patches shortly and queue
+them. I'll change the line above on my PR
+
+/Ilias
+>
+> > +
+> > +     systab_pointer->signature = EFI_SYSTEM_TABLE_SIGNATURE;
+> > +     systab_pointer->efi_system_table_base = (uintptr_t)&systab;
+> > +     systab_pointer->crc32 = crc32(0,
+> > +                                   (const unsigned char *)systab_pointer,
+> > +                                   sizeof(struct efi_system_table_pointer));
+> > +
+> > +     return EFI_SUCCESS;
+> > +}
+> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> > index 48f91da5df7..78c5059256a 100644
+> > --- a/lib/efi_loader/efi_setup.c
+> > +++ b/lib/efi_loader/efi_setup.c
+> > @@ -278,6 +278,13 @@ efi_status_t efi_init_obj_list(void)
+> >       if (ret != EFI_SUCCESS)
+> >               goto out;
+> >
+> > +     /* Initialize system table pointer */
+> > +     if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT)) {
+> > +             ret = efi_initialize_system_table_pointer();
+> > +             if (ret != EFI_SUCCESS)
+> > +                     goto out;
+> > +     }
+> > +
+> >       if (IS_ENABLED(CONFIG_EFI_ECPT)) {
+> >               ret = efi_ecpt_register();
+> >               if (ret != EFI_SUCCESS)
 >
