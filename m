@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3638C83F03
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 16:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0922C83F03
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 16:29:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4568C82103;
-	Thu,  3 Jul 2025 18:29:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9862081D5D;
+	Thu,  3 Jul 2025 18:29:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tObixeDP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="neHHzRnE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C11E801BE; Thu,  3 Jul 2025 18:29:36 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 6178282F00; Thu,  3 Jul 2025 18:29:37 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB08C801BE
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 18:29:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E733380E9A
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 18:29:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-739f2508ffaso81947a34.2
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 09:29:33 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-2ea08399ec8so115173fac.1
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 09:29:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751560172; x=1752164972; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751560173; x=1752164973; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2v9QICtWf2LjYF2fNgN6IAgQgQ2YTsIMwAKuBqpebmo=;
- b=tObixeDP+AMG2KJUkRpquk9bWhkDXSLTlKPg2tycCgSoUgRSHUdKywpeXa+0HN4gpP
- rxuCeO+vSATh9zKjWifaKvUNwVtEa4gd1J4EvY43y3PQaNBOUZrgp/lNI4hlHr6/o3Ng
- wYoXFqUAJMLoKKduZ5ArW+E/gLISrjCSb7H7g=
+ bh=a7mexDc1JTwRqZxtrvO+1QgkpyK07FlJMUqZROePaaQ=;
+ b=neHHzRnEOdC5XzbTJXYRgEuCDmM3opR/qJxMxw6DW3EfDf2LtNOO94pFs8JqA/m9nQ
+ LAEI5qV7GnFIRlxltAZa0yvzq60I6SAsPZTcJ3+8tdpZ8Xk9k/BUlN698fZbnfjv6/bo
+ LxLdZrh0hgFB4htoBBvkCksWg1FVsHZ2vi4Jw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751560172; x=1752164972;
+ d=1e100.net; s=20230601; t=1751560173; x=1752164973;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2v9QICtWf2LjYF2fNgN6IAgQgQ2YTsIMwAKuBqpebmo=;
- b=vIZs8e2WDoF803tpM2DwAlVwoRpmzD88kWIqSTiQqy648HJ0bdjflrWhS1ewJNPtPW
- w7jwDT+JOENczIXfm9cm5qLYqUqLkXzj9TMlkWEqIV3WGGo2Pkd9qfDM4PBDNmmLTPEE
- 9I1fseAriwdpk/9d0HSHYNP53rz+bPhdiuYKP5mN15QBpS/1jsh+FQHXQsiGrmQZm2Gz
- PSeT8tasQQsHLLhXFI6iQV688YEWjO89ZABR1+e0fv0jO6TZImWVS2/u2NgrbXpJnYTq
- wuxUaSJj2HrKarB5SbtDhKAO4PXl2ipy/txxVECpi/b3Yy2G/PnParo9jZoYGeDQxTtY
- 1Eig==
-X-Gm-Message-State: AOJu0Yxr/F9Tp3RkDxz8TCSQK977fQGyneF11DfU3Efjoc/WxF35AHws
- jvkCWEmgwbhoOOtLX5QY8jY575aoTEvblanC5+ED3thuGtTNc6y35zSABptO58m04vc=
-X-Gm-Gg: ASbGncu/CW7AP1clv5KYgBw2sD7yeVIOCGnqvE6l8hSsM3gV5xBz3EJHGE4s8IQkN3v
- kjOn4u7in2CojnJ2n88I0wQNbvtPu4nIkqH4OqzJ+IPJHAa3FrB03TpTObRHi6FpMtnTuMGNLMU
- 2TzGuAUhg/467KYRE6OBtivqgl39PCIWWamFG6H2AMsDCrYI68Jgm6uqQKB6tawpM9ix9paa8RB
- 6xdjxaJVs5klhO63k0U/jNu2WN9Zq570S89544XZNrGMA0VaSBQXAfseXUFgYVd4LaZlHlOEl4Y
- 9IJSGDe4Rsvakd5ndkiMLwlIuDx3c4Ku/LGHx1cmENCNW1l4Szcli9svsZJYOYDgirSLWXROa9u
- CUqVYt7VxfLiac78+NWspFvDaPBkhbA==
-X-Google-Smtp-Source: AGHT+IEMOiLp/6sJLt+Jsg6GB0me8QP3gc8C+63NtJg1+vvuKB/3IWk4VvNwUoptwyildjyS0fOCMQ==
-X-Received: by 2002:a05:6830:6588:b0:72b:a064:fab0 with SMTP id
- 46e09a7af769-73b4c950342mr4771951a34.3.1751560172676; 
- Thu, 03 Jul 2025 09:29:32 -0700 (PDT)
+ bh=a7mexDc1JTwRqZxtrvO+1QgkpyK07FlJMUqZROePaaQ=;
+ b=mf8HYQZATgP8HGo6xButEm1naZhcXoAVC2jWWtTZM/r4+yTaVzE5mqq+FKs4IfiMba
+ 6P5UqHM5dAohQ5/9U9KnCDOdJNLZ4kzddAivB08voVyerNMFxmEpy7bT0TaQAYj27lhQ
+ 3vrN5W4/xiFnErlqMyF3ah++ATcEegX5WqWRvLc6sexjGLbet7RrOP+bC2tAtU2nYDYA
+ Xou46ZvvDL4TyoiDe6nAP5x9wX4VVlKydh5WnTBBwADiTK9VO4FgBEr8qLijOyi54bnT
+ vGk8XA7OqT9zYZKNLhrC7WTgRZ/+wT+UJLVVyQCG8CymmH/Rm7dLYWx3hFqua3Yrt4Fo
+ /FDQ==
+X-Gm-Message-State: AOJu0Yyl1oRnN9rFvDFOJv5FQCiRslqdf4vookLFNzOsiuNhWZpZviHc
+ bTahvFDpsLT7gm1TICP+v6DiT8ekFnzsUixTLDOT2/zpiT7tthNPVnaTACT6cdviU5w=
+X-Gm-Gg: ASbGncv6oPBQ0gW0Ul9iym2qHgYz9qIOCyknv7lwr+xW9vW7ZaeunlA0+K59mBFbIYC
+ OvjOyaw7UIBzPtnHaBEtSYKZCmtkC9Eim0sEmsV4Dl+nomBPgsnYci7PICw53SP0LnCqZ+OLwZy
+ j/JwGWlKrFkctMmHnlTVJtIsODn69toGUsfTAfYInfVVpgYT/vj7hkFN9cYlPUQwKbqkyfi1Fgc
+ DHZtWhF1eKkhTKi53mUeVPdFH6rP1EkKPjNq2ahhD5+FHDCP6yaqF1IBULBva7ahTEHNAh3xEl6
+ Qc7ukG53C67OUcFp/ueUHFeTSyCmjYCnqEmKjgRInIm19OCZerVUM/CEWev064wTy/ilIFEXeK2
+ W3pdasfMKCIYEX8KbN0E=
+X-Google-Smtp-Source: AGHT+IFCcMgxHrXXkPfLkn+zaMsyzQYOZRGJIMHgzm+TpGFs/xGE0CpDWCN5erVA8mqYwMIx8v836Q==
+X-Received: by 2002:a05:6870:948c:b0:2d5:25b6:ec14 with SMTP id
+ 586e51a60fabf-2f76ed921bamr2515556fac.15.1751560173615; 
+ Thu, 03 Jul 2025 09:29:33 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f7714c4sm19400a34.28.2025.07.03.09.29.31
+ 46e09a7af769-73c9f7714c4sm19400a34.28.2025.07.03.09.29.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Jul 2025 09:29:32 -0700 (PDT)
+ Thu, 03 Jul 2025 09:29:33 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, paul.liu@linaro.org, sughosh.ganu@linaro.org, 
- javierm@redhat.com
-In-Reply-To: <20250703110655.482467-1-ilias.apalodimas@linaro.org>
-References: <20250703110655.482467-1-ilias.apalodimas@linaro.org>
-Subject: Re: Pull request for efi-next-03072025
-Message-Id: <175156017165.3012248.3576179122691503329.b4-ty@konsulko.com>
-Date: Thu, 03 Jul 2025 10:29:31 -0600
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com, ziyao@disroot.org, 
+ conor@kernel.org, ben.dooks@codethink.co.uk
+In-Reply-To: <aGaPFKZQNGrEbCnV@swlinux02>
+References: <aGaPFKZQNGrEbCnV@swlinux02>
+Subject: Re: [GIT PULL] u-boot-riscv/next
+Message-Id: <175156017281.3012248.548651943497669024.b4-ty@konsulko.com>
+Date: Thu, 03 Jul 2025 10:29:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +96,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 03 Jul 2025 14:06:55 +0300, Ilias Apalodimas wrote:
+On Thu, 03 Jul 2025 22:09:24 +0800, Leo Liang wrote:
 
-> A pull request for EFI coming from the TPM tree.
-> New protocols are added to the EFI subsystem
-> - Android Generic Bootloader (an EFI app loading Android) needs
->   EFI Debug Support Table for hardware assisting debugging.
-> - EFI_PARTITION_INFO_PROTOCOL is needed by a new OS Loader Redhat is
->   working on that natively supports A/B filesystems via EFI.
+> The following changes since commit c405bab7661dd60420e97a4edeb3162e9d7e02c5:
 > 
-> Sughosh added EFI HTTP support to eficonfig and finally Andrew fixed
-> more issues reported by smatch.
+>   Merge tag 'mmc-next-2025-07-02' of https://source.denx.de/u-boot/custodians/u-boot-mmc into next (2025-07-02 07:51:57 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
 > 
 > [...]
 
