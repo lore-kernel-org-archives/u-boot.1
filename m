@@ -4,144 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FCCFC83030
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 11:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4A6C77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 11:38:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EABB182EA9;
-	Thu,  3 Jul 2025 13:37:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4406D82F8C;
+	Thu,  3 Jul 2025 13:37:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Eda2GGJ5";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="LpCa4yFX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4907182F5D; Thu,  3 Jul 2025 13:37:43 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 382FC82F6A; Thu,  3 Jul 2025 13:37:44 +0200 (CEST)
+Received: from AS8PR03CU001.outbound.protection.outlook.com
+ (mail-westeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B88182EA9
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 13:37:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D7A782F03
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 13:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iZHNHc0kVyNBdpXFjNUuIjzPS62eTGr4GbxnmVA20huItvwGvnuM9Z2QyEQPSFdsIxMqolRlURvukWPpjpj5qU0I7OiXLEHopFD8oZRwjTF+Zh3MeiChgJbFR+IFURUZMc+W6RkElMosm8MNtXkcBySMN0SpXjH+bzuB3mNEHwzWzOKib5UV2cmaw4+4fGw3u/aSwdAYPJFNRX0M4rSmSozelg/p38dYX2Uen3AuHI4MnAfH905Ynol4DE39OwkwvDS7eb5/wIDADfLPXvc2SuTrO4gjowCpardHz/si+CFjFj4vvulBGrMcDIoPhilKfEvQs4EAnkEIcZ4OSKZGdQ==
+ b=T8eHSCOd5hv2f0TsWR/lxHVx94h+CwzaeT6ymuKyykNXCttsbMtaUJev0wUCjhHvyC38nFc0uRtQw2+xaReGFMBTrWXSfJoWj7aZlRzbE3S1KUQkIaPUqOfy49TC67eiVEtZ7OJFhtGoUrgE6xu4wNi41hjaJfn3yvDhurZHrsP7qJtQzZgEFc0/ZWPJiWcCoRc0f2zb8tYQ3KveN58OrRZwkZKzHseCUNnaGZMj04MFT4ZbvybCXtXIkdEv5q+QzqENkjqN+JYpk3SLn9YJWTvVlaG1gI+R0EFChb3A50UAa6L36SDuIIcsjz9OOY8+FgjoRpBW8BE6eZp42Z99YQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wyx1azTsGjuIsw6clgLBF+0P6YtvZPUYJ0W1s1KWRNo=;
- b=ebauy/rhTFFBddHl7rO694jKk+YdGNZDOrzMq8BNiubVbdFG5jrbNfHJB7xN94aVjxAMz8jhFuuHCcDRmB5KNX2S5MPxsB3phX0bh3cR5DPlhrlWjc6KLXGmlxiZyRF3GoDF8UnbqZ2ouA8yc9qN2BAkfHJLiXDnZyRXLaTbn9wZEnKg+djteg91LKnBDKAnsRbC/RUsTVsCTwv0eirSCyl1zZsptOWMJiS6C0KJxBQMATQEntWzlp40ULIMRSgbFw1TvtQ5RI4lZxJiV4pcZh02W0E7s2USVKRerKvHOfQ8Roa8zjbzqWVXN6OAQaGPa1N40flkR4pAF6u3OrzM7w==
+ bh=FqpcNsG3kUCClC3PslX5XFSmbmPvq/HZ6P9orX3vQEc=;
+ b=QLIGCCf1F4izND6bEB2xSH43e4Yk2zWblPIHUgD4cjbaJhxeG9h5Y6u8ZJHh038y3ygzJeYKcyaGDnTImP9W7jZDhi3WXc3E6kD0CrFS0zSJ9tirogYqpPJXc2V237PkTjmzzLuFlbWWkkdyc/wEIv3TAG8MEBruo/TE4QLny3TeQxaM/Vj+FtlMwIkqOazO3Sx2sNwTyhqlYGRLL52DdSpUlN6cOmSOmvkdCn9NyNiutlOoDNN6LfPkAQtqvtBvQKZ3mc5LJkHpYrSKjWKLpgasDDerJtCldFEqm60t0iBXlQTTzaedINeFP//Yf4s34neJCBC0Y6JoKAAc3Y3mcQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wyx1azTsGjuIsw6clgLBF+0P6YtvZPUYJ0W1s1KWRNo=;
- b=Eda2GGJ5zRRTFVoeeYTXSw/SezoxdrBvLjWgAZSHfBW+2aB/1f065vBvGZiom4ouoTvGldZ7H1FCbtdJ9MIQpUQXYfeA2odu/6y58RYx2RTZl8rGC25sVk8rNDKpuAKCt69K2vqTMRHp0SdYahUJp6WLD84q0T47mncez0mc41c=
+ bh=FqpcNsG3kUCClC3PslX5XFSmbmPvq/HZ6P9orX3vQEc=;
+ b=LpCa4yFXtzFsFJmqQK2rgPUzR4PDaYoeAGgOcBbP2MGbVshQwGUu31qbdR3P3/GgbYYw1cL8UNXIPEymw2Tcgxgw/5rU2tpzxQc2Tf7u8CmpnUYdUxpo6REUSf+uZ/ChUoxUeIpQxnUSvXjWPxn4gt89z+UW+O/XF6FGZV5/yOw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by AS2PR10MB7573.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:544::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.20; Thu, 3 Jul
- 2025 11:37:37 +0000
+ 2025 11:37:38 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::c2c9:6363:c7c2:fad5%5]) with mapi id 15.20.8880.029; Thu, 3 Jul 2025
- 11:37:37 +0000
+ 11:37:38 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
 	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH 2/3] move limits for sNN/uNN types from kernel.h to limits.h
-Date: Thu,  3 Jul 2025 13:37:29 +0200
-Message-ID: <20250703113730.531225-3-ravi@prevas.dk>
+Subject: [PATCH 3/3] limits.h: provide all limit macros for standard
+ [u]intNN_t types
+Date: Thu,  3 Jul 2025 13:37:30 +0200
+Message-ID: <20250703113730.531225-4-ravi@prevas.dk>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250703113730.531225-1-ravi@prevas.dk>
 References: <20250703113730.531225-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0068.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::35) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: MM0P280CA0012.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:a::31) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AS2PR10MB7573:EE_
-X-MS-Office365-Filtering-Correlation-Id: 04fa49eb-d9cd-4888-b241-08ddba26029a
+X-MS-Office365-Filtering-Correlation-Id: d30bf4fb-85cb-4365-30c0-08ddba260360
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?yeoBJLGVhYSBJyxyc+3Uo68TutJuUjah+HqpISYVQGGoP9St8lUre6TfU4rU?=
- =?us-ascii?Q?swM94732H1bFhyur7U3alCzycuR+wwE5IHX8hZvzzmoZMQw3KNbVmL/6Eakq?=
- =?us-ascii?Q?8IU3f2NxQvQ8ERWmVQc/lSkPUpBWxfACxrGv9zvUmimZ4wWzAdkf5mnZ9X+P?=
- =?us-ascii?Q?4N1U0mtoIa7gk/2fAbsuwi95VALafNQIhaR6HbTk+22qVS7zkI2QzyMq8cN6?=
- =?us-ascii?Q?q639pcCPHla2pemuywjmbAR1PaQGsg1EoCsDisogKBe19+tzp3Jr21j3cVIL?=
- =?us-ascii?Q?A5JdmzJXv4Q7eTLv7CIwduIu2g1aKYNyUXI+/wIQ7xCSwIwNeyv9pXA5rZ9U?=
- =?us-ascii?Q?qPtKOz8x3KhE2OKmPbQe4+p9B7nfsL4O4LeLmaSz+AKUX5M8qhqI94WU1hbM?=
- =?us-ascii?Q?QUfspQRY2aAZnWyJ0NzN3aSS5Cnflx+oIkdsVFe/ZhVKNC+4ZDfuhNblizW8?=
- =?us-ascii?Q?drpR+RU7vnqDDOXJDT3QGawjuF96XAg6xa2B5JKGLFfTagBclWbpxJ2H2M6Y?=
- =?us-ascii?Q?RqFIznJuQ7tzRJx34ygHhn5sNxmw0y49KpDG61eAOoBAxWxFssxVvuYBgkac?=
- =?us-ascii?Q?iH9lqJ6MrGMCiQPqkystsumrqC+JkHAHL072FoNpuBB44C9pXtic9awVOAdj?=
- =?us-ascii?Q?EIscuPV253Wt2s5JqADW3//VwZtbfRWULQr9vlAQ5KqEXz68P2NzKGlCRHVN?=
- =?us-ascii?Q?Ng50o06g3l6d5TGlcaEprTF66XW27cyRad9JF7EBSwLwR66/hV2HWj6Ae80G?=
- =?us-ascii?Q?E+mzlMzfUKZH7lhMPmwfc+6nu++CWB7nvTgFm+aAW5ZFabIKF5DmGLZZCcNR?=
- =?us-ascii?Q?eM2FY2Gu5TFbBwBe53bcaP5OssHLfJZfX99y8Khi4rdV/vQIYibztOxM45cK?=
- =?us-ascii?Q?kZnQYsZXUQ87FSZqoN5NzYyI+DbUJ2Wl/1gds18EheAU6hd72BEM+XigjgbV?=
- =?us-ascii?Q?F0Er+6vIgPizc/4a3yf+gAioTN5nFKpBTLlSWILFaJLXKtmx/D7ueUoyyEYV?=
- =?us-ascii?Q?u3aW6DjgTJbE4GUCdqOgOeRPWAcXVOgq8YlksIK0mP/Oj8tZocC6ylmxC61O?=
- =?us-ascii?Q?T54wLvcjl3xNSBRsIs6qLyrAwOOei+vXg04sgkOSCgxozcv3PwoIXD454Vpu?=
- =?us-ascii?Q?V7BZkfgCsrxFzogGE2eWgEhP4cbVCT6hURzcMvUzeiQzgBkgF8cKXkj7wnLt?=
- =?us-ascii?Q?4e0PGOFmu0YMJgmdCTlMaSl/agwYhDdECX+DSIc1wMVcIHS/HuHnpqqNmAun?=
- =?us-ascii?Q?x28heLfHok0gbu+tj/FEO0IHaps3x7k2jfwF5t9fQqvVCQpzF/wjP91445e8?=
- =?us-ascii?Q?+rgoiLbVdMaVHyzZTwMjoQcS8ECmTj811oE9fgMl2RY82E0g3oVJy6W8AdOj?=
- =?us-ascii?Q?7wAgGVju9swomacBJMkmioifeKD1fttFNwfCDqv9gZ7m59AwnId77a+i25D+?=
- =?us-ascii?Q?EeYtcmXY1xbh/R1FuP/uVmSU8eDZEvnGcY2GBeCcj3MZDKi7enqH0A=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?H1Eem0/RnjOwkaNByxzFukkOh1UIA8CxkkEikUQqT223TmQ5BLT5K54erRKG?=
+ =?us-ascii?Q?m1sgCybeIIiJoOmaQuTe5kxsuE/TE/5KKfSmBlo3sTfWsT8YKjQ7TWBnrF0f?=
+ =?us-ascii?Q?t5FskaYxcIY0cDNxgc+BQK6+PE7LFHOTw4tA7Q1er8GeoCrtmYUxiTPjBW2l?=
+ =?us-ascii?Q?eE/braRKWTOHp0w+Z5DUh2gBQF/cJL5oA7M6FH7suFI0b27RfOjGpZ2TgWhk?=
+ =?us-ascii?Q?G4dCPrJC9nTm8AtpHJCcA6nlyNgY0UFQ2C+4lCQ018bljyfJuZdckjP1eu1U?=
+ =?us-ascii?Q?fjVxOtGZ/gVVGfunaL5lnBuIMiKXQihRKZejVQYOchhZdopGTfAa5570VGIZ?=
+ =?us-ascii?Q?uYiLtHSna5oUWcLs6/hFXaCSakYcYiALUhq45ZiuY/Yr+76bF5Z6o98gLjbk?=
+ =?us-ascii?Q?sk/oy2Jj/ZktBnptd4WFTTaE+WRMLCNigd3bNDbLayQi+Xog3osMQorsDkAt?=
+ =?us-ascii?Q?nontCyp+dUJvWNPFqF0RHVgwA4Y4EhL1yc8ZrqKYfDr7ExcQUx+ZYVsXFr8x?=
+ =?us-ascii?Q?pCVDRQlopc7a6r0wMJwyWzAmuYFA1ku4P1mZKFbLigPDzwRog9OKuQW8FfYz?=
+ =?us-ascii?Q?yY89Gbe9+j4JmMZw/R9bhGsg64+O3ObugqO6+oCZGExS7LV3dVdTCXjX1RMK?=
+ =?us-ascii?Q?zXGlbG/rfJBytgVTN2bT1ay7LSKev+FB2VKOdSSvXSA76O0KBu6oIvcDi6uh?=
+ =?us-ascii?Q?UCl7K7mAmxnkkuxb7ze+bAFz47cSIehuGwPbfrIRX+HeoWgunTLc8XyUJKiS?=
+ =?us-ascii?Q?2cU6Y/pDCYuMRIxJUmnwiA7FvyWzAPH4r5KM/aLRzHELzuxoyvxkB47r4qh+?=
+ =?us-ascii?Q?eghMLIjacvQBuWLy30VzvKWvlfxX0B5LAEA2sqbKy2P9y2uONfg8nFq8gAUm?=
+ =?us-ascii?Q?Vq2OA+SWb6NVynUa0WnATBGsktGk7VzOxZD2va9AVQxV8IP1TvF3s020mzIt?=
+ =?us-ascii?Q?UZfNB4QmIgWtQK9Y/ESuOJ8CbloFZsdES7hK5oV9mwhjgXbgqk531Qtg6mVH?=
+ =?us-ascii?Q?KeXSbQEEzaNB/4oIf5jnUBrTMvCPTXQ703UVrwjKKGBzwXcFPxz2nadZZm/c?=
+ =?us-ascii?Q?kPqAM4KnhDssdCWUASzKO0H8Ob5hru6EZeOX9XJFh7jxiMOT/I7uYOTo7lhE?=
+ =?us-ascii?Q?62bF5ADq6PxvGnrIoSzuDNd1Gc88z1QhfEikZnk4RJt1yeDzAma3PMcTupVH?=
+ =?us-ascii?Q?WkBHBKII5fT6BUkwI4XgERM+nxrF50V8DssVavPsTlLWB4iZZZtBBLE2KbkB?=
+ =?us-ascii?Q?udQZeAR0d3Q57eRHbj3K4RSVF/jL03Z0VqI/Fm0rUiZIfQT5khufsENDfK0Q?=
+ =?us-ascii?Q?588IlTR2OlylWHGpV6oOOtRIDGA/yM7QOQk2+KmT5ohXDo8dedAHKpqTwydL?=
+ =?us-ascii?Q?0PQRAItVNGxro7XI9rAQ0fU2N1nLmpS/+Lj9kzVErRq9aluxz3+oDG3jMDgy?=
+ =?us-ascii?Q?xnmswUFvuGU8XRRRTXC63/LNkJRNwozQa8OndEF3mHx2E6NoTnyIWA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8Q5c6KQjhYBF0aYlTdDdclW4wy+edce9u8ZC3TFPYttLO53U0RewUwRkMU0Q?=
- =?us-ascii?Q?5sqPOZ9cDIok402nS2M7EByNjCIBlCrAYDJUYFeEfvZO0djZntGhfHX0K/j2?=
- =?us-ascii?Q?Fsht9oVWjfnPyPh1xi2L3gtdQ7NIeBsPWmA4lx7GIlgVMrci9Y/uX9ZGdd/l?=
- =?us-ascii?Q?S4vG6PFaKStJcSB878T2KGretguFFC8w/mjCOt7qZ46q0NLD6xzKiiNalbXm?=
- =?us-ascii?Q?TkXllNUcEpd4KxLBrMZRM7pIDlOjiPwT43Kz6afj264hj8LmY8gCCtNl2aU5?=
- =?us-ascii?Q?fnAyEL4vO2yT2m+7Ri0pVzk0RL0oHuSzKtr2sxi8yk8WlkdwuuWul4EaQY4J?=
- =?us-ascii?Q?7IZ+8Xrp5Y7BBjx7KSi12sGuHAzohOmNszay7+Kg1Gut5gyqRwcOkFTTL+pG?=
- =?us-ascii?Q?VsAHrcS/8HxOHFzB5TWkFxyAVhJkg16H652kt73R6XKUWbu1NfGilOXI0pa2?=
- =?us-ascii?Q?4oh8nZbI+9qLcctg44gA1kv6CPBRd5Xwl57vLmTyheF+AHedGoJ50xFYoqTp?=
- =?us-ascii?Q?TU/IjoOGa1igLV30i3KQSeN6MmjTSjMLBqoM/2CbNOVLO1TbOvnTcXX/KETs?=
- =?us-ascii?Q?Z+Efa/QnHoxkb+1PdLIP221QYHOL7iWmcYtBALRm29iThz7VUlyrpvcArW2f?=
- =?us-ascii?Q?r8IX38sqZ4g8k9JmsaPR/Oa/7WmhiAl+/lNnhN723gA5bVTl/kJFav3++fno?=
- =?us-ascii?Q?sP7hv+FEsF6NJ4wYoAFQJqGNTofc4CszPtGo5gNDjXyAkkwTx6w3CewFwJx6?=
- =?us-ascii?Q?EzuuPtz0p+Mkf23c8eX426OYNGY/GBJ9+WELb7d4tzoBsvDEjFCsRYXZsRHP?=
- =?us-ascii?Q?SvkOzaK2NbKfbjIsXSdcUsvo9hQQHACKULvsggEMqwQQr+fn9gxfieV7zePR?=
- =?us-ascii?Q?YExATuHHivwEkcYx75DoXXg03KNrsr5lo5bRrFdpVNJoxFQu96MS5PtQIoIe?=
- =?us-ascii?Q?do1TqHRLvOIDeol9rW8ONW/FW7kgIzDPhA8CFapa1JCPHjYDjaM7/OraR/kC?=
- =?us-ascii?Q?BrTUN6xxRPAlZN6XLfGBfX9YiTk0HLc1WjInNSqdfCtAcA7eq224Za+LRgXB?=
- =?us-ascii?Q?bh2xvtOm4wRXLN4G2bMyd8weoLt6IiUPU9f0DvqYVoMLbcKtthPzKAgZ1lym?=
- =?us-ascii?Q?o9fqVAjCnrvY3KdWOqwmRwKf7CXfQXI8e90YQuSAAAqBlC0jpZ/TgcZm6YYD?=
- =?us-ascii?Q?9PeRbNKsnwaiNu8XEGbsr6SUBnATChiYnxRTpe9OEOFn6uaR+Cb/gZqeEGRU?=
- =?us-ascii?Q?nuHDMkKwwk8VhoQy5wU9Z92JW5u4AweNDVmc6hXEv0kftzgeXCajF+7Z6UiF?=
- =?us-ascii?Q?943laHV8AY1FxYjOBkHaUfgnGrsXbwSzvLC98yilOt4dfH5WQjeDD+ax+YzI?=
- =?us-ascii?Q?aT9hvi9KAP/doTiKLgCqhlNITtJx4FOYL3qx5rXBg19tIxAZvymuSYujhMvR?=
- =?us-ascii?Q?nvd4c0GdWlcF1mXtlTRjGj8sS2N9VjcNcwoN0+2qVGyUz9VLJM+qNKICYVPe?=
- =?us-ascii?Q?KB1LKaAH4TT1K+QJDHTW6+YV0GnLrOYUsWAGUP3sJuNCxLVb9VHZkHHzeJ0y?=
- =?us-ascii?Q?lf9jrCLieTeYvhm7kd06sK1XS1G6Q5Z1yJjbiPep4B0khv7TnpRAbUaj7i7Y?=
- =?us-ascii?Q?ow=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?IaxnRs86tX5Y4JM2P+PQBdkQ9usfWMEAvQk4hl6pE7jWKYqz3QyTPHtyrFb8?=
+ =?us-ascii?Q?q+bwXYJy9cRldDqKj24L0GYMx/3VtMt6DDuuJ1EmMHDna4Dwmdg+Yk6yuYl+?=
+ =?us-ascii?Q?BgzSysV1kql0W2H1+bfjvDXKMi3qhKO/wiI3/EPlczb2EIr2t4jbjcA81atN?=
+ =?us-ascii?Q?m7D21VYWcW6s7PDhofr+L6DKah+m9VrXgBzjbx/3FvBO1pBhCTa2ppjPl2mh?=
+ =?us-ascii?Q?gVSUQ0hvncHkfG0WbQWewYMM3dI1wjdlK9WKf07m2B+35xosBIEjdFCXXUpo?=
+ =?us-ascii?Q?vllBULNy8uOxkleGdOHOki8Byu5/zkKxBpnjKaJTv7dzjDcF+A2xieBJu/4P?=
+ =?us-ascii?Q?d5mtd19kHBcA6YoL2gY+I8cUK+eKFst9JJ8wUKiDG+4XdeovUp7XDQDpk7QM?=
+ =?us-ascii?Q?tCQVXGF/f8k05MlBGAxcHlLAhefB/9XR28MZtzVEDOZ+EvOc6f4H7eRXHkqv?=
+ =?us-ascii?Q?bFqYqyCPLMLx+4uQMHIxxhV0u7zWvF6t1W8352q3aAzHSD5BbXsSwv8rk73E?=
+ =?us-ascii?Q?ONDUOqmybOS1ns2ZL9sJN6Qy6DO/oOpi5/hQlKuUf8k773U98RXWVn4jQrjP?=
+ =?us-ascii?Q?4Oxwr5wdDYJiSoFrU+bprpLMpGCVK6eNhwlCl3BRsjoplETSdcM58hqGepe8?=
+ =?us-ascii?Q?W2NeY1xw/J0zT2mo4LWFOSFY1NfUF9QRlMaCCNo+XL8Jsid4oiF9f1y1hqUH?=
+ =?us-ascii?Q?9jxEJF/XYYfP2rllkKhdpB0MXDqGT4hOUYc+fx57wUwGE+Nk6vCoZE9AYqCV?=
+ =?us-ascii?Q?ENMHMDGGCqX3jmVkkJg/DWQFOcc0acyLdSAokD1Hl2AXJtHPmvApODLLtxgC?=
+ =?us-ascii?Q?iyPm/GQJgAi7B8ordGU1WkFDD5E5C4DQVex9HwFbfbNZXZE9X9xUC8c6IHK/?=
+ =?us-ascii?Q?BqxhIE+/yMCKpyP9XpDDAZZLvtoPpV5mgHfzKh5K727zg5rZ8xYdrRcQB1gJ?=
+ =?us-ascii?Q?YZedKGZxoOdUYzwYFzLgMmTj4pdtPf0DCcLkzALnD7NB4vLCOw03KTiPj5D4?=
+ =?us-ascii?Q?wkifchMsVV28Tvd9TMjcbNCF/QgRhpdNzHJ4OEE+fUUEfBNsiaC7ne/AgLdG?=
+ =?us-ascii?Q?oJD1HgisM9XxemXJYawao4adt0c8JcCjIasp+z/nlcT6tpIYpy80LUmjL1rs?=
+ =?us-ascii?Q?H3RW9Zy17exPBSnYiKUQMRfJ+zMvvlLsNPKQxtLPFqdlFPyogOjpsma87pn5?=
+ =?us-ascii?Q?eYgnLWz2J6zKb8u7r/3eByAiw8iJs+Do4Ye/z//PBqd6F31AALxGmyGacykG?=
+ =?us-ascii?Q?gcxF44chv1cJuq1LoscdYgg2yobk47ktaKx8NGxBof6ocgE9IxsXC6LCBptt?=
+ =?us-ascii?Q?a5eC0n/RtqM78GiqRQg3OpPu8oMA/MpwDfWMGlnFWg2HQyYEhcDLB1gG9+O9?=
+ =?us-ascii?Q?7TasBw5WwJD9iN43Z2d8LqtyVr8immXDVWkJeECJKtub7+AWJaYKCphMtw6G?=
+ =?us-ascii?Q?VXWnTJhB2GvizDzlsV/E7nflmLhv3szMaVDHTZM7TJA/583iXhYQP9zlshDV?=
+ =?us-ascii?Q?Zz2jAZwnvHIbuJxoYQ5i3zKmI6xa8+hpSwEEafkoYa0Jhsx7GbleZfLy9HA9?=
+ =?us-ascii?Q?KZcvgdo/h4L4ExuSienXjoz3tHDl+UK1jVa279HQqvdntsEAlUmHK9YFEFjZ?=
+ =?us-ascii?Q?Ng=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04fa49eb-d9cd-4888-b241-08ddba26029a
+X-MS-Exchange-CrossTenant-Network-Message-Id: d30bf4fb-85cb-4365-30c0-08ddba260360
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2025 11:37:37.2683 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2025 11:37:38.5633 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t57l3o/fkLUhLkg6tUNj2rtc+q11J+3QB+2Y2391pbJOhMvy7QnZly+y7MIkrj14RYMyi5LJqLkq+OezMjWT7cqctAKaJpXirwylPXoHtlg=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8Aj0B/SdwgEopgNx27JnHSVRJBZwXzmVsSkGpNG8r97ZRnUOemS8xhgAh0hEmYsLMi/IDJwbS8pleqme/zIfYWQbM90uVLsNm8FPHwPqI9A=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7573
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -159,70 +160,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since we define the {s,u}{8,16,32,64} types the same way on all
-architectures, i.e. everybody uses asm-generic/int-ll64.h, we can just
-define the associated limit macros in terms of those for the
-corresponding types. This eliminates another set of limit macros that
-are not usable in #if conditionals.
+Currently, we only have UINT32_MAX and UINT64_MAX in limits.h, and
+then stdint.h and kernel.h somewhat randomly define UINT8_MAX and
+INT32_MAX, respectively.
 
-These type names and macros are not C or POSIX, so there's no language
-violation, but certainly a violation of developers' reasonable
-expectations.
+Provide a full set of definitions in terms of the min/max macros for
+the types that [u]intNN_t are defined in terms of, namely the {s,u}NN
+ones.
+
+Try to avoid breaking whatever depended on getting UINT8_MAX from our
+compat stdint.h by replacing it with an include of limits.h.
 
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- include/limits.h       | 13 +++++++++++++
- include/linux/kernel.h | 13 -------------
- 2 files changed, 13 insertions(+), 13 deletions(-)
+ include/limits.h       | 15 +++++++++++++--
+ include/linux/kernel.h |  2 --
+ include/stdint.h       |  2 +-
+ 3 files changed, 14 insertions(+), 5 deletions(-)
 
 diff --git a/include/limits.h b/include/limits.h
-index ec111023e00..aa30f5dc8d8 100644
+index aa30f5dc8d8..57640a1c6d4 100644
 --- a/include/limits.h
 +++ b/include/limits.h
-@@ -31,6 +31,19 @@
- #define LLONG_MIN   (-LONG_LONG_MAX - 1LL)
- #define ULLONG_MAX  (LLONG_MAX * 2ULL + 1ULL)
+@@ -44,9 +44,20 @@
+ #define S64_MAX     LLONG_MAX
+ #define S64_MIN     LLONG_MIN
  
-+#define U8_MAX      UCHAR_MAX
-+#define S8_MAX      SCHAR_MAX
-+#define S8_MIN      SCHAR_MIN
-+#define U16_MAX     USHRT_MAX
-+#define S16_MAX     SHRT_MAX
-+#define S16_MIN     SHRT_MIN
-+#define U32_MAX     UINT_MAX
-+#define S32_MAX     INT_MAX
-+#define S32_MIN     INT_MIN
-+#define U64_MAX     ULLONG_MAX
-+#define S64_MAX     LLONG_MAX
-+#define S64_MIN     LLONG_MIN
++#define UINT8_MAX   U8_MAX
++#define INT8_MAX    S8_MAX
++#define INT8_MIN    S8_MIN
++#define UINT16_MAX  U16_MAX
++#define INT16_MAX   S16_MAX
++#define INT16_MIN   S16_MIN
++#define UINT32_MAX  U32_MAX
++#define INT32_MAX   S32_MAX
++#define INT32_MIN   S32_MIN
++#define UINT64_MAX  U64_MAX
++#define INT64_MAX   S64_MAX
++#define INT64_MIN   S64_MIN
 +
  #define CHAR_BIT    8
- #define UINT32_MAX  0xffffffffU
- #define UINT64_MAX  0xffffffffffffffffULL
+-#define UINT32_MAX  0xffffffffU
+-#define UINT64_MAX  0xffffffffffffffffULL
+ 
+ #if (defined(CONFIG_64BIT) && !defined(CONFIG_SPL_BUILD)) || \
+ 	(defined(CONFIG_SPL_64BIT) && defined(CONFIG_SPL_BUILD))
 diff --git a/include/linux/kernel.h b/include/linux/kernel.h
-index f26274fbe1d..d3d979834ae 100644
+index d3d979834ae..e0443ecac84 100644
 --- a/include/linux/kernel.h
 +++ b/include/linux/kernel.h
-@@ -5,19 +5,6 @@
+@@ -5,8 +5,6 @@
  #include <linux/printk.h> /* for printf/pr_* utilities */
  #include <limits.h>
  
--#define U8_MAX		((u8)~0U)
--#define S8_MAX		((s8)(U8_MAX>>1))
--#define S8_MIN		((s8)(-S8_MAX - 1))
--#define U16_MAX		((u16)~0U)
--#define S16_MAX		((s16)(U16_MAX>>1))
--#define S16_MIN		((s16)(-S16_MAX - 1))
--#define U32_MAX		((u32)~0U)
--#define S32_MAX		((s32)(U32_MAX>>1))
--#define S32_MIN		((s32)(-S32_MAX - 1))
--#define U64_MAX		((u64)~0ULL)
--#define S64_MAX		((s64)(U64_MAX>>1))
--#define S64_MIN		((s64)(-S64_MAX - 1))
+-#define INT32_MAX	S32_MAX
 -
- #define INT32_MAX	S32_MAX
- 
  #define STACK_MAGIC	0xdeadbeef
+ 
+ #define REPEAT_BYTE(x)	((~0ul / 0xff) * (x))
+diff --git a/include/stdint.h b/include/stdint.h
+index dea83c8226a..90fd2bdee08 100644
+--- a/include/stdint.h
++++ b/include/stdint.h
+@@ -9,6 +9,6 @@
+ #ifndef __UB_STDINT_H
+ #define __UB_STDINT_H
+ 
+-#define UINT8_MAX	0xff
++#include <limits.h>
+ 
+ #endif
 -- 
 2.50.0
 
