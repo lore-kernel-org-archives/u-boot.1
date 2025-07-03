@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D44B4C77B7C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:23:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 030DBC77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:23:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1524E80E9A;
-	Thu,  3 Jul 2025 15:23:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 76F6C82063;
+	Thu,  3 Jul 2025 15:23:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UCbaMlru";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TMn4H4xI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7616F82063; Thu,  3 Jul 2025 15:23:06 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 013C282A76; Thu,  3 Jul 2025 15:23:19 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4186C8091A
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:23:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE2E78091A
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:23:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-714066c7bbbso91005357b3.3
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 06:23:04 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-710fe491842so76321997b3.0
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 06:23:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751548983; x=1752153783; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=07bLDUYM9y4Cqt8lFqFg7DLzhArxIBfddkPObA+3IaA=;
- b=UCbaMlruzhRPv6xqQUReCiGLWwfzZLMDIuW5Zb852hhopFlSyvvJAOGS6N7ONmhEWk
- h1xE95AnSTCJ8r10uFk0KYMnX/CyZ3RyER0XHcu9k8pL7OiOOjBGUPivAH866L4rgnfm
- 4ZegJnRFvUs5I+bvI4+p9gcEH0roiWzbXImhxlNmWp3qTFnQYAzXZ1GZc1egD4C1tJoy
- AuOHd974WonBPiMeUKpyMjjzWyf04IiO4Hf9vLso+k7R79YYla2kUDFZVTIzhQ6wn/my
- IgwxxUsJhZie8MiEuZrBwMRJN0vEi1WYd3UJG/mNm4l1SeB7T3jw5x6lzBkNGh7xBRUr
- RRyg==
+ d=linaro.org; s=google; t=1751548996; x=1752153796; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I8moqK51Zab8XF4hGWuqlRskaruAJVZLRoJ5szvjfI8=;
+ b=TMn4H4xIyeG2B/MqrbjFfPS78308Z/O2R82OiBVpVb6bbfV0aDZIaVJWoiCpu3UqIn
+ 6ya6ON2K9ln5pEpNiDNsrL85H75i82t9J1opPT2AgP2owrPOz2Hv6q7iZJYyzF3jKMis
+ 4cpwrIOFNyI/K9sU+dnUzaA0VzG6pAWyWrYE8zDNCSOfiyAEjXhd3aLZYXVTGtM/x5c7
+ LbAqDQkWNqxx8bZ3cjp79cjSMgXTpQUttgnlolcHKWDgZKfWR8q2b5+pV3uwJlDqFzqj
+ 5tZtMiypm4M/jn1scTZ+cm6EcaMAEive2H+s1PhH63zcOW/HRERN5n7UUtdN/HceX3Nt
+ 11FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751548983; x=1752153783;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=07bLDUYM9y4Cqt8lFqFg7DLzhArxIBfddkPObA+3IaA=;
- b=m4dCFiHpRn7ku3YOeItFuoM3SmMLQlA2XQkbcWG28Zk8oIUbl2Xg8CmtBG+ILX2sAO
- OY5UavrOVJ5O1hMwubaeuSn61qIPWzfSvg9HDYNw9gQ7oY8ENGgeLEx2XRSFydAdNKwU
- OznJo8g1p1I2aMOn37lz7suW4+TEpBGxbImy6gFAFVrx4UjjiDzg/QTeAuqgCNGyAc9Y
- aDn09sq0uBHJoZeeSvqsdbKr0CG4ZCzNjXZ8a08eTwmA09j+KOxJba+CV/Jt1mz84PxX
- xufp90NECDxzpEj/zaFjW4BsMciwkYVa8k8PpnOAwU+BjWE2rJIwvSp4lbe6aub8uK6n
- bxiQ==
+ d=1e100.net; s=20230601; t=1751548996; x=1752153796;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I8moqK51Zab8XF4hGWuqlRskaruAJVZLRoJ5szvjfI8=;
+ b=nRcoAJ5YdbbvtfIonuTmv7OCYDlAa5oHUspAXMNCjuo+5Tw0UfzgQnaMi8HO8nQr43
+ +ssTJwjSLudQ4iBtswmjL62zx+dZKc7ScqAS3Gl6Mc1oQauOeRv4GUlVQClp+MvOmJkh
+ 90cJ5j4aJj8l8daMkvcyjP7dgkUmeIYnnnG0rZ5q0lZhN695bQvSE/eOs23c0X/8u4In
+ w4zzuA8vYwhjqoXIAe7XBM2PzL0cN5Lr5iyrDoVJSBT/RMJh6+/6Ri7GJ9Y1umycxHD1
+ tv+a/91TqZ2mxAIXeYBce1iM2I8sSEDKXlCaDSExmgB+xkKLA4SdWVTyw0gscUlS95KO
+ 3nCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPo2kA3Lj9pGni8KlfPjw8Gq7BToQDUeJ2rx/S4FGhtUjQFS0AMeNJPAIxGdmg6/ukd8HCXM8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwS25yJhIzS5/vLJi3bghGlCBB70gExRQQvIcViN7R2J5MWlFf2
- DQbtZ/yid80fjhbnz4R0cWhQdHHLj3Wqj1pa79OwF4bMhDpDuh8BGwgNMOnHmbeK07GH7HmyTIi
- E8YdMwTKwB0/1+LNsSTRmmKJznKRYXqqiDV/PwP8igw==
-X-Gm-Gg: ASbGncs2rV4oNx2+DusmixSJQ2Rr1H7nYqR+QsLGLNxEw4SAqSnp6gCj2raQ5vLKrCo
- zeXOcPe7XQCMG3RudXI9pbeuFEWnAFrzFEsHbnhSAKQxgLTfr4LlHhG8eUo61qWKgEX7oeb58fP
- fSYJclqVSEPFKo7KjGsGr8f6TCICRykJn/pDO3bLK5qOGF
-X-Google-Smtp-Source: AGHT+IHp3IKMEA6VL9L1Tln1nxFp9pu0gCO+/bYMg5fntY6K+NuX7cRioYLAGLJlODFRZ8Q3Wiwioo6mNSwv2kpFliw=
-X-Received: by 2002:a05:690c:6e04:b0:70e:7a67:b4b5 with SMTP id
- 00721157ae682-716590aea79mr51498627b3.22.1751548983029; Thu, 03 Jul 2025
- 06:23:03 -0700 (PDT)
+ AJvYcCWWjrl9/2Tr7fTbu93jaS15XXw2J4yXJPloA74WenyYQkBof5dkMIx7jBeWqGBV3Q/V5IGZ2uQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHN9ZhydFH5YfFtyx2mArQK3ieIlS0EwB6Bt5FGQ+LlbuE9J0+
+ Tt8A1zeuQuU3ZLEfIVbLQX/lAvvjJJDWRY4gvHoIGOMj/gKThEbKPZuoWTtLI0GYe+pUX6nGLOX
+ veqcexOvckrTDIw1CdapvcZKxr+3y+sWmwICE7cI6TA==
+X-Gm-Gg: ASbGncv9RTCmprnvOOfz1/x5NgfRknQYuHPboit16aeWlcj+wiFJdQCPaIxm4CmwEyC
+ jO+Lp/sVfe1DH9Cq8O9ukJM0NJuFD6VR3uDW2P/NwezSwecBd7KosCUA9FmRLPtcNCPBsXHnJg9
+ 3OeELIyh6IjkQDWzJF9mQre4YofotlhG/SNxyTss1VHS2R
+X-Google-Smtp-Source: AGHT+IEOp4s8luvod2oCMPsb7W5HpXgtVo6tdYA44pXhLnc2xROu2WcKZ9ob2m/PIciRNbzHb80fL7ulAkjNEMcbJlI=
+X-Received: by 2002:a05:690c:fcc:b0:710:edee:74d1 with SMTP id
+ 00721157ae682-7165a3203c6mr40365827b3.3.1751548995705; Thu, 03 Jul 2025
+ 06:23:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250703051951.43372-1-heinrich.schuchardt@canonical.com>
- <20250703051951.43372-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250703051951.43372-3-heinrich.schuchardt@canonical.com>
+ <20250703051951.43372-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250703051951.43372-2-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 3 Jul 2025 16:22:25 +0300
-X-Gm-Features: Ac12FXzZumzFEzfB4MDKRYV1jaWj4988RMl3mcJTD-aeBSZNdQiKYhL6ILR3Yck
-Message-ID: <CAC_iWjKobrJsF6yndiexeYBfgoaQLmjiOAc+zPx1qrXzUHarzQ@mail.gmail.com>
-Subject: Re: [PATCH 2/5] arm64: initialize the frame pointer register
+Date: Thu, 3 Jul 2025 16:22:38 +0300
+X-Gm-Features: Ac12FXywhhzVagEcSc-6mczm5cKfPiKT-wmW9-UTkCNfvb-zoDqhxBPV46lMtmo
+Message-ID: <CAC_iWjKQoc9tosmGo2zm2vSAcDdG59XtK3=b+67cjX3AXJhzKw@mail.gmail.com>
+Subject: Re: [PATCH 1/5] cmd/exception: missing include string.h
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -80,6 +81,7 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,31 +101,38 @@ X-Virus-Status: Clean
 On Thu, 3 Jul 2025 at 08:20, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> U-Boot may be compiled with frame pointers depending on defaults built into
-> compilers are via explicitly passing -fno-omit-frame-pointer.
+> When building qemu_arm64_defconfig with CMD_EXCEPTION a build error occur=
+s:
 >
-> To stop walking frames it is necessary that the initial value of the frame
-> pointer register is 0.
+>     In file included from cmd/arm/exception64.c:87:
+>     include/exception.h: In function =E2=80=98exception_complete=E2=80=99=
+:
+>     include/exception.h:41:23: error: implicit declaration of
+>     function =E2=80=98strlen=E2=80=99 [-Wimplicit-function-declaration]
+>        41 |                 len =3D strlen(argv[1]);
+>           |                       ^~~~~~
+>
+> Add the missing include.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
->  arch/arm/lib/crt0_64.S | 1 +
+>  include/exception.h | 1 +
 >  1 file changed, 1 insertion(+)
 >
-> diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-> index f3f279f2c39..3ff0577e9c8 100644
-> --- a/arch/arm/lib/crt0_64.S
-> +++ b/arch/arm/lib/crt0_64.S
-> @@ -168,6 +168,7 @@ clear_loop:
->         /* call board_init_r(gd_t *id, ulong dest_addr) */
->         mov     x0, x18                         /* gd_t */
->         ldr     x1, [x18, #GD_RELOCADDR]        /* dest_addr */
-> +       mov     x29, 0                          /* frame pointer */
->         b       board_init_r                    /* PC relative jump */
+> diff --git a/include/exception.h b/include/exception.h
+> index a7f21e73d75..0d4dff49954 100644
+> --- a/include/exception.h
+> +++ b/include/exception.h
+> @@ -6,6 +6,7 @@
+>   */
 >
->         /* NOTREACHED - board_init_r() does not return */
+>  #include <command.h>
+> +#include <string.h>
+>
+>  static int do_exception(struct cmd_tbl *cmdtp, int flag, int argc,
+>                         char *const argv[])
 > --
 > 2.48.1
 >
