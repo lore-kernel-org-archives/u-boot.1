@@ -4,93 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4EAC83030
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 11:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C94C77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 11:53:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 821B582EA9;
-	Thu,  3 Jul 2025 13:39:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 631A882103;
+	Thu,  3 Jul 2025 13:53:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MxoYOslL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s+HCd2tY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFE1982103; Thu,  3 Jul 2025 13:39:47 +0200 (CEST)
+ id B65EB82A76; Thu,  3 Jul 2025 13:53:47 +0200 (CEST)
 Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
  [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D319382F6A
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 13:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB3E482063
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 13:53:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
 Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-451d54214adso56581675e9.3
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 04:39:45 -0700 (PDT)
+ 5b1f17b1804b1-45363645a8eso55952755e9.1
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 04:53:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751542785; x=1752147585; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c2ZDYsLWIy53RFWmvU0AhdlWPlvPnVnXk8k3d6LCWLo=;
- b=MxoYOslLX4JqJ1UPX9rZflloQ9B7g3H2Z3d2w/fQ9i0qTysG4CvFHWaX5fCB+7nVgS
- fExP7AIHy3VMXQywFsQDLO6QKXolfwEjcbQzOjaUAPidoOEDUIrSF/nhcAUfZBGKRbyR
- xlSRPJX3a+JqOfQXPGqYiQHtDjdrTNpyiOSqWFlueOw6kFwozQEeh8T+Q+absAMcjUBH
- uxCtaqiYKSh2uonpBEwqKhV5LLwCgTV8R8o6fuP3UDwHTuLk3lUQZto/yX1+n7vulNli
- guK7Dzi1YH13QcIC9lpU8dtRjZvEfX/UeHDdb5Du0leelZMXjRSE2gVgzUcwI63NLgLn
- IxGQ==
+ d=linaro.org; s=google; t=1751543625; x=1752148425; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=z8cjCxnQ706sV+EUP5q4kmCa2HG4dLN0k5OtQ5426ao=;
+ b=s+HCd2tY7cHEalP2em2CB2hSWonhXukaQMJEpkzEDhhUXU9JYDrObfXrVCE7ZDqiGj
+ 1xy9jwLy1/YiXpBLd0YA1jjZd/VvtZDuBAZgNleHY5j/zxXXHufPUkt9MDa08sZ7RLUa
+ WWte37zB4wK8NtlEnleENMH2z+QINl8Cu4ZixqBfhVI4a5iuZo158WsubjiPIMhSyyAJ
+ TUG3VejoTpKqu7uzfhfqszP8xv8sx8yEAaOi/V9aFyp0cT4YcVGwTjIuNNVNin6s3zXn
+ Ce7XSNzlyws/x2PTVdi5qyh1oymiy00SQdgC9oP3sopMHfuc8aR+DU0rfhyny5YkdlLU
+ 8ENA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751542785; x=1752147585;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c2ZDYsLWIy53RFWmvU0AhdlWPlvPnVnXk8k3d6LCWLo=;
- b=WtYMTAKsE4wopagRDrZ9fWNnYcf9xCpBOisN7TgmPvVwaK2q1O56sMukZrsWQRrHaJ
- wjsXlS5hZQMrfk7VoydDIQmawZJkZrtsWL9fsy54LiUk4M10/y2rtwTekVNhPvim5Lz+
- k5QNNPIcwZgkOKF415JpvgnYBP/NWydzYdPBF6rhrO3X7rMmm38mFwPoTXkYzWZULWL9
- uyQT6RnONxHYg5uyJCPZJ911wpwVHUvbR4+AgBKcYH85k9HCqVKc9MlAnVMbFjaNhnE3
- J94oOoeEWvf9jy13juKULph3dXkfzKC9HX60PWcBB9Ivuu1YRGWy2nDdOh0SI+uFi4sS
- 9NxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUBLrC2u7qTvIy5e7g3rT02mdkVsf+eZh5M5O8Qjx9GJ/c2pNHEUcXde+/rhNIfgraaZs+y5vg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzv4q78q21eBG8z4q3JFyx5M3/mbRQ8cu0NRRZ7q28BJvxpXC+4
- GbtTPyRcQMRleVGC42IFD41J7fj2SZ3KfW/kfMJfUxhdDJR7RYd9MBzRP0BXJ1qaOd8=
-X-Gm-Gg: ASbGncvN7SNDCP6SI9HgVT/5P7V9U9ytyHiJd2SycWn6hreGBLUhudhJqn0B67mlqC6
- FA8wrK7Vb+PRc8ylPVD73chEdDVQXkNIU2merIgvbZF4cn6Zf120ZYWu1KAsc1hdReTBe1m90N0
- Ovhb9jNsOL/fIkf/XuukWUHFdfuxza8IgfRqXn40N6kXOO3hDnYqwrgKTALoV06rZbf4YI0Rib+
- NjM7imMWi5XtSOD630QUuI9H1Q2+Yi6FSr/2rubEvoU76Qs52D9e/5j3zpL8Kof/riqR76zqLYT
- 5vZGVz3nh2432kg9LLiYIkikt6YbL6/fs0ZJAlU2xKTjSzPZN2Aq/Cj//NM4B+FEsCV6lcNYaEH
- 2u3QPQoGTw8zuRmRqD4LuPULeoxdA
-X-Google-Smtp-Source: AGHT+IE9cRe2dL35HUP6aQdwSHQJwP7evakfdA4miTsJfT0qE3G3EiK4hi0aqS7EtfYnRtMav2alWg==
-X-Received: by 2002:a05:600c:3b01:b0:453:99f:b1b0 with SMTP id
- 5b1f17b1804b1-454a3706e45mr61752665e9.20.1751542785175; 
- Thu, 03 Jul 2025 04:39:45 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3d084.dip0.t-ipconnect.de. [79.195.208.132])
+ d=1e100.net; s=20230601; t=1751543625; x=1752148425;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z8cjCxnQ706sV+EUP5q4kmCa2HG4dLN0k5OtQ5426ao=;
+ b=Kelwv3kel8/wBexBhiI7gy4iYOK4E180cFZ4LLh7Vsna69SyBtasxV/SFZ702IBHU6
+ 22R/swvMEVW+o2h3d4FSIuTsmveYnbsVvkKS1GBHHKl8xQ0iB571Z09oKHTiq/LLzNwF
+ yLUhv4eVe2IB87wTqPXpBQ1f6+rxkZ/CVG7aWIMxBaZTNyxlVWKweRGGM7b10yMaunGV
+ 8dJZ4Imsma/TqZiZ+/WNQR91GRj4gAfMWgPNZ8FhJEEuTjaReeePW9s0xccNy9uxSTh6
+ TdVmRcp9LIlfVETeyFr8wdXcmdNVDIcrGAeUDIOr7YfUk/++eunZwg4obxLF0C7hl72W
+ HqGQ==
+X-Gm-Message-State: AOJu0YyVr41TTQtZHL1MCuANl/5dZgWolj7Ckc7xPeWbQV0CY23TtFHH
+ nm7lw9j6D6ZcqAYKiRXv1aiVgBRj+1Mk8bUUvloMFXBD0XMPmi6+rBxR1bh83JN1+LU=
+X-Gm-Gg: ASbGncvNekvHEixKgFNIDe6nd8osu1ccXEZY99PyJBmrCI3TY7/sYGoIUrsh1F0N3Ba
+ xbU84CPQwKTxgXxqN/kjNl85CG3NnUobseOH6nDB6DmIY26br7OVVyMzFglVKXk/QnZIsYT1T1C
+ Ai64U+byrJgdZogqAt7NOF+tIdOohV3b5Ueot2ZHo6/a8vT3+vJw25yRtAc86Q/UeeTjkVZih2M
+ sKtgVg7JSGYUtBPoIOHHN9UohiyKSFCy6HdqXGz16oGs/k5PKo8Je8C0GADTrc1nysaUGTS5WIJ
+ gP9SbHRgu7Q4l5V9KJayig0jl+G0nUPY3/KsA3jN0kGuo9ZCVuX5kSaW7L79XnNh9Zcs4If43NU
+ ai8ms3/xzPNyF
+X-Google-Smtp-Source: AGHT+IEVmWjeSXgZUU/FMzsCY+BoBnjYBzctOdemQP0DePX50f4p8Aal4uSdh6h+fMJb7wGbJHgbkw==
+X-Received: by 2002:a05:600c:3f15:b0:453:9317:8aa0 with SMTP id
+ 5b1f17b1804b1-454a9ce2841mr28431415e9.32.1751543625040; 
+ Thu, 03 Jul 2025 04:53:45 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:b5c8:44f:55cc:3182])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a892e5f8e1sm18219732f8f.88.2025.07.03.04.39.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Jul 2025 04:39:44 -0700 (PDT)
-Message-ID: <11d46fc2-10ca-46a3-b543-40160bb51f9a@linaro.org>
-Date: Thu, 3 Jul 2025 13:39:43 +0200
+ 5b1f17b1804b1-453b3542838sm49213025e9.1.2025.07.03.04.53.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Jul 2025 04:53:44 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 03 Jul 2025 12:53:42 +0100
+Subject: [PATCH] power: regulator: Fix incorrect use of binary and
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] cmd/exception: missing include string.h
-Content-Language: en-US
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de
-References: <20250703051951.43372-1-heinrich.schuchardt@canonical.com>
- <20250703051951.43372-2-heinrich.schuchardt@canonical.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250703051951.43372-2-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250703-regulator_uclass_fix-v1-1-8bce90b7e07a@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAEVvZmgC/x2NUQqDMBAFryL73UBqlWCvUoqs8UUDNpZdlYJ4d
+ 2M/h3nD20khEUrPYifBFjXOKcP9VpAfOQ0wsc9MpS1r6+zDCIZ14mWWdvUTq7Yh/kzfVLVDCC6
+ goZx2rDCdcPLjFX9YF8glvoK8//+93sdxApZSQA5/AAAA
+To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,39 +99,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In regulator_list_autoset there is a test for ret being non-zero and
+error being zero but it uses the binary '&' instead of the logical '&&'
+which could well lead to unexpected results. Correct this to use the
+logical '&&' instead.
 
+This issue found by Smatch.
 
-On 03/07/2025 07:19, Heinrich Schuchardt wrote:
-> When building qemu_arm64_defconfig with CMD_EXCEPTION a build error occurs:
-> 
->     In file included from cmd/arm/exception64.c:87:
->     include/exception.h: In function ‘exception_complete’:
->     include/exception.h:41:23: error: implicit declaration of
->     function ‘strlen’ [-Wimplicit-function-declaration]
->        41 |                 len = strlen(argv[1]);
->           |                       ^~~~~~
-> 
-> Add the missing include.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/power/regulator/regulator-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>> ---
->  include/exception.h | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/include/exception.h b/include/exception.h
-> index a7f21e73d75..0d4dff49954 100644
-> --- a/include/exception.h
-> +++ b/include/exception.h
-> @@ -6,6 +6,7 @@
->   */
->  
->  #include <command.h>
-> +#include <string.h>
->  
->  static int do_exception(struct cmd_tbl *cmdtp, int flag, int argc,
->  			char *const argv[])
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 09567eb9dbb..fbd1f69ac72 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -389,7 +389,7 @@ int regulator_list_autoset(const char *list_platname[],
+ 		ret = regulator_autoset_by_name(list_platname[i], &dev);
+ 		if (ret != -EMEDIUMTYPE && verbose)
+ 			regulator_show(dev, ret);
+-		if (ret & !error)
++		if (ret && !error)
+ 			error = ret;
+ 
+ 		if (list_devp)
 
+---
+base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
+change-id: 20250703-regulator_uclass_fix-d9457eff7fe9
+
+Best regards,
 -- 
-// Casey (she/her)
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
