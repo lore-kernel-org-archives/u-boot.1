@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E840C77B7C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 11:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9981EC83030
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 11:39:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB1F482E08;
-	Thu,  3 Jul 2025 13:39:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2565F82E08;
+	Thu,  3 Jul 2025 13:39:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v75Yxt33";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p5LrkVCA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CB7682EA9; Thu,  3 Jul 2025 13:39:09 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 58F9282EA9; Thu,  3 Jul 2025 13:39:37 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37F7782103
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 13:39:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 434B582103
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 13:39:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-450ce3a2dd5so43764905e9.3
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 04:39:06 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-453066fad06so54457805e9.2
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 04:39:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751542745; x=1752147545; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751542775; x=1752147575; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=cHP3TDFD+sX7WtStvLV2mnSRvgr4yMHrKL+p09sotBE=;
- b=v75Yxt33RKGbNwQbzKwRF3qsSvih7/R80CIwA06uzREye/pADzYYDgq9RY7Z9GnNU+
- JvnVf8ESuA0yB5Nxhskd4yoGHBKOiE4nO3Md8xwuVv/Bczdv73+7wf5+Dc4ouw2+sVC1
- 4NbFPvuSylAAQ/AhVc0aaSgGpySggNBaOhXh+E1EXCNvCkfQJNrhZoejiT0U6giO2m7b
- lzjEtHQxDkdIC0lotZU7ajMTLFYDJR59PAzWbeei9ukJdaACnUVmN/SCjIcnT6HpNR1l
- LzQRp/0Ds9YnyZY3PkaaY51ac/aBQnP6HQr5PwvgVivRg+dFFd/w6VSnFLdsCoSAFfQt
- 0o1A==
+ bh=PH3LCGRKx77EcbEyR9dU5rGg1kgbvcrfGBft0BhAdmc=;
+ b=p5LrkVCAmc53Ed+Akes2CvMuRCZ5o/6KEjkYps28LNINLYNpa61bXRgfFcWSsXsuPq
+ FhqI9sHH9fslxLw6h13FgrwiU6HsZZ5e9hZUxrJsVbnES1wlWBDMj170sJyOnfmoJqMO
+ YF7ea3O7e2CTfowJHkLn5KaJqDdFJswVVIccqc0yxpRnqKyPjoC8aJXB61WMr3/2iSv7
+ HrNwTAP9Uhcx6kkox//AFWgT4ygPD9B63gOHKXbWhpZVB6bxwhm57Am7gEXzhUJQwlIl
+ b8SdqT8p8cysZvedIazV+XGjtoihwwr+RriT8SDTYSwg4r5JvaJhKdaocm+Lvdn+zUDe
+ 3PEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751542745; x=1752147545;
+ d=1e100.net; s=20230601; t=1751542775; x=1752147575;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cHP3TDFD+sX7WtStvLV2mnSRvgr4yMHrKL+p09sotBE=;
- b=L92mOShgEh4ctN5qRsVi2Ntxh3uMushslRZyl7fCf16FV89bGuIflRwdsfyk9vd6r1
- Q4dM3GMr8ekcpgIZBNxxzuoiEspkEY5R2cUjco+7a5isHI6RFXeACXBCNzzCJYrlRaJs
- tfxrCcCNjDrF5Af2GBzG6VlJBa7dy0Vj8wsuxDvK4Fsgsb5KsMZ6W3QP6EGfpi7ZGX/6
- ZKkS2lbKmdG62vG4aADx6G7ZTjZMyYamK+M9h67fInWojBUjmqaEPaZYh3KQrTCLN1kA
- 02tgX1/pXyfcsJB2whEmz8AsauT1WwNVKglKLIpwTW0Gj21/5PxNZ8e3cvHPOyKYpHqh
- giKA==
+ bh=PH3LCGRKx77EcbEyR9dU5rGg1kgbvcrfGBft0BhAdmc=;
+ b=CTLOyQm+BXN9hMkCVfzlxf6gLITPnujtWBa9MbLWIITazi/WGy1ESTaeb4A2wC2aiK
+ P9/C9OJRNGVe1FlevWSSBoPnzNyQ7zrJWPPj8CoVnRKkVyTvjXtHSfX22Hr3GbkvxdIL
+ zjgLY7VI7gGKyAsCDl5nOyJx6XGmW9YyhTDQIe+JdQLlaOSzvi3H8tiGIUJAZCBDkIpk
+ sHiHT4xZoQcdvsDyoBAjIhCpX3HNOvGtOAf7PyoHSWS2H6N0nIwmiDyeUKQ//kNWwqpw
+ /5nhzNReNLV15VbvAvxqYUr/dlIGXig8/QYQq/XulZUHPy/OBknmeCwIxXY2zInbGn3T
+ KA7Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsYm9a2t89gwprZPCtQBTY82TkSiAxK9bhQtDr5N5haSZA2ZWQjzJFN3pDUeWD/VhqKPya0U4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPhaHwiUMmFHTFMJ3GTVzq1gbBKOx4xRWHzb43sgyVbWHvwWmG
- o4PHnlpxS1Vs8HviIG4luTceNz2LvmyhbWceuKjJOPssnbhohaSRZ066AI8lwCveZ5o=
-X-Gm-Gg: ASbGncvuxj5BevfrDqgB0juVpa9MV7NeD0h46laYkSIipGscNoako5zK0zt+ZHs8dyI
- ho8h7UJS+JfBz1UskcwHAXQIXB5HaJp2K/UyGBg9Pnt1Ng2KaTEM0UTEiR6TVloQIJRelt3sQdv
- 3tTVaI346ZnqZQ/8mhBjJzayXmJ221fhx7GkAgnoXBYpNfyDZrPgdpc3mAomLs4y4hva3/b0Kyr
- 6doqjQDeyz1ZbeYDiXVRlvFKrIvrMCoM7qKX1J44+vIgWK+HIdWZDji6htrHioGOPyz5+eQVih3
- mLI+idszNxf5ysb+2tQvfR4fM+bXOF+LsiOt5DdCUtvXAi6NWMG5d3NZtilQQbQyqZM2wqYCTjf
- M0K6GgpTTsQ2FantanqGdHQfEVZpEePsLDwNSVS0=
-X-Google-Smtp-Source: AGHT+IEkTZCKHkDHROD3wmg1cN36thgy+tYhh9GoyBrYnEjNjeClwF+7ovL0PPR33jOD2nUlj/OTYg==
-X-Received: by 2002:a05:600c:638e:b0:453:59c2:e4f8 with SMTP id
- 5b1f17b1804b1-454a36d80d6mr58229225e9.1.1751542745327; 
- Thu, 03 Jul 2025 04:39:05 -0700 (PDT)
+ AJvYcCUoUaiuqCjIKllUl80+5EJL7nFOG+AIp4iJT13EypYd8R2t2onWgQnZvmfS5K1hhP/+VfeNj34=@lists.denx.de
+X-Gm-Message-State: AOJu0YyVdMLAgnOXhO9+R2VsP50xBMNDaw3jGC7pW8g2SNx3O/CCtJi8
+ Sz57CDurdtDhSWExfAyt1GkSan2uYgajuXqaSy0uQP6aLL74r18pZ7oYBOwzxbFaJTY=
+X-Gm-Gg: ASbGncslEQC/H/PY3Ey1xXKxiLGI2Y2+8lu2palFaZa0lcC5YXbU6sd/JzsjIqwIc8h
+ MByr1EZXRv/HTNWfgaDJNKPfbMGQGbJXEj8j2eWjAIWfQpQSeTOKSecajyzRlx+aTZB1go1kw2A
+ Zhujx0UVGWw4sP9+uy/mR9wn0Uz0+hqVY05aCE9eD41nf9c6x0yxywv2VVtFNbeKmbYeiokPKyl
+ /WKSx7P9FpFRqwzLU/uaaZgGSmiLORfFGfBiMt9SNE0QXaBfKPwIIcNDaFHRt2Mxev6tftB160x
+ mFvykrPzXWGhlcfhEoe91Sn/CcHOnsJEpJdrefO/MIHbsRearoDovV/WjeJUylTuCS+9uIA2drq
+ N/tHpLhGcV13IwMR/lSnUpRFXR9bj
+X-Google-Smtp-Source: AGHT+IGTxFdWb9wEU1kfdzyCVBxCTfebsUAtMqlOg33Rk35klm2uHPAobNq0A8xXESOBAcaepCAJUQ==
+X-Received: by 2002:a05:600c:820d:b0:442:f4a3:b5f2 with SMTP id
+ 5b1f17b1804b1-454ab368d5dmr24943385e9.6.1751542774534; 
+ Thu, 03 Jul 2025 04:39:34 -0700 (PDT)
 Received: from [192.168.1.36] (p4fc3d084.dip0.t-ipconnect.de. [79.195.208.132])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454a9bde8c8sm24753235e9.31.2025.07.03.04.39.04
+ 5b1f17b1804b1-454a9969058sm24811895e9.3.2025.07.03.04.39.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Jul 2025 04:39:04 -0700 (PDT)
-Message-ID: <788df6dc-fa00-4462-a61c-5878a5f9ddeb@linaro.org>
-Date: Thu, 3 Jul 2025 13:39:03 +0200
+ Thu, 03 Jul 2025 04:39:34 -0700 (PDT)
+Message-ID: <9501ecf8-1e2f-4a49-93ce-be18525d69d0@linaro.org>
+Date: Thu, 3 Jul 2025 13:39:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] arm64: implement printing backtraces
+Subject: Re: [PATCH 5/5] arm64: simplify interrupt code
 Content-Language: en-US
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Tom Rini <trini@konsulko.com>
@@ -86,9 +86,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  u-boot@lists.denx.de
 References: <20250703051951.43372-1-heinrich.schuchardt@canonical.com>
- <20250703051951.43372-4-heinrich.schuchardt@canonical.com>
+ <20250703051951.43372-6-heinrich.schuchardt@canonical.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250703051951.43372-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250703051951.43372-6-heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -110,191 +110,157 @@ X-Virus-Status: Clean
 
 
 On 03/07/2025 07:19, Heinrich Schuchardt wrote:
-> Add a function to print frame pointers depending on symbols
-> CONFIG_(SPL)_FRAMEPOINTER.
+> Carve out a function except_msg() to handle the output for most type of
+> interrupts.
+> 
+> Consistently use 16 digits for printing the exception syndrome register
+> esr to match the register size.
 > 
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/arm/Makefile            |  9 ++++++-
->  arch/arm/lib/interrupts_64.c | 46 ++++++++++++++++++++++++++++++++++++
->  2 files changed, 54 insertions(+), 1 deletion(-)
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>> ---
+>  arch/arm/lib/interrupts_64.c | 72 ++++++++++++------------------------
+>  1 file changed, 24 insertions(+), 48 deletions(-)
 > 
-> diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-> index 5ecadb2ef1b..41e75b5bcb1 100644
-> --- a/arch/arm/Makefile
-> +++ b/arch/arm/Makefile
-> @@ -33,6 +33,13 @@ endif
->  # Evaluate arch cc-option calls now
->  arch-y := $(arch-y)
->  
-> +ifeq ($(CONFIG_$(PHASE_)FRAMEPOINTER),y)
-> +	ARCH_FLAGS += -fno-omit-frame-pointer
-
-from my testing, current arm64 builds of U-Boot will make use of a frame
-pointer, it seems to be the default.
-
-So if CONFIG_FRAMEPOINTER is disabled we should explicitly add the
--fomit-frame-pointer flag I think? Or we ignore CONFIG_FRAMEPOINTER for
-arm64 and accept that we always have a framepointer (I'm not sure how
-significant the space saving really is here).
-
-> +endif
-> +
-> +PLATFORM_CPPFLAGS	+= $(ARCH_FLAGS)
-> +CFLAGS_EFI		+= $(ARCH_FLAGS)
-> +
->  # This selects how we optimise for the processor.
->  tune-$(CONFIG_CPU_ARM720T)	=-mtune=arm7tdmi
->  tune-$(CONFIG_CPU_ARM920T)	=
-> @@ -47,7 +54,7 @@ tune-$(CONFIG_ARM64)		=
->  # Evaluate tune cc-option calls now
->  tune-y := $(tune-y)
->  
-> -PLATFORM_CPPFLAGS += $(arch-y) $(tune-y)
-> +PLATFORM_CPPFLAGS += $(ARCH_FLAGS) $(arch-y) $(tune-y)
->  
->  # Machine directory name.  This list is sorted alphanumerically
->  # by CONFIG_* macro name.
 > diff --git a/arch/arm/lib/interrupts_64.c b/arch/arm/lib/interrupts_64.c
-> index b3024ba514e..970f8b6831f 100644
+> index 970f8b6831f..cc20528327b 100644
 > --- a/arch/arm/lib/interrupts_64.c
 > +++ b/arch/arm/lib/interrupts_64.c
-> @@ -98,6 +98,35 @@ void show_regs(struct pt_regs *regs)
->  	dump_instr(regs);
+> @@ -170,14 +170,18 @@ static bool smh_emulate_trap(struct pt_regs *regs)
+>  	return true;
 >  }
 >  
+> -/*
+> - * do_bad_sync handles the impossible case in the Synchronous Abort vector.
 > +/**
-> + * show_backtrace() - show backtrace using frame pointers
+> + * except_msg() - print exception message
 > + *
-> + * @regs - registers
+> + * Print exception message, register contents, backtrace, loaded EFI images.
+> + *
+> + * @msg:	message describing exception type
+> + * @pt_regs:	registers
+>   */
+> -void do_bad_sync(struct pt_regs *pt_regs)
+> +static void except_msg(const char *msg, struct pt_regs *pt_regs)
+>  {
+>  	efi_restore_gd();
+> -	printf("Bad mode in \"Synchronous Abort\" handler, esr 0x%08lx\n",
+> -	       pt_regs->esr);
+> +	printf("%s handler, esr 0x%016lx\n", msg, pt_regs->esr);
+>  	show_regs(pt_regs);
+>  	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+>  		show_backtrace(pt_regs);
+> @@ -185,18 +189,20 @@ void do_bad_sync(struct pt_regs *pt_regs)
+>  	panic("Resetting CPU ...\n");
+>  }
+>  
+> +/*
+> + * do_bad_sync handles the impossible case in the Synchronous Abort vector.
 > + */
-> +static void show_backtrace(struct pt_regs *regs)
+> +void do_bad_sync(struct pt_regs *pt_regs)
 > +{
-> +	void **fp = (void **)regs->regs[29];
-> +	unsigned int count = 0;
-> +	void *lr;
-> +
-> +	printf("\nbacktrace:\n");
-
-This should be a capital 'B' as with the other headers.
-
-In my series the output looks like:
-
-Backtrace:
-	<0x000001ffdfb344> do_mem_mw+0xbc
-	<0x000001ffe0f07c> cmd_process+0x130
-	<0x000001ffe06440> run_list_real+0x6d0
-	<0x000001ffe065cc> parse_stream_outer+0x14c
-	<0x000001ffe06b10> parse_file_outer+0x34
-	<0x000001ffe0e3a4> cli_loop+0x18
-	<0x000001ffe03b9c> main_loop+0x74
-	<0x000001ffe07984> board_init_r+0x3c8
-
-The aim was to match how the kernel backtraces look. I think it makes
-sense to do that here too.
-
-> +
-> +	while (fp) {
-> +		lr = fp[1];
-> +		printf("%3d: fp: %p lr: %p",
-> +		       count, fp, lr);
-
-The address of the framepointer isn't so interesting, neither is the
-index imo. I think the useful info here is the address of the function
-and the offset from that to lr.
-
-Printing the lr pre and post relocation does maybe make sense though, to
-be useful for interactive debugging or analyzing an objdump.
-
-Kind regards,
-
-> +
-> +		if (gd && gd->flags & GD_FLG_RELOC)
-> +			printf(" - %p (reloc)\n", lr - gd->reloc_off);
-> +		else
-> +			printf("\n");
-> +
-> +		fp = fp[0];
-> +		++count;
-> +	}
-> +	printf("\n");
+> +	except_msg("Bad mode in \"Synchronous Abort\"", pt_regs);
 > +}
 > +
 >  /*
->   * Try to "emulate" a semihosting call in the event that we don't have a
->   * debugger attached.
-> @@ -149,6 +179,8 @@ void do_bad_sync(struct pt_regs *pt_regs)
->  	printf("Bad mode in \"Synchronous Abort\" handler, esr 0x%08lx\n",
->  	       pt_regs->esr);
->  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
+>   * do_bad_irq handles the impossible case in the Irq vector.
+>   */
+>  void do_bad_irq(struct pt_regs *pt_regs)
+>  {
+> -	efi_restore_gd();
+> -	printf("Bad mode in \"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
+> -	show_regs(pt_regs);
+> -	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+> -		show_backtrace(pt_regs);
+> -	show_efi_loaded_images(pt_regs);
+> -	panic("Resetting CPU ...\n");
+> +	except_msg("Bad mode in \"Irq\"", pt_regs);
 >  }
-> @@ -161,6 +193,8 @@ void do_bad_irq(struct pt_regs *pt_regs)
+>  
+>  /*
+> @@ -204,13 +210,7 @@ void do_bad_irq(struct pt_regs *pt_regs)
+>   */
+>  void do_bad_fiq(struct pt_regs *pt_regs)
+>  {
+> -	efi_restore_gd();
+> -	printf("Bad mode in \"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
+> -	show_regs(pt_regs);
+> -	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+> -		show_backtrace(pt_regs);
+> -	show_efi_loaded_images(pt_regs);
+> -	panic("Resetting CPU ...\n");
+> +	except_msg("Bad mode in \"Fiq\"", pt_regs);
+>  }
+>  
+>  /*
+> @@ -218,13 +218,7 @@ void do_bad_fiq(struct pt_regs *pt_regs)
+>   */
+>  void do_bad_error(struct pt_regs *pt_regs)
+>  {
+> -	efi_restore_gd();
+> -	printf("Bad mode in \"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
+> -	show_regs(pt_regs);
+> -	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+> -		show_backtrace(pt_regs);
+> -	show_efi_loaded_images(pt_regs);
+> -	panic("Resetting CPU ...\n");
+> +	except_msg("Bad mode in \"Error\"", pt_regs);
+>  }
+>  
+>  /*
+> @@ -236,7 +230,7 @@ void do_sync(struct pt_regs *pt_regs)
+>  	    smh_emulate_trap(pt_regs))
+>  		return;
 >  	efi_restore_gd();
->  	printf("Bad mode in \"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
->  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
->  }
-> @@ -173,6 +207,8 @@ void do_bad_fiq(struct pt_regs *pt_regs)
->  	efi_restore_gd();
->  	printf("Bad mode in \"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
->  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
->  }
-> @@ -185,6 +221,8 @@ void do_bad_error(struct pt_regs *pt_regs)
->  	efi_restore_gd();
->  	printf("Bad mode in \"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
->  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
->  }
-> @@ -202,6 +240,8 @@ void do_sync(struct pt_regs *pt_regs)
+> -	printf("\"Synchronous Abort\" handler, esr 0x%08lx", pt_regs->esr);
+> +	printf("\"Synchronous Abort\" handler, esr 0x%016lx", pt_regs->esr);
 >  	dump_far(pt_regs->esr);
 >  	printf("\n");
 >  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
+> @@ -251,13 +245,7 @@ void do_sync(struct pt_regs *pt_regs)
+>   */
+>  void do_irq(struct pt_regs *pt_regs)
+>  {
+> -	efi_restore_gd();
+> -	printf("\"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
+> -	show_regs(pt_regs);
+> -	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+> -		show_backtrace(pt_regs);
+> -	show_efi_loaded_images(pt_regs);
+> -	panic("Resetting CPU ...\n");
+> +	except_msg("\"Irq\"", pt_regs);
 >  }
-> @@ -214,6 +254,8 @@ void do_irq(struct pt_regs *pt_regs)
->  	efi_restore_gd();
->  	printf("\"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
->  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
+>  
+>  /*
+> @@ -265,13 +253,7 @@ void do_irq(struct pt_regs *pt_regs)
+>   */
+>  void do_fiq(struct pt_regs *pt_regs)
+>  {
+> -	efi_restore_gd();
+> -	printf("\"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
+> -	show_regs(pt_regs);
+> -	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+> -		show_backtrace(pt_regs);
+> -	show_efi_loaded_images(pt_regs);
+> -	panic("Resetting CPU ...\n");
+> +	except_msg("\"Fiq\"", pt_regs);
 >  }
-> @@ -226,6 +268,8 @@ void do_fiq(struct pt_regs *pt_regs)
->  	efi_restore_gd();
->  	printf("\"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
->  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
+>  
+>  /*
+> @@ -282,11 +264,5 @@ void do_fiq(struct pt_regs *pt_regs)
+>   */
+>  void __weak do_error(struct pt_regs *pt_regs)
+>  {
+> -	efi_restore_gd();
+> -	printf("\"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
+> -	show_regs(pt_regs);
+> -	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+> -		show_backtrace(pt_regs);
+> -	show_efi_loaded_images(pt_regs);
+> -	panic("Resetting CPU ...\n");
+> +	except_msg("\"Error\"", pt_regs);
 >  }
-> @@ -241,6 +285,8 @@ void __weak do_error(struct pt_regs *pt_regs)
->  	efi_restore_gd();
->  	printf("\"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
->  	show_regs(pt_regs);
-> +	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-> +		show_backtrace(pt_regs);
->  	show_efi_loaded_images(pt_regs);
->  	panic("Resetting CPU ...\n");
->  }
+
 -- 
 // Casey (she/her)
 
