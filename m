@@ -4,132 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B79BC77B7C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 12:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5270CC83030
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 13:03:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AA9882F6A;
-	Thu,  3 Jul 2025 14:55:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EE0180E9A;
+	Thu,  3 Jul 2025 15:03:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="SJqxdOPw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lkqVWbfh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEF0682F30; Thu,  3 Jul 2025 14:55:10 +0200 (CEST)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1F22822D7
- for <u-boot+nodisclaimer@lists.denx.de>; Thu,  3 Jul 2025 14:55:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ id D31838206E; Thu,  3 Jul 2025 15:03:48 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BCA58091A
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 15:03:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yan.wang@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QNUFZNUTZfhBzzWuLfvJw4muuJ5/8EMDIu7JmoWIi8LXxEXSmGyptVRWy4Zutc4B6p28ylNl0HZ1HdUJqmuTatO5s2eurZ6vON/bHJBx782mkLKJn83l9NIcHGWQeADP2vAxk/rxldZZuqLIfZUIhUF226sB98AHO62g0D6wKLQzp4U6n5/jmwWQkaNj9cbMSLTAnx1ytxpsqrxxCoGzj7W5qES0qoXcAmJhBP+RqL9tURifkLQk+X5SdFnIkAWNkZT3pmd/P/loyErVtz5AVD1DvAzRORDFvDmkvl6s4JmXoDnbHnw+KdDLLF54cfBZD85CBLNQy9QKQBr/5QOJGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RTaZAY/9FCMIl4RZs5aRH/aI00dM1Tx0klPwM+Nl2bc=;
- b=MLrNwAu/2FspwJNcdTcKeKNz9K33ctVw1JT1VDj/nwRHCnOPCL37NqL4qe9J0T5a9B+KWnCrpov5BKoR2Z4GnsOx3JiO+SD+7JXn/Jp/gErGlcpuybXR27Osk2FJGK5C4/xZKMUni6BkxfFw2I7OFTonqZZrWkWR1wpceWMBBC2Qfb7BexcDAnxo33QH7aFK+G9u2bT7bAP1o1xUBvAB4anYbLXeI3Lxk29oQGWNiaNHRcXEctPN5CT58QaqUW5k7srA+v3cKfXNsecMqYTD7SUXzLr3JT+NdmPQqBdmikVigZh0uJQhLSC0XCZ3Rb+M1gaxib4Ogdn+AE50T44dnQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RTaZAY/9FCMIl4RZs5aRH/aI00dM1Tx0klPwM+Nl2bc=;
- b=SJqxdOPw7lHq3jLbuL5NDTGpWla4reUsoviwR7F60l5AHDO91XG2qcjBB9PL2QZccv6MzNBzFs5ioz3Y5bSE+loGmxugz80D65UYX5fKceYyR9X6EGmWU5Y4ql84af8PhtSCxVClnUZO/0nE2Jv85XxhyJlp0uulO7a4bUSpwjwbk0fHFUbhXmPQUHlXZIniWAAW1Na930zZuRgqdVfI20iMIuNt3eZXOzFKtV7/7f8eWtB5FtjlavuFyY72O+cprdwv1n8YEyyLSLihLDAAoOqgFh8Zfb9LR1+NiuybBhcKYMqmp8lZrKEc+AkhHOQEVtP+stZGDVEfxmixw/jb7w==
-Received: from GV0P278CA0009.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:26::19)
- by MR1PPFB97302C0F.FRAP264.PROD.OUTLOOK.COM (2603:10a6:508:1::683) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.30; Thu, 3 Jul
- 2025 12:55:03 +0000
-Received: from PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:710:26:cafe::65) by GV0P278CA0009.outlook.office365.com
- (2603:10a6:710:26::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.22 via Frontend Transport; Thu,
- 3 Jul 2025 12:55:02 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- PA1PEPF000CC3FB.mail.protection.outlook.com (10.167.242.6) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.15
- via Frontend Transport; Thu, 3 Jul 2025 12:55:02 +0000
-Received: from sah1lpt719.softathome.com (unknown [192.168.72.213])
- by proxy.softathome.com (Postfix) with ESMTPSA id BE3431FE2D;
- Thu,  3 Jul 2025 14:55:02 +0200 (CEST)
-From: yan wang <yan.wang@softathome.com>
-To: trini+nodisclaimer@konsulko.com, sjg+nodisclaimer@chromium.org,
- alpernebiyasak+nodisclaimer@gmail.com
-Cc: philippe.reynes+nodisclaimer@softathome.com,
- paul.henrys_ext+nodisclaimer@softathome.com,
- u-boot+nodisclaimer@lists.denx.de, yan wang <yan.wang@softathome.com>
-Subject: [PATCH 2/3] binman: Fix signing an encryted FIT with a preload key
-Date: Thu,  3 Jul 2025 14:54:53 +0200
-Message-Id: <20250703125454.61174-3-yan.wang@softathome.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250703125454.61174-1-yan.wang@softathome.com>
-References: <20250703125454.61174-1-yan.wang@softathome.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 563D3ie6026800;
+ Thu, 3 Jul 2025 08:03:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1751547824;
+ bh=5GhdqjE23H9al++tpPWLJAIAnpe6DGLmG8GvYC54Drs=;
+ h=From:To:CC:Subject:Date;
+ b=lkqVWbfhmLNA9uURaIwi+o95kWQRn+39PqUegu89HvD0xniFpSW67jHs4p4xpjAVq
+ NkR38R2HX+qFMtCWRkA8f2mB/xlVYTM/OICvKrbpTI8NO07U4oWLDWtjYc4ZBQSaoB
+ Jw93+ZWPck+MTLghPnpLDkyZyVwBy6hIAc+/2Y0U=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 563D3HKv1850902
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 3 Jul 2025 08:03:17 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 3
+ Jul 2025 08:03:16 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 3 Jul 2025 08:03:17 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 563D3GP31152977;
+ Thu, 3 Jul 2025 08:03:17 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v1] configs: am62x: fix CONFIG_NR_DRAM_BANKS to 1
+Date: Thu, 3 Jul 2025 18:32:26 +0530
+Message-ID: <20250703130227.4106816-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FB:EE_|MR1PPFB97302C0F:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 7c526df5-66ca-4af4-dfb7-08ddba30d3b0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?tqMmUcHjKx95K39ZKBNOgqNVl4CfEnqwAU4Wb5evWdANQtiy+2ffgLZzg7DS?=
- =?us-ascii?Q?i69tPJ9ZpRgCBRzNZGW4HFULjq8tCwXq3BBuwib/ZemNn6/4nc1ZSekW7RHr?=
- =?us-ascii?Q?v6uip7qaXWSWoOvNN7cOy6LMtI0UV5XoI39RZoLXwBW4DRG/kk2E/sixF1d3?=
- =?us-ascii?Q?w7ksgkO+k3Y6ZunAC/WMPngynH8fTobqRslilCePquJKYRtYjHDvALf2XwGt?=
- =?us-ascii?Q?P8Pn3HikzKTedaSg24iXCtKKt1EiLUdG+porCJ6FmW8oSUN/Dn+PCLLCUMLs?=
- =?us-ascii?Q?iyvMsAbIiMMnxvzjI32L/QmTC5zRSpufKihFFl+fkZLjt5Gn2BQDKr50IQr2?=
- =?us-ascii?Q?EmZYX1Qu8sp8Yn4XddKXCFKcyiyOSsJFWvWhEcFnjdziZXoedtOaDXJxvbek?=
- =?us-ascii?Q?KMEOZ1A18OE1GfTe+cYOsonjKYD/zV7P8NsrGJ/ZBRgrTSyhoMyv0KioBb+I?=
- =?us-ascii?Q?ZNUzAVHXL8z650A40pAbRZsuk89KA61Yes5xFnnQiLJh410KXvoZrUqwyawr?=
- =?us-ascii?Q?Flgcp/m3lxNboILECcPAu0L3Al2CilS3n+IwdfEBAGUpVuRSxrD+3QGMXZ6a?=
- =?us-ascii?Q?0I57a1AGHHemL7SRMfObG3FCw8L4n16wXV1kGFqNEQgIAm37DklPmV1ofL3o?=
- =?us-ascii?Q?ZtRBQdNhwMRSulWF+rWmeKfRAGnfsxkit0G0BHmZdiP5ZORe/+hEMxbl2oUa?=
- =?us-ascii?Q?H6F083CBOsNYZWTvEdYLNvoE6Ij38doaHQXwCfu3FEtngJ7fjQBqfIfdYOFr?=
- =?us-ascii?Q?pLp+zhH4nkbAY41hv6LZo+yBBbOyy8mIBn6oiOwLNlCNJOv5NSFDmR94aGST?=
- =?us-ascii?Q?Sn6+ME2nVywIhSNnXxLAyU8VidaUNI2I2byiKCq5DznFaryxI8Mpzn/+v0Kf?=
- =?us-ascii?Q?nwKNEBY9K+gquHfBD7CRgVpos4K2mz9PyOa9qP/QIdniJ7U+gKz6jvrgWFsJ?=
- =?us-ascii?Q?xUHmzYG/wpmMBMv9si2Cnr6N5zdaCaSi/ykSUNhTHpdzgr2M1/wV15L4MhEY?=
- =?us-ascii?Q?3O8mLPUrFYsMkqLcvwf7KyMcDILgrUnLqsYNfTsyL8EyMI3pribSXSgNbCfu?=
- =?us-ascii?Q?qNPbXae2OtlLzzUtPDl3/p6vjXM0TxTGhc2UUC3AcqcQji3yduNdk1/SVnk1?=
- =?us-ascii?Q?m7cIHR5SPj0YecdCYufGpn/MFWKBBRxLohJWQQLwwCOfZsUpSdnNJ/PdMnwz?=
- =?us-ascii?Q?I/Ynph4jgH9YhAyaypdL6uNILyj3FeXcpfiFcJocLBK/cDqdh92AdpBmy9cv?=
- =?us-ascii?Q?gPh4Qhwtj1Y2ukjSb2cQ4QwdaBIvKyK0CIVJhOIAGziNgey4ObXu78I5/u8w?=
- =?us-ascii?Q?MEAwTdRcuecmeXwhFQRQlFAloJRMYrRUzT+Z/UTCgoWQ5UIpJhkKaafZEgtY?=
- =?us-ascii?Q?vjUW0zUGR/FY0FmOLMjRdtXs2J/cwMAXKCEgDelc6ZKLz/2yN7arRyOuZMPn?=
- =?us-ascii?Q?n5RkMXqmuZd+9zXwLp9F5601HpD7hTId25cWptsRuusdeQQ84FKMqc1b5lBI?=
- =?us-ascii?Q?EbFKOJfN3l7vYJQyLboILRWqY1mQhsn7E1l6?=
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2025 12:55:02.8794 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7c526df5-66ca-4af4-dfb7-08ddba30d3b0
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1PPFB97302C0F
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,51 +76,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At the end of several passes of packing entries, a FIT is already
-generated. This is the FIT with which preload header has signed.
-Don't rerun the mkimage to generate a new FIT after the preload header
-has already signed the FIT. Because when encrypting the image with a
-random IV or if the timestamp in the FIT has changed, the signature will
-be different.
+CONFIG_NR_DRAM_BANKS defines the number of DRAM banks on the
+device. The default value of NR_DRAM_BANKS for ARCH_K3 is set to 2
+(arch/arm/mach-k3/Kconfig:199) but should be 1 for am62x platforms.
 
-Signed-off-by: yan wang <yan.wang@softathome.com>
+This patch updates NR_DRAM_BANKS value for all am62x platforms to 1.
+
+Fixes: 2969ed31b893 ("configs: Add am62x_beagleplay_*_defconfig")
+Fixes: 2d257d9279e3 ("configs: Add configs for AM62x SK")
+Fixes: 085cd6459dae ("board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM")
+Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- tools/binman/image.py | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ configs/am62x_beagleplay_a53_defconfig | 2 +-
+ configs/am62x_beagleplay_r5_defconfig  | 1 +
+ configs/am62x_evm_a53_defconfig        | 1 +
+ configs/am62x_evm_r5_defconfig         | 1 +
+ configs/phycore_am62x_a53_defconfig    | 1 +
+ configs/phycore_am62x_r5_defconfig     | 1 +
+ configs/verdin-am62_a53_defconfig      | 1 +
+ configs/verdin-am62_r5_defconfig       | 1 +
+ 8 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/tools/binman/image.py b/tools/binman/image.py
-index 24ce0af7c72..0118834b76a 100644
---- a/tools/binman/image.py
-+++ b/tools/binman/image.py
-@@ -13,6 +13,7 @@ import re
- import sys
- 
- from binman.entry import Entry
-+from binman.etype import fit
- from binman.etype import fdtmap
- from binman.etype import image_header
- from binman.etype import section
-@@ -178,11 +179,20 @@ class Image(section.Entry_section):
-         """Write symbol values into binary files for access at run time"""
-         super().WriteSymbols(self)
- 
-+    def mark_fit_build_done(self):
-+        """Mark Entry_fit as already built"""
-+        entries = self.GetEntries()
-+        if entries:
-+            for entry in entries.values():
-+                if isinstance(entry, fit.Entry_fit):
-+                    entry.mark_build_done()
-+
-     def BuildImage(self):
-         """Write the image to a file"""
-         fname = tools.get_output_filename(self._filename)
-         tout.info("Writing image to '%s'" % fname)
-         with open(fname, 'wb') as fd:
-+            self.mark_fit_build_done()
-             data = self.GetPaddedData()
-             fd.write(data)
-         tout.info("Wrote %#x bytes" % len(data))
+diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+index f61e701e3c9..05853317fea 100644
+--- a/configs/am62x_beagleplay_a53_defconfig
++++ b/configs/am62x_beagleplay_a53_defconfig
+@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_TARGET_AM625_A53_BEAGLEPLAY=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
+index 7ca5f58ea0c..a4e680240c6 100644
+--- a/configs/am62x_beagleplay_r5_defconfig
++++ b/configs/am62x_beagleplay_r5_defconfig
+@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
+ CONFIG_SYS_MALLOC_F_LEN=0x9000
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_TARGET_AM625_R5_BEAGLEPLAY=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index 2c04d32195d..4da668396d0 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -5,6 +5,7 @@ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_TARGET_AM625_A53_EVM=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+diff --git a/configs/am62x_evm_r5_defconfig b/configs/am62x_evm_r5_defconfig
+index 4e3ed7801e6..b23b816e540 100644
+--- a/configs/am62x_evm_r5_defconfig
++++ b/configs/am62x_evm_r5_defconfig
+@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
+ CONFIG_SYS_MALLOC_F_LEN=0x9000
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_TARGET_AM625_R5_EVM=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
+index 487eafb0e17..0a4904c1541 100644
+--- a/configs/phycore_am62x_a53_defconfig
++++ b/configs/phycore_am62x_a53_defconfig
+@@ -6,6 +6,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_PHYTEC_SOM_DETECTION=y
+ CONFIG_TARGET_PHYCORE_AM62X_A53=y
+diff --git a/configs/phycore_am62x_r5_defconfig b/configs/phycore_am62x_r5_defconfig
+index a5d494cf87a..b3681993d49 100644
+--- a/configs/phycore_am62x_r5_defconfig
++++ b/configs/phycore_am62x_r5_defconfig
+@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
+ CONFIG_SYS_MALLOC_F_LEN=0x9000
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_PHYTEC_SOM_DETECTION=y
+ CONFIG_TARGET_PHYCORE_AM62X_R5=y
+diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
+index 4bdcb4b6c46..da384598ef7 100644
+--- a/configs/verdin-am62_a53_defconfig
++++ b/configs/verdin-am62_a53_defconfig
+@@ -6,6 +6,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_TARGET_VERDIN_AM62_A53=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+diff --git a/configs/verdin-am62_r5_defconfig b/configs/verdin-am62_r5_defconfig
+index f9580e697ff..175e2d6a9a7 100644
+--- a/configs/verdin-am62_r5_defconfig
++++ b/configs/verdin-am62_r5_defconfig
+@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x08000000
+ CONFIG_SYS_MALLOC_F_LEN=0x9000
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SOC_K3_AM625=y
+ CONFIG_TARGET_VERDIN_AM62_R5=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -- 
-2.25.1
+2.49.0
 
