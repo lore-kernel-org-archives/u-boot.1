@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB319C83030
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 06:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BDDAC77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 06:43:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F10A82E08;
-	Thu,  3 Jul 2025 08:43:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5C1081FEE;
+	Thu,  3 Jul 2025 08:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA7D982CFA; Thu,  3 Jul 2025 08:43:27 +0200 (CEST)
+ id AF5B681FEE; Thu,  3 Jul 2025 08:43:30 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 5CB4080194
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 08:43:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 2F16B80194
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 08:43:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 47578152B;
- Wed,  2 Jul 2025 23:43:10 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 16215152B;
+ Wed,  2 Jul 2025 23:43:13 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A0FD53F58B;
- Wed,  2 Jul 2025 23:43:22 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 634CB3F58B;
+ Wed,  2 Jul 2025 23:43:25 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v5 1/2] cmd: eficonfig: add support for URI device path based
- boot options
-Date: Thu,  3 Jul 2025 12:13:07 +0530
-Message-Id: <20250703064308.1019305-2-sughosh.ganu@linaro.org>
+Subject: [PATCH v5 2/2] test: wget: add a test case for validating URI
+Date: Thu,  3 Jul 2025 12:13:08 +0530
+Message-Id: <20250703064308.1019305-3-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250703064308.1019305-1-sughosh.ganu@linaro.org>
 References: <20250703064308.1019305-1-sughosh.ganu@linaro.org>
@@ -57,312 +56,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The eficonfig command provides a menu based interface for maintenance
-of the EFI boot options. Add support for adding a URI based boot
-option. This boot option can then be used for HTTP boot.
+The wget module has a function wget_validate_uri() which is used for
+validating the URI to be used by wget. Add a basic test case for this
+function.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
-Changes since V4:
-* Clear out the URI string in eficonfig_process_clear_file_selection()
-  when user selects the 'Clear' menu.
-* Display the URI string as part of editing the boot option by putting
-  a check in prepare_file_selection_entry().
-* Clear out the URI string in eficonfig_process_select_file() if a
-  file is being selected from one of the disk volumes.
+Changes since V4: None
 
+ test/cmd/wget.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
- cmd/eficonfig.c      | 146 ++++++++++++++++++++++++++++++++++++++++---
- include/efi_config.h |   2 +
- 2 files changed, 140 insertions(+), 8 deletions(-)
-
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index 6e14d34a6bd..8ac0fb98e02 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -35,6 +35,7 @@ static int avail_row;
- 
- #define EFICONFIG_DESCRIPTION_MAX 32
- #define EFICONFIG_OPTIONAL_DATA_MAX 64
-+#define EFICONFIG_URI_MAX 512
- #define EFICONFIG_MENU_HEADER_ROW_NUM 3
- #define EFICONFIG_MENU_DESC_ROW_NUM 5
- 
-@@ -538,6 +539,40 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
- 	return dp;
+diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+index 445750660c2..1005392b952 100644
+--- a/test/cmd/wget.c
++++ b/test/cmd/wget.c
+@@ -241,3 +241,23 @@ static int net_test_wget(struct unit_test_state *uts)
+ 	return 0;
  }
- 
-+/**
-+ * eficonfig_create_uri_device_path() - Create an URI based device path
-+ * @uri_str:	URI string to be added to the device path
-+ *
-+ * Take the u16 string, convert it to a u8 string, and create a URI
-+ * device path. This will be used for the EFI HTTP boot.
-+ *
-+ * Return: pointer to the URI device path on success, NULL on failure
-+ */
-+static struct efi_device_path *eficonfig_create_uri_device_path(u16 *uri_str)
+ CMD_TEST(net_test_wget, UTF_CONSOLE);
++
++static int net_test_wget_uri_validate(struct unit_test_state *uts)
 +{
-+	char *pos, *p;
-+	u32 len = 0;
-+	efi_uintn_t uridp_len;
-+	struct efi_device_path_uri *uridp;
++	ut_asserteq(true, wget_validate_uri("http://foo.com/bar.html"));
++	ut_asserteq(true, wget_validate_uri("http://1.1.2.3/bar.html"));
++	ut_asserteq(false, wget_validate_uri("http://foo/ba r.html"));
++	ut_asserteq(false, wget_validate_uri("http://"));
 +
-+	len = utf16_utf8_strlen(uri_str);
-+
-+	uridp_len = sizeof(struct efi_device_path) + len + 1;
-+	uridp = efi_alloc(uridp_len + sizeof(EFI_DP_END));
-+	if (!uridp)
-+		return NULL;
-+
-+	uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-+	uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-+	uridp->dp.length = uridp_len;
-+	p = (char *)&uridp->uri;
-+	utf16_utf8_strcpy(&p, uri_str);
-+	pos = (char *)uridp + uridp_len;
-+	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
-+
-+	return &uridp->dp;
-+}
-+
- /**
-  * eficonfig_file_selected() - handler of file selection
-  *
-@@ -983,6 +1018,22 @@ static efi_status_t eficonfig_boot_add_optional_data(void *data)
- 				 "  enter optional data:");
- }
- 
-+/**
-+ * eficonfig_boot_add_uri() - handle user input for HTTP Boot URI
-+ *
-+ * @data:	pointer to the internal boot option structure
-+ * Return:	status code
-+ */
-+static efi_status_t eficonfig_boot_add_uri(void *data)
-+{
-+	struct eficonfig_select_file_info *file_info = data;
-+
-+	return handle_user_input(file_info->uri, EFICONFIG_URI_MAX, 24,
-+				 "\n  ** Edit URI **\n"
-+				 "\n"
-+				 "  enter HTTP Boot URI:");
-+}
-+
- /**
-  * eficonfig_boot_edit_save() - handler to save the boot option
-  *
-@@ -998,7 +1049,8 @@ static efi_status_t eficonfig_boot_edit_save(void *data)
- 		bo->edit_completed = false;
- 		return EFI_NOT_READY;
- 	}
--	if (u16_strlen(bo->file_info.current_path) == 0) {
-+	if (u16_strlen(bo->file_info.current_path) == 0 &&
-+	    u16_strlen(bo->file_info.uri) == 0) {
- 		eficonfig_print_msg("File is not selected!");
- 		bo->edit_completed = false;
- 		return EFI_NOT_READY;
-@@ -1024,9 +1076,19 @@ efi_status_t eficonfig_process_clear_file_selection(void *data)
- 	file_info->current_path[0] = u'\0';
- 	file_info->dp_volume = NULL;
- 
-+	if (file_info->uri)
-+		file_info->uri[0] = u'\0';
-+
- 	return EFI_ABORTED;
- }
- 
-+static struct eficonfig_item select_boot_file_menu_items[] = {
-+	{"Select File", eficonfig_process_select_file},
-+	{"Enter URI", eficonfig_boot_add_uri},
-+	{"Clear", eficonfig_process_clear_file_selection},
-+	{"Quit", eficonfig_process_quit},
-+};
-+
- static struct eficonfig_item select_file_menu_items[] = {
- 	{"Select File", eficonfig_process_select_file},
- 	{"Clear", eficonfig_process_clear_file_selection},
-@@ -1042,16 +1104,30 @@ static struct eficonfig_item select_file_menu_items[] = {
- efi_status_t eficonfig_process_show_file_option(void *data)
- {
- 	efi_status_t ret;
-+	unsigned int menu_count;
- 	struct efimenu *efi_menu;
-+	struct eficonfig_item *menu_items;
-+	struct eficonfig_select_file_info *file_info = data;
-+
-+	menu_items = file_info->uri ? select_boot_file_menu_items :
-+		select_file_menu_items;
-+
-+	menu_count = file_info->uri ?
-+		ARRAY_SIZE(select_boot_file_menu_items) :
-+		ARRAY_SIZE(select_file_menu_items);
-+
-+	menu_items[0].data = data;
-+	menu_items[1].data = data;
-+	menu_items[2].data = data;
- 
--	select_file_menu_items[0].data = data;
--	select_file_menu_items[1].data = data;
--	efi_menu = eficonfig_create_fixed_menu(select_file_menu_items,
--					       ARRAY_SIZE(select_file_menu_items));
-+	efi_menu = eficonfig_create_fixed_menu(menu_items, menu_count);
- 	if (!efi_menu)
- 		return EFI_OUT_OF_RESOURCES;
- 
--	ret = eficonfig_process_common(efi_menu, "  ** Update File **",
-+	ret = eficonfig_process_common(efi_menu,
-+				       file_info->uri ?
-+				       "  ** Update File/URI **" :
-+				       "  ** Update File **",
- 				       eficonfig_menu_desc,
- 				       eficonfig_display_statusline,
- 				       eficonfig_print_entry,
-@@ -1121,6 +1197,14 @@ out:
- 		file_info->current_path[len] = u'\0';
- 		file_info->current_volume = tmp->current_volume;
- 		file_info->dp_volume = tmp->dp_volume;
-+
-+		/*
-+		 * File being selected, set the URI string to
-+		 * null so that the file gets picked as the
-+		 * boot image.
-+		 */
-+		if (file_info->uri)
-+			file_info->uri[0] = u'\0';
- 	}
- 
- 	list_for_each_safe(pos, n, &tmp->filepath_list) {
-@@ -1224,6 +1308,12 @@ static efi_status_t prepare_file_selection_entry(struct efimenu *efi_menu, char
- 	efi_handle_t handle;
- 	char *devname;
- 
-+	/* Check for URI based boot file */
-+	if (file_info->uri && utf16_utf8_strlen(file_info->uri))
-+		return create_boot_option_entry(efi_menu, title, file_info->uri,
-+						eficonfig_process_show_file_option,
-+						file_info);
-+
- 	devname = calloc(1, EFICONFIG_VOLUME_PATH_MAX + 1);
- 	if (!devname)
- 		return EFI_OUT_OF_RESOURCES;
-@@ -1340,6 +1430,27 @@ out:
- 	return ret;
- }
- 
-+/**
-+ * fill_dp_uri() - copy the URI string in the device path
-+ * @dp:		pointer to the URI device path
-+ * @uri_str:	URI string to be copied
-+ *
-+ * Copy the passed URI string to the URI device path. This
-+ * requires utf8_utf16_strcpy() to copy the u16 string to
-+ * the u8 array in the device path structure.
-+ *
-+ * Return: None
-+ */
-+static void fill_dp_uri(struct efi_device_path *dp, u16 **uri_str)
-+{
-+	u16 *p = *uri_str;
-+	struct efi_device_path_uri *uridp;
-+
-+	uridp = (struct efi_device_path_uri *)dp;
-+
-+	utf8_utf16_strcpy(&p, uridp->uri);
-+}
-+
- /**
-  * fill_file_info() - fill the file info from efi_device_path structure
-  *
-@@ -1392,10 +1503,13 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 	size_t len;
- 	efi_status_t ret;
- 	char *tmp = NULL, *p;
-+	u16 *current_path = NULL;
- 	struct efi_load_option lo = {0};
- 	efi_uintn_t dp_size;
- 	struct efi_device_path *dp = NULL;
- 	efi_uintn_t size = load_option_size;
-+	struct efi_device_path *dp_volume = NULL;
-+	struct efi_device_path *uri_dp = NULL;
- 	struct efi_device_path *device_dp = NULL;
- 	struct efi_device_path *initrd_dp = NULL;
- 	struct efi_device_path *fdt_dp = NULL;
-@@ -1464,6 +1578,12 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 		goto out;
- 	}
- 
-+	bo->file_info.uri = calloc(1, EFICONFIG_URI_MAX * sizeof(u16));
-+	if (!bo->file_info.uri) {
-+		ret =  EFI_OUT_OF_RESOURCES;
-+		goto out;
++	if (CONFIG_IS_ENABLED(WGET_HTTPS)) {
++		ut_asserteq(true,
++			    wget_validate_uri("https://foo.com/bar.html"));
++		ut_asserteq(true,
++			    wget_validate_uri("https://1.1.2.3/bar.html"));
++		ut_asserteq(false, wget_validate_uri("https://foo/ba r.html"));
++		ut_asserteq(false, wget_validate_uri("https://"));
 +	}
 +
- 	/* copy the preset value */
- 	if (load_option) {
- 		ret = efi_deserialize_load_option(&lo, load_option, &size);
-@@ -1481,7 +1601,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 		u16_strcpy(bo->description, lo.label);
- 
- 		/* EFI image file path is a first instance */
--		if (lo.file_path)
-+		if (lo.file_path && EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE,
-+						MSG_URI))
-+			fill_dp_uri(lo.file_path, &bo->file_info.uri);
-+		else if (lo.file_path)
- 			fill_file_info(lo.file_path, &bo->file_info, device_dp);
- 
- 		/* Initrd file path (optional) is placed at second instance. */
-@@ -1512,6 +1635,9 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 			goto out;
- 	}
- 
-+	if (utf16_utf8_strlen(bo->file_info.uri))
-+		uri_dp = eficonfig_create_uri_device_path(bo->file_info.uri);
-+
- 	if (bo->initrd_info.dp_volume) {
- 		dp = eficonfig_create_device_path(bo->initrd_info.dp_volume,
- 						 bo->initrd_info.current_path);
-@@ -1536,7 +1662,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 		efi_free_pool(dp);
- 	}
- 
--	dp = eficonfig_create_device_path(bo->file_info.dp_volume, bo->file_info.current_path);
-+	dp_volume = bo->file_info.dp_volume;
-+	current_path = bo->file_info.current_path;
-+	dp = uri_dp ?
-+		uri_dp : eficonfig_create_device_path(dp_volume, current_path);
- 	if (!dp) {
- 		ret = EFI_OUT_OF_RESOURCES;
- 		goto out;
-@@ -1560,6 +1689,7 @@ out:
- 	free(tmp);
- 	free(bo->optional_data);
- 	free(bo->description);
-+	free(bo->file_info.uri);
- 	free(bo->file_info.current_path);
- 	free(bo->initrd_info.current_path);
- 	free(bo->fdt_info.current_path);
-diff --git a/include/efi_config.h b/include/efi_config.h
-index d7c1601137e..23211e799fc 100644
---- a/include/efi_config.h
-+++ b/include/efi_config.h
-@@ -82,6 +82,7 @@ struct eficonfig_item {
-  * @current_volume:	pointer to the efi_simple_file_system_protocol
-  * @dp_volume:		pointer to device path of the selected device
-  * @current_path:	pointer to the selected file path string
-+ * @uri:		URI for HTTP Boot
-  * @filepath_list:	list_head structure for file path list
-  * @file_selectred:	flag indicates file selecting status
-  */
-@@ -89,6 +90,7 @@ struct eficonfig_select_file_info {
- 	struct efi_simple_file_system_protocol *current_volume;
- 	struct efi_device_path *dp_volume;
- 	u16 *current_path;
-+	u16 *uri;
- 	struct list_head filepath_list;
- 	bool file_selected;
- };
++	return 0;
++}
++CMD_TEST(net_test_wget_uri_validate, UTF_CONSOLE);
 -- 
 2.34.1
 
