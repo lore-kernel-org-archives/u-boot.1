@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52117C83030
-	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 08:53:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C2AC77B7C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Jul 2025 08:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB52F8206E;
-	Thu,  3 Jul 2025 10:53:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08C2682063;
+	Thu,  3 Jul 2025 10:53:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FgNFTNQ4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eJ+Jv4G4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB8CE80194; Thu,  3 Jul 2025 10:53:10 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 870F482103; Thu,  3 Jul 2025 10:53:42 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6238C80194
- for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 10:53:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65A6681FEE
+ for <u-boot@lists.denx.de>; Thu,  3 Jul 2025 10:53:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-70e40e3f316so47257127b3.0
- for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 01:53:08 -0700 (PDT)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-710f39f5cb9so76066877b3.3
+ for <u-boot@lists.denx.de>; Thu, 03 Jul 2025 01:53:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751532787; x=1752137587; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751532819; x=1752137619; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3eNoX+1On01Bc4xUoGthT/AOoU7UPogyOV7/XZk6vjA=;
- b=FgNFTNQ4WgF/AOQ2dKKcamk93MtMgPk/j/Uh/Ldx/65UOYxapCihNfbMfGr19F1c+3
- 7TR93sV9O2n/yWWCcKTfeme8lY12pe0Z1GTTNudcUBSYuGEIyFd1YV0oVNm8oJAD0f/q
- JCdHhuzpjrWCS9/s0x2QXxe9HjuTr+Y8eJNV9jrf5x1raVEhVyInhhEXX9WbfN4q6C+X
- yrrIXX9BnuWMHP2FqCZ7SInypcp2+6Irl8r97MSExvhu6RMXdyC6I5BPOWme4JYjp7Nw
- Ir6lsUftDwbSEO7sqbkTJbyK1D0eXub1z75PYH1978HMfVBaDKovLFNG78nZ7qGkihHP
- UxSQ==
+ bh=AOWnpKNvXQg/nS50vj9Wa33Tmj0d57e7mnzH/Hn4P9s=;
+ b=eJ+Jv4G4mFbtgNhNbyCLIKAJJRVPylyQfCQdSASd0Q2g1eABUTU7381LnHR/Qm/wXq
+ cL5tjxxM1wWHApDdENvGsFNWn/ApJ5/r0TGHZ4D2r0v0t3t44geVjarUmbdnxW9xGHt+
+ VSJbACpJ2Jz3h/NfE5RHSQZkFPWwOXchw2yPqHRDO5P8D7cjX134pIXAi+pYQMHIaYSc
+ kJVSGhRH/Nbf3Aw3IapX9PAQApxkRbjuXqMZvXjQgbwBn3+bXgtO5W1AqY1UdS3cvUnw
+ 8RahcVeGdVf6lTuF8FS7CeiZj0TYQoragGpv7HpbDjyGIs26meQ0AFK+wE/XfFogpE26
+ aTEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751532787; x=1752137587;
+ d=1e100.net; s=20230601; t=1751532819; x=1752137619;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3eNoX+1On01Bc4xUoGthT/AOoU7UPogyOV7/XZk6vjA=;
- b=TI6YCZioVs/SmjbBfi52IoWQwI1YpUoI6mjB8H4a5TeyrR//3QPKUbcRjnCzINXAM/
- fD+9IsmFQxf5UOenKFGd1jz+sepzRcUdqIN3tN3qXIqq2c9T4n11gNDPHrNrouxmMYuP
- sh3XWRQ/OAbX9l7mKX0TsjoeWTDE9fvP++y0kPLFKzL/H96AkfEEdyQqpbjAhgJO+J7B
- KLaIiqtEclIj5NQhxlz7benRHi0o6/WgDb6tZvmOy/+mm/zxML4xrN1GRfV+3ro8cxZe
- Womsoj05z+tgFXWHJJlEPo6SjQLmlxRULQag6NuA3IkIxhBerS4IG+y4u2ZDi7wjvsGO
- ElUw==
-X-Gm-Message-State: AOJu0YxYQ+GkhA2K2umAbElA1u+O9bvy4A8OW4rrKwaipigM3alS9QlC
- Sk67L6+5sRIE28xD50661qX2q/kjFYyJJnu2EGlKNFbozcMLpf1VENta6/6XVT/a25ZQ57yNQcB
- aJBM6xzRM3XktX+QgZh+qDpPqr+reI1wDncXHbjmlgA==
-X-Gm-Gg: ASbGnct/oMYuSr6lBds4FuyCqyfk5Fz8M4nVdZ+1yroausDQuIQ5q24FaKdaBrrF8bK
- ehy0psjkKGqygzyTs+yxUcpMwtw9ldcEOw7XWfpU2OU0wmMm8H1yz1kUkpfnLdnflqeoCF+N0v/
- muvob1TJh+u+KQWvh5LPnfQu/p/d3dVQkh1pasFPh9XExt
-X-Google-Smtp-Source: AGHT+IEizmrUYK2gp0kIy80oLQVlYXfGiwP7nlMHKHR1hAoZtB25g1Lj6045U2sqgLTyVIfkanmi/BzArToXGy3GAJ8=
-X-Received: by 2002:a05:690c:6186:b0:711:371e:ecbe with SMTP id
- 00721157ae682-7164d46af4dmr88502927b3.29.1751532787196; Thu, 03 Jul 2025
- 01:53:07 -0700 (PDT)
+ bh=AOWnpKNvXQg/nS50vj9Wa33Tmj0d57e7mnzH/Hn4P9s=;
+ b=sIgdh04eSUiga6p+Y11v8yokAAAyDRtuP3CwrJDib3vHi/KQNwahan/H7XhhjtiCzm
+ GEUwDmneuWniZs6wgSyS2sGpDBaH94Eh6LPzQ/JwWH7WtT6oV7C05tyO0oYUmhw6hM0P
+ FcQVfAYLKCO9be7ZKX9BFxsr5i691zpgBN6y2Qs5k+OcdR44ziYdlMEbhkJa1G9wkcvr
+ IIDtDJCBufh5Jj9pHLGatlVTvmSB9GI0kR/E3FRT4ReRr/qYtwN6ZnJbCBDoQAuXe4nD
+ PzxisXtis2Wh+wXtwtU6NQy9PMwduCgWARM1OYimsX+1DQIc5gPft12e3rbY5clH7Z1A
+ 7SPQ==
+X-Gm-Message-State: AOJu0YwY8EylavVVoAjG5NA6QQcfySQ7mu0lnTMqzHYZCCnv9nQBzpBS
+ rSAD6bGh92eihA7mrLRgqwqumKayDp3g6+kvgdx3gggYbq/Ybx8NWcO4lRTImo3FVVVpoMp7l0o
+ L6evta7E7w3rBlZQSJwV1EM4es0lW1F5fYVST5jpPCw==
+X-Gm-Gg: ASbGnctRxzFgnEuFvYmgJZ1qi9gAewzXR0z/SKaA/RVEvAyj9Phv8Mj4eQJ+6PG6C89
+ qVZwiDsPrDl2QoEB/nRtGmoIz+8wtZluXwI93f0cOSg3yqJ4fle2Gbn2lJbwwXQ9xEDVH4r5hLo
+ BQ8JSV+WuN1EEKumQSJiGBzeBO6FChiDeJ6/Xb4ppo5/Nl
+X-Google-Smtp-Source: AGHT+IF++5SIh7GCOgmWC+UjS/rQD9bBxvUtae+VwGmDQL8Vll8iljgmuobSqUV+XnXTfzgeytwmTLh/y2rTC8WwEA4=
+X-Received: by 2002:a05:690c:6601:b0:70e:26ef:95eb with SMTP id
+ 00721157ae682-7165a320362mr26373407b3.5.1751532819136; Thu, 03 Jul 2025
+ 01:53:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250703062811.72871-1-paulliu@debian.org>
- <20250703062811.72871-5-paulliu@debian.org>
-In-Reply-To: <20250703062811.72871-5-paulliu@debian.org>
+ <20250703062811.72871-6-paulliu@debian.org>
+In-Reply-To: <20250703062811.72871-6-paulliu@debian.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 3 Jul 2025 11:52:31 +0300
-X-Gm-Features: Ac12FXz7n_bYYgs-LFsU6VrUtfsKKAYARXKNnzMi8XPkdi7JG7hkEfF-0NgMXis
-Message-ID: <CAC_iWj+RbE0fHzoCP7nfm40Tnr0YCYk2ESQcdg2E2+8pEK8d2Q@mail.gmail.com>
-Subject: Re: [PATCH v8 4/5] efi: add EFI_DEBUG_IMAGE_INFO for debug
+Date: Thu, 3 Jul 2025 11:53:03 +0300
+X-Gm-Features: Ac12FXwNsZx7k84b7YkInoHLtboLRtAb4MSiOV7jlYVurghBuTwIkTz8hTZJwvs
+Message-ID: <CAC_iWjLdRvGR08-Y5imo+nVr_Fg4_+=QEtfB=gTJvYR4=3NvcA@mail.gmail.com>
+Subject: Re: [PATCH v8 5/5] efi: selftest: add selftest for EFI_DEBUG_SUPPORT
 To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
 Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Peter Robinson <pbrobinson@gmail.com>,
- Simon Glass <sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,242 +95,83 @@ On Thu, 3 Jul 2025 at 09:28, Ying-Chun Liu (PaulLiu) <paulliu@debian.org> wrote:
 >
 > From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 >
-> This commit adds the functionality of generate EFI_DEBUG_IMAGE_INFO
-> while loading the image.
->
-> This feature is described in UEFI Spec 2.10. Section 18.4.3.
-> The implementation ensures support for hardware-assisted debugging and
-> provides a standardized mechanism for debuggers to discover the load
-> address of an EFI application.
+> Add selftest to check the installed configuration table that has
+> the correct GUID.
 >
 > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
+> ---
+> V7: add selftest for EFI_DEBUG_SUPPORT
+> V8: refine the selftest.
 > ---
 
 Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-> V2: use Kconfig options to turn on/off this feature.
-> V3: Use efi_realloc to realloc the tables. Move tables to boot time.
-> V4: Use new efi_realloc().
-> V5: Fix function comments and move the code into a separate module.
-> V6: refine the code. Handling the error of efi_allocate_pool.
-> V7: Use memmove instead of memcpy. Fix syntax warnings.
-> ---
->  include/efi_api.h                  |   2 +
->  include/efi_loader.h               |   5 ++
->  lib/efi_loader/efi_boottime.c      |   7 ++
->  lib/efi_loader/efi_debug_support.c | 137 +++++++++++++++++++++++++++++
->  4 files changed, 151 insertions(+)
+>  lib/efi_selftest/Makefile                     |  2 +
+>  lib/efi_selftest/efi_selftest_debug_support.c | 40 +++++++++++++++++++
+>  2 files changed, 42 insertions(+)
+>  create mode 100644 lib/efi_selftest/efi_selftest_debug_support.c
 >
-> diff --git a/include/efi_api.h b/include/efi_api.h
-> index 8da0a350ce3..77a05f752e5 100644
-> --- a/include/efi_api.h
-> +++ b/include/efi_api.h
-> @@ -581,6 +581,8 @@ struct efi_loaded_image {
->  #define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
->  #define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
+> diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+> index d78bf7d6191..842433f68aa 100644
+> --- a/lib/efi_selftest/Makefile
+> +++ b/lib/efi_selftest/Makefile
+> @@ -78,6 +78,8 @@ endif
 >
-> +#define EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL  0x01
+>  obj-$(CONFIG_EFI_ESRT) += efi_selftest_esrt.o
+>
+> +obj-$(CONFIG_EFI_DEBUG_SUPPORT) += efi_selftest_debug_support.o
 > +
->  /**
->   * struct efi_debug_image_info_normal - Store Debug Information for normal
->   * image.
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 13ca2ec9a4e..22440b842e3 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -650,6 +650,11 @@ efi_status_t efi_root_node_register(void);
->  efi_status_t efi_initialize_system_table(void);
->  /* Called by bootefi to initialize debug */
->  efi_status_t efi_initialize_system_table_pointer(void);
-> +/* Called by efi_load_image for register debug info */
-> +efi_status_t efi_core_new_debug_image_info_entry(u32 image_info_type,
-> +                                                struct efi_loaded_image *loaded_image,
-> +                                                efi_handle_t image_handle);
-> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle);
->  /* efi_runtime_detach() - detach unimplemented runtime functions */
->  void efi_runtime_detach(void);
->  /* efi_convert_pointer() - convert pointer to virtual address */
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> index dbebb37dc04..8c83040ac48 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -2129,6 +2129,11 @@ efi_status_t EFIAPI efi_load_image(bool boot_policy,
->                 *image_handle = NULL;
->                 free(info);
->         }
-> +
-> +       if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT) && *image_handle)
-> +               efi_core_new_debug_image_info_entry(EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL,
-> +                                                   info,
-> +                                                   *image_handle);
->  error:
->         return EFI_EXIT(ret);
->  }
-> @@ -3359,6 +3364,8 @@ efi_status_t EFIAPI efi_unload_image(efi_handle_t image_handle)
->                 ret = EFI_INVALID_PARAMETER;
->                 goto out;
->         }
-> +       if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT))
-> +               efi_core_remove_debug_image_info_entry(image_handle);
->         switch (efiobj->type) {
->         case EFI_OBJECT_TYPE_STARTED_IMAGE:
->                 /* Call the unload function */
-> diff --git a/lib/efi_loader/efi_debug_support.c b/lib/efi_loader/efi_debug_support.c
-> index 5401488602e..17f506a70e7 100644
-> --- a/lib/efi_loader/efi_debug_support.c
-> +++ b/lib/efi_loader/efi_debug_support.c
-> @@ -17,6 +17,13 @@ struct efi_debug_image_info_table_header efi_m_debug_info_table_header = {
->         NULL
->  };
->
-> +/* efi_m_max_table_entries is the maximum entries allocated for
-> + * the efi_m_debug_info_table_header.efi_debug_image_info_table.
+>  targets += \
+>  efi_miniapp_file_image_exception.h \
+>  efi_miniapp_file_image_exit.h \
+> diff --git a/lib/efi_selftest/efi_selftest_debug_support.c b/lib/efi_selftest/efi_selftest_debug_support.c
+> new file mode 100644
+> index 00000000000..9ca8b3f82f5
+> --- /dev/null
+> +++ b/lib/efi_selftest/efi_selftest_debug_support.c
+> @@ -0,0 +1,40 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * efi_selftest_debug_support
+> + *
+> + * Copyright (c) 2025 Ying-Chun Liu, Linaro Ltd. <paul.liu@linaro.org>
+> + *
+> + * Test the EFI_DEBUG_SUPPORT
 > + */
-> +static u32 efi_m_max_table_entries;
 > +
-> +#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(union efi_debug_image_info *))
-> +
->  /**
->   * efi_initialize_system_table_pointer() - Initialize system table pointer
->   *
-> @@ -44,3 +51,133 @@ efi_status_t efi_initialize_system_table_pointer(void)
->
->         return EFI_SUCCESS;
->  }
+> +#include <efi_loader.h>
+> +#include <efi_selftest.h>
 > +
 > +/**
-> + * efi_core_new_debug_image_info_entry() - Add a new efi_loaded_image structure to the
-> + *                                         efi_debug_image_info table.
+> + * efi_st_debug_support_execute() - execute test
 > + *
-> + * @image_info_type: type of debug image information
-> + * @loaded_image:    pointer to the loaded image protocol for the image
-> + *                   being loaded
-> + * @image_handle:    image handle for the image being loaded
+> + * Test EFI_DEBUG_SUPPORT tables.
 > + *
-> + * Re-Allocates the table if it's not large enough to accommodate another
-> + * entry.
-> + *
-> + * Return: status code
-> + **/
-> +efi_status_t efi_core_new_debug_image_info_entry(u32 image_info_type,
-> +                                                struct efi_loaded_image *loaded_image,
-> +                                                efi_handle_t image_handle)
+> + * Return:     status code
+> + */
+> +static int efi_st_debug_support_execute(void)
 > +{
-> +       union efi_debug_image_info **table;
-> +       u32 index;
-> +       u32 table_size;
-> +       efi_status_t ret;
+> +       struct efi_debug_image_info_table_header *efi_st_debug_info_table_header = NULL;
+> +       efi_guid_t efi_debug_image_info_table_guid = EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
 > +
-> +       /* Set the flag indicating that we're in the process of updating
-> +        * the table.
-> +        */
-> +       efi_m_debug_info_table_header.update_status |=
-> +               EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +       /* get EFI_DEBUG_IMAGE_INFO_TABLE */
+> +       efi_st_debug_info_table_header = efi_st_get_config_table(&efi_debug_image_info_table_guid);
 > +
-> +       table = &efi_m_debug_info_table_header.efi_debug_image_info_table;
-> +
-> +       if (efi_m_debug_info_table_header.table_size >= efi_m_max_table_entries) {
-> +               /* table is full, re-allocate the buffer increasing the size
-> +                * by 4 KiB.
-> +                */
-> +               table_size = efi_m_max_table_entries * EFI_DEBUG_TABLE_ENTRY_SIZE;
-> +
-> +               ret = efi_realloc((void **)table, table_size + EFI_PAGE_SIZE);
-> +
-> +               if (ret != EFI_SUCCESS) {
-> +                       efi_m_debug_info_table_header.update_status &=
-> +                               ~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +                       return ret;
-> +               }
-> +
-> +               /* Enlarge the max table entries and set the first empty
-> +                * entry index to be the original max table entries.
-> +                */
-> +               efi_m_max_table_entries +=
-> +                       EFI_PAGE_SIZE / EFI_DEBUG_TABLE_ENTRY_SIZE;
+> +       if (!efi_st_debug_info_table_header) {
+> +               efi_st_error("Missing EFI_DEBUG_IMAGE_INFO_TABLE\n");
+> +               return EFI_ST_FAILURE;
 > +       }
 > +
-> +       /* We always put the next entry at the end of the currently consumed
-> +        * table (i.e. first free entry)
-> +        */
-> +       index = efi_m_debug_info_table_header.table_size;
-> +
-> +       /* Allocate data for new entry. */
-> +       ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA,
-> +                               sizeof(union efi_debug_image_info),
-> +                               (void **)(&(*table)[index].normal_image));
-> +       if (ret == EFI_SUCCESS && (*table)[index].normal_image) {
-> +               /* Update the entry. */
-> +               (*table)[index].normal_image->image_info_type = image_info_type;
-> +               (*table)[index].normal_image->loaded_image_protocol_instance =
-> +                       loaded_image;
-> +               (*table)[index].normal_image->image_handle = image_handle;
-> +
-> +               /* Increase the number of EFI_DEBUG_IMAGE_INFO elements and
-> +                * set the efi_m_debug_info_table_header in modified status.
-> +                */
-> +               efi_m_debug_info_table_header.table_size++;
-> +               efi_m_debug_info_table_header.update_status |=
-> +                       EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
-> +       } else {
-> +               log_err("Adding new efi_debug_image_info failed\n");
-> +               return ret;
-> +       }
-> +
-> +       efi_m_debug_info_table_header.update_status &=
-> +               ~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +
-> +       return EFI_SUCCESS;
+> +       return EFI_ST_SUCCESS;
 > +}
 > +
-> +/**
-> + * efi_core_remove_debug_image_info_entry() - Remove an efi_debug_image_info entry.
-> + *
-> + * @image_handle:    image handle for the image being removed
-> + **/
-> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle)
-> +{
-> +       union efi_debug_image_info *table;
-> +       u32 index;
-> +
-> +       efi_m_debug_info_table_header.update_status |=
-> +               EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +
-> +       table = efi_m_debug_info_table_header.efi_debug_image_info_table;
-> +
-> +       for (index = 0; index < efi_m_max_table_entries; index++) {
-> +               if (table[index].normal_image &&
-> +                   table[index].normal_image->image_handle == image_handle) {
-> +                       /* Found a match. Free up the table entry.
-> +                        * Move the tail of the table one slot to the front.
-> +                        */
-> +                       efi_free_pool(table[index].normal_image);
-> +
-> +                       memmove(&table[index],
-> +                               &table[index + 1],
-> +                               (efi_m_debug_info_table_header.table_size -
-> +                                index - 1) * EFI_DEBUG_TABLE_ENTRY_SIZE);
-> +
-> +                       /* Decrease the number of EFI_DEBUG_IMAGE_INFO
-> +                        * elements and set the efi_m_debug_info_table_header
-> +                        * in modified status.
-> +                        */
-> +                       efi_m_debug_info_table_header.table_size--;
-> +                       table[efi_m_debug_info_table_header.table_size].normal_image =
-> +                               NULL;
-> +                       efi_m_debug_info_table_header.update_status |=
-> +                               EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
-> +                       break;
-> +               }
-> +       }
-> +
-> +       efi_m_debug_info_table_header.update_status &=
-> +               ~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +}
+> +EFI_UNIT_TEST(debug_support) = {
+> +       .name = "debug_support",
+> +       .phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
+> +       .execute = efi_st_debug_support_execute,
+> +};
 > --
 > 2.39.5
 >
