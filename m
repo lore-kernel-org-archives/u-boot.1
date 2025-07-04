@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 164AAC83F05
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 09:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61BDDC83030
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 09:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64D2B8206E;
-	Fri,  4 Jul 2025 11:01:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD73A82F03;
+	Fri,  4 Jul 2025 11:02:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="m/n0gUWP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="hMxY7wsp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E97782A76; Fri,  4 Jul 2025 11:01:28 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20622.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::622])
+ id 0459082F03; Fri,  4 Jul 2025 11:02:10 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::618])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EC8C803DF
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 11:01:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4594682A76
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 11:02:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gVvncJtAvbee0fmic+ypkJvN7z5KhrAJ/qEUvP4PGA1j17aMFvyOOpy8kE2zYG+wWgiFKHnUlu/wWrwu9jioR8Y8COftdF6jqQbajuhSnDEi80ybh5Hn3IWsPl8NzI7SCak+bz01fj71mra6f+rRMiNEvWwsz06krHUI+NmZl274Z0RF14/6kfarFBwJicYhkgHeDoM345o9d7yVwLbztyvDnuINDoFVFnneuFwDIeVapyYWfmhgvApr8XuyWVkHv7ZnLAqOqTnl8z4j0y5nH6COjxCiti6TaqQgM5jhAHGJgcmD0t9hEgxWYV1i2g2/TuG4y1zhXianN7SjCGShTw==
+ b=X9tRFdpRT1MIg8RnKGQNWhhv2/Xc6nydVme+fVGePkkmMQ7ZFskD5WwMnfWfKwNmJyp8VeofiQNZOBucEP5AuXCIj2fSU2Q4DEBNcWdmmrIc2/nmZUNZDW5z9QQDNsmtagMbvc5eRHkji6lrhMzSCWGhUZdb5yHzk0UIt5X+zCZNSG1OspILieUgx+WRI3f4r95ClrNhsEjXGLr6uq1B/lN4qlBFwuH9utTaeT3zLBGrmLVUNBaClJmWT0pm5YIDwDXGDVnQv9LgIYqjWrf2V7fMTN9WVv+gD9NviSiMbX++Orwou5mLkQu3QJOxIgj3I78pUIdfB2Rkd6kUciDcOA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l7TvUZnsyUwcGiw6a9OcuZ+pbq4ayiIikaPtxY7SuOc=;
- b=YxkJoAuUuJuDVAMY1UQqBlRDaCUK9optA3hHlP8rdWxORVHkMUzXar1KvKQAdigR5/Ja27Gj9wdITjNYQhzcU6140o1Hf9tcJfI1fBLlugHJgOzf7+etoIAx3LKW269xiJ6GQIqhKRqo3s4AcX3ywqdYr5o3TGhrvcWtLnAkMj85Q5kGND9ZtZoaYkvYecniX1bIAxF4A/bP5m90c6aZ8O94z3PPXx9qST03KPc3nDTVQiGM1zAeILnbqaUcCA5GrVZohsLSEmSaA/Vrf/pJSeJFgKtdVEeRhfixp2b/GpN5NlW6U1CAxbwxqVk9l3dEESg5VXBGCKye/VMZ9RggHA==
+ bh=TKGbuwoZ3Cbc/E2xdckDGGMhmFIS5SyWqRkKhKpuz4s=;
+ b=Tej9WIw/ciYNTjCY9ZGsSYqLkgApgiVMQyuPfUcO3OzFrjKbLDaQGIJqnbM/VWzrxxjH3c64rPIS0EPlRgz5L6ir+LCVzYVy4chbwc9BBJjD4rwcLzU+3D1pPsUEmI1ZXdMm5M8jnKFgfXT1TgmY1+dmMjoY0W4LbPI03jHyKGM58wzaT7A38gjJu9AtJLqZlHYEFqctcHEGC66t2/SelnxgqAxOjV3aKUF+XTjgzz19OhB+PV3wHvc0vLfTbKyLOyXb0of4jkTBUOOplEg6eLbLVt3wLlh99TgHbyicrZYCtSUFgQjJUg8vY7D0/pf2cueZTp5bneRK6a82aypF6w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l7TvUZnsyUwcGiw6a9OcuZ+pbq4ayiIikaPtxY7SuOc=;
- b=m/n0gUWPv9evtk32QBr/MbJqf38MubyMdJI6pxn8OhK+uv+R+4J2a+9k7NEnK3dagc9Asq5GxzTZ1c/FxXb4eMDXVBywcpsCpNDWw3MYj1wnsXFV5Sbgbelcs8TpR8V8jhEnlLsNylsvqh9nsJWvrXyrdJ09TeUGgAnKU29SzkI=
+ bh=TKGbuwoZ3Cbc/E2xdckDGGMhmFIS5SyWqRkKhKpuz4s=;
+ b=hMxY7wspl67SeICMSO3r3EU67/6oxtCQfVj8ULi6l65/CLz/JdMSzS6AYGh0kPxBmI5Cp89/Nwkp3grOMJ0jkJzi5LHp+9uCg0S8axXSpmlbQZAMMhcKkhsnBBri0uc/snR+rtBKadNeBbS9wJ08lZJYk9ovjVu6jWaWxnMyZds=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by MW4PR12MB7482.namprd12.prod.outlook.com (2603:10b6:303:212::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.23; Fri, 4 Jul
- 2025 09:01:23 +0000
+ 2025 09:02:04 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.8901.018; Fri, 4 Jul 2025
- 09:01:22 +0000
-Message-ID: <2668bcaa-cc82-433d-be05-f97b120b3fff@amd.com>
-Date: Fri, 4 Jul 2025 11:01:10 +0200
+ 09:02:04 +0000
+Message-ID: <6ece62ad-2bf8-4098-9914-c387fd4797ca@amd.com>
+Date: Fri, 4 Jul 2025 11:01:44 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/25] fwu_arm_psa: Add FWU acceptance mechanism
+Subject: Re: [PATCH 25/25] fwu_arm_psa: Document FWU support for Arm PSA
 To: abdellatif.elkhlifi@arm.com, u-boot@lists.denx.de
-Cc: trini@konsulko.com, Sughosh Ganu <sughosh.ganu@linaro.org>,
+Cc: trini@konsulko.com, Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Casey Connolly <casey.connolly@linaro.org>
+ <marek.vasut+renesas@mailbox.org>, Casey Connolly
+ <casey.connolly@linaro.org>, Adriano Cordova <adrianox@gmail.com>
 References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
- <20250702152528.1180414-18-abdellatif.elkhlifi@arm.com>
+ <20250702152528.1180414-26-abdellatif.elkhlifi@arm.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -109,101 +112,101 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20250702152528.1180414-18-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20250702152528.1180414-26-abdellatif.elkhlifi@arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR04CA0110.eurprd04.prod.outlook.com
- (2603:10a6:803:64::45) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR04CA0080.eurprd04.prod.outlook.com
+ (2603:10a6:803:64::15) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|MW4PR12MB7482:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74b8266d-05d5-4562-cd49-08ddbad95959
+X-MS-Office365-Filtering-Correlation-Id: 48b7ca3f-0bcd-4ea9-6616-08ddbad971f8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cEloOURtVzBma1ZuTjN6N0ljSUoraXE1VHRBS1Joc1I4OGRSTzllTStJSWkw?=
- =?utf-8?B?Z0pWMkNja3Bsd2sxVzdGV0QyOG50aXYwTlA0T0JmR1k0WlZ4VDQvMHVVMTVD?=
- =?utf-8?B?ckNaTUxSUk4xYUM0V1I5N0xQZkVZdGUzelA4eDBFSzhMMnBTL0FvNUcxQWZP?=
- =?utf-8?B?cVM0bk45eTBCMEd5UFNPUURmNldWSmNabTBHNStkVnhDdXRzYTlFSmJGY29v?=
- =?utf-8?B?MUU5bDZrZ2NJd2o2RjhDSndlR0d3cVF1RWp1TFFmeU4wQjRVZTBUT1BIR0Zj?=
- =?utf-8?B?U0M1UWhNWlJURXZWSDBXOEl4Q2F1SzRsdC92YXFlaEQzbEJnMUJrRzZCcXl1?=
- =?utf-8?B?ekhTc1pKNU5YT3Z3dWVMRHhMTm1lSVI5dG1MbUlsTCszcXk5bFU2QjR0c0lz?=
- =?utf-8?B?ZWh2UXQrZThPd0U5ZEVqcjdJbEtlME56RFVHNlVEVkdQV1ozcDlZV2pQQUhN?=
- =?utf-8?B?NHdSTncyVTFsUTNTenF6RXZpaGhwcTVQeHJvQ1dWTStiTExDakkzVHFqa2Rk?=
- =?utf-8?B?RzdLWGNjdUJwUkFOWjBSbzZqS09hT2U3b09LVE5CcitBQktDVkE2VDVOZmNn?=
- =?utf-8?B?UTJiOG8zOVA3VDhQMlUwZ0JWaUVsMVNsTk5keWxvQnhGakhhQ3dKRFJhQmZr?=
- =?utf-8?B?MXU5NlhyR0VoK3J5NC91ZzNFdCtZSzVRUUViNVZhRnVveUtGSWZLM0w4Tmlk?=
- =?utf-8?B?eXp6T2JRbGhXQUduUHBwQXluZ0UzNisvWXFoWUtWRTY5YmxmeEtGYW1hb05x?=
- =?utf-8?B?cjdoT0ZnSno3emhkOEhUVFYrYWdPN1pNTUpqdjZjVHhXaktSOURORng0L1lO?=
- =?utf-8?B?QU04bzJITU1aTEViOGVtcEVDWGhXT0FvS2g0OC9jaHhuZmVPZmFxM2VCUnRT?=
- =?utf-8?B?aUphczVIL2dRaytGS0NraUF5OWdteE9QWGdpSVVlQjdtY05IYkluenpISHh5?=
- =?utf-8?B?K1d6L3FBSWJVNTFDQy84RTZZVFBKbjdycGxKWER1R1ExRkVTWUpmL2twbUt5?=
- =?utf-8?B?Y2crSzQyQWRoUWc2MnJLNlpYb0pXL3RMZkVzWXFvbGorc1R2MmIvbjhhbzg2?=
- =?utf-8?B?cDc5T0gxVEV2VWdHLy9uMjM0cXkvRHFNRmJkWWE3SDhJWE1jWGR1ejdjbnlQ?=
- =?utf-8?B?SmpMNVdseitGMStPenU1cGZ2cms4aitXZ1Ara0JEcFg1eGM1K3cvRjhKL014?=
- =?utf-8?B?VXp3dnJWMmwvRXVPeU1sMzFDWGR1MUJ2V2ExQ0x2VGx1UXFoZndsSXpTWEcw?=
- =?utf-8?B?aXZXQ2xiTkg4TGRiTk02NmZtcTJtbmJQTi9kalExRHdISHBGbFBSbzhFN0JN?=
- =?utf-8?B?eXZXbnhza2hrU012aVpHOTNhTnU4MjZNcjRMdFFVeTl2eCtRWTJYMDFIa2RS?=
- =?utf-8?B?bXlHMUV6QW5NbGwwSWp5cXBjWFhFOFd4Wlp0U0RnSnpDeUowOEg4UllmWjdt?=
- =?utf-8?B?RGh0elRmSzRaa1A0dmVYRkZ3WmtkOHJuamJleUEzbEI3aEF0RldGMGNQbXF3?=
- =?utf-8?B?YUFhbFFmd3BzRVJpNnZmYU1ZWUZkOTd6bUh3ZWs5bmhGQm9kd3dGb3ZIcTUv?=
- =?utf-8?B?Mm1FVDNLaG5WVFJ2cFZCQ3RiWkxhd2phY2Znb0ttcUU2Zm9pVUg4dGJ3SlBP?=
- =?utf-8?B?WjR1cng0ME9CcTFSeVVGY1pPRlNBL0grZjlHdmlwZkd3QXB0RXdvMjdOYWkw?=
- =?utf-8?B?V2prbitSUS9hRE45QTl5SXkyTFFibmpZWnRLMU1tc3hOdnp5S0NUWVZHTzhU?=
- =?utf-8?B?VTNKWllmZ3E2Tm80TS9JQXZqTzN0dCtab3NBdGRMQ1FqMU9ua1h3b1U3N0Jz?=
- =?utf-8?B?cDRWNlNjUXg4UGd5MDA3ZGRCR0txaWRiMGI5Ylo1L1RVN00zaERIRjR2alhF?=
- =?utf-8?B?akxrbVN5ZmhlbFlYWVk3WGZFZ1g3VmdWWWc3VWFENU81bGdObUtmVWExL1lZ?=
- =?utf-8?Q?ffu9sqW1NPI=3D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|7416014|1800799024|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZG5JVmh6dGRPNmRpcTB0ekNTSWhMWWRpd3FrSGJHZDdnRzB0cHR4WnoySHBG?=
+ =?utf-8?B?MlJmamMzcGNhaW9MaTVnUCtJWUdGalBVcGU4NUk2NnQ4ejFGT01zNTMxanNM?=
+ =?utf-8?B?amFJSkxKdWpkU3A5bFBJVFZsdnNQcTRnVU45YlFlajR0d1MvNVJIUWQzU0dC?=
+ =?utf-8?B?cUxvN3luN0xvWUJuNWRhand1bURWRU5EUGFpTEZManpMemFYYTAraDZvSkR1?=
+ =?utf-8?B?WDg4Zkw3VjZoSWFQaFdXS1A3RlNvYTZ4TzBHQmYyeEtzOUp6VEdyS2U4S0s0?=
+ =?utf-8?B?RDZqREcxckgvQmMwQnJqM0RWWlFlY1FmemZzT29JRXFYMnN2UzNpT3A1ZnI1?=
+ =?utf-8?B?WkdJeFY3c05OcExXcldnRjFsalE1S2RNckVHY09tVS8zck5yeTVweDlMY0hk?=
+ =?utf-8?B?bDRuNzl2L2h5bnFtV0ZidjVPdTdWUGFqYndLam9IeFhkS2FzclQxS2RKcmtm?=
+ =?utf-8?B?dDg4K3gyZC9JZ3M2V1ppNHlheVN2RFpjYjhXd0RIeWJjM29YVXcxeVAxaDZC?=
+ =?utf-8?B?N05HelBWWDBrUC9hejRNcXdxMFQvOXZVY0ErUi9VMmRWWUd6cmlTWkFpVE10?=
+ =?utf-8?B?ZSttZlFBNzV6RXg4UExXd0JkSTlHNlUyTVB2K01VUU5hczJUb2YwODBSZ2Fu?=
+ =?utf-8?B?WUt5R2hob1FNbkRJcnRNVEhuSDdEWjNFdnphT2VvQm9ERFVTV1NiK2xUd1Zv?=
+ =?utf-8?B?VkdVbjNaMWpUbS82Qlc2N2VzS2JnRGdiUEswQ0JzOUxHSXFYTUYrb1ZXbkE1?=
+ =?utf-8?B?eTlKUFpBMzNDTTBYOHZ0di9jK0JlYXZ3QjJ1N2lMd21Rd3Z3RjNUQXRWalRW?=
+ =?utf-8?B?UkwrVjVzNGV3R05YWThEcHN5VGs3aTArUEZ0aHFmbndFcnpwT2tOUTZmNVdL?=
+ =?utf-8?B?aDZwWHFzMUpYYWh0NEhMUW9sR3psV0hPQzBzVnJTSTBGalNKa2R2cjdaZXN6?=
+ =?utf-8?B?ZlZQMkVLTWJZNkNSNkU1RjFDMnl5WlcyWTVYWXArMW9uMHo3QWFkT2UvdUI0?=
+ =?utf-8?B?eGxVNnBIK0dVelJSMmVzK29haTJaRXB1aFFsVWlydWkwQWR6UnVTcUVCZVJy?=
+ =?utf-8?B?T1ZDVVY0bGFmVXNmYkUwR1ZmOUxnbkhqU1pVazJNa1hWMlpoSUlqaEF3YW9v?=
+ =?utf-8?B?ZWJMcGQxNURDRzRYOGgzSEk4YmJDNVhlQ0JycDI5UFlhRnMzM05vU1hFY0ta?=
+ =?utf-8?B?UDN4VUtuV0I4V3dGMWNVY21ZSXN1OE9kbklaQzU4VVpPZG1aSVgrcUhRSG51?=
+ =?utf-8?B?M3RFVk1ZbDZOdjUrcUJ5TnF5WUk3ZEtMaHF5WWxHZTFxY0dkOUtyTmh4Y2w1?=
+ =?utf-8?B?NVMzVjc5Q3VkTXJvU1JBRHozWm4rekpEYy9oSGsrZWlGNWdaNE14Yk13QUJy?=
+ =?utf-8?B?c011MmlDd1RxWDJVQkJFbEhtL2VUYmlNdUR1YnFDMEUwQitTVjQxQUt4NkdF?=
+ =?utf-8?B?a3pFdUwram9Mb0RKZHJsMExMcHpodXo1SURwZE1CWERpdzloSm9TOFFKcTdV?=
+ =?utf-8?B?c1R1Rm5SbEhGd01vclN3bTlPV2RjVW1VQWNDWDV1V0VCV05IT29ZNnhDYjFC?=
+ =?utf-8?B?N3VpMmxCWjlZbDF0L3J5QmJjTFQ0bnVDS1owakR5NlJ4NjVMZHFKaXViSHpw?=
+ =?utf-8?B?WWdpSndHU0hrM3NPUGMya0J2VkFRMzFDUnVNSExJM0RvWHJ6SnMvWGVHZzFC?=
+ =?utf-8?B?MW56TEROQ0wzWjJDSDVZb3VPb2JQcXhzV3A1OWx0aWZ1SFRPRHNnNEVGR08y?=
+ =?utf-8?B?RWlIWVBvbm9HUEFBNnlpelJtUUVzZGRRUGxzZENhTG9lbVFIYUFRTyt1NDEy?=
+ =?utf-8?Q?LF9R/2lA5/iBxukm8WiG6vEVIQb2FYrxcigUI=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(7416014)(1800799024)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WSs3RHMxSzAzN2hoSmtTL3F6ZlNXMG9uTWpEdXRrWmxRRUNsQWlXb1VSUnVh?=
- =?utf-8?B?YUJOdTJMVmFxT1V5MlVxMG4vMVhjTjNaa1hBZzVXOUhNSWtlZmtUd2dwMWUw?=
- =?utf-8?B?SXoweGxVVk41NkJQZVlTZWJvcXJ1ZTlPb3hjSDFSekJBT1FkNWkzanM1bEZN?=
- =?utf-8?B?L2N0SndUR29peSs4UDNqRjZlQ2M4Ulp5c0hiSnBIR3RtSmJ5Y21tYW5pRHo3?=
- =?utf-8?B?VTRMc1ZSQmZWb2NMQUVVS2ZDKzdNNVBjcVJIS21Yd24wOUlJbUQ4YTlQUVhu?=
- =?utf-8?B?cE5scGJSSmVmM2lYTkdKczJRUUZLcEttdVRoTHBHbFBsNlE5WHNhMElCZ2oz?=
- =?utf-8?B?NVB3ZmI5UVNuQ2c5Z29KTFFVT2pUN05nV1hCK01OSFlMSS80WnoxRUd1bHFh?=
- =?utf-8?B?TkpEL1ZqVjd5RmNzeE9ueHRJZFROaVdVREg4WExzY3Q3SC8rVDUwS3Z1VTA4?=
- =?utf-8?B?K2VpaE8wTm5BTnNXYWo4OHdXRmlmWkN1OVhyVk1PWjlvMnNnYStSRGROdlc3?=
- =?utf-8?B?VXE2ellaTndWUlZXT0UyekVaZWRsQnlSa0M4ckMwcnZGbHo3WlJRSTFMRFp1?=
- =?utf-8?B?bEc1NldWQU40bmZIQnByUG9xYW9WSUdKbi9Pa25aWTU0V1VDYU1VQzNTV1Y5?=
- =?utf-8?B?bXJ2N05SL1NRYVVGK2tUUzZoZlIvTnd1RDA3RVo3TXA0Y2poYXhkWllkTmcr?=
- =?utf-8?B?OHRyQmZoY2FEdUJRNERhbHEvR24vb1lBZExjZERDU1daQmkvdGs2WTM0K21K?=
- =?utf-8?B?bDV6dzdpOU00MlJBN21GQ2RhMHRDT0Rxbmp2VUo2UnJwOUlLNUhrWWs5WmJS?=
- =?utf-8?B?NlF6Wmpaa1U5QlB3R3FVbUhQcTZOWkttUDVwaGtaMHJzQVRIN3k1alJteG1B?=
- =?utf-8?B?ditOb25wUU9PejFyQVdCTDRZaTF2Q1pvZ0k4cXRBUndQYm9pb0FGV3pYUFZF?=
- =?utf-8?B?ZkhtYmxnZ09NTzd6KzhiZGo2T2J2MHpTb2Fvc0c5bzJyR0cySXdBWXZOWGFj?=
- =?utf-8?B?Qk9ETTh5MDFlMjk2eVJRWnhOQ1gxVVRSM0VDQW9zZUZWeEV6Y1BlczByblh4?=
- =?utf-8?B?dmpTVk5MKzd4QmdvZitya2Z6bmFwN1ZRRlQrRDVOUHJpK2d2UG9KMDQ5UUN2?=
- =?utf-8?B?cXlYQXBnSXpvMTVCcUhVcXJDemw4eEducU5YQkVncjNMdVZIS1ZUc2o1VlBr?=
- =?utf-8?B?MHRRaTZXTE9zQktLVlMwQU5wV3pVY2xMeHhUUG1FYURlZ0I1RHd3VCtBRXph?=
- =?utf-8?B?QjIxZXhHMVkyam0vYVZMdWx2WnZPaHZFTjc2ekd2R1BmWm1wSzNUVXNtRE53?=
- =?utf-8?B?a2N2bGEyUjZ5Y3Z4M2VXZW9VWjBUTEpjMHQ0WHkrU2dJWTd2NThFeFNQRTRX?=
- =?utf-8?B?cnJiRHpIL3NGemZBcllSSWFXL0RPOUR6bjBUQldEc3RrYjJQaG93VlNRMmln?=
- =?utf-8?B?RTZRRW5ydTFpQ0QyOW10WEZQWGNiWFIwS085K2RuZnY5c1R3c2QxOFhuTCtv?=
- =?utf-8?B?Sm4veWhPOUF0M3IyWnFJdythb1VKTUNsRnR2d3YxTlZyVTFTYk1LaU12SUZM?=
- =?utf-8?B?VlJHZ3EwT20wd1cwZ0VkQlBrSVA3S01KNnRDd29hYXhQSlROQ1Z0RmJNWFJD?=
- =?utf-8?B?Yms3SHRaUmk5c0orS05EdEdNM1JNRUd4TXVGaVdLY241T0xXR293cEk4Nkxs?=
- =?utf-8?B?T2NBdkx4Tmc4MzhsZkFSY0Q3bThFUkEzc3VXNXpid0ZhZ3llbUZSYjlLbHpB?=
- =?utf-8?B?SE5wYzVkdXRwaGlNR3hOTHdFVXdFZHNvTzNrQ1psU3gxd3ZzRmtvQkdRVHZa?=
- =?utf-8?B?eDNPb2R5TVZjblNtc2VEeXFZakRGSDFsQmRsUmhJL2s1clR1MURaT0VCUlQ5?=
- =?utf-8?B?R1VSQTJzWFhlc1BtYmVBWVV5UEhEbXZwZFRxNW1aNHlYdUdHUUo0VW0xOVRB?=
- =?utf-8?B?VXVtZ1lnaWJOUmg2aTMvQXhCbUxjbWM0cXZaWTVGY1BtRzZ6Q1lxMnFwdjhh?=
- =?utf-8?B?MWQ3RW9ONm1lWUwxeFJCTGhhaVAyK0ZKTFVWUjAveEZmbysyZHZmeDlSRVlq?=
- =?utf-8?B?LzNQVXVMOXp1WGVEeG9PRERYRWZJYk5tUGVvNVRPd1BuRmROVDVHN2RQeHRh?=
- =?utf-8?Q?GMPZBpGq6HtdCZDlZi3fCx0HU?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TVVvWEp5MWhSazVYbVZpM3YxSFphWmpuQ1M4STk2RG9BaGoxMzNpR3lMUzRM?=
+ =?utf-8?B?ZnV3TGIySE5yUDJ6ZXZ3UU9lWXZQeHZNWG1hRVVvOFdkRVVUbFJYT0x3bkd0?=
+ =?utf-8?B?bnJhYzFoUEtmczdrRVNxdkxMUXFqNWlPRWFzVmV6Q1JBQUpqaVg0cUFTaVBF?=
+ =?utf-8?B?bG05QmdJc2p6YTBpaVBIcUkwQmxEcHZtYUhjVGUxWVlTbmNod0MreDRCSkdz?=
+ =?utf-8?B?WHgyTjJVRU5ZWUJnbGpPakxXZURDRXBlcE9vdUl3K2xPYVEvN1RsZnRVY2l6?=
+ =?utf-8?B?YmVSNlBlVGpGY29DbUI3aGtpc1NheklCVm51SmVvWnUwS3Q1dmNFeVdJckxr?=
+ =?utf-8?B?eURON2lzSCtsRW9wWU9ySklzTVRuSy9oVnh1VU8xOTVwWExWRXpCK3orR3BU?=
+ =?utf-8?B?VjlhbkNLN0pTQ0J3MkllN3J0SVdnRjN6WDR3dzZRL0ZUanVIVm9LL0dyT1hI?=
+ =?utf-8?B?YXhXVTVTYm9wWlFRcWtJckZhcFF0TTc4TzVENTMrb0NNc1lDWVNycXFEaWxz?=
+ =?utf-8?B?ekxVN1pUL3h0RlA3eTJTT0xBWjJDUmFvaFN1RVpKWGx6ZHVjTFUzaThJZHJa?=
+ =?utf-8?B?aHdNZWJ3NHFsQ3h0RFoyWGh6YlZPZ205Y3E2RzlqMWJneTNPVklTWXAzdmxE?=
+ =?utf-8?B?NTNlbmp3RCtudE5DTG51eis2T09LOGlLY1dQSVBCcjZyL0g3NSt0K09XT25v?=
+ =?utf-8?B?bTZGaDA5WnpRMFZ6aE5UTDdkUVlJRTlhclJFVzM1ZzhndE9NcFNlSCsvSGpD?=
+ =?utf-8?B?QjB0OS9peEdyanN5L2Q0VUR2OGxFNUk1djlhczQ2TUZSZlBCOGJLd0d3Yy8z?=
+ =?utf-8?B?Z0NyZTNDS3VBNXRWaFFPQmo5V0R3ZHhRYlZlOS9Xdk5zNCtnL3BMdEZpTnJH?=
+ =?utf-8?B?RnRibWY0TldiV0lsaVFqUitQUXRuTmhnUjlIMG5ITks0NlZEZzVmUHZjVnN4?=
+ =?utf-8?B?VGNxTDRWVXZGZGowOEJYK0J4eG1vUVB5QTZpVDNUYW4xcEVEZXd0Szd1MWxW?=
+ =?utf-8?B?VWtZU3dOZ3c0SEFiVVR6SlA1VWpPdHBNZFZleDE2MVU2Z3FqNmV4R2MyMWRM?=
+ =?utf-8?B?NzBjZThpTmhhU1VDQVB4ZVdvNHNzS2xTRjhkYlpSY1JELzR6RjlUb1lhWlVR?=
+ =?utf-8?B?VWVkbnZIeXd2MGE5cHAvMXUrd2pJbkxWMVNlTDhONXIvUkRIUy9tTjZWTHIy?=
+ =?utf-8?B?Y3NMTjRacWhNY2dqaVRaNUJZVXUrcE5nYTZRQ0d1eU5XUzB2aDRESFpQdzVC?=
+ =?utf-8?B?UGpHVTRiNEVvZDN6eURtdWhhSkczejN2V2RyeDhGQzZsSlR3MTN1TkZ1Nyt4?=
+ =?utf-8?B?TGw0MG82eThWbExQYzlLb3JHamJPNDJCc2wvUnpackZwZ0JSZUJwZ3ozQklR?=
+ =?utf-8?B?c0tPK0xjZTFlMEFrM3NqV2g3T1d3emRJUmhlNTdCUU1ZNlU4MFBFRWFtb1ZY?=
+ =?utf-8?B?ejlZN1NTT2lhTXJQa2RqMnNQSXBkajZkaTU0eTZJd3o4blNhTlZwZUg3VHNh?=
+ =?utf-8?B?S2NtZzRQRTQyMkh3QkFWWHhmeWthV2JENnR0QStaempCV1RQbk1IeSttOE9E?=
+ =?utf-8?B?em9mcllmS3Q3Ykw2L0tLUlpXcCtXTTZtZFFEZk9hZkJ3bExGVTRzVENoOU8w?=
+ =?utf-8?B?VlczL09EMytTZ1dKdldOcWMybkFneE13Z1kwSE4wVENPRUxzYXhlMmFxdGhq?=
+ =?utf-8?B?TnYvMCs2RUhhTklQZXZURlVkRjNIRm81U3VXRU1EaVBOTitUcHRzRUpTS0NX?=
+ =?utf-8?B?R0d5UFRNU1FyQkhEMHNXc2dnSlJGQmNuNmdrSTk3RnBoc0doRTBiWGVJM25F?=
+ =?utf-8?B?ZW1nblltT3h1cXM1NlB6bW5GRG11ZEtzd0lTRHVKVFRrbjlQVG1ONjU2MTBD?=
+ =?utf-8?B?Q3orNTVjNzJCS0VyUzdNTG1UQXJMdFJzSmI3TURsZTBMSzNBVS9SNHllaWZV?=
+ =?utf-8?B?SmFnVnNhLzh0eW5OYmYvR2J3VWhQNmxxbjNWNGdTY2ZTbmZJSUJBbmdUOXk4?=
+ =?utf-8?B?bkVVTUZvb1ZsaC8vOWFReGVVMWF6MUprbGRtNk4yckRHMW43VWhJRE9XL3Qr?=
+ =?utf-8?B?QnA5dVRuKzBGWFJKcGkrMi9QdDJzYjFOT0VrK0RHRGgwVDhONFpteGNNV3BZ?=
+ =?utf-8?Q?tppj1ANpSEAx65vm92s/1f2+g?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74b8266d-05d5-4562-cd49-08ddbad95959
+X-MS-Exchange-CrossTenant-Network-Message-Id: 48b7ca3f-0bcd-4ea9-6616-08ddbad971f8
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 09:01:22.8784 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 09:02:04.3413 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: df1JHwLqX9zDXFXvylv4lr7da263hmgnnrNtDGZd8vIIZ448FsQK+w1ff6DYEyut
+X-MS-Exchange-CrossTenant-UserPrincipalName: wlOTr/FlqTqQ2Ed6ULCbSK5LsE3DbsRnOOtDV4EP6Xfc/yu/kt8f0rMhauwVLpHX
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7482
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -226,18 +229,11 @@ X-Virus-Status: Clean
 On 7/2/25 17:25, abdellatif.elkhlifi@arm.com wrote:
 > From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 > 
-> Accept the FWU at ExitBootServices()
-> 
-> Provide the FWU_ACCEPT_IMAGE ABI and setup an event triggered
-> on ExitBootServices().
-> This mechanism notifies Secure world that the system booted
-> successfully by accepting the images in trial state.
-> 
-> Also, add FWU_ARM_PSA_ACCEPT_IMAGES config
-> to allow platforms to switch off image acceptance
-> in ExitBootServices().
+> Add a README
 > 
 > Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -245,34 +241,200 @@ On 7/2/25 17:25, abdellatif.elkhlifi@arm.com wrote:
 > Cc: Michal Simek <michal.simek@amd.com>
 > Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Adriano Cordova <adrianox@gmail.com>
 > ---
->   include/fwu_arm_psa.h         |  22 +++-
->   lib/fwu_updates/Kconfig       |   8 ++
->   lib/fwu_updates/fwu_arm_psa.c | 183 ++++++++++++++++++++++++++++++++++
->   3 files changed, 212 insertions(+), 1 deletion(-)
+>   MAINTAINERS                      |   1 +
+>   doc/develop/uefi/fwu_arm_psa.rst | 153 +++++++++++++++++++++++++++++++
+>   doc/develop/uefi/index.rst       |   1 +
+>   3 files changed, 155 insertions(+)
+>   create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
 > 
-> diff --git a/include/fwu_arm_psa.h b/include/fwu_arm_psa.h
-> index a8f0ff93d51..451d8b614e3 100644
-> --- a/include/fwu_arm_psa.h
-> +++ b/include/fwu_arm_psa.h
-> @@ -84,9 +84,10 @@ enum fwu_abis {
->   	FWU_WRITE_STREAM = 20,
->   	FWU_READ_STREAM = 21,
->   	FWU_COMMIT = 22,
-> +	FWU_ACCEPT_IMAGE = 23,
->   	/* To be updated when adding new FWU IDs */
->   	FWU_FIRST_ID = FWU_DISCOVER, /* Lowest number ID */
-> -	FWU_LAST_ID = FWU_COMMIT, /* Highest number ID */
-> +	FWU_LAST_ID = FWU_ACCEPT_IMAGE, /* Highest number ID */
->   };
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index fdf34c74049..a75bc1d2379 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1231,6 +1231,7 @@ FWU ARM PSA
+>   M:	Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>   M:	Davidson kumaresan <davidson.kumaresan@arm.com>
+>   S:	Maintained
+> +F:	doc/develop/uefi/fwu_arm_psa.rst
+>   F:	include/fwu_arm_psa.h
+>   F:	lib/fwu_updates/fwu_arm_psa.c
 >   
->   enum fwu_abi_errcode {
-> @@ -311,6 +312,25 @@ struct __packed fwu_write_stream_resp {
->   	int status;
->   };
+> diff --git a/doc/develop/uefi/fwu_arm_psa.rst b/doc/develop/uefi/fwu_arm_psa.rst
+> new file mode 100644
+> index 00000000000..f91fd85f573
+> --- /dev/null
+> +++ b/doc/develop/uefi/fwu_arm_psa.rst
+> @@ -0,0 +1,153 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +.. Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+> +
+> +Firmware Update (FWU) Support for Arm PSA
+> +==========================================
+> +
+> +This README provides an overview of the Firmware Update (FWU) support
+> +implemented in U-Boot for Arm `PSA Certified`_ platforms, such as
+> +Corstone-1000. The feature aligns with the Platform Security Firmware Update
+> +specification for the A-profile Arm Architecture
+> +(see `DEN0118 v1.0 A specification`_) and leverages the Trusted Services (TS)
+> +framework to interact with Secure world update agent.
+> +
+> +Overview
+> +--------
+> +
+> +The FWU subsystem enables secure  firmware updates by
+> +delegating the update management to a Secure world agent. U-Boot acts as the
+> +FWU client, coordinating updates via a well-defined set of ABIs over the FF-A
+> +interface (see :doc:`Arm FF-A Support <../../arch/arm64.ffa>`).
+> +
+> +FWU for Arm PSA supports both on-disk and standard capsule updates.
+> +
+> +Key Features
+> +------------
+> +
+> +1. PSA Firmware Update Initialization
+> +-------------------------------------
+> +
+> +- Initialization of the update agent using the FF-A transport and discovery of
+> +  the Trusted Services FWU SP.
+> +
+> +- Discovery of the version of the ABIs using FWU_DISCOVER ABI.
+> +
+> +- Establishment and sharing of communication buffers between U-Boot
+> +  (Normal world) and Secure world.
+> +
+> +2. ESRT Support
+> +---------------
+> +
+> +Retrieval of ESRT (EFI System Resource Table) data from Secure world using
+> +FWU_READ_STREAM ABI, enabling compliance with UEFI standards
+> +(see `UEFI v2.10 specification`_).
+> +
+> +3. UEFI Capsule Handling
+> +------------------------
+> +
+> +- Runtime checks for capsule flags as per UEFI 2.10 specification:
+> +
+> +    - CAPSULE_FLAGS_PERSIST_ACROSS_RESET
+> +
+> +    - CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE
+> +
+> +    - CAPSULE_FLAGS_INITIATE_RESET
+> +
+> +- Support for keeping the FMP payload header in Arm PSA mode to preserve
+> +  critical metadata required by Secure world.
+> +
+> +4. Staging and Update Flow
+> +--------------------------
+> +
+> +- Full support for update staging flow as per PSA spec:
+> +
+> +    - FWU_BEGIN_STAGING
+> +
+> +    - FWU_END_STAGING
+> +
+> +    - FWU_CANCEL_STAGING
+> +
+> +    - FWU_WRITE_STREAM
+> +
+> +- Capsules can contain multiple payloads (including start/end markers
+> +  and the update content).
+> +
+> +5. Directory Access
+> +-------------------
+> +
+> +- Reading the FWU directory from Secure world using FWU_READ_STREAM ABI.
+> +
+> +6. Image Update Lifecycle
+> +-------------------------
+> +
+> +- Implementation of get_image_info() and set_image() using raw EFI firmware
+> +  services provided by the FMP driver for raw images.
+> +
+> +- FWU_ACCEPT_IMAGE ABI issued on ExitBootServices() to commit successfully
+> +  booted trial images.
+> +
+> +- Option to disable automatic acceptance on ExitBootServices() via
+> +  CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES.
+> +
+> +Configuration Options
+> +---------------------
+> +
+> +To enable FWU support for Arm PSA, include the following options in your board
+> +configuration:
+> +
+> +CONFIG_FWU_ARM_PSA=y enables the PSA-compliant firmware update client in U-Boot.
+> +
+> +CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES=y Enables auto-acceptance on
+> +ExitBootServices(). This option is enabled by default. It can be disabled if
+> +image acceptance should not be done at ExitBootServices().
+> +
+> +Platform Integration: Corstone-1000
+> +-----------------------------------
+> +
+> +- Corstone-1000 is the reference implementation for the FWU Arm PSA feature.
+> +
+> +- ESP partition detection is automated by setting Boot0001 in the U-Boot bootcmd.
+> +
+> +ABIs Implemented
+> +----------------
+> +
+> +The following ABIs from the PSA FWU specification have been implemented:
+> +
+> +    - FWU_DISCOVER
+> +
+> +    - FWU_BEGIN_STAGING
+> +
+> +    - FWU_END_STAGING
+> +
+> +    - FWU_CANCEL_STAGING
+> +
+> +    - FWU_OPEN
+> +
+> +    - FWU_WRITE_STREAM
+> +
+> +    - FWU_READ_STREAM
+> +
+> +    - FWU_COMMIT
+> +
+> +    - FWU_ACCEPT_IMAGE
+> +
+> +ExitBootServices() Integration
+> +------------------------------
+> +
+> +- The U-Boot FWU client performs several key actions during ExitBootServices():
+> +
+> +- Notifies Secure world about successful boot.
+> +
+> +- Accepts updated images in trial state.
+> +
+> +- Supports board-level override of fwu_notify_exit_boot_services() for custom
+> +  behavior.
+> +
+> +Contributors
+> +------------
+> +   * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> +   * Davidson kumaresan <davidson.kumaresan@arm.com>
+> +
+> +.. _`DEN0118 v1.0 A specification`: https://developer.arm.com/documentation/den0118/latest/
+> +.. _`PSA Certified`: https://www.psacertified.org/
+> +.. _`UEFI v2.10 specification`: https://uefi.org/specs/UEFI/2.10/
+> diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
+> index e26b1fbe05c..573630740a0 100644
+> --- a/doc/develop/uefi/index.rst
+> +++ b/doc/develop/uefi/index.rst
+> @@ -10,6 +10,7 @@ can be run an UEFI payload.
+>   .. toctree::
+>      :maxdepth: 2
 >   
-> +/*
+> +   fwu_arm_psa.rst
+>      uefi.rst
+>      u-boot_on_efi.rst
+>      iscsi.rst
 
-/** for marking kernel-doc format. Please fix this in the whole series.
+Is there a way how to run this on Qemu/FVP or so to see how it is working?
 
-M
+Thanks,
+Michal
+
