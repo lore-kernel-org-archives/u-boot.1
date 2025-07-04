@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FEAC83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 15:09:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFC4C8303D
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 15:34:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 361E7806D8;
-	Fri,  4 Jul 2025 17:08:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 189BB8206E;
+	Fri,  4 Jul 2025 17:34:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jijRwxmK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Si5SyXKB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E47F8206E; Fri,  4 Jul 2025 17:08:57 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 0E4278277D; Fri,  4 Jul 2025 17:34:04 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77D02803DF
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 17:08:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECA36803DF
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 17:34:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2efa219b5bbso330948fac.0
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 08:08:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-60867565fb5so1716708a12.3
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 08:34:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751641734; x=1752246534; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n0SdIBBdpkXzG/fjhQIIY0ODay5l6TCTCw53ww4CCj4=;
- b=jijRwxmKM+gdIOaS6vFC5557aJAZ2f062dOooVLyBKpjDVM1jCpQPiYqvaSXbalwOZ
- yhOJQQWTRFUgyDdVlgFwpj68YaFtUoHuDz5xdBv9Y06f3coEARbnJqv4YgmJCkWO6Yqd
- eZrpRl2wi/KG5sb4oVtfzZAUrGIlcws903avM=
+ d=linaro.org; s=google; t=1751643240; x=1752248040; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dcwEFlG2BzurLgTlS1TynmqJwRgUeG6tKXB21J93T8Q=;
+ b=Si5SyXKBernwa28LQTINfmzOY5WuXjTRaUbuEVJEP3FFgbrei8zzuBh2PcGlx+pjVG
+ uT9xkAxfWEv0XdMakpP0ANYBvOtBOr4XyB53zQ1sgJ2KUaYqFNsfmOijhSnofFtBZKGn
+ 9w8LuxYLMw3RlUv4caP5jOcrTz+MltgxlSq8uaDFDgd9bQpYLxEqa2nT993QlNkRH4fz
+ vLnjkF9GaBu2nXGyTm7khHW3J7zWe0t1qfvxA4Rm26d19hqJYsT5jHUxXQB0Zz6KOHMw
+ 7x7831pPMJYP2SFQ3H9Je8BTyj+9044yHv6+/jKmTo7WE8vjRiKlqtQ3c64+wQZuYTI+
+ 0H6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751641734; x=1752246534;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n0SdIBBdpkXzG/fjhQIIY0ODay5l6TCTCw53ww4CCj4=;
- b=AbpHz8awpV6NloBvuE/6FO35vVqatUc+b+ZXo/H0wMOGtikCcHPJ/nYxXdiPPlO9kl
- 02FvFi/WC0xl+5a23xBYWYVbpYBssy0PQsrUGJk3SLEyZ6xvvdnkpt1LRNzpPGeRwBzU
- U1miYRfeWt+Y/mx68TJEI2kElNIVCCzMx3h4sb9y7DPH96aI3i66UE91TGnmQfF6JIRc
- RpkMtqNEmkeWaNmcEaJkp7sFiO4NVv1ghoGu8+t1FT6Y7UBw5jNr0tQcX292HqQrW3xr
- keW9X2cvkPBgDQjlpN9IcI2Q9XS/Nrflu6vXN8taFwB3+zZj1sSqY+rwsaL61rw3OQ2n
- qh2g==
-X-Gm-Message-State: AOJu0YytJwkVhcPF8nMVV/l0fjYTTAfowz4neTdsu1eucHiqp/+/QkVr
- +6xSv17vGHyUnHLxtPEA56g/QhDuQF9eg90Zhwk0P2IRdN8dkLKSuiv0qELWj07PrM0=
-X-Gm-Gg: ASbGnct3rghBsIA6q9OkTrgnt81T4gOfYxNZsYU0/0EegB6hXLVGMJPx16Ndy4jyPLj
- fDFnN4prmtK+GNn89ECbcbu6l7ZsJGTJoTzGDS01pjDD1VY+IR2fwsr+uwIUGY9Kdb5v0SQjRWB
- nh8b52ndNK/Iw9qxQ5Snku7o/HgT1dIRL5LJvRCRyqtN4STvkP9NaQsF9z5L+cdrOBl9WmWx3Ai
- qgrUn/LwdirIaBV3Aiv6nFaXpv0wroDoKI4jIADi2hpMVFdY4loRfFgb7o6kBM325E1NLr9jX07
- JD98rH2KnnTGdO+4tt6GNA9ERM1X85+7vkYWhKbkmK14R3Kuou4cYl5kuWIveE9FKjzryeZ4DhH
- xlLDJV9g4u8pO0hesEn7j
-X-Google-Smtp-Source: AGHT+IFb2j89+kWmiyWFUqKlvzEeez8MMZzgT/eEzgAUba+MgD/TvJjR9RSyKIitDFSi3J2UVCebbw==
-X-Received: by 2002:a05:6870:c05:b0:2e8:7505:638e with SMTP id
- 586e51a60fabf-2f792168420mr2498341fac.39.1751641732409; 
- Fri, 04 Jul 2025 08:08:52 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f772500sm399834a34.30.2025.07.04.08.08.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 08:08:51 -0700 (PDT)
-Date: Fri, 4 Jul 2025 09:08:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, jerome.forissier@linaro.org,
- otavio@ossystems.com.br, michael@amarulasolutions.com, uboot-imx@nxp.com
-Subject: Re: [PATCH] mx6sabresd: Increase CONFIG_ENV_OFFSET to fix boot
- regression
-Message-ID: <20250704150849.GG6424@bill-the-cat>
-References: <20250704130319.3814676-1-festevam@gmail.com>
- <20250704133105.GD6424@bill-the-cat>
- <CAOMZO5AtVXOxWjMQeVeUtbU1Z_D_DvQ+0a7OzzHUskSK8wFJ6w@mail.gmail.com>
- <20250704135338.GF6424@bill-the-cat>
- <CAOMZO5B+EV-PPhT0pExj6TFYWNw4OAepob_M2k7RiHX9O_b_Uw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1751643240; x=1752248040;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=dcwEFlG2BzurLgTlS1TynmqJwRgUeG6tKXB21J93T8Q=;
+ b=fzYDJAYxkOcUPKCDXrJc6is5lYJwHdE7Qa0K8r4tNa71xhDA/9aXnwcIJWrT2Uhgsm
+ cPQT/F3JxMgVVTfG4v9XMVTPQFRpJWhbnvnfisEhUoZ3KD6oi4U9SVIQWgYEVcbzQZpV
+ P3j+hxjwe5BI9iTBNrZfGSj6lsCKOrfB1ze3EYt4NErRswCmutbPMFmE3v6+toegWx8F
+ OZ+PRAOfSLRjXrhHIPx4JCfR1IMSBIobqYMsYOixQ0wEXm+EJUsOc0WgLOm6xun6yHe6
+ p83yi34aGQ2l20Jd5NMI/amPRb+G6FrLLzjsnIk5268bLv2u7h+r/BxixwrKieAdJG2+
+ DCmw==
+X-Gm-Message-State: AOJu0YwTn8OJmln6Nt5pbOLiBesBuxTMPrFHDVjzfnRBVwMurfgAJfVe
+ ypIsS30yeW1D6NSRb7fULCKOFF8lyB2MWM8AXLX5Fx2PMeYY39JkXK/M/jeYStgvLX5FF2EZ1e8
+ UdfAY0/9AOQ==
+X-Gm-Gg: ASbGncuwSw1q2qX1ANUgjiO15mixDHu937gF64JZTfis7iOy6jxFVIo4I3bSC57H0o0
+ U5zK1l275JU6g4rKp7YFlj3q5SC4AILE4fVm2XweAYKTn9OHbt2GFeYPxoRdD88UqF8a2sXyASW
+ cTaG5t5xjAjLXU5XbsJGOkT7GO81K7nwuLMb3YderSKPEllUAZ+/73sGFx5IwWA5kWzeRbt+0Io
+ 0NK3DY/upvMkObMsmduzeF+UxgBKUec7UMS4W0AZAmQCOZAMYt3Zo/x9h2QxUhyXVrRIsfwc6/O
+ cvsIhQWdQ2J7Mz8ALhCCPpiQD7k/LKCb9S1aZLXgD6GiR8bYXd2PqcLpe0/m3rofZByq+XjBdCB
+ m4ZUP8qxgVFfCeM7bERoukR7z1WjUvVZ6F6xmjJHjeQ==
+X-Google-Smtp-Source: AGHT+IG9N/Qnf+tdWx1kmJlAAMEnsl/1n3BVxyTz38aKhX0BOvXRix506EZmyBieMA3q+gt5r16m4A==
+X-Received: by 2002:a17:907:3f07:b0:ae0:b3be:f214 with SMTP id
+ a640c23a62f3a-ae3fbc56d8bmr311175766b.9.1751643240226; 
+ Fri, 04 Jul 2025 08:34:00 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:713c:93e8:d764:c0f8?
+ ([2a01:e0a:3cb:7bb0:713c:93e8:d764:c0f8])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae3f6ac67bbsm192936166b.96.2025.07.04.08.33.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Jul 2025 08:34:00 -0700 (PDT)
+Message-ID: <a310530f-7768-41fe-abda-91ef5fda9c4a@linaro.org>
+Date: Fri, 4 Jul 2025 17:33:59 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Rp6G4zkpjmiCl7oN"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5B+EV-PPhT0pExj6TFYWNw4OAepob_M2k7RiHX9O_b_Uw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] mx6sabresd: Reduce U-Boot proper size to fix boot
+ regression
+To: Fabio Estevam <festevam@gmail.com>, trini@konsulko.com
+Cc: u-boot@lists.denx.de, otavio@ossystems.com.br,
+ michael@amarulasolutions.com, uboot-imx@nxp.com
+References: <20250704144022.3946416-1-festevam@gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250704144022.3946416-1-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,84 +103,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Fabio,
 
---Rp6G4zkpjmiCl7oN
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 7/4/25 16:40, Fabio Estevam wrote:
+> The mx6sabresd U-Boot proper binary size has grown beyond the 
+> CONFIG_BOARD_SIZE_LIMIT.
+> 
+> Reduce its size by removing the CONFIG_MULTI_DTB_FIT, BOOTM_PLAN9 and
+> BOOTM_RTEMS options.
 
-On Fri, Jul 04, 2025 at 11:11:34AM -0300, Fabio Estevam wrote:
-> On Fri, Jul 4, 2025 at 10:53=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
-te:
->=20
-> > Yes please, thanks! And I would like to explore a little if some other
-> > compression algorithm (that we don't have support for yet) might be a
-> > larger win too, for v2025.10.
->=20
-> Ah, I manually tried this change below:
->=20
+FWIW, I'm working on a better fix than commit 410d59095a9f ("arm: kirkwood:
+fix freeze on boot") for the LTO link issue that appeared when I made the
+static initcalls series. Instead of disabling LTO for common/board_{f,r}.c
+I will instead move th e problematic inline assembly code to separate .S
+files. The idea is to get rid of the selective LTO disabling (there are
+others places which do that) and at the same time to not force -marm on
+some C files that could totally be compiled in Thumb/Thumb2 mode if it
+weren't for this inline assembly with mrc/mcr instructions. In other words,
+let the compiler and linker do their job. While it could cost a few bytes
+in some cases compared to inlining, I also expect meaningful reductions in
+other cases. It will all depend on arm vs. thumb and LTO vs. no LTO.
+
+Anyway, I looked at the impact of my series on the binary size for mx6sabresd.
+Good news, it does save 1702 bytes:
+
+$ git log --oneline -n 4
+306a6f7adf8 (HEAD -> lto-fixes-tmp2) arm: do not force -marm on some C files and allow LTO everywhere
+1680ed4cbb2 arm: move inline assembly CP15 instructions to separate .S files
+018263f9278 Revert "arm: asm/system.h: mrc and mcr need .arm if __thumb2__ is not set"
+7027b445cc0 Merge tag 'efi-2025-07-rc6' of https://source.denx.de/u-boot/custodians/u-boot-efi
+$ tools/buildman/buildman -b lto-fixes-tmp2 -c 4 --step -0 mx6sabresd
+$ tools/buildman/buildman -b lto-fixes-tmp2 -c 4 --step 0 -sSd mx6sabresd
+Summary of 2 commits for 1 boards (1 thread, 24 jobs per thread)
+01: Merge tag 'efi-2025-07-rc6' of https://source.denx.de/u-boot/custodians/u-boot-efi
+04: arm: do not force -marm on some C files and allow LTO everywhere
+       arm: (for 1/1 boards) all -1702.0 data -4.0 rodata -514.0 text -1184.0
+            mx6sabresd     : all -1702 data -4 rodata -514 text -1184
+(no errors to report)
+
+So stay tuned for more on this. When the series is ready I will post it for
+review with a link to the buildman size stats for all plaforms. It should
+happen next week.
+
+Regards,
+-- 
+Jerome
+
+> According to doc/README.multi-dtb-fit:
+> 
+> "Usually the DTB is selected by the SPL and passed down to U-Boot. But some
+> platforms don't use the SPL. In this case MULTI_DTB_FIT can used to provide
+> U-Boot with a choice of DTBs"
+> 
+> mx6sabresd uses SPL, so MULTI_DTB_FIT can be safely dropped as the DTB
+> selection in SPL is done by board_fit_config_name_match().
+> 
+> Tested boot on the imx6dl and imx6q variants.
+> 
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> ---
+>  configs/mx6sabresd_defconfig | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
+> index f041f1fd1a3b..312af2f57fde 100644
 > --- a/configs/mx6sabresd_defconfig
 > +++ b/configs/mx6sabresd_defconfig
-> @@ -40,6 +40,8 @@ CONFIG_SPL_WATCHDOG=3Dy
->  CONFIG_HUSH_PARSER=3Dy
->  CONFIG_SYS_MAXARGS=3D32
->  CONFIG_CMD_BOOTZ=3Dy
+> @@ -40,6 +40,8 @@ CONFIG_SPL_WATCHDOG=y
+>  CONFIG_HUSH_PARSER=y
+>  CONFIG_SYS_MAXARGS=32
+>  CONFIG_CMD_BOOTZ=y
 > +# CONFIG_BOOTM_PLAN9 is not set
 > +# CONFIG_BOOTM_RTEMS is not set
->  CONFIG_CMD_SPL=3Dy
->  CONFIG_CMD_SPL_WRITE_SIZE=3D0x20000
->  CONFIG_CMD_GPIO=3Dy
-> @@ -65,7 +67,7 @@ CONFIG_EFI_PARTITION=3Dy
+>  CONFIG_CMD_SPL=y
+>  CONFIG_CMD_SPL_WRITE_SIZE=0x20000
+>  CONFIG_CMD_GPIO=y
+> @@ -65,7 +67,6 @@ CONFIG_EFI_PARTITION=y
 >  # CONFIG_SPL_EFI_PARTITION is not set
->  CONFIG_OF_CONTROL=3Dy
->  CONFIG_OF_LIST=3D"imx6q-sabresd imx6qp-sabresd imx6dl-sabresd"
-> -CONFIG_MULTI_DTB_FIT=3Dy
-> +CONFIG_MULTI_DTB_FIT_LZO=3Dy
->  CONFIG_ENV_OVERWRITE=3Dy
->  CONFIG_ENV_IS_IN_MMC=3Dy
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
->=20
-> After running make savedefconfig; cp defconfig
-> configs/mx6sabresd_defconfig, I see that CONFIG_MULTI_DTB_FIT_LZO does
-> not get selected, and CONFIG_MULTI_DTB_FIT=3Dy is removed.
->=20
-> According to doc/README.multi-dtb-fit:
->=20
-> "Usually the DTB is selected by the SPL and passed down to U-Boot. But so=
-me
-> platforms don't use the SPL. In this case MULTI_DTB_FIT can used to provi=
-de
-> U-Boot with a choice of DTBs"
->=20
-> mx6sabresd uses SPL, so MULTI_DTB_FIT can be safely dropped.
->=20
-> I tested it on a imx6dl and imx6q sabresd boards.
->=20
-> I'll send a v2.
-
-I guess the question is if we need to be using SPL_MULTI_FIT_DTB to pass
-the right one along, or if we don't really need to have the exact DTB in
-any case?
-
---=20
-Tom
-
---Rp6G4zkpjmiCl7oN
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhn7n0ACgkQFHw5/5Y0
-tywsjgwAl6Gr+teEpJ9susStOhw1o0TKniz61x1k5rnaDiYZJv9GIU+CPRQ9Kv4a
-Sefvq1hYbcN4H50YOPXGnUpP8hQIt6y0zK6GBIAXwelt0G4BCQbGMOVbiAlr+dPN
-msfa8XstE9MHeEjg14xMCG+YaddFjb5rIymGljkc3MvHVEJk9AA5LrYduVRYTPly
-oOnoS5ETfmzw7F2fxJplM25Hkxn9U4esupoiVVOrWaBw66uRUVe9paZALFJhLOO0
-BLVgbjJwd5ZB2m/V5BMGK5GV3cG3aZfIyKxoJ8OBwC0KAJW1of1NDwMTJBTk/2tJ
-RIsKqQxlo/zTksU3kpKUYw+/s1lJ3FCMkVtKitHBLUZ17qROeBiykHtF9+a2JZDK
-WvPqZSgc346W3QyfpJFxBxbCP0K8xCe65ukzoEmobYFvTuVDYDt7Jk82SFGdt1Uy
-igbMX+lOod2r+1slTH8ubCTQTvdsbhNb5YJ8MNQrH40s9h0nd8suESsLbHKmXU4c
-EW0sXBS+
-=7+Xn
------END PGP SIGNATURE-----
-
---Rp6G4zkpjmiCl7oN--
+>  CONFIG_OF_CONTROL=y
+>  CONFIG_OF_LIST="imx6q-sabresd imx6qp-sabresd imx6dl-sabresd"
+> -CONFIG_MULTI_DTB_FIT=y
+>  CONFIG_ENV_OVERWRITE=y
+>  CONFIG_ENV_IS_IN_MMC=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
