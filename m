@@ -4,53 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05F0C8303D
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 19:26:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240AEC83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 20:28:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E45781F6B;
-	Fri,  4 Jul 2025 21:26:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 47FFB8277D;
+	Fri,  4 Jul 2025 22:28:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="xQp5cilg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SRWGPoi+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70A678206E; Fri,  4 Jul 2025 21:26:34 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 233A582A76; Fri,  4 Jul 2025 22:28:18 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F2E1803DF
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 21:26:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABD5981F6B
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 22:28:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 098F71FB2D;
- Fri,  4 Jul 2025 21:26:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1751657191;
- bh=FxuqIIWxBNBDT1WtfbdzDq7SJEi+WeA6u6u/jI++hyU=; h=From:To:Subject;
- b=xQp5cilg7uT27bJaEceBUnIsa1WIEna/WYdyJSexB+5wGaGlX1qosHUtpSrJEvf+y
- 1oytcHEuKyY8kF0JFHIslERThJAdXItlPoZiWcuoPSs5bMtBP59J3X5DM0u7NPb3qU
- QQyph3gGQpXoZd6PX/Ryc+yrPRdW8BbeuCZsIySnlnhcfV+Vd+wmTNA8fUbbr9G1S6
- b/M+CnR6oUSXIYG5fBWXeClbYKGpH5sxty6Ckee3P7M/O267aMlsCY6P/rMn1r6UoO
- hXOgeDiyl+KIrA1WUNTyH7rE+fGaC4cyb65VozUDomPWNxSRedVRyoMQBPsTCbaXbs
- 0VnJCEF/rJM0g==
-Date: Fri, 4 Jul 2025 21:26:26 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Vishal Mahaveer <vishalm@ti.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH] board: ti: rm-cfg: Update rm-cfg to reflect new resource
- reservation
-Message-ID: <20250704192626.GA17727@francesco-nb>
-References: <20240220203944.27916-1-vishalm@ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2ef493de975so975120fac.1
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 13:28:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1751660894; x=1752265694; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yGei1fbPWSPs8QrTZjzPiHbFoUvk+6HoQG7B9WJCX1M=;
+ b=SRWGPoi+cnTIZDp8g+7iuQxvFaF78j7xtZGYKRWreF4U/bLm7S7dLEXSYww5jTD2iw
+ JLDKLGy6U7v1PBKJB9De5YaVp/cTaR+eQRJl5k/GkorxoGxKoYG+Nk3OMOqklQU0VY3y
+ LOz0wVDv792zHt5ywWNkBJaPt8RLWWJUwhs9M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751660894; x=1752265694;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yGei1fbPWSPs8QrTZjzPiHbFoUvk+6HoQG7B9WJCX1M=;
+ b=ThK0g136mX0PIRu9Kl0GSJdfv7oatOr6N/OaILhJnk9FDhX2IWe4o+Iabsunh46Qdw
+ TNgl5DbyIbD1orxLQrpUQ5c5T7KKSmSBD5p8ryYe8heh5XAHjtdqIZp82dG/jfF4YPYw
+ dbRI6/FyXh8yNcHhQ5i0J5mANo/effYyYNvuqc5yWlkFs0SOFJvaYUXart43r5x/0zWl
+ xYtEC1czlCAtCZqyUjQ5GNqWcdcGzyYznH1PBO9NpIClhgzwzeqHZ7nIglj0/n5dEyTI
+ IJvb+AxoF6FoA0n6O9gq6CC4oQ8n9yyg+pomd4KMsYr8ocUF2NNmGPKHTTdQGg38cvUG
+ BlSg==
+X-Gm-Message-State: AOJu0YzQc6gckjiEsa0ZTiDXrHmDDzoXqzdJV48b7DI62hp1sx047ejh
+ Qd4INtQ9EOXZzvaJNlGR/Elm2rfFsAu7enuG1VVDTFQAM8LfYtw5ohK94Gftwq3hLhs8rbxH6sQ
+ qnb50+IQ=
+X-Gm-Gg: ASbGncvhzMBiCHGKFcExdb1czakAT5YrlbZiW6uZwuT0ZXslA/X9TFtiG6WPXc0yMag
+ vT20MZSLbpdd+WcrPSLHwUVXJg59Rif1Bu2hY3DAem8cEWZ2gcJJwgZWxoCnn6bZgLtdEnh18qP
+ yx47Wo7ml0fPUPJcW8mj53c65IVkyk3uL9k4fGE4TiomO6VEB7EfG3GN//7bdSseIA/mG8iG9HV
+ fKkABZhOGzzVPdK5PRaqBpxZgYLDpDq/3N5IBozAbI+ycYNyw54u/vBfPsxJtKPAE/IYwGYwtQX
+ Lxm3rBYUT+sWf4+Aig3OrtUi9SAorzjZw2RQZvfp2IXMqKzmMaZcMoq6LeoF6rfSg48YBdx/eYP
+ dMYi3w7V1dXUqFZUPmrTB
+X-Google-Smtp-Source: AGHT+IHc9v1VYZaZO2VR3aQjKIjvTcnkbpB4CDaQkwbgQS18/BdCR0oxg8Mdl3h0iephF0WVyCDgpQ==
+X-Received: by 2002:a05:6870:8912:b0:2e9:2f58:fed2 with SMTP id
+ 586e51a60fabf-2f796da0edemr2381112fac.22.1751660894217; 
+ Fri, 04 Jul 2025 13:28:14 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2f78ff02977sm697247fac.10.2025.07.04.13.28.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jul 2025 13:28:13 -0700 (PDT)
+Date: Fri, 4 Jul 2025 14:28:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <david@lechnology.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] configs: legoev3: adjust to reduce binary size
+Message-ID: <20250704202811.GJ6424@bill-the-cat>
+References: <20250704-b4-configs-legoev3-use-thumb-instructions-v1-1-6749cc9ecb45@lechnology.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CHyBU8L5RcyhjkkX"
 Content-Disposition: inline
-In-Reply-To: <20240220203944.27916-1-vishalm@ti.com>
+In-Reply-To: <20250704-b4-configs-legoev3-use-thumb-instructions-v1-1-6749cc9ecb45@lechnology.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,32 +96,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Vishal,
 
-On Tue, Feb 20, 2024 at 02:39:44PM -0600, Vishal Mahaveer wrote:
-> With the latest TIFS firmware, an additional virtual interrupt and
-> event is reserved for TIFS usage on am62x and am62ax devices.
-> 
-> Update the rm-cfg to reflect this new reservation.
-> 
-> Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
+--CHyBU8L5RcyhjkkX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I just noticed this old patch from 2024, and I have a few
-questions and one request.
+On Fri, Jul 04, 2025 at 02:15:20PM -0500, David Lechner wrote:
 
- 1. I assume this patch applies to all am62x based board, not just the
-    two from TI you did the change for, correct?
- 2. Which kind of issue can I expect if I have not updated this file on
-    my board?
- 3. Which is the version of firmware that requires such a change (you
-    mention just "latest")
+> Adjust legoev3_defconfig to reduce the binary output size.
+>=20
+> As u-boot has bloated a bit over the years, the legoev3_defconfig can no
+> longer build something that fits in the 256kB size limit of the EV3.
+> This drops a few unused features, but the real difference-makers are
+> enabling thumb instructions and using link time optimization to reduce
+> the size.
+>=20
+> This reduced u-boot.bin from 279,920 to 198,416 bytes on my local
+> machine with arm-none-eabi-gcc (15:13.2.rel1-2) 13.2.1 20231009.
+>=20
+> Signed-off-by: David Lechner <david@lechnology.com>
+> ---
+>  configs/legoev3_defconfig | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
- ... and one request
+Thanks for doing this. Can you please also enable HAS_BOARD_SIZE_LIMIT
+and then set the limit? This will help ensure we don't break in the
+future.
 
- Can you please update all the relevant boards when doing such kind of
- change next time?
+--=20
+Tom
 
-Thanks
-Francesco
+--CHyBU8L5RcyhjkkX
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhoOVgACgkQFHw5/5Y0
+tyzY9wv8DgV+Cl6Jxb8wXMJ/A86BrmF1abqh0Z0yRqZX2MWuRwwR1qqwYfxy2SHw
+f/dNIVoHmemyzOpxb1agttGBFPKcHnoMo3RY6mCCOThetRoy3RHtAwKS8OF+RVVu
+t7YA8XqOszkEWBzSERTVN+ol2Z6pYSSkqZpWBS6sl21Hvr7MfKA+LZKJLCUN63ca
+jk40am5xoNIk4AnRooD8WnHnz7oCU/DueWuTSz0Xk/tbWSRx6chIoZYfWdgc2i4L
+xntuoIzLJ+xXVg3eCmXKBZf93tpZauqqi3E2RD9C3t8pE/jJhl4arSNFfcOJUptp
+thCsSW2ipo2+vE18faGxVWaalGG8hN779onGwUjhgEGc6oCj/mzHKPFQyx12BlmG
+IQ+y1XhZT/cICOS8XkGJzJfbuUVoPbOVEhK588/uQbbzvQb7Bjs+6SdpU3r7yJ3J
+bWLBCkOKJM/KXMvF7GPc6mvxkmqxYg6Yvxz4MNWrTZ8X5t7fMbemlWZ+urCGwKOc
+TSeTvJch
+=KbQx
+-----END PGP SIGNATURE-----
+
+--CHyBU8L5RcyhjkkX--
