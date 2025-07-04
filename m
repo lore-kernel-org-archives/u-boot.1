@@ -4,74 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41AEC83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 10:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DCB3C83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 10:53:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4C0E806D8;
-	Fri,  4 Jul 2025 12:42:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 947E7806D8;
+	Fri,  4 Jul 2025 12:53:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="h0IHtIgQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TK+RGZaM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4DD38091A; Fri,  4 Jul 2025 12:42:11 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B42388091A; Fri,  4 Jul 2025 12:53:21 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB245801BE
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 12:42:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=273a31b10=Conor.Dooley@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1751625729; x=1783161729;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=Y/LEqnE6Wt061LjAoGPqdIF+82zAMRurQbHoZfZtPV4=;
- b=h0IHtIgQi/KlGr3pN+JHrvnVyB44OPxqobd00XEDX+IRlC1hmiNunPSc
- xJS5HKJF/+iEdUTv3cooOY4nLLVPYTjZztXBteOjvzRs0BYgqldw3N2Jq
- DLxN3BiTa/Hku32vxVjQY8ZptH1uYR4/jdiv/7N3JekHJFfQs4QUBxB0d
- uolsy7DYx0QJAXVqubjfX9VKy8ufWPCq+qOfJrJ77TgP49cnUzdM9A0tT
- 2Ap7n8kESvhUaZ/YNbNn8F8ifbJWJgb9PkLlLA8Ac6+A4/ritM2LnasHM
- KPnViOrKKP5MMc3wHh5NCF3wDrOYVmGJn6tlRTiJoGTpwkQlGj+7vFF5g w==;
-X-CSE-ConnectionGUID: WAdlLvIZTuic4wGP7RDhEg==
-X-CSE-MsgGUID: 7jbIAo9ATvCagPDUGX1ciQ==
-X-IronPort-AV: E=Sophos;i="6.16,287,1744095600"; 
- d="asc'?scan'208";a="43584464"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 04 Jul 2025 03:42:07 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Fri, 4 Jul 2025 03:41:35 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex01.mchp-main.com (10.10.85.143)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44 via Frontend
- Transport; Fri, 4 Jul 2025 03:41:34 -0700
-Date: Fri, 4 Jul 2025 11:40:21 +0100
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Leo Liang <ycliang@andestech.com>
-CC: Conor Dooley <conor@kernel.org>, <u-boot@lists.denx.de>, Ivan Griffin
- <ivan.griffin@microchip.com>, Cyril Jean <cyril.jean@microchip.com>, Tom Rini
- <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, "Simon
- Glass" <sjg@chromium.org>, <Jamie.Gibbons@microchip.com>
-Subject: Re: [PATCH v2] board: mpfs_icicle: implement
- board_fdt_blob_setup()/board_fit_config_name_match()
-Message-ID: <20250704-mortified-defense-b100145ed06d@wendy>
-References: <20250623115137.4017059-1-conor@kernel.org>
- <aGZW8cabMrd_76sw@swlinux02>
+ by phobos.denx.de (Postfix) with ESMTPS id C2950801BE
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 12:53:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-45348bff79fso8721975e9.2
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 03:53:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751626399; x=1752231199; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TYUfGgVQKxjeNoqTBMQyIM1QXOFI8iFSnNKeX8Ix47s=;
+ b=TK+RGZaMMDT47qP0RxYdhaozgT6bbtO9P1oHUta9/q0JXwSJZ4fApCJWI/WfP+LB4O
+ Bp3JhU8SLx4eYLOFfencdwa/ssoMhqmBcYybIVOTNUaCTbb3jW4JBeunU8lZjLlsbZmH
+ I7uI0diJDjzfcluftIAuD4/+cC5cz5kV6w7B3mR+FXWOBDMYqE91QJh/D+o2S9zo4FLn
+ wBMjiLSF7h8wQMHhdocwPuc+qHgOzvvCEehtySCW9+AUo5ca78/rvq7xZ16aUef9gjgF
+ CjMvWeWZZxb00h6DRp70/cH6nRuMecUXaMAibVSRYq2T31wlRqifTQkylQhWURpddtjA
+ ktKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751626399; x=1752231199;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TYUfGgVQKxjeNoqTBMQyIM1QXOFI8iFSnNKeX8Ix47s=;
+ b=Y9qvlKkkmnVOEPJshW3vvtL64/eXnSTssF78C3WpGQMnILQBhw/IQ6EX14KoGL0uHS
+ 60oxMhPrX6w/wazVrnWnFc6vdZszvLmB+Al0+DPvzlLYMX08UYfQy0TOf4preuJSSxMd
+ Q1rnknfFUKltb46PeCF5hBbZXgZxaxfKs8TFGwtBNZqVOelwlj3YLiLL7uVjvgDIm9iY
+ BdkIL3bsfgtsOMR3r729TTJjlKnv9lPh0LwXt1rhJMO9/sivSnm/XsKY9fYpXiDGXGQI
+ osWwzXan18Aa7VZKyiN77rr7FXkUpgjoRYyzALJzbbhv2hUSjMthTqj3boo1UCHrS5/6
+ u5qw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUpptcQX3Bb7Gwx+EkftXqT/M2KBxCG6/wCBfORTA14Vt2XZVfJ0F8Star1oYF3HiTwO5Z23Qs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz0p71kGDcy5QvBsM3hsACx6WR0MPCRwF7ApYoolSSk0SQ6r+oH
+ xHKEBGpsYcfUfxfT3SuNUU822dG1+V6eom8/6bmcGW4ntFaGTmhfU1+zeV3dMvt6dq4=
+X-Gm-Gg: ASbGncuKdecNGaRVzrtu9tP7WgzP/pF0PEv9uroWF6IYzzzzshNES/cIEhh7JDDrOw4
+ 7tsmtU5dYm9CIIEjB4i2VLfiXtoX/BvX9zVPyJtHWhYvnQ7urKWK4lKz7jMM/E1bmKKDWWXKCRg
+ E8mlTh3Cf4RZl3+ruqz8VLDBsMXCH/ARKKFex96Jq2UsU5YUQKbl2Lp7X6eKkLHUmPjS4aU9bWn
+ 4yaa1QEWFVm8Pmks6zDkUfPQG6IWwHmn8LfPkPR/9MRwPM+qfICeHsNg7YF+6LuY4Ww+dC0DlVI
+ UgmNQO/WsJvMZAaI7AU/EX0ePKMeIo3onlvMNLK8essISO0ugR1xDoPi3J0CFzj8/9/3APVitQC
+ LdYUQue7R+B++lw==
+X-Google-Smtp-Source: AGHT+IHumStWARKzwTLDqj3gsQQkKaFeOVDjsrI8sZ0pzfL6/B1IPNJbdgB3aKVC5ZDfDADStvqK9g==
+X-Received: by 2002:a05:600c:5292:b0:453:6146:1172 with SMTP id
+ 5b1f17b1804b1-454b4e6e64dmr18293705e9.3.1751626399055; 
+ Fri, 04 Jul 2025 03:53:19 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:2854:bc73:8076:c06f])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-454a997e367sm51506035e9.15.2025.07.04.03.53.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jul 2025 03:53:18 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Fri, 04 Jul 2025 11:53:18 +0100
+Subject: [PATCH] fs: erofs: Do NULL check before dereferencing pointer
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="7itcylrr+DniMOEO"
-Content-Disposition: inline
-In-Reply-To: <aGZW8cabMrd_76sw@swlinux02>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250704-erofs_fix-v1-1-956be16f32e9@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAJ2yZ2gC/x2N0QpAQBBFf0XzbGsJi1+RtNYs82BpRlLy75bH0
+ z2ne4MgEwq0yQ2MJwltIUKWJuAWG2ZUNEWGXOelNrpQyJuXwdOljHFTrRvTOF9B9EcrqEa2wS1
+ fsVo5kL9hZ4z+f9L1z/MC91MXfnQAAAA=
+To: Huang Jianan <jnhuang95@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: linux-erofs@lists.ozlabs.org, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,103 +102,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---7itcylrr+DniMOEO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The assignments to sect and off use the pointer from ctxt.cur_dev but
+that has not been NULL checked before this is done. So instead move the
+assignments after the NULL check.
 
-On Thu, Jul 03, 2025 at 06:09:53PM +0800, Leo Liang wrote:
-> On Mon, Jun 23, 2025 at 12:51:36PM +0100, Conor Dooley wrote:
-> > From: Conor Dooley <conor.dooley@microchip.com>
-> >=20
-> > The firmware on the Icicle is capable of providing a devicetree in a1 to
-> > U-Boot, but until now the devicetree has been packaged in a "payload" [=
-1]
-> > alongside U-Boot (or other bootloaders/RTOSes) and appended to the imag=
-e.
-> > The address of this appended devicetree is placed in a1 by the firmware.
-> > This meant that the mechanism used by OF_SEPARATE to locate the
-> > devicetree at the end of the image would pick up the one provided by the
-> > firmware when u-boot-nodtb.bin was in the payload and U-Boot's devicetr=
-ee
-> > when u-boot.bin was.
-> >=20
-> > The firmware is now going to be capable of providing a minimal devicetr=
-ee
-> > (quite cut down due to severe space constraints), but this devicetree is
-> > linked into the firmware that runs out of the L2 rather than at the end
-> > of the U-Boot image.
-> >=20
-> > Implement board_fdt_blob_setup() so that this devicetree can be
-> > optionally used, and the devicetree provided in the "payload" can be
-> > used without relying on "happening" to implement the same strategy as
-> > OF_SEPARATE expects in combination with u-boot-nodtb.bin.
-> > Unlike other RISC-V boards, the firmware provided devicetree is only
-> > used when OF_BOARD is set, so that the almost certainly more complete
-> > devicetree in U-Boot will be used unless explicitly requested otherwise.
-> >=20
-> > Implement board_fit_config_name_match(), so that, using the firmware
-> > provided cut-down/minimal dtb, U-Boot can select one of several
-> > devicetrees when MULTI_DTB_FIT is enabled.
-> >=20
-> > Enabling both MULTI_DTB_FIT and OF_BOARD will lead to a conflict
-> > between the two options, with the latter taking priority due to
-> > board_fdt_blob_setup() being executed before board_fit_config_name_matc=
-h(),
-> > which causes gd->fdt_blob to be overwritten with a pointer to the
-> > minimal devicetree rather than the location of the fit image containing
-> > the multiple dtbs. Let MULTI_DTB_FIT take priority in this case, by
-> > explicitly blocking the override when MULTI_DTB_FIT is enabled.
-> >=20
-> > Link: https://github.com/polarfire-soc/hart-software-services/blob/mast=
-er/tools/hss-payload-generator/README.md [1]
-> > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> > ---
-> >=20
-> > v2:
-> > - implement MULTI_DTB_FIT too
-> >=20
-> > v1 was a year ago here:
-> > https://lore.kernel.org/u-boot/20240625090806.1787287-2-conor.dooley@mi=
-crochip.com/
-> >=20
-> > There was some discussion on that thread, but ultimately I didn't find
-> > what was mentioned to be worth implementing. Heinrich suggested to me, I
-> > guess on IRC or something since it's not in that thread, implementing
-> > MULTI_DTB_FIT, which I have done. A lot of the reason for the patch when
-> > I wrote it was speculative, but we have some actual users for OF_BOARD
-> > now - hence the v2 after about a year's gap.
-> >=20
-> > CC: Ivan Griffin <ivan.griffin@microchip.com>
-> > CC: Cyril Jean <cyril.jean@microchip.com>
-> > CC: Tom Rini <trini@konsulko.com>
-> > CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > CC: Simon Glass <sjg@chromium.org>
-> > CC: Jamie.Gibbons@microchip.com
-> > CC: u-boot@lists.denx.de
-> > ---
-> >  board/microchip/mpfs_icicle/mpfs_icicle.c | 63 +++++++++++++++++++++++
-> >  1 file changed, 63 insertions(+)
->=20
-> Acked-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+This issue found by Smatch
 
-Hmm, I made a mistake in the MULTI_DTB_FIT portion of this, and the
-strtok() is causing problems (I forgot about the modification in place,
-and the testcases I had used didn't catch it). Have you sent this in a
-PR yet? If you have, I'll send a fix otherwise a v3.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ fs/erofs/fs.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-Cheers,
-Conor.
+diff --git a/fs/erofs/fs.c b/fs/erofs/fs.c
+index dcdc883e34c..db86928511e 100644
+--- a/fs/erofs/fs.c
++++ b/fs/erofs/fs.c
+@@ -11,12 +11,15 @@ static struct erofs_ctxt {
+ 
+ int erofs_dev_read(int device_id, void *buf, u64 offset, size_t len)
+ {
+-	lbaint_t sect = offset >> ctxt.cur_dev->log2blksz;
+-	int off = offset & (ctxt.cur_dev->blksz - 1);
++	lbaint_t sect;
++	int off;
+ 
+ 	if (!ctxt.cur_dev)
+ 		return -EIO;
+ 
++	sect = offset >> ctxt.cur_dev->log2blksz;
++	off = offset & (ctxt.cur_dev->blksz - 1);
++
+ 	if (fs_devread(ctxt.cur_dev, &ctxt.cur_part_info, sect,
+ 		       off, len, buf))
+ 		return 0;
 
---7itcylrr+DniMOEO
-Content-Type: application/pgp-signature; name="signature.asc"
+---
+base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
+change-id: 20250704-erofs_fix-77cd80979cf6
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaGevlQAKCRB4tDGHoIJi
-0mdJAPwL/Cw4okVKYysZ/hXcHkrdXY07MrAKjf40z//85eFCcgD/ZupsVU7BZMKV
-apnCAE+z1JUUwoYFpCoc8jD1l2038wo=
-=k7p6
------END PGP SIGNATURE-----
-
---7itcylrr+DniMOEO--
