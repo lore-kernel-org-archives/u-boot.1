@@ -4,88 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F0CC83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 20:51:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E97B6C83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 20:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 805DA82A76;
-	Fri,  4 Jul 2025 22:51:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55E8682A76;
+	Fri,  4 Jul 2025 22:59:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hsx/FY7q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MIS4kEcJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FCBC82AF6; Fri,  4 Jul 2025 22:51:22 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id 1E13F82063; Fri,  4 Jul 2025 22:59:12 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BE6582063
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 22:51:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0474482063
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 22:59:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-60f24b478e3so733850eaf.3
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 13:51:20 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-40d12821c1cso278343b6e.2
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 13:59:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751662279; x=1752267079; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751662749; x=1752267549; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8fm0N57B1sGhL4ZdL4Fo0uf98eWuSGpAQ1zozOQIw/o=;
- b=hsx/FY7qecLTEQLqFtKt5ZILbzHIGpcvL1559z3exI4tXtStAQfSORjPlCY1D3Yw3s
- ncuV1xpROgmW1o1k7ZLfuFcX2LN41nfGKMcV9uSK8DXAjfOYVXwWm/oOC9XVnY+Zlzrn
- bSEVYnOdsrRWjBRfFiicCQLbTIRg8lj9VaPcw=
+ bh=Q8iwLsy/yVz50HlOcNmEDxzZdz/gHWH1Po9NBn/lyHE=;
+ b=MIS4kEcJDaxJopAF5it8UNulA7jJ+LoRcLFoRtcSlBfjruNkh0ClZudmiA+aa5IWtD
+ 3DJxdIRrjRNlbAJwfxItlrxsH0wRli+AStMhJB3K0E3ol6ubj2NfdjQrybb07esrRsaC
+ 9xS5TU1wlVA/EoFy5Xk48ayqdApLZOFB1xtus=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751662279; x=1752267079;
+ d=1e100.net; s=20230601; t=1751662749; x=1752267549;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8fm0N57B1sGhL4ZdL4Fo0uf98eWuSGpAQ1zozOQIw/o=;
- b=TJuC9N6MvWhC/8EHnaZE7MSihIe5HyHQv9IKrBGJp3PLavgqLWdoygwXmFTO48nx+F
- E4oPYsQhSzvcaNCh39tQRG9PpTi0SteMm66+vlolU/6HlhH7Shl6v4SZpMIm8fK+J/bm
- mK1HiRZayJZfiqe6OVbUEQU0QzMAMz0857FDSe55BR4o9S/75lX7Xvig+msxqDkhaouK
- kaw+9hFwTLnA1aycBnZlfL1e6Nwh+vBhoRi3TQM9tRBCSKrXWW/VYV8fRn1CG8V5oOGl
- 98NNqWLr4quYDWJ0eC21Pcdz22XY7Hq2yF7ZNCvbf2k1masC2BBeA+zHFts3Cr5Oa66Y
- +PWA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpVow/CoY9TFFTqToNzEbN02uwrmAqVUQwblpBsmsnMp+n4Y14QyRlWjrmfxo9GFqdVj44s48=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywkhu6d+bTuaGNa/Pn3wr6+G3qth4H3FtpxsGSZz4Wq/OV2gJ9u
- aT5b9Vr4pg1fAKjv1xYfUpmmO6slO2pPAHVn03VUbS17mFm8g1cjS7i0BEhH8d7YRJAtjpZ67/0
- 3IIeX3n0=
-X-Gm-Gg: ASbGncs8DquqdWt8/PFVoRKyb9uxxWgsTpCEvhfI9mHa3g7OyUlV2pLfsjK4Emv7fwd
- sfJkLft7+eklodOpkn0mM7ArdjxzPTE9gXpeq3iBMtycAVYN7vDN9DHKEIXsn2uvMCxOyUUH8wT
- MjD3Fb0HBYM0ciuFxumd/8EmDpdd9scMVWv5OCIe4Y/nY8c+JzZBvgpUmQ8J2zh7sw25v95uYjx
- lC38Wd7oRYZYBZP8CS2xPJmzig2NIeur6aM9bMC+1zBJMN/Eq4/sEwolndGcvFNe4vSgvD26R7E
- nkAu4toirtXJk0M1sFwyxYfQiGu/SG04Z4hdKOsWOT3ZVShekGkAg06htpqltTwXwHs2ZcMTNa1
- 1yGk15mYgzrVMMRH/qyzh
-X-Google-Smtp-Source: AGHT+IHL/uoN3AyJp3ZJNXtySOc+tvhrXLbskhXNmUWL99UN4e0OAwpryRPy6JcUTVpKYRRr47YZDQ==
-X-Received: by 2002:a05:6820:6acf:b0:611:e00a:598d with SMTP id
- 006d021491bc7-61392c2c5a8mr2392399eaf.8.1751662279166; 
- Fri, 04 Jul 2025 13:51:19 -0700 (PDT)
+ bh=Q8iwLsy/yVz50HlOcNmEDxzZdz/gHWH1Po9NBn/lyHE=;
+ b=HdtTo2MLoFWUF6jdNoq7ofT2jY4uB9w2yfENmrb3xhPT/n2eaczu0+wKoOsOGQF4Y3
+ ekmOAp2BLyC87Eig9zQyakmjKOs3DXMCLo+2z1vaiVK3dbu0c+A2tYCvObHmxPndTHxu
+ El+w596GEW4YWBrnF7kSWMwZBQB4dQDAj4IRv0N0ObHoM/qty8VWTVyq6W1KwDdTIvoK
+ Gnv55d3hvWlVgrx/hTZhPWiebO0m/TBE0jWGiq6w85ga3hjeipKpGtMZAfEFIYI1G+wH
+ jLYrwraKQNQXlUZYUdReoykv76kpkGnmM5mleV4h9oLSeST58trvVb6qwzlIlQZXOyaU
+ BIAg==
+X-Gm-Message-State: AOJu0Yz+dc4Knn95q6LeE60M6tRR3UvBudsKoSlqRz8H7ZzM0TxqB+5E
+ rfZm2OcDcSfXktr4UGtBOsY0mDzCSMwb9YxeYFmE5NbYBkNoBEQbQ9VDemZ/dOAVkZc=
+X-Gm-Gg: ASbGncuRii6e+43nZlCbWjJopSCz8kitfzvS90cvkYvWt+emfU2U71XPCBsNYjnNHwd
+ y4vbYAAg1RcmtVF1jgfvij6OkrL/hFpajCGU6pqSBCKQn8m1oK2drVZPq3i3NTfMlCs5dKLIdL4
+ aTbmSstaVMg3tvOaljA6v18LjcbrQzqvd3V28jAFFrH4QSZsmXE8lfOecpAOQygTCJGWtib6ekA
+ G6qKbUzwGqNlFDhTtu7UnB9avByDwyTdRh+sI66dLWM11NVY6YhFs1Vlc47yKFuIRRRdk1K8V/m
+ evftj13aXbxoo4198PEEWMrfFdMZyPHH1TtHRu7ZRdp9Xic4Fv/t4gzCs7AAshcNXyyZxBcUkTG
+ d2cjVRSAuj4NpJ6HQbYPx
+X-Google-Smtp-Source: AGHT+IFPGrH06H//BmvhJEa7V1Hb5cLdqrRL4YCElD717vmXq9Cqp2bmvZ19S0lqym0PTI9Z0rUAMA==
+X-Received: by 2002:a05:6808:16a4:b0:40a:b141:8f57 with SMTP id
+ 5614622812f47-40d0408094fmr2711145b6e.3.1751662748663; 
+ Fri, 04 Jul 2025 13:59:08 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6138e5c3cf1sm429957eaf.39.2025.07.04.13.51.17
+ 5614622812f47-40d02a43f13sm427453b6e.11.2025.07.04.13.59.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 13:51:18 -0700 (PDT)
-Date: Fri, 4 Jul 2025 14:51:16 -0600
+ Fri, 04 Jul 2025 13:59:07 -0700 (PDT)
+Date: Fri, 4 Jul 2025 14:59:05 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Julius Lehmann <lehmanju@devpi.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Smatch reports for drivers/scsi/scsi.c
-Message-ID: <20250704205116.GK6424@bill-the-cat>
-References: <047489d8-c453-4eb2-8a10-ef736da556b9@linaro.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: PCI config read functions
+Message-ID: <20250704205905.GL6424@bill-the-cat>
+References: <3df65973-626b-4894-84bd-5a03a19032c2@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Bn1SdI5hmsx3g8DP"
+ protocol="application/pgp-signature"; boundary="pnv+QfLutJ5VqLgJ"
 Content-Disposition: inline
-In-Reply-To: <047489d8-c453-4eb2-8a10-ef736da556b9@linaro.org>
+In-Reply-To: <3df65973-626b-4894-84bd-5a03a19032c2@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,75 +96,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Bn1SdI5hmsx3g8DP
+--pnv+QfLutJ5VqLgJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 02, 2025 at 02:45:48PM +0100, Andrew Goodbody wrote:
-> Hi,
+On Fri, Jul 04, 2025 at 10:53:55AM +0100, Andrew Goodbody wrote:
+> Hi Tom,
 >=20
-> Smatch reports the following for drivers/scsi/scsi.c
+> Smatch reports that the callers of the functions
+> (dm_)pci_config_read(8|16|32) from drivers/pci/pci-uclass.c do not check =
+the
+> return value for an error before using the variable that should have been
+> assigned with the value read. However in the error path that variable is =
+not
+> assigned to and so the code can use an uninitialised variable in that cas=
+e.
+> eg line 1396 in drivers/pci/pci-uclass.c addr may not have been assigned =
+to
+> in the error case.
 >=20
-> drivers/scsi/scsi.c:165 scsi_setup_erase_ext() warn: right shifting more
-> than type allows 16 vs 24
-> drivers/scsi/scsi.c:166 scsi_setup_erase_ext() warn: right shifting more
-> than type allows 16 vs 16
+> This also seems to be the case with callers from other files as well.
 >=20
-> I just wanted some ideas on the best way to resolve this. There are
-> differing patterns even within this file about how the number of blocks
-> parameter should be handled in calls to static functions. In all cases the
-> value starts as a lbaint_t which can be a long or a 64 bit type.
->=20
-> 1) in scsi_read there are calls to scsi_setup_read_ext whose third parame=
-ter
-> is an unsigned short. The lbaint_t variable is assigned to an unsigned sh=
-ort
-> (smallblks), which will simply truncate the value, before smallblks is
-> passed as the 3rd parameter to scsi_setup_read_ext.
-> In scsi_setup_read_ext the third parameter (blocks) is split into 2 bytes=
-=2E A
-> third byte is set to 0 and I am guessing that if appropriate this could h=
-ave
-> taken a higher order byte if that had made sense.
->=20
-> 2) scsi_write is similar to scsi_read
->=20
-> 3) scsi_erase calls scsi_setup_erase_ext with lbaint_t as the third
-> parameter. scsi_setup_erase_ext takes unsigned short so there is an impli=
-cit
-> truncation here. Here is where Smatch complains as this unsigned short is
-> shifted 16 or 24 bits to the right, both of which exceed the size of this
-> type.
->=20
-> So possible fixes are to make all three functions consistent and take an
-> lbaint_t as the third parameter. Or to make scsi_setup_erase_ext like the
-> other two and just hard code those bytes with excessive shifts to be 0. C=
-an
-> probably remove the use of the smallblks variable at the same time.
+> Would a patch that adds a default assignment before returning an error to
+> the affected functions be accepted?
 
-I suspect the best functional answer would be to use lbaint_t all around
-and cleanup/make sure we're good when SYS_64BIT_LBA is enabled.
+Can you please check the size growth on say qemu_arm* and we can go from
+there? Thanks.
 
 --=20
 Tom
 
---Bn1SdI5hmsx3g8DP
+--pnv+QfLutJ5VqLgJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhoPsAACgkQFHw5/5Y0
-tyytZwv+O2EEIqly5ilbDoindW1BOhllpbxyql1AEIRCWdqndiU/gVofCc7TWPgI
-7YzLOq6KYqPMfF7hd0HqF7lVlG2C1neyJjSKri3KOMj9ferLPdEnFbz2zsqb8n3r
-toFJe1Ni9gttYC8S5lqd15vkUwD8DKqmFqVJ9AOIQPgNKJtvacko1mWNNmI0U0as
-R1mhVI3nz2xQV1jtl9vGJshc7Mxkagp1q8QIQ+9XbdOM9JkV2YaQ57BS05P+f+Gf
-D367J+nXUDlcuhUqe3Q737/f5qxxpoC8Z2cAJ8t1gFaqf6HI8m+zN7Y5zvlGFndf
-RVMlGMgd3xH0utUKI97ANYlgXrXxDB2SoCy2SwgOgBfy4Q7u7OjO6d1xtGxqwsW0
-guxJ1bu6S7X2FPN6l34mcaQUQZHQ6V6BF8/7XVGZmjG4zS5LsaxyCo4Hzy3qi2Wz
-cI/9ReQpGy8kWLgHc4SeMLU3Bl1Szukw3bDOGR6K0JQtvMlTOfeudKDnSIyM1QO9
-+4LbD+RX
-=fxvJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhoQJkACgkQFHw5/5Y0
+tyx2Twv+KlMV/qZja6CUGfdOMBySrk7FIP3agta8WlfgeaLxzcOH9r6NCnj/3aOT
+cN9mkKTTivBzdO3JZ1/+T51EkiPbrtxMop1rdNip3c1g95en11Q8M8qwPj9PsmUR
+E1UZiUKlSxWzMP3WWXchJaCOWJ9VYi8AXq1U4MV0eP+n4rPE/x4YsCUl5T0ctKeX
+lIEHn01sxlSBc+1MoUQaepyUcfiSLp/Mg2NedIE4OSjRD/5azBaZKqffjZrN+vD6
+cZ74/JRTfRlVP1XSIZ1qfl4/PRArWVaMoxlNeJqnKtstfvHGv++6v+Byhk2Y2XHT
+OMpIPUDK1lrSTG0tpbdAj0IzHJ07g1soFVXtqiSJRXxCTmCNKy4zGrfsEDR/KriS
+BcbM3zKnsMQ5p/3X117rVwPt7vRQXB8CEIkK4Jsqcm5ghQBKOVHqfEpTqrr35bQJ
+jjnRwUG8F/mcawlgetUDJw+Cr3KoGGLsrGSKP9o3afAtvj5dhMqolEmXp29yFuTs
+d9u3y2nb
+=N2rj
 -----END PGP SIGNATURE-----
 
---Bn1SdI5hmsx3g8DP--
+--pnv+QfLutJ5VqLgJ--
