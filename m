@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CFE8C83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 16:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CB5C8303D
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 16:56:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D86578277D;
-	Fri,  4 Jul 2025 18:54:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4BEEF8277D;
+	Fri,  4 Jul 2025 18:56:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z1OMUCMm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NSUuiROG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1803B82A76; Fri,  4 Jul 2025 18:54:53 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 1F18382A76; Fri,  4 Jul 2025 18:56:55 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C349803DF
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 18:54:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01BE0803DF
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 18:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-32ac42bb4e4so10028361fa.0
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 09:54:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2ef60dbaefbso943062fac.1
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 09:56:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751648090; x=1752252890; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1751648212; x=1752253012; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cuD3NtXpi6Bx2Z6rKi5t7tHr+a7ddMPzV6q81lRjovA=;
- b=Z1OMUCMmoiSSAuYnQIsLgFS76+Yj3PwWaTQuitXMVprikZPsCbqkh+twv3rSLRbZKI
- oNEzL4sJJbd0jJeWVDMmLydZzLhSVmPF7uTl4+3AmZsWGDVYH4X9ZIb4liyKBPaac3Cf
- s9Ol1xeZ+gCsFPsILRtR9NoQ+44HBQ4MmsbT30+QRHbi7qy6VC7yZElvJcfuKtxoHNk9
- AEp47A2zv7LYnCLfran4sXxZ+gBRqowAur0aUCzhutSIOIy6F+iCqwQNnY9QjP/XgPxE
- 1oB3XAQ2juRy9d8FuIltyyXKtSAQR0RL9R+R+XikBlyBd3vsYKKrBCvqWOCXqAghMZq2
- TjDA==
+ bh=4bb8eBrasiLSzJlty+ZdUA6mieZy8huTiLtjBApLk4c=;
+ b=NSUuiROGJF3fm0po1Q+7wB22YQwMCgj47nGPeh+0Tn+ybfU7QZfFunSSuKzWtpK5c8
+ MclTb5m7d+6mk7IPRmQD7zcqwkt6+dKf9LZ4C1IVFh8uu6stYTaNsycaRxA02QT675A0
+ WXa7J2tjbnTlcxKfurqz/EA0ilXGKkWPCEUk0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751648090; x=1752252890;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1751648212; x=1752253012;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cuD3NtXpi6Bx2Z6rKi5t7tHr+a7ddMPzV6q81lRjovA=;
- b=gZBO6fheuWIbwnta9Qf6MoNPM0KawggQwKFPG5iLZf5PeJLVmtQp/qgsTIww6CJCoJ
- L4YPHh+Wnjo5nmMP1Uyen041fZy4L++YfkLC2dfx2E0uWhOBepfLrL75Tug49I+zLt2J
- 12RC9YwTSZQ5IfGYDfOp17sOue2Db7VXnxaHXdfIlSJo/VjvXEadbZQGhvWq4OmCtPar
- Z9z4WlWmiWKxicIYTlOZIYGkeKgVNxLnqU1jffBBQGv78MYinyjuigej2sDIq850OjmE
- HWra1ll+eVPK15ZPEAfcXhCVt8c2oR2OOoXfm7WVCxuaJi3B7W6LuwMQsA9LTBIJPom2
- XPuQ==
-X-Gm-Message-State: AOJu0YzFfS9ykO1wMqR+YZSiq5akfpRICWCFCOhR6KGt3TRJyQZXiviH
- 1A+GhPG799YkARJczR3TwF6vytjC8G812bbduJHogVB37sTHzkkrq+hb5ioBDZ8b0jZp96VNkT7
- +EhJw56zSfaq/yADwq9qj7nQhn2JUxcg=
-X-Gm-Gg: ASbGncu6HawSo0R1RgB4K5K6SqAHj3oSiXGF7gaRHAYRYLAMdCZQylyz6kGDAewx+9x
- UoZObmcmjHsp5UaVzduE8XXWSkUqlldCn6uJ/GUZjdPOjHJHYng+MeLQbIHYEp/ZCvN5ptysAns
- mjVPc/FaoXdWyaIsDkcTrBEJdtVY4vlXUH7dTFzP3gQsKB3CAFa7oq7v2FCPE45LSLkL6pOR/uv
- w==
-X-Google-Smtp-Source: AGHT+IG83tk+2BUkat5V5idZN+SM8HQ+okibTvijirLUVFxUYGbxtPEXgFTn5hraik/eFqpbUERWTM0XSz3uMzrpj70=
-X-Received: by 2002:a2e:a582:0:b0:32b:488a:f519 with SMTP id
- 38308e7fff4ca-32f00c889efmr9850581fa.6.1751648090115; Fri, 04 Jul 2025
- 09:54:50 -0700 (PDT)
-MIME-Version: 1.0
+ bh=4bb8eBrasiLSzJlty+ZdUA6mieZy8huTiLtjBApLk4c=;
+ b=PGRpaDyrpsmlx9vNyeb1YmN/yg8BHAP4P5HnaJbqiu1pyGE6kb/Vf9UONXtk8L47Qo
+ CMtqIzs2puvRT7owIMlOZxMz3sMdH35+qbhLhNLIDkDc+Acd/10ypoJ9HWSPWl5Ktxch
+ STAwzPDw0zPU1tpgzYrCdA0LVCoY3azn9nrukwOIzX6QLaN3uT1Sj81XzGURXGjxL8hm
+ IWRfvsojLQxHnwtXpgXsw1uq5QXXxr1+WyBW35MO4FlDb5z2KZ81OHWW1eWx0eRI/soq
+ artcYhSn9gW4tUso1IozkXwjSkmB0ebIrZ1PXLYGg0IPVbPEQpN6QuQ8s+f/YOrG2NrB
+ rezA==
+X-Gm-Message-State: AOJu0YxaCBUD/LoH7uHHl/0EjlvzMf4ElyRTf9xN5z1PWquenGFJX80n
+ eD1PPYXAQ/9K/uGVbkrYf2COwlucd45ztV6MInnAsj8ZYnrFbmplhC4aAxX4jklGfOs=
+X-Gm-Gg: ASbGncuKADCbbGDfvydf0h61FnCQRvOkZVRfLbZJgoaa3SpbxqQF27t9M6EJfssV/e4
+ cQP17KiZNR3dDfIvU47sqko/nb3M6VKij7cNpeQ8VjXZFDd32eyqigr6lsVabePYef6O2NF+EdE
+ L11L4YvMpwVxFbijmI/4ErvxcrMCgYZqVEEDsGKwEsj/hF8+L5DHtg4dTE0ok0/xAZvLqjk7NhK
+ //+nYsd/4EEy4pFnmEKK5aDex22C5JDReqzxwpNTH34iWxJxwRHPRWfiDart3aACRetemaK0zxd
+ ivS2og3OwqtZ3Qj4kdGyNNd2kBLeYXOWd6M8CGrw3MU4g4GJG5tOlYxyKMpVINY4X1lFtOv4PPP
+ B86fJ6SOGbFSISBztpRYjP/uPkdA+Yw==
+X-Google-Smtp-Source: AGHT+IEEf9OoeP9+U/g9BPVbmw6BGNO/ceZ18evJZX5cI2ZKOARtZXHmZjSS0EE6zfgsIyeSFxRlNw==
+X-Received: by 2002:a05:6871:79a5:b0:2d4:e101:13dd with SMTP id
+ 586e51a60fabf-2f791cebf01mr2787601fac.1.1751648211738; 
+ Fri, 04 Jul 2025 09:56:51 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2f78fefc2a9sm595792fac.4.2025.07.04.09.56.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jul 2025 09:56:51 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, jerome.forissier@linaro.org, 
+ otavio@ossystems.com.br, michael@amarulasolutions.com, uboot-imx@nxp.com
+In-Reply-To: <20250704144022.3946416-1-festevam@gmail.com>
 References: <20250704144022.3946416-1-festevam@gmail.com>
- <20250704155611.GH6424@bill-the-cat>
- <CAOMZO5Ck=ufscXJ8KFyy+Ee-fPJNtHFKTFMCGdQ8t0uWVbFfHg@mail.gmail.com>
- <20250704164655.GI6424@bill-the-cat>
-In-Reply-To: <20250704164655.GI6424@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 4 Jul 2025 13:54:37 -0300
-X-Gm-Features: Ac12FXxZT26YsAuhIHriZ1cug-L5ns2Kjo50XYJ9uUD31mIceK5z-HHy3FdHeIE
-Message-ID: <CAOMZO5BiL7uDjGr767q=DKZGjvP9xpszZYssHDHKEA1QKAYMTA@mail.gmail.com>
 Subject: Re: [PATCH v2] mx6sabresd: Reduce U-Boot proper size to fix boot
  regression
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, jerome.forissier@linaro.org, otavio@ossystems.com.br,
- michael@amarulasolutions.com, uboot-imx@nxp.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Message-Id: <175164821078.3259979.7672907617517362999.b4-ty@konsulko.com>
+Date: Fri, 04 Jul 2025 10:56:50 -0600
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,17 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 4, 2025 at 1:46=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+On Fri, 04 Jul 2025 11:40:22 -0300, Fabio Estevam wrote:
 
-> I think Jerome has the wrong idea here. The previous problem was on
-> armv5 CPUs, armv7 CPUs are thumb2 and aren't tripping this problem. I
-> suspect that if you used gcc-14.2.0 from kernel.org to build, current
-> top of tree mainline would work. I think we should still take this patch
-> as it's both correct and saves much more space so that we aren't quite
-> so close and so dependent on gcc optimizations.
+> The mx6sabresd U-Boot proper binary size has grown beyond the
+> CONFIG_BOARD_SIZE_LIMIT.
+> 
+> Reduce its size by removing the CONFIG_MULTI_DTB_FIT, BOOTM_PLAN9 and
+> BOOTM_RTEMS options.
+> 
+> According to doc/README.multi-dtb-fit:
+> 
+> [...]
 
-Okay, I agree.
+Applied to u-boot/master, thanks!
 
-Please apply this v2 to master to restore the mx6sabresd boot.
+[1/1] mx6sabresd: Reduce U-Boot proper size to fix boot regression
+      commit: d1d53c252a4a746db5ebcdf0d6de3aa0feec504e
+-- 
+Tom
 
-Thanks
+
