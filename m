@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D422C83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 21:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36166C8303D
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 21:46:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 422198206E;
-	Fri,  4 Jul 2025 23:45:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A06782CFA;
+	Fri,  4 Jul 2025 23:45:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oxBBD4yO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZtyjLKXI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 211F382F00; Fri,  4 Jul 2025 23:45:49 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 934C582F30; Fri,  4 Jul 2025 23:45:50 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D989282063
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 23:45:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 457C882A76
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 23:45:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-611e20dd2ffso412441eaf.2
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 14:45:46 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-2eacb421554so455415fac.1
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 14:45:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751665545; x=1752270345; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=08NS9+g6Luc9uijoJj86oscsoKN17OAHf+GAe6mYX1A=;
- b=oxBBD4yOuaoNHqv2J+xN4hq6FaBULjXyRZ+yq/jwveoOxlIG3lt5oiLE/wdNVbvtz/
- 90CulHF5KpYw5O5RyS3kRipcfhDxOIQFo36axktz3VuUHDGfJ/HOplWCLAPIPtcpeFB7
- Zbsr7242bWbJtN+FAVD6oRlQAM2ZZ/3V5DZ+U=
+ d=konsulko.com; s=google; t=1751665547; x=1752270347; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CaPAqg8cBE7RrpYJpw848yxL5SboeJPjltSjVUpMf20=;
+ b=ZtyjLKXIBdV/OwrHtWyTYKei8gwa0r0zz3cloGP29FHScy8xFLDGxXYHmvva6ChBur
+ ZxSDF+HpHp/+jxWU8vR7Rli4Cr1ULy5T+8qSV3T8FB8OYypUKHgGWj+XmCy843u5ilB7
+ SB00119puwc85w5DOnU+Ah7S6kTRPJjaJAxfI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751665545; x=1752270345;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=08NS9+g6Luc9uijoJj86oscsoKN17OAHf+GAe6mYX1A=;
- b=dFZF5uZaR5jASsfE/Kat/z5ko420kZnCpcSthCQyUuh76CiOEiDhXnaM7gtco2jyN4
- T1xFLOPFoghHutiAgosCcY/7BwdyC/M6TzkabmUQpp4km1pa7wzfQXBnzf6sO40l2d8t
- QR+I3LKEAZPAqMrgk3Y9ck5+txeEJzU8PgLs3btsPfZViB2w3AKSjFk0AXf21wVrciDU
- S8VgDlWJran1mnV/pLqAmoG+LK/yM3PjIwm1Sk23lC4o82eJQdpD5jei8rL6mugwGjH/
- i4OTPNH0wUd8TAoDPZdytAnUWOORcGw0u1/TrMaWOHdqNuOwTcF6aV4EJTB6nklGLPhi
- oHcg==
-X-Gm-Message-State: AOJu0YzmOcgd6/p6MmnvnLrInCbbq/VvB78xUtKt6Ndlc0JTwAkIpEOv
- Nmx64Fn2mlK68tStLI6hbc7YaAkQlItpTRHyFlKnwsOZ1/56A/qL5F9cTx8vHzt8MT1Bru7PrG4
- O0A4orsk=
-X-Gm-Gg: ASbGncvoQEzDGCEkPtsFyVJSYsrLy4CRWSVcaprDzhZ2M1uPzYkPBcj2bBWrWS+ibJa
- +jGvzTwy6BwlwYjWkocxZ+yxp65F2IgJrTWCy9ih4S+eGedzA055QPnrui+cpeSHntTsIRgzr40
- UYXvF7vfvo5AmzsneCNH6uKgBxlYLcxiELs2VU+Y5pWpe3ah49x+Q8R1E5AM9lpJMim0J5vbycs
- u3KrhKFTaV/RQ/jLYC3z+7iaB7jxuKgtHEuAEEP40XzEoB1dBjvmSDqzGAKuYXyGCAxSMXFIzbs
- /6Idl7ZHXAGT+t4J+swgrae3mK6TD1GZAUBvDLZkMky4d+Pv5FDKrzqBbEcU8NIhXM6ayDXbo8i
- Pd5bu9kI3FQdKlv9pINCdYOw=
-X-Google-Smtp-Source: AGHT+IFlOdWT6PY0nnbdcHqVG6pnpx3jfnVeLh08lu0aUtVefuZNT7C5UWjHgTBv6+YkO0cqYXVcxg==
-X-Received: by 2002:a05:6830:8206:b0:727:3664:ca3a with SMTP id
- 46e09a7af769-73ca1015d35mr2567357a34.0.1751665545457; 
- Fri, 04 Jul 2025 14:45:45 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751665547; x=1752270347;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CaPAqg8cBE7RrpYJpw848yxL5SboeJPjltSjVUpMf20=;
+ b=PFUlwZDsEvdNN4MSOUJLP6etJdtJNNMM0IXZ9n7Q4r54tZwBR4OuNr45QsP7aEF+D9
+ hkItP8krRyruvd2XXWqaNopyGqBuBojA17sn4sIYJndXqZB6Jzjz5NJ5JmW6EAtfMYnu
+ 0sNX0AdVmZzNw8VNVFAJnvroi/q+jpsj0IUUrR1WZqTB3+U3ZxrmtzLfR72bqmMo3CbL
+ QO3ZzKjCZgLPaC75ijJFYZA215UKzflCYzIAYDiiq3FkiuMtvBnJg4c1CT7KjQlJe5bF
+ 4movZkooYA7Cpp0dL/xoWzfzMO1BP1XYeIs98N17XCq+vsPQhQw3NPx32oEw0iBQfTrm
+ g3og==
+X-Gm-Message-State: AOJu0YzhZFvJO7Gpq3G7QuOJx/FjKnt7O49/aUuU7aw47ZacsMNRxf0Y
+ 6QUcp/iMiY3ww8Cn4Arvb5J2yHnCJMmzPBPMq4VmqtoMEBjxmgqEKBKvJer7Pk7OGuQ0n1BYac0
+ ezguvHwk=
+X-Gm-Gg: ASbGncuYk3vi4PnZP7MPxtbxilHtUCsGq8NGnIj0RNZmA9oRoMKqs8kHZPi7dR+VnRA
+ VUqqiO23erKglszFdutY8MN6yGs3dUNXvUgZ2dHyB9g+JEFZ5x+2hjrupig1as3o6AryCbjSQGD
+ EydNGVbKXMWWEONGQy/zczrqMgeQ/ZIoiLGmLFLdMf4iV1svydbntS3gAdjX1gcdLF/vp3hMf16
+ hJyRARKTpTzfp6ekByGro7Bh1ZedkBR89EnJZR9wnsRgv7Hn0mvXA94PnLZxq39kmDO/d10GJBf
+ Rxpq7lhmbqmNFTjkhXfruwHAJkVVxGge9T6leMYVav41Q2cNcg/iA3CJb7JrPxD/60zf3F00rgk
+ fZnvP3tf0CM+U5NhsEQFUKH0=
+X-Google-Smtp-Source: AGHT+IGA/0yTQQCBBkCwDtNUinmM85d4WNbdfPCkkifXGhlQt0WfLMe1HZgL7cwqzYvaJuEmy6uj/g==
+X-Received: by 2002:a05:6808:3090:b0:401:16e:918e with SMTP id
+ 5614622812f47-40d04198f44mr3512625b6e.8.1751665546771; 
+ Fri, 04 Jul 2025 14:45:46 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f9628d8sm519370a34.60.2025.07.04.14.45.43
+ 46e09a7af769-73c9f9628d8sm519370a34.60.2025.07.04.14.45.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 14:45:44 -0700 (PDT)
+ Fri, 04 Jul 2025 14:45:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: [PATCH 1/2] toradex: Switch from ARCH_MISC_INIT to MISC_INIT_R in
- some cases
-Date: Fri,  4 Jul 2025 15:45:41 -0600
-Message-ID: <20250704214542.3418805-1-trini@konsulko.com>
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: [PATCH 2/2] global: Make ARCH_MISC_INIT a selected symbol
+Date: Fri,  4 Jul 2025 15:45:42 -0600
+Message-ID: <20250704214542.3418805-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250704214542.3418805-1-trini@konsulko.com>
+References: <20250704214542.3418805-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,128 +96,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The hook arch_misc_init was not intended to be used for per-board hooks.
-This can be done with misc_init_r instead, which is what follows
-immediately after arch_misc_init. Switch a few platforms.
+This symbol is not something that the user should be enabling or
+disabling but rather the developer for a particular board should select
+it when required.
+
+This is mostly size neutral, however a few places do have changes. In
+the case of i.MX6ULL systems, it is always the case that
+arch_misc_init() could call setup_serial_number() and do useful work,
+but was not enabled widely, but now is. In the case of i.MX23/28
+systems, we should be able to call mx28_fixup_vt() again here, so do so.
+Finally, some platforms were calling arch_misc_init() and then not doing
+anything and this results in removing the option.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Stefano Babic <sbabic@nabladev.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 ---
- board/toradex/apalis-tk1/apalis-tk1.c   | 2 +-
- board/toradex/apalis_t30/apalis_t30.c   | 2 +-
- board/toradex/colibri_t20/colibri_t20.c | 2 +-
- board/toradex/colibri_t30/colibri_t30.c | 2 +-
- configs/apalis-tk1_defconfig            | 2 +-
- configs/apalis_t30_defconfig            | 2 +-
- configs/colibri_t20_defconfig           | 2 +-
- configs/colibri_t30_defconfig           | 2 +-
- 8 files changed, 8 insertions(+), 8 deletions(-)
+ arch/arm/Kconfig                          | 7 ++++---
+ arch/arm/cpu/armv7/ls102xa/Kconfig        | 1 +
+ arch/arm/cpu/armv8/fsl-layerscape/Kconfig | 1 +
+ arch/arm/mach-imx/imx9/Kconfig            | 2 ++
+ arch/arm/mach-imx/mx6/Kconfig             | 1 +
+ arch/arm/mach-omap2/am33xx/Kconfig        | 6 ++++++
+ arch/mips/mach-octeon/Kconfig             | 1 +
+ board/toradex/verdin-imx8mm/spl.c         | 2 ++
+ common/Kconfig                            | 3 ++-
+ 9 files changed, 20 insertions(+), 4 deletions(-)
 
-diff --git a/board/toradex/apalis-tk1/apalis-tk1.c b/board/toradex/apalis-tk1/apalis-tk1.c
-index 4557ed1f1f2f..168840764a1d 100644
---- a/board/toradex/apalis-tk1/apalis-tk1.c
-+++ b/board/toradex/apalis-tk1/apalis-tk1.c
-@@ -36,7 +36,7 @@
- #define VCC_USBO1	TEGRA_GPIO(T, 5)
- #define VCC_USBO1_V1_0	TEGRA_GPIO(N, 4)
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index be0819a9c9d6..a10d1bb32b63 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -905,6 +905,7 @@ config ARCH_IMX8
  
--int arch_misc_init(void)
-+int misc_init_r(void)
- {
- 	if (readl(NV_PA_BASE_SRAM + NVBOOTINFOTABLE_BOOTTYPE) ==
- 	    NVBOOTTYPE_RECOVERY) {
-diff --git a/board/toradex/apalis_t30/apalis_t30.c b/board/toradex/apalis_t30/apalis_t30.c
-index 02e8f8eb1fed..2c785da41eaa 100644
---- a/board/toradex/apalis_t30/apalis_t30.c
-+++ b/board/toradex/apalis_t30/apalis_t30.c
-@@ -35,7 +35,7 @@ DECLARE_GLOBAL_DATA_PTR;
- static int pci_reset_status;
- #endif /* CONFIG_APALIS_T30_PCIE_EVALBOARD_INIT */
+ config ARCH_IMX8M
+ 	bool "NXP i.MX8M platform"
++	select ARCH_MISC_INIT if FSL_CAAM
+ 	select ARM64
+ 	select GPIO_EXTRA_HEADER
+ 	select MACH_IMX
+@@ -954,6 +955,7 @@ config ARCH_IMXRT
  
--int arch_misc_init(void)
-+int misc_init_r(void)
- {
- 	if (readl(NV_PA_BASE_SRAM + NVBOOTINFOTABLE_BOOTTYPE) ==
- 	    NVBOOTTYPE_RECOVERY)
-diff --git a/board/toradex/colibri_t20/colibri_t20.c b/board/toradex/colibri_t20/colibri_t20.c
-index d432fd2b843d..05c3377a60bc 100644
---- a/board/toradex/colibri_t20/colibri_t20.c
-+++ b/board/toradex/colibri_t20/colibri_t20.c
-@@ -29,7 +29,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define PMU_SUPPLYENE_SYSINEN	(1<<5)
- #define PMU_SUPPLYENE_EXITSLREQ	(1<<1)
+ config ARCH_MX23
+ 	bool "NXP i.MX23 family"
++	select ARCH_MISC_INIT
+ 	select CPU_ARM926EJS
+ 	select GPIO_EXTRA_HEADER
+ 	select MACH_IMX
+@@ -961,6 +963,7 @@ config ARCH_MX23
  
--int arch_misc_init(void)
-+int misc_init_r(void)
- {
- 	/* Disable PMIC sleep mode on low supply voltage */
- 	struct udevice *dev;
-diff --git a/board/toradex/colibri_t30/colibri_t30.c b/board/toradex/colibri_t30/colibri_t30.c
-index 342673ac506c..1b091ea1694e 100644
---- a/board/toradex/colibri_t30/colibri_t30.c
-+++ b/board/toradex/colibri_t30/colibri_t30.c
-@@ -18,7 +18,7 @@
- #include "pinmux-config-colibri_t30.h"
- #include "../common/tdx-common.h"
+ config ARCH_MX28
+ 	bool "NXP i.MX28 family"
++	select ARCH_MISC_INIT
+ 	select CPU_ARM926EJS
+ 	select GPIO_EXTRA_HEADER
+ 	select MACH_IMX
+@@ -1102,6 +1105,7 @@ config ARCH_QEMU
  
--int arch_misc_init(void)
-+int misc_init_r(void)
+ config ARCH_RENESAS
+ 	bool "Renesas ARM SoCs"
++	select ARCH_MISC_INIT if DISPLAY_CPUINFO && !(RZA1 || RZN1)
+ 	select DM
+ 	select DM_SERIAL
+ 	select GPIO_EXTRA_HEADER
+@@ -1111,7 +1115,6 @@ config ARCH_RENESAS
+ 	imply FAT_WRITE
+ 	imply OF_UPSTREAM
+ 	imply SYS_THUMB_BUILD
+-	imply ARCH_MISC_INIT if DISPLAY_CPUINFO
+ 
+ config ARCH_SNAPDRAGON
+ 	bool "Qualcomm Snapdragon SoCs"
+@@ -1540,7 +1543,6 @@ config TARGET_LX2160AQDS
+ config TARGET_LX2162AQDS
+ 	bool "Support lx2162aqds"
+ 	select ARCH_LX2162A
+-	select ARCH_MISC_INIT
+ 	select ARM64
+ 	select ARMV8_MULTIENTRY
+ 	select ARCH_SUPPORT_TFABOOT
+@@ -1953,7 +1955,6 @@ config TARGET_SL28
+ config TARGET_TEN64
+ 	bool "Support ten64"
+ 	select ARCH_LS1088A
+-	select ARCH_MISC_INIT
+ 	select ARM64
+ 	select ARMV8_MULTIENTRY
+ 	select ARCH_SUPPORT_TFABOOT
+diff --git a/arch/arm/cpu/armv7/ls102xa/Kconfig b/arch/arm/cpu/armv7/ls102xa/Kconfig
+index 46ace7e5fd68..5c8839583aa6 100644
+--- a/arch/arm/cpu/armv7/ls102xa/Kconfig
++++ b/arch/arm/cpu/armv7/ls102xa/Kconfig
+@@ -1,5 +1,6 @@
+ config ARCH_LS1021A
+ 	bool
++	select ARCH_MISC_INIT if FSL_CAAM
+ 	select FSL_DEVICE_DISABLE
+ 	select FSL_IFC if !QSPI_BOOT && !SD_BOOT_QSPI
+ 	select LS102XA_STREAM_ID
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/Kconfig b/arch/arm/cpu/armv8/fsl-layerscape/Kconfig
+index 080fe3fc327d..787c7a7c1da6 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/Kconfig
++++ b/arch/arm/cpu/armv8/fsl-layerscape/Kconfig
+@@ -328,6 +328,7 @@ config ARCH_LX2160A
+ 
+ config FSL_LSCH2
+ 	bool
++	select ARCH_MISC_INIT if FSL_CAAM
+ 	select SKIP_LOWLEVEL_INIT
+ 	select SYS_FSL_CCSR_GUR_BE
+ 	select SYS_FSL_CCSR_SCFG_BE
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index 280d255c0864..6af45938edb3 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -22,10 +22,12 @@ config IMX93
+ config IMX91
+ 	bool
+ 	select IMX9
++	select ARCH_MISC_INIT
+ 	select ARMV8_SPL_EXCEPTION_VECTORS
+ 
+ config IMX95
+ 	bool
++	select ARCH_MISC_INIT
+ 	select ARMV8_SPL_EXCEPTION_VECTORS
+ 	select IMX9
+ 	select DM_MAILBOX
+diff --git a/arch/arm/mach-imx/mx6/Kconfig b/arch/arm/mach-imx/mx6/Kconfig
+index 2f873ed6ddf1..3f5e91da204f 100644
+--- a/arch/arm/mach-imx/mx6/Kconfig
++++ b/arch/arm/mach-imx/mx6/Kconfig
+@@ -63,6 +63,7 @@ config MX6UL
+ 
+ config MX6ULL
+ 	bool "i.MX 6ULL SoC support"
++	select ARCH_MISC_INIT
+ 	select ROM_UNIFIED_SECTIONS
+ 	select SYSCOUNTER_TIMER
+ 	select SYS_L2CACHE_OFF
+diff --git a/arch/arm/mach-omap2/am33xx/Kconfig b/arch/arm/mach-omap2/am33xx/Kconfig
+index 46abf070f9d5..dff4f1cf202f 100644
+--- a/arch/arm/mach-omap2/am33xx/Kconfig
++++ b/arch/arm/mach-omap2/am33xx/Kconfig
+@@ -9,6 +9,7 @@ choice
+ 
+ config TARGET_AM335X_EVM
+ 	bool "Support am335x_evm"
++	select ARCH_MISC_INIT
+ 	select BOARD_LATE_INIT
+ 	select DM
+ 	select DM_GPIO
+@@ -70,6 +71,7 @@ config TARGET_AM335X_SHC
+ 
+ config TARGET_AM335X_GUARDIAN
+ 	bool "Support am335x based guardian board from bosch"
++	select ARCH_MISC_INIT
+ 	select BOARD_LATE_INIT
+ 	select DM
+ 	select DM_SERIAL
+@@ -116,6 +118,7 @@ config TARGET_ETAMIN
+ 
+ config TARGET_PCM051
+ 	bool "Support pcm051"
++	select ARCH_MISC_INIT
+ 	select DM
+ 	select DM_GPIO
+ 	select DM_SERIAL
+@@ -123,6 +126,7 @@ config TARGET_PCM051
+ 
+ config TARGET_PHYCORE_AM335X_R2
+ 	bool "Support phyCORE AM335X R2"
++	select ARCH_MISC_INIT
+ 	select DM
+ 	select DM_GPIO
+ 	select DM_SERIAL
+@@ -130,6 +134,7 @@ config TARGET_PHYCORE_AM335X_R2
+ 
+ config TARGET_PXM2
+ 	bool "Support pxm2"
++	select ARCH_MISC_INIT
+ 	select BOARD_LATE_INIT
+ 	select DM
+ 	select DM_GPIO
+@@ -148,6 +153,7 @@ config TARGET_RASTABAN
+ 
+ config TARGET_RUT
+ 	bool "Support rut"
++	select ARCH_MISC_INIT
+ 	select BOARD_LATE_INIT
+ 	select DM
+ 	select DM_GPIO
+diff --git a/arch/mips/mach-octeon/Kconfig b/arch/mips/mach-octeon/Kconfig
+index 5d2186bba551..6105cdcf96ea 100644
+--- a/arch/mips/mach-octeon/Kconfig
++++ b/arch/mips/mach-octeon/Kconfig
+@@ -42,6 +42,7 @@ config TARGET_OCTEON_EBB7304
+ 
+ config TARGET_OCTEON_NIC23
+ 	bool "Marvell Octeon NIC23"
++	select ARCH_MISC_INIT
+ 	select OCTEON_CN73XX
+ 	help
+ 	 Choose this for the Octeon NIC23 board
+diff --git a/board/toradex/verdin-imx8mm/spl.c b/board/toradex/verdin-imx8mm/spl.c
+index 1020078afea2..3c2d0ba1dd46 100644
+--- a/board/toradex/verdin-imx8mm/spl.c
++++ b/board/toradex/verdin-imx8mm/spl.c
+@@ -53,7 +53,9 @@ void spl_dram_init(void)
+ 
+ void spl_board_init(void)
  {
- 	if (readl(NV_PA_BASE_SRAM + NVBOOTINFOTABLE_BOOTTYPE) ==
- 	    NVBOOTTYPE_RECOVERY)
-diff --git a/configs/apalis-tk1_defconfig b/configs/apalis-tk1_defconfig
-index de30fa1b961c..846c7bde2343 100644
---- a/configs/apalis-tk1_defconfig
-+++ b/configs/apalis-tk1_defconfig
-@@ -27,7 +27,7 @@ CONFIG_CONSOLE_MUX=y
- CONFIG_SYS_STDIO_DEREGISTER=y
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_ARCH_MISC_INIT=y
-+CONFIG_MISC_INIT_R=y
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-diff --git a/configs/apalis_t30_defconfig b/configs/apalis_t30_defconfig
-index e9c9cfe940e4..57e1eb733a87 100644
---- a/configs/apalis_t30_defconfig
-+++ b/configs/apalis_t30_defconfig
-@@ -22,7 +22,7 @@ CONFIG_CONSOLE_MUX=y
- CONFIG_SYS_STDIO_DEREGISTER=y
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_ARCH_MISC_INIT=y
-+CONFIG_MISC_INIT_R=y
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-diff --git a/configs/colibri_t20_defconfig b/configs/colibri_t20_defconfig
-index c8a17cd40a2f..02e33ba5e3cb 100644
---- a/configs/colibri_t20_defconfig
-+++ b/configs/colibri_t20_defconfig
-@@ -20,7 +20,7 @@ CONFIG_SYS_PBSIZE=1055
- CONFIG_SYS_STDIO_DEREGISTER=y
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_ARCH_MISC_INIT=y
-+CONFIG_MISC_INIT_R=y
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-diff --git a/configs/colibri_t30_defconfig b/configs/colibri_t30_defconfig
-index 8d7a6bf7060c..63b695c1e54b 100644
---- a/configs/colibri_t30_defconfig
-+++ b/configs/colibri_t30_defconfig
-@@ -21,7 +21,7 @@ CONFIG_CONSOLE_MUX=y
- CONFIG_SYS_STDIO_DEREGISTER=y
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_ARCH_MISC_INIT=y
-+CONFIG_MISC_INIT_R=y
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++#if IS_ENABLED(CONFIG_ARCH_MISC_INIT)
+ 	arch_misc_init();
++#endif
+ }
+ 
+ #ifdef CONFIG_SPL_LOAD_FIT
+diff --git a/common/Kconfig b/common/Kconfig
+index 17539079f90f..a2f653f7e722 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -704,8 +704,9 @@ config ARCH_EARLY_INIT_R
+ 	  enabled. This can be used to set up architecture-specific devices.
+ 
+ config ARCH_MISC_INIT
+-	bool "Call arch-specific init after relocation, when console is ready"
++	bool
+ 	help
++	  Call arch-specific init after relocation, when console is ready.
+ 	  With this option U-Boot will call arch_misc_init() after
+ 	  relocation to allow miscellaneous arch-dependent initialisation
+ 	  to be performed. This function should be defined by the board
 -- 
 2.43.0
 
