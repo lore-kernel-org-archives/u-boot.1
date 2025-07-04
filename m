@@ -4,83 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9169C8303D
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 14:11:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F428C83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 14:22:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24839801BE;
-	Fri,  4 Jul 2025 16:11:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BACF0801BE;
+	Fri,  4 Jul 2025 16:22:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cR5Pwdbx";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="a/A04XH5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A746F803DF; Fri,  4 Jul 2025 16:11:49 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1CC95803DF; Fri,  4 Jul 2025 16:22:23 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9C61800D7
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 16:11:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ECCC800D7
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 16:22:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-553dceb342aso918065e87.1
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 07:11:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751638307; x=1752243107; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TBBW/4T4iqfw+1J+xA3wLVDfVsTNhMrtRzMmg4VNuwA=;
- b=cR5PwdbxfbpLFdYTn3/dBvl/jVy/SDIbyUVcr53zmKSI6z+QC0u9yY4kq6d1Yp9NbX
- ukEZom6ERt9Exo/b4lUUa1RJ6fKc5J+HDBlokSEaS1nmju/b3xN+MdnTrBHoTn5eIYRU
- NkyBLeMLfArCzZlof9sAo94ha9k5mAuDc0WtGd5AtFEZ89aLyfm6H6dj+2BXpAiopnaf
- Grr6U9+NHWy2dmvTd9ChM4eoHflCfwzas6qIK2N6zDtSElIaEDaQepkM7Wg6Ah0qsnSx
- 6cYa23zzSkqZqBHTQTzOJi9hS65LxL5iTBKs1V6VQShxodGGpYiGder8qZytf3AEgSUK
- EyPw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D25573F691
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 14:22:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1751638939;
+ bh=e2IUOrZwI74TwWVTbpC4qqzWjQLpb+n9bXMwWd1dp6A=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=a/A04XH5PWwfQSMvGKGKWTzvjzNkh/x9Jdw8ZxTFJy1PODFhuYvnn1lP1HbeVeNoK
+ hMhu6XdAA5JQ88brVt0EZ3VEMgcdTN9tlEBJJNy/xhykwjuZwU4I7bkRZV+eMJEN0M
+ uuh4J/LEDefhNJYNheCaoYezj5aCxfCL4URuuNRP80nl7uZ0qcKKqi1Ie+LWo9e6ze
+ Lydav35xfBDJYWzIGhGwxK0yojgYeVajqfiOPNjkXbhkQzSQS0D6rLrybp2GExGo+Q
+ S7UWpxRnx8iUjBcUFXYnSh6FVSVYI82XX3cQfileNH3yr/isyODf1tbVPn9eqMPeed
+ wXQC7AdDmWtbw==
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-ade81d27cddso114040566b.0
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 07:22:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751638307; x=1752243107;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TBBW/4T4iqfw+1J+xA3wLVDfVsTNhMrtRzMmg4VNuwA=;
- b=nBsuHseFyeYKUqyMIPiiuhArguQwp1YNQXpYQntoTF/r1TO2SiJ6cXMOm9uwRuAcWE
- qKHbAGjN68TqJw4Ne2JIdO+DdP8n6ZMa4NxIgBrBkc+IUFqZxsaoP9HQCoTEGRkQqH+S
- hnBJzrkULIyKbNQXGN/xsqXEEQspMJv8PXC+CmVCwWBm/ubmo9KBijX4dHh4g1+zTG9V
- D2hGdKAE2U2vzIxBIbcD9I8+0eWDzw9tUnD1zrzE7TGyxkxN1OjL8kPeeKti3sPwWBhK
- //5GQuzgQxpUNsBwbKg9NGpSZ6T2Gn0hOx6V06ZChdLZ+Khev2MtrP5TspHB2G6EJM24
- Vm+Q==
-X-Gm-Message-State: AOJu0Yy5mprQ1dD+vMqBaGU76kbYHUxh9wnuZgtI4MmR4GnsXbsfR6aB
- zRs/3t09r4wLlAuJnhkAd8+SG11+SzXeqVQqX2Glf23757pAKbW7DlmHMrik+m+4MZzwJSj+tId
- OrJY6cAol96KuHGnOA+5HuVAjRcYShZ8=
-X-Gm-Gg: ASbGncv5+GUO2ThRJ5e6kOtqFuD6Wu1qL+tQj9y3mTgixvEshH4c2iXVbvPKXRbmUgW
- QB0Njgb4/9tBNxggI2Hyg4OjxVhVS1ILJ4aXx8mr92EfPFJzAoZwcWzWCRBG4F648JWGQf5czJ2
- Fp498EbEVh1deOqZXkKtG4+AjFx45BVxgNfODHfyS2nO87QN111TfIrQnX0yVTF2/+r3Qa5VGjr
- w==
-X-Google-Smtp-Source: AGHT+IFSa/9lERdQrxrbr8yNvfPKgKO6a8EsQfKCAmIJTaiKEZEwJY0x4+JH0Ez1RJci5/UHn5rvaV4CWJ50/bgwQZQ=
-X-Received: by 2002:a05:6512:3f0e:b0:553:ce07:de8e with SMTP id
- 2adb3069b0e04-556f1b653f6mr968529e87.42.1751638306772; Fri, 04 Jul 2025
- 07:11:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751638939; x=1752243739;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e2IUOrZwI74TwWVTbpC4qqzWjQLpb+n9bXMwWd1dp6A=;
+ b=FPY2CZUwJZ/SayAIyJVOG51p1HvsZhkexUdtNDTvhbvIU7bGhus9pyjZPGYc3eOsGv
+ DWx7Al2ro38X9WRD6EvZzyeVjjjZQDFC8WRnxz1NCpre7kzlxXLijL3Bso3PKnChx46z
+ WGYRC+Vy9eX7OKxcG1q+oz7qDvyqO0DKULuVC6yRWxm+LglPKPvwdw7L9P7ZdCazasGB
+ P15dMOI7LxdI/+7MVfexlbU5Lgj64LyTGY/uDpUERQdjshlMpCfsuNOFF8EWdl7V4EZK
+ lG8dqi2q9KYCVGDR89u+OS6xGF6vQGLbRotxnr1xjovOATb0WB16Q1zMKbI0f7bn+6Yo
+ Fwbw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUU/KyenEvyAtECmrFgOcIOq9IWY/Yf75kUqQ6qLmpGVf/+j5YkdTPp3tHCtYM7jXYXRRX7M+s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzmbtla1rdu9U7CVIF13biA/y8KwXtHRHGmy0TKG9FsR495JtSK
+ jnwMdoYtOlTNS7b6ATcnmoRHUHAWv9VAhl32W930GsTewzKBsdhx0AzHR9DJjkbxuRuZLfYeoV2
+ Ei+0rJNY3fTVQgjwyhkRH/IG7I+B62n7CwxVAnC7XFA2IqDELUtBJUyTIO+w0SGYdszIRSyc=
+X-Gm-Gg: ASbGnctDH+D8Q7Ivy1Yy2OBTpYnSODKMUWhXVMYICI4MYyg4dsorqVBUU17z9CzTDqc
+ +BsICUcMxqn94+AYwERcZrzxWX7V9XWYOhBJGMB0Ou2cFubZANVCEw4Q/R4DA9Lj2D1KgVY6/k4
+ N801/tr61DXthG2VbbH6VVnt0JowIuE8bZzLELLWy0TMoSFozVZdmn9pRDLl1MpTHvXKb0cRvOR
+ r4BGiCT6XPLrlSY3juYzNH2Bm2NJWOM3azElZzw0y5Co1ly3QMf2qtW7AMKTgriD9DIGoQlIGiM
+ WPlTvUQ7mfJ65TtcnHdU+Xwr2SIMPDko2e936POmgSm2r1YNDYMd7NBs9XZGm7XreazGlrh7V3D
+ sFQco58aThuNk63FM1Pt1PJ1L
+X-Received: by 2002:a17:906:d7cb:b0:ad8:9b5d:2c1e with SMTP id
+ a640c23a62f3a-ae3fbd499ddmr291090566b.29.1751638939209; 
+ Fri, 04 Jul 2025 07:22:19 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFkZUQqq/rfMMqEmUOlrqoqm71lqYESb5K6ZvV4iQywWPwSzaGKvuTUXxoDOD11YJjj2DAC2Q==
+X-Received: by 2002:a17:906:d7cb:b0:ad8:9b5d:2c1e with SMTP id
+ a640c23a62f3a-ae3fbd499ddmr291088166b.29.1751638938748; 
+ Fri, 04 Jul 2025 07:22:18 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae3f66d931csm185482866b.10.2025.07.04.07.22.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jul 2025 07:22:18 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Ying-Chun Liu <paul.liu@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_selftest: check system table pointer
+Date: Fri,  4 Jul 2025 16:22:12 +0200
+Message-ID: <20250704142212.186229-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250704130319.3814676-1-festevam@gmail.com>
- <20250704133105.GD6424@bill-the-cat>
- <CAOMZO5AtVXOxWjMQeVeUtbU1Z_D_DvQ+0a7OzzHUskSK8wFJ6w@mail.gmail.com>
- <20250704135338.GF6424@bill-the-cat>
-In-Reply-To: <20250704135338.GF6424@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 4 Jul 2025 11:11:34 -0300
-X-Gm-Features: Ac12FXz9tHuY7Sdwq6N5OeAmrSd7OomPSEezYqAtJIV-s_54znu_WnH810bU6ho
-Message-ID: <CAOMZO5B+EV-PPhT0pExj6TFYWNw4OAepob_M2k7RiHX9O_b_Uw@mail.gmail.com>
-Subject: Re: [PATCH] mx6sabresd: Increase CONFIG_ENV_OFFSET to fix boot
- regression
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, jerome.forissier@linaro.org, otavio@ossystems.com.br,
- michael@amarulasolutions.com, uboot-imx@nxp.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,50 +108,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 4, 2025 at 10:53=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
+Enhance the debug support unit test.
 
-> Yes please, thanks! And I would like to explore a little if some other
-> compression algorithm (that we don't have support for yet) might be a
-> larger win too, for v2025.10.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_selftest/efi_selftest_debug_support.c | 68 ++++++++++++++++++-
+ 1 file changed, 67 insertions(+), 1 deletion(-)
 
-Ah, I manually tried this change below:
+diff --git a/lib/efi_selftest/efi_selftest_debug_support.c b/lib/efi_selftest/efi_selftest_debug_support.c
+index 9ca8b3f82f5..ac77caaf561 100644
+--- a/lib/efi_selftest/efi_selftest_debug_support.c
++++ b/lib/efi_selftest/efi_selftest_debug_support.c
+@@ -9,6 +9,7 @@
+ 
+ #include <efi_loader.h>
+ #include <efi_selftest.h>
++#include <linux/sizes.h>
+ 
+ /**
+  * efi_st_debug_support_execute() - execute test
+@@ -21,6 +22,12 @@ static int efi_st_debug_support_execute(void)
+ {
+ 	struct efi_debug_image_info_table_header *efi_st_debug_info_table_header = NULL;
+ 	efi_guid_t efi_debug_image_info_table_guid = EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
++	struct efi_mem_desc *memory_map;
++	efi_uintn_t map_size = 0;
++	efi_uintn_t map_key;
++	efi_uintn_t desc_size;
++	u32 desc_version;
++	efi_status_t ret;
+ 
+ 	/* get EFI_DEBUG_IMAGE_INFO_TABLE */
+ 	efi_st_debug_info_table_header = efi_st_get_config_table(&efi_debug_image_info_table_guid);
+@@ -30,7 +37,66 @@ static int efi_st_debug_support_execute(void)
+ 		return EFI_ST_FAILURE;
+ 	}
+ 
+-	return EFI_ST_SUCCESS;
++	/* Load memory map */
++	ret = st_boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
++					  &desc_version);
++	if (ret != EFI_BUFFER_TOO_SMALL) {
++		efi_st_error
++			("GetMemoryMap did not return EFI_BUFFER_TOO_SMALL\n");
++		return EFI_ST_FAILURE;
++	}
++	/* Allocate extra space for newly allocated memory */
++	map_size += sizeof(struct efi_mem_desc);
++	ret = st_boottime->allocate_pool(EFI_BOOT_SERVICES_DATA, map_size,
++					 (void **)&memory_map);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("AllocatePool failed\n");
++		return EFI_ST_FAILURE;
++	}
++	ret = st_boottime->get_memory_map(&map_size, memory_map, &map_key,
++					  &desc_size, &desc_version);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("GetMemoryMap failed\n");
++		return EFI_ST_FAILURE;
++	}
++	/* Find the system table pointer */
++	for (efi_uintn_t i = 0; map_size; ++i, map_size -= desc_size) {
++		struct efi_mem_desc *entry = &memory_map[i];
++		u64 end;
++
++		if (entry->type != EFI_RUNTIME_SERVICES_DATA)
++			continue;
++
++		end = entry->physical_start +
++		      (entry->num_pages << EFI_PAGE_SHIFT);
++		for (u64 pos = ALIGN(entry->physical_start, SZ_4M);
++		     pos <= end; pos += SZ_4M) {
++			struct efi_system_table_pointer *systab_pointer =
++				(void *)(uintptr_t)pos;
++
++			/* check for overflow */
++			if (pos < entry->physical_start)
++				break;
++			if (systab_pointer->signature ==
++			    EFI_SYSTEM_TABLE_SIGNATURE) {
++				if (systab_pointer->efi_system_table_base !=
++				    (uintptr_t)st_systable) {
++					efi_st_error("Wrong system table address\n");
++					ret = EFI_ST_FAILURE;
++					goto out;
++				}
++				ret = EFI_ST_SUCCESS;
++				goto out;
++			}
++		}
++	}
++	efi_st_error("System table pointer not found\n");
++	ret = EFI_ST_FAILURE;
++
++out:
++	st_boottime->free_pool(memory_map);
++
++	return ret;
+ }
+ 
+ EFI_UNIT_TEST(debug_support) = {
+-- 
+2.48.1
 
---- a/configs/mx6sabresd_defconfig
-+++ b/configs/mx6sabresd_defconfig
-@@ -40,6 +40,8 @@ CONFIG_SPL_WATCHDOG=3Dy
- CONFIG_HUSH_PARSER=3Dy
- CONFIG_SYS_MAXARGS=3D32
- CONFIG_CMD_BOOTZ=3Dy
-+# CONFIG_BOOTM_PLAN9 is not set
-+# CONFIG_BOOTM_RTEMS is not set
- CONFIG_CMD_SPL=3Dy
- CONFIG_CMD_SPL_WRITE_SIZE=3D0x20000
- CONFIG_CMD_GPIO=3Dy
-@@ -65,7 +67,7 @@ CONFIG_EFI_PARTITION=3Dy
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_OF_CONTROL=3Dy
- CONFIG_OF_LIST=3D"imx6q-sabresd imx6qp-sabresd imx6dl-sabresd"
--CONFIG_MULTI_DTB_FIT=3Dy
-+CONFIG_MULTI_DTB_FIT_LZO=3Dy
- CONFIG_ENV_OVERWRITE=3Dy
- CONFIG_ENV_IS_IN_MMC=3Dy
- CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-
-After running make savedefconfig; cp defconfig
-configs/mx6sabresd_defconfig, I see that CONFIG_MULTI_DTB_FIT_LZO does
-not get selected, and CONFIG_MULTI_DTB_FIT=3Dy is removed.
-
-According to doc/README.multi-dtb-fit:
-
-"Usually the DTB is selected by the SPL and passed down to U-Boot. But some
-platforms don't use the SPL. In this case MULTI_DTB_FIT can used to provide
-U-Boot with a choice of DTBs"
-
-mx6sabresd uses SPL, so MULTI_DTB_FIT can be safely dropped.
-
-I tested it on a imx6dl and imx6q sabresd boards.
-
-I'll send a v2.
-
-Thanks
