@@ -4,82 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 532A7C83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 19:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05F0C8303D
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 19:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD1DE81F6B;
-	Fri,  4 Jul 2025 21:15:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=lechnology.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E45781F6B;
+	Fri,  4 Jul 2025 21:26:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lechnology.com header.i=@lechnology.com header.b="VMdiKN4y";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="xQp5cilg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD8198206E; Fri,  4 Jul 2025 21:15:41 +0200 (CEST)
-Received: from vern.gendns.com (vern.gendns.com [98.142.107.122])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 70A678206E; Fri,  4 Jul 2025 21:26:34 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6BD6803DF
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 21:15:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=lechnology.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1F2E1803DF
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 21:26:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=david@lechnology.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=lechnology.com; s=default; h=Cc:To:Message-Id:Content-Transfer-Encoding:
- Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V8MOiFawivrUCcK8DUobHLUXfIBwaXkGYlzmoDvoQjg=; b=VMdiKN4y83MA+s0MTAtnSLpt70
- JT0N+WFwREqXrlArw0/v5fPq1hNce3ZJy6XKRPA/38B5yh/4mVHpQSB9/JkKRhka02VET0BgQJmsy
- gPU9U4NA9Jf9gD7m4g9yUEiAyiKGDVbGkhRxUNF+YaDwt/91cayzrRncJjMHOn3NGSdkGSCZB88Qd
- t5HccnNSUD+q2L1HotSUBRt0i0REXsbkgHbjhMx1rIsr3z/rQ5esVWy/ljp4qRmH8uuWpgY20XfhI
- Kgqcd5Kg4w4KXokx/IyxYPqz1yWWs5krxSKQHWJcFKWRW095uayOjdtnZr+hscPZgHh2QqUyVfj/k
- C35/vYUg==;
-Received: from [2600:8803:e7e4:1d00:d956:6ab3:7240:6bd9] (port=44150
- helo=[127.0.1.1]) by vern.gendns.com with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.1)
- (envelope-from <david@lechnology.com>) id 1uXltE-0000000073t-1TuJ;
- Fri, 04 Jul 2025 15:15:36 -0400
-From: David Lechner <david@lechnology.com>
-Date: Fri, 04 Jul 2025 14:15:20 -0500
-Subject: [PATCH] configs: legoev3: adjust to reduce binary size
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 098F71FB2D;
+ Fri,  4 Jul 2025 21:26:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1751657191;
+ bh=FxuqIIWxBNBDT1WtfbdzDq7SJEi+WeA6u6u/jI++hyU=; h=From:To:Subject;
+ b=xQp5cilg7uT27bJaEceBUnIsa1WIEna/WYdyJSexB+5wGaGlX1qosHUtpSrJEvf+y
+ 1oytcHEuKyY8kF0JFHIslERThJAdXItlPoZiWcuoPSs5bMtBP59J3X5DM0u7NPb3qU
+ QQyph3gGQpXoZd6PX/Ryc+yrPRdW8BbeuCZsIySnlnhcfV+Vd+wmTNA8fUbbr9G1S6
+ b/M+CnR6oUSXIYG5fBWXeClbYKGpH5sxty6Ckee3P7M/O267aMlsCY6P/rMn1r6UoO
+ hXOgeDiyl+KIrA1WUNTyH7rE+fGaC4cyb65VozUDomPWNxSRedVRyoMQBPsTCbaXbs
+ 0VnJCEF/rJM0g==
+Date: Fri, 4 Jul 2025 21:26:26 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Vishal Mahaveer <vishalm@ti.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH] board: ti: rm-cfg: Update rm-cfg to reflect new resource
+ reservation
+Message-ID: <20250704192626.GA17727@francesco-nb>
+References: <20240220203944.27916-1-vishalm@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250704-b4-configs-legoev3-use-thumb-instructions-v1-1-6749cc9ecb45@lechnology.com>
-X-B4-Tracking: v=1; b=H4sIAEcoaGgC/x3NTQqDMBBA4avIrDsQY/zBq5QuNI5xoE0kk0hBv
- LvB5dt87wShyCQwVidEOlg4+BL1qwK7Td4R8lIatNKt6pXB2aANfmUn+CUX6GgwC2Ha8m9G9pJ
- itqkggrR0ZpgGXbemgeLtkVb+P6/357pu216wlHsAAAA=
-X-Change-ID: 20250704-b4-configs-legoev3-use-thumb-instructions-ed648a821543
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, David Lechner <david@lechnology.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1831; i=david@lechnology.com; 
- h=from:subject:message-id;
- bh=MeReC5F+BqbJDbgsuauPWdv2EGtWIURqA5jl+rjJ9wY=; 
- b=owEBbQGS/pANAwAKAcLMIAH/AY/AAcsmYgBoaChRQUSOR+ik0cqNSJdmJ4mY6LduHAlqF8R2l
- ZVVRsj5T4yJATMEAAEKAB0WIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaGgoUQAKCRDCzCAB/wGP
- wI8ICAChY8F3/KcrlHDzSpdpqYn9xrY/TfBCELEzG1x9/WcLjvPJUXCWTYzMRw7cevlXpHkvF+b
- JURWu0Sxv/3tTWeXprdBDyPKHW0btQtwMflDD1slyBdRyMSme6ttt++hOnvnyhm2FzjS/qaidzs
- pwHz1GLwaMxDXEdBYC6QTVxUNrLicqNXoEwNEHvvopKBbxlxC6s+GIZ8d5lU6ryW+WgEy4Lg/oS
- xbLXXSmC4Y/A4aYwHXKQKtghcH/WaUFRRSVybkjfrlL+R+wGVnQ+ELsr5E2QVUB3V6x/j5afqUC
- LiohObhhcDX8vnwLPlpiIaOe4Crs5Es95dl1NJbYGKD487Nk
-X-Developer-Key: i=david@lechnology.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - vern.gendns.com
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - lechnology.com
-X-Get-Message-Sender-Via: vern.gendns.com: authenticated_id:
- davidmain+lechnology.com/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: vern.gendns.com: davidmain@lechnology.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240220203944.27916-1-vishalm@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,60 +67,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust legoev3_defconfig to reduce the binary output size.
+Hello Vishal,
 
-As u-boot has bloated a bit over the years, the legoev3_defconfig can no
-longer build something that fits in the 256kB size limit of the EV3.
-This drops a few unused features, but the real difference-makers are
-enabling thumb instructions and using link time optimization to reduce
-the size.
+On Tue, Feb 20, 2024 at 02:39:44PM -0600, Vishal Mahaveer wrote:
+> With the latest TIFS firmware, an additional virtual interrupt and
+> event is reserved for TIFS usage on am62x and am62ax devices.
+> 
+> Update the rm-cfg to reflect this new reservation.
+> 
+> Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
 
-This reduced u-boot.bin from 279,920 to 198,416 bytes on my local
-machine with arm-none-eabi-gcc (15:13.2.rel1-2) 13.2.1 20231009.
+I just noticed this old patch from 2024, and I have a few
+questions and one request.
 
-Signed-off-by: David Lechner <david@lechnology.com>
----
- configs/legoev3_defconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ 1. I assume this patch applies to all am62x based board, not just the
+    two from TI you did the change for, correct?
+ 2. Which kind of issue can I expect if I have not updated this file on
+    my board?
+ 3. Which is the version of firmware that requires such a change (you
+    mention just "latest")
 
-diff --git a/configs/legoev3_defconfig b/configs/legoev3_defconfig
-index 60b7a84205c0fef1ffed39de7b7c1a3d5cdff217..e234894bcce2a74121d0ca1128faebac0eefa8ca 100644
---- a/configs/legoev3_defconfig
-+++ b/configs/legoev3_defconfig
-@@ -1,5 +1,6 @@
- CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_DAVINCI=y
- CONFIG_TEXT_BASE=0xc1080000
- CONFIG_SYS_MALLOC_LEN=0x110000
-@@ -12,6 +13,7 @@ CONFIG_SF_DEFAULT_SPEED=50000000
- CONFIG_ENV_SIZE=0x4000
- CONFIG_DEFAULT_DEVICE_TREE="da850-lego-ev3"
- CONFIG_SYS_LOAD_ADDR=0xc0700000
-+CONFIG_LTO=y
- CONFIG_DYNAMIC_SYS_CLK_FREQ=y
- CONFIG_BOOTDELAY=0
- CONFIG_AUTOBOOT_KEYED=y
-@@ -31,7 +33,6 @@ CONFIG_HUSH_PARSER=y
- # CONFIG_BOOTM_RTEMS is not set
- # CONFIG_BOOTM_VXWORKS is not set
- CONFIG_CMD_ASKENV=y
--CONFIG_CRC32_VERIFY=y
- CONFIG_CMD_MX_CYCLIC=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SPI=y
-@@ -56,4 +57,3 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_DAVINCI_SPI=y
--CONFIG_REGEX=y
+ ... and one request
 
----
-base-commit: d1d53c252a4a746db5ebcdf0d6de3aa0feec504e
-change-id: 20250704-b4-configs-legoev3-use-thumb-instructions-ed648a821543
+ Can you please update all the relevant boards when doing such kind of
+ change next time?
 
-Best regards,
--- 
-David Lechner <david@lechnology.com>
+Thanks
+Francesco
+
 
