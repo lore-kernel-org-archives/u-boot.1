@@ -4,94 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD2BC83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 12:02:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80813C8303D
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 12:12:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1082F82F03;
-	Fri,  4 Jul 2025 14:02:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CD65B803DF;
+	Fri,  4 Jul 2025 14:12:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vAg7cNe8";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VYvE6YLz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9054882F14; Fri,  4 Jul 2025 14:02:21 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 289F28206E; Fri,  4 Jul 2025 14:12:35 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FAAE82A76
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 14:02:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A193801BE
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 14:12:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ae3b336e936so168527166b.3
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 05:02:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751630539; x=1752235339; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dZDdeSjqyLuscfYNu3VDDbHM/VLPAI2uu7F9LJm6YJg=;
- b=vAg7cNe8gRXVdI+uqvfubnFE8EW3fu1bMoQlu4fkeENh8+sTK3fkR9TWMfhNsUOvP+
- jzLnnUMMO9xt1ZbhTEYR1tSbh7zcntmfg34bjM9yTdWDHr6rWONLBXCtpoUm1AEF8f0J
- XmmwS/KRGge3YA4YPOcx0py0knsZOB4XYgv9o5TP3Y/t4/vOgoEpR9h5nRNn+x1vfyDu
- zqsXZRcj4GUftLgi2g6s1U1l5Obf5D0DEATWCnic4NS6kCY30mymE9HgzhjpJGTYKItJ
- gnk2C0iZLFtE0NnL3AteM7d+w222jL3BQ9KRoBa8oHnJuWtI1VLBKqNAw8b5uuL4Zxov
- t4Ww==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8F9DD3F921
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 12:12:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1751631152;
+ bh=F2UqRnQq+IxyUu7HClGP6irTmHw730wmRgaL4F1NDIs=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=VYvE6YLzsQSHCajxinicx2iDUn4x8HoVPErqAk+MgI6KlLOMovrDS+9jAEe0Ca4d9
+ rdl/HR/xK+ix0IlRqdUXjdwsBlFKD16BGgOM8cnJwTfzs0ib+fFK06KVl7zPo+kXIt
+ TP5Yh4y8Ipqcp1yjBfwWTX8cyiRn6EnJYYqiC7YadeULj4Jneo187sIQtgfMZKp+xt
+ dOEjCe9NNP1A/DI28CkmUjzHMcjFCY3h4u7r88WnF7qW4CQRtMyqF0noZfH56NTqNF
+ +zjQrQbhvJCnbB8Ron3GAqd1USRhsj/nkk9Dzc5qnUVnsCO4bURwfKlCnGSdDEZTQl
+ XmP3LMhlVi8pg==
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-ae3c5ed22dfso82308666b.2
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 05:12:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751630539; x=1752235339;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1751631152; x=1752235952;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dZDdeSjqyLuscfYNu3VDDbHM/VLPAI2uu7F9LJm6YJg=;
- b=Hc42clCwoiQJTXCzmGxK/8A2Bvs5WQuJ31pqV3xP7zOMoZZX+MBPSjLr1Olj7ZXtvj
- qPXiJA2sY9q10ChqyctLRJ9iBPv83aSU0tAz1JEo3yansa0S1cjuWHNxJzkHCZ5202cR
- KJ4hLa3Eq2TjjBbNxcZab5jE9GuzoF24qnm8zl0IEEbD4bh2896jFWyjk9bW8MXZLrPM
- Jvr9g+XuWjlj3gyy8K0IToEm2RPbJ9biLp4KeN8HbQwD5/Evqk8wE4HZ+w6hQ5ocGcyv
- P/MMkQ1u0hedglYEbie4VySy1zxWFrxkbVo9nFHt5F1yjTKvACGdmco+1OrXHALhFIev
- 2rtA==
+ bh=F2UqRnQq+IxyUu7HClGP6irTmHw730wmRgaL4F1NDIs=;
+ b=NApRyiQV3akqEPTvQnzf+hyEGSaKDBtsiZcXIA9NN0Vr7BORyMxSSGc9P8DRR+5Kc2
+ AHvLZTl5qOV65hQmQAHAcKeoqUc7BcQDZaCK8Mu2uJh6DKFy5q0//LzD6ZVkhQ+5lm+H
+ lv5/FEYyQEVekgFbTC1JDscD/EfLeh765Dg4Zg1G+ZkTQZmMH/zCAcqr2hm8MGqR8BoO
+ LoE1b4ct5CvLrvlAxjcXUhDDwhrjGppnTXMk6FXu3/Ln9Jz5yca9cqNbNfjiZNEOt8qp
+ 7aNnFOdVGVTOKyeTXd3qyh1v0PC1AB8bRZGU3xpdpduT8n5syN/J2UOri3DKBoioelLb
+ EYsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOn3I1HtZF47INJ4t6e9qNAUlZ4mNUv/KkNsOzgq7GiNLJyBB59TyEUJCwNsZA0yClipHSE3s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy6MNxHTXUihpNwfeLsWIhWEk3vloIEePvS+pe3jMg9k6fJLEzx
- We4H3PPqAFVX9mwpEFVtwMbRAGL/y80WASRl3CIPCtMeGMR4NeiNTqqiyLUkvuA3HAY=
-X-Gm-Gg: ASbGncvvkp3pKlUq30x+V48mKX+42uiepBs16/KlaDm0JosGDSg5Hgc3VuoqInUiaiN
- te5+N8H1aRq3UpYOI9C5bvpFlzzTxUG9ByL8tqmWWzkn/37Om5xCWSWCdsv5UzzUfcUvYlIzrbj
- Q6sXvBiTjllB7hgktqo+QrqQDTqHrulw1FLiHLFEWOcCyYlYfzHliqQkXvPElPlX5Y/1q99rS+Z
- 2PLGhEm+sArWfAx3jT26R4NWs+/BEBUyUGhqp1e2ms5EHUyWt0+vEUytFeTjL+aY02bZkIBhVvM
- RKPdIUaBKMWNcFtfxdUuOyrnd44M1V82NKQgooXvleFjQc4L5es++V/jsNNtI55pkP4Q32ZM4cV
- ChYXnRoANLtHDmHlERznGNTTKxiuzVgKlnoUHZSRpRA==
-X-Google-Smtp-Source: AGHT+IFDhDWIzenQhVOyNmR5YETY1+2V4pMJxon1swqZX9i8BaddtRcPJXavLQHLa5zAaKEb1OLCcg==
-X-Received: by 2002:a17:907:8693:b0:ade:316e:bfc with SMTP id
- a640c23a62f3a-ae3fe5bddffmr158561166b.21.1751630538806; 
- Fri, 04 Jul 2025 05:02:18 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:713c:93e8:d764:c0f8?
- ([2a01:e0a:3cb:7bb0:713c:93e8:d764:c0f8])
+ AJvYcCXj+v2lDLbhJhY0Wp5HG6qmSrrVnjTBlQD1zE/gPY5bOydn61MoAAnI57j7J+ddcu/Jv5ftNxk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDsKp/fVwa1oWCSSLy5hNzn6N9gbr/+/M3x3yZg/PCkuR3e0XW
+ 7py4hEV8y0XIQBUWkthA9uiEz+/BA2Oz0k9C8WWEOHRg0f6tOUDplKjN/0kDdI5qYA3waMmmOXK
+ /q3ri+bCwVNE3R0M0dwxtovDh62T9DEZcCgeeEM3A5JSyJ36HxvyZC3y2wQ2R5iyGj1WZxVo=
+X-Gm-Gg: ASbGnct1oREPIkMrHYshexR+VrCz0QwkynbAqwYZQtjqSUaTiE2j8Py/Py8qRMYugh5
+ CSnJWbw7fX/dOi1a1ubptOBI5brbrX6BOkAYfP48zd6UiTpbUCdhWdr5QGT5DdogND16+gVCeN6
+ Rz+n/h+N/TLIh84rz8FV0ZiG38xYnJ3nNBBCqRk6LnezosuumWQ+f0n1K2QvORrv0KpnIRF/jnQ
+ bvoUZYo3O8agct/X1bcnQROUVJjPOzoGZ+af0Kk8RaQSIdiqwn0pHwp0xJU9IY4wyrwM3I97+YB
+ gdaXddy3JzeJdKKbDktV2n90sDS6I0EJ6wYrY6Q3YOz3nSlz9bUSiV1mCVNvTXdlJxgG7BiMGgg
+ 94w==
+X-Received: by 2002:a17:907:9815:b0:ae3:9ec1:9c03 with SMTP id
+ a640c23a62f3a-ae3fbd4a32bmr230704666b.37.1751631151802; 
+ Fri, 04 Jul 2025 05:12:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFTYlQ6EdrU3AorYEve5yJzbWBWaSmFpBOHsLM/bhrG2H8MC67vhHkQT9xSdRiiqhPKcQWdYg==
+X-Received: by 2002:a17:907:9815:b0:ae3:9ec1:9c03 with SMTP id
+ a640c23a62f3a-ae3fbd4a32bmr230701366b.37.1751631151382; 
+ Fri, 04 Jul 2025 05:12:31 -0700 (PDT)
+Received: from [192.168.103.102]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f6ac36c7sm164503866b.91.2025.07.04.05.02.17
+ a640c23a62f3a-ae3f6ac45easm162381066b.100.2025.07.04.05.12.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Jul 2025 05:02:17 -0700 (PDT)
-Message-ID: <96cd2cac-2ba2-40fe-b54e-21a37e69c19b@linaro.org>
-Date: Fri, 4 Jul 2025 14:02:17 +0200
+ Fri, 04 Jul 2025 05:12:30 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <602b2d22-dfd1-4fd7-9e78-371c5b37158b@gmx.de>
+Date: Fri, 4 Jul 2025 14:12:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 0/3] Static initcalls
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Otavio Salvador <otavio@ossystems.com.br>, dl-uboot-imx <uboot-imx@nxp.com>
-References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
- <CAOMZO5Dhs2GRgvjDCBbwsxxZadsVCrpXaWm4qToYfpak+CAKuw@mail.gmail.com>
- <CAOMZO5Bjxx5tjj75Bo8A4WJWBnV3Q8h1UHK45_xZgOavig0C9w@mail.gmail.com>
- <0b7fcdb0-0d18-41ef-8607-cf060ce3d058@linaro.org>
- <CAOMZO5CXyVyoDEUhFbtaHxi=QDp2uqn1U5ccBq6W8uoEipeVxA@mail.gmail.com>
+Subject: Re: [PATCH 01/25] arm_ffa: Add NULL pointer check to the uclass
+ driver operations
+To: abdellatif.elkhlifi@arm.com
+Cc: trini@konsulko.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de
+References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
+ <20250702152528.1180414-2-abdellatif.elkhlifi@arm.com>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAOMZO5CXyVyoDEUhFbtaHxi=QDp2uqn1U5ccBq6W8uoEipeVxA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250702152528.1180414-2-abdellatif.elkhlifi@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,24 +117,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 7/4/25 13:37, Fabio Estevam wrote:
-> Hi Jerome,
+On 02.07.25 17:25, abdellatif.elkhlifi@arm.com wrote:
+> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 > 
-> On Fri, Jul 4, 2025 at 5:33 AM Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
+> Add NULL pointer check for ops
 > 
->> Have you tried the master branch recently? Hopefully commit 410d59095a9f
->> ("arm: kirkwood: fix freeze on boot") should fix the issue.
+> The device driver can miss defining an operations structure.
+> So, ffa_get_ops() can return NULL.
+> This commit adds checks for ops in the uclass driver operations
+> and an error is returned when ops is NULL.
 > 
-> Yes, I'm using top-of-tree U-Boot, and this commit is present.
+> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>   drivers/firmware/arm-ffa/arm-ffa-uclass.c | 11 ++++++++++-
+>   1 file changed, 10 insertions(+), 1 deletion(-)
 > 
-> Unfortunately, it does not help.
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> index 96c64964bb7..f8d231204db 100644
+> --- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> +++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> @@ -1,6 +1,6 @@
+>   // SPDX-License-Identifier: GPL-2.0+
+>   /*
+> - * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
+> + * Copyright 2022-2023, 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+>    *
+>    * Authors:
+>    *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> @@ -954,6 +954,9 @@ int ffa_partition_info_get(struct udevice *dev, const char *uuid_str,
+>   {
+>   	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+>   
+> +	if (!ops)
+> +		return -EINVAL;
 
-OK. Then I suggest adding a debug traces to the INITCALL() macro to see
-how far the init goes.
+uclasses that use ops typically don't check for NULL.
 
-Thanks,
--- 
-Jerome
+Why would we have an FFA driver without ops?
+Would such a driver be of any use?
+
+Best regards
+
+Heinrich
+
+> +
+>   	if (!ops->partition_info_get)
+>   		return -ENOSYS;
+>   
+> @@ -979,6 +982,9 @@ int ffa_sync_send_receive(struct udevice *dev, u16 dst_part_id,
+>   {
+>   	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+>   
+> +	if (!ops)
+> +		return -EINVAL;
+> +
+>   	if (!ops->sync_send_receive)
+>   		return -ENOSYS;
+>   
+> @@ -1000,6 +1006,9 @@ int ffa_rxtx_unmap(struct udevice *dev)
+>   {
+>   	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+>   
+> +	if (!ops)
+> +		return -EINVAL;
+> +
+>   	if (!ops->rxtx_unmap)
+>   		return -ENOSYS;
+>   
+
