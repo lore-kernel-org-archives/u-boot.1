@@ -4,103 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80813C8303D
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 12:12:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36DD3C8303D
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 12:22:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD65B803DF;
-	Fri,  4 Jul 2025 14:12:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D600801BE;
+	Fri,  4 Jul 2025 14:22:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VYvE6YLz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NJtf2re7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 289F28206E; Fri,  4 Jul 2025 14:12:35 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E4EBE803DF; Fri,  4 Jul 2025 14:22:24 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A193801BE
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 14:12:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02F57800D7
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 14:22:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8F9DD3F921
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 12:12:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1751631152;
- bh=F2UqRnQq+IxyUu7HClGP6irTmHw730wmRgaL4F1NDIs=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=VYvE6YLzsQSHCajxinicx2iDUn4x8HoVPErqAk+MgI6KlLOMovrDS+9jAEe0Ca4d9
- rdl/HR/xK+ix0IlRqdUXjdwsBlFKD16BGgOM8cnJwTfzs0ib+fFK06KVl7zPo+kXIt
- TP5Yh4y8Ipqcp1yjBfwWTX8cyiRn6EnJYYqiC7YadeULj4Jneo187sIQtgfMZKp+xt
- dOEjCe9NNP1A/DI28CkmUjzHMcjFCY3h4u7r88WnF7qW4CQRtMyqF0noZfH56NTqNF
- +zjQrQbhvJCnbB8Ron3GAqd1USRhsj/nkk9Dzc5qnUVnsCO4bURwfKlCnGSdDEZTQl
- XmP3LMhlVi8pg==
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-ae3c5ed22dfso82308666b.2
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 05:12:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-55511c3e203so859911e87.3
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 05:22:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751631742; x=1752236542; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CB/LV+JzMA3Hd53Ss977iXAtbInBgtRbAp2VCEebd5o=;
+ b=NJtf2re7md+d5Ifp32ZXdGX5M5PakpObP7mnkJ5vfTm72qHWEDcRYyYOBk/hGTzh8I
+ /rz/rPDMqzAOE5iP8BAGP4mKA0hjn+v4ZWJM3x1d2EgszDJyFLpDAGnOVNNSapEy26C5
+ Jml26VIoGu+XQ0r+p5Zz1rOEZizMQ3n5+gIt96zexzGAThP6QZdTFG/ZBosZ+j340q/w
+ jAFBXJxWcCFrPS3rmJuKnKMt+GCtgSPsWuv6xqFhqvP9smun8/0j6vx52hnv77dh/sj7
+ aI+VnEdtLUNoRml7TcH8NixR6acL1sLrBcaTIdAPUQA007ZlHWSpIMAJHCkwv01LaEdN
+ 6Wdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751631152; x=1752235952;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:user-agent:mime-version:date:message-id:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=F2UqRnQq+IxyUu7HClGP6irTmHw730wmRgaL4F1NDIs=;
- b=NApRyiQV3akqEPTvQnzf+hyEGSaKDBtsiZcXIA9NN0Vr7BORyMxSSGc9P8DRR+5Kc2
- AHvLZTl5qOV65hQmQAHAcKeoqUc7BcQDZaCK8Mu2uJh6DKFy5q0//LzD6ZVkhQ+5lm+H
- lv5/FEYyQEVekgFbTC1JDscD/EfLeh765Dg4Zg1G+ZkTQZmMH/zCAcqr2hm8MGqR8BoO
- LoE1b4ct5CvLrvlAxjcXUhDDwhrjGppnTXMk6FXu3/Ln9Jz5yca9cqNbNfjiZNEOt8qp
- 7aNnFOdVGVTOKyeTXd3qyh1v0PC1AB8bRZGU3xpdpduT8n5syN/J2UOri3DKBoioelLb
- EYsA==
+ d=1e100.net; s=20230601; t=1751631742; x=1752236542;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CB/LV+JzMA3Hd53Ss977iXAtbInBgtRbAp2VCEebd5o=;
+ b=tyKLwA+ilAn5LxW728BbuTuAhA6x9CN97kMybhuXsBYCk7+sz+LuO7pTSJJvmq5LSq
+ fvM1Zz0v0a6zWCtOsiXpUkzmmLJVna/2YXARWjI5Va6gcpTyMJl1iwJt9AswHCIKJ/y6
+ FSqT9L/WWXeazYC2NCIw6erWfySpxSMPFu3LwZ/LQ9+9nPMDaxHSU3ASdvU0oFTNh39B
+ FfsyZDwJFPQQWAbVfaHC/uNrMLaKLuOlap6F9MvBJTuGnySh9C0XP2kHVnzSY4VZ/Pj6
+ y4c+mVB2OA/Up9E6sQKrxFAXjSXO/HzciQ7u04uxUsoLisf0xwWP7JkWh3wD04pige/w
+ IgRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXj+v2lDLbhJhY0Wp5HG6qmSrrVnjTBlQD1zE/gPY5bOydn61MoAAnI57j7J+ddcu/Jv5ftNxk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDsKp/fVwa1oWCSSLy5hNzn6N9gbr/+/M3x3yZg/PCkuR3e0XW
- 7py4hEV8y0XIQBUWkthA9uiEz+/BA2Oz0k9C8WWEOHRg0f6tOUDplKjN/0kDdI5qYA3waMmmOXK
- /q3ri+bCwVNE3R0M0dwxtovDh62T9DEZcCgeeEM3A5JSyJ36HxvyZC3y2wQ2R5iyGj1WZxVo=
-X-Gm-Gg: ASbGnct1oREPIkMrHYshexR+VrCz0QwkynbAqwYZQtjqSUaTiE2j8Py/Py8qRMYugh5
- CSnJWbw7fX/dOi1a1ubptOBI5brbrX6BOkAYfP48zd6UiTpbUCdhWdr5QGT5DdogND16+gVCeN6
- Rz+n/h+N/TLIh84rz8FV0ZiG38xYnJ3nNBBCqRk6LnezosuumWQ+f0n1K2QvORrv0KpnIRF/jnQ
- bvoUZYo3O8agct/X1bcnQROUVJjPOzoGZ+af0Kk8RaQSIdiqwn0pHwp0xJU9IY4wyrwM3I97+YB
- gdaXddy3JzeJdKKbDktV2n90sDS6I0EJ6wYrY6Q3YOz3nSlz9bUSiV1mCVNvTXdlJxgG7BiMGgg
- 94w==
-X-Received: by 2002:a17:907:9815:b0:ae3:9ec1:9c03 with SMTP id
- a640c23a62f3a-ae3fbd4a32bmr230704666b.37.1751631151802; 
- Fri, 04 Jul 2025 05:12:31 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFTYlQ6EdrU3AorYEve5yJzbWBWaSmFpBOHsLM/bhrG2H8MC67vhHkQT9xSdRiiqhPKcQWdYg==
-X-Received: by 2002:a17:907:9815:b0:ae3:9ec1:9c03 with SMTP id
- a640c23a62f3a-ae3fbd4a32bmr230701366b.37.1751631151382; 
- Fri, 04 Jul 2025 05:12:31 -0700 (PDT)
-Received: from [192.168.103.102]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f6ac45easm162381066b.100.2025.07.04.05.12.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Jul 2025 05:12:30 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
-Message-ID: <602b2d22-dfd1-4fd7-9e78-371c5b37158b@gmx.de>
-Date: Fri, 4 Jul 2025 14:12:29 +0200
+ AJvYcCXAguRTkmuLr584/pyhEfx7V88fBF82LZd60E7VSQyEb/dGa00CvVWoROgC22Xq97OI3Bv7v2E=@lists.denx.de
+X-Gm-Message-State: AOJu0YwxbW5WjXeVm1WuJvYz3sTG9MdRwKMXBwzDMPvL3CoBYpaWn+Ct
+ DJI1h14RyauSKhK7qskLYvz574pMhimEcUyBUm8ToIUK9h2yGQMYR5/MxI5NiI3dM7X9q8YB616
+ hBAuyIGMMH0e50JTH1kId8drR5rURO3I=
+X-Gm-Gg: ASbGncsJVQgObfRAZPAyi2OWmKkMAYKgej10LmCe035VhYDUAMHDcGbaM3AvbI7KHIo
+ xuiHUPK8s+bBhC74JLhDxR1Y+gx0lwLVLKjnpcHykfcaHv0JuaiHfgqJuvduE/sAXyB4p7pCkeU
+ Q6FZbuGnUxjBT7z68kIAlxUmusJgTPMC+/kvikxwArobYKZyIjHVLl4UT3TWxG/DosvIWwIwdJQ
+ g==
+X-Google-Smtp-Source: AGHT+IFrXapC2cpUqX54//NOVCGq46egrO8D6U6MbRVJIsqKkjK7udp8yAOj8lR1HFWRu4GzTw3IJmiCQHWudCLRKeE=
+X-Received: by 2002:a05:6512:3c84:b0:553:297b:3d4e with SMTP id
+ 2adb3069b0e04-556de363d36mr716466e87.52.1751631741875; Fri, 04 Jul 2025
+ 05:22:21 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/25] arm_ffa: Add NULL pointer check to the uclass
- driver operations
-To: abdellatif.elkhlifi@arm.com
-Cc: trini@konsulko.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, Simon Glass <sjg@chromium.org>,
- Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de
-References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
- <20250702152528.1180414-2-abdellatif.elkhlifi@arm.com>
-Content-Language: en-US
-In-Reply-To: <20250702152528.1180414-2-abdellatif.elkhlifi@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
+ <CAOMZO5Dhs2GRgvjDCBbwsxxZadsVCrpXaWm4qToYfpak+CAKuw@mail.gmail.com>
+ <CAOMZO5Bjxx5tjj75Bo8A4WJWBnV3Q8h1UHK45_xZgOavig0C9w@mail.gmail.com>
+ <0b7fcdb0-0d18-41ef-8607-cf060ce3d058@linaro.org>
+ <CAOMZO5CXyVyoDEUhFbtaHxi=QDp2uqn1U5ccBq6W8uoEipeVxA@mail.gmail.com>
+ <96cd2cac-2ba2-40fe-b54e-21a37e69c19b@linaro.org>
+In-Reply-To: <96cd2cac-2ba2-40fe-b54e-21a37e69c19b@linaro.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 4 Jul 2025 09:22:09 -0300
+X-Gm-Features: Ac12FXzZf2mDrFDVUpbWaakwfOPlbEmpFAtbYtquuMOKwwKjfF6xLPl2EB9Fa0Y
+Message-ID: <CAOMZO5B7Mhx1GTJXWp-22_NXNOKRJWDUx4aChG3DDo9Vtg=KAw@mail.gmail.com>
+Subject: Re: [PATCH v6 0/3] Static initcalls
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Otavio Salvador <otavio@ossystems.com.br>, 
+ dl-uboot-imx <uboot-imx@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,76 +102,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 02.07.25 17:25, abdellatif.elkhlifi@arm.com wrote:
-> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> 
-> Add NULL pointer check for ops
-> 
-> The device driver can miss defining an operations structure.
-> So, ffa_get_ops() can return NULL.
-> This commit adds checks for ops in the uclass driver operations
-> and an error is returned when ops is NULL.
-> 
-> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> ---
->   drivers/firmware/arm-ffa/arm-ffa-uclass.c | 11 ++++++++++-
->   1 file changed, 10 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-> index 96c64964bb7..f8d231204db 100644
-> --- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-> +++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-> @@ -1,6 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /*
-> - * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-> + * Copyright 2022-2023, 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
->    *
->    * Authors:
->    *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> @@ -954,6 +954,9 @@ int ffa_partition_info_get(struct udevice *dev, const char *uuid_str,
->   {
->   	struct ffa_bus_ops *ops = ffa_get_ops(dev);
->   
-> +	if (!ops)
-> +		return -EINVAL;
+On Fri, Jul 4, 2025 at 9:02=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 
-uclasses that use ops typically don't check for NULL.
+> OK. Then I suggest adding a debug traces to the INITCALL() macro to see
+> how far the init goes.
 
-Why would we have an FFA driver without ops?
-Would such a driver be of any use?
+I added some debug traces inside the INITCALL() macro, but when it
+hangs in SPL, no output is seen.
 
-Best regards
+There's something very fragile: depending on what is removed from the
+defconfig, the board can boot or not.
 
-Heinrich
+For example, by removing the following lines, the board boots:
 
-> +
->   	if (!ops->partition_info_get)
->   		return -ENOSYS;
->   
-> @@ -979,6 +982,9 @@ int ffa_sync_send_receive(struct udevice *dev, u16 dst_part_id,
->   {
->   	struct ffa_bus_ops *ops = ffa_get_ops(dev);
->   
-> +	if (!ops)
-> +		return -EINVAL;
-> +
->   	if (!ops->sync_send_receive)
->   		return -ENOSYS;
->   
-> @@ -1000,6 +1006,9 @@ int ffa_rxtx_unmap(struct udevice *dev)
->   {
->   	struct ffa_bus_ops *ops = ffa_get_ops(dev);
->   
-> +	if (!ops)
-> +		return -EINVAL;
-> +
->   	if (!ops->rxtx_unmap)
->   		return -ENOSYS;
->   
-
+--- a/configs/mx6sabresd_defconfig
++++ b/configs/mx6sabresd_defconfig
+@@ -73,11 +73,6 @@ CONFIG_SYS_MMC_ENV_DEV=3D1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=3Dy
+ CONFIG_ARP_TIMEOUT=3D200
+ CONFIG_BOUNCE_BUFFER=3Dy
+-CONFIG_USB_FUNCTION_FASTBOOT=3Dy
+-CONFIG_FASTBOOT_BUF_ADDR=3D0x12000000
+-CONFIG_FASTBOOT_BUF_SIZE=3D0x10000000
+-CONFIG_FASTBOOT_FLASH=3Dy
+-CONFIG_FASTBOOT_FLASH_MMC_DEV=3D2
+ CONFIG_DM_I2C=3Dy
+ CONFIG_SYS_I2C_MXC=3Dy
+ CONFIG_SUPPORT_EMMC_BOOT=3Dy
+@@ -111,8 +106,6 @@ CONFIG_SYSRESET_WATCHDOG=3Dy
+ CONFIG_IMX_THERMAL=3Dy
+ CONFIG_USB=3Dy
+ CONFIG_SPL_USB_HOST=3Dy
+-CONFIG_USB_HOST_ETHER=3Dy
+-CONFIG_USB_ETHER_ASIX=3Dy
+ CONFIG_USB_GADGET=3Dy
+ CONFIG_SPL_USB_GADGET=3Dy
+ CONFIG_USB_GADGET_MANUFACTURER=3D"FSL"
