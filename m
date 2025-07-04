@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF410C83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 12:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8FAC8303D
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 12:33:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D1CF82F03;
-	Fri,  4 Jul 2025 14:32:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AFE0582F49;
+	Fri,  4 Jul 2025 14:32:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K976ATmM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QkDgLjfl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A625D82ED0; Fri,  4 Jul 2025 14:32:46 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 20397803DF; Fri,  4 Jul 2025 14:32:48 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEAA2803DF
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 14:32:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92D6282A76
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 14:32:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-450cf214200so6888735e9.1
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 05:32:44 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-45310223677so5944655e9.0
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 05:32:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751632364; x=1752237164; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751632365; x=1752237165; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=iEltIIjP8+ioXJF5bw39+54r76aFUkiRaCyXWvGat+g=;
- b=K976ATmM9VntzSi9EOT1PrCjmhlM3hvnSQI6Fkd6gvB0f0gORTziEyU1JFFTOh8bqH
- EwWbyH8ciMH0mxKN6VZeS7YV5b3ByJTuIZc7LB6cO3I4ffeTj2PkOXgS4P91Hujyr12n
- XO02q+kJSiX9heN8w/2mx+mJ7OumqpwoxGItwqvt8OVEBEzBtLq/K37D61DQ6Wy8nswS
- g3iirUcVsenVj/RWkKTQh7k+Ec/npDPhJBxB5s2w3NEo1ttyvq7dmKdXwKfy0agQgpOs
- CaiBmg7BuiAz63mp6jO0v7tg4wOBcjVa+fTJGWZlwml0friUg4r+Ey2n1aWAZI7xiRLW
- 6dnQ==
+ :reply-to; bh=7v1zow+DBIRaJY4HLjJuhGtMOpHjHwnXCnoFdAahGFI=;
+ b=QkDgLjfl7Uas1hbgfic45ZhP7ef70wq3IYrcxNynPVlZFM7XD5HWoDzQ0SAYzcz9uO
+ wLBwCby9IHfC669Ax/yBJ8aDfsvGLcK6S4nQVAif+lgwPYAbKOgXUmwfzZFzipA2ayCb
+ 0+Yhy/vbBBhxdfSulqIIezGfgOLUrM/cp5omE2vq/mKwEnsId+a32VxiLuQLFtPpbU2T
+ tvUOLZf7ew2dyFKun2FwVwmls6G07XE5KWEOYGqJ0jNw8I8yh3ZxE2SdV1h6oxsaoHaa
+ HPfKjfRXuncURYfeYTcqE6MWo7K2TEK3f82MG2USUQxC3ReVW6uvYrX2sR9R3eaViCXO
+ Cr8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751632364; x=1752237164;
+ d=1e100.net; s=20230601; t=1751632365; x=1752237165;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iEltIIjP8+ioXJF5bw39+54r76aFUkiRaCyXWvGat+g=;
- b=kHU6YMZFZr7p08TFfT6/198EFZTHWyC/fFOLB1DBVWVYaMi/3aevZXWoW/CiL8F/hM
- vf8S1VvB0ohyzuLXJ1HoBt1mepA4PWej9pL9hcBzSKDcOtjOV5cdZZ5M+tyH1sQho2V1
- z9bLUl02M5DP6EFagxBwfngxRtOTVWJkTxOgosghbOXAQ4VbN2zIx7hw2MgtnF2ULVRP
- UaTb48RtSfXtulTLptN1/d57oO15n0qAZhI2Uz7UCQSvVf1ASjmek96sEKmJRCQNrXQy
- Wfus37oc1iXJRDOJspu0X7btKT21cZbB8Osf/zD67+Mg6fR5X4hMh+g8rA6zY7YRvdit
- IXXQ==
-X-Gm-Message-State: AOJu0YwgygILRlg5u6B+m14bL6SSsU8dPvZ2J4nHK/tZl2hNLE59nsep
- AuBERdUO4MByx9i6iqDvf3/h1qKFkqdpVBf0IT4MzxRdzYgl+bkYSbl166CHondlQo4=
-X-Gm-Gg: ASbGncshMYoc2lZhailm4I1tD3ilrNxGAUgUQ6DH7toUIlcZEp1gEHjsX8vejm8u6Zo
- nezOmh813KKD5n7KywukhJnRYXRyrs1sNzTjY8WgoPNDc3gyWz65zs3dLTgDiRoUb5Pg/XjEwvV
- NXzzLCYSHs3ICeT0DZ5FxGKy7oedDW9G+sxCiICjTn7UzV4PM8NTlrCB7B104D4ji1UHqdf7jIo
- baQdusB9ZluNHwjmDJJFVDvr9V5LW51ADQNNRIw9Z+OFPvgsvW5qCEN9ZqpEIflGIjK6mVrhYFj
- MHjkHAp3x66DpeHsrYbGEDbQ+cNvlNnBxXomVpWR5oqd5HEfN7jcMiSU+KFR2rS27g/7j2g5Q+Y
- wP4VdRxkKl9ZAwA==
-X-Google-Smtp-Source: AGHT+IEqFo36nOCl2DX9cX3Cnqj/2uh/tERBrNp42O6nVJXcGnfMMF+Hwp/sHzJjei+YlFnw1qeQCQ==
-X-Received: by 2002:a05:6000:2dc7:b0:3a4:ed62:c7e1 with SMTP id
- ffacd0b85a97d-3b4964f4d29mr2152475f8f.12.1751632364079; 
+ bh=7v1zow+DBIRaJY4HLjJuhGtMOpHjHwnXCnoFdAahGFI=;
+ b=Sb5zf7mgqN+ocX692W18dfRKCw/mnzugn9SEgu+Za0Ewad5V/VEHLVUMZG5+YmhgKU
+ l48cpmz8fl+PCigUZ1HOFcRU68yGDAtDGLU5GZtpMv9ItXIpbUAstHt70BXjXpok5tfJ
+ Yz2pM1orJ18rslfaoKegDgPEcILjHVQdEkjhEryrWeZ6pRkymT7Qyp3+hQezd2F5Nc9C
+ tmfgs1JMdIxxP4gzcafskeMehsuZImZ+7TFjIfNlDe3fuxG1xp0htQeNGhyV4UWK8yGe
+ ErejYBlIVvdkqAFvdTsed25AMZBiiIOm6VG7x+KIcPoEVQ5AUCCU06a7AgRPcqkuK+9l
+ 4icA==
+X-Gm-Message-State: AOJu0YzH5XeXQo1q21lg4FgQv/SyIpfAsvVwueWb7ELpap8+9z6qtQ+F
+ 3B0pYyqpWR7FVm4Ubi5Ox+O+H7dBIq+OKFkMI/gq/dEU8s10wUykNq2P3IHxPh2Lz9Y=
+X-Gm-Gg: ASbGncvPW9uT4vFfP0IMokY46ESJ4+rhuuumaxF8DXDs15zYsxzT+YXISq8Oa2Py9jh
+ JB57tBkmzfPpVtudY5NaZkf8KSeNaWbg7cvaDS5QPCeGbKiQTSRIK4U72NBBJY7lvuIGtLLnJA3
+ XcJHJbITyX1J+sVXM54YVULJj6JkZCNuNwnZtEJC9JuNWee1VzUYkKmAr1heKwA1JyT4lCshJOT
+ tY+pMmoqQD/fPtS6jQR7G51dhN6woJl8i6YkoyDPwJiHRpvEWc+FKd+XrT1OpidZ7X6j39rYBss
+ mTw0Ub48wOGsmDXBjT9uqyaW2wK4gU/QhiY/mT81xoigkZm08JXAq6NS78eeeX1t0ZSftfySx70
+ HkRCtJKnFrECNcA==
+X-Google-Smtp-Source: AGHT+IHF1Cy8G0t49rNKIWPtAEWbULKmE4VvPDOEPaRg5R2mT27T7lBIXlhozvVqHFmD5PMZhRmP4A==
+X-Received: by 2002:a05:6000:2384:b0:3a4:ee3f:e9a6 with SMTP id
+ ffacd0b85a97d-3b49703d9acmr1578945f8f.54.1751632364858; 
  Fri, 04 Jul 2025 05:32:44 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:e07:801:2854:bc73:8076:c06f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b47030bc5asm2367760f8f.20.2025.07.04.05.32.43
+ ffacd0b85a97d-3b47030bc5asm2367760f8f.20.2025.07.04.05.32.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 05:32:43 -0700 (PDT)
+ Fri, 04 Jul 2025 05:32:44 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 04 Jul 2025 13:32:42 +0100
-Subject: [PATCH 1/3] fs: ext4fs: Do not negate error before returning it
+Date: Fri, 04 Jul 2025 13:32:43 +0100
+Subject: [PATCH 2/3] fs: ext4fs: Use unwind goto to free memory on error
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250704-ext4fs_fix-v1-1-5c6acf4bf839@linaro.org>
+Message-Id: <20250704-ext4fs_fix-v1-2-5c6acf4bf839@linaro.org>
 References: <20250704-ext4fs_fix-v1-0-5c6acf4bf839@linaro.org>
 In-Reply-To: <20250704-ext4fs_fix-v1-0-5c6acf4bf839@linaro.org>
 To: Tom Rini <trini@konsulko.com>
@@ -98,30 +98,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In ext4fs_readdir it calls ext4fs_read_file and checks the return value
-for non-zero to detect an error. This return value should be returned as
-is rather than being negated.
+Ensure that allocated memory is freed on error exit replace the direct
+return calls with 'goto fail'.
 
-This issue found by Smatch
+This issue found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- fs/ext4/ext4fs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/ext4/ext4_write.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
-index 1727da2dc6d..7fb4c1b755b 100644
---- a/fs/ext4/ext4fs.c
-+++ b/fs/ext4/ext4fs.c
-@@ -272,7 +272,7 @@ int ext4fs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **dentp)
- 				       sizeof(struct ext2_dirent),
- 				       (char *)&dirent, &actread);
- 		if (ret < 0)
--			return -ret;
-+			return ret;
+diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+index d109ed6e90d..dd8ed40f888 100644
+--- a/fs/ext4/ext4_write.c
++++ b/fs/ext4/ext4_write.c
+@@ -877,19 +877,19 @@ int ext4fs_write(const char *fname, const char *buffer,
  
- 		if (!dirent.direntlen)
- 			return -EIO;
+ 	if (ext4fs_init() != 0) {
+ 		printf("error in File System init\n");
+-		return -1;
++		goto fail;
+ 	}
+ 
+ 	missing_feat = le32_to_cpu(fs->sb->feature_incompat) & ~EXT4_FEATURE_INCOMPAT_SUPP;
+ 	if (missing_feat) {
+ 		log_err("Unsupported features found %08x, not writing.\n", missing_feat);
+-		return -1;
++		goto fail;
+ 	}
+ 
+ 	missing_feat = le32_to_cpu(fs->sb->feature_ro_compat) & ~EXT4_FEATURE_RO_COMPAT_SUPP;
+ 	if (missing_feat) {
+ 		log_err("Unsupported RO compat features found %08x, not writing.\n", missing_feat);
+-		return -1;
++		goto fail;
+ 	}
+ 
+ 	inodes_per_block = fs->blksz / fs->inodesz;
 
 -- 
 2.39.5
