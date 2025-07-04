@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACA7C83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 21:50:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8235AC83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 22:10:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DB3D82F30;
-	Fri,  4 Jul 2025 23:50:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8B9182A76;
+	Sat,  5 Jul 2025 00:10:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Pa96g34Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="en3XzZgo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D85182CFA; Fri,  4 Jul 2025 23:50:29 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 1C57182AF6; Sat,  5 Jul 2025 00:10:40 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE8E282CFA
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 23:50:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A382682063
+ for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 00:10:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-2e95f0b6cb7so526417fac.3
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 14:50:26 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-73afbe1497bso653026a34.1
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 15:10:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751665826; x=1752270626; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zWXMOMWk7Gg1qYNfGbVk8JM+YbuV1hk0tb+bH02rvk4=;
- b=Pa96g34ZimJv5ynfxBH/9LEVJxAsNcmU+C8rqcwoqg1R0Z85KLTotLm7gCjT0smYoy
- QnAH0rkRKoON7ybkHUpR5LeBY9NCx0zpBr0Pk340CQToV0y7YhBJKqzsFWfJCJVmYvin
- RvBTaha6ezz0bZlTWbKP9ywi+uh6tA6uZrLbk=
+ d=konsulko.com; s=google; t=1751667036; x=1752271836; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zaVqH3rVSkaTUPgB9XwtfWNpAKceV4nx3lZckhaxcRY=;
+ b=en3XzZgolAvvTkMyxTMME+6sU/hjtyPlwTDpiBxIUPi0FvhGFq6xKfPsBZRSBYECCH
+ TQgyS6ZzehW9rwk8i/9K7cH3mIgOFeP8e7gMJC1SXUS20wxOdt2CQr7TbgvncnpBaKko
+ SHirbYq+GPIIjwAb5Ga69TqXYmMGSN2CpFwLY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751665826; x=1752270626;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zWXMOMWk7Gg1qYNfGbVk8JM+YbuV1hk0tb+bH02rvk4=;
- b=W8DWkFuKLWOBl2GWe8TzySru920Y7UF2cPk2bRRZ65ifQD8ggILpvHeOa9p0Um4dJM
- lFTyS6ItMrJB7MJnkGKxfnN5ojTINcSktZ7IO5Rlc9ntfdL79ikvW2pEhbPEu8m/N+dF
- 8LrI8J7dCEh3uHvnyFXkh9xz0EPfdOpCUE354wLWTngrKG0j9w9Xs027+Cu7+6EK1PW0
- Z+ZzTFvLC+H7ovMJUNlNZigOWxsSJyLFYLgsdPuGuadevfOy3zEbTVwpFjI8GwefDbaG
- V8If9Kr+dQUoZ+AnfUUf7/ExWFqRR7FhAanO7SS3Ztk8U0xFf4ZOyBQs6UvGtc1ZWPCQ
- IVXA==
-X-Gm-Message-State: AOJu0Yz/Kf2qPmI6j16nnwOsDcMDP+pzKV7KCb+o0JTBm45JVSl8Ifln
- gvL/RJHs0smaA1JPJIaEMjfVaMS4TlvqVaw12lzSZinMaxK/uwkC17KYlkx2rr7lEEdQ7jQQQBD
- g4WDJaXc=
-X-Gm-Gg: ASbGncvD2MorS6zZbAkB+zcO/T03XispsBR0i4Gf76jxHMLYqdx3r6WCD6dAxEtz3th
- tjiDv1n7FTarvMcobwNYXNRXEWrsG+BuSQFk17RHCTLf/g29A9hNaWDa8GP1fr9w8DCsOC1Pmla
- msislxDQbjBbDllHhwlVk7NzZ/aV2PUZYUMP9lTq5B11HXORXpVelrauDyMBo1XN2crCW2iZKZB
- DtFxS+F24VnvuEjWHh0rMpLeC5CNKWHkPnRj0kPePg2PXv2RS7N76u+9h6xFkrlv1wbdl742Hwx
- vWlpVIMxQPNxe/bh3wIni9Vls4V7drCufVZnV6Fl1hDXYEYxr9zBgM0PYRFWukOcfGqrv404c+L
- 0/pgzFl/HuEe5iBdHsqiTIoM=
-X-Google-Smtp-Source: AGHT+IHEJFqOfz3KabCYIf1ndfw4B/bC7yh930puAY/E0n1gmUggO21Dpr8RmxAQni77WcYLoV38xw==
-X-Received: by 2002:a05:6871:204:b0:2d9:3868:b310 with SMTP id
- 586e51a60fabf-2f7afed031cmr219266fac.11.1751665825517; 
- Fri, 04 Jul 2025 14:50:25 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1751667036; x=1752271836;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zaVqH3rVSkaTUPgB9XwtfWNpAKceV4nx3lZckhaxcRY=;
+ b=gp6dK9GYen3YjCtiVTMcs6yVDkfpquUBwwR5FwZvYfvkPjW1tHgLqgmfX6oeCbne99
+ VPm17Mnol5mNzK2VUqsVv65wIYVG18jR+wX1uvp5IypA8M0HaAtpi3fR4cl7MvYYXYUN
+ cQZh+fszMHYsSo9kfz3KhRsTjdDprP022b4qZD4jD5EIYBhK3VsG1S/WXaVV2HQMLUil
+ u7C1l0F1AqbUnUte/K8F5rAjn0HnCzDsNEIavtwMLs4F0mWH/habA1uIWugM3MyY1Nkw
+ nd7YcznXvDdL8oKbES7RO2EzYM42gnonAZxJDnL5GxxLLYhn1I3+lez8VpcMYWwtbf1j
+ RcSg==
+X-Gm-Message-State: AOJu0YwZ8ZMYDaSJbMPpgXdYRAR8gL8Pf/pVZ4lKNkBkVHNkRWBcRGsb
+ Bwehc0vXoZO6TtSeP5OdXJOmNh36RPAJXBSDeDPgP3Kbg8U31D73jj64CuX7ReJ0uu6yDJVGJaF
+ fu/Vnyo8=
+X-Gm-Gg: ASbGnctTkNlO5KrfWr4kr78LShhDn80SQpR8BzarZldRV07SsIRACmio31XSLxAdnmn
+ 5u3TM/wNhXEz2SdmDtmCc6Yfb0VKlLKJowZccdu1eWBscytH2emsax3/2iBwZaddSHLxKBi7Xkl
+ JOWuNjjNfLo3uCNNpgMpbAP1tmbNyUd7PPmviK9AaE6DSb3b1ZtXBxqjt/4anIqzJsihYSDCP+T
+ d9Kq27nP1nELcgkyWDhtFgl7SAoHa/q2l2NzZ3j4oBSWKWo2pwe+EyRQK2y6Upipo3cOfFYcR6Y
+ 6YVo90tR907+k4qQ7KrjykcNOWzSdd/WHFM0B7N/qSx5Tx+vPn5NWBRIR2dn+5HOleu8j0KaRsI
+ Xobs3HsU+cGlj3irXAF68
+X-Google-Smtp-Source: AGHT+IEdCaNIIOPgJMi2vgog5fmpoQBleEwOoNzpfaAyaOlpZVERwMH3aogwNCBeDchtaDQ8NQxlSQ==
+X-Received: by 2002:a05:6830:2a08:b0:73b:1efa:5f40 with SMTP id
+ 46e09a7af769-73cb44965f5mr329115a34.10.1751667036234; 
+ Fri, 04 Jul 2025 15:10:36 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2f79020c84asm739414fac.36.2025.07.04.14.50.24
- for <u-boot@lists.denx.de>
+ 46e09a7af769-73c9f753ee3sm535761a34.24.2025.07.04.15.10.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 14:50:24 -0700 (PDT)
+ Fri, 04 Jul 2025 15:10:35 -0700 (PDT)
+Date: Fri, 4 Jul 2025 16:10:33 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] power: Split *POWER_LEGACY portion of <power/pmic.h>
- out to new header
-Date: Fri,  4 Jul 2025 15:50:21 -0600
-Message-ID: <20250704215021.3419863-2-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250704215021.3419863-1-trini@konsulko.com>
-References: <20250704215021.3419863-1-trini@konsulko.com>
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 0/3] integer limit macro consolidation
+Message-ID: <20250704221033.GN6424@bill-the-cat>
+References: <20250703113730.531225-1-ravi@prevas.dk>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="G7DLdvflF3CJ3BYf"
+Content-Disposition: inline
+In-Reply-To: <20250703113730.531225-1-ravi@prevas.dk>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,230 +96,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commends in include/power/pmic.h say that once SPL_DM_PMIC exists we
-should update things. This has been true for some time, so let us update
-this to have the legacy portions in their own header, which should not
-be directly included. This cleans up the logic within the file too
-slightly.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Remove one more now incorrect comment
----
- include/power/pmic.h        | 89 ++---------------------------------
- include/power/pmic_legacy.h | 94 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 97 insertions(+), 86 deletions(-)
- create mode 100644 include/power/pmic_legacy.h
+--G7DLdvflF3CJ3BYf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/include/power/pmic.h b/include/power/pmic.h
-index 636221692d0b..4aee07383a98 100644
---- a/include/power/pmic.h
-+++ b/include/power/pmic.h
-@@ -17,76 +17,9 @@
- 
- enum { PMIC_I2C, PMIC_SPI, PMIC_NONE};
- 
--/* TODO: Change to !CONFIG_IS_ENABLED(DM_PMIC) when SPL_DM_PMIC exists */
- #if CONFIG_IS_ENABLED(POWER_LEGACY)
--enum { I2C_PMIC, I2C_NUM, };
--enum { PMIC_READ, PMIC_WRITE, };
--enum { PMIC_SENSOR_BYTE_ORDER_LITTLE, PMIC_SENSOR_BYTE_ORDER_BIG, };
--
--enum {
--	PMIC_CHARGER_DISABLE,
--	PMIC_CHARGER_ENABLE,
--};
--
--struct p_i2c {
--	unsigned char addr;
--	unsigned char *buf;
--	unsigned char tx_num;
--};
--
--struct p_spi {
--	unsigned int cs;
--	unsigned int mode;
--	unsigned int bitlen;
--	unsigned int clk;
--	unsigned int flags;
--	u32 (*prepare_tx)(u32 reg, u32 *val, u32 write);
--};
--
--struct pmic;
--struct power_fg {
--	int (*fg_battery_check) (struct pmic *p, struct pmic *bat);
--	int (*fg_battery_update) (struct pmic *p, struct pmic *bat);
--};
--
--struct power_chrg {
--	int (*chrg_type) (struct pmic *p);
--	int (*chrg_bat_present) (struct pmic *p);
--	int (*chrg_state) (struct pmic *p, int state, int current);
--};
--
--struct power_battery {
--	struct battery *bat;
--	int (*battery_init) (struct pmic *bat, struct pmic *p1,
--			     struct pmic *p2, struct pmic *p3);
--	int (*battery_charge) (struct pmic *bat);
--	/* Keep info about power devices involved with battery operation */
--	struct pmic *chrg, *fg, *muic;
--};
--
--struct pmic {
--	const char *name;
--	unsigned char bus;
--	unsigned char interface;
--	unsigned char sensor_byte_order;
--	unsigned int number_of_regs;
--	union hw {
--		struct p_i2c i2c;
--		struct p_spi spi;
--	} hw;
--
--	void (*low_power_mode) (void);
--	struct power_battery *pbat;
--	struct power_chrg *chrg;
--	struct power_fg *fg;
--
--	struct pmic *parent;
--	struct list_head list;
--};
--#endif /* CONFIG_IS_ENABLED(POWER_LEGACY) */
--
--/* TODO: Change to CONFIG_IS_ENABLED(DM_PMIC) when SPL_DM_PMIC exists */
--#if defined(CONFIG_DM_PMIC) || !CONFIG_IS_ENABLED(POWER_LEGACY)
-+#include <power/pmic_legacy.h>
-+#else
- /**
-  * U-Boot PMIC Framework
-  * =====================
-@@ -308,23 +241,7 @@ struct uc_pmic_priv {
- 	uint trans_len;
- };
- 
--#endif /* DM_PMIC */
--
--/* TODO: Change to CONFIG_IS_ENABLED(DM_PMIC) when SPL_DM_PMIC exists */
--#if CONFIG_IS_ENABLED(POWER_LEGACY)
--
--/* Legacy API, do not use */
--int pmic_init(unsigned char bus);
--int power_init_board(void);
--int pmic_dialog_init(unsigned char bus);
--int check_reg(struct pmic *p, u32 reg);
--struct pmic *pmic_alloc(void);
--struct pmic *pmic_get(const char *s);
--int pmic_probe(struct pmic *p);
--int pmic_reg_read(struct pmic *p, u32 reg, u32 *val);
--int pmic_reg_write(struct pmic *p, u32 reg, u32 val);
--int pmic_set_output(struct pmic *p, u32 reg, int ldo, int on);
--#endif /* CONFIG_IS_ENABLED(POWER_LEGACY) */
-+#endif
- 
- #define pmic_i2c_addr (p->hw.i2c.addr)
- #define pmic_i2c_tx_num (p->hw.i2c.tx_num)
-diff --git a/include/power/pmic_legacy.h b/include/power/pmic_legacy.h
-new file mode 100644
-index 000000000000..7c244060b4ab
---- /dev/null
-+++ b/include/power/pmic_legacy.h
-@@ -0,0 +1,94 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ *  Copyright (C) 2014-2015 Samsung Electronics
-+ *  Przemyslaw Marczak <p.marczak@samsung.com>
-+ *
-+ *  Copyright (C) 2011-2012 Samsung Electronics
-+ *  Lukasz Majewski <l.majewski@samsung.com>
-+ */
-+
-+#ifndef __POWER_PMIC_LEGACY_H__
-+#define __POWER_PMIC_LEGACY_H__
-+
-+#ifndef __CORE_PMIC_H_
-+#error "Do not include <power/pmic_legacy.h> directly"
-+#endif
-+
-+enum { I2C_PMIC, I2C_NUM, };
-+enum { PMIC_READ, PMIC_WRITE, };
-+enum { PMIC_SENSOR_BYTE_ORDER_LITTLE, PMIC_SENSOR_BYTE_ORDER_BIG, };
-+
-+enum {
-+	PMIC_CHARGER_DISABLE,
-+	PMIC_CHARGER_ENABLE,
-+};
-+
-+struct p_i2c {
-+	unsigned char addr;
-+	unsigned char *buf;
-+	unsigned char tx_num;
-+};
-+
-+struct p_spi {
-+	unsigned int cs;
-+	unsigned int mode;
-+	unsigned int bitlen;
-+	unsigned int clk;
-+	unsigned int flags;
-+	u32 (*prepare_tx)(u32 reg, u32 *val, u32 write);
-+};
-+
-+struct pmic;
-+struct power_fg {
-+	int (*fg_battery_check) (struct pmic *p, struct pmic *bat);
-+	int (*fg_battery_update) (struct pmic *p, struct pmic *bat);
-+};
-+
-+struct power_chrg {
-+	int (*chrg_type) (struct pmic *p);
-+	int (*chrg_bat_present) (struct pmic *p);
-+	int (*chrg_state) (struct pmic *p, int state, int current);
-+};
-+
-+struct power_battery {
-+	struct battery *bat;
-+	int (*battery_init) (struct pmic *bat, struct pmic *p1,
-+			     struct pmic *p2, struct pmic *p3);
-+	int (*battery_charge) (struct pmic *bat);
-+	/* Keep info about power devices involved with battery operation */
-+	struct pmic *chrg, *fg, *muic;
-+};
-+
-+struct pmic {
-+	const char *name;
-+	unsigned char bus;
-+	unsigned char interface;
-+	unsigned char sensor_byte_order;
-+	unsigned int number_of_regs;
-+	union hw {
-+		struct p_i2c i2c;
-+		struct p_spi spi;
-+	} hw;
-+
-+	void (*low_power_mode) (void);
-+	struct power_battery *pbat;
-+	struct power_chrg *chrg;
-+	struct power_fg *fg;
-+
-+	struct pmic *parent;
-+	struct list_head list;
-+};
-+
-+/* Legacy API, do not use */
-+int pmic_init(unsigned char bus);
-+int power_init_board(void);
-+int pmic_dialog_init(unsigned char bus);
-+int check_reg(struct pmic *p, u32 reg);
-+struct pmic *pmic_alloc(void);
-+struct pmic *pmic_get(const char *s);
-+int pmic_probe(struct pmic *p);
-+int pmic_reg_read(struct pmic *p, u32 reg, u32 *val);
-+int pmic_reg_write(struct pmic *p, u32 reg, u32 val);
-+int pmic_set_output(struct pmic *p, u32 reg, int ldo, int on);
-+
-+#endif
--- 
-2.43.0
+On Thu, Jul 03, 2025 at 01:37:27PM +0200, Rasmus Villemoes wrote:
 
+> I was bitten by our limit macros not being usable in #if conditionals
+> when building a standalone app. It turns out that the work to fix that
+> had already been started by the inclusion of the mbedtls library, so
+> it's something that people do hit.
+>=20
+> Let's finish the job by providing suitable limit macros for all three fam=
+ilies:
+>=20
+> - Standard C types, char, short, ...
+> - Kernel-style fixed-width types s8, u64, ...
+> - POSIX/C99 fixed-width types int16_t, uint32_t, ...
+>=20
+> Please note that a naive approach like spelling out the full decimal
+> value for the constants doesn't really work, as there is no such thing
+> as a "negative integer constant". That is, doing
+>=20
+> #define LLONG_MIN -9223372036854775808LL
+>=20
+> would lead to the compiler complaining
+>=20
+>   warning: integer constant is so large that it is unsigned
+>=20
+> and the type of that LLONG_MIN would actually be "unsigned long long", so=
+ e.g.
+>=20
+> #if LLONG_MIN >=3D 0
+> #warning "LLONG_MIN is not negative?"
+> #endif
+>=20
+> would fire.
+
+Thanks for doing this. I assume you put this through CI? My only real
+concern there is with host tools on macOS/Windows.
+
+--=20
+Tom
+
+--G7DLdvflF3CJ3BYf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhoUVUACgkQFHw5/5Y0
+tyzJTwwAmYJjb2T0czuJVcXnuPFu+9TeFZNS3rop1TU8Wpxo6IN10wM8ILbJrTS1
+cnQTwUq96UiYd14mmTkuf6fOKpHBwr5nlwa+7STjd9QAYwwgOt7phDTSOVrz0OdQ
+BwRfvoCKerlAZw3MkCmV/cnPkfQQHHVHXQcyDB2G6dVkeUwJ7pX8sBnjn77bxsMx
+cP68LsZzPg0lQ8OZMvrQPof4HvDGnMttAuIR9OuUIpi9TAdNOWlDPal3wJVUepJp
+Y8Sk3fPEV4nWrimtAzIko/H0TRS5pf7fOTpBSJ9dkV3XtnRCF9H6uGwK1hSl9vIx
+Jjmvnyjz0Pk+zqrn48flfTU7qchkXhA5rGSmIFa5zXtuc277/FAzweFnqZpkEntk
+1np/LCSxcrv7Fpu4eIQ5uD+tyMdFxvQ6jzG3wp5J696kYi7l4rHbXRVH6/XV6A+H
+ukwBTaZnzHMbt7mxoSP4arvsK6SCHDMt9o/RxZ2s+1IolJO9PEs4b8YslTf37mwV
+D8tWM2nH
+=+yWe
+-----END PGP SIGNATURE-----
+
+--G7DLdvflF3CJ3BYf--
