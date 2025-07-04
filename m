@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7C0CC8303D
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 21:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36E20C83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 21:46:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE50E82FD6;
-	Fri,  4 Jul 2025 23:46:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D8638206E;
+	Fri,  4 Jul 2025 23:46:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yr9nj6hW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O2STFMN2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5727E82063; Fri,  4 Jul 2025 23:46:13 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id DFF3B83015; Fri,  4 Jul 2025 23:46:17 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3155582FCA
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 23:46:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5A2283010
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 23:46:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-72c09f8369cso492640a34.3
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 14:46:11 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-735a6d7c5b1so891378a34.2
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 14:46:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751665570; x=1752270370; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3CHjw3ZD2M0irSCxG7Ezajnrpfhiy6skPler4BpgsGY=;
- b=Yr9nj6hW9V+wWu6nDMuEu5AKI8qWkDukbXzzwbBZ0VrkhvH7aU4aZIOqCbAbWgDxlI
- Bo6DQqA5mgI9MXn+cgKJDNEqAk3+l2YvtHZEhhGvdh92qCvwQTBrExObx2pwdsDvoVxi
- 37BoRBYzURDRNJWOifhjwEZIukkf6zmuY5nQE=
+ d=konsulko.com; s=google; t=1751665574; x=1752270374; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=p6cSRNSCoHtszFPZpQXNpXSLzLloBsF6CgwHbPpmSg0=;
+ b=O2STFMN2mQPT8RBCVu9yEd4o5l8ankSrgTFuntpOMXHAebLoyOv+oYYia/nheE18T2
+ T2WVOMIEG2rotEGvJ/2Y8GIPDx6wOYOlT3WhQpUPHhVB5dFYuabN0vHtdA2yC/5vzYsv
+ F7qXnsTp5FwUlQvrdlGlznRLLzavYcoB/WB4A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751665570; x=1752270370;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3CHjw3ZD2M0irSCxG7Ezajnrpfhiy6skPler4BpgsGY=;
- b=Cqm8zoQX3QzhGAaqWoBtQH5Z//OA5Dkr2pwUgYHg4xhEmCNYR7gQiWwAZ6u2Dk/QhW
- 41HEQbmb8Oo17v5IFj7feS7pZvJw/6nXtOfjELlb42NUFlEOrSOwD/3AVZJOmt0tnlgd
- hVZpHEUBLG0aGWcBF4JDV7khjY270EHqrLeKf4cTKjLoQQ575Yu7YPAQI22KS76feqza
- uF1JFSCj4TAMXJZGsOxXP9kfaPybyj0+vndSCgbmGkGd2KrHZVz4JlNMGuk61wkrcArs
- 8K1gmLZl35uKF/iDohWycDq37G/r+PHuX2u77b44quCfmLhfXjmNSWtndNhhuY7DaR2T
- VDEw==
-X-Gm-Message-State: AOJu0Ywz1HvxYJSN3NaDUlecljeCFzRc1Vdfep/ZL+71e5AzQGfNQIiL
- 4LRcIkR7cAojfWmbLoQJ3gBxjkaTKXaY2RDMYHpKdNFDpUvnLY2MEznJhIvcucxai1TefVCiaXw
- imUniqvI=
-X-Gm-Gg: ASbGncvryugkfHyr1drEUvVyfF8th9F0W+N0mNSUJFDUFr8g9DxtLUsC2dRSy32BsNB
- Sj9OXqQBTEHcTIgHvxTu+5k9i9WQIeuAPfR+lA1k01AZerIYaFtKvhzRsnygG7SAi4uXi9Noc9v
- udhjUVu6Y2JUHz9KcGE4b1GH9fBZyjlJ1OcaJ71SS+zMHWxntvbQsD4BJ10GEpfOE8CW8x4uXOC
- 1N7//a9LnxqSwj7HeOAdgSaClVGLH90kL3eJiYL75ZGVtAyLBYflOExcjqWP7htCEYgCJBdXGRf
- 5RKOv9c46A+JZy51dMeHtUrZFPLock/TMQXGvCzXq+B543gaW88jQoVlY6KoZxdn+bM/W//oZ+2
- 1alS0M9NDARXGcX2j4ikTWeM=
-X-Google-Smtp-Source: AGHT+IEKWxYtfCbAL/t907wfyJer4UGtNeJcxvpxM9Qk/uDllGRpLfvfBtKsEgvQWeGn8Au7skSbgA==
-X-Received: by 2002:a05:6830:3c05:b0:72b:80b4:dbca with SMTP id
- 46e09a7af769-73cb44a48f6mr235722a34.5.1751665569860; 
- Fri, 04 Jul 2025 14:46:09 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751665574; x=1752270374;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=p6cSRNSCoHtszFPZpQXNpXSLzLloBsF6CgwHbPpmSg0=;
+ b=Es7h7Fwwn6oMl5CVCh3VDdHrKvYpzMEKwuny8qqb9A93ckkHaXa2N240uH6j/3EYvq
+ UWBPoLKxQrM7u2dg8D/BbUBVyeRRjJb8CAe9K3tJMojtv/wlD29CzU0EK2lu7h3obuTJ
+ 92UtjMW28wUzZVrxFmUb74grN3n04QTjj34SCQdOUcvR8Rv9X7PBj+WGbXuo4OhY+D2N
+ j9/5Ms9wTQnpJX4iRJrz2lS9lFOmdX5uKwWk8Bp6FosDzcWUfeRXxCJ0z+uC4qk/3kWR
+ K1E2ZkEv6vCXDyr+v2EFPtWFY0/98V/sIDnQ0zFlGVs8xu/CoYd99aTZipS4hFgccG3P
+ RFTQ==
+X-Gm-Message-State: AOJu0YxwoofGvEWO7/sK/A0TTwU0ZSNF6034lvjKBH0mRBn9YbtQJSEe
+ lMvCVsqvv8Vfv/1epnZr1F57hqZj9vX41hx4b4g91aYv/nZiJB0652N7CZwzyyjle7Rtu2UTnaD
+ F0xxyFzU=
+X-Gm-Gg: ASbGncvdF68XaN8KvYYWppv7J7ghHL/UN7Skyprf2gLWgTblVA5ygjLVarr3w5Jl8Rl
+ OROpukycEzqUMxpaudhTXQnvva7Up/MQsUEbA2+wbkm7MeCa/yC6BoUsr0EfcIPiH6AOEXXF2ZD
+ q08+6DsJs0xaItJTz3nie61U+YGP7pUATm/mJHdOXdjAyQctRqYCddI1pj+hxwoU1WzB5QTIy8z
+ zftpfd5PkmPsUOhbUuys4r3owmi1nFiMFzL/OqQEiTnpXWBRk/HZE3rBU2zcPwHf3SsQv/qVqBi
+ 6/5s36bAOrDv+R0iLyv55+xE9nn83s6cKF1jpsf6MAKiy81slk4b4jwU6e/lgJiZmRzmVIOuLmo
+ wvVWPpsztEWJLGoaut2WsFYU=
+X-Google-Smtp-Source: AGHT+IGKKSUY847xyeJJPf4g1KRtwNZs5cj2Q/pTzNSLbSo4tMXyrnx3j0On/0NbFd7ouBYZ6HfDNw==
+X-Received: by 2002:a05:6830:2c03:b0:73a:96e5:19b9 with SMTP id
+ 46e09a7af769-73cb44e1f14mr168819a34.2.1751665574452; 
+ Fri, 04 Jul 2025 14:46:14 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f9628d8sm519483a34.60.2025.07.04.14.46.08
+ 46e09a7af769-73c9f9801dfsm525290a34.66.2025.07.04.14.46.13
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 14:46:09 -0700 (PDT)
+ Fri, 04 Jul 2025 14:46:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 2/2] Kconfig: Test for !COMPILE_TEST in some locations
-Date: Fri,  4 Jul 2025 15:46:06 -0600
-Message-ID: <20250704214606.3418898-2-trini@konsulko.com>
+Subject: [PATCH] block: sandbox: Add support for SYS_64BIT_LBA
+Date: Fri,  4 Jul 2025 15:46:12 -0600
+Message-ID: <20250704214612.3418920-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250704214606.3418898-1-trini@konsulko.com>
-References: <20250704214606.3418898-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,81 +91,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have a few options that we cannot enable in a "allyesconfig" type
-build because we cannot use zero as a default value.
-
-- The logic around HAS_BOARD_SIZE_LIMIT assumes that if we have set this
-  then we compare with it. Similarly, we need to set SPL_NO_BSS_LIMIT as
-  the default there.
-- Both SYS_CUSTOM_LDSCRIPT and ENV_USE_DEFAULT_ENV_TEXT_FILE then prompt
-  for a file name to use.
-- The SYS_I2C_SOFT driver is a legacy driver which requires a lot of
-  configuration within the board config. file instead, so disable it.
+In order to use SYS_64BIT_LBA with this driver we need for "start" to
+also be of type lbaint_t and to then use the correct printf format
+characters.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- Kconfig             | 2 ++
- common/spl/Kconfig  | 1 +
- drivers/i2c/Kconfig | 1 +
- env/Kconfig         | 1 +
- 4 files changed, 5 insertions(+)
+ drivers/block/sandbox.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/Kconfig b/Kconfig
-index 3571f5214e67..c883f1154595 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -537,6 +537,7 @@ config BUILD_TARGET
+diff --git a/drivers/block/sandbox.c b/drivers/block/sandbox.c
+index 6c74d66037e7..9cb27561a97f 100644
+--- a/drivers/block/sandbox.c
++++ b/drivers/block/sandbox.c
+@@ -18,7 +18,7 @@
+ DECLARE_GLOBAL_DATA_PTR;
  
- config HAS_BOARD_SIZE_LIMIT
- 	bool "Define a maximum size for the U-Boot image"
-+	depends on !COMPILE_TEST
- 	default y if RCAR_32 || RCAR_64
- 	help
- 	  In some cases, we need to enforce a hard limit on how big the U-Boot
-@@ -555,6 +556,7 @@ config BOARD_SIZE_LIMIT
+ static unsigned long host_block_read(struct udevice *dev,
+-				     unsigned long start, lbaint_t blkcnt,
++				     lbaint_t start, lbaint_t blkcnt,
+ 				     void *buffer)
+ {
+ 	struct blk_desc *desc = dev_get_uclass_plat(dev);
+@@ -26,7 +26,7 @@ static unsigned long host_block_read(struct udevice *dev,
+ 	struct host_sb_plat *plat = dev_get_plat(host_dev);
  
- config SYS_CUSTOM_LDSCRIPT
- 	bool "Use a custom location for the U-Boot linker script"
-+	depends on !COMPILE_TEST
- 	help
- 	  Normally when linking U-Boot we will look in the board directory,
- 	  the CPU directory and finally the "cpu" directory of the architecture
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 9a17ccb2d3d4..5b520e6f62e9 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -132,6 +132,7 @@ config SPL_BSS_START_ADDR
- choice
- 	prompt "Enforce SPL BSS limit"
- 	depends on !PPC
-+	default SPL_NO_BSS_LIMIT if COMPILE_TEST
- 	default SPL_BSS_LIMIT
- 	help
- 	  In some platforms we only want to enforce a limit on the size of the
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index 9465e61a04c9..108b24b3dd23 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -619,6 +619,7 @@ endif
+ 	if (os_lseek(plat->fd, start * desc->blksz, OS_SEEK_SET) < 0) {
+-		printf("ERROR: Invalid block %lx\n", start);
++		printf("ERROR: Invalid block " LBAF "\n", start);
+ 		return -1;
+ 	}
+ 	ssize_t len = os_read(plat->fd, buffer, blkcnt * desc->blksz);
+@@ -37,7 +37,7 @@ static unsigned long host_block_read(struct udevice *dev,
+ }
  
- config SYS_I2C_SOFT
- 	bool "Legacy software I2C interface"
-+	depends on !COMPILE_TEST
- 	help
- 	  Enable the legacy software defined I2C interface
+ static unsigned long host_block_write(struct udevice *dev,
+-				      unsigned long start, lbaint_t blkcnt,
++				      lbaint_t start, lbaint_t blkcnt,
+ 				      const void *buffer)
+ {
+ 	struct blk_desc *desc = dev_get_uclass_plat(dev);
+@@ -45,7 +45,7 @@ static unsigned long host_block_write(struct udevice *dev,
+ 	struct host_sb_plat *plat = dev_get_plat(host_dev);
  
-diff --git a/env/Kconfig b/env/Kconfig
-index c30785de48b1..c667e8f2da19 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -759,6 +759,7 @@ config SCSI_ENV_PART_UUID
- 
- config ENV_USE_DEFAULT_ENV_TEXT_FILE
- 	bool "Create default environment from file"
-+	depends on !COMPILE_TEST
- 	help
- 	  Normally, the default environment is automatically generated
- 	  based on the settings of various CONFIG_* options, as well
+ 	if (os_lseek(plat->fd, start * desc->blksz, OS_SEEK_SET) < 0) {
+-		printf("ERROR: Invalid block %lx\n", start);
++		printf("ERROR: Invalid block " LBAF "\n", start);
+ 		return -1;
+ 	}
+ 	ssize_t len = os_write(plat->fd, buffer, blkcnt * desc->blksz);
 -- 
 2.43.0
 
