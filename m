@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F892C8303D
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 21:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D422C83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 21:45:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2CEA82A76;
-	Fri,  4 Jul 2025 23:04:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 422198206E;
+	Fri,  4 Jul 2025 23:45:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m4y6bMLw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oxBBD4yO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CD0882F30; Fri,  4 Jul 2025 23:04:27 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 211F382F00; Fri,  4 Jul 2025 23:45:49 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02A2E82063
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 23:04:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D989282063
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 23:45:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-606b58241c9so1983800a12.3
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 14:04:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-611e20dd2ffso412441eaf.2
+ for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 14:45:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751663064; x=1752267864; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qU/oCfAkGT0sv4k8GaOkbC/4f8zTOA5RMlB1YMvI/oI=;
- b=m4y6bMLwrs2YE5OFRr9yCExRRV30Ry7BYhSLJmBHOmr7aCNBdEN2vHyswhpInTHqii
- xQzNcftQK82Ni8d5OWX2tDRnt9gNpNOsc2DcXo7HsP3FOr2B3V19Ewjqj4IEM7aSaMjH
- +u+P6K7Nks7yzR3P1C3d/+AD/ZHRRTrNrOBDXM1EIf8+IOC4NOlLAcuFnqwXPAPydkZO
- JrIeIePyyOWKstMDxWSFxVG+3yIwzo4C7/638pBYezNCXtevjE/PZOhjop/V26569CPl
- PUMb4nPV6u1ZeYV2ZgXjm2xKW0akI7k1fr1V5bWZ40apIssel9PH614luOT+0WxDFhhy
- eF1g==
+ d=konsulko.com; s=google; t=1751665545; x=1752270345; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=08NS9+g6Luc9uijoJj86oscsoKN17OAHf+GAe6mYX1A=;
+ b=oxBBD4yOuaoNHqv2J+xN4hq6FaBULjXyRZ+yq/jwveoOxlIG3lt5oiLE/wdNVbvtz/
+ 90CulHF5KpYw5O5RyS3kRipcfhDxOIQFo36axktz3VuUHDGfJ/HOplWCLAPIPtcpeFB7
+ Zbsr7242bWbJtN+FAVD6oRlQAM2ZZ/3V5DZ+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751663064; x=1752267864;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qU/oCfAkGT0sv4k8GaOkbC/4f8zTOA5RMlB1YMvI/oI=;
- b=xL4u7ipOJr7WWTZbslkY47+/0V+3mvG/7/K2PfaULzNxlSKivX/Nx4lLUSkpl7cYne
- BjyvEHa++gLvfjv1LipBcgEh8cpf4B/qKpWFQts5FQ9E7v3dGXTwbyIkusuRLyu44/Oq
- 9BUyDc9PtHkBsMQRGcNNMAImbsFRpvFnDe2YTTMqamut6kYofbBaO8IInrNznIHitOKn
- nn8G793S0i6TwG1y62g88/XcazzaNthtZNFTBZtZ41K5p+8jdOQcqgGWWnI0Zc0jt9NF
- 5eBfr7yBt9BtqIxbkPkOHJ1y/IzVm6c8JjPFr6K99XMAbQCqOFfep1GGAey8dl0wTkiW
- 2ekA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUpGhHTKj10cdOtM5dBO/MsZWfm/hf5bq5YFVFdZBjhSV7TS2qbPAZhQlBSZFn8MgmsOUh8eA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw70ZP1OamPaHVQsSG5dCtg2in/Ltizr/Xi0JprWGutUpAMypCG
- aumvppZwkHQ2IuIL3sAqhwcv1GyEHuCXdjdCCiHwwKBG5sw8ue5eQxzPKnNznbrc0F+aNncmvaJ
- YNLGnHolfknQHAr4OfwHoM6Tfv2flRv3z1tPj
-X-Gm-Gg: ASbGncuSHfVay6mK5T6VvxYOU9vHyzredKRsXc0xLfg09SPK+rn3yMjBZSAjIuJG5Av
- G58tXVQ7qb7UFDr/vT8AjH3aXMLC2xaLC8iDUBVOlvKJKmwQL3tbBsNVt+pGGt1rgt4ngxvmrMr
- PBQJyNmZ5CsnLtMGTibuvGpQjA0aG70VNERHOfDS6zaGV+
-X-Google-Smtp-Source: AGHT+IFP9s+OSFG4TpCiEk0/wPBVEIRjJH7Qg/TiohDlx52RLGfCORqJkS6QpANUq8stU6OlEw/XezehhMfwi5Kc7Hg=
-X-Received: by 2002:a05:6402:440a:b0:60c:40bd:885a with SMTP id
- 4fb4d7f45d1cf-60fd6d508e0mr3326692a12.17.1751663064018; Fri, 04 Jul 2025
- 14:04:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751665545; x=1752270345;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=08NS9+g6Luc9uijoJj86oscsoKN17OAHf+GAe6mYX1A=;
+ b=dFZF5uZaR5jASsfE/Kat/z5ko420kZnCpcSthCQyUuh76CiOEiDhXnaM7gtco2jyN4
+ T1xFLOPFoghHutiAgosCcY/7BwdyC/M6TzkabmUQpp4km1pa7wzfQXBnzf6sO40l2d8t
+ QR+I3LKEAZPAqMrgk3Y9ck5+txeEJzU8PgLs3btsPfZViB2w3AKSjFk0AXf21wVrciDU
+ S8VgDlWJran1mnV/pLqAmoG+LK/yM3PjIwm1Sk23lC4o82eJQdpD5jei8rL6mugwGjH/
+ i4OTPNH0wUd8TAoDPZdytAnUWOORcGw0u1/TrMaWOHdqNuOwTcF6aV4EJTB6nklGLPhi
+ oHcg==
+X-Gm-Message-State: AOJu0YzmOcgd6/p6MmnvnLrInCbbq/VvB78xUtKt6Ndlc0JTwAkIpEOv
+ Nmx64Fn2mlK68tStLI6hbc7YaAkQlItpTRHyFlKnwsOZ1/56A/qL5F9cTx8vHzt8MT1Bru7PrG4
+ O0A4orsk=
+X-Gm-Gg: ASbGncvoQEzDGCEkPtsFyVJSYsrLy4CRWSVcaprDzhZ2M1uPzYkPBcj2bBWrWS+ibJa
+ +jGvzTwy6BwlwYjWkocxZ+yxp65F2IgJrTWCy9ih4S+eGedzA055QPnrui+cpeSHntTsIRgzr40
+ UYXvF7vfvo5AmzsneCNH6uKgBxlYLcxiELs2VU+Y5pWpe3ah49x+Q8R1E5AM9lpJMim0J5vbycs
+ u3KrhKFTaV/RQ/jLYC3z+7iaB7jxuKgtHEuAEEP40XzEoB1dBjvmSDqzGAKuYXyGCAxSMXFIzbs
+ /6Idl7ZHXAGT+t4J+swgrae3mK6TD1GZAUBvDLZkMky4d+Pv5FDKrzqBbEcU8NIhXM6ayDXbo8i
+ Pd5bu9kI3FQdKlv9pINCdYOw=
+X-Google-Smtp-Source: AGHT+IFlOdWT6PY0nnbdcHqVG6pnpx3jfnVeLh08lu0aUtVefuZNT7C5UWjHgTBv6+YkO0cqYXVcxg==
+X-Received: by 2002:a05:6830:8206:b0:727:3664:ca3a with SMTP id
+ 46e09a7af769-73ca1015d35mr2567357a34.0.1751665545457; 
+ Fri, 04 Jul 2025 14:45:45 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73c9f9628d8sm519370a34.60.2025.07.04.14.45.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jul 2025 14:45:44 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH 1/2] toradex: Switch from ARCH_MISC_INIT to MISC_INIT_R in
+ some cases
+Date: Fri,  4 Jul 2025 15:45:41 -0600
+Message-ID: <20250704214542.3418805-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
- <47e2ae8a-19b1-4841-bdde-e2994d1a7f70@linaro.org>
- <eb06107f-2a8b-4347-9937-89d099f22c89@linaro.org>
- <CAJaLiFwW_=GZcyS8qEyCepkYyHsGs-3hOiS6ubNbN=2=WC9ReA@mail.gmail.com>
- <20250621013656.GP216500@bill-the-cat>
- <2b144700-371c-4492-9244-41539457050b@linaro.org>
-In-Reply-To: <2b144700-371c-4492-9244-41539457050b@linaro.org>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 4 Jul 2025 14:04:12 -0700
-X-Gm-Features: Ac12FXz_5dr10FCRXbEDgkF7RO10P9VdRz-PqtnX4tlj2ykZu9P9S46f5AIUtnM
-Message-ID: <CAJaLiFwc-aV67oYnRTHcEeDZByqr_LeS_uOv2O60QXGJ4ByEhQ@mail.gmail.com>
-Subject: Re: arm: mvebu: Kirkwood boards are broken by commit 6fe50e3
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,164 +93,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome & Tom,
+The hook arch_misc_init was not intended to be used for per-board hooks.
+This can be done with misc_init_r instead, which is what follows
+immediately after arch_misc_init. Switch a few platforms.
 
-On Mon, Jun 23, 2025 at 1:10=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Hi Tom,
->
-> On 6/21/25 03:36, Tom Rini wrote:
-> > On Fri, Jun 20, 2025 at 02:21:59PM -0700, Tony Dinh wrote:
-> >> Hi Jerome,
-> >>
-> >> On Fri, Jun 20, 2025 at 4:03=E2=80=AFAM Jerome Forissier
-> >> <jerome.forissier@linaro.org> wrote:
-> >>>
-> >>> On 6/20/25 12:53, Jerome Forissier wrote:
-> >>>> Hi Tony,
-> >>>>
-> >>>> On 6/19/25 22:37, Tony Dinh wrote:
-> >>>>> Hi Jerome,
-> >>>>>
-> >>>>> While fixing some ext4 file system problems on 2025.07-rc4, I ran i=
-nto
-> >>>>> a problem booting a few Kirkwood boards. kwboot loaded the u-boot
-> >>>>> image,
-> >>>>> and then u-boot execution was frozen without anything going to the
-> >>>>> serial console. I did a bisect and found the commit that caused it.
-> >>>>>
-> >>>>> https://github.com/trini/u-boot/commit/6fe50e39508043f386fc1bd40bbc=
-02b8a75c1940
-> >>>>>
-> >>>>> When I tried to reverse this commit, I had a build error like this
-> >>>>> "{standard input}:24246: Error: selected processor does not support
-> >>>>> `mrc p15,1,r3,c15,c1,0' in Thumb mode"
-> >>>>>
-> >>>>> Currently, the only way to boot Kirkwood boards is to disable eithe=
-r
-> >>>>> CONFIG_LTO or CONFIG_SYS_THUMB_BUILD or both.
-> >>>>>
-> >>>>> I'm using the pogo_v4 and nsa325 boards as test beds. Please let me
-> >>>>> know if I can help with testing to troubleshoot this regression.
-> >>>>>
-> >>>>> All the best,
-> >>>>> Tony
-> >>>>
-> >>>> The problem seems to be that some arm32 instructions are inlined
-> >>>> inside thumb code and that's not allowed on this CPU without some
-> >>>> interworking instruction (bx, blx etc.). For example, consider
-> >>>> board_init_r(), is is mainly 16-bit instructions (Thumb):
-> >>>>
-> >>>> 006186a0 <board_init_r>:
-> >>>> board_init_r():
-> >>>> /home/jerome/work/u-boot/common/board_r.c:799
-> >>>>   6186a0:       b5f0            push    {r4, r5, r6, r7, lr}
-> >>>>   6186a2:       b0ab            sub     sp, #172        @ 0xac
-> >>>> get_gd():
-> >>>> /home/jerome/work/u-boot/./arch/arm/include/asm/global_data.h:127
-> >>>>   6186a4:       464a            mov     r2, r9
-> >>>> ...
-> >>>>
-> >>>> but then suddenly:
-> >>>>
-> >>>> /home/jerome/work/u-boot/arch/arm/mach-kirkwood/cpu.c:242
-> >>>>   619aae:       9b15            ldr     r3, [sp, #84]   @ 0x54
-> >>>> writefr_extra_feature_reg():
-> >>>> /home/jerome/work/u-boot/./arch/arm/include/asm/arch/cpu.h:100
-> >>>>   619ab0:       ee2f3f11        mcr     15, 1, r3, cr15, cr1, {0}
-> >>>>                 ^^^^^^^^
-> >>>>                 32-bit arm instruction
-> >>>>
-> >>>> I would expect some call to a *_from_thumb() veneer, such as in:
-> >>>>
-> >>>> 006009dc <do_bootm_qnxelf>:
-> >>>> [...]
-> >>>> /home/jerome/work/u-boot/boot/bootm_os.c:379
-> >>>>   600a02:       9501            str     r5, [sp, #4]
-> >>>> /home/jerome/work/u-boot/boot/bootm_os.c:384
-> >>>>   600a04:       f04a fc7c       bl      64b300 <__dcache_status_from=
-_thumb>
-> >>>>
-> >>>>
-> >>>> 0064b130 <__dcache_enable_from_thumb>:
-> >>>> __dcache_enable_from_thumb():
-> >>>>   64b130:       4778            bx      pc
-> >>>>   64b132:       e7fd            b.n     64b130 <__dcache_enable_from=
-_thumb>
-> >>>>   64b134:       e59fc000        ldr     ip, [pc]        @ 64b13c <__=
-dcache_enable_from_thumb+0xc>
-> >>>>   64b138:       e08cf00f        add     pc, ip, pc
-> >>>>   64b13c:       fffffb28        .word   0xfffffb28
-> >>>>
-> >>>> We may need to move the inline functions with mrc/mcr to a .S file,
-> >>>> making sure it's built with -marm on CPUs that do not support Thumb2=
-.
-> >>>> Then hopefully the proper interworking sequence would be inserted by=
- the
-> >>>> linker as is the case when Thumb is calling into object files result=
-ing
-> >>>> from .c files built with -marm (for example: arch/arm/mach-kirkwood/=
-cpu.c
-> >>>> which has CFLAGS_cpu.o :=3D -marm).
-> >>>>
-> >>>> In the meantime, could you try the following patch?
-> >>>>
-> >>>> diff --git a/common/Makefile b/common/Makefile
-> >>>> index 35991562a12..a509675335a 100644
-> >>>> --- a/common/Makefile
-> >>>> +++ b/common/Makefile
-> >>>> @@ -19,6 +19,8 @@ obj-y +=3D version.o
-> >>>>  # # boards
-> >>>>  obj-y +=3D board_f.o
-> >>>>  obj-y +=3D board_r.o
-> >>>> +CFLAGS_board_f.o +=3D -marm
-> >>>> +CFLAGS_board_r.o +=3D -marm
-> >>>>  obj-$(CONFIG_DISPLAY_BOARDINFO) +=3D board_info.o
-> >>>>  obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) +=3D board_info.o
-> >>>>
-> >>>> I think it should resolve the issue, but is does also increase the
-> >>>> size of the binary (+4 KiB). So the .S solution would definitely be
-> >>>> better if it works IMO. I'll try to propose something ASAP, will
-> >>>> likely be on Monday, feel free to give it a try by yourself though :=
-)
-> >>>
-> >>> Or maybe this which is a bit less radical:
-> >>>
-> >>> diff --git a/common/Makefile b/common/Makefile
-> >>> index 35991562a12..f0b7eadf7d2 100644
-> >>> --- a/common/Makefile
-> >>> +++ b/common/Makefile
-> >>> @@ -19,6 +19,8 @@ obj-y +=3D version.o
-> >>>  # # boards
-> >>>  obj-y +=3D board_f.o
-> >>>  obj-y +=3D board_r.o
-> >>> +CFLAGS_REMOVE_board_f.o :=3D $(LTO_CFLAGS)
-> >>> +CFLAGS_REMOVE_board_r.o :=3D $(LTO_CFLAGS)
-> >>>  obj-$(CONFIG_DISPLAY_BOARDINFO) +=3D board_info.o
-> >>>  obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) +=3D board_info.o
-> >>>
-> >>> Still results in +1 KiB.
-> >>
-> >> The above patch works great! I've tested it on 3 Kirkwood boards: the
-> >> Pogo V4 (88F6192), Zyxel NSA325 (88F6282), and GoFlex Home (88F6281,
-> >> same SoC as the Sheevaplug).
-> >>
-> >> The Sheevaplug is now 498K, which is well under limit. All these
-> >> boards see only 1K increase in binary size.
-> >
-> > Can we please get a patch of the latter option now for the release and
-> > look at doing the .S file for the future? Thanks!
->
-> https://lists.denx.de/pipermail/u-boot/2025-June/592785.html
->
-> Regards,
-> --
-> Jerome
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+---
+ board/toradex/apalis-tk1/apalis-tk1.c   | 2 +-
+ board/toradex/apalis_t30/apalis_t30.c   | 2 +-
+ board/toradex/colibri_t20/colibri_t20.c | 2 +-
+ board/toradex/colibri_t30/colibri_t30.c | 2 +-
+ configs/apalis-tk1_defconfig            | 2 +-
+ configs/apalis_t30_defconfig            | 2 +-
+ configs/colibri_t20_defconfig           | 2 +-
+ configs/colibri_t30_defconfig           | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
-Just a heads up, in a few days I'll be away for a few weeks. And not
-sure I can access my development box to do the testing for the
-upcoming .S patch. If not, I will do that late next month.
+diff --git a/board/toradex/apalis-tk1/apalis-tk1.c b/board/toradex/apalis-tk1/apalis-tk1.c
+index 4557ed1f1f2f..168840764a1d 100644
+--- a/board/toradex/apalis-tk1/apalis-tk1.c
++++ b/board/toradex/apalis-tk1/apalis-tk1.c
+@@ -36,7 +36,7 @@
+ #define VCC_USBO1	TEGRA_GPIO(T, 5)
+ #define VCC_USBO1_V1_0	TEGRA_GPIO(N, 4)
+ 
+-int arch_misc_init(void)
++int misc_init_r(void)
+ {
+ 	if (readl(NV_PA_BASE_SRAM + NVBOOTINFOTABLE_BOOTTYPE) ==
+ 	    NVBOOTTYPE_RECOVERY) {
+diff --git a/board/toradex/apalis_t30/apalis_t30.c b/board/toradex/apalis_t30/apalis_t30.c
+index 02e8f8eb1fed..2c785da41eaa 100644
+--- a/board/toradex/apalis_t30/apalis_t30.c
++++ b/board/toradex/apalis_t30/apalis_t30.c
+@@ -35,7 +35,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ static int pci_reset_status;
+ #endif /* CONFIG_APALIS_T30_PCIE_EVALBOARD_INIT */
+ 
+-int arch_misc_init(void)
++int misc_init_r(void)
+ {
+ 	if (readl(NV_PA_BASE_SRAM + NVBOOTINFOTABLE_BOOTTYPE) ==
+ 	    NVBOOTTYPE_RECOVERY)
+diff --git a/board/toradex/colibri_t20/colibri_t20.c b/board/toradex/colibri_t20/colibri_t20.c
+index d432fd2b843d..05c3377a60bc 100644
+--- a/board/toradex/colibri_t20/colibri_t20.c
++++ b/board/toradex/colibri_t20/colibri_t20.c
+@@ -29,7 +29,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define PMU_SUPPLYENE_SYSINEN	(1<<5)
+ #define PMU_SUPPLYENE_EXITSLREQ	(1<<1)
+ 
+-int arch_misc_init(void)
++int misc_init_r(void)
+ {
+ 	/* Disable PMIC sleep mode on low supply voltage */
+ 	struct udevice *dev;
+diff --git a/board/toradex/colibri_t30/colibri_t30.c b/board/toradex/colibri_t30/colibri_t30.c
+index 342673ac506c..1b091ea1694e 100644
+--- a/board/toradex/colibri_t30/colibri_t30.c
++++ b/board/toradex/colibri_t30/colibri_t30.c
+@@ -18,7 +18,7 @@
+ #include "pinmux-config-colibri_t30.h"
+ #include "../common/tdx-common.h"
+ 
+-int arch_misc_init(void)
++int misc_init_r(void)
+ {
+ 	if (readl(NV_PA_BASE_SRAM + NVBOOTINFOTABLE_BOOTTYPE) ==
+ 	    NVBOOTTYPE_RECOVERY)
+diff --git a/configs/apalis-tk1_defconfig b/configs/apalis-tk1_defconfig
+index de30fa1b961c..846c7bde2343 100644
+--- a/configs/apalis-tk1_defconfig
++++ b/configs/apalis-tk1_defconfig
+@@ -27,7 +27,7 @@ CONFIG_CONSOLE_MUX=y
+ CONFIG_SYS_STDIO_DEREGISTER=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_ARCH_MISC_INIT=y
++CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+diff --git a/configs/apalis_t30_defconfig b/configs/apalis_t30_defconfig
+index e9c9cfe940e4..57e1eb733a87 100644
+--- a/configs/apalis_t30_defconfig
++++ b/configs/apalis_t30_defconfig
+@@ -22,7 +22,7 @@ CONFIG_CONSOLE_MUX=y
+ CONFIG_SYS_STDIO_DEREGISTER=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_ARCH_MISC_INIT=y
++CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+diff --git a/configs/colibri_t20_defconfig b/configs/colibri_t20_defconfig
+index c8a17cd40a2f..02e33ba5e3cb 100644
+--- a/configs/colibri_t20_defconfig
++++ b/configs/colibri_t20_defconfig
+@@ -20,7 +20,7 @@ CONFIG_SYS_PBSIZE=1055
+ CONFIG_SYS_STDIO_DEREGISTER=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_ARCH_MISC_INIT=y
++CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+diff --git a/configs/colibri_t30_defconfig b/configs/colibri_t30_defconfig
+index 8d7a6bf7060c..63b695c1e54b 100644
+--- a/configs/colibri_t30_defconfig
++++ b/configs/colibri_t30_defconfig
+@@ -21,7 +21,7 @@ CONFIG_CONSOLE_MUX=y
+ CONFIG_SYS_STDIO_DEREGISTER=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_ARCH_MISC_INIT=y
++CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-- 
+2.43.0
 
-All the best,
-Tony
