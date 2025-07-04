@@ -4,84 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA472C83F03
-	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 15:56:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DCE9C83F03
+	for <u-boot@archiver.kernel.org>; Fri,  4 Jul 2025 15:56:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42FE78277D;
-	Fri,  4 Jul 2025 17:56:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BDC0A82CFA;
+	Fri,  4 Jul 2025 17:56:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dKqMmC7p";
+	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="aY9iOJkL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C8E082CFA; Fri,  4 Jul 2025 17:56:18 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8CD8C8206E; Fri,  4 Jul 2025 17:05:10 +0200 (CEST)
+Received: from mail-24420.protonmail.ch (mail-24420.protonmail.ch
+ [109.224.244.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12BC9803DF
- for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 17:56:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CE5C803DF
+ for <u-boot@lists.denx.de>; Fri,  4 Jul 2025 17:05:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-2eff5d1c7efso869316fac.2
- for <u-boot@lists.denx.de>; Fri, 04 Jul 2025 08:56:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751644575; x=1752249375; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FQlNfVFJqj7Adaco4+GK4doHQNyFD7Co2rf2Lm0Ry6w=;
- b=dKqMmC7pOE9DGwBBw7cPOkisr8nk7NvJvLmnfZ75DaO9IytJY+Luofgx19JKCT4LU6
- i9iJvwRizfDGMWPJwYEJ8RytS+/7+DaO87TaHDyUClYQ/MFQzOX4XhIpggD6jMQLjpZo
- VzvcMHQMQ2H+31rCj1DXbxSol//En/P1DKHqI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751644575; x=1752249375;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FQlNfVFJqj7Adaco4+GK4doHQNyFD7Co2rf2Lm0Ry6w=;
- b=KaiX/QixEeeZ3k2JI3M6X07GpuIsxPUg6CxVos4YbQ9nRlpAOBLhNJyZUiUGTFyvEY
- iOMf/RWQQd7r/UE3BlqlR6kgOE/OEx7dpgWmuVhVsgQwR4zlSie05XGHZpxM4p12JTKm
- ry9TXRLHlkC2dfaWEGJS14sjdSND8ZF8QKT3MQiviNQazTQ1skacf0MT4X9WnDosb9Qy
- jReG/9KpBOly5+OA+ODRgAkklyWfzXZH+EDzXoRG5fIEX9EuI/9HXWNc+U4uTDO4p3ps
- pMyKssKpIabzqeslbH1eGLHJOjduuGYM9fAC0WO/5PC15wh15SVWpt43KgwWZb9fUwnQ
- qzQA==
-X-Gm-Message-State: AOJu0Yw1BrTxPW+moFI4BEChqFzIqS04R7ip/VqCcRwueMxdR0yrotpu
- 1OxAOleDs7xoBl0YxNIRw3r+wYUzZC6iqnAnY1lER5hrOekFLKv45hvTkhCOkMG7ZH+e6HWIgTb
- mhLykzPM=
-X-Gm-Gg: ASbGnctw+EewQN5CdYoBUh47/FfJRiwlV4I2wI01/i+t22bQiaEOOgbWOJ72SXNhoOe
- PI+i2GGGPhfd35YyAgNWRcu3R0m5Kses2Gbte0TpHXmn2pnpoYW9B7Z2f30HdZchXVo2e2AoPnH
- OsGlI5KgcbT6QKzBlaDnGw7iitPPH2rO/JGck2XQvUr8m7uEnDhaSue+qmF3M3wmF2hMkP8zcMA
- CQzYJV4KZ5Sgw9dkeeuvf0XaHo6++z1Xd3R8lqf09SA+o+/WBzWWbCkYESoPKI0tVwsfXGdcA+g
- ozfeDOuwxkIndJST63Gtf4IKWBn+Gu3L/I0UYBaBETdxQFuAeERnDSlNdAarVimGU+oKhhyiaNo
- PFGCjn6oWvyVaZh4GrxrH
-X-Google-Smtp-Source: AGHT+IEN9+zl1Du+YVBGdO0fIM3EUMQ4SGV5CKAVzVkxwFrpwGpGK/r/67bnefNEIfIpNoBxNFJvzA==
-X-Received: by 2002:a05:6870:a413:b0:2f7:64ff:aae2 with SMTP id
- 586e51a60fabf-2f796d61630mr2021081fac.36.1751644574742; 
- Fri, 04 Jul 2025 08:56:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2f78ff03f88sm568369fac.2.2025.07.04.08.56.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 08:56:13 -0700 (PDT)
-Date: Fri, 4 Jul 2025 09:56:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, jerome.forissier@linaro.org,
- otavio@ossystems.com.br, michael@amarulasolutions.com, uboot-imx@nxp.com
-Subject: Re: [PATCH v2] mx6sabresd: Reduce U-Boot proper size to fix boot
- regression
-Message-ID: <20250704155611.GH6424@bill-the-cat>
-References: <20250704144022.3946416-1-festevam@gmail.com>
+ spf=pass smtp.mailfrom=analog@philipmolloy.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
+ s=protonmail2; t=1751641506; x=1751900706;
+ bh=VZu++WlM+TLN1JEZvOjtC0zGgrp650djQxyQ/EG4qEI=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=aY9iOJkLDOJti3dloyS0pVLpAzCeotxWmLSfrdgWW+eCIsnSYuyCDtbwHHDKQ3QUL
+ k2TadBVVm8v0jTRI9iYZrnAinh70fQHTA10FeBg1LygkONW7ZXGAX7nKWk5VtV2gDE
+ s92U1IpR6deZtdt0caw/qHpadp0HMHJ+hTmmDPZIDCDiNntMxAjrfDHeaV1j2hTELM
+ f45z45Eo/uOoidEoZj7GyfSx1qA/iFyPxQi1OeKABSx3BedohOpDuLd0FmfZNvYbIE
+ Uqu0oG8OwiLlwPNeOaMarOWyWACs2mpHOjJPEOO/SkHei3ABntPDcjHlX8J9ov+1Oa
+ LHwmJ+EWzbk4g==
+Date: Fri, 04 Jul 2025 15:04:59 +0000
+To: Greg Malysa <malysagreg@gmail.com>, u-boot@lists.denx.de
+From: Philip Molloy <analog@philipmolloy.com>
+Cc: adsp-linux@analog.com, Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Tom Rini <trini@konsulko.com>,
+ Trevor Woerner <twoerner@gmail.com>, Philip Molloy <philip.molloy@analog.com>
+Subject: Re: [PATCH 08/10] board: adi: Add support for SC598
+Message-ID: <ec9cf50848f43349e73acbbe34ddcfcb1448d406.camel@philipmolloy.com>
+Feedback-ID: 149422483:user:proton
+X-Pm-Message-ID: 947ee5eb857f365f937cb2d2668fea869aea5a20
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U4OTyF4flGH4jJYa"
-Content-Disposition: inline
-In-Reply-To: <20250704144022.3946416-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 04 Jul 2025 17:56:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,39 +71,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 2025-06-02 at 15:44 -0400, Greg Malysa wrote:
+> > =C2=A0&clk {
+> > =C2=A0 compatible =3D "adi,sc598-clocks";
+> > =C2=A0 reg =3D <0x3108d000 0x1000>,
+> > - =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x3108e000 0x1000>,
+> > - =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x3108f000 0x1000>,
+> > - =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x310a9000 0x1000>;
+> > + <0x3108e000 0x1000>,
+> > + <0x3108f000 0x1000>,
+> > + <0x310a9000 0x1000>;
 
---U4OTyF4flGH4jJYa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Could it be that everything is indented with 4 space tabs rather than 8?
 
-On Fri, Jul 04, 2025 at 11:40:22AM -0300, Fabio Estevam wrote:
+> > + gpio_expander1: mcp23018@20 {
+> > + compatible =3D "microchip,mcp23018";
 
-> The mx6sabresd U-Boot proper binary size has grown beyond the=20
-> CONFIG_BOARD_SIZE_LIMIT.
+It looks like this corresponds to Rev D of the SOM. There is a Rev E of the=
+ SOM with a adi,adp5588 like on the ezlite and a 1Gb SPI flash. I imagine R=
+ev D is no longer being manufactured, but I'm waiting to hear back internal=
+ly at ADI. Changes for Rev E can be made in another series, but it might be=
+ nice to add a `Link: <...>` to the schematics in the commit message so it =
+is clear which revision this corresponds to.
 
-So, is CONFIG_BOARD_SIZE_LIMIT set incorrectly then and needs to be
-lowered?
+> > + uart0 {
+> > + gpio-hog;
+> > + gpios =3D <5 GPIO_ACTIVE_HIGH>;
 
---=20
-Tom
+It looks like the PI3C3125 bus switch has active LOW enables. That would ex=
+plain why `output-low` and GPIO_ACTIVE_HIGH result in a functional UART.
 
---U4OTyF4flGH4jJYa
-Content-Type: application/pgp-signature; name="signature.asc"
+> > + output-low;
+> > + line-name =3D "~uart0-en";
 
------BEGIN PGP SIGNATURE-----
+I couldn't find any other examples of ~ being used as a prefix for `line-na=
+me` in U-Boot or in the Kernel.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhn+ZcACgkQFHw5/5Y0
-tywYhgwAtpZulo5OVcKlnD2FJxe+8SgaO9ggjljXdfdXrGohRZ8pE7K7EF0unV7i
-uMiez0HV1iJp5ZD0d/2yrFs3dizIaW6SoH8EyUE0cD0W4pQbzoldDL+HwO5e8evQ
-8Y1AjApvA5uJtfOG94KwKPxyUVlRB0e7n9KVU8G+t8qaVmP9jTd3AbGaGaUfWbkb
-NTqr8I+Q1Fbnkb1V5/Y3yj0rlADLjrd+DpOkkWVkw9j0kuL8puQfWz/6bbKd/Lts
-uMFPTkdytRTK8L6ZS5OqZKqOSB9ze3Iq4HUc2c4oeRByLheqWsPopUxBZP/HnAPL
-LAuZzfhp3cHLvudTdvy4U5z0bldKy9s8l+s5w6/DYTpj2U4VTcDpFWv7prf8w1/7
-7zJgIjavsMjA5Q2w9ghQFknL5Nhzx0ELfJTUHUQuHhHx4MHDiZAyVuC7ecx3Cq4O
-ojnGCYPCe9fCXR4UJd3Wmh2hOVb5DFDSIWXBRSlPkXt8Qegxgo0rNFRRy8XwkXi5
-mSrQFk8d
-=GGAi
------END PGP SIGNATURE-----
+> > + bootph-pre-ram;
 
---U4OTyF4flGH4jJYa--
+Unfortunately, SPL doesn't currently configure the GPIO expander before usi=
+ng the UART so there is no output until U-Boot proper is booted. I did a li=
+ttle JTAG debugging and neither the GPIO expander was probed, nor the ADI I=
+2C driver.
+
+By probing before the bus switch I could see the following getting output:
+
+U-Boot SPL 2025.07-rc4 (Jul 04 2025 - 13:31:08 +0200)
+ADI Boot Mode: 0x0 (JTAG/BOOTROM)
+
+Unfortunately, the ADI UART driver does not support DEBUG_UART. I also trie=
+d adding devicetree entries for uart2 (which is routed to the carrier board=
+) without luck.
+
+Ideally, this would be documented somewhere, otherwise anyone booting SPL o=
+ver JTAG may think something is wrong.
