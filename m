@@ -4,85 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2AB3C8303C
-	for <u-boot@archiver.kernel.org>; Sat,  5 Jul 2025 10:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FD6C83F03
+	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:50:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0E8A82063;
-	Sat,  5 Jul 2025 12:02:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 79711810EB;
+	Sun,  6 Jul 2025 05:50:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=pm.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="T9yDRgkV";
+	dkim=pass (2048-bit key; secure) header.d=pm.me header.i=@pm.me header.b="im7G/Cga";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED0158206E; Sat,  5 Jul 2025 12:02:11 +0200 (CEST)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DA3698206E; Sat,  5 Jul 2025 20:48:21 +0200 (CEST)
+Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
+ [79.135.106.30])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B598381D5D
- for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 12:02:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9E2D2809A5
+ for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 20:48:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-311a6236effso1286954a91.2
- for <u-boot@lists.denx.de>; Sat, 05 Jul 2025 03:02:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1751709728; x=1752314528;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/REjAzNcj37hWP9CIzVA0Ba1mexsJ/Jlm647mFWgB8M=;
- b=T9yDRgkVUEERB4pLX7Ajkg19V75YP1K3JOc7Y/UZvm7xwFljHFWqq8kGnpKYgp8z5o
- AWEeMVP0WdiwuO3vCHGRnrWzqcOB94puF2gmFbWap/YGxJC0pVn2f9V5Yrnyfg3mA7eo
- Umzx2JApzgNq9uuyFePlsCk/LbKDhK4OO3LQw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751709728; x=1752314528;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/REjAzNcj37hWP9CIzVA0Ba1mexsJ/Jlm647mFWgB8M=;
- b=NBE7W2qfREE5OKz/iQ2MVCZyxCV0QYfJU+4x81rk0BQeiKWtE+wX9+sVdxsJg8cUrT
- JRM6JMCt483Z055q994YvnPAoJAZdjiSshdNmWn2k057H/EPH96nx6VGHq85U+UFL0yw
- ro9qOWsel+xqmRVvzpm1TsOv0wetj8UHIzxCFItTnIEiOBUiNydGQI6X8dsNcLBmmwwA
- DLj0YlwK513I3EZfebjBSOf+priOhLHftopbO0wsWfnYyWkC0uflTlbIkoJ4UnJNDrsR
- RRVBIDzqjF+ZmC7Emy+UeIw0otw87Ixu5NQkoLGCKzBrfHZLxeWoSs47vy3I3P5o0Czc
- UkVw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUhsC8WNeK+78W9pxb0xdOO9zpa5wNHjOVVg4F3lL7ITt44wha5cYHkwMGKpY4NFokTTGxA4co=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2lXQu9Xqfr0Q8Q7XtJcAunyox2/Hg4iaKSVi5VBbCLH6bNQfG
- 9THm7yDslpBkJIf3MCeCfODSFojRW3RvheJG8BPBa4ienFdmV1TmGbGn2sPA4Q/ryWBQlUkDLNB
- EcYVNHK32SwuZuZokfR65NO/EKqVI8pfAN/2DUhe+pQ==
-X-Gm-Gg: ASbGncurCP49La2KYgKy682b605BNlFzAUeK9pZmhwSj6xrDqmSiDKeo3Xww8y46tjP
- 4XDefYMC08fZyES46/G3wxP8x2TpnAQgkJnD20QVtNwdKksOzmJHrXu91IHQnc0FTCKnw0gDx9K
- YF6aSBL3ArDnfsBiMKMRPhWd6wZi3/yzok6qWc6sjzoA==
-X-Google-Smtp-Source: AGHT+IHwIYkyQnBv0EiPpowqE/TjDrsNMAToGN9W4CHAPw1uzeU5H4/b6e6qRB2XDfjYdy7s95L6oddnHCfLKPPvmZw=
-X-Received: by 2002:a17:90b:3804:b0:312:da0d:3d85 with SMTP id
- 98e67ed59e1d1-31aac438684mr7932357a91.6.1751709728204; Sat, 05 Jul 2025
- 03:02:08 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rjstoneus@pm.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+ s=protonmail3; t=1751741298; x=1752000498;
+ bh=2M9zfLCBlsWqTu8yaCBcg6deGc9yMCYS6gDDdapVAbA=;
+ h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=im7G/Cgaax9TQfhfBzebSHetH2wjgWLGshXYauKiY90mPQdmfqYa2UNKkCSKKSso8
+ LJhJ5eUq81P9rztye2n7psd2m2ZaD9C16ieSypNs0MQ8FzmQ6HQi5sirVs6jOPlP6/
+ XTKSVj7va3uVZGDkJBT3INH29rHI6wlCZ3ZKso5ZMf9xKHqYDTHAOrZEDg+CWjtiQp
+ Lv7R5AEUwkDb+/YEp8o/qAoejjwpirk37h+1TnBnLDD2VDhmlZWEgriivfX4jyfxJq
+ gj7lfCbBiAeYE1E6hMhsgTW8MWbZs/wEkOrIxh62yse/5/apR3NRwhY+xOa8kRBDJG
+ aJCRU32xOQf1g==
+Date: Sat, 05 Jul 2025 18:48:12 +0000
+To: u-boot@lists.denx.de
+From: Robert Stone <rjstoneus@pm.me>
+Subject: [PATCH] drivers: remove -mgeneral-regs-only for truetype
+Message-ID: <2a6ea8e8-788e-4eab-b06b-b553cf4f8320@pm.me>
+Feedback-ID: 39838635:user:proton
+X-Pm-Message-ID: f4a7ac20097ee0ccb21aff1826ebe8cf7d51a21e
 MIME-Version: 1.0
-References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
- <CAOMZO5Dhs2GRgvjDCBbwsxxZadsVCrpXaWm4qToYfpak+CAKuw@mail.gmail.com>
- <CAOMZO5Bjxx5tjj75Bo8A4WJWBnV3Q8h1UHK45_xZgOavig0C9w@mail.gmail.com>
- <0b7fcdb0-0d18-41ef-8607-cf060ce3d058@linaro.org>
- <CAOf5uwniX09rvpChMVrFWVG-X5S52aK_ZjnpS8EAN24=r1youA@mail.gmail.com>
- <CAOMZO5B-4qUypOyVEiZt6V_4S35G4m6WATmdXqKnFCwsQJxF9A@mail.gmail.com>
-In-Reply-To: <CAOMZO5B-4qUypOyVEiZt6V_4S35G4m6WATmdXqKnFCwsQJxF9A@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sat, 5 Jul 2025 12:01:56 +0200
-X-Gm-Features: Ac12FXzma_YB1Oofm7ERes9AD35nyL38nos5ZZrRg6RVdc04Vxm7YkHjfDlnxFI
-Message-ID: <CAOf5uwntwHoVEg=DUXSkDzL3az4_wun0YyASAQV6p5UFFtB6aA@mail.gmail.com>
-Subject: Re: [PATCH v6 0/3] Static initcalls
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Otavio Salvador <otavio@ossystems.com.br>, dl-uboot-imx <uboot-imx@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+ micalg=pgp-sha256;
+ boundary="------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de";
+ charset=utf-8
+X-Mailman-Approved-At: Sun, 06 Jul 2025 05:50:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,48 +65,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Message-ID: <2a6ea8e8-788e-4eab-b06b-b553cf4f8320@pm.me>
+Date: Sat, 5 Jul 2025 11:47:58 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Robert Stone <rjstoneus@pm.me>
+To: u-boot@lists.denx.de
+Subject: [PATCH] drivers: remove -mgeneral-regs-only for truetype
 
-On Fri, Jul 4, 2025 at 3:33=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
-rote:
->
-> Hi Michael,
->
-> On Fri, Jul 4, 2025 at 5:37=E2=80=AFAM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->
-> > We have problems that our board crashes with display enabled when this
-> > series is applied but we can boot
-> > if the series is reverted. We are still try to understand what is going=
- on
->
-> What is the defconfig you are using?
->
+ From a364b45738c1fc2e937a8d845f419b8c5c64d751 Mon Sep 17 00:00:00 2001
+From: rjstone <rjstoneus@pm.me>
+Date: Sat, 5 Jul 2025 11:22:09 -0700
+Subject: [PATCH] drivers: remove -mgeneral-regs-only for truetype
 
-If everything working on your side, I will check the code that is
-added to our board.
+For almost everything, -mgeneral-regs-only is a good optimization, but
+console_truetype.c does using floating point, so the build will fail
+unless it is compiled without -mgeneral-regs-only.
+---
+Sorry if this is formatted improperly. I had some trouble setting up 
+patman and format-patch. Also having some email software problems.
 
-> Does the crash happen in the SPL or U-Boot?
+  drivers/video/Makefile | 1 +
+  1 file changed, 1 insertion(+)
 
-u-boot clock subsystem consistently. Change a bit the code allow us to
-boot (ex add some more printing)
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index ebe4a3961fc..a1a408da2fb 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -15,6 +15,7 @@ else ifdef CONFIG_CONSOLE_ROTATION
+  obj-y += console_core.o
+  endif
+  obj-$(CONFIG_CONSOLE_ROTATION) += console_core.o
++CFLAGS_REMOVE_console_truetype.o = -mgeneral-regs-only
+  obj-$(CONFIG_CONS
+OLE_TRUETYPE) += console_truetype.o fonts/
+  obj-$(CONFIG_DISPLAY) += display-uclass.o
+  obj-$(CONFIG_VIDEO_MIPI_DSI) += dsi-host-uclass.o
+--
+2.34.1
 
-Michael
+--------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
->
-> Please share the logs and more details.
+-----BEGIN PGP SIGNATURE-----
+Version: ProtonMail
+
+wqsEARYIAF0Fgmhpc2sJkEQjl2rWJkrnNRQAAAAAABwAEHNhbHRAbm90YXRp
+b25zLm9wZW5wZ3Bqcy5vcmeuQNNDtStIzfbK6Uc+9/FhFiEExt5p7tzELQem
+AB4jRCOXatYmSucAAChmAP9XXKK7lYoeTRu/scZYdbtyfB6aszRoIOhC9P4x
+FU6+zgD/ZF5fd6kKYupIAAb2tUVQmdwv0x382fgtOzxWLorfrgM=
+=iNEr
+-----END PGP SIGNATURE-----
 
 
+--------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de--
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
