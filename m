@@ -4,50 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FD6C83F03
-	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0420FC83F05
+	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:50:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79711810EB;
-	Sun,  6 Jul 2025 05:50:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+	by phobos.denx.de (Postfix) with ESMTP id 433A582F14;
+	Sun,  6 Jul 2025 05:50:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=pm.me header.i=@pm.me header.b="im7G/Cga";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BVjUCsRp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA3698206E; Sat,  5 Jul 2025 20:48:21 +0200 (CEST)
-Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
- [79.135.106.30])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 45B4482A76; Sat,  5 Jul 2025 22:57:22 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E2D2809A5
- for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 20:48:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1293809A5
+ for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 22:57:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rjstoneus@pm.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
- s=protonmail3; t=1751741298; x=1752000498;
- bh=2M9zfLCBlsWqTu8yaCBcg6deGc9yMCYS6gDDdapVAbA=;
- h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=im7G/Cgaax9TQfhfBzebSHetH2wjgWLGshXYauKiY90mPQdmfqYa2UNKkCSKKSso8
- LJhJ5eUq81P9rztye2n7psd2m2ZaD9C16ieSypNs0MQ8FzmQ6HQi5sirVs6jOPlP6/
- XTKSVj7va3uVZGDkJBT3INH29rHI6wlCZ3ZKso5ZMf9xKHqYDTHAOrZEDg+CWjtiQp
- Lv7R5AEUwkDb+/YEp8o/qAoejjwpirk37h+1TnBnLDD2VDhmlZWEgriivfX4jyfxJq
- gj7lfCbBiAeYE1E6hMhsgTW8MWbZs/wEkOrIxh62yse/5/apR3NRwhY+xOa8kRBDJG
- aJCRU32xOQf1g==
-Date: Sat, 05 Jul 2025 18:48:12 +0000
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vtpieter@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-60c51860bf5so3089223a12.1
+ for <u-boot@lists.denx.de>; Sat, 05 Jul 2025 13:57:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751749039; x=1752353839; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z8Yg5WgKZ8QyP6UsQuxbmePntxgoUxH/UreFhDW4ftM=;
+ b=BVjUCsRpZ8M/Xi31EarFCuFVTWP736WGLeL0zOhjj83Pcylhqnu4BGGu0XdhF70JN7
+ FN2KDegljKwgCU7AaYSeE3ThvtKQfpib5JTshPrJQmw9RX+4r4Y6Amj+869ESefyMOyR
+ 1+Kryzh2c02cqDcPOG0g2468JDMbv4jLo7FoQsfbHR126X3y9KMZE1oa2/Xmg/mF/fZB
+ RbZsR1VQ+eyUOAjoVoXbppeQeuC5z2S9xjxobT4HTz32sJFKtfA1/EXldRn4AeCSK/r3
+ FAqOCZaKx91A0LjO5HPscfJqyc7CYNP/DxVLjy2NqbOa0Lc1Im/26Ye/JYVPQ+CfH9oL
+ pYKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751749039; x=1752353839;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z8Yg5WgKZ8QyP6UsQuxbmePntxgoUxH/UreFhDW4ftM=;
+ b=IWWx2XkN7xN8Xg8+5r6IUYmMdEsTuFAh2eEaGYJwdmJg+BVQl13/cVLKojc5PAz4A3
+ G9CwyLVwDIZF2ZAaDHbgD4m7CtsDpNrdhfMEY2rdhz+0hsfL0KoPgdKoN5QfYejm+w6Z
+ LN5MYG9wabi5VdcDCT6M5uJI8Y8ijH6wzV4B41PLNgaV04B5XvAgXVPyKbx/86uFo/s2
+ DfKEnP2jRuDkhucpVaZimcjA8XEy8nnK3FALSDiFTIp9gMqBFCcFSUO6+kHJTjppSsAX
+ gKH+GupPUeMGfWXX3srCJ9Z4u/ozh7yQNSlapPVDUvt87FAD2ljtqYJjlwBG5+fdoKR4
+ d4+A==
+X-Gm-Message-State: AOJu0YyMhJCyDeedOXnJ7R1S/UfaBBrqsPLoUq/jriAMxPFWLklfWGU4
+ 4RTy9BhcSRZ4AvgK2oAaNrkeync6T0z5CSmOoAOOI3pWy+BMRsJoq9kWpZHKf0DEdS8=
+X-Gm-Gg: ASbGncsKz3gPP5X+tXoKYYPkDOe2Wb0D0dBr5aPctkTLasY2hJ8uJPVtV+3ziNdaR8M
+ WPv7B5CRYNbjJGQLQ1+Jq7DlwrKCXKpUqd4KZ4ruTAZ3h4r8dT9tz/ZiPGEBceLScOfGJSYDBO+
+ R5TK9e8WK52ulYEdvC4ytXMIbpFIjleXAULNbh+MVCG10mHGgWzZSN0BhNC1UOXKXV4YrlYgrjL
+ 4KztdF4Sakca3lvNADbb0N6PZpg3LxgzwXP6j1pOe7xl8PJGB+Z7IwWx03z1jjuQ3wyiXNWcl6w
+ 6UhTTG0+wIIbG7Lp2x8RnPJ+EqkWOobHxUUz9dmPHcJ+uLt+SYBMFCCj3Xi8ls5v
+X-Google-Smtp-Source: AGHT+IHgAuE/3HdxtT/37XBKwqgk7kDKpkJa4W4iRZcjdU4CeSHJtGxVAOLRfld0bWqj790loUnRwQ==
+X-Received: by 2002:a17:907:d23:b0:ae0:a245:2fef with SMTP id
+ a640c23a62f3a-ae4107e1322mr341653066b.20.1751749039191; 
+ Sat, 05 Jul 2025 13:57:19 -0700 (PDT)
+Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae3f66e6f51sm399423666b.8.2025.07.05.13.57.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 05 Jul 2025 13:57:18 -0700 (PDT)
+From: vtpieter@gmail.com
 To: u-boot@lists.denx.de
-From: Robert Stone <rjstoneus@pm.me>
-Subject: [PATCH] drivers: remove -mgeneral-regs-only for truetype
-Message-ID: <2a6ea8e8-788e-4eab-b06b-b553cf4f8320@pm.me>
-Feedback-ID: 39838635:user:proton
-X-Pm-Message-ID: f4a7ac20097ee0ccb21aff1826ebe8cf7d51a21e
+Cc: michal.simek@amd.com,
+	Pieter Van Trappen <pieter.van.trappen@cern.ch>
+Subject: [PATCH v4 0/5] Improve user feedback in case of FPGA bitstream load
+ failure
+Date: Sat,  5 Jul 2025 22:57:01 +0200
+Message-ID: <20250705205710.792370-1-vtpieter@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg=pgp-sha256;
- boundary="------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de";
- charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 06 Jul 2025 05:50:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -65,65 +96,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Message-ID: <2a6ea8e8-788e-4eab-b06b-b553cf4f8320@pm.me>
-Date: Sat, 5 Jul 2025 11:47:58 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Robert Stone <rjstoneus@pm.me>
-To: u-boot@lists.denx.de
-Subject: [PATCH] drivers: remove -mgeneral-regs-only for truetype
+From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
- From a364b45738c1fc2e937a8d845f419b8c5c64d751 Mon Sep 17 00:00:00 2001
-From: rjstone <rjstoneus@pm.me>
-Date: Sat, 5 Jul 2025 11:22:09 -0700
-Subject: [PATCH] drivers: remove -mgeneral-regs-only for truetype
+The main motivation for this patch series is to make the `fpga *`
+commands' return message more explicit because simply returning the
+command usage without indicating the root cause is not helpful.
 
-For almost everything, -mgeneral-regs-only is a good optimization, but
-console_truetype.c does using floating point, so the build will fail
-unless it is compiled without -mgeneral-regs-only.
----
-Sorry if this is formatted improperly. I had some trouble setting up 
-patman and format-patch. Also having some email software problems.
+In addition, the sandbox_defconfig was amended to facilitate compiling
+fpga-based sources and various style, compiler errors and warnings
+have been fixed.
 
-  drivers/video/Makefile | 1 +
-  1 file changed, 1 insertion(+)
+v4:
+ * make better use of prefixes in commit subjects
+ * change patches' order to ensure no commit introduces compiler
+ warnings or errors i.e. defconfig is now patch 5/5
+ * add new patch 4/5 to remove compiler Werror=unused-function
+ * add an additional Kconfig dependency to patch 2/5
 
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index ebe4a3961fc..a1a408da2fb 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -15,6 +15,7 @@ else ifdef CONFIG_CONSOLE_ROTATION
-  obj-y += console_core.o
-  endif
-  obj-$(CONFIG_CONSOLE_ROTATION) += console_core.o
-+CFLAGS_REMOVE_console_truetype.o = -mgeneral-regs-only
-  obj-$(CONFIG_CONS
-OLE_TRUETYPE) += console_truetype.o fonts/
-  obj-$(CONFIG_DISPLAY) += display-uclass.o
-  obj-$(CONFIG_VIDEO_MIPI_DSI) += dsi-host-uclass.o
---
-2.34.1
+v3: https://lore.kernel.org/all/20250626093519.115655-1-vtpieter@gmail.com/
+ * enable FPGA configs in sandbox_defconfig instead of new one
 
---------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+v2: https://lore.kernel.org/all/20250626093519.115655-1-vtpieter@gmail.com/
+ * use log_* instead of puts() which is now preferred
+ * harmonize user feedback format; remove useless strings
+ * add a sandbox_fpga_defconfig; amend fpga Kconfig
+ * fix various compiler errors and warnings
 
------BEGIN PGP SIGNATURE-----
-Version: ProtonMail
+v1: https://lore.kernel.org/all/20250626093519.115655-1-vtpieter@gmail.com/
 
-wqsEARYIAF0Fgmhpc2sJkEQjl2rWJkrnNRQAAAAAABwAEHNhbHRAbm90YXRp
-b25zLm9wZW5wZ3Bqcy5vcmeuQNNDtStIzfbK6Uc+9/FhFiEExt5p7tzELQem
-AB4jRCOXatYmSucAAChmAP9XXKK7lYoeTRu/scZYdbtyfB6aszRoIOhC9P4x
-FU6+zgD/ZF5fd6kKYupIAAb2tUVQmdwv0x382fgtOzxWLorfrgM=
-=iNEr
------END PGP SIGNATURE-----
+Pieter Van Trappen (5):
+  cmd: fpga: improve user feedback in case of bitstream load failure
+  drivers: fpga/firmware: add Kconfig dependencies
+  drivers: fpga: correct compiler errors and warnings
+  drivers: fpga: cleanup printf usage
+  configs: enable FPGA commands and drivers at sandbox_defconfig
+
+ cmd/fpga.c                | 101 ++++++++++++++---------------
+ configs/sandbox_defconfig |  20 ++++++
+ drivers/firmware/Kconfig  |   1 +
+ drivers/fpga/ACEX1K.c     |   1 +
+ drivers/fpga/Kconfig      |   1 +
+ drivers/fpga/fpga.c       | 103 ++++++++++++------------------
+ drivers/fpga/ivm_core.c   |   1 +
+ drivers/fpga/lattice.c    |   4 +-
+ drivers/fpga/spartan2.c   |   1 +
+ drivers/fpga/stratixII.c  | 131 +++++++++++++++++---------------------
+ drivers/fpga/stratixv.c   |   2 +-
+ drivers/fpga/versalpl.c   |   1 -
+ drivers/fpga/virtex2.c    |   2 +
+ drivers/fpga/xilinx.c     |   2 +-
+ drivers/fpga/zynqmppl.c   |   4 +-
+ drivers/fpga/zynqpl.c     |   4 +-
+ include/fpga.h            |   2 +-
+ include/stratixII.h       |   6 +-
+ 18 files changed, 192 insertions(+), 195 deletions(-)
 
 
---------96c04fd319e64f19b58999b193b0c3536ef9d0e9c75091a554ce68dbbac196de--
+base-commit: 7598b469c16d97128d9c22839b06d94c5c331a7e
+-- 
+2.48.1
 
