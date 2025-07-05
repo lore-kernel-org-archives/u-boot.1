@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CADEAC83F03
-	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FF9C83F05
+	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9160583015;
+	by phobos.denx.de (Postfix) with ESMTP id E61978303B;
 	Sun,  6 Jul 2025 05:50:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VyAvUql1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W7fJti47";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E34482A76; Sat,  5 Jul 2025 22:57:27 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 0D271810EB; Sat,  5 Jul 2025 22:57:28 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60895809A5
+ by phobos.denx.de (Postfix) with ESMTPS id E9D9C82AF6
  for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 22:57:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ae0b6532345so536608166b.1
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ae3b37207easo357053666b.2
  for <u-boot@lists.denx.de>; Sat, 05 Jul 2025 13:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751749044; x=1752353844; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1751749045; x=1752353845; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OCj3yzINjXr8H5gk3VXn/Q07HVcmN+758DosVLWQA3s=;
- b=VyAvUql1UM+Pt5jl9jG/YTO/Y8Ub5jG8Tk3AIO+DIrBn4nBqyxo2piWQcIKzBM8vTC
- Ghb32e0Fl0VTDEd0Xp8dSlcvJK7BGZ3SVUfoF62Y4GyoqzXzQyqc0yQbSk/3cutYgUdP
- 6+jtSAU3YXyd/WJFQywGVJM39Fd3RLsCxzRRAhLagvQZ7oWmkIV3cFDE57w/ABYC8JTO
- gP8nQqc4z2S5/m5Z5AXKAZd3N1CWFsnZqp0s5XCH/jazLxIzuBp6a973l513cecZsaLo
- sl+yiUpUBw4E9SU+eMCrlwkiPIbMFKTQpL7eWUgJypS7IToiFh837+3WJL29IRZDL1Zi
- ua2A==
+ bh=l/lPPO0E/5Qz4QjFXYKvJlr+YdtKSLO1x6QwruZyeBw=;
+ b=W7fJti47NqJ03J1smFioKoM5PYDpjKPKKm0jbNSbbt1xNTu+IRWBdIXnNePSHNmt9x
+ d6YeZsd2Frq84gzs7t27syguWetOzCfxO18i5BnEajoA2kckvR5j1/huKRM+IMeNWbR4
+ nxYDfn95HJzzUWdxhtxMelEyw2tvg2qICFdhOctjt5FNcTueu9/xCw93Vc5bttycuEUY
+ 3WDhpjVrYtGrC2bI98uybM/o0s4PP+AJQf8vJk34HljQohr31IIj6e6ZVQ3jyiKh3dIa
+ Hwnoz1yYI/oQDZ+Z1ZyPuYMiUoVPP8bP5XZUu5XMIjmyL1+/sSD2iSEaVK/4+T7bm2LE
+ 5kPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751749044; x=1752353844;
+ d=1e100.net; s=20230601; t=1751749045; x=1752353845;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OCj3yzINjXr8H5gk3VXn/Q07HVcmN+758DosVLWQA3s=;
- b=Q8nczSOA75tYO4+/cdek4t9lFRobiA2tJjlucFv9wYQeQhnJPD17S3cb+hpiLB/bcm
- 7GSxaz1bAY6rNHfjKT9VNSXATAAqmsNtCgOLTg7gQH8cAZ7HhDiWwO8XrQzbhGHDzB35
- PL7OfCQTjtRcpsGeZ6g2Qmwi5LCdNd1BJF+KNWb6E8fls8NPmT9CZsWQKRer/o7IzezG
- Ct7pviDx/whkc06wXYkzTETnfyeDOCku9+/OP6ePInm9Ut0kQkrBE0LFTDHrXM868v2N
- vxtbjNh4JQhNmmhRbXTR6fcDN06LX2Jme9ggNcAlSC13YEmouDdfNpntc6Z9jnX+XPcd
- Ep8A==
-X-Gm-Message-State: AOJu0YyacWTA/elh5zFoQ3ZgG1Rxz4GencLndNRojnN6DvP3qsxal+WN
- +S1kLtf+LBSZYDuCkr6pATSE1RJ38jWhja9IzoAvn9FX0Xz131GGI4Gqcz0fT7TKca8=
-X-Gm-Gg: ASbGncuy0ZfJ96j7cl/XNn+Ieks1eA3NgNrBVJsKHb2456eFwLQ/mYdoNIZycgapoS2
- 7vJ/VrqINX2QDM27tLgXiNeee2O0TFFNpdGMnMPBjusB0N0os5uYp/em2uobW/DF5UFxDsHsD2n
- OLMPkppaFcmdCFo+J8G1NNXT0BzozmHhq6ZPrfC/PFtDEkv0KmZh6hJ8sa2d+B6yrmXPZFdJi7C
- cR/U2SwXVAt/og6t8mbL/iPnSCA2WI/S/u27eaT8hnLxAmYNDAvCVISCAawM/SbLa4KXNB5FD+V
- +WFAeSfBcnauYrVNZCxuipc1kBV9SWAdwtRprI9Jm/d81IjNpZ7yG6tX8x3hG7ip
-X-Google-Smtp-Source: AGHT+IGBOJyHMlgGiSmV/A1x9CNER3XSuDnvIM5NdXVGCtUbjNco1wHV6vFz7plmEJGr8Mp98oV1OQ==
-X-Received: by 2002:a17:907:e90c:b0:ae3:a753:615b with SMTP id
- a640c23a62f3a-ae3f82d9c7bmr697889066b.19.1751749044173; 
- Sat, 05 Jul 2025 13:57:24 -0700 (PDT)
+ bh=l/lPPO0E/5Qz4QjFXYKvJlr+YdtKSLO1x6QwruZyeBw=;
+ b=i8VWxjcRgyoaOsjp8a+sx5/PTg9xoTse/BMLlplLk3KLgEHHX5Gq2BtUQtue7EO2NS
+ 6fGdysDh89hB97P68cVlgTHCwqTUSR1a7zetgvnK9dtDCEVqqCy9EPTZNDUm5l1TFg4v
+ r0k6bDtVnpdMA5bJBrZMhLo756rzWrUKK25tLKA98zVpm9hngcXXVYirxiIBDosHHeKZ
+ IH0o2rAQYOSdygo8abKF7EvIB+P5eUC8K2esSJTHY8tqvddcPSe7b0lXzszWChvHVPur
+ VzCvSSqNo9iL1m1QQsZsdFoQxGdduUOfRQZneDXLG79M3tTCKDBboND2e9AwePpWelXm
+ Iu5w==
+X-Gm-Message-State: AOJu0YxIJFakUW/gdsP62F9tKgaz0y8641GGdV9Va2KThF8cL9B+OAv7
+ Y9mLLEY3gop19fIdiaxUbHlr1b1HB7dUp38cxsz8JjFf4pyGsMITrz4we8T1pTvLiIw=
+X-Gm-Gg: ASbGncvvbDvBP4JfE9+OsSCgLCmsESSVqV7K1kuAY3ETR7LyFjMHI8o4Uff+U29N534
+ EVbNFQY5bxR8EBdTICWX6GQcfWuhmp7IhPMyAaLq1D7Rk2ieunS0eEQbYm6AdUfjAcTUdzW20Fm
+ SJSyYRuxu6PAmIuYIyC4fNJnzCDH54/2GBZeDb9ZXiW1CslrfWDfgLOfyizRqoLVU0cHjhNaTJj
+ a63cncFojx3Me0eqrsuuy9yNaMKOW/waqm9AT2dWe+LZkH3cBYloBspT22idi0Cu9FR1O1zWgeQ
+ mk3/zkRDV4ITIQq8V5gwv8KA3bWAjrTdBSF+wfbWRR/9cJZZqnarpEtvQlTmjjl5vo8tJPp5tig
+ =
+X-Google-Smtp-Source: AGHT+IGbzO8mO64rxKT5KDSaUpSI8tbb/MiDOxFtcEN/e8rU6wuCw+Re3kxBSPHxxFu6lONQReT6wg==
+X-Received: by 2002:a17:907:7293:b0:ae0:c0b3:5656 with SMTP id
+ a640c23a62f3a-ae4107dcd56mr284504166b.22.1751749045267; 
+ Sat, 05 Jul 2025 13:57:25 -0700 (PDT)
 Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f66e6f51sm399423666b.8.2025.07.05.13.57.23
+ a640c23a62f3a-ae3f66e6f51sm399423666b.8.2025.07.05.13.57.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Jul 2025 13:57:23 -0700 (PDT)
+ Sat, 05 Jul 2025 13:57:24 -0700 (PDT)
 From: vtpieter@gmail.com
-To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v4 4/5] drivers: fpga: cleanup printf usage
-Date: Sat,  5 Jul 2025 22:57:05 +0200
-Message-ID: <20250705205710.792370-5-vtpieter@gmail.com>
+Cc: michal.simek@amd.com,
+	Pieter Van Trappen <pieter.van.trappen@cern.ch>
+Subject: [PATCH v4 5/5] configs: enable FPGA commands and drivers at
+ sandbox_defconfig
+Date: Sat,  5 Jul 2025 22:57:06 +0200
+Message-ID: <20250705205710.792370-6-vtpieter@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250705205710.792370-1-vtpieter@gmail.com>
 References: <20250705205710.792370-1-vtpieter@gmail.com>
@@ -100,334 +103,51 @@ X-Virus-Status: Clean
 
 From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-Remove `fpga_no_sup` to get rid of Werror=unused-function when all
-FPGA configurations are enabled.
-
-Swap all printf calls to log_* as this is now preferred and includes
-the calling __func__.
+Enable to facilitate compiler checks on most FPGA-related sources.
 
 Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 ---
- drivers/fpga/fpga.c   | 103 +++++++++++++++++-------------------------
- drivers/fpga/xilinx.c |   2 +-
- include/fpga.h        |   2 +-
- 3 files changed, 44 insertions(+), 63 deletions(-)
+ configs/sandbox_defconfig | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/drivers/fpga/fpga.c b/drivers/fpga/fpga.c
-index f88267e01b6..2297fefd149 100644
---- a/drivers/fpga/fpga.c
-+++ b/drivers/fpga/fpga.c
-@@ -16,20 +16,6 @@
- static int next_desc = FPGA_INVALID_DEVICE;
- static fpga_desc desc_table[CONFIG_MAX_FPGA_DEVICES];
- 
--/*
-- * fpga_no_sup
-- * 'no support' message function
-- */
--static void fpga_no_sup(char *fn, char *msg)
--{
--	if (fn && msg)
--		printf("%s: No support for %s.\n", fn, msg);
--	else if (msg)
--		printf("No support for %s.\n", msg);
--	else
--		printf("No FPGA support!\n");
--}
--
- /* fpga_get_desc
-  *	map a device number to a descriptor
-  */
-@@ -39,8 +25,8 @@ const fpga_desc *fpga_get_desc(int devnum)
- 
- 	if ((devnum >= 0) && (devnum < next_desc)) {
- 		desc = &desc_table[devnum];
--		debug("%s: found fpga descriptor #%d @ 0x%p\n",
--		      __func__, devnum, desc);
-+		log_debug("found fpga descriptor #%d @ 0x%p\n",
-+			  devnum, desc);
- 	}
- 
- 	return desc;
-@@ -51,15 +37,15 @@ const fpga_desc *fpga_get_desc(int devnum)
-  *	generic parameter checking code
-  */
- const fpga_desc *fpga_validate(int devnum, const void *buf,
--			       size_t bsize, char *fn)
-+			       size_t bsize)
- {
- 	const fpga_desc *desc = fpga_get_desc(devnum);
- 
- 	if (!desc)
--		printf("%s: Invalid device number %d\n", fn, devnum);
-+		log_err("Invalid device number %d\n", devnum);
- 
- 	if (!buf) {
--		printf("%s: Null buffer.\n", fn);
-+		log_err("Null buffer.\n");
- 		return NULL;
- 	}
- 	return desc;
-@@ -75,40 +61,40 @@ static int fpga_dev_info(int devnum)
- 	const fpga_desc *desc = fpga_get_desc(devnum);
- 
- 	if (desc) {
--		debug("%s: Device Descriptor @ 0x%p\n",
--		      __func__, desc->devdesc);
-+		log_info("Device Descriptor @ 0x%p\n",
-+			 desc->devdesc);
- 
- 		switch (desc->devtype) {
- 		case fpga_xilinx:
- #if defined(CONFIG_FPGA_XILINX)
--			printf("Xilinx Device\nDescriptor @ 0x%p\n", desc);
-+			log_info("Xilinx Device\nDescriptor @ 0x%p\n", desc);
- 			ret_val = xilinx_info(desc->devdesc);
- #else
--			fpga_no_sup((char *)__func__, "Xilinx devices");
-+			log_err("No support for Xilinx devices.\n");
- #endif
- 			break;
- 		case fpga_altera:
- #if defined(CONFIG_FPGA_ALTERA)
--			printf("Altera Device\nDescriptor @ 0x%p\n", desc);
-+			log_info("Altera Device\nDescriptor @ 0x%p\n", desc);
- 			ret_val = altera_info(desc->devdesc);
- #else
--			fpga_no_sup((char *)__func__, "Altera devices");
-+			log_err("No support for Altera devices.\n");
- #endif
- 			break;
- 		case fpga_lattice:
- #if defined(CONFIG_FPGA_LATTICE)
--			printf("Lattice Device\nDescriptor @ 0x%p\n", desc);
-+			log_info("Lattice Device\nDescriptor @ 0x%p\n", desc);
- 			ret_val = lattice_info(desc->devdesc);
- #else
--			fpga_no_sup((char *)__func__, "Lattice devices");
-+			log_err("No support for Lattice devices.\n");
- #endif
- 			break;
- 		default:
--			printf("%s: Invalid or unsupported device type %d\n",
--			       __func__, desc->devtype);
-+			log_err("Invalid or unsupported device type %d\n",
-+				desc->devtype);
- 		}
- 	} else {
--		printf("%s: Invalid device number %d\n", __func__, devnum);
-+		log_err("Invalid device number %d\n", devnum);
- 	}
- 
- 	return ret_val;
-@@ -144,23 +130,22 @@ int fpga_add(fpga_type devtype, void *desc)
- 	int devnum = FPGA_INVALID_DEVICE;
- 
- 	if (!desc) {
--		printf("%s: NULL device descriptor\n", __func__);
-+		log_err("NULL device descriptor\n");
- 		return devnum;
- 	}
- 
- 	if (next_desc < 0) {
--		printf("%s: FPGA support not initialized!\n", __func__);
-+		log_err("FPGA support not initialized!\n");
- 	} else if ((devtype > fpga_min_type) && (devtype < fpga_undefined)) {
- 		if (next_desc < CONFIG_MAX_FPGA_DEVICES) {
- 			devnum = next_desc;
- 			desc_table[next_desc].devtype = devtype;
- 			desc_table[next_desc++].devdesc = desc;
- 		} else {
--			printf("%s: Exceeded Max FPGA device count\n",
--			       __func__);
-+			log_err("Exceeded Max FPGA device count\n");
- 		}
- 	} else {
--		printf("%s: Unsupported FPGA type %d\n", __func__, devtype);
-+		log_err("Unsupported FPGA type %d\n", devtype);
- 	}
- 
- 	return devnum;
-@@ -181,7 +166,7 @@ int __weak fpga_is_partial_data(int devnum, size_t img_len)
- int __weak fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
- 			      bitstream_type bstype)
- {
--	printf("Bitstream support not implemented for this FPGA device\n");
-+	log_err("Bitstream support not implemented for this FPGA device\n");
- 	return FPGA_FAIL;
- }
- 
-@@ -190,8 +175,7 @@ int fpga_fsload(int devnum, const void *buf, size_t size,
- 		 fpga_fs_info *fpga_fsinfo)
- {
- 	int ret_val = FPGA_FAIL;           /* assume failure */
--	const fpga_desc *desc = fpga_validate(devnum, buf, size,
--					      (char *)__func__);
-+	const fpga_desc *desc = fpga_validate(devnum, buf, size);
- 
- 	if (desc) {
- 		switch (desc->devtype) {
-@@ -200,12 +184,12 @@ int fpga_fsload(int devnum, const void *buf, size_t size,
- 			ret_val = xilinx_loadfs(desc->devdesc, buf, size,
- 						fpga_fsinfo);
- #else
--			fpga_no_sup((char *)__func__, "Xilinx devices");
-+			log_err("No support for Xilinx devices.\n");
- #endif
- 			break;
- 		default:
--			printf("%s: Invalid or unsupported device type %d\n",
--			       __func__, desc->devtype);
-+			log_err("Invalid or unsupported device type %d\n",
-+				desc->devtype);
- 		}
- 	}
- 
-@@ -219,8 +203,7 @@ int fpga_loads(int devnum, const void *buf, size_t size,
- {
- 	int ret_val = FPGA_FAIL;
- 
--	const fpga_desc *desc = fpga_validate(devnum, buf, size,
--					      (char *)__func__);
-+	const fpga_desc *desc = fpga_validate(devnum, buf, size);
- 
- 	if (desc) {
- 		switch (desc->devtype) {
-@@ -229,12 +212,12 @@ int fpga_loads(int devnum, const void *buf, size_t size,
- 			ret_val = xilinx_loads(desc->devdesc, buf, size,
- 					       fpga_sec_info);
- #else
--			fpga_no_sup((char *)__func__, "Xilinx devices");
-+			log_err("No support for Xilinx devices.\n");
- #endif
- 			break;
- 		default:
--			printf("%s: Invalid or unsupported device type %d\n",
--			       __func__, desc->devtype);
-+			log_err("Invalid or unsupported device type %d\n",
-+				desc->devtype);
- 		}
- 	}
- 
-@@ -265,8 +248,7 @@ int fpga_load(int devnum, const void *buf, size_t bsize, bitstream_type bstype,
- {
- 	int ret_val = FPGA_FAIL;           /* assume failure */
- 	int ret_notify;
--	const fpga_desc *desc = fpga_validate(devnum, buf, bsize,
--					      (char *)__func__);
-+	const fpga_desc *desc = fpga_validate(devnum, buf, bsize);
- 
- 	if (desc) {
- 		switch (desc->devtype) {
-@@ -275,26 +257,26 @@ int fpga_load(int devnum, const void *buf, size_t bsize, bitstream_type bstype,
- 			ret_val = xilinx_load(desc->devdesc, buf, bsize,
- 					      bstype, flags);
- #else
--			fpga_no_sup((char *)__func__, "Xilinx devices");
-+			log_err("No support for Xilinx devices.\n");
- #endif
- 			break;
- 		case fpga_altera:
- #if defined(CONFIG_FPGA_ALTERA)
- 			ret_val = altera_load(desc->devdesc, buf, bsize);
- #else
--			fpga_no_sup((char *)__func__, "Altera devices");
-+			log_err("No support for Altera devices.\n");
- #endif
- 			break;
- 		case fpga_lattice:
- #if defined(CONFIG_FPGA_LATTICE)
- 			ret_val = lattice_load(desc->devdesc, buf, bsize);
- #else
--			fpga_no_sup((char *)__func__, "Lattice devices");
-+			log_err("No support for Lattice devices.\n");
- #endif
- 			break;
- 		default:
--			printf("%s: Invalid or unsupported device type %d\n",
--			       __func__, desc->devtype);
-+			log_err("Invalid or unsupported device type %d\n",
-+				desc->devtype);
- 		}
- 	}
- 
-@@ -312,8 +294,7 @@ int fpga_load(int devnum, const void *buf, size_t bsize, bitstream_type bstype,
- int fpga_dump(int devnum, const void *buf, size_t bsize)
- {
- 	int ret_val = FPGA_FAIL;           /* assume failure */
--	const fpga_desc *desc = fpga_validate(devnum, buf, bsize,
--					      (char *)__func__);
-+	const fpga_desc *desc = fpga_validate(devnum, buf, bsize);
- 
- 	if (desc) {
- 		switch (desc->devtype) {
-@@ -321,26 +302,26 @@ int fpga_dump(int devnum, const void *buf, size_t bsize)
- #if defined(CONFIG_FPGA_XILINX)
- 			ret_val = xilinx_dump(desc->devdesc, buf, bsize);
- #else
--			fpga_no_sup((char *)__func__, "Xilinx devices");
-+			log_err("No support for Xilinx devices.\n");
- #endif
- 			break;
- 		case fpga_altera:
- #if defined(CONFIG_FPGA_ALTERA)
- 			ret_val = altera_dump(desc->devdesc, buf, bsize);
- #else
--			fpga_no_sup((char *)__func__, "Altera devices");
-+			log_err("No support for Altera devices.\n");
- #endif
- 			break;
- 		case fpga_lattice:
- #if defined(CONFIG_FPGA_LATTICE)
- 			ret_val = lattice_dump(desc->devdesc, buf, bsize);
- #else
--			fpga_no_sup((char *)__func__, "Lattice devices");
-+			log_err("No support for Lattice devices.\n");
- #endif
- 			break;
- 		default:
--			printf("%s: Invalid or unsupported device type %d\n",
--			       __func__, desc->devtype);
-+			log_err("Invalid or unsupported device type %d\n",
-+				desc->devtype);
- 		}
- 	}
- 
-@@ -363,7 +344,7 @@ int fpga_info(int devnum)
- 
- 			return FPGA_SUCCESS;
- 		} else {
--			printf("%s: No FPGA devices available.\n", __func__);
-+			log_err("No FPGA devices available.\n");
- 			return FPGA_FAIL;
- 		}
- 	}
-diff --git a/drivers/fpga/xilinx.c b/drivers/fpga/xilinx.c
-index c46513226d9..28c68faba55 100644
---- a/drivers/fpga/xilinx.c
-+++ b/drivers/fpga/xilinx.c
-@@ -49,7 +49,7 @@ int fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
- 
- 	dataptr = (unsigned char *)fpgadata;
- 	/* Find out fpga_description */
--	desc = fpga_validate(devnum, dataptr, 0, (char *)__func__);
-+	desc = fpga_validate(devnum, dataptr, 0);
- 	/* Assign xilinx device description */
- 	xdesc = desc->devdesc;
- 
-diff --git a/include/fpga.h b/include/fpga.h
-index 4cc44164b2f..a144238e66a 100644
---- a/include/fpga.h
-+++ b/include/fpga.h
-@@ -79,7 +79,7 @@ int fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
- int fpga_dump(int devnum, const void *buf, size_t bsize);
- int fpga_info(int devnum);
- const fpga_desc *fpga_validate(int devnum, const void *buf,
--			       size_t bsize, char *fn);
-+			       size_t bsize);
- int fpga_compatible2flag(int devnum, const char *compatible);
- 
- #endif	/* _FPGA_H_ */
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 4f6943d1a4b..a64e208ad89 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -78,6 +78,11 @@ CONFIG_CMD_MX_CYCLIC=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DEMO=y
++CONFIG_CMD_FPGA_LOADP=y
++CONFIG_CMD_FPGA_LOADBP=y
++CONFIG_CMD_FPGA_LOADFS=y
++CONFIG_CMD_FPGA_LOADMK=y
++CONFIG_CMD_FPGA_LOAD_SECURE=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPIO_READ=y
+ CONFIG_CMD_PWM=y
+@@ -196,6 +201,21 @@ CONFIG_SANDBOX_DMA=y
+ CONFIG_FASTBOOT_FLASH=y
+ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+ CONFIG_ARM_FFA_TRANSPORT=y
++CONFIG_FPGA_ALTERA=y
++CONFIG_FPGA_STRATIX_II=y
++CONFIG_FPGA_STRATIX_V=y
++CONFIG_FPGA_ACEX1K=y
++CONFIG_FPGA_CYCLON2=y
++CONFIG_FPGA_LATTICE=y
++CONFIG_FPGA_XILINX=y
++CONFIG_FPGA_VERSALPL=y
++CONFIG_FPGA_SPARTAN2=y
++CONFIG_FPGA_SPARTAN3=y
++CONFIG_FPGA_VIRTEX2=y
++CONFIG_SYS_FPGA_CHECK_BUSY=y
++CONFIG_SYS_FPGA_CHECK_CTRLC=y
++CONFIG_DM_FPGA=y
++CONFIG_SANDBOX_FPGA=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_GPIO_LOOKUP_LABEL=y
+ CONFIG_QCOM_PMIC_GPIO=y
 -- 
 2.48.1
 
