@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31CB3C83F05
-	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:50:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CADEAC83F03
+	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:51:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AA4382FE1;
+	by phobos.denx.de (Postfix) with ESMTP id 9160583015;
 	Sun,  6 Jul 2025 05:50:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DbwnRjL3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VyAvUql1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32DCC82A76; Sat,  5 Jul 2025 22:57:26 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 7E34482A76; Sat,  5 Jul 2025 22:57:27 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AD4C8206E
- for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 22:57:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60895809A5
+ for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 22:57:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ae0df6f5758so303750166b.0
- for <u-boot@lists.denx.de>; Sat, 05 Jul 2025 13:57:24 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ae0b6532345so536608166b.1
+ for <u-boot@lists.denx.de>; Sat, 05 Jul 2025 13:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751749043; x=1752353843; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1751749044; x=1752353844; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0+w0jdVQzI9NTmBuVCBASONvYDKdxWjXPqYUT1nI5vw=;
- b=DbwnRjL3m9V+W5wmYbMGOWOQdItHP2Dl477S59V8OvGaJMiGvj4tyWy97+mavY2phP
- 3WvJNBLIhXqplz1MzU6no9dOKk6PJKj369xfRLtQ+bPpCOxlFWGLFy6FWPXFhXKjDH+U
- V6OENg72eQHmByfJN+Wi+E+f8B3DvlD+cbMGYGKpSnMb0TJEGnWS+xGdnOxqJw2rh+LY
- 4bXrcv4bYwBWVkOt+zpxQPyiLtPDspX83JQgspykhIaO3AS+a1n/jh+sI1t2jVgXEoWn
- jDM/zxf+h819Nrm/VNdYosyMyJbQf1+erQcG89uxs+nxNj3WockgF7aR6NXNOLWYPCO4
- 4r2w==
+ bh=OCj3yzINjXr8H5gk3VXn/Q07HVcmN+758DosVLWQA3s=;
+ b=VyAvUql1UM+Pt5jl9jG/YTO/Y8Ub5jG8Tk3AIO+DIrBn4nBqyxo2piWQcIKzBM8vTC
+ Ghb32e0Fl0VTDEd0Xp8dSlcvJK7BGZ3SVUfoF62Y4GyoqzXzQyqc0yQbSk/3cutYgUdP
+ 6+jtSAU3YXyd/WJFQywGVJM39Fd3RLsCxzRRAhLagvQZ7oWmkIV3cFDE57w/ABYC8JTO
+ gP8nQqc4z2S5/m5Z5AXKAZd3N1CWFsnZqp0s5XCH/jazLxIzuBp6a973l513cecZsaLo
+ sl+yiUpUBw4E9SU+eMCrlwkiPIbMFKTQpL7eWUgJypS7IToiFh837+3WJL29IRZDL1Zi
+ ua2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751749043; x=1752353843;
+ d=1e100.net; s=20230601; t=1751749044; x=1752353844;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0+w0jdVQzI9NTmBuVCBASONvYDKdxWjXPqYUT1nI5vw=;
- b=TLM6lqu3s5mCRhzuTnrv8CK4cxJBY6BEIQwDfnIMsnRr/v2GYKJ6+pULVH0OvSzfE6
- sdpvOAT9/ejD2JxTkckK0bLsISzSdJTkVvk48f2WyTm7sr7JHHGwst/hP/oMrZPjalcf
- eYB4HzbBvwxOqoMpvGvGOSkbs2TmvnvxkNqYRV2/rsU8ilpdnHL3gq4StharsgJbWvb4
- H/96Z0S8uojkP+82nVgU0MKKu3MFX7WX3z2pPek3LOvppRcsU+Nh6ts0vJ3q54TWaylj
- +NuMMQKWV0l9IWAVKipER7CUqYyw6YkXnGoy8oXlg0IE6RRWAc6i0BCIftkTkQIkge0+
- pPpw==
-X-Gm-Message-State: AOJu0YyqeiViotnubCJXZ34VmBjQK0bhhWWFdHUtRto2xwAR3lwrv5if
- jCwvtujxC1ngGabl5Gxy7e9QfLumkzr6D3k2pH8xBUx7T+Zk5eepIxLpBKJoNAaJMIw=
-X-Gm-Gg: ASbGnctoUuLzDchh9gKqqFDKmeS5yx44ACeRdcjTeCTl4TpjZKAuCQdBEDczE4ibUDP
- bG/YPaQ3GPtq6pZm3WZ9/9dwfJp3xnI1gAEMg9/pAa8fViJQBWK5zVU3n7tWMBWSxjFGrU8DlRa
- McoEnJ7foNyFCEj4legEFZQ8sp9HbHmaZr88YOOqFpBdJxRyAo+eL4eR5cPb0j7JRubwEc3yvyN
- 78fH3qFG2uG6rc2XQIQKJbfkiu8ja/XuPe2XWz9OqhyfKScKPXFqNK5u770l5PGr7XGZgTX9amG
- UECWH0iez2VDM40GoV2j3Z/a3dd6yz3R7jF6F2KEdSaMhznXMsuxT937KX3f9VFH
-X-Google-Smtp-Source: AGHT+IEMsIB2tf9NDmlpnY/WqW8Bn7w6OWkeOSvtUVsI/fV20jsSIZXYCMacBXuFKJX19tGU6JZwFw==
-X-Received: by 2002:a17:907:c1c:b0:ae0:cf36:ea81 with SMTP id
- a640c23a62f3a-ae3fe4578e9mr509635566b.5.1751749042976; 
- Sat, 05 Jul 2025 13:57:22 -0700 (PDT)
+ bh=OCj3yzINjXr8H5gk3VXn/Q07HVcmN+758DosVLWQA3s=;
+ b=Q8nczSOA75tYO4+/cdek4t9lFRobiA2tJjlucFv9wYQeQhnJPD17S3cb+hpiLB/bcm
+ 7GSxaz1bAY6rNHfjKT9VNSXATAAqmsNtCgOLTg7gQH8cAZ7HhDiWwO8XrQzbhGHDzB35
+ PL7OfCQTjtRcpsGeZ6g2Qmwi5LCdNd1BJF+KNWb6E8fls8NPmT9CZsWQKRer/o7IzezG
+ Ct7pviDx/whkc06wXYkzTETnfyeDOCku9+/OP6ePInm9Ut0kQkrBE0LFTDHrXM868v2N
+ vxtbjNh4JQhNmmhRbXTR6fcDN06LX2Jme9ggNcAlSC13YEmouDdfNpntc6Z9jnX+XPcd
+ Ep8A==
+X-Gm-Message-State: AOJu0YyacWTA/elh5zFoQ3ZgG1Rxz4GencLndNRojnN6DvP3qsxal+WN
+ +S1kLtf+LBSZYDuCkr6pATSE1RJ38jWhja9IzoAvn9FX0Xz131GGI4Gqcz0fT7TKca8=
+X-Gm-Gg: ASbGncuy0ZfJ96j7cl/XNn+Ieks1eA3NgNrBVJsKHb2456eFwLQ/mYdoNIZycgapoS2
+ 7vJ/VrqINX2QDM27tLgXiNeee2O0TFFNpdGMnMPBjusB0N0os5uYp/em2uobW/DF5UFxDsHsD2n
+ OLMPkppaFcmdCFo+J8G1NNXT0BzozmHhq6ZPrfC/PFtDEkv0KmZh6hJ8sa2d+B6yrmXPZFdJi7C
+ cR/U2SwXVAt/og6t8mbL/iPnSCA2WI/S/u27eaT8hnLxAmYNDAvCVISCAawM/SbLa4KXNB5FD+V
+ +WFAeSfBcnauYrVNZCxuipc1kBV9SWAdwtRprI9Jm/d81IjNpZ7yG6tX8x3hG7ip
+X-Google-Smtp-Source: AGHT+IGBOJyHMlgGiSmV/A1x9CNER3XSuDnvIM5NdXVGCtUbjNco1wHV6vFz7plmEJGr8Mp98oV1OQ==
+X-Received: by 2002:a17:907:e90c:b0:ae3:a753:615b with SMTP id
+ a640c23a62f3a-ae3f82d9c7bmr697889066b.19.1751749044173; 
+ Sat, 05 Jul 2025 13:57:24 -0700 (PDT)
 Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f66e6f51sm399423666b.8.2025.07.05.13.57.22
+ a640c23a62f3a-ae3f66e6f51sm399423666b.8.2025.07.05.13.57.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Jul 2025 13:57:22 -0700 (PDT)
+ Sat, 05 Jul 2025 13:57:23 -0700 (PDT)
 From: vtpieter@gmail.com
 To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v4 3/5] drivers: fpga: correct compiler errors and warnings
-Date: Sat,  5 Jul 2025 22:57:04 +0200
-Message-ID: <20250705205710.792370-4-vtpieter@gmail.com>
+Subject: [PATCH v4 4/5] drivers: fpga: cleanup printf usage
+Date: Sat,  5 Jul 2025 22:57:05 +0200
+Message-ID: <20250705205710.792370-5-vtpieter@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250705205710.792370-1-vtpieter@gmail.com>
 References: <20250705205710.792370-1-vtpieter@gmail.com>
@@ -100,355 +100,334 @@ X-Virus-Status: Clean
 
 From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-Errors reported by GCC 14.2 when enabling FPGA commands and
-drivers. Also many style fixes as reported by checkpatch.pl on the
-diffs. Most changes in stratixII.c which has been reorganized as well
-to avoid the top function prototypes.
+Remove `fpga_no_sup` to get rid of Werror=unused-function when all
+FPGA configurations are enabled.
 
-No functional changes.
+Swap all printf calls to log_* as this is now preferred and includes
+the calling __func__.
 
 Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 ---
- cmd/fpga.c               |   2 +-
- drivers/fpga/ACEX1K.c    |   1 +
- drivers/fpga/ivm_core.c  |   1 +
- drivers/fpga/lattice.c   |   4 +-
- drivers/fpga/spartan2.c  |   1 +
- drivers/fpga/stratixII.c | 131 ++++++++++++++++++---------------------
- drivers/fpga/stratixv.c  |   2 +-
- drivers/fpga/versalpl.c  |   1 -
- drivers/fpga/virtex2.c   |   2 +
- include/stratixII.h      |   6 +-
- 10 files changed, 72 insertions(+), 79 deletions(-)
+ drivers/fpga/fpga.c   | 103 +++++++++++++++++-------------------------
+ drivers/fpga/xilinx.c |   2 +-
+ include/fpga.h        |   2 +-
+ 3 files changed, 44 insertions(+), 63 deletions(-)
 
-diff --git a/cmd/fpga.c b/cmd/fpga.c
-index 9cc51f04698..d51c380d7b3 100644
---- a/cmd/fpga.c
-+++ b/cmd/fpga.c
-@@ -302,7 +302,7 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/drivers/fpga/fpga.c b/drivers/fpga/fpga.c
+index f88267e01b6..2297fefd149 100644
+--- a/drivers/fpga/fpga.c
++++ b/drivers/fpga/fpga.c
+@@ -16,20 +16,6 @@
+ static int next_desc = FPGA_INVALID_DEVICE;
+ static fpga_desc desc_table[CONFIG_MAX_FPGA_DEVICES];
  
- 			data = image_get_load(hdr);
- 
--			if (gunzip((void *)data, ~0UL, (void *)image_buf,
-+			if (gunzip((void *)data, ~0U, (void *)image_buf,
- 				   &image_size) != 0) {
- 				log_err("Gunzip error\n");
- 				return CMD_RET_FAILURE;
-diff --git a/drivers/fpga/ACEX1K.c b/drivers/fpga/ACEX1K.c
-index 3de9011ac06..e1514fc56d0 100644
---- a/drivers/fpga/ACEX1K.c
-+++ b/drivers/fpga/ACEX1K.c
-@@ -14,6 +14,7 @@
- #include <log.h>
- #include <ACEX1K.h>		/* ACEX device family */
- #include <linux/delay.h>
-+#include <time.h>
- 
- /* Note: The assumption is that we cannot possibly run fast enough to
-  * overrun the device (the Slave Parallel mode can free run at 50MHz).
-diff --git a/drivers/fpga/ivm_core.c b/drivers/fpga/ivm_core.c
-index 3c9a01e5110..4ab5dab250a 100644
---- a/drivers/fpga/ivm_core.c
-+++ b/drivers/fpga/ivm_core.c
-@@ -33,6 +33,7 @@
- #include <linux/string.h>
- #include <malloc.h>
- #include <lattice.h>
-+#include <vsprintf.h>
- 
- #define vme_out_char(c)	printf("%c", c)
- #define vme_out_hex(c)	printf("%x", c)
-diff --git a/drivers/fpga/lattice.c b/drivers/fpga/lattice.c
-index 3f481e38565..29cf2f60974 100644
---- a/drivers/fpga/lattice.c
-+++ b/drivers/fpga/lattice.c
-@@ -350,8 +350,8 @@ int lattice_info(Lattice_desc *desc)
- 			printf("Unsupported interface type, %d\n", desc->iface);
- 		}
- 
--		printf("Device Size:   \t%d bytes\n",
--				desc->size);
-+		printf("Device Size:   \t%zu bytes\n",
-+		       desc->size);
- 
- 		if (desc->iface_fns) {
- 			printf("Device Function Table @ 0x%p\n",
-diff --git a/drivers/fpga/spartan2.c b/drivers/fpga/spartan2.c
-index 906649ea181..792e4033428 100644
---- a/drivers/fpga/spartan2.c
-+++ b/drivers/fpga/spartan2.c
-@@ -9,6 +9,7 @@
- #include <config.h>		/* core U-Boot definitions */
- #include <log.h>
- #include <spartan2.h>		/* Spartan-II device family */
-+#include <time.h>
- 
- /* Note: The assumption is that we cannot possibly run fast enough to
-  * overrun the device (the Slave Parallel mode can free run at 50MHz).
-diff --git a/drivers/fpga/stratixII.c b/drivers/fpga/stratixII.c
-index 73fecd9dca5..c347eba0b79 100644
---- a/drivers/fpga/stratixII.c
-+++ b/drivers/fpga/stratixII.c
-@@ -7,90 +7,38 @@
- #include <altera.h>
- #include <linux/delay.h>
- 
--int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
--			   int isSerial, int isSecure);
--int StratixII_ps_fpp_dump (Altera_desc * desc, void *buf, size_t bsize);
+-/*
+- * fpga_no_sup
+- * 'no support' message function
+- */
+-static void fpga_no_sup(char *fn, char *msg)
+-{
+-	if (fn && msg)
+-		printf("%s: No support for %s.\n", fn, msg);
+-	else if (msg)
+-		printf("No support for %s.\n", msg);
+-	else
+-		printf("No FPGA support!\n");
+-}
 -
- /****************************************************************/
- /* Stratix II Generic Implementation                            */
--int StratixII_load (Altera_desc * desc, void *buf, size_t bsize)
-+int StratixII_ps_fpp_dump(Altera_desc *desc, const void *buf, size_t bsize)
+ /* fpga_get_desc
+  *	map a device number to a descriptor
+  */
+@@ -39,8 +25,8 @@ const fpga_desc *fpga_get_desc(int devnum)
+ 
+ 	if ((devnum >= 0) && (devnum < next_desc)) {
+ 		desc = &desc_table[devnum];
+-		debug("%s: found fpga descriptor #%d @ 0x%p\n",
+-		      __func__, devnum, desc);
++		log_debug("found fpga descriptor #%d @ 0x%p\n",
++			  devnum, desc);
+ 	}
+ 
+ 	return desc;
+@@ -51,15 +37,15 @@ const fpga_desc *fpga_get_desc(int devnum)
+  *	generic parameter checking code
+  */
+ const fpga_desc *fpga_validate(int devnum, const void *buf,
+-			       size_t bsize, char *fn)
++			       size_t bsize)
  {
--	int ret_val = FPGA_FAIL;
--
--	switch (desc->iface) {
--	case passive_serial:
--		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 1, 0);
--		break;
--	case fast_passive_parallel:
--		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 0, 0);
--		break;
--	case fast_passive_parallel_security:
--		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 0, 1);
--		break;
--
--		/* Add new interface types here */
--	default:
--		printf ("%s: Unsupported interface type, %d\n", __FUNCTION__,
--			desc->iface);
--	}
--	return ret_val;
--}
--
--int StratixII_dump (Altera_desc * desc, void *buf, size_t bsize)
--{
--	int ret_val = FPGA_FAIL;
--
--	switch (desc->iface) {
--	case passive_serial:
--	case fast_passive_parallel:
--	case fast_passive_parallel_security:
--		ret_val = StratixII_ps_fpp_dump (desc, buf, bsize);
--		break;
--		/* Add new interface types here */
--	default:
--		printf ("%s: Unsupported interface type, %d\n", __FUNCTION__,
--			desc->iface);
--	}
--	return ret_val;
--}
--
--int StratixII_info (Altera_desc * desc)
--{
--	return FPGA_SUCCESS;
--}
--
--int StratixII_ps_fpp_dump (Altera_desc * desc, void *buf, size_t bsize)
--{
--	printf ("Stratix II Fast Passive Parallel dump is not implemented\n");
-+	printf("Stratix II Fast Passive Parallel dump is not implemented\n");
+ 	const fpga_desc *desc = fpga_get_desc(devnum);
+ 
+ 	if (!desc)
+-		printf("%s: Invalid device number %d\n", fn, devnum);
++		log_err("Invalid device number %d\n", devnum);
+ 
+ 	if (!buf) {
+-		printf("%s: Null buffer.\n", fn);
++		log_err("Null buffer.\n");
+ 		return NULL;
+ 	}
+ 	return desc;
+@@ -75,40 +61,40 @@ static int fpga_dev_info(int devnum)
+ 	const fpga_desc *desc = fpga_get_desc(devnum);
+ 
+ 	if (desc) {
+-		debug("%s: Device Descriptor @ 0x%p\n",
+-		      __func__, desc->devdesc);
++		log_info("Device Descriptor @ 0x%p\n",
++			 desc->devdesc);
+ 
+ 		switch (desc->devtype) {
+ 		case fpga_xilinx:
+ #if defined(CONFIG_FPGA_XILINX)
+-			printf("Xilinx Device\nDescriptor @ 0x%p\n", desc);
++			log_info("Xilinx Device\nDescriptor @ 0x%p\n", desc);
+ 			ret_val = xilinx_info(desc->devdesc);
+ #else
+-			fpga_no_sup((char *)__func__, "Xilinx devices");
++			log_err("No support for Xilinx devices.\n");
+ #endif
+ 			break;
+ 		case fpga_altera:
+ #if defined(CONFIG_FPGA_ALTERA)
+-			printf("Altera Device\nDescriptor @ 0x%p\n", desc);
++			log_info("Altera Device\nDescriptor @ 0x%p\n", desc);
+ 			ret_val = altera_info(desc->devdesc);
+ #else
+-			fpga_no_sup((char *)__func__, "Altera devices");
++			log_err("No support for Altera devices.\n");
+ #endif
+ 			break;
+ 		case fpga_lattice:
+ #if defined(CONFIG_FPGA_LATTICE)
+-			printf("Lattice Device\nDescriptor @ 0x%p\n", desc);
++			log_info("Lattice Device\nDescriptor @ 0x%p\n", desc);
+ 			ret_val = lattice_info(desc->devdesc);
+ #else
+-			fpga_no_sup((char *)__func__, "Lattice devices");
++			log_err("No support for Lattice devices.\n");
+ #endif
+ 			break;
+ 		default:
+-			printf("%s: Invalid or unsupported device type %d\n",
+-			       __func__, desc->devtype);
++			log_err("Invalid or unsupported device type %d\n",
++				desc->devtype);
+ 		}
+ 	} else {
+-		printf("%s: Invalid device number %d\n", __func__, devnum);
++		log_err("Invalid device number %d\n", devnum);
+ 	}
+ 
+ 	return ret_val;
+@@ -144,23 +130,22 @@ int fpga_add(fpga_type devtype, void *desc)
+ 	int devnum = FPGA_INVALID_DEVICE;
+ 
+ 	if (!desc) {
+-		printf("%s: NULL device descriptor\n", __func__);
++		log_err("NULL device descriptor\n");
+ 		return devnum;
+ 	}
+ 
+ 	if (next_desc < 0) {
+-		printf("%s: FPGA support not initialized!\n", __func__);
++		log_err("FPGA support not initialized!\n");
+ 	} else if ((devtype > fpga_min_type) && (devtype < fpga_undefined)) {
+ 		if (next_desc < CONFIG_MAX_FPGA_DEVICES) {
+ 			devnum = next_desc;
+ 			desc_table[next_desc].devtype = devtype;
+ 			desc_table[next_desc++].devdesc = desc;
+ 		} else {
+-			printf("%s: Exceeded Max FPGA device count\n",
+-			       __func__);
++			log_err("Exceeded Max FPGA device count\n");
+ 		}
+ 	} else {
+-		printf("%s: Unsupported FPGA type %d\n", __func__, devtype);
++		log_err("Unsupported FPGA type %d\n", devtype);
+ 	}
+ 
+ 	return devnum;
+@@ -181,7 +166,7 @@ int __weak fpga_is_partial_data(int devnum, size_t img_len)
+ int __weak fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
+ 			      bitstream_type bstype)
+ {
+-	printf("Bitstream support not implemented for this FPGA device\n");
++	log_err("Bitstream support not implemented for this FPGA device\n");
  	return FPGA_FAIL;
  }
  
--int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
--			   int isSerial, int isSecure)
-+int StratixII_ps_fpp_load(Altera_desc *desc, const void *buf, size_t bsize,
-+			  int isSerial, int isSecure)
+@@ -190,8 +175,7 @@ int fpga_fsload(int devnum, const void *buf, size_t size,
+ 		 fpga_fs_info *fpga_fsinfo)
  {
- 	altera_board_specific_func *fns;
- 	int cookie;
+ 	int ret_val = FPGA_FAIL;           /* assume failure */
+-	const fpga_desc *desc = fpga_validate(devnum, buf, size,
+-					      (char *)__func__);
++	const fpga_desc *desc = fpga_validate(devnum, buf, size);
+ 
+ 	if (desc) {
+ 		switch (desc->devtype) {
+@@ -200,12 +184,12 @@ int fpga_fsload(int devnum, const void *buf, size_t size,
+ 			ret_val = xilinx_loadfs(desc->devdesc, buf, size,
+ 						fpga_fsinfo);
+ #else
+-			fpga_no_sup((char *)__func__, "Xilinx devices");
++			log_err("No support for Xilinx devices.\n");
+ #endif
+ 			break;
+ 		default:
+-			printf("%s: Invalid or unsupported device type %d\n",
+-			       __func__, desc->devtype);
++			log_err("Invalid or unsupported device type %d\n",
++				desc->devtype);
+ 		}
+ 	}
+ 
+@@ -219,8 +203,7 @@ int fpga_loads(int devnum, const void *buf, size_t size,
+ {
  	int ret_val = FPGA_FAIL;
- 	int bytecount;
--	char *buff = buf;
-+	const char *buff = buf;
- 	int i;
  
- 	if (!desc) {
--		printf ("%s(%d) Altera_desc missing\n", __FUNCTION__, __LINE__);
-+		log_err("Altera_desc missing\n");
- 		return FPGA_FAIL;
- 	}
- 	if (!buff) {
--		printf ("%s(%d) buffer is missing\n", __FUNCTION__, __LINE__);
-+		log_err("buffer is missing\n");
- 		return FPGA_FAIL;
- 	}
- 	if (!bsize) {
--		printf ("%s(%d) size is zero\n", __FUNCTION__, __LINE__);
-+		log_err("size is zero\n");
- 		return FPGA_FAIL;
- 	}
- 	if (!desc->iface_fns) {
--		printf
--		    ("%s(%d) Altera_desc function interface table is missing\n",
--		     __FUNCTION__, __LINE__);
-+		log_err("Altera_desc function interface table is missing\n");
- 		return FPGA_FAIL;
- 	}
- 	fns = (altera_board_specific_func *) (desc->iface_fns);
-@@ -99,9 +47,7 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
- 	if (!
- 	    (fns->config && fns->status && fns->done && fns->data
- 	     && fns->abort)) {
--		printf
--		    ("%s(%d) Missing some function in the function interface table\n",
--		     __FUNCTION__, __LINE__);
-+		log_err("Missing some function in the function interface table\n");
- 		return FPGA_FAIL;
+-	const fpga_desc *desc = fpga_validate(devnum, buf, size,
+-					      (char *)__func__);
++	const fpga_desc *desc = fpga_validate(devnum, buf, size);
+ 
+ 	if (desc) {
+ 		switch (desc->devtype) {
+@@ -229,12 +212,12 @@ int fpga_loads(int devnum, const void *buf, size_t size,
+ 			ret_val = xilinx_loads(desc->devdesc, buf, size,
+ 					       fpga_sec_info);
+ #else
+-			fpga_no_sup((char *)__func__, "Xilinx devices");
++			log_err("No support for Xilinx devices.\n");
+ #endif
+ 			break;
+ 		default:
+-			printf("%s: Invalid or unsupported device type %d\n",
+-			       __func__, desc->devtype);
++			log_err("Invalid or unsupported device type %d\n",
++				desc->devtype);
+ 		}
  	}
  
-@@ -124,13 +70,12 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
- 	bytecount = 0;
- 	fns->clk (0, 1, cookie);
+@@ -265,8 +248,7 @@ int fpga_load(int devnum, const void *buf, size_t bsize, bitstream_type bstype,
+ {
+ 	int ret_val = FPGA_FAIL;           /* assume failure */
+ 	int ret_notify;
+-	const fpga_desc *desc = fpga_validate(devnum, buf, bsize,
+-					      (char *)__func__);
++	const fpga_desc *desc = fpga_validate(devnum, buf, bsize);
  
--	printf ("loading to fpga    ");
-+	printf("loading to fpga    ");
- 	while (bytecount < bsize) {
- 		/* 3.1 check stratix has not signaled us an error */
- 		if (fns->status (cookie) != 1) {
--			printf
--			    ("\n%s(%d) Stratix failed (byte transferred till failure 0x%x)\n",
--			     __FUNCTION__, __LINE__, bytecount);
-+			log_err("\nStratix failed (byte transferred till failure 0x%x)\n",
-+				bytecount);
- 			fns->abort (cookie);
+ 	if (desc) {
+ 		switch (desc->devtype) {
+@@ -275,26 +257,26 @@ int fpga_load(int devnum, const void *buf, size_t bsize, bitstream_type bstype,
+ 			ret_val = xilinx_load(desc->devdesc, buf, bsize,
+ 					      bstype, flags);
+ #else
+-			fpga_no_sup((char *)__func__, "Xilinx devices");
++			log_err("No support for Xilinx devices.\n");
+ #endif
+ 			break;
+ 		case fpga_altera:
+ #if defined(CONFIG_FPGA_ALTERA)
+ 			ret_val = altera_load(desc->devdesc, buf, bsize);
+ #else
+-			fpga_no_sup((char *)__func__, "Altera devices");
++			log_err("No support for Altera devices.\n");
+ #endif
+ 			break;
+ 		case fpga_lattice:
+ #if defined(CONFIG_FPGA_LATTICE)
+ 			ret_val = lattice_load(desc->devdesc, buf, bsize);
+ #else
+-			fpga_no_sup((char *)__func__, "Lattice devices");
++			log_err("No support for Lattice devices.\n");
+ #endif
+ 			break;
+ 		default:
+-			printf("%s: Invalid or unsupported device type %d\n",
+-			       __func__, desc->devtype);
++			log_err("Invalid or unsupported device type %d\n",
++				desc->devtype);
+ 		}
+ 	}
+ 
+@@ -312,8 +294,7 @@ int fpga_load(int devnum, const void *buf, size_t bsize, bitstream_type bstype,
+ int fpga_dump(int devnum, const void *buf, size_t bsize)
+ {
+ 	int ret_val = FPGA_FAIL;           /* assume failure */
+-	const fpga_desc *desc = fpga_validate(devnum, buf, bsize,
+-					      (char *)__func__);
++	const fpga_desc *desc = fpga_validate(devnum, buf, bsize);
+ 
+ 	if (desc) {
+ 		switch (desc->devtype) {
+@@ -321,26 +302,26 @@ int fpga_dump(int devnum, const void *buf, size_t bsize)
+ #if defined(CONFIG_FPGA_XILINX)
+ 			ret_val = xilinx_dump(desc->devdesc, buf, bsize);
+ #else
+-			fpga_no_sup((char *)__func__, "Xilinx devices");
++			log_err("No support for Xilinx devices.\n");
+ #endif
+ 			break;
+ 		case fpga_altera:
+ #if defined(CONFIG_FPGA_ALTERA)
+ 			ret_val = altera_dump(desc->devdesc, buf, bsize);
+ #else
+-			fpga_no_sup((char *)__func__, "Altera devices");
++			log_err("No support for Altera devices.\n");
+ #endif
+ 			break;
+ 		case fpga_lattice:
+ #if defined(CONFIG_FPGA_LATTICE)
+ 			ret_val = lattice_dump(desc->devdesc, buf, bsize);
+ #else
+-			fpga_no_sup((char *)__func__, "Lattice devices");
++			log_err("No support for Lattice devices.\n");
+ #endif
+ 			break;
+ 		default:
+-			printf("%s: Invalid or unsupported device type %d\n",
+-			       __func__, desc->devtype);
++			log_err("Invalid or unsupported device type %d\n",
++				desc->devtype);
+ 		}
+ 	}
+ 
+@@ -363,7 +344,7 @@ int fpga_info(int devnum)
+ 
+ 			return FPGA_SUCCESS;
+ 		} else {
+-			printf("%s: No FPGA devices available.\n", __func__);
++			log_err("No FPGA devices available.\n");
  			return FPGA_FAIL;
  		}
-@@ -162,7 +107,7 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
- 
- 		/* 3.5 while clk is deasserted it is safe to print some progress indication */
- 		if ((bytecount % (bsize / 100)) == 0) {
--			printf ("\b\b\b%02d\%", bytecount * 100 / bsize);
-+			printf("\b\b\b%02zu\%%", bytecount * 100 / bsize);
- 		}
  	}
+diff --git a/drivers/fpga/xilinx.c b/drivers/fpga/xilinx.c
+index c46513226d9..28c68faba55 100644
+--- a/drivers/fpga/xilinx.c
++++ b/drivers/fpga/xilinx.c
+@@ -49,7 +49,7 @@ int fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
  
-@@ -170,11 +115,11 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
- 	fns->clk (1, 1, cookie);
- 	udelay(100);
- 	if (!fns->done (cookie)) {
--		printf (" error!.\n");
-+		printf(" error!.\n");
- 		fns->abort (cookie);
- 		return FPGA_FAIL;
- 	} else {
--		printf ("\b\b\b done.\n");
-+		printf("\b\b\b done.\n");
- 	}
+ 	dataptr = (unsigned char *)fpgadata;
+ 	/* Find out fpga_description */
+-	desc = fpga_validate(devnum, dataptr, 0, (char *)__func__);
++	desc = fpga_validate(devnum, dataptr, 0);
+ 	/* Assign xilinx device description */
+ 	xdesc = desc->devdesc;
  
- 	/* 5. call lower layer post configuration */
-@@ -187,3 +132,47 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+diff --git a/include/fpga.h b/include/fpga.h
+index 4cc44164b2f..a144238e66a 100644
+--- a/include/fpga.h
++++ b/include/fpga.h
+@@ -79,7 +79,7 @@ int fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
+ int fpga_dump(int devnum, const void *buf, size_t bsize);
+ int fpga_info(int devnum);
+ const fpga_desc *fpga_validate(int devnum, const void *buf,
+-			       size_t bsize, char *fn);
++			       size_t bsize);
+ int fpga_compatible2flag(int devnum, const char *compatible);
  
- 	return FPGA_SUCCESS;
- }
-+
-+int StratixII_load(Altera_desc *desc, const void *buf, size_t size)
-+{
-+	int ret_val = FPGA_FAIL;
-+
-+	switch (desc->iface) {
-+	case passive_serial:
-+		ret_val = StratixII_ps_fpp_load(desc, buf, size, 1, 0);
-+		break;
-+	case fast_passive_parallel:
-+		ret_val = StratixII_ps_fpp_load(desc, buf, size, 0, 0);
-+		break;
-+	case fast_passive_parallel_security:
-+		ret_val = StratixII_ps_fpp_load(desc, buf, size, 0, 1);
-+		break;
-+
-+		/* Add new interface types here */
-+	default:
-+		log_err("Unsupported interface type, %d\n", desc->iface);
-+	}
-+	return ret_val;
-+}
-+
-+int StratixII_dump(Altera_desc *desc, const void *buf, size_t bsize)
-+{
-+	int ret_val = FPGA_FAIL;
-+
-+	switch (desc->iface) {
-+	case passive_serial:
-+	case fast_passive_parallel:
-+	case fast_passive_parallel_security:
-+		ret_val = StratixII_ps_fpp_dump(desc, buf, bsize);
-+		break;
-+		/* Add new interface types here */
-+	default:
-+		log_err("Unsupported interface type, %d\n", desc->iface);
-+	}
-+	return ret_val;
-+}
-+
-+int StratixII_info(Altera_desc *desc)
-+{
-+	return FPGA_SUCCESS;
-+}
-diff --git a/drivers/fpga/stratixv.c b/drivers/fpga/stratixv.c
-index 372f16d92d1..4b251994598 100644
---- a/drivers/fpga/stratixv.c
-+++ b/drivers/fpga/stratixv.c
-@@ -48,7 +48,7 @@ int stratixv_load(Altera_desc *desc, const void *rbf_data, size_t rbf_size)
- 	int spi_dev;
- 	int ret = 0;
- 
--	if ((u32)rbf_data & 0x3) {
-+	if ((size_t)rbf_data & 0x3) {
- 		puts("FPGA: Unaligned data, realign to 32bit boundary.\n");
- 		return -EINVAL;
- 	}
-diff --git a/drivers/fpga/versalpl.c b/drivers/fpga/versalpl.c
-index d691f135e89..624493ad838 100644
---- a/drivers/fpga/versalpl.c
-+++ b/drivers/fpga/versalpl.c
-@@ -6,7 +6,6 @@
- 
- #include <cpu_func.h>
- #include <log.h>
--#include <asm/arch/sys_proto.h>
- #include <memalign.h>
- #include <versalpl.h>
- #include <zynqmp_firmware.h>
-diff --git a/drivers/fpga/virtex2.c b/drivers/fpga/virtex2.c
-index 8e2c12bb58b..805cbac8082 100644
---- a/drivers/fpga/virtex2.c
-+++ b/drivers/fpga/virtex2.c
-@@ -19,6 +19,7 @@
- #include <log.h>
- #include <virtex2.h>
- #include <linux/delay.h>
-+#include <time.h>
- 
- /*
-  * If the SelectMap interface can be overrun by the processor, enable
-@@ -301,6 +302,7 @@ static int virtex2_ssm_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 	size_t bytecount = 0;
- 	unsigned char *data = (unsigned char *)buf;
- 	int cookie = desc->cookie;
-+	unsigned long ts;
- 
- 	ret_val = virtex2_slave_pre(fn, cookie);
- 	if (ret_val != FPGA_SUCCESS)
-diff --git a/include/stratixII.h b/include/stratixII.h
-index 3c06bb2955a..785cdf41cb8 100644
---- a/include/stratixII.h
-+++ b/include/stratixII.h
-@@ -6,8 +6,8 @@
- #ifndef _STRATIXII_H_
- #define _STRATIXII_H_
- 
--extern int StratixII_load (Altera_desc * desc, void *image, size_t size);
--extern int StratixII_dump (Altera_desc * desc, void *buf, size_t bsize);
--extern int StratixII_info (Altera_desc * desc);
-+int StratixII_load(Altera_desc *desc, const void *buf, size_t size);
-+int StratixII_dump(Altera_desc *desc, const void *buf, size_t bsize);
-+int StratixII_info(Altera_desc *desc);
- 
- #endif				/* _STRATIXII_H_ */
+ #endif	/* _FPGA_H_ */
 -- 
 2.48.1
 
