@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E30DC83F03
-	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 22:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D147C83F07
+	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 22:20:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 701A18309C;
+	by phobos.denx.de (Postfix) with ESMTP id B5CF7830B3;
 	Mon,  7 Jul 2025 00:18:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2CB481D6A; Sun,  6 Jul 2025 13:29:43 +0200 (CEST)
-Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com
- [209.85.219.49])
+ id 85A6582F30; Sun,  6 Jul 2025 13:29:51 +0200 (CEST)
+Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com
+ [209.85.219.50])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76BFB82F14
- for <u-boot@lists.denx.de>; Sun,  6 Jul 2025 13:29:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15C9D82F14
+ for <u-boot@lists.denx.de>; Sun,  6 Jul 2025 13:29:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=magnus.damm@gmail.com
-Received: by mail-qv1-f49.google.com with SMTP id
- 6a1803df08f44-6fad4e6d949so13417606d6.0
- for <u-boot@lists.denx.de>; Sun, 06 Jul 2025 04:29:41 -0700 (PDT)
+Received: by mail-qv1-f50.google.com with SMTP id
+ 6a1803df08f44-6fad8b4c927so25590676d6.0
+ for <u-boot@lists.denx.de>; Sun, 06 Jul 2025 04:29:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751801380; x=1752406180;
+ d=1e100.net; s=20230601; t=1751801388; x=1752406188;
  h=subject:references:in-reply-to:message-id:date:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XRKWT0BvHip2jshSfspMmDUN2fq2hsxj8XQipziInpA=;
- b=BBYpvSZvC17VDgxMavQspt+Ia90aUBp4jWJ9Jzbb6diDUef2dd1ZIZOPqNPGUK5rlU
- 7aBpzKoSufFuUGixpIMBtpBlzibjXt4WIXNpxei0jMgILaAmjNlFcAIb5IeBWwGYfHgZ
- j2MOsgsd9BXwnSqF1Nhb0CUjcRBhytxftiWGWfCQ+KgYiM/x7k7CRTldXvmaUpGQhTy0
- 2V8FlB1pHcBkiH3AFGTGfG8aGvaS93hAc7WQ0CuHl3YpuKWpWzizg1rL3PjAKIzD+jGF
- gSxtoxiltzsuq6bv4AQD3wz4RhRnUX8flpbnENWRCYPwwwrLj+zKHnyT05UUGYd8od6Q
- LOmg==
-X-Gm-Message-State: AOJu0YxvHm69a6WfVke3uFT9NJEvf527ApvBqflcuef4tD5a8xzmkF6g
- RdN3m4YNrOtSVIYY9w/ORUs2plbLBkgkb0cMnuUxtLLk7HpcVNhljgKlLx1PLMU7
-X-Gm-Gg: ASbGncvUSWJZmi7ZXpg2/JDyV2kXWkZ3zXJxEptTiTTsjMf0ZYHYMo31S/f/xU8oSer
- pgFSHrzpNtx4Ce0QebOYhogUhxmEcW0CFiLwPY1G/3thwR6RzsQMsVm7hSxsiVw61bUqql5Gy39
- XfMoZa3WccbSvwMQ1Df0BMq9FAb32VJBxmKZBuZs6erYcPmuNSyy6hY4j5Z6v1qvRk520Su9lTE
- lw6o/P4aMZibmudCgSeYf7h6hyblAH30AxucK9iBSoAx12o9vkwkFg31peI9Dqv5njCtyv2nmIA
- eTJQ0pCpmasMpbqSNeDpmcsdvV8AC5LQ194IAy2XHa1jfrBo7asFCwLPpfjbTxJjvxpLm46fDnd
- N56eOHLQ=
-X-Google-Smtp-Source: AGHT+IGMcRg3GvUq5SyQrPk0je4LghMWwIkJAV8Hx2UC2busqr0+QTqzpqp11jcf0mr4NH3QCMV3iA==
-X-Received: by 2002:a05:6214:260c:b0:6f8:a825:adea with SMTP id
- 6a1803df08f44-702c8b90c07mr116340446d6.15.1751801380113; 
- Sun, 06 Jul 2025 04:29:40 -0700 (PDT)
+ bh=+4jjkq9atXqUIB70vOLaX2w/ru0XCQFel7S1VVzCxj4=;
+ b=Xdinp9NvYl+3qXoSXWBuRyOVa1ZUDWp/9KFOAEl1yxdX/S0NjZx26fW2NX8jrxDfOe
+ tSaWLL4mb74sIoW3SWXnm5vRsZEYL1Rh84aGqCh0tjALDNVEKKY8vFKeXJM0CwCIBRjb
+ D7sXV2FQ1RK5cIyAmpR4VTeqnrKbOv7vv064hGhnI/rwzy7jCHi768tYKD3bVbGaNbC/
+ oYa/MTZ3uwLlluh+zjxFSx6fgb2Bcro+EqfzaEzAxxl/IXIb630YotyARDd+3sptO0l8
+ wJOvHD/TalaFkLMjuGBF52SsdNKHHvkowFPatJDnPKgKZNjX32nYAni9VaX8Cf9sW7x4
+ Njkw==
+X-Gm-Message-State: AOJu0Yz4lCcW29F9P1t8NS+7e7ufM7IhK7j3xKHzlX7VDlQ1/WIuFTVp
+ CJPmWn+5PXZiMlPsRM5rBK4r8AZFC/w4IiLD5uCcEvXbqvwfHdxnLbKQ1mFFqAQe
+X-Gm-Gg: ASbGncuQUwvr7mGgEQORISFo60P/xLS1vuBueXeKhPipDOqrqQfpesWM0j6ZJ6llrfj
+ nExhdLNPtEpPAn1geEUOZIs7saNKlrgo0prb/EOmzdMgvP0dyRk+6txfXxlhA0cqRg2/+s4mHoy
+ 8mmv14HTatX/iAF4h+9b2pN03FWiTJ0hYGeztPfogWTEPXfnHNv1vIPK0lQJQaONXn8Fha1ZwmB
+ vE5B2HdMe6xCt3MYyI92Is2vbtUOgoaUv1zT5E7HwoeoWjXtY5CLzJtiiLAQB5Nuc5oogdySIG6
+ JZhNS5ATT8xQmxuqJBrgOd5SlFox1pn4gVGs34GZ40rLge6N+dwglm8dWzAg/YmLZgEYkrQH38a
+ ogmduWbOMnRx5o75FTA==
+X-Google-Smtp-Source: AGHT+IHyAu9GRk9hdc8nGwIqu6DjyDMunNrDPv4EMlTiQsAbVMhKeGhdaX9fZRoIqAx+6szuWtbYQA==
+X-Received: by 2002:a05:6214:e4b:b0:6fa:fcb0:b88d with SMTP id
+ 6a1803df08f44-702c6d79cf4mr129936986d6.28.1751801387745; 
+ Sun, 06 Jul 2025 04:29:47 -0700 (PDT)
 Received: from 1.0.0.127.in-addr.arpa ([167.99.4.198])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-702c4cc7534sm43219356d6.11.2025.07.06.04.29.38
+ 6a1803df08f44-702c4cc7751sm43060246d6.10.2025.07.06.04.29.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Jul 2025 04:29:39 -0700 (PDT)
+ Sun, 06 Jul 2025 04:29:47 -0700 (PDT)
 From: Magnus Damm <damm@opensource.se>
 To: u-boot@lists.denx.de
-Cc: Chris.Brandt@renesas.com, Magnus Damm <damm@opensource.se>,
- marek.vasut+renesas@mailbox.org, geert+renesas@glider.be
-Date: Sun, 06 Jul 2025 13:29:37 +0200
-Message-Id: <175180137742.86839.9519699030077029409.sendpatchset@1.0.0.127.in-addr.arpa>
+Cc: Chris.Brandt@renesas.com, marek.vasut+renesas@mailbox.org,
+ Magnus Damm <damm@opensource.se>, geert+renesas@glider.be
+Date: Sun, 06 Jul 2025 13:29:45 +0200
+Message-Id: <175180138513.86839.112101475183122753.sendpatchset@1.0.0.127.in-addr.arpa>
 In-Reply-To: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
 References: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
-Subject: [PATCH v3 8/9] ARM: renesas: Add RZ/A2 GR-Mango board support
+Subject: [PATCH v3 9/9] ARM: renesas: Add RZ/A2 RZA2MBTC board support
 X-Mailman-Approved-At: Mon, 07 Jul 2025 00:18:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,8 +82,8 @@ X-Virus-Status: Clean
 
 From: Magnus Damm <damm@opensource.se>
 
-Add initial RZ/A2 GR-Peach board support. Serial console and Ethernet
-are known to work however on-board SDRAM is not yet enabled.
+Add initial RZ/A2 RZA2MBTC  board support. Serial console, SPI Flash and
+Ethernet are known to work however on-board SDRAM is not yet enabled.
 
 Signed-off-by: Magnus Damm <damm@opensource.se>
 ---
@@ -92,38 +92,53 @@ Signed-off-by: Magnus Damm <damm@opensource.se>
  - new patch
 
  Please pick DT board file from the following patch in series:
- [PATCH 5/6] ARM: dts: renesas: gr-mango: initial board support
+ [PATCH 6/6] ARM: dts: renesas: rza2mbtc: initial board support
  https://patchwork.kernel.org/project/linux-renesas-soc/list/?series=979368
 
- arch/arm/dts/Makefile                     |    3 ++
- arch/arm/dts/r7s9210-gr-mango-u-boot.dtsi |   28 ++++++++++++++++++++
- arch/arm/mach-renesas/Kconfig.rza2        |   13 +++++++++
- board/renesas/grmango/Kconfig             |   12 ++++++++
- board/renesas/grmango/MAINTAINERS         |    5 +++
- board/renesas/grmango/Makefile            |    7 +++++
- board/renesas/grmango/grmango.c           |   40 +++++++++++++++++++++++++++++
- configs/grmango_defconfig                 |   10 +++++++
- include/configs/grmango.h                 |   15 ++++++++++
- 9 files changed, 133 insertions(+)
+ Makefile                                  |    2 +
+ arch/arm/dts/Makefile                     |    3 +-
+ arch/arm/dts/r7s9210-rza2mbtc-u-boot.dtsi |   28 +++++++++++++++++++++++
+ arch/arm/mach-renesas/Kconfig.rza2        |    4 +++
+ board/aprg/rza2mbtc/Kconfig               |   15 ++++++++++++
+ board/aprg/rza2mbtc/MAINTAINERS           |    5 ++++
+ board/aprg/rza2mbtc/Makefile              |    1 
+ board/aprg/rza2mbtc/rza2mbtc.c            |   34 +++++++++++++++++++++++++++++
+ configs/rza2mbtc_defconfig                |   17 ++++++++++++++
+ include/configs/rza2mbtc.h                |   27 +++++++++++++++++++++++
+ 10 files changed, 135 insertions(+), 1 deletion(-)
 
---- 0020/arch/arm/dts/Makefile
-+++ work/arch/arm/dts/Makefile	2025-07-05 18:10:31.000000000 +0900
-@@ -927,6 +927,9 @@ dtb-$(CONFIG_RZA1) += \
- 	r7s72100-genmai.dtb \
+--- 0013/Makefile
++++ work/Makefile	2025-07-05 19:47:10.480068691 +0900
+@@ -868,9 +868,11 @@ c_flags := $(KBUILD_CFLAGS) $(cpp_flags)
+ # U-Boot objects....order is important (i.e. start must be first)
+ 
+ HAVE_VENDOR_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(VENDOR)/common/Makefile),y,n)
++HAVE_SOC_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(SOC)/common/Makefile),y,n)
+ 
+ libs-$(CONFIG_API) += api/
+ libs-$(HAVE_VENDOR_COMMON_LIB) += board/$(VENDOR)/common/
++libs-$(HAVE_SOC_COMMON_LIB) += board/$(SOC)/common/
+ libs-y += boot/
+ libs-$(CONFIG_CMDLINE) += cmd/
+ libs-y += common/
+--- 0021/arch/arm/dts/Makefile
++++ work/arch/arm/dts/Makefile	2025-07-05 19:47:10.480068691 +0900
+@@ -928,7 +928,8 @@ dtb-$(CONFIG_RZA1) += \
  	r7s72100-gr-peach.dtb
  
-+dtb-$(CONFIG_RZA2) += \
-+	r7s9210-gr-mango.dtb
-+
+ dtb-$(CONFIG_RZA2) += \
+-	r7s9210-gr-mango.dtb
++	r7s9210-gr-mango.dtb \
++	r7s9210-rza2mbtc.dtb
+ 
  dtb-$(CONFIG_TARGET_AT91SAM9261EK) += at91sam9261ek.dtb
  
- dtb-$(CONFIG_TARGET_PM9261) += at91sam9261ek.dtb
 --- /dev/null
-+++ work/arch/arm/dts/r7s9210-gr-mango-u-boot.dtsi	2025-07-05 18:10:32.845452021 +0900
++++ work/arch/arm/dts/r7s9210-rza2mbtc-u-boot.dtsi	2025-07-05 19:57:05.029546662 +0900
 @@ -0,0 +1,28 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Device Tree Source extras for U-Boot for the GR Mango board
++ * Device Tree Source extras for U-Boot for the RZ/A2M BTC board
 + * Based on GR Peach, Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
 + */
 +
@@ -141,70 +156,64 @@ Signed-off-by: Magnus Damm <damm@opensource.se>
 +	bootph-all;
 +};
 +
-+&scif0 {
++&scif1 {
 +	bootph-all;
 +	clock = <66666666>;     /* ToDo: Replace by DM clock driver */
 +};
 +
-+&scif0_pins {
++&scif1_pins {
 +	bootph-all;
 +};
---- 0020/arch/arm/mach-renesas/Kconfig.rza2
-+++ work/arch/arm/mach-renesas/Kconfig.rza2	2025-07-05 18:10:31.000000000 +0900
-@@ -4,4 +4,17 @@ config CPU_RZA2
- 	bool
- 	default y
+--- 0021/arch/arm/mach-renesas/Kconfig.rza2
++++ work/arch/arm/mach-renesas/Kconfig.rza2	2025-07-05 19:47:10.480068691 +0900
+@@ -11,10 +11,14 @@ choice
+ config TARGET_GRMANGO
+ 	bool "GR-MANGO board"
  
-+choice
-+	prompt "Renesas RZ/A2 board select"
++config TARGET_RZA2MBTC
++	bool "RZA2MBTC board"
 +
-+# Renesas Supported Boards
-+config TARGET_GRMANGO
-+	bool "GR-MANGO board"
-+
-+endchoice
-+
-+# Renesas Supported Boards
-+source "board/renesas/grmango/Kconfig"
-+
-+
+ endchoice
+ 
+ # Renesas Supported Boards
+ source "board/renesas/grmango/Kconfig"
+ 
++source "board/aprg/rza2mbtc/Kconfig"
+ 
  endif
 --- /dev/null
-+++ work/board/renesas/grmango/Kconfig	2025-07-05 18:10:32.859452100 +0900
-@@ -0,0 +1,12 @@
-+if TARGET_GRMANGO
++++ work/board/aprg/rza2mbtc/Kconfig	2025-07-05 19:47:11.525074804 +0900
+@@ -0,0 +1,15 @@
++if TARGET_RZA2MBTC
++
++config SYS_SOC
++        default "renesas"
 +
 +config SYS_BOARD
-+	default "grmango"
++	default "rza2mbtc"
 +
 +config SYS_VENDOR
-+	default "renesas"
++	default "aprg"
 +
 +config SYS_CONFIG_NAME
-+	default "grmango"
++	default "rza2mbtc"
 +
 +endif
 --- /dev/null
-+++ work/board/renesas/grmango/MAINTAINERS	2025-07-05 18:10:32.867452146 +0900
++++ work/board/aprg/rza2mbtc/MAINTAINERS	2025-07-05 19:47:11.532074845 +0900
 @@ -0,0 +1,5 @@
-+GRMANGO BOARD
++RZA2MBTC BOARD
 +M:	Magnus Damm <damm@opensource.se>
 +F:	arch/arm/dts/r7s9210*
-+F:	board/renesas/grmango/
-+N:	grmango
++F:	board/aprg/rza2mbtc/
++N:	rza2mbtc
 --- /dev/null
-+++ work/board/renesas/grmango/Makefile	2025-07-05 18:10:32.874452185 +0900
-@@ -0,0 +1,7 @@
-+#
-+# Copyright (C) 2018 Renesas Electronics
-+# Copyright (C) 2018 Chris Brandt
-+#
-+# SPDX-License-Identifier:	GPL-2.0+
-+
-+obj-y	:= grmango.o
++++ work/board/aprg/rza2mbtc/Makefile	2025-07-05 19:47:11.539074886 +0900
+@@ -0,0 +1 @@
++obj-y	:= rza2mbtc.o
 --- /dev/null
-+++ work/board/renesas/grmango/grmango.c	2025-07-05 19:42:53.297553497 +0900
-@@ -0,0 +1,40 @@
++++ work/board/aprg/rza2mbtc/rza2mbtc.c	2025-07-05 19:48:16.442454560 +0900
+@@ -0,0 +1,34 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2017 Renesas Electronics
@@ -212,7 +221,6 @@ Signed-off-by: Magnus Damm <damm@opensource.se>
 + */
 +
 +#include <init.h>
-+#include <linux/io.h>
 +#include <asm/global_data.h>
 +
 +DECLARE_GLOBAL_DATA_PTR;
@@ -220,11 +228,6 @@ Signed-off-by: Magnus Damm <damm@opensource.se>
 +int board_init(void)
 +{
 +	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
-+
-+	/* configure PFENET register to use MII for Ethernet */
-+	writeb(0x00, 0xfcffe2ff);
-+	writeb(0x40, 0xfcffe2ff);
-+	writeb(0x02, 0xfcffe820);
 +	return 0;
 +}
 +
@@ -246,21 +249,28 @@ Signed-off-by: Magnus Damm <damm@opensource.se>
 +	return 0;
 +}
 --- /dev/null
-+++ work/configs/grmango_defconfig	2025-07-05 18:10:32.888452265 +0900
-@@ -0,0 +1,10 @@
++++ work/configs/rza2mbtc_defconfig	2025-07-05 19:47:11.553074968 +0900
+@@ -0,0 +1,17 @@
 +#include <configs/renesas_rza2.config>
 +
 +CONFIG_ARM=y
 +CONFIG_ARCH_RENESAS=y
 +CONFIG_TEXT_BASE=0x00000000
 +CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r7s9210-gr-mango"
-+CONFIG_TARGET_GRMANGO=y
++CONFIG_DEFAULT_DEVICE_TREE="renesas/r7s9210-rza2mbtc"
++CONFIG_TARGET_RZA2MBTC=y
 +
-+CONFIG_ENV_IS_NOWHERE=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_OFFSET=0xe0000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_SECT_SIZE=0x10000
++CONFIG_MTD=y
++CONFIG_SPI_FLASH=y
++CONFIG_SPI_FLASH_MACRONIX=y
 --- /dev/null
-+++ work/include/configs/grmango.h	2025-07-05 18:10:32.894452299 +0900
-@@ -0,0 +1,15 @@
++++ work/include/configs/rza2mbtc.h	2025-07-05 19:47:11.560075010 +0900
+@@ -0,0 +1,27 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
 + * Configuration settings for the Renesas GRMANGO board
@@ -271,8 +281,20 @@ Signed-off-by: Magnus Damm <damm@opensource.se>
 +#ifndef __GRMANGO_H
 +#define __GRMANGO_H
 +
-+/* Internal RAM Size: RZ/A2M = 4MB */
++/* Internal RAM Size */
++/*
++ * u-boot will be relocated to internal RAM during boot.
++ * RZ/A2M = 4MB
++ */
 +#define CFG_SYS_SDRAM_BASE           0x80000000
 +#define CFG_SYS_SDRAM_SIZE           (4 * 1024 * 1024)
++
++/* Network interface */
++#define CFG_SH_ETHER_USE_PORT 1
++#define CFG_SH_ETHER_PHY_ADDR 0
++#define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
++#define CFG_SH_ETHER_CACHE_WRITEBACK
++#define CFG_SH_ETHER_CACHE_INVALIDATE
++#define CFG_SH_ETHER_ALIGNE_SIZE	64
 +
 +#endif	/* __GRMANGO_H */
