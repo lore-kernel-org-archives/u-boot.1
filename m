@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0500C83F07
-	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 22:19:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD713C83F07
+	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 22:19:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D52458307F;
-	Mon,  7 Jul 2025 00:18:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2923D83092;
+	Mon,  7 Jul 2025 00:18:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E50282F14; Sun,  6 Jul 2025 13:29:28 +0200 (CEST)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
- [209.85.222.176])
+ id 261C982F14; Sun,  6 Jul 2025 13:29:36 +0200 (CEST)
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
+ [209.85.160.170])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06EF18277D
- for <u-boot@lists.denx.de>; Sun,  6 Jul 2025 13:29:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D769D8277D
+ for <u-boot@lists.denx.de>; Sun,  6 Jul 2025 13:29:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=magnus.damm@gmail.com
-Received: by mail-qk1-f176.google.com with SMTP id
- af79cd13be357-7d41b04bf6fso238054385a.0
- for <u-boot@lists.denx.de>; Sun, 06 Jul 2025 04:29:25 -0700 (PDT)
+Received: by mail-qt1-f170.google.com with SMTP id
+ d75a77b69052e-4a6f0bcdf45so31223141cf.0
+ for <u-boot@lists.denx.de>; Sun, 06 Jul 2025 04:29:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751801365; x=1752406165;
+ d=1e100.net; s=20230601; t=1751801372; x=1752406172;
  h=subject:references:in-reply-to:message-id:date:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/vFZcs4nbLKxyZyzoebFwTjho2YAyB/KOL41NeyYrw0=;
- b=mL0pZzK44FKBdpy1x0o6q2iFQ28NtFKqMoARTt1vtCbq4qGc2VXz2J9zgGzdpY7QnD
- Qlva4egaWXKsoQarNeHHRIvO3QsjfnUosEr4xwKHARmeZGw9CiI2SGAp8aXUNkIpiUBc
- c3clvQSbWxr8Sp4fj7xS6ztLf9nGJzpKoVoSBq82vcClM8xjM2vjoJH1T6wJ26Hl1N1O
- I5n26u+eyAmqc4g7tRyG8QM5jk7poHsKGOWgA8876+WOB0ecxcwucrgQzIljS6SIN5/A
- BIo0Q0+FKA0jlIMJyI36mpRhYDQ1DAMp3eGWGENwOPnBX9887Y2n2OMon96VcFUjIX+y
- rHQw==
-X-Gm-Message-State: AOJu0YwgNk4vKtiYNPTbBEClCfwXdfQFs1QU0D6gthnV1Oy/++O6nk59
- RtEFOSun2eI5bpKk53FwCchizGbF/AG10WP3XTbZRfDmoLVVSfZNvEESypsneHrI
-X-Gm-Gg: ASbGncsdk6ovJbyCvQJwJZ9lIAh2C1TB8b5FFGXVhZBAdewBLTxdihwBDDh2Ed96L3C
- XkYsPMjnYP4M0B6F1VLX/KDxEUo3Ch7OJXuFARkV8dihM3OKHLRG/GWE8SSVUxHVWtcuh734p9d
- a4ZcKO09ex2mpGYuV83fdg/PxkIX50K+hz8NbjsfLTau7UP82VwigYlqd1BpQWE/vAyJUTQpbCQ
- va6oj9wcX+B28bFkba9AYcnjmSVWkusqodJX0PDjHxzdLo/s3hJILyvKJmZL3LIhZTfr1K8RUrl
- xXLC3hgoDL990A2U9wIm7XYfq9XXpRsou8LRzNeAbZAgXJLGquFB/OxaTs9EukgfrwXF+eipjcc
- HhCHAc+c=
-X-Google-Smtp-Source: AGHT+IFyKSQncbU/6JHlwD52YGVaPbGHIRFSQSRvWwsdVzJMsUx9JtJ7Ljay1uS2nQVi2gjZC5j6kg==
-X-Received: by 2002:a05:620a:468c:b0:7cd:4b5b:a1fc with SMTP id
- af79cd13be357-7d5df0ccfe3mr1181659985a.7.1751801364629; 
- Sun, 06 Jul 2025 04:29:24 -0700 (PDT)
+ bh=4IyP+lGMVbfNCQtjYP+9yqFwjpLy6W47LDhzbLRiqwk=;
+ b=kTtMryuDTe8mVicdStCvqHEXaCdMU8UZDlcSX9LI7BV5e+LDRChgf/Es+ELb6QpNBK
+ Qp7VYqj5tT5Vg3C/r+Z5msFVqNhbvqUq4WX8KoB6OSBF3rwiPt2ormdNnQLeGYcb5MaJ
+ y8GJZWueYU422+qasuSHZ2YopiYoBph2KbckHhLjZglkUK0pZPhoouIyfXjZcw2F4Lno
+ T7f+MYllyBe9VlGNmeOFb/j9oDElUG9XAVoPZK1KkjNp1Et5IRFOqpmyErUG/jzLkAlp
+ a1glt0j6O3zNOlPyOeDDh5MXFL4aI59cItt8PZP9A7BKqe5ewFnKf7rvIkOlRHG8KtOI
+ tuTQ==
+X-Gm-Message-State: AOJu0Yx5NQcnNtNt2OaDSYIOAtu/iJTp4TaVZo3Tc0BEyI/G2b5bS3rr
+ obp7Bink6KCijjxZeEUFtLWetv05mit6+089X7dhSVVZBYN84cP+AdvRS6SGQNzJ
+X-Gm-Gg: ASbGncvW/3tgwrBCR36Mpnkz50uwzAiIVbmCrqla3p8qBOTFhnsokMB2Qz/tiQj3lc+
+ nPqh39omEkicyRgoc/6jrlXq6tUq9n/HI7B3znMsiZKHFAGSr0vz6L6wmQN+g/d8ynx9Ixf8f06
+ VMV3R3dE2jIPouUVKaa/Jm11sEygEmD8If2dXULmODnzHpTpn3hLbiMQQL5Kl9fCURYQ7GyiJxK
+ 0GUlOJclj+CWivy+JOJWgbbGCIvi9AGcgz6xY67U5ii4YrdEN6VtEPdfmCvycxD/adl9lRQKRxQ
+ FXk8xmbS2SYOZ9x3Xat7JJprV8rguBTjNfTNFrAurZil6e7iuLao6CPp8nGVXJZBUs//ei6kFKz
+ lMQEpKd0=
+X-Google-Smtp-Source: AGHT+IHAS5iKqIkg8NK4kShEn+qHnGm4cYd1O3dXS6RhZZmERsM6nMabFWUHGS/k06n4Ei1DJHkJtQ==
+X-Received: by 2002:a05:622a:13d4:b0:4a5:a632:2888 with SMTP id
+ d75a77b69052e-4a9968bc76amr141942841cf.47.1751801372257; 
+ Sun, 06 Jul 2025 04:29:32 -0700 (PDT)
 Received: from 1.0.0.127.in-addr.arpa ([167.99.4.198])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-702c4cd4049sm42455666d6.51.2025.07.06.04.29.23
+ d75a77b69052e-4a9949e5221sm46007541cf.2.2025.07.06.04.29.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Jul 2025 04:29:24 -0700 (PDT)
+ Sun, 06 Jul 2025 04:29:31 -0700 (PDT)
 From: Magnus Damm <damm@opensource.se>
 To: u-boot@lists.denx.de
-Cc: Magnus Damm <damm@opensource.se>, Chris.Brandt@renesas.com,
- marek.vasut+renesas@mailbox.org, geert+renesas@glider.be
-Date: Sun, 06 Jul 2025 13:29:22 +0200
-Message-Id: <175180136211.86839.18252924614607632271.sendpatchset@1.0.0.127.in-addr.arpa>
+Cc: Magnus Damm <damm@opensource.se>, marek.vasut+renesas@mailbox.org,
+ Chris.Brandt@renesas.com, geert+renesas@glider.be
+Date: Sun, 06 Jul 2025 13:29:29 +0200
+Message-Id: <175180136965.86839.10195243856147148306.sendpatchset@1.0.0.127.in-addr.arpa>
 In-Reply-To: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
 References: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
-Subject: [PATCH v3 6/9] spi: renesas_rpc_spi: Add RZ/A2 SPI Multi I/O support
+Subject: [PATCH v3 7/9] net: sh_eth: Adjust RZ/A1, add RZ/A2 support
 X-Mailman-Approved-At: Mon, 07 Jul 2025 00:18:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,11 +82,13 @@ X-Virus-Status: Clean
 
 From: Magnus Damm <damm@opensource.se>
 
-Add SPI Multi I/O Bus (also known as RPC SPI) support for RZ/A2 r7s9210.
+Extend the sh_eth driver to also support RZ/A2. While at it fix the RZ/A1
+handling to also take the Ethernet controller base address from the DT node.
 
-Tested on RZ/A1H Genmai with U6 S25FL512S-16 by Spansion.
-Tested on RZ/A2M RZA2MBTC with U2 MX25L51245GXDI-08G by Macronix.
-In the latter case the SPI flash is also used as boot media.
+Tested on:
+- RZ/A1H Genmai (MII) with U2 uPD60610 by Renesas
+- RZ/A2M GR-Mango (ch0 MII) with U13 LAN8710 by Mikrochip
+- RZ/A2M RZA2MBTC + emoEdgeExpanderV2 (ch1 RMII) with IC1 RTL8201 by Realtek
 
 Signed-off-by: Magnus Damm <damm@opensource.se>
 ---
@@ -94,45 +96,185 @@ Signed-off-by: Magnus Damm <damm@opensource.se>
  Changes since v2:
  - new patch
 
- drivers/spi/Kconfig           |    8 ++++----
- drivers/spi/renesas_rpc_spi.c |    3 ++-
- 2 files changed, 6 insertions(+), 5 deletions(-)
+ drivers/net/sh_eth.c |   16 ++++++++++++----
+ drivers/net/sh_eth.h |   31 ++++++++++++++++---------------
+ 2 files changed, 28 insertions(+), 19 deletions(-)
 
---- 0001/drivers/spi/Kconfig
-+++ work/drivers/spi/Kconfig	2025-07-05 03:07:38.660458220 +0900
-@@ -432,12 +432,12 @@ config SPI_QUP
- 
- config RENESAS_RPC_SPI
- 	bool "Renesas RPC SPI driver"
--	depends on RCAR_64 || RZA1
-+	depends on RCAR_64 || RZA1 || RZA2
- 	imply SPI_FLASH_SFDP_SUPPORT
- 	help
--	  Enable the Renesas RPC SPI driver, used to access SPI NOR flash
--	  on Renesas R-Car Gen3 SoCs. This uses driver model and requires a
--	  device tree binding to operate.
-+	 Enable the Renesas RPC SPI driver, used to access SPI NOR flash
-+	 on Renesas R-Car Gen3 and RZ/A series of SoCs. This uses driver model
-+	 and requires a device tree binding to operate.
- 
- config ROCKCHIP_SFC
- 	bool "Rockchip SFC Driver"
---- 0001/drivers/spi/renesas_rpc_spi.c
-+++ work/drivers/spi/renesas_rpc_spi.c	2025-07-05 01:44:41.907314240 +0900
-@@ -207,7 +207,7 @@ static void rpc_spi_flush_read_cache(str
- 
- static u32 rpc_spi_get_strobe_delay(void)
+--- 0013/drivers/net/sh_eth.c
++++ work/drivers/net/sh_eth.c	2025-07-05 17:45:07.333754799 +0900
+@@ -144,10 +144,10 @@ static int sh_eth_reset(struct sh_eth_in
  {
--#ifndef CONFIG_RZA1
-+#if !defined(CONFIG_RZA1) && !defined(CONFIG_RZA2)
- 	u32 cpu_type = renesas_get_cpu_type();
+ #if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
+ 	int ret = 0, i;
+-
++#if !defined(CONFIG_RZA2)
+ 	/* Start e-dmac transmitter and receiver */
+ 	sh_eth_write(port_info, EDSR_ENALL, EDSR);
+-
++#endif
+ 	/* Perform a software reset and wait for it to complete */
+ 	sh_eth_write(port_info, EDMR_SRST, EDMR);
+ 	for (i = 0; i < TIMEOUT_CNT; i++) {
+@@ -215,9 +215,11 @@ static int sh_eth_tx_desc_init(struct sh
+ 	sh_eth_write(port_info, ADDR_TO_PHY(port_info->tx_desc_base), TDLAR);
+ #if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
+ 	sh_eth_write(port_info, ADDR_TO_PHY(port_info->tx_desc_base), TDFAR);
++#if !defined(CONFIG_RZA2)
+ 	sh_eth_write(port_info, ADDR_TO_PHY(cur_tx_desc), TDFXR);
+ 	sh_eth_write(port_info, 0x01, TDFFR);/* Last discriptor bit */
+ #endif
++#endif
  
- 	/*
-@@ -464,6 +464,7 @@ static const struct dm_spi_ops rpc_spi_o
+ err:
+ 	return ret;
+@@ -282,9 +284,11 @@ static int sh_eth_rx_desc_init(struct sh
+ 	sh_eth_write(port_info, ADDR_TO_PHY(port_info->rx_desc_base), RDLAR);
+ #if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
+ 	sh_eth_write(port_info, ADDR_TO_PHY(port_info->rx_desc_base), RDFAR);
++#if !defined(CONFIG_RZA2)
+ 	sh_eth_write(port_info, ADDR_TO_PHY(cur_rx_desc), RDFXR);
+ 	sh_eth_write(port_info, RDFFR_RDLF, RDFFR);
+ #endif
++#endif
  
- static const struct udevice_id rpc_spi_ids[] = {
- 	{ .compatible = "renesas,r7s72100-rpc-if" },
-+	{ .compatible = "renesas,r7s9210-rpc-if" },
- 	{ .compatible = "renesas,rcar-gen3-rpc-if" },
- 	{ .compatible = "renesas,rcar-gen4-rpc-if" },
- 	{ }
+ 	return ret;
+ 
+@@ -408,7 +412,7 @@ static int sh_eth_phy_regs_config(struct
+ 		sh_eth_write(port_info, GECMR_100B, GECMR);
+ #elif defined(CONFIG_CPU_SH7757) || defined(CONFIG_CPU_SH7752)
+ 		sh_eth_write(port_info, 1, RTRATE);
+-#elif defined(CONFIG_RCAR_GEN2) || defined(CONFIG_R8A77980)
++#elif defined(CONFIG_RCAR_GEN2) || defined(CONFIG_R8A77980) || defined(CONFIG_RZA2)
+ 		val = ECMR_RTM;
+ #endif
+ 	} else if (phy->speed == 10) {
+@@ -722,8 +726,11 @@ static int sh_ether_probe(struct udevice
+ 		goto err_mdio_register;
+ 
+ 	priv->bus = mdiodev;
+-
++#ifdef BASE_IO_ADDR
+ 	port_info->iobase = (void __iomem *)(uintptr_t)BASE_IO_ADDR;
++#else
++	port_info->iobase = (void __iomem *)pdata->iobase;
++#endif
+ 
+ #if CONFIG_IS_ENABLED(CLK)
+ 	ret = clk_enable(&priv->clk);
+@@ -797,6 +804,7 @@ int sh_ether_of_to_plat(struct udevice *
+ 
+ static const struct udevice_id sh_ether_ids[] = {
+ 	{ .compatible = "renesas,ether-r7s72100" },
++	{ .compatible = "renesas,ether-r7s9210" },
+ 	{ .compatible = "renesas,ether-r8a7790" },
+ 	{ .compatible = "renesas,ether-r8a7791" },
+ 	{ .compatible = "renesas,ether-r8a7793" },
+--- 0013/drivers/net/sh_eth.h
++++ work/drivers/net/sh_eth.h	2025-07-05 17:42:00.409687244 +0900
+@@ -339,9 +339,10 @@ static const u16 sh_eth_offset_fast_sh4[
+ #elif defined(CONFIG_RCAR_GEN2)
+ #define SH_ETH_TYPE_ETHER
+ #define BASE_IO_ADDR	0xEE700200
+-#elif defined(CONFIG_R7S72100)
++#elif defined(CONFIG_RZA1)
++#define SH_ETH_TYPE_RZ
++#elif defined(CONFIG_RZA2)
+ #define SH_ETH_TYPE_RZ
+-#define BASE_IO_ADDR	0xE8203000
+ #elif defined(CONFIG_R8A77980)
+ #define SH_ETH_TYPE_GETHER
+ #define BASE_IO_ADDR	0xE7400000
+@@ -351,7 +352,7 @@ static const u16 sh_eth_offset_fast_sh4[
+  * Register's bits
+  * Copy from Linux driver source code
+  */
+-#if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
++#if defined(SH_ETH_TYPE_GETHER) || defined(CONFIG_RZA1)
+ /* EDSR */
+ enum EDSR_BIT {
+ 	EDSR_ENT = 0x01, EDSR_ENR = 0x02,
+@@ -363,11 +364,11 @@ enum EDSR_BIT {
+ enum DMAC_M_BIT {
+ 	EDMR_NBST	= 0x80, /* DMA transfer burst mode */
+ 	EDMR_DL1 = 0x20, EDMR_DL0 = 0x10,
+-#if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
++#if defined(SH_ETH_TYPE_GETHER) || defined(CONFIG_RZA1)
+ 	EDMR_SRST	= 0x03, /* Receive/Send reset */
+ 	EMDR_DESC_R	= 0x30, /* Descriptor reserve size */
+ 	EDMR_EL		= 0x40, /* Litte endian */
+-#elif defined(SH_ETH_TYPE_ETHER)
++#elif defined(SH_ETH_TYPE_ETHER) || defined(CONFIG_RZA2)
+ 	EDMR_SRST	= 0x01,
+ 	EMDR_DESC_R	= 0x30, /* Descriptor reserve size */
+ 	EDMR_EL		= 0x40, /* Litte endian */
+@@ -389,7 +390,7 @@ enum DMAC_M_BIT {
+ 
+ /* EDTRR */
+ enum DMAC_T_BIT {
+-#if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
++#if defined(SH_ETH_TYPE_GETHER) || defined(CONFIG_RZA1)
+ 	EDTRR_TRNS = 0x03,
+ #else
+ 	EDTRR_TRNS = 0x01,
+@@ -434,7 +435,7 @@ enum PHY_STATUS_BIT { PHY_ST_LINK = 0x01
+ 
+ /* EESR */
+ enum EESR_BIT {
+-#if defined(SH_ETH_TYPE_ETHER)
++#if defined(SH_ETH_TYPE_ETHER) || defined(CONFIG_RZA1)
+ 	EESR_TWB  = 0x40000000,
+ #else
+ 	EESR_TWB  = 0xC0000000,
+@@ -451,7 +452,7 @@ enum EESR_BIT {
+ 	EESR_FTC  = 0x00200000, EESR_TDE  = 0x00100000,
+ 	EESR_TFE  = 0x00080000, EESR_FRC  = 0x00040000,
+ 	EESR_RDE  = 0x00020000, EESR_RFE  = 0x00010000,
+-#if defined(SH_ETH_TYPE_ETHER)
++#if defined(SH_ETH_TYPE_ETHER) || defined(CONFIG_RZA1)
+ 	EESR_CND  = 0x00000800,
+ #endif
+ 	EESR_DLC  = 0x00000400,
+@@ -539,7 +540,7 @@ enum TD_STS_BIT {
+ enum RECV_RST_BIT { RMCR_RST = 0x01, };
+ /* ECMR */
+ enum FELIC_MODE_BIT {
+-#if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
++#if defined(SH_ETH_TYPE_GETHER) || defined(CONFIG_RZA1)
+ 	ECMR_TRCCM = 0x04000000, ECMR_RCSC = 0x00800000,
+ 	ECMR_DPAD = 0x00200000, ECMR_RZPF = 0x00100000,
+ #endif
+@@ -550,16 +551,16 @@ enum FELIC_MODE_BIT {
+ 	ECMR_PRM = 0x00000001,
+ #ifdef CONFIG_CPU_SH7724
+ 	ECMR_RTM = 0x00000010,
+-#elif defined(CONFIG_RCAR_GEN2) || defined (CONFIG_R8A77980)
++#elif defined(CONFIG_RCAR_GEN2) || defined (CONFIG_R8A77980) || defined(CONFIG_RZA2)
+ 	ECMR_RTM = 0x00000004,
+ #endif
+ 
+ };
+ 
+-#if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
++#if defined(SH_ETH_TYPE_GETHER) || defined(CONFIG_RZA1)
+ #define ECMR_CHG_DM (ECMR_TRCCM | ECMR_RZPF | ECMR_ZPF | ECMR_PFR | \
+ 			ECMR_RXF | ECMR_TXF | ECMR_MCT)
+-#elif defined(SH_ETH_TYPE_ETHER)
++#elif defined(SH_ETH_TYPE_ETHER) || defined(CONFIG_RZA2)
+ #define ECMR_CHG_DM (ECMR_ZPF | ECMR_PFR | ECMR_RXF | ECMR_TXF)
+ #else
+ #define ECMR_CHG_DM	(ECMR_ZPF | ECMR_PFR | ECMR_RXF | ECMR_TXF | ECMR_MCT)
+@@ -640,11 +641,11 @@ enum FIFO_SIZE_BIT {
+ static inline unsigned long sh_eth_reg_addr(struct sh_eth_info *port,
+ 					    int enum_index)
+ {
+-#if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
++#if defined(SH_ETH_TYPE_GETHER)
+ 	const u16 *reg_offset = sh_eth_offset_gigabit;
+-#elif defined(SH_ETH_TYPE_ETHER)
++#elif defined(SH_ETH_TYPE_ETHER) || defined(CONFIG_RZA2)
+ 	const u16 *reg_offset = sh_eth_offset_fast_sh4;
+-#elif defined(SH_ETH_TYPE_RZ)
++#elif defined(CONFIG_RZA1)
+ 	const u16 *reg_offset = sh_eth_offset_rz;
+ #else
+ #error
