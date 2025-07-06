@@ -4,87 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FF9C83F05
-	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 03:51:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9818C83F03
+	for <u-boot@archiver.kernel.org>; Sun,  6 Jul 2025 13:07:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E61978303B;
-	Sun,  6 Jul 2025 05:50:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 87FD5810EB;
+	Sun,  6 Jul 2025 15:07:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W7fJti47";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="n8kQ8+Zr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D271810EB; Sat,  5 Jul 2025 22:57:28 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AF2E081D6A; Sun,  6 Jul 2025 15:07:50 +0200 (CEST)
+Received: from AS8PR03CU001.outbound.protection.outlook.com
+ (mail-westeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9D9C82AF6
- for <u-boot@lists.denx.de>; Sat,  5 Jul 2025 22:57:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A25980FA8
+ for <u-boot@lists.denx.de>; Sun,  6 Jul 2025 15:07:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ae3b37207easo357053666b.2
- for <u-boot@lists.denx.de>; Sat, 05 Jul 2025 13:57:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751749045; x=1752353845; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l/lPPO0E/5Qz4QjFXYKvJlr+YdtKSLO1x6QwruZyeBw=;
- b=W7fJti47NqJ03J1smFioKoM5PYDpjKPKKm0jbNSbbt1xNTu+IRWBdIXnNePSHNmt9x
- d6YeZsd2Frq84gzs7t27syguWetOzCfxO18i5BnEajoA2kckvR5j1/huKRM+IMeNWbR4
- nxYDfn95HJzzUWdxhtxMelEyw2tvg2qICFdhOctjt5FNcTueu9/xCw93Vc5bttycuEUY
- 3WDhpjVrYtGrC2bI98uybM/o0s4PP+AJQf8vJk34HljQohr31IIj6e6ZVQ3jyiKh3dIa
- Hwnoz1yYI/oQDZ+Z1ZyPuYMiUoVPP8bP5XZUu5XMIjmyL1+/sSD2iSEaVK/4+T7bm2LE
- 5kPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751749045; x=1752353845;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l/lPPO0E/5Qz4QjFXYKvJlr+YdtKSLO1x6QwruZyeBw=;
- b=i8VWxjcRgyoaOsjp8a+sx5/PTg9xoTse/BMLlplLk3KLgEHHX5Gq2BtUQtue7EO2NS
- 6fGdysDh89hB97P68cVlgTHCwqTUSR1a7zetgvnK9dtDCEVqqCy9EPTZNDUm5l1TFg4v
- r0k6bDtVnpdMA5bJBrZMhLo756rzWrUKK25tLKA98zVpm9hngcXXVYirxiIBDosHHeKZ
- IH0o2rAQYOSdygo8abKF7EvIB+P5eUC8K2esSJTHY8tqvddcPSe7b0lXzszWChvHVPur
- VzCvSSqNo9iL1m1QQsZsdFoQxGdduUOfRQZneDXLG79M3tTCKDBboND2e9AwePpWelXm
- Iu5w==
-X-Gm-Message-State: AOJu0YxIJFakUW/gdsP62F9tKgaz0y8641GGdV9Va2KThF8cL9B+OAv7
- Y9mLLEY3gop19fIdiaxUbHlr1b1HB7dUp38cxsz8JjFf4pyGsMITrz4we8T1pTvLiIw=
-X-Gm-Gg: ASbGncvvbDvBP4JfE9+OsSCgLCmsESSVqV7K1kuAY3ETR7LyFjMHI8o4Uff+U29N534
- EVbNFQY5bxR8EBdTICWX6GQcfWuhmp7IhPMyAaLq1D7Rk2ieunS0eEQbYm6AdUfjAcTUdzW20Fm
- SJSyYRuxu6PAmIuYIyC4fNJnzCDH54/2GBZeDb9ZXiW1CslrfWDfgLOfyizRqoLVU0cHjhNaTJj
- a63cncFojx3Me0eqrsuuy9yNaMKOW/waqm9AT2dWe+LZkH3cBYloBspT22idi0Cu9FR1O1zWgeQ
- mk3/zkRDV4ITIQq8V5gwv8KA3bWAjrTdBSF+wfbWRR/9cJZZqnarpEtvQlTmjjl5vo8tJPp5tig
- =
-X-Google-Smtp-Source: AGHT+IGbzO8mO64rxKT5KDSaUpSI8tbb/MiDOxFtcEN/e8rU6wuCw+Re3kxBSPHxxFu6lONQReT6wg==
-X-Received: by 2002:a17:907:7293:b0:ae0:c0b3:5656 with SMTP id
- a640c23a62f3a-ae4107dcd56mr284504166b.22.1751749045267; 
- Sat, 05 Jul 2025 13:57:25 -0700 (PDT)
-Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f66e6f51sm399423666b.8.2025.07.05.13.57.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Jul 2025 13:57:24 -0700 (PDT)
-From: vtpieter@gmail.com
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: michal.simek@amd.com,
-	Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v4 5/5] configs: enable FPGA commands and drivers at
- sandbox_defconfig
-Date: Sat,  5 Jul 2025 22:57:06 +0200
-Message-ID: <20250705205710.792370-6-vtpieter@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250705205710.792370-1-vtpieter@gmail.com>
-References: <20250705205710.792370-1-vtpieter@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Fdqq4RJSCQnGvhtik2dYOMtc+rZBLrlnKlhlrYmt2cx61FPqnac/pyp8Q7PDkLrSJWi8ih8dawT2sR2GPPXzRipqqD7j0hMCqkCADo8+2d9JmYhZyrzdRDbh4B8T2TvLqJaYzIZgv/ksOO03kQqlfvqKJdCtu8tRuvISYXlNNIq/S2jSXFcQuI5ZN8UdielbAPoH+A+0Zzt/MwiJFKIUjhF+lPiTSLHEXrbBnb78SF7jjLLzjRUQMX6EcreRRbw4Z0mkbLVUaYuG09QaHyxBArKG4Xnq85pWK7GEPKut/CH15MaptZJ8rG0wSPAmT8x/njxNDCnIsakUxVWhcjF/rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kYP3woHXGqOtbbU0G/QQxExrIxKJJqOmlWuwecL8rwo=;
+ b=A0pJglip8k1UG2elG4dmssNtB12zMwnLXY9T+CuZxriViyHxd4/GBCSzzdT0CL+/yDg3D2ABcpJXXsG9AWQctHOfcrPRLMLzhNajUBH8fV+H1rRA46FbYlkJTTCKtRYAnWt8WHmGNKxg/KnsZ2IcQCyMqkNEeUtyKWLtbo9p+95soREIj75LpWCyIGTeRlBZzxwl9ytDrsg5wjsJKlPFpOSuk25CCYMVafw1S8VkRwa7ihtTRmU5dl/aWOh/eDowA+5fkJHYZ0hZBYKy7I6Na+udJ0YW2+A9QtLDBMKeh14f/CkK3uvOCU4aU4KDi7gdsI9PFppV5ucfJCFxAr0/gQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kYP3woHXGqOtbbU0G/QQxExrIxKJJqOmlWuwecL8rwo=;
+ b=n8kQ8+ZrVWBL5g4mxAKPs0Qz5imiLiaqybbzYUayjtHCaB/CPL32dMBoE3IFVq3wQqs3HR85Tofx5vrPvE805NO2vPwxHxojJ2g2CZvq1+sccikE56GIlZ0sOTy/KRseYgJxIpeHbKhVlbFSOnTRj7uIrvl5ZXT5Mc8v5907Ot3Z/mxWOlAdG2J9UM0ZCw33XuumRl8lSIxEDBpMEXtkt8YqoiS1jk7oBgQu5THSt6v3FfJBbQH4joxqKfcbCkknQkiRiLWKK+wfK0do2rzXFHoASBhGq51nsC22p5M7S9LKwIGrHGWbCuRmDX4v5KG1NN4/npzQoGPh8OZ0t64Pzg==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by PAXPR04MB8096.eurprd04.prod.outlook.com (2603:10a6:102:1c7::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.23; Sun, 6 Jul
+ 2025 13:07:46 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8901.021; Sun, 6 Jul 2025
+ 13:07:46 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>
+Subject: RE: [PATCH] arm: imx: Remove the rest of i.MX31 support
+Thread-Topic: [PATCH] arm: imx: Remove the rest of i.MX31 support
+Thread-Index: AQHb7S0OeiJOeSkUaUeHnlRjCJPdD7QlE3ig
+Date: Sun, 6 Jul 2025 13:07:45 +0000
+Message-ID: <PAXPR04MB8459A57464A61BC8946F4EB8884CA@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20250704214600.3418869-1-trini@konsulko.com>
+In-Reply-To: <20250704214600.3418869-1-trini@konsulko.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|PAXPR04MB8096:EE_
+x-ms-office365-filtering-correlation-id: 13cd642d-0e28-4110-d96c-08ddbc8e19cc
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|19092799006|366016|1800799024|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?Aw7jMHEvTa5rah+PY1Of3/l75WGjsA62Ebk8esWstQxQzvXOPoKSfFyCg9l7?=
+ =?us-ascii?Q?gcUohYkwqCe4p0OvKvA8yOToyHcry/15e5kLCLuKYZlhSieSRHyp2WyW1Xga?=
+ =?us-ascii?Q?eryvCp5qQuBkp78Ni3Crmf6ob3lFmVPRQcjPkBAYZgGHQMwCkJJYvyC2i4+C?=
+ =?us-ascii?Q?WVzR9j1ZJKn5Pr50Ga9EdKFBgv3kVLy9CIgyHvHaF+dZVnlS20XE4utjFBQ+?=
+ =?us-ascii?Q?Eobm3CXcE04hFrVACMZG270tCJn474xbSVTuPIPh9uSnkb3LB6YOQ3VYcGUd?=
+ =?us-ascii?Q?ixFqeNe3+U9kva433VdCNMKbAClCZkGYWdvrBnQnV7jCitU6k0ivKwpH1pH/?=
+ =?us-ascii?Q?IrIvKZuU5CuvyC6y5tZ/7AnnBVB5RQefOyahM7wsfSZtaDmWZ9z+NwLSy+Hp?=
+ =?us-ascii?Q?DfC14dCphdIVrXPSfIBea+Vez4Aa1A1hgvRn3N4/rvcveFeePL/bgYHrqal/?=
+ =?us-ascii?Q?/Rjck3CyJp2mj5DciOYGp93d+BR/W2CBcYl9EnKlBowhaW75Et+xmTAi2PEl?=
+ =?us-ascii?Q?FjWw/7CYKEpxfdBMz6/SINNc8JWtjdoQDzGOiqVophTKryH1OAKn2kDUHbFc?=
+ =?us-ascii?Q?p/WbitGlOcDooJptJZSa24G1tHrQzX3ybbIocWulT1hM6Jf6TV7qL7VMvwhZ?=
+ =?us-ascii?Q?Df7EHTevdU6vrUe1SmWk335Cvr5xv6vjcIVbN18Wtztjvfd9ry87h8DMn1MC?=
+ =?us-ascii?Q?KNAddy5h6szAj09bVL0wty1dVDcabIlK8nsWqGcYwELAV/xLPCTIeTgUwgfa?=
+ =?us-ascii?Q?roIQnGjR0nBBSWoyFNh/hz8nrgZZquLLWX5GPFDnaUJs+CleHoY2PiAnjkdc?=
+ =?us-ascii?Q?CJZ7XH3QhQxi4qDRcsoQlku5wOTJ0k2loxAI113Hx5shSw7636RCdFoJfKkc?=
+ =?us-ascii?Q?VFl6dYbu6w/o1DrE/WljDhtCAxZlttpUVqnxEuKQa6MPZxJ154ypmg14dxAS?=
+ =?us-ascii?Q?eg3IUTvttPjIKwz2tP7snFW/hB4S2mqt5SEdYxS7XKVXS1VFNgXNxsxUeyvV?=
+ =?us-ascii?Q?Hd3jSgXTwmnDeQYJCOM1NahRCaXD9EDClxlL2Qm7BYjskkS418HKPVXuUoXq?=
+ =?us-ascii?Q?B3NTGcrpvyg8MnP1/06eZAefoj50LvQSvbEhm7tgMnUL1erm9dbpe7nQ5evB?=
+ =?us-ascii?Q?yRe/2KtVsVdZOIMEzbQ8DSqB1QD7dDLlc86uoB9mJblp0TA4Wn0N+e8HuJ2k?=
+ =?us-ascii?Q?qoCJFcr2/AsEA9F7//2XJ6VgnCJYrbjtq+CI8gCzi9HSMtDpt96g/kDKUH02?=
+ =?us-ascii?Q?id7QIPHh/n8lO1nKhcYZIUa1ZZQirYyL4EE8tpjjkdiV5iCQ+ex4rT1wtEXj?=
+ =?us-ascii?Q?Fvqyc2/ApR+MZOU49k3tM/fF0bCzMNzGbwS+LCgcaAgVP/2gqon3ApdNT0V2?=
+ =?us-ascii?Q?Q6BCv1gvP4nMtkbZf4lOalsQhEgO2Yw9EOX6S10NORNpbgUaetDeeKV8/K1Y?=
+ =?us-ascii?Q?o8T00YAxNevyE+PTvsAN7V8tZEGJ05UgbhrF1nt+nZzB6KC3mzK1Vg=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(19092799006)(366016)(1800799024)(38070700018); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?S+V3nw4mcBqwgdNlYhR1hKhppjNx5wP+pBI5VJ7kRD2dnqzbLwQAfRz1y/qU?=
+ =?us-ascii?Q?8d33A3rZceugezdU6P7kbHuOBk45ilCD51MzNugKnVaduUrJm8olXJO7uXjQ?=
+ =?us-ascii?Q?KoPpFGRbEdz4gojvAoZi6KNz5Ku84v56tZJPpZlGXPrmj6nPkkFdddHG92wq?=
+ =?us-ascii?Q?SdaQGHNrUVNLNq+JOarDLHdvJ8B7/dyNu6gAMf/vRkb+mYMurLz7I50JopYG?=
+ =?us-ascii?Q?H5dNAI7bJER3/40J+OvkJuAxmC5oLPy5GFqOojn6i7wEb1wlaGX8pSlYKssr?=
+ =?us-ascii?Q?8pwXL2OWQmeNucaWPEU4R7bFEPBvmLnM4/z6tD9vYzBSStNWyCamtqpb/cfI?=
+ =?us-ascii?Q?L6Vc6LEnWQIE3H1asioADqtf5KQevjTbPmIWBbeF1sdP2CvrWIbMrd2LeVf0?=
+ =?us-ascii?Q?Xc/3DQSfNgcwxu253i/Zo9m3qRIWIkN+xTsrE+s5iq83LEPoRIJxUH8AehHC?=
+ =?us-ascii?Q?W41N4lxLmtHJEBBBU6SuQ2QKCK8k8EeBDY07rXMRsoU6qJ3s4Z1DIP8bz56F?=
+ =?us-ascii?Q?ftTchhc6+cZg/mh/SHljcKKnVW9mgoxK1EE9wGLCDHy7ATkio5hYjwkM8Y8E?=
+ =?us-ascii?Q?dWg2YnsAlK36RUKyMCrZLUV405o3J61LKdwD2BrXwjf6rXn2xKcs3Ag3sAaP?=
+ =?us-ascii?Q?r36mWPNtjPnOfUGjrU/qjVgi6u1e8EBOQ5OpJwAmWLIQWCbUNnm/WwnDgnYK?=
+ =?us-ascii?Q?1gtT9E01aQPeZ89yjtiZgnV2FSbZVIWkLkxnhvpcXMnXdtVkSi/em332KqGO?=
+ =?us-ascii?Q?/DlgDu5bhX0/Ndky1HNO6Txxo91kCWOXENQ+zuHVD8IHxhBN4U/aKuRUxczY?=
+ =?us-ascii?Q?J5nQ7Yuv8lK6PA+uufWo/Y8IA2f5OEmGZh8mJlBCannKvMOGkpE+PBR0TPeF?=
+ =?us-ascii?Q?PtDMplgZsIQ8hU5dchFox1uhF+qq9Xpo+xzpRkt98FBBQzL6HAh2iY/5SOsF?=
+ =?us-ascii?Q?CYjFu9PXOFuFDsxsLJ2LPwuura1pTlFjRnU50qbgozrqmmqIm3qK8pZ51QYe?=
+ =?us-ascii?Q?8uW5WiQChSTKXFDcgbGizHQ6NH5WrObTnNcSnXqlbMODvd3CNKe5sn++Y5uC?=
+ =?us-ascii?Q?Qf071qGfHa/qiIWsaw6QF1o9K8Ai56MBPK4rhdtvU+QjFWrDp8fNCgkiKZSz?=
+ =?us-ascii?Q?iBq0q5hvA71hyzMV46Hd6Mw11PPjNNv3J3p/tUR5ZOtHvVK5cDfBNIU5+eJZ?=
+ =?us-ascii?Q?cTKBjlnWB2sIOywQZbPP55sLYPQl7NPfuioMJO5sAcIwU3D7A7EklFGzKrzV?=
+ =?us-ascii?Q?elDOucVY0neAXlT8/I/s7EDmIQyLT40qhjwVD6Ppp1ugvs7Ingz9g/IrJmtf?=
+ =?us-ascii?Q?eVaRffXStRXAKKB517Nj28Xmyz2AKSrKLmL+QMtQ42OYiDjc3swhAh+NLanJ?=
+ =?us-ascii?Q?bM9VpY+cvit3AkNauLC8vIYWAMjMY6h70Gr2d8UJi61OeGDBD+yucV3eRIc6?=
+ =?us-ascii?Q?5f9yDTbGB4rqc6noOWO/DzqC+sJ2Lu8s6bToIuIReDXDss/Fvc/VBIgRAbUI?=
+ =?us-ascii?Q?KrVSIcNMH08FsAUKAGSjfDop9nZrBwrzXBIKFpevLOT/4drB8n2OdN87pdxl?=
+ =?us-ascii?Q?+t9X29kayV2VJ47SjKI=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 06 Jul 2025 05:50:01 +0200
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13cd642d-0e28-4110-d96c-08ddbc8e19cc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Jul 2025 13:07:46.0114 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: pNYeU63GioFMPBuNoplkzsVVPyJYvrUmQMlxGlkCIcis63vCqRIyJIMFsIrw7I8kJl6tY+0wkrOq4uhvU9laPw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8096
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,53 +160,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+> Subject: [PATCH] arm: imx: Remove the rest of i.MX31 support
+>=20
+> With the removal of the last i.MX31 platform we can remove the rest
+> of the underlying architecture code as well.
+>=20
+> Fixes: f247354708ec ("arm: Remove mx31pdk board")
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-Enable to facilitate compiler checks on most FPGA-related sources.
-
-Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
----
- configs/sandbox_defconfig | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
-
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 4f6943d1a4b..a64e208ad89 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -78,6 +78,11 @@ CONFIG_CMD_MX_CYCLIC=y
- CONFIG_CMD_MEMTEST=y
- CONFIG_CMD_CLK=y
- CONFIG_CMD_DEMO=y
-+CONFIG_CMD_FPGA_LOADP=y
-+CONFIG_CMD_FPGA_LOADBP=y
-+CONFIG_CMD_FPGA_LOADFS=y
-+CONFIG_CMD_FPGA_LOADMK=y
-+CONFIG_CMD_FPGA_LOAD_SECURE=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPIO_READ=y
- CONFIG_CMD_PWM=y
-@@ -196,6 +201,21 @@ CONFIG_SANDBOX_DMA=y
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_ARM_FFA_TRANSPORT=y
-+CONFIG_FPGA_ALTERA=y
-+CONFIG_FPGA_STRATIX_II=y
-+CONFIG_FPGA_STRATIX_V=y
-+CONFIG_FPGA_ACEX1K=y
-+CONFIG_FPGA_CYCLON2=y
-+CONFIG_FPGA_LATTICE=y
-+CONFIG_FPGA_XILINX=y
-+CONFIG_FPGA_VERSALPL=y
-+CONFIG_FPGA_SPARTAN2=y
-+CONFIG_FPGA_SPARTAN3=y
-+CONFIG_FPGA_VIRTEX2=y
-+CONFIG_SYS_FPGA_CHECK_BUSY=y
-+CONFIG_SYS_FPGA_CHECK_CTRLC=y
-+CONFIG_DM_FPGA=y
-+CONFIG_SANDBOX_FPGA=y
- CONFIG_GPIO_HOG=y
- CONFIG_DM_GPIO_LOOKUP_LABEL=y
- CONFIG_QCOM_PMIC_GPIO=y
--- 
-2.48.1
-
+Acked-by: Peng Fan <peng.fan@nxp.com>
