@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 568A5C8303C
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 09:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D28EC8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 09:43:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8326683046;
-	Mon,  7 Jul 2025 11:27:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5A4D83046;
+	Mon,  7 Jul 2025 11:43:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PBWDJcx9";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="z5Uneim7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C67838304D; Mon,  7 Jul 2025 11:27:21 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::60d])
+ id EBF3D8304D; Mon,  7 Jul 2025 11:43:28 +0200 (CEST)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::612])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 842E683043
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 11:27:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 973B583043
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 11:43:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AWcCIYrWh18e2R9XQn9zUwhArtUuo6P1tsMyXTDbC41naKG/kXRBslWb2ZwxIPkh4LGG6b4Uk9oKT/yxaBvIUv3Er70VQkhEFMaQwFKZdIq5jxymHzq6Wil9PETc8P2PzpZpW1qwOlXsGl335PXrvxhtzocV3HA/4Rsh23qvjJxmCaNHplidkIhQk+mT3dud0qHZMRrxCuQy5CcQ8Xk9JhPAvoS6+u21CHGNKbtZ6DIt1MzPP2h8FUGRfrklvRk2RiC6FH4sn9pJ0vXX5aCN9hJYdhSk6A9V9ulwXZqd8sgD32lDfMbkfqO3h82fyaAdmOrkuxMG7QhqWvAvOZ+z0g==
+ b=Rl7lVtQxEtVamedYfdpBsWNVDjIQqSk2KLkpP/cqUskpYBjL1MT84hSoZWU5XqQs6t7La4Pn8swJKTWzNak0PGbCywoWPFo/n7D6IhX2Pcdu0o0USrFJBGKNVz98uJEQhXW5aAswOhbiGyGLfpPl2NlZLWz//FFwLcsAzIU1AK1g73M5F+0CeYQqqVQJYhfnec89OIsAVI3CyuEG2RHERB5KrkfCMmTlEJ6k506TZJeQy5ep0+kR2TGh9P4xd8TMwDcarIC+0iRUQx7+mOP4+eUby+Do4N6dm3htKuDywxGA9bcARUQK1amtGYsLKzto/GgCo5vxbffFN/6Yr6cHxA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RL5ociZJwhiiRUr14+03WBjcuEV2Dwnzy7Hwg0V4qn0=;
- b=uQO1MHCHmhnTR7H3X3wewWIYyHd07CvqOObiVt7ZDOWeNPv0RWt1UVwJyylsNTygCv53QSBvHu1mwWA72d0bhPT89MLlhQEi39TqhwFh02O0NuWmYxLBBVPq0sMOBju/Z6l8arv/LOVQ2M1CueFQj/rPuxeiawnoSI+l8LqffqZ8xs7mrPVG68azUSF5HMSizmVFgOG9lGFi2DJx+dejp/+DB7kFz1RWKY5P/7x7t/GiXVgekO3ooSbK3N+H4ETmaLxKj++nkRCiXHRwRy/3UH+T/kgDXjXwDsOhfxAyX8jsz5d7IBmxRyPQGSAcB2+zlqkuZiysKjjk/GiJK0QgNQ==
+ bh=nNwRt1zKcUr8/taUJkyZcy3ue0LRBi19NY7mzE66KyU=;
+ b=iEZoed0pk0v5A8AylClFjU0dOpBEbnAPKWIkCGx2bYvkvQC7eGhxid+JqN7tt9XT0PsWSRjIZP+WvGAAUdJjDEQj3Xe6Z1O5wKJfcbjpgYfzNQhG9EGnMOwRL++kTT69rJhRt4JTap6rDwGCbNUw4ktoBgvhvBWcy+elcgutCWXH70EaJZ09mhntO2gxRFlnIE1EUVtfg4m9OSgzNuCNYltEF5v5myzo1Fml5dVmHpNszbCTTeG5SjqPY40IRNN8Y+18d8/lyFYmUBB1NGM2jXRamX3WyuFZBRrMWddMVmibOIdNNX6IJPfN9Lrge1/RKVP5/lrcWgL6sugwGFdKUA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RL5ociZJwhiiRUr14+03WBjcuEV2Dwnzy7Hwg0V4qn0=;
- b=PBWDJcx9KZ54MqmTYDIcsWUwZiiL67kQSA7UWP4aiCcla7Y3R8oquWOJW+f69rYqFrZR9CQO64QRhNxPp+c6LYYB+kY8dUALoHQmNCf2q+rIlWN1Lf+FYEZLLreCwzBS3q1zSbFF2XrFKKJcd7hVw53h2mXrbY10GXdghf0kegE=
+ bh=nNwRt1zKcUr8/taUJkyZcy3ue0LRBi19NY7mzE66KyU=;
+ b=z5Uneim7Z+RhSaxVZKX4ZxD8aK7SytEbcG9ELI/czOlQEDpHRmD8YtqfNtFwc3PYQzTT/ATqGqCQGDfGz7xVDn00FIpoudQcQONdxCXWKXc0OgLJeXG89stqXKCUAfdrmeq8GpAfgVSbUFQkRGJqp3qM20WvtVuzJT/4QfkA6Oo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by IA0PPF52B16157D.namprd12.prod.outlook.com
- (2603:10b6:20f:fc04::bce) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.26; Mon, 7 Jul
- 2025 09:27:16 +0000
+ by CY3PR12MB9654.namprd12.prod.outlook.com (2603:10b6:930:ff::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.23; Mon, 7 Jul
+ 2025 09:43:23 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.8901.023; Mon, 7 Jul 2025
- 09:27:15 +0000
-Message-ID: <57b676ae-84d6-4459-92f6-f9096536def3@amd.com>
-Date: Mon, 7 Jul 2025 11:27:07 +0200
+ 09:43:23 +0000
+Message-ID: <a2fe2449-494c-48f3-8beb-44012043e404@amd.com>
+Date: Mon, 7 Jul 2025 11:43:13 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/5] drivers: fpga/firmware: add Kconfig dependencies
-To: vtpieter@gmail.com, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v4 5/5] configs: enable FPGA commands and drivers at
+ sandbox_defconfig
+To: vtpieter@gmail.com, u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
 Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 References: <20250705205710.792370-1-vtpieter@gmail.com>
- <20250705205710.792370-3-vtpieter@gmail.com>
+ <20250705205710.792370-6-vtpieter@gmail.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -106,102 +108,102 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20250705205710.792370-3-vtpieter@gmail.com>
+In-Reply-To: <20250705205710.792370-6-vtpieter@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR03CA0070.eurprd03.prod.outlook.com
- (2603:10a6:803:50::41) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR04CA0058.eurprd04.prod.outlook.com
+ (2603:10a6:802:2::29) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|IA0PPF52B16157D:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f1e3487-5970-44c9-05ba-08ddbd387633
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CY3PR12MB9654:EE_
+X-MS-Office365-Filtering-Correlation-Id: de4b414a-b525-4242-4bbb-08ddbd3ab6b0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NlFaTmlheGZFMTJWKzhDNEdEOHpFcEJibzcrQ0lGaXNjUEh2SXEwTVdvL0xC?=
- =?utf-8?B?UlA0Y28xZ3R5clRtc1lyN25OL1NwbkVrckc3U3NKUFdGWWVoNW9ydkgvZGRY?=
- =?utf-8?B?dlQxV3R3NFduOXVyMSt6Zll6NDNrUVBORDdJYWYvN0dxOE1NQnk5L3V6Tms1?=
- =?utf-8?B?Mm5nRVdxUlluenpreXNYVTVURFkxckMrYkFRNmVidThDWjgrQjFiOVgvbkhN?=
- =?utf-8?B?Ni9zWHQyaDVpZUxwenUwei9IVnFIN1VRZm1QbjVrdWhyeTNaMFBVbmtENGg1?=
- =?utf-8?B?aitsbjcvdEdJWXozS1B4eGZ3ZWFPdEJZd0I2OEF2Y2ZCZWZXWW1xcUhuRU5j?=
- =?utf-8?B?MXRUcmJWU05vam9tK0dSTmU0aUh6ZUFGTmpYWUtJUWRhT3A4bTF5Ty9hbTEz?=
- =?utf-8?B?YzdPemcxNkFseXZhQkVKYjlpUGJNektsRFA1cFZTdmk2QlZvYUxzTWMvYW9K?=
- =?utf-8?B?OXFNeEpGclo1dkFOM00yd3FJcW1zaHROMTVMSzkzK1JvS29UUkxOTFJ0dU82?=
- =?utf-8?B?WGZjVVh1QUxJeEJzektROThoTUFEQ2pYYkhkOHh2VkRLelhyUVJSd0c1UW5U?=
- =?utf-8?B?K0dmY0dpVFdja0RZRU1aRzh2akVya1hjbFdWazdLTWFqckxMQndiS1M1cmJ1?=
- =?utf-8?B?ZkxCc1c2amFwWDZqeWszcHhuVjR3WGdIalVQZ3RKanNqZjlKZWJUNlRmRWNF?=
- =?utf-8?B?bVZaNDA0R2p1ejc1MTVaakt5RHZsaXFuQjFBNXJpVmJQckkzRkJUU3ZaeTJh?=
- =?utf-8?B?b2Z0VXRKSUpqa3lCTFgyN0ZVN2hDNU9QdGk3eWlUSWsxcDJjdDM5R3E0SmQ3?=
- =?utf-8?B?QTNGMitZU1hhRVZvbVRnNE1PWERDL3RTRm93R0NSQWVpbldTT1FwaWU3NUVX?=
- =?utf-8?B?ZEpkSWJic2R3c1dLbXdac1lVK2NkcmVubkZIREtiOFVTL2RsNWhvZGtVQ3dL?=
- =?utf-8?B?Y3BiREd3a2VZMy9kOXFrQVh2TElVaHRDU3hSMmcyS3BxbUVSK0xSZFVuQ3p1?=
- =?utf-8?B?MXMzK3BBckg0dGxON1N5d1Y5NE9lTGg2RHlOWFJueWtsMTlBbmNiMy9PRzBX?=
- =?utf-8?B?aGNWVEdoaE53Q1IyV3dJZ3BCVVQ2TnM1Q2xjdlFkcTZuU1poNVZybWRqVncw?=
- =?utf-8?B?enJVdUpEU3VTMUtLRVllWFcxNTcxNEJFRU0zbEJOOGc2VTkzamlSUDl0ZFNG?=
- =?utf-8?B?dTJQZlA4bmxKTHE3Kzl0c3B3SUJtQk1Td1pYbTUrMktjV05NQWxQNU9zNWZG?=
- =?utf-8?B?OEdjbmhFdisvNHZZVllvc29LcHJaNUVMT29oZ3hQeFM3ZS92WDNQR1N4bHk5?=
- =?utf-8?B?SEp2c0RieHJUQ2R1Smx1MlU0eThHUmszdFBaQ2hhVXpDQTM0YWZ0RTZ0aGZU?=
- =?utf-8?B?THpRSkxNUE1ic2lWY1lrZ3ZraWpJajQvMzVFKzhXWWNJVDQ1NmMvcmJZc3gz?=
- =?utf-8?B?YnpsYlpxeFp2VnQyYUZDUE5XaWFXalY1dndyNnFXZlhsbG1BcXlkZWRlYWor?=
- =?utf-8?B?TEFXRjUzZ1hmVHdxTXpKdzhjTytKbWlXNjZ6RE9jK1p1S1E3Q1hjRnYrNDA5?=
- =?utf-8?B?Z3kyY3ZkU3NLYVJqUnZpd1QzTTlxYmxIV1p2ZTltZ203S3Iwa0UzNnlVKzR4?=
- =?utf-8?B?ZHRhRnU0QXMrcUpqWEVWUm1wZHY0b1BNaEFYLzVSMDZuU2RhTHVWczVUTkpk?=
- =?utf-8?B?YXY0emM1aGJLenZPOWp0cEZXaFNKdDFLaDhLbS9WNEtDclplcHRLSXBCVFNi?=
- =?utf-8?B?UGgxeVd6Szl0RVpoQXlSMnM1VTNBZitLK0FLQzc5RFlLdjJ4QVhPbWlqZlFV?=
- =?utf-8?B?WTJVMFB3SU4zSnJHNlNqVmJwbDV6dTBSVG9wT201V3pEZlIwRkdOUGl4SCts?=
- =?utf-8?B?UE5iMnE3Um16bGViZHV1cmVkK29NR2RvVDFjNStiZEpwbk5jY0x3UTJKV2Nu?=
- =?utf-8?Q?71jCyhArH98=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UUFvR1B4dDNxbXdzYXRXZUcxcThsRS9iaTBNcWxEbmpSaURob2xvaHh2NlFs?=
+ =?utf-8?B?RjhaY0I0T3JKaFdRV01JSExJZnhTYmRjK0VoQWJSelk3ZEdRcHkzckdJY3ZI?=
+ =?utf-8?B?NVlieE5FV2NqTWVTck5ML2hpSTVMNFg1eXdBRkh6MDg1MUtCVW5JMEYwSGlO?=
+ =?utf-8?B?eDIzejd5RFlkVFI5bmdSbXNxc3hqRUtDRnNILzZtV09ZTnpOZC9xT3BDMjRl?=
+ =?utf-8?B?aWV5aStUamg2ZzJsZmpjMGZiTC9qWk1zZjcrRUZ0eWpVT0hSd2o0QkFsWXBR?=
+ =?utf-8?B?LzEyOWFCUHdRWDhRRFdaU0Era3NJa2txb01CWVM2dXluTFl5eXA5Q1lMSVpY?=
+ =?utf-8?B?VlByYjhDS1JLWUVVSWdNKy9EZXFTWkRRMVBIS0pzRGQ0SEc1VjZJbFRsLzFN?=
+ =?utf-8?B?WE1MV3ZRNXdQYzJCVnBJcHBJbk51R2grZllVeWFCbHZNa0wyQWg1V0p1V0NO?=
+ =?utf-8?B?bFRPcy9yOWZWdEtNcFVMRllpdnc5NGREdTNIdTBCK0p2NmhrTlZsVXZheUhq?=
+ =?utf-8?B?UG84L3IvNGNmSnA1bmhvNWVlcitOdkwxOUdadktaU0I5aWJPZkk3YW5GcHBL?=
+ =?utf-8?B?L25mQS9ISGZYVk5GYThCUFQ5YW00SnIwUit5SVNob051RE95VG9Oa0ozbktZ?=
+ =?utf-8?B?M3BMakFzL2VSQlFyc0VvM2twV1dRaVVPaHZlMGVnNlhaVnd3aURZZDlKc1k0?=
+ =?utf-8?B?WkVGY09TZENucEk5NlEyQnNQSDcwUGFOc05FS0FkY0pGNXZvNWJhdnRDKzZG?=
+ =?utf-8?B?SEY1Wk1yMXIxTHB1cC80Wk9GRHNwbkltUWtsN2Z2YVhOY3o5RzJaL3Nsb3F6?=
+ =?utf-8?B?SGtaM2NZUU1raWdBd0haa0VscGNNOEZDZWZTNS9EUS9DVUFjR3VBSHFWdEVQ?=
+ =?utf-8?B?eHpZaFRNMVE2bitydWE4dy9HMXMwTG5PNWF5TEMwWFNaRi9uRFg4SU9qVEFY?=
+ =?utf-8?B?aDhJVHgyK0hyeGJISVg2YmRMZk80Qm1EWGpibmNCb0hqc0RhT2xYa1J2Umlo?=
+ =?utf-8?B?Y0ZDckZ1ZTVQR2M3c29RV2xrMVZlUnN0S3lndDJROGNXVkhmL0x6MjBkekp3?=
+ =?utf-8?B?Vy9HRmc4VmJuams4NVJVTE1sYXN2d3NKdldyMXhFaWg0bU11MWVSbmI2M1Qz?=
+ =?utf-8?B?aWg0L2tTUkFRQm42bUI5Sk1QSVJ2N1A5TFYrRG1ONmNYY3RjOUNiSEdRKzAz?=
+ =?utf-8?B?Um5PM0Q4Y0VUY0wya2k5MGtPWC9keG5FdnVpS0phUjNENUdIRzZXOFl6Ri9Q?=
+ =?utf-8?B?bGdFQ1pmRHpRMVZoU0s0S2k3OVJBemhKbFRvV1dMYWpUeWNmaG9wL1ZHeU45?=
+ =?utf-8?B?MXhQdy96ZlVSSlF0UUtKWVZoTVJmSWRkWVJDK0M1bEowNkZFaFhxUWNVUlF5?=
+ =?utf-8?B?Rmxjckt3VHc3aEhlL0gwZFl1eWFvcS9HZW9DRUxMTXBOeXRBNkxreW9SaVg5?=
+ =?utf-8?B?TndyaUhOTGpoSXpicm0rcDIrbTNNUldvaHV6Q2ZmNnhxb0tRUDVzczVjQVl5?=
+ =?utf-8?B?UHJrSVNxZ2pqckV4eEpycXM4M0wxYXU0dVRCeHVWSDl6cXdEZFZQQ3k3ZlR6?=
+ =?utf-8?B?S2Nta1Q4MEhqYnpTWUh2bGEvTjBvSTVwakNlRXNUbEVuT0Q2SGhBODdNNjlm?=
+ =?utf-8?B?OWg0UHpOWUtYSXBQMlJHeFVZWEtLT0hPYnhmVjNCMW5QKzcvbEdGU2ZzRU9v?=
+ =?utf-8?B?T0NCMG0vUTN2ZXIxLzhlVnM0ckI0YldNcCtveDk3dVplUnAwNEU1Vk5zSEJ2?=
+ =?utf-8?B?d2t5d2Z6OGxmNVcvQmtJbERqOW9ZMjhtQVJQc290RU05dURLT3Y4M1FHV2JX?=
+ =?utf-8?B?T2Ixa0hZUXlaN2NlZ1RRbndXSnhybmRiMU81cmlxSHRlUjZLbUNvMnlqMXg2?=
+ =?utf-8?B?R2pqaE5XMms0MzFhcFNvODdoSFpoN1J6VWVyRCtMdTNyYVA2Zm9ybS9wbk1t?=
+ =?utf-8?Q?znHMpLbLZrI=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VGtOcnlCYmFUakJyaDRLRVNpN0Q1cG9xei9nd0hkczNOYm9CSEJLQTVIS24w?=
- =?utf-8?B?enJSLzBHVjY3ZjRNdjNseEQzcGI0RWt3RU0wcEFxWWpHclRkd3ZyRDE2c0Jl?=
- =?utf-8?B?aU1sVFRYZGlOWWRpWGJYd1BzYnp5MlhEK0JzODE5R2xFRTFyMTdPYXlOd1Fj?=
- =?utf-8?B?ZWd6bURzSzVyNWdkTnZMWVdwdVdSOXJzTG9XRUNUVy8wM0Q0cUhnMnB3Ukk0?=
- =?utf-8?B?TEh6d015REhpVENWYmE4Q0RrWWJNb3BPZEdNYTB4eVhYRThUK0c2TE1rKzFm?=
- =?utf-8?B?ZUc5OXFlNCtCUG5mUzNyVHZwencvZ3JLeHhiMFRCT2hUVzkyNEZ6OCsvNklC?=
- =?utf-8?B?L3duSkp3cE44WnRQb1VHWUFnaDdCWGZ5N0wyTHZsSGx5WHYxWlZERmJ0bm1H?=
- =?utf-8?B?ZkFKUjJ0MGc1bmgvdDV1cW1uYlFSTXg1ZFQrY2Z2ZjFBaUY4eXBtNitXWkx5?=
- =?utf-8?B?Y0dNaEVGRjVvcmhLSHNDQXBPSEdkdXQxWjRlU2NsVmZxaFhWejVRMWlNQUNG?=
- =?utf-8?B?cmJ0K3hLT3g2bEdiUEVsOUdsc3pqK01xemxXb2p1RGdBa01vc2l2ZFlmb3F4?=
- =?utf-8?B?YTlvMWFQRU8rb1VSTDhCSlFoaEE2U3lyTlo2WmUzS0crVEJXdHJKdVZnY1Yy?=
- =?utf-8?B?WWZieUlWdmpvVnB5em9vNElBbnVIdC9KZVlRYXpVOVNyUXhLWC8vM3c4em9R?=
- =?utf-8?B?MGphN2llQWp3aENnRElSbTQvZXc3c04wWjRIWmFGZEF1Qitnd3NqNDQ0WkZq?=
- =?utf-8?B?b2JCN2d1L3N1NFNrbDFBMEIyR2hySVhQT0lKM2UvZk1uMnpFbmIwSVczdThW?=
- =?utf-8?B?Y0U2cm1zL0ZEYS9pcHptOTFsUTVwditLZXg0cjVnRmxhbGhxcHkyb2xMdzh3?=
- =?utf-8?B?V1QvQXkzRUpRSUQvUWR1ZzdkWkVPeFh1Z3lKR0I3aXVYaHZrME95TStKb1pP?=
- =?utf-8?B?TGQxaDMrN3JkWEtiOUh5c2VIQ240aEY3eHpwWlhubVdxQmxSWmgwdnZOaU1o?=
- =?utf-8?B?dHI5dkJFMUZXZXBKWVlydVhZeFFPcDZCVUlZdk1oUUhQMzNpQ0FPRi9ralVW?=
- =?utf-8?B?TnJQWXlPT0Vib2NQblJNSlZyYkY4TVpFWGExczRMTzRIVy9TWEcwUEcwMU1K?=
- =?utf-8?B?cjh1K3Z3eHBsd3hMTWFkZ2hBeDdScDhyaGhyc2JpMEJ6eFlJMzhjUFJNdnM3?=
- =?utf-8?B?RDNOWk95eVE4MTVManJ3dUFoMUgyR093U1NlWmlRR05NajdCMUtHcytJYlhB?=
- =?utf-8?B?cmlsVkFsbHZ4V3hpODY5TEVVdlVkcnUxWGZBbVdnSExaNFI2d3FtYWhteFlh?=
- =?utf-8?B?eE9pUnRnVDJFVHdtVnh2RTVqQWk3TWU2OU8waG16YkJnS056UVFHTkYwRTU1?=
- =?utf-8?B?b2VtMXExdGxubHNyTG1QNjRHUWJPQzFJclBhMmdNcGVtQ3d5aHBoNWlGaHJB?=
- =?utf-8?B?MmpMZHNERWlkN2ozZktyK1JhNERXNnhKbjdMSmdkS29NV25zL3ZOYkRkT0lM?=
- =?utf-8?B?S0RoWTduZXlXRGxqU1RPZWdMQmFQaTFhbnJIeW52MVhOUHk2a3IyUjF5ZWVq?=
- =?utf-8?B?TU5JSW5aRzZxeTBJZU5raWI1NXF4TGF4VExlZHpEdVZETU9mQWdQcTRxdUxL?=
- =?utf-8?B?U2Q3RnNrWkFYMCs4ODNQTisvLytWWmdza0dVZXhHcGpSdUswQWwybENkY0Qw?=
- =?utf-8?B?S1FYcVJ4ZStqRE16N0lHOEVLakxWdjJMMExEdWtscno2OTJxZFg1ZjlobHpO?=
- =?utf-8?B?WUIzZ0JrcitnOWlvbTlNS3hTdC9FdnJYenFKajR0b0Y1aGpQOUpXSmdtOFdG?=
- =?utf-8?B?TXFTMlJteEtZT25jRzcwZnk1UmZUelQ1V25TcUtMSVNhQUtValpMNHgyK2Zp?=
- =?utf-8?B?bG9Xczl1bW0yQzR3OWp5L3phaEJrUklWUVoxWWVMUFRzTHgzeHRwV1RxL2Mw?=
- =?utf-8?B?eUZncWVKSXJyT2tFM2pLMWJKNHQ0YThxUDVMbXFDcTVTT1N1dGMvRXJwVFRL?=
- =?utf-8?B?UXZqb0ZFQy8yS1paeHh1Y2JmOFU3MExQMS9ydzJIbG5SbGVKaGxSaUpOTy9R?=
- =?utf-8?B?R0JvTUxSWGtkc2FWVUt1eW0zMldjVkFMWjRRTTVRMUFWV1lkbUFxTmRSTEVo?=
- =?utf-8?Q?hNaml5/Nn/6XTbMoi78Ia8IDG?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T081RmttOUk1TlZPSk9QMFNPUUw4MmkvcDZGVlJhTXIrVkF6UjRlNmxPTkZR?=
+ =?utf-8?B?MGc3RU5aVGpIVVhLQjI1ZXhCbnFmem1vWks1S2RMeHFMQVBYN2VFL0ZmT0ph?=
+ =?utf-8?B?ZG8yMGtZZ1U0UEtsT0hHZ1JXRDl6M0xXRGRmckpaTEhJM28zWnVxekFhL3Fs?=
+ =?utf-8?B?bnorQ1d4dHNpU3VaRmxsOS9ydVAyRXZLNlhuNjFhZm9Xa2N2K3RPTmNIc2lk?=
+ =?utf-8?B?NGxUZUVlZ3RXT3EzODJqekZZZlQxRVBWU1V4SVlYblh4SS9ScjBwRUxrd2Fr?=
+ =?utf-8?B?cEp0ZVVkZURaVlFEd3h1VnZEMGgvQnVYZWpiNFJndTZFYXltTEJsbWd0K3Jq?=
+ =?utf-8?B?ektFQ1prQ2lPZGV3Z2EwMXoxTEFlejEybGU0MGk3Q0pmenhQdkFhYlpxOHJV?=
+ =?utf-8?B?RXJhNFo2eE1RRDgraFRaZUpxSnkxc0VZRVJxY1FuV3I4aytLdnVNQmtVRzJs?=
+ =?utf-8?B?Ym5vYlMyOVcwL0FxZ1hicVR2Q2lvaVd3UlhwUStSMWtvWVo5WkNLcjR3V2R0?=
+ =?utf-8?B?SlZzeXZwZUdubk9JcWVuNStJK2g2c2Y5UFg1UXFMYnR6T2Uzb2Zuayt3MitD?=
+ =?utf-8?B?cjhDTDM3cy9lY0xnN0ZOZzYyZzIyTTNQb2tXdndqdFcxQUtvb3lOcktQWER3?=
+ =?utf-8?B?MW1YSmMxYTlMMkhnRUJYMUNuS2FmQVUxM0dqSXRrSC9MQ1AxTGxhVER2TGZ4?=
+ =?utf-8?B?dHJadmtOTFhKRXorQVFiTHJFYWlMMkd6Yit5bEU1SHhSS2s5ZW12K3lMM1N2?=
+ =?utf-8?B?L3FZNEZpMEM4MXZDN3kyTHZpZWNoL0NEQUtzMFhrUlNQUkErNUFsdnpjQWRF?=
+ =?utf-8?B?aENyK2x2T29Jc0tab3M4bis2Z2wxTzhFcDdNUWxJdUpRNnZ1SmYvU25kVXVU?=
+ =?utf-8?B?SUppZTBxbXExUVFvS3VyTVVJMWpQQ1Jsb3dPQVEyMHdtNmJtSjVjd1IxNUhz?=
+ =?utf-8?B?ZGk2eFRNWjNVUVJ0N1VKSzNoNzF3TzNicGp1cmh1bGM1VDNqdDNOL2gwU0xn?=
+ =?utf-8?B?L3N6YnBXenpCOTB0TTZQNlZDVlZ4QXJIZllxVGMweFlscUtyNXZnVHF3N2hz?=
+ =?utf-8?B?TU9GeEtGaEJHTHFxVTlOLzdIY1NtUWZqdnlQT1lYSi9lRTFUMHFsTm5JT2RL?=
+ =?utf-8?B?VUdZSHlZQzUzWEZpenpSMVFhTTd5cjBnSW0xVEpmdEQzRVliYlk1RmFDK0Z5?=
+ =?utf-8?B?eTBPWWgrVy9HaStITDBxRGtzT1EyVDFuTG1xQ25KTVR2TmJUTDlIV2tRa1RR?=
+ =?utf-8?B?L3VIdm50MDZjTTVjUk8zR1pWVGh5NkxRVndBMHV1VHFkWGEzRWN3eElzZk5K?=
+ =?utf-8?B?SWpMUEk2QmtMZjZVcGRNZE5CVVI2TUdjdUFOZzc0SW1qTFNEQXJlMkgwNHVt?=
+ =?utf-8?B?U1kwT1diRk96N29pSnVmWEJtZExZL3RQMkVPLzhuUWtYTnQ5SnBZVmtrTVVI?=
+ =?utf-8?B?QTIxR0MzTGg2djlzQzBkUUlMbkxnK0VwSlk1WFNQdVJMOENobytCNUFzdmNx?=
+ =?utf-8?B?NFZTMEdvVHRmN0l1NHlwRkNmVmEwZlpBU1FtTk90RVJPakQ3dysyN1VBMjRD?=
+ =?utf-8?B?VitPRDBDZERJSHRCY2FSdlduNVQ3TTR6RWdQUERRMXc0bEhBMGV1UERlMWQ1?=
+ =?utf-8?B?OHBsTG5PRXpRN2dsajk2Wmd6S0NXMk9LNHBvUm9GOEhjNHF3emozdGFMb1pB?=
+ =?utf-8?B?MitOam1LUVU1SDVONTRLeHcrN2lHaTU0WXJzc2RSUmsrSzJST3c5UDBMT1Bn?=
+ =?utf-8?B?YnlCcTlBZVdUVTJSaFBXUmExSWNzblNaVDM5aldFTE5BajByQk5sYjY4QWV6?=
+ =?utf-8?B?WkZnYkFzY1g1bytIVis0QmtRRG9ycTBJekprc1lNRUFObGlia01HdjFJdDBt?=
+ =?utf-8?B?N2t6SkpDeVg1YnpiU2NUYkpsaWtBbWtPdys1L0VUWnpsVlRkVTFMamhncG03?=
+ =?utf-8?B?Y1poTC9uZlg0aktlZ2hmK0lueE9tTUZFMmYyQTlxSG91TlNLekZ5V3BNSXQ0?=
+ =?utf-8?B?MTcrZ1o1bE9QQW1XNklrazEzYjlDRVQ5VDJEVHJuRG5oc3Q5VCtYMXFZbjcr?=
+ =?utf-8?B?RUw1TG5GY2luRjNOYWVRUmdLMjl6UW9UTExvdlk1Z2V2RnNwU2ZFdlZGa0lK?=
+ =?utf-8?Q?iyyQjpKp5nhx19Tgbs0tFeTFF?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f1e3487-5970-44c9-05ba-08ddbd387633
+X-MS-Exchange-CrossTenant-Network-Message-Id: de4b414a-b525-4242-4bbb-08ddbd3ab6b0
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2025 09:27:15.7742 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2025 09:43:23.1190 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: R7ODLxEHon5SNwSXHxHoqVdSDZxEramH1ZHrR8/18j6t2lQUifSFfl4/c1hXaDRX
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPF52B16157D
+X-MS-Exchange-CrossTenant-UserPrincipalName: eltAvMOQoq8/PSTSg0zhRtb4eFR5PmZX27D+i2q8c5wHqp6auJSdFqAgwcNbxK1A
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR12MB9654
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -223,29 +225,79 @@ X-Virus-Status: Clean
 On 7/5/25 22:57, vtpieter@gmail.com wrote:
 > From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 > 
-> FPGA_SOCFPGA requires ARCH_SOCFPGA cause socfpga.c contains
-> arch/arm/mach-socfpga/* include macros.
-> 
-> ZYNQMP_FIRMWARE requires ARCH_ZYNQMP cause firmware-zynqmp.c contains
-> arch/arm/mach-zynqmp/* include macros.
+> Enable to facilitate compiler checks on most FPGA-related sources.
 > 
 > Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 > ---
->   drivers/firmware/Kconfig | 1 +
->   drivers/fpga/Kconfig     | 1 +
->   2 files changed, 2 insertions(+)
+>   configs/sandbox_defconfig | 20 ++++++++++++++++++++
+>   1 file changed, 20 insertions(+)
 > 
-> diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
-> index 8789b1ea141..f3302d34354 100644
-> --- a/drivers/firmware/Kconfig
-> +++ b/drivers/firmware/Kconfig
-> @@ -29,6 +29,7 @@ config TI_SCI_PROTOCOL
->   
->   config ZYNQMP_FIRMWARE
->   	bool "ZynqMP Firmware interface"
-> +	depends on ARCH_ZYNQMP
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> index 4f6943d1a4b..a64e208ad89 100644
+> --- a/configs/sandbox_defconfig
+> +++ b/configs/sandbox_defconfig
+> @@ -78,6 +78,11 @@ CONFIG_CMD_MX_CYCLIC=y
+>   CONFIG_CMD_MEMTEST=y
+>   CONFIG_CMD_CLK=y
+>   CONFIG_CMD_DEMO=y
+> +CONFIG_CMD_FPGA_LOADP=y
+> +CONFIG_CMD_FPGA_LOADBP=y
+> +CONFIG_CMD_FPGA_LOADFS=y
+> +CONFIG_CMD_FPGA_LOADMK=y
+> +CONFIG_CMD_FPGA_LOAD_SECURE=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPIO_READ=y
+>   CONFIG_CMD_PWM=y
+> @@ -196,6 +201,21 @@ CONFIG_SANDBOX_DMA=y
+>   CONFIG_FASTBOOT_FLASH=y
+>   CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+>   CONFIG_ARM_FFA_TRANSPORT=y
+> +CONFIG_FPGA_ALTERA=y
+> +CONFIG_FPGA_STRATIX_II=y
+> +CONFIG_FPGA_STRATIX_V=y
+> +CONFIG_FPGA_ACEX1K=y
+> +CONFIG_FPGA_CYCLON2=y
+> +CONFIG_FPGA_LATTICE=y
 
-This has been already fixed by
-https://lore.kernel.org/all/20250702010410.18828-1-trini@konsulko.com/
+CI is reporting issues with clang.
+
+make sandbox_defconfig
+make -j HOSTCC=clang CC=clang
+
+
+   CC      drivers/fpga/lattice.o
+   AR      drivers/usb/eth/built-in.o
+drivers/fpga/ivm_core.c:593:23: error: a function declaration without a 
+prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]
+   593 | long int ispVMDataSize()
+       |                       ^
+       |                        void
+drivers/fpga/ivm_core.c:618:22: error: a function declaration without a 
+prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]
+   618 | signed char ispVM  CC      drivers/i2c/i2c-gpio.o
+Code()
+       |                      ^
+       |                       void
+drivers/fpga/ivm_core.c:1117:26: error: a function declaration without a 
+prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]
+  1117 | signed char ispVMDataCode()
+       |                          ^
+       |                           void
+   CC      drivers/gpio/qcom_pmic_gpio.o
+drivers/fpga/ivm_core.c:2479:16: error: a function declaration without a 
+prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]
+  2479 | void ispVMStart()
+       |                ^
+       |                 void
+drivers/fpga/ivm_core.c:2508:14: error: a function declaration without a 
+prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]
+  2508 | void ispVMEnd()
+       |              ^
+       |               void
+   CC      cmd/iotrace.o
+5 errors generated.
+make[3]: *** [scripts/Makefile.build:249: drivers/fpga/ivm_core.o] Error 1
+make[3]: *** Waiting for unfinished jobs....
+   CC      cmd/hash.o
 
 M
