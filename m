@@ -4,76 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC506C83F07
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 11:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC365C83F07
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 12:14:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 533FE830E4;
-	Mon,  7 Jul 2025 13:50:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F3020830E4;
+	Mon,  7 Jul 2025 14:14:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iGuN3BsV";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="EWI+Bwgj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B27AA83118; Mon,  7 Jul 2025 13:50:56 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1BCA483106; Mon,  7 Jul 2025 14:14:14 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F661830CA
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:50:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-4a5851764e1so72646591cf.2
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 04:50:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751889053; x=1752493853; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cs4CBrKzcISqT7GSOLwBGbIgtJx0fJcygf4NyN1cqjs=;
- b=iGuN3BsVmvcAcoRo/ddh7xyoN7hTF/jM3p8XKSH1Y7NQoGHYYx1GCVIvotN6cP76zG
- qVpRYvRdp/GgrUUgVUaTCb9PwrM0/IALvDQjR3Kcq+wmMZrgtzWRbNmm8gL1Yu3hjC7G
- QikUciBj9Rt1p6zTJR9m05Oh77TlW8ewGvF6sOQP/YksYsswnCPvvPpnM3/cNanh1Kne
- 7zTH2eE6FA+FCQhky1QvVuRZhXI6NAIootlmemJ++NsC8106tdpIxmice6LDENmgb+cs
- AmZoFbKolChaE3bAY5L15CQr2FRSjSY/p86cCoBShYrgXTt4BnO+yZeI/1VFNhJWgnDf
- 0yyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751889053; x=1752493853;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cs4CBrKzcISqT7GSOLwBGbIgtJx0fJcygf4NyN1cqjs=;
- b=TZnhWkkNXVX1c4n9ArkPqJZ1DCtq+njYzlw5F2c2SmOMZD4Vpbmojjsz2Ph7gUCae5
- Wx9I0UDNhIT2rBbA8zb47vsIPPROIbYEwhuutUxQobmzTiJkk69PibcLtLhC3sovJu/s
- OGfVRtG0CPeyKX4qz5djGxfnDJkDOnuIRow+Oc0LwlJLlbkAlCdgR7TDwSHpqcuH28WI
- C2ixhk/eqJOUuP9OAW72Ar8rTlB5G04pljX3ROohZP5hnGpm4VLVNtLuH/oZ7lcVtvz9
- NyFBl4OY7K2Y58X9Ko10jdfjWAGMMe2TdpmQ6lA9wfKGc6SwI9PFxW4WlSYVUwwMzmD9
- KOoA==
-X-Gm-Message-State: AOJu0YyqJuhdmIzvExRcTTLne98UhrBUihZe2Roc+dQPthqyibtSLND8
- bjCUdR24gQ55VhtEBa35YkBgUeOtBvXD5AcgLCAj1hb3oIZqb2ZsS9Jn8MavtWZT8cPRwTQZx5C
- /SlpFWeY8iH4sf4OpQn0BTjqcjiMfG+H67iBY1wKIhg==
-X-Gm-Gg: ASbGnctka1r5LzHMcbb5mIsF90R4UzBRZko6O5iogID9/o/5WedT71jBu/hrjImlyFr
- u8QIGN6+gY0/BHil+8ySEj5/f3t+mipEtqGrTnSZV5aiAre44s1K6ou1oFN9Oqc7qwj5pxqAuyO
- SfatP1EsggdsGidLDyyNg7+TGsNt7nCT3gKRXutxr5W4ci
-X-Google-Smtp-Source: AGHT+IHL041wvDOlNwNjc6Fm/7V8Gmp0yMkaFcQZfw6zUL0d7n6Q4Iip4hNrOhi9I0uxBecjwhRY491h7ziMe++a4Ok=
-X-Received: by 2002:ac8:5a0c:0:b0:4a9:a2c4:a06f with SMTP id
- d75a77b69052e-4a9a69e90eemr121621181cf.36.1751889052926; Mon, 07 Jul 2025
- 04:50:52 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id B330C830CA
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 14:14:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 901576143D;
+ Mon,  7 Jul 2025 12:14:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F127BC4CEE3;
+ Mon,  7 Jul 2025 12:14:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1751890450;
+ bh=1eECpHe2GoikdFvbn/gECEh2MtHwJvLOD97gEgMp0lM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=EWI+BwgjK/Ix/NDbuGYyk5dBrVgWoWVpTpDBPjCdMzTGUXC9LjrYFYEe2qkXH0ZHp
+ r2PuxZyUpKlPwCRK0TuK7gEBjfNXmQ303Ndsu7Y24qrR111uTkzOSYKI1CpyOjAzAB
+ 7Ou7L3SmV+DAmkT5keRy187tgxviNx5h1S6kaILlqSs6tA0M+bF5u8vQ7+EeJvDUGj
+ MzTzsVQ61FzaNF7LDvGadWu0UFlmqSmSc4r6iSp0Dv8LchPsawC5M/7kslbvLvRz1i
+ cjXkXR7T2ZIOJ2tPXF3IlnLh9u9STKBPFLsAmJzDoT8673P19WdUssWh22JLJ4hlrO
+ ADGQanhzo1lrA==
+From: Conor Dooley <conor@kernel.org>
+To: u-boot@lists.denx.de
+Cc: conor@kernel.org, Conor Dooley <conor.dooley@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>
+Subject: [PATCH v1] board: mpfs_icicle: fix board_fit_config_name_match()
+Date: Mon,  7 Jul 2025 13:13:33 +0100
+Message-ID: <20250707121333.601067-2-conor@kernel.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20250707103918.4189148-1-padmarao.begari@amd.com>
- <20250707103918.4189148-3-padmarao.begari@amd.com>
-In-Reply-To: <20250707103918.4189148-3-padmarao.begari@amd.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 7 Jul 2025 17:20:41 +0530
-X-Gm-Features: Ac12FXwpxrCbEoOczqn_JxTt9290C6MTIDrD7kc-qfpRv8XyNz3CtVVu_QDdZL8
-Message-ID: <CADg8p95jWh=NFEM_qZJKng4kY5iz2YGSd_+wjQ9FOMycHRws9Q@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] board: xilinx: update guid based on metadata
-To: Padmarao Begari <padmarao.begari@amd.com>
-Cc: u-boot@lists.denx.de, git@amd.com, michal.simek@amd.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,57 +67,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 7 Jul 2025 at 16:09, Padmarao Begari <padmarao.begari@amd.com> wrote:
->
-> The generated GUID applies to all Xilinx platforms but is not
-> specific to any individual board. For FWU multi bank update,
-> use the image UUID (GUID) from the FWU metadata structure
-> rather than embedding a generated GUID into the U-Boot build.
->
-> Note: The FWU metadata is an unsecure piece of data, as
-> highlighted by the spec, and there is no way to ascertain
-> that it has not been tampered with in a malicious manner.
-> U-Boot OTOH can be part of a trusted boot chain, where the
-> U-Boot image has been verified before being booted. So,
-> although this does remove issues that might crop up with
-> manual mismatches, still need to consider the fact that
-> the FWU mdata is not a secure piece of data.
->
-> And this is a not real problem with Xilinx platforms because
-> actually it is only providing reference stack.
+From: Conor Dooley <conor.dooley@microchip.com>
 
-Also mention the above note as a comment in the function. Not many are
-going to read this commit message when reading the corresponding code.
+The loop in the icicle implementation of board_fit_config_name_match()
+runs strtok() to split off the vendor portion of the compatible string
+using , as the delimiter. strtok() modifies a string in place, so where
+the first config and compatible do not match, the compatible has been
+modified by the time the loop hits the second iteration.
+Since stringlists in dt land are null separated strings, the nulls
+strtok() inserts to replace the delimiter increase the number of strings
+in the compatible list. When the second iteration of the loop calls
+fdt_stringlist_get(), it gets the vendorless portion of the first
+compatible string, rather than the second compatible string. Copy each
+compatible before calling strtok() to avoid this problem.
 
--sughosh
+The temporary string the compatible is copied to is statically
+allocated, as attempts to dynamically allocate it at this stage of boot
+were met with "alloc space exhausted" errors.
 
->
-> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-> ---
->  board/xilinx/common/board.c | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
-> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> index 8ffe7429901..3d22149d429 100644
-> --- a/board/xilinx/common/board.c
-> +++ b/board/xilinx/common/board.c
-> @@ -712,3 +712,16 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->  }
->
->  #endif
-> +
-> +#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
-> +int fwu_mtd_platform_hook(struct udevice *dev, struct fwu_data *data)
-> +{
-> +       struct fwu_image_entry *img_entry = &data->fwu_images[0];
-> +
-> +       /* Copy image type GUID */
-> +       memcpy(&fw_images[0].image_type_id, &img_entry->image_type_guid, 16);
-> +
-> +       return 0;
-> +}
-> +
-> +#endif
-> --
-> 2.25.1
->
+Fixes: 7c16ebba1ed ("board: mpfs_icicle: implement board_fdt_blob_setup()/board_fit_config_name_match()")
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+CC: Conor Dooley <conor.dooley@microchip.com>
+CC: Cyril Jean <cyril.jean@microchip.com>
+CC: Tom Rini <trini@konsulko.com>
+CC: Leo Yu-Chi Liang <ycliang@andestech.com>
+CC: u-boot@lists.denx.de
+---
+ board/microchip/mpfs_icicle/mpfs_icicle.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/mpfs_icicle/mpfs_icicle.c
+index 6b6984eae3f..ba622e38ee5 100644
+--- a/board/microchip/mpfs_icicle/mpfs_icicle.c
++++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
+@@ -73,13 +73,22 @@ int board_fit_config_name_match(const char *name)
+ 	for (int i = 0; i < list_len; i++) {
+ 		int len, match;
+ 		const char *compat;
++		char copy[64];
+ 		char *devendored;
+ 
+ 		compat = fdt_stringlist_get(fdt, 0, "compatible", i, &len);
+ 		if (!compat)
+ 			return -EINVAL;
+ 
+-		strtok((char *)compat, ",");
++		/*
++		 * The naming scheme for compatibles doesn't produce anything
++		 * close to this long.
++		 */
++		if (len >= 64)
++			return -EINVAL;
++
++		strncpy(copy, compat, 64);
++		strtok(copy, ",");
+ 
+ 		devendored = strtok(NULL, ",");
+ 		if (!devendored)
+-- 
+2.45.2
+
