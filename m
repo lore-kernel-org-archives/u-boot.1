@@ -4,76 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B51E9C83F07
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 01:18:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3964DC8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 04:06:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B44CD81D5D;
-	Mon,  7 Jul 2025 03:18:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B31081D5D;
+	Mon,  7 Jul 2025 06:06:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Iw+FG0ie";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="OG0uGlga";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2264981D6A; Mon,  7 Jul 2025 03:18:39 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E01D082FAB; Mon,  7 Jul 2025 06:06:26 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20620.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::620])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39A6E810EB
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 03:18:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9495F810EB
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 06:06:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-55622414cf4so2504095e87.3
- for <u-boot@lists.denx.de>; Sun, 06 Jul 2025 18:18:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751851116; x=1752455916; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=AwlsmMo/G5MuXiKW1brmJYZ3LQDH2duHvmlJEl1qmfE=;
- b=Iw+FG0ielm+6bJqmJ76ytoqP8PJScN/CCfD8acsX1/fHH0BOJPvDDPTsuWjFU50WUk
- ph5sH5VxjaRI8bqna8yl6IpvKFR8L8BDHX4+gnQdlWGrPAaMLGQ4AE2DRSQmowz/Jbvn
- OY4SbUV4mlRLK1n71aJXMhb4o9kyeKeudk1NnQiNFPYnlgbP13ofGEbpr51310K1qxux
- MkmmcdjxTQwzKgN8XYodEQVs4C87wt4nRwfyzHFoucNw3qTzUtAKvNDTQ3OS/ctifiKZ
- 9IauR5H+FBzGeM3aqYmfXexwQSmYsZbSX4v6oroZGVTQeZ+0insmuGHm01YWB5fg54jl
- ivgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751851116; x=1752455916;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=AwlsmMo/G5MuXiKW1brmJYZ3LQDH2duHvmlJEl1qmfE=;
- b=S+NVmEjIoVQFqrGQgWGlAFS+Zzt9EdQnyFh4Yjcn5zThIaKga1TqiLoYNfem4dazdV
- R/I0LyXgPM07T5h/iu8OM8AGyX9MTPEpwbKHtFwNzNEmBcFQGQ57AxrMO4j/PsoYn3cP
- bF0QT+5iZgk91nVPF3qepxPyO6Kk3YopIV8bUfD/vBfN8fz0boRQsro1pBm8lM0vUtlM
- 8TJmEgO0/VW0t1tbLOXMW9SvrBXxOIAVy17//M+QPYQdt7QD3N6nbRIZFWSYtwjmSgy8
- xefB42OwFuzsjwEmhX42w5aSEOYI1wDEI6eKxdAwUScJV94o1iw5F4wnyWCCiPajTHdM
- GgVA==
-X-Gm-Message-State: AOJu0YzdbMmZfR9bS77ikk/xeYjGgz0/i99ExUh4SkL8rc1ZoW276zBG
- /0T4rjn5ByjxoyobbdN0+KY6GQ/BTecPEQYl40ckHRjN727HcU0okSltKgvrdMAmOBR01h1LjQu
- EZA5o7hZHOMc7ZsldlSh7i3TNKneaiZAzbfsu
-X-Gm-Gg: ASbGnctWKKynseAF1lKBRm25Jq/CcZ67H7uatkhBCY8f3vXsWJVTQv40b3PeGnwe6fu
- 0+6kXGps4mEpmc90SySUsGjTII/HHFh16uohbWGErpX9fRJmT14agM4eQz/P2LZcqsgbwbDLqn+
- oRugFdek3wZfM/C5sNLRRRYyxYq9LVvezYhW34p3pFRGe0R6UURSr8uXU2Vg924cCLHPNLVsBDW
- 4kTiCXSdjonnA==
-X-Google-Smtp-Source: AGHT+IEB6aYbqA0ttmO36HgMqjs+YTzb4VXqQCpKGiSpsJ7wMif4w98w/XE4Pq50HcbYJtu/YbWwRH+2e26NyD3ENMs=
-X-Received: by 2002:a05:6512:230a:b0:553:277b:17c8 with SMTP id
- 2adb3069b0e04-557e559e67emr1804776e87.35.1751851115755; Sun, 06 Jul 2025
- 18:18:35 -0700 (PDT)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rlU7MKCSEHJxZWgp61hhRvyDhzxu3el4jWaRNlRbNuIEG9HwNiRYrl5FD/BPJf9uegEmTipfhYJdD23mOkEHxSDJxbHVkVzc6IaE4eH7t7eVfbrstmST50/Zz9IIyAcyDwwAIbc+KuTwec1FPbSq0xMd5zKGkA4v0uC+t4p5qlU6boHPZKnmsRAeIoCPsSsZsa1zfO745N9lOdQs2kW4I2pUgrmBZKWuUr0QAhKfmbTmFCnAhgs5phE0c18ofavH1CTCs6j7891pTDhwnccG/zbwbirlwjS3bd+NB6Xfw/exdEdBF76bA/n7KcoDUv9hv95W33vqGaKEoGyMcME65Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Fh1v68IBBb6DMEB/aSFEU8ixruzADExX3r5w9xhhAZk=;
+ b=WE+6Iee4ocj8UbbrpM8vvaXTTsduUNee2mN2QfT5DjppLShNrS81b4WRjgNxJfYHPLVubqIxtv2go1zKv6WjAhfKA3bjbMRmQfbM37z44Xg1e1m4FNmOtc8anvSAcSkA1fYg6x2IU+4fag6rLzt0nfbbmuduRHOboiFAgBEm23cOA9ULLZ5xG98Go4MhwLlsiq7vRpqBqlFvz/kV656y+0a6cNpZVxtrRFGMN5a9CByxu75Z4yz0e153wu44HUjWGRdzjGX3xoxmcoBN8EOd9J3nKJn3aL2m/dIUgRvTik0aQF5YXDpWakLD8gBit/5mBdq7OHzqXEa/n2o2eO6wlA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Fh1v68IBBb6DMEB/aSFEU8ixruzADExX3r5w9xhhAZk=;
+ b=OG0uGlga+gPBy+ftKIeuyBHa2GttIVQzzZMh2fZu8H8yQDj0gkbzZQc6yX5hf0Ot69bF1e3N7sTZ2CqcMbiJsB/i4msebIP9lbIsFZTy4/aCW8KHA5+cD9TU2UPnhSmeC53gN6M/tLiDyvLkdrSbRr4zUF5oenGqQqmXL1QJMDs=
+Received: from BY3PR05CA0023.namprd05.prod.outlook.com (2603:10b6:a03:254::28)
+ by CY3PR12MB9579.namprd12.prod.outlook.com (2603:10b6:930:10a::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.26; Mon, 7 Jul
+ 2025 04:06:21 +0000
+Received: from BY1PEPF0001AE1B.namprd04.prod.outlook.com
+ (2603:10b6:a03:254:cafe::2) by BY3PR05CA0023.outlook.office365.com
+ (2603:10b6:a03:254::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.19 via Frontend Transport; Mon,
+ 7 Jul 2025 04:06:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BY1PEPF0001AE1B.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8901.20 via Frontend Transport; Mon, 7 Jul 2025 04:06:20 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 6 Jul
+ 2025 23:06:15 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Sun, 6 Jul 2025 23:06:14 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@amd.com>
+Subject: [PATCH 0/2] versal2: Enable reset and poweroff
+Date: Mon, 7 Jul 2025 09:36:05 +0530
+Message-ID: <20250707040607.758919-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 6 Jul 2025 22:18:24 -0300
-X-Gm-Features: Ac12FXwcB2dw2epHDDxxdXCdi8bQE643M-iw64CR6IpJ2JSapeDFNom11rHyDDU
-Message-ID: <CAOMZO5Ag7CmRBhpvOB5btNvHiAMayBoxSYMoBJXbV3-w1ET7jA@mail.gmail.com>
-Subject: i.MX6UL: Adding bootcount support
-To: U-Boot-Denx <u-boot@lists.denx.de>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Schrempf Frieder <frieder.schrempf@kontron.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- =?UTF-8?B?TWFyZWsgVmHFoXV0?= <marex@denx.de>, Heiko Schocher <hs@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE1B:EE_|CY3PR12MB9579:EE_
+X-MS-Office365-Filtering-Correlation-Id: 39c69046-7793-4a01-02cc-08ddbd0ba188
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8iaIlVbDLnaLdYWjXEYGNRnhl0+ingkCvtepwu53Cg5O9NPqe5pe3hJtI57A?=
+ =?us-ascii?Q?HPzaK0AbMT51UemBY+fpPG4VBUPaNc+Aj9EI8iZQY5zCVjoY6MSWF/2p31Rt?=
+ =?us-ascii?Q?8qh9SCl+4SOC9JGIO25iqlewjWa9LA1k836ZLfdNNaGMHWEoAK4oMNiIDVOB?=
+ =?us-ascii?Q?7A/JP7fmzjG3JIx+O58gw4pRamd7+jEHb8oszMdXyaxnePwbMMexEGENcRYe?=
+ =?us-ascii?Q?0UcMWh7LvckCAG+2cIJGJJAYdKbVaTBF+GxQG2bDTv9ZIdvJoj2ouMXxGl28?=
+ =?us-ascii?Q?R3+toHR/ILts7CiaXS4bWxlEPUhVMcyfdQr1yy1gY5EMvPm0S1BCaDa7dDSM?=
+ =?us-ascii?Q?JJLsNnJR4gs5H9CEaN3jHgvXbvI9Q1t6wNPFXmZgbND4o/R1q7QrZGb+WV26?=
+ =?us-ascii?Q?H6BOQ/JPOJxaBdNfTBFv1jeahM66UiR6qodNpdwTbbX0rjeAaVs8hAYirL5T?=
+ =?us-ascii?Q?71OIQTaFy7vG4KQEO0YLnSxNZ22pF07uPTEe7HTe7uTScWQog/iuUUZI5Zm5?=
+ =?us-ascii?Q?i1/PYWqzJyR2gdd79F0MGJwT86aZDdx7EfEyWj1NcBizCXZCm7arxIcFM+yO?=
+ =?us-ascii?Q?q4v99TTLiSSFffDUlz8CSPv7BG7eTweeYAmdBkm03igEmhGvGuwWI14dw+9Q?=
+ =?us-ascii?Q?PJ5LkKQ2aS1tUE9CWZo2OAxJr+9CkWPG2qziE89G0t6XK34hdyR4+RFUf/Kr?=
+ =?us-ascii?Q?QeUQPusK8zBfcTbkgWLqH3+VZSxagMiMf78quDSLUQsuGU8qw0MQw+XS5q0u?=
+ =?us-ascii?Q?lf2r8YNdHD1sL4ektbTZBWoQHK+Wsb+hF9hU4KjSMvBmLPexvOaTWSsaDPCk?=
+ =?us-ascii?Q?D2rMN0vOZIpnKzERu5nXc/roSPTeq5cC8lGxFE94P33yZFRdMb2XKGkukLBg?=
+ =?us-ascii?Q?8m3QemS9WC4Jh1hek9do8u9istt+UX0Av+oJn+jJ/CQIdjSom1dzmlyW9xuz?=
+ =?us-ascii?Q?37zYEhmWB8qPPGv3n/1I5YC83O82Ve6wPEB0ltFKNKGDbiJayZBMdms+aZu5?=
+ =?us-ascii?Q?w4RAflaQZHWNbh5hyUACi3aWCTcy5OruLhy9nYonRR3CqIQ9XVO+z0J7RxGL?=
+ =?us-ascii?Q?C/yGVxrdzDYd34iDIVagWY9lXZTob+CuONx0Ey3IdYa7MfGwq5jyyw3tJpPY?=
+ =?us-ascii?Q?ssoVuY2eL2oKalZ7lLdSXaIMjsozPK/glIYmZg7qeDrH2bVGbRi/drpw84Vr?=
+ =?us-ascii?Q?V5yFp1gbQrn1XsoFbJW5ajCvIzx0q9jJmFJuSS+t6GNXRxHzSKXUprTMAaJN?=
+ =?us-ascii?Q?olRXjBtFn8jPYZW7pF8C8qpx/D7jtFEGezSe25bN1a9aniy0C3i/Y4yvpUbv?=
+ =?us-ascii?Q?PPsMDEyc23/KOrWjTb1A8cEGtPktX/1zZroR5wepdjaD3uqFGHMxDy7fmWcb?=
+ =?us-ascii?Q?3KqRWAXqRU3Q2BmEhz37im5vhcs6dfBuBu+rbKgP/7ZnFXwgvMEKz9+58LwY?=
+ =?us-ascii?Q?Uqfjbw3DrcqbhRpSyvjZmeEAOGJxY7e8keukGsFSXkeQWtgY3f2nPfOE87dS?=
+ =?us-ascii?Q?O6wnlPbtEvJ0CPowTAniHzKARbGM6p5h8Sgx?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2025 04:06:20.7459 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 39c69046-7793-4a01-02cc-08ddbd0ba188
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BY1PEPF0001AE1B.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR12MB9579
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,29 +146,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Enable reset and poweroff via sysreset framework.
 
-I'm trying to enable bootcount support on the imx6ul-evk board like this:
+Venkatesh Yadav Abbarapu (2):
+  arm64: versal2: Enable reset and poweroff via sysreset framework
+  arm64: versal2: Do not define do_reset() if sysreset is enabled
 
---- a/configs/mx6ul_14x14_evk_defconfig
-+++ b/configs/mx6ul_14x14_evk_defconfig
-@@ -110,3 +110,8 @@ CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
- CONFIG_IMX_WATCHDOG=y
-+CONFIG_SYS_BOOTCOUNT_ADDR=0x020B0068
-+CONFIG_SYS_BOOTCOUNT_SINGLEWORD=y
-+CONFIG_BOOTCOUNT_LIMIT=y
-+CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C4000
-+CONFIG_SYS_BOOTCOUNT_BE=y
+ board/amd/versal2/board.c          | 2 ++
+ configs/amd_versal2_virt_defconfig | 3 +++
+ 2 files changed, 5 insertions(+)
 
-However, the 'bootcount' variable does not increment after a 'reset' command:
+-- 
+2.34.1
 
-=> print bootcount
-bootcount=1
-
-Has anyone managed to get bootcount working on it?MX6UL?
-
-Thanks,
-
-Fabio Estevam
