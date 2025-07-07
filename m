@@ -4,78 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF5EAC83030
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 19:59:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17188C83030
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 20:09:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FCA98320C;
-	Mon,  7 Jul 2025 21:59:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 78EBB831C3;
+	Mon,  7 Jul 2025 22:09:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SN/ekMph";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sT+CKCzI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A6AA831E4; Mon,  7 Jul 2025 21:59:20 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id E3A2D831D3; Mon,  7 Jul 2025 22:09:49 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 816A9831A4
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 21:59:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73292831B5
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 22:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-4067ac8f6cdso2583790b6e.2
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 12:59:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ae401ebcbc4so585568466b.1
+ for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 13:09:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751918356; x=1752523156; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=p0aLP1WqfF5AZD4LP06qdua2zr4rzKHaB1HcXjTZYxA=;
- b=SN/ekMphftUyvQrX2uhMm++19mo7XmRIwvfX8xZACRw8y5dre0wL3qEsMS4y/m3Jqo
- bADfaRN5Fi8vMU27CIEVmF6oGrxnTVq3knln508vRlHaKka25KNp0qK8+ew/rdxkFJws
- /ewNa6OjxtqTXPsU1LBelSqkY31XHSgm1ckVE=
+ d=linaro.org; s=google; t=1751918987; x=1752523787; darn=lists.denx.de;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BuXtVfZ2q9EOa8UhKuFMOB/QbeiPXl0W6Yhwn6+l/vA=;
+ b=sT+CKCzI5UmDiIUWriyf/H+HwqGiMJ2IPOW2bcNBle4nUlCcoARuJH5SwZnNCFJ7EI
+ XGmlpryVE7e++5grqABIDo58ib1HnNrqGuYtuSyoHkNpWfOFU3zAPykXBpIg/900Nwo9
+ 2QhEwIbEGO1a4UrGmCd46jU8IV8QW9ATGgMAbBPlMSwix5kS9XRWQrfqqErd0aQL9ugQ
+ KyhOoyeefuUEKemjisJGkgwCTAi6cZaNmUqTRU/7s+0f9/1V46e/PeYn+PUNQXt2+zC8
+ J42LKlGxyOfXTFZabjA5092MgEYOz83+w+REREySBBGCv2qzpqdX6OZ4oUvxo2TVj0th
+ 3oWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751918356; x=1752523156;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p0aLP1WqfF5AZD4LP06qdua2zr4rzKHaB1HcXjTZYxA=;
- b=qKSyz/sjtWgi/U2gJSVWjHdwr6q+9RgmbFE8Mf4PWKgh7ABnx/Dv/UZHovkERjGOIu
- y1fwanNxrzGRKwrZ41ykPrb44/B+ElvgSjZzhuumtFP/2EnfLlzN3gcLM4jOXDXGuFQ1
- 50XScfwjIBCU+4+9U+J1iAlwivB5sVtzI88AkZO5viY7NOKIDvPgVtAxWldz8AbMAIIx
- /iYuvDJRotm4W574RolGPVvf1lkiKAdfWj3KQCAd6M+ss1bDQg1XD6mbPMbU3YpH1VsU
- ypTF7y49RYvHqx6/MhpZ9Pto6oxEJd0flPHpFM/nRkO57sNAeCIZEawe+ogVGVm9UwOO
- qnqg==
-X-Gm-Message-State: AOJu0YztWlFrZLoDxKjig6xSW9V9mlzqkS3HVb0yUWNqLxsQMSVLrShA
- d3spoomjItHUWKxxh/G3GDXDSF/a0hDbbw2svZly7Csqw0nDQCcoxjaIS/cPvLOjVhmudRqWXCY
- MYQargq0=
-X-Gm-Gg: ASbGncvnGWdkB+VfqouATNVesLda9TaOnDsvWIuTeM+gPalz17HtiQwPiXGwu2gc31w
- i+N3yJbhZhvHVW8LoZAKDdBj3/kAynrJ7LAlSNHZ7+FxqHTHElZRIdhzyoYvdTMAVutOE9gwQ6c
- DWCdN9AV2fhhN8d7Jvn0imuSCCbvZJHHV+xuDb1qrJxKel8fRcwLq+oq9UY4Mz60a97c9FQhszG
- uaa3ppUXTbFx3VSsr2gqyWu/XZYHSvQShSiUOgl1smlHKBNNOXJCmnXF3uq+VEK7/WcXhlLR7sZ
- 4FprQG3zCa/0UNW0QkzA5Bhg63kGUWJ962n29ydVFLMv/3da7JV6RW7DYjbcCVrdgjUzdz+YOJT
- 0lY+xNitHaS/AM8g0JVt3
-X-Google-Smtp-Source: AGHT+IFXDKV2rk/W3EH1Yu1dGIKbaqf4nNxMHJSVTUyDbrdb/iXOe0XzoIq7AkIidzmXt4Ca2evmag==
-X-Received: by 2002:a05:6808:244d:b0:406:6d79:49e3 with SMTP id
- 5614622812f47-40d073f4be3mr9754911b6e.34.1751918356120; 
- Mon, 07 Jul 2025 12:59:16 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40d02a442d3sm1418370b6e.13.2025.07.07.12.59.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Jul 2025 12:59:15 -0700 (PDT)
-Date: Mon, 7 Jul 2025 13:59:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2025.07 released
-Message-ID: <20250707195913.GR6424@bill-the-cat>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iPpfVZGxphPZ7Y2i"
-Content-Disposition: inline
+ d=1e100.net; s=20230601; t=1751918987; x=1752523787;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=BuXtVfZ2q9EOa8UhKuFMOB/QbeiPXl0W6Yhwn6+l/vA=;
+ b=meoqQmL3Fqp2cDGipDBl0AWPE4gcCffpsYLLUKUxo+n5INcHa1JVLUUHQe5w479wIm
+ aj3ZBin/qPIAwihS7KlLQnIurMFDC0BO4VgPSNsPjsqYc0S/DRp8HgXFtatEyYBKaJDB
+ QxfnyXlih2Fjpwqc4zUJYmTNYu60dyvvA6CmK4YBI8D5XrctnM98aGVoh5q78GsBldI4
+ FqKKkZT9IsQgRQ+CNOFVXbR7qhmo7pTTVeH0CbmUawSQ9iOPZXpPXIpn47DLuxH8OfP6
+ 7JPC+ma1Ek+N6nv6GPpC7KLhqRCan4SyF58GPBHW35/ziL9tdXBXtgE823sfml62plNq
+ XVjg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWr7ep91uKFEgkj0zGur0cqMZ3jGxSKHki1upiooYCK3oNGnKkg5i3MhxKXSZUmcPIEm7HQYDY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyn7A4Vu41ruDk4hJtA0qjPkcNy9wJ5Uo1y9ANeBLFVKFFd/Lw1
+ HChJjVufS7XFJIGoGfu9kw1SEftAq2Ob6o7fipF8Qw4eJT7MOve5MLdUYzBWA58HbLwVMHlVd6U
+ wqkhk8So=
+X-Gm-Gg: ASbGncu9+GYA+sppbS9uJkZp2TsgVFU2KMw4AJmLpzX94EqJvKFGNoC4cb2wd3zxAx8
+ Ai1AUf/O7aRKKi65ige5WVKPIQ4wyK+BlOjHsQTqnV6azwkdWoUrYkBcCvvVBel16wTSxdz7EOy
+ 0E1r78BUZfLZzqedEPrJScZANWnjXIDOExswuXlaUQBU5M5x6eO53JXo8jCGoAEjRGLLZOOF3az
+ Hs5z9e+uauWcUbaZCNGf81Sy2ZJ3wrNx8yKtV4YYP2GPfQu66+mIf/0Pwdje4X9JWSJBLqXjO2e
+ TkuaxjzFDtvRTHuYnn47OkaeU29r57BRGUkuNu4iADCAzpK777qpQ6/Ut89hRJdkM+6Xc/6+/S1
+ Y22EjUqnN3vqendT9oeoGNYs7
+X-Google-Smtp-Source: AGHT+IGdcN/9hk5cLV7miE4RJ2M+ETAJohx+OI8Jb+IfFCd0DmUcsfDicT2h8DEN7X0QQzqPNPSJbw==
+X-Received: by 2002:a17:906:28d6:b0:ae3:cd73:efbc with SMTP id
+ a640c23a62f3a-ae6b021b6c3mr41246466b.46.1751918986785; 
+ Mon, 07 Jul 2025 13:09:46 -0700 (PDT)
+Received: from localhost (ppp089210105145.access.hol.gr. [89.210.105.145])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae3f6ac62dfsm765310466b.105.2025.07.07.13.09.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Jul 2025 13:09:46 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 07 Jul 2025 23:09:44 +0300
+Message-Id: <DB63G6T323QW.2AQUT656TKCGJ@linaro.org>
+To: "Anshul Dalal" <anshuld@ti.com>, <u-boot@lists.denx.de>
+Cc: <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>
+Subject: Re: [PATCH v5 3/4] mach-k3: add dynamic mmu fixups for SPL stage
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+X-Mailer: aerc 0.20.0
+References: <20250703133533.104758-1-anshuld@ti.com>
+ <20250703133533.104758-4-anshuld@ti.com>
+In-Reply-To: <20250703133533.104758-4-anshuld@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,78 +106,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Anshul,
 
---iPpfVZGxphPZ7Y2i
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu Jul 3, 2025 at 4:35 PM EEST, Anshul Dalal wrote:
+> On platforms with spl splash support such as 62p and 62x
+> (CONFIG_VIDEO=3Dy), the top of DDR is reserved for the framebuffer.
+>
+> The size of the framebuffer is computed at runtime by video_reserve.
+> During the MMU configuration an entry corresponding to the framebuffer
+> should be dynamically created to properly allocate the required space
+> for the framebuffer.
+>
+> Therefore this patch adds k3_spl_mem_map_init which adds the required
+> MMU entry by querying the gd after the framebuffer size has been
+> computed in spl_reserve_video_from_ram_top.
+>
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>  arch/arm/mach-k3/arm64/arm64-mmu.c | 13 ++++++++++++-
+>  arch/arm/mach-k3/common.c          | 17 ++++++++++++++---
+>  2 files changed, 26 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/=
+arm64-mmu.c
+> index 49dd6fcb23b..b1b287f2114 100644
+> --- a/arch/arm/mach-k3/arm64/arm64-mmu.c
+> +++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+> @@ -131,6 +131,13 @@ static int k3_setup_extra_mem_banks(unsigned int *ma=
+p_idx)
+>  	return 0;
+>  }
+>
+> +static void k3_spl_mem_map_init(unsigned int *map_idx)
+> +{
+> +	if (CONFIG_IS_ENABLED(VIDEO))
+> +		k3_mmu_add_cachable_entry(gd_video_bottom(), gd_video_top(),
+> +					  map_idx);
+> +}
+> +
 
-Hey all,
+I don't know wnough details for this board, but generally speaking we shoul=
+d be doing
+this commonly for all arm64 platforms. There's mmu code for that. Can you e=
+xplain why
+this is only useful to k3?
 
-So it's release day and so here is v2025.07. I will be merging the next
-branch back to master shortly and pushing that out as well.
+Thanks
+/Ilias
+>  static int k3_uboot_mem_map_init(unsigned int *map_idx)
+>  {
+>  	int ret;
+> @@ -159,7 +166,11 @@ int k3_mem_map_init(void)
+>
+>  	map_idx++;
+>
+> -	ret =3D k3_uboot_mem_map_init(&map_idx);
+> +	if (xpl_phase() =3D=3D PHASE_SPL)
+> +		k3_spl_mem_map_init(&map_idx);
+> +	else
+> +		ret =3D k3_uboot_mem_map_init(&map_idx);
+> +
+>  	if (ret)
+>  		return ret;
+>
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index fc230f180d0..e72413b9803 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -32,6 +32,7 @@
+>  #include <dm/device-internal.h>
+>
+>  #include <asm/arch/k3-qos.h>
+> +#include <mach/k3-ddr.h>
+>
+>  struct ti_sci_handle *get_ti_sci_handle(void)
+>  {
+> @@ -224,16 +225,26 @@ void spl_enable_cache(void)
+>
+>  	dram_init();
+>
+> -	/* reserve TLB table */
+> -	gd->arch.tlb_size =3D PGTABLE_SIZE;
+> -
+>  	gd->ram_top +=3D get_effective_memsize();
+> +	/* keep ram_top in the 32-bit address space */
+> +	if (gd->ram_top >=3D 0x100000000)
+> +		gd->ram_top =3D (phys_addr_t)0x100000000;
+> +
+>  	gd->relocaddr =3D gd->ram_top;
+>
+>  	ret =3D spl_reserve_video_from_ram_top();
+>  	if (ret)
+>  		panic("Failed to reserve framebuffer memory (%d)\n", ret);
+>
+> +	if (IS_ENABLED(CONFIG_ARM64)) {
+> +		ret =3D k3_mem_map_init();
+> +		if (ret)
+> +			panic("Failed to setup MMU table (%d)\n", ret);
+> +	}
+> +
+> +	/* reserve TLB table */
+> +	gd->arch.tlb_size =3D PGTABLE_SIZE;
+> +
+>  	gd->arch.tlb_addr =3D gd->relocaddr - gd->arch.tlb_size;
+>  	gd->arch.tlb_addr &=3D ~(0x10000 - 1);
+>  	debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
 
-As this is a full release, and not just a release candidate I'm hoping
-for a few more people to read this and then read what I'm linking to as
-well. For the overall health of the project, and the community, I'm
-hoping to find a few people within the community that can help with
-overall organization and management. I would like to long term be able
-to move us to being under the Software Freedom Conservancy umbrella and
-that in turn means having a organizational structure that's not just a
-single person. I've put more details in the email here:
-https://lore.kernel.org/u-boot/20250602222738.GC100073@bill-the-cat/
-
-Next up, I want to remind everyone that we'll have our regularly
-scheduled community meeting tomorrow.  The meeting details itself are:
-https://meet.google.com/btj-wgcg-euw
-July 8th, 2025. 9am (GMT -06:00)
-
-To join by phone:
-https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
-
-A high level changelog from v2025.04 until now is:
-- Inspired by barebox "bthreads" we now have "uthreads".
-- We have exFAT support now.
-- General improvements, updates and new support in the following
-  architectures / SoCs: Apple M1/2, i.MX8/9, sunxi, STM32, StarFive, TI
-  K3, Rockchip RK3528 and RK3576 (and general improvements to older
-  chips), MIPS Boston platforms, SoCFPGA, Atmel sama9x60 and sama5d2,
-  Raspberry Pi, AMD/Xilinx (Versal, Versal Gen 2, ZynqMP), Marvell
-  platforms, assorted Tegra platforms, Qualcomm platforms, Rensas R-Car
-  and likely more I've missed.
-- Once again a number of improvements within the EFI loader subsytem
-- A number of cleanups and improvements in the networking, DFU, MMC,
-  i2c, SCSI and other subsystems. Also a few series addressing more
-  general code quality and cleanups.
-- Additional testing within CI on more (QEMU) platforms.
-
-And I'm sure there's things I've missed.
-
-With all of that said, we're on our usual cycle of 3 weeks for -rc1,
-which will be July 28th and then every other week for -rc tags until the
-release of v2025.10 on October 6th.
-
-Thanks all!
-
---=20
-Tom
-
---iPpfVZGxphPZ7Y2i
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhsJxEACgkQFHw5/5Y0
-tywBzAwAoHvJ3wkhpnJjFuTNAkWhovFndoCHrybSnxHsQCx1uWNcs+mseehFYigC
-e1/GHWCEGgMslImoNXC94ekCtUKhwhKgh5+Sq65CEMFT4sg8Cl11Rao3nrdlzQzP
-NztK4ZXJ57KBfeLTLctCVFgxabCVTx5g2IOWoLZgKFvQ/g0dq9IUjSPUYc+ehLOM
-SP9PS9SIAjQdCNr/wb9rpMgIlDyEXXclvtqGIUMuJy7iGg2uHi3ExDvQdgtfvizt
-atq4lVIMJ3JS/o5yydTiAnNNNejVZaP3wz+9C8cDV/qr1kwJayblALCMIeqYLIJp
-8m4HMZxWOCUINDAoJGGifNl72Fx8TNVCfNAZxmTFG/Z6EbZRA1QWvspuGk5zIVM5
-3o6n4d6YKQuOPuHYg2zxXjIyqV12D4UryC7Nr4EKYaxeo9skvVHrSZ1FW2PCp9fo
-fkH3/ajmtcIJzN97eU19eUavHD11ydNyfKnj3mwVTWQEEMMpSO6YjjIJnGwnJg33
-/7Ea9Ybu
-=kVjl
------END PGP SIGNATURE-----
-
---iPpfVZGxphPZ7Y2i--
