@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47976C83F07
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 09:53:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90910C83F0A
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 10:03:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A35830C0;
-	Mon,  7 Jul 2025 11:53:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
+	by phobos.denx.de (Postfix) with ESMTP id EC33B8304D;
+	Mon,  7 Jul 2025 12:03:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IWffg+NL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O6k15dwq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AB88830C0; Mon,  7 Jul 2025 11:53:34 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id CD4AC8305C; Mon,  7 Jul 2025 12:03:13 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97B958304D
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 11:53:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C906883046
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 12:03:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=debian.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=grandpaul@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a54700a463so1495851f8f.1
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 02:53:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-453066fad06so19694415e9.2
+ for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 03:03:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751882012; x=1752486812; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NI5h90YNeyT7dtAbdp1h2y8iCr5oz/raqGXVFLiwQmc=;
- b=IWffg+NLTKXuUPQJiqMCcny4LfAjO0hs57pwJBI8rNs42u7cYJB4jtub8k6Yyn1oQ5
- FO55SFhbkb2QhAlxmdcrHmn0btpry3ErW+R1U6zaA/JDP57YjcxW76KncSz8WCy0WJ8u
- e5hq8m2lPdHmxHbgaTVzseszCvVCHWndg90rpyIXm4GCCMemmxE4XjnR5tob0bhNuDsR
- bnrRQJgq0Up8xQyl1Mxzh42KDPAGPsan7dvMfc2L2HUZqXzcCs8TTEtnLd5ahiTfavmm
- w5EseArM4OcPSY04IwV0yMErPrt2Yyt+e/MrU6/IyiNwIn0TQl41RzaHejsCV6Xu5a3b
- hLaw==
+ d=linaro.org; s=google; t=1751882591; x=1752487391; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=q0gLJsvSRkrtAZtkoNtwENqeSO9nWq2C98UwJb9r8cQ=;
+ b=O6k15dwquWQS9qurJNIVml2RojrZmElZt+ArHwuszMdVsuovM1p/PR/MYCiNpj1B9L
+ hWvLCcTpqyqeLG+9DlPTM5AWs3Cuv71OIhLzzJK2XG1WpA1IH1zlsTOw7uzVRHTTv6eM
+ LO0HFa7nhmLPEDnNsBtWC9KQl6fvoJYpiTkki01mZX0uXoUdhg1MlWIUEVMTACZbP5oR
+ rpKGLzRJanFuFU1un1JzXDopH+BfoNqiiiYz+eFszJ2b6L0a2uCFqLQnIotywKb+RAYs
+ bn3dnAIEHJ/cmdvpvwhJ/z6ds+Aspfp+lj30pCQsfW5BCzonYP7frkh1jDEcJjmKF2l1
+ sSiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751882012; x=1752486812;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=NI5h90YNeyT7dtAbdp1h2y8iCr5oz/raqGXVFLiwQmc=;
- b=IPsWEPMjk1DnFcA2p/8iST5cbd0/OXv84HmxbW4KOPCCqGYLT1W0wxXaajC1IIaCgA
- sXDcCaI/gcYIP7/GNrUNcsupgVb6jMYnS33zSGhStnaiMiZEJHv3WiSb3w/0BuNvpXDX
- JC9kAE0p1Wi/j4hSKR32b9Si6B4hVnIIDcSGoZSBmL6s/Kh56mQA7RKZkvOQA5zupNn6
- /CoEQtVVrobfXErZNwJh1xYmW+tbCtRRIBMF8P5GDX6mJXDOyeHwDtEclQuqQhPYlJXp
- hhqJ4NFCEDBCEbbSyH01zNnWhfacmhdynQIsW6U2Cgoz0AZEAYXFaKAUtqlp7XInf3cJ
- wytA==
-X-Gm-Message-State: AOJu0YxFT41z/uSQZCXYWgmZHbnQv3wUFb6CxMvtIYBet3HisS8dpnF7
- dZ6va1F/B8Hn+ipzgHJC/jGDHNngo7BOsg+rr7o3cY9Lti7Uf+zE78nzyK6kfZiU
-X-Gm-Gg: ASbGncsDpzOvI9gbdCB9WaWgAQahNm+3HopAjfK8B1C4y0eACtkls5yUlPdPbLV994R
- PKzHEwH5EhSWBkpVxTJwftEcYuOGV3k9EefHFGEARtQG7klSElCNpKhSXkpdpN3Utf43SJqzo2a
- 01Sp2UMZaEtwrLmRJzyEP2LAOTJPZ1y5BMLvF9Fl2Q4GIK95WoRfq5u0A1T0t8UOBat6bcQiEgK
- /0r4ysVwTGeUtgQTm8H+/9/sLzC7ZKgcYb9pu2nzzHM6dhH2HjtWUNeOj5AMXLkN7MYsWG1wiCY
- HMp8UYzPm3AhuzB5rVv4sLnD13vjxFXSn0DTBgqph/I8lWE/9muz/fVSjQNAaQ==
-X-Google-Smtp-Source: AGHT+IHN4tMB1aZgPjLpoYxjnXJj3/uPlIk05axGIHzPFfbIXeikUK/cQvC7bgK3eaqdXs+9p2IfVg==
-X-Received: by 2002:a5d:5846:0:b0:3a4:e231:8632 with SMTP id
- ffacd0b85a97d-3b495b94922mr12044558f8f.12.1751882011483; 
- Mon, 07 Jul 2025 02:53:31 -0700 (PDT)
-Received: from localhost ([2001:8a0:6a5a:6c00:eb29:af93:a639:c827])
+ d=1e100.net; s=20230601; t=1751882591; x=1752487391;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=q0gLJsvSRkrtAZtkoNtwENqeSO9nWq2C98UwJb9r8cQ=;
+ b=IB0Zn4WaxHjZF3Rb/IVx77OvnuI8b276aBvIy862JrVrZ3PpwchVgNZjiDf4GAfcad
+ tQcDJx9qZoRXlp1KN02wxLE40HbERbGO7JhfIazWPKY2ToTdsg8cODf6tqvZfYJZtPgk
+ yPKV2bnMcyTp2HdLy0aYREQcg5nC9RFKy7f8HsIgkc0d/49Q8sAJzgcE2N6i1+DFwu2H
+ DdOhW75DC6Gs8lsAIWep+zFGXPPkZ2DhcKdDf3Pd2YWnsrE5OgzYG4C1r2VuK8MTzalX
+ 4SKUZ283eZCV3o4vYL2f1KTw3bcN4KBQs8rCy+ySww+tc3X+uqO6eQ+y8fMF557kx9//
+ ssdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVwtK2uSJBtpDXqYi0WfEaGmvTHbsM3nr6E4ecAM3eP9G2f4jTyPYeXglLwRD8lo+Pq+RFEshg=@lists.denx.de
+X-Gm-Message-State: AOJu0YztniN9zboz4IFIJFBsF9sAA5Ag2+6Wq+wXkukEH2YUvtzj2MYK
+ wxC4VgtTpyF6JsZuipM7CCCL8l5yfpGMceQ6SahqWbomAZr9ZqpEqw7Ux2Ou+pqjOu8=
+X-Gm-Gg: ASbGncshRLFQkVGGTLO9G4GiMGRnETJUPsqTmuRCo9gB1LILUcqZIKosxPUeBASpzk7
+ Lr19Eo+sDQQkiUYTp7VNmHY3gehVTVREHpPwGyu2Ws4FPBUV8UiHK4Qpu6aDkwbdFHCPzq1Qfiw
+ VPPwG7vmwjfRXducnTRkrB7kOBsix3OVBWT9hZPyNM0UM9D3Uq6xRE4kgd4aD9EhPA64CJb789t
+ rskG6SSu8mjx8EQM2owZeI2v0U3ljJEMoM9XWCYelGyiFChP72yxbFWGBBJ/KbD/MbLbQgJrc4e
+ Xi5/TPV5EDGM0Q5uE/9qEy2J+0wkBlmpiJqDeySz96G+07+vYQoP6Ntv0mUesaOoEJqZImgaIQr
+ DieaTy0/vdDwh7hMN1jX649CBFagkwS0JCgRHWF1tVdS0Qlgr1g==
+X-Google-Smtp-Source: AGHT+IFi3yF3yN7an0Lcj150FDIhAQBTgbGYP+IhrxAZPBhKSGEhGGPE9a177epwwNtkvubfPTu/9g==
+X-Received: by 2002:a05:600c:8509:b0:43b:cc42:c54f with SMTP id
+ 5b1f17b1804b1-454bb801406mr68056805e9.14.1751882590986; 
+ Mon, 07 Jul 2025 03:03:10 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:e07:801:7bf5:4bcd:8bca:5bc3?
+ ([2a0a:ef40:e07:801:7bf5:4bcd:8bca:5bc3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b47225afd4sm9489719f8f.83.2025.07.07.02.53.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Jul 2025 02:53:31 -0700 (PDT)
-From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-To: u-boot@lists.denx.de
-Cc: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/1] efi: turn on EFI_DEBUG_SUPPORT for qemu arm and arm64
- target
-Date: Mon,  7 Jul 2025 10:53:22 +0100
-Message-Id: <20250707095322.30222-2-paulliu@debian.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250707095322.30222-1-paulliu@debian.org>
-References: <20250707095322.30222-1-paulliu@debian.org>
+ 5b1f17b1804b1-454b16a3799sm106238565e9.35.2025.07.07.03.03.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Jul 2025 03:03:10 -0700 (PDT)
+Message-ID: <c578799b-a2e1-482d-b349-0693c102791e@linaro.org>
+Date: Mon, 7 Jul 2025 11:03:09 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ofnode: NULL check bootscr_flash_size before dereference
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20250703-ofnode_fix-v1-1-c739233efb58@linaro.org>
+ <20250704210116.GM6424@bill-the-cat>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250704210116.GM6424@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,57 +103,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previously, EFI_DEBUG_SUPPORT was enabled across all platforms for
-CI build testing. With this commit, we are limiting its activation
-to qemu_arm64_defconfig and qemu_arm_defconfig only, which is
-sufficient for our current needs.
+On 04/07/2025 22:01, Tom Rini wrote:
+> On Thu, Jul 03, 2025 at 05:05:31PM +0100, Andrew Goodbody wrote:
+> 
+>> Move the NULL check of bootscr_flash_size to before the first time it is
+>> dereferenced to avoid any possible segment violations.
+>>
+>> This issue found by Smatch.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   drivers/core/ofnode.c | 12 ++++++------
+>>   1 file changed, 6 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+>> index 26e014d5c53..1c285a867b3 100644
+>> --- a/drivers/core/ofnode.c
+>> +++ b/drivers/core/ofnode.c
+>> @@ -1960,6 +1960,12 @@ int ofnode_read_bootscript_flash(u64 *bootscr_flash_offset,
+>>   	int ret;
+>>   	ofnode uboot;
+>>   
+>> +	if (!bootscr_flash_size) {
+>> +		dm_warn("bootscr-flash-size is zero. Ignoring properties!\n");
+>> +		*bootscr_flash_offset = 0;
+>> +		return -EINVAL;
+>> +	}
+>> +
+>>   	*bootscr_flash_offset = 0;
+>>   	*bootscr_flash_size = 0;
+> 
+> Is the compiler likely to optimize this to:
+> *bootscr_flash_offset = 0;
+> if (!bootscr_flash_size) {
+>    ...dm_warn(...)
+>    return -EINVAL;
+> }
+> *bootscr_flash_size = 0;
+> 
+> Otherwise we should re-organize it like that. And yes, the two patches
+> today for "fix platform ... because it grew too much" reminded me to be
+> picky like this.
+> 
 
-Signed-off-by: Ying-Chun Liu (PaulLiu) <paulliu@debian.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
----
- configs/qemu_arm64_defconfig | 1 +
- configs/qemu_arm_defconfig   | 1 +
- lib/efi_loader/Kconfig       | 1 -
- 3 files changed, 2 insertions(+), 1 deletion(-)
+Thanks, yes.
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 39afb837e41..54bf4646382 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ENV_ADDR=0x4000000
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
- CONFIG_AHCI=y
-+CONFIG_EFI_DEBUG_SUPPORT=y
- CONFIG_EFI_HTTP_BOOT=y
- CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
-diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-index 92ba48f6af9..b1c277a86c0 100644
---- a/configs/qemu_arm_defconfig
-+++ b/configs/qemu_arm_defconfig
-@@ -18,6 +18,7 @@ CONFIG_ENV_ADDR=0x4000000
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
- CONFIG_AHCI=y
-+CONFIG_EFI_DEBUG_SUPPORT=y
- CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 077466f01f0..fdabe9cc278 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -73,7 +73,6 @@ config EFI_SIGNATURE_SUPPORT
- 
- config EFI_DEBUG_SUPPORT
- 	bool "EFI Debug Support"
--	default y if !HAS_BOARD_SIZE_LIMIT
- 	help
- 	  Select this option if you want to setup the EFI Debug Support
- 	  Table and the EFI_SYSTEM_TABLE_POINTER which is used by the debug
--- 
-2.39.5
-
+Andrew
