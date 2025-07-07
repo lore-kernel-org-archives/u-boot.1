@@ -4,48 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 076D1C83F07
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 13:06:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A7E2C8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 13:06:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50028830CA;
-	Mon,  7 Jul 2025 15:06:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9ECDC830E4;
+	Mon,  7 Jul 2025 15:06:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="KHBmxJvy";
+	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="BYx6DoBg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76912830E4; Mon,  7 Jul 2025 15:06:07 +0200 (CEST)
-Received: from mail-10624.protonmail.ch (mail-10624.protonmail.ch
- [79.135.106.24])
+ id 4D0B083156; Mon,  7 Jul 2025 15:06:26 +0200 (CEST)
+Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
+ [109.224.244.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1301A8305C
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 15:06:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AACA18305C
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 15:06:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philip@philipmolloy.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail2; t=1751893564; x=1752152764;
- bh=VLkpF25GxNXkEP44Itqcd1zsS4LaJui7eP4w0UbYBGI=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=KHBmxJvyNNsxPfJN9gGLPRwqQanQl/kK8glydJ3i8VXTl4YjTpbFmMb0gIPITtAv+
- z8TMPkugmuDgamTiT4IVK1GVpQv9pI+/zRgLVXz8sEtFNWjvWekHZGMqzhq2FQ2mHt
- Y0PDHVCea1+U72XlkCpuDklKcuxOWBGHQNiKESc4klXQXD3okTg2lvgtcwdoWvWInk
- GhmmG0XjnqtFntQMdzPNW3tecuibrAxXGBuRAmoVF5kCw27VFNuzeRTMXmQc5YNxFx
- NwaciejV0pWW96iQH2ogqOLQmjkyR+di2lwbzdZl1Rp4smBdJwIpZ5fAslArlEYtzm
- JATwY1PVqRnOg==
-Date: Mon, 07 Jul 2025 13:06:00 +0000
+ s=protonmail2; t=1751893583; x=1752152783;
+ bh=jTyWvZ+L4PMK0YuBh7uy0dKKtbXxMScZlwhJ8wYl5C4=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=BYx6DoBgfyyOSYRWwKBB3Us4CfZXkoqZ+8NwMOCA0Xmo9iGK/laQFfIbwurOoEdZa
+ gTCZNG4kALBQzexzfvAfEP4cXgZeFcpdGdo9/6wrvDDnTaCCVPuY1SDRo8G1pJfeIO
+ RKevTObkYB8qEn27bULOyWJnIvQuFhX/NtXngU/UhWIx2/1nkUD3AFXfruCeou1nkg
+ c75zQMZ3joYO59pUJGywiKNgXMB9HOPZzd7N4LD/+18RlfoplswZS8lVfGsKCZVdaS
+ hYAkA1K+iP/Fow/Wm5qIzABoKLoq4Aj9JXtdGFxx1rh+io/VfIqCZfziIhXy89Wv8W
+ mcNhgINLRHhOA==
+Date: Mon, 07 Jul 2025 13:06:16 +0000
 To: u-boot@lists.denx.de
 From: Philip Molloy <philip@philipmolloy.com>
 Cc: Michael Hennerich <michael.hennerich@analog.com>,
- Philip Molloy <philip.molloy@analog.com>
-Subject: [PATCH 0/4] Minor fixes to comments, README, and Kconfig description
-Message-ID: <20250707150438.3016690-1-philip@philipmolloy.com>
+ Philip Molloy <philip.molloy@analog.com>, Tom Rini <trini@konsulko.com>,
+ Michael Walle <michael@walle.cc>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/4] pinctrl-uclass: update comment to reflect code
+Message-ID: <20250707150438.3016690-2-philip@philipmolloy.com>
+In-Reply-To: <20250707150438.3016690-1-philip@philipmolloy.com>
+References: <20250707150438.3016690-1-philip@philipmolloy.com>
 Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: 82271d47a9aca1576ab3c5cc458a463826287256
+X-Pm-Message-ID: 58f9017f053901ac71bf3bedf542ba05c3c664d3
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -67,23 +72,32 @@ X-Virus-Status: Clean
 
 From: Philip Molloy <philip.molloy@analog.com>
 
-A hodge-podge of minor fixes I came across while debugging.
+The logic was updated without modifying the comment above it
 
-https://github.com/analogdevicesinc/u-boot/tree/staging/philip/minor-mainli=
-ne-cleanup
+Fixes: 72b8c6d1ebf ("pinctrl: don't fall back to pinctrl_select_state_simpl=
+e()")
 
-Philip Molloy (4):
-  pinctrl-uclass: update comment to reflect code
-  serial-uclass: fix typo in comment
-  gpio: add SPL to Kconfig option description
-  README: remove obsolete note
-
- README                           | 4 ----
- drivers/gpio/Kconfig             | 2 +-
+Signed-off-by: Philip Molloy <philip.molloy@analog.com>
+---
  drivers/pinctrl/pinctrl-uclass.c | 3 +--
- drivers/serial/serial-uclass.c   | 2 +-
- 4 files changed, 3 insertions(+), 8 deletions(-)
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
+diff --git a/drivers/pinctrl/pinctrl-uclass.c b/drivers/pinctrl/pinctrl-ucl=
+ass.c
+index d9c76898a96..58e070bfe1e 100644
+--- a/drivers/pinctrl/pinctrl-uclass.c
++++ b/drivers/pinctrl/pinctrl-uclass.c
+@@ -317,8 +317,7 @@ int pinctrl_select_state(struct udevice *dev, const cha=
+r *statename)
+ =09if (!dev_has_ofnode(dev))
+ =09=09return 0;
+ =09/*
+-=09 * Try full-implemented pinctrl first.
+-=09 * If it fails or is not implemented, try simple one.
++=09 * If full-implemented pinctrl is not implemented, try simple one.
+ =09 */
+ =09if (CONFIG_IS_ENABLED(PINCTRL_FULL))
+ =09=09return pinctrl_select_state_full(dev, statename);
 --=20
 2.50.0
 
