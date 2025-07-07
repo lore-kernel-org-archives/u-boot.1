@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17188C83030
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 20:09:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75014C71130
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 20:10:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78EBB831C3;
-	Mon,  7 Jul 2025 22:09:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 08BE4831D3;
+	Mon,  7 Jul 2025 22:10:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sT+CKCzI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JMDI8XQk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3A2D831D3; Mon,  7 Jul 2025 22:09:49 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id C4352831C2; Mon,  7 Jul 2025 18:54:08 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73292831B5
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 22:09:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCC188318E
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 18:54:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ae401ebcbc4so585568466b.1
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 13:09:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=ld.adecy@gmail.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-453749af004so16562465e9.1
+ for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 09:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751918987; x=1752523787; darn=lists.denx.de;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BuXtVfZ2q9EOa8UhKuFMOB/QbeiPXl0W6Yhwn6+l/vA=;
- b=sT+CKCzI5UmDiIUWriyf/H+HwqGiMJ2IPOW2bcNBle4nUlCcoARuJH5SwZnNCFJ7EI
- XGmlpryVE7e++5grqABIDo58ib1HnNrqGuYtuSyoHkNpWfOFU3zAPykXBpIg/900Nwo9
- 2QhEwIbEGO1a4UrGmCd46jU8IV8QW9ATGgMAbBPlMSwix5kS9XRWQrfqqErd0aQL9ugQ
- KyhOoyeefuUEKemjisJGkgwCTAi6cZaNmUqTRU/7s+0f9/1V46e/PeYn+PUNQXt2+zC8
- J42LKlGxyOfXTFZabjA5092MgEYOz83+w+REREySBBGCv2qzpqdX6OZ4oUvxo2TVj0th
- 3oWA==
+ d=gmail.com; s=20230601; t=1751907246; x=1752512046; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ode0YuFIqPHwUpcPwlFqcplX+H+gCLhL7GUnTQe5KlM=;
+ b=JMDI8XQk56WeobSJmdyxl1RyO97OgadvheOsjecz+xalUBE1DMbpRydUq6smU4fNG9
+ O0JtmmQP0mam2lW0smYK1pMeCrCmORNasrsLrSG4aamx7ICPxv3S1BbOQgppLpqQjpgc
+ xL0pQoy1ONFmDpoAWrTKvvxi6Hrw4dSUbxAnwZ6275YIUSS3YIFxV7+l3lz63Tls8P02
+ M3m8jhSkrRFoGrSPXymQbh1MIz+r5PNu3bbDzQUbHTa+DhsMDKnM+qYxCJoOI0a73GOB
+ WdN0WUgot+rgJoHrLW2WL5Kdna3kbW2JVTUEDAj8oUBq2nCm58HZHeKxU6EEkFFKEN0d
+ cAQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751918987; x=1752523787;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=BuXtVfZ2q9EOa8UhKuFMOB/QbeiPXl0W6Yhwn6+l/vA=;
- b=meoqQmL3Fqp2cDGipDBl0AWPE4gcCffpsYLLUKUxo+n5INcHa1JVLUUHQe5w479wIm
- aj3ZBin/qPIAwihS7KlLQnIurMFDC0BO4VgPSNsPjsqYc0S/DRp8HgXFtatEyYBKaJDB
- QxfnyXlih2Fjpwqc4zUJYmTNYu60dyvvA6CmK4YBI8D5XrctnM98aGVoh5q78GsBldI4
- FqKKkZT9IsQgRQ+CNOFVXbR7qhmo7pTTVeH0CbmUawSQ9iOPZXpPXIpn47DLuxH8OfP6
- 7JPC+ma1Ek+N6nv6GPpC7KLhqRCan4SyF58GPBHW35/ziL9tdXBXtgE823sfml62plNq
- XVjg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWr7ep91uKFEgkj0zGur0cqMZ3jGxSKHki1upiooYCK3oNGnKkg5i3MhxKXSZUmcPIEm7HQYDY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyn7A4Vu41ruDk4hJtA0qjPkcNy9wJ5Uo1y9ANeBLFVKFFd/Lw1
- HChJjVufS7XFJIGoGfu9kw1SEftAq2Ob6o7fipF8Qw4eJT7MOve5MLdUYzBWA58HbLwVMHlVd6U
- wqkhk8So=
-X-Gm-Gg: ASbGncu9+GYA+sppbS9uJkZp2TsgVFU2KMw4AJmLpzX94EqJvKFGNoC4cb2wd3zxAx8
- Ai1AUf/O7aRKKi65ige5WVKPIQ4wyK+BlOjHsQTqnV6azwkdWoUrYkBcCvvVBel16wTSxdz7EOy
- 0E1r78BUZfLZzqedEPrJScZANWnjXIDOExswuXlaUQBU5M5x6eO53JXo8jCGoAEjRGLLZOOF3az
- Hs5z9e+uauWcUbaZCNGf81Sy2ZJ3wrNx8yKtV4YYP2GPfQu66+mIf/0Pwdje4X9JWSJBLqXjO2e
- TkuaxjzFDtvRTHuYnn47OkaeU29r57BRGUkuNu4iADCAzpK777qpQ6/Ut89hRJdkM+6Xc/6+/S1
- Y22EjUqnN3vqendT9oeoGNYs7
-X-Google-Smtp-Source: AGHT+IGdcN/9hk5cLV7miE4RJ2M+ETAJohx+OI8Jb+IfFCd0DmUcsfDicT2h8DEN7X0QQzqPNPSJbw==
-X-Received: by 2002:a17:906:28d6:b0:ae3:cd73:efbc with SMTP id
- a640c23a62f3a-ae6b021b6c3mr41246466b.46.1751918986785; 
- Mon, 07 Jul 2025 13:09:46 -0700 (PDT)
-Received: from localhost (ppp089210105145.access.hol.gr. [89.210.105.145])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f6ac62dfsm765310466b.105.2025.07.07.13.09.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Jul 2025 13:09:46 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 07 Jul 2025 23:09:44 +0300
-Message-Id: <DB63G6T323QW.2AQUT656TKCGJ@linaro.org>
-To: "Anshul Dalal" <anshuld@ti.com>, <u-boot@lists.denx.de>
-Cc: <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
- <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>, <devarsht@ti.com>
-Subject: Re: [PATCH v5 3/4] mach-k3: add dynamic mmu fixups for SPL stage
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-X-Mailer: aerc 0.20.0
-References: <20250703133533.104758-1-anshuld@ti.com>
- <20250703133533.104758-4-anshuld@ti.com>
-In-Reply-To: <20250703133533.104758-4-anshuld@ti.com>
+ d=1e100.net; s=20230601; t=1751907246; x=1752512046;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ode0YuFIqPHwUpcPwlFqcplX+H+gCLhL7GUnTQe5KlM=;
+ b=fXX+M1xZnR5oA89pl/wgv9AMeamegNqmCqIOdtqnmcBWQ6/DArqRxPsG20WAKv9/E/
+ Cc4aP/jPRDBzFz4PEjS7cO8FomZtNxpmXq8dGD5/PfZjpo0IaKYLfVmPPDi+NkacjYCW
+ YKPy6IXBd9CHN0pa0TpjMeGDfTE/hn+cQxeTq3MEoBMIUOq3pRPibAxijB7LP9t8A/Py
+ ESkcGO9pfP543kKiX0upWYzY+RmRwvBJnAizkADz4FWsvz72n35QilvP5EWrYk+dt0jP
+ DPazgJ8H1YzUUXsbaGbzyVfVbGMrF/pdk8ZHXlBnBP8sAK0285uBbCFXEqVvwDPrdP7q
+ 9qgA==
+X-Gm-Message-State: AOJu0YzgVXqNR6bgkqjYA1/pHlqYcRgruhzOghPgssHQSDCWWC7cwAsI
+ I20bcLbL/nfOd2oYm1ScQj+RKsfibrLGMlFDVTlbVyjQwhnFxMEPAbtH8L2nVa1t
+X-Gm-Gg: ASbGncsy5znE3wmJwQzNafIRJkFeui5ZYzNVjX1Fpy2GKVjSfqCW20ZFoESulvRyFsi
+ PQnu7UwTOpiI24rfVoC6v31uRwmEpVLa5yynRetQ2LIKogkdMn7mGVLe/qAClImyUTIwopIxArr
+ jdzMRkBJWcS75h4Wvx6CIA1s8nigYfYcphVM0lk1Fa9eRYTbyGE8aVaOpFVh2EplTRl4tWhsVAJ
+ GkmK1AphGoG1bsMRl6e4mqxeDtCmZ5jRuqn0pqXFtYq+KC3MA4CalXm0Jv+wm5RIH+Sa85XMsg3
+ t8sNnO/jhBYmTnrjcQP2Ltw9EmQwptBvg8eEP2sqakvNQ5IoppxF/kD/TrPH87FjWl2JOzCxwTl
+ mEWPvIgpRFCO+T/GssTU9tHOsBRcnaAuV1rRg5w5MsrIGBEyvsbiHvyWEtWzU
+X-Google-Smtp-Source: AGHT+IHw6cl3lkEh37osRtP30fjQeqLZM6KMrMga1461iZ3fkVfZ4NEl2t3ldmuodNSWVDHcv7NOsg==
+X-Received: by 2002:a05:600c:6819:b0:453:2433:1c5b with SMTP id
+ 5b1f17b1804b1-454ccc5661dmr3171285e9.5.1751907245760; 
+ Mon, 07 Jul 2025 09:54:05 -0700 (PDT)
+Received: from zgw.local.lan (abordeaux-256-1-90-105.w90-11.abo.wanadoo.fr.
+ [90.11.209.105]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-454a9969409sm148180395e9.4.2025.07.07.09.54.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Jul 2025 09:54:05 -0700 (PDT)
+From: Lucas Dietrich <ld.adecy@gmail.com>
+X-Google-Original-From: Lucas Dietrich <lucas.dietrich.git@proton.me>
+To: u-boot@lists.denx.de
+Cc: mr.nuke.me@gmail.com,
+	Lucas Dietrich <lucas.dietrich.git@proton.me>
+Subject: [PATCH] ecdsa: fix segfault in mkimage when "-r" option is not set
+Date: Mon,  7 Jul 2025 17:55:50 +0200
+Message-Id: <20250707155550.310829-1-lucas.dietrich.git@proton.me>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 07 Jul 2025 22:10:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,109 +97,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul,
+Fix a segmentation fault in the ECDSA signing logic of `mkimage`
+that occurs when the "-r" option is not specified.
 
-On Thu Jul 3, 2025 at 4:35 PM EEST, Anshul Dalal wrote:
-> On platforms with spl splash support such as 62p and 62x
-> (CONFIG_VIDEO=3Dy), the top of DDR is reserved for the framebuffer.
->
-> The size of the framebuffer is computed at runtime by video_reserve.
-> During the MMU configuration an entry corresponding to the framebuffer
-> should be dynamically created to properly allocate the required space
-> for the framebuffer.
->
-> Therefore this patch adds k3_spl_mem_map_init which adds the required
-> MMU entry by querying the gd after the framebuffer size has been
-> computed in spl_reserve_video_from_ram_top.
->
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
->  arch/arm/mach-k3/arm64/arm64-mmu.c | 13 ++++++++++++-
->  arch/arm/mach-k3/common.c          | 17 ++++++++++++++---
->  2 files changed, 26 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/=
-arm64-mmu.c
-> index 49dd6fcb23b..b1b287f2114 100644
-> --- a/arch/arm/mach-k3/arm64/arm64-mmu.c
-> +++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
-> @@ -131,6 +131,13 @@ static int k3_setup_extra_mem_banks(unsigned int *ma=
-p_idx)
->  	return 0;
->  }
->
-> +static void k3_spl_mem_map_init(unsigned int *map_idx)
-> +{
-> +	if (CONFIG_IS_ENABLED(VIDEO))
-> +		k3_mmu_add_cachable_entry(gd_video_bottom(), gd_video_top(),
-> +					  map_idx);
-> +}
-> +
+This reproduces the logic in `lib/rsa/rsa-sign.c` by checking if
+`info->require_keys` is non-null before passing it to
+`fdt_setprop_string()`.
 
-I don't know wnough details for this board, but generally speaking we shoul=
-d be doing
-this commonly for all arm64 platforms. There's mmu code for that. Can you e=
-xplain why
-this is only useful to k3?
+Signed-off-by: Lucas Dietrich <lucas.dietrich.git@proton.me>
+---
+ lib/ecdsa/ecdsa-libcrypto.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-Thanks
-/Ilias
->  static int k3_uboot_mem_map_init(unsigned int *map_idx)
->  {
->  	int ret;
-> @@ -159,7 +166,11 @@ int k3_mem_map_init(void)
->
->  	map_idx++;
->
-> -	ret =3D k3_uboot_mem_map_init(&map_idx);
-> +	if (xpl_phase() =3D=3D PHASE_SPL)
-> +		k3_spl_mem_map_init(&map_idx);
-> +	else
-> +		ret =3D k3_uboot_mem_map_init(&map_idx);
-> +
->  	if (ret)
->  		return ret;
->
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index fc230f180d0..e72413b9803 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -32,6 +32,7 @@
->  #include <dm/device-internal.h>
->
->  #include <asm/arch/k3-qos.h>
-> +#include <mach/k3-ddr.h>
->
->  struct ti_sci_handle *get_ti_sci_handle(void)
->  {
-> @@ -224,16 +225,26 @@ void spl_enable_cache(void)
->
->  	dram_init();
->
-> -	/* reserve TLB table */
-> -	gd->arch.tlb_size =3D PGTABLE_SIZE;
-> -
->  	gd->ram_top +=3D get_effective_memsize();
-> +	/* keep ram_top in the 32-bit address space */
-> +	if (gd->ram_top >=3D 0x100000000)
-> +		gd->ram_top =3D (phys_addr_t)0x100000000;
-> +
->  	gd->relocaddr =3D gd->ram_top;
->
->  	ret =3D spl_reserve_video_from_ram_top();
->  	if (ret)
->  		panic("Failed to reserve framebuffer memory (%d)\n", ret);
->
-> +	if (IS_ENABLED(CONFIG_ARM64)) {
-> +		ret =3D k3_mem_map_init();
-> +		if (ret)
-> +			panic("Failed to setup MMU table (%d)\n", ret);
-> +	}
-> +
-> +	/* reserve TLB table */
-> +	gd->arch.tlb_size =3D PGTABLE_SIZE;
-> +
->  	gd->arch.tlb_addr =3D gd->relocaddr - gd->arch.tlb_size;
->  	gd->arch.tlb_addr &=3D ~(0x10000 - 1);
->  	debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index f0095e9dbcf..f48df2b870f 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -345,10 +345,12 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
+-				 info->require_keys);
+-	if (ret < 0)
+-		return ret;
++	if (info->require_keys) {
++		ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
++					 info->require_keys);
++		if (ret < 0)
++			return ret;
++	}
+ 
+ 	return key_node;
+ }
+-- 
+2.39.5
 
