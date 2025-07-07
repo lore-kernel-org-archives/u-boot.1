@@ -4,65 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9047C83F07
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 15:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 491C4C8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 15:55:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DFE98324C;
+	by phobos.denx.de (Postfix) with ESMTP id DA49983264;
 	Mon,  7 Jul 2025 17:54:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="laL/pH72";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="BAztC1wX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 036F583121; Mon,  7 Jul 2025 13:43:12 +0200 (CEST)
+ id 3A1E583121; Mon,  7 Jul 2025 13:44:16 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8429F830CA
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:43:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5EB4830CA
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:44:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=2768a2b95=Varshini.Rajendran@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1751888589; x=1783424589;
+ t=1751888653; x=1783424653;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=LtAfNFKPE/caTdaHGeTJbccY/xKn0F2sjiKEBF3zve8=;
- b=laL/pH729f3My516vTzZp8fq422RvfNu1WUWaIbBGT507W8DIZ/8/8JR
- Sq5gMtnInm9XXQhQwOgiGylTslFKYfaQ30DRkOcDIgsyw/FePyi0+E+RA
- azE7TO2BweZcM+PNtCHaBPb6nnwTvt7Jhb5aFzg4eokuC7c1crJjO/rZ1
- FX59OxaaDsfV9ClTVXprHaKi2etvfRf4nj0hXDAzDGTaWtJK2mX0JiVEG
- NLYgwSvkjcBZ7m97IRNRAaikPPDq6onqnZDCuT1PhdaV9wyWl00xrowXh
- YvN5ugpcuwgewOS0bBaH30zZLCn8ELSDtzQXOLklee8vPslQYDXFwjixO Q==;
-X-CSE-ConnectionGUID: gbTpSdOhQhCztcCm+eT6eQ==
-X-CSE-MsgGUID: XKijB7XfS7OLmyVEtHOG4A==
-X-IronPort-AV: E=Sophos;i="6.16,294,1744095600"; d="scan'208";a="44272061"
+ bh=d+Z33o5qe4qP2QGCGEnA2fs0BmviHoUznbubUUH7/CU=;
+ b=BAztC1wX505uYb9QT/a7gLR7cvtzTUraXl45W3rVPRDoJFSwKD37w1XF
+ XFaSZNc9KMmRukEcBH8rT8JvP1iQ0YKRZDygGRjb95W7aqKgH42+qgL4O
+ DCvFWwyxDkJPQ/YX1aJPJyG4hRii9xeENw9z4JLiFMMj5kuYGqj63Q7JU
+ 3FGs2zxcGI/cECkicScg7WFV+Uv1m9ZqtHBTlacCKOU6YkOtP+QXGhojJ
+ LzcREmZ5NNiQrhkpbTAiDdMP28NOm+oMNDaqvVr8Bz5+NAMAUjVA2kCWv
+ h7xcaTGZ7QaYBoOBZSTME8Acr1DT0km/GF56Pm1emCzfI7HmtjspYOTjB Q==;
+X-CSE-ConnectionGUID: FyvGSvafSDmQ2xh2YdENhg==
+X-CSE-MsgGUID: 9TDPq4EZSbuZUtLJVP+1PA==
+X-IronPort-AV: E=Sophos;i="6.16,294,1744095600"; d="scan'208";a="43164945"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 07 Jul 2025 04:43:08 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 07 Jul 2025 04:44:12 -0700
+Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Mon, 7 Jul 2025 04:42:58 -0700
+ 15.1.2507.44; Mon, 7 Jul 2025 04:43:50 -0700
 Received: from che-dk-mpulab01.microchip.com (10.10.85.11) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Mon, 7 Jul 2025 04:42:54 -0700
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
+ 15.1.2507.44 via Frontend Transport; Mon, 7 Jul 2025 04:43:48 -0700
 From: Varshini Rajendran <varshini.rajendran@microchip.com>
 To: <eugen.hristev@linaro.org>, <ryan.wanner@microchip.com>,
- <manikandan.m@microchip.com>, <sjg@chromium.org>,
- <varshini.rajendran@microchip.com>,
- <balamanikandan.gunasundar@microchip.com>, <Romain.Sioen@microchip.com>,
- <u-boot@lists.denx.de>
-CC: Ryan Wanner <Ryan.Wanner@microchip.com>
-Subject: [PATCH 5/6] board: sama7d65_curiosity: Add support for
+ <Romain.Sioen@microchip.com>, <u-boot@lists.denx.de>
+CC: <varshini.rajendran@microchip.com>, Ryan Wanner <Ryan.Wanner@microchip.com>
+Subject: [PATCH 6/6] configs: sama7d65_curiosity: Add defconfig for
  sama7d65_curiosity
-Date: Mon, 7 Jul 2025 17:06:50 +0530
-Message-ID: <20250707113650.4135507-1-varshini.rajendran@microchip.com>
+Date: Mon, 7 Jul 2025 17:07:43 +0530
+Message-ID: <20250707113743.4135558-1-varshini.rajendran@microchip.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
 References: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
@@ -88,201 +85,139 @@ X-Virus-Status: Clean
 
 From: Ryan Wanner <Ryan.Wanner@microchip.com>
 
-Add board specific functions for sama7d65_curiosity.
+Add initial mmc defconfig to boot from SDMMC1.
 
 Signed-off-by: Ryan Wanner <Ryan.Wanner@microchip.com>
+Signed-off-by: Romain Sioen <Romain.Sioen@microchip.com>
 ---
- arch/arm/mach-at91/Kconfig                    |  8 ++
- board/atmel/sama7d65_curiosity/Kconfig        | 15 ++++
- board/atmel/sama7d65_curiosity/MAINTAINERS    |  5 ++
- board/atmel/sama7d65_curiosity/Makefile       |  7 ++
- .../sama7d65_curiosity/sama7d65_curiosity.c   | 75 +++++++++++++++++++
- include/configs/sama7d65_curiosity.h          | 20 +++++
- 6 files changed, 130 insertions(+)
- create mode 100644 board/atmel/sama7d65_curiosity/Kconfig
- create mode 100644 board/atmel/sama7d65_curiosity/MAINTAINERS
- create mode 100644 board/atmel/sama7d65_curiosity/Makefile
- create mode 100644 board/atmel/sama7d65_curiosity/sama7d65_curiosity.c
- create mode 100644 include/configs/sama7d65_curiosity.h
+ board/atmel/sama7d65_curiosity/MAINTAINERS |   1 +
+ configs/sama7d65_curiosity_mmc1_defconfig  | 108 +++++++++++++++++++++
+ 2 files changed, 109 insertions(+)
+ create mode 100644 configs/sama7d65_curiosity_mmc1_defconfig
 
-diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
-index cc9ed89e544..7d00f1650b4 100644
---- a/arch/arm/mach-at91/Kconfig
-+++ b/arch/arm/mach-at91/Kconfig
-@@ -304,6 +304,13 @@ config TARGET_SAMA7G54_CURIOSITY
- 	  4Gbit SLC nand-flash, MCP16502 PMIC, 2 x Mikrobus connectors,
- 	  1 x SD-Card connector, 1 x M.2 slot, 3 x USB
- 
-+config TARGET_SAMA7D65_CURIOSITY
-+	bool "SAMA7D65 CURIOSITY board"
-+	select SAMA7D65
-+	select BOARD_EARLY_INIT_F
-+	select BOARD_LATE_INIT
-+	imply OF_UPSTREAM
-+
- config TARGET_TAURUS
- 	bool "Support taurus"
- 	select AT91SAM9G20
-@@ -370,6 +377,7 @@ source "board/atmel/sam9x60_curiosity/Kconfig"
- source "board/atmel/sam9x75_curiosity/Kconfig"
- source "board/atmel/sama7g5ek/Kconfig"
- source "board/atmel/sama7g54_curiosity/Kconfig"
-+source "board/atmel/sama7d65_curiosity/Kconfig"
- source "board/atmel/sama5d2_ptc_ek/Kconfig"
- source "board/atmel/sama5d2_xplained/Kconfig"
- source "board/atmel/sama5d27_som1_ek/Kconfig"
-diff --git a/board/atmel/sama7d65_curiosity/Kconfig b/board/atmel/sama7d65_curiosity/Kconfig
-new file mode 100644
-index 00000000000..21ff432f2c1
---- /dev/null
-+++ b/board/atmel/sama7d65_curiosity/Kconfig
-@@ -0,0 +1,15 @@
-+if TARGET_SAMA7D65_CURIOSITY
-+
-+config SYS_BOARD
-+	default "sama7d65_curiosity"
-+
-+config SYS_VENDOR
-+	default "atmel"
-+
-+config SYS_SOC
-+	default "at91"
-+
-+config SYS_CONFIG_NAME
-+	default "sama7d65_curiosity"
-+
-+endif
 diff --git a/board/atmel/sama7d65_curiosity/MAINTAINERS b/board/atmel/sama7d65_curiosity/MAINTAINERS
-new file mode 100644
-index 00000000000..be67d56dc5b
---- /dev/null
+index be67d56dc5b..054af3c6541 100644
+--- a/board/atmel/sama7d65_curiosity/MAINTAINERS
 +++ b/board/atmel/sama7d65_curiosity/MAINTAINERS
-@@ -0,0 +1,5 @@
-+SAMA7D65 CURIOSITY BOARD
-+M:     Ryan Wanner <ryan.wanner@microchip.com>
-+S:     Maintained
-+F:     board/atmel/sama7d65_curiosity.c
-+F:     include/configs/sama7d65_curiosity.h
-diff --git a/board/atmel/sama7d65_curiosity/Makefile b/board/atmel/sama7d65_curiosity/Makefile
+@@ -3,3 +3,4 @@ M:     Ryan Wanner <ryan.wanner@microchip.com>
+ S:     Maintained
+ F:     board/atmel/sama7d65_curiosity.c
+ F:     include/configs/sama7d65_curiosity.h
++F:     configs/sama7d65_curiosity_mmc1_defconfig
+diff --git a/configs/sama7d65_curiosity_mmc1_defconfig b/configs/sama7d65_curiosity_mmc1_defconfig
 new file mode 100644
-index 00000000000..56d011d1d81
+index 00000000000..e819e51b458
 --- /dev/null
-+++ b/board/atmel/sama7d65_curiosity/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier:     GPL-2.0+
-+#
-+# Copyright (C) 2024 Microchip Technology Inc. and its subsidiaries
-+#
-+# Author: Ryan Wanner <ryan.wanner@microchip.com>
-+
-+obj-y += sama7d65_curiosity.o
-diff --git a/board/atmel/sama7d65_curiosity/sama7d65_curiosity.c b/board/atmel/sama7d65_curiosity/sama7d65_curiosity.c
-new file mode 100644
-index 00000000000..713b1b9d959
---- /dev/null
-+++ b/board/atmel/sama7d65_curiosity/sama7d65_curiosity.c
-@@ -0,0 +1,75 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Microchip Technology, Inc. and its subsidiaries
-+ *
-+ * Author: Ryan Wanner <ryan.wanner@microchip.com>
-+ *
-+ */
-+
-+#include <debug_uart.h>
-+#include <init.h>
-+#include <fdtdec.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <asm/arch/at91_common.h>
-+#include <asm/arch/atmel_pio4.h>
-+#include <asm/arch/clk.h>
-+#include <asm/arch/gpio.h>
-+#include <asm/arch/sama7d65.h>
-+#include <asm/mach-types.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static void board_leds_init(void)
-+{
-+	atmel_pio4_set_pio_output(AT91_PIO_PORTA, 21, 0);	/* LED BLUE */
-+	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 17, 0);	/* LED RED */
-+	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 15, 1);	/* LED GREEN */
-+}
-+
-+int board_late_init(void)
-+{
-+	return 0;
-+}
-+
-+#if (IS_ENABLED(CONFIG_DEBUG_UART_BOARD_INIT))
-+static void board_uart0_hw_init(void)
-+{
-+	/* FLEXCOM6 IO0 */
-+	atmel_pio4_set_b_periph(AT91_PIO_PORTD, 18, 0);
-+	/* FLEXCOM6 IO1 */
-+	atmel_pio4_set_b_periph(AT91_PIO_PORTD, 19, 0);
-+
-+	at91_periph_clk_enable(ATMEL_ID_FLEXCOM6);
-+}
-+
-+void board_debug_uart_init(void)
-+{
-+	board_uart0_hw_init();
-+}
-+#endif
-+
-+int board_early_init_f(void)
-+{
-+	return 0;
-+}
-+
-+int board_init(void)
-+{
-+	/* address of boot parameters */
-+	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
-+
-+	board_leds_init();
-+
-+	return 0;
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-diff --git a/include/configs/sama7d65_curiosity.h b/include/configs/sama7d65_curiosity.h
-new file mode 100644
-index 00000000000..9316b104ee3
---- /dev/null
-+++ b/include/configs/sama7d65_curiosity.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Configuration file for the SAMA7D65 Curiosity Board.
-+ *
-+ * Copyright (C) 2024 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Ryan Wanner <ryan.wanner@microchip.com>
-+ *
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#define CFG_SYS_AT91_SLOW_CLOCK      32768
-+#define CFG_SYS_AT91_MAIN_CLOCK      24000000 /* from 24 MHz crystal */
-+/* SDRAM */
-+#define CFG_SYS_SDRAM_BASE		0x60000000
-+#define CFG_SYS_SDRAM_SIZE		0x40000000
-+
-+#endif
++++ b/configs/sama7d65_curiosity_mmc1_defconfig
+@@ -0,0 +1,108 @@
++CONFIG_ARM=y
++CONFIG_ARCH_AT91=y
++CONFIG_TEXT_BASE=0x66f00000
++CONFIG_SYS_MALLOC_F_LEN=0x11000
++CONFIG_TARGET_SAMA7D65_CURIOSITY=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60014ef0
++CONFIG_SYS_MEMTEST_START=0x60000000
++CONFIG_SYS_MEMTEST_END=0x70000000
++CONFIG_ENV_SIZE=0x4000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="microchip/at91-sama7d65_curiosity"
++CONFIG_DEBUG_UART_BOARD_INIT=y
++CONFIG_DEBUG_UART_BASE=0xe2020200
++CONFIG_DEBUG_UART_CLOCK=100000000
++CONFIG_DEBUG_UART=y
++CONFIG_ENV_VARS_UBOOT_CONFIG=y
++CONFIG_SYS_LOAD_ADDR=0x62000000
++CONFIG_FIT=y
++CONFIG_SD_BOOT=y
++CONFIG_USE_BOOTARGS=y
++CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootwait"
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="fatload mmc 0:1 0x61000000 at91-sama7d65_curiosity.dtb; fatload mmc 0:1 0x62000000 zImage; bootz 0x62000000 - 0x61000000"
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_BOOTZ=y
++CONFIG_SYS_BOOTM_LEN=0x2000000
++CONFIG_CMD_IMI=y
++CONFIG_CMD_MD5SUM=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_STRINGS=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DM=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++# CONFIG_CMD_LOADS is not set
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_NAND=y
++CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_WGET=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_DNS=y
++CONFIG_CMD_HASH=y
++CONFIG_HASH_VERIFY=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_FAT=y
++CONFIG_OF_CONTROL=y
++CONFIG_ENV_IS_IN_FAT=y
++CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_ARP_TIMEOUT=200
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_DM=y
++CONFIG_CLK=y
++CONFIG_CLK_CCF=y
++CONFIG_CLK_AT91=y
++CONFIG_AT91_UTMI=y
++CONFIG_AT91_GENERIC_CLK=y
++CONFIG_AT91_SAM9X60_PLL=y
++CONFIG_CPU=y
++CONFIG_ATMEL_PIO4=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_AT91=y
++CONFIG_ATMEL_EBI=y
++CONFIG_MFD_ATMEL_SMC=y
++CONFIG_I2C_EEPROM=y
++CONFIG_MICROCHIP_FLEXCOM=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ATMEL=y
++CONFIG_MTD=y
++CONFIG_MTD_RAW_NAND=y
++CONFIG_DM_MTD=y
++CONFIG_DM_NAND_ATMEL=y
++CONFIG_SYS_NAND_ONFI_DETECTION=y
++CONFIG_DM_SPI_FLASH=n
++CONFIG_SF_DEFAULT_MODE=0x0
++CONFIG_SF_DEFAULT_SPEED=133000000
++CONFIG_SPI_FLASH_SFDP_SUPPORT=n
++CONFIG_SPI_FLASH_SOFT_RESET=n
++CONFIG_SPI_FLASH_MACRONIX=n
++CONFIG_SPI_FLASH_MX66LM1G45G=n
++CONFIG_SPI_FLASH_SST=n
++CONFIG_SPI_FLASH_MTD=n
++CONFIG_DM_ETH=y
++CONFIG_PHY_SMSC=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_MACB=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_AT91PIO4=y
++CONFIG_DM_RESET=y
++CONFIG_RESET_AT91=y
++CONFIG_DM_SERIAL=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_ATMEL_USART=y
++CONFIG_SPI=n
++# CONFIG_ATMEL_SPI is not set
++CONFIG_TIMER=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_CMD_RESET=y
++CONFIG_SYSRESET_AT91=y
++CONFIG_MCHP_PIT64B_TIMER=y
++CONFIG_OF_LIBFDT_OVERLAY=y
++# CONFIG_EFI_LOADER_HII is not set
++CONFIG_PHANDLE_CHECK_SEQ=y
 -- 
 2.45.2
 
