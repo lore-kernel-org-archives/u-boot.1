@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E5AEC8303C
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 15:54:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 728F8C83F07
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 15:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFF7B83189;
-	Mon,  7 Jul 2025 17:54:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B31E831C2;
+	Mon,  7 Jul 2025 17:54:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="kACCDefD";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="VxXys5rw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2159D830E4; Mon,  7 Jul 2025 13:36:06 +0200 (CEST)
+ id A7310830E4; Mon,  7 Jul 2025 13:38:09 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F63D8305C
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:36:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A4758305C
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:38:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=2768a2b95=Varshini.Rajendran@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1751888163; x=1783424163;
- h=from:to:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=t+SJL2gyIU5Tt4nFuDZyo6DFEwj8VapwEHtre71jghA=;
- b=kACCDefDiWFjsXeXBegeoB8Si7PyqBt5PXOg0KKxKN0YXFJ6dEyukk7j
- kSZ/feoQbiF9A2RCayEOPs/gt1V3LnV6HOKptjQjIp0qrfn5yiDpRXlyn
- kEFN51RNRw7j8btAL5ciAmyaQT9ziAwlw/j/yHq33QFmcloS+rcgemUx2
- ijVjp2o6zkgOQa4kHiGdgRrvfYmmMS+T9o4sv7/z1ZLL0Ui82kWcIWMT1
- uMuoNzbc1DG3qP83xUJo6CLYAU2ID3s18CUIzoxNMEVTccCnS3OckYHmL
- mbeLUlUOFzV5WLJlrwWXYEmifUJl7exsiEs0SX5/uSmzllTUdyYwOnKde w==;
-X-CSE-ConnectionGUID: g3f6m/IuQeKiZIhKrT2jbg==
-X-CSE-MsgGUID: Z9+ihSJ8RhCyuDknSMyuFQ==
-X-IronPort-AV: E=Sophos;i="6.16,294,1744095600"; d="scan'208";a="44271891"
+ t=1751888287; x=1783424287;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=ilPtvBJiW7LJ77p1JUpK0JBYKHK30m0dOS5gnr6i/IM=;
+ b=VxXys5rwN1aDmARVLy/2WMn4IA+ZHa8ZQVLW+ps+lIQC3RydrXv2IQYX
+ CZie84jfyM5uY0PMx8G6OBpPrEDsyrPuXygp8r8SngAp74anjZFEOFLfV
+ 5OT8eLWbTuRxde5XmnqT8Qve4Gw68YlyVmLPzmqthj/MPAit8CyozfKUM
+ qVtXt2+kX7qWC2tuAEdJ8isL6B2OZj9tlYYCIdpRbkoIiVlDhC5LaMZzA
+ KbzUfq5831MiNSNHuwvaeDmlkSKMUbrwQMCbs0kIbpWCLOlZ22Poot1M+
+ dbZjqyFBib/9Ki3w4+c8Z6Ub8pmVU6mxXKo9Yud71o0jZlcxM8+OE6Avk g==;
+X-CSE-ConnectionGUID: Y+uV++1dTMWM329rmu1xxQ==
+X-CSE-MsgGUID: 12QEHHMyQJae5NR+vkbwQw==
+X-IronPort-AV: E=Sophos;i="6.16,294,1744095600"; d="scan'208";a="43164824"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 07 Jul 2025 04:36:02 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 07 Jul 2025 04:38:05 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Mon, 7 Jul 2025 04:35:43 -0700
+ 15.1.2507.44; Mon, 7 Jul 2025 04:37:35 -0700
 Received: from che-dk-mpulab01.microchip.com (10.10.85.11) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Mon, 7 Jul 2025 04:35:40 -0700
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
+ 15.1.2507.44 via Frontend Transport; Mon, 7 Jul 2025 04:37:33 -0700
 From: Varshini Rajendran <varshini.rajendran@microchip.com>
-To: <eugen.hristev@linaro.org>, <ryan.wanner@microchip.com>, <lukma@denx.de>, 
- <seanga2@gmail.com>, <varshini.rajendran@microchip.com>,
- <manikandan.m@microchip.com>, <nicolas.ferre@microchip.com>,
- <sjg@chromium.org>, <balamanikandan.gunasundar@microchip.com>,
- <Romain.Sioen@microchip.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 0/6] Add support for sama7d65 SoC and sama7d65 curiosity board
-Date: Mon, 7 Jul 2025 16:59:34 +0530
-Message-ID: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
+To: <lukma@denx.de>, <seanga2@gmail.com>, <Ryan.Wanner@microchip.com>,
+ <varshini.rajendran@microchip.com>, <u-boot@lists.denx.de>
+CC: <eugen.hristev@linaro.org>
+Subject: [PATCH 1/6] clk: at91: Update MAX PLL and master clk ID
+Date: Mon, 7 Jul 2025 17:01:27 +0530
+Message-ID: <20250707113127.4130992-1-varshini.rajendran@microchip.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
+References: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -82,49 +82,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds support for the new SoC sama7d65.
- - sama7d65 SoC is added
- - Clock driver for sama7d65 is added
- - Target board SAMA7D65 Curiosity is added with its differences in DT
- and MMC config support
+From: Ryan Wanner <Ryan.Wanner@microchip.com>
 
-Ryan Wanner (6):
-  clk: at91: Update MAX PLL and master clk ID
-  clk: at91: sama7d65: add clock support
-  ARM: mach-at91: add support for new SoC sama7d65
-  ARM: dts: at91: sama7d65-curiosity: Add DT tweaks for
-    sama7d65-curiosity board
-  board: sama7d65_curiosity: Add support for sama7d65_curiosity
-  configs: sama7d65_curiosity: Add defconfig for sama7d65_curiosity
+Update the MAX PLL and master CLK ID to support sama7d65
+SoC family.
 
- .../dts/at91-sama7d65_curiosity-u-boot.dtsi   |   80 +
- arch/arm/mach-at91/Kconfig                    |   13 +
- arch/arm/mach-at91/armv7/Makefile             |    1 +
- arch/arm/mach-at91/armv7/sama7d65_devices.c   |   31 +
- arch/arm/mach-at91/include/mach/hardware.h    |    2 +
- arch/arm/mach-at91/include/mach/sama7d65.h    |  107 ++
- board/atmel/sama7d65_curiosity/Kconfig        |   15 +
- board/atmel/sama7d65_curiosity/MAINTAINERS    |    6 +
- board/atmel/sama7d65_curiosity/Makefile       |    7 +
- .../sama7d65_curiosity/sama7d65_curiosity.c   |   75 +
- configs/sama7d65_curiosity_mmc1_defconfig     |  108 ++
- drivers/clk/at91/Makefile                     |    1 +
- drivers/clk/at91/clk-master.c                 |    2 +-
- drivers/clk/at91/clk-sam9x60-pll.c            |    2 +-
- drivers/clk/at91/sama7d65.c                   | 1451 +++++++++++++++++
- include/configs/sama7d65_curiosity.h          |   20 +
- 16 files changed, 1919 insertions(+), 2 deletions(-)
- create mode 100644 arch/arm/dts/at91-sama7d65_curiosity-u-boot.dtsi
- create mode 100644 arch/arm/mach-at91/armv7/sama7d65_devices.c
- create mode 100644 arch/arm/mach-at91/include/mach/sama7d65.h
- create mode 100644 board/atmel/sama7d65_curiosity/Kconfig
- create mode 100644 board/atmel/sama7d65_curiosity/MAINTAINERS
- create mode 100644 board/atmel/sama7d65_curiosity/Makefile
- create mode 100644 board/atmel/sama7d65_curiosity/sama7d65_curiosity.c
- create mode 100644 configs/sama7d65_curiosity_mmc1_defconfig
- create mode 100644 drivers/clk/at91/sama7d65.c
- create mode 100644 include/configs/sama7d65_curiosity.h
+Signed-off-by: Ryan Wanner <Ryan.Wanner@microchip.com>
+---
+ drivers/clk/at91/clk-master.c      | 2 +-
+ drivers/clk/at91/clk-sam9x60-pll.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/drivers/clk/at91/clk-master.c b/drivers/clk/at91/clk-master.c
+index d28775d64d3..cdc5271fa83 100644
+--- a/drivers/clk/at91/clk-master.c
++++ b/drivers/clk/at91/clk-master.c
+@@ -37,7 +37,7 @@
+ 
+ #define PMC_MCR_ID(x)		((x) & PMC_MCR_ID_MSK)
+ 
+-#define MASTER_MAX_ID		4
++#define MASTER_MAX_ID		10
+ 
+ struct clk_master {
+ 	void __iomem *base;
+diff --git a/drivers/clk/at91/clk-sam9x60-pll.c b/drivers/clk/at91/clk-sam9x60-pll.c
+index df8172bccac..65be2775ac3 100644
+--- a/drivers/clk/at91/clk-sam9x60-pll.c
++++ b/drivers/clk/at91/clk-sam9x60-pll.c
+@@ -32,7 +32,7 @@
+ #define UPLL_DIV		2
+ #define PLL_MUL_MAX		(FIELD_GET(PMC_PLL_CTRL1_MUL_MSK, UINT_MAX) + 1)
+ 
+-#define PLL_MAX_ID		7
++#define PLL_MAX_ID		8
+ 
+ struct sam9x60_pll {
+ 	void __iomem *base;
 -- 
 2.45.2
 
