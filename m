@@ -4,81 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7146C71130
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 20:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC17FC83030
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 20:16:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C350831E4;
-	Mon,  7 Jul 2025 22:10:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 58D0F831B5;
+	Mon,  7 Jul 2025 22:16:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O5Jq2VDc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nbaVVRD1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CD93831C2; Mon,  7 Jul 2025 19:03:53 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 0F2B3831C3; Mon,  7 Jul 2025 22:16:05 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16FAA8318E
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 19:03:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9676E831A4
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 22:16:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=magnus.damm@gmail.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e7dc89108bfso2944704276.3
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 10:03:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-60c79bedc19so5683867a12.3
+ for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 13:16:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751907830; x=1752512630; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1751919362; x=1752524162; darn=lists.denx.de;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zqhvfK3Ne4vket1167fNWBwNJTq5WB04BU58VsOLG+Q=;
- b=O5Jq2VDcSSaXJdhgQwqa/xCmWxQBk0WUvL2w0AMxIPbaQWXRH56gqsgksxUAdY3bkr
- Y//udt8TTuliDHdThmaO6iWIyksAaNowmt6FNb8Ww6Ml4uBSKGQ0Hu9g1Lc7xwihQrVE
- HXgo6T1Bd0+BqS41t53vJHh9Q7eXEDJNQPZhcYYJtkP8TsB0r2oLiTyj5a9TmseSmH74
- ELaWe4HEWdDIZJEFIYYUwl9wjWVYEwVsxV+/2WUw5p3hlMDNWdgDl0mvNG0Ftg0KyONr
- 4VoVvjI/gTfGowDlwAXeyj1Vg4fymprS5Z+mO33gsGMw+jcwMPyaJvN2kDf/MkJeF17K
- OyWw==
+ bh=8tyMwEhq2WnV7cguLwLZ0F48Z6BvxAJeIQoEvVo9r/0=;
+ b=nbaVVRD1MTu65WDEX534f/H+ULAbn2w2x0wuXxXCDcA7XZpUCuOJ6bvY96GGy7bal1
+ i1zt1dnZmWCqf9p/KQJcWiZtBtpmDy28Vh5vmM3KROuQflpNvxH6xa7TI4f1EzCI6yG/
+ Ibkm4hAn/7+qr8i0D+WtHrwcXGNpbrFLVSR4JUG6D6gdW0TPn0317LAjytsw4JuP28Wm
+ AirUqOWow8YmuxKHpXI5+mSoShdDBSwlgFybXFFtMF8b5dDRW0V2JTOC7ReJIiMzQ/sA
+ PcKnCJzV0Ln0IOauZnULcdTUzr/8IExqYALHClf7czHLqAWbaDnA5dhN82CIFHs+Zk1g
+ KzRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751907830; x=1752512630;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zqhvfK3Ne4vket1167fNWBwNJTq5WB04BU58VsOLG+Q=;
- b=FzqKfyjT60LK32LjFBidwm5sWuk5bFPKNBSgpWBTaIAX0RsOGPrVxf5vv0O9ACMKDl
- IgGr69VVt6azo+V7XsLnl5NlMoJHoc3wbgUDk7dgssNv1qLC1QiMaVvsDUdLKflzGuwD
- EY0xgWpfty16tTWjNaUj7ATz1iV/0NlN0ElulM2NAbYGcEEog3SQGUn/3wNemB3Z6fXd
- I1IXj8p8c6JgNGaPZYH3hpOhf+vrH1wMSNTzmrKr6itJhy0Dpht8oF94f3E63lPWQ+8W
- kWN6DElzpH+RgrlPjdWyRWWGGUyH17wGt5IP67dCJRBvTfmOjmY0crzSTbIs/120p3C7
- gTpw==
-X-Gm-Message-State: AOJu0YzPcOWNr7ZdKz+iB1iD8lRMak7IEHZHrG/NbP6m2WwcS7x8wxGi
- uKTbt+oAu0KD+esX/4fm7nDETFPgaNzDlF1r446n6EezZe6gelQsBHQQ9P9kQhzT8y/kS9APGs0
- N+253rEb74vEMgkKV2HVNdIY7pRQG7mm8ub6c
-X-Gm-Gg: ASbGncuHMm7tDlfsExzgoxCVmxiTweFrINlERtmEIetbLwNDNCB/MYCuyDzMtLq5Eiu
- ZcX9fnKb2NLC8EUvc3197/NbrzAOOY40cgfq3XkGcqIJxkbpZ5XSgtpdqHTE6s0dTPiBmSAmME8
- AbIEa5lXd6o6/whb4Q9kHru33g4skaaWkZp4JV3XwUhg==
-X-Google-Smtp-Source: AGHT+IE3j1SjjJJ3MtwXGANMeXlRsAhnsnSG+NKDEPZwwh15geogFJyU3txJH3PVp0DrNDRP7TNHuCuWOrg90bH74FI=
-X-Received: by 2002:a05:690c:62c5:b0:70c:bd93:452d with SMTP id
- 00721157ae682-7179e398a62mr5009737b3.15.1751907829513; Mon, 07 Jul 2025
- 10:03:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
- <175180136965.86839.10195243856147148306.sendpatchset@1.0.0.127.in-addr.arpa>
- <0e525790-79f7-4653-808d-137c1e55ed09@mailbox.org>
-In-Reply-To: <0e525790-79f7-4653-808d-137c1e55ed09@mailbox.org>
-From: Magnus Damm <magnus.damm@gmail.com>
-Date: Mon, 7 Jul 2025 19:03:38 +0200
-X-Gm-Features: Ac12FXwd9U3lrYemWJRiyt4eqqLlEw8BzcX5NI-ILD4MMfd0Aj0bCbMUWgaJMsE
-Message-ID: <CANqRtoQUCmwfYF80KqoBSSYbhzJmR0488R6+zJFxBTyGYXLcwg@mail.gmail.com>
-Subject: Re: [PATCH v3 7/9] net: sh_eth: Adjust RZ/A1, add RZ/A2 support
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org, 
- Chris.Brandt@renesas.com, geert+renesas@glider.be
-Content-Type: text/plain; charset="UTF-8"
+ d=1e100.net; s=20230601; t=1751919362; x=1752524162;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=8tyMwEhq2WnV7cguLwLZ0F48Z6BvxAJeIQoEvVo9r/0=;
+ b=NC1osdHnTuXAFaeleC/5d7NhuIoOyW6aC27EVzN4eSOpiUz+tsaUJaz2dAXJLZDiCs
+ FBSPUTAmMSmqSd5RHFOZxnQEZcANJmYHkOFjL/szd2VkzEKtE4Y1qN1jkwhryp2bgOUZ
+ ZdLM7q3FOJQtR0YsD3CGJamFIe0Y5rxKxglpFFBBR3zA++On5Cj3ANbiX4S6zW1xMEJQ
+ Y8cLL82ccGxpD+gT4dW16L81Mv+jREBjUdRnKHoH77cWer+aqH4w9++2g4LlB18tm5+D
+ GvLyCFsZjZ9KTKpFFvF5/8+sgytlZ4fDGl05nFG+UyyTY7sqEEXVg9NRyG7sYTUOTi8O
+ NfrQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXhciB1FoMBv1RrRn6Gqpc8pUkHVh1xPiyqsEYmIkVbBEG2vrJu2QwPtWl86skHaXk4eOsp9P8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1nROsTBFI+y04ppEua+uuwtTEiTeayuOvmdBwDbD0W21os7/5
+ gC0MXQuyzj7Mxj0QdtfEywtFFROEX4qYULImd9kqHxKczp2SmCdmGPmofo1RBBRdlpI=
+X-Gm-Gg: ASbGncskCs4VKO3LuQw8GeKW3gEKgKZpTiFXqIK//Vkm5aV9ckeajFZQN5NMU4r3LS0
+ ouzJKnxJVhI4rvP1d/oGMIIs8cFE0snYxAoy2R20ClSFGTS9pLCU7X8uBMM4dEOOb1dGMsfGipW
+ K73V9/AHTMIaFTpAU/PVV4WJf1zIi6EXODgOZ74dWAmazVbbhNr943YwnLoaQ92Ed77YB5KgrDI
+ Q6AcoRgdVnuIpI9LWIRA/ovW3VtwSs/hDjO0BVVrHee9XKySKNvbfCfjQ0ByqAijyRVA+LumEWI
+ /5AEPQNxnRPuQYW3bqAIhu/4sn/LIqf5HxOtg10d8k8Cw+Qe/5YZZPYLAJ8/UG4yMP5K8bVvVVk
+ GoWeS5Lm/Nd78uf7scZVAnzjdZxxgoj8RayA=
+X-Google-Smtp-Source: AGHT+IH8Mp1VilUvg01WcO/q1HEnQNJm74bqx3BRTjp2+f3Zq3IoLxSWsHMhJYS0C/MDjkk2Xh3Izg==
+X-Received: by 2002:a17:907:86ab:b0:adb:2a66:85bc with SMTP id
+ a640c23a62f3a-ae3fbd1397bmr1153590866b.34.1751919361957; 
+ Mon, 07 Jul 2025 13:16:01 -0700 (PDT)
+Received: from localhost (ppp089210105145.access.hol.gr. [89.210.105.145])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae3f6b0336asm765625266b.115.2025.07.07.13.16.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Jul 2025 13:16:01 -0700 (PDT)
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 07 Jul 2025 22:10:31 +0200
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 07 Jul 2025 23:15:59 +0300
+Message-Id: <DB63KZ89ZWMY.3KGIHVA42RGM4@linaro.org>
+Cc: <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>
+Subject: Re: [PATCH v5 2/4] mach-k3: add runtime configuration of MMU table
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+To: "Anshul Dalal" <anshuld@ti.com>, <u-boot@lists.denx.de>
+X-Mailer: aerc 0.20.0
+References: <20250703133533.104758-1-anshuld@ti.com>
+ <20250703133533.104758-3-anshuld@ti.com>
+In-Reply-To: <20250703133533.104758-3-anshuld@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,97 +105,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Anshul,
 
-Thanks for all the feedback.
+On Thu Jul 3, 2025 at 4:35 PM EEST, Anshul Dalal wrote:
+> k3_mem_map is used by u-boot to configure the MMU on k3 devices but
+> currently it's a static array which does not scale for platforms with
+> non-standard load addresses for ATF and OP-TEE. Additionally on systems
+> with limited DRAM, more space is mapped than is available on the device.
+>
+> Therefore this patch adds a new k3_mem_map_init function which can
+> be called from dram_init to configure the table at runtime where we
+> can query the required DDR information and reserved regions from the
+> device-tree.
 
-On Mon, Jul 7, 2025 at 5:52=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.org=
-> wrote:
->
-> On 7/6/25 1:29 PM, Magnus Damm wrote:
->
-> > +++ work/drivers/net/sh_eth.c 2025-07-05 17:45:07.333754799 +0900
-> > @@ -144,10 +144,10 @@ static int sh_eth_reset(struct sh_eth_in
-> >   {
-> >   #if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
-> >       int ret =3D 0, i;
-> > -
->
-> Does something like this ...
->
-> if (!device_is_compatible(dev, "..."))
->
-> ... work instead of the ifdef ?
->
-> If yes, it might be even improved into dedicated function:
->
-> static bool device_is_rza2(struct udevice *dev)
-> {
->    if (!IS_ENABLED(CONFIG_RZA2))
->      return false;
->    else
->      return device_is_compatible(dev, "...");
-> }
->
-> That should be compile-time checked and then optimized out, and in case
-> of non-RZA2, this should be optimized out entirely.
+Is this a problem for k3 only? This kind of code should be aimed at the mmu
+support and improving armv8 overall, not specific platforms
 
-While I'm all for trying to clean up the code, unfortunately I don't
-think only adding compat string handling to RZ is going to help that
-much. My apologies for prodding with DT in the SCIF driver for RZA2
-only. The same thing applies there in my opinion. =3D) But we have to
-start somewhere, that's for sure.
-
-By the way, did you see the #ifdeffery and the compile time constants
-in sh_eth.h? Also there seems to be a lot of overlap between
-TYPE_GETHER and TYPE_RZ.
-
-My first take on cleaning up the sh_eth.c driver would probably be to
-dive deeper into the offset tables (such as sh_eth_offset_rz in
-sh_eth.h) and convert the code to during runtime use the offset table
-to determine if a register exists or not. That would take care of a
-bunch of TYPE_GETHER and TYPE_RZ differences and remove some #ifdefs
-from the code as long as the offset tables are correct (which they
-don't seem to be for RZ so those need to be validated as well). Then
-perhaps add some feature flag to handle corner cases like
-'device_needs_polled_reset' to clean up sh_eth_reset().
-
-And during probe() or U-Boot equivalent then using the compat string
-detection mechanism to select appropriate offset table would make
-sense to me.
-
-What do you think? This seems like incremental cleanups though, not
-neccessarily related to RZ. I am happy to clean it up though, if you
-think it would be helpful.
-
-> > +#if !defined(CONFIG_RZA2)
-> >       /* Start e-dmac transmitter and receiver */
-> >       sh_eth_write(port_info, EDSR_ENALL, EDSR);
-> > -
 >
-> [...]
+> A dummy implementation is also added in r5/common.c to allow the build
+> to pass without masking each call to k3_mem_map_init behind an ifdef
+> CONFIG_ARM64.
 >
-> > @@ -722,8 +726,11 @@ static int sh_ether_probe(struct udevice
-> >               goto err_mdio_register;
-> >
-> >       priv->bus =3D mdiodev;
-> > -
-> > +#ifdef BASE_IO_ADDR
-> >       port_info->iobase =3D (void __iomem *)(uintptr_t)BASE_IO_ADDR;
-> > +#else
-> > +     port_info->iobase =3D (void __iomem *)pdata->iobase;
-> > +#endif
->
-> Can the base address be pulled from DT?
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
 
-Actually pdata->iobase comes from DT. Currently BASE_IO_ADDR is not
-set in sh_eth.h for RZ/A1 and RZ/A2. In such case the code above uses
-DT to get the device base address. Other processor variants still rely
-on the compile time constants. And good news, as I wrote in some cover
-email, this driver is with this patch known to work in multi-port
-configuration since RZ/A2 GR-Peach is using ch0 with MII and RZ/A2
-RZA2MBTC is using ch1 RMII. The configuration all comes from DT.
+[...]
 
-Thanks,
+> +
+> +static void k3_mmu_add_cachable_entry(u64 start, u64 end, unsigned int *=
+map_idx)
+> +{
+> +	if (start >=3D end)
+> +		return;
+> +
+> +	k3_mem_map[*map_idx].virt =3D start,
+> +	k3_mem_map[*map_idx].phys =3D start,
+> +	k3_mem_map[*map_idx].size =3D end - start,
+> +	k3_mem_map[*map_idx].attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> +				     PTE_BLOCK_INNER_SHARE;
+> +	(*map_idx)++;
+> +}
 
-Magnus
+Doesn't this need a break-before-make?
+Also why does it have to be a board specific function? Is there something m=
+mu_change_region_attr()
+doesn't do ?
+
+> +
+> +/* It is assumed that if ATF and OPTEE are loaded in DDR, they are loade=
+d to
+> + * first bank only
+> +
+> +static int k3_setup_extra_mem_banks(unsigned int *map_idx)
+> +{
+> +	unsigned int bank;
+> +	int ret;
+> +
+> +	ret =3D fdtdec_setup_memory_banksize();
+> +	if (ret)
+> +		return ret;
+> +
+> +	for (bank =3D 1; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> +		k3_mmu_add_cachable_entry(gd->bd->bi_dram[bank].start,
+> +					  gd->bd->bi_dram[bank].start +
+> +						  gd->bd->bi_dram[bank].size,
+> +					  map_idx);
+> +	}
+> +
+
+ditto
+
+> +static int k3_uboot_mem_map_init(unsigned int *map_idx)
+> +{
+> +	int ret;
+> +
+> +	/* Overwrite the 128MiB SPL entry */
+> +	(*map_idx)--;
+> +
+> +	ret =3D k3_setup_first_mem_bank(map_idx);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (CONFIG_NR_DRAM_BANKS > 1)
+> +		ret =3D k3_setup_extra_mem_banks(map_idx);
+> +
+> +	return ret;
+> +}
+> +
+> diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/in=
+clude/mach/k3-ddr.h
+
+[..]
+
+Thanks
+/Ilias
