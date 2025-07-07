@@ -4,95 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DD23C8303C
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 13:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC63C8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 13:41:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4D348319A;
-	Mon,  7 Jul 2025 15:12:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 163C2830CA;
+	Mon,  7 Jul 2025 15:41:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XYELO+Ga";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e9ZFEqjO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE8B083164; Mon,  7 Jul 2025 15:12:32 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 71E958313B; Mon,  7 Jul 2025 15:41:07 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B1EF830CA
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 15:12:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A968E8305C
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 15:41:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4537deebb01so17573055e9.0
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 06:12:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-453643020bdso24046065e9.1
+ for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 06:41:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751893950; x=1752498750; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751895664; x=1752500464; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=VOi9kDjeWoIMRgrC1uRCj2lroqORx6Ypr/xE7dZ6SuQ=;
- b=XYELO+Ganfk6iuQLS7Qn7fl1H9QZl0TmlDwMo77SDC6w5nhAMDqTuGOStgFi4Qnvy9
- 5ivaiFZQ6eO4n4V12YdwYBA+QHYsgPAUADBuwvKqa2g3cjPGB2t0aRBZv8QTK+Y9aFaO
- dnxNIUelESklX8CvxvOaG/ujQggK/4mttICBJFsbIIjmRDNXTTlKNzNUDvpK8gxLPUiH
- K/PUTxBd60xcq4SveWYF8Ib/Q6zhiPGGfU7lrBckZoR2xrSZp3dguDjJXM0FzQ8Nornm
- Jrn0+jPsX1nkjGUJ3cXCgR8vc74ongyUgYwa440k8fXVk1nuZOzi40Qloc0fHa/M0GyG
- Xm1Q==
+ bh=44Ge/hcBIRX/mrU5kUEwCCnuEYNuTSNf59a85qkgaEM=;
+ b=e9ZFEqjOjYlkXo2299VDKjA/4z+Tbq6caLrWr4Yrpswd/tekRyIqvqUtfq5IlINz1z
+ naPerW5AA3MRThUMAKACitkP6jdbx68h+wxPxGI6oAb66GLNJdQxfPxf4n98CHUSt1DX
+ HEivSjVLm3w2zjA9pb6QAyIJSqy10xLjKLfsNoIgCFwpjdZLxCRCkNTyC+KfhzNNRB4I
+ fU9m2YafKoUsPl190jKTpOc3zfcKGM75QkPlfc62V0N99pAs83dhiD4BzqBio47tRH25
+ T4Tv4E/TTtaSlOjFb4mNgI/8NeFDG5jeG+70TQOYgIZBpc8yeqcnecZWQPvbcUMrZGR9
+ W5BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751893950; x=1752498750;
+ d=1e100.net; s=20230601; t=1751895664; x=1752500464;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VOi9kDjeWoIMRgrC1uRCj2lroqORx6Ypr/xE7dZ6SuQ=;
- b=RqtKYZTCRZ3M2u3kChLEg2jm7PyIzUx3xz/RFj+lt94eutd+jvm9BWntKWodHrDD95
- 9eOrKYomu+5UGeR/BOljwoGKsboZZiEalNQQEgY2HITm1mPvVmZnp1FajwEBFnfvq76O
- rwxCP70syTvC607XPU9WicHIpzzFtRQCo3skdJYDsT/G8izELYFn3LZ5BDOGwdcI1bEx
- MXE/+/1yMdqk0odKT9RJ2rBjEeS4ddyf0qBvs/1mTzOnL42Gerl2f/eje8JaczRmKJ95
- 2ePlhMF9qd3AuhbJzsLqYI/QXr4nqr5JwibBhj6IbmUMNocrhVwct+SKpLI53all4aTj
- wl1A==
+ bh=44Ge/hcBIRX/mrU5kUEwCCnuEYNuTSNf59a85qkgaEM=;
+ b=NE0RiqbuKU7ckM0eFSWTPEypMSrbUpW69TvYRohVxC7bH0YO/mHQc0eoIzDUP2bOOA
+ hc0kW9HkXxWiHIrPB7n1f2sIySkFM8wrRUYIbmrWSUN+MyBb4ThLBgk8oGDbTmGxw9Hh
+ FFc1jrKeqJHst8kMHQNQLRyJDBuNWv57fG3+0UKe3BjsFiy4Uix2xCwi1hBoyHpSDEJX
+ /9czVKBQvz2DofVY0zCM/Qlt0c1/JJULu+rvlvLH5pfxOz39F+QHWckRJ6O2aOWiiH+t
+ V7p0TDZ56OGUBpJFolaiUfzGlDXkjnrD4SKriocauSMehTzibkNDa6FCv7vRGJ4K4wRe
+ 5FYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUqnrm1niGUkCCOentcBxZ//avOpzW3h371+5QcNjb47m7FL/iTaj1tyhYo0vWz7/7VCZID5rI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yya9NSB8IdtngADqbGLnQbO6RAqHgdqKz5CwCPe3ELqZqfgRN/W
- xpLuxmfl8DaDWf8sSjcElEz/RlU6c/x0Naz9ttuWvtrise+0nQP3ni6LLyKHiUZDOoM=
-X-Gm-Gg: ASbGncs7rekNL3pc7Xzc93LqkVfdtV3zSZH6TyrZN98qmM9qtTQueXCB9loJ1LyqYhn
- kaELOV7umSvdT7+9Bmha1pV05mBb4CXwB5wTf9rBXACyEmhP04SOGh8xaFG+8C2d1VjyXp2smke
- fEs9uie0vQ0E1OVHtbyHQ9s5YrBxZAyLOprQyIk7xpf4J30GUAyYf3tTYeWxOgdrx9LP13AMv3X
- eyA9wtxPszx40U2mguhSMKHdk9b+xgLNh7V+2t1/Gg9l6WkhI9d8gOEUfBvIYsf3GbZnju1MrZq
- wS9zRBblIyh66gOxBMCk+O57ilOaXkIZJUKovKcz+OOEvgbZsSUfsXuVAuOOiMOXkvNtP/e2cvz
- AonbRoy2CsKHr1OmE5or+xam+0JwtStI=
-X-Google-Smtp-Source: AGHT+IF9vtqdM0JEkro30hbv2arMk5NaB2Pp67pka0tzBYJkQokGFk/LNUQIPQ+MolB8/4vNrS52BQ==
-X-Received: by 2002:a05:600c:3153:b0:43c:f70a:2af0 with SMTP id
- 5b1f17b1804b1-454b4ea5f53mr134915915e9.16.1751893949801; 
- Mon, 07 Jul 2025 06:12:29 -0700 (PDT)
-Received: from [192.168.1.159] (p4fc3d4fa.dip0.t-ipconnect.de.
- [79.195.212.250]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b49cb46c61sm6162910f8f.63.2025.07.07.06.12.28
+ AJvYcCUsJxy/SyPqcrnhsbPV5EX2f9vWq9gJHmyk8LFtEqKwZlZ8ziLie+fcdYf4K6ZPhK722wq0p1c=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOMJ25/6xho2LoCVesZrOCTXRcAYqnlzB9Ae/x+gg4czSBtSB8
+ XZAlEaZmHGaCc1BZSsKURdq0DB/b7kJMfipuaxuywzcdQSyfzbpyWAOm94ofgZz/mPs=
+X-Gm-Gg: ASbGncuoiGtyk14MS7X4qawQmZhmvBhI4zZMvT6DbfdVNYi8ngNknZUTikF85qDOTh1
+ 7VM4+ilHOqgUoFsiD1Ycxyg9Vv/683efv6hpavJyZVm3bixEnTH66Jd2QGlbguNxfZk2XQXk8SM
+ niBB6hwXBNMu/HGndE3BeIZQgoyCbfxpq1s7AyIhuehctHHVz0dFEThz9bBMV97PzyySiw7lwGH
+ FJFf6fZ36n4C2aYVCZwsrweEXd9VUf/OcaOnXc+62/wv96DXNTWtbYKDnYFQOEVylV7ufXBJAq8
+ JPNnO4Bjf/oMhKkj3nZBqpjlrN+7c6mgvP2fgbIN8S7/K8Ehl2iRvMYLlN8Df8CPIt5W9owBcJ+
+ KZFNyeQCOW4ykM75afEBjmFhPCCA/1izsBkxlcgg=
+X-Google-Smtp-Source: AGHT+IEyj3NfP7ARxa6pKeXbiItaDf7nGgMWkKBG6mJyLQXjnwJeM5MbH8Z1g6qr9cSV240JbdSerA==
+X-Received: by 2002:a05:600c:1f94:b0:454:aba2:c332 with SMTP id
+ 5b1f17b1804b1-454bb82de10mr76351155e9.29.1751895664091; 
+ Mon, 07 Jul 2025 06:41:04 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:e07:801:7bf5:4bcd:8bca:5bc3?
+ ([2a0a:ef40:e07:801:7bf5:4bcd:8bca:5bc3])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-454b161e8f1sm113469215e9.8.2025.07.07.06.41.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Jul 2025 06:12:29 -0700 (PDT)
-Message-ID: <4a0802d2-ec1e-4602-b48d-4c284381923d@linaro.org>
-Date: Mon, 7 Jul 2025 15:12:27 +0200
+ Mon, 07 Jul 2025 06:41:03 -0700 (PDT)
+Message-ID: <18f71373-49b2-4197-9051-0eeb8c7fd6aa@linaro.org>
+Date: Mon, 7 Jul 2025 14:41:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] arm64: implement printing backtraces
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de
-References: <20250703051951.43372-1-heinrich.schuchardt@canonical.com>
- <20250703051951.43372-4-heinrich.schuchardt@canonical.com>
- <788df6dc-fa00-4462-a61c-5878a5f9ddeb@linaro.org>
- <78c0ab6b-cbc4-4cfe-9144-dfb2b9bba801@canonical.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <78c0ab6b-cbc4-4cfe-9144-dfb2b9bba801@canonical.com>
+Subject: Re: [PATCH 2/4] serial-uclass: fix typo in comment
+To: Philip Molloy <philip@philipmolloy.com>, u-boot@lists.denx.de
+Cc: Michael Hennerich <michael.hennerich@analog.com>,
+ Philip Molloy <philip.molloy@analog.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Rasmus Villemoes <ravi@prevas.dk>
+References: <20250707150438.3016690-1-philip@philipmolloy.com>
+ <20250707150438.3016690-3-philip@philipmolloy.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250707150438.3016690-3-philip@philipmolloy.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,222 +105,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 7/3/25 14:08, Heinrich Schuchardt wrote:
-> On 03.07.25 13:39, Casey Connolly wrote:
->>
->> On 03/07/2025 07:19, Heinrich Schuchardt wrote:
->>> Add a function to print frame pointers depending on symbols
->>> CONFIG_(SPL)_FRAMEPOINTER.
->>>
->>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>> ---
->>>   arch/arm/Makefile            |  9 ++++++-
->>>   arch/arm/lib/interrupts_64.c | 46 ++++++++++++++++++++++++++++++++++++
->>>   2 files changed, 54 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/arch/arm/Makefile b/arch/arm/Makefile
->>> index 5ecadb2ef1b..41e75b5bcb1 100644
->>> --- a/arch/arm/Makefile
->>> +++ b/arch/arm/Makefile
->>> @@ -33,6 +33,13 @@ endif
->>>   # Evaluate arch cc-option calls now
->>>   arch-y := $(arch-y)
->>> +ifeq ($(CONFIG_$(PHASE_)FRAMEPOINTER),y)
->>> +    ARCH_FLAGS += -fno-omit-frame-pointer
->> from my testing, current arm64 builds of U-Boot will make use of a frame
->> pointer, it seems to be the default.
+On 07/07/2025 14:06, Philip Molloy wrote:
+> From: Philip Molloy <philip.molloy@analog.com>
 > 
-> The built-in defaults may depend on the distro providing the compiler 
-> and may be different on LLVM and GCC.
-
-I think you missed the second half of my comment vv>
->>
->> So if CONFIG_FRAMEPOINTER is disabled we should explicitly add the
->> -fomit-frame-pointer flag I think? Or we ignore CONFIG_FRAMEPOINTER for
->> arm64 and accept that we always have a framepointer (I'm not sure how
->> significant the space saving really is here).
-
-
-
->>
->>> +endif
->>> +
->>> +PLATFORM_CPPFLAGS    += $(ARCH_FLAGS)
->>> +CFLAGS_EFI        += $(ARCH_FLAGS)
->>> +
->>>   # This selects how we optimise for the processor.
->>>   tune-$(CONFIG_CPU_ARM720T)    =-mtune=arm7tdmi
->>>   tune-$(CONFIG_CPU_ARM920T)    =
->>> @@ -47,7 +54,7 @@ tune-$(CONFIG_ARM64)        =
->>>   # Evaluate tune cc-option calls now
->>>   tune-y := $(tune-y)
->>> -PLATFORM_CPPFLAGS += $(arch-y) $(tune-y)
->>> +PLATFORM_CPPFLAGS += $(ARCH_FLAGS) $(arch-y) $(tune-y)
->>>   # Machine directory name.  This list is sorted alphanumerically
->>>   # by CONFIG_* macro name.
->>> diff --git a/arch/arm/lib/interrupts_64.c b/arch/arm/lib/interrupts_64.c
->>> index b3024ba514e..970f8b6831f 100644
->>> --- a/arch/arm/lib/interrupts_64.c
->>> +++ b/arch/arm/lib/interrupts_64.c
->>> @@ -98,6 +98,35 @@ void show_regs(struct pt_regs *regs)
->>>       dump_instr(regs);
->>>   }
->>> +/**
->>> + * show_backtrace() - show backtrace using frame pointers
->>> + *
->>> + * @regs - registers
->>> + */
->>> +static void show_backtrace(struct pt_regs *regs)
->>> +{
->>> +    void **fp = (void **)regs->regs[29];
->>> +    unsigned int count = 0;
->>> +    void *lr;
->>> +
->>> +    printf("\nbacktrace:\n");
->> This should be a capital 'B' as with the other headers.
+> Signed-off-by: Philip Molloy <philip.molloy@analog.com>
+> ---
+>   drivers/serial/serial-uclass.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> ok
-> 
->>
->> In my series the output looks like:
->>
->> Backtrace:
->>     <0x000001ffdfb344> do_mem_mw+0xbc
->>     <0x000001ffe0f07c> cmd_process+0x130
->>     <0x000001ffe06440> run_list_real+0x6d0
->>     <0x000001ffe065cc> parse_stream_outer+0x14c
->>     <0x000001ffe06b10> parse_file_outer+0x34
->>     <0x000001ffe0e3a4> cli_loop+0x18
->>     <0x000001ffe03b9c> main_loop+0x74
->>     <0x000001ffe07984> board_init_r+0x3c8
-> 
-> Please, provide a link to your series.
+> diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
+> index a08678dde4e..32108c381a4 100644
+> --- a/drivers/serial/serial-uclass.c
+> +++ b/drivers/serial/serial-uclass.c
+> @@ -109,7 +109,7 @@ static void serial_find_console_or_panic(void)
+>   		 * from 1!).
+>   		 *
+>   		 * Failing that, get the device with sequence number 0, or in
+> -		 * extremis just the first working serial device we can find.
 
-Already sent in a different mail but just for completeness sake
+That is not a typo. [1]
 
-https://lore.kernel.org/u-boot/20240808-arm64-backtrace-v2-0-29665a2265cf@linaro.org/
+> +		 * extremes just the first working serial device we can find.
 
-> 
-> Showing function names would be great.
-> 
-> Best regards
-> 
-> Heinrich
-> 
->>
->> The aim was to match how the kernel backtraces look. I think it makes
->> sense to do that here too.
->>
->>> +
->>> +    while (fp) {
->>> +        lr = fp[1];
->>> +        printf("%3d: fp: %p lr: %p",
->>> +               count, fp, lr);
->> The address of the framepointer isn't so interesting, neither is the
->> index imo. I think the useful info here is the address of the function
->> and the offset from that to lr.
->>
->> Printing the lr pre and post relocation does maybe make sense though, to
->> be useful for interactive debugging or analyzing an objdump.
->>
->> Kind regards,
->>
->>> +
->>> +        if (gd && gd->flags & GD_FLG_RELOC)
->>> +            printf(" - %p (reloc)\n", lr - gd->reloc_off);
->>> +        else
->>> +            printf("\n");
->>> +
->>> +        fp = fp[0];
->>> +        ++count;
->>> +    }
->>> +    printf("\n");
->>> +}
->>> +
->>>   /*
->>>    * Try to "emulate" a semihosting call in the event that we don't 
->>> have a
->>>    * debugger attached.
->>> @@ -149,6 +179,8 @@ void do_bad_sync(struct pt_regs *pt_regs)
->>>       printf("Bad mode in \"Synchronous Abort\" handler, esr 0x%08lx\n",
->>>              pt_regs->esr);
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
->>> @@ -161,6 +193,8 @@ void do_bad_irq(struct pt_regs *pt_regs)
->>>       efi_restore_gd();
->>>       printf("Bad mode in \"Irq\" handler, esr 0x%08lx\n", pt_regs- 
->>> >esr);
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
->>> @@ -173,6 +207,8 @@ void do_bad_fiq(struct pt_regs *pt_regs)
->>>       efi_restore_gd();
->>>       printf("Bad mode in \"Fiq\" handler, esr 0x%08lx\n", pt_regs- 
->>> >esr);
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
->>> @@ -185,6 +221,8 @@ void do_bad_error(struct pt_regs *pt_regs)
->>>       efi_restore_gd();
->>>       printf("Bad mode in \"Error\" handler, esr 0x%08lx\n", pt_regs- 
->>> >esr);
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
->>> @@ -202,6 +240,8 @@ void do_sync(struct pt_regs *pt_regs)
->>>       dump_far(pt_regs->esr);
->>>       printf("\n");
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
->>> @@ -214,6 +254,8 @@ void do_irq(struct pt_regs *pt_regs)
->>>       efi_restore_gd();
->>>       printf("\"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
->>> @@ -226,6 +268,8 @@ void do_fiq(struct pt_regs *pt_regs)
->>>       efi_restore_gd();
->>>       printf("\"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
->>> @@ -241,6 +285,8 @@ void __weak do_error(struct pt_regs *pt_regs)
->>>       efi_restore_gd();
->>>       printf("\"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
->>>       show_regs(pt_regs);
->>> +    if (CONFIG_IS_ENABLED(FRAMEPOINTER))
->>> +        show_backtrace(pt_regs);
->>>       show_efi_loaded_images(pt_regs);
->>>       panic("Resetting CPU ...\n");
->>>   }
-> 
-> 
+This would be poorer grammar.
 
--- 
-Casey (she/they)
+>   		 * But we insist on having a console (even if it is silent).
+>   		 */
+>   #ifdef CONFIG_CONS_INDEX
 
+
+Andrew
+
+1) https://dictionary.cambridge.org/dictionary/english/in-extremis
