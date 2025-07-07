@@ -4,135 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C4E6C83030
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 04:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA488C8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 04:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 076D983015;
-	Mon,  7 Jul 2025 06:06:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5723381D5D;
+	Mon,  7 Jul 2025 06:13:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MMny4KbA";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="2/j6QhL7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7F9682F83; Mon,  7 Jul 2025 06:06:28 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2061b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::61b])
+ id 9F1ED81D6A; Mon,  7 Jul 2025 06:13:27 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2060f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::60f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08BF382F83
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 06:06:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 995F7810EB
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 06:13:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BBmx1X3o2Ha7d7scaiU4sVUYyWke+QyN5wiMM/LHJECw+IlkxC3aiiw73Bj+rMN1AgPCZp8dHKvckzj/cP+iUFCJmi8czBxu6V9o69dZ4SWqGspwl3u22Um3/Y0jJBL5CZDBhZQu6lR7oAZiJQ5P+w/JK0Qzd0WbNhM86+UNAhMOdTmQw9SIi7HMXpxVPzLeuzUeyEKGpMjCyWXaPPbapd4lO8AL8XpmiO/CKRYN2p85+ETeLuqeZSWLIJR08wFdPakQk2qWMA3aqP5oYGcxVeel7M7IvMDc8xmt/G7pJ1Ji6xuiMfpQjdXO4I0EvSLc63OCC4ENZMsXthwaXZqUGA==
+ b=eZbgOITB3UIAIBuAJPZAviKOtw9ruPFpJ06ku0Fk4We3UkSgwKRrA7Ob8PDB6PXTuwKLcIfgZ9MYpQAKBBY7BV3sL6RjIO31c5eJxMiyLrnVgBtuSwCT1DFsQ8CD0BZszJPiwdh2qjKUdms+WK9Tfv7Os8MwVL/eCDE+eTay+zEcak6Ulmg9sA9wILievEf1W53xAA1M2LbKwOyObG1vqAzloueHwaa5ZzsQpV4IJJoZCqDViN1fKc43hrwvSScA7u8bjrNQLz8nXlYUncjSOMHRnMsbWPrq3VItsrN+VuoxgR4+P4NYbSrR1+VR7UG12sTCCB3H5X77Wo9/a+Wirw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=92ZbW56oks1S2UdAa18X/kHmIlnonuapzysrzP4locc=;
- b=BI6ulMbGV4G6TweYudVZAe5p3kPGLZng8sstH3doHxDFYj1isa18/DVmpa75mBcmPLsBwuY2zrn0w4Mu/Spuaf5DJKk/LNYUbmTbf3c/42NK3YLhcO12DS91CYS9y8pkdFZEXGBIrsxPCsI+B22INWkcv6xmpHYKBia2dUH8UwUgNFM68DKcGiOutDNln1UiIvhHM3HaMeAmcQuIuG6PF+o7sd0FOqv/xW1A1J3vv3L/wvMHnSdes57Em5fIQSCNnVKJLpd+akt2Fo1MPwEk+WhlOERSWvTZiGiOk2j7rSdroMibX3zz78cMqzhQMWQ7MNkEDMBDiXqaSdrEMXeM9w==
+ bh=/LZRMhIqS6ftlWWpfk/r6/rcNGkq0q/CuZFGuNyahcQ=;
+ b=Qg+DPjK0unzqzUSt5G1QyFVvyp7JnLk/sx3+PWUWHdjnpYMoNhIKdG3UFwT5JOa1P2XDLFQC/sCP1qE/eC7iwZ7kTPURmuk8B1nA8W8vJZIQBOip1/SPClBvS9iUUnXm+PIgDfNBMw62fVt+W1ikPfr2J2O4AFf9gk+9uZJP1CvK3tBkJiSN9PTDY0Y30/ye+6hiW7WJMV/h3L8EAb/Tg9ihy5xiuXs9dCBGt0RetShiLyjb+pBEOjC6O6x0pykmrMWnkggcDVBGK6Knt1O29NFvia9z9TZhs6/yLVLc5Q1wQM4P8CDAK586slJ+QWWqGahryIw0gkzgLwyK/IRqRQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=92ZbW56oks1S2UdAa18X/kHmIlnonuapzysrzP4locc=;
- b=MMny4KbAl2BuiiMDNNNRGWwFnA2vsQAqVIv7Th3mb4i+esioQ2dOG3ay7S3r1j5vZYQbZsKzU7bAzG7CDUHbihnpGM1r0eOCIo9YYNeWOoQTLhobycCMlZWTc/wMz6V6XkyLRwv5naNwlCvOP9CEMzLA06EH0zmbgZyD006o8Vs=
-Received: from BY3PR05CA0030.namprd05.prod.outlook.com (2603:10b6:a03:254::35)
- by DS5PPF4ACC15C0E.namprd12.prod.outlook.com (2603:10b6:f:fc00::64c)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.30; Mon, 7 Jul
- 2025 04:06:22 +0000
-Received: from BY1PEPF0001AE1B.namprd04.prod.outlook.com
- (2603:10b6:a03:254:cafe::4f) by BY3PR05CA0030.outlook.office365.com
- (2603:10b6:a03:254::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.19 via Frontend Transport; Mon,
- 7 Jul 2025 04:06:21 +0000
+ bh=/LZRMhIqS6ftlWWpfk/r6/rcNGkq0q/CuZFGuNyahcQ=;
+ b=2/j6QhL7bFRgJM86wLdU69K/lRZ3BZ4XNWzZ8E8gRkFba2GGa/H+fU6EULJUjfe743mHgT0U0so4K1JX8IWNaTOqI7c8vcFsE2Icrxf1rF2eIP4cNp8yr9LRIXPdKrcVo+ZtRikya8jnTR1w6Vsv4emF1+y0VAShVGSFPPGL+NY=
+Received: from BN9PR03CA0079.namprd03.prod.outlook.com (2603:10b6:408:fc::24)
+ by DS0PR12MB6560.namprd12.prod.outlook.com (2603:10b6:8:d0::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.24; Mon, 7 Jul
+ 2025 04:13:21 +0000
+Received: from BN3PEPF0000B077.namprd04.prod.outlook.com
+ (2603:10b6:408:fc:cafe::9) by BN9PR03CA0079.outlook.office365.com
+ (2603:10b6:408:fc::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.32 via Frontend Transport; Mon,
+ 7 Jul 2025 04:13:21 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BY1PEPF0001AE1B.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN3PEPF0000B077.mail.protection.outlook.com (10.167.243.122) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.20 via Frontend Transport; Mon, 7 Jul 2025 04:06:21 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 6 Jul
- 2025 23:06:18 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ 15.20.8901.15 via Frontend Transport; Mon, 7 Jul 2025 04:13:20 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 6 Jul
+ 2025 23:13:20 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 6 Jul
+ 2025 23:13:19 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Sun, 6 Jul 2025 23:06:17 -0500
+ Transport; Sun, 6 Jul 2025 23:13:18 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <git@amd.com>
-Subject: [PATCH 2/2] arm64: versal2: Do not define do_reset() if sysreset is
- enabled
-Date: Mon, 7 Jul 2025 09:36:07 +0530
-Message-ID: <20250707040607.758919-3-venkatesh.abbarapu@amd.com>
+Subject: [PATCH] arm64: versal2: Remove the ZynqMP Firmware from mini ospi
+Date: Mon, 7 Jul 2025 09:43:11 +0530
+Message-ID: <20250707041311.769577-1-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250707040607.758919-1-venkatesh.abbarapu@amd.com>
-References: <20250707040607.758919-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE1B:EE_|DS5PPF4ACC15C0E:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4775459b-a182-4977-8157-08ddbd0ba220
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B077:EE_|DS0PR12MB6560:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5bd61311-73e1-4e20-77b1-08ddbd0c9be7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6xd3j8ddtp0Gv5QYSHj3FQrgInD2ZAToEGF+oJnrHjXHycfS93SKhzD0bHRg?=
- =?us-ascii?Q?bJDI/qkYly1t1A7u9Qeuv0YKaalRMr2uPVyylMxRFQnHZI1at3UpGhcKU9ne?=
- =?us-ascii?Q?DzFuU80Ui6MsMo5CJJ9qLlnU3w1kEaEBjKPeu7IxvUoW4AVKaISWsJHQObQm?=
- =?us-ascii?Q?pseWIiOcd5z9tPrbUiBV1aO03hcgm/kFdn2GJSQHzXXvxhBu/YZtnymQ4VPz?=
- =?us-ascii?Q?NY2HOy0GBryYMyx3PnEbms0Flb9x+5+F7t1ZXFXSbiMKHUI/PNzO6V01d96G?=
- =?us-ascii?Q?qDck1S1xJB0jHjwBOSrukbSIM9vOP5pteB3xiEkQOkR9hKQL9X71q1sIsLbA?=
- =?us-ascii?Q?N5fCG7AtWnOgFcMSd2NHw8TEh+pb7iOtoGlGDQ/Dag4YAMG5TM0xQ7hLl531?=
- =?us-ascii?Q?AReIsM19YPFhpjMZpFhzMaYyeuoY2bCpNVHG6dkvKQ9dkvvPspocoYEe0RXH?=
- =?us-ascii?Q?WaFI1QNyK9W+STcJGGzmgZwwicHMmzbwjJgOg7NbCGhz/TeOQEZSgiPG3fM8?=
- =?us-ascii?Q?/P4Gk0QgEPX3QpQzJQ4N+8k/BY6EAMDI8L1xhXJIwxwY+82fob+OnjW7JgG1?=
- =?us-ascii?Q?ArnEOc++GqNtgnQnukS/NEUl0dnGwAw2QWeWpPHQhvUSCG5teXeAM4vA3R+A?=
- =?us-ascii?Q?eK574DVhMbn6T4mOrxswS+IJoypnTdr4z+L6Sb6k7d1QwYOp021fFT5IPRdb?=
- =?us-ascii?Q?J7oDMIuMqvcRhNZxj69QzFpAt8WQ2A8jg33kJ/onvSZjRmZPi9zPZLkLmSqk?=
- =?us-ascii?Q?jCxCVHdFG0pj7uNb/XGKcySngfMxnLAu2qtobRYBb4jPbZkHiofK9JSIVxpb?=
- =?us-ascii?Q?c/e6wYueYI5oZabtRzfEGrPgsMYiYTAWFHKfAO0AaR2cCw7lg9Gr3c6JHF8P?=
- =?us-ascii?Q?nulmzCgz9InexdfIim+beY0ddFfekfBNhu3sn1O1rJgYdw283NZMcOLVFm9o?=
- =?us-ascii?Q?thOzC85inN8xwkHql3q43r382UPullrqamaBexoZrnQb5M5Ch5A8HEQEkZuW?=
- =?us-ascii?Q?30ABf8Nn3reoFN+Olh+8RdzacTh5a+HJew/HT+iT9LbEpO4Aw51svvtTnyxB?=
- =?us-ascii?Q?wxcVMVf+yq8NWz27H5gNgEQxG6kPV1BfZLnvEJlN3siPc7S1DsBeKPuHgrxS?=
- =?us-ascii?Q?W77DsJcXVZt4nXElmZkyFkZEw8khk97OoEQim6sB1jaINhjRv+6lbdnYEcJr?=
- =?us-ascii?Q?k37jBP//LRhPFf1caFIEIX6NsV7rcYO1BpHcGg4oIpNbEKFuMHuiUk8lO0cB?=
- =?us-ascii?Q?iiS//sUE0ncbCw75fydBR1aY3uuuFxEI3r+yB2c3nblY58QO0eBguxGw0/aT?=
- =?us-ascii?Q?yRe/YNOy88Lhe6dwVBp4ONtOaTDt6VgsKeF6Bk12qX5ZqKTc44Dy4TbjtgoO?=
- =?us-ascii?Q?EvbYNrGE8AUPP/jlNy1qcYRr8W9SQU6hnJBMeZtKP94L6XsUzuRuTym+i3S5?=
- =?us-ascii?Q?PgQMBb6nYDf27MmVZQoVBxW5vbWNVe4gQpRG/i3ejLOzedVcWWkcfwtov2tZ?=
- =?us-ascii?Q?YtfVWJBvFsoASrGR2m1DygQksSNp1K6qFc7l?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DoH+e1KDZ3SXz6KxiRpKd3wh4+57Ugh/TUSBM5Ul1Nbk8DR5t8tl3WJIrZUQ?=
+ =?us-ascii?Q?ubEF15ZxmZaf0atqbRVIMg0KDZ6lpCKRQbcUsfrTIcLUnbQ7K4cwGWE+T0ln?=
+ =?us-ascii?Q?KRys7noUinQ9Wgns5yirgNx04KQZke4PILMgEUjeOFVRgy/6zkcNvI01H0Lw?=
+ =?us-ascii?Q?dNqJQZknpCj+/4EGuVGETzsjkerN4sOpe9u7yrNcCDblex1AtTC6FsXxObKE?=
+ =?us-ascii?Q?eKr+84Nxua8FKaqSXgNV9ZohMjI0uwD7D1oRiMAO2JB9Dk40qie0FYvC+BBw?=
+ =?us-ascii?Q?Xd1JxyE+0GTwkN/Ls2jfN7X2XWuUxbH0fBXaHFybp66S5f1ATklVsn1TRjWg?=
+ =?us-ascii?Q?v+gR5PU5a+H+UsYENzo6LWyVxHXDOx9O5SpHvx3GBpuLHDsUd5SBGi/mPcJQ?=
+ =?us-ascii?Q?9mReFP5aK1Fe8+fwY/sRnRBnet7ZECrkp11S28+j2XCNqHKjmuOlfY+JDLBf?=
+ =?us-ascii?Q?2N3bXQ9nRieBjk9xqafxatZfS4hTuRBJMTelVyJPSDt3XSMFBOUShiP/oVXb?=
+ =?us-ascii?Q?9Q5Rmiug7cVtnLIlcDhv9KhAsPS1S4t7AFXV7SGQQzLXRl8uzb4REwqRGCQQ?=
+ =?us-ascii?Q?2TMG2qMl16AnO81t11HlVDklqfS4nvuGV+lxfW43IzQCiVWNoRgxEcZ8qmDJ?=
+ =?us-ascii?Q?M/I1EwUNDL5ie/MeH2fcf/tWG+jgT/Ru3BsrCztsWpcFKLp4x+9/Gstwthq/?=
+ =?us-ascii?Q?MVMzlUNymvi+CEWugmp3km7LYr9l72QS1Oe6ieNgR7Vt2+bo6q5J/dv4PIeI?=
+ =?us-ascii?Q?kjvOz+fG6AlQKJGhp0M0FxUDj3UbvQSRgXZvOUHrRKjPvtCELSPY/rPEdK9/?=
+ =?us-ascii?Q?XXV7cewBgYrlr8vaHBaf+aoHK1YClYlm06bzh4Y2w7K6AloUVxdF1E3Skec2?=
+ =?us-ascii?Q?WvHkTKI202JhrcY+Ift7HvU6hjMtZXqo9rex8DEifdd32C3KeG0ZHpKZQRQ0?=
+ =?us-ascii?Q?g1EdcyhP+nsQIApbu0e6y7CtN/HLAu27y0wrnJ3X6JIGzgcObbhDSn8BJEbk?=
+ =?us-ascii?Q?Y1setPpS8TSPc6qiMaVyS5w4hweHR1bVNF/ZWeWtqnNVmNqIJRc0gD+m0cO9?=
+ =?us-ascii?Q?Hn7yD5iEYZCT1OynL80pbIa9Zl0rlhxKIT38fwscTPraEKMymWG3cauEEvSM?=
+ =?us-ascii?Q?qaUr1XGo2tStLu7a8seN119CgRJxBfGOxELbkWtcFD9UvwaDEaDL98BERIM4?=
+ =?us-ascii?Q?4mfP0AfFSeTFKbFwsXLXtEg8CRxt1YroYQ4UNy1sF1S//MbhwTsTFxoTjyok?=
+ =?us-ascii?Q?8bSsoOS2eySStwVBuAXntXyQ+WlIgtyZLj4zTo3ahPU+uxoQk0Tu8SWBahWK?=
+ =?us-ascii?Q?zNTAiqZPrEvr6m2sOrp4xC4Uj+UqbSn7XzKydPMGdBpZa9UnP98oRzKbZT8V?=
+ =?us-ascii?Q?VoEoEullmlThcxm/b7wJit/vuVdv+3BtHW26w49LX33q/9vebO7TjppOocqI?=
+ =?us-ascii?Q?K7JmHuyL57W0jf6wrwnj9hDVBcbjvKA1I2NTmAuMzNkW7Mwx+KLjrObgQOe6?=
+ =?us-ascii?Q?hFjpqu5e9JHc+lkmqETsFCcPLJwv7dq2G6Kq?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2025 04:06:21.7464 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4775459b-a182-4977-8157-08ddbd0ba220
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2025 04:13:20.8941 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5bd61311-73e1-4e20-77b1-08ddbd0c9be7
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BY1PEPF0001AE1B.namprd04.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B077.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PPF4ACC15C0E
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6560
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,30 +148,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If sysreset is enabled reset_cpu is defined in sysreset uclass
-that's why it can't be in platform/board code.
+Remove the config ZYNQMP_FIRMWARE and also update the initial
+stack address.
 
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- board/amd/versal2/board.c | 2 ++
- 1 file changed, 2 insertions(+)
+ configs/amd_versal2_mini_ospi_defconfig | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
-index 72967e69a84..7d91d288d2e 100644
---- a/board/amd/versal2/board.c
-+++ b/board/amd/versal2/board.c
-@@ -365,9 +365,11 @@ int dram_init(void)
- 	return 0;
- }
- 
-+#if !CONFIG_IS_ENABLED(SYSRESET)
- void reset_cpu(void)
- {
- }
-+#endif
- 
- #if defined(CONFIG_ENV_IS_NOWHERE)
- enum env_location env_get_location(enum env_operation op, int prio)
+diff --git a/configs/amd_versal2_mini_ospi_defconfig b/configs/amd_versal2_mini_ospi_defconfig
+index 54328e85784..55953d14200 100644
+--- a/configs/amd_versal2_mini_ospi_defconfig
++++ b/configs/amd_versal2_mini_ospi_defconfig
+@@ -9,7 +9,7 @@ CONFIG_SYS_MALLOC_LEN=0x20000
+ CONFIG_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_NR_DRAM_BANKS=3
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xBBF20000
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xBBFF8000
+ CONFIG_ENV_SIZE=0x80
+ CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-mini"
+ CONFIG_SYS_LOAD_ADDR=0xBBF80000
+@@ -57,6 +57,8 @@ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
++CONFIG_FIRMWARE=y
++# CONFIG_ZYNQMP_FIRMWARE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+ # CONFIG_INPUT is not set
 -- 
 2.34.1
 
