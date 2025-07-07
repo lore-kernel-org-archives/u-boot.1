@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE422C8303C
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 11:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F8ABC83F07
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 11:48:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 447DF830CA;
-	Mon,  7 Jul 2025 13:41:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 896E9830E4;
+	Mon,  7 Jul 2025 13:48:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HqUDwzCW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uUahy2Gp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5610D8305C; Mon,  7 Jul 2025 13:41:27 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 4F09C83121; Mon,  7 Jul 2025 13:48:54 +0200 (CEST)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 139B2830CA
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:41:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DA5E830CA
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:48:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-714066c7bbbso27722467b3.3
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 04:41:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-4a44b3526e6so46954981cf.0
+ for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 04:48:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751888484; x=1752493284; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751888931; x=1752493731; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3dtDtL3VpEtr/Cot4D4pBhI7tTIZJtYH0PUs+/O7pmY=;
- b=HqUDwzCWk4VeJ4ooYLcscebav8MDFnBdLTyYeUi6jGPwX1lozQEvjKFnbakSRmOvXt
- 69snZZROrM+HTWhW7lftxM8WTo33S5zO7TooqZAQbQ7ZjWiWqubQ2m/V0iyFd5Q3sxH3
- j5axGZoC7kV1qUVwTMjh8lS3Func0jHnztbi7O51dlsP2jJcCY6eRsWuLkV2ZkcKvg6Z
- 2eerflBo+uiAE8OHrgRa2biZssa7cTNWzLjPCk1Kp/lXnKy3NC2H2WRGDfVjwBK10Jn4
- tHPalUBxXQ6I6siinJsermxFFcWSIhq1T5l17zY2rE3RhRR9Lr47NZkjz35l5BKsERtC
- lncw==
+ bh=M8EZaHbq/lYUD1c/KoO5zB/jxWd4r2UDblRtZrrNXlI=;
+ b=uUahy2Gp6O7pUEJ1G02ebtOBb9CoiNy3EFvQkThsKql7KFxezYv3eoQon8+ZlGZXaT
+ bzRYyQiAT60+mqLa08p6RFU1Q0CA2OLu9UksXxR/oKVTFd5igmxXMitzPf83lOF2cjjB
+ oV1zefvvCMnndS6EWI1EWZ0qRq0ZWtjNJNquT83pEMr4+O3Xpnglis4Mb7evPn+8bxB0
+ atfQ5L7PEnvywK2K4WuEuI0qLjWdQLZ4PeCPLln7A/mqapyanN6nK28KfajU+q9ldiiw
+ xxTkinwBr6BjVDEz8ZDS/4ZXQwRYlMLmYQP7qpaEby0kmVvQ/wxsK8f3FXX/V/TnQ5q2
+ eEIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751888484; x=1752493284;
+ d=1e100.net; s=20230601; t=1751888931; x=1752493731;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3dtDtL3VpEtr/Cot4D4pBhI7tTIZJtYH0PUs+/O7pmY=;
- b=YMo6QTYRFR6+ORVRlw3PYVzqj/imCq1DsLGOykKT1JSPvI1yjReFSvQZtoDHXliEG1
- 1/DZ0vWwAAzDu5NgHfGky2p+SUo0oUkvQRvU7HD73US20iIJUKPF1+0fdp+QTOG9vjB2
- d+soTTFivl0hPkKzH7AEddPnOgpOyIOgqvYfLd2fPX3ZlbnicYQwzvIC9GN3QfItyFj9
- Nsfw+UWyPus1gBQfjkpx1+Q2yNx5SQhEzTPpI3U4KcarkEwdrNOsiRYZdP4BHBS4NRK6
- rHQIdAY46lFTD9mHkC8sjBWa9QKAUZtRA+3casDVRHXUA+BQxeSOeuiOeMzDQCMgZDgC
- 0s6w==
-X-Gm-Message-State: AOJu0YzahnJoCCFUpYkNE4xYnbWIvQFHuYA3FXOIINrTb+5mfSiWZQk/
- iZubquD3/DW3AdsNK1QbsRbnEHJgqFBpxO8PYCpmNtnSA/HshDjvkulwou9fCkSdFYGOkLbIn/f
- ptMNDgdqVThYPx65xfwynoOdOGh6DHa2vt+a0H7+YcW3DmxnLnWJfpiiI5w==
-X-Gm-Gg: ASbGnct8EXiAgIvzT4QaeLAg2LnSMohHiQHY6DPiOBaHPh0Ji8dARincjbeqEbvYjYA
- ck3/6rmO+C46PDnudbIPZPzw+S6cqEjDaY2WE1hqnA+RwnjKrpsfALV6WtKUHtSReY2HBE8cv06
- vAJbQ/Bs4HMirKygN9Nr/V5H57VbTuGCYOi2qr53ATrzw=
-X-Google-Smtp-Source: AGHT+IG9Afh/koGrUVyiO6arkVEyM8+x3NBTfcGai/hA1PhwPQylokUluKEXYslN+9ElnzCJRNt0IuGmJbOmELqAbuk=
-X-Received: by 2002:a05:690c:a95:b0:714:250:833a with SMTP id
- 00721157ae682-7176ccd8658mr104172147b3.27.1751888483863; Mon, 07 Jul 2025
- 04:41:23 -0700 (PDT)
+ bh=M8EZaHbq/lYUD1c/KoO5zB/jxWd4r2UDblRtZrrNXlI=;
+ b=Ro4qH4Z9VnCfkTog+yno9KJmfYHGTmV55Us5KRk8SUrb3cOzs252eytpus6kTt4I9u
+ HUhp0XN5GySzPVpVifACQSKqn899kX0jAyTD41Xb2ZwVn1sX02Amxf3KgAQ+mXoTzdA7
+ uNNDNu3310oVHFDMlDm5ygSpl+Ee8dLcZsrwXUu0yR70iahrvmv5lf8roHTDX7H8uiel
+ Aj0uexaRbVLvLZz2qUFIVDr0SrWuD8athedUYCrRFQa07j9RmjjK5hYZPkTiXLZF+UZ2
+ lHUpzAQMqlS7U1I630avCV1bmS9qatVplwkpWfoiWGBSCjf959wNUOv06Eod7W8sfZia
+ EwfQ==
+X-Gm-Message-State: AOJu0Yx0wuTA53NYyaw+qqbvV1vwzaNK+4TiLUV5AZvbDbiFP0bl3sP/
+ rLCLGRdYIvnGZ/lyS/2+H3TKbV8y9PTCWtO3pJ/QgUE3oc+BOP6LU3lV39t3mNJJwdXbDYbpYUV
+ IEZaQnX1iYVqEy7wNp8rnwDaxkeEl5FfiIcwriKYAkW5C4rrhJnWb
+X-Gm-Gg: ASbGncuG6lVRrXsQKcZvB9TwyDQo9vw2hVwUKRJr4vWc+flBqhjpvdtH9VyrnImp6zK
+ DC1llHOeani3yCP1RcMqs2U5tgwasnPn+jkcZT/+WG5rGo+UrRymN7NsVJi1KhoV0ldh4sI/t25
+ 8zHNjowdoFk2DKsaVuRGQxyUDOvZja5fVLhsoEZhSo9yQU
+X-Google-Smtp-Source: AGHT+IHYclVEVTAiATrt+5RW6RlR5QwhUGequqI84q+C2wWh+RXLj0lN/LSBNhDg+2cCqfxQ8VhwKWGDhcBeoqRTWIo=
+X-Received: by 2002:a05:622a:4e8c:b0:4a4:31c5:fc8a with SMTP id
+ d75a77b69052e-4a9a69abec4mr131166241cf.47.1751888930858; Mon, 07 Jul 2025
+ 04:48:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250707095322.30222-1-paulliu@debian.org>
- <20250707095322.30222-2-paulliu@debian.org>
-In-Reply-To: <20250707095322.30222-2-paulliu@debian.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 7 Jul 2025 14:40:47 +0300
-X-Gm-Features: Ac12FXwK4dUYuS7tPtXHC6EeJskezXySppd_0wtcaXweluDhRkKtkpbPbBhjpwQ
-Message-ID: <CAC_iWjLnna4TMhZ5mEQp1_aKcazwmALkd_+aA21npU-aS0Y9Rw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi: turn on EFI_DEBUG_SUPPORT for qemu arm and arm64
- target
-To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
+References: <20250707103918.4189148-1-padmarao.begari@amd.com>
+ <20250707103918.4189148-2-padmarao.begari@amd.com>
+In-Reply-To: <20250707103918.4189148-2-padmarao.begari@amd.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 7 Jul 2025 17:18:39 +0530
+X-Gm-Features: Ac12FXyoqp5nfExwldfNf48g1gbNlXrbokrijaLYuNBLnrlBK14BHEyMO40oYYc
+Message-ID: <CADg8p97bXHr984mEpcNdXEk9dDeW8Kn4R8hen-dp49DphC7LTw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] FWU: Add platform hook support for fwu metata
+To: Padmarao Begari <padmarao.begari@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, michal.simek@amd.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,64 +90,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Paul
-
-On Mon, 7 Jul 2025 at 12:53, Ying-Chun Liu (PaulLiu) <paulliu@debian.org> wrote:
+On Mon, 7 Jul 2025 at 16:09, Padmarao Begari <padmarao.begari@amd.com> wrote:
 >
-> Previously, EFI_DEBUG_SUPPORT was enabled across all platforms for
-> CI build testing. With this commit, we are limiting its activation
-> to qemu_arm64_defconfig and qemu_arm_defconfig only, which is
-> sufficient for our current needs.
+> FWU metadata information is unavailable for platform-specific
+> operations since FWU initialization has not yet occurred.
+> The initialization function is invoked as part of the main
+> loop event. To address this, the FWU platform hook function
+> is introduced during FWU initialization, allowing metadata
+> processing with platform-specific operations.
 >
-> Signed-off-by: Ying-Chun Liu (PaulLiu) <paulliu@debian.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 > ---
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->  configs/qemu_arm64_defconfig | 1 +
->  configs/qemu_arm_defconfig   | 1 +
->  lib/efi_loader/Kconfig       | 1 -
->  3 files changed, 2 insertions(+), 1 deletion(-)
+>  include/fwu.h         | 11 +++++++++++
+>  lib/fwu_updates/fwu.c | 18 ++++++++++++++++++
+>  2 files changed, 29 insertions(+)
 >
-> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-> index 39afb837e41..54bf4646382 100644
-> --- a/configs/qemu_arm64_defconfig
-> +++ b/configs/qemu_arm64_defconfig
-> @@ -15,6 +15,7 @@ CONFIG_ENV_ADDR=0x4000000
->  CONFIG_PCI=y
->  CONFIG_DEBUG_UART=y
->  CONFIG_AHCI=y
-> +CONFIG_EFI_DEBUG_SUPPORT=y
->  CONFIG_EFI_HTTP_BOOT=y
->  CONFIG_FIT=y
->  CONFIG_FIT_SIGNATURE=y
-> diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-> index 92ba48f6af9..b1c277a86c0 100644
-> --- a/configs/qemu_arm_defconfig
-> +++ b/configs/qemu_arm_defconfig
-> @@ -18,6 +18,7 @@ CONFIG_ENV_ADDR=0x4000000
->  CONFIG_PCI=y
->  CONFIG_DEBUG_UART=y
->  CONFIG_AHCI=y
-> +CONFIG_EFI_DEBUG_SUPPORT=y
->  CONFIG_FIT=y
->  CONFIG_FIT_SIGNATURE=y
->  CONFIG_FIT_VERBOSE=y
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 077466f01f0..fdabe9cc278 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -73,7 +73,6 @@ config EFI_SIGNATURE_SUPPORT
+> diff --git a/include/fwu.h b/include/fwu.h
+> index 6441de370c9..8d0b856cc81 100644
+> --- a/include/fwu.h
+> +++ b/include/fwu.h
+> @@ -129,6 +129,17 @@ int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata,
+>  int fwu_write_mdata(struct udevice *dev, struct fwu_mdata *mdata,
+>                     bool primary, uint32_t size);
 >
->  config EFI_DEBUG_SUPPORT
->         bool "EFI Debug Support"
-> -       default y if !HAS_BOARD_SIZE_LIMIT
->         help
->           Select this option if you want to setup the EFI Debug Support
->           Table and the EFI_SYSTEM_TABLE_POINTER which is used by the debug
+> +/**
+> + * fwu_platform_hook() - Hook the given FWU data copy
+
+This can be phrased better. Something like "platform specific
+processing with FWU metadata".
+
+> + * @dev: FWU metadata device
+> + * @data: FWU metadata
+> + *
+> + * It is a platform-specific function that processes fwu metadata.
+
+More details please. This is an API. Something like, "Provide a
+platform specific function for processing with the FWU metadata".
+
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +int fwu_platform_hook(struct udevice *dev, struct fwu_data *data);
+> +
+>  /**
+>   * fwu_get_mdata() - Read, verify and return the FWU metadata
+>   *
+> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> index 7f085a0211f..9e913a04ed4 100644
+> --- a/lib/fwu_updates/fwu.c
+> +++ b/lib/fwu_updates/fwu.c
+> @@ -655,6 +655,16 @@ __weak void fwu_plat_get_bootidx(uint *boot_idx)
+>                 *boot_idx = 0; /* Dummy value */
+>  }
+>
+> +/**
+> + * fwu_platform_hook() - Hook the given FWU data copy
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +__weak int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
+> +{
+> +       return 0;
+> +}
+> +
+>  /**
+>   * fwu_update_checks_pass() - Check if FWU update can be done
+>   *
+> @@ -712,6 +722,7 @@ static int fwu_boottime_checks(void)
+>  {
+>         int ret;
+>         u32 boot_idx, active_idx;
+> +       struct fwu_data *data;
+>
+>         ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
+>         if (ret) {
+> @@ -770,6 +781,13 @@ static int fwu_boottime_checks(void)
+>         if (!ret)
+>                 boottime_check = 1;
+>
+> +       data = fwu_get_data();
+> +       ret = fwu_platform_hook(g_dev, data);
+> +       if (ret && ret != -ENOSYS) {
+
+Is there any scenario for returning ENOSYS. This is not a DM uclass
+call where an operation might not be defined.
+
+-sughosh
+
+> +               log_err("fwu_platform_hook() failed\n");
+> +               return ret;
+> +       }
+> +
+>         return 0;
+>  }
+>  EVENT_SPY_SIMPLE(EVT_MAIN_LOOP, fwu_boottime_checks);
 > --
-> 2.39.5
+> 2.25.1
 >
