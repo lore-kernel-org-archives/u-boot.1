@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9782C8303C
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 15:53:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 660F5C8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 15:53:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0E3983145;
-	Mon,  7 Jul 2025 17:52:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 67AEE831BE;
+	Mon,  7 Jul 2025 17:52:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="K5om+OfS";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hUKcefPE";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ILEZAyD/";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="BG0u/0GN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C763F831D6; Mon,  7 Jul 2025 17:52:25 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 2A0CF831D7; Mon,  7 Jul 2025 17:52:27 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F066583046
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 17:52:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54FC5830CA
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 17:52:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bbTJl5BTyz9svb;
- Mon,  7 Jul 2025 17:52:23 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bbTJm64bNz9t9p;
+ Mon,  7 Jul 2025 17:52:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1751903544;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mYnZWBd5ZS1XFIAWF19sSeARIR9VayXF+kTLrNlU/sk=;
+ b=ILEZAyD/gCbUO8eC9tNtTWAZhI1KR7l4b1ZQd8gMVC+va8Tl5jZGa5HHl9aXle08yPSf9v
+ tafUBSbygA4xvid2BG7q+4t//XggKhgfKjtFZ/r3qs7NrOwDW71CSDcbAUvhHuF9HRGzjw
+ 8pX1/1XN5nRDzxdqFYqTQr9H3srBVadA61CRXAZcTH23WrdnIqQlHbXclyookPiT+dBU0E
+ v3DeW/TT3sjh0nAtJe9F/56hiTcgrT8KyMdEj7/U6Vs1/BhcK9Bxz3OZWZ4wYDPlPE+zLM
+ MBw3DKxMYAxp8sKMQNdvlLYx0T4lBLz6XAR+CMxyUxmTkeXHyhGH5t6pnZ+mDQ==
+Message-ID: <d99d2f0f-cb41-4e60-87c5-570dcc16d359@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1751903543;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=m1TDzIC0TmOjgqmn4tN26qruRxoan5f/1ES97UVG2FY=;
- b=K5om+OfStOoPFbHPinPnYGHYbkINx6bNtXZBtifPdcbhBaRM7iwDKf7SK5/wdaocHB9qXX
- CMsVz70hHxk0VWsoC7yuPfnQbpQ6iJqRgAiPR4d79iSoLPQtKGxZNrdqVe7L5kP+uOGRU5
- ELdLGlhZxJnq3xEjfJtQpUGWXocnsbIIIaMH9FLBUlq4L9PflsfUfIAsA1WiV/RIckoXAD
- En3mjWPOCLLrhXRyzUj75jFMCbVvpJ/+Lku9Z/jmXqZ4DjE0CPNecWZuUf6//SMn4escG+
- xRZG885jILIqxZvyaYWuzMrfrGsahhgzE4uBpog4LEGZ7QDmcctsco39T9uxtQ==
-Message-ID: <27e8e250-6297-41a9-9664-9dadd1429c26@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751903541;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=m1TDzIC0TmOjgqmn4tN26qruRxoan5f/1ES97UVG2FY=;
- b=hUKcefPEHjWQ/vn/V6785dL38S7l1FL8UthQX1ErmAAOrZIMj5+tsw0X/gsMbNLJgoFOmj
- n0+4koBxogdTlMxkCvsAD6629OGo7oZ8QMkk87kdu3Aqap2jcnjcoGR8lNPOAG3iw3Xfhh
- 9xZyvalg+ef4PFeNtr3ElNPZQ6zVZBnYUTfGaOJOpf5hbfothsgKL60mdayMa2aFdcQoAa
- zKyQB2KoBd3qE625ctZTdZl0/Dn9XCiHV33KFSrgd+i+7qxGXqcT8zPs5As8N8yLv91h8m
- 6NjfMkjTKy13PCU5ZpeBVjgyzFXlO0kYZHVLDGsbCwvhZQR66+RRe/AvO5S0uA==
-Date: Mon, 7 Jul 2025 17:49:15 +0200
+ bh=mYnZWBd5ZS1XFIAWF19sSeARIR9VayXF+kTLrNlU/sk=;
+ b=BG0u/0GNVjg+WNkcqOE3NOfmenjMlI7MvVSHHHqC2iKXdJyGUq1rlUAhYZrP4mirBTxbi3
+ YB7nK2ryFb2CMtSEI1eQe7IV6mn512BrBlzy3jKlywHinAqwqegibD57BZxa53d5/S1Jqi
+ GnIxJHyesk6rM/SKfE1/drQRf+bQ/wbaN0kgbNhSe0fHsk++MOMJe1eNmMXS+J4T/5xHZW
+ BFiJEk9tI7RePK4GhdCpcVAkqZBbisx+IoFp7u3cSeelKVJWzTxGPqPkDvQiwCLwpXHeE9
+ lHrU0WPnRuBGtPnAcv4Z5dqDE/Hf2lyXe8WcqCbDiOXWvCjmG3ensY4l3EuJlQ==
+Date: Mon, 7 Jul 2025 17:50:08 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 8/9] ARM: renesas: Add RZ/A2 GR-Mango board support
+Subject: Re: [PATCH v3 9/9] ARM: renesas: Add RZ/A2 RZA2MBTC board support
 To: Magnus Damm <damm@opensource.se>, u-boot@lists.denx.de
 Cc: Chris.Brandt@renesas.com, marek.vasut+renesas@mailbox.org,
  geert+renesas@glider.be
 References: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
- <175180137742.86839.9519699030077029409.sendpatchset@1.0.0.127.in-addr.arpa>
+ <175180138513.86839.112101475183122753.sendpatchset@1.0.0.127.in-addr.arpa>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <175180137742.86839.9519699030077029409.sendpatchset@1.0.0.127.in-addr.arpa>
+In-Reply-To: <175180138513.86839.112101475183122753.sendpatchset@1.0.0.127.in-addr.arpa>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 0fbb104f2071694ced5
-X-MBO-RS-META: fazn88itnptg83eekf4knrhrrjzf73b6
+X-MBO-RS-ID: b57137eb7ecae47eddb
+X-MBO-RS-META: 3aurukthstxu8kpwpypbhjdz6k4so18o
+X-Rspamd-Queue-Id: 4bbTJm64bNz9t9p
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,33 +95,23 @@ On 7/6/25 1:29 PM, Magnus Damm wrote:
 
 [...]
 
-> +++ work/board/renesas/grmango/grmango.c	2025-07-05 19:42:53.297553497 +0900
-> @@ -0,0 +1,40 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2017 Renesas Electronics
-> + * Copyright (C) Chris Brandt
-> + */
-> +
-> +#include <init.h>
-> +#include <linux/io.h>
-> +#include <asm/global_data.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +int board_init(void)
-> +{
-> +	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
-> +
-> +	/* configure PFENET register to use MII for Ethernet */
-> +	writeb(0x00, 0xfcffe2ff);
-> +	writeb(0x40, 0xfcffe2ff);
-> +	writeb(0x02, 0xfcffe820);
+> --- 0013/Makefile
+> +++ work/Makefile	2025-07-05 19:47:10.480068691 +0900
+> @@ -868,9 +868,11 @@ c_flags := $(KBUILD_CFLAGS) $(cpp_flags)
+>   # U-Boot objects....order is important (i.e. start must be first)
+>   
+>   HAVE_VENDOR_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(VENDOR)/common/Makefile),y,n)
+> +HAVE_SOC_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(SOC)/common/Makefile),y,n)
+>   
+>   libs-$(CONFIG_API) += api/
+>   libs-$(HAVE_VENDOR_COMMON_LIB) += board/$(VENDOR)/common/
+> +libs-$(HAVE_SOC_COMMON_LIB) += board/$(SOC)/common/
 
-Please add symbolic names (introduce macros) for those registers here.
+Separate patch please .
 
-> +	return 0;
-> +}
+>   libs-y += boot/
+>   libs-$(CONFIG_CMDLINE) += cmd/
+>   libs-y += common/
 
 [...]
 
