@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D34BC83F07
-	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 11:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE422C8303C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Jul 2025 11:41:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04760830CA;
-	Mon,  7 Jul 2025 13:37:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 447DF830CA;
+	Mon,  7 Jul 2025 13:41:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="urxmstAg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HqUDwzCW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E03A830E4; Mon,  7 Jul 2025 13:37:32 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 5610D8305C; Mon,  7 Jul 2025 13:41:27 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 945B58305C
- for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:37:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 139B2830CA
+ for <u-boot@lists.denx.de>; Mon,  7 Jul 2025 13:41:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6097b404f58so4429246a12.3
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 04:37:30 -0700 (PDT)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-714066c7bbbso27722467b3.3
+ for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 04:41:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751888250; x=1752493050; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5t1XT2yto6/zZVNtc2w2MxFrDf/EzrTaYhX6jsG7xYU=;
- b=urxmstAgjY9ERGz3sj5Pny8ViPsbWbQJub+QlINVxPzoe6OgtB8JPQVsmIkhXevOOI
- T1cenn5qEY6V1dTQkrLc/DxOfsKcfBCLGC2msgLGPbrZ1LJUz2WUQ5TztouOPA2BmEH1
- MFRzp0mcLxTcA2lHpkGfz/ZT/NebwR7lWD5HnxqU/xvn9Za+1KQPu/KTwutMWhPdF2dk
- rOM/SK+7GlzxhIkLJe8vSVnCJalKF6ASldMOh+m9etYNDSziM6BFgG7Ol/reU1i34lwh
- QZRzfgz/a0OL6jd+tXmwY2r4oZyazlHt+NU4/mH0tz34hnxIHCO2slifASS191jK9wAi
- B4SQ==
+ d=linaro.org; s=google; t=1751888484; x=1752493284; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3dtDtL3VpEtr/Cot4D4pBhI7tTIZJtYH0PUs+/O7pmY=;
+ b=HqUDwzCWk4VeJ4ooYLcscebav8MDFnBdLTyYeUi6jGPwX1lozQEvjKFnbakSRmOvXt
+ 69snZZROrM+HTWhW7lftxM8WTo33S5zO7TooqZAQbQ7ZjWiWqubQ2m/V0iyFd5Q3sxH3
+ j5axGZoC7kV1qUVwTMjh8lS3Func0jHnztbi7O51dlsP2jJcCY6eRsWuLkV2ZkcKvg6Z
+ 2eerflBo+uiAE8OHrgRa2biZssa7cTNWzLjPCk1Kp/lXnKy3NC2H2WRGDfVjwBK10Jn4
+ tHPalUBxXQ6I6siinJsermxFFcWSIhq1T5l17zY2rE3RhRR9Lr47NZkjz35l5BKsERtC
+ lncw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751888250; x=1752493050;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1751888484; x=1752493284;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5t1XT2yto6/zZVNtc2w2MxFrDf/EzrTaYhX6jsG7xYU=;
- b=dHtCzF9ayZRCn9YWkkDGtG/aNDvKFbpLaCw8sv289M7A9F3ijc65+Ihtdv7n8jSYhi
- EvLUtZGJDmDWLvVrzuLAex0WTkmUy+oxFkfzrBGbS25vFkiOYQTcd1N1OWACKuapLbcs
- o5nilPvrpoBzhs4Ummi0ErVT+QUDttCBOFCeHddzSm+kU89U0PVJyfH8uWGP0MBcAwfz
- jdVduLTEgyKUAUfQd3Sn+QiH9MF3L56PUoCMliq+WqkfTnHGM5PMJCZZ+DGjK4DCvSY8
- MqzfItQJHzflrRUfPt9fwIixDp70V8SapYnpL3HoHCDikTNufGF06x/0GXzlc7FAMIP8
- pdrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXMgquGzsFCJgPXtvNITYP2/bBKIRR2jb8H9SQ+Gp7fX5/U+756qX7GyACAGa6dEqkIkgAgAY8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJ4gwr6lS3i6W0a0auS/P/uq+Q/MATodJBp81KineKO6bVxSUo
- KbwbgIQEhx9dfl8ROcLAYEfbg4QqDScpeohEHX0d+dl6t8TEMtOUQ1tCUSJYB8RfGJA=
-X-Gm-Gg: ASbGncuA4TUxuAP6IFgwbhSn5MT6wsfyMAVK+zlxkhzc4JLQ4kiF5SSfOaYw46FCjpa
- WFCLpGZP6BEhDwL4g9RNGgxuGT/NRp0TaKwFqJo1vgs8ueTU4Z//umckzUOqRHIPNd5lHCi81y0
- xutII9KoCxOoMuWkWUqdR31N9j/7PXl4eYd+MHOU80wEkqvlwTlywMFQTV/Im9qHscPg0mo1LHq
- kSFuTjIeQrvAsAAQmw8Dzxm2jK2xVTANCiCxs8FD07kDIausEio0BhdZS5wT1azDmKkYvkmvE5I
- JWAALsyst1GYQtq7Tnd/BP3jEMf2IBZo0W3DVcZAHDriDOYhZnOuZQAm1V8jkE/J8pMLpG3d5yb
- 9wA7aILBXUqaZhUOuyZuzv/9EVJdIkIvq
-X-Google-Smtp-Source: AGHT+IEa8ACYDcqaXua/bqbfRk7LQHibc9dupoQwT9xA3bR1PTmJ1HFeVPvTLPPWYkt9Mb0s5W2kYw==
-X-Received: by 2002:a05:6402:50ce:b0:606:ebd9:c58b with SMTP id
- 4fb4d7f45d1cf-60ff3818095mr5997722a12.1.1751888249976; 
- Mon, 07 Jul 2025 04:37:29 -0700 (PDT)
-Received: from hades.. (ppp089210105145.access.hol.gr. [89.210.105.145])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-60fcb1f7618sm5405206a12.55.2025.07.07.04.37.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Jul 2025 04:37:29 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
-	u-boot@lists.denx.de
-Subject: [PATCH] tools: gen_ethaddr_crc: Make functions static
-Date: Mon,  7 Jul 2025 14:37:25 +0300
-Message-ID: <20250707113726.118630-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ bh=3dtDtL3VpEtr/Cot4D4pBhI7tTIZJtYH0PUs+/O7pmY=;
+ b=YMo6QTYRFR6+ORVRlw3PYVzqj/imCq1DsLGOykKT1JSPvI1yjReFSvQZtoDHXliEG1
+ 1/DZ0vWwAAzDu5NgHfGky2p+SUo0oUkvQRvU7HD73US20iIJUKPF1+0fdp+QTOG9vjB2
+ d+soTTFivl0hPkKzH7AEddPnOgpOyIOgqvYfLd2fPX3ZlbnicYQwzvIC9GN3QfItyFj9
+ Nsfw+UWyPus1gBQfjkpx1+Q2yNx5SQhEzTPpI3U4KcarkEwdrNOsiRYZdP4BHBS4NRK6
+ rHQIdAY46lFTD9mHkC8sjBWa9QKAUZtRA+3casDVRHXUA+BQxeSOeuiOeMzDQCMgZDgC
+ 0s6w==
+X-Gm-Message-State: AOJu0YzahnJoCCFUpYkNE4xYnbWIvQFHuYA3FXOIINrTb+5mfSiWZQk/
+ iZubquD3/DW3AdsNK1QbsRbnEHJgqFBpxO8PYCpmNtnSA/HshDjvkulwou9fCkSdFYGOkLbIn/f
+ ptMNDgdqVThYPx65xfwynoOdOGh6DHa2vt+a0H7+YcW3DmxnLnWJfpiiI5w==
+X-Gm-Gg: ASbGnct8EXiAgIvzT4QaeLAg2LnSMohHiQHY6DPiOBaHPh0Ji8dARincjbeqEbvYjYA
+ ck3/6rmO+C46PDnudbIPZPzw+S6cqEjDaY2WE1hqnA+RwnjKrpsfALV6WtKUHtSReY2HBE8cv06
+ vAJbQ/Bs4HMirKygN9Nr/V5H57VbTuGCYOi2qr53ATrzw=
+X-Google-Smtp-Source: AGHT+IG9Afh/koGrUVyiO6arkVEyM8+x3NBTfcGai/hA1PhwPQylokUluKEXYslN+9ElnzCJRNt0IuGmJbOmELqAbuk=
+X-Received: by 2002:a05:690c:a95:b0:714:250:833a with SMTP id
+ 00721157ae682-7176ccd8658mr104172147b3.27.1751888483863; Mon, 07 Jul 2025
+ 04:41:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250707095322.30222-1-paulliu@debian.org>
+ <20250707095322.30222-2-paulliu@debian.org>
+In-Reply-To: <20250707095322.30222-2-paulliu@debian.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 7 Jul 2025 14:40:47 +0300
+X-Gm-Features: Ac12FXwK4dUYuS7tPtXHC6EeJskezXySppd_0wtcaXweluDhRkKtkpbPbBhjpwQ
+Message-ID: <CAC_iWjLnna4TMhZ5mEQp1_aKcazwmALkd_+aA21npU-aS0Y9Rw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi: turn on EFI_DEBUG_SUPPORT for qemu arm and arm64
+ target
+To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,42 +92,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These functions are only used locally. Enabling -Wmissing-prototypes
-triggers a warning. Mark them as static.
+Thanks Paul
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- tools/gen_ethaddr_crc.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Mon, 7 Jul 2025 at 12:53, Ying-Chun Liu (PaulLiu) <paulliu@debian.org> wrote:
+>
+> Previously, EFI_DEBUG_SUPPORT was enabled across all platforms for
+> CI build testing. With this commit, we are limiting its activation
+> to qemu_arm64_defconfig and qemu_arm_defconfig only, which is
+> sufficient for our current needs.
+>
+> Signed-off-by: Ying-Chun Liu (PaulLiu) <paulliu@debian.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
 
-diff --git a/tools/gen_ethaddr_crc.c b/tools/gen_ethaddr_crc.c
-index e73d0429a04e..277172075809 100644
---- a/tools/gen_ethaddr_crc.c
-+++ b/tools/gen_ethaddr_crc.c
-@@ -16,12 +16,12 @@
- #define ARP_HLEN_ASCII (ARP_HLEN * 2) + (ARP_HLEN - 1) /* with separators */
- #define ARP_HLEN_LAZY (ARP_HLEN * 2) /* separatorless hardware address length */
- 
--uint8_t nibble_to_hex(const char *nibble, bool lo)
-+static uint8_t nibble_to_hex(const char *nibble, bool lo)
- {
- 	return (strtol(nibble, NULL, 16) << (lo ? 0 : 4)) & (lo ? 0x0f : 0xf0);
- }
- 
--int process_mac(const char *mac_address)
-+static int process_mac(const char *mac_address)
- {
- 	uint8_t ethaddr[ARP_HLEN + 1] = { 0x00 };
- 	uint_fast8_t i = 0;
-@@ -45,7 +45,7 @@ int process_mac(const char *mac_address)
- 	return 0;
- }
- 
--void print_usage(char *cmdname)
-+static void print_usage(char *cmdname)
- {
- 	printf("Usage: %s <mac_address>\n", cmdname);
- 	puts("<mac_address> may be with or without separators.");
--- 
-2.43.0
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
+>  configs/qemu_arm64_defconfig | 1 +
+>  configs/qemu_arm_defconfig   | 1 +
+>  lib/efi_loader/Kconfig       | 1 -
+>  3 files changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+> index 39afb837e41..54bf4646382 100644
+> --- a/configs/qemu_arm64_defconfig
+> +++ b/configs/qemu_arm64_defconfig
+> @@ -15,6 +15,7 @@ CONFIG_ENV_ADDR=0x4000000
+>  CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+>  CONFIG_AHCI=y
+> +CONFIG_EFI_DEBUG_SUPPORT=y
+>  CONFIG_EFI_HTTP_BOOT=y
+>  CONFIG_FIT=y
+>  CONFIG_FIT_SIGNATURE=y
+> diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
+> index 92ba48f6af9..b1c277a86c0 100644
+> --- a/configs/qemu_arm_defconfig
+> +++ b/configs/qemu_arm_defconfig
+> @@ -18,6 +18,7 @@ CONFIG_ENV_ADDR=0x4000000
+>  CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+>  CONFIG_AHCI=y
+> +CONFIG_EFI_DEBUG_SUPPORT=y
+>  CONFIG_FIT=y
+>  CONFIG_FIT_SIGNATURE=y
+>  CONFIG_FIT_VERBOSE=y
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 077466f01f0..fdabe9cc278 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -73,7 +73,6 @@ config EFI_SIGNATURE_SUPPORT
+>
+>  config EFI_DEBUG_SUPPORT
+>         bool "EFI Debug Support"
+> -       default y if !HAS_BOARD_SIZE_LIMIT
+>         help
+>           Select this option if you want to setup the EFI Debug Support
+>           Table and the EFI_SYSTEM_TABLE_POINTER which is used by the debug
+> --
+> 2.39.5
+>
