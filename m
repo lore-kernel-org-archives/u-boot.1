@@ -4,92 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78393C83F09
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 14:33:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07FA1C8303C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 14:35:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7200832F0;
-	Tue,  8 Jul 2025 16:33:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 44145832F0;
+	Tue,  8 Jul 2025 16:35:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C0opEn4Y";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1751985301;
+	bh=jlUK/r1SMwenBWdhGsrhO+qIhSRo7AnLaDigTN/Rf7M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=fZaGF7V+14mEjUko5npEsPdEf7eah0LNX1V1r6bolx92l/8pjx7fS0tyAx9CfPhM3
+	 uA7rs9yywFajKdxwfPuX7mZKFi8aGCPgyTt3YHfyzTa0I5fyGDR8kojri9m7SiMgqr
+	 OgcKRuu9ruTbds4hpDwFm3sLHt5dP32MVwr3ObLzHcTpMQwkpC4otue7ez/EqWFwUp
+	 K/o6aC78f4ISdQ3Fq+dC2gEjsKKFLox4Ud0K+lP2SVrsy39fXpPS9rlmYugq6sn0aW
+	 IcCZzRwiomG0O2vv4IRelSMx4U9J61MSblEl3mUfpHcnNn81mR96F0WAZ2My2mNciL
+	 wsyOuHP+9SFFw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58C93832F0; Tue,  8 Jul 2025 16:32:59 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 62C5F8331D; Tue,  8 Jul 2025 16:35:00 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E095683297
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 16:32:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 416C783297
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 16:34:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-451d7b50815so36982655e9.2
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 07:32:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751985176; x=1752589976; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ATSURZVGIaKJpvj5EwOr02mJYdYAvyv9qvyCS4VnjH0=;
- b=C0opEn4Y6x5nMFTGoS6Owth75/toAM/xf7le/QE9GO/Z+igRtywFH9rgJfuzr31cAB
- iiffbUK2XGR9aET5QLu/v4kkEzYpN0ghK3zvA1ACxbYrVFar2oiBSxG/jIhpdX76ZoyW
- ZiTNGdjPDiZ54yjpsGx4jhd7YtG16567pokIYm6q/yoB9teXFlzojdQCuRrBAsxN6Oro
- 2doYVtRNzkeP+MjW8IAURTcvXctiQaQAPR72xAfapdkRmab0VtN0BlMJ27ajvWg+llUE
- g9+DRBxhvVtoKiADvqE0yiHSTFFcrLtQloS6PDOqqsLDBik5DSVmX74yTetuoaIWsmGL
- 6RiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751985176; x=1752589976;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ATSURZVGIaKJpvj5EwOr02mJYdYAvyv9qvyCS4VnjH0=;
- b=dTFT5NEJK4sF9FnF9gZ+Y0Zep4sIEJ3LqID414HFbCCisX8i+l1+X2l3rcIdZByzZX
- BgmHTlRDzHa70CzlHVpb/hC4JwFUhhRcki953bL6YO3n6b1TJ7LicQ0Iw+Jdc7ci8Row
- ach+ghxpZvt7Fmk1mbj2bHBhHE8FsKi+hJyPEdjlBSVpnsKWzPvohROwZ7Tf5hyxRDA/
- 3gRXQgl3HFwXMOKToarPEgbGqO+iA5uc59pT2izMqb6CudAv+tBqTF5aWStccMQgoKeU
- Jtyp/71a8e4AkOhUYc2i07BYVW8VB8aRTUQGWbVYssbFb5ELMcujachsBTb2b8jJnDt4
- E56g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxkXZTEFsrZCGf/2m7UXc/Q20pWjY1FAwYlOYR7QF5mnA1kGBGgkAgUhZBSn3IyY4YObOvHSg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzigezpN8j7uUrlPeGXxMOOD6KncQCVI3jgd6fSb0cq1sbnhmRo
- 8ZSEllNVpVLCF7WuziWW0AG7VzWf5uN4gKehfeU1w+/rE8RTVFFX1oCn459tqKFpyPQ=
-X-Gm-Gg: ASbGnctKL75zKr2kxk3oZlruWt4wgpoCPytVnTqmuHJ7jZ7CD2h0ciXYz3zleMgwebc
- vPnOVtr+jf3fp5yctu1DjIQkV3DwH+s1JYB8PdTDUeI5WYM6QUEU8iAdDtUDqOWE6/mCm9sio8h
- UipSRyMO0tfQrkexeeQCPLQ6AycvogcaU4c5Lbp59JAf14LoHSmkA4bMhAAfpKpqb9/slpKZHWI
- zNypPsqiSZA/p6crPDb9U4jVu/vm1i7hbNTXCmM0heW2VPBtEdmnF05k4y6Xo4E3/yNDx4ajeY4
- lbg5CQBFigV9vP9D/k3Y4D2epKA3ip6vd8c/om29e44kH/afZ/PD5lAjmvQJnd8d6/sIFTnX+75
- FCsaAI5CWAcnBqfLqnbtySATJJm06rhQfUl7yuGNR2igfoc0=
-X-Google-Smtp-Source: AGHT+IFGzl3lG1fpNkM0UCSome96qNyNLTi1NJFw2XDx9R4YoKmM3bggjDKJ1SVLU9Rn00CmUnbL2Q==
-X-Received: by 2002:a05:6000:18a5:b0:3a5:2182:bce2 with SMTP id
- ffacd0b85a97d-3b4964c0a9fmr15969556f8f.17.1751985176225; 
- Tue, 08 Jul 2025 07:32:56 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:e07:801:a08:6480:3e01:6cde?
- ([2a0a:ef40:e07:801:a08:6480:3e01:6cde])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454cd45957fsm23055335e9.17.2025.07.08.07.32.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 07:32:55 -0700 (PDT)
-Message-ID: <43d86312-c109-4f22-9ea2-92725030f053@linaro.org>
-Date: Tue, 8 Jul 2025 15:32:55 +0100
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="b5mELbRE"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 99B0D10380104; 
+ Tue,  8 Jul 2025 16:34:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1751985297; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=jlUK/r1SMwenBWdhGsrhO+qIhSRo7AnLaDigTN/Rf7M=;
+ b=b5mELbREVKm6ZW0dtJKJxubGf/K3dR5XNVNSfXizI9aEjPa5iRn2/qZ/WoopFVjejJ4IIf
+ 1mbQWyvtAcTjqSLNAwXgzoEvRHENeJQlPysvzENcQYK2SIVfNV1g0y0UncFfdyUYlycA7j
+ pPQd39Dun2E8XKCE4UnbBLn4aBWazjVUcNIe3dLmkcD68gV6sW+hkBUKpMnLt6U8mCHt4j
+ I8B/Pi/7Tm5QXjoKpuxAoLx3OEyG2KerZZDZo/2xe7XrOvsjjNueSDqvsFcTGGhKhVjmGT
+ 833lGLEZs/URNZD4OyulBDU6X4l6QC74e6siTFNyFqs1dBOrLa/B933dhhOx4w==
+Date: Tue, 8 Jul 2025 16:34:52 +0200
+From: Philip Oberfichtner <pro@denx.de>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v4 1/3] Makefile: Add size check for u-boot-with-spl.bin
+Message-ID: <aG0sjC1h5ggy-THS@antares>
+References: <20250708103959.26129-1-pro@denx.de>
+ <20250708103959.26129-2-pro@denx.de>
+ <CAC_iWjKFBJRG290byhLj0cZjdLKhWOD+7NMZu5OY1sokgNb8Lw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fs: btrfs: Do not free multi when guaranteed to be NULL
-To: Johannes Thumshirn <Johannes.Thumshirn@wdc.com>,
- =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, WenRuo Qu <wqu@suse.com>,
- Tom Rini <trini@konsulko.com>
-Cc: "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20250708-btrfs_fix-v1-1-bd6dce729ddd@linaro.org>
- <8780edf7-e89e-424c-8770-2d45ab8849d4@wdc.com>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <8780edf7-e89e-424c-8770-2d45ab8849d4@wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAC_iWjKFBJRG290byhLj0cZjdLKhWOD+7NMZu5OY1sokgNb8Lw@mail.gmail.com>
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,43 +86,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08/07/2025 15:16, Johannes Thumshirn wrote:
-> On 08.07.25 13:35, Andrew Goodbody wrote:
->> multi is guaranteed to be NULL in the first two error exit paths so the
->> attempt to free it is not needed. Remove those calls.
->>
->> This issue found by Smatch.
->>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>    fs/btrfs/volumes.c | 2 --
->>    1 file changed, 2 deletions(-)
->>
->> diff --git a/fs/btrfs/volumes.c b/fs/btrfs/volumes.c
->> index 5726981b19c..71b0b55b9c6 100644
->> --- a/fs/btrfs/volumes.c
->> +++ b/fs/btrfs/volumes.c
->> @@ -972,12 +972,10 @@ int __btrfs_map_block(struct btrfs_fs_info *fs_info, int rw,
->>    again:
->>    	ce = search_cache_extent(&map_tree->cache_tree, logical);
->>    	if (!ce) {
->> -		kfree(multi);
->>    		*length = (u64)-1;
->>    		return -ENOENT;
->>    	}
->>    	if (ce->start > logical) {
->> -		kfree(multi);
->>    		*length = ce->start - logical;
->>    		return -ENOENT;
+Hi Ilias,
+
+Thanks for having a look at this!
+
+On Tue, Jul 08, 2025 at 02:31:37PM +0300, Ilias Apalodimas wrote:
+> > diff --git a/Makefile b/Makefile
+> > index fa9ce756083..791c00713ec 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -1545,6 +1545,7 @@ OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
+> >                                    --pad-to=$(CONFIG_SPL_PAD_TO)
+> >  u-boot-with-spl.bin: $(SPL_IMAGE) $(SPL_PAYLOAD) FORCE
+> >         $(call if_changed,pad_cat)
+> > +       $(SPL_SIZE_CHECK)
 > 
-> What tree are you working against? __btrfs_map_block() is "gone" since
-> cd4efd210edf ("btrfs: rename __btrfs_map_block to btrfs_map_block")
-> which is more than two years old.
+> There's a rule in the Makefile
+> ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
+> SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
+> else
+> SPL_SIZE_CHECK =
+> endif
+> 
+> and
+> 
+> isn't this running?
 
-master
 
-https://source.denx.de/u-boot/u-boot/-/blob/master/fs/btrfs/volumes.c?ref_type=heads#L975
+Well, before this patch it only ran for the u-boot-spl.bin target. But I
+also need it for the combined u-boot-with-spl.bin image.
 
-I am not seeing the commit you mention in master or -next.
+I'm not sure if this answers your question?
 
-Andrew
+
+Just for reference I'll put a link to the previous discussion with Tom:
+https://patchwork.ozlabs.org/project/uboot/patch/20250527121049.106825-2-pro@denx.de/
+
+
+Best regards,
+Philip
+
+> 
+> Thanks
+> /Ilias
+> 
