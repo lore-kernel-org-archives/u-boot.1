@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AC7C83F09
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 15:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C0CC8303C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 15:35:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE3698340A;
-	Tue,  8 Jul 2025 17:29:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 539DB83390;
+	Tue,  8 Jul 2025 17:35:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MdSMUTbY";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="y5CvyTX2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E76B2832F0; Tue,  8 Jul 2025 17:25:13 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 157C083390; Tue,  8 Jul 2025 17:35:37 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BE3A8338D
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 17:25:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7DFB832F0
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 17:35:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ae361e8ec32so897406266b.3
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 08:25:12 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ae0d758c3a2so751534266b.2
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 08:35:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751988311; x=1752593111; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1751988934; x=1752593734;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l/lPPO0E/5Qz4QjFXYKvJlr+YdtKSLO1x6QwruZyeBw=;
- b=MdSMUTbY947fhytlWcJp3NeKnB9NyD9BlL3QQvKIjxsMfezsacqidih8yrb0M+1Tfl
- llvBTGSRJoRc3Yu/3t/3vQWb/yuSdDtrpL3foFc0eNsIUfEJSJNeYWkAu1JdugiLE9Tl
- SIlVICRIhNOxhkvNf61xnHweETy5BfMdo9y4m1XdOPskl94sCseFtjxcBPTA4/2l8nMf
- 7HR8b4qcPuiICaZp46ZFqWrKV8UiHYno1DRs+SvKwHHqtNPx6Pks8nLa0aVz6Dnn9U29
- 5f8u1GpLVC+hPtHkgCtUswdvoWTS2fAbJ3ij/jW909VqvYAGlLs8ZrlhkLLoden/3jfE
- HJew==
+ bh=oIU5KmbOc0FVRlI3BOhsjkiTNoK0U3ceqDvHi8115ao=;
+ b=y5CvyTX2hXqUrb67f0p6lT1i4NL34khjMQRJTRg0ve1LyImbcKsGA6fIc1q9aO//4S
+ LvuN9pOXlKVz0yEN5ABgpQXt78ZAiiLWVBiz+43mFvYmqEXYz7ifG7/e/kXt2cviloxp
+ nkmLBgtJtDO6f3U0DCjhjguuvNbOVM5fY3x0EMfDdHm+Zn9Xt72nbLf21QI5JUlv1s/L
+ DOwGv8DsQUpH8PZcRCz9wo5CkIlWZfL3RCmsrDyLNa3whl0BjL+eQCyq4DXoKMbVMwFx
+ UPwsEyAwisuwDO2TFIziW4Bb65qwBPAIzyw4MmQZ5Lc0N6cWWleb18Qhkomh2TfHHwQF
+ F9tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751988311; x=1752593111;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l/lPPO0E/5Qz4QjFXYKvJlr+YdtKSLO1x6QwruZyeBw=;
- b=WGM7cmkg1vXIwKDC9hm89E4liT0J/RWEhqaSn1xZZfhCFnrTVimIO5owLytb5goH07
- XySAE+TA8MJBnS8SWmVf13uuaIN+mzIwcXgjk0dcMskysn6/egXd13xDXtst0E+PoJcY
- DPQNMBn7dGgXRk3gVQI3PUzJuSgFZgvVAbNmoNx8x5pAv0GS8lecKOHRAaP3owtNoGDm
- f7ZqCS+P8ljp+gOjUk7YqAPmtbUyxwD51oOlLF5F2llrFb+3UU5HLEZBRTKPxkZEq/Gy
- sICd+WbohaZSQhky9YcDWUnUC6ZVEnCFDuLsy8z8CqCrcxRU47XJ2eH3ZFRHGNtcy98k
- x00w==
-X-Gm-Message-State: AOJu0YyNXYiueSj8YYVaiHty8DyPFX8P8eKYVDFrgEsb+GZEvSHDnI/r
- IbwuAlUr4Yh7Uaz5c+4uUFjvdZgNYypIMVpQPIkRQYJQ6kUFAtdpRpoPgJkWoIFO
-X-Gm-Gg: ASbGncvTx/I+LWu6OgCK8han099UDPLrczf2VlSj9tVGhIIq6RNy9UNPpQ1ATF/e3Kw
- 5UX1qMk/L295pQhT0wxbYe8EWqslQZf9qQSndAJPSF0BujB4VZ/CwjlZ2ihkQOEpVQlBUJQ5GgQ
- NjzIZyAUdQNZ/It4sROJ5zbTe/RiksYico0kq+P9wJgDqjqhg+pOw8falrEStGq4q7IvNx2cMjv
- cXPBEucSWB/28ejbGMMoeSARZzDnA6Mk2ZUo4br/FO+ZdSif32Zp3bQ5bEUZM8hQNglyNX6SHz8
- T6ZoZL65v75D1RYXsLCupkmDQrbJm+QOG9zae79DTiAuiA0jrJHxdThimuIMTUtVb5l1d60Vbzw
+ d=1e100.net; s=20230601; t=1751988934; x=1752593734;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=oIU5KmbOc0FVRlI3BOhsjkiTNoK0U3ceqDvHi8115ao=;
+ b=E3ieOvpRfiWUZTzJ/E1gUEhKffo97/rDeLu8KJNOvR2DXcXfpXKm3FeLIEmnRvpT/5
+ CJXgiUN/mFyOX7EWFMtYhmhaPRTO8lcj6g2f+9gQJZwEB3apIxwF6Jynj3DoXi3XNC+T
+ S2fh0odoPBZ80DASh18JEv2CYQLs4tZIaK54yhnivha9R5jB/vWVOKWrHaw3ijTTrnrX
+ 8ncvwNAM6bdpmyc04NlFtP5j1Izu4aS+wDXFC0Tde02kghpPLhuUddxHcAzXcQ4nD5mm
+ ofvR8Qs/sLu+XVu+HaDUsdxe8D9YHAPr2pF1EKxmviff2DQt8vclmCiHN+myknIopT5H
+ PSxw==
+X-Gm-Message-State: AOJu0Yw/p/qppCjBL8t0I63Pwpkf/MqyY9H7wO18cc08jsNQ2VRVpG0v
+ dnrvRQJub69dlbm1LCTLK/XkYHnhdLWcKno2DENtz4ZrGPiQCUSX+Dym9Ey6AYosYWxDqldscOH
+ FGqxDZQ==
+X-Gm-Gg: ASbGncvl06i5+lIRfASxJdASW4kuR21BlMES1fk5MwhI9u4eZLPEAoyyyFWh4VBzudJ
+ d7gfn52GcJjX6Glj0MOxrTvk8v5FZXGL/tkGWAQ45hLRw+hssCEPfno/jZ71tI0jKZCY2HBDbuX
+ 8ES11htRf5CsFmTo1sVemWTSTf+vOd5gqnKdVp5V4Jzd4x5vUNAmHgqBhw5Cg2oC/3Ncp+l4oua
+ /pBqSLzbIXs8H/HDzux6+MKltp86XDyo45OiKh5f7IXvSUl8k8GEGMvS8zInyoIdg1lBc3wGhNO
+ BYFaJBokNirjzHGuS+NVAQqkppOS7g7HyhVmRaQJz20Tx+RBxl3k6XzqII/d4fwzJZWE3aU9Zgg
  =
-X-Google-Smtp-Source: AGHT+IG7TKCl+lh7so+SNdD6rKm9y2WF2RrFadTD8oE3UYunozc+YHfSv5QMQGv8kfllnuYCTGe9KQ==
-X-Received: by 2002:a17:907:9404:b0:ae3:ed39:89ba with SMTP id
- a640c23a62f3a-ae6b0b1e8dcmr373349666b.11.1751988311339; 
- Tue, 08 Jul 2025 08:25:11 -0700 (PDT)
-Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
+X-Google-Smtp-Source: AGHT+IF10T1oSKib8ZluT0QKzzaV3tC6VQFIkcICiYa2rnz5yhPbfsbU3ao2HsFSs52UrzEeup9Tig==
+X-Received: by 2002:a17:907:9705:b0:ae0:b3cd:b7f8 with SMTP id
+ a640c23a62f3a-ae6b0e30386mr417918866b.40.1751988933870; 
+ Tue, 08 Jul 2025 08:35:33 -0700 (PDT)
+Received: from [10.254.183.223] ([149.199.62.131])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f66d931csm921950666b.10.2025.07.08.08.25.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Jul 2025 08:25:11 -0700 (PDT)
-From: vtpieter@gmail.com
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: michal.simek@amd.com,
-	Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v5 6/6] configs: enable FPGA commands and drivers at
- sandbox_defconfig
-Date: Tue,  8 Jul 2025 17:24:51 +0200
-Message-ID: <20250708152455.1214487-7-vtpieter@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250708152455.1214487-1-vtpieter@gmail.com>
-References: <20250708152455.1214487-1-vtpieter@gmail.com>
+ a640c23a62f3a-ae3f692fdcesm918678966b.63.2025.07.08.08.35.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Jul 2025 08:35:33 -0700 (PDT)
+Message-ID: <4fb58823-45e5-4cbb-b3cb-f648e42d9104@monstr.eu>
+Date: Tue, 8 Jul 2025 17:35:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 08 Jul 2025 17:29:30 +0200
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] AMD/Xilinx changes for 2025-10-rc1
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,53 +98,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+Hi Tom,
 
-Enable to facilitate compiler checks on most FPGA-related sources.
+please pull these patches to your tree. Gitlab CI is not reporting any new 
+issue. Most of the changes are related to mini configurations and then small 
+cleanups which I have collected so far.
 
-Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
----
- configs/sandbox_defconfig | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+Thanks,
+Michal
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 4f6943d1a4b..a64e208ad89 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -78,6 +78,11 @@ CONFIG_CMD_MX_CYCLIC=y
- CONFIG_CMD_MEMTEST=y
- CONFIG_CMD_CLK=y
- CONFIG_CMD_DEMO=y
-+CONFIG_CMD_FPGA_LOADP=y
-+CONFIG_CMD_FPGA_LOADBP=y
-+CONFIG_CMD_FPGA_LOADFS=y
-+CONFIG_CMD_FPGA_LOADMK=y
-+CONFIG_CMD_FPGA_LOAD_SECURE=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPIO_READ=y
- CONFIG_CMD_PWM=y
-@@ -196,6 +201,21 @@ CONFIG_SANDBOX_DMA=y
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_ARM_FFA_TRANSPORT=y
-+CONFIG_FPGA_ALTERA=y
-+CONFIG_FPGA_STRATIX_II=y
-+CONFIG_FPGA_STRATIX_V=y
-+CONFIG_FPGA_ACEX1K=y
-+CONFIG_FPGA_CYCLON2=y
-+CONFIG_FPGA_LATTICE=y
-+CONFIG_FPGA_XILINX=y
-+CONFIG_FPGA_VERSALPL=y
-+CONFIG_FPGA_SPARTAN2=y
-+CONFIG_FPGA_SPARTAN3=y
-+CONFIG_FPGA_VIRTEX2=y
-+CONFIG_SYS_FPGA_CHECK_BUSY=y
-+CONFIG_SYS_FPGA_CHECK_CTRLC=y
-+CONFIG_DM_FPGA=y
-+CONFIG_SANDBOX_FPGA=y
- CONFIG_GPIO_HOG=y
- CONFIG_DM_GPIO_LOOKUP_LABEL=y
- CONFIG_QCOM_PMIC_GPIO=y
+The following changes since commit b379335f141e3ddca0cdbb5d9d39af0444530542:
+
+   configs: Resync with savedefconfig (2025-07-07 14:15:18 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
+tags/xilinx-for-v2025.10-rc1
+
+for you to fetch changes up to a00f312e745db563e5c992e461dc4d24ed949370:
+
+   arm64: versal2: Remove the ZynqMP Firmware from mini ospi (2025-07-08 
+15:01:25 +0200)
+
+----------------------------------------------------------------
+AMD/Xilinx changes for v2025.10-rc1
+
+cmd:
+- Introduce CMD_HELP Kconfig option
+
+fpga:
+- Fix in intel_smd_mb
+
+mini:
+- Remove simple-bus driver and description
+- Disable CMD_HELP
+
+firmware:
+- Fix dependencies
+- Switch to new SMC firmware format
+
+cadence qspi:
+- Fix read/write STIG mode
+- Set tshsl_ns to at least one sclk_ns
+
+sdhci:
+- Call sdhci reset if wired
+
+zynqmp-clk:
+- Add support for DPLL clock source
+
+zynqmp:
+- Sync clock ID bindings with Linux
+- defconfig updates
+- Enable rng-seed generation
+
+versal:
+- Fix clock dependency
+
+versal2:
+- defconfig updates
+- Enable sysreset
+
+----------------------------------------------------------------
+Michal Simek (6):
+       clk: versal: Fix clock driver dependency
+       firmware: xilinx: Prepare code for new SMC firmware format
+       xilinx: Remove simple-bus description from mini configurations
+       arm64: zynqmp: Enable rng-seed generation
+       cmd: Introduce CMD_HELP
+       xilinx: Disable help command for all mini configurations
+
+Naresh Kumar Ravulapalli (1):
+       drivers: fpga: intel_sdm_mb: Check SIP SMC status in send_bitstream()
+
+Padmarao Begari (2):
+       clk: zynqmp: Add support for dpll clock source
+       xilinx: zynqmp: Enable xilinx ethernet phy
+
+Tom Rini (2):
+       arm: zynqmp: Remove local copy of 'dt-bindings/clock/xlnx-zynqmp-clk.h'
+       firmware: xilinx: Tighten dependencies for ZYNQMP_FIRMWARE
+
+Venkatesh Yadav Abbarapu (10):
+       mmc: zynq_sdhci: Reset the host controller
+       config: amd: Enable the SPI_STACKED_PARALLEL config option
+       xilinx: zynqmp: disable CONFIG_SPI_FLASH_BAR
+       arm64: versal2: Do not define do_reset() if sysreset is enabled
+       arm64: versal2: Enable reset and poweroff via sysreset framework
+       config: versal2: Update timer clock to 100Mhz
+       spi: cadence_qspi: Fix odd byte write issue in STIG mode
+       spi: cadence_qspi: Set tshsl_ns to at least one sclk_ns
+       cadence_qspi: fix odd byte read issue in STIG mode
+       arm64: versal2: Remove the ZynqMP Firmware from mini ospi
+
+  arch/arm/dts/versal-mini-emmc0.dts               |  36 +++---
+  arch/arm/dts/versal-mini-emmc1.dts               |  36 +++---
+  arch/arm/dts/versal-mini-ospi.dtsi               |  52 ++++----
+  arch/arm/dts/versal-mini-qspi.dtsi               |  40 +++----
+  arch/arm/dts/versal-net-mini-emmc.dts            |  36 +++---
+  arch/arm/dts/versal-net-mini-ospi.dtsi           |  56 ++++-----
+  arch/arm/dts/versal-net-mini-qspi.dtsi           |  42 +++----
+  arch/arm/dts/versal-net-mini.dts                 |  26 ++--
+  arch/arm/dts/zynqmp-clk-ccf.dtsi                 |   2 +-
+  arch/arm/dts/zynqmp-mini-emmc0.dts               |  31 ++---
+  arch/arm/dts/zynqmp-mini-emmc1.dts               |  31 ++---
+  arch/arm/dts/zynqmp-mini-nand.dts                |  35 +++---
+  arch/arm/dts/zynqmp-mini-qspi.dts                |  25 ++--
+  board/amd/versal2/board.c                        |   2 +
+  board/xilinx/common/board.c                      |  33 ++++-
+  cmd/Kconfig                                      |   6 +
+  cmd/Makefile                                     |   2 +-
+  cmd/help.c                                       |   6 -
+  configs/amd_versal2_mini_defconfig               |   2 +
+  configs/amd_versal2_mini_emmc_defconfig          |   2 +
+  configs/amd_versal2_mini_ospi_defconfig          |   5 +-
+  configs/amd_versal2_mini_qspi_defconfig          |   2 +
+  configs/amd_versal2_virt_defconfig               |   6 +-
+  configs/xilinx_versal_mini_defconfig             |   2 +
+  configs/xilinx_versal_mini_emmc0_defconfig       |   2 +
+  configs/xilinx_versal_mini_emmc1_defconfig       |   2 +
+  configs/xilinx_versal_mini_ospi_defconfig        |   2 +
+  configs/xilinx_versal_mini_qspi_defconfig        |   2 +
+  configs/xilinx_versal_net_mini_defconfig         |   2 +
+  configs/xilinx_versal_net_mini_emmc_defconfig    |   2 +
+  configs/xilinx_versal_net_mini_ospi_defconfig    |   2 +
+  configs/xilinx_versal_net_mini_qspi_defconfig    |   2 +
+  configs/xilinx_versal_net_virt_defconfig         |   1 +
+  configs/xilinx_versal_virt_defconfig             |   1 +
+  configs/xilinx_zynqmp_kria_defconfig             |   1 +
+  configs/xilinx_zynqmp_mini_defconfig             |   2 +
+  configs/xilinx_zynqmp_mini_emmc0_defconfig       |   2 +
+  configs/xilinx_zynqmp_mini_emmc1_defconfig       |   2 +
+  configs/xilinx_zynqmp_mini_nand_defconfig        |   2 +
+  configs/xilinx_zynqmp_mini_nand_single_defconfig |   2 +
+  configs/xilinx_zynqmp_mini_qspi_defconfig        |   2 +
+  configs/xilinx_zynqmp_virt_defconfig             |   2 +-
+  drivers/clk/Kconfig                              |   2 +-
+  drivers/clk/clk_zynqmp.c                         |  20 ++++
+  drivers/firmware/Kconfig                         |   1 +
+  drivers/firmware/firmware-zynqmp.c               |  60 ++++++----
+  drivers/fpga/intel_sdm_mb.c                      |   3 +-
+  drivers/mmc/zynq_sdhci.c                         |  22 ++++
+  drivers/spi/cadence_ospi_versal.c                |  12 +-
+  drivers/spi/cadence_qspi.h                       |   4 +-
+  drivers/spi/cadence_qspi_apb.c                   |  13 +-
+  include/dt-bindings/clock/xlnx-zynqmp-clk.h      | 126 --------------------
+  include/zynqmp_firmware.h                        |   9 ++
+  test/py/tests/test_help.py                       |   1 +
+  54 files changed, 383 insertions(+), 439 deletions(-)
+  delete mode 100644 include/dt-bindings/clock/xlnx-zynqmp-clk.h
+
 -- 
-2.48.1
-
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
