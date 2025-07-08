@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39FBCC8303C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 07:36:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8735FC83F0F
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 07:40:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5359383189;
-	Tue,  8 Jul 2025 09:36:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1224583189;
+	Tue,  8 Jul 2025 09:40:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d6dQNRx9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bGZzgFcq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD9A08319F; Tue,  8 Jul 2025 09:36:51 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 4050D83242; Tue,  8 Jul 2025 09:40:54 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAE5C83145
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 09:36:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5217383145
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 09:40:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-714078015edso34826637b3.2
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 00:36:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-556fd896c99so3308165e87.3
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 00:40:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751960208; x=1752565008; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kMQRPEBGXhoLUruV+045q86yuTPtaEMg3cGupLBLcTs=;
- b=d6dQNRx9ET+qCBPqj1e/uMLD3VUv3lrVDaOe78FZKicV7xfFWL0j3U8EhPSVXpRDQ3
- KLKyqXUP70OILpjWWBspYyP+hNjfw0FHtEzjEvZwfVQMvJkTMaQToKvq9cWYx7hVp3Cm
- o3QNnIVM0NyOw4CQEaSoiTqqznN9g87qTm5qqvaucibybyxQEi046PnYfLxW2UV9bB/b
- i0//vl5s+bbpgvhtyow4fXUxaZyQ17XC1DX+BVD4v+vqhpI34Mx8cpvFnVeauWC0tUtC
- /PK2ec3UfJ6eQS0g5hw7i6nIy0LV1u1i1jlG0V+o6pFpN9qmZyjtpFBVOjTBurTeCqoy
- QFEg==
+ d=gmail.com; s=20230601; t=1751960451; x=1752565251; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7GoxAQV6on5A+VLfvSHb9NPOog6ev8c/vqIYK6eEr/Y=;
+ b=bGZzgFcqn4sHnjd1joT+tRg/MWP1djQ/RWzMNHtCZA1IcZfTpNuQohJQWQ7KNSjqoC
+ h171ghpESVAJc1ZPl1tuq+IHCVlr2EPgbK5BKD0TMbUMFPXn1We2L4UjxPySgBlcMOcT
+ vPkrqzNTbg4H51Qzd+iqjIk/Z5K+u+IEEoFC0NBDcl4xIyFk/QJGAC3vwBz/bQm+ojKT
+ hM8IbGVO2EuRiJpfSqsEI3iH1cnaH7jNQF9rjlt3WIn0FHm77qjgoF8dOonA2Ti05Hzf
+ 0PbHWUITVq0oQFwnnMFf9IKbo6cxtY9IxZNxCmT2YUpnzJ0+6awoC6F4W1PDlBQiDSvH
+ hqdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751960208; x=1752565008;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1751960451; x=1752565251;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kMQRPEBGXhoLUruV+045q86yuTPtaEMg3cGupLBLcTs=;
- b=pVxngfJIL++93YtStT99OykBICE9hv2vfrgDr/hSkl01xy5PZ32GDs0sTDmQPdW8vU
- OcsEeriIBulLMjWqKFc4NXhhG+m6SYpwJt2i2XTvyFWHdkMh702XURweaps3rI1nrKGJ
- RTIWizwGu9JUzXFrfSG41m+gbpvz1SbJpg6mphgHYu2EiCqNU2t+aiAzaCyVwAAqzvWb
- FwVW7QV7Rx7n0qHx4EMRCRWPXTgvW5zX/9O3w+2u9IsegfWIyIFcQoJHkYNwqQ9hRTLS
- Q3LtwTpjH+oC68s5JHky8KZoNecnFD/ZPOU5fHp9u101ztGvBSD1gvc7dNwlaEleApOE
- VonA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXIJ6N/vbcwD3Npj/YS2EZLTDOnKzIPovw7aAXe2SWWVpQERZXebT5l2jB1pJX5T1hAFP9s+eo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwU+xOTgdbzz4zZsMc6GM15GPsvP31dMbylsVP7czS2cH6SxIha
- q028X4VAT2tQtyudpZUdYP1QfhLEUUnrEvHqCvtCrbwM1ID13A0VxBt4IMV9UtLXh2G4b1TOOef
- es34fwPQtGPZoiTT/TaezMUEEGORf1Kpk/AgkoBPGCw==
-X-Gm-Gg: ASbGncvjLaDkk/6s1IDM7NuiLwMt+16lBK8plQYfmoU9J7jCOtejRDMWPMEcftVIXfA
- Q/6yabYkg9MLjOyP1HjTQW6AD28nj8fZM6duf5PjAqXW0LFRBxjNAlTSM/cmRJzwRCKu3tYlIPu
- 43ehJSMETOz2bZvVU9T/8cACwBc5LXrdfOb0qgRnMg8eA=
-X-Google-Smtp-Source: AGHT+IFaX2tai5zzvJb3lk8D62kM9s+TtXAIj/V+xntrnkc8cbHevYDZ2RTzeHoJk39XjaM9ZNltxpMMAUQ59x+Wp/o=
-X-Received: by 2002:a05:690c:6f82:b0:70d:ed5d:b4dd with SMTP id
- 00721157ae682-7166b699231mr193340087b3.25.1751960208579; Tue, 08 Jul 2025
- 00:36:48 -0700 (PDT)
+ bh=7GoxAQV6on5A+VLfvSHb9NPOog6ev8c/vqIYK6eEr/Y=;
+ b=E9uAIQ069OQINKT5vfOmAn5MMcJJJNXglb8t3qJO0TMOxAuUpAzWJKKGjYax1Afeew
+ SqZBa+FcJvOuHQ3Z4v4QMp5/AymXrbPA5ZLG0KPvyY7HNyRVu9kjncFozUbckiz5SOvL
+ vQOKN/QoUCSkdIBQXF4T4nQYT8IiOXiq5EtNPGLFNv/Ch1kYkmbIkySHE8COvssf9Lnu
+ YoZj2ju5l9PeKuOJBIe7Hk0Gh6kUvJ3qAHK8IaMatmIzh4Vpc0uAL6TV7yCyeZbhkdUh
+ hEnmitd5PE0ExR/KCm8iArAYnAvQR1t3sPhx64b7vdSrtCKoCUHjS4rADdny1zo/C2Ge
+ 5zMA==
+X-Gm-Message-State: AOJu0YwwqQLaFJil081cHNHLvFRhvgyJ9LZZNagootvR1SAocANqSVt4
+ vshDPA1ML8K/v8gfucBxIsv3zReBciQLw+xtVC54t0Wh0q8ETWkFZe1P
+X-Gm-Gg: ASbGncv6epzdj5bcbOneC9TP5QqZKiM+oEWR8uyaWvWYdVYOQaAMEVSO1qt5K1YKDhh
+ ePGmviKjSA3GN+SDUqgT6FcZAEIL4usWqgXz32G68UCqRfOLsMg5MdQHsSlXUWD4j+EkbnAA+2Y
+ U/acP2xbuRqR3D589t/MVQg1+KqfwxBXffkmfv+Av6wNJDFBjTyt5qIM37Yk5notQAlmJ+0k5Cu
+ SCm0prfKSyjEB4sWxsW/qCDd8vwXLicJEaqxr1NYL+aBXkAODFqWdstiTSMocHBOGyJ2rJmqLhc
+ PXME0hBXQHQ0OGHPyM/h+VRqRSdONzz4PbjVZUD9sqSz40LO2PLA5PKosCRbR+C0
+X-Google-Smtp-Source: AGHT+IG9/I23On5IpE7BhuIRTC+fMo/X0sgIvJjkZn/n91lj6nv8Tv1lJRnbtZzrvLaD/cbC895tfw==
+X-Received: by 2002:a05:6512:159a:b0:553:2bf7:77ac with SMTP id
+ 2adb3069b0e04-557aa86bf06mr4713166e87.41.1751960451263; 
+ Tue, 08 Jul 2025 00:40:51 -0700 (PDT)
+Received: from xeon.. ([188.163.112.61]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-556384c5248sm1582662e87.228.2025.07.08.00.40.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Jul 2025 00:40:50 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/1] Tegra30: add support for Pegatron Chagall
+Date: Tue,  8 Jul 2025 10:40:28 +0300
+Message-ID: <20250708074031.9946-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250707095322.30222-1-paulliu@debian.org>
- <20250707095322.30222-2-paulliu@debian.org>
- <8AF80705-BB09-4AAD-8604-3D967295AB30@gmx.de>
-In-Reply-To: <8AF80705-BB09-4AAD-8604-3D967295AB30@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 8 Jul 2025 10:36:12 +0300
-X-Gm-Features: Ac12FXwJCo0_cJtB100Gq9U8rVOIrIV2ab7FzaU122GfyoAi53DfnrL2Hf4xv38
-Message-ID: <CAC_iWjLL2jZ6m6FWFSyiWdr+BExuj7rEJ7CMLQ5CDbDgpJKYew@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi: turn on EFI_DEBUG_SUPPORT for qemu arm and arm64
- target
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,76 +93,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
+Add support for Pegatron Chagall Tegra 3 tablet.
 
-On Tue, 8 Jul 2025 at 06:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> Am 7. Juli 2025 11:53:22 MESZ schrieb "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>:
-> >Previously, EFI_DEBUG_SUPPORT was enabled across all platforms for
-> >CI build testing. With this commit, we are limiting its activation
-> >to qemu_arm64_defconfig and qemu_arm_defconfig only, which is
-> >sufficient for our current needs.
->
-> Was there a request to turn it off on other platforms?
+Svyatoslav Ryhel (1):
+  board: chagall: add Pegatron Chagall support
 
-I asked Paul to send this, because it grows the binary size a bit.
-Since it a debug protocol, I thought we could only enable it for QEMU
-to test it.
-If you want that on for risc-v we can turn it on for QEMU as well?
+ arch/arm/dts/Makefile                     |    1 +
+ arch/arm/dts/tegra30-pegatron-chagall.dts | 1291 +++++++++++++++++++++
+ arch/arm/mach-tegra/tegra30/Kconfig       |    5 +
+ board/pegatron/chagall/Kconfig            |   13 +
+ board/pegatron/chagall/MAINTAINERS        |    7 +
+ board/pegatron/chagall/Makefile           |   11 +
+ board/pegatron/chagall/chagall-spl.c      |   41 +
+ board/pegatron/chagall/chagall.c          |   23 +
+ board/pegatron/chagall/chagall.env        |    9 +
+ configs/chagall_defconfig                 |   80 ++
+ doc/board/index.rst                       |    1 +
+ doc/board/pegatron/chagall.rst            |   41 +
+ doc/board/pegatron/index.rst              |    9 +
+ 13 files changed, 1532 insertions(+)
+ create mode 100644 arch/arm/dts/tegra30-pegatron-chagall.dts
+ create mode 100644 board/pegatron/chagall/Kconfig
+ create mode 100644 board/pegatron/chagall/MAINTAINERS
+ create mode 100644 board/pegatron/chagall/Makefile
+ create mode 100644 board/pegatron/chagall/chagall-spl.c
+ create mode 100644 board/pegatron/chagall/chagall.c
+ create mode 100644 board/pegatron/chagall/chagall.env
+ create mode 100644 configs/chagall_defconfig
+ create mode 100644 doc/board/pegatron/chagall.rst
+ create mode 100644 doc/board/pegatron/index.rst
 
-Thanks
-/Ilias
->
-> Best regards
->
-> Heinrich
->
->
-> >
-> >Signed-off-by: Ying-Chun Liu (PaulLiu) <paulliu@debian.org>
-> >Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >Cc: Tom Rini <trini@konsulko.com>
-> >---
-> > configs/qemu_arm64_defconfig | 1 +
-> > configs/qemu_arm_defconfig   | 1 +
-> > lib/efi_loader/Kconfig       | 1 -
-> > 3 files changed, 2 insertions(+), 1 deletion(-)
-> >
-> >diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-> >index 39afb837e41..54bf4646382 100644
-> >--- a/configs/qemu_arm64_defconfig
-> >+++ b/configs/qemu_arm64_defconfig
-> >@@ -15,6 +15,7 @@ CONFIG_ENV_ADDR=0x4000000
-> > CONFIG_PCI=y
-> > CONFIG_DEBUG_UART=y
-> > CONFIG_AHCI=y
-> >+CONFIG_EFI_DEBUG_SUPPORT=y
-> > CONFIG_EFI_HTTP_BOOT=y
-> > CONFIG_FIT=y
-> > CONFIG_FIT_SIGNATURE=y
-> >diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-> >index 92ba48f6af9..b1c277a86c0 100644
-> >--- a/configs/qemu_arm_defconfig
-> >+++ b/configs/qemu_arm_defconfig
-> >@@ -18,6 +18,7 @@ CONFIG_ENV_ADDR=0x4000000
-> > CONFIG_PCI=y
-> > CONFIG_DEBUG_UART=y
-> > CONFIG_AHCI=y
-> >+CONFIG_EFI_DEBUG_SUPPORT=y
-> > CONFIG_FIT=y
-> > CONFIG_FIT_SIGNATURE=y
-> > CONFIG_FIT_VERBOSE=y
-> >diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> >index 077466f01f0..fdabe9cc278 100644
-> >--- a/lib/efi_loader/Kconfig
-> >+++ b/lib/efi_loader/Kconfig
-> >@@ -73,7 +73,6 @@ config EFI_SIGNATURE_SUPPORT
-> >
-> > config EFI_DEBUG_SUPPORT
-> >       bool "EFI Debug Support"
-> >-      default y if !HAS_BOARD_SIZE_LIMIT
-> >       help
-> >         Select this option if you want to setup the EFI Debug Support
-> >         Table and the EFI_SYSTEM_TABLE_POINTER which is used by the debug
->
+-- 
+2.48.1
+
