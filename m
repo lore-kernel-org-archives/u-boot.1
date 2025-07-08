@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E1AC8303C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 11:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E154C83F0A
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 11:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59EA283123;
-	Tue,  8 Jul 2025 13:37:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id B4AC083123;
+	Tue,  8 Jul 2025 13:38:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="B9wonGDR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k9241V2L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D65083242; Tue,  8 Jul 2025 13:37:43 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BA11A832FE; Tue,  8 Jul 2025 13:38:09 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 368EC830B4
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 13:37:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8055830B4
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 13:38:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 073FA3F27F
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 11:37:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1751974660;
- bh=aYL08g+5X1s8G4bu9C+A14GfRdCDZHbqjfJbf5jzyo4=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=B9wonGDRQD33FtutyZkSuch4LhDGNjK4qIo1u+r6AQhlTZ/h3A+50ctWkUrNRM9nZ
- rNm9eV7VPH28UPfJ/NZNJRkQLPP59BbA83tf6ZMq0j6ThGyq7FPoatiUcifF7hdMdq
- Vnsu/w9m9VkCI9LeSVFXeCyy4aPZKGbe85kPcphYoVo2+rBgZO5NMBDhEjssIlkTJX
- 9nVutoyNhkGR4nhlDO3Si78f0TQZ4g40vI7bB03Yzn1Yr8ljAlcoyZy4X4ISiYrG0x
- UK+UsHGDR3HVNi67AOWBA1a8oQSzEta9qkUfxwj5WulBhD3weuujZ/TSIfacPvfxDW
- ixxU1cJn8+7Tg==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-ae0a3511145so280575566b.3
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 04:37:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-556373661aaso3823310e87.2
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 04:38:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751974687; x=1752579487; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3JkHUKhzIBWte3IRirHirhkH/NRAGHhOSPiSyWPbD0A=;
+ b=k9241V2L5INBUuoEqVHkhESzSt6BSZc/i+Lr8TTm8cIkedLtUo+Ltdc/U9LRCdTvCG
+ Lsjap6JmnUo5qeWeydBGEjkTLniymFdBcis3FeiA4UFveCqB4SY86xCrtRfWAMnyRlWe
+ bjMpdCYFGafJmeqOHzLY/3wptaWjl3eO4i8S3wMpk3YJK/WHm1deLB4mN4dTVxiPINu0
+ UIZNEHPZqJfPBuNxY/9sNbr6iA4dJUJ14XHY8jcTl1Qeu+j0WWHbS9LcOYlYJv2Ovhbd
+ aNK/yuufDB32kFU1MZpNQRV3ikgAS3+nKUAXRk69qahESL54fJVpHgkrqWTwkq0yB6Wo
+ XU2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751974659; x=1752579459;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aYL08g+5X1s8G4bu9C+A14GfRdCDZHbqjfJbf5jzyo4=;
- b=kpKHbz7pUTYVI22G/XYY/UCbVwrkHQjZoA+2jU6NJ/JsGx/trQK+h11qk9CneI9L0t
- Bp1QkwQKbAXBVK/rhTMLgHefABumYUpDi6a2gPZivkFBpGyY8cOuq8OJZ4jAy7oDqnO3
- amkwAdpTApVRbKZMMtNYoRPsrmELvMyZ2WUtSKyfQdLC4hSc609yWS00jsHg476vktMx
- OXHGv08Gd3zpO53CVt16pkwN4emlTqVj8ybN9dNQ65xC30GtISYMiTP6Rc4QCdd0H/tM
- uzSBLbsIgFIyfReJwzzeYjDlP+yjm4QqYcN2wqfGF9Oqec/ncngWuFw/35cPN0qbKysP
- GEWg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWoJrRhtL7y5+Ip2nzZt3tv/3bHIVupBMBOiSnI6A+qf2umkexHnZ5bJqR6ALgyZWVgTbwLf1Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YzkMRWn8pnrIQazY90OnNrquzjjqS23nMyyBs7aD8QkSlk+4von
- /gVRR1DGww1/IADp8r8iNtJo5mq1g6mPB44znBdaEKD67Bbg0/zm1doeK4jPfcuDJkG5KQQadWF
- 9aJFCb8O54XvmECcMQnIAgRaXruzfZ+ghMZ/rDxRXjw2XdWYsFSm79lITQhQBB4aer9AvJSI=
-X-Gm-Gg: ASbGncsdu9o007QkR2r09xSIcCuMpICSs0pveYShIAANNBZXbNJibjoCd0i7bG4JPU7
- BnhamQwbjNSXig64EPEng0OPkxANrWiSREt/G3Oa3sX/FKz/dGifJRSHyI7KE9QrMbjqS6r6r+9
- WdZ2Hoqoj+lzEKuYKwfXgsKqcm7PATJEsjprMHX2QzrbGrUgsnxOB6w+5HX3G0IUZ2ytfJcFIVu
- O9t/+vwuiqEP9rJNuxbAm7aedH6YeLE/zZa0hpv7kWnhl7WDGrtnvi/AXCDhs68V+wU/Tyy04j0
- Ibt8EXJzircAoG8OBb5r8s6viMhb8DGlTyGCLPiwdPSPmNo4Rreztp4vEd2zNsHRGde1xBRwDVF
- nvaHoMjBP/PWiWuZhpogUd+FI
-X-Received: by 2002:a17:906:f5a7:b0:add:ede0:b9c4 with SMTP id
- a640c23a62f3a-ae6b06d9230mr283464466b.42.1751974658800; 
- Tue, 08 Jul 2025 04:37:38 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHUB5IMLR1NtO/tIhAazAoBT6YGzBQ2c8GA0xKJyGLH3UhkaOv3E9901/esvR9rGgY9KBPbrQ==
-X-Received: by 2002:a17:906:f5a7:b0:add:ede0:b9c4 with SMTP id
- a640c23a62f3a-ae6b06d9230mr283461766b.42.1751974658372; 
- Tue, 08 Jul 2025 04:37:38 -0700 (PDT)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f6b02788sm878883066b.113.2025.07.08.04.37.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Jul 2025 04:37:37 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jose Marinho <jose.marinho@arm.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_selftest: fix ESRT creation tests
-Date: Tue,  8 Jul 2025 13:37:32 +0200
-Message-ID: <20250708113732.74017-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ d=1e100.net; s=20230601; t=1751974687; x=1752579487;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3JkHUKhzIBWte3IRirHirhkH/NRAGHhOSPiSyWPbD0A=;
+ b=G2IGVX6L9ajpGgxiyrQad9vcbMY/HYkw8p+Kl3k+R+Rka2Q18uXown47LSs8d1Tdvb
+ OWamYcfkFKR5LXNGZ6OoA2WMxVn+fezI3vnwYTKhuUDeEeoKVX47X3mLSibn+ibwIeys
+ D3UwMEVCcqjDavD5V5igpJJ70Z1bQqDR1mkVoCuv3dleGw4vcohpKSpL0jcqP4uKvk6+
+ Gkt9CxytQ3sHh9/TfNyJpaxubVLJMrw8N0bLvHBBax8aTkWHpgqDaNVXgHz+6dYpRPD8
+ mehVBzsIV3dOEGj5T2LGh8+4lVcIMef+f+DbI2budar1g0t+pUS36eora5QOQqGOHO7Z
+ OMJg==
+X-Gm-Message-State: AOJu0Yxtzx8gqLznwSwXYFxGY6e6hkRTM7YPdNkqIllVhEYcrBGB5F86
+ OtUgAotkWpAjf6UfRlIv1zdhn3nBXrxLSW5U7MLWUt04nYWUoSs94+w6CMfIFcRVIV4JURYrl12
+ zwNUJn/qya46/yCpeMxlEeA1kN+R2gTU=
+X-Gm-Gg: ASbGncsBeDhwzmzxG2m0Szl2N0GtINyWLgJb1zhlQlb6iov7FDX47PqhkgKm1ydQ0z8
+ o6qwdrsXJpktuLhzIzpJCvx8xGvCaJlHNR7TvLikLvl9nNZbn40cBlbf/IyRrbct8r3X3ZZihhX
+ s3plxy3lwXbkZG+6QB69or17hVEA5H0FKR482RyHpIsE7GCmeuQqJEdH8/hpu7a/2XAKmk6SPcg
+ oE=
+X-Google-Smtp-Source: AGHT+IEkXwhLRU58StKBk92T4v/kQENFCHvakJMraY3bsJcV1hxGHnVKZTaviDupDIMs0M0ASHvMjBZr5D7yRClW/Zs=
+X-Received: by 2002:a2e:b88f:0:b0:32b:7614:5745 with SMTP id
+ 38308e7fff4ca-32f39b1f90cmr7613621fa.20.1751974686705; Tue, 08 Jul 2025
+ 04:38:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAOMZO5Ag7CmRBhpvOB5btNvHiAMayBoxSYMoBJXbV3-w1ET7jA@mail.gmail.com>
+ <072c3a1f-7501-891c-b2b7-a55ea47be0f4@denx.de>
+ <CAOMZO5A_7Ruaq9mE=owPctK-6uDu56kaBkqth-Vngr_CvAMHKQ@mail.gmail.com>
+ <6bea1e46-e5ce-d3aa-369c-b6fd7b0b116c@denx.de>
+In-Reply-To: <6bea1e46-e5ce-d3aa-369c-b6fd7b0b116c@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 8 Jul 2025 08:37:53 -0300
+X-Gm-Features: Ac12FXzZddf6RrV5qeGbtd15MbB14UawV61-vcWIja-jgXuJ4Pjtr59Dw_eWPg4
+Message-ID: <CAOMZO5Bsdx__qUGmwkYAAKTCbYcBVC2wExsV8o5c5mf9_N8CvQ@mail.gmail.com>
+Subject: Re: i.MX6UL: Adding bootcount support
+To: hs@denx.de
+Cc: U-Boot-Denx <u-boot@lists.denx.de>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Schrempf Frieder <frieder.schrempf@kontron.de>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ =?UTF-8?B?TWFyZWsgVmHFoXV0?= <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,39 +99,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The code foresees that parameters descriptor_size and descriptor_count
-might be NULL and then dereferences them without further check.
+Hi Heiko,
 
-The size check must take into account the descriptor count.
+On Tue, Jul 8, 2025 at 12:49=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
 
-ImageInfo might be NULL. In this case we must not dereference it.
+> Ah, looked into RM of imx6ul ... it has also a SRC_GPR2 with the same
+> comment as imx6ull has ... uff... why does this not work for you than?
+>
+> Try with md and mw and make soft resets (not power off/on !)
 
-Fixes: 4ac6041c3cbf ("efi: ESRT creation tests")
-Addresses-Coverity-ID: CID 569497: Null pointer dereferences (FORWARD_NULL)
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_selftest/efi_selftest_esrt.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Thanks for your help. It works now with the changes below:
 
-diff --git a/lib/efi_selftest/efi_selftest_esrt.c b/lib/efi_selftest/efi_selftest_esrt.c
-index b7688deb496..7eadac90fbc 100644
---- a/lib/efi_selftest/efi_selftest_esrt.c
-+++ b/lib/efi_selftest/efi_selftest_esrt.c
-@@ -69,10 +69,12 @@ EFIAPI efi_test_fmp_get_image_info(struct efi_firmware_management_protocol *this
- 	if (package_version_name)
- 		*package_version_name = NULL;
- 
--	if (*image_info_size < sizeof(*image_info)) {
--		*image_info_size = *descriptor_size * *descriptor_count;
-+	if (*image_info_size < sizeof(*image_info) * TEST_ESRT_NUM_ENTRIES) {
-+		*image_info_size = sizeof(*image_info) * TEST_ESRT_NUM_ENTRIES;
- 		return EFI_BUFFER_TOO_SMALL;
- 	}
-+	if (!image_info)
-+		return EFI_INVALID_PARAMETER;
- 
- 	for (int idx = 0; idx < TEST_ESRT_NUM_ENTRIES; idx++)
- 		image_info[idx] = static_img_info[idx];
--- 
-2.48.1
+diff --git a/arch/arm/dts/imx6ul-14x14-evk.dtsi
+b/arch/arm/dts/imx6ul-14x14-evk.dtsi
+index 1a18c41ce385..0239a153080c 100644
+--- a/arch/arm/dts/imx6ul-14x14-evk.dtsi
++++ b/arch/arm/dts/imx6ul-14x14-evk.dtsi
+@@ -384,7 +384,6 @@
+ &wdog1 {
+        pinctrl-names =3D "default";
+        pinctrl-0 =3D <&pinctrl_wdog>;
+-       fsl,ext-reset-output;
+ };
 
+ &iomuxc {
+diff --git a/configs/mx6ul_14x14_evk_defconfig
+b/configs/mx6ul_14x14_evk_defconfig
+index 0e35e5e6af57..4a6a35346759 100644
+--- a/configs/mx6ul_14x14_evk_defconfig
++++ b/configs/mx6ul_14x14_evk_defconfig
+@@ -110,3 +110,7 @@ CONFIG_SPLASH_SCREEN=3Dy
+ CONFIG_SPLASH_SCREEN_ALIGN=3Dy
+ CONFIG_BMP_16BPP=3Dy
+ CONFIG_IMX_WATCHDOG=3Dy
++CONFIG_BOOTCOUNT_BOOTLIMIT=3D3
++CONFIG_SYS_BOOTCOUNT_ADDR=3D0x20d8024
++CONFIG_SYS_BOOTCOUNT_SINGLEWORD=3Dy
++CONFIG_BOOTCOUNT_LIMIT=3Dy
+
+Thanks,
+
+Fabio Estevam
