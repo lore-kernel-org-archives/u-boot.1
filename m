@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3EC2C83F0F
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 10:33:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF97C83F0F
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 10:35:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39BD883018;
-	Tue,  8 Jul 2025 12:33:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AE2AF8318E;
+	Tue,  8 Jul 2025 12:35:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wYh90gxS";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="mr2PuAAz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5550483043; Tue,  8 Jul 2025 12:33:33 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 82B6B83043; Tue,  8 Jul 2025 12:35:46 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4301C83015
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 12:33:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA19483015
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 12:35:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-70e302191a3so34929117b3.2
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 03:33:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-607cc1a2bd8so6831271a12.2
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 03:35:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751970810; x=1752575610; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1A5QejQN6kXAHEW8RzzGLGA6I2kWt2lGKp9a0HZPAkI=;
- b=wYh90gxS0oBTSLdY47SlAlRA6hJPIHGkMPSynOsprQKD0lyXXDT57dziYIgKSSFgK2
- DhYBCb2c630O6+wvRkaOAgILqurtFiLlVyf2u4M0lp8FzEqpctEO2l/133tIjHPtjU1F
- MxmVqwTBOu/YXmfALsnLG9s1wMp59t4rFUi8pVNRL+SSyHMYhw3gaKexoM5XvTAOfxGO
- CiXrcTF9Mk9oBWJPAYgzbV7stbIQQL5z1ASqpDMP307IdAvbbyzmqR+Zn0GggDdHoGx0
- lgnUk3Mxqfu/Y1FgIyBSv5g0z9cMhEHxqQp3rkQFwFMzVI/+qfA5AWNnh/X9yaN5VXFT
- JdIA==
+ d=amarulasolutions.com; s=google; t=1751970944; x=1752575744;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KhVGrwBxYHK3vvLEWCPQWeNAp9bwMKnu9f5y1sbF6as=;
+ b=mr2PuAAz2Gb7BLLhCV+bYXRCp4YnLOM2O/xWiKCOjCLqFdiESFucxWeAQ/+REHvdh7
+ uFJTuhYR4V+A45brj82g9lb/CfhUwPD3gvUhHSTYyE3f5UAPdQY2Dvx3xv6oJem6QhBy
+ qRTc1wuexv4HZoKHLsmggLVTW3fZiirNqRO4U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751970810; x=1752575610;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1751970944; x=1752575744;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1A5QejQN6kXAHEW8RzzGLGA6I2kWt2lGKp9a0HZPAkI=;
- b=o9M9ZvHaMfHccOr+nM36sSaJ5ABU+4Xqc/TTokVmuWxa/t+TfpeQXY5Q8sqcLqyKdq
- Lnkww7uUH/i8huQOLoppkVY14IN//Vow6aR/5iRiJVy9lH1yjP9wQF9O7HUBUwKgKy5F
- uniuKBcCC1Nvl3n4znCj/3/IhB2LorgZAQCv12tzx7e+5amXTrmEijnqW3Ct5pX9Ye/E
- 2y4dy/5TnHur21TAHMXLvns+B58f3+2gPZbjobTgCmgLbvjwtSPSsHm6fKtMTUUcijt0
- 7Ax8VH0uuhApm0A5Z32vtPXoYk9BCFgurf5Vh1rWsjMm4LWeM6VLg3nb7CMXmRXKOZ7q
- OmmQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNwxpH6s99nGjZrxHCSeqCkE1wbSTXvHaoAsQGcNC3RWzV7zTUP2PZzhs/hYNQpBQNP9CN74I=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLRgoBChcR97FF6O5jMQo7Qr04k4GWycnwXc+iwqFLb526wjug
- z4RLZg+TatuA8IvHS+RGoz+JO377cNCqH59kfrP9Vp7miKFlzCK67NL0r2vFzeOSrhzjefelbK3
- 0er3bQQuFz1ucoJy8f+/Ny9rthUjrB1VUta5hH7XQjJGOZcNOQzyTo9U7qg==
-X-Gm-Gg: ASbGncu6eLX1uLMEoq7qvaL915ld3g7YqSWbyJ3UO7HwOo/ONZ5wusxogmSHLFu75yH
- wDrmhOvzrRLi9kg/bMtHXwhrDMP/HfWi79z1FTcMy2j2W45ydc/7X3RLh4dGVMiPnqeXWojkcHG
- wOwEqzv5Wl4OqX9l4/QOpXORkeACylwapOV1+EK7WfH4k=
-X-Google-Smtp-Source: AGHT+IHY5gtYU1+qzWM7Ylna9un2Xu1V1rkOi6nVuB2boVVORcjY3+w52lOkQkq59AYDD45tCG9S/6B+Hc4xRgwBtZM=
-X-Received: by 2002:a05:690c:490d:b0:713:ff41:37f1 with SMTP id
- 00721157ae682-717a0431c1dmr29495497b3.29.1751970809965; Tue, 08 Jul 2025
- 03:33:29 -0700 (PDT)
+ bh=KhVGrwBxYHK3vvLEWCPQWeNAp9bwMKnu9f5y1sbF6as=;
+ b=T+OtjuHFzSlghYtMc3vLiKH4SIqbIIa4EbJZAHazco6X9yR/x5btsMkISpQTALIYiU
+ 2R9vQ5wxnXNqbG6fQShNx2uLzMXOJPXY9MuiU12kNpp7dGsgr5kaQgYPDs6uikbF0Vz7
+ Z5k8ZIpE96K7M/5cWTM0YcSUAB0tKVPDhZ8zww3WZfLcglNQc5WI97I+W4MhCRnPU3wW
+ khWQLi/iFPt7oJWCIGTmXiHmJX0xfbrpoFEJk3FPVZi4DeFkjtYjKuj5lLQ0XZl2I5YW
+ ul7xM4ydoFTwfiARveWAivhfHL0o0s1n3PeKKmJiGekKTCOj0R+uFDz8dXEc+bAqyT1b
+ STyw==
+X-Gm-Message-State: AOJu0Yz3FerfbSmxBXTcPcL5cEto3AyzSsBE1sgGy35+rjj+EqpDIce0
+ hcG6ZXFJaLMbbjC6vX00pogPqeUn57cU3EvW9Cs5SBtIg/2OaegZqlyqRl5gsiKomyOOsGGqHRZ
+ ZkAlWU0Y=
+X-Gm-Gg: ASbGncv638inWqT48+IhwsdeJcLwItlCqBFzRJnKfOsbaArqAjEjOwIGVio63nzGIkA
+ 8A2MWVwWUfLHiV1irQWLSoiY11D8/cyP9USPGR2ljGIoAkwyanK0rI3viAo3uCs7rGLoNk+jc0u
+ E609uEzs14Nx5Q/d7jixhfcvS8/41Q/UY3QVG32THESRWx0s8L1Oi6YKxcXU18hSuz6vzmXBsI4
+ 4GyfjupGv+xLuDf9uoXbyqQm3pWms/2mD+0HrO52IPi9EnHeKrk8Qbv+I2a9viot5pgToEKQKNy
+ Kix2/hVRQJxGNk48/AutwVPSE1BL4EqqKojEOEoybJUxjLjs9IQBAmYOnUYzDaetQHaUe3L2p8R
+ BA1ILD/CoAqq98sWXrs8TgAFQa7rVNPFrZ5w974DKbbv/ymLh3VjzoVpcQf59zkePwluaP2GNVA
+ ==
+X-Google-Smtp-Source: AGHT+IFSQF9jgk3UPlo73ZQ/lG5GwUR6FphY64pgIzSAF6/OlEKR1xQe9TnzjvAJJ4O45ZFO+Ba0BA==
+X-Received: by 2002:a05:6402:350f:b0:602:36ce:d0e7 with SMTP id
+ 4fb4d7f45d1cf-60fd65185edmr13317817a12.14.1751970943484; 
+ Tue, 08 Jul 2025 03:35:43 -0700 (PDT)
+Received: from panicking.amarulasolutions.com
+ (mob-176-246-194-172.net.vodafone.it. [176.246.194.172])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-60ff11c3e83sm5373473a12.66.2025.07.08.03.35.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Jul 2025 03:35:42 -0700 (PDT)
+From: Michael Trimarchi <michael@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Michael Trimarchi <michael@amarulasolutions.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] configs/imx6ulz_smm_m2b_defconfig: Enable clock framework
+Date: Tue,  8 Jul 2025 12:35:28 +0200
+Message-ID: <20250708103537.27632-1-michael@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250708100820.34909-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250708100820.34909-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 8 Jul 2025 13:32:54 +0300
-X-Gm-Features: Ac12FXxb8S6VAUTqXic7L_hqJF-2mYiMcQigpNIhF8mJPAx8Uapa6u3-hRUr8P0
-Message-ID: <CAC_iWjLM7Eir+m4HTqOA1bG+G6LV-o8ccu8SvkpiB7TO2rLMUg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: efi_realloc() must check efi_alloc()
- return value
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Ying-Chun Liu <paul.liu@linaro.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,35 +99,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 8 Jul 2025 at 13:08, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Avoid copying to NULL if out of memory.
->
-> Fixes: 3c08df58cc43 ("lib: efi_loader: efi_memory.c: add efi_realloc() for realloc memory")
-> Addresses-Coverity-ID: 569499: Null pointer dereferences (NULL_RETURNS)
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
+Enable the clock framework on the m2b platform as was done
+in m2 variant. This helps to increase the NAND controller performance.
 
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+---
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ configs/imx6ulz_smm_m2b_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
->  lib/efi_loader/efi_memory.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 6dfc698a247..b77c2f980cc 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -714,6 +714,8 @@ efi_status_t efi_realloc(void **ptr, size_t size)
->                 sizeof(struct efi_pool_allocation);
->
->         new_ptr = efi_alloc(size);
-> +       if (!new_ptr)
-> +               return EFI_OUT_OF_RESOURCES;
->
->         /* copy old data to new alloced buffer */
->         memcpy(new_ptr, *ptr, min(size, old_size));
-> --
-> 2.48.1
->
+diff --git a/configs/imx6ulz_smm_m2b_defconfig b/configs/imx6ulz_smm_m2b_defconfig
+index c0eb1093d8b..3d7530431fd 100644
+--- a/configs/imx6ulz_smm_m2b_defconfig
++++ b/configs/imx6ulz_smm_m2b_defconfig
+@@ -44,6 +44,8 @@ CONFIG_ENV_IS_IN_NAND=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_NO_NET=y
+ CONFIG_BOUNCE_BUFFER=y
++CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_CLK_IMX6UL=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x82000000
+ CONFIG_FASTBOOT_FLASH=y
+-- 
+2.43.0
+
+base-commit: b379335f141e3ddca0cdbb5d9d39af0444530542
