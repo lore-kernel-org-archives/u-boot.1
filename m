@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD471C8303C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 11:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15885C83F0F
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 11:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 033258305C;
-	Tue,  8 Jul 2025 13:14:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A7708305C;
+	Tue,  8 Jul 2025 13:16:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GNmy3STM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HWxwfANH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 083B4830B4; Tue,  8 Jul 2025 13:14:52 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3F2CD8328D; Tue,  8 Jul 2025 13:16:45 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12C3B83043
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 13:14:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23C4D83043
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 13:16:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8B2273F633
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 11:14:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1751973289;
- bh=KUOZ2MgUOJBGSO7S72g0ovbpFLh5lwgWQ9LjVqfl8v4=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=GNmy3STMk7cjyqtRpDPVx/QwVFvmDVQm5sYBN1intymBDBbKGfrktB+FSNUn953Ms
- w5SKDfjy/KjLtg/TM5lsP4aqpyL7EgbWyXMg5/uCeGXu5nxR2XYS/j3F3PVUkJmriR
- Q5FSi8AcCrP8Tj1cOwYT2JVzW6Wxe0vPDQlnhj0tET+PmtdrO96tEV/796TKej7KpR
- I+NUEg51DO55IwcBZIrR61ic2284c+RIwSgE1fv9AwK5FNp8d2WohjAHAx4zI5PJDy
- yM/4dEQgxBhKvZwYliBpm3txZZKSsSbvBDNNydiiuAWFESDUccNAkkW2aYWYJrzjLG
- vxTsrNEJ5tCrg==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-451d30992bcso30247795e9.2
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 04:14:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-454aaade1fbso47404905e9.3
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 04:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751973402; x=1752578202; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EX1+4n1d2Tzr2wHtwyQs2KlLQb5RSdaQKIPPnQSct0I=;
+ b=HWxwfANHRED4EHhIsAiyOp5JGaOU+PP7MO40QThji18tbnwqlC2jmnli+KMxrOZ2vv
+ unIXjlsGFmu/OS0Uap6PNXrrVKHnpcPJ0NI24BMTn3f4Zt3o1YF5KB1i0MbpZplt1q3o
+ abyttDJY+YIM6+gWtO63mahVHX5RfZamBuq7qOK3MIWyClPhnLtatgKBmo6BiZk8mMgw
+ Qvzh0VSuPhXm12bBeAzcPFTilOSvwgspK1jd5rbahSqPbNjy5c2KHCxlsm2RSbCpwtEi
+ UslzNIqYIdl+yg6RlroJb/Lj3KS8Np5mcfmN0pp7g/ucEn0k5+omjGKLqUNd18WjxseN
+ 4FAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751973289; x=1752578089;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1751973402; x=1752578202;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KUOZ2MgUOJBGSO7S72g0ovbpFLh5lwgWQ9LjVqfl8v4=;
- b=HnFu98cmrO8daX5Qn01bW4GOACfI87nwYY2rmA+6ii/xiQLLXyM+AP3rhkvJ75FdGI
- zwZmZ/bciuUrCNLOVIsCcbK2QfL7Q9uYFJc+Jc35jJK08Vk9KNmPoSAB/ys3RWY26eBy
- uwZTOQ5HMMxbNigbXA50QWwiclDNxmj5S/OessY2Ph100OSMH8VrCLgzpw24CIwjhdfW
- 0Oxx4J/FtvkB+QgCn4YAondcnheGe3u82FSsQDXoKAAwHrJKtCL9O/evW5qSOmPTgm4f
- c64hZWV4KR+jn/lur+3gXON7oPnSnpTlrJCuBUzPaWFSdJesErHv1NfPKt6E91E09yfK
- z+1g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW3ZSO+fZJdITRceDrIIju01Q946MgZr6I+zFxrmDW0WVXXradaLKGrkOjGEbuc3mKSoxU9anY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9n79iAknLZG+hh0CI0ypRSO5kfb+0hYam5KYFUQZMlc+6coQv
- lN2ahvbgkJZOaNi4UQrXWulV4ld7dYvT+KjOWmLU/u0yp4ot2pX13IQX428ZAGwL6f3Uc4pOhKU
- ck8kTFF06iL7Q9XargZSbnm8CAqOXuEcQREF+BoH5jBSsm1XSdWgFMeV6MGTNPhfJNjgGMIg=
-X-Gm-Gg: ASbGncsyuf81+1ToH7juwgbar3gC6v60LiVPlhAvYqDAQGKzhGMQJQWxaVdsrTUCzRU
- gPxJ0aXhvUejFsxfXaCROtCL+UWMoBkzWV7+O4gz9BdnNSNHJoWnkJGsJgd+hDUibXhX4nHFcA9
- g1BzqrJBKliNZkC7nlSga7L6x+BHEfrG31r+GhaoiaqGePgIepec4DKYEvd5gKQS2r+5s1TPfV9
- ZLclzAHwh2bA7eQKLzdo9Q4b43/nGX5JULHMcouP9TMpOrGVkt1I1P1g708u95YUxm0ej0tDBWC
- hH1RNPtQSyAbHUo3/IezTP7ZvezNZv/jnL/SQMFi5E24pYEB3e3H+zIn0QrpUuX00pIggNZQbKg
- 3o5bBSOblSMVqn9V7nQLKvf3R
-X-Received: by 2002:a05:600c:8b64:b0:43c:fdbe:4398 with SMTP id
- 5b1f17b1804b1-454b4e6e641mr127626015e9.6.1751973289073; 
- Tue, 08 Jul 2025 04:14:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFMEIVKaFmNODlUexUHY7R81RwGfMlnuhHxV1DtSyd2jRKo2OdlbTLDGLhTC3qltiY7EozQQQ==
-X-Received: by 2002:a05:600c:8b64:b0:43c:fdbe:4398 with SMTP id
- 5b1f17b1804b1-454b4e6e641mr127625785e9.6.1751973288689; 
- Tue, 08 Jul 2025 04:14:48 -0700 (PDT)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ bh=EX1+4n1d2Tzr2wHtwyQs2KlLQb5RSdaQKIPPnQSct0I=;
+ b=ouH1pF+eIfoWcg+iNLsbjE5yoQVs3R/dSSdoJHj5iF2aNnIkDlL64HRYKwiB0K0Ii3
+ iaC8dHOyCgtkbPzJUSAKZ3/+TLvYlkW4RR2oYTpW7mfzvpMSOkW0T1QSmvIQO2m+ha1s
+ V2Cvv7eRA6cx+trU6M12bF3d3w2r0VZNjSRhPZPyfNDRK5oZGUNDMBvFRbFpRhggCe5L
+ oGzVnDStGIRUSK/ewlcsH/IiWDubmrIwqD2mvUJ7LBTnF63M2c8I2NvwswyIhsiGi2wy
+ PT0vy7rVviXWtr7s3U0t66DCHPWp0F03vEFwqTdmMyviuKNWSh9Y9Ml1d8m1bw1WMsVY
+ XQ8Q==
+X-Gm-Message-State: AOJu0Yx8p6yBYJyTi7SLdryA3/WqUkoWB/fDi4Qa8nqCIGsYHFxz4CaN
+ hgtTcyMlJtwf5/nDOr5BsxA8S86Mw0tR4P+1hKAa/kUDF1NfH7u4Hh7ZFaJFtyFgDAw=
+X-Gm-Gg: ASbGnctgd4vyPnMn5UGLVgdtWSE0EJCLKx71rzslPmP4j8vitznSK41Iw6/yAEzYB5Z
+ 4qdkFrpuPJzxiX+jrUTkcHqVG88h1ESDCeOuNe+Fl7AWL8MMvDZjGQsqjGT5AC067DnrTvNb11R
+ sk/nha/dbBadyQhzd3Rw+j6i7KWMrLocn5+LrbxcBaYrQT54v53XQhB8iSXn1wivA8tlF8iB3fU
+ IyEynQhVY4frXQEqNEeHuITQM7+rUpJ+zzQkB/bhAq/mSS8j6HdPIOn7zoDb7IKhuWfXSJq/A3R
+ 8kaWGAxAT03mOa8QD71DBAFn90ZHjaMbPYCU9YiHwSyLKsuYw15o2cQXV1ESUHxGJwFComXrcDn
+ enJR02NUSASH6
+X-Google-Smtp-Source: AGHT+IG8nl5xSo9dfZLaNA4AglzEqOg9NMSZsaO2b6+f8caU+40A888wpfwJqOujiJpoPB6uZL8QnA==
+X-Received: by 2002:a05:600c:8b2f:b0:43c:fe5e:f03b with SMTP id
+ 5b1f17b1804b1-454b4ec3e6fmr173887385e9.30.1751973402491; 
+ Tue, 08 Jul 2025 04:16:42 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:a08:6480:3e01:6cde])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b470e928aesm12484706f8f.44.2025.07.08.04.14.47
+ 5b1f17b1804b1-454cd3d806bsm19168985e9.33.2025.07.08.04.16.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Jul 2025 04:14:47 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Ying-Chun Liu <paul.liu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: correct EFI_DEBUG_TABLE_ENTRY_SIZE
-Date: Tue,  8 Jul 2025 13:14:35 +0200
-Message-ID: <20250708111435.40515-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ Tue, 08 Jul 2025 04:16:42 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/2] fs: exfat: Fix some Smatch issues
+Date: Tue, 08 Jul 2025 12:16:40 +0100
+Message-Id: <20250707-exfat_fix-v1-0-e5783978cd11@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABj+bGgC/x2N0QqCQBBFf0XmuYXVLLNfiYjZ9W7Og1vMSAjiv
+ 7f6eLjncFcyqMDoXq2k+InJJxeoTxXFkfMbTobC1Pjm4jvfOSyJ51eSxZ1vIcShra+pBxU/sME
+ F5RzHvZjYZug+fBXFP04ez237A5ySaAd0AAAA
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,33 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the current code we allocate to little memory when adding entries to
-the EFI_DEBUG_INFO_TABLE and we fail to correctly move entries when an
-entry is removed.
+Smatch reported issues with variables being dereferenced before NULL
+checks and also testing an unsigned variable for being negative.
 
-EFI_DEBUG_TABLE_ENTRY_SIZE must be the size of an entry in the
-EFI_DEBUG_INFO_TABLE, not the size of a pointer.
-
-Fixes: 146546138af5 ("efi: add EFI_DEBUG_IMAGE_INFO for debug")
-Addresses-Coverity-ID: CID 569498: Code maintainability issues (SIZEOF_MISMATCH)
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- lib/efi_loader/efi_debug_support.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Andrew Goodbody (2):
+      fs: exfat: Perform NULL check before dereference
+      fs: exfat: Remove pointless variable uoffset
 
-diff --git a/lib/efi_loader/efi_debug_support.c b/lib/efi_loader/efi_debug_support.c
-index 186bdbce750..490b0bb7088 100644
---- a/lib/efi_loader/efi_debug_support.c
-+++ b/lib/efi_loader/efi_debug_support.c
-@@ -22,7 +22,7 @@ struct efi_debug_image_info_table_header efi_m_debug_info_table_header = {
-  */
- static u32 efi_m_max_table_entries;
- 
--#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(union efi_debug_image_info *))
-+#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(union efi_debug_image_info))
- 
- /**
-  * efi_initialize_system_table_pointer() - Initialize system table pointer
+ fs/exfat/io.c | 54 +++++++++++++++++++++++++++---------------------------
+ 1 file changed, 27 insertions(+), 27 deletions(-)
+---
+base-commit: d1d53c252a4a746db5ebcdf0d6de3aa0feec504e
+change-id: 20250707-exfat_fix-38bbcd416f9e
+
+Best regards,
 -- 
-2.48.1
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
