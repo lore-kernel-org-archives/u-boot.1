@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0696C83F0A
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 15:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1583C8303C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 15:29:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4710832F0;
-	Tue,  8 Jul 2025 17:29:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AFC883394;
+	Tue,  8 Jul 2025 17:29:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BNtpWcI9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N9mgQ8KX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC49E83285; Tue,  8 Jul 2025 17:25:06 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id B1F4A83285; Tue,  8 Jul 2025 17:25:07 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FB1683285
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 17:25:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A69568331D
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 17:25:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ae0e0271d82so914902966b.3
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 08:25:04 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-60bf5a08729so8403243a12.0
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 08:25:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751988304; x=1752593104; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=i1ZEDxATALSWycQ5Snokzw9olDl556jwvz6R6lByDLM=;
- b=BNtpWcI97pAbNalWSAfNmlNLaRO2Tn0f8Zjt7VaW7ndmTwv0JJza6f2H10ZaUL4ljT
- 5DsrvDaeptftFkxHub0Uc4M8MLgLFY3rdO8YP26+Y42pLp0wHO66KqJZeWri0Hz66JaC
- d+GvEAY20cpLgQ8uC3yOp/jd4yJ/nT9PX3nchctKjTf7osYP6rzQkGt7Sm9yzGCsCTC0
- bXcZa5Oz8IDn76GHVYQR2R+NipbswULi12XM6jiNrPKkpMFIAq0YxM6cBszzO3ygEtHX
- +hrYBKiqIhH4xBv5LTI+uGN39GuTK4fcuVQoX05LLcl4PkRLmfL+OAB7hTchPivc9Ye8
- UHMw==
+ d=gmail.com; s=20230601; t=1751988305; x=1752593105; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9B5bby6DgKTWtbc+N0sdn0LWWWw073VfAmbzZ/Hu4RE=;
+ b=N9mgQ8KXTHfi3FiPCuljykZ6SX2Q1HLvrnEVdD1DKMGeJZu8SGkhX9NgYF+qM3uI9r
+ IuY164nJIBWeSxpYeMjAJrol9OF92LUPlKTCEzKzMzKzFP3Bfe5kcxbGzPLSN1eNuiRH
+ uXrWNaIlVscbSIFIcBCF3j6VtjsPAIO9fCr+VJEDNCRTLfgdM8fKG8UpmwkNIeYLYt+A
+ 1ug8Y8OkZda9LtV75QHLUVB/jtYGPL/0aVHx/6RKHTlos1S0S/2BKctFJWVD6l5W29Dk
+ u23O6wAw04UWiPGlxVHYeAhP0KgtT2bAGdvafUxqtXejomCw+e1gbjZjng2P0ex149kZ
+ D2Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751988304; x=1752593104;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=i1ZEDxATALSWycQ5Snokzw9olDl556jwvz6R6lByDLM=;
- b=QdGQMDGmttHcKOPWWA0os75MswqvgshKPajkC35U5YImay4E+nKhOefp5dVcGGzkOQ
- aijs+c3Voe8u8qEv1ssuV6VvCKlRPW7TAx04c+v8lYYxD475XQgLsku4BpJgb4Ct+1W+
- t7CvG50qysCShTBXkgnjdArxSLvwYvPqMd/Ip0P2IujsbYXHLMrQUH/K9DL4m2u0CoTe
- XGrBoeynl8c+bttRzEwPxBWIl7Ni3OQmnZ+4BFaFDUXFekM0/dt6D00nZgeuZ+zSN4pK
- N6LSJnyde1yre6lHjqHbaHUNbBcxzEb1NpyIYwyB+DZZqYoaUae4jLL7dl3g7FNEz4ma
- gZZg==
-X-Gm-Message-State: AOJu0YwDqQnHCdRLiiwbTsof5PRH5NyOAK5zljCwcdUbZk65JRUUk1EU
- YB5hqDZ5i3lRiiyEqO7p4/t64TnbBIsfHasvQ64Tz6Ls6/YpR3BRon6RQpbp2Cxi
-X-Gm-Gg: ASbGncuKh02MYMCbe97BMx+ttgUwssCaYQxKtNbQNFjwJCs4x+pzShGeZp6W29Zje9O
- XNt5SZz2Oz7KNc+Wph0Vfxv25A/b1Tc/EZIP/g/wX2pahwVSmis5nYdySOG+WtrvWP2uIzo+wN7
- q7Sk9iJWTy8gwQeehlBrtsWb/wGItVVNI1RH+1ExymbMkkj243ONHHF9lBC8/JX6PBE/Woz3ywS
- qGjojxr/Xcv1bF6M2iaScf52BI202+foYof27AcGSltVeG+wHcB6+t3iaqknL9oxwnmFhGGqTQ3
- m2tvfXxvq6LRkZw+fZh8I4w74/iiH/GdeqDSdJ9eKTRLGDXpZdp4R5Ouh/zNq06KWnwaUamcSAU
- =
-X-Google-Smtp-Source: AGHT+IEyu3+eCbxvJf3aoK1cUwh5Zk19Mx8t6pOweMDzqP9bHDyUmhLoVxXSfoD625wWiTfkRZ7c/A==
-X-Received: by 2002:a17:906:f592:b0:ad2:4b0c:ee8c with SMTP id
- a640c23a62f3a-ae6b06f28b1mr385469566b.35.1751988303579; 
- Tue, 08 Jul 2025 08:25:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751988305; x=1752593105;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9B5bby6DgKTWtbc+N0sdn0LWWWw073VfAmbzZ/Hu4RE=;
+ b=Kuc8FOrMNSYwmbKV6bJbEMYDuSndV+GHTeHh8LY6B1R1er3xForJ7UkO9pHTGcRXte
+ kQnAMHB6xWpggLSHLDmdTDYZQhmm85+K0/vFeieNOq1jTmvgMWqUvWo8mYjNswLmRs5G
+ to/aFDS6ivvvd0XIYyige9GFlkR58wdaMvYtSUzZ48xAapHPNMx7C5IlTmKS2BMk37CY
+ FK6bPylEcjGXuJ7OCUN2d709/skzI/Tr0oHIUwb47ovd7WL4Exu9mU+TmVc9XSEkBOIZ
+ TBQhJppSsQQSbuAWpl3LwmMeIjrjSqsa+b1kAHz0/YmVG+L6+L4kViUYcp6xylZjAg5H
+ gykw==
+X-Gm-Message-State: AOJu0YyTyphI3rcFKQaVmeczJPBc6A8arNZiQsY/a3Zz9HcLqbDf7kIp
+ FZGNmDfdxN0oT3NSK35A2xwyRI3Eth25AGxJZ+KY9jUPcyRnFOCXRocAMnUFZWbM
+X-Gm-Gg: ASbGncuvq01zOrpVyhgSa0B3+FQ4DtjuE8IZ7BrokD1wWtTdGt1LuacH6LOeK4nhuH1
+ x9D+c9TfdjrboiYol9MQYEu83sEgK0WEQYGPuojun+efwu1vabCEBqMjVJMYlsT5VUnL+NgMBFr
+ /2zBt8rthk7aSKCgHdZDjPVAyFMwObRK2Bw+BBNCk9gDheXk9GaAoXzomAOP5RZUwv9fAfIEnMq
+ b1ohHtl2fPrqeotOumBpiV+KyxcnFByME+S384ZvB76uphYBem9fEV/qD+ikkUzKpP4wnrCGIu2
+ ASRZBj7Rh2EjYeAOQHWOjF8j5w5+71ycKYnr7zUg8qpdo00uqwPe0N5d3vC7sxVa
+X-Google-Smtp-Source: AGHT+IHOZywg4T74qg5g578kU90KAQ9ryRsYP8acmvqw5Ba3WbrKhuosvF6n03EiVbBnySvI/IzMQQ==
+X-Received: by 2002:a17:907:1c0d:b0:adf:f82f:fe0a with SMTP id
+ a640c23a62f3a-ae3fe5b6b45mr1739664066b.16.1751988304768; 
+ Tue, 08 Jul 2025 08:25:04 -0700 (PDT)
 Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f66d931csm921950666b.10.2025.07.08.08.25.02
+ a640c23a62f3a-ae3f66d931csm921950666b.10.2025.07.08.08.25.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Jul 2025 08:25:03 -0700 (PDT)
+ Tue, 08 Jul 2025 08:25:04 -0700 (PDT)
 From: vtpieter@gmail.com
-To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com,
-	Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v5 0/6] Improve user feedback in case of FPGA bitstream load
- failure
-Date: Tue,  8 Jul 2025 17:24:45 +0200
-Message-ID: <20250708152455.1214487-1-vtpieter@gmail.com>
+To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+Subject: [PATCH v5 1/6] cmd: fpga: improve user feedback in case of bitstream
+ load failure
+Date: Tue,  8 Jul 2025 17:24:46 +0200
+Message-ID: <20250708152455.1214487-2-vtpieter@gmail.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250708152455.1214487-1-vtpieter@gmail.com>
+References: <20250708152455.1214487-1-vtpieter@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 08 Jul 2025 17:29:30 +0200
@@ -99,70 +101,293 @@ X-Virus-Status: Clean
 
 From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-The main motivation for this patch series is to make the `fpga *`
-commands' return message more explicit because simply returning the
-command usage without indicating the root cause is not helpful.
+In cmd/fpga.c, change some `debug` calls to `log_err` for important
+user feedback and use CMD_RET_FAILURE in favor of CMD_RET_USAGE due to
+its long output which hides the actual, useful return message. Change
+the remaining `debug` calls to `log_debug`. Remove all 'fpga:' and
+__func__ strings as log_* has this covered.
 
-In addition, the sandbox_defconfig was amended to facilitate compiling
-fpga-based sources and various style, compiler errors and warnings
-have been fixed.
+For `do_fpga_loads`, move up the `do_fpga_check_params` call for more
+consistent command output; use a constant instead of multiple '5' use.
 
-v5:
- * add new patch 5/6 to fix Wstrict-prototypes error, reported by clang
- * revert sprintf format to original in patch 1/6 zynqpl.c
- * remove Kconfig new dependency in patch 2/6, fixed upstream already
+In drivers/fpga/zynq*.c, change 'up to' to 'above' which corrects this
+confusing/wrong statement.
 
-v4: https://lore.kernel.org/u-boot/20250705205710.792370-1-vtpieter@gmail.com/
- * make better use of prefixes in commit subjects
- * change patches' order to ensure no commit introduces compiler
- warnings or errors i.e. defconfig is now patch 5/5
- * add new patch 4/5 to remove compiler Werror=unused-function
- * add an additional Kconfig dependency to patch 2/5
+Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+---
+ cmd/fpga.c              | 99 +++++++++++++++++++++--------------------
+ drivers/fpga/zynqmppl.c |  4 +-
+ drivers/fpga/zynqpl.c   |  4 +-
+ 3 files changed, 54 insertions(+), 53 deletions(-)
 
-v3: https://lore.kernel.org/all/20250626093519.115655-1-vtpieter@gmail.com/
- * enable FPGA configs in sandbox_defconfig instead of new one
-
-v2: https://lore.kernel.org/all/20250626093519.115655-1-vtpieter@gmail.com/
- * use log_* instead of puts() which is now preferred
- * harmonize user feedback format; remove useless strings
- * add a sandbox_fpga_defconfig; amend fpga Kconfig
- * fix various compiler errors and warnings
-
-v1: https://lore.kernel.org/all/20250626093519.115655-1-vtpieter@gmail.com/
-
-
-Pieter Van Trappen (6):
-  cmd: fpga: improve user feedback in case of bitstream load failure
-  drivers: fpga: add Kconfig dependency
-  drivers: fpga: correct compiler errors and warnings
-  drivers: fpga: cleanup printf usage
-  drivers: fpga: fix function declaration without a prototype
-  configs: enable FPGA commands and drivers at sandbox_defconfig
-
- cmd/fpga.c                | 101 ++++++++++++++---------------
- configs/sandbox_defconfig |  20 ++++++
- drivers/fpga/ACEX1K.c     |   1 +
- drivers/fpga/Kconfig      |   1 +
- drivers/fpga/fpga.c       | 103 ++++++++++++-----------------
- drivers/fpga/ivm_core.c   |  13 ++--
- drivers/fpga/lattice.c    |   4 +-
- drivers/fpga/spartan2.c   |   1 +
- drivers/fpga/stratixII.c  | 132 ++++++++++++++++++--------------------
- drivers/fpga/stratixv.c   |   2 +-
- drivers/fpga/versalpl.c   |   1 -
- drivers/fpga/virtex2.c    |   2 +
- drivers/fpga/xilinx.c     |   2 +-
- drivers/fpga/zynqmppl.c   |   4 +-
- drivers/fpga/zynqpl.c     |   4 +-
- include/fpga.h            |   2 +-
- include/stratixII.h       |   6 +-
- 17 files changed, 198 insertions(+), 201 deletions(-)
-
-
-base-commit: 1323b480a6fc053475901a90bdaece2ddcc47310
-prerequisite-patch-id: d13ffa9f16b79939ca26d5334d15c077c11427af
-prerequisite-patch-id: cf4d9931473e7f673dad6a4e7c23fc3fe4678408
-prerequisite-patch-id: e6885654262d1a9ddbb8d33e988be9c7c04a95cf
+diff --git a/cmd/fpga.c b/cmd/fpga.c
+index 9dc7b63db5d..9cc51f04698 100644
+--- a/cmd/fpga.c
++++ b/cmd/fpga.c
+@@ -28,7 +28,7 @@ static long do_fpga_get_device(char *arg)
+ 	if (dev == FPGA_INVALID_DEVICE && arg)
+ 		dev = simple_strtol(arg, NULL, 16);
+ 
+-	debug("%s: device = %ld\n", __func__, dev);
++	log_debug("device = %ld\n", dev);
+ 
+ 	return dev;
+ }
+@@ -40,26 +40,26 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
+ 	size_t local_data_size;
+ 	long local_fpga_data;
+ 
+-	debug("%s %d, %d\n", __func__, argc, cmdtp->maxargs);
++	log_debug("%d, %d\n", argc, cmdtp->maxargs);
+ 
+ 	if (argc != cmdtp->maxargs) {
+-		debug("fpga: incorrect parameters passed\n");
+-		return CMD_RET_USAGE;
++		log_err("Incorrect number of parameters passed\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	*dev = do_fpga_get_device(argv[0]);
+ 
+ 	local_fpga_data = simple_strtol(argv[1], NULL, 16);
+ 	if (!local_fpga_data) {
+-		debug("fpga: zero fpga_data address\n");
+-		return CMD_RET_USAGE;
++		log_err("Zero fpga_data address\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 	*fpga_data = local_fpga_data;
+ 
+ 	local_data_size = hextoul(argv[2], NULL);
+ 	if (!local_data_size) {
+-		debug("fpga: zero size\n");
+-		return CMD_RET_USAGE;
++		log_err("Zero size\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 	*data_size = local_data_size;
+ 
+@@ -70,51 +70,52 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
+ static int do_fpga_loads(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 char *const argv[])
+ {
++	struct fpga_secure_info fpga_sec_info;
++	const int pos_userkey = 5;
+ 	size_t data_size = 0;
+ 	long fpga_data, dev;
+ 	int ret;
+-	struct fpga_secure_info fpga_sec_info;
+ 
+ 	memset(&fpga_sec_info, 0, sizeof(fpga_sec_info));
+ 
+-	if (argc < 5) {
+-		debug("fpga: incorrect parameters passed\n");
+-		return CMD_RET_USAGE;
++	if (argc < pos_userkey) {
++		log_err("Too few parameters passed\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+-	if (argc == 6)
++	if (argc == pos_userkey + 1)
+ 		fpga_sec_info.userkey_addr = (u8 *)(uintptr_t)
+-					      simple_strtoull(argv[5],
++					      simple_strtoull(argv[pos_userkey],
+ 							      NULL, 16);
+ 	else
+ 		/*
+ 		 * If 6th parameter is not passed then do_fpga_check_params
+ 		 * will get 5 instead of expected 6 which means that function
+-		 * return CMD_RET_USAGE. Increase number of params +1 to pass
++		 * return CMD_RET_FAILURE. Increase number of params +1 to pass
+ 		 * this.
+ 		 */
+ 		argc++;
+ 
++	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
++				   cmdtp, argc, argv);
++	if (ret)
++		return ret;
++
+ 	fpga_sec_info.encflag = (u8)hextoul(argv[4], NULL);
+ 	fpga_sec_info.authflag = (u8)hextoul(argv[3], NULL);
+ 
+ 	if (fpga_sec_info.authflag >= FPGA_NO_ENC_OR_NO_AUTH &&
+ 	    fpga_sec_info.encflag >= FPGA_NO_ENC_OR_NO_AUTH) {
+-		debug("fpga: Use <fpga load> for NonSecure bitstream\n");
+-		return CMD_RET_USAGE;
++		log_err("Use <fpga load> for NonSecure bitstream\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	if (fpga_sec_info.encflag == FPGA_ENC_USR_KEY &&
+ 	    !fpga_sec_info.userkey_addr) {
+-		debug("fpga: User key not provided\n");
+-		return CMD_RET_USAGE;
++		log_err("User key not provided\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+-	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
+-				   cmdtp, argc, argv);
+-	if (ret)
+-		return ret;
+-
+ 	return fpga_loads(dev, (void *)fpga_data, data_size, &fpga_sec_info);
+ }
+ #endif
+@@ -245,23 +246,23 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	ulong dev = do_fpga_get_device(argv[0]);
+ 	char *datastr = env_get("fpgadata");
+ 
+-	debug("fpga: argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
++	log_debug("argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
+ 
+ 	if (dev == FPGA_INVALID_DEVICE) {
+-		debug("fpga: Invalid fpga device\n");
+-		return CMD_RET_USAGE;
++		log_err("Invalid fpga device\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	if (argc == 0 && !datastr) {
+-		debug("fpga: No datastr passed\n");
+-		return CMD_RET_USAGE;
++		log_err("No datastr passed\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	if (argc == 2) {
+ 		datastr = argv[1];
+-		debug("fpga: Full command with two args\n");
++		log_debug("Full command with two args\n");
+ 	} else if (argc == 1 && !datastr) {
+-		debug("fpga: Dev is setup - fpgadata passed\n");
++		log_debug("Dev is setup - fpgadata passed\n");
+ 		datastr = argv[0];
+ 	}
+ 
+@@ -269,20 +270,20 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (fit_parse_subimage(datastr, (ulong)fpga_data,
+ 			       &fit_addr, &fit_uname)) {
+ 		fpga_data = (void *)fit_addr;
+-		debug("*  fpga: subimage '%s' from FIT image ",
+-		      fit_uname);
+-		debug("at 0x%08lx\n", fit_addr);
++		log_debug("*  fpga: subimage '%s' from FIT image ",
++			  fit_uname);
++		log_debug("at 0x%08lx\n", fit_addr);
+ 	} else
+ #endif
+ 	{
+ 		fpga_data = (void *)hextoul(datastr, NULL);
+-		debug("*  fpga: cmdline image address = 0x%08lx\n",
+-		      (ulong)fpga_data);
++		log_debug("*  fpga: cmdline image address = 0x%08lx\n",
++			  (ulong)fpga_data);
+ 	}
+-	debug("%s: fpga_data = 0x%lx\n", __func__, (ulong)fpga_data);
++	log_debug("fpga_data = 0x%lx\n", (ulong)fpga_data);
+ 	if (!fpga_data) {
+-		puts("Zero fpga_data address\n");
+-		return CMD_RET_USAGE;
++		log_err("Zero fpga_data address\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	switch (genimg_get_format(fpga_data)) {
+@@ -303,13 +304,13 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 			if (gunzip((void *)data, ~0UL, (void *)image_buf,
+ 				   &image_size) != 0) {
+-				puts("GUNZIP: error\n");
++				log_err("Gunzip error\n");
+ 				return CMD_RET_FAILURE;
+ 			}
+ 			data_size = image_size;
+ #else
+-			puts("Gunzip image is not supported\n");
+-			return 1;
++			log_err("Gunzip image is not supported\n");
++			return CMD_RET_FAILURE;
+ #endif
+ 		} else {
+ 			data = (ulong)image_get_data(hdr);
+@@ -327,12 +328,12 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		const void *fit_data;
+ 
+ 		if (!fit_uname) {
+-			puts("No FIT subimage unit name\n");
++			log_err("No FIT subimage unit name\n");
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+ 		if (fit_check_format(fit_hdr, IMAGE_SIZE_INVAL)) {
+-			puts("Bad FIT image format\n");
++			log_err("Bad FIT image format\n");
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+@@ -348,7 +349,7 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	}
+ #endif
+ 	default:
+-		puts("** Unknown image type\n");
++		log_err("Unknown image type\n");
+ 		return CMD_RET_FAILURE;
+ 	}
+ }
+@@ -390,16 +391,16 @@ static int do_fpga_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	fpga_cmd = find_cmd_tbl(argv[1], fpga_commands,
+ 				ARRAY_SIZE(fpga_commands));
+ 	if (!fpga_cmd) {
+-		debug("fpga: non existing command\n");
+-		return CMD_RET_USAGE;
++		log_err("Non existing command\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	argc -= 2;
+ 	argv += 2;
+ 
+ 	if (argc > fpga_cmd->maxargs) {
+-		debug("fpga: more parameters passed\n");
+-		return CMD_RET_USAGE;
++		log_err("Too many parameters passed\n");
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	ret = fpga_cmd->cmd(fpga_cmd, flag, argc, argv);
+diff --git a/drivers/fpga/zynqmppl.c b/drivers/fpga/zynqmppl.c
+index 2b62bbbe3cf..1199b249e36 100644
+--- a/drivers/fpga/zynqmppl.c
++++ b/drivers/fpga/zynqmppl.c
+@@ -191,8 +191,8 @@ static int zynqmp_validate_bitstream(xilinx_desc *desc, const void *buf,
+ 	}
+ 
+ 	if ((ulong)buf < SZ_1M) {
+-		printf("%s: Bitstream has to be placed up to 1MB (%px)\n",
+-		       __func__, buf);
++		log_err("Bitstream has to be placed above 1MB (%px)\n",
++			buf);
+ 		return FPGA_FAIL;
+ 	}
+ 
+diff --git a/drivers/fpga/zynqpl.c b/drivers/fpga/zynqpl.c
+index 3e86d854a01..5a37a33b0a7 100644
+--- a/drivers/fpga/zynqpl.c
++++ b/drivers/fpga/zynqpl.c
+@@ -360,8 +360,8 @@ static int zynq_validate_bitstream(xilinx_desc *desc, const void *buf,
+ 	}
+ 
+ 	if ((u32)buf < SZ_1M) {
+-		printf("%s: Bitstream has to be placed up to 1MB (%x)\n",
+-		       __func__, (u32)buf);
++		log_err("Bitstream has to be placed above 1MB (%x)\n",
++			(u32)buf);
+ 		return FPGA_FAIL;
+ 	}
+ 
 -- 
 2.48.1
 
