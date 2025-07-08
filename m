@@ -4,102 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E88C83F0A
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 12:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7DDFC83F09
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 12:32:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B544A8304D;
-	Tue,  8 Jul 2025 14:20:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 2812D8304D;
+	Tue,  8 Jul 2025 14:32:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mLB9kfr0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U2YTCHlQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC4A88305C; Tue,  8 Jul 2025 14:20:53 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A03868305C; Tue,  8 Jul 2025 14:32:50 +0200 (CEST)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9EE583018
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 14:20:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1664983018
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 14:32:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8A1BF3F2CB
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 12:20:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1751977250;
- bh=znP5whX+OHmpiGIw9vIddJZCZEL/IVycScpiyJPa2lQ=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=mLB9kfr0ny+F6lFi5XmJinjrb/vG2QvrfooQgwdZ/aqfb+n0YWP1r98x+cZcumgIg
- CZMnOShmgeluZoKvtnkgM6R6ynqPvpZ7E4+drdZvMciSK6iGYj2tQ8VVsmsnIC4SDd
- m9pKqP2fiDRX7qCvRiIxSIE0YV9ongasK2S8TLueQ0UYsH57MNgwD8OGTjFqxzjoPm
- dZNfUSSCiAMeKz9TS9/01LovVUL4GdEIr97Hc6TN6j/Jhzeke/lMGwMs6tewuizpT+
- Qn713X1bDB98bRCBzFbmy0YIr1iGnAwnni8fs5GIX8LvvnsRv9zT/fdXLh3UsIfuek
- fJyxkglFm561w==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3af3c860ed7so1936319f8f.1
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 05:20:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4a585dc5f4aso54229261cf.2
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 05:32:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751977967; x=1752582767; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DlrJisb1i5krUtUWHgEGAul+ft2VsOWAhAWnSkgovo0=;
+ b=U2YTCHlQnjTEoZnm1CfZMCgszCEBeWwfANEhhDA6LQzSFHxekdb5X0aj8HNU+C/1zN
+ RAZ8nHWxtDq6kZ0jQh3xjp6OEtWUMzxNKl65nfarW1me6FtpKiE4SR9w5v2XEn3KVXCi
+ VdRYNDbwyxQE8m0dh5pQQygI2qXTlfMpEFbwjCtCD0mSevt3x36+kBkgvbmjNMpf7dZl
+ RJMfiUWGoBoFWsNtmst3VvdbX+R3gTTVrZi830ljIGw2IcvkCnfWdyuPE7lgOUmHszcP
+ PA+RanPGHYPkf20UKWV2epGGeXcAfmUKSahAsJVtWld28aVCCuxQmvYNAUchy5/KEmYZ
+ OjCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751977250; x=1752582050;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=znP5whX+OHmpiGIw9vIddJZCZEL/IVycScpiyJPa2lQ=;
- b=APxaEh40ttl8S1VuBSDWLDOMdBh4q15PtARfJKLH6KcEHjOgf5gd/6SrjARqDVAh1g
- hALXTKft+q1SkRwAEsg0ZNjXoIavc7R4a7OKn/eshHj+qLQDp1tXZ/dJgM6K++e97QAn
- 5X/rKwZBWB2ktlFSq169/7FHixH/EHxb1QtDEX1je2Uh6tuxluGBmL4IKvuNwxre105f
- WdFiMqyuLG/bEtReUUhfkgoZPWQzRmXrzksVZxqdhuwIW7xZx+vLvkgwWhEwdfyWerkc
- uRQ4wlVrUTlWeBIgN7cZwK5JBq78UExMPFH3z/fYIRdJxs8BIMCmDo2Fpx4Tx8KNGpPO
- +mFQ==
+ d=1e100.net; s=20230601; t=1751977967; x=1752582767;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DlrJisb1i5krUtUWHgEGAul+ft2VsOWAhAWnSkgovo0=;
+ b=sdLypiCRLTVVUgS84WDaTWTWaBEtzMcLpHE7+48zaR1TrrdsF1Y+4yECCKh6u3jxmK
+ ewh2buqljQ/tbFnVbjTrsYvxlvUD7ef5ehV02PogGQOZT7IW7424pxJOc7WdbpKlwaay
+ kXxgjtUdwxM5djbUx6dNEz0WVta8VsRtOftibSUYjI8XYk/OD8KIMlqFPUU4aaivlkuN
+ 2l0sjGRW12V/YodnNdhGxb8OxPIF9geYFuBuZUHjLUJh9wlLO5QLFT70pps3wjv6/JBN
+ kEuByNf+dzxw0kkfo+s4Jui6u7ygX3ADyw9yNFi9BYYMJckh83wn6h4j9YflHflPx2Ra
+ vkvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4ZFxgcFi2GJIWRexuQTIxGhx70uWqP0gI3Vz8IwZeF8BMUYv7a8/eoq3r1xxYdfnV2d4PLto=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8EU+pkq1Gpj1tDPFbTseugFmmyra+yvdMVeM7p/YHRILN8UN7
- RIe0Q5bfnILHDIJBD0gI6w5sX+PeVzhPBiXC2RHGVKSQybDHq1enMiZT2DseRkY6BwS29lpyY6T
- /xWZ1DJ7gtHY9XvfxGOKm0MqZzSKxu1rrCNcl6Xbb4wLZvqoZVyyn53ZoEvrbxFBRW3yXXa0=
-X-Gm-Gg: ASbGnctWOoQaGZCG0q42aYQnYiIh4Gi4fzzmZHCjJzRxYayAhNTi7zRweI8zYOvSgCl
- apG41fzCEJ8y6B1dM6yQIz1lvy1L3QGBUKs+JaKuoROGO25w+Nmowh7Vmkkbzhr37o3SmwYKvtM
- AaRihMrx8+u1aFDG8Qvc/gr0cF8TjDd8v1ekSs+WU+SsgLNP7o/L9Xj0b9rRzSHen1vLrNax+cs
- ZqkXZy3YA35a0k4NRAw/dLLx6gsO+R3ahTSsXsATnnk76bgec4gQlqGbOFwYXcvJtiJ0j30CXEN
- cKb3IE195BRm7YqjIdkq5EabgBOsSCVqmu0/X6BGCi37kXB1jY/OmLoEMgzIOZk9eUuWNgJwxuz
- GmYgAmV2xLI9Y3lvNdr4=
-X-Received: by 2002:a05:6000:2910:b0:3a4:ec23:dba7 with SMTP id
- ffacd0b85a97d-3b497038e99mr11653550f8f.31.1751977249687; 
- Tue, 08 Jul 2025 05:20:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGgNW79A8BrP21EWSs7lKUKdILa06LH5bVAwBaOGGKTGtsUuKzF/1aJyfa0YVS71SOtjmayRQ==
-X-Received: by 2002:a05:6000:2910:b0:3a4:ec23:dba7 with SMTP id
- ffacd0b85a97d-3b497038e99mr11653535f8f.31.1751977249314; 
- Tue, 08 Jul 2025 05:20:49 -0700 (PDT)
-Received: from [192.168.103.102]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454cd3d2656sm20804455e9.21.2025.07.08.05.20.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 05:20:48 -0700 (PDT)
-Message-ID: <c2b30b63-8920-4c74-a154-09d676de12e0@canonical.com>
-Date: Tue, 8 Jul 2025 14:20:47 +0200
+ AJvYcCVoBqx+7VNexLrMnWvcE6RejCDJ5fr7FZrYL6gMtBjU4hzj8tturumTriG6kwcHomr1BuXX0qo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwROy9jRNwZk5psg9bS4U8VozzeWrq5p5o6mVPl85L6fpySUa8Z
+ 7zDzFM7FVYtQGnbKN/VFLX40zzn3CjGXW5HwBJn4TF9q3CkI4zHHlLxLkzlIPGJrfeE3CG+eDOS
+ /5l6yCeKh6o83VR2ksjTFYa7v7dS5igPbzaP2OyeqAg==
+X-Gm-Gg: ASbGncuEe8Lp42iv6TTqM5iczzDxWcnwwA90Hmu+1E4foMNL0fSxkVM/G/InDIOqzpj
+ JhAdBCXg8ctGkqCdfT2NTE40PzlnI8r8CZV4lj18cQHST7ldTV9RtUJ8EBn3m/3+a6B8fVFs4ph
+ fN9s+CpFcUfj/4s8tNQGeFm8W5BaWRj+UeUiMHvcvfD8ZsH+zLA0Am750=
+X-Google-Smtp-Source: AGHT+IH5HhZITR+lcJDhAGWoLmsR189yjQkc7vp1FWIPR/wueoPhlP+ab7r0SSmUrEbS304qUvOMIvnnQ/Xgu1y8YWw=
+X-Received: by 2002:ac8:5796:0:b0:494:a235:fcbb with SMTP id
+ d75a77b69052e-4a9ccc07f14mr50590701cf.29.1751977966185; Tue, 08 Jul 2025
+ 05:32:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] efi_loader: add missing check in FMP.GetImageInfo()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
- Casey Connolly <casey.connolly@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
-References: <20250708114851.78109-1-heinrich.schuchardt@canonical.com>
- <CAC_iWjKCtmN8Pn4VRNKRgH0OXymtp8=vc0J_q=MxTDLvTXgSxw@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAC_iWjKCtmN8Pn4VRNKRgH0OXymtp8=vc0J_q=MxTDLvTXgSxw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250708121251.83980-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250708121251.83980-1-heinrich.schuchardt@canonical.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 8 Jul 2025 18:02:34 +0530
+X-Gm-Features: Ac12FXwssNXB1R7Zn5nwbw-ZVeiCuwXIeCH-NV6eFr-oi3HI538ifolUKaDe76g
+Message-ID: <CADg8p96hiG7Tewhgz6eZH0yMnMVRS1CbR=dxx_kX4E2mtiuNjA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] lmb: add missing fallthrough in lmb_alloc_mem()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Janne Grunau <j@jannau.net>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,62 +94,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08.07.25 13:56, Ilias Apalodimas wrote:
-> Hi Heinrich
-> 
-> On Tue, 8 Jul 2025 at 14:48, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> The UEFI 2.11 specification, chapter 23.1.3 requires
->> EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo() to return
->> EFI_INVALID_PARAMETER if *ImageInfoSize is not too small
->> and ImageInfo is NULL.
->>
->> Fixes: f27c20148511 ("efi_loader: add firmware management protocol for FIT image")
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
-> 
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> 
-> That being said, we need to double check the FIT capsule users. I
-> think we can probably remove it in the future.
+On Tue, 8 Jul 2025 at 17:43, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Add fallthrough to clarify the intent.
+>
+> Addresses-Coverity-ID: CID 569481: Control flow issues (MISSING_BREAK)
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/lmb.c | 1 +
+>  1 file changed, 1 insertion(+)
 
-It is not clear if you mean the check or the FIT version of the protocol.
+Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 
-efi_firmware_get_image_info() is a protocol implementation that may be 
-called from anywhere outside of U-Boot. We should not remove checks 
-required by the UEFI specification even if our internal usage of the 
-protocol would not require them.
+-sughosh
 
-> Are you aware of use cases that FIT supports, which we don't support
-> from the RAW variant?
-
-Maybe Takahiro remembers, why both RAW and FIT were implemented.
-
-Best regards
-
-Heinrich
-
-> 
-> Thanks
-> /Ilias
->>   lib/efi_loader/efi_firmware.c | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
->> index 75501e21557..216df83de67 100644
->> --- a/lib/efi_loader/efi_firmware.c
->> +++ b/lib/efi_loader/efi_firmware.c
->> @@ -332,6 +332,8 @@ static efi_status_t efi_fill_image_desc_array(
->>
->>                  return EFI_BUFFER_TOO_SMALL;
->>          }
->> +       if (!image_info)
->> +               return EFI_INVALID_PARAMETER;
->>          *image_info_size = total_size;
->>
->>          ret = efi_gen_capsule_guids();
->> --
->> 2.48.1
->>
-
+>
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 45b26512a5b..e5a0677e3f9 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -762,6 +762,7 @@ int lmb_alloc_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
+>         switch (type) {
+>         case LMB_MEM_ALLOC_ANY:
+>                 *addr = LMB_ALLOC_ANYWHERE;
+> +               fallthrough;
+>         case LMB_MEM_ALLOC_MAX:
+>                 ret = _lmb_alloc_base(size, align, addr, flags);
+>                 break;
+> --
+> 2.48.1
+>
