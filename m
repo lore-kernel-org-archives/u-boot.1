@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C0CC8303C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 15:35:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D44C83F09
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 16:51:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 539DB83390;
-	Tue,  8 Jul 2025 17:35:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 3374283390;
+	Tue,  8 Jul 2025 18:51:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="y5CvyTX2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mZ5cABwM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 157C083390; Tue,  8 Jul 2025 17:35:37 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 2FD25833C0; Tue,  8 Jul 2025 18:51:20 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7DFB832F0
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 17:35:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F31BE832F0
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 18:51:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ae0d758c3a2so751534266b.2
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 08:35:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3a548a73ff2so4386145f8f.0
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 09:51:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1751988934; x=1752593734;
- darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oIU5KmbOc0FVRlI3BOhsjkiTNoK0U3ceqDvHi8115ao=;
- b=y5CvyTX2hXqUrb67f0p6lT1i4NL34khjMQRJTRg0ve1LyImbcKsGA6fIc1q9aO//4S
- LvuN9pOXlKVz0yEN5ABgpQXt78ZAiiLWVBiz+43mFvYmqEXYz7ifG7/e/kXt2cviloxp
- nkmLBgtJtDO6f3U0DCjhjguuvNbOVM5fY3x0EMfDdHm+Zn9Xt72nbLf21QI5JUlv1s/L
- DOwGv8DsQUpH8PZcRCz9wo5CkIlWZfL3RCmsrDyLNa3whl0BjL+eQCyq4DXoKMbVMwFx
- UPwsEyAwisuwDO2TFIziW4Bb65qwBPAIzyw4MmQZ5Lc0N6cWWleb18Qhkomh2TfHHwQF
- F9tg==
+ d=linaro.org; s=google; t=1751993477; x=1752598277; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qb4VuBxSBrzOutViOJzoMJgmhOrAPB64Gcv9ogJutrA=;
+ b=mZ5cABwMWoq2KgNFRa949EEdZ+Ylxjv8TfHm8Zj05cEJ/pSwbDW9ZhhMtXBZVvsLRD
+ 68TUOCe2FsBRiTE2g3rVYTBRuEYEtAf6U42S3QPJ5xYJ915MKFDG0nyLHrgEQIv90GFn
+ K+oIb1vGt0/VM1Tt0BEzrh+NObpajj758IoLckuslwdQTVmH8OJuCn8Cj4keIsCGSp0p
+ Xk/cMIIca1SATKrIT6JKM2vETHVD351ZOrNPn88/blAUPdOhDO8Na+AqKOWGGH1IiyXy
+ wwhNauPOOEYpQMPWTfMF6godj+W/hN3vU/Y41MRJHLGuNo1hEN4BHBXsRsZG/W4sGbmA
+ 8www==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751988934; x=1752593734;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=oIU5KmbOc0FVRlI3BOhsjkiTNoK0U3ceqDvHi8115ao=;
- b=E3ieOvpRfiWUZTzJ/E1gUEhKffo97/rDeLu8KJNOvR2DXcXfpXKm3FeLIEmnRvpT/5
- CJXgiUN/mFyOX7EWFMtYhmhaPRTO8lcj6g2f+9gQJZwEB3apIxwF6Jynj3DoXi3XNC+T
- S2fh0odoPBZ80DASh18JEv2CYQLs4tZIaK54yhnivha9R5jB/vWVOKWrHaw3ijTTrnrX
- 8ncvwNAM6bdpmyc04NlFtP5j1Izu4aS+wDXFC0Tde02kghpPLhuUddxHcAzXcQ4nD5mm
- ofvR8Qs/sLu+XVu+HaDUsdxe8D9YHAPr2pF1EKxmviff2DQt8vclmCiHN+myknIopT5H
- PSxw==
-X-Gm-Message-State: AOJu0Yw/p/qppCjBL8t0I63Pwpkf/MqyY9H7wO18cc08jsNQ2VRVpG0v
- dnrvRQJub69dlbm1LCTLK/XkYHnhdLWcKno2DENtz4ZrGPiQCUSX+Dym9Ey6AYosYWxDqldscOH
- FGqxDZQ==
-X-Gm-Gg: ASbGncvl06i5+lIRfASxJdASW4kuR21BlMES1fk5MwhI9u4eZLPEAoyyyFWh4VBzudJ
- d7gfn52GcJjX6Glj0MOxrTvk8v5FZXGL/tkGWAQ45hLRw+hssCEPfno/jZ71tI0jKZCY2HBDbuX
- 8ES11htRf5CsFmTo1sVemWTSTf+vOd5gqnKdVp5V4Jzd4x5vUNAmHgqBhw5Cg2oC/3Ncp+l4oua
- /pBqSLzbIXs8H/HDzux6+MKltp86XDyo45OiKh5f7IXvSUl8k8GEGMvS8zInyoIdg1lBc3wGhNO
- BYFaJBokNirjzHGuS+NVAQqkppOS7g7HyhVmRaQJz20Tx+RBxl3k6XzqII/d4fwzJZWE3aU9Zgg
- =
-X-Google-Smtp-Source: AGHT+IF10T1oSKib8ZluT0QKzzaV3tC6VQFIkcICiYa2rnz5yhPbfsbU3ao2HsFSs52UrzEeup9Tig==
-X-Received: by 2002:a17:907:9705:b0:ae0:b3cd:b7f8 with SMTP id
- a640c23a62f3a-ae6b0e30386mr417918866b.40.1751988933870; 
- Tue, 08 Jul 2025 08:35:33 -0700 (PDT)
-Received: from [10.254.183.223] ([149.199.62.131])
+ d=1e100.net; s=20230601; t=1751993477; x=1752598277;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qb4VuBxSBrzOutViOJzoMJgmhOrAPB64Gcv9ogJutrA=;
+ b=hclZ+Nfpwm2+T2IwsP1jjNZ5DxzCYPFbZYDZv+jHocctuNmTfx0ckDTR549gKIpSU3
+ YcHwJllVbxnuHNm8LznBQN0mgKs+JP+lgM5qumjB3YiFWdMXOz0sqrvrdmMUA2CvSwv7
+ JYyBJ9TJIalOEe+WiXWSYoz+eQpVqizyEZr/gmNah2Q5zVV75KT3KGsMkFjsSqgEMldK
+ jimkEjNoyrUXS5MJ8tSQoud067NybIQJuDhFjSvflL3hEEsbPTsC8VBpUSfXK9ZJxO5y
+ bAG888OGmjwW/iEVL/WdOJw9QGb7ozQvis/wC4qIsquUW8JoBxWpYO5fmDh5KVS8HUfJ
+ bZtg==
+X-Gm-Message-State: AOJu0YznvqAn3oicW9ex/TS4IxqvT1/i90ebwMP+VhxJ4GkkDMZBVgHu
+ Y4uG86HElmxxakaDwLZSqirNZu9LPkE5u6JwEHQeHSsw/1K1g0f8KnLBOkpZIH7hFTk=
+X-Gm-Gg: ASbGncslvXhnKQtHKKYGRlNwQr5c0RlwCRzNjhEEiqCnSKfODNqqr7lur43GiyuECvj
+ Rnp/mcyz6lmkUiKWKuzGbzbo2z4kARoJiZPuwx6JFGmnMKBiisO6/Nj3EP4N66eht/dfut1AGCK
+ woQ7uKySP5IrjXlM3jMCjaTKgMaI4318iaLI0bXk/hEO6glQrWOIHslSrp1Is4tmVZhe9juubre
+ n+T2fuYneX8uN3ZAcLbuGu5sh1h2c006BQKgXdYWNnseTT0dQAa/Zfkup9wjTdoyckjRXg9n4+7
+ 72yLCLm7/7uVNJ7dn5WTn6o91h/Dd0T2MJB5HeCNM8xp1+3uL2MHSwXPaerHHQ7XUwvR2+cdcbk
+ x6ndXUa2PVRGcsaPj0ZZI464=
+X-Google-Smtp-Source: AGHT+IHdqG5EWWgeok1cZsY9exqswhiOZhtSLaSVJJUMdkhEYyXniPmoyWgGKnA4hcB2JNeVy+hyqw==
+X-Received: by 2002:a05:6000:151:b0:3a5:1222:ac64 with SMTP id
+ ffacd0b85a97d-3b5e32020e3mr121191f8f.38.1751993477359; 
+ Tue, 08 Jul 2025 09:51:17 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:a08:6480:3e01:6cde])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f692fdcesm918678966b.63.2025.07.08.08.35.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 08:35:33 -0700 (PDT)
-Message-ID: <4fb58823-45e5-4cbb-b3cb-f648e42d9104@monstr.eu>
-Date: Tue, 8 Jul 2025 17:35:29 +0200
+ ffacd0b85a97d-3b47030ba29sm13232481f8f.2.2025.07.08.09.51.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Jul 2025 09:51:16 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/3] net: Address some issues reported by Smatch
+Date: Tue, 08 Jul 2025 17:51:15 +0100
+Message-Id: <20250708-net_fix-v1-0-292b9aa20f31@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] AMD/Xilinx changes for 2025-10-rc1
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAINMbWgC/x3NQQqEMAyF4atI1haqM7XiVUSGWKNmYZVERBDvP
+ tXlz/vgXaAkTApNdoHQwcprTFHkGYQZ40SGh9RQ2tJZb2sTaf+NfBpff0eHofp4V0HSPSqZXjC
+ G+fEL6k7yDJtQ8u9F2933H8D80ntyAAAA
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,161 +100,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Smatch reported some issues including a macro that was missing outer
+parens, a comparison of an 8bit type against a 32bit define and a
+comparison that was always true due to being an unsigned type.
 
-please pull these patches to your tree. Gitlab CI is not reporting any new 
-issue. Most of the changes are related to mini configurations and then small 
-cleanups which I have collected so far.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Andrew Goodbody (3):
+      net: Add parens to macro PSEUDO_HDR_SIZE
+      net: Incorrect NOP macro used for test
+      net: wget: Fix comparison of unsigned variable
 
-Thanks,
-Michal
+ include/net/tcp.h | 2 +-
+ net/tcp.c         | 2 +-
+ net/wget.c        | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+---
+base-commit: d1d53c252a4a746db5ebcdf0d6de3aa0feec504e
+change-id: 20250708-net_fix-784f5ac63756
 
-The following changes since commit b379335f141e3ddca0cdbb5d9d39af0444530542:
-
-   configs: Resync with savedefconfig (2025-07-07 14:15:18 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2025.10-rc1
-
-for you to fetch changes up to a00f312e745db563e5c992e461dc4d24ed949370:
-
-   arm64: versal2: Remove the ZynqMP Firmware from mini ospi (2025-07-08 
-15:01:25 +0200)
-
-----------------------------------------------------------------
-AMD/Xilinx changes for v2025.10-rc1
-
-cmd:
-- Introduce CMD_HELP Kconfig option
-
-fpga:
-- Fix in intel_smd_mb
-
-mini:
-- Remove simple-bus driver and description
-- Disable CMD_HELP
-
-firmware:
-- Fix dependencies
-- Switch to new SMC firmware format
-
-cadence qspi:
-- Fix read/write STIG mode
-- Set tshsl_ns to at least one sclk_ns
-
-sdhci:
-- Call sdhci reset if wired
-
-zynqmp-clk:
-- Add support for DPLL clock source
-
-zynqmp:
-- Sync clock ID bindings with Linux
-- defconfig updates
-- Enable rng-seed generation
-
-versal:
-- Fix clock dependency
-
-versal2:
-- defconfig updates
-- Enable sysreset
-
-----------------------------------------------------------------
-Michal Simek (6):
-       clk: versal: Fix clock driver dependency
-       firmware: xilinx: Prepare code for new SMC firmware format
-       xilinx: Remove simple-bus description from mini configurations
-       arm64: zynqmp: Enable rng-seed generation
-       cmd: Introduce CMD_HELP
-       xilinx: Disable help command for all mini configurations
-
-Naresh Kumar Ravulapalli (1):
-       drivers: fpga: intel_sdm_mb: Check SIP SMC status in send_bitstream()
-
-Padmarao Begari (2):
-       clk: zynqmp: Add support for dpll clock source
-       xilinx: zynqmp: Enable xilinx ethernet phy
-
-Tom Rini (2):
-       arm: zynqmp: Remove local copy of 'dt-bindings/clock/xlnx-zynqmp-clk.h'
-       firmware: xilinx: Tighten dependencies for ZYNQMP_FIRMWARE
-
-Venkatesh Yadav Abbarapu (10):
-       mmc: zynq_sdhci: Reset the host controller
-       config: amd: Enable the SPI_STACKED_PARALLEL config option
-       xilinx: zynqmp: disable CONFIG_SPI_FLASH_BAR
-       arm64: versal2: Do not define do_reset() if sysreset is enabled
-       arm64: versal2: Enable reset and poweroff via sysreset framework
-       config: versal2: Update timer clock to 100Mhz
-       spi: cadence_qspi: Fix odd byte write issue in STIG mode
-       spi: cadence_qspi: Set tshsl_ns to at least one sclk_ns
-       cadence_qspi: fix odd byte read issue in STIG mode
-       arm64: versal2: Remove the ZynqMP Firmware from mini ospi
-
-  arch/arm/dts/versal-mini-emmc0.dts               |  36 +++---
-  arch/arm/dts/versal-mini-emmc1.dts               |  36 +++---
-  arch/arm/dts/versal-mini-ospi.dtsi               |  52 ++++----
-  arch/arm/dts/versal-mini-qspi.dtsi               |  40 +++----
-  arch/arm/dts/versal-net-mini-emmc.dts            |  36 +++---
-  arch/arm/dts/versal-net-mini-ospi.dtsi           |  56 ++++-----
-  arch/arm/dts/versal-net-mini-qspi.dtsi           |  42 +++----
-  arch/arm/dts/versal-net-mini.dts                 |  26 ++--
-  arch/arm/dts/zynqmp-clk-ccf.dtsi                 |   2 +-
-  arch/arm/dts/zynqmp-mini-emmc0.dts               |  31 ++---
-  arch/arm/dts/zynqmp-mini-emmc1.dts               |  31 ++---
-  arch/arm/dts/zynqmp-mini-nand.dts                |  35 +++---
-  arch/arm/dts/zynqmp-mini-qspi.dts                |  25 ++--
-  board/amd/versal2/board.c                        |   2 +
-  board/xilinx/common/board.c                      |  33 ++++-
-  cmd/Kconfig                                      |   6 +
-  cmd/Makefile                                     |   2 +-
-  cmd/help.c                                       |   6 -
-  configs/amd_versal2_mini_defconfig               |   2 +
-  configs/amd_versal2_mini_emmc_defconfig          |   2 +
-  configs/amd_versal2_mini_ospi_defconfig          |   5 +-
-  configs/amd_versal2_mini_qspi_defconfig          |   2 +
-  configs/amd_versal2_virt_defconfig               |   6 +-
-  configs/xilinx_versal_mini_defconfig             |   2 +
-  configs/xilinx_versal_mini_emmc0_defconfig       |   2 +
-  configs/xilinx_versal_mini_emmc1_defconfig       |   2 +
-  configs/xilinx_versal_mini_ospi_defconfig        |   2 +
-  configs/xilinx_versal_mini_qspi_defconfig        |   2 +
-  configs/xilinx_versal_net_mini_defconfig         |   2 +
-  configs/xilinx_versal_net_mini_emmc_defconfig    |   2 +
-  configs/xilinx_versal_net_mini_ospi_defconfig    |   2 +
-  configs/xilinx_versal_net_mini_qspi_defconfig    |   2 +
-  configs/xilinx_versal_net_virt_defconfig         |   1 +
-  configs/xilinx_versal_virt_defconfig             |   1 +
-  configs/xilinx_zynqmp_kria_defconfig             |   1 +
-  configs/xilinx_zynqmp_mini_defconfig             |   2 +
-  configs/xilinx_zynqmp_mini_emmc0_defconfig       |   2 +
-  configs/xilinx_zynqmp_mini_emmc1_defconfig       |   2 +
-  configs/xilinx_zynqmp_mini_nand_defconfig        |   2 +
-  configs/xilinx_zynqmp_mini_nand_single_defconfig |   2 +
-  configs/xilinx_zynqmp_mini_qspi_defconfig        |   2 +
-  configs/xilinx_zynqmp_virt_defconfig             |   2 +-
-  drivers/clk/Kconfig                              |   2 +-
-  drivers/clk/clk_zynqmp.c                         |  20 ++++
-  drivers/firmware/Kconfig                         |   1 +
-  drivers/firmware/firmware-zynqmp.c               |  60 ++++++----
-  drivers/fpga/intel_sdm_mb.c                      |   3 +-
-  drivers/mmc/zynq_sdhci.c                         |  22 ++++
-  drivers/spi/cadence_ospi_versal.c                |  12 +-
-  drivers/spi/cadence_qspi.h                       |   4 +-
-  drivers/spi/cadence_qspi_apb.c                   |  13 +-
-  include/dt-bindings/clock/xlnx-zynqmp-clk.h      | 126 --------------------
-  include/zynqmp_firmware.h                        |   9 ++
-  test/py/tests/test_help.py                       |   1 +
-  54 files changed, 383 insertions(+), 439 deletions(-)
-  delete mode 100644 include/dt-bindings/clock/xlnx-zynqmp-clk.h
-
+Best regards,
 -- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
