@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B696EC8303C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 11:32:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24483C83F0F
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 11:34:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2570283123;
-	Tue,  8 Jul 2025 13:32:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1D6483123;
+	Tue,  8 Jul 2025 13:34:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SuqiL7AF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="huC//RxN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7018183242; Tue,  8 Jul 2025 13:32:17 +0200 (CEST)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 550A083242; Tue,  8 Jul 2025 13:34:55 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 577338305C
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 13:32:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CE158305C
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 13:34:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-70b4e497d96so37645437b3.2
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 04:32:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3ab112dea41so2300147f8f.1
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 04:34:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751974334; x=1752579134; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gnPLZC5+YFtd+H8kknRN1UriWBPGzRBujWsUC9NY7Qc=;
- b=SuqiL7AFNWRbgkSt24+tw6MoyGC1UskWTC7pwHxZ4lGZKWzKNgRkBoIboPCkbGuvFL
- zYAClk8xGgtcpJELrziOcdg2szT3hduLds1tc9c8jM7TJUctBR2vyxfkM9daginnxeJL
- HeOdxxIR9C+OC1Y7VLRBKR1rU7eSOkVDhIbdcdGM9an5KAcTxyHlDVwPZE4gXL/KGL2e
- T2HmmB8PfLIdpnHV+JdRekILLja+IdoysJ1AAaGcqSnYSrqJ0s7NhBWvEYQuoINSB5LP
- aiGgAQXObW5XgRcmRzs8oFj6vvA0TvdEXjkGgyfI/vd1ddVfl/1/S/ymiRsBdz0f+27F
- 5lsA==
+ d=linaro.org; s=google; t=1751974493; x=1752579293; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=S+NMcbjKHVmgPTHUhj1Yf+qG+1KgczemAGf9JeCYIBo=;
+ b=huC//RxN9VCgkxB+sSRc5x11qUL8RaXr3adoC3tv+OmrTigb5AUxItzFs+2q2V1vv0
+ a+TmrEfReBEkxPLTmUYP5jK6W+izImt6hn3RhxXvfE3+hCQtX9WrtrImw772bWI8NEoU
+ 4ARsm0fHSlVw4vnHO8h11QcxMY41lt+0ykJhVHz7tqT42UFZh05/eZk8Ic+NVlfWqcBf
+ QPjSnKDr9CdA5vl+ymA5z3VuTFcn0qVenocKRJuTDSZn/ESgQsFLGD8lu47P6WC7kr9+
+ N1sHwJc+PX0x0tiBrYARISggpz/rGEemS6dqIuW0+PedM139gaoIc8viD9dwyNsEiK8u
+ WghQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751974334; x=1752579134;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1751974493; x=1752579293;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gnPLZC5+YFtd+H8kknRN1UriWBPGzRBujWsUC9NY7Qc=;
- b=JuUi0JmTSgG0/wZjd9CilNMAV7Rn3SlTx+bukGAA1phWIkWzqpWHYu/YtVYYnlP6sf
- T7kcYq5JXQfk8EkXJ+i0t2xgdxKMSgtZIv13TEyJPmNb2Sgw3iR8tRGMvH2uHKB/jQ+V
- dx2g6cFpE5ICBs6doqoZOh2ZqRmZaKENMxiOnWoJTyebXlgHWXNOj6iSTEKJmDxxmw0f
- PGMfcwtFjEmGS9gf4t13bDHQpK4QZnHwS2RxVa/DynkkNUsD/kcNrtzLhL0chYdjV71d
- jAV/9ro+rHU9mcG0aGnFR/5EJZjc6FmR1Vh1l17VTxgce3pNspl8Y1Y3tQivCOVtfcx1
- 9vkg==
-X-Gm-Message-State: AOJu0YydsKi1f4Lzg/l7IEJfOHnc1xOH4C05+xwb/rk5jbXZwMDjl9pS
- Qo5dGd4/IoHZ8QlAruSETrGAcGEEFVr052DvZ2p5ALYJYwOfhgVy1gmYY6st5wDVcEeY4CtNdTO
- oQh1RwzPmrwFOXd5w364BHogC0N9g9BAFEOBjqcQPmN1UmUuFvvUq+jN23Q==
-X-Gm-Gg: ASbGncttVtfsfG9nh/bwosfOhZeciGN5JfkxS/L7DKj0rcsGHdc6Tg1FR86Xz8afZs/
- yHwVI+tObdRRU2DfXMTmw7wyALgrV6kEzl8WpG4dE2HctFBJmtlDf3UTdFORlZXYBKhD/lhyJso
- 4kapXX2z4HT/NHycxKIOK94Z9/88PMseW0FBkyZSAQ3fE=
-X-Google-Smtp-Source: AGHT+IEEuAUPFcSg7cSTqBXG6ee9YQWHKPLXHjVnEYcb4tm22lpPt2tYEKBu6abC4qqSbp0KmY6RY22eo42AE/NwX1Y=
-X-Received: by 2002:a05:690c:610a:b0:714:115:712f with SMTP id
- 00721157ae682-7166b5d75bdmr219370697b3.6.1751974334014; Tue, 08 Jul 2025
- 04:32:14 -0700 (PDT)
+ bh=S+NMcbjKHVmgPTHUhj1Yf+qG+1KgczemAGf9JeCYIBo=;
+ b=YANY5L+BO6mI/M1Yg69wBwcEQw76uB4MUyD3tVESCpZpl6wVVjAe44THD+OluxdCSr
+ m3x1N6PfnpNgTAXXeumvJ4CrLAnm2j/MyiuhBJBfypUgDmKUnR4SgBjKXf3USCpChaxk
+ RtGq+gEFfwWGubi1TaJQlzLrGggvX4uo9ifpARznIN9UROIuYhd7CXITDp25C2ZYX1De
+ JVoFZzdRQ6KRApdI/tG3+aCA70x6qVg/TsPQUQaSgqU37/JXdxAFtE5WhZLxokn7ArOw
+ Oe8cetEXvItJ9g73atIwNYWxKmzPCuhgUiF2jFMoEbuXZlGcN+padd4IBCtkroTWCgz/
+ lfjg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUTrV1viOR9M2KphuVJmRQqqWE6cos8sIkRJpydtraz3aoUqnYWjWv6ghmKRSjVn2uyJcSEgAY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzb+BsJTZ188921i4L/kuS+rgTsvX5Ig1P70jBnIqjIW38vHYga
+ koYBPcQJ4maEUFezA9+tbfNVgNug+qb0uH+QySpPHGpcDHgsqsvU/AGJkOKpwSyqQss=
+X-Gm-Gg: ASbGncs07v/bTHKAoY2l8PJeFr0tbiMXN8RYOpOs2iBhWhDKHQAoPX0Q/t7Uwt3gTQB
+ 1lW9nfiZ3sw4n4FTe4N682N8jopsEmRjDl+ZPtmollUYXmnGV8BhGj7YVMgGlJxWar/vJlTmbIt
+ DTt0FQlmkW9seaHrgjcAF+vAde5sWVGMsNz24JvITlYFiD2592Co3Zu1JTXMIBAgglzLXEGqtxY
+ 8reUaWR57aN4rK9MhwyMIciwMa+k9FwwLo+dXcI4j+8OT0+cH59XQJ3+uUxNvO1F1PGIw9nwcRl
+ 8lBa/C4ZZTU6iIwp8KB3/pDSn86/SkiYEofVRbr3Vc5FMJjGc8kcSoyA4TQFSlWUhM1ZDjswVM9
+ w6HHQmpG7z3S9
+X-Google-Smtp-Source: AGHT+IGmlNnP64MFWAL3+YAV1n7vQLupS0xRegglRx+zdUNXiYH/ZN2ATI3xu8dtOFu50jrLXck/iw==
+X-Received: by 2002:a05:6000:2187:b0:3b3:a6c2:1a10 with SMTP id
+ ffacd0b85a97d-3b5dde3f94fmr2198157f8f.12.1751974492420; 
+ Tue, 08 Jul 2025 04:34:52 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:a08:6480:3e01:6cde])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b47285d3bbsm12900668f8f.96.2025.07.08.04.34.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Jul 2025 04:34:51 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Tue, 08 Jul 2025 12:34:49 +0100
+Subject: [PATCH] fs: btrfs: Do not free multi when guaranteed to be NULL
 MIME-Version: 1.0
-References: <20250708103959.26129-1-pro@denx.de>
- <20250708103959.26129-2-pro@denx.de>
-In-Reply-To: <20250708103959.26129-2-pro@denx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 8 Jul 2025 14:31:37 +0300
-X-Gm-Features: Ac12FXzwqJYqUhH4Xvg8GTAudh_D9sZi8Cdn3UIdfgIYkqx-8Y9oZb0Mw6l_sEE
-Message-ID: <CAC_iWjKFBJRG290byhLj0cZjdLKhWOD+7NMZu5OY1sokgNb8Lw@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] Makefile: Add size check for u-boot-with-spl.bin
-To: Philip Oberfichtner <pro@denx.de>
-Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Paul Kocialkowski <contact@paulk.fr>, 
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250708-btrfs_fix-v1-1-bd6dce729ddd@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAFgCbWgC/x2N0QqDMAxFf0XybKGrDoe/IjKSGmce7CQpMhD/3
+ brHwz2He4CxChv01QHKu5h8U4FHXUFcMH3YyVQYgg9P3/mXo6yzvWf5OQxtJG5xajqC4hMaO1J
+ McbmLFS2z3sOmXPz/yTCe5wUznzn6dAAAAA==
+To: =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
+ Qu Wenruo <wqu@suse.com>, Tom Rini <trini@konsulko.com>
+Cc: linux-btrfs@vger.kernel.org, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,68 +103,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philip,
+multi is guaranteed to be NULL in the first two error exit paths so the
+attempt to free it is not needed. Remove those calls.
 
-On Tue, 8 Jul 2025 at 13:40, Philip Oberfichtner <pro@denx.de> wrote:
->
-> Like other images, u-boot-with-spl.bin may be subject to size
-> restrictions. Extend CONFIG_SPL_SIZE_LIMIT to handle this case.
->
-> Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> ---
->
-> Notes:
->     Changes in v4: none
->
->     Changes in v3:
->         Reuse existing SPL_SIZE_LIMIT instead of implementing a new option
->
->     Changes in v2: none
->
->  Makefile           | 1 +
->  common/spl/Kconfig | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/Makefile b/Makefile
-> index fa9ce756083..791c00713ec 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1545,6 +1545,7 @@ OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
->                                    --pad-to=$(CONFIG_SPL_PAD_TO)
->  u-boot-with-spl.bin: $(SPL_IMAGE) $(SPL_PAYLOAD) FORCE
->         $(call if_changed,pad_cat)
-> +       $(SPL_SIZE_CHECK)
+This issue found by Smatch.
 
-There's a rule in the Makefile
-ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
-SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
-else
-SPL_SIZE_CHECK =
-endif
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ fs/btrfs/volumes.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-and
+diff --git a/fs/btrfs/volumes.c b/fs/btrfs/volumes.c
+index 5726981b19c..71b0b55b9c6 100644
+--- a/fs/btrfs/volumes.c
++++ b/fs/btrfs/volumes.c
+@@ -972,12 +972,10 @@ int __btrfs_map_block(struct btrfs_fs_info *fs_info, int rw,
+ again:
+ 	ce = search_cache_extent(&map_tree->cache_tree, logical);
+ 	if (!ce) {
+-		kfree(multi);
+ 		*length = (u64)-1;
+ 		return -ENOENT;
+ 	}
+ 	if (ce->start > logical) {
+-		kfree(multi);
+ 		*length = ce->start - logical;
+ 		return -ENOENT;
+ 	}
 
-isn't this running?
+---
+base-commit: d1d53c252a4a746db5ebcdf0d6de3aa0feec504e
+change-id: 20250708-btrfs_fix-a24cbe4ad37b
 
-Thanks
-/Ilias
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
->
->  ifeq ($(CONFIG_ARCH_LPC32XX)$(CONFIG_SPL),yy)
->  MKIMAGEFLAGS_lpc32xx-spl.img = -T lpc32xximage -a $(CONFIG_SPL_TEXT_BASE)
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 9a17ccb2d3d..dcb25b593f1 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -43,7 +43,7 @@ config SPL_SIZE_LIMIT
->         default 0x30000 if ARCH_MVEBU && ARMADA_32BIT
->         default 0x0
->         help
-> -         Specifies the maximum length of the U-Boot SPL image.
-> +         Specifies the maximum length of U-Boot SPL images.
->           If this value is zero, it is ignored.
->
->  config SPL_SIZE_LIMIT_SUBTRACT_GD
-> --
-> 2.39.5
->
