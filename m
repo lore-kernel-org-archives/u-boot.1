@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75895C83F09
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 22:19:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D1CC8303C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 22:58:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74FCC83371;
-	Wed,  9 Jul 2025 00:19:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C62C83390;
+	Wed,  9 Jul 2025 00:58:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lCD5ssrt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DUulJQNU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1527C83390; Wed,  9 Jul 2025 00:19:09 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id F12CD83394; Wed,  9 Jul 2025 00:58:25 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E91A3831C3
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 00:19:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A3B883371
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 00:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-73cdce0ee0eso345333a34.3
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 15:19:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-71173646662so45575017b3.2
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 15:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752013145; x=1752617945; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vkE54BU7zbib4wlGXnNN9J4PKwvURusyj//KVhpQd7k=;
- b=lCD5ssrtX/fl4DPnKrFL6tZW6dksjPBMQqyKScqZkld0fKsGQ1Rasz6BsPYGGIoEUP
- vDEg3QfwU0vQyeUsqku3pyV6HRrTeR9jMuKB3vwvoRT0lPCP8bI6ZvomeixlJmlF4nx2
- 1f6oIx1gNTPc6bmhk+yV4sJobMtlDnOhZ7MEM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752013145; x=1752617945;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1752015502; x=1752620302; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vkE54BU7zbib4wlGXnNN9J4PKwvURusyj//KVhpQd7k=;
- b=res+1qn1Lkf1UMQFHcsHPv6nvk34ffvWymk3yscneB9SaW9Y13+SqQN2Q8DIOZ6Ptk
- eVAXPT0hTQppEM2102+PDOfPFW8ZOr8P5TEArUi2xC+ynCAtGXZ2X+tg5qv7R0YbZNFS
- xwq9OoYA0iLpnWgqaRo4MmqiI5BpYG6EiPLEwfa2RA5BARP5mgpQ80WbuG7vkjxyGUgB
- ZV7D5xjjTDlSgtOB4jxdfF8QSzyCbomTRdgeNZjscdb4u+2KSWAy0skTBmLc9kcNI9O0
- XTiUd1/oPHQFsEth67+i+pPOaQOS4kkO7MSzwq/OL1SKIcE9tUM/+iAcsuFBJTzKtNeX
- vw1A==
-X-Gm-Message-State: AOJu0Yw9LgETaeVS0C0d++pGau2c6eYs0GBzFHKf3Hi/96hr9StahvIO
- SItTWOwuznWZNnok+topl3108Rw25huJJ4osLp8iuUcnQZ/DX5m2FESlS2jmACm8fIk=
-X-Gm-Gg: ASbGnctpqRyOAFRKR93gOC3BWsGpGKMUgWiN3uTyYFLOqDXaTjO9+dMaegVtDXUaP81
- 8GMVNePQVE/lQVdqhCFMIn/Ucc2lcQ66v2ZfLXD6C47SGY0G5LVS4UQubK33+VkNNIXeilrriBm
- AbJ6u/vaU+FNYrvTk5k6RFPqaqbUJOIqN/C73JQ3QLawlLAgU0AFntkGIt0CkaaTrMyluubnJrS
- KDn5v1bOhuLy4JoQOXaNHNFM1VoiSxYbaxSPqf6gc7cpcdRJz1au8c5+EN93UK5Z67XohCi6TkN
- hvhZ2ap5mKjKL+fGGn+faHyzFe7dVT7wZirzUuIPZzaCV1HFn9KLL2mKmPg6VW2JfhTAsDWsjHU
- wpGf8T8tEAARP8uUyJfFn
-X-Google-Smtp-Source: AGHT+IG9cbIGwXoLFFUk9cNAWWeGJpI3xiZLbopCnEWlR5TzuREzFcQh3FpI1uVF3h/KTup8ylAqFg==
-X-Received: by 2002:a05:6871:440f:b0:29e:766d:e969 with SMTP id
- 586e51a60fabf-2fef84c7e1dmr81089fac.10.1752013145383; 
- Tue, 08 Jul 2025 15:19:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2f78ff4c088sm3133567fac.18.2025.07.08.15.19.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Jul 2025 15:19:04 -0700 (PDT)
-Date: Tue, 8 Jul 2025 16:19:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] spl: add linux initrd ramdisk properties to dtb
-Message-ID: <20250708221902.GA1391688@bill-the-cat>
-References: <20250625210132.800789-1-agust@denx.de>
+ bh=7yOmgDtUd7Y9gNXTFkhAz2joBwi6uPsQVF6WkcAQs3Y=;
+ b=DUulJQNUTsdA6EFd/NZVEoObavyoThvHategJD8z6jyqPuXlWycZ7hoQHNs46h8p18
+ 4tEwpJ/+VuToT3DowJgi1tzXvptuj1pmhb9iCf++9GKYNc2cfFQ0Qyync0Z9U7Bek+zK
+ mT6+yVcGEXqfkfni/6990qtZYhbskxmtN4GO06bdMiHU9pHP43oMVLDaMqcMTPvZJvTr
+ AP8hOWrbXamgTva+WlWg42sPEr46tPuRc106jfWfQyCK9F7ZdH9zi4IzDdPE3m4degO1
+ g/PqQDBmdzLBNHvG2jvJSHdoPsLhizybQoDqK4znnY0UtaqjaMPM5DGFR68qTJmuOJre
+ mKAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752015502; x=1752620302;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7yOmgDtUd7Y9gNXTFkhAz2joBwi6uPsQVF6WkcAQs3Y=;
+ b=UQrGxZA5DJfOpmGuBVpvNCiki27CpLJgwW48UcjXLcJEQtlmJjzQvf3PGKRXR6bYkG
+ MC0gkzbH5rejVm8hP5jam/t8UrjBpg1UyUyzqsIesb6TP1m8CkIsojFmjLV0oC2NNgVl
+ RoykskfR11AFhIkdS1mX4+HExPBXknkejhptuo2XQAgqfTB5BMpYLT6vDKtsE7kQ2V+x
+ JQE+F2jgOGmpH1WBJPD8MuCGtsawfoZrBg31z5sCySoMzR9imjQWEC2Wa1WZwNrrDAXT
+ H6rPEhwdZdhKky3uzinwjS4CvzO3rOafnEcdrZXDgeq0v39xRHlKpDfHrSVsq76m9E7/
+ mspw==
+X-Gm-Message-State: AOJu0YyLE24J5zmftVha3sv/JQHGLNRN+AyqsaF4Q9o+F0yydV3HTPNZ
+ UD9A4CJ2sVBN01q1L7rl5QKklql9pUjcGK/diCK5MmaaUxaLjJF0zZG9ABwHpzTsBklImyRjXYe
+ Sro7T0514sZr6g+oCeVSsfasqn0vEn3M1ySdN+nui6Q==
+X-Gm-Gg: ASbGncs+vcvBM7iz4mWDa6kKWF/Fw353UJfgeu9+xPxrIt8xNvurjXPNQYB/TpP2mIk
+ D9othIiJTeQkwmPsn1CiD5dBez7RStSgIGAs6DhHMK5oO8PqWlUMKmsInKmwv4261VAbViRZmdL
+ pNNnQzbL9A9/h7PDx/etG3A0cytK/P9JRMM3/ZG+OfJiRncWR1Qd4c2Imxb+ap6ViTJ4To7jjze
+ mHZMA==
+X-Google-Smtp-Source: AGHT+IH00Y3C5JKVqVfR2yxui+mOzUi8ILhyCe7NS3IcXj13seuo2oK5PBt1mNSfLy+GTgSZDReXJpMJnkh79jYzE54=
+X-Received: by 2002:a05:690c:6d07:b0:70e:1474:63f2 with SMTP id
+ 00721157ae682-717b166b8e3mr7936317b3.7.1752015502133; Tue, 08 Jul 2025
+ 15:58:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="M+rAIqwb+MvlXhCv"
-Content-Disposition: inline
-In-Reply-To: <20250625210132.800789-1-agust@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250529150213.27149-1-richard@nod.at>
+ <174976652550.365589.4489095631856636528.b4-ty@konsulko.com>
+In-Reply-To: <174976652550.365589.4489095631856636528.b4-ty@konsulko.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 8 Jul 2025 17:58:11 -0500
+X-Gm-Features: Ac12FXxuj22E2vcej-ln9CU9C0NPLI0YMPeuIzLpUXGAQEpQRZLHz8820zD9Y-o
+Message-ID: <CAPLW+4kSGfyhd_Bxr+cn=PJV1Zvi2Du5+jLSZSxhqBPZ=PvFow@mail.gmail.com>
+Subject: Re: [RFC, PATCH] fdt: Make sure there is no stale initrd left
+To: Tom Rini <trini@konsulko.com>, Richard Weinberger <richard@nod.at>
+Cc: u-boot@lists.denx.de, ddrokosov@salutedevices.com, sjg@chromium.org, 
+ tharvey@gateworks.com, ilias.apalodimas@linaro.org, 
+ kojima.masahisa@socionext.com, upstream+uboot@sigma-star.at
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,50 +95,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jun 12, 2025 at 5:15=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Thu, 29 May 2025 17:02:13 +0200, Richard Weinberger wrote:
+>
+> > Although if we we don't setup an initrd, there could be a stale
+> > initrd setting from the previous boot firmware in the live
+> > device tree. So, make sure there is no setting left if we
+> > don't want an initrd.
+> >
+> > This can happen when booting on a Raspberry Pi. The boot firmware
+> > can happily load an initrd before us and configuring the addresses
+> > in the live device tree we get handed over.
+> >
+> > [...]
+>
+> Applied to u-boot/next, thanks!
+>
 
---M+rAIqwb+MvlXhCv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This patch introduces regression in case when U-Boot transfers control
+to an EFI app which acts as a subsequent bootloading program. Such an
+app might try to set "linux,initrd-start" and "linux,initrd-end" fdt
+properties, but by that time those properties are already removed by
+the code added in this patch.
 
-On Wed, Jun 25, 2025 at 11:01:32PM +0200, Anatolij Gustschin wrote:
+Particularly, the issue was observed on the E850-96 board where GBL
+EFI app [1] can't run Android successfully anymore. More specifically,
+the kernel can't see the ramdisk and panics with these messages:
 
-> Currently when SPL is booting FIT images with ramdisk
-> the kernel fails to find the ramdisk and panics.
->=20
-> This is due to missing "linux,initrd-start/end"
-> properties in the device tree. Add fixup to insert
-> these properties if a ramdisk is detected in the
-> FIT image.
->=20
-> Signed-off-by: Anatolij Gustschin <agust@denx.de>
-> ---
->  common/spl/spl_fit.c | 23 +++++++++++++++++++++++
->  1 file changed, 23 insertions(+)
+    /dev/root: Can't open blockdev
+    VFS: Cannot open root device "" or unknown-block(0,0): error -6
+    Please append a correct "root=3D" boot option; here are the
+available partitions:
+    Kernel panic - not syncing: VFS: Unable to mount root fs on
+unknown-block(0,0)
 
-Since this doesn't test with SPL_OS_BOOT it leads to ~400 byte SPL
-growth and failure to link due to excess site in a lot of platforms.
-Please rework this and put it through CI, thanks.
+fdt_initrd() function (where initrd dts properties are removed) is
+called two times:
 
---=20
-Tom
+1. First it's called by EFI boot manager (e.g. as a part of U-Boot
+Standard Boot mechanism) when it's installing FDT:
 
---M+rAIqwb+MvlXhCv
-Content-Type: application/pgp-signature; name="signature.asc"
+    fdt_initrd
+    image_setup_libfdt
+    efi_install_fdt
+    efi_bootmgr_run
+    efi_mgr_boot
 
------BEGIN PGP SIGNATURE-----
+It's already enough for EFI app to malfunction. But then it's also
+called second time:
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhtmVIACgkQFHw5/5Y0
-tyzXggwAhgMMjejBuovdEbFQ5WFEh0iyic9PuXm9VtjkBD0uFnN2Yod5PvI8hvcw
-3t1ofwIv8HSCM6WPmaOinZ8FFVtoGDcTMvZnR6Q5bNysyhViW/tW2ho56S57WDgS
-uSQtG6ccIZfdDhNZFeGR3be46G3YtB5w4e8IrzQUV+/Ub4iRZ+4iNI9DZT1av2Ww
-Ttu0KbuLT2g7mO3Lp2HUO/ESNJTRWh1LKlXMJOb3Bo1rWDlSHuAEmoTpmY4pynne
-WyxE1jbIYC+X3GLXxMjA4sO1iy0gO13EEDaux3uQxXyY9SXezv+tZNp2HEVhX8fY
-Pd25C0w6qL61OlVCQra+aY5zZmacqd3wCmzPW+8liqRP2L/RWlI0PdWr37G4gIZ8
-mbnw+ZBrh0WB37I8Dk1l04gC6uY9yKwC8q9upPq+Qa7K3R/GwYFp4RM7S60ufCCP
-muSHG1x9bI7QgQc85LHo/tl0xZ3Qn98bXmrd7Gd7qmhwIZqo3M3SwkCgHaRKlfWz
-c89NXLVB
-=80cg
------END PGP SIGNATURE-----
+2. From the EFI app, via EFI DT fixup protocol:
 
---M+rAIqwb+MvlXhCv--
+    fdt_initrd
+    image_setup_libfdt
+    efi_dt_fixup
+    struct efi_dt_fixup_protocol efi_dt_fixup_prot =3D {
+        .fixup =3D efi_dt_fixup
+    };
+
+See [2] for specific GBL code which sets those fdt properties and then
+runs DT fixup protocol callback.
+
+I don't see any way for U-Boot to know if those initrd properties are
+going to be set later by other EFI apps or not. So arguably this patch
+should be reverted. But I might be missing something and maybe there
+are better options to fix that?
+
+Thanks!
+
+[1] https://source.android.com/docs/core/architecture/bootloader/generic-bo=
+otloader/gbl-dev
+[2] https://android.googlesource.com/platform/bootable/libbootloader/+/refs=
+/heads/gbl-mainline/gbl/libgbl/src/android_boot/mod.rs#208
+
+> [1/1] fdt: Make sure there is no stale initrd left
+>       commit: 9fe2e4b46458f9c4ec6b8115ebf18b4b26fe6127
+> --
+> Tom
+>
