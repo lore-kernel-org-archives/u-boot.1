@@ -4,83 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50A1AC83030
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 01:37:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E80FC83F09
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 03:38:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ED5583189;
-	Tue,  8 Jul 2025 03:37:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2BC7783189;
+	Tue,  8 Jul 2025 05:38:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F/o7PjX0";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bkzfWqeO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF8F48318E; Tue,  8 Jul 2025 03:37:03 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 059608319F; Tue,  8 Jul 2025 05:38:16 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9384983145
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 03:37:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F0FB83145
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 05:38:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-553b6a349ccso4610043e87.0
- for <u-boot@lists.denx.de>; Mon, 07 Jul 2025 18:37:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751938621; x=1752543421; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nmFMoRPuQTStRk+fuZmV+YtCXItgSutEi2itY/Cid58=;
- b=F/o7PjX0XqbtLiCtHJzc9eYx+8KKtfisOlU6ZWNI2tZ2BjAcjDz4rg6TfmzEOlASCw
- rwtNMKunnjdAZFvHnual/jE/Mea1LgvL87hIRkcHpKwkIgYmVWI+fyIz8RREQyo4FA9p
- atw8OuhsYOjkELKh8HjmvaIhQdOJZ1bx4gzYjEPUgrFr9N166WR1KoYJn+zm7e+b2NRI
- S9TLRILdtls3XhM2FqCjl4+IFT1RAqTrAOtl5j0EdXeVnZjYk4KyI1zqry7XDW+rM8dA
- ggrEAijclOjRChI0NfURpOckjrXWTN382bYHdszLQlXDqZAvZqnHa6gWjE9clfjp4OZ7
- n4AA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751938621; x=1752543421;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nmFMoRPuQTStRk+fuZmV+YtCXItgSutEi2itY/Cid58=;
- b=WOEp7FGoRin6C7niADMGIiMywGD97mr/3rAGIhtGxgfdRsF1L/18R4fE6/dOiybyJw
- pueWv4/KqmPFF3wPGPurI7L6dUQ37gMygW4ympvU6nmAKXhRMNiYFeivLktKJcWRYe8n
- JmIJd1PbnaML5+qjp0V/m6+QDZBomg+yeoR8rQKhcNi116tmDxLUckvxgQd02X/Wpywe
- jeIICPkwXhzy2MYZ44DYIPeeSYRI/dlhrcuNu/LnfBxX1xwAYveC4X870aTX5K2QDOL4
- AfDm4eBZ0i3p+8CTMzTM2/avxrmcfK32S5KoTToXgLVzA84GUTVflQsHzoRPG3vRIwhX
- GgWg==
-X-Gm-Message-State: AOJu0YxedGggMi9u/55wYPCO/tNE5rByE2TV4RTCPX8BZjLlka7dUvqu
- bJarPk9ORbRMXyM4aWtLTMW2EUSzAqYDRO2Itec8vzHn4V6nbxWiE43LvUgAHX4Xk8yYZLBjpS/
- E2Z0tdycYD1ZNzor7wuHtUhN1n9jF2qE=
-X-Gm-Gg: ASbGncujhmmaDG5GiIKHbSvBGxwyKGVur6m/yli02u0Ae7L3FxGyt2cnj1kzKvKuK7S
- nzFrTRlzNtuzU9M8c5LLpq3Q9C86wbc5SgJIU71+VW1hDOAt6X8S0LHRAfa5XlgU/oG55sSNJ4k
- 3C9Skg2+jw92sT4eWOdGajADWjUwiWSj12RXFIa0rQw+mNDUt9B2RkFcMSWFH9uy4jHzqhEsq8q
- k4=
-X-Google-Smtp-Source: AGHT+IF374EqO6TL0Ktcyys/FjgD6tGfjN+IX+XiEf0SaOO7DJw1izKeaBO+Xu03FmTaDdNedeSECB+CDps4RmtUqLc=
-X-Received: by 2002:a05:6512:124d:b0:553:2c65:f1d1 with SMTP id
- 2adb3069b0e04-556d5e2d95cmr3772661e87.13.1751938620407; Mon, 07 Jul 2025
- 18:37:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1751945892; x=1752550692; i=xypron.glpk@gmx.de;
+ bh=V2+xDW8NyxpLv1/j5m4fZoepzfAXLX9t9LF2N+e2Hlc=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=bkzfWqeO7E67WZL5EDV27EeOkPyAt55NWEuK6v9HyNdNAF5sG6t9nU4vvYBu3Umo
+ OF2xbmSfTNwu4F0+P0vjBXulB9ef19/OGIzDpNy/ikuOyPQVCpWRg0z+JWEgloQ7v
+ djr7+CAgUYtbukDDGEWsyrkgXhEpjT7aHPk8kslZRuZf0RYjIFZDfMCX+3PX/sAa7
+ JIJVQdW2mR4x8Uj7R1hneDVKHGI87X/FSUwuduIji1pDUYmda50HyZ1pTS1H7z8PL
+ Fs99uE72J/kIllbLWQGAOJYVKvgivJH4C03QAspnrM5Hh4fBHzEfHDqsicMORk2NY
+ k451pmvZYvFoUlcAbA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([46.114.111.61]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MBUmD-1uNl0e3L3v-00AMMX; Tue, 08
+ Jul 2025 05:38:11 +0200
+Date: Tue, 08 Jul 2025 05:38:10 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>, u-boot@lists.denx.de
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_1/1=5D_efi=3A_turn_on_EFI=5FDEBUG?=
+ =?US-ASCII?Q?=5FSUPPORT_for_qemu_arm_and_arm64_target?=
+User-Agent: Thunderbird for Android
+In-Reply-To: <20250707095322.30222-2-paulliu@debian.org>
+References: <20250707095322.30222-1-paulliu@debian.org>
+ <20250707095322.30222-2-paulliu@debian.org>
+Message-ID: <8AF80705-BB09-4AAD-8604-3D967295AB30@gmx.de>
 MIME-Version: 1.0
-References: <CAOMZO5Ag7CmRBhpvOB5btNvHiAMayBoxSYMoBJXbV3-w1ET7jA@mail.gmail.com>
- <072c3a1f-7501-891c-b2b7-a55ea47be0f4@denx.de>
-In-Reply-To: <072c3a1f-7501-891c-b2b7-a55ea47be0f4@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 7 Jul 2025 22:36:49 -0300
-X-Gm-Features: Ac12FXyyziS95nx9-at5du_OlDU7BldTq-w02pqeEGSvfEZyOoEbcvMtPmY5HQw
-Message-ID: <CAOMZO5A_7Ruaq9mE=owPctK-6uDu56kaBkqth-Vngr_CvAMHKQ@mail.gmail.com>
-Subject: Re: i.MX6UL: Adding bootcount support
-To: hs@denx.de
-Cc: U-Boot-Denx <u-boot@lists.denx.de>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Schrempf Frieder <frieder.schrempf@kontron.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- =?UTF-8?B?TWFyZWsgVmHFoXV0?= <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Yx33xzG6HrabjUKTZTDvDtCgVyzLs2ezxgaONegA/npg7EvuwjM
+ 3xQ/pcE+HPhWr2FhVUuoHI9AtSoFiCaPsjX7oqoNxmL5QqYeRwmdlvUOpx0Ay7VKXPTiK65
+ qMgJcXNRas4cOxVelTVj+PWrS/K6y2x7bc4lecsDzb/zMqJxoKw68tpZKnK0YDvSYHJY21G
+ Mbp9DMSq+Yno7s4B8IYFA==
+UI-OutboundReport: notjunk:1;M01:P0:bpM7yHlGpbs=;SPt6/nzd7BQ94VhnNNswqLbFavI
+ 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
+ UrFuYuTnD6V7ytWLMp63EkVC/JdX591M=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,57 +128,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Am 7=2E Juli 2025 11:53:22 MESZ schrieb "Ying-Chun Liu (PaulLiu)" <paulliu@=
+debian=2Eorg>:
+>Previously, EFI_DEBUG_SUPPORT was enabled across all platforms for
+>CI build testing=2E With this commit, we are limiting its activation
+>to qemu_arm64_defconfig and qemu_arm_defconfig only, which is
+>sufficient for our current needs=2E
 
-Thanks for your email.
+Was there a request to turn it off on other platforms?
 
-On Mon, Jul 7, 2025 at 1:30=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
+Best regards=20
 
-> Have you checked if CONFIG_SYS_BOOTCOUNT_ADDR address is stable over
-> reset? May someone overwrites it...
+Heinrich
 
-When I inspect via md.l, it is always zero.
 
-> I had it working on imx6ull
 >
-> CONFIG_BOOTCOUNT_BOOTLIMIT=3D3
-> CONFIG_SYS_BOOTCOUNT_ADDR=3D0x20d8024
-> CONFIG_SYS_BOOTCOUNT_SINGLEWORD=3Dy
-> CONFIG_BOOTCOUNT_LIMIT=3Dy
-
-I tried these changes, but they did not help.
-
-Do you happen to remember which U-Boot version you used?
-
-> I did not needed
+>Signed-off-by: Ying-Chun Liu (PaulLiu) <paulliu@debian=2Eorg>
+>Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
+>Cc: Tom Rini <trini@konsulko=2Ecom>
+>---
+> configs/qemu_arm64_defconfig | 1 +
+> configs/qemu_arm_defconfig   | 1 +
+> lib/efi_loader/Kconfig       | 1 -
+> 3 files changed, 2 insertions(+), 1 deletion(-)
 >
->  > +CONFIG_SYS_BOOTCOUNT_MAGIC=3D0xB0C4000
->  > +CONFIG_SYS_BOOTCOUNT_BE=3Dy
->
-> but may because I have an older base...
->
-> Hmm.. your register seems fine ... I read in RM:
-> """
-> For backward compatibility with earlier
-> versions of SNVS LPGPR0 is aliased at its original offset of 68h.The GPR =
-will be
-> automatically zeroized when a tamper event occurs, unless GPR zeroization=
- is disabled
-> via the GPR_Z_DIS bit in the LP Control Register.
-> """
->
-> May try 0x20b00090 ... just a try...
+>diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+>index 39afb837e41=2E=2E54bf4646382 100644
+>--- a/configs/qemu_arm64_defconfig
+>+++ b/configs/qemu_arm64_defconfig
+>@@ -15,6 +15,7 @@ CONFIG_ENV_ADDR=3D0x4000000
+> CONFIG_PCI=3Dy
+> CONFIG_DEBUG_UART=3Dy
+> CONFIG_AHCI=3Dy
+>+CONFIG_EFI_DEBUG_SUPPORT=3Dy
+> CONFIG_EFI_HTTP_BOOT=3Dy
+> CONFIG_FIT=3Dy
+> CONFIG_FIT_SIGNATURE=3Dy
+>diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
+>index 92ba48f6af9=2E=2Eb1c277a86c0 100644
+>--- a/configs/qemu_arm_defconfig
+>+++ b/configs/qemu_arm_defconfig
+>@@ -18,6 +18,7 @@ CONFIG_ENV_ADDR=3D0x4000000
+> CONFIG_PCI=3Dy
+> CONFIG_DEBUG_UART=3Dy
+> CONFIG_AHCI=3Dy
+>+CONFIG_EFI_DEBUG_SUPPORT=3Dy
+> CONFIG_FIT=3Dy
+> CONFIG_FIT_SIGNATURE=3Dy
+> CONFIG_FIT_VERBOSE=3Dy
+>diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>index 077466f01f0=2E=2Efdabe9cc278 100644
+>--- a/lib/efi_loader/Kconfig
+>+++ b/lib/efi_loader/Kconfig
+>@@ -73,7 +73,6 @@ config EFI_SIGNATURE_SUPPORT
+>=20
+> config EFI_DEBUG_SUPPORT
+> 	bool "EFI Debug Support"
+>-	default y if !HAS_BOARD_SIZE_LIMIT
+> 	help
+> 	  Select this option if you want to setup the EFI Debug Support
+> 	  Table and the EFI_SYSTEM_TABLE_POINTER which is used by the debug
 
-Also, tried, but it also stays at 0.
-
-> May tamper event occurs? And the register is in "low power domain" ... ma=
-y
-> there is a problem... so no real idea here from my side, just speculation=
-...
-
-It seems that I am missing something to get the LPGPR register to increment=
-.
-
-Regards,
-
-Fabio Estevam
