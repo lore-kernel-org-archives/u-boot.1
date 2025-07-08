@@ -4,70 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3BC2C83F0F
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 10:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31003C8303C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 10:40:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61FFE83285;
-	Tue,  8 Jul 2025 12:40:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABE1B83018;
+	Tue,  8 Jul 2025 12:40:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1751971236;
-	bh=3JeotcYVis4sPUaCGfG4DQvJByEeRHx2zlTG/ztKKyY=;
+	s=phobos-20191101; t=1751971251;
+	bh=voJettxfqKuUyjtlirTR4RxVXG8FQ/owoSVt8EK6Xsk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=a9x+/P8P27h3WfANp5/AsFaJ1wS5lbxrj+RGk9+4WUrHA3FV4GBIrMVVYx7XbA68J
-	 XA6M4GKUr3Dj2HqhJhdb8SFpztKHja8pY3tkrge+cfMgPhESkfeW2FDoxj8Vc/1dX/
-	 RIZtZEEQm4oJIf6jmtuO3hPyz9LSQTv2o1ujcYY4oLLDwahR9T0x9dhpM0YLpTnl27
-	 RrjErVQOAEwUep9jR9Htzp8vhJJ1ZuV5ZvxATb4nSqWlWruPETxbWv+rNAnjSEtiK8
-	 nl3U4sqUOkgj/EOlQ3+bD0Ux9PtpUvzvs2kuTU8JRzlpEGsxAbEsUzRVOmV3vSGTAR
-	 /GfWkgVLe3ayg==
+	b=zfaD6nfJzvIxDSiWZ8pc6UfKAzKltVLXN5XKiM771Fg6m2UbFGHkXeKU09037F6te
+	 jefPdgqPsUkl4k/J9nJdznlCD9ki6CDMXanbl1ndwERG39/t/2QtqRJXWhV60VKUBk
+	 d4WU3zjziENZnQJPPisO0+IIgZzeS73k6+ZkEiE8GNuO4IVUkEUL8K3uKCKoEz15ET
+	 cgkygdKSy4xxUi9NrfOQ7KWzyDtknBnNvApZZKnIIRntzEPcJ0G6nDVtxY71MOqauf
+	 7lnMJjTI0oT3YaYWBQ6WiaRakXsEMjHeWPcNeNxfPcottKjQm1sAK7qLHNY6L0AbgO
+	 bn4M+hvr6pMOw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFE1883015; Tue,  8 Jul 2025 12:40:35 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id B123683018; Tue,  8 Jul 2025 12:40:50 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 085EA83297
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 12:40:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DFBDD83015
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 12:40:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="ZvlqXxqf"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="VUAGf22v"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C629E103972A9; 
- Tue,  8 Jul 2025 12:40:32 +0200 (CEST)
+ with ESMTPSA id 4E71010380104; 
+ Tue,  8 Jul 2025 12:40:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1751971233; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1751971248; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=3JeotcYVis4sPUaCGfG4DQvJByEeRHx2zlTG/ztKKyY=;
- b=ZvlqXxqfMw3JiTRyuSPnWDTLI+XH6dI25B8x+VFFLSZS9pO5qwmo42Inz1ROTjD/VgTt3L
- PjXLc8jp3to1kW6lDgBR8lFDee3o4c9wlUpltywJWJ3TNxYEP7F1FqGQp1aKD4ZuErG0QV
- 7BvG1PrzZE4bCt47y44ci1FzwRrqPPsXYI3ei9up6UShz+Py/z/2PzEzjEQ369EiwuIU1x
- 4pFa/8dV0bkT6l9fIZsfRbdFf7CtKNBsNq9KVxZaLCDNiNU569zTXtXRKfvuQeWF2Ra9d+
- jUv/Qp/ZRuqfCIuJOwfU7L9ZLNfu+hn+B1HeZKDM4HPivQhIrg1XuCBUHJVicw==
+ bh=voJettxfqKuUyjtlirTR4RxVXG8FQ/owoSVt8EK6Xsk=;
+ b=VUAGf22vbELjEMNaQiFAZ9dbb5MrrmEzIaLeLOoUgA6gF6v2sDtYukmvBDH/bTy0uUgbmu
+ 9dB00Dc16nIkR1iJGP9Lh5ci244n2N45Vf/KIor4YCxMVRLpb1cXFz8fVjeEYQ5E6/+hFD
+ J6+NxHDAaxN+abtMJmD9lw+dSYvAvWqLWeAwyVilHKOV3D63cAyHxPW1+Vm4h4rOO/BfPl
+ 7pbUWKJOzi9BiQ3Ec2AT/MK0nSmpIM2PUW9xC0NqMHTJExm7fFFQyV8SFef3r4oQw61+yW
+ 91XpAloPYsR+sdNL2xEfCCUPeh+xgehKAsp3JmFmsm/MMPo3elC5bIzddkK/HQ==
 From: Philip Oberfichtner <pro@denx.de>
 To: u-boot@lists.denx.de
-Cc: Philip Oberfichtner <pro@denx.de>, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 1/3] Makefile: Add size check for u-boot-with-spl.bin
-Date: Tue,  8 Jul 2025 12:39:57 +0200
-Message-Id: <20250708103959.26129-2-pro@denx.de>
+Cc: Philip Oberfichtner <pro@denx.de>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH v4 2/3] mips: serial: Silence "unused variable" warning
+Date: Tue,  8 Jul 2025 12:39:58 +0200
+Message-Id: <20250708103959.26129-3-pro@denx.de>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250708103959.26129-1-pro@denx.de>
 References: <20250708103959.26129-1-pro@denx.de>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -86,49 +81,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Like other images, u-boot-with-spl.bin may be subject to size
-restrictions. Extend CONFIG_SPL_SIZE_LIMIT to handle this case.
+Before this commit, mtmips_spl_serial_init() caused the following
+warning:
+
+  arch/mips/mach-mtmips/mt7628/serial.c:14:23: warning: unused variable ‘base’ [-Wunused-variable]
+     14 |         void __iomem *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
+        |                       ^~~~
+
+This happens whenever CONFIG_SPECIFY_CONSOLE_INDEX is unset, which leads
+to an effectively empty function:
+
+  void mtmips_spl_serial_init(void)
+  {
+	  void __iomem *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
+  }
+
+Add the __maybe_unused attribute to silence this warning.
 
 Signed-off-by: Philip Oberfichtner <pro@denx.de>
 ---
 
 Notes:
-    Changes in v4: none
-    
-    Changes in v3:
-    	Reuse existing SPL_SIZE_LIMIT instead of implementing a new option
-    
-    Changes in v2: none
+    Changes in v4: new
 
- Makefile           | 1 +
- common/spl/Kconfig | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ arch/mips/mach-mtmips/mt7620/serial.c     | 2 +-
+ arch/mips/mach-mtmips/mt7621/spl/serial.c | 2 +-
+ arch/mips/mach-mtmips/mt7628/serial.c     | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index fa9ce756083..791c00713ec 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1545,6 +1545,7 @@ OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
- 				   --pad-to=$(CONFIG_SPL_PAD_TO)
- u-boot-with-spl.bin: $(SPL_IMAGE) $(SPL_PAYLOAD) FORCE
- 	$(call if_changed,pad_cat)
-+	$(SPL_SIZE_CHECK)
+diff --git a/arch/mips/mach-mtmips/mt7620/serial.c b/arch/mips/mach-mtmips/mt7620/serial.c
+index 35544b8537e..a6915865e27 100644
+--- a/arch/mips/mach-mtmips/mt7620/serial.c
++++ b/arch/mips/mach-mtmips/mt7620/serial.c
+@@ -24,7 +24,7 @@ void board_debug_uart_init(void)
+ void mtmips_spl_serial_init(void)
+ {
+ #ifdef CONFIG_SPL_SERIAL
+-	void __iomem *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
++	void __iomem __maybe_unused *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
  
- ifeq ($(CONFIG_ARCH_LPC32XX)$(CONFIG_SPL),yy)
- MKIMAGEFLAGS_lpc32xx-spl.img = -T lpc32xximage -a $(CONFIG_SPL_TEXT_BASE)
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 9a17ccb2d3d..dcb25b593f1 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -43,7 +43,7 @@ config SPL_SIZE_LIMIT
- 	default 0x30000 if ARCH_MVEBU && ARMADA_32BIT
- 	default 0x0
- 	help
--	  Specifies the maximum length of the U-Boot SPL image.
-+	  Specifies the maximum length of U-Boot SPL images.
- 	  If this value is zero, it is ignored.
+ #if CONFIG_CONS_INDEX == 1
+ 	clrbits_32(base + SYSCTL_GPIOMODE_REG, UARTL_GPIO_MODE);
+diff --git a/arch/mips/mach-mtmips/mt7621/spl/serial.c b/arch/mips/mach-mtmips/mt7621/spl/serial.c
+index 5cf093a078a..3f600d778e7 100644
+--- a/arch/mips/mach-mtmips/mt7621/spl/serial.c
++++ b/arch/mips/mach-mtmips/mt7621/spl/serial.c
+@@ -11,7 +11,7 @@
+ void mtmips_spl_serial_init(void)
+ {
+ #ifdef CONFIG_SPL_SERIAL
+-	void __iomem *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
++	void __iomem __maybe_unused *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
  
- config SPL_SIZE_LIMIT_SUBTRACT_GD
+ #if CONFIG_CONS_INDEX == 1
+ 	clrbits_32(base + SYSCTL_GPIOMODE_REG, UART1_MODE);
+diff --git a/arch/mips/mach-mtmips/mt7628/serial.c b/arch/mips/mach-mtmips/mt7628/serial.c
+index 11a2149e127..88d63f3825b 100644
+--- a/arch/mips/mach-mtmips/mt7628/serial.c
++++ b/arch/mips/mach-mtmips/mt7628/serial.c
+@@ -11,7 +11,7 @@
+ void mtmips_spl_serial_init(void)
+ {
+ #ifdef CONFIG_SPL_SERIAL
+-	void __iomem *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
++	void __iomem __maybe_unused *base = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
+ 
+ #if CONFIG_CONS_INDEX == 1
+ 	clrbits_32(base + SYSCTL_GPIO_MODE1_REG, UART0_MODE_M);
 -- 
 2.39.5
 
