@@ -4,70 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3568FC8303C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 13:24:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27997C83F09
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 13:42:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7465833CC;
-	Tue,  8 Jul 2025 15:23:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 25EDA8331F;
+	Tue,  8 Jul 2025 15:42:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="1Hku84o4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="QRcmntZ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E72FA830B4; Tue,  8 Jul 2025 15:03:18 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2BADA83323; Tue,  8 Jul 2025 15:42:07 +0200 (CEST)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2406::631])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3644083339
- for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 15:03:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=277d701d6=Eoin.Dickson@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1751979796; x=1783515796;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=1te+mfZyKDc3gObXmskp4lttaXMhSWy3vjfGvnu5Msc=;
- b=1Hku84o42PHtFc3UuS8/Y/tkS1qV8gzJw0xkfuMZ1qQmkX+JILeu72Q3
- Wf+FIBHwpSl3ADEfH/qtSje2qYm1z4AuXUgO0qyc4kIxb6F78eV26uTWN
- JTZcnAVXGwEwVj/Hw6+ida9BD18f7gx1Qqk88FfyQOEEFbNMbd3JK0WXi
- 7nkWvlvD/PPqK0uP+XTj3dsgjHPspkl9kUv0SVOgZPM5/kBVc7lmq4+HX
- ikakmrAr79Qod+vWdMUJqXr4IIK6+FU566JcQ5ACX0lb/Ka+b3vaDpFaV
- nsVLN9JPK3I6TpjYjhLwA3ryCYLhSdR795xh2F0MLps53eKRRSC2eT5dA Q==;
-X-CSE-ConnectionGUID: FC3IMhBZRl2vWyg2IYdYqg==
-X-CSE-MsgGUID: gLcPy++uTQKAw52K5sNG9Q==
-X-IronPort-AV: E=Sophos;i="6.16,297,1744095600"; d="scan'208";a="44326170"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 08 Jul 2025 06:03:14 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Tue, 8 Jul 2025 06:02:21 -0700
-Received: from ird-lt-m75649b.microchip.com (10.10.85.11) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Tue, 8 Jul 2025 06:02:20 -0700
-From: Eoin Dickson <Eoin.Dickson@microchip.com>
+ by phobos.denx.de (Postfix) with ESMTPS id DD7D38331D
+ for <u-boot@lists.denx.de>; Tue,  8 Jul 2025 15:42:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=t2W+25jzoTMIPNe74kQ77dN0OxSxC+RircTRzhp9YFhtT7OXkQWhD9wYk+G5eRuzslux6vJwRJFgJPVRbmIaQGdn+lHY7CehSvViRMjT8zfT4D3274p3YgM7f3DYT47785Fdse4fTAHhcPN55NVDXNKaXeCYr06aARKl00IqI2DjetnJCRnVDfkRIKnifc03Al1+w8qHK++Nb+5enNijL/0+9k51b7iZCI1MgBQk94qsTNTDzAK7J3VqGZcJ8Y4SQcaFjqGLhohnffMRNKfJsteV/3ovbA0IkVx614rWaZdlRLzokwQxrqBzGmP8Ck//FUAbtnzrvy/Y06i1PHKeiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JVBRe3chYIviy2fZFcEkvt3G65qNc5LLNm6H26Kp0bg=;
+ b=gjboj2RpkfO8mOVWkS0lnLK2FWeQhH0UOg1ChXlOUlG4YofketBn14s7KRw5le0IULKRVoujxED8umxe4Xzx4YZNzlHmy9iSRdft1VgvLlw9kVKxeJeHePOr9qhJnEycCyY/nx2SMSgG/AqayKcv0EehvmEisJc7qcBX7viJWNc/ik0PQkHGwc/OjRxcH/ZmikSWOJI6rxviBBVh0KF2byXNSZgXRyxXKRY9sef12cBJA8HB9YhPrZ9ogFqmuIAL2TjZcWsufd/nT6vuft2apCQ0McXRkLMUuIth1AodlTwlg06OnrkMEyU59p4tGq0YWjOVTCUlp5zvLgnK9xb/xA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JVBRe3chYIviy2fZFcEkvt3G65qNc5LLNm6H26Kp0bg=;
+ b=QRcmntZ4HPS1UWLonco5K437q5F24tN6QvxDs3sHY2WVmagdoqCzBGj7PlVnEU4loW2M3ojkiTUAaKUj8YYe89JrWCitQ+P+7C3tcHOgb+/w70rJmpvYBF5A9fUkzJwq99lRdBbXxcF6Zc4EJYkvuEEu3TurM4P+o4VODrWhPNE=
+Received: from BN8PR15CA0022.namprd15.prod.outlook.com (2603:10b6:408:c0::35)
+ by IA1PR12MB8079.namprd12.prod.outlook.com (2603:10b6:208:3fb::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.24; Tue, 8 Jul
+ 2025 13:41:59 +0000
+Received: from BL02EPF00021F6F.namprd02.prod.outlook.com
+ (2603:10b6:408:c0:cafe::66) by BN8PR15CA0022.outlook.office365.com
+ (2603:10b6:408:c0::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.21 via Frontend Transport; Tue,
+ 8 Jul 2025 13:41:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF00021F6F.mail.protection.outlook.com (10.167.249.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8901.20 via Frontend Transport; Tue, 8 Jul 2025 13:41:59 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 8 Jul
+ 2025 08:41:55 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Tue, 8 Jul 2025 08:41:54 -0500
+From: Padmarao Begari <padmarao.begari@amd.com>
 To: <u-boot@lists.denx.de>
-CC: <rick@andestech.com>, <ycliang@andestech.com>,
- <Conor.Dooley@microchip.com>, <Jamie.Gibbons@microchip.com>,
- <Praveen.Kumar@microchip.com>, <Eoin.Dickson@microchip.com>,
- <Cyril.Jean@microchip.com>, <jagan@amarulasolutions.com>
-Subject: [PATCH v3 2/2] spi: coreqspi: add xfer function for PolarFire SoC
-Date: Tue, 8 Jul 2025 18:31:21 +0530
-Message-ID: <20250708130121.1769247-3-Eoin.Dickson@microchip.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250708130121.1769247-1-Eoin.Dickson@microchip.com>
-References: <20250708130121.1769247-1-Eoin.Dickson@microchip.com>
+CC: <git@amd.com>, <michal.simek@amd.com>
+Subject: [PATCH v3 0/2] xilinx: update guid with fwu metadata
+Date: Tue, 8 Jul 2025 19:11:40 +0530
+Message-ID: <20250708134142.327224-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Mailman-Approved-At: Tue, 08 Jul 2025 15:23:43 +0200
+Received-SPF: None (SATLEXMB04.amd.com: padmarao.begari@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F6F:EE_|IA1PR12MB8079:EE_
+X-MS-Office365-Filtering-Correlation-Id: 139de123-e353-4a7b-105b-08ddbe253696
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?b/pxcRnEfvtUBojfYRQY8rjcfq/g0z8KlAYi7b3Uia/qiKKSqDW6dVC1YyYb?=
+ =?us-ascii?Q?BDVeGLOHzdnEsT1d9CD/hb2yBmVHAOoD9HfMMVtOLbjvyKunCGLFy557EILn?=
+ =?us-ascii?Q?UVEivjBTRrGLsIrrkUZMSkXov8pQQIwAC9bJWDHQr1fRpZmUvNOHaOqxPOP1?=
+ =?us-ascii?Q?dFP+kK2IUwSFCzv+J9J694DX6eVVhVVYyr7qyoFmMCg8hpJ4694L30N34rdv?=
+ =?us-ascii?Q?QwhGsRoYLhTR2bDfJp1jmNfuial0PJWWdiEBsOB5DObNnk//gQd3VpXpjLhv?=
+ =?us-ascii?Q?w+UlZblXtRY0zn4dXBBgRgYTZnlHar9WUN68zTCMz+HS53WKcGf98ZTT4lQ9?=
+ =?us-ascii?Q?0czhkhmJ6tGTgcQ88lx8wXwMJaH4R4jcfLQgqnizV4PdJJ3aqw4KBmHqyF6g?=
+ =?us-ascii?Q?W6o/EfBaIaPQf7ZeglfVNOGPKS77pvUNBycTHsAtHkJRNQvgpV1QNEWREQHu?=
+ =?us-ascii?Q?jtIxrRf0kSIQu481fZKsCqZlOoeY8OUtqDWC+CZl8UfqF5eS2mYLaKofITgm?=
+ =?us-ascii?Q?EQAfJ7tRxBTCtf0HocA61diMWUw4bq4uJLZMe+VvguPdycYuWG5cq6eMTVG6?=
+ =?us-ascii?Q?DsaGBsRtqPE+OiyhN8pJd80IqxIFDNY2zWMfYQ62ZAxHdvUC0i8iy6XTHHU6?=
+ =?us-ascii?Q?IPhSmpvUkfbdEJtse+OjjZtjOP5g24OjU8FJ6kkGmuSv/DBA+M39A/z6AHRt?=
+ =?us-ascii?Q?XzsWPHLUta1KOvZfyuAOxhfMKje1ghYY27BUdw/hCcEMJ605UjBVTtTKRAkN?=
+ =?us-ascii?Q?TqHgVSgPLeVLSGIfxNNvJK3ZSzjRnXJWftQuaoIuPtlwU4NP1LpvciMicrRT?=
+ =?us-ascii?Q?GsF/OruN9wTycYp8Ilma+9ZsugBeYfoQ4+Wo1aWUal2vaFImw3tzKXTqS0bj?=
+ =?us-ascii?Q?fLcm0ZkCLdPZwBLmpXIBgnTLwZKEKT73MrJzA1ccCTk/mKbhb3gHpCr+Dcdv?=
+ =?us-ascii?Q?N+OknT0HBxqkX0uodbwJ2CuFlatfrPctlcFcvtWZtqK6gOA+mmqgqx39V9PI?=
+ =?us-ascii?Q?S2Nx9TwByaxxL5kAGF38T4OfPqZKCSJ/weuzXUEPNytFnYbu9XBcfej6jV4G?=
+ =?us-ascii?Q?H3prHdPTfOHFXWSqFH8eoRI4+vvgHqNfRivCqTE+6du2T7VMt6aWoeN9pJu5?=
+ =?us-ascii?Q?GqVKIkp6KnTkAGbTe256AwE4Ybwc5agvhY0HYjjJKUYZb6q1oaeAnbnku46g?=
+ =?us-ascii?Q?UzkV+olib2z9fDSG3xAPMzmC0x+nBtfrZwWnovskuYYxZP3oWAmgWucHQO33?=
+ =?us-ascii?Q?ev/Sl4svbUzjLmH+ZhxVyzP/2aV4SKxXliN3Eu+PtyMYh4iAbLju+UW/pgia?=
+ =?us-ascii?Q?Le2vxmQOnubOETyqTWviGNwGCGejPjJ8UK6BXxl0/vcA2z9DahiK3IpfaBKa?=
+ =?us-ascii?Q?CbcCMA+b+/9Jiu/toQKHFFwC+1uEoRZe16c9CQPg1TI6ExnZ4FeDYv5bN8vO?=
+ =?us-ascii?Q?3bxP2PZWhBhQAtIPWS8FcLUB6Ce9FcVKmnRQUORSbPr9GED8cb7MkiSN8PYr?=
+ =?us-ascii?Q?LJk2wthum5GKz70TNMvc3p/jQqP7/yVKw08Y?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2025 13:41:59.4924 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 139de123-e353-4a7b-105b-08ddbe253696
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F6F.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8079
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,183 +146,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Eoin Dickson <eoin.dickson@microchip.com>
+Introducing the fwu platform hook function from fwu
+initialization to process fwu metadata information with
+platform specific operation, and use image uuid(GUID)
+from fwu metadata structure for fwu multi bank update.
 
-Add xfer function to PolarFire SoC coreqspi driver. The read and write
-operations are limited to one byte at a time instead of four as CMD18
-(multiple block read) reads garbage when four byte ops are enabled.
+Change in v3:
+-Update Note in function
+-Update function description
+-Remove ENOSYS
 
-Signed-off-by: Eoin Dickson <eoin.dickson@microchip.com>
----
- drivers/spi/microchip_coreqspi.c | 113 ++++++++++++++++++++++++++++++-
- 1 file changed, 111 insertions(+), 2 deletions(-)
+Change in v2:
+-Update commit message for FWU mdata
+-Remove platform_hook() from driver, add weak and actual platform hook function
 
-diff --git a/drivers/spi/microchip_coreqspi.c b/drivers/spi/microchip_coreqspi.c
-index 234b1688272..84b8965b7fc 100644
---- a/drivers/spi/microchip_coreqspi.c
-+++ b/drivers/spi/microchip_coreqspi.c
-@@ -16,6 +16,7 @@
- #include <linux/delay.h>
- #include <linux/types.h>
- #include <linux/sizes.h>
-+#include <asm/gpio.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -97,6 +98,8 @@ DECLARE_GLOBAL_DATA_PTR;
- #define REG_X4_TX_DATA         (0x4c)
- #define REG_FRAMESUP           (0x50)
- 
-+#define MAX_CS_COUNT 1
-+
- /**
-  * struct mchp_coreqspi - Defines qspi driver instance
-  * @regs:              Address of the QSPI controller registers
-@@ -113,6 +116,7 @@ struct mchp_coreqspi {
- 	u8 *rxbuf;
- 	int tx_len;
- 	int rx_len;
-+	struct gpio_desc cs_gpios[MAX_CS_COUNT];
- };
- 
- static void mchp_coreqspi_init_hw(struct mchp_coreqspi *qspi)
-@@ -172,7 +176,7 @@ static inline void mchp_coreqspi_write_op(struct mchp_coreqspi *qspi, bool word)
- 	while (qspi->tx_len >= 4) {
- 		while (readl(qspi->regs + REG_STATUS) & STATUS_TXFIFOFULL)
- 			;
--		data = *(u32 *)qspi->txbuf;
-+		data = qspi->txbuf ? *((u32 *)qspi->txbuf) : 0xFF;
- 		qspi->txbuf += 4;
- 		qspi->tx_len -= 4;
- 		writel(data, qspi->regs + REG_X4_TX_DATA);
-@@ -184,7 +188,7 @@ static inline void mchp_coreqspi_write_op(struct mchp_coreqspi *qspi, bool word)
- 	while (qspi->tx_len--) {
- 		while (readl(qspi->regs + REG_STATUS) & STATUS_TXFIFOFULL)
- 			;
--		data =  *qspi->txbuf++;
-+		data = qspi->txbuf ? *qspi->txbuf++ : 0xFF;
- 		writel(data, qspi->regs + REG_TX_DATA);
- 	}
- }
-@@ -471,6 +475,110 @@ static int mchp_coreqspi_probe(struct udevice *dev)
- 	/* Init the mpfs qspi hw */
- 	mchp_coreqspi_init_hw(qspi);
- 
-+	if (CONFIG_IS_ENABLED(DM_GPIO)) {
-+		int i;
-+
-+		ret = gpio_request_list_by_name(dev, "cs-gpios", qspi->cs_gpios,
-+							ARRAY_SIZE(qspi->cs_gpios), 0);
-+
-+		if (ret < 0) {
-+			pr_err("Can't get %s gpios! Error: %d", dev->name, ret);
-+			return ret;
-+		}
-+
-+		for (i = 0; i < ARRAY_SIZE(qspi->cs_gpios); i++) {
-+			if (!dm_gpio_is_valid(&qspi->cs_gpios[i]))
-+				continue;
-+			dm_gpio_set_dir_flags(&qspi->cs_gpios[i], GPIOD_IS_OUT);
-+		}
-+	}
-+
-+	u32 control = readl(qspi->regs + REG_CONTROL);
-+
-+	control |= (CONTROL_MASTER | CONTROL_ENABLE);
-+	control &= ~CONTROL_CLKIDLE;
-+	writel(control, qspi->regs + REG_CONTROL);
-+
-+	return 0;
-+}
-+
-+static void mchp_coreqspi_cs_activate(struct udevice *dev)
-+{
-+	struct udevice *bus = dev_get_parent(dev);
-+	struct mchp_coreqspi *qspi = dev_get_priv(bus);
-+	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
-+	u32 cs = slave_plat->cs[0];
-+
-+	if (CONFIG_IS_ENABLED(DM_GPIO) && dm_gpio_is_valid(&qspi->cs_gpios[cs]))
-+		dm_gpio_set_value(&qspi->cs_gpios[cs], 1);
-+}
-+
-+static void mchp_coreqspi_cs_deactivate(struct udevice *dev)
-+{
-+	struct udevice *bus = dev_get_parent(dev);
-+	struct mchp_coreqspi *qspi = dev_get_priv(bus);
-+	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
-+	u32 cs = slave_plat->cs[0];
-+
-+	if (CONFIG_IS_ENABLED(DM_GPIO) && dm_gpio_is_valid(&qspi->cs_gpios[cs]))
-+		dm_gpio_set_value(&qspi->cs_gpios[cs], 0);
-+}
-+
-+static int mchp_coreqspi_xfer(struct udevice *dev, unsigned int bitlen,
-+				const void *dout, void *din, unsigned long flags)
-+{
-+	struct udevice *bus = dev_get_parent(dev);
-+	struct mchp_coreqspi *qspi = dev_get_priv(bus);
-+	struct spi_slave *slave = dev_get_parent_priv(dev);
-+	uint total_bytes = bitlen >> 3; /* fixed 8-bit word length */
-+	u32 control, frames;
-+
-+	int err = 0;
-+
-+	err = mchp_coreqspi_wait_for_ready(slave);
-+	if (err)
-+		return err;
-+
-+	control = readl(qspi->regs + REG_CONTROL);
-+	control &= ~(CONTROL_MODE12_MASK | CONTROL_MODE0);
-+	writel(control, qspi->regs + REG_CONTROL);
-+
-+	frames = total_bytes & BYTESUPPER_MASK;
-+	writel(frames, qspi->regs + REG_FRAMESUP);
-+
-+	frames |= FRAMES_FLAGBYTE;
-+	writel(frames, qspi->regs + REG_FRAMES);
-+
-+	if (flags & SPI_XFER_BEGIN)
-+		mchp_coreqspi_cs_activate(dev);
-+
-+	if (bitlen == 0)
-+		goto out;
-+
-+	if (bitlen % 8) { // Non byte aligned SPI transfer
-+		flags |= SPI_XFER_END;
-+		goto out;
-+	}
-+
-+	qspi->txbuf = (u8 *)dout;
-+	qspi->rxbuf = (u8 *)din;
-+
-+	while (total_bytes) {
-+		qspi->tx_len = 1;
-+		qspi->rx_len = 1;
-+		total_bytes--;
-+
-+		if (din) {
-+			mchp_coreqspi_write_op(qspi, true);
-+			mchp_coreqspi_read_op(qspi);
-+		} else {
-+			mchp_coreqspi_write_op(qspi, true);
-+		}
-+	}
-+out:
-+	if (flags & SPI_XFER_END)
-+		mchp_coreqspi_cs_deactivate(dev);
-+
- 	return 0;
- }
- 
-@@ -483,6 +591,7 @@ static const struct spi_controller_mem_ops mchp_coreqspi_mem_ops = {
- static const struct dm_spi_ops mchp_coreqspi_ops = {
- 	.claim_bus      = mchp_coreqspi_claim_bus,
- 	.release_bus    = mchp_coreqspi_release_bus,
-+	.xfer           = mchp_coreqspi_xfer,
- 	.set_speed      = mchp_coreqspi_set_speed,
- 	.set_mode       = mchp_coreqspi_set_mode,
- 	.mem_ops        = &mchp_coreqspi_mem_ops,
+Padmarao Begari (2):
+  FWU: Add platform hook support for fwu metata
+  board: xilinx: update guid based on metadata
+
+ board/xilinx/common/board.c | 26 ++++++++++++++++++++++++++
+ include/fwu.h               | 11 +++++++++++
+ lib/fwu_updates/fwu.c       | 18 ++++++++++++++++++
+ 3 files changed, 55 insertions(+)
+
 -- 
-2.34.1
+2.25.1
 
