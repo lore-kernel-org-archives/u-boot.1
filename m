@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D1CC8303C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 22:58:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958E6C83F0F
+	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 23:31:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C62C83390;
-	Wed,  9 Jul 2025 00:58:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CD08083390;
+	Wed,  9 Jul 2025 01:31:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DUulJQNU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MfLRAGsn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F12CD83394; Wed,  9 Jul 2025 00:58:25 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 729A083394; Wed,  9 Jul 2025 01:31:11 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A3B883371
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 00:58:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F320583371
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 01:31:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-71173646662so45575017b3.2
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 15:58:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-735ae68cc78so3287227a34.1
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 16:31:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752015502; x=1752620302; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7yOmgDtUd7Y9gNXTFkhAz2joBwi6uPsQVF6WkcAQs3Y=;
- b=DUulJQNUTsdA6EFd/NZVEoObavyoThvHategJD8z6jyqPuXlWycZ7hoQHNs46h8p18
- 4tEwpJ/+VuToT3DowJgi1tzXvptuj1pmhb9iCf++9GKYNc2cfFQ0Qyync0Z9U7Bek+zK
- mT6+yVcGEXqfkfni/6990qtZYhbskxmtN4GO06bdMiHU9pHP43oMVLDaMqcMTPvZJvTr
- AP8hOWrbXamgTva+WlWg42sPEr46tPuRc106jfWfQyCK9F7ZdH9zi4IzDdPE3m4degO1
- g/PqQDBmdzLBNHvG2jvJSHdoPsLhizybQoDqK4znnY0UtaqjaMPM5DGFR68qTJmuOJre
- mKAw==
+ d=konsulko.com; s=google; t=1752017468; x=1752622268; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bpfHl5DhlooFVOke8j518L2tx8nekgXnxuTk9kNicvs=;
+ b=MfLRAGsniVrV0aLoA6J8TOndmfcfC0D7cY0f5GopLdGO2QSvRa2qXG/mrJgdrfG3o7
+ ozvzldj0UymcqXZzdxNLrc4YRNRqD+eFex9DR64mh1s9/jhkwhHRUMTlZ9xorrBuDxbm
+ WUp3BgdspUuMtWiAsGqYGiRs6g/5DomaeP3nA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752015502; x=1752620302;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7yOmgDtUd7Y9gNXTFkhAz2joBwi6uPsQVF6WkcAQs3Y=;
- b=UQrGxZA5DJfOpmGuBVpvNCiki27CpLJgwW48UcjXLcJEQtlmJjzQvf3PGKRXR6bYkG
- MC0gkzbH5rejVm8hP5jam/t8UrjBpg1UyUyzqsIesb6TP1m8CkIsojFmjLV0oC2NNgVl
- RoykskfR11AFhIkdS1mX4+HExPBXknkejhptuo2XQAgqfTB5BMpYLT6vDKtsE7kQ2V+x
- JQE+F2jgOGmpH1WBJPD8MuCGtsawfoZrBg31z5sCySoMzR9imjQWEC2Wa1WZwNrrDAXT
- H6rPEhwdZdhKky3uzinwjS4CvzO3rOafnEcdrZXDgeq0v39xRHlKpDfHrSVsq76m9E7/
- mspw==
-X-Gm-Message-State: AOJu0YyLE24J5zmftVha3sv/JQHGLNRN+AyqsaF4Q9o+F0yydV3HTPNZ
- UD9A4CJ2sVBN01q1L7rl5QKklql9pUjcGK/diCK5MmaaUxaLjJF0zZG9ABwHpzTsBklImyRjXYe
- Sro7T0514sZr6g+oCeVSsfasqn0vEn3M1ySdN+nui6Q==
-X-Gm-Gg: ASbGncs+vcvBM7iz4mWDa6kKWF/Fw353UJfgeu9+xPxrIt8xNvurjXPNQYB/TpP2mIk
- D9othIiJTeQkwmPsn1CiD5dBez7RStSgIGAs6DhHMK5oO8PqWlUMKmsInKmwv4261VAbViRZmdL
- pNNnQzbL9A9/h7PDx/etG3A0cytK/P9JRMM3/ZG+OfJiRncWR1Qd4c2Imxb+ap6ViTJ4To7jjze
- mHZMA==
-X-Google-Smtp-Source: AGHT+IH00Y3C5JKVqVfR2yxui+mOzUi8ILhyCe7NS3IcXj13seuo2oK5PBt1mNSfLy+GTgSZDReXJpMJnkh79jYzE54=
-X-Received: by 2002:a05:690c:6d07:b0:70e:1474:63f2 with SMTP id
- 00721157ae682-717b166b8e3mr7936317b3.7.1752015502133; Tue, 08 Jul 2025
- 15:58:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752017468; x=1752622268;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bpfHl5DhlooFVOke8j518L2tx8nekgXnxuTk9kNicvs=;
+ b=AMoowTVg1tZXRwtMgaZX4Wl2k3rgjYGfwKOl6BpO//Q94XYTxT/XuEdrTVEIey0poW
+ LaJ2OxJ9Xv6DRYS45tvlVrjdKdDZACj6qn7k4tz7w951FZoSEf9D7MZArP+eh9nEgAHd
+ 1axRVmG+papqi7CrG2g33kpBBSVCCxDo1x0CSJyhteEjQSfNL5sF51cNvTMXUxck2KC7
+ xLkdckGXJFMV6DYQwKhkaVQkXrFnRWNh91MZq1m8kGHIocGJ4npg9O0Ql7nQPr9iX+xe
+ TzAxOMseP8lz5jFBoRSwO0POGOxtGYSc+kD7bYFiD47NUSKUHZl8LsjajXViTtk8wiW8
+ 01FQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW3KMnE2/ah1VpwRmyVzbxElFcZdkIb+CwzD+GTctybK/1yteHAwpQC2k21W3t5u9LcEhF1uIU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTj8cfES7AfvtQlVj1e4ZYR+IZFFLRSC6mzjOD9SDubUFGbEjB
+ fIUzGR3HBJLzp0Q5/3cGvZmw8WTcqlqXAJy3TLMvvqxUc/F7XMZxmdm9Rblg0wDdmaE=
+X-Gm-Gg: ASbGnctR8EOrGjXvCyg6B+4tR0CFbfDZuP9jLck8WknSazGm5iilom+1owNGQsnsdus
+ Gpor3dllXWwUN6RsfQQiDfxg5eq0qlJ/YT/P+oXEvigwtfcQbVIgZu53dR8wugs7ENDa5gZ47w1
+ 9DhCJ7EsT1ej+UQ2XWvmAxqFpoLNDbPca/mxJQ7UeXZu4rOw2cLYtrxMtlVtBy1tseAUaQa2r9+
+ WcrFChUSO5pdhwoCSU7LuRe3G1n0+KP769+Dub8Ldrmyu7ddw1JIdHQ7/2btaZ6NSjv6iQbDchM
+ IdH0TJGTQcvo1c7ocYEv/dd49q1KiP1pawG6YD/QXqvwvVfH4PobZih3Ec8o3TISYUhNmuS+hzj
+ AaqTghLuUrrvMXR4EG6Ct
+X-Google-Smtp-Source: AGHT+IFxvGNBCKVdMQrUmrwXXDR8jDl27lf0jWcv7Uh7dmn2/sEBEXWNCjMo6JVIXdaXsYPN9LLhzw==
+X-Received: by 2002:a05:6830:90c:b0:72c:320b:fc8c with SMTP id
+ 46e09a7af769-73ce635d585mr420402a34.21.1752017467586; 
+ Tue, 08 Jul 2025 16:31:07 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73c9f92e5c4sm2179845a34.47.2025.07.08.16.31.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Jul 2025 16:31:06 -0700 (PDT)
+Date: Tue, 8 Jul 2025 17:31:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Gokul Praveen <g-praveen@ti.com>
+Cc: Manorit Chawdhry <m-chawdhry@ti.com>, casey.connolly@linaro.org,
+ tien.fong.chee@altera.com, sjg@chromium.org,
+ patrick.rudolph@9elements.com, 1425075683@qq.com,
+ Oliver.Gaskell@analog.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] configs: KASLR OPTEE RNG support for K3 devices
+Message-ID: <20250708233104.GA1456905@bill-the-cat>
+References: <20250627092224.36325-1-g-praveen@ti.com>
+ <20250627092224.36325-2-g-praveen@ti.com>
+ <20250627102218.xtjlreu5qmpmfszr@uda0497581-HP>
+ <a6e024ba-8642-4c58-a7b7-284c8cf448e5@ti.com>
 MIME-Version: 1.0
-References: <20250529150213.27149-1-richard@nod.at>
- <174976652550.365589.4489095631856636528.b4-ty@konsulko.com>
-In-Reply-To: <174976652550.365589.4489095631856636528.b4-ty@konsulko.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 8 Jul 2025 17:58:11 -0500
-X-Gm-Features: Ac12FXxuj22E2vcej-ln9CU9C0NPLI0YMPeuIzLpUXGAQEpQRZLHz8820zD9Y-o
-Message-ID: <CAPLW+4kSGfyhd_Bxr+cn=PJV1Zvi2Du5+jLSZSxhqBPZ=PvFow@mail.gmail.com>
-Subject: Re: [RFC, PATCH] fdt: Make sure there is no stale initrd left
-To: Tom Rini <trini@konsulko.com>, Richard Weinberger <richard@nod.at>
-Cc: u-boot@lists.denx.de, ddrokosov@salutedevices.com, sjg@chromium.org, 
- tharvey@gateworks.com, ilias.apalodimas@linaro.org, 
- kojima.masahisa@socionext.com, upstream+uboot@sigma-star.at
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TabzYBkQI2tKuJIl"
+Content-Disposition: inline
+In-Reply-To: <a6e024ba-8642-4c58-a7b7-284c8cf448e5@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,83 +103,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 12, 2025 at 5:15=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Thu, 29 May 2025 17:02:13 +0200, Richard Weinberger wrote:
->
-> > Although if we we don't setup an initrd, there could be a stale
-> > initrd setting from the previous boot firmware in the live
-> > device tree. So, make sure there is no setting left if we
-> > don't want an initrd.
-> >
-> > This can happen when booting on a Raspberry Pi. The boot firmware
-> > can happily load an initrd before us and configuring the addresses
-> > in the live device tree we get handed over.
-> >
-> > [...]
->
-> Applied to u-boot/next, thanks!
->
 
-This patch introduces regression in case when U-Boot transfers control
-to an EFI app which acts as a subsequent bootloading program. Such an
-app might try to set "linux,initrd-start" and "linux,initrd-end" fdt
-properties, but by that time those properties are already removed by
-the code added in this patch.
+--TabzYBkQI2tKuJIl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Particularly, the issue was observed on the E850-96 board where GBL
-EFI app [1] can't run Android successfully anymore. More specifically,
-the kernel can't see the ramdisk and panics with these messages:
+On Mon, Jun 30, 2025 at 10:50:09AM +0530, Gokul Praveen wrote:
+> Hi Manorit,
+>=20
+> On 27/06/25 15:52, Manorit Chawdhry wrote:
+> > Hi Gokul,
+> >=20
+> > On 14:52-20250627, Gokul wrote:
+> > > From: Gokul Praveen <g-praveen@ti.com>
+> > >=20
+> > > Add KASLR OPTEE RNG support across K3 devices by enabling the required
+> > > configs.
+> > >=20
+> > > Signed-off-by: Gokul Praveen <g-praveen@ti.com>
+> > > ---
+> > >   arch/arm/Kconfig | 3 +++
+> > >   1 file changed, 3 insertions(+)
+> > >=20
+> > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > > index 7282c4123b0..cd27e5a5422 100644
+> > > --- a/arch/arm/Kconfig
+> > > +++ b/arch/arm/Kconfig
+> > > @@ -805,6 +805,9 @@ config ARCH_K3
+> > >   	select REGEX
+> > >   	select FIT_SIGNATURE if ARM64
+> > >   	imply TI_SECURE_DEVICE
+> > > +	imply DM_RNG
+> > > +	imply TEE
+> > > +	imply OPTEE
+> >=20
+> > Does it get enabled for R5 based defconfigs too in .config? ARCH_K3 is
+> > enabled for both R5 and ARM64 cores so wondering if we are ending up
+> > enabling it for R5 too which might not be required ( or is it? )
+> >=20
+> > Regards,
+> > Manorit
+> >=20
+> No,it does not get enabled for R5 actually.
 
-    /dev/root: Can't open blockdev
-    VFS: Cannot open root device "" or unknown-block(0,0): error -6
-    Please append a correct "root=3D" boot option; here are the
-available partitions:
-    Kernel panic - not syncing: VFS: Unable to mount root fs on
-unknown-block(0,0)
+That's not what the size growth on R5 platforms I see reflects:
+               u-boot: add: 11/-2, grow: 8/-2 bytes: 1584/-692 (892)
+                 function                                   old     new   d=
+elta
+                 try_load_entry                               -     596    =
++596
+                 static.fdt_kaslrseed                         -     200    =
++200
+                 handle_random_req                            -     180    =
++180
+                 getrng                                       -     120    =
++120
+                 rng_getinfo                                  -      80    =
+ +80
+                 _u_boot_list_2_uclass_driver_2_rng           -      72    =
+ +72
+                 efi_init_obj_list                         2304    2368    =
+ +64
+                 static.uclass_get_device                     -      56    =
+ +56
+                 label_boot                                1316    1372    =
+ +56
+                 _rproc_name_is_unique                        -      52    =
+ +52
+                 gen_rand_uuid_str                          108     144    =
+ +36
+                 efi_guid_rng_protocol                        -      16    =
+ +16
+                 dm_rng_read                                  -      16    =
+ +16
+                 static.env_do_env_set                      272     280    =
+  +8
+                 fdt_chosen                                 172     180    =
+  +8
+                 efi_rng_protocol                             -       8    =
+  +8
+                 cli_readline_into_buffer                  1716    1724    =
+  +8
+                 parse_pxefile_top                          928     932    =
+  +4
+                 bootflow_scan_next                         272     276    =
+  +4
+                 vbe_req_aslr_rand                            8       4    =
+  -4
+                 serial_init                                316     276    =
+ -40
+                 static._rproc_name_is_unique                52       -    =
+ -52
+                 static.try_load_entry                      596       -    =
+-596
 
-fdt_initrd() function (where initrd dts properties are removed) is
-called two times:
+--=20
+Tom
 
-1. First it's called by EFI boot manager (e.g. as a part of U-Boot
-Standard Boot mechanism) when it's installing FDT:
+--TabzYBkQI2tKuJIl
+Content-Type: application/pgp-signature; name="signature.asc"
 
-    fdt_initrd
-    image_setup_libfdt
-    efi_install_fdt
-    efi_bootmgr_run
-    efi_mgr_boot
+-----BEGIN PGP SIGNATURE-----
 
-It's already enough for EFI app to malfunction. But then it's also
-called second time:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhtqjQACgkQFHw5/5Y0
+tyzKsgv/b3DHg2GBHL5+SdEQE2a53X9Cl43lm350xjEJ/DZRQVOnf76MAF/8YzMQ
+TiCZVeIBRVviJYCMEv0kmY85xvWqrdQWYsJ5wrlmu4GPzaXFi7kEjMJSTMREtkrN
+5ZRky9B6WzspK673fAyAFOXm8pNmYrJkM7aEsI2ZIBX6+sOHS55CJlOPI3LPl97V
+oXvW96rufef34KwW9A85bkVvcW2oWso1XBN0yRV97R+zvM6UTIw5eHkoaMFPI8sr
+F+x+T6AAOplxvfLcIZeW3vBobtsS+x6HRX4yfqj7eIS53TS5xxhn9lGdLpY8s/N6
++xsYWlzowRtCykqSgT1qYtH57K9uOeFBiv7EQ7bfcIIqHSSAtyGgh8f8n/pO9tqP
+JIVyi2dKWSAfickpEw63ZNd7DfYnQTlJVbKfVh8GsHBulRn582WDXsqQ8eowJdlX
+sUNRA31FB1Fvqb2knUOZXi3ZiPRCqKVPx3MZ0O1K9xLTth/frN4inCiwNO+l0nbv
+d3/q8WcX
+=eSRO
+-----END PGP SIGNATURE-----
 
-2. From the EFI app, via EFI DT fixup protocol:
-
-    fdt_initrd
-    image_setup_libfdt
-    efi_dt_fixup
-    struct efi_dt_fixup_protocol efi_dt_fixup_prot =3D {
-        .fixup =3D efi_dt_fixup
-    };
-
-See [2] for specific GBL code which sets those fdt properties and then
-runs DT fixup protocol callback.
-
-I don't see any way for U-Boot to know if those initrd properties are
-going to be set later by other EFI apps or not. So arguably this patch
-should be reverted. But I might be missing something and maybe there
-are better options to fix that?
-
-Thanks!
-
-[1] https://source.android.com/docs/core/architecture/bootloader/generic-bo=
-otloader/gbl-dev
-[2] https://android.googlesource.com/platform/bootable/libbootloader/+/refs=
-/heads/gbl-mainline/gbl/libgbl/src/android_boot/mod.rs#208
-
-> [1/1] fdt: Make sure there is no stale initrd left
->       commit: 9fe2e4b46458f9c4ec6b8115ebf18b4b26fe6127
-> --
-> Tom
->
+--TabzYBkQI2tKuJIl--
