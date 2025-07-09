@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958E6C83F0F
-	for <u-boot@archiver.kernel.org>; Tue,  8 Jul 2025 23:31:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93ADFC83F09
+	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 00:14:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD08083390;
-	Wed,  9 Jul 2025 01:31:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BEB8483390;
+	Wed,  9 Jul 2025 02:14:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MfLRAGsn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VykDJGs5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 729A083394; Wed,  9 Jul 2025 01:31:11 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id F083B83394; Wed,  9 Jul 2025 02:14:51 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F320583371
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 01:31:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D24E83371
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 02:14:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-735ae68cc78so3287227a34.1
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 16:31:08 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-73ce7b40d7aso18437a34.1
+ for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 17:14:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752017468; x=1752622268; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752020088; x=1752624888; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bpfHl5DhlooFVOke8j518L2tx8nekgXnxuTk9kNicvs=;
- b=MfLRAGsniVrV0aLoA6J8TOndmfcfC0D7cY0f5GopLdGO2QSvRa2qXG/mrJgdrfG3o7
- ozvzldj0UymcqXZzdxNLrc4YRNRqD+eFex9DR64mh1s9/jhkwhHRUMTlZ9xorrBuDxbm
- WUp3BgdspUuMtWiAsGqYGiRs6g/5DomaeP3nA=
+ bh=EwdZjzyZW5y5gfp3GOasHpDdmknr1cScoKfD9eTEc28=;
+ b=VykDJGs5w0YuaabQqvjOyAoHMIlZ6NTrBUHSbkm9CiyFG3xBWY6W7PFsQXTau8ulfL
+ 9bSfoZhFQGwAcgJgiZjOsP+Ygr6XP1V1pmRS6pMK1VG10xY4vNJ8Ov3KdsApPqUn6p6d
+ Fdl8Kew0idOG8Pi1PzWW7WySYipnfRMnx0YWY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752017468; x=1752622268;
+ d=1e100.net; s=20230601; t=1752020088; x=1752624888;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bpfHl5DhlooFVOke8j518L2tx8nekgXnxuTk9kNicvs=;
- b=AMoowTVg1tZXRwtMgaZX4Wl2k3rgjYGfwKOl6BpO//Q94XYTxT/XuEdrTVEIey0poW
- LaJ2OxJ9Xv6DRYS45tvlVrjdKdDZACj6qn7k4tz7w951FZoSEf9D7MZArP+eh9nEgAHd
- 1axRVmG+papqi7CrG2g33kpBBSVCCxDo1x0CSJyhteEjQSfNL5sF51cNvTMXUxck2KC7
- xLkdckGXJFMV6DYQwKhkaVQkXrFnRWNh91MZq1m8kGHIocGJ4npg9O0Ql7nQPr9iX+xe
- TzAxOMseP8lz5jFBoRSwO0POGOxtGYSc+kD7bYFiD47NUSKUHZl8LsjajXViTtk8wiW8
- 01FQ==
+ bh=EwdZjzyZW5y5gfp3GOasHpDdmknr1cScoKfD9eTEc28=;
+ b=qXtoYD2FLspAQhh18CnfYJDAnLtr9aA1ChldRXBD41/+VT+5yjk09aZHVRT87yrJFi
+ /fzrTvpLEo/Y58jR6JmhDHYMa7XclccPN1gY8m6/h3h33mpcH5pFmUI0F1IDNMF+gd2V
+ uWbt148Dnozb5G9wLxrU1XfEYKuLSh0cq1HcX7s0c1Ikhqgv/mQxvyzSRJKikRkEvzh8
+ M/Ma4ffT3Q/kErxVQbTFrBu495tLtRan3dJHt0ooH9mlTxauw3wWw2VYl/voyB9pgjEj
+ NN4SAB+Qb+WyPSsiowE0PBBTvaCFawd71zNLH0KGVqN9JrcHXMsSGWJGPSUcpmtc1c3D
+ 18tw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3KMnE2/ah1VpwRmyVzbxElFcZdkIb+CwzD+GTctybK/1yteHAwpQC2k21W3t5u9LcEhF1uIU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTj8cfES7AfvtQlVj1e4ZYR+IZFFLRSC6mzjOD9SDubUFGbEjB
- fIUzGR3HBJLzp0Q5/3cGvZmw8WTcqlqXAJy3TLMvvqxUc/F7XMZxmdm9Rblg0wDdmaE=
-X-Gm-Gg: ASbGnctR8EOrGjXvCyg6B+4tR0CFbfDZuP9jLck8WknSazGm5iilom+1owNGQsnsdus
- Gpor3dllXWwUN6RsfQQiDfxg5eq0qlJ/YT/P+oXEvigwtfcQbVIgZu53dR8wugs7ENDa5gZ47w1
- 9DhCJ7EsT1ej+UQ2XWvmAxqFpoLNDbPca/mxJQ7UeXZu4rOw2cLYtrxMtlVtBy1tseAUaQa2r9+
- WcrFChUSO5pdhwoCSU7LuRe3G1n0+KP769+Dub8Ldrmyu7ddw1JIdHQ7/2btaZ6NSjv6iQbDchM
- IdH0TJGTQcvo1c7ocYEv/dd49q1KiP1pawG6YD/QXqvwvVfH4PobZih3Ec8o3TISYUhNmuS+hzj
- AaqTghLuUrrvMXR4EG6Ct
-X-Google-Smtp-Source: AGHT+IFxvGNBCKVdMQrUmrwXXDR8jDl27lf0jWcv7Uh7dmn2/sEBEXWNCjMo6JVIXdaXsYPN9LLhzw==
-X-Received: by 2002:a05:6830:90c:b0:72c:320b:fc8c with SMTP id
- 46e09a7af769-73ce635d585mr420402a34.21.1752017467586; 
- Tue, 08 Jul 2025 16:31:07 -0700 (PDT)
+ AJvYcCWwPBWKIAwT4YQkaGt392a9Qw5D2qleCYkmLTKysfkMQQ/0tvNRSB1k/x0Io5gRbzTgQ5FbmDI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1+dcQ1OwM+10yymXvyFTrSespkkb3HfjU3L+Eky5/tbOHzjEQ
+ 0V3OvLymLcldYmUu3jiGZUaL9HPrx8KBNGLWNdx1DYDjT0UHze5RMe/2q49wj/aaT24=
+X-Gm-Gg: ASbGncsjC5CAko2LJhZ0qFa765nLqmilCCSAxPADXXFewmjAnqqdMDd0heDBZagnGKX
+ n2Kg5wn1m1KYfvQY+kVTk+y4OZbQcozw61tXInLMITumxuhQNVdXsiUda67fzz1mpo/VCfDPYog
+ bnzRkkdUnXsQtPHpu6tOaz2jn+kM0hpJPh1ezCiKM+d9/0Vy9eaBluGNeRu0WlCv2ht8J8ExoMt
+ hA9tHTaSysmCtA+hQupHBQVXm7mh8qtrdhwU/642tNz3vq2UuO53eI4nVG7Ewu+yuwbr71NmFji
+ Bz5aX6cwn5ZMWZdJYXG327+FxNTJU42OpcAZtZ5PbxRKz7RA+60AQVgAQIfDQluw14W49EgTSMb
+ 3QT8YPMlWHvQMDtEEHvH5w9Hk6NEp5hU=
+X-Google-Smtp-Source: AGHT+IEC+j1VSgpu4KmW7lFcuPD+jhJPa4QcJmAFrSAwjoRBKkVg5Q25aoXMNOe3vgdLWpDkNzdknQ==
+X-Received: by 2002:a05:6830:154e:b0:72a:48d1:7fca with SMTP id
+ 46e09a7af769-73cd791dbdfmr3443726a34.4.1752020088099; 
+ Tue, 08 Jul 2025 17:14:48 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f92e5c4sm2179845a34.47.2025.07.08.16.31.06
+ 46e09a7af769-73c9f73520csm2195543a34.8.2025.07.08.17.14.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Jul 2025 16:31:06 -0700 (PDT)
-Date: Tue, 8 Jul 2025 17:31:04 -0600
+ Tue, 08 Jul 2025 17:14:47 -0700 (PDT)
+Date: Tue, 8 Jul 2025 18:14:45 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Gokul Praveen <g-praveen@ti.com>
-Cc: Manorit Chawdhry <m-chawdhry@ti.com>, casey.connolly@linaro.org,
- tien.fong.chee@altera.com, sjg@chromium.org,
- patrick.rudolph@9elements.com, 1425075683@qq.com,
- Oliver.Gaskell@analog.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] configs: KASLR OPTEE RNG support for K3 devices
-Message-ID: <20250708233104.GA1456905@bill-the-cat>
-References: <20250627092224.36325-1-g-praveen@ti.com>
- <20250627092224.36325-2-g-praveen@ti.com>
- <20250627102218.xtjlreu5qmpmfszr@uda0497581-HP>
- <a6e024ba-8642-4c58-a7b7-284c8cf448e5@ti.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] boot: Ensure method_flags is initialised before use
+Message-ID: <20250709001445.GA1724532@bill-the-cat>
+References: <20250627-bootflow_fix-v1-1-f1039b2962d6@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TabzYBkQI2tKuJIl"
+ protocol="application/pgp-signature"; boundary="Gc09Q3/35tulY1oy"
 Content-Disposition: inline
-In-Reply-To: <a6e024ba-8642-4c58-a7b7-284c8cf448e5@ti.com>
+In-Reply-To: <20250627-bootflow_fix-v1-1-f1039b2962d6@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,119 +98,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---TabzYBkQI2tKuJIl
+--Gc09Q3/35tulY1oy
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 30, 2025 at 10:50:09AM +0530, Gokul Praveen wrote:
-> Hi Manorit,
->=20
-> On 27/06/25 15:52, Manorit Chawdhry wrote:
-> > Hi Gokul,
-> >=20
-> > On 14:52-20250627, Gokul wrote:
-> > > From: Gokul Praveen <g-praveen@ti.com>
-> > >=20
-> > > Add KASLR OPTEE RNG support across K3 devices by enabling the required
-> > > configs.
-> > >=20
-> > > Signed-off-by: Gokul Praveen <g-praveen@ti.com>
-> > > ---
-> > >   arch/arm/Kconfig | 3 +++
-> > >   1 file changed, 3 insertions(+)
-> > >=20
-> > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > > index 7282c4123b0..cd27e5a5422 100644
-> > > --- a/arch/arm/Kconfig
-> > > +++ b/arch/arm/Kconfig
-> > > @@ -805,6 +805,9 @@ config ARCH_K3
-> > >   	select REGEX
-> > >   	select FIT_SIGNATURE if ARM64
-> > >   	imply TI_SECURE_DEVICE
-> > > +	imply DM_RNG
-> > > +	imply TEE
-> > > +	imply OPTEE
-> >=20
-> > Does it get enabled for R5 based defconfigs too in .config? ARCH_K3 is
-> > enabled for both R5 and ARM64 cores so wondering if we are ending up
-> > enabling it for R5 too which might not be required ( or is it? )
-> >=20
-> > Regards,
-> > Manorit
-> >=20
-> No,it does not get enabled for R5 actually.
+On Fri, Jun 27, 2025 at 11:09:36AM +0100, Andrew Goodbody wrote:
 
-That's not what the size growth on R5 platforms I see reflects:
-               u-boot: add: 11/-2, grow: 8/-2 bytes: 1584/-692 (892)
-                 function                                   old     new   d=
-elta
-                 try_load_entry                               -     596    =
-+596
-                 static.fdt_kaslrseed                         -     200    =
-+200
-                 handle_random_req                            -     180    =
-+180
-                 getrng                                       -     120    =
-+120
-                 rng_getinfo                                  -      80    =
- +80
-                 _u_boot_list_2_uclass_driver_2_rng           -      72    =
- +72
-                 efi_init_obj_list                         2304    2368    =
- +64
-                 static.uclass_get_device                     -      56    =
- +56
-                 label_boot                                1316    1372    =
- +56
-                 _rproc_name_is_unique                        -      52    =
- +52
-                 gen_rand_uuid_str                          108     144    =
- +36
-                 efi_guid_rng_protocol                        -      16    =
- +16
-                 dm_rng_read                                  -      16    =
- +16
-                 static.env_do_env_set                      272     280    =
-  +8
-                 fdt_chosen                                 172     180    =
-  +8
-                 efi_rng_protocol                             -       8    =
-  +8
-                 cli_readline_into_buffer                  1716    1724    =
-  +8
-                 parse_pxefile_top                          928     932    =
-  +4
-                 bootflow_scan_next                         272     276    =
-  +4
-                 vbe_req_aslr_rand                            8       4    =
-  -4
-                 serial_init                                316     276    =
- -40
-                 static._rproc_name_is_unique                52       -    =
- -52
-                 static.try_load_entry                      596       -    =
--596
+> The local variable method_flags is only assigned to in some of the
+> code paths leaving it possibly uninitialised at first use.
+> Initialise method_flags at declaration to ensure that it cannot be
+> used uninitialised. Also remove now redundant assignments.
+>=20
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  boot/bootflow.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+>=20
+> diff --git a/boot/bootflow.c b/boot/bootflow.c
+> index 4054a966af8..d60e9df6a9d 100644
+> --- a/boot/bootflow.c
+> +++ b/boot/bootflow.c
+> @@ -245,7 +245,7 @@ static int iter_incr(struct bootflow_iter *iter)
+>  	if (iter->flags & BOOTFLOWIF_SINGLE_DEV) {
+>  		ret =3D -ENOENT;
+>  	} else {
+> -		int method_flags;
+> +		int method_flags =3D 0;
+> =20
+>  		ret =3D 0;
+>  		dev =3D iter->dev;
+> @@ -264,7 +264,6 @@ static int iter_incr(struct bootflow_iter *iter)
+>  		} else if (IS_ENABLED(CONFIG_BOOTSTD_FULL) &&
+>  			   iter->flags & BOOTFLOWIF_SINGLE_MEDIA) {
+>  			log_debug("next in single\n");
+> -			method_flags =3D 0;
+>  			do {
+>  				/*
+>  				 * Move to the next bootdev child of this media
+> @@ -306,7 +305,6 @@ static int iter_incr(struct bootflow_iter *iter)
+>  				}
+>  			} else {
+>  				ret =3D bootdev_next_prio(iter, &dev);
+> -				method_flags =3D 0;
+>  			}
+>  		}
+>  		log_debug("ret=3D%d, dev=3D%p %s\n", ret, dev,
+
+This leads to failures in CI:
+https://source.denx.de/u-boot/u-boot/-/jobs/1195854
 
 --=20
 Tom
 
---TabzYBkQI2tKuJIl
+--Gc09Q3/35tulY1oy
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhtqjQACgkQFHw5/5Y0
-tyzKsgv/b3DHg2GBHL5+SdEQE2a53X9Cl43lm350xjEJ/DZRQVOnf76MAF/8YzMQ
-TiCZVeIBRVviJYCMEv0kmY85xvWqrdQWYsJ5wrlmu4GPzaXFi7kEjMJSTMREtkrN
-5ZRky9B6WzspK673fAyAFOXm8pNmYrJkM7aEsI2ZIBX6+sOHS55CJlOPI3LPl97V
-oXvW96rufef34KwW9A85bkVvcW2oWso1XBN0yRV97R+zvM6UTIw5eHkoaMFPI8sr
-F+x+T6AAOplxvfLcIZeW3vBobtsS+x6HRX4yfqj7eIS53TS5xxhn9lGdLpY8s/N6
-+xsYWlzowRtCykqSgT1qYtH57K9uOeFBiv7EQ7bfcIIqHSSAtyGgh8f8n/pO9tqP
-JIVyi2dKWSAfickpEw63ZNd7DfYnQTlJVbKfVh8GsHBulRn582WDXsqQ8eowJdlX
-sUNRA31FB1Fvqb2knUOZXi3ZiPRCqKVPx3MZ0O1K9xLTth/frN4inCiwNO+l0nbv
-d3/q8WcX
-=eSRO
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhttHEACgkQFHw5/5Y0
+tyzgpAv9GITJWEfaui3Hp1f4Gyvb8cW4mA9tDTOzI3vvqf7/D0UJIytf2gsRN61o
+iqjihCv389IN/72IFSO0VY0xpVGoymw3Tv3kvtFA32u+KxCW6BHSJN10y9QrDIs6
+BfWda6Ou2SJp2CWFHrKGQO3mANIk/bgTdLisXtnKSly59WyVw0laZpdpR2Z9wlpS
+ep0WqJ4iYG3YgFH5KlltqX7dvzFygxc3UA2wA3EpRDBSSbe2L0FMMdzZEGT8zxe8
+URHuQju2T4OKp4bclf5aDOL+w0l+8yx7tIM2YhBldnLOeNidqptw8AMpNfsoR7Ig
+iKZrhD/6jHj/TWG3o4fkLV4obrXUcEmcZ9hYOQGqfgOOolxOXA/U3pl1VzgxPWVF
+cspMnu8jjHwVej8btSNfkQFV1QaL4cYhfAmPoTKzDeXIlijp2W0W3A4BviYnLJB/
+5i490lPOc0Necb4NVlAreoHT5PddzjvO7LfslXI4TFaFPb+uDoRs7jq5OtSsBYy/
+M0EzCPoa
+=5ikZ
 -----END PGP SIGNATURE-----
 
---TabzYBkQI2tKuJIl--
+--Gc09Q3/35tulY1oy--
