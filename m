@@ -4,44 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2CFC83F03
-	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 18:32:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35CDC83F0A
+	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 18:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE02F835CB;
-	Wed,  9 Jul 2025 20:32:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 35F3F83599;
+	Wed,  9 Jul 2025 20:35:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aqOF6tx5";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 868D0835B0; Wed,  9 Jul 2025 20:32:25 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5A842835A5; Wed,  9 Jul 2025 20:35:29 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A46CB835A5
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 20:32:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A9EB83564
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 20:35:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uZZad-008d4i-Uk;
- Wed, 09 Jul 2025 18:32:20 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de
-Cc: Fabio Estevam <festevam@denx.de>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 3/4] venice: lpddr4_timing_imx8mm: update ddr phy config for
- mscale_v3.10
-Date: Wed,  9 Jul 2025 11:32:16 -0700
-Message-Id: <20250709183217.3392140-3-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250709183217.3392140-1-tharvey@gateworks.com>
-References: <20250709183217.3392140-1-tharvey@gateworks.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5562838ce68so111503e87.2
+ for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 11:35:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752086127; x=1752690927; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KNQJbUFLjycgbFRJjw8JGS8vA51VO4RHzbqfv25oJk8=;
+ b=aqOF6tx5zk7ZuhUeM72cniiEuLOLqBYCepJbPWBlHXA3w0jb+iBvIRsVkCxztFWir5
+ KPyA/OZG6e1Pb5N6S6fUkBYZzxNCcmd+rTh3wYQhuKwSuI8uaMwAI+ShCVa4MtkDr1YB
+ gnPfx7C/QQFbJJjDWlfz+bT3a+ypjt1ZB6PgBWdM3mxLBQz4K5H9k69XhR8NHQInFtRk
+ melxhkevBYhtKVf0tEKwmOMpJ9q1UTUwDN0pb0nmOOqURWI6ovQP1JEjnKD6DxjiFqec
+ PqKnksmTLdHB5s7SmEkrybAEV0COfggWJNhlPNrzOKFWSj0NsgC5mOZY8Wo1QsXX8ZS9
+ B/8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752086127; x=1752690927;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KNQJbUFLjycgbFRJjw8JGS8vA51VO4RHzbqfv25oJk8=;
+ b=hPmnZBh8I9gu+5sBZn0X30Odm5qqOgeyLEl9pNEsR0NBJpM8WciIcqJQSHdPEw/MsN
+ VerNnJLiSt+F4vI11LuCJcvEIURi9FwL9iTkwG/NADYdZgM0gHEY97JJ2dvJr7Q7G2ib
+ rawmiUmPytigE8R8rGD7isOVVEZuwNd3/fGg0urRZubr3aAKmMogurLSODqjAiZUADAG
+ /ptzfNMm8lGRv2mvd1sQQwXM7gVeN6A68t+Q3Q3RQzS02RAOoXHqwGxDxbukf/OrITr9
+ lvztcByjd3U/i0TadZkmM6wjs9U0oEKkrvS1w7f9qGSI6If1eyGvwQS4Y3d8mnbEzC6D
+ iITg==
+X-Gm-Message-State: AOJu0YzJNtWPNDbqQ3qciH/yNDBph0Nw6XWamULybjqH1JkmeTG5F//o
+ Kf+tBZn+Tqv2DWhFD7l1fTF4sTmDODLlFt4+H7hx8vv5deVl0//Q1VjFNEaKPAa7SQU8CWIwkgs
+ iwFXsEWPC8zrM0xS+ztBzgWdOFk/xDE0=
+X-Gm-Gg: ASbGnctFcuxFKoVtCf4dH/K5FIlogxXz2mydQvM3zjcO+OnV5ep9k61GNHshFr+/Qkk
+ Cea+4aoVS13KNnldqIMoLBQ4upC5t1vC7MaV6crAMxTpBd06Uo5h6NRkWMbLt3WFRpkL57o0tiS
+ SDkqUU7nT0sbmvy3FtOl4Pg4YXeWNb2vszSMtbZjlHv9mnv4mp7fZz0J8PVGlZHZWHWfTfvo6Y2
+ g==
+X-Google-Smtp-Source: AGHT+IGyJ5yEkKUMVwqwfgLdvD2pwy/cFSWHc4UwqGOax2F/Vb0N1I9YVUZXaoTo7ntl8Vzd5XVZXmxR+NkuZLWfwEw=
+X-Received: by 2002:a05:6512:2315:b0:553:d17a:d01d with SMTP id
+ 2adb3069b0e04-5590004d044mr288551e87.14.1752086126248; Wed, 09 Jul 2025
+ 11:35:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250709183217.3392140-1-tharvey@gateworks.com>
+ <20250709183217.3392140-4-tharvey@gateworks.com>
+In-Reply-To: <20250709183217.3392140-4-tharvey@gateworks.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 9 Jul 2025 15:35:14 -0300
+X-Gm-Features: Ac12FXzEE4yaqK7LoBeuKq8pqxWUYvMxH_FErKKSPXlHyKoIFmV0p8yjkNXyca8
+Message-ID: <CAOMZO5DsDXkEziirU_BPBVg0Z9Ky08Ucdc+pWZH1hzj1u2OBJQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] venice: display DRAM MR registers and decoding if
+ debug enabled
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,304 +96,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the ddr phy config values to those created by the mscale_v3.10
-tool. The original values were obtained using mscale_v3.10. The v3.10
-tool removed ddr phy register values of 0x0.
+Hi Tim,
 
-This has no functional change but makes comparing and patching ddr
-configuration easier in addition to slightly shrinking the DRAM config
-size.
+On Wed, Jul 9, 2025 at 3:32=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
+rote:
+>
+> While this is interesting and useful for debugging there isn't extremely
+> useful information so we will only show it if debug is enabled.
+>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+>  board/gateworks/venice/spl.c | 61 +++++++++++++++++++++++++++++++++++-
+>  1 file changed, 60 insertions(+), 1 deletion(-)
+>
+> diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
+> index d9bc593fa0d5..5f621ade9287 100644
+> --- a/board/gateworks/venice/spl.c
+> +++ b/board/gateworks/venice/spl.c
+> @@ -2,6 +2,7 @@
+>  /*
+>   * Copyright 2021 Gateworks Corporation
+>   */
+> +#define DEBUG
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
----
- board/gateworks/venice/lpddr4_timing_imx8mm.c | 143 ------------------
- 1 file changed, 143 deletions(-)
-
-diff --git a/board/gateworks/venice/lpddr4_timing_imx8mm.c b/board/gateworks/venice/lpddr4_timing_imx8mm.c
-index a6025322e78d..896a5c66eb6a 100644
---- a/board/gateworks/venice/lpddr4_timing_imx8mm.c
-+++ b/board/gateworks/venice/lpddr4_timing_imx8mm.c
-@@ -2164,56 +2164,26 @@ static struct dram_cfg_param lpddr4_ddrphy_cfg_1gb[] = {
- /* P0 message block paremeter for training firmware */
- static struct dram_cfg_param lpddr4_fsp0_cfg_1gb[] = {
- 	{ 0xd0000, 0x0 },
--	{ 0x54000, 0x0 },
--	{ 0x54001, 0x0 },
--	{ 0x54002, 0x0 },
- 	{ 0x54003, 0xbb8 },
- 	{ 0x54004, 0x2 },
- 	{ 0x54005, 0x2228 },
- 	{ 0x54006, 0x11 },
--	{ 0x54007, 0x0 },
- 	{ 0x54008, 0x131f },
- 	{ 0x54009, 0xc8 },
--	{ 0x5400a, 0x0 },
- 	{ 0x5400b, 0x2 },
--	{ 0x5400c, 0x0 },
--	{ 0x5400d, 0x0 },
--	{ 0x5400e, 0x0 },
--	{ 0x5400f, 0x0 },
--	{ 0x54010, 0x0 },
--	{ 0x54011, 0x0 },
- 	{ 0x54012, 0x110 },
--	{ 0x54013, 0x0 },
--	{ 0x54014, 0x0 },
--	{ 0x54015, 0x0 },
--	{ 0x54016, 0x0 },
--	{ 0x54017, 0x0 },
--	{ 0x54018, 0x0 },
- 	{ 0x54019, 0x2dd4 },
- 	{ 0x5401a, 0x31 },
- 	{ 0x5401b, 0x4d66 },
- 	{ 0x5401c, 0x4d00 },
--	{ 0x5401d, 0x0 },
- 	{ 0x5401e, 0x16 },
- 	{ 0x5401f, 0x2dd4 },
- 	{ 0x54020, 0x31 },
- 	{ 0x54021, 0x4d66 },
- 	{ 0x54022, 0x4d00 },
--	{ 0x54023, 0x0 },
- 	{ 0x54024, 0x16 },
--	{ 0x54025, 0x0 },
--	{ 0x54026, 0x0 },
--	{ 0x54027, 0x0 },
--	{ 0x54028, 0x0 },
--	{ 0x54029, 0x0 },
--	{ 0x5402a, 0x0 },
- 	{ 0x5402b, 0x1000 },
- 	{ 0x5402c, 0x1 },
--	{ 0x5402d, 0x0 },
--	{ 0x5402e, 0x0 },
--	{ 0x5402f, 0x0 },
--	{ 0x54030, 0x0 },
--	{ 0x54031, 0x0 },
- 	{ 0x54032, 0xd400 },
- 	{ 0x54033, 0x312d },
- 	{ 0x54034, 0x6600 },
-@@ -2226,69 +2196,33 @@ static struct dram_cfg_param lpddr4_fsp0_cfg_1gb[] = {
- 	{ 0x5403b, 0x4d },
- 	{ 0x5403c, 0x4d },
- 	{ 0x5403d, 0x1600 },
--	{ 0x5403e, 0x0 },
--	{ 0x5403f, 0x0 },
--	{ 0x54040, 0x0 },
--	{ 0x54041, 0x0 },
--	{ 0x54042, 0x0 },
--	{ 0x54043, 0x0 },
--	{ 0x54044, 0x0 },
- 	{ 0xd0000, 0x1 },
- };
- 
- /* P1 message block paremeter for training firmware */
- static struct dram_cfg_param lpddr4_fsp1_cfg_1gb[] = {
- 	{ 0xd0000, 0x0 },
--	{ 0x54000, 0x0 },
--	{ 0x54001, 0x0 },
- 	{ 0x54002, 0x101 },
- 	{ 0x54003, 0x190 },
- 	{ 0x54004, 0x2 },
- 	{ 0x54005, 0x2228 },
- 	{ 0x54006, 0x11 },
--	{ 0x54007, 0x0 },
- 	{ 0x54008, 0x121f },
- 	{ 0x54009, 0xc8 },
--	{ 0x5400a, 0x0 },
- 	{ 0x5400b, 0x2 },
--	{ 0x5400c, 0x0 },
--	{ 0x5400d, 0x0 },
--	{ 0x5400e, 0x0 },
--	{ 0x5400f, 0x0 },
--	{ 0x54010, 0x0 },
--	{ 0x54011, 0x0 },
- 	{ 0x54012, 0x110 },
--	{ 0x54013, 0x0 },
--	{ 0x54014, 0x0 },
--	{ 0x54015, 0x0 },
--	{ 0x54016, 0x0 },
--	{ 0x54017, 0x0 },
--	{ 0x54018, 0x0 },
- 	{ 0x54019, 0x84 },
- 	{ 0x5401a, 0x31 },
- 	{ 0x5401b, 0x4d66 },
- 	{ 0x5401c, 0x4d00 },
--	{ 0x5401d, 0x0 },
- 	{ 0x5401e, 0x16 },
- 	{ 0x5401f, 0x84 },
- 	{ 0x54020, 0x31 },
- 	{ 0x54021, 0x4d66 },
- 	{ 0x54022, 0x4d00 },
--	{ 0x54023, 0x0 },
- 	{ 0x54024, 0x16 },
--	{ 0x54025, 0x0 },
--	{ 0x54026, 0x0 },
--	{ 0x54027, 0x0 },
--	{ 0x54028, 0x0 },
--	{ 0x54029, 0x0 },
--	{ 0x5402a, 0x0 },
- 	{ 0x5402b, 0x1000 },
- 	{ 0x5402c, 0x1 },
--	{ 0x5402d, 0x0 },
--	{ 0x5402e, 0x0 },
--	{ 0x5402f, 0x0 },
--	{ 0x54030, 0x0 },
--	{ 0x54031, 0x0 },
- 	{ 0x54032, 0x8400 },
- 	{ 0x54033, 0x3100 },
- 	{ 0x54034, 0x6600 },
-@@ -2301,69 +2235,33 @@ static struct dram_cfg_param lpddr4_fsp1_cfg_1gb[] = {
- 	{ 0x5403b, 0x4d },
- 	{ 0x5403c, 0x4d },
- 	{ 0x5403d, 0x1600 },
--	{ 0x5403e, 0x0 },
--	{ 0x5403f, 0x0 },
--	{ 0x54040, 0x0 },
--	{ 0x54041, 0x0 },
--	{ 0x54042, 0x0 },
--	{ 0x54043, 0x0 },
--	{ 0x54044, 0x0 },
- 	{ 0xd0000, 0x1 },
- };
- 
- /* P2 message block paremeter for training firmware */
- static struct dram_cfg_param lpddr4_fsp2_cfg_1gb[] = {
- 	{ 0xd0000, 0x0 },
--	{ 0x54000, 0x0 },
--	{ 0x54001, 0x0 },
- 	{ 0x54002, 0x102 },
- 	{ 0x54003, 0x64 },
- 	{ 0x54004, 0x2 },
- 	{ 0x54005, 0x2228 },
- 	{ 0x54006, 0x11 },
--	{ 0x54007, 0x0 },
- 	{ 0x54008, 0x121f },
- 	{ 0x54009, 0xc8 },
--	{ 0x5400a, 0x0 },
- 	{ 0x5400b, 0x2 },
--	{ 0x5400c, 0x0 },
--	{ 0x5400d, 0x0 },
--	{ 0x5400e, 0x0 },
--	{ 0x5400f, 0x0 },
--	{ 0x54010, 0x0 },
--	{ 0x54011, 0x0 },
- 	{ 0x54012, 0x110 },
--	{ 0x54013, 0x0 },
--	{ 0x54014, 0x0 },
--	{ 0x54015, 0x0 },
--	{ 0x54016, 0x0 },
--	{ 0x54017, 0x0 },
--	{ 0x54018, 0x0 },
- 	{ 0x54019, 0x84 },
- 	{ 0x5401a, 0x31 },
- 	{ 0x5401b, 0x4d66 },
- 	{ 0x5401c, 0x4d00 },
--	{ 0x5401d, 0x0 },
- 	{ 0x5401e, 0x16 },
- 	{ 0x5401f, 0x84 },
- 	{ 0x54020, 0x31 },
- 	{ 0x54021, 0x4d66 },
- 	{ 0x54022, 0x4d00 },
--	{ 0x54023, 0x0 },
- 	{ 0x54024, 0x16 },
--	{ 0x54025, 0x0 },
--	{ 0x54026, 0x0 },
--	{ 0x54027, 0x0 },
--	{ 0x54028, 0x0 },
--	{ 0x54029, 0x0 },
--	{ 0x5402a, 0x0 },
- 	{ 0x5402b, 0x1000 },
- 	{ 0x5402c, 0x1 },
--	{ 0x5402d, 0x0 },
--	{ 0x5402e, 0x0 },
--	{ 0x5402f, 0x0 },
--	{ 0x54030, 0x0 },
--	{ 0x54031, 0x0 },
- 	{ 0x54032, 0x8400 },
- 	{ 0x54033, 0x3100 },
- 	{ 0x54034, 0x6600 },
-@@ -2376,69 +2274,35 @@ static struct dram_cfg_param lpddr4_fsp2_cfg_1gb[] = {
- 	{ 0x5403b, 0x4d },
- 	{ 0x5403c, 0x4d },
- 	{ 0x5403d, 0x1600 },
--	{ 0x5403e, 0x0 },
--	{ 0x5403f, 0x0 },
--	{ 0x54040, 0x0 },
--	{ 0x54041, 0x0 },
--	{ 0x54042, 0x0 },
--	{ 0x54043, 0x0 },
--	{ 0x54044, 0x0 },
- 	{ 0xd0000, 0x1 },
- };
- 
- /* P0 2D message block paremeter for training firmware */
- static struct dram_cfg_param lpddr4_fsp0_2d_cfg_1gb[] = {
- 	{ 0xd0000, 0x0 },
--	{ 0x54000, 0x0 },
--	{ 0x54001, 0x0 },
--	{ 0x54002, 0x0 },
- 	{ 0x54003, 0xbb8 },
- 	{ 0x54004, 0x2 },
- 	{ 0x54005, 0x2228 },
- 	{ 0x54006, 0x11 },
--	{ 0x54007, 0x0 },
- 	{ 0x54008, 0x61 },
- 	{ 0x54009, 0xc8 },
--	{ 0x5400a, 0x0 },
- 	{ 0x5400b, 0x2 },
--	{ 0x5400c, 0x0 },
- 	{ 0x5400d, 0x100 },
--	{ 0x5400e, 0x0 },
- 	{ 0x5400f, 0x100 },
- 	{ 0x54010, 0x1f7f },
--	{ 0x54011, 0x0 },
- 	{ 0x54012, 0x110 },
--	{ 0x54013, 0x0 },
--	{ 0x54014, 0x0 },
--	{ 0x54015, 0x0 },
--	{ 0x54016, 0x0 },
--	{ 0x54017, 0x0 },
--	{ 0x54018, 0x0 },
- 	{ 0x54019, 0x2dd4 },
- 	{ 0x5401a, 0x31 },
- 	{ 0x5401b, 0x4d66 },
- 	{ 0x5401c, 0x4d00 },
--	{ 0x5401d, 0x0 },
- 	{ 0x5401e, 0x16 },
- 	{ 0x5401f, 0x2dd4 },
- 	{ 0x54020, 0x31 },
- 	{ 0x54021, 0x4d66 },
- 	{ 0x54022, 0x4d00 },
--	{ 0x54023, 0x0 },
- 	{ 0x54024, 0x16 },
--	{ 0x54025, 0x0 },
--	{ 0x54026, 0x0 },
--	{ 0x54027, 0x0 },
--	{ 0x54028, 0x0 },
--	{ 0x54029, 0x0 },
--	{ 0x5402a, 0x0 },
- 	{ 0x5402b, 0x1000 },
- 	{ 0x5402c, 0x1 },
--	{ 0x5402d, 0x0 },
--	{ 0x5402e, 0x0 },
--	{ 0x5402f, 0x0 },
--	{ 0x54030, 0x0 },
--	{ 0x54031, 0x0 },
- 	{ 0x54032, 0xd400 },
- 	{ 0x54033, 0x312d },
- 	{ 0x54034, 0x6600 },
-@@ -2451,13 +2315,6 @@ static struct dram_cfg_param lpddr4_fsp0_2d_cfg_1gb[] = {
- 	{ 0x5403b, 0x4d },
- 	{ 0x5403c, 0x4d },
- 	{ 0x5403d, 0x1600 },
--	{ 0x5403e, 0x0 },
--	{ 0x5403f, 0x0 },
--	{ 0x54040, 0x0 },
--	{ 0x54041, 0x0 },
--	{ 0x54042, 0x0 },
--	{ 0x54043, 0x0 },
--	{ 0x54044, 0x0 },
- 	{ 0xd0000, 0x1 },
- };
- 
--- 
-2.25.1
-
+I believe this DEBUG definition was left by mistake?
