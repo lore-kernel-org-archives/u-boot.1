@@ -4,83 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93ADFC83F09
-	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 00:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40457C83F09
+	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 04:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEB8483390;
-	Wed,  9 Jul 2025 02:14:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 61C5583390;
+	Wed,  9 Jul 2025 06:17:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VykDJGs5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Drunpr09";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F083B83394; Wed,  9 Jul 2025 02:14:51 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D24E83371
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 02:14:49 +0200 (CEST)
+ id 727E283394; Wed,  9 Jul 2025 06:17:09 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 796DB83371
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 06:17:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-73ce7b40d7aso18437a34.1
- for <u-boot@lists.denx.de>; Tue, 08 Jul 2025 17:14:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752020088; x=1752624888; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EwdZjzyZW5y5gfp3GOasHpDdmknr1cScoKfD9eTEc28=;
- b=VykDJGs5w0YuaabQqvjOyAoHMIlZ6NTrBUHSbkm9CiyFG3xBWY6W7PFsQXTau8ulfL
- 9bSfoZhFQGwAcgJgiZjOsP+Ygr6XP1V1pmRS6pMK1VG10xY4vNJ8Ov3KdsApPqUn6p6d
- Fdl8Kew0idOG8Pi1PzWW7WySYipnfRMnx0YWY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752020088; x=1752624888;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EwdZjzyZW5y5gfp3GOasHpDdmknr1cScoKfD9eTEc28=;
- b=qXtoYD2FLspAQhh18CnfYJDAnLtr9aA1ChldRXBD41/+VT+5yjk09aZHVRT87yrJFi
- /fzrTvpLEo/Y58jR6JmhDHYMa7XclccPN1gY8m6/h3h33mpcH5pFmUI0F1IDNMF+gd2V
- uWbt148Dnozb5G9wLxrU1XfEYKuLSh0cq1HcX7s0c1Ikhqgv/mQxvyzSRJKikRkEvzh8
- M/Ma4ffT3Q/kErxVQbTFrBu495tLtRan3dJHt0ooH9mlTxauw3wWw2VYl/voyB9pgjEj
- NN4SAB+Qb+WyPSsiowE0PBBTvaCFawd71zNLH0KGVqN9JrcHXMsSGWJGPSUcpmtc1c3D
- 18tw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWwPBWKIAwT4YQkaGt392a9Qw5D2qleCYkmLTKysfkMQQ/0tvNRSB1k/x0Io5gRbzTgQ5FbmDI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1+dcQ1OwM+10yymXvyFTrSespkkb3HfjU3L+Eky5/tbOHzjEQ
- 0V3OvLymLcldYmUu3jiGZUaL9HPrx8KBNGLWNdx1DYDjT0UHze5RMe/2q49wj/aaT24=
-X-Gm-Gg: ASbGncsjC5CAko2LJhZ0qFa765nLqmilCCSAxPADXXFewmjAnqqdMDd0heDBZagnGKX
- n2Kg5wn1m1KYfvQY+kVTk+y4OZbQcozw61tXInLMITumxuhQNVdXsiUda67fzz1mpo/VCfDPYog
- bnzRkkdUnXsQtPHpu6tOaz2jn+kM0hpJPh1ezCiKM+d9/0Vy9eaBluGNeRu0WlCv2ht8J8ExoMt
- hA9tHTaSysmCtA+hQupHBQVXm7mh8qtrdhwU/642tNz3vq2UuO53eI4nVG7Ewu+yuwbr71NmFji
- Bz5aX6cwn5ZMWZdJYXG327+FxNTJU42OpcAZtZ5PbxRKz7RA+60AQVgAQIfDQluw14W49EgTSMb
- 3QT8YPMlWHvQMDtEEHvH5w9Hk6NEp5hU=
-X-Google-Smtp-Source: AGHT+IEC+j1VSgpu4KmW7lFcuPD+jhJPa4QcJmAFrSAwjoRBKkVg5Q25aoXMNOe3vgdLWpDkNzdknQ==
-X-Received: by 2002:a05:6830:154e:b0:72a:48d1:7fca with SMTP id
- 46e09a7af769-73cd791dbdfmr3443726a34.4.1752020088099; 
- Tue, 08 Jul 2025 17:14:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73c9f73520csm2195543a34.8.2025.07.08.17.14.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Jul 2025 17:14:47 -0700 (PDT)
-Date: Tue, 8 Jul 2025 18:14:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] boot: Ensure method_flags is initialised before use
-Message-ID: <20250709001445.GA1724532@bill-the-cat>
-References: <20250627-bootflow_fix-v1-1-f1039b2962d6@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5694H4X21359567;
+ Tue, 8 Jul 2025 23:17:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752034624;
+ bh=iqwZBdglvRWuTGe5u+1ojhH+BDvfxmdnRmY/iILJ5Ug=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Drunpr09soR9f2/decfy69QCPEXkYR5DGWg58y+FtsndiWsnOOOCMqYkoq1RF/0nY
+ awY3f6lXR/pv9BYyU0AhZbG2AOXnlV1J71WJop3zSIWZQZ9Z27k7MkwQK4t99nzHBO
+ RnUeHnEn49/rbDgFLlonOlyNl3KWEkfUQyrFbHkc=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5694H4Br3955012
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 8 Jul 2025 23:17:04 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 8
+ Jul 2025 23:17:04 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 8 Jul 2025 23:17:04 -0500
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5694H1A32974380;
+ Tue, 8 Jul 2025 23:17:01 -0500
+Message-ID: <d8f780e1-635d-403b-9c33-e6c2b3549d97@ti.com>
+Date: Wed, 9 Jul 2025 09:47:00 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Gc09Q3/35tulY1oy"
-Content-Disposition: inline
-In-Reply-To: <20250627-bootflow_fix-v1-1-f1039b2962d6@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] board: ti: Clean up formatting in rm-cfg.yaml
+To: Bryan Brattlof <bb@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
+ <vaishnav.a@ti.com>, <j-choudhary@ti.com>, <afd@ti.com>, <u-kumar1@ti.com>
+References: <20250704091234.3218906-1-n-francis@ti.com>
+ <20250707163626.4trdbcgiuzlibm6x@bryanbrattlof.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250707163626.4trdbcgiuzlibm6x@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,76 +83,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Bryan
 
---Gc09Q3/35tulY1oy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 07/07/25 22:06, Bryan Brattlof wrote:
+> On July  4, 2025 thus sayeth Neha Malcom Francis:
+>> Move to using the latest generated RM YAML configuration files generated
+>> by the K3 Resource Partitioning Tool which updates them to have standard
+>> formatting with respect to indentation.
+>>
+>> These files were generated from the untagged commit 41718bd5f915 ("docs: Update
+>> docs and move them to docs folder") of the K3 Resource Partitioning tool. This
+>> tool is packaged as a part of the public SDK and is not otherwise
+>> publicly available.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>> Changes since v1:
+>> https://lore.kernel.org/all/20250702105533.1533178-1-n-francis@ti.com/
+>> - commit message changed to include the generated tool commit (Udit)
+>>
+>> Boot logs:
+>> https://gist.github.com/nehamalcom/73c1c66d674c32f71a6ade8049c97d21
+>>
+>>  board/ti/am64x/rm-cfg.yaml      | 2416 +++++++-------
+>>  board/ti/j7200/rm-cfg.yaml      | 3554 ++++++++++----------
+>>  board/ti/j721e/rm-cfg.yaml      | 5498 +++++++++++++++----------------
+>>  board/ti/j722s/rm-cfg.yaml      |   66 +-
+>>  board/ti/j722s/tifs-rm-cfg.yaml | 1552 ++++-----
+>>  5 files changed, 6543 insertions(+), 6543 deletions(-)
+> 
+> Are only these boards affected or should we do this for all the 
+> reference boards?
 
-On Fri, Jun 27, 2025 at 11:09:36AM +0100, Andrew Goodbody wrote:
+AM62P and AM62A also require an update but this is along with changes in
+the values themselves not only formatting. It would be better to send
+them as a separate patch.
 
-> The local variable method_flags is only assigned to in some of the
-> code paths leaving it possibly uninitialised at first use.
-> Initialise method_flags at declaration to ensure that it cannot be
-> used uninitialised. Also remove now redundant assignments.
->=20
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->  boot/bootflow.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->=20
-> diff --git a/boot/bootflow.c b/boot/bootflow.c
-> index 4054a966af8..d60e9df6a9d 100644
-> --- a/boot/bootflow.c
-> +++ b/boot/bootflow.c
-> @@ -245,7 +245,7 @@ static int iter_incr(struct bootflow_iter *iter)
->  	if (iter->flags & BOOTFLOWIF_SINGLE_DEV) {
->  		ret =3D -ENOENT;
->  	} else {
-> -		int method_flags;
-> +		int method_flags =3D 0;
-> =20
->  		ret =3D 0;
->  		dev =3D iter->dev;
-> @@ -264,7 +264,6 @@ static int iter_incr(struct bootflow_iter *iter)
->  		} else if (IS_ENABLED(CONFIG_BOOTSTD_FULL) &&
->  			   iter->flags & BOOTFLOWIF_SINGLE_MEDIA) {
->  			log_debug("next in single\n");
-> -			method_flags =3D 0;
->  			do {
->  				/*
->  				 * Move to the next bootdev child of this media
-> @@ -306,7 +305,6 @@ static int iter_incr(struct bootflow_iter *iter)
->  				}
->  			} else {
->  				ret =3D bootdev_next_prio(iter, &dev);
-> -				method_flags =3D 0;
->  			}
->  		}
->  		log_debug("ret=3D%d, dev=3D%p %s\n", ret, dev,
+> 
+> ~Bryan
 
-This leads to failures in CI:
-https://source.denx.de/u-boot/u-boot/-/jobs/1195854
-
---=20
-Tom
-
---Gc09Q3/35tulY1oy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhttHEACgkQFHw5/5Y0
-tyzgpAv9GITJWEfaui3Hp1f4Gyvb8cW4mA9tDTOzI3vvqf7/D0UJIytf2gsRN61o
-iqjihCv389IN/72IFSO0VY0xpVGoymw3Tv3kvtFA32u+KxCW6BHSJN10y9QrDIs6
-BfWda6Ou2SJp2CWFHrKGQO3mANIk/bgTdLisXtnKSly59WyVw0laZpdpR2Z9wlpS
-ep0WqJ4iYG3YgFH5KlltqX7dvzFygxc3UA2wA3EpRDBSSbe2L0FMMdzZEGT8zxe8
-URHuQju2T4OKp4bclf5aDOL+w0l+8yx7tIM2YhBldnLOeNidqptw8AMpNfsoR7Ig
-iKZrhD/6jHj/TWG3o4fkLV4obrXUcEmcZ9hYOQGqfgOOolxOXA/U3pl1VzgxPWVF
-cspMnu8jjHwVej8btSNfkQFV1QaL4cYhfAmPoTKzDeXIlijp2W0W3A4BviYnLJB/
-5i490lPOc0Necb4NVlAreoHT5PddzjvO7LfslXI4TFaFPb+uDoRs7jq5OtSsBYy/
-M0EzCPoa
-=5ikZ
------END PGP SIGNATURE-----
-
---Gc09Q3/35tulY1oy--
+-- 
+Thanking You
+Neha Malcom Francis
