@@ -4,42 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ABB8C83F0A
-	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 15:36:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF449C83F03
+	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 15:50:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66D7D83535;
-	Wed,  9 Jul 2025 17:36:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D5A783479;
+	Wed,  9 Jul 2025 17:50:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T+PK0rsG";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AEF883423; Wed,  9 Jul 2025 17:36:30 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F08CD83526; Wed,  9 Jul 2025 17:50:52 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5EE6832BC
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 17:36:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0E6F8344C
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 17:50:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uZWqP-008cpJ-7W;
- Wed, 09 Jul 2025 15:36:25 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [v2 PATCH 1/2] usb: common: allow dr_mode to come from gpio-id based
- usb-connector
-Date: Wed,  9 Jul 2025 08:36:22 -0700
-Message-Id: <20250709153623.3038697-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-40b54ee16ddso53081b6e.1
+ for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 08:50:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1752076249; x=1752681049; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RtPPvAa4MYRAj/mJd5lKDWQUbgHapNlY4ubBPWhPoBI=;
+ b=T+PK0rsGOOmiR8F7zg7O0fv48P3YNg5MWUs+EQFgFtoXnKehIYMOtxsE7HsPcUY2ug
+ UurbU43DnTirD6H3rMfa51jRRPyFl4lLtuJvn9qXS4ScMWI3SZbb7tEr3E6tg6rTa0SC
+ Mnq3nRZtTqZq1KPV4GGk7fvuxenyaPsnB8+QQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752076249; x=1752681049;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RtPPvAa4MYRAj/mJd5lKDWQUbgHapNlY4ubBPWhPoBI=;
+ b=w2S/J9S2kb9jblU/qjkItQI+tlfZkNoDCqnT1LdZZMiaMOKZgKlP/FPzw1yWhlZqtE
+ aqQovmYSw320dH6kHQH/rqFvZPxpg3MBDnsqqavycR9zWTGaO3haUd/DK0lEuxGidD5d
+ n40f4LtP00D+e8wseullQfpNQpsQF/wanfGN9luPm1helVU4MRms3TtIACgoDoKEB+qI
+ 40BzjxEotik42kkglMnwlrOlIO9xoiVNn7CQwZqK26w/9qefifyITIRUCHliINWzJeL4
+ alJsSZascHgSj8AmMKE2ppR6At7wwLC9CWM32Gn8tFf7YJcKg+JyT3/tcyIsiX2vVEIc
+ I7Qw==
+X-Gm-Message-State: AOJu0YzQwEk8cpb/8gH5FK9FGYyCfcRN1Xi7GKJHtEAGI0eUKNAbfVhh
+ a0qUN/0DFW+fq9YTC+I/ekSXR5GEriowBPd57PZHuNiRgtKWKnslydQ7VimtdXrX/vzfT8PSk69
+ SI9UArPE=
+X-Gm-Gg: ASbGncsyuYRp5RFsAr6TvXMF/GCt27BFauSrB62JyJ+8uQJShdKmQJjs79MO4r462wV
+ W3Qm485QrNb6/FqLzqzXjh69cIhbthwRRlBtX1B5wiX2pAhdJa4ifu01N1i2L+pHe0O6K1QeT+F
+ E795rk/E4wiZZOH2m2bq7ndz4HEr1GqqhfT6Kpr8YdxpXi1oGPxfdLB7SmL/KvBzKNJKpsxyduG
+ E3S8jNavg3RmOSmOVqcoEuGfNfTcwcp4kYeXJjWUolUZznyjPcFgInvjSdIm9P+6qtzUU2tFgpK
+ 4TLZNULT4EMazciQ09cCKtnDuKM6V2/B+bZYwa5vQg1NAc/61WNXCKjeFrbI3dkVMZx7OLhrHMr
+ 6dG/9uFVe7DWdXoYxMhvu
+X-Google-Smtp-Source: AGHT+IEHmioTicHLyBAuGvwdhxoeFrkZSM+P7UBKMKJ0c76DTq7O2T5+9AT150sGha6EoldSfy4tpA==
+X-Received: by 2002:a05:6808:2021:b0:405:6b13:ca55 with SMTP id
+ 5614622812f47-413aea7b6a5mr256569b6e.37.1752076249495; 
+ Wed, 09 Jul 2025 08:50:49 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6138e4adca8sm1935444eaf.8.2025.07.09.08.50.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Jul 2025 08:50:48 -0700 (PDT)
+Date: Wed, 9 Jul 2025 09:50:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] boot: bootflow: Ensure sel_id is initialised before use
+Message-ID: <20250709155046.GA1823165@bill-the-cat>
+References: <20250630-bootflow_menu_fix-v1-1-5d75ced54484@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="q1541Ce8GiMzn0XL"
+Content-Disposition: inline
+In-Reply-To: <20250630-bootflow_menu_fix-v1-1-5d75ced54484@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,137 +96,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If a usb host with dr_mode of "otg" has a usb-connector using a GPIO ID
-pin use this to determine host vs peripheral.
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
----
-v2
- - do not display error if 'port' node not found
- - change print to debug
----
- drivers/usb/common/common.c | 94 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 93 insertions(+), 1 deletion(-)
+--q1541Ce8GiMzn0XL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/usb/common/common.c b/drivers/usb/common/common.c
-index 13e9a61072a9..85865712bfcc 100644
---- a/drivers/usb/common/common.c
-+++ b/drivers/usb/common/common.c
-@@ -8,6 +8,7 @@
- 
- #include <dm.h>
- #include <asm/global_data.h>
-+#include <asm/gpio.h>
- #include <linux/printk.h>
- #include <linux/usb/otg.h>
- #include <linux/usb/ch9.h>
-@@ -22,6 +23,97 @@ static const char *const usb_dr_modes[] = {
- 	[USB_DR_MODE_OTG]		= "otg",
- };
- 
-+/**
-+ * get_remote_node_from_graph - Resolve the remote node from a graph binding
-+ * @node: Starting ofnode (e.g., connector)
-+ * @port_id: Port unit address (e.g., 0 for port@0, or -1 for first port)
-+ * @endpoint_id: Endpoint unit address (e.g., 0 for endpoint@0, or -1 for first endpoint)
-+ * Return: ofnode of the remote node, or ofnode_null() on failure
-+ */
-+static ofnode get_remote_node_from_graph(ofnode node, int port_id, int endpoint_id)
-+{
-+	ofnode port_node, endpoint_node, remote_node;
-+	u32 phandle_value;
-+	char port_name[16];
-+	char endpoint_name[16];
-+
-+	/* Validate the starting node */
-+	if (!ofnode_valid(node)) {
-+		debug("Invalid starting node\n");
-+		return ofnode_null();
-+	}
-+
-+	/* Construct port name (e.g., "port" or "port@0") */
-+	if (port_id == -1)
-+		strcpy(port_name, "port");
-+	else
-+		snprintf(port_name, sizeof(port_name), "port@%d", port_id);
-+
-+	/* look for a 'port' node */
-+	port_node = ofnode_find_subnode(node, port_name);
-+	if (!ofnode_valid(port_node))
-+		return ofnode_null();
-+
-+	/* Construct endpoint name (e.g., "endpoint" or "endpoint@0") */
-+	if (endpoint_id == -1)
-+		strcpy(endpoint_name, "endpoint");
-+	else
-+		snprintf(endpoint_name, sizeof(endpoint_name), "endpoint@%d", endpoint_id);
-+
-+	/* Find the 'endpoint' node */
-+	endpoint_node = ofnode_find_subnode(port_node, endpoint_name);
-+	if (!ofnode_valid(endpoint_node)) {
-+		printf("No '%s' node found under '%s'\n", endpoint_name, port_name);
-+		return ofnode_null();
-+	}
-+
-+	/* Read the remote-endpoint phandle */
-+	phandle_value = ofnode_read_u32_default(endpoint_node, "remote-endpoint", 0);
-+	if (phandle_value == 0) {
-+		printf("No valid 'remote-endpoint' phandle in '%s'\n", endpoint_name);
-+		return ofnode_null();
-+	}
-+
-+	/* Resolve the phandle to the remote node */
-+	remote_node = ofnode_get_by_phandle(phandle_value);
-+	if (!ofnode_valid(remote_node)) {
-+		printf("Failed to resolve phandle %u\n", phandle_value);
-+		return ofnode_null();
-+	}
-+
-+	return remote_node;
-+}
-+
-+static enum usb_dr_mode get_connector_drmode(ofnode node)
-+{
-+	struct gpio_desc id;
-+	enum usb_dr_mode dr_mode = USB_DR_MODE_OTG;
-+	ofnode conn;
-+
-+	/* get remote endpoint */
-+	conn = get_remote_node_from_graph(node, -1, -1);
-+	/* get port endpoint */
-+	if (ofnode_valid(conn))
-+		conn = ofnode_get_parent(conn);
-+	/* get connector */
-+	if (ofnode_valid(conn))
-+		conn = ofnode_get_parent(conn);
-+	if (ofnode_valid(conn) &&
-+	    ofnode_device_is_compatible(conn, "gpio-usb-b-connector") &&
-+	    !gpio_request_by_name_nodev(conn, "id-gpios", 0, &id, GPIOD_IS_IN)) {
-+		if (dm_gpio_get_value(&id))
-+			dr_mode = USB_DR_MODE_PERIPHERAL;
-+		else
-+			dr_mode = USB_DR_MODE_HOST;
-+		gpio_free_list_nodev(&id, 1);
-+		pr_debug("%s got dr_mode from connector %s dr_mode=%s\n", __func__,
-+			 ofnode_get_name(node),
-+			 dr_mode == USB_DR_MODE_HOST ? "host" : "peripheral");
-+	}
-+
-+	return dr_mode;
-+}
-+
- enum usb_dr_mode usb_get_dr_mode(ofnode node)
- {
- 	const char *dr_mode;
-@@ -35,7 +127,7 @@ enum usb_dr_mode usb_get_dr_mode(ofnode node)
- 
- 	for (i = 0; i < ARRAY_SIZE(usb_dr_modes); i++)
- 		if (!strcmp(dr_mode, usb_dr_modes[i]))
--			return i;
-+			return (i == USB_DR_MODE_OTG) ?  get_connector_drmode(node) : i;
- 
- 	return USB_DR_MODE_UNKNOWN;
- }
--- 
-2.25.1
+On Mon, Jun 30, 2025 at 02:25:44PM +0100, Andrew Goodbody wrote:
 
+> sel_id is only assigned to in the case of EXPOACT_SELECT, anything
+> else will leave sel_id uninitialised. Initialise it on declaration
+> to ensure that it is always valid.
+>=20
+> This issue was found with Smatch.
+>=20
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  boot/bootflow_menu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+Can you please rebase this on current master? Thanks.
+
+--=20
+Tom
+
+--q1541Ce8GiMzn0XL
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhuj9MACgkQFHw5/5Y0
+tyxL5QwAo5TmP2cVNOMqkf9msFTYm1jd7vdCiDGtmd4BEaHxDsn54u8j6ZF2N2hG
+nM9PMXiFEFKD3ftri+HNSceqtXvgWxnWLX/5pbEFzuJowO/T290SSm0U/xY8nCfS
+nPYGoL6cOIufbOtc+KWYRR4NLlP/DOCpwoF/YHynJ+YSjteKiiMu/ao4b2d4g6lS
+LVah6a6mTqhBzJd4XdsH8l5fn+HO886sI+epr7l1j6tf6e2x5AChOSqESWLst3Qy
+Ek6katDDOTwskL5EP9JGZB9j860gn/aeLQ6iwwdKnYXWtQvriXkonKe6pPFKOZmW
+Y12rTWbi1EDtZPI0CmQ8iDGUm/im2PyoGHVAMwDsfQfePlVCSZm6ZVqYOUwX25Rd
+WrXv5ywn6GUvPKXqhmOuk19RIbQwF7mXE2TysTcimlGvjKYE+TXVugI0RX9rG0p8
+TGW2F+nwStOHCRLAqv0vvuncVWFVFlxBbEfNQHZULsxhNdni/4FiBVJPo7vk4aBq
+fobbibku
+=ihlv
+-----END PGP SIGNATURE-----
+
+--q1541Ce8GiMzn0XL--
