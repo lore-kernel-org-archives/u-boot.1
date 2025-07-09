@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8570AC83F09
-	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 14:23:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7706DC83F09
+	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 14:23:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14F4C8344C;
+	by phobos.denx.de (Postfix) with ESMTP id AD99683559;
 	Wed,  9 Jul 2025 16:22:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ykxki61/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cCsZG+KX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 735F283577; Wed,  9 Jul 2025 16:22:07 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id A0B94835A5; Wed,  9 Jul 2025 16:22:08 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6043F834EC
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 16:22:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A14683559
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 16:22:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-60bd30dd387so2796418eaf.3
- for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 07:22:05 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-610cbca60cdso3811336eaf.0
+ for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 07:22:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752070924; x=1752675724; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752070925; x=1752675725; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=N6UswDVoNQmo000lVq/rpR0KZoRzXgw0ihbHLWcI7QQ=;
- b=Ykxki61/AuOApirGOc5H2J0jLk09XdGAzt/oHqosqyS9olHEDzGPQQXpkbpb/swLb2
- fZ6KX6b6KJAW6uBfLrqta+I/X/sL/UMgQbJ0cFfhAWjm0445fLX8BwlWnOhtd6BLsZNi
- 7X7GFN6SLFPOoVAsh2rTQfsJKoIB7MK1OCmJc=
+ :reply-to; bh=GBp1JUsmwkXo/irLmcpTmzaq87SsekCCZlRzsKtOAKY=;
+ b=cCsZG+KXTVA6a+gyNUmUlu1evtbnPyN87xEBuoXiURBTzDNIUY0XlZ/YcVJF7tPHRG
+ fkoGU0WVSHyl6CuyHNIIGjy0dk/R1juHs0EgX6T23C9rZLxGkz1lSU4j7G5lOCHgIgpG
+ xbxs44GzD/vGacPoQ43zn78asGz3g3TMM80pc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752070924; x=1752675724;
+ d=1e100.net; s=20230601; t=1752070925; x=1752675725;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N6UswDVoNQmo000lVq/rpR0KZoRzXgw0ihbHLWcI7QQ=;
- b=bp28ddtVutephQd9jPfj3y/mEjGgEE3Plk7dKZMVVINFlXsCzagrCjPubpNWtD24xM
- 86j08lIRHZE/g6sJ17FuiXqZm/Mku9lk9nTjoywfsj0BglDGhU/+0MypCU0d6+2397WM
- N+OtWDJ+wsk3rBMCLDlbiW2ph1gxDTfJX4mvMYFvgm5b2JBNcV0EziH56OjmMwdUOZJL
- AiFynoUhmMP71AqXYmEVwFGTYWJwk1APGbA+0ycu/ubSzHBTdT+VDWsh+gq1oH42Ov/A
- Qsf92qCP6mIv0RBSWw0JLOtwJ720nC6KPN6+/g3mbLL1des8YMD9JkY6X9oWJBP/cj/o
- r0oA==
-X-Gm-Message-State: AOJu0YzzLopPRV51Ns1/HGQYoCzJr6mVaoV4NOipFoSXTFI9y8zErTRd
- fIKCQQasvj3UL3tlbVAA0xdqB5e5n5rHIYukne/QKcf5iLb00s+jeDxfJJ5hPTZRK0RJbk215tI
- JBJj7G1M=
-X-Gm-Gg: ASbGnctRhUewITUxfKtL4ha+FezAjvSYkr+5BekHtFlb+Tl4qjMOW1GxEewcP3iJ3k/
- GaqbLhWnE+OyhM0b/lQGj5BvOo3CQ5R8zeL1Vs8fxfJHYzeV8Pixt0ox0n8TKLlsu6bWK1wOXCI
- RJ/zchGj//7D2hnVhX3yTZebGrwaa019idrb7+85H3KHih+dONI3148XSpYjXyUKCxbls+TKdgr
- XKhS58uR4Lfg4x+Wchp2Th7LEQ1Ij4XALDy8CfU0/EejE0d/8aJK8ImnMr634AZWDnRdlsKeFqI
- HTb7hO/Eez6qVoErmJPT8t5iJA9ZUDvKbzAruqarbCZH1OwBxX7aOvsgnOX0u/qpUr+fAGyCFij
- SbGiGA2dT6gEcP21z0ps=
-X-Google-Smtp-Source: AGHT+IFK6Gw+fDTgWCOGAfDW8q2IP/PGVlnBfjEn+xWl2CkVKjId8YJ2l6+kHlTqBd083srjiU+eaA==
-X-Received: by 2002:a05:6820:3090:b0:611:f241:b8f5 with SMTP id
- 006d021491bc7-613cceb191emr1842902eaf.5.1752070924077; 
- Wed, 09 Jul 2025 07:22:04 -0700 (PDT)
+ bh=GBp1JUsmwkXo/irLmcpTmzaq87SsekCCZlRzsKtOAKY=;
+ b=eepvQo+Cs5NbZgAzdpPilI2ELhU8pq0Cr3pwafwTDbkMoQEIwkpSlu+YKlaM5BNQgq
+ JDSr6QDSmDsm9GNqbVZhrZ7rVlOmjS61qJJS8ZHsSyDnGYgd5bRRASJ2qOBKLbXCGkZa
+ efrKzHLaUwCuoDUEPvwo8X/ztEnFGW3cDXajrgPC/wuRA7nQjZZ1aYQOtYLuq4CnDhkV
+ F8pZXOMXjLQXtladv9BjppZ0x7O1dMWqvDqEcxqLIgEm8PNTrb1IgiqPHqCIKv4Xvk3+
+ Giwfpst1OBjAokSbYb+6wZMAvUQJQjJi+58KF/hcajerUNzZc1JkHqgP3ofe55E/5Bgg
+ 4L4g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUDJ7mdhgpKt73vZu11Ve39neCxPGYnbEe/ip///fxzfaK/zDtihoUqWVSmd5+zDonW+gcom/c=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdrbavH28t3vUfXTDY0KQCdQK4+bkaL5JHwLXQCitao/AJoG10
+ vZdYLoCyqqEM2q1Ozthqc16cYdGWXQAD4vVa6mAq3Y2CW3KTK6hZ7zWzEqud9xqLoyQ7amCPO0t
+ PIpJ2Z5E=
+X-Gm-Gg: ASbGnctsfX0n2zQqVIYbAgIwrl8MRNG6nCJwgJiQp2ohNGjnOhq7ggMkPmTlSipHBD3
+ GAS/yKrGHSnExPQhklxJaJBAtJTb/qxjHfZuW4gSZIM/7e3xQHjzEqYl43vzqYHLWydjhq59oS0
+ GiMYVrglE/fShulFxEJvNlhVAAgek2Kp8pM7X4YjO3yH8bOC+S0+urHPYciSEDF2BZmVzFwRkbo
+ tqMVxbyhzj+pfHxl9ZfSu2RCU2jwKb28YkoEzMo2OhFhIS5pAVlTsVm6Dd6QNULoP4NacXINucf
+ tUdHtcIjDvUIWZSKIGKcuiLgRuqYuNdm/Om0geAI8fzXZG8YQo9SvxVL0nwsNuyjqfd2tgMHjzr
+ 8M0l6QbrtpuVK9IiD7q8=
+X-Google-Smtp-Source: AGHT+IG9ZB2cjrB5cz9wumYN/IYw8ktyYOEZhn3561J7by8tWHLrGOOh+ut80IQTxaLhe/oEleiH2g==
+X-Received: by 2002:a05:6808:10c9:b0:3fc:7e1:a455 with SMTP id
+ 5614622812f47-412ba280279mr2178765b6e.2.1752070925087; 
+ Wed, 09 Jul 2025 07:22:05 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6138e5ac83esm1919975eaf.27.2025.07.09.07.22.02
+ 006d021491bc7-6138e5ac83esm1919975eaf.27.2025.07.09.07.22.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Jul 2025 07:22:03 -0700 (PDT)
+ Wed, 09 Jul 2025 07:22:04 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250627172947.3876739-1-trini@konsulko.com>
-References: <20250627172947.3876739-1-trini@konsulko.com>
-Subject: Re: [PATCH] fit-dtb.blob.gz: Pass "-n" to gzip
-Message-Id: <175207092289.1813324.6005336372323440754.b4-ty@konsulko.com>
-Date: Wed, 09 Jul 2025 08:22:02 -0600
+To: Joe Hershberger <joe.hershberger@ni.com>, u-boot@lists.denx.de, 
+ Christian Marangi <ansuelsmth@gmail.com>
+In-Reply-To: <20250629132122.24389-1-ansuelsmth@gmail.com>
+References: <20250629132122.24389-1-ansuelsmth@gmail.com>
+Subject: Re: [PATCH] env: Fix possible out-of-bound access in
+ env_do_env_set
+Message-Id: <175207092418.1813324.12453392080896998105.b4-ty@konsulko.com>
+Date: Wed, 09 Jul 2025 08:22:04 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,22 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 27 Jun 2025 11:29:47 -0600, Tom Rini wrote:
+On Sun, 29 Jun 2025 15:21:18 +0200, Christian Marangi wrote:
 
-> Sometimes when building a platform such as imx28_btt3 we can get an
-> error such as:
+> It was discovered that env_do_env_set() currently suffer from a long
+> time of a possible out-of-bound access for the argv array handling.
 > 
-> gzip: fit-dtb.blob: warning: file timestamp out of range for gzip format
-> make[1]: *** [Makefile:1219: fit-dtb.blob.gz] Error 2
-> make[1]: *** Deleting file 'fit-dtb.blob.gz'
-> make: *** [Makefile:186: sub-make] Error 2
+> The BUG is present in the function env_do_env_set() line:
+> 
+> name = argv[1];
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] fit-dtb.blob.gz: Pass "-n" to gzip
-      commit: 1930a7df10b18f0f4b67d868632896233dded981
+[1/1] env: Fix possible out-of-bound access in env_do_env_set
+      commit: 0ffd456516b5f0c126c9705d6b2368a45ee2353f
 -- 
 Tom
 
