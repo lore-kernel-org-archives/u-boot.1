@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5CC8C83F03
-	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 13:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EEB2C83F03
+	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 13:20:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1902083479;
-	Wed,  9 Jul 2025 15:20:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 88940834E5;
+	Wed,  9 Jul 2025 15:20:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NGyyQfFB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YTCVIYVh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54C4783443; Wed,  9 Jul 2025 15:20:06 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 3F5F083515; Wed,  9 Jul 2025 15:20:15 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5496D8349B
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 15:20:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58DB1834EC
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 15:20:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ae36dc91dc7so988169766b.2
- for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 06:20:04 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-60cc11b34f6so1643329a12.0
+ for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 06:20:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752067204; x=1752672004; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1752067213; x=1752672013; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=KatpH0KkC2cd+wymBWr6I8rhuVgkQUdMEbkYbI4YJmQ=;
- b=NGyyQfFBZWL7nvo453aC0FQ5RxyciWkXB6pi4Du1cQLnWJTmA1dklfMZj5genD2jSN
- 6QmtYwmJcY3+5klfmCe6S9JDzRad7PKqVo1V8kAKEAMc2RxhBX7GOXoY/Z9jd6NcUlo7
- PzCyZfqUHZytZjcKppaz84aJkn+hOA+Q4OBsAIrMy5jqGCtHsz8ebe7ggA+RTcUDozcz
- htck6pLpr3sZYtZX4EMTiekzwl4lbN4VSzqRtBK1VahsyLM2w46U3qppmhWrG68Pb4de
- 00/Ap2QYZ5tobiDVaToO9K6rmme0bmBr6ScJpidHeNT6Vyhqu1Mg2xd6y6zj1edTCNqQ
- mwpQ==
+ bh=nj4I90Om1yjIrXgy9nhSNWKgmJAJI4qLOodIGUfgkbg=;
+ b=YTCVIYVhiNRmMzzLyTrFI6UbZac3d/0PZ9txCsyUVf7EOuqGQL72xdKh+bW4K4K0FY
+ BXRgxWCRx3Pzlf632sQFUSx4L0lvY4/M5nGnCztixRVybRnCMseTo12Oa1lOZXE7R4lK
+ FQlwM/WOF1W5DJ2L3gfPPZPLLOFpj++1vWbsQUqrOta6ZMlrrxXfUuA4mOzskcPD2JDf
+ xrEVBTNYp2+j41JJPKKKSTO6OWNmgB60N8VZNANCTdDu9U2+igybx9s1oCin8baQOfIr
+ T2gVw7/TKSi8o1a0WFD2SFFHpS2viu8YUVxLbVFTEkF/PnwTFsUccLdcQ5CI7XEO8jt5
+ TJtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752067204; x=1752672004;
+ d=1e100.net; s=20230601; t=1752067213; x=1752672013;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KatpH0KkC2cd+wymBWr6I8rhuVgkQUdMEbkYbI4YJmQ=;
- b=Vodph7PPb9mlaJH7C2bza8Q+SicU3FUqRtdx4Cj9gKxu8pddG4MHXd/6YODjkcIokV
- pW1EiWl9SOgTvmjJx+IXK1Cgo/cAWLH+04xZ44EVOKsYEs9Bs5E6K8RciqVolj/FHkKq
- bNvrPO4teBLdmVdbFJ9Ls7zhjR8r0ihTOmxWS+W2jPLujUoUGFBe28T2iZK6hCPyH+q9
- rMa5COdu8woch4cFN7tCWd9axwGy/LIe0K87UtxFR/ASw3NP7VCCYIugRhQtjF2V8UFI
- Q37yqTVp0OeCySqdlJ+hH4qAmUyJvQcvxTh3Jn/2QZBo7BmTzL2Pmhmnu7D+aOnDThUv
- aGuQ==
-X-Gm-Message-State: AOJu0YyXeE2dbkEGeIa6wursRkAiok6GnUlS6TTu6EmvIRKlECIf6iuN
- Id2NVk+A++Nu4RNkLue5oGP1KLJqBjqKgrvivDNgi1rogoNtUWJnYuulzkdyr6IpUSQ=
-X-Gm-Gg: ASbGncucAusJCb25lwf7xHraxIMrbkbGfbWxve9vqyryjWDwuRYiPSxCn1FErW9MS7Q
- gUGRjiVCzfIdLfOBjixyoyzw+oDrxethxI5M/aLqtpDb+6lN1TRDejblmoOnCbPVZCShJwsIIXJ
- wYKjsGJ8ZmUVzHM3DN0gl2kmpixF77eFeaQiVLrXYUZbhjSjYJfmqhs1QqDG+8GhX+XXiZvyPIl
- i6ASJu85N3V+dH2qEuU+ftA0j2dywPLrmX7/TpQixOIftdmhQi2fqw9lB6J3NtGi4QViYCGWs0n
- QBUa7JZTSSY4Bezgc+kcf+oReQ0gfXW0h/fvUWTMFImEfSVSIZKTacAOAjUAqREjt1tUcE9xBzO
- mkpEWSXk8+2sg4YGZEDs96+pD4MkGgjwOBsUyyewA3A==
-X-Google-Smtp-Source: AGHT+IGQUy4QmMCAiGnhnQtrQFqTAezovF2l/wmwHwFieTJ5WtAXn7qcsN/+Be87hyp5MIAfn+GfbQ==
-X-Received: by 2002:a17:907:72c5:b0:ae3:5e70:3306 with SMTP id
- a640c23a62f3a-ae6cf5bc2d2mr350837366b.19.1752067203595; 
- Wed, 09 Jul 2025 06:20:03 -0700 (PDT)
+ bh=nj4I90Om1yjIrXgy9nhSNWKgmJAJI4qLOodIGUfgkbg=;
+ b=k/OGHfDhbHyB1ZUAMYlUZtPV8avze2+9p5kx1QWo268kuNUgn1YUCfOGUFYmkjHaiK
+ brRmO9WnC27HwmYrqWDAFyxfbeFoJFqB7Kso8hhBVA69zUpB6p9fJDv2Qt0GYUmLNh1i
+ Ua53ZsaqDWXLOIfTdJpmkEaYy1mideuvViiRuJ4w5HHdbGfcnzkOTveimzHOTKanNa4x
+ YyjBxOIkHDTkoF/euJV1qqjzH63Fjbcmu6gHvzR4hoqHzaV+F0toJ55MC7HDBr7CF8sM
+ CvZTQcCz8GDYV37CgpK4gBfY0LUwDo/z9MAomjfMhFneRiVLoQa3HSlWtdfcZe81WVAz
+ 2kiA==
+X-Gm-Message-State: AOJu0YxyTKRfUQze6/s/NYBcaARvP9F4GeAowmT48H0gfOFZoTMzb5e/
+ exC7ylShIeIMsa2FNgllS/c2TwbhmjC5RJvbjjYeX+c2j+JOuuFq53rPuMm5+DJP95o=
+X-Gm-Gg: ASbGnctAVR7rVFfPnR6+Otn4UrANzdlxsrLFqruZYU3qmph1hu0adt7bGWmV2S8VM5W
+ 0ofcbMfP41zAjl8KACXto7Km1vZhnxkVlQ8MJaEbIGy5zuXEmexsE24BXLM1lGMqy93HRaEXot3
+ LQ+jhGkn+dd0sEKqXYOAkVTPV0P0RdkAkuQ1BsqHn8JKt7L9B/zBE/8J/hLwKAzpFGydXBDwG1E
+ B8I8PjAOHd2LVgtbz9AEh0WQSLnY/ucHQtnS+0rteTmLVw9CHHERsgCRia5rlvIjJv6iW7SzIKO
+ 56XWw2K1E4Y0Ao1t2L6xM1vYuE46YJNsX+6jtFdiEB9J/f15CU2sTbz1cKNipMfCoY0s31TQ8qH
+ fPTy1o8k3EuqKws/hAEMP5XJgDArNEzQavZNupn/iJA==
+X-Google-Smtp-Source: AGHT+IELbjxFhacJZE1nzIn03CkFl+6VBBmJfpd8chNtkw4PFCvxAyyl+nW2jQJnu1QKAweOuJb+Cg==
+X-Received: by 2002:a17:906:c115:b0:ae3:6038:ad6f with SMTP id
+ a640c23a62f3a-ae6b2366ed4mr766437166b.3.1752067212657; 
+ Wed, 09 Jul 2025 06:20:12 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:3e87:9fed:9dd9:2f0e?
  ([2a01:e0a:3cb:7bb0:3e87:9fed:9dd9:2f0e])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae3f6bb1046sm1115271466b.174.2025.07.09.06.20.02
+ a640c23a62f3a-ae3f6b0717esm1105949466b.137.2025.07.09.06.20.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Jul 2025 06:20:03 -0700 (PDT)
-Message-ID: <d4e83482-f120-41e9-9cb7-06ddff2f3986@linaro.org>
-Date: Wed, 9 Jul 2025 15:20:02 +0200
+ Wed, 09 Jul 2025 06:20:12 -0700 (PDT)
+Message-ID: <417c10e9-6af0-4385-b86a-991ee8b4d240@linaro.org>
+Date: Wed, 9 Jul 2025 15:20:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] net: Incorrect NOP macro used for test
+Subject: Re: [PATCH 3/3] net: wget: Fix comparison of unsigned variable
 To: Andrew Goodbody <andrew.goodbody@linaro.org>,
  Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20250708-net_fix-v1-0-292b9aa20f31@linaro.org>
- <20250708-net_fix-v1-2-292b9aa20f31@linaro.org>
+ <20250708-net_fix-v1-3-292b9aa20f31@linaro.org>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250708-net_fix-v1-2-292b9aa20f31@linaro.org>
+In-Reply-To: <20250708-net_fix-v1-3-292b9aa20f31@linaro.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,30 +106,30 @@ X-Virus-Status: Clean
 
 
 On 7/8/25 18:51, Andrew Goodbody wrote:
-> In tcp_parse_options the uchar p[0] is attempted to test for a match
-> with the 32bit macro TCP_0_NOP which can never be true. Instead test
-> against the 8bit macro TCP_1_NOP.
+> content_length is an unsigned long and so testing that it is >= 0 will
+> always be true. Instead test that it is != -1 as that is the condition
+> set on error.
 > 
 > This issue found by Smatch.
 > 
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->  net/tcp.c | 2 +-
+>  net/wget.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/net/tcp.c b/net/tcp.c
-> index 2635727f47d..8740150365f 100644
-> --- a/net/tcp.c
-> +++ b/net/tcp.c
-> @@ -804,7 +804,7 @@ void tcp_parse_options(struct tcp_stream *tcp, uchar *o, int o_len)
->  		}
+> diff --git a/net/wget.c b/net/wget.c
+> index 3c0fff488eb..428ee072330 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -214,7 +214,7 @@ static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
+>  			content_length = -1;
+>  	}
 >  
->  		/* Process optional NOPs */
-> -		if (p[0] == TCP_O_NOP)
-> +		if (p[0] == TCP_1_NOP)
->  			p++;
->  		else
->  			p += p[1];
+> -	if (content_length >= 0) {
+> +	if (content_length != -1) {
+>  		debug_cond(DEBUG_WGET,
+>  			   "wget: Connected Len %lu\n",
+>  			   content_length);
 > 
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
