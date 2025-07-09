@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F416C83F0A
-	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 16:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E828AC83F0A
+	for <u-boot@archiver.kernel.org>; Wed,  9 Jul 2025 16:36:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFEB283479;
-	Wed,  9 Jul 2025 18:33:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7014683479;
+	Wed,  9 Jul 2025 18:36:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EMhU4eBH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S2VQplQO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 163D38349B; Wed,  9 Jul 2025 18:33:42 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id B11218357B; Wed,  9 Jul 2025 18:36:02 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E38268344C
- for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 18:33:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9957B8344C
+ for <u-boot@lists.denx.de>; Wed,  9 Jul 2025 18:36:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3a588da60dfso129061f8f.1
- for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 09:33:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-4067b7d7e52so59584b6e.2
+ for <u-boot@lists.denx.de>; Wed, 09 Jul 2025 09:36:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752078819; x=1752683619; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pG5N+yHXV2okdx/j18q8un/k22qujk+8O+zkRSOHqM0=;
- b=EMhU4eBHc/MEsUPsOkTFtRV+ozH+gI7svtx4KleshDvn8Qdpr0l8MAswIIYF97oPvN
- H+xb6KYx7IR98EzRdziSIq8tq8Amt/79sapjJZ4j8DcOMR6cq8vpbpCDoc8Z/auP8O4p
- X+cfT9OPoW9ISEd27pINgNmsV4LCmNXArIRNtWmFjKZbVSB3iIJMHyUEuXJF0Nw4+xe4
- ZqHJMnMZHITsXmjVOTm79pFIYyhe2IORfaFNENZTKoLXFrCK6I/4US37vOdWOIy6Xde0
- 004XoFWG9joxBcJSgOCXAl4Lz4vmA8dpcVR3wD2lfzHNMmCIbPOhGqe6AlJ6TMXCU2PC
- JdHQ==
+ d=konsulko.com; s=google; t=1752078959; x=1752683759; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9PtR9GFrC9GmduXCnXrURNkKu7Fez7f4sKBTWlNUjYQ=;
+ b=S2VQplQOxBuXHW7dm7/CbgK1ugyroEupWrSqm7xbDaNc+rXz9iWZSKZM6ZwDWzvp08
+ 23Vt965QuY1h2/hth+4HvaSCpVIR/vsYhIoFJYIA8tPngeuQ/KTbGwXV8ZHHzixdsX+/
+ 3pfvtTv44N4jQVpzM3rjJz897YE0BXhXsKd9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752078819; x=1752683619;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pG5N+yHXV2okdx/j18q8un/k22qujk+8O+zkRSOHqM0=;
- b=dvp0rKblHcZUNYHQvNmBnPy6kPG1jpHUHUS/9n9rG4ZUokriHn8Ogp2VZzUAcSE2X+
- dhLhVAx10X0NjBAUICoFeHY5drGHQGe9CYF/vgTjWnSh2+9GblhdnRKx+ja8itmleGtq
- /WWAi6QjdyB52zJqkEHQrqjaoX65PjLflFzQyLdB/Ym/ZzowpeXn1mQKFADYR4FG29rs
- nEyt03PcrT2ShIlppEIAt2SpBbXwxkp+ZB+G9fyycNnvXinCGTvkWZ0n0wjpBxxVsD0H
- Ku3dMluwyXzQect3f38TMDcqHbKlYDCbAGAwPNiaFb3Rosp/9+tH0fpvLh2iteEmx+2L
- R4WA==
-X-Gm-Message-State: AOJu0YxoUH9n/H3hdkK6L4/P/rz/quvR5ybkBRClh8akxVzwkZ4eqi9C
- kWCBJ1OiaogsEZe00wABfkHo3K6oWABp+5M9F+4mdOv73FEXXnVDR6IA0le3GsxWU2Yk2bciSaF
- 9fb/I
-X-Gm-Gg: ASbGncv5M3Ougf0mjUQcvnfZ6Tc54LSDuPVsd7ASD7yCpST8AYZg/CIplMkSO9HugtH
- /rxtkhQKgTGW5po9Lg/BZEAlF0nRWWOBNIsYXllm8RXCpF/dqCbunLaZf2a7TH8/oB5//ehjd60
- 27L5J62iyCT5h9ulSXGSNVcImXE6uiKZA+q80dfN2uQL8cLCclrASKUEf2V8rYi8MTZBVTZr4Fm
- OyN6UOVGPyDAbywAwnRtSxJXfWGRYz2kmD7gmifSgXSLsWwFKQuo830Ex+1KDi2HOU9pM4GK3U3
- 7lcMpkcnLB1dsGZ3I2DUdoddN/rgfePg5hJ8QH2PVFc7e8nVsOhqIigvKESbxTJXsb+NhEkg3LW
- HQ6xo6RA5zd90d6IXfp7/l8ZyyLRvU8PryvU+k+4Y4LwzL+xONw==
-X-Google-Smtp-Source: AGHT+IEHO1nLTvbwljRdrKez07r2im57SChk8SyJbVEbs5Icq5JZsdAhubNSgHTLhYkKVfrfN6GS0Q==
-X-Received: by 2002:a05:6000:21c9:b0:3a8:38b4:1d55 with SMTP id
- ffacd0b85a97d-3b5e78d7d37mr423138f8f.28.1752078818959; 
- Wed, 09 Jul 2025 09:33:38 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:e07:801:7978:74ac:133f:8950?
- ([2a0a:ef40:e07:801:7978:74ac:133f:8950])
+ d=1e100.net; s=20230601; t=1752078959; x=1752683759;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9PtR9GFrC9GmduXCnXrURNkKu7Fez7f4sKBTWlNUjYQ=;
+ b=V3r7Y4ewnMwRyBZlDAR5bQI7coKWX2pATFivng3dj6p6oTsm2BSmqrdGrIHiqnwLbi
+ qF6VIqtm1SI1lWGeG7JMLS668f7S6POOEuNAFulPfReohkxz8tVopWz1DuPXjldusjBU
+ QZoc1oj8YWC4strXM80SV0ITOGQb9ejHjqYiO03eeqYa0cQNo8PsGptux3qcLNHYMD9q
+ vWO9VJqBH8zcn6ySzu+ZKhUvSnDiqeEMn3lGd6IJB0TxJQ6MTWN/K5dNC9r8NzHI1Fa8
+ AlGgheFi7OcW8VJB0VF5QIx55Ul+EBCDgu0M6WMAlDSRjEIoemZV1I/vZoEIjmiMiJi3
+ o1Uw==
+X-Gm-Message-State: AOJu0Yy2Rz2KcZsuC2wP4C5yI5ufZ6p7iDgaIANV4jEaFxty2Mp2DLO7
+ qMkqhJEhEJVDx6uW/sw4k43Sk7bxn5UFkL3kBiZTjgAar4c5L1Vj4JoJwWhspRo7SWHqEDeiRCz
+ rd60KFUA=
+X-Gm-Gg: ASbGncvuof9kIgyoaySvh9iwl57QBkL1yc1yOJCFwSPlk6VCvhONMcJo7AKwigQ9dIt
+ rp0tPuPXChFkKT+9xyS6GPfEBvCfDKsxXDpg7DjSMgaIL1utj8FNm9YhSMd+SlKSEurpgpyvL+9
+ JGvyxVhSSwcM/SvJyqEtwfCclX4jw9DVB5cHDdPOapHdsYyskm26OSwdh3TC25Yg7ZddMiOv7MW
+ JRn7WekcfjFVKkTxjlelrhg9kgAfGDGZLsEF+PtEFP7Ebzva6YlcKUYmLv6kEQPR8EaZsBfUIng
+ GTnsTDFRPgi3tTFRrdbk4Ce63r6I1g2YOiuP5qkBI7gS3eObuEaq+WnJ5DK7Ej5BoeGTJ74wLQY
+ cYYhQpJWklWus9ZXUKiI=
+X-Google-Smtp-Source: AGHT+IEmkL7p3/FO6d3lR/7l2zldW6Ga8/FFoV5T7BWTQ2zFBzBQr6nDlsSwRVK3VIbaZWiTsVTLKA==
+X-Received: by 2002:a05:6808:2215:b0:401:16e:918e with SMTP id
+ 5614622812f47-413abe70c1amr522236b6e.8.1752078959254; 
+ Wed, 09 Jul 2025 09:35:59 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b47030c2e8sm16165225f8f.3.2025.07.09.09.33.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Jul 2025 09:33:38 -0700 (PDT)
-Message-ID: <6e922f7b-27ab-4e41-8f8c-baf20adbd896@linaro.org>
-Date: Wed, 9 Jul 2025 17:33:37 +0100
+ 006d021491bc7-6138e5ab33dsm2068341eaf.28.2025.07.09.09.35.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Jul 2025 09:35:58 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Simon Glass <sjg@chromium.org>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Apurva Nandan <a-nandan@ti.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <jpaulo.silvagoncalves@gmail.com>
+Cc: u-boot@lists.denx.de, 
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
+In-Reply-To: <20250623-am62p-fdt-fixup-trip-points-v1-0-12355eb6a72f@toradex.com>
+References: <20250623-am62p-fdt-fixup-trip-points-v1-0-12355eb6a72f@toradex.com>
+Subject: Re: [PATCH 0/4] Improve Verdin AM62P thermal setup by generalizing
+ ft_board_setup_ex()
+Message-Id: <175207895776.1827628.4168115355047544206.b4-ty@konsulko.com>
+Date: Wed, 09 Jul 2025 10:35:57 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] boot: bootflow: Ensure sel_id is initialised before use
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250630-bootflow_menu_fix-v1-1-5d75ced54484@linaro.org>
- <20250709155046.GA1823165@bill-the-cat>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20250709155046.GA1823165@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,22 +102,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09/07/2025 16:50, Tom Rini wrote:
-> On Mon, Jun 30, 2025 at 02:25:44PM +0100, Andrew Goodbody wrote:
-> 
->> sel_id is only assigned to in the case of EXPOACT_SELECT, anything
->> else will leave sel_id uninitialised. Initialise it on declaration
->> to ensure that it is always valid.
->>
->> This issue was found with Smatch.
->>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>   boot/bootflow_menu.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> Can you please rebase this on current master? Thanks.
+On Mon, 23 Jun 2025 14:39:53 -0300, João Paulo Gonçalves wrote:
 
-The patch is no longer relevant with all the changes. Just drop it.
+> In some use cases, board-specific device tree changes must not be overwritten
+> by system fixups. Although U-Boot provides ft_board_setup_ex() for this
+> purpose, it is currently only used on TI Keystone. This series makes
+> ft_board_setup_ex() a generic option, allowing its use by other architectures
+> and boards.
+> 
+> Additionally, considering that Toradex Verdin-AM62P hardware lifetime
+> guarantees are based on a 105°C junction temperature (while TI AM62Px supports
+> up to 125°C), this series implements necessary changes within TI K3 AM62P and
+> Toradex board code. These changes include exporting common fixup device Tree
+> functions used in TI K3 for board-code access and also fixup for AM62P thermal
+> zones to correctly reflect the number of CPU nodes according to the SoC part
+> number.
+> 
+> [...]
 
-Andrew
+Applied to u-boot/master, thanks!
+
+[1/4] boot: Make ft_board_setup_ex() generic
+      commit: 2b7c6b6f3ca34970be61c5189d263f94f0c94917
+[2/4] arm: mach-k3: Export common fdt fixups for use in board code
+      commit: 9e672e4260144bf43a5b38db48537ecc097d296c
+[3/4] arm: mach-k3: am62p: fixup thermal cooling device by cpu number
+      commit: 7f4baa866dd510fe123290526dc1c7387dd48255
+[4/4] board: toradex: verdin-am62p: Add fixup for critical trip points
+      commit: a03f4a632bf7c2337586394e5e7db6b368cfb37f
+-- 
+Tom
+
+
