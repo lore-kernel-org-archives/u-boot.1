@@ -4,104 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B43C83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 15:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 088A1C83F1B
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 15:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A1FF83666;
-	Thu, 10 Jul 2025 17:02:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 637B583666;
+	Thu, 10 Jul 2025 17:08:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mf0MQa5U";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="leUTJ6nA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B321283666; Thu, 10 Jul 2025 17:02:03 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 04D128367F; Thu, 10 Jul 2025 17:08:20 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BC2B8363C
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 17:02:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 957D48363C
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 17:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-40af40aee93so690207b6e.0
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 08:02:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-55511c3e203so998736e87.3
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 08:08:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752159720; x=1752764520; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+u2Y9L2pSEc+Z0c5eNJplkIiJZFOBaEExPZRyq9Ac/s=;
- b=Mf0MQa5U6qszA68q/JExTHN+U5vKVQVDeoyf8tBcCC6/tXYxRkg7BBnDkK7Wv3Ufhc
- BhSx73tcpnL418u7yiUURC8e/TMfRe5PoHOCeydMpBUIdVrHvzNV8G8osL+eW4CFqXL8
- gEhc8X6LijkiOFqCeUjXCdh08L1t3MG5yNsYg=
+ d=linaro.org; s=google; t=1752160097; x=1752764897; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=XJvwfO1fxpPpkOHUd0pox0sy564ufCdjguskFlVUsmk=;
+ b=leUTJ6nAH5jmzvc1cH9W/ZW4vmRj1t5UNppXUZNYE6FJ725KPA2k4eLPf8rc4TuHOs
+ 6zfvVDyqMQ+Ggy5KjW3yBOWB4gh7fAsHfrnPSYyErIJ+3Jm8ZB9cm3QKu1OrxvM3jjY0
+ EDUBPaQYGkOq22BFe4cXfI0vOtUljv2qUBpkLdJqafnl0UnOy8ajpOHZV6e1veeL40Lt
+ meGV3meFYXBw63YKQ/SkC5ZmYXaNVPSn5XZGysVB7jm14g5ejegylaGZeMaKCHbhOwIh
+ 3caS7dJVFGykG/uL+9MRP9z1RN4+HNHzpPHUWzWS1fSYC8sxG6XN77ujcmMvm0EgB9SK
+ gDOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752159720; x=1752764520;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+u2Y9L2pSEc+Z0c5eNJplkIiJZFOBaEExPZRyq9Ac/s=;
- b=Bn51h2OtZsphT+csrsZMuz8N8Im/6cM7sw8HyGfI7Z+33I+rLDjPKQWtSez0uf5TXF
- XDcB+biAlLQLhf74L7UBGBT9SeJeVJZgG2Azytu04j46xhzdR3ImUxCSQmajHBvid68A
- KopyzmDKzSJ4xqWp4e1q3yWlZm4UJPrO3nJmnWZ2+lXh2NNCFpJqR/obUxo+P8u2Gg5j
- bcvBLhkc8B+LmsAhuUh7fIzMex/xmFsmijz3g471OLl/ybe9O1oleD4Ny65gvEt3xKp1
- dnrtsIRlqYaLJ6O/FR8zcN4P/mRy+Xzv3nLV+DK6vtmQ4jHB74SwoeY2LdDBYH2si0FR
- dMpQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZ87m4l8ewcvoVk5wMuVYXRBnBN0+SMSQ4F23Tc1awsB+FmgLcHrEE+7TFdh2nVf0eJaZ0XA8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1KqmqpmrSoh7Pap2zlR1dTVMhgnRJr60yvHZBBvGoC92Ms73L
- gf+ovschwqE1Jf+500bTBlkPdyc0K8l3PmrtqgYwJVmnZir9XSUn4wq1B+SHgMonhAU=
-X-Gm-Gg: ASbGnctQyaSz51XS80MzXjz+TTtOcDPhwVCfSFCLbKHXKLxfQ1+MYg3S9ZUJqZnJbsv
- P7ehqG2XQdqz/sOQjyagkKSbj7jiBNM//Zk/qq5ubWq8dhGflS7YOi+xZU9l515pj587TL+YdI8
- DVhd129UvXS2+DGtdI5gMvdVyk76uoA1V+DdZmOreSX9A6seAV+ukyI/sX4c5jbseox4KxcfgyR
- L+q36KhZWW7r/BjIEkwTeFSDiumfjm+mWvy3F+wziXTNJUQmgrG0DwZ86d8dug+cGELFNPqrkyF
- 0Au2R3qkO5TdQrZefTbmMQaj0bAnHwMHJDUbZoUyErt9gwuWtqmm2DLsLDRKmC4z+SLIpQJIDYk
- IFLpIofFiG2Zv0b0OkFZeXbXZYr4VbpQ=
-X-Google-Smtp-Source: AGHT+IESRNlkFcLlR7rGa6o6GnS3xIVjimtrjuPjjI4oKivAJel1Mu4zZSSVaBWvJxcUa7iHK/EWeg==
-X-Received: by 2002:a05:6808:23c1:b0:406:697f:a62f with SMTP id
- 5614622812f47-412bacad619mr4470021b6e.10.1752159718675; 
- Thu, 10 Jul 2025 08:01:58 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4141cb795c4sm229049b6e.47.2025.07.10.08.01.56
+ d=1e100.net; s=20230601; t=1752160097; x=1752764897;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:message-id:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XJvwfO1fxpPpkOHUd0pox0sy564ufCdjguskFlVUsmk=;
+ b=CWBl+juCgp7RQ+Pa6nprmWPiM7UiuDrXw07DvL8QkXCBCRRDEibYLaZlzrnee4ehfu
+ VHNLPnykF16eVg2ltNoSyG3LPC1k0QoEWxoEFtDCUGnGvvnbAmOGR32a5DwZ2LPY3jz6
+ Su3J62NgfYK/7T8zDgfyPN3i/s9GHPFn1npwKwU3OpcxnEkwf5NSMFG4FNG7eNJYBDVO
+ 6aT5K8ZUHEvBzLFVyaVQx3Qo2sqMFW7RUq7FK4+HQtxckblZIqyRi0OfJJOunu/Wj+Or
+ 7agLOfzo3z9v/0Nry/ChsbhRe5++FdbbXernGtXfpSJcg9mQJmYKKtnAEh1i0dimKXVk
+ aHyw==
+X-Gm-Message-State: AOJu0YwVUanI/wiR78UTArzk7AyUGM6M5B+JCfZ0M5JBcE/QzV/1/DwE
+ 1whUirkRnW/VJqIHw+qqPznOOQv9lHr1K0KvEMI4XtnUie33hezmz8lr/CcdmzeOhYes/SXQfS5
+ e1Fpd
+X-Gm-Gg: ASbGncvMFlPChC+b8s94P3dgbYcrElhNj4r72OzBUQBjtGNybNkkHriAy4BD2DPjvIY
+ iOoI4mqxzV2i4azyZC5ae5DLtuqkIs6HXbO3YyQeDyq8S+pGDOpBNhfMTdL6yXtK1ZBjXU/VO6d
+ e3mdWWoaFzcDdRABIQ7mz+IWtExLVmjx28oSev5Zdfbm3q7kLM9zn+kj5NcI6Dl1/0EuwZf0Usd
+ pz80c95/sIeQfUWEiXnEdkK4oeY9oJXQc9ckm4nl96lYmHrt0TAxicftnha5ug+Ow1t84Ves4Ek
+ 30VfgWSa03WE9L98z39U5ALlPn6Te8wrIvvXqaSd8HX1O7YyzrYFdAMLIDH4zbwOsvhz4yal/Aq
+ LWoDqvVjLRVq0JJwCDgk=
+X-Google-Smtp-Source: AGHT+IGqjAuYpVVPkexWXJoXiNutmagAV/b0rQl5/PU0JzMEoLFVZB9+GhiOpOA70lX1Gh0aO1gJew==
+X-Received: by 2002:a05:6512:b8a:b0:553:d8ca:4fcb with SMTP id
+ 2adb3069b0e04-5592e34ff8fmr995542e87.21.1752160096525; 
+ Thu, 10 Jul 2025 08:08:16 -0700 (PDT)
+Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5593c7e9420sm398166e87.58.2025.07.10.08.08.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Jul 2025 08:01:58 -0700 (PDT)
-Date: Thu, 10 Jul 2025 09:01:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, sughosh.ganu@linaro.org,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Marek Vasut <marex@denx.de>,
- Olaf Mandel <o.mandel@menlosystems.com>,
- Minkyu Kang <mk7.kang@samsung.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
- Yannic Moog <y.moog@phytec.de>, Wadim Egorov <w.egorov@phytec.de>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Prasad Kummari <prasad.kummari@amd.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/2] kbuild: Bump the build system to 5.1
-Message-ID: <20250710150154.GC6424@bill-the-cat>
-References: <20250627185723.342553-1-ilias.apalodimas@linaro.org>
- <20250627185723.342553-2-ilias.apalodimas@linaro.org>
- <CAOMZO5DP=8Jebnm32mPQ6s7rcTX62dgKqyzyrdco9dHNewyWKQ@mail.gmail.com>
- <CAC_iWj+rJgUGkpEV-vYRei9R-UPj3J_2ix++K3P-ZXK8C7Vneg@mail.gmail.com>
- <CAOMZO5CDkeD633fG-pELUF+QyzW3ftP_eQ3LmrjUTuaidY1c1g@mail.gmail.com>
- <8df9cfba-662d-416e-ac21-5ae6d4448708@amd.com>
+ Thu, 10 Jul 2025 08:08:16 -0700 (PDT)
+Date: Thu, 10 Jul 2025 18:08:14 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Adriano Cordova <adrianox@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH] scripts/Makefile.lib: fix *_efi.so dependency to
+ PLATFORM_LIBGCC
+Message-ID: <aG_XXm3Cvm6DJPQy@nuoska>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZykA8tdFVHgDyajx"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <8df9cfba-662d-416e-ac21-5ae6d4448708@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20250710145903.GB6424@bill-the-cat>
+ <20250710144445.335480-1-mikko.rapeli@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,53 +101,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi, moving patch review from oe-core list to u-boot:
 
---ZykA8tdFVHgDyajx
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jul 10, 2025 at 08:59:03AM -0600, Tom Rini wrote:
+<snip>
+> I cleared you patch (and moderation flag) but I don't think the above
+> works in all cases since PLATFORM_LIBGCC can have a number of values
+> only one of which is that file.
 
-On Thu, Jul 10, 2025 at 04:58:00PM +0200, Michal Simek wrote:
-> Hi,
+Right. Should I make the dependency conditional to
+CONFIG_USE_PRIVATE_LIBGCC like it's set in Makefile?
+
+I don't see another variable for lib.a to use in
+scripts/Makefile.lib
+
+Cheers,
+
+-Mikko
+
+On Thu, Jul 10, 2025 at 05:44:45PM +0300, Mikko Rapeli wrote:
+> When PLATFORM_LIBGCC was added to linker command it was not
+> added to the dependency of the .so rule. Thus a build can try
+> to link *_efi.so files before PLATFORM_LIBGCC lib.a is available.
+> This was seen in yocto autobuilder builds with u-boot 2025.07
+> update, see https://lists.openembedded.org/g/openembedded-core/message/22=
+0004
 >=20
-> On 7/10/25 16:34, Fabio Estevam wrote:
-> > Hi Ilias,
-> >=20
-> > On Thu, Jul 10, 2025 at 11:28=E2=80=AFAM Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> >=20
-> > > Thanks I'll try to reproduce it later today and let you know. Do you
-> > > know if we build this defonconfig in the CI?
-> >=20
-> > Yes, mx6sabresd_defconfig is built in CI, but no CI error was seen.
+> https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/2914600/raw_inl=
+ine
 >=20
-> I have seen this with other targets too. Toolchain from binman has no iss=
-ue
-> with it that's why I expect it has something to with different toolchains
-> builds.
+> |    rm -f lib/efi_loader/built-in.o; arm-poky-linux-gnueabi-ar cDPrsT li=
+b/efi_loader/built-in.o lib/efi_loader/efi_bootmgr.o lib/efi_loader/efi_boo=
+tbin.o lib/efi_loader/efi_boottime.o lib/efi_loader/efi_helper.o lib/efi_lo=
+ader/efi_console.o lib/efi_loader/efi_device_path.o lib/efi_loader/efi_devi=
+ce_path_to_text.o lib/efi_loader/efi_device_path_utilities.o lib/efi_loader=
+/efi_dt_fixup.o lib/efi_loader/efi_fdt.o lib/efi_loader/efi_file.o lib/efi_=
+loader/efi_hii.o lib/efi_loader/efi_hii_config.o lib/efi_loader/efi_image_l=
+oader.o lib/efi_loader/efi_load_options.o lib/efi_loader/efi_memory.o lib/e=
+fi_loader/efi_root_node.o lib/efi_loader/efi_runtime.o lib/efi_loader/efi_s=
+etup.o lib/efi_loader/efi_string.o lib/efi_loader/efi_unicode_collation.o l=
+ib/efi_loader/efi_var_common.o lib/efi_loader/efi_var_mem.o lib/efi_loader/=
+efi_variable.o lib/efi_loader/efi_var_file.o lib/efi_loader/efi_watchdog.o =
+lib/efi_loader/efi_disk.o lib/efi_loader/efi_net.o lib/efi_loader/efi_smbio=
+s.o lib/efi_loader/efi_load_initrd.o lib/efi_loader/efi_conformance.o
+> |   arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -zn=
+orelro --no-warn-rwx-segments -L /srv/pokybuild/yocto-worker/oe-selftest-ar=
+mhost/build/build-st-3119200/tmp/work/beaglebone_yocto-poky-linux-gnueabi/u=
+-boot/2025.07/sources/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -share=
+d -Bsymbolic -s lib/efi_loader/helloworld.o lib/efi_loader/efi_crt0.o lib/e=
+fi_loader/efi_reloc.o lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.a =
+-o lib/efi_loader/helloworld_efi.so
+> | arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such =
+file or directory
+> | make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi.s=
+o] Error 1
+>=20
+> The issue is hard to reproduce but this change can artificially trigger i=
+t:
+>=20
+>   --- a/scripts/Makefile.build
+>   +++ b/scripts/Makefile.build
+> @@ -353,7 +353,7 @@ $(modorder-target): $(subdir-ym) FORCE
+>  #
+>  ifdef lib-target
+>  quiet_cmd_link_l_target =3D AR      $@
+> -cmd_link_l_target =3D rm -f $@; $(AR) cDPrsT$(KBUILD_ARFLAGS) $@ $(lib-y)
+> +cmd_link_l_target =3D rm -f $@ && echo "HACK, delaying build!" && sleep =
+60 && $(AR) cDPrsT$(KBUILD_ARFLAGS) $@ $(lib-y)
+>=20
+>  $(lib-target): $(lib-y) FORCE
+>         $(call if_changed,link_l_target)
+>=20
+> Then run a rebuild with:
+>=20
+> $  rm -f $( find build/ -name lib.a -or -name helloworld_efi.so ) && \
+>    make
+> ...
+>   arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -znor=
+elro --no-warn-rwx-segments -L /home/mcfrisk/src/base/repo/poky/build_bea
+> glebone/tmp/work/beaglebone_yocto-poky-linux-gnueabi/u-boot/2025.07/sourc=
+es/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -shared -Bsymbolic -s lib=
+/efi_loader/helloworld.o lib/efi_loader/efi_crt0.o lib/efi_loader/efi_reloc=
+=2Eo lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.a -o lib/efi_loader=
+/helloworld_efi.so
+> arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such fi=
+le or directory
+> make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi.so]=
+ Error 1
+>=20
+> Fixes: 43d43241d1c9 ("scripts/Makefile.lib: add PLATFORM_LIBGCC to efi li=
+nking")
+>=20
+> Cc: Adriano Cordova <adrianox@gmail.com>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+> ---
+>  scripts/Makefile.lib | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index e89a4a51b74d..54e17b2f8089 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -508,7 +508,7 @@ $(obj)/efi_reloc.o: $(srctree)/arch/$(ARCH)/lib/$(EFI=
+_RELOC:.o=3D.c) $(recordmcoun
+>  	$(call cmd,force_checksrc)
+>  	$(call if_changed_rule,cc_o_c)
+> =20
+> -$(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/=
+efi_freestanding.o
+> +$(obj)/%_efi.so: $(PLATFORM_LIBGCC) $(obj)/%.o $(obj)/efi_crt0.o $(obj)/=
+efi_reloc.o $(obj)/efi_freestanding.o
+>  	$(call cmd,efi_ld)
+> =20
+>  targets +=3D $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestandin=
+g.o
+> --=20
+> 2.43.0
+>=20
 
-What host OS are you using, and are you using separate object
-directories? This feels like a "make" issue at first glance.
-
---=20
-Tom
-
---ZykA8tdFVHgDyajx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhv1dsACgkQFHw5/5Y0
-tyxexwv7BsxyjwVaHIWO8RwFISPeQ8fEBGuMdFhoizNF/hInxOh8yhf2E0tJB05a
-smQOgnH+iIAX46OASJp56gKJ67YVayWUy/8PRlUOZn9B1uod9yfSh+KAKXlUQH0F
-0OfWG63JhhgGpyuZJAd02vEE8HrIh4Bqixth/rNZxRjkBTl5U+ILy0Nt/Uz0CeEu
-acjVyEDP8w6n9QiW65A+NvMRnYX31oZWbedOdTKXLRoQ19ftLMf8Ru6z+WB8b3HG
-9U2iwzJNWJigJhcxRxPRWZOKH/aLCwxp7HQ6Q25/A9gw6n4M/kZb856qTsjKF6ed
-weZxjAwCMPYi8Nb8SJx7BIhMTZCxAZA7hmsXH8lsyu9sUjmjoM4Wibkrvli3BkEQ
-PhE3JZi8rt8J9JSDDJA1UYqzPXj59my46rnDCmwSPlSOtoZgsK6xOxwUYfK5h5JY
-j8GQD/y0KvAQfuyXE9HPiRbM2XSxQ0M1zaP22VoSCTFpV7r0xSA5oEoZ/CfBWjvL
-Edyuxi85
-=lqwY
------END PGP SIGNATURE-----
-
---ZykA8tdFVHgDyajx--
