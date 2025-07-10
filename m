@@ -4,168 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06B09C83F09
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 05:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2703CC83F09
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 07:19:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 133EC83689;
-	Thu, 10 Jul 2025 07:53:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 76F0D83666;
+	Thu, 10 Jul 2025 09:19:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="BnKq/GWL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DN40Mv8I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BBA483689; Thu, 10 Jul 2025 07:53:29 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2071d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::71d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 975998368F; Thu, 10 Jul 2025 09:19:16 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA78583653
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 07:53:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ONXTIXGpl2QkWphDev8t+JHiCV1QAy+grJEenQoE1RSMQmiEb16cnW2UCsBdNvY6CgKp1G5lTu8BveGlb+tIUm5/y31yX+hNtgx/biDvKQaq79ti+u1d5zTcoQgTmO4UAOwg71QlhOatiAhjIkvGiS5tsRbbKjoETJcf1OOW9zBAOrf6ckUZYWJNoieZIHJlyO0xS0LLdoaynUTFnkGSbsYu3p1VOz2iCNL6S7EOkVruEmKzMtANr5aRs5O0Hkmjy0ozcYO/2FH54JcTcSIr8CA7Kpt9mzxvF6UOsx/Q2sjxANfC+6XOfN98pN4UUct/Sl/BJlKqkZ6iyI6xLruo5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nwER1R0Wc8Ccdn/XKYATSMsVEM4rqP3SvNXej3hZGJk=;
- b=pFgyVcrOj2wFBV7VwGDjZJrQVO47pUBwcIDln4rVq0BR1/5WdQkwx0vJsggtphkxNnJDreplre9IAOjtDE8/7Muw4YO59JXmcYNBgKOrJeD4B1yggDflEaHpnhPIuoYTlaadXU5ppMfuGHtrfkqxMam/CxUPaRT9mf0tjSlf5DhXy2Q2ZNljaRjsbhWV5Tr500twQdfjkNiLBG61a7fajPDen0p7QbjoXcLbEDbYWf02KnoucqfVOtE14OArSdWjgsxT69kEIfQaUVLCX6lUDGrWwtbCoEqr/qTkcfs5upSQToPP7bb0iZSuS/Sm18rz3sgvcF2ualSYAazcWLZD5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
- dkim=pass header.d=phytec.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nwER1R0Wc8Ccdn/XKYATSMsVEM4rqP3SvNXej3hZGJk=;
- b=BnKq/GWLfXbCsso7YL7Z+6k1PKJKo0WV5oSbn4ZKqavh7guXFHLE8Gv4GFKWBaJowHI5HSptUjyM7S3lN8wC0IXA62DLPaPsAFMIjZFqsxNEBrBv14QxRv5ZwApXLf2Kx7ztfBCVGSLg0a54OYffqB+zvE3wGPQT2K2KBeJnRl7vevGck+rxopeNnO2HGriq0wCnl71JN1lYTAFQUGAi0lluLZ29HmqHG5c9GZiXHpRUkhjKf+eJ1UIJFiJsyyrD9lSAB67t18J5ksBf4LDUZbEVCFoMWVp/Dzbj/Rdfq8sbd3/fG9QeyJfgJVCfd/tGiqNGQBJ3KpYzFPMUR2vQNg==
-Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:22f::14)
- by VI6PPFB13B98217.EURP195.PROD.OUTLOOK.COM (2603:10a6:808:1::11b)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.23; Thu, 10 Jul
- 2025 05:53:22 +0000
-Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
- ([fe80::4131:8d3c:f0c6:c414]) by VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
- ([fe80::4131:8d3c:f0c6:c414%5]) with mapi id 15.20.8901.024; Thu, 10 Jul 2025
- 05:53:22 +0000
-From: Yannic Moog <Y.Moog@phytec.de>
-To: Tim Harvey <tharvey@gateworks.com>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 3/6] binman: rework dropping absent entries from
- packaged image
-Thread-Topic: [PATCH v3 3/6] binman: rework dropping absent entries from
- packaged image
-Thread-Index: AQHb3FsoJtUnJ92Q7kyyCP54skQAqrQqOzoAgADJ8YA=
-Date: Thu, 10 Jul 2025 05:53:22 +0000
-Message-ID: <ccf0d5863d8505336a43524d7b871338db16fc3d.camel@phytec.de>
-References: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
- <20250613-binman_faked_optional-v3-3-1e23dd7c41a2@phytec.de>
- <CAJ+vNU2o3jtSMaUTd_1xms7QeAdJwTyy8Q+UiKQC56rCwk2G6g@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2o3jtSMaUTd_1xms7QeAdJwTyy8Q+UiKQC56rCwk2G6g@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VI2P195MB2491:EE_|VI6PPFB13B98217:EE_
-x-ms-office365-filtering-correlation-id: ac7cfe40-4c1b-40f0-9d07-08ddbf76141c
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?NkF0V1M0U1JCbFVjeDlNQnNzY0o1c0F0SnRSd2krcFhPQzNiQ0I3LzI0ZUs5?=
- =?utf-8?B?aTQrT3BFOWxEbnZlOEc1THRYQjNkM2ZRdFFEKzd1UnpBdGE0U2NLb0Y5eUJE?=
- =?utf-8?B?d1FsMTlpNlNNL3BPSUNsK1V0YXEyRDhuV2ZzdmE2OWNMejVYbVZDZWVMbDNY?=
- =?utf-8?B?c3JuOHY5T2JSR1JLZEc4UnRZWHo0c1d1RktuVXJReElHT3BnOGdhT29EcldV?=
- =?utf-8?B?QUp1SGNtbXpZT0VhQ0Y1QlV5MzF2dytFa1FjeElqYldIcW5CZ0laanNZczlU?=
- =?utf-8?B?a0J4V0NvQnlyN3MwZ2lZdVZiTVBPTENvK3VjeWUzVUpWS3ppWk9wc1dzdUhU?=
- =?utf-8?B?OVBtN20wVWxvNGZzbUt0THNDTnBaR3h4azhNOUs3ancwTGh2eDNvYk1vd1BW?=
- =?utf-8?B?bTFrem51Q1NKM0szd0RpQWM1Yy8vR1YzRkloYVdhWFhYd0VKcFVqZEpqRlZM?=
- =?utf-8?B?Ym9oU3o4VVBpMXdRQU1rS2Nnd1NJbysrZXVwS0tJZ0F2dlkrbkNZb29iTUVS?=
- =?utf-8?B?aW5aQVM1WFV5dGF0N1V2TkYvTDhLY1RTVFJZT1QzbGd6Y1EwVCsybVZwTjBm?=
- =?utf-8?B?RUF6Rk8yeFkzQXA3YXFlU1lTTzRjNmlKYXcrUy9IaElVV2UxWnc2U1dyekVF?=
- =?utf-8?B?V0R4emVsaWVnY3FzZk54L1U5ZVJWaGw5cGNhRjNHdWh2Qi9KS1pkbnJXNnlK?=
- =?utf-8?B?SVJ1eHdXVWJPT3h2NHV6MGYrNDBIWFBHajZMOXF2MStwUXd3L2syRWw2Qllm?=
- =?utf-8?B?QmxTY1gwNU5sdHFlSWZYWUFXUUc4c2RINncxY1ZjRmp3U3dUejZsK0cwOTBL?=
- =?utf-8?B?MUlaN3ZZUTk5dy92OFg4WERlUElCWlEvM0pDN1pVaUpxVlhORFE3Q0NCS0Rp?=
- =?utf-8?B?MFVxNlcxc1dydFJTTmFkNnJQSmMvTXhuZ3F3dS9Dak43d2s2aVJBVzZwM3Zu?=
- =?utf-8?B?NTBBNDJWU1F4WEgrd2lZdENZMGo0NVIxR3BBczRVQ01tWmsvMHFocVVTR3JI?=
- =?utf-8?B?TzVYNnpRSnE2ZzhZaHMvczZXOCtTUXJNa2Y4bWlMUGVabnZyOWx2MjJNYUJ3?=
- =?utf-8?B?RFZVVDkrWEFNOGU2M3ZnMFN0dTllcVl6NDM0bmJFMnFIL0FyYUduQTc3eVBF?=
- =?utf-8?B?VVYwVko2NlBRZkNONlQ1djZhZ3p3RU5DUmgrQ2JwdTVrMWNSd1VXcXJYOGk2?=
- =?utf-8?B?OEIxc3hpUmY1OVRzeHIvVGtMQUttUXp0VFdKdWcvQWJ6ejhwMk15WFhoSzdE?=
- =?utf-8?B?RjBhK2xHRHlWRnlPT294Vnc5YVpzWTkyYUYzWXhtQmRaNjdGd1ZTY09vTTI0?=
- =?utf-8?B?SHFMMGZPaHY5eHVDdncyU1JTcjJiNEREMU9RT3JLa0VKZ0Q1c3ZQRnlXUGZI?=
- =?utf-8?B?UnNyOWZ3dVNOaEsxTTJwWmk4dUQ0V0xTMDNScHlBQVl3ZEVZc0FEaC85ODhU?=
- =?utf-8?B?SW44Z0IxOERGdGZ1SWR3dGtuWW9OODYra1ZvdXB6amJqY0dpdnluS3NCVUtG?=
- =?utf-8?B?MVdOUTJ5dTZvMzZ5a2dnZUl4SkpmVy9xeDQ3OFNhMUFOcGFPcTlqRjBpSEpI?=
- =?utf-8?B?ZXNPMTdNRngzM0l4ZnRTRHpyRG1kcmlwdTJCY01wU3JMZUxsVkwvU2NaVEtk?=
- =?utf-8?B?QXZ2SEVyc1VTWGpqelR2RDhxRzFUYUg0NHBxdzU4U09GTndXSXRhVjhHNmZu?=
- =?utf-8?B?TFFvL1BQdUJyVjRrK2RCQWc3UWRLeDJlZXRyWmlheUN0YzlUVFBmZXA3ZEhD?=
- =?utf-8?B?bGMvajVXWnB1OXpKczJ6ZHp6ZDVKdE8xL2p1QVVER204aFZNeUx0TjEzVTBE?=
- =?utf-8?B?RkRGUTVhRWFFVWdSNHk4MUwrR0dBbXIzR2VTM0NsNDZCSGRaYjFrTXpWTnRQ?=
- =?utf-8?B?TDZ6TEJieFFwS3BkM3JxQ2diR2dYRG9TaUEySTJ1N0c5L2hBSXd6ZGpvTVRY?=
- =?utf-8?B?SWZ4OUFRMUgwZnF2Y0N5OW1KTERJUzB3N1ZOUmpIdHB1TzY1UEk2TitjTFJw?=
- =?utf-8?B?SmUweldVeTZ3PT0=?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI2P195MB2491.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700018); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?bFp4dnNBME8vWXNiVGNkOXV0Q1dJMCtOdTZkZzZHZStGdit5YUYyOG1vZzMx?=
- =?utf-8?B?TXFiQ3pVdGdtcmovREdmMXYwRzNsNk42OEowN0gwNE5JQUliaUUrdWw4d2lu?=
- =?utf-8?B?a1AwKzFQaENML1dCYVoxK09SVDk2RkRoVklrNEs3N2hKK0RLVmR6a0p4VFNj?=
- =?utf-8?B?ejZXNFRyVjJIR2FkNVhiYjRHMGJRdUJMZ0dxcU1LWVF2MkNKN1ZLTEJ4azZI?=
- =?utf-8?B?N3FmM2xiYUJvenFyVm9wYnkrRUsvNE1NOHdtQmF3a2wzZmQ3aHlvb3J3bUFo?=
- =?utf-8?B?T2lrVnp1UDdaOEJOVS91eDBXWU5QRjFFSzdZcE1FbENhVS9nRWNwN2p1Qmxz?=
- =?utf-8?B?blJlb3J6MkhaQkhzV0s1WXpCZ0t5TEdBQXBqYmlma0kwSDAva2h5TkhFVGU2?=
- =?utf-8?B?eCtNa2RTeWhIVTRoY2tuTEprUXY3bmFHeThLZXFMOWpsM1RwaUVuN2EvOHls?=
- =?utf-8?B?YWZUTkhkcHpKR21oRkN4MDBIWDdpOXFwbURyTk9JT3ZJYmtEQnJqd1VjQ2Fm?=
- =?utf-8?B?eEFXcm9MdzFERktmVE4zOHBlQlhuOUdOYStyTWsvR0d6RlJwRThHVzdkTDhB?=
- =?utf-8?B?UGFDbHBMejExZlllaE96YmdaZmdSR2REU1RPUVdOSVArc0tLNHRKNGpCR3pH?=
- =?utf-8?B?RHN2RzlpQ3lXV0tlaC9iVFFOZWhsTnQ4Q2ZESVdOQ29LazNpcGJJQlNEeERn?=
- =?utf-8?B?RmJoZU9JdDBKeEtDZWdvcHp0djFWdFB2UXcxNCtELytjZkVtYVM0aXFtT3V1?=
- =?utf-8?B?UWQwL29UazA2aGZyNmNCSFdEeTdDV2c3NndVenhRS2RYRG1QVDdXRFhJa0dx?=
- =?utf-8?B?RnU4VHZNM1RCMktPakRuNFdOT3BJNU1GZ3ZieEpXWVowVkx5cENRT1pNMUoy?=
- =?utf-8?B?UUNEOTBwSXlPU0xVRGEyVFgzMDVIK01YcmRKblFMTDV0cGVpbDZ2ai9XYUln?=
- =?utf-8?B?bjA2bW1DNlpUSklqYS9BSk1pTmVBWmp1RFgvdFZkbzRqanN3dCtHeHo0NHBv?=
- =?utf-8?B?aVVTUmhtWmlEWUlsdDdwOXhCaVV0UjdDYVV1Sk1tK05oNGRwM1hTVGZhSFE5?=
- =?utf-8?B?dGlMNlVJamRxeWl1aTZlS05RUkdvNDRTNVFPb2dNa0FoUDlRSzBYNFFhMG1H?=
- =?utf-8?B?bVkxSW9YdUNVVzQrdzQ3a1g5WDllSTZxZThORHgxWWVNbERvWGtyZEFPcXhh?=
- =?utf-8?B?V2RGRHFoOURwb1VoM05CUDI0c2hOUlhuTDFYTGUyTkhMQURTbzVxelZxUjJu?=
- =?utf-8?B?Rnhiek1TWXQrVlNJTGo0MXdZbGFpMWR1TWVobzRjWE5tR1NqSmMzR1ducDYv?=
- =?utf-8?B?UDM2SU93T1NPSDd2ZFZtT2Z0Y1pTVGw2TzJ1UjJ3QVNncytULzJ4M3lobmxs?=
- =?utf-8?B?YS9PY2UrZWY4SXdhRjRubXF5eEk0TjZQRnpyT0JodDlvNFhKTXBpd05SRTU0?=
- =?utf-8?B?UVB6SXhwRmFlSjJEVUw3c0tDVG5aNWt6bTEydFQzekU3cS93REI2UzVRQVhs?=
- =?utf-8?B?RnAreVduVFpMQ0JWMGlHalIxTUplWkEyODJFNzBJSVVHSGJYYnUzTk5OaU5o?=
- =?utf-8?B?bnBkN1hhZmozZWk1cFp4STh5Q2N0d3FFY3pjVTB1eFcrVHI5WkNDMks3ZnpR?=
- =?utf-8?B?bHZjRGcySHJFeHpFdGVCRGF1eEp5WlBpVkMzT3Q1SXRFK1BnOWVaaE1JT3FK?=
- =?utf-8?B?UFRoSjBuaDk3eTAvSElQbnUwcGZKbElkYXBTNFBlbWkzSzhmdUkyTkZuejZU?=
- =?utf-8?B?Z2pYNjBkUWJQUGVJR1AyYjJsZlE5SUloUE9PbSs1VUxyTjkrR2hwaVNBRkMr?=
- =?utf-8?B?WXJwMllPNlB1cTRPeC94ZVd0RExqTWhpQ0RGNHB0c2dIc05BeC9CMlZOMll1?=
- =?utf-8?B?cWlmbm42aGlNTWJBblpvNjNaVDlMVWVvZW1OMTBlKy9FcFVrMXZOejRiSDBV?=
- =?utf-8?B?dzhzUmIzb2xqcEJ3M25Rc0J6ZHYyMktvTG5wRGRoMGpXUnl3U0FnZEJkaEUw?=
- =?utf-8?B?R3JiUjU0NEZvQU05QUlnQ2xyV3NucWlHS09aSXcwYUZQZkZpNFo4SS9BMTJs?=
- =?utf-8?B?cDhhK1dLaWlFUGVsRUo2enMxZkpJTEdUWGZGcWpVSzFUbWNHazUxWDRoR3Z1?=
- =?utf-8?Q?5Dt0=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <E3A1584B9BB8064CBAE3E21FAB2852F6@EURP195.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ by phobos.denx.de (Postfix) with ESMTPS id 3A49083653
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 09:19:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ae3cd8fdd77so126603266b.1
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 00:19:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752131953; x=1752736753; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=K8ssSKbdoIFvHXxoKVWQ/JcKaPQ95QEpLjAYVLLNKrA=;
+ b=DN40Mv8IbjRgMAvPcJ+j8lBb+ddEN4IpkCdtD3Y2GFGfOMTa/rJBYql5rGk6N/fQ2E
+ DE5JClhXuCF66rFFnPGUN6JubXorluPo9PKPD5bort/f3RN3hkCxVCF9YC6ufnWt9Lml
+ nEY3eoGjy1vXxw3KdQ151hXUWLsvfpDJtLT3kQA5FRYnDUqXLl57W0+SB1WzQ1QwWV48
+ kwHxsh2JSxdr70POaQW86lvR72Lswfc0bnrvLckxRYv8a47wUwqjK02rLmUF0/KpH6bh
+ xMs9y6UVXg47Feoayd0ZAOpdZ+nsn/uW3JuIvWGQ5IUMWp2gS/rIMRU+HLzRFguh+mmx
+ IhDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752131953; x=1752736753;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=K8ssSKbdoIFvHXxoKVWQ/JcKaPQ95QEpLjAYVLLNKrA=;
+ b=RhDqRSCd0K76XgIHT5dEwkFtapEz2bflmi3/4kEnycah2qMOs5MDOXckEec+d0gdXY
+ RdC5E21TM0MDA7tSVLp/NE5grO7cKNH4zoQkwjVpfOuIh10ELmGXrpPHT91wc95u/Ks3
+ O55jm6onXms3ySYQB8UydXAZvgIUWHeZelW83d308p6Z+Nk0rjUZhKARkp25gXm/VHQF
+ 33mgubLqMfosxthmc92Q3R9406dXu9f3n3c22inNrJbxcS5K4HHQCv17N0Vt6/ygyJW0
+ IE5dt8gV59KaJ621T6Uj8ZhGrEFQm7zHv40HfFIs8keOMd00iY5Se2p6JxYWmwjAn29e
+ wf8A==
+X-Gm-Message-State: AOJu0YyUj+MLNAoQHA3Ecev3lJM0DwvoxK1ouALzScac0mWjRavrEnAj
+ qj7Fql+2xVx59hrV6nqdxqSiTCQa2nN/mOqCUPOB7EYYjzH/ZseTRKFZuVKpk/SDfqdRyhZ0pfE
+ svKcz5/fYsw==
+X-Gm-Gg: ASbGncvvPLhyU2ZJPNwvPCzlt3CIIsQBr7kfJWRN3yHfy3Jxi+U2KZeQ6E4CB1RVGZd
+ Qq/0Ro0Wy/EfV37Y0I56d5ea7TWreOxH582f0Q9kgOcL3+UI5Rwk+1TQssPEvLOjvsepIcRvYe5
+ Jozmtpm3ItWxvL429SsU1qV7O32k5NZoSJYjaNaV7wNd9h0NiMKzX60TJldMMDcKpAXY/IeNIIx
+ uyhwXzFCSX04rQlglFa6Gva4JqGK1SJhYi+EwK1keTvr7z3jlSZ1Xc3XJucSMxlH2WYycryc82A
+ u2YlyqJEIkVWrfdsNU+QPPjCzbAcbyz+68Pu+QqEPG5VQsg8TtwBHA+QCU58pDxPS2pM6ttPTFM
+ pW62GJTSMUJ5rGcErNydBD9Kg9XcPRuSIjuMKSzk=
+X-Google-Smtp-Source: AGHT+IEPg9uX6aMJ8NGhCS0KGAEmcLM3cZRN0gko6a+QV6DA/FyLrzONbQHv1ohUlzz4LeZAYPId6w==
+X-Received: by 2002:a17:907:94ca:b0:ad8:8719:f6f3 with SMTP id
+ a640c23a62f3a-ae6e6e7a992mr161718766b.22.1752131953338; 
+ Thu, 10 Jul 2025 00:19:13 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:157f:442:48ff:45a9?
+ ([2a01:e0a:3cb:7bb0:157f:442:48ff:45a9])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae6e7eeae48sm82620266b.65.2025.07.10.00.19.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Jul 2025 00:19:13 -0700 (PDT)
+Message-ID: <15e75099-b5cf-4d65-a9c3-f78514b464b6@linaro.org>
+Date: Thu, 10 Jul 2025 09:19:11 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac7cfe40-4c1b-40f0-9d07-08ddbf76141c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Jul 2025 05:53:22.0683 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: /ovCH9hS3RuvHO76SKrydTvDH7Kp0HdYJs88NCePjjr6Tn6Iw0wgSuuXvBVN+4AYGucKHbr5DR+l+M7tiB5jHQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI6PPFB13B98217
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/11] net: lwip: fix initialization sequence before a
+ command
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>, Simon Glass
+ <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20250415211819.1254435-1-jerome.forissier@linaro.org>
+ <20250415211819.1254435-2-jerome.forissier@linaro.org>
+ <CAJ+vNU2Z-9n78B25g6h7AEEcWDQfKxM0vWymft2-LaWwpb-_2w@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAJ+vNU2Z-9n78B25g6h7AEEcWDQfKxM0vWymft2-LaWwpb-_2w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,72 +109,376 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgVGltCgpBbSBNaXR0d29jaCwgZGVtIDA5LjA3LjIwMjUgdW0gMTA6NTAgLTA3MDAgc2Nocmll
-YiBUaW0gSGFydmV5Ogo+IE9uIEZyaSwgSnVuIDEzLCAyMDI1IGF0IDU6MDTigK9BTSBZYW5uaWMg
-TW9vZyA8eS5tb29nQHBoeXRlYy5kZT4gd3JvdGU6Cj4gPiAKPiA+IFdoZW4gYmxvYnMgYXJlIGFi
-c2VudCBhbmQgYXJlIG1hcmtlZCBhcyBvcHRpb25hbCwgdGhleSBjYW4gYmUgc2FmZWx5Cj4gPiBk
-cm9wcGVkIGZyb20gdGhlIGJpbm1hbiB0cmVlLiBVc2UgdGhlIGRyb3BfYWJzZW50IGZ1bmN0aW9u
-IGZvciB0aGF0Lgo+ID4gUmVuYW1lIGRyb3BfYWJzZW50IHRvIGRyb3BfYWJzZW50X29wdGlvbmFs
-IGFzIHdlIGRvIG5vdCB3YW50IHRvIGRyb3AgYW55Cj4gPiBlbnRyaWVzIHRoYXQgYXJlIGFic2Vu
-dDsgdGhleSBzaG91bGQgYmUgcmVwb3J0ZWQgYnkgYmlubWFuIGFzIGVycm9ycwo+ID4gd2hlbiB0
-aGV5IGFyZSBtaXNzaW5nLgo+ID4gV2UgYWxzbyByZW9yZGVyIHRoZSBwcm9jZXNzaW5nIG9mIHRo
-ZSBpbWFnZSB0aGUgZm9sbG93aW5nOgo+ID4gLSBXZSBjYWxsIHRoZSBDaGVja0ZvclByb2JsZW1z
-IGZ1bmN0aW9uIGJlZm9yZSB0aGUgaW1hZ2UgaXMgYnVpbHQuCj4gPiAtIFdlIGRyb3AgZW50cmll
-cyBhZnRlciB3ZSBjaGVja2VkIGZvciBwcm9ibGVtcyB3aXRoIHRoZSBpbWFnZS4KPiA+IFRoaXMg
-aXMgb2theSBiZWNhdXNlIENoZWNrRm9yUHJvYmxlbXMgZG9lcyBub3QgbG9vayBhdCB0aGUgZmls
-ZSB3ZSBoYXZlCj4gPiB3cml0dGVuIGJ1dCByYXRoZXIgcXVlcmllcyB0aGUgZGF0YSBzdHJ1Y3R1
-cmUgKGltYWdlKSBidWlsdCB3aXRoIGJpbm1hbi4KPiA+IFRoaXMgYWxzbyBhbGxvd3MgdXMgdG8g
-Z2V0IGFsbCBlcnJvciBhbmQgd2FybmluZyBtZXNzYWdlcyB0aGF0IHdlIHdhbnQKPiA+IHRvIHJl
-cG9ydCB3aGlsZSBhdm9pZGluZyBwdXR0aW5nIG1pc3Npbmcgb3B0aW9uYWwgZW50cmllcyBpbiB0
-aGUgZmluYWwKPiA+IGltYWdlLgo+ID4gQXMgb25seSB0aGUgYmxvYnMgYXJlIGRyb3BwZWQsIHRo
-ZSBzZWN0aW9ucyBzdGlsbCByZW1haW4gaW4gdGhlCj4gPiBhc3NlbWJsZWQgaW1hZ2UuIFRodXMg
-YWRkIHRoZW0gdG8gdGhlIGV4cGVjdGVkIHRlc3QgY2FzZSBjaGVja3Mgd2hlcmUKPiA+IG5lY2Vz
-c2FyeS4KPiA+IAo+ID4gSW4gYWRkaXRpb24sIGEgcmV3b3JrIG9mIHRlc3RQYWNrVGVlT3NPcHRp
-b25hbCB0ZXN0IGNhc2UgaXMgbmVjZXNzYXJ5Lgo+ID4gCj4gPiBUaGUgdGVzdCBkaWQgbm90IHJl
-YWxseSBkbyB3aGF0IGl0IHdhcyBzdXBwb3NlZCB0by4gVGhlIGRlc2NyaXB0aW9uIHNhaWQKPiA+
-IHRoYXQgb3B0aW9uYWwgYmluYXJ5IGlzIHRlc3RlZCwgYnV0IHRoZSBiaW5hcnkgaXMgbm90IG1h
-cmtlZCBhcwo+ID4gb3B0aW9uYWwuIEZ1cnRoZXIsIHRoZSB0ZWUuZWxmIGZpbGUsIHdoZW4gaW5j
-bHVkZWQgaW4gdGhlIGltYWdlCj4gPiBwcm9wZXJseSwgYWxzbyBzaG93cyB1cCBpbiB0aGUgaW1h
-Z2UgZGF0YS4gVGhpcyBtdXN0IGJlIGFkZGVkIGFzIHdlbGwuCj4gPiAKPiA+IEFzIHRoZXJlIGlz
-IG5vIGdsb2JhbCB2YXJpYWJsZSBmb3IgdGhlIGVsZiBkYXRhLCBzZXQgdGhlIHBhdGhuYW1lIHRv
-IHRoZQo+ID4gZWxmIGZpbGUgdGhhdCB3YXMgY3JlYXRlZCB3aGVuIHNldHRpbmcgdXAgdGhlIHRl
-c3Qgc3VpdGUuCj4gPiBGb3IgdGhlIHRlc3QgY2FzZSBnZXQgdGhlIGZpbGVuYW1lIGFuZCByZWFk
-IHRoZSBjb250ZW50cywgY29tcGFyaW5nIHRoZW0KPiA+IHRvIHRoZSBjb250ZW50cyBvZiB0aGUg
-Y3JlYXRlZCBiaW5tYW4gaW1hZ2UuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IFlhbm5pYyBNb29n
-IDx5Lm1vb2dAcGh5dGVjLmRlPgo+ID4gLS0tCj4gPiDCoHRvb2xzL2Jpbm1hbi9jb250cm9sLnB5
-wqDCoMKgwqDCoMKgIHzCoCA1ICsrLS0tCj4gPiDCoHRvb2xzL2Jpbm1hbi9lbnRyeS5wecKgwqDC
-oMKgwqDCoMKgwqAgfMKgIDYgKysrKystCj4gPiDCoHRvb2xzL2Jpbm1hbi9ldHlwZS9jYmZzLnB5
-wqDCoMKgIHzCoCAzICsrLQo+ID4gwqB0b29scy9iaW5tYW4vZXR5cGUvbWtpbWFnZS5weSB8wqAg
-MiArLQo+ID4gwqB0b29scy9iaW5tYW4vZXR5cGUvc2VjdGlvbi5weSB8IDE2ICsrKysrKysrKysr
-Ky0tLS0KPiA+IMKgdG9vbHMvYmlubWFuL2Z0ZXN0LnB5wqDCoMKgwqDCoMKgwqDCoCB8IDE0ICsr
-KysrKysrLS0tLS0tCj4gPiDCoHRvb2xzL2Jpbm1hbi9pbWFnZS5wecKgwqDCoMKgwqDCoMKgwqAg
-fMKgIDIgKysKPiA+IMKgNyBmaWxlcyBjaGFuZ2VkLCAzMiBpbnNlcnRpb25zKCspLCAxNiBkZWxl
-dGlvbnMoLSkKPiA+IAo+ID4gCgpbLi4uXQoKPiA+IGRpZmYgLS1naXQgYS90b29scy9iaW5tYW4v
-ZXR5cGUvc2VjdGlvbi5weSBiL3Rvb2xzL2Jpbm1hbi9ldHlwZS9zZWN0aW9uLnB5Cj4gPiBpbmRl
-eAo+ID4gMWQ1MGJiNDc3NTM0NzAyMDE5NTAyZDA4Zjg2NDhkNGM5YTM2N2MwZi4uMDNjNGY3YzZl
-Yzc0YzZmYTc1YzkzNjJlMmZlY2RiMGU2YQo+ID4gYjU2OGNiIDEwMDY0NAo+ID4gLS0tIGEvdG9v
-bHMvYmlubWFuL2V0eXBlL3NlY3Rpb24ucHkKPiA+ICsrKyBiL3Rvb2xzL2Jpbm1hbi9ldHlwZS9z
-ZWN0aW9uLnB5Cj4gPiBAQCAtNTM3LDcgKzUzNyw3IEBAIGNsYXNzIEVudHJ5X3NlY3Rpb24oRW50
-cnkpOgo+ID4gwqDCoMKgwqDCoMKgwqDCoCBmb3IgZW50cnkgaW4gc2VsZi5fZW50cmllcy52YWx1
-ZXMoKToKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbnRyeS5Xcml0ZU1hcChmZCwgaW5k
-ZW50ICsgMSkKPiA+IAo+ID4gLcKgwqDCoCBkZWYgR2V0RW50cmllcyhzZWxmKToKPiA+ICvCoMKg
-wqAgZGVmIEdldEVudHJpZXMoc2VsZikgLT4gZGljdFtzdHIsIEVudHJ5XToKPiA+IMKgCgp0aGUg
-cHJvYmxlbSBpcyB0aGF0IEkgZm9yZ290IHRvICJwYWNrcG9ydCIgdHlwaW5nIHN1cHBvcnQgZm9y
-IG9sZGVyIHB5dGhvbgp2ZXJzaW9ucyA8IDMuOS4KVGhhbmsgeW91IGZvciBicmluZ2luZyB0aGlz
-IHRvIG15IGF0dGVudGlvbi4KCj4gCj4gSGkgWWFubmljLAo+IAo+IFRoaXMgc2VyaWVzIGp1c3Qg
-Z290IG1lcmdlZCB0byBtYXN0ZXIgYW5kIEkgbm90aWNlZCBpdCBmYWlsaW5nCj4gYnVpbGRpbmcg
-aW14OG1tX3ZlbmljZSBvbiBteSBVYnVudHUgMjAuMDQgZGV2IGhvc3Qgd2hpY2ggaGFzIFB5dGhv
-bgo+IDMuOC4xMC4KPiAKPiBtYWtlIGlteDhtbV92ZW5pY2VfZGVmY29uZmlnCj4gbWFrZQo+IC4u
-Lgo+IMKgIEJJTk1BTsKgIC5iaW5tYW5fc3RhbXAKPiBiaW5tYW46ICd0eXBlJyBvYmplY3QgaXMg
-bm90IHN1YnNjcmlwdGFibGUKPiBtYWtlOiAqKiogW01ha2VmaWxlOjEzMzY6IC5iaW5tYW5fc3Rh
-bXBdIEVycm9yIDEKPiAKPiBEbyB5b3Uga25vdyB3aGF0IHRoZSBtaW5pbXVtIHZlcnNpb24gb2Yg
-cHl0aG9uIHJlcXVpcmVkIGlzIG9yIHdoYXQKPiB3b3VsZCBuZWVkIHRvIGJlIGNoYW5nZWQgaGVy
-ZSB0byBzdXBwb3J0IHRoZSBwcmV2aW91cyB2ZXJzaW9uIG9mCj4gcHl0aG9uIHRoYXQgd29ya2Vk
-PwoKQWJzb2x1dGUgbWluaW11bSB2ZXJzaW9uIGlzIDMuNS4gVGhhdCBpcyB3aGVuIHR5cGluZyBn
-b3QgaW50cm9kdWNlZC4KClF1b3RpbmcgZnJvbSBiaW5tYW4gcHlwcm9qZWN0LnRvbWw6Cgo+IGRl
-c2NyaXB0aW9uID0gIkJpbm1hbiBmaXJtd2FyZS1wYWNrYWdpbmcgdG9vbCIKPiByZWFkbWUgPSAi
-UkVBRE1FLnJzdCIKPiByZXF1aXJlcy1weXRob24gPSAiPj0zLjciCj4gCgpCdXQgdGhlcmUgaGFz
-IGJlZW4gYSBwYXRjaCB0aGF0IHRyaWVkIHRvIG1ha2UgYmlubWFuIHdvcmsgZm9yIDMuNi4KZGU2
-NWIxMjJhMjUzNCAoInRvb2xzOiBGYWxsIGJhY2sgdG8gaW1wb3J0bGliX3Jlc291cmNlcyBvbiBQ
-eXRob24gMy42IikKClNob3VsZCBJIGNyZWF0ZSBhIHNvbHV0aW9uIGZvciBweXRob24gPj0gMy41
-IG9yID49IDMuNz8KCllhbm5pYwoKPiAKPiBCZXN0IFJlZ2FyZHMsCj4gCj4gVGltCg==
+Hi Tim,
+
+On 7/10/25 01:53, Tim Harvey wrote:
+> On Tue, Apr 15, 2025 at 2:18 PM Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> The things that are done prior to executing a network command with
+>> NET_LWIP are not consistent with what is done with NET. It impacts the
+>> selection of the current device, and more precisely if the active device
+>> is invalid NET would return an error while NET_LWIP would try to pick a
+>> new device. This incorrect behavior was detected thanks to the eth_rotate
+>> sandbox test (dm_test_eth_rotate()).
+>>
+>> Fix it by re-using a sequence similar to what NET has in net_loop().
+>> This piece of code is inserted in a function called net_lwip_eth_start()
+>> renamed from net_lwip_eth_set_current().
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>>
+>> (no changes since v1)
+>>
+>>  include/net-lwip.h  |  9 ++++++++-
+>>  net/lwip/dhcp.c     |  3 ++-
+>>  net/lwip/dns.c      |  3 ++-
+>>  net/lwip/net-lwip.c | 40 +++++++++++++++++++++++++++++-----------
+>>  net/lwip/ping.c     |  3 ++-
+>>  net/lwip/tftp.c     |  5 ++++-
+>>  net/lwip/wget.c     |  6 +++++-
+>>  7 files changed, 52 insertions(+), 17 deletions(-)
+>>
+>> diff --git a/include/net-lwip.h b/include/net-lwip.h
+>> index 64e5c720560..0d3bb8a8bd8 100644
+>> --- a/include/net-lwip.h
+>> +++ b/include/net-lwip.h
+>> @@ -10,7 +10,14 @@ enum proto_t {
+>>         TFTPGET
+>>  };
+>>
+>> -void net_lwip_set_current(void);
+>> +static inline int eth_is_on_demand_init(void)
+>> +{
+>> +       return 1;
+>> +}
+>> +
+>> +int eth_init_state_only(void); /* Set active state */
+>> +
+>> +int net_lwip_eth_start(void);
+>>  struct netif *net_lwip_new_netif(struct udevice *udev);
+>>  struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+>>  void net_lwip_remove_netif(struct netif *netif);
+>> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+>> index 3b7e4700c6e..92bd7067a7f 100644
+>> --- a/net/lwip/dhcp.c
+>> +++ b/net/lwip/dhcp.c
+>> @@ -115,7 +115,8 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>         int ret;
+>>         struct udevice *dev;
+>>
+>> -       net_lwip_set_current();
+>> +       if (net_lwip_eth_start() < 0)
+>> +               return CMD_RET_FAILURE;
+>>
+>>         dev = eth_get_dev();
+>>         if (!dev) {
+>> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+>> index 149bdb784dc..19172ac959a 100644
+>> --- a/net/lwip/dns.c
+>> +++ b/net/lwip/dns.c
+>> @@ -121,7 +121,8 @@ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>         if (argc == 3)
+>>                 var = argv[2];
+>>
+>> -       net_lwip_set_current();
+>> +       if (net_lwip_eth_start() < 0)
+>> +               return CMD_RET_FAILURE;
+>>
+>>         return dns_loop(eth_get_dev(), name, var);
+>>  }
+>> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+>> index 6b7b696dbf0..6748008736b 100644
+>> --- a/net/lwip/net-lwip.c
+>> +++ b/net/lwip/net-lwip.c
+>> @@ -134,18 +134,27 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+>>         return 0;
+>>  }
+>>
+>> -/* Initialize the lwIP stack and the ethernet devices and set current device  */
+>> -void net_lwip_set_current(void)
+>> +/*
+>> + * Initialize the network stack if needed and start the current device if valid
+>> + */
+>> +int net_lwip_eth_start(void)
+>>  {
+>> -       static bool init_done;
+>> +       int ret;
+>>
+>> -       if (!init_done) {
+>> -               eth_init_rings();
+>> -               eth_init();
+>> -               lwip_init();
+>> -               init_done = true;
+>> +       net_init();
+>> +       if (eth_is_on_demand_init()) {
+>> +               eth_halt();
+>> +               eth_set_current();
+>> +               ret = eth_init();
+>> +               if (ret < 0) {
+>> +                       eth_halt();
+>> +                       return ret;
+>> +               }
+>> +       } else {
+>> +               eth_init_state_only();
+>>         }
+>> -       eth_set_current();
+>> +
+>> +       return 0;
+>>  }
+>>
+>>  static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>> @@ -224,11 +233,20 @@ void net_lwip_remove_netif(struct netif *netif)
+>>         free(netif);
+>>  }
+>>
+>> +/*
+>> + * Initialize the network buffers, an ethernet device, and the lwIP stack
+>> + * (once).
+>> + */
+>>  int net_init(void)
+>>  {
+>> -       eth_set_current();
+>> +       static bool init_done;
+>>
+>> -       net_lwip_new_netif(eth_get_dev());
+>> +       if (!init_done) {
+>> +               eth_init_rings();
+>> +               eth_init();
+>> +               lwip_init();
+>> +               init_done = true;
+>> +       }
+>>
+>>         return 0;
+>>  }
+>> diff --git a/net/lwip/ping.c b/net/lwip/ping.c
+>> index c586a96806d..542ef2cb148 100644
+>> --- a/net/lwip/ping.c
+>> +++ b/net/lwip/ping.c
+>> @@ -168,7 +168,8 @@ int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>         if (!ipaddr_aton(argv[1], &addr))
+>>                 return CMD_RET_USAGE;
+>>
+>> -       net_lwip_set_current();
+>> +       if (net_lwip_eth_start() < 0)
+>> +               return CMD_RET_FAILURE;
+>>
+>>         if (ping_loop(eth_get_dev(), &addr) < 0)
+>>                 return CMD_RET_FAILURE;
+>> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+>> index 123d66b5dba..4f9b2049187 100644
+>> --- a/net/lwip/tftp.c
+>> +++ b/net/lwip/tftp.c
+>> @@ -280,7 +280,10 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>                 goto out;
+>>         }
+>>
+>> -       net_lwip_set_current();
+>> +       if (net_lwip_eth_start() < 0) {
+>> +               ret = CMD_RET_FAILURE;
+>> +               goto out;
+>> +       }
+>>
+>>         if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
+>>                 ret = CMD_RET_FAILURE;
+>> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+>> index ec098148835..a3b82908877 100644
+>> --- a/net/lwip/wget.c
+>> +++ b/net/lwip/wget.c
+>> @@ -471,7 +471,11 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>>
+>>  int wget_do_request(ulong dst_addr, char *uri)
+>>  {
+>> -       net_lwip_set_current();
+>> +       int ret;
+>> +
+>> +       ret = net_lwip_eth_start();
+>> +       if (ret < 0)
+>> +               return ret;
+>>
+>>         if (!wget_info)
+>>                 wget_info = &default_wget_info;
+>> --
+>> 2.43.0
+>>
+> 
+> Hi Jerome,
+> 
+> I'm seeing an issue with NET_LWIP related to this patch.
+> 
+> In net_lwip_eth_start the eth_init function is called first in
+> net_init then again within the if eth_is_on_demand. This causes a
+> situation where the netdev is started, then stopped and started again
+> and in the case of at least the dwc_eth_qos device this causes the phy
+> to drop link after negotiation has been performed the first time a
+> network operation occurs.
+> 
+> The situation is this on an imx8mp_venice board for any network action
+> (dhcp, tftp, etc):
+> u-boot=> dhcp
+> ethernet@30bf0000 Waiting for PHY auto negotiation to complete...... done
+> No link
+> FAILED: -11
+> eqos_start ethernet@30bf0000
+> No link
+> FAILED: -11
+> Could not start ethernet@30bf0000
+> 
+> Here is some debugging added:
+> lwip with eqos:
+> u-boot=> dhcp
+> net_lwip_eth_start
+> eth_start_udev ethernet@30bf0000 running=0
+> eqos_start ethernet@30bf0000 phy=null
+> eqos_start ethernet@30bf0000 calling phy_connect
+> eqos_start ethernet@30bf0000 connected to phy ethernet@30bf0000
+> eqos_start ethernet@30bf0000 calling phy_config
+> ethernet@30bf0000 Waiting for PHY auto negotiation to complete....... done
+> eth_start_udev ethernet@30bf0000 done running=1
+> ^^^ this was a result of eth_init being called in net_init
+> net_lwip_eth_start calling eth_halt
+> eth_halt in_init_halt=0
+> eth_halt current=ethernet@30bf0000
+> eth_halt running=1
+> ^^^ now, because we are already running halt continues on to halt the interface
+> eth_halt ethernet@30bf0000 calling stop
+> eqos_stop ethernet@30bf0000
+> phy_shutdown ethernet@30bf0000
+> ^^^ phy is shutdown here
+> net_lwip_eth_start calling eth_set_current
+> net_lwip_eth_start calling eth_init
+> eth_start_udev ethernet@30bf0000 running=0
+> eqos_start ethernet@30bf0000 phy=ethernet@30bf0000
+> ^^^ phy links again but link has not been established by the time we
+> try to use it here
+> No link
+> phy_shutdown ethernet@30bf0000
+> FAILED: -11
+> eth_start_udev ethernet@30bf0000 running=0
+> eqos_start ethernet@30bf0000 phy=ethernet@30bf0000
+> eth_start_udev ethernet@30bf0000 done running=1
+> DHCP client bound to address 172.24.23.42 (1110 ms)
+> u-boot=> dhcp
+> net_lwip_eth_start
+> net_lwip_eth_start calling eth_halt
+> eth_halt in_init_halt=0
+> eth_halt current=ethernet@30bf0000
+> eth_halt running=1
+> eth_halt ethernet@30bf0000 calling stop
+> eqos_stop ethernet@30bf0000
+> phy_shutdown ethernet@30bf0000
+> net_lwip_eth_start calling eth_set_current
+> net_lwip_eth_start calling eth_init
+> eth_start_udev ethernet@30bf0000 running=0
+> eqos_start ethernet@30bf0000 phy=ethernet@30bf0000
+> eth_start_udev ethernet@30bf0000 done running=1
+> eth_start_udev ethernet@30bf0000 running=1
+> DHCP client bound to address 172.24.23.42 (29 ms)
+> ^^^ any follow-on network operation is fine as the PHY has re-linked
+> at this point
+> 
+> legacy:
+> u-boot=> dhcp
+> net_loop calling eth_halt()
+> eth_halt in_init_halt=0
+> eth_halt current=ethernet@30bf0000
+> eth_halt running=0
+> ^^^ does not call stop because its not running because eth_init hasn't
+> been called already
+> eqos_start ethernet@30bf0000
+> DP83867 ethernet@30bf0000 Waiting for PHY auto negotiation to
+> complete....... done
+> ^^^ works
+> 
+> Here's another board (imx8mm_venice) which has a different MAC (fec)
+> that works fine with this patch:
+> u-boot=> dhcp
+> net_lwip_eth_start
+> net_init init_done=0
+> eth_start_udev ethernet@30be0000 running=0
+> fecmxc_init ethernet@30be0000
+> ethernet@30be0000 Waiting for PHY auto negotiation to complete.... done
+> eth_start_udev ethernet@30be0000 done running=1
+> net_lwip_eth_start calling eth_halt
+> eth_halt in_init_halt=0
+> eth_halt current=ethernet@30be0000
+> eth_halt running=1
+> eth_halt ethernet@30be0000 calling stop
+> fecmxc_halt ethernet@30be0000
+> ^^^ halt is called but for this MAC it doesn't drop the link
+> net_lwip_eth_start calling eth_set_current
+> net_lwip_eth_start calling eth_init
+> eth_start_udev ethernet@30be0000 running=0
+> fecmxc_init ethernet@30be0000
+> eth_start_udev ethernet@30be0000 done running=1
+> eth_start_udev ethernet@30be0000 running=1
+> DHCP client bound to address 172.24.23.44 (1117 ms)
+> 
+> The difference here is the FEC mac driver (fec_mxc.c) is not disturbed
+> by a start->stop->start. I'm not exactly sure why this is... I thought
+> it was because the FEC driver configures the PHY in the probe vs the
+> start but even if I remove the phy_shutdown call from the EQOS driver
+> it still drops the link on eqos_stop.
+> 
+> Removing the call the eth_init from net_init makes NET_LWIP behave
+> like legacy and makes more sense as you don't get a
+> 'start->stop->start' call sequence to your netdev but honestly I'm not
+> sure if this also points out an issue with either the fec driver or
+> the eqos driver regarding where/how the PHY is handled.
+> 
+> Would you agree with:
+> 
+> net: lwip: remove eth_init from net_init as its called later
+> 
+> The call to eth_init within net_init casues the network interface to
+
+causes
+
+> start, stop, start again which can cause issues with certain network
+> device drivers. Remove it to make it behave like the legacy network
+> path.
+> 
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index 3918d57d7e58..d53faa39ba11 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -285,7 +285,6 @@ int net_init(void)
+> 
+>         if (!init_done) {
+>                 eth_init_rings();
+> -               eth_init();
+>                 lwip_init();
+>                 init_done = true;
+>         }
+
+Yes, that looks good to me. Please also update the comment:
+
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index f05c4cd3f64..505d002e185 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -237,8 +237,7 @@ void net_lwip_remove_netif(struct netif *netif)
+ }
+ 
+ /*
+- * Initialize the network buffers, an ethernet device, and the lwIP stack
+- * (once).
++ * Initialize the network buffers and the lwIP stack (once).
+  */
+ int net_init(void)
+ {
+
+While looking at this I also noted that with NET_LWIP
+eth_is_on_demand_init() is always true so net_lwip_eth_start()
+could be simplified. Feel free to add a patch for that too :)
+
+Thanks,
+-- 
+Jerome
+
+> 
+> Best Regards,
+> 
+> Tim
