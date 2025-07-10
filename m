@@ -4,65 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0543FC83F17
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 13:05:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6E6C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 13:18:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E436835C9;
-	Thu, 10 Jul 2025 15:05:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 96222835FD;
+	Thu, 10 Jul 2025 15:18:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VJ3VLX4a";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0682D835B6; Thu, 10 Jul 2025 11:59:35 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44C29834BC
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 11:59:32 +0200 (CEST)
+ id 2C7B68360D; Thu, 10 Jul 2025 15:18:17 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A4DD4835C9
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:18:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=g-praveen@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56A9xSWx1108685;
- Thu, 10 Jul 2025 04:59:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1752141568;
- bh=boMjefzbQ1NBGkmMncIjnAaawQglbwdoa49apJQyKvg=;
- h=From:To:CC:Subject:Date;
- b=VJ3VLX4aKtAEwK0oAjpFj6WHG28+r+XhDTMWpW8HJyXVKbKDsmErBsDBYFdWVkIrw
- yVrSZF2q1eg9B7GiqHBxhXG+thYGfrUGSiss12e/tYChBpFGDlgcEwcxeFN8oeSmdF
- kVE/Wz1/2cZkKJEDOcHzwy5DtYQ47hx3zbcBKdSA=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56A9xSTt2928385
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 10 Jul 2025 04:59:28 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 10
- Jul 2025 04:59:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 10 Jul 2025 04:59:27 -0500
-Received: from a0507176-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0507176-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.200])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56A9xOes1147418;
- Thu, 10 Jul 2025 04:59:25 -0500
-From: Gokul <g-praveen@ti.com>
-To: <trini@konsulko.com>, <rayagonda.kokatanur@broadcom.com>,
- <casey.connolly@linaro.org>, <sjg@chromium.org>, <m-chawdhry@ti.com>
-CC: <g-praveen@ti.com>, <u-boot@lists.denx.de>, <j-keerthy@ti.com>
-Subject: [PATCH v2] configs: KASLR OPTEE RNG support for K3 devices
-Date: Thu, 10 Jul 2025 15:29:22 +0530
-Message-ID: <20250710095922.144361-1-g-praveen@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C8A861EA6;
+ Thu, 10 Jul 2025 06:18:02 -0700 (PDT)
+Received: from e130802.arm.com (e130802.arm.com [10.1.35.55])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5AF503F66E;
+ Thu, 10 Jul 2025 06:18:11 -0700 (PDT)
+Date: Thu, 10 Jul 2025 14:18:03 +0100
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: trini@konsulko.com, Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 25/25] fwu_arm_psa: Document FWU support for Arm PSA
+Message-ID: <20250710131803.GA1610792@e130802.arm.com>
+References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
+ <20250702152528.1180414-26-abdellatif.elkhlifi@arm.com>
+ <de8a07e1-dbf6-4232-b8e3-4b5b1ccf12e0@gmx.de>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Thu, 10 Jul 2025 15:05:38 +0200
+In-Reply-To: <de8a07e1-dbf6-4232-b8e3-4b5b1ccf12e0@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,48 +62,199 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gokul Praveen <g-praveen@ti.com>
+Hi Heinrich,
 
-KASLR, or Kernel Address Space Layout Randomization, is a security
-feature in the Linux kernel that randomizes the memory location
-where the kernel is loaded during boot.
+> On 02.07.25 17:25, abdellatif.elkhlifi@arm.com wrote:
+> > From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> > 
+> > Add a README
+> > 
+> > Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> > Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Michal Simek <michal.simek@amd.com>
+> > Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > Cc: Casey Connolly <casey.connolly@linaro.org>
+> > Cc: Adriano Cordova <adrianox@gmail.com>
+> > ---
+> >   MAINTAINERS                      |   1 +
+> >   doc/develop/uefi/fwu_arm_psa.rst | 153 +++++++++++++++++++++++++++++++
+> >   doc/develop/uefi/index.rst       |   1 +
+> >   3 files changed, 155 insertions(+)
+> >   create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+> > 
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index fdf34c74049..a75bc1d2379 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -1231,6 +1231,7 @@ FWU ARM PSA
+> >   M:	Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> >   M:	Davidson kumaresan <davidson.kumaresan@arm.com>
+> >   S:	Maintained
+> > +F:	doc/develop/uefi/fwu_arm_psa.rst
+> >   F:	include/fwu_arm_psa.h
+> >   F:	lib/fwu_updates/fwu_arm_psa.c
+> > diff --git a/doc/develop/uefi/fwu_arm_psa.rst b/doc/develop/uefi/fwu_arm_psa.rst
+> > new file mode 100644
+> > index 00000000000..f91fd85f573
+> > --- /dev/null
+> > +++ b/doc/develop/uefi/fwu_arm_psa.rst
+> > @@ -0,0 +1,153 @@
+> > +.. SPDX-License-Identifier: GPL-2.0+
+> > +.. Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+> > +
+> > +Firmware Update (FWU) Support for Arm PSA
+> > +==========================================
+> > +
+> > +This README provides an overview of the Firmware Update (FWU) support
+> 
+> There  is no README here. How about:
+> 
+> U-Boot implements Firmware Update (FWU) support for Arm `PSA Certified`_
+> platforms.
+> 
+> > +implemented in U-Boot for Arm `PSA Certified`_ platforms, such as
+> > +Corstone-1000. The feature aligns with the Platform Security Firmware Update
+> > +specification for the A-profile Arm Architecture
+> > +(see `DEN0118 v1.0 A specification`_) and leverages the Trusted Services (TS)
+> > +framework to interact with Secure world update agent.
+> > +
+> > +Overview
+> > +--------
+> > +
+> > +The FWU subsystem enables secure  firmware updates by
+> > +delegating the update management to a Secure world agent. U-Boot acts as the
+> > +FWU client, coordinating updates via a well-defined set of ABIs over the FF-A
+> > +interface (see :doc:`Arm FF-A Support <../../arch/arm64.ffa>`).
+> > +
+> > +FWU for Arm PSA supports both on-disk and standard capsule updates.
+> > +
+> > +Key Features
+> > +------------
+> > +
+> > +1. PSA Firmware Update Initialization
+> > +-------------------------------------
+> > +
+> > +- Initialization of the update agent using the FF-A transport and discovery of
+> > +  the Trusted Services FWU SP.
+> > +
+> > +- Discovery of the version of the ABIs using FWU_DISCOVER ABI.
+> > +
+> > +- Establishment and sharing of communication buffers between U-Boot
+> > +  (Normal world) and Secure world.
+> > +
+> > +2. ESRT Support
+> > +---------------
+> > +
+> > +Retrieval of ESRT (EFI System Resource Table) data from Secure world using
+> > +FWU_READ_STREAM ABI, enabling compliance with UEFI standards
+> > +(see `UEFI v2.10 specification`_).
+> > +
+> > +3. UEFI Capsule Handling
+> > +------------------------
+> > +
+> > +- Runtime checks for capsule flags as per UEFI 2.10 specification:
+> > +
+> > +    - CAPSULE_FLAGS_PERSIST_ACROSS_RESET
+> > +
+> > +    - CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE
+> > +
+> > +    - CAPSULE_FLAGS_INITIATE_RESET
+> > +
+> > +- Support for keeping the FMP payload header in Arm PSA mode to preserve
+> > +  critical metadata required by Secure world.
+> > +
+> > +4. Staging and Update Flow
+> > +--------------------------
+> > +
+> > +- Full support for update staging flow as per PSA spec:
+> > +
+> > +    - FWU_BEGIN_STAGING
+> > +
+> > +    - FWU_END_STAGING
+> > +
+> > +    - FWU_CANCEL_STAGING
+> > +
+> > +    - FWU_WRITE_STREAM
+> > +
+> > +- Capsules can contain multiple payloads (including start/end markers
+> > +  and the update content).
+> > +
+> > +5. Directory Access
+> > +-------------------
+> > +
+> > +- Reading the FWU directory from Secure world using FWU_READ_STREAM ABI.
+> > +
+> > +6. Image Update Lifecycle
+> > +-------------------------
+> > +
+> > +- Implementation of get_image_info() and set_image() using raw EFI firmware
+> > +  services provided by the FMP driver for raw images.
+> > +
+> > +- FWU_ACCEPT_IMAGE ABI issued on ExitBootServices() to commit successfully
+> > +  booted trial images.
+> > +
+> > +- Option to disable automatic acceptance on ExitBootServices() via
+> > +  CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES.
+> > +
+> > +Configuration Options
+> > +---------------------
+> > +
+> > +To enable FWU support for Arm PSA, include the following options in your board
+> > +configuration:
+> > +
+> > +CONFIG_FWU_ARM_PSA=y enables the PSA-compliant firmware update client in U-Boot.
+> 
+> Please, use a formatting that lets the config parameters stick out:
+> 
+> CONFIG_FWU_ARM_PSA
+>     enables the PSA-compliant firmware update client in U-Boot.
+> 
+> CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES
+>     enables auto-acceptance on ExitBootServices(). Disable this setting
+>     if auto-acceptance shall be handled at a later boot stage.
+> 
+> > +
+> > +CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES=y Enables auto-acceptance on
+> > +ExitBootServices(). This option is enabled by default. It can be disabled if
+> > +image acceptance should not be done at ExitBootServices().
+> 
+> Enabled by default implies that it can be disabled.
+> "if .. should not be done" conveys no new information.
+> 
+> > +
+> > +Platform Integration: Corstone-1000
+> > +-----------------------------------
+> > +
+> > +- Corstone-1000 is the reference implementation for the FWU Arm PSA feature.
+> 
+> A link to the board page should be good enough.
+> 
+> What is implemented for a specific board should be described there.
+> 
+> > +
+> > +- ESP partition detection is automated by setting Boot0001 in the U-Boot bootcmd.
+> 
+> Please, state that you mean the environment variable bootcmd. How about
+> altbootcmd?
+> 
+> What would the variable bootcmd look like?
+> 
+> It is unclear to me which part of the information above is board specific
+> and which is not.
 
-OP-TEE RNG is a Random Number Generator (RNG) component within the
-Open Portable Trusted Execution Environment (OP-TEE) which provides
-a random number to U-BOOT and U-BOOT provides this random number
-as seed value to the LINUX kernel for KASLR.
+Thank you for your review. I’ve addressed all of your comments and will include
+the updates in the upcoming v2 patchset.
 
-Add KASLR OPTEE RNG support across K3 devices by enabling the required
-configs.
+Regarding the bootcmd question: Corstone-1000 only supports the standard bootcmd
+environment variable, and does not use altbootcmd. I’ll remove the bootcmd
+reference from the documentation and instead link to the
+Corstone-1000 user guide for further details.
 
-Signed-off-by: Gokul Praveen <g-praveen@ti.com>
----
-v2<==> v1
-===========
-* Added 'if' condition for configs to avoid enabling this feature
-  in R5.
-
-Boot logs Link :
-
-https://gist.github.com/GokulPraveen2001/44aa8c0962438c12ffc55e6ed67742e5
----
- arch/arm/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 7282c4123b0..cd27e5a5422 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -805,6 +805,9 @@ config ARCH_K3
- 	select REGEX
- 	select FIT_SIGNATURE if ARM64
- 	imply TI_SECURE_DEVICE
-+	imply DM_RNG if ARM64
-+	imply TEE if ARM64
-+	imply OPTEE if ARM64
- 
- config ARCH_OMAP2PLUS
- 	bool "TI OMAP2+"
--- 
-2.34.1
+Cheers
+Abdellatif
 
