@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF51FC83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 14:28:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE3EC83F17
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 14:34:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1E718363C;
-	Thu, 10 Jul 2025 16:28:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 518B78363C;
+	Thu, 10 Jul 2025 16:34:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h2FtyWIj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ak9V/TuT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B58083653; Thu, 10 Jul 2025 16:28:13 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id AE0B68367F; Thu, 10 Jul 2025 16:34:39 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58A25835C9
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 16:28:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2FA2835C9
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 16:34:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-70f94fe1e40so24301177b3.1
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 07:28:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-54b10594812so1033682e87.1
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 07:34:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752157690; x=1752762490; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1752158077; x=1752762877; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HIagwolHpwRRrKcmdztCc/pra/2yd2KqX/22Mqz0IpQ=;
- b=h2FtyWIjEafhr+3a0XN4lvi4mzEl4UqWVXGztxIKA6L+L6XqJXgG0C9aqk9ALseAKv
- 0p1iGRXABWaIrMT+9/3yllcIP5DOIWoUm/EsQu/ER7iZ+rCLRRwjAKIYincuA7ZoxAZ6
- hM8pd1alFIkScf+V+xIWBfGjteJJmkLa7ssJ2K34ZpQVj3iRTWbaLWcnDc6+I24MzEPn
- LeVJZ1az8FuJOFusmeR8kp0mH/7e3GBuMqdCL7CYU7ogosjuaNhQvPVSihgE/rZdDlW3
- qrJid3VxOcFxWBCebpYmMc87qR6OgYBC261JVF0MyknlQye+gQ1fiuS1yFH96EEBWHfM
- NTAA==
+ bh=U5rs7lHMhxOASbiE0qenBSx5/4r48hTt89mrqp1gYxE=;
+ b=Ak9V/TuTpRNpgwFst6iKq0DbHcBwLUmziSikOzRAHzcTNUBW6cM4jRKd1CFPa6rLc/
+ dYO/lHsC56uE8d1uvVANbDi6ePdgqqCVx3PIm00g6m5FuS/VWS2VuG3lsJRHr7xhktNz
+ 2eXnll9oJMfJiY7G4H+ouiJifLpL3fJZoa9s1z2H3mTx3544QWTe2KM+jacSOeY2zHxG
+ 2X2gjiabwqZBaYHBX/JgeMEhZtixxaxLy92erAGlcisxeygjc6lLlVuY4tydCN3N1jJ1
+ zOxGf1acz7pUSfEK7BmV09loZIaPR0+p7RLWQcZq/BfOCuuzOg9rIP+0C7ptsZTcViHO
+ qyHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752157690; x=1752762490;
+ d=1e100.net; s=20230601; t=1752158077; x=1752762877;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HIagwolHpwRRrKcmdztCc/pra/2yd2KqX/22Mqz0IpQ=;
- b=cttmwDDB4hvfx4V63+PROulbffe5q/n4d2FLrQfneaviJhmImu3ypdilPF1h6h+XEI
- vZ1GgaDxoAYRZkjsIhqXIAvYGvxjYHQVHKLB6SNKCmZR56BsFJLq4P9m5EojNnh7vWhX
- 5bdSddDPDEA7kAm85N6OrgoCEN5G2OvdAyGhmqFfQM9hgsN0Z+v/ermssvcnV6Mojiav
- Sq9SVj/M7b1FJGjxanrIW+fKRVkzuh0nScGT0k14lXdbet4a8GNfnyIY5+lNU35yYjGw
- l4drpDVGNr0SR+eYd7BLumYhSlFPREoJUs8kcYWEhHoN1+Y/2gmsvhB2kqiFN3hP6r6r
- 7EeQ==
+ bh=U5rs7lHMhxOASbiE0qenBSx5/4r48hTt89mrqp1gYxE=;
+ b=klIqpm5VjEscUQdq+mGfLcUvU9C6+M0Pit0zvovDHdGguI8TMfGZnMllkvaBKy+7Cx
+ lE35xlAIUFiRkKgPohIftLAdpLVQS/lSYaVc4z5vlTwXGUOdCQ1G3sKwTDzXaJiEQI/w
+ LCb0Wz3o0B6dcZFqFUE/MRoDzN794dxW06SNpa7AGUv5+BnasRVzDgJFDkXMxUd1uQmV
+ RVk6axwlfWiN+6RvziOJvg6ReaG+I3yeH7YvYgEk5xBMCLGGmnrbI8sxGrzyO6+0Y309
+ 6nebKzCgFwPiW1x7WMnrizpi6DX+1RITRaU8lV+nQROW9oNfjJS/F8KrFqHhgOAF3zOS
+ stIw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVH2ZmHP3xpnZ0ZXE/bwdj+kwptO5qfbC6nYWC2wbpdWBz4HPi4Yxl+2Y/+3bIH+f8WlR1KXqs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4IgYo6SzP39PDDw/VIboJAJ1wwqdf/gMK9kH4DjJ8DflOjPuO
- laisAjDmmSRoUE3QlNuvnRlAJQQwL/nxGjUyfbTgXPPq5OJzF10g84GnvKAWo/4Zp3+GeSW0Vp3
- V5ArYjFif/YOMVlvHWbzESJeD3frE/mHt7uIuy2B32w==
-X-Gm-Gg: ASbGncsJToJKFo49o3uSp4iLIsofvosJ6n6jk3K9sfxIJVgPlG4HyJ5tU+j0KT84VS2
- Js/0Th81rtqvZzNxpknfbL8J8f8n/6qXA11RXcxanhUQP3fEXwkM0BAbYlk5+aLGaWykXk2bguT
- Pci8E8LZsD0dcEuYgD8zKCYSIxsKJDAseG/oNp7dZZufW/Z0QAtPk0oA==
-X-Google-Smtp-Source: AGHT+IFkvzDgIjV+NVPYw660QVfBCKqsFgh1X29alCT5lhwv1uEXT2ynqbkf0cVELGC9vbVdTjUySV3PVbGKKQDke4s=
-X-Received: by 2002:a05:690c:685:b0:712:c5f7:1eef with SMTP id
- 00721157ae682-717c149bfe7mr56594937b3.3.1752157690126; Thu, 10 Jul 2025
- 07:28:10 -0700 (PDT)
+ AJvYcCVgPmd6I6X5AJLz8/vYdGjA+VYCbyx/K8jJ0xlKrsveOo7B0luUZurM07Pb50PM6bMqVYZtOjA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxB2+SB7hOWKiEKgFm7VVyu9e85PK8o7YilRWpYE15h/hZwyz6l
+ 9YMRsjIPR1wnYulV59iimQpQhJqsqGgaxzcOi5rcIvRGQx2fhqb1FDbIF7K1iTpJdbS7naGZ3xm
+ y/qTycf3In/J/oUbmEjSM6rmlWlZnOEs=
+X-Gm-Gg: ASbGncvoQdRdA0S+5mJLKSvqDGl0IpJKm2v7uVSGAK0Q47WLVT8olI1lr15dx7THeKj
+ ZT0awcRbFJ4uqyUHcPZEsxGVq4GMkhFnww0YqWeloAu2GVPQ4wXf8SfUvv6q8fenhBk5ncV6O1m
+ S1c8Vlsf1rRIuM9/bpC0xF/jqSBmFu1sJxSTfZASWq4DGBSZWZVq27u2SwLUu43y+1ICGgac5iH
+ uA=
+X-Google-Smtp-Source: AGHT+IE/UEslYVTRMVFUbKXHncw7eEFXiclrXkDaBVjC3hWs7EihoXCImWg4laSM8FK0MGWoM1xR8tW2nyu/ubrQLVo=
+X-Received: by 2002:a05:6512:158d:b0:549:5866:6489 with SMTP id
+ 2adb3069b0e04-55935b34bf0mr1054350e87.47.1752158076348; Thu, 10 Jul 2025
+ 07:34:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250627185723.342553-1-ilias.apalodimas@linaro.org>
  <20250627185723.342553-2-ilias.apalodimas@linaro.org>
  <CAOMZO5DP=8Jebnm32mPQ6s7rcTX62dgKqyzyrdco9dHNewyWKQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5DP=8Jebnm32mPQ6s7rcTX62dgKqyzyrdco9dHNewyWKQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 10 Jul 2025 17:27:34 +0300
-X-Gm-Features: Ac12FXx5wd6wcYrHojLAkFC4Z0UoLKYERbu7ivy4twl4nBQKEKh94dfVGBrhcOg
-Message-ID: <CAC_iWj+rJgUGkpEV-vYRei9R-UPj3J_2ix++K3P-ZXK8C7Vneg@mail.gmail.com>
+ <CAC_iWj+rJgUGkpEV-vYRei9R-UPj3J_2ix++K3P-ZXK8C7Vneg@mail.gmail.com>
+In-Reply-To: <CAC_iWj+rJgUGkpEV-vYRei9R-UPj3J_2ix++K3P-ZXK8C7Vneg@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 10 Jul 2025 11:34:25 -0300
+X-Gm-Features: Ac12FXyzzCxEIfNHqRpA-5lEwfJr1RwF_yONfPMzUkyeiF_MwU-TxFSjaKhbY2c
+Message-ID: <CAOMZO5CDkeD633fG-pELUF+QyzW3ftP_eQ3LmrjUTuaidY1c1g@mail.gmail.com>
 Subject: Re: [PATCH v2 2/2] kbuild: Bump the build system to 5.1
-To: Fabio Estevam <festevam@gmail.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: trini@konsulko.com, sughosh.ganu@linaro.org, 
  Christophe Leroy <christophe.leroy@csgroup.eu>,
  Stefano Babic <sbabic@nabladev.com>, 
@@ -110,66 +112,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
+Hi Ilias,
 
+On Thu, Jul 10, 2025 at 11:28=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 
-On Thu, 10 Jul 2025 at 17:16, Fabio Estevam <festevam@gmail.com> wrote:
->
-> Hi Ilias,
->
-> On Fri, Jun 27, 2025 at 3:57=E2=80=AFPM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Our last sync with the kernel was 5.1. Even that was a partial one
-> > as some patches from 4.x kernels were already missing making the
-> > transition to a modern kbuild infeasible.
-> >
-> > We are so out of sync now, that tracking the patches and backporting
-> > them one by one makes little sense and it's going to take ages.
-> >
-> > This is an attempt to sync up Makefile[.lib/.kbuild].
-> > Unfortunately due to sheer amount of patches this is not easy to review=
-,
-> > but that's what we decided during a community call.
-> >
-> > One of the biggest changes is get rid of partial linking entirely and
-> > build .a archives isntead of .o.
-> > We diaviate from the kernel on that. Instead of calling a custom script
-> > to create the archive symbol table, we call ar with rcTP (isntead of
-> > rcSTP) since we want a resulting archive that's sauble with the linker.
-> >
-> > The only affected platforms are PPC ones. Unfortunately I don't have an=
-y
-> > of them around to test, but the objdump of the resulting files --
-> > arch/powerpc/lib/built-in.[oa] looks identical.
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> This commit breaks the mx6sabresd_defconfig build on my Ubuntu 2022.04 ma=
-chine:
->
-> $ make mx6sabresd_defconfig
->   HOSTCC  scripts/basic/fixdep
->   HOSTCC  scripts/kconfig/conf.o
->   YACC    scripts/kconfig/zconf.tab.c
->   LEX     scripts/kconfig/zconf.lex.c
->   HOSTCC  scripts/kconfig/zconf.tab.o
->   HOSTLD  scripts/kconfig/conf
-> #
-> # configuration written to .config
-> #
-> $ make
-> scripts/kconfig/conf  --syncconfig Kconfig
->   UPD     include/config.h
->   CFG     u-boot.cfg
->   GEN     include/autoconf.mk
->   GEN     include/autoconf.mk.dep
->   CFG     spl/u-boot.cfg
->   GEN     spl/include/autoconf.mk
-> make: *** arch/arm/mach-imx/: Is a directory.  Stop.
+> Thanks I'll try to reproduce it later today and let you know. Do you
+> know if we build this defonconfig in the CI?
 
-Thanks I'll try to reproduce it later today and let you know. Do you
-know if we build this defonconfig in the CI?
+Yes, mx6sabresd_defconfig is built in CI, but no CI error was seen.
 
 Thanks
-/Ilias
