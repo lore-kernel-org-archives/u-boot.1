@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D16C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 22:43:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85F2CC83F17
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 22:43:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BA5B8380F;
+	by phobos.denx.de (Postfix) with ESMTP id 7A08D83826;
 	Fri, 11 Jul 2025 00:42:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qs6gkCsB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gxVtDzF0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F49383738; Fri, 11 Jul 2025 00:42:07 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 2CE1E835C9; Fri, 11 Jul 2025 00:42:07 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BA1E835C9
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 00:42:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4597583754
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 00:42:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-407aaace4daso614090b6e.2
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:42:04 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-40af40aeef6so500502b6e.3
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:42:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752187323; x=1752792123; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752187322; x=1752792122; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Dawx3Y4HtCfXWccM4WfwM09El3FDRukSU5z4tQH8PDc=;
- b=qs6gkCsBBVVyItaIc/pxtNEeR5Th7sU7jNfXj30uUQtNfrjivtvDiY/KBvEMXqDBe2
- Nlb4Y+mzMd8X1PfB+TwRsEIiuzFGv67rlEaqd87oMbC8dra+f4mePSS+wo0XZBULvRSM
- snlFtoHOlL4ZXdPgKX9XW/AmqT654WGFC1pK8=
+ :reply-to; bh=3M7eI1w8ulExeq82A6lEYFFT3utrWxAH1KrDWwlA/bI=;
+ b=gxVtDzF058eniP4xK4vSemxURZlFY/GxNUldSV+31GOTJcXyv7MUutDRgmlNvMLzMv
+ JijbWKma4SUzaPSUjgc7+c9eMEyielJzbwO6sw5MSKVCWvEK2SQsDAFifIDccHKT7JGU
+ 5XBjMvNOAE8FKovn4plD+pcBPOY8chHYDNKnA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752187323; x=1752792123;
+ d=1e100.net; s=20230601; t=1752187322; x=1752792122;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Dawx3Y4HtCfXWccM4WfwM09El3FDRukSU5z4tQH8PDc=;
- b=Ox5mBuwdRZbF2vrA/LwLxOxMZAN0mmtP60j4Jl0xIIaElGtXPX536F6xiyijW2n0zK
- E+oHOURSNFrOjcZj2Hp+pSOJin0zW8pJLjNAwl+wieBgLqaC9Mx5uAq8cTrb6Td2Alh/
- EV1sMfPzSoXtD7ab+7w2PP8DToUBUhcswR3ZFEkrH4TAmD8CPLmg2ToSxisrQFhHFvLU
- WilA+G3VnwGhNexq4jc1Rc+Z46m4MJXxq7wZsuaiNCP+bVhKYytRXCo3xacofnwAZ2Fi
- V5mGjPDnjF7TayyYXFCgbOjLb3tRvfUBP3LcvBLzQdxRfiCvzrXqieH3sdNUFHeOhisY
- m1Kg==
-X-Gm-Message-State: AOJu0YzHH5G/kWMf0CPktedvOCtQpDdUr3qQhbPmgb1G7P7+b5sWzH8G
- 5fg0o35yQ+AR/sg/3PxC0EWfn0InsksW+SU+Gn71+q+DaIqPBBm2Xv+6tVstp44GT0BOwXUoGRe
- OClYhWfk=
-X-Gm-Gg: ASbGncsjXh2JXoREHQWqsn4RqYsulXShZnR29OVX58T8agbgpJWsj/SGWpXM+ZlCkhq
- MR2j8JLg5cKONQfBcho4WAbyjtxMLNcy7KraOD8lkF1PfGDUtBqpk9bBkDQWXkQcMu9ytHEMxPb
- mgvCeYLs/h/9K7eTos6rqhV/b4R+lPp5aPOs6VHikXft1zSTsNpe2aCz+XCTVxibt3jKXxCThW/
- XLVaAsT6b+B1ShMrnFLdF1oD6IT2D4SX7i2D5G7WmjaLxEOCbeiVoz4mGpHY30kMZg6wBewU3Ar
- cGdqapMtH3wAQGxYpekew6iOUiFXC5ZP7AqfTThJfvhmPM0LjMFHcIhW6CFAY/vegG0T08vixJa
- 5E9SxYeApvFdtPmXjM9XzcW1OuJdD56u9f9tlLr7PaQz7Q3gCKkE28EWGBvsatJ7FDQ==
-X-Google-Smtp-Source: AGHT+IG46r0Ruc9XYAn3qg4n80c5dydaK2YZ1s5ifItbJ93LGfloRmDWBNH6N+9QcyJEj2G7b/63bg==
-X-Received: by 2002:a05:6808:3190:b0:40b:a456:e73a with SMTP id
- 5614622812f47-41539d95d73mr526104b6e.28.1752187322841; 
+ bh=3M7eI1w8ulExeq82A6lEYFFT3utrWxAH1KrDWwlA/bI=;
+ b=YmOnYaQG9zmB09lZUcYS+2ADYrCFEMxKs3ffI5Y+fuM5dSJDs4ZtfWztvH9Uw39acU
+ D3svGxopB6NhEzluMUu2e8dEqUDxsSu1FTI2qcONR4T4L2qI+wW2aQzGplT8gTATagNh
+ b369rUv9hHdZZKGKmVSzrgQFbv2j/87/f9tmdFC/Xqt6b6krs4HKYKiOfaYm7w5AH5Y5
+ QOcQYnhtlZsC9BYTT3OOEb6csfg1v5NMesZX0x9zuvWFWXSGA/rb7b5JT/K4ZdjhSorZ
+ mcI/MOO/dPw1Ry1KAjFZzKHnSpREKLZrPKiNQRkpFHjKqwrPLamg+4de+bqmk7meUfzp
+ QVPw==
+X-Gm-Message-State: AOJu0YxWPOhVoqox89dUpT3j+kDO4gI/8qkbOKfvysPqE7OLUvVX2m1y
+ 54Nk6DVtWLBchmO49W/6at1FtiWSxM9KJWgCX9Pll33mYhIWxCbse/Vdy9BUZVkJmwGRhL7ISt5
+ 03oeRV/Q=
+X-Gm-Gg: ASbGnctCTEkqaF/Tz7F9M0uH9WJe1StHQPwPjpQ+KcQT0szpTVE+wzaaVNw7D90wPb/
+ vGDEx6eScBt4ykmzGvsNophuGXFdXuytK7dtet+8h25RaQghnmKjsDHnjyJ8E7K247QwNchcATi
+ FYnCQSutXXXTQATffFIs9+BZn4rPvPlqex8iRnUTh7O8NaXqoT1Wl+SHGelOcgtc7rIQUUUhhnA
+ ztzY/UiL4QXwblWtSpSvQ3D+QvsDfoZa36Rhj+tgQSIGKQLn1VuaBDybR/hRHNlkba9fGZbvhYR
+ PkFxqripBcdZ6fGRLpk0z6LtkGAWBtHbIvXogVYgdHNDImmVjJriEQLioaQ3wnCzo7sECWS70JM
+ 0BLxDMCwIuPn5qQPEbpJzoc3rV3cWIAEgLqYgiOetxHFckfoTGSVOGXg=
+X-Google-Smtp-Source: AGHT+IFQ0wIxAUYfrDCKvh4gTMjCGrsE4hIKVh5Ly+Y9M/Haynb1rMyCfJs+Xae0oXuZHpS4a/K4wQ==
+X-Received: by 2002:a05:6808:e8c:b0:406:7769:d351 with SMTP id
+ 5614622812f47-415116183d1mr931827b6e.23.1752187322023; 
  Thu, 10 Jul 2025 15:42:02 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf12b745fsm357354a34.64.2025.07.10.15.42.02
+ 46e09a7af769-73cf12b745fsm357354a34.64.2025.07.10.15.42.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Jul 2025 15:42:02 -0700 (PDT)
+ Thu, 10 Jul 2025 15:42:01 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250702010429.18958-1-trini@konsulko.com>
-References: <20250702010429.18958-1-trini@konsulko.com>
-Subject: Re: [PATCH] ata: Correct two dependency issues
-Message-Id: <175218732210.2073260.435739675561639414.b4-ty@konsulko.com>
-Date: Thu, 10 Jul 2025 16:42:02 -0600
+In-Reply-To: <20250702010422.18911-1-trini@konsulko.com>
+References: <20250702010422.18911-1-trini@konsulko.com>
+Subject: Re: [PATCH] crypto: aspeed: Tighten some dependencies for the
+ aspeed platforms
+Message-Id: <175218732118.2073260.950000049619486905.b4-ty@konsulko.com>
+Date: Thu, 10 Jul 2025 16:42:01 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,19 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 01 Jul 2025 19:04:29 -0600, Tom Rini wrote:
+On Tue, 01 Jul 2025 19:04:22 -0600, Tom Rini wrote:
 
-> First, the SATA_MV driver can only build on kirkwood or mvebu platforms
-> due to header requirements, so add that as a dependency here. Second,
-> SYS_SATA_MAX_DEVICE is also used by the API code so allow it to be
-> configured in that case.
+> Some of the aspeed platform drivers cannot build without platform
+> specific headers being available. Express those requirements in Kconfig as
+> well.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] ata: Correct two dependency issues
-      commit: a713fa1b5d4090fde3d84d25b7800de8f9feba62
+[1/1] crypto: aspeed: Tighten some dependencies for the aspeed platforms
+      commit: dbe1fa4d260fffd094d936c27d17bf4910bf2472
 -- 
 Tom
 
