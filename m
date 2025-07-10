@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8DC2C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 22:25:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F0DC83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 22:42:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B12BA8362C;
-	Fri, 11 Jul 2025 00:25:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7B198836F0;
+	Fri, 11 Jul 2025 00:42:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fJ+Gu4jg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HfITiPnD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01D19836CE; Fri, 11 Jul 2025 00:25:18 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 0B1B5836EE; Fri, 11 Jul 2025 00:42:00 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90D79835C9
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 00:25:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAC98835C9
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 00:41:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-73cdce0ee0eso377240a34.3
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:25:15 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-611a7c617a7so447499eaf.1
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:41:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752186314; x=1752791114; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+50ZvlNVNwEClzQyfMBvFtuoqgiUyrZYgZERo//SWeY=;
- b=fJ+Gu4jgtSr9x8Pnc8dVOfrKP5/tH2sx6fHQF4eZcll8cnLJRqweZCl4ivNlgdO+ia
- OGUkSn1k1kZHOU5eWMWfbccG6M/H3vbpi0tzMU2sfxn17Vaojc2Djqm+qhFd9pb69X6v
- NNIELcmAzvm0S5ag030oMXhpHFTYJfby6POUA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752186314; x=1752791114;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1752187316; x=1752792116; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+50ZvlNVNwEClzQyfMBvFtuoqgiUyrZYgZERo//SWeY=;
- b=kA4E3Ys8fyNkv/nOGtu15o2xdirHj500HEnUdPU9SjV8JtLxvIBcPReW5AVRlzeget
- iTCS1sYil+yxT5GPjqMkV99hSGdYDJ6/9wbBiJXA9vS0NqUtZNwEvz4xbVEUmceG7093
- KUoavoWd7+KA1GvwuEOiO91LXjvYqwcdM3+WRaX36VV7zSvkj3j+Bt7dzKhbcvkCu4Xw
- fDj8I4uzMMiRxDEvT/HlxzmepHaygEX5mtkJ8//G0rka3T4cKLPleg1pAKGqoH5lXMZg
- aQ03IrIga2PZT9OBM/k4ru7YBN4EmjJqmu7EIE6rWfZ+RNyERmslxNjlpFWuPumZivp+
- LEJw==
-X-Gm-Message-State: AOJu0Yz9yt1a4PbctSudpvQjWG5rpe+Ivid/DKdf06Z4iFcYWAFXnGAs
- M6FCvvM/ZQujo12WPM+cnUtsZqjAr7hYfQMqcNTkwmCUeUboNyPOgkVdlhVesaP8ENDk3cKlJdI
- JIASVeOw=
-X-Gm-Gg: ASbGncsUYDwdGXtKp8G0t25NhPBCeKliCVTQkHIdzsbr8p6ty0OhRJB87feGLXV1/kJ
- /aR7c8P0PlTrpXpcUu+dLSfsrnz1Nzr8ADitoMyUktWw6tsoTv2WV7BP7tyB6g/Zn/iUkzj2UZw
- nOej7m8wgxDhCeLTIvxd2AVy20JSo1PYwqok+9M/Bxe0KoNYAAeQQ5bZPHtO5Rs5mdOQSf/wYYW
- 3qjvnzz7KnW7pQ3CPxPQ53vRPj1Blj5QEYTM+UDQfug+hE9aWioCpwD/BmqFkCqXuhpn5zHpOgy
- 6l68S7oIhYcINKaMskTQPt2h1cO8/PflsmNfEAqPiyVWWyQxfiCyN9IAMo1KSzyzjICYHmijkkw
- AqiNx9V6gmlUePRknmSeBJ2YZxTWBPbamNDfyG6ooXygesgstnoykAGdFxS1ClkobgO8=
-X-Google-Smtp-Source: AGHT+IG+TUBMftVFPxySv3uF2FJchy+s93fBPvvvrpQWLLCG2YwII4hI4wi+T95pFSfScgH+mLTCVw==
-X-Received: by 2002:a05:6830:4990:b0:73b:2682:5b2b with SMTP id
- 46e09a7af769-73cf9de1fafmr1122430a34.8.1752186314322; 
- Thu, 10 Jul 2025 15:25:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf1064f51sm353639a34.3.2025.07.10.15.25.13
+ bh=hyMjIXJoAHmum+9Lcx6mjxZ56ipnAnMMfN5oCZ6HHEk=;
+ b=HfITiPnDFaRDpNdDfFjjocMr3voRwjMOAEJSpP8JqnZx8KJfoKmxxtNtDJXYckfAY3
+ raAFKZaGTSEqxo4pl6O9/8z2PvhOOr5GRZd63RkjO3QyXhFGVahdcObThUKNi8jUg5TA
+ +lTItTGTTND/Hs8lOQjfwWOSBU5yduSYXa09k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752187316; x=1752792116;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hyMjIXJoAHmum+9Lcx6mjxZ56ipnAnMMfN5oCZ6HHEk=;
+ b=YzzLYfJ+LXtwxTFb+C9IupK66BqNCV3f1iaVyYlUmuVweIKHTHfoN/UYG8rB8lYCgN
+ gJ99pQGPOeeDhJDjEktR736XJQ8gMEAkeChCtELroxe912pJ/f2sMj7/ZZF7W6BHhwRi
+ GV+CcfAJfc+9zk6uP7c+UkE9rrDlQopvJYMWRC2gVxx1VVf2u5+lmKLeQYcEA5WehPi3
+ 1Eg0sAtpjvXWW/TvMwnI8sKHrBA/alfD6hEGrK19cPJuZJU/TwKCA0EAoMbmdcxizE4G
+ jRajZF32nHU3UhXUwAioOxX5+xSlahVTV8rtGoefkrht4NsZ+azofjqXFa0QvJicOeat
+ 2DNg==
+X-Gm-Message-State: AOJu0YxEAjPP1MkEBKsbYU3m4CXLzOUa4mfbiCDF8BxHrRL3TRl3aQzU
+ eBq5rYGlE7ep5EP0le8ezBBDu0mmb7N8hLVjYJfyl+bCQYhD3BP45mXrY1Gj315+Ylo=
+X-Gm-Gg: ASbGncvFFbU9wg7pFLSvCez4YU2gJil5bnTMrEz3UIb0WFz6DPPwn4JsnTJ9v3uZppw
+ cetwAACmUe5g3Oxq/FWp89IpBM5FKXeeeGXbiCmnT68uDs8X+EpxfBzwwLDeM6FIsg5taB5DxXT
+ X0F7Lc1kGt5+eah0klaEVQi2Fj9y6vJmcjMdf/MhIsrZL0rSJPVQJmJJowHt7zt+IxCm2Dd5wgZ
+ Z5etcnjnRNuWOpL1lRJo/Lb/VQOCeeGwMgDs8D/4zdbXzILNR/SPs9DsYXbSu+gf93bs9gzXxKU
+ anXI5T48EtY2GNmT8xUTZPpNhkw1HMZazvkA7MkW8DKS4ulg7ZlIqoCMPclj+JVQ4dI9/XVpuJ/
+ l46hThUGEWMaYLMHf3iQl13TNgo+Bzgq6eu4R9tBChYfInTvxwKXb+GqZN5K9e4iVVw==
+X-Google-Smtp-Source: AGHT+IFUM0c2GAsFrE89fFXchnHdz1P1zrok6g2Qe2GrecXQJu6Oi6a1W7XXi4IKy/qNFBGR/huDhw==
+X-Received: by 2002:a05:6830:f85:b0:72b:9e3b:82bc with SMTP id
+ 46e09a7af769-73cf9ea0788mr984667a34.11.1752187316567; 
+ Thu, 10 Jul 2025 15:41:56 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73cf12b745fsm357354a34.64.2025.07.10.15.41.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Jul 2025 15:25:13 -0700 (PDT)
-Date: Thu, 10 Jul 2025 16:25:11 -0600
+ Thu, 10 Jul 2025 15:41:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Mikko Rapeli <mikko.rapeli@linaro.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] scripts/Makefile.lib: fix *_efi.so dependency to
- PLATFORM_LIBGCC
-Message-ID: <20250710222511.GD6424@bill-the-cat>
-References: <20250710145903.GB6424@bill-the-cat>
- <20250710144445.335480-1-mikko.rapeli@linaro.org>
- <aG_XXm3Cvm6DJPQy@nuoska>
+To: u-boot@lists.denx.de, 
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+Cc: Marek Vasut <marex@denx.de>, 
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
+In-Reply-To: <20250701044923.7410-1-nareshkumar.ravulapalli@altera.com>
+References: <20250701044923.7410-1-nareshkumar.ravulapalli@altera.com>
+Subject: Re: [PATCH] drivers: net: phy: micrel: Try to get phy node from
+ phy-handle
+Message-Id: <175218731540.2073260.15188578213282869956.b4-ty@konsulko.com>
+Date: Thu, 10 Jul 2025 16:41:55 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="af1uEUZlO7datqVS"
-Content-Disposition: inline
-In-Reply-To: <aG_XXm3Cvm6DJPQy@nuoska>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,49 +101,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 30 Jun 2025 21:49:23 -0700, Naresh Kumar Ravulapalli wrote:
 
---af1uEUZlO7datqVS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> If phy node isn't found in ethernet-phy subnode, try to get it from
+> phy-handle. And when this fails, only then use Ethernet node. This
+> fix results in getting correct phy handle properties for the
+> phy node if defined.
+> 
+> 
 
-On Thu, Jul 10, 2025 at 06:08:14PM +0300, Mikko Rapeli wrote:
-> Hi, moving patch review from oe-core list to u-boot:
->=20
-> On Thu, Jul 10, 2025 at 08:59:03AM -0600, Tom Rini wrote:
-> <snip>
-> > I cleared you patch (and moderation flag) but I don't think the above
-> > works in all cases since PLATFORM_LIBGCC can have a number of values
-> > only one of which is that file.
->=20
-> Right. Should I make the dependency conditional to
-> CONFIG_USE_PRIVATE_LIBGCC like it's set in Makefile?
->=20
-> I don't see another variable for lib.a to use in
-> scripts/Makefile.lib
+Applied to u-boot/master, thanks!
 
-Yes, that's my first thought as well. But that might also fail when
-CC_COVERAGE is enabled. So you might need to adjust that logic too.
-
---=20
+[1/1] drivers: net: phy: micrel: Try to get phy node from phy-handle
+      commit: acf964c4758e2a60656a385f27dea0250fbbe7e6
+-- 
 Tom
 
---af1uEUZlO7datqVS
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhwPcMACgkQFHw5/5Y0
-tyzhmAv8DoJRBokDffGFskx+FkI2DQt7NakIaJFifqHC/C/2R1ElaS3pxklWh1Ls
-3ioFUuZat4xA3Tz0Gsici2rGMmPuqj2jQyrxJrYXEgLp6hFxf8L/nP/tBuPlH1Xi
-CoS4ulaODCzmkxAtYU6axqQcCH09qNxhNOKfof/aR+MG6L1/dHtYv5GwDpCQ8VTA
-rGuzZhfnHlAcP3LXKCIp64Nxt3V+mDjdP5blgIWcfQZpzo44Hwbyl+5y0oNhXHfA
-Dol/A/98gd91hnzbPGH6r+BXsxxWGNYYWp4huUICkotknXKBwfPROu/sCOQgOsng
-z3wvfdPmsmoJiuU7weVp3Vql/JKjRCQJy90KWYCU69oDUKXCmc2Zzot94TbQ9E3k
-dRUcQhVFaRcK/t7N8atfudBntkMXxqObf4hjsvXPXDe5sX29POYaEp7qI6O5wM7h
-kOqEuIeatQ9K0C9RJ5+4q0uFV3rxbjeiySobtUaCV6SqBDG6PsEYo9aUcDiSNOM4
-58sk+iQ7
-=VmNw
------END PGP SIGNATURE-----
-
---af1uEUZlO7datqVS--
