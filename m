@@ -4,78 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97CC9C83F1D
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 10:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0543FC83F17
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 13:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97C87835B6;
-	Thu, 10 Jul 2025 12:59:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E436835C9;
+	Thu, 10 Jul 2025 15:05:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OUvRAOe/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VJ3VLX4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4D7A835C0; Thu, 10 Jul 2025 12:59:46 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3E0583599
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 12:59:44 +0200 (CEST)
+ id 0682D835B6; Thu, 10 Jul 2025 11:59:35 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 44C29834BC
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 11:59:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-553b60de463so745037e87.3
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 03:59:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752145184; x=1752749984; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0PzRNefiTm6GRt7/zRzMiNZ1/FlW1Ggy23CaT2hqL80=;
- b=OUvRAOe/aYOuhpcx5vY6EUglWyCPS8nEdBmNfQiGHx/E1J9AZvJYq7iixMcOSyNTf6
- CcLYKMLSkYSedkOABVT7UVmsXBCWFTyBCONEj6oTmB/a5nGqr43a4WpmCize3xqC2a9v
- GVRs2efq1eWoVxR5dhTpVFIR0QWbS+dUXqUqBqg7Ng8gI/8Vy/BX1U+jyJLsW0e32DPh
- NhpqpqykSILufrmjlg4eB314o4ysGWP5Kq54LBD28s1bPtFf+xEbv8wm/9cVHObaPGon
- ChZ34tg7VL8VmJblecEe6EN7R+inSnoCTDinGpHUpik5wU7syFZlhjvDcMttOXiDfGmw
- Gekw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752145184; x=1752749984;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0PzRNefiTm6GRt7/zRzMiNZ1/FlW1Ggy23CaT2hqL80=;
- b=X1uUiBP5sO+wpYRgAefVDGiGpzMzeYEDPn7ngxzzQE8a5naR5qVsE12QZ6hxAEe0Y0
- J5JMrpVr5sQuypnuPiVDnp7M1Hq/1Oq+6D7dHaohQdlhr3KCABfr4jKzJ1cfiZOyrgFz
- 6mWXBfcitFt7+lMuBv0X/kB4Rq3CfQWqm9c8uDNtovAlcHXp/NuyT2o+BIHozeeaz9Tj
- 1xsiziNnUPFw9v33HY2b4ucEEXC9Wa2MAD18gvBy6YrEizRHJa4mbT3m4diggozE84an
- GEnoGUfIymRSx7BJLQev4hO+zpIIYdVWIT2h5bj1LiAXDJeOmBDjbS3C9is1zc4KU4wg
- C3ZQ==
-X-Gm-Message-State: AOJu0YxZQC/G5Co6GljBGazDFxalwwrbOjz82aJVxYFPxsTnPpIaMAwE
- UH25vIDXN4GAga4ubRMdpMH6brTjWj4tghs/3JfTi7N5FW3EsDF+xyhYl+O9csUIhqpj5TS0k5g
- y+MASDC6ZiFXB7jz82utnLFz+F20n6LM=
-X-Gm-Gg: ASbGncsqTy0eWYJc7ZEFQTGUiT4UFEvVgYR67Ahzjfzts8wjmV7LA9sxlUAgTpzP/J2
- HghShj8rinUglfEZ6fg0pQaG/3h44yE7Q0uoxEMZbb/ZVoP0CnpHG2++2LkH119nr3HXKlomTks
- oHXzmcF6oPezUpnGbxtTULYesROzl9jGAK7qtMF8Nq2BCTuSllaAgKrrhUYJQxzAuE4j/0IV9C9
- K8=
-X-Google-Smtp-Source: AGHT+IFuDpHIAJZzprK1X1l5Ypxt0xqnrTyiB+8xctQm+Z2I2g+M7FkLYQBWAmV6+lFPTVi/mdDLMMCC0hRe7Oos2UY=
-X-Received: by 2002:a05:6512:3986:b0:553:3073:c38b with SMTP id
- 2adb3069b0e04-559000423b6mr1038152e87.1.1752145183782; Thu, 10 Jul 2025
- 03:59:43 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=g-praveen@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56A9xSWx1108685;
+ Thu, 10 Jul 2025 04:59:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752141568;
+ bh=boMjefzbQ1NBGkmMncIjnAaawQglbwdoa49apJQyKvg=;
+ h=From:To:CC:Subject:Date;
+ b=VJ3VLX4aKtAEwK0oAjpFj6WHG28+r+XhDTMWpW8HJyXVKbKDsmErBsDBYFdWVkIrw
+ yVrSZF2q1eg9B7GiqHBxhXG+thYGfrUGSiss12e/tYChBpFGDlgcEwcxeFN8oeSmdF
+ kVE/Wz1/2cZkKJEDOcHzwy5DtYQ47hx3zbcBKdSA=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56A9xSTt2928385
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 10 Jul 2025 04:59:28 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 10
+ Jul 2025 04:59:27 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 10 Jul 2025 04:59:27 -0500
+Received: from a0507176-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0507176-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.200])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56A9xOes1147418;
+ Thu, 10 Jul 2025 04:59:25 -0500
+From: Gokul <g-praveen@ti.com>
+To: <trini@konsulko.com>, <rayagonda.kokatanur@broadcom.com>,
+ <casey.connolly@linaro.org>, <sjg@chromium.org>, <m-chawdhry@ti.com>
+CC: <g-praveen@ti.com>, <u-boot@lists.denx.de>, <j-keerthy@ti.com>
+Subject: [PATCH v2] configs: KASLR OPTEE RNG support for K3 devices
+Date: Thu, 10 Jul 2025 15:29:22 +0530
+Message-ID: <20250710095922.144361-1-g-praveen@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250709234918.140919-1-davidzangcs@gmail.com>
-In-Reply-To: <20250709234918.140919-1-davidzangcs@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 10 Jul 2025 07:59:32 -0300
-X-Gm-Features: Ac12FXzexNrWOTMxjaOkR0odjJu7UKR5dWcMUfRnSFvakQmiebvMtx9XXg-nYag
-Message-ID: <CAOMZO5D1d=Y9i9E+Pcm0sbyKE+M=zUj_9Rs_QHbaE5DPvWFA=w@mail.gmail.com>
-Subject: Re: [PATCH] soc: imx8ulp: Add celsius unit for temperature
-To: David Zang <davidzangcs@gmail.com>
-Cc: u-boot@lists.denx.de, uboot-imx@nxp.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Thu, 10 Jul 2025 15:05:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,28 +79,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
+From: Gokul Praveen <g-praveen@ti.com>
 
-On Wed, Jul 9, 2025 at 9:44=E2=80=AFPM David Zang <davidzangcs@gmail.com> w=
-rote:
->
-> Signed-off-by: David Zang <davidzangcs@gmail.com>
-> ---
->  arch/arm/mach-imx/imx8ulp/soc.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/=
-soc.c
-> index bbcd862caa3..5de15b59b96 100644
-> --- a/arch/arm/mach-imx/imx8ulp/soc.c
-> +++ b/arch/arm/mach-imx/imx8ulp/soc.c
-> @@ -400,7 +400,7 @@ int print_cpuinfo(void)
->         if (!ret) {
->                 ret =3D thermal_get_temp(udev, &temp);
->                 if (!ret)
-> -                       printf("CPU current temperature: %d\n", temp);
-> +                       printf("CPU current temperature: %dC\n", temp);
+KASLR, or Kernel Address Space Layout Randomization, is a security
+feature in the Linux kernel that randomizes the memory location
+where the kernel is loaded during boot.
 
-Your change looks good, but please add a short commit log and send a v2.
+OP-TEE RNG is a Random Number Generator (RNG) component within the
+Open Portable Trusted Execution Environment (OP-TEE) which provides
+a random number to U-BOOT and U-BOOT provides this random number
+as seed value to the LINUX kernel for KASLR.
 
-Thanks
+Add KASLR OPTEE RNG support across K3 devices by enabling the required
+configs.
+
+Signed-off-by: Gokul Praveen <g-praveen@ti.com>
+---
+v2<==> v1
+===========
+* Added 'if' condition for configs to avoid enabling this feature
+  in R5.
+
+Boot logs Link :
+
+https://gist.github.com/GokulPraveen2001/44aa8c0962438c12ffc55e6ed67742e5
+---
+ arch/arm/Kconfig | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 7282c4123b0..cd27e5a5422 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -805,6 +805,9 @@ config ARCH_K3
+ 	select REGEX
+ 	select FIT_SIGNATURE if ARM64
+ 	imply TI_SECURE_DEVICE
++	imply DM_RNG if ARM64
++	imply TEE if ARM64
++	imply OPTEE if ARM64
+ 
+ config ARCH_OMAP2PLUS
+ 	bool "TI OMAP2+"
+-- 
+2.34.1
+
