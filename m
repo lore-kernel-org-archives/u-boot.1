@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC2BC83F17
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 22:44:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77ECAC83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 22:44:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65EB183845;
+	by phobos.denx.de (Postfix) with ESMTP id AE6CE8384C;
 	Fri, 11 Jul 2025 00:42:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Einpv3AZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RyDGjD3M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FE1C8362C; Fri, 11 Jul 2025 00:42:13 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 26A7E8362C; Fri, 11 Jul 2025 00:42:14 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A820D8382E
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 00:42:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8848E83744
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 00:42:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-72c27166ab3so869212a34.1
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:42:10 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-73a4c557d47so699562a34.3
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:42:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752187329; x=1752792129; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752187330; x=1752792130; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tLuWL8iKdEtLbLZgq9KkFrLezpkA8v29xVsbdWc6X44=;
- b=Einpv3AZr8xGcDisby78yNA/EGkyFJFd1LnK30WVO87mnogWc6gIhE1XSUZp550nL1
- 3QNqzuzkezlt9/fz0tPFcmYn5dbWWJN0cNsa6mEplOz8g0ucfH9jEwQAYCjJT2MfRskK
- IABtZ1qRELJgiRcY16xOv2nrldgF8OAqp710E=
+ bh=yo5S9oZXPs2QRtf1RE4dXDZXicVIWDXl3sCjuIzhwtQ=;
+ b=RyDGjD3MtvO0QT3hRBRggTHyKaJFtqQ5X7O8iRYP75Muc9uCAjrdHEqq/6LpruP56l
+ gTITVwKyGPzuLt0a75IRwDMkTTAsGNE80LdGiL1gxGv9wg+1N+v9awAYwiffUh647J8C
+ F13DT6wWBISgC6BSXdMLkuZV8xJmYR7BAWM0A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752187329; x=1752792129;
+ d=1e100.net; s=20230601; t=1752187330; x=1752792130;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tLuWL8iKdEtLbLZgq9KkFrLezpkA8v29xVsbdWc6X44=;
- b=SiJtAc0+g2p6DyOpR1YQsXsdB+MFplOd4ahnAz3Pe3B2q6NPSyDGTLFXAR/wgRvT4g
- CZcZhudWAg3XB0PG45jUueheCl8tHB+V3B659E96EtWwvGOXuAN71/TgIXaiagqYTTHP
- atvEZZf9+7KjNkwpxqAk1fZu6PSKB4KhRmIHU6mwUL3bnCgC+15qybnVBsy5e444t20B
- Q8AuVr2v81BHlBdB7a9mEZ6zahSmTBuxQDmHIMJS10AnhNf8yRP/TwlZECLpkeucY0mf
- gVxhPmGa2RNehTNyrQNzCYidfzVtRNvAnicnfLFmh4XD4i654pPK1bc++Ul73kMj2IgJ
- A3Fg==
-X-Gm-Message-State: AOJu0YwdLSgWadUaQgDvC2UWuZAMzhBRJ1joyQX6NlbBmCH1s9AvNz7A
- lQVHr853hk27cb1tV4LBY9b3Z8Q0OVd8s2IVe4tD9F9HhpYYzqzxMJVCJBfYeXjc1UFHOhRGRW/
- xlcEcYmc=
-X-Gm-Gg: ASbGncuxPxipkSOM8M4f1YfnuEWacPDYGedL4xfOV5R0OeXDGuv4GanVnqwC7f6O09W
- IkNMz5+rpKlRY6YPvMTfL3HrTsaTU2f+YblQZhhTqLivvZqVlN2rXmOmtePd7/Y7D2YrvFQatNb
- Gr80E4S44IloZkTS7BuhekK3SMADt0dFT+U6pJUsBd/dADxYIpYiwiMARBuJqfuVPBC1iABHLXU
- M7Ri7ICPcr9h1hMjKIQpUPHXj4TArSUDywZ1clLzGQ+Fm3GxB90a/PsViceNAbDFKquTJ5zZOrs
- QhMzLuktuwMWL5bPnAsi1lTpfUMtu01RJm7UDI8g1a0vjdfGwLIc2c7k4vCuwP8UsqPtnRIB7za
- apHJnLzPlOCkSMoYrq4dRyQR13K6a5DyLb6L1J/t1vgSKQU9F+Y4HSYQ=
-X-Google-Smtp-Source: AGHT+IFRfzzFz2UTOKD4YxxVwRQh8J4t6Yx0BMbpEkZg5Ca8bsqU4soWoh1HBKRKzNFnpd938sl+zg==
-X-Received: by 2002:a05:6830:3c88:b0:73c:925e:c6c8 with SMTP id
- 46e09a7af769-73cf9e9db44mr852361a34.7.1752187329349; 
- Thu, 10 Jul 2025 15:42:09 -0700 (PDT)
+ bh=yo5S9oZXPs2QRtf1RE4dXDZXicVIWDXl3sCjuIzhwtQ=;
+ b=bJazhEtlIyQJ/jRc5rLl8hmrvsdtyoDxz+kC4HTLBnVL2jebVe4keumQ1InimloLZK
+ fVgNiv8cNVLHiYmyAGLbGki2FO0oOsj0a6KkiqXTFj5axDo8wh66aLULOOK8BDaQw4ZM
+ ZC8sPfhFEN7TjXYmu/wnBt+WZUUry8jGB76klXuoz4W+gMbLhGKhwkRKzvFw3fYNroxE
+ eOLXBT56U6ri+EcDY1ZPMN27hPLbdniPQ6bHVftV/kdWataE/LilRnl3JouBir0y7kGx
+ mko6e0wQaqCAhuF0rLYFCNbPlMGF+cov6sJkV4uUCYI/wu/2Z6vee0CPnWs1eD+5fRik
+ k/UA==
+X-Gm-Message-State: AOJu0Yzv4xYM7IWoaHLrx/rMSGL7t97ROB5dDRb0XUf1HA/TThM9//i/
+ KgiGuIXfGykQHYKy6j0x+bbeUOKvcnc+3rvgRaT4BrpFIINhWpxv9G/OzsQAtSyTKgVAnjTzsZy
+ VYAWPcAU=
+X-Gm-Gg: ASbGncvZaModTtuxLDxQbwsWztueE+oyIcsSR3vvZnE7YEcMO0vAfl6WEireBFbLf0U
+ bgW9ENtPmSpX9cAeTdF5Tu+UfbZPwPp1CwEikJ86n8/gHa73xauYm03FRDijR0BBuilwt7tp5ND
+ DWSJOizsveQNvFdXr+uGRhH06MHsqBSnpQ8OTj7g2g2rPfs+eQavbZbxB1khlqwyWr3M9p+GvPv
+ vW+SYAyI9kmdEJdjTXlmd0E3WA66tmZ1H5HKlac0j/SksoTs8CS69DHIpDjWCyAERLnr7rOjVbw
+ JGPy2bYR9bUD82aFNyrLY78rQl+0VkPH7b8fZPiRuJxQfZj8swo4YzJVbYPxg5ltbw/HOBJehr/
+ 2yKxRtxOKC2wqtL0Wdd//YOBMueaUor9Bk05FlHjcs2dZTZPRFTGVXyM=
+X-Google-Smtp-Source: AGHT+IElJn1bp2hwyZKZTmW5oVpewV1QPMgJ0tcqgz529Kv17FPNbgBMti4bYcvDbcYwIJj/PfCuhg==
+X-Received: by 2002:a05:6830:6995:b0:73c:fb75:d571 with SMTP id
+ 46e09a7af769-73cfb75d7abmr282500a34.22.1752187330272; 
+ Thu, 10 Jul 2025 15:42:10 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf12b745fsm357354a34.64.2025.07.10.15.42.08
+ 46e09a7af769-73cf12b745fsm357354a34.64.2025.07.10.15.42.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Jul 2025 15:42:08 -0700 (PDT)
+ Thu, 10 Jul 2025 15:42:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Magnus Damm <damm@opensource.se>
-Cc: marek.vasut+renesas@mailbox.org
-In-Reply-To: <175146324587.68406.3781314116200023930.sendpatchset@1.0.0.127.in-addr.arpa>
-References: <175146324587.68406.3781314116200023930.sendpatchset@1.0.0.127.in-addr.arpa>
-Subject: Re: [PATCH] makefile: Adjust distclean to remove .binman_stamp
- file
-Message-Id: <175218732853.2073260.6108276789420313709.b4-ty@konsulko.com>
-Date: Thu, 10 Jul 2025 16:42:08 -0600
+To: Bin Meng <bmeng.cn@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250702-nvme_fix-v1-1-a0d023f4305b@linaro.org>
+References: <20250702-nvme_fix-v1-1-a0d023f4305b@linaro.org>
+Subject: Re: [PATCH] nvme: Fix memory leak on error path of nvme_init
+Message-Id: <175218732941.2073260.9495590052004142340.b4-ty@konsulko.com>
+Date: Thu, 10 Jul 2025 16:42:09 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,16 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 02 Jul 2025 15:34:05 +0200, Magnus Damm wrote:
+On Wed, 02 Jul 2025 17:02:10 +0100, Andrew Goodbody wrote:
 
-> Remove the .binman_stamp file during distclean
+> The use of log_msg_ret to log a message and return an error meant that
+> memory allocated earlier in the function was not freed on this error
+> path. Instead log the message in the same way that log_msg_ret would do
+> and then goto the cleanup code to free the memory.
 > 
+> This issue found by Smatch.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] makefile: Adjust distclean to remove .binman_stamp file
-      commit: 39b836d898782e31961afd16769c46d7f2730858
+[1/1] nvme: Fix memory leak on error path of nvme_init
+      commit: f074616014179eefbca6f4b86b1fa6336711ba80
 -- 
 Tom
 
