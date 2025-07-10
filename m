@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B49BC83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 15:09:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A98C83F1B
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 15:16:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0A4B83666;
-	Thu, 10 Jul 2025 17:09:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 960B48362C;
+	Thu, 10 Jul 2025 17:16:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2069B8367F; Thu, 10 Jul 2025 17:09:43 +0200 (CEST)
+ id 8F3DC83653; Thu, 10 Jul 2025 17:16:02 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C90EB8362C
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 17:09:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C438583285
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 17:15:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,17 +25,17 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uZsu2-008eQW-Gm;
- Thu, 10 Jul 2025 15:09:38 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1uZt09-008eQn-UH;
+ Thu, 10 Jul 2025 15:15:58 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
  Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] net: lwip: remove eth_init from net_init as it is called later
-Date: Thu, 10 Jul 2025 08:09:34 -0700
-Message-Id: <20250710150934.3833907-1-tharvey@gateworks.com>
+Subject: [PATCH] net: lwip: simplify net_lwip_eth_start
+Date: Thu, 10 Jul 2025 08:15:56 -0700
+Message-Id: <20250710151556.3834583-1-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -55,29 +55,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The call to eth_init within net_init causes the network interface to
-start, stop, start again which can cause issues with certain network
-device drivers. Remove it to make it behave like the legacy network
-path.
+For NET_LWIP eth_is_on_demand_init() is always 1 so remove the check and
+simplify the code.
 
-Fixes: 5666865decb8 ("net: lwip: fix initialization sequence before a command")
+Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- net/lwip/net-lwip.c | 1 -
- 1 file changed, 1 deletion(-)
+ net/lwip/net-lwip.c | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
 
 diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 3918d57d7e58..d53faa39ba11 100644
+index d53faa39ba11..660ceb10cbe2 100644
 --- a/net/lwip/net-lwip.c
 +++ b/net/lwip/net-lwip.c
-@@ -285,7 +285,6 @@ int net_init(void)
+@@ -184,16 +184,12 @@ int net_lwip_eth_start(void)
+ 	int ret;
  
- 	if (!init_done) {
- 		eth_init_rings();
--		eth_init();
- 		lwip_init();
- 		init_done = true;
+ 	net_init();
+-	if (eth_is_on_demand_init()) {
++	eth_halt();
++	eth_set_current();
++	ret = eth_init();
++	if (ret < 0) {
+ 		eth_halt();
+-		eth_set_current();
+-		ret = eth_init();
+-		if (ret < 0) {
+-			eth_halt();
+-			return ret;
+-		}
+-	} else {
+-		eth_init_state_only();
++		return ret;
  	}
+ 
+ 	return 0;
 -- 
 2.25.1
 
