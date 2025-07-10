@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6E6C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 13:18:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A7EC83F17
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 13:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96222835FD;
-	Thu, 10 Jul 2025 15:18:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 014FD835C0;
+	Thu, 10 Jul 2025 15:31:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C7B68360D; Thu, 10 Jul 2025 15:18:17 +0200 (CEST)
+ id EB868835C9; Thu, 10 Jul 2025 15:31:56 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A4DD4835C9
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:18:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id CB31A83599
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 15:31:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C8A861EA6;
- Thu, 10 Jul 2025 06:18:02 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B7B71EA6;
+ Thu, 10 Jul 2025 06:31:42 -0700 (PDT)
 Received: from e130802.arm.com (e130802.arm.com [10.1.35.55])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5AF503F66E;
- Thu, 10 Jul 2025 06:18:11 -0700 (PDT)
-Date: Thu, 10 Jul 2025 14:18:03 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DE05A3F6A8;
+ Thu, 10 Jul 2025 06:31:50 -0700 (PDT)
+Date: Thu, 10 Jul 2025 14:31:43 +0100
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Michal Simek <michal.simek@amd.com>
 Cc: trini@konsulko.com, Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Casey Connolly <casey.connolly@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
 Subject: Re: [PATCH 25/25] fwu_arm_psa: Document FWU support for Arm PSA
-Message-ID: <20250710131803.GA1610792@e130802.arm.com>
+Message-ID: <20250710133127.GA1611084@e130802.arm.com>
 References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
  <20250702152528.1180414-26-abdellatif.elkhlifi@arm.com>
- <de8a07e1-dbf6-4232-b8e3-4b5b1ccf12e0@gmx.de>
+ <6ece62ad-2bf8-4098-9914-c387fd4797ca@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <de8a07e1-dbf6-4232-b8e3-4b5b1ccf12e0@gmx.de>
+In-Reply-To: <6ece62ad-2bf8-4098-9914-c387fd4797ca@amd.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,9 +63,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Michal,
 
-> On 02.07.25 17:25, abdellatif.elkhlifi@arm.com wrote:
+> 
+> 
+> On 7/2/25 17:25, abdellatif.elkhlifi@arm.com wrote:
 > > From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 > > 
 > > Add a README
@@ -111,12 +114,6 @@ Hi Heinrich,
 > > +==========================================
 > > +
 > > +This README provides an overview of the Firmware Update (FWU) support
-> 
-> There  is no README here. How about:
-> 
-> U-Boot implements Firmware Update (FWU) support for Arm `PSA Certified`_
-> platforms.
-> 
 > > +implemented in U-Boot for Arm `PSA Certified`_ platforms, such as
 > > +Corstone-1000. The feature aligns with the Platform Security Firmware Update
 > > +specification for the A-profile Arm Architecture
@@ -208,53 +205,84 @@ Hi Heinrich,
 > > +configuration:
 > > +
 > > +CONFIG_FWU_ARM_PSA=y enables the PSA-compliant firmware update client in U-Boot.
-> 
-> Please, use a formatting that lets the config parameters stick out:
-> 
-> CONFIG_FWU_ARM_PSA
->     enables the PSA-compliant firmware update client in U-Boot.
-> 
-> CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES
->     enables auto-acceptance on ExitBootServices(). Disable this setting
->     if auto-acceptance shall be handled at a later boot stage.
-> 
 > > +
 > > +CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES=y Enables auto-acceptance on
 > > +ExitBootServices(). This option is enabled by default. It can be disabled if
 > > +image acceptance should not be done at ExitBootServices().
-> 
-> Enabled by default implies that it can be disabled.
-> "if .. should not be done" conveys no new information.
-> 
 > > +
 > > +Platform Integration: Corstone-1000
 > > +-----------------------------------
 > > +
 > > +- Corstone-1000 is the reference implementation for the FWU Arm PSA feature.
-> 
-> A link to the board page should be good enough.
-> 
-> What is implemented for a specific board should be described there.
-> 
 > > +
 > > +- ESP partition detection is automated by setting Boot0001 in the U-Boot bootcmd.
+> > +
+> > +ABIs Implemented
+> > +----------------
+> > +
+> > +The following ABIs from the PSA FWU specification have been implemented:
+> > +
+> > +    - FWU_DISCOVER
+> > +
+> > +    - FWU_BEGIN_STAGING
+> > +
+> > +    - FWU_END_STAGING
+> > +
+> > +    - FWU_CANCEL_STAGING
+> > +
+> > +    - FWU_OPEN
+> > +
+> > +    - FWU_WRITE_STREAM
+> > +
+> > +    - FWU_READ_STREAM
+> > +
+> > +    - FWU_COMMIT
+> > +
+> > +    - FWU_ACCEPT_IMAGE
+> > +
+> > +ExitBootServices() Integration
+> > +------------------------------
+> > +
+> > +- The U-Boot FWU client performs several key actions during ExitBootServices():
+> > +
+> > +- Notifies Secure world about successful boot.
+> > +
+> > +- Accepts updated images in trial state.
+> > +
+> > +- Supports board-level override of fwu_notify_exit_boot_services() for custom
+> > +  behavior.
+> > +
+> > +Contributors
+> > +------------
+> > +   * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> > +   * Davidson kumaresan <davidson.kumaresan@arm.com>
+> > +
+> > +.. _`DEN0118 v1.0 A specification`: https://developer.arm.com/documentation/den0118/latest/
+> > +.. _`PSA Certified`: https://www.psacertified.org/
+> > +.. _`UEFI v2.10 specification`: https://uefi.org/specs/UEFI/2.10/
+> > diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
+> > index e26b1fbe05c..573630740a0 100644
+> > --- a/doc/develop/uefi/index.rst
+> > +++ b/doc/develop/uefi/index.rst
+> > @@ -10,6 +10,7 @@ can be run an UEFI payload.
+> >   .. toctree::
+> >      :maxdepth: 2
+> > +   fwu_arm_psa.rst
+> >      uefi.rst
+> >      u-boot_on_efi.rst
+> >      iscsi.rst
 > 
-> Please, state that you mean the environment variable bootcmd. How about
-> altbootcmd?
-> 
-> What would the variable bootcmd look like?
-> 
-> It is unclear to me which part of the information above is board specific
-> and which is not.
+> Is there a way how to run this on Qemu/FVP or so to see how it is working?
 
 Thank you for your review. I’ve addressed all of your comments and will include
-the updates in the upcoming v2 patchset.
+the changes in the upcoming v2 patchset.
 
-Regarding the bootcmd question: Corstone-1000 only supports the standard bootcmd
-environment variable, and does not use altbootcmd. I’ll remove the bootcmd
-reference from the documentation and instead link to the
-Corstone-1000 user guide for further details.
+FWU support for Arm PSA is now available on the Corstone-1000 FVP and FPGA.
+We’ve validated it on both.
+The associated patchset and FWU-agent firmware will soon be published in the
+Yocto meta-arm project [1], enabling the community to test it directly.
+
+[1]: https://git.yoctoproject.org/meta-arm/log/
 
 Cheers
 Abdellatif
-
