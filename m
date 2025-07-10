@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 415C2C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 21:56:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098B7C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 21:56:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48F10835C9;
+	by phobos.denx.de (Postfix) with ESMTP id A8492836D1;
 	Thu, 10 Jul 2025 23:56:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=yngvason.is
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=yngvason.is header.i=@yngvason.is header.b="LefGdNe3";
+	dkim=pass (1024-bit key; secure) header.d=yngvason.is header.i=@yngvason.is header.b="VZrcUtbt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF67E836CE; Thu, 10 Jul 2025 19:32:02 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id BF40D82AFC; Thu, 10 Jul 2025 19:32:03 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C927F82AFC
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 19:31:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2F4F83653
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 19:32:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=yngvason.is
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andri@yngvason.is
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4538a2fc7ffso17265165e9.0
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 10:31:59 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3a53359dea5so783641f8f.0
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 10:32:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=yngvason.is; s=google; t=1752168719; x=1752773519; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UTF+37kJ6oUy2g9APuN6nKId86xRWSbHVYZAyp7d8oo=;
- b=LefGdNe3d3Dzd+EwBfUlaLHMqOZnmnlWG2s8Y//PbNntwO26L1+8PG+/kYuEPhCu+4
- 9PLRhbMWBFRwQIZXtJmeqnzAToi/nu5EljADluHOIVeAeZJgFFuxE6eHsclQN9WGmMsb
- 7yJ/D4afkRfWVvsUkS31raU4kfQ2GsjhevAc8=
+ d=yngvason.is; s=google; t=1752168720; x=1752773520; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=12rNqt+SU6rZyivdY+m6w7uy0C8Lf7hknOS0lg4ux68=;
+ b=VZrcUtbtnNofOdY64tdkCyhZxDZuS0/eeqNl6tVuY1iKQ612EztXZUg1YcbwMEdbJS
+ 9fLK5oPwta5Piz4ah9otVMZ9aOUSTsN6h3RMzwu2ie/vfthldjPQFeTJdNY1krajvqg8
+ WLBTKZQ1loLkX49yhjb+W2WPaLoFZxpzLjVi0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752168719; x=1752773519;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UTF+37kJ6oUy2g9APuN6nKId86xRWSbHVYZAyp7d8oo=;
- b=iQTajToEWlERVjArZjltDCb4utg2NLqxiMDkoYeBoCNRnSJm3E6qbSN61W3YaJf5Ck
- jIw+tEXQug6cOjNfz9/fvujZ9FZqDF046Y+0HagnXrEtCa0qg/pm/rl/s603r1ZTj8iC
- y1oSve+6eIbaoMPrtsBr4uw8TAyRahuSqc6o8e0q43e6Ar0uRnxWWN8KFMBaj8g9z0vK
- fD8+8eflGDgGGRQCuwLp2vwdQ922JTlcUlXlNelFdAn2gDDkkTzJT08LQinh8dVSFpig
- SrD2RX9BqsLVF8f8wWw8I7i1luaypeq8seDWjSbplmev1a6OThBOBur+UM6ABXhtiiU5
- q4ZQ==
-X-Gm-Message-State: AOJu0Yx/B6Z+K0QfbR/jJTshzjXhbhRXQJQEkTRignkLE3G1uYhboUZ3
- Zp79AwaMy6YxJnLP+rZJnWDovJ1p6INu+yW08ZHxpCfJDE8o3I+AHPoLichmjSnCCbnQOan0yQy
- tCQKi8wYCWA==
-X-Gm-Gg: ASbGncv9vptbWguGqVqSpMFu1jzGzWZ5+1L/Rjgt6J/tf0iuID+qysab1dkQOZbxGSs
- 58cmMZDwIqj8a8G3t/5bFwZtq99itzLcfri46qW63IhAL8SCL/Gev7pMYrZvTfKWTkAXLRiIC7Z
- wpElp9mTgK8ZNjaLB+LyZPuC9IgOufOJjtL/gAtnbqrsAAf9ql80GXp40boZngWaADc0VpJugGl
- cR3DYhAZ0kp6NrZ0np2OjYWsPX+nTuzpIg54TDqUNUI+8i3d0kKq8VWAFDI8BR5mXMqDKjQR9x3
- 60E0PluJFrx1JFlKklR7d6d0jHmCrGuWK9tji2dYwgGPiR2NzCDbVEOPEapfguS/1PxpwiF6J+a
- PJJIVuuB0mv1egdgJIegglCM=
-X-Google-Smtp-Source: AGHT+IFmPGRAg3O57V/rSmkyJCJVOjOXsdACZ2wAPxFx1ycY2qw1Wwq05FyDE/gs79FzchNKV502Lg==
-X-Received: by 2002:a05:600c:3508:b0:454:b97a:486e with SMTP id
- 5b1f17b1804b1-454e2b351d7mr1593385e9.10.1752168719010; 
- Thu, 10 Jul 2025 10:31:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752168720; x=1752773520;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=12rNqt+SU6rZyivdY+m6w7uy0C8Lf7hknOS0lg4ux68=;
+ b=Vc+oJB1PL/5olpFC9z31lySxSOW4zUPYTrdT4B1/XB5Ssp6eoMf4SxYhbCIjFOyXlJ
+ EEjFJCHkHpP1LA9fxkjC63AKVdoW/xI4t5dLxG/HtF2CVxVQYMfdIS09NElzoB/+DgzE
+ RGMscGJdFb/Txc7q7YXTbKPnoJ/u95d9eYFkmn0ta2ycl7rAfyadOOuv5piIMECxFnxX
+ Md4Tn8NT2sh737+OFup9ERPDys+1aqT8y8tV+8nDLKIGNm4kYLirlzbmmog+YLLlR72f
+ VTnfI7OyPrSjSras+B3kQDjjM4lnJ+HsNHvXTiJwkVg4iHphrLSsk8fMpM3daudVbK5s
+ haWQ==
+X-Gm-Message-State: AOJu0Yz6rj9qo3TcYiDyj7pow5TbiO8bLj/ZmOXuL6j2ZqazzlUy9irB
+ ZAR1QED+88gFyxeVB9hrgjd4/3ImPyX+OQ6PZ2aIzvP8fkGsKyRJJVuohk5VorTz4vAeTWwD1Py
+ f0Z2azpVuQg==
+X-Gm-Gg: ASbGncvXDx9r6/SGGTMBBeDQQ38+E8uIoB03yb5C8LboMZ5vCYwTcSYHCdMXLnySYSm
+ TGfS4QNVEVEFtZjY5Fp2lQFQQbYWXSfH56tt3+rFBf3mwFlKIXAiBz8LBE7d7ppKY1sYfwFHVtP
+ jGjbjfdItcIZufaI3FhGmCApiv/HmY9RBxF3BfqAKHGsZMs+YN+DZFoj6z+UjZZ6nBYokzdTtc6
+ RKovL2srPXXZ63DhB5CwwPi7qSZwQ90vVEsfGhs+U3mWintDlRAaUE08tPhuauLEHFFZ4YB+5w/
+ SQ07+Gr/ywc21vaCDIOAvumLRMwggmXn4Obt7EhE0wHU1OzJYr5vL6/s8t1Vkl6IgdAQQf5ucpq
+ VBKY9uPfjNb8hAU/epXy8/v6tttDMNEM1OA==
+X-Google-Smtp-Source: AGHT+IHa2b95chviNJ7CAtgpV4KgF66unOQlW0tfe3aNvYa2lQStE1kOPfWvi3XJIPKThzHCMJl+sg==
+X-Received: by 2002:a05:6000:2711:b0:3a5:8a68:b81b with SMTP id
+ ffacd0b85a97d-3b5f18e2906mr234364f8f.44.1752168720138; 
+ Thu, 10 Jul 2025 10:32:00 -0700 (PDT)
 Received: from andri-workstation.turninn.appdynamic.com
  ([2a01:8280:aa07:ad:7285:c2ff:fef0:4baf])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8e0d732sm2442227f8f.52.2025.07.10.10.31.58
+ ffacd0b85a97d-3b5e8e0d732sm2442227f8f.52.2025.07.10.10.31.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Jul 2025 10:31:58 -0700 (PDT)
+ Thu, 10 Jul 2025 10:31:59 -0700 (PDT)
 From: Andri Yngvason <andri@yngvason.is>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Andri Yngvason <andri@yngvason.is>
-Subject: [PATCH 1/3] phy: rockchip: inno-usb2: Add rk3576 config
-Date: Thu, 10 Jul 2025 17:31:52 +0000
-Message-ID: <20250710173154.1244430-1-andri@yngvason.is>
+Subject: [PATCH 2/3] phy: rockchip: usbdp: Add rk3576 config
+Date: Thu, 10 Jul 2025 17:31:53 +0000
+Message-ID: <20250710173154.1244430-2-andri@yngvason.is>
 X-Mailer: git-send-email 2.50.0
+In-Reply-To: <20250710173154.1244430-1-andri@yngvason.is>
+References: <20250710173154.1244430-1-andri@yngvason.is>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 10 Jul 2025 23:56:14 +0200
@@ -97,53 +100,53 @@ X-Virus-Status: Clean
 
 Signed-off-by: Andri Yngvason <andri@yngvason.is>
 ---
- drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 26 +++++++++++++++++++
+ drivers/phy/rockchip/phy-rockchip-usbdp.c | 26 +++++++++++++++++++++++
  1 file changed, 26 insertions(+)
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-index 88b33de1b2a..c38b48d0c71 100644
---- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-+++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -456,6 +456,28 @@ static const struct rockchip_usb2phy_cfg rk3568_phy_cfgs[] = {
+diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+index 9deec47ae46..17e8fb65552 100644
+--- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
++++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+@@ -813,6 +813,28 @@ static const char * const rk3588_udphy_rst_l[] = {
+ 	"init", "cmn", "lane", "pcs_apb", "pma_apb"
+ };
+ 
++static const struct rockchip_udphy_cfg rk3576_udphy_cfgs = {
++	.num_phys = 1,
++	.phy_ids = {
++		0x2b010000,
++	},
++	.num_rsts = ARRAY_SIZE(rk3588_udphy_rst_l),
++	.rst_list = rk3588_udphy_rst_l,
++	.grfcfg	= {
++		/* u2phy-grf */
++		.bvalid_phy_con		= { 0x0010, 1, 0, 0x2, 0x3 },
++		.bvalid_grf_con		= { 0x0000, 15, 14, 0x1, 0x3 },
++
++		/* usb-grf */
++		.usb3otg0_cfg		= { 0x0030, 15, 0, 0x1100, 0x0188 },
++
++		/* usbdpphy-grf */
++		.low_pwrn		= { 0x0004, 13, 13, 0, 1 },
++		.rx_lfps		= { 0x0004, 14, 14, 0, 1 },
++	},
++	.combophy_init = rk3588_udphy_init,
++};
++
+ static const struct rockchip_udphy_cfg rk3588_udphy_cfgs = {
+ 	.num_phys = 2,
+ 	.phy_ids = {
+@@ -842,6 +864,10 @@ static const struct udevice_id rockchip_udphy_dt_match[] = {
+ 		.compatible = "rockchip,rk3588-usbdp-phy",
+ 		.data = (ulong)&rk3588_udphy_cfgs
+ 	},
++	{
++		.compatible = "rockchip,rk3576-usbdp-phy",
++		.data = (ulong)&rk3576_udphy_cfgs
++	},
  	{ /* sentinel */ }
  };
  
-+static const struct rockchip_usb2phy_cfg rk3576_phy_cfgs[] = {
-+	{
-+		.reg		= 0x0000,
-+		.clkout_ctl	= { 0x0008, 0, 0, 1, 0 },
-+		.port_cfgs	= {
-+			[USB2PHY_PORT_OTG] = {
-+				.phy_sus	= { 0x0000, 8, 0, 0, 0x1d1 },
-+			}
-+		},
-+	},
-+	{
-+		.reg		= 0x2000,
-+		.clkout_ctl	= { 0x2008, 0, 0, 1, 0 },
-+		.port_cfgs	= {
-+			[USB2PHY_PORT_OTG] = {
-+				.phy_sus	= { 0x2000, 8, 0, 0, 0x1d1 },
-+			}
-+		},
-+	},
-+	{ /* sentinel */ }
-+};
-+
- static const struct rockchip_usb2phy_cfg rk3588_phy_cfgs[] = {
- 	{
- 		.reg		= 0x0000,
-@@ -517,6 +539,10 @@ static const struct udevice_id rockchip_usb2phy_ids[] = {
- 		.compatible = "rockchip,rk3568-usb2phy",
- 		.data = (ulong)&rk3568_phy_cfgs,
- 	},
-+	{
-+		.compatible = "rockchip,rk3576-usb2phy",
-+		.data = (ulong)&rk3576_phy_cfgs,
-+	},
- 	{
- 		.compatible = "rockchip,rk3588-usb2phy",
- 		.data = (ulong)&rk3588_phy_cfgs,
 -- 
 2.50.0
 
