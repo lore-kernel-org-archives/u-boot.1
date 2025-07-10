@@ -4,58 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F418C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 08:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97CC9C83F1D
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 10:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2A0C83599;
-	Thu, 10 Jul 2025 10:39:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 97C87835B6;
+	Thu, 10 Jul 2025 12:59:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="YlQUuRpJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OUvRAOe/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AE6F835CD; Thu, 10 Jul 2025 09:23:51 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C4D7A835C0; Thu, 10 Jul 2025 12:59:46 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F411C8006D
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 09:23:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3E0583599
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 12:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bd5tV5Ngmz9tCL;
- Thu, 10 Jul 2025 09:23:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1752132226;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=tLHnnqITDtZbvxpgOUK4z2GqfBqFLgVaTVcxIszIHPE=;
- b=YlQUuRpJdRQtb4wpl8+nZYuhz+QlQ9lDAtCXG5MSOHNkSLidpjwuN/ppo/159oHWfpd1e+
- 8tAVGyRWvd/2ZJdBX5RznGBhfO6GkPn7yXuU19ProxoSnkGkYONJRnKp9ebhxjnlCjRruW
- WQ+rMj81TDH9dDnOco/QU3pbBzwi0YdTiB2clooVHWlQDjD0ZmrCfC2/KYNhthfyhpXdXP
- vUrgDqK6gygUrrv4XAm18zTrXLh50276VArIYBzV0J6AXxSGRodueG/oplWvveOuV+xV4w
- 4/AEyj4f42PRtctzPP3j7npG5th84xvHo8SCMtUc2C7ZTRHcNW3VgbK7WdVKrg==
-From: Stefan Roese <stefan.roese@mailbox.org>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com
-Subject: [PATCH] MAINTAINERS: Update email of Stefan Roese
-Date: Thu, 10 Jul 2025 09:23:44 +0200
-Message-ID: <20250710072345.3458823-1-stefan.roese@mailbox.org>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-553b60de463so745037e87.3
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 03:59:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752145184; x=1752749984; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0PzRNefiTm6GRt7/zRzMiNZ1/FlW1Ggy23CaT2hqL80=;
+ b=OUvRAOe/aYOuhpcx5vY6EUglWyCPS8nEdBmNfQiGHx/E1J9AZvJYq7iixMcOSyNTf6
+ CcLYKMLSkYSedkOABVT7UVmsXBCWFTyBCONEj6oTmB/a5nGqr43a4WpmCize3xqC2a9v
+ GVRs2efq1eWoVxR5dhTpVFIR0QWbS+dUXqUqBqg7Ng8gI/8Vy/BX1U+jyJLsW0e32DPh
+ NhpqpqykSILufrmjlg4eB314o4ysGWP5Kq54LBD28s1bPtFf+xEbv8wm/9cVHObaPGon
+ ChZ34tg7VL8VmJblecEe6EN7R+inSnoCTDinGpHUpik5wU7syFZlhjvDcMttOXiDfGmw
+ Gekw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752145184; x=1752749984;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0PzRNefiTm6GRt7/zRzMiNZ1/FlW1Ggy23CaT2hqL80=;
+ b=X1uUiBP5sO+wpYRgAefVDGiGpzMzeYEDPn7ngxzzQE8a5naR5qVsE12QZ6hxAEe0Y0
+ J5JMrpVr5sQuypnuPiVDnp7M1Hq/1Oq+6D7dHaohQdlhr3KCABfr4jKzJ1cfiZOyrgFz
+ 6mWXBfcitFt7+lMuBv0X/kB4Rq3CfQWqm9c8uDNtovAlcHXp/NuyT2o+BIHozeeaz9Tj
+ 1xsiziNnUPFw9v33HY2b4ucEEXC9Wa2MAD18gvBy6YrEizRHJa4mbT3m4diggozE84an
+ GEnoGUfIymRSx7BJLQev4hO+zpIIYdVWIT2h5bj1LiAXDJeOmBDjbS3C9is1zc4KU4wg
+ C3ZQ==
+X-Gm-Message-State: AOJu0YxZQC/G5Co6GljBGazDFxalwwrbOjz82aJVxYFPxsTnPpIaMAwE
+ UH25vIDXN4GAga4ubRMdpMH6brTjWj4tghs/3JfTi7N5FW3EsDF+xyhYl+O9csUIhqpj5TS0k5g
+ y+MASDC6ZiFXB7jz82utnLFz+F20n6LM=
+X-Gm-Gg: ASbGncsqTy0eWYJc7ZEFQTGUiT4UFEvVgYR67Ahzjfzts8wjmV7LA9sxlUAgTpzP/J2
+ HghShj8rinUglfEZ6fg0pQaG/3h44yE7Q0uoxEMZbb/ZVoP0CnpHG2++2LkH119nr3HXKlomTks
+ oHXzmcF6oPezUpnGbxtTULYesROzl9jGAK7qtMF8Nq2BCTuSllaAgKrrhUYJQxzAuE4j/0IV9C9
+ K8=
+X-Google-Smtp-Source: AGHT+IFuDpHIAJZzprK1X1l5Ypxt0xqnrTyiB+8xctQm+Z2I2g+M7FkLYQBWAmV6+lFPTVi/mdDLMMCC0hRe7Oos2UY=
+X-Received: by 2002:a05:6512:3986:b0:553:3073:c38b with SMTP id
+ 2adb3069b0e04-559000423b6mr1038152e87.1.1752145183782; Thu, 10 Jul 2025
+ 03:59:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: afa1a0b304e1d2eeb97
-X-MBO-RS-META: z8teu5kqj4h4xpncjmne8p7tnb699j5h
-X-Mailman-Approved-At: Thu, 10 Jul 2025 10:39:04 +0200
+References: <20250709234918.140919-1-davidzangcs@gmail.com>
+In-Reply-To: <20250709234918.140919-1-davidzangcs@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 10 Jul 2025 07:59:32 -0300
+X-Gm-Features: Ac12FXzexNrWOTMxjaOkR0odjJu7UKR5dWcMUfRnSFvakQmiebvMtx9XXg-nYag
+Message-ID: <CAOMZO5D1d=Y9i9E+Pcm0sbyKE+M=zUj_9Rs_QHbaE5DPvWFA=w@mail.gmail.com>
+Subject: Re: [PATCH] soc: imx8ulp: Add celsius unit for temperature
+To: David Zang <davidzangcs@gmail.com>
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,108 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the @mailbox.org mail address also for community work.
+Hi David,
 
-Signed-off-by: Stefan Roese <stefan.roese@mailbox.org>
----
- .mailmap       |  2 +-
- MAINTAINERS    | 14 +++++++-------
- doc/git-mailrc |  2 +-
- 3 files changed, 9 insertions(+), 9 deletions(-)
+On Wed, Jul 9, 2025 at 9:44=E2=80=AFPM David Zang <davidzangcs@gmail.com> w=
+rote:
+>
+> Signed-off-by: David Zang <davidzangcs@gmail.com>
+> ---
+>  arch/arm/mach-imx/imx8ulp/soc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/=
+soc.c
+> index bbcd862caa3..5de15b59b96 100644
+> --- a/arch/arm/mach-imx/imx8ulp/soc.c
+> +++ b/arch/arm/mach-imx/imx8ulp/soc.c
+> @@ -400,7 +400,7 @@ int print_cpuinfo(void)
+>         if (!ret) {
+>                 ret =3D thermal_get_temp(udev, &temp);
+>                 if (!ret)
+> -                       printf("CPU current temperature: %d\n", temp);
+> +                       printf("CPU current temperature: %dC\n", temp);
 
-diff --git a/.mailmap b/.mailmap
-index 629d0ca95a81..67a42217cf86 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -125,7 +125,7 @@ Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com> <siva.durga.pala
- Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com> <sivadur@xilinx.com>
- Srinivas Goud <srinivas.goud@amd.com> <srinivas.goud@xilinx.com>
- Srinivas Neeli <srinivas.neeli@amd.com> <srinivas.neeli@xilinx.com>
--Stefan Roese <sr@denx.de> <stroese>
-+Stefan Roese <stefan.roese@mailbox.org> <stroese>
- Stefano Babic <sbabic@nabladev.com>
- Stefano Stabellini <stefano.stabellini@amd.com> <stefano.stabellini@xilinx.com>
- No generic patch CC mail please <noreply@example.com> <swarren@wwwdotorg.org>
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d5264c8f5df6..f98acbc8885c 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -361,7 +361,7 @@ S:	Maintained
- F:	drivers/misc/ls2_sfp.c
- 
- ARM MARVELL KIRKWOOD ARMADA-XP ARMADA-38X ARMADA-37XX ARMADA-7K/8K
--M:	Stefan Roese <sr@denx.de>
-+M:	Stefan Roese <stefan.roese@mailbox.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-marvell.git
- F:	arch/arm/mach-kirkwood/
-@@ -384,7 +384,7 @@ F:	drivers/watchdog/orion_wdt.c
- F:	include/configs/mv-common.h
- 
- ARM MARVELL PCIE CONTROLLER DRIVERS
--M:	Stefan Roese <sr@denx.de>
-+M:	Stefan Roese <stefan.roese@mailbox.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-marvell.git
- F:	drivers/pci/pci-aardvark.c
-@@ -400,7 +400,7 @@ F:	include/configs/pxa1908.h
- 
- ARM MARVELL SERIAL DRIVERS
- M:	Pali Rohár <pali@kernel.org>
--M:	Stefan Roese <sr@denx.de>
-+M:	Stefan Roese <stefan.roese@mailbox.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-marvell.git
- F:	drivers/serial/serial_mvebu_a3700.c
-@@ -1022,7 +1022,7 @@ S:	Maintained
- F:	cmd/cat.c
- 
- CFI FLASH
--M:	Stefan Roese <sr@denx.de>
-+M:	Stefan Roese <stefan.roese@mailbox.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-cfi-flash.git
- F:	drivers/mtd/cfi_flash.c
-@@ -1053,7 +1053,7 @@ F:	cmd/cpu.c
- F:	doc/usage/cpu.rst
- 
- CYCLIC
--M:	Stefan Roese <sr@denx.de>
-+M:	Stefan Roese <stefan.roese@mailbox.org>
- S:	Maintained
- F:	cmd/cyclic.c
- F:	common/cyclic.c
-@@ -1251,7 +1251,7 @@ F:	drivers/i2c/
- KWBIMAGE / KWBOOT TOOLS
- M:	Pali Rohár <pali@kernel.org>
- M:	Marek Behún <kabel@kernel.org>
--M:	Stefan Roese <sr@denx.de>
-+M:	Stefan Roese <stefan.roese@mailbox.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-marvell.git
- F:	doc/README.kwbimage
-@@ -1883,7 +1883,7 @@ F:	test/dm/virtio.c
- F:	doc/develop/driver-model/virtio.rst
- 
- WATCHDOG
--M:	Stefan Roese <sr@denx.de>
-+M:	Stefan Roese <stefan.roese@mailbox.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-watchdog.git
- F:	cmd/wdt.c
-diff --git a/doc/git-mailrc b/doc/git-mailrc
-index 50f896de8e8e..1982785f60e4 100644
---- a/doc/git-mailrc
-+++ b/doc/git-mailrc
-@@ -46,7 +46,7 @@ alias sbabic         Stefano Babic <sbabic@nabladev.com>
- alias simongoldschmidt Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
- alias sjg            Simon Glass <sjg@chromium.org>
- alias smcnutt        Scott McNutt <smcnutt@psyent.com>
--alias stroese        Stefan Roese <sr@denx.de>
-+alias stroese        Stefan Roese <stefan.roese@mailbox.org>
- alias tienfong       Tien Fong Chee <tien.fong.chee@intel.com>
- alias trini          Tom Rini <trini@konsulko.com>
- alias wd             Wolfgang Denk <wd@denx.de>
--- 
-2.43.0
+Your change looks good, but please add a short commit log and send a v2.
 
+Thanks
