@@ -4,65 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E506C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 17:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ABFFC83F1B
+	for <u-boot@archiver.kernel.org>; Thu, 10 Jul 2025 17:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B24B83653;
-	Thu, 10 Jul 2025 19:11:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 88BE383653;
+	Thu, 10 Jul 2025 19:20:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Op9W5SG2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ImPBOvwk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D46B083666; Thu, 10 Jul 2025 19:11:40 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71FDE8362C
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 19:11:38 +0200 (CEST)
+ id 2972483666; Thu, 10 Jul 2025 19:20:56 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 026AE8362C
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 19:20:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56AHBZEb1564473;
- Thu, 10 Jul 2025 12:11:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1752167495;
- bh=BAq837PabSCtuCfSMAEuMI9hM/IlRLnKBFsk+BfVgyg=;
- h=From:To:CC:Subject:Date;
- b=Op9W5SG2DeBpGxtf91+pFaj6TOEZ6hjJ2AcOk7JnJZ1Z/LZZkgYoYZZoiUdFRjGSJ
- UYHXPhrjG1u5XJpsfEa9+56bPkhk8GV0VQ2ap+pjFW+BLwYnMPBRFbw7t1cqwFDKCq
- SPniGcvylCjSkv5cIyIrb0dFD5EtSHGjhzjyCVGU=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56AHBZ9T362433
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 10 Jul 2025 12:11:35 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 10
- Jul 2025 12:11:35 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 10 Jul 2025 12:11:34 -0500
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56AHBZbN1724734;
- Thu, 10 Jul 2025 12:11:35 -0500
-From: Judith Mendez <jm@ti.com>
-To: Judith Mendez <jm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Anshul Dalal <anshuld@ti.com>, Bryan Brattlof <bb@ti.com>, Andrew Davis
- <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, <u-boot@lists.denx.de>
-Subject: [PATCH] mach-k3: am62*: am62*_init: Prohibit boot from UDA w/ eMMC
- boot
-Date: Thu, 10 Jul 2025 12:11:34 -0500
-Message-ID: <20250710171135.669838-1-jm@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e81749142b3so1070886276.3
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 10:20:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752168053; x=1752772853; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QOHhmMHcmIJvN36A937+1Sef2TDaU85FmtpAICJA27Q=;
+ b=ImPBOvwkJ7QdFTRHQ7C7OUU9NEqa+ARwZG6HfUrsxRzEks/TBZaw3NXSxSmlEbOQVf
+ Zaw0idRp+pCyseq41Bxcqt20hUV95HsJUUzFWossjsHepvXCYaMUzj2fbdxnrFv2Ar/n
+ r4a0Mp86DazvEk7BjwNhXgLarKaO70BjSw/CSzs1oxo/zy7B/Yzjc51EopuwkBht+CGK
+ OnsxbRzVC7EGSu2lFRcsvAcrAVKTg1VsmRBGLk1FD2xfrKkwpwNqKdMf85pV/pQdnUAz
+ VLmSksajy3to60wp45wbOTwgJSZ2tIiunI7fTYBAtXXojP4mv2Mm2BHgD72nuMwTmabf
+ 4hyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752168053; x=1752772853;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QOHhmMHcmIJvN36A937+1Sef2TDaU85FmtpAICJA27Q=;
+ b=YcGG4adMJ90cn3fyRoX/6rhQnQjSDV8e4/loNEi7A2qFIpSnsRIyCK8Kt8WRFvYtUk
+ GIxkAyXf/UWjZneiUpew8Z8vLZMp3wQKgvc0FF4RY0qGzqF8a4dHIYoBNCqP5U7Ezyxo
+ fVLQ6ilTD/Ldf7semRwz5HtIkYM7Ql9LMOA4Y9WCJZWsS5Sq0yzkoyc4ecddotlA1Goa
+ 3XzVALqSZB0EVDc2WNaz/Gg0Pz09BI4PFs6PWspP3/8fC7XWtDTwX/QBCG/Jjl1hRG/0
+ Ehyo01FZmJSdx2BkrkC9gGUukFrqrsyYH+3WnznHS718K+QK1hzTKcB616lxcvxmajkh
+ YIlA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVSRcJhsvMZCrbdhQcO3zNUFT2HCiiuAERU9bs3mv5k6X/gTxVb3OGP5xPv3XE1xkPY/BM+cYk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIXQH5ZL1vbFR1QdDJl2YYmqIPhZCCOxOoqHuVjWp1ZJVUVWJL
+ Urn0JnLvTiGydVjE2YCddYUI7QJlXOVDcHDNOrt7PlBZABs6hNOG02YsTG0jjfWCBFsfdOvBg6X
+ yst1/nr17RZzLBPGaaX5aCGldnLreh7JyHKtHYygH4w==
+X-Gm-Gg: ASbGnct4a02p9O3iRovDJUINxi8k+VtA1SMx1UgIn1rY64Xskcw2H53E8aFGaIznR7D
+ FwViCfupg+7wyMu3+ZcMeGVvCCoeHIvfihojxFDDdKUIMS6IeoGBp2y3ETYqsyNdc6LrM4Ipf1h
+ /BcXyHWoZtV6vP2xWmi0A4ChleV5KHjfZPd0/z5BZa8AM=
+X-Google-Smtp-Source: AGHT+IEyCr+236tzcjBTGvZ1mXOxTJZwseSLUBIBExC9854LqijdeLZ5X5H+Y3nmkX3FgnEFtAAZU+CprnIXYjmwUek=
+X-Received: by 2002:a05:690c:630d:b0:717:b35b:94d1 with SMTP id
+ 00721157ae682-717d5bbe0ccmr5525417b3.9.1752168052483; Thu, 10 Jul 2025
+ 10:20:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250529150213.27149-1-richard@nod.at>
+ <1752760284.mgMEAqHVhB@nailgun>
+ <CAPLW+4nz81kT=uTofbf86sqQnGZYB2d4A=mr5P3zT0kOstRKQA@mail.gmail.com>
+ <18562990.Emhk5qWAgF@nailgun>
+In-Reply-To: <18562990.Emhk5qWAgF@nailgun>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 10 Jul 2025 12:20:40 -0500
+X-Gm-Features: Ac12FXw2hNcqjywp4YiSWQBt4yHjj48R2cs8Rx2JVB2t2ulxJd1FFeg449juHpI
+Message-ID: <CAPLW+4n42ctJC2j5vUnibcWNYr+V1t8jfmD7p1ju95q8R89C-Q@mail.gmail.com>
+Subject: Re: [RFC, PATCH] fdt: Make sure there is no stale initrd left
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: Tom Rini <trini@konsulko.com>, Richard Weinberger <richard@nod.at>,
+ upstream@sigma-star.at, 
+ u-boot@lists.denx.de, ddrokosov@salutedevices.com, sjg@chromium.org, 
+ tharvey@gateworks.com, ilias.apalodimas@linaro.org, 
+ kojima.masahisa@socionext.com, upstream+uboot@sigma-star.at
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,73 +100,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This removes support from booting from UDA when in eMMC boot.
+On Thu, Jul 10, 2025 at 9:40=E2=80=AFAM Richard Weinberger
+<richard@sigma-star.at> wrote:
+>
+> On Mittwoch, 9. Juli 2025 19:05 Sam Protsenko wrote:
+> > > I think we need to distinguish two cases:
+> > > 1. The caller explicitly does not want to have an initramfs. e.g. you=
+ run  "bootm addr1 - addr3".
+> >
+> > Yes, so fdt_delprop() lines should be probably moved to appropriate
+> > users, e.g. image_setup_linux(). Can you take care of this? I'm in the
+> > middle of something else right now and can't spend too much time on
+> > this. Or we can just revert this patch for now, to fix EFI apps
+> > breakage.
+>
+> I'll try to allocate time for that.
+> Are we in a hurry? I'm fine with reverting but since the next release is =
+months
+> away and the change is only in next I'd first try to find a solution.
+>
 
-When user selects eMMC boot [0], that is, boot from eMMC boot0 or
-boot1 HW partitions, we should not boot from eMMC UDA. The current
-logic confuses the end user and mixes two different boot modes.
+No, you're right, we have time. I specifically reported the issue
+instead of sending a revert, so that we can try and look for a
+solution. So I'm ok waiting, if you have time to sort this out. Please
+add me to Cc: when you send a patch, I can test it on my HW for you.
 
-The logic was added for AM62A/AM62P with commit: 3b7893145e36, but
-this is not a clean solution and fix will come later for falcon boot.
+P.S. The change is in master already btw, not only in -next, it's MW right =
+now.
 
-Logic was also added for AM62X with commit: 664593464634, but this
-logic is incorrect according to TRM [0] under Primary Boot Mode Selection
-for 'eMMC Boot'.
-
-Fixes: 3b7893145e36 ("mach-k3: add eMMC FS boot support for am62[ap]")
-Fixes: 664593464634 ("arm: mach-k3: am625: Relax emmc boot condition")
-Signed-off-by: Judith Mendez <jm@ti.com>
----
- arch/arm/mach-k3/am62ax/am62a7_init.c | 4 ----
- arch/arm/mach-k3/am62px/am62p5_init.c | 4 ----
- arch/arm/mach-k3/am62x/am625_init.c   | 4 ----
- 3 files changed, 12 deletions(-)
-
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index edd43a1d78d..1d8644bd073 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -217,10 +217,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 
- 	switch (bootmode) {
- 	case BOOT_DEVICE_EMMC:
--		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
--			return MMCSD_MODE_EMMCBOOT;
--		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
--			return MMCSD_MODE_FS;
- 		return MMCSD_MODE_EMMCBOOT;
- 	case BOOT_DEVICE_MMC:
- 		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
-index 6e3c66e5107..01e47deca94 100644
---- a/arch/arm/mach-k3/am62px/am62p5_init.c
-+++ b/arch/arm/mach-k3/am62px/am62p5_init.c
-@@ -262,10 +262,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 
- 	switch (bootmode) {
- 	case BOOT_DEVICE_EMMC:
--		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
--			return MMCSD_MODE_EMMCBOOT;
--		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
--			return MMCSD_MODE_FS;
- 		return MMCSD_MODE_EMMCBOOT;
- 	case BOOT_DEVICE_MMC:
- 		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-index a422919fab1..eb7e245843c 100644
---- a/arch/arm/mach-k3/am62x/am625_init.c
-+++ b/arch/arm/mach-k3/am62x/am625_init.c
-@@ -316,10 +316,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 
- 	switch (bootmode) {
- 	case BOOT_DEVICE_EMMC:
--		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
--			return MMCSD_MODE_EMMCBOOT;
--		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
--			return MMCSD_MODE_FS;
- 		return MMCSD_MODE_EMMCBOOT;
- 	case BOOT_DEVICE_MMC:
- 		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
--- 
-2.49.0
-
+> Thanks,
+> //richard
+>
+> --
+> sigma star gmbh | Eduard-Bodem-Gasse 6, 6020 Innsbruck, AUT UID/VAT Nr:
+> ATU 66964118 | FN: 374287y
+>
+>
