@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C97EC83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B7E2C83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 558268304F;
-	Fri, 11 Jul 2025 17:20:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B5738309C;
+	Fri, 11 Jul 2025 17:20:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mt6U316+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SlM+Vzil";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A72583093; Fri, 11 Jul 2025 17:20:07 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 7218A8309C; Fri, 11 Jul 2025 17:20:11 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B49983092
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E326682F14
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-2ebb468cbb4so1889911fac.2
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:04 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-61208b548e8so612491eaf.3
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752247203; x=1752852003; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752247207; x=1752852007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=HR1XyO3qgyF9CMXCcSYtMCGuK2/jvzHYdE2jjwLHXbY=;
- b=mt6U316+0j4ylfZveW2tpU+fOKdZ5x2WHeA7m2s6RTESzoMhnGZgbtH/rC9nK8Oa3U
- CD5fhoQFisrog71anRxQYCO+UmlVyDfc8v43Gc3xdKKlPcCKm/v8UAgd/swFCZhAp83q
- ihA6D2kcE38qmOg1dSMpy1FPkwcwR2rykJgEA=
+ bh=cjA7fMB/DT6vpfLm8B0NT2jSt6+d83iii3oOWP1da4k=;
+ b=SlM+VziluLyZNBz1hEgS8gDRRE141RkvBHU3qIvpfXTGLIZ2Jwufr2CteUywhcITwt
+ lZvTkKiBkhYt7PGi8G2ApDQ9NaRlWI7v/osg8YAtTaFYMN9fQqKdgVYPFCXosFUM/uoi
+ wnyYDfRhAk3yLwp1Mt9Kbf0EMvGcY5SKwmKwE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752247203; x=1752852003;
+ d=1e100.net; s=20230601; t=1752247207; x=1752852007;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HR1XyO3qgyF9CMXCcSYtMCGuK2/jvzHYdE2jjwLHXbY=;
- b=kSpa8s/PJMV+fFKdnpsIpBXlIvy5mwuKYhK5fGfKq3z3FL1aIyizrpRs3FbGtNHVZY
- o6wljDz9h8ols0qtQN2WiU+flaMZTDXHf92QfZnCoahgCQJer0+lkOl0B2/meM9C/r+v
- 9XWIkTttqGqpzUmR3dupmWGi0j9fAS9X1jsFxyp/tBP4BqR9mGK6y37fXvv9DaAuAEFN
- +PY49Ylvm4pHMDVVlYn0FsDErr3D11Wz1DCUMf/e+EsjNXubGR+Z6nAdk/ByNdYdtkIY
- rY30FZQiex4A3nhc7VTH9HFkfL7eCquS789mn7gfjs6tAxDdGKDfFoecVewMLrZQOXLV
- LQqQ==
-X-Gm-Message-State: AOJu0YzEBhJq/lvKPSoPb81V8mKasTN9sZBQe5oCZ1lAOUTsDPztQlJI
- yw2rd57uK9DAJ6+l4CBrZBJwWwHn3mYqgqILtSmH9vpyb/R9I24wwq9UG6o7w/zhI3yCM59pH6e
- dC8G+9DU=
-X-Gm-Gg: ASbGncv4Idl/NqMXByDyR+iZfVfEh+ZCi+97AyhQlg8oDpABVutsfK6VA9Vg46uRWQg
- DAtpJJIO/+kypye1tBUy9YyKPtrhohM+3/m0BFAiqzzyrxjMHP0Vw7hFfqfw8XzErDgxwtfcOBZ
- bqe9mr6AtI1+9mCbXtMBl9nv0RsWuyIe3+DJIoUWly+k9ZOA8UsSDRz5Fv5rwKm1P+lvJDhZMmR
- eY6kxf7kJOpTGDRJThZXVIziYklvQco4Of10hjMB68Pu5HTHkMwFM3AOiMGxbCOe2zTRc2y+JK8
- KlEWG3xZM4xwtPbI7JiXHD0/8gPlke7TJ9bRg+ZaJZGZXCzepnqbaTfypBTElf/MBZuPOQvQGKm
- f/PNi8I2x8PZ4+iRQ1inIQFgGa1s9wSxtquUYpwsvcmIu0G7BpkzkDdxOtms=
-X-Google-Smtp-Source: AGHT+IHtJ2iHIJbQ7kvRHme9ZCU1Eo+h/Asu6mx/SOCV9jTY+xvlJa2DFl24yYqXZdgOTCnDsW/TUQ==
-X-Received: by 2002:a05:6870:a914:b0:2e9:e9b9:fd7c with SMTP id
- 586e51a60fabf-2ff2715d5dcmr2873710fac.26.1752247203221; 
- Fri, 11 Jul 2025 08:20:03 -0700 (PDT)
+ bh=cjA7fMB/DT6vpfLm8B0NT2jSt6+d83iii3oOWP1da4k=;
+ b=wy4RIH6IHBeE7R+hF61TxIEbRdwO7/ffHjk3EzzA099YsTw6YTJn1mDmvxjWVZWwno
+ 06lgFubvbkQCb4awq3yVfMI2t9EZv850Xx7ydux2sE2LWsoAaMbR4VUigUzeB8PXKrPh
+ Y7JuG/FbjwOWFHbDwC4UPTSM4DgrGPsGE33D1bGMPZ5allAS8s6OnlhwB1XQEsBDwS71
+ WFUlBb6Fyv05w29LsyAumUObUVSDRVjoFOieTa6N8xKH36AvMJ2iZzqWh7QF+Hi876VZ
+ WKwJy4m8H81ZaBLnTSp3r7f2LqOXfiC8O5kkkQT0ovGU3pZPxzgBPnDn19oF6uAHpS7R
+ /rng==
+X-Gm-Message-State: AOJu0Yybtq8+gIf/ts/29uTFEV61y4qrh0onEHzuvOXPYrOOPofKWyiH
+ qU++Ilx2KWShxO0ZZ8K3srM7l8cE1qPle68MQqDm0La9HgOMSAOxKbAnanvnytV2+KgFFQUgnGY
+ bVLrysIc=
+X-Gm-Gg: ASbGncsuHQAU4xjGh4wdeFokyfgYgHatmsxTBR41spKBqV+ZxnM97Gin3xczbz6va1E
+ Q+44QrPV2oNp5l5X/YwJAkpCrwTM+ZGDdv0C/TuH7XSqyOG1/phHlMicWKSfdPD3RGwFXXIu5f6
+ aIOTGvN/Y5l5AHFdHGq+T8KSirPm502bMrX0YQYCsNKIVowMPoxetzU9UqwGxkNCfa00//3hHJP
+ m8ZOmbeiKAiBmAtKyuYeqDAdGtp5JpQD5PhsugSD5GMEfxSl6BLCC53bDXew8ZfCJDSkTIg+yAf
+ xqkDbDKNJYtreqDjnhC+OkbTrVRU2KGD+pGNbOwaiVAgcPlH+bNcxDBKe+uv2qA/5ReLJK0ZyJ5
+ xr12HJxp3Ey7IfASWRQY/NDwzfVFsQOrbM7nXXrSbFlcYBW1y3AveHdUcvV8=
+X-Google-Smtp-Source: AGHT+IGf6caZSahzX4Kxve56bIfaca7QKGDbtxsvvJ6K1mhbh26Ythbz4Te0X2sv8MtN2jEcZMcixw==
+X-Received: by 2002:a05:6820:4b17:b0:613:c922:32c6 with SMTP id
+ 006d021491bc7-613e5efca9cmr2348709eaf.2.1752247206728; 
+ Fri, 11 Jul 2025 08:20:06 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ff11684d21sm751945fac.30.2025.07.11.08.20.02
+ 006d021491bc7-613d9d6d51bsm501966eaf.5.2025.07.11.08.20.05
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 08:20:02 -0700 (PDT)
+ Fri, 11 Jul 2025 08:20:06 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] mmc: Remove unused kona_sdhci driver
-Date: Fri, 11 Jul 2025 09:20:01 -0600
-Message-ID: <20250711152001.2225395-1-trini@konsulko.com>
+Subject: [PATCH] arm: imx: Remove unused mxcmmc driver
+Date: Fri, 11 Jul 2025 09:20:05 -0600
+Message-ID: <20250711152005.2225412-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -95,182 +95,589 @@ As no platforms use this driver anymore, remove it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/mmc/Kconfig      |  10 ---
- drivers/mmc/Makefile     |   1 -
- drivers/mmc/kona_sdhci.c | 132 ---------------------------------------
- 3 files changed, 143 deletions(-)
- delete mode 100644 drivers/mmc/kona_sdhci.c
+ arch/arm/include/asm/arch-mx27/imx-regs.h |   5 -
+ drivers/mmc/Kconfig                       |   9 -
+ drivers/mmc/Makefile                      |   1 -
+ drivers/mmc/mxcmmc.c                      | 523 ----------------------
+ 4 files changed, 538 deletions(-)
+ delete mode 100644 drivers/mmc/mxcmmc.c
 
+diff --git a/arch/arm/include/asm/arch-mx27/imx-regs.h b/arch/arm/include/asm/arch-mx27/imx-regs.h
+index 60499189b2cf..a91528142458 100644
+--- a/arch/arm/include/asm/arch-mx27/imx-regs.h
++++ b/arch/arm/include/asm/arch-mx27/imx-regs.h
+@@ -21,11 +21,6 @@ extern void mx27_uart1_init_pins(void);
+ extern void mx27_fec_init_pins(void);
+ #endif /* CONFIG_FEC_MXC */
+ 
+-#ifdef CONFIG_MMC_MXC
+-extern void mx27_sd1_init_pins(void);
+-extern void mx27_sd2_init_pins(void);
+-#endif /* CONFIG_MMC_MXC */
+-
+ /* AIPI */
+ struct aipi_regs {
+ 	u32 psr0;
 diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 845b653731f9..123bd3fa3148 100644
+index 1c9b6898bff4..845b653731f9 100644
 --- a/drivers/mmc/Kconfig
 +++ b/drivers/mmc/Kconfig
-@@ -651,16 +651,6 @@ config MMC_SDHCI_F_SDH30
- 	  If you have a controller with this interface, say Y here.
- 	  If unsure, say N.
+@@ -333,15 +333,6 @@ config MMC_MESON_GX
+ 	help
+ 	 Support for EMMC host controller on Meson GX ARM SoCs platform (S905)
  
--config MMC_SDHCI_KONA
--	bool "SDHCI support on Broadcom KONA platform"
--	depends on MMC_SDHCI
+-config MMC_MXC
+-	bool "Freescale i.MX21/27/31 or MPC512x Multimedia Card support"
 -	help
--	  This selects the Broadcom Kona Secure Digital Host Controller
--	  Interface(SDHCI) support.
--	  This is used in Broadcom mobile SoCs.
+-	  This selects the Freescale i.MX21, i.MX27, i.MX31 or MPC512x
+-	  Multimedia Card Interface. If you have an i.MX or MPC512x platform
+-	  with a Multimedia Card slot, say Y here.
 -
--	  If you have a controller with this interface, say Y here.
+-	  If unsure, say N.
 -
- config MMC_SDHCI_MSM
- 	bool "Qualcomm SDHCI controller"
- 	depends on MMC_SDHCI
+ config MMC_OWL
+ 	bool "Actions OWL Multimedia Card Interface support"
+ 	depends on ARCH_OWL
 diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
-index 280187c6bab7..a23336d7d8d7 100644
+index 360706f53d2b..280187c6bab7 100644
 --- a/drivers/mmc/Makefile
 +++ b/drivers/mmc/Makefile
-@@ -63,7 +63,6 @@ obj-$(CONFIG_MMC_SDHCI_CADENCE)		+= sdhci-cadence6.o
- obj-$(CONFIG_MMC_SDHCI_CV1800B)		+= cv1800b_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_AM654)		+= am654_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_IPROC)		+= iproc_sdhci.o
--obj-$(CONFIG_MMC_SDHCI_KONA)		+= kona_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_MSM)		+= msm_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_MV)		+= mv_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_NPCM)            += npcm_sdhci.o
-diff --git a/drivers/mmc/kona_sdhci.c b/drivers/mmc/kona_sdhci.c
+@@ -41,7 +41,6 @@ obj-$(CONFIG_MMC_MESON_GX) += meson_gx_mmc.o
+ obj-$(CONFIG_MMC_SPI) += mmc_spi.o
+ obj-$(CONFIG_MVEBU_MMC) += mvebu_mmc.o
+ obj-$(CONFIG_MMC_OMAP_HS)		+= omap_hsmmc.o
+-obj-$(CONFIG_MMC_MXC)			+= mxcmmc.o
+ obj-$(CONFIG_MMC_MXS)			+= mxsmmc.o
+ obj-$(CONFIG_MMC_OCTEONTX)		+= octeontx_hsmmc.o
+ obj-$(CONFIG_MMC_OWL)			+= owl_mmc.o
+diff --git a/drivers/mmc/mxcmmc.c b/drivers/mmc/mxcmmc.c
 deleted file mode 100644
-index 83f141226325..000000000000
---- a/drivers/mmc/kona_sdhci.c
+index 1acea6f820b4..000000000000
+--- a/drivers/mmc/mxcmmc.c
 +++ /dev/null
-@@ -1,132 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
+@@ -1,523 +0,0 @@
 -/*
-- * Copyright 2013 Broadcom Corporation.
+- *  This is a driver for the SDHC controller found in Freescale MX2/MX3
+- *  SoCs. It is basically the same hardware as found on MX1 (imxmmc.c).
+- *  Unlike the hardware found on MX1, this hardware just works and does
+- *  not need all the quirks found in imxmmc.c, hence the seperate driver.
+- *
+- *  Copyright (C) 2009 Ilya Yanok, <yanok@emcraft.com>
+- *  Copyright (C) 2008 Sascha Hauer, Pengutronix <s.hauer@pengutronix.de>
+- *  Copyright (C) 2006 Pavel Pisa, PiKRON <ppisa@pikron.com>
+- *
+- *  derived from pxamci.c by Russell King
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
+- *
 - */
 -
+-#include <config.h>
+-#include <command.h>
+-#include <mmc.h>
+-#include <part.h>
 -#include <malloc.h>
--#include <sdhci.h>
--#include <linux/delay.h>
+-#include <mmc.h>
+-#include <time.h>
 -#include <linux/errno.h>
--#include <asm/kona-common/clk.h>
+-#include <asm/io.h>
+-#include <asm/arch/clock.h>
 -
--#define SDHCI_CORECTRL_OFFSET		0x00008000
--#define SDHCI_CORECTRL_EN		0x01
--#define SDHCI_CORECTRL_RESET		0x02
+-#define DRIVER_NAME "mxc-mmc"
 -
--#define SDHCI_CORESTAT_OFFSET		0x00008004
--#define SDHCI_CORESTAT_CD_SW		0x01
+-struct mxcmci_regs {
+-	u32 str_stp_clk;
+-	u32 status;
+-	u32 clk_rate;
+-	u32 cmd_dat_cont;
+-	u32 res_to;
+-	u32 read_to;
+-	u32 blk_len;
+-	u32 nob;
+-	u32 rev_no;
+-	u32 int_cntr;
+-	u32 cmd;
+-	u32 arg;
+-	u32 pad;
+-	u32 res_fifo;
+-	u32 buffer_access;
+-};
 -
--#define SDHCI_COREIMR_OFFSET		0x00008008
--#define SDHCI_COREIMR_IP		0x01
+-#define STR_STP_CLK_RESET               (1 << 3)
+-#define STR_STP_CLK_START_CLK           (1 << 1)
+-#define STR_STP_CLK_STOP_CLK            (1 << 0)
 -
--static int init_kona_mmc_core(struct sdhci_host *host)
+-#define STATUS_CARD_INSERTION		(1 << 31)
+-#define STATUS_CARD_REMOVAL		(1 << 30)
+-#define STATUS_YBUF_EMPTY		(1 << 29)
+-#define STATUS_XBUF_EMPTY		(1 << 28)
+-#define STATUS_YBUF_FULL		(1 << 27)
+-#define STATUS_XBUF_FULL		(1 << 26)
+-#define STATUS_BUF_UND_RUN		(1 << 25)
+-#define STATUS_BUF_OVFL			(1 << 24)
+-#define STATUS_SDIO_INT_ACTIVE		(1 << 14)
+-#define STATUS_END_CMD_RESP		(1 << 13)
+-#define STATUS_WRITE_OP_DONE		(1 << 12)
+-#define STATUS_DATA_TRANS_DONE		(1 << 11)
+-#define STATUS_READ_OP_DONE		(1 << 11)
+-#define STATUS_WR_CRC_ERROR_CODE_MASK	(3 << 10)
+-#define STATUS_CARD_BUS_CLK_RUN		(1 << 8)
+-#define STATUS_BUF_READ_RDY		(1 << 7)
+-#define STATUS_BUF_WRITE_RDY		(1 << 6)
+-#define STATUS_RESP_CRC_ERR		(1 << 5)
+-#define STATUS_CRC_READ_ERR		(1 << 3)
+-#define STATUS_CRC_WRITE_ERR		(1 << 2)
+-#define STATUS_TIME_OUT_RESP		(1 << 1)
+-#define STATUS_TIME_OUT_READ		(1 << 0)
+-#define STATUS_ERR_MASK			0x2f
+-
+-#define CMD_DAT_CONT_CMD_RESP_LONG_OFF	(1 << 12)
+-#define CMD_DAT_CONT_STOP_READWAIT	(1 << 11)
+-#define CMD_DAT_CONT_START_READWAIT	(1 << 10)
+-#define CMD_DAT_CONT_BUS_WIDTH_4	(2 << 8)
+-#define CMD_DAT_CONT_INIT		(1 << 7)
+-#define CMD_DAT_CONT_WRITE		(1 << 4)
+-#define CMD_DAT_CONT_DATA_ENABLE	(1 << 3)
+-#define CMD_DAT_CONT_RESPONSE_48BIT_CRC	(1 << 0)
+-#define CMD_DAT_CONT_RESPONSE_136BIT	(2 << 0)
+-#define CMD_DAT_CONT_RESPONSE_48BIT	(3 << 0)
+-
+-#define INT_SDIO_INT_WKP_EN		(1 << 18)
+-#define INT_CARD_INSERTION_WKP_EN	(1 << 17)
+-#define INT_CARD_REMOVAL_WKP_EN		(1 << 16)
+-#define INT_CARD_INSERTION_EN		(1 << 15)
+-#define INT_CARD_REMOVAL_EN		(1 << 14)
+-#define INT_SDIO_IRQ_EN			(1 << 13)
+-#define INT_DAT0_EN			(1 << 12)
+-#define INT_BUF_READ_EN			(1 << 4)
+-#define INT_BUF_WRITE_EN		(1 << 3)
+-#define INT_END_CMD_RES_EN		(1 << 2)
+-#define INT_WRITE_OP_DONE_EN		(1 << 1)
+-#define INT_READ_OP_EN			(1 << 0)
+-
+-struct mxcmci_host {
+-	struct mmc		*mmc;
+-	struct mxcmci_regs	*base;
+-	int			irq;
+-	int			detect_irq;
+-	int			dma;
+-	int			do_dma;
+-	unsigned int		power_mode;
+-
+-	struct mmc_cmd		*cmd;
+-	struct mmc_data		*data;
+-
+-	unsigned int		dma_nents;
+-	unsigned int		datasize;
+-	unsigned int		dma_dir;
+-
+-	u16			rev_no;
+-	unsigned int		cmdat;
+-
+-	int			clock;
+-};
+-
+-static struct mxcmci_host mxcmci_host;
+-
+-/* maintainer note: do we really want to have a global host pointer? */
+-static struct mxcmci_host *host = &mxcmci_host;
+-
+-static inline int mxcmci_use_dma(struct mxcmci_host *host)
 -{
--	unsigned int mask;
--	unsigned int timeout;
+-	return host->do_dma;
+-}
 -
--	if (sdhci_readb(host, SDHCI_SOFTWARE_RESET) & SDHCI_RESET_ALL) {
--		printf("%s: sd host controller reset error\n", __func__);
--		return -EBUSY;
+-static void mxcmci_softreset(struct mxcmci_host *host)
+-{
+-	int i;
+-
+-	/* reset sequence */
+-	writel(STR_STP_CLK_RESET, &host->base->str_stp_clk);
+-	writel(STR_STP_CLK_RESET | STR_STP_CLK_START_CLK,
+-			&host->base->str_stp_clk);
+-
+-	for (i = 0; i < 8; i++)
+-		writel(STR_STP_CLK_START_CLK, &host->base->str_stp_clk);
+-
+-	writel(0xff, &host->base->res_to);
+-}
+-
+-static void mxcmci_setup_data(struct mxcmci_host *host, struct mmc_data *data)
+-{
+-	unsigned int nob = data->blocks;
+-	unsigned int blksz = data->blocksize;
+-	unsigned int datasize = nob * blksz;
+-
+-	host->data = data;
+-
+-	writel(nob, &host->base->nob);
+-	writel(blksz, &host->base->blk_len);
+-	host->datasize = datasize;
+-}
+-
+-static int mxcmci_start_cmd(struct mxcmci_host *host, struct mmc_cmd *cmd,
+-		unsigned int cmdat)
+-{
+-	if (host->cmd != NULL)
+-		printf("mxcmci: error!\n");
+-	host->cmd = cmd;
+-
+-	switch (cmd->resp_type) {
+-	case MMC_RSP_R1: /* short CRC, OPCODE */
+-	case MMC_RSP_R1b:/* short CRC, OPCODE, BUSY */
+-		cmdat |= CMD_DAT_CONT_RESPONSE_48BIT_CRC;
+-		break;
+-	case MMC_RSP_R2: /* long 136 bit + CRC */
+-		cmdat |= CMD_DAT_CONT_RESPONSE_136BIT;
+-		break;
+-	case MMC_RSP_R3: /* short */
+-		cmdat |= CMD_DAT_CONT_RESPONSE_48BIT;
+-		break;
+-	case MMC_RSP_NONE:
+-		break;
+-	default:
+-		printf("mxcmci: unhandled response type 0x%x\n",
+-				cmd->resp_type);
+-		return -EINVAL;
 -	}
 -
--	/* For kona a hardware reset before anything else. */
--	mask = sdhci_readl(host, SDHCI_CORECTRL_OFFSET) | SDHCI_CORECTRL_RESET;
--	sdhci_writel(host, mask, SDHCI_CORECTRL_OFFSET);
+-	writel(cmd->cmdidx, &host->base->cmd);
+-	writel(cmd->cmdarg, &host->base->arg);
+-	writel(cmdat, &host->base->cmd_dat_cont);
 -
--	/* Wait max 100 ms */
--	timeout = 1000;
--	do {
--		if (timeout == 0) {
--			printf("%s: reset timeout error\n", __func__);
--			return -ETIMEDOUT;
+-	return 0;
+-}
+-
+-static void mxcmci_finish_request(struct mxcmci_host *host,
+-		struct mmc_cmd *cmd, struct mmc_data *data)
+-{
+-	host->cmd = NULL;
+-	host->data = NULL;
+-}
+-
+-static int mxcmci_finish_data(struct mxcmci_host *host, unsigned int stat)
+-{
+-	int data_error = 0;
+-
+-	if (stat & STATUS_ERR_MASK) {
+-		printf("request failed. status: 0x%08x\n",
+-				stat);
+-		if (stat & STATUS_CRC_READ_ERR) {
+-			data_error = -EILSEQ;
+-		} else if (stat & STATUS_CRC_WRITE_ERR) {
+-			u32 err_code = (stat >> 9) & 0x3;
+-			if (err_code == 2) /* No CRC response */
+-				data_error = -ETIMEDOUT;
+-			else
+-				data_error = -EILSEQ;
+-		} else if (stat & STATUS_TIME_OUT_READ) {
+-			data_error = -ETIMEDOUT;
+-		} else {
+-			data_error = -EIO;
 -		}
--		timeout--;
--		udelay(100);
--	} while (0 ==
--		 (sdhci_readl(host, SDHCI_CORECTRL_OFFSET) &
--		  SDHCI_CORECTRL_RESET));
+-	}
 -
--	/* Clear the reset bit. */
--	mask = mask & ~SDHCI_CORECTRL_RESET;
--	sdhci_writel(host, mask, SDHCI_CORECTRL_OFFSET);
+-	host->data = NULL;
 -
--	/* Enable AHB clock */
--	mask = sdhci_readl(host, SDHCI_CORECTRL_OFFSET);
--	sdhci_writel(host, mask | SDHCI_CORECTRL_EN, SDHCI_CORECTRL_OFFSET);
+-	return data_error;
+-}
 -
--	/* Enable interrupts */
--	sdhci_writel(host, SDHCI_COREIMR_IP, SDHCI_COREIMR_OFFSET);
+-static int mxcmci_read_response(struct mxcmci_host *host, unsigned int stat)
+-{
+-	struct mmc_cmd *cmd = host->cmd;
+-	int i;
+-	u32 a, b, c;
+-	u32 *resp = (u32 *)cmd->response;
 -
--	/* Make sure Card is detected in controller */
--	mask = sdhci_readl(host, SDHCI_CORESTAT_OFFSET);
--	sdhci_writel(host, mask | SDHCI_CORESTAT_CD_SW, SDHCI_CORESTAT_OFFSET);
+-	if (!cmd)
+-		return 0;
 -
--	/* Wait max 100 ms */
--	timeout = 1000;
--	while (!(sdhci_readl(host, SDHCI_PRESENT_STATE) & SDHCI_CARD_PRESENT)) {
--		if (timeout == 0) {
--			printf("%s: CARD DETECT timeout error\n", __func__);
--			return -ETIMEDOUT;
+-	if (stat & STATUS_TIME_OUT_RESP) {
+-		printf("CMD TIMEOUT\n");
+-		return -ETIMEDOUT;
+-	} else if (stat & STATUS_RESP_CRC_ERR && cmd->resp_type & MMC_RSP_CRC) {
+-		printf("cmd crc error\n");
+-		return -EILSEQ;
+-	}
+-
+-	if (cmd->resp_type & MMC_RSP_PRESENT) {
+-		if (cmd->resp_type & MMC_RSP_136) {
+-			for (i = 0; i < 4; i++) {
+-				a = readl(&host->base->res_fifo) & 0xFFFF;
+-				b = readl(&host->base->res_fifo) & 0xFFFF;
+-				resp[i] = a << 16 | b;
+-			}
+-		} else {
+-			a = readl(&host->base->res_fifo) & 0xFFFF;
+-			b = readl(&host->base->res_fifo) & 0xFFFF;
+-			c = readl(&host->base->res_fifo) & 0xFFFF;
+-			resp[0] = a << 24 | b << 8 | c >> 8;
 -		}
--		timeout--;
--		udelay(100);
 -	}
 -	return 0;
 -}
 -
--int kona_sdhci_init(int dev_index, u32 min_clk, u32 quirks)
+-static int mxcmci_poll_status(struct mxcmci_host *host, u32 mask)
 -{
--	int ret = 0;
--	u32 max_clk;
--	void *reg_base;
--	struct sdhci_host *host = NULL;
+-	u32 stat;
+-	unsigned long timeout = get_ticks() + CONFIG_SYS_HZ;
 -
--	host = (struct sdhci_host *)malloc(sizeof(struct sdhci_host));
--	if (!host) {
--		printf("%s: sdhci host malloc fail!\n", __func__);
--		return -ENOMEM;
+-	do {
+-		stat = readl(&host->base->status);
+-		if (stat & STATUS_ERR_MASK)
+-			return stat;
+-		if (timeout < get_ticks())
+-			return STATUS_TIME_OUT_READ;
+-		if (stat & mask)
+-			return 0;
+-	} while (1);
+-}
+-
+-static int mxcmci_pull(struct mxcmci_host *host, void *_buf, int bytes)
+-{
+-	unsigned int stat;
+-	u32 *buf = _buf;
+-
+-	while (bytes > 3) {
+-		stat = mxcmci_poll_status(host,
+-				STATUS_BUF_READ_RDY | STATUS_READ_OP_DONE);
+-		if (stat)
+-			return stat;
+-		*buf++ = readl(&host->base->buffer_access);
+-		bytes -= 4;
 -	}
--	switch (dev_index) {
--	case 0:
--		reg_base = (void *)CONFIG_SYS_SDIO_BASE0;
--		ret = clk_sdio_enable(reg_base, CONFIG_SYS_SDIO0_MAX_CLK,
--				      &max_clk);
--		break;
--	case 1:
--		reg_base = (void *)CONFIG_SYS_SDIO_BASE1;
--		ret = clk_sdio_enable(reg_base, CONFIG_SYS_SDIO1_MAX_CLK,
--				      &max_clk);
--		break;
--	case 2:
--		reg_base = (void *)CONFIG_SYS_SDIO_BASE2;
--		ret = clk_sdio_enable(reg_base, CONFIG_SYS_SDIO2_MAX_CLK,
--				      &max_clk);
--		break;
--	case 3:
--		reg_base = (void *)CONFIG_SYS_SDIO_BASE3;
--		ret = clk_sdio_enable(reg_base, CONFIG_SYS_SDIO3_MAX_CLK,
--				      &max_clk);
--		break;
--	default:
--		printf("%s: sdio dev index %d not supported\n",
--		       __func__, dev_index);
--		ret = -EINVAL;
+-
+-	if (bytes) {
+-		u8 *b = (u8 *)buf;
+-		u32 tmp;
+-
+-		stat = mxcmci_poll_status(host,
+-				STATUS_BUF_READ_RDY | STATUS_READ_OP_DONE);
+-		if (stat)
+-			return stat;
+-		tmp = readl(&host->base->buffer_access);
+-		memcpy(b, &tmp, bytes);
 -	}
+-
+-	return 0;
+-}
+-
+-static int mxcmci_push(struct mxcmci_host *host, const void *_buf, int bytes)
+-{
+-	unsigned int stat;
+-	const u32 *buf = _buf;
+-
+-	while (bytes > 3) {
+-		stat = mxcmci_poll_status(host, STATUS_BUF_WRITE_RDY);
+-		if (stat)
+-			return stat;
+-		writel(*buf++, &host->base->buffer_access);
+-		bytes -= 4;
+-	}
+-
+-	if (bytes) {
+-		const u8 *b = (u8 *)buf;
+-		u32 tmp;
+-
+-		stat = mxcmci_poll_status(host, STATUS_BUF_WRITE_RDY);
+-		if (stat)
+-			return stat;
+-
+-		memcpy(&tmp, b, bytes);
+-		writel(tmp, &host->base->buffer_access);
+-	}
+-
+-	stat = mxcmci_poll_status(host, STATUS_BUF_WRITE_RDY);
+-	if (stat)
+-		return stat;
+-
+-	return 0;
+-}
+-
+-static int mxcmci_transfer_data(struct mxcmci_host *host)
+-{
+-	struct mmc_data *data = host->data;
+-	int stat;
+-	unsigned long length;
+-
+-	length = data->blocks * data->blocksize;
+-	host->datasize = 0;
+-
+-	if (data->flags & MMC_DATA_READ) {
+-		stat = mxcmci_pull(host, data->dest, length);
+-		if (stat)
+-			return stat;
+-		host->datasize += length;
+-	} else {
+-		stat = mxcmci_push(host, (const void *)(data->src), length);
+-		if (stat)
+-			return stat;
+-		host->datasize += length;
+-		stat = mxcmci_poll_status(host, STATUS_WRITE_OP_DONE);
+-		if (stat)
+-			return stat;
+-	}
+-	return 0;
+-}
+-
+-static int mxcmci_cmd_done(struct mxcmci_host *host, unsigned int stat)
+-{
+-	int datastat;
+-	int ret;
+-
+-	ret = mxcmci_read_response(host, stat);
+-
 -	if (ret) {
--		free(host);
+-		mxcmci_finish_request(host, host->cmd, host->data);
 -		return ret;
 -	}
 -
--	host->name = "kona-sdhci";
--	host->ioaddr = reg_base;
--	host->quirks = quirks;
--	host->max_clk = max_clk;
--
--	if (init_kona_mmc_core(host)) {
--		free(host);
--		return -EINVAL;
+-	if (!host->data) {
+-		mxcmci_finish_request(host, host->cmd, host->data);
+-		return 0;
 -	}
 -
--	add_sdhci(host, 0, min_clk);
+-	datastat = mxcmci_transfer_data(host);
+-	ret = mxcmci_finish_data(host, datastat);
+-	mxcmci_finish_request(host, host->cmd, host->data);
 -	return ret;
+-}
+-
+-static int mxcmci_request(struct mmc *mmc, struct mmc_cmd *cmd,
+-		struct mmc_data *data)
+-{
+-	struct mxcmci_host *host = mmc->priv;
+-	unsigned int cmdat = host->cmdat;
+-	u32 stat;
+-	int ret;
+-
+-	host->cmdat &= ~CMD_DAT_CONT_INIT;
+-	if (data) {
+-		mxcmci_setup_data(host, data);
+-
+-		cmdat |= CMD_DAT_CONT_DATA_ENABLE;
+-
+-		if (data->flags & MMC_DATA_WRITE)
+-			cmdat |= CMD_DAT_CONT_WRITE;
+-	}
+-
+-	if ((ret = mxcmci_start_cmd(host, cmd, cmdat))) {
+-		mxcmci_finish_request(host, cmd, data);
+-		return ret;
+-	}
+-
+-	do {
+-		stat = readl(&host->base->status);
+-		writel(stat, &host->base->status);
+-	} while (!(stat & STATUS_END_CMD_RESP));
+-
+-	return mxcmci_cmd_done(host, stat);
+-}
+-
+-static void mxcmci_set_clk_rate(struct mxcmci_host *host, unsigned int clk_ios)
+-{
+-	unsigned int divider;
+-	int prescaler = 0;
+-	unsigned long clk_in = mxc_get_clock(MXC_ESDHC_CLK);
+-
+-	while (prescaler <= 0x800) {
+-		for (divider = 1; divider <= 0xF; divider++) {
+-			int x;
+-
+-			x = (clk_in / (divider + 1));
+-
+-			if (prescaler)
+-				x /= (prescaler * 2);
+-
+-			if (x <= clk_ios)
+-				break;
+-		}
+-		if (divider < 0x10)
+-			break;
+-
+-		if (prescaler == 0)
+-			prescaler = 1;
+-		else
+-			prescaler <<= 1;
+-	}
+-
+-	writel((prescaler << 4) | divider, &host->base->clk_rate);
+-}
+-
+-static int mxcmci_set_ios(struct mmc *mmc)
+-{
+-	struct mxcmci_host *host = mmc->priv;
+-	if (mmc->bus_width == 4)
+-		host->cmdat |= CMD_DAT_CONT_BUS_WIDTH_4;
+-	else
+-		host->cmdat &= ~CMD_DAT_CONT_BUS_WIDTH_4;
+-
+-	if (mmc->clock) {
+-		mxcmci_set_clk_rate(host, mmc->clock);
+-		writel(STR_STP_CLK_START_CLK, &host->base->str_stp_clk);
+-	} else {
+-		writel(STR_STP_CLK_STOP_CLK, &host->base->str_stp_clk);
+-	}
+-
+-	host->clock = mmc->clock;
+-
+-	return 0;
+-}
+-
+-static int mxcmci_init(struct mmc *mmc)
+-{
+-	struct mxcmci_host *host = mmc->priv;
+-
+-	mxcmci_softreset(host);
+-
+-	host->rev_no = readl(&host->base->rev_no);
+-	if (host->rev_no != 0x400) {
+-		printf("wrong rev.no. 0x%08x. aborting.\n",
+-			host->rev_no);
+-		return -ENODEV;
+-	}
+-
+-	/* recommended in data sheet */
+-	writel(0x2db4, &host->base->read_to);
+-
+-	writel(0, &host->base->int_cntr);
+-
+-	return 0;
+-}
+-
+-static const struct mmc_ops mxcmci_ops = {
+-	.send_cmd	= mxcmci_request,
+-	.set_ios	= mxcmci_set_ios,
+-	.init		= mxcmci_init,
+-};
+-
+-static struct mmc_config mxcmci_cfg = {
+-	.name		= "MXC MCI",
+-	.ops		= &mxcmci_ops,
+-	.host_caps	= MMC_MODE_4BIT,
+-	.voltages	= MMC_VDD_32_33 | MMC_VDD_33_34,
+-	.b_max		= CONFIG_SYS_MMC_MAX_BLK_COUNT,
+-};
+-
+-static int mxcmci_initialize(struct bd_info *bis)
+-{
+-	host->base = (struct mxcmci_regs *)CONFIG_MXC_MCI_REGS_BASE;
+-
+-	mxcmci_cfg.f_min = mxc_get_clock(MXC_ESDHC_CLK) >> 7;
+-	mxcmci_cfg.f_max = mxc_get_clock(MXC_ESDHC_CLK) >> 1;
+-
+-	host->mmc = mmc_create(&mxcmci_cfg, host);
+-	if (host->mmc == NULL)
+-		return -1;
+-
+-	return 0;
+-}
+-
+-int mxc_mmc_init(struct bd_info *bis)
+-{
+-	return mxcmci_initialize(bis);
 -}
 -- 
 2.43.0
