@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3244C83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 02:20:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27401C83F21
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 02:21:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEEFE836E7;
-	Fri, 11 Jul 2025 04:20:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6FD2F836D1;
+	Fri, 11 Jul 2025 04:21:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TyhZPGgY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LOq1lUud";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F1F1836EE; Fri, 11 Jul 2025 04:20:35 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 1DC6C836E7; Fri, 11 Jul 2025 04:21:17 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C60E2836D1
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 04:20:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB82F835B6
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 04:21:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-23c8f179e1bso18763425ad.1
- for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 19:20:32 -0700 (PDT)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5561ab55c4dso1659264e87.2
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 19:21:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752200431; x=1752805231; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2dfdJjLHe6O4tRtw7MqX2S8OowVTXrFaT6DqcjBhsNI=;
- b=TyhZPGgYnfuD1IxWkIvIpSlUeamOFZ5pgb6uyNYyzvkDMOWinnpYTFBLRMukMdE634
- mU49Y0oHK/2zZV2OeZ2Ddt1j8qtutmqsvzEK2MfqzEKjxLGNn6OFk1ke0ZnDxloHBtkb
- ICXyh+8RFVMgKZz+B1eiyraZWZHProPH8o36fod+gMhUg99ic9LYZt36mhZtgxX64I0Z
- jkAA3nabdZzIuFShR8jpqnPWzYDYU8406XpHPRzLLniuhdkOYR4OEP0CDhL53NwF3yXu
- 63rCJR3jw9UU4aDZS766sT7Tl6No8MXvgo2h8OhXv2hUPP86OPBu3nymjsXcfRcDiTP/
- IPvw==
+ d=gmail.com; s=20230601; t=1752200474; x=1752805274; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t3MzbR089BJ6tmfI74YKhOwBgozYrz2765j3XYZXLSM=;
+ b=LOq1lUud71mUaMTGBcwHEYevRasKLysuWHSjrumohEA+D5E9Oa3yjDKjwuQ0MI4kON
+ 5P1dm03MTqPRYBg3h8CgGv6sEElKEBXn7Xf9rzo3uLb+L8tikW6eJBz/ilMkYVWrPb/O
+ Bc/LBJfKhkpUsFGf0D58UvFm39mp7s7832FLEyhK47M2du3vAWlRhYuS00CNnTSzjl0N
+ UqduCStd3Mlf0QIy8Mw0nDmG534MateZOOgLX1deVYDv6CB5SKayerQI+OvrvDZqerja
+ nnql6/DXggiVmWgnyXbiFrkHES5p8m7fVm/NoPyYEPma80yOvQNFv8mLgYhrM6fs6Ag5
+ zkqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752200431; x=1752805231;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2dfdJjLHe6O4tRtw7MqX2S8OowVTXrFaT6DqcjBhsNI=;
- b=rDDife6jvje5cBNB0uYc8ASCQNAAgGY+bbV9zYhCgVhCPow5wnvFDQq1Os3xT4ZZLd
- zwW99JF2m+M/CxQF60c9aWA328DMZYucTKDQX+E8XgOVLCbjzJv52DoJH3JQLG89rYnA
- 0Ivp0z9ySk75pqit/dqwRkkoHYdNgQG6Q+XvuH7q2wu5m+T1zf7oJIJL7T2BF4goGCGN
- 45p9PHMrEhzrqZ2xWbKFPEzVnhugcpXJzhNtSIc7xTFUBrV1Kf5yC3ANoFjpmEPFEqNg
- tM1D+V9ahuEdcUw+3SBMKbB+sEDmtQjglNhXMF3dJEVDJWTo5Ub7wn9B1VZ4Hjyvp8zr
- Xueg==
-X-Gm-Message-State: AOJu0YwTryVKNkR6ZtiOdKFjfsQ5KMMLAIR3cfriAVXAlZqJtQyjIGsK
- ZUKpvw5Egcrj9+paFhj+A2CqDYcWYf0BNrK6brAv4rBHMJjUDzAPY9tQPst9Fw==
-X-Gm-Gg: ASbGncuNxxq31VWXcbrIiFfCPp3AS2FzGaunUxdSCID/Br8nuGwcYMbOKuoDgnxkrts
- D4qcjg8ivKtusp+4JMl03Zm3WnqES18hFvzv/JQ86hMLfqZqyKSp+t0r43eQ/uQ2sFG5xzhME4p
- 5GHfOO6qKehB2R3lWoVo0+JYS4BJDLMklPBYenEZXdxLP5m49H0HaSRBWg+qsdgJrc2xPJr6hbp
- D8kl5NzJrvdYN88YpVnbjHW+URFWiwPUgCYGlnMOuf2QcSQ6rjNAsRs/E5OS0YNEZNQ4ia3qgUx
- tL5D7yqZYDplckSfqP/R9QnqnNNK+qxgy5BbWsvQKv07TGHVvCVgVzrslwaIDrIrpmT6508JMly
- pqbzN6QuFwRfCnTp5U1aqm4L4s4jW6owiW3PGLnLrgdgcqz8=
-X-Google-Smtp-Source: AGHT+IGaPpW/HB1JEnoVMQJcQZ5QXbbdm3E1W9FrZelubdAx7R3bTXHCacHWUV9Gq3Vb1A3mAyjadQ==
-X-Received: by 2002:a17:902:ecc5:b0:235:f18f:2924 with SMTP id
- d9443c01a7336-23dee18af80mr18358585ad.15.1752200431210; 
- Thu, 10 Jul 2025 19:20:31 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:8639:9b25:e8ab:e2f1])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b3bbe58125bsm3761946a12.27.2025.07.10.19.20.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Jul 2025 19:20:30 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20250710
-Date: Thu, 10 Jul 2025 23:20:26 -0300
-Message-Id: <20250711022026.942001-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1752200474; x=1752805274;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t3MzbR089BJ6tmfI74YKhOwBgozYrz2765j3XYZXLSM=;
+ b=L3a1bwDxECPD8Yt8n+EJlbd8FJJM3sJNYmtr/AedgShMXG/mOHTA2wKWxKfkjnMaB9
+ iyTyS7FPqk0orXSg+nZxImyY75rw/3ZfhF8/fz1QZpqFf5V/341hb+8uZBV/tB08fGCa
+ Ni5kLzRi/l5XEiRjJNssC2ilE8jVSnWbJIc1xuqoDsUkWS6BuPufHU5LuVZKnUYkF2E6
+ TC96S1bc1JALGlPjC1PJtDK/ByuBW8d7h0bmdmS1ipiXIQhKcJAFPyHhgNdKQ+qSpQpd
+ Jc+MkwyURIWKnUvQMtWWZxaZ4XDmvdfRozx/q2oo/F31121lZdokQ27PkjJzSFPo5afs
+ YYTg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWCf6wUV94QguXsOayKfobR/jVjkS2aPgdxvIaXT2qkUd+tHmi0//opq41EUruz7xv6T1OCqOI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCv6XYYtT7WIBuZGc5YPHRoo0fVbBTcAOXr9YQWkmTFqnpGCtm
+ concwyMM2HF2V4UQZiS+vmV3OICImaRML/qWjLnAye21NuM6oGnBn8tZ1L3pGkNOFQPXgzlfrzw
+ wvE5XafV700mD3ehKZHmVwhXD2VTNst4=
+X-Gm-Gg: ASbGncsIf1ZdXHkhRvkSiBTXbEBxMAt2l8X4hZCG61sdN4kobnMWARam1endZcFb397
+ bfsvYvDNXOyXKv5pL4tR0RtCKwPmrcf8zaXloBybFckzq5bZMHrRh3dvauVA5EWW/ztQ++J8dST
+ 4io0LmoKqGpQUzWUd6z308tT5MXpSn5k1s+XGfg31str9X4ZNsjdNtHzg9Ll4V8PiLomj4zINF7
+ zenPDxjNfG7UcK2YIFhA29mviikAqKYGMQcSmQ=
+X-Google-Smtp-Source: AGHT+IHnc61NIi6RIDasz9vPkDfKKUAVQ3ftc181fh7AIg7CzmWkRB/iEd7HQNbHfDRwutzEZKbQPfxQOLbdECpwmtM=
+X-Received: by 2002:a05:6512:3b12:b0:553:37da:2bad with SMTP id
+ 2adb3069b0e04-55a046475ccmr319691e87.38.1752200473795; Thu, 10 Jul 2025
+ 19:21:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250708084127.659728-1-alexander.stein@ew.tq-group.com>
+In-Reply-To: <20250708084127.659728-1-alexander.stein@ew.tq-group.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 10 Jul 2025 23:21:02 -0300
+X-Gm-Features: Ac12FXzoVWcFKsCw8pRPQZ0ypVdwsLh-_PRvNjId4yXExEqZectN6ICOsGzAUV8
+Message-ID: <CAOMZO5Aain_S1+AWwe7SMHAQot8Pw7+h0C1WA8A5nr=LQ0_2gg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] arm: imx: imx8m: soc: Fix i.MX8M Nano GPU paths
+To: Alexander Stein <alexander.stein@ew.tq-group.com>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,72 +96,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, Jul 8, 2025 at 5:41=E2=80=AFAM Alexander Stein
+<alexander.stein@ew.tq-group.com> wrote:
+>
+> The SoC node is called 'soc@0', even on NXP branch 6.6-fslc. This fixes
+> the boot on i.MX8M Nano DualLite, as there is no GPU.
+>
+> Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
 
-Please pull from u-boot-imx/master, thanks.
-
-The following changes since commit 344e1798059ba65769272be3145736685bb25a7e:
-
-  lmb: add missing fallthrough in lmb_alloc_mem() (2025-07-09 10:39:37 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20250710
-
-for you to fetch changes up to 76f11d6de398669d30c9ad5621e6137d7aa6333a:
-
-  arm: imx: imx8m: soc: Fix i.MX8M Nano GPU paths (2025-07-10 08:02:11 -0300)
-
-u-boot-imx-master-20250710
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/27010
-
-- Fix the i.MX8M Nano GPU path.
-- Enable RNG support for KASLR on Toradex i.MX8 boards.
-- Enable watchdog and clock driver for imx6ulz_smm_m2b.
-- Tighten dependencies on CMD_BLOB.
-- Remove the rest of i.MX31 support.
-----------------------------------------------------------------
-Alexander Stein (1):
-      arm: imx: imx8m: soc: Fix i.MX8M Nano GPU paths
-
-Emanuele Ghidoli (5):
-      configs: verdin-imx8mm: enable RNG support for KASLR
-      configs: verdin-imx8mp: enable RNG support for KASLR
-      configs: toradex-smarc-imx8mp: enable RNG support for KASLR
-      configs: apalis-imx8: enable RNG support for KASLR
-      configs: colibri-imx8x: enable RNG support for KASLR
-
-Michael Trimarchi (2):
-      configs/imx6ulz_smm_m2b_defconfig: Enable clock framework
-      configs: imx6ulz_smm_m2b: Add board watchdog reset configuration
-
-Tom Rini (2):
-      cmd/Kconfig: Tighten dependencies on CMD_BLOB
-      arm: imx: Remove the rest of i.MX31 support
-
- arch/arm/Kconfig                           |   8 -
- arch/arm/include/asm/arch-mx31/clock.h     |  35 --
- arch/arm/include/asm/arch-mx31/gpio.h      |  12 -
- arch/arm/include/asm/arch-mx31/imx-regs.h  | 905 -----------------------------
- arch/arm/include/asm/arch-mx31/sys_proto.h |  20 -
- arch/arm/mach-imx/imx8m/soc.c              |   2 +-
- arch/arm/mach-imx/mx3/Kconfig              |  33 --
- cmd/Kconfig                                |   1 +
- configs/apalis-imx8_defconfig              |   5 +-
- configs/colibri-imx8x_defconfig            |   5 +-
- configs/imx6ulz_smm_m2b_defconfig          |   5 +
- configs/toradex-smarc-imx8mp_defconfig     |   1 +
- configs/verdin-imx8mm_defconfig            |   5 +-
- configs/verdin-imx8mp_defconfig            |   1 +
- drivers/misc/Kconfig                       |   2 +-
- drivers/serial/Kconfig                     |   2 +-
- drivers/w1/Kconfig                         |   2 +-
- drivers/watchdog/Kconfig                   |   2 +-
- 18 files changed, 25 insertions(+), 1021 deletions(-)
- delete mode 100644 arch/arm/include/asm/arch-mx31/clock.h
- delete mode 100644 arch/arm/include/asm/arch-mx31/gpio.h
- delete mode 100644 arch/arm/include/asm/arch-mx31/imx-regs.h
- delete mode 100644 arch/arm/include/asm/arch-mx31/sys_proto.h
- delete mode 100644 arch/arm/mach-imx/mx3/Kconfig
+Applied, thanks.
