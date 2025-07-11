@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46ED4C83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 17:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C88AC83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 17:41:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B162882C84;
-	Fri, 11 Jul 2025 19:41:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 11C7E82FCA;
+	Fri, 11 Jul 2025 19:41:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yTDEVWkI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bp6lelJn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70B2A82F6F; Fri, 11 Jul 2025 19:41:28 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id D9EAF82C84; Fri, 11 Jul 2025 19:22:40 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 411868277D
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 19:41:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6B5E8277D
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 19:22:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-311bd8ce7e4so2146438a91.3
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 10:41:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=davidzangcs@gmail.com
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-3137c20213cso2320032a91.3
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 10:22:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752255685; x=1752860485; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1752254557; x=1752859357; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uqXCCpzu0Xc59qOw0Os+9vJKZ1TiwoJAdlBtaqJb/54=;
- b=yTDEVWkIMB5Yri5whP8nRVTpLlshLbhD0PotMMJPeMRVDgjP16trPbMOyQwXXiJ53J
- vUUEJO72ZKA2MjxLckwnaFSF451Cc/3Gb9/gxPMRLPGaAEXF1bH6YoXXivFwDU+RUtHQ
- OsDqOuCsS/pJ9oeNDyedwifDB9AWUnI8kA/+vAelRXM6k6b71fc6rD999J7YVfSVYoAr
- gXEPexriKYA3YzqPiDJa1n5qZCX1l6cp7lGlV8wfu5nJHIMAaqFaIXu/FcD1trSCquXi
- kXpFGi8nvd/k4GXo07hYw0NGstGTgkhiBU5MIC5/GIHsTV/eeYHiJem1nxNTFakWo5Xx
- kFuA==
+ bh=QzeshgnaOkHvJ6j1QF6Th8Qu+sraLXqrngaJ964fKts=;
+ b=bp6lelJn04xG/xpky5beIQR3YIWRQ9z3rHokvK3mF353/kG1gdlPwJHp+lvKQne4Du
+ x9o0J66Q81Dymp207iXL/gQcLAMoXP/y2w3gg84Rkg0s/bMY7rwozaYK7M5xt/ErsQ81
+ WEZiQbUNiD2uYeNMk+s94O+utkFPiBsO48CBeOoijMaHNev0i4v7sCkA0XKLuH+f99UJ
+ sATjTmLuwxa0r6AKthG0MPaq2s5Syt12hXpzOvDZtDqmediIkzVy7y0uWKk0bTo3nCr3
+ jNfi2i17ez/ZGMjU3l1TtG0BanjWR5uOFITojl6dckk+4VZNAVexaeoaflwDmS3jURzm
+ 1NOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752255685; x=1752860485;
+ d=1e100.net; s=20230601; t=1752254557; x=1752859357;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uqXCCpzu0Xc59qOw0Os+9vJKZ1TiwoJAdlBtaqJb/54=;
- b=XDUEou5VqHw5OlD20B+dYPeDRcwTV+uFjMJLQbi7xv7rvFkvf0kDlKPcFHh8TCPmdI
- vTOnhT+BIThpoN+XyEwBlnfQvxjliTEyVRBpzXKB1irvVVOLgKPmXNeCbk6+OliIajsG
- TWn7zF/O2/QT9FsLIyEj2p2Lf727x9yivWjcN3VEcHtFjQIZi75DhyJF2HESnmcj1Oqm
- +CwCObq+o8Nlo7gHzsNfmr7TmyAx6WTNxUjnVzbGjIHQfEk2YdLpVZ5ShCE3gB9Ul9iH
- OJ0YNlU9LKh+4NPolLEeHpgy1v44oMJSc8gkBFXe8kLzwhEA56D8G6/MY4RBKyuVvjQQ
- o92w==
-X-Gm-Message-State: AOJu0Yymd2wKJv6sy4DDjhPwKk2kPOwpRmv7pRclvIXNy1LpZJEGDflG
- 7X8Q2N/Tzkh3810l1rzYq/RjNpeI0QtPjB4ugsGZp7x78DZMnwhvaeOhY7HRxbtt35P/6Zu0hmG
- CizNawKtigIyGoUZSRB2PU9aUpFB1aB4XV+utEOP/Z7jiWd9rRfzw
-X-Gm-Gg: ASbGnctSrcSYiyDbJTSYrfuS6VzeWN008ZfU0m4cDjv/I6smZCw1RvM5ORMTHF4KGrE
- nF0YTdphDLgc+QoeU1+gsRByf+Uav9nSvGSXgVbC+6V1wKVbUSqEZ4h5v9DfkTxaGVnh2VzFYx3
- 30NHcyISTQ9XXYYp4q1tS2knaYHALsasrM98gc0FMwHTaJb19XpLAtyklNYKHki3GJ2rrj6+VZN
- VmDnAd9
-X-Google-Smtp-Source: AGHT+IFNdFo+pCb/VM8A1OBUWIomT32T4SXp1UMsm9vznF0L5nnQvWAU6VvYvHvh6fiiBjF72JuMHD6MJCwPH78y+HQ=
-X-Received: by 2002:a17:90b:4d0a:b0:313:f9fc:7213 with SMTP id
- 98e67ed59e1d1-31c4cd6309fmr5643797a91.21.1752255684712; Fri, 11 Jul 2025
- 10:41:24 -0700 (PDT)
+ bh=QzeshgnaOkHvJ6j1QF6Th8Qu+sraLXqrngaJ964fKts=;
+ b=MEP8YLpOtp7Ih/QTlx8QIzE2iYezfmW6cyeQ67XgOMd7MY2tTgE9wekA79dOVm6VAP
+ i9vUygNN6jrPoKrKl19X6z3R1P5IIBoPuLUFB/dPHVr0IJJO/hkiImXUha08z2EZpRHD
+ vnrV5DniY2kKa1Y932vQXdVsWJDKUOHjwjO7YoCoWMBiazsxWjUgkBSv0akLXLp+SRwn
+ AZmZIYBcLeGNh1GhTZNb7z6v0KuMxk+V2W9GVmXul3zcl0sJixLePBuSFEpavpl6dbZC
+ Zv7WaVrHWZO0MAXXC7+jbOQaBB9HV1EmZLUtnEmu6+tF4fcu3KjRsDbpi+LoA3S4q4Xj
+ UUxw==
+X-Gm-Message-State: AOJu0Yz3R53Eb+RU+ACD1mOX4qNuyDf+G0kj9ZhdsNr26Rq2E/aSh7wl
+ vh5fD/mBMUokMA6IGS3I6m1IhaMHnNctei07WtxPNrtUbskMhEtVhLZtn2g94O9/T2+Q45wEECc
+ Ya1sSGw68lrPDgnFPUCa4g5sfmmTpC9Y=
+X-Gm-Gg: ASbGncudojamymudE4vRHMzPEJFqas/pYbVDkAn3bLQUAU9vhGx8jcc0ct0fEmd+qRk
+ Lkkdx9VN2oRhXVbhGkYnnb13Z2HdMSECWPe4w2abR3b61MAtXBJk4CxzJ0OnR4MnEssbnDeYT25
+ zCwuXkD9GyADPS5nwqovvEublWjX8A7nsBqT67IAZb1CFVc5rFVeduBIcQXGSViauXm7DqyqziP
+ tPw
+X-Google-Smtp-Source: AGHT+IHE0a+b2LjHVTRbZbmBbv4lPndenkPdEGA9m5dJaQuqIzpw0uFLku/MhyvfVe0U8VDyqCTDkZ6mKY5mIaruny8=
+X-Received: by 2002:a17:90b:2ecb:b0:311:f99e:7f4a with SMTP id
+ 98e67ed59e1d1-31c4ccedab5mr5811407a91.26.1752254556878; Fri, 11 Jul 2025
+ 10:22:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250704134208.2895595-1-raymond.mao@linaro.org>
- <20250711154538.GI6424@bill-the-cat>
-In-Reply-To: <20250711154538.GI6424@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 11 Jul 2025 13:41:13 -0400
-X-Gm-Features: Ac12FXxuVnIpglGjW1T0BLH-mvAB-8_jGTLoxmTxhysSBckdErW38VsRHVOrXP0
-Message-ID: <CAEfUkUKyTO9BjEWSRegVE-_f_v-cqVNCDbPapefEJ4KhVEVjRw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/6] Add support for DT overlays handoff
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com, 
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20250709234918.140919-1-davidzangcs@gmail.com>
+ <CAOMZO5D1d=Y9i9E+Pcm0sbyKE+M=zUj_9Rs_QHbaE5DPvWFA=w@mail.gmail.com>
+In-Reply-To: <CAOMZO5D1d=Y9i9E+Pcm0sbyKE+M=zUj_9Rs_QHbaE5DPvWFA=w@mail.gmail.com>
+From: David Zang <davidzangcs@gmail.com>
+Date: Fri, 11 Jul 2025 12:22:25 -0500
+X-Gm-Features: Ac12FXxGFAZjVUiOipmFYOwGnJTTO8iF2gLMCcWOZYijUZwf4gnTAWXIj7Kv_WU
+Message-ID: <CACwB3C-KKZS_5JOfFvF5hWsXr4AXUU+OTR1+rBSd5NpkH4r+rg@mail.gmail.com>
+Subject: Re: [PATCH] soc: imx8ulp: Add celsius unit for temperature
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com
+X-Mailman-Approved-At: Fri, 11 Jul 2025 19:41:30 +0200
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,30 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Jul 10, 2025 at 5:59=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
 
-On Fri, 11 Jul 2025 at 11:45, Tom Rini <trini@konsulko.com> wrote:
+> Hi David,
 >
-> On Fri, Jul 04, 2025 at 06:41:59AM -0700, Raymond Mao wrote:
-> > The series include refactoring on bloblist and fdtdec to support handoff
-> > of multiple DT overlays and applying them into the DT base during setup.
-> > All changes are aligned to the spec update for supporting DT overlay
-> > handoff[1].
+> On Wed, Jul 9, 2025 at 9:44=E2=80=AFPM David Zang <davidzangcs@gmail.com>=
+ wrote:
+> >
+> > Signed-off-by: David Zang <davidzangcs@gmail.com>
+> > ---
+> >  arch/arm/mach-imx/imx8ulp/soc.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/arch/arm/mach-imx/imx8ulp/soc.c
+> b/arch/arm/mach-imx/imx8ulp/soc.c
+> > index bbcd862caa3..5de15b59b96 100644
+> > --- a/arch/arm/mach-imx/imx8ulp/soc.c
+> > +++ b/arch/arm/mach-imx/imx8ulp/soc.c
+> > @@ -400,7 +400,7 @@ int print_cpuinfo(void)
+> >         if (!ret) {
+> >                 ret =3D thermal_get_temp(udev, &temp);
+> >                 if (!ret)
+> > -                       printf("CPU current temperature: %d\n", temp);
+> > +                       printf("CPU current temperature: %dC\n", temp);
 >
-> Which for the record and my tracking, isn't merged yet, and links to
-> the doc update which also isn't applied yet. I'm fine with the concept
-> but also thinking that applying this here to master isn't the first step
-> towards getting all the relevant projects in agreement FYI.
+> Your change looks good, but please add a short commit log and send a v2.
 >
-No worries, both the changes to the DT doc and FW handoff spec are
-still under review.
-It may take some time to get everyone's agreement.
-I will try to keep my patch up to date with the latest docs changes
-and address all comments.
-You can merge it after the docs changes are accepted.
+> Since it is a simple fix, do I really need a commit log?
 
-Raymond
-
-
-> --
-> Tom
+David
