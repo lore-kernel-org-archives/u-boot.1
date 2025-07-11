@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40F46C83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 22:21:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13194C83F21
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 22:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F4218277D;
-	Sat, 12 Jul 2025 00:21:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B688282B07;
+	Sat, 12 Jul 2025 00:21:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="q5HzSqys";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zPpp6ZpA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF7A4828A2; Sat, 12 Jul 2025 00:21:42 +0200 (CEST)
+ id 7A11682C84; Sat, 12 Jul 2025 00:21:47 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8526B81FEE
- for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 00:21:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECFFE82B07
+ for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 00:21:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=2656=ZZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1752272499;
- bh=D1gAUJfFyGEgIS8ovE1VDzlHQW3o/tSzs60I1zOa+a0=;
- b=q5HzSqysztxm1V5nW6XHiom3KpiK8LWsVxuBg8FuQEGGxYdghjYBxiY389TWOQpMIsL3103/A
- CXXAzuWc3XpWMatTyaimSR+vGPDIRauoS0710z7C05aHj2V4QcLOFB0m6zKTtRE30cUOqCFnZK0
- +gJMDFMXRpQeApbehUgiZWMUfSJEZThxsBEt9MLP5pm8X7ccsWNePRh4kq1zOZKaIh3TftY2eNu
- TpZ/b+lMYJXIJMntK5bQ49iUdZFmKf3wcN4L05vOxgD7kFR4KRal4BD389phHaXejqjpCbMFDfq
- fKbuIcQDYo0zb04o2dlQ6woJuye12ob1KV9ZyztAkLjg==
-X-Forward-Email-ID: 68718e7126dc7c4d2555fcc1
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1752272503; bh=EQlJqhVDSQO3bVrHcoFJyxK9YyEokCPS21jPRKNAh9E=;
+ b=zPpp6ZpAjgIMyAzv4nmfn7HCyG1UDJyUmgbgJbLzZ9rBMW8DsMkoxt0/MCR8Ix3ZxGVoGh2W7
+ 3Yl0I7EV9kcrzZaQx796bk2tbqRE5gdJCYHCN8kMnsdknZALMGryTHI3kjXNc4PF50T6BaGqU5w
+ Hm2E8ywTGsrux7YCzQKap4/lCLXOoAYCCaNVJdwV+/T3pB+tz+wpihc45w8sJyqchNzQApXYfpv
+ tV+LhRwNRfbpCc/53+Kv3wIzIBuQVqqZPi9zn5pUFNWvExW2Ic/M+dypeybZYUUURxYZFheJXUQ
+ Zgzu0z4DSIyNrcdi+DEdULI10RCrSntowxf8VL5UNGJg==
+X-Forward-Email-ID: 68718e7526dc7c4d2555fce9
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.1.6
@@ -44,14 +44,17 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 0/6] rockchip: rk3576: Add rng,
- checkboard() and generic board
-Date: Fri, 11 Jul 2025 22:21:15 +0000
-Message-ID: <20250711222132.204344-1-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
+ Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
+ Heiko Stuebner <heiko@sntech.de>
+Subject: [PATCH v2 1/6] arm64: dts: rockchip: add RK3576 RNG node
+Date: Fri, 11 Jul 2025 22:21:16 +0000
+Message-ID: <20250711222132.204344-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250711222132.204344-1-jonas@kwiboo.se>
+References: <20250711222132.204344-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -70,44 +73,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a follow-up series on top of the "Support for the RK3576" series.
-It adds support for RNG, USB PID, a generic board and printing of the
-running SoC variant.
+From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 
-Changes in v2:
-- Add RNG node by picking a commit from devicetree-rebasing
-- Add compatible for RK3576 to RNG driver
-- Add default USB_GADGET_PRODUCT_NUM for RK3576
-- Add USB OTG nodes to the minimal generic RK3576 board
-- Split the checkboard() patch in two
-- Split out the ArmSoM Sige5 patch into a separate series
+The RK3576 has a hardware random number generator IP built into the SoC.
 
-Jonas Karlman (5):
-  rng: rockchip_rng: Add compatible for RK3576
-  rockchip: Add default USB_GADGET_PRODUCT_NUM for RK3576
-  board: rockchip: Add minimal generic RK3576 board
-  rockchip: rk3576: Implement checkboard() to print SoC variant
-  arm: dts: rockchip: Include OTP in U-Boot pre-reloc phase for RK3576
+Add it to the SoC's .dtsi, now that there's a binding and driver for it.
 
-Nicolas Frattaroli (1):
-  arm64: dts: rockchip: add RK3576 RNG node
+Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+Link: https://lore.kernel.org/r/20250430-rk3576-hwrng-v1-3-480c15b5843e@collabora.com
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
- arch/arm/dts/rk3576-generic-u-boot.dtsi     |  3 +
- arch/arm/dts/rk3576-generic.dts             | 65 +++++++++++++++++++++
- arch/arm/dts/rk3576-u-boot.dtsi             |  4 ++
- arch/arm/mach-rockchip/rk3576/MAINTAINERS   |  5 ++
- arch/arm/mach-rockchip/rk3576/rk3576.c      | 48 +++++++++++++++
- configs/generic-rk3576_defconfig            | 51 ++++++++++++++++
- doc/board/rockchip/rockchip.rst             |  1 +
- drivers/rng/rockchip_rng.c                  |  4 ++
- drivers/usb/gadget/Kconfig                  |  1 +
- dts/upstream/src/arm64/rockchip/rk3576.dtsi |  8 +++
- 10 files changed, 190 insertions(+)
- create mode 100644 arch/arm/dts/rk3576-generic-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3576-generic.dts
- create mode 100644 arch/arm/mach-rockchip/rk3576/MAINTAINERS
- create mode 100644 configs/generic-rk3576_defconfig
+[ upstream commit: 5268f3b5d29887480011b44567bcbf0d422cda94 ]
 
+(cherry picked from commit 25cfcb091747900639f2b5df297d26b3a6ca3989)
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+v2: New patch
+---
+ dts/upstream/src/arm64/rockchip/rk3576.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/dts/upstream/src/arm64/rockchip/rk3576.dtsi b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
+index ebb5fc8bb8b1..50332ec6e0de 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3576.dtsi
++++ b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
+@@ -1419,6 +1419,14 @@
+ 			status = "disabled";
+ 		};
+ 
++		rng: rng@2a410000 {
++			compatible = "rockchip,rk3576-rng";
++			reg = <0x0 0x2a410000 0x0 0x200>;
++			clocks = <&cru HCLK_TRNG_NS>;
++			interrupts = <GIC_SPI 181 IRQ_TYPE_LEVEL_HIGH>;
++			resets = <&cru SRST_H_TRNG_NS>;
++		};
++
+ 		otp: otp@2a580000 {
+ 			compatible = "rockchip,rk3576-otp";
+ 			reg = <0x0 0x2a580000 0x0 0x400>;
 -- 
 2.49.0
 
