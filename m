@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50019C83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:21:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E45C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A603482F8E;
-	Fri, 11 Jul 2025 17:20:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E07E83108;
+	Fri, 11 Jul 2025 17:20:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="juYq6WRU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XDqpGq48";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1FD2830F6; Fri, 11 Jul 2025 17:20:21 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 5F6F78313B; Fri, 11 Jul 2025 17:20:26 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA75282F14
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40A7D83108
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2efbbf5a754so1375219fac.0
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:19 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-611f48c6e30so1182570eaf.0
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752247218; x=1752852018; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752247223; x=1752852023; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=uUKU084LcCC9gctSbMeTEk0jlGxtEhxxMVNo0dzIev4=;
- b=juYq6WRUnagZ6E3yilriGfiFf9TXEwbB6c+XIQEM8BAspt8B+0bmeqNPIlKTSKsD+c
- KS2qZ47qxLiSGb+m9zrHhhYO2HYAilS0+zpXCoeaWjWaTyIeGK03nErZubljyJ4pS0RV
- K1vqZhhl+aNysta16O9fyT5zOBQoq/JE/ugC0=
+ bh=loXKM4R4k7H2kzxIOsA5jDgk5aQD3cjkk2ajH4JElmQ=;
+ b=XDqpGq48Wr03mXydup421vjJiLFUzeLh1pnBO0KOLtU3ityRQ+3M9+5lkEqX44ZPBm
+ 7x0RCoYnGDmE2k4eKeWzyyl2y3w4wM86ZraBi/yWY2KP4/YUclgCSaf+as7rksGIkZtN
+ qX0w1Knl/jjTgxlnS19Kuf3Iw9snnkf23IfCM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752247218; x=1752852018;
+ d=1e100.net; s=20230601; t=1752247223; x=1752852023;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uUKU084LcCC9gctSbMeTEk0jlGxtEhxxMVNo0dzIev4=;
- b=YUoIpvQUF9qtq2uM08lviFYaANTl6tZfs93VUUsRXeWvxwfyn5Vv6PBpF1OW1ClLIs
- oWfBZKoW2DXw4aJ5jKAc1fMys6LnepK46WGgcj1WPB6GmgRpvM7GlDtJ4GyToGHb89KO
- Gx7Rvqf/ywU/0fTNbhmm8jAblMFgetitkWhcRaTK1JD5LddgfKLQI/gA+YOGYNBtFnsx
- m/s+dyKu8EN7qzynApK6f6wJtC7+kPF+gwjbqSZ9p54qeUrT8EwTC6ZJjYVDFfIRvJyT
- qTPpvIS31J7ZClh2kdD4wDOx715YUuGnYB3Uj+T1o/K/4LNJPiKE6WlkeQLlzDD0k2mh
- NCdg==
-X-Gm-Message-State: AOJu0YylI2u1FHNJFGX+0T2musWkS7jNY5yasjjYHSFomqK1FOUTz0EN
- N7+MBgjbJPiM4Ykf20NlNIfZIxvtUxBIXPGpo/jlb1D+jpSm5CP1xp9xwSGyKrljS/pbtChRPNN
- hReqoSeA=
-X-Gm-Gg: ASbGncvHJbl4LbR3Ge9JBRZDORrniEjInGjTaUjVrEY3TVzzw5Vp1Dz5ShPAZu8OjZ3
- wGgrZarjEIfVKphrYM9bmT/yEtaPRZ9EGEUa5IEs42LeoeTwRyt1aHwZclTQoZiNZ+1NwtR5KF3
- YZ9+J1M4b1MLidrVNmHniCpo8vL0nGUiPrh4pvBH7BnrqVbcd9yZTwK9JpWxypplyO635l7+aaO
- Jwaep+kUGSEhvkKOUtg3hEYy5moknRpjbpx+oIfkMLw39NaWO29hs6/mKMJKpnIXZ3LMP9DHNCO
- cHy4Rj7IHe7xJs6f0h9XSRhNSH49w/4Ia+yVUNCfZPNoyOq1ZYff75s2xfOjDO+D60JYmuwVXSs
- I2YPSoezCem19vZLXECdlTxUEhImDrVorNml+dOsRP8UmseisOSRJnCDmTPRhxccLKop/8Q==
-X-Google-Smtp-Source: AGHT+IHKKcHuyHUz6FsO/6GQjuDRCwLXrPw+MDN7S7SmFfNacB95lRwVgVWgH8UIS5PcQdmb3O28PA==
-X-Received: by 2002:a05:6870:7909:b0:2d5:2191:c8b3 with SMTP id
- 586e51a60fabf-2ff27049ca8mr2872062fac.29.1752247218310; 
- Fri, 11 Jul 2025 08:20:18 -0700 (PDT)
+ bh=loXKM4R4k7H2kzxIOsA5jDgk5aQD3cjkk2ajH4JElmQ=;
+ b=GfyozSjj7r/yRCEzGwlRLuTaYqzX0R4NBEmZm6XaZQYGkpDYfleSRQuKZ4JAjCL3Ml
+ MSMUsAC5t6T/Eij4zPpEAbiHOc0pnG13tAyByvS+/Kz/dpZtF4BH2FWBcdw30J/alqXA
+ Zvyahmb9p3HLHKIn9zfxthrqkiWFIsFBx9kSiyl9TZ8gq1T4ocHuStucyMEkKO2iEjxJ
+ hLDqlxNa3keBexrJcqZwk+3sRL8ZNBCLIRvKyiE7r98G6rZXKpckHx5cZ/sAWn8UelJk
+ hldc90HrgBeH6SYImrp7e9jPUKl15KXtweIyCIPRJUgiaj8gQ4lOsLNqWr4MowOQUCOE
+ 94Ng==
+X-Gm-Message-State: AOJu0YwSZpeWeFXF5S9f1YZRTI5gS4O1zFivKzfS89ym55I3O1guFKP7
+ EMO/ra2X6Uy97cChLeZMhXpi6tPxssui6Xxvu4t2XbmeTzVnkzRR50S/8J2okuQvaMYevoA+2aL
+ HnlxyAaM=
+X-Gm-Gg: ASbGncuzor2fcRK6VzzNBHFiftWDtbrRvcgdprh1Mnh3ABzuhnFQonUEtRWiKSay6nM
+ HiFEYoU9Zk/vHcwddAmrwFI5L/jfTj7DA9j5MsZeJfG7bBRS0QMKSKATybfWu0/0FZv53Lfkx0k
+ 4/GGEx8+3PSnaJLTJGRhrMrzc6QrjsQmNhcG8T+QPJWowtKGTJ1A7A/c/jxGXlbnO5EODrPLL93
+ Wjd5D28BV/kHyq8XzRTg5JS/ep+wkKTTjyLA8DDEk+Z7h9vZ2yekb2CYH1vSJH+HdZ9qV2hSIip
+ wBzD1t/Q9XODsmPDZgHzuQZ5m3/wcdX5rrXUZ8jpYZNmQOgB71JUhy8GlMsQY0rKK9gBJZIx8wU
+ JUg5GsXy9gZ6DmVNFkChP/S/iPctUn28ONc/7Ap2HJSfOgpi7dC1z5VikusB/5zWSJOWRJg==
+X-Google-Smtp-Source: AGHT+IGaLVFIVjNIblRlQt87mQqcB1oaC6wslatF8L3qnzcmaxtk1YSD7LAcEdpukEipw3zG9MSmIA==
+X-Received: by 2002:a05:6808:1692:b0:40c:5b58:dbd4 with SMTP id
+ 5614622812f47-4151122da67mr3165392b6e.22.1752247221239; 
+ Fri, 11 Jul 2025 08:20:21 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ff1172e5c8sm761583fac.44.2025.07.11.08.20.17
+ 5614622812f47-414196c6381sm566570b6e.14.2025.07.11.08.20.20
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 08:20:17 -0700 (PDT)
+ Fri, 11 Jul 2025 08:20:20 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] sandbox: Add dummy sync()
-Date: Fri, 11 Jul 2025 09:20:16 -0600
-Message-ID: <20250711152016.2225486-1-trini@konsulko.com>
+Subject: [PATCH] x86: Rename arch/x86/include/asm/pnp_def.h to
+ include/pnp_def.h
+Date: Fri, 11 Jul 2025 09:20:19 -0600
+Message-ID: <20250711152019.2225509-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,28 +92,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to compile more drivers, add an empty sync() function.
+There is nothing x86-centric in this include file, and moving it will
+allow for some drivers to be compile-tested on sandbox.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/sandbox/include/asm/io.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c | 2 +-
+ board/dfi/dfi-bt700/dfi-bt700.c                            | 2 +-
+ board/intel/crownbay/crownbay.c                            | 2 +-
+ drivers/misc/nuvoton_nct6102d.c                            | 2 +-
+ drivers/misc/smsc_lpc47m.c                                 | 2 +-
+ drivers/misc/winbond_w83627.c                              | 2 +-
+ {arch/x86/include/asm => include}/pnp_def.h                | 0
+ 7 files changed, 6 insertions(+), 6 deletions(-)
+ rename {arch/x86/include/asm => include}/pnp_def.h (100%)
 
-diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
-index 6e3f9547fee7..11ed89e00710 100644
---- a/arch/sandbox/include/asm/io.h
-+++ b/arch/sandbox/include/asm/io.h
-@@ -8,6 +8,10 @@
+diff --git a/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c b/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c
+index 4197e88fb6ff..153594c42bb0 100644
+--- a/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c
++++ b/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c
+@@ -5,10 +5,10 @@
  
- #include <linux/types.h>
+ #include <i2c.h>
+ #include <init.h>
++#include <pnp_def.h>
+ #include <winbond_w83627.h>
+ #include <asm/gpio.h>
+ #include <asm/ibmpc.h>
+-#include <asm/pnp_def.h>
  
-+static inline void sync(void)
-+{
-+}
-+
- enum sandboxio_size_t {
- 	SB_SIZE_8,
- 	SB_SIZE_16,
+ int board_early_init_f(void)
+ {
+diff --git a/board/dfi/dfi-bt700/dfi-bt700.c b/board/dfi/dfi-bt700/dfi-bt700.c
+index 907cc985d7a9..69a6860c2dd3 100644
+--- a/board/dfi/dfi-bt700/dfi-bt700.c
++++ b/board/dfi/dfi-bt700/dfi-bt700.c
+@@ -6,9 +6,9 @@
+ #include <init.h>
+ #include <log.h>
+ #include <nuvoton_nct6102d.h>
++#include <pnp_def.h>
+ #include <asm/gpio.h>
+ #include <asm/ibmpc.h>
+-#include <asm/pnp_def.h>
+ #include <linux/delay.h>
+ 
+ int board_early_init_f(void)
+diff --git a/board/intel/crownbay/crownbay.c b/board/intel/crownbay/crownbay.c
+index 036beb1146dc..6c5d03c1d496 100644
+--- a/board/intel/crownbay/crownbay.c
++++ b/board/intel/crownbay/crownbay.c
+@@ -4,8 +4,8 @@
+  */
+ 
+ #include <init.h>
++#include <pnp_def.h>
+ #include <asm/ibmpc.h>
+-#include <asm/pnp_def.h>
+ #include <smsc_lpc47m.h>
+ 
+ int board_early_init_f(void)
+diff --git a/drivers/misc/nuvoton_nct6102d.c b/drivers/misc/nuvoton_nct6102d.c
+index a3ca037d25f7..c4a8ecaa1b38 100644
+--- a/drivers/misc/nuvoton_nct6102d.c
++++ b/drivers/misc/nuvoton_nct6102d.c
+@@ -4,8 +4,8 @@
+  */
+ 
+ #include <nuvoton_nct6102d.h>
++#include <pnp_def.h>
+ #include <asm/io.h>
+-#include <asm/pnp_def.h>
+ 
+ static void superio_outb(int reg, int val)
+ {
+diff --git a/drivers/misc/smsc_lpc47m.c b/drivers/misc/smsc_lpc47m.c
+index 1b15907b0933..cc3d3f9de06c 100644
+--- a/drivers/misc/smsc_lpc47m.c
++++ b/drivers/misc/smsc_lpc47m.c
+@@ -3,8 +3,8 @@
+  * Copyright (C) 2014, Bin Meng <bmeng.cn@gmail.com>
+  */
+ 
++#include <pnp_def.h>
+ #include <asm/io.h>
+-#include <asm/pnp_def.h>
+ 
+ static void pnp_enter_conf_state(u16 dev)
+ {
+diff --git a/drivers/misc/winbond_w83627.c b/drivers/misc/winbond_w83627.c
+index 87b9043e65c4..8c5b121b8e93 100644
+--- a/drivers/misc/winbond_w83627.c
++++ b/drivers/misc/winbond_w83627.c
+@@ -3,8 +3,8 @@
+  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+  */
+ 
++#include <pnp_def.h>
+ #include <asm/io.h>
+-#include <asm/pnp_def.h>
+ 
+ #define WINBOND_ENTRY_KEY	0x87
+ #define WINBOND_EXIT_KEY	0xaa
+diff --git a/arch/x86/include/asm/pnp_def.h b/include/pnp_def.h
+similarity index 100%
+rename from arch/x86/include/asm/pnp_def.h
+rename to include/pnp_def.h
 -- 
 2.43.0
 
