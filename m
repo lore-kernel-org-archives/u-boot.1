@@ -4,81 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33471C83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 16:08:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D283C83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 16:08:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E25A82063;
-	Fri, 11 Jul 2025 18:08:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C08E782F6D;
+	Fri, 11 Jul 2025 18:08:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kyfJ/cov";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ndKguSYb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F65E826AA; Fri, 11 Jul 2025 18:08:15 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40466805D7
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 18:08:13 +0200 (CEST)
+ id 4F4C6805D7; Fri, 11 Jul 2025 18:08:20 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 95F9C82F49
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 18:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7387f21daadso1747923a34.0
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 09:08:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752250092; x=1752854892; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VH3MfTx9CHhtjiCvWWFJKifZkMbmOUPZhHixEKLM79Q=;
- b=kyfJ/covu9l3R8z9vDOrDr9lQw9Qjh7X8nxoBJKk1GvKKJylycKSdOq1u9L9omn89I
- q3mTpH6pweee+FFboVjKTuGvItjEeE+ETbei6zyXfBrDiCVuQN7yWXu+pZB9GHSW1oQW
- bwmQkYHVnrWKTlVCpjql8H0/9X0RIXj6pjmIg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752250092; x=1752854892;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VH3MfTx9CHhtjiCvWWFJKifZkMbmOUPZhHixEKLM79Q=;
- b=hLuI/GBTtnkwpAzlhxwgrYz52dn7cfYWsxIFSW7bfLAXboMACzz9o7IjuHysZwXC/S
- PaTbwpQY7dzTKPkr90CbwLKyuf/hCixJQ2ZWKfRHmxV/vj6n5ODgYqB+ld8PcLnuvVqT
- R2xe3ey72qyipxIqOZXrqx5J7b4/hjjTb/usBEULhq85IsWorRps+sUkJKnmEhGYFZMo
- T7+MRF8UzIs1rCupzzL2q6pD3MBZrIckzsoCgdupTr1nO30BMrmCfeEMOce8gWQd2uZ4
- 6rTXwq+3LcX2Jl06yeZOMiHBsUbLixPtozJGXRaIXJMqNN2Ulil/uah5SdVNegNe3LIP
- /gjw==
-X-Gm-Message-State: AOJu0Yz7yOEcfP+Ij2Ox5a5pxRZHoHSTzA5pGKcJAa624vNJM79FP8SE
- JnnxC1ti5iW3fEXC2p7Wez4dat2vGicW7IUYJItUD2f2n653G+1MUd6D+mJaYFDKoAc=
-X-Gm-Gg: ASbGnctYXXcxbZbOx+GdF+1wgqstildkEHP/7X5YF+R2l4oWcOVG6zDgu3ZNUTE1TaU
- ArYiS4I7YjsYb0RxhBh/gYllpLSRTNB+sKOTx5+9QtOsH+i6tMZA1I1yIsc0qzQ8biSm9z/GMI8
- WnWZgLSLxyqiGc/ihWK6GEPyY5Z6LaqHXBtWczFFw8JKx234D1W8LnXqkxk4lHtO6x56TvmOYrS
- EwOA9HhdyiCLyrXl/Hbm8AkD1BYfe3nKC5syL5PcXYKZnkn38jr8v5+Dwse7VzzNFIfpsQAqgeJ
- uxpqmvk0h8caR4UFw8M27SF2oFfTS8u+9BQE1P5GQOKrA9cdcUFlm02q4HpEahuv6eMmJIdqEzx
- L/ARi+RQqFJZpSlk0NRNT5XdArZ9zaVqKBiwoZAp3v0x0fI7H9MNqAAA1
-X-Google-Smtp-Source: AGHT+IEQUeVvY/FNuGzLKG+jKyrqYGTkV0IWPJMNPFzabB7ugrePWKVpQySyLdlrMV+4XLErIuv6Vg==
-X-Received: by 2002:a05:6808:1246:b0:40a:729d:82f3 with SMTP id
- 5614622812f47-413c251ed29mr5088627b6e.1.1752250091547; 
- Fri, 11 Jul 2025 09:08:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-613e2e93514sm365868eaf.25.2025.07.11.09.08.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 09:08:10 -0700 (PDT)
-Date: Fri, 11 Jul 2025 10:08:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Robert Stone <rjstoneus@pm.me>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] drivers: remove -mgeneral-regs-only for truetype
-Message-ID: <20250711160808.GA2230322@bill-the-cat>
-References: <2a6ea8e8-788e-4eab-b06b-b553cf4f8320@pm.me>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56BG8AjH1845160;
+ Fri, 11 Jul 2025 11:08:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752250090;
+ bh=onUw/txcQpoJmlvQOpGxkrgttrMBwJAhw1BqAZ+Q/kY=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=ndKguSYboeoyuD87Zyj8vZIWsbIqh+PEFCDCdt17QuB6kngvpPDu7RxRgDKBoEUqx
+ N3v32mNwresrvvXOPYeazRp9AAh2oMaqaioRK6DICr9EbpA8+xbBOz/d6LiUejkaml
+ WBXSV9kXH/otd0mkTpAdCDPZc8tYBl3wny6haNuo=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56BG8Aai2441804
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 11 Jul 2025 11:08:10 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 11
+ Jul 2025 11:08:10 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 11 Jul 2025 11:08:10 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56BG8Ajf3466051;
+ Fri, 11 Jul 2025 11:08:10 -0500
+Date: Fri, 11 Jul 2025 11:08:10 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Yao Zi <ziyao@disroot.org>
+CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2] kbuild: Avoid including architecture-specific
+ Makefile twice
+Message-ID: <20250711160810.cmtm3jtl2ev2rkzh@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250711085234.23659-1-ziyao@disroot.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MDiwBK8gX944bkdu"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <2a6ea8e8-788e-4eab-b06b-b553cf4f8320@pm.me>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20250711085234.23659-1-ziyao@disroot.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,50 +81,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---MDiwBK8gX944bkdu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Jul 05, 2025 at 06:48:12PM +0000, Robert Stone wrote:
-
-> From a364b45738c1fc2e937a8d845f419b8c5c64d751 Mon Sep 17 00:00:00 2001
-> From: rjstone <rjstoneus@pm.me>
-> Date: Sat, 5 Jul 2025 11:22:09 -0700
-> Subject: [PATCH] drivers: remove -mgeneral-regs-only for truetype
->=20
-> For almost everything, -mgeneral-regs-only is a good optimization, but
-> console_truetype.c does using floating point, so the build will fail
-> unless it is compiled without -mgeneral-regs-only.
+On July 11, 2025 thus sayeth Yao Zi:
+> Stranges errors are observed when building U-Boot master for almost any
+> RISC-V board, the messages are in two types, one is about duplicated
+> symbols,
+> 
+> 	u-boot/arch/riscv/cpu//mtrap.S:32: multiple definition of `trap_entry';
+> 	arch/riscv/cpu/mtrap.o: u-boot/arch/riscv/cpu//mtrap.S:32: first defined here
+> 
+> and the other is fixdep's complaint about missing dependency files,
+> 
+> 	fixdep: error opening file: arch/riscv/cpu/.mtrap.o.d: No such file or directory
+> 	fixdep: error opening file: arch/riscv/cpu//.start.o.d: No such file or directory
+> 
+> where the latter could only be reproduced when building parallelly.
+> 
+> Both the two types of errors are about files in arch/riscv/cpu, and
+> there's a suspicious slash character in the reported path. Looking
+> through RISC-V-specific Makefiles, there's only one place that may
+> expand to such a path,
+> 
+> 	libs-y += arch/riscv/cpu/$(CPU)/
+> 
+> The right hand expands to "arch/riscv/cpu//" if $(CPU) isn't defined at
+> the time of including. With some debug statement added to
+> arch/riscv/Makefile, the output proves that arch/riscv/Makefile is
+> included twice, once with $(CPU) undefined and once defined correctly
+> according to CONFIG_SYS_CPU.
+> 
+> Futher bisecting shows an extra include statement against
+> arch/$(SRCARCH)/Makefile is added in earlier bump of Kbuild system. But
+> the statement is evaluated before config.mk is included and definition
+> of $(CPU), causing objects in arch/riscv/cpu/ are built and linked twice
+> (once as "arch/riscv/cpu/*", and once as "arch/riscv/cpu//*"), resulting
+> in the error.
+> 
+> Let's simply remove the extra include to fix these nasty errors. For
+> config targets, bumping Kbuild also introduced a new include to
+> arch/$(SRCARCH)/Makefile, which is removed as well for consistency.
+> 
+> Fixes: 5f520875bdf ("kbuild: Bump the build system to 5.1")
+> Signed-off-by: Yao Zi <ziyao@disroot.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
-> Sorry if this is formatted improperly. I had some trouble setting up patm=
-an
-> and format-patch. Also having some email software problems.
+> 
+> Changes from v1
+> - Don't describe the problem as RISC-V-specific since it may affect ARM
+>   builds as well.
+> - Prevent config targets from including for architecture-specific
+>   Makefile as well for consistency.
+> - Add comments to explain the removal.
+> - Link to v1: https://lore.kernel.org/u-boot/20250709161418.21287-2-ziyao@disroot.org/
+> 
+>  Makefile | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
 
-Can you please explain what config you're using that can lead to the
-failure to compile here? I suspect this might be some x86 related "fun". Th=
-anks.
+Works for arch/arm/mach-k3 thanks for fixing this
 
---=20
-Tom
+Tested-by: Bryan Brattlof <bb@ti.com>
 
---MDiwBK8gX944bkdu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhxNuUACgkQFHw5/5Y0
-tyxEPgv/UWwBNhAioywGcuEL1tPzbBouGcx6iwld9St3QjiIQWG3gBF9Q6LxBUzw
-9kU84M0xlzYC1yaUm1dNM2Wz9ZN6uCTMJIze4GjHQZMEJr8Sk6Up6pXFcPCmKhub
-p/hS7QN0IVTelV7bNPHMbopRJzsH9AvuZ+5WEkbRLr4eSgM94ERe1Dn4mpmBaLSM
-46meeti76dvms6/KMKPtsF8JNQaVYFPL5h1Qht73E4RL6OXc8OUU7nDsOtZe0MPT
-ZMrMNrQHNlv2oo35dSmU0YJXp5Rkz1R4oocykHPYtWMe/jTeN0SzsfGeyXv5yINL
-ZZpu7O36HuuImOQc7bLGXICChH5HlkM4plxgQOxsFqTfWCZw73AEyWoGpGEkOzHX
-zUd88NGWiKmUrG3dkzykfgXp3SczqHePEDLQNz+OkRbTxIlLJZmL0BhCbf6dY8Is
-KnqeYIRGywzkL9YFe1mR6mB/9D6mBaaJaQEeqET4f1gCijl4Ifc3H9YzDjPDiB9Z
-nXdus93I
-=gX+Z
------END PGP SIGNATURE-----
-
---MDiwBK8gX944bkdu--
+~Bryan
