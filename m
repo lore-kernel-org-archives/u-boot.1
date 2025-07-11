@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 368DAC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 22:45:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C323CC83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 22:45:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 709EE83010;
-	Sat, 12 Jul 2025 00:45:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D17F882C84;
+	Sat, 12 Jul 2025 00:45:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="QvS+weFi";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="x1coWGdY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B131483015; Sat, 12 Jul 2025 00:45:15 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id A3B2381FEE; Sat, 12 Jul 2025 00:45:16 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF71582FAB
+ by phobos.denx.de (Postfix) with ESMTPS id DCEDC82F8F
  for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 00:45:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1752273911; bh=ME/NsVvTi9xVrGGbiL1cqR5qK4VwLQrxKXPlvda2fnw=;
- b=QvS+weFiKh5ikoAn/8/4247+bHEPbjUyKfa16MWGfYRil96fOlIsdo2EhR16XLLB0XLa1Q94c
- raedNRKWKDWWtbkTu3y5M+1n5tnU8ygTLZyPt9hSmql8rg9QrdjXJ3AKPBjfbW0X/jWzT71544S
- +dQHcK5HS8/JBWI0go/TdSCWWOSFA/yd+cjOkOSckKT35YA3emcuipJwbW7V82EoqWfRtPE2ETq
- ChulWX5Rckw3rQ+NDgqHvRMUccmEROMX21YwL1nK+q5hyz7iI2pQI6G0Q+wntaBikKDFz/Vw2NH
- NhOthVnaOWSx3VRvvIgAcaf40jC1nx6AGX4bQv3wtIVw==
-X-Forward-Email-ID: 687193f626dc7c4d255611bc
+ t=1752273911; bh=P71yp99+qYouvPtrCiNeWTv0mzyIjy/+4ZAZLD/InlM=;
+ b=x1coWGdYORRVpNDknWMs4C8tfrSVKY+T1sD4o9+0I8nXyhDOitHXgkWmdwDGVOKiiGaEhJKDq
+ 3wvOsd9SLhTrgKT5pTkKs3FVKJPFNYrNeRjPju8k/yRt5DDI4p9QVLqTLXn2A1mhG2zxsfafyGi
+ mjHafvBdL3e0mCY1m5QsE1kA71Vd4HISPbEqNS75FqN4EKfShFj6pUB9FCR18Rd4veug4Mj/w40
+ 1uwvv+EkLuLX2JXXtE5vu2m/aL8SG51+TyqzFNjK8GfXDWCSID4tY3C56aWdQjW7L07aZcApPuI
+ l2rWNGKs82aCMk4NuIHI3aEoR6eHNwRNq+R0InDq0DOg==
+X-Forward-Email-ID: 687193f226dc7c4d2556119c
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 1.1.6
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -44,13 +44,14 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
- Jon Lin <jon.lin@rock-chips.com>
-Subject: [PATCH v2 5/6] phy: rockchip: naneng-combphy: Add support for RK3576
-Date: Fri, 11 Jul 2025 22:44:35 +0000
-Message-ID: <20250711224446.211511-6-jonas@kwiboo.se>
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 4/6] rockchip: clk: clk_rk3576: Add dummy CLK_REF_PCIEx_PHY
+ support
+Date: Fri, 11 Jul 2025 22:44:34 +0000
+Message-ID: <20250711224446.211511-5-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250711224446.211511-1-jonas@kwiboo.se>
 References: <20250711224446.211511-1-jonas@kwiboo.se>
@@ -72,186 +73,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jon Lin <jon.lin@rock-chips.com>
+Add dummy support for the CLK_REF_PCIEx_PHY clocks to allow probe of the
+phy-rockchip-naneng-combphy driver on RK3576.
 
-Add support for the PCIe/USB3/SATA combo PHYs used in the RK3576 SoC.
-
-Config values are taken from vendor U-Boot linux-6.1-stan-rkr5 tag.
-
-Signed-off-by: Jon Lin <jon.lin@rock-chips.com>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: New patch
-
-I have only verified that the PCIe and USB3 mode config works.
 ---
- .../rockchip/phy-rockchip-naneng-combphy.c    | 146 ++++++++++++++++++
- 1 file changed, 146 insertions(+)
+ drivers/clk/rockchip/clk_rk3576.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-index 5145b517aa4c..4827dcf27d7f 100644
---- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-+++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-@@ -453,6 +453,148 @@ static const struct rockchip_combphy_cfg rk3568_combphy_cfgs = {
- 	.combphy_cfg	= rk3568_combphy_cfg,
- };
- 
-+static int rk3576_combphy_cfg(struct rockchip_combphy_priv *priv)
-+{
-+	const struct rockchip_combphy_grfcfg *cfg = priv->cfg->grfcfg;
-+	u32 val;
-+
-+	switch (priv->mode) {
-+	case PHY_TYPE_PCIE:
-+		param_write(priv->phy_grf, &cfg->con0_for_pcie, true);
-+		param_write(priv->phy_grf, &cfg->con1_for_pcie, true);
-+		param_write(priv->phy_grf, &cfg->con2_for_pcie, true);
-+		param_write(priv->phy_grf, &cfg->con3_for_pcie, true);
-+		break;
-+	case PHY_TYPE_USB3:
-+		/* Set SSC downward spread spectrum */
-+		val = readl(priv->mmio + (0x1f << 2));
-+		val &= ~GENMASK(5, 4);
-+		val |= 0x01 << 4;
-+		writel(val, priv->mmio + 0x7c);
-+
-+		/* Enable adaptive CTLE for USB3.0 Rx */
-+		val = readl(priv->mmio + (0x0e << 2));
-+		val &= ~GENMASK(0, 0);
-+		val |= 0x01;
-+		writel(val, priv->mmio + (0x0e << 2));
-+
-+		/* Set PLL KVCO fine tuning signals */
-+		val = readl(priv->mmio + (0x20 << 2));
-+		val &= ~(0x7 << 2);
-+		val |= 0x2 << 2;
-+		writel(val, priv->mmio + (0x20 << 2));
-+
-+		/* Set PLL LPF R1 to su_trim[10:7]=1001 */
-+		writel(0x4, priv->mmio + (0xb << 2));
-+
-+		/* Set PLL input clock divider 1/2 */
-+		val = readl(priv->mmio + (0x5 << 2));
-+		val &= ~(0x3 << 6);
-+		val |= 0x1 << 6;
-+		writel(val, priv->mmio + (0x5 << 2));
-+
-+		/* Set PLL loop divider */
-+		writel(0x32, priv->mmio + (0x11 << 2));
-+
-+		/* Set PLL KVCO to min and set PLL charge pump current to max */
-+		writel(0xf0, priv->mmio + (0xa << 2));
-+
-+		/* Set Rx squelch input filler bandwidth */
-+		writel(0x0d, priv->mmio + (0x14 << 2));
-+
-+		param_write(priv->phy_grf, &cfg->pipe_txcomp_sel, false);
-+		param_write(priv->phy_grf, &cfg->pipe_txelec_sel, false);
-+		param_write(priv->phy_grf, &cfg->usb_mode_set, true);
-+		break;
-+	case PHY_TYPE_SATA:
-+		/* Enable adaptive CTLE for SATA Rx */
-+		val = readl(priv->mmio + (0x0e << 2));
-+		val &= ~GENMASK(0, 0);
-+		val |= 0x01;
-+		writel(val, priv->mmio + (0x0e << 2));
-+		/* Set tx_rterm = 50 ohm and rx_rterm = 43.5 ohm */
-+		writel(0x8F, priv->mmio + (0x06 << 2));
-+
-+		param_write(priv->phy_grf, &cfg->con0_for_sata, true);
-+		param_write(priv->phy_grf, &cfg->con1_for_sata, true);
-+		param_write(priv->phy_grf, &cfg->con2_for_sata, true);
-+		param_write(priv->phy_grf, &cfg->con3_for_sata, true);
-+		param_write(priv->pipe_grf, &cfg->pipe_con0_for_sata, true);
-+		param_write(priv->pipe_grf, &cfg->pipe_con1_for_sata, true);
-+		break;
-+	case PHY_TYPE_SGMII:
-+	case PHY_TYPE_QSGMII:
-+	default:
-+		dev_err(priv->dev, "incompatible PHY type\n");
-+		return -EINVAL;
-+	}
-+
-+	/* 100MHz refclock signal is good */
-+	clk_set_rate(&priv->ref_clk, 100000000);
-+	param_write(priv->phy_grf, &cfg->pipe_clk_100m, true);
-+	if (priv->mode == PHY_TYPE_PCIE) {
-+		/* gate_tx_pck_sel length select work for L1SS */
-+		writel(0xc0, priv->mmio + 0x74);
-+
-+		/* PLL KVCO tuning fine */
-+		val = readl(priv->mmio + (0x20 << 2));
-+		val &= ~(0x7 << 2);
-+		val |= 0x2 << 2;
-+		writel(val, priv->mmio + (0x20 << 2));
-+
-+		/* Set up rx_trim: PLL LPF C1 85pf R1 1.25kohm */
-+		writel(0x4c, priv->mmio + (0x1b << 2));
-+
-+		/* Set up su_trim: T3_P1 650mv */
-+		writel(0x90, priv->mmio + (0xa << 2));
-+		writel(0x43, priv->mmio + (0xb << 2));
-+		writel(0x88, priv->mmio + (0xc << 2));
-+		writel(0x56, priv->mmio + (0xd << 2));
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct rockchip_combphy_grfcfg rk3576_combphy_grfcfgs = {
-+	/* pipe-phy-grf */
-+	.pcie_mode_set		= { 0x0000, 5, 0, 0x00, 0x11 },
-+	.usb_mode_set		= { 0x0000, 5, 0, 0x00, 0x04 },
-+	.pipe_rxterm_set	= { 0x0000, 12, 12, 0x00, 0x01 },
-+	.pipe_txelec_set	= { 0x0004, 1, 1, 0x00, 0x01 },
-+	.pipe_txcomp_set	= { 0x0004, 4, 4, 0x00, 0x01 },
-+	.pipe_clk_25m		= { 0x0004, 14, 13, 0x00, 0x01 },
-+	.pipe_clk_100m		= { 0x0004, 14, 13, 0x00, 0x02 },
-+	.pipe_phymode_sel	= { 0x0008, 1, 1, 0x00, 0x01 },
-+	.pipe_rate_sel		= { 0x0008, 2, 2, 0x00, 0x01 },
-+	.pipe_rxterm_sel	= { 0x0008, 8, 8, 0x00, 0x01 },
-+	.pipe_txelec_sel	= { 0x0008, 12, 12, 0x00, 0x01 },
-+	.pipe_txcomp_sel	= { 0x0008, 15, 15, 0x00, 0x01 },
-+	.pipe_clk_ext		= { 0x000c, 9, 8, 0x02, 0x01 },
-+	.pipe_phy_status	= { 0x0034, 6, 6, 0x01, 0x00 },
-+	.con0_for_pcie		= { 0x0000, 15, 0, 0x00, 0x1000 },
-+	.con1_for_pcie		= { 0x0004, 15, 0, 0x00, 0x0000 },
-+	.con2_for_pcie		= { 0x0008, 15, 0, 0x00, 0x0101 },
-+	.con3_for_pcie		= { 0x000c, 15, 0, 0x00, 0x0200 },
-+	.con0_for_sata		= { 0x0000, 15, 0, 0x00, 0x0129 },
-+	.con1_for_sata		= { 0x0004, 15, 0, 0x00, 0x0000 },
-+	.con2_for_sata		= { 0x0008, 15, 0, 0x00, 0x80c1 },
-+	.con3_for_sata		= { 0x000c, 15, 0, 0x00, 0x0407 },
-+	/* php-grf */
-+	.pipe_con0_for_sata	= { 0x001C, 2, 0, 0x00, 0x2 },
-+	.pipe_con1_for_sata	= { 0x0020, 2, 0, 0x00, 0x2 },
-+	.u3otg1_port_en		= { 0x0038, 15, 0, 0x0181, 0x1100 },
-+};
-+
-+static const struct rockchip_combphy_cfg rk3576_combphy_cfgs = {
-+	.num_phys = 2,
-+	.phy_ids = {
-+		0x2b050000,
-+		0x2b060000,
-+	},
-+	.grfcfg		= &rk3576_combphy_grfcfgs,
-+	.combphy_cfg	= rk3576_combphy_cfg,
-+};
-+
- static int rk3588_combphy_cfg(struct rockchip_combphy_priv *priv)
- {
- 	const struct rockchip_combphy_grfcfg *cfg = priv->cfg->grfcfg;
-@@ -564,6 +706,10 @@ static const struct udevice_id rockchip_combphy_ids[] = {
- 		.compatible = "rockchip,rk3568-naneng-combphy",
- 		.data = (ulong)&rk3568_combphy_cfgs
- 	},
-+	{
-+		.compatible = "rockchip,rk3576-naneng-combphy",
-+		.data = (ulong)&rk3576_combphy_cfgs
-+	},
- 	{
- 		.compatible = "rockchip,rk3588-naneng-combphy",
- 		.data = (ulong)&rk3588_combphy_cfgs
+diff --git a/drivers/clk/rockchip/clk_rk3576.c b/drivers/clk/rockchip/clk_rk3576.c
+index e84a0943a940..125b08ee8322 100644
+--- a/drivers/clk/rockchip/clk_rk3576.c
++++ b/drivers/clk/rockchip/clk_rk3576.c
+@@ -2168,6 +2168,8 @@ static ulong rk3576_clk_set_rate(struct clk *clk, ulong rate)
+ 	case CLK_CPLL_DIV10:
+ 	case FCLK_DDR_CM0_CORE:
+ 	case ACLK_PHP_ROOT:
++	case CLK_REF_PCIE0_PHY:
++	case CLK_REF_PCIE1_PHY:
+ 		ret = 0;
+ 		break;
+ #ifndef CONFIG_SPL_BUILD
 -- 
 2.49.0
 
