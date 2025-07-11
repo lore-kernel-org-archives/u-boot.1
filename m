@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E86AFC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:20:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A41C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:21:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 058B082F6D;
-	Fri, 11 Jul 2025 17:20:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 546EC826AA;
+	Fri, 11 Jul 2025 17:20:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X5/tbcsv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WA//HLAD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C3AE82063; Fri, 11 Jul 2025 17:20:14 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id F35DF830C8; Fri, 11 Jul 2025 17:20:16 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20E1F826AA
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E63F582063
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-60402c94319so1185918eaf.1
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:12 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-72c27166ab3so1304976a34.1
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752247211; x=1752852011; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752247214; x=1752852014; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=W2JVIShp5uY/jNPaqHy5qJZEGuLcqfT0DF3KS6tgPk8=;
- b=X5/tbcsvHg4yO7nQ5+qIQykf3yM+Bhy6TaBLM8jMH6Qttmn7PgSSluYGHv/E4tMJt5
- ZY0c11Whhl6yYAbLfL/UkgvEzXIIAh4u1pFUpmeAJfK9rGl6wg1iom9QDZxF987SY9af
- jnt6/bbZk45Q9+ZmdyXTlvdcZ/W1dBkfERtCg=
+ bh=gxucfbkl/3WQNHXRWTpCGehYVd0LHUUUXQGd6OrVmzU=;
+ b=WA//HLADBkO5C6mVoTUJ66tp1fgyHt+v38E6kh+YBoh9ItxbNauHIZYrwjmkSYkPKh
+ B6OWWNqfc1HoDqESU5+RW7U79enX00jxCNABb6mAAo5qpwBFdD0Pwj5+/O9fGW70N09A
+ h46WTE89VjZxMAwhNOb4RGWRLNp4j56pNLp2s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752247211; x=1752852011;
+ d=1e100.net; s=20230601; t=1752247214; x=1752852014;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=W2JVIShp5uY/jNPaqHy5qJZEGuLcqfT0DF3KS6tgPk8=;
- b=fb9zVUJZUiKsVHALKLZ2u4OPPvYfoJKPr0zdROd7zwHhPeCJbtBjIRWqH7+v3FxoM6
- UQ0w4x3eiso3SsvVnvgSUFl20nZsvMJhahvEsst29q4D7XTzC4x58Hn7Mkej4UtsJq8v
- AKVfVKHMCQ5B6MRT/jf/0oj80SEKFQ3YgINXuJxP1Ic0PwaB4R+TCMrg8a3IUKvlkFK6
- JdbxIBPJndW93K+xgH6gO8rL/crwlvwDNX287kTwuLV9w8uAQxWpehW8a//2ONRSCIps
- dgmW1YUdwunjVCYjM4aUjzkdQArpvjA7dwT3RWi7pBLqTYk9W7I06K6X3FTT23zee7bC
- hsgQ==
-X-Gm-Message-State: AOJu0YzFy9cmxpvUalK5r9u2sN+7Snks8+tFg6ZQXJ6nsE81GaQWll4T
- mk5kviLD25Fwslc8ltgYslR4BPwoNK3aviidQiwfjcomzMj5H0+b0+5/vdQGYtODeYvbhGUl2Rh
- wsTWGyzQ=
-X-Gm-Gg: ASbGnct71R2R8UpIeIoB8vsUr1f3dq5UwsWg8MjBZ518XJDS0tLTqdDChlCe3huClYI
- WUA3Jpwaq+ZlEe7cbBHdCDdoTJlnuDrBY96hlk/KcuCqLpO5O1VljqE1z5AGrQd0TSzAnxJl2Dq
- wo1DrcVCO1RDsV12XWmsYMwnGeyAHCta66NhsD+zeLZCgREJGIQSEM6BW/QZ9oKY4+NLtqmDu6u
- fV63gwMX5mXM7NWMVcRPkvnXNXYAO5uFuboiK1N8ShM5ZQufwmzmzFnyMi4jYL4cfbvySwRmksZ
- eKmCql9NO1pFDt53/uIrUhYC0z4bsgUoY7EAG6bqLJtSOampsPnGQgNYwi5B1/6THFnoZw1TngA
- lxjNNVaOBRqJs2B/GmFrJMxU+4/41kpRk5mw3nwgklDSpn2zyQj4snsxhmIA=
-X-Google-Smtp-Source: AGHT+IGzaNTEzTqT4BJj6YWQtv56QpPQ3u15XU1wHrS+D3+kCOku+naSa8po9119waiRIFulCVtUnw==
-X-Received: by 2002:a05:6870:6c14:b0:2d5:2955:aa6b with SMTP id
- 586e51a60fabf-2ff2b4d9b3fmr1929382fac.5.1752247210608; 
- Fri, 11 Jul 2025 08:20:10 -0700 (PDT)
+ bh=gxucfbkl/3WQNHXRWTpCGehYVd0LHUUUXQGd6OrVmzU=;
+ b=kkM73VpToPaVJjzTZrI86eR/VlD4N2YPwz1DkpOtnpvMUF1TAKgvnC4ShvADkCHlt4
+ f241aC+d8Tx9U8DTEQMP1RoTasBjrpaB06FIWkKLR2bqRHcLcK1wMdHzi4dtH96XPMl9
+ R0PfTg5+whwLt0tTuaI6K8xLfkqsClEOot5EOrzDW4c0rpyayeL81qiyd/sBBUkQd/Py
+ Mw55K6kvX4TJDucoKzZKKfX4Ns+8TCpxBVn0+HGTQXydxlu5sbSp/G8HjW5gYGASk7uH
+ 8f0+T8sqT8JtSt1UITemexJOl7e7Tg4ttjXjhQZ84c+ZmLMtA5H+2q2xv8C5v/xQtFYf
+ aaOA==
+X-Gm-Message-State: AOJu0YwM1rnrVp7PUeBGUzke/pCYHkCV02jTpySq8v6vjj7VF1f+hGT4
+ FN/fO38ZccGliuHjQfa2DxxdXny/gXBhxeLHzS3xysXJ0Vv8bUtx2kX+24+XbFV/0ouY1t5lorw
+ j9ZKvrmE=
+X-Gm-Gg: ASbGnctyWVZQ4hgvRy6rBXJltPYT1YLurC0MuEtXO1iL3f5bQiaHXV7oVJ3UgM2oNTE
+ G+xS09nFPbb8Nt3wUr5eb46ovAlIr99qV87gsfHmfGMlPADdvC5jZhaohvKcgHyDp2N11LLCXnV
+ InlHmDsRdbsF3MICPKL90bbQeSPNeJ++fibG3X3NfR9j21Am+S9/jh9s3Msm38zbTVYDqiksZhc
+ QRXHnyuj4Z5p4cB1fXj7kO4kjCZuqYv3KUvtKzOt9yvLKmwg9EnH3ORys0n7/fTVJJHap4BfqnL
+ iHV4WjgXk8pl5Sp1DT25utXn42dMaAnuji39Quhl/7Nj3DZTNvl5w7obcpk6/gTJBn+2j5c8pL/
+ EE/3+l4gzcJ4EIX3fRdN3kUbeX5ZOB8W0oGPOkbVHYxicun2TvYWnxf03z8s=
+X-Google-Smtp-Source: AGHT+IGDEHRYf/Tkbx2OXhKX8Z1rToVdfk0aUcx+6vdSUCetxLgSyjugyjX8MZ+DfiQRKZleokDmCA==
+X-Received: by 2002:a05:6830:43a7:b0:73c:d48f:6c6a with SMTP id
+ 46e09a7af769-73cf9ea0795mr3465389a34.8.1752247213709; 
+ Fri, 11 Jul 2025 08:20:13 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ff111c3769sm760782fac.3.2025.07.11.08.20.09
+ 46e09a7af769-73cf127258dsm590760a34.34.2025.07.11.08.20.13
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 08:20:10 -0700 (PDT)
+ Fri, 11 Jul 2025 08:20:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] misc: Tighten requirements on IHS_FPGA driver
-Date: Fri, 11 Jul 2025 09:20:09 -0600
-Message-ID: <20250711152009.2225445-1-trini@konsulko.com>
+Subject: [PATCH] input: Tighten dependency requirements for TEGRA_KEYBOARD
+Date: Fri, 11 Jul 2025 09:20:12 -0600
+Message-ID: <20250711152012.2225465-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,27 +91,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This driver requires that the gdsys legacy driver option also be enabled
-in order to build. Express that requirement in Kconfig as well.
+This driver requires headers which only exist on Tegra. Express that
+requirement in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/misc/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/input/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index e9866fbcdd7a..966783e4b622 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -629,7 +629,7 @@ config GDSYS_SOC
+diff --git a/drivers/input/Kconfig b/drivers/input/Kconfig
+index c09f0ae795ed..47ce0ea690fd 100644
+--- a/drivers/input/Kconfig
++++ b/drivers/input/Kconfig
+@@ -98,6 +98,7 @@ config I8042_KEYB
  
- config IHS_FPGA
- 	bool "Enable IHS FPGA driver"
--	depends on MISC
-+	depends on MISC && (GDSYS_LEGACY_DRIVERS || SYS_FPGA_FLAVOR_GAZERBEAM)
+ config TEGRA_KEYBOARD
+ 	bool "NVIDIA Tegra internal matrix keyboard controller support"
++	depends on ARCH_TEGRA
  	help
- 	  Support IHS (Integrated Hardware Systems) FPGA, the main FPGAs on
- 	  gdsys devices, which supply the majority of the functionality offered
+ 	  A matrix keyboard connected directly to the internal keyboard
+ 	  controller on Tegra SoCs.
 -- 
 2.43.0
 
