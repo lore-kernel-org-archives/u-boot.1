@@ -4,87 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCD5C83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 14:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BECAC83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 14:39:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1118C803DF;
-	Fri, 11 Jul 2025 16:32:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4DEBA803DF;
+	Fri, 11 Jul 2025 16:39:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SGUIXUUm";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="L7bckaPK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F861805D7; Fri, 11 Jul 2025 16:32:19 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7FB9E805D7; Fri, 11 Jul 2025 16:39:05 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C10A4800D7
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 16:32:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE5DA800D7
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 16:39:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-73afbe1497bso898435a34.1
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 07:32:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752244335; x=1752849135; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NvSEnyMNSduxObUeuYGqN+6s2KnLxlWDVFRJtCRV398=;
- b=SGUIXUUmDYmaZ5it/J1VsqMmUQhrDNGZJoZzf02nhAbFcPtP3c1/ol4PLh+dZxU/J/
- OT/2EgmyoyhT2nAlN8s2fXbMaKrsd8A57vf3zbeCw3NOICrsj64Qyh3jEv6CB1b1e/iK
- /KpQLc6VQhRWO6q4mJphNrZQC7/dUeEIKPKmQ=
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56BB06kY012020
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 14:39:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=eqD8Zp8SdFoRaXEAVVVlCFAalzCtlvIKX6f
+ 4I1XGiMA=; b=L7bckaPKEqFHZozZS100JWDucHYExdNzKm5EwO7TPBKANIu3S2w
+ o5rcMemlIwHwZlNW9RsjrdxzV6ACLYQembMTYGee8ry8pO2VTxJSS4hwKEyUbKWZ
+ rl3KKuYQVL5kpyqjXH+KV98WB6HnPzkBbYt9se0ndR64qqSjoPqsFoAVS6Lx0aYg
+ IKhyGoQfgQ18Yv+z+5G/2JWJAnHS/+dG9DDbugQf2+BqCM00OjqVrualW8/1xod5
+ BOWRagA91F29wl1rxo7TqhMWhLm2YgVH4p/0YSzL0rSp4V0xB5jFc1659Us4ylCx
+ fbedj75fRbv8IUlz0mWCKZ5InmK8DGK5Veg==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47sm9e0vah-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 14:39:01 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-23632fd6248so22615955ad.3
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 07:39:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752244335; x=1752849135;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NvSEnyMNSduxObUeuYGqN+6s2KnLxlWDVFRJtCRV398=;
- b=TU+GR8mLbziGIJtA0K9Cv80nB5PiBuRPvVECyXNVqWk1+rXOTzweXxu1Ui2U7LcXHn
- nNPX1y+zLLleOZ3RVdLrc+sMWVxXQ0t+HPStM7qngwVby/mQYEMRC+qDXz4VrS2ZKSVO
- I06UBwDOH1wZq6tGRjubgUtdWxYsRPka1x+KSTgVx0uQeK1Ro2x4G0Nw3sgj+vIj7tvM
- /wSC3FhKaGVd4JM3GJW9BT8YyrL1wgurxYGqSf74nZuPaP07cMNXlaQGlHzfjLWeslzM
- gCZef+5YHAd00EitStrs3of8+RBlro6BI1IAqwXoPpQxl/sX4sXXD91J09UawGv4sJjX
- b5UA==
+ d=1e100.net; s=20230601; t=1752244740; x=1752849540;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=eqD8Zp8SdFoRaXEAVVVlCFAalzCtlvIKX6f4I1XGiMA=;
+ b=Yxx3TM52L7GRqqX5RS5xtSYMY+u7f/e/NsA9243cIDSWNst5ZmZ9xQ9dJNyyNEhpGV
+ cu05j/fCJypwlnhKH8loKXC23SB7w67N2UyJMU+abGWsXkEm+RiaKwskC9EE61SzgoZp
+ s9KKgOxPrHgLRkSPDLEX7YbrQBB2P6ML1JlSemD5b65I86tKnbYdk5lelTCGMsWHGhao
+ nejDN3Vb+viW8ei/ZMtjg/CpRC+WnKsfPHk8oVokUzkodhyQj6YqGRzmDtKCiTRqzFF2
+ TwqURl+PmaXS7TE8k2wRAE6NTJKXR5RSbHpC/JXwU6NTNcuSDpEz7KkbNMbPJOOGAoWH
+ 74sQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWn7tEuRIML47l7j4+JoQpDcJBiy82GcvpxH72d8gcCRfVVd+37E1/IiNN3o8kuyDYxS/0C3jw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwgTeofBoAqCsPST4BcjkXm2JXB6BPPJqrxl0t1qPky337iBGeB
- wd+bcsYdxA80lrsB/SDLFmFUsBon/3gJa2Srxdf4uQ27csYUwJkqCeEuQrzi+DHKFQs=
-X-Gm-Gg: ASbGncuYBXruBmv/rPOAxN3GjmtJPdh4MNfjhJY66xveSOABHAwXggy0J+8kAlYHOFH
- zZqOCzCMY0QxVJFJV+53emUUabvC/tyXMS/6q12z9QLx9ejyH8qTiAB4Ymk13RPHDVBnQn6vq4e
- jhJpugSe/9H3a6FqsTQzNGKjIF3gKKiDw1osVhYTVpaoqgqhRV7RxuRvaYlgQTKlwAoXP0USS4z
- N6MmmUZpn/5KsWprWNszkl3KhHqQO+LsTSSu/49wRwVkcCeCUmU9V7M0vmD4Azdmo4afMrkxG7s
- 527tESVT5orLN+rpGWEgCS1GVqhDwDSR8YJzUplfcnWLKbwKiFoFIzFyOeg5A5B6Jk4kIv7lwpl
- BJVX6G65HYgk7Nfxftg8vmL/w074XV/hh05uSRKxaKDkfrzVLlruGiW65/JDxty3QQYg=
-X-Google-Smtp-Source: AGHT+IFXfUh0M4h2EsI41gQyMc8Ir+rsjvguE0Q/adsitRzHWwXJ4shleQm1DQ8umEogkMxttYILcw==
-X-Received: by 2002:a05:6808:120b:b0:40c:fcb9:9158 with SMTP id
- 5614622812f47-41511813017mr2717063b6e.27.1752244335342; 
- Fri, 11 Jul 2025 07:32:15 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4141bbde341sm556546b6e.27.2025.07.11.07.32.13
+ AJvYcCWSOy7s4sOeDZ/v9K2KZi52Fd9bAvRMnP5eikOSZFqmXafy3VHWTVABfbGgkF/yjyu8UYnSzSo=@lists.denx.de
+X-Gm-Message-State: AOJu0YydkiMdVbFIGd2W69occwhp/Mh13BWnpYRfoJlUtRCey8VFqHL/
+ ZxMiawDufvOIYNOv2I95rploSK+lr5dKXnlPOIBGWSjY8MgFSocrf2++fpDnDjpx77IWnNIJy5j
+ GkKNMSLBqEbJ6o16/6sbnRnNtx+eUQaxL2jaLPLm4Sl+cNmUPv8NXPTtk
+X-Gm-Gg: ASbGncu04EyoU1InkIvVEc97K5GmsV2/6XpBJePzgxCk23O9oN8KKrErFL1sAI8qcbf
+ gWiK/Fhw0BCBCrjOHWj1snuh2pzwcqMglmFigCMiiFB6bocalwPRnypGyyGBFHh/aCbqGP3Iqul
+ iXvyP0oUIXmkIaAJ+FXiPA1O7jjwlCdI0Mt4z1FcOtTw752Q3GJqZg9QiGWGcdqpnRnI8SD5eLQ
+ LffM73EUQ5kWiKDvufuzl2R3hTzDT3Y2btAYF+l3WP3NwMSTrciS+vpxMdChXb1pW+Z+tiJItvK
+ u4dsj1/zIDP1Q/IZK5CMwM3J2tQRTn8XNbCthWAvIBjoVCP/O2A4LaCB9DjXf/4la1w/2OHA5La
+ tKLpdVJxUNIIyN9oiLqgGAKo/Zlaa7g8tJo0XPxg2yBvWmgdzowY+FsDWJkE=
+X-Received: by 2002:a17:902:ef03:b0:23d:eb0f:d81 with SMTP id
+ d9443c01a7336-23dede2f323mr65064635ad.1.1752244740073; 
+ Fri, 11 Jul 2025 07:39:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHiSxdPBXVnl7tJAH5SVCN3Jwprs0ZDe/9EARQRfOfhI2rdoroYJLL1szRpUEIjKfdnYeA8rQ==
+X-Received: by 2002:a17:902:ef03:b0:23d:eb0f:d81 with SMTP id
+ d9443c01a7336-23dede2f323mr65064075ad.1.1752244739625; 
+ Fri, 11 Jul 2025 07:38:59 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23de42ad948sm54234675ad.61.2025.07.11.07.38.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 07:32:14 -0700 (PDT)
-Date: Fri, 11 Jul 2025 08:32:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <ziyao@disroot.org>, Michal Simek <michal.simek@amd.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] kbuild: Avoid including architecture-specific
- Makefile twice
-Message-ID: <20250711143211.GE6424@bill-the-cat>
-References: <20250711085234.23659-1-ziyao@disroot.org>
+ Fri, 11 Jul 2025 07:38:59 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, jh80.chung@samsung.com,
+ aswin.murugan@oss.qualcomm.com, rui.silva@linaro.org,
+ ilias.apalodimas@linaro.org, christopher.obbard@linaro.org,
+ me@samcday.com, quic_varada@quicinc.com,
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@linaro.org,
+ miquel.raynal@bootlin.com, balaji.selvanathan@oss.qualcomm.com,
+ sjg@chromium.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH v4 0/4] Added QCOM RPMH Power Domain Driver
+Date: Fri, 11 Jul 2025 20:08:47 +0530
+Message-Id: <20250711143851.1490617-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fYsw9CpT5ffnMZ2V"
-Content-Disposition: inline
-In-Reply-To: <20250711085234.23659-1-ziyao@disroot.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: J82r0-HXDEFREzB2wzqgi8UULnlUVXQa
+X-Authority-Analysis: v=2.4 cv=W7k4VQWk c=1 sm=1 tr=0 ts=68712205 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=Wb1JkmetP80A:10 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=EuAw1RFdh1CT6udIzeIA:9
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-ORIG-GUID: J82r0-HXDEFREzB2wzqgi8UULnlUVXQa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzExMDEwNCBTYWx0ZWRfX6wyUvFcah0N1
+ LzpE7y9ZsL1O/Uc1d4eInGMG2zLAoW/YiCGNWNhpNAVz1/pZM98Pw1ZZj9k2yRysZqjh01E2Str
+ zsT74Fl0DblCN9EqC/hsUo5L9Hq1XO6ry4d8v4bQ87d3n6E9v1nz9SdGOXv2wZPW29WLv/uwJv8
+ dyE8u88nI3XsNjAq6xfo5++WOJJV5/z4gnTPmN27AWHwsxsEsln5xSygr6ULeN7qFf+8QYUDK/3
+ m2hJGmIrleB0yPvY+sztF4d6Ztu2+wua/t2ubcrIljp7zmdZEWmA1TOLnWpZtIo40iV+xrXKjkc
+ G7kE3Q2YhzsZEjTJla1W95YwfAGQmYiXmS4vqOUk3ohx0Vjti3DiKycCXNHtzhyybUxjjcVKfGl
+ 3/YZ24lIP96q7XQ7asdpvgx7aTybFB+LryQ1HJqrmVqbQkJEOzynEEcfeVTRA8KHXb5yCnc/
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-07-11_04,2025-07-09_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0 phishscore=0
+ mlxlogscore=551 priorityscore=1501 impostorscore=0 malwarescore=0 mlxscore=0
+ adultscore=0 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
+ definitions=main-2507110104
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,130 +134,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch series adds support for the Qualcomm RPMH power domain
+driver, responsible for managing power domains on Qualcomm SoCs.
+The driver is ported from the Linux kernel and adapted for
+U-Boot to enable proper power domain control on SA8775P platform.
 
---fYsw9CpT5ffnMZ2V
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+---
+Changes in v4:
+- Added all soc entries in power domain linux driver to drivers/power/domain/qcom-rpmhpd.c and
+  stubbed it
+- Removed "qcom_rpmhpd" driver & unused members of struct rpmhpd in drivers/power/domain/qcom-rpmhpd.c
+- Moved the "soc: qcom: cmd-db" change before the "power-domain" change
+- Link to v3: https://lore.kernel.org/u-boot/20250702180133.1889709-1-aswin.murugan@oss.qualcomm.com/
 
-On Fri, Jul 11, 2025 at 08:52:34AM +0000, Yao Zi wrote:
+Changes in v3:
+- Removed OF_LIVE_SA8775P config in arch/arm/mach-snapdragon/Kconfig & configs/qcs9100_defconfig,
+  since there is no SA8775p specific fixups are done
+- Link to v2: https://lore.kernel.org/u-boot/20250702171335.1811080-1-aswin.murugan@oss.qualcomm.com/
 
-> Stranges errors are observed when building U-Boot master for almost any
-> RISC-V board, the messages are in two types, one is about duplicated
-> symbols,
->=20
-> 	u-boot/arch/riscv/cpu//mtrap.S:32: multiple definition of `trap_entry';
-> 	arch/riscv/cpu/mtrap.o: u-boot/arch/riscv/cpu//mtrap.S:32: first defined=
- here
->=20
-> and the other is fixdep's complaint about missing dependency files,
->=20
-> 	fixdep: error opening file: arch/riscv/cpu/.mtrap.o.d: No such file or d=
-irectory
-> 	fixdep: error opening file: arch/riscv/cpu//.start.o.d: No such file or =
-directory
->=20
-> where the latter could only be reproduced when building parallelly.
->=20
-> Both the two types of errors are about files in arch/riscv/cpu, and
-> there's a suspicious slash character in the reported path. Looking
-> through RISC-V-specific Makefiles, there's only one place that may
-> expand to such a path,
->=20
-> 	libs-y +=3D arch/riscv/cpu/$(CPU)/
->=20
-> The right hand expands to "arch/riscv/cpu//" if $(CPU) isn't defined at
-> the time of including. With some debug statement added to
-> arch/riscv/Makefile, the output proves that arch/riscv/Makefile is
-> included twice, once with $(CPU) undefined and once defined correctly
-> according to CONFIG_SYS_CPU.
->=20
-> Futher bisecting shows an extra include statement against
-> arch/$(SRCARCH)/Makefile is added in earlier bump of Kbuild system. But
-> the statement is evaluated before config.mk is included and definition
-> of $(CPU), causing objects in arch/riscv/cpu/ are built and linked twice
-> (once as "arch/riscv/cpu/*", and once as "arch/riscv/cpu//*"), resulting
-> in the error.
->=20
-> Let's simply remove the extra include to fix these nasty errors. For
-> config targets, bumping Kbuild also introduced a new include to
-> arch/$(SRCARCH)/Makefile, which is removed as well for consistency.
->=20
-> Fixes: 5f520875bdf ("kbuild: Bump the build system to 5.1")
-> Signed-off-by: Yao Zi <ziyao@disroot.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->=20
-> Changes from v1
-> - Don't describe the problem as RISC-V-specific since it may affect ARM
->   builds as well.
-> - Prevent config targets from including for architecture-specific
->   Makefile as well for consistency.
-> - Add comments to explain the removal.
-> - Link to v1: https://lore.kernel.org/u-boot/20250709161418.21287-2-ziyao=
-@disroot.org/
->=20
->  Makefile | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
->=20
-> diff --git a/Makefile b/Makefile
-> index da53efa09f1..e745cc618ba 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -635,8 +635,9 @@ ifeq ($(config-targets),1)
->  # Read arch specific Makefile to set KBUILD_DEFCONFIG as needed.
->  # KBUILD_DEFCONFIG may point out an alternative default configuration
->  # used for 'make defconfig'
-> -# Modified for U-Boot
-> --include arch/$(SRCARCH)/Makefile
-> +# Modified for U-Boot: we don't include arch/$(SRCARCH)/Makefile for con=
-fig
-> +# targets, which is useless since U-Boot has no architecture defining it=
-s own
-> +# KBUILD_{DEF,K}CONFIG, or CROSS_COMPILE.
->  export KBUILD_DEFCONFIG KBUILD_KCONFIG CC_VERSION_TEXT
-> =20
->  config: scripts_basic outputmakefile FORCE
-> @@ -724,8 +725,10 @@ endif
->  ARCH_CPPFLAGS :=3D
->  ARCH_AFLAGS :=3D
->  ARCH_CFLAGS :=3D
-> -# Modified for U-Boot
-> --include arch/$(SRCARCH)/Makefile
-> +# Modified for U-Boot: we put off the include of arch/$(SRCARCH)/Makefil=
-e until
-> +# making sure include/config/auto.conf is up-to-date and include of conf=
-ig.mk,
-> +# because the architecture-specific Makefile may make use of variables d=
-efined
-> +# in config.mk. See also the comment about autoconf_is_old.
-> =20
->  ifeq ($(dot-config),1)
->  ifeq ($(may-sync-config),1)
+Changes in v2:
+- Added ARCH_SNAPDRAGON dependency to QCOM_POWER_DOMAIN in drivers/power/domain/Kconfig
+- In drivers/power/domain/qcom-rpmhpd.c, the un-supported power domains are handled with warning
+- Power domain fixups have been removed since they are now managed by drivers/power/domain/qcom-rpmhpd.c
+- Link to v1: https://lore.kernel.org/u-boot/20250626112441.143064-1-aswin.murugan@oss.qualcomm.com/
+---
 
-Since Fabio confirmed this fixes his issue, I'd like one or two more
-tested-by's if I can before the end of the day when I'll apply this.
-Thanks!
+Aswin Murugan (4):
+  soc: qcom: cmd-db: Add cmd_db_read_slave_id() & cmd_db_read_aux_data()
+    functions
+  power-domain: Add QCOM RPMH Power Domain Driver Support
+  mach-snapdragon: fixup power-domains
+  configs: qcom: Add QCOM_POWER_DOMAIN config
 
---=20
-Tom
+ arch/arm/mach-snapdragon/of_fixup.c |  31 ----
+ configs/qcom_defconfig              |   1 +
+ drivers/power/domain/Kconfig        |   8 +
+ drivers/power/domain/Makefile       |   1 +
+ drivers/power/domain/qcom-rpmhpd.c  | 278 ++++++++++++++++++++++++++++
+ drivers/soc/qcom/cmd-db.c           |  45 +++++
+ include/soc/qcom/cmd-db.h           |   2 +
+ 7 files changed, 335 insertions(+), 31 deletions(-)
+ create mode 100644 drivers/power/domain/qcom-rpmhpd.c
 
---fYsw9CpT5ffnMZ2V
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+2.34.1
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhxIGgACgkQFHw5/5Y0
-tyyIwQwAqQjhrbxJjJi1Q2H7/o9X0KD6iLFGksOCzgjEP6KnYkqtDI9O4k8JwsZM
-9cxkK9x8Oaj/YQEtR4Rc7NqT0GAhuBGT+RCtgyWx9acY0UJz7JhWy7V1GZnxhPrg
-+xHwXi9EOMdWR2q2WflkIhBC/cYzIfbdJt6mjQrBY/DtMaucaNb71OQI0SCzRpMM
-UBWmdYGvFMb7MIKVs4LIsQJnhsdYgoiR4Z1PeLorOHxw8MUabTECnegwwtpvu4/2
-s1W0oWW/nus3QVo7s+ZE96OaI8BlkOeiXehy/2V9jqd1yZP1mXkZK0GYRNzyuAYX
-dis2nqwYWrkLU4s+0btuca9Ma4kYuCJCQ/srMhFKwj0MLBXdrxiJz6cM7jy0ub/E
-yZ/DuwefAreR9RuMHZPUYoXd+4DpGGlHApVkhXlFhJTopFb/hAuLYgVTb74lkt9W
-810AfpsLaylzZtKOPT17YInHfu6cyOJ9PHuqD2HWk9FMOqMpqOzmTYHDd4cFTOF4
-Bsg9+ssI
-=4Ghy
------END PGP SIGNATURE-----
-
---fYsw9CpT5ffnMZ2V--
