@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A41C83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:21:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50019C83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:21:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 546EC826AA;
-	Fri, 11 Jul 2025 17:20:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A603482F8E;
+	Fri, 11 Jul 2025 17:20:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WA//HLAD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="juYq6WRU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F35DF830C8; Fri, 11 Jul 2025 17:20:16 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id D1FD2830F6; Fri, 11 Jul 2025 17:20:21 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E63F582063
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA75282F14
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72c27166ab3so1304976a34.1
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:14 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2efbbf5a754so1375219fac.0
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752247214; x=1752852014; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752247218; x=1752852018; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=gxucfbkl/3WQNHXRWTpCGehYVd0LHUUUXQGd6OrVmzU=;
- b=WA//HLADBkO5C6mVoTUJ66tp1fgyHt+v38E6kh+YBoh9ItxbNauHIZYrwjmkSYkPKh
- B6OWWNqfc1HoDqESU5+RW7U79enX00jxCNABb6mAAo5qpwBFdD0Pwj5+/O9fGW70N09A
- h46WTE89VjZxMAwhNOb4RGWRLNp4j56pNLp2s=
+ bh=uUKU084LcCC9gctSbMeTEk0jlGxtEhxxMVNo0dzIev4=;
+ b=juYq6WRUnagZ6E3yilriGfiFf9TXEwbB6c+XIQEM8BAspt8B+0bmeqNPIlKTSKsD+c
+ KS2qZ47qxLiSGb+m9zrHhhYO2HYAilS0+zpXCoeaWjWaTyIeGK03nErZubljyJ4pS0RV
+ K1vqZhhl+aNysta16O9fyT5zOBQoq/JE/ugC0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752247214; x=1752852014;
+ d=1e100.net; s=20230601; t=1752247218; x=1752852018;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gxucfbkl/3WQNHXRWTpCGehYVd0LHUUUXQGd6OrVmzU=;
- b=kkM73VpToPaVJjzTZrI86eR/VlD4N2YPwz1DkpOtnpvMUF1TAKgvnC4ShvADkCHlt4
- f241aC+d8Tx9U8DTEQMP1RoTasBjrpaB06FIWkKLR2bqRHcLcK1wMdHzi4dtH96XPMl9
- R0PfTg5+whwLt0tTuaI6K8xLfkqsClEOot5EOrzDW4c0rpyayeL81qiyd/sBBUkQd/Py
- Mw55K6kvX4TJDucoKzZKKfX4Ns+8TCpxBVn0+HGTQXydxlu5sbSp/G8HjW5gYGASk7uH
- 8f0+T8sqT8JtSt1UITemexJOl7e7Tg4ttjXjhQZ84c+ZmLMtA5H+2q2xv8C5v/xQtFYf
- aaOA==
-X-Gm-Message-State: AOJu0YwM1rnrVp7PUeBGUzke/pCYHkCV02jTpySq8v6vjj7VF1f+hGT4
- FN/fO38ZccGliuHjQfa2DxxdXny/gXBhxeLHzS3xysXJ0Vv8bUtx2kX+24+XbFV/0ouY1t5lorw
- j9ZKvrmE=
-X-Gm-Gg: ASbGnctyWVZQ4hgvRy6rBXJltPYT1YLurC0MuEtXO1iL3f5bQiaHXV7oVJ3UgM2oNTE
- G+xS09nFPbb8Nt3wUr5eb46ovAlIr99qV87gsfHmfGMlPADdvC5jZhaohvKcgHyDp2N11LLCXnV
- InlHmDsRdbsF3MICPKL90bbQeSPNeJ++fibG3X3NfR9j21Am+S9/jh9s3Msm38zbTVYDqiksZhc
- QRXHnyuj4Z5p4cB1fXj7kO4kjCZuqYv3KUvtKzOt9yvLKmwg9EnH3ORys0n7/fTVJJHap4BfqnL
- iHV4WjgXk8pl5Sp1DT25utXn42dMaAnuji39Quhl/7Nj3DZTNvl5w7obcpk6/gTJBn+2j5c8pL/
- EE/3+l4gzcJ4EIX3fRdN3kUbeX5ZOB8W0oGPOkbVHYxicun2TvYWnxf03z8s=
-X-Google-Smtp-Source: AGHT+IGDEHRYf/Tkbx2OXhKX8Z1rToVdfk0aUcx+6vdSUCetxLgSyjugyjX8MZ+DfiQRKZleokDmCA==
-X-Received: by 2002:a05:6830:43a7:b0:73c:d48f:6c6a with SMTP id
- 46e09a7af769-73cf9ea0795mr3465389a34.8.1752247213709; 
- Fri, 11 Jul 2025 08:20:13 -0700 (PDT)
+ bh=uUKU084LcCC9gctSbMeTEk0jlGxtEhxxMVNo0dzIev4=;
+ b=YUoIpvQUF9qtq2uM08lviFYaANTl6tZfs93VUUsRXeWvxwfyn5Vv6PBpF1OW1ClLIs
+ oWfBZKoW2DXw4aJ5jKAc1fMys6LnepK46WGgcj1WPB6GmgRpvM7GlDtJ4GyToGHb89KO
+ Gx7Rvqf/ywU/0fTNbhmm8jAblMFgetitkWhcRaTK1JD5LddgfKLQI/gA+YOGYNBtFnsx
+ m/s+dyKu8EN7qzynApK6f6wJtC7+kPF+gwjbqSZ9p54qeUrT8EwTC6ZJjYVDFfIRvJyT
+ qTPpvIS31J7ZClh2kdD4wDOx715YUuGnYB3Uj+T1o/K/4LNJPiKE6WlkeQLlzDD0k2mh
+ NCdg==
+X-Gm-Message-State: AOJu0YylI2u1FHNJFGX+0T2musWkS7jNY5yasjjYHSFomqK1FOUTz0EN
+ N7+MBgjbJPiM4Ykf20NlNIfZIxvtUxBIXPGpo/jlb1D+jpSm5CP1xp9xwSGyKrljS/pbtChRPNN
+ hReqoSeA=
+X-Gm-Gg: ASbGncvHJbl4LbR3Ge9JBRZDORrniEjInGjTaUjVrEY3TVzzw5Vp1Dz5ShPAZu8OjZ3
+ wGgrZarjEIfVKphrYM9bmT/yEtaPRZ9EGEUa5IEs42LeoeTwRyt1aHwZclTQoZiNZ+1NwtR5KF3
+ YZ9+J1M4b1MLidrVNmHniCpo8vL0nGUiPrh4pvBH7BnrqVbcd9yZTwK9JpWxypplyO635l7+aaO
+ Jwaep+kUGSEhvkKOUtg3hEYy5moknRpjbpx+oIfkMLw39NaWO29hs6/mKMJKpnIXZ3LMP9DHNCO
+ cHy4Rj7IHe7xJs6f0h9XSRhNSH49w/4Ia+yVUNCfZPNoyOq1ZYff75s2xfOjDO+D60JYmuwVXSs
+ I2YPSoezCem19vZLXECdlTxUEhImDrVorNml+dOsRP8UmseisOSRJnCDmTPRhxccLKop/8Q==
+X-Google-Smtp-Source: AGHT+IHKKcHuyHUz6FsO/6GQjuDRCwLXrPw+MDN7S7SmFfNacB95lRwVgVWgH8UIS5PcQdmb3O28PA==
+X-Received: by 2002:a05:6870:7909:b0:2d5:2191:c8b3 with SMTP id
+ 586e51a60fabf-2ff27049ca8mr2872062fac.29.1752247218310; 
+ Fri, 11 Jul 2025 08:20:18 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf127258dsm590760a34.34.2025.07.11.08.20.13
+ 586e51a60fabf-2ff1172e5c8sm761583fac.44.2025.07.11.08.20.17
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 08:20:13 -0700 (PDT)
+ Fri, 11 Jul 2025 08:20:17 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] input: Tighten dependency requirements for TEGRA_KEYBOARD
-Date: Fri, 11 Jul 2025 09:20:12 -0600
-Message-ID: <20250711152012.2225465-1-trini@konsulko.com>
+Subject: [PATCH] sandbox: Add dummy sync()
+Date: Fri, 11 Jul 2025 09:20:16 -0600
+Message-ID: <20250711152016.2225486-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,26 +91,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This driver requires headers which only exist on Tegra. Express that
-requirement in Kconfig as well.
+In order to compile more drivers, add an empty sync() function.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/input/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/sandbox/include/asm/io.h | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/input/Kconfig b/drivers/input/Kconfig
-index c09f0ae795ed..47ce0ea690fd 100644
---- a/drivers/input/Kconfig
-+++ b/drivers/input/Kconfig
-@@ -98,6 +98,7 @@ config I8042_KEYB
+diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
+index 6e3f9547fee7..11ed89e00710 100644
+--- a/arch/sandbox/include/asm/io.h
++++ b/arch/sandbox/include/asm/io.h
+@@ -8,6 +8,10 @@
  
- config TEGRA_KEYBOARD
- 	bool "NVIDIA Tegra internal matrix keyboard controller support"
-+	depends on ARCH_TEGRA
- 	help
- 	  A matrix keyboard connected directly to the internal keyboard
- 	  controller on Tegra SoCs.
+ #include <linux/types.h>
+ 
++static inline void sync(void)
++{
++}
++
+ enum sandboxio_size_t {
+ 	SB_SIZE_8,
+ 	SB_SIZE_16,
 -- 
 2.43.0
 
