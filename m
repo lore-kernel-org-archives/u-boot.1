@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCABFC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 14:51:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ABAFC83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 14:52:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB692830A0;
-	Fri, 11 Jul 2025 16:50:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D85482F8F;
+	Fri, 11 Jul 2025 16:50:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6761830A0; Fri, 11 Jul 2025 16:50:02 +0200 (CEST)
+ id 4E42482F6A; Fri, 11 Jul 2025 16:50:05 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C766680194
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 16:50:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 1399780194
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 16:50:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AB35C25E0;
- Fri, 11 Jul 2025 07:49:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E228F2247;
+ Fri, 11 Jul 2025 07:49:51 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.35.55])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4B1193F738;
- Fri, 11 Jul 2025 07:49:58 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 890883F738;
+ Fri, 11 Jul 2025 07:50:00 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -36,9 +36,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Casey Connolly <casey.connolly@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v2 14/25] efi_loader: fwu_arm_psa: Keep the FMP payload header
-Date: Fri, 11 Jul 2025 15:49:06 +0100
-Message-Id: <20250711144917.1876948-15-abdellatif.elkhlifi@arm.com>
+Subject: [PATCH v2 15/25] efi_loader: fwu: fwu_arm_psa: Skip accepting the
+ payload after set_image()
+Date: Fri, 11 Jul 2025 15:49:07 +0100
+Message-Id: <20250711144917.1876948-16-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250711144917.1876948-1-abdellatif.elkhlifi@arm.com>
 References: <20250711144917.1876948-1-abdellatif.elkhlifi@arm.com>
@@ -62,10 +63,10 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Allow sending the payload with its FMP header
+Do not update the acceptance metadata bit after updating an image
 
-The Secure world needs the data provided by the payload
-FMP header. So, let's keep it in case of FWU_ARM_PSA.
+The update agent (secure world) is responsible of setting the acceptance
+bit in the metadata.
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -78,27 +79,91 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Casey Connolly <casey.connolly@linaro.org>
 Cc: Adriano Cordova <adrianox@gmail.com>
 ---
- lib/efi_loader/efi_firmware.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ lib/efi_loader/efi_capsule.c | 23 +++++++++++++----------
+ lib/fwu_updates/fwu.c        | 21 +++++++++++++++++++++
+ 2 files changed, 34 insertions(+), 10 deletions(-)
 
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 38945b34e7b..e1fc3f577d4 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -517,8 +517,11 @@ static void efi_firmware_get_fw_version(const void **p_image,
- 		/* FMP header is inserted above the capsule payload */
- 		state->fw_version = header->fw_version;
+diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+index 234e3c1b3c0..1dac691d24d 100644
+--- a/lib/efi_loader/efi_capsule.c
++++ b/lib/efi_loader/efi_capsule.c
+@@ -696,17 +696,20 @@ static efi_status_t efi_capsule_update_firmware(
+ 				status = fwu_clear_accept_image(image_type_id,
+ 								update_index);
+ 			}
+-			ret = fwu_to_efi_error(status);
+-			if (ret != EFI_SUCCESS) {
+-				log_err("Unable to %s the accept bit for the image %pUs\n",
+-					fw_accept_os ? "clear" : "set",
+-					image_type_id);
+-				goto out;
+-			}
  
--		*p_image += header->header_size;
--		*p_image_size -= header->header_size;
-+		if (!IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
-+			*p_image += header->header_size;
-+			*p_image_size -= header->header_size;
-+		}
+-			log_debug("%s the accepted bit for Image %pUs\n",
+-				  fw_accept_os ? "Cleared" : "Set",
+-				  image_type_id);
++			if (!IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
++				ret = fwu_to_efi_error(status);
++				if (ret != EFI_SUCCESS) {
++					log_err("Unable to %s the accept bit for the image %pUs\n",
++						fw_accept_os ? "clear" : "set",
++						image_type_id);
++					goto out;
++				}
 +
- 	}
- }
++				log_debug("%s the accepted bit for Image %pUs\n",
++					  fw_accept_os ? "Cleared" : "Set",
++					  image_type_id);
++			}
+ 		}
  
+ 	}
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index 7f085a0211f..46b6f9356a7 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -1,6 +1,11 @@
+ // SPDX-License-Identifier: GPL-2.0-or-later
+ /*
+  * Copyright (c) 2022, Linaro Limited
++ *
++ * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ *
++ * Author:
++ *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+  */
+ 
+ #include <dm.h>
+@@ -586,6 +591,14 @@ out:
+  */
+ int fwu_accept_image(efi_guid_t *img_type_id, u32 bank)
+ {
++	/*
++	 * In case of Arm PSA accepting images is either
++	 * at ExitBootServices() or in the OS. So, let's skip setting the
++	 * acceptance bit (not used in Arm PSA)
++	 */
++	if (IS_ENABLED(CONFIG_FWU_ARM_PSA))
++		return EFI_SUCCESS;
++
+ 	return fwu_clrset_image_accept(img_type_id, bank,
+ 				       IMAGE_ACCEPT_SET);
+ }
+@@ -606,6 +619,14 @@ int fwu_accept_image(efi_guid_t *img_type_id, u32 bank)
+  */
+ int fwu_clear_accept_image(efi_guid_t *img_type_id, u32 bank)
+ {
++	/*
++	 * In case of Arm PSA accepting images is either
++	 * at ExitBootServices() or in the OS. So, let's skip clearing the
++	 * acceptance bit (not used in Arm PSA)
++	 */
++	if (IS_ENABLED(CONFIG_FWU_ARM_PSA))
++		return EFI_SUCCESS;
++
+ 	return fwu_clrset_image_accept(img_type_id, bank,
+ 				       IMAGE_ACCEPT_CLEAR);
+ }
 -- 
 2.25.1
 
