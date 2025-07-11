@@ -4,86 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED64CC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 17:36:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58DEDC83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 17:38:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 506F582B07;
-	Fri, 11 Jul 2025 19:36:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CC2D182B07;
+	Fri, 11 Jul 2025 19:38:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="woVnTuOi";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="QT1yUzu+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F047382C84; Fri, 11 Jul 2025 19:36:27 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E477982C84; Fri, 11 Jul 2025 19:38:47 +0200 (CEST)
+Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B8B08277D
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 19:36:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 931328277D
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 19:38:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-312e747d2d8so3009213a91.0
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 10:36:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752255384; x=1752860184; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jSE5pWAa9saCQzxdHC4D3ZXSx/70b+KC00kh3ri0Wz4=;
- b=woVnTuOiVyacURmbhRhDdmLE2KqdyF21uPVlSAkkmnwtrmsmFKoOPaBaFtqoXzyuWs
- 6RXkUD+1pwA8rf9nti/kIFg9FWCXBWhCscNdfbHS6zalVItRSmptRMqj973fg3k9OwuQ
- MRzfYtFIXCxYb+4EUAzu/Fj2MxyYUldHlnlbtowl5OwdVQaEEHbgXUD6Et7+0cbzjBl3
- IxeZzmfrJyPgKIhCOX3omzDtryAcSzt4qtmeOFgvkTWlThx3U4Nx0YcVi+SN1SSO46OJ
- 1iQ0pZqqvq2bhMrpVJJ4n7WJSNbuIEyl2WGHRVdYNLzUl/icG8f8ubQn0cV2JtkNJMQt
- UDHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752255384; x=1752860184;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jSE5pWAa9saCQzxdHC4D3ZXSx/70b+KC00kh3ri0Wz4=;
- b=dyfrdFa8msSDZTYrIPRB4gzSWeYHe8hHb0P3dfuCR46jzdS5l8htYZwjsG9AOTl/V+
- jg8Nl1d4SPPIAk7BvG3ImGbq9G62hn95/bCZ8QAVvOwwi+HeUbN9w1URiGjJ+6E7w9+d
- gV8UW8RkxuR4CH8SCyyy5/UClh4NIQhCgUwcCTixaEqUIlV8v3OTAODkYsPHQveXGtrH
- zX5cTjm3AdbGZHJC3hVYx0n8nEaDgGLQXe+x2+mB/MegZ8i3xBEOpN2y5zhUavmMU9Nl
- I1kw4RXgh+azI4oWkQHJxfSFNlRiVdBrdH46U0jbDcvchQF88HdeUionDa+ETNOrh6sS
- skVQ==
-X-Gm-Message-State: AOJu0YxHpfkgXYYvSbkTtn6FwZE87eoFlqlIyEoBfLyIWi/1gkj3vv3E
- xiXVm9DbZSFpCAyGuj6Q7T0kURbvSmwdTYjsAKwflAXBayIce47La8Jxd7nV6Q1PPunlfMNslBA
- Xj6fTC0wc+QUCX3ALwQFy4gu/9o3ZNO8vEa/RP5zsMw==
-X-Gm-Gg: ASbGnctgW1pBZB2UQ4pXZPlmjEIEC1sWEQSBav+Rj0JQ5SUSA0pn9z2j8CWaV8l8wjX
- 8vCIWK5mC4giDyYOOW6TMQfdvF67dTs+oWQk9NEehvECvSejdnBOPevE6OBrIl81rXgd4Q3CAwj
- W91Kgj0NXbxbcB2dFKt4va5mlGzE/HSccqWp7N3CWi73h6kc/oeKsmuNQI0VQUaCGojttmYuXHV
- 3SkeyyJ
-X-Google-Smtp-Source: AGHT+IEjpOtSRQaa2sOKv+Qh9fVqLadlNOhl5Rp6QF50IOoIi93+aFnInpxV+2Qp9d5KEgt50JyWM1JWz83i3qu+mFg=
-X-Received: by 2002:a17:90b:568f:b0:313:d7ec:b7b7 with SMTP id
- 98e67ed59e1d1-31c3d0c25b6mr13466462a91.13.1752255383639; Fri, 11 Jul 2025
- 10:36:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250704134208.2895595-1-raymond.mao@linaro.org>
- <20250704134208.2895595-7-raymond.mao@linaro.org>
- <20250711154530.GH6424@bill-the-cat>
-In-Reply-To: <20250711154530.GH6424@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 11 Jul 2025 13:36:12 -0400
-X-Gm-Features: Ac12FXwt1WH8MAcqzAfuCRfPA7B_FxJwU6bAVXp__m9TZJxNJD8Myvq70k0KH_8
-Message-ID: <CAEfUkUJjP6LRmSy_wjJvDWFmLsQaQk3ccO=yNG83_Q2N4fQL0w@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] fdtdec: apply DT overlays from bloblist
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1752255487;
+ bh=T8QzLf+exKXH2OrZ/+1tbujlzSS3OuVFSzo8hf5VctY=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=QT1yUzu+WLBD4F53qhUTniDxGQSl5+vDwc8NXWjkJN5X7ISoxB9G9tjW44N3VyfLc
+ u64jN7rVGxcG8pDp8Q4+J/R68NMADEdeIIzU873kKZUBy2vnkNuCW5nP6MSBaex/Gl
+ KMmiC4SoduqyP7IqNfvhMlRyquliDvys//JJqMxokP7D8pqt8kTjtyMalwGZvdxp29
+ UPsnTzLBJJMVeGuJ5cDyjgVZwSCKy491a4gExdMLQktTFTAUi+DtrXAGHiJZuUUuVo
+ PEdP8i/ynqssWt9CKdFjPgC67YtQSfZIFgLW1/CrI/p7MxcE5lo0IGYgofZIYy4T1P
+ Q6LF2s9E6SEdw==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com, 
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Levi Yun <yeoreum.yun@arm.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Harrison Mutai <harrison.mutai@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Content-Type: text/plain; charset="UTF-8"
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Andy Shevchenko
+ <andriy.shevchenko@linux.intel.com>, Christian Marangi
+ <ansuelsmth@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, "Patrick
+ Delaunay" <patrick.delaunay@foss.st.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>
+Subject: RE: [PATCH V4 0/3] cmd: env: select: Add output for available
+ environment targets
+Thread-Topic: [PATCH V4 0/3] cmd: env: select: Add output for available
+ environment targets
+Thread-Index: AQHb6dGg1PMbxiI2V0e6dQQ7cHE56LQqhxUAgAKY0NA=
+Date: Fri, 11 Jul 2025 17:37:55 +0000
+Message-ID: <7d8b712b9e71485ca6f057e95f19af1e@dh-electronics.com>
+References: <20250630151232.39100-1-cniedermaier@dh-electronics.com>
+ <20250710015826.GY6424@bill-the-cat>
+In-Reply-To: <20250710015826.GY6424@bill-the-cat>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,51 +81,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Tom Rini <trini@konsulko.com>
+Sent: Thursday, July 10, 2025 3:58 AM
+> Subject: Re: [PATCH V4 0/3] cmd: env: select: Add output for available en=
+vironment targets
+>=20
+> On Mon, Jun 30, 2025 at 05:12:29PM +0200, Christoph Niedermaier wrote:
+>=20
+>> Add the "-l" parameter to the "env select" command to print the availabl=
+e
+>> environment targets, convert all argument parsing in the file nvedit.c t=
+o
+>> getopt() and check that with unit tests.
+>>
+>> The first patch converts the parsing of arguments to getopt() for all en=
+v
+>> commands. The second one adds unit tests for checking the env command.
+>> These were used to check the env commands before and after the conversio=
+n.
+>> The third patch adds the actual new parameter "-l" for the "env select"
+>> command.
+>>
+>> Christoph Niedermaier (3):
+>>   cmd: nvedit: Convert the parsing of arguments to getopt()
+>>   test: cmd: nvedit: Add basic unit tests
+>>   cmd: env: select: Add output for available environment targets
+>=20
+> Can you please make a v5 that's run through CI? I saw that am64x_evm_a53
+> fails to build now and I'm seeing the tests fail too:
+> https://source.denx.de/u-boot/u-boot/-/jobs/1196652
 
-On Fri, 11 Jul 2025 at 11:45, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Jul 04, 2025 at 06:42:05AM -0700, Raymond Mao wrote:
->
-> > During FDT setup, apply all existing DT overlays from the bloblist
-> > to the base FDT if bloblist is being used for handoff from previous
-> > boot stage.
-> > According to the spec update for DT overlay handoff[1], an overlay
-> > must have the same top-level compatible string as its target base
-> > DT has.
-> > Before applying the DTO, it checks whether sufficient space is
-> > reserved in the base FDT region. A margin (0x400) is used during
-> > estimating the space size required by the merged DT.
-> > A resizing happens if the reserved space is insufficient.
-> > After all overlays are applied, it resizes to the actual size of the
-> > merged DT.
-> > Note that the margin (0x400) is arbitrary from experience, it might
-> > not cover all possible scenarios as complex overlays with many
-> > properties might require extra spaces and lead to FDT_ERR_NOSPACE
-> > error.
-> >
-> > [1] Add Transfer Entry for Devicetree Overlay
-> > https://github.com/FirmwareHandoff/firmware_handoff/pull/74
-> [snip]
-> > +     actual_size = fdt_totalsize(*blob);
-> > +     /* Add margin for extra size growth after merging */
-> > +     new_fdt_size = fdt_totalsize(live_fdt) + actual_size + 0x400;
->
-> This is still a fixed value and still not the right way to handle it. I
-> think now that we expose configuring the amount of extra space we have
-> for the tree it should possibly even just fail out with an error message
-> that points to SYS_FDT_PAD?
->
-Shall we do it following the steps below?
-1. Expand to "fdt_totalsize() + SYS_FDT_PAD" without conditions.
-2. Apply each overlay and out if any errors are returned.
-3. Shrink to fdt_totalsize().
+Sorry, I will have a look at it and make a new version.
+Are my patches also the cause of the build issue with am64x_evm_a53?
 
-In this case, the expansion is only once at the beginning. Is it good?
-
-Regards,
-Raymond
-
-
-> --
-> Tom
+Regards
+Christoph
