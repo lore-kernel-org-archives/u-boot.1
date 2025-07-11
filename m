@@ -4,151 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F24CC83F17
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 02:59:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AF76C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 05:11:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7597B837B9;
-	Fri, 11 Jul 2025 04:58:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 022F283280;
+	Fri, 11 Jul 2025 07:11:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="pAss9ziU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vZHweU7L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5993D837B9; Fri, 11 Jul 2025 04:58:57 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5B1E283423; Fri, 11 Jul 2025 07:11:44 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80EA7836EE
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 04:58:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CD2E83123
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 07:11:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lqFJ2Wlh/vYAaXq2vCsNjeKv6MvkxUTu46SYaYLDOdQzYXWBRLuetf78Tkc7V0Yx7jBGBTHNmsBm3P8pCzBnTdd7jRh+FPYupD3juYyVqgHO7vQYhK9L85eril3W5Jk7vixd5Kgn6Fxx17nLOXy2BRwUhNmnkcAxz5D6AqC10CM6bWZpkoz4H/EDb2bGaFzbUDpH1saUqkRDubOxJntoeyg+iHeiADg5AlAajQN0dOH8pQ8DHcGlGAZgogaYsJkmOovzGmuDD51zpiAr2RsgOz/0DPmn2hHelSs60tuHzzlTb10t6x5v7b/K3fe+ZhPBoejBmBa66Ti2QmPIKz4w2A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XWBLe4rktAhZVCboadtTRLxdu+OiAt4kJTh5EO7zkgc=;
- b=TC79/ufxXrQYKkNw1pcuIwdvGJDYldo1k4ap8kJMvgiHav8GQZkQju/0Z0Unt2cIziu666DmRoGLFcIdk9ZtIlU6jnCK2r1Ov95ajiVuf7X2UDkQ0w73R9TN1Y+MaRcJytqZrFxO5WfOR/oEJ6jzomj2JuW5VNd+DETHvdkPpRjOBwdNB85R42lDNS3EwE673GtgoE9ohAv1RlKsDaZljKheJCnGSQDXVVAPjEhD9tnpGavZGjXi58IVPiuGB0KcywL7JVOclTgzlxs/5HXiARxQJvgfM3Hf+wrGztKmeFH2NKhphUcE4R0q5Tu9xWqLBe7bUFW+IlPAgd3DVnvOLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XWBLe4rktAhZVCboadtTRLxdu+OiAt4kJTh5EO7zkgc=;
- b=pAss9ziU9Hrhep0IQuFcOw5V1Z3ziyhsasjN1BglBk1Y7hdlFAwijEU2UzbgLu9urm1WhZtNvGOaesj+g8UexO0ee18FgaQnzLvc2VM4OLE4Q5u11wP4U+kIkDPOTbDAxvahTGdWUOMDOrsRl9XwrLIt6TaH36/5yyJgE4M0XkfMNgI5UPDaGk9cmobnoquhlrGvGN2ZRPEqV3ug7Mar+vaQSrFTaw2Lb3tJT+vbuqzt25gIUYoUmn6vFLrAkImLvsPgkiNKtWg3bR0aJlexR4RtjNc2jUHLA7/Y+cEnBEGTEzMwU3lDIaj08s+cyUh0ew9ls7TH+wxNvtAjFeRrgw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VI2PR04MB10265.eurprd04.prod.outlook.com (2603:10a6:800:221::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.25; Fri, 11 Jul
- 2025 02:58:52 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8901.028; Fri, 11 Jul 2025
- 02:58:52 +0000
-Date: Fri, 11 Jul 2025 12:09:12 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 2/2] configs: imx6ulz_smm_m2b: Add board watchdog reset
- configuration
-Message-ID: <20250711040912.GE1654@nxa18884-linux>
-References: <20250708103537.27632-1-michael@amarulasolutions.com>
- <20250708103537.27632-2-michael@amarulasolutions.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250708103537.27632-2-michael@amarulasolutions.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: MA0PR01CA0103.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:af::17) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-711d4689084so18214867b3.0
+ for <u-boot@lists.denx.de>; Thu, 10 Jul 2025 22:11:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752210700; x=1752815500; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fYM7mk99yKiixRmm88O8C8r8VCOUCU3bS0RDjfvcv+0=;
+ b=vZHweU7LY7QshxEgQlkHQoLRc745Meie25vIs9+eJ+wW8m//pD7SyJv6CuNc7FLKe1
+ hgXaV1YCZSjMi4Z5FFIydn3cX88EQATVKNRGGmyK9mtym7aA65aFoEqUBfLgvCQOcoCc
+ tzC0WBCeJWnp1f1/euWWlzXfTQ/sv065RPByjc019D+WCVZwRE33hOtCxRX5wJqDzngc
+ 6p0i0RLXClZ8tMrXIERjEFalI6wXxXC3b58OlOLK/6fkDKlwN1CpKL85Zw9Opcy5HtD5
+ EY7ddVQ7B1e4YgB2e/O7FHGpro92vR5fwtIBrjTC6AJ/ZFclYTQieF/4oMrUVs+3lCVs
+ jKJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752210700; x=1752815500;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fYM7mk99yKiixRmm88O8C8r8VCOUCU3bS0RDjfvcv+0=;
+ b=Jf0EuqXuyxSwIw9Uk35cSfXUREmpvhFD7PcuFzrazCZS+0iDbdOGqQYwF/92lKOal+
+ 3EnhTu01jX0MXgxO0+D3km6lQUnmMcpzv5XUUyio9rTNbidsmW5JoQe8pM0Do8RsXp8j
+ PwYoNlMMj160NpixZPmBiB4TVH6eyYHn9V7+STnNlmJqKM7HgCH/rneGizHqxh2RMrl4
+ l+EwQq/JOJw88zvJbNqrxD+HzUGuLEKsyZqsWmLmtc+ix1P1/j1WzyYxd6HKH7yWwvBM
+ SdiTSu7wolnc5+YlJ+krhoLlRXru7gu7F4LsSCp8jmCu5ctqs0/bbuCFqhH7fBMhN8ST
+ P03g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUDYNY0q5Gj/MrOAg1STNQiczA3/9DZHmevPt/3og/2WG/Nqq9hfwrszMIzs0TE8TJ2W9YQUS8=@lists.denx.de
+X-Gm-Message-State: AOJu0YylyicjBPq9Vmqx+ViUBDInZjsPbZ+bNl2VTdFre6fjxj5eY0g4
+ ZKPTpEfB1Y0/2R6cwDpcUjtgs3zsFp+KA/trBh19rA5E5DPUOtWbbzDiN5P9OQV2nS4MAEaF6vi
+ 5E34377hOte+yV85lmlyQII6SgFUHBeENtS+YTkZDiA==
+X-Gm-Gg: ASbGncsTot5ZvQwlWBg4FdZGZkBDCCC798TBIjZk3/LMyQ2L5EtBFNaLvjXN4GCKfbB
+ EtrQjTO1/nll7Cs158HNW6ZAxRca0G/B5Yeiw0+35nvq1YXrjqbeavum8GBQqzdojdVYBKwDPm5
+ 1qFOz0S8deM1jH67Uue0AOeNu9VxPfO5dLZyxyrXSKaBnmDY3xIWfoBwcNc0B3zpNvHOBBHLOKa
+ y7dNiQ=
+X-Google-Smtp-Source: AGHT+IFiwr9e8BzZ0Dc5bQJoTEPsb6WHcSHX6AdzM5KJu2zdCScwrXpKf6iYvVlBKW8ZY8/93JAThCTil5c0L7qlwz0=
+X-Received: by 2002:a05:690c:4a04:b0:712:c14a:a388 with SMTP id
+ 00721157ae682-717d5b7bd05mr35167377b3.7.1752210699690; Thu, 10 Jul 2025
+ 22:11:39 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI2PR04MB10265:EE_
-X-MS-Office365-Filtering-Correlation-Id: 667e0bfa-9198-44a2-c0e3-08ddc026de34
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|19092799006|52116014|7053199007|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?LdOLW0HuP5R/63ZHl2PTxK4WKlhyyyZ0ZT/4jwrKGPr4mXIzmKA/jH6aI5Dc?=
- =?us-ascii?Q?YV/vGurolpSRzduQgKbwW8YUniaGdHSo4V3oHkGXUxjuycvaUeP9PsrB/qis?=
- =?us-ascii?Q?PG4mVOGBSBS068ivj9LRzasdYsAse/giKTgOVEaQI3s1LO/qdVw8aEeUIjXQ?=
- =?us-ascii?Q?N4Mm+rZPTNXAgGDJGJuatxXYBDHCuVjGLZZmzhwJHt06Grc0ojetovn9faxg?=
- =?us-ascii?Q?+twtew4hVigOlNdi0gPYvIsXsDnf8uT3cpiogsUaFBLSBspYhU0POhLY1WQs?=
- =?us-ascii?Q?9bp9Yr1tDt068Ahwsr5AZOAQgkIZSjHAs1gy5OVb+NN+dO5nYRzolJUftZFq?=
- =?us-ascii?Q?A8AQILEogc8Sjxl6GgYInIeburXpv94MtEnlPQoGBxi30Z9Nw4rh91iMBQ8z?=
- =?us-ascii?Q?VvXuKQKa2kxfhVCvoXLavGe+o7zd/iifIGl5E8pSDu8dQyPrfMQNooxJiwiW?=
- =?us-ascii?Q?Qscg60MFYkOdVfUgaRi/enFYYtyNjeCQ0p1r+W3NjfFnm1GQuqqX0QKZSYR3?=
- =?us-ascii?Q?c1gCnL1uZVgPWhyPrP5ec+oG1jTMbqOHYnJuH8I+cAMkdEq8Qz9IFxg0/lSf?=
- =?us-ascii?Q?oLrSPeW6ZXwGigsEWvYK+Gglm8XFSLpmOkGBiOT9o9AmoLjuSG2JmM5VnDrh?=
- =?us-ascii?Q?RGtFVR5rjOv9RsfRub9vM5I7IUEwHrJRKWdOkfTfJpwEu61xGqzc563jpC6V?=
- =?us-ascii?Q?ASe20Ljn67EqXeS8CUskvE68mKRGCi3S655HRxmLQTOlYZaxK4TsofXtMCIs?=
- =?us-ascii?Q?07Y4+ekBSiptu2iK1ddsLBmfKvFAZN7nour/gVwkigd/FMUN6aOSry5nt/19?=
- =?us-ascii?Q?irrggrAJKLimlqApiLEWa8um5flkWqFauZ30UOZSiOnJ0A71KGubrhub1A34?=
- =?us-ascii?Q?bp3l3MyH0mPafv6Jv5Yc0GHFwmRT4wjXI56iEBYHYC1TiFC9g7x4+tsM2O1S?=
- =?us-ascii?Q?a+rKMBGmEqlHT0/pYPUqklk/arHXgo58bAUZwNrxbYvHP5iRs9GaBFVgl6CA?=
- =?us-ascii?Q?x/LGE9XPvJuJgqcvKOcDQejEoMfmqqZW2lbWHkvl+wh14FrTbkKu/a/oD6ip?=
- =?us-ascii?Q?kvLsCaGsUbnh/cEQK2izI7znLnbuRETMSXYYqGJw+NgVcHfpC2itMtm51MAy?=
- =?us-ascii?Q?NbQOdLd+DxeU04CvRm/1psz1TOT1Jq3mpB5xHEk8k28s1JiKIIvBVAPl3Ih6?=
- =?us-ascii?Q?fZ2/Mv6IP+IpBh8FyoZ01nTHH5lohCTYgAEzdNJcF+b9aldEnE6vzP5DRJhN?=
- =?us-ascii?Q?8xvscICOca5AV6scaBzBGQBRsVU0V1p6MYPOLEHgORRMGUQyGI3jkyOkuEk/?=
- =?us-ascii?Q?HzAZGXP31UfMWZ+w9HIgE1DOKHKRg8DGO6Gw0U8ZOTa9STFKcWuBpd9niBVX?=
- =?us-ascii?Q?9JYPt88RK4nAQNbQ5LnRcxzlrmXn0etx5WhHiERmmwrvi/FiT5xalPGuF4O+?=
- =?us-ascii?Q?siXvOie0/Xd2Hd0Lnbcsfe4Fo5FzkPgBVBxAmNEitrOf4V8JEW+nnQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(19092799006)(52116014)(7053199007)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?RnXSqpPAT1fYeZUvTADpvZTO92VScGJ42XR6huaUyMZem6TzdsDCZDO3LBUr?=
- =?us-ascii?Q?PEMvp3LAVwfVmCIQi+k+Q633jpwARq9xL5t3mllqOe7VjM9cTaoQpEadZItx?=
- =?us-ascii?Q?06tlxVEyTnu0rXBf9SObag08nkT1pt1FteLUU1yvNqfjZuqZomY8TSII1U/E?=
- =?us-ascii?Q?7ozDzH7t2vjSk9gB+Af9Q42uRRrmTG5q/7XPnEHIkwLdx8Woyh5/i0NaOIzR?=
- =?us-ascii?Q?PZhvsS9/wo/yQ4mHvfqAjiz3x+/QtMR8xJDQ42NERm7C3N+kXxtdhCnqM3JU?=
- =?us-ascii?Q?Dv8q+wM3Q/8OqxDShZFveVkTFNin4ya6UGxozPDIhoH44UrKUI3HFnAEL8cb?=
- =?us-ascii?Q?SNJA0QvBlTWWRZWgjcERYHd8uVqIRoFDUrGSx6XGI/ClG1dZhDFTfbyt3JYz?=
- =?us-ascii?Q?5ooVmFqteXmYiyZL1er23IN22Lynyvxeeh9xQAeKoyqhSI0wY1mJNmfdVs0U?=
- =?us-ascii?Q?ohtcRXiiNh4L12qbaR9BVEJU5ViWPkLAHZ74RJedv+TmMdQxBy1ClOEJY1If?=
- =?us-ascii?Q?qCU5GyC5t+ksBU0qgY42Aidvgo03GsJOpfgFmSf1OTO5jzdg/qrGm4dB7ndL?=
- =?us-ascii?Q?myLhM4RWGg5HdCkoqgrHzoC5Hj7b5ChrkrsdRkLg3QoXa2UwG2sCMk282/+5?=
- =?us-ascii?Q?++W+8BCjaf8HIAiHc1DCX1WSDr2kPp9frMKR3n6cDOHh7kbRx4FIl/Qnw4iP?=
- =?us-ascii?Q?BUKjFID0SG9vHA2hiVgWkY4Uv0w+9XhVoir6nbEh+cj2+FmH+mqFfp5QiYDS?=
- =?us-ascii?Q?h4T5vuA1qRl3Gsl4mUb2VcFrAwTyXutunQqJ0DfVdDHnY8nntoQ6Ynfdq00U?=
- =?us-ascii?Q?FvOtL8ZEJQvOpLzs64T77fA8tXAMwb8ypxRhbeWwaFHptouctcrMMMLb800Z?=
- =?us-ascii?Q?+34fHCNJJ4CddYO/9hGlT3hvtHSWk3gFbJn2bi8DJ88d8t8Nlh2Ku0pzTgh2?=
- =?us-ascii?Q?2Tt6ogeE54PH94EHxgHuB2JvNzBppUgpBOKvDNNmsrIJC2w1HRe5Rg8ZPv+C?=
- =?us-ascii?Q?0CrI+rNOzkVVxOcta8tJwrbwsqW1l49zbruunl466JNGRZswmZVJBDZf3r5z?=
- =?us-ascii?Q?MtuFaY06f2BgS3OCpQsZy2H9T3Tiyd4eeCd+zWsRbjF8l0G2vvflXgpcaCDI?=
- =?us-ascii?Q?jdNlXsOv66dzaU7uVnC+vGkK5Hpd6WdHpNexVzfUejuVIJhJfN1xA/H40DVy?=
- =?us-ascii?Q?Y6ovbHn23l57SOrGYf6Lk7rt183L9TCqqEUEbe1VqvHWOoHG8WN3CBgq04QH?=
- =?us-ascii?Q?wcQ02aSGowE89+JoghOnLAU3HB6q20TcVG0rFfGWdjfL/BVTdv4/dnpcpgjN?=
- =?us-ascii?Q?ZACYMX0L9q+lR5y7DuUy4iiaDTBwNE2BfxJK76eoAdQ0zoiRfMY73B0CToMo?=
- =?us-ascii?Q?p9Ng8jL2R4AhIi1OK3vgSHDnkp1EOFptrfn6m/moKwCS5zUHXsyd7vRS10IQ?=
- =?us-ascii?Q?WaYHtNqEuMN073s2uPKmc1SV30xIm1jpd8U1R2DgtYxHCiCtuFci61lR8xw+?=
- =?us-ascii?Q?H6vjsunLMfPrYbf2g7Dqa8FQgCgyT0ZVZMzurBAtfiFqIRsoGyPuCoyeDDjr?=
- =?us-ascii?Q?gsJAaZhsp1SSwhZcq32xUdTgu5CuXp+GzKFfSNtD?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 667e0bfa-9198-44a2-c0e3-08ddc026de34
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2025 02:58:52.7105 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KHUfxWbz318eKf5Y7M6qhjxvbQ7K/YHC1LF94ha3I18Ke5ISRJDDTvSxmfVvwlQk9pmxdHlMjjKHWHg1ixcd8Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10265
+References: <20250709161418.21287-2-ziyao@disroot.org>
+In-Reply-To: <20250709161418.21287-2-ziyao@disroot.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 11 Jul 2025 08:11:03 +0300
+X-Gm-Features: Ac12FXyJ5USo9jxv82NcYkudHjSPnaAU_I7aKenqILLw1mNdjQQHSCZ3Vnx8DBI
+Message-ID: <CAC_iWjKovoQA0K57pwT9Mfzo_Y4NMvUZO5jfDcQAztTMn4LcMw@mail.gmail.com>
+Subject: Re: [PATCH] kbuild: Avoid including architecture-specific Makefile
+ twice
+To: Yao Zi <ziyao@disroot.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,12 +94,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 08, 2025 at 12:35:29PM +0200, Michael Trimarchi wrote:
->Add the configuration that allow to reset the board from reset
->cmd
->
->Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
->---
->
+Hi Yao,
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+
+On Wed, 9 Jul 2025 at 19:15, Yao Zi <ziyao@disroot.org> wrote:
+>
+> Stranges errors are observed when building U-Boot master for almost any
+> RISC-V board, the messages are in two types, one is about duplicated
+> symbols,
+>
+>         u-boot/arch/riscv/cpu//mtrap.S:32: multiple definition of `trap_entry';
+>         arch/riscv/cpu/mtrap.o: u-boot/arch/riscv/cpu//mtrap.S:32: first defined here
+>
+> and the other is fixdep's complaint about missing dependency files,
+>
+>         fixdep: error opening file: arch/riscv/cpu/.mtrap.o.d: No such file or directory
+>         fixdep: error opening file: arch/riscv/cpu//.start.o.d: No such file or directory
+>
+> where the latter could only be reproduced when building parallelly.
+>
+> Both the two types of errors are about files in arch/riscv/cpu, and
+> there's a suspicious slash character in the reported path. Looking
+> through RISC-V-specific Makefiles, there's only one place that may
+> expand to such a path,
+>
+>         libs-y += arch/riscv/cpu/$(CPU)/
+>
+> The right hand expands to "arch/riscv/cpu//" if $(CPU) isn't defined at
+> the time of including. With some debug statement added to
+> arch/riscv/Makefile, the output proves that arch/riscv/Makefile is
+> included twice, once with $(CPU) undefined and once defined correctly
+> according to CONFIG_SYS_CPU.
+>
+> Futher bisecting shows an extra include statement against
+> arch/$(SRCARCH)/Makefile is added in earlier bump of Kbuild system. But
+> the statement is evaluated before config.mk is included and definition
+> of $(CPU), causing objects in arch/riscv/cpu/ are built and linked twice
+> (once as "arch/riscv/cpu/*", and once as "arch/riscv/cpu//*"), resulting
+> in the error.
+>
+> Let's simply remove the extra include to fix these nasty errors. Note
+> though this therotically affects all architectures, ones except RISC-V
+> may not reproduce similar errors since there are no source files
+> directly under arch/*/cpu, thus the extra include doesn't hurt.
+
+There's another unconditional include under ifeq ($(config-targets),1).
+Should we remove that as well?
+
+The patch it self seems correct, but can you try removing the
+pre-existing include instead and add the config.mk inclusion?
+Something like
+diff --git a/Makefile b/Makefile
+index db8d89587290..e6ad9be262ef 100644
+--- a/Makefile
++++ b/Makefile
+@@ -636,6 +636,7 @@ ifeq ($(config-targets),1)
+ # KBUILD_DEFCONFIG may point out an alternative default configuration
+ # used for 'make defconfig'
+ # Modified for U-Boot
++include config.mk
+ -include arch/$(SRCARCH)/Makefile
+ export KBUILD_DEFCONFIG KBUILD_KCONFIG CC_VERSION_TEXT
+
+@@ -725,6 +726,7 @@ ARCH_CPPFLAGS :=
+ ARCH_AFLAGS :=
+ ARCH_CFLAGS :=
+ # Modified for U-Boot
++include config.mk
+ -include arch/$(SRCARCH)/Makefile
+
+ ifeq ($(dot-config),1)
+@@ -773,10 +775,6 @@ ifneq ($(wildcard $(KCONFIG_CONFIG)),)
+ ifneq ($(wildcard include/config/auto.conf),)
+ autoconf_is_old := $(shell find . -path ./$(KCONFIG_CONFIG) -newer \
+                                                include/config/auto.conf)
+-ifeq ($(autoconf_is_old),)
+-include config.mk
+-include arch/$(ARCH)/Makefile
+-endif
+ endif
+ endif
+
+I prefer keeping the makefile closer to the kernel so we can sync it
+up easier in the future
+
+Thanks for looking at this
+/Ilias
+>
+> Fixes: 5f520875bdf ("kbuild: Bump the build system to 5.1")
+> Signed-off-by: Yao Zi <ziyao@disroot.org>
+> ---
+>
+> I was surprised to see this morning's CI passed[1] even for these RISC-V
+> boards. Builds for SiFive unleashed, QEMU S-Mode virt and Sipeed Lichee
+> Pi 4A always fail on my machine with the latest master branch, thus
+> maybe I missed some points when digging the issue, please correct me if
+> so.
+>
+> [1]: https://source.denx.de/u-boot/u-boot/-/commit/3833600dbaa2d7008063f3127abf21be8f0fe6cd/pipelines?ref=master
+>
+>  Makefile | 2 --
+>  1 file changed, 2 deletions(-)
+>
+> diff --git a/Makefile b/Makefile
+> index da53efa09f1..b610dcc0b6e 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -724,8 +724,6 @@ endif
+>  ARCH_CPPFLAGS :=
+>  ARCH_AFLAGS :=
+>  ARCH_CFLAGS :=
+> -# Modified for U-Boot
+> --include arch/$(SRCARCH)/Makefile
+>
+>  ifeq ($(dot-config),1)
+>  ifeq ($(may-sync-config),1)
+> --
+> 2.50.0
+>
