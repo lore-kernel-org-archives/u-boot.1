@@ -4,114 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F275C83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 19:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EFC0C83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 19:43:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A3C68277D;
-	Fri, 11 Jul 2025 21:35:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A7CB4828A2;
+	Fri, 11 Jul 2025 21:43:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="E2y/NytM";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="dSGGQqvF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41B0B82998; Fri, 11 Jul 2025 21:35:29 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2023182998; Fri, 11 Jul 2025 21:43:49 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3B58826AA
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 21:35:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 569478277D
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 21:43:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1752262524; x=1752867324; i=xypron.glpk@gmx.de;
- bh=kDgOGO52GNesO06MuC0z0eEBfKz9VzhGpqgU+rgt0Zk=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=E2y/NytMk85tg9Fz8+BH5a9li13ecBMXulWmXOcuyZvuUu0Gwd/ouCcho9zmyUr/
- tjP3xxhuCJLzoob8tOhmnSCnMIcZ+8PhKEX6LkMw/pLuiwfYihe+KeylLKX4jJmJa
- ldUwMGQdAbqJ3SYY7CKnTcFRFSweXyMmhMdwm6bgqurwvQd+AzEafxztqD/I3eSbu
- lfduM46/hl5m0XG9EHZD8SoieOQWIkKotoaLfrCMqOQCz8R6RQSn1aVOKulp62B+N
- ShSbULo9IsY5VMztvOgtBE4GlBc0c+OTNi5GJ0/T87gRwn+2DJjv9W1m3xTyBYS4Q
- CQrkTvrHcxARnb0HoA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MYNNo-1u5yen2V06-00X0gU; Fri, 11
- Jul 2025 21:35:23 +0200
-Date: Fri, 11 Jul 2025 21:35:21 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-CC: Josef Holzmayr <josef.holzmayr@northern.tech>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] vexpress_ca9x4: Disable EFI_LOADER on this platform
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250711185512.2250368-1-trini@konsulko.com>
-References: <20250711185512.2250368-1-trini@konsulko.com>
-Message-ID: <ECA70B87-D474-4408-B523-86F4A2D02D09@gmx.de>
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-31c38e75dafso2192274a91.2
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 12:43:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1752263024; x=1752867824;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rHQ3tWIVxp7RV9YOslYJfx++UcaBVu1oZak/qYCmzv4=;
+ b=dSGGQqvFdOfZkrWTG7fDDYm0QUySNmXAtOJd+FXU9lUKRKix2EK9/gRRdWYyWWlBt9
+ xp3ZBgLsDPxoqC+0eIDgozyFS0UrVEKMgZqYaD6FNkzkq1W/lD9iKICeLgiFCRH8f9V5
+ aJMNy7dXiuqX3aEpItaQHhlY6TjKi7GywMkzw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752263024; x=1752867824;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rHQ3tWIVxp7RV9YOslYJfx++UcaBVu1oZak/qYCmzv4=;
+ b=agHWJQmIvSKMqboEeOQ9V0cJ/u8ZhZaXsJljcUMzGGTv83NrtsYntJ0r6qQ9Oc7QFa
+ I0qkDoJCDV96GyukVECjUr5lqyDRt0w2Yp0YHFlEbwW0iyQYa3TyHQaT1y2BS2a6tvJx
+ TmRnxMygL7fDKAZ0b1/GE6a9mQgn1mVCTgAgUDzzPwS+jrHzJs11KG+ANKx4r8KPxLu7
+ Oh82NqtbeyphWEYedGI8VS3+aVkUUnMtY2DtZU2Y2Wkqz57EqQlT+rP54jIkUVnABaxb
+ t3S7NEzjrPx5I65krh8MnQmw1W4QjLzB4uZ5Jc+YsGPBsoE/ah17hlN1VwApIAlyDM4O
+ hBJw==
+X-Gm-Message-State: AOJu0YzlhOxBuU7CfdbTp57QC721HkFI5V3Ai1RcgzeYqxrh1c8MopFV
+ wkWeyQq0Ppi9MGt5XJNtmBuanPCbF6il8Z7k291r1VkOw9HVSeSI4bXL4fLh6h6yTCOfM2g6Zfi
+ N2XnptfdbgRICkEgEqBA+9MRdoAj6tJq2v8of6zwqbA==
+X-Gm-Gg: ASbGnctuu5r+Bkrt66gMyHLMRHzUemUpylTEssO5sm56mjfYL2bCeNWMuYy5CsnsfbT
+ SqfQrhSyV+W3SjD00zLWNXl8VeOlk4BcwRM9CLqcFGuzcDGZiHdGDV1uj49qrqy6qar/v6pcGuJ
+ Nr7oCiHj3XqhVvL/Gf4AUEiqukbSv+JnSXOaWzq15ofLmY9JaWe2Ht23uXmbosOuUCa053koH0i
+ k2SlK6J
+X-Google-Smtp-Source: AGHT+IHSExipuNZxM1+V+GQ1tB2J9gSwbkOhWXU6QsksYf7qpv8d4B5xMIo7quE37O+c9JMZzsVxjnJggqT6IwtdMYg=
+X-Received: by 2002:a17:90b:1348:b0:311:ff02:3fcb with SMTP id
+ 98e67ed59e1d1-31c4ccf3b38mr6858933a91.28.1752263023538; Fri, 11 Jul 2025
+ 12:43:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
+References: <20250711151952.2225349-1-trini@konsulko.com>
+In-Reply-To: <20250711151952.2225349-1-trini@konsulko.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 11 Jul 2025 21:43:32 +0200
+X-Gm-Features: Ac12FXzrCIxgbByYYmYVyyYAohjsMgK2nmRAB5iaogTlPmQ4CoIcLPaYRFd1UBg
+Message-ID: <CAOf5uw=R2nTioRf_iqXKPzVzqCLm9UvB4AekUt_PFMQ8ZHvNeQ@mail.gmail.com>
+Subject: Re: [PATCH] mtd: nand: raw: Remove unused mxic_nand driver
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:imOudKUqefRS5P72v3811mloQywelbO5ihb+iysWIjE7T9S3edQ
- A6Y6yWs/WDSBSptzCR97qX1/ZqVpkRePgHkcaI2V5f15rwbT7kmPvlLh0JeVUkYlTFuU+/w
- ikyyERVu2VeNAjHZl7MXDhPINFv7Zojhc3x2DXU1GOQzNFX9G3U1Pisqw049cmXndR9CkPX
- bGiruGqLJRaWNlMk4zL8Q==
-UI-OutboundReport: notjunk:1;M01:P0:Mv50ZfgmSKE=;iMmyg2dt3Vklz6gpaBc8+HFHD0G
- 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
- 3k9Kh6UKaFDXH0=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,76 +90,690 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 11=2E Juli 2025 20:55:12 MESZ schrieb Tom Rini <trini@konsulko=2Ecom>:
->As part of upgrading to QEMU 10=2E0=2E0 we discovered that the EFI loader
->tests would no longer pass CI, on this specific platform, while still
->passing on real hardware=2E Upon further investigation it turns out that
->on ARMv7 we rely on some undefined behavior with respect to enabling
->unaligned access=2E And while this is seemingly fine on real hardware,
->QEMU is now correct enough in implementation to no longer allow this=2E I=
-n
->order to not rely on this undefined behavior we would need to implement
->some MMU configuration (and then ensure proper tear-down possibly)=2E
+Hi
+
+On Fri, Jul 11, 2025 at 5:20=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
->At the moment, the most reasonable path forward seems to be to document
->this and disable the support here=2E
-
-Where will we document the issue? Does it imply that we should discourage =
-EFI use on all ARMv7 systems? It would be good if somebody at ARM could fin=
-d out if they ever delivered designs that match QEMU's behavior=2E=20
-
-Best regards=20
-
-Heinrich
-
-
+> As no platforms use this driver anymore let's go ahead and remove it.
 >
->Link: https://gitlab=2Ecom/qemu-project/qemu/-/issues/2944
->Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
->---
->I believe at one point Norther was using this platform, in QEMU, for a
->reference platform via EFI for using Mender=2E As such, this would likely
->make this platform not useful anymore=2E I believe Ilias can better
->explain what needs to be done to fix this properly but there's no one
->with the available time to take care of this in the community at large,
->and this is part of what's blocking updating QEMU to a newer version
->that provides other platform and feature support we do want to use=2E
->Alternatively, we could just let this platform go and remove it, if that
->path makes more sense=2E
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  drivers/mtd/nand/raw/Kconfig     |   6 -
+>  drivers/mtd/nand/raw/Makefile    |   1 -
+>  drivers/mtd/nand/raw/mxic_nand.c | 602 -------------------------------
+>  3 files changed, 609 deletions(-)
+>  delete mode 100644 drivers/mtd/nand/raw/mxic_nand.c
 >
->Cc: Josef Holzmayr <josef=2Eholzmayr@northern=2Etech>
->Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
->Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
->---
-> configs/vexpress_ca9x4_defconfig | 4 ++++
-> 1 file changed, 4 insertions(+)
+> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+> index 3ca6d1cca812..4b4330302bed 100644
+> --- a/drivers/mtd/nand/raw/Kconfig
+> +++ b/drivers/mtd/nand/raw/Kconfig
+> @@ -550,12 +550,6 @@ config NAND_MXS_USE_MINIMUM_ECC
 >
->diff --git a/configs/vexpress_ca9x4_defconfig b/configs/vexpress_ca9x4_de=
-fconfig
->index 67adba437bfc=2E=2E6ebb37fcf2ec 100644
->--- a/configs/vexpress_ca9x4_defconfig
->+++ b/configs/vexpress_ca9x4_defconfig
->@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"vexpress-v2p-ca9"
-> CONFIG_SYS_LOAD_ADDR=3D0x90000000
-> CONFIG_ENV_ADDR=3D0x47F80000
-> CONFIG_SYS_MONITOR_BASE=3D0x40000000
->+# CONFIG_EFI_LOADER is not set
-> CONFIG_DISTRO_DEFAULTS=3Dy
-> CONFIG_BOOTCOMMAND=3D"run distro_bootcmd; run bootflash"
-> CONFIG_DEFAULT_FDT_FILE=3D"vexpress-v2p-ca9=2Edtb"
->@@ -20,6 +21,7 @@ CONFIG_SYS_CBSIZE=3D512
-> CONFIG_SYS_PBSIZE=3D532
-> # CONFIG_DISPLAY_CPUINFO is not set
-> # CONFIG_DISPLAY_BOARDINFO is not set
->+CONFIG_LAST_STAGE_INIT=3Dy
-> # CONFIG_CMD_CONSOLE is not set
-> # CONFIG_CMD_BOOTD is not set
-> # CONFIG_CMD_XIMG is not set
->@@ -55,4 +57,6 @@ CONFIG_SMC911X=3Dy
-> CONFIG_SMC911X_32_BIT=3Dy
-> CONFIG_BAUDRATE=3D38400
-> CONFIG_DM_SERIAL=3Dy
->+CONFIG_FAT_WRITE=3Dy
->+CONFIG_FAT_RENAME=3Dy
-> CONFIG_SYS_TIMER_COUNTS_DOWN=3Dy
+>  endif
+>
+> -config NAND_MXIC
+> -       bool "Macronix raw NAND controller"
+> -       select SYS_NAND_SELF_INIT
+> -       help
+> -         This selects the Macronix raw NAND controller driver.
+> -
+>  config NAND_ZYNQ
+>         bool "Support for Zynq Nand controller"
+>         select SPL_SYS_NAND_SELF_INIT
+> diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefil=
+e
+> index 97e874ef769d..5ffd450e8fe7 100644
+> --- a/drivers/mtd/nand/raw/Makefile
+> +++ b/drivers/mtd/nand/raw/Makefile
+> @@ -74,7 +74,6 @@ obj-$(CONFIG_NAND_OMAP_GPMC) +=3D omap_gpmc.o
+>  obj-$(CONFIG_NAND_OMAP_ELM) +=3D omap_elm.o
+>  obj-$(CONFIG_NAND_SANDBOX) +=3D sand_nand.o
+>  obj-$(CONFIG_NAND_SUNXI) +=3D sunxi_nand.o
+> -obj-$(CONFIG_NAND_MXIC) +=3D mxic_nand.o
+>  obj-$(CONFIG_NAND_ZYNQ) +=3D zynq_nand.o
+>  obj-$(CONFIG_NAND_STM32_FMC2) +=3D stm32_fmc2_nand.o
+>  obj-$(CONFIG_CORTINA_NAND) +=3D cortina_nand.o
+> diff --git a/drivers/mtd/nand/raw/mxic_nand.c b/drivers/mtd/nand/raw/mxic=
+_nand.c
+> deleted file mode 100644
+> index 0e54b5f69389..000000000000
+> --- a/drivers/mtd/nand/raw/mxic_nand.c
+> +++ /dev/null
+> @@ -1,602 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0
+> -/*
+> - * Copyright (C) 2021 Macronix International Co., Ltd.
+> - *
+> - * Author:
+> - *     Zhengxun Li <zhengxunli@mxic.com.tw>
+> - */
+> -
+> -#include <clk.h>
+> -#include <dm.h>
+> -#include <malloc.h>
+> -#include <nand.h>
+> -#include <asm/io.h>
+> -#include <asm/arch/hardware.h>
+> -#include <dm/device_compat.h>
+> -#include <linux/bug.h>
+> -#include <linux/errno.h>
+> -#include <linux/iopoll.h>
+> -#include <linux/mtd/mtd.h>
+> -#include <linux/mtd/rawnand.h>
+> -#include <linux/mtd/partitions.h>
+> -#include <linux/mtd/nand_ecc.h>
+> -#include <linux/delay.h>
+> -
+> -#define HC_CFG                 0x0
+> -#define HC_CFG_IF_CFG(x)       ((x) << 27)
+> -#define HC_CFG_DUAL_SLAVE      BIT(31)
+> -#define HC_CFG_INDIVIDUAL      BIT(30)
+> -#define HC_CFG_NIO(x)          (((x) / 4) << 27)
+> -#define HC_CFG_TYPE(s, t)      ((t) << (23 + ((s) * 2)))
+> -#define HC_CFG_TYPE_SPI_NOR    0
+> -#define HC_CFG_TYPE_SPI_NAND   1
+> -#define HC_CFG_TYPE_SPI_RAM    2
+> -#define HC_CFG_TYPE_RAW_NAND   3
+> -#define HC_CFG_SLV_ACT(x)      ((x) << 21)
+> -#define HC_CFG_CLK_PH_EN       BIT(20)
+> -#define HC_CFG_CLK_POL_INV     BIT(19)
+> -#define HC_CFG_BIG_ENDIAN      BIT(18)
+> -#define HC_CFG_DATA_PASS       BIT(17)
+> -#define HC_CFG_IDLE_SIO_LVL(x) ((x) << 16)
+> -#define HC_CFG_MAN_START_EN    BIT(3)
+> -#define HC_CFG_MAN_START       BIT(2)
+> -#define HC_CFG_MAN_CS_EN       BIT(1)
+> -#define HC_CFG_MAN_CS_ASSERT   BIT(0)
+> -
+> -#define INT_STS                        0x4
+> -#define INT_STS_EN             0x8
+> -#define INT_SIG_EN             0xc
+> -#define INT_STS_ALL            GENMASK(31, 0)
+> -#define INT_RDY_PIN            BIT(26)
+> -#define INT_RDY_SR             BIT(25)
+> -#define INT_LNR_SUSP           BIT(24)
+> -#define INT_ECC_ERR            BIT(17)
+> -#define INT_CRC_ERR            BIT(16)
+> -#define INT_LWR_DIS            BIT(12)
+> -#define INT_LRD_DIS            BIT(11)
+> -#define INT_SDMA_INT           BIT(10)
+> -#define INT_DMA_FINISH         BIT(9)
+> -#define INT_RX_NOT_FULL                BIT(3)
+> -#define INT_RX_NOT_EMPTY       BIT(2)
+> -#define INT_TX_NOT_FULL                BIT(1)
+> -#define INT_TX_EMPTY           BIT(0)
+> -
+> -#define HC_EN                  0x10
+> -#define HC_EN_BIT              BIT(0)
+> -
+> -#define TXD(x)                 (0x14 + ((x) * 4))
+> -#define RXD                    0x24
+> -
+> -#define SS_CTRL(s)             (0x30 + ((s) * 4))
+> -#define LRD_CFG                        0x44
+> -#define LWR_CFG                        0x80
+> -#define RWW_CFG                        0x70
+> -#define OP_READ                        BIT(23)
+> -#define OP_DUMMY_CYC(x)                ((x) << 17)
+> -#define OP_ADDR_BYTES(x)       ((x) << 14)
+> -#define OP_CMD_BYTES(x)                (((x) - 1) << 13)
+> -#define OP_OCTA_CRC_EN         BIT(12)
+> -#define OP_DQS_EN              BIT(11)
+> -#define OP_ENHC_EN             BIT(10)
+> -#define OP_PREAMBLE_EN         BIT(9)
+> -#define OP_DATA_DDR            BIT(8)
+> -#define OP_DATA_BUSW(x)                ((x) << 6)
+> -#define OP_ADDR_DDR            BIT(5)
+> -#define OP_ADDR_BUSW(x)                ((x) << 3)
+> -#define OP_CMD_DDR             BIT(2)
+> -#define OP_CMD_BUSW(x)         (x)
+> -#define OP_BUSW_1              0
+> -#define OP_BUSW_2              1
+> -#define OP_BUSW_4              2
+> -#define OP_BUSW_8              3
+> -
+> -#define OCTA_CRC               0x38
+> -#define OCTA_CRC_IN_EN(s)      BIT(3 + ((s) * 16))
+> -#define OCTA_CRC_CHUNK(s, x)   ((fls((x) / 32)) << (1 + ((s) * 16)))
+> -#define OCTA_CRC_OUT_EN(s)     BIT(0 + ((s) * 16))
+> -
+> -#define ONFI_DIN_CNT(s)                (0x3c + (s))
+> -
+> -#define LRD_CTRL               0x48
+> -#define RWW_CTRL               0x74
+> -#define LWR_CTRL               0x84
+> -#define LMODE_EN               BIT(31)
+> -#define LMODE_SLV_ACT(x)       ((x) << 21)
+> -#define LMODE_CMD1(x)          ((x) << 8)
+> -#define LMODE_CMD0(x)          (x)
+> -
+> -#define LRD_ADDR               0x4c
+> -#define LWR_ADDR               0x88
+> -#define LRD_RANGE              0x50
+> -#define LWR_RANGE              0x8c
+> -
+> -#define AXI_SLV_ADDR           0x54
+> -
+> -#define DMAC_RD_CFG            0x58
+> -#define DMAC_WR_CFG            0x94
+> -#define DMAC_CFG_PERIPH_EN     BIT(31)
+> -#define DMAC_CFG_ALLFLUSH_EN   BIT(30)
+> -#define DMAC_CFG_LASTFLUSH_EN  BIT(29)
+> -#define DMAC_CFG_QE(x)         (((x) + 1) << 16)
+> -#define DMAC_CFG_BURST_LEN(x)  (((x) + 1) << 12)
+> -#define DMAC_CFG_BURST_SZ(x)   ((x) << 8)
+> -#define DMAC_CFG_DIR_READ      BIT(1)
+> -#define DMAC_CFG_START         BIT(0)
+> -
+> -#define DMAC_RD_CNT            0x5c
+> -#define DMAC_WR_CNT            0x98
+> -
+> -#define SDMA_ADDR              0x60
+> -
+> -#define DMAM_CFG               0x64
+> -#define DMAM_CFG_START         BIT(31)
+> -#define DMAM_CFG_CONT          BIT(30)
+> -#define DMAM_CFG_SDMA_GAP(x)   (fls((x) / 8192) << 2)
+> -#define DMAM_CFG_DIR_READ      BIT(1)
+> -#define DMAM_CFG_EN            BIT(0)
+> -
+> -#define DMAM_CNT               0x68
+> -
+> -#define LNR_TIMER_TH           0x6c
+> -
+> -#define RDM_CFG0               0x78
+> -#define RDM_CFG0_POLY(x)       (x)
+> -
+> -#define RDM_CFG1               0x7c
+> -#define RDM_CFG1_RDM_EN                BIT(31)
+> -#define RDM_CFG1_SEED(x)       (x)
+> -
+> -#define LWR_SUSP_CTRL          0x90
+> -#define LWR_SUSP_CTRL_EN       BIT(31)
+> -
+> -#define DMAS_CTRL              0x9c
+> -#define DMAS_CTRL_EN           BIT(31)
+> -#define DMAS_CTRL_DIR_READ     BIT(30)
+> -
+> -#define DATA_STROB             0xa0
+> -#define DATA_STROB_EDO_EN      BIT(2)
+> -#define DATA_STROB_INV_POL     BIT(1)
+> -#define DATA_STROB_DELAY_2CYC  BIT(0)
+> -
+> -#define IDLY_CODE(x)           (0xa4 + ((x) * 4))
+> -#define IDLY_CODE_VAL(x, v)    ((v) << (((x) % 4) * 8))
+> -
+> -#define GPIO                   0xc4
+> -#define GPIO_PT(x)             BIT(3 + ((x) * 16))
+> -#define GPIO_RESET(x)          BIT(2 + ((x) * 16))
+> -#define GPIO_HOLDB(x)          BIT(1 + ((x) * 16))
+> -#define GPIO_WPB(x)            BIT((x) * 16)
+> -
+> -#define HC_VER                 0xd0
+> -
+> -#define HW_TEST(x)             (0xe0 + ((x) * 4))
+> -
+> -#define MXIC_NFC_MAX_CLK_HZ    50000000
+> -#define IRQ_TIMEOUT            1000
+> -
+> -struct mxic_nand_ctrl {
+> -       struct clk *send_clk;
+> -       struct clk *send_dly_clk;
+> -       void __iomem *regs;
+> -       struct nand_chip nand_chip;
+> -};
+> -
+> -/*
+> - * struct mxic_nfc_command_format - Defines NAND flash command format
+> - * @start_cmd:         First cycle command (Start command)
+> - * @end_cmd:           Second cycle command (Last command)
+> - * @addr_len:          Number of address cycles required to send the add=
+ress
+> - * @read:              Direction of command
+> - */
+> -
+> -struct mxic_nfc_command_format {
+> -       int start_cmd;
+> -       int end_cmd;
+> -       u8 addr_len;
+> -       bool read;
+> -};
+> -
+> -/*  The NAND flash operations command format */
+> -static const struct mxic_nfc_command_format mxic_nand_commands[] =3D {
+> -       {NAND_CMD_READ0,        NAND_CMD_READSTART, 5, 1 },
+> -       {NAND_CMD_RNDOUT,       NAND_CMD_RNDOUTSTART, 2, 1 },
+> -       {NAND_CMD_READID,       NAND_CMD_NONE, 1, 1 },
+> -       {NAND_CMD_STATUS,       NAND_CMD_NONE, 0, 1 },
+> -       {NAND_CMD_SEQIN,        NAND_CMD_NONE, 5, 0 },
+> -       {NAND_CMD_PAGEPROG,     NAND_CMD_NONE, 0, 0 },
+> -       {NAND_CMD_CACHEDPROG,   NAND_CMD_NONE, 0, 0 },
+> -       {NAND_CMD_RNDIN,        NAND_CMD_NONE, 2, 0 },
+> -       {NAND_CMD_ERASE1,       NAND_CMD_NONE, 3, 0 },
+> -       {NAND_CMD_ERASE2,       NAND_CMD_NONE, 0, 0 },
+> -       {NAND_CMD_RESET,        NAND_CMD_NONE, 0, 0 },
+> -       {NAND_CMD_PARAM,        NAND_CMD_NONE, 1, 1 },
+> -       {NAND_CMD_GET_FEATURES, NAND_CMD_NONE, 1, 1 },
+> -       {NAND_CMD_SET_FEATURES, NAND_CMD_NONE, 1, 0 },
+> -       {NAND_CMD_NONE,         NAND_CMD_NONE, 0, 0 },
+> -};
+> -
+> -static int mxic_nfc_clk_enable(struct mxic_nand_ctrl *nfc)
+> -{
+> -       int ret;
+> -
+> -       ret =3D clk_prepare_enable(nfc->send_clk);
+> -       if (ret)
+> -               return ret;
+> -
+> -       ret =3D clk_prepare_enable(nfc->send_dly_clk);
+> -       if (ret)
+> -               goto err_send_dly_clk;
+> -
+> -       return ret;
+> -
+> -err_send_dly_clk:
+> -       clk_disable_unprepare(nfc->send_clk);
+> -
+> -       return ret;
+> -}
+> -
+> -static void mxic_nfc_clk_disable(struct mxic_nand_ctrl *nfc)
+> -{
+> -       clk_disable_unprepare(nfc->send_clk);
+> -       clk_disable_unprepare(nfc->send_dly_clk);
+> -}
+> -
+> -static void mxic_nfc_set_input_delay(struct mxic_nand_ctrl *nfc, u8 idly=
+_code)
+> -{
+> -       writel(IDLY_CODE_VAL(0, idly_code) |
+> -              IDLY_CODE_VAL(1, idly_code) |
+> -              IDLY_CODE_VAL(2, idly_code) |
+> -              IDLY_CODE_VAL(3, idly_code),
+> -              nfc->regs + IDLY_CODE(0));
+> -       writel(IDLY_CODE_VAL(4, idly_code) |
+> -              IDLY_CODE_VAL(5, idly_code) |
+> -              IDLY_CODE_VAL(6, idly_code) |
+> -              IDLY_CODE_VAL(7, idly_code),
+> -              nfc->regs + IDLY_CODE(1));
+> -}
+> -
+> -static int mxic_nfc_clk_setup(struct mxic_nand_ctrl *nfc, unsigned long =
+freq)
+> -{
+> -       int ret;
+> -
+> -       ret =3D clk_set_rate(nfc->send_clk, freq);
+> -       if (ret)
+> -               return ret;
+> -
+> -       ret =3D clk_set_rate(nfc->send_dly_clk, freq);
+> -       if (ret)
+> -               return ret;
+> -
+> -       /*
+> -        * A constant delay range from 0x0 ~ 0x1F for input delay,
+> -        * the unit is 78 ps, the max input delay is 2.418 ns.
+> -        */
+> -       mxic_nfc_set_input_delay(nfc, 0xf);
+> -
+> -       return 0;
+> -}
+> -
+> -static int mxic_nfc_set_freq(struct mxic_nand_ctrl *nfc, unsigned long f=
+req)
+> -{
+> -       int ret;
+> -
+> -       if (freq > MXIC_NFC_MAX_CLK_HZ)
+> -               freq =3D MXIC_NFC_MAX_CLK_HZ;
+> -
+> -       mxic_nfc_clk_disable(nfc);
+> -       ret =3D mxic_nfc_clk_setup(nfc, freq);
+> -       if (ret)
+> -               return ret;
+> -
+> -       ret =3D mxic_nfc_clk_enable(nfc);
+> -       if (ret)
+> -               return ret;
+> -
+> -       return 0;
+> -}
+> -
+> -static void mxic_nfc_hw_init(struct mxic_nand_ctrl *nfc)
+> -{
+> -       writel(HC_CFG_NIO(8) | HC_CFG_TYPE(1, HC_CFG_TYPE_RAW_NAND) |
+> -              HC_CFG_SLV_ACT(0) | HC_CFG_MAN_CS_EN |
+> -              HC_CFG_IDLE_SIO_LVL(1), nfc->regs + HC_CFG);
+> -       writel(INT_STS_ALL, nfc->regs + INT_STS_EN);
+> -       writel(INT_RDY_PIN, nfc->regs + INT_SIG_EN);
+> -       writel(0x0, nfc->regs + ONFI_DIN_CNT(0));
+> -       writel(0, nfc->regs + LRD_CFG);
+> -       writel(0, nfc->regs + LRD_CTRL);
+> -       writel(0x0, nfc->regs + HC_EN);
+> -}
+> -
+> -static void mxic_nfc_cs_enable(struct mxic_nand_ctrl *nfc)
+> -{
+> -       writel(readl(nfc->regs + HC_CFG) | HC_CFG_MAN_CS_EN,
+> -              nfc->regs + HC_CFG);
+> -       writel(HC_CFG_MAN_CS_ASSERT | readl(nfc->regs + HC_CFG),
+> -              nfc->regs + HC_CFG);
+> -}
+> -
+> -static void mxic_nfc_cs_disable(struct mxic_nand_ctrl *nfc)
+> -{
+> -       writel(~HC_CFG_MAN_CS_ASSERT & readl(nfc->regs + HC_CFG),
+> -              nfc->regs + HC_CFG);
+> -}
+> -
+> -static int mxic_nfc_data_xfer(struct mxic_nand_ctrl *nfc, const void *tx=
+buf,
+> -                             void *rxbuf, unsigned int len)
+> -{
+> -       unsigned int pos =3D 0;
+> -
+> -       while (pos < len) {
+> -               unsigned int nbytes =3D len - pos;
+> -               u32 data =3D 0xffffffff;
+> -               u32 sts;
+> -               int ret;
+> -
+> -               if (nbytes > 4)
+> -                       nbytes =3D 4;
+> -
+> -               if (txbuf)
+> -                       memcpy(&data, txbuf + pos, nbytes);
+> -
+> -               ret =3D readl_poll_timeout(nfc->regs + INT_STS, sts,
+> -                                        sts & INT_TX_EMPTY, 1000000);
+> -               if (ret)
+> -                       return ret;
+> -
+> -               writel(data, nfc->regs + TXD(nbytes % 4));
+> -
+> -               ret =3D readl_poll_timeout(nfc->regs + INT_STS, sts,
+> -                                        sts & INT_TX_EMPTY, 1000000);
+> -               if (ret)
+> -                       return ret;
+> -
+> -               ret =3D readl_poll_timeout(nfc->regs + INT_STS, sts,
+> -                                        sts & INT_RX_NOT_EMPTY, 1000000)=
+;
+> -               if (ret)
+> -                       return ret;
+> -
+> -               data =3D readl(nfc->regs + RXD);
+> -               if (rxbuf) {
+> -                       data >>=3D (8 * (4 - nbytes));
+> -                       memcpy(rxbuf + pos, &data, nbytes);
+> -               }
+> -
+> -               WARN_ON(readl(nfc->regs + INT_STS) & INT_RX_NOT_EMPTY);
+> -
+> -               pos +=3D nbytes;
+> -       }
+> -
+> -       return 0;
+> -}
+> -
+> -static uint8_t mxic_nfc_read_byte(struct mtd_info *mtd)
+> -{
+> -       struct nand_chip *chip =3D mtd_to_nand(mtd);
+> -       struct mxic_nand_ctrl *nfc =3D nand_get_controller_data(chip);
+> -       u8 data;
+> -
+> -       writel(0x0, nfc->regs + ONFI_DIN_CNT(0));
+> -       writel(OP_DATA_BUSW(OP_BUSW_8) | OP_DUMMY_CYC(0x3F) |
+> -              OP_READ, nfc->regs + SS_CTRL(0));
+> -
+> -       mxic_nfc_data_xfer(nfc, NULL, &data, 1);
+> -
+> -       return data;
+> -}
+> -
+> -static void mxic_nfc_read_buf(struct mtd_info *mtd, uint8_t *rxbuf, int =
+rlen)
+> -{
+> -       struct nand_chip *chip =3D mtd_to_nand(mtd);
+> -       struct mxic_nand_ctrl *nfc =3D nand_get_controller_data(chip);
+> -
+> -       writel(0x0, nfc->regs + ONFI_DIN_CNT(0));
+> -       writel(OP_DATA_BUSW(OP_BUSW_8) | OP_DUMMY_CYC(0x3F) |
+> -                           OP_READ, nfc->regs + SS_CTRL(0));
+> -
+> -       mxic_nfc_data_xfer(nfc, NULL, rxbuf, rlen);
+> -}
+> -
+> -static void mxic_nfc_write_buf(struct mtd_info *mtd, const uint8_t *txbu=
+f,
+> -                              int wlen)
+> -{
+> -       struct nand_chip *chip =3D mtd_to_nand(mtd);
+> -       struct mxic_nand_ctrl *nfc =3D nand_get_controller_data(chip);
+> -
+> -       writel(wlen, nfc->regs + ONFI_DIN_CNT(0));
+> -       writel(OP_DATA_BUSW(OP_BUSW_8) | OP_DUMMY_CYC(0x3F),
+> -              nfc->regs + SS_CTRL(0));
+> -
+> -       mxic_nfc_data_xfer(nfc, txbuf, NULL, wlen);
+> -}
+> -
+> -static void mxic_nfc_cmd_function(struct mtd_info *mtd, unsigned int com=
+mand,
+> -                                 int column, int page_addr)
+> -{
+> -       struct nand_chip *chip =3D mtd_to_nand(mtd);
+> -       struct mxic_nand_ctrl *nfc =3D nand_get_controller_data(chip);
+> -       const struct mxic_nfc_command_format *cmd =3D NULL;
+> -       u32 sts;
+> -       u8 index, addr[5];
+> -
+> -       /* Emulate NAND_CMD_READOOB */
+> -       if (command =3D=3D NAND_CMD_READOOB) {
+> -               column +=3D mtd->writesize;
+> -               command =3D NAND_CMD_READ0;
+> -       }
+> -
+> -       /* Get the command format */
+> -       for (index =3D 0; index < ARRAY_SIZE(mxic_nand_commands); index++=
+)
+> -               if (command =3D=3D mxic_nand_commands[index].start_cmd)
+> -                       break;
+> -
+> -       cmd =3D &mxic_nand_commands[index];
+> -
+> -       if (!(command =3D=3D NAND_CMD_PAGEPROG ||
+> -             command =3D=3D NAND_CMD_CACHEDPROG ||
+> -             command =3D=3D NAND_CMD_ERASE2))
+> -               mxic_nfc_cs_disable(nfc);
+> -
+> -       mxic_nfc_cs_enable(nfc);
+> -
+> -       if (column !=3D -1) {
+> -               addr[0] =3D column;
+> -               addr[1] =3D column >> 8;
+> -
+> -               if (page_addr !=3D -1) {
+> -                       addr[2] =3D page_addr;
+> -                       addr[3] =3D page_addr >> 8;
+> -                       addr[4] =3D page_addr >> 16;
+> -               }
+> -       } else if (page_addr !=3D -1) {
+> -               addr[0] =3D page_addr;
+> -               addr[1] =3D page_addr >> 8;
+> -               addr[2] =3D page_addr >> 16;
+> -       }
+> -
+> -       writel(0, nfc->regs + HC_EN);
+> -       writel(HC_EN_BIT, nfc->regs + HC_EN);
+> -       writel(OP_CMD_BUSW(OP_BUSW_8) |  OP_DUMMY_CYC(0x3F) | OP_CMD_BYTE=
+S(0),
+> -              nfc->regs + SS_CTRL(0));
+> -
+> -       mxic_nfc_data_xfer(nfc, &cmd->start_cmd, NULL, 1);
+> -
+> -       if (cmd->addr_len) {
+> -               writel(OP_ADDR_BUSW(OP_BUSW_8) | OP_DUMMY_CYC(0x3F) |
+> -                      OP_ADDR_BYTES(cmd->addr_len), nfc->regs + SS_CTRL(=
+0));
+> -
+> -               mxic_nfc_data_xfer(nfc, &addr, NULL, cmd->addr_len);
+> -       }
+> -
+> -       if (cmd->end_cmd !=3D NAND_CMD_NONE) {
+> -               writel(0, nfc->regs + HC_EN);
+> -               writel(HC_EN_BIT, nfc->regs + HC_EN);
+> -               writel(OP_CMD_BUSW(OP_BUSW_8) |  OP_DUMMY_CYC(0x3F) |
+> -                      OP_CMD_BYTES(0), nfc->regs + SS_CTRL(0));
+> -
+> -               mxic_nfc_data_xfer(nfc, &cmd->end_cmd, NULL, 1);
+> -       }
+> -
+> -       readl_poll_timeout(nfc->regs + INT_STS, sts, sts & INT_RDY_PIN,
+> -                          1000000);
+> -
+> -       if (command =3D=3D NAND_CMD_PAGEPROG ||
+> -           command =3D=3D NAND_CMD_CACHEDPROG ||
+> -           command =3D=3D NAND_CMD_ERASE2 ||
+> -           command =3D=3D NAND_CMD_RESET) {
+> -               mxic_nfc_cs_disable(nfc);
+> -       }
+> -}
+> -
+> -static int mxic_nfc_setup_data_interface(struct mtd_info *mtd, int chipn=
+r,
+> -                                        const struct nand_data_interface=
+ *conf)
+> -{
+> -       struct nand_chip *chip =3D mtd_to_nand(mtd);
+> -       struct mxic_nand_ctrl *nfc =3D nand_get_controller_data(chip);
+> -       const struct nand_sdr_timings *sdr;
+> -       unsigned long freq;
+> -       int ret;
+> -
+> -       sdr =3D nand_get_sdr_timings(conf);
+> -       if (IS_ERR(sdr))
+> -               return PTR_ERR(sdr);
+> -
+> -       if (chipnr =3D=3D NAND_DATA_IFACE_CHECK_ONLY)
+> -               return 0;
+> -
+> -       freq =3D 1000000000 / (sdr->tRC_min / 1000);
+> -
+> -       ret =3D  mxic_nfc_set_freq(nfc, freq);
+> -       if (ret)
+> -               WARN_ON("Set freq failed\n");
+> -
+> -       if (sdr->tRC_min < 30000)
+> -               writel(DATA_STROB_EDO_EN, nfc->regs + DATA_STROB);
+> -
+> -       return 0;
+> -}
+> -
+> -/* Dummy implementation: we don't support multiple chips */
+> -static void mxic_nfc_select_chip(struct mtd_info *mtd, int chipnr)
+> -{
+> -       switch (chipnr) {
+> -       case -1:
+> -       case 0:
+> -               break;
+> -
+> -       default:
+> -               BUG();
+> -       }
+> -}
+> -
+> -static int mxic_nfc_probe(struct udevice *dev)
+> -{
+> -       struct mxic_nand_ctrl *nfc =3D dev_get_priv(dev);
+> -       struct nand_chip *nand_chip =3D &nfc->nand_chip;
+> -       struct mtd_info *mtd;
+> -       ofnode child;
+> -       int err;
+> -
+> -       nfc->regs =3D dev_read_addr_ptr(dev);
+> -
+> -       nfc->send_clk =3D devm_clk_get(dev, "send");
+> -       if (IS_ERR(nfc->send_clk))
+> -               return PTR_ERR(nfc->send_clk);
+> -
+> -       nfc->send_dly_clk =3D devm_clk_get(dev, "send_dly");
+> -       if (IS_ERR(nfc->send_dly_clk))
+> -               return PTR_ERR(nfc->send_dly_clk);
+> -
+> -       mtd =3D nand_to_mtd(nand_chip);
+> -
+> -       ofnode_for_each_subnode(child, dev_ofnode(dev))
+> -               nand_set_flash_node(nand_chip, child);
+> -
+> -       nand_set_controller_data(nand_chip, nfc);
+> -
+> -       nand_chip->select_chip =3D mxic_nfc_select_chip;
+> -       nand_chip->setup_data_interface =3D mxic_nfc_setup_data_interface=
+;
+> -       nand_chip->cmdfunc =3D mxic_nfc_cmd_function;
+> -       nand_chip->read_byte =3D mxic_nfc_read_byte;
+> -       nand_chip->read_buf =3D mxic_nfc_read_buf;
+> -       nand_chip->write_buf =3D mxic_nfc_write_buf;
+> -
+> -       mxic_nfc_hw_init(nfc);
+> -
+> -       err =3D nand_scan(mtd, 1);
+> -       if (err)
+> -               return err;
+> -
+> -       err =3D nand_register(0, mtd);
+> -       if (err) {
+> -               dev_err(dev, "Failed to register MTD: %d\n", err);
+> -               return err;
+> -       }
+> -
+> -       return 0;
+> -}
+> -
+> -static const struct udevice_id mxic_nfc_of_ids[] =3D {
+> -       { .compatible =3D "mxic,multi-itfc-v009-nand-controller" },
+> -       { /* Sentinel */ }
+> -};
+> -
+> -U_BOOT_DRIVER(mxic_nfc) =3D {
+> -       .name =3D "mxic_nfc",
+> -       .id =3D UCLASS_MTD,
+> -       .of_match =3D mxic_nfc_of_ids,
+> -       .probe =3D mxic_nfc_probe,
+> -       .priv_auto =3D sizeof(struct mxic_nand_ctrl),
+> -};
+> -
+> -void board_nand_init(void)
+> -{
+> -       struct udevice *dev;
+> -       int ret;
+> -
+> -       ret =3D uclass_get_device_by_driver(UCLASS_MTD,
+> -                                         DM_DRIVER_GET(mxic_nfc), &dev);
+> -       if (ret && ret !=3D -ENODEV)
+> -               pr_err("Failed to initialize %s. (error %d)\n", dev->name=
+,
+> -                      ret);
+> -}
+> --
+> 2.43.0
+>
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
