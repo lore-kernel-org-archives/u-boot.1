@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6485C83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:16:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1525CC83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:16:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EBE082AE9;
-	Fri, 11 Jul 2025 17:16:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8612C83018;
+	Fri, 11 Jul 2025 17:16:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rmV+HS5i";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FpuJ+cBY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C063282063; Fri, 11 Jul 2025 17:16:09 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id AC3CE82063; Fri, 11 Jul 2025 17:16:15 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DBD582AE9
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:16:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD45F82FD6
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:16:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-611998766c0so1101180eaf.1
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:16:07 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-735ac221670so1285780a34.0
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:16:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752246966; x=1752851766; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=zMPEJG88qgELFh9g8VvV9J7xSKwNHbNsQRKgZ+Npggs=;
- b=rmV+HS5irdp4Uf+S6/LK9NdYCarGw92yAFPAr9m6WlQxxq6qDEfYPgBa/kgvr8u2YS
- OUigQGNVE/Uciu5CW1Xe7MppIj4BLzDRNTAfRz/9DVPe3f2QDHsVjyTnkJUINjhloY1R
- IUmeRKpYQLLhUkGSG02HX9Ww37JiPcksovrv8=
+ d=konsulko.com; s=google; t=1752246970; x=1752851770; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=l7f/Xm1nYb7usIiIAF7NX3t7vo7liuVM9KvGR8xmv/8=;
+ b=FpuJ+cBYPHIkQ0nVfD6wqqgSgEilbTfZLGtjB1/Ht+koM90muzLWRL5PjmpJ+u6IMb
+ W2Z005dxZyi2P9+i4IzSvgFkUruR0TQK5zOXRFG9GM5TIUTF0Fapwh+HnRFFc0ss3gxq
+ Ofe9+F5X3lIdNCTOCVVOjkYDDHfwWXGZ06IqA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752246966; x=1752851766;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zMPEJG88qgELFh9g8VvV9J7xSKwNHbNsQRKgZ+Npggs=;
- b=nMVxCUGqWRXyRdubXP7bTBDyd69p+EAidzajNW876POvHPXxM592dYxmYH9DTdtMwD
- Po5iypDQQBxNRWMg9L1BYPOY6EalAjU11yWBoRNN+fgSPedHkteZEWkUMDBz7rnOuPQ2
- U/T1yoY/7wMhzCdl5UaJx/s2AA5qBH6Da0m7h8KDKiujhPWFi2HCl63jwhrwSqkNoxsv
- mJ/l/CH2y3itGCiQ74OOzvELeaOSW//B5GVnP7EmvacJR/seKw+H2krzaf9C8q7yBos+
- VnK4HrXcx2mUivmV9RqcPyXbLd5xUmqtNqaIhM/jRKpb3aQovLFOBlKp0LrMQFChhr1f
- pv0A==
-X-Gm-Message-State: AOJu0YxFxQuVU2XzL35Ts7FybFbKG6dVNuULOfNhXS3UC+nqbSGkuKm0
- rnKTbzNOyu7oWW4UBXVHt/tWpxtvAwZ1TTa5LTeW0WwrWeoGAz4FlS8ahTlpjkA5ewGxPUVKGuU
- QbNxsyNw=
-X-Gm-Gg: ASbGncuDcEFXKdtg1jNfByn29I537lumkSk9IhpNGjrw1qz8gQy2WWz9xPOEXQunwzp
- RYX4I2Wdy4TFwVc3m8QeWX5AAIUOHS2qHzN5QxcjR83TABexYbWzqhG7xgAvIj2VTRF5mgYtH7p
- Ksg6mj5dqaanaffwVJlWf46i/V0sk8fHA2tydzd+RCQtpEsnnf2o14Rpom1MJhM1hCuTIMSBXqI
- c5k1XqBvM2p/nt0JCIF+AhWfYqVq3LwMPAFCZQhIrW3kpsGwRCravsHERrtNXs7LqR0j1u7X4Qy
- aCaHIMDGoriGikCC0lCvZ25N+PhfetETf4IvdvLWWUbLparU5SbWp+CGFghSJFesyiOSt3tlVP5
- rj4gKlC9dVhoZx9flbvbbCgY6eakxOR/ynwS53DSN5pC0pNZ83fIrXOgtujENxzSUVeBtig==
-X-Google-Smtp-Source: AGHT+IEnZX+pHFR7VjJjpTUIEMaQ9scpAtcQWOKlk5RW1LK15WCO/kemiIBPkIBBwKO9PFMBJKp/Sw==
-X-Received: by 2002:a05:6820:984:b0:611:a799:cb65 with SMTP id
- 006d021491bc7-613e5eee3e5mr2406505eaf.2.1752246965983; 
- Fri, 11 Jul 2025 08:16:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752246970; x=1752851770;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l7f/Xm1nYb7usIiIAF7NX3t7vo7liuVM9KvGR8xmv/8=;
+ b=P0hUk8PfZB0KnoOPaQdrURDZnQEtpy5LW0JEvQ60djX3apmND7TjRMIrcpm8CuTSkX
+ CPUlK7nKiRuJSr326DaO339vRvNn7NpAbWWcLX/CUO2j6W4JptfEemqKFzpQGxhce8P+
+ k5JFua0FrTj9fkFu0KgDd/0ZsOa01BWlEt3C4gt8Hy6BGPjV/rZA1kXKVaX/cY/22noS
+ PX5lVMJiLnnuxpXQ7vn4rcCcHiQMh53Jpd6v26Vr0Okf1aIlyKvmNGae3SI/yD+2CIeP
+ Hpzpn1I/RO1KpbiBVS/epedatIlxZ5nm1VPJzEqIVoZsTgu6kazNhyi0V88rvGudxyyf
+ LOYQ==
+X-Gm-Message-State: AOJu0YzLzmO7fE06wot0iltnZnQuGHMIr9JwJVO6XEQWCZX7otbKCbEK
+ eCt+FLq5wev2RTPuCQYoquowNhD9KCbbKV+V7cR4kHyYnd1ppNdfishmQ8UFgzdZCGCAwl5WFOU
+ OhJgs9AE=
+X-Gm-Gg: ASbGnctoJo16Tm4Qzcr+hrhIH1IdUfRCVEQRDIfFVV58UOcePZDi6a2oPi2LeM2eEn9
+ bGWXTMign46WIydomXDd/pJNaIxlGue1RVeV2rwuKAV6ABUnLHlbU36ak9/c3Y64y0jdJrRxs+S
+ tJTK8ktEGDFu++B6rpPgnWSdxsTpk3x4APZJ0MJZH5aeSnb3qhglxjN0872hQg/wNThZEJirJpH
+ pMxfykBFvnVNR1ytkECcAclMqS4u1+tHwz8WbqJdcBZuZLHNbEFFw0n/TRGeGcaLzmmw8lQyxzy
+ X41/8YyJNZnRmpdeF2SLLiECKKsO1+8ok5o9aBiwjdAB1w3nbJ40F+vYFZ2rcAdYPGIy8fEgwML
+ mJoeyz2XMKcZ5LzSE/82TwG+h8EWxlRgmNdoYfrRll3NeUW8ejftqrtxi1EA=
+X-Google-Smtp-Source: AGHT+IE9vUN0yg4pkFidUwzjD4fmgAqL77UA1Bg87VHaKRh93JqihJIi5v30AVl36WAj8hf7y1DS2Q==
+X-Received: by 2002:a05:6830:34a1:b0:73b:30be:66fc with SMTP id
+ 46e09a7af769-73cfa2d9cfamr2682200a34.12.1752246968617; 
+ Fri, 11 Jul 2025 08:16:08 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-613d9f00ceesm502575eaf.19.2025.07.11.08.16.05
- for <u-boot@lists.denx.de>
+ 46e09a7af769-73cf10648ccsm586446a34.13.2025.07.11.08.16.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 08:16:05 -0700 (PDT)
+ Fri, 11 Jul 2025 08:16:08 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] mtd: Tighten some mtd driver dependencies
-Date: Fri, 11 Jul 2025 09:16:04 -0600
-Message-ID: <20250711151604.2224243-1-trini@konsulko.com>
+Cc: Peng Fan <peng.fan@nxp.com>,
+	Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH] mmc: Tighten some mmc driver dependencies
+Date: Fri, 11 Jul 2025 09:16:07 -0600
+Message-ID: <20250711151607.2224269-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,122 +93,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A large number of mtd drivers cannot build without access to some
+A large number of mmc drivers cannot build without access to some
 platform specific header files. Express those requirements in Kconfig as
 well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/mtd/Kconfig          |  1 +
- drivers/mtd/nand/raw/Kconfig | 14 +++++++++++---
- 2 files changed, 12 insertions(+), 3 deletions(-)
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+---
+ drivers/mmc/Kconfig | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-index f561b07e40b9..5d12dd3c7323 100644
---- a/drivers/mtd/Kconfig
-+++ b/drivers/mtd/Kconfig
-@@ -222,6 +222,7 @@ config SYS_MAX_FLASH_SECT
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 123bd3fa3148..4c46df0ffb87 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -284,7 +284,7 @@ config MMC_DW_K3
  
- config SAMSUNG_ONENAND
- 	bool "Samsung OneNAND driver support"
-+	depends on S5P
- 
- config USE_SYS_MAX_FLASH_BANKS
- 	bool "Enable Max number of Flash memory banks"
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 492b577709d0..aa4bb2a0595c 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -49,6 +49,7 @@ config SYS_NAND_NO_SUBPAGE_WRITE
- 
- config DM_NAND_ATMEL
- 	bool "Support Atmel NAND controller with DM support"
-+	depends on ARCH_AT91
- 	select SYS_NAND_SELF_INIT
- 	imply SYS_NAND_USE_FLASH_BBT
+ config MMC_DW_ROCKCHIP
+ 	bool "Rockchip SD/MMC controller support"
+-	depends on OF_CONTROL
++	depends on OF_CONTROL && ARCH_ROCKCHIP
+ 	depends on MMC_DW
  	help
-@@ -57,6 +58,7 @@ config DM_NAND_ATMEL
+ 	  This enables support for the Rockchip SD/MMM controller, which is
+@@ -382,6 +382,7 @@ config MVEBU_MMC
  
- config NAND_ATMEL
- 	bool "Support Atmel NAND controller"
-+	depends on ARCH_AT91
- 	select SYS_NAND_SELF_INIT
- 	imply SYS_NAND_USE_FLASH_BBT
+ config MMC_OMAP_HS
+ 	bool "TI OMAP High Speed Multimedia Card Interface support"
++	depends on ARCH_KEYSTONE || ARCH_OMAP2PLUS
+ 	select DM_REGULATOR_PBIAS if DM_REGULATOR
  	help
-@@ -114,6 +116,7 @@ endif
- config NAND_BRCMNAND
- 	bool "Support Broadcom NAND controller"
- 	depends on OF_CONTROL && DM && DM_MTD
-+	depends on ARCH_BCMBCA || ARCH_BMIPS || TARGET_BCMNS || TARGET_BCMNS3
- 	select SYS_NAND_SELF_INIT
+ 	  This selects the TI OMAP High Speed Multimedia card Interface.
+@@ -588,7 +589,7 @@ config MMC_SDHCI_BCM2835
+ 
+ config MMC_SDHCI_BCMSTB
+ 	tristate "SDHCI support for the BCMSTB SD/MMC Controller"
+-	depends on MMC_SDHCI
++	depends on MMC_SDHCI && (ARCH_BCMSTB || ARCH_BCM283X)
  	help
- 	  Enable the driver for NAND flash on platforms using a Broadcom NAND
-@@ -147,6 +150,7 @@ config NAND_BRCMNAND_IPROC
+ 	  This selects the Broadcom set-top box SD/MMC controller.
  
- config NAND_DAVINCI
- 	bool "Support TI Davinci NAND controller"
-+	depends on ARCH_DAVINCI || ARCH_KEYSTONE
- 	select SYS_NAND_SELF_INIT if TARGET_DA850EVM
+@@ -653,7 +654,7 @@ config MMC_SDHCI_F_SDH30
+ 
+ config MMC_SDHCI_MSM
+ 	bool "Qualcomm SDHCI controller"
+-	depends on MMC_SDHCI
++	depends on MMC_SDHCI && ARCH_SNAPDRAGON
  	help
- 	  Enable this driver for NAND flash controllers available in TI Davinci
-@@ -191,7 +195,7 @@ config SPL_NAND_LOAD
+ 	  Enables support for SDHCI 2.0 controller present on some Qualcomm
+           Snapdragon devices. This device is compatible with eMMC v4.5 and
+@@ -699,7 +700,7 @@ config MMC_SDHCI_ROCKCHIP
  
- config NAND_CADENCE
- 	bool "Support Cadence NAND controller as a DT device"
--	depends on OF_CONTROL && DM_MTD
-+	depends on OF_CONTROL && DM_MTD && ARCH_SOCFPGA
- 	select SYS_NAND_SELF_INIT
- 	select SPL_SYS_NAND_SELF_INIT
- 	select SPL_NAND_BASE
-@@ -233,6 +237,7 @@ config NAND_FSL_ELBC_DT
+ config MMC_SDHCI_S5P
+ 	bool "SDHCI support on Samsung S5P SoC"
+-	depends on MMC_SDHCI
++	depends on MMC_SDHCI && S5P
+ 	help
+ 	  This selects the Secure Digital Host Controller Interface (SDHCI)
+ 	  on Samsung S5P SoCs.
+@@ -721,7 +722,7 @@ config MMC_SDHCI_SNPS
  
- config NAND_FSL_IFC
- 	bool "Support Freescale Integrated Flash Controller NAND driver"
+ config MMC_SDHCI_STI
+ 	bool "SDHCI support for STMicroelectronics SoC"
+-	depends on MMC_SDHCI && OF_CONTROL
++	depends on MMC_SDHCI && OF_CONTROL && ARCH_STI
+ 	help
+ 	  This selects the Secure Digital Host Controller Interface (SDHCI)
+ 	  on STMicroelectronics STiH410 SoC.
+@@ -775,6 +776,7 @@ config TEGRA124_MMC_DISABLE_EXT_LOOPBACK
+ config MMC_SDHCI_ZYNQ
+ 	bool "Arasan SDHCI controller support"
+ 	depends on OF_CONTROL
++	depends on ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2 || ARCH_ZYNQ || ARCH_ZYNQMP
+ 	depends on MMC_SDHCI
+ 	help
+ 	  Support for Arasan SDHCI host controller on Zynq/ZynqMP ARM SoCs platform
+@@ -833,7 +835,7 @@ config GENERIC_ATMEL_MCI
+ 
+ config STM32_SDMMC2
+ 	bool "STMicroelectronics STM32H7 SD/MMC Host Controller support"
+-	depends on OF_CONTROL
++	depends on OF_CONTROL && (ARCH_STM32 || ARCH_STM32MP)
+ 	help
+ 	  This selects support for the SD/MMC controller on STM32H7 SoCs.
+ 	  If you have a board based on such a SoC and with a SD/MMC slot,
+@@ -867,6 +869,7 @@ config FSL_SDHC_V2_3
+ 
+ config FSL_ESDHC
+ 	bool "Freescale/NXP eSDHC controller support"
 +	depends on ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3 || PPC
- 	select TPL_SYS_NAND_SELF_INIT if TPL_NAND_SUPPORT
- 	select TPL_NAND_INIT if TPL && !TPL_FRAMEWORK
- 	select SPL_SYS_NAND_SELF_INIT
-@@ -256,13 +261,14 @@ config NAND_KMETER1
- 
- config NAND_LPC32XX_MLC
- 	bool "Support LPC32XX_MLC controller"
-+	depends on ARCH_LPC32XX
- 	select SYS_NAND_SELF_INIT
+ 	select FSL_SDHC_V2_3 if ARCH_P1010 || ARCH_BSC9131 || ARCH_BSC9132 \
+ 		|| ARCH_C29X
  	help
- 	  Enable the LPC32XX MLC NAND controller.
+@@ -919,6 +922,7 @@ config ESDHCI_QUIRK_BROKEN_TIMEOUT_VALUE
  
- config NAND_OMAP_GPMC
- 	bool "Support OMAP GPMC NAND controller"
--	depends on ARCH_OMAP2PLUS || ARCH_KEYSTONE || ARCH_K3
-+	depends on ARCH_OMAP2PLUS || ARCH_K3
- 	select SYS_NAND_SELF_INIT if ARCH_K3
- 	select SPL_NAND_INIT if ARCH_K3
- 	select SPL_SYS_NAND_SELF_INIT if ARCH_K3
-@@ -430,6 +436,7 @@ endif
- 
- config NAND_PXA3XX
- 	bool "Support for NAND on PXA3xx and Armada 370/XP/38x"
-+	depends on ARCH_MVEBU
- 	select SYS_NAND_SELF_INIT
- 	select DM_MTD
- 	select REGMAP
-@@ -489,7 +496,7 @@ endif
- config NAND_ARASAN
- 	bool "Configure Arasan Nand"
- 	select SYS_NAND_SELF_INIT
--	depends on DM_MTD
-+	depends on DM_MTD && ARCH_ZYNQMP
- 	imply CMD_NAND
+ config FSL_ESDHC_IMX
+ 	bool "Freescale/NXP i.MX eSDHC controller support"
++	depends on MACH_IMX
  	help
- 	  This enables Nand driver support for Arasan nand flash
-@@ -552,6 +559,7 @@ endif
- 
- config NAND_ZYNQ
- 	bool "Support for Zynq Nand controller"
-+	depends on ARCH_ZYNQ
- 	select SPL_SYS_NAND_SELF_INIT
- 	select SYS_NAND_SELF_INIT
- 	select DM_MTD
+ 	  This selects support for the i.MX eSDHC (Enhanced Secure Digital Host
+ 	  Controller) found on numerous Freescale/NXP SoCs.
 -- 
 2.43.0
 
