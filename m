@@ -4,77 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E22F0C83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:21:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E05C83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:45:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ED2B8312E;
-	Fri, 11 Jul 2025 17:20:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8F47826AA;
+	Fri, 11 Jul 2025 17:45:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r+8vNbis";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nxQy8ivc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25330831AC; Fri, 11 Jul 2025 17:20:34 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 613F48277D; Fri, 11 Jul 2025 17:45:37 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B81E38312E
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:20:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0283282063
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:45:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-40ba3d91c35so1242740b6e.3
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:20:31 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-40669fd81b5so1384318b6e.1
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:45:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752247230; x=1752852030; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=sO18mTR6HHy81sgaxXjNpwzQHv1umr5GibD3yWEKe0c=;
- b=r+8vNbislT/Bb/lzNwknfG/wq6l+JwAD/9W0/WiLWguo5gfBR98YdRA5qpT0Xd9g9X
- ncb6xYYWOPvjm2cPyCPdFQhHiLw0XubgSQIWbHJiUMAjSYy9WUYhkkLA0V27NLIqeOV3
- ArrO1V8JJHUT5h0tt9DB26D1Awgh4JD3mkn9I=
+ d=konsulko.com; s=google; t=1752248734; x=1752853534; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DA67vjnYR5H/s89re/v807JiAF07+DOxclZdf/SzjZA=;
+ b=nxQy8ivcfo+nSEW0rUg/svEfXd0hgzcwzyCP2VB9mMMpHXKA2mv90gZTS/w6WvrJVX
+ vhYrZ30kXkQTKdGB0GQnjhSaSjs98LcL+yiqXMgAt2nyYVNTucA75uz3RjSI8GNEPNRF
+ RNxDEvCBGZ1izo0bjCEmpcfsbQ7HAh9d+Xp+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752247230; x=1752852030;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sO18mTR6HHy81sgaxXjNpwzQHv1umr5GibD3yWEKe0c=;
- b=Epc+MFbhxMB+ZEc6fO6mRa0S+Eg0Liv0CCOpWZj29mzM6FKRUdaJ0B1jMc/MWFouI+
- cvHa1mUKH/WikK3Y5o0t6RtI4JDjTKASbZkcg3JkmUihW54j0GxgzHRdwJ1cxK4WGQr3
- 4P6CuJ5RMgt/GjwcZX1JyAO330+i54Fv5/tbwqaUZBy+WvMv73kRZUCNH9P3+JfsRxKT
- e3kRf7oGNBG0IKi01yLWrgWcyyYEEnHEuCGvuUMTcMXUaYd9y3WRS7VtmHdKrp2NYg40
- mfp7H49/futAq7Rew2B3z/+l700PjllVC5mYkl9CnEPKvf7phAxUSscVBJ6sf3xG9yFl
- s5pQ==
-X-Gm-Message-State: AOJu0YwB2WVwoKCKphi9yr3ODaZ4kjiSkM6frMmNdQ/KVNeiy3RwB983
- LVjzqRM7OSgy+eKiuctQnJY+SkSlllT9tDtzPUe1bKEqa76UeOPFbqonv49ak2J60l+e6KdQNd7
- RlNXpT2g=
-X-Gm-Gg: ASbGnct/hWNWgTNl+iR/7Vjoj/wX5Ce7+DhWSRrME26JqoVCTqlbYq1T9rFfMuF/Q0k
- aOjrJap225XNmqIJGSxRPvEPtHFMsa9lomADZYwcfY/bFKV+lr7Nw6odOziq6Th0vsYjt38QSaY
- JGtgw3TW89pO5BnBSJbVg2WuTKQ/3+rFPw2fcivKG5o06y9Cdp/F2QDci0xw/sHA0a8WcfQsDxZ
- CTcf4d8etpivPdofzlJKNLUDptohTmnuo99ZgcFbvZKzR+ZzVEmvekoOpJMjaoZmrwV/jA5JwSr
- M/E3SpNdWbsSRPmb0MYXwW4bMkOaZphYEyAzAZfQ99JzGGLFBZTWONNIan07GTQzVGQIYnor2V7
- YLQE1T03D7hB1Gxvx8pKm7D1sEr0YmGm/vFvfcA5zqHaubkfc1fzyzcg6Dyc=
-X-Google-Smtp-Source: AGHT+IHtNEkKKq1+wIxUZ8yPhbR5+PbHUt3sLuvyqBDQjmKUvxW7njqB45cYLqgQtIJh9jmcjxDLfw==
-X-Received: by 2002:a05:6808:6b47:b0:40b:3bdd:ba22 with SMTP id
- 5614622812f47-415393d4f5cmr2299875b6e.24.1752247229991; 
- Fri, 11 Jul 2025 08:20:29 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1752248734; x=1752853534;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DA67vjnYR5H/s89re/v807JiAF07+DOxclZdf/SzjZA=;
+ b=Vzvv0GrDBH55SjSnE7Eh8zkmTLjmtGvxxSGICIpvYFiAWQTij7CzrOFFPY2mNWzR/v
+ kvmJtRvyxT4/hS4F7eqpVuBU4aCPNGunBOle6gGGxowug/1+5VFh6sQ92vVdiUE7NPnE
+ n/ZY1NgkFumSGA2nGm7PJxZTDv2HV7JdGQC3nk6al2P73c6u7927ppq3jT7z6eKYz7Zm
+ F44/xb8zU85fz94jQH2GMNnQrST55eVT3F45FL3izw9d6Y4td8p6maNnIFJ0oCo4CbV0
+ Bf+uCDQOlfPylPOhZbUN/UFGcyPaQMK9Z7/9zGqRu9MF/ltborw5fb6yuDb5DLG3kRke
+ Y30g==
+X-Gm-Message-State: AOJu0YxHHoXMSdmmBzj1Od1E2CpRHR1W7rz137nwLrVNjtYBAr6Uow/w
+ 1GkrZ4Xcs2zibEt2GB70nyUvRoGI3KIbP2fbTfyMZxettJBZha9tR/W8Wiuu8UOxvys=
+X-Gm-Gg: ASbGncso7nM/MMwcOTQfaBPatb87JdmR5tjqPR4tYcD4RuapJH+PXdXrnxqJV443Sxw
+ fTIskgANIHnTA07fRoC0dJHjtIXQx54L2hwHgM1N6Pc8ZGFK2NStK08Zm1CeUdpQ6OO33VUuyEb
+ FmeeQOqU7vm1gv9UUrKjc4aaiTifvhKClr+yWOLM+PWrL1XSQQfomNP+RNS/ZQQn5MiMXRZ8UGl
+ o1Y94JJPeiyu106Geq8AzoUDVV4tbvC2ygC8BjdzD8CTxgHE19HiR+JJ5xxJi81m5FTN4daiueS
+ JJtsZL1wajO/8Ak0r1WTXRtNoOfxyQHOEuGUJCF17CjZWYkPbd3WEKzPqafibvK4IYATvgHBmpk
+ nCgyNWPoInIswURIwUlPP3g9cjSOLb5flDqzZkJadH61YrRe4j3+znN8Q
+X-Google-Smtp-Source: AGHT+IFm14Ytlc578gANt+WykVlzcAUt9AeiPg4rKoxwvWMtZt8E1ygXU6tXKPNBoJon5LpnIv/zcQ==
+X-Received: by 2002:a05:6808:10d2:b0:409:f8e:72a8 with SMTP id
+ 5614622812f47-415393d5d13mr2292546b6e.23.1752248733649; 
+ Fri, 11 Jul 2025 08:45:33 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4141c1abe25sm563654b6e.33.2025.07.11.08.20.29
- for <u-boot@lists.denx.de>
+ 5614622812f47-4141c58ff73sm574968b6e.40.2025.07.11.08.45.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 08:20:29 -0700 (PDT)
+ Fri, 11 Jul 2025 08:45:33 -0700 (PDT)
+Date: Fri, 11 Jul 2025 09:45:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] misc: Remove DS4510 driver
-Date: Fri, 11 Jul 2025 09:20:28 -0600
-Message-ID: <20250711152028.2225638-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Levi Yun <yeoreum.yun@arm.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Subject: Re: [PATCH v2 6/6] fdtdec: apply DT overlays from bloblist
+Message-ID: <20250711154530.GH6424@bill-the-cat>
+References: <20250704134208.2895595-1-raymond.mao@linaro.org>
+ <20250704134208.2895595-7-raymond.mao@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ja17ftSAkpuPhBxe"
+Content-Disposition: inline
+In-Reply-To: <20250704134208.2895595-7-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,494 +106,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As no platforms use this driver anymore and it's not been converted from
-to DM_I2C for use, remove it.
 
-Fixes: ed7fe2bee12a ("ppc: Remove xpedite boards")
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- drivers/misc/Kconfig  |   8 -
- drivers/misc/Makefile |   1 -
- drivers/misc/ds4510.c | 379 ------------------------------------------
- drivers/misc/ds4510.h |  52 ------
- 4 files changed, 440 deletions(-)
- delete mode 100644 drivers/misc/ds4510.c
- delete mode 100644 drivers/misc/ds4510.h
+--ja17ftSAkpuPhBxe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 515d3668395d..c4a4510f9687 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -290,14 +290,6 @@ config CROS_EC_SPI
- 	  provides a faster and more robust interface than I2C but the bugs
- 	  are less interesting.
- 
--config DS4510
--	bool "Enable support for DS4510 CPU supervisor"
--	help
--	  Enable support for the Maxim DS4510 CPU supervisor. It has an
--	  integrated 64-byte EEPROM, four programmable non-volatile I/O pins
--	  and a configurable timer for the supervisor function. The device is
--	  connected over I2C.
--
- config FSL_IIM
- 	bool "Enable FSL IC Identification Module (IIM) driver"
- 	depends on ARCH_MX5
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index 248068d5b436..83a95f683aca 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -32,7 +32,6 @@ endif
- obj-$(CONFIG_ALTERA_SYSID) += altera_sysid.o
- obj-$(CONFIG_ATSHA204A) += atsha204a-i2c.o
- obj-$(CONFIG_CBMEM_CONSOLE) += cbmem_console.o
--obj-$(CONFIG_DS4510)  += ds4510.o
- obj-$(CONFIG_FSL_DEVICE_DISABLE) += fsl_devdis.o
- obj-$(CONFIG_FSL_IFC) += fsl_ifc.o
- obj-$(CONFIG_FSL_IIM) += fsl_iim.o
-diff --git a/drivers/misc/ds4510.c b/drivers/misc/ds4510.c
-deleted file mode 100644
-index 302015e27938..000000000000
---- a/drivers/misc/ds4510.c
-+++ /dev/null
-@@ -1,379 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright 2008 Extreme Engineering Solutions, Inc.
-- */
--
--/*
-- * Driver for DS4510, a CPU supervisor with integrated EEPROM, SRAM,
-- * and 4 programmable non-volatile GPIO pins.
-- */
--
--#include <i2c.h>
--#include <command.h>
--#include <linux/delay.h>
--#include "ds4510.h"
--
--enum {
--	DS4510_CMD_INFO,
--	DS4510_CMD_DEVICE,
--	DS4510_CMD_NV,
--	DS4510_CMD_RSTDELAY,
--	DS4510_CMD_OUTPUT,
--	DS4510_CMD_INPUT,
--	DS4510_CMD_PULLUP,
--	DS4510_CMD_EEPROM,
--	DS4510_CMD_SEEPROM,
--	DS4510_CMD_SRAM,
--};
--
--/*
-- * Write to DS4510, taking page boundaries into account
-- */
--static int ds4510_mem_write(uint8_t chip, int offset, uint8_t *buf, int count)
--{
--	int wrlen;
--	int i = 0;
--
--	do {
--		wrlen = DS4510_EEPROM_PAGE_SIZE -
--			DS4510_EEPROM_PAGE_OFFSET(offset);
--		if (count < wrlen)
--			wrlen = count;
--		if (i2c_write(chip, offset, 1, &buf[i], wrlen))
--			return -1;
--
--		/*
--		 * This delay isn't needed for SRAM writes but shouldn't delay
--		 * things too much, so do it unconditionally for simplicity
--		 */
--		udelay(DS4510_EEPROM_PAGE_WRITE_DELAY_MS * 1000);
--		count -= wrlen;
--		offset += wrlen;
--		i += wrlen;
--	} while (count > 0);
--
--	return 0;
--}
--
--/*
-- * General read from DS4510
-- */
--static int ds4510_mem_read(uint8_t chip, int offset, uint8_t *buf, int count)
--{
--	return i2c_read(chip, offset, 1, buf, count);
--}
--
--/*
-- * Write SEE bit in config register.
-- * nv = 0 - Writes to SEEPROM registers behave like EEPROM
-- * nv = 1 - Writes to SEEPROM registers behave like SRAM
-- */
--static int ds4510_see_write(uint8_t chip, uint8_t nv)
--{
--	uint8_t data;
--
--	if (i2c_read(chip, DS4510_CFG, 1, &data, 1))
--		return -1;
--
--	if (nv)	/* Treat SEEPROM bits as EEPROM */
--		data &= ~DS4510_CFG_SEE;
--	else	/* Treat SEEPROM bits as SRAM */
--		data |= DS4510_CFG_SEE;
--
--	return ds4510_mem_write(chip, DS4510_CFG, &data, 1);
--}
--
--/*
-- * Write de-assertion of reset signal delay
-- */
--static int ds4510_rstdelay_write(uint8_t chip, uint8_t delay)
--{
--	uint8_t data;
--
--	if (i2c_read(chip, DS4510_RSTDELAY, 1, &data, 1))
--		return -1;
--
--	data &= ~DS4510_RSTDELAY_MASK;
--	data |= delay & DS4510_RSTDELAY_MASK;
--
--	return ds4510_mem_write(chip, DS4510_RSTDELAY, &data, 1);
--}
--
--/*
-- * Write pullup characteristics of IO pins
-- */
--static int ds4510_pullup_write(uint8_t chip, uint8_t val)
--{
--	val &= DS4510_IO_MASK;
--
--	return ds4510_mem_write(chip, DS4510_PULLUP, (uint8_t *)&val, 1);
--}
--
--/*
-- * Read pullup characteristics of IO pins
-- */
--static int ds4510_pullup_read(uint8_t chip)
--{
--	uint8_t val;
--
--	if (i2c_read(chip, DS4510_PULLUP, 1, &val, 1))
--		return -1;
--
--	return val & DS4510_IO_MASK;
--}
--
--/*
-- * Write drive level of IO pins
-- */
--static int ds4510_gpio_write(uint8_t chip, uint8_t val)
--{
--	uint8_t data;
--	int i;
--
--	for (i = 0; i < DS4510_NUM_IO; i++) {
--		if (i2c_read(chip, DS4510_IO0 - i, 1, &data, 1))
--			return -1;
--
--		if (val & (0x1 << i))
--			data |= 0x1;
--		else
--			data &= ~0x1;
--
--		if (ds4510_mem_write(chip, DS4510_IO0 - i, &data, 1))
--			return -1;
--	}
--
--	return 0;
--}
--
--/*
-- * Read drive level of IO pins
-- */
--static int ds4510_gpio_read(uint8_t chip)
--{
--	uint8_t data;
--	int val = 0;
--	int i;
--
--	for (i = 0; i < DS4510_NUM_IO; i++) {
--		if (i2c_read(chip, DS4510_IO0 - i, 1, &data, 1))
--			return -1;
--
--		if (data & 1)
--			val |= (1 << i);
--	}
--
--	return val;
--}
--
--/*
-- * Read physical level of IO pins
-- */
--static int ds4510_gpio_read_val(uint8_t chip)
--{
--	uint8_t val;
--
--	if (i2c_read(chip, DS4510_IO_STATUS, 1, &val, 1))
--		return -1;
--
--	return val & DS4510_IO_MASK;
--}
--
--/*
-- * Display DS4510 information
-- */
--static int ds4510_info(uint8_t chip)
--{
--	int i;
--	int tmp;
--	uint8_t data;
--
--	printf("DS4510 @ 0x%x:\n\n", chip);
--
--	if (i2c_read(chip, DS4510_RSTDELAY, 1, &data, 1))
--		return -1;
--	printf("rstdelay = 0x%x\n\n", data & DS4510_RSTDELAY_MASK);
--
--	if (i2c_read(chip, DS4510_CFG, 1, &data, 1))
--		return -1;
--	printf("config   = 0x%x\n", data);
--	printf(" /ready  = %d\n", data & DS4510_CFG_READY ? 1 : 0);
--	printf(" trip pt = %d\n", data & DS4510_CFG_TRIP_POINT ? 1 : 0);
--	printf(" rst sts = %d\n", data & DS4510_CFG_RESET ? 1 : 0);
--	printf(" /see    = %d\n", data & DS4510_CFG_SEE ? 1 : 0);
--	printf(" swrst   = %d\n\n", data & DS4510_CFG_SWRST ? 1 : 0);
--
--	printf("gpio pins: 3210\n");
--	printf("---------------\n");
--	printf("pullup     ");
--
--	tmp = ds4510_pullup_read(chip);
--	if (tmp == -1)
--		return tmp;
--	for (i = DS4510_NUM_IO - 1; i >= 0; i--)
--		printf("%d", (tmp & (1 << i)) ? 1 : 0);
--	printf("\n");
--
--	printf("driven     ");
--	tmp = ds4510_gpio_read(chip);
--	if (tmp == -1)
--		return -1;
--	for (i = DS4510_NUM_IO - 1; i >= 0; i--)
--		printf("%d", (tmp & (1 << i)) ? 1 : 0);
--	printf("\n");
--
--	printf("read       ");
--	tmp = ds4510_gpio_read_val(chip);
--	if (tmp == -1)
--		return -1;
--	for (i = DS4510_NUM_IO - 1; i >= 0; i--)
--		printf("%d", (tmp & (1 << i)) ? 1 : 0);
--	printf("\n");
--
--	return 0;
--}
--
--struct cmd_tbl cmd_ds4510[] = {
--	U_BOOT_CMD_MKENT(device, 3, 0, (void *)DS4510_CMD_DEVICE, "", ""),
--	U_BOOT_CMD_MKENT(nv, 3, 0, (void *)DS4510_CMD_NV, "", ""),
--	U_BOOT_CMD_MKENT(output, 4, 0, (void *)DS4510_CMD_OUTPUT, "", ""),
--	U_BOOT_CMD_MKENT(input, 3, 0, (void *)DS4510_CMD_INPUT, "", ""),
--	U_BOOT_CMD_MKENT(pullup, 4, 0, (void *)DS4510_CMD_PULLUP, "", ""),
--	U_BOOT_CMD_MKENT(info, 2, 0, (void *)DS4510_CMD_INFO, "", ""),
--	U_BOOT_CMD_MKENT(rstdelay, 3, 0, (void *)DS4510_CMD_RSTDELAY, "", ""),
--	U_BOOT_CMD_MKENT(eeprom, 6, 0, (void *)DS4510_CMD_EEPROM, "", ""),
--	U_BOOT_CMD_MKENT(seeprom, 6, 0, (void *)DS4510_CMD_SEEPROM, "", ""),
--	U_BOOT_CMD_MKENT(sram, 6, 0, (void *)DS4510_CMD_SRAM, "", ""),
--};
--
--int do_ds4510(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	static uint8_t chip = 0x51;
--	struct cmd_tbl *c;
--	ulong ul_arg2 = 0;
--	ulong ul_arg3 = 0;
--	int tmp;
--	ulong addr;
--	ulong off;
--	ulong cnt;
--	int end;
--	int (*rw_func)(uint8_t, int, uint8_t *, int);
--
--	c = find_cmd_tbl(argv[1], cmd_ds4510, ARRAY_SIZE(cmd_ds4510));
--
--	/* All commands but "device" require 'maxargs' arguments */
--	if (!c || !((argc == (c->maxargs)) ||
--		(((int)c->cmd == DS4510_CMD_DEVICE) &&
--		 (argc == (c->maxargs - 1))))) {
--		return cmd_usage(cmdtp);
--	}
--
--	/* arg2 used as chip addr and pin number */
--	if (argc > 2)
--		ul_arg2 = hextoul(argv[2], NULL);
--
--	/* arg3 used as output/pullup value */
--	if (argc > 3)
--		ul_arg3 = hextoul(argv[3], NULL);
--
--	switch ((int)c->cmd) {
--	case DS4510_CMD_DEVICE:
--		if (argc == 3)
--			chip = ul_arg2;
--		printf("Current device address: 0x%x\n", chip);
--		return 0;
--	case DS4510_CMD_NV:
--		return ds4510_see_write(chip, ul_arg2);
--	case DS4510_CMD_OUTPUT:
--		tmp = ds4510_gpio_read(chip);
--		if (tmp == -1)
--			return -1;
--		if (ul_arg3)
--			tmp |= (1 << ul_arg2);
--		else
--			tmp &= ~(1 << ul_arg2);
--		return ds4510_gpio_write(chip, tmp);
--	case DS4510_CMD_INPUT:
--		tmp = ds4510_gpio_read_val(chip);
--		if (tmp == -1)
--			return -1;
--		return (tmp & (1 << ul_arg2)) != 0;
--	case DS4510_CMD_PULLUP:
--		tmp = ds4510_pullup_read(chip);
--		if (tmp == -1)
--			return -1;
--		if (ul_arg3)
--			tmp |= (1 << ul_arg2);
--		else
--			tmp &= ~(1 << ul_arg2);
--		return ds4510_pullup_write(chip, tmp);
--	case DS4510_CMD_INFO:
--		return ds4510_info(chip);
--	case DS4510_CMD_RSTDELAY:
--		return ds4510_rstdelay_write(chip, ul_arg2);
--	case DS4510_CMD_EEPROM:
--		end = DS4510_EEPROM + DS4510_EEPROM_SIZE;
--		off = DS4510_EEPROM;
--		break;
--	case DS4510_CMD_SEEPROM:
--		end = DS4510_SEEPROM + DS4510_SEEPROM_SIZE;
--		off = DS4510_SEEPROM;
--		break;
--	case DS4510_CMD_SRAM:
--		end = DS4510_SRAM + DS4510_SRAM_SIZE;
--		off = DS4510_SRAM;
--		break;
--	default:
--		/* We should never get here... */
--		return 1;
--	}
--
--	/* Only eeprom, seeprom, and sram commands should make it here */
--	if (strcmp(argv[2], "read") == 0)
--		rw_func = ds4510_mem_read;
--	else if (strcmp(argv[2], "write") == 0)
--		rw_func = ds4510_mem_write;
--	else
--		return cmd_usage(cmdtp);
--
--	addr = hextoul(argv[3], NULL);
--	off += hextoul(argv[4], NULL);
--	cnt = hextoul(argv[5], NULL);
--
--	if ((off + cnt) > end) {
--		printf("ERROR: invalid len\n");
--		return -1;
--	}
--
--	return rw_func(chip, off, (uint8_t *)addr, cnt);
--}
--
--U_BOOT_CMD(
--	ds4510,	6,	1,	do_ds4510,
--	"ds4510 eeprom/seeprom/sram/gpio access",
--	"device [dev]\n"
--	"	- show or set current device address\n"
--	"ds4510 info\n"
--	"	- display ds4510 info\n"
--	"ds4510 output pin 0|1\n"
--	"	- set pin low or high-Z\n"
--	"ds4510 input pin\n"
--	"	- read value of pin\n"
--	"ds4510 pullup pin 0|1\n"
--	"	- disable/enable pullup on specified pin\n"
--	"ds4510 nv 0|1\n"
--	"	- make gpio and seeprom writes volatile/non-volatile"
--	"\n"
--	"ds4510 rstdelay 0-3\n"
--	"	- set reset output delay"
--	"\n"
--	"ds4510 eeprom read addr off cnt\n"
--	"ds4510 eeprom write addr off cnt\n"
--	"	- read/write 'cnt' bytes at EEPROM offset 'off'\n"
--	"ds4510 seeprom read addr off cnt\n"
--	"ds4510 seeprom write addr off cnt\n"
--	"	- read/write 'cnt' bytes at SRAM-shadowed EEPROM offset 'off'\n"
--	"ds4510 sram read addr off cnt\n"
--	"ds4510 sram write addr off cnt\n"
--	"	- read/write 'cnt' bytes at SRAM offset 'off'"
--);
-diff --git a/drivers/misc/ds4510.h b/drivers/misc/ds4510.h
-deleted file mode 100644
-index 5c7a1a8c737c..000000000000
---- a/drivers/misc/ds4510.h
-+++ /dev/null
-@@ -1,52 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright 2008 Extreme Engineering Solutions, Inc.
-- */
--
--#ifndef __DS4510_H_
--#define __DS4510_H_
--
--/* General defines */
--#define DS4510_NUM_IO				0x04
--#define DS4510_IO_MASK				((1 << DS4510_NUM_IO) - 1)
--#define DS4510_EEPROM_PAGE_WRITE_DELAY_MS	20
--
--/* EEPROM from 0x00 - 0x39 */
--#define DS4510_EEPROM				0x00
--#define DS4510_EEPROM_SIZE			0x40
--#define DS4510_EEPROM_PAGE_SIZE			0x08
--#define DS4510_EEPROM_PAGE_OFFSET(x)	((x) & (DS4510_EEPROM_PAGE_SIZE - 1))
--
--/* SEEPROM from 0xf0 - 0xf7 */
--#define DS4510_SEEPROM				0xf0
--#define DS4510_SEEPROM_SIZE			0x08
--
--/* Registers overlapping SEEPROM from 0xf0 - 0xf7 */
--#define DS4510_PULLUP				0xF0
--#define DS4510_PULLUP_DIS			0x00
--#define DS4510_PULLUP_EN			0x01
--#define DS4510_RSTDELAY				0xF1
--#define DS4510_RSTDELAY_MASK			0x03
--#define DS4510_RSTDELAY_125			0x00
--#define DS4510_RSTDELAY_250			0x01
--#define DS4510_RSTDELAY_500			0x02
--#define DS4510_RSTDELAY_1000			0x03
--#define DS4510_IO3				0xF4
--#define DS4510_IO2				0xF5
--#define DS4510_IO1				0xF6
--#define DS4510_IO0				0xF7
--
--/* Status configuration registers from 0xf8 - 0xf9*/
--#define DS4510_IO_STATUS			0xF8
--#define DS4510_CFG				0xF9
--#define DS4510_CFG_READY			0x80
--#define DS4510_CFG_TRIP_POINT			0x40
--#define DS4510_CFG_RESET			0x20
--#define DS4510_CFG_SEE				0x10
--#define DS4510_CFG_SWRST			0x08
--
--/* SRAM from 0xfa - 0xff */
--#define DS4510_SRAM				0xfa
--#define DS4510_SRAM_SIZE			0x06
--
--#endif /* __DS4510_H_ */
--- 
-2.43.0
+On Fri, Jul 04, 2025 at 06:42:05AM -0700, Raymond Mao wrote:
 
+> During FDT setup, apply all existing DT overlays from the bloblist
+> to the base FDT if bloblist is being used for handoff from previous
+> boot stage.
+> According to the spec update for DT overlay handoff[1], an overlay
+> must have the same top-level compatible string as its target base
+> DT has.
+> Before applying the DTO, it checks whether sufficient space is
+> reserved in the base FDT region. A margin (0x400) is used during
+> estimating the space size required by the merged DT.
+> A resizing happens if the reserved space is insufficient.
+> After all overlays are applied, it resizes to the actual size of the
+> merged DT.
+> Note that the margin (0x400) is arbitrary from experience, it might
+> not cover all possible scenarios as complex overlays with many
+> properties might require extra spaces and lead to FDT_ERR_NOSPACE
+> error.
+>=20
+> [1] Add Transfer Entry for Devicetree Overlay
+> https://github.com/FirmwareHandoff/firmware_handoff/pull/74
+[snip]
+> +	actual_size =3D fdt_totalsize(*blob);
+> +	/* Add margin for extra size growth after merging */
+> +	new_fdt_size =3D fdt_totalsize(live_fdt) + actual_size + 0x400;
+
+This is still a fixed value and still not the right way to handle it. I
+think now that we expose configuring the amount of extra space we have
+for the tree it should possibly even just fail out with an error message
+that points to SYS_FDT_PAD?
+
+--=20
+Tom
+
+--ja17ftSAkpuPhBxe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhxMZcACgkQFHw5/5Y0
+tyxcXgv/UMFbeziNV2GlKDOSAXsmyqahMeqsc/QbdH+HEpQXaiZs7NsyjfV9+EbK
+NxvI2G6+lhRYcqi9tPNk+7Gdg5JwqXZwH2fwddnDbMG2r2tffCXc+PHM0VLu53+E
+JYTqmaunA0vt92zcFtmRz8BUhQYBLr9pIg6KIQ/UzrXJpyAfC9ShdKueK8KRMR5f
+FkHK7eT12bHYJW4i8mKIFBnz+tMIv9Qi2wnOBoi7NZG6qwlHQTcQNQxJ25FcOnmU
+AiogV8qrYb2KrCBGjupiJPDiKYe94hkKef/gseXGKHgxAgpFnOcO3GNbzyieuMrp
+hBPpe+V5h0zyMSaJerIEDmBD+C/cSvLTkAKmoFKjA5ndQrhTCpZO4oob4ZkUCO7S
+f38mddjv1si5Ce0BMjEnPe9EsErJK4c4Mvc/Oz18G1bNFV1ZQUE7yq0D1W8iY52Z
+KSfUlQ6D7C+MUXrnPz28BllI9EunuLxj/MsI26GBjGRJf3NsJ0ESZ2Ln5z+wFPe9
+LyiyZ4tk
+=MLB4
+-----END PGP SIGNATURE-----
+
+--ja17ftSAkpuPhBxe--
