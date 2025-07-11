@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51046C83F1D
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 20:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFA6C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 20:01:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ECC182998;
-	Fri, 11 Jul 2025 22:00:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A603E83043;
+	Fri, 11 Jul 2025 22:00:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oBscbjAQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IeUjBOnm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C00C083015; Fri, 11 Jul 2025 22:00:52 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id BAA8682F8E; Fri, 11 Jul 2025 22:00:53 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A54B9800D7
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 22:00:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99E45826AA
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 22:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-73cddf31c45so609275a34.1
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 13:00:50 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-73afbe149afso1281319a34.1
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 13:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752264049; x=1752868849; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752264050; x=1752868850; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BaPssrD9mmgx74x6ANGtLMEUM1HaOzdpq8QOktdFIuI=;
- b=oBscbjAQm9WsgQPVOwlsEXPz+5yuq6zsVFMoCB+02qo3LIkv3M1MVR0cbvXCcHswDM
- IIW0lE+3RTbXibPaBs1Gl+AH/BaVRKS//ATZlL7+ZH3z+//E4VZNFlZJpv5stYUDJncb
- +yLWSyw3CdR5QxgtYlB1waIP0XwjFXDZ4Rcn0=
+ bh=mAwdfbfKSApuSRvYf5VAxgQNQ03VF2UWUCwHtX61/bc=;
+ b=IeUjBOnmmdqqNkNpGGPVJXctAsKHnud6xZXG9KYjY+Bx1GtynQ3v5p9bzDPAEYKEZW
+ wsN7Wovzc7dDe4BcSbwUSRQT7narRzqiYLVoagaKW9/wtCEJ3EfB18QrVygcL0i7yDnz
+ 6BCqK+yLLWrug+96MVC9OSi4+0fqMYo/9yt1M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752264049; x=1752868849;
+ d=1e100.net; s=20230601; t=1752264050; x=1752868850;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BaPssrD9mmgx74x6ANGtLMEUM1HaOzdpq8QOktdFIuI=;
- b=UFQ9uXcKqcXP7VYIXiUX2uB+oDMEadTwHRdLqJKc5bvV6LD4wrm2/+n/qNoZiiYwsx
- ZeNuI2qXRJvcAx1Mc4qfg9yAgj26yJbkEAV28hS8n/GtlPN9H3/52APpDEfFIs64YJIR
- mpwKm5ckUzlS/NxEe55fyG/0j/yFw2lzegoZOsdqDp8IMDwggByBsYfvyHuUno1zyQ/o
- RpTWgQlenYvbstqxIKXivGXrSqkU6kYfvaBApyhgaU5++Y00bhDBnwwP3gjwxrjpCCGY
- OP68oJYOb7dRNuCGD7VBYMUSoIDL+49862RpH/gOFIr51MifipUlvJxYqvCE4XB9Pe9Z
- fkcA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW03Db6K1WM4YbIPiv4SISeSYk/PvuhsoDN4I/ud3KTa53tND9v3VaKEfzipZI/GcTWN2KkUAc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwswH0zTnpkPEQ7V7NLuqOXvXW4uPetIlPhdzX7gIDslxf3R7QO
- pdohYDNhfb8CXyosamzXEot3pwZYfG821+L+PDYqUVAkS7c/h1HmQQgC0tE+YLfev78=
-X-Gm-Gg: ASbGnct835jyxsp0SEaxvxVyf9HrAMNNyMsbJGaNOV9HyQhrKvaSrSKx0s8hMhTUudf
- RXSrViDNS6osU3aRU3VKwOzNAUbO99zmeoQNGAcfcR3WGtILlNuhEhoB0TUDIkTec69lYJRlBrP
- Ch8B4VNGrcmIVVuDyCgpsdoxibxCmCjLuSfOocVWVst3KagJiHhl3hHfz94S5dxDfABE8+wRcvh
- iBVksyG/f18rBkihxSK1r8BsGbotzokJWhKNcMmh3/eKEfZYj+D0vr1tiXg60Az6S3WWd+paSPl
- 1WwhmpL1o904wwe/ME8k1moKwzCAKQOQhpd7HhIL8MbwOK9Nf3hj7buJ9/J3/jcJrbjwPjA7wL9
- r3DQNo2ExOwtOk45gGBalLje7cZ3T/ehl05IDvkEvrHMpumPhGJDDXhU=
-X-Google-Smtp-Source: AGHT+IF1+rcAuenvmjgp5oVSqQX900e5dYT1EFkO2wKwcoCzIX/yg6qG+GZ6Qz9eRvgTsbFkCMTvdQ==
-X-Received: by 2002:a05:6808:6b96:b0:40a:bcbf:2d83 with SMTP id
- 5614622812f47-41511c00a0dmr3698524b6e.28.1752264049329; 
- Fri, 11 Jul 2025 13:00:49 -0700 (PDT)
+ bh=mAwdfbfKSApuSRvYf5VAxgQNQ03VF2UWUCwHtX61/bc=;
+ b=odqsEcl8DGPdLm0AJxKkjsuKX483ApkQVkGV6zmK1tgjCZfuNXVfuk//7qO+UWLIov
+ hWJV6N+qTHazE90sZ0T3gXTAmxerLHXnRmp85s8HjnO5zer4cpmPHGSyLLb8VoweOzcM
+ zT0/1kFf5WAqgkOQeiXL0z9UGbLIT519zbxSZA2QSBYW1TkMznEO4+BDR1cute2KqGCj
+ hZyoP2Kexe6LF1E03gIf7XAgGc6IGvQBjtfnbDKg9hg6Dxpe4FR3KPfST1Ary0mPQdxx
+ nnoQeGnKq8mWw7dPSnpZ9R56vh1xh/JUjeJsXCrrvyHmvzvEKGIHZMnSd6z714Z0BtEF
+ Ji2w==
+X-Gm-Message-State: AOJu0YyEn0DhJhrW1SLFCNay+VJK40XGETRFqhZ/LSo9bWErPMCYFBeQ
+ yqYqs3LDZL5COIlio5TZPcO0uA2dNeECDeXpCKZFzbn1TfqkdyweGV+N/riYJFMK87BMk6On5b2
+ xCe+rnqU=
+X-Gm-Gg: ASbGnct2WZS7sXPdBaz5Rlg0F2TI6IbSiNqm2zmrx34y1rnzRl2GryER20EUrU53AR9
+ JyLkTBsW2hW7iWHAeARlDsQCgb1wDU8jF/8sj5+p5AD493kqdud93nZEh4XKSyTgG3K2uqVMP6C
+ sKJKwYeNLwjpaORU0GUCxG6WAVbayctb43k0yTbofyNxGo+eJP35Q7+12CEBab/Ln44HyO8unA1
+ YXIMXE9GA/3v4g99SzoXSVBvZd52Sm+AXt4tV9B9p/OEdv3XWjeejLk7vazVm4p4S+fIxqz1kYe
+ q08teeLY/KIGlQrekH01Vca5Lur7VDJ0Tkc4v0/mZHoyYCNW0uTgv26W4efY+GgnPOsjJAVOjZ4
+ AkwbaSiNoRgzZAYiRmnPXHomYhJlLvmurit2R8N7PPkqicHIkdUUAMtE=
+X-Google-Smtp-Source: AGHT+IGKMcqkl0I0T2NOi6rWc5GCxRBAkwsGbk3aalKDggdZugQbCLfo6JRqQGb9zG9ETRFCV6IE9w==
+X-Received: by 2002:a05:6808:2016:b0:40a:52f5:f2ad with SMTP id
+ 5614622812f47-4153737a03cmr3306995b6e.8.1752264050274; 
+ Fri, 11 Jul 2025 13:00:50 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-414161e2b74sm666516b6e.0.2025.07.11.13.00.48
+ 5614622812f47-414161e2b74sm666516b6e.0.2025.07.11.13.00.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 13:00:48 -0700 (PDT)
+ Fri, 11 Jul 2025 13:00:49 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Huang Jianan <jnhuang95@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: linux-erofs@lists.ozlabs.org, u-boot@lists.denx.de
-In-Reply-To: <20250704-erofs_fix-v1-1-956be16f32e9@linaro.org>
-References: <20250704-erofs_fix-v1-1-956be16f32e9@linaro.org>
-Subject: Re: [PATCH] fs: erofs: Do NULL check before dereferencing pointer
-Message-Id: <175226404820.2365211.17225429153023348856.b4-ty@konsulko.com>
-Date: Fri, 11 Jul 2025 14:00:48 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+In-Reply-To: <20250704214542.3418805-1-trini@konsulko.com>
+References: <20250704214542.3418805-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/2] toradex: Switch from ARCH_MISC_INIT to MISC_INIT_R
+ in some cases
+Message-Id: <175226404944.2365211.2655877557197327046.b4-ty@konsulko.com>
+Date: Fri, 11 Jul 2025 14:00:49 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,21 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 04 Jul 2025 11:53:18 +0100, Andrew Goodbody wrote:
+On Fri, 04 Jul 2025 15:45:41 -0600, Tom Rini wrote:
 
-> The assignments to sect and off use the pointer from ctxt.cur_dev but
-> that has not been NULL checked before this is done. So instead move the
-> assignments after the NULL check.
-> 
-> This issue found by Smatch
+> The hook arch_misc_init was not intended to be used for per-board hooks.
+> This can be done with misc_init_r instead, which is what follows
+> immediately after arch_misc_init. Switch a few platforms.
 > 
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] fs: erofs: Do NULL check before dereferencing pointer
-      commit: ff8a41ce4947c6d7f1826990d5d7b96d30928e3f
+[1/2] toradex: Switch from ARCH_MISC_INIT to MISC_INIT_R in some cases
+      commit: 0d50d5fc52f0fe54f5d80bb9543f92f362c8b80a
+[2/2] global: Make ARCH_MISC_INIT a selected symbol
+      commit: d0ed9636902bc5c0d7ea5f73926441241acb6051
 -- 
 Tom
 
