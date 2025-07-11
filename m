@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34A43C83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 20:01:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51046C83F1D
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 20:01:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3250882F8E;
-	Fri, 11 Jul 2025 22:00:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8ECC182998;
+	Fri, 11 Jul 2025 22:00:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WsgtBTXq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oBscbjAQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE30F82998; Fri, 11 Jul 2025 22:00:51 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id C00C083015; Fri, 11 Jul 2025 22:00:52 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7011B82C84
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 22:00:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A54B9800D7
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 22:00:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-611e20dd2ffso761586eaf.2
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 13:00:49 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-73cddf31c45so609275a34.1
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 13:00:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752264048; x=1752868848; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752264049; x=1752868849; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=flgQH+kl+Dn0l6pIUktwWcmqrD0qr9+BdwqM40mO3P0=;
- b=WsgtBTXqGgTZnADK3GHy3j4VpK3vLZGXAg3+9id1ATqPt0yp/h9c56qviIm6ZQfk22
- tRmqTfMV/IMDSno3TC5YhQim/D/5opXdM2F1AfYYWeJpxirqSAi7DekVtUpB40xcoGPt
- UAuEwyQX/opbJy8pGaPFTqexR+AGy7lnZEyQ4=
+ bh=BaPssrD9mmgx74x6ANGtLMEUM1HaOzdpq8QOktdFIuI=;
+ b=oBscbjAQm9WsgQPVOwlsEXPz+5yuq6zsVFMoCB+02qo3LIkv3M1MVR0cbvXCcHswDM
+ IIW0lE+3RTbXibPaBs1Gl+AH/BaVRKS//ATZlL7+ZH3z+//E4VZNFlZJpv5stYUDJncb
+ +yLWSyw3CdR5QxgtYlB1waIP0XwjFXDZ4Rcn0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752264048; x=1752868848;
+ d=1e100.net; s=20230601; t=1752264049; x=1752868849;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=flgQH+kl+Dn0l6pIUktwWcmqrD0qr9+BdwqM40mO3P0=;
- b=Kg+fKE5hUSoZQZWVnbqRA+6scUaVErwf9HNqHY2rz0yZhk20SPlCwNwE7tgkxfQ1Us
- WyC73pqYhtA1pfMLZiNwhBB6WQQvpYyN8Y6QELD1rrDMbs6vNotPQwN2skdqfif75oDz
- DuiQ5lZqvisKqEvNuDz3TzDVTwFJ0Gm+YKVJZy5idDubB4kgXht5fG1x2JDvKC56nHBf
- E7wFuLvoizFTEu65tL/ulLivYMa+sFJH/lG5KvPoKN6VGTTd7TZ4Iq4xqD0rKLU355oy
- 3wFfFQITqKyFXUDP461p2Jp/n0D8UpnWs/uuN6NwAC+ADP68FrO6YqnDSI7jJS7TsUpm
- I7VA==
-X-Gm-Message-State: AOJu0YxCyjEzn+CZkkostUlCMcUdZ625yKp4nYr9LwjcVd6MVdezUrpg
- vOoVFy8z7qHqRWE6uSVqlsgAINbD3kTZ0uVox7Ht9e6IOjuU5UDVDGhZcJvrEKJOuFg=
-X-Gm-Gg: ASbGnctZDeI4yuALsgked+TyrbbyZM82gMclRaRSEgvEkQpanWAIF11LVN7s2Alp/5s
- cVaa9ohDD860FHD5epLjz5gHoTvn5ZIFe9B+cr8EAxyzgfjxwtOqkrqkXOshPiksvwwyS0lFB92
- lZs6WOBHKynhrT4vmyD6GK9xbkdEmsMpoZzKEbIdaNUcT8dNntIm3fNgluWrkt8HJy+qpcvCprT
- Dk9MjhZn6Wpaldr9izP4JNdjECr7Qp18EJsRX+RfF0cJbK51b12n9QIu/0g1p8ePmdJv5Lab6jL
- TaiJeKK4AjPmmsK6b3j4l5WGJ5kBC/bHKL4LdaQ99DytAsDhTnHuAhisNlryN2H4zxbtYPq5ZVn
- h609T2IuxQt2vevK8EwReioQ03H1rMDywiwCKFTWTINzoqClJ4wkzTAPmOSasJx3f8w==
-X-Google-Smtp-Source: AGHT+IE0RNMgq8u/04W4IG29Dfb7pYAbRCUmafLLYnmpwBkpv18BpgGmd7KkdNLWXT/W7RoxbsVMpQ==
-X-Received: by 2002:a05:6808:4f28:b0:40b:3530:98bb with SMTP id
- 5614622812f47-4150db3262cmr3576378b6e.9.1752264048077; 
- Fri, 11 Jul 2025 13:00:48 -0700 (PDT)
+ bh=BaPssrD9mmgx74x6ANGtLMEUM1HaOzdpq8QOktdFIuI=;
+ b=UFQ9uXcKqcXP7VYIXiUX2uB+oDMEadTwHRdLqJKc5bvV6LD4wrm2/+n/qNoZiiYwsx
+ ZeNuI2qXRJvcAx1Mc4qfg9yAgj26yJbkEAV28hS8n/GtlPN9H3/52APpDEfFIs64YJIR
+ mpwKm5ckUzlS/NxEe55fyG/0j/yFw2lzegoZOsdqDp8IMDwggByBsYfvyHuUno1zyQ/o
+ RpTWgQlenYvbstqxIKXivGXrSqkU6kYfvaBApyhgaU5++Y00bhDBnwwP3gjwxrjpCCGY
+ OP68oJYOb7dRNuCGD7VBYMUSoIDL+49862RpH/gOFIr51MifipUlvJxYqvCE4XB9Pe9Z
+ fkcA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW03Db6K1WM4YbIPiv4SISeSYk/PvuhsoDN4I/ud3KTa53tND9v3VaKEfzipZI/GcTWN2KkUAc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwswH0zTnpkPEQ7V7NLuqOXvXW4uPetIlPhdzX7gIDslxf3R7QO
+ pdohYDNhfb8CXyosamzXEot3pwZYfG821+L+PDYqUVAkS7c/h1HmQQgC0tE+YLfev78=
+X-Gm-Gg: ASbGnct835jyxsp0SEaxvxVyf9HrAMNNyMsbJGaNOV9HyQhrKvaSrSKx0s8hMhTUudf
+ RXSrViDNS6osU3aRU3VKwOzNAUbO99zmeoQNGAcfcR3WGtILlNuhEhoB0TUDIkTec69lYJRlBrP
+ Ch8B4VNGrcmIVVuDyCgpsdoxibxCmCjLuSfOocVWVst3KagJiHhl3hHfz94S5dxDfABE8+wRcvh
+ iBVksyG/f18rBkihxSK1r8BsGbotzokJWhKNcMmh3/eKEfZYj+D0vr1tiXg60Az6S3WWd+paSPl
+ 1WwhmpL1o904wwe/ME8k1moKwzCAKQOQhpd7HhIL8MbwOK9Nf3hj7buJ9/J3/jcJrbjwPjA7wL9
+ r3DQNo2ExOwtOk45gGBalLje7cZ3T/ehl05IDvkEvrHMpumPhGJDDXhU=
+X-Google-Smtp-Source: AGHT+IF1+rcAuenvmjgp5oVSqQX900e5dYT1EFkO2wKwcoCzIX/yg6qG+GZ6Qz9eRvgTsbFkCMTvdQ==
+X-Received: by 2002:a05:6808:6b96:b0:40a:bcbf:2d83 with SMTP id
+ 5614622812f47-41511c00a0dmr3698524b6e.28.1752264049329; 
+ Fri, 11 Jul 2025 13:00:49 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-414161e2b74sm666516b6e.0.2025.07.11.13.00.47
+ 5614622812f47-414161e2b74sm666516b6e.0.2025.07.11.13.00.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 13:00:47 -0700 (PDT)
+ Fri, 11 Jul 2025 13:00:48 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>
-Cc: vigneshr@ti.com, vaishnav.a@ti.com, j-choudhary@ti.com, afd@ti.com, 
- u-kumar1@ti.com
-In-Reply-To: <20250704091234.3218906-1-n-francis@ti.com>
-References: <20250704091234.3218906-1-n-francis@ti.com>
-Subject: Re: [PATCH v2] board: ti: Clean up formatting in rm-cfg.yaml
-Message-Id: <175226404718.2365211.11325637132607693906.b4-ty@konsulko.com>
-Date: Fri, 11 Jul 2025 14:00:47 -0600
+To: Huang Jianan <jnhuang95@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: linux-erofs@lists.ozlabs.org, u-boot@lists.denx.de
+In-Reply-To: <20250704-erofs_fix-v1-1-956be16f32e9@linaro.org>
+References: <20250704-erofs_fix-v1-1-956be16f32e9@linaro.org>
+Subject: Re: [PATCH] fs: erofs: Do NULL check before dereferencing pointer
+Message-Id: <175226404820.2365211.17225429153023348856.b4-ty@konsulko.com>
+Date: Fri, 11 Jul 2025 14:00:48 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,23 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 04 Jul 2025 14:42:34 +0530, Neha Malcom Francis wrote:
+On Fri, 04 Jul 2025 11:53:18 +0100, Andrew Goodbody wrote:
 
-> Move to using the latest generated RM YAML configuration files generated
-> by the K3 Resource Partitioning Tool which updates them to have standard
-> formatting with respect to indentation.
+> The assignments to sect and off use the pointer from ctxt.cur_dev but
+> that has not been NULL checked before this is done. So instead move the
+> assignments after the NULL check.
 > 
-> These files were generated from the untagged commit 41718bd5f915 ("docs: Update
-> docs and move them to docs folder") of the K3 Resource Partitioning tool. This
-> tool is packaged as a part of the public SDK and is not otherwise
-> publicly available.
+> This issue found by Smatch
+> 
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] board: ti: Clean up formatting in rm-cfg.yaml
-      commit: a21ec39944f93fb5bd3dd5de525e78cac988fdb6
+[1/1] fs: erofs: Do NULL check before dereferencing pointer
+      commit: ff8a41ce4947c6d7f1826990d5d7b96d30928e3f
 -- 
 Tom
 
