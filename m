@@ -4,92 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FFF5C83F1B
-	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8052C83F1B
+	for <u-boot@archiver.kernel.org>; Fri, 11 Jul 2025 15:48:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39D598277D;
-	Fri, 11 Jul 2025 17:45:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12536826AA;
+	Fri, 11 Jul 2025 17:48:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PRTs4sBb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ilHhIYV2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC9F482E37; Fri, 11 Jul 2025 17:45:44 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 286C68277D; Fri, 11 Jul 2025 17:48:46 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7F1582D21
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:45:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0217482063
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:48:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2ff1ed124deso671096fac.0
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:45:42 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7387f21daadso1735770a34.0
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 08:48:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752248741; x=1752853541; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752248923; x=1752853723; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MPU0zFzTTR7eCUrannp70tx+/IFEcS0Hq6xX3jxKTqo=;
- b=PRTs4sBbjHViBbtTLHoZGc9ik2XVZq89wO7M71RLGlRSNy2dHA/qeEOu+tiraaKiuK
- 5xKTf/patUJfiDOMTckVkc0eZa5MHxMamfoy7IF/gsG/eNjfz6O+DI/LNJ6IvZEtkJLt
- tzv40LuD42f/CQz8AtSI+M5GzPD3pRsslbA+I=
+ bh=P6uCc1jTAnMZVvq/ziwT6aY8y/6QWmIR+PyXMxyz+FE=;
+ b=ilHhIYV2N1ZqhDxNnTXw7Lq8wNAOnMdgj8ZUBGKUvoQeRXBxnG8reAfeW2xlXE9//t
+ cFa7QOkOzYWqr17cuf6tVccWYTMW/NocEBy1Ikq8IkUn8SPZNhYUB/1GpSC5dCwe8H2A
+ CBgRISw/Zvb6pSUbAL1b+oYUQBad/0qO9F9Rc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752248741; x=1752853541;
+ d=1e100.net; s=20230601; t=1752248923; x=1752853723;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MPU0zFzTTR7eCUrannp70tx+/IFEcS0Hq6xX3jxKTqo=;
- b=Z2rzM7VO0bTT6aHABp1jSr2UNXaV4mftQzTZDW8yLLkkl3W+Gh98RVFgfirJUBYF5m
- j+gfpk/ds9YffqUZp4LPjiK1h1EWK6HbWiIAyEM92RjvIrFvhU/gXf8NwQ6nHComK8rg
- tBAmV95Q1ETGoC5bggsxNkC2vZKaqBHrPFZC17YAw/gL+q/ImqsqnvTcY5bGrxvRAE1e
- yXnc4evzusLKDCxosc6DpxRgsrtsDG9D7JTFazhv/l3WrGBpAvvO7tzPSBPaiANc8kb8
- VeTSKIxNtTtGmfH2Fwsil3nxcSz5UnqwslWOXDkMciUlb9cPV6bAGcVfh7NZqtCMBWc8
- 2j4g==
-X-Gm-Message-State: AOJu0Yym7w88PHXmHfK96wJcoC9lNm0dR9sLCb/SYsBoLTnjNjDzKhsB
- HZ70tfhAxnWipIrqZsu6W7WEIke2xGE6758/pnn52qdYpo1NDL8Q79evPOHZZ6TSNhQ=
-X-Gm-Gg: ASbGncvEZa1cyRLmVhu+b53uCBRJp5KJN5r49j7vgqnXUvo4joFpbvJe7CdqXZTj69A
- vHejt8U3BDeYA9BofDeb4OzYdWdoa3CWyXSdauudrAzArMx69p6AczJpjG39wcmEoi/GwOj6c6G
- Mw6pIvoLtC172rV0Cj/dWjI4VbUa0atoy6f3knhVvVeOUKLQqBh1/lH2yBDHEAgOvwLmG2oAShc
- 9vLJQlIGFIGxFQjGs//LaO0LnxTIk2nv0afZGpunQdfDsx7LWz0EK4wPmj0iFDNnmivp1RML386
- M7h/RWjXfgxwOCphJNK4NGtOXl1ZuiCiAh9h7boN3M5A5NKLFneXyr7KHS4O4d+7bMuMWJzuTCD
- JFKbKe5aCuq6VphNc4eRHrhyPvjD5IsdKlxIq7IGCma1wq1wI72QH3nu0
-X-Google-Smtp-Source: AGHT+IExET3W1o39WZD6/zTILU9g3XWoDqsk568NNlpmRiPvh6I1lZgYO2giEz4yAAcL7RG3nheP4Q==
-X-Received: by 2002:a05:6871:e250:b0:2d5:2955:aa58 with SMTP id
- 586e51a60fabf-2ff3f379272mr283918fac.0.1752248741275; 
- Fri, 11 Jul 2025 08:45:41 -0700 (PDT)
+ bh=P6uCc1jTAnMZVvq/ziwT6aY8y/6QWmIR+PyXMxyz+FE=;
+ b=rnGEXjoobhqMVZv51GKnQqEhLwX2uDQnyT3tqvFk3HGJ4dg9T5oLX8JW9RRIbvwxQD
+ rOkAi4SQneBuwN0Omo59XO4HQQQfnT2pkx54Mf84SUUpi+fB5NRk7lHNRD38JxsKszc8
+ 1U2R+fOa3pO9esPXcFu86XLRUxCxGBF9jo0l++fEKm8cHOz+WQASYhgjZCWJYTHf726s
+ tfl+1OP8eq3K8Qx9t464fJpMdFaJnB37EqvRQfpPWG1ZlmJ6NhojIV/yWO656MXqctSD
+ 3vahPeDyrx1eRmCtER3N3pp9DiuKehN7OnVh432ro4KhFsrDuvymOUbp9t6PACVMW+g5
+ n+2g==
+X-Gm-Message-State: AOJu0YwH+qK/ok49GOFPvsKx4o1XQ+z2oEgVZjileBJs15EibNYbYfaU
+ LXb8pRwVL8b3k7eXKUiJrINMokYnCRCbNmvdCHjAYlHqNIPsS1RJ5AIkHZwN7O4bAec=
+X-Gm-Gg: ASbGncsBR1Ub/hUsgxR+AMN7K4gzVodNGn1pFHvQMDbSlwbXwuaK7VWApyOlcX7OaEm
+ fNFSmFZJ4qIcWlH/hcvFbZYIXDy/lkmHl1/+FbKuFV0UrB8hoC5tgk9Th+ed8rKP4XU3YsQQWql
+ aTjQ2QqSL33q4xePArHFki39aYxKNtUUjWgcnOSrM8LUO365Eb+xSKAYAbxmiKZoM3+IvGA79f5
+ rp2VAtrUxU6wS+9x62z+yoUfOdujmjZOYvXbrMD9EwOEUaJau2HQ5nAniKIiZTNis+d6PlPEr2b
+ lyQ2vLNKqG6A6zw0nGdaxLsJ6/rh4EyCm3X3kQq/8nDngKBYcBkJd4/DQWaqEkMcckZ08O0XG/s
+ Lli5Hi2pXznd2FAi56vV4LhdFd8imMf//2EiSBe00g0KXcukTf5wwsDX4BZHlCPqHl2M=
+X-Google-Smtp-Source: AGHT+IFKMjLppGESY6Kc9OZ6OeBSIVGlq4L4WksVi3vA9v2KFq14cbEi0gohl0SmzAXt5RPVeLJQ6A==
+X-Received: by 2002:a05:6808:198f:b0:401:bb42:700c with SMTP id
+ 5614622812f47-413c4b8aff3mr6176326b6e.19.1752248922636; 
+ Fri, 11 Jul 2025 08:48:42 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ff111c5011sm770593fac.4.2025.07.11.08.45.39
+ 006d021491bc7-613e0406cf6sm392369eaf.1.2025.07.11.08.48.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 08:45:40 -0700 (PDT)
-Date: Fri, 11 Jul 2025 09:45:38 -0600
+ Fri, 11 Jul 2025 08:48:42 -0700 (PDT)
+Date: Fri, 11 Jul 2025 09:48:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Levi Yun <yeoreum.yun@arm.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2 0/6] Add support for DT overlays handoff
-Message-ID: <20250711154538.GI6424@bill-the-cat>
-References: <20250704134208.2895595-1-raymond.mao@linaro.org>
+To: Greg Malysa <malysagreg@gmail.com>
+Cc: u-boot@lists.denx.de, adsp-linux@analog.com,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ "Molloy, Philip" <Philip.Molloy@analog.com>
+Subject: Re: [PATCH 10/10] MAINTAINERS: Update ADI entries for new boards
+Message-ID: <20250711154839.GJ6424@bill-the-cat>
+References: <20250602194507.15159-1-malysagreg@gmail.com>
+ <20250602194507.15159-11-malysagreg@gmail.com>
+ <20250605171248.GB1382132@bill-the-cat>
+ <CABdDSeVrA-XyDhEHC6p_vvaQwM+Dh5xE6Ct=+VXjcd0Tq_8_6w@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="172cyDJgGYsS9ZYE"
+ protocol="application/pgp-signature"; boundary="PY95QWoLl4yv2HoV"
 Content-Disposition: inline
-In-Reply-To: <20250704134208.2895595-1-raymond.mao@linaro.org>
+In-Reply-To: <CABdDSeVrA-XyDhEHC6p_vvaQwM+Dh5xE6Ct=+VXjcd0Tq_8_6w@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,41 +112,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---172cyDJgGYsS9ZYE
-Content-Type: text/plain; charset=us-ascii
+--PY95QWoLl4yv2HoV
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 04, 2025 at 06:41:59AM -0700, Raymond Mao wrote:
-> The series include refactoring on bloblist and fdtdec to support handoff
-> of multiple DT overlays and applying them into the DT base during setup.
-> All changes are aligned to the spec update for supporting DT overlay
-> handoff[1].
+On Wed, Jul 09, 2025 at 03:14:12PM -0400, Greg Malysa wrote:
+> Hi Tom,
+>=20
+> On Thu, Jun 5, 2025 at 1:12=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+> >
+> > On Mon, Jun 02, 2025 at 03:44:48PM -0400, Greg Malysa wrote:
+> >
+> > > This adds missing maintainers entries for the ADI SC5xx defconfigs.
+> > >
+> > > Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+> > > Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
+> > > Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
+> > > Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> > > Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+> > > ---
+> > >
+> > >  MAINTAINERS | 1 +
+> > >  1 file changed, 1 insertion(+)
+> > >
+> > > diff --git a/MAINTAINERS b/MAINTAINERS
+> > > index d62dd35a385..cee5f1a9271 100644
+> > > --- a/MAINTAINERS
+> > > +++ b/MAINTAINERS
+> > > @@ -631,6 +631,7 @@ F:        arch/arm/dts/sc5*
+> > >  F:   arch/arm/include/asm/arch-adi/
+> > >  F:   arch/arm/mach-sc5xx/
+> > >  F:   board/adi/
+> > > +F:   configs/sc5*
+> > >  F:   doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
+> > >  F:   doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
+> > >  F:   doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
+> >
+> > This doesn't also catch the other drivers and so forth added. Perhaps
+> > the "N: " regex syntax would be helpful here, to make adding all of
+> > those as well easier? Thanks.
+>=20
+> Thanks for the feedback, I'll review the names again before v2 and
+> look for any missed entries. Our names are a bit inconsistent: some
+> adi, some adsp, some include sc5xx and some do not. In v2 of this
+> series we could rename the defconfigs to adhere to a useful, specific
+> naming convention, and then follow up by renaming drivers across
+> different subsystems in a separate series so that we can have one N:
+> line and catch them all. Do you have any tips on tracking down files
+> that are missed? Using scripts/get_maintainer.pl with a list of what I
+> think the files are could work but I won't know if I forgot something
+> that way :-). Is there a particular way to invoke it that checks all
+> files, perhaps, and reports on files that are missing supporters?
 
-Which for the record and my tracking, isn't merged yet, and links to
-the doc update which also isn't applied yet. I'm fine with the concept
-but also thinking that applying this here to master isn't the first step
-towards getting all the relevant projects in agreement FYI.
+Sadly it's a manual process.
 
 --=20
 Tom
 
---172cyDJgGYsS9ZYE
+--PY95QWoLl4yv2HoV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhxMaIACgkQFHw5/5Y0
-tyyhCgv+OIpA5ggY7L4iZ0nYkFpDKeNlqe1d1IC/3H68bQX6ALcKonchFuVma9yb
-VoGOgSOaFYuUTge6udaWHAcWIt0wmHSuTYvIxEpqDIe8Codr5oAN6tWmffiq4dyf
-/exjK52vyMHQ/bQkboBImVGMMhJMd+8Xj1jlmJmLMMjmXTl3D0MAaYVuG3nFL3wO
-KRqWcUyBSBMpML4bJvTsDMi55+ZDcL7VnybY6BGqvHDZURW3s0nqTARIuAEWQ4Oi
-8JyOdPgV9MGTq9eypKJT0/6CQBRnysUD7pRx8yGK5yYstJDR4FNgdEY3J43SjDvc
-y0BhnqbT4KNv2nhbtxDa4Yj96JJsOGsnSdaRiEGO5CneUp7dFvwZRsNe3QsDUXsw
-+T0lrgkfbyvXbPQWrn8OG4pvOHYOujwVe5aw0qK7UEiOXLCF2bom1NZ2shGvuUk4
-b+W1c6YiJZGRjjKtQ6RS/ll4NdiOcrVYRfjTgHFSCT79L5xfylDOof00F6Mlc6z+
-a/d0hCWy
-=THRb
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhxMlcACgkQFHw5/5Y0
+tywLMQv/URhi2QSxRFxXWtZJVsmGotcp2PkkD826PexFtnxhYCpMShGTNQhhGEtm
+wDS8NjMXhVdyux9qHrMJ0BSh0uqYRPCWneBizTVmO9mP84A+8wX4P4S0pR5k/nto
+W/jeN+BLz2yRcmCZkbX6vKxj7RUU7G2gEFiWLzivl79llLB/OLa2FMCh0c2ggm9H
+vXJL3W++7QrMmFP+NDskNgsDpStx6nA/QxGOSnedI1/J01dezKNM9hqqUdiRygwa
+3VqxvYxEpC2vf1+Y0RfFLnTAxef7as84crE2yrMobCgSerXHtTpNYYOCKMoenJ+X
+4cqdF7chRJUPOec2G4rM+dH9A4qB3QILaH3xQQLs2H0n7Q37PvBRZSpwA2DJfsv6
+0XCockE7cULBpPT6693ANuHjGupReGP+WUoQE7EcSzkPC8o/cHeinzqWecbMiZDt
+vXfajjCUjoqTPzYOEPTQkTCFxJvZ0GNXt4hbIuse6iO2eG39TqzPJymou41yC7Iv
+n6Y6hI29
+=xE/h
 -----END PGP SIGNATURE-----
 
---172cyDJgGYsS9ZYE--
+--PY95QWoLl4yv2HoV--
