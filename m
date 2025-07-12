@@ -4,44 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24B1EC83F10
-	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 17:25:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B4A9C83F1D
+	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 18:03:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC9DB8006D;
-	Sat, 12 Jul 2025 19:25:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=opensuse.org
+	by phobos.denx.de (Postfix) with ESMTP id 96AFC805D7;
+	Sat, 12 Jul 2025 20:03:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jBq5uacp";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6916803DF; Sat, 12 Jul 2025 19:25:00 +0200 (CEST)
-Received: from eclipse.jkvinge.net (eclipse.jkvinge.net [217.170.205.109])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1BE1E808AF; Sat, 12 Jul 2025 20:03:35 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38D3480050
- for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 19:24:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C03F980050
+ for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 20:03:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=opensuse.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=jonaski@opensuse.org
-Received: from ni217.in.jkvinge.net (ti0116a430-0645.bb.online.no
- [85.165.33.137]) (authenticated bits=0)
- by eclipse.jkvinge.net (8.15.2/8.15.2/SuSE Linux 0.8) with ESMTPSA id
- 56CHOud4004887
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO)
- for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 19:24:57 +0200
-Message-ID: <7c447cc15eafab93f91ac3f9d14b12045d2a66f2.camel@opensuse.org>
-Subject: CM5 and LetsTrust TPM with u-boot and Linux
-From: Jonas Kvinge <jonaski@opensuse.org>
-To: u-boot@lists.denx.de
-Date: Sat, 12 Jul 2025 19:24:56 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2 
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-60bd30dd387so1518512eaf.3
+ for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 11:03:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1752343411; x=1752948211; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QXg3Uk6e4rX6fiBnaMUucFspVUm2ojngctQviGHXG+0=;
+ b=jBq5uacpnT4n8CB327WmB5C+53aR1hg7fZV+sgl3clsh6TB2phtCyhD9L9ODldY+P4
+ uR7s+jiPu5LX1Z/3G8JFEPwOjoUdDUwqbslfpwjT+6GVvHVZqFddrdGPXLX1IK5KwtbC
+ 6OfVnQr74WZILZagWfUk6/3fp3jWXBjummbl0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752343411; x=1752948211;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QXg3Uk6e4rX6fiBnaMUucFspVUm2ojngctQviGHXG+0=;
+ b=rbyWPkVS8xA00fqvwH/jykip/yhyeISBuDzCDT2H8VnlGHsfAVy9PflhHnkjAe1q9K
+ VFwe3f/CfgN41MRUqeiOE0MYDfKDa6EtSTOhfhcnWZni6QnsNt5uM/UDvJz/oegJp6JP
+ DPc776Y1P+ZWUj/puHEM5H6VVYw+Zcy49kKJnTLxouQAeJIJCDJmDJ5gxjIPF26vpIoK
+ EV4/UzMcxuu+vTawZzo7l2SpF13wn1TXrSAO//1WUC00+3/OO1tq5qAOPNwSnlXerbjX
+ mEcsZVo/7pjqUZsR8TI9lXflzBLfcEFty1DORzn9zh/Rqnr/PIS2APs1sSun2UBib7hc
+ YYMQ==
+X-Gm-Message-State: AOJu0YxBurwoT0OqO9vP3Z8+x5rGqP3Jd6HVNIBe93BKgzNIn00CMvoz
+ WDXewvJYR8VurT8nXXtYm0RV15Zm9dIQ4imMWHBbaz0TDODqmN+6RTNL08a7bu296ps=
+X-Gm-Gg: ASbGncvrmBY4ElbKd1+VcTPPsUiykvQCPC1KJXfltEEbmRccA3xv7a1lWxyR4XMSHRf
+ Tox7z4SsfDk4PFmJTUngi+lYv/tTAcQGzJpSBQkaDHj3oiiXR4muS6zuAJKiOSg4JR8SOOS0Gpw
+ EmavIKuNGyj7dcrgzyp88fFtooTsEzrVqbGo6kxX1vMqK29DuTwrpumJR8k0yoqK1pvlQ4SKKet
+ 8GUVHnWAThwELqgOT1FSFf2mPhNloFEDyQ8KgfsouRtMMx4g/sK3yP9Y8ByzLPKVbPosYRLLZj8
+ h/RWXou1QJTc5Kg1ldV2nQ0oXssQINyf5fIakJM+nCGmCn+DvGfm2NYI12HSum0M9EUnoMIfAyx
+ gB6A+UrJSqdHZ/9jEWlLz8Xz1jgKsFW8o+sfT7Z14KtSr/0MS4ElxuHo=
+X-Google-Smtp-Source: AGHT+IHSUQ6RBK2I0SUoNFWIJNf2gUXIFF08z02xFV3e6NOiQQ8r/pLInYR3AN1a9ikTfPGxzYlOUg==
+X-Received: by 2002:a05:6808:f8e:b0:40b:441e:3a5f with SMTP id
+ 5614622812f47-4150f6b88b2mr4821810b6e.25.1752343411346; 
+ Sat, 12 Jul 2025 11:03:31 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4141bcd27b6sm956104b6e.29.2025.07.12.11.03.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 12 Jul 2025 11:03:30 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Yao Zi <ziyao@disroot.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250711085234.23659-1-ziyao@disroot.org>
+References: <20250711085234.23659-1-ziyao@disroot.org>
+Subject: Re: [PATCH v2] kbuild: Avoid including architecture-specific
+ Makefile twice
+Message-Id: <175234341036.3620534.17039080480632432616.b4-ty@konsulko.com>
+Date: Sat, 12 Jul 2025 12:03:30 -0600
 MIME-Version: 1.0
-Received-SPF: pass (eclipse.jkvinge.net: authenticated connection)
- receiver=eclipse.jkvinge.net; client-ip=85.165.33.137;
- helo=ni217.in.jkvinge.net; envelope-from=jonaski@opensuse.org;
- x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
- libspf2-1.2.10; 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,34 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Fri, 11 Jul 2025 08:52:34 +0000, Yao Zi wrote:
 
-I'm working on getting Raspberry Pi CM5 with a source kit io board and
-LetsTrust TPM with u-boot and Linux working.
-I'm building a custom u-boot similar to the description
-here:=C2=A0https://github.com/joholl/rpi4-uboot-tpm/blob/ad31306ce2f2d52f05=
-72385bfc8bac33cb1f1f68/README.md#setting-up-and-configuring
+> Stranges errors are observed when building U-Boot master for almost any
+> RISC-V board, the messages are in two types, one is about duplicated
+> symbols,
+> 
+> 	u-boot/arch/riscv/cpu//mtrap.S:32: multiple definition of `trap_entry';
+> 	arch/riscv/cpu/mtrap.o: u-boot/arch/riscv/cpu//mtrap.S:32: first defined here
+> 
+> [...]
 
-I've got this successfully working on the CM4 where the PCR's are
-extended on boot.
+Applied to u-boot/master, thanks!
 
-I'm now trying a similar setup on the CM5.
-I use openSUSE Tumbleweed with a custom built u-boot and linux kernel.
-I use kernel 6.12.35 with all the Raspberry Pi modifications
-from=C2=A0https://github.com/raspberrypi/linux
+[1/1] kbuild: Avoid including architecture-specific Makefile twice
+      commit: e80998a77b97fa52e9321a56e004d8adfd8125d7
+-- 
+Tom
 
-The TPM is detected, but the PCR's are not extended, showing zeros for
-all PCRs (tpm2_pcrread).
 
-In addition to the=C2=A0tpm-slb9670.dtbo from the latest firmware files for
-the Raspberry Pi
-(https://raw.githubusercontent.com/raspberrypi/linux/refs/heads/rpi-6.12.y/=
-arch/arm/boot/dts/overlays/tpm-slb9670-overlay.dts
-), I use the=C2=A0tpm-soft-spi.dts
-from=C2=A0https://raw.githubusercontent.com/joholl/rpi4-uboot-tpm/ad31306ce=
-2f2d52f0572385bfc8bac33cb1f1f68/Raspberry_Pi_OS_64bit/tpm-soft-spi.dts
-
-Do these needs to be modified for Raspberry Pi Compute Module 5, or
-could it be something in u-boot that needs to be changed?
-
-Jonas
