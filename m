@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4D1C83F1A
-	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 05:43:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22187C83F1A
+	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 05:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDD1B803DF;
-	Sat, 12 Jul 2025 07:43:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F11482998;
+	Sat, 12 Jul 2025 07:43:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cSnXM1pG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mzh1iYT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 835158277D; Sat, 12 Jul 2025 02:13:03 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 8D10A8277D; Sat, 12 Jul 2025 02:13:45 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08A61803DF
- for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 02:13:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5900E803DF
+ for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 02:13:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=davidzangcs@gmail.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-73a44512c8aso761094a34.0
- for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:13:00 -0700 (PDT)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2349f096605so34152725ad.3
+ for <u-boot@lists.denx.de>; Fri, 11 Jul 2025 17:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752279179; x=1752883979; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=o17V27T06MpSUqHpeWnRpWyVn5JserzB5tvov33pwss=;
- b=cSnXM1pGhNlfNy/EsYIqXmeB1NLfxDcjg/Br8u+NBCfWcqfrwGnsBXMHbUIXJ1hiEm
- tvZ5090lwDDKcf6T0kgFE4bnuSzDRjph2H7sJPlCA+GB9xcgoz3IEcTfVJTSjiZufxHz
- Ys77BUWb/IV6bs9RNf0WJBjhAaVWu1EnwzaQ//wRxSAXaicuTok9gKLzvkTgjXU8DDX7
- XNy6Os4hoiK7CDpBDOZFd80EflfivBLxrB26BfXnUcx8VyZDIbKKeGKcIm7g9rmgYzq2
- ZhSasTX0M4e4WX02HsBJQFMbReg5n1KM1m0FISqb5uDFiCUaio8fPmtCpt5u5j3kj0w0
- OykQ==
+ d=gmail.com; s=20230601; t=1752279222; x=1752884022; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Grd3qLmpj4XEgvOrbOmQC5TU17F+IXH/PQtnCK0WnAw=;
+ b=mzh1iYT1xJDr6iX4lyVzFMzmQJ7KiMCsozbPyI2JLa8kMsRLsCIR6faU8GADY2me68
+ ZkgI4UDHtKMnJ9wi1pjoEn6QN+c+4KyCuXzku67KwC2TY/Bk5fnsyLh/VBkPeZgeDo1J
+ Wu3hGBURFS61FOIgNjXYdhuy9PfljLL3LMUbN1J00lmshUkMyQ9PCjwwNE7q+JbfAnqN
+ BnrAg3WVNTuilwe2ZTDG9PUeyOPL7XiN3+A+oeYIJr5PNZqQszsR9Zd/8dxvpigtBsyA
+ di9EF+b5CqvXrsqa6yNNqduv4+cH++Ufho2gobXpUcWJvIxnipDvn87t0UZZSMUF2S5M
+ K8/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752279179; x=1752883979;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1752279222; x=1752884022;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=o17V27T06MpSUqHpeWnRpWyVn5JserzB5tvov33pwss=;
- b=W8s/SsfPGIYxRJOvbSe+k+Lx/3HTnnz1BvKiTmwoUH787PjVeE7+lV6GLxuyq44E/t
- Dliw5uDB/DUiyFrrVdMPFY3elJhZ94SF9oieQPD0F+yWHDypvBgHi1tiEaO9IGaZdrqW
- bo1q/6Oqezqhr0MDBglXq9RySnS7OcAZon3QodInAPktEYZfjXjxUCEFeUzAwYbDnvEt
- ReUDCsYkHwOM8yTrrQ3Uh4AjtDWtpEosO6dXMMmivCLBIloV/4zvF8uykfdTdyMfsQ+f
- cceuSBOGRFPIQ4r8tjJRh0QRRuC6PI/l0S6tGYwtMqQiJ/Bw4zKK1bGIYuO5opTUuhm0
- BMrQ==
-X-Gm-Message-State: AOJu0YwZ0/t+ZB9FTGSNqyS4JydLiWi/gRKr1sT5vOICutEgMQqRrQQ0
- yJGdimnW3EmNNMTOKvxq+5hEJHmgIh25x5IvPVljwnF8zv+DKpDur+3PpKInZQ==
-X-Gm-Gg: ASbGncvO4+lqlj4r34RLc215Z6g8mps+gl+IHoFXSAFeknddTGxHKG7PXiZckm5qWUd
- UpC5DHH0ANfHHHBD7OCfeujdoGsPvUcGBVnBgA0B0rZoeJDIetX9zq0QmVLFYyBHD3//rcZOBzU
- 4SYmPSZIvowgIH1tVZ0Zd4XLt2Rgf0yJGN/kX6zgwy/64ztaBq2Sm4sGGWlmRdLVJ0xzMApZ6O3
- 2ao5H0R4sHJAVpDkcDIa3L5Rl/qA1qSDhddOv+GWraHWijn6M96i5Kwgrhf9OWEB8lFRDvjYTi/
- i/pNY4JVaN8leSd856I0lpcvtxmZkrDoRK+1Gc8Zbqd5VipIDfTp4lbo/F5o0xrfaoN3c5nKlWG
- JCdK8OYo2S/T8xfvKv0XijJW9c3GvhKncZFeF0sIdnwxy1Dsqgo2+06mQXr/Kl1hot1rbv2fBnl
- A=
-X-Google-Smtp-Source: AGHT+IGWM0zFni4taAzb62dhzUGOL7nmWNiT1KA9zS7emRZJY8JQzcKjbGKDsnq9ueqL8aUAsi/AwQ==
-X-Received: by 2002:a05:6871:70e:b0:2d4:e420:926c with SMTP id
- 586e51a60fabf-2ff26389acfmr3066310fac.0.1752279179293; 
- Fri, 11 Jul 2025 17:12:59 -0700 (PDT)
-Received: from dva-Latitude-E6440.lan (syn-024-027-011-011.res.spectrum.com.
- [24.27.11.11]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ff11684d21sm931123fac.30.2025.07.11.17.12.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Jul 2025 17:12:58 -0700 (PDT)
-From: David Zang <davidzangcs@gmail.com>
-To: u-boot@lists.denx.de
-Cc: uboot-imx@nxp.com,
-	David Zang <davidzangcs@gmail.com>
-Subject: [PATCH v2] soc: imx8ulp: Add celsius unit for temperature
-Date: Fri, 11 Jul 2025 19:12:54 -0500
-Message-Id: <20250712001254.232825-1-davidzangcs@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ bh=Grd3qLmpj4XEgvOrbOmQC5TU17F+IXH/PQtnCK0WnAw=;
+ b=FzMy6IZWbNp4xVCsHkeH9LG/amX2pcjnPNDjQHY09HiLefB/AISvDSq1tbbWSe5AWs
+ P+WQztWeskrgyTzDmcCmP0taFgxr3Tp7Jjm51YMRMlYHa1fxg3dyIQDl9ga8483qywUT
+ 6olkM35zBsJuIaOF7kOUWW1TwPojbYqW/HbnSwVcIVgiXw11M1uCSOYhRt0e7pOwiNyK
+ qV0rem+bqc9YH+9Mni6vs8pomuEXYiAjCVEanIYYREpwgHwuWxxvNqTG6Rm1YnHF3poB
+ +YZbTRG9fqHOgMQWnWom2DwejDCICBHN3ZuYZVMfMzE6r4fNqQhGci9rFelMj+udcYSd
+ xyrw==
+X-Gm-Message-State: AOJu0Yytg4CHa+jeePC8YlrEhfkL6K25aBeO4R13ILbrIE4Jf/P/QfFF
+ GLQzCCeKXh5Dci1Fm/eDD+JhydR9UwLyVdi9+dYTKUEFcA7QeF4QDljDZ6yuutN6A1XRzh8ARUS
+ 7ZA0j4EXl0sAIiq+pu3PLu5+C87KuRu0=
+X-Gm-Gg: ASbGncuoI+O5eq0ykgh5YMn/jySix7RebuwI30WcELihyfNWHvInGCxK1H2D7WfFsxH
+ DKpVi52UEPB/mbEHWnQb9JM05iZ1uczJ5AmnHmxuP7jrue2S5iXIGn7x4X91O8ZN3XS92w0Kyy1
+ WXCBLggxDk3t5ji/ji7x9BO2qSXD5oNOSzUuKN+OTcSRMv9iVGN6iCRxIcEL+ULA7RewYho8gwy
+ 7bpCaWI5YPsBK8=
+X-Google-Smtp-Source: AGHT+IEz7CCuVuULnTYsVECtcAwDOw+T6NCXxnvi/2wrbQ1dYaGqVGZoLbQvsQQSsrKUnLNhGB/xp95FkZmLGmV8LaU=
+X-Received: by 2002:a17:902:fc8e:b0:234:b422:7120 with SMTP id
+ d9443c01a7336-23dee17a4b6mr58053415ad.9.1752279221769; Fri, 11 Jul 2025
+ 17:13:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250709234918.140919-1-davidzangcs@gmail.com>
+ <CAOMZO5D1d=Y9i9E+Pcm0sbyKE+M=zUj_9Rs_QHbaE5DPvWFA=w@mail.gmail.com>
+ <CACwB3C-KKZS_5JOfFvF5hWsXr4AXUU+OTR1+rBSd5NpkH4r+rg@mail.gmail.com>
+ <CAOMZO5AXxp3x+mErrWFMX_3SUt58jGDZCAXOo+De=0b-ORA2GA@mail.gmail.com>
+In-Reply-To: <CAOMZO5AXxp3x+mErrWFMX_3SUt58jGDZCAXOo+De=0b-ORA2GA@mail.gmail.com>
+From: David Zang <davidzangcs@gmail.com>
+Date: Fri, 11 Jul 2025 19:13:30 -0500
+X-Gm-Features: Ac12FXzkurAkv-siwQP5HALCkiMDTqExQkdVacXTvE5Ff8mGhjZz0AR-ixr79Nw
+Message-ID: <CACwB3C9cvxRx2+RFhqnoL56D+WWU+qhYJcQvCxhcAzF_Un1MaA@mail.gmail.com>
+Subject: Re: [PATCH] soc: imx8ulp: Add celsius unit for temperature
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com
 X-Mailman-Approved-At: Sat, 12 Jul 2025 07:42:59 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,27 +96,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make temperature unit (celsius) more clear to reduce confusion.
+On Fri, Jul 11, 2025 at 12:24=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 
-Signed-off-by: David Zang <davidzangcs@gmail.com>
----
-v2: Add commit log
- arch/arm/mach-imx/imx8ulp/soc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> On Fri, Jul 11, 2025 at 2:22=E2=80=AFPM David Zang <davidzangcs@gmail.com=
+> wrote:
+>
+> > Since it is a simple fix, do I really need a commit log?
+>
+> Yes, even a single line is better than nothing.
+>
+I sent out the v2.
 
-diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/soc.c
-index b5dc45296d1..f80890e62ae 100644
---- a/arch/arm/mach-imx/imx8ulp/soc.c
-+++ b/arch/arm/mach-imx/imx8ulp/soc.c
-@@ -279,7 +279,7 @@ int print_cpuinfo(void)
- 	if (!ret) {
- 		ret = thermal_get_temp(udev, &temp);
- 		if (!ret)
--			printf("CPU current temperature: %d\n", temp);
-+			printf("CPU current temperature: %dC\n", temp);
- 		else
- 			debug(" - failed to get CPU current temperature\n");
- 	} else {
--- 
-2.34.1
-
+David
