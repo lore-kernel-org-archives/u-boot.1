@@ -4,63 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456C1C83F20
-	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 11:56:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED67C83F1D
+	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 13:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DA898006D;
-	Sat, 12 Jul 2025 13:56:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 3FD068006D;
+	Sat, 12 Jul 2025 15:07:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=on-the-web.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Z88iHyU4";
+	dkim=pass (2048-bit key; secure) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="XQRiPZTy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 743C3800D7; Sat, 12 Jul 2025 13:56:49 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ id 7E9B7800D7; Sat, 12 Jul 2025 10:27:05 +0200 (CEST)
+Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
+ [109.224.244.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E5D080050
- for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 13:56:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 263A08003E
+ for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 10:27:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=on-the-web.ch
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 97b07539-5f17-11f0-b8ea-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 97b07539-5f17-11f0-b8ea-005056999439;
- Sat, 12 Jul 2025 13:58:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=kjB6nDJPF4K2c/BPYE08CglRTudafYw/vapeAyFZ06k=;
- b=Z88iHyU4QTkMtkaY5MqEIspXzSA9/SEXyaxT4CqQDLWMnZgZhz353geQMKZFJ1o5zXafYpWPxgfFd
- +JiexdTLWBUQEHVnLIXZ3lmIgu+zOM7tlKj2prQOq0q8pIcQ0X/ImHpqcYOKuC6RcbyRNitRAZGGUn
- CFZRrVxRGkv7unXBVkHHh4ZvhxNJUdbrxz0lFIJBLRp2cnuJt3F5xphFoyd8xBmaF+mSCMOTFkRHGs
- 47d49fu7j3nFEa6y7LUnCmMCL42JODP05WoYX3RBor6MyiA39ucCnWw553yWzzjC+iU/h9KHE5Sumj
- aC0kuvJDqTEo9dAzvaCQSVfOpSUP3cQ==
-X-KPN-MID: 33|7MSW49jglv6En9khLurS5vLHeIdMChFVdzi8wyXsV5yBFkrC1b3X85CmygbbmUI
- e8Zjy1kr9K8Q69/4DEiPXMJEDDExYPLeylDe5MHdhT+8=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|VFMSWWbZWwJq6/tUtz6zoxR1SmoHeXzF5Bgyk6tvBO7GpnsFGks9zsx776Ja9TY
- pfvKAAyVHh7htnvVd9YF8Dg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 48e4ea7e-5f17-11f0-aff3-005056998788;
- Sat, 12 Jul 2025 13:56:46 +0200 (CEST)
-Date: Sat, 12 Jul 2025 13:56:45 +0200
-Message-Id: <87wm8dbp1e.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- trini@konsulko.com, u-boot@lists.denx.de, josef.holzmayr@northern.tech
-In-Reply-To: <87y0stbssf.fsf@bloch.sibelius.xs4all.nl> (message from Mark
- Kettenis on Sat, 12 Jul 2025 12:35:44 +0200)
-Subject: Re: [PATCH] vexpress_ca9x4: Disable EFI_LOADER on this platform
-References: <20250711185512.2250368-1-trini@konsulko.com>
- <ECA70B87-D474-4408-B523-86F4A2D02D09@gmx.de>
- <CAC_iWjJQh8M8KsscLb6JXkFH4t+wr+oi9xX=gko6ztPm2YuQWw@mail.gmail.com>
- <87y0stbssf.fsf@bloch.sibelius.xs4all.nl>
+ spf=pass smtp.mailfrom=sputnik@on-the-web.ch
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=on-the-web.ch;
+ s=protonmail3; t=1752308821; x=1752568021;
+ bh=9UYh3HuX4WN4RuS2EwORSYPpYP3jTxeZxFmnMOP7Euk=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=XQRiPZTyp+nIzyNiYL3o0XOWl1Ot7sLVi3UlOMmrheo7RTb0VLRC/b9G4FOi7Cu05
+ YzovwKZcReQmay8+7s0k+INl5rwjCzMWJ/ql4kwmxA4/StuuAilY7UC3cmpspnzkTa
+ 1xEg7YI1ZDbtzEJHetJpUVjaYSmBUd1aeXh8BXyAni05sHuRzBG50irj2+y+HAbctK
+ FjfiGFY0VkMhqec85DO9oRH1pFjwkh5yPukKgwatvRj5A3GGOvOPq4T1mRNqdFqnfw
+ Yh2ISjOzBnxOK2t0NpVhu/h+NppBuZNmQRGMNgykBlhhqTQKtmhRiB0ce/zGgkMzl3
+ obkjke2uUo3mw==
+Date: Sat, 12 Jul 2025 08:26:55 +0000
+To: u-boot@lists.denx.de
+From: Martin Herren <sputnik@on-the-web.ch>
+Cc: Martin Herren <sputnik@on-the-web.ch>, Andreas Schwab <schwab@suse.de>,
+ Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>,
+ Bin Meng <bmeng.cn@gmail.com>, "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>, E Shattow <e@freeshell.de>,
+ Green Wan <green.wan@sifive.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Minda Chen <minda.chen@starfivetech.com>,
+ Padmarao Begari
+ <padmarao.begari@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Rick Chen <rick@andestech.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
+ Yao Zi <ziyao@disroot.org>, Yixun Lan <dlan@gentoo.org>,
+ Yuri Zaporozhets <yuriz@vodafonemail.de>
+Subject: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly used
+ value.
+Message-ID: <20250712082540.14091-1-sputnik@on-the-web.ch>
+Feedback-ID: 61562450:user:proton
+X-Pm-Message-ID: e0b68a876d8d53d6ab228834e688af9d7968a6c9
+MIME-Version: 1.0
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+ micalg=pgp-sha256;
+ boundary="------d36b3cc8328991b875eca77af6f783c44cec41c3d321328a5182d2181a8383e8";
+ charset=utf-8
+X-Mailman-Approved-At: Sat, 12 Jul 2025 15:07:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,98 +95,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Sat, 12 Jul 2025 12:35:44 +0200
-> From: Mark Kettenis <mark.kettenis@xs4all.nl>
-> 
-> > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Date: Sat, 12 Jul 2025 09:28:07 +0300
-> 
-> Hi Ilias, Heinrich and Tom,
-> 
-> As you probably know, OpenBSD/armv7 relies on EFI_LOAD, so disabling
-> EFI_LOADER on a platform means you can't boot OpenBSD on it.  Ilias
-> and I talked about this a while ago.  We talked about telling QEMU to
-> use an older version of the architecture that didn't do this alignment
-> check, but that may have been based on a misunderstanding of the
-> changes in QEMU.
-> 
-> At the time I didn't look any further into this, but I did now.  And
-> I'm confused because...
-> 
-> > Hi Heinrich
-> > 
-> > On Fri, 11 Jul 2025 at 22:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > Am 11. Juli 2025 20:55:12 MESZ schrieb Tom Rini <trini@konsulko.com>:
-> > > >As part of upgrading to QEMU 10.0.0 we discovered that the EFI loader
-> > > >tests would no longer pass CI, on this specific platform, while still
-> > > >passing on real hardware. Upon further investigation it turns out that
-> > > >on ARMv7 we rely on some undefined behavior with respect to enabling
-> > > >unaligned access. And while this is seemingly fine on real hardware,
-> > > >QEMU is now correct enough in implementation to no longer allow this. In
-> > > >order to not rely on this undefined behavior we would need to implement
-> > > >some MMU configuration (and then ensure proper tear-down possibly).
-> > > >
-> > > >At the moment, the most reasonable path forward seems to be to document
-> > > >this and disable the support here.
-> > >
-> > > Where will we document the issue?
-> > 
-> > I think we can add it on the EFI documentation? IIRC we only enable
-> > the i-cache not the mmu + d-cache. I can double check and send a
-> > patch.
-> 
-> There is code in U-Boot to enable the MMU and the D-cache.  The code
-> turns on the MMU gets turned on when we turn on the D-cache, which
-> happens when we call dcache_enable().  That function typically gets
-> called from the board.c file and the one used by vexpress_ca9x4
-> doesn't seem to do that.  But other ARMv7 targets do.  For example in
-> arch/arm/mach-sunxi/board.c we have:
-> 
-> #if !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) && defined(CONFIG_CPU_V7A)
-> void enable_caches(void)
-> {
->         /* Enable D-cache. I-cache is already enabled in start.S */
->         dcache_enable();
-> }
-> #endif
-> 
-> Note the CONFIG_CPU_V7A there.  This means that for the Allwinner
-> ARMv7 SoCs, which typically use Cortex-A7 cores that do include the
-> virtualization extensions and therefore should implement the stricter
-> unaligned access checks, we do enable the MMU.
-> 
-> > >  Does it imply that we should discourage EFI use on all ARMv7 systems?
-> 
-> So no, it does *not* imply we should discourage EFI use on all ARMv7
-> systems.
-> 
-> > The spec says the MMU must be enabled, so I think yes. I thought about
-> > disabling it, but that's too strict.
-> > Perhaps someone that uses v7 and *needs* EFI can look at enabling the
-> > MMU with a simple identity mapping.
-> 
-> That should be as simple the diff below.  I've not verified if that
-> fixes the QEMU issue, but I strongly suspect it will.  Whether this
-> works on actual vexpress hardware is a different issue though.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------d36b3cc8328991b875eca77af6f783c44cec41c3d321328a5182d2181a8383e8
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+From: Martin Herren <sputnik@on-the-web.ch>
+To: u-boot@lists.denx.de
+Cc: Martin Herren <sputnik@on-the-web.ch>,
+	Andreas Schwab <schwab@suse.de>,
+	Anup Patel <anup@brainfault.org>,
+	Atish Patra <atishp@atishpatra.org>,
+	Bin Meng <bmeng.cn@gmail.com>,
+	"Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+	Conor Dooley <conor.dooley@microchip.com>,
+	Cyril Jean <cyril.jean@microchip.com>,
+	E Shattow <e@freeshell.de>,
+	Green Wan <green.wan@sifive.com>,
+	Hal Feng <hal.feng@starfivetech.com>,
+	Heinrich Schuchardt <xypron.glpk@gmx.de>,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	Jaehoon Chung <jh80.chung@samsung.com>,
+	Jerome Forissier <jerome.forissier@linaro.org>,
+	Junhui Liu <junhui.liu@pigmoral.tech>,
+	Kongyang Liu <seashell11234455@gmail.com>,
+	Leo Yu-Chi Liang <ycliang@andestech.com>,
+	Maksim Kiselev <bigunclemax@gmail.com>,
+	Marek Vasut <marek.vasut+renesas@mailbox.org>,
+	Martin Schwan <m.schwan@phytec.de>,
+	Mattijs Korpershoek <mkorpershoek@kernel.org>,
+	Michal Simek <michal.simek@amd.com>,
+	Minda Chen <minda.chen@starfivetech.com>,
+	Padmarao Begari <padmarao.begari@amd.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Peter Robinson <pbrobinson@gmail.com>,
+	Rick Chen <rick@andestech.com>,
+	Sean Anderson <seanga2@gmail.com>,
+	Simon Glass <sjg@chromium.org>,
+	Sughosh Ganu <sughosh.ganu@linaro.org>,
+	Sumit Garg <sumit.garg@kernel.org>,
+	Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+	Tom Rini <trini@konsulko.com>,
+	Wei Fu <wefu@redhat.com>,
+	Yao Zi <ziyao@disroot.org>,
+	Yixun Lan <dlan@gentoo.org>,
+	Yuri Zaporozhets <yuriz@vodafonemail.de>
+Subject: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly used value.
+Date: Sat, 12 Jul 2025 10:25:20 +0200
+Message-ID: <20250712082540.14091-1-sputnik@on-the-web.ch>
+X-Mailer: git-send-email 2.50.0
+MIME-Version: 1.0
 
-Fixes the issue with QEMU 9.2.2.  Before it would reset, now it boots
-into the OpenBSD installer just fine.
 
-> diff --git a/board/armltd/vexpress/vexpress_common.c b/board/armltd/vexpress/vexpress_common.c
-> index 6c374e25e32..3833af59b09 100644
-> --- a/board/armltd/vexpress/vexpress_common.c
-> +++ b/board/armltd/vexpress/vexpress_common.c
-> @@ -165,3 +165,11 @@ void smp_set_core_boot_addr(unsigned long addr, int corenr)
->  	writel(addr, CONFIG_SYSFLAGS_ADDR);
->  }
->  #endif
-> +
-> +#if !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
-> +void enable_caches(void)
-> +{
-> +	/* Enable D-cache. I-cache is already enabled in start.S */
-> +	dcache_enable();
-> +}
-> +#endif
-> 
+The most commonly used SYS_BOOTM_LEN for riscv is 0x4000000 which is
+used in 25 of the current defconfigs.
+
+The previous default config value of 0x800000 was only used in 8
+defconfigs.
+
+This patch sets the default to this value.
+
+Command used to get the stats of the used values on RISCV defconfigs:
+
+```
+grep -l "CONFIG_RISCV=y" configs/* | \
+ xargs -I {} sh -c "grep -H CONFIG_SYS_BOOTM_LEN {} || echo {}:DEFAULT" | \
+ cut -d ':' -f 2 | sort | uniq -c
+```
+
+
+Martin Herren (3):
+  riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
+  riscv: Set SYS_BOOTM_LEN default to 0x4000000
+  riscv: Remove default SYS_BOOTM_LEN from defconfig
+
+ boot/Kconfig                            | 2 +-
+ configs/ae350_rv32_defconfig            | 1 -
+ configs/ae350_rv32_falcon_defconfig     | 1 -
+ configs/ae350_rv32_falcon_xip_defconfig | 1 -
+ configs/ae350_rv32_spl_defconfig        | 1 -
+ configs/ae350_rv32_spl_xip_defconfig    | 1 -
+ configs/ae350_rv32_xip_defconfig        | 1 -
+ configs
+/ae350_rv64_defconfig            | 1 -
+ configs/ae350_rv64_falcon_defconfig     | 1 -
+ configs/ae350_rv64_falcon_xip_defconfig | 1 -
+ configs/ae350_rv64_spl_defconfig        | 1 -
+ configs/ae350_rv64_spl_xip_defconfig    | 1 -
+ configs/ae350_rv64_xip_defconfig        | 1 -
+ configs/ibex-ast2700_defconfig          | 1 -
+ configs/k230_canmv_defconfig            | 1 +
+ configs/microchip_mpfs_icicle_defconfig | 1 +
+ configs/milkv_duo_defconfig             | 1 -
+ configs/qemu-riscv32_defconfig          | 1 -
+ configs/qemu-riscv32_smode_defconfig    | 1 -
+ configs/qemu-riscv32_spl_defconfig      | 1 -
+ configs/qemu-riscv64_defconfig          | 1 -
+ configs/qemu-riscv64_smode_defconfig    | 1 -
+ configs/qemu-riscv64_spl_defconfig      | 1 -
+ configs/sifive_unleashed_defconfig      | 1 -
+ configs/sifive_unmatched_defconfig      | 1 -
+ configs/sipeed_licheerv_nano_defconfig  | 1 -
+ configs/sipeed_maix_bitm_defconfig      | 1 +
+ configs/sipeed_maix_smode_defconfig     | 1 +
+
+ configs/starfive_visionfive2_defconfig  | 1 -
+ configs/th1520_lpi4a_defconfig          | 1 -
+ configs/xilinx_mbv32_defconfig          | 1 +
+ configs/xilinx_mbv32_smode_defconfig    | 1 +
+ configs/xilinx_mbv64_defconfig          | 1 +
+ configs/xilinx_mbv64_smode_defconfig    | 1 +
+ 34 files changed, 9 insertions(+), 26 deletions(-)
+
+
+--------d36b3cc8328991b875eca77af6f783c44cec41c3d321328a5182d2181a8383e8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: ProtonMail
+
+wqsEARYIAF0FgmhyHE0JkIiu+thqKlAPNRQAAAAAABwAEHNhbHRAbm90YXRp
+b25zLm9wZW5wZ3Bqcy5vcmdreMFt65DCoNBhdMLG8rOoFiEEJgeVlthQxcLg
+gu1biK762GoqUA8AAIoGAQD0xOBui9/w35EMdKh6W8e1npfTk4qrcE3E0v1Y
+0xc23AD9FeorADZOKYQkIbWvV8fNkuOlXBMUGPFEpKJnrok+UwM=
+=ZPGz
+-----END PGP SIGNATURE-----
+
+
+--------d36b3cc8328991b875eca77af6f783c44cec41c3d321328a5182d2181a8383e8--
+
