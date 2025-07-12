@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C6B9C83F10
-	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 08:27:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1181C83F10
+	for <u-boot@archiver.kernel.org>; Sat, 12 Jul 2025 10:35:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5480A8277D;
-	Sat, 12 Jul 2025 10:27:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=on-the-web.ch
+	by phobos.denx.de (Postfix) with ESMTP id E61208006D;
+	Sat, 12 Jul 2025 12:35:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="chfCWaKY";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="SZp8IiQ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C8B38277D; Sat, 12 Jul 2025 10:27:36 +0200 (CEST)
-Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
+ id 07AFC800D7; Sat, 12 Jul 2025 12:35:48 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 705D98003E
- for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 10:27:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=on-the-web.ch
+ by phobos.denx.de (Postfix) with ESMTPS id C1CCE80050
+ for <u-boot@lists.denx.de>; Sat, 12 Jul 2025 12:35:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sputnik@on-the-web.ch
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=on-the-web.ch;
- s=protonmail3; t=1752308853; x=1752568053;
- bh=uBo0V4yofsUMvSKU3khHSSe1pbsC6INY/nFdFOqQoI8=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=chfCWaKY67xSyST1Pvf6ipyZOu7VKEk2MJ6SEz77JKH4iMovh46+D/DLTeXs7xIyn
- q58KgKTQeZJWxE9jW6+fv2WXeHocXY3l8oadrM5MP9xr5jF9ZF087Rz5VwIl3YMVVP
- TYD15RHrNRcFr7bs53uRVl/vADVdrSnb/bLJzp6rd15yUbSHb/hQ4Pgc+UCpDCvqpG
- ugmt0soIYfVfgid4MfLbjP8ZFZhWqXgDMwVyxuWjF1YPDWmdGwqt8ETJeFmqDmFjGH
- 0JfObYF1ZZ/7pLN7ucUN97zQNOacX02feIG0RUe5ax700711hieLjG41ALAE5uenFW
- X6AjKMRfgXblA==
-Date: Sat, 12 Jul 2025 08:27:29 +0000
-To: u-boot@lists.denx.de
-From: Martin Herren <sputnik@on-the-web.ch>
-Cc: Martin Herren <sputnik@on-the-web.ch>, Andreas Schwab <schwab@suse.de>,
- Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>,
- Bin Meng <bmeng.cn@gmail.com>, "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
- E Shattow <e@freeshell.de>, Green Wan <green.wan@sifive.com>,
- Hal Feng <hal.feng@starfivetech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Minda Chen <minda.chen@starfivetech.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Rick Chen <rick@andestech.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Thomas Bonnefille <thomas.bonnefille@bootlin.com>, Tom Rini
- <trini@konsulko.com>, Wei Fu <wefu@redhat.com>, Yao Zi <ziyao@disroot.org>,
- Yixun Lan <dlan@gentoo.org>, Yuri Zaporozhets <yuriz@vodafonemail.de>
-Subject: [PATCH 3/3] riscv: Remove default SYS_BOOTM_LEN from defconfig
-Message-ID: <20250712082540.14091-4-sputnik@on-the-web.ch>
-In-Reply-To: <20250712082540.14091-1-sputnik@on-the-web.ch>
-References: <20250712082540.14091-1-sputnik@on-the-web.ch>
-Feedback-ID: 61562450:user:proton
-X-Pm-Message-ID: cdf39fd2f59de521adeaf5b18c36f74a199e3bfc
-MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg=pgp-sha256;
- boundary="------ef5d0869316b8eb2a840c585fa00e2dd1e2c889ffad2ffac3496638ac62acacf";
- charset=utf-8
+ dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: f736b939-5f0b-11f0-a9c0-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id f736b939-5f0b-11f0-a9c0-00505699b430;
+ Sat, 12 Jul 2025 12:35:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=1ByK1UiAB5CUMFyn2m/tFQCuUuyXoOkFi9eg8YZ/wCU=;
+ b=SZp8IiQ4WMHy/oindc7JU7zW0CxPbSLX2Z+5FUh218H2CCh8gIXkZIrqQyAviu3povufUERYzpvtE
+ Cl/mhXKgB3XrWmBMQe0P/maKGJHEgaiIZd/7aPtiS7hOFRsZt8mJGaEKb5Imi8Iv1qm34RWLEcd6RN
+ PosEHFTB2BM6x8S0nuYx1VuajN0fTZDQKPOFqan/L4Lj5lLRyZyxWYqpooaEj8YZnr+fYQ+08iUyET
+ XdDiZ9vvtEWlDM0J8C0zeOYYY5ZHA8h7+IgJ9lftoVOCD3K+Lo9N+75TdfLeTaXDccDHcD1sr8JipI
+ a5wOJWQpLNpAfpjPJ6s21a+IVpZT16g==
+X-KPN-MID: 33|BwTaUKNX7PHIyRs9HB/frwp//Qoicpng7aSnJmmhIDs768GtDS1zYFeE7W3kFWT
+ IW+mqDlXwMNAhQjdH5C64gT50KGP2fPJhUI9GhZF6Vpw=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|/PGLu0XvevMNaoanx0sVEt7pc7MQ/rA473DZoY5o/26n+NQ16tcNmvq7RoNmjAB
+ P6maZyWXNoa55nQ0pan9QRw==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id f70b38b3-5f0b-11f0-9821-00505699d6e5;
+ Sat, 12 Jul 2025 12:35:44 +0200 (CEST)
+Date: Sat, 12 Jul 2025 12:35:44 +0200
+Message-Id: <87y0stbssf.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com, u-boot@lists.denx.de,
+ josef.holzmayr@northern.tech
+In-Reply-To: <CAC_iWjJQh8M8KsscLb6JXkFH4t+wr+oi9xX=gko6ztPm2YuQWw@mail.gmail.com>
+ (message from Ilias Apalodimas on Sat, 12 Jul 2025 09:28:07 +0300)
+Subject: Re: [PATCH] vexpress_ca9x4: Disable EFI_LOADER on this platform
+References: <20250711185512.2250368-1-trini@konsulko.com>
+ <ECA70B87-D474-4408-B523-86F4A2D02D09@gmx.de>
+ <CAC_iWjJQh8M8KsscLb6JXkFH4t+wr+oi9xX=gko6ztPm2YuQWw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,412 +76,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------ef5d0869316b8eb2a840c585fa00e2dd1e2c889ffad2ffac3496638ac62acacf
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-From: Martin Herren <sputnik@on-the-web.ch>
-To: u-boot@lists.denx.de
-Cc: Martin Herren <sputnik@on-the-web.ch>,
-	Andreas Schwab <schwab@suse.de>,
-	Anup Patel <anup@brainfault.org>,
-	Atish Patra <atishp@atishpatra.org>,
-	Bin Meng <bmeng.cn@gmail.com>,
-	"Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
-	E Shattow <e@freeshell.de>,
-	Green Wan <green.wan@sifive.com>,
-	Hal Feng <hal.feng@starfivetech.com>,
-	Heinrich Schuchardt <xypron.glpk@gmx.de>,
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>,
-	Jaehoon Chung <jh80.chung@samsung.com>,
-	Jerome Forissier <jerome.forissier@linaro.org>,
-	Kongyang Liu <seashell11234455@gmail.com>,
-	Leo Yu-Chi Liang <ycliang@andestech.com>,
-	Maksim Kiselev <bigunclemax@gmail.com>,
-	Marek Vasut <marek.vasut+renesas@mailbox.org>,
-	Minda Chen <minda.chen@starfivetech.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Rick Chen <rick@andestech.com>,
-	Simon Glass <sjg@chromium.org>,
-	Sughosh Ganu <sughosh.ganu@linaro.org>,
-	Sumit Garg <sumit.garg@kernel.org>,
-	Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
-	Tom Rini <trini@konsulko.com>,
-	Wei Fu <wefu@redhat.com>,
-	Yao Zi <ziyao@disroot.org>,
-	Yixun Lan <dlan@gentoo.org>,
-	Yuri Zaporozhets <yuriz@vodafonemail.de>
-Subject: [PATCH 3/3] riscv: Remove default SYS_BOOTM_LEN from defconfig
-Date: Sat, 12 Jul 2025 10:25:23 +0200
-Message-ID: <20250712082540.14091-4-sputnik@on-the-web.ch>
-X-Mailer: git-send-email 2.50.0
-In-Reply-To: <20250712082540.14091-1-sputnik@on-the-web.ch>
-References: <20250712082540.14091-1-sputnik@on-the-web.ch>
-MIME-Version: 1.0
+> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Date: Sat, 12 Jul 2025 09:28:07 +0300
 
-Remove CONFIG_SYS_BOOTM_LEN from all riscv defconfigs where the new
-default value is used.
+Hi Ilias, Heinrich and Tom,
 
-Signed-off-by: Martin Herren <sputnik@on-the-web.ch>
----
+As you probably know, OpenBSD/armv7 relies on EFI_LOAD, so disabling
+EFI_LOADER on a platform means you can't boot OpenBSD on it.  Ilias
+and I talked about this a while ago.  We talked about telling QEMU to
+use an older version of the architecture that didn't do this alignment
+check, but that may have been based on a misunderstanding of the
+changes in QEMU.
 
- configs/ae350_rv32_defconfig            | 1 -
- configs/ae350_rv32_falcon_defconfig     | 1 -
- configs/ae350_rv32_falcon_xip_defconfig | 1 -
- configs/ae350_rv32_spl_defconfig        | 1 -
- configs/ae350_rv32_spl_xip_defconfig    | 1 -
- configs/ae350_rv32_xip_defconfig        | 1 -
- configs/ae350_rv64_defconfig            | 1 -
- configs/ae350_rv64_falcon_defconfig     | 1 -
- configs/ae350_rv64_falcon_xip_defconfig | 1 -
- configs/ae350_rv64_spl_defconfig        | 1 -
- configs/ae350_rv64_spl_xip_defconfig    | 1 -
- configs/ae350_rv64_xip_defconfig        | 1 -
- configs/ibex-ast2700_defconfig          | 1 -
- configs/milkv_duo_defconfig             | 1 -
- configs/qemu-riscv32_defconfig          | 1 -
- configs/qemu-riscv32_smode_defconfig    | 1 -
- configs/qemu-riscv32_spl_defconfig      | 1 -
- configs/qemu-riscv64_defcon
-fig          | 1 -
- configs/qemu-riscv64_smode_defconfig    | 1 -
- configs/qemu-riscv64_spl_defconfig      | 1 -
- configs/sifive_unleashed_defconfig      | 1 -
- configs/sifive_unmatched_defconfig      | 1 -
- configs/sipeed_licheerv_nano_defconfig  | 1 -
- configs/starfive_visionfive2_defconfig  | 1 -
- configs/th1520_lpi4a_defconfig          | 1 -
- 25 files changed, 25 deletions(-)
+At the time I didn't look any further into this, but I did now.  And
+I'm confused because...
 
-diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
-index 467d61d73df..e87782005f1 100644
---- a/configs/ae350_rv32_defconfig
-+++ b/configs/ae350_rv32_defconfig
-@@ -7,7 +7,6 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xfffe80
- CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
- CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
- CONFIG_SYS_MONITOR_BASE=0x88000000
-diff --git a/configs/ae350_rv32_falcon_defconfig b/configs/ae350_rv32_falcon_defconfig
-index 66b809d2376..f1d88f8560f 100644
----
- a/configs/ae350_rv32_falcon_defconfig
-+++ b/configs/ae350_rv32_falcon_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
- CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv32_falcon_xip_defconfig b/configs/ae350_rv32_falcon_xip_defconfig
-index a2f8d4cd236..2355bac5019 100644
---- a/configs/ae350_rv32_falcon_xip_defconfig
-+++ b/configs/ae350_rv32_falcon_xip_defconfig
-@@ -10,7 +10,6 @@ CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
-index 098cf7686d6..6655cbd4a96 100644
---- a/configs/ae350_rv3
-2_spl_defconfig
-+++ b/configs/ae350_rv32_spl_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
- CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
-index 23927888c87..44a6b6534b8 100644
---- a/configs/ae350_rv32_spl_xip_defconfig
-+++ b/configs/ae350_rv32_spl_xip_defconfig
-@@ -10,7 +10,6 @@ CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
-index 75eb0618454..15f3b5c378b 100644
---- a/configs/ae350_rv32_xip_defconfig
-+++ b/configs/ae350_r
-v32_xip_defconfig
-@@ -7,7 +7,6 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xfffe80
- CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
- CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
- CONFIG_XIP=y
-diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
-index 932739e5dec..78b9fc439ac 100644
---- a/configs/ae350_rv64_defconfig
-+++ b/configs/ae350_rv64_defconfig
-@@ -6,7 +6,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xfffd70
- CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
- CONFIG_ARCH_RV64I=y
-diff --git a/configs/ae350_rv64_falcon_defconfig b/configs/ae350_rv64_falcon_defconfig
-index c9417175ce7..81bebb1a1d4 100644
---- a/configs/ae350_rv64_falcon_defconfig
-+++ b/configs/ae350_rv64_falcon_defconfig
-@@ -8,7 +8,6 @@ CONFIG_ENV_SECT
-_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv64_falcon_xip_defconfig b/configs/ae350_rv64_falcon_xip_defconfig
-index e072f7c2ae9..8e1b8e20052 100644
---- a/configs/ae350_rv64_falcon_xip_defconfig
-+++ b/configs/ae350_rv64_falcon_xip_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
-index 83ce28077f0..7950074642e 100644
---- a/configs/ae350_rv64_spl_defconfig
-+++ b/configs/ae350_rv64_spl_defconfig
-@@ -8,7 +8,6 @@ CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_
-DEFAULT_DEVICE_TREE="ae350_64"
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
-index 5ad1751686c..d5882af1de1 100644
---- a/configs/ae350_rv64_spl_xip_defconfig
-+++ b/configs/ae350_rv64_spl_xip_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SPL_BSS_START_ADDR=0x400000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_SPL=y
- CONFIG_TARGET_ANDES_AE350=y
-diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
-index 5ec2cba670b..46ce063c484 100644
---- a/configs/ae350_rv64_xip_defconfig
-+++ b/configs/ae350_rv64_xip_defconfig
-@@ -6,7 +6,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0
-xfffd70
- CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
- CONFIG_ARCH_RV64I=y
-diff --git a/configs/ibex-ast2700_defconfig b/configs/ibex-ast2700_defconfig
-index f088aec8716..8e8259f291d 100644
---- a/configs/ibex-ast2700_defconfig
-+++ b/configs/ibex-ast2700_defconfig
-@@ -15,7 +15,6 @@ CONFIG_DM_RESET=y
- CONFIG_SPL_TEXT_BASE=0x14bc0080
- CONFIG_SPL_BSS_START_ADDR=0x14bd7800
- CONFIG_SPL_BSS_MAX_SIZE=0x800
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x83000000
- CONFIG_SPL_SIZE_LIMIT=0x16000
- CONFIG_SPL=y
-diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
-index 70393de5736..f1f3930564b 100644
---- a/configs/milkv_duo_defconfig
-+++ b/configs/milkv_duo_defconfig
-@@ -5,7 +5,6 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
- CONFIG_DEFAULT_DEVICE_TREE="cv1800b-milkv-duo"
--C
-ONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80080000
- CONFIG_IDENT_STRING="milkv_duo"
- CONFIG_TARGET_MILKV_DUO=y
-diff --git a/configs/qemu-riscv32_defconfig b/configs/qemu-riscv32_defconfig
-index cdffda26281..d77054e5a0e 100644
---- a/configs/qemu-riscv32_defconfig
-+++ b/configs/qemu-riscv32_defconfig
-@@ -5,7 +5,6 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-virt32"
- CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_TARGET_QEMU_VIRT=y
- CONFIG_FIT=y
-diff --git a/configs/qemu-riscv32_smode_defconfig b/configs/qemu-riscv32_smode_defconfig
-index 3d065b6a9fb..22d9462c022 100644
---- a/configs/qemu-riscv32_smode_defconfig
-+++ b/configs/qemu-riscv32_smode_defconfig
-@@ -5,7 +5,6 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-virt32"
- CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SYS_BOOTM_LEN=0x4000000
+> Hi Heinrich
+> 
+> On Fri, 11 Jul 2025 at 22:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > Am 11. Juli 2025 20:55:12 MESZ schrieb Tom Rini <trini@konsulko.com>:
+> > >As part of upgrading to QEMU 10.0.0 we discovered that the EFI loader
+> > >tests would no longer pass CI, on this specific platform, while still
+> > >passing on real hardware. Upon further investigation it turns out that
+> > >on ARMv7 we rely on some undefined behavior with respect to enabling
+> > >unaligned access. And while this is seemingly fine on real hardware,
+> > >QEMU is now correct enough in implementation to no longer allow this. In
+> > >order to not rely on this undefined behavior we would need to implement
+> > >some MMU configuration (and then ensure proper tear-down possibly).
+> > >
+> > >At the moment, the most reasonable path forward seems to be to document
+> > >this and disable the support here.
+> >
+> > Where will we document the issue?
+> 
+> I think we can add it on the EFI documentation? IIRC we only enable
+> the i-cache not the mmu + d-cache. I can double check and send a
+> patch.
 
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_TARGET_QEMU_VIRT=y
- CONFIG_RISCV_SMODE=y
-diff --git a/configs/qemu-riscv32_spl_defconfig b/configs/qemu-riscv32_spl_defconfig
-index 15f1a5d973d..b43eda1e160 100644
---- a/configs/qemu-riscv32_spl_defconfig
-+++ b/configs/qemu-riscv32_spl_defconfig
-@@ -6,7 +6,6 @@ CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-virt32"
- CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_BSS_START_ADDR=0x84000000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL=y
- CONFIG_TARGET_QEMU_VIRT=y
-diff --git a/configs/qemu-riscv64_defconfig b/configs/qemu-riscv64_defconfig
-index bf9a0b07400..b5d65db6308 100644
---- a/configs/qemu-riscv64_defconfig
-+++ b/configs/qemu-riscv64_defconfig
-@@ -4,7 +4,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-virt64"
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_TARGET
-_QEMU_VIRT=y
- CONFIG_ARCH_RV64I=y
-diff --git a/configs/qemu-riscv64_smode_defconfig b/configs/qemu-riscv64_smode_defconfig
-index 6cc42817970..d3f7465ff82 100644
---- a/configs/qemu-riscv64_smode_defconfig
-+++ b/configs/qemu-riscv64_smode_defconfig
-@@ -4,7 +4,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-virt64"
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_TARGET_QEMU_VIRT=y
- CONFIG_ARCH_RV64I=y
-diff --git a/configs/qemu-riscv64_spl_defconfig b/configs/qemu-riscv64_spl_defconfig
-index 1c7cef056c4..eae94d8d161 100644
---- a/configs/qemu-riscv64_spl_defconfig
-+++ b/configs/qemu-riscv64_spl_defconfig
-@@ -5,7 +5,6 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-virt64"
- CONFIG_SPL_BSS_START_ADDR=0x84000000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL=y
- CONF
-IG_TARGET_QEMU_VIRT=y
-diff --git a/configs/sifive_unleashed_defconfig b/configs/sifive_unleashed_defconfig
-index 01963a4e54e..f341e3e0735 100644
---- a/configs/sifive_unleashed_defconfig
-+++ b/configs/sifive_unleashed_defconfig
-@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_STACK=0x81cfe70
- CONFIG_SPL_BSS_START_ADDR=0x85000000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL=y
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-diff --git a/configs/sifive_unmatched_defconfig b/configs/sifive_unmatched_defconfig
-index acbea7fe1bb..0a736f2ba95 100644
---- a/configs/sifive_unmatched_defconfig
-+++ b/configs/sifive_unmatched_defconfig
-@@ -12,7 +12,6 @@ CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_STACK=0x81cfe60
- CONFIG_SPL_BSS_START_ADDR=0x85000000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL=y
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-diff --git a/configs/sipeed_licheerv_nano_defconfig b/configs/sipeed_licheerv_nan
-o_defconfig
-index 14fefa968c6..ab29f327d7a 100644
---- a/configs/sipeed_licheerv_nano_defconfig
-+++ b/configs/sipeed_licheerv_nano_defconfig
-@@ -5,7 +5,6 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
- CONFIG_DEFAULT_DEVICE_TREE="sg2002-licheerv-nano-b"
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80080000
- CONFIG_IDENT_STRING="licheerv_nano"
- CONFIG_TARGET_LICHEERV_NANO=y
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 3e34e4a87f8..544140c03f7 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -18,7 +18,6 @@ CONFIG_SPL_STACK=0x8180000
- CONFIG_SPL_TEXT_BASE=0x8000000
- CONFIG_SPL_BSS_START_ADDR=0x8040000
- CONFIG_SPL_BSS_MAX_SIZE=0x10000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x82000000
- CONFIG_SPL=y
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-diff --git a/configs/th1520_lpi4a_defconfig b/confi
-gs/th1520_lpi4a_defconfig
-index 78e3b25ab82..55a8eaac4a9 100644
---- a/configs/th1520_lpi4a_defconfig
-+++ b/configs/th1520_lpi4a_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DEFAULT_DEVICE_TREE="th1520-lichee-pi-4a"
- CONFIG_SPL_STACK=0xffe0170000
- CONFIG_SPL_BSS_START_ADDR=0xffe0160000
- CONFIG_SPL_BSS_MAX_SIZE=0x10000
--CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL=y
- CONFIG_TARGET_TH1520_LPI4A=y
+There is code in U-Boot to enable the MMU and the D-cache.  The code
+turns on the MMU gets turned on when we turn on the D-cache, which
+happens when we call dcache_enable().  That function typically gets
+called from the board.c file and the one used by vexpress_ca9x4
+doesn't seem to do that.  But other ARMv7 targets do.  For example in
+arch/arm/mach-sunxi/board.c we have:
 
---------ef5d0869316b8eb2a840c585fa00e2dd1e2c889ffad2ffac3496638ac62acacf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+#if !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) && defined(CONFIG_CPU_V7A)
+void enable_caches(void)
+{
+        /* Enable D-cache. I-cache is already enabled in start.S */
+        dcache_enable();
+}
+#endif
 
------BEGIN PGP SIGNATURE-----
-Version: ProtonMail
+Note the CONFIG_CPU_V7A there.  This means that for the Allwinner
+ARMv7 SoCs, which typically use Cortex-A7 cores that do include the
+virtualization extensions and therefore should implement the stricter
+unaligned access checks, we do enable the MMU.
 
-wqsEARYIAF0FgmhyHG8JkIiu+thqKlAPNRQAAAAAABwAEHNhbHRAbm90YXRp
-b25zLm9wZW5wZ3Bqcy5vcmfP7IqRnkIEsLrmzBGZjG8hFiEEJgeVlthQxcLg
-gu1biK762GoqUA8AAECUAP9khgS8ilCPIrW3JB3xduxgy+mb3zRAmZiRDc4v
-sIm4BwD/Z21XzMqAvFknalbuFaWnfiNgnfs6BZshuIZUM88Dmgw=
-=e/YG
------END PGP SIGNATURE-----
+> >  Does it imply that we should discourage EFI use on all ARMv7 systems?
+
+So no, it does *not* imply we should discourage EFI use on all ARMv7
+systems.
+
+> The spec says the MMU must be enabled, so I think yes. I thought about
+> disabling it, but that's too strict.
+> Perhaps someone that uses v7 and *needs* EFI can look at enabling the
+> MMU with a simple identity mapping.
+
+That should be as simple the diff below.  I've not verified if that
+fixes the QEMU issue, but I strongly suspect it will.  Whether this
+works on actual vexpress hardware is a different issue though.
 
 
---------ef5d0869316b8eb2a840c585fa00e2dd1e2c889ffad2ffac3496638ac62acacf--
 
+diff --git a/board/armltd/vexpress/vexpress_common.c b/board/armltd/vexpress/vexpress_common.c
+index 6c374e25e32..3833af59b09 100644
+--- a/board/armltd/vexpress/vexpress_common.c
++++ b/board/armltd/vexpress/vexpress_common.c
+@@ -165,3 +165,11 @@ void smp_set_core_boot_addr(unsigned long addr, int corenr)
+ 	writel(addr, CONFIG_SYSFLAGS_ADDR);
+ }
+ #endif
++
++#if !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
++void enable_caches(void)
++{
++	/* Enable D-cache. I-cache is already enabled in start.S */
++	dcache_enable();
++}
++#endif
