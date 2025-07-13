@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5460FC83F17
-	for <u-boot@archiver.kernel.org>; Sun, 13 Jul 2025 23:32:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E37DC83F1A
+	for <u-boot@archiver.kernel.org>; Sun, 13 Jul 2025 23:35:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60A5D81E06;
-	Mon, 14 Jul 2025 01:32:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8DCEB82DA1;
+	Mon, 14 Jul 2025 01:34:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Lk+h7KHr";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yF8c1wIa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71E0281FEE; Mon, 14 Jul 2025 01:32:29 +0200 (CEST)
+ id 71A2381FEE; Mon, 14 Jul 2025 01:34:53 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41F00805D7
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 01:32:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AD87805D7
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 01:34:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=afea=Z3=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1752449544;
- bh=3ZFoGrlJxb04mAzxl7UBU2nz7VQ7VTOncNfAAmyFDG8=;
- b=Lk+h7KHrRntiiKcqHgz7HlX7UoYg426N+gBMVxVFXqUQakQYuucolZg76Q/9NFXa/svcru6Io
- 0iZfZvPzS8S0m9AtNgMzsKU4zIWPV07ZSpzjyHR7WVe6O+hQhHwiLull4w/qwkjY1rOqxoQ4rfZ
- KPNTCl/Usopymf86RFF575VUKClN50mId4pj/14zDIPQmR7ZnuNH08O8yVrdxsCCl5aJWKZqI3e
- qDz5Yozia1rJhQSObxybNfHKbueNns8jd3Odh1dQERjbALQj/5Qp77ItQOOicIqlW4vEYb13x8V
- ccl1rm54ACCQaR4unvfocC9rA7a+gYXcjgBhLYRd7ZdA==
-X-Forward-Email-ID: 687442001bd28f9311449296
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1752449681;
+ bh=rcAsGCnPQa3C6p1uoy63bk2qZODMk5zIDAkAHotSY1Q=;
+ b=yF8c1wIaCJJXuWzmt9lpwcjztfqBbLS5MyhPJZHbxJGizwGcXDv3y6sBwQXqEsyUuvQpl6OSN
+ 5DRNMJvi8/mjdLQaCZYGHYZTIYFyviyTxlYoeJa+0vFLth5spLPjuq5JwG0CiBQfF76yxa2vJ5v
+ vIpjBlZqwtqJS+/SywbQUPNX90A2Uu1qiCq5ozOsqxgFpTg9mkGzbaEvjGywprbeD/1COs2mtQa
+ SSkUMZmsHGjvXp+4smH8qekXu9F2xhS/R1jcKhudVXvIpxRrlzmGlFvFXOitT17KZB16AdgVXaU
+ 0+Tav2Mh0hQh6ZMM6dJGCbcGj563uzciwWPJQEYReWqg==
+X-Forward-Email-ID: 6874428e5c59ddd2f404fd70
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.1.6
@@ -43,23 +42,19 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <e1202cd9-6db7-4c9f-8744-94ffc6f28c9a@kwiboo.se>
-Date: Mon, 14 Jul 2025 01:32:12 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] rockchip: px30/rk3326: Implement checkboard() to print
- SoC variant
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Heiko Stuebner <heiko@sntech.de>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20250610-px30-identify-variant-v3-1-957d70a8df9e@cherry.de>
-Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250610-px30-identify-variant-v3-1-957d70a8df9e@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 00/17] rockchip: odroid-go2: Add support for SPI flash boot
+ and more 
+Date: Sun, 13 Jul 2025 23:33:48 +0000
+Message-ID: <20250713233429.1376172-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,91 +71,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/10/2025 11:42 AM, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> This implements checkboard() to print the current SoC model used by a
-> board, e.g. one of:
-> 
-> SoC:   PX30
-> SoC:   PX30S
-> SoC:   PX30K
-> SoC:   RK3326
-> SoC:   RK3326S
-> 
-> when U-Boot proper is running.
-> 
-> The information is read from the OTP and also the DDR_GRF. There's no
-> public information as far as I know about the layout and stored
-> information on OTP but this was provided by Rockchip themselves through
-> their support channel.
-> 
-> The OTP stores the information of whether the SoC is PX30K or something
-> else. To differentiate between PX30/RK3326 and PX30S/RK3326S, one needs
-> to read some undocumented bitfield in a DDR_GRF register as done in
-> vendor kernel,
-> c.f. https://github.com/armbian/linux-rockchip/blob/rk-6.1-rkr5.1/drivers/soc/rockchip/rockchip-cpuinfo.c#L118-L133
-> 
-> I do not own a PX30S, nor RK3326/RK3326S so cannot test it works
-> properly.
-> 
-> Also add the OTP node to the pre-relocation phase of U-Boot proper so
-> that the SoC variant can be printed when DISPLAY_BOARDINFO is enabled.
-> This is not required if DISPLAY_BOARDINFO_LATE is enabled because this
-> happens after relocation. If both are enabled, then the SoC variant will
-> be printed twice in the boot log, e.g.:
-> 
-> U-Boot 2025.07-rc3-00014-g7cb731574ae6-dirty (May 28 2025 - 13:52:47 +0200)
-> 
-> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
-> SoC:   PX30  <---- due to DISPLAY_BOARDINFO
-> DRAM:  2 GiB
-> PMIC:  RK809 (on=0x40, off=0x00)
-> Core:  293 devices, 27 uclasses, devicetree: separate
-> MMC:   mmc@ff370000: 1, mmc@ff390000: 0
-> Loading Environment from MMC... Reading from MMC(1)... OK
-> 
-> In:    serial@ff030000
-> Out:   serial@ff030000
-> Err:   serial@ff030000
-> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
-> SoC:   PX30  <----- due to DISPLAY_BOARDINFO_LATE
-> Net:   eth0: ethernet@ff360000
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+This series update ODROID-GO Advance/Super to support SPI flash boot,
+adds pinctrl in SPL, enable use of checksum validation for FIT images,
+include FDT for each board variant in FIT and more.
 
-I have now tested this on my RK3326 ODROID-GO Super:
+Each patch in this series has been tested on a ODROID-GO Super:
 
+  DDR3, 333MHz
+  BW=32 Col=10 Bk=8 CS0 Row=15 CS=1 Die BW=16 Size=1024MB
+  out
+  
+  U-Boot SPL 2025.07 (Jul 13 2025 - 10:07:16 +0000)
+  Trying to boot from MMC1
+  ## Checking hash(es) for config config-3 ... OK
+  ## Checking hash(es) for Image atf-1 ... sha256+ OK
+  ## Checking hash(es) for Image u-boot ... sha256+ OK
+  ## Checking hash(es) for Image fdt-3 ... sha256+ OK
+  ## Checking hash(es) for Image atf-2 ... sha256+ OK
+  ## Checking hash(es) for Image atf-3 ... sha256+ OK
+  ## Checking hash(es) for Image atf-4 ... sha256+ OK
+  ## Checking hash(es) for Image atf-5 ... sha256+ OK
+  
   U-Boot 2025.07 (Jul 13 2025 - 10:07:16 +0000)
-
+  
   Model: ODROID-GO Super
   SoC:   RK3326
   DRAM:  1 GiB (total 1022 MiB)
+  PMIC:  RK817 (on=0x80, off=0x08)
+  Core:  283 devices, 26 uclasses, devicetree: separate
+  MMC:   mmc@ff370000: 0
+  Loading Environment from MMC... Reading from MMC(0)... OK
+  In:    serial@ff160000
+  Out:   serial@ff160000
+  Err:   serial@ff160000
+  Net:   No ethernet found.
+  Hit any key to stop autoboot:  0
+  =>
 
-so this is,
+The final patch in this series enables use of the feature added in
+"rockchip: px30/rk3326: Implement checkboard() to print SoC variant" [1]
 
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+[1] https://patchwork.ozlabs.org/patch/2095941/
 
-Regards,
-Jonas
+Jonas Karlman (17):
+  clk: px30: Allow use of GPU and WIFI_PMU in assigned-clocks
+  rockchip: odroid-go2: Remove cru assigned-clocks override
+  rockchip: odroid-go2: Remove u-boot.dtsi props already defined
+  rockchip: odroid-go2: Use appropriate bootph props
+  rockchip: odroid-go2: Move SoC common overrides into a SoC u-boot.dtsi
+  rockchip: odroid-go2: Remove unsupported Kconfig options
+  rockchip: odroid-go2: Update Kconfig options for SPL
+  rockchip: odroid-go2: Include pinctrl for sdmmc, sfc and uart in SPL
+  rockchip: odroid-go2: Use power off at power plug-in event
+  rockchip: odroid-go2: Add support for SPI flash boot
+  rockchip: odroid-go2: Select board FDT from FIT in SPL
+  rockchip: odroid-go2: Use env from same storage FIT was loaded from
+  rockchip: odroid-go2: Enable RockUSB, button, LED and RNG support
+  rockchip: odroid-go2: Turn on the blue LED at boot
+  rockchip: odroid-go2: Enable more commands
+  rockchip: odroid-go2: Add myself as a reviewer
+  arm: dts: rockchip: Include OTP in U-Boot pre-reloc phase for RK3326
 
-> ---
-> Tested on a PX30 Ringneck and PX30K Ringneck. Would be nice if anyone
-> had a device with a PX30S, RK3326 or RK3326S so we could verify it
-> prints what it should :)
-> ---
-> Changes in v3:
-> - added (theoretical, untested) support for RK3326/RK3326S based on
->   feedback from Jonas,
-> - Link to v2: https://lore.kernel.org/r/20250606-px30-identify-variant-v2-1-624d34ccc381@cherry.de
-> 
-> Changes in v2:
-> - added (theoretical, untested) support for PX30S based on feedback from
->   Kever,
-> - Link to v1: https://lore.kernel.org/r/20250528-px30-identify-variant-v1-1-4ea69c527a0d@cherry.de
-> ---
->  arch/arm/dts/px30-u-boot.dtsi      |  4 +++
->  arch/arm/mach-rockchip/px30/px30.c | 61 ++++++++++++++++++++++++++++++++++++++
->  2 files changed, 65 insertions(+)
+ arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi    | 111 +++----------
+ .../arm/dts/rk3326-odroid-go2-v11-u-boot.dtsi |   3 +
+ arch/arm/dts/rk3326-odroid-go3-u-boot.dtsi    |   3 +
+ arch/arm/dts/rk3326-u-boot.dtsi               | 154 ++++++++++++++++++
+ board/hardkernel/odroid_go2/Kconfig           |   7 +
+ board/hardkernel/odroid_go2/MAINTAINERS       |   2 +
+ board/hardkernel/odroid_go2/go2.c             |  88 ++++++++--
+ configs/odroid-go2_defconfig                  |  63 ++++---
+ drivers/clk/rockchip/clk_px30.c               |   6 +
+ 9 files changed, 315 insertions(+), 122 deletions(-)
+ create mode 100644 arch/arm/dts/rk3326-odroid-go2-v11-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3326-odroid-go3-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3326-u-boot.dtsi
 
-[snip]
+-- 
+2.49.0
+
