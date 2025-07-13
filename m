@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFF1CC83F1A
-	for <u-boot@archiver.kernel.org>; Sun, 13 Jul 2025 23:38:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E982C83F1A
+	for <u-boot@archiver.kernel.org>; Sun, 13 Jul 2025 23:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EA688309D;
-	Mon, 14 Jul 2025 01:35:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A5F482DA1;
+	Mon, 14 Jul 2025 01:35:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PsS8w16C";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GbYJRBiY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7478781E06; Mon, 14 Jul 2025 01:35:38 +0200 (CEST)
+ id 4E79F830C0; Mon, 14 Jul 2025 01:35:42 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C68C82D06
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 01:35:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2097482FCA
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 01:35:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1752449728; bh=yhMmjizPRB9rcOEJf2ulpwF7Qb9Mb9zPET4go9P/vW0=;
- b=PsS8w16CHMs77rF6+bYcWcPp4T3IZEuL8JUCy8OEBGdce+QaBHptzIzrN8W5lRtR4YsEDj+DI
- LL5kJQE+RrBKX77tkMFtmhFSO6t7EdNU+xlXGSZ7MMMw78ZNCFuoc2um0izB35r4qkaAp/6k1J1
- c01FBGXljRIKGrIcK8PkMjjBvaaDtbLMewFOpVOXygtxB7t9hyQm4Q1h0P448qMCL8T1b5VA8zk
- GwBxmdLW4l8lBGEfxIH6e+Ny1L5MMhhyfUdJfUkEEk29oVEqB5hqJ/WOSPu4IfJZuUqXZwJx/Pa
- skl1oe8cCrq+zxCIPVA+OuHwCrHED85LVKC8MDBTAspw==
-X-Forward-Email-ID: 687442bc5c59ddd2f404ff91
+ t=1752449738; bh=jtqyvno6CUAvGzGPyTIEzZw5mKEwfrJAoVQQEI6ahQw=;
+ b=GbYJRBiYni7a8flw79oLUB9sqz54WBU9nLhk97mE/KxnS9Gng+1gcxYHol8nVTYCl87p3hFwG
+ PrH4Qfgf8BCZXmEre1GcwX+QX5zmZbrunOeVFthw2z9lvpHKylBpJis1kXWBN1VAISW23YEkX/2
+ b2MDxIp8VK5GGJudlwiKhi/AjVcImao8jiuw/REh2QXH/aRgKOCRyZIDvvWPbrgdtNsFp0+S3Cb
+ /EH7VCE2EhTYESiQVkD9vCs70wggjK/Qo6rgON40D/RrH2VXA9r9nWmrf5M15T6PiB3yEeJyv/G
+ Jw8uVrYe+J7SLfFXraLJEfxnGMlfQGozGP1gcuXIMJvA==
+X-Forward-Email-ID: 687442c75c59ddd2f404fffa
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.1.6
@@ -48,10 +48,9 @@ To: Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 13/17] rockchip: odroid-go2: Enable RockUSB, button,
- LED and RNG support
-Date: Sun, 13 Jul 2025 23:34:01 +0000
-Message-ID: <20250713233429.1376172-14-jonas@kwiboo.se>
+Subject: [PATCH 16/17] rockchip: odroid-go2: Add myself as a reviewer
+Date: Sun, 13 Jul 2025 23:34:04 +0000
+Message-ID: <20250713233429.1376172-17-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250713233429.1376172-1-jonas@kwiboo.se>
 References: <20250713233429.1376172-1-jonas@kwiboo.se>
@@ -73,61 +72,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Kconfig options to support RockUSB, buttons, LEDs and RNG
-featured on the board or SoC.
+I have the ORDOID-GO Super variant of this board. Add myself as a
+reviewer to help review future patches targeting this device.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- configs/odroid-go2_defconfig | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ board/hardkernel/odroid_go2/MAINTAINERS | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
-index 185d0f1d7c5f..70d74c65a2f3 100644
---- a/configs/odroid-go2_defconfig
-+++ b/configs/odroid-go2_defconfig
-@@ -54,6 +54,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_ITEST is not set
- # CONFIG_CMD_SLEEP is not set
-@@ -72,12 +73,17 @@ CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
- CONFIG_SYSCON=y
- CONFIG_SPL_SYSCON=y
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_GPIO=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_FASTBOOT_BUF_ADDR=0x800800
- CONFIG_FASTBOOT_BUF_SIZE=0x04000000
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_PWM=y
-+CONFIG_LED_GPIO=y
- CONFIG_MISC=y
- CONFIG_ROCKCHIP_OTP=y
- CONFIG_MMC_DW=y
-@@ -97,6 +103,8 @@ CONFIG_RAM=y
- CONFIG_SPL_RAM=y
- CONFIG_TPL_RAM=y
- CONFIG_ROCKCHIP_SDRAM_COMMON=y
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_ROCKCHIP=y
- # CONFIG_SPECIFY_CONSOLE_INDEX is not set
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-@@ -109,6 +117,7 @@ CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_LZO=y
- CONFIG_ERRNO_STR=y
+diff --git a/board/hardkernel/odroid_go2/MAINTAINERS b/board/hardkernel/odroid_go2/MAINTAINERS
+index 9e83bc9452c8..ee06c2fa6518 100644
+--- a/board/hardkernel/odroid_go2/MAINTAINERS
++++ b/board/hardkernel/odroid_go2/MAINTAINERS
+@@ -1,6 +1,8 @@
+ GO2
+ M:      Heiko Stuebner <heiko.stuebner@cherry.de>
++R:      Jonas Karlman <jonas@kwiboo.se>
+ S:      Maintained
+ F:      board/hardkernel/odroid_go2/
+ F:      include/configs/odroid_go2.h
++F:      arch/arm/dts/rk3326-odroid-go*
+ F:      configs/odroid-go2_defconfig
 -- 
 2.49.0
 
