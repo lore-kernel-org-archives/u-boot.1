@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1E69C83F17
-	for <u-boot@archiver.kernel.org>; Sun, 13 Jul 2025 23:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F96C83F1A
+	for <u-boot@archiver.kernel.org>; Sun, 13 Jul 2025 23:36:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F15D82E52;
+	by phobos.denx.de (Postfix) with ESMTP id 9AD0083010;
 	Mon, 14 Jul 2025 01:35:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0hGomBll";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="QK749VHC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E95F8300B; Mon, 14 Jul 2025 01:35:04 +0200 (CEST)
+ id C69F882E52; Mon, 14 Jul 2025 01:35:04 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF47581E06
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 01:34:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB092805D7
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 01:34:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1752449696; bh=PKuQl8qB/Coug6WzhQv/nGxGO1E8ndxpYebnQ0oPKN8=;
- b=0hGomBllhGf8MsVOXALVsP7fCAO0eUJ5AGkLQRNAba+dNzjroT7OV1jcIj33q24UYsThqHQgy
- L4DXmiMEGf/RGHTPkG8ei2fGtFmii/LHzkVj0adFtea72X4cUoPcUrFSNbTSOHokF5za7nJZBBd
- VMY4V0F4bPCX5+R49AlqHoajSLlNkQXi1umJDh7uMSbqhQy5Rcq0Qixd28mzR8MsHoqK/8iJ32o
- GgZ6Sbx2X7Ju5GcC+k5BteTyHB+/wagl6vxldjVXgNWUx3oEcUojonlNcNOA8ZQGisOFq+FqFwg
- VdpRZSSe1FyA3CfCe6y93NKYcUiJ5reX6mWgzfAEB2TQ==
-X-Forward-Email-ID: 6874429c5c59ddd2f404fe16
+ t=1752449691; bh=qLLlBRGUoC10817I0X3v0IVpuvQVX/0iv1Q9MdThByQ=;
+ b=QK749VHCVP68pgDES1DTxmutHc7jP5oBc6dQwVWUEozp0Tzs4xtQQz3J+WE9hN3ur3V5z6Aas
+ 9T2Dd2vb+Cfl/I50tyJPObGwY1Qb+XAzYvEZ2NRqBLxaWI1erlRbgoiKLO22q/EYn2aAowupRaQ
+ FcOxLJdqA+NvVCVu3YI6lNPEXBHNyVrZt3XQNzxcLa+L46U7lPBjVmMY5yqlUXZ2wnJx0Ru0i5X
+ 7RcqveQd3rmFLG92L/qq7gokfZtjggWUsWGq7vaikmihVXUjBMbv1tDF+ASTwwUjmikI5EzE4pP
+ 5VtmiRMkBjt++ZU8gFHwiOJfyrQ0dp6wWehBSBa41dGw==
+X-Forward-Email-ID: 687442985c59ddd2f404fdfc
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.1.6
@@ -48,9 +48,10 @@ To: Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 04/17] rockchip: odroid-go2: Use appropriate bootph props
-Date: Sun, 13 Jul 2025 23:33:52 +0000
-Message-ID: <20250713233429.1376172-5-jonas@kwiboo.se>
+Subject: [PATCH 03/17] rockchip: odroid-go2: Remove u-boot.dtsi props already
+ defined
+Date: Sun, 13 Jul 2025 23:33:51 +0000
+Message-ID: <20250713233429.1376172-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250713233429.1376172-1-jonas@kwiboo.se>
 References: <20250713233429.1376172-1-jonas@kwiboo.se>
@@ -72,79 +73,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-GPIO devices are needed in U-Boot proper phase, sdmmc and sfc devices
-are needed in SPL and pre-reloc phase.
+DTs from dts/upstream already contain aliases for i2c, mmc and serial.
 
-Update bootph- props to match what boot phase devices are needed at.
+Remove the aliases and status=okay that are already defined in upstream
+board or SoC DT.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 16 +++++++---------
- 1 file changed, 7 insertions(+), 9 deletions(-)
+This also remove a bad re-defined alias for spi0, SPI flash support will
+be added/fixed in a later patch in this series
+---
+ arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 11 -----------
+ 1 file changed, 11 deletions(-)
 
 diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-index df21747fad78..a27994e450c0 100644
+index f37daa893c79..df21747fad78 100644
 --- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
 +++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-@@ -27,22 +27,18 @@
+@@ -10,15 +10,6 @@
+ 		u-boot,spl-boot-order = &sdmmc;
+ 	};
+ 
+-	aliases {
+-		i2c0 = &i2c0;
+-		i2c1 = &i2c1;
+-		mmc0 = &sdmmc;
+-		serial1 = &uart1;
+-		serial2 = &uart2;
+-		spi0 = &sfc;
+-	};
+-
+ 	dmc {
+ 		bootph-all;
+ 		compatible = "rockchip,px30-dmc", "syscon";
+@@ -28,7 +19,6 @@
+ 	rng: rng@ff0b0000 {
+ 		compatible = "rockchip,cryptov2-rng";
+ 		reg = <0x0 0xff0b0000 0x0 0x4000>;
+-		status = "okay";
+ 	};
  };
  
- &gpio0 {
--	bootph-all;
- 	gpio-ranges = <&pinctrl 0 0 32>;
- };
+@@ -85,7 +75,6 @@
  
- &gpio1 {
--	bootph-all;
- 	gpio-ranges = <&pinctrl 0 32 32>;
- };
- 
- &gpio2 {
--	bootph-all;
- 	gpio-ranges = <&pinctrl 0 64 32>;
- };
- 
- &gpio3 {
--	bootph-all;
- 	gpio-ranges = <&pinctrl 0 96 32>;
- };
- 
-@@ -78,28 +74,30 @@
+ &saradc {
+ 	bootph-all;
+-	status = "okay";
  };
  
  &sdmmc {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
- 
- 	/* mmc to sram can't do dma, prevent aborts transferring TF-A parts */
- 	u-boot,spl-fifo-mode;
- };
- 
- &sfc {
--	bootph-all;
-+	bootph-some-ram;
- };
- 
- &{/spi@ff3a0000/flash@0} {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &uart1 {
--	clock-frequency = <24000000>;
- 	bootph-all;
-+	clock-frequency = <24000000>;
- };
- 
- &uart2 {
--	clock-frequency = <24000000>;
- 	bootph-all;
-+	clock-frequency = <24000000>;
- };
- 
- &xin24m {
 -- 
 2.49.0
 
