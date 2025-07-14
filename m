@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0997C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 14:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 118B8C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 15:22:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2759883020;
-	Mon, 14 Jul 2025 16:58:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B85182F49;
+	Mon, 14 Jul 2025 17:22:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=hitachienergy.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EE+CMj9G";
+	dkim=pass (1024-bit key; unprotected) header.d=hitachienergy.com header.i=@hitachienergy.com header.b="c7wG1h35";
+	dkim=pass (2048-bit key; unprotected) header.d=outbound.mailhop.org header.i=@outbound.mailhop.org header.b="Wp1B7nQa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C3E583020; Mon, 14 Jul 2025 16:58:28 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CC9ED82FC7; Mon, 14 Jul 2025 17:22:12 +0200 (CEST)
+Received: from out-ip0052.fra.mailhop.org (out-ip0052.fra.mailhop.org
+ [18.158.144.38])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CDC382CFA
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:58:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D37A82E37
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 17:22:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=hitachienergy.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-735a8be4ea9so792195a34.0
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 07:58:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=holger.brunck@hitachienergy.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752505104; x=1753109904; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5cYDpDUqmDxvlZ1V6qTpMYM9i6BaO1TZkZ8sbsTwJ28=;
- b=EE+CMj9GzkSkFMEYnEs0P5CZUThwJsp4cdtcNbqtgvUHlJI4SSMA+H7o9x0XgAh4UD
- IsGX2L9aRlRZyM6aTAYD93c0NWmbrIbe5u4cY3cyZ4vnbenwpmBONWfU72H/Nxhcl44X
- 3D4PpWj74CFtbg4qzLAyO/qCny00Lsv6Co4PU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752505104; x=1753109904;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5cYDpDUqmDxvlZ1V6qTpMYM9i6BaO1TZkZ8sbsTwJ28=;
- b=KVPnszYJoEZn4J0eEczJVIG1muh2QV2LJtgFJnJ7vR4VjvR4NJBfaV7aJQOScuaMJZ
- HRHE/l82F6vAs7UdyuXNlBsltYdv8NY6A3hQxzpf1360wh7qZxa1r6+0a3yrQ4gu80Mq
- PW6KkGP0wRj5TnykqSYS9pm74rZbgxc9Wd2JDRgxh6qEvrtVrWBNbSuH0soadvmi+64y
- AKvFAgZXqkHtJUpy/0JORV1J/tGpNAh6VAV3j4zmkmAKmW2JKsamh+Uue3hkCKeDwRf9
- ubQ8jytSsaqxCfsX4XAzRSnhh85MvJFzm+4G1iWPzNXTn5MXqvmxnkOsrU5btxkqG01e
- aqoQ==
-X-Gm-Message-State: AOJu0Yzqb0U7SUP/9NNCMl8EWLVe7fZiRrPToBWk0Gxqaf3E21d6mPFA
- LWSgCH04eC71NsHK5qlUKDWnmJTrkJL9+qebT/1n+0/FMvefR5SnxdvzLPJdMURr5o4=
-X-Gm-Gg: ASbGncvAhXPEB8MOKFZmtZujrafPG5mpH6pDqI4/NYLyknNeP3UfL/UQRYSp6My5U8G
- KphKw4gmK/+EJXtw9Kreum9nZJ5+fAimcAM18U2phKth/4nVA7AMdo5sqm4hKiZyvObfRs/vaA/
- YadlyhmT8HBcIRuGXL2VCiQsm0m9Jjvm1I3b6oOqOMCnwRxIm0SWWC0apoW55vpWh5G5HHWAA8w
- f/FjJ7MB6c1sCtRh+9ezHeuriGiQR+6nQ096vzVkzkd4BffYJJ6qMWlXZvodBwfjUgC2OiWG79p
- FPpwlfLknCu7UFHe/npto8zdn/6Uav1BAELP+BUnqjvreXZUkimP/O+ubFEDZ18gKjqQbRVQG+q
- z/AvmzGinwM09Bb+oiTNf2ICKlF1wKVUjZvnrv1h+QRc4QygBVwACDipg
-X-Google-Smtp-Source: AGHT+IE9d0RlvXwuA/6tme9Vkxix8aagW0a3q8HEnLSTFHD8E6DvqWH8G8o3DHa5QFVNVvp/KWAwEA==
-X-Received: by 2002:a05:6808:3505:b0:401:16e:918e with SMTP id
- 5614622812f47-4150d645624mr10585797b6e.8.1752505104008; 
- Mon, 14 Jul 2025 07:58:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-414196c7484sm1558660b6e.15.2025.07.14.07.58.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 07:58:23 -0700 (PDT)
-Date: Mon, 14 Jul 2025 08:58:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Holger Brunck <holger.brunck@hitachienergy.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
-Subject: Re: [PATCH 2/6] km: Kconfig: set KM_RESERVED_PRAM to zero for all
- designs
-Message-ID: <20250714145821.GG13084@bill-the-cat>
-References: <20250714132221.2471558-1-holger.brunck@hitachienergy.com>
- <20250714132221.2471558-2-holger.brunck@hitachienergy.com>
- <20250714145212.GF13084@bill-the-cat>
- <AM9PR06MB7843D024FB26194DC5AE943CF754A@AM9PR06MB7843.eurprd06.prod.outlook.com>
+ d=hitachienergy.com; s=duo-1630306886989-947ac67a;
+ h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
+ subject:cc:to:from:cfbl-address:cfbl-feedback-id:from;
+ bh=5/t8erYYGcCb7JoPcIGjayH9olJKw6gx0BzB9uZGmkE=;
+ b=c7wG1h35SOsVKSE0NTcoT6YIkAUucGWk2LR1XvlHfeVoVPw0BCGHNV+qjQa/RSTFr08uEdcHzRwCX
+ xOK2oZmqmjPjKv+ZzeYFiwYFuadhsbcm2jIZgBDYXpvrbnX9jb9MnuNmdbCr5zaeSUIxsJlkdPhwId
+ bonKt3oTJrYEPpiA=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=outbound.mailhop.org; s=dkim-high;
+ h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
+ subject:cc:to:from:cfbl-address:cfbl-feedback-id:from;
+ bh=5/t8erYYGcCb7JoPcIGjayH9olJKw6gx0BzB9uZGmkE=;
+ b=Wp1B7nQaKXp6Y8BlhyCLE/dVji/EXDK5uxWUnkzKb00iu4k0z52673nIAu4BquNx3YWlIf/oyO8Zy
+ mWYLATqT2QIam3m6jrTxqm2H0Kfge3Mq5VXf7wQ7x3KVw5UfinWwBek89t8jmfXdMJV8sZ1ek/3Rke
+ VqasPpIJdZi7OFgK8qXgUC/RMnRI68jNIOqoLHSxg6iZ6G3dFMiSaol8qMFH7X0AV+1oaQtgdv2NKh
+ YTbtpYONRO7gAMdCxLe+pps7a1s4ftwEUmpEkLaCWKWnDWvPMiSYVul3/ReN5sAdCDTdcFWCB7EV/I
+ 7lb/0r0Ug/p1boUa0FiOSH4SPvAQfzA==
+X-Originating-IP: 20.62.140.138
+X-MHO-RoutePath: aGVkY3NtdHA=
+X-MHO-User: 4d0a59a0-60c6-11f0-be23-eb1d40c36193
+X-Report-Abuse-To: https://support.duocircle.com/support/solutions/articles/5000540958-duocircle-standard-smtp-abuse-information
+X-Mail-Handler: DuoCircle Outbound SMTP
+CFBL-Feedback-ID: 4d0a59a0-60c6-11f0-be23-eb1d40c36193:7
+CFBL-Address: prvs=02909799d7=abuse@outbound.mailhop.org; report=arf
+Received: from HPG0000000548.corp.hitachi-powergrids.com (unknown
+ [20.62.140.138]) by outbound2.eu.mailhop.org (Halon) with ESMTPSA
+ id 4d0a59a0-60c6-11f0-be23-eb1d40c36193;
+ Mon, 14 Jul 2025 15:22:07 +0000 (UTC)
+Received: from gitsiv.hitachienergy.com (unknown [10.54.139.14])
+ by HPG0000000548.corp.hitachi-powergrids.com (Postfix) with SMTP id 374921606; 
+ Mon, 14 Jul 2025 15:22:05 +0000 (UTC)
+Received: from chbrn3-p-dev015.keymile.net (chbrn3-p-dev015.keymile.net
+ [172.31.41.201])
+ by gitsiv.hitachienergy.com (Postfix) with ESMTP id A174660B7D47;
+ Mon, 14 Jul 2025 17:22:04 +0200 (CEST)
+From: Holger Brunck <holger.brunck@hitachienergy.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+ Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
+ Holger Brunck <holger.brunck@hitachienergy.com>
+Subject: [PATCH v2 2/6] km: drop KM_RESERVED_PRAM
+Date: Mon, 14 Jul 2025 17:22:02 +0200
+Message-ID: <20250714152202.2504860-1-holger.brunck@hitachienergy.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250714132221.2471558-2-holger.brunck@hitachienergy.com>
+References: <20250714132221.2471558-2-holger.brunck@hitachienergy.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7xMbEQMUlSrzwzEv"
-Content-Disposition: inline
-In-Reply-To: <AM9PR06MB7843D024FB26194DC5AE943CF754A@AM9PR06MB7843.eurprd06.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,67 +92,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This variable is unused since we dropped the support for the Kirkwood
+boards.
 
---7xMbEQMUlSrzwzEv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Holger Brunck <holger.brunck@hitachienergy.com>
+---
+ board/keymile/Kconfig                | 8 --------
+ board/keymile/common/common.c        | 8 +++-----
+ include/configs/km/pg-wcom-ls102xa.h | 3 +--
+ include/configs/kmcent2.h            | 3 +--
+ 4 files changed, 5 insertions(+), 17 deletions(-)
 
-On Mon, Jul 14, 2025 at 02:57:41PM +0000, Holger Brunck wrote:
-> > On Mon, Jul 14, 2025 at 03:22:17PM +0200, Holger Brunck wrote:
-> >=20
-> > > This area was used for special purposes on kirkwood. On the current
-> > > designs we don't need this anymore.
-> > >
-> > > Signed-off-by: Holger Brunck <holger.brunck@hitachienergy.com>
-> > > ---
-> > >  board/keymile/Kconfig | 3 +--
-> > >  1 file changed, 1 insertion(+), 2 deletions(-)
-> > >
-> > > diff --git a/board/keymile/Kconfig b/board/keymile/Kconfig index
-> > > 41458813858..3a66b2915ac 100644
-> > > --- a/board/keymile/Kconfig
-> > > +++ b/board/keymile/Kconfig
-> > > @@ -31,8 +31,7 @@ config KM_PHRAM
-> > >
-> > >  config KM_RESERVED_PRAM
-> > >  	hex "Reserved RAM"
-> > > -	default 0x0 if MPC83xx
-> > > -	default 0x1000 if MPC85xx || ARCH_LS1021A
-> > > +	default 0x0
-> > >  	depends on !ARCH_SOCFPGA
-> > >  	help
-> > >  	  Reserved physical RAM area at the end of memory for special
-> > purposes.
-> >=20
-> > Can the whole thing be removed then? Thanks.
-> >=20
->=20
-> Good point, I can drop it completely. Should I send a v2 for the whole se=
-ries
-> then or only for this one?
-
-Assuming there's no conflicts, v2 of just this patch is fine.
-
+diff --git a/board/keymile/Kconfig b/board/keymile/Kconfig
+index 41458813858..b68c10f85e4 100644
+--- a/board/keymile/Kconfig
++++ b/board/keymile/Kconfig
+@@ -29,14 +29,6 @@ config KM_PHRAM
+ 	help
+ 	  Start address of the physical RAM, which is the mounted /var folder.
+=20
+-config KM_RESERVED_PRAM
+-	hex "Reserved RAM"
+-	default 0x0 if MPC83xx
+-	default 0x1000 if MPC85xx || ARCH_LS1021A
+-	depends on !ARCH_SOCFPGA
+-	help
+-	  Reserved physical RAM area at the end of memory for special purposes.
+-
+ config KM_CRAMFS_ADDR
+ 	hex "CRAMFS Address"
+ 	default 0x83000000 if ARCH_LS1021A
+diff --git a/board/keymile/common/common.c b/board/keymile/common/common.=
+c
+index 25897af2d8a..4bdaf90deff 100644
+--- a/board/keymile/common/common.c
++++ b/board/keymile/common/common.c
+@@ -53,7 +53,7 @@ int set_km_env(void)
+ 	char *p;
+=20
+ 	pnvramaddr =3D CFG_SYS_SDRAM_BASE + gd->ram_size -
+-		CONFIG_KM_RESERVED_PRAM - CONFIG_KM_PHRAM - CONFIG_KM_PNVRAM;
++		CONFIG_KM_PHRAM - CONFIG_KM_PNVRAM;
+ 	sprintf(envval, "0x%x", pnvramaddr);
+ 	env_set("pnvramaddr", envval);
+=20
+@@ -61,12 +61,10 @@ int set_km_env(void)
+ 	p =3D env_get("rootfssize");
+ 	if (p)
+ 		strict_strtoul(p, 16, &rootfssize);
+-	pram =3D (rootfssize + CONFIG_KM_RESERVED_PRAM + CONFIG_KM_PHRAM +
+-		CONFIG_KM_PNVRAM) / 0x400;
++	pram =3D (rootfssize + CONFIG_KM_PHRAM + CONFIG_KM_PNVRAM) / 0x400;
+ 	env_set_ulong("pram", pram);
+=20
+-	varaddr =3D CFG_SYS_SDRAM_BASE + gd->ram_size -
+-		CONFIG_KM_RESERVED_PRAM - CONFIG_KM_PHRAM;
++	varaddr =3D CFG_SYS_SDRAM_BASE + gd->ram_size - CONFIG_KM_PHRAM;
+ 	env_set_hex("varaddr", varaddr);
+ 	sprintf(envval, "0x%x", varaddr);
+ 	env_set("varaddr", envval);
+diff --git a/include/configs/km/pg-wcom-ls102xa.h b/include/configs/km/pg=
+-wcom-ls102xa.h
+index 3a243d789c0..b6e6958599c 100644
+--- a/include/configs/km/pg-wcom-ls102xa.h
++++ b/include/configs/km/pg-wcom-ls102xa.h
+@@ -10,8 +10,7 @@
+ #define CFG_SYS_INIT_RAM_SIZE	OCRAM_SIZE
+=20
+ #define CFG_PRAM			((CONFIG_KM_PNVRAM + \
+-					  CONFIG_KM_PHRAM + \
+-					  CONFIG_KM_RESERVED_PRAM) >> 10)
++					  CONFIG_KM_PHRAM) >> 10)
+=20
+ #define PHYS_SDRAM			0x80000000
+ #define PHYS_SDRAM_SIZE			(1u * 1024 * 1024 * 1024)
+diff --git a/include/configs/kmcent2.h b/include/configs/kmcent2.h
+index e7ae18ec5f9..de41b998ea4 100644
+--- a/include/configs/kmcent2.h
++++ b/include/configs/kmcent2.h
+@@ -158,11 +158,10 @@
+ /***********************************************************************=
+*******
+  * (PRAM usage)
+  * ... -------------------------------------------------------
+- * ... |ROOTFSSIZE | PNVRAM |PHRAM |RESERVED_PRAM | END_OF_RAM
++ * ... |ROOTFSSIZE | PNVRAM |PHRAM | END_OF_RAM              |
+  * ... |<------------------- pram -------------------------->|
+  * ... -------------------------------------------------------
+  * @END_OF_RAM:
+- * @CONFIG_KM_RESERVED_PRAM: reserved pram for special purpose
+  * @CONFIG_KM_PHRAM: address for /var
+  * @CONFIG_KM_PNVRAM: address for PNVRAM (for the application)
+  */
 --=20
-Tom
+2.49.0
 
---7xMbEQMUlSrzwzEv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh1Gw0ACgkQFHw5/5Y0
-tywzRgwAnn4BCMClla+h+0x7NgfCjcj/gAs0MTNVHoSGgXpV6qzMc6aPFFxuckn2
-v/bQ9mrrom1y7GAllsLHhtrDbF2sNi/Wc0xcT8asMVZZDIvTZAlNDr9j9RrvoWQv
-qBlTfZ3F2gQgH7zDdnXGat/4R9GMVopSX1/WzASursUSToDD7Hg7K7gZBZNqpQrN
-6s4UeZ3NETm/UpAb1FOB+VzM1RfUCddsbLUDP9wf2Wy4PjSRw8eOiTb7XMa12Qn+
-xbpjxPslZb2nEEbq2W2Z86kv0X0EZFrGa7tAkCCUmdpi23i3llcboIN5kcMjwmn4
-PQ9WRBAAJSiw+0Lf7aCNF39+4zzZJcHhpVHGWqioquFbE8Z9rHpnwkPJpc2CQa19
-rcbsMrs62c7/rai6Ek6P8osFI1zRhW3k5Ia3xYk0p3T1ssOBwQIHGGwmcyZffBUP
-fEJtVt/qFXKM2SOlIDPu7EXHUUkcY7rbIjZ6P/RVN1HaP3jxMSYUtmatG9Ocu+Cx
-y+3xzTig
-=b0eS
------END PGP SIGNATURE-----
-
---7xMbEQMUlSrzwzEv--
