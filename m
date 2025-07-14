@@ -4,84 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72413C83F17
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 21:11:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D92C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 22:34:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70C9B83043;
-	Mon, 14 Jul 2025 23:10:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E855882E37;
+	Tue, 15 Jul 2025 00:34:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OPlhBTxC";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oSIUMB6r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A36D82F6F; Mon, 14 Jul 2025 23:10:53 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 87A3282E52; Tue, 15 Jul 2025 00:34:28 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95DA582E52
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 23:10:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEF5B8277D
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 00:34:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-73c89db3dfcso922127a34.3
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 14:10:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752527449; x=1753132249; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Gq6Nd1MhtovZtvwDwt9NXp8dhJ37fBXHy/HjoYWqY9Y=;
- b=OPlhBTxCTKoS7kEsVy1j9/TQllHEcqb94gQZDwncu3q6kntXZFG5lU/X+b7frLPVNQ
- ulTvRSrmVF2dk1nmv9jqcYxIYzUOlrxL59qB8MPr832fEV4GpX47wTnkyQAihKaIpIJ9
- +RODO6w2CnD6wip+1inWasdnl9Z2ZbvEKvnhc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752527449; x=1753132249;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Gq6Nd1MhtovZtvwDwt9NXp8dhJ37fBXHy/HjoYWqY9Y=;
- b=r2/SrHL40g2qkW+P0J161DqwX6nUb8dbI28nf0lUZM5jM0ASO580CYNz8p2AjBLbqJ
- s5M1HkmJJ3A/ifHN32pAfIsZXglL2mBrxn4+QKe8riYspJxExMik68Iy6C8keLo1HEen
- j09FIH3MLuwZQsGi47QtfB3LPJj6JckFqRUktyyDrSBq6czwkkXL5A8rbzGLkcv9cda7
- DwVmUZD8r4hp2/sKdlRObMbvv7waempjdjqdIshJ7JTtXBRNZkAF0gKtERCaNyW2FPPo
- AAsaCtMOTPaGlx1b+ESj1cSJK4zJ0ia1dqvZ3MTYA7aL13b2MMj/+tBAVl+d7dE3vzkw
- rFIQ==
-X-Gm-Message-State: AOJu0YzefhB7bz/edZmX/Cs1e1jjsSzF3/Kmta5xy8B2Tg7iD2rzP754
- isbF6Y3IanRjoJBazjowNlrNWghNpr57cRdWDTt1DBw/xaDahAfYrIOGgqZ2L/v0AdQ9ISo8NqH
- TGYue8R4=
-X-Gm-Gg: ASbGncvoTKjSOYha9dRG4XaoE/uzHIdnXtjQbGl/oIP6Br7i8lGMqUVu6xYDh4/Fvqg
- pYgOJTBlBeYXXuZsZ0t51Wj6XihnS2GNUrg3Jn0qWukTY2/YTB6e/vIMwJes6UTOyimfLDI/emP
- OpAAfZVdl3Ib80on0/dQbqUW0yAMP2lYQJe1MCYWfgg4PggRk6eLymSLh8rZfDg1C2bAn5aP8eO
- 2/7kbj1olXqJYGGxkQTIh8nfIp9LNeArmUJqtLtYIQrzAxUyQ5aI+TaAUJU7w35Hg8Wv8ErRtgW
- 9Td/JSb/Tw8hJnjnTipobCricIlSN4JjIYvL9JiVv6ncRs7Ew7dxRsLqGxpBiNuA/wGOpO2Tmj3
- iMxG/97CeU2W97ojq3ZbDHSE9umIIxxotchCktuFW8XIjPKQOQ1I6CrvqGYwBAWDgHw==
-X-Google-Smtp-Source: AGHT+IFgaBW/Li8KpKm6i6A+iwksptjuHhqomO0zLiH02QAQckXxcuADinvwhDWWg67IkzajTOaSKA==
-X-Received: by 2002:a05:6830:3e9a:b0:72b:9724:6a82 with SMTP id
- 46e09a7af769-73cf9f0d8dcmr6123444a34.17.1752527449229; 
- Mon, 14 Jul 2025 14:10:49 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e541c3a6fsm202668a34.57.2025.07.14.14.10.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 14:10:48 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Philip Molloy <philip@philipmolloy.com>
-Cc: Michael Hennerich <michael.hennerich@analog.com>, 
- Philip Molloy <philip.molloy@analog.com>
-In-Reply-To: <20250707150438.3016690-1-philip@philipmolloy.com>
-References: <20250707150438.3016690-1-philip@philipmolloy.com>
-Subject: Re: (subset) [PATCH 0/4] Minor fixes to comments, README, and
- Kconfig description
-Message-Id: <175252744816.202878.3383780359482514055.b4-ty@konsulko.com>
-Date: Mon, 14 Jul 2025 15:10:48 -0600
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a257=Z4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1752532464; bh=7VugHVtMAD/bJkwhC4LP9gLOjkpCAgGbw3MbmbhpWoc=;
+ b=oSIUMB6rOqnA82ahUJINI/MrNWu34825O9LNJCzoYOHBY12fYn2rS8MpPkCKs9pjoPjxmWv4x
+ gS3bgiZFrxyU1oC95RvMjMujjLvcpTMHU6Qhm7Ei9thxyvnNzcGSJRaonzkoMcqHfTkw5Fcy01t
+ r/3uXQNhQNl+86QqPEyfh2Gt4g4TBnwq2eS0yT+wdiJOH6VrVm7xCndcLaGXQ6Y8bg4O6HxuC+P
+ K5tANk5NVQ4NwsKOtjQV5nm7SCQovgseTdkxyBSNMlw7mBoDcQeYeLLpKzzq7OMgqsIMkONf7zL
+ XHW68DeVq+MTlt+n7xKS41zJMsyY9lGXd62lVjWkBGqQ==
+X-Forward-Email-ID: 687585ec9931367d30116e39
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.1.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: Sebastian Reichel <sebastian.reichel@collabora.com>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>, Diederik de Haas <didi.debian@cknow.org>,
+ Heiko Stuebner <heiko@sntech.de>
+Subject: [PATCH 1/4] arm64: dts: rockchip: Add vcc-supply to SPI flash on
+ rk3588-rock-5b
+Date: Mon, 14 Jul 2025 22:33:58 +0000
+Message-ID: <20250714223410.1836893-2-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250714223410.1836893-1-jonas@kwiboo.se>
+References: <20250714223410.1836893-1-jonas@kwiboo.se>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,31 +75,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 07 Jul 2025 13:06:00 +0000, Philip Molloy wrote:
+From: Diederik de Haas <didi.debian@cknow.org>
 
-> From: Philip Molloy <philip.molloy@analog.com>
-> 
-> A hodge-podge of minor fixes I came across while debugging.
-> 
-> https://github.com/analogdevicesinc/u-boot/tree/staging/philip/minor-mainline-cleanup
-> 
-> Philip Molloy (4):
->   pinctrl-uclass: update comment to reflect code
->   serial-uclass: fix typo in comment
->   gpio: add SPL to Kconfig option description
->   README: remove obsolete note
-> 
-> [...]
+The Radxa Rock 5B component placement document identifies the SPI Nor
+Flash chip as 'U4300' which is described on page 25 of the Schematic
+v1.45. There we can see that the VCC connector is connected to the
+VCC_3V3_S3 power source.
 
-Applied to u-boot/master, thanks!
+This fixes the following warning:
 
-[1/4] pinctrl-uclass: update comment to reflect code
-      commit: b476530a8412fa45e8bfe0cd10c2b5f5f197e9ca
-[3/4] gpio: add SPL to Kconfig option description
-      commit: b4c65b337aab7446b03dab6f22b289c88e4c0053
-[4/4] README: remove obsolete note
-      commit: ebfbc77109a1fee5db71f767dd1f58d7c68bb442
+  spi-nor spi5.0: supply vcc not found, using dummy regulator
+
+Signed-off-by: Diederik de Haas <didi.debian@cknow.org>
+Link: https://lore.kernel.org/r/20250425092601.56549-5-didi.debian@cknow.org
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+
+[ upstream commit: 425af91c58023a8924cc2330384e040d388adc4e ]
+
+(cherry picked from commit b31830e88153e20bf3454e210760264b7f24b206)
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ dts/upstream/src/arm64/rockchip/rk3588-rock-5b.dts | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/dts/upstream/src/arm64/rockchip/rk3588-rock-5b.dts b/dts/upstream/src/arm64/rockchip/rk3588-rock-5b.dts
+index d22068475c5d..17f4fd054cd3 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3588-rock-5b.dts
++++ b/dts/upstream/src/arm64/rockchip/rk3588-rock-5b.dts
+@@ -562,6 +562,7 @@
+ 		spi-max-frequency = <104000000>;
+ 		spi-rx-bus-width = <4>;
+ 		spi-tx-bus-width = <1>;
++		vcc-supply = <&vcc_3v3_s3>;
+ 	};
+ };
+ 
 -- 
-Tom
-
+2.49.0
 
