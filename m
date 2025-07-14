@@ -4,44 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28BE5C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 17:23:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 290B0C83F1B
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 18:46:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 485E683106;
-	Mon, 14 Jul 2025 19:23:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B5098300B;
+	Mon, 14 Jul 2025 20:46:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="Lx55jE05";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99E82830B3; Mon, 14 Jul 2025 19:23:12 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ id D966283046; Mon, 14 Jul 2025 20:01:35 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2061c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::61c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20B168309C
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 19:23:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BB0983020
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 20:01:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=reject dis=none) header.from=nokia.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1ubMtO-008k39-Ca;
- Mon, 14 Jul 2025 17:23:06 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de
-Cc: Fabio Estevam <festevam@denx.de>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v2 2/4] venice: lpddr4_timing_imx8mm: add 4gb single die
- support
-Date: Mon, 14 Jul 2025 10:23:02 -0700
-Message-Id: <20250714172304.4095241-2-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250714172304.4095241-1-tharvey@gateworks.com>
-References: <20250714172304.4095241-1-tharvey@gateworks.com>
+ spf=fail smtp.mailfrom=anthony.pighin@nokia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yy3+IeK4+olbkib8HjDiRBs043lFg9hc5Mk3zmyoeHynmo7mQ65tH9zrgdHWnaAj3W3AHRilTS+NaBHllGsvV4aePIbmbM+VYFhTLwodSDNARpXD0eJSiuF01cKOllZGp4w0UUgVwgl1b+aZ49EnHYoJOeq4hQnyudAWXcUk/MjZga7oCzoVE+8DRdp95dllXvMb3gemZMDXl03JiWfJz5aZWzjMzdZQv7B3rsqN0Tp39rgJw2SUOMdm1s+pqaiqOmcGwr5UdlKNaTBG3jU++xBJ94dugSMS7WL9yRSdYckXjGPHMhUWk3X5OLDGnSKZUS3qLrmEFcNNNKI1Jggucw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kgMmgPPtK5IqT/7as4zoS8bWD0xnbJrfYGEVqB2cilc=;
+ b=XTVXzY5vL7BwthDeC75oIB0o0XR25eTUkvtTk6e/BwrLfHB03huEFZkKF4BpoOxXnwW6jtpef5df4/x+rSDpgIW7yLB7k7/ManrbSePyfPofMDmzV1bg8eAmiSRDiKq0MkTFlQY8loexNvlauIdT4zeSQJu1fHevYudGk3cFmeT37gHdGL53JeKOCzvthfR9ONMdDoLa9HiLPoWScDLpjUaimq+eIMhrBGHplKNQU3ZzwmKvnpFrsjB/i9KypvPp7pUS2S9foxB9Rq9/wBoHyHxzJ5G+3jR41zeENwJ08LEt9WiR+ev9giUahF6N7s8fnL6k49g7lkISwhJw+qaYkg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nokia.com; dmarc=pass action=none header.from=nokia.com;
+ dkim=pass header.d=nokia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kgMmgPPtK5IqT/7as4zoS8bWD0xnbJrfYGEVqB2cilc=;
+ b=Lx55jE05U/7jEicef+PMZKyE2oqppoxfykMDcIXLEiXwRr9stQr8wctyykwgb/TD043SSwbJfQgvP+75eJFfaV0CbRQ0sdtlj7h7Ev8ug0AfNljU2+XjisfJkhX4i9tFvPZCpHiekmz5cVwBZ2FLE3zuJ/bL70zlOf41F9WB2cYXCuil+AR5QAM/1nyMnGtHrr4j4MjX8WeHpuFuQxgPhVJFOiePTm5aGQBZ8EadbFYIjgZSzRtz4Ecj40ck4C8I3rhKrbw+ESiIJ+Nw0Teydk0zLeho7xuYF6HRlkTHUB4Cl/Re3SMS4B/pNW1A1Dn1GfGxM0WMQzg3WaCWfpH0UQ==
+Received: from BN0PR08MB6951.namprd08.prod.outlook.com (2603:10b6:408:128::14)
+ by DM6PR08MB6347.namprd08.prod.outlook.com (2603:10b6:5:1e2::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.32; Mon, 14 Jul
+ 2025 18:01:29 +0000
+Received: from BN0PR08MB6951.namprd08.prod.outlook.com
+ ([fe80::9ea8:ab2e:4ce1:2d36]) by BN0PR08MB6951.namprd08.prod.outlook.com
+ ([fe80::9ea8:ab2e:4ce1:2d36%6]) with mapi id 15.20.8922.028; Mon, 14 Jul 2025
+ 18:01:28 +0000
+From: "Anthony Pighin (Nokia)" <anthony.pighin@nokia.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "gaurav.jain@nxp.com" <gaurav.jain@nxp.com>, Fabio Estevam
+ <festevam@gmail.com>
+Subject: [PATCH] drivers: crypto: fsl: rng: Reinitialize job ring descriptor
+ for each iteration
+Thread-Topic: [PATCH] drivers: crypto: fsl: rng: Reinitialize job ring
+ descriptor for each iteration
+Thread-Index: Adv06CvHynxQxl05SyaIAFw4TNIM4g==
+Date: Mon, 14 Jul 2025 18:01:28 +0000
+Message-ID: <BN0PR08MB6951D0B436D20B1306B6AC818354A@BN0PR08MB6951.namprd08.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nokia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BN0PR08MB6951:EE_|DM6PR08MB6347:EE_
+x-ms-office365-filtering-correlation-id: 3d5c26b3-b25e-4db5-423e-08ddc3007511
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?RzWEu7iPF2f1BP3xvHzwz1oSvXORIrjXkPipeReHXNVXmzdAIub4RoeIfI51?=
+ =?us-ascii?Q?cEn0uwf45JDlMTDYVZLjlO2HF3LBWyPE5GTUPfFTVXVQiHzaxsKZN/K/TA3O?=
+ =?us-ascii?Q?u63RXXDBwKnzhvVGMcfdXQrq4iAsZu5ZFP3wkBY8rjQJP/6nAXn/pZ5AVfiX?=
+ =?us-ascii?Q?z973mwckXw7urQkaFqMBVarpRJjtSLVs/yW/7U7DT+J0vDQKM7/zjhKB3dwq?=
+ =?us-ascii?Q?VoaV0QHVJQfbL7upY5ajTeR+t51QdU7YyA5VoDgTHbbuTDVZO7hA6+dV2VQ9?=
+ =?us-ascii?Q?OjH6sfUbUl1MMdBTxczH3lkWJQOFwrBjsuNBSeYrDEZVh4l0G1fdIoznBCSN?=
+ =?us-ascii?Q?dsAI1pY4mlAfX4kiDeko1ltqzZqLfYjLVKM2C4awnqNfB9gfR2+6wMLUXXrc?=
+ =?us-ascii?Q?5cAmOFZjBhhbtxnP8RtllC+0z/LJ2l02MDO2hXCXfAALQZcK+o08wDVzr85h?=
+ =?us-ascii?Q?Uc/0K41J0nGbfWxBXcAfwhflG9TfG0cuVLRoyfSqaloo2HYmEJh3apkds9PE?=
+ =?us-ascii?Q?3mDYrtJql8uJ/HjZpLmuIKOOdDeyb39Kim5i8oO3y53zRA0wPYa9QZpQcSk3?=
+ =?us-ascii?Q?o72xvQkTOj9/MZcZPGI4aoHsuTLpUfeEeaNU73a4T+m2VxpE+hGQeYtjc7gH?=
+ =?us-ascii?Q?VISsuc3XYYBqNVZK1K0FX1s/IGjRjiCimY0DlyYBjiibOdWsgDW/ZoWkkoaj?=
+ =?us-ascii?Q?Ms/5ITciiWeIR2o2w+zB1M8CyEdpWj8JwpVubuFlI4peguibpPKh8rYo8N0y?=
+ =?us-ascii?Q?8tsrMRLuT9pcVstKfYYzQt3MjMgTHMpqO9I3eQsrkinCS1T54Qj+xTseXmcr?=
+ =?us-ascii?Q?vnCebXPNBDztN2jN+qCZmbsaOntgh3iu/aOU0cDfCihBETkMdYIGMNGOOylc?=
+ =?us-ascii?Q?W3DAk/Nvv/8WzVnustnIp8cWI0Ko0TiHDrRLmy+mUJmvmyMKJ/oKbNTn2wRQ?=
+ =?us-ascii?Q?oc+n8CqPI1R2MJf+aJVe/66ucK9B4UnrTFPpq0JnyX/El8MVpwMbjJdPJE9E?=
+ =?us-ascii?Q?HnaZUf6F6CVpfZLRNn9gt34B8vC607pkOqOvwgI+Ti420WTAjGxYmaVIOk8G?=
+ =?us-ascii?Q?+Xg6gZXrJrCFGEA6bRUjJwa3cCMtD9EpWh3I/w2PK1uJAuQ3T1l62K/9iUSL?=
+ =?us-ascii?Q?MI+Qm3/YEyG1aICjEujVNcXXbwAxnib5ppFntsGo1u+E1rMkKkbLVAxEQC7z?=
+ =?us-ascii?Q?lD1lb+3BhennwIEEqpA6DtyceBehjbRo2Q5yKQhvgvIhB22wTi312+4sLob4?=
+ =?us-ascii?Q?oXACMGhNiugdyzzWX2UXPhanxGmD/ournsfpHWlRYgw3azHUs6+Awh0ntyZ+?=
+ =?us-ascii?Q?Yhpt2OTSXmQpkfiO2gDFOdnfEarvUt8iJW7OOsgbTWBnzcTsrghpkfFXCnpj?=
+ =?us-ascii?Q?+lxZlH3/It18JoNuqFvBT59m8G56XF4ZuxBBsLFIsJMBgA1RyjHQ06TgNmaQ?=
+ =?us-ascii?Q?XU6GQP8ns7DllIAdDy7+2EGnctQeVPw68kN/BlwmDp6NJ+Nhsop8MA=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN0PR08MB6951.namprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?PYzquzzyBE5B/CEUfwO7h8YP/akr1X6SNsbLTY+sXYw3HajOXfi/DAup/XFz?=
+ =?us-ascii?Q?2XbeuENkOv1wdz/WJvVHwEWnhzszQY3ugIPZidnbv9BEZa3Ox6ybEtV/pJCm?=
+ =?us-ascii?Q?BDQ6TmH5lvgeGPcM6i9P8Ed/Uwa5amUf2ys9v6ubnagIjwbKsGpDWzjsBHch?=
+ =?us-ascii?Q?0YT6Yfm1QvyBycHr60GFGLrRr/I16bxKeYqRuGiL/bhpyMkDetrSkh5VSTj+?=
+ =?us-ascii?Q?qano0dVkX30ZChatn6EHnisHrKRUqIWGSauUAYhl8r7RLqqC3YL+BTvW57XA?=
+ =?us-ascii?Q?opeVGmE6gteIQ78aICSe3vyqzNfqXtxU5e5uDszeR/JEdMz4rre1yVbx0Ll4?=
+ =?us-ascii?Q?M90s/AKBu53dHen9G+FblEMYz4XW5J5uGSJdLgZne0NhXOmOW608qxtXgVeJ?=
+ =?us-ascii?Q?f8L1+KgdDykSqeyYJKklPHtMjQMU8RIzGeWhRsHAErXfv8k0q6AW562BjndR?=
+ =?us-ascii?Q?O1/jFy9MzoAWRknQfAfKj/39QHXWjUA7aOCRRCDVQ8GBxG4WfTDHgHJaNifA?=
+ =?us-ascii?Q?7wcbZwm+HMMRd5FOCjvp8PNtoYBQqEoDfghAk4LB7utzxIyRKkpJN9GHipfP?=
+ =?us-ascii?Q?0g1GHHSo54SM/HFmsPhI5JgRfhoL/Nu0KnSUqYWzO+mmxUiWRlO/pgqQYAjL?=
+ =?us-ascii?Q?lbw4GgewEO2mF4fOpfazvlWUnN5RcSQHbM5Jot06edQd1mTFtrojD20Cooo4?=
+ =?us-ascii?Q?V6VF+2+/BgErBtfZ6IRFPaY8m3/c1lK/t7KgyY9IFMi22+VI4Qudb9SH1PHU?=
+ =?us-ascii?Q?WIiQ9BKaviOu60yfUv7QamUtAa2gNKe2BDsDdScLM37J9RzUfCrmMvS28b/f?=
+ =?us-ascii?Q?pad7X0g5vwKkyi2jrhZdrpWBcOku9/nM+DLS8vseefIxSkOralSKkMRUBKz6?=
+ =?us-ascii?Q?C3YYWAezo5zLn/EDymOjQjWYQniJ6dU0yl6QRR+lBcOmn2n0SUOFV5r9YsmB?=
+ =?us-ascii?Q?lPnkYB42tGBSXq8XdIf/wUyurPJH0t10npv4YG0Er1KMVe5KNXiUReUoGVQS?=
+ =?us-ascii?Q?tU7lCfUEul9kAXwKqh4+0fMH7k39Gb4dKrqahP2B8Rnaz3yo9/5Dr3j6AMfR?=
+ =?us-ascii?Q?2oVcONK2nDWt4xgH5PIOhhnLZ6akhz6Yj9bTeF80l0Nwpo5p7KjzmLklWYF6?=
+ =?us-ascii?Q?JDXTatsf7vrpEllvN2VGK8KvFqfuz6/n1u0+ls3F8rjOzIhj5QlDgqvQSWOl?=
+ =?us-ascii?Q?4N7WZlp8ZU2tVoMKuVitkJ/aw+BcuSqpPOFMoImQyvgzI94e1vGQKFR0MinE?=
+ =?us-ascii?Q?b9O+nr/J6vwxnwZdDvLr+UPY6BLw3PrJoF/N8GUBQxLBbEYYYpF32QTwTwUY?=
+ =?us-ascii?Q?sAVdaHYzacku4bH7ZbUDiKbf/pPJqizG+dGCVU7DG5JsZWfUnRUSwClKMX5n?=
+ =?us-ascii?Q?JuBma2YHM9HWFf/gJTP9AQWrStmRhsbAafPy7m7h2KVjRmLsZyrYWCAD3Ehf?=
+ =?us-ascii?Q?llIBDY/6kQApfhqV+QSrrHq8/FykX0lBFYwjmv4565zV/qj9WaD8SuG0BhTO?=
+ =?us-ascii?Q?CZ2+thkHodMiXGgIR9oqtbGOpaaZyD6r030mQY5R28o82mJzCyh1wkRCt/QR?=
+ =?us-ascii?Q?vgolSG1u+QqlC7ky674gvgIQlWAq712QMAle2RMR?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: nokia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN0PR08MB6951.namprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d5c26b3-b25e-4db5-423e-08ddc3007511
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Jul 2025 18:01:28.7463 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 5d471751-9675-428d-917b-70f44f9630b0
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Z26RfeojBwJa1vct35DSqqX2oizSfHVyJuy4gLoa0FUVzOHoOaOaLYYmfg4N8LswWIJtNR0+nP62swhzzEHc0CbvPuqjVRgLMXbXfo8W6r0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR08MB6347
+X-Mailman-Approved-At: Mon, 14 Jul 2025 20:46:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,328 +159,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add dram support for the MT53E1G32D2FW-046 RevC part which is a single die
-32Gbit density part vs RevA/B which were dual-die parts:
- - use a previously unused EEPROM byte to denote a variant of the
-   base config to be patched
- - add a dram description string
- - return the board struct from eeprom_init and pass it to the
-   spl_dram_init function so that it has access to the EEPROM
- - move ddr_init into the spl_dram_init so that it can be patched
-   in the per-soc init function
+u-boot internals were being corrupted following an EFI callback to
+get_rng(). One of the many footprints was a corruption of the EFI
+protocols linked list.
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
----
-v2: no changes
----
- board/gateworks/venice/eeprom.c               |  6 +--
- board/gateworks/venice/eeprom.h               |  5 +-
- board/gateworks/venice/lpddr4_timing.h        |  3 +-
- board/gateworks/venice/lpddr4_timing_imx8mm.c | 49 ++++++++++++++++++-
- board/gateworks/venice/lpddr4_timing_imx8mn.c | 14 +++++-
- board/gateworks/venice/lpddr4_timing_imx8mp.c | 13 ++++-
- board/gateworks/venice/spl.c                  | 33 ++++++++-----
- 7 files changed, 102 insertions(+), 21 deletions(-)
+A request for >16 bytes of random data is broken into smaller requests.
+Those requests are fed in a loop to the CAAM RNG, which uses a job
+queue ring for interaction.
 
-diff --git a/board/gateworks/venice/eeprom.c b/board/gateworks/venice/eeprom.c
-index d9a871934340..88bbc2e1af8c 100644
---- a/board/gateworks/venice/eeprom.c
-+++ b/board/gateworks/venice/eeprom.c
-@@ -356,7 +356,7 @@ static int eeprom_info(bool verbose)
- 	return 0;
- }
- 
--int venice_eeprom_init(int quiet)
-+struct venice_board_info *venice_eeprom_init(int quiet)
- {
- 	char rev_pcb;
- 	int rev_bom;
-@@ -466,10 +466,10 @@ int venice_eeprom_init(int quiet)
- 
- 	if (!strncmp(venice_model, "GW7901-SP486", 12) &&
- 	    strcmp(venice_model, "GW7901-SP486-C")) {
--		return 2048;
-+		som_info.sdram_size++;
- 	}
- 
--	return (16 << som_info.sdram_size);
-+	return &som_info;
- }
- 
- void board_gsc_info(void)
-diff --git a/board/gateworks/venice/eeprom.h b/board/gateworks/venice/eeprom.h
-index a0f449299aa3..817277f62767 100644
---- a/board/gateworks/venice/eeprom.h
-+++ b/board/gateworks/venice/eeprom.h
-@@ -18,13 +18,14 @@ struct venice_board_info {
- 	u8 sdram_size;	/* 0x2B: (16 << n) MB */
- 	u8 sdram_speed;	/* 0x2C: (33.333 * n) MHz */
- 	u8 sdram_width;	/* 0x2D: (8 << n) bit */
--	u8 res3[2];	/* 0x2E */
-+	u8 sdram_variant; /* 0x2E */
-+	u8 res3[1];	/* 0x2D */
- 	char model[16];		/* 0x30: model string */
- 	u8 config[14];	/* 0x40: model config */
- 	u8 chksum[2];	/* 0x4E */
+However, the job queue descriptor is created only at probe time. That=20
+descriptor may end up needing an endian swap (LS1046A) before being fed
+to the CAAM RNG. This corrupts the descriptor for the next iteration,
+since it will be blindly endian swapped yet again.
+
+Two issues arise. The number of words to endian swap is taken from the
+input descriptor itself. So on the second iteration, the length has been
+corrupted. This results in a corruption past the end of the descriptor:
+whatever is after in memory is endian swapped too. Second, some of the
+entries in the descriptor are DMA addresses. If the descriptor is still
+somehow considered valid after swapping, the data at the corrupted DMA
+address is now trampled.
+
+Linux properly initializes the descriptor for each iteration. This is
+what is now done with this commit.
+
+Signed-off-by: Anthony Pighin <anthony.pighin@nokia.com>
+---
+ drivers/crypto/fsl/rng.c | 19 ++++++++++++++-----
+ 1 file changed, 14 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/crypto/fsl/rng.c b/drivers/crypto/fsl/rng.c
+index 786a710f5fb..85544f931cb 100644
+--- a/drivers/crypto/fsl/rng.c
++++ b/drivers/crypto/fsl/rng.c
+@@ -23,11 +23,24 @@ struct caam_rng_priv {
+        u8 data[CAAM_RNG_MAX_FIFO_STORE_SIZE] __aligned(ARCH_DMA_MINALIGN);
  };
- 
--int venice_eeprom_init(int quiet);
-+struct venice_board_info *venice_eeprom_init(int quiet);
- const char *eeprom_get_model(void);
- const char *eeprom_get_som_model(void);
- const char *eeprom_get_baseboard_model(void);
-diff --git a/board/gateworks/venice/lpddr4_timing.h b/board/gateworks/venice/lpddr4_timing.h
-index 21997f6fb2a1..e4aa8b6821c7 100644
---- a/board/gateworks/venice/lpddr4_timing.h
-+++ b/board/gateworks/venice/lpddr4_timing.h
-@@ -6,6 +6,7 @@
- #ifndef __LPDDR4_TIMING_H__
- #define __LPDDR4_TIMING_H__
- 
--extern struct dram_timing_info *spl_dram_init(const char *model, int sizemb);
-+struct dram_timing_info *spl_dram_init(const char *model, struct venice_board_info *info,
-+				       char *dram_desc, size_t sz_desc);
- 
- #endif /* __LPDDR4_TIMING_H__ */
-diff --git a/board/gateworks/venice/lpddr4_timing_imx8mm.c b/board/gateworks/venice/lpddr4_timing_imx8mm.c
-index 485649ab4f40..a6025322e78d 100644
---- a/board/gateworks/venice/lpddr4_timing_imx8mm.c
-+++ b/board/gateworks/venice/lpddr4_timing_imx8mm.c
-@@ -10,6 +10,8 @@
- #include <asm/arch/ddr.h>
- #include <asm/arch/lpddr4_define.h>
- 
-+#include "eeprom.h"
+
++static int caam_init_desc(struct caam_rng_priv *priv)
++{
++       ulong size =3D ALIGN(CAAM_RNG_DESC_LEN, ARCH_DMA_MINALIGN);
 +
- /* ddr phy trained csr */
- static struct dram_cfg_param lpddr4_ddrphy_trained_csr[] = {
- 	{ 0x200b2, 0x0 },
-@@ -3561,9 +3563,36 @@ static struct dram_cfg_param ddr_ddrphy_cfg_alt_patch[] = {
- 	{ 0x120a5, 0x2 },
- };
- 
--struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
-+/* 4GB single Die patch (MT53E1G32D2FW-046 revC) */
-+static struct dram_cfg_param ddr_ddrc_cfg_4gb_single_die_patch[] = {
-+	{ 0x3d400000, 0xa1080020 },
-+	{ 0x3d400064, 0x5b011d },
-+	{ 0x3d40011c, 0x402 },
-+	{ 0x3d400138, 0x123 },
-+	{ 0x3d4000f4, 0x699 },
-+	{ 0x3d400200, 0x1f },
-+	{ 0x3d40021c, 0xf07 },
-+	{ 0x3d402064, 0xc0026 },
-+	{ 0x3d40211c, 0x302 },
-+	{ 0x3d402138, 0x27 },
-+	{ 0x3d4020f4, 0x599 },
-+	{ 0x3d403064, 0x3000a },
-+	{ 0x3d40311c, 0x302 },
-+	{ 0x3d403138, 0xa },
-+	{ 0x3d4030f4, 0x599 }
-+};
++       inline_cnstr_jobdesc_rng(priv->desc, priv->data,
++                                CAAM_RNG_MAX_FIFO_STORE_SIZE);
++       flush_dcache_range((unsigned long)priv->desc,
++                          (unsigned long)priv->desc + size);
 +
-+static struct dram_cfg_param fsp_msg_4gb_single_die_patch[] = {
-+	{ 0x00054012, 0x110 },
-+	{ 0x0005402c, 0x1 },
-+};
++       return 0;
++}
 +
-+struct dram_timing_info *spl_dram_init(const char *model, struct venice_board_info *info,
-+				       char *dram_desc, size_t sz_desc)
+ static int caam_rng_read_one(struct caam_rng_priv *priv)
  {
- 	struct dram_timing_info *dram_timing;
-+	int sizemb = (16 << info->sdram_size);
-+	int i;
- 
- 	switch (sizemb) {
- 	case 512:
-@@ -3577,6 +3606,21 @@ struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
- 		break;
- 	case 4096:
- 		dram_timing = &dram_timing_4gb;
-+		if (info->sdram_variant == 1) {
-+			if (dram_desc)
-+				strlcpy(dram_desc, "single-die", sz_desc);
-+			apply_cfg_patch(dram_timing->ddrc_cfg, dram_timing->ddrc_cfg_num,
-+					ddr_ddrc_cfg_4gb_single_die_patch,
-+					ARRAY_SIZE(ddr_ddrc_cfg_4gb_single_die_patch));
-+			for (i = 0; i < 4; i++) {
-+				apply_cfg_patch(dram_timing->fsp_msg[i].fsp_cfg,
-+						dram_timing->fsp_msg[i].fsp_cfg_num,
-+						fsp_msg_4gb_single_die_patch,
-+						ARRAY_SIZE(fsp_msg_4gb_single_die_patch));
-+			}
-+		} else if (dram_desc) {
-+			strlcpy(dram_desc, "dual-die", sz_desc);
-+		}
- 		break;
- 	default:
- 		printf("unsupported");
-@@ -3596,5 +3640,8 @@ struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
- 				ARRAY_SIZE(ddr_ddrphy_cfg_alt_patch));
- 	}
- 
-+	if (ddr_init(dram_timing))
-+		return NULL;
-+
- 	return dram_timing;
- }
-diff --git a/board/gateworks/venice/lpddr4_timing_imx8mn.c b/board/gateworks/venice/lpddr4_timing_imx8mn.c
-index e7d04822c9cf..cad4fc0d31ce 100644
---- a/board/gateworks/venice/lpddr4_timing_imx8mn.c
-+++ b/board/gateworks/venice/lpddr4_timing_imx8mn.c
-@@ -4,6 +4,8 @@
- #include <string.h>
- #include <asm/arch/ddr.h>
- 
-+#include "eeprom.h"
-+
- /*
-  * Generated code from MX8M_DDR_tool v3.20 using RPAv15
-  */
-@@ -2369,26 +2371,36 @@ static struct dram_timing_info dram_timing_2gb_dual_die = {
- 	.fsp_table = { 3200, 400, 100, },
- };
- 
--struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
-+struct dram_timing_info *spl_dram_init(const char *model, struct venice_board_info *info,
-+				       char *dram_desc, size_t sz_desc)
+        int size =3D ALIGN(CAAM_RNG_MAX_FIFO_STORE_SIZE, ARCH_DMA_MINALIGN)=
+;
+        int ret;
+
++       caam_init_desc(priv);
+        ret =3D run_descriptor_jr(priv->desc);
+        if (ret < 0)
+                return -EIO;
+@@ -63,12 +76,8 @@ static int caam_rng_read(struct udevice *dev, void *data=
+, size_t len)
+ static int caam_rng_probe(struct udevice *dev)
  {
- 	struct dram_timing_info *dram_timing;
-+	int sizemb = (16 << info->sdram_size);
- 
- 	switch (sizemb) {
- 	case 1024:
- 		dram_timing = &dram_timing_1gb_single_die;
-+		if (dram_desc)
-+			strlcpy(dram_desc, "single-die", sz_desc);
- 		break;
- 	case 2048:
- 		if (!strcmp(model, "GW7902-SP466-A") ||
- 		    !strcmp(model, "GW7902-SP466-B")) {
- 			dram_timing = &dram_timing_2gb_dual_die;
-+			if (dram_desc)
-+				strlcpy(dram_desc, "dual-die", sz_desc);
- 		} else {
- 			dram_timing = &dram_timing_2gb_single_die;
-+			if (dram_desc)
-+				strlcpy(dram_desc, "single-die", sz_desc);
- 		}
- 		break;
- 	default:
- 		printf("unsupported");
- 		dram_timing = &dram_timing_2gb_dual_die;
- 	}
-+	if (ddr_init(dram_timing))
-+		return NULL;
- 
- 	return dram_timing;
+        struct caam_rng_priv *priv =3D dev_get_priv(dev);
+-       ulong size =3D ALIGN(CAAM_RNG_DESC_LEN, ARCH_DMA_MINALIGN);
+
+-       inline_cnstr_jobdesc_rng(priv->desc, priv->data,
+-                                CAAM_RNG_MAX_FIFO_STORE_SIZE);
+-       flush_dcache_range((unsigned long)priv->desc,
+-                          (unsigned long)priv->desc + size);
++       caam_init_desc(priv);
+
+        return 0;
  }
-diff --git a/board/gateworks/venice/lpddr4_timing_imx8mp.c b/board/gateworks/venice/lpddr4_timing_imx8mp.c
-index 36c4cb147e82..f2d5d9ce5659 100644
---- a/board/gateworks/venice/lpddr4_timing_imx8mp.c
-+++ b/board/gateworks/venice/lpddr4_timing_imx8mp.c
-@@ -1,8 +1,11 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
- #include <linux/kernel.h>
-+#include <string.h>
- #include <asm/arch/ddr.h>
- 
-+#include "eeprom.h"
-+
- /*
-  * Generated code from MX8M_DDR_tool v3.30 using MX8M_Plus RPAv7
-  */
-@@ -2378,21 +2381,29 @@ static struct dram_timing_info dram_timing_4gb_dual_die = {
- 	.fsp_table = { 4000, 400, 100, },
- };
- 
--struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
-+struct dram_timing_info *spl_dram_init(const char *model, struct venice_board_info *info,
-+				       char *dram_desc, size_t sz_desc)
- {
- 	struct dram_timing_info *dram_timing;
-+	int sizemb = (16 << info->sdram_size);
- 
- 	switch (sizemb) {
- 	case 1024:
- 		dram_timing = &dram_timing_1gb_single_die;
-+		if (dram_desc)
-+			strlcpy(dram_desc, "single-die", sz_desc);
- 		break;
- 	case 4096:
- 		dram_timing = &dram_timing_4gb_dual_die;
-+		if (dram_desc)
-+			strlcpy(dram_desc, "dual-die", sz_desc);
- 		break;
- 	default:
- 		printf("unsupported");
- 		dram_timing = &dram_timing_4gb_dual_die;
- 	}
-+	if (ddr_init(dram_timing))
-+		return NULL;
- 
- 	return dram_timing;
- }
-diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
-index e813f3e763ec..d9bc593fa0d5 100644
---- a/board/gateworks/venice/spl.c
-+++ b/board/gateworks/venice/spl.c
-@@ -188,9 +188,10 @@ static int power_init_board(const char *model, struct udevice *gsc)
- void board_init_f(ulong dummy)
- {
- 	struct dram_timing_info *dram_timing;
-+	struct venice_board_info *eeprom;
- 	struct udevice *bus, *dev;
- 	const char *model;
--	int dram_szmb;
-+	char dram_desc[32];
- 	int i, ret;
- 
- 	arch_cpu_init();
-@@ -249,23 +250,31 @@ void board_init_f(ulong dummy)
- 			break;
- 		mdelay(1);
- 	}
--	dram_szmb = venice_eeprom_init(0);
-+	eeprom = venice_eeprom_init(0);
- 	model = eeprom_get_model();
- 
- 	/* PMIC */
- 	power_init_board(model, dev);
- 
- 	/* DDR initialization */
--	printf("DRAM    : LPDDR4 ");
--	if (dram_szmb > 512)
--		printf("%d GiB", dram_szmb / 1024);
--	else
--		printf("%d MiB", dram_szmb);
--	dram_timing = spl_dram_init(model, dram_szmb);
--	printf(" %dMT/s %dMHz\n",
--	       dram_timing->fsp_msg[0].drate,
--	       dram_timing->fsp_msg[0].drate / 2);
--	ddr_init(dram_timing);
-+	dram_desc[0] = 0;
-+	dram_timing = spl_dram_init(model, eeprom, dram_desc, sizeof(dram_desc));
-+	if (dram_timing) {
-+		int dram_szmb = (16 << eeprom->sdram_size);
-+
-+		printf("DRAM    : LPDDR4 ");
-+		if (dram_szmb > 512)
-+			printf("%d GiB", dram_szmb / 1024);
-+		else
-+			printf("%d MiB", dram_szmb);
-+		printf(" %dMT/s %dMHz %s",
-+		       dram_timing->fsp_msg[0].drate,
-+		       dram_timing->fsp_msg[0].drate / 2,
-+		       dram_desc[0] ? dram_desc : "");
-+		puts("\n");
-+	} else {
-+		hang();
-+	}
- 
- 	board_init_r(NULL, 0);
- }
--- 
-2.25.1
+--
+2.43.0
 
