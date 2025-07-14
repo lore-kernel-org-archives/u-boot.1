@@ -4,145 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 290B0C83F1B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 18:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DC1AC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 19:17:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B5098300B;
-	Mon, 14 Jul 2025 20:46:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
+	by phobos.denx.de (Postfix) with ESMTP id 502D38300B;
+	Mon, 14 Jul 2025 21:17:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="Lx55jE05";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HT2oP+iL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D966283046; Mon, 14 Jul 2025 20:01:35 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2061c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::61c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 01CD183020; Mon, 14 Jul 2025 21:17:00 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BB0983020
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 20:01:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3C3882F8E
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 21:16:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nokia.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=anthony.pighin@nokia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yy3+IeK4+olbkib8HjDiRBs043lFg9hc5Mk3zmyoeHynmo7mQ65tH9zrgdHWnaAj3W3AHRilTS+NaBHllGsvV4aePIbmbM+VYFhTLwodSDNARpXD0eJSiuF01cKOllZGp4w0UUgVwgl1b+aZ49EnHYoJOeq4hQnyudAWXcUk/MjZga7oCzoVE+8DRdp95dllXvMb3gemZMDXl03JiWfJz5aZWzjMzdZQv7B3rsqN0Tp39rgJw2SUOMdm1s+pqaiqOmcGwr5UdlKNaTBG3jU++xBJ94dugSMS7WL9yRSdYckXjGPHMhUWk3X5OLDGnSKZUS3qLrmEFcNNNKI1Jggucw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kgMmgPPtK5IqT/7as4zoS8bWD0xnbJrfYGEVqB2cilc=;
- b=XTVXzY5vL7BwthDeC75oIB0o0XR25eTUkvtTk6e/BwrLfHB03huEFZkKF4BpoOxXnwW6jtpef5df4/x+rSDpgIW7yLB7k7/ManrbSePyfPofMDmzV1bg8eAmiSRDiKq0MkTFlQY8loexNvlauIdT4zeSQJu1fHevYudGk3cFmeT37gHdGL53JeKOCzvthfR9ONMdDoLa9HiLPoWScDLpjUaimq+eIMhrBGHplKNQU3ZzwmKvnpFrsjB/i9KypvPp7pUS2S9foxB9Rq9/wBoHyHxzJ5G+3jR41zeENwJ08LEt9WiR+ev9giUahF6N7s8fnL6k49g7lkISwhJw+qaYkg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nokia.com; dmarc=pass action=none header.from=nokia.com;
- dkim=pass header.d=nokia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kgMmgPPtK5IqT/7as4zoS8bWD0xnbJrfYGEVqB2cilc=;
- b=Lx55jE05U/7jEicef+PMZKyE2oqppoxfykMDcIXLEiXwRr9stQr8wctyykwgb/TD043SSwbJfQgvP+75eJFfaV0CbRQ0sdtlj7h7Ev8ug0AfNljU2+XjisfJkhX4i9tFvPZCpHiekmz5cVwBZ2FLE3zuJ/bL70zlOf41F9WB2cYXCuil+AR5QAM/1nyMnGtHrr4j4MjX8WeHpuFuQxgPhVJFOiePTm5aGQBZ8EadbFYIjgZSzRtz4Ecj40ck4C8I3rhKrbw+ESiIJ+Nw0Teydk0zLeho7xuYF6HRlkTHUB4Cl/Re3SMS4B/pNW1A1Dn1GfGxM0WMQzg3WaCWfpH0UQ==
-Received: from BN0PR08MB6951.namprd08.prod.outlook.com (2603:10b6:408:128::14)
- by DM6PR08MB6347.namprd08.prod.outlook.com (2603:10b6:5:1e2::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.32; Mon, 14 Jul
- 2025 18:01:29 +0000
-Received: from BN0PR08MB6951.namprd08.prod.outlook.com
- ([fe80::9ea8:ab2e:4ce1:2d36]) by BN0PR08MB6951.namprd08.prod.outlook.com
- ([fe80::9ea8:ab2e:4ce1:2d36%6]) with mapi id 15.20.8922.028; Mon, 14 Jul 2025
- 18:01:28 +0000
-From: "Anthony Pighin (Nokia)" <anthony.pighin@nokia.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "gaurav.jain@nxp.com" <gaurav.jain@nxp.com>, Fabio Estevam
- <festevam@gmail.com>
-Subject: [PATCH] drivers: crypto: fsl: rng: Reinitialize job ring descriptor
- for each iteration
-Thread-Topic: [PATCH] drivers: crypto: fsl: rng: Reinitialize job ring
- descriptor for each iteration
-Thread-Index: Adv06CvHynxQxl05SyaIAFw4TNIM4g==
-Date: Mon, 14 Jul 2025 18:01:28 +0000
-Message-ID: <BN0PR08MB6951D0B436D20B1306B6AC818354A@BN0PR08MB6951.namprd08.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nokia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BN0PR08MB6951:EE_|DM6PR08MB6347:EE_
-x-ms-office365-filtering-correlation-id: 3d5c26b3-b25e-4db5-423e-08ddc3007511
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?RzWEu7iPF2f1BP3xvHzwz1oSvXORIrjXkPipeReHXNVXmzdAIub4RoeIfI51?=
- =?us-ascii?Q?cEn0uwf45JDlMTDYVZLjlO2HF3LBWyPE5GTUPfFTVXVQiHzaxsKZN/K/TA3O?=
- =?us-ascii?Q?u63RXXDBwKnzhvVGMcfdXQrq4iAsZu5ZFP3wkBY8rjQJP/6nAXn/pZ5AVfiX?=
- =?us-ascii?Q?z973mwckXw7urQkaFqMBVarpRJjtSLVs/yW/7U7DT+J0vDQKM7/zjhKB3dwq?=
- =?us-ascii?Q?VoaV0QHVJQfbL7upY5ajTeR+t51QdU7YyA5VoDgTHbbuTDVZO7hA6+dV2VQ9?=
- =?us-ascii?Q?OjH6sfUbUl1MMdBTxczH3lkWJQOFwrBjsuNBSeYrDEZVh4l0G1fdIoznBCSN?=
- =?us-ascii?Q?dsAI1pY4mlAfX4kiDeko1ltqzZqLfYjLVKM2C4awnqNfB9gfR2+6wMLUXXrc?=
- =?us-ascii?Q?5cAmOFZjBhhbtxnP8RtllC+0z/LJ2l02MDO2hXCXfAALQZcK+o08wDVzr85h?=
- =?us-ascii?Q?Uc/0K41J0nGbfWxBXcAfwhflG9TfG0cuVLRoyfSqaloo2HYmEJh3apkds9PE?=
- =?us-ascii?Q?3mDYrtJql8uJ/HjZpLmuIKOOdDeyb39Kim5i8oO3y53zRA0wPYa9QZpQcSk3?=
- =?us-ascii?Q?o72xvQkTOj9/MZcZPGI4aoHsuTLpUfeEeaNU73a4T+m2VxpE+hGQeYtjc7gH?=
- =?us-ascii?Q?VISsuc3XYYBqNVZK1K0FX1s/IGjRjiCimY0DlyYBjiibOdWsgDW/ZoWkkoaj?=
- =?us-ascii?Q?Ms/5ITciiWeIR2o2w+zB1M8CyEdpWj8JwpVubuFlI4peguibpPKh8rYo8N0y?=
- =?us-ascii?Q?8tsrMRLuT9pcVstKfYYzQt3MjMgTHMpqO9I3eQsrkinCS1T54Qj+xTseXmcr?=
- =?us-ascii?Q?vnCebXPNBDztN2jN+qCZmbsaOntgh3iu/aOU0cDfCihBETkMdYIGMNGOOylc?=
- =?us-ascii?Q?W3DAk/Nvv/8WzVnustnIp8cWI0Ko0TiHDrRLmy+mUJmvmyMKJ/oKbNTn2wRQ?=
- =?us-ascii?Q?oc+n8CqPI1R2MJf+aJVe/66ucK9B4UnrTFPpq0JnyX/El8MVpwMbjJdPJE9E?=
- =?us-ascii?Q?HnaZUf6F6CVpfZLRNn9gt34B8vC607pkOqOvwgI+Ti420WTAjGxYmaVIOk8G?=
- =?us-ascii?Q?+Xg6gZXrJrCFGEA6bRUjJwa3cCMtD9EpWh3I/w2PK1uJAuQ3T1l62K/9iUSL?=
- =?us-ascii?Q?MI+Qm3/YEyG1aICjEujVNcXXbwAxnib5ppFntsGo1u+E1rMkKkbLVAxEQC7z?=
- =?us-ascii?Q?lD1lb+3BhennwIEEqpA6DtyceBehjbRo2Q5yKQhvgvIhB22wTi312+4sLob4?=
- =?us-ascii?Q?oXACMGhNiugdyzzWX2UXPhanxGmD/ournsfpHWlRYgw3azHUs6+Awh0ntyZ+?=
- =?us-ascii?Q?Yhpt2OTSXmQpkfiO2gDFOdnfEarvUt8iJW7OOsgbTWBnzcTsrghpkfFXCnpj?=
- =?us-ascii?Q?+lxZlH3/It18JoNuqFvBT59m8G56XF4ZuxBBsLFIsJMBgA1RyjHQ06TgNmaQ?=
- =?us-ascii?Q?XU6GQP8ns7DllIAdDy7+2EGnctQeVPw68kN/BlwmDp6NJ+Nhsop8MA=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN0PR08MB6951.namprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?PYzquzzyBE5B/CEUfwO7h8YP/akr1X6SNsbLTY+sXYw3HajOXfi/DAup/XFz?=
- =?us-ascii?Q?2XbeuENkOv1wdz/WJvVHwEWnhzszQY3ugIPZidnbv9BEZa3Ox6ybEtV/pJCm?=
- =?us-ascii?Q?BDQ6TmH5lvgeGPcM6i9P8Ed/Uwa5amUf2ys9v6ubnagIjwbKsGpDWzjsBHch?=
- =?us-ascii?Q?0YT6Yfm1QvyBycHr60GFGLrRr/I16bxKeYqRuGiL/bhpyMkDetrSkh5VSTj+?=
- =?us-ascii?Q?qano0dVkX30ZChatn6EHnisHrKRUqIWGSauUAYhl8r7RLqqC3YL+BTvW57XA?=
- =?us-ascii?Q?opeVGmE6gteIQ78aICSe3vyqzNfqXtxU5e5uDszeR/JEdMz4rre1yVbx0Ll4?=
- =?us-ascii?Q?M90s/AKBu53dHen9G+FblEMYz4XW5J5uGSJdLgZne0NhXOmOW608qxtXgVeJ?=
- =?us-ascii?Q?f8L1+KgdDykSqeyYJKklPHtMjQMU8RIzGeWhRsHAErXfv8k0q6AW562BjndR?=
- =?us-ascii?Q?O1/jFy9MzoAWRknQfAfKj/39QHXWjUA7aOCRRCDVQ8GBxG4WfTDHgHJaNifA?=
- =?us-ascii?Q?7wcbZwm+HMMRd5FOCjvp8PNtoYBQqEoDfghAk4LB7utzxIyRKkpJN9GHipfP?=
- =?us-ascii?Q?0g1GHHSo54SM/HFmsPhI5JgRfhoL/Nu0KnSUqYWzO+mmxUiWRlO/pgqQYAjL?=
- =?us-ascii?Q?lbw4GgewEO2mF4fOpfazvlWUnN5RcSQHbM5Jot06edQd1mTFtrojD20Cooo4?=
- =?us-ascii?Q?V6VF+2+/BgErBtfZ6IRFPaY8m3/c1lK/t7KgyY9IFMi22+VI4Qudb9SH1PHU?=
- =?us-ascii?Q?WIiQ9BKaviOu60yfUv7QamUtAa2gNKe2BDsDdScLM37J9RzUfCrmMvS28b/f?=
- =?us-ascii?Q?pad7X0g5vwKkyi2jrhZdrpWBcOku9/nM+DLS8vseefIxSkOralSKkMRUBKz6?=
- =?us-ascii?Q?C3YYWAezo5zLn/EDymOjQjWYQniJ6dU0yl6QRR+lBcOmn2n0SUOFV5r9YsmB?=
- =?us-ascii?Q?lPnkYB42tGBSXq8XdIf/wUyurPJH0t10npv4YG0Er1KMVe5KNXiUReUoGVQS?=
- =?us-ascii?Q?tU7lCfUEul9kAXwKqh4+0fMH7k39Gb4dKrqahP2B8Rnaz3yo9/5Dr3j6AMfR?=
- =?us-ascii?Q?2oVcONK2nDWt4xgH5PIOhhnLZ6akhz6Yj9bTeF80l0Nwpo5p7KjzmLklWYF6?=
- =?us-ascii?Q?JDXTatsf7vrpEllvN2VGK8KvFqfuz6/n1u0+ls3F8rjOzIhj5QlDgqvQSWOl?=
- =?us-ascii?Q?4N7WZlp8ZU2tVoMKuVitkJ/aw+BcuSqpPOFMoImQyvgzI94e1vGQKFR0MinE?=
- =?us-ascii?Q?b9O+nr/J6vwxnwZdDvLr+UPY6BLw3PrJoF/N8GUBQxLBbEYYYpF32QTwTwUY?=
- =?us-ascii?Q?sAVdaHYzacku4bH7ZbUDiKbf/pPJqizG+dGCVU7DG5JsZWfUnRUSwClKMX5n?=
- =?us-ascii?Q?JuBma2YHM9HWFf/gJTP9AQWrStmRhsbAafPy7m7h2KVjRmLsZyrYWCAD3Ehf?=
- =?us-ascii?Q?llIBDY/6kQApfhqV+QSrrHq8/FykX0lBFYwjmv4565zV/qj9WaD8SuG0BhTO?=
- =?us-ascii?Q?CZ2+thkHodMiXGgIR9oqtbGOpaaZyD6r030mQY5R28o82mJzCyh1wkRCt/QR?=
- =?us-ascii?Q?vgolSG1u+QqlC7ky674gvgIQlWAq712QMAle2RMR?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ae3b37207easo951598866b.2
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 12:16:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752520617; x=1753125417; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q8R3Cl4CBnaMd3DLUoSMGMgXBCVQzgTSpuWUtXS2av8=;
+ b=HT2oP+iLp9PEOFO4keabbnqYP3e4THT2kF3AIzudH0ZyERagnNTsg2G4ZG55mqm1ib
+ kw8aM0oNEjHGN0zMn53mvlAv4up7xuVXdnYmUFk3F/r8iPNl2EWgivp36/1uV6xX+rCV
+ vsxHsPiSCODiGjWGIvFGB+oU9mwAWGCDp8HTwAW7hIdehItclZMRmbgvQg17mBuse6fL
+ qJ+Zqe5c2v5ao9YS9sWEJ8O3sMnfOFP9MEJ8Uwa4fWlaQDDaZd46BF5iUOzLo0tdfjDA
+ v0PETjHjETP9nWjFrbTQkNkoHeAMbtqwmk2RwmJzOaVF9cfHY/72xlqhlSDPow09uW1M
+ Jksw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752520617; x=1753125417;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=q8R3Cl4CBnaMd3DLUoSMGMgXBCVQzgTSpuWUtXS2av8=;
+ b=KFlqQLhshG6632BPRd3pSVQrCgNFKCI8UB9uze4g0pblXgHdBFQFQDvqLTYjAZJKwi
+ B/3Z/duqxQWeliWxkYSchWY4p0AAkyK9NG2Zi6SIX2T271AD5Xmi66o+yo53/kMrBb1x
+ n1g5IfON4PZW8FKqjlqYl19lUODNPVx/+jXIyM8pe86Ph7UVf94pCKZJzdbd0/i3fm0v
+ UKibiSiyBsn3WV1WE/U0KiI9a5BgSvm2kOBoGzFXkldE1YweY24UvycLBa97loA/mxXl
+ ToKbU0k3mF4zRrtdQLDLHN4MoU1sZrMaLMHhtwqgQvNgsrcxjBVFA8/WHImJemRXTkss
+ vy/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUlX6RzZz0jvU3tGP1DAWOvRR9Nz1Ohbdf0UKN8kI2q5i33ewm3zXApR15PiBciN3GiGk5irWg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzHbJDZjqLdOc+TZ65k0l5gPg9RtFC092j4D/L0N1eXP0IpF5FH
+ ZJfuumcNoFVmv2PFkSPYss0gjigGBhKf/+X1eqMJkezaxGxyh5v0v+2sbTnfQiikP2DW4pm7q34
+ jS/7Em+gVMU5Ruju6dly7Uxr40Aow+3Uw
+X-Gm-Gg: ASbGncv+9QewkdPB2PBldMmjg1lDqeAIL6yKq+HIcgsAfbCcNTEUHY73ZD/q3p7/+kD
+ sZ2aJTz5SY7ADxu8q1Hewzg/1P8ckpKb18gBHnNGUbLHSgGH0H3i7JiB9phbA1snDHMjF7+sScr
+ m7a6vj1A6bs8hyt+k24bZOeCdVLnpeLuXwV9lGoeHyz11L3ZHdcH5cvL32Miloq48l9lU+McU8N
+ OHJIW1NM9jmwFWx+0keZI1+XDZMzKGDWjZcQr0=
+X-Google-Smtp-Source: AGHT+IGHBHCd7zURXVwrFr/nxsb1rXxflk2tZbrZZsa506/TIMJx5fj6UYzqr4kAaH3SKMS4pjRsvrwervOlbidsTEk=
+X-Received: by 2002:a17:906:9f8c:b0:ae0:9363:4d5d with SMTP id
+ a640c23a62f3a-ae6fbc13b3emr1532069366b.2.1752520617008; Mon, 14 Jul 2025
+ 12:16:57 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: nokia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BN0PR08MB6951.namprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d5c26b3-b25e-4db5-423e-08ddc3007511
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Jul 2025 18:01:28.7463 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5d471751-9675-428d-917b-70f44f9630b0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Z26RfeojBwJa1vct35DSqqX2oizSfHVyJuy4gLoa0FUVzOHoOaOaLYYmfg4N8LswWIJtNR0+nP62swhzzEHc0CbvPuqjVRgLMXbXfo8W6r0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR08MB6347
-X-Mailman-Approved-At: Mon, 14 Jul 2025 20:46:29 +0200
+References: <20250714-blk-uclass-v1-1-d21428c5f762@linaro.org>
+ <20250714162951.GI13084@bill-the-cat>
+ <04953cfc-0475-4560-bd7c-fee27739e351@linaro.org>
+In-Reply-To: <04953cfc-0475-4560-bd7c-fee27739e351@linaro.org>
+From: Greg Malysa <malysagreg@gmail.com>
+Date: Mon, 14 Jul 2025 15:13:26 -0400
+X-Gm-Features: Ac12FXxnkUm7_7MszWr8c-61a1elJg_4HwgA3GhY5dFKeVKQ8FOg7fIVqlsvboM
+Message-ID: <CABdDSeVtccemn8PTgs-f+QzZqJDZ_R=GRmrK2wquasCYDwWYPQ@mail.gmail.com>
+Subject: Re: [PATCH] block: Remove unreachable code
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,80 +96,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-u-boot internals were being corrupted following an EFI callback to
-get_rng(). One of the many footprints was a corruption of the EFI
-protocols linked list.
+Hi Tom, Andrew,
 
-A request for >16 bytes of random data is broken into smaller requests.
-Those requests are fed in a loop to the CAAM RNG, which uses a job
-queue ring for interaction.
+On Mon, Jul 14, 2025 at 1:12=E2=80=AFPM Andrew Goodbody
+<andrew.goodbody@linaro.org> wrote:
+>
+> On 14/07/2025 17:29, Tom Rini wrote:
+> > On Mon, Jul 14, 2025 at 04:38:53PM +0100, Andrew Goodbody wrote:
+> >> The two functions blk_find_first and blk_find_next use a for loop with
+> >> the content being a 'return 0' which means that the 'increment' code i=
+s
+> >> unreachable so remove it and also remove the variable ret which is
+> >> assigned to but its value is never used.
+> >>
+> >> This issue found by Smatch.
+> >>
+> >> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> >> ---
+> >>   drivers/block/blk-uclass.c | 14 ++++----------
+> >>   1 file changed, 4 insertions(+), 10 deletions(-)
+> >>
+> >> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+> >> index f3ac8db9464..b38c21ffbe2 100644
+> >> --- a/drivers/block/blk-uclass.c
+> >> +++ b/drivers/block/blk-uclass.c
+> >> @@ -613,11 +613,8 @@ static int blk_flags_check(struct udevice *dev, e=
+num blk_flag_t req_flags)
+> >>
+> >>   int blk_find_first(enum blk_flag_t flags, struct udevice **devp)
+> >>   {
+> >> -    int ret;
+> >> -
+> >> -    for (ret =3D uclass_find_first_device(UCLASS_BLK, devp);
+> >> -         *devp && !blk_flags_check(*devp, flags);
+> >> -         ret =3D uclass_find_next_device(devp))
+> >> +    for (uclass_find_first_device(UCLASS_BLK, devp);
+> >> +         *devp && !blk_flags_check(*devp, flags);)
+> >>              return 0;
+> >>
+> >>      return -ENODEV;
+> >> @@ -625,11 +622,8 @@ int blk_find_first(enum blk_flag_t flags, struct =
+udevice **devp)
+> >>
+> >>   int blk_find_next(enum blk_flag_t flags, struct udevice **devp)
+> >>   {
+> >> -    int ret;
+> >> -
+> >> -    for (ret =3D uclass_find_next_device(devp);
+> >> -         *devp && !blk_flags_check(*devp, flags);
+> >> -         ret =3D uclass_find_next_device(devp))
+> >> +    for (uclass_find_next_device(devp);
+> >> +         *devp && !blk_flags_check(*devp, flags);)
+> >>              return 0;
+> >>
+> >>      return -ENODEV;
+> >
+> > Should we clean up uclass_find_next_device(...) to not return int? The
+> > function comments don't quite make sense (include/dm/uclass-internal.h)
+> > and it always returns 0.
+>
+> OK, that should not be too bad.
+>
+> Andrew
 
-However, the job queue descriptor is created only at probe time. That=20
-descriptor may end up needing an endian swap (LS1046A) before being fed
-to the CAAM RNG. This corrupts the descriptor for the next iteration,
-since it will be blindly endian swapped yet again.
+To me it looks like this function doesn't do what is advertised in
+include/blk.h in either case (find the first block device with
+matching flags by checking each one until one matches or we run out),
+instead it seems to test the first block device for the flags
+requested and either returns -ENODEV or 0. Out of curiosity, i looked
+for uses of blk_find_first and blk_find_next, and (except for
+test/dm/blk.c where all the functions are used) they're only used by
+the blk_foreach macro (include/blk.h again), which is only used in
+blk_foreach_probe, which is only used in blk_count_devices, which is
+used nowhere. Instead users use blk_first_device_err which is a
+completely separate path (drivers/block/blk-uclass.c:638).
 
-Two issues arise. The number of words to endian swap is taken from the
-input descriptor itself. So on the second iteration, the length has been
-corrupted. This results in a corruption past the end of the descriptor:
-whatever is after in memory is endian swapped too. Second, some of the
-entries in the descriptor are DMA addresses. If the descriptor is still
-somehow considered valid after swapping, the data at the corrupted DMA
-address is now trampled.
+I was hoping the test code could clarify a bit and it might. In test/dm/blk=
+.c:
 
-Linux properly initializes the descriptor for each iteration. This is
-what is now done with this commit.
+dm_test_blk_flags first looks for devices with either flag (BLKF_BOTH)
+so the flag check never fails, then it looks for BLKF_FIXED ,which it
+indicates must fail because before probing all devices are removable,
+then it looks for BLKF_REMOVABLE, which is set for the first device
+before probing (even though it will become BLKF_FIXED later). So none
+of these are (I think) testing for the situation where the first
+device is missing a flag, but the second device has it and
+blk_find_first should return the second device. Then in
+dm_test_blk_iter, blk_count_devices is used with varying flag
+combinations and is expected to give the correct answer, which
+suggests that the code does actually work, assuming the test case runs
+and succeeds.
 
-Signed-off-by: Anthony Pighin <anthony.pighin@nokia.com>
----
- drivers/crypto/fsl/rng.c | 19 ++++++++++++++-----
- 1 file changed, 14 insertions(+), 5 deletions(-)
+I've been looking for something to poke around in and if you're ok
+with it I'd be interested in exploring this further to figure out
+whether the function does what it is intended to or if there's an
+opportunity to improve the test coverage.
 
-diff --git a/drivers/crypto/fsl/rng.c b/drivers/crypto/fsl/rng.c
-index 786a710f5fb..85544f931cb 100644
---- a/drivers/crypto/fsl/rng.c
-+++ b/drivers/crypto/fsl/rng.c
-@@ -23,11 +23,24 @@ struct caam_rng_priv {
-        u8 data[CAAM_RNG_MAX_FIFO_STORE_SIZE] __aligned(ARCH_DMA_MINALIGN);
- };
-
-+static int caam_init_desc(struct caam_rng_priv *priv)
-+{
-+       ulong size =3D ALIGN(CAAM_RNG_DESC_LEN, ARCH_DMA_MINALIGN);
-+
-+       inline_cnstr_jobdesc_rng(priv->desc, priv->data,
-+                                CAAM_RNG_MAX_FIFO_STORE_SIZE);
-+       flush_dcache_range((unsigned long)priv->desc,
-+                          (unsigned long)priv->desc + size);
-+
-+       return 0;
-+}
-+
- static int caam_rng_read_one(struct caam_rng_priv *priv)
- {
-        int size =3D ALIGN(CAAM_RNG_MAX_FIFO_STORE_SIZE, ARCH_DMA_MINALIGN)=
-;
-        int ret;
-
-+       caam_init_desc(priv);
-        ret =3D run_descriptor_jr(priv->desc);
-        if (ret < 0)
-                return -EIO;
-@@ -63,12 +76,8 @@ static int caam_rng_read(struct udevice *dev, void *data=
-, size_t len)
- static int caam_rng_probe(struct udevice *dev)
- {
-        struct caam_rng_priv *priv =3D dev_get_priv(dev);
--       ulong size =3D ALIGN(CAAM_RNG_DESC_LEN, ARCH_DMA_MINALIGN);
-
--       inline_cnstr_jobdesc_rng(priv->desc, priv->data,
--                                CAAM_RNG_MAX_FIFO_STORE_SIZE);
--       flush_dcache_range((unsigned long)priv->desc,
--                          (unsigned long)priv->desc + size);
-+       caam_init_desc(priv);
-
-        return 0;
- }
---
-2.43.0
-
+Thanks,
+Greg
