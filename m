@@ -4,53 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A60FEC83F17
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 21:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E7DC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 21:10:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0073582E37;
-	Mon, 14 Jul 2025 23:03:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=novatechautomation.com
+	by phobos.denx.de (Postfix) with ESMTP id 277D782E37;
+	Mon, 14 Jul 2025 23:10:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=novatechautomation.com header.i=@novatechautomation.com header.b="Bn8WC8WR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fo8+yiYR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D1AA83020; Mon, 14 Jul 2025 23:03:08 +0200 (CEST)
-Received: from gw1.cammew.com (gw1.cammew.com [64.182.209.148])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8223882F6F; Mon, 14 Jul 2025 23:10:51 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4653582CEA
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 23:03:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=novatechautomation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=eric.schikschneit@novatechautomation.com
-Received: from eric-Desktop.novatech-llc.local (unknown [38.62.160.128])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by gw1.cammew.com (Postfix) with ESMTPSA id BF0F811A5CB;
- Mon, 14 Jul 2025 17:03:02 -0400 (EDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 gw1.cammew.com BF0F811A5CB
+ by phobos.denx.de (Postfix) with ESMTPS id 6E76582CEA
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 23:10:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-73e57de73b8so130269a34.0
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 14:10:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=novatechautomation.com; s=relay; t=1752526983;
- bh=ghtxWQBgAFKaTUx65c6vBM4xw5hIMi9QXRw2papJkIE=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Bn8WC8WRFJjFZ6NJvCP9Mjx764rii+yzP95LYpuQ3p7RXXgRhDRnsQcpYTpWkAJk9
- WINZgG3vVJSawY7IxCwq/2bdWUHpXT+nFhAqlPg7j5V7xp1ggEqmP0JtbEJjh+7uIk
- o7OZyGDgKl5o+FiLi846gmGKS+Rr1odcHTCkXCHA=
-From: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-To: u-boot@lists.denx.de
-Cc: bmeng.cn@gmail.com,
- Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Subject: [PATCH 2/2] Fix x86 baytrail boot flow, UPD/VPD Updates
-Date: Mon, 14 Jul 2025 16:02:49 -0500
-Message-ID: <20250714210249.4139916-2-eric.schikschneit@novatechautomation.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
-References: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
+ d=konsulko.com; s=google; t=1752527448; x=1753132248; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=7K2xU1UM2xLhNWtS0HJjo7iDgQ0xn8sQo3c2pbC+kVw=;
+ b=fo8+yiYRIHu5ouDc3ELPV/FdebUk+hAA0MRyxi2omRuM1n1lPnFCiPi09gN8Z/DGSm
+ m7oNXp26tKST+FaA8bG655KyQuLrD3Do8HZldjvPv4XbLoylvdbtPS6ewYgI4qzLYyNC
+ BcCCC20nniglvBU0sN2PW46T1LfZGYQTQcTbY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752527448; x=1753132248;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7K2xU1UM2xLhNWtS0HJjo7iDgQ0xn8sQo3c2pbC+kVw=;
+ b=eNtfIaTO+ghmtvRAXlAHXxqYaj6A2wTOwzOh8/dMn9QD78xcn0Kcg+hlzunI5WlpLC
+ 1Wu+MEnpgPdubzdgxy8U1KsOcRkqQ14rhciJdEiv5CO8Ttd5XI1Cu+A+zgwXH4Z7QjV9
+ OlTYSI2I5z+1uJOTDDdpLMeXvY7iDaOfPcpcXM8BEU37EUxC8/WcSmjzQ7W4/8X0BgqR
+ IiozUCZBzAgzt3pJNE+O33cDlSf7cof3QCoawkExpAPwONqjGDZigtkre3x+6iOv3Tv9
+ 0MhIqqDeJu4wG8RPnObThqaJWo2M2zxPf6+KdNeCVMh/ioqxRVIONQV/jpKgDZOam+dP
+ YgrA==
+X-Gm-Message-State: AOJu0YxerRhf/hmpe8WGRdBAIbK/kvVxoIym1hruGAkOyYZfQ5D+pLsa
+ 93P7FYjZjrn8YsXSevnoUy8O6ak9P8cXrk0Ntz3wzXwEldI9esa2bhBBP5CjwRndHtYy2fvne+6
+ 4giFzoIo=
+X-Gm-Gg: ASbGncuXqukliOJAXFvdc0Rt9kXievFcV1VSDGjORCWHxadzAOGtpMybyVIS+bxvFk+
+ MtG/8/foK1HbKDWEP79Oa0hzQ39G4HNZxQvtm2kD+BxfWXBfOE+epQjcYilBijYl4Q8A2P0e2wV
+ Crnm/PQlPTMU3zen0JWxiy58A6fQhEHkaSBZnZbcD5stYL8dtqIbhd0dO9l6FNd/bJSJigywFdc
+ GhXaG6qVxCkGl5ARva0c1+A5B66oLW2cW3dV767DdxOW/nmGJB2GUw8o30mhZRaB/2cTOacrAnR
+ b1Gkvd6YZa+WImIMPfh2dp01d+GJY83kTmfhc0Zbg7J1QoIExD76K0UCeHvrhy2Jo4L3VDX8ZbC
+ ndEGCWGxHZPRfTQlywRKXAE7mtYYdw8AdzukDe/qUtDrnRebU0jeQE/s=
+X-Google-Smtp-Source: AGHT+IFBTTee0ROFK6n/4xV7tG6B3ChYsohDTF3TqwY/blH88j4zM7pwKTuWVeTXXRmuxiB7iff4RA==
+X-Received: by 2002:a05:6830:8107:b0:73a:d3f6:8b22 with SMTP id
+ 46e09a7af769-73e57733540mr576437a34.11.1752527448041; 
+ Mon, 14 Jul 2025 14:10:48 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73e541c3a6fsm202668a34.57.2025.07.14.14.10.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Jul 2025 14:10:47 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
+In-Reply-To: <20250707203655.613340-1-ravi@prevas.dk>
+References: <20250707203655.613340-1-ravi@prevas.dk>
+Subject: Re: [PATCH v2 0/3] integer limit macro consolidation
+Message-Id: <175252744723.202878.14649503760799034937.b4-ty@konsulko.com>
+Date: Mon, 14 Jul 2025 15:10:47 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,266 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The VPD has been updated to include additional values found in the Intel
-FSP_MR5 Integration Guide.
+On Mon, 07 Jul 2025 22:36:52 +0200, Rasmus Villemoes wrote:
 
-Disable MRC_CACHE for the baytrail platform as this will break the boot flow
-as well. This issue has not been diagnosed further, but I suspect it is similar
-to my previous patch and related to how modern GCC generates the low level
-op-codes.
+> I was bitten by our limit macros not being usable in #if conditionals
+> when building a standalone app. It turns out that the work to fix that
+> had already been started by the inclusion of the mbedtls library, so
+> it's something that people do hit.
+> 
+> Let's finish the job by providing suitable limit macros for all three families:
+> 
+> [...]
 
-Patch 2 of 2
+Applied to u-boot/master, thanks!
 
-Upstream-Status: Pending
-
-Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
----
- arch/x86/cpu/baytrail/fsp_configs.c           | 193 +++++++-----------
- .../include/asm/arch-baytrail/fsp/fsp_vpd.h   |   4 +-
- arch/x86/lib/fsp1/fsp_common.c                |   2 +-
- 3 files changed, 75 insertions(+), 124 deletions(-)
-
-diff --git a/arch/x86/cpu/baytrail/fsp_configs.c b/arch/x86/cpu/baytrail/fsp_configs.c
-index fb3f946c45f..ddbd727120d 100644
---- a/arch/x86/cpu/baytrail/fsp_configs.c
-+++ b/arch/x86/cpu/baytrail/fsp_configs.c
-@@ -35,137 +35,86 @@ void fsp_update_configs(struct fsp_config_data *config,
- 	struct upd_region *fsp_upd = &config->fsp_upd;
- 	struct memory_down_data *mem;
- 	const void *blob = gd->fdt_blob;
--	int node;
- 
- 	/* Initialize runtime buffer for fsp_init() */
- 	rt_buf->common.stack_top = config->common.stack_top - 32;
- 	rt_buf->common.boot_mode = config->common.boot_mode;
- 	rt_buf->common.upd_data = &config->fsp_upd;
- 
--	node = fdtdec_next_compatible(blob, 0, COMPAT_INTEL_BAYTRAIL_FSP);
--	if (node < 0) {
--		debug("%s: Cannot find FSP node\n", __func__);
--		return;
--	}
-+	/* Set all values to known good defaults as documented in 	*
-+	 * Intel FSP_MR5 file: BAYTRAIL_FSP.bsf				*/
-+
-+	/* NOTE: This breaks u-boot ability to set board options via	*
-+	 * device tree, but guarantees specific known values..		*
-+	 * you wouldnt use an uninitialized variable would you??	*/
-+	fsp_upd->mrc_init_tseg_size = 0x0001;
-+	fsp_upd->mrc_init_mmio_size = 0x0800;
-+	fsp_upd->mrc_init_spd_addr1 = 0xa0;
-+	fsp_upd->mrc_init_spd_addr2 = 0xa2;
-+	fsp_upd->emmc_boot_mode = 2;
-+	fsp_upd->enable_sdio = 1;
-+	fsp_upd->enable_sdcard = 1;
-+	fsp_upd->enable_hsuart0 = 1;
-+	fsp_upd->enable_hsuart1 = 1;
-+	fsp_upd->enable_spi = 1;
-+	// Skip 1 byte
-+	fsp_upd->enable_sata = 1;
-+	fsp_upd->sata_mode = 1;
-+	fsp_upd->enable_azalia = 0;
- 
--	fsp_upd->mrc_init_tseg_size = fdtdec_get_int(blob, node,
--						     "fsp,mrc-init-tseg-size",
--						     MRC_INIT_TSEG_SIZE_1MB);
--	fsp_upd->mrc_init_mmio_size = fdtdec_get_int(blob, node,
--						     "fsp,mrc-init-mmio-size",
--						     MRC_INIT_MMIO_SIZE_2048MB);
--	fsp_upd->mrc_init_spd_addr1 = fdtdec_get_int(blob, node,
--						     "fsp,mrc-init-spd-addr1",
--						     0xa0);
--	fsp_upd->mrc_init_spd_addr2 = fdtdec_get_int(blob, node,
--						     "fsp,mrc-init-spd-addr2",
--						     0xa2);
--	fsp_upd->emmc_boot_mode = fdtdec_get_int(blob, node,
--						 "fsp,emmc-boot-mode",
--						 EMMC_BOOT_MODE_EMMC41);
--	fsp_upd->enable_sdio = fdtdec_get_bool(blob, node, "fsp,enable-sdio");
--	fsp_upd->enable_sdcard = fdtdec_get_bool(blob, node,
--						 "fsp,enable-sdcard");
--	fsp_upd->enable_hsuart0 = fdtdec_get_bool(blob, node,
--						  "fsp,enable-hsuart0");
--	fsp_upd->enable_hsuart1 = fdtdec_get_bool(blob, node,
--						  "fsp,enable-hsuart1");
--	fsp_upd->enable_spi = fdtdec_get_bool(blob, node, "fsp,enable-spi");
--	fsp_upd->enable_sata = fdtdec_get_bool(blob, node, "fsp,enable-sata");
--	fsp_upd->sata_mode = fdtdec_get_int(blob, node, "fsp,sata-mode",
--					    SATA_MODE_AHCI);
--	fsp_upd->enable_azalia = fdtdec_get_bool(blob, node,
--						 "fsp,enable-azalia");
- 	if (fsp_upd->enable_azalia)
- 		update_fsp_azalia_configs(&fsp_upd->azalia_cfg_ptr);
--	fsp_upd->enable_xhci = fdtdec_get_bool(blob, node, "fsp,enable-xhci");
--	fsp_upd->lpe_mode = fdtdec_get_int(blob, node, "fsp,lpe-mode",
--					   LPE_MODE_PCI);
--	fsp_upd->lpss_sio_mode = fdtdec_get_int(blob, node, "fsp,lpss-sio-mode",
--					   LPSS_SIO_MODE_PCI);
--	fsp_upd->enable_dma0 = fdtdec_get_bool(blob, node, "fsp,enable-dma0");
--	fsp_upd->enable_dma1 = fdtdec_get_bool(blob, node, "fsp,enable-dma1");
--	fsp_upd->enable_i2_c0 = fdtdec_get_bool(blob, node, "fsp,enable-i2c0");
--	fsp_upd->enable_i2_c1 = fdtdec_get_bool(blob, node, "fsp,enable-i2c1");
--	fsp_upd->enable_i2_c2 = fdtdec_get_bool(blob, node, "fsp,enable-i2c2");
--	fsp_upd->enable_i2_c3 = fdtdec_get_bool(blob, node, "fsp,enable-i2c3");
--	fsp_upd->enable_i2_c4 = fdtdec_get_bool(blob, node, "fsp,enable-i2c4");
--	fsp_upd->enable_i2_c5 = fdtdec_get_bool(blob, node, "fsp,enable-i2c5");
--	fsp_upd->enable_i2_c6 = fdtdec_get_bool(blob, node, "fsp,enable-i2c6");
--	fsp_upd->enable_pwm0 = fdtdec_get_bool(blob, node, "fsp,enable-pwm0");
--	fsp_upd->enable_pwm1 = fdtdec_get_bool(blob, node, "fsp,enable-pwm1");
--	fsp_upd->enable_hsi = fdtdec_get_bool(blob, node, "fsp,enable-hsi");
--	fsp_upd->igd_dvmt50_pre_alloc = fdtdec_get_int(blob, node,
--			"fsp,igd-dvmt50-pre-alloc", IGD_DVMT50_PRE_ALLOC_64MB);
--	fsp_upd->aperture_size = fdtdec_get_int(blob, node, "fsp,aperture-size",
--						APERTURE_SIZE_256MB);
--	fsp_upd->gtt_size = fdtdec_get_int(blob, node, "fsp,gtt-size",
--					   GTT_SIZE_2MB);
--	fsp_upd->mrc_debug_msg = fdtdec_get_bool(blob, node,
--						 "fsp,mrc-debug-msg");
--	fsp_upd->isp_enable = fdtdec_get_bool(blob, node, "fsp,isp-enable");
--	fsp_upd->scc_mode = fdtdec_get_int(blob, node, "fsp,scc-mode",
--					   SCC_MODE_PCI);
--	fsp_upd->igd_render_standby = fdtdec_get_bool(blob, node,
--						      "fsp,igd-render-standby");
--	fsp_upd->txe_uma_enable = fdtdec_get_bool(blob, node,
--						  "fsp,txe-uma-enable");
--	fsp_upd->os_selection = fdtdec_get_int(blob, node, "fsp,os-selection",
--					       OS_SELECTION_LINUX);
--	fsp_upd->emmc45_ddr50_enabled = fdtdec_get_bool(blob, node,
--			"fsp,emmc45-ddr50-enabled");
--	fsp_upd->emmc45_hs200_enabled = fdtdec_get_bool(blob, node,
--			"fsp,emmc45-hs200-enabled");
--	fsp_upd->emmc45_retune_timer_value = fdtdec_get_int(blob, node,
--			"fsp,emmc45-retune-timer-value", 8);
--	fsp_upd->enable_igd = fdtdec_get_bool(blob, node, "fsp,enable-igd");
- 
-+	fsp_upd->enable_xhci = 1;
-+	fsp_upd->lpe_mode = 1;
-+	fsp_upd->lpss_sio_mode = 1;
-+	fsp_upd->enable_dma0 = 1;
-+	fsp_upd->enable_dma1 = 1;
-+	fsp_upd->enable_i2_c0 = 1;
-+	fsp_upd->enable_i2_c1 = 1;
-+	fsp_upd->enable_i2_c2 = 1;
-+	fsp_upd->enable_i2_c3 = 1;
-+	fsp_upd->enable_i2_c4 = 1;
-+	fsp_upd->enable_i2_c5 = 1;
-+	fsp_upd->enable_i2_c6 = 1;
-+	fsp_upd->enable_pwm0 = 1;
-+	fsp_upd->enable_pwm1 = 1;
-+	fsp_upd->enable_hsi = 0;
-+	fsp_upd->igd_dvmt50_pre_alloc = 2;
-+	fsp_upd->aperture_size = 2;
-+	fsp_upd->gtt_size = 2;
-+	// Skip 5 bytes
-+	fsp_upd->mrc_debug_msg = 0;
-+	fsp_upd->isp_enable = 0;
-+	fsp_upd->scc_mode = 1;
-+	fsp_upd->igd_render_standby = 0;
-+	fsp_upd->txe_uma_enable = 0;
-+	fsp_upd->os_selection = 0x4;
-+	fsp_upd->emmc45_ddr50_enabled = 1;
-+	fsp_upd->emmc45_hs200_enabled = 0;
-+	fsp_upd->emmc45_retune_timer_value = 8;
-+	fsp_upd->enable_igd = 1;
-+	fsp_upd->auto_self_refresh = 2;
-+	fsp_upd->task_timeout_count = 100;
-+	// Skip 152 bytes
- 	mem = &fsp_upd->memory_params;
--	mem->enable_memory_down = fdtdec_get_bool(blob, node,
--						  "fsp,enable-memory-down");
--	if (mem->enable_memory_down) {
--		node = fdtdec_next_compatible(blob, node,
--					      COMPAT_INTEL_BAYTRAIL_FSP_MDP);
--		if (node < 0) {
--			debug("%s: Cannot find FSP memory-down-params node\n",
--			      __func__);
--		} else {
--			mem->dram_speed = fdtdec_get_int(blob, node,
--							 "fsp,dram-speed",
--							 DRAM_SPEED_1333MTS);
--			mem->dram_type = fdtdec_get_int(blob, node,
--							"fsp,dram-type",
--							DRAM_TYPE_DDR3L);
--			mem->dimm_0_enable = fdtdec_get_bool(blob, node,
--					"fsp,dimm-0-enable");
--			mem->dimm_1_enable = fdtdec_get_bool(blob, node,
--					"fsp,dimm-1-enable");
--			mem->dimm_width = fdtdec_get_int(blob, node,
--							 "fsp,dimm-width",
--							 DIMM_WIDTH_X8);
--			mem->dimm_density = fdtdec_get_int(blob, node,
--							   "fsp,dimm-density",
--							   DIMM_DENSITY_2GBIT);
--			mem->dimm_bus_width = fdtdec_get_int(blob, node,
--					"fsp,dimm-bus-width",
--					DIMM_BUS_WIDTH_64BITS);
--			mem->dimm_sides = fdtdec_get_int(blob, node,
--							 "fsp,dimm-sides",
--							 DIMM_SIDES_1RANKS);
--			mem->dimm_tcl = fdtdec_get_int(blob, node,
--						       "fsp,dimm-tcl", 0x09);
--			mem->dimm_trpt_rcd = fdtdec_get_int(blob, node,
--					"fsp,dimm-trpt-rcd", 0x09);
--			mem->dimm_twr = fdtdec_get_int(blob, node,
--						       "fsp,dimm-twr", 0x0a);
--			mem->dimm_twtr = fdtdec_get_int(blob, node,
--							"fsp,dimm-twtr", 0x05);
--			mem->dimm_trrd = fdtdec_get_int(blob, node,
--							"fsp,dimm-trrd", 0x04);
--			mem->dimm_trtp = fdtdec_get_int(blob, node,
--							"fsp,dimm-trtp", 0x05);
--			mem->dimm_tfaw = fdtdec_get_int(blob, node,
--							"fsp,dimm-tfaw", 0x14);
--		}
--	}
-+	// We make the assumption that 0x00 = DISABLED
-+	mem->enable_memory_down = 0x00;
-+#if 0
-+	mem->dram_speed = 0x02;
-+	mem->dram_type = 0x01;
-+	mem->dimm_0_enable = 0x01;
-+	mem->dimm_1_enable = 0x00;
-+	mem->dimm_width = 0x00;
-+	mem->dimm_density = 0x01;
-+	mem->dimm_bus_width = 0x03;
-+	mem->dimm_sides = 0x00;
-+	mem->dimm_tcl = 0x09;
-+	mem->dimm_trpt_rcd = 0x09;
-+	mem->dimm_twr = 0x0a;
-+	mem->dimm_twtr = 0x05;
-+	mem->dimm_trrd = 0x04;
-+	mem->dimm_trtp = 0x05;
-+	mem->dimm_tfaw = 0x14;
-+#endif
- }
-diff --git a/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h b/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h
-index c6544ea409c..09924d7393a 100644
---- a/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h
-+++ b/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h
-@@ -74,7 +74,9 @@ struct __packed upd_region {
- 	uint8_t emmc45_hs200_enabled;		/* Offset 0x0052 */
- 	uint8_t emmc45_retune_timer_value;	/* Offset 0x0053 */
- 	uint8_t enable_igd;			/* Offset 0x0054 */
--	uint8_t unused_upd_space1[155];		/* Offset 0x0055 */
-+	uint8_t auto_self_refresh;		/* Offset 0x0055 */
-+	uint16_t task_timeout_count;		/* Offset 0x0056 */
-+	uint8_t unused_upd_space1[152];		/* Offset 0x0057 */
- 	struct memory_down_data memory_params;	/* Offset 0x00f0 */
- 	uint16_t terminator;			/* Offset 0x0100 */
- };
-diff --git a/arch/x86/lib/fsp1/fsp_common.c b/arch/x86/lib/fsp1/fsp_common.c
-index df18f476756..e6a1276986b 100644
---- a/arch/x86/lib/fsp1/fsp_common.c
-+++ b/arch/x86/lib/fsp1/fsp_common.c
-@@ -55,7 +55,7 @@ int arch_fsp_init(void)
- 	}
- 
- 	if (!gd->arch.hob_list) {
--		if (IS_ENABLED(CONFIG_ENABLE_MRC_CACHE))
-+		if (!IS_ENABLED(CONFIG_INTEL_BAYTRAIL) && IS_ENABLED(CONFIG_ENABLE_MRC_CACHE))
- 			nvs = fsp_prepare_mrc_cache();
- 		else
- 			nvs = NULL;
+[1/3] move more limits from kernel.h to limits.h and standardize their definitions
+      commit: dc323f3bee318514af9d7c6fed1e01c712bc71ae
+[2/3] move limits for sNN/uNN types from kernel.h to limits.h
+      commit: 0604595c16a6bf3c0aed131b80d1a25d5d74057d
+[3/3] limits.h: provide all limit macros for standard [u]intNN_t types
+      commit: dd260d95fd26deedc64f076b554759d09420f006
 -- 
-2.43.0
+Tom
+
 
