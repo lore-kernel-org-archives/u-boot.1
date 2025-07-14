@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC236C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 21:03:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A60FEC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 21:03:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7BAE82F6F;
-	Mon, 14 Jul 2025 23:03:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0073582E37;
+	Mon, 14 Jul 2025 23:03:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=novatechautomation.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=novatechautomation.com header.i=@novatechautomation.com header.b="TmwQckTu";
+	dkim=pass (1024-bit key; unprotected) header.d=novatechautomation.com header.i=@novatechautomation.com header.b="Bn8WC8WR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB4B582E52; Mon, 14 Jul 2025 23:03:04 +0200 (CEST)
+ id 7D1AA83020; Mon, 14 Jul 2025 23:03:08 +0200 (CEST)
 Received: from gw1.cammew.com (gw1.cammew.com [64.182.209.148])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBEE882CEA
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 23:03:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4653582CEA
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 23:03:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=novatechautomation.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -29,24 +29,26 @@ Received: from eric-Desktop.novatech-llc.local (unknown [38.62.160.128])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by gw1.cammew.com (Postfix) with ESMTPSA id 88081119CBD;
- Mon, 14 Jul 2025 17:02:58 -0400 (EDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 gw1.cammew.com 88081119CBD
+ by gw1.cammew.com (Postfix) with ESMTPSA id BF0F811A5CB;
+ Mon, 14 Jul 2025 17:03:02 -0400 (EDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 gw1.cammew.com BF0F811A5CB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=novatechautomation.com; s=relay; t=1752526978;
- bh=NwtAfoqYLNAtb1flNGu2Dg856RQmnAx1LyPRxYCbJ5g=;
- h=From:To:Cc:Subject:Date:From;
- b=TmwQckTuT1MpYTIxSPbY2kyBhWMxW+Dygm6UNMnxVfBvVdwfC7ZKEdBXISrIFnUMy
- k7+erdkuzssGVjrfFuZDwKbr/AkWwVQzldRQsj1xk4wuAb6aSFaFzjsxUBc+quB+d6
- ltIWJ+G7eAB2shTDTg1/yDFXz87Qzke+FEacznNE=
+ d=novatechautomation.com; s=relay; t=1752526983;
+ bh=ghtxWQBgAFKaTUx65c6vBM4xw5hIMi9QXRw2papJkIE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Bn8WC8WRFJjFZ6NJvCP9Mjx764rii+yzP95LYpuQ3p7RXXgRhDRnsQcpYTpWkAJk9
+ WINZgG3vVJSawY7IxCwq/2bdWUHpXT+nFhAqlPg7j5V7xp1ggEqmP0JtbEJjh+7uIk
+ o7OZyGDgKl5o+FiLi846gmGKS+Rr1odcHTCkXCHA=
 From: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
 To: u-boot@lists.denx.de
 Cc: bmeng.cn@gmail.com,
  Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Subject: [PATCH 1/2] Fix x86 baytrail boot flow.
-Date: Mon, 14 Jul 2025 16:02:48 -0500
-Message-ID: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
+Subject: [PATCH 2/2] Fix x86 baytrail boot flow, UPD/VPD Updates
+Date: Mon, 14 Jul 2025 16:02:49 -0500
+Message-ID: <20250714210249.4139916-2-eric.schikschneit@novatechautomation.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
+References: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -65,266 +67,266 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It was found that on modern versions of GCC the transition from low level
-assembly into the C function 'fsp_find_header' was no longer valid. A detailed
-step by step analysis with GDB showed that various registers were not being
-initialized properly which would result in the hardware to fail to setup the
-Cache As Ram (CAR) portion. This failure cascades down into later stages of
-initialization because there is no valid stack, or memory for later functions.
+The VPD has been updated to include additional values found in the Intel
+FSP_MR5 Integration Guide.
 
-The function 'fsp_find_header' has been rewritten in assembly, which should
-no longer be dependant on a specific version of GCC in order to be usable on
-actual hardware.
+Disable MRC_CACHE for the baytrail platform as this will break the boot flow
+as well. This issue has not been diagnosed further, but I suspect it is similar
+to my previous patch and related to how modern GCC generates the low level
+op-codes.
 
-Testing was done using GCC 11.4.0 on Ubuntu 22.04.
-Hardware used for verification: Intel E3845 SoC
-
-Patch 1 of 2
+Patch 2 of 2
 
 Upstream-Status: Pending
 
 Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
 ---
- arch/x86/cpu/start.S            |   3 +-
- arch/x86/cpu/start16.S          |   4 +
- arch/x86/lib/fsp1/fsp_car.S     |   4 +-
- arch/x86/lib/fsp1/fsp_support.c | 132 ++++++++++++++++++--------------
- common/board_f.c                |   1 +
- include/init.h                  |   9 +++
- 6 files changed, 92 insertions(+), 61 deletions(-)
+ arch/x86/cpu/baytrail/fsp_configs.c           | 193 +++++++-----------
+ .../include/asm/arch-baytrail/fsp/fsp_vpd.h   |   4 +-
+ arch/x86/lib/fsp1/fsp_common.c                |   2 +-
+ 3 files changed, 75 insertions(+), 124 deletions(-)
 
-diff --git a/arch/x86/cpu/start.S b/arch/x86/cpu/start.S
-index 0ef27cc5a00..3b4d1151d7f 100644
---- a/arch/x86/cpu/start.S
-+++ b/arch/x86/cpu/start.S
-@@ -77,7 +77,8 @@ _start:
- #endif
+diff --git a/arch/x86/cpu/baytrail/fsp_configs.c b/arch/x86/cpu/baytrail/fsp_configs.c
+index fb3f946c45f..ddbd727120d 100644
+--- a/arch/x86/cpu/baytrail/fsp_configs.c
++++ b/arch/x86/cpu/baytrail/fsp_configs.c
+@@ -35,137 +35,86 @@ void fsp_update_configs(struct fsp_config_data *config,
+ 	struct upd_region *fsp_upd = &config->fsp_upd;
+ 	struct memory_down_data *mem;
+ 	const void *blob = gd->fdt_blob;
+-	int node;
  
- 	/* Load the segment registers to match the GDT loaded in start16.S */
--	movl	$(X86_GDT_ENTRY_32BIT_DS * X86_GDT_ENTRY_SIZE), %eax
-+	movl	$(X86_GDT_ENTRY_32BIT_DS * X86_GDT_ENTRY_SIZE), %eax  /* Move values into EAX: 3 * 8 = 0x18 */
-+
- 	movw	%ax, %fs
- 	movw	%ax, %ds
- 	movw	%ax, %gs
-diff --git a/arch/x86/cpu/start16.S b/arch/x86/cpu/start16.S
-index 865a49731e5..518ff842948 100644
---- a/arch/x86/cpu/start16.S
-+++ b/arch/x86/cpu/start16.S
-@@ -20,11 +20,15 @@ start16:
- 	/* Save BIST */
- 	movl	%eax, %ecx
+ 	/* Initialize runtime buffer for fsp_init() */
+ 	rt_buf->common.stack_top = config->common.stack_top - 32;
+ 	rt_buf->common.boot_mode = config->common.boot_mode;
+ 	rt_buf->common.upd_data = &config->fsp_upd;
  
-+	/* Set COLD_BOOT Flag */
-+	movl   $0x10000, %ebx
-+
- 	xorl	%eax, %eax
- 	movl	%eax, %cr3	/* Invalidate TLB */
- 
- 	/* Turn off cache (this might require a 486-class CPU) */
- 	movl	%cr0, %eax
-+	/* Set Cache Disable, and NonWrite-through $(0x60000000), %eax */
- 	orl	$(X86_CR0_NW | X86_CR0_CD), %eax
- 	movl	%eax, %cr0
- 	wbinvd
-diff --git a/arch/x86/lib/fsp1/fsp_car.S b/arch/x86/lib/fsp1/fsp_car.S
-index a64a6534357..2f32636cef0 100644
---- a/arch/x86/lib/fsp1/fsp_car.S
-+++ b/arch/x86/lib/fsp1/fsp_car.S
-@@ -20,7 +20,7 @@ car_init:
- 
- car_init_start:
- 	post_code(POST_CAR_START)
--	lea	fsp_find_header_romstack, %esp
-+	lea     fsp_find_header_romstack, %esp
- 	jmp	fsp_find_header
- 
- fsp_find_header_ret:
-@@ -91,6 +91,8 @@ die:
- 	 * contain the function return address as well as the parameters.
- 	 */
- 	.balign	4
-+/* Does this need to be global? */
-+.global fsp_find_header_romstack
- fsp_find_header_romstack:
- 	.long	fsp_find_header_ret
- 
-diff --git a/arch/x86/lib/fsp1/fsp_support.c b/arch/x86/lib/fsp1/fsp_support.c
-index d84c632f140..c043a63d906 100644
---- a/arch/x86/lib/fsp1/fsp_support.c
-+++ b/arch/x86/lib/fsp1/fsp_support.c
-@@ -9,66 +9,80 @@
- #include <asm/fsp1/fsp_support.h>
- #include <asm/post.h>
- 
--struct fsp_header *__attribute__((optimize("O0"))) fsp_find_header(void)
--{
--	/*
--	 * This function may be called before the a stack is established,
--	 * so special care must be taken. First, it cannot declare any local
--	 * variable using stack. Only register variable can be used here.
--	 * Secondly, some compiler version will add prolog or epilog code
--	 * for the C function. If so the function call may not work before
--	 * stack is ready.
--	 *
--	 * GCC 4.8.1 has been verified to be working for the following codes.
--	 */
--	volatile register u8 *fsp asm("eax");
--
--	/* Initalize the FSP base */
--	fsp = (u8 *)CONFIG_FSP_ADDR;
--
--	/* Check the FV signature, _FVH */
--	if (((struct fv_header *)fsp)->sign == EFI_FVH_SIGNATURE) {
--		/* Go to the end of the FV header and align the address */
--		fsp += ((struct fv_header *)fsp)->ext_hdr_off;
--		fsp += ((struct fv_ext_header *)fsp)->ext_hdr_size;
--		fsp  = (u8 *)(((u32)fsp + 7) & 0xFFFFFFF8);
--	} else {
--		fsp  = 0;
+-	node = fdtdec_next_compatible(blob, 0, COMPAT_INTEL_BAYTRAIL_FSP);
+-	if (node < 0) {
+-		debug("%s: Cannot find FSP node\n", __func__);
+-		return;
 -	}
-+#define _STR(x) #x
-+#define STR(x) _STR(x)
++	/* Set all values to known good defaults as documented in 	*
++	 * Intel FSP_MR5 file: BAYTRAIL_FSP.bsf				*/
++
++	/* NOTE: This breaks u-boot ability to set board options via	*
++	 * device tree, but guarantees specific known values..		*
++	 * you wouldnt use an uninitialized variable would you??	*/
++	fsp_upd->mrc_init_tseg_size = 0x0001;
++	fsp_upd->mrc_init_mmio_size = 0x0800;
++	fsp_upd->mrc_init_spd_addr1 = 0xa0;
++	fsp_upd->mrc_init_spd_addr2 = 0xa2;
++	fsp_upd->emmc_boot_mode = 2;
++	fsp_upd->enable_sdio = 1;
++	fsp_upd->enable_sdcard = 1;
++	fsp_upd->enable_hsuart0 = 1;
++	fsp_upd->enable_hsuart1 = 1;
++	fsp_upd->enable_spi = 1;
++	// Skip 1 byte
++	fsp_upd->enable_sata = 1;
++	fsp_upd->sata_mode = 1;
++	fsp_upd->enable_azalia = 0;
  
--	/* Check the FFS GUID */
--	if (fsp &&
--	    ((struct ffs_file_header *)fsp)->name.b[0] == FSP_GUID_BYTE0 &&
--	    ((struct ffs_file_header *)fsp)->name.b[1] == FSP_GUID_BYTE1 &&
--	    ((struct ffs_file_header *)fsp)->name.b[2] == FSP_GUID_BYTE2 &&
--	    ((struct ffs_file_header *)fsp)->name.b[3] == FSP_GUID_BYTE3 &&
--	    ((struct ffs_file_header *)fsp)->name.b[4] == FSP_GUID_BYTE4 &&
--	    ((struct ffs_file_header *)fsp)->name.b[5] == FSP_GUID_BYTE5 &&
--	    ((struct ffs_file_header *)fsp)->name.b[6] == FSP_GUID_BYTE6 &&
--	    ((struct ffs_file_header *)fsp)->name.b[7] == FSP_GUID_BYTE7 &&
--	    ((struct ffs_file_header *)fsp)->name.b[8] == FSP_GUID_BYTE8 &&
--	    ((struct ffs_file_header *)fsp)->name.b[9] == FSP_GUID_BYTE9 &&
--	    ((struct ffs_file_header *)fsp)->name.b[10] == FSP_GUID_BYTE10 &&
--	    ((struct ffs_file_header *)fsp)->name.b[11] == FSP_GUID_BYTE11 &&
--	    ((struct ffs_file_header *)fsp)->name.b[12] == FSP_GUID_BYTE12 &&
--	    ((struct ffs_file_header *)fsp)->name.b[13] == FSP_GUID_BYTE13 &&
--	    ((struct ffs_file_header *)fsp)->name.b[14] == FSP_GUID_BYTE14 &&
--	    ((struct ffs_file_header *)fsp)->name.b[15] == FSP_GUID_BYTE15) {
--		/* Add the FFS header size to find the raw section header */
--		fsp += sizeof(struct ffs_file_header);
--	} else {
--		fsp = 0;
+-	fsp_upd->mrc_init_tseg_size = fdtdec_get_int(blob, node,
+-						     "fsp,mrc-init-tseg-size",
+-						     MRC_INIT_TSEG_SIZE_1MB);
+-	fsp_upd->mrc_init_mmio_size = fdtdec_get_int(blob, node,
+-						     "fsp,mrc-init-mmio-size",
+-						     MRC_INIT_MMIO_SIZE_2048MB);
+-	fsp_upd->mrc_init_spd_addr1 = fdtdec_get_int(blob, node,
+-						     "fsp,mrc-init-spd-addr1",
+-						     0xa0);
+-	fsp_upd->mrc_init_spd_addr2 = fdtdec_get_int(blob, node,
+-						     "fsp,mrc-init-spd-addr2",
+-						     0xa2);
+-	fsp_upd->emmc_boot_mode = fdtdec_get_int(blob, node,
+-						 "fsp,emmc-boot-mode",
+-						 EMMC_BOOT_MODE_EMMC41);
+-	fsp_upd->enable_sdio = fdtdec_get_bool(blob, node, "fsp,enable-sdio");
+-	fsp_upd->enable_sdcard = fdtdec_get_bool(blob, node,
+-						 "fsp,enable-sdcard");
+-	fsp_upd->enable_hsuart0 = fdtdec_get_bool(blob, node,
+-						  "fsp,enable-hsuart0");
+-	fsp_upd->enable_hsuart1 = fdtdec_get_bool(blob, node,
+-						  "fsp,enable-hsuart1");
+-	fsp_upd->enable_spi = fdtdec_get_bool(blob, node, "fsp,enable-spi");
+-	fsp_upd->enable_sata = fdtdec_get_bool(blob, node, "fsp,enable-sata");
+-	fsp_upd->sata_mode = fdtdec_get_int(blob, node, "fsp,sata-mode",
+-					    SATA_MODE_AHCI);
+-	fsp_upd->enable_azalia = fdtdec_get_bool(blob, node,
+-						 "fsp,enable-azalia");
+ 	if (fsp_upd->enable_azalia)
+ 		update_fsp_azalia_configs(&fsp_upd->azalia_cfg_ptr);
+-	fsp_upd->enable_xhci = fdtdec_get_bool(blob, node, "fsp,enable-xhci");
+-	fsp_upd->lpe_mode = fdtdec_get_int(blob, node, "fsp,lpe-mode",
+-					   LPE_MODE_PCI);
+-	fsp_upd->lpss_sio_mode = fdtdec_get_int(blob, node, "fsp,lpss-sio-mode",
+-					   LPSS_SIO_MODE_PCI);
+-	fsp_upd->enable_dma0 = fdtdec_get_bool(blob, node, "fsp,enable-dma0");
+-	fsp_upd->enable_dma1 = fdtdec_get_bool(blob, node, "fsp,enable-dma1");
+-	fsp_upd->enable_i2_c0 = fdtdec_get_bool(blob, node, "fsp,enable-i2c0");
+-	fsp_upd->enable_i2_c1 = fdtdec_get_bool(blob, node, "fsp,enable-i2c1");
+-	fsp_upd->enable_i2_c2 = fdtdec_get_bool(blob, node, "fsp,enable-i2c2");
+-	fsp_upd->enable_i2_c3 = fdtdec_get_bool(blob, node, "fsp,enable-i2c3");
+-	fsp_upd->enable_i2_c4 = fdtdec_get_bool(blob, node, "fsp,enable-i2c4");
+-	fsp_upd->enable_i2_c5 = fdtdec_get_bool(blob, node, "fsp,enable-i2c5");
+-	fsp_upd->enable_i2_c6 = fdtdec_get_bool(blob, node, "fsp,enable-i2c6");
+-	fsp_upd->enable_pwm0 = fdtdec_get_bool(blob, node, "fsp,enable-pwm0");
+-	fsp_upd->enable_pwm1 = fdtdec_get_bool(blob, node, "fsp,enable-pwm1");
+-	fsp_upd->enable_hsi = fdtdec_get_bool(blob, node, "fsp,enable-hsi");
+-	fsp_upd->igd_dvmt50_pre_alloc = fdtdec_get_int(blob, node,
+-			"fsp,igd-dvmt50-pre-alloc", IGD_DVMT50_PRE_ALLOC_64MB);
+-	fsp_upd->aperture_size = fdtdec_get_int(blob, node, "fsp,aperture-size",
+-						APERTURE_SIZE_256MB);
+-	fsp_upd->gtt_size = fdtdec_get_int(blob, node, "fsp,gtt-size",
+-					   GTT_SIZE_2MB);
+-	fsp_upd->mrc_debug_msg = fdtdec_get_bool(blob, node,
+-						 "fsp,mrc-debug-msg");
+-	fsp_upd->isp_enable = fdtdec_get_bool(blob, node, "fsp,isp-enable");
+-	fsp_upd->scc_mode = fdtdec_get_int(blob, node, "fsp,scc-mode",
+-					   SCC_MODE_PCI);
+-	fsp_upd->igd_render_standby = fdtdec_get_bool(blob, node,
+-						      "fsp,igd-render-standby");
+-	fsp_upd->txe_uma_enable = fdtdec_get_bool(blob, node,
+-						  "fsp,txe-uma-enable");
+-	fsp_upd->os_selection = fdtdec_get_int(blob, node, "fsp,os-selection",
+-					       OS_SELECTION_LINUX);
+-	fsp_upd->emmc45_ddr50_enabled = fdtdec_get_bool(blob, node,
+-			"fsp,emmc45-ddr50-enabled");
+-	fsp_upd->emmc45_hs200_enabled = fdtdec_get_bool(blob, node,
+-			"fsp,emmc45-hs200-enabled");
+-	fsp_upd->emmc45_retune_timer_value = fdtdec_get_int(blob, node,
+-			"fsp,emmc45-retune-timer-value", 8);
+-	fsp_upd->enable_igd = fdtdec_get_bool(blob, node, "fsp,enable-igd");
+ 
++	fsp_upd->enable_xhci = 1;
++	fsp_upd->lpe_mode = 1;
++	fsp_upd->lpss_sio_mode = 1;
++	fsp_upd->enable_dma0 = 1;
++	fsp_upd->enable_dma1 = 1;
++	fsp_upd->enable_i2_c0 = 1;
++	fsp_upd->enable_i2_c1 = 1;
++	fsp_upd->enable_i2_c2 = 1;
++	fsp_upd->enable_i2_c3 = 1;
++	fsp_upd->enable_i2_c4 = 1;
++	fsp_upd->enable_i2_c5 = 1;
++	fsp_upd->enable_i2_c6 = 1;
++	fsp_upd->enable_pwm0 = 1;
++	fsp_upd->enable_pwm1 = 1;
++	fsp_upd->enable_hsi = 0;
++	fsp_upd->igd_dvmt50_pre_alloc = 2;
++	fsp_upd->aperture_size = 2;
++	fsp_upd->gtt_size = 2;
++	// Skip 5 bytes
++	fsp_upd->mrc_debug_msg = 0;
++	fsp_upd->isp_enable = 0;
++	fsp_upd->scc_mode = 1;
++	fsp_upd->igd_render_standby = 0;
++	fsp_upd->txe_uma_enable = 0;
++	fsp_upd->os_selection = 0x4;
++	fsp_upd->emmc45_ddr50_enabled = 1;
++	fsp_upd->emmc45_hs200_enabled = 0;
++	fsp_upd->emmc45_retune_timer_value = 8;
++	fsp_upd->enable_igd = 1;
++	fsp_upd->auto_self_refresh = 2;
++	fsp_upd->task_timeout_count = 100;
++	// Skip 152 bytes
+ 	mem = &fsp_upd->memory_params;
+-	mem->enable_memory_down = fdtdec_get_bool(blob, node,
+-						  "fsp,enable-memory-down");
+-	if (mem->enable_memory_down) {
+-		node = fdtdec_next_compatible(blob, node,
+-					      COMPAT_INTEL_BAYTRAIL_FSP_MDP);
+-		if (node < 0) {
+-			debug("%s: Cannot find FSP memory-down-params node\n",
+-			      __func__);
+-		} else {
+-			mem->dram_speed = fdtdec_get_int(blob, node,
+-							 "fsp,dram-speed",
+-							 DRAM_SPEED_1333MTS);
+-			mem->dram_type = fdtdec_get_int(blob, node,
+-							"fsp,dram-type",
+-							DRAM_TYPE_DDR3L);
+-			mem->dimm_0_enable = fdtdec_get_bool(blob, node,
+-					"fsp,dimm-0-enable");
+-			mem->dimm_1_enable = fdtdec_get_bool(blob, node,
+-					"fsp,dimm-1-enable");
+-			mem->dimm_width = fdtdec_get_int(blob, node,
+-							 "fsp,dimm-width",
+-							 DIMM_WIDTH_X8);
+-			mem->dimm_density = fdtdec_get_int(blob, node,
+-							   "fsp,dimm-density",
+-							   DIMM_DENSITY_2GBIT);
+-			mem->dimm_bus_width = fdtdec_get_int(blob, node,
+-					"fsp,dimm-bus-width",
+-					DIMM_BUS_WIDTH_64BITS);
+-			mem->dimm_sides = fdtdec_get_int(blob, node,
+-							 "fsp,dimm-sides",
+-							 DIMM_SIDES_1RANKS);
+-			mem->dimm_tcl = fdtdec_get_int(blob, node,
+-						       "fsp,dimm-tcl", 0x09);
+-			mem->dimm_trpt_rcd = fdtdec_get_int(blob, node,
+-					"fsp,dimm-trpt-rcd", 0x09);
+-			mem->dimm_twr = fdtdec_get_int(blob, node,
+-						       "fsp,dimm-twr", 0x0a);
+-			mem->dimm_twtr = fdtdec_get_int(blob, node,
+-							"fsp,dimm-twtr", 0x05);
+-			mem->dimm_trrd = fdtdec_get_int(blob, node,
+-							"fsp,dimm-trrd", 0x04);
+-			mem->dimm_trtp = fdtdec_get_int(blob, node,
+-							"fsp,dimm-trtp", 0x05);
+-			mem->dimm_tfaw = fdtdec_get_int(blob, node,
+-							"fsp,dimm-tfaw", 0x14);
+-		}
 -	}
--
--	if (fsp &&
--	    ((struct raw_section *)fsp)->type == EFI_SECTION_RAW) {
--		/* Add the raw section header size to find the FSP header */
--		fsp += sizeof(struct raw_section);
--	} else {
--		fsp = 0;
--	}
--
--	return (struct fsp_header *)fsp;
-+__attribute__((naked))  // avoid prolog/epilog and stack usage
-+struct fsp_header *fsp_find_header(void)
-+{
-+    asm volatile (
-+	// Make sure function knows where to return to later..
-+	"push %%ebp\n\t"
-+	"mov %%esp, %%ebp\n\t"
-+
-+	"mov $" STR(CONFIG_FSP_ADDR) ", %%eax\n\t"         // eax = CONFIG_FSP_ADDR
-+
-+	// Check for FVH signature at CONFIG_FSP_ADDR + 0x28
-+	"movl 0x28(%%eax), %%edx\n\t"
-+	"cmp $" STR(EFI_FVH_SIGNATURE) ", %%edx\n\t"
-+	"jne .fail_fvh\n\t"
-+
-+	// Found the header, verify it!
-+	"mov %%eax, %%edx\n\t"
-+	"mov 0x34(%%eax), %%eax\n\t"
-+	"movzwl %%ax, %%eax\n\t"	// Zero extend ax from 16-bit to 32-bit
-+	"add %%edx, %%eax\n\t"
-+	"mov %%eax, %%edx\n\t"
-+	"mov 0x10(%%eax), %%eax\n\t"
-+	"add %%edx, %%eax\n\t"
-+	"add $0x7, %%eax\n\t" 		// 8-byte alignment
-+	"and $0xfffffff8, %%eax\n\t"
-+
-+	// From here code should jump to first GUID byte to check
-+	"mov (%%eax), %%edx\n\t"
-+	"cmp $0x912740be, %%edx\n\t"	// These are bytes 0-3 of FSP_GUID in LE
-+	"jne .fail_fvh\n\t"
-+
-+	"mov 0x4(%%eax), %%edx\n\t"
-+	"cmp $0x47342284 , %%edx\n\t"	// These are bytes 4-7 of FSP_GUID in LE
-+	"jne .fail_fvh\n\t"
-+
-+	"mov 0x8(%%eax), %%edx\n\t"
-+	"cmp $0xb08471b9, %%edx\n\t"	// These are bytes 8-11 of FSP_GUID in LE
-+	"jne .fail_fvh\n\t"
-+
-+	"mov 0xc(%%eax), %%edx\n\t"
-+	"cmp $0x0c3f3527, %%edx\n\t"	// These are bytes 12-15 of FSP_GUID in LE
-+	"jne .fail_fvh\n\t"
-+
-+	// Add 0x18 bytes to offset header in eax register
-+	"add $0x18,%%eax\n\t"
-+
-+	//Make sure eax is greater than 0x18, should be!
-+	"cmp $0x18, %%eax\n\t"
-+	"jbe .fail_fvh\n\t"
-+
-+	"mov 0x3(%%eax), %%edx\n\t"
-+	// Make sure pointer is at actual " FSP" start
-+	"cmp $0x50534619, %%edx\n\t"
-+	"jne .fail_fvh\n\t"
-+
-+	// That test passed, so advance pointer 4 bytes..
-+	"add $0x4, %%eax\n\t"
-+
-+	// Base pointer should be set before entering here so..
-+	"pop %%ebp\n\t"
-+	"ret\n"
-+
-+	".fail_fvh:\n\t"
-+	"mov $0xF1, %%al\n\t"
-+	"out %%al, $0x80\n\t"
-+	"xor %%eax, %%eax\n\t"                  // return 0 on failure
-+	"ret\n"
-+	:
-+	:
-+	: "eax", "ecx"
-+    );
++	// We make the assumption that 0x00 = DISABLED
++	mem->enable_memory_down = 0x00;
++#if 0
++	mem->dram_speed = 0x02;
++	mem->dram_type = 0x01;
++	mem->dimm_0_enable = 0x01;
++	mem->dimm_1_enable = 0x00;
++	mem->dimm_width = 0x00;
++	mem->dimm_density = 0x01;
++	mem->dimm_bus_width = 0x03;
++	mem->dimm_sides = 0x00;
++	mem->dimm_tcl = 0x09;
++	mem->dimm_trpt_rcd = 0x09;
++	mem->dimm_twr = 0x0a;
++	mem->dimm_twtr = 0x05;
++	mem->dimm_trrd = 0x04;
++	mem->dimm_trtp = 0x05;
++	mem->dimm_tfaw = 0x14;
++#endif
  }
+diff --git a/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h b/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h
+index c6544ea409c..09924d7393a 100644
+--- a/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h
++++ b/arch/x86/include/asm/arch-baytrail/fsp/fsp_vpd.h
+@@ -74,7 +74,9 @@ struct __packed upd_region {
+ 	uint8_t emmc45_hs200_enabled;		/* Offset 0x0052 */
+ 	uint8_t emmc45_retune_timer_value;	/* Offset 0x0053 */
+ 	uint8_t enable_igd;			/* Offset 0x0054 */
+-	uint8_t unused_upd_space1[155];		/* Offset 0x0055 */
++	uint8_t auto_self_refresh;		/* Offset 0x0055 */
++	uint16_t task_timeout_count;		/* Offset 0x0056 */
++	uint8_t unused_upd_space1[152];		/* Offset 0x0057 */
+ 	struct memory_down_data memory_params;	/* Offset 0x00f0 */
+ 	uint16_t terminator;			/* Offset 0x0100 */
+ };
+diff --git a/arch/x86/lib/fsp1/fsp_common.c b/arch/x86/lib/fsp1/fsp_common.c
+index df18f476756..e6a1276986b 100644
+--- a/arch/x86/lib/fsp1/fsp_common.c
++++ b/arch/x86/lib/fsp1/fsp_common.c
+@@ -55,7 +55,7 @@ int arch_fsp_init(void)
+ 	}
  
- void fsp_continue(u32 status, void *hob_list)
-diff --git a/common/board_f.c b/common/board_f.c
-index 442b8349d08..3a9ae741d97 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -860,6 +860,7 @@ __weak int clear_bss(void)
- }
- 
- static const init_fnc_t init_sequence_f[] = {
-+	arch_fsp_init,          // FSP on platforms like baytrail MUST be done before memory ops
- 	setup_mon_len,
- #ifdef CONFIG_OF_CONTROL
- 	fdtdec_setup,
-diff --git a/include/init.h b/include/init.h
-index 9a1951d10a0..21d9cea30f6 100644
---- a/include/init.h
-+++ b/include/init.h
-@@ -68,6 +68,15 @@ int mach_cpu_init(void);
-  */
- int arch_fsp_init_r(void);
- 
-+/**
-+ * arch_fsp_init() - perform firmware support package init
-+ *
-+ * Where U-Boot relies on binary blobs to handle part of the system init, this
-+ * function can be used to set up the blobs. This is used on some Intel
-+ * platforms.
-+ */
-+int arch_fsp_init(void);
-+
- int dram_init(void);
- 
- /**
+ 	if (!gd->arch.hob_list) {
+-		if (IS_ENABLED(CONFIG_ENABLE_MRC_CACHE))
++		if (!IS_ENABLED(CONFIG_INTEL_BAYTRAIL) && IS_ENABLED(CONFIG_ENABLE_MRC_CACHE))
+ 			nvs = fsp_prepare_mrc_cache();
+ 		else
+ 			nvs = NULL;
 -- 
 2.43.0
 
