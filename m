@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 545A4C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 22:35:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82636C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 22:35:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27EB83092;
-	Tue, 15 Jul 2025 00:34:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E4B883013;
+	Tue, 15 Jul 2025 00:34:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jg2n86nq";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kvztZKrC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 551D98304A; Tue, 15 Jul 2025 00:34:37 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 5464583013; Tue, 15 Jul 2025 00:34:48 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A55BC8277D
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 00:34:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 025F58277D
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 00:34:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1752532473; bh=+B9aHLNrc7N6lWknVsGp2VbhdYABwCdu+DcSjYYtMsQ=;
- b=jg2n86nqwjfegoCXN0bZn+vPoD1zmwudL7dw0sSfY517LpCuUaBo7VKfoLJ+U6RlfST/ppMhl
- PX1ps5ebZ2j9TrlOgMRqikKkwohdvSX4gO1Noz/Iql8chbJWwI+iRyWPk0dSw2CMMMOh2yEiiJT
- nA2JXIPCz7oUTOJHxneJ7smB8wFErRcolTSJwzBfrawf6QkOl3763/B8TYjq2KhAGHT56OiqT+t
- L5UCRWuZ0AYtexDzV9j1VRuxbis/DWU2YCtC5l8dCYmPMVRQh5JyQ2HYWSwx9OlojcS0fZcB0//
- VJRB79EtJ9mCx3/V16KaErwjun/TUZZZ4a/F+QsKJadA==
-X-Forward-Email-ID: 687585f49931367d30116e6a
+ t=1752532474; bh=smtE3VpNxvGxaraSqaKy2NbnsJJxh+Gq04JS+w5YWVM=;
+ b=kvztZKrCBNcB1EywmnIr0UQjd1yra1T4FVPRVFzS5vC7UfVNGHMWChJxNGorbWlr4qztxCoKC
+ cDgjtdJGcps4f6jJeo1zKf3Y8n4DnL68oGVgz/x4958XZPpNXTI4Zrcs6lNpday7ooui/FteiiO
+ p7GDImyILAv3um5J+gWR6iVLHYwOpX7jsd+mSskgcFK2GBTiuyGtTWRX76bsv3MbGUZPWZf2nze
+ kwykboL5R0kbL2QhNzvvHB7tp7v0laYi7x09MuIiB1HUzgItOx66Opr4LMikx1f6HGa6ti0gfDY
+ N7EMfUyn/xTlsMb9oCHe+7Hq8gdMb9aSGKAK+N4f6Ldw==
+X-Forward-Email-ID: 687585f99931367d30116e81
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 1.1.6
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -46,12 +46,11 @@ From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>,
  Eugen Hristev <eugen.hristev@linaro.org>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: Sebastian Reichel <sebastian.reichel@collabora.com>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH 3/4] arm64: dts: rockchip: add Rock 5B+
-Date: Mon, 14 Jul 2025 22:34:00 +0000
-Message-ID: <20250714223410.1836893-4-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Sebastian Reichel <sebastian.reichel@collabora.com>, u-boot@lists.denx.de
+Subject: [PATCH 4/4] rockchip: rock5b-rk3588: Add support for ROCK 5B+
+Date: Mon, 14 Jul 2025 22:34:01 +0000
+Message-ID: <20250714223410.1836893-5-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250714223410.1836893-1-jonas@kwiboo.se>
 References: <20250714223410.1836893-1-jonas@kwiboo.se>
@@ -73,154 +72,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sebastian Reichel <sebastian.reichel@collabora.com>
+Include FDTs for both ROCK 5B and 5B+ in the FIT and add board selection
+code to load the 5B+ FDT when the ADC channel 5 value is close to 4095.
 
-Add ROCK 5B+, which is an improved version of the ROCK 5B with the
-following changes:
+  U-Boot 2025.07 (Jul 14 2025 - 21:28:20 +0000)
 
- * Memory LPDDR4X -> LPDDR5
- * HDMI input connector size
- * eMMC socket -> onboard
- * M.2 E-Key is replaced by onboard RTL8852BE WLAN/BT
- * M.2 M-Key 1x4 lanes is replaced by 2x2 lanes
- * Added M.2 B-Key for USB connected WWAN modules (untested)
- * Add second camera port (not yet supported in upstream Linux)
- * Add dedicated USB-C port for device power (no impact in DT;
-   the existing port has not been changed and the new port is
-   handled by CH224D standalone chip)
+  Model: Radxa ROCK 5B+
+  SoC:   RK3588
+  DRAM:  8 GiB
 
-Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-Link: https://lore.kernel.org/r/20250508-rock5bp-for-upstream-v2-4-677033cc1ac2@kernel.org
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+Features tested on a ROCK 5B+ v1.2:
+- SD-card boot
+- eMMC boot
+- SPI flash boot
+- PCIe/NVMe
+- Ethernet
+- USB/TCPM
 
-[ upstream commit: 376cb9696298df2028afb620a9dc6c4b10a18605 ]
-
-(cherry picked from commit 73262063f45da4fc1cab7cac91f568edc9d0eb7d)
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- .../arm64/rockchip/rk3588-rock-5b-plus.dts    | 113 ++++++++++++++++++
- 1 file changed, 113 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-rock-5b-plus.dts
+ arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi |  3 ++
+ arch/arm/dts/rk3588-rock-5b-u-boot.dtsi      |  5 ++
+ board/radxa/rock5b-rk3588/Kconfig            |  5 ++
+ board/radxa/rock5b-rk3588/MAINTAINERS        |  3 +-
+ board/radxa/rock5b-rk3588/rock5b-rk3588.c    | 55 ++++++++++++++++++++
+ configs/rock5b-rk3588_defconfig              |  1 +
+ doc/board/rockchip/rockchip.rst              |  2 +-
+ 7 files changed, 71 insertions(+), 3 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588-rock-5b-plus.dts b/dts/upstream/src/arm64/rockchip/rk3588-rock-5b-plus.dts
+diff --git a/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
 new file mode 100644
-index 000000000000..74c7b6502e4d
+index 000000000000..c07696c83913
 --- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3588-rock-5b-plus.dts
-@@ -0,0 +1,113 @@
++++ b/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
+@@ -0,0 +1,3 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
-+/dts-v1/;
-+
-+#include "rk3588-rock-5b.dtsi"
-+
-+/ {
-+	model = "Radxa ROCK 5B+";
-+	compatible = "radxa,rock-5b-plus", "rockchip,rk3588";
-+
-+	rfkill-wwan {
-+		compatible = "rfkill-gpio";
-+		label = "rfkill-m2-wwan";
-+		radio-type = "wwan";
-+		shutdown-gpios = <&gpio3 RK_PA6 GPIO_ACTIVE_HIGH>;
-+	};
-+
-+	vcc3v3_4g: regulator-vcc3v3-4g {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
-+		/* pinctrl for the GPIO is requested by vcc3v3_pcie2x1l0 */
-+		regulator-name = "vcc3v3_4g";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		startup-delay-us = <50000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc3v3_wwan_pwr: regulator-vcc3v3-wwan {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio2 RK_PB1 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wwan_power_en>;
-+		regulator-name = "vcc3v3_wwan_pwr";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc3v3_4g>;
-+	};
++#include "rk3588-rock-5b-u-boot.dtsi"
+diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+index d51fbf51cb88..e07b549c767f 100644
+--- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+@@ -46,6 +46,11 @@
+ 	};
+ };
+ 
++&saradc {
++	bootph-pre-ram;
++	vdd-microvolts = <1800000>;
 +};
 +
-+&gpio0 {
-+	wwan-disable2-n-hog {
-+		gpios = <RK_PB2 GPIO_ACTIVE_LOW>;
-+		output-low;
-+		line-name = "M.2 B-key W_DISABLE2#";
-+		gpio-hog;
-+	};
+ &sdhci {
+ 	cap-mmc-highspeed;
+ 	mmc-hs200-1_8v;
+diff --git a/board/radxa/rock5b-rk3588/Kconfig b/board/radxa/rock5b-rk3588/Kconfig
+index 41dfe2402b12..98d630117836 100644
+--- a/board/radxa/rock5b-rk3588/Kconfig
++++ b/board/radxa/rock5b-rk3588/Kconfig
+@@ -9,4 +9,9 @@ config SYS_VENDOR
+ config SYS_CONFIG_NAME
+ 	default "rock5b-rk3588"
+ 
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	select ADC
++	select SPL_ADC
++
+ endif
+diff --git a/board/radxa/rock5b-rk3588/MAINTAINERS b/board/radxa/rock5b-rk3588/MAINTAINERS
+index 4460c9971a96..c8a43769105e 100644
+--- a/board/radxa/rock5b-rk3588/MAINTAINERS
++++ b/board/radxa/rock5b-rk3588/MAINTAINERS
+@@ -5,5 +5,4 @@ S:	Maintained
+ F:	board/radxa/rock5b-rk3588
+ F:	include/configs/rock5b-rk3588.h
+ F:	configs/rock5b-rk3588_defconfig
+-F:	arch/arm/dts/rk3588-rock-5b.dts
+-F:	arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
++F:	arch/arm/dts/rk3588-rock-5b*
+diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+index fc2f69db2241..1443c2c828a1 100644
+--- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
++++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+@@ -3,8 +3,63 @@
+  * Copyright (c) 2023-2024 Collabora Ltd.
+  */
+ 
++#include <adc.h>
++#include <env.h>
+ #include <fdtdec.h>
+ #include <fdt_support.h>
++#include <linux/errno.h>
++
++#define HW_ID_CHANNEL	5
++
++struct board_model {
++	unsigned int low;
++	unsigned int high;
++	const char *fdtfile;
 +};
 +
-+&gpio2 {
-+	wwan-reset-n-hog {
-+		gpios = <RK_PB3 GPIO_ACTIVE_LOW>;
-+		output-low;
-+		line-name = "M.2 B-key RESET#";
-+		gpio-hog;
-+	};
-+
-+	wwan-wake-n-hog {
-+		gpios = <RK_PB2 GPIO_ACTIVE_LOW>;
-+		input;
-+		line-name = "M.2 B-key WoWWAN#";
-+		gpio-hog;
-+	};
++static const struct board_model board_models[] = {
++	{ 4050, 4130, "rockchip/rk3588-rock-5b-plus.dtb" },
 +};
 +
-+&pcie30phy {
-+	data-lanes = <1 1 2 2>;
-+};
++static const struct board_model *get_board_model(void)
++{
++	unsigned int val;
++	int i, ret;
 +
-+&pcie3x2 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie3x2_rst>;
-+	reset-gpios = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc3v3_pcie30>;
-+	status = "okay";
-+};
++	ret = adc_channel_single_shot("adc@fec10000", HW_ID_CHANNEL, &val);
++	if (ret)
++		return NULL;
 +
-+&pcie3x4 {
-+	num-lanes = <2>;
-+};
++	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
++		unsigned int min = board_models[i].low;
++		unsigned int max = board_models[i].high;
 +
-+&pinctrl {
-+	wwan {
-+		wwan_power_en: wwan-pwr-en {
-+			rockchip,pins = <2 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
++		if (min <= val && val <= max)
++			return &board_models[i];
++	}
 +
-+	pcie3 {
-+		pcie3x2_rst: pcie3x2-rst {
-+			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
++	return NULL;
++}
 +
-+	usb {
-+		vcc5v0_host_en: vcc5v0-host-en {
-+			rockchip,pins = <1 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
++int rk_board_late_init(void)
++{
++	const struct board_model *model = get_board_model();
 +
-+&vcc5v0_host {
-+	enable-active-high;
-+	gpio = <&gpio1 RK_PA1 GPIO_ACTIVE_HIGH>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&vcc5v0_host_en>;
-+};
++	if (model)
++		env_set("fdtfile", model->fdtfile);
++
++	return 0;
++}
++
++int board_fit_config_name_match(const char *name)
++{
++	const struct board_model *model = get_board_model();
++
++	if (model && !strcmp(name, model->fdtfile))
++		return 0;
++
++	return -EINVAL;
++}
+ 
+ #ifdef CONFIG_OF_BOARD_SETUP
+ int ft_board_setup(void *blob, struct bd_info *bd)
+diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+index 6349e8791456..967cebc2054f 100644
+--- a/configs/rock5b-rk3588_defconfig
++++ b/configs/rock5b-rk3588_defconfig
+@@ -47,6 +47,7 @@ CONFIG_CMD_REGULATOR=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
++CONFIG_OF_LIST="rockchip/rk3588-rock-5b rockchip/rk3588-rock-5b-plus"
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index b88299cbba23..7a1385789c20 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -152,7 +152,7 @@ List of mainline supported Rockchip boards:
+      - Pine64 QuartzPro64 (quartzpro64-rk3588)
+      - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
+      - Radxa ROCK 5A (rock5a-rk3588s)
+-     - Radxa ROCK 5B (rock5b-rk3588)
++     - Radxa ROCK 5B/5B+ (rock5b-rk3588)
+      - Radxa ROCK 5C (rock-5c-rk3588s)
+      - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
+      - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
 -- 
 2.49.0
 
