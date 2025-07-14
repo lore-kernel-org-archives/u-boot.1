@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DBEC83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 23:13:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6626FC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 23:13:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B084E83043;
-	Tue, 15 Jul 2025 01:12:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BA6B830B5;
+	Tue, 15 Jul 2025 01:12:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hT5mghKQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b1ML/yAn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1E2883020; Tue, 15 Jul 2025 01:12:12 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id D3EF3830F6; Tue, 15 Jul 2025 01:12:13 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D687882E37
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 01:12:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCFA08300B
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 01:12:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-735a6d7c5b1so2842744a34.2
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:12:10 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2ebb468cbb4so4300692fac.2
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:12:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752534729; x=1753139529; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752534730; x=1753139530; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=w5I6vuqONv7ytdju6STOiNtKJIfc/YDlKhq1923kJDo=;
- b=hT5mghKQeRP/nLgO8w9HVB1heW0RIMKm8S+U5RVdNIPjJTKpG1q1PDTMA/nCOqqExe
- K1FIALklBSKhEdqJk8MtcPzIJjf1AV3zRpiv0lIdlle2Xs9eUoKUU0J9v44J9I76ztyu
- crnBgkbEL4pLVDfK28X4uVSxoN5wpsajLlVtA=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=bPnu+azeGz6QbLduiUZKRN3ErsVmSfYjvfODhGetkiE=;
+ b=b1ML/yAnXMAcnDrFmox2bCdGAcZRec7yk0ZTMfFc1+edjCiQJF7uAZjCxo10nby+qQ
+ SHYSoDn7azxrKjaQz6mmxE1Q1aLN8SnQsi+9Gl/nxZIQAKmp5FnfG9e1SJOWjN06dJlp
+ e5TZTv3Hx18LbJ66KKuojHAVPpj17DM+j9fU0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752534729; x=1753139529;
+ d=1e100.net; s=20230601; t=1752534730; x=1753139530;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w5I6vuqONv7ytdju6STOiNtKJIfc/YDlKhq1923kJDo=;
- b=hA9a7sfYjrL6IskzhLGYL6lkLX0gQNwmkH0BtL4W0iZVDi1M0urnpowctYVccFaL5y
- HiTRiBhSxymuopxmD9FS5IafP3PkzwFUDEXcYltvKvsbNw21C/kTtHcknB2fUP6k7ps5
- hxAzNvJlss3dN4/R1E/FAXf4udcjxHWpa1djiZ3pL6A6MbW/uzNSoKGZhVT8YXdW2TuR
- edbKWN+CeM9Jg2O9ddGjKUg3eQ0HLUu9fa9HW5ThLdNUKwIxuC7QC7DSLRaP8SYkVZsT
- Xc3vU+4hcQhc0fF3Hwz9otplsSG55+uKupCetyHX6STKEEJIhCPW/6CzCyK2qCBSfwp/
- LnjQ==
-X-Gm-Message-State: AOJu0Yx2kMaYx/McN85YQq61bDnq+PGyYqWFpIxKzvGoaUdR6H8dJB3r
- y3XE8aDG5IUUcaP7m2LVtbnKkqvFlAIRqD7/4779cjgE6Eni8Yi2BeTciBb1lYe5LeQ=
-X-Gm-Gg: ASbGncts/bmsupGTiQCHrJ0AT/Q8YkTU1n9EfvPMhcG0kfbTqxJGil7+0NUCC96UY8F
- ioBuKBicqR6rzkxNnASFV/udpQG2kcKKPFeCNpN9eBAJmHUTL1bPQODe1Isco18bvL4AigO9axl
- kOusqYYK2QR7WyV6STtZxFtWs9KjtUmL0cNtwNpntVQf968jQM1qAkev9AcSSDAgOmK0Bh2BuBm
- KCDTsTe79N49MlankX3n3eyMdjRjYfmA74fszRQmFsCeIkV33lTPuJN4+6uG1bfruEPDSLR12Gc
- Z+xJucV5im9h5+q5RQgcaJDCl5jnRKB2EOHwZBFa2dEjjrSBr35yF2S3kuTi9qvIic/z/WEbTMR
- rzphsISasuX97fP9Gc2CC37nu7VjhMMhCg5SfVwtf9Gh6D7veXrlPB10=
-X-Google-Smtp-Source: AGHT+IFL7OQi7boDEFGJSKqeqt48bjOR2Ylt0TmWmknPRMTUjV7ogyQRIucwqTcQiDbnL8uzgmsuYA==
-X-Received: by 2002:a05:6830:4907:b0:73b:2c88:8ec3 with SMTP id
- 46e09a7af769-73cfc4a31c3mr11138566a34.27.1752534729613; 
- Mon, 14 Jul 2025 16:12:09 -0700 (PDT)
+ bh=bPnu+azeGz6QbLduiUZKRN3ErsVmSfYjvfODhGetkiE=;
+ b=osG96KImrEqz+pybEvqGb1px3JLO/+QDaxNhaVGWnJuDjmqmi7DCAMFj0ZYzSeb9ez
+ uFmfF4sC85Gflgp40+JUDqlyFzPP7cwPnuVO4+DOAuW896zdZ+qFZ0ydTMR3QikSDxJa
+ c0h4awQXdUoQvMaVpc7aP07mMEDNt1tOhktpF2gmWK72bMQHwZI/5aiTX167rgRauoBn
+ aaX3XVFnYEq/t87aqFJd49dif/6V/Kb4eBkEAz5HiCrceBzMdFgTRdbSBWcqCoAiqQJR
+ qjskxO5gmgSwTt/UegxVfsrrmKzvpTU2B/k4S6RsbjRed8zeYo+xpeb6BUCZGkKpgdBU
+ Uf0g==
+X-Gm-Message-State: AOJu0YxiZvn5bNC3O0l9iUD8DHOz8JuhPMvIoV+wCBQ7NaBZKu0obQkU
+ XIQOf7OdMukxCkasJqmv9EwGoxo8em3UgUOmPA1dMbhJQUf3XIkto2blEQ1oTeRKv9ZZiimxiap
+ /r6sEndw=
+X-Gm-Gg: ASbGncsBxaMvoLuKf3WvIvsn81zlFbSeWJb2qvLRpKITEb9Odma2/bE5QzdaCB8R21i
+ BYDjamOdeQYGYTe2Py3Ynd1MU+9rs1TeKRa0R6E4lNt2GMcWtFd628IyulBV9d3FcfcSdzUhAN3
+ WkkZ3BAdoIX7GXzFiAtbX/ALjQPv2WzstopbKrlimTq1r2qnTQAFwGNCoH5bkuaJoljiRRnG7OV
+ xwK23vfCU6jUyrnQzuwinpuB9PfDWiGUWXRYdYS/hc68dxQ3cxeiCPSqsgneT8w0Ld5Dj5Gj0Ne
+ 9MeAyI4SNJviYi6F3lDdRDuEmzgRmBKTmCSNw9wLpbiT0ujoidFMrBJFhpzMgG8xB+gKHRqgWa3
+ yTCwYmGMFd4GPxb59ck7GzDrJa2Mwt235o+Ryu9vPopvrsbSU+7FNDD8=
+X-Google-Smtp-Source: AGHT+IEu9bNQ8FaopLe01E+/TalezMckqgecg8xPjkOmDa6MgdICTMP9Cxfak2Kl2sTUwapyOy22JQ==
+X-Received: by 2002:a05:6870:1191:b0:2c1:44a9:fc16 with SMTP id
+ 586e51a60fabf-2ff271b1a58mr7617180fac.38.1752534730471; 
+ Mon, 14 Jul 2025 16:12:10 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf108af60sm1729410a34.21.2025.07.14.16.12.08
+ 46e09a7af769-73cf108af60sm1729410a34.21.2025.07.14.16.12.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 14 Jul 2025 16:12:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: vigneshr@ti.com
-In-Reply-To: <20250703130227.4106816-1-anshuld@ti.com>
-References: <20250703130227.4106816-1-anshuld@ti.com>
-Subject: Re: [PATCH v1] configs: am62x: fix CONFIG_NR_DRAM_BANKS to 1
-Message-Id: <175253472881.280771.84712494243852465.b4-ty@konsulko.com>
-Date: Mon, 14 Jul 2025 17:12:08 -0600
+To: u-boot@lists.denx.de, David Zang <davidzangcs@gmail.com>
+In-Reply-To: <20250707002201.62932-1-davidzangcs@gmail.com>
+References: <20250707002201.62932-1-davidzangcs@gmail.com>
+Subject: Re: [PATCH] Fix autoboot countdown printing wrong
+Message-Id: <175253472974.280771.3738510642595969013.b4-ty@konsulko.com>
+Date: Mon, 14 Jul 2025 17:12:09 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,25 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 03 Jul 2025 18:32:26 +0530, Anshul Dalal wrote:
+On Sun, 06 Jul 2025 19:22:01 -0500, David Zang wrote:
 
-> CONFIG_NR_DRAM_BANKS defines the number of DRAM banks on the
-> device. The default value of NR_DRAM_BANKS for ARCH_K3 is set to 2
-> (arch/arm/mach-k3/Kconfig:199) but should be 1 for am62x platforms.
+> Originally when bootdelay >99, the countdown breaks. Setting bootdelay
+> at 101 or bigger will trigger this error.
 > 
-> This patch updates NR_DRAM_BANKS value for all am62x platforms to 1.
 > 
-> Fixes: 2969ed31b893 ("configs: Add am62x_beagleplay_*_defconfig")
-> Fixes: 2d257d9279e3 ("configs: Add configs for AM62x SK")
-> Fixes: 085cd6459dae ("board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM")
-> Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
-> 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] configs: am62x: fix CONFIG_NR_DRAM_BANKS to 1
-      commit: b7d70fe68b9ca8f04ba3917d71ec4e84058b9948
+[1/1] Fix autoboot countdown printing wrong
+      commit: 5f70be08b015a5dc2296ea0073ecc8165fc48588
 -- 
 Tom
 
