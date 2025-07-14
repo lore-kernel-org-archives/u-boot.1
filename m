@@ -4,95 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 921B0C83F1B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 14:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B49C83F1B
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 14:21:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECE3182FAB;
-	Mon, 14 Jul 2025 16:08:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=on-the-web.ch
+	by phobos.denx.de (Postfix) with ESMTP id 067F482E37;
+	Mon, 14 Jul 2025 16:21:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=smtpservice.net header.i=@smtpservice.net header.b="H/5sdFI1";
-	dkim=pass (2048-bit key; unprotected) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="HOyx/dXy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xhYKLndF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D092983111; Mon, 14 Jul 2025 15:34:58 +0200 (CEST)
-Received: from a4i432.smtp2go.com (a4i432.smtp2go.com [158.120.81.176])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9F1B682E52; Mon, 14 Jul 2025 16:21:36 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BCB28309E
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 15:34:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=on-the-web.ch
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounce.yabn06jh31lx3f1=avkertrrf195=o5oejtdcqvwx8c@em923567.on-the-web.ch
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smtpservice.net;
- i=@smtpservice.net; q=dns/txt; s=a1-4; t=1752500081; h=feedback-id :
- x-smtpcorp-track : date : message-id : to : subject : from : reply-to
- : sender : list-unsubscribe : list-unsubscribe-post;
- bh=F86vuBVpAiUKRTo8rEifEvezLB+VXOfgCaPwQx5Ka00=;
- b=H/5sdFI1a8fHp+mz/Uil2cm2mxfZzyC9806cDFddfenLomeus3xnqaegk9caArMYrNFnV
- SWggJgp9M38TZ1uRtj3CNGuvXk0qPlnD/7JUKPmXLpKASe4NXXPfPN1lzstBx/fELcqrgQh
- 5GCufS+cJeltlzy9btR/glVXY/NFjjt2kvWDjZIwRtM6VxkjOKAVg+UYqTAlLIhf379vvRY
- +FyvyCeQWwAoIR53WO1qMMwrBobq082d287Hr+a2NQsmMu81vlS1AkxkmtSqBcmlgAF7sy/
- ACuilch3BkPXfFtAUe9H8W0J7Sw8i8YmNLthjyzKKzrlDtfZ6mCO1HDFpOrA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=on-the-web.ch;
- i=@on-the-web.ch; q=dns/txt; s=s923567; t=1752500081; h=from : subject
- : to : message-id : date;
- bh=F86vuBVpAiUKRTo8rEifEvezLB+VXOfgCaPwQx5Ka00=;
- b=HOyx/dXyBLDwrwlVdwM1WtBZDtBXAEFar5VWTt8nag+heg/boYXdPpBoWDPvroNwzBAJ9
- TicShRxS6iRePzKY+YymqQOHAWV0P088vBVXsSlvM1AMzU9X329blfhpEtWdQQ+inY08P52
- lOdZT4XoqtGosmJMf2yKP54Btl0oDQvK8cHeq5+tdQLgBiP+tz2f0zcET+CwEfg4U8eKJeT
- 3U7cX0OLj+fr0QDQMvFR1CIwggEE52X+tzWtAvyvCBJzRPKPQ6procieJzZYYvtnhyKMiAI
- UcthNDYuJ0m2vkkbxHE6THbUhXppyCc/zMmXxByzLEq/AdoGjE5N09AKGPBA==
-Received: from [10.114.245.143] (helo=ch-web-troubles-5500.dynv6.net)
- by smtpcorp.com with esmtpsa
- (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
- (Exim 4.98.1-S2G) (envelope-from <sputnik@on-the-web.ch>)
- id 1ubJJu-FnQW0hPlLyG-oHCS; Mon, 14 Jul 2025 13:34:15 +0000
-From: Martin Herren <sputnik@on-the-web.ch>
-To: u-boot@lists.denx.de
-Cc: Martin Herren <sputnik@on-the-web.ch>, Andreas Schwab <schwab@suse.de>,
- Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
- Conor Dooley <conor.dooley@microchip.com>,
- Cyril Jean <cyril.jean@microchip.com>, E Shattow <e@freeshell.de>,
- Green Wan <green.wan@sifive.com>, Hal Feng <hal.feng@starfivetech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Peter Robinson <pbrobinson@gmail.com>, Rick Chen <rick@andestech.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
- Yao Zi <ziyao@disroot.org>, Yixun Lan <dlan@gentoo.org>,
- Yuri Zaporozhets <yuriz@vodafonemail.de>
-Subject: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly used
- value.
-Date: Mon, 14 Jul 2025 15:33:09 +0200
-Message-ID: <20250714133345.128853-1-sputnik@on-the-web.ch>
+ by phobos.denx.de (Postfix) with ESMTPS id 6C4ED82CFA
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:21:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-45600581226so22937825e9.1
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 07:21:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752502894; x=1753107694; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xYZoGB3h1386rWN6BJBzA7GqCd7ey41EsS+Vv8DiVKo=;
+ b=xhYKLndFPcJ40KkPEkT0UOazB6YgMCdoKVmWGndR/R7kFtJVx/ePRgJUoFoD9jQVhf
+ xc95EEi8lKnwUTio8NVpGw/AvHSPCJhWZZyYxpdATZREhF32+1VbNBOLB8Xi2sQ32pf6
+ 7SU4ELcdMHT6RYH6qeUcATSmMkpG+kbGsak5rbZSrCtSzg8vknhBxSX79NZ4Nvt7xcmX
+ IyOeNCGA2GLVQbtHnF2doLWqqnCUHia+ZRhrii+XQ6NxPR9gT2i6clydcvIWOAPuXXEn
+ OWr61A+jfPkce4NRRvMWWVBuIN2kDeVYM8hqDiCy6/TuroEhBSw93x+xgEivZkmzSug4
+ w1sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752502894; x=1753107694;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xYZoGB3h1386rWN6BJBzA7GqCd7ey41EsS+Vv8DiVKo=;
+ b=P2+ZMS9IkcivnTuaDkfs8V0M8V0EYSN/R06jIm1cPFCkXMXZUX73CS65oRvQgMFpu0
+ FbZilH2U9v/407o+aWURYDx3uOL/XLciz2dl9J6qqTlYkO8MblcYk7pYrupsZ/jHRevv
+ 3cBQo9TMxyyJd5OpBBf2xMBHZUOPt8JxpeKAdjLA9altBLdvN8HudQOM6MAHxDHHPdct
+ N33yxL7eL4QoVL61CkXx/BplhPsAyoyYXXrvtE1736eQKAJYUfn1WRIXkhb2pvyhddDO
+ nXf4YvYwV+XcDKhUoCUAVPrvMSVHxusFJ2NEkcRejACdaK3O6s2hwbVKTKWm3recnMQz
+ vO+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUnsz0oqdN1g/4dWJA0Rf2tQh4tfklccNrfGiSCn3G5axc/JKg4gHuMmdW8nfg19V0yH/xDgRE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwC/woR17n69HUEvnZSsAja8e7Z0qimbF8uEg/SxpnHOEx/hxBx
+ utpRLIaG5cncofI3FlaYRRyoMOgqjiN+hcacFpKB5vGU6Hlwoc0DBPvfo35gxhQqlDM=
+X-Gm-Gg: ASbGncuPq7nXUbbW55jxpfNUAmfdJD/VdgsOXY+cQGCt03O472ywxzVoYLo13NQi9Z1
+ ligYn2YWqoTx7tv+X+VELAip8gZ1YY21AjY0I6kPWD70JrgqNl9X78guM978ihBa6vRLsia0vf2
+ gSAO1UcNYeGUjQsv4xncU7elQGQPj0IOYGjGwKiY+3Dt7B3KOUZeLogp5aiAnt+XPAUccVwKJbe
+ rkmnFS1zKyBFwPI5krl/tmpc23GY2SUrszqJfCg9PSueGFHYMbseq7WlLYEVl0RwI9mma/tsd7F
+ yjf1yk3m79sxDAGwTlH769jRN5TFfmzFup0CMmH0kI4ITfv63uVsA/tFXs2IdWLtwKpxK3LMlnv
+ bSkhPI97drjc6ikCvSnYcgpX0c7dQUu+U3cuVQUm1H78mx/IgVfqL1GCCX9menZjeaoGn/O/19B
+ nGkoQu
+X-Google-Smtp-Source: AGHT+IGja65g8LoyZ6m++A697vo2W0tl1VC1lc7WcccZXZiQxyM/Un8GsxPhpJlvYBOMQUywmYP0kA==
+X-Received: by 2002:a05:600c:4445:b0:43d:4686:5cfb with SMTP id
+ 5b1f17b1804b1-454ec28306cmr118483325e9.27.1752502893846; 
+ Mon, 14 Jul 2025 07:21:33 -0700 (PDT)
+Received: from toyger.localdomain (p549d4699.dip0.t-ipconnect.de.
+ [84.157.70.153]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b5e8e2710bsm12526472f8f.99.2025.07.14.07.21.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Jul 2025 07:21:33 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Rui Miguel Silva <rui.silva@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PULL] Please pull qcom-main-20250714
+Date: Mon, 14 Jul 2025 16:18:51 +0200
+Message-ID: <20250714142121.3266304-1-casey.connolly@linaro.org>
 X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse: Please forward a copy of this message, including all headers,
- to <abuse-report@smtp2go.com>
-Feedback-ID: 923567m:923567atSSOWT:923567sdFZQW6bQj
-X-smtpcorp-track: 9tUZo7NP9OrG.A1jKcB4a8pR3.1D-p4AVbght
-X-Mailman-Approved-At: Mon, 14 Jul 2025 16:08:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,65 +101,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-The most commonly used SYS_BOOTM_LEN for riscv is 0x4000000 which is
-used in 25 of the current defconfigs.
+A few fixes and additions for you:
 
-The previous default config value of 0x800000 was only used in 8
-defconfigs.
+* Fix unused access in ufetch
+* Add missing clock for SM8650
+* Port the Linux SPMI GPIO driver and port over SM8550 (other platforms should follow)
 
-This patch sets the default to this value.
+CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/27056
 
-Command used to get the stats of the used values on RISCV defconfigs:
+Kind regards,
+// Casey (she/they)
 
-```
-grep -l "CONFIG_RISCV=y" configs/* | \
- xargs -I {} sh -c "grep -H CONFIG_SYS_BOOTM_LEN {} || echo {}:DEFAULT" | \
- cut -d ':' -f 2 | sort | uniq -c
-```
+The following changes since commit 344e1798059ba65769272be3145736685bb25a7e:
 
-Changes in v2:
-- Resubmit using another mail provider to prevent mangling and signature
-  attachement.
+  lmb: add missing fallthrough in lmb_alloc_mem() (2025-07-09 10:39:37 -0600)
 
-Martin Herren (3):
-  riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
-  riscv: Set SYS_BOOTM_LEN default to 0x4000000
-  riscv: Remove default SYS_BOOTM_LEN from defconfig
+are available in the Git repository at:
 
- boot/Kconfig                            | 2 +-
- configs/ae350_rv32_defconfig            | 1 -
- configs/ae350_rv32_falcon_defconfig     | 1 -
- configs/ae350_rv32_falcon_xip_defconfig | 1 -
- configs/ae350_rv32_spl_defconfig        | 1 -
- configs/ae350_rv32_spl_xip_defconfig    | 1 -
- configs/ae350_rv32_xip_defconfig        | 1 -
- configs/ae350_rv64_defconfig            | 1 -
- configs/ae350_rv64_falcon_defconfig     | 1 -
- configs/ae350_rv64_falcon_xip_defconfig | 1 -
- configs/ae350_rv64_spl_defconfig        | 1 -
- configs/ae350_rv64_spl_xip_defconfig    | 1 -
- configs/ae350_rv64_xip_defconfig        | 1 -
- configs/ibex-ast2700_defconfig          | 1 -
- configs/k230_canmv_defconfig            | 1 +
- configs/microchip_mpfs_icicle_defconfig | 1 +
- configs/milkv_duo_defconfig             | 1 -
- configs/qemu-riscv32_defconfig          | 1 -
- configs/qemu-riscv32_smode_defconfig    | 1 -
- configs/qemu-riscv32_spl_defconfig      | 1 -
- configs/qemu-riscv64_defconfig          | 1 -
- configs/qemu-riscv64_smode_defconfig    | 1 -
- configs/qemu-riscv64_spl_defconfig      | 1 -
- configs/sifive_unleashed_defconfig      | 1 -
- configs/sifive_unmatched_defconfig      | 1 -
- configs/sipeed_licheerv_nano_defconfig  | 1 -
- configs/sipeed_maix_bitm_defconfig      | 1 +
- configs/sipeed_maix_smode_defconfig     | 1 +
- configs/starfive_visionfive2_defconfig  | 1 -
- configs/th1520_lpi4a_defconfig          | 1 -
- configs/xilinx_mbv32_defconfig          | 1 +
- configs/xilinx_mbv32_smode_defconfig    | 1 +
- configs/xilinx_mbv64_defconfig          | 1 +
- configs/xilinx_mbv64_smode_defconfig    | 1 +
- 34 files changed, 9 insertions(+), 26 deletions(-)
+  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-main-20250714
 
+for you to fetch changes up to 07ddbb89c9cc42a366807813dcb28fbd3e9d198b:
+
+  clk: qcom: sm8650: add usb3 noc clk (2025-07-14 15:35:24 +0200)
+
+----------------------------------------------------------------
+Andrew Goodbody (1):
+      cmd: ufetch: Initialise size before first use
+
+Balaji Selvanathan (1):
+      watchdog: qcom-wdt: Drop read check on write-only WDT_EN register
+
+Casey Connolly (1):
+      qcom_defconfig: enable USB mass storage gadget
+
+Neil Armstrong (2):
+      gpio: qcom: add new driver for SPMI gpios
+      gpio: qcom: move pm8550 gpio to new driver
+
+Rui Miguel Silva (1):
+      clk: qcom: sm8650: add usb3 noc clk
+
+ cmd/ufetch.c                    |    2 +-
+ configs/qcom_defconfig          |    1 +
+ drivers/clk/qcom/clock-sm8650.c |    1 +
+ drivers/gpio/Makefile           |    2 +-
+ drivers/gpio/qcom_pmic_gpio.c   |   20 +-
+ drivers/gpio/qcom_spmi_gpio.c   | 1035 +++++++++++++++++++++++++++++++++++++++
+ drivers/watchdog/qcom-wdt.c     |    5 +-
+ 7 files changed, 1041 insertions(+), 25 deletions(-)
+ create mode 100644 drivers/gpio/qcom_spmi_gpio.c
