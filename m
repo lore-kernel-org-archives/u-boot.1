@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C290C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 12:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF57C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 12:19:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B26F682AC4;
-	Mon, 14 Jul 2025 14:02:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B193282AC4;
+	Mon, 14 Jul 2025 14:19:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Kmi2n8ag";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="yHjcv6BW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF45382B07; Mon, 14 Jul 2025 14:02:37 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8201805D7
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 14:02:33 +0200 (CEST)
+ id 7222682B07; Mon, 14 Jul 2025 14:19:15 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 493CB805D7
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 14:19:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56EC2SbX2017886;
- Mon, 14 Jul 2025 07:02:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1752494548;
- bh=scKrct3zhnijq+2L3NpN3LyvGasMSxDA1T6h+4gNQzc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Kmi2n8agEgJDmWt/FmSZtpO2lhWxgKJQ40g+Lz17EV3yCHLb/9A4XGWLwW3zIGre2
- J2TB5hcj5L0sFtNnLhlQk0hllNLaPL3TDlPxz+sL5vMDWwGk7WJDPhg3056fywf7bt
- xKcrFmv31Qv/gTGYsZIcdYgRS4jSVcZ37cSw7XVk=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56EC2Srs1712018
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 14 Jul 2025 07:02:28 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 14
- Jul 2025 07:02:28 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 14 Jul 2025 07:02:28 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56EC2Sld829235;
- Mon, 14 Jul 2025 07:02:28 -0500
-Date: Mon, 14 Jul 2025 07:02:28 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Yannic Moog <y.moog@phytec.de>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>,
- Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH v2] binman: Fix typing for python >= 3.5
-Message-ID: <20250714120228.hkxkjzlxapyo4mmw@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20250714-binman-typing-fix-v2-1-dbe6519c43a0@phytec.de>
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-70e5d953c0bso43525237b3.1
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 05:19:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1752495551; x=1753100351;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lck/suxyj/2TEHn6TnHiB4ZwaNlQnSEp7yJWsvL7r+0=;
+ b=yHjcv6BWTCyEu/zwhW6PJGFaunvPTVtPyq6nv325TfM3cOdzhGJnX4/aJm7qw7Vc7I
+ Cp2d7XS2hgo5Bg+vA/HkYYi+JQELLtF/q43qqcApoed4/TysqBsaO6Rd0uFgrvATbpjx
+ ecdsln6+C4tR5gIvoL3ZUq3/kkzmMP41SuWbCL1BCEqDhwj1GYIc65nZhkKSk5NZxnDp
+ 4T14ye1qSp7u2DFFevOMzRQIInsG1MtfAT1Y6rGzk8W2QMWa5+ZwiOzDgL1N4vxG0xbK
+ yZX6uDrIIls4jnWHY0G5FgKHhMZnkUTgAktdbLCW8W/vNwaXAIQ2AphkUcIpJ5wIhfnn
+ xeVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752495551; x=1753100351;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lck/suxyj/2TEHn6TnHiB4ZwaNlQnSEp7yJWsvL7r+0=;
+ b=jW7onwuHFLPkueYJyNWslUiUZQqqJT0Bq1nvgnDNc8Ou20M+M7PiQ1bR1WFr9kKLYt
+ legJv8qfdAOVjxJ7G1whhgKy37x+lm6RuNCo9jedShfJX5z8rIyMZYcwtuyX2opg3AJK
+ lQyWhKrBXA+OciOKlR2htWzs0o9xbq0xsowvxt0NYJdWV0pxSTyltkgFzOJtgMhL/sHN
+ gYWd2Fq+QUBIQ3ZtHTbz8O8qfBGA5A0aqh3EB122G9lny30HbGogft45PdoJGXQb7Ch1
+ e6To2h2N/e3FkmiIGyPw3L1HvVA1E5kktUJPtLNubjsPtbplzuSlJXkxHZiQKlL5edw0
+ zJDA==
+X-Gm-Message-State: AOJu0YwJ/RE0UHA8BEoBcYoWAvABdkH/8N951M1BF0+f9J2JhEOFGkc4
+ xv8WM1p3gsSR1DGMdhUBSJl6mhDzHVr7vBHgWidlHue5v0gD1aT4arMzd0pRlxMZuOU3Yja+JNh
+ Ax85M33LD2LE9gEB6gGqnG3NG1upykT6QKmpwlmxP
+X-Gm-Gg: ASbGnct3qwiyDFyE4Dyd3Hd3c50OuFOuqtHn4fSJtpdHLzMdGT2zYgb21iCiA+2lHVS
+ DKGX6yzpv4kJh3BlU72K06heiQB6E8ibsJEUBjyYB3qrsoDHhECQt3ekGucNkd9p4p5pjewPoeK
+ cFjlGBWktueZrEQAqTHcavQuZWICJyvC0FPcYdjTnbUMClsg/ar2yvyvkSu8nd29yDrDuKRexnf
+ O37xB2q
+X-Google-Smtp-Source: AGHT+IHUXgsMMFq9jZb1InhBx1EtlTPHaBiDbcaptDwCkPUA+TWffVOe3oqTtLw0rUYE8xElvYeCDrJfYQANHW1HSPg=
+X-Received: by 2002:a05:690c:7406:b0:70f:83ef:ddf7 with SMTP id
+ 00721157ae682-717d5bb20b9mr196142317b3.13.1752495550559; Mon, 14 Jul 2025
+ 05:19:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20250714-binman-typing-fix-v2-1-dbe6519c43a0@phytec.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250711144917.1876948-1-abdellatif.elkhlifi@arm.com>
+ <20250711144917.1876948-2-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20250711144917.1876948-2-abdellatif.elkhlifi@arm.com>
+From: Michal Simek <monstr@monstr.eu>
+Date: Mon, 14 Jul 2025 14:18:59 +0200
+X-Gm-Features: Ac12FXy0ssIzNjnpHgiNwycF3e-hIptgfgTKw5hVtZ24V03AfIyE3DAqGRpaT-c
+Message-ID: <CAHTX3dJgT0FB9f9Ybes=V+xUt1M2wXPXNhqxVtzcAGysNeLJGA@mail.gmail.com>
+Subject: Re: [PATCH v2 01/25] arm_ffa: Remove NULL pointer check for ops
+To: abdellatif.elkhlifi@arm.com
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,42 +96,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On July 14, 2025 thus sayeth Yannic Moog:
-> To make it work with python 3.5 and 3.6, need type hints from the
-> typing module.
-> 
-> Reported-by: Tim Harvey <tharvey@gateworks.com>
-> Fixes: 21bc3433a43d ("binman: rework dropping absent entries from packaged image")
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
+p=C3=A1 11. 7. 2025 v 16:49 odes=C3=ADlatel <abdellatif.elkhlifi@arm.com> n=
+apsal:
+>
+> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>
+> Remove NULL pointer check for ops
+>
+> uclasses that use ops typically don't check for NULL.
+>
+> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jens Wiklander <jens.wiklander@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>
 > ---
-> Changes in v2:
-> - drop newline changes
-> - Link to v1: https://lore.kernel.org/r/20250711-binman-typing-fix-v1-1-66ab075015ac@phytec.de
-> ---
->  tools/binman/etype/cbfs.py    | 3 ++-
->  tools/binman/etype/mkimage.py | 3 ++-
->  tools/binman/etype/section.py | 3 ++-
->  3 files changed, 6 insertions(+), 3 deletions(-)
-> 
-> diff --git a/tools/binman/etype/cbfs.py b/tools/binman/etype/cbfs.py
-> index 5879f377231bf94697bea97c3cfc3a2515665b8f..c5e77f3a0df22ff768aa7254e4dd9ecbe6f81684 100644
-> --- a/tools/binman/etype/cbfs.py
-> +++ b/tools/binman/etype/cbfs.py
-> @@ -6,6 +6,7 @@
->  #
->  
->  from collections import OrderedDict
-> +from typing import Dict
+>
+> Changelog of changes:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>
+> v2:
+>
+> * As suggested by Heinrich: The commit is renamed and the ops NULL check =
+removed
+>
+> v1:
+>
+> * Commit title was "arm_ffa: Add NULL pointer check to the uclass driver =
+operations"
+>
+>  drivers/firmware/arm-ffa/arm-ffa-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware=
+/arm-ffa/arm-ffa-uclass.c
+> index 96c64964bb7..32dd9458da9 100644
+> --- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> +++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-of=
+fice@arm.com>
+> + * Copyright 2022-2023, 2025 Arm Limited and/or its affiliates <open-sou=
+rce-office@arm.com>
+>   *
+>   * Authors:
+>   *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> --
+> 2.25.1
+>
 
-It's been a while from my Python days so I'm still trying to understand 
-what's going on, but my understanding is the 'typing' module is 
-considered deprecated after Python 3.9 with PEP 589[0]
+That commit message is not matching what you do here.
 
-It seems like we're asked to use:
+Thanks,
+Michal
 
-    from __future__ import annotations
 
-~Bryan
-
-[0] https://peps.python.org/pep-0585/
-
+--=20
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
