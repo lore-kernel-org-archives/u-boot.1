@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB89C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 17:06:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDDD9C83F17
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 17:12:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EB9982F14;
-	Mon, 14 Jul 2025 19:06:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1871782F14;
+	Mon, 14 Jul 2025 19:12:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LoZWDG3/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wo/rbVSC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA1A083043; Mon, 14 Jul 2025 19:06:09 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id A48558309A; Mon, 14 Jul 2025 19:12:08 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47D1D82E37
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 19:06:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6AAF82E37
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 19:12:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-73d0a11674cso1098141a34.3
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 10:06:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-455e6fb8057so32641635e9.3
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 10:12:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752512764; x=1753117564; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ed6tBNPv5+iPaCApKJcgQTU90XYVan/gZ8I8J+cSQXA=;
- b=LoZWDG3/TU4DPeXRtAPtTmymtukdnU3hUzfAOAsyG0QZKuE4rPftY3xLUpc6ScgN7g
- a78NU6RrmaO85M+JHFS1ghAoDWUv/7oZbBEFfNbHvcZzsBtwn30RudCM2J7nlEvBpMC1
- 5k7OKON+9faE6DRWGL/wsn2dwZGR/bmYAHHws=
+ d=linaro.org; s=google; t=1752513126; x=1753117926; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=tFEABrz09PRVJtSwGR7XZVcPkDQ31BL1yexOwg/pAxM=;
+ b=Wo/rbVSC7Xr+AQaTfHVRulzV5/dXGj8Mg34Wz3H3tT15RTRk9YUVg3FEjZlbp20J0R
+ W0pzWeb7DmNxLDDJ6NYlM7gX4CDk1VACmMy3DnTNY0PHkWg7z+yyiuMtRgPltIMoXZ0c
+ KNX9Era6dpMTVpVfXdXFGz7zLxJUVs28K94GtoVqxHiyXF1CCV6XyTxlJWoPn/me/bh4
+ foQMv2HYQhm92mxsCDX+jbqIT9Q1y9LSU8U93tFPIwypC91mSIO6va7taONF7OlqdZoV
+ jhaGk47RW9L/O+xah4/dbdCNTUZGGiBl3BI/ST24ORi/z8zdlIcnpC5vBJ8dIPQhnHV4
+ wMyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752512764; x=1753117564;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ed6tBNPv5+iPaCApKJcgQTU90XYVan/gZ8I8J+cSQXA=;
- b=VaxOCM+QKM2E0cWUv8l+iGcTmfNl41c8Ysg9Q8TduY+VhwifUODTxlPmQSFYeU9hrx
- yI3G4qABRr5gmHLk7qVzYZmbvomGBURjJMf9g9R14ZWNqktTucNH/ypb2yhH4cRxBXKJ
- 33uplb13ptAZiH+x6LnxJDj112EAsDN6owf6wq/4SBY+Tcqwq67kL8n/fimqnud15CPt
- hHs4u5OlZGndcNH9SzzDFZoM+c0nvme7BSre3mi609K/DQkSeBVhvqLT2iZTQ7IPBjiy
- lgF5i5cWSx/KnJ6GIMbUY0uBGLBvg/fcMrP0aZzck+qDFujvQjL+yVJ368jwh4/SdOCM
- hYDw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUDG0GAuxnV0e2ipmmqQ3zfsyxconYrqIDUzFLisgfbx/fbhalM1q91K20mn7Z5xXSOTmx6Lg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7JDs7wM4RZW3JdhYjy5985iXCIJt44wF8TPKOikE9unOCcWal
- C/rMnUfpjmR73H+zIBgI4vwLwbKbb0GVDuB3taqsw4JJKp4mBL4E0WgTUjU8KtpoCqog6bo0eHW
- Z8Mnm
-X-Gm-Gg: ASbGnctBecjBM4hZ2R0AcPlAK5aagXU3f3IX+E10N0cwloRLNyA2S1z+J7miZ14NtbG
- LTVW5NI5vmICWA1bAmAHWBMC19XCEG2Y22beWo8KjUCuq9GZumQmRJI+HxTVoeHjzfITql45dYg
- 7rDF3ylbByAn0HP50k8ktK/TUBjXFXo/ksk7fjbPupiNOy09P9Ik86Etu4BqFYtYmhfGDCQfjJy
- mAqpO/13PALD21Qi6XNTRFe71sMFJ34clcjYiGdLwJ5g2kE4ASecw6f534TjL2NYzM+LXaVvnWA
- xtU0NCsfTQoKSIfsWdGuLA5j+L7tlsCWU6ucXzNA0NfvVtHeiBcijgcLYvkR/QFJEyvRAcG/dwK
- LuoFY0Zjne6fDp54/QbxeDgOmcx8ZJHGBzmcaCMyNvjliiEzGhTTtrmVaCYMFRcdqwA==
-X-Google-Smtp-Source: AGHT+IEkGtq9b6V394FEokf+E2YD8YrKTXzLnm4JghDqfEAF8caknYh7Iqrq+hR0o4+Ig+IrWP1GjQ==
-X-Received: by 2002:a05:6830:8206:b0:73b:1efa:5f6d with SMTP id
- 46e09a7af769-73cfb1fcb7cmr7313680a34.16.1752512763935; 
- Mon, 14 Jul 2025 10:06:03 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ d=1e100.net; s=20230601; t=1752513126; x=1753117926;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=tFEABrz09PRVJtSwGR7XZVcPkDQ31BL1yexOwg/pAxM=;
+ b=HbdzIxAKGvHbMTrgnMiTlUi3Y0ltX2+E3lgrCMJmsv3B4blnISpER1BiaSJERPCYil
+ v2F/oD3qmt0A6OxLqLGMwJmu0rkzoTdDaALskOp2Wt7W6CU3MyiszkPSnjgsP2/c3eEf
+ N3KsGezWiKGdbgkNdW5d6EXC4ACGCRZH2wa1QFDwt3JoiuX2TY1/GypvxfhMKZUVhoac
+ D8vGC3b8BgaRVSVhCjKe6BUNyu8LVpk26yzs0Bcw40W0qtyt7RQpYHQ8C26LjK1qUXpZ
+ VC7vfEsJTQVVmRaaWIf9eoinGRgzexF7StvUlIh9Fo7GjKMJix0t6dYs1L9oQ+ClpVL7
+ r7Qw==
+X-Gm-Message-State: AOJu0Yy03kOBVPwRLQtJsUuvLDsXcPp69I8Di+TH1QLn5Grc4u7atIjy
+ sI9/kIKPIeuVaw5gU7JjhrqoDEzQ+oLnky8tyMuXa9RDXYdGchGVyLQC1+2EN8UU+Xtu+R6hmfl
+ eJgDv
+X-Gm-Gg: ASbGncvKliMHq0gfaaBAq9b6Yrc/AOBcB3s3eR9HFehI/49IeEGQ12XBPt9rWgr/+xL
+ M8w58Vv4srrSiEHM0A3ouGnw4iHDKh0Zu7iBl1XtShc0JhY5dj9/cIwf3cNgXAmvA6uRwjypcU+
+ LJYbVTpQEW3QccTqZTTe7XGWmRV8t2Ta0l4ArJts+tYgEjdke6xSeiFDTQLf+L6m8LAZ2mSX+RN
+ 6TL6JtXvn1mOmUm+S5qIfdisR44oIB2fBdSprE0u79lPYrk2bhDF8pJgbjxlDSUZ/69Qs4hkZfU
+ Nw2itnmDMnieygATXJJ/yh66kGncVbnxAeAmyr/ZFMIAVM0KgVJ4FR4E+AyXJQmnnQv8tgXG3jk
+ 3ReFhNYi3H05EaWsglo5Kq9VmqotWuudYUAHkYhqhbXuVEKe19+7+HBcdV03J2tYh6DVm1KsWeC
+ qme1k+zNvLwg==
+X-Google-Smtp-Source: AGHT+IHhgBJqVeJRtHxA1+FqIpnQTX1xLhz8u5g9CSjHkWlf110di7PKUlmx+a52b1CDwo+2ecKVqw==
+X-Received: by 2002:a05:600c:c176:b0:43c:eeee:b713 with SMTP id
+ 5b1f17b1804b1-454ec263d7cmr101920495e9.20.1752513126072; 
+ Mon, 14 Jul 2025 10:12:06 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:e07:801:3743:80cb:93ed:a9a8?
+ ([2a0a:ef40:e07:801:3743:80cb:93ed:a9a8])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf12b69edsm1624526a34.61.2025.07.14.10.06.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 10:06:03 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io, Casey Connolly <casey.connolly@linaro.org>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Rui Miguel Silva <rui.silva@linaro.org>
-In-Reply-To: <20250714142121.3266304-1-casey.connolly@linaro.org>
-References: <20250714142121.3266304-1-casey.connolly@linaro.org>
-Subject: Re: [PULL] Please pull qcom-main-20250714
-Message-Id: <175251276267.177698.13561276176534038479.b4-ty@konsulko.com>
-Date: Mon, 14 Jul 2025 11:06:02 -0600
+ ffacd0b85a97d-3b5e8bd181bsm12601759f8f.7.2025.07.14.10.12.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Jul 2025 10:12:05 -0700 (PDT)
+Message-ID: <04953cfc-0475-4560-bd7c-fee27739e351@linaro.org>
+Date: Mon, 14 Jul 2025 18:12:05 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] block: Remove unreachable code
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250714-blk-uclass-v1-1-d21428c5f762@linaro.org>
+ <20250714162951.GI13084@bill-the-cat>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250714162951.GI13084@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,21 +103,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Jul 2025 16:18:51 +0200, Casey Connolly wrote:
-
-> A few fixes and additions for you:
+On 14/07/2025 17:29, Tom Rini wrote:
+> On Mon, Jul 14, 2025 at 04:38:53PM +0100, Andrew Goodbody wrote:
+>> The two functions blk_find_first and blk_find_next use a for loop with
+>> the content being a 'return 0' which means that the 'increment' code is
+>> unreachable so remove it and also remove the variable ret which is
+>> assigned to but its value is never used.
+>>
+>> This issue found by Smatch.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   drivers/block/blk-uclass.c | 14 ++++----------
+>>   1 file changed, 4 insertions(+), 10 deletions(-)
+>>
+>> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+>> index f3ac8db9464..b38c21ffbe2 100644
+>> --- a/drivers/block/blk-uclass.c
+>> +++ b/drivers/block/blk-uclass.c
+>> @@ -613,11 +613,8 @@ static int blk_flags_check(struct udevice *dev, enum blk_flag_t req_flags)
+>>   
+>>   int blk_find_first(enum blk_flag_t flags, struct udevice **devp)
+>>   {
+>> -	int ret;
+>> -
+>> -	for (ret = uclass_find_first_device(UCLASS_BLK, devp);
+>> -	     *devp && !blk_flags_check(*devp, flags);
+>> -	     ret = uclass_find_next_device(devp))
+>> +	for (uclass_find_first_device(UCLASS_BLK, devp);
+>> +	     *devp && !blk_flags_check(*devp, flags);)
+>>   		return 0;
+>>   
+>>   	return -ENODEV;
+>> @@ -625,11 +622,8 @@ int blk_find_first(enum blk_flag_t flags, struct udevice **devp)
+>>   
+>>   int blk_find_next(enum blk_flag_t flags, struct udevice **devp)
+>>   {
+>> -	int ret;
+>> -
+>> -	for (ret = uclass_find_next_device(devp);
+>> -	     *devp && !blk_flags_check(*devp, flags);
+>> -	     ret = uclass_find_next_device(devp))
+>> +	for (uclass_find_next_device(devp);
+>> +	     *devp && !blk_flags_check(*devp, flags);)
+>>   		return 0;
+>>   
+>>   	return -ENODEV;
 > 
-> * Fix unused access in ufetch
-> * Add missing clock for SM8650
-> * Port the Linux SPMI GPIO driver and port over SM8550 (other platforms should follow)
-> 
-> CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/27056
-> 
-> [...]
+> Should we clean up uclass_find_next_device(...) to not return int? The
+> function comments don't quite make sense (include/dm/uclass-internal.h)
+> and it always returns 0.
 
-Merged into u-boot/master, thanks!
+OK, that should not be too bad.
 
--- 
-Tom
-
-
+Andrew
