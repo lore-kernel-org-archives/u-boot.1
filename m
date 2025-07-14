@@ -4,106 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F5DC83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 13:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6B59C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 13:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B27C8309E;
-	Mon, 14 Jul 2025 15:13:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7D14383020;
+	Mon, 14 Jul 2025 15:14:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bxx8bPHg";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="eGM5gVpe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85D0B82E52; Mon, 14 Jul 2025 15:13:30 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D0E3F83045; Mon, 14 Jul 2025 15:14:17 +0200 (CEST)
+Received: from mail-m32122.qiye.163.com (mail-m32122.qiye.163.com
+ [220.197.32.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A16E383055
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 15:13:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CE2382F49
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 15:14:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4561a4a8bf2so10360775e9.1
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 06:13:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752498807; x=1753103607; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vRO6TsjtuO4FoYZFYI3LLk482AHm4xrnMfQpRXls1HY=;
- b=Bxx8bPHgI5xuC256gcICDKCZasU3cI3cR/2lh4Uh4b3ayNZyN4ye2ozV+GHa3vFZm+
- 5DIe/pXLz28wI6S3dK2+skVvZ1x7GU76nR4ZJgk/9jjNg8rihE0Vlf6j0TFRJKsXEc/b
- ZPK1v+xx3dyrce1Ne3UuG7O8q2D83qFxdDrjGxHo+lhpCBLqdWh8u7Sjq4jBQ91iC/Oe
- Sm/1KPCNGWinVVOUgOo07HprZIOBhh+s7D9bepm6HbpQb8lAVXlPlBSQ2tuo3h5JJFzM
- +u2OX4NU7AlM/U8vS4QwEVvcfwhmOGmY3jq8h+GBGD0d+jdU1Thg9YM4bsajt5E0AQEA
- oM9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752498807; x=1753103607;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vRO6TsjtuO4FoYZFYI3LLk482AHm4xrnMfQpRXls1HY=;
- b=ggplVEmotSQryhZt/Yo+7jUFyoA/60oUiPEvKld8GmrYQzU3PwwHtpLHlZWfX0bL8Q
- DDabYNaUzk4ehN+i9gX9Rhxj1N5I1LFSUc+IwvoN0wtsmr/0ixDrpbbo1TYSidD1s7YZ
- Yn/iN6o3z61ZaeSvEMmrLQNfSrhI4HmYOJsdYT6/oSODEfVRr2bQ7R2WgNlhJhb/EEED
- Mje4jA2y8Mo/gqWPuB8PPtDDz8ZN5mfBQgCJbWqf2jnsOTtwMQke2dqu5ND3YFEes7pr
- NZSyvS5AydqB8YeklH1MUUime9L9ShvrMhqHjugW0IZnHggXY607iXDogdG3UKccCzjN
- UjQQ==
-X-Gm-Message-State: AOJu0Yyz9EWTMAaky3C0gMjt7eYTwf9Igt3SdLsr8VO1FBRoQ6ZWwZQs
- VUOODq2wczQL0hSmBKjftEhked5tOO7dTVFKEJrdQopHVow6oRO+b+eeNqFk4EEzRQ0=
-X-Gm-Gg: ASbGncsNotLkYC5jsFdtBxHrBNsWoJjotpKQp6XLakhFIUkkE440DNUVyWoDKbs7PMn
- KQPqtv+sO/C81WwZJ/E14/qDJKE8oMoMWVkNBFdbQjpq44KbOBStUdRNmUlz0C9DHp5U1V01+nI
- Z+K1hos1lNT9hqlcmVA3uZ9h9Khk/wx7ZEzKg71funHMEC6V1WrMwga+fLvzosdtIQlEv2d76ow
- Hsf0Yzl/5+lRiO5Estu2vmN7fzvI8he3htDT9lt7JwJ/4ZgxbzZTexjOMVAjAGbV8DERr7ZxTpQ
- Lk2EK7yHGIMqUBkQUc7bpWA2Q54hFIE8tb3khHFTwPrcHXq+qBx60D15FPk/2VuIIJtz3Wwrxck
- cHySfanTzy4tu7EQShqGdijBBxvEuxiZ8vrEKys/41vz0ukcRxK3AG2K/q0LmQLnOZd4IkB7l4N
- iZH8DE
-X-Google-Smtp-Source: AGHT+IEPZxUz7pG47VHN4m9W07VdKd8qs7yJDGukKZi5bZaItJmZSCU5nAn6ayECCk/HXfaF6V2HfA==
-X-Received: by 2002:a5d:64ec:0:b0:3b4:6577:eed5 with SMTP id
- ffacd0b85a97d-3b5f2db1739mr10058400f8f.12.1752498806994; 
- Mon, 14 Jul 2025 06:13:26 -0700 (PDT)
-Received: from toyger.localdomain (p549d4699.dip0.t-ipconnect.de.
- [84.157.70.153]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8dc9298sm12361010f8f.44.2025.07.14.06.13.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 06:13:26 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 14 Jul 2025 15:13:19 +0200
-Subject: [PATCH v5 8/8] configs: qcom_*: enable QCOM_GENI where needed
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.33.147] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 1bf33294e;
+ Mon, 14 Jul 2025 21:14:11 +0800 (GMT+08:00)
+Message-ID: <dce6837b-abfb-4bfa-8da1-cccde3707a9f@rock-chips.com>
+Date: Mon, 14 Jul 2025 21:14:11 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250714-geni-load-fw-v5-8-5abbc0d29838@linaro.org>
-References: <20250714-geni-load-fw-v5-0-5abbc0d29838@linaro.org>
-In-Reply-To: <20250714-geni-load-fw-v5-0-5abbc0d29838@linaro.org>
-To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Casey Connolly <casey.connolly@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1845;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=+c8Izve2/yFtqFnP8AcucsceNjRjGif/OzA+OaaACBY=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBodQJrjP5yHB3CNGjbnQsB2Fa8VVIk8y+/X7oZa
- cjubFFmzhCJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaHUCawAKCRAFgzErGV9k
- ttVoD/9Sne8WiuPMXZO1zLSRp6eyjVJTeXUqFVl7q590oED3Q1ErWgLPpHM6aljf2cJyDfod0XS
- 6lHXbgaSKs9V5n1kxbO1OsV8mkYFyBem/oGBlmAS+1ErsalFhBxv4ThBPcOh9m8xk/j6BOsfCFg
- dsRpgQ3Wflc0m0iWGdkRlpwzciZJAhiidmJW/kPjqXPQC6Cn1ceGm1r8lVbgtKEh7VGmsmk91Jp
- 1259C66Qb8Ag5TPCbUB+GRryvHouwlECp5oyZb/kryA4vJUrxa0enbGVrrEsFds1V07j4a8hhu0
- LbRj5p4qQmP5o1C0xVULRIXy8jWLX1t09i2drkw1TeTlkeuIZo0iVsC+AhQyDDFKJOIG++o+D/g
- 9USZw517CWezrL9DBBIAX+yd62D/QN6nfH3tzXYvwW7vjHFJAnh20NkwMCTUGOTJyD+aXCo1AD9
- z1Ql9/Knind4MK6zLEQRFs8DuNPWVYaDDLGjujRzAyaETuGbvRKwzPmLTV6BACTJYxssgknFXMf
- eVQ8fdT+PVd2vcbfMEgH0Ji0wObeLbgqiKOc3JxsxPhmekgcgMqkEFUvSal4MoQDX4wEetepyPV
- PuDo4UCvEVLlGpVVe5VNNb8ZkS0rIkXMCqBRbCYYElYck2CBt9qkwc85WukCJlKc7iTFtiU/5wq
- u/aQN3tQPhwiGqw==
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] phy: rockchip: inno-usb2: Add rk3576 config
+To: Andri Yngvason <andri@yngvason.is>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+References: <20250710173154.1244430-1-andri@yngvason.is>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20250710173154.1244430-1-andri@yngvason.is>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkhCSVYaHksfHR8aTkhJSx5WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a9809124fd003afkunm3fce05021cc66e5
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MC46NCo5EzE4FRdKHRcTNw48
+ SSMaCQhVSlVKTE5JT0JDQ05JTUJLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQ0pNNwY+
+DKIM-Signature: a=rsa-sha256;
+ b=eGM5gVpek0VZKnVXlfSWRQUcmZ0huqxaQNMiEBK1289v1XxdGPzi64lQ7XfXVu+HpebJB5Xrw38HtlTY4+ni8td1U1pwOYUlhrGDxu6Nfkxpyh7TuvUcdFWxQ/kKoiI8d9JIHXm1cGI+RBYUjPkleLu7YV4ZtNhlrPnHGMUPlIg=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=t5r/rrGOpIgmdE/0pmxYm7JSATJYUxa9erQvEuldNAQ=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,61 +72,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the GENI MISC driver which is required for many Qualcomm
-platforms.
+Hi Andri,
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- configs/qcom_defconfig             | 1 +
- configs/qcom_ipq5424_mmc_defconfig | 2 ++
- configs/qcom_ipq9574_mmc_defconfig | 2 ++
- 3 files changed, 5 insertions(+)
+     Thanks for your patch, pls add commit msg for your commit, it 
+should not empty.
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 4ce1bae54145e892d3389fa0ef49bc5c4df8fa03..0c40dc6198c62748979fe6a63be41a083d02a40f 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -84,8 +84,9 @@ CONFIG_BUTTON_KEYBOARD=y
- CONFIG_IOMMU=y
- CONFIG_QCOM_HYP_SMMU=y
- CONFIG_MISC=y
- CONFIG_NVMEM=y
-+CONFIG_QCOM_GENI=y
- CONFIG_I2C_EEPROM=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
-diff --git a/configs/qcom_ipq5424_mmc_defconfig b/configs/qcom_ipq5424_mmc_defconfig
-index 81c3865193d73e3f1fc85bd342e3f1d25534c81d..cbd154f81c396b0b10c3c208efe52ff4077e0b54 100644
---- a/configs/qcom_ipq5424_mmc_defconfig
-+++ b/configs/qcom_ipq5424_mmc_defconfig
-@@ -34,8 +34,10 @@ CONFIG_CLK=y
- CONFIG_CLK_QCOM_IPQ5424=y
- CONFIG_MSM_GPIO=y
- # CONFIG_I2C is not set
- # CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
- CONFIG_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
-diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
-index 6c5706f4c08e35ddec40be8c1e44bfc5cba04fff..97c4abd41c495b47ca9cd322ec2b50c64f64530f 100644
---- a/configs/qcom_ipq9574_mmc_defconfig
-+++ b/configs/qcom_ipq9574_mmc_defconfig
-@@ -33,8 +33,10 @@ CONFIG_CLK=y
- CONFIG_CLK_QCOM_IPQ9574=y
- CONFIG_MSM_GPIO=y
- # CONFIG_I2C is not set
- # CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
- CONFIG_MTD=y
+
+Thanks,
+- Kever
+On 2025/7/11 01:31, Andri Yngvason wrote:
+> Signed-off-by: Andri Yngvason <andri@yngvason.is>
+> ---
+>   drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 26 +++++++++++++++++++
+>   1 file changed, 26 insertions(+)
+>
+> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> index 88b33de1b2a..c38b48d0c71 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> @@ -456,6 +456,28 @@ static const struct rockchip_usb2phy_cfg rk3568_phy_cfgs[] = {
+>   	{ /* sentinel */ }
+>   };
+>   
+> +static const struct rockchip_usb2phy_cfg rk3576_phy_cfgs[] = {
+> +	{
+> +		.reg		= 0x0000,
+> +		.clkout_ctl	= { 0x0008, 0, 0, 1, 0 },
+> +		.port_cfgs	= {
+> +			[USB2PHY_PORT_OTG] = {
+> +				.phy_sus	= { 0x0000, 8, 0, 0, 0x1d1 },
+> +			}
+> +		},
+> +	},
+> +	{
+> +		.reg		= 0x2000,
+> +		.clkout_ctl	= { 0x2008, 0, 0, 1, 0 },
+> +		.port_cfgs	= {
+> +			[USB2PHY_PORT_OTG] = {
+> +				.phy_sus	= { 0x2000, 8, 0, 0, 0x1d1 },
+> +			}
+> +		},
+> +	},
+> +	{ /* sentinel */ }
+> +};
+> +
+>   static const struct rockchip_usb2phy_cfg rk3588_phy_cfgs[] = {
+>   	{
+>   		.reg		= 0x0000,
+> @@ -517,6 +539,10 @@ static const struct udevice_id rockchip_usb2phy_ids[] = {
+>   		.compatible = "rockchip,rk3568-usb2phy",
+>   		.data = (ulong)&rk3568_phy_cfgs,
+>   	},
+> +	{
+> +		.compatible = "rockchip,rk3576-usb2phy",
+> +		.data = (ulong)&rk3576_phy_cfgs,
+> +	},
+>   	{
+>   		.compatible = "rockchip,rk3588-usb2phy",
+>   		.data = (ulong)&rk3588_phy_cfgs,
 
 -- 
-2.50.0
+Thanks & Best regards,
+   Kever Yang
+**************************************************************************************************
+杨凯  市场部             Kever Yang      Marketing Department
+瑞芯微电子股份有限公司                Rockchip Electronics Co.，Ltd。
+地址：福建省福州市铜盘路软件大道89号软件园A区18号楼 (350003)
+Addr : No.18 Building，A District，No.89，Fuzhou Software Boulevard，Fuzhou，Fujian，PRC
 
