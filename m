@@ -4,75 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52B54C83F1B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 15:28:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9150C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 15:33:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8373582F49;
-	Mon, 14 Jul 2025 17:28:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A9D482F49;
+	Mon, 14 Jul 2025 17:33:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yDdZO4++";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HfbfFopb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D49B82FC7; Mon, 14 Jul 2025 17:28:41 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EBE282E37
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 17:28:38 +0200 (CEST)
+ id AB73282FC7; Mon, 14 Jul 2025 17:33:14 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8764982E37
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 17:33:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56EFSXmt2404502;
- Mon, 14 Jul 2025 10:28:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1752506913;
- bh=WqhRyL/N+rf2/HgmiZBl6IUqLBszfcaXnZUBQaKh2oo=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=yDdZO4++tJ+Amw0Z79eLbeCGc346NYWYZWYjyS1yaG9an9FDdxugvrY0u2lQo9BEt
- Z/t+pxcgWJWZw0J6i4Zl0z5PIB9juSx3yWTDqsWwS0sWIwcMzilh+bzCb4bQNDmsdu
- 1jXHQLDQvdFLYUZNx+fS+oXsdBFJGnMOUq2Z4BcQ=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56EFSXUu3999785
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 14 Jul 2025 10:28:33 -0500
-Received: from lewvowa01.ent.ti.com (10.180.75.79) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 14
- Jul 2025 10:28:32 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by lewvowa01.ent.ti.com
- (10.180.75.79) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.55; Mon, 14 Jul
- 2025 10:28:32 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 14 Jul 2025 10:28:32 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56EFSWGd939652;
- Mon, 14 Jul 2025 10:28:32 -0500
-Date: Mon, 14 Jul 2025 10:28:32 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Yannic Moog <Y.Moog@phytec.de>, Simon Glass <sjg@chromium.org>, "Alper
- Nebi Yasak" <alpernebiyasak@gmail.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH v2] binman: Fix typing for python >= 3.5
-Message-ID: <20250714152832.kgaiwnqqc45umxju@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20250714-binman-typing-fix-v2-1-dbe6519c43a0@phytec.de>
- <20250714120228.hkxkjzlxapyo4mmw@bryanbrattlof.com>
- <86c6b776c425e422290f72830d6a568123f740b5.camel@phytec.de>
- <20250714135657.fpa35alz45otqyj2@bryanbrattlof.com>
- <20250714142920.GE13084@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2e95f0b6cb7so1266384fac.3
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 08:33:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1752507191; x=1753111991; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=h/fmeP1tzieTyiGnItiKs+gtQY5DhxluZR+YMlORrAU=;
+ b=HfbfFopbSYWWmdjLjam5mX9n8cQeICZeYr7qaZHJgiQoiFURYZHPDnKYI/efnT8lD/
+ XBc80ZB1gb1/dP/JXVjJosht9zkbyLBIsTvnAUwrYdilKcfEeE2GZDFBiRPF6J7wK9Lt
+ PgayMOsk9kErrY64tVyT7dRCKc6NhiLWAQo7Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752507191; x=1753111991;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h/fmeP1tzieTyiGnItiKs+gtQY5DhxluZR+YMlORrAU=;
+ b=O/zgEGWq7MZ3ZPpWrY7rYkq8NRF/4QoFizWXiEQgwx74jco1XQtS0ZC/uh61aXfIKu
+ nN+reJUzGuGbybePEB6qAC0w65gce7m8Xf0CWyVhgJr0dJmHRUUGFplM1s3F4uGFsybn
+ rxGDxJhXM7sXvkcFfeO7A5dtwggpoKFUI9vMtc/SZRT5BGI5bCj9pp/YXfCLCpmvN02Q
+ N6D73359IaCXjMs/ON7eydqfyG2HmUfRQZ4CNrCP7xk6+94qmkduRvuRJ0lNu58zTYe1
+ 5uj/iwi9yeOnFlDYakQrCwclgLdrAaHs/P6S2I2V2rRfbRsR2kJB4GqqfIsERMkGDGKQ
+ wktw==
+X-Gm-Message-State: AOJu0YyziBdjhMsz6/H9uo8kn2x4QWlpQJgisgvEcFrLE+4d88NlnZjT
+ X/j0B4ay5z1tGXGtJiwt8YlegZfncHwu/wLgNtjlNVILuE+JeMTkZaajP2SiR93SbaQ=
+X-Gm-Gg: ASbGncvHAtPqFsJG5v02Rm05UlvRWvjLQHa6PTSYZ+4Fi82hTjcU54yzPTtFqQS9bEd
+ 2eRobMNngM8N/b6vnejmptcn45q1B6V+G1O1ZgaUzYsdXgl9+4FDKVPQyTQFZuOxPN9cnSuMrrA
+ DgxqGbELMyDps/c2Ww6QgPowR6PUfmtNT3oK0XRQVYLtsOarsrGa1CenFKIBtqErS2KP68fMLWO
+ aSk4ahNUEzdajSdLDzEXUQ4WKPeJIRpInM2JQRS3Os+i0yz0D3BWhD/xU6VKeqaOjVdJo72KAW9
+ Mj0DPji8TL4vDEt+Ahx3QJ1V0/RwFZhuBjow9oZf/NgNTLcYzLemFMW+SMX6qT+BrqFKWLyQ/au
+ P0bdYJdyggS/PanjZ32yB4m/AYRyKc2aeo61EWZp4IU/dVInWeBx1LUWO
+X-Google-Smtp-Source: AGHT+IGnJ15khU+F9AE5O0p/b/7UbhOdQty1wk7/kKkSVba5YF4l61B63efpoaev9IJt/VsyXgvATg==
+X-Received: by 2002:a05:6871:ca53:b0:2ff:894d:421f with SMTP id
+ 586e51a60fabf-2ff894d99abmr898949fac.15.1752507191005; 
+ Mon, 14 Jul 2025 08:33:11 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2ff8bc75ac3sm67918fac.20.2025.07.14.08.33.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Jul 2025 08:33:10 -0700 (PDT)
+Date: Mon, 14 Jul 2025 09:33:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Holger Brunck <holger.brunck@hitachienergy.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
+Subject: Re: [PATCH 2/6] km: Kconfig: set KM_RESERVED_PRAM to zero for all
+ designs
+Message-ID: <20250714153308.GH13084@bill-the-cat>
+References: <20250714132221.2471558-1-holger.brunck@hitachienergy.com>
+ <20250714132221.2471558-2-holger.brunck@hitachienergy.com>
+ <20250714145212.GF13084@bill-the-cat>
+ <AM9PR06MB7843D024FB26194DC5AE943CF754A@AM9PR06MB7843.eurprd06.prod.outlook.com>
+ <20250714145821.GG13084@bill-the-cat>
+ <AM9PR06MB78434DBE25572F3CCF32A25DF754A@AM9PR06MB7843.eurprd06.prod.outlook.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KW5J607uqVDwhGDK"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250714142920.GE13084@bill-the-cat>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <AM9PR06MB78434DBE25572F3CCF32A25DF754A@AM9PR06MB7843.eurprd06.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,91 +102,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On July 14, 2025 thus sayeth Tom Rini:
-> On Mon, Jul 14, 2025 at 08:56:57AM -0500, Bryan Brattlof wrote:
-> > On July 14, 2025 thus sayeth Yannic Moog:
-> > > Am Montag, dem 14.07.2025 um 07:02 -0500 schrieb Bryan Brattlof:
-> > > > On July 14, 2025 thus sayeth Yannic Moog:
-> > > > > To make it work with python 3.5 and 3.6, need type hints from the
-> > > > > typing module.
-> > > > > 
-> > > > > Reported-by: Tim Harvey <tharvey@gateworks.com>
-> > > > > Fixes: 21bc3433a43d ("binman: rework dropping absent entries from packaged
-> > > > > image")
-> > > > > Signed-off-by: Yannic Moog <y.moog@phytec.de>
+
+--KW5J607uqVDwhGDK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jul 14, 2025 at 03:27:32PM +0000, Holger Brunck wrote:
+> > On Mon, Jul 14, 2025 at 02:57:41PM +0000, Holger Brunck wrote:
+> > > > On Mon, Jul 14, 2025 at 03:22:17PM +0200, Holger Brunck wrote:
+> > > >
+> > > > > This area was used for special purposes on kirkwood. On the
+> > > > > current designs we don't need this anymore.
+> > > > >
+> > > > > Signed-off-by: Holger Brunck <holger.brunck@hitachienergy.com>
 > > > > > ---
-> > > > > Changes in v2:
-> > > > > - drop newline changes
-> > > > > - Link to v1:
-> > > > > https://lore.kernel.org/r/20250711-binman-typing-fix-v1-1-66ab075015ac@phytec.de
-> > > > > ---
-> > > > >  tools/binman/etype/cbfs.py    | 3 ++-
-> > > > >  tools/binman/etype/mkimage.py | 3 ++-
-> > > > >  tools/binman/etype/section.py | 3 ++-
-> > > > >  3 files changed, 6 insertions(+), 3 deletions(-)
-> > > > > 
-> > > > > diff --git a/tools/binman/etype/cbfs.py b/tools/binman/etype/cbfs.py
-> > > > > index
-> > > > > 5879f377231bf94697bea97c3cfc3a2515665b8f..c5e77f3a0df22ff768aa7254e4dd9ecbe6
-> > > > > f81684 100644
-> > > > > --- a/tools/binman/etype/cbfs.py
-> > > > > +++ b/tools/binman/etype/cbfs.py
-> > > > > @@ -6,6 +6,7 @@
-> > > > >  #
-> > > > >  
-> > > > >  from collections import OrderedDict
-> > > > > +from typing import Dict
-> > > > 
-> > > > It's been a while from my Python days so I'm still trying to understand 
-> > > > what's going on, but my understanding is the 'typing' module is 
-> > > > considered deprecated after Python 3.9 with PEP 589[0]
-> > > 
-> > > That is correct. Afaik it is supposed to be removed with 3.14. (Source: Fluent
-> > > Python 2nd Edition).
-> > > Python 3.6 (and 3.5) does not have access to __futures__.annotations, that is
-> > > why I asked if we strive for python >= 3.5 support or >= 3.7.
-> > > 
-> > > So it seems to me there are two paths:
-> > > 
-> > > - remove type annotations again.
-> > > - when this typing module gets removed, migrate and require python >= 3.7
-> > > 
-> > > What do you think is the best course of action?
-> > > 
-> > 
-> > Grepping around some more it looks like mbedtls is still using the 
-> > typing module so it's probably fine for now. Though I think 3.14 will 
-> > be available by October this year and just in time for this next 
-> > release :/
-> > 
-> > Going off Python's version status page[0] it looks like we're safe to 
-> > move the minimum requirement to 3.6 or 3.7. Python 3.5 isn't even 
-> > listed as end-of-life anymore.
-> > 
-> > Debian's oldstable (bullseye) seems to be using 3.9[1]
-> > Ubuntu's 22.04 (Jammy) seems to use 3.10[2]
-> > Yocto's Dunfell is using 3.8[3]
-> > 
-> > I seem remember Rocky 8 using 3.6 but I can't find a source for that.
-> > 
-> > It seems like we should look into bumping the minimum version but I 
-> > tend to refresh my system a little more often so I don't know what 
-> > pain this would cause others
-> > 
-> > [0] https://devguide.python.org/versions/
-> > [1] https://wiki.debian.org/Python
-> > [2] https://packages.ubuntu.com/search?keywords=python3
-> > [3] https://github.com/openembedded/openembedded-core/blob/c4fb7d1f0f157ffafd9f907f49ea74b93b2c1d40/meta/recipes-devtools/python/python3_3.8.18.bb#L67
-> 
-> We partly hit this because Ubuntu 20.04 is on, uh, I forget what Tim
-> said now. But I really like to be able to say we work on the oldest
-> still supported common LTS distributions. We may have to bump to 3.7 or
-> newer after v2025.10 so that we don't run in to too many problems with
-> bleeding edge distributions instead.
+> > > > >  board/keymile/Kconfig | 3 +--
+> > > > >  1 file changed, 1 insertion(+), 2 deletions(-)
+> > > > >
+> > > > > diff --git a/board/keymile/Kconfig b/board/keymile/Kconfig index
+> > > > > 41458813858..3a66b2915ac 100644
+> > > > > --- a/board/keymile/Kconfig
+> > > > > +++ b/board/keymile/Kconfig
+> > > > > @@ -31,8 +31,7 @@ config KM_PHRAM
+> > > > >
+> > > > >  config KM_RESERVED_PRAM
+> > > > >  	hex "Reserved RAM"
+> > > > > -	default 0x0 if MPC83xx
+> > > > > -	default 0x1000 if MPC85xx || ARCH_LS1021A
+> > > > > +	default 0x0
+> > > > >  	depends on !ARCH_SOCFPGA
+> > > > >  	help
+> > > > >  	  Reserved physical RAM area at the end of memory for special
+> > > > purposes.
+> > > >
+> > > > Can the whole thing be removed then? Thanks.
+> > > >
+> > >
+> > > Good point, I can drop it completely. Should I send a v2 for the whole
+> > > series then or only for this one?
+> >=20
+> > Assuming there's no conflicts, v2 of just this patch is fine.
+> >=20
+>=20
+> Ok done. Unfortunately, the patch shows up as a new patch.
+> I used the message id from patchwork to keep the relation with:
+> --in-reply-to=3D20250714132221.2471558-2-holger.brunck@hitachienergy.com
+> =20
+> Isn't that the right way to do it?
 
-Ah OK yeah that works for me. I wish Python would be a little better 
-with their versions :/
+That looks right yes, oh well. We'll see what b4 does when I apply it,
+it likely will do the right thing.
 
-Reviewed-by: Bryan Brattlof <bb@ti.com>
+--=20
+Tom
 
-~Bryan
+--KW5J607uqVDwhGDK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh1IzAACgkQFHw5/5Y0
+tyxxDAv/Xslfl5KIE9WBEQOmiA60+LxlBuxHMr4mhTn9efH4CIXR7jfy91xGbFrE
+zsfZlDfpEXQbn8qqhCTSTkmktyHvAYoyk9NJCZq1thlioCfotlbBD1617x80OfRv
+KuNbpfVHssdAcDNag/7gnoaDMTfpjpxYzTQpagC4nYUapXSGwr/Ls/mYVLv5RknT
+Vp71kfPi/ZZUXikX1kMapscRtKEBLY9Y6ii1LoNHFPiZLvbP0X1SdFcHqBR+ww+Z
+aG3cNUKZMy83uFJIjoqD1/FC+1o7cpnWel1mw4jf3qo1gLGsXTv2MX6XIwRH6TAx
+ik6vcB78THoKSgnEZXVMQ/a7YItDESuPmPZQJpnoPc21iPHBOvKRgwDHampSqSTH
+jubh2eKBX9zRdwMYXyE+sB6hsmpIc5PkMsa3KIAFr1aDtFtXczBoRgmbY/xQrHeu
+6Ly85P92g4NGHEQy8Ceo1k2F0Fqhk1DBaA1m8Jph+W7LM6LguKL6jDu9vuQEObwz
+tDZYsPHV
+=PmRk
+-----END PGP SIGNATURE-----
+
+--KW5J607uqVDwhGDK--
