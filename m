@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C7EC83F1B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 23:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2762AC83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 23:13:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C71A8830E4;
-	Tue, 15 Jul 2025 01:12:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20B00830F6;
+	Tue, 15 Jul 2025 01:12:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CQcsLT2d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fJDvrVsr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C22982E52; Tue, 15 Jul 2025 01:12:10 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 0CFCB82F8E; Tue, 15 Jul 2025 01:12:11 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDC8382B07
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 01:12:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5EB283092
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 01:12:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-2ebb72384dbso1485191fac.1
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:12:07 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-72c47631b4cso3298321a34.1
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:12:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1752534727; x=1753139527; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZFcu21kX1YkB+BfwFmQOhipQoOd1QZc1gemYqCX6ZP0=;
- b=CQcsLT2dVEEiN+iC4lNOyh/mJMJqbKFvvxb00txlhRz5vD9Io7N19xAiCAiwGgQD/F
- vz2MFX3o0CYir+YUubFLtcHd0Rz/36ispExpeSwtUllTDl1luXnzJh4RzvORMEiHn92t
- IMSUfQVAJXk1Br/clxHH5hemH6oGGd+fca71Q=
+ bh=rIPlekRFSgpVeG3o7cTsKZYfizkw2rJnUflVczLALGk=;
+ b=fJDvrVsrZ777Awv8xhU184J4LXthNVu4UIvdMaSPMJNrZLAa3FUFKxQcYtssnAoyrB
+ jTyfhZ0S86IU7KbCsP2PJ0zKBpnn6HuG2dfNy4mP+V3Cr3UvanlJDgqveOo754mzv7vJ
+ R6UMbRUvtREupiSQ60oqKCBjayJovSqBo/HyE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1752534727; x=1753139527;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZFcu21kX1YkB+BfwFmQOhipQoOd1QZc1gemYqCX6ZP0=;
- b=ORKYELL8Jr79ynnBHnZoWowtSFGTPUWZEjAGJKvheqU42ax3hS0gdRQ/yZ3fez3Zcw
- KhrP9rUAeeDXb33bnIEW1pdqHAdRO26NA43pikYPpZjG+OQOL0wGyG4ESmJnQmgeiEkE
- IUDB+e0rXcTLS7cL3XVMTZlU5Zh4RpPA9XFCRCe0HY7X+SX9N33s1KP+A6CKOvDfRBUt
- lgqMBUxuOL46X4jAJHqnp18SLzm6O1OHt00pO5nTO7WYtfQw9OsPPq3i4FiplHH+szYo
- glSojnUthvokv+/FJIquvOV1x/RLOoypZ0P8x67KLX9+iQUn//BI5sfAfXqlPajevbbD
- tiXg==
-X-Gm-Message-State: AOJu0YwLccqovTXJ38b2o271H+JIDMYGS7RES/NUwciRP4rW9vNWWRW0
- Xa2IdGuMYN/5xkkj5fL9jrHiTtcA4jYahnkE4/O++UljO+LM3GyyrtSLS9ZrakNHv415CD/EL+I
- ApRqCeXo=
-X-Gm-Gg: ASbGnctjX5XfG6T73Plb608GJla53DsulKfTHgOTduFpXDG3wD1APmweMvRnoAuaKD/
- rg607zTZjeqPNnNY7tDQuCiZ4yLhuF21hzyXaGhS5jowSwnqaEW3cqHjLHfB+xV3buY5LXLYbmx
- mbmGFbwybRW6uRk24TcG/egjxKgSnbxhToe1d/+5oePWPG+bCNAZX+oLYrU0BcGkwBkQGzgFI2o
- j43vimCvO1gi9ZnDvWvWmL4eTxCamFiKOcRMkojS7/LLfZ7tPI6auMRLsty5Jz/4+CjgBz2NPbU
- Xa1fpyAaHhgrsOG6ClLv2f/OPsLt8XgVjfBcacXhhWT2IvLS1etlkBD9PJ7R5l/F2kjwCCI0BWC
- 226icKFthp8HPdeNWUNYxQ3EiZ/9i5SkfOL6buhXdJ26zFG88RQDGEEjWCCDss2al0g==
-X-Google-Smtp-Source: AGHT+IEnMpw25x+5qIKRi+LkwQRrxMBPGAolQFwxzi/XI4qyRP2mL/KTG11EeLozXw3ab49TPD7Nsw==
-X-Received: by 2002:a05:6871:647:b0:29e:2ce2:94d with SMTP id
- 586e51a60fabf-2ff267f0eb1mr10641775fac.14.1752534726610; 
- Mon, 14 Jul 2025 16:12:06 -0700 (PDT)
+ bh=rIPlekRFSgpVeG3o7cTsKZYfizkw2rJnUflVczLALGk=;
+ b=WoSJJTgZkdexlFUURfQAjD3683xqY9U4Aay3DU87PTDdSJxTAolx/EfQE9qPMa8aFv
+ 5on419uypgZ/42EoifOQcZzTQiTu7y3L70OHgWy3P4AxFpGX+rEpfkldJXU8K/mljM80
+ D7H1bfwQt15uHtvCc/7hWgp0SyxsNx1Bdft6a2pZjUYTadi99yaDlexbSRkGp4itwiO9
+ 2vEwxT5Eem25w10YpU+hLDzQujWiz+E8guUEQe3DYhcmNj3n4bqyrd36sUm5ISoWiho1
+ tU54jt+do/a26uC6kWWHBSMdtbZbrfM1Ae9x4mk1D1GoFI8lwI8QPvkO4Jfb+B6Uxdsi
+ t2mQ==
+X-Gm-Message-State: AOJu0Yz9e2EmMgVMSpmU/WocoYVtDjfWpP+HKHhhm88pd0orayBq2XBb
+ /TKhhm0Ho0gjPTMZEvldujw113Ohu83BQIIDWsopaeAY+q1rCPoH1j94F7C/kYSR7jw=
+X-Gm-Gg: ASbGnctHBU9HSnSKZ6NKkqRsvHvL+YulAvZuH9GxMkeAxL2RuBvlGs+IexeHHYDh5xv
+ LgjkwzzS69eOo+zUvZJjVOtKcf9IO2dp2zbxopceQ24dfAuL+i7lFzVKnSi8g7PQMeb5gqrqmwB
+ AkUcSIhfhfR8Omz1Xu4jKFwG4cgXODoQ99VQyNhqqfDBWLsj7qlDLJfNjwmUVgbrY2OoDubo5Fg
+ XhOsC/w/cfAF0gsewfAJoOFjyKyW+Q/p9607Dq+/xNK6zgtiCtmpLuA1cOo1zsqb8ua/L8w987X
+ vjwnago78ebmV5L1GuIeliUDov6ro1YWzp1AHVwmOsQqZOKgzg3yr/eVqtRAIfNo6IyT8K6nMFy
+ QvXo4Gg7gEWX72LQsyOv/zBJn4pkyPS+AfO6jg7U/neE2hb0hlLAXs7k=
+X-Google-Smtp-Source: AGHT+IG8AOr6dq/sMNDCme9OjyF1ASOlgx0gWF2TdzErNaUtHpftSxphl1qLYyRXuZVhpGiHDvImSg==
+X-Received: by 2002:a05:6808:4706:b0:407:a501:19cd with SMTP id
+ 5614622812f47-41539d959d6mr10298142b6e.29.1752534727555; 
+ Mon, 14 Jul 2025 16:12:07 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf108af60sm1729410a34.21.2025.07.14.16.12.05
+ 46e09a7af769-73cf108af60sm1729410a34.21.2025.07.14.16.12.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 16:12:06 -0700 (PDT)
+ Mon, 14 Jul 2025 16:12:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250707-scsi_fix-v1-1-26a3b1af4b9f@linaro.org>
-References: <20250707-scsi_fix-v1-1-26a3b1af4b9f@linaro.org>
-Subject: Re: [PATCH] scsi: Make static functions consistent using lbaint_t
-Message-Id: <175253472589.280771.17075310945066249930.b4-ty@konsulko.com>
-Date: Mon, 14 Jul 2025 17:12:05 -0600
+To: u-boot@lists.denx.de, Lucas Dietrich <ld.adecy@gmail.com>
+Cc: mr.nuke.me@gmail.com, Lucas Dietrich <lucas.dietrich.git@proton.me>
+In-Reply-To: <20250707155550.310829-1-lucas.dietrich.git@proton.me>
+References: <20250707155550.310829-1-lucas.dietrich.git@proton.me>
+Subject: Re: [PATCH] ecdsa: fix segfault in mkimage when "-r" option is not set
+Message-Id: <175253472676.280771.7110453198844449481.b4-ty@konsulko.com>
+Date: Mon, 14 Jul 2025 17:12:06 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,21 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 07 Jul 2025 15:12:20 +0100, Andrew Goodbody wrote:
+On Mon, 07 Jul 2025 17:55:50 +0200, Lucas Dietrich wrote:
 
-> The static helper functions are inconsistent in their use of their third
-> parameter which is used to pass a block count. Keep consistency by
-> always using lbaint_t here. This will fix an issue where two left shifts
-> were overflowing the variable type in use.
+> Fix a segmentation fault in the ECDSA signing logic of `mkimage`
+> that occurs when the "-r" option is not specified.
 > 
-> This issue found by Smatch
+> This reproduces the logic in `lib/rsa/rsa-sign.c` by checking if
+> `info->require_keys` is non-null before passing it to
+> `fdt_setprop_string()`.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] scsi: Make static functions consistent using lbaint_t
-      commit: 41713b99671f6775c18d70d31ccd8b27e438abe1
+[1/1] ecdsa: fix segfault in mkimage when "-r" option is not set
+      commit: 6a269b7fdefe3edc60a6218f1402f17206644628
 -- 
 Tom
 
