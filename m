@@ -4,80 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D766AC83F1B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 14:06:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 921B0C83F1B
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 14:08:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47A4F82FAB;
-	Mon, 14 Jul 2025 16:06:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ECE3182FAB;
+	Mon, 14 Jul 2025 16:08:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=on-the-web.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DkaqGbF7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=smtpservice.net header.i=@smtpservice.net header.b="H/5sdFI1";
+	dkim=pass (2048-bit key; unprotected) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="HOyx/dXy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24CF883043; Mon, 14 Jul 2025 16:06:04 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D092983111; Mon, 14 Jul 2025 15:34:58 +0200 (CEST)
+Received: from a4i432.smtp2go.com (a4i432.smtp2go.com [158.120.81.176])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 312EB82F49
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:06:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-558fa0b2cc8so3411267e87.1
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 07:06:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752501961; x=1753106761; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZeVU3qp0my9Ba0iJ89nEBZmL2j3ZoL7vYX/sIN2Qo44=;
- b=DkaqGbF7t7dCS9QB3olrXJwMi5q6b5juEpB3CtYyANR4JzS4Ki3++YlAOctjMLEjQW
- 0uSpdqjRVYgwL/byf4x2Eda6IITfT3MZwc1gCb3c0gNz6CdcMn3SeI5D3RCUa1YXOGeV
- z8XfsVatTMQPlEnxjPthEqIvnljr7WYyp8hSEujMXChmUEt0P+dOOzndAPaFZbP1ApGN
- wsu+hu/UTMfXkGgXrjqy5tKLQhjN1dMtlVFD+1d1ELY2xjUcIkf2wdT4GraB1k0MOpK6
- X3TEUx8j/sRPbUz4+Y/Y1Tjp95CsFMM/7qJt4IP3uc4SbaiUId2+HE+O9DDJPQofU58n
- zamg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752501961; x=1753106761;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZeVU3qp0my9Ba0iJ89nEBZmL2j3ZoL7vYX/sIN2Qo44=;
- b=VgBJgTbE2gGHbKa3/T4eRypZy4oX23nfpNsSdpFaLJOk0OY3+bgsKm6dGQpTYTD35f
- zG80uoSV0fb+0OjC7S7TuooisWrsZi0KSHwpMwBbvdjTBx8pg8n+ZoDRlt9EzLqgWYHW
- lTsX3HgZLrru/fVA2Mdjdzwt5PJRHkTB3RlllwbEy1HxKpdMh9qRvINvRgskVZIMeQD6
- EGT21Ef1kCREai7trrx5+MMFhbkVZNAuyikfFXAorR1i95avztDycI0fmwWdAcz3GT/H
- 2USFr6CcIxGA169H5vs4ZAt2MLG83CbpsyH0quq8wVVEV4aoE6YpQPsmV7G8+p2WWGDQ
- Qq3A==
-X-Gm-Message-State: AOJu0YxtG+WUvalzinSlAe4GR+qJs7ZJESkokbe+2WCSPZCpzOMKKrL3
- eIY10uFNMP5Bd6oExtNctg8DvFuwIhPEn2i5rl/wU6/OGkjEZbkYBlqaZ8nvdDanFBiSVU0dJb4
- eW6gppzzsEgKOH7aLR9vZvq9adQBgwWU=
-X-Gm-Gg: ASbGncs5XEwmIR4a6BkqNQQKGmQbMtxX+P7WJucM5UQKkTFbRsWfki+5tZFAGYfycJj
- OUkDlrI9bfU7VA59gqCYMk/9DwxXUdFGyUtwm5etGFar9v3esRKSXpw0oY1CFNqSR2WPvouaFPw
- vXsh9P0TGxUuvyyhncfzM+w5M96RNfAzVeLfxnfckD5GwzDRlZnuascYvVBWbF5cX88yoMyZDKH
- jgFsR4eFYQeW0OU6k0mCPirFF5IYwpxaw0bsZI=
-X-Google-Smtp-Source: AGHT+IF41PzZ4J3g9JJY9MIaLNT2pJeLGKw62L/Elqjbk7W98INqhitzvIHlixzTv/OwJcEssso1cZHPWp1blXpNxi0=
-X-Received: by 2002:a05:6512:b8a:b0:553:5d00:be84 with SMTP id
- 2adb3069b0e04-55a045f06c8mr3652795e87.34.1752501960365; Mon, 14 Jul 2025
- 07:06:00 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BCB28309E
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 15:34:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=on-the-web.ch
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bounce.yabn06jh31lx3f1=avkertrrf195=o5oejtdcqvwx8c@em923567.on-the-web.ch
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smtpservice.net;
+ i=@smtpservice.net; q=dns/txt; s=a1-4; t=1752500081; h=feedback-id :
+ x-smtpcorp-track : date : message-id : to : subject : from : reply-to
+ : sender : list-unsubscribe : list-unsubscribe-post;
+ bh=F86vuBVpAiUKRTo8rEifEvezLB+VXOfgCaPwQx5Ka00=;
+ b=H/5sdFI1a8fHp+mz/Uil2cm2mxfZzyC9806cDFddfenLomeus3xnqaegk9caArMYrNFnV
+ SWggJgp9M38TZ1uRtj3CNGuvXk0qPlnD/7JUKPmXLpKASe4NXXPfPN1lzstBx/fELcqrgQh
+ 5GCufS+cJeltlzy9btR/glVXY/NFjjt2kvWDjZIwRtM6VxkjOKAVg+UYqTAlLIhf379vvRY
+ +FyvyCeQWwAoIR53WO1qMMwrBobq082d287Hr+a2NQsmMu81vlS1AkxkmtSqBcmlgAF7sy/
+ ACuilch3BkPXfFtAUe9H8W0J7Sw8i8YmNLthjyzKKzrlDtfZ6mCO1HDFpOrA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=on-the-web.ch;
+ i=@on-the-web.ch; q=dns/txt; s=s923567; t=1752500081; h=from : subject
+ : to : message-id : date;
+ bh=F86vuBVpAiUKRTo8rEifEvezLB+VXOfgCaPwQx5Ka00=;
+ b=HOyx/dXyBLDwrwlVdwM1WtBZDtBXAEFar5VWTt8nag+heg/boYXdPpBoWDPvroNwzBAJ9
+ TicShRxS6iRePzKY+YymqQOHAWV0P088vBVXsSlvM1AMzU9X329blfhpEtWdQQ+inY08P52
+ lOdZT4XoqtGosmJMf2yKP54Btl0oDQvK8cHeq5+tdQLgBiP+tz2f0zcET+CwEfg4U8eKJeT
+ 3U7cX0OLj+fr0QDQMvFR1CIwggEE52X+tzWtAvyvCBJzRPKPQ6procieJzZYYvtnhyKMiAI
+ UcthNDYuJ0m2vkkbxHE6THbUhXppyCc/zMmXxByzLEq/AdoGjE5N09AKGPBA==
+Received: from [10.114.245.143] (helo=ch-web-troubles-5500.dynv6.net)
+ by smtpcorp.com with esmtpsa
+ (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+ (Exim 4.98.1-S2G) (envelope-from <sputnik@on-the-web.ch>)
+ id 1ubJJu-FnQW0hPlLyG-oHCS; Mon, 14 Jul 2025 13:34:15 +0000
+From: Martin Herren <sputnik@on-the-web.ch>
+To: u-boot@lists.denx.de
+Cc: Martin Herren <sputnik@on-the-web.ch>, Andreas Schwab <schwab@suse.de>,
+ Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>, E Shattow <e@freeshell.de>,
+ Green Wan <green.wan@sifive.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Rick Chen <rick@andestech.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
+ Yao Zi <ziyao@disroot.org>, Yixun Lan <dlan@gentoo.org>,
+ Yuri Zaporozhets <yuriz@vodafonemail.de>
+Subject: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly used
+ value.
+Date: Mon, 14 Jul 2025 15:33:09 +0200
+Message-ID: <20250714133345.128853-1-sputnik@on-the-web.ch>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-References: <BN0PR08MB6951B4921AD52EDFA06E885D8349A@BN0PR08MB6951.namprd08.prod.outlook.com>
- <BN0PR08MB69511CACF429DE68924BCB348354A@BN0PR08MB6951.namprd08.prod.outlook.com>
-In-Reply-To: <BN0PR08MB69511CACF429DE68924BCB348354A@BN0PR08MB6951.namprd08.prod.outlook.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 14 Jul 2025 11:05:47 -0300
-X-Gm-Features: Ac12FXwnoh9cji3gf-El-8Rh3NCfPwytY3udeg80Cqb87IYaD6pPuc-oLS5kJBM
-Message-ID: <CAOMZO5BXVuLnCUF1CCLMm93pcqESv_+fps-8GFXPZvhcNGbugw@mail.gmail.com>
-Subject: Re: u-boot corruption from EFI CAAM RNG request
-To: "Anthony Pighin (Nokia)" <anthony.pighin@nokia.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "gaurav.jain@nxp.com" <gaurav.jain@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse: Please forward a copy of this message, including all headers,
+ to <abuse-report@smtp2go.com>
+Feedback-ID: 923567m:923567atSSOWT:923567sdFZQW6bQj
+X-smtpcorp-track: 9tUZo7NP9OrG.A1jKcB4a8pR3.1D-p4AVbght
+X-Mailman-Approved-At: Mon, 14 Jul 2025 16:08:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,18 +109,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anthony,
 
-On Mon, Jul 14, 2025 at 10:04=E2=80=AFAM Anthony Pighin (Nokia)
-<anthony.pighin@nokia.com> wrote:
->
-> > u-boot is being corrupted following a Linux EFI callback to get_rng(). =
-One of
-> > the many footprints is a corruption of the EFI protocols linked list.
+The most commonly used SYS_BOOTM_LEN for riscv is 0x4000000 which is
+used in 25 of the current defconfigs.
 
-Which SoC do you use?
+The previous default config value of 0x800000 was only used in 8
+defconfigs.
 
-> Here is a proposed fix. The caam_rng_probe() init might not even be neede=
-d, but I left it there just in case.
+This patch sets the default to this value.
 
-Please send a formal patch.
+Command used to get the stats of the used values on RISCV defconfigs:
+
+```
+grep -l "CONFIG_RISCV=y" configs/* | \
+ xargs -I {} sh -c "grep -H CONFIG_SYS_BOOTM_LEN {} || echo {}:DEFAULT" | \
+ cut -d ':' -f 2 | sort | uniq -c
+```
+
+Changes in v2:
+- Resubmit using another mail provider to prevent mangling and signature
+  attachement.
+
+Martin Herren (3):
+  riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
+  riscv: Set SYS_BOOTM_LEN default to 0x4000000
+  riscv: Remove default SYS_BOOTM_LEN from defconfig
+
+ boot/Kconfig                            | 2 +-
+ configs/ae350_rv32_defconfig            | 1 -
+ configs/ae350_rv32_falcon_defconfig     | 1 -
+ configs/ae350_rv32_falcon_xip_defconfig | 1 -
+ configs/ae350_rv32_spl_defconfig        | 1 -
+ configs/ae350_rv32_spl_xip_defconfig    | 1 -
+ configs/ae350_rv32_xip_defconfig        | 1 -
+ configs/ae350_rv64_defconfig            | 1 -
+ configs/ae350_rv64_falcon_defconfig     | 1 -
+ configs/ae350_rv64_falcon_xip_defconfig | 1 -
+ configs/ae350_rv64_spl_defconfig        | 1 -
+ configs/ae350_rv64_spl_xip_defconfig    | 1 -
+ configs/ae350_rv64_xip_defconfig        | 1 -
+ configs/ibex-ast2700_defconfig          | 1 -
+ configs/k230_canmv_defconfig            | 1 +
+ configs/microchip_mpfs_icicle_defconfig | 1 +
+ configs/milkv_duo_defconfig             | 1 -
+ configs/qemu-riscv32_defconfig          | 1 -
+ configs/qemu-riscv32_smode_defconfig    | 1 -
+ configs/qemu-riscv32_spl_defconfig      | 1 -
+ configs/qemu-riscv64_defconfig          | 1 -
+ configs/qemu-riscv64_smode_defconfig    | 1 -
+ configs/qemu-riscv64_spl_defconfig      | 1 -
+ configs/sifive_unleashed_defconfig      | 1 -
+ configs/sifive_unmatched_defconfig      | 1 -
+ configs/sipeed_licheerv_nano_defconfig  | 1 -
+ configs/sipeed_maix_bitm_defconfig      | 1 +
+ configs/sipeed_maix_smode_defconfig     | 1 +
+ configs/starfive_visionfive2_defconfig  | 1 -
+ configs/th1520_lpi4a_defconfig          | 1 -
+ configs/xilinx_mbv32_defconfig          | 1 +
+ configs/xilinx_mbv32_smode_defconfig    | 1 +
+ configs/xilinx_mbv64_defconfig          | 1 +
+ configs/xilinx_mbv64_smode_defconfig    | 1 +
+ 34 files changed, 9 insertions(+), 26 deletions(-)
+
