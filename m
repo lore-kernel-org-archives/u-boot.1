@@ -4,89 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD4CFC83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 20:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD7EC83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 20:34:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B54BB82E37;
-	Mon, 14 Jul 2025 22:33:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 10F7982E52;
+	Mon, 14 Jul 2025 22:34:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E/D10hMt";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="W3fVXd6O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F17882E52; Mon, 14 Jul 2025 22:33:46 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8EBBE8300B; Mon, 14 Jul 2025 22:34:24 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62E6E82CEA
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 22:33:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6C3C82CEA
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 22:34:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ae36e88a5daso947904066b.1
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 13:33:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752525224; x=1753130024; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YIr7nSApctQmtkcX+Oe2HFZaJeNvMgrtEdkDk2XeIpw=;
- b=E/D10hMtX11R3ng1/29Bt6v81JZK2SPdECeb2geiDzh1/tT/WfsadPFEdy5ZqGqsRe
- 0WFs81JXEc46fBLlkR44PlSYD1vAKQ6qutMGMM778S37OGgi+/o8zzmnEXwFKd+BOH13
- nrUmh887GxwG2kORzEqAiN/cuPuK4QjU0KAgc9AUjGZwIqlYjZ70ph1VEH8rFti4E7Kp
- abn3vVGjaC010RgbrNJJUt2Af4fSU2xS5URMM8SEFrjmjlScceco1uwGqrHK0Pg7zrZh
- vH8i9fyC8j2GxbCmkjelhcPTOyGL/WUT12c1wmtDSb+8vQq9y7Ln8nsyvZZoFqpJvbBg
- 3vvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752525224; x=1753130024;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YIr7nSApctQmtkcX+Oe2HFZaJeNvMgrtEdkDk2XeIpw=;
- b=ab/gOu9PStCDfpaABDhgHLjP9hpU2JR2Q6kmoUjfbWCiaN+48YDDXu7eZtkgY6LUYJ
- mmWaTSkpyJCbHgtVff88SETj8HpTMDTlM9fjcIwDl63yK9565bzAU6Ld6tqbkkf5aTwd
- 1ItvYWo4BqerGfvrfB5qZDVX0V2p4bn5v+Qy0u1PR2ilpAmTwP/9R0jzIkK66aTS07kL
- bVSCYfQ037+bwYSvYhDixW0r2TCBMlBgM4lcy5GXKiVRgcUP4aG5xLgsaD/iq57oKIKL
- NFAaPxgPSB0EFNSK+LhT+qSuoYwHj0msv7XmIkr7Vq8ZmsV17sEWQqMuPhEIJkdCel7p
- Y/ng==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVqMKH/78ddnolYYjfTpWyos60ac9hPyXm9GhMhRcuo4BFanp/HJKd+vLESFKeu8VDl7aI9+k0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2NXZGKHCtGU/OLIgUgoTrdAG5B9JcyqkAVow84ivf+L+bWIRm
- AJzxNpgBVgqOYuKBiwgtVZv4BKriT5qfOabcLkas6iKZQIjmsgWS9WwEX+R4Suqgw8w=
-X-Gm-Gg: ASbGnctn+RclkCkalzV6UcuaxarKnYKo8E4KRISCM4B9zZ3XkIQPRcL23uraxp0hIW+
- F1OIGbOgLalpZPAL+xhMXb1ZWn3y5/pNxOHFPWlqC/xY/qu9ek+IWp66mwRWAHrvzIDjHrQCE3D
- EuTGzE6b9acohOaXsXlITEbFHBItoA0RWzAnh+4EYbB7XZZUSUn+77lBUQS7KXXCC+ZkI27jHLi
- ZgrxePUsS6n3KrPLePgMKeolAdnK+I4lnsE0r1YBFccxOxCfYdMVBfF/Tq5J4VKQlOJe2b5f7CT
- Il1fsfh3jDGAMyQATvlLF2E24pNRQ/2AF0Os8dx8SyopE3bv+LRHu7SQOmpBV8WJL7SOTP3Ffte
- rZMAilspCAQH+O2rGtHBJOyyJac+a9Q==
-X-Google-Smtp-Source: AGHT+IFNQ8r/oymYBKqhOSm+RoSsI0FRZw62Fg71OGqgGYZWcyZrzy52mil8YLJpun/qRGDj8yzLOQ==
-X-Received: by 2002:a17:907:60cb:b0:ae0:685b:5e9f with SMTP id
- a640c23a62f3a-ae6fbe14a42mr1544648366b.3.1752525223831; 
- Mon, 14 Jul 2025 13:33:43 -0700 (PDT)
-Received: from [192.168.0.33] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae6e7eec2b1sm889287766b.68.2025.07.14.13.33.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Jul 2025 13:33:43 -0700 (PDT)
-Message-ID: <0c6dc75a-1252-4236-a322-61def9b17775@linaro.org>
-Date: Mon, 14 Jul 2025 23:33:42 +0300
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a257=Z4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1752525260;
+ bh=Ga8gDpwK3YrM3CwYlInLhiUJrfF2F0OCMXHK5uQYA5s=;
+ b=W3fVXd6OZvnkTlJEeLaiSBTLZYEHY0Ms3NSPKaNQ7xZC5iJ7yvT2Ir3tZ3bPMWmSsRcfScsTg
+ E3E6/s4t+JtiIWQqJOSpym5hDQzkS/N8zvultPzcUW2ocPThVDzjnSuWalDaxBOjimmZcC/ecBD
+ aT98y6FiTuEcoktWg8gTSUNT9vsG0rydjSRO4GlmtVfxmAtbAASYGuh5hKa7kHiNpzW8SlGS4sx
+ S+9AUjdITCfu41r/mutfXAiRfYMMbhZeDGJ005JXOyyHsDvV9e87ovSO98nZ1iA+nRTY+H6M9K8
+ WxviR6VDhnevPzGYqMQg2Qq8Hq/VkQ8y81XchrX9pQ+w==
+X-Forward-Email-ID: 687569c89931367d30112743
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.1.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <ziyao@disroot.org>,
+ Chukun Pan <amadeus@jmu.edu.cn>, Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de
+Subject: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
+Date: Mon, 14 Jul 2025 20:34:07 +0000
+Message-ID: <20250714203410.1782783-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: atmel_qspi: fix race condition in transfer
- completion check
-To: Ramin Moussavi <lordrasmus@gmail.com>, u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Alexander Dahl <ada@thorsis.com>
-References: <20250713160826.108821-1-lordrasmus@gmail.com>
-From: Eugen Hristev <eugen.hristev@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20250713160826.108821-1-lordrasmus@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,87 +71,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Ramin,
+eMMC erase and write support on RK3528 is somewhat unreliable, sometime
+e.g. mmc erase and write commands will fail with an error.
 
-Thank you for your patch.
+Use the delay line lock value for half card clock cycle, DLL_LOCK_VALUE,
+to set a manual xx_TAP_VALUE to fix the unreliable eMMC support.
 
-Can you please change the subject to have "spi: atmel_qspi: ..."
+This is only enabled for RK3528, remaining SoCs still use the automatic
+tap value, (DLL_LOCK_VALUE * 2) % 256, same value we configure manually
+for RK3528.
 
-On 7/13/25 19:08, Ramin Moussavi wrote:
-> In atmel_qspi_transfer(), the status register is polled with:
-> 
->   imr = QSPI_SR_INSTRE | QSPI_SR_CSR;
->   return readl_poll_timeout(aq->regs + QSPI_SR, sr,
->                             (sr & imr) == imr,
->                             ATMEL_QSPI_TIMEOUT);
-> 
-> However, this is racy: QSPI_SR_INSTRE can be set before QSPI_SR_CSR,
-> and will then be cleared by the read. If that happens, the condition
-> "(sr & imr) == imr" can never be true, and the function times out.
-> 
-> This race condition is avoided in at91bootstrap by accumulating the
-> status bits across reads until both bits have been observed:
-> 
->   /* Poll INSTruction End and Chip Select Rise flags. */
->   imr = (QSPI_SR_INSTRE | QSPI_SR_CSR);
->   sr = 0;
->   do {
->     udelay(1);
->     sr |= qspi_readl(qspi, QSPI_SR) & imr;
->   } while ((--timeout) && (sr != imr));
-> 
-> Update U-Boot's atmel_qspi_transfer() to use the same pattern,
-> ensuring that both flags are observed even if they are not set
-> simultaneously.
-> 
-> Signed-off-by: Ramin Seyed-Mousavi <lordrasmus@gmail.com>
-> ---
->  drivers/spi/atmel-quadspi.c | 17 +++++++++++++++--
->  1 file changed, 15 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/spi/atmel-quadspi.c b/drivers/spi/atmel-quadspi.c
-> index 8aa7a83aef4..fba32876f8f 100644
-> --- a/drivers/spi/atmel-quadspi.c
-> +++ b/drivers/spi/atmel-quadspi.c
-> @@ -616,6 +616,8 @@ static int atmel_qspi_transfer(struct atmel_qspi *aq,
->  			       const struct spi_mem_op *op, u32 offset)
->  {
->  	u32 sr, imr;
-> +	uint32_t val = 0;
-> +	unsigned long timeout;
->  
->  	/* Skip to the final steps if there is no data */
->  	if (op->data.nbytes) {
-> @@ -636,8 +638,19 @@ static int atmel_qspi_transfer(struct atmel_qspi *aq,
->  
->  	/* Poll INSTruction End and Chip Select Rise flags. */
->  	imr = QSPI_SR_INSTRE | QSPI_SR_CSR;
-> -	return readl_poll_timeout(aq->regs + QSPI_SR, sr, (sr & imr) == imr,
-> -				  ATMEL_QSPI_TIMEOUT);
-> +
-> +	timeout = timer_get_us() + ATMEL_QSPI_TIMEOUT;
-> +	while(1){
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+Changes in v2:
+- Rename flag and field value to function name, TAPVALUE_FROM_SW
+- Simplify and make code more understandable with use of FIELD_GET/PREP,
+  should be more clear that xx_TAP_VALUE is set to DLL_LOCK_VALUE * 2
+---
+ drivers/mmc/rockchip_sdhci.c | 27 ++++++++++++++++++++++-----
+ 1 file changed, 22 insertions(+), 5 deletions(-)
 
-There is a missing space, can you please run checkpatch tool and fix the
-warnings given ?
+diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+index 761e3619329c..cca917da68e7 100644
+--- a/drivers/mmc/rockchip_sdhci.c
++++ b/drivers/mmc/rockchip_sdhci.c
+@@ -9,6 +9,7 @@
+ #include <dm.h>
+ #include <dm/ofnode.h>
+ #include <dt-structs.h>
++#include <linux/bitfield.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+ #include <linux/libfdt.h>
+@@ -86,6 +87,9 @@
+ #define DLL_CMDOUT_SRC_CLK_NEG		BIT(28)
+ #define DLL_CMDOUT_EN_SRC_CLK_NEG	BIT(29)
+ #define DLL_CMDOUT_BOTH_CLK_EDGE	BIT(30)
++#define DLL_TAPVALUE_FROM_SW		BIT(25)
++#define DLL_TAP_VALUE_PREP(x)		FIELD_PREP(GENMASK(15, 8), (x))
++#define DLL_LOCK_VALUE_GET(x)		FIELD_GET(GENMASK(7, 0), (x))
+ 
+ #define DLL_LOCK_WO_TMOUT(x) \
+ 	((((x) & DWCMSHC_EMMC_DLL_LOCKED) == DWCMSHC_EMMC_DLL_LOCKED) && \
+@@ -93,6 +97,7 @@
+ #define ROCKCHIP_MAX_CLKS		3
+ 
+ #define FLAG_INVERTER_FLAG_IN_RXCLK	BIT(0)
++#define FLAG_TAPVALUE_FROM_SW		BIT(1)
+ 
+ struct rockchip_sdhc_plat {
+ 	struct mmc_config cfg;
+@@ -317,7 +322,7 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+ 	struct sdhci_data *data = (struct sdhci_data *)dev_get_driver_data(priv->dev);
+ 	struct mmc *mmc = host->mmc;
+ 	int val, ret;
+-	u32 extra, txclk_tapnum;
++	u32 extra, txclk_tapnum, dll_tap_value;
+ 
+ 	if (!enable) {
+ 		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
+@@ -347,7 +352,15 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+ 		if (ret)
+ 			return ret;
+ 
+-		extra = DWCMSHC_EMMC_DLL_DLYENA | DLL_RXCLK_ORI_GATE;
++		if (data->flags & FLAG_TAPVALUE_FROM_SW)
++			dll_tap_value = DLL_TAPVALUE_FROM_SW |
++					DLL_TAP_VALUE_PREP(DLL_LOCK_VALUE_GET(val) * 2);
++		else
++			dll_tap_value = 0;
++
++		extra = DWCMSHC_EMMC_DLL_DLYENA |
++			DLL_RXCLK_ORI_GATE |
++			dll_tap_value;
+ 		if (data->flags & FLAG_INVERTER_FLAG_IN_RXCLK)
+ 			extra |= DLL_RXCLK_NO_INVERTER;
+ 		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_RXCLK);
+@@ -361,19 +374,22 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+ 				DLL_CMDOUT_BOTH_CLK_EDGE |
+ 				DWCMSHC_EMMC_DLL_DLYENA |
+ 				data->hs400_cmdout_tapnum |
+-				DLL_CMDOUT_TAPNUM_FROM_SW;
++				DLL_CMDOUT_TAPNUM_FROM_SW |
++				dll_tap_value;
+ 			sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_CMDOUT);
+ 		}
+ 
+ 		extra = DWCMSHC_EMMC_DLL_DLYENA |
+ 			DLL_TXCLK_TAPNUM_FROM_SW |
+ 			DLL_TXCLK_NO_INVERTER |
+-			txclk_tapnum;
++			txclk_tapnum |
++			dll_tap_value;
+ 		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_TXCLK);
+ 
+ 		extra = DWCMSHC_EMMC_DLL_DLYENA |
+ 			data->hs400_strbin_tapnum |
+-			DLL_STRBIN_TAPNUM_FROM_SW;
++			DLL_STRBIN_TAPNUM_FROM_SW |
++			dll_tap_value;
+ 		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_STRBIN);
+ 	} else {
+ 		/*
+@@ -663,6 +679,7 @@ static const struct sdhci_data rk3528_data = {
+ 	.set_ios_post = rk3568_sdhci_set_ios_post,
+ 	.set_clock = rk3568_sdhci_set_clock,
+ 	.config_dll = rk3568_sdhci_config_dll,
++	.flags = FLAG_TAPVALUE_FROM_SW,
+ 	.hs200_txclk_tapnum = 0xc,
+ 	.hs400_txclk_tapnum = 0x6,
+ 	.hs400_cmdout_tapnum = 0x6,
+-- 
+2.49.0
 
-> +		val |= readl( aq->regs + QSPI_SR ) & imr;
-> +		if( ( val & imr ) == imr ){
-
-Remove unnecessary brackets please, also spacing is odd
-
-> +			return 0;
-> +		}
-> +
-> +		if ( time_after(timer_get_us(), timeout)) {
-Same here
-> +			return -ETIMEDOUT;
-> +		}
-> +	}
-> +
->  }
->  
->  static int atmel_qspi_sama7g5_set_cfg(struct atmel_qspi *aq,
-
-
-Eugen
