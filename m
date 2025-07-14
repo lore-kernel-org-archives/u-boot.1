@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F54C83F1B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 13:13:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18776C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 13:13:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A30908304A;
-	Mon, 14 Jul 2025 15:13:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05FFA83093;
+	Mon, 14 Jul 2025 15:13:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kkzMrNW/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pmPCDH1E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 328B982F49; Mon, 14 Jul 2025 15:13:20 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 62BCA83061; Mon, 14 Jul 2025 15:13:21 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45D9D83020
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 15:13:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 820308304A
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 15:13:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a503d9ef59so3235539f8f.3
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 06:13:18 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3a4f379662cso3328340f8f.0
+ for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 06:13:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752498798; x=1753103598; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1752498799; x=1753103599; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=57qTojJVzZCL9vrHxV3w3EvKFhfYQ29Vf+jS2q+ot1g=;
- b=kkzMrNW/3dk1OSb5bGtoj5dFfgs9Kz7Sk4+xjgA86Q0vls4OM+R2RTFDUSJjAC/oWf
- BY0tuCXaQ52UElMJeuiAP815OkI/pqREUjWod6xg1gh9zDuQA3YFI4FfTCYXdGjGlfuF
- D28ASo4IqAA/xKd8nFHOAC54GVRwje4kjMvxgJi+86DXzY4zhVYxSxyTGV6FNS0P3CXa
- 5He/Ko7/YkTtSYU4sfozIpjgFlHQu3OPga0TauItGiC/0OttfiNlu9w0me9ZtlPfR3aP
- tpqRg0j7HBcWqbXWprT5j2j81ZvjG2YcZQA+d5jZnqh5ZBSt5PeOTfj0Hw0nW2Tk7LiQ
- yyfg==
+ :reply-to; bh=7VzvDZ+10IVltyj53raqwBJ3cghBbjv9yDHlTuW3/6Q=;
+ b=pmPCDH1ErXjxXODYJ+MZE0y/kNbXuaGn1u2ktjo9RimjUONabDpwBi8fNO+535e20L
+ 5rG3ZFZqRB+eYeS0Kxpq8gnMmWXvNNW/IyyA+zugJRKA9NJS7dms7V4a978fWRxNMyKD
+ jLQnZ4NP7tRg/0wiPpCppqRV1cr708Goj+Jndvd/XF+BAT3asslVaCsuoTTLOmoR4qQP
+ abFoJkwIMxwgacOqa3CjzOcoSct9bTBa2MXs5Iw4yovSFZ62612s8GPqPWYbpxky3a89
+ N+q1uHyJncu7ENMD8ot68YohAvOIaG8TtAJ1td8UXdzb5IbEXRPwhnhkaPDBkbrcVrod
+ ywPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752498798; x=1753103598;
+ d=1e100.net; s=20230601; t=1752498799; x=1753103599;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=57qTojJVzZCL9vrHxV3w3EvKFhfYQ29Vf+jS2q+ot1g=;
- b=LMir/xUFqeKIBj9Ug0AayNTgkEf9WyOHwKf3kEO8lBEnZOHzkdwrtLetx9QT1CI6zC
- wpuvBpJuzthSFQteZ2Gi1EhV9PwtTEchbQwfrh4IhIfb5Rp6J8Z+8V4T5YoZYs/SuV1W
- Tk6jf/0g6iAGjsGXqdQ3kNmFq9SGdsVFmnbnbyvoWWnYhiDTZvr8ArfJhLmU9dAiQcXw
- rENry/Biz890LKF/GklunIuCDB+2YD42tcToqgeuRDY7maE9Cjeovokkzp9e8eJGUZP4
- hfyc/x36zhwbdsMkkN8chbNet5KxRPi2KpzV/bLRXPQec7sgnjGHFBhn0MAaeRYZIwrv
- ECxQ==
-X-Gm-Message-State: AOJu0Yxp57Em+aNofiDQtOBUIJCP7ekLuoBSrlc5+ZZnJjyQ3hDawW2o
- s0KjDHrcbB0uxb9+cQiGrfyX4ipzMv+YM3117mp6R1/FFwCirc2xSCZ1pZO6NfLC9DE=
-X-Gm-Gg: ASbGncsW9WMDZkxoXIGowOacB8PMUf/Xw+hMqe8SgfwmqGldlCmLCcch47KoyJrXZLf
- PiqHT5OOMKupxBeYul+UUgDy4eB1EbrlznYOoADZQas1E2WX+Fbi7rJJ9nhP2Kqj3jjIpJomKR0
- o1m8qfKroyP2Sx6IcY53Cil2eFfrP3uqMhik4NPHf085FI0B2snAWnm7hCRrk3neler0vMUaj4J
- t1n6/y6BPIYsSmMIOp+/W5cVhNNLbzpuEEtj7SotmE29E3P5KnQVyokYfjlsSNZJQ+0EpQoRlRx
- 0/BM3gDi2DERdVRTVH6oYmCtQ358ZdOj3Aziv62gcbO8qt+WM5gfuQWOlz01HvqHT8O1GuCG9Ne
- OFtbbkTkj7wCx3X0niBc2dcQiMs6TvaCj2iJmml7sQL3qOhPVWFvXaERkP7yGl6mgytC8yA==
-X-Google-Smtp-Source: AGHT+IEPt+lznf3+kIs3bItyZnSqIO2nbGbNWRAh33+52kSbWpqOhpqGu8FOtDWKHii8Az2uYf/nLA==
-X-Received: by 2002:a05:6000:1884:b0:3a4:ee3f:e9a6 with SMTP id
- ffacd0b85a97d-3b5f2e45e0fmr10958318f8f.54.1752498797654; 
- Mon, 14 Jul 2025 06:13:17 -0700 (PDT)
+ bh=7VzvDZ+10IVltyj53raqwBJ3cghBbjv9yDHlTuW3/6Q=;
+ b=i8IXMdnwheU20+oxAm0oOpRZnCywtiDNt5tR/X73ClgkTBWAbNLQLHhswexc3JPUHn
+ SP3Zs8NkPVcE2/ibsboEGXtExPL0oCyMTnykGGKM+1Zzeamt4r8nYekI4aQMrhnoo46K
+ lzn8JC5oNwyGR7q8hvVsnzrBobSkk6k5qzdT4FjLCSwL7N3VYaewUVitibEd7sHfak2Z
+ wBe6TKqOpGsLPqiIU529NNUfs1RDiRDD4zAzYLGCDg+WWCoHCBl7qSu8Dw9ojl6PHXjX
+ iSMuvc/iX+nLrUJfmNVmxYUCP3vQoVKgzOa0TzVT3RRKsSWPbdrVMDrJexxlrQHAxzhV
+ ThKA==
+X-Gm-Message-State: AOJu0YzGT+eyut3gPQcKACNJQIJ1I5eV9NOth7pgOxCtHoixWTz9/PHo
+ 7Cjjsqb5B2EqX2W/j/OsG+e4i5pw/VKM6unbz09qR39zAClsEKOwup8zobFClYVo7NE=
+X-Gm-Gg: ASbGncstXnFzvnkewWWKhcNamWhYgGK3MPp2SJqsFukyow0lqgV/zswnFkARf+YcUgy
+ 5xI2GxIDr6bku8UnV0La3jaPswDG4wU3DRVjRmAyGWwd2Wdd7gbL6OBYZFx1ruVbYvS73/N1Hv4
+ 5ScA+jqTQWRbBysBp0+//0CdXxX9w696sHc9xz+TAFssfd5bLngvxwsad/nRjpc2aY3LPmwasIb
+ wbhXKt4zvcxz2DsnGtBEe1Vi47j9NQPZa2ZY9dCd2GbOZh/6ZNZml0ul2XLFvOnjxNugTszUpvG
+ Qmdb4JITPE6rULQ5jhv79UrUgK24E8uREzCDbgUnGGPWpiJ7nK+o3zsUprG0S6kBk7urzLQO2aQ
+ ngE5O9qhJQeJ6bCHXWiS0LbUAX0xFN2laWg03yxNe1gDSsxqK/2A3QHJ2lfIGioMJA0eB+Bb5zE
+ xrGuzW
+X-Google-Smtp-Source: AGHT+IHBcfbeIkmV638PT82W2xwLRcCFFaFvOofc2+xTnosSgWMEDx7f+m1Jv+5RtRR1zOgIFf45Qw==
+X-Received: by 2002:a05:6000:290a:b0:3a4:f038:af74 with SMTP id
+ ffacd0b85a97d-3b5f2e3ad53mr10949248f8f.51.1752498798891; 
+ Mon, 14 Jul 2025 06:13:18 -0700 (PDT)
 Received: from toyger.localdomain (p549d4699.dip0.t-ipconnect.de.
  [84.157.70.153]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8dc9298sm12361010f8f.44.2025.07.14.06.13.16
+ ffacd0b85a97d-3b5e8dc9298sm12361010f8f.44.2025.07.14.06.13.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 06:13:17 -0700 (PDT)
+ Mon, 14 Jul 2025 06:13:18 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 14 Jul 2025 15:13:12 +0200
-Subject: [PATCH v5 1/8] configs: run savedefconfig on
- qcom_ipq5424_mmc_defconfig
+Date: Mon, 14 Jul 2025 15:13:13 +0200
+Subject: [PATCH v5 2/8] i2c: geni: fix error message wording in clk_disable
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250714-geni-load-fw-v5-1-5abbc0d29838@linaro.org>
+Message-Id: <20250714-geni-load-fw-v5-2-5abbc0d29838@linaro.org>
 References: <20250714-geni-load-fw-v5-0-5abbc0d29838@linaro.org>
 In-Reply-To: <20250714-geni-load-fw-v5-0-5abbc0d29838@linaro.org>
 To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
@@ -87,21 +87,21 @@ To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3455;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1083;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=unrwUiLZwHJQEfNEdUudbX4OCE66MoUqBOoLLezpEvY=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBodQJqmRm03btx4QkymCOV60TezVLs7Yf8IVDr9
- 6Ks0XOdF0OJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaHUCagAKCRAFgzErGV9k
- tg71D/9jYvj2h23lmEzFh+J1gc14MEXHNCwt8GYEfccMEEl+Ua9EHwSPMFAJ4v1Dd9mJ+DleEQp
- p2Uy9Nlw0oaVQuEFIgRB37/oFOV3UVgcnDy0czAPRoz/p2EU+boQGXQXc7u2CruoCKknz3lp+lE
- m1CnnKD6ZKG0IzlmwbbQGALAGoAE5qnOTx5YJ58MXL/TvsUcxaa6QP7HV4gemv4q5nE1RDcwp69
- p4tWgYZBWTE4Ce0Fh93LVnQYfNwIzKxeuvG9GgWE7SdzSlZ/7vAZ6kQuWWqva7bbZ7ecyjIf+sK
- 0W9wg59bPjiiqL6zaxQgIXXXXnV7Zm+t/0TDl26t0mMj9hwd4g48OAMIdeD6PvRxIm/NeQ8qKEX
- oTuvkGgtJXGMCuoJRWHfKYvE+2OBuspYa6e1YJdqq+CNhRahyaXsUfEuGmCEiIbA4YJu0+A+nlr
- QlO7nFEP0PVV8sY9EMKtaTAUC2++fszX5SgIi15I02brssUEcBNrfmpiJTV18P5AgeSoW9ML+7R
- ePtd6zAiiRYmkouZWYdPtnG2/1X4ycGUSQCPpZWbuCDtptg98PlHMptrkYQMwyHMX5mRCZjwZp1
- whIVbqbX53Mr70vSnBcEXoelEPkRLgD6Vzqs5neR2co7QtcZwoAae2YVrngrQD6pni6ytEJ6EeU
- S4pa7ih+Fqpg8NQ==
+ bh=yl5eH8N9a3bWD1YMIpzhqdHUST/oYjNpQQ03AWxv7EE=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBodQJqJ673BtCjLOijwpERSxHKSTBlUi/88q82O
+ K6Tqm7CXcmJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaHUCagAKCRAFgzErGV9k
+ tguGD/wMd78tBkCAPJmzDYCHayskBwCFkQ4M/Vy+dK3bE4QAiho2exgwb7I9hkYAdyXBtGArFdm
+ 2aSRuVHFaw6UHPyMLIHHPV1aZMzOdesndwGKbItbUZXFHsu7UxmKI95jYkdYAIRRg7oEtISFT1B
+ SHRNIsLFM1VK7vY8bQ/EULhMH3kFrJ2RhudaiLLAo4nkH2BR1zHT0mZERjf/QOPj9E6w6MA/Kef
+ xuMpW/pCRe0KU56jFtB6Rklkd6Hj6PsSmFFbvhXFT8OzyWvFTnk+ZcFWZIuRzo0hU3HRFZzUtPz
+ dXOP9/Wh8q2PSbAdz6aiGTg5TwX3ceYQb/4lIJvWsOdbYuNNXOq7Facc5zffeLSB8paSJL+fEAh
+ rhbJQToO8Nym+MVKnJNwu3ctqC2j4NWne5A6DX6L2kKPuHq50HYreFcArhkeQmhf4KcB1ctow/L
+ UV5LHyxmxpDZNAL3cUe/5GzlUODw5VKgheF8HgDXcfl06iwyqBlMZygH3PPC49lkkzKUNlh778h
+ ExU0oygW/0luoZNlHLSs56+1x46GxqO/5niruaVOJF190vid6MAwmWJx9KIus74y97xXCv3HdjG
+ +IOfGR1M3PA1z6MuiVZdxOmYGY4SohymvQn7FRHlNXeUk9EOOacPsRTaFaA4QizB2fpKHj5op0e
+ N1hvQmuDzO3xczw==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -120,124 +120,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Regenerate this defconfig since it seems to have been hand-made
-originally. Some options like SCSI were enabled in the defconfig but not
-in the final config, it seems like disabling SCSI is the correct thing
-here, so no functional changes.
+Correct the error messages so they accurately describe that we failed to
+disable the clocks, not to enable them.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- configs/qcom_ipq5424_mmc_defconfig | 67 ++++++++++++--------------------------
- 1 file changed, 21 insertions(+), 46 deletions(-)
+ drivers/i2c/geni_i2c.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/configs/qcom_ipq5424_mmc_defconfig b/configs/qcom_ipq5424_mmc_defconfig
-index 0dd46680b0fc80b10a6975aaddf36e97d8b9be84..81c3865193d73e3f1fc85bd342e3f1d25534c81d 100644
---- a/configs/qcom_ipq5424_mmc_defconfig
-+++ b/configs/qcom_ipq5424_mmc_defconfig
-@@ -2,82 +2,57 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_POSITION_INDEPENDENT=y
- CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
- CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x8a380000
- CONFIG_NR_DRAM_BANKS=24
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
- CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq5424-rdp466"
- CONFIG_SYS_LOAD_ADDR=0x50000000
-+CONFIG_DEBUG_UART_BASE=0x1a84000
-+CONFIG_DEBUG_UART_CLOCK=14745600
-+CONFIG_DEBUG_UART=y
-+CONFIG_REMAKE_ELF=y
-+# CONFIG_EFI_LOADER is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
--# CONFIG_EFI_LOADER is not set
--# CONFIG_EFI_BINARY_EXEC is not set
--# CONFIG_EFI_VARIABLE_FILE_STORE is not set
--# CONFIG_PXE_UTILS is not set
- # CONFIG_BOOTSTD is not set
--# CONFIG_BOOTMETH_VBE is not set
--CONFIG_BOOTDELAY=2
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_USE_PREBOOT=y
--CONFIG_LOG_MAX_LEVEL=9
--CONFIG_LOG_DEFAULT_LEVEL=4
-+CONFIG_SYS_PBSIZE=1024
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
- CONFIG_CMD_MMC=y
--CONFIG_CMD_USB=y
- CONFIG_CMD_PART=y
-+CONFIG_EFI_PARTITION=y
- CONFIG_OF_LIVE=y
-+CONFIG_ENV_IS_IN_MMC=y
- CONFIG_USE_DEFAULT_ENV_FILE=y
- CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
- CONFIG_CLK=y
- CONFIG_CLK_QCOM_IPQ5424=y
--CONFIG_DFU_MMC=y
--CONFIG_DFU_SCSI=y
--CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
- CONFIG_MSM_GPIO=y
--CONFIG_PINCTRL=y
--CONFIG_PINCONF=y
--CONFIG_PINCTRL_QCOM_IPQ5424=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+CONFIG_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
--CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_MTD=y
- CONFIG_DM_MDIO=y
- CONFIG_DM_ETH_PHY=y
- CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_QCOM=y
- CONFIG_RGMII=y
- CONFIG_PHY=y
- CONFIG_PHY_QCOM_QMP_UFS=y
- CONFIG_PHY_QCOM_QUSB2=y
--CONFIG_SCSI=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_IPQ5424=y
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
- CONFIG_SOC_QCOM=y
--CONFIG_DEBUG_UART=y
--CONFIG_DEBUG_UART_ANNOUNCE=y
--CONFIG_DEBUG_UART_BASE=0x1a84000
--CONFIG_DEBUG_UART_MSM_GENI=y
--CONFIG_DEBUG_UART_CLOCK=14745600
--CONFIG_TEXT_BASE=0x8a380000
--CONFIG_REMAKE_ELF=y
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_BOOTSTD_FULL=y
--CONFIG_SYS_CBSIZE=1024
--CONFIG_SYS_PBSIZE=1024
--CONFIG_OF_LIVE=y
--CONFIG_MSM_SERIAL=y
--CONFIG_DM_EVENT=y
--CONFIG_ENV_IS_IN_MMC=y
--CONFIG_ENV_SIZE=0x40000
--CONFIG_ENV_OFFSET=0
--CONFIG_PARTITIONS=y
--CONFIG_PARTITION_UUIDS=y
--CONFIG_MTD=y
--CONFIG_MTD_PARTS=y
--CONFIG_HUSH_PARSER=y
--CONFIG_PARTITIONS=y
--CONFIG_EFI_PARTITION=y
--# CONFIG_I2C is not set
--# CONFIG_INPUT is not set
--# CONFIG_SCSI is not set
--# CONFIG_SPMI is not set
+diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
+index eabf5c76c21c2bc12c80dbb9fb498a0080928248..4eb41ba852f7790ca646c8ba38f29fdb727fa804 100644
+--- a/drivers/i2c/geni_i2c.c
++++ b/drivers/i2c/geni_i2c.c
+@@ -330,17 +330,15 @@ static int geni_i2c_disable_clocks(struct udevice *dev, struct geni_i2c_priv *ge
+ 
+ 	if (geni->is_master_hub) {
+ 		ret = clk_disable(&geni->core);
+ 		if (ret) {
+-			dev_err(dev, "clk_enable core failed %d\n", ret);
+-			return ret;
++			dev_err(dev, "clk_disable core failed %d\n", ret);
+ 		}
+ 	}
+ 
+ 	ret = clk_disable(&geni->se);
+ 	if (ret) {
+-		dev_err(dev, "clk_enable se failed %d\n", ret);
+-		return ret;
++		dev_err(dev, "clk_disable se failed %d\n", ret);
+ 	}
+ 
+ 	return 0;
+ }
 
 -- 
 2.50.0
