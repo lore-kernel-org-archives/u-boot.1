@@ -4,163 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19898C83F22
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 11:50:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A29C83F22
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 12:06:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7347982BF6;
-	Tue, 15 Jul 2025 13:50:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EE5882BF6;
+	Tue, 15 Jul 2025 14:06:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Hu3ULeL3";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="OtqR0kvX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F24F982F6F; Tue, 15 Jul 2025 13:50:20 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 417D282E37; Tue, 15 Jul 2025 14:06:31 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE5668277D
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 13:50:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2903D8277D
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 14:06:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ixin+h/1UC9RSFOw5/WAWzNqnc2oAKIaRv8IhzWLx3uAk+DNQFgkdaf9DICrwM9uE+eV+GA2Lnh8vNisfdIObrga0nNbcvjAfkRk8NLQ/4wXOIfZccsHjpsds3XiBJor67Sbz1qaljTi0SfqC3SakQScQ/twFIJI+/YOc+ASxs3DxY3mYyq7hJaiYZvwJe48cEJGBqPStXh2KRRO+DHnoynEr93FF6Qeu6PqYFrFkGEY7esW+UIbSLJdhk7uaVIK6r90+KGq7fgCp9dcHaofrliVdYP4bX/0wnE72bbVxz1bt5chxrEGuz/bOq9btTADdTpyC6h7sP24Hg3x7gQ8pA==
+ b=NE1UycEP+YWc/wm0hWSctjjr2yoYllxZj4aI1icGDDTdijv/YcR5HrgJYsbrCmn8njT9zwWApfiD6FjqngDMUd/bD99+yBZcy7uenRrb0kcLsfscWViuMGytmiw3eQvBh1wNc2tw/8sKYiK2oHERQ16d2ZCfAyNov6L/uwYqjr3z1VSznY7ICLnpGQfai3EnjBg4b02hwpsy/W3sXVtgYMcQRFjCrkRM3EKiLVONs7VdmQyNlG2IX7YW8U200W3lUNSDXNbDxxfSl1cf4zWi/f+ELjuy0FXWmkI1p465PK247ovUjC2XsQF4SdCnK4qeyy6yC7xBoMskBeAEzgda0A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aA9+b9P8S4v5q4jbK6+e8Z+HBCbEhS8DfH4jnqAFIU0=;
- b=Uao0Ss7+Y1Dt6QsTuv4SPbVUTcFNY1kwjiHkEEYhFJGroGnYumWLfvUoQsmyKJpbQ56SbECBIkXYiBLJVgDSgXJAcvMeiDqKrLSTJjN4BoUX31X3SOswq6nlLb9kBRHPzzPHmyITRCCE53CrTr7bgYxYJCP7BpKCXaCmfp2P6MVQg1zlNNM+Tu4epnsnhAikBEn9wGl+BZ9TcqeLZQAXEDGInG3TaI99vrRfdOXTq8nCC52D4THYk+ohJ2muV1H3ZMT888PEorOZvXcfAig5RGNc/D2JhsiaTgPSX2D7Od1P0qHPyuwa5NYSpZmttDdsMH6N8tch4RtMLEswpHHnVQ==
+ bh=qwr8pLQOF3maIW89qDZMZ7nlNs759lV6SqevXa43mq8=;
+ b=FjxmVmoXldSo5beudiAS7e+glM1RjoZzUmcFyyF1CZYUFJr0u1ofrCe4y2BAsoR2tZ4sCz+WgyV6VgqwxweYh/E3oqp39oc1/fa2XAOu0YofR1twSqMiZ6edDrk+oHc3zOS91N2JS5r+1K4PeM8dlVLRA34iudpR2nRONSTH6lCmFTj7IFKtWl4WSWZAMIkUD6018U1ZptUOkbImUlP8bdAIBhlbepkh7jIG5NFsF9s6I9ZY979aTzCchgTzUUVpNViNRdQXE8OrEm/YEHJcWxtkbWDXc54nk4zH/FICU+GKskdaPQSyK1UskwaioNs/MFWt/APRi0dURyrsPCkKuQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aA9+b9P8S4v5q4jbK6+e8Z+HBCbEhS8DfH4jnqAFIU0=;
- b=Hu3ULeL3VZLsA2EH5VbJy0Pc08uJjfD8dL/t1zA1+UhcxTCT4J4jorZoc/8qaZqo7uwXw1mHaOkgkI5vL+AY/mOr49aHbtbegbhFRbWxH2jNXgqfsWovRHReUQXQwLYTqNJGZMkje5/3CMpofFKAnMxyxwL94rmOUMQGipGdcDI=
+ bh=qwr8pLQOF3maIW89qDZMZ7nlNs759lV6SqevXa43mq8=;
+ b=OtqR0kvX8LA7w8/KtLNNUNGpPqskrGL2KWuAUtifcPiblNl+7pWpZZJc0SJ7nvRjt0rRmZczpTpRQ9j8WrqUYy/lQpEqOuJkeAb3HuxYFp/5M6TXLYI1c1vm0tn/LwnGY9aiPximNZK1NjJfRV1nsYJrAYDj32H2zMvwGklecJ8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PA4PR04MB7775.eurprd04.prod.outlook.com (2603:10a6:102:c3::15)
- with Microsoft SMTP Server (version=TLS1_2,
+ by DBBPR04MB7755.eurprd04.prod.outlook.com (2603:10a6:10:1e7::6) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.32; Tue, 15 Jul
- 2025 11:50:16 +0000
+ 2025 12:06:23 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.8922.028; Tue, 15 Jul 2025
- 11:50:16 +0000
-Message-ID: <400621fa-0cc4-459e-82a5-4d1b0fe8982d@cherry.de>
-Date: Tue, 15 Jul 2025 13:50:15 +0200
+ 12:06:23 +0000
+Message-ID: <a836de8e-5de1-4cdd-8dcc-643ffa0463b1@cherry.de>
+Date: Tue, 15 Jul 2025 14:06:22 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/3] arm: k3-am65-iot2050: Fix invalid default
- configuration reference
-To: Aristo Chen <jj251510319013@gmail.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, ravi@prevas.dk, sjg@chromium.org,
- jan.kiszka@siemens.com, baocheng.su@siemens.com,
- Aristo Chen <aristo.chen@canonical.com>
-References: <20250715025307.2013-1-aristo.chen@canonical.com>
- <20250715025307.2013-3-aristo.chen@canonical.com>
+Subject: Re: [PATCH v2 2/2] uclass: Cleanup uclass_find_next_device
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Alexander Graf <agraf@csgraf.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de
+References: <20250714-blk-uclass-v2-0-1bb1d2eee896@linaro.org>
+ <20250714-blk-uclass-v2-2-1bb1d2eee896@linaro.org>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250715025307.2013-3-aristo.chen@canonical.com>
+In-Reply-To: <20250714-blk-uclass-v2-2-1bb1d2eee896@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR04CA0077.eurprd04.prod.outlook.com
- (2603:10a6:802:2::48) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: VI1PR07CA0257.eurprd07.prod.outlook.com
+ (2603:10a6:803:b4::24) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA4PR04MB7775:EE_
-X-MS-Office365-Filtering-Correlation-Id: ad8df565-aced-4871-a214-08ddc395c3f3
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBBPR04MB7755:EE_
+X-MS-Office365-Filtering-Correlation-Id: def13961-49f6-4dc1-8fd1-08ddc398046f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QkZjTWc2c2ZSb1RHaytLbXNnck93bDdtMDYwa3Fpc3NBWGU2VENVVzY3cVJw?=
- =?utf-8?B?Uzc1QThhVUJvbWpGd01XOUorRUpGYkEwMlNLTVZCNzlZU2FqbUcrREpPZ3Jq?=
- =?utf-8?B?ZGxPQk9NMm1ob1JDR0tiZzdQeGw3SmRWYjV3RjJZczBHcEllV2xXck5uSW1l?=
- =?utf-8?B?TEQwNDd3SHJSSGFFbHRrRGc5ZVB2WG5peFNVVHliTGxWd3BTdUY1ajh5RWxZ?=
- =?utf-8?B?WDY3eDFpSEE0cjdlR0UxTjdjRWxsMHlUa3R1N096VHlvUWhpUlBhejlITVov?=
- =?utf-8?B?ZGlVdk55Z1Z3M3ZEdUNxSHFCNEZwSk1hQ0JBNHZUTlFENzVndXM2RzZmNTVi?=
- =?utf-8?B?akVxd0o4Y0NQeEgvNXdQdGtVWTJwMGh0aThPSklJOVRiY2pDQXhGNkxpWHNI?=
- =?utf-8?B?RExvcUhmQmVwdzcvclJmRnRXNEt4aDM0M2FEbEpGTXVFM3dyZWp4VTVCV1ZH?=
- =?utf-8?B?dWN1Wm9KOEpGSzhNcXo2RjZmTHMxc3M5MU5ReFRaMWtGMXJjRko4VllBZUpu?=
- =?utf-8?B?amM2UW5kNjVVNmJXbThjekNIYmVkMDkxamNIQ3YyZDA5Sk5iK0lTN0l1RUdF?=
- =?utf-8?B?VW0wNzA1WjJyZ29HekF5ZEpxNjRMeURJMGxtTEwwL1ArME5GMmFhZ2lvL3dB?=
- =?utf-8?B?NUt4M2MyUk03b1JwRmVhcnQrcUhibnRVT3drY2JZb1ZuS1JFbmZTc1RENS9W?=
- =?utf-8?B?dG50czAwdXNvSDdXNWx3bnZaT1grQnV6dWtFYmJaZVQ4WXM3ZGhCT1paYk10?=
- =?utf-8?B?eEdFQi9aaFI3endTMXVDc3VDMkRJTzBFK2l2NGh4VGt4SndSU1dKSC85ZlVE?=
- =?utf-8?B?RVFIR0FzSG9acVFoeGo2a2lUN2cvV3NrcU1wTE1QaGdmUmRBSGFJTEZKMTUv?=
- =?utf-8?B?YXpmRXNwbXB4dTNDYzh1V1lyUXdrdFVtODhEZk5WS2lDamdkOXJCZTViM29q?=
- =?utf-8?B?eEpjbkZMTFREQUwrN1BWempUMXZqdWhsNWxWWDdZK3ZsOU41RjlUcnZ5OHhI?=
- =?utf-8?B?TFFUR0phcVU3Qm9GYTIybXFobnQraTRUaDBSK21UOEpsQnp2MExjTzVaOS9y?=
- =?utf-8?B?VnZLYVpKY2k4ZGg1ZEhFZjRHUy91R2hzeFRZL0dlaklvcTJiS0g4bllCRGRU?=
- =?utf-8?B?dDBSUnBLSHR3alFMVy9mSEZ5VFNpeFBham9Yd2Z5ZFJWNHl3dTd5c0ZWTzhT?=
- =?utf-8?B?MTNVSzIvQlBDRXd3aXFvbk5aUHNKWVFSQncyQ3FBcDNUSHhWeVdrR0JpOWdr?=
- =?utf-8?B?ZUgxOEpWZHI2VnltVXl4cUdiT2hTMitneCtSRnBVdkx5dHN0MFE4MUVCTklu?=
- =?utf-8?B?OHlOSVoyUkFoYkhpZ0Z6OFEvTzRuNis3RDM5dGMwTHN5NEpoMlQwRXI2VWRE?=
- =?utf-8?B?dlZGeUJFNFBzNk1nNHpxeTFVR0N6OEhkcW8xckZia1l6SitRd0U5SmlUVnVs?=
- =?utf-8?B?TzJBTzc0QXdMMnhpM0dyMWxxT1BNUUNVMzNOdyszVEI2aDBIcENTbVBsdFdO?=
- =?utf-8?B?LzhWQjFaSFY3UG9SUTVoL2JzQi81aE5MTUV4T0w1THFiTjNvc1JDQ2M3M0dJ?=
- =?utf-8?B?NEV2Z2hJeE5nUFE4SmMwbUNpcFlhUHpUZlN1a0RvRkFaZUFqL2kwbTFyK2RL?=
- =?utf-8?B?amlUMHR2QnZLQUxjRjh5N0J5YTlrOVBHcmlUY3hoSGorWk9LRGlYK1RvTHNL?=
- =?utf-8?B?VExWRnlvb2dpMHNLV2lSdlg4QmdKalhkeDI2NjBUeGpZV3NsVTFFYlBtbDAx?=
- =?utf-8?B?aWRUbHZEcWRvOGtwVE1ISUZsSE5JckhLYmVORjNIcU1xVVNDS1BBWEJFWWcx?=
- =?utf-8?B?ZDNXc3NsNlR3SDQ1OUJ6Q0pISGRmNHFrYlAwektDRDBOTXR4VHNTYS9XNmpO?=
- =?utf-8?B?ZDM3cHJwSTlpWkpnZCt0bXdUa0o1NFZoN3YyZHlCQ3NRd0E9PQ==?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OStraHI4SHhmbUw1L0E4SHp0Y3d0cHdrL2NkYWdDV0lLWjVxZWFwMGpGSitp?=
+ =?utf-8?B?QVpxY202QXdKcE5SdVF4UUpWdk40N0FlYjdqdXk3Ni9IamJIdkptVzZNcExi?=
+ =?utf-8?B?V0RFcFJsamRWNFY3RmtRL0hobjJsNmwweGNvYzZnRjFidkFWM3lqMjlZUS92?=
+ =?utf-8?B?NTA1ZzBXZVdIK3FvZ2ZzSVhMNURJWFZnYXU4am5od2pLVkluMFgvNURXamtk?=
+ =?utf-8?B?MHJMa1lEdFlwRzQ2OGhHbS9VSGx6RDN1RGVTZE9UYm03cGxiVHhzQW91QTBr?=
+ =?utf-8?B?TGFMTTRuOXVpT1l6VFdIOUQ2Nk5LeU1CYjRNOTAxbjBiN2NBVmx1QnZyWUZR?=
+ =?utf-8?B?SkxlblRaMm5YS0VyekxlRlZ0VVZ0QkJtZjRycWl4eWVhOVBDaWNOYm9zam1y?=
+ =?utf-8?B?VlJTN2hmQWZWN3A0aWlGaVVmdWx3MWpIeDlIeE5ZVUhPajJTSGdidkRPRkxV?=
+ =?utf-8?B?Y2pzSklJeFZOcVowNmNYcTVqZmwwVkpMYjRpQng4LzFFRlYzQ3l3dmE3Y1pX?=
+ =?utf-8?B?N0tDYTMraldZTy9hOU91dHRQM0szLy9OdytCQWIxcHA5dldTZ0RCemEyb2o5?=
+ =?utf-8?B?dkk4ZHdRNHBmWldnRnVlNmpya05FTkNTVGNxM0tXRndqUzh6b3JnL2swVHE3?=
+ =?utf-8?B?RUN1RGNGdVVsMzlxV292cnNPMDZ1TEUvVjBYR3FFc0JFb1FKUGJ0NlNCdEM5?=
+ =?utf-8?B?V0xFbUx0em5VVUVpa0IwL3VFalFDaXU5dWlBQzJTZ1U3aGJ1czdhRlJNSmdB?=
+ =?utf-8?B?RWVKcXZKRWxINVZRUTNaYWVvUHkyUEFFS1hqT0tDb1pFZlk4dFhSZDdzNVFt?=
+ =?utf-8?B?b1BzUHJkOStKWDlYcTY5YUQwQjZ4b1poeGppSlkreU1TOTBMSWZHMmR1TnNl?=
+ =?utf-8?B?cXFHWnFPdjNFZVBjdzY1UzV1eE5DK0FWYi9GR0lEdnVpbHN1em83SDR4OU8v?=
+ =?utf-8?B?K1oxTXM3eTQ1TnNzbmI3eStzVm01d3pIWUwrblFsM2s2OC9sMEJ6eUNKQWZC?=
+ =?utf-8?B?anNEZTkxOXdtbDhYdThBMHJ6TG9qdjFibkh5dmJJK2JGeVJsUTBWOEs0NTFy?=
+ =?utf-8?B?Rnp1aDZJR0hLSHMraHVHeFVobjcxa2I1MjJCTFI3RzlnbG5DOG5qUk9zc0la?=
+ =?utf-8?B?RGFjKzNVeGtFeE43ODVsRVhac2RTOCtJenoxeURWK0R0Z0dZTFUxK0E1cHJT?=
+ =?utf-8?B?Qm0yZDI1ZFpURHZOTk1OZXVXMGZxU0k4NkJnSllHeWJsdGhLZHVNT0ZsSWZR?=
+ =?utf-8?B?UDRoUCtyZHhwT2xtd3paV1lPeldYVjd3ZFI2Vkt1TFFtRnl4RkpPN2RWMTdo?=
+ =?utf-8?B?UFV6L2wrNGhVTjg5U1ZOMlJYV3hUTkJ0OFJ3UHNDa1crZ1NJS3RiWjBoVUJY?=
+ =?utf-8?B?NExEaGJZWDkxejBUWDlJTWtnYkZiWVZEak1lbHVzOTJxb1JOQXl2K3RlMkpI?=
+ =?utf-8?B?VktKUWpXdWhvT0NLc2g4SkozZXgwWlZ4VVJQUUNFU3ZkVE1DUllxejNEbkMx?=
+ =?utf-8?B?ckN5V0dpK2NpM0gwbmVoVlhxM3N2MWNlVExnckwrVTJORW5MZUJ2NFFuTCtP?=
+ =?utf-8?B?M1h4dmgyUDRzb0J4eVpNR05pV2Z1dVdVbDg5YS9YczFmc2gvcjYzU0MvM0lW?=
+ =?utf-8?B?NWp3ZUZiN0pPTVdKazlBK0RDWVZJQnpOdDFKNzZBa3EwSzE2eGtDU2doZVZI?=
+ =?utf-8?B?QWovRDNWcG52cXNSWENGeHc5anM3MTJWMEdHTE9TazZjWDV4T01zYzBvMDlG?=
+ =?utf-8?B?YWs0VjFEci9SODYvTjFTVkRHOFRGZ2NuWVk4U0daN25sdWt1YnBQQkJEaEZF?=
+ =?utf-8?B?YWpJZ0h3TDNBZzNnRlhwSjl1Vm9PT05nMVY3OXhBZ2ZRYUdVMW5rYjRsMFl4?=
+ =?utf-8?B?TzBub21veC8vMDluZkZDWUNlYkxaSWl5cVlXanNXM3AzaDRkTndPejAzTjFX?=
+ =?utf-8?Q?b9QAHcPnrtg=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RlN4UitIdnRXakRXb2tDMU1aSkwxMjhPeUNYdUtwTXFvUTNwZUZWQXBaS1VU?=
- =?utf-8?B?ZDkwQmRPQ0N6aldkN0FPODhOZnJHYkFZNDFwelJXeWcvaDdyV205R1g5SG51?=
- =?utf-8?B?NnRya0JocFJWbFdKK3A3WUlOd2xLZE5EYzY5MkxsenZqWDRNc1k5MFVyb3k2?=
- =?utf-8?B?dGluTE0rMkxyOFZ0TWF2Sjg5eUZ1NTFTUTk3ZFNEME5iaTg2cU1IZi9wR1lx?=
- =?utf-8?B?OTVudlFDaStJdVZ5ZXQ4YmFJQUZGUUlnbEk1dlJhZWNGYnY4MWs0b1FMMDJp?=
- =?utf-8?B?QzhYM1YvdXA0bUFEa3dWSkNyb1VublF2Z3ZGRS81YnhmNkRKUHJMN0ZhSVpC?=
- =?utf-8?B?ZzdIUlhmTVAwbjBRbk1VYTNGcG5PU0dkeUlSekswbGx0OVBBRDE0WEJ4cGxy?=
- =?utf-8?B?SzJUUzk0eitIdGsycVR0dTRQemdVWkVncnVaeVBsSEYyVExubk9HdExUS0s2?=
- =?utf-8?B?Z1JCdDhSTXRCYkxoZnE1NnVWWjdpNUNGOElRZUVKY21CNXY5a0QrMURmdzdC?=
- =?utf-8?B?NmZpS3U3cUNTYXdHV2NTWm5OR3Y4eHpubnB4aHFWZ3BtZm1wVmpLK016Zjcy?=
- =?utf-8?B?NlJ1dmFPYjhyZG9ROXYwYUFSbUdBWVhkWlpPaW9YVmErUXRIZkk1cTVMUU53?=
- =?utf-8?B?STE4WEVEVTJUcEpOZXdRdTY1V0xaTWFUU3lmMUdnRjBLWWVJWHV2Z01WRW9F?=
- =?utf-8?B?ZDR5ZmxKZ0FsL2xrUUpHZGZQWG02OEpaWjNjSUF1U1ppbU4zZE1EYkt0UE9a?=
- =?utf-8?B?S0NSSFM2REd1aWEzNXdYdFlYK1pKeFF5cGc0RDJTbzA1b2M1MkNVbitucnhG?=
- =?utf-8?B?VjRQNFQxT0wwekhCRjJzZ1FpeFlxUnNMYnFBVDM5cHNFMWkzNEVaYXkvbEJT?=
- =?utf-8?B?ZjdmVCsxa2lLSmxLdkszSUthUk95c0lWMXZwNUJlM1lBTXNNcUtkejZaaUVj?=
- =?utf-8?B?VVNjTjNQcXpOQkY2dUhtQXV5bzFKdHJsMkQyZ3RiVW5qUzMrZW12aUVaejVE?=
- =?utf-8?B?N1Y2VUVHd2JBRTJEb0pHTUJ4V1hwcUxDMlBBVXYvRFFsYytHWldyTmRvOTlL?=
- =?utf-8?B?Z2F2c0hONUVFSlJmV3Rzb2NuK1NtNEVNSkFWMCtyTnNTTVFVZ2pIc0Q1R2V3?=
- =?utf-8?B?Q1Z3UWdpTmUvZHkxOWZnbEVJTURqNkhiRGxBL3hHM2dKWlNkM2IxVGFYRTly?=
- =?utf-8?B?K29FMHhvUVowYWJJYUE4VDg0MXVDcVMzNWo5YzZDQ2VPVTVZSGhjbUwzRTdO?=
- =?utf-8?B?YjJ1M2NnWkY5cDBPdkh1T1d4TVJCNUFGcXBiakxPSEpEVzVESVpSU3dkWTgy?=
- =?utf-8?B?UnBPaHN3SERlTjNBZmFBRVlnVHJUOWNicElxZms1bWg0djBrWWxCOXhURldw?=
- =?utf-8?B?WWdtS3dSSUc0WlRueElSNFNOS0pYZC9UMzBuZlRidDRpU3ZkQURoeGZxOUxk?=
- =?utf-8?B?cWNzcU0wZnU0aGpvMzdUNG9BK20rMnlrQmUxbVJKV1Y4SGxKNGh1aDA2WVdL?=
- =?utf-8?B?eDBuWkZvTGdLaHdqdWtVUVkvVktRU3JDazhLY2premxjRUx5Mjk3Uy83VkNn?=
- =?utf-8?B?am5PQzgzdGdLaXVIS3BFaFB5Uyt4eXQwbEJQNmhNMmtVVk96Ly96bE5oOXhV?=
- =?utf-8?B?N2J1WWxwUEVMWXcvZWRpQWJYWUE3ZTVjT2owNjQ4OWttVHd5S3UwbUhNRk5r?=
- =?utf-8?B?VzcyZkM2bk9TOFVyUEwyeFR1bFNwSzF6cWltWUJCem9jUjNwckFRTkJDQ0RP?=
- =?utf-8?B?M2p4NjFhcFpLQzAwRUgrRFJFYmY4TTl3WDQvbmY3bUNUVmVwOG4wSWlaMU1s?=
- =?utf-8?B?YzU0UWE2MUhES1JPbHQ4NDk5K0pCK2lKTmhrUnBTMzJNVExNb3c5REVOUkll?=
- =?utf-8?B?TmljWlpNYkVUZmdxa1d6Wkw0RHpUSStDbDdRLzRucTRtcEZnbzVFR3JsdU1H?=
- =?utf-8?B?dHQrS00vUllHKzI0cHkrMCs1OUlINjNEUThhL280S09DKzJ4M1BHdUpuTmV0?=
- =?utf-8?B?bjVNbmNJbjExNjNlTElBY3NFcHhPb3krazdsc3NCSUZnb3ZJeHo2ZWord2JW?=
- =?utf-8?B?eUM1ZWk2MFNYVmpDMlhrVWxTSHp5T1FVNFhLRHdXYlExRFhhOTdibEljeXh3?=
- =?utf-8?B?WHI4Ry9aQmQwU2Nad1ZGcmg0dFNVV2J6TmoweTZtYjVxOTNqSVhZMTIvS0pI?=
- =?utf-8?B?Q2c9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bklLaW9rS1krZ21CemlNbUo3ak1vRThTZlI2OUU4WEduSDkzcE0rQ011R1cx?=
+ =?utf-8?B?endrUmwva3UwS09lKzl2dFNJVmdwMmdHQkVSbWhmN2h5M2RUbU5PRlJVazJj?=
+ =?utf-8?B?cVNLdVZFbmwxTGczMWxMMGVXVkc4Vnp6SGxzZkNXZk9XbWN6aW9XdkZSV0JM?=
+ =?utf-8?B?bHRFbjNVMXR6ejhxRlhLUGU5OWw1VVB2RUk1K2M1dk5EcEF6b2k4SzZlWGJQ?=
+ =?utf-8?B?dFpnNExBNUVKRnZZRnlXeVByNjNvKzNTbzFvRm9OaWh2YzNQYWhIbXFDUjBZ?=
+ =?utf-8?B?MFM2bkcwelkxV2ZrK1pEWDZveStSVkFNYXl3bUNQcXB3MnFxZ1Fza3NNRXQv?=
+ =?utf-8?B?NEZ2aFV2NmY4Ujh1eTJMaW90cDNXcW5rNFJLeEVIZHdCYXR4aFNyQldBNEND?=
+ =?utf-8?B?dUR3UTBkYlZBOWxZcGFzOXZkaitGbjNGRzNrOUp5Yy9oR3drZTNQQXhHdENy?=
+ =?utf-8?B?ZFQ0MXNPbGtaOUU1M1gvTm1Ia2FtLzlPMjFFR0Mzcm9LYW14MlhFVTZUTjl3?=
+ =?utf-8?B?Q2E0WUlNd1JweXJMaUgySGpFeWZCZlYvcTRrRWhZa3dRejVyODJDdFVuOGdj?=
+ =?utf-8?B?YVljUVpGTzdDK2Uxb2xkV3gwSTRUQWRXb1VUSWZ4SGQ1cjNTQ2hEYVJHQUJx?=
+ =?utf-8?B?a2RKT3BjV21XSHQvenFLNHh4ZzR0S1VvUDFITVR3MzY0VWlPV05GbTYwaENX?=
+ =?utf-8?B?TU1QdEtHclF6Y2Z1TEtvSWR2SHNpSXpXU3N5dmdkS3h3Mll0Ri9ZeXJuMlJ3?=
+ =?utf-8?B?TnVtVks3VTBWNGxNMUdCMHZnUzRDTHNGaEYyWXdpVnFjWXlmaERBdmVreFlu?=
+ =?utf-8?B?dUZ5ZDh0ODBDMFd5U2RCbUxxanJ1N21BcGFKcXhnNi9hckVaQ28wM2lKaW9m?=
+ =?utf-8?B?QmFkYXBoOGpLNG9GRGhYY2tJWTVIbE5BSjJyS200bGR6aU4xWFFUYmt3QTlq?=
+ =?utf-8?B?dXNnb2RzQmxGZVVvZG5DNk5KMXJFUnNvaUhJdzlOeW5Mbm1IVHN2RTROZURV?=
+ =?utf-8?B?L0JCcFFMSUJGeXJ3cVhwTk40ZGc2Wk90cmJONk45aURJWkdjVDNyM2tERzdq?=
+ =?utf-8?B?R3p1ZHlpN2h2YzlPd05VakhSTmk0OWVkWmxEVmtnSnNwK1hXdkNYa2lYeGFC?=
+ =?utf-8?B?R1RlYW9UbHl0SGdtdURVVVNPRDBRbDV0dTgvVG1sM0JuZVdLWWJVUTU3TjRa?=
+ =?utf-8?B?VjJCNGR0Q1pFR0R5SThzaDlUSWZubUxBaUtjTkFQNEtMdXp4a1hiR2NtaTdq?=
+ =?utf-8?B?M25oYUREMUsvbklHSG14cmlOSE1oQXhkMFNmenNjY2wzNUNmNG53dVViZ010?=
+ =?utf-8?B?L1RxR2JLMGZRUmgvdVdnWGNkSml1cjhHTG56clo3TWtDR3lwVzhkU204MUJw?=
+ =?utf-8?B?TnRodHJOaEdkZ2lxL1YxZmJTb3ZtRk1QYm1Fdkx5MTZHNFBuOXFlMjg5NWg5?=
+ =?utf-8?B?S1VwS2pSSDJxREVOazRKbWUvVUVHTUUwRUV1SWMwMVN3eDQ0RXVnL2Rib0J6?=
+ =?utf-8?B?enUvS2FHeTFldU9XdytJN2NlZHdHem9pVU9xL3grclBwRURLd2VrWkd1c1ly?=
+ =?utf-8?B?VHpaV2FjRXQ1QXVha05TeHR0ZUZJOHJYZ29pSnJBbEJDSkNSZzIycU1uUzE0?=
+ =?utf-8?B?SGdwZDcreHhmQ0QvcUNyTlpBRVRIbkNFTEMzeGpmdTEwQUhodE96MUtoRGVk?=
+ =?utf-8?B?NTRTS1ZPck9TT3J2NkROMVJUdVIyUUcveEoyK2drRDUrL0xZZVU2M1VIdnhw?=
+ =?utf-8?B?NFhwZFlGbWJSNUxsRHFwR2NOUURaTVQvaXlpdTVnQjUwRXFGS1FDTlhDNml2?=
+ =?utf-8?B?Q1FvMUZuWTB0NVplbnd3M2JlejhaTHZWRDBIR3g4U1Jxc0w4elRhOFpTc0dn?=
+ =?utf-8?B?V2NGSGU0K0w2SkF3a3Rid1hnS3hyWVp0UjJGdFpmQ3dnQ25UZlBGei80Q05l?=
+ =?utf-8?B?N1ovV04zREQzY2lqUU1wVzh6Wk13YWxWb2RrTVhJSTN0aUpUZm9KZ2NtRFpT?=
+ =?utf-8?B?MjNjY0Jjc0NPallCY2VUazRtWmF1L0FiTXRPTGNOT3d5S3JKdnlmcG5rZFhF?=
+ =?utf-8?B?bmQ2WlpCbmZvazZJN2NRWGg2U1kvUjFPNjcwaUc2RXFzUlVEVFh3dHZDT09V?=
+ =?utf-8?B?MDRBY2NoRVY1VHNRZHdPUlMwUE8xV2dBZXV6UklTWHBURU9FZk5VWEJ6Ym4w?=
+ =?utf-8?B?a1E9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad8df565-aced-4871-a214-08ddc395c3f3
+X-MS-Exchange-CrossTenant-Network-Message-Id: def13961-49f6-4dc1-8fd1-08ddc398046f
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2025 11:50:16.5996 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2025 12:06:23.7107 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bVKn1oTImg/+rebJkw3b8a1dsd599QyYBsAN3CPZnOaIxtw8ncFgcXA2RjBBZaX6B97/koccHmc7FYVrWkgh6Ocp3/0YgypcEF0w5lQL7Cs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7775
+X-MS-Exchange-CrossTenant-UserPrincipalName: pe4o061Ph6PxjVX/0kYgZPmpGKGEaUU+FSzXqRhQmpxqTyfqHCu0rI3INJVkrt3jbn0xuGDjg254r+sdodBOpkTKHx7gC9+Zdh2M4D7RfnY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7755
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,31 +178,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
+Hi Andrew,
 
-On 7/15/25 4:52 AM, Aristo Chen wrote:
-> mkimage introduced a validation step to ensure that the 'default'
-> property under the /configurations node in a FIT image refers to a
-> valid subnode. This exposed an issue in the
-> k3-am65-iot2050-boot-image.dtsi, where the 'default' property was set to
-> "ti/k3-am6528-iot2050-basic" and "ti/k3-am6528-iot2050-basic-pg2", which
-> do not correspond to actual configuration node names.
+On 7/15/25 11:23 AM, Andrew Goodbody wrote:
+> uclass_find_next_device always returns 0, so instead make it a void and
+> update calling sites.
 > 
-> This patch updates both /configurations nodes to reference the correct
-> subnode.
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>   board/emulation/qemu-ppce500/qemu-ppce500.c |  4 ++--
+>   boot/bootdev-uclass.c                       |  2 +-
+>   cmd/regulator.c                             |  4 ++--
+>   drivers/core/uclass.c                       | 16 +++++-----------
+>   drivers/power/regulator/regulator-uclass.c  | 10 ++++++----
+>   drivers/remoteproc/rproc-uclass.c           |  6 ++++--
+>   include/dm/uclass-internal.h                |  4 +---
+>   test/dm/core.c                              | 28 ++++++++++++++--------------
+>   8 files changed, 35 insertions(+), 39 deletions(-)
 > 
-> Without this fix, mkimage will fail with an error:
-> "ERROR: Default configuration 'ti/k3-am6528-iot2050-basic' not found
-> under /configurations"
-> 
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> diff --git a/board/emulation/qemu-ppce500/qemu-ppce500.c b/board/emulation/qemu-ppce500/qemu-ppce500.c
+> index 40d295dbf06..58de4a05296 100644
+> --- a/board/emulation/qemu-ppce500/qemu-ppce500.c
+> +++ b/board/emulation/qemu-ppce500/qemu-ppce500.c
+> @@ -170,9 +170,9 @@ int misc_init_r(void)
+>   	 * Detect the presence of the platform bus node, and
+>   	 * create a virtual memory mapping for it.
+>   	 */
+> -	for (ret = uclass_find_first_device(UCLASS_SIMPLE_BUS, &dev);
+> +	for (uclass_find_first_device(UCLASS_SIMPLE_BUS, &dev);
+>   	     dev;
+> -	     ret = uclass_find_next_device(&dev)) {
+> +	     uclass_find_next_device(&dev)) {
+>   		if (device_is_compatible(dev, "qemu,platform")) {
+>   			struct simple_bus_plat *plat = dev_get_uclass_plat(dev);
+>   
+> diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+> index 3791ebfcb42..6718c482e52 100644
+> --- a/boot/bootdev-uclass.c
+> +++ b/boot/bootdev-uclass.c
+> @@ -216,7 +216,7 @@ void bootdev_list(bool probe)
+>   		if (probe)
+>   			ret = uclass_next_device_check(&dev);
+>   		else
+> -			ret = uclass_find_next_device(&dev);
+> +			uclass_find_next_device(&dev);
 
-Please reorder the patches so that the builds still pass when applying 
-patch 1.
+I think we need to ret = 0 here as well? Otherwise the printf at the top 
+of the for-loop will return whatever was the last return value?
 
-You can simply update the last sentence of the commit log to say that an 
-upcoming commit will validate the default configuration exists and would 
-therefore fail the build (as it should).
+>   	}
+>   	printf("---  ------  ------  --------  ------------------\n");
+>   	printf("(%d bootdev%s)\n", i, i != 1 ? "s" : "");
+> diff --git a/cmd/regulator.c b/cmd/regulator.c
+> index da298090bb7..db843283662 100644
+> --- a/cmd/regulator.c
+> +++ b/cmd/regulator.c
+> @@ -97,9 +97,9 @@ static int do_list(struct cmd_tbl *cmdtp, int flag, int argc,
+>   	       "Parent");
+>   
+>   	for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
+> -	     ret = uclass_find_next_device(&dev)) {
+> +	     uclass_find_next_device(&dev)) {
+>   		if (ret)
+> -			continue;
+> +			break;
+
+I think it would make this more readable by having
+
+ret = uclass_find_first_device(UCLASS_REGULATOR, &dev);
+if (ret)
+     return ret;
+
+for (; dev; uclass_find_next_device(&dev)) {
+     uc_pdata...
+}
+
+return ret;
+
+What do you think? This also avoids checking for ret in every loop 
+considering it won't ever change.
+
+[...]
+
+> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+> index 09567eb9dbb..eac025c9c02 100644
+> --- a/drivers/power/regulator/regulator-uclass.c
+> +++ b/drivers/power/regulator/regulator-uclass.c
+> @@ -261,10 +261,10 @@ int regulator_get_by_platname(const char *plat_name, struct udevice **devp)
+>   	*devp = NULL;
+>   
+>   	for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
+> -	     ret = uclass_find_next_device(&dev)) {
+> +	     uclass_find_next_device(&dev)) {
+>   		if (ret) {
+>   			dev_dbg(dev, "ret=%d\n", ret);
+> -			continue;
+> +			break;
+>   		}
+
+Same here.
+
+>   
+>   		uc_pdata = dev_get_uclass_plat(dev);
+> @@ -411,8 +411,10 @@ static bool regulator_name_is_unique(struct udevice *check_dev,
+>   	int len;
+>   
+>   	for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
+> -	     ret = uclass_find_next_device(&dev)) {
+> -		if (ret || dev == check_dev)
+> +	     uclass_find_next_device(&dev)) {
+> +		if (ret)
+> +			break;
+
+Ditto.
+
+> +		if (dev == check_dev)
+>   			continue;
+>   
+>   		uc_pdata = dev_get_uclass_plat(dev);
+> diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
+> index 3233ff80419..7916cb27e3d 100644
+> --- a/drivers/remoteproc/rproc-uclass.c
+> +++ b/drivers/remoteproc/rproc-uclass.c
+> @@ -56,8 +56,10 @@ static int for_each_remoteproc_device(int (*fn) (struct udevice *dev,
+>   	int ret;
+>   
+>   	for (ret = uclass_find_first_device(UCLASS_REMOTEPROC, &dev); dev;
+> -	     ret = uclass_find_next_device(&dev)) {
+> -		if (ret || dev == skip_dev)
+> +	     uclass_find_next_device(&dev)) {
+> +		if (ret)
+> +			return ret;
+
+Ditto.
+
+> +		if (dev == skip_dev)
+>   			continue;
+>   		uc_pdata = dev_get_uclass_plat(dev);
+>   		ret = fn(dev, uc_pdata, data);
+> diff --git a/include/dm/uclass-internal.h b/include/dm/uclass-internal.h
+> index 3ddcdd21439..9cb3f090271 100644
+> --- a/include/dm/uclass-internal.h
+> +++ b/include/dm/uclass-internal.h
+> @@ -149,10 +149,8 @@ int uclass_find_first_device(enum uclass_id id, struct udevice **devp);
+>    *
+>    * The device is not prepared for use - this is an internal function.
+>    * The function uclass_get_device_tail() can be used to probe the device.
+> - *
+> - * Return: 0 if OK (found or not found), -ve on error
+>    */
+> -int uclass_find_next_device(struct udevice **devp);
+> +void uclass_find_next_device(struct udevice **devp);
+>   
+>   /**
+>    * uclass_find_device_by_namelen() - Find uclass device based on ID and name
+> diff --git a/test/dm/core.c b/test/dm/core.c
+> index 959b834576f..201daee6836 100644
+> --- a/test/dm/core.c
+> +++ b/test/dm/core.c
+> @@ -737,7 +737,7 @@ static int dm_test_device_reparent(struct unit_test_state *uts)
+>   	/* try to get devices */
+>   	for (ret = uclass_find_first_device(UCLASS_TEST, &dev);
+>   	     dev;
+> -	     ret = uclass_find_next_device(&dev)) {
+> +	     uclass_find_next_device(&dev)) {
+>   		ut_assert(!ret);
+
+Ditto for all the tests in test/dm/core.c.
 
 Cheers,
 Quentin
