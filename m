@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A21C83F1D
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 10:49:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736D2C83F17
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 10:56:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B821F82F8F;
-	Tue, 15 Jul 2025 12:49:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 042E782F8F;
+	Tue, 15 Jul 2025 12:56:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zRcpTEte";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OnYffyG9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C37482F6F; Tue, 15 Jul 2025 12:49:24 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id AFA1782F8F; Tue, 15 Jul 2025 12:56:35 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80F4482FAB
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 12:49:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FEB6801BE
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 12:56:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,35 +28,38 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1752576560;
- bh=nkoOh1efG9S450sWAZtolPk3RUB01B0XI6BGg5t7Bwo=;
- b=zRcpTEte+688q+e+fprHTEcTy7DNp5ErrgLG9M6aDMD/HbOJTqNNGurfYpVVuTDL6qQnxM/IS
- +Dlne4qSikyCvTnIA9U5mb2PsYk2fNTT5bp7X3NAXp47oZlaeo7N5yhN0qKguJBmuwvOmGWO0fb
- kVAxR33TIuFnMrfWrYpbsVUK88D1dxMjB9rkVTIeMkaptf+/kvCE1WUO3KDVqM1n9VIUZ37Cl9f
- U/kFGalA3r14fHd+kYrzR18hL1z5zcWeohwLrGEXWc8ymZZNnFJkY1bydBDFhr/end9W7Yrwzzo
- /TGOd3lsUeBqlhSW3O5u2IccOBL6/K+cxzli7LkdHoGQ==
-X-Forward-Email-ID: 6876322b02da433925ac9bcd
+ s=fe-e1b5cab7be; t=1752576991;
+ bh=+86rPL67F9RFhWA+Ut4vH/visVlF1TqBb8vBzp8PvJk=;
+ b=OnYffyG9xBJGkfr/lPRnwLmz4EqrY2dIIwAjkjXoc+Fdbu6cnHsfjkoFyxEQpU0yz3D+c1xje
+ Q9dKp6nhOBJdm/XYVjkC0H7+mDdXKcuGcWRS/rPux+os9Mnx+4DIKlskDbTZhpdVGH7z/GDoXFs
+ LhDqTiqFYOPBn+k9lwzQQ1f92yzGRCHcQ7pIq2hZFFggW/dA6W+qP7+6dD9Jwv8CWwN/56BzCAg
+ qUzAG9Z5xSXmMJeNUcDPMAJEYoHUQ17uU8EVxkuwgK1iXskVkQoZAmYmxvmgP+PdbHC/g2G2Fbd
+ RhvnaqQX3EJppM/sKdK1N26sy1aL35uhLwgzPNoT2epw==
+X-Forward-Email-ID: 687633dd02da433925aca306
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 1.1.6
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <092a18f7-91fc-49f1-8110-90105262c40f@kwiboo.se>
-Date: Tue, 15 Jul 2025 12:49:10 +0200
+Message-ID: <58122518-6a07-4dd9-8326-0ae6f5aeb9fe@kwiboo.se>
+Date: Tue, 15 Jul 2025 12:56:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: Ensure env in SPI Flash can work correctly
+Subject: Re: [PATCH 03/17] rockchip: odroid-go2: Remove u-boot.dtsi props
+ already defined
 To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
-References: <20250712212710.684525-1-jonas@kwiboo.se>
- <aa1c247f-c22e-4f4c-9abf-dd1bc23b4f90@cherry.de>
+References: <20250713233429.1376172-1-jonas@kwiboo.se>
+ <20250713233429.1376172-4-jonas@kwiboo.se>
+ <4257f343-4353-4d8a-a633-24ca154bd4d1@cherry.de>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <aa1c247f-c22e-4f4c-9abf-dd1bc23b4f90@cherry.de>
+In-Reply-To: <4257f343-4353-4d8a-a633-24ca154bd4d1@cherry.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,34 +80,39 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-On 7/15/2025 11:11 AM, Quentin Schulz wrote:
-> Hi Jonas,
+On 7/15/2025 11:34 AM, Quentin Schulz wrote:
+> Hi Jonas
 > 
-> On 7/12/25 11:27 PM, Jonas Karlman wrote:
->> Ensure that the spi/sfc node for SPI flash is aviliable during pre-reloc
->> phase so that env can successfully be loaded from SPI Flash.
+> On 7/14/25 1:33 AM, Jonas Karlman wrote:
+>> DTs from dts/upstream already contain aliases for i2c, mmc and serial.
 >>
+>> Remove the aliases and status=okay that are already defined in upstream
+>> board or SoC DT.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> This also remove a bad re-defined alias for spi0, SPI flash support will
+>> be added/fixed in a later patch in this series
 > 
-> Shouldn't the pinmux nodes be added as well? Or are you planning on 
-> having those part of the individual board's DTS rather than in the SoC DTSI?
+> This won't make it to the commit log in the git tree but is an important 
+> piece of information.
+> 
+> Please have a separate commit just for that or at the very least have it 
+> properly explained in the commit log as I checked the diff and did 
+> notice this was different.
 
-The boards that come with SPI flash should already have those added in
-the SoC or individual board's DTs, to my knowledge.
+Sure, I will split it up into a separate patch or include more details in
+the commit message in a v2.
 
-However, when I was testing env in SPI flash on odroid-go2 I noticed
-that env would not load unless we explicitly include the sfc/spi node in
-pre-reloc phase. And the recent added propagation of bootph- props in
-binman did not seem to really affect use of multiple FDTs in FIT.
-
-With this patch I try to add this explicit bootph-some-ram prop so that
-if anyone enable the ENV_IN_SPI_FLASH option it actually works as
-intended on boards that already support booting from SPI flash.
-
-Basically this fixes something I missed in old patches/series ;-)
+This series initially started out very small, however it grew into a lot
+more patches than expected, so this was just me trying to keep patch
+count as low as possible ;-)
 
 Regards,
 Jonas
 
+> 
+> Otherwise looks ok to me.
 > 
 > Cheers,
 > Quentin
