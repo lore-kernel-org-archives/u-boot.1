@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CB26C83F17
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 16:58:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63EC7C83F22
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 17:20:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4742382BF6;
-	Tue, 15 Jul 2025 18:58:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA605830A0;
+	Tue, 15 Jul 2025 19:20:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OwC7pHjS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WDFjtBjd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7AA783071; Tue, 15 Jul 2025 18:58:51 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id A090A801BE; Tue, 15 Jul 2025 19:20:25 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7F78801BE
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 18:58:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90CEC801BE
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 19:20:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-73afbe149afso3036344a34.1
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 09:58:49 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-73e58206ac1so349151a34.0
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 10:20:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752598728; x=1753203528; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vsPRxbK4vwEbA6jZAsKIeDDBD54locdNIkG3Ax0MgCE=;
- b=OwC7pHjSFmmxnYbxsp1/VlO+ZNPa7c52Eo1aIVvXY+mXVlwacLookuJX5Yi777tMWI
- gMKzg//vvzlFc5gccWqI4aXv90PFbmPPWObWY1RF1EECLkD91T26qBZCGWzCKGdM5Bed
- KtHiG05uD1zIrULpM6SInv9af0Bro/clfhT1o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752598728; x=1753203528;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1752600022; x=1753204822; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vsPRxbK4vwEbA6jZAsKIeDDBD54locdNIkG3Ax0MgCE=;
- b=c+2wbPpzHkXj9ggv0mqRKWoKzm5IK7A1zU2S5UDqljnLnFlXvG0D4t3BF7Y6D7D8U6
- 5vHMgIEDT6A2HgKaTSVHiG9X4bLRDd0TbsIWSukVB8Nap1+f2cMINKg3XEzeKya51RmV
- ozes389/VmMDAaoEDQrPjE5eCtwXphPDaPZkEzRxLUlIlsa00Pu8/gadu6E9ME3e2Jta
- sNGmOlSqy5D19bb/H6gJT7WuXrsD4sSe/H+/1pyn8VfLeOefy8Prj3mochHL4jh1jJCp
- CY/a8py+mkh7R38YZoHSlVK04v82zP/5locccVqYP1G6uCqpTnBbHZEmPEmj2nQcSlYb
- j5nw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXWzj8xqKOQeYHwVLpmhbArTCgKgeQB3fzqrzwbDsg3FQT1W49ewEMKD8Dy/KSqirrOUdBMWow=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQNM4GoeOgaHq95IwiFtoJNVYTMOiERlbuVwSvfrxch6Be2bvU
- CloQUO3YpyAeX34FsJtZvE4tvV/PjbM2bWsJO3MG3c12/X18HFZqNEChH6tltxf6UGs=
-X-Gm-Gg: ASbGncvwon/NeN9hxAsRQUCY+X09pDJ2Y1G7kZqJCEBi++8Owpyl377+djazvIzSazo
- 4La4j9HrcO6C0vt2gYL7fmVRBxbwKk7U7IeMSIq9bOjNeyNhLa3fQMBfdaOSw+elBY5HAFxp1+L
- Vk+s3zTDMZ1h9SGAUc2Mr7Q6s9HUhQcQKLLv37CbY6Gr9DbIYc+mF01olqhtTznE/KlAX+nun1n
- ikUhN0UyqYedbek+CLKRC3u461ILxDkU6rW00tmBKEq1VnEd+qu0937WzCZVlPChzxf7TxrWsGH
- 6bfecPUnwjNIhSgSUkA9I1DNhSsebB44WJ+9UKKCGSRwyIQjXMfxmRjjHLG7oF/W140p1M3oSwz
- Ucjr7a27xBT0MHPsz4ZxXtVeixfUkluBGObPnLXT7QuvQHDsLwXVv5i7O
-X-Google-Smtp-Source: AGHT+IGCCK8JlS3FrHkvYxD5H8IV68YcZ/55bFqsp+BB/tQRuo0/s51a9FMJg0ljzykmPwc68eKJQQ==
-X-Received: by 2002:a9d:6014:0:b0:72b:a465:d955 with SMTP id
- 46e09a7af769-73e64a49a2bmr137336a34.12.1752598728434; 
- Tue, 15 Jul 2025 09:58:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e5a69bcc4sm615259a34.47.2025.07.15.09.58.47
+ bh=W0VaioHUcIrt2r7oMa0om8N4Rn9DjyPKAR9xUmG07F4=;
+ b=WDFjtBjdYgVhQ7oRvjhSsfR7+BCH2s/0nCn2C72Rc08yl2U+/TygSmT5xJ5+pvKx5z
+ S7GSKVM+MndWu+Ei7DaGuwVvFNa8DrQpkbGrKeuqXWb/xz/tNoD5r1rl3bn2pDvdiiy6
+ RzatwGmljZmGXSQaO0gvueMCv6yxqxPqIektc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752600022; x=1753204822;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=W0VaioHUcIrt2r7oMa0om8N4Rn9DjyPKAR9xUmG07F4=;
+ b=BwxB7NeUc63qSU7AGEIIJxF/XRKJmtuHHN4w2oGeXNwMVIHt98rUj/j29u/agf/A45
+ gbNDcJnieIuKn8LhwTdsSJdI/dsRYWiIp1acENQx4Y8WDsxq5fnsF3psDa9m6JgNK4DQ
+ KDYv7BqmmK4MSlmcs7TANTrBxBeSiZWvHMwwJMNZgT1EXgo2kn9pq0T6HfuNiN6CO5s7
+ YufHrB8H7VQTER8wyuzJ0mlY7v+2xH9xIj6PLsLthC+axpDBdN+XX6n/eG3TeZGs/Etz
+ 3b2CHKZBOp5HAJO1agEKI1H6yuSCG6h5O+4ggtxNXsnEAkWv2Z3mKcSWlE+bsxZ7CwIv
+ nJgg==
+X-Gm-Message-State: AOJu0YzbntJhFxEU/LuS4WFSu0X3AMk3fR9TVwvjqX0wL3SVX1rMs4is
+ w8RySwETzWx4uMSAm+ivPY24HeEk6O2pery+MJLzFXQOCdUBqq3clwSO+DEAxeBJOUQ=
+X-Gm-Gg: ASbGnctVDie4+UGEKbjpDKt4fWQI7ySX34MxFggyjfqTEZVmuIWubuq5dPvwZ2e+u4g
+ 2lG1i15kYYEeXDLabnHRtBQEM/fdrehjcRFCEidY5eMpDQvKM/XWoHw0C+yA6J+9Qwk3/ib+swj
+ f5ckSqS6hur1zi1R5TAAnT9uPCNP8Q9NTGbARVi9P16mFOn8XKlr7DcO5w1A7OSWqMcU7lyV9hW
+ sYtwV1vAqILbWDXIbobPfMllKpcdF7IOK+Q2RxG42kw0BNuFGHsimJCtTCLmF4MulUTYG/QTpwS
+ hr1b0honmy652vkIKG/qO4svRa3gnrAzT1qarDiLejVpdY/Plb+vmR6zLe4XwbAlQ03BR+L8gjN
+ 9B9dA+EzSDCzPI1oEWjPFKCvbAqfqhZSyZNYuS7wQzShR9bNs0MKSwAM=
+X-Google-Smtp-Source: AGHT+IHzP7cEHu/mYkSI6HGPIvVJHL2q5vwTGMkGRtrzDTPjROUlMj/bPf05ztgKon/7am1l4La+gg==
+X-Received: by 2002:a05:6830:2c0c:b0:73d:baa3:830b with SMTP id
+ 46e09a7af769-73e649f7a87mr208553a34.7.1752600022174; 
+ Tue, 15 Jul 2025 10:20:22 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6142b0961fbsm988894eaf.35.2025.07.15.10.20.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 09:58:47 -0700 (PDT)
-Date: Tue, 15 Jul 2025 10:58:45 -0600
+ Tue, 15 Jul 2025 10:20:21 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] include: env: ti_common: remove bootm_size
-Message-ID: <20250715165845.GF193579@bill-the-cat>
-References: <20250715-initrd-fixes-v1-1-8c41b1fdea6b@ti.com>
+To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
+In-Reply-To: <20250708100707.89070-1-weijie.gao@mediatek.com>
+References: <20250708100707.89070-1-weijie.gao@mediatek.com>
+Subject: Re: [PATCH] net: mediatek: correct the AN8855 TPID value in port
+ isolation settings
+Message-Id: <175260002117.441891.11694532561355921805.b4-ty@konsulko.com>
+Date: Tue, 15 Jul 2025 11:20:21 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TTUv4yjRJ25q5uOZ"
-Content-Disposition: inline
-In-Reply-To: <20250715-initrd-fixes-v1-1-8c41b1fdea6b@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,62 +98,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 08 Jul 2025 18:07:07 +0800, Weijie Gao wrote:
 
---TTUv4yjRJ25q5uOZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> The TPID value should be 0x9100 instead of 0x8100 according to the
+> datasheet.
+> 
+> 
 
-On Tue, Jul 15, 2025 at 11:21:12AM -0500, Bryan Brattlof wrote:
+Applied to u-boot/master, thanks!
 
-> As the size of the kernels, DTs, and initial ram disks continues to grow
-> in size the 256MB size limit set aside for image processing by the bootm
-> command has become too small for some boards.
->=20
-> Rather than increasing this limit let's just remove any limit by default
-> and let each board set its own (if needed) for there use case.
->=20
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
-> ---
->  include/env/ti/ti_common.env | 1 -
->  1 file changed, 1 deletion(-)
->=20
-> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
-> index 7029d12bf203320fde859965ae57c272ed4c685c..03e3267ef8a1bf3e14c65df12=
-4ed1ac842c88760 100644
-> --- a/include/env/ti/ti_common.env
-> +++ b/include/env/ti/ti_common.env
-> @@ -8,7 +8,6 @@ rdaddr=3D0x88080000
->  ramdisk_addr_r=3D0x88080000
->  scriptaddr=3D0x80000000
->  pxefile_addr_r=3D0x80100000
-> -bootm_size=3D0x10000000
->  boot_fdt=3Dtry
-> =20
->  boot_fit=3D0
-
-So, which of the older families of parts use this file if any? This can
-be a concern on am33xx for example, still.
-
---=20
+[1/1] net: mediatek: correct the AN8855 TPID value in port isolation settings
+      commit: 70db2be9fbae747a869ec5d7af1055685a9c01f3
+-- 
 Tom
 
---TTUv4yjRJ25q5uOZ
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh2iMEACgkQFHw5/5Y0
-tyz/fgv+Ph1HNo7nBCwTFAyN4/csK7hZza1axDz7jR8UGSF4iO8qIdDK5wEqJoLf
-fgxazdI/pvA1qdEcsMBuC3R2Togadm8kR3QT+Oi6zqlW9D1dL0x66U6Y6OySPV/H
-2OY4adZH7RhYOgnmDXlpK/tKbRgryJL0XXBi1Sr46uLuHNxMr8OqraHlKbMOFq6y
-7yO0uwWntSwm0NSmL1n2YMuAtAx3878E9+2xQUfAMsfS2guiQJLndiw9PECwThXM
-C/++Y9Ud7Gh96PvwMonOCj11GGBx6IgMxBka3KJXOD6EO4EJocYiaCXmnmCiOddD
-je1nZ1/0ZmFqmak/KCGR6wUfMuCI/UeUbX+g5vHMpmcKXfTGqxC33ljZwO31pIQD
-+cTEcIj+C3W//OyhIgf2sfDOQVtdp1TraWi/DpEb2XfNGC93wKl8NkaXCglCNXfv
-utWBB9cA1R16FigBekbSrvo+aCDp1mYmim6rfEeBqbJhXtFBxSLSoP+cblqZBkbw
-st8oUWnG
-=zlJY
------END PGP SIGNATURE-----
-
---TTUv4yjRJ25q5uOZ--
