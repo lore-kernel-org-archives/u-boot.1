@@ -4,64 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2BEC83F22
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 15:36:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E86BEC83F22
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 16:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34B1A83020;
-	Tue, 15 Jul 2025 17:36:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2E2B78303B;
+	Tue, 15 Jul 2025 18:02:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qq/qJ0Tz";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wAiGA0ur";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="CYhh96HT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46BAD8307F; Tue, 15 Jul 2025 17:36:19 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 81CE183071; Tue, 15 Jul 2025 18:02:27 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1C7882E37
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 17:36:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5921982E37
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 18:02:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5605=Z5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1752593775;
- bh=Z0FAMuyjbVopfXUr6mJWcRpUz+MqUhNPJZB1KOTELOI=;
- b=qq/qJ0TzilG81cIDg1CmvkUJGD0FFYw2BMkinTyc1zBKgxnNyFG5eWeYWVNon+aFLd3AjVefw
- lT1EQSNBw7bcX+LWGrqLe2cpm2RGSQixfb81YhyeARKsLe0ZvYgGJZYYsTR6rK4Bv6++FedI51R
- KGlmw8toWheAqF2A/fPXS6TRDq7mtGXkefzafeEVMCu0PhXYY+Q8HeRLlu2U+Vd3wFrDvenM3Xz
- HKahncc4Ty7Kk0gFEsLDQtN1+8qwFlv7U8nCDveK9UuP3euSu5sPjDKxdQPnRlcJchiaRswu8wR
- 8C8e/wsjmypcI5bVdoUiwteDuGFxfeDg6udrWuL6k4ng==
-X-Forward-Email-ID: 6876756d4f06c51bcf025958
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.1.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <53230176-dcb4-4841-8f6e-edbd578eb632@kwiboo.se>
-Date: Tue, 15 Jul 2025 17:36:10 +0200
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bhP8d0H35z9tCJ;
+ Tue, 15 Jul 2025 18:02:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1752595345;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nkAXNv9ww3xHSJL6fsmeaUR4qRwCLBKROXeu7GQFGs4=;
+ b=wAiGA0urjuqHGoft4hmH8HTVO9/rhXkY+P7P+5h1DfxfVZGe8Xu1PyBv0qq10d0fRMcrgM
+ rVP3q7nNq0nlfk6P929La88iflLyLCjX0ouWSiDc4aLndNId29tHD0jDNb+Vte6Z8vxwFP
+ D6qCpeuxN7rAI7ALCGNOYrvOQVhSqZfKWM0ESRggfOy9neisXZ5G8/XydTarwqwjDb0vph
+ 8yk4QOzoe4WIO5VuIsGj/w6U0k9SVTR4XoJHtvVwuNjY8qzhI/bOvadsrb2Il+Itw0uIs9
+ LCNJE0n49naQ7FrwRiAIakD0kDLTTacp/AJ69HyuAoSWoOZXHlzS6k060y4PhQ==
+Message-ID: <cbf3d5e0-3634-49f6-bf5e-157b20ae8e89@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1752595342;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nkAXNv9ww3xHSJL6fsmeaUR4qRwCLBKROXeu7GQFGs4=;
+ b=CYhh96HTh+wdG+HHRbdeTA4ByU03y0+XPaKAI4p900GrJUaiyysfUVmuWFnjfvkBDLZd53
+ SgJdhX7+SMLIQcDcJp5EKMiVrjK1/CSBIEO3+0gOvUaZDBOM+4hwQdT+SUzFuTTOMp2SFI
+ xpdW24p5mYnuqjbXvOfMH90bFxsBYV61iFIqqct9z+Ju9YPYd3yt76UD5HojlmxHkiwpuM
+ g/wjn8UQPJVCpckoFSPwwhyWZvEwMn1KBnjGRryuo+rNa0UotNcf7cY7HtX8f2TNaRR8XK
+ 6dbfcYZPgKEE8QptkOHXPEXj0U+ZpqHwysI28/Fz1aoSf1Hd+bpomR1YU6OJ7Q==
+Date: Tue, 15 Jul 2025 18:02:17 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] board: rockchip: Add Radxa ROCK 4D
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20250711230613.217996-1-jonas@kwiboo.se>
- <20250711230613.217996-5-jonas@kwiboo.se>
- <6034d52d-36ff-469a-8113-afaa9c26682f@cherry.de>
- <4b2fe7eb-f6d3-47dd-a2e6-d577ba60a806@kwiboo.se>
- <27fbb7c1-32d8-48b8-b38c-12e79d940fb7@cherry.de>
+Subject: Re: [PATCH] configs: renesas: Set CONFIG_TEXT_BASE to 0x0 for R-Car
+ Gen3 PIE builds
+To: "Lad, Prabhakar" <prabhakar.csengg@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Biju Das <biju.das.jz@bp.renesas.com>, Adam Ford <aford173@gmail.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ "Cogent Embedded, Inc." <source@cogentembedded.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Chris Paterson <chris.paterson2@renesas.com>,
+ Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20250715111103.1092458-1-prabhakar.mahadev-lad.rj@bp.renesas.com>
+ <20250715143151.GE193579@bill-the-cat>
+ <CA+V-a8u4hOPNijmqO4P=yvPoyOjxApiEeT4kNJ4mBt-vY55A_A@mail.gmail.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <27fbb7c1-32d8-48b8-b38c-12e79d940fb7@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CA+V-a8u4hOPNijmqO4P=yvPoyOjxApiEeT4kNJ4mBt-vY55A_A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: qc8fpnc4rfrj4mq71tfxnn16fgiyb973
+X-MBO-RS-ID: 5d173a4b1551a353303
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,81 +97,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-
-On 7/15/2025 12:42 PM, Quentin Schulz wrote:
-> Hi Jonas,
+On 7/15/25 4:49 PM, Lad, Prabhakar wrote:
+> Hi Tom,
 > 
-> On 7/14/25 6:46 PM, Jonas Karlman wrote:
->> Hi Quentin,
+> On Tue, Jul 15, 2025 at 3:31 PM Tom Rini <trini@konsulko.com> wrote:
 >>
->> On 7/14/2025 6:35 PM, Quentin Schulz wrote:
->>> Hi Jonas,
+>> On Tue, Jul 15, 2025 at 12:11:03PM +0100, Prabhakar wrote:
+>>> From: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 >>>
->>> On 7/12/25 1:06 AM, Jonas Karlman wrote:
->>>> The Radxa ROCK 4D is a compact single-board computer (SBC) featuring
->>>> numerous top-tier functions, features, and expansion options.
->>>>
->>>> Equipped with the Rockchip RK3576 or RK3576J SoC, the ROCK 4D boasts an
->>>> octa-core CPU (4x Cortex-A72 + 4x Cortex-A53), Mali-G52 GPU, and a
->>>> powerful 6 TOPS NPU, making it ideal for AI and multimedia tasks.
->>>>
->>>> Features tested on a Radxa ROCK 4D v1.112:
->>>> - SPI Flash boot
->>>> - Ethernet
->>>>
->>>> ROCK 4D boards with SPI Flash is configured to boot from FSPI0->UFS->USB,
->>>> or directly from USB when the MASKROM button is pressed, booting
->>>> directly from SD-card is not possible on these boards.
->>>>
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>> ---
->>>>    arch/arm/dts/rk3576-rock-4d-u-boot.dtsi   | 15 +++++
->>>>    arch/arm/mach-rockchip/rk3576/MAINTAINERS |  6 ++
->>>>    configs/rock-4d-rk3576_defconfig          | 68 +++++++++++++++++++++++
->>>>    doc/board/rockchip/rockchip.rst           |  1 +
->>>>    4 files changed, 90 insertions(+)
->>>>    create mode 100644 arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
->>>>    create mode 100644 configs/rock-4d-rk3576_defconfig
->>>>
->>>> diff --git a/arch/arm/dts/rk3576-rock-4d-u-boot.dtsi b/arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
->>>> new file mode 100644
->>>> index 000000000000..5056a1cecb83
->>>> --- /dev/null
->>>> +++ b/arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
->>>> @@ -0,0 +1,15 @@
->>>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
->>>> +
->>>> +#include "rk3576-u-boot.dtsi"
->>>> +
->>>> +&rgmii_phy0 {
->>>> +	/delete-property/ reset-gpio;
->>>> +	reset-gpios = <&gpio2 RK_PB5 GPIO_ACTIVE_LOW>;
+>>> For Renesas R-Car Gen3 platforms with CONFIG_POSITION_INDEPENDENT enabled,
+>>> override CONFIG_TEXT_BASE to 0x0 in each defconfig. The top-level Makefile
+>>> already compensates for our PIE builds by appending:
 >>>
->>> Why?
+>>>      OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x50000000
 >>>
->>> If the upstream DT is wrong, please fix the upstream DT first and
->>> cherry-pick.
+>>> so that the flash_writer and legacy recovery tools still see an SREC load
+>>> address of 0x5000_0000. This change prevents the "Program over size Error"
+>>> reported by flash_writer when programming PIE U-Boot on these platforms.
+>>>
+>>> Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+>>> ---
+>>>   configs/hihope_rzg2_defconfig    | 2 +-
+>>>   configs/r8a77970_eagle_defconfig | 2 +-
+>>>   configs/r8a77970_v3msk_defconfig | 2 +-
+>>>   configs/r8a77990_ebisu_defconfig | 2 +-
+>>>   configs/r8a77995_draak_defconfig | 2 +-
+>>>   configs/rzg2_beacon_defconfig    | 2 +-
+>>>   configs/silinux_ek874_defconfig  | 2 +-
+>>>   7 files changed, 7 insertions(+), 7 deletions(-)
+>>>
+>>> diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
+>>> index f5bb28cb0c7..931183cc34b 100644
+>>> --- a/configs/hihope_rzg2_defconfig
+>>> +++ b/configs/hihope_rzg2_defconfig
+>>> @@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=y
+>>>   CONFIG_RCAR_GEN3=y
+>>>   CONFIG_COUNTER_FREQUENCY=16666666
+>>>   CONFIG_ARCH_CPU_INIT=y
+>>> -CONFIG_TEXT_BASE=0x50000000
+>>> +CONFIG_TEXT_BASE=0x0
+>>>   CONFIG_ENV_SIZE=0x20000
+>>>   CONFIG_ENV_OFFSET=0xFFFE0000
+>>>   CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a774a1-hihope-rzg2m-ex"
 >>
->> This has already been fixed in upstream DT [1], however it is targeted
->> for v6.17 so not pickable for another 4-6 weeks.
+>> With POSITION_INDEPENDENT=y the default is 0x0, so on the next resync
+>> these lines will be removed. Please just remove the lines setting them
+>> to 0x50000000, thanks.
 >>
-> 
-> Maybe it'll make it in time for 6.16 but I don't see it in Heiko's 
-> v6.16-armsoc/dtsfixes so it probably is too late in the cycle :)
-> 
-> Can you add a comment that this can be removed once 
-> https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/commit/?h=v6.17-armsoc/dts64&id=cd803da7c033e376a66793a43ee98e136bc6cc25 
-> is merged into U-Boot DT?
-
-I will add a comment to the U-Boot DT in a v2.
-
-Regards,
-Jonas
-
-> 
-> So this part is fine with me now, thanks for the explanation :)
-> 
-> Cheers,
-> Quentin
-
+> I see thank you. Let's drop this patch.
+Send a V2 please.
