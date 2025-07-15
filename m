@@ -4,91 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCFCFC83F1D
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 11:11:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D75C5C83F1D
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 11:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12B6882F6F;
-	Tue, 15 Jul 2025 13:11:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D3E782F6F;
+	Tue, 15 Jul 2025 13:17:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T8FbHts1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kPDBgp3q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B553782F8F; Tue, 15 Jul 2025 13:11:14 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 53CF282F8F; Tue, 15 Jul 2025 13:17:02 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D5F982BF6
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 13:11:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BAF182BF6
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 13:16:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=prabhakar.csengg@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3a52874d593so4220024f8f.0
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 04:11:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752577871; x=1753182671; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JlakVpbSoR63oF3YpxxzLDbY7ikJ6lljuPgsfBb8Xuc=;
- b=T8FbHts1mHaGmmJDKFKL3be9lOzV2UqslaLBGHVacOjdEia+Aay8bIkOfEjvlE6vsU
- Nd743lhMlt+QOTL9NF5BjRyTLLCQQTFK9LimGd2WLygUPtcVvesMtrozVSyEdN1hzUZv
- GovMZFqCu4E0CgLw7I4qM/wY1UkyUDcUUwhctdfxHWnvYvd6+GlbirEPnI0CIA7mSgBg
- 5hCdYWGSzok1gBtXYpd11i8ypC4IEwnyKibyyZmFmC98fbRUJez0m7dIOdN/N2aAcbzb
- 05j1qyliniX8xScNCpeXJ+sxoaJtZU3mwfBSohRf+et/hJ23K1MyFPjbah6i1PpG82jR
- aNDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752577871; x=1753182671;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JlakVpbSoR63oF3YpxxzLDbY7ikJ6lljuPgsfBb8Xuc=;
- b=ksuno27XxQ9GBRatZID82wqsB3W8pkThN1yseJd47Dl75Z/3Y9O2xd0mZxmuoPJfXs
- uioJSugW5gJWrPVc8XJ5vkUG++1DhiSoeHwqNrpgIuAnAaf75gsHZwk75x63CIk4NcXK
- M+AEHn9fxuT8lSjjZW3K15h2h8ErXMsmQ/EKjqK36xnLjwo3V05lJV1sstZcCPJOtmux
- KWoeyTZXmuhmu4v4WBfyCudUWF6z7RrJnActCdaXyhkH2BO4+cdRIdg6NCv4uXrjUmTr
- vHH0T8WTfeyLFl3yc6V7IEjjIJQdKLdbR0G98X+EyTtWIvKp9nidYkmhWBFkfZf4k/HK
- tc7A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUiP+WmDOKXi6zcMfnld/r5s5IVu0XrHk9XCVuXBQv0TSf7+HNBgmYsitbB78Tk4PJFGi2P5oE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxws/LfbzvY4IxV662zUA8mdPcS6cIs70UfFnbhcYovTGzmgCMB
- nD5CRHYuo+B1zZ6x1xoH1d+jF/4sxtg5lZ8ltmI/T2ImF7Wv31o/yqaD
-X-Gm-Gg: ASbGncsRM/dbPlLyX6ICEtw/DXuADVL5zhE2U7LvqmgVn4lyDa5FoMOqJ0H2kUv8U1Y
- +s8oCKYlzNKyX1l73cMo9pj6L2957fmemrvKCRY6S3QBDpJF1fugMJR6U4IuNV00O+roTLvyp7Z
- lXIvFwdgQCYwZtqx1AMoIscOsEVOQ4NcOafhVppA/hKpwAlqUFSoVnP459dmyH1aHAM0t8wjv1m
- 23i1BnDFnXmYcoSitrZ+bTyXTLPlTAYiezs2HgIc3mKgJlrmESpWekFq1JwTXUJ0myZZtynwDLK
- wddjlARBDGonwS1rMhieeRWmC6kQl41QRLB5/y8smZ4dlfa1bVxTNwo6sQA0ZYKHByYlScFsZY3
- 1HxbGFeG0sL5//Vf3/4f8mofkwyTeX2KJU6scSdW0wc6/Fl2zsb33glDD
-X-Google-Smtp-Source: AGHT+IFetuabXhAji8tSy3u4dVefChTO40S321bWZh8tWNN/EKDQtMIEfARriayVvtQpbeY7vm0XVA==
-X-Received: by 2002:a05:6000:2d11:b0:3a4:fbaf:3f99 with SMTP id
- ffacd0b85a97d-3b5f188d7b8mr9990477f8f.13.1752577871122; 
- Tue, 15 Jul 2025 04:11:11 -0700 (PDT)
-Received: from iku.example.org ([2a06:5906:61b:2d00:55d8:78ff:485d:b45f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8bd18ffsm14604551f8f.9.2025.07.15.04.11.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 04:11:10 -0700 (PDT)
-From: Prabhakar <prabhakar.csengg@gmail.com>
-X-Google-Original-From: Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Adam Ford <aford173@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- "Cogent Embedded, Inc." <source@cogentembedded.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Chris Paterson <chris.paterson2@renesas.com>,
- Prabhakar <prabhakar.csengg@gmail.com>,
- Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH] configs: renesas: Set CONFIG_TEXT_BASE to 0x0 for R-Car Gen3
- PIE builds
-Date: Tue, 15 Jul 2025 12:11:03 +0100
-Message-ID: <20250715111103.1092458-1-prabhakar.mahadev-lad.rj@bp.renesas.com>
-X-Mailer: git-send-email 2.50.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a257=Z4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1752578217;
+ bh=PEV2BrdLupkqpRbt+BltdUkQMAtYJxTANfGgv4eCjKc=;
+ b=kPDBgp3qwwJjd31sLt7yZuSBiscS6tRzpem5OGedYlNoU7jsjIlU+EiGbHBED/tlZvF8F88oc
+ iNQpZcix4WRfZ2tMq0N9aQUxdQQ2uq4OnG+C4XH12mWLbCHxi9ykxCfvWwiTqXkUenFS+xlPT2Z
+ m4KqqTnMkVF8t3VckmRHKbh72qqVD5RpImXOKDYvc0T0K4HM4dLqrdqEWyJ3+ohwcNjmG8ZYsZ1
+ nxrYi9aMshVwsUqGRGfmjfAdHOEIjgnbVwkoA7uv7p5P3QYYYR4HQe7QB02y2jr7s+eecXh/QTD
+ oAbh3JMmQT61smCj7B8E+fKorckhpOozj/TcHKUXvkPw==
+X-Forward-Email-ID: 687638a102da433925acb7eb
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.1.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <23c00620-379d-4bf6-b692-86146b386789@kwiboo.se>
+Date: Tue, 15 Jul 2025 13:16:44 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
+To: Peng Fan <peng.fan@nxp.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <ziyao@disroot.org>,
+ Chukun Pan <amadeus@jmu.edu.cn>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+References: <20250714203410.1782783-1-jonas@kwiboo.se>
+ <PAXPR04MB84591B628A56777F00320BEF8857A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <PAXPR04MB84591B628A56777F00320BEF8857A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,120 +78,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Hi Peng,
 
-For Renesas R-Car Gen3 platforms with CONFIG_POSITION_INDEPENDENT enabled,
-override CONFIG_TEXT_BASE to 0x0 in each defconfig. The top-level Makefile
-already compensates for our PIE builds by appending:
+On 7/15/2025 3:15 AM, Peng Fan wrote:
+>> Subject: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for
+>> RK3528
+>>
+>> eMMC erase and write support on RK3528 is somewhat unreliable,
+>> sometime e.g. mmc erase and write commands will fail with an error.
+>>
+>> Use the delay line lock value for half card clock cycle,
+>> DLL_LOCK_VALUE, to set a manual xx_TAP_VALUE to fix the unreliable
+>> eMMC support.
+>>
+>> This is only enabled for RK3528, remaining SoCs still use the automatic
+>> tap value, (DLL_LOCK_VALUE * 2) % 256, same value we configure
+>> manually for RK3528.
+> 
+> May I ask how linux kernel handle this issue you spotted?
 
-    OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x50000000
+I am not yet sure if or how this issue may be affecting Linux.
 
-so that the flash_writer and legacy recovery tools still see an SREC load
-address of 0x5000_0000. This change prevents the "Program over size Error"
-reported by flash_writer when programming PIE U-Boot on these platforms.
+This issue turned up when I was testing eMMC on my ArmSoM Sige1 board,
+where a simple "mmc erase 40 5000" to remove an existing bootloader or
+use "mmc write $fileaddr 40 5000" to write the new bootloader
+unexpectedly resulted in an ERROR.
 
-Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
----
- configs/hihope_rzg2_defconfig    | 2 +-
- configs/r8a77970_eagle_defconfig | 2 +-
- configs/r8a77970_v3msk_defconfig | 2 +-
- configs/r8a77990_ebisu_defconfig | 2 +-
- configs/r8a77995_draak_defconfig | 2 +-
- configs/rzg2_beacon_defconfig    | 2 +-
- configs/silinux_ek874_defconfig  | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+When using the generic-rk3528 target (a minimal generic device tree) the
+emmc module seems to initialize correctly:
 
-diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
-index f5bb28cb0c7..931183cc34b 100644
---- a/configs/hihope_rzg2_defconfig
-+++ b/configs/hihope_rzg2_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
-+CONFIG_TEXT_BASE=0x0
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a774a1-hihope-rzg2m-ex"
-diff --git a/configs/r8a77970_eagle_defconfig b/configs/r8a77970_eagle_defconfig
-index 4ab362f0d43..7d6ba1b9cb4 100644
---- a/configs/r8a77970_eagle_defconfig
-+++ b/configs/r8a77970_eagle_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
-+CONFIG_TEXT_BASE=0x0
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0x700000
-diff --git a/configs/r8a77970_v3msk_defconfig b/configs/r8a77970_v3msk_defconfig
-index 5ef81682caa..991050e5855 100644
---- a/configs/r8a77970_v3msk_defconfig
-+++ b/configs/r8a77970_v3msk_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
-+CONFIG_TEXT_BASE=0x0
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0x700000
-diff --git a/configs/r8a77990_ebisu_defconfig b/configs/r8a77990_ebisu_defconfig
-index 414bfdebab1..b1dbecdbef7 100644
---- a/configs/r8a77990_ebisu_defconfig
-+++ b/configs/r8a77990_ebisu_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
-+CONFIG_TEXT_BASE=0x0
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
-diff --git a/configs/r8a77995_draak_defconfig b/configs/r8a77995_draak_defconfig
-index 12d92067de5..1bf861a516f 100644
---- a/configs/r8a77995_draak_defconfig
-+++ b/configs/r8a77995_draak_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
-+CONFIG_TEXT_BASE=0x0
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
-diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
-index 0b91337b17b..0aa7a91f77c 100644
---- a/configs/rzg2_beacon_defconfig
-+++ b/configs/rzg2_beacon_defconfig
-@@ -3,7 +3,7 @@
- CONFIG_ARM=y
- CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
--CONFIG_TEXT_BASE=0x50000000
-+CONFIG_TEXT_BASE=0x0
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
-diff --git a/configs/silinux_ek874_defconfig b/configs/silinux_ek874_defconfig
-index acdd1ad5205..68157f17943 100644
---- a/configs/silinux_ek874_defconfig
-+++ b/configs/silinux_ek874_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
-+CONFIG_TEXT_BASE=0x0
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x3F0000
--- 
-2.50.1
+  => mmc dev 0
+  rk3568_sdhci_config_dll: clock=400000 enable=0
+  rk3568_sdhci_config_dll: clock=400000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=200000000 enable=0
+  rk3568_sdhci_config_dll: clock=200000000 enable=1
+  rk3568_sdhci_config_dll: dll_tap_value=2007600 DLL_LOCK_VALUE=3b
+  switch to partitions #0, OK
+  mmc0(part 0) is current device
+  =>
+
+However when using a real device tree for the board the sdhci init seem
+to sometime behave differently:
+
+  => mmc dev 0
+  rk3568_sdhci_config_dll: clock=400000 enable=0
+  rk3568_sdhci_config_dll: clock=400000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=200000000 enable=0
+  rk3568_sdhci_config_dll: clock=200000000 enable=1
+  rk3568_sdhci_config_dll: dll_tap_value=2007600 DLL_LOCK_VALUE=3b
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=200000000 enable=0
+  rk3568_sdhci_config_dll: clock=200000000 enable=1
+  rk3568_sdhci_config_dll: dll_tap_value=2007600 DLL_LOCK_VALUE=3b
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=25000000 enable=0
+  rk3568_sdhci_config_dll: clock=25000000 enable=1
+  rk3568_sdhci_config_dll: clock=52000000 enable=0
+  rk3568_sdhci_config_dll: clock=52000000 enable=1
+  switch to partitions #0, OK
+  mmc0(part 0) is current device
+  =>
+
+or something similar could be observed.
+
+Please note that above code that is run print out the value that would
+have been used for dll_tap_value but it never uses it to configure the
+manual tap values.
+
+However when the dll_tap_value are used the initialization seem to be
+back to working normally (single cycle) and erase/write starts working.
+
+Possible that some other underlying power, clock or timing issue is
+causing this discrepancy.
+
+To my knowlede Linux is using interrups during sdhci card inizialization
+compared to U-Boot, so Linux may not be affected of this issue.
+
+Regards,
+Jonas
+
+> 
+> Thanks,
+> Peng.
+> 
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> Changes in v2:
+>> - Rename flag and field value to function name, TAPVALUE_FROM_SW
+>> - Simplify and make code more understandable with use of
+>> FIELD_GET/PREP,
+>>   should be more clear that xx_TAP_VALUE is set to DLL_LOCK_VALUE *
+>> 2
+>> ---
+>>  drivers/mmc/rockchip_sdhci.c | 27 ++++++++++++++++++++++-----
+>>  1 file changed, 22 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/drivers/mmc/rockchip_sdhci.c
+>> b/drivers/mmc/rockchip_sdhci.c index 761e3619329c..cca917da68e7
+>> 100644
+>> --- a/drivers/mmc/rockchip_sdhci.c
+>> +++ b/drivers/mmc/rockchip_sdhci.c
+>> @@ -9,6 +9,7 @@
+>>  #include <dm.h>
+>>  #include <dm/ofnode.h>
+>>  #include <dt-structs.h>
+>> +#include <linux/bitfield.h>
+>>  #include <linux/delay.h>
+>>  #include <linux/err.h>
+>>  #include <linux/libfdt.h>
+>> @@ -86,6 +87,9 @@
+>>  #define DLL_CMDOUT_SRC_CLK_NEG		BIT(28)
+>>  #define DLL_CMDOUT_EN_SRC_CLK_NEG	BIT(29)
+>>  #define DLL_CMDOUT_BOTH_CLK_EDGE	BIT(30)
+>> +#define DLL_TAPVALUE_FROM_SW		BIT(25)
+>> +#define DLL_TAP_VALUE_PREP(x)
+>> 	FIELD_PREP(GENMASK(15, 8), (x))
+>> +#define DLL_LOCK_VALUE_GET(x)
+>> 	FIELD_GET(GENMASK(7, 0), (x))
+>>
+>>  #define DLL_LOCK_WO_TMOUT(x) \
+>>  	((((x) & DWCMSHC_EMMC_DLL_LOCKED) ==
+>> DWCMSHC_EMMC_DLL_LOCKED) && \ @@ -93,6 +97,7 @@
+>>  #define ROCKCHIP_MAX_CLKS		3
+>>
+>>  #define FLAG_INVERTER_FLAG_IN_RXCLK	BIT(0)
+>> +#define FLAG_TAPVALUE_FROM_SW		BIT(1)
+>>
+>>  struct rockchip_sdhc_plat {
+>>  	struct mmc_config cfg;
+>> @@ -317,7 +322,7 @@ static int rk3568_sdhci_config_dll(struct
+>> sdhci_host *host, u32 clock, bool enab
+>>  	struct sdhci_data *data = (struct sdhci_data
+>> *)dev_get_driver_data(priv->dev);
+>>  	struct mmc *mmc = host->mmc;
+>>  	int val, ret;
+>> -	u32 extra, txclk_tapnum;
+>> +	u32 extra, txclk_tapnum, dll_tap_value;
+>>
+>>  	if (!enable) {
+>>  		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
+>> @@ -347,7 +352,15 @@ static int rk3568_sdhci_config_dll(struct
+>> sdhci_host *host, u32 clock, bool enab
+>>  		if (ret)
+>>  			return ret;
+>>
+>> -		extra = DWCMSHC_EMMC_DLL_DLYENA |
+>> DLL_RXCLK_ORI_GATE;
+>> +		if (data->flags & FLAG_TAPVALUE_FROM_SW)
+>> +			dll_tap_value = DLL_TAPVALUE_FROM_SW |
+>> +
+>> 	DLL_TAP_VALUE_PREP(DLL_LOCK_VALUE_GET(val) * 2);
+>> +		else
+>> +			dll_tap_value = 0;
+>> +
+>> +		extra = DWCMSHC_EMMC_DLL_DLYENA |
+>> +			DLL_RXCLK_ORI_GATE |
+>> +			dll_tap_value;
+>>  		if (data->flags & FLAG_INVERTER_FLAG_IN_RXCLK)
+>>  			extra |= DLL_RXCLK_NO_INVERTER;
+>>  		sdhci_writel(host, extra,
+>> DWCMSHC_EMMC_DLL_RXCLK); @@ -361,19 +374,22 @@ static int
+>> rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>>  				DLL_CMDOUT_BOTH_CLK_EDGE |
+>>  				DWCMSHC_EMMC_DLL_DLYENA |
+>>  				data->hs400_cmdout_tapnum |
+>> -				DLL_CMDOUT_TAPNUM_FROM_SW;
+>> +				DLL_CMDOUT_TAPNUM_FROM_SW
+>> |
+>> +				dll_tap_value;
+>>  			sdhci_writel(host, extra,
+>> DWCMSHC_EMMC_DLL_CMDOUT);
+>>  		}
+>>
+>>  		extra = DWCMSHC_EMMC_DLL_DLYENA |
+>>  			DLL_TXCLK_TAPNUM_FROM_SW |
+>>  			DLL_TXCLK_NO_INVERTER |
+>> -			txclk_tapnum;
+>> +			txclk_tapnum |
+>> +			dll_tap_value;
+>>  		sdhci_writel(host, extra,
+>> DWCMSHC_EMMC_DLL_TXCLK);
+>>
+>>  		extra = DWCMSHC_EMMC_DLL_DLYENA |
+>>  			data->hs400_strbin_tapnum |
+>> -			DLL_STRBIN_TAPNUM_FROM_SW;
+>> +			DLL_STRBIN_TAPNUM_FROM_SW |
+>> +			dll_tap_value;
+>>  		sdhci_writel(host, extra,
+>> DWCMSHC_EMMC_DLL_STRBIN);
+>>  	} else {
+>>  		/*
+>> @@ -663,6 +679,7 @@ static const struct sdhci_data rk3528_data = {
+>>  	.set_ios_post = rk3568_sdhci_set_ios_post,
+>>  	.set_clock = rk3568_sdhci_set_clock,
+>>  	.config_dll = rk3568_sdhci_config_dll,
+>> +	.flags = FLAG_TAPVALUE_FROM_SW,
+>>  	.hs200_txclk_tapnum = 0xc,
+>>  	.hs400_txclk_tapnum = 0x6,
+>>  	.hs400_cmdout_tapnum = 0x6,
+>> --
+>> 2.49.0
+> 
 
