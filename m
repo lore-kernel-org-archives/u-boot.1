@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0531C83F22
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 14:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B6DC83F17
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 14:49:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4866383092;
-	Tue, 15 Jul 2025 16:47:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22F3982F8E;
+	Tue, 15 Jul 2025 16:49:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aNDhT57C";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RDF9VrrU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3969482FAB; Tue, 15 Jul 2025 15:04:01 +0200 (CEST)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id 9249B82FCA; Tue, 15 Jul 2025 16:49:41 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA88A82BF6
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 15:03:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE19C82E37
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 16:49:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-74b52bf417cso3450619b3a.0
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 06:03:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=prabhakar.csengg@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-45600581226so35492055e9.1
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 07:49:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752584637; x=1753189437; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1752590979; x=1753195779; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MkRqOcm9nRXDvcgXWhVINmj6JvK49QrdTuoqBqIKhh0=;
- b=aNDhT57C3Uf1vvwFWE9mjSH3cVPvHirAugaRg8HFnxp79uNjZcCgDraHiYzAin+8C8
- RPvCcCVr6GikQBaeahgC3+0t8bmcnLCf6hgbTZrVqfd7h75jXITr0rOnSYvdzEHuYsQ3
- w15YaqQmmW/55iUoogUiuK2g9It/LREET48UfO4x0T+AIds3T2RvOCfykOcsGsO3PvZ/
- cWx37LUWFqb98HYQM6BxJAm2miBzASgSS3av0qOYDqroj1GxH7AQ/JHO88vmlixhk2pR
- tfHS2DnSDJJFIuPZ3nqL23CcWUZyMBPjV4PIrOKIds/bd88nQdYiJGHqcEcB1+ROh3lT
- 7+CQ==
+ bh=EMkxHH+9i+ZVsI2/Tknpd/Dq1v8W0V2pKliz6vUeAAw=;
+ b=RDF9VrrUAQO2xRIrgtl1JG2XtgZAycZBiROk86SIgNxIYsRxB7RbagInM/7/Wk5aNe
+ PY/q+4pceccWJqPOZydk9rHj8enVFhpgmSWH8WGTBNKzdh38DDuNVZBjUOGpTlbQjfYy
+ fjSw2D5rdoU6HSTEDZbput2tDGauGmsp63dfG4X7OGLA0sciTSmkG0hZK/KRcmOcR0rJ
+ LDq+U2A7VoI2ka9HpPDN0ZGq5VcZaNjIFEsKr7Xil8DUThHxdwSbq1usG5gcWlg2qSe4
+ II/ngNYcjgIUhzf/5p0p0L46UukIq++V2PUu2RTO8NC/G16fuh408Krbw0EYiP5Visvc
+ RS6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752584637; x=1753189437;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1752590979; x=1753195779;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MkRqOcm9nRXDvcgXWhVINmj6JvK49QrdTuoqBqIKhh0=;
- b=IgqzIZBWWavvpmuWwocoupDXakMtUZ4quYSk+g7ZmTHMh9okoZdKSxqs/r99EWCp3l
- wBmZlmPQ+Oa92GCIJ+aafXwzripnxi5XIvmVgzJad9CShWLk2Yq0LdcbZMOIC+4RzpQW
- ytzCd116ieDas5yXMqy/66bZiQ32+I/2pkyhj+UiN5SRwX8gZuZ0570dRmiadQvvm3Yc
- NX5viB2Prt7NVkaNwrJ8Q9m5US1j4vRz5hyn29mIinN1+rwzwJlIn0Zw/DFvNo9LOLM+
- VJv+4yGWdRTUlalobsTbN4IEbSl7pW3eg4iLL94GinBch3/gRSgHk4RhqFdTsl0FAON0
- qZqQ==
-X-Gm-Message-State: AOJu0YwXFOVijgiILxcDAln583HoSSTbtiPyVgayuIQ0sgyusTZbrDAV
- 2J1hXyEw+fHymefM4mhsDSke39QnhlBM0FA9Q9EgLxxywXg38tL04lk0+xnMSQ==
-X-Gm-Gg: ASbGncv3Ie84Mu2puzIKC2YknkVkiGS3xC9g4A+6mx4QYKoIi9zqANARGAiSG4gcmPq
- cw2Dw997kW21PTYigNPvsN2gqk3rpWhn7X18Aixtf6ykDtuQl6F99lmGqrF4CuGTZ0Z5f4QZGEH
- jD2tZit/S/zMjhvDVmZv5OsS+Sj0h/65Vo0a4BuvZaUMPR/KS1UUyw2p6YqNuS5hKb9xFYnM579
- cRBIvZ1RtMXCqsuNvLg1bPFhNVTx5c1OWEyBtNtUQf2XBe/EuVaqYjzroW6C00iqX9lAdffn2YW
- tQGCB/WP6mSeVSObZEPqG2pK3U6FOxjBhz9BmXIduFdW1P2sCdTRJdyhnmGTja4+oy4KVLkWDEF
- xuGScjWRcZJ/rFyNTx3dnoXR5cJo3rNw4bYyrUqa0BYT4trNGMCNL0Ary3GSdW1aedcJ3JZY=
-X-Google-Smtp-Source: AGHT+IFJDRy/Qo3UW8j2pV66C3KGreHdiAT6CpUdeHnZdXhoWau269mnMwV0fCioTUgLvjmDoeOHgQ==
-X-Received: by 2002:a05:6a00:6ca3:b0:755:ad06:b6d1 with SMTP id
- d2e1a72fcca58-755ad06c6e8mr4379613b3a.20.1752584636773; 
- Tue, 15 Jul 2025 06:03:56 -0700 (PDT)
-Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
- [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74eb9dd5fc9sm12392356b3a.2.2025.07.15.06.03.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 06:03:56 -0700 (PDT)
-From: Aristo Chen <jj251510319013@gmail.com>
-X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, jan.kiszka@siemens.com, baocheng.su@siemens.com,
- sjg@chromium.org, ravi@prevas.dk, quentin.schulz@cherry.de,
- Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v2 3/3] test: fit: add test case for invalid default
- configuration reference
-Date: Tue, 15 Jul 2025 13:03:07 +0000
-Message-ID: <20250715130317.3886-4-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250715130317.3886-1-aristo.chen@canonical.com>
-References: <20250715130317.3886-1-aristo.chen@canonical.com>
+ bh=EMkxHH+9i+ZVsI2/Tknpd/Dq1v8W0V2pKliz6vUeAAw=;
+ b=kGH0gWsAFWWrnN8BALIekmdtrOsy01VgGv9bBKAAo+GYgUTD0GyVCz1rWuxBa2jTLQ
+ T6iBKOzgShXOmla1yzu0dL5v/aC0ouXSDDN8hdJAkBNAf6mAtCv/ERZAkwoulckz6fWU
+ Dbhx7B4NBQEzRSluZI2rhnQc7Pff56pAyYK5zfrqIwXqEgBR6hUQqsXTfSWkxJSlXk2d
+ AxfvCai3WB9dQ086T2xMF7hExFgIjBCDUeSJ2rPUB2DV7fvQzyBpga06dCL0gY0IDA7E
+ CTGZH5w6HD3pWY6dpjJD1IPeFXIIb2xSgK1+EX89u3qHiSgIDWCiXTUZq8fX4FEPwMDy
+ yHEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXneOkrwz4/xZ7mTPbYji+Q/cXZNeq90q9O0zuIOYlyjv9on7pQMWJFLqzKtCdmacjMYIwpvXw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxW9pviIIalnoXrBFCUveqM85lScYaatCPhSk36TF92ehL1qMTv
+ OVHo0kp0H/805N8Lq/aLwbQlDihQG0PMsaYUXrgR77ubywsiAIJ6lprXESWesH9tuQBhZwyhzac
+ CA0025iLXWcgJLBhQV3F3SvCCz2MC/Tw=
+X-Gm-Gg: ASbGncsiBInAGlL4SGI95PN1t+t56mDFFU/PIc++qviNbrD7MyL48ehW+sOPdKZLbvl
+ F+xoAmp6D3fwEAXyCwKDMpxTbzH8GjGI7SpxIDYE/ZAjLaaa3IpuCsE+y3fObOnVsQqAOHoU5re
+ O2PE+ij2pJmAMlTRoG4Q4iisKVkJadcysLK62lPsOPYUnEzVauG10blkt7Hc0m5Bco30InU9fs4
+ TKxEFjM
+X-Google-Smtp-Source: AGHT+IHeDXcyS3Ab1eKeIe78WwZFL7xcb2Yn+SdjBRpAFGGgE22p53xaHe2VUuKGybOnknnA92x7jug9WftlrR6cGZM=
+X-Received: by 2002:a05:600c:310a:b0:43d:4686:5cfb with SMTP id
+ 5b1f17b1804b1-4562751c28bmr27760255e9.27.1752590978687; Tue, 15 Jul 2025
+ 07:49:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 15 Jul 2025 16:47:06 +0200
+References: <20250715111103.1092458-1-prabhakar.mahadev-lad.rj@bp.renesas.com>
+ <20250715143151.GE193579@bill-the-cat>
+In-Reply-To: <20250715143151.GE193579@bill-the-cat>
+From: "Lad, Prabhakar" <prabhakar.csengg@gmail.com>
+Date: Tue, 15 Jul 2025 15:49:11 +0100
+X-Gm-Features: Ac12FXwuSpaUCwx-azEoSLMYfJXp8dQxiabxw-hR4n60ZCvimYJHmiCxNmztns8
+Message-ID: <CA+V-a8u4hOPNijmqO4P=yvPoyOjxApiEeT4kNJ4mBt-vY55A_A@mail.gmail.com>
+Subject: Re: [PATCH] configs: renesas: Set CONFIG_TEXT_BASE to 0x0 for R-Car
+ Gen3 PIE builds
+To: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Biju Das <biju.das.jz@bp.renesas.com>, 
+ Adam Ford <aford173@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ "Cogent Embedded, Inc." <source@cogentembedded.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Chris Paterson <chris.paterson2@renesas.com>, 
+ Fabrizio Castro <fabrizio.castro.jz@renesas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,81 +103,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Recent changes to mkimage introduced a validation step to ensure that
-the 'default' property under the /configurations node in a FIT image
-references a valid configuration subnode. If the referenced node is
-missing, mkimage will now return an error.
+Hi Tom,
 
-This patch adds a Python test case to verify that mkimage correctly
-fails when the 'default' configuration does not exist. The test creates
-a minimal ITS with an invalid default reference and checks that mkimage
-produces the expected error message.
+On Tue, Jul 15, 2025 at 3:31=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Tue, Jul 15, 2025 at 12:11:03PM +0100, Prabhakar wrote:
+> > From: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> >
+> > For Renesas R-Car Gen3 platforms with CONFIG_POSITION_INDEPENDENT enabl=
+ed,
+> > override CONFIG_TEXT_BASE to 0x0 in each defconfig. The top-level Makef=
+ile
+> > already compensates for our PIE builds by appending:
+> >
+> >     OBJCOPYFLAGS_u-boot-elf.srec +=3D --change-addresses=3D0x50000000
+> >
+> > so that the flash_writer and legacy recovery tools still see an SREC lo=
+ad
+> > address of 0x5000_0000. This change prevents the "Program over size Err=
+or"
+> > reported by flash_writer when programming PIE U-Boot on these platforms=
+.
+> >
+> > Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> > ---
+> >  configs/hihope_rzg2_defconfig    | 2 +-
+> >  configs/r8a77970_eagle_defconfig | 2 +-
+> >  configs/r8a77970_v3msk_defconfig | 2 +-
+> >  configs/r8a77990_ebisu_defconfig | 2 +-
+> >  configs/r8a77995_draak_defconfig | 2 +-
+> >  configs/rzg2_beacon_defconfig    | 2 +-
+> >  configs/silinux_ek874_defconfig  | 2 +-
+> >  7 files changed, 7 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defcon=
+fig
+> > index f5bb28cb0c7..931183cc34b 100644
+> > --- a/configs/hihope_rzg2_defconfig
+> > +++ b/configs/hihope_rzg2_defconfig
+> > @@ -5,7 +5,7 @@ CONFIG_ARCH_RENESAS=3Dy
+> >  CONFIG_RCAR_GEN3=3Dy
+> >  CONFIG_COUNTER_FREQUENCY=3D16666666
+> >  CONFIG_ARCH_CPU_INIT=3Dy
+> > -CONFIG_TEXT_BASE=3D0x50000000
+> > +CONFIG_TEXT_BASE=3D0x0
+> >  CONFIG_ENV_SIZE=3D0x20000
+> >  CONFIG_ENV_OFFSET=3D0xFFFE0000
+> >  CONFIG_DEFAULT_DEVICE_TREE=3D"renesas/r8a774a1-hihope-rzg2m-ex"
+>
+> With POSITION_INDEPENDENT=3Dy the default is 0x0, so on the next resync
+> these lines will be removed. Please just remove the lines setting them
+> to 0x50000000, thanks.
+>
+I see thank you. Let's drop this patch.
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- test/py/tests/test_fit_mkimage_validate.py | 45 ++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
-
-diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests/test_fit_mkimage_validate.py
-index af56f08ca10..ef974c8c762 100644
---- a/test/py/tests/test_fit_mkimage_validate.py
-+++ b/test/py/tests/test_fit_mkimage_validate.py
-@@ -7,6 +7,7 @@ import os
- import subprocess
- import pytest
- import fit_util
-+import re
- 
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.requiredtool('dtc')
-@@ -56,3 +57,47 @@ def test_fit_invalid_image_reference(ubman):
-     assert result.returncode != 0, "mkimage should fail due to missing image reference"
-     assert "references undefined image 'notexist'" in result.stderr
- 
-+def test_fit_invalid_default_config(ubman):
-+    """Test that mkimage fails when default config is missing"""
-+
-+    its_fname = fit_util.make_fname(ubman, "invalid.its")
-+    itb_fname = fit_util.make_fname(ubman, "invalid.itb")
-+    kernel = fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
-+
-+    # Write ITS with an invalid reference to a nonexistent default config
-+    its_text = '''
-+/dts-v1/;
-+
-+/ {
-+    images {
-+        kernel@1 {
-+            description = "Test Kernel";
-+            data = /incbin/("kernel.bin");
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x40000>;
-+            entry = <0x40000>;
-+        };
-+    };
-+
-+    configurations {
-+        default = "conf@1";
-+        conf@2 {
-+            kernel = "kernel@1";
-+        };
-+    };
-+};
-+'''
-+
-+    with open(its_fname, 'w') as f:
-+        f.write(its_text)
-+
-+    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
-+    cmd = [mkimage, '-f', its_fname, itb_fname]
-+
-+    result = subprocess.run(cmd, capture_output=True, text=True)
-+
-+    assert result.returncode != 0, "mkimage should fail due to missing default config"
-+    assert re.search(r"Default configuration '.*' not found under /configurations", result.stderr)
--- 
-2.43.0
-
+Cheers,
+Prabhakar
