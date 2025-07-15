@@ -4,99 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06C38C83F1D
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 10:17:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC02C83F22
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 10:23:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08580830EA;
-	Tue, 15 Jul 2025 12:16:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 398CB83013;
+	Tue, 15 Jul 2025 12:22:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="gG9BObBG";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="xSl8kf6Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E0EE830C0; Tue, 15 Jul 2025 12:16:27 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8F9148307F; Tue, 15 Jul 2025 12:22:58 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F78F82F8F
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 12:16:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCC8682FCA
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 12:22:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56F5lVH2021130;
- Tue, 15 Jul 2025 10:16:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- LEq7IuvY4VuI3qhcrrdT3Rp2nRfRCGrg4ZB2B6EYHa4=; b=gG9BObBGUW6AjaCy
- JanUNY0akZ7tS2xEJhQWGLOBh4F+RbeAuxp/oOCMfhe2bw3KP0UICbH5Tf0wNgqm
- 7/N6PSaANfK5EhyQwVRYs4Q3xWnGSummCsc8AHbEs9euxkqEJVBQsG3zI81Kczen
- QQVBCK4dV9tKF+vUQoHvlX4E6zzDsUFg3aLcf0wbmwf6xkkv4vhOCGSAAnlBguuI
- 8F02Uo1MdyHgrbOYlVsYPPlKeYGZpPQisFJnyZLO1cUbAa1hzoxDVg1W69DeUYYZ
- zh1y/22AdZC3wflplrdVKlNl9ym8sWaFRxx7N1Rqxt+ST8h9JZCDfX0OH00vBHR+
- HU8AVA==
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47w5dpakdg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 15 Jul 2025 10:16:17 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56FAGGvX013292
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 15 Jul 2025 10:16:16 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.10; Tue, 15 Jul 2025 03:16:12 -0700
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <trini@konsulko.com>, <casey.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <sumit.garg@kernel.org>, <lukma@denx.de>,
- <seanga2@gmail.com>, <quic_varada@quicinc.com>,
- <marek.vasut+renesas@mailbox.org>, <bhupesh.linux@gmail.com>,
- <alexeymin@postmarketos.org>, <u-boot@lists.denx.de>,
- <u-boot-qcom@groups.io>
-Subject: [PATCH v1 6/6] doc: board/qualcomm: Update RDP flashing instructions
-Date: Tue, 15 Jul 2025 15:45:38 +0530
-Message-ID: <20250715101538.4072985-7-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250715101538.4072985-1-quic_varada@quicinc.com>
-References: <20250715101538.4072985-1-quic_varada@quicinc.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a257=Z4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1752574972;
+ bh=uV+QFIo1F98sVHSeendF1CYFefssPCgoM02bLcPYWWA=;
+ b=xSl8kf6QaIXMqTlUIhhONjPm7jGvjDjiwhyE2FBtiKRZMcuK1UDRwo85Ao99UF3mhvA2m0qPa
+ twTnHibHEzmronvstBk38vz34HPDN4S9BhIKxT4n0mJpHNS+4RECe0x3gDfQ9LRKBWfBS0WOe7s
+ fpsfCw8TTZRjA0CIyBBGI1raHiNScePcWmu8DG/jFxY++LEd14LMZmUkFggy3u88UPyvzqYHA4X
+ YLTRsc+5g267Z3GW9gBLMH77D61N/KA/gUpQy3i/p8cag51er7R7QAOinaWfsVpJGrSYLWdnm2M
+ eDYNF/IEUb/TzIRuhOkrE7GkpSXuPL0q5DK5XQbYYurA==
+X-Forward-Email-ID: 68762bf602da433925ac7ea1
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.1.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <17927728-3ac7-40b9-b085-1fb8a6f15beb@kwiboo.se>
+Date: Tue, 15 Jul 2025 12:22:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE1MDA5MyBTYWx0ZWRfX0iBpkh4ORZsz
- E/rFe7WomWO9S3lTKhnQx/8yQrCKKklHW64zo0d0UcozzL3f4G5ohFKkMngOvF6j3bhonjnpSO/
- A5AsG0BH8UXKYqskGDPjFH9DueHCpZTSlLC2IAA2yQcyshtD5CLPuX6wFkVdeTVLcc4z0Ft8+ge
- TNPt7nxEA0z4oitS05LyLYVfTEjuyntcR/Jewo5+V7/Wwn7dfrgyYJ77EjC/4z+7AzDEUqcUaQV
- d8Xb9NBTkwUm0LPA1XKWIipZiEJ1YQih/9a3ejqjOfOcxo/IKAEwBzzHYbt6ufFLqjezPr67fRK
- t8CjU9TxqDR4qIUs2b3fXLgBBO1sF1qQaS85oY14aCu4nYaTcz3SB57q1irNxp6qKUuwN0L+qm7
- PhSyr8HhRdFstH8Jexj2L2GGlJTX5BaHzfHeUifUxZu9G/0mFzeDFdJvzorfIiGCt99nvtus
-X-Proofpoint-GUID: Za1wQY_PrQmMCdTB8zBWJDQq2budnrbm
-X-Proofpoint-ORIG-GUID: Za1wQY_PrQmMCdTB8zBWJDQq2budnrbm
-X-Authority-Analysis: v=2.4 cv=Y+r4sgeN c=1 sm=1 tr=0 ts=68762a71 cx=c_pps
- a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=Wb1JkmetP80A:10 a=COk6AnOGAAAA:8 a=r5MC_wQ6cbKlY4jr-AgA:9
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-15_01,2025-07-14_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 mlxlogscore=903 phishscore=0 malwarescore=0 priorityscore=1501
- adultscore=0 impostorscore=0 mlxscore=0 suspectscore=0 lowpriorityscore=0
- bulkscore=0 spamscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507150093
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/17] rockchip: odroid-go2: Remove cru assigned-clocks
+ override
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250713233429.1376172-1-jonas@kwiboo.se>
+ <20250713233429.1376172-3-jonas@kwiboo.se>
+ <7f502029-21de-45e3-a9da-4c681af0affc@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <7f502029-21de-45e3-a9da-4c681af0affc@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,38 +78,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the flashing instructions to include fastboot.
+Hi Quentin,
 
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
- doc/board/qualcomm/rdp.rst | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+On 7/15/2025 11:19 AM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 7/14/25 1:33 AM, Jonas Karlman wrote:
+>> Remove the cru assigned-clocks override now that SCLK_GPU is supported
+>> by the clock driver.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> 
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> And this seems like we can remove
+> 
+> /delete-property/ assigned-clocks;
+> /delete-property/ assigned-clock-rates;
+> 
+> from cru and pmucru from arch/arm/dts/px30-u-boot.dtsi?
 
-diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-index 99cf8eba57c..97a64e4677c 100644
---- a/doc/board/qualcomm/rdp.rst
-+++ b/doc/board/qualcomm/rdp.rst
-@@ -42,6 +42,20 @@ on your device with::
- 
- U-Boot should be running after a reboot (``reset``).
- 
-+This U-Boot doesn't have the n/w driver. To restore the original U-Boot or flash
-+modified versions of the above built U-Boot, 'fastboot' can be used.
-+
-+  => setenv serial# ipq9574
-+  => fastboot usb 0
-+
-+  C:\>.\fastboot.exe devices
-+  ipq9574  fastboot
-+
-+  C:\>.\fastboot flash 0:APPSBL u-boot.mbn
-+  Sending '0:APPSBL' (620 KB)                        OKAY [  0.042s]
-+  Writing '0:APPSBL'                                 OKAY [  0.030s]
-+  Finished. Total time: 0.342s
-+
- .. WARNING
- 	Boards with newer software versions would automatically go the emergency
- 	download (EDL) mode if U-Boot is not functioning as expected. If its a
--- 
-2.34.1
+Yes, I think so too, but I do not have any PX30 device only a single
+RK3326 device, so I try to be very cautious when it comes to PX30.
+
+> 
+> And... maybe we can eventually make 
+> arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi include 
+> arch/arm/dts/px30-u-boot.dtsi to avoid duplication and match what the 
+> upstream DT does (including rk3326.dtsi which includes px30.dtsi and 
+> deletes VOPL)?
+
+Yes, I think so too, in a future series, in this series I tried to be
+very cautious to ensure that only odroid-go2 was affected.
+
+This series mostly started out with me wanting to test your checkboard()
+patch and then it evolved into something more :-).
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
 
