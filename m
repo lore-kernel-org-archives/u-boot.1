@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C49C83F17
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 10:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A11C83F1D
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 10:16:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A21CD830A0;
-	Tue, 15 Jul 2025 12:16:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BCC583013;
+	Tue, 15 Jul 2025 12:16:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Lcv3r+On";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="N5oNrs9T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBB1F82F14; Tue, 15 Jul 2025 12:16:19 +0200 (CEST)
+ id 96710830E4; Tue, 15 Jul 2025 12:16:25 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF4F1830A0
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 12:16:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82B7F83013
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 12:16:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56F8kH6q026550;
- Tue, 15 Jul 2025 10:16:09 GMT
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56F5muxD028103;
+ Tue, 15 Jul 2025 10:16:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- g2OXNTEFy+pD0btfC4ytRDAuM2wD3NKQfYf96V1XoPQ=; b=Lcv3r+Onrp8c0dj3
- Uf2JYc9f/n0CQDbUKxI2aVDtzrvWkUEUtw8xESkYrqtTFTtE6vmIILvMHGT82M9i
- cgBH6bnlocUhCIkswReNjA7PthO7hotUZHAUjRJDs0RLBC//TxlmkFxGnktKCv9Z
- 8bBR9xmQOk2rk1jqkkpjytorkGPQcaFj95RwhLcyTFPEtXlQX1aC5p8IZSGWvXiz
- yNCGpS4Q95wCyPnFT/KISwODWUgN/s/syJh5of1RJmwyKAEvROVKQnzSND0uItZw
- xfSpum7dMiojs2C03/j0Z/lW9ZPxMbqOyH92kjgX87ShPCNnQteRZSZPEn/lDRUG
- NgaeAw==
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ 98EiIp2mxXFhCLRygz0npM1W3gu8P01Npoz/sruD2Ag=; b=N5oNrs9TRJS2Ufuq
+ Ri6+q+YH72xD823sORKzHJDA4/SfBuE9FwDCDh30Fexy2DuCR7av757VUrlBKsfZ
+ CUsa9Gm/PODgerK/K43NxeIid+1EWLw0kBTVi+UKTysKuqLC1adwUBE+ViB8+NkS
+ K2tZAewV/TsZfv+MyhAMi4tjRzFVAARR/rlySZaCsbDJ3vvAfUEOepQmLMpoAzCr
+ RoCCnObEfXpt1zv4y0/jCwAqc6Q2/BQBUEJvWr73pki2HCG9Crn5HJ9fXVfQfp20
+ k1mzUMTRChB0BNP9U3d+s0iqe8kqAxcTn1eAw9gj/bZuAPgqPsbY6kNh+ki24+gR
+ V4dXGQ==
+Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47wkrugb7u-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47w5drjkp3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 15 Jul 2025 10:16:09 +0000 (GMT)
+ Tue, 15 Jul 2025 10:16:13 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56FAG93F032208
+ by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56FAGCUh008869
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 15 Jul 2025 10:16:09 GMT
+ Tue, 15 Jul 2025 10:16:12 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.10; Tue, 15 Jul 2025 03:16:05 -0700
+ 15.2.1748.10; Tue, 15 Jul 2025 03:16:09 -0700
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <casey.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@kernel.org>, <lukma@denx.de>,
@@ -60,9 +60,10 @@ To: <trini@konsulko.com>, <casey.connolly@linaro.org>,
  <marek.vasut+renesas@mailbox.org>, <bhupesh.linux@gmail.com>,
  <alexeymin@postmarketos.org>, <u-boot@lists.denx.de>,
  <u-boot-qcom@groups.io>
-Subject: [PATCH v1 4/6] configs: ipq9574: Enable fastboot support
-Date: Tue, 15 Jul 2025 15:45:36 +0530
-Message-ID: <20250715101538.4072985-5-quic_varada@quicinc.com>
+Subject: [PATCH v1 5/6] dts: ipq9574-rdp433-u-boot: Enable USB device mode and
+ MMC
+Date: Tue, 15 Jul 2025 15:45:37 +0530
+Message-ID: <20250715101538.4072985-6-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250715101538.4072985-1-quic_varada@quicinc.com>
 References: <20250715101538.4072985-1-quic_varada@quicinc.com>
@@ -75,27 +76,27 @@ X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-GUID: VXWSkCnzDsCibU0arNZTkI4tOyfu1FEV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE1MDA5MyBTYWx0ZWRfXxtKiQ3bbeSvg
- jg9f5z2wra6tO8CNo7y/X4hAcINB1AZQlEnZV6B2hdNUZN/HabL1LPG8jlk382phlxt5CLhStbF
- V/LhNANg7RswxjmOFQUZ9B0Z64igbhxC48d8yhPWBkg5qMUespRasBctPlM2reJ1ajUJr33nyy5
- xz6v5UzlL3k9xglieMGb85Z0rdpKM8cEUOC2vlPGXAA4VfAXe93WyH/jYG37/XmUJiiG3uLjtlA
- lkpnZXvJqX1wQG+gXQY1Xgha09FzCUv5HwvviSFiDp21guIYWKFquEM30lMIWdp5nIhqnqUoOPq
- 00eKzgnQ0l25CX0NPSjOt5I63aQfA7sFdYfjP3Wt8oLslRUi+BvNOsNoZf6BtMFO/ME14zmX4bQ
- l4hVs8SNfuvTkE+3tiGxKy5H0EbYTYDvXo55NCpxVOaomTYLY+dyqDvKkwawz7H3sJoTgheo
-X-Authority-Analysis: v=2.4 cv=WqUrMcfv c=1 sm=1 tr=0 ts=68762a69 cx=c_pps
+X-Proofpoint-ORIG-GUID: fIlsf8gpEWQnWR8qdqZZ_nbKorBxCRcT
+X-Authority-Analysis: v=2.4 cv=D4xHKuRj c=1 sm=1 tr=0 ts=68762a6d cx=c_pps
  a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=Wb1JkmetP80A:10 a=COk6AnOGAAAA:8 a=6zSr0Cm5jUOs9Rz06jIA:9
+ a=GEpy-HfZoHoA:10 a=Wb1JkmetP80A:10 a=COk6AnOGAAAA:8 a=CNuWJGMGguEIvuNeiLgA:9
  a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: VXWSkCnzDsCibU0arNZTkI4tOyfu1FEV
+X-Proofpoint-GUID: fIlsf8gpEWQnWR8qdqZZ_nbKorBxCRcT
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE1MDA5MyBTYWx0ZWRfX7QuuQb22kCG7
+ G8Icwt+e6A3qe1eXu/eBTiAqSUQEGw5TX9D0iZxFUX7cDA64Yda+RTnxJh4Vk+HldR3022iUzgt
+ Z6u0ETynkyFtQNfAkAK4cCKRWEb6nI270ib3y+bc55e4cHBLk581VytZpHi3TGPfHp7uQwbH7lj
+ d0eYkjI95b9BIJd7UakwN+SEOHKzx0tuzn/AqMXy4h/pqUSAYUet4Tq7WrjzfhSWMgTaJZJdwBz
+ A8+z62GyoE7TPoEMKSn8qF7ZA6Yxx5LmGYy8Blta53ocV9VH0gfQizAyIPxdbZYoQhFyo63g+24
+ SlePVxKih+ZQEVa5HxAx6nzEuNpiYOnqhPuQ8zYnN+WdS5puaVpM2wRd//9ji8Gx3VEHWkI4IP2
+ yqJcpR3+DkSmsR5i9/LcOgtooOCdnth2QfemBObibzrl+A8i7E5x522ikAAajxhsD2qBdWqx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
  definitions=2025-07-15_01,2025-07-14_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 mlxscore=0 mlxlogscore=820 bulkscore=0
- adultscore=0 priorityscore=1501 impostorscore=0 clxscore=1015
- lowpriorityscore=0 malwarescore=0 spamscore=0 classifier=spam authscore=0
- authtc=n/a authcc= route=outbound adjust=0 reason=mlx scancount=1
+ adultscore=0 mlxlogscore=874 impostorscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 bulkscore=0 mlxscore=0
+ priorityscore=1501 phishscore=0 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
  engine=8.19.0-2505280000 definitions=main-2507150093
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,52 +114,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable relevant configs like USB PHY, gadget, fastboot,
-fastboot MMC support etc. to enable fastboot flashing
-of IPQ9574 based boards.
+Enable MMC and USB device mode by default to be able to use
+fastboot for flashing images to IPQ9574 based boards.
 
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
- configs/qcom_ipq9574_mmc_defconfig | 22 +++++++++++++++++++++-
- 1 file changed, 21 insertions(+), 1 deletion(-)
+ arch/arm/dts/ipq9574-rdp433-u-boot.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
-index 720220dc98a..22fd39bbdc9 100644
---- a/configs/qcom_ipq9574_mmc_defconfig
-+++ b/configs/qcom_ipq9574_mmc_defconfig
-@@ -43,7 +43,7 @@ CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_QCOM=y
- CONFIG_RGMII=y
- CONFIG_PHY=y
--CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QMP_USB=y
- CONFIG_PHY_QCOM_QUSB2=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
-@@ -52,3 +52,23 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
- CONFIG_SOC_QCOM=y
-+CONFIG_USB=y
-+CONFIG_USB_GADGET=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_CMD_USB=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GADGET=y
-+CONFIG_MISC=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT=y
-+CONFIG_CMD_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=y
-+CONFIG_FASTBOOT_BUF_SIZE=y
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
-+CONFIG_FASTBOOT_BUF_ADDR=0x50000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x4000000
+diff --git a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+index 390e2338d65..9f04c0c1077 100644
+--- a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
++++ b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+@@ -22,4 +22,10 @@
+ 	 * reset done sdhci_init() times out.
+ 	 */
+ 	resets = <&gcc GCC_SDCC_BCR>;
++
++	status = "okay";
++};
++
++&usb_0_dwc3 {
++	dr_mode = "peripheral";
+ };
 -- 
 2.34.1
 
