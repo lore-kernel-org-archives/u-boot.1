@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B8C1C83F22
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 17:20:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FE2C83F17
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 17:20:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5963D830EE;
-	Tue, 15 Jul 2025 19:20:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A3EF08309D;
+	Tue, 15 Jul 2025 19:20:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="km4/LNry";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gJlQ5E1/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D6018309D; Tue, 15 Jul 2025 19:20:27 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 74747830C8; Tue, 15 Jul 2025 19:20:28 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F33F8309D
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 19:20:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C73A83071
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 19:20:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72c14138668so2158859a34.2
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 10:20:25 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-615917e9875so384635eaf.1
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 10:20:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752600024; x=1753204824; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752600025; x=1753204825; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=nJhzmqVpi+eFtMv4M5pLZFl6IrtC0hQzuqPvis3Y8JA=;
- b=km4/LNry/HAEzxVD2MsyL/Nqo+IVsM5gAa83tTrIxLchNyyiwZYPH8OP4SiZfEZqrQ
- EFNu7/kJMPJSK3NuRSMJgVovRgfdYRQ4EFFS0n7W0oq4nE0yHze3jRKnqP89+xX+rkbO
- Xyhzw13/eEc8CM0dY7CMwY8y4cSPThVybEQlQ=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZTGKDxVDs1NaFghLgyz1n4WNZvurFx4ys7IMMMFpGQA=;
+ b=gJlQ5E1/3IVX8wlb2cluLRo+qb8/uaR9DiQ2+IdqE015H7QiP8yRe8IGEdOP8no+zk
+ e6NMejrLLt/FyAQVnela5vmTCj7ms70FpX2+/PuHCCCn0IdxDtKbqEYlGh3keZOSXQ/B
+ hZ3cgyqXh4u6KOHzq1saewuPm8Q5k7xgXWpfE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752600024; x=1753204824;
+ d=1e100.net; s=20230601; t=1752600025; x=1753204825;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nJhzmqVpi+eFtMv4M5pLZFl6IrtC0hQzuqPvis3Y8JA=;
- b=b5a8sez3HGNaKyy2IcaYBlf0kuk4dtDzz40Gbp3x/SXnU8AVGit6FzmAf8kAXg/CSM
- g3BWnYIG7TE9Vo6y/BkP1qcWBpUA3Af3+6/tiJtuc71YBnYaJy91ErfaMDHWdeNSxG5F
- SPhuVcc3vLNWbfK5VqJQD6OY95V2Gfw1x8ngjmPyfpr2fHMRzH9bz+4W6xMgYqD1tcl+
- caLmpB+f7tShSo4l6Rbd5VMGmUsb2VxfHFVmnU4pG6qjImYH5kVe7eCFWaCz19rDqJEg
- CYFy6vkliEEMwE82c4n+VxrwYkACBwWXSsHeCFLzH9RRUZX40WKfeF6JFfp1vdsmlFDK
- 9NAA==
-X-Gm-Message-State: AOJu0Yzx94N4RFPK67cMfDdICgpUQU1/WI7kzwui/znRD91MPtoXL+aA
- /x9NUH+k5hbUpbVdPaP8kvxbDWPUT6IDgqEydfbR6fSzrLIZV83B8ttCSdkSKW2T1r2DyzctFBX
- 7EUreWlk=
-X-Gm-Gg: ASbGncuH1ve+FkH+uvbcmEhxQnD/bBaikLR0WZ6PzsJgNnd5As6vh2zI/9dGVOkMyNs
- meJUwIk+5mi9Z/w0WfOHNeqj2ehQrk8xfCYK7K+ZFj37qIWxgSzn0MctRHCu7eHrY/EOdAX7TKO
- bh9g2Jwib1puBVXThQwa33u19XeUhEhsHUDlzaHUapcVGRWpbL2Oz9PESG7ppwOyjfhSwy7vbhS
- pVmlgLvCwn5cxHc1RofYEDDQqq/EDmz7AZf7UT0Rp7HSH2f6voqzMSGKpBJ20aOXWWVr67Zn14M
- P9OnL+or1x5WZWIJy/De4syuONmfzjZmKicrfaDCKwdIkNoEm9KakZUQJAAX30tmBNcL//duTmM
- tN/YE+zLE28afrEpc3vAoNIVp3Ad3faOgwNhYs5aXGexKdnGdzrVLhJ8sl1Xxc5Q4NA==
-X-Google-Smtp-Source: AGHT+IGnqXWEYhe/U8idSr3/mq14YqHUlUEAZ8xYhOgtvmmlrSu9/+yEGzlNH6OxRL2Y87ay36mfEA==
-X-Received: by 2002:a05:6830:7307:b0:72b:9b1f:2e1d with SMTP id
- 46e09a7af769-73e649c5ed2mr196178a34.2.1752600024181; 
+ bh=ZTGKDxVDs1NaFghLgyz1n4WNZvurFx4ys7IMMMFpGQA=;
+ b=GKavpfCpU3O39T/GO3EJcUPbyrZ/wz1E/Ug9I/t/STQT03vPvJ2tS+EbpGAmeHY51q
+ UTKivALpO05HVt/e2pEabA0wDq5fnUiffmmtUyeCM9AF6ozPWR6kq+OJotY43+uidFfN
+ npxeObEQQZHbCpw7AApMbIxFYuCLf0X+zt3QL6iqlvq6r0EfwJKByq1IVwxN6QTDGtar
+ TNWjoCcUZWr5hz7CxrLfUeHjI8/IuSbIYX3AG/CigTnWTuQnmR33PyAd51WjvlVdgi+Y
+ pS4WPtTTuIsqWtzoBctRzGt+TglZgrmpcmaAcyx7W9cyRnojeWkK5YQQdLY0XmbQMuUr
+ VN8w==
+X-Gm-Message-State: AOJu0YzbznuwpcgmSCS3FzM5A5gZpM5gJdS9OkVkhEhPjMDUtKvsHZRw
+ D7rFmV3EJH/PPaG+T6bSjFlgPUgeBSCg++uGLPSnENYLgIkc7VfXmJ6WeZNX53Q2zPY=
+X-Gm-Gg: ASbGncu4jOXl030D4+XFk+tgYTKpNQfEO7sE9CAezLtmegBwUPbeduGSCG/rkfp9+ee
+ zhnPv2aBxF5C6sBdgauJmEqJ9vh7tfELRYrkzcc5swfo5HDzM8FnMqIAXG6gKkRrpAzDjaWSjwO
+ rWEClNfo8djd1XybpuzdCq8amtvK8AaIvVea43K33DkDYDGBrN3MGpUaNXZmwJHEGW1FPemX8vm
+ ukxjj2U6ohQwBax6M3NiPbv2Bhgcy3R/9lYmmFq+IPVpoxdYP7UxYbXImAbkwTjgvjRRGaYnp6r
+ yTlVBbNXBRDZI2oe9qfrrHu/nGOlECP9qK+l8Zt+ASq4tqOmu6x0fwf+iPApWED8txS+ZsrC0E2
+ p58ra0cFVUDtMBySEgsQhVbK/e+Cjr9ZT2O8gU3hJOUNF8w/2lVcQKSg=
+X-Google-Smtp-Source: AGHT+IFBJPu0T9FA7nUjPU8KOPl/PQ3/hWo6Md1RF9+ga1FqaScwPmkRCbuMngKdOAkBngqn7TRNnA==
+X-Received: by 2002:a4a:ee04:0:b0:615:96cd:ebfc with SMTP id
+ 006d021491bc7-6159febae8emr84015eaf.2.1752600024993; 
  Tue, 15 Jul 2025 10:20:24 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6142b0961fbsm988894eaf.35.2025.07.15.10.20.23
+ 006d021491bc7-6142b0961fbsm988894eaf.35.2025.07.15.10.20.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 10:20:23 -0700 (PDT)
+ Tue, 15 Jul 2025 10:20:24 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
-In-Reply-To: <20250709083449.656724-1-ravi@prevas.dk>
-References: <20250709083449.656724-1-ravi@prevas.dk>
-Subject: Re: [PATCH] tools: mkimage: make size_inc a signed type
-Message-Id: <175260002343.441891.8572271709599005937.b4-ty@konsulko.com>
-Date: Tue, 15 Jul 2025 11:20:23 -0600
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250707-exfat_fix-v1-0-e5783978cd11@linaro.org>
+References: <20250707-exfat_fix-v1-0-e5783978cd11@linaro.org>
+Subject: Re: [PATCH 0/2] fs: exfat: Fix some Smatch issues
+Message-Id: <175260002428.441891.14280598447722808139.b4-ty@konsulko.com>
+Date: Tue, 15 Jul 2025 11:20:24 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,25 +95,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 09 Jul 2025 10:34:49 +0200, Rasmus Villemoes wrote:
+On Tue, 08 Jul 2025 12:16:40 +0100, Andrew Goodbody wrote:
 
-> In the Fixes commit, I initialized size_inc from the return value of
-> the new fit_estimate_hash_sig_size() helper. That helper may fail and
-> report that by returning a negative value, but I overlooked that
-> size_inc had type size_t, and hence the error check doesn't work.
+> Smatch reported issues with variables being dereferenced before NULL
+> checks and also testing an unsigned variable for being negative.
 > 
-> Change size_inc to have type int so the error check works.  Inside the
-> loop, it is passed to another function as a size_t parameter, but
-> that's fine, because we know it is non-negative, and its value may be
-> incremented in steps of 1024 and is capped at ~64K, so it will
-> certainly never overflow an int.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] tools: mkimage: make size_inc a signed type
-      commit: f08e29351dcb4c07c940b8a4c6b7b3899b803980
+[1/2] fs: exfat: Perform NULL check before dereference
+      commit: 505e2734756018af953d2e5bd1cd6ff7b66b0cdb
+[2/2] fs: exfat: Remove pointless variable uoffset
+      commit: dd4693136b33f2b175e8cedecf9d76e391acabdf
 -- 
 Tom
 
