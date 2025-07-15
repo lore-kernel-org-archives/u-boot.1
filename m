@@ -4,79 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A0CC83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Jul 2025 23:29:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71140C83F17
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 01:15:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CA1D82E52;
-	Tue, 15 Jul 2025 01:29:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 969E182AC4;
+	Tue, 15 Jul 2025 03:15:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oZmGEfmV";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="hvZyxlMD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73F7982F00; Tue, 15 Jul 2025 01:29:09 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2945282B07; Tue, 15 Jul 2025 03:15:15 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7BD782E37
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 01:29:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9EF58277D
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 03:15:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-613b02e801aso2463505eaf.2
- for <u-boot@lists.denx.de>; Mon, 14 Jul 2025 16:29:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752535745; x=1753140545; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c48r+zr5rW8M0i2R3tr/EH/YmRUsnJ/owlk1VeQft8E=;
- b=oZmGEfmVV37eBktifAoIA84/u6kjOYWLukA5c2xyKVJ3YdQz6tg5YCCNS2xc6N8eRs
- XFwU1fX3mmz2deYEf1heLdo3Csd8OCV3IrXTAImdbZzltf0UFVfg9s3/lqo5XKxjE4lg
- KR+pIuWEa/rRYTLrr041thVpAOSkeDg9D5/5k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752535745; x=1753140545;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c48r+zr5rW8M0i2R3tr/EH/YmRUsnJ/owlk1VeQft8E=;
- b=oip30ksBKDj/VgFNyMMFxQWjI4xgu682lpqVK3A9wM9MyC2lV00dDxdKQxXsQy5WUn
- H9UfWAUU6OtLJccqebwK0BlsiJV7k0EWl174BUxWRVAnS41ck1M1GweYtyyJB3RhSPYp
- pb/JraMo0UAQjA00X7fVN0dkw+oN5w+cwHb2QNctPQlQW4volRLM8HWnl9cxGgRrSNMQ
- 5kKd5u+F9wrZLNKbJNqvG4XUJcN+M7v0tkdcf94xobG/jF1EH60LqY8gPLqpG1IRuP+o
- TVzYCzCgFsFRJ0f+UikVlRji2iGOysKhBxWhP2yUGX+UfjOPj6JFzo5fKdJBRDRdakNL
- XHVg==
-X-Gm-Message-State: AOJu0YxBtT/f4mjOkQQ2pOExH+iNCmeeZZNfyR9pIo1nStUAyd02XLPT
- QPc45jQLNY1VFBHN2Cg8F3zJ/+OWpe0T9fAAlpecuRpOxTBPDBYhn+u/9jTN5GXuj6APAjuCL4C
- +U8oVBVA=
-X-Gm-Gg: ASbGnctGnwoWwyD5kpVur2zkZVuYJAD0FNV7iPC7wu9OEVwGGSNow2Fv5JYNDoLJNJ0
- wOWdnoHYpWffMyCZVLj1ByaJp/oz+Il39PCeya5vWmRkotXaCuBc5ZxHZV8F4n6OVbZSqBBpQqT
- BlcxvOkCyV97M34UB/i0YAH0r3p/TGuzFVOdqQooE2jApzE3ovbkp5TGO5kh1tZ7ofqMfYixV6X
- RXJ1CqLcASPF3VQPB30+PhxNPAWtKGEzIhtoRwuKAxUDKNKUa9jAQYq3TnTvfCfTd417WEPRTor
- VMlM5HTCJF197X6UqEmNiHNYrBs9Fl8dsKLCkABGdvvsBNz1aLw7zKXL0gbRADIQ6lv8tuhWybd
- 14U1m7ohdJdIZBPoynmarfGqW7/+RNlbcRXfa/z1Vm7TKCpkIuOsUmuJ5
-X-Google-Smtp-Source: AGHT+IG4EWM6EdomsTd7nalTSGFi88vU5yZnCfGkAXbIt04wM7XWlMqdthw9NbN0ZmCUB6N4SFdpfg==
-X-Received: by 2002:a05:6820:310a:b0:615:83d3:7269 with SMTP id
- 006d021491bc7-61583d37c0cmr3479222eaf.8.1752535745357; 
- Mon, 14 Jul 2025 16:29:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf1064e90sm1757889a34.9.2025.07.14.16.29.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 16:29:04 -0700 (PDT)
-Date: Mon, 14 Jul 2025 17:29:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20250714232902.GB193579@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ecotuJs/HdGwCOyNDtViRoRdVFD7Pm97TN9eFPr3alLOHxEjWu7g+PYdNoXHNZwTaXutmi3frElODN+CmHfGldyVaf59g0mh20px+Q8MBfgBQKyvSGoXiyNbPM9dJ2bpehEsmqnplLwnIys/rpLWGxBH1AB/b9AstkaXTOfA4km1DCDRRIZBJkPvahNkOur4Vo0E3KeZdYwzdAS3UhAnuwHwpaBZ2Y3viK3o3JX1lr+eFybdEnxgjBoO0M1K+a/y2TVs7wqHqsWGRTq3uluknr83LITgP5uuUlR5WEKOM7EnCsmPwTVp/7SVum0e+ZpOk92lotMz5k40AGxfNQyovQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KQSWwQC9a0wm3BptoEOsyfMFwmM43vgSt7WgUOg7mPs=;
+ b=fn2m+dQgQlCfUbk+UrMBy6tK3Oknp/vVD0Fh4hMyHfJ3t2DaIOY+Cr0cXl4JDASqinRISCjRCFpG1A/ukxp3BJPz4jzj3OAq6Jo8RlaQw88vCjgrALFhe+7QZDayhQ7vTdfzNvLcmCt8J8DMg3BdwNsxecPTEHeJkdaaLY0fT1Ra2XL/gkr2a6IelImJHu9NIIdLdJ7PC+ORqJR2Orahukv+sNIVqcRGiwfVptIG6Gi2qumTCe99LQwOt4RTGG3yGEZoY9Nxuy26MQk+RYga//0MRV0P6YvuGGL9n11i4kDVp21QvDYlHqn38x4Nd48Af8kxFOfUYAvD3HHnT7mOBg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KQSWwQC9a0wm3BptoEOsyfMFwmM43vgSt7WgUOg7mPs=;
+ b=hvZyxlMDp7LylmTFzSrLdij1BcjyoWlVSShOvRnw1eUs+8ggz2uNdByAlsOFyN5AFV8TeTZN6iotRC5DFLWcN8ZegGFpS6ArfXOe08VwGEBjJRUlQzogVRglVxUfvTBVKZQXjfKt2UemMVrWa/vfk0F5gi63FDjBmYRRaB/8dJtujgzb2zS+sSl0xIgU0lqSPEPDEGW26jUzTFeCuoO21BbIuPYxe1q7IQhem10byJDURQmQMsUmyVqI9bmEeLXTb+Aha4/JEhlZoR0xpsrau79UoSQzxST2c7qypJfIZepFDiuFpDiFujN0QtgoJMgLuCUlJT/7NHY8VonEphxwOQ==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DU2PR04MB8680.eurprd04.prod.outlook.com (2603:10a6:10:2df::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.32; Tue, 15 Jul
+ 2025 01:15:09 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8922.028; Tue, 15 Jul 2025
+ 01:15:09 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+CC: Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <ziyao@disroot.org>,
+ Chukun Pan <amadeus@jmu.edu.cn>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: RE: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
+Thread-Topic: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
+Thread-Index: AQHb9P6wanFrS/58/kujUtKs6COc/bQyYaSA
+Date: Tue, 15 Jul 2025 01:15:09 +0000
+Message-ID: <PAXPR04MB84591B628A56777F00320BEF8857A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20250714203410.1782783-1-jonas@kwiboo.se>
+In-Reply-To: <20250714203410.1782783-1-jonas@kwiboo.se>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|DU2PR04MB8680:EE_
+x-ms-office365-filtering-correlation-id: 10b5e71d-b8e3-4159-ec20-08ddc33d0aae
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|19092799006|7416014|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?v0sl4EMPxz8hM2uK/klPLPYGOjzy+yq1jyPi/ziG69u7CPE6OncJRD4oj69z?=
+ =?us-ascii?Q?U2jndAXXrG5Bp6kBolu3nAGgL5I88e5ErEVvFAxaJGEookIlvKNgBJPJsBQJ?=
+ =?us-ascii?Q?vUfCAg3SehGmq3xX+wfGkOBKob3M4sHriLwXVFzRrm4F9L2UaAaQzgmO80bQ?=
+ =?us-ascii?Q?24np/MYpA+yuhSZPfnu1zNUlwsgNKJ46TpDUcaW2uViUkkuQTuD2JyZFtCpR?=
+ =?us-ascii?Q?k4ak9OVmTc98CndNrwrO2urgFSBnqdt8slaADRB5C1wQa+08XpVJBMqAmLEA?=
+ =?us-ascii?Q?bTLrwx8C9YzRHmP+EbUdRkA5zpoK6WWm6MSReYALOwzSe+zmqAxHqvy3V5i/?=
+ =?us-ascii?Q?bDMMKd57iNi82GJPA9S9KEQdB3Vftg94hg4x9vR4ZgfGdje3CezihAm2QXxZ?=
+ =?us-ascii?Q?wJHcPsizTblXgT2a8RI3iQRaSil2LR3LEYOQcWjVmNWZvnYELOBgChFWOapY?=
+ =?us-ascii?Q?V3tG1lZ1QSIikKVusnj49UD9hkT64ZP2KXoRFdC4cOllyoXUbV6qFen7OHLZ?=
+ =?us-ascii?Q?VfJFlN+3z6G/sm/PSyvIpWPHYNTJVqolWXWYTAUqvXq8O9NlLYaFp+iR7+F/?=
+ =?us-ascii?Q?UUIa00fjrduRsn6a7hTY4K6o5qp0CJdPFUuaumJk0MjMS2SKWjbcSTfda7v3?=
+ =?us-ascii?Q?45ChCpJ81ykzCgUI3Fw2Ei1FZgoI+XaMeCKOgOg2GqeesXSD0Xpp36D3iPVr?=
+ =?us-ascii?Q?aizJCDU56ufclYa2xADq6sFinm8fgdi6dp5KxDT5hrDChKDnlqYvh0pKCG2U?=
+ =?us-ascii?Q?XvUR2Vg30Mc4aJS45z2QPLCA+dRlr6Ymld+b31S2WgHXjiC8Qp/guf369jif?=
+ =?us-ascii?Q?LdrukTgkDzaGxfOg8NGcbOTWInsKlmo3NSlSt0ywsQ/fX+doDo/87aZJWWNP?=
+ =?us-ascii?Q?B3CYE5W5jGl5935g6/EzMk0qKsacd4rfzZ1ban7z5Ad9AvrtX1qCk+guW2or?=
+ =?us-ascii?Q?GmxcIBoF+nAYQGV0x3kwIDfnprZH13hHH2ojna1NSue9j5A3PQdhQ0B3zAPe?=
+ =?us-ascii?Q?Uv/SwncJsadmE5l3LZ6fg3NtfzJpQKP/RdzXM/cS8yjAMcJQ4V8nTjZz5VUx?=
+ =?us-ascii?Q?6/A9L8/M4HOVXIluzj4GyCWI3jLDWgW+/LhDjbn3XVApF1fC7bxr1aBH6O+d?=
+ =?us-ascii?Q?ik22kFvNHYCyTStD8m7Xy39rF0ba7daXWDvky9VOq5aCGlF9ptw6ujNtS63t?=
+ =?us-ascii?Q?PFg5yPqHg60Dda7h1MjZUagEn+ik9UzzdbsZsVcboTR+maH/n06AfwoZKBsp?=
+ =?us-ascii?Q?CoVRFEuss0OcPS+hJ7o4qpYvvFL+CeuPw0NkBWa3AESa2W2EZOHSmiUlzWIF?=
+ =?us-ascii?Q?yCzJKFDQD4zrirEdfkOpgcuSMo/vB6Pt1HbQJY16BRYKqP6Dt/2OlTquyPGN?=
+ =?us-ascii?Q?Vxk7nrUK0h3SRyFXUAXe/mb9XAgRFQn4DNFeR67K+6fBg9NIgYEK05CgyDOY?=
+ =?us-ascii?Q?aD4732YxhmjUB3Iww5NGGBzRWuI7tuYMoVldD5nuzScfe+LMD28OHQ=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(19092799006)(7416014)(38070700018);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?cx1XjZiBCNTUm2wlMfQjAR7zveE4rI1DErcaZD8pMfevIil0VSG052HqXlA9?=
+ =?us-ascii?Q?qBxXwpNO456cgrGhZ1+FUSoNfGKi83funaUBTmF8XEerU3MQuptivTR+V11h?=
+ =?us-ascii?Q?3zjCA2m92Mu4f6S9Ih+5HrXUuYYJRotG5PsY6yIfcZxZWio0WjZ8taKGdcbq?=
+ =?us-ascii?Q?b7vDk+hIL/ygeJAC9nWgxZVRIpJt6hfwi1Gr/rUUZe/qBxdAnr4g9AEy1oPB?=
+ =?us-ascii?Q?2cEDjef+cAJxvcyPgcxBHK/d5KU4Fldir5cNqORwtr6jyx/uDe34fpqpTHJx?=
+ =?us-ascii?Q?IFoveog3WXJrbKFjfElbquinjjd+TiHfadxC2/iUbBgvQ3Q4WAltTi+kblOE?=
+ =?us-ascii?Q?w1rHAL2GEsziHRSW0uqT+ZinDYvXc84yUSMhnArSCQ79zldOOiTjoHYgAAPS?=
+ =?us-ascii?Q?dx0PxXevNwQxrV4m0KVY39YV8brzSv1CbSp2YNOyqpS3lsML6ZwiDptOO8WF?=
+ =?us-ascii?Q?qxeJu5pZXzAsdcqrAkvl/W+hMuF4vjM8oxEy1my27xHi5WmheSoQqNqBV/5B?=
+ =?us-ascii?Q?kyChb5Mc1FWbe9zukUgoE6VrnRNQC6Sr8FHQAnR1ZXOTG5rQw8y6ITd9xHd3?=
+ =?us-ascii?Q?GQbBLkD9b0UR9xmtYtfuJXsIDlUrLXJjLnkGFzpHTB5pEa0+374p7d4mSLnt?=
+ =?us-ascii?Q?b8QCMpOB9FBxDzLwbyB7/hc8a5OgdRzQuob7aUdgEqAUQFGdv20ljUcIibgE?=
+ =?us-ascii?Q?DIIvj6pKCFYelmvWae7YpwaoFuvLakbSZhR0J52pQ2ACJRS7fnPP+y1dnQBC?=
+ =?us-ascii?Q?C7KZr9HVvc9DTDVWRN/BpNXMkY+qwiFG+7zLLzkfKOdlZ8gtQjNm1tNcuZp6?=
+ =?us-ascii?Q?4pv1P2X58KXSAjhA7S4Czee6SVR+nBY5QCcUV7wD1Lm4FoWOW701ZQp/1p99?=
+ =?us-ascii?Q?q/GP9zkFMdq2knNxiu8oIq7Jj20lIVm6/d46/Uou/pmOgMQxqbYkS6g6LPCC?=
+ =?us-ascii?Q?fmNUT/f0luPJlQTDATkuxpXHMvmZNKlTUJICLjiZfMuOAN4H0hzXUoxJE7WZ?=
+ =?us-ascii?Q?VcPrJ7+jf6j0vjoNlPrV0X7Rh/YOYogGCM2IQjDM/mYzEUsfTNXFnsgMwNEJ?=
+ =?us-ascii?Q?wJQ/VfxGjv9CN449jz8zWGri2E9nhbm4KuL7uUOk8jZk200pNfdLcuZnvPG1?=
+ =?us-ascii?Q?99cCiB0KCK0c9WIGAV0nrDdOj1QITYEzhtpSWDfgbqMezLT58VsnDhwP3Mep?=
+ =?us-ascii?Q?hfmu2kpvqyC54OgFDxYnRWbikP5pJEhEi3eXZQ+jBOGr/oUjotlT7GS6ut2K?=
+ =?us-ascii?Q?FmBacIwT253UPyGirXswFxd2Pxs60wTd1XfXcGL0z6AeuiKgKLGhJJIfWAHi?=
+ =?us-ascii?Q?us/wWxps8PAE7wUD0wH5jF92tq5fXa6E9p/FhDsasr8azhOhrWBALHgeeRv5?=
+ =?us-ascii?Q?SkJvgUgtYW/XICMwi37tLfwsPl2vw+LirY+44KYHDMZC91tHF8EW1kTmG6dh?=
+ =?us-ascii?Q?CsUQjEg/bvGFcXiBCK+kGDMO8DWPLbmcz9EX6vg+SJWEnJpyc2wU8JG5c2sF?=
+ =?us-ascii?Q?v8L/4FrLe8DJezz6tfU3FDZkp5KjPyvo0KBRBdxE9Q0Vp5mFi+d3x38wxXL7?=
+ =?us-ascii?Q?1cO/4yHV/UFYX+xXo8M=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bcApRyx8AF0F+/D7"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 10b5e71d-b8e3-4159-ec20-08ddc33d0aae
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jul 2025 01:15:09.5734 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 1eNac/RaA4OA+F0MecsLYLHdsebxh/ZUWPnsjLonVjo1rmOBTMy923Fl46vXxdL6D231Y21tLkUEsXNb7U7pNQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8680
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,144 +162,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> Subject: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for
+> RK3528
+>=20
+> eMMC erase and write support on RK3528 is somewhat unreliable,
+> sometime e.g. mmc erase and write commands will fail with an error.
+>=20
+> Use the delay line lock value for half card clock cycle,
+> DLL_LOCK_VALUE, to set a manual xx_TAP_VALUE to fix the unreliable
+> eMMC support.
+>=20
+> This is only enabled for RK3528, remaining SoCs still use the automatic
+> tap value, (DLL_LOCK_VALUE * 2) % 256, same value we configure
+> manually for RK3528.
 
---bcApRyx8AF0F+/D7
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+May I ask how linux kernel handle this issue you spotted?
 
-Here's the latest report from Coverity. Good news is closing 5 existing
-issues (overlap with smatch I think) but 3 new ones. Or maybe it's
-related to Rasmus' cleanup series? I can only run one report a day I
-think so I don't have granular breakdown on which changes today brought
-these up.
+Thanks,
+Peng.
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Jul 14, 2025 at 5:23=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
+>=20
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> Changes in v2:
+> - Rename flag and field value to function name, TAPVALUE_FROM_SW
+> - Simplify and make code more understandable with use of
+> FIELD_GET/PREP,
+>   should be more clear that xx_TAP_VALUE is set to DLL_LOCK_VALUE *
+> 2
+> ---
+>  drivers/mmc/rockchip_sdhci.c | 27 ++++++++++++++++++++++-----
+>  1 file changed, 22 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/drivers/mmc/rockchip_sdhci.c
+> b/drivers/mmc/rockchip_sdhci.c index 761e3619329c..cca917da68e7
+> 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
+> @@ -9,6 +9,7 @@
+>  #include <dm.h>
+>  #include <dm/ofnode.h>
+>  #include <dt-structs.h>
+> +#include <linux/bitfield.h>
+>  #include <linux/delay.h>
+>  #include <linux/err.h>
+>  #include <linux/libfdt.h>
+> @@ -86,6 +87,9 @@
+>  #define DLL_CMDOUT_SRC_CLK_NEG		BIT(28)
+>  #define DLL_CMDOUT_EN_SRC_CLK_NEG	BIT(29)
+>  #define DLL_CMDOUT_BOTH_CLK_EDGE	BIT(30)
+> +#define DLL_TAPVALUE_FROM_SW		BIT(25)
+> +#define DLL_TAP_VALUE_PREP(x)
+> 	FIELD_PREP(GENMASK(15, 8), (x))
+> +#define DLL_LOCK_VALUE_GET(x)
+> 	FIELD_GET(GENMASK(7, 0), (x))
+>=20
+>  #define DLL_LOCK_WO_TMOUT(x) \
+>  	((((x) & DWCMSHC_EMMC_DLL_LOCKED) =3D=3D
+> DWCMSHC_EMMC_DLL_LOCKED) && \ @@ -93,6 +97,7 @@
+>  #define ROCKCHIP_MAX_CLKS		3
+>=20
+>  #define FLAG_INVERTER_FLAG_IN_RXCLK	BIT(0)
+> +#define FLAG_TAPVALUE_FROM_SW		BIT(1)
+>=20
+>  struct rockchip_sdhc_plat {
+>  	struct mmc_config cfg;
+> @@ -317,7 +322,7 @@ static int rk3568_sdhci_config_dll(struct
+> sdhci_host *host, u32 clock, bool enab
+>  	struct sdhci_data *data =3D (struct sdhci_data
+> *)dev_get_driver_data(priv->dev);
+>  	struct mmc *mmc =3D host->mmc;
+>  	int val, ret;
+> -	u32 extra, txclk_tapnum;
+> +	u32 extra, txclk_tapnum, dll_tap_value;
+>=20
+>  	if (!enable) {
+>  		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
+> @@ -347,7 +352,15 @@ static int rk3568_sdhci_config_dll(struct
+> sdhci_host *host, u32 clock, bool enab
+>  		if (ret)
+>  			return ret;
+>=20
+> -		extra =3D DWCMSHC_EMMC_DLL_DLYENA |
+> DLL_RXCLK_ORI_GATE;
+> +		if (data->flags & FLAG_TAPVALUE_FROM_SW)
+> +			dll_tap_value =3D DLL_TAPVALUE_FROM_SW |
+> +
+> 	DLL_TAP_VALUE_PREP(DLL_LOCK_VALUE_GET(val) * 2);
+> +		else
+> +			dll_tap_value =3D 0;
+> +
+> +		extra =3D DWCMSHC_EMMC_DLL_DLYENA |
+> +			DLL_RXCLK_ORI_GATE |
+> +			dll_tap_value;
+>  		if (data->flags & FLAG_INVERTER_FLAG_IN_RXCLK)
+>  			extra |=3D DLL_RXCLK_NO_INVERTER;
+>  		sdhci_writel(host, extra,
+> DWCMSHC_EMMC_DLL_RXCLK); @@ -361,19 +374,22 @@ static int
+> rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>  				DLL_CMDOUT_BOTH_CLK_EDGE |
+>  				DWCMSHC_EMMC_DLL_DLYENA |
+>  				data->hs400_cmdout_tapnum |
+> -				DLL_CMDOUT_TAPNUM_FROM_SW;
+> +				DLL_CMDOUT_TAPNUM_FROM_SW
+> |
+> +				dll_tap_value;
+>  			sdhci_writel(host, extra,
+> DWCMSHC_EMMC_DLL_CMDOUT);
+>  		}
+>=20
+>  		extra =3D DWCMSHC_EMMC_DLL_DLYENA |
+>  			DLL_TXCLK_TAPNUM_FROM_SW |
+>  			DLL_TXCLK_NO_INVERTER |
+> -			txclk_tapnum;
+> +			txclk_tapnum |
+> +			dll_tap_value;
+>  		sdhci_writel(host, extra,
+> DWCMSHC_EMMC_DLL_TXCLK);
+>=20
+>  		extra =3D DWCMSHC_EMMC_DLL_DLYENA |
+>  			data->hs400_strbin_tapnum |
+> -			DLL_STRBIN_TAPNUM_FROM_SW;
+> +			DLL_STRBIN_TAPNUM_FROM_SW |
+> +			dll_tap_value;
+>  		sdhci_writel(host, extra,
+> DWCMSHC_EMMC_DLL_STRBIN);
+>  	} else {
+>  		/*
+> @@ -663,6 +679,7 @@ static const struct sdhci_data rk3528_data =3D {
+>  	.set_ios_post =3D rk3568_sdhci_set_ios_post,
+>  	.set_clock =3D rk3568_sdhci_set_clock,
+>  	.config_dll =3D rk3568_sdhci_config_dll,
+> +	.flags =3D FLAG_TAPVALUE_FROM_SW,
+>  	.hs200_txclk_tapnum =3D 0xc,
+>  	.hs400_txclk_tapnum =3D 0x6,
+>  	.hs400_cmdout_tapnum =3D 0x6,
+> --
+> 2.49.0
 
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
-
-   - *New Defects Found:* 3
-   - 5 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 3 of 3 defect(s)
-
-Defect Details
-
-** CID 573150:       Integer handling issues  (INTEGER_OVERFLOW)
-/drivers/pci/pci-uclass.c: 1531           in dm_pci_map_ea_virt()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 573150:         Integer handling issues  (INTEGER_OVERFLOW)
-/drivers/pci/pci-uclass.c: 1531             in dm_pci_map_ea_virt()
-1525     		if (ea_entry & PCI_EA_IS_64) {
-1526     			/* MaxOffset 2nd DW */
-1527     			dm_pci_read_config32(dev, ea_off + 16, &ea_entry);
-1528     			sz |=3D ((u64)ea_entry) << 32;
-1529     		}
-1530
->>>     CID 573150:         Integer handling issues  (INTEGER_OVERFLOW)
->>>     Expression "sz + 1UL", where "sz" is known to be equal to 184467440=
-73709551615, overflows the type of "sz + 1UL", which is type "unsigned long=
-".
-1531     		addr =3D (pdata->virtid - 1) * (sz + 1);
-1532     	}
-1533
-1534     	return addr;
-1535     }
-1536
-
-** CID 573149:       Integer handling issues  (CONSTANT_EXPRESSION_RESULT)
-/lib/efi_loader/efi_file.c: 594           in efi_file_read_int()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 573149:         Integer handling issues  (CONSTANT_EXPRESSION_RESUL=
-T)
-/lib/efi_loader/efi_file.c: 594             in efi_file_read_int()
-588
-589     	bs =3D *buffer_size;
-590     	if (fh->isdir)
-591     		ret =3D dir_read(fh, &bs, buffer);
-592     	else
-593     		ret =3D file_read(fh, &bs, buffer);
->>>     CID 573149:         Integer handling issues  (CONSTANT_EXPRESSION_R=
-ESULT)
->>>     "bs <=3D 18446744073709551615ULL /* 9223372036854775807LL * 2ULL + =
-1ULL */" is always true regardless of the values of its operands. This occu=
-rs as the logical operand of "if".
-594     	if (bs <=3D SIZE_MAX)
-595     		*buffer_size =3D bs;
-596     	else
-597     		*buffer_size =3D SIZE_MAX;
-598
-599     	return ret;
-
-** CID 573148:       Integer handling issues  (INTEGER_OVERFLOW)
-/drivers/pci/pci-uclass.c: 1581           in dm_pci_map_ea_bar()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 573148:         Integer handling issues  (INTEGER_OVERFLOW)
-/drivers/pci/pci-uclass.c: 1581             in dm_pci_map_ea_bar()
-1575     			addr |=3D ((u64)ea_entry) << 32;
-1576     		}
-1577
-1578     		if (IS_ENABLED(CONFIG_PCI_SRIOV))
-1579     			addr +=3D dm_pci_map_ea_virt(dev, ea_off, pdata);
-1580
->>>     CID 573148:         Integer handling issues  (INTEGER_OVERFLOW)
->>>     Expression "4294967295U - addr", where "addr" is known to be equal =
-to 4294967292, underflows the type of "4294967295U - addr", which is type "=
-unsigned int".
-1581     		if (~((phys_addr_t)0) - addr < offset)
-1582     			return NULL;
-1583
-1584     		/* size ignored for now */
-1585     		return map_physmem(addr + offset, len, MAP_NOCACHE);
-1586     	}
-
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
-
-Best regards,
-
-The Coverity Scan Admin Team
-
------ End forwarded message -----
-
---=20
-Tom
-
---bcApRyx8AF0F+/D7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh1kroACgkQFHw5/5Y0
-tyycyQv/b37fxtF4823UO6NhLYaTHTOeMT5IS1FdhHygV3JYHle1Uadup19YICMe
-CyPVuGml3IS15tkuHp6N+al9bztj67W/YbOxbrED/R8whsHHBA1vBYTCmr1DyjnI
-LRRluQZuouEM+ix6KpHDrWDEpb9Ao9vWBgunmV5sP+c13Yg8fPtZUv5+bdhwgYwj
-DlPql6oym89JWtNexPwV5iIbJcPO1QuIQDIpXw8WhpPYTJik/IxE5auunXY8a8aj
-DmzhoY0ZT87lFqtaYqV0yWIajh+gCul3mv8O7KAKEQG3/pDXA1qaePBk7cmkbP3Z
-gEdAzqtrLboc2eIMiYqheFxyfZ9r8YPM/njPqpuL640UQ9pMpkOk7UMdz5I/1usv
-tqsn4I6RvrvKH10c4s1kJsExg3GBveAjl+/Q2eHiA//ZkrNz9wGroGbexlM6Xn2y
-LQ63BRvvuNF5Flj7QwZuOTERtwnbYGnLAc4xNAhjrZjIiE2MRNJlIw4YmAlqxZ8i
-yqrr3g4D
-=SO+y
------END PGP SIGNATURE-----
-
---bcApRyx8AF0F+/D7--
