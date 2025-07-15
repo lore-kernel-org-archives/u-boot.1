@@ -4,162 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4FDFC83F21
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 09:07:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B351C83F17
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 09:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A1CD82F00;
-	Tue, 15 Jul 2025 11:07:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id D726582F14;
+	Tue, 15 Jul 2025 11:08:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="N8H0dfdV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AtexrqJP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9102482F14; Tue, 15 Jul 2025 11:07:21 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F0B2E8304F; Tue, 15 Jul 2025 11:08:11 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAA6682BF6
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 11:07:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 3924382BF6
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 11:08:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=n0bmDjLjY87uZXDFYhByYM/zF3sDFbPn+2lA13PUY8N0SDY5z2CwRJc3nKACp4tnx9H+h8UEqdOH4V2T+0qNivB2gUlyDrY055bOMeRy5vyQmBdoj4jXmsf3NJUs1vEtbMJ2XiQW5fce2OSaD5qQjdcg46STI3RO16BIXK8E1+4ggi2dOvYpWf80IEE00wJTVlu9sy4XUHwT6skPcoG87kPZYhBtnmYqFpaWr3hs0TV+amTn21t3QjEsB8/ernGtZnWWSSob5i09auKs6gbFuD0AGeuZto31YziclPA10ozbs5p3KCMLzmApgU5SnAW1m+9FsxnVHbVGcZLShzRWmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zPfxq09a1K+hN4cevqTmfovVLZU4cMbQN4h2kteQBDA=;
- b=iUxljgZRATGpXuvcbVugydF8fwdj06qVb6Bff9Q0H0Z998N6SLFXjR4p8zJG4A0zYBuv/UlQVHQAKK+xywOADDN8VEdMx9Gu2d8vgnLc2m1Go5//9kI0xv3PPqVNoeXAu/dnBEGYOJJ9rvJrFFHQasAojLcXtMmlawxeXJCL97aWu1OM3VdXJGp7TlzvHWaCYdDUeqsNHnbZ6LJfhngaELMHzj0YUpmsW8pRR3mCMKPOvwIqeSRcANkIcNe8wjmx4jK2paWVVEQ1rsSaRNCTHnMm0GJJH05n8ApbmycSYrICpHDoGSOvEdXrY8CHTFOAUJipe1Mcq+pE/XUHHc77yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zPfxq09a1K+hN4cevqTmfovVLZU4cMbQN4h2kteQBDA=;
- b=N8H0dfdVqcIzVtV5Bgg8LSDMDzdAzuJ4/daKQQWWS4ckcARGtrRRnj3VBSTtUMGrieiVGkVvByGcr+dYg5MxEu3LJE8t/ZmxFhlFKrA/PcNK0V46WkpVcQDEo/dJIhEOl9zhX7a2Wq2bvQNhrhWRWxj4wTSKCmtnfzBp/cskYXI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS5PR04MB9921.eurprd04.prod.outlook.com (2603:10a6:20b:678::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.32; Tue, 15 Jul
- 2025 09:07:17 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.8922.028; Tue, 15 Jul 2025
- 09:07:17 +0000
-Message-ID: <0df75337-a0e0-4076-93db-aa8632e23c8e@cherry.de>
-Date: Tue, 15 Jul 2025 11:07:16 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: spl-boot-order: Defer probe of boot device
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: u-boot@lists.denx.de
-References: <20250712211232.680047-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250712211232.680047-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0238.eurprd07.prod.outlook.com
- (2603:10a6:802:58::41) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3a54700a463so2873378f8f.1
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 02:08:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752570488; x=1753175288; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Xh1oYDFlKOnYZJtv8lrwSVlcJ/ux1lJWxKXRvWoRUM0=;
+ b=AtexrqJPWwsu9LE3f5wGf/Foti3rC1Rzn+Hw6I3iS1b0Pmyu+qw/Ic9Scx7taeJJZU
+ dMWMMgVdmNWJVUojUscgcmkRPLg6QWrd+qJ6aHIKEc3t7d/D5GX6mgkNHTwoeVwV3uv1
+ B7L0M514/Ke6hlA1XzmMS1mv4qfsARl5dUgPXlvGQCmJFdxAFX5I9elLgKGwLlOMD9QD
+ EPS8dAhhREsXToAJwIfV5ScpvQAVhZ5o9Yq7TU1s0x9or4NI0HipfRtncp/F/+u+VQBV
+ VZIAM/t0HV1s5CZTZ//hgVSz30chtwyJpmxOCgqmxbbOL1Mh16+Wmy4NzQxghQGJKgKo
+ WKIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752570488; x=1753175288;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xh1oYDFlKOnYZJtv8lrwSVlcJ/ux1lJWxKXRvWoRUM0=;
+ b=Kl7OxQ+kJhGmZm3h1wvmam5qlExV5gaxr/Z+LsvvduEbJEz4J819FiMMu3L3RODlzJ
+ 0FsApv3c2UpObIODwFausEqUEX5KBUjNSPkZ7l86BFJt3Er9Q2Hgh6s32mx5QsfpGI4Q
+ lwq3wulmDZGD22oWzsO9rS+F+s+hnBrgk7v3o61vlqkCt1rV2TLyR5pdPPjemTFVERid
+ 9JJr01s+6/R1aUX60LqJ7CRID/iktA0BTE5lAVjHR0Z6mvWryoJ1MPWhbifUS5BiWvuN
+ VTI2FXTGMm6lYxl4VHv15hGyxceLw0QlmtckmTSJdh2n8IeFbXHX63TPK9WYM4xfI9lW
+ BViQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPNUrtnI+rU1SRXrGjmXe/awYjqCqo1HbaXIpZf0VLroo3d7WV0a8U2QmuHaL+pCez1Sk7ARc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxt8QsFJw41zUYG9fSlL8R61g1IG32Bg8S5fWu5jBAbTt0Dagnj
+ 5Uq25rRXR+W+4cKmwcL8NRziGl9MgsNZVd6Un792Nj6Aty13TExr/JhmZImIr9E8FjLnI4s97tF
+ VPHTw
+X-Gm-Gg: ASbGncvuQbNwPuNufA6cr7TjaZF/eNuexfAOPCb4zf/wunV3WTBf/RKpm8sb/T1bRvN
+ Yf8ZDFi9e/t5MWzYdKHjZyrAUh/cS+RCycCdQSiY78rNaHUaxDC6ppLkQbOuRajzVO1kW4wkgZ9
+ Tfw26CCWcils/8ILbh2FTOKy8Cd/YOCYrXrdZYPe3LJ3SxhSe9YvPcYxJvtgBUbrrLZOzpgVWd/
+ QfRh4D0+7FihGDZ0GC+0sbg4r51qGDjKY4yaAaoRJjyjXpRgTUHLIcrOtKnqP9V72kQZy47wp+Y
+ 14Q7JRgqTqPl/04Y3HRs8lT1uGwAnQm0kP5p70/XjJ0CDkbXhdeuknAfgdX37bEd++NM9PE1isa
+ ZiXfLsJBWxz7b9FPTc7HfqeH2XGJ4KKXt4D9f+Vl6fylYmILlLDyDbnakg/aOnmkM4XUXHcrEBl
+ E=
+X-Google-Smtp-Source: AGHT+IFc0C2mv02OT3QtcOyq4ayH6oC2lPV7NNDe4jFxoDebnsH7QVXRGkKzGd0jxYSp9kxKJayCYg==
+X-Received: by 2002:a05:6000:2dc6:b0:3a3:64b9:773 with SMTP id
+ ffacd0b85a97d-3b609526044mr1870124f8f.10.1752570488474; 
+ Tue, 15 Jul 2025 02:08:08 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:e07:801:c1bc:9f9a:fc67:a1d1?
+ ([2a0a:ef40:e07:801:c1bc:9f9a:fc67:a1d1])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b5e8dc2025sm14867607f8f.31.2025.07.15.02.08.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Jul 2025 02:08:07 -0700 (PDT)
+Message-ID: <bd2a68e7-a79d-4d5c-af67-e89e36982f57@linaro.org>
+Date: Tue, 15 Jul 2025 10:08:07 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS5PR04MB9921:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1801e72f-c73d-4ecd-f4d3-08ddc37eff0a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MHpSYk54cTZjcUxyNUxoY0JPZWl1c2Q1b0kvUWx5M082NGgzaEV2ZUdoN2J2?=
- =?utf-8?B?UWU4MllXQU9haXJUOEdJRDBHMktxYzQ3cXV4UVliNHBRazBZamY0bGFRZnR3?=
- =?utf-8?B?R2NKYzdnRG5sQlZlWE9iR1A5QTJ4dElxUExHMXlzUEFJWFZrZEVEMjF2elV2?=
- =?utf-8?B?QTN0Q3Z5Z0l4ZktlVi9vNnZNM3hvZ25ZWlpqdE5qYUM5eFpPNC95MVIzYXhp?=
- =?utf-8?B?K2hVak9KOG5JdEN1c3UyQnVSYnBOaDVxOE9ITWZlYkVXc3pVR3N4bnIxZEVy?=
- =?utf-8?B?R2dPRDN6M0JBMzFaMzdOVnFIVWZZMS9GbHpRbVRNV3loNHZlaUJwRkhuazJU?=
- =?utf-8?B?M0FRdFdGTXRReFRHZ2plY3hndmZUSFB4Qm1YR2NwM2FCZnhWcnZtWXcxNkUx?=
- =?utf-8?B?T1huSUh6VWUxMWR5Z3RGRHA4R0VWRFdXYWRaWGRFQWIzMWdpNW93M2paeGZQ?=
- =?utf-8?B?K0tsaVNQaWhZaDdiSkp0cXVjNEk1b29XWU9zM1ZGNnJ2bGV0N2szUHVQRnlV?=
- =?utf-8?B?eGFqVzlDU1hacENKaERGdEh5YWFHRU5ySUwyaDI1NlZMVGFrNnRwMEJib2I1?=
- =?utf-8?B?aDB1emNXSUlUdVF5UkZIZjBQTnpTN2Y5SVZwUTRBc3VCVHFFdGppbzFxR3FP?=
- =?utf-8?B?MEtjVGZTQVhQb0w1cDlNTXR6bjV1VmVqZGxvcVk0b2piQ0FLYzl3b1ZLMHpD?=
- =?utf-8?B?VFgrMFlocksxcWlsS2hGTTF6bWNoTEtlQ016d3NLS3VnbVZ6eXRRS1VBalhw?=
- =?utf-8?B?R1c3UzJNY0dsRnpTVGlOVXVxT01jTW01WEFnSWU5dXRkcWpDM2Q4aHNvMkg5?=
- =?utf-8?B?M3lRMmhSbXRHa3lTTUozY3l2TmdGT1owc1hCUm1yMTZPZ2ZXUGVFUnllUmE3?=
- =?utf-8?B?MWVxV2ZJVnJtaExRb3h2K1FOcFY3VWV1WjdxbW84cDhvc0ZBTk5YcmsvalRT?=
- =?utf-8?B?bjR0QXJrMS80UmlYUTdiaDNTVXl2YU8vSXFERmdMZHZ0OG5WWUUvZi82Smkv?=
- =?utf-8?B?cTRJSDAxSlAwSERETW5hSURvM0ZGbGc0bm9keWFuc0l5Zml6c1I3WVZ2SEJk?=
- =?utf-8?B?VWRzQlBZL2RKTzVrb2dEamZPUkl4ZUxQTXQ1UHBlU3VyeE9BNjJSVHBTTFVl?=
- =?utf-8?B?aVBmclBYS1pPYjE1bjFSbnVCYUM4c1hLZ2VuSlpMeFc5MXRJcWliWjcrc0tk?=
- =?utf-8?B?OFdzZlFPRElScEdzaFNpanNRK2N0eFBaZDNMc0w5aFhvd3ZleU1BMXBQS2ZS?=
- =?utf-8?B?L1dpbzE0WnlHWFdYdVBmZi9MaDh4anQxR3YvdUVWN3JhVzJBSTFzYk9nQkZ2?=
- =?utf-8?B?L01Nd2k1MjFxeU9OVjhneEJhZEswN21rTmVUVTZxUHNyWCtXRG1DTEE2cTJ1?=
- =?utf-8?B?Q1cyeDNsazhSdlhCTVB1cWJGY0I1SmwxV21ibnJnbXRhblNaZVVOakFQRUNG?=
- =?utf-8?B?WWYzRTZSS3FVNnM3Qy83RnZGWUlwWU1tV3U3bm1CSzdwb1NDR1NKMzNqaHp4?=
- =?utf-8?B?bGQ3NFlPT0huczNNTmRUa0xVdXFGSW0xNFBjWEVjaFFhOWtwc1dyNkVSMTcw?=
- =?utf-8?B?QUlqeEIya0tuU1ZVVVhwdEFCMGVrSnJGNll6MW1zK1o5Z0cybGw5MGgzTURY?=
- =?utf-8?B?aXpIczBzTFdHUUVLVmkydmZDek9jaDljUHJHTXVnRWhySmZKTVlWSEQrWWtJ?=
- =?utf-8?B?THo2dFR1bkR6T1BFUHgrcythUzBzOTZBUDdOYUJITmFkVkdnNXZzN2dhMXpU?=
- =?utf-8?B?UklXRXpmUys4WG9IbWRzS1BkVkpuMWlMTEE2QVRYcGlJdmxZZjJHcGFwWWNB?=
- =?utf-8?B?OVpueEpMby95YWcwdmZDcmphOXFhdjlWN3Rvb1RSQ0U1dERkWU9mYWh2UU9S?=
- =?utf-8?B?QUlqM2xiVXFUNHBZV0U2N2pjbHpTRWtaVGxvR3FXMWNOWEJrU0h3YnUzZjJt?=
- =?utf-8?Q?W94ni8YC8WQ=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d25yVzA5RldUWW83TVlqSlY5dmljdXpIbERFNEV1YU90VTBrTWs2aWwvRFMr?=
- =?utf-8?B?b1czQml6S0t0MVZiT0o3OGtSQW5pSDArd0xTRzI0eW5IMDFWUFY1UzlnUm1V?=
- =?utf-8?B?b1VCVHN5dDFvaXpuS2pnVWJyeThCRDBsblNGZ0ZtMW9yZk5KN1dlcHVTZFdV?=
- =?utf-8?B?OWMvRENENVp4QzU4N1hEdk12dm9NTWhMYkNDcCt5SmROaWhZOUtuellXdW11?=
- =?utf-8?B?Vi95UGJMQjcrY2JTT0JtS1BCamhYMHMrUG1MVm5XUXRBQUhkODJNUk1HU0pv?=
- =?utf-8?B?WG9mcDlGNEc2SmNXdjdBUlNMa2xycjIxeFk1QXRTQnVQQnA2M1REUXZYQnFU?=
- =?utf-8?B?YjFnenBMeFA5bWZ0dnEzSkZVMEp5ajJqWCtVV2hYZ2xRNnE5TmJUN1hCSGd6?=
- =?utf-8?B?OFExN1RES3puSGd3WktVaGpHS0MzS0xCa2h5RTZzVk12SnMraENUbkoydzUw?=
- =?utf-8?B?bzRpbkhOdUJVUU1oZFhUSzY3TVAxV0hEekhFTnR2czRtNTM5N1FDYTYvU0Fx?=
- =?utf-8?B?VHplblp3NkhYY1B6M3BhZG8xR0dwd0tWT3k2YVV6YnBKTEdKNHl3eW5aRHpV?=
- =?utf-8?B?bVg0M29TY1BIUEZrSWg1cE1saFl4WWVCejhRRnBxeGtndGVmVkJQRjA3SW1v?=
- =?utf-8?B?YjhuVkxCUCtpRExEckV0YWpVRHV1VXNTNHlFSUNYNi9mZ1kvS3JBTzh2UFJH?=
- =?utf-8?B?TlNiMG9Fb2RvUXpob1lOaDByWklQcnVIWnV0Znd2MGt0SlRabnBsQ280azA5?=
- =?utf-8?B?dEdadnJ4MzhIRDJrL0ZtZEQya3diRzhIQXlLM1c2L3pweFVVVlBoNHdqVjVL?=
- =?utf-8?B?QWpYcERGMVlVcnA3OS9oVituZENpc1JSSGpGWmpzZnIvTEo0N0RXVzYvSkhW?=
- =?utf-8?B?UEpLSnZRNXJ4Q3gvcVU0WEd3Qm5Dczc0Nm5yWUpBOUdQdHRPaVZ0OUVGNFcw?=
- =?utf-8?B?dURJYjJyYm9heWQ4V0tyckxWRUp2MzRkOTdtSXVQeWNqZTFyQW55RGczNktr?=
- =?utf-8?B?TFlPTU9DZ3B1NjNFek02WUtqRVJTbmUxcmtnVWFTZ1BCZDhFS29LejdGZURw?=
- =?utf-8?B?WWtyZ3dpZTJXYXJURjJoS1E2RzV4c296UHFLYkwvZU5MR2VPWG8rT1l4OWVR?=
- =?utf-8?B?R0lETmdXN2RBdXZDTERlWTdHaGZjNmtOWVVDYTRuQUpTbnFvYm1IN01zdktx?=
- =?utf-8?B?NkxReW9xQm5hbXhaNlVXSDFDU1NMa0lMQUZYRzB3QSs0UE9kWk5HZWpWRUgy?=
- =?utf-8?B?cjR6dm9Jc3BOajlGOWFvWWpSM0VRLzNVamhmdENJYVVveFZxK3ZxTkZKR0pq?=
- =?utf-8?B?U1ZjclM5cE1FNlk2ZGQwWWR4bTdaVGtGUG9iTEFsRFZ1TStJZll5cWxBZDls?=
- =?utf-8?B?aFllUTYzOExncVFONjVLZ1g0TWhNeWVLUU9GaFBsSGdsbXN0ZG5nMys5eUta?=
- =?utf-8?B?a3JrRkJINkhTTGNETVJVSTVCSndXZ25MWWs2cndiN2k4MGdMK3lxNDZ6MVpF?=
- =?utf-8?B?SjJVTUpoRzNxY1RZUEhFRWpZSENQZ3R1SC9Idm80cmQ2MUtPcmNKQkNzRU5j?=
- =?utf-8?B?N2JLNnIxNUw5K0ZYTTl4TjFLOEE5cGxFYk8xUW9sMmd0akdDcGZCaEYxaEpE?=
- =?utf-8?B?Z2RLbWF2NEFyL3ZHb1ZkdVVhUjVrMk1YaXcreks0Q0VoREt3MmQ1RGhvWW9F?=
- =?utf-8?B?TkdwNGdkQWZhWm5OdzhaUXdDbVB0cFZveDZXS3hlb2tvMFFYN1lXcW1ETENU?=
- =?utf-8?B?V3duU2JOZEZCejJ1blZoZnUrc2lQSHg3OWtVc2ZQUlN6OG91OWxYVWJRYnQ1?=
- =?utf-8?B?aS9LWEFhSGU0TEplVDZuRkFneU5qeStnOVhWR2lxaTdGalU1cnNibTRMS3J1?=
- =?utf-8?B?ZzJCUWtIL1ZYRnZDSzg4VjFYd1hDWDNBSkI2YzFVSDZGVVRkcW44YUtLb2tk?=
- =?utf-8?B?ZzhNTTFRcmtTeVRWV3dJbFhKK1k1MlpqU1NlSG13ZS9zUVVhUE5pNzhNNVdX?=
- =?utf-8?B?bHc2QTJ0RzlQSXhYTUFjdm5kdVg0L0lxS2VpekF5bHJ5bVJIRDRXbEpwUXNB?=
- =?utf-8?B?bWdrTkE5N2xNVXdrZTJxNG1zdW5aQ25ZQjBDcFRTbllXczNqL01Eam12eE9O?=
- =?utf-8?B?eDJ2dHRVclhZQ0JLTXd0aVBLVERFM0R0RDlZNUdnK21WeGh6NG9zSDR0dS9h?=
- =?utf-8?B?akE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1801e72f-c73d-4ecd-f4d3-08ddc37eff0a
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2025 09:07:17.2519 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vFrTobOMq/xO0TSbkievt6O/whJ9fJJWL6FFNjcWiq8swTI/uQ2qIRxsCMPBCT9YFczknP+C2Gfc723kkn3RsIyyDFcl1pTAPfLL9KlHrUw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB9921
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] block: Remove unreachable code
+To: Greg Malysa <malysagreg@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250714-blk-uclass-v1-1-d21428c5f762@linaro.org>
+ <20250714162951.GI13084@bill-the-cat>
+ <04953cfc-0475-4560-bd7c-fee27739e351@linaro.org>
+ <CABdDSeVtccemn8PTgs-f+QzZqJDZ_R=GRmrK2wquasCYDwWYPQ@mail.gmail.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <CABdDSeVtccemn8PTgs-f+QzZqJDZ_R=GRmrK2wquasCYDwWYPQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,25 +107,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On 7/12/25 11:12 PM, Jonas Karlman wrote:
-> Boot devices are being probed when SPL boot order is determined. This
-> may delay boot slightly and can prevent booting from SPI Flash on boards
-> that use same pins for SPI Flash and eMMC due to pinctrl being applied
-> prior to booting.
+
+On 14/07/2025 20:13, Greg Malysa wrote:
+> Hi Tom, Andrew,
 > 
+> On Mon, Jul 14, 2025 at 1:12 PM Andrew Goodbody
+> <andrew.goodbody@linaro.org> wrote:
+>>
+>> On 14/07/2025 17:29, Tom Rini wrote:
+>>> On Mon, Jul 14, 2025 at 04:38:53PM +0100, Andrew Goodbody wrote:
+>>>> The two functions blk_find_first and blk_find_next use a for loop with
+>>>> the content being a 'return 0' which means that the 'increment' code is
+>>>> unreachable so remove it and also remove the variable ret which is
+>>>> assigned to but its value is never used.
+>>>>
+>>>> This issue found by Smatch.
+>>>>
+>>>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>>>> ---
+>>>>    drivers/block/blk-uclass.c | 14 ++++----------
+>>>>    1 file changed, 4 insertions(+), 10 deletions(-)
+>>>>
+>>>> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+>>>> index f3ac8db9464..b38c21ffbe2 100644
+>>>> --- a/drivers/block/blk-uclass.c
+>>>> +++ b/drivers/block/blk-uclass.c
+>>>> @@ -613,11 +613,8 @@ static int blk_flags_check(struct udevice *dev, enum blk_flag_t req_flags)
+>>>>
+>>>>    int blk_find_first(enum blk_flag_t flags, struct udevice **devp)
+>>>>    {
+>>>> -    int ret;
+>>>> -
+>>>> -    for (ret = uclass_find_first_device(UCLASS_BLK, devp);
+>>>> -         *devp && !blk_flags_check(*devp, flags);
+>>>> -         ret = uclass_find_next_device(devp))
+>>>> +    for (uclass_find_first_device(UCLASS_BLK, devp);
+>>>> +         *devp && !blk_flags_check(*devp, flags);)
+>>>>               return 0;
+>>>>
+>>>>       return -ENODEV;
+>>>> @@ -625,11 +622,8 @@ int blk_find_first(enum blk_flag_t flags, struct udevice **devp)
+>>>>
+>>>>    int blk_find_next(enum blk_flag_t flags, struct udevice **devp)
+>>>>    {
+>>>> -    int ret;
+>>>> -
+>>>> -    for (ret = uclass_find_next_device(devp);
+>>>> -         *devp && !blk_flags_check(*devp, flags);
+>>>> -         ret = uclass_find_next_device(devp))
+>>>> +    for (uclass_find_next_device(devp);
+>>>> +         *devp && !blk_flags_check(*devp, flags);)
+>>>>               return 0;
+>>>>
+>>>>       return -ENODEV;
+>>>
+>>> Should we clean up uclass_find_next_device(...) to not return int? The
+>>> function comments don't quite make sense (include/dm/uclass-internal.h)
+>>> and it always returns 0.
+>>
+>> OK, that should not be too bad.
+>>
+>> Andrew
+> 
+> To me it looks like this function doesn't do what is advertised in
+> include/blk.h in either case (find the first block device with
+> matching flags by checking each one until one matches or we run out),
+> instead it seems to test the first block device for the flags
+> requested and either returns -ENODEV or 0. Out of curiosity, i looked
+> for uses of blk_find_first and blk_find_next, and (except for
+> test/dm/blk.c where all the functions are used) they're only used by
+> the blk_foreach macro (include/blk.h again), which is only used in
+> blk_foreach_probe, which is only used in blk_count_devices, which is
+> used nowhere. Instead users use blk_first_device_err which is a
+> completely separate path (drivers/block/blk-uclass.c:638).
 
-How would that be possible? One cannot have the same pins used for SPI 
-flash and eMMC at the same time? So that would be an issue in the DT or 
-a misconfigured DT for the board?
+I was also going to follow up on how much this code was actually used. 
+So yes thanks for confirming that all this code has no user. In which 
+case I would suggest that it can just be removed.
 
-On paper otherwise, it makes sense to me not to probe the device until 
-it's used.
+In the meantime I will post my V2 to include clean up of 
+uclass_find_next_device as it is at least a step in the right direction.
 
-Is it guaranteed the devices are actually probed before being used from 
-the SPL loader code? (common/spl/*) I guess if it's not it would be an 
-issue in the SPL loader code making assumptions it shouldn't.
+Andrew
 
-Cheers,
-Quentin
+> I was hoping the test code could clarify a bit and it might. In test/dm/blk.c:
+> 
+> dm_test_blk_flags first looks for devices with either flag (BLKF_BOTH)
+> so the flag check never fails, then it looks for BLKF_FIXED ,which it
+> indicates must fail because before probing all devices are removable,
+> then it looks for BLKF_REMOVABLE, which is set for the first device
+> before probing (even though it will become BLKF_FIXED later). So none
+> of these are (I think) testing for the situation where the first
+> device is missing a flag, but the second device has it and
+> blk_find_first should return the second device. Then in
+> dm_test_blk_iter, blk_count_devices is used with varying flag
+> combinations and is expected to give the correct answer, which
+> suggests that the code does actually work, assuming the test case runs
+> and succeeds.
+> 
+> I've been looking for something to poke around in and if you're ok
+> with it I'd be interested in exploring this further to figure out
+> whether the function does what it is intended to or if there's an
+> opportunity to improve the test coverage.
+> 
+> Thanks,
+> Greg
+
