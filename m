@@ -4,91 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D659C83F22
-	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 15:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 365A0C83F17
+	for <u-boot@archiver.kernel.org>; Tue, 15 Jul 2025 15:22:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDB318300B;
-	Tue, 15 Jul 2025 17:00:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B8AB83043;
+	Tue, 15 Jul 2025 17:22:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zGOsNsgW";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="JYCCtoeO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE74183010; Tue, 15 Jul 2025 17:00:57 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4CBB783071; Tue, 15 Jul 2025 17:22:42 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBCF882FCA
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 17:00:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C957E83010
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 17:22:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3a50956e5d3so4269218f8f.1
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 08:00:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752591655; x=1753196455; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=L0RJL4y/3Eej4yfcMBmxL3JltnX5xfbliQzM3rcxgvU=;
- b=zGOsNsgWxDOzLUOQ3VI7N/1DkCWbgPo7uECT9gtlsrBMs9js8A950j/IqSmBAy4TP+
- h5aMxVa695KyxLmAB7osXZDTXpgF/ubwkTSkN0nFudDHFgVT6XkC6zawFBb0eY+EFIzc
- /VMAK755B5TxzAa5DcoKtTUg19XU62iLgaMKrKrKAYsC1oRjK0fn3tAW5d8ME/A0xHn3
- QHpcHFEOhI43m0H9jK0/IhKUmZpEkJDtOWk6W+Wewat7byFr7eo8nfi9MckETzvf8JYi
- K3/8RciWg71fW1KigB6IXkPcZg3gp94ofcK9Jd/3P2Kl8vmf5z1qmB8Kd/1fCUv3rOnn
- bsQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752591655; x=1753196455;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=L0RJL4y/3Eej4yfcMBmxL3JltnX5xfbliQzM3rcxgvU=;
- b=Zl9fWKeTpW3yn+cjVT4cwdhTS0kT9HpuzesI4TBplVXmULHdCEHw6SpSA305nHUdWq
- fo5+9Uq5cq7D3jkflTN77bvcGuy4kvuHKzS2I1/bDu2juPL93yc6jEJls/T9uAH3o8VN
- DsZOj3FK3oFkajIZoV7wf2cOuMqci5ugfplPEDhpRyxAHjNPgNf0/pECdPuVd2SadbkL
- qXH8dUfllh2cSeqlTVGRPCwxoe6QxF3J8J8zTixaYe7pyFsrJirN9G9XNVFggDFap0M+
- xfaPP6JaX/VUxx/FyeAJd0GCkSl8QSPshE+wJ5o/5Dzcn4cu8fBAr1zbb6Lz0YL6DT97
- VS7g==
-X-Gm-Message-State: AOJu0Yxz3Fj3/kkdfnNTtAMegU2zBTuE+FgldAepl3ZjzmjYhtu1OWOw
- OFx4r63TUQr7/cLxfqSMpJGKMJwR/m9P0oDkkfW6rDTwIHsSBeJC+BXgvOC4t2Ob9uE=
-X-Gm-Gg: ASbGncuIb2qUYlXeq16Q82pu0fisF1kkxoMOKXJ4J6xNg0uejHUKzYEKPYquXUx3Rdl
- eoF+tUBmpGPJdXxbemR1aXVypQ5vSVD5J5Tva7FMlTmQmzcMnFNshrVjsb9vwfG7BdVFyV53DNl
- Zo2/OU7652EhGPG2v//t6tzH1XYU//5jtj9+lL8sbxLWADZq5saWMSwjwwumZm/wbI9sI6BqLAP
- RWASgeQElPjZFNWH29S64QoJnfrPraSzGAqF1Pa+puMVsHnqGVg11g01/kKcI/d5TdbbTumLnBL
- Vl9t7Yfkyh14SI7AxwwOHXCaLznB0g5bKx2SQvKtemz/GNghVlv/T5q070ay2nqrMxtBb5TKa60
- Lk6V0UWNzEqMh8mK3vaLGZPhGK6Q68ReiiohcM8cXMvRN4D/sSEQTEVU0zh55VRYvbkAOXKl+4R
- NdxDXoN+pyXg==
-X-Google-Smtp-Source: AGHT+IFRY2E8uooT6lQRyyLBnCjhFCe6f/5EexswM+K+JT8Qut69USMdQUFeP11zqGEbb1xNA5+t3A==
-X-Received: by 2002:a5d:5f06:0:b0:3a4:f787:9b58 with SMTP id
- ffacd0b85a97d-3b60a1bb64dmr2168616f8f.58.1752591654722; 
- Tue, 15 Jul 2025 08:00:54 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:e07:801:c1bc:9f9a:fc67:a1d1?
- ([2a0a:ef40:e07:801:c1bc:9f9a:fc67:a1d1])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8e0d5easm15193482f8f.48.2025.07.15.08.00.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Jul 2025 08:00:54 -0700 (PDT)
-Message-ID: <60a53026-4758-4da1-9ec9-37a75b098ccd@linaro.org>
-Date: Tue, 15 Jul 2025 16:00:52 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5605=Z5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1752592958;
+ bh=hdTgNqsIo69b3PjPZbhDf9DTl6nr8jLiDbITTYpfwis=;
+ b=JYCCtoeODXuGaD1lWkQujvAj/fAOIBhQv6DT/yKliFIC7Iy9K+SEIXptAtLHgW7f/u3d7zqJM
+ rifLznH4sYojBqOzLA9Kck8Gwgan/KZxDWde7rLIZNDV3Tk5ij2at5/ZdFt1+M4/wjFbWREQsi0
+ RLsgF5sVjxDlwmxWBHMMi0QJKyGILVeLCKHMm605I6eLXrm24FRYC5KKq/QSaAkpVWegbb9W8AK
+ g9ayyPn6rQV474e7KMa9rdfo8/YNa4PTxoAw6dbSWFGpjD7mc8pr3aQr+e1M8zkGfdJ8IEMcpEP
+ NoJ/91ZZBeM97S5KBasiD7vfF0XbyZkBnnKunMWoQGtg==
+X-Forward-Email-ID: 687672364f06c51bcf025161
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.1.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <00bc1039-5163-451b-b3e0-81abb4a9185f@kwiboo.se>
+Date: Tue, 15 Jul 2025 17:22:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] uclass: Cleanup uclass_find_next_device
-To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
- Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>,
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de
-References: <20250714-blk-uclass-v2-0-1bb1d2eee896@linaro.org>
- <20250714-blk-uclass-v2-2-1bb1d2eee896@linaro.org>
- <a836de8e-5de1-4cdd-8dcc-643ffa0463b1@cherry.de>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <a836de8e-5de1-4cdd-8dcc-643ffa0463b1@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] rockchip: spl-boot-order: Defer probe of boot device
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20250712211232.680047-1-jonas@kwiboo.se>
+ <0df75337-a0e0-4076-93db-aa8632e23c8e@cherry.de>
+ <13913124-c2b9-4072-b57e-7012b2a222ec@kwiboo.se>
+ <9390c906-4462-4e02-83f5-5e7d05dd956f@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <9390c906-4462-4e02-83f5-5e7d05dd956f@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,193 +77,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
-
-On 15/07/2025 13:06, Quentin Schulz wrote:
-> Hi Andrew,
+On 7/15/2025 3:11 PM, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> On 7/15/25 11:23 AM, Andrew Goodbody wrote:
->> uclass_find_next_device always returns 0, so instead make it a void and
->> update calling sites.
+> On 7/15/25 11:36 AM, Jonas Karlman wrote:
+>> Hi Quentin,
 >>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>   board/emulation/qemu-ppce500/qemu-ppce500.c |  4 ++--
->>   boot/bootdev-uclass.c                       |  2 +-
->>   cmd/regulator.c                             |  4 ++--
->>   drivers/core/uclass.c                       | 16 +++++-----------
->>   drivers/power/regulator/regulator-uclass.c  | 10 ++++++----
->>   drivers/remoteproc/rproc-uclass.c           |  6 ++++--
->>   include/dm/uclass-internal.h                |  4 +---
->>   test/dm/core.c                              | 28 +++++++++++++ 
->> +--------------
->>   8 files changed, 35 insertions(+), 39 deletions(-)
+>> On 7/15/2025 11:07 AM, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 7/12/25 11:12 PM, Jonas Karlman wrote:
+>>>> Boot devices are being probed when SPL boot order is determined. This
+>>>> may delay boot slightly and can prevent booting from SPI Flash on boards
+>>>> that use same pins for SPI Flash and eMMC due to pinctrl being applied
+>>>> prior to booting.
+>>>>
+>>>
+>>> How would that be possible? One cannot have the same pins used for SPI
+>>> flash and eMMC at the same time? So that would be an issue in the DT or
+>>> a misconfigured DT for the board?
 >>
->> diff --git a/board/emulation/qemu-ppce500/qemu-ppce500.c b/board/ 
->> emulation/qemu-ppce500/qemu-ppce500.c
->> index 40d295dbf06..58de4a05296 100644
->> --- a/board/emulation/qemu-ppce500/qemu-ppce500.c
->> +++ b/board/emulation/qemu-ppce500/qemu-ppce500.c
->> @@ -170,9 +170,9 @@ int misc_init_r(void)
->>        * Detect the presence of the platform bus node, and
->>        * create a virtual memory mapping for it.
->>        */
->> -    for (ret = uclass_find_first_device(UCLASS_SIMPLE_BUS, &dev);
->> +    for (uclass_find_first_device(UCLASS_SIMPLE_BUS, &dev);
->>            dev;
->> -         ret = uclass_find_next_device(&dev)) {
->> +         uclass_find_next_device(&dev)) {
->>           if (device_is_compatible(dev, "qemu,platform")) {
->>               struct simple_bus_plat *plat = dev_get_uclass_plat(dev);
->> diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
->> index 3791ebfcb42..6718c482e52 100644
->> --- a/boot/bootdev-uclass.c
->> +++ b/boot/bootdev-uclass.c
->> @@ -216,7 +216,7 @@ void bootdev_list(bool probe)
->>           if (probe)
->>               ret = uclass_next_device_check(&dev);
->>           else
->> -            ret = uclass_find_next_device(&dev);
->> +            uclass_find_next_device(&dev);
+>> Correct, basically there are SoCs, RK3576 and RK3588S comes to mind,
+>> that share/mux pins for FSPI and EMMC. And some devices with those SoCs
+>> have options to mount a SPI flash or eMMC module using same connector.
+>>
+>> E.g. Radxa has a SPI flash module for ROCK 5A/5C that can be mounted on
+>> the eMMC connector. And ROCK 4D has a shared eMMC/UFS connector with a
+>> SPI flash mounted onboard (in some configurations).
+>>
+>> When I tried to boot from SPI flash on my ROCK 4D and was trying to
+>> describe the eMMC module, SPL would instead first probe the SPI flash
+>> module and apply the pinctrl for FSPI func, and then when it tries to
+>> lookup more boot options, it instead probed the sdhci controller and
+>> applied pinctrl for emmc so loading FIT from SPI flash then failed.
+>>
 > 
-> I think we need to ret = 0 here as well? Otherwise the printf at the top 
-> of the for-loop will return whatever was the last return value?
+> Yeah... but that's an invalid DT you just used, no? SPI flash AND eMMC 
+> cannot be used at the same time? So we should either have SPI flash or 
+> eMMC enabled in the DT and not both? Or are you planning on supporting 
+> booting from SPI flash entirely and then somehow have proper load stuff 
+> from the eMMC and not SPI flash or something?
 
-Yes, will fix.
+Something like that, some scenarios I envision for future:
+a) an eMMC module is mounted and BROM report eMMC as bootsource.
+b) a SPI flash module is mounted and BROM report SPINOR as bootsource.
 
->>       }
->>       printf("---  ------  ------  --------  ------------------\n");
->>       printf("(%d bootdev%s)\n", i, i != 1 ? "s" : "");
->> diff --git a/cmd/regulator.c b/cmd/regulator.c
->> index da298090bb7..db843283662 100644
->> --- a/cmd/regulator.c
->> +++ b/cmd/regulator.c
->> @@ -97,9 +97,9 @@ static int do_list(struct cmd_tbl *cmdtp, int flag, 
->> int argc,
->>              "Parent");
->>       for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
->> -         ret = uclass_find_next_device(&dev)) {
->> +         uclass_find_next_device(&dev)) {
->>           if (ret)
->> -            continue;
->> +            break;
-> 
-> I think it would make this more readable by having
-> 
-> ret = uclass_find_first_device(UCLASS_REGULATOR, &dev);
-> if (ret)
->      return ret;
-> 
-> for (; dev; uclass_find_next_device(&dev)) {
->      uc_pdata...
-> }
-> 
-> return ret;
-> 
-> What do you think? This also avoids checking for ret in every loop 
-> considering it won't ever change.
+For now only scenario a) is possible on ROCK 5A/5C, because the sdhci is
+currently enabled in the FDT that would be loaded in next boot phase.
 
-OK, will change as suggested.
+For scenario b) a DTBO or an alternative FDT config in FIT can be
+selected that disabled sdhci and instead enable SPI flash controller.
 
-> [...]
-> 
->> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/ 
->> power/regulator/regulator-uclass.c
->> index 09567eb9dbb..eac025c9c02 100644
->> --- a/drivers/power/regulator/regulator-uclass.c
->> +++ b/drivers/power/regulator/regulator-uclass.c
->> @@ -261,10 +261,10 @@ int regulator_get_by_platname(const char 
->> *plat_name, struct udevice **devp)
->>       *devp = NULL;
->>       for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
->> -         ret = uclass_find_next_device(&dev)) {
->> +         uclass_find_next_device(&dev)) {
->>           if (ret) {
->>               dev_dbg(dev, "ret=%d\n", ret);
->> -            continue;
->> +            break;
->>           }
-> 
-> Same here.
-> 
->>           uc_pdata = dev_get_uclass_plat(dev);
->> @@ -411,8 +411,10 @@ static bool regulator_name_is_unique(struct 
->> udevice *check_dev,
->>       int len;
->>       for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
->> -         ret = uclass_find_next_device(&dev)) {
->> -        if (ret || dev == check_dev)
->> +         uclass_find_next_device(&dev)) {
->> +        if (ret)
->> +            break;
-> 
-> Ditto.
-> 
->> +        if (dev == check_dev)
->>               continue;
->>           uc_pdata = dev_get_uclass_plat(dev);
->> diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/ 
->> rproc-uclass.c
->> index 3233ff80419..7916cb27e3d 100644
->> --- a/drivers/remoteproc/rproc-uclass.c
->> +++ b/drivers/remoteproc/rproc-uclass.c
->> @@ -56,8 +56,10 @@ static int for_each_remoteproc_device(int (*fn) 
->> (struct udevice *dev,
->>       int ret;
->>       for (ret = uclass_find_first_device(UCLASS_REMOTEPROC, &dev); dev;
->> -         ret = uclass_find_next_device(&dev)) {
->> -        if (ret || dev == skip_dev)
->> +         uclass_find_next_device(&dev)) {
->> +        if (ret)
->> +            return ret;
-> 
-> Ditto.
-> 
->> +        if (dev == skip_dev)
->>               continue;
->>           uc_pdata = dev_get_uclass_plat(dev);
->>           ret = fn(dev, uc_pdata, data);
->> diff --git a/include/dm/uclass-internal.h b/include/dm/uclass-internal.h
->> index 3ddcdd21439..9cb3f090271 100644
->> --- a/include/dm/uclass-internal.h
->> +++ b/include/dm/uclass-internal.h
->> @@ -149,10 +149,8 @@ int uclass_find_first_device(enum uclass_id id, 
->> struct udevice **devp);
->>    *
->>    * The device is not prepared for use - this is an internal function.
->>    * The function uclass_get_device_tail() can be used to probe the 
->> device.
->> - *
->> - * Return: 0 if OK (found or not found), -ve on error
->>    */
->> -int uclass_find_next_device(struct udevice **devp);
->> +void uclass_find_next_device(struct udevice **devp);
->>   /**
->>    * uclass_find_device_by_namelen() - Find uclass device based on ID 
->> and name
->> diff --git a/test/dm/core.c b/test/dm/core.c
->> index 959b834576f..201daee6836 100644
->> --- a/test/dm/core.c
->> +++ b/test/dm/core.c
->> @@ -737,7 +737,7 @@ static int dm_test_device_reparent(struct 
->> unit_test_state *uts)
->>       /* try to get devices */
->>       for (ret = uclass_find_first_device(UCLASS_TEST, &dev);
->>            dev;
->> -         ret = uclass_find_next_device(&dev)) {
->> +         uclass_find_next_device(&dev)) {
->>           ut_assert(!ret);
-> 
-> Ditto for all the tests in test/dm/core.c.
+Main reason to support something like this will be to use the cheap SPI
+flash module for bootloader and use NVMe for storage without requiring
+a special DT or build of U-Boot.
 
-The for loops in test/dm/core.c mostly reduce to being empty as the only 
-test left inside is that dev is not NULL, but in that case the for loop 
-terminates so the test can never fail. So the for loops can mostly be 
-removed as they do nothing.
+> 
+>> With probe and thus apply of pinctrl happening later when images are
+>> loaded we should be able to create a single boot image that dynamically
+>> can apply correct FDT/DTBO depending if it was booted from SPI flash or
+>> eMMC. Or for the ROCK 4D case (can only boot from FSPI->UFS->USB) being
+>> able to boot from SPI flash and then switch to use eMMC for storage.
+>>
+> 
+> I see... So the point would be to have a DTBO with pluggable eMMC which 
+> disables the SPI flash and another one with pluggable UFS flash and load 
+> the appropriate one based on the boot medium used by the BootROM to load 
+> the TPL? This however makes a fallback impossible (e.g. booting from 
+> SD/SPI flash so we don't know whether UFS, eMMC or no pluggable storage 
+> medium is provided, no or corrupted proper on SD/SPI flash, how to know 
+> which next storage to try?).
 
-Thanks,
-Andrew
+Correct, for the ROCK 5A/5C their DT currently enable sdhci controller
+because this is the most likely use-case. However if the user use a SPI
+flash module instead of the eMMC module (same connector), runtime could
+determine this and use special FDT or apply an DTBO as you cannot mount
+both a SPI flash and eMMC module at the same time.
 
+If I am not mistaken vendor u-boot may already do something to this
+effect, try to identify SPI flash and load a special FDT in such case.
+
+Such feature would only be board specific, and possible may require a
+special boot only DT for SPL, something to investigate in future.
+
+> 
+> Maybe we would need to tentatively apply pluggable eMMC DTBO, try to 
+> probe, remove the drivers, apply pluggable UFS DTBO, try to probe, 
+> remove the drivers, etc... Seems very complex though :/
+> 
+>> Something to investigate more in a follow up series.
+>>
+> 
+> Have fun :)
+
+Hehe, I do not think it needs to be that complex, but this idea could
+very likely also never amount to anything :-)
+
+> 
+> Don't we need to describe the eMMC (sdhci) controller with the pinmux 
+> for SPL to be able to load proper from it? Which would conflict with the 
+> one from the eMMC controller's? This all seems to be due to some WIP 
+> state, bring-up of Rock 4D and odd HW configurations rather than stuff 
+> we should support in the long run?
+
+The ROCK 4D variant I have come with onboard SPI flash and a UFS module
+mount. I think there may be future variants without SPI flash that
+instead can support use of an eMMC module.
+
+Current board variant that have an onboard SPI flash also configure BROM
+to use FSPI->UFS->USB boot order (or USB when MSAK-button is pressed).
+These models cannot be booted directly from a SD-card (or eMMC).
+
+> 
+> I'm still a bit confused by what the plan for 4D and the additional 
+> pluggable storage medium are, do you have anything in mind?
+
+With my current ROCK 4D series only SPI flash boot is supported. UFS
+boot support would be interesting but I have no current plans to look
+into that. Fallback to read FIT from SD-card should also be supported.
+
+Trying to boot from SPI flash and then later switch to eMMC was just
+something I was entertaining as an interesting idea, mostly because I
+had no UFS module until one was delivered earlier today ;-)
+
+> 
+> With my current understanding, I would say that we simply should remove 
+> the part about preventing to boot from other storage medium as that is 
+> the result of some WIP state that shouldn't make it to upstream U-Boot? 
+> We can describe the current limitations in the documentation if you want.
+
+I can try to simplify the commit message in a v2.
+
+> 
+> Not wanting to probe devices before they are used is valid though, so 
+> the code part of this patch seems reasonable to me.
+
+Yes, this is why I sent this patch standalone, everything else mentioned
+above is more about possible future endeavors that this also may help
+enable.
+
+Regards,
+Jonas
+
+> 
 > Cheers,
 > Quentin
 
