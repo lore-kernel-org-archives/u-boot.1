@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 552FDC83F22
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 13:03:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58937C83F22
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 13:03:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CFDA8313B;
+	by phobos.denx.de (Postfix) with ESMTP id 842EE8324C;
 	Wed, 16 Jul 2025 15:03:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=on-the-web.ch
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="MNWJlgB6";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D3ZousK1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9F24831E1; Wed, 16 Jul 2025 12:11:59 +0200 (CEST)
-Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 45FEA83242; Wed, 16 Jul 2025 13:56:05 +0200 (CEST)
+Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
+ [IPv6:2607:f8b0:4864:20::a30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D430831AC
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 12:11:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=on-the-web.ch
+ by phobos.denx.de (Postfix) with ESMTPS id 97B2B831EA
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 13:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sputnik@on-the-web.ch
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=on-the-web.ch;
- s=protonmail3; t=1752660715; x=1752919915;
- bh=RvLvPBttKBK7gfo1an0lyYi42VBMExSzwAKtRvZTiXQ=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=MNWJlgB6rxLkquKnO3Ym+xGcpqsk65mj98uqivYEfswesmeksrBPMaXh8fEB0Cnt6
- JFMKgGLBQzjzIT6BOHPDbQBcwPvJ/OWmeOBKs7nOlUxQHm6kqkw5PbajtX8JAKJSVn
- APHIfQ0sug9JERNVpYTonBoMMsuQVmI5x9apbU2Z5Q77FMpJxWW+bDEyYS1q10reZr
- Pu9tSE47dNqCz6Z1UonXcUORiK739ZCqQxzHt+sQsm8RFDjmMob1oHiV7CfODYv5Ef
- z54fZrRCM4bQI9zl50j6TKQCGQt/3sN0s11afIFKbs7dE42nPFbM+1EAqOdtVbhguj
- tELjvXHGaPGSA==
-Date: Wed, 16 Jul 2025 10:11:47 +0000
-To: E Shattow <e@freeshell.de>
-From: Martin Herren <sputnik@on-the-web.ch>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
- Andreas Schwab <schwab@suse.de>, Anup Patel <anup@brainfault.org>,
- Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>, "Chia-Wei,
- Wang" <chiawei_wang@aspeedtech.com>, Conor Dooley <conor.dooley@microchip.com>,
- Cyril Jean <cyril.jean@microchip.com>, Green Wan <green.wan@sifive.com>,
- Hal Feng <hal.feng@starfivetech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Minda Chen <minda.chen@starfivetech.com>,
- Padmarao Begari <padmarao.begari@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Rick Chen <rick@andestech.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
- Yao Zi <ziyao@disroot.org>, Yixun Lan <dlan@gentoo.org>,
- Yuri Zaporozhets <yuriz@vodafonemail.de>
-Subject: Re: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly
- used value.
-Message-ID: <vYg4IlDYamca-5F-VHVhUe0syuQhVE3qrEpgug3uvTZas8gzrXpE4YX-H63dA9ISHVebukojmJUigxf9EaSWx-lmzGGSdeV_SLSMXuNa62Q=@on-the-web.ch>
-In-Reply-To: <b3f95ac9-a847-450b-9d5a-64af5e84a47e@freeshell.de>
-References: <20250714133345.128853-1-sputnik@on-the-web.ch>
- <9529db2f-ff07-448e-99b4-65dde605b0ec@amd.com>
- <b3f95ac9-a847-450b-9d5a-64af5e84a47e@freeshell.de>
-Feedback-ID: 61562450:user:proton
-X-Pm-Message-ID: 2ce7118ee326eca391e758b88442c3f73683d9e0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gchan9527@gmail.com
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-531426c7139so2786005e0c.2
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 04:56:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752666961; x=1753271761; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KZTmVaIDd3P/0osElDkOzh11BNxNYNvmtzA6J1coKGM=;
+ b=D3ZousK1N1DWoTAbihzNpeuGZBFFqBBlvz4G0DONk+IQcG+uC6kx1UNjB1bYDByzz2
+ k3VY4eGnKlYBj4t7GNjEwkTknorqAlNW5mg5vCqKroymlKj8NaQSiNgz6S4LFEeifggL
+ LNYK1X9z3XpWqWUT0Atcg5zaIpt4Ho0aV26xSjWVm91svklZfITMTr7TF9ox11c+7bf/
+ QjFIMA0txymWKEcoTKXqfOaDlLYZqkGV72Unoabuu4BeVwUVdoVx5Xhr5JvFONvJBwn7
+ Pko6vCcGpEEOAmYBWusan5ImCj+mQnW6vQhP86voP+2CSkOZYLBjGFGT/5XWaXenP468
+ QpPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752666961; x=1753271761;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KZTmVaIDd3P/0osElDkOzh11BNxNYNvmtzA6J1coKGM=;
+ b=xSxk7ipclABAWxoOfPlbL39zyPblEqf2iMpeDWtG8t2HhnJiagg4jglDARRLORfXUl
+ 5VnBOfhpI6htsjiXFSF1PaiY7Oo5aXZ5dXgRF/fH6mUW6ao72hCL8ej3XS51c4fK4Lws
+ lXWHFSax8bFaku3ijxEQlUGk1Jeywq2GDHIOlqjRBJX9sELRQMFgf6J64aIL6YdEQD5y
+ WUfjs1kzA1RXFCbgF6pbmtfIgfUs1HhVTZ4CVZipRjmwtVpVUI9ei96yHMUXYsIrM5cG
+ yYpdno/3ynoWhpVNuZwa8JY4gd7uGW1jY6o5PIzhNkmB8DvpmJJ4ynPNHDA9LbS8+us4
+ fDDQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkzdGjuM0/4roqUpUbm8WqAQ0EMKYJVowxgdoIBRq0TwD4sgY3xO1q+RIfw5Vw5moxlEVWszU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzFD4/4EUKSpA0gE4IWmOoHbh8nROX5HeiSWNW/Sr/0xumHuaZU
+ APXP9hN6Vg2+lvTjFi3xg/FItZZewSF7igKvwy+2ZdgnETrMyRPLyk/1kr7R13hSV5P4vH929D1
+ AoEUTfbKzmLiNXyG/CNrRLXHT21Vowgc=
+X-Gm-Gg: ASbGncuqSMx3ZmbtX6aHKbD3PhsFYwwJxLBW5kxVVOwAOKL7alMh28Fi/pVQ9hNp8Zt
+ ccwZc+t1V2DQzkgE2ZNSlKKHTf9wJky9snuOwFxSU6DWXMR0kGuL0AINto1sd/SiMz18WzkNXt3
+ McatKwyCT7GKivQHpfTjRcgxYY57ris0w5AaHtVr7QYJ7dKVJCDtPDg79oN30ysf/2KlfG4lvBg
+ gMc31MJ
+X-Google-Smtp-Source: AGHT+IHITRZ+71hKJZYYVN7HvyiWjbdcNdS+yXGtMa16ttyV69YB5K4q5j+IeWeBRq7XNrUwuB1cVzHrVPx6K2YnKpY=
+X-Received: by 2002:a05:6122:d29:b0:526:720:704 with SMTP id
+ 71dfb90a1353d-5373fcb944dmr719077e0c.7.1752666961310; Wed, 16 Jul 2025
+ 04:56:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg=pgp-sha512;
- boundary="------6d5712196c62a753711f570937787b5487e4d653e8862b83990e521df252be85";
- charset=utf-8
+References: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
+ <20250630-sc7180-android-boot-v4-3-24cdb50e860f@gmail.com>
+ <871pqg4iar.fsf@kernel.org>
+In-Reply-To: <871pqg4iar.fsf@kernel.org>
+From: george chan <gchan9527@gmail.com>
+Date: Wed, 16 Jul 2025 19:55:50 +0800
+X-Gm-Features: Ac12FXw16uvXRJX0YJtPcV0g43C-oV4GrxjxT_JiOx8JyrmFgfAomdM8YcQfqtM
+Message-ID: <CADgMGSuN249mVLKja2r1cpN4Xn80CAkuv2F5rSizo3C_qaRpEA@mail.gmail.com>
+Subject: Re: [PATCH v4 3/6] bootm: Append bootargs value when bootmeth_android
+ provide cmdline
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailman-Approved-At: Wed, 16 Jul 2025 15:03:11 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,84 +103,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------6d5712196c62a753711f570937787b5487e4d653e8862b83990e521df252be85
-Content-Type: multipart/mixed;boundary=---------------------97ab90b2d92f39da3253ec96a851034f
+Hi Mattijs,
 
------------------------97ab90b2d92f39da3253ec96a851034f
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;charset=utf-8
+Thx for reply.
 
-Hej all,
+=E5=9C=A8 2025=E5=B9=B47=E6=9C=8816=E6=97=A5=E9=80=B1=E4=B8=89 17:05=EF=BC=
+=8CMattijs Korpershoek <mkorpershoek@kernel.org> =E5=AF=AB=E9=81=93=EF=BC=
+=9A
 
-On Wednesday, July 16th, 2025 at 3:35 AM, E Shattow <e@freeshell.de> wrote=
-:
-> =
+> Hi George,
+>
+> Thank you for the patch.
+>
+...
 
+>
+> > -     ret =3D env_set("bootargs", cmdline);
+> > +     ret =3D android_image_modify_bootargs_env(cmdline, NULL);
+>
+> I don't think it can be done this way. bootm_boot_start() is used in the
+> ChromeOS bootmethod as well (boot/bootmeth_cros.c)
+>
 
-> =
+I got your point. I have 3 ideas come out.
 
+(1) The logic purposely empty the env bootargs, either developer don't use
+env bootargs or those use cases touched bootargs in some early step. And
+then wanna disregard previous u-boot bootmeth operation, and empty bootargs
+for that ongoing bootmeth stage...well that's not congruent behavior; I
+have a gut feeling this is a bug or band-aid anyway, it closed the door for
+people (potentially abootimg) inject needed boot param between bootmeth
+stage. Perhaps, either clean up bootargs before bootmeth load stage, or add
+kconfig to check and enable this logic, a better representation.
 
-> Is there some reason for the value from documentation about the
-> architecture? Or is it arbitrary?
-> =
+(2) One more thing, the vendor_boot cmdline is not handle neither in
+original logic nor in url from you provided. So I can say the url one is
+not capable for extended with Android boot img version > 2 since
+vendor_boot cmdline not handled.
 
+(3) I don't think it is very much different between your mentioned url with
+my patch. There is nothing advanced, but just existing code logic reuse and
+that logic handled vendor_cmdline in other path. I prefer code logic reuse.
 
-> I don't really see the sense in a default value which is simply popular
-> but not founded in an architectural reasoning.
-> =
+And I believe above are not the important thing....
 
-
-> The values do not change often (ever?) so I miss why there is any
-> default at all.
-> =
-
-
-> -E
-
-No, there is no documentation justifying this value. My reasoning was the =
-reverse, there is no justification either that this default value should b=
-e almost an order of magnitude lower than ARM64 as typically generated RIS=
-CV code size is similar and thus the typical kernel size as well.
-
-This is reflected in the most commonly used value in the existing riscv de=
-fconfigs as well as other boards not yet mainlined into u-boot.
-
-With a lower value, typical kernels generated from Yocto or others are too=
- big to be able to be booted.
-
-In my idea the default value, when provided, should reflect the most commo=
-n use case which can then be overridden if wanted.
-
-I understand it was a very bold move on my side as a first submission to c=
-hallenge a default value and touch over 30 boards, so i won't be offended =
-if this is not accepted. The learning experience on just submitting a patc=
-h here and learning about patman and co is already a success for me.
-
-Still I consider the proposed new default as sane and maybe more future or=
-iented for new boards to come.
-
-Cheers,
-
-Martin
------------------------97ab90b2d92f39da3253ec96a851034f--
-
---------6d5712196c62a753711f570937787b5487e4d653e8862b83990e521df252be85
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: ProtonMail
-
-wrsEARYKAG0Fgmh3etMJkIiu+thqKlAPRRQAAAAAABwAIHNhbHRAbm90YXRp
-b25zLm9wZW5wZ3Bqcy5vcme+0jkvj3NJeibcnespGYg/0b9Hw3/DkHQ1vLBs
-YrIKJxYhBCYHlZbYUMXC4ILtW4iu+thqKlAPAAChkgD/RANe9/gr7mB1sYlt
-oiYiq411HLrJzWis8VPJv67/pXwA/RqermUrwaVHvjRtB3Q1KPSWCJy4O/m2
-YS0UN3YwkL0J
-=5dBy
------END PGP SIGNATURE-----
+>
+> Changing this would potentially break ChromeOS boot behaviour so I'd
+> prefer to find another solution.
+>
+> I know that TI has a downstream patch that changes bootmeth_android.c
+> instead:
+>
+>
+> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=3Dti-u-boot-2024.04=
+-next&id=3D9d802d798ac143e06ffe545606aa657a6c32cc63
 
 
---------6d5712196c62a753711f570937787b5487e4d653e8862b83990e521df252be85--
+...
 
+
+> Would that work for you?
+>
+>
+Well, the one from url also fine with me.
+
+The important thing is here. So as to ease the change with "minimal impact"
+gets in. I can add one extra check to maintain original behavior in case
+people have concern of breakage. Code example as below:
+
++ If (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS))
++   ret =3D android_image_modify_bootargs_env(cmdline, NULL);
++ else
+      ret =3D env_set("bootargs", cmdline);
+
+This logic eliminated the concern, but it also limited those potential use
+cases for Android boot header version > 2, unless the newly introduced
+CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS is defined.
+
+Or this one with good extendible.
++ /* Clean up bootargs purposely */
++ if (IS_ENABLED(SOME_FLAG))
++    env_set("bootargs", "");
++ ret =3D android_image_modify_bootargs_env(cmdline, NULL);
+
+Either way. I prefer first one and can blindly apply without afford. I
+leave the idea above to people more concern with it. Please let me know
+your decision, I can provide one more revision later.
+
+Regards,
+George
+
+>
