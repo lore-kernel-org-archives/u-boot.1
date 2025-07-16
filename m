@@ -4,98 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94AC8C83F27
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 04:57:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8818C83F1B
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 06:22:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 940B183145;
-	Wed, 16 Jul 2025 06:57:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 10DC083164;
+	Wed, 16 Jul 2025 08:22:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="JXOSXZ84";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="irbCjbJ+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550078315B; Wed, 16 Jul 2025 06:57:27 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CDE483123
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 06:57:24 +0200 (CEST)
+ id E96118315B; Wed, 16 Jul 2025 08:22:06 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D058A8313B
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 08:22:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56FGDILc024674;
- Wed, 16 Jul 2025 04:57:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=d0II+4duL/2E++T0xx1j3tC6
- 1GVPLWkW0/dsWhd/m4g=; b=JXOSXZ84imO8xcHzsUqrYi6NaLlqKPJYzmgsDl/F
- JDX5CBzSbyNFDq/DUwHyclihv0yRRB4CtDpNJISAFkbVJ7KFdpnAxL6F5KOdRSX8
- ASHaMJxGtHORw6PWzdRHGPXj7KKw6SFl3BDJrwxcS0N3GJXqzVPYrAqjZi/e8HTQ
- IysEmbJA5DxA0a2MXTM+JLoie8YEdR3s/dpYZxNCiFtIgXC6PAqUkaEiH624r+Mp
- 0L1oj91xCutOYVAA1b4z+MAIrRp4HGGqSRStxwcw8+V0mlfeV8AtaYZ58j2FDOW/
- R/IrDMw3podMHIrLKrDxD7fbIB7A69Xq/UKRqfuMyJu34g==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47w5dpdegf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Jul 2025 04:57:14 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56G4vD4m024356
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Jul 2025 04:57:13 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.10; Tue, 15 Jul 2025 21:57:10 -0700
-Date: Wed, 16 Jul 2025 10:27:06 +0530
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-CC: <trini@konsulko.com>, <neil.armstrong@linaro.org>, <sumit.garg@kernel.org>,
- <lukma@denx.de>, <seanga2@gmail.com>,
- <marek.vasut+renesas@mailbox.org>, <bhupesh.linux@gmail.com>,
- <alexeymin@postmarketos.org>, <u-boot@lists.denx.de>,
- <u-boot-qcom@groups.io>
-Subject: Re: [PATCH v1 0/6] Enable fastboot support for IPQ9574 based boards
-Message-ID: <aHcxIj299SjS8wzG@hu-varada-blr.qualcomm.com>
-References: <20250715101538.4072985-1-quic_varada@quicinc.com>
- <7f4689e8-e727-438a-95c1-b1dd49890cea@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56G6M2XR185235;
+ Wed, 16 Jul 2025 01:22:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752646922;
+ bh=ytjAHQWH8bBiy51MigNyzYc3EzhVpo6SZt3dB9Tw/XE=;
+ h=From:To:CC:Subject:Date;
+ b=irbCjbJ+PwFNG94NUr5pkc684XnQqj5hwwcdln3FtFjG/Zk/92h3yTzkPDfZkbECM
+ 4pFIdQfqn9k54PdAks/UW4gWBwuz+VTESV3XL0zgdwuzu5WLoDsiB23WcQXBOedUIV
+ ztvSc6Ed6EiKekWdHBhyHBaz6OdY1g1bFTOHcW2o=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56G6M25C1804703
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 16 Jul 2025 01:22:02 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 16
+ Jul 2025 01:22:01 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 16 Jul 2025 01:22:01 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56G6Lvk94174146;
+ Wed, 16 Jul 2025 01:21:57 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>
+CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <j-keerthy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH v4 RESEND 0/2] Add support for K3 BIST
+Date: Wed, 16 Jul 2025 11:51:54 +0530
+Message-ID: <20250716062156.2564297-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <7f4689e8-e727-438a-95c1-b1dd49890cea@linaro.org>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE2MDA0MSBTYWx0ZWRfX+pX7g5nAT1oR
- CysPNArx4cwMYlzUAT+th1S/uOY+T0gMjnbLC6oMFiz6TbGvbRGfLQkWzb9SgTT/EXy8c1zOrqq
- doOG2gTtDalJ9qBFgyKWmvz+o4wXwhwONd3yDDdMxuXU8+HHV5fbd55wv6jEiN3SFlZhk9w3H8x
- ed0vo6cQqvPvUStWfOP5P6KheisA5NsdLSuOx3xMCmLJ5HoKQN2p3nS9iODOx8aLnxTvgbdeISP
- 3cTY4pKlzF4qR1VFGoAi2CSOOIXS0/rAhJLddcJyt6kgcieHiF0eO+iGE+GHKlW+u07Un8EtDbT
- OoXoD+Wc7+Vuhizze9hhesfw55c5OPQYIfOrRhiAJmnyTsu4F8Nvk/y7Pp7guZHAcIyCqC8ev6B
- ie88xqsiolVInD6uInrBma3cWhTXahtp1yaCVKRtMaFQcbUXNLSaSCqdxbROLHW4y5qumte1
-X-Proofpoint-GUID: aNF7yH-HSyWUE9H_huFP4qacHFpd9eET
-X-Proofpoint-ORIG-GUID: aNF7yH-HSyWUE9H_huFP4qacHFpd9eET
-X-Authority-Analysis: v=2.4 cv=Y+r4sgeN c=1 sm=1 tr=0 ts=6877312a cx=c_pps
- a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=kj9zAlcOel0A:10 a=Wb1JkmetP80A:10
- a=9XabRrNJ_bRDcgU-d34A:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-16_01,2025-07-15_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 mlxlogscore=999 phishscore=0 malwarescore=0 priorityscore=1501
- adultscore=0 impostorscore=0 mlxscore=0 suspectscore=0 lowpriorityscore=0
- bulkscore=0 spamscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507160041
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,68 +81,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 15, 2025 at 02:30:09PM +0200, Casey Connolly wrote:
-> Hi Varadarajan,
->
-> On 7/15/25 12:15, Varadarajan Narayanan wrote:
-> > This series enables MMC based fastboot flashing for IPQ9574 boards.
-> > For this the following are added/enabled
-> > 	* USB2 & USB3 phys support
-> > 	* USB Gadget support, Fastboot-MMC related configs
-> > 	* Flashing related documentation
->
-> This is awesome! Glad to see you have the superspeed phy working. I'm a bit
-> confused though since the of_fixup code in mach-snapdragon configures all
-> the usb controllers for high speed only and removes the reference to the
-> superspeed phy, is there some missing commit to adjust this?
+This series implements a driver for the BIST (Built-In Self Test) module
+for K3 devices. The BIST driver must ideally support triggering of BIST
+tests, both PBIST (Memory BIST) and LBIST (Logic BIST) on a core. Both
+tests are destructive in nature. Please see links [1] and [2] for
+further information regarding the two.
 
-CONFIG_EVENT is not defined in ipq defconfig. Hence of_live_build() doesn't
-notify the EVT_OF_LIVE_BUILT event and qcom_of_fixup_nodes -> fixup_usb_nodes
-is not called.
+At boot up, BIST is executed by hardware for the MCU domain
+automatically as part of HW POST. So BIST has been checked only for the
+MCU domain when U-Boot comes up in the usual U-Boot to Linux boot flow.
+To facilitate the use-case where some safe firmware is intended to be
+run on a safe core, it is best to have triggered the BIST tests on that
+core. As an example, we take triggering the BIST tests on the MAIN R52_x
+cores. The triggering patch is kept as DONOTMERGE.
 
-	=> bdinfo
-	. . .
-	fdt_blob    = 0x000000006fe3b5e0
-	. . .
+The general procedure for triggering BIST on a core is:
+	1. Power on the core under test following a sequence
+	2. Trigger the BIST test
+	3. Reset the core under test following a sequence
 
-	=> fdt addr 0x6fe3b5e0
-	Working FDT set to 6fe3b5e0
+BIST tests are triggered from A72 SPL where the DM (Device Manager
+firmware that handles power management) is already up and can perform
+these power sequences for us.
 
-	=> fdt print /soc@0/usb@8af8800
-	usb@8af8800 {
-		compatible = "qcom,ipq9574-dwc3", "qcom,dwc3";
-		reg = <0x08af8800 0x00000400>;
-		#address-cells = <0x00000001>;
-		#size-cells = <0x00000001>;
-		ranges;
-		clocks = <0x0000000c 0x0000005c 0x0000000c 0x0000005b 0x0000000c 0x0000005d 0x0000000c 0x000000d1 0x0000000c 0x00000060>;
-		clock-names = "cfg_noc", "core", "iface", "sleep", "mock_utmi";
-		assigned-clocks = <0x0000000c 0x0000005b 0x0000000c 0x00000060>;
-		assigned-clock-rates = <0x0bebc200 0x016e3600>;
-		interrupts-extended = <0x00000001 0x00000000 0x00000086 0x00000004>;
-		interrupt-names = "pwr_event";
-		resets = <0x0000000c 0x0000002c>;
-		status = "okay";
-		usb@8a00000 {
-			compatible = "snps,dwc3";
-			reg = <0x08a00000 0x0000cd00>;
-			clocks = <0x0000000c 0x00000060>;
-			clock-names = "ref";
-			interrupts = <0x00000000 0x0000008c 0x00000004>;
-			phys = <0x0000001d 0x0000001e>;
-			phy-names = "usb2-phy", "usb3-phy";
-			tx-fifo-resize;
-			snps,is-utmi-l1-suspend;
-			snps,hird-threshold = [00];
-			snps,dis_u2_susphy_quirk;
-			snps,dis_u3_susphy_quirk;
-			dr_mode = "peripheral";
-		};
-	};
+Boot logs (with LOG_DEBUG and CONFIG_K3_BIST enabled) and DT node kept (already
+merged to ti-k3-dts-next [3]):
+https://gist.github.com/nehamalcom/3fed504d038b54e3e05ba3874d73d603
 
-Initially, I manually overrode the 'phys' and 'phy-names' to just have the usb2
-phy and it didn't seem to work. Only after bringing up the USB3 phy did it work.
-Not sure what the relation is between the two.
+Changes since v4 (resent):
+--------------------------
+https://lore.kernel.org/all/20250609102706.2434495-2-n-francis@ti.com/
+- rebased on master
+- removed DONOTMERGE DT patch
 
-Thanks
-Varada
+Changes since v3:
+-----------------
+https://lore.kernel.org/all/20250328123127.497971-1-n-francis@ti.com/
+- Krzysztof (from dt-binding mailing list)
+    - use existing common definition (ti,sci-dev-id) from grabbing
+      the device ID instead of a new property
+- Udit
+    - add support for J742S2
+- changes from v2 as well since v3 was kept on hold for ack on
+  dt-binding first
+- modified small code of LBIST MISR check to grab expected value of MISR
+  from the appropriate register instead of hard coding the value
+
+Changes since v2:
+-----------------
+https://lore.kernel.org/all/20250204123147.939917-1-n-francis@ti.com/
+- Udit
+    - code cleanup and minor optimizations
+    - reorder patch with DONOTMERGE at the end
+- Manorit
+    - move MCU4_O BIST code into a separate function
+
+Changes since v1:
+-----------------
+https://lore.kernel.org/all/20241127145346.2609868-1-n-francis@ti.com/
+- Udit
+	- alignment and macro naming corrections
+	- move debug prints to printf for errors
+	- split to separate SoC BIST header file
+	- drop enabling CONFIG_K3_BIST by default (patch 3/4)
+	- unmark triggering of BIST as a DONOTMERGE patch
+
+RFC:
+----
+https://lore.kernel.org/all/20240903114402.2155740-1-n-francis@ti.com/
+
+[1] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/latest/exports/docs/sdl/sdl_docs/userguide/j721e/modules/pbist.html#introduction
+[2] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/latest/exports/docs/sdl/sdl_docs/userguide/j721e/modules/lbist.html#introduction
+[3] https://lore.kernel.org/all/175205725858.918402.3771835070085533874.b4-ty@ti.com/
+
+Neha Malcom Francis (2):
+  drivers: misc: k3_bist: Add K3 BIST driver
+  arm: mach-k3: j784s4_init: Trigger LBIST and PBIST on MAIN R5 2_0
+
+ arch/arm/mach-k3/j784s4/j784s4_init.c     |  52 ++
+ drivers/misc/Kconfig                      |   8 +
+ drivers/misc/Makefile                     |   1 +
+ drivers/misc/k3_bist.c                    | 807 ++++++++++++++++++++++
+ drivers/misc/k3_bist_static_data.h        | 673 ++++++++++++++++++
+ drivers/misc/k3_j784s4_bist_static_data.h | 370 ++++++++++
+ include/k3_bist.h                         |  44 ++
+ 7 files changed, 1955 insertions(+)
+ create mode 100644 drivers/misc/k3_bist.c
+ create mode 100644 drivers/misc/k3_bist_static_data.h
+ create mode 100644 drivers/misc/k3_j784s4_bist_static_data.h
+ create mode 100644 include/k3_bist.h
+
+-- 
+2.34.1
+
