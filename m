@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F315C83F1B
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 07:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B09CC83F27
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 07:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C11D8313F;
-	Wed, 16 Jul 2025 09:05:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BC8D68317B;
+	Wed, 16 Jul 2025 09:19:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mAo1/MJ8";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZjeqR8pK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FF698317B; Wed, 16 Jul 2025 09:05:01 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F81805D7
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 09:04:58 +0200 (CEST)
+ id B27AA8315B; Wed, 16 Jul 2025 08:14:44 +0200 (CEST)
+Received: from mail-oo1-xc41.google.com (mail-oo1-xc41.google.com
+ [IPv6:2607:f8b0:4864:20::c41])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 79A998313B
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 08:14:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56G74SxA2792189;
- Wed, 16 Jul 2025 02:04:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1752649468;
- bh=XMdzHboCikLHZ5WJorjylcDMG0erGKeOR47+4kH7Gj8=;
- h=From:To:CC:Subject:Date;
- b=mAo1/MJ8q06PUufTHmoMy48IYn9zst2YOhF89sbfqTEGTcKWSeGm/03MTaLa16XW0
- bt1ncwx5enS3tYTd2OsK6IqM7hgQCaVMbPzUOClUaJS+3QLaYLKpWh35JhBHOJVNRI
- V+R2omQugej1CYsxndQX0X5gACqmZWGTO350SbrI=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56G74SOH3356819
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 16 Jul 2025 02:04:28 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 16
- Jul 2025 02:04:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 16 Jul 2025 02:04:27 -0500
-Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
- [172.24.227.142])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56G74NMP3910756;
- Wed, 16 Jul 2025 02:04:24 -0500
-From: Prasanth Babu Mantena <p-mantena@ti.com>
-To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <michal.simek@amd.com>
-CC: <u-boot@lists.denx.de>, <venkatesh.abbarapu@amd.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
-Subject: [PATCH] Revert "spi: cadence_qspi: Fix odd byte write issue in STIG
- mode"
-Date: Wed, 16 Jul 2025 12:34:07 +0530
-Message-ID: <20250716070407.2082524-1-p-mantena@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ion.galaxy2812@gmail.com
+Received: by mail-oo1-xc41.google.com with SMTP id
+ 006d021491bc7-615a4b50215so41533eaf.1
+ for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 23:14:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752646481; x=1753251281; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=QP/mpQDqJSV0/QO7wO7I+ynvQ0p+EqybGtealVLUq88=;
+ b=ZjeqR8pKPC9gyQvJ/7pnbrJUmDcd1hedNXTFlsVZePaMWqHbaM5WDfl6V7A9llDDGc
+ X3AKS1Y2h4HIE4ZdY4rSANp//2S9pNG8L65lrx7EtpieWV/WmswMD0niAO1MqQ7nyrmj
+ 12RxEXuQ4V167JZbNDajzUc7B0mMBbpj6G6Jafe8AQGTih9UdkNg1nGkbfpAQT14Lswv
+ 2cHTuNbXvgIm7Popgg4Qabj3xs3aQeeGblsf+eGtopmAL74mVVO86A64WUzCukTfYxtk
+ hVLJRDoyF46fkN1VHLR75X+DdfUQFPALPQ8Y9fhK5pgoG+GmeUBd5YQxFAb9wF+fCxxM
+ ypnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752646481; x=1753251281;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QP/mpQDqJSV0/QO7wO7I+ynvQ0p+EqybGtealVLUq88=;
+ b=M7X6c3YEskyG3PWuSefuFOrAtVdHPUExxRn3k2L95Sk1zfhfTu7FXkE6g5Z7UXDfXR
+ /xn0AmhRxDvzBux/Dzuq2HKakSpcY57O9y9fH157RTcFiOLltwSb+8dpzJUE/BEZ6Dih
+ CC8kyJDnFApPgqHq1VK/BkDV9UCOGK+Kev0Czzeotu2S3ZXMy3fkCjMnpmDQZtfl4tOy
+ 2vl41mrr8YgCcm3Cd8wuAPDS0U6jMIVWaWlyd72EHa9s+82A77FGR52UN5mH53s12Yux
+ O+jfULKL1HfMKPiJURE2dJWvA+zWhAsAw+PrWtZlM/oOzmxge7duNbA3wkS4bZ9vI57+
+ zfNQ==
+X-Gm-Message-State: AOJu0YwfGxohzzX9FS/+rsJYme3RLk18hy7sW0nmfqvAIJrIvbnXpRg9
+ YDTc2yWDmIAqaFAvlSvg2OQpCypILeTvr9P4UTZATfDYmJl3yq0VSlcJPCzlkltqOC1k+58vjZE
+ S8NKQjshuqtx7aB5K6ApWmnt0a0ipMH9uVr0b4ItPXIKejvRsj4bmsg==
+X-Gm-Gg: ASbGncs8zB25ZG+7aypeAa8IqOlBAo9bb2mPiZ973gjTCH4zlaab96H2JbChtfg0CKV
+ qVQqxoTyjBN6f/k1djIMUVwrodh8EwxpDY2SKJD6KVScVXO1iAuo3mUTS5psgKTQ1Z+4aCMwnGn
+ SxmYa4eh33y7Wm0U7aT0IDuwp8nCt3Qj6vBDR+aiQEO8+96DpQVSlRxjaa65KjVUQzOaw0hes9G
+ b9dc2A=
+X-Google-Smtp-Source: AGHT+IF7uSmlC3fQXL40MX9QDlFTCKALcATpM5vN/NZByx1Rr5o2NUURtHY/FoX6j2rcYThUXQjIVB2yPiSxpItIGXc=
+X-Received: by 2002:a05:6820:4b0a:b0:615:a6d2:348a with SMTP id
+ 006d021491bc7-615a6d236famr125399eaf.6.1752646480703; Tue, 15 Jul 2025
+ 23:14:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: =?UTF-8?B?0JjQvtC9INCY0L7QvdC+0LI=?= <ion.galaxy2812@gmail.com>
+Date: Wed, 16 Jul 2025 09:14:29 +0300
+X-Gm-Features: Ac12FXwvPl2-0aEkxm928osI3sy0cQWJDzIA0f9a3KVLkUZVInPIXfQcPHzgA5w
+Message-ID: <CAPvr=H_N0L_VWT5Z7Ch2DBZK3aUGk+fTfrixMATkwKOaLtcPsg@mail.gmail.com>
+Subject: Problems with building SPL in buildroot 2015.01
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Wed, 16 Jul 2025 09:18:59 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,31 +89,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The buffer that is being used to write into the flash needs
-to be handled properly with padding of 0xFF. The place that
-this is done can be at a more generic place like spi-nor core.
+I need your help or advice on how to assemble the SPL(MLO) for my b2232
+board from St. When building without SPL, uboot.bin is being assembled, and
+I can run it via JTAG like this, but I'm trying to run the system via
+Micro-SD, and I can't. after reading the documentation for uboot, linux
+came to the conclusion that SPL was needed, enabled it in the config, and
+then problems appeared:
 
-This reverts commit cd9123507003e07b13e61d72e14e493bb338e827.
+   1.
 
-Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
----
- drivers/spi/cadence_qspi_apb.c | 3 ---
- 1 file changed, 3 deletions(-)
+   scripts/Makefile.spl:114: *** could not find linker script.
+=D0=9E=D1=81=D1=82=D0=B0=D0=BD=D0=BE=D0=B2. make: *** [Makefile:1216: spl/u=
+-boot-spl] error 2
 
-diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
-index 6f89d3add5d..4696c09f754 100644
---- a/drivers/spi/cadence_qspi_apb.c
-+++ b/drivers/spi/cadence_qspi_apb.c
-@@ -558,9 +558,6 @@ int cadence_qspi_apb_command_write(struct cadence_spi_priv *priv,
- 	void *reg_base = priv->regbase;
- 	u8 opcode;
- 
--	if (priv->dtr)
--		txlen += txlen & 1;
--
- 	if (priv->dtr)
- 		opcode = op->cmd.opcode >> 8;
- 	else
--- 
-2.34.1
+   I will be able to solve it by explicitly specifying arch=3Darm, since it
+   was empty
+   2.
 
+   LD     spl/arch/arm/cpu//built-in.o
+   uboots/uboot-2015.01/toolchain/bin/arm-starkl-linux-gnueabihf-ld.bfd:
+cannot find arch/arm/cpu/start.o
+   make[1]: *** [scripts/Makefile.spl:211: spl/u-boot-spl] error 1
+   make: *** [Makefile:1216: spl/u-boot-spl] error 2
+
+   The next error, which is not entirely clear to me, is that it cannot
+   find the file and creates the file in the wrong directory.
+
+When assembling another to another SPL board, everything is assembled
+normally and without errors.
