@@ -4,70 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D908BC83F22
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 19:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A56E8C83F22
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 22:15:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1521B83253;
-	Wed, 16 Jul 2025 21:34:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C7DB883276;
+	Thu, 17 Jul 2025 00:15:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bKxBS/1l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RGinYpcO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4985183253; Wed, 16 Jul 2025 21:34:42 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32EFF83242
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 21:34:38 +0200 (CEST)
+ id CB35E830CA; Thu, 17 Jul 2025 00:15:12 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BD19C830CA
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 00:15:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56GJYYXe2568514;
- Wed, 16 Jul 2025 14:34:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1752694474;
- bh=T8Zd739Q7KbpOYNes4ofUBalOukw4u+0ljRnxF6oxfc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=bKxBS/1lIpquv/f6Yq5evA3zTVIhBe07MvYVrg/LeDyQVJULFtmNpKJLZbsslx8Mt
- 4jvH/zMjhnFa897QmqT3aaGZ63E59qaHPz8mrY5i0uRePd2Bdvv6sdpo45R5KTX5wp
- 0FFwqZz2wqAyiuu+SY4bmyJJXzEZGAyl/i9/81+k=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56GJYYPw1111942
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 16 Jul 2025 14:34:34 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 16
- Jul 2025 14:34:33 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 16 Jul 2025 14:34:33 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56GJYX25967727;
- Wed, 16 Jul 2025 14:34:33 -0500
-Date: Wed, 16 Jul 2025 14:34:33 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Gokul Praveen <g-praveen@ti.com>
-CC: <trini@konsulko.com>, <rayagonda.kokatanur@broadcom.com>,
- <casey.connolly@linaro.org>, <sjg@chromium.org>, <m-chawdhry@ti.com>,
- <u-boot@lists.denx.de>, <j-keerthy@ti.com>
-Subject: Re: [PATCH v2] configs: KASLR OPTEE RNG support for K3 devices
-Message-ID: <20250716193433.7hrlyvfg64kyangq@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20250710095922.144361-1-g-praveen@ti.com>
- <20250710141718.fx7cqeh2f2eibwkm@bryanbrattlof.com>
- <51e00bdb-374a-4e35-a230-58427aeaead7@ti.com>
- <20250711121741.jyo6gonfhoswbxvb@bryanbrattlof.com>
- <8b8a0e73-39e5-436e-8458-9bc511daa880@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-72c27166ab3so269051a34.1
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 15:15:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1752704109; x=1753308909; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1EIQYPji1I4n+wM28b38gdBRqjUKXOAjiZ36AfOLWAs=;
+ b=RGinYpcOgXcseL9CJ2B66nRUPKzE48o/HFoEKmVkD7UOmnl2/q+UatK3o9FynkxOYa
+ mknNkCfpkbPkcbZ1twfmpY0NFic/BlcAnbnFs0s3qyqPY77CY0BwSkLWH6pDyq8TPAUe
+ SVYmVgKmhXv82am4MaE6GUI13DR11Z8am68+U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752704109; x=1753308909;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1EIQYPji1I4n+wM28b38gdBRqjUKXOAjiZ36AfOLWAs=;
+ b=KdMx5oO77Xhd/j38Z0BIas2yNyqFyw+JKp/0B7M19mb7AV9QnaJArh24HvKaaIkrb1
+ CH8S7cipTN4BReVA/2KkjeyWnk7QLny4s/XkecK1NMUYcVUDJnuVXXGOXBJgWWc5hCjk
+ nveFUaGltyRDQBI9M13ZyNuAmBy63Y4GFwU/II4PnIramPEuu6ngi87NUANICgQND5LN
+ W59GlEtwKD5lDnKs/GfouJu0dWofHBbCMP1S6iKa+cBRVwUMvwbohcy2M3+aDskoOQHq
+ Og7geB6eWP2fagr6QgMTxSyzOHaxJojXSVcVijhcshCE0+KYGJ1aWGE4cbXv+7C7Q8pJ
+ SC3g==
+X-Gm-Message-State: AOJu0YyOnRTUpI4UZ+N4fZuwTfBDryi+UdEUPk7Os7o2o/iAwTiwcEkG
+ xRR50AcikK2Xj2OaXuGpHZUTJB82WfHps2k5llTu7aYWNznafamDdJtXzn5dD9atPN8=
+X-Gm-Gg: ASbGnctLDpJKJWNye2H1m158dtx2URbCEqQRd+vMpp1MrDw7V6IUKebsHO7O2YDf50D
+ yYcgJxHvaDF7+qIehkcBs8Zo+ZAoaH/fyni1LIdjHftErAnTdrnodGEfSbJMYaCtdbZWt9VkBmE
+ O1RYPZZmPh7saFdCH4jv9LqMRgX/s2J5zTLYnrZow4AAfErITJ5uVwp913aX//6LpnH5KxwEfPw
+ hEXL+A2qSZoZJleJttFxVsbtmKDYSn/qSTlLwSeDvj3PGzjgSBv+stFykRdPpIkSprz8x83Ki0b
+ fP21V57vOvJW06Ncx0SlzFCGy+S0cv52S22ZvflO/iDQdVIa3fZA1j91BgA2GyxHn+NcwFG9BPG
+ 1H0VmVRXEB5rAPtUWfLfZ0d2zNjfuEIQM2GSAnf70qJDD2h07v1lV4A+rWM9yj5ZE5A==
+X-Google-Smtp-Source: AGHT+IHRDxO/fk/znBgGno8vDc1kzBWsGyneHfDDWKBToydYsGH25YJ7SBbkqZUVsyPmmm2Zi6twvw==
+X-Received: by 2002:a05:6870:3048:b0:2c2:5f8c:4630 with SMTP id
+ 586e51a60fabf-2ffb1ea478fmr3201805fac.0.1752704109389; 
+ Wed, 16 Jul 2025 15:15:09 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2ff116d3541sm3949246fac.35.2025.07.16.15.15.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Jul 2025 15:15:08 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
+Cc: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250709110751.663614-1-ravi@prevas.dk>
+References: <20250709110751.663614-1-ravi@prevas.dk>
+Subject: Re: [PATCH] arm: dts: am335x-evm: remove duplicate chosen node
+Message-Id: <175270410851.2648161.15830953112108701219.b4-ty@konsulko.com>
+Date: Wed, 16 Jul 2025 16:15:08 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <8b8a0e73-39e5-436e-8458-9bc511daa880@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,67 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On July 16, 2025 thus sayeth Gokul Praveen:
-> Hi Bryan,
+On Wed, 09 Jul 2025 13:07:51 +0200, Rasmus Villemoes wrote:
+
+> The stdout-path property is already set to this value in the other
+> chosen node ~15 lines above.
 > 
-> On 11/07/25 17:47, Bryan Brattlof wrote:
-> > On July 11, 2025 thus sayeth Gokul Praveen:
-> > > Hi Bryan,
-> > > 
-> > > On 10/07/25 19:47, Bryan Brattlof wrote:
-> > > > On July 10, 2025 thus sayeth Gokul:
-> > > > > From: Gokul Praveen <g-praveen@ti.com>
-> > > > > 
-> > > > > KASLR, or Kernel Address Space Layout Randomization, is a security
-> > > > > feature in the Linux kernel that randomizes the memory location
-> > > > > where the kernel is loaded during boot.
-> > > > > 
-> > > > > OP-TEE RNG is a Random Number Generator (RNG) component within the
-> > > > > Open Portable Trusted Execution Environment (OP-TEE) which provides
-> > > > > a random number to U-BOOT and U-BOOT provides this random number
-> > > > > as seed value to the LINUX kernel for KASLR.
-> > > > > 
-> > > > > Add KASLR OPTEE RNG support across K3 devices by enabling the required
-> > > > > configs.
-> > > > > 
-> > > > > Signed-off-by: Gokul Praveen <g-praveen@ti.com>
-> > > > > ---
-> > > > > v2<==> v1
-> > > > > ===========
-> > > > > * Added 'if' condition for configs to avoid enabling this feature
-> > > > >     in R5.
-> > > > 
-> > > > Works for me.
-> > > > 
-> > > > Reviewed-by: Bryan Brattlof <bb@ti.com>
-> > > > 
-> > > > > 
-> > > > > Boot logs Link :
-> > > > > 
-> > > > > https://gist.github.com/GokulPraveen2001/44aa8c0962438c12ffc55e6ed67742e5
-> > > > 
-> > > > Just curious are you enabling the kaslrseed command for this build? It
-> > > > looks like you're using TI's evil vendor scripts but I assumed the
-> > > > kaslrseed command was disabled.
-> > > 
-> > > Can you elaborate more on this,Bryan?
-> > > 
-> > > Actually, we are not using the kaslrseed device tree property. Is that what
-> > > you meant,Bryan?
-> > 
-> > Everything in this boot log is tagged as dirty. So I'm just trying to
-> > ensure I've got everything setup correctly.
-> > 
-> > I was curious what you are doing to generate the line:
-> > 
-> >     KASLR SEED OPTEE SET SUCCESSFULLY
-> > 
-> > before we jump to the kernel.
-> 
-> I have also updated the boot logs in the gist link provided to the one
-> without debug prints and without the dirty tag as well, Bryan.
 > 
 
-Thanks Gokul. That lines up exactly to how it looks on my end as well
+Applied to u-boot/master, thanks!
 
-~Bryan
+[1/1] arm: dts: am335x-evm: remove duplicate chosen node
+      commit: 343a30aba38f753161b8c5007898211cc9d43b2a
+-- 
+Tom
+
+
