@@ -4,82 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDCDCC83F1B
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 08:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E864C83F27
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 08:40:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E52D830C8;
-	Wed, 16 Jul 2025 10:24:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EBB58318E;
+	Wed, 16 Jul 2025 10:40:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="mURkUHAd";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1872831A4; Wed, 16 Jul 2025 09:48:09 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 89859831A1; Wed, 16 Jul 2025 10:40:41 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A92858313B
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 09:48:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2879C8313B
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 10:40:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-55a2604ebc1so96800e87.0
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 00:48:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1752652087; x=1753256887;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OgP9N6nFey4czJCVtruzsNQ4Geh3LgXegpHKfWe3LTw=;
- b=mURkUHAd4zzoVuvYL9eBBPXooQruYrAvRZC6iUvh4ZIqQwk2LO3XBykBTFVSapPAwe
- NYs9GU0NBLe+TMcQ7TyuebyNqLy1tWcneoFMCrr8hVqLunexoQqklSpeeSjzKZflSovO
- vWfkqxEtjTE6v3jHISyKMbOlXlWJJld4kXUqZoq6VTxHhupcc8GqeI9zWWYx1cTHHFXn
- DOjwGHh0bveVKGhJqachIHG1ZWLgf6gWegCMwRzkJEDuSt34H1qd57wHQ/G5ahsEx+u+
- LlEm9bSp6FIx2oLJT8qkeqbLdhIPbGIgkUR+Q/qec/Ju5efi0LrtWXf/NtmuXhpLITDC
- sYXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752652087; x=1753256887;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OgP9N6nFey4czJCVtruzsNQ4Geh3LgXegpHKfWe3LTw=;
- b=oVTzq86awWnqQiUybzpJOAi+EUbpTGsa9Upp7tMUV58/WuqxjdEEGZ3k1jnsvyY9z5
- v33wcJlIenfkpM/oJYP3PcuGCRN0KLV3GXzfqTUrtDCC04cCtv5U7Ioaka93PM2oPnPu
- FOW1NLF95ldb75Wcxtzes9+P8SmSNSrW4wUBu6OSnX/PoMIb5eWmpFdQuZIW5hMNHQZW
- uG8cPZMiTRCruIJSVFNC3F3j7BEQ3OQRYJpKoLOKP6e1XGi9PzaQGIIFMP67jMeoS9yS
- hKtVmeGfRw9jfI/c6WjGagAX7UCooWHizxX6+ug/oKqStvkqnrm2jKwRk5lJkz08Eepw
- GQ2w==
-X-Gm-Message-State: AOJu0YyjRsay4yRYEdp9Ce+ySUN5eFZknCvsDnSZW1Op3O3bH51zrR0l
- vTdXwKtotn98XBDE3PmvaIqvIgbxPiCvy6o3fpos5zMDMna2cwiS6kj48ar7N/vCRoh5ykyod2g
- RBmZ0r1jeJH2lPvFP2Bx3N2/7CJ64SqZxeS1QyeFs7A==
-X-Gm-Gg: ASbGncv9ybz8M9maUEeNdXK04sgLwB5Gi+qvCS5FymTSRRG4DUYzfEPfAXrThlYt1yx
- mpazl3nM/XGY15PVpkEU1vkqmhe8Xr/tisuS1dT9cOh+sOqaAh3QK/lcwuMwAcbGOUGURls+l7v
- g1gobMUSl8XnDPuLAqJ3nwdLroHDJcx5MrO4z5VYjQlVcEOTYEXmRZ5DANPttgt8nCJxJbFHjk3
- p2RDl0=
-X-Google-Smtp-Source: AGHT+IE85oLIhmP4T+K4GWAa6UlRBpP0fXVBHvvxOmX1GAtN66MvreGZGBYVnLINPQOXxPiDoJ/45UUbg9lQn9EaVsY=
-X-Received: by 2002:a05:6512:3d0d:b0:553:276d:1084 with SMTP id
- 2adb3069b0e04-55a23f7feaamr571593e87.28.1752652086611; Wed, 16 Jul 2025
- 00:48:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 56G8eFGr071835
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Wed, 16 Jul 2025 16:40:15 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 16 Jul
+ 2025 16:40:15 +0800
+Date: Wed, 16 Jul 2025 16:40:11 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Conor Dooley <conor@kernel.org>
+CC: <u-boot@lists.denx.de>, Conor Dooley <conor.dooley@microchip.com>, Cyril
+ Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1] configs: microchip_mpfs_icicle: disable DEBUG_UART
+Message-ID: <aHdla5DDUGqF7wdR@swlinux02>
+References: <20250707125140.935234-1-conor@kernel.org>
 MIME-Version: 1.0
-References: <20250701-nor-v1-1-ca3435d582d2@hifiphile.com>
-In-Reply-To: <20250701-nor-v1-1-ca3435d582d2@hifiphile.com>
-From: Zixun LI <admin@hifiphile.com>
-Date: Wed, 16 Jul 2025 09:47:56 +0200
-X-Gm-Features: Ac12FXyRK2KWih0NOWHPXSqITj_7e0eiZWeoVmn4mKKx_Enx45mhFXKVxOw85Ss
-Message-ID: <CA+GyqeZ+vj0cQMT51=OTTPaya26p-fiwNJLzJqUC7Q1O3NmP1Q@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for AT25SF321B and
- AT25SF641B
-To: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, 
- Tudor Ambarus <tudor.ambarus@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 16 Jul 2025 10:24:06 +0200
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250707125140.935234-1-conor@kernel.org>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 56G8eFGr071835
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,43 +67,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello, any update on this ?
+On Mon, Jul 07, 2025 at 01:51:39PM +0100, Conor Dooley wrote:
+> From: Conor Dooley <conor.dooley@microchip.com>
+> 
+> By default DEBUG_UART uses the SBI DBCN extension on S-Mode RISC-V
+> platforms, but the Icicle Kit's firmware doesn't support it. Since
+> DEBUG_UART is getting turned on automagically and this is somewhat
+> misleading, disable it in the Icicle kit's defconfig.
+> 
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> ---
+> CC: Conor Dooley <conor.dooley@microchip.com>
+> CC: Cyril Jean <cyril.jean@microchip.com>
+> CC: Tom Rini <trini@konsulko.com>
+> CC: Leo Yu-Chi Liang <ycliang@andestech.com>
+> CC: u-boot@lists.denx.de
+> ---
+>  configs/microchip_mpfs_icicle_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
-Zixun
-
-On Tue, Jul 1, 2025 at 5:16=E2=80=AFPM Zixun LI <admin@hifiphile.com> wrote=
-:
->
-> These flash chips are similar to AT25DF321A with Quad I/O capacity.
->
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
-> ---
-> Tested on SAM9X60 custom board.
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index e7e97780d7cdd27104fd7db900b3a779d2188922..18bc6f2f06e9a02594da6ad18=
-80489e78458a60f 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -76,6 +76,8 @@ const struct flash_info spi_nor_ids[] =3D {
->         { INFO("at45db641d",    0x1f2800, 0, 64 * 1024, 128, SECT_4K) },
->         { INFO("at25sl321",     0x1f4216, 0, 64 * 1024,  64, SECT_4K) },
->         { INFO("at26df081a",    0x1f4501, 0, 64 * 1024,  16, SECT_4K) },
-> +       { INFO("at25sf321b",    0x1f8701, 0, 64 * 1024,  64, SECT_4K) },
-> +       { INFO("at25sf641b",    0x1f8801, 0, 64 * 1024, 128, SECT_4K) },
->  #endif
->  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
->         /* EON -- en25xxx */
->
-> ---
-> base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
-> change-id: 20250701-nor-0ee20c630bc4
->
-> Best regards,
-> --
-> Zixun LI <admin@hifiphile.com>
->
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
