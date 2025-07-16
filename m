@@ -4,80 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20128C83F27
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 00:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C94B8C83F27
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 04:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D15183152;
-	Wed, 16 Jul 2025 02:15:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6384983106;
+	Wed, 16 Jul 2025 06:35:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mmy5LYGo";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C58B583106; Wed, 16 Jul 2025 02:15:49 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9EE3C83123; Wed, 16 Jul 2025 03:35:30 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15A7D83111
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 02:15:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57E16830C8
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 03:35:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-73e62c8f39eso184692a34.3
- for <u-boot@lists.denx.de>; Tue, 15 Jul 2025 17:15:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752624944; x=1753229744; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NbWXnZ+NccTvbmqsdFqj0JguES8nclLn4QXRxYbhDB4=;
- b=mmy5LYGoFJK0j5CDDmqz56bMHarJNVr61svk6hon/jfA1NEEviuOMPxRasZ78OSz8H
- yfea1R91Ge2h1xBpFSz/sHr+g92HvWe54/d9OHKuDbLc4f6oT1lQO6l0hqt+UbPg8o1F
- rRy3C/bzRUl3H4HcL4ntdR5sDEWj9WBz24qfY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752624944; x=1753229744;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NbWXnZ+NccTvbmqsdFqj0JguES8nclLn4QXRxYbhDB4=;
- b=Nry6Z4oUYu6UJIdKR9rgjhtI6MN6ecT8krp1c907K0EAdHuCsMHeOJBfjhGG8cgbuE
- TuOzKipJUxDoVpa7hEX2mJxMNGGcrt55lPhebuU/+AOjfJw4bx3f5QcoC3ILSjrXs3c1
- QIj35LB1nPBU1VfFzfBk6Bb4oj12iM3Z7NrM6jX/qXFzMCjNg97itg26x5DjP66likNk
- unzoZKHAgxI/FzOVf0PsmYeX8YkyHEMWvvwAojpFYVYiDVZCfqCLbSnJ9DGT0o0soXmz
- oXoOPn3xNPaO5qINvMgeayOYNalqG3kPmxfRT0J6hDXG1Tdsw02qO4o4lFTQzWZEpPE5
- H1BA==
-X-Gm-Message-State: AOJu0YxF/47oCvoTXnSYd3AtFyPklLKASRD4N4TFmqMk1Z9Kyk5a32WO
- tDRfbmwIz5x5XjOg6Hr3fD3pzdzfMwRjp0mvdieH/sUueCkRoNZpeTUjzosOxI3hu9tdRKPVdJk
- gU9Sbye0=
-X-Gm-Gg: ASbGncu8NISubNCxfFMivimIEF8po4I20fHebALlu59KRirMStysDZ4ZkaYU3ZY0hTE
- izc42012CpxtrLVYTptrB2vu3A+d/0kJlnn/u0qtm0XBRrCije7QHW4hZt0wSEsZSJteeRDNNjF
- z7K1Cs+iV/4dCNYymSypI4V7aiwCS2Pi7gXj0cW2WbYlcASXcmrxQoTPRwjSrWkwCS46J/JCKuw
- 2v4SCHksHr/bJ1+BZ2gG0grQs+gp2J1y330XAAHGJygS0BthkjVpOcu1AmHgbiGt3BKtKfUVVpZ
- VTRCu38QMKa4Sxb0a3daEMzdv0QD7WbbkfnF9LcMertKdwBgx7e2q7XukcCNzlgXkDMQFKm5/mm
- zhV7rYe7f8QYXFtirAMHE/fiMn4rQU1U7LtRXiBHjt8J/9h/weacoQP1by1g=
-X-Google-Smtp-Source: AGHT+IHWi+D+YuVGkvH3B9pnfIfUfzIfuhTGAjfPMl5B7OIWkLNH+uCb9F4IKvg3S2tZBO1+9zCzuQ==
-X-Received: by 2002:a05:6830:2d87:b0:73d:baa3:830b with SMTP id
- 46e09a7af769-73e6613273amr370012a34.7.1752624943729; 
- Tue, 15 Jul 2025 17:15:43 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73cf10adfa9sm2543607a34.30.2025.07.15.17.15.42
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 17:15:43 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH 3/3] CI: Update to coreboot 25.03
-Date: Tue, 15 Jul 2025 18:15:39 -0600
-Message-ID: <20250716001539.2483390-3-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250716001539.2483390-1-trini@konsulko.com>
-References: <20250716001539.2483390-1-trini@konsulko.com>
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.26.71]) (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id BD418B4D172C;
+ Wed, 16 Jul 2025 03:35:18 +0200 (CEST)
+Message-ID: <b3f95ac9-a847-450b-9d5a-64af5e84a47e@freeshell.de>
+Date: Tue, 15 Jul 2025 18:35:17 -0700
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly
+ used value.
+To: Michal Simek <michal.simek@amd.com>, Martin Herren
+ <sputnik@on-the-web.ch>, u-boot@lists.denx.de
+Cc: Andreas Schwab <schwab@suse.de>, Anup Patel <anup@brainfault.org>,
+ Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>, Green Wan <green.wan@sifive.com>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Rick Chen <rick@andestech.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
+ Yao Zi <ziyao@disroot.org>, Yixun Lan <dlan@gentoo.org>,
+ Yuri Zaporozhets <yuriz@vodafonemail.de>
+References: <20250714133345.128853-1-sputnik@on-the-web.ch>
+ <9529db2f-ff07-448e-99b4-65dde605b0ec@amd.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <9529db2f-ff07-448e-99b4-65dde605b0ec@amd.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 16 Jul 2025 06:35:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,38 +82,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At this point there's problems rebuilding coreboot-24.08 without manual
-intervention. Let us upgrade to a newer version.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- tools/docker/Dockerfile | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 02821417ca0c..a83c80db496c 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -292,8 +292,8 @@ RUN mkdir /tmp/trace && \
-     rm -rf /tmp/trace
- 
- # Build coreboot
--RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
--    cd /tmp/coreboot-24.08 && \
-+RUN wget -O - https://coreboot.org/releases/coreboot-25.03.tar.xz | tar -C /tmp -xJ && \
-+    cd /tmp/coreboot-25.03 && \
-     make crossgcc-i386 CPUS=$(nproc) && \
-     make -C payloads/coreinfo olddefconfig && \
-     make -C payloads/coreinfo && \
-@@ -304,7 +304,7 @@ RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp
-     make -j $(nproc) && \
-     sudo mkdir /opt/coreboot && \
-     sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/ && \
--    rm -rf /tmp/coreboot-24.08
-+    rm -rf /tmp/coreboot-25.03
- 
- # Create our user/group
- RUN echo uboot ALL=NOPASSWD: ALL > /etc/sudoers.d/uboot
--- 
-2.43.0
+On 7/15/25 04:27, Michal Simek wrote:
+> 
+> 
+> On 7/14/25 15:33, Martin Herren wrote:
+>>
+>> The most commonly used SYS_BOOTM_LEN for riscv is 0x4000000 which is
+>> used in 25 of the current defconfigs.
+>>
+>> The previous default config value of 0x800000 was only used in 8
+>> defconfigs.
+>>
+>> This patch sets the default to this value.
+>>
+>> Command used to get the stats of the used values on RISCV defconfigs:
+>>
+>> ```
+>> grep -l "CONFIG_RISCV=y" configs/* | \
+>>   xargs -I {} sh -c "grep -H CONFIG_SYS_BOOTM_LEN {} || echo
+>> {}:DEFAULT" | \
+>>   cut -d ':' -f 2 | sort | uniq -c
+>> ```
+>>
+>> Changes in v2:
+>> - Resubmit using another mail provider to prevent mangling and signature
+>>    attachement.
+>>
+>> Martin Herren (3):
+>>    riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
+>>    riscv: Set SYS_BOOTM_LEN default to 0x4000000
+>>    riscv: Remove default SYS_BOOTM_LEN from defconfig
+>>
+>>   boot/Kconfig                            | 2 +-
+>>   configs/ae350_rv32_defconfig            | 1 -
+>>   configs/ae350_rv32_falcon_defconfig     | 1 -
+>>   configs/ae350_rv32_falcon_xip_defconfig | 1 -
+>>   configs/ae350_rv32_spl_defconfig        | 1 -
+>>   configs/ae350_rv32_spl_xip_defconfig    | 1 -
+>>   configs/ae350_rv32_xip_defconfig        | 1 -
+>>   configs/ae350_rv64_defconfig            | 1 -
+>>   configs/ae350_rv64_falcon_defconfig     | 1 -
+>>   configs/ae350_rv64_falcon_xip_defconfig | 1 -
+>>   configs/ae350_rv64_spl_defconfig        | 1 -
+>>   configs/ae350_rv64_spl_xip_defconfig    | 1 -
+>>   configs/ae350_rv64_xip_defconfig        | 1 -
+>>   configs/ibex-ast2700_defconfig          | 1 -
+>>   configs/k230_canmv_defconfig            | 1 +
+>>   configs/microchip_mpfs_icicle_defconfig | 1 +
+>>   configs/milkv_duo_defconfig             | 1 -
+>>   configs/qemu-riscv32_defconfig          | 1 -
+>>   configs/qemu-riscv32_smode_defconfig    | 1 -
+>>   configs/qemu-riscv32_spl_defconfig      | 1 -
+>>   configs/qemu-riscv64_defconfig          | 1 -
+>>   configs/qemu-riscv64_smode_defconfig    | 1 -
+>>   configs/qemu-riscv64_spl_defconfig      | 1 -
+>>   configs/sifive_unleashed_defconfig      | 1 -
+>>   configs/sifive_unmatched_defconfig      | 1 -
+>>   configs/sipeed_licheerv_nano_defconfig  | 1 -
+>>   configs/sipeed_maix_bitm_defconfig      | 1 +
+>>   configs/sipeed_maix_smode_defconfig     | 1 +
+>>   configs/starfive_visionfive2_defconfig  | 1 -
+>>   configs/th1520_lpi4a_defconfig          | 1 -
+>>   configs/xilinx_mbv32_defconfig          | 1 +
+>>   configs/xilinx_mbv32_smode_defconfig    | 1 +
+>>   configs/xilinx_mbv64_defconfig          | 1 +
+>>   configs/xilinx_mbv64_smode_defconfig    | 1 +
+>>   34 files changed, 9 insertions(+), 26 deletions(-)
+>>
+> 
+> I don't mind with these changes. It is just value which can be changed.
+> 
+> Acked-by; Michal Simek <michal.simek@amd.com> # xilinx_mbv
+> 
+> Thanks
+> Michal
+> 
+> 
 
+Is there some reason for the value from documentation about the
+architecture? Or is it arbitrary?
+
+I don't really see the sense in a default value which is simply popular
+but not founded in an architectural reasoning.
+
+The values do not change often (ever?) so I miss why there is any
+default at all.
+
+-E
