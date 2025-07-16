@@ -4,85 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E880EC7EE30
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 13:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B47C83F1B
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 17:00:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7534582FD4;
-	Tue,  1 Jul 2025 15:45:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 792D783249;
+	Wed, 16 Jul 2025 19:00:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nDUMas3f";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C1CC82F83; Tue,  1 Jul 2025 15:45:38 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A7DB983242; Wed, 16 Jul 2025 18:23:26 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2053082B18
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 15:45:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E14B830B5
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 18:23:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ae0c571f137so1098068566b.0
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 06:45:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751377532; x=1751982332; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=l3HkYuo0A0f3jmI3Xqkqb7cupbSLIHKiQ5F0CYGbKBE=;
- b=nDUMas3fxpWVnPHDCDn8GTmVzZo+PnNUW0yKExeDFMm1306v4/fsLWsNvkW6ScuLvV
- Wmlom2XF9F32xqk03QauHsNVukl6glJcGWEco1eSG7E9Z+OAUnwUhMRQWzUE5e2jfYvB
- KKXTs40LBfbptSDA/QOeIjuS63Qg+D6qf/G/+Ab7xFXnio0bOD7mM/wVxeRobXnr7NeL
- 3jMYtcFXRH+egLH5O8UKWeGi4WLmu48gtNmlow1rnYAfrBUUtd17eed+B1vVT7JYXDmb
- xXJYhmnFzQ1zT8hkMiwKTId/kv72Zsd5Ef8sUITpTkdTIW3sOBb+NVZSVcGEm0uLKgw6
- zyMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751377532; x=1751982332;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=l3HkYuo0A0f3jmI3Xqkqb7cupbSLIHKiQ5F0CYGbKBE=;
- b=RPEHhyW225cuGT/lmjseTCcb6yhv7EC9W3tOmhtK6+x2VaMZHjV83AKgpsMunLB/d0
- 1nUBPg18sG1IO5GOkWYgZYJPLmoErYA6qLhVQ8186xAhg3Kmuw8RgPryIz+9mY1ru+ED
- Ki0UwqkErtenlbkGc9onQUXY8HuxUIryyYHh6EkOQL1BweDCHOsfLMG/vbgx8M8s2b8N
- F49Mfl+JBZUXyBQBEnYSL4f6l+zWAS6H2+oyNuWKmfUN7OpjkM/M26dGcK1GZr0II7io
- M6yLAK5zZ8Ou6QYEtsStM4B8API8koDCT16hlNY0MwMfK7evUIGpxwE7mBpgA7an0ff6
- wFTQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwEKhG77zbprcTTmkH6vLJBlsn2rGLVcM8hK+aBUYqKeiyl2WoA//9aVN5UM0eriw4kkznJmY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwwrU0Ra0QxK4YzWr+qe32hwNo/aLiMCBeh2XSr866ggGbVmrkM
- aRBTKptk9FMHjTmXM5oQina8bfCPYhVBkPhXTwjTHXWSCca3u8mNpVYAdSI4qw==
-X-Gm-Gg: ASbGncsbbGAzSHJp9rJ4rSmraCTiTUK0kb58Jqw7XMemxndUiSmGLUs8+nmyLrOBmh0
- 10GGLplUmk83ZpdTcie+lxMSzso8UIOH8t965gpTosyG4Y+JD0heaxIC5O3M+bbADXKEnYZlAdw
- VWOVCXZKRcNAEXBORKqyK8tAjyv0sOZHldcAyI5ayiW4BaUNahQHwGdGw991GG5nkS5DpN5pfLy
- AuBlYQUQerXPsXv+lkFP2OF0zsNr4X2/O66H/nSqCYwesrSBS0ELqk+RywZoeHPjs+NlzxSdgPI
- qHosbFZkVeryvuMsh+BUXozFeHR3JAqAMxm9c9wAc1en+lsTzOwdYpc8YlJ5Q/JSZOZ2GiIzIK9
- y9kFQpZNo0DJjJ942
-X-Google-Smtp-Source: AGHT+IFPgYD03VIIEk6EPhxHFpmqIoHH6NBk43eMaOwTie6YGBK4hoZKbG0etJLATr+j4LqtjNHv4A==
-X-Received: by 2002:a17:906:d256:b0:ae3:bb0a:1cd8 with SMTP id
- a640c23a62f3a-ae3bb0a263cmr46870966b.19.1751377532230; 
- Tue, 01 Jul 2025 06:45:32 -0700 (PDT)
-Received: from emanuele-nb.int.toradex.com
- ([2001:b07:aac:705d:6d3f:7f26:74f6:c076])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae39ec1146csm288232366b.185.2025.07.01.06.45.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 06:45:31 -0700 (PDT)
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
-	u-boot@lists.denx.de
-Subject: 
-Date: Tue,  1 Jul 2025 15:44:55 +0200
-Message-ID: <20250701134504.1076115-1-ghidoliemanuele@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [143.105.119.108])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 993D8B4D16BD;
+ Wed, 16 Jul 2025 18:23:16 +0200 (CEST)
+Message-ID: <c841ac9b-809c-41d3-92e9-f143cfde6d5b@freeshell.de>
+Date: Wed, 16 Jul 2025 09:23:14 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly
+ used value.
+To: Martin Herren <sputnik@on-the-web.ch>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
+ Andreas Schwab <schwab@suse.de>, Anup Patel <anup@brainfault.org>,
+ Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>, Green Wan <green.wan@sifive.com>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Rick Chen <rick@andestech.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
+ Yao Zi <ziyao@disroot.org>, Yixun Lan <dlan@gentoo.org>,
+ Yuri Zaporozhets <yuriz@vodafonemail.de>
+References: <20250714133345.128853-1-sputnik@on-the-web.ch>
+ <9529db2f-ff07-448e-99b4-65dde605b0ec@amd.com>
+ <b3f95ac9-a847-450b-9d5a-64af5e84a47e@freeshell.de>
+ <vYg4IlDYamca-5F-VHVhUe0syuQhVE3qrEpgug3uvTZas8gzrXpE4YX-H63dA9ISHVebukojmJUigxf9EaSWx-lmzGGSdeV_SLSMXuNa62Q=@on-the-web.ch>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <vYg4IlDYamca-5F-VHVhUe0syuQhVE3qrEpgug3uvTZas8gzrXpE4YX-H63dA9ISHVebukojmJUigxf9EaSWx-lmzGGSdeV_SLSMXuNa62Q=@on-the-web.ch>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 16 Jul 2025 19:00:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +85,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Subject: [PATCH v1 0/5] Enable RNG support for KASLR on Toradex arm64 i.MX SoMs
 
-This patch series enables RNG support to automatically populate /chosen/kaslr-seed on the following Toradex arm64 i.MX System on Modules (SoMs):
-- Verdin iMX8MM
-- Verdin iMX8MP
-- Toradex SMARC iMX8MP
-- Apalis iMX8
-- Colibri iMX8X
+On 7/16/25 03:11, Martin Herren wrote:
+> Hej all,
+> 
+> On Wednesday, July 16th, 2025 at 3:35 AM, E Shattow <e@freeshell.de> wrote:
+>>
+> 
+>>
+> 
+>> Is there some reason for the value from documentation about the
+>> architecture? Or is it arbitrary?
+>>
+> 
+>> I don't really see the sense in a default value which is simply popular
+>> but not founded in an architectural reasoning.
+>>
+> 
+>> The values do not change often (ever?) so I miss why there is any
+>> default at all.
+>>
+> 
+>> -E
+> 
+> No, there is no documentation justifying this value. My reasoning was the reverse, there is no justification either that this default value should be almost an order of magnitude lower than ARM64 as typically generated RISCV code size is similar and thus the typical kernel size as well.
+> 
+> This is reflected in the most commonly used value in the existing riscv defconfigs as well as other boards not yet mainlined into u-boot.
+> 
+> With a lower value, typical kernels generated from Yocto or others are too big to be able to be booted.
+> 
+> In my idea the default value, when provided, should reflect the most common use case which can then be overridden if wanted.
+> 
+> I understand it was a very bold move on my side as a first submission to challenge a default value and touch over 30 boards, so i won't be offended if this is not accepted. The learning experience on just submitting a patch here and learning about patman and co is already a success for me.
+> 
+> Still I consider the proposed new default as sane and maybe more future oriented for new boards to come.
+> 
+> Cheers,
+> 
+> Martin
 
-This improves kernel security by supporting Kernel Address Space Layout Randomization (KASLR) using a runtime-provided seed from the hardware RNG.
+My concern is to not-find what I am looking for where I am looking for
+it and then hunt around to determine where this value comes from. A
+default ceases to be a default when there are more than a few
+exceptions, as it then becomes an obfuscation.
 
-Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
----
-Emanuele Ghidoli (5):
-  configs: verdin-imx8mm: enable RNG support for KASLR
-  configs: verdin-imx8mp: enable RNG support for KASLR
-  configs: toradex-smarc-imx8mp: enable RNG support for KASLR
-  configs: apalis-imx8: enable RNG support for KASLR
-  configs: colibri-imx8x: enable RNG support for KASLR
+I do tend to complain when the code base becomes clever for the sake of
+being clever, and defer to actual programmers however... all else being
+the same (it compiles the same?) go with what you think is most
+maintainable and readable.
 
- configs/apalis-imx8_defconfig          | 5 ++++-
- configs/colibri-imx8x_defconfig        | 5 ++++-
- configs/toradex-smarc-imx8mp_defconfig | 1 +
- configs/verdin-imx8mm_defconfig        | 5 ++++-
- configs/verdin-imx8mp_defconfig        | 1 +
- 5 files changed, 14 insertions(+), 3 deletions(-)
-
--- 
-2.43.0
-
+-E
