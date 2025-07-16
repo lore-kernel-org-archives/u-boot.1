@@ -4,53 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C2EC83F27
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 08:43:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34736C83F1B
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 09:03:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AAE2831A1;
-	Wed, 16 Jul 2025 10:43:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D677831BE;
+	Wed, 16 Jul 2025 11:03:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A3F83831AC; Wed, 16 Jul 2025 10:43:23 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 398368313B
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 10:43:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 56G8goSo072190
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Wed, 16 Jul 2025 16:42:50 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 16 Jul
- 2025 16:42:50 +0800
-Date: Wed, 16 Jul 2025 16:42:47 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Conor Dooley <conor@kernel.org>
-CC: <u-boot@lists.denx.de>, Conor Dooley <conor.dooley@microchip.com>, Cyril
- Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v1] board: mpfs_icicle: fix board_fit_config_name_match()
-Message-ID: <aHdmB-YrlLB-0kHm@swlinux02>
-References: <20250707121333.601067-2-conor@kernel.org>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Iz9Y30NT";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 944CE831C3; Wed, 16 Jul 2025 11:03:34 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A705831AC
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 11:03:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-45611a517a4so2336285e9.1
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 02:03:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752656611; x=1753261411; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/HUsSRTQaE4+pwflyIZy6lZ5qnrjhEOPvp0+q2OYpgg=;
+ b=Iz9Y30NT2iCcDcWrtgY+q/9ikao2yY8AgT6gF3H+IpSJiEz3PVqRy7jb6gFmaZnVTe
+ HL04I/bQxCwKC89g7zDoKpQ6x4hjyIJALBf1Qb0QIkf8drHkMR6d46iUmGiR0LuVppRt
+ fJjEwuKVKQZ5cs32NASGpUPsZcG5gbprLnxPv4Dcc+hAFuWm8puVLlReJuFtvHsiyuiV
+ TpFWDeqIr/vtVNes9P5QnSiOcGlg9P5869fVFz2rV56udxxiB2Nb8p2eJXeQc0SRN7YK
+ 6wsFty6HBEINRiSI7IIZR2cG690NiSs4iRc/TlqIWp93yGH0mRYxD99/63qaNIG8hOXg
+ fcoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752656611; x=1753261411;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/HUsSRTQaE4+pwflyIZy6lZ5qnrjhEOPvp0+q2OYpgg=;
+ b=BMFl+s/WmTavbKGdZXZDZ1eYGw1Pe+Gd6VGbylL47iRvfeEYZ6euIHluOpTo+7kJFL
+ s5I60czbEBgIcuTp34MoSRI7LI5zLTEmDLvHA+exEYEXXCWrgbHNb/fIvgMwtSYEodiZ
+ sMD1ALqcm38txEMljNp7hsTFWR9Qok7kMFevFVhCaG+WZ14CN3I+hKgrEnSNaSxnOn2n
+ DDNg0FxHPyVMhGZOVkAwBnIisVj/8Pzu7k23bvY+LEIi0lITD0GbNmrCPu2+nqtiMpGT
+ MKB/1v5g4TYmFcbuEbKWJZcCV0T+O+T/oQRGWRlRGp6LcNVsgndPcYQuJJpqnbn8D4x1
+ 8NUg==
+X-Gm-Message-State: AOJu0YxKTtvzgMtNJx2gQH7A4UKGhych/eVbHn8ilJO4dkO9ebilBigG
+ UwK94zgF7jgF0EcK8Q6HC8MFofdzbRU9ku+L4NG4eg45tZS8lOvkrkgiuQa+5ztXDO3KyTs/RA/
+ 5BR0B
+X-Gm-Gg: ASbGnctRvrmqR2L2y+B2tka6r1Drz0V5Frt5jVnZ5tht7nL3MchdIuQGNrV/quLRTh7
+ yHVHXFmtvgsArGsid6YUSRiQ/HnIHrW7lkV3kdpJu9lxGq1MYC79uOdx2nNmfJVWzplqlEjAll/
+ rcWfW5Gt0boQu+PkazjcEO1+vUC1LkUNE9mVfsgTPHNWyTGAnSMslSW5mkxMgdVDOSVfR0P0jPf
+ dSgufUTykPYtgbKqmvMK7qvlnN2Mszgg/7nwIu+dI+m/vqBFEQDzC3kCb9LEk3Dhm2HnRNdp7Pf
+ bY4aP6YGD2NlSL+Xh9ij+rmCvz+0aoRU58sU43sSuVvbw2E6UgmMQPa/bhay3cNSc6WRHTOma8g
+ 2GQU9PZcstnhVQFEl/tloRvh0O5vvkiPc71cU33d4ffHJKeLppQ==
+X-Google-Smtp-Source: AGHT+IEMJsU3FgWtW4XC5N859NPRwXLaexXfUI3nt0Ajr2nPA8nbw1UPZoO8HaaGeojPlj3V+O6Bkw==
+X-Received: by 2002:a05:600c:310b:b0:456:942:b162 with SMTP id
+ 5b1f17b1804b1-4562dcc2f8emr21861225e9.11.1752656611392; 
+ Wed, 16 Jul 2025 02:03:31 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:d584:3606:6325:3ecd])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b5e8e0d587sm16999681f8f.46.2025.07.16.02.03.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Jul 2025 02:03:30 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Wed, 16 Jul 2025 10:03:30 +0100
+Subject: [PATCH] abuf: Remove code that prevented test code running
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250707121333.601067-2-conor@kernel.org>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 56G8goSo072190
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250715-abuf_test-v1-1-d4eef5cb79e7@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAOFqd2gC/x2NQQqDMBBFryKzbsCIUfEqpcgknegsjGUmSkG8e
+ 2OXj/8+7wQlYVIYqxOEDlbeUgH7qCAsmGYy/C4MTd24urfOoN/jlEmzwWBj37adH6yD4ntUMl4
+ wheV+rKiZ5B4+QpG//8jzdV0/Oe05WHQAAAA=
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,35 +100,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jul 07, 2025 at 01:13:33PM +0100, Conor Dooley wrote:
-> From: Conor Dooley <conor.dooley@microchip.com>
-> 
-> The loop in the icicle implementation of board_fit_config_name_match()
-> runs strtok() to split off the vendor portion of the compatible string
-> using , as the delimiter. strtok() modifies a string in place, so where
-> the first config and compatible do not match, the compatible has been
-> modified by the time the loop hits the second iteration.
-> Since stringlists in dt land are null separated strings, the nulls
-> strtok() inserts to replace the delimiter increase the number of strings
-> in the compatible list. When the second iteration of the loop calls
-> fdt_stringlist_get(), it gets the vendorless portion of the first
-> compatible string, rather than the second compatible string. Copy each
-> compatible before calling strtok() to avoid this problem.
-> 
-> The temporary string the compatible is copied to is statically
-> allocated, as attempts to dynamically allocate it at this stage of boot
-> were met with "alloc space exhausted" errors.
-> 
-> Fixes: 7c16ebba1ed ("board: mpfs_icicle: implement board_fdt_blob_setup()/board_fit_config_name_match()")
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
-> CC: Conor Dooley <conor.dooley@microchip.com>
-> CC: Cyril Jean <cyril.jean@microchip.com>
-> CC: Tom Rini <trini@konsulko.com>
-> CC: Leo Yu-Chi Liang <ycliang@andestech.com>
-> CC: u-boot@lists.denx.de
-> ---
->  board/microchip/mpfs_icicle/mpfs_icicle.c | 11 ++++++++++-
->  1 file changed, 10 insertions(+), 1 deletion(-)
+When abuf was introduced some test code was prevented from running using
+a 'return 0' early in the functions. A comment said it crashed on
+sandbox due to a 'bug' in realloc. Some time later a bug in abuf_realloc
+was fixed but this test code was never enabled.
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+Remove the early 'return 0' instances so that the test code can run.
+Also remove some checks that relied on the implementation details of the
+U-Boot memory code as these can fail on sandbox which uses system memory
+code. Besides that this code should be testing abuf implementation not
+the underlying memory code which has its own tests.
+Finally use a new #define for the allocs that are meant to fail to
+ensure they do fail on all CI platforms.
+
+This issue found by Smatch.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ test/lib/abuf.c | 46 +++++++---------------------------------------
+ 1 file changed, 7 insertions(+), 39 deletions(-)
+
+diff --git a/test/lib/abuf.c b/test/lib/abuf.c
+index 97b128c01c0..3dced1ddb11 100644
+--- a/test/lib/abuf.c
++++ b/test/lib/abuf.c
+@@ -12,6 +12,7 @@
+ 
+ static char test_data[] = "1234";
+ #define TEST_DATA_LEN	sizeof(test_data)
++#define HUGE_ALLOC_SIZE 0x60000000
+ 
+ /* Test abuf_set() */
+ static int lib_test_abuf_set(struct unit_test_state *uts)
+@@ -93,13 +94,6 @@ static int lib_test_abuf_realloc(struct unit_test_state *uts)
+ {
+ 	struct abuf buf;
+ 	ulong start;
+-	void *ptr;
+-
+-	/*
+-	 * TODO: crashes on sandbox sometimes due to an apparent bug in
+-	 * realloc().
+-	 */
+-	return 0;
+ 
+ 	start = ut_check_free();
+ 
+@@ -116,23 +110,18 @@ static int lib_test_abuf_realloc(struct unit_test_state *uts)
+ 	ut_assertnonnull(buf.data);
+ 	ut_asserteq(TEST_DATA_LEN, buf.size);
+ 	ut_asserteq(true, buf.alloced);
+-	ptr = buf.data;
+ 
+ 	/*
+-	 * Make it smaller; the pointer should remain the same. Note this relies
+-	 * on knowledge of how U-Boot's realloc() works
++	 * Make it smaller.
+ 	 */
+ 	ut_asserteq(true, abuf_realloc(&buf, TEST_DATA_LEN - 1));
+ 	ut_asserteq(TEST_DATA_LEN - 1, buf.size);
+ 	ut_asserteq(true, buf.alloced);
+-	ut_asserteq_ptr(ptr, buf.data);
+ 
+ 	/*
+-	 * Make it larger, forcing reallocation. Note this relies on knowledge
+-	 * of how U-Boot's realloc() works
++	 * Make it larger.
+ 	 */
+ 	ut_asserteq(true, abuf_realloc(&buf, 0x1000));
+-	ut_assert(buf.data != ptr);
+ 	ut_asserteq(0x1000, buf.size);
+ 	ut_asserteq(true, buf.alloced);
+ 
+@@ -210,19 +199,12 @@ static int lib_test_abuf_large(struct unit_test_state *uts)
+ 	ulong start;
+ 	size_t size;
+ 	int delta;
+-	void *ptr;
+-
+-	/*
+-	 * This crashes at present due to trying to allocate more memory than
+-	 * available, which breaks something on sandbox.
+-	 */
+-	return 0;
+ 
+ 	start = ut_check_free();
+ 
+ 	/* Try an impossible size */
+ 	abuf_init(&buf);
+-	ut_asserteq(false, abuf_realloc(&buf, CONFIG_SYS_MALLOC_LEN));
++	ut_asserteq(false, abuf_realloc(&buf, HUGE_ALLOC_SIZE));
+ 	ut_assertnull(buf.data);
+ 	ut_asserteq(0, buf.size);
+ 	ut_asserteq(false, buf.alloced);
+@@ -237,13 +219,11 @@ static int lib_test_abuf_large(struct unit_test_state *uts)
+ 	ut_assertnonnull(buf.data);
+ 	ut_asserteq(TEST_DATA_LEN, buf.size);
+ 	ut_asserteq(true, buf.alloced);
+-	ptr = buf.data;
+ 	delta = ut_check_delta(start);
+ 	ut_assert(delta > 0);
+ 
+ 	/* try to increase it */
+-	ut_asserteq(false, abuf_realloc(&buf, CONFIG_SYS_MALLOC_LEN));
+-	ut_asserteq_ptr(ptr, buf.data);
++	ut_asserteq(false, abuf_realloc(&buf, HUGE_ALLOC_SIZE));
+ 	ut_asserteq(TEST_DATA_LEN, buf.size);
+ 	ut_asserteq(true, buf.alloced);
+ 	ut_asserteq(delta, ut_check_delta(start));
+@@ -254,8 +234,8 @@ static int lib_test_abuf_large(struct unit_test_state *uts)
+ 
+ 	/* Start with a huge unallocated buf and try to move it */
+ 	abuf_init(&buf);
+-	abuf_map_sysmem(&buf, 0, CONFIG_SYS_MALLOC_LEN);
+-	ut_asserteq(CONFIG_SYS_MALLOC_LEN, buf.size);
++	abuf_map_sysmem(&buf, 0, HUGE_ALLOC_SIZE);
++	ut_asserteq(HUGE_ALLOC_SIZE, buf.size);
+ 	ut_asserteq(false, buf.alloced);
+ 	ut_assertnull(abuf_uninit_move(&buf, &size));
+ 
+@@ -278,12 +258,6 @@ static int lib_test_abuf_uninit_move(struct unit_test_state *uts)
+ 
+ 	start = ut_check_free();
+ 
+-	/*
+-	 * TODO: crashes on sandbox sometimes due to an apparent bug in
+-	 * realloc().
+-	 */
+-	return 0;
+-
+ 	/* Move an empty buffer */
+ 	abuf_init(&buf);
+ 	ut_assertnull(abuf_uninit_move(&buf, &size));
+@@ -383,12 +357,6 @@ static int lib_test_abuf_init_move(struct unit_test_state *uts)
+ 	struct abuf buf;
+ 	void *ptr;
+ 
+-	/*
+-	 * TODO: crashes on sandbox sometimes due to an apparent bug in
+-	 * realloc().
+-	 */
+-	return 0;
+-
+ 	ptr = strdup(test_data);
+ 	ut_assertnonnull(ptr);
+ 
+
+---
+base-commit: cd79a2839b01571b6f2915c219f71c05e3c97482
+change-id: 20250715-abuf_test-ac1f7446b815
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
