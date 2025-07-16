@@ -4,46 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94A10C83F1B
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 09:44:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DF7C83F1B
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 09:58:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A117831C3;
-	Wed, 16 Jul 2025 11:44:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 26F07831C6;
+	Wed, 16 Jul 2025 11:58:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="deOTJAH+";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A423831C6; Wed, 16 Jul 2025 11:44:43 +0200 (CEST)
-Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
- [185.125.25.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 18C96831E0; Wed, 16 Jul 2025 11:58:42 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D818831AC
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 11:44:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D482831AC
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 11:58:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bhrkH6jgfzCDf;
- Wed, 16 Jul 2025 11:44:39 +0200 (CEST)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4bhrkH11X1zbCW; Wed, 16 Jul 2025 11:44:39 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 16 Jul 2025 11:44:08 +0200
-Subject: [PATCH] power: rk8xx: allow to customize RK806 reset mode
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-455fdfb5d04so23675095e9.2
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 02:58:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752659919; x=1753264719; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZiYD4bqejGWOx7mnZkcckcGcsDMvaFG8aXuQrnZbY+U=;
+ b=deOTJAH+Mjck5qtFplokuOyqXrBe/QGeyPVTUhPCdSjUxkKnY18yNuPEb9XfuDwfY0
+ qNM0PHXT0Fc3Igs/qLdYBfoJpqNxnnXafpMQshlgVir4dKLodb977yFjSDtHCNHHWRnh
+ I6boayfeklnO9uRWOQDfoMGxEHjp8XTpUAU90eAgf00QEn7n+ZdVR9Zonb79GO2bA/Wj
+ +Zl1zCOqhVs9LIh5T9NWjIqdlzxQXPOEMKFg8FPMzfYwSzh6z0BFV8BrTiloz7GCWXXX
+ tvoop3mn1DgIlXIEJ7YZJKnTMduwCTT/MsIFh0gD1DVJHgVqyptMFIBaULZPMWV281js
+ z8Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752659919; x=1753264719;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZiYD4bqejGWOx7mnZkcckcGcsDMvaFG8aXuQrnZbY+U=;
+ b=P96xyEmRpW5TKUpAidsw6qUJLwTr1SNbN1/nimcazBFQ92jgzJvMsIoItzR8XCGt7c
+ InDjnCuaeGZQSWGspYyyfiMpbWyu69mDZfEK/oEvSAHrpJH24CGO/GNR4C/7omFJGwiq
+ yPY1n9YO3bZMKkt9KTzAVvhklumHgIECSI1O5poWX6EOFMseBB2VcLBqQBhHaFxyPn8/
+ xpj/Nqv/4b7+ge7rRfSFoaf10bC5vQAzVsRjiprcMy3r8MUeT+jv2FD1/eXKj6NDSUhw
+ 5sPzkb6ldoiYhHhyu1f+U6bY0396eExjn1jczYR2tMTnibqEPUt6uxbPD9XpkV1DFrHR
+ UOZA==
+X-Gm-Message-State: AOJu0Yx5KTmMqVtveexIfPNW6IT2KteiomgBrKQEJ9FRC+8on2rh0/3Y
+ ZXpKR+N+wMaduubbKjWWllaSOWspXSvj8rklrGbsSV8c8tsE7ahPap+RPz6hNJKYsZo=
+X-Gm-Gg: ASbGncvdh5mxKxyYg7WaomBW8fT+M5pxU2gCuZL3/BjaW3VY6apDi9dny1COlpOTDxp
+ /+U+/dsFoJp35ltSkQqB0PI0uOY6bcXBUShVi5buDn02jxbBsrvbck67UQAdhEn4jUeLPlWOyYh
+ BoeUlStMaCWesgvX38O3ZwnhuBRY8+mU1+/7T7BCEKoxCBlXdflPbVqrIiEbbbM2nnIyMO9xzi2
+ +H2sjMxYWVXBpzr7EDavqHdS7BQ5KIAEb+yWoZmIg/Ly/gijGCU76b6HxRsOooz17rNv42p4Wfa
+ pZXCix2J9be9Em6xqlrRo93XZJ4x7jXrSdBWeRnAYoQ10OwYks75rPTLVYsgmhxVd+CQ4TikoNI
+ bL0T0xWZG2cQ4ewIqK+HokNvI84NhhA8QaGCE7YkwVKuTlXQ/hQ==
+X-Google-Smtp-Source: AGHT+IFTcfUVCGvP7jx2u1JBpLDu5WJgt/quLqmtxr6Yre2MPP5QQ9r4a7nAG0NpmQTb4Vw5x+SWAA==
+X-Received: by 2002:a05:600c:5486:b0:456:c3c:d285 with SMTP id
+ 5b1f17b1804b1-4562dfd8845mr20917055e9.1.1752659918711; 
+ Wed, 16 Jul 2025 02:58:38 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:d584:3606:6325:3ecd])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b5e8dc21e7sm17395270f8f.36.2025.07.16.02.58.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Jul 2025 02:58:38 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH v3 0/2] Remove unreachable code and cleanup code with fixed
+ return
+Date: Wed, 16 Jul 2025 10:58:37 +0100
+Message-Id: <20250714-blk-uclass-v3-0-1fc761606df6@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250716-rk8xx-rst-fun-v1-1-269277cb779e@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAGd0d2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDMyNz3aJsi4oK3aLiEt200jzdNAvjVPNEs8REE5NEJaCegqLUtMwKsHn
- RsbW1AEGUKldfAAAA
-X-Change-ID: 20250627-rk8xx-rst-fun-f83e7a6aa44a
-To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+X-B4-Tracking: v=1; b=H4sIAM13d2gC/3WNQQ7CIBREr2JY+w1QSqsr72FcAP1tiRUMVKJpe
+ nehOxNdvpm8mYVEDBYjOe0WEjDZaL3LUO13xIzKDQi2y0w45TVtmAA93eBpJhUjVEK2wlDWS2p
+ IFrSKCDooZ8ai3FWcMZTiEbC3r+3lcs082jj78N5OEyvpz/3EgEHHmeCtqftG8vNknQr+4MNAy
+ k7i/10OFJjWrOOI2B7ll7uu6wf2lEya+gAAAA==
+To: Tom Rini <trini@konsulko.com>, Alexander Graf <agraf@csgraf.de>, 
+ Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,132 +103,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Smatch reported unreachable code in blk-uclass.c which led to noticing
+that uclass_find_next_device always returned 0 which meant it had no
+need of any return value.
 
-The RK806 PMIC has a bitfield for configuring the restart/reset behavior
-(which I assume Rockchip calls "function") whenever the PMIC is reset
-either programmatically (c.f. DEV_RST in the datasheet) or via PWRCTRL
-or RESETB pins.
-
-For RK806, the following values are possible for RST_FUN:
-
-0b00 means "Restart PMU"
-0b01 means "Reset all the power off reset registers, forcing
-	the state to switch to ACTIVE mode"
-0b10 means "Reset all the power off reset registers, forcing
-	the state to switch to ACTIVE mode, and simultaneously
-	pull down the RESETB PIN for 5mS before releasing"
-0b11 means the same as for 0b10 just above.
-
-This adds the appropriate logic in the driver to parse the new
-rockchip,reset-mode DT property to pass this information. It just
-happens that the values in the binding match the values to write in the
-bitfield so no mapping is necessary.
-
-For backward compatibility reasons, if the property is missing we set it
-to 0b10 (i.e. BIT(7)) like before this commit was merged instead of
-leaving it untouched like in the kernel driver.
-
-Note that this does nothing useful for U-Boot at the moment as the ways
-to reset the device (e.g. via `reset` command) doesn't interact with the
-RK8xx PMIC and simply does a CPU reset.
-Considering the upstream Linux kernel left this register untouched until
-(assumed) v6.17[1], this is useful for cases in which the U-Boot
-bootloader has this patch (and running with a DT with
-rockchip,reset-mode property set) and running an upstream kernel before
-(assumed) v6.17, or alternatively later without the property in the
-kernel DT.
-
-See https://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git/commit/?id=e15f4a2e2f0a8ff973562f5f18d40c7fdc3836c8
-for the documentation of this DT property.
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git/commit/?id=87b48d86b77686013f5c2a8866ed299312b671db
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-The RK3588 Theobroma boards (Tiger and Jaguar) need a different reset
-mode for the PMIC to work properly, c.f.
-https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/commit/?id=ee907113430aa02a8202c91bb574c385ecc28aa2
-https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/commit/?id=e82f642b9821384045915dc30e73df7de8424827
+Changes in v3:
+- Address review comments to make more readable and prevent for loop
+  testing of a variable that will not change
+- Remove those for loops that reduce to being empty
+- Link to v2: https://lore.kernel.org/r/20250714-blk-uclass-v2-0-1bb1d2eee896@linaro.org
 
-While the kernel just recently gained support for setting this
-appropriately (assumed to be part of the upcoming 6.17 release), all
-upstream kernels before that release will simply not behave
-appropriately for those boards. While it is typically much easier to
-update the Linux kernel than U-Boot, let's cover all possible scenario
-by adding support for setting this reset mode properly from U-Boot so
-that there isn't a need for patching or updating the kernel. Note that
-this isn't enough for fixing the behavior on Tiger and Jaguar as we
-still need DT patches for that to work. They are merged already and
-expected to make it to v6.17 release but I cannot backport them before
-they land in devicetree-rebasing so it'll have to wait a bit :) It's
-also not urgent enough to my taste to warrant manually patching that in
--u-boot.dtsi.
----
- drivers/power/pmic/rk8xx.c | 21 ++++++++++++---------
- include/power/rk8xx_pmic.h |  2 ++
- 2 files changed, 14 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
-index 3bc696d4caaa68f87fd49810682616c34bafb23b..d11f7a7886e8074e7b7833c8a51ea24d77fede34 100644
---- a/drivers/power/pmic/rk8xx.c
-+++ b/drivers/power/pmic/rk8xx.c
-@@ -89,11 +89,6 @@ void rk8xx_off_for_plugin(struct udevice *dev)
- 	}
- }
- 
--static struct reg_data rk806_init_reg[] = {
--	/* RST_FUN */
--	{ RK806_REG_SYS_CFG3, BIT(7), GENMASK(7, 6)},
--};
--
- static struct reg_data rk817_init_reg[] = {
- /* enable the under-voltage protection,
-  * the under-voltage protection will shutdown the LDO3 and reset the PMIC
-@@ -306,12 +301,20 @@ static int rk8xx_probe(struct udevice *dev)
- 		value = (power_en2 & 0x0f) | ((power_en3 & 0x0f) << 4);
- 		pmic_reg_write(dev, RK817_POWER_EN_SAVE1, value);
- 		break;
--	case RK806_ID:
-+	case RK806_ID: {
-+		u32 rst_fun = 2;
-+
- 		on_source = RK806_ON_SOURCE;
- 		off_source = RK806_OFF_SOURCE;
--		init_data = rk806_init_reg;
--		init_data_num = ARRAY_SIZE(rk806_init_reg);
--		break;
-+
-+		ret = dev_read_u32(dev, "rockchip,reset-mode", &rst_fun);
-+		if (ret)
-+			debug("rockchip,reset-mode property missing, defaulting to %d\n",
-+			      rst_fun);
-+
-+		pmic_clrsetbits(dev, RK806_REG_SYS_CFG3, RK806_RST_FUN_MSK,
-+				FIELD_PREP(RK806_RST_FUN_MSK, rst_fun));
-+		break; }
- 	default:
- 		printf("Unknown PMIC: RK%x!!\n", show_variant);
- 		return -EINVAL;
-diff --git a/include/power/rk8xx_pmic.h b/include/power/rk8xx_pmic.h
-index 31221aa46b60cf995fd02f5894b3ee97a7475f8a..913b6ebe6d96e08bcfab509cff5db7da8358784a 100644
---- a/include/power/rk8xx_pmic.h
-+++ b/include/power/rk8xx_pmic.h
-@@ -212,6 +212,8 @@ enum {
- #define RK817_POWER_EN_SAVE0	0x99
- #define RK817_POWER_EN_SAVE1	0xa4
- 
-+#define RK806_RST_FUN_MSK	GENMASK(7, 6)
-+
- #define RK806_POWER_EN(x)			(0x00 + (x))
- /* POWER_ENx register lower 4 bits are write-protected unless the associated top bit is set */
- #define RK806_POWER_EN_CLRSETBITS(bit, val)	(((val) << (bit)) | (1 << ((bit) + 4)))
+Changes in v2:
+- make uclass_find_next_device a void and update callers
+- Link to v1: https://lore.kernel.org/r/20250714-blk-uclass-v1-1-d21428c5f762@linaro.org
 
 ---
-base-commit: bcc7bc69b92ab728790aea0d08b2ae5e22d3b09d
-change-id: 20250627-rk8xx-rst-fun-f83e7a6aa44a
+Andrew Goodbody (2):
+      block: Remove unreachable code
+      uclass: Cleanup uclass_find_next_device
+
+ board/emulation/qemu-ppce500/qemu-ppce500.c |   4 +-
+ boot/bootdev-uclass.c                       |   8 +-
+ cmd/regulator.c                             |   8 +-
+ drivers/block/blk-uclass.c                  |  14 +--
+ drivers/core/uclass.c                       |  16 +---
+ drivers/power/regulator/regulator-uclass.c  |  21 ++--
+ drivers/remoteproc/rproc-uclass.c           |   9 +-
+ include/dm/uclass-internal.h                |   4 +-
+ test/dm/core.c                              | 143 +++++++++++-----------------
+ 9 files changed, 94 insertions(+), 133 deletions(-)
+---
+base-commit: cd79a2839b01571b6f2915c219f71c05e3c97482
+change-id: 20250714-blk-uclass-34684c01f60c
 
 Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
