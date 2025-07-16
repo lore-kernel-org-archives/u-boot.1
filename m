@@ -4,114 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B24C83F22
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 17:00:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D908BC83F22
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 19:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C6438328F;
-	Wed, 16 Jul 2025 19:00:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1521B83253;
+	Wed, 16 Jul 2025 21:34:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dP8k8Ds9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bKxBS/1l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 342B983249; Wed, 16 Jul 2025 19:00:24 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCB65831E1
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 19:00:21 +0200 (CEST)
+ id 4985183253; Wed, 16 Jul 2025 21:34:42 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 32EFF83242
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 21:34:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-73e64e87d49so37323a34.2
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 10:00:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752685220; x=1753290020; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2A3HND7KMwVdsnco6CprA1JWBPTEZ6dL7aa1jgHYoOU=;
- b=dP8k8Ds9rnCLTBtPjBt5GlCtoKtOCqUoBxqLqitQ3D+ZPYexYFduze6wPBCLLGbfQR
- 6uaXcmCRebQL01HKPTZWUAKjxU0takkbwalwLe1Le7Hcsccw49H+rua+6ZhIL36tJ5Gm
- XEngZULHU+dOW0stzJQsN/abIBMiPGZrTCHO8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752685220; x=1753290020;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2A3HND7KMwVdsnco6CprA1JWBPTEZ6dL7aa1jgHYoOU=;
- b=I3orce6N9yDz3qx5VcdgDviJ/Iz7M/GGRdbPSZcpMIVqs8cL41LflBxAek1CsGI3zK
- KgAlNE7QI8B9KuHkR4oJ3nL+kx/Al5o04kf3jUnei33AtQb6hGXrux04yPzL4dOao//M
- XhJTIMYep/GSoMRKVExNyCLbBukv9N9HpH5j0O3LCAKcH75OtprX3F6bkHpItPQbhxW6
- Eju6OKI7uoB9hilj7aL3boxNND/zU2NyO34GGKB2/mxZHsaL3UR8XKJO+KDlvVLEzS7z
- GID2miLiZrgXu2aeSNYyYBj+UBkoogUWOB84BlwytCqFQEvgmMYSBqiCCh0OryiYwibJ
- P6UQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUcFiScqdDxx8zYCILvts3elFV0DDbaTj/yPn6gK4hMvylQ2eNFJabWQWRvess+S4RtXelfC40=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqroXopaIHmjxw2N/sG0gl6UqQHiSc3PrhTIk+0r81/B3njLRY
- bW5OFBZnI/z6bh6VcXgz1AxaXx1b8wAAZU90TZk9cxvP61cUFVxC+SdNhmXicIaBlmM=
-X-Gm-Gg: ASbGncvD5ePyT69I+DnL1roDuPVNmdHLwaYkD4LVeTGeJqJZCtVyI/eq7XYFTDYvU8z
- UU2F631T+FFIMy3adzm6vKqEb4P/qi8go12APdSWXfxdV4ip3YbOAxWO+tiqmX6iZNl0/juOGU7
- VN3WKROFK5Mifhmhr5rRWYsnAaCYDWpUaVlXkJRul0AEVpe5+p2FI/bQoMxlFF9ICHVayJsX/NM
- uJV5SKiovnaK5Ldjz89+reEZz5vbSMsZf29pCCouq6lfhYhgwK+XrA93wV6PppodkG2iB9i8w9p
- Y9Yf93L3mCFEnJvtjzpYjDbmqaq2emiBtFl3ouDVtc+nngTv1GlY22+53ygQ4rtmNWuQTSplSDo
- 170eoH+Lvq9Zr/w==
-X-Google-Smtp-Source: AGHT+IFLr82dY6smgJOv/xbYcOYNorU85i1JXpdYj9/dg2yybfvL86AAs9KyeudUgs/R8IwVbg/1Og==
-X-Received: by 2002:a05:6871:88f:b0:2ff:a25a:bf52 with SMTP id
- 586e51a60fabf-2ffb2451e83mr2613514fac.19.1752685220392; 
- Wed, 16 Jul 2025 10:00:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ff11686f20sm3599892fac.24.2025.07.16.10.00.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Jul 2025 10:00:18 -0700 (PDT)
-Date: Wed, 16 Jul 2025 11:00:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: E Shattow <e@freeshell.de>
-Cc: Michal Simek <michal.simek@amd.com>,
- Martin Herren <sputnik@on-the-web.ch>, u-boot@lists.denx.de,
- Andreas Schwab <schwab@suse.de>, Anup Patel <anup@brainfault.org>,
- Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>,
- "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
- Conor Dooley <conor.dooley@microchip.com>,
- Cyril Jean <cyril.jean@microchip.com>, Green Wan <green.wan@sifive.com>,
- Hal Feng <hal.feng@starfivetech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Minda Chen <minda.chen@starfivetech.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rick Chen <rick@andestech.com>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
- Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
- Wei Fu <wefu@redhat.com>, Yao Zi <ziyao@disroot.org>,
- Yixun Lan <dlan@gentoo.org>, Yuri Zaporozhets <yuriz@vodafonemail.de>
-Subject: Re: [PATCH 0/3] Update riscv's SYS_BOOTM_LEN to the most commonly
- used value.
-Message-ID: <20250716170015.GI193579@bill-the-cat>
-References: <20250714133345.128853-1-sputnik@on-the-web.ch>
- <9529db2f-ff07-448e-99b4-65dde605b0ec@amd.com>
- <b3f95ac9-a847-450b-9d5a-64af5e84a47e@freeshell.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56GJYYXe2568514;
+ Wed, 16 Jul 2025 14:34:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752694474;
+ bh=T8Zd739Q7KbpOYNes4ofUBalOukw4u+0ljRnxF6oxfc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=bKxBS/1lIpquv/f6Yq5evA3zTVIhBe07MvYVrg/LeDyQVJULFtmNpKJLZbsslx8Mt
+ 4jvH/zMjhnFa897QmqT3aaGZ63E59qaHPz8mrY5i0uRePd2Bdvv6sdpo45R5KTX5wp
+ 0FFwqZz2wqAyiuu+SY4bmyJJXzEZGAyl/i9/81+k=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56GJYYPw1111942
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 16 Jul 2025 14:34:34 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 16
+ Jul 2025 14:34:33 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 16 Jul 2025 14:34:33 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56GJYX25967727;
+ Wed, 16 Jul 2025 14:34:33 -0500
+Date: Wed, 16 Jul 2025 14:34:33 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Gokul Praveen <g-praveen@ti.com>
+CC: <trini@konsulko.com>, <rayagonda.kokatanur@broadcom.com>,
+ <casey.connolly@linaro.org>, <sjg@chromium.org>, <m-chawdhry@ti.com>,
+ <u-boot@lists.denx.de>, <j-keerthy@ti.com>
+Subject: Re: [PATCH v2] configs: KASLR OPTEE RNG support for K3 devices
+Message-ID: <20250716193433.7hrlyvfg64kyangq@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250710095922.144361-1-g-praveen@ti.com>
+ <20250710141718.fx7cqeh2f2eibwkm@bryanbrattlof.com>
+ <51e00bdb-374a-4e35-a230-58427aeaead7@ti.com>
+ <20250711121741.jyo6gonfhoswbxvb@bryanbrattlof.com>
+ <8b8a0e73-39e5-436e-8458-9bc511daa880@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JnN+9NnHDCLoIgcX"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <b3f95ac9-a847-450b-9d5a-64af5e84a47e@freeshell.de>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Wed, 16 Jul 2025 19:00:40 +0200
+In-Reply-To: <8b8a0e73-39e5-436e-8458-9bc511daa880@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,128 +84,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On July 16, 2025 thus sayeth Gokul Praveen:
+> Hi Bryan,
+> 
+> On 11/07/25 17:47, Bryan Brattlof wrote:
+> > On July 11, 2025 thus sayeth Gokul Praveen:
+> > > Hi Bryan,
+> > > 
+> > > On 10/07/25 19:47, Bryan Brattlof wrote:
+> > > > On July 10, 2025 thus sayeth Gokul:
+> > > > > From: Gokul Praveen <g-praveen@ti.com>
+> > > > > 
+> > > > > KASLR, or Kernel Address Space Layout Randomization, is a security
+> > > > > feature in the Linux kernel that randomizes the memory location
+> > > > > where the kernel is loaded during boot.
+> > > > > 
+> > > > > OP-TEE RNG is a Random Number Generator (RNG) component within the
+> > > > > Open Portable Trusted Execution Environment (OP-TEE) which provides
+> > > > > a random number to U-BOOT and U-BOOT provides this random number
+> > > > > as seed value to the LINUX kernel for KASLR.
+> > > > > 
+> > > > > Add KASLR OPTEE RNG support across K3 devices by enabling the required
+> > > > > configs.
+> > > > > 
+> > > > > Signed-off-by: Gokul Praveen <g-praveen@ti.com>
+> > > > > ---
+> > > > > v2<==> v1
+> > > > > ===========
+> > > > > * Added 'if' condition for configs to avoid enabling this feature
+> > > > >     in R5.
+> > > > 
+> > > > Works for me.
+> > > > 
+> > > > Reviewed-by: Bryan Brattlof <bb@ti.com>
+> > > > 
+> > > > > 
+> > > > > Boot logs Link :
+> > > > > 
+> > > > > https://gist.github.com/GokulPraveen2001/44aa8c0962438c12ffc55e6ed67742e5
+> > > > 
+> > > > Just curious are you enabling the kaslrseed command for this build? It
+> > > > looks like you're using TI's evil vendor scripts but I assumed the
+> > > > kaslrseed command was disabled.
+> > > 
+> > > Can you elaborate more on this,Bryan?
+> > > 
+> > > Actually, we are not using the kaslrseed device tree property. Is that what
+> > > you meant,Bryan?
+> > 
+> > Everything in this boot log is tagged as dirty. So I'm just trying to
+> > ensure I've got everything setup correctly.
+> > 
+> > I was curious what you are doing to generate the line:
+> > 
+> >     KASLR SEED OPTEE SET SUCCESSFULLY
+> > 
+> > before we jump to the kernel.
+> 
+> I have also updated the boot logs in the gist link provided to the one
+> without debug prints and without the dirty tag as well, Bryan.
+> 
 
---JnN+9NnHDCLoIgcX
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks Gokul. That lines up exactly to how it looks on my end as well
 
-On Tue, Jul 15, 2025 at 06:35:17PM -0700, E Shattow wrote:
->=20
->=20
-> On 7/15/25 04:27, Michal Simek wrote:
-> >=20
-> >=20
-> > On 7/14/25 15:33, Martin Herren wrote:
-> >>
-> >> The most commonly used SYS_BOOTM_LEN for riscv is 0x4000000 which is
-> >> used in 25 of the current defconfigs.
-> >>
-> >> The previous default config value of 0x800000 was only used in 8
-> >> defconfigs.
-> >>
-> >> This patch sets the default to this value.
-> >>
-> >> Command used to get the stats of the used values on RISCV defconfigs:
-> >>
-> >> ```
-> >> grep -l "CONFIG_RISCV=3Dy" configs/* | \
-> >> =A0 xargs -I {} sh -c "grep -H CONFIG_SYS_BOOTM_LEN {} || echo
-> >> {}:DEFAULT" | \
-> >> =A0 cut -d ':' -f 2 | sort | uniq -c
-> >> ```
-> >>
-> >> Changes in v2:
-> >> - Resubmit using another mail provider to prevent mangling and signatu=
-re
-> >> =A0=A0 attachement.
-> >>
-> >> Martin Herren (3):
-> >> =A0=A0 riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
-> >> =A0=A0 riscv: Set SYS_BOOTM_LEN default to 0x4000000
-> >> =A0=A0 riscv: Remove default SYS_BOOTM_LEN from defconfig
-> >>
-> >> =A0 boot/Kconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 2 +-
-> >> =A0 configs/ae350_rv32_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv32_falcon_defconfig=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv32_falcon_xip_defconfig | 1 -
-> >> =A0 configs/ae350_rv32_spl_defconfig=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv32_spl_xip_defconfig=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv32_xip_defconfig=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv64_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv64_falcon_defconfig=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv64_falcon_xip_defconfig | 1 -
-> >> =A0 configs/ae350_rv64_spl_defconfig=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv64_spl_xip_defconfig=A0=A0=A0 | 1 -
-> >> =A0 configs/ae350_rv64_xip_defconfig=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/ibex-ast2700_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/k230_canmv_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 +
-> >> =A0 configs/microchip_mpfs_icicle_defconfig | 1 +
-> >> =A0 configs/milkv_duo_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | =
-1 -
-> >> =A0 configs/qemu-riscv32_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/qemu-riscv32_smode_defconfig=A0=A0=A0 | 1 -
-> >> =A0 configs/qemu-riscv32_spl_defconfig=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/qemu-riscv64_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/qemu-riscv64_smode_defconfig=A0=A0=A0 | 1 -
-> >> =A0 configs/qemu-riscv64_spl_defconfig=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/sifive_unleashed_defconfig=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/sifive_unmatched_defconfig=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/sipeed_licheerv_nano_defconfig=A0 | 1 -
-> >> =A0 configs/sipeed_maix_bitm_defconfig=A0=A0=A0=A0=A0 | 1 +
-> >> =A0 configs/sipeed_maix_smode_defconfig=A0=A0=A0=A0 | 1 +
-> >> =A0 configs/starfive_visionfive2_defconfig=A0 | 1 -
-> >> =A0 configs/th1520_lpi4a_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 -
-> >> =A0 configs/xilinx_mbv32_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 +
-> >> =A0 configs/xilinx_mbv32_smode_defconfig=A0=A0=A0 | 1 +
-> >> =A0 configs/xilinx_mbv64_defconfig=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 1 +
-> >> =A0 configs/xilinx_mbv64_smode_defconfig=A0=A0=A0 | 1 +
-> >> =A0 34 files changed, 9 insertions(+), 26 deletions(-)
-> >>
-> >=20
-> > I don't mind with these changes. It is just value which can be changed.
-> >=20
-> > Acked-by; Michal Simek <michal.simek@amd.com> # xilinx_mbv
-> >=20
-> > Thanks
-> > Michal
-> >=20
-> >=20
->=20
-> Is there some reason for the value from documentation about the
-> architecture? Or is it arbitrary?
->=20
-> I don't really see the sense in a default value which is simply popular
-> but not founded in an architectural reasoning.
->=20
-> The values do not change often (ever?) so I miss why there is any
-> default at all.
-
-So, the default for SYS_BOOTM_LEN isn't so much arbitrary as just no
-longer reflective of modern times. It's why there's larger defaults for
-ARM64 for example. Likely RISCV should just also use that as the default
-and platforms with very small amounts of RAM should stick with smaller.
-
---=20
-Tom
-
---JnN+9NnHDCLoIgcX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh32psACgkQFHw5/5Y0
-tyw2KgwAuFeVRxxPTn9e+WvdqOWA6/jEfhkFznBml0uIJIAIUA7gaNWkgxeVy26a
-kTixIgS9Ehq3mugsZLbuejjlNPn8/iZAx1+X2Hm2hoqi2HJcLKVBLfSDUuwznxad
-J20IK5Yh70e9h3YSnSpPlOYG0EAE79inrPAPcJCeXaSf/mDr4YwcM5o1Ux/6upct
-pVTa+5+O0Tp0pKBosgfP6Ib3AKEBIWb+S0ZFaN1egL2T+KBhabRpmreJ0prNW7xC
-ChZfgpXErvnefM5UCyptVYwnbrBHiNFxgvcPO9fnfjxAQfeok2i3ldZAWVseHPCw
-gS3+AGDrFp6W1be6Kzb06tPFh3gSOgyTx/SG1rDIloZckK3kLzmmFZ6cDIMmTsIc
-U8g3xcFmM4+50wm4n8V71DFRdSOotDqstTfO9vL3gYzQsPAIlXbnXOfmZ38olqmM
-APgYm92p7lQN89SW4zUOYziOJwPnNCOTN5IqmbrOdn7V6qu+gMLQI2qBLKNuLTvq
-eJXO7VMw
-=7XHu
------END PGP SIGNATURE-----
-
---JnN+9NnHDCLoIgcX--
+~Bryan
