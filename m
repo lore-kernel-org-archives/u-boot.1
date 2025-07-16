@@ -4,66 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C2DC83F22
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 10:33:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A7DC83F22
+	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 10:55:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E161D831AC;
-	Wed, 16 Jul 2025 12:33:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id E1476831D5;
+	Wed, 16 Jul 2025 12:55:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J/kPkShL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iA/nQuOu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0CD3831D5; Wed, 16 Jul 2025 12:33:24 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DDBF4831D8; Wed, 16 Jul 2025 12:55:50 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C28882C87
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 12:33:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C6B136115E;
- Wed, 16 Jul 2025 10:33:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8177BC4CEF0;
- Wed, 16 Jul 2025 10:33:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752662000;
- bh=C+njW5vZ7PvCsqH1y1Q/KfZqFQrkrcEHVl440ZexRHk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=J/kPkShLlrpSU+LHyJr0aeZFQh9BFRdcEUujD7bMOwYxU4IdZdeNi4zHcQ2djrtVW
- neVUzN+RbkxlgovsLnv7NmCtcjdBorK5Gx2jGDyEHK2hittdJ+4//FUNJT8aMI8Gv6
- kzjaO9eJFFQdZqsTjbHP+iYmF7t3YOy+3kQ3os3ZYMqailFqg6mLHT4ayq4wxcehxS
- ivIXiQDVhx748WHKkuNR6U43mA3aVKXl1J+/1UllLCSiIqK6l/8AKhG2bKoH4+WEjh
- nPOCL4K8Jj+YN7AClroczPgciWDik7Mo5vIrtmMEglneE2Z0yZhQwhDzgZZDsmFr1w
- 1fK/UXUL1oaQg==
-Date: Wed, 16 Jul 2025 11:33:15 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Martin Herren <sputnik@on-the-web.ch>
-Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>,
- Cyril Jean <cyril.jean@microchip.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/3] riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
-Message-ID: <20250716-observant-compile-949c212107d6@spud>
-References: <20250714133345.128853-1-sputnik@on-the-web.ch>
- <20250714133345.128853-2-sputnik@on-the-web.ch>
+ by phobos.denx.de (Postfix) with ESMTPS id DDCCC830B5
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 12:55:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3a548a73ff2so5093833f8f.0
+ for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 03:55:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752663348; x=1753268148; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wb5tHSBM/opltbHkS98dk2DFf6uwiPzNadibZN8Imxw=;
+ b=iA/nQuOush7Vmtj2RIbV22B4T52G9uThh985KVyn8lBvwSm2lCjWLRclV/iNIuUTfT
+ S1tbwWO9nT34BNEA/oaCPGunYF7f4su6p8B9wvSSXStLXkhQrAwGwkM+oDza2m/vhUtz
+ HiGGKsjU6W1T7hrX0GHTvk9OE6vGQgM+BbbzkyfXXuPEuj8B2hHADBlabb0+/XW5sNDq
+ lWuKAXzOvlc/gNL3jW8t3afkaq0Dv6AHi+To2TG1M9YjiJ3SP0t6vOA3OeVwactbnNgQ
+ rCLKh8BSQozjT8Z1qtLsIREvQZZrjBUhzIO7XYtnfBa6+haX/xpgGYxKwn/hRQ7pLEqn
+ dYXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752663348; x=1753268148;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wb5tHSBM/opltbHkS98dk2DFf6uwiPzNadibZN8Imxw=;
+ b=XOomjfd6fRU4vH4VuAIlgxyIMuwH2FhiidfCRt9y4V721+lz1XJdvBDy6Yb4J+scer
+ iIz9FhYnC0F+1wsTkEeBKrt8H+Fy9cLMUtDhxO4Ey+ExVnVEREqLNJltCOnT6mZBK1WP
+ g/1wERfz6qevJlHyjyU4K1McLBcpYc4GqYaAn4O9d0yGDqgvD9vVc6cqTujacFARo+K7
+ rXPrxyewIvS3XqoTcPpZDpo5ugTpzpQ3gOkRp8r0aQTNfxjZjqagDurYY/92kavsXZ6x
+ RSapUGpka5iZBYpGNOCanWgYjugj16gfXfPolv+B47VCcrIxl8wokRURuPwwQ4a9W39p
+ bUuQ==
+X-Gm-Message-State: AOJu0YzR4TLuzapDsTjRBWgioViyvq5OTISf7mhFKhv82GX2kpZFxAJI
+ SDWuFKzkggzPGkiRkK3cQMxAi6mao+pkQ/UTWQqaOn+0YOzJ6sAbctkr27Hu0sc/ae8=
+X-Gm-Gg: ASbGncsnsSWQrq/glYY3r2klqin3AMNQZHxt4fozK1PalyKo5SwawwhFVQheAYudA4e
+ tEgun1/8I7vfRQGE3BUQvrDPzRFvt8kX6nKO7boiVUZiWLai4bwYfilUabrnLYd/CEwCBbYeALB
+ lMJGNEwzrzhs6nJJDo2hCn5wrP3zVh15rtA/rqBOPI0BfEbQtffy/BzMbLma1nZLGFy5jwkTHb0
+ 13HJiouq/WW0LobUWWnTFX+czdamjcmhitJEQX0jmXusNB+sFJBalMNWKGd1gjOfvNAn9xfMdGn
+ TpQNQ8aj4mRzieAZ1r2XVgjPzhRvvdv+MSNxX8UwqJSvEXgx1UcbZJy7hkZ9HcOtO4gqD1hae/Q
+ cKcWsjGberlQ1y6uNOnBt36wN3pntOpuvytgPZUN80vvBAr8w6w==
+X-Google-Smtp-Source: AGHT+IHobgHsi/9Gw1+qQHrZnIqZldo9dQdN5wBVWT0hFbbK8JbHsM9TWKMu/Az21Zn/qwm3/SohOg==
+X-Received: by 2002:a05:6000:42c6:b0:3a3:7115:5e7a with SMTP id
+ ffacd0b85a97d-3b60dd7b0dbmr1545328f8f.42.1752663348200; 
+ Wed, 16 Jul 2025 03:55:48 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:d584:3606:6325:3ecd])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b5e8e26c97sm17766603f8f.90.2025.07.16.03.55.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Jul 2025 03:55:47 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Wed, 16 Jul 2025 11:55:47 +0100
+Subject: [PATCH] cmd: gpt: Fix off by 1 errors
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="ol32EojhH75JRzJL"
-Content-Disposition: inline
-In-Reply-To: <20250714133345.128853-2-sputnik@on-the-web.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250716-gpt_offby1-v1-1-6aa3546069ba@linaro.org>
+X-B4-Tracking: v=1; b=H4sIADKFd2gC/x2NQQqDMBAAvyJ7biCJNZF+pYgkutE9NMquiEX8e
+ 2OPwzDMCYJMKPCqTmDcSWjJBcyjgmEOeUJFY2Gw2jbaG6emdeuXlOLXqLa1ztfG6qfzUIIYBFX
+ kkIf5Tj5BNuRbrIyJjv/l3V3XDxyOiBx1AAAA
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,51 +99,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The buffer for a name to be copied into must also contain the
+terminating 0 byte but strlen returns the length of the string without
+counting that 0 byte. Adjust the length checks to take this into
+account.
 
---ol32EojhH75JRzJL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This issue found by Smatch.
 
-On Mon, Jul 14, 2025 at 03:33:10PM +0200, Martin Herren wrote:
-> For all riscv defconfigs that use the current default value.
->=20
-> This is done in provision of changing the default value to the most
-> common used value of 0x4000000.
->=20
-> Signed-off-by: Martin Herren <sputnik@on-the-web.ch>
-> ---
->=20
-> (no changes since v1)
->=20
->  configs/k230_canmv_defconfig            | 1 +
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ cmd/gpt.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
->  configs/microchip_mpfs_icicle_defconfig | 1 +
+diff --git a/cmd/gpt.c b/cmd/gpt.c
+index 27aea2df197..e18e5036a06 100644
+--- a/cmd/gpt.c
++++ b/cmd/gpt.c
+@@ -911,8 +911,9 @@ static int do_rename_gpt_parts(struct blk_desc *dev_desc, char *subcomm,
+ 		goto out;
+ 
+ 	if (!strcmp(subcomm, "swap")) {
+-		if ((strlen(name1) > PART_NAME_LEN) || (strlen(name2) > PART_NAME_LEN)) {
+-			printf("Names longer than %d characters are truncated.\n", PART_NAME_LEN);
++		if ((strlen(name1) >= PART_NAME_LEN) || (strlen(name2) >= PART_NAME_LEN)) {
++			printf("Names longer than %d characters are truncated.\n",
++			       PART_NAME_LEN - 1);
+ 			ret = -EINVAL;
+ 			goto out;
+ 		}
+@@ -967,8 +968,9 @@ static int do_rename_gpt_parts(struct blk_desc *dev_desc, char *subcomm,
+ 		*first = *second;
+ 		*second = tmp_part;
+ 	} else { /* rename */
+-		if (strlen(name2) > PART_NAME_LEN) {
+-			printf("Names longer than %d characters are truncated.\n", PART_NAME_LEN);
++		if (strlen(name2) >= PART_NAME_LEN) {
++			printf("Names longer than %d characters are truncated.\n",
++			       PART_NAME_LEN - 1);
+ 			ret = -EINVAL;
+ 			goto out;
+ 		}
 
-tbh, I think this should get the new default value instead of the old
-one. Pretty sure in our downstream users we've made it larger and this
-is one of the first things I end up changing whenever I do some
-debugging or w/e with upstream U-Boot since there's not much chance of
-fitting some kernel with all the debug etc bells and whistles into
-the current size.
+---
+base-commit: bcc7bc69b92ab728790aea0d08b2ae5e22d3b09d
+change-id: 20250716-gpt_offby1-882673120467
 
->  configs/sipeed_maix_bitm_defconfig      | 1 +
->  configs/sipeed_maix_smode_defconfig     | 1 +
->  configs/xilinx_mbv32_defconfig          | 1 +
->  configs/xilinx_mbv32_smode_defconfig    | 1 +
->  configs/xilinx_mbv64_defconfig          | 1 +
->  configs/xilinx_mbv64_smode_defconfig    | 1 +
->  8 files changed, 8 insertions(+)
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
---ol32EojhH75JRzJL
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaHd/6wAKCRB4tDGHoIJi
-0pogAQDUXUogDHJZ4sMh9XL24UQYyfeezy0i0oXuAYjZnrXZUgD9EJXRLL/dqPqN
-5eg9H+0yNqnU5Ti68rn3AV+HWoYpIAc=
-=hZjt
------END PGP SIGNATURE-----
-
---ol32EojhH75JRzJL--
