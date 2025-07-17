@@ -4,83 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA7DC83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 17:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3312CC83F34
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 17:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A1B083439;
-	Thu, 17 Jul 2025 19:17:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C1AA8346A;
+	Thu, 17 Jul 2025 19:20:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="CpcJQsfk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VANbqVDr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6158383448; Thu, 17 Jul 2025 19:17:50 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 932FE833FC
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 19:17:47 +0200 (CEST)
+ id 534BD8346A; Thu, 17 Jul 2025 19:20:34 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E1976833FC
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 19:20:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-61585dfc8f8so339870eaf.0
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 10:17:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1752772666; x=1753377466; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kNkIFtNUkZe5Vv5pFGp/Ji14EH9NC2HaNdefzsm1umA=;
- b=CpcJQsfkgZX0BDbxHnK4PrVkcIhoB8hVUJn81wCcHqt+IPa4rNkl+RBUI4ZzQ4lr9R
- SMflDpHbfUUq2NflAq4N3FF9oRIYZru3CLZQIeqQBDdBzeNRZCQkkOK2Xc4nm3lUIqiZ
- HeiiP1VK3sNM+bHSchhCU9nm8LxNJDSFiD9tH5uLr5vOiq3QCoEuZ4EQB+lXOM0blm8s
- KpYJPQ882U0lXAdD8YwOhuuWPCOSpWqUS3DzVCT00Rx2qzYY7f9WSZ3DMo5Q0umE+bU7
- hC6ca2mwr6D1bFCo1QE9ayfVm0jZcVowsODn450gDjIHINSYNh4dIwpLORVH2bwm4cLk
- AVwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752772666; x=1753377466;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kNkIFtNUkZe5Vv5pFGp/Ji14EH9NC2HaNdefzsm1umA=;
- b=m9OCzU1SMHQBSE/R608kPpraAx2ot7D4bygi5mWCkafT+ohZO3v0uvnIxYVi8ZJ+wH
- Ko/tHqx9TJ2uw6CmrBOc09UGtoNMjWxKMgN+ef92qsFKQ0GQjFgudiWUmDpftrMZlX+5
- rmRRpOSsK8+vudzOjx2HqbUxOnrE/Xt+8h+UHwmhOAYkEpMBPeoylCPKykQcOBif61Aw
- woL01k/qA7rCUyPLOGOze1vPwlLHNgMJMUF9mQSJpXM/SqEfRHEBgMk6uVwjsoNMGmnL
- ZOR23MaitBFCJuZP2udh1WRyFKMHEG2bBuv5EjPyl2L+rF030PZfJy9JiC3GEn0XpGVm
- 7E4w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXV8WROMnnMZX+i8ogIsDleKgQn3D+Na/nI0psygY8APFhDzRt92goti0pQ/lHzdMCpI5CFAy0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDHm5dT76a71TsopxFtK/0lfV8q9Es+NasDQ8fkacxGiIDvZES
- NRqkdX+h9saNhWmdcSNeqcLd0DY2K2WObGF1AlUbEe61m5cMPP73CtuUhXKnGop7VVCvc2oY2U1
- FTJ2GBZhJiaX5mvcqMq3GpV3H4vLPowyCz5Jpvju8tQ==
-X-Gm-Gg: ASbGnct4L/Dzqv/bCRypoJN58R1qunzkH/BYl2oDXQXY5U1MUmRFcvcpMEbS9irPkCx
- 8gyvBq1gLLVQmHfGATlNr0LFWfPYG8CqUZd6SlQIWCk/E+2nLcLVvYnpcRdVFylfkeOS6YMSNBK
- czNrW9+s8PapMguiKrjLrr/IIwD52r+Q/TqID/TV7UWzyntg+9pyXacFNoWym0EwCeLsZefVpfZ
- pRWjft8G70a05YUcg==
-X-Google-Smtp-Source: AGHT+IHWQR6ZA7GsS4gjvCrHpe9/rPHlGHtk0jekblo8BrLcQRUyEPdZRASceji2+u1k1Fv6bbZ6GTBV/lNIa9vQWfo=
-X-Received: by 2002:a05:6820:4dcb:b0:613:87ee:10e with SMTP id
- 006d021491bc7-6159ff061fbmr6079229eaf.5.1752772666103; Thu, 17 Jul 2025
- 10:17:46 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56HHKTl2520764;
+ Thu, 17 Jul 2025 12:20:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752772829;
+ bh=hgy+D3Kxgym2/PQeuilZOmQmGNXw9FQi4LayhtcOBEc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=VANbqVDrSa2X5TpbL7+STuFNZwn2B0sfB41HPrAnSpzovM4ycSMKn7GIR+dM1iKTM
+ N13UmuoRVB7fIarXqDsgfUV5+rBFRA2OhAq0kvUcC6rgYOhKuiIRbvROy/jDYrSkCT
+ 64SL87ZZdSg1KPCAtwgJzInipVBI3LejeYfzpB4Q=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56HHKTJv1789424
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 17 Jul 2025 12:20:29 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 17
+ Jul 2025 12:20:29 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 17 Jul 2025 12:20:29 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56HHKSfE2209784;
+ Thu, 17 Jul 2025 12:20:28 -0500
+Message-ID: <3d30853a-59eb-4907-8810-9daf49209eb6@ti.com>
+Date: Thu, 17 Jul 2025 12:20:28 -0500
 MIME-Version: 1.0
-References: <20250709153623.3038697-1-tharvey@gateworks.com>
-In-Reply-To: <20250709153623.3038697-1-tharvey@gateworks.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 17 Jul 2025 10:17:35 -0700
-X-Gm-Features: Ac12FXyStbw8zEYnRpQcte_z_6AvSaGdbAx4GV0kfqVI-HZcXFVrAQwHDkUFyco
-Message-ID: <CAJ+vNU2rgaNgS2naHK0nU_kkPpa3y6DYeQzFrJUUb6T7vJnxWQ@mail.gmail.com>
-Subject: Re: [v2 PATCH 1/2] usb: common: allow dr_mode to come from gpio-id
- based usb-connector
-To: Marek Vasut <marex@denx.de>
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- u-boot@lists.denx.de, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: k3: use SPL_TEXT_BASE for R5 SPL load address
+To: Bryan Brattlof <bb@ti.com>, Wadim Egorov <w.egorov@phytec.de>, Tom Rini
+ <trini@konsulko.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Garrett Giordano <ggiordano@phytec.com>
+CC: <u-boot@lists.denx.de>
+References: <20250717-dt-cleanup-v1-1-a911b0bb832b@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250717-dt-cleanup-v1-1-a911b0bb832b@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,161 +81,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 9, 2025 at 8:36=E2=80=AFAM Tim Harvey <tharvey@gateworks.com> w=
-rote:
->
-> If a usb host with dr_mode of "otg" has a usb-connector using a GPIO ID
-> pin use this to determine host vs peripheral.
->
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+On 7/17/25 7:13 AM, Bryan Brattlof wrote:
+> The load address for the R5's SPL is defined in Kconfig by
+> SPL_TEXT_BASE. Rather than hard coding the load address which could
+> lead to hard to debug issues if this value is changed, just use the
+> SPL_TEXT_BASE value.
+> 
+> Signed-off-by: Bryan Brattlof <bb@ti.com>
 > ---
-> v2
->  - do not display error if 'port' node not found
->  - change print to debug
+
+Seems resonable, but looks like you missed the same in J784s4 and
+J721s2, otherwise,
+
+Reviewed-by: Andrew Davis <afd@ti.com>
+
+>   arch/arm/dts/k3-am625-phycore-som-binman.dtsi      | 6 +++---
+>   arch/arm/dts/k3-am625-sk-binman.dtsi               | 6 +++---
+>   arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 6 +++---
+>   arch/arm/dts/k3-am62a-phycore-som-binman.dtsi      | 6 +++---
+>   arch/arm/dts/k3-am62a-sk-binman.dtsi               | 6 +++---
+>   arch/arm/dts/k3-am62p-sk-binman.dtsi               | 4 ++--
+>   arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi | 4 ++--
+>   arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi       | 4 ++--
+>   arch/arm/dts/k3-j722s-binman.dtsi                  | 4 ++--
+>   9 files changed, 23 insertions(+), 23 deletions(-)
+> 
+> diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> index 6deebdadf092aff27ddb4201e408f2aefe9a0f0f..a9bd5a2be84abf5645c540360b08f15260bca5d3 100644
+> --- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> +++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> @@ -25,7 +25,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>   			content-dm-data = <&combined_dm_cfg>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -69,7 +69,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -105,7 +105,7 @@
+>   			combined;
+>   			dm-data;
+>   			content-sbl = <&u_boot_spl_unsigned>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			content-sysfw = <&ti_fs_gp>;
+>   			load-sysfw = <0x40000>;
+>   			content-sysfw-data = <&combined_tifs_cfg_gp>;
+> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
+> index 6822a5dac896eb55de15d8c9eb38061f76ec6e51..f743c4353b49c882a87631610232e6d6de1300c4 100644
+> --- a/arch/arm/dts/k3-am625-sk-binman.dtsi
+> +++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
+> @@ -23,7 +23,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>   			content-dm-data = <&combined_dm_cfg>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -67,7 +67,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -103,7 +103,7 @@
+>   			combined;
+>   			dm-data;
+>   			content-sbl = <&u_boot_spl_unsigned>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			content-sysfw = <&ti_fs_gp>;
+>   			load-sysfw = <0x40000>;
+>   			content-sysfw-data = <&combined_tifs_cfg_gp>;
+> diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+> index bfbba28269cf3435944e2e25bf9c454af88046f4..65fef6e479070bb64cd1297d17b189c72892379f 100644
+> --- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+> +++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+> @@ -23,7 +23,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>   			content-dm-data = <&combined_dm_cfg>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -67,7 +67,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -103,7 +103,7 @@
+>   			combined;
+>   			dm-data;
+>   			content-sbl = <&u_boot_spl_unsigned>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			content-sysfw = <&ti_fs_gp>;
+>   			load-sysfw = <0x40000>;
+>   			content-sysfw-data = <&combined_tifs_cfg_gp>;
+> diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+> index fd3401015325cd34fd7e3592e1f5bc6cfec50b3a..9bcdf74ffe46368ddc6a872d02f26378aba763a9 100644
+> --- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+> +++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+> @@ -30,7 +30,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>   			content-dm-data = <&combined_dm_cfg>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -74,7 +74,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -110,7 +110,7 @@
+>   			combined;
+>   			dm-data;
+>   			content-sbl = <&u_boot_spl_unsigned>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			content-sysfw = <&ti_fs_gp>;
+>   			load-sysfw = <0x40000>;
+>   			content-sysfw-data = <&combined_tifs_cfg_gp>;
+> diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+> index 877a513a2418611b491963925440011cc1e319bf..0685bdd7e0c78087777e12cfa3d936c63f2fa597 100644
+> --- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
+> +++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+> @@ -27,7 +27,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>   			content-dm-data = <&combined_dm_cfg>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -71,7 +71,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c3a800>;
+> @@ -107,7 +107,7 @@
+>   			combined;
+>   			dm-data;
+>   			content-sbl = <&u_boot_spl_unsigned>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			content-sysfw = <&ti_fs_gp>;
+>   			load-sysfw = <0x40000>;
+>   			content-sysfw-data = <&combined_tifs_cfg_gp>;
+> diff --git a/arch/arm/dts/k3-am62p-sk-binman.dtsi b/arch/arm/dts/k3-am62p-sk-binman.dtsi
+> index d65e5c4d4e1e53f30040f32306d7b8c0159a3176..feb59edcd832ba535deac296ff82f3d9929050fe 100644
+> --- a/arch/arm/dts/k3-am62p-sk-binman.dtsi
+> +++ b/arch/arm/dts/k3-am62p-sk-binman.dtsi
+> @@ -25,7 +25,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c4a800>;
+> @@ -72,7 +72,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_hs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_hs>;
+>   			content-dm-data = <&combined_dm_cfg_hs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c4a800>;
+> diff --git a/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
+> index 13fac18d7aac6fd5d146bcd5b815282f8e53372d..b1591faaf0a52e9f18e95c85b9da18d43d8a8758 100644
+> --- a/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
+> +++ b/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
+> @@ -25,7 +25,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c4a800>;
+> @@ -74,7 +74,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_hs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_hs>;
+>   			content-dm-data = <&combined_dm_cfg_hs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c4a800>;
+> diff --git a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
+> index 2a0023fb7c313270ed6b4ccf967a2b59bf8e3d09..0e810e7f492dbb37cde89b6adc8b78098e0134e7 100644
+> --- a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
+> @@ -75,7 +75,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>   			content-dm-data = <&combined_dm_cfg>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c7a800>;
+> @@ -125,7 +125,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c7a800>;
+> diff --git a/arch/arm/dts/k3-j722s-binman.dtsi b/arch/arm/dts/k3-j722s-binman.dtsi
+> index 57e966ea666447118503e59ed0ddf40f471ae4c0..278b7bfac7fa0369f1227941d392a17ce71a1112 100644
+> --- a/arch/arm/dts/k3-j722s-binman.dtsi
+> +++ b/arch/arm/dts/k3-j722s-binman.dtsi
+> @@ -23,7 +23,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>   			content-dm-data = <&combined_dm_cfg>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c7a800>;
+> @@ -73,7 +73,7 @@
+>   			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>   			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>   			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+>   			load-sysfw = <0x40000>;
+>   			load-sysfw-data = <0x67000>;
+>   			load-dm-data = <0x43c7a800>;
+> 
 > ---
->  drivers/usb/common/common.c | 94 ++++++++++++++++++++++++++++++++++++-
->  1 file changed, 93 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/usb/common/common.c b/drivers/usb/common/common.c
-> index 13e9a61072a9..85865712bfcc 100644
-> --- a/drivers/usb/common/common.c
-> +++ b/drivers/usb/common/common.c
-> @@ -8,6 +8,7 @@
->
->  #include <dm.h>
->  #include <asm/global_data.h>
-> +#include <asm/gpio.h>
->  #include <linux/printk.h>
->  #include <linux/usb/otg.h>
->  #include <linux/usb/ch9.h>
-> @@ -22,6 +23,97 @@ static const char *const usb_dr_modes[] =3D {
->         [USB_DR_MODE_OTG]               =3D "otg",
->  };
->
-> +/**
-> + * get_remote_node_from_graph - Resolve the remote node from a graph bin=
-ding
-> + * @node: Starting ofnode (e.g., connector)
-> + * @port_id: Port unit address (e.g., 0 for port@0, or -1 for first port=
-)
-> + * @endpoint_id: Endpoint unit address (e.g., 0 for endpoint@0, or -1 fo=
-r first endpoint)
-> + * Return: ofnode of the remote node, or ofnode_null() on failure
-> + */
-> +static ofnode get_remote_node_from_graph(ofnode node, int port_id, int e=
-ndpoint_id)
-> +{
-> +       ofnode port_node, endpoint_node, remote_node;
-> +       u32 phandle_value;
-> +       char port_name[16];
-> +       char endpoint_name[16];
-> +
-> +       /* Validate the starting node */
-> +       if (!ofnode_valid(node)) {
-> +               debug("Invalid starting node\n");
-> +               return ofnode_null();
-> +       }
-> +
-> +       /* Construct port name (e.g., "port" or "port@0") */
-> +       if (port_id =3D=3D -1)
-> +               strcpy(port_name, "port");
-> +       else
-> +               snprintf(port_name, sizeof(port_name), "port@%d", port_id=
-);
-> +
-> +       /* look for a 'port' node */
-> +       port_node =3D ofnode_find_subnode(node, port_name);
-> +       if (!ofnode_valid(port_node))
-> +               return ofnode_null();
-> +
-> +       /* Construct endpoint name (e.g., "endpoint" or "endpoint@0") */
-> +       if (endpoint_id =3D=3D -1)
-> +               strcpy(endpoint_name, "endpoint");
-> +       else
-> +               snprintf(endpoint_name, sizeof(endpoint_name), "endpoint@=
-%d", endpoint_id);
-> +
-> +       /* Find the 'endpoint' node */
-> +       endpoint_node =3D ofnode_find_subnode(port_node, endpoint_name);
-> +       if (!ofnode_valid(endpoint_node)) {
-> +               printf("No '%s' node found under '%s'\n", endpoint_name, =
-port_name);
-> +               return ofnode_null();
-> +       }
-> +
-> +       /* Read the remote-endpoint phandle */
-> +       phandle_value =3D ofnode_read_u32_default(endpoint_node, "remote-=
-endpoint", 0);
-> +       if (phandle_value =3D=3D 0) {
-> +               printf("No valid 'remote-endpoint' phandle in '%s'\n", en=
-dpoint_name);
-> +               return ofnode_null();
-> +       }
-> +
-> +       /* Resolve the phandle to the remote node */
-> +       remote_node =3D ofnode_get_by_phandle(phandle_value);
-> +       if (!ofnode_valid(remote_node)) {
-> +               printf("Failed to resolve phandle %u\n", phandle_value);
-> +               return ofnode_null();
-> +       }
-> +
-> +       return remote_node;
-> +}
-> +
-> +static enum usb_dr_mode get_connector_drmode(ofnode node)
-> +{
-> +       struct gpio_desc id;
-> +       enum usb_dr_mode dr_mode =3D USB_DR_MODE_OTG;
-> +       ofnode conn;
-> +
-> +       /* get remote endpoint */
-> +       conn =3D get_remote_node_from_graph(node, -1, -1);
-> +       /* get port endpoint */
-> +       if (ofnode_valid(conn))
-> +               conn =3D ofnode_get_parent(conn);
-> +       /* get connector */
-> +       if (ofnode_valid(conn))
-> +               conn =3D ofnode_get_parent(conn);
-> +       if (ofnode_valid(conn) &&
-> +           ofnode_device_is_compatible(conn, "gpio-usb-b-connector") &&
-> +           !gpio_request_by_name_nodev(conn, "id-gpios", 0, &id, GPIOD_I=
-S_IN)) {
-> +               if (dm_gpio_get_value(&id))
-> +                       dr_mode =3D USB_DR_MODE_PERIPHERAL;
-> +               else
-> +                       dr_mode =3D USB_DR_MODE_HOST;
-> +               gpio_free_list_nodev(&id, 1);
-> +               pr_debug("%s got dr_mode from connector %s dr_mode=3D%s\n=
-", __func__,
-> +                        ofnode_get_name(node),
-> +                        dr_mode =3D=3D USB_DR_MODE_HOST ? "host" : "peri=
-pheral");
-> +       }
-> +
-> +       return dr_mode;
-> +}
-> +
->  enum usb_dr_mode usb_get_dr_mode(ofnode node)
->  {
->         const char *dr_mode;
-> @@ -35,7 +127,7 @@ enum usb_dr_mode usb_get_dr_mode(ofnode node)
->
->         for (i =3D 0; i < ARRAY_SIZE(usb_dr_modes); i++)
->                 if (!strcmp(dr_mode, usb_dr_modes[i]))
-> -                       return i;
-> +                       return (i =3D=3D USB_DR_MODE_OTG) ?  get_connecto=
-r_drmode(node) : i;
->
->         return USB_DR_MODE_UNKNOWN;
->  }
-> --
-> 2.25.1
->
-
-Hi Marek,
-
-Have you had a chance to review this yet?
-
-Best Regards,
-
-Tim
+> base-commit: 3b4604a40b9fd61b87e9d059fc56f04d36f1a380
+> change-id: 20250717-dt-cleanup-8892f5dbacf0
+> 
+> Best regards,
