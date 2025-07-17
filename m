@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73290C83F34
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 23:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D532C83F34
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 23:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA6E4834E4;
-	Fri, 18 Jul 2025 01:57:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B53683599;
+	Fri, 18 Jul 2025 01:57:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2DDF8353F; Fri, 18 Jul 2025 01:56:59 +0200 (CEST)
+ id C224283544; Fri, 18 Jul 2025 01:57:00 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7A365834BC
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 01:56:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id BE55583479
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 01:56:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 498421BB2;
- Thu, 17 Jul 2025 16:56:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A0A9F1BCA;
+ Thu, 17 Jul 2025 16:56:50 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B50F63F694;
- Thu, 17 Jul 2025 16:56:55 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 19CD33F694;
+ Thu, 17 Jul 2025 16:56:56 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: u-boot@lists.denx.de
 Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
  Mikhail Kalashnikov <iuncuim@gmail.com>, Yixun Lan <dlan@gentoo.org>,
  Paul Kocialkowski <paulk@sys-base.io>, linux-sunxi@lists.linux.dev,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 04/20] sunxi: clock: H6: add A523 CPU PLL support
-Date: Fri, 18 Jul 2025 00:54:39 +0100
-Message-ID: <20250717235455.32528-5-andre.przywara@arm.com>
+Subject: [PATCH v2 05/20] sunxi: spl: add support for Allwinner A523 watchdog
+Date: Fri, 18 Jul 2025 00:54:40 +0100
+Message-ID: <20250717235455.32528-6-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.3
 In-Reply-To: <20250717235455.32528-1-andre.przywara@arm.com>
 References: <20250717235455.32528-1-andre.przywara@arm.com>
@@ -57,149 +57,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Allwinner A523 features 8 CPU cores, organised in two clusters, both
-driven by separate PLLs. Also there is the DSU PLL, which clocks the
-hardware that connects the cores to the rest of the system.
-And while the PLL registers itself are very similar, they are located in
-a separate register frame, outside the main CCU, and also the register
-controlling the CPU clock source (mux) is different.
+The watchdog in the Allwinner A523 SoC differs a bit from the one in the
+previous SoCs: it lives in a separate register frame, so no longer
+inside some timer device, and it manages to shuffle around some
+registers a bit. But it also conveniently adds a direct reset
+functionality, so we don't need to use a dummy timeout period.
 
-Provide a separate function that reparents the two clusters and the DSU,
-while their PLLs are programmed. For the actual PLL programming, we rely
-on the existing shared routine.
-
-The selection between the new A523 routine and the existing code is made
-with C if statements, but since the choice is effectively made at compile
-time already, the compiler optimises away the other code paths, leaving
-just the one required function in.
+Avoid introducing a new MMIO register frame C struct, but just define
+the one needed register offset as a macro. Then just trigger this new
+direct reset functionality in the A523 specific reset_cpu()
+implementation.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- .../include/asm/arch-sunxi/clock_sun50i_h6.h  | 17 ++++++++
- .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  |  2 +
- arch/arm/mach-sunxi/clock_sun50i_h6.c         | 40 ++++++++++++++++++-
- 3 files changed, 58 insertions(+), 1 deletion(-)
+ arch/arm/include/asm/arch-sunxi/watchdog.h | 2 ++
+ arch/arm/mach-sunxi/board.c                | 6 ++++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-index 5d6519d2367..5881ab88573 100644
---- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-@@ -13,6 +13,7 @@
- #include <linux/bitops.h>
- #endif
+diff --git a/arch/arm/include/asm/arch-sunxi/watchdog.h b/arch/arm/include/asm/arch-sunxi/watchdog.h
+index 38e2ef2aca3..14a6e89ccfa 100644
+--- a/arch/arm/include/asm/arch-sunxi/watchdog.h
++++ b/arch/arm/include/asm/arch-sunxi/watchdog.h
+@@ -12,6 +12,8 @@
+ #define WDT_CTRL_RESTART	(0x1 << 0)
+ #define WDT_CTRL_KEY		(0x0a57 << 1)
  
-+/* Main CCU register offsets */
- #define CCU_H6_PLL1_CFG			0x000
- #define CCU_H6_PLL5_CFG			0x010
- #define CCU_H6_PLL6_CFG			0x020
-@@ -31,6 +32,14 @@
- #define CCU_H6_UART_GATE_RESET		0x90c
- #define CCU_H6_I2C_GATE_RESET		0x91c
- 
-+/* A523 CPU PLL offsets */
-+#define CPC_CPUA_PLL_CTRL		0x04
-+#define CPC_DSU_PLL_CTRL		0x08
-+#define CPC_CPUB_PLL_CTRL		0x0c
-+#define CPC_CPUA_CLK_REG		0x60
-+#define CPC_CPUB_CLK_REG		0x64
-+#define CPC_DSU_CLK_REG			0x6c
++#define WDT_SRST_REG		0x08
 +
- /* PLL bit fields */
- #define CCM_PLL_CTRL_EN			BIT(31)
- #define CCM_PLL_LDO_EN			BIT(30)
-@@ -42,6 +51,14 @@
- #define CCM_PLL1_CTRL_N_MASK		GENMASK(15, 8)
- #define CCM_PLL1_CTRL_N(n)		(((n) - 1) << 8)
- 
-+/* A523 CPU clock fields */
-+#define CPU_CLK_SRC_HOSC		(0 << 24)
-+#define CPU_CLK_SRC_CPUPLL		(3 << 24)
-+#define CPU_CLK_CTRL_P(p)		((p) << 16)
-+#define CPU_CLK_APB_DIV(n)		(((n) - 1) << 8)
-+#define CPU_CLK_PERI_DIV(m1)		(((m1) - 1) << 2)
-+#define CPU_CLK_AXI_DIV(m)		(((m) - 1) << 0)
-+
- /* pll5 bit field */
- #define CCM_PLL5_CTRL_N(n)		(((n) - 1) << 8)
- #define CCM_PLL5_CTRL_DIV1(div1)	((div1) << 0)
-diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-index 908a582ae0f..c04ddb3f1d4 100644
---- a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-+++ b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-@@ -30,6 +30,8 @@
- 
- #define SUNXI_CPUCFG_BASE		0x09010000
- 
-+#define SUNXI_CPU_PLL_CFG_BASE		0x08817000
-+
- #ifndef __ASSEMBLY__
- void sunxi_board_init(void);
- void sunxi_reset(void);
-diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-index 84064c4ed86..3a4399a9c6c 100644
---- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-@@ -6,6 +6,10 @@
- #include <asm/arch/prcm.h>
- #include <linux/delay.h>
- 
-+#ifndef SUNXI_CPU_PLL_CFG_BASE
-+#define SUNXI_CPU_PLL_CFG_BASE 0
-+#endif
-+
- #ifdef CONFIG_XPL_BUILD
- void clock_init_safe(void)
- {
-@@ -120,6 +124,37 @@ static void clock_set_pll(u32 *reg, unsigned int n)
+ #if defined(CONFIG_MACH_SUN4I) || \
+     defined(CONFIG_MACH_SUN5I) || \
+     defined(CONFIG_MACH_SUN7I) || \
+diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+index 08d55b3a0e3..13caefda884 100644
+--- a/arch/arm/mach-sunxi/board.c
++++ b/arch/arm/mach-sunxi/board.c
+@@ -502,6 +502,12 @@ void reset_cpu(void)
+ 		/* sun5i sometimes gets stuck without this */
+ 		writel(WDT_MODE_RESET_EN | WDT_MODE_EN, &wdog->mode);
  	}
- }
- 
-+/* Program the PLLs for both clusters plus the DSU. */
-+static void clock_a523_set_cpu_plls(unsigned int n_factor)
-+{
-+	void *const cpc = (void *)SUNXI_CPU_PLL_CFG_BASE;
-+	u32 val;
++#elif defined(CONFIG_MACH_SUN55I_A523)
++	static const void *wdog = (void *)SUNXI_TIMER_BASE;
 +
-+	val = CPU_CLK_SRC_HOSC | CPU_CLK_CTRL_P(0) |
-+	       CPU_CLK_APB_DIV(4) | CPU_CLK_PERI_DIV(2) |
-+	       CPU_CLK_AXI_DIV(2);
-+
-+	/* Switch CPU clock source to 24MHz HOSC while changing the PLL */
-+	writel(val, cpc + CPC_CPUA_CLK_REG);
-+	writel(val, cpc + CPC_CPUB_CLK_REG);
-+	udelay(20);
-+	writel(CPU_CLK_SRC_HOSC | CPU_CLK_CTRL_P(0),
-+	       cpc + CPC_DSU_CLK_REG);
-+	udelay(20);
-+
-+	clock_set_pll(cpc + CPC_CPUA_PLL_CTRL, n_factor);
-+	clock_set_pll(cpc + CPC_CPUB_PLL_CTRL, n_factor);
-+	clock_set_pll(cpc + CPC_DSU_PLL_CTRL, n_factor);
-+
-+	/* Switch CPU clock source to the CPU PLL */
-+	clrsetbits_le32(cpc + CPC_CPUA_CLK_REG, CPU_CLK_SRC_HOSC,
-+			CPU_CLK_SRC_CPUPLL);
-+	clrsetbits_le32(cpc + CPC_CPUB_CLK_REG, CPU_CLK_SRC_HOSC,
-+			CPU_CLK_SRC_CPUPLL);
-+	clrsetbits_le32(cpc + CPC_DSU_CLK_REG, CPU_CLK_SRC_HOSC,
-+			CPU_CLK_SRC_CPUPLL);
-+}
-+
- static void clock_h6_set_cpu_pll(unsigned int n_factor)
- {
- 	void *const ccm = (void *)SUNXI_CCM_BASE;
-@@ -148,7 +183,10 @@ void clock_set_pll1(unsigned int clk)
- 
- 	clk /= 24000000;
- 
--	clock_h6_set_cpu_pll(clk);
-+	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
-+		clock_a523_set_cpu_plls(clk);
-+	else
-+		clock_h6_set_cpu_pll(clk);
- }
- 
- int clock_twi_onoff(int port, int state)
++	writel(WDT_CTRL_KEY | WDT_CTRL_RESTART, wdog + WDT_SRST_REG);
++	while (1)
++		;
+ #elif defined(CONFIG_SUNXI_GEN_SUN6I) || defined(CONFIG_SUN50I_GEN_H6) || defined(CONFIG_SUNXI_GEN_NCAT2)
+ #if defined(CONFIG_MACH_SUN50I_H6)
+ 	/* WDOG is broken for some H6 rev. use the R_WDOG instead */
 -- 
 2.46.3
 
