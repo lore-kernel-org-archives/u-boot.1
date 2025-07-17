@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AE85C83F34
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 19:04:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBE7C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 21:27:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B67EE83496;
-	Thu, 17 Jul 2025 21:04:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05BE883438;
+	Thu, 17 Jul 2025 23:27:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RUCMMvBb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ivV7k38W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD53483510; Thu, 17 Jul 2025 21:04:16 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 9F9A083479; Thu, 17 Jul 2025 23:27:09 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF5F683390
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 21:04:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84244833FC
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 23:27:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-73e65c09828so699622a34.3
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 12:04:14 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-73e82d2ea1dso130042a34.2
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 14:27:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752779053; x=1753383853; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752787626; x=1753392426; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PX5sf+Dnh3wUlivCIEu6IyJ8JoJPs1wDC4pjch52uno=;
- b=RUCMMvBbeivS/IH3Z8TAHgVTo7ihIhps4jonpC6mNwNPXA2VbsLGPkRaUufTfLvKlI
- qNhPUAUv+thRGBx1VDZhsS6Y9ijN9YMnam1kaVQWYQ0aEXXxU4qgFhSGVaGEIBhAU6Hq
- I9ZN95IvInVPe8B/G4xwgqmSVqM0/RG8PDSH4=
+ bh=AvxW9AwRno0IK7fNCZROanOonsUTRlGnEFxV7ICk0JQ=;
+ b=ivV7k38WCrcAjOVN3W0zo9byOoCojWZHQqGNSu18zXMhgkq+gWLuw5I4K7S7UYSpkS
+ yPkLhkHmddVY7LAyXUFDaxRPl8uEZ0DE3TW/QrK3a2yv4HPIZCT5YDUwBancI/PBvdsw
+ qTNbFvZXv/lEurSt+8Q38pE3Vky+qoBj5IzZw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752779053; x=1753383853;
+ d=1e100.net; s=20230601; t=1752787626; x=1753392426;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PX5sf+Dnh3wUlivCIEu6IyJ8JoJPs1wDC4pjch52uno=;
- b=MtkjwvRC+1oMmSqIPKuM+7lpdHswf4f9ukg0zfcuX+qWtao51MLbbA9f//1wZwho3Z
- cce90aGHBKdQNn8+lhvYOBX7MDfn/ERgT3aNx6R+ENTi6eSd/NI6XoMqEJWZAUTtl5pN
- AYz7Wf6VrLlJq4EVH7FM2qRxdY6TgnF5QB1b7HA1CEI0DqvlegLVHJ6khagSLoNzVZ55
- /eSbmRkVkcfBFJZv8CKsqaJmLCWp6Kge2YP2ZPvsHLP7CtyBjF5QxTIKcgOj0BHro4cm
- ESo9zjcB+Ss8zSY/mdjNBpnUzOHBev6+hqy57erBAeXCdvfUv7XFiubqFG2xtiD77vzH
- y2cg==
-X-Gm-Message-State: AOJu0Yx29E9G+lA13uOcYQN8MeqtS9x5bUDOzYNZdN97vWoCVcD81quu
- EFgqbvw/5KghJ0o+L1Gq81/n+RP9V9tfhwbVsydXWHexNGQ1+n/v980IxEP3ZFB4OOw=
-X-Gm-Gg: ASbGncsZcEc4416FhmpoC5zPwXg65FfsFYspw4LP8d8CALb44tEkW1+SrC46Mvow4Lc
- IpWEyYz0P0vQRG8kyh6PTkOniTvIvd5Ibxr2CgiFR0IXCauPHTGZu9EErQqe9LmMUHOm1w+hdYl
- WqZnePM0nrDVdQQ3L196YvH/a6wcx2YvvTzvYkPgneZCQqseR7/tpWkaD9GnxdxiQxMNRx0s7eO
- lNbieaof0UzitWqicINkuCRVSgsNSfosgmb2rEc1qeSdJwvhijWpA12QXmAeL+GwuGWfgGTrD+V
- 2TVHHYFUMPqAXdBCo1pLbk4jqG3eEFbftSrWF4J8LnRuUxzZpzmHHKcNipWFjmdIS6MUNVJiw9d
- JtHJdjQBZZZwz5Wl8qZKLI8PFenU/jU6piyNpbOtEQ89reILUdQEcikZz5NbetEbd/uU=
-X-Google-Smtp-Source: AGHT+IEiorMhJ73y2hdzpjx7xEjeQlUDLKt9OUmuywxcajF+/7KGuE06THbtxnpvVG4PTHdE/dG9gA==
-X-Received: by 2002:a05:6830:8104:b0:73d:baa3:8326 with SMTP id
- 46e09a7af769-73e753435d7mr2347764a34.15.1752779053347; 
- Thu, 17 Jul 2025 12:04:13 -0700 (PDT)
+ bh=AvxW9AwRno0IK7fNCZROanOonsUTRlGnEFxV7ICk0JQ=;
+ b=ci2OmNUfJ9ZgPiS+B1icr5WtiG0KWfoIAygz3C27/O4dkDvAbn0yvnJ+aYuxvb+A7r
+ RpL5Gu2r4Ws8DKCGOfRtxT4BU3qQ6hSIKA2lNqHFfL3ZVUOrtVc1rO0dgZYeT9JKVm1M
+ lPlHR68IUSFUYraW9EeyXidogSQEIWJfiQr5eBDogiMvrudZtx4MqTFVTYzRNfq+Kj2D
+ Z60CxAlaw9/wYKPw/gBm9VBaqkHUGS8nseXethJkfFBZ/Ba996m4qK5yN9R5T6wmrJIt
+ m2RQupl+Oq3xWE4Act3twuHyl5LslVvZpQWWKZF6AJTdhDjC+iOM45nRqaU48glDR4iS
+ rNSQ==
+X-Gm-Message-State: AOJu0YyfYDgXoaDTTEAksGexAn09q1iTvUo3akR4haEf7V0cAaaujrbD
+ CiJ3othWDvsFY077py2/ldjKLYjyFxHcEg5doum1AIBh64QMxURaNYcaaokPmbJ8XDc=
+X-Gm-Gg: ASbGncuR8XcbZuBlBAai9X9q2grcQZqxaBqsHQCPDIpZBcXwscGc5M/mI+7dqc4jyyu
+ c8wnDjyi89drP91mVHM/mZp9FspynmR7A9FgOzvnGybwXmhgwDdhBZe/mE2PzHfHMuKQtDOeJvy
+ JnPF5Kiivo9bG5rqlLmjw5MoBlO2i/e0GKk8QUDVefbQOuPbzBzUl0PVtFDd55FBLlpXyeXOnH5
+ RfjCsr8DADDzLXNLzwnfDx0xpMhAnDN0B7LQNVIH0zw7y1X8LmkkwO73nssKpU6GdHTCxykxCNY
+ +fyeX8wpnW7Xk37EaXlKx6e/A58EDHyQbUMkLCN3t2Rv0RnY5mHTghEnt9muC6OAJPW29rWKVuY
+ EHvK+nE090NBbjVaqD9TUfSzB4Vh93HWeD3jMPU016ap4jaQf68Vr5js4
+X-Google-Smtp-Source: AGHT+IHgF3piIPVahJ2KH7AnTE8RfbusYjAElm1oHFgR4eS61HIKDWsAaDIM2JAO15Ub7P0BkwwvLw==
+X-Received: by 2002:a05:6830:6110:b0:73c:976b:6c93 with SMTP id
+ 46e09a7af769-73e661bfb32mr8903779a34.21.1752787626152; 
+ Thu, 17 Jul 2025 14:27:06 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e5ea71943sm2164677a34.50.2025.07.17.12.04.12
+ 46e09a7af769-73e83623107sm108140a34.18.2025.07.17.14.27.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 12:04:12 -0700 (PDT)
-Date: Thu, 17 Jul 2025 13:04:10 -0600
+ Thu, 17 Jul 2025 14:27:05 -0700 (PDT)
+Date: Thu, 17 Jul 2025 15:27:03 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] please pull mmc-2025-07-16
-Message-ID: <20250717190410.GR193579@bill-the-cat>
-References: <20250717041933.GA26574@nxa18884-linux>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sam Day <me@samcday.com>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH] sysreset: psci: Fix SPL dependency
+Message-ID: <20250717212703.GS193579@bill-the-cat>
+References: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+OnLaMRkZFUApfq5"
+ protocol="application/pgp-signature"; boundary="Rn8QS0Up35ISDrvt"
 Content-Disposition: inline
-In-Reply-To: <20250717041933.GA26574@nxa18884-linux>
+In-Reply-To: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,39 +98,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+OnLaMRkZFUApfq5
+--Rn8QS0Up35ISDrvt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 17, 2025 at 12:35:47PM +0800, Peng Fan wrote:
+On Thu, Jul 17, 2025 at 10:41:32AM +0200, Michal Simek wrote:
 
-> Hi Tom,
+> SYSRESET_PSCI should select SPL_ARM_PSCI_FW only when SPL_SYSRESET is
+> enabled/required. This change saves 1.6kB on Xilinx ZynqMP Kria platform.
 >=20
-> Please pull mmc-2025-07-16
->=20
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 
-Applied to u-boot/master, thanks!
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---+OnLaMRkZFUApfq5
+--Rn8QS0Up35ISDrvt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh5SSoACgkQFHw5/5Y0
-tyxpzgv8CmSrCOFMuHs+4fS+TVQQpxw42E1yEna9dcp/Ow5t95KZdsW4p3dHZF9G
-LG2ucm7UzW0eAMjTqw5jzQNkjjarYYOZBHLuh1gH72XiK7H8Q57PEwiEiaozbKDn
-mRBZ/FJxx4R/BnfKInZKp+eV2qvkWB2TBWYx5bgS4jTBJjoOzzV4CICJuSXOWHQ6
-58AhAHU2nOScsmD5dzKsSvc0HMm6UkwiqyBhxawDPE04jnHiYRpTZTbyPOEymx4K
-VnGMBQMbfC42rnN94i3zdgzv0tOH8TsJEvrYAxwCr+1qHuwYoci9N+0KIcl6H4nj
-6CRsua8n57ajyCXwFEmdTf4pN479HC7kQimltD/iYLBuYwbGkJeA/Q4USCtxRHK8
-YDt42TAfFAm8QnZnvkeDeM3Kn9vmY/nCPqGbigWpRksyoHiBVkJbEQOE1ksxcDpr
-tRpG2kKrZORZD4WXONPeDeFjMcu+tQ6h/RfKTTEFBc5bde4UHbbTocnTPwsxMSd4
-ouP4jqot
-=CZ57
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh5aqMACgkQFHw5/5Y0
+tyzyPgv8C1AExRSBv1qsXKfjPZZhmuaDx89Bour2zR5i309TT9wyDiQROsQ5ucyF
+WM5a/9MT8WpJAgTODPyggK9jmkcmVHJh6+3x+pCQ29/FNkBFhMCfXexN62CLpIi+
+IDo62Nfi6+2Yi6GgRyNoPNbrtHIi9O3JNtNFRhBldGsZG7+yClePUnAuU75QcF5d
+eNQPKlI9aTU7Y6tEJSIGhuS6sMGsCGIFVXItMAKS1hjmDdvYK3O+qvDojH8CGbey
+yV/nbzgu98nrJKokP8hP1/aCvDQ7PEUE1IIGZ1AQbMVAmtz2vgXEntKr8IgdKGsB
+F1h9Sk2uQ+OLirM5c9dhN/nwId5OHTx1FJiuLAnka32Ab53NRayAFF6PpcTyQit9
+gQexGMRUMXhpdsfnPW9OhZ59uhTj2Tkv3U4pspdXR8RyvNL9Up64t5k5ifAeho/Y
+vkr0EOv3jLixco4n0PD6OMiIwZ/KzgLwDgypc8BSI3RZdkHuzc3gQXGlml8jWjXs
+xuV+cI5c
+=8/tN
 -----END PGP SIGNATURE-----
 
---+OnLaMRkZFUApfq5--
+--Rn8QS0Up35ISDrvt--
