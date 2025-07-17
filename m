@@ -4,75 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EC1BC83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 07:00:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F024AC83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 07:03:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ED5B83394;
-	Thu, 17 Jul 2025 09:00:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E578833C6;
+	Thu, 17 Jul 2025 09:03:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XUeX4Tqt";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 265A08338D; Thu, 17 Jul 2025 08:03:31 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDE9C83314
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 08:03:27 +0200 (CEST)
+ id DD561833C7; Thu, 17 Jul 2025 09:03:11 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D07F833B3
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:03:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=g-praveen@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56H63MVA2667494;
- Thu, 17 Jul 2025 01:03:22 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1752732202;
- bh=i3Sz+64Xe7KDGH+23D8sF97WdunooGq6dUkJE2U9alw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=XUeX4Tqtzi2HGeTAyPZo9qpcUCTDxNB2Kxb9T4gdA4ImOodQnWHnPcyubbhOp5O1Q
- nqebHl4RHfYn70p13BBsQRBuUENhZ3b1TD93dPNXbkagdaSafHy5CatH8sHRGHV1Oo
- xo/Rg2msIaqeRh5L5wFRqNPc4OiiCF6Cn6W4jD0o=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56H63Mqa2581791
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 17 Jul 2025 01:03:22 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 17
- Jul 2025 01:03:22 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 17 Jul 2025 01:03:22 -0500
-Received: from [10.24.69.200]
- (a0507176-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.200])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56H63JRk1671780;
- Thu, 17 Jul 2025 01:03:19 -0500
-Message-ID: <b4fc5581-09f5-4969-aa34-738ef3a88842@ti.com>
-Date: Thu, 17 Jul 2025 11:33:18 +0530
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 56H72xEQ015452
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Thu, 17 Jul 2025 15:02:59 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Jul
+ 2025 15:02:59 +0800
+Date: Thu, 17 Jul 2025 15:02:56 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <rick@andestech.com>, <ycliang@andestech.com>, <u-boot@lists.denx.de>
+Subject: [PULL] u-boot-riscv/master
+Message-ID: <aHigIDCHNSqEt2e3@swlinux02>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] configs: KASLR OPTEE RNG support for K3 devices
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Bryan Brattlof <bb@ti.com>, <trini@konsulko.com>,
- <rayagonda.kokatanur@broadcom.com>, <casey.connolly@linaro.org>,
- <sjg@chromium.org>, <u-boot@lists.denx.de>, <j-keerthy@ti.com>,
- Gokul Praveen <g-praveen@ti.com>
-References: <20250710095922.144361-1-g-praveen@ti.com>
- <20250710141718.fx7cqeh2f2eibwkm@bryanbrattlof.com>
- <51e00bdb-374a-4e35-a230-58427aeaead7@ti.com>
- <20250711121741.jyo6gonfhoswbxvb@bryanbrattlof.com>
- <8b8a0e73-39e5-436e-8458-9bc511daa880@ti.com>
- <20250717041745.bcxjwlkg7y3yjojm@uda0497581-HP>
-Content-Language: en-US
-From: Gokul Praveen <g-praveen@ti.com>
-In-Reply-To: <20250717041745.bcxjwlkg7y3yjojm@uda0497581-HP>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Thu, 17 Jul 2025 09:00:07 +0200
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 56H72xEQ015452
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,82 +64,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you Manorit and Bryan.
+Hi Tom,
 
-On 17/07/25 09:47, Manorit Chawdhry wrote:
-> Hi Gokul,
-> 
-> On 18:17-20250716, Gokul Praveen wrote:
->> Hi Bryan,
->>
->> On 11/07/25 17:47, Bryan Brattlof wrote:
->>> On July 11, 2025 thus sayeth Gokul Praveen:
->>>> Hi Bryan,
->>>>
->>>> On 10/07/25 19:47, Bryan Brattlof wrote:
->>>>> On July 10, 2025 thus sayeth Gokul:
->>>>>> From: Gokul Praveen <g-praveen@ti.com>
->>>>>>
->>>>>> KASLR, or Kernel Address Space Layout Randomization, is a security
->>>>>> feature in the Linux kernel that randomizes the memory location
->>>>>> where the kernel is loaded during boot.
->>>>>>
->>>>>> OP-TEE RNG is a Random Number Generator (RNG) component within the
->>>>>> Open Portable Trusted Execution Environment (OP-TEE) which provides
->>>>>> a random number to U-BOOT and U-BOOT provides this random number
->>>>>> as seed value to the LINUX kernel for KASLR.
->>>>>>
->>>>>> Add KASLR OPTEE RNG support across K3 devices by enabling the required
->>>>>> configs.
->>>>>>
->>>>>> Signed-off-by: Gokul Praveen <g-praveen@ti.com>
->>>>>> ---
->>>>>> v2<==> v1
->>>>>> ===========
->>>>>> * Added 'if' condition for configs to avoid enabling this feature
->>>>>>      in R5.
->>>>>
->>>>> Works for me.
->>>>>
->>>>> Reviewed-by: Bryan Brattlof <bb@ti.com>
->>>>>
->>>>>>
->>>>>> Boot logs Link :
->>>>>>
->>>>>> https://gist.github.com/GokulPraveen2001/44aa8c0962438c12ffc55e6ed67742e5
->>>>>
->>>>> Just curious are you enabling the kaslrseed command for this build? It
->>>>> looks like you're using TI's evil vendor scripts but I assumed the
->>>>> kaslrseed command was disabled.
->>>>
->>>> Can you elaborate more on this,Bryan?
->>>>
->>>> Actually, we are not using the kaslrseed device tree property. Is that what
->>>> you meant,Bryan?
->>>
->>> Everything in this boot log is tagged as dirty. So I'm just trying to
->>> ensure I've got everything setup correctly.
->>>
->>> I was curious what you are doing to generate the line:
->>>
->>>      KASLR SEED OPTEE SET SUCCESSFULLY
->>>
->>> before we jump to the kernel.
->>
->> I have also updated the boot logs in the gist link provided to the one
->> without debug prints and without the dirty tag as well, Bryan.
->>
-> 
-> Thanks for the update, giving my r-by again as well as I think you did
-> some changes.
-> 
-> Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> 
-> Regards,
-> Manorit
-> 
->> Regards
->> Gokul
+The following changes since commit 3b4604a40b9fd61b87e9d059fc56f04d36f1a380:
 
-Regards
-Gokul
+  board: vexpress_ca9x4: Enable D-cache and MMU (2025-07-16 10:56:28 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+
+for you to fetch changes up to 18c6e8cd69f60b987292fb2ac00431de6e357c9b:
+
+  configs: th1520_lpi4a: Enable network support (2025-07-17 14:37:40 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/27087
+----------------------------------------------------------------
+- Board: mpfs_icicle: Fix board_fit_config_name_match and disable DEBUG_UART
+- Board: Add SD card support to the Beagle-V-Fire
+- Board: Add support for TH1520-integrated GMACs
+----------------------------------------------------------------
+Conor Dooley (2):
+      board: mpfs_icicle: fix board_fit_config_name_match()
+      configs: microchip_mpfs_icicle: disable DEBUG_UART
+
+Eoin Dickson (2):
+      gpio: add PolarFire SoC GPIO and Core GPIO driver
+      spi: coreqspi: add xfer function for PolarFire SoC
+
+Yao Zi (5):
+      clk: thead: th1520-ap: Correctly handle flags for dividers
+      riscv: cpu: th1520: Limit upper RAM boundary to 4 GiB
+      drivers: net: Add T-Head DWMAC glue layer
+      riscv: dts: th1520: Describe GMACs and enable them on Lichee Pi 4A
+      configs: th1520_lpi4a: Enable network support
+
+ MAINTAINERS                                 |   1 +
+ arch/riscv/cpu/th1520/dram.c                |  16 ++
+ arch/riscv/dts/th1520-lichee-module-4a.dtsi | 119 ++++++++++++
+ arch/riscv/dts/th1520.dtsi                  |  42 ++++
+ board/microchip/mpfs_icicle/mpfs_icicle.c   |  11 +-
+ configs/microchip_mpfs_icicle_defconfig     |   1 +
+ configs/th1520_lpi4a_defconfig              |   7 +-
+ drivers/clk/thead/clk-th1520-ap.c           |   4 +-
+ drivers/gpio/Kconfig                        |   5 +
+ drivers/gpio/Makefile                       |   1 +
+ drivers/gpio/mpfs_gpio.c                    | 198 +++++++++++++++++++
+ drivers/net/Kconfig                         |   8 +
+ drivers/net/Makefile                        |   1 +
+ drivers/net/dwmac_thead.c                   | 288 ++++++++++++++++++++++++++++
+ drivers/spi/microchip_coreqspi.c            | 113 ++++++++++-
+ 15 files changed, 810 insertions(+), 5 deletions(-)
+ create mode 100644 drivers/gpio/mpfs_gpio.c
+ create mode 100644 drivers/net/dwmac_thead.c
+
+ Best regards,
+ Leo
