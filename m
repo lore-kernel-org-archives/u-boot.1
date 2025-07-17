@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF7D6C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 13:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3482BC83F1B
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 13:24:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18B20833D7;
+	by phobos.denx.de (Postfix) with ESMTP id DFB76833F1;
 	Thu, 17 Jul 2025 15:24:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=northern.tech
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=northern.tech header.i=@northern.tech header.b="O7t5e+fb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k0Cw3JS3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A34E583390; Thu, 17 Jul 2025 11:27:45 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id B8DF1833C0; Thu, 17 Jul 2025 13:02:16 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFB538334A
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 11:27:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=northern.tech
+ by phobos.denx.de (Postfix) with ESMTPS id C476283242
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 13:02:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=josef.holzmayr@northern.tech
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-32b4dc9be5eso1005081fa.0
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 02:27:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-45629703011so6016435e9.0
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 04:02:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=northern.tech; s=google; t=1752744461; x=1753349261; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3cg8bSc+hxhTlhM9+VRGxLi+1Js+1ulsvEmPTd04aLM=;
- b=O7t5e+fbGuwd3Y/H6kiPfWY2ZEgAHd+UXBzSaO1JRGXsws3cg1+fF16pukx8T1OcBk
- geOZEt87iApS21Cc/6DOGwWiV9GEUp3OR/782i6vZyFafv6xXWiXT6Lq+lcm93w55/pU
- XnrqQxLKf2sjzncq/Ds2dFdePBjz+wgE2QXeWcLL6y7BACJ+4rfRwtvq7z8/ZmHdU/BJ
- AC4ThYZiOJk45+n1NTX9Fu7ug6KS3ToYO1mkr1/ubCHC9/xXYI7I46x6VDOqyPfspLVm
- qPhe9sI9FlLqv7YiRcv4/W7AJAzQ+ypNfdiL1hgLuEfVwD2+wdg0dw9oSKrUID0P4nTr
- C18g==
+ d=gmail.com; s=20230601; t=1752750134; x=1753354934; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ADSi54w2MgdvdPzq/dwFt0+54A+JA/UeoxLVEdV/VFg=;
+ b=k0Cw3JS3wmCU+GufByObrR43Z+naOB0N+5JEk4WVZ4fKDhJdqI4/Pt3nqL4bpANJ5z
+ DPJKebBvTqAvs7UL1+QGY24wbgjx56W3nRx9NZXC6SaPHmRTt5oL5kvtiW4lGJl4/aYw
+ +V8TCw1vmG2Wo43S1Mw+bh6iwxcOkcEE3+c5fWpI4L1aLpEbQHyZHZMWoXm97efrxz7Y
+ 65mz1It7p6RuX7JGmF1akG17QXUmx95tcRXUozD1UK7FBXIvGJtEN2AVN+iCcVJRsMQf
+ 9MRIRWakehqr+SfJg0JR9SwoJ7nZ5RV0lUQp5y8nSxUVlz9gar/u+0PnlbHxQPrzZKJB
+ qasg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752744461; x=1753349261;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1752750134; x=1753354934;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3cg8bSc+hxhTlhM9+VRGxLi+1Js+1ulsvEmPTd04aLM=;
- b=vp/gqC7Kfodpp+YJquezGDgSjbrA1XuAmiBdvqPbqGCRGNpTi9T1ohbti5vI2CrPcW
- WD/LxU0yXl8V0rztlxUJ7nd4EFngZbWtJY2dPmCfS0n0anOnwEg8AYyYdISVi8fEH3A2
- dWI0v8oYWXNJ8TrdctmHPcg8q2ZNydpSMxL118oyJc3gLVENPdCbu+ibAS1oKhzJpzCT
- 3pQm9zJ3M69oqFlp4qVVRoWgds/DQPMePj24vc2KpIOWeV8WrNIozjaM2N2eAQee9KYX
- JeGpEWUmoYDyuDqK13jdIxiuuw5XXTQ73vs92EmAjDYiM7CVL5q1taN6LraLsLDeYiUc
- S3RQ==
-X-Gm-Message-State: AOJu0YwolJ80bNzB04yu/dbiB+0edwc0MemroP3kAffVQ4UhgPnj0uMN
- 8GbTZJcXv8OIHSqjiJ/zZIjI3HVt6IHMc1jE6uXp76Xgk2EoIwiMkRxYz2u2GYlOkRZnmYZXjmO
- XdkorvBe+rM/EdmlT14zHksf6I5WEhaEjqccHD7+cfZ4SMp+8CcFv5v7XSHqsQTNp5AmAZp0RDO
- z8zEJFt1plIVQoKocltdoubW9cJKwHfs8p
-X-Gm-Gg: ASbGnctMDhkvQBbWcZ6e53pFYir6VdDe50juZju2dkijLI3QxPsLyKAwtys3+ZBPMPO
- aPwrTKHOgm3e+skIU5xixiKby//DJZfURGutpMjlilfKpf/e7qXTXMxO8gIkUO8/Ck5O5nZKphX
- p6ibvFRtzBsvI2pQ4tds6KGBN2BCOEd/HmuIUOKU9UPyssyyMGI/0ugtFkG+Fs/NcC1YuGgx++7
- ekP3Q==
-X-Google-Smtp-Source: AGHT+IHP0ehqMTs8WZS3KHKO6shf6d0FBF2d8McxTKcYxysEyRHvEKm5XgexIwkOPcDZgz+X3ZIklV3vT+ds84Omb6M=
-X-Received: by 2002:a05:6512:1450:20b0:553:50c9:c8a9 with SMTP id
- 2adb3069b0e04-55a233586a8mr503149e87.8.1752744461063; Thu, 17 Jul 2025
- 02:27:41 -0700 (PDT)
+ bh=ADSi54w2MgdvdPzq/dwFt0+54A+JA/UeoxLVEdV/VFg=;
+ b=q051EErC3P70n+5RuBfro7uoORwFsAZf/XcgJ5u2AYyRj/KNgeUwM69YrPHu7Pdzdd
+ JkXRVgLTO6o+UDC5r6z0M+iWj4fuKI6XrcFPzTaaLA/h29Mmx8nFr63l7iZN8tSvSjzh
+ P1q9lTs0FBBRfivkOX9WkBz4wnx1NyPwf5+JKVNqMsNr4puVf7aTknYFxuAQ7cy/LDsG
+ dmgnqYGkAHxdv09cSu8pNtp6chyuwSeKuRSJnvyZDGStTwYGW4Ec28mbly9ItY9bq/j0
+ xXzG87SnkIa7kAfNZX8xxyWCsC7+A3ECxJTIlaIYuP2eEjz5ZTJ1/oOw4dIqXU0vNFfe
+ KBfQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV2szm9eFQsWQE3a4a+kuM6FYqn4Y1tomhQzPd3vdnn+q71nnvBY2YWXE/BIkSUto+9IlH5/gQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRwR4KJ+9xW04u24LeHcoI8eMGpOs24S6Mj0BJt2ngC4ryz2gd
+ +LaNRJN4J9tt7ZRETDlodzYtY5ExpIoh4vpeb3Tp1clAfhCizZzX+mvb
+X-Gm-Gg: ASbGnctabw/dUETsDbvY9jhV10m89Tb6+z5WyrCMMeXKVr6qFoiUbd71NLoMO0niX+7
+ E4Tb1m01f2eZZomBs5K2hvVYEgZyY7fQGOfx2UCeUb1LZ2/4FX9WDqigVykYcaZkbXZQqbFrc5a
+ U7sh4rTDJf3IK8zJhtPNFo9RUA4oCzuOKSn4HGuKAWdQcFvGRhKoJu1jzwFWu/dP3X6ZNqiIsh/
+ PLCOoTg3wrBmFD7uXaIE7P4Npx8Q9Nd65iyrmLUZv2l8ZtGiFqbbTqI+vF9sr1WTi7/U0kjruQx
+ 0h5Jm8bOWcs0VAnmxh0qm3XH56o33L44XCymqsGX2PuHEWGjzZf96bf7qX6PJl893LtytzdrmD9
+ 2EclfXgt0d8QFXz/dOHFL19w52/vJMoL5+BvM
+X-Google-Smtp-Source: AGHT+IEKEm35R1bZ7h7p/UtGMJOV7MeSAplc/oO6qkwHSSCryMYZjan+BPxeIkZckfXrw6xd6FugPg==
+X-Received: by 2002:a05:6000:4b0c:b0:3a4:ed10:c14 with SMTP id
+ ffacd0b85a97d-3b60dd6a911mr5498978f8f.14.1752750133888; 
+ Thu, 17 Jul 2025 04:02:13 -0700 (PDT)
+Received: from vitor-nb (bl21-87-120.dsl.telepac.pt. [2.82.87.120])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45634f5ea01sm18689695e9.14.2025.07.17.04.02.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Jul 2025 04:02:13 -0700 (PDT)
+From: Vitor Soares <ivitro@gmail.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
+ ivitro@gmail.com
+Subject: [PATCH v1] toradex: tdx-cfg-block: add verdin i.mx8m mini 0216 pid4
+Date: Thu, 17 Jul 2025 12:02:08 +0100
+Message-ID: <20250717110210.443381-1-ivitro@gmail.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250712185227.17100-1-kettenis@openbsd.org>
- <175270411042.2648161.17574452616601901369.b4-ty@konsulko.com>
-In-Reply-To: <175270411042.2648161.17574452616601901369.b4-ty@konsulko.com>
-From: Josef Holzmayr <josef.holzmayr@northern.tech>
-Date: Thu, 17 Jul 2025 11:27:28 +0200
-X-Gm-Features: Ac12FXymk1mp9DXL7mcHYtnHPmEjDcL5SaAq3-hYSa7RnJ56midN8jGKxe15Fs0
-Message-ID: <CA+AKJpHxRGD6Bvdv8FmC4_mn94nUjU6N2X5wivyBRpzQ_x0Zvw@mail.gmail.com>
-Subject: Re: [PATCH] board: vexpress_ca9x4: Enable D-cache and MMU
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Mark Kettenis <kettenis@openbsd.org>,
- liviu.dudau@foss.arm.com
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 17 Jul 2025 15:24:12 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,44 +98,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Mark and Tom!
+From: Vitor Soares <vitor.soares@toradex.com>
 
-Just so I understand it correctly, this patch means that after the next
-u-boot release we can continue to use the  vexpress-ca9 emulation as long
-as we also make sure QEMU is current? If so, do you happen to know which
-minimum version would apply?
+Add PID4 0216 Verdin iMX8M Mini Quad 2GB WB IT to config block handling.
 
-Greetz,
-*Josef Holzmayr* (he/him)
-Developer Enablement Expert
-Mender <https://mender.io/> | GitHub
-<https://github.com/theyoctojester> | Mender
-Hub <https://hub.mender.io>
-<https://www.linkedin.com/company/northern.tech>
-<https://twitter.com/northerntechhq> <https://northern.tech> Northern.tech
-<https://northern.tech> | Securing the world's connected devices
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+---
+ board/toradex/common/tdx-cfg-block.c        | 1 +
+ board/toradex/common/tdx-cfg-block.h        | 1 +
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c | 3 ++-
+ 3 files changed, 4 insertions(+), 1 deletion(-)
 
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index a89c5bf2c19c..869656eee7a7 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -183,6 +183,7 @@ const struct toradex_som toradex_modules[] = {
+ 	{ AQUILA_AM69O_16GB_IT,                  "Aquila AM69 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ 	{ AQUILA_AM69O_8GB_WB_IT,                "Aquila AM69 Octa 8GB WB IT",           TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ 	{ AQUILA_AM69O_8GB_IT,                   "Aquila AM69 Octa 8GB IT",              TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
++	{ VERDIN_IMX8MMQ_WB_IT_64G,              "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)        },
+ };
+ 
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index db612811c5c5..d002b969bdfe 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -141,6 +141,7 @@ enum {
+ 	AQUILA_AM69O_16GB_IT,
+ 	AQUILA_AM69O_8GB_WB_IT,
+ 	AQUILA_AM69O_8GB_IT, /* 215 */
++	VERDIN_IMX8MMQ_WB_IT_64G,
+ };
+ 
+ enum {
+diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+index 066e8db678fb..cf4a0e37af3e 100644
+--- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
++++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+@@ -85,7 +85,8 @@ static void select_dt_from_module_version(void)
+ 		is_wifi = (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT) ||
+ 			  (tdx_hw_tag.prodid == VERDIN_IMX8MMDL_WIFI_BT_IT) ||
+ 			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT_NO_CAN) ||
+-			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_4G_WIFI_BT_ET);
++			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_4G_WIFI_BT_ET) ||
++			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WB_IT_64G);
+ 	}
+ 
+ 	switch (get_pcb_revision()) {
+-- 
+2.50.1
 
-On Thu, Jul 17, 2025 at 12:15=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
-
-> On Sat, 12 Jul 2025 20:52:27 +0200, Mark Kettenis wrote:
->
-> > Enable the D-cache, which will also enable the MMU.  The latter
-> > make sure we don't do unaligned access on Strongly-ordered memory,
-> > which has UNPREDICTABLE behaviour according the architecture
-> > definition.  This fixes using U-Boot with recent versions of
-> > QEMU's vexpress-ca9 emulation.
-> >
-> >
-> > [...]
->
-> Applied to u-boot/master, thanks!
->
-> [1/1] board: vexpress_ca9x4: Enable D-cache and MMU
->       commit: 3b4604a40b9fd61b87e9d059fc56f04d36f1a380
-> --
-> Tom
->
->
->
