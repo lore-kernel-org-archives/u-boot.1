@@ -4,87 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAA4C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 15:29:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41156C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 15:30:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADE8C833F9;
-	Thu, 17 Jul 2025 17:29:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 47FC98340C;
+	Thu, 17 Jul 2025 17:29:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gax/1OEC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wKABMh4e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77B728340C; Thu, 17 Jul 2025 17:29:25 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37C5D833EC
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 17:29:23 +0200 (CEST)
+ id 9DEA283423; Thu, 17 Jul 2025 17:29:56 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D3F25833EC
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 17:29:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4563a57f947so340815e9.1
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 08:29:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752766162; x=1753370962; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GIctG0veVBF1YHJtONbbLBlVcZVSDekaPK72xZ6pbUU=;
- b=Gax/1OECuyvvhFNvVm6olWuweH3GISymqcEDSHA4JVU2KBxXopuUDHhaaBz8NlTYbX
- wVbRhrJRS6CI1tqiyU8COumC5MQLl/kDRRc6NemnrDmtBo/Z6pvAp4J9YZdRN6yP0bRh
- u3O8ov6rDghZn1pJLhvFTd0wInqRhnHWTtAmKPDGirxRwd67SslKTGwNlK6JCNYvxnfl
- ugAwiEywLd6VsnNhgiiY8eS8w9iIS6pVnqtZuBksPnkXv5eiaS0vGd6l03GcwvG37zWe
- najjstVmv3U5WeBom6pfCb0+0XnVUcXnAnlR9+ngDTPcyhx3U3rPT4uKTYRdelRkORN5
- FLtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752766162; x=1753370962;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GIctG0veVBF1YHJtONbbLBlVcZVSDekaPK72xZ6pbUU=;
- b=wCx0wm8uqZX8yzamDrwDo5naXGeudCrWUYLxNx4WDvBr1SvL9CtodFRUBzg4LIAjG1
- O9kqDjYThLC7ed/2QWoMQoPCOQKV1L+RNnVSwfziOtV64tANZxd5tN9aXfvkSv+IhJ+x
- OKEXAlDALwCU1o++PBu4mpH9iKaL49Gn+M+0JNCPp2zNi56kf1zIfvAzhegF7TuNT6ny
- yqmW2p/AC8IGab6Epl+74I2WAm+9S6aIXaJ1SpdZohXnVgRFQI5l6yPcFTfSunUEzTiy
- 4zIUtzGSA8jRGAdfEOPwjJ6RV8waI3ErZxYB951F7faYVOGixUkKLwLT5GuL4VBKcYHL
- 7Htg==
-X-Gm-Message-State: AOJu0YxzMJqllrnwcRW9RaR1VLsFv2dznxws4pzFgr9F8N4VSt5p2Tlu
- VlWB8k0wAhRaCfw3MJuhcuAGO61jmGmn/U198O/Kj8fEoGY9mILKJV3D5Wfd21wmk66SXMCgt24
- A3ELv
-X-Gm-Gg: ASbGnctdNBp+G84xa+MnQKK7YxssjmnFuOx5eiToybLx6uJZbIGVBmzHFJbb3na5Hrj
- tmLKOa5zWFn7yWd0XpiMXlBJTM6H4fw4hx5EEGAIDf2VVqyIQ4taKZ3oZCSmymoxY0Yok+4J+Ym
- G78cv1/EjJQm3Wy7SP95A2hsmYX8lC/H+DWeeJ8L4wC7xAPNuJTtulbNtWUV2VBK6dmxoaHYDqr
- Q1Cie0jLZX/piQ1gr7V1oWmAb8EOO8ormVcb7TgrnRHJ7ghzeALAObIbjdv8MIdChC2AgKDQpMM
- 6CNfKgecYgHuSeXJ1PCHZEVgCvEa67Ie97D0M4xu7HeSwjTn1UkJZjW4D4SMaoa/IU0t4ph+bEI
- 7ueki8MpTZXS1aKSrIcRQfDa6kSIb8N8HHYEavTUQV0KSUAQKJ8w=
-X-Google-Smtp-Source: AGHT+IHZNXhawfdwHeATDlqliO9dTWB0OH5TOlN7C9h1qGd06Y7amZmCfzYmON/grE/uLQJt0PEtQA==
-X-Received: by 2002:a05:6000:2b02:b0:3a5:8977:e0f8 with SMTP id
- ffacd0b85a97d-3b613aca3e6mr2324996f8f.19.1752766162470; 
- Thu, 17 Jul 2025 08:29:22 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:eb9:1701:f497:a590:bf80:45c8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8dc3a62sm20890734f8f.40.2025.07.17.08.29.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 08:29:21 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 17 Jul 2025 16:29:21 +0100
-Subject: [PATCH v2] fs: exfat: Remove unused label code
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56HFTpkJ510049;
+ Thu, 17 Jul 2025 10:29:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752766191;
+ bh=7NxxEsPM2oZe5Jtjm/NjsuWvwmg+RdwxxRMXlECc9+U=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=wKABMh4eWqEWqD7ln97wzmHscwc7C4KiRqhDTwbTUHzxQ/zzVIe4ZL6dLS0lgIZX3
+ gOM/J93EbWUvgusPNNCEPdeVSsZNmC09VjGEZQbBQw+lDTw5vtCB5yFNhOqqOf8xiU
+ oZ8fLMgtEvjiEItZiyVHKuIVf+qIU3nAxPMK6rlQ=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56HFTpUS1732286
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 17 Jul 2025 10:29:51 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 17
+ Jul 2025 10:29:50 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 17 Jul 2025 10:29:50 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56HFTo8u2074934;
+ Thu, 17 Jul 2025 10:29:50 -0500
+Date: Thu, 17 Jul 2025 10:29:50 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Judith Mendez <jm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, Andrew Davis
+ <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] mach-k3: am62*: am62*_init: Prohibit boot from UDA w/
+ eMMC boot
+Message-ID: <20250717152950.n5bfcobot66stpz3@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250710171135.669838-1-jm@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250717-exfat_label-v2-1-b012eacca67c@linaro.org>
-X-B4-Tracking: v=1; b=H4sIANAWeWgC/22Nyw6CMBBFf4XM2hpaeagr/8MQM4UpTIKtmRKCI
- fy7hbXLc29OzgqRhCnCPVtBaObIwScwpwzaAX1PirvEYHJT5rWuFS0Op9eIlkZlXYEuLwjN7QL
- JsBhJWUHfDrvzxjiR7MdHyPFyZJ5N4oHjFOR7VGe9r/8Ds1ZakS6dubquaiv7GNmjhHOQHppt2
- 37OW/v/wAAAAA==
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Disposition: inline
+In-Reply-To: <20250710171135.669838-1-jm@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,60 +81,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reported a possible buffer overflow in exfat_set_label but it
-turns out that this code is unused so just guard the function with
-'#ifndef __UBOOT__' as well as exfat_get_label that is also unused and
-the helper static find_label.
+On July 10, 2025 thus sayeth Judith Mendez:
+> This removes support from booting from UDA when in eMMC boot.
+> 
+> When user selects eMMC boot [0], that is, boot from eMMC boot0 or
+> boot1 HW partitions, we should not boot from eMMC UDA. The current
+> logic confuses the end user and mixes two different boot modes.
+> 
+> The logic was added for AM62A/AM62P with commit: 3b7893145e36, but
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
-Changes in v2:
-- Instead of removing the code just guard it with #ifndef __UBOOT__ to
-  make future resyncs easier from upstream
-- Link to v1: https://lore.kernel.org/r/20250717-exfat_label-v1-1-e15f28fd6c6b@linaro.org
----
- fs/exfat/exfat.h | 2 ++
- fs/exfat/node.c  | 2 ++
- 2 files changed, 4 insertions(+)
+If we end up respinning this we should probably use the standard
+'commit: <sha> "(<msg>)"' syntax.
 
-diff --git a/fs/exfat/exfat.h b/fs/exfat/exfat.h
-index ca6f22b9d58..bd2965c3942 100644
---- a/fs/exfat/exfat.h
-+++ b/fs/exfat/exfat.h
-@@ -237,8 +237,10 @@ int exfat_rename(struct exfat* ef, const char* old_path, const char* new_path);
- void exfat_utimes(struct exfat_node* node, const struct timespec tv[2]);
- void exfat_update_atime(struct exfat_node* node);
- void exfat_update_mtime(struct exfat_node* node);
-+#ifndef __UBOOT__
- const char* exfat_get_label(struct exfat* ef);
- int exfat_set_label(struct exfat* ef, const char* label);
-+#endif /* __UBOOT__ */
- 
- int exfat_soil_super_block(const struct exfat* ef);
- int exfat_mount(struct exfat* ef, const char* spec, const char* options);
-diff --git a/fs/exfat/node.c b/fs/exfat/node.c
-index 88b1357189c..b7406fbf3ed 100644
---- a/fs/exfat/node.c
-+++ b/fs/exfat/node.c
-@@ -1188,6 +1188,7 @@ void exfat_update_mtime(struct exfat_node* node)
- 	node->is_dirty = true;
- }
- 
-+#ifndef __UBOOT__
- const char* exfat_get_label(struct exfat* ef)
- {
- 	return ef->label;
-@@ -1241,3 +1242,4 @@ int exfat_set_label(struct exfat* ef, const char* label)
- 	strcpy(ef->label, label);
- 	return 0;
- }
-+#endif /* __UBOOT__ */
+> this is not a clean solution and fix will come later for falcon boot.
+> 
+> Logic was also added for AM62X with commit: 664593464634, but this
+> logic is incorrect according to TRM [0] under Primary Boot Mode Selection
+> for 'eMMC Boot'.
+> 
+> Fixes: 3b7893145e36 ("mach-k3: add eMMC FS boot support for am62[ap]")
+> Fixes: 664593464634 ("arm: mach-k3: am625: Relax emmc boot condition")
+> Signed-off-by: Judith Mendez <jm@ti.com>
+> ---
+>  arch/arm/mach-k3/am62ax/am62a7_init.c | 4 ----
+>  arch/arm/mach-k3/am62px/am62p5_init.c | 4 ----
+>  arch/arm/mach-k3/am62x/am625_init.c   | 4 ----
+>  3 files changed, 12 deletions(-)
+> 
+> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+> index edd43a1d78d..1d8644bd073 100644
+> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
+> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+> @@ -217,10 +217,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>  
+>  	switch (bootmode) {
+>  	case BOOT_DEVICE_EMMC:
+> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
+> -			return MMCSD_MODE_EMMCBOOT;
+> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+> -			return MMCSD_MODE_FS;
 
----
-base-commit: 3b4604a40b9fd61b87e9d059fc56f04d36f1a380
-change-id: 20250717-exfat_label-bf4af04ea293
+If we're booting from what ROM calls eMMC boot, which ROM has the 
+limitation where we can only boot from MMC0 in 8bit 1v8 and in RAW mode. 
+So I see the need to soften this requirement.
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+>  		return MMCSD_MODE_EMMCBOOT;
+>  	case BOOT_DEVICE_MMC:
 
+But it also has what they call MMC/SD mode which gives us the option of 
+booting from both MMC0 and MMC1 and in RAW or FS mode by setting the 
+PORT and RAW pins which we can read in the WKUP_CTRL_MMR0. And can give 
+us the same configuration as the previous boot mode.
+
+I agree if we know the next phases of boot won't fit in the boot 
+partition we should be using this bootmode.
+
+But I know this takes away some functionality after people have already 
+had their boards made and who cannot realistically change their bootmode 
+pins. I wonder if we should mark this as __weak so people can override 
+this in the board/ directory if needed?
+
+~Bryan
