@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE732C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC3AC83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:30:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F24E83440;
-	Thu, 17 Jul 2025 18:30:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B06DB83444;
+	Thu, 17 Jul 2025 18:30:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F+SuSD6g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B23E7K+6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33B2D83444; Thu, 17 Jul 2025 18:30:13 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 4D69A83447; Thu, 17 Jul 2025 18:30:51 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 424078343B
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:30:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 655F58343B
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:30:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-32f1df5b089so11443691fa.3
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:30:11 -0700 (PDT)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-32b2f5d91c8so9127061fa.0
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:30:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752769810; x=1753374610; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1752769848; x=1753374648; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=swAD3jn+qqKGqW79PE7LPIghBjbPSjGJsBUQIl38uLY=;
- b=F+SuSD6gXWpln/hZVjP5PDWdKyLSvkupXdCgRocg0ROCKOmXqmInM3yt1hlwAgkzG7
- 6AZf0WW6A41FHzwIeF+/uF+tWsBPE7dbsj/dYIx7HKzFYXUTtq6L3xREbWeIyL+uAVvw
- 47OsKoa5evdTX8PRsKAs0V1XUpSPUvcj4SIxENblapUZoMwxF2PIlloEREPLk6G81F9K
- FnK5IPyIBw7FJdeJA4A0newi/dhEciY7/uBherTi7NLFFujh0QUJRSki9wyDKGqSvZjy
- wdfHHeFF6xvgNBRDkav+SUm8BMx0JeweNNQKang8+ztA8aOUtGsaP4VbRjGZ1M0x3HbZ
- fytg==
+ bh=eqTY/hgnUOGw5r/5MMNQ9zxLh09jKm/h4RTZnzclTLk=;
+ b=B23E7K+6+PNnXQ24OBeCa0Pyy1WR9vcDRUb5diOma6YcvFfM/BHX2G/fsXC+qdTOB9
+ sg2/vYVr2ncWkEwOlfNv59W6TQNXqBVZFhOJTKUbNEkPswlJKYsvmo/4IvgGnTWgWBsF
+ 2kRKdVHq7XXYQkJoJ8x6kWLjTTGJIjEdxCplGZS9GrEmkd1c4izTh3wjWKiZZy9Lw8sZ
+ 8XSLyEXwkASWA7XW6dYnbp8sbIHD1iKt/TS5XUx6BcE/0nEr19ixGcfAiSwuRGBEuTjj
+ 0Kf6HC+tlFrVY77JeSo6COxG12uUwzkFSAm052gFlDQq9hA7Mi7LC5hH+uAzx2msQE2+
+ nVyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752769810; x=1753374610;
+ d=1e100.net; s=20230601; t=1752769848; x=1753374648;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=swAD3jn+qqKGqW79PE7LPIghBjbPSjGJsBUQIl38uLY=;
- b=bqXU7a2bFZTkc05gjJswmfCwa54yS6Gcl2vsmijMEjhCi4zfjWCFGzjT+OzjLzPkmN
- GLEFxaEVaqb6fPiahWO/E0IiqdBNFHjRfUSLSCvVhhV1I9KieOathbaaSUtG1HWqDFIR
- 9ucvrNv1iCamAjMpch0bftfZH2PIFbgr9+CrnRLlOAX/OP846VhyRih5e0s69/KbbvYu
- TgKXBL0KuXe5PsqeSmT74tWhwpOlk3OOMKletCiAcf7SrRGWZzyIUlfWeApx7KlfbnC8
- RyFpvPYvyODfRNuhk0DhIunr7LgMNFNwOezBTgkzOz9Ne95IgXcwEZlvwtQtOXQG1rgH
- kZTw==
+ bh=eqTY/hgnUOGw5r/5MMNQ9zxLh09jKm/h4RTZnzclTLk=;
+ b=EchC9u6YdouWDTqvF0xQhaqpKokHkCUYLAxR8Fx6CpdOruw8YZU2Sl3OxLNXle50es
+ P4jGbFV6Bu01F8iQJqiN8LHrgoS0IzQIEWeGF5HWvTvisvrX1NTP+x2w/2EUEX26mgkF
+ oYeRcY1P3v/eeOLjXFjgRsuf9Sy4KIeEbOQGeTnrziHK+yycOKauzXg9HyAISiHmtDbG
+ FO0/YFxbAHY+xE7PJIWmAg61mRXJ9ot0dq0LtcOKVRL3j6omMyW7k/FsWLRB4uHEuKMi
+ bvmvWk23QNRhwVIcG6WDUjPdROw5aExMgopDEARorVHF4KQdoQDe55mcx2v3Dzm40i9j
+ FZOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUK749lRlJiDYRORV6fvFg6uUCvp4xypbtG4kVSIvWCx2XLvNqAvhP/qo/IV/WGrvPuejUCpg0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRAT4Q6iCCoVxc+2jZMRB2G1DYTucAVaHbYYmcPsMd1g6w2ztj
- LzSPHovzGhix2VH6wC0P+3xt0rQhdTwkvpGpYmErX+4m5rF2U+Vi3PfxEQOyo+AM6cwiNwEQx6v
- smyxKkbthPKtgIeqagNJG8jjnULh/tE0mkQ==
-X-Gm-Gg: ASbGnctqAJ1miA8S7S+cIROEheh6AgR+XgAWOH6YkZDIMC63RWYpSWKglnLjvapQceo
- 2lY6NpqZ3Swv5c7r9vnqV5bJRER/S+VnAQzi3NPzP+lJ8hGuJhkCLr4AH4hlbZFXL2yJB+9frd7
- dXYbOti+0B0mYkCveApkwMik9yDaUDGINWAzyO4oLBa77v2JVd0sHwwF6F6IaoW42xcpkO+a/9u
- R7cPvKGIExA3YbCaYun6Cng2AAeWqY4KUxN
-X-Google-Smtp-Source: AGHT+IESaz19Y9qYrAucj4S0krUSj5yLYCZB/uRksZjrkH6wawrhNPIpiG7uKk8n0HAVzLTqQEVzTuVF9UTVoikgRJY=
-X-Received: by 2002:a05:651c:4190:b0:32c:a097:41bc with SMTP id
- 38308e7fff4ca-3308e38b29bmr22951431fa.10.1752769810039; Thu, 17 Jul 2025
- 09:30:10 -0700 (PDT)
+ AJvYcCWGVfI0Sjg+FFJlzJ4qfjM/L8x+wNWdpZoLIpx3G0BL+RhAtz4oIJ7S3UgkXIOz8O/yNCDtqUc=@lists.denx.de
+X-Gm-Message-State: AOJu0YznxrNiH3czpOIkb8TxUo5QSXl28L9bKTjw0Aea58A9cMLCOGz5
+ l2xFi5La7/ZhANax07fEmEHpHnEkkZtw2MbkfLU44IHW+TRy4Lw0BJbtxxmVxbfpPQ6IjdZiNIA
+ +K7Ixasa1QIKvfFnWfYGubY88MLvetUg=
+X-Gm-Gg: ASbGncvAB3lc6c5mLYqCqN0Kn/RnJ3QOsAYeinN2eKxsHJG6wPYjGB+ceCDKgVU/BY7
+ iVG6Am5Udan1u71aNZYYvNkrV+9zZqRPx/VQAV/nVbO9h4qK1sphdc8WS11ZYCMTSZMpgzqyz2y
+ AKrtkUuVS3kNvYpB9/Nu6vw76covm7F/qmraGtsfOJF18U0iWFnTpQ4QJHuy6FZ4cvhSkItr1m0
+ hdVFu8KLWHOlZcZlhQ+MnSmPbYk7x7Sdek2
+X-Google-Smtp-Source: AGHT+IEpmMLV/kXFH87hPfS5+KCGEyWTb+DiuNohfm77eAy+F72BSYAiWSwL2SVh4/UzEk+sKHlyYl+lr6zZ6HIEYIY=
+X-Received: by 2002:a05:651c:1505:b0:32a:88ca:ec18 with SMTP id
+ 38308e7fff4ca-3308f4baed3mr21347401fa.10.1752769848163; Thu, 17 Jul 2025
+ 09:30:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250708-imx95b0-v1-0-01759e9c855f@oss.nxp.com>
-In-Reply-To: <20250708-imx95b0-v1-0-01759e9c855f@oss.nxp.com>
+References: <20250710081717.435585-1-l.anderweit@phytec.de>
+In-Reply-To: <20250710081717.435585-1-l.anderweit@phytec.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 17 Jul 2025 13:29:58 -0300
-X-Gm-Features: Ac12FXwGkfM_RgGkoBTa5V6CFFBPh8oqe95_kVWf80L9tWV47v8QU2dN-KP4FCY
-Message-ID: <CAOMZO5A3hx_1uEDnwrtix4mkb_3WmniFKUOCXO-=XwSCcpOzEA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] imx: add i.MX95 b0 support
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Alice Guo <alice.guo@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Jacky Bai <ping.bai@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
+Date: Thu, 17 Jul 2025 13:30:36 -0300
+X-Gm-Features: Ac12FXzBOmHfkl7TRK7RlcNV8rFA1o01CQ4NopI7ft_oPGwkQ8sFG0a_yE_H5pw
+Message-ID: <CAOMZO5DsWCDGeUPTN_d=8ZbYJCL1=qjMsyEsvnRwxwdUF7=qCg@mail.gmail.com>
+Subject: Re: [PATCH] phycore-imx8mp: Enable standard boot
+To: Leonard Anderweit <l.anderweit@phytec.de>
+Cc: Teresa Remmet <t.remmet@phytec.de>, Tom Rini <trini@konsulko.com>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, Yashwanth Varakala <y.varakala@phytec.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Yannic Moog <y.moog@phytec.de>, 
+ upstream@lists.phytec.de, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,18 +97,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 15, 2025 at 3:40=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
-com> wrote:
+On Thu, Jul 10, 2025 at 5:17=E2=80=AFAM Leonard Anderweit <l.anderweit@phyt=
+ec.de> wrote:
 >
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> ---
-> Alice Guo (2):
->       tools: imx8image: Add 2 new commands CMD_CNTR_VERSION and CMD_DUMMY=
-_DDR
->       imx95_evk: Add i.MX95 B0 support
+> Enable standard boot for the phycore-imx8mp and use it as default. Add
+> all variables required for standard boot to the environment.
 >
-> Ye Li (2):
->       arm: imx: Update ELE get_info structure for i.MX94
->       spl: imx: Add support for new PQC container
+> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
+> Tested-by: Martin Schwan <m.schwan@phytec.de>
 
-Applied all, thanks.
+Applied, thanks.
