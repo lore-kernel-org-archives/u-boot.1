@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A11C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 05:39:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E18C3C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 05:39:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 168248329B;
-	Thu, 17 Jul 2025 07:39:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7381B832DA;
+	Thu, 17 Jul 2025 07:39:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52BF4832BC; Thu, 17 Jul 2025 07:39:00 +0200 (CEST)
+ id 702AD832BC; Thu, 17 Jul 2025 07:39:48 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF62B831E1
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:38:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CE4B832DA
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:39:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 56H5clLb065820
+ by Atcsqr.andestech.com with ESMTPS id 56H5dZbo066058
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 17 Jul 2025 13:38:47 +0800 (+08)
+ Thu, 17 Jul 2025 13:39:35 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Jul
- 2025 13:38:46 +0800
-Date: Thu, 17 Jul 2025 13:38:43 +0800
+ 2025 13:39:35 +0800
+Date: Thu, 17 Jul 2025 13:39:32 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Eoin Dickson <Eoin.Dickson@microchip.com>
 CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <Conor.Dooley@microchip.com>,
  <Jamie.Gibbons@microchip.com>, <Praveen.Kumar@microchip.com>,
  <Cyril.Jean@microchip.com>, <jagan@amarulasolutions.com>
-Subject: Re: [PATCH v3 1/2] gpio: add PolarFire SoC GPIO and Core GPIO driver
-Message-ID: <aHiMY22VV6ib7JzI@swlinux02>
+Subject: Re: [PATCH v3 2/2] spi: coreqspi: add xfer function for PolarFire SoC
+Message-ID: <aHiMlONE13-mwkMs@swlinux02>
 References: <20250708130121.1769247-1-Eoin.Dickson@microchip.com>
- <20250708130121.1769247-2-Eoin.Dickson@microchip.com>
+ <20250708130121.1769247-3-Eoin.Dickson@microchip.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250708130121.1769247-2-Eoin.Dickson@microchip.com>
+In-Reply-To: <20250708130121.1769247-3-Eoin.Dickson@microchip.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 56H5clLb065820
+X-MAIL: Atcsqr.andestech.com 56H5dZbo066058
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,18 +69,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 08, 2025 at 06:31:20PM +0530, Eoin Dickson wrote:
+On Tue, Jul 08, 2025 at 06:31:21PM +0530, Eoin Dickson wrote:
 > From: Eoin Dickson <eoin.dickson@microchip.com>
 > 
-> This driver adds GPIO support for PolarFire SoC family, this is required
-> to add sd card support on the Beagle-V-Fire as it uses GPIO chip selects
+> Add xfer function to PolarFire SoC coreqspi driver. The read and write
+> operations are limited to one byte at a time instead of four as CMD18
+> (multiple block read) reads garbage when four byte ops are enabled.
 > 
 > Signed-off-by: Eoin Dickson <eoin.dickson@microchip.com>
 > ---
->  drivers/gpio/Kconfig     |   5 +
->  drivers/gpio/Makefile    |   1 +
->  drivers/gpio/mpfs_gpio.c | 198 +++++++++++++++++++++++++++++++++++++++
->  3 files changed, 204 insertions(+)
->  create mode 100644 drivers/gpio/mpfs_gpio.c
+>  drivers/spi/microchip_coreqspi.c | 113 ++++++++++++++++++++++++++++++-
+>  1 file changed, 111 insertions(+), 2 deletions(-)
 
 Acked-by: Leo Yu-Chi Liang <ycliang@andestech.com>
