@@ -4,66 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B65DEC83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 06:09:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3F50C83F1B
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 06:26:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35DEC83327;
-	Thu, 17 Jul 2025 08:09:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2F985832EA;
+	Thu, 17 Jul 2025 08:26:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1752732591;
-	bh=41KK3LY7IrRN5Oa+iwdgg6zy2VZMclV44s4AIfuD6iY=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=YSBbx689xnPFvGfYmoHC6a849l6wbSu5epLfeKkns7Og9mTkWgMJDcauoypZvU8Hj
-	 QqjfcN2DyS8OVY+G4L85XNajN2qx0C9ldyvxF7KUUTsUN+9Bw08DlDo+GKT5bQ2ja6
-	 eY2F0lZf2v7Zb0ppGZsmhl2MBoOyL3cbSCtZFK9s5vQA8/44uQ+UlaGL60WYXmcKXp
-	 hnRT4YENMUIK2IjjL+7w54Uy17dIRWh56xIUoyzSVmghhEPC7xTCZ6rYlSl6uubs2l
-	 OPMbF5yZVHfJYkd8pz6XBbLjUvDYayoy73XqtkVXIoPdO73rDHYG3qmqu+9p322y3Y
-	 4/1Y8mo1urLCw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B788083381; Thu, 17 Jul 2025 08:09:49 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72836832EA
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 08:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="ZEbICIvp"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id EF08210397286; 
- Thu, 17 Jul 2025 08:09:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1752732586;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language;
- bh=41KK3LY7IrRN5Oa+iwdgg6zy2VZMclV44s4AIfuD6iY=;
- b=ZEbICIvpabdSwx9wmK1HVIRK9eV7D5Xwh7fLxryGmHTpJ55023J01kfuaLgnDH7YyrVSo9
- kovYI3LQs04amIX0e0nSA+txbQ4rf4LTf3AsxMqX6Lun43sNPzO8h51Qbz1z8BwwhXGHaG
- oGudgs4iizDfQWthuthRV0CHEkIC1nnCMHW3Im5lX5Bqzd3ZbCFTHVSR8UqBmztm0l59I5
- ZjX+61vJlLBiuS1kYUR6diovC5N1m0EDPgMDzSfLvdZzZ7lvaMlwM4LMyDJEwdKvaQ1r62
- NFYNAzL79ARZxyKoctU56genNyurKsViDdULDA/erhFKdMisCcXOBCJN7lPp6g==
-Message-ID: <06c2b16e-1e3d-7632-70be-d6df4232ff71@denx.de>
-Date: Thu, 17 Jul 2025 08:10:17 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="GDBVWirz";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CC7A48331D; Thu, 17 Jul 2025 08:26:32 +0200 (CEST)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2406::61e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 852A0832E6
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 08:26:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CfqfB1v+sn0olbYn+BGvnRGQASFNpUr+bnznIAM5GhadNp7aAVi8cTlOnpeQG+jCmbsDMPUJCB/lw/DepDTcmzV9VCKRWwoPL8cweMvEnK8D/ucU2BCyA+wePYhw66fnO7H/6GcqDWkt5NoVsKvb8HuL6DC9MUf/Jo8W7OdgsDoxbWy1nHRdwBNff8gglDYCYDPb2okLXvnxoY+vRnlXIlnr24yIXuHuILooYZzgAIFapD562cmixR+laOk6nZT0H2ESNtnWJC4g5d7IeTzeZAiPJKDbChJqyesWtXNqYz64beRoRsdfR6rvdJYRf9UhV+8zTJtdyGT9jPCQpNr7YA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=J1yBCguQBwWCgaGxDJ/vRx7fUBDfWQ17ch9fwJAtO4o=;
+ b=EUM1Sy51OlsGKP2skRa/y5N3qHiHQyV86s/VDDgSO1FBsnr6pk+D9h80rdidYTl1/pxuhGxNP6LIoraQ2ybUn3uX35PEb1tyAaS1HbAvGxoEIWVyHKceMruayGvmM/kOpQ8PgthlpvMeJMXaBNOf+HfS30S0vTgJrxVIxFve/wMKT8U/bNHqekZY1SsoIGCemmN+IRADqR73TAnasI4BwZAbM9FQeTw10UaoNId3yEB5uxSBmi1VKd38pXUP5f4fEMrrvhIIAiML+v8qmy51d2UdinEmt+/wdJ4ghqmONzDb0AiEtV6Pk8zOnU74ZSskEDUSm00s0oly+4A8Rg0Vew==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=J1yBCguQBwWCgaGxDJ/vRx7fUBDfWQ17ch9fwJAtO4o=;
+ b=GDBVWirzFLhB8Zec5IsQlWUhBks3sgRK6cw9TSvj02bC3yyjGDGh/EUB6ps4GHFmDuNJi8XrdDW6vD5T1Ji+MH0D3B49jCcJ69SS6JzLjEZZKxsxj6O9TF3JAgGT47YGT0d0+AzXKIyAFZHlEzVrEyGcIcvYzIqKuGNEk7QRCO0=
+Received: from SJ0PR13CA0176.namprd13.prod.outlook.com (2603:10b6:a03:2c7::31)
+ by MN2PR12MB4359.namprd12.prod.outlook.com (2603:10b6:208:265::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.39; Thu, 17 Jul
+ 2025 06:26:26 +0000
+Received: from SJ1PEPF0000231E.namprd03.prod.outlook.com
+ (2603:10b6:a03:2c7:cafe::60) by SJ0PR13CA0176.outlook.office365.com
+ (2603:10b6:a03:2c7::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.17 via Frontend Transport; Thu,
+ 17 Jul 2025 06:26:26 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF0000231E.mail.protection.outlook.com (10.167.242.230) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8943.21 via Frontend Transport; Thu, 17 Jul 2025 06:26:26 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Jul
+ 2025 01:26:24 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 17 Jul 2025 01:26:23 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Leo <ycliang@andestech.com>, Mayuresh Chitale <mchitale@ventanamicro.com>, 
+ Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>, Yao Zi
+ <ziyao@disroot.org>
+Subject: [PATCH] riscv: cpu: Use CONFIG_IS_ENABLED(CPU) instead of plain ifdef
+Date: Thu, 17 Jul 2025 08:26:15 +0200
+Message-ID: <56c9166ed5928476cbc977eaa3ae398903eeb917.1752733573.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Frank Wunderlich <linux@fw-web.de>, Padmarao Begari
- <padmarao.begari@amd.com>, dinesh.maniyam@altera.com,
- Holger Brunck <holger.brunck@hitachi-powergrids.com>
-From: Heiko Schocher <hs@denx.de>
-Subject: Please pull u-boot-i2c master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1136; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=FVudeNfeyqB1QcVacgOqc+/pjSvU+IA6o97xTWW7ghc=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRUTO885LJynkyj0Z5X5eq7FC5UJ8qmH5Fqj+6alHdXK
+ mEjb+TxjlIWBjEOBlkxRZbpTDoOa75dWyq2PDIfZg4rE8gQBi5OAZhIlCPDP60pz9p23yruyHid
+ uH2pWV9Ab6HS4RD1da8+JSdOeC/YsYDhD99Zr0u7Zq6auPoR49MVXVeZqrPtnVyNXhqlCrpOr/n
+ 6lgsA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231E:EE_|MN2PR12MB4359:EE_
+X-MS-Office365-Filtering-Correlation-Id: c0240e94-d58e-489a-a75e-08ddc4fadba3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dkUm4txgW88cCFAcBLin1CwFs/KKbUtaqLQ+2BfJr4ZnKWAGdjn2I7+xcJTf?=
+ =?us-ascii?Q?f1iBmq14n6oEfj5L4AsDLut8RT6v9uzkazT4NDRPd7bNMJ9mgYXOIRTaAbkF?=
+ =?us-ascii?Q?GWjmQPkOYliGINqZvdqQV5SyPp5qNDqn/3PyEm0rm1aabp8xabBs4HImY98W?=
+ =?us-ascii?Q?Fpn1gEqT8pQIeuck9S+RYnc4hVQYQo/LDK5DCw01XNkTgTbl6UtBK+Q2tpGM?=
+ =?us-ascii?Q?KJhrvd/HtLYsiEmvh8uTooH/gxHMk7AXoh3A1eKFjR0VVjZdqD2MY+0a43wf?=
+ =?us-ascii?Q?sGJsbQIw9Eo8y6S5pEDr45trIw1ZcdiiUSYrrUFZlEcPra/rH5VvFeg0+ARs?=
+ =?us-ascii?Q?EhK0VXUMS6geiVsI0jNLsIH0heKa2B8XPK4OSxdXe68qSELEW/3BuQ5Zs58v?=
+ =?us-ascii?Q?eiKfkwGp25Iux+Z+4toYD+NlKcrRJyFuY4sL26VXvnA57jXeH86jHAITZgpC?=
+ =?us-ascii?Q?xB773yxEbKnNoofFGUsckBcMJBIaqp3gqeTd/NlhsuRwngDz1hN3F1AyOvDC?=
+ =?us-ascii?Q?eoj1rCWXtSfKZfSF2tGSN9vcqoZwE7jwqmOQSOlqz9+SJTu0fPtP+pyYG0fx?=
+ =?us-ascii?Q?waf1tlkcRXjKUp6ebyd8vGasike4mFrFOZr7LFCdCfW39qOZ59ABPsYFUNl1?=
+ =?us-ascii?Q?d/OhhR7FjQ4S7Lh4fywhRMFebrfbaHVZQjD1bWXwtfruUFdg3gyLgLxG+VrM?=
+ =?us-ascii?Q?yduvpDXmlUQXF3WBgJcCERs5MiSlp4pJba7GT8euPE/IVPHj0HqSLJs2/zAK?=
+ =?us-ascii?Q?LpqRuVhDPrHXmXhIWOiO+gXvwLs2w297Btq55NR8II62IYotM7Sa6cosNrZJ?=
+ =?us-ascii?Q?34mEbxh+YSm8D8HdZ8n9gudpEccjXprBA9WGFALvyVsu2Dbr64mNPryIZGb9?=
+ =?us-ascii?Q?USI4WvlfZeDorPMk+T8ACIyp/Rsw7jlx8+4HMWaqcfDl/xx51NM8IOqtCU4W?=
+ =?us-ascii?Q?2hv4C1Q2YMjKZysL6pPrdCHU3xzoicBvI/nq/ePEY/gtB/uPRiS1OCq7WtwZ?=
+ =?us-ascii?Q?t18pJbSl0luMYwPylXdeMt6S2zox90PP3U/r5H46fBqMyppf9p0Nr9bVvLp6?=
+ =?us-ascii?Q?ooYwfcK085TdUCf+TE76I2fW3snUfpXGSPO18HsxS9gJ3Z9Nt1KqjWAFaPI7?=
+ =?us-ascii?Q?D2wtDnN1UjOKbB/0O8IBlg9ztMxMTOCzgODgtzrYVn1v70ZnYKt9/jYTeOKi?=
+ =?us-ascii?Q?VWJTtqWKuHH0rm2XVYdHqB9IAu8/J+EfJxbbwomUrVZ26+BO6lUwK8gD55u3?=
+ =?us-ascii?Q?diQcbqVxZDYPCVP24TUK77C65wwht/uWzQcrTpVllM/P0jBReAQF8bbT6cmf?=
+ =?us-ascii?Q?aLIr7cLuvHX+f4Y7rgr0ElCQlGfeRyfn8ZXXOPRcfywiMOTuIpLk34eAYYDZ?=
+ =?us-ascii?Q?6lqxwGyeNQG/ttxleT+5aLWRdHFYGXkGIDjdZsGIFuQeg/1sTFvGWliDhH12?=
+ =?us-ascii?Q?tXndKZ4HGNKpMTWLrM7TEpInjWqGu/DnKRtDQPvxJY2Y9P8Kl9wD7evyqIEj?=
+ =?us-ascii?Q?liLGCLqJAp0c/8eEsIGtG3k8euxblvsvNLG/?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2025 06:26:26.0939 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c0240e94-d58e-489a-a75e-08ddc4fadba3
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF0000231E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4359
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,154 +151,49 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+ifdef CONFIG_CPU only works in U-Boot proper but macro is not working when
+XPL phases are used. In this case CONFIG_SPL_CPU is also defined and can be
+disabled which is causing compilation error.
 
-The following changes since commit 53bd87651e45b32efa398dd5e433d8b93d781445:
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-   block: sandbox: Add support for SYS_64BIT_LBA (2025-07-11 11:33:25 -0600)
+ arch/riscv/cpu/cpu.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-i2c.git i2c-for-2025.10
-
-for you to fetch changes up to 5e80c6757378d09950235083533e7a7c3aeae3be:
-
-   configs: agilex5_defconfig: Enable i3c configs for agilex5 (2025-07-16 09:33:54 +0200)
-
-----------------------------------------------------------------
-i2c updates for v2025.10
-
-- i2c Kconfig updates from Tom
-   - add some driver dependencies
-   - added missing include delay.h in iproc_i2c.c
-
-- i2c: muxes: Add PCA9541 i2c arbitrator driver
-   from Padmarao Begari
-
-- pca954x: add pca9545 support
-   from Frank Wunderlich
-
-- cmd: i2c: fix build when CFG_SYS_I2C_NOPROBES defined with DM_I2C
-   From Holger Brunck
-
-- added i3c support to U-Boot and enable it for agilex5
-   board from Dinesh Maniyam
-
-----------------------------------------------------------------
-Dinesh Maniyam (12):
-       drivers: i3c: Add new i3c uclass id
-       drivers: i3c: Add driver for MIPI DWI3C
-       drivers: i3c: Add i3c uclass driver.
-       drivers: Enabled Kconfig and Makefile for i3c support
-       drivers: i3c: Enabled Kconfig and Makefile for DWI3C
-       drivers: i3c: Add i3c sandbox simple test.
-       drivers: i3c: master: Enable probe i3c without slave device
-       i3c: master: dw-i3c-master: Fix OD_TIMING for spike filter
-       cmd: Add i3c command support.
-       test: cmd: Add simple test for i3c
-       configs: sandbox_defconfig: Enable configs for sandbox i3c
-       configs: agilex5_defconfig: Enable i3c configs for agilex5
-
-Frank Wunderlich (1):
-       i2c: muxes: pca954x: add pca9545 support
-
-Holger Brunck (1):
-       cmd: i2c: fix build when CFG_SYS_I2C_NOPROBES defined with DM_I2C
-
-Padmarao Begari (1):
-       i2c: muxes: Add PCA9541 i2c arbitrator driver
-
-Tom Rini (2):
-       i2c: Add missing <linux/delay.h> to iproc_i2c.c
-       i2c: Kconfig: Tighten some i2c driver dependencies
-
-  MAINTAINERS                        |    7 +
-  arch/sandbox/dts/test.dts          |    8 +
-  cmd/Kconfig                        |    6 +
-  cmd/Makefile                       |    1 +
-  cmd/i2c.c                          |    6 +-
-  cmd/i3c.c                          |  271 +++++++++++++++++++
-  configs/sandbox_defconfig          |    4 +
-  configs/socfpga_agilex5_defconfig  |    3 +
-  doc/api/i3c.rst                    |    8 +
-  doc/api/index.rst                  |    1 +
-  doc/usage/cmd/i3c.rst              |  146 +++++++++++
-  doc/usage/index.rst                |    1 +
-  drivers/Kconfig                    |    2 +
-  drivers/Makefile                   |    1 +
-  drivers/i2c/Kconfig                |   11 +-
-  drivers/i2c/iproc_i2c.c            |    1 +
-  drivers/i2c/muxes/Kconfig          |    7 +
-  drivers/i2c/muxes/Makefile         |    1 +
-  drivers/i2c/muxes/pca9541.c        |  297 +++++++++++++++++++++
-  drivers/i2c/muxes/pca954x.c        |    6 +
-  drivers/i3c/Kconfig                |   27 ++
-  drivers/i3c/Makefile               |    5 +
-  drivers/i3c/device.c               |  262 +++++++++++++++++++
-  drivers/i3c/i3c-uclass.c           |   38 +++
-  drivers/i3c/internals.h            |   26 ++
-  drivers/i3c/master.c               | 2070 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  drivers/i3c/master/Kconfig         |   11 +
-  drivers/i3c/master/Makefile        |    3 +
-  drivers/i3c/master/dw-i3c-master.c | 1062 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  drivers/i3c/sandbox_i3c.c          |   56 ++++
-  include/dm/device.h                |    2 +
-  include/dm/uclass-id.h             |    1 +
-  include/dw-i3c.h                   |  252 ++++++++++++++++++
-  include/i3c.h                      |   93 +++++++
-  include/linux/i3c/ccc.h            |  385 +++++++++++++++++++++++++++
-  include/linux/i3c/device.h         |  286 +++++++++++++++++++++
-  include/linux/i3c/master.h         |  698 +++++++++++++++++++++++++++++++++++++++++++++++++
-  test/cmd/Makefile                  |    1 +
-  test/cmd/i3c.c                     |   50 ++++
-  test/dm/Makefile                   |    1 +
-  test/dm/i3c.c                      |   34 +++
-  41 files changed, 6145 insertions(+), 6 deletions(-)
-  create mode 100644 cmd/i3c.c
-  create mode 100644 doc/api/i3c.rst
-  create mode 100644 doc/usage/cmd/i3c.rst
-  create mode 100644 drivers/i2c/muxes/pca9541.c
-  create mode 100644 drivers/i3c/Kconfig
-  create mode 100644 drivers/i3c/Makefile
-  create mode 100644 drivers/i3c/device.c
-  create mode 100644 drivers/i3c/i3c-uclass.c
-  create mode 100644 drivers/i3c/internals.h
-  create mode 100644 drivers/i3c/master.c
-  create mode 100644 drivers/i3c/master/Kconfig
-  create mode 100644 drivers/i3c/master/Makefile
-  create mode 100644 drivers/i3c/master/dw-i3c-master.c
-  create mode 100644 drivers/i3c/sandbox_i3c.c
-  create mode 100644 include/dw-i3c.h
-  create mode 100644 include/i3c.h
-  create mode 100644 include/linux/i3c/ccc.h
-  create mode 100644 include/linux/i3c/device.h
-  create mode 100644 include/linux/i3c/master.h
-  create mode 100644 test/cmd/i3c.c
-  create mode 100644 test/dm/i3c.c
-
-Thanks!
-
-Azure build shows an error:
-
-https://dev.azure.com/hs0298/hs/_build/results?buildId=180&view=results
-
-https://dev.azure.com/hs0298/hs/_build/results?buildId=180&view=logs&j=6be877ff-932d-5d95-9b1f-9903312b5111&t=a6f13977-3537-5140-4cdf-3c258dd9359a&l=346
-
-! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - no other tests will run !
-
-So, I think, it is not a problem with pull request...
-
-bye,
-Heiko
+diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+index 15c4e14599d1..d5123e4b7d97 100644
+--- a/arch/riscv/cpu/cpu.c
++++ b/arch/riscv/cpu/cpu.c
+@@ -608,14 +608,14 @@ static inline bool supports_extension(char ext)
+ 
+ static int riscv_cpu_probe(void)
+ {
+-#ifdef CONFIG_CPU
+-	int ret;
++	if (CONFIG_IS_ENABLED(CPU)) {
++		int ret;
+ 
+-	/* probe cpus so that RISC-V timer can be bound */
+-	ret = cpu_probe_all();
+-	if (ret)
+-		return log_msg_ret("RISC-V cpus probe failed\n", ret);
+-#endif
++		/* probe cpus so that RISC-V timer can be bound */
++		ret = cpu_probe_all();
++		if (ret)
++			return log_msg_ret("RISC-V cpus probe failed\n", ret);
++	}
+ 
+ 	return 0;
+ }
 -- 
-DENX Software Engineering GmbH, Managing Director: Johanna Denk, Tabea Lutz
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.43.0
+
+base-commit: 4634016dd14f0e39b5afae1c20f01bfce2bda262
+branch: debian-sent3
