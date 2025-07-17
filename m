@@ -4,141 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9DC9C83F22
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 08:41:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 150A3C83F22
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 08:43:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C49DF8334D;
-	Thu, 17 Jul 2025 10:41:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 587768338B;
+	Thu, 17 Jul 2025 10:43:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="OlGEzuk2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RCiyalcP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82B938338B; Thu, 17 Jul 2025 10:41:51 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2061a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::61a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CF6508339C; Thu, 17 Jul 2025 10:43:33 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 373FD8334A
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 10:41:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA7088334A
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 10:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D/FlPGMRDpdbbaIBSpJ5u0D6LFCSvoKH7IjGiv5Vy6aNQ8k7y5uz0R9uwoyS9SNKmYGoPSp0NS9oBCwwzUMoslEHjKwVR2KDDmsYcUTth8rNwF7kdeY8vnJgPW2+yl7AmTFrOnVo8MRSE8QwignwUK4/tWIM6qgmFC50WTosknPtGIiGEjiWb1UO0nOowTdZmuItk+hZtFzBtUctSJaSlFIh7L0i6ojaDNlrbWaaHkQo2cdUvMiGBS8GlCKnEZgCXY/hsobQGYfcIXgUnflZfbJ0ohqRh+7Ez605i4hnUUHUjhhlxFE8ixV3mi5d6jutKKaWSnSsX2TG8Z7/vTz9pg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+bFxUZN6FtGVNYOrZ4UNdkuf6ZF59bwta2WivnEH14k=;
- b=Nef6njnwjAL/AbUoeYtW1W48jdmA+nZwirmpWLcInXIfnfGc0EL3tzo6fMnOb31LXihPqvcmZFY0PH+2HHklLz5f+OCC0qqWfCKsw1sr5XtKuUHPdvqTapZGolTjMCM6ef9ZOYqQGE2Cq47Mk5dGLuBXPDBX10Tzo4DO3jXuCj2UFF87vOOQymjqpZNsL90OpHJx9rPOeuKOibaIM3mcbVgXA0scm0KXblQIY5IICojxPvOaj4Xu4nNiNTWMMk+xt0IQiVDrG27GdwbfL+uispecnAPpU9W0snEqaUKOKh3DrH3Uw5bMbDZFcqeavP3GLZlGE1UX0QxD3dXBxRYCRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+bFxUZN6FtGVNYOrZ4UNdkuf6ZF59bwta2WivnEH14k=;
- b=OlGEzuk2twiitVY9F0CsWB5G07+aLK9Tx9mZ/u4RDk2YP54G3J0Gv36CCEgnJEnN04Wzln+6433DI4NXT9VtBmzmaSggD9LUVY917S9xCtA0dIDxx0Y+9Cb/JIaSI2wWYgdxsf9NWemdKGwbEPuN5hCV8CVIQnOqhFGptNXmf5o=
-Received: from BN9PR03CA0561.namprd03.prod.outlook.com (2603:10b6:408:138::26)
- by DM6PR12MB4057.namprd12.prod.outlook.com (2603:10b6:5:213::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.39; Thu, 17 Jul
- 2025 08:41:45 +0000
-Received: from BL02EPF0002992C.namprd02.prod.outlook.com
- (2603:10b6:408:138:cafe::63) by BN9PR03CA0561.outlook.office365.com
- (2603:10b6:408:138::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.26 via Frontend Transport; Thu,
- 17 Jul 2025 08:41:45 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0002992C.mail.protection.outlook.com (10.167.249.57) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8943.21 via Frontend Transport; Thu, 17 Jul 2025 08:41:45 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Jul
- 2025 03:41:43 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 17 Jul 2025 03:41:42 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Casey Connolly <casey.connolly@linaro.org>, Sam Day <me@samcday.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] sysreset: psci: Fix SPL dependency
-Date: Thu, 17 Jul 2025 10:41:32 +0200
-Message-ID: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-455ecacfc32so2698605e9.3
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 01:43:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752741811; x=1753346611; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qx5WW/BVTDw4nrvbee4hwZgjAdva/fNerlRZmvr3MBo=;
+ b=RCiyalcPwWGlmAOMzHYog0s/JK0IOoDTqLloyC5O0eqgAwrKpUnbAn0a3oUBcPNB5P
+ q+X2kpUJUfbKFO1FqSCEJ+Q/CW63Op+CKyDM/zjdDN2PQQklaQDfBkmuO8nhCecFDQzw
+ 8LDrWZd5Q26t/ysGW0xXbqtzy5AH8JubXn4RS9T9rFP8mpXT6uKBbDrld02uct+4f3nZ
+ oqnF4GOkAUcYm0KvdHe/2FLEyy9u9D3NapmM8QJXRLdgxHh0ComveN3MxtCwKpF5FAjv
+ eEMHYFDfYaGbCLgVSKTblMmtY4Efx24aQq9w241iASUnQdopqNeP8/g66BTZLMSFg8e5
+ qHQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752741811; x=1753346611;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qx5WW/BVTDw4nrvbee4hwZgjAdva/fNerlRZmvr3MBo=;
+ b=goH3w6dM2lD6PGXnruEYUPAb+Y3CUV6jYm55lymj7Fq1c4rg3c5or2fQOSd8EP7+9r
+ YXPT4fiJ9j8CyGl2vJdJ1Xdy4M9oQDXTQcaP1l4kTfq1qVNfuYnmQWBe04fABMF1CPWx
+ Lje/7A9b7IjBT5DVrJMieS3NjPW2rTYE2V+Z4Rq405Ok3gejDQdVqQpG+pItUxYJnhi6
+ jvHMttT+J3MjUg6aIWY/uCdS6XkPcQp8aLoc92vv7q1Fd8EnWS8NyjY8SKhLmaaVAtj3
+ BzcTnCcuTyydO3Z5V4PUbb6Igdznno+ojY5JuM2iDJS4EElh+vSG+HjWjqOXRspfyKP/
+ ePzg==
+X-Gm-Message-State: AOJu0YxKJwn+MQ2QD3Yd8Jx4c604NdNx+lrJHMr+hrLrNkRPGKD7heW1
+ Mb1UgPl7xnCmlE93XefMFAxf2HTz4rKdwc8XAm6hBZbO+UHgUp1eubPNA1blaw4Cpm0eJpkzsBx
+ ip/V9
+X-Gm-Gg: ASbGncvorK/yetyxYznYb0D00bPbBxrJuU0qt9AdRPPL06Til9to4GhwaNieKpFVHN/
+ xDHd6NCvo6W0s4fJmOhRMeDcb9hAi12YU/TeRZ088BLGHLT1N9LvRfyz1oNq4bt4vxxh/XCjjCp
+ aTNMwm/RSxv/f45IZxkVuquDOkUw3WXvLR+FXhvbmOaOEqGVVdCxmJCJ1J9ZdhH3id4FDFHd8dD
+ 35Z20IGu4xY+6X9WdFplZABfDorZsoisTRaQQXm7MoBsR8rfc3cI0OUCSNtoDfKwxTLUro/F7b/
+ la+FS8kKN5ziK+1fa2VTxW5/4lYvOq3vjAJ12B7uhdatJkCokBW+gfMsFE57T3x19HBj4oBQc46
+ 6B4+xqI+uvkQfBdnVgPx9BoWTpYmTv9X3IpX8YWNjQamDcD/2/xKzyevnpv4=
+X-Google-Smtp-Source: AGHT+IEAK6TIHWwNgEnEeudRzgrYI/VjiGzvQ+HqUvCdKMTGDCFwoKUdz7w8JXdYT0j+uqv/R5JmCQ==
+X-Received: by 2002:a05:600c:8b85:b0:456:2347:3f01 with SMTP id
+ 5b1f17b1804b1-456355c60d3mr14571535e9.20.1752741811163; 
+ Thu, 17 Jul 2025 01:43:31 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:1903:ee1:3e05:76f7])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b5e8bd1a15sm19825514f8f.6.2025.07.17.01.43.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Jul 2025 01:43:30 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 17 Jul 2025 09:43:29 +0100
+Subject: [PATCH] fastboot: Fix off by 1 error
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=865; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=EMYs1SPuxDZSoJRDQFSvrmCP/D/IRB3afLVEpeM3lAI=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRUbLd3KRG7de++ydd3yatnzHtgUn41t74wSXgjV+WVn
- TP2cd+40FHKwiDGwSArpsgynUnHYc23a0vFlkfmw8xhZQIZwsDFKQATsXzLyNDzV/D0ql4h1/8l
- MTt2FN+f2sbwUFRZX3syL8vcGY8vT17EyLAkbmmdcVZck1jz8uSd8QXJqQ7MK3YqRHziS9zxf1e
- eNzMA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992C:EE_|DM6PR12MB4057:EE_
-X-MS-Office365-Filtering-Correlation-Id: 538b78f7-faf5-41ab-1730-08ddc50dc2e3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QacQcIfyj0VEP+b0KPeixwAvIvmM/VeCeeUoS59scSH6XRKfjFIQfG0iXCPl?=
- =?us-ascii?Q?1hfOWfo1u/ffiRRdDCT4V8YZYQIUHu5LWrzKGGqe/16WnTMsw1akYFaxcJF3?=
- =?us-ascii?Q?ULqziV4Qb6i+69iH2tdyToJHhKe+0BxPi0UitQPhiyO5aRzsc9RRjnNZ6mxz?=
- =?us-ascii?Q?S/5a5rqrGP1X5qbOa3rykdCaM2zKmULYi+LfGgrcCYV3fGLXNt64Wk4fUueF?=
- =?us-ascii?Q?CLlz4mzwWug8iJvq10OgLvW4XZdVyavRu1qhLXntqOqgQ9AhD71fVSDxE8RT?=
- =?us-ascii?Q?U9xJYOs11F2WTcA3NIuNKFX+tMUTMoSAYJ9tVGidtI9uzNGagLS+Q455Y4Nk?=
- =?us-ascii?Q?jZl7hmJV0QrVrn9ullffy4ChUie5lhWRD8UHODjm3CZnXE5vFtFT1TzO9Too?=
- =?us-ascii?Q?wRfYZoD7ixr4YaEHhvRVPMN3jO6pmoUgcR9nc/ImIHYt0w+NUvjYuVo048Ea?=
- =?us-ascii?Q?xHr/qRNizZGpqRhAc4UDR673G6u8d93uE4f8U5JmcGxdbGIjGg5vPqq5CtzF?=
- =?us-ascii?Q?bhcz7EAGnljI9IP3dGeGw6bRHMqnWwk/xfKSkryR/jelYlcUH8Spx5mZd4CE?=
- =?us-ascii?Q?sbWSCikxtjZsZRJbZBo9s0EB0LCn1Q96OPkSgawg6h1iiavjMofidY2Po032?=
- =?us-ascii?Q?kQHB6cFpu6ARyz1kKJGPuxb9iOn2Di7pGgGcSs2oEme8h3InW3hgHztRu3yO?=
- =?us-ascii?Q?fVm5lXLx7bjPzftINDBUtx89sytk9h4l5od5cCUOFfZBzpWJhgVB2HFW+FGx?=
- =?us-ascii?Q?X3PfZksnJvfA/oDIirHs8Vp/MnszxJj/u9WO+T+hLINLRQHRo3NEs2KiAL7J?=
- =?us-ascii?Q?jggk4rdEn1PhI8XORXl5OfLIHKeQLSRrjK6AApZrHKD4h3WM0Ub9nfsh07cu?=
- =?us-ascii?Q?ZbkotKhNI3fsnGtVOXwWqaK3/sJhSCSPNx4LuMrCQzdvdgYazYqis38wsjxk?=
- =?us-ascii?Q?YNMSDI7t/ZaeaiPj8RqXZWGEKr6rA3PnRLIGhgRjSWEA5M3vTaUHRSyhh1EM?=
- =?us-ascii?Q?TtcfBJxHwvnHqU05rEbt0WBoPj8zo09zbtOiTvdqZQvBBSYkVyb0Bb1wZlKG?=
- =?us-ascii?Q?JjXwpVwhE+j9pIn+IZFUyfInbpDqcNod1XlMa3A+bW5nJMB5A1C3J3V+jK3f?=
- =?us-ascii?Q?YPOx2H0GBItU1beEWiiAZFPa1Xfq0yukE6wHOeKwElJ/gHw/drCoRT3kA2GE?=
- =?us-ascii?Q?nzfV50EjS/X4xERC7UUtD1jP9MXyDNuN9omQO4nJ0BQV28fwdFuhp+NOOvpa?=
- =?us-ascii?Q?ehYwruYk5CdrvyPL/lorUmM2eqwc4n5abNSc05L9s+fhZqwECXwCP1Y5vVxJ?=
- =?us-ascii?Q?CMRG5JwVMnL5Gr8Tj6OrGQFlQ+IPwmPEhtF2hcN6XtiYIAUuxg4l+2A5ojBa?=
- =?us-ascii?Q?n7RUVLzMNQBd0GjialHQhoIv/syiOxBha3beMuLBsQ7qM072P+G3rPjvlA+D?=
- =?us-ascii?Q?U92LDxTQ9btCAOR/hH2APLHcHdIuqem2WVd0dYoQtkQiLXfMrzdmnsESv3hz?=
- =?us-ascii?Q?DArcnso9LRp89mG2SOhvp6/zKFvB9UNxgePN?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2025 08:41:45.0944 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 538b78f7-faf5-41ab-1730-08ddc50dc2e3
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992C.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4057
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250717-fb_command-v1-1-97695943666b@linaro.org>
+X-B4-Tracking: v=1; b=H4sIALC3eGgC/x2NQQqDMBAAvyJ7biCJSMCvSJFN3OgeEsuulIL49
+ 0aPwzDMCUrCpDB2Jwh9WXmvDdyrg7RhXcnw0hi89YMNLpgc57SXgnUxPgwJbR9dtj20IKKSiYI
+ 1bXdSUA+SW3yEMv+ey/S+rj89WWhFdQAAAA==
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,29 +101,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SYSRESET_PSCI should select SPL_ARM_PSCI_FW only when SPL_SYSRESET is
-enabled/required. This change saves 1.6kB on Xilinx ZynqMP Kria platform.
+strlen only reports length of string not including terminating 0 byte
+but this has to be included in length of receiving buffer on copy so
+adjust length check to be correct.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+This issue found by Smatch.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-
- drivers/sysreset/Kconfig | 2 +-
+ drivers/fastboot/fb_command.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index aa83073c96a7..67edf004205c 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -176,7 +176,7 @@ config SYSRESET_PALMAS
- config SYSRESET_PSCI
- 	bool "Enable support for PSCI System Reset"
- 	depends on ARM_PSCI_FW
--	select SPL_ARM_PSCI_FW if SPL
-+	select SPL_ARM_PSCI_FW if SPL_SYSRESET
- 	help
- 	  Enable PSCI SYSTEM_RESET function call.  To use this, PSCI firmware
- 	  must be running on your system.
--- 
-2.43.0
+diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+index 2cdbac50ac4..df6e2a81cd5 100644
+--- a/drivers/fastboot/fb_command.c
++++ b/drivers/fastboot/fb_command.c
+@@ -405,7 +405,7 @@ static void __maybe_unused run_acmd(char *cmd_parameter, char *response)
+ 		return;
+ 	}
+ 
+-	if (strlen(cmd_parameter) > sizeof(g_a_cmd_buff)) {
++	if (strlen(cmd_parameter) >= sizeof(g_a_cmd_buff)) {
+ 		pr_err("too long command\n");
+ 		fastboot_fail("too long command", response);
+ 		return;
 
-base-commit: ea9b7094949916938ae6aff345422eb0f125868f
+---
+base-commit: 3b4604a40b9fd61b87e9d059fc56f04d36f1a380
+change-id: 20250717-fb_command-275ca03b1f03
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
