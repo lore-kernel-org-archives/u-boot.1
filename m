@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 187A6C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:33:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E05BC83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:33:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93B9B83477;
-	Thu, 17 Jul 2025 18:33:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F13C6834AD;
+	Thu, 17 Jul 2025 18:33:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ia/VXAmv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GjUoZwLD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B25C383496; Thu, 17 Jul 2025 18:33:12 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 1D369834B4; Thu, 17 Jul 2025 18:33:53 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC9938343B
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:33:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FE5E83496
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:33:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-55a25635385so1330439e87.3
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:33:10 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5561d41fc96so1377407e87.1
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:33:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752769990; x=1753374790; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1752770030; x=1753374830; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rFF+xGtc6dAe70D9awzHBnhCQ1iqej5ma4uaXZ5TrOY=;
- b=Ia/VXAmvCnszBMmYHsnjkkXyih/2uX7M59GvdoPGJ2s170Q8dFaj3arrASM1QzMJto
- MjcSrCXeXIbfTm4kPdA0qfpFkt0qQYZqyC/21frhLglRoI+6Z3QgLK3ZWlsF41aG1CgQ
- 3ZSbytoWaHI8bPuQozBbsPHJUcOT816rbkFBHDwf3QwY1t7rNTicG9hFRzlzF+fIu/qT
- hD1oIefSVriyxzi5GYQlz5OziCR2KKgqZjEbGDtWU+EHqA2/fyMlGzxv343prZbCZtni
- vZqAEDddag1YStTBEz0Z7CWOLI+FbfOnphiNXeUuFS0bAp3CFjIVnmQNqTrxfImwJAZf
- u7Og==
+ bh=8DwR+AKfEtK5lQjIRhCA4ZiyUS9NHHZ3ETui3g6AGx0=;
+ b=GjUoZwLDsnHNbAUryj0fmAAeGYQIKThFTFb1pZn+H5J/DIk9uhQAAXXrYR6+xxAbmn
+ +ODs5OOEOdfUI4RfWMjiDzSDE1Pn+J4+eBy/9quqwUzmiTTvOF60GYSMQ1oHY4vuGsD1
+ jugN/fA0H/XysPwnOzjg7lTVcWCyiA6RHyVGywMRcFYYvWXFRXEK4yotYbF0vBBMrfYD
+ Z81tf7k+0k8j3N/2oGCm6KWMXz2T4jvDiu0C3WEA5fkneOevYS5N50+xCu9ijoTvM1GN
+ C9pvPzCgvjZsvzACoThDO/jAeO8H99nQif5ytnfQtFD9sXKBqB+Df+BKgODSWW9JIx0j
+ bx1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752769990; x=1753374790;
+ d=1e100.net; s=20230601; t=1752770030; x=1753374830;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rFF+xGtc6dAe70D9awzHBnhCQ1iqej5ma4uaXZ5TrOY=;
- b=dhm2cxOeYoltUmMRmwuR6uJweWa8g7VenDv8HQNxyd8yoDGCOQhdaKWOVhPFMOKlke
- 6xiE/u/1bIyxp0lgAJ/Yix7Qbv8WQNBh3aINjfLSt+UJt5HFG5iQns3zxWFme/eDrOLA
- JearAcFKsIkixvhrAYMCbCVoCa+u+4GW3ohpoUntuKsDGSDumPXZscLddTZz0FgZvabb
- w4pEpx2/cMfLlaVFjheRh42K7ismNMA1ImP0a1J7MOpp0Ng9h9yTiLXwPvc1Rov5vLS4
- +ok1f5ZrmkSH7iGJ0G8hyM/kPQyMqyxYJrXqpwFHAHEgpEQBAT4ZNOsAWqjkOalIUUzb
- 411Q==
-X-Gm-Message-State: AOJu0YyMRWU96O+ylLslnuHx2wyGqWgq+E3QjQoeZwJih/BbWkcfQi3L
- ancOlooqKqQH1zlRP3xrh8zCPuiD3rzae8loEV3BscJMjFLevQRMoGv31spj843gCi+rylPY0zt
- 7l4fByCuuGAoLzpoO/ytKaby8s2NI4KA=
-X-Gm-Gg: ASbGncsyEFT3Ck+jHCt11xpL49EgvYgjCK1JjGZeX52boQs+y9ocdGcP8oTaVKZYS0V
- lOXtyOSxxt9zzUzLRvSlfDrC/9/poFii3b/FAMzz9jTlpKMJKXquGIF4eoamFZtkDnuMk0tVQFn
- i7K1T3WbF67gzDhwIINwxWKtEPT/x0Fql3FO55J3r0wPVlIbH8al850+lcU4MtTFYa/6GmATG++
- 96ib1aTBRdI6bvFOsQTUt6dPe4zzQY7rTk9
-X-Google-Smtp-Source: AGHT+IGSq6tWUKvRjPxZZfG5KdjF6e/j4U5JLwrGRT+rRVcMo8djwXGS6rv2yMPuYaV+No9zas/dT0am4YHVIcn+tlw=
-X-Received: by 2002:a05:6512:1282:b0:553:da39:38a with SMTP id
- 2adb3069b0e04-55a233012a3mr2167471e87.7.1752769989892; Thu, 17 Jul 2025
- 09:33:09 -0700 (PDT)
+ bh=8DwR+AKfEtK5lQjIRhCA4ZiyUS9NHHZ3ETui3g6AGx0=;
+ b=qzuwBjDYDR5ZuC39NBxHflzOv0dMn78Kouph/3BqpVTWNxGQqaHuUskkSswbKA0+8N
+ l2YXv9dG2rw/lNVmeEk699U3BTipQw8K7zzsy30YQwCUzYnAKBlup1Dn0VqjfHBm8oGi
+ TAG38/ZRfnEoOC0xyWCa7SJ4/awshATqQcTTzJ8Gj9yOwMoPficV6x28UFA+UTQxOqFW
+ gk8hZJuDgIvYxbh537Q+8zl5YA1h57XRwz9jN+dXsxrFilL8fJRyCmmj7RVS9gCJzZ0G
+ fmtKH45DO3FvTkgbVYrZlc1N1/X+l7Rd2gamr6OuY0qIs0flsiNbCn58AZlRtbfDguKQ
+ Cdlg==
+X-Gm-Message-State: AOJu0Ywd1g5gvoShguE5egVfJ83u/LDNPU/jUTrIJ2d9p2bJaaRFagdB
+ G1vaF22lMGomHvFOQuW7TDQ2esZ7s2LwEw15uMmYAM3a/Tm/Ot2wIoRAsmXgwnWiaMiUcs2saW3
+ HDtLsUPAaEBE8L+6sP07YYJyBr/AEHAs=
+X-Gm-Gg: ASbGnct6WXZVR+TlOSc0IcL0JLNWI4o8YnO+uSqm/Jl+yf8xzwjw0TvCl+l2Eu1TTBl
+ RZ5a3Ai2M6icmji3lYA7BBzO+ppC2ce+pjrgmo0VGzAteM9cFEQppzxrCsX3wWCg2dAw+dMyvOc
+ 0bjwgionql6XiTeqheHfDFnpwfPfNWwSQ3ZyF5s1GwGHiZb4A+oqRiuKKVegNyRaI7t86hf7czu
+ kXkFTzM3XzBcTErQo9xg3aSRleUv56UxJSj
+X-Google-Smtp-Source: AGHT+IF6gL/l0U8RDAsiQkWR49xG7EA6j2mH7Yj5C8jbwJkq7ePpCZNydJiTYa+g3oThwyniUG8AUXzjxbXN3LA4qsA=
+X-Received: by 2002:a05:6512:1113:b0:553:d6fe:b9e7 with SMTP id
+ 2adb3069b0e04-55a23fb2546mr2587142e87.51.1752770030165; Thu, 17 Jul 2025
+ 09:33:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250712001254.232825-1-davidzangcs@gmail.com>
-In-Reply-To: <20250712001254.232825-1-davidzangcs@gmail.com>
+References: <20250714114347.2455172-1-holger.brunck@hitachienergy.com>
+In-Reply-To: <20250714114347.2455172-1-holger.brunck@hitachienergy.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 17 Jul 2025 13:32:58 -0300
-X-Gm-Features: Ac12FXyykvPmw_FtNDVfUwuoKJs-7YzH-1jLXtpXXjKxzej7tKgDF10QC0sSzA8
-Message-ID: <CAOMZO5D7Lc978UPZ1RQ4tcTJEc_6yUGQ8C3KGLXufij7W7d10w@mail.gmail.com>
-Subject: Re: [PATCH v2] soc: imx8ulp: Add celsius unit for temperature
-To: David Zang <davidzangcs@gmail.com>
-Cc: u-boot@lists.denx.de, uboot-imx@nxp.com
+Date: Thu, 17 Jul 2025 13:33:37 -0300
+X-Gm-Features: Ac12FXyMgT3ACZMlTsQbPlkoH-EfcHX-Nhj48idJ5uZKkwSclAJL0JRVJM1FCu4
+Message-ID: <CAOMZO5DSOEhBeM_tLTp0E4UJbahcvL+=kouVcNuB_kPGmpt20Q@mail.gmail.com>
+Subject: Re: [PATCH] armv8: ls1043a: make some erratas dependent from USB
+To: Holger Brunck <holger.brunck@hitachienergy.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,11 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jul 12, 2025 at 3:00=E2=80=AFAM David Zang <davidzangcs@gmail.com> =
-wrote:
+On Mon, Jul 14, 2025 at 11:10=E2=80=AFAM Holger Brunck
+<holger.brunck@hitachienergy.com> wrote:
 >
-> Make temperature unit (celsius) more clear to reduce confusion.
+> These erratas are only useful if USB is enabled. If it is disabled
+> these erratas might cause issues.
 >
-> Signed-off-by: David Zang <davidzangcs@gmail.com>
+> Signed-off-by: Holger Brunck <holger.brunck@hitachienergy.com>
 
 Applied, thanks.
