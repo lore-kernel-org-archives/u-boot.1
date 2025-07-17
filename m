@@ -4,59 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D88FC83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 05:55:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14044C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 05:57:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA7DB83322;
-	Thu, 17 Jul 2025 07:55:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 4BC738331B;
+	Thu, 17 Jul 2025 07:57:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1752731825;
+	bh=zweqEmy9dsH//3Oq1831sEtthZvoYeedGjnHSjsMyaw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=NzUXkKst6xedx0ibTA4KCOKa2MR752jZ5+ckXXdRPDKONP/zJAxFL2Fr7xoAsbyWD
+	 brr3LTK5uo3cWHHeR7pYjJjCvnh3p+nnu/cp6/Iz8cYvQ+4WnKax+iAt61bmcLeirL
+	 1miCLGcxht4xkU7RPJb2/+4MKzForIJRQ5GJEFvgXQ/iisNh68kBlFR+zxIm1YiZPa
+	 vXyQirfQA2wabgD7Dq5DhyfJ2kG4NqFWJ/B+a0V6wxx7jApzOGW3rVAp1bTYu4Xvgq
+	 BBcs2siVlaZMrXnBC+D4DhJwQc9jcwhjaROpt9NxlBz+luSNwb7W476ePy/i2vx4bE
+	 rZliNZl5xMxxw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C10682BA7; Thu, 17 Jul 2025 07:55:46 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id E50D083321; Thu, 17 Jul 2025 07:57:03 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7CF283322
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:55:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id ED11E82B0F
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:57:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 56H5tLLx073890
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 17 Jul 2025 13:55:21 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Jul
- 2025 13:55:21 +0800
-Date: Thu, 17 Jul 2025 13:55:17 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Yao Zi <ziyao@disroot.org>
-CC: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, Wei Fu
- <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>,
- Han Gao <rabenda.cn@gmail.com>, Han Gao <gaohan@iscas.ac.cn>
-Subject: Re: [PATCH 5/5] configs: th1520_lpi4a: Enable network support
-Message-ID: <aHiQRXlPUMCkuc5w@swlinux02>
-References: <20250710034201.39901-1-ziyao@disroot.org>
- <20250710034201.39901-6-ziyao@disroot.org>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="bFojWX+Z"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id CED3810397286; 
+ Thu, 17 Jul 2025 07:56:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1752731820;
+ h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=zweqEmy9dsH//3Oq1831sEtthZvoYeedGjnHSjsMyaw=;
+ b=bFojWX+Z+AiJ9SAQnFWiUC5uc+kZ9XgsBmm7FFrwSjNXIRbDR0Qdo2PuOvkOZMYeOQeQCD
+ iXfygNTX/tfmuMlx0m9Pf4t0pcVIY5ezCcnCd4N9XqHMDVe0DqjQYvrd89nWlEnXNuVbTR
+ FHP4IdXrb3qB9DjyVz+4GW0JdWinPhugx9bRL+KUOWYGD40dY+wtKBvAh5OSGWBd3cFNkK
+ k/KKU5moBclzvSVUEGBw0slU6+TGNe6cMOOwxLe6wULiU+/xC/lbAs1arYkC23Jn7CGio8
+ gna0PAAER5xguudeFmMkv63Af2/fQh1Atj0Ur4BfFLF9QukQ3WP+Ub/0xgGWYg==
+Message-ID: <e0292583-4f44-e965-70e0-1b63cbe74422@denx.de>
+Date: Thu, 17 Jul 2025 07:57:22 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250710034201.39901-6-ziyao@disroot.org>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 56H5tLLx073890
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v1] i2c: muxes: pca954x: add pca9545 support
+Content-Language: en-US
+To: Frank Wunderlich <linux@fw-web.de>, Michal Simek <michal.simek@amd.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Frank Wunderlich <frank-w@public-files.de>,
+ Maksim Kiselev <bigunclemax@gmail.com>, u-boot@lists.denx.de
+References: <20250606095056.22082-1-linux@fw-web.de>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20250606095056.22082-1-linux@fw-web.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,20 +78,29 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 10, 2025 at 03:42:01AM +0000, Yao Zi wrote:
-> Enable the network stack, the designware ethernet driver and
-> corresponding glue driver. The Lichee Pi 4A board ships two RTL8211F
-> phys, both attached to GMAC 0, thus support for Realtek phys and DM
-> support for MDIO devices are enabled as well.
-> 
-> Signed-off-by: Yao Zi <ziyao@disroot.org>
-> ---
->  configs/th1520_lpi4a_defconfig | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+Hello Frank,
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+On 06.06.25 11:50, Frank Wunderlich wrote:
+> From: Frank Wunderlich <frank-w@public-files.de>
+> 
+> Add support for 4 channel pca9545 found on Bananapi R4.
+> 
+> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+> ---
+>   drivers/i2c/muxes/pca954x.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
+
+applied to u-boot-i2c master, thanks!
+
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH, Managing Director: Johanna Denk, Tabea Lutz
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
