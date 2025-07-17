@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC3AC83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2794C83F34
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:31:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B06DB83444;
-	Thu, 17 Jul 2025 18:30:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50C0283447;
+	Thu, 17 Jul 2025 18:31:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B23E7K+6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MzhKm8KW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D69A83447; Thu, 17 Jul 2025 18:30:51 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id D03748343B; Thu, 17 Jul 2025 18:31:17 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 655F58343B
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:30:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA0788344E
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:31:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-32b2f5d91c8so9127061fa.0
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:30:49 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-558fa0b2cc8so953782e87.1
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:31:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752769848; x=1753374648; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1752769875; x=1753374675; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eqTY/hgnUOGw5r/5MMNQ9zxLh09jKm/h4RTZnzclTLk=;
- b=B23E7K+6+PNnXQ24OBeCa0Pyy1WR9vcDRUb5diOma6YcvFfM/BHX2G/fsXC+qdTOB9
- sg2/vYVr2ncWkEwOlfNv59W6TQNXqBVZFhOJTKUbNEkPswlJKYsvmo/4IvgGnTWgWBsF
- 2kRKdVHq7XXYQkJoJ8x6kWLjTTGJIjEdxCplGZS9GrEmkd1c4izTh3wjWKiZZy9Lw8sZ
- 8XSLyEXwkASWA7XW6dYnbp8sbIHD1iKt/TS5XUx6BcE/0nEr19ixGcfAiSwuRGBEuTjj
- 0Kf6HC+tlFrVY77JeSo6COxG12uUwzkFSAm052gFlDQq9hA7Mi7LC5hH+uAzx2msQE2+
- nVyg==
+ bh=8OJqWAm7slkT9oJlTjfZYWlypq6UPefNbjBtcaVhf0s=;
+ b=MzhKm8KW6jcRfOF4V2h1SxlZwk0SxBEC8i5mOGwzDhTz/kFOX3aInIWivhfT19VwvY
+ Q0fnMKODVT6S6a6LQfazuiPu17T3bODLe2EpqIVaf7X7LLh4wbiT3NYAAVDlzewiA4Oe
+ GeCWFbg040Ez9Qa9eiHMYIclCSpiV8mi5U3QhL7C0O/UvUqbCAPM1A/fe6CVIF7e+jUG
+ 60VbnKkoOiXrxc+sQPj4x7As/2Kaj/rBC2j8WAPmJpW+gWMmbZyd+d24ebCpK63tErbb
+ oZmh/R/tiDxYPcYDmdmiQpXTmV9JQRXQt6zZcltQwYUz1JEaU1nPj08+rIhgW+zgE99U
+ BFQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752769848; x=1753374648;
+ d=1e100.net; s=20230601; t=1752769875; x=1753374675;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eqTY/hgnUOGw5r/5MMNQ9zxLh09jKm/h4RTZnzclTLk=;
- b=EchC9u6YdouWDTqvF0xQhaqpKokHkCUYLAxR8Fx6CpdOruw8YZU2Sl3OxLNXle50es
- P4jGbFV6Bu01F8iQJqiN8LHrgoS0IzQIEWeGF5HWvTvisvrX1NTP+x2w/2EUEX26mgkF
- oYeRcY1P3v/eeOLjXFjgRsuf9Sy4KIeEbOQGeTnrziHK+yycOKauzXg9HyAISiHmtDbG
- FO0/YFxbAHY+xE7PJIWmAg61mRXJ9ot0dq0LtcOKVRL3j6omMyW7k/FsWLRB4uHEuKMi
- bvmvWk23QNRhwVIcG6WDUjPdROw5aExMgopDEARorVHF4KQdoQDe55mcx2v3Dzm40i9j
- FZOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWGVfI0Sjg+FFJlzJ4qfjM/L8x+wNWdpZoLIpx3G0BL+RhAtz4oIJ7S3UgkXIOz8O/yNCDtqUc=@lists.denx.de
-X-Gm-Message-State: AOJu0YznxrNiH3czpOIkb8TxUo5QSXl28L9bKTjw0Aea58A9cMLCOGz5
- l2xFi5La7/ZhANax07fEmEHpHnEkkZtw2MbkfLU44IHW+TRy4Lw0BJbtxxmVxbfpPQ6IjdZiNIA
- +K7Ixasa1QIKvfFnWfYGubY88MLvetUg=
-X-Gm-Gg: ASbGncvAB3lc6c5mLYqCqN0Kn/RnJ3QOsAYeinN2eKxsHJG6wPYjGB+ceCDKgVU/BY7
- iVG6Am5Udan1u71aNZYYvNkrV+9zZqRPx/VQAV/nVbO9h4qK1sphdc8WS11ZYCMTSZMpgzqyz2y
- AKrtkUuVS3kNvYpB9/Nu6vw76covm7F/qmraGtsfOJF18U0iWFnTpQ4QJHuy6FZ4cvhSkItr1m0
- hdVFu8KLWHOlZcZlhQ+MnSmPbYk7x7Sdek2
-X-Google-Smtp-Source: AGHT+IEpmMLV/kXFH87hPfS5+KCGEyWTb+DiuNohfm77eAy+F72BSYAiWSwL2SVh4/UzEk+sKHlyYl+lr6zZ6HIEYIY=
-X-Received: by 2002:a05:651c:1505:b0:32a:88ca:ec18 with SMTP id
- 38308e7fff4ca-3308f4baed3mr21347401fa.10.1752769848163; Thu, 17 Jul 2025
- 09:30:48 -0700 (PDT)
+ bh=8OJqWAm7slkT9oJlTjfZYWlypq6UPefNbjBtcaVhf0s=;
+ b=Uec8BW/HN8ewNfmUDpekMyLPyE69D0DMsutsWVEj9ZuD/L6fTBmF76Xh5pdpoy67G2
+ 2xLS4CDwre+Da6bh5Jn+DMp/xqJ1lOHSs8XidOXbHmEZkTRQM2wR7//kZ46mHV5umjwX
+ Nb8Yg84qQobiYUIYfGZF9dR+7ybZuYj77jNzkVNghbQTgHX+HkXOtbAKyrlTARTLuZoN
+ ka6qXs2uA3PcK9TD14bIp/vN097ONsd9+1DwuvK5JtTXVoBVQltxFhABKj8J7fqbchJL
+ K1h6+hBE3/tu6NlpoHXwMtveXCGzyBYIlIIN5JjosimU9bBd/zxiUZhVoOlEE+KtuVoj
+ I83g==
+X-Gm-Message-State: AOJu0YxAkEWq4hG3eyFIuU8prS2++tEdyG69kEyLfeR8vppq/K+gfmVJ
+ +rwNkr9OF4StAt1HpW775CR3Z0fUYrt4Ggq0Yqhsw2tHvRrtheoFp8m6SGg2Ns+LOdFMyyL779/
+ RVOCaSP3SPc+NTyGNmr/66neEXz3YDjlGbw==
+X-Gm-Gg: ASbGncuY5s1gL5WMscAJHMbYx643S9KKSF2eWmouwoqDZlhq1CPPWmo/TCt9HLrf0lP
+ AAhKpX+vZm7dZyvaBuTATT0w2KDUm40W/1tecKWscfs2l8GrybCl1nEAx74HBKbby+i4oPauNev
+ 5K2flHjXih/SacX9gpjZ8G6IE9celjCIOus8X82YkZkiQpVw5WNKt496U+WTX2f7vuKIFgbNfU8
+ RYgi6pC96fb+24aBeFcmgAgGFf0muadC9+W
+X-Google-Smtp-Source: AGHT+IEHkktU8y8w1fKV3d0CH/cBO2ldFNUq/Tqj4G7tAgUn8FffUodYhKN5+OefQEvT3ZZ7i3K7SfiYu/jctOPZs8Q=
+X-Received: by 2002:ac2:568b:0:b0:553:2633:8a65 with SMTP id
+ 2adb3069b0e04-55a23f35a02mr2116574e87.30.1752769874927; Thu, 17 Jul 2025
+ 09:31:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250710081717.435585-1-l.anderweit@phytec.de>
-In-Reply-To: <20250710081717.435585-1-l.anderweit@phytec.de>
+References: <20250711151552.2224176-1-trini@konsulko.com>
+In-Reply-To: <20250711151552.2224176-1-trini@konsulko.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 17 Jul 2025 13:30:36 -0300
-X-Gm-Features: Ac12FXzBOmHfkl7TRK7RlcNV8rFA1o01CQ4NopI7ft_oPGwkQ8sFG0a_yE_H5pw
-Message-ID: <CAOMZO5DsWCDGeUPTN_d=8ZbYJCL1=qjMsyEsvnRwxwdUF7=qCg@mail.gmail.com>
-Subject: Re: [PATCH] phycore-imx8mp: Enable standard boot
-To: Leonard Anderweit <l.anderweit@phytec.de>
-Cc: Teresa Remmet <t.remmet@phytec.de>, Tom Rini <trini@konsulko.com>, 
- Benjamin Hahn <B.Hahn@phytec.de>, Yashwanth Varakala <y.varakala@phytec.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Yannic Moog <y.moog@phytec.de>, 
- upstream@lists.phytec.de, u-boot@lists.denx.de
+Date: Thu, 17 Jul 2025 13:31:03 -0300
+X-Gm-Features: Ac12FXzhyGCJUDS4IY7evXJjei-LAACDNDkNUbKvo3goZk9xv58J50Htq-pLiP4
+Message-ID: <CAOMZO5B6suF1QeXOQRvVUjZ-D+oksc6-Yg7t_jX6rMtm3+_11A@mail.gmail.com>
+Subject: Re: [PATCH] brppt2: Use the correct MMC driver
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,13 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 10, 2025 at 5:17=E2=80=AFAM Leonard Anderweit <l.anderweit@phyt=
-ec.de> wrote:
+On Fri, Jul 11, 2025 at 12:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
 >
-> Enable standard boot for the phycore-imx8mp and use it as default. Add
-> all variables required for standard boot to the environment.
+> As part of splitting the i.MX parts of FSL_ESDHC out from the more
+> legacy parts, the FSL_ESDHC_IMX symbol was added. This platform is the
+> only one which was not converted correctly.
 >
-> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
-> Tested-by: Martin Schwan <m.schwan@phytec.de>
+> Fixes: e37ac717d796 ("Convert to use fsl_esdhc_imx for i.MX platforms")
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
 Applied, thanks.
