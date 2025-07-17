@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D2DC83F22
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 14:46:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC931C83F34
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 14:54:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A8E8833FA;
-	Thu, 17 Jul 2025 16:46:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ABA983403;
+	Thu, 17 Jul 2025 16:54:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AfoKhV8F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ijt2J0Fk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8C69833D0; Thu, 17 Jul 2025 16:46:08 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 398CB8340A; Thu, 17 Jul 2025 16:54:42 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F50F833FA
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 16:46:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10372833FC
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 16:54:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-73e810dc4cdso10201a34.0
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:46:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-455b00339c8so7745635e9.3
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:54:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752763565; x=1753368365; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tZGA1cI46K3vnMV+qSxue1lBjEWvmpyW5W2O3xg2eDM=;
- b=AfoKhV8FH3esKZ0N7iIfpuycCmpFCGZUFm/U8hNbjLHxqZXokb4BABQBxzc+GXsCNX
- YeHldWvdJFXNql7T2Cy728vhPlshJ567WWZmpqxc4mxyMHMnWdanmQ87M6arL3BRfLQd
- ZvmMcR5Q4jobav2KFS2CNLb+uM8FfB3IAWEHU=
+ d=linaro.org; s=google; t=1752764078; x=1753368878; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KPW7Kilcakbc8ZShxorfV/v0yEftImZ5HPAq3o+LWcY=;
+ b=ijt2J0FkLODGjMSfY4GJ8GAN8gOkse1FyYeXZNM0d1KE10r2HwgAG9K9YRj6QnU9zT
+ 1EjpqyxLqLOaaq2C2JkAMQQ9n8YwRzP/R5wvrElLMEuEGDnWfpSO0gWkkNt+TrxC8ta8
+ qHTpp5Dt3UbQPt1Man6XmldVG2eu1QmX12g9J5XGTLoCZtE6ChaRlQrLcorHZcDsMNnz
+ zsLf4b/Bac99j/ML5qiG1J44wrG9uDF6gNIi+k6tU5v33vipZ5yeXzUKUrX/ISVQntdp
+ MGY16BbUQpKUlReiGM70o3rlyFI0CAKMcgHMjZNAJGkymy5cDCCv+d6HawqdY7sFOb59
+ XQCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752763565; x=1753368365;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tZGA1cI46K3vnMV+qSxue1lBjEWvmpyW5W2O3xg2eDM=;
- b=YlkBCJzS3EhCLFWDquFQi+zq+PYjLMRHHvdeCrx9kY8f2JCYw0FYdVDO2XELQCi3jf
- fvSA/zcBbjlulriX2196E8sscnUgXZx0IQDzVKF1oEl+hzEoLjGuZX+Qy1VR82Y2xXCo
- D2ZwRxrEgvM6BCQ0o+2ZA9ixy3sYjPLnBoGlopa7iPhzJF8b6/H3JldJh6f1W9ZrdIfF
- 5Uc5KJZRkhZJ7L+SxvTC3+hdKfzvks1dwVGyoQU0imxkdyiQYKfk12qg3YPeIzJXIRq3
- r/bwXaUIBMTb4B5MvdrqyiJ7CBitT+6m3w/RaqtvRq0BQMxLWZxBCKU2qyyjHlPhwwgP
- YnOA==
-X-Gm-Message-State: AOJu0Yy4nhyGCYqz4fDKEd+Z4ds6VTbUdhqBnkoYARHbTHHTXhl7VO2p
- KmQlF8fcBwLHtxWsiCbQsin2Qp24UUh7yJx8v7Bd9xqgcj5vUWbSVLUJJk5+vglJ8q4=
-X-Gm-Gg: ASbGncsdx+H9ix9adBWBAlj9OTDc1e9uF3yzgFka08xynzt5qfnMpIJ61HIEAs0BiAU
- LsBpFzJRQeuczprgqLT7Xlrus9qjkqPahigRb3xnzTHoqyr9lRQEZcu0ccG+nKx6pEZ6T/n5Vt/
- NFEoJa89Y1AopMBjRa+uoxgCsR4Z11TLwmlWurp9bizjrzYUIn9ga2v8e+4cKWBwZ1b+aqw+bvB
- mAdAXJskLDCvH8CmfvDb5cD/Yr/q/ZDkoB2/pbKStEBDKLE6pztdFEBb5nzL4KasUaYd3+TPZYt
- gMcf/VHHOTACCk4v91OkHyckia++10wmdkg+JedUtjuo+07vFfY8G1vBDDH1t1jSQ+ww3S0N+YX
- jXlHkkjUh6DFbW/Yhmd3XwDXeDilvHjvPGnP9BaNxadlBwL5JsLs+nIi3
-X-Google-Smtp-Source: AGHT+IE13NC2KV4dKkmUOVJHF38md2JYZoElis+Rom+IUOZUdl5wGOrOKXDdKK0KueF8eTuj5begJw==
-X-Received: by 2002:a05:6830:d07:b0:72b:84a7:47e0 with SMTP id
- 46e09a7af769-73e649c8a5dmr5660507a34.1.1752763565180; 
- Thu, 17 Jul 2025 07:46:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e568d9181sm2351034a34.36.2025.07.17.07.46.04
+ d=1e100.net; s=20230601; t=1752764078; x=1753368878;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KPW7Kilcakbc8ZShxorfV/v0yEftImZ5HPAq3o+LWcY=;
+ b=PJk15YevNNVAgWCcIkZbMzZ0Cq4Bq4qHhFjpzgOrStfvv0HCxBv/A9FfrBhPYfAjQ8
+ Vd8zkjit5rS+dCxpuYIXrvcNI5qx5DOzJGrlEtmNy7Ms0hAWNQ/KWCRo1gv9MKHRMJYG
+ WC5thGpKjZeV4e+FZITIt8KfC+/LC4cfXyn0luegF12mKB+uaMMSksT6rKR0JdvJL05r
+ UZHYDozY6pMwgkz/3Mll5Zlx/HcLZwVvaen8Z7lAUIMp7P4uc5pLy/pIu9xJ3AAF4P5L
+ FuVvC7BqcQ20p/uue27LMKq/ZVUolPPqeGf9uHBKrRot7dHSS3l6gir3XbIOFiHa64l0
+ hFww==
+X-Gm-Message-State: AOJu0YwZPyAJr2oTPdX49fI/kZ/xwTSWt33Xze60jc912VU/sBfdkbQX
+ gHcaBzKhvyK5dLYhGBYLs33EK9YgR+Mckcg2z83PeWCeWg7nFLpPneLjE3+/GBAiy+E=
+X-Gm-Gg: ASbGnct5U8nEfH1XusCMhoAe6lENXNjWV/dHnzfhB8koWQKUaSQMHFSBeiONpxILrvS
+ Wn7ffHPIjNzDG7Z6BlCkf7H97G5ZvSjQmAOB1pFIrNV3wIkF6oug4u9LDvFjSz193DHy3QHePgF
+ wysJ83Jov53DH9Ckala/v/j6U/1u6vdFMnS4ryrFvhBP1sngxl6xjRczh0TQuHRdNViT6czVZQE
+ IafR0yI9pxVNKoLJrF5vuUj0Ru+0ho5450z/xbKr3m8BafFr4qFDgdY+wfLMQfcmfSCKiIPoj0l
+ YTMSHQ18wl3Hg/3Ti39WNo6r/0rRmGTKFG20aTBoShH6U0jVaAMH/7aAPKRmJCof9Nra34qdGD9
+ 9wpL0GcQtUVkEVKsytEIH1YXkvN6aBjP1mHNcNEuTf/obl3MDxhw=
+X-Google-Smtp-Source: AGHT+IHd5bh2zi6KIZGYZTOySFh2xEJfI68QVOchoVWXE1TnvTfnvANAlui8mC3hVfV+oOQxIDW0/A==
+X-Received: by 2002:a05:600c:4e8c:b0:43d:4e9:27ff with SMTP id
+ 5b1f17b1804b1-4562efa4ccdmr55052385e9.7.1752764078282; 
+ Thu, 17 Jul 2025 07:54:38 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:eb9:1701:f497:a590:bf80:45c8])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4562e8ab642sm52643905e9.36.2025.07.17.07.54.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 07:46:04 -0700 (PDT)
-Date: Thu, 17 Jul 2025 08:46:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] fs: exfat: Remove unused label code
-Message-ID: <20250717144602.GM193579@bill-the-cat>
-References: <20250717-exfat_label-v1-1-e15f28fd6c6b@linaro.org>
+ Thu, 17 Jul 2025 07:54:37 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 17 Jul 2025 15:54:37 +0100
+Subject: [PATCH] fs: fat: Prevent possible buffer overflow
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+xzd6QPIEfkbqy8i"
-Content-Disposition: inline
-In-Reply-To: <20250717-exfat_label-v1-1-e15f28fd6c6b@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250717-fsfat-v1-1-4cfb1d1a77ca@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAKwOeWgC/x2NQQqEMAwAvyI5W7CiZPEr4iHtpmsOVklEBPHv1
+ j0OMzAXGKuwwVBdoHyIyZoL+LqCOFP+sZNvYWibtm/Qo0uWaHeEGPnje5+wg9IGMnZBKcf5rRe
+ ynfUVm3KS8z8Yp/t+AN/LkuRwAAAA
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,47 +99,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Instead of strcpy which is unbounded use strlcpy to ensure that the
+receiving buffer cannot be overflowed.
 
---+xzd6QPIEfkbqy8i
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This issue found by Smatch.
 
-On Thu, Jul 17, 2025 at 01:04:58PM +0100, Andrew Goodbody wrote:
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ fs/fat/fat.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Smatch reported a possible buffer overflow in exfat_set_label but it
-> turns out that this code is unused so just remove the function as well
-> as exfat_get_label that is also unused and the helper static find_label.
->=20
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->  fs/exfat/exfat.h |  2 --
->  fs/exfat/node.c  | 54 --------------------------------------------------=
-----
->  2 files changed, 56 deletions(-)
+diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+index 89f2acbba1e..fa34ad7a501 100644
+--- a/fs/fat/fat.c
++++ b/fs/fat/fat.c
+@@ -1391,7 +1391,7 @@ int fat_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp)
+ 		return -ENOENT;
+ 
+ 	memset(dent, 0, sizeof(*dent));
+-	strcpy(dent->name, dir->itr.name);
++	strlcpy(dent->name, dir->itr.name, FS_DIRENT_NAME_LEN);
+ 	if (CONFIG_IS_ENABLED(EFI_LOADER)) {
+ 		dent->attr = dir->itr.dent->attr;
+ 		fat2rtc(le16_to_cpu(dir->itr.dent->cdate),
 
-Since I think this is just pure upstream, we should guard it with
-#ifndef __UBOOT__/#endif like other parts to make future resyncs easier.
+---
+base-commit: 3b4604a40b9fd61b87e9d059fc56f04d36f1a380
+change-id: 20250717-fsfat-a77ce8151f74
 
---=20
-Tom
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
---+xzd6QPIEfkbqy8i
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh5DKoACgkQFHw5/5Y0
-tywzGAv+L/kHHNQQUy5CBo7eobI8dwSV3htfcZTFdX6UMaBGo0pu3k1iM5SfJamC
-NLqAiwG8eGTCz6z+e8N9VzgZZFeymYr51v/BGFhf+Q0Gbx4Ddfv/6j4lH2wvV+gs
-SW9sglF7fooBc/fXmBuJQyqnkwUmMSCS/3Q4rVX0N4N6LoRTQQn0c80qekT79EEM
-/IhbP3r51KzC330ISdsoDaY4n/AKQvE6SOa94e49/MAJtRTZOLisn8wwUFTyolck
-sBWmBJEqnI0Q64hUHpacvg7Jt2LAFU2DHU1ygLziKgo1raGSiBpgPUFgs9xZKfBc
-PNBjG+cmE/vJxEsEwl3Azxlbce7UKsWxWOG/7EI+kHI468/U0ndS0gnIE8WJ2+W+
-ENqek3yYuagKw/spvymaxAuyeXXoSAlfz1oxs34NFQJfje1EQN2DdjFK+1m77bRU
-fxk4y7ZpcXavHC42uM7hFe7QI30Db2c0Vfz7G3Cdh4f54kx0Uxk4Meg+jySErlsz
-uqgVC9PG
-=XDC6
------END PGP SIGNATURE-----
-
---+xzd6QPIEfkbqy8i--
