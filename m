@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E58F6C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 12:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994A2C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 12:14:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C462E83330;
-	Thu, 17 Jul 2025 14:05:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EBAEA83339;
+	Thu, 17 Jul 2025 14:14:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o2u9S5Va";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gX32qEiT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E10C48334F; Thu, 17 Jul 2025 14:05:07 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DC9C83323
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 14:05:05 +0200 (CEST)
+ id 0F9978334F; Thu, 17 Jul 2025 14:14:00 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C734583323
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 14:13:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a575a988f9so521086f8f.0
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 05:05:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752753905; x=1753358705; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=edIOk89F63yw/OG3BYR4Lka7V9EOP5Xv2XumqCpScjU=;
- b=o2u9S5Va884uD4EYddggNG4wIuQAYsoC2746ENKz23YJZWJHYjhThR/Ni1JSwYke88
- p4kZA+THaRQfObTWMAUV1qbi0BETldjGLr5gHDMV7i2WGhlAsySCpbWc4mD6vXPAxsN+
- AuFyiX/803P3Xj2d/kTRE8Rxh5ZcXDJiYEo4kFoBWJiXWtP0fjVSNaOl1du2ckNLtudh
- qIqRV3GGvRxpuuvmjPKu1TF8jGWtTAiSBG+jFoWhRZIeWViiM4hBq2km4v3ZMViOp82c
- GKoFvoYEraqUGr/yZwtYgUupx21+6lU6WvSVGaQmDSYSzZTyzdgQIAohs6RH3Z71+heC
- k9vw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752753905; x=1753358705;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=edIOk89F63yw/OG3BYR4Lka7V9EOP5Xv2XumqCpScjU=;
- b=lBZl1Dve1GcMUdtub0EU8tkaFolDDIWtD97HprAkNVvhX9Nx7xhuzBIRI3uZP+boHW
- nnpyIwcmgrBlBAYz+yfxE8aJGVyyfHOo/rJfusWtKG7NMi9pe6Q0hT4ONH5/PbgJTSHE
- yapMh+FuHTYmiUJelvYK66EwKqjTc/s5DESgj9pGkLzoQPUpcd9X1SfBr04mgN2W31nf
- QYP9B3H8P8tDHlCjXuebQTBFq7zLyKzfDrYhliLRMOPvngyNmlDRDGo/2LCUOJipTAMn
- Har9OPKDWW8rNK9gnHiUV/dwvl9qMj7A+uwdnmFrpkIKxNkAvO2vh8M/Nid9U3eFP6iz
- CxPA==
-X-Gm-Message-State: AOJu0Yzc14f1Ru5+Va6FdvAx21+ZtVVvelzdmfnMPNbsDpJ+iiYVNUVQ
- urJdLVWfMX/LBh+9YrIMNzNQq9aRdyPUersG+GrVHe0wHuSEAZ4oJhvv1jvg3y4cEh8=
-X-Gm-Gg: ASbGncuF+q5E1Vxikl0DlrUGYX5puxKYEu2xmfJ1nyX4AttArHn98248PJrVWS/RqEp
- 84mHytWpEGbbk6p7s1uHQeJPtHE7MWvMlCmotk3TaeNiG2ijNTD0Gf4dbVrMngeIG/CQUKUXioW
- 1iz9G7fKRCfYXfn4mhsWJ43TOalLtSIhdzWRC60wKqPMYT+4nLG9k3TTa6cETWY+Zji4anBdUmv
- ABYeJ7aZ5gROAEzaxdaXR1RE0ShRDqaRlxHosfVWygNTlZ4vBV4SBpyLI1zKA6ntd5Z08oINwhU
- +zzak/GRSWJ+Xann0HzfKVfEimkN8avQQbZRsAZz+EaeSVd49YeaiyAVZRZv8L3G9a8EbE9wjnI
- K43LZusXat/+5RdYng93GyKKQoReZqAl5fJ1YldAAOrhL5GkOi4g=
-X-Google-Smtp-Source: AGHT+IHPFvOGVp5a2A7RjMYcA6Pq7P7eWkgXcl43lgLIjH1anFHTxwK6MrslSKRDh17exxRVdZ+GJA==
-X-Received: by 2002:a05:6000:21c7:b0:3a4:dc42:a0c3 with SMTP id
- ffacd0b85a97d-3b60dd8f441mr4173906f8f.56.1752753900115; 
- Thu, 17 Jul 2025 05:05:00 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:eb9:1701:f497:a590:bf80:45c8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8e14e82sm20730510f8f.71.2025.07.17.05.04.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 05:04:59 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 17 Jul 2025 13:04:58 +0100
-Subject: [PATCH] fs: exfat: Remove unused label code
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56HCDsiF469845;
+ Thu, 17 Jul 2025 07:13:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1752754434;
+ bh=isHmHakmKoEty5pcphHDgJaNDaxkikuy+q5pYSrRGv4=;
+ h=From:Date:Subject:To:CC;
+ b=gX32qEiT1KFYecCfDeyAlIBhmM2wXMpGU1nePuatzaXYgzhTAuJLAvwXW0z5oQsCE
+ n+Dpl7FvGwidzsopi9PeP54rPEmcdth95pRSmsNOpqWIGUTeRQbNEYNoyfDaTtazHd
+ I7B1MysqXKxlwlgwLElMnSemtjzvOM+uoCv1D55M=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56HCDsAw2772885
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 17 Jul 2025 07:13:54 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 17
+ Jul 2025 07:13:53 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 17 Jul 2025 07:13:54 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56HCDsrO1828486;
+ Thu, 17 Jul 2025 07:13:54 -0500
+From: Bryan Brattlof <bb@ti.com>
+Date: Thu, 17 Jul 2025 07:13:49 -0500
+Subject: [PATCH] arm: dts: k3: use SPL_TEXT_BASE for R5 SPL load address
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250717-exfat_label-v1-1-e15f28fd6c6b@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAOnmeGgC/x2NUQqDMBAFryL73UBMFalXKaVs7Isu2Fh2pQji3
- Rv7OQzD7GRQgVFf7aT4ismSC9SXioaJ8wgnr8IUfGh9V3cOW+L1OXPE7GJqOPkGHG5XKkVkg4v
- KeZjO5s22Qk/xUSTZ/pv74zh+wUsswnYAAAA=
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Message-ID: <20250717-dt-cleanup-v1-1-a911b0bb832b@ti.com>
+X-B4-Tracking: v=1; b=H4sIAP3oeGgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDc0Nz3ZQS3eSc1MS80gJdCwtLozTTlKTE5DQDJaCGgqLUtMwKsGHRsbW
+ 1APQn3rBcAAAA
+X-Change-ID: 20250717-dt-cleanup-8892f5dbacf0
+To: Wadim Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, Garrett Giordano
+ <ggiordano@phytec.com>
+CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10967; i=bb@ti.com;
+ h=from:subject:message-id; bh=rl6GaofdP0seyDJCssor7z3F9aTY0wxp+pwKcCi6kUM=;
+ b=owNCWmg5MUFZJlNZq5dcKQAAaX///7/f+3ejXf2+OZd/3Wz733++1//v2vu9305c9D9v9fywA
+ RmwHaQAAAyZAGg0A0AAAGhoAAGmmmmmgAAAAMI0GINB6QzUwTQeoaehqNqHCYgyADI0GgA0wTQx
+ DQyNNDQAGjJgEZAD0mjRk0ADQaABkyAMgAGgNByGmgD1GjahkAHohoNBiDTR6IBpppoBkNANAZA
+ MhkNNGTQNGgDQGgaADTINNDCq11FPNOGj83i+cwnYYXFgQMoELQ2Hpsd5vBfSgIAhVULmvYJhJm
+ 3PbM8rIg2ZN7BE3gaepDLjjWbKsPo3fxAE7nIZ8KM+D/50+L9Lb59mtNTRMRzsG3kojuJ6HHpR4
+ 2I49bedDpUny5hpOYfULzzv97OJ8ETZlWt+zF+3B6LRq0DpMUoCGp4cQ7fafAYXqSRfZGX3GTUE
+ laoQyOIICgqHcRDsZQ+dTM/JinAyoKP5XOif2D8D+yHNox7cUXBolmXoEfUrBuiSXOKRS13oK+t
+ eqTh6ndMRKs2CFGcwS03YfoFIZCvQcA0eo+lh7sc/fJkELOO5BHd/kYFT2wVmsDPne8x5kRXhiv
+ ChecUQBkhAxjrXU+zSWQrBA/AUBXtiMtFolTMCYNgN+Jhypg1FZl4VA0PKP0Y1OjWOs+tVow8DM
+ SDJ5ZqWG/xdyRThQkKuXXCk
+X-Developer-Key: i=bb@ti.com; a=openpgp;
+ fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,97 +96,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reported a possible buffer overflow in exfat_set_label but it
-turns out that this code is unused so just remove the function as well
-as exfat_get_label that is also unused and the helper static find_label.
+The load address for the R5's SPL is defined in Kconfig by
+SPL_TEXT_BASE. Rather than hard coding the load address which could
+lead to hard to debug issues if this value is changed, just use the
+SPL_TEXT_BASE value.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- fs/exfat/exfat.h |  2 --
- fs/exfat/node.c  | 54 ------------------------------------------------------
- 2 files changed, 56 deletions(-)
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi      | 6 +++---
+ arch/arm/dts/k3-am625-sk-binman.dtsi               | 6 +++---
+ arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 6 +++---
+ arch/arm/dts/k3-am62a-phycore-som-binman.dtsi      | 6 +++---
+ arch/arm/dts/k3-am62a-sk-binman.dtsi               | 6 +++---
+ arch/arm/dts/k3-am62p-sk-binman.dtsi               | 4 ++--
+ arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi | 4 ++--
+ arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi       | 4 ++--
+ arch/arm/dts/k3-j722s-binman.dtsi                  | 4 ++--
+ 9 files changed, 23 insertions(+), 23 deletions(-)
 
-diff --git a/fs/exfat/exfat.h b/fs/exfat/exfat.h
-index ca6f22b9d58..19d6a70c48c 100644
---- a/fs/exfat/exfat.h
-+++ b/fs/exfat/exfat.h
-@@ -237,8 +237,6 @@ int exfat_rename(struct exfat* ef, const char* old_path, const char* new_path);
- void exfat_utimes(struct exfat_node* node, const struct timespec tv[2]);
- void exfat_update_atime(struct exfat_node* node);
- void exfat_update_mtime(struct exfat_node* node);
--const char* exfat_get_label(struct exfat* ef);
--int exfat_set_label(struct exfat* ef, const char* label);
- 
- int exfat_soil_super_block(const struct exfat* ef);
- int exfat_mount(struct exfat* ef, const char* spec, const char* options);
-diff --git a/fs/exfat/node.c b/fs/exfat/node.c
-index 88b1357189c..2e2fae7935f 100644
---- a/fs/exfat/node.c
-+++ b/fs/exfat/node.c
-@@ -1187,57 +1187,3 @@ void exfat_update_mtime(struct exfat_node* node)
- 	node->mtime = time(NULL);
- 	node->is_dirty = true;
- }
--
--const char* exfat_get_label(struct exfat* ef)
--{
--	return ef->label;
--}
--
--static int find_label(struct exfat* ef, off_t* offset)
--{
--	struct exfat_entry entry;
--	int rc;
--
--	for (*offset = 0; ; *offset += sizeof(entry))
--	{
--		rc = read_entries(ef, ef->root, &entry, 1, *offset);
--		if (rc != 0)
--			return rc;
--
--		if (entry.type == EXFAT_ENTRY_LABEL)
--			return 0;
--	}
--}
--
--int exfat_set_label(struct exfat* ef, const char* label)
--{
--	le16_t label_utf16[EXFAT_ENAME_MAX + 1];
--	int rc;
--	off_t offset;
--	struct exfat_entry_label entry;
--
--	memset(label_utf16, 0, sizeof(label_utf16));
--	rc = exfat_utf8_to_utf16(label_utf16, label, EXFAT_ENAME_MAX + 1,
--			strlen(label));
--	if (rc != 0)
--		return rc;
--
--	rc = find_label(ef, &offset);
--	if (rc == -ENOENT)
--		rc = find_slot(ef, ef->root, &offset, 1);
--	if (rc != 0)
--		return rc;
--
--	entry.type = EXFAT_ENTRY_LABEL;
--	entry.length = exfat_utf16_length(label_utf16);
--	memcpy(entry.name, label_utf16, sizeof(entry.name));
--	if (entry.length == 0)
--		entry.type ^= EXFAT_ENTRY_VALID;
--
--	rc = write_entries(ef, ef->root, (struct exfat_entry*) &entry, 1, offset);
--	if (rc != 0)
--		return rc;
--
--	strcpy(ef->label, label);
--	return 0;
--}
+diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+index 6deebdadf092aff27ddb4201e408f2aefe9a0f0f..a9bd5a2be84abf5645c540360b08f15260bca5d3 100644
+--- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
++++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+@@ -25,7 +25,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+ 			content-dm-data = <&combined_dm_cfg>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -69,7 +69,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -105,7 +105,7 @@
+ 			combined;
+ 			dm-data;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			content-sysfw = <&ti_fs_gp>;
+ 			load-sysfw = <0x40000>;
+ 			content-sysfw-data = <&combined_tifs_cfg_gp>;
+diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
+index 6822a5dac896eb55de15d8c9eb38061f76ec6e51..f743c4353b49c882a87631610232e6d6de1300c4 100644
+--- a/arch/arm/dts/k3-am625-sk-binman.dtsi
++++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
+@@ -23,7 +23,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+ 			content-dm-data = <&combined_dm_cfg>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -67,7 +67,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -103,7 +103,7 @@
+ 			combined;
+ 			dm-data;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			content-sysfw = <&ti_fs_gp>;
+ 			load-sysfw = <0x40000>;
+ 			content-sysfw-data = <&combined_tifs_cfg_gp>;
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+index bfbba28269cf3435944e2e25bf9c454af88046f4..65fef6e479070bb64cd1297d17b189c72892379f 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+@@ -23,7 +23,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+ 			content-dm-data = <&combined_dm_cfg>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -67,7 +67,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -103,7 +103,7 @@
+ 			combined;
+ 			dm-data;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			content-sysfw = <&ti_fs_gp>;
+ 			load-sysfw = <0x40000>;
+ 			content-sysfw-data = <&combined_tifs_cfg_gp>;
+diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+index fd3401015325cd34fd7e3592e1f5bc6cfec50b3a..9bcdf74ffe46368ddc6a872d02f26378aba763a9 100644
+--- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
++++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+@@ -30,7 +30,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+ 			content-dm-data = <&combined_dm_cfg>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -74,7 +74,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -110,7 +110,7 @@
+ 			combined;
+ 			dm-data;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			content-sysfw = <&ti_fs_gp>;
+ 			load-sysfw = <0x40000>;
+ 			content-sysfw-data = <&combined_tifs_cfg_gp>;
+diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+index 877a513a2418611b491963925440011cc1e319bf..0685bdd7e0c78087777e12cfa3d936c63f2fa597 100644
+--- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
++++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+@@ -27,7 +27,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+ 			content-dm-data = <&combined_dm_cfg>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -71,7 +71,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c3a800>;
+@@ -107,7 +107,7 @@
+ 			combined;
+ 			dm-data;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			content-sysfw = <&ti_fs_gp>;
+ 			load-sysfw = <0x40000>;
+ 			content-sysfw-data = <&combined_tifs_cfg_gp>;
+diff --git a/arch/arm/dts/k3-am62p-sk-binman.dtsi b/arch/arm/dts/k3-am62p-sk-binman.dtsi
+index d65e5c4d4e1e53f30040f32306d7b8c0159a3176..feb59edcd832ba535deac296ff82f3d9929050fe 100644
+--- a/arch/arm/dts/k3-am62p-sk-binman.dtsi
++++ b/arch/arm/dts/k3-am62p-sk-binman.dtsi
+@@ -25,7 +25,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c4a800>;
+@@ -72,7 +72,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_hs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_hs>;
+ 			content-dm-data = <&combined_dm_cfg_hs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c4a800>;
+diff --git a/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
+index 13fac18d7aac6fd5d146bcd5b815282f8e53372d..b1591faaf0a52e9f18e95c85b9da18d43d8a8758 100644
+--- a/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
++++ b/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
+@@ -25,7 +25,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c4a800>;
+@@ -74,7 +74,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_hs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_hs>;
+ 			content-dm-data = <&combined_dm_cfg_hs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c4a800>;
+diff --git a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
+index 2a0023fb7c313270ed6b4ccf967a2b59bf8e3d09..0e810e7f492dbb37cde89b6adc8b78098e0134e7 100644
+--- a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
++++ b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
+@@ -75,7 +75,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+ 			content-dm-data = <&combined_dm_cfg>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c7a800>;
+@@ -125,7 +125,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c7a800>;
+diff --git a/arch/arm/dts/k3-j722s-binman.dtsi b/arch/arm/dts/k3-j722s-binman.dtsi
+index 57e966ea666447118503e59ed0ddf40f471ae4c0..278b7bfac7fa0369f1227941d392a17ce71a1112 100644
+--- a/arch/arm/dts/k3-j722s-binman.dtsi
++++ b/arch/arm/dts/k3-j722s-binman.dtsi
+@@ -23,7 +23,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+ 			content-dm-data = <&combined_dm_cfg>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c7a800>;
+@@ -73,7 +73,7 @@
+ 			content-sysfw-data = <&combined_tifs_cfg_fs>;
+ 			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+ 			content-dm-data = <&combined_dm_cfg_fs>;
+-			load = <0x43c00000>;
++			load = <CONFIG_SPL_TEXT_BASE>;
+ 			load-sysfw = <0x40000>;
+ 			load-sysfw-data = <0x67000>;
+ 			load-dm-data = <0x43c7a800>;
 
 ---
 base-commit: 3b4604a40b9fd61b87e9d059fc56f04d36f1a380
-change-id: 20250717-exfat_label-bf4af04ea293
+change-id: 20250717-dt-cleanup-8892f5dbacf0
 
 Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+Bryan Brattlof <bb@ti.com>
 
