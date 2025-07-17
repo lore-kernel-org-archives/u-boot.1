@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50ECC83F34
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 23:58:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FBC8C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 23:58:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD15A834BC;
-	Fri, 18 Jul 2025 01:57:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A477835C6;
+	Fri, 18 Jul 2025 01:57:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C21B834B6; Fri, 18 Jul 2025 01:57:06 +0200 (CEST)
+ id 9CFF6835D4; Fri, 18 Jul 2025 01:57:07 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 419EE83577
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 01:57:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 9ECA08349B
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 01:57:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 21B8E168F;
- Thu, 17 Jul 2025 16:56:56 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 786921762;
+ Thu, 17 Jul 2025 16:56:57 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8D52A3F694;
- Thu, 17 Jul 2025 16:57:02 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E59683F694;
+ Thu, 17 Jul 2025 16:57:03 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: u-boot@lists.denx.de
 Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
  Mikhail Kalashnikov <iuncuim@gmail.com>, Yixun Lan <dlan@gentoo.org>,
  Paul Kocialkowski <paulk@sys-base.io>, linux-sunxi@lists.linux.dev,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 09/20] sunxi: mmc: add support for Allwinner A523 MMC mod
- clock
-Date: Fri, 18 Jul 2025 00:54:44 +0100
-Message-ID: <20250717235455.32528-10-andre.przywara@arm.com>
+Subject: [PATCH v2 10/20] power: regulator: add AXP323 support
+Date: Fri, 18 Jul 2025 00:54:45 +0100
+Message-ID: <20250717235455.32528-11-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.3
 In-Reply-To: <20250717235455.32528-1-andre.przywara@arm.com>
 References: <20250717235455.32528-1-andre.przywara@arm.com>
@@ -58,57 +57,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Allwinner A523 SoC has a slightly changed mod clock, where the P
-factor, formerly a shift value, is now a second divider value.
-Also the input clock is not PLL_PERIPH0_2X (1200MHz) anymore, but
-PLL_PERIPH0_400M, so adjust the input rate calculation accordingly.
+The X-Powers AXP323 is very close sibling to the AXP313A, only that it
+adds support for dual-phasing the first two DC/DC converters.
+
+We do not really care about this particular feature, so just add the new
+compatible string and tie it to the existing AXP313A support code.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- drivers/mmc/sunxi_mmc.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ drivers/power/pmic/axp.c                | 1 +
+ drivers/power/regulator/axp_regulator.c | 1 +
+ include/axp_pmic.h                      | 1 +
+ 3 files changed, 3 insertions(+)
 
-diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
-index 06c1e09bf26..7c85030be16 100644
---- a/drivers/mmc/sunxi_mmc.c
-+++ b/drivers/mmc/sunxi_mmc.c
-@@ -99,6 +99,15 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
- 		 */
- 		if (IS_ENABLED(CONFIG_MACH_SUN8I_R528))
- 			pll_hz /= 2;
-+
-+		/*
-+		 * The A523/T527 uses PERIPH0_400M as the MMC input clock,
-+		 * which is the PERIPH0 nominal rate (1200MHz) / 3.
-+		 * Together with the fixed post-divider of 2 of the MMC mod
-+		 * clock, that gives a divider of 6.
-+		 */
-+		if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
-+			pll_hz /= 6;
- 	}
- 
- 	div = pll_hz / hz;
-@@ -153,6 +162,10 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
- 			CCM_MMC_CTRL_SCLK_DLY(sclk_dly);
- 	}
- 
-+	/* The A523 has a second divider, not a shift. */
-+	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
-+		n = (1U << n) - 1;
-+
- 	writel(CCM_MMC_CTRL_ENABLE| pll | CCM_MMC_CTRL_N(n) |
- 	       CCM_MMC_CTRL_M(div) | val, priv->mclkreg);
- 
-@@ -559,7 +572,8 @@ struct mmc *sunxi_mmc_init(int sdc_no)
- 	cfg->host_caps = MMC_MODE_4BIT;
- 
- 	if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I) ||
--	    IS_ENABLED(CONFIG_SUN50I_GEN_H6)) && (sdc_no == 2))
-+	    IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_MACH_SUN55I_A523)) &&
-+	    (sdc_no == 2))
- 		cfg->host_caps = MMC_MODE_8BIT;
- 
- 	cfg->host_caps |= MMC_MODE_HS_52MHz | MMC_MODE_HS;
+diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
+index c300fd2bbc2..1204ec00f8d 100644
+--- a/drivers/power/pmic/axp.c
++++ b/drivers/power/pmic/axp.c
+@@ -89,6 +89,7 @@ static const struct udevice_id axp_pmic_ids[] = {
+ 	{ .compatible = "x-powers,axp221", .data = AXP221_ID },
+ 	{ .compatible = "x-powers,axp223", .data = AXP223_ID },
+ 	{ .compatible = "x-powers,axp313a", .data = AXP313_ID },
++	{ .compatible = "x-powers,axp323", .data = AXP323_ID },
+ 	{ .compatible = "x-powers,axp717", .data = AXP717_ID },
+ 	{ .compatible = "x-powers,axp803", .data = AXP803_ID },
+ 	{ .compatible = "x-powers,axp806", .data = AXP806_ID },
+diff --git a/drivers/power/regulator/axp_regulator.c b/drivers/power/regulator/axp_regulator.c
+index 75cdbca30f6..7794a4f5d92 100644
+--- a/drivers/power/regulator/axp_regulator.c
++++ b/drivers/power/regulator/axp_regulator.c
+@@ -318,6 +318,7 @@ static const struct axp_regulator_plat *const axp_regulators[] = {
+ 	[AXP221_ID]	= axp22x_regulators,
+ 	[AXP223_ID]	= axp22x_regulators,
+ 	[AXP313_ID]	= axp313_regulators,
++	[AXP323_ID]	= axp313_regulators,
+ 	[AXP717_ID]	= axp717_regulators,
+ 	[AXP803_ID]	= axp803_regulators,
+ 	[AXP806_ID]	= axp806_regulators,
+diff --git a/include/axp_pmic.h b/include/axp_pmic.h
+index ae62ef0d76d..1806a7270a0 100644
+--- a/include/axp_pmic.h
++++ b/include/axp_pmic.h
+@@ -33,6 +33,7 @@ enum {
+ 	AXP221_ID,
+ 	AXP223_ID,
+ 	AXP313_ID,
++	AXP323_ID,
+ 	AXP717_ID,
+ 	AXP803_ID,
+ 	AXP806_ID,
 -- 
 2.46.3
 
