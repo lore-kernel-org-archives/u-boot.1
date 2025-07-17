@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC931C83F34
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 14:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C33C83F34
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 14:56:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ABA983403;
-	Thu, 17 Jul 2025 16:54:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC16A83404;
+	Thu, 17 Jul 2025 16:56:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ijt2J0Fk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wmCTNf/B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 398CB8340A; Thu, 17 Jul 2025 16:54:42 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 097FD8340A; Thu, 17 Jul 2025 16:56:41 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10372833FC
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 16:54:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F38E833F8
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 16:56:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-455b00339c8so7745635e9.3
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:54:38 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3a52874d593so823979f8f.0
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:56:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752764078; x=1753368878; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KPW7Kilcakbc8ZShxorfV/v0yEftImZ5HPAq3o+LWcY=;
- b=ijt2J0FkLODGjMSfY4GJ8GAN8gOkse1FyYeXZNM0d1KE10r2HwgAG9K9YRj6QnU9zT
- 1EjpqyxLqLOaaq2C2JkAMQQ9n8YwRzP/R5wvrElLMEuEGDnWfpSO0gWkkNt+TrxC8ta8
- qHTpp5Dt3UbQPt1Man6XmldVG2eu1QmX12g9J5XGTLoCZtE6ChaRlQrLcorHZcDsMNnz
- zsLf4b/Bac99j/ML5qiG1J44wrG9uDF6gNIi+k6tU5v33vipZ5yeXzUKUrX/ISVQntdp
- MGY16BbUQpKUlReiGM70o3rlyFI0CAKMcgHMjZNAJGkymy5cDCCv+d6HawqdY7sFOb59
- XQCA==
+ d=linaro.org; s=google; t=1752764198; x=1753368998; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4YSnUBiMBgHhiiNrZwUVeM4DZTY4t0tAyFfdugOXFPc=;
+ b=wmCTNf/B8NOeoZr8vd6kUtedmnAqbeCi1Pz23nhlQw6N9T2RxQLayFGA3k/fOGxkHX
+ ggSZPWcP1a+f5hsEqgCMB7IydS36fXGKEcVRsMTKbXYMmBYlDvDCkQDvsvqJLOk0bl/q
+ cLid/7H74vbGF0CL7FcYTggFuIjNKBs2tpmMXuI7ZVOh+PsYXXN6O7KCsM0euXI8bqhi
+ Tj9DuFqQ0hjncb8v6mUW9JQcKrtTcK6ub8RrEPtx0qPCELIcBpLBS9GcSYEijLB7PjXj
+ DyuHFJqN6WRVCshjnuxTnTRN2OfUp1SHOjy/iYGBQ6Dp6q8GzjzkpOtnVFbOhGTFYB0C
+ YmJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752764078; x=1753368878;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KPW7Kilcakbc8ZShxorfV/v0yEftImZ5HPAq3o+LWcY=;
- b=PJk15YevNNVAgWCcIkZbMzZ0Cq4Bq4qHhFjpzgOrStfvv0HCxBv/A9FfrBhPYfAjQ8
- Vd8zkjit5rS+dCxpuYIXrvcNI5qx5DOzJGrlEtmNy7Ms0hAWNQ/KWCRo1gv9MKHRMJYG
- WC5thGpKjZeV4e+FZITIt8KfC+/LC4cfXyn0luegF12mKB+uaMMSksT6rKR0JdvJL05r
- UZHYDozY6pMwgkz/3Mll5Zlx/HcLZwVvaen8Z7lAUIMp7P4uc5pLy/pIu9xJ3AAF4P5L
- FuVvC7BqcQ20p/uue27LMKq/ZVUolPPqeGf9uHBKrRot7dHSS3l6gir3XbIOFiHa64l0
- hFww==
-X-Gm-Message-State: AOJu0YwZPyAJr2oTPdX49fI/kZ/xwTSWt33Xze60jc912VU/sBfdkbQX
- gHcaBzKhvyK5dLYhGBYLs33EK9YgR+Mckcg2z83PeWCeWg7nFLpPneLjE3+/GBAiy+E=
-X-Gm-Gg: ASbGnct5U8nEfH1XusCMhoAe6lENXNjWV/dHnzfhB8koWQKUaSQMHFSBeiONpxILrvS
- Wn7ffHPIjNzDG7Z6BlCkf7H97G5ZvSjQmAOB1pFIrNV3wIkF6oug4u9LDvFjSz193DHy3QHePgF
- wysJ83Jov53DH9Ckala/v/j6U/1u6vdFMnS4ryrFvhBP1sngxl6xjRczh0TQuHRdNViT6czVZQE
- IafR0yI9pxVNKoLJrF5vuUj0Ru+0ho5450z/xbKr3m8BafFr4qFDgdY+wfLMQfcmfSCKiIPoj0l
- YTMSHQ18wl3Hg/3Ti39WNo6r/0rRmGTKFG20aTBoShH6U0jVaAMH/7aAPKRmJCof9Nra34qdGD9
- 9wpL0GcQtUVkEVKsytEIH1YXkvN6aBjP1mHNcNEuTf/obl3MDxhw=
-X-Google-Smtp-Source: AGHT+IHd5bh2zi6KIZGYZTOySFh2xEJfI68QVOchoVWXE1TnvTfnvANAlui8mC3hVfV+oOQxIDW0/A==
-X-Received: by 2002:a05:600c:4e8c:b0:43d:4e9:27ff with SMTP id
- 5b1f17b1804b1-4562efa4ccdmr55052385e9.7.1752764078282; 
- Thu, 17 Jul 2025 07:54:38 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
+ d=1e100.net; s=20230601; t=1752764198; x=1753368998;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4YSnUBiMBgHhiiNrZwUVeM4DZTY4t0tAyFfdugOXFPc=;
+ b=uCAG+WNflS+d8iQc5J4e0+oX6LedD8QZjmr9NPlXRXEPrdqUsxv5By5sobu9T0dMLU
+ ttO5ya8ODuC7bn/Kawe0zTnflsHtR3XtRX0mu7mOfRJajeURlohURT3m4cwcJg2iymWk
+ 9PfAWCuxeF3wjbTn/ZK1BcGIYlgCk/HmFtPCVjJLJ1F6WBSiTSS35s1idkZ21vcX4D1y
+ IsDYeswnFAPcaIa4K9JKFXoPhURmcN934mIv8haxxcMAhCrcUwmMhTIHUBtKfwNNdlSb
+ jsdbqjLmTYufYUjxnKQSNkWADYZhuHQts0lV1pV7/9ZqzCWIqPCOlD4f6/QxX9kCj/80
+ idoQ==
+X-Gm-Message-State: AOJu0YzAqH/ZSJgv48wTqKpPlhRbqtaz5dWxl65ESMtclbtKlJ8rbSEK
+ 97R4Dzi0QDuA+Rw7dEoFtcl9SWmlgIjsRutY+I3B3YbJV72XlOPlJKmDmIfXNxPs0h1BF+JQx49
+ chXKT
+X-Gm-Gg: ASbGncvryYCYH6wms5Cucq9Gd34S8KwGUJWVDD/0zq9zeFqaTpbj/+zHjzwdt6F1qLS
+ /gxsffwDP04QLzjP0o9PIlHtcPUeLcuKRsCEzdKdv1m4KPg3NKj6vOS378XJg2wLn5AeaH9FcI1
+ zxtb/mmaalOONHZZ0q+MVqm8+Dt+NJjzjCSrruFahOjYal+zXsYAcHXgahEM0+/ildXpGTb4/rK
+ OE3xxsZQYSgkUwCDMKRJGgZlJVDD8xrNxh3zbEMfynkzX0EDHyNNF9dL3dLuW7gEGHo0e8CWavx
+ VojY68m9PkeUe6PujuWxHEKut5tfe88PtezG23Mzyy4cLuz8HIxK0PxIV13YRBXXSxS/pIdrFW1
+ 4Fe9GIjRmrfd3I+Lr8qhgnKOiz9/uL0FOkRKrV0yVYttTTF3vLkZmo8mHxdU+ppoBQLrjXsCHgB
+ boLQ==
+X-Google-Smtp-Source: AGHT+IE3QKNAIgwuZNrxQdYFBHbN8yHC6qYtOay+J5lOT9ulq1u/HML0h7yVUg+7ISbidDni2t/4QA==
+X-Received: by 2002:a05:6000:4b1e:b0:3b4:b4d:6861 with SMTP id
+ ffacd0b85a97d-3b60e50fe9cmr5496720f8f.27.1752764198327; 
+ Thu, 17 Jul 2025 07:56:38 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:eb9:1701:f497:a590:bf80:45c8?
  ([2a0a:ef40:eb9:1701:f497:a590:bf80:45c8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4562e8ab642sm52643905e9.36.2025.07.17.07.54.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 07:54:37 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 17 Jul 2025 15:54:37 +0100
-Subject: [PATCH] fs: fat: Prevent possible buffer overflow
+ 5b1f17b1804b1-4562e819e04sm53913045e9.18.2025.07.17.07.56.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Jul 2025 07:56:37 -0700 (PDT)
+Message-ID: <e39f6445-c9a6-496c-8c37-cbfa5b86f0c8@linaro.org>
+Date: Thu, 17 Jul 2025 15:56:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250717-fsfat-v1-1-4cfb1d1a77ca@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAKwOeWgC/x2NQQqEMAwAvyI5W7CiZPEr4iHtpmsOVklEBPHv1
- j0OMzAXGKuwwVBdoHyIyZoL+LqCOFP+sZNvYWibtm/Qo0uWaHeEGPnje5+wg9IGMnZBKcf5rRe
- ynfUVm3KS8z8Yp/t+AN/LkuRwAAAA
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fs: exfat: Remove unused label code
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Cc: u-boot@lists.denx.de
+References: <20250717-exfat_label-v1-1-e15f28fd6c6b@linaro.org>
+ <20250717144602.GM193579@bill-the-cat>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250717144602.GM193579@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +103,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of strcpy which is unbounded use strlcpy to ensure that the
-receiving buffer cannot be overflowed.
+On 17/07/2025 15:46, Tom Rini wrote:
+> On Thu, Jul 17, 2025 at 01:04:58PM +0100, Andrew Goodbody wrote:
+> 
+>> Smatch reported a possible buffer overflow in exfat_set_label but it
+>> turns out that this code is unused so just remove the function as well
+>> as exfat_get_label that is also unused and the helper static find_label.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   fs/exfat/exfat.h |  2 --
+>>   fs/exfat/node.c  | 54 ------------------------------------------------------
+>>   2 files changed, 56 deletions(-)
+> 
+> Since I think this is just pure upstream, we should guard it with
+> #ifndef __UBOOT__/#endif like other parts to make future resyncs easier.
 
-This issue found by Smatch.
+OK, I will update the patch.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- fs/fat/fat.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 89f2acbba1e..fa34ad7a501 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -1391,7 +1391,7 @@ int fat_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp)
- 		return -ENOENT;
- 
- 	memset(dent, 0, sizeof(*dent));
--	strcpy(dent->name, dir->itr.name);
-+	strlcpy(dent->name, dir->itr.name, FS_DIRENT_NAME_LEN);
- 	if (CONFIG_IS_ENABLED(EFI_LOADER)) {
- 		dent->attr = dir->itr.dent->attr;
- 		fat2rtc(le16_to_cpu(dir->itr.dent->cdate),
-
----
-base-commit: 3b4604a40b9fd61b87e9d059fc56f04d36f1a380
-change-id: 20250717-fsfat-a77ce8151f74
-
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+Andrew
