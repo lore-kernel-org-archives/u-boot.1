@@ -4,64 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FDDC83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 05:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11145C83F1B
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 06:01:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7BB8832FE;
-	Thu, 17 Jul 2025 07:59:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6826B832F0;
+	Thu, 17 Jul 2025 08:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1752731983;
-	bh=O4+99LHRCxPzSxei3Rt3MHp5n79w9vZka7XXLAQIa0o=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1752732088;
+	bh=FmNpPmZQxlz3dNTmGt5oIqdftFczox14YWMpoLGTftk=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=mBzkCVoF3huHvHSU6vy4Sf/4f7lYm9FLmsNfrAY60P+aHDgEufz8PfSQrvnKraq53
-	 Z0zGwWfAJE7BH5GVOwy0iCGNa5ZUGITbqI2Ikao3NhYYyRJ6lTWC615SPqvfRC2icl
-	 1t17R8GBi+BDdP+QJ8/ZQwj5/JFEds62JAIi7kk9OPWsFqK9vbgPKnE47ESd1idiqf
-	 AzD2f6nyD6Rvgk2Kuve2HRqcv6UEQeVUqymy6aIGqjh6XoM+4GBSLwK4StgLCGKIrW
-	 OScH4tWrVlXwjmBPaQvdJlyLKq3LdAiZ7SEl0clm+rnMAQWFPy8YtWeclS03nAOOLO
-	 VuvxK+WDV0Nhg==
+	b=qslOySGFJtsUUZKWyKUqXJGdGkFghvdfRUMUK1U/49FaTwDxa7XSQ0D91ZxKrWSIW
+	 xNKReXmaLgcjZCo/C7vk+fH1kJ/16U7Uwe8xuAmWo+WfFloOhpNRSBu46RTHLUZt1E
+	 zwATGKEy9ge/PU01F6VBlXOXvELENltWzHtZy3+Nc4fMNDXAz1GIRrZIYnVYZKpsEF
+	 ZqXskjKbKWWM6pnCx73SQzg5JLPtb6XXJikU46rgNUqTyJYS5Z7JY1+sFdGoOVimNd
+	 yvV1GL01D9Fh7jCsHOkkH//C2OwzhN7jSF4Ap9skZvrK5QRCNWjG+DeGVvu9NMnkXH
+	 tPhvbftEHPrrw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 434B083314; Thu, 17 Jul 2025 07:59:43 +0200 (CEST)
+ id 4618A82B0F; Thu, 17 Jul 2025 08:01:27 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A66682B0F
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 07:59:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31BE482B0F
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 08:01:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="QH2v8Y0z"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="DOjjMVXV"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5409610397286; 
- Thu, 17 Jul 2025 07:59:39 +0200 (CEST)
+ with ESMTPSA id 39F2110272379; 
+ Thu, 17 Jul 2025 08:01:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1752731980;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1752732084;
+ h=from:reply-to:subject:date:message-id:to:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=O4+99LHRCxPzSxei3Rt3MHp5n79w9vZka7XXLAQIa0o=;
- b=QH2v8Y0zwPYxb+Xr+fJe++EZVZsi+Beu+RjETGsIelKcWwZHSPn5GfG+Cl0ItgeVB+Q329
- J/V/3DZbF/RdATwU1wiOi+Ddff3jdpgvgLZNjk0JVEB4HxYl23NAcerVbmGEOYQPCTaLnt
- e6Cj8Ng8qIhvYs1ml5N/4DzqR7YMdW7c8ywZAs9iFGhe01bWWmx3BtmEfSM6b598AzzvsL
- gmwDMdJggfKHAtFhdrCthtUKTyP16udRQTUfWT7hbB/uAOX4YWf7kfK/WN6JwkQUcqFp3h
- eMQ8Sl6ZldLGy3NYE0HMch+5X5alOM154b5tEuwbukorlZli7qRKVdPYNs8KzQ==
-Message-ID: <ff39e1e9-5cf6-b935-4d5e-21e25515785c@denx.de>
-Date: Thu, 17 Jul 2025 08:00:12 +0200
+ bh=FmNpPmZQxlz3dNTmGt5oIqdftFczox14YWMpoLGTftk=;
+ b=DOjjMVXVoIPf5dFZQ70SAkrr1gXxCBRQhtnGMw9aNfzJ70Y3O/X25XUbVKYqTiXIxEGSJp
+ DhUfuX+eJ1Bfy7xxLNR+2G6ZqeNTS3qq64+2FfNZEbxK8wLJ5I2tssVZsh0E5CcDAwJjnd
+ LOIqNo+kv/lMucRpmJ27VE6Lq8AhRP//z1tjFvMkLxt777T4+NHRkCNtNQO1TUN3McgI2g
+ PFBzMyIR9scLCA0CQ6tcVoXHnqhnWrlCxq21+spX4QfwB5/MuON8/sD48DajUdzmluXhv3
+ 08kZDWY+vpMsFbuWALElESGlzLaHSVocGtg+vrF2cmR22lEYhtvQgj2YIXIBWQ==
+Message-ID: <8e2da406-c015-f3d0-4445-aabd19dbcacf@denx.de>
+Date: Thu, 17 Jul 2025 08:01:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH] i2c: muxes: Add PCA9541 i2c arbitrator driver
+Subject: Re: [PATCH] i2c: Kconfig: Tighten some i2c driver dependencies
 Content-Language: en-US
-To: Padmarao Begari <padmarao.begari@amd.com>, u-boot@lists.denx.de
-Cc: git@amd.com, michal.simek@amd.com, jonathan.stroud@amd.com,
- bigunclemax@gmail.com
-References: <20250623082439.949845-1-padmarao.begari@amd.com>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250702010359.18747-1-trini@konsulko.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250623082439.949845-1-padmarao.begari@amd.com>
+In-Reply-To: <20250702010359.18747-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -82,26 +80,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Padmarao Begari
+Hello Tom,
 
-On 23.06.25 10:24, Padmarao Begari wrote:
-> Add a driver for the PCA9541 i2c bus arbitrator based
-> on the Linux driver for the same device.
+On 02.07.25 03:03, Tom Rini wrote:
+> A few i2c drivers cannot build without access to some platform specific
+> header files. Express those requirements in Kconfig as well.
 > 
-> Co-developed-by: Jonathan Stroud <jonathan.stroud@amd.com>
-> Signed-off-by: Jonathan Stroud <jonathan.stroud@amd.com>
-> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->   drivers/i2c/muxes/Kconfig   |   7 +
->   drivers/i2c/muxes/Makefile  |   1 +
->   drivers/i2c/muxes/pca9541.c | 297 ++++++++++++++++++++++++++++++++++++
->   3 files changed, 305 insertions(+)
->   create mode 100644 drivers/i2c/muxes/pca9541.c
+> Cc: Heiko Schocher <hs@denx.de>
+> ---
+>   drivers/i2c/Kconfig | 11 ++++++++---
+>   1 file changed, 8 insertions(+), 3 deletions(-)
 
-applied to u-boot-i2c master, thanks!
+applied to u-boot-i2c.git master, thanks!
 
 bye,
 Heiko
+-- 
 -- 
 DENX Software Engineering GmbH, Managing Director: Johanna Denk, Tabea Lutz
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
