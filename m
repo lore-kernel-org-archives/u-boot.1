@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29AE4C83F34
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84DB4C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 16:32:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B91208344C;
-	Thu, 17 Jul 2025 18:32:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FF9E8344E;
+	Thu, 17 Jul 2025 18:32:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ct/73QY+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xut72jwn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 622918344E; Thu, 17 Jul 2025 18:32:04 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id F12DF83487; Thu, 17 Jul 2025 18:32:38 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2ECC8343B
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:32:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F18A83477
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:32:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-32b5226e6beso12087211fa.2
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:32:01 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-555163cd09aso984622e87.3
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 09:32:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752769921; x=1753374721; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1752769956; x=1753374756; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cJdcD2xrc1MSA63fQuYyTFdYFXO1jBvwgMhsHkeyeqo=;
- b=Ct/73QY++OQ3cJJDUzc2YKMfcEA6KZyeYEj8QlTBhl2zQozVJN4nxOuAYnyKih/yVh
- E8UaeRT7iPR7BRyhwTKq1foBabbPBUyAecvnFTdPwKqa5Rv+eueIi66q+711DD1efYb0
- A9J6ExVVCRD/fQAqCBP7QeK4648EPvaYeKxFpRTphUsrsJeUmUVfyLBxxcnv63g5EYbo
- nFb7njixTdjsLnhgJ80cdxdb8BwYDOBvu3aecsDK2fFyX30i64g9zJXUjpmBRSTls9dZ
- W+PzW/AVbu7OVIvt979OOG8mTVzGzCM2RoPKzYH2N1UGhESAd02qnC6wbbDsKewmTFzU
- vnvw==
+ bh=Vjn2pXL66dLvdyfPaW5XvisTYX+zgtPRUzqfBQ+7RNY=;
+ b=Xut72jwnv7ByfkULDXgH/NF6d5qpBo1KS5SSZHo9r9leQVNPngYiYBjnoJB7nzolGQ
+ 9+d9pEi3zMdJ4QiBL48qSUGbzt/Kxwl/3Z1GOolKg2Vmf/JVXEZ6MMnsw9+Id7PPaME1
+ +fP3dZc8rXZNZYY6I0V9mZCUsa07W6hDNa75yonCo9jGJOXMP0YPzeacY2c5MO2ESKAm
+ GGymekank0JkGxvp2qLDCEKyuarRyTpiPo5XstHFNsLaX/DeVR7NEGQaKx38grD552Es
+ RhkcS2eUelCWECGXOWt/nA7lkChcKjxkA4WuXlQ1843umoItewEuqPX6Gnewr47R/Zuj
+ EGWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752769921; x=1753374721;
+ d=1e100.net; s=20230601; t=1752769956; x=1753374756;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cJdcD2xrc1MSA63fQuYyTFdYFXO1jBvwgMhsHkeyeqo=;
- b=GUQTQzS20Y5tmSzAkM8IkLYctgzzLIU8Ws9rMRvaKAa3bC9jahN21WwBkzXJURBraQ
- n3w36jmZpT6N+b5IwYIiDF130oTbOYcD8crTeaIGXIGpLZjN9TTbsabxg4vVZZCcNXs3
- 9gyFuA6rer5K6bu/fsGtUQaQgXZwoDwTj6WSB99G1aEPs1igiYGFaIkaZONrx9Ph/b2L
- tEHFvjHr2pmP1JTCZbJgDV6so+si53qIE5n4+vObgcpIJ5/f01Kf85d2mcV4BvMZTsR+
- F8ah6f+h5J5l9Nre474dWlvEJPJqqrh+4KyozB1KgzMxUEWHiZcbluj6ROweJkyQA8RH
- dJDg==
-X-Gm-Message-State: AOJu0YwGo1EJp5y69uIc8cyz+mfyySeaTHelsjr6Fw0PVgEqV5lBvVj1
- B2/4G8hiREeCINGJYem2QYi5jPjcqYRT8xgcozIyyZSCHGyoWiNjdfJf6q45z+o8nekZufJVDu5
- 6d+mW1YbVtQSOrlizcd1wITOjWB5V5lU46g==
-X-Gm-Gg: ASbGncu4Z99PEOF1KTzV3Cy2q8yh2NEZdE/N/ThsrwzGxHpLX2SwUMlodTcq253zYNK
- g2Qf0ej7wiXSwbjYl74dwBWN3Nwsq9PPgHabVzBd261Vp9c9u5l6BfLdn9jThNa38aAqSZgyYKY
- YzqIi7fZ6WrCTACIXAbGNO97t3zJwEHWb8OJcRrF+5WNUFw1XJgyh9Nb9XlXQP9o+GiUsw3L74/
- KPhBb2/hhv0k/zznc53nLut4A3ji3fir7gx
-X-Google-Smtp-Source: AGHT+IHFXehFqGuUszxrUKNxYkZ8SFvsi/fP/umEY93XIJaSOL0Ejf5UucXJiUIeg2bfA0Q8z6HrJk2SDBqWaS0R/FQ=
-X-Received: by 2002:a05:651c:110d:b0:32b:75f0:cfa4 with SMTP id
- 38308e7fff4ca-3308f5c95f9mr23662491fa.25.1752769920758; Thu, 17 Jul 2025
- 09:32:00 -0700 (PDT)
+ bh=Vjn2pXL66dLvdyfPaW5XvisTYX+zgtPRUzqfBQ+7RNY=;
+ b=qFJYlatpUoS2m4S4NoUyyPSoAGyAGBAfV0Ptxx+VQy/49z/GwWfo+bVNwhIRdQmYhM
+ uzhCwAAWxqNSos92okjs6yJg1MLJjcSVG1ApuQXMZAkzTRe5SSPlWK2r24qPMkIX9rFS
+ 7L3d2YZopGC4pAa8dpbwKb21TDYabx+K6V60+5NAmA2BrS+BIj9cnTtyiuZjeoLFANAI
+ r3WjXHWGBw09CbPEyytZwBqft2DQO/VsuPADYhAcx1qU8Za0EIf/Uvsbvd3hQtCDRBPc
+ CRpLf7L8+pcvWA5D6oDWZxLPhVkm3T2pnTQJZciwhP44OYK1uVD6og2hTn4I37xAZH/p
+ 3iUQ==
+X-Gm-Message-State: AOJu0YzON3IegmTS7OdTK1n5YWQmam43ZH1mOXLeOt6U8KCQglMcu7ab
+ Mls+RON4Aj50jtw+TBtQkpZAM4Q4ZOWFA8aLC0wOftsf2emblavbKgNmSbhR+N/Ksyu86HCoQ3u
+ pW4e89cQTDxhzWrf2D8/ZTo/XtrL64pI=
+X-Gm-Gg: ASbGnctEvzAl4x9tshr+aWTSbJcxlxtM0i5ZSdfFwYqLwbqvlSZ5/1vWulACn+dPyUV
+ i+mMsl0K7z8dhzBdmf7UEQ9xbkOjZy6YoDyViuKe9JYfc4olPiT3EK+mpDcHgfb5HZEclGDsGLA
+ LVzliNcN+3zcpcrDAoBsGYzHJor1pAK9RwjGH3PlriyErdoLnhxFK9yKHdPQCtkj4B2Dn+BZ7FE
+ DUoFpvpxZwtDLN75zF2y9Xl8zmlFcLrOBfLrN+JZuaX0iI=
+X-Google-Smtp-Source: AGHT+IGKoCSZyMolViwiz3kZQdUwnNJRIQX34e/kJBvq7jufc/dWOAH1iq5f9FRa98mVLdHJSWsNaz9WI8jyrjeMmbM=
+X-Received: by 2002:a05:6512:3b25:b0:553:adab:88d8 with SMTP id
+ 2adb3069b0e04-55a296fd1e0mr1112482e87.34.1752769956047; Thu, 17 Jul 2025
+ 09:32:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250711152005.2225412-1-trini@konsulko.com>
-In-Reply-To: <20250711152005.2225412-1-trini@konsulko.com>
+References: <20250711152025.2225590-1-trini@konsulko.com>
+In-Reply-To: <20250711152025.2225590-1-trini@konsulko.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 17 Jul 2025 13:31:48 -0300
-X-Gm-Features: Ac12FXyUlgz-f4WYKvEbY63onE3yZuKne2-coQ0_cwJwnfWCVQOiiWUOjZ6Th40
-Message-ID: <CAOMZO5BC+-WUPmK-91geyqy5cMAFjgoh1rpcQopeodZ13XCGww@mail.gmail.com>
-Subject: Re: [PATCH] arm: imx: Remove unused mxcmmc driver
+Date: Thu, 17 Jul 2025 13:32:24 -0300
+X-Gm-Features: Ac12FXxgXNqTohtRqW4fgMepQfhG5i-vsAfY4__eFljq_OgPF_GYD6HJcwvo5D0
+Message-ID: <CAOMZO5BAranfCbUkSZXAfaScLzZ+c0BMK7G16VUpd30hz-exnw@mail.gmail.com>
+Subject: Re: [PATCH] nxp: Move FSL_SEC_MON related options to arch/Kconfig.nxp
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -92,10 +92,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 11, 2025 at 12:20=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+On Fri, Jul 11, 2025 at 12:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
 e:
 >
-> As no platforms use this driver anymore, remove it.
+> The options related to FSL_SEC_MON are part of the chain of trust
+> related options and should be under that menu, so move it there.
+> Furthermore we don't need to prompt for the driver itself but do need to
+> allow for configuration of the monitor endianess.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 
