@@ -4,83 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBE7C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 21:27:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBA3C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 23:56:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05BE883438;
-	Thu, 17 Jul 2025 23:27:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A3E0834E1;
+	Fri, 18 Jul 2025 01:56:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ivV7k38W";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F9A083479; Thu, 17 Jul 2025 23:27:09 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84244833FC
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 23:27:07 +0200 (CEST)
+ id C1604833FC; Fri, 18 Jul 2025 01:56:54 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 50AD7833FC
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 01:56:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-73e82d2ea1dso130042a34.2
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 14:27:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752787626; x=1753392426; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AvxW9AwRno0IK7fNCZROanOonsUTRlGnEFxV7ICk0JQ=;
- b=ivV7k38WCrcAjOVN3W0zo9byOoCojWZHQqGNSu18zXMhgkq+gWLuw5I4K7S7UYSpkS
- yPkLhkHmddVY7LAyXUFDaxRPl8uEZ0DE3TW/QrK3a2yv4HPIZCT5YDUwBancI/PBvdsw
- qTNbFvZXv/lEurSt+8Q38pE3Vky+qoBj5IzZw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752787626; x=1753392426;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AvxW9AwRno0IK7fNCZROanOonsUTRlGnEFxV7ICk0JQ=;
- b=ci2OmNUfJ9ZgPiS+B1icr5WtiG0KWfoIAygz3C27/O4dkDvAbn0yvnJ+aYuxvb+A7r
- RpL5Gu2r4Ws8DKCGOfRtxT4BU3qQ6hSIKA2lNqHFfL3ZVUOrtVc1rO0dgZYeT9JKVm1M
- lPlHR68IUSFUYraW9EeyXidogSQEIWJfiQr5eBDogiMvrudZtx4MqTFVTYzRNfq+Kj2D
- Z60CxAlaw9/wYKPw/gBm9VBaqkHUGS8nseXethJkfFBZ/Ba996m4qK5yN9R5T6wmrJIt
- m2RQupl+Oq3xWE4Act3twuHyl5LslVvZpQWWKZF6AJTdhDjC+iOM45nRqaU48glDR4iS
- rNSQ==
-X-Gm-Message-State: AOJu0YyfYDgXoaDTTEAksGexAn09q1iTvUo3akR4haEf7V0cAaaujrbD
- CiJ3othWDvsFY077py2/ldjKLYjyFxHcEg5doum1AIBh64QMxURaNYcaaokPmbJ8XDc=
-X-Gm-Gg: ASbGncuR8XcbZuBlBAai9X9q2grcQZqxaBqsHQCPDIpZBcXwscGc5M/mI+7dqc4jyyu
- c8wnDjyi89drP91mVHM/mZp9FspynmR7A9FgOzvnGybwXmhgwDdhBZe/mE2PzHfHMuKQtDOeJvy
- JnPF5Kiivo9bG5rqlLmjw5MoBlO2i/e0GKk8QUDVefbQOuPbzBzUl0PVtFDd55FBLlpXyeXOnH5
- RfjCsr8DADDzLXNLzwnfDx0xpMhAnDN0B7LQNVIH0zw7y1X8LmkkwO73nssKpU6GdHTCxykxCNY
- +fyeX8wpnW7Xk37EaXlKx6e/A58EDHyQbUMkLCN3t2Rv0RnY5mHTghEnt9muC6OAJPW29rWKVuY
- EHvK+nE090NBbjVaqD9TUfSzB4Vh93HWeD3jMPU016ap4jaQf68Vr5js4
-X-Google-Smtp-Source: AGHT+IHgF3piIPVahJ2KH7AnTE8RfbusYjAElm1oHFgR4eS61HIKDWsAaDIM2JAO15Ub7P0BkwwvLw==
-X-Received: by 2002:a05:6830:6110:b0:73c:976b:6c93 with SMTP id
- 46e09a7af769-73e661bfb32mr8903779a34.21.1752787626152; 
- Thu, 17 Jul 2025 14:27:06 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e83623107sm108140a34.18.2025.07.17.14.27.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 14:27:05 -0700 (PDT)
-Date: Thu, 17 Jul 2025 15:27:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com,
- Casey Connolly <casey.connolly@linaro.org>,
- Sam Day <me@samcday.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: Re: [PATCH] sysreset: psci: Fix SPL dependency
-Message-ID: <20250717212703.GS193579@bill-the-cat>
-References: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CDF471596;
+ Thu, 17 Jul 2025 16:56:43 -0700 (PDT)
+Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
+ [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 449D13F694;
+ Thu, 17 Jul 2025 16:56:50 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: u-boot@lists.denx.de
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>, Yixun Lan <dlan@gentoo.org>,
+ Paul Kocialkowski <paulk@sys-base.io>, linux-sunxi@lists.linux.dev,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 00/20] sunxi: Add Allwinner A523 support
+Date: Fri, 18 Jul 2025 00:54:35 +0100
+Message-ID: <20250717235455.32528-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.3
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Rn8QS0Up35ISDrvt"
-Content-Disposition: inline
-In-Reply-To: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,40 +55,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---Rn8QS0Up35ISDrvt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+(Mikhail and Jernej: please reply with S-o-b: lines for your patches!)
 
-On Thu, Jul 17, 2025 at 10:41:32AM +0200, Michal Simek wrote:
+this series introduces support for the Allwinner A523 SoC family.
+Compared to v1, a good chunk of those patches have been merged, so we are
+down from 34 to 20 patches now. There are some small fixes to the
+pinctrl driver, and the SPL clock bits got updated to fix the conflicts
+with the now merged A133 support. I rewrote the SPL watchdog code, to
+avoid the MMIO register C struct. The DRAM driver lost one MMIO register
+struct. The DT files have now landed in the DT rebasing repo, so we can
+cherry-pick them from there.
 
-> SYSRESET_PSCI should select SPL_ARM_PSCI_FW only when SPL_SYSRESET is
-> enabled/required. This change saves 1.6kB on Xilinx ZynqMP Kria platform.
->=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+Otherwise this now based on latest U-Boot master, which hopefully makes
+testing easier. If people don't shout, I would like to merge it still
+during this merge window, since the patches have been around for a while,
+and people want to use them, alongside the now supported mainline Linux
+code. So please test and review!
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+==================================
+This series introduces support for the Allwinner A523 SoC family. The
+same die is used in different packages: the A523, A527, T527, and H728:
+they connect a different set of peripherals to the pins, or enable extra
+goodies like an NPU. From a U-Boot perspective those chips do not differ
+much, all the differences are described in the board DT files.
 
---=20
-Tom
+To be able to share the SPL clock code, the existing H6 code gets
+refactored in patches 01-04. This unifies the (CPU) PLL handling across
+the SoCs supported by this code (H6, H616, A133), and adds support for
+the separate CPU PLLs on the A523.
 
---Rn8QS0Up35ISDrvt
-Content-Type: application/pgp-signature; name="signature.asc"
+Patches 05-10 extend the existing Allwinner U-Boot drivers to cope with
+some of the changed peripherals, this includes the mandatory clock and
+pinctrl drivers, but also some clock tweaks for the MMC controller
+driver, and support for the new-ish AXP323 PMIC used on most boards.
 
------BEGIN PGP SIGNATURE-----
+Patches 11 updates some SPL bits to be able to cope with the A523.
+Patches 12-15 add the new SPL bits for the A523, most prominently the DRAM
+initialisation code. Many thanks to Jernej and Mikhail for providing
+this part, there is a great reverse engineering and testing effort behind
+this.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh5aqMACgkQFHw5/5Y0
-tyzyPgv8C1AExRSBv1qsXKfjPZZhmuaDx89Bour2zR5i309TT9wyDiQROsQ5ucyF
-WM5a/9MT8WpJAgTODPyggK9jmkcmVHJh6+3x+pCQ29/FNkBFhMCfXexN62CLpIi+
-IDo62Nfi6+2Yi6GgRyNoPNbrtHIi9O3JNtNFRhBldGsZG7+yClePUnAuU75QcF5d
-eNQPKlI9aTU7Y6tEJSIGhuS6sMGsCGIFVXItMAKS1hjmDdvYK3O+qvDojH8CGbey
-yV/nbzgu98nrJKokP8hP1/aCvDQ7PEUE1IIGZ1AQbMVAmtz2vgXEntKr8IgdKGsB
-F1h9Sk2uQ+OLirM5c9dhN/nwId5OHTx1FJiuLAnka32Ab53NRayAFF6PpcTyQit9
-gQexGMRUMXhpdsfnPW9OhZ59uhTj2Tkv3U4pspdXR8RyvNL9Up64t5k5ifAeho/Y
-vkr0EOv3jLixco4n0PD6OMiIwZ/KzgLwDgypc8BSI3RZdkHuzc3gQXGlml8jWjXs
-xuV+cI5c
-=8/tN
------END PGP SIGNATURE-----
+Patches 16-19 cherry-pick the DT files from the DT rebasing repo. There
+are more fix patches queued, I will update them once they hit the repo.
 
---Rn8QS0Up35ISDrvt--
+The final patch adds defconfig files for the three boards that seem to be
+the most popular at the moment, they include two development boards and
+one TV box. The most interesting bits in there are the DRAM parameters.
+
+Please have a look, review, and test.
+
+Cheers,
+Andre
+
+Andre Przywara (17):
+  sunxi: clock: H6: unify PLL control bit definitions
+  sunxi: clock: H6: factor out clock_set_pll()
+  sunxi: clock: H6: factor out H6/H616 CPU clock setup
+  sunxi: clock: H6: add A523 CPU PLL support
+  sunxi: spl: add support for Allwinner A523 watchdog
+  clk: sunxi: Add support for the A523 CCU
+  clk: sunxi: Add support for the A523 -R CCU
+  pinctrl: sunxi: add Allwinner A523 pinctrl description
+  sunxi: mmc: add support for Allwinner A523 MMC mod clock
+  power: regulator: add AXP323 support
+  sunxi: update cpu_sunxi_ncat2.h
+  sunxi: add basic A523 support
+  arm64: dts: allwinner: Add Allwinner A523 .dtsi file
+  arm64: dts: allwinner: a523: add X96Q-Pro+ support
+  arm64: dts: allwinner: a523: add Radxa A5E support
+  arm64: dts: allwinner: a523: add Avaota-A1 router support
+  sunxi: A523: add defconfigs for three boards
+
+Jernej Skrabec (2):
+  sunxi: sun50i_h6: add A523 SPL clock setup code
+  sunxi: A523: add DRAM initialisation routine
+
+Mikhail Kalashnikov (1):
+  sunxi: A523: add DDR3 DRAM support
+
+ arch/arm/cpu/armv8/fel_utils.S                |    5 +-
+ .../include/asm/arch-sunxi/clock_sun50i_h6.h  |   49 +-
+ .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  |   20 +
+ arch/arm/include/asm/arch-sunxi/dram.h        |    2 +
+ .../include/asm/arch-sunxi/dram_sun55i_a523.h |  153 ++
+ arch/arm/include/asm/arch-sunxi/watchdog.h    |    2 +
+ arch/arm/mach-sunxi/Kconfig                   |   54 +-
+ arch/arm/mach-sunxi/Makefile                  |    2 +
+ arch/arm/mach-sunxi/board.c                   |   11 +
+ arch/arm/mach-sunxi/clock_sun50i_h6.c         |  153 +-
+ arch/arm/mach-sunxi/cpu_info.c                |    2 +
+ arch/arm/mach-sunxi/dram_sun50i_a133.c        |   10 +-
+ arch/arm/mach-sunxi/dram_sun50i_h6.c          |    6 +-
+ arch/arm/mach-sunxi/dram_sun50i_h616.c        |    6 +-
+ arch/arm/mach-sunxi/dram_sun55i_a523.c        | 1590 +++++++++++++++++
+ arch/arm/mach-sunxi/dram_timings/Makefile     |    2 +
+ arch/arm/mach-sunxi/dram_timings/a523_ddr3.c  |  134 ++
+ .../arm/mach-sunxi/dram_timings/a523_lpddr4.c |  119 ++
+ board/sunxi/MAINTAINERS                       |   15 +
+ board/sunxi/board.c                           |    7 +-
+ common/spl/Kconfig                            |    4 +-
+ configs/avaota-a1_defconfig                   |   31 +
+ configs/radxa-a5e_defconfig                   |   30 +
+ configs/x96q_pro_plus_defconfig               |   32 +
+ drivers/clk/sunxi/Kconfig                     |   14 +
+ drivers/clk/sunxi/Makefile                    |    2 +
+ drivers/clk/sunxi/clk_a523.c                  |   85 +
+ drivers/clk/sunxi/clk_a523_r.c                |   39 +
+ drivers/clk/sunxi/clk_sunxi.c                 |   10 +
+ drivers/mmc/sunxi_mmc.c                       |   16 +-
+ drivers/pinctrl/sunxi/Kconfig                 |   10 +
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c         |   50 +
+ drivers/power/pmic/axp.c                      |    1 +
+ drivers/power/regulator/axp_regulator.c       |    1 +
+ .../src/arm64/allwinner/sun55i-a523.dtsi      |  598 +++++++
+ .../arm64/allwinner/sun55i-a527-cubie-a5e.dts |  299 ++++
+ .../arm64/allwinner/sun55i-h728-x96qpro+.dts  |  287 +++
+ .../arm64/allwinner/sun55i-t527-avaota-a1.dts |  308 ++++
+ include/axp_pmic.h                            |    1 +
+ include/configs/sun55i.h                      |   11 +
+ 40 files changed, 4109 insertions(+), 62 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-sunxi/dram_sun55i_a523.h
+ create mode 100644 arch/arm/mach-sunxi/dram_sun55i_a523.c
+ create mode 100644 arch/arm/mach-sunxi/dram_timings/a523_ddr3.c
+ create mode 100644 arch/arm/mach-sunxi/dram_timings/a523_lpddr4.c
+ create mode 100644 configs/avaota-a1_defconfig
+ create mode 100644 configs/radxa-a5e_defconfig
+ create mode 100644 configs/x96q_pro_plus_defconfig
+ create mode 100644 drivers/clk/sunxi/clk_a523.c
+ create mode 100644 drivers/clk/sunxi/clk_a523_r.c
+ create mode 100644 dts/upstream/src/arm64/allwinner/sun55i-a523.dtsi
+ create mode 100644 dts/upstream/src/arm64/allwinner/sun55i-a527-cubie-a5e.dts
+ create mode 100644 dts/upstream/src/arm64/allwinner/sun55i-h728-x96qpro+.dts
+ create mode 100644 dts/upstream/src/arm64/allwinner/sun55i-t527-avaota-a1.dts
+ create mode 100644 include/configs/sun55i.h
+
+-- 
+2.46.3
+
