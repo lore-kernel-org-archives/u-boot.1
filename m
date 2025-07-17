@@ -4,84 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3482BC83F1B
-	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 13:24:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1DF0C83F22
+	for <u-boot@archiver.kernel.org>; Thu, 17 Jul 2025 13:56:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFB76833F1;
-	Thu, 17 Jul 2025 15:24:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D50E833E1;
+	Thu, 17 Jul 2025 15:56:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k0Cw3JS3";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=ariel.dalessandro@collabora.com header.b="WTnmJ1as";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8DF1833C0; Thu, 17 Jul 2025 13:02:16 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 22C34833E8; Thu, 17 Jul 2025 15:56:42 +0200 (CEST)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
+ [136.143.188.112])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C476283242
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 13:02:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0236A833D0
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 15:56:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-45629703011so6016435e9.0
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 04:02:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752750134; x=1753354934; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ADSi54w2MgdvdPzq/dwFt0+54A+JA/UeoxLVEdV/VFg=;
- b=k0Cw3JS3wmCU+GufByObrR43Z+naOB0N+5JEk4WVZ4fKDhJdqI4/Pt3nqL4bpANJ5z
- DPJKebBvTqAvs7UL1+QGY24wbgjx56W3nRx9NZXC6SaPHmRTt5oL5kvtiW4lGJl4/aYw
- +V8TCw1vmG2Wo43S1Mw+bh6iwxcOkcEE3+c5fWpI4L1aLpEbQHyZHZMWoXm97efrxz7Y
- 65mz1It7p6RuX7JGmF1akG17QXUmx95tcRXUozD1UK7FBXIvGJtEN2AVN+iCcVJRsMQf
- 9MRIRWakehqr+SfJg0JR9SwoJ7nZ5RV0lUQp5y8nSxUVlz9gar/u+0PnlbHxQPrzZKJB
- qasg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752750134; x=1753354934;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ADSi54w2MgdvdPzq/dwFt0+54A+JA/UeoxLVEdV/VFg=;
- b=q051EErC3P70n+5RuBfro7uoORwFsAZf/XcgJ5u2AYyRj/KNgeUwM69YrPHu7Pdzdd
- JkXRVgLTO6o+UDC5r6z0M+iWj4fuKI6XrcFPzTaaLA/h29Mmx8nFr63l7iZN8tSvSjzh
- P1q9lTs0FBBRfivkOX9WkBz4wnx1NyPwf5+JKVNqMsNr4puVf7aTknYFxuAQ7cy/LDsG
- dmgnqYGkAHxdv09cSu8pNtp6chyuwSeKuRSJnvyZDGStTwYGW4Ec28mbly9ItY9bq/j0
- xXzG87SnkIa7kAfNZX8xxyWCsC7+A3ECxJTIlaIYuP2eEjz5ZTJ1/oOw4dIqXU0vNFfe
- KBfQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV2szm9eFQsWQE3a4a+kuM6FYqn4Y1tomhQzPd3vdnn+q71nnvBY2YWXE/BIkSUto+9IlH5/gQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRwR4KJ+9xW04u24LeHcoI8eMGpOs24S6Mj0BJt2ngC4ryz2gd
- +LaNRJN4J9tt7ZRETDlodzYtY5ExpIoh4vpeb3Tp1clAfhCizZzX+mvb
-X-Gm-Gg: ASbGnctabw/dUETsDbvY9jhV10m89Tb6+z5WyrCMMeXKVr6qFoiUbd71NLoMO0niX+7
- E4Tb1m01f2eZZomBs5K2hvVYEgZyY7fQGOfx2UCeUb1LZ2/4FX9WDqigVykYcaZkbXZQqbFrc5a
- U7sh4rTDJf3IK8zJhtPNFo9RUA4oCzuOKSn4HGuKAWdQcFvGRhKoJu1jzwFWu/dP3X6ZNqiIsh/
- PLCOoTg3wrBmFD7uXaIE7P4Npx8Q9Nd65iyrmLUZv2l8ZtGiFqbbTqI+vF9sr1WTi7/U0kjruQx
- 0h5Jm8bOWcs0VAnmxh0qm3XH56o33L44XCymqsGX2PuHEWGjzZf96bf7qX6PJl893LtytzdrmD9
- 2EclfXgt0d8QFXz/dOHFL19w52/vJMoL5+BvM
-X-Google-Smtp-Source: AGHT+IEKEm35R1bZ7h7p/UtGMJOV7MeSAplc/oO6qkwHSSCryMYZjan+BPxeIkZckfXrw6xd6FugPg==
-X-Received: by 2002:a05:6000:4b0c:b0:3a4:ed10:c14 with SMTP id
- ffacd0b85a97d-3b60dd6a911mr5498978f8f.14.1752750133888; 
- Thu, 17 Jul 2025 04:02:13 -0700 (PDT)
-Received: from vitor-nb (bl21-87-120.dsl.telepac.pt. [2.82.87.120])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45634f5ea01sm18689695e9.14.2025.07.17.04.02.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 04:02:13 -0700 (PDT)
-From: Vitor Soares <ivitro@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
- ivitro@gmail.com
-Subject: [PATCH v1] toradex: tdx-cfg-block: add verdin i.mx8m mini 0216 pid4
-Date: Thu, 17 Jul 2025 12:02:08 +0100
-Message-ID: <20250717110210.443381-1-ivitro@gmail.com>
-X-Mailer: git-send-email 2.50.1
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ariel.dalessandro@collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1752760595; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=Z6nMevRJVjA/ATYy/4Qo4QI2fd8Uhj52MsoceaLy/8Crt970YxDPV7GgvZl+qgbyv3SZnPD0oU5Tgy62Cnn/YY3XXOK1uFGf1G63Vrgez5Ul0/qaoZ8L6x4WFglB7Cj01fw8LAepnl3rZgvr4/7bbnJ4zc1RYGX0vhHlYze5+H0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1752760595;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=eWsfAnwod3tBCsTSQCNpFdrWMOjhVhxWTcDBGMaWxxw=; 
+ b=UIA/YCF2Uul71xzb0mSClTb8BA5JLE0h9etcwSOLXrzJESvfeJ0EmQmxZcfs2DuFFR3M4H5V5EtRNrxhvzjAH+2I7FyK+ZBfVUqhoEvCu7m4IrxQkjOO7pZ6JSrk/ie618nc9UVrljKBk7fcGHC9bJquBsg+fHC4yFC/OTNEiLs=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=ariel.dalessandro@collabora.com;
+ dmarc=pass header.from=<ariel.dalessandro@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1752760595; 
+ s=zohomail; d=collabora.com; i=ariel.dalessandro@collabora.com;
+ h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=eWsfAnwod3tBCsTSQCNpFdrWMOjhVhxWTcDBGMaWxxw=;
+ b=WTnmJ1asDiFCOzcmQwV/S5R7tON0vK1lIml8nLwF7E1VgRfZx3GNGZJYXNA/OV8o
+ y9VKlsKeFXsdSx6UJt/FiMu0X0W0f7H0zgyr6SDWedrov9hdD1Wb8SdM4POhK/H91GI
+ shuLXsxYNsNULxEnn2S+0h+CgW86OueCZvyENieM=
+Received: by mx.zohomail.com with SMTPS id 1752760592878813.6364941079948;
+ Thu, 17 Jul 2025 06:56:32 -0700 (PDT)
+Message-ID: <b446525c-c852-471b-93d4-b6d98834c6a3@collabora.com>
+Date: Thu, 17 Jul 2025 10:56:27 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 17 Jul 2025 15:24:12 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] drivers: fastboot: Add support for SPI flash memory
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, jerome.forissier@linaro.org,
+ patrice.chotard@foss.st.com, ilias.apalodimas@linaro.org,
+ andre.przywara@arm.com, casey.connolly@linaro.org, mwalle@kernel.org
+References: <20250715191109.329588-1-ariel.dalessandro@collabora.com>
+ <87y0sn2utc.fsf@kernel.org>
+Content-Language: en-US
+From: Ariel D'Alessandro <ariel.dalessandro@collabora.com>
+In-Reply-To: <87y0sn2utc.fsf@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,55 +80,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vitor Soares <vitor.soares@toradex.com>
+Hi Mattijs,
 
-Add PID4 0216 Verdin iMX8M Mini Quad 2GB WB IT to config block handling.
+On 7/17/25 3:30 AM, Mattijs Korpershoek wrote:
+> Hi Ariel,
+> 
+> Thank you for the patch.
+> 
+> On Tue, Jul 15, 2025 at 16:11, Ariel D'Alessandro <ariel.dalessandro@collabora.com> wrote:
+> 
+>> Fastboot currently supports MMC and NAND flash devices. Similarly,
+>> extend the support to SPI flash memories.
+>>
+>> Note that in this initial implementation, partitions on the device are
+>> not supported yet, but raw partitions can be set in u-boot environment.
+> 
+> nitpick: u-boot -> U-Boot
 
-Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
----
- board/toradex/common/tdx-cfg-block.c        | 1 +
- board/toradex/common/tdx-cfg-block.h        | 1 +
- board/toradex/verdin-imx8mm/verdin-imx8mm.c | 3 ++-
- 3 files changed, 4 insertions(+), 1 deletion(-)
+Ack.
 
-diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
-index a89c5bf2c19c..869656eee7a7 100644
---- a/board/toradex/common/tdx-cfg-block.c
-+++ b/board/toradex/common/tdx-cfg-block.c
-@@ -183,6 +183,7 @@ const struct toradex_som toradex_modules[] = {
- 	{ AQUILA_AM69O_16GB_IT,                  "Aquila AM69 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
- 	{ AQUILA_AM69O_8GB_WB_IT,                "Aquila AM69 Octa 8GB WB IT",           TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
- 	{ AQUILA_AM69O_8GB_IT,                   "Aquila AM69 Octa 8GB IT",              TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
-+	{ VERDIN_IMX8MMQ_WB_IT_64G,              "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)        },
- };
- 
- struct pid4list {
-diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
-index db612811c5c5..d002b969bdfe 100644
---- a/board/toradex/common/tdx-cfg-block.h
-+++ b/board/toradex/common/tdx-cfg-block.h
-@@ -141,6 +141,7 @@ enum {
- 	AQUILA_AM69O_16GB_IT,
- 	AQUILA_AM69O_8GB_WB_IT,
- 	AQUILA_AM69O_8GB_IT, /* 215 */
-+	VERDIN_IMX8MMQ_WB_IT_64G,
- };
- 
- enum {
-diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-index 066e8db678fb..cf4a0e37af3e 100644
---- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-+++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-@@ -85,7 +85,8 @@ static void select_dt_from_module_version(void)
- 		is_wifi = (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT) ||
- 			  (tdx_hw_tag.prodid == VERDIN_IMX8MMDL_WIFI_BT_IT) ||
- 			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT_NO_CAN) ||
--			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_4G_WIFI_BT_ET);
-+			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_4G_WIFI_BT_ET) ||
-+			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WB_IT_64G);
- 	}
- 
- 	switch (get_pcb_revision()) {
+> 
+>>
+>> To define a raw partition descriptor, add an environment variable
+>> similar to the MMC case:
+>>
+>> ```
+>> fastboot_raw_partition_<raw partition name>=<offset> <size>
+>> ```
+>>
+>> for example:
+>>
+>> ```
+>> fastboot_raw_partition_boot=0x0 0x1000000
+>> ```
+>>
+>> Signed-off-by: Ariel D'Alessandro <ariel.dalessandro@collabora.com>
+>> ---
+>>   drivers/fastboot/Kconfig        |   6 +-
+>>   drivers/fastboot/Makefile       |   1 +
+>>   drivers/fastboot/fb_command.c   |   8 +
+>>   drivers/fastboot/fb_getvar.c    |   6 +
+>>   drivers/fastboot/fb_spi_flash.c | 249 ++++++++++++++++++++++++++++++++
+>>   include/fb_spi_flash.h          |  40 +++++
+> 
+> Can we also include a doc change to doc/android/fastboot.rst ?
+> The current doc mentions:
+> "Support for both eMMC and NAND devices is included."
+> 
+> We should add SPI flash to that sentence.
+
+Sure.
+
+> 
+> Maybe also mention in the "Raw partition descriptors" that this is
+> supported for SPI flash as well.
+
+Will do.
+
+> 
+>>   6 files changed, 309 insertions(+), 1 deletion(-)
+>>   create mode 100644 drivers/fastboot/fb_spi_flash.c
+>>   create mode 100644 include/fb_spi_flash.h
+>>
+> 
+> [...]
+> 
+>> +
+>> +/**
+>> + * fastboot_spi_flash_get_part_info() - Lookup SPI flash partition by name
+>> + *
+>> + * @part_name: Named device to lookup
+>> + * @part_info: Pointer to returned struct disk_partition
+>> + * @response: Pointer to fastboot response buffer
+> 
+> Can we add a Return: line to document the return code?
+
+Sure, will add it to both source and header files.
+
+> 
+>> + */
+>> +int fastboot_spi_flash_get_part_info(const char *part_name,
+>> +				     struct disk_partition *part_info,
+>> +				     char *response);
+>> +
+>> +/**
+>> + * fastboot_spi_flash_write() - Write image to SPI flash for fastboot
+>> + *
+>> + * @cmd: Named device to write image to
+>> + * @download_buffer: Pointer to image data
+>> + * @download_bytes: Size of image data
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_spi_flash_write(const char *cmd, void *download_buffer,
+>> +			      u32 download_bytes, char *response);
+>> +
+>> +/**
+>> + * fastboot_spi_flash_erase() - Erase SPI flash for fastboot
+>> + *
+>> + * @cmd: Named device to erase
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_spi_flash_erase(const char *cmd, char *response);
+>> +#endif
+Thanks a lot for the feedback!
+
 -- 
-2.50.1
+Ariel D'Alessandro
+Software Engineer
+
+Collabora Ltd.
+Platinum Building, St John's Innovation Park, Cambridge CB4 0DS, UK 
+Registered in England & Wales, no. 5513718
 
