@@ -4,85 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F37C83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 12:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF4F3C83F17
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 13:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E90B83655;
-	Fri, 18 Jul 2025 14:19:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DF69583666;
+	Fri, 18 Jul 2025 15:02:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cYyyRr/+";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=radisson97@web.de header.b="nStKAebt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B60618365E; Fri, 18 Jul 2025 14:19:57 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 17DA083666; Fri, 18 Jul 2025 14:37:14 +0200 (CEST)
+Received: from mout.web.de (mout.web.de [212.227.17.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E38983623
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 14:19:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD6DF83623
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 14:37:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3b611665b96so1109364f8f.2
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 05:19:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752841195; x=1753445995; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EoxPV6TnrvvQ0ok6/UtvhX21TdTEcshWZPoYLn9AeeI=;
- b=cYyyRr/+ZMEOuPbD92Hw1OaxgpXIRM1GDyXdTn4/1NGp7lc7s2dIT6SqTrQDA4+3r0
- hJuCCOb4R2BbqVkSb24+URLyhj29u04EM6+TpU7md6mHkN/tJAjqHVH/E/g0zO8C6onb
- 7AqXyfwtcSUQ4FX4tCk9NTjz8POiff5ioLIAaKse6CaBRFcxhmd4AC7e+bMWQ41zial6
- bft3Gmx11i56+UGHAuB4kBew1qqd4T93snvCiMkaHJB0GnIx8qItlE0hzoYPnbJR+KeO
- FwbcaV5JZjFy42XX8YGLTwcVOvuQ5Kp3e86nQtzHRP2u+tdCbtfgFVzcCOTg3ST08Cim
- qkkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752841195; x=1753445995;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EoxPV6TnrvvQ0ok6/UtvhX21TdTEcshWZPoYLn9AeeI=;
- b=h0IXCXO81PoV1sAiLvTC8Jrh1S4O8glwrLDK494cIkIafzDkkrrfeK3/Zq+CbR55Ba
- zBf0ctOvUDNnJ/9d59oiWqWQl0d7T8LLS09uO8ZQv1eHhVmlghefySIC3cWIfqlGLko0
- hG+3jq8SvZbXKi7wKch6Nv5045u5CWnPOIeMuagU47PlG8rfFtKIYPKPu4jGkR3n0pgE
- K5NOvPOXQPeNX+u7L+5Zdfq6hMs5TDPAFgV2qSZeeEG76B+2xKzshG9B60IHbn6SJCbs
- /r4Z+Tqr4n8pEG/tj9MH5vrScaqsk5f4oZs11LcWSYx/l8O6TkpWDbTk7uVqS+jsPaLI
- 6HKA==
-X-Gm-Message-State: AOJu0YzU0DUdqZ0d2z7/71zhWgcP1c9iinjHRbmSEJuzUmaTjMKITW+K
- L7elEQI75F/UR4VrhVgTHObR7MwQjsQ+FmS0CczPY0benesLyLVr2rYfsAnhsIHwUN8=
-X-Gm-Gg: ASbGnctim+7STTmH7LrBISfTC/l2URXUWjDOycuIKRhd4mvIH7Kzg1X33TDdEZkKjpx
- nb9zP0ICC7dGOcL7KzAueT/+tDSRRX9DyyZWP1m6dMFkMwIcg2Lq89mXj0zk70cyQqs8EICv7LF
- y1Jl/rRmNs2n9Y/R1qNzIF3+c+I9N1NKz/Qa95vurl8ZbeF5SMAuI8kts3vZNO55ewPjqs7/SJ9
- /n6pTJlsyac/2Stg8EIru2hYIDsu81a/EZ8aefRQnIO4F3/kD+wnkxGe9Th8KsAN+rZBIg6bsfp
- vqAx5nN9oRm/ltYCfjCoX093cxYfBqMZHUOCE2szAdroA7JTRMuTc0qPO2jU4tryHQApi10/60I
- Qb9jWXeNFHkN/jaF14ngvhXqS9OaLG1KIb+MvA2Hh4NJXneWMktQ=
-X-Google-Smtp-Source: AGHT+IHmsNDczM1dtu3XbPuNZ8UktTjypn46R5Wny/q+lqP7b7VoZ3O1BrGGfnhHUQ7U7m2mHdAvfQ==
-X-Received: by 2002:a05:6000:2013:b0:3a4:e8bc:594 with SMTP id
- ffacd0b85a97d-3b60e4c5132mr7930973f8f.8.1752841194710; 
- Fri, 18 Jul 2025 05:19:54 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:eb9:1701:ef2b:6c47:de09:6843])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca4894asm1706494f8f.49.2025.07.18.05.19.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 05:19:54 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 18 Jul 2025 13:19:54 +0100
-Subject: [PATCH] spl: NULL check variable before dereference
+ spf=pass smtp.mailfrom=Radisson97@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1752842231; x=1753447031; i=radisson97@web.de;
+ bh=PUlnWyssJhAl7uXTjZdRRZINyTNLDxanaRye1DWAFrM=;
+ h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Subject:
+ Content-Type:Content-Transfer-Encoding:Date:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=nStKAebtXLFjM9ryeicSohPo8Zx2x6BeImxTbfPrprblnayKM1Uck8iH4CDs02n+
+ 1b7Vpyh2puxhPr8x21N89QrR9JGSlCBO1bHNolV2uUgBkFGGJEa45/zLePa63jPw9
+ MOQ/ylmG3HlHy62gb7uu0qomHx4+5jkW8+v1eLRIdv9crEwBdv5k6QJgaL25/xABO
+ YCOcnDm0JY4MNT6wAGG/aCWEuToR/y1vac79Gtp1Ba0yUqmxzZAFeCJJSbrbQFLMa
+ ADhy2qw7mUcabc9NsQo83oCutGMPqij8oBG4P+i7HHQijJlwqdMUHtEytBUSy+W8b
+ cTZVrtOQTFEy2e0+9w==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [100.64.250.143] ([100.64.250.143]) by
+ trinity-msg-rest-webde-webde-live-597dbb6dfc-t47db (via HTTP); Fri, 18 Jul
+ 2025 12:37:11 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250718-spl_loader-v1-1-835ff557b9f4@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAOk7emgC/x2NXQqDMBAGryL73ICmf9qriJSN+VoXNMqulIJ49
- 8Y+DsMwGxlUYPQoNlJ8xGROGapTQf3A6Q0nMTP50l/Le1U7W8bnOHOEOjRn9tFfbqEG5SCwwQX
- l1A9HMrGt0EMsipd8/5e22/cfuZrmAnUAAAA=
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Message-ID: <trinity-2dc0c8ca-3b5f-446c-8236-28aaea7b5e2c-1752842231069@trinity-msg-rest-webde-webde-live-597dbb6dfc-89pk5>
+From: Radisson97@web.de
+To: u-boot@lists.denx.de
+Subject: MLO and crc error
+Content-Type: text/plain; charset=UTF-8
+Importance: normal
+Sensitivity: Normal
+Content-Transfer-Encoding: quoted-printable
+Date: Fri, 18 Jul 2025 12:37:11 +0000
+X-Priority: 3
+X-Provags-ID: V03:K1:FVfCd5vfltukFE9mK19SkqP1kMeJKAdgrSnTQDAuB0wMd/oyvjeRh5yGEd99bC3qZlYCw
+ COmoYnM3YbCYS7Q+P1fEyRud0HsO+OzLuGS/p+hIM0hIy6pths8I9JNNINGSRmtXb7Z7AnoDOCq3
+ FDw48fpL2J4+fuNQIojmCInwtUXvi2j4RS8gNNY1MpNHgAnstxACdN/2luKStqSadaHzzNKOljre
+ 7KhseVXKGd2CnBctz1doR2LeKbyb+BBPzPogpXrnXl7BSrGMX6vDHTh1qSpm2YmFTLJgNHmx1eJI
+ eYjbh+bKOsAP5Os2tpYtDNWcooGQgEgYpgFL1JNYa9GdrzWoZLUVvI6F4EX8iGa62MU1xxludQWB
+ 3tWFb87N9Gx
+UI-OutboundReport: notjunk:1;M01:P0:mtpP8+S0KGI=;dPLskA3W6//9Utue8UjsZyYJDSB
+ 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
+X-Mailman-Approved-At: Fri, 18 Jul 2025 15:02:47 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,36 +120,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In boot_from_devices the variable loader is not NULL checked after
-assignment and before first use but later code does check it for NULL.
-Add a NULL check before first use.
+Hello list,
+i am stuck in a porting project=2E The hardware is a AM3703 on a omap3 bas=
+ed custom board=2E
+The original hw used U-Boot 2013=2E07 but since we need to update, we swit=
+ched to uboot 2021=2E01 (complicated background does not matter here)=2EThe=
+ stuff is running with the noteable exception of the MLO that keeps spewing=
+ CRC errors (but it works, binary from the 2013)=2E
 
-This issue was found by Smatch.
+For Uboot we define OMAP_ECC_BCH8_CODE_HW_DETECTION_SW and it works fine=
+=2E Booting from MMC we have no problems (but thats not an option)=2E Booti=
+ng from NAND only the MLO complains=2E
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- common/spl/spl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Our initialization sequence for MLO is:
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index d8e26605d20..ed443c645a7 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -634,7 +634,7 @@ static int boot_from_devices(struct spl_image_info *spl_image,
- 		if (CONFIG_IS_ENABLED(SHOW_ERRORS))
- 			ret = -ENXIO;
- 		for (loader = drv; loader != drv + n_ents; loader++) {
--			if (bootdev != loader->boot_device)
-+			if (loader && bootdev != loader->boot_device)
- 				continue;
- 			if (!CONFIG_IS_ENABLED(SILENT_CONSOLE)) {
- 				if (loader)
+nand erase=2Epart x-loader
+nandecc hw hamming
+fatload =E2=80=A6
+nand write =E2=80=A6
+nandecc hw_bch2
 
----
-base-commit: 0f83825802d8938fb584c12f115bde900efe71c1
-change-id: 20250718-spl_loader-e93a2d246b8e
+I guess the problem is with changes to nandecc but i have no experience wi=
+th uboot to fix that problem and run out of ideas what todo here=2E
+Does anyone have an idea ? I even do not know, who exactly is writing the =
+CRC error or what is expected=2E
+=20
+Please, reply directly, as i am not a list member=2E
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+CU
