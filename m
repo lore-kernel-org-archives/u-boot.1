@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B0C8C83F17
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 14:16:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23680C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 14:17:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3846883675;
-	Fri, 18 Jul 2025 16:16:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A452A836A7;
+	Fri, 18 Jul 2025 16:16:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VD5HZSNi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AhxBoMbx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFD35835B0; Fri, 18 Jul 2025 16:16:44 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id D2C57835B0; Fri, 18 Jul 2025 16:16:50 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C70FF836A3
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 16:16:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8D43836A7
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 16:16:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-4ab554fd8fbso26496081cf.1
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 07:16:42 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-4ab58105261so41934261cf.2
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 07:16:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752848201; x=1753453001; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1752848207; x=1753453007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l1895sRN35sPGDUxMQhF/B9D5O7fk0U8Zvg5wbRqgq4=;
- b=VD5HZSNioK0343vw6YqMyX4021Pevft4KMAGvd9li/Nhr4ji/DDKLpkHwLQs2o1rNB
- 0Jc//oXKBFBOncvcoAuFFJKAqG4dh1H/tiI3mtk104TJLl7MqqUOwMyg66RnXCs2rgsa
- Iw8HNWE3XNrFP5zyHZWLIBium6YFFkhFrCEN5wd1mjqOuu4NxEeLfsjRn7aj8bhnEfNN
- alKqq4kySXEaMPnRSfB5zGvoaDdbMJjtjhMR5yISQPwt6nvscGgPVdbA9cBnVyDxG6+U
- aEbf5oT/BSIl3xycERHmJNaGw7olFRbOKyXF/jWXXXLNOl2bTCO0qVwF2tIMxu0kNmL7
- acPQ==
+ bh=Twng5CF3mkFazTeQJ6ELs/kyM8121MTSmmK2f9Ak2dY=;
+ b=AhxBoMbx8w5UAWGFYPBYNp0Ccu84tDWV66pws/T+7zjdr1fwCUkRPgiDGHaM9k49pz
+ EhV5gUjhpCobvuZmMTi46DJbrFIIZcH4dAR+OPE2itm9ZCB2mrIbko/uuxHrwLoM21+i
+ JxMTIV7Obk/bWSdaqwuq4lAIhhAbQDZK2naC6YzIEBwF3tPJg9wmiMJKe94HNt53X+uq
+ HIuW33XQsuivXgr1J72SyzvPFrBNGijWnUllmQ9napADoffOghY5J4XSBpIo4oZuO5nv
+ fokHSEFMhGKvRfdWnNLP5yA3NilzZ1AvtjDQtdMYYkIctNiMyrrabcDk4p+MLhbm3eFx
+ wY1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752848201; x=1753453001;
+ d=1e100.net; s=20230601; t=1752848207; x=1753453007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=l1895sRN35sPGDUxMQhF/B9D5O7fk0U8Zvg5wbRqgq4=;
- b=HDBYPSvnOxCpKKiXUJY5nGqlesK4Df3Kc4rSYE4kdLQt1f2Axm8Yepvr+Uyaq8e929
- JY64bMN1jXIVb4MHnrtN1iurucLGKyTZ41gAIQPqfGtkQ35Ot+ZhHityRb9GSgcvwoPF
- 3cVJA9QKe3PETAhX3bNMWqSt10M/MdkLs8uQPX+L2PMa0SGKJMC8azqizN2HdLyXSn7o
- fXvxgK5CvFRjyjPGGoHdBscSIdI0rFZpXWfqXFMqgCi/ZVd6ujk+ZDG2fzWVKlzkZ3CY
- OY2IsbqIGIGM2XxXBN7KexfWT6mAsx6eNu4QqU9NSABYky2sl336+f7zdyevD48FS2ld
- QVng==
-X-Gm-Message-State: AOJu0YzZpubQoQgxwhZq0oTErfSIOkimYWMNgNZ1DLvdEEXYD7MtYNMq
- 9+c4zwfRVJHdlX8wjKB9PYJYOnGT9C0iKq01/uIEBktl2dGdgk5aeR3C6Zaf2WWzMv+iqfckKMM
- nMD3R
-X-Gm-Gg: ASbGncsPZYrSdXFjKf5xXUVAYInTns8f/ozeTpWSwXtKq5MJp4sIbgfUxBOXv4pDAz0
- db892J7vwVrvauJwjEhgzpm9GaRXo2S+V/B2ExKd3US3KILWSvnMXnx8HstLJ3eCgI5YVBNzOAd
- XC5EFo9un6tpCa2ug52OGOpi8vNz0mrH59W1lgQz/b/RCxzROdLCukX6Od11g3PjCzXSdNTezO2
- Fah8LHAYtUbfANltSCg5Ksz4GQ+UhUSvDwkLIa5ZqMkr+O37aJ4OvBMf5dXxObpwOEZPbEfPIFG
- 0gwMwQTQrR9iL4Z3nu9JRSnWv8t+EWwP9SflrgwL/nSdtfk8eE1qHypQdJZ4zzHC+ICUYgnAB8K
- sJL0SFtbFDPYDiWThc7eLeNlzgIGuotkRopn2Ga4sVsEskefIhIZMM9tPsnpJqP8Cp5a0gynFHC
- PMako2Y6D00BSxs4u4lg==
-X-Google-Smtp-Source: AGHT+IF5YQ80Pn0gTt9rNO8uUe+yvVE9cUz1eXNleQ48bom2eHrWqMGu5/h5YATqYDif7i7j84NgQw==
-X-Received: by 2002:a05:622a:4acb:b0:4ab:41a7:18da with SMTP id
- d75a77b69052e-4abb0901f50mr73258321cf.26.1752848201031; 
- Fri, 18 Jul 2025 07:16:41 -0700 (PDT)
+ bh=Twng5CF3mkFazTeQJ6ELs/kyM8121MTSmmK2f9Ak2dY=;
+ b=DkedqeCqfVAXI8XaiDJffOuVI9u9Ubn6qLHCNj/LAH+ILNvwZCtVsEBMJybs8CloZ4
+ 7e2wSAKab8bfrOn48xb+IJFDr58n6/IjunRv4oVVywKUMFRR0trAudCKXccmyUvjwAsp
+ OZxVG/i/U0N7nwJ+t/fXa24n0XvHHSpnc3ffHPKde+WXHEVlSCZNo1P/dOZYGwIbIwGo
+ t/941Vkx5tVBb3b4Sht7pXAW2iYPmqWM+Y6kBRC/x46TAbIQvAHTBGNvxbeOHRRF2R34
+ DOsVQyNYA+LTwZ8q/a/FGF3Myssf+alEsRp3P8SptRoSiO+6CtY7aJ2Eod79wNq7l5PB
+ /tzQ==
+X-Gm-Message-State: AOJu0Yyxt+n0oLF4g7XP+7HB6I1UQDfLmcfWvpEig+A9XJ0o+J8uWOyC
+ 9HQYN/l+auHQ5sl5WKR/HztGwILRta+APGJqZITgZnfBgxjapFxcPfRFABmkwRET+n7i3d8fLyP
+ dVnbC
+X-Gm-Gg: ASbGncsuxuYKiHk1hhFg0yF6cMsF4Fe9m90fTxAxdbALKdr/Uy/iUl8JxSc62HNbky+
+ uRLUYyX8/56T3R0dN6aIzEquHeBWhkmC0sk4EXOoZy0LEJyBfY7+5KLLOqPwEkqAOgNAim27xjv
+ z2Gr/JFPQ3O6U1EfEKSzHR7DH/4sQxYwFkCMRT3cV0aUCfXgJHil+FX8B7yXHxM5RUzk6OXC9WO
+ 1Yg3eRztoMUdR4yT5cW1G4kUqMxZIGtK8Opylr4HKyhTmmbsCdHotzb34KYXiCcGzjZEVixxV0A
+ cCv6XRH+Z558A/XIMOb7bDHzBrA1SnV70y+SVwEpr2FA3VIaBB/LWITBPVIOMx3u60TpKOEOy//
+ A6enqzkwrKta0hBeJMqUS8NjKen0vZz8dC9Dd25Fk/ouZWRqBURZZrjH4CKEvpaaUD7NAvWoNdQ
+ lASavUp7w=
+X-Google-Smtp-Source: AGHT+IH5Mg2HskRX9zSvbDp0N6LssKr6ptcvM6yXZKesT/d+jvQV4JDbjqDgI1FT0A/N8YKsAhsAVA==
+X-Received: by 2002:a05:622a:4c:b0:4a9:cd88:2ce5 with SMTP id
+ d75a77b69052e-4abb2d956c6mr48845591cf.43.1752848206908; 
+ Fri, 18 Jul 2025 07:16:46 -0700 (PDT)
 Received: from ubuntu.localdomain (173-206-114-64.cpe.distributel.net.
  [173.206.114.64]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4abb499e91csm7558341cf.19.2025.07.18.07.16.39
+ d75a77b69052e-4abb499e91csm7558341cf.19.2025.07.18.07.16.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 07:16:40 -0700 (PDT)
+ Fri, 18 Jul 2025 07:16:46 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
@@ -80,6 +80,7 @@ Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
  Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
  Harrison Mutai <harrison.mutai@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
@@ -88,9 +89,9 @@ Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
  Matthias Brugger <mbrugger@suse.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v3 2/6] bloblist: add helper functions
-Date: Fri, 18 Jul 2025 07:16:15 -0700
-Message-Id: <20250718141621.3147633-3-raymond.mao@linaro.org>
+Subject: [PATCH v3 3/6] bloblist: fix a potential negative size for memmove
+Date: Fri, 18 Jul 2025 07:16:16 -0700
+Message-Id: <20250718141621.3147633-4-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250718141621.3147633-1-raymond.mao@linaro.org>
 References: <20250718141621.3147633-1-raymond.mao@linaro.org>
@@ -112,10 +113,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add two helper functions for:
-1. marking a blob void
-2. getting blob record from a given blob data pointer.
+It causes a panic when blob is shrunk and 'new_alloced' is less than
+'next_ofs'. The data area that needs to be moved should end up at
+'hdr->used_size'.
 
+Fixes: 1fe59375498f ("bloblist: Support resizing a blob")
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2:
@@ -123,33 +125,22 @@ Changes in v2:
 Changes in v3:
 - None.
 
- common/bloblist.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ common/bloblist.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index 1c690f58b56..488908f605e 100644
+index 488908f605e..550c0c78ffc 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -97,6 +97,19 @@ static inline uint rec_tag(struct bloblist_rec *rec)
- 		BLOBLISTR_TAG_SHIFT;
- }
+@@ -335,7 +335,7 @@ static int bloblist_resize_rec(struct bloblist_hdr *hdr,
+ 	next_ofs = bloblist_blob_end_ofs(hdr, rec);
+ 	if (next_ofs != hdr->used_size) {
+ 		memmove((void *)hdr + next_ofs + expand_by,
+-			(void *)hdr + next_ofs, new_alloced - next_ofs);
++			(void *)hdr + next_ofs, hdr->used_size - next_ofs);
+ 	}
+ 	hdr->used_size = new_alloced;
  
-+static inline void void_blob(struct bloblist_rec *rec)
-+{
-+	if (rec_tag(rec) == BLOBLISTT_VOID)
-+		return;
-+	rec->tag_and_hdr_size = BLOBLISTT_VOID |
-+				sizeof(*rec) << BLOBLISTR_HDR_SIZE_SHIFT;
-+}
-+
-+static inline struct bloblist_rec *rec_from_blob(void *blob)
-+{
-+	return (blob - sizeof(struct bloblist_rec));
-+}
-+
- static ulong bloblist_blob_end_ofs(struct bloblist_hdr *hdr,
- 				   struct bloblist_rec *rec)
- {
 -- 
 2.25.1
 
