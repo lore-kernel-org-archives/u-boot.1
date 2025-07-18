@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C66DC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 15:01:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8A60C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 15:01:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C21DC8367B;
-	Fri, 18 Jul 2025 17:01:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14712836A9;
+	Fri, 18 Jul 2025 17:01:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h3XNWUEh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dYBeUFLo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C09BE83693; Fri, 18 Jul 2025 17:01:23 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 659D783623; Fri, 18 Jul 2025 17:01:29 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D093834D4
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 17:01:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA3C6836A9
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 17:01:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-2ff94cc4068so605682fac.3
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 08:01:19 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-73e5792cb9dso679719a34.2
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 08:01:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752850879; x=1753455679; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752850885; x=1753455685; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1QbvmY4CkuKz/nfZ0UzDM362/teR5IN0XZioe/VtdeM=;
- b=h3XNWUEhDSahdhTYSuLul+3kv8WtJ0hCB2B6Qcl6dxiUD7xLkpNcpBbvYdnTF/nF7d
- YbqkPA4xITtTUr6FkfbnF7UlJBZ0FWA9/ZE8G42trUD2MJ1wV+hbrV0CENemJG4PJbIO
- /5AY5xYJLI/7Q2bL2vAqfki2NFHhMGxEUyRao=
+ bh=O1r0oM4YqFcvuddg/x0mj4sQc/JKIxUTEuV9hePaz8E=;
+ b=dYBeUFLoG0StECIDtbbMlNb1QHwEjOMeb5X+hr6T4RRxuvTR56hC/iK4jmq93Kg10P
+ 5ONQYjK9Wg6ypJ5YKrjT1ogQE89K6MG4Xu1PPuMU/1rqSgLlbGVu1ZSo3ag14Ko9RwR4
+ JmFGnds1Hx5ZuwJqIqwLnZi8UHYz21Jhbbeig=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752850879; x=1753455679;
+ d=1e100.net; s=20230601; t=1752850885; x=1753455685;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1QbvmY4CkuKz/nfZ0UzDM362/teR5IN0XZioe/VtdeM=;
- b=mbR2A1qFIcRX4oyWgNAg7gpzTWyzI0Kxm+NOIWbQHxSvjfuGeNoYb77xMYpoeEd/dk
- DJEIvP1SHr+0fwHqYbaun0z3PTOLtTNJiYOui4qcngGvFvJmEDrgaabE6+ar0us9oxF6
- EO+5ig8O4WL028/PjkobmuMfhuddeE2mUoVQByX1vXvrkERbt+nHMzNifhS8mXUfz51x
- HRen0UxHofeWOS7YrLkFHpqlfw8qCX0SO/dEKnKH0ZGhNpzg1pJlS70/iyax3oX13wrD
- 4DdbOmGkjxLQOaOlCUq7wT32oggdeRt5B+1J98G1h4rb2Vq/lsGSACxCPICNL6TXhO33
- LdIQ==
-X-Gm-Message-State: AOJu0YyjQwAeFBxEUcupRmojCufP43oNIC2nraPOKaAc4hLBoQZvgrS/
- QV1wsujIO0lLKJLuextlvqHObte/MIAuEYhvqgjTVdK641N2npuqOvs3oA9pC+EUmN8=
-X-Gm-Gg: ASbGncvCS8Z/L42IAHQ9j3a560P2UDH1IJW6QRWuJFFSAu9twXMpYcmafaUxtZeb41b
- avsPBwjYz+PNxtgRqvXt/EeKGWXrjbCDZk5u6qRJcbxqWdse4UkqVYAS5FbJLxMDMkuhOsGf/b7
- 9v7U598NXjZd+7LvC0yoWl9ng1iKa+eiBdPBS7D1hKCF1VN9ozdnRwAZh0KAZSXuKF+hhRjWBh3
- EwfSgOT+CM7R9OdqEGxCmiHykq+W6sVmLDq45lj1fnHXq/IBtc0Epuh0NdvnlI5QBAxlzQbUWLQ
- DRNGv5XYdGOm95qiPKh192pBqwJDfhd5IQgXMl74Iz8yCbwL5mOujEsfzz1nrvG4QBJ+IiqwSVz
- UxMT3jPXiKjV2YE64w0rvcIf4H8u9wro5fXNDZ2kJdQ==
-X-Google-Smtp-Source: AGHT+IFbtIZTwBbWyVKWiC0oUXVEqpQ0cRXg5XdnIBoVETlYnzkG34NyUFvhEpNrOznAqz+wJya2wQ==
-X-Received: by 2002:a05:6870:6b09:b0:2e9:4038:83d7 with SMTP id
- 586e51a60fabf-300e8d11fe3mr2346042fac.11.1752850876768; 
- Fri, 18 Jul 2025 08:01:16 -0700 (PDT)
+ bh=O1r0oM4YqFcvuddg/x0mj4sQc/JKIxUTEuV9hePaz8E=;
+ b=G+1z7O3w9iwL2jRyWkoM0bm7Um/T/RHF6ltnAdt6eU/8XAoCOvTA6/1hQt6MvWl6o4
+ iDzfxnnoiDtk7KxnoxKDyriTzgvfi6Uq+AzR5PcVf4dKQ1LxqJI6oCYIqDKlCbc3MOuX
+ BDz71q5v2jCOaoMF9dTYyMO2WTWRRE2jPeHu++AiYNZ7RNMTdA9/VmaR4yS8bMS+G9Sx
+ WPsjzKhO/deITIl2nxSoXaXO/llBNaqdVCLqECsUE9erZy0TRrEgi1ZR3JA6ZfAEIU1v
+ kOhBq/yFRLctL0s4osnGYCuN7EQxsTaWwgOTL8Nwro83OsV3zZXvd5p1m/DEmS/tv/PD
+ 9Pkg==
+X-Gm-Message-State: AOJu0YwJKhwtYuw2ZvYib/vCgeM54DT/F+p+HFDnEa+AN4avHlts+UE3
+ b06xXIVF/khIFcuJS8x/DjIP7KfsDohM++XRmwqZE/LS2SA09UtauH+A2xfkc/WaHyKcey0Fsxm
+ jomucZRE=
+X-Gm-Gg: ASbGnctvqRFD9rHJD0qcTo2tcn76fqAK9GSHcKADPbJJs2FuYtRYMHTN44+TXW8gaAp
+ psvCzQGJ6qNs+3SbDC6c4ogAo+EHhfjjUwX6Y0W6v4TOwnxmfg6qVA170lfF++o3a+QH/eopF0a
+ V8jn0RtVAwLSSNCMJTAtW3Bave+t/weopxKUQ9PWcfbIEtXbO+4uLIew/nZNYPiEXZZHcyY67vq
+ h1VmimsjXLm43psgUSYKSgNyLCfmTj5o4ns6B5Kvph2Lp1nUoHxthwlEVHaGX+3BxWumQK1a9DG
+ JzM2hXVptrgQsca93CGXf6p2aznpq0BgUvM3JqeSgj9thi4tHHjW3rmY97bt2ilXhIE8zJig8Er
+ xSUJdzwAkf6gSTq7/JUpCax+kgI42TDJzYAOiyBM5QiVUJdevXt2kAWuF
+X-Google-Smtp-Source: AGHT+IEGzykJnJK0y1UQcuGmnQ5nZ9YDT64SZ2Va72tZKN9t3M1Ql/OO73F3qecR8l6oyuVKrODtCw==
+X-Received: by 2002:a05:6830:630d:b0:72b:9b1f:2e33 with SMTP id
+ 46e09a7af769-73e64a80b44mr8946438a34.18.1752850884034; 
+ Fri, 18 Jul 2025 08:01:24 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e8354df84sm644240a34.2.2025.07.18.08.01.15
+ 46e09a7af769-73e83bca6b5sm650233a34.59.2025.07.18.08.01.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 08:01:15 -0700 (PDT)
-Date: Fri, 18 Jul 2025 09:01:13 -0600
+ Fri, 18 Jul 2025 08:01:23 -0700 (PDT)
+Date: Fri, 18 Jul 2025 09:01:21 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Frank Wunderlich <linux@fw-web.de>,
- Padmarao Begari <padmarao.begari@amd.com>, dinesh.maniyam@altera.com,
- Holger Brunck <holger.brunck@hitachi-powergrids.com>
-Subject: Re: Please pull u-boot-i2c master
-Message-ID: <20250718150113.GU193579@bill-the-cat>
-References: <06c2b16e-1e3d-7632-70be-d6df4232ff71@denx.de>
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] .gitignore: don't ignore .gitattributes files
+Message-ID: <20250718150121.GV193579@bill-the-cat>
+References: <20250718085634.13542-1-ravi@prevas.dk>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2dnjUUj23ANX2bhd"
+ protocol="application/pgp-signature"; boundary="v1UtnEt7ZfDhpam3"
 Content-Disposition: inline
-In-Reply-To: <06c2b16e-1e3d-7632-70be-d6df4232ff71@denx.de>
+In-Reply-To: <20250718085634.13542-1-ravi@prevas.dk>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,107 +97,57 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2dnjUUj23ANX2bhd
+--v1UtnEt7ZfDhpam3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 17, 2025 at 08:10:17AM +0200, Heiko Schocher wrote:
+On Fri, Jul 18, 2025 at 10:56:34AM +0200, Rasmus Villemoes wrote:
 
-> Hello Tom,
+> In a private fork, it's not unreasonable to commit various binary
+> files associated to one's project, and thus put a suitable
+> .gitattributes file next to it to force git to treat that file as
+> binary. In my case, I have a .xslx spreadsheet used for computing
+> suitable RAM timing tables, which I wanted to put in
+> board/<vendor>/<project>. Git duly warned me that it would do LF/CRLF
+> mangling, so I also added a .gitattributes file next to it with
 >=20
-> The following changes since commit 53bd87651e45b32efa398dd5e433d8b93d7814=
-45:
+>   *.xlsx binary
 >=20
->   block: sandbox: Add support for SYS_64BIT_LBA (2025-07-11 11:33:25 -060=
-0)
+> but upon adding that file, git told me that I'd have to use -f because
+> it's a dot-file that is by default ignored.
 >=20
-> are available in the Git repository at:
+> Add .gitattributes to the list of dot-files that should not be
+> ignored.
 >=20
->   https://source.denx.de/u-boot/custodians/u-boot-i2c.git i2c-for-2025.10
+> While in here, sort the list and update the comment, as there are also
+> files which git itself does not make use of in the list, cf. linux
+> commit f46e65da48b2 (".gitignore: exclude .get_maintainer.ignore and
+> .gitattributes").
 >=20
-> for you to fetch changes up to 5e80c6757378d09950235083533e7a7c3aeae3be:
->=20
->   configs: agilex5_defconfig: Enable i3c configs for agilex5 (2025-07-16 =
-09:33:54 +0200)
->=20
-> ----------------------------------------------------------------
-> i2c updates for v2025.10
->=20
-> - i2c Kconfig updates from Tom
->   - add some driver dependencies
->   - added missing include delay.h in iproc_i2c.c
->=20
-> - i2c: muxes: Add PCA9541 i2c arbitrator driver
->   from Padmarao Begari
->=20
-> - pca954x: add pca9545 support
->   from Frank Wunderlich
->=20
-> - cmd: i2c: fix build when CFG_SYS_I2C_NOPROBES defined with DM_I2C
->   From Holger Brunck
->=20
-> - added i3c support to U-Boot and enable it for agilex5
->   board from Dinesh Maniyam
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-Unfortunately the i3c support leads to this in coreboot:
-https://source.denx.de/u-boot/u-boot/-/jobs/1202949/raw
-
-Which looks like coreboot just gets stuck in a loop? And in turn, that
-lead me to do this locally:
-commit 03e9d5f4c61cba5d8e1db81d759fefd622b3ad49
-Author: Tom Rini <trini@konsulko.com>
-Date:   Thu Jul 17 15:22:08 2025 -0600
-
-    hack drop generic changes
-   =20
-    Signed-off-by: Tom Rini <trini@konsulko.com>
-
-diff --git a/include/dm/device.h b/include/dm/device.h
-index c5cfa18d09d6..678cd83c2716 100644
---- a/include/dm/device.h
-+++ b/include/dm/device.h
-@@ -169,7 +169,6 @@ enum {
-  * @dma_offset: Offset between the physical address space (CPU's) and the
-  *		device's bus address space
-  * @iommu: IOMMU device associated with this device
-- * @of_node: Associated device tree node
-  */
- struct udevice {
- 	const struct driver *driver;
-@@ -202,7 +201,6 @@ struct udevice {
- #if CONFIG_IS_ENABLED(IOMMU)
- 	struct udevice *iommu;
- #endif
--	struct device_node	*of_node;
- };
-=20
- static inline int dm_udevice_size(void)
-
-Which leads me (a) being concerned about what our coreboot support is up
-to and (b) why i3c needs this generic change? And I don't just want to
-see CONFIG_IS_ENABLED()'ing it, why do we have to handle the device tree
-that way and is there no standard mechanism we can use?
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---2dnjUUj23ANX2bhd
+--v1UtnEt7ZfDhpam3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh6YbYACgkQFHw5/5Y0
-tyzLVgv45XgYagn0iBgjprKXxFghLpcVnp22wlEjvOuJ9g973gFQNWOeb48FUKAZ
-YWAfLUrPX7rJsVjOEs3d0oUVaRkEiTDhLs6Q34Y9JDslasauYdFd/hawgXOte18m
-paWg5IUSdX/feKvhAx45eqI4kVYI8HFBv9/REkNtte1t9Reo8H+D50Acnu4rsMlU
-P208BUcUQ7/+MJODOjCM0wkxEzEl44vUax89p1iy86oHmsWiYGKijeiXlhDstBkz
-y5DPpFTwx1ZpBII+1tlZKvT8Ez3SDOPCzYZPm4hgipkK31CVtPezlaRIVVGm0QnV
-d83kBjvTE3SaMZUje/SAlC/gX3S1DiPvnfWyAw65JaO0dG28Zw+QqfOXR2GpgLdX
-4Jldsx7e2pilrqyqietAgqFI7gOqyy+zu9TdsgG2gjmqC4LD68bwHmzsFVHLAeWB
-xaGzqrjLDi46Um5P0RcMZDZT4Aw1g/q/uQ/Fou3tikffpFfGyVk8UYrN3qwESOul
-ETdfCnA=
-=V0Tc
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh6YcEACgkQFHw5/5Y0
+tyz9OQv/bUOpeFJNamRxhmZpvJN9kSsisE8YB+djY680zHHnKRT0kQTyubBqrEen
+JB23sZv8Ny9fALb2Hd3FsQLoRED9pMXDRWLeYYYnVmro6tJiFduRfdN9Rdh4tAQS
+rh7lt2ifvZQpAWShhRBGYiNrzN2eYKTZ3kTFNFEqALBDPGmpZbhwWqHHVppztWy7
+bAIeksAa87DgQwzoTuvCUieFj8zTMciHEjwR331cze5Mu8MAKVtp8I3lVkbT93bp
+OEIfjMDrpvQVpkZUicAEXBbHHxEoE5LxgyFlnBi7fAR2eoPIfdGVnk2fK7bUYAwG
+W9K2rwl1nvjqOSNHQGKENVQlwcB5cGbQL2eleVfoAtr46gHa1d35MPSCUt66rDcZ
+cCjTNuZrULv92QyJpAB8+KcyOFN9jXEGWFbM0uNQTB9RpJttZFHL0Nia7Av9ExWE
+nlD5MfuB5SC6ikdFEunfc4L08gWD3HabYxJFNobmZ6jw8VMlybMol3K3XE8OBljX
+CkT9/c9H
+=BkeN
 -----END PGP SIGNATURE-----
 
---2dnjUUj23ANX2bhd--
+--v1UtnEt7ZfDhpam3--
