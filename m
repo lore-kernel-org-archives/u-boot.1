@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461DFC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 17:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0347C83F17
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 17:34:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9DEA83678;
-	Fri, 18 Jul 2025 19:17:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D52E83677;
+	Fri, 18 Jul 2025 19:34:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=lessconfused.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="uP8UinCZ";
+	dkim=pass (1024-bit key; unprotected) header.d=lessconfused.com header.i=@lessconfused.com header.b="A6SVq3Xb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 179AC83692; Fri, 18 Jul 2025 19:17:12 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A44CF8367F; Fri, 18 Jul 2025 19:34:26 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0C17834EC
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 19:17:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8155883612
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 19:34:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=lessconfused.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1752859003;
- bh=6CROeabS+W1cVykibjIiwqwcuKG5kG4TIFhTohSB0MI=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=uP8UinCZwtWKb7DxnOOqqPnxO+GabwNCOCehb2EaFfeyKcpl7F7AUwYqGe4Xja3ev
- 3KZjbafX/6GnXLeXwI3sNvL10rF04ra+UrV3Zz3WKCmF3TCzIfawFEN0yjJz8CF9Ka
- oHGXIqubQCMTp2Z3sSpas7Jlo+/Av5hcF6FJa79iguTgPN2NwNQZNlaTRMc+5MRYro
- NkHNDJBko+NvomQ7HZ8TFCPQwWaRbeGei579bfzgDfL4W6bMytO/izAyMXiLo680bi
- v2CloPt7fAZhVDBjDM2h7L10Y81k435OHgi5Q3NmcWOnbiMKEFK/5A0q5HZc/fEzSt
- koI7xHs8nnBlA==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Tom Rini <trini@konsulko.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Andy Shevchenko
- <andriy.shevchenko@linux.intel.com>, Christian Marangi
- <ansuelsmth@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, "Patrick
- Delaunay" <patrick.delaunay@foss.st.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: RE: [PATCH V4 0/3] cmd: env: select: Add output for available
- environment targets
-Thread-Topic: [PATCH V4 0/3] cmd: env: select: Add output for available
- environment targets
-Thread-Index: AQHb6dGg1PMbxiI2V0e6dQQ7cHE56LQqhxUAgAKY0NCAAADmgIAANquwgArC0bA=
-Date: Fri, 18 Jul 2025 17:16:41 +0000
-Message-ID: <e7284037388042d089ded45ef18856ef@dh-electronics.com>
-References: <20250630151232.39100-1-cniedermaier@dh-electronics.com>
- <20250710015826.GY6424@bill-the-cat>
- <7d8b712b9e71485ca6f057e95f19af1e@dh-electronics.com>
- <20250711174107.GK6424@bill-the-cat>
- <073f00355c2d490ab8242e129d662ecf@dh-electronics.com>
-In-Reply-To: <073f00355c2d490ab8242e129d662ecf@dh-electronics.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=da@lessconfused.com
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-b1fd59851baso1620680a12.0
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 10:34:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=lessconfused.com; s=lessconfused; t=1752860062; x=1753464862;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nMuZzyyeP/bq3o9ObPMtAQw37FUeKvMg54QG5iYzdiY=;
+ b=A6SVq3XbOxYnK4AECskVZ3uisYtu27qbEA5e81yGY8YHvleVONLoMauXxkIOlS7S3M
+ 4GlVItZKlRxNEFVokNNzRtsGt0kdFV69koq5gAJ/4hJIaXQOXKXlb63HAN3vCsugxArM
+ GqroNXDdJCJaRctZr7WxCxY0ousu09YJYEE9Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752860062; x=1753464862;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nMuZzyyeP/bq3o9ObPMtAQw37FUeKvMg54QG5iYzdiY=;
+ b=rpOmFcDlxaYO5f/YqrSET6xA4Je8y/q8Px1PpRkwc4kfGtGyusNJ9I5NwWFlRFyRO0
+ C9yVwzLsioO36QBwcpuUfVRU6rJF/5KUVGM0cpXaMxIQpPxLkMZyP9p4u7FtEX+siT42
+ mx5awOLMKhAmO+pupv3GwRwOhLn7kpQdzpQi3z/YsdJwCzt3Ovv2XjSEA+wdQGePc2X3
+ jzVUmaysUu8ZR3F9kH8zN8BqXIvvWPeFoyNVGBQBjGCV2emgV+2ZW0vNmwWdBbOmrqVB
+ WxL2lTBRS+I8cJC00CWhNZPcq28Lcn/HrugCDzDEMrDyhipY5yk77YqQnm9Ll+dm85S5
+ TSRg==
+X-Gm-Message-State: AOJu0YyWkKcRc17zONS6nWgDbd1d93feToUhooW6Wat8Y8DEKmp5tzR2
+ SFldVI1uaXl+q8pzdqnhAeiX6bLoFUwnwr4nR2WK1pGdsnypcxeOZ3Zx6w4NYPghNKfBfnr8xVB
+ RaVObRupCunPqyLUbihENykOTEsN90SAubRfhTb3yZuL/YE+lmH+K
+X-Gm-Gg: ASbGncutqiRXDdTg/TS/bXAU+LBTk4KsyyfSgxmyCabjCw3UUwFmrOAZDHvX6fRTnkX
+ o/RSOSaC5ZhH8GW2zk2kWoLOErTFZJ6Y/5VN5vqyjUX2Usj88H3mWZIwGNWiB2V/DrwqpgWK5mQ
+ XMWPdAku6v5JBE3sYIUBV0z/itSbz1wyWIW0IektGnn4HhZqqJ4LfSJEFwsBInGhLimz5aVwSou
+ bNURoLu14Ke/aINO+4hOPGm7ajILSea1riNmw==
+X-Google-Smtp-Source: AGHT+IFwAaIlf2N8KoxosTzCttc9d9V8Gb03xyeDsZs35J+NpjsF8PpP8KtmpJuiZDg3J4HLED0Uz92brSHwfUvKdU4=
+X-Received: by 2002:a17:90b:2c85:b0:311:e8cc:424c with SMTP id
+ 98e67ed59e1d1-31c9f446ab2mr15007923a91.25.1752860061920; Fri, 18 Jul 2025
+ 10:34:21 -0700 (PDT)
 MIME-Version: 1.0
+References: <cover.1740672437.git.jerome.forissier@linaro.org>
+ <CACdvmAjUwxAx2_r3Mvacn_4oG97uYUaKsTmTQ4F4KzaN7+aaQA@mail.gmail.com>
+ <4843f58a-357c-400e-bccb-34810e779366@linaro.org>
+In-Reply-To: <4843f58a-357c-400e-bccb-34810e779366@linaro.org>
+From: Da Xue <da@lessconfused.com>
+Date: Fri, 18 Jul 2025 13:34:10 -0400
+X-Gm-Features: Ac12FXyoBZNvIkjayFJZ_DXzFswUTWrK5WZ-dvdWuNnMQUdwRcoHh1ixmcU1p3A
+Message-ID: <CACdvmAi8_TDCxgkvZJq1_BkWUTnZMBZ+ad8xhX8hWfZyRWhQ9A@mail.gmail.com>
+Subject: Re: [PATCH 0/5] net: lwip: root certificates
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,58 +92,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Christoph Niedermaier
-Sent: Friday, July 11, 2025 10:57 PM
-> From: Tom Rini <trini@konsulko.com>
-> Sent: Friday, July 11, 2025 7:41 PM
->> On Fri, Jul 11, 2025 at 05:37:55PM +0000, Christoph Niedermaier wrote:
->>> From: Tom Rini <trini@konsulko.com>
->>> Sent: Thursday, July 10, 2025 3:58 AM
->>>> Subject: Re: [PATCH V4 0/3] cmd: env: select: Add output for available=
- environment targets
->>>>
->>>> On Mon, Jun 30, 2025 at 05:12:29PM +0200, Christoph Niedermaier wrote:
->>>>
->>>>> Add the "-l" parameter to the "env select" command to print the avail=
-able
->>>>> environment targets, convert all argument parsing in the file nvedit.=
-c to
->>>>> getopt() and check that with unit tests.
->>>>>
->>>>> The first patch converts the parsing of arguments to getopt() for all=
- env
->>>>> commands. The second one adds unit tests for checking the env command=
-.
->>>>> These were used to check the env commands before and after the conver=
-sion.
->>>>> The third patch adds the actual new parameter "-l" for the "env selec=
-t"
->>>>> command.
->>>>>
->>>>> Christoph Niedermaier (3):
->>>>>   cmd: nvedit: Convert the parsing of arguments to getopt()
->>>>>   test: cmd: nvedit: Add basic unit tests
->>>>>   cmd: env: select: Add output for available environment targets
->>>>
->>>> Can you please make a v5 that's run through CI? I saw that am64x_evm_a=
-53
->>>> fails to build now and I'm seeing the tests fail too:
->>>> https://source.denx.de/u-boot/u-boot/-/jobs/1196652
->>>
->>> Sorry, I will have a look at it and make a new version.
->>> Are my patches also the cause of the build issue with am64x_evm_a53?
->>
->> Yes, something in the series was leading to at least that platform and
->> likely many others (I saw that in my local board testing, CI failed the
->> pipeline before getting to the world stage so I don't know all of the
->> ones that failed).
->=20
-> OK, then I will also have a look at it.
-> Thanks for the clarification.
+On Fri, Jul 18, 2025 at 10:08=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Hi Da,
+>
+> On 7/15/25 06:45, Da Xue wrote:
+> > Hi Jerome,
+> >
+> >> Then new Kconfig symbols are added to support providing the certificat=
+es
+> >> at build time, as a DER or PEM encoded X509 collection:
+> >> WGET_BUILTIN_CACERT=3Dy and WGET_BUILTIN_CACERT_PATH=3D<some path>.
+> >> Note that PEM support requires MBEDTLS_LIB_X509_PEM=3Dy (for the cacer=
+t
+> >> command as well as for the builtin way).
+> >>
+> >> Here is a complete example (showing only the relevant output from the
+> >> various commands):
+> >>
+> >>  make qemu_arm64_lwip_defconfig
+> >>  wget https://curl.se/ca/cacert.pem
+> >>  echo CONFIG_WGET_BUILTIN_CACERT=3Dy >>.config
+> >>  echo CONFIG_WGET_BUILTIN_CACERT_PATH=3Dcacert.pem >>.config
+> >>  make olddefconfig
+> >>  make -j$(nproc) CROSS_COMPILE=3D"ccache aarch64-linux-gnu-"
+> >>  qemu-system-aarch64 -M virt -nographic -cpu max \
+> >>         -object rng-random,id=3Drng0,filename=3D/dev/urandom \
+> >>         -device virtio-rng-pci,rng=3Drng0 -bios u-boot.bin
+> >>  =3D> dhcp
+> >>  # HTTPS transfer using the builtin CA certificates
+> >>  =3D> wget https://www.google.com/
+> >>  18724 bytes transferred in 15 ms (1.2 MiB/s)
+> >>  # Disable certificate validation
+> >>  =3D> wget cacert 0 0
+> >>  # Unsafe HTTPS transfer
+> >>  =3D> wget https://www.google.com/
+> >>  WARNING: no CA certificates, HTTPS connections not authenticated
+> >>  16570 bytes transferred in 15 ms (1.1 MiB/s)
+> >>  # Dowload and apply CA certificates from the net
+> >>  =3D> wget https://curl.se/ca/cacert.pem
+> >>  WARNING: no CA certificates, HTTPS connections not authenticated
+> >>  ##
+> >>  233263 bytes transferred in 61 ms (3.6 MiB/s)
+> >>  =3D> wget cacert $fileaddr $filesize
+> >>  # Now HTTPS is authenticated against the new CA
+> >>  =3D> wget https://www.google.com/
+> >>  18743 bytes transferred in 14 ms (1.3 MiB/s)
+> >>  # Drop the certificates again...
+> >>  =3D> wget cacert 0 0
+> >>  # Check that transfer is not secure
+> >>  =3D> wget https://www.google.com/
+> >>  WARNING: no CA certificates, HTTPS connections not authenticated
+> >>  # Restore the builtin CA
+> >>  =3D> wget cacert builtin
+> >>  # No more WARNING
+> >>  =3D> wget https://www.google.com/
+> >>  18738 bytes transferred in 15 ms (1.2 MiB/s)
+> >
+> > Is there a simple way to convert multi-certificate root trust pem to
+> > der? I tried packing it as a PKCS#7 and got "Could not parse
+> > certificates (-8576)"
+>
+> AFAICT MBed TLS should be able to parse multiple root certificates as
+> long as they are in DER form. U-Boot doesn't enable the PEM format at the
+> moment, it is less space-efficient. Please try:
+>
+> openssl x509 -in cert.pem -outform DER -out cert.der
 
-I have submitted version 5, which should solve the problem with CI. I
-could not reproduce the problem when building for am64x_evm_a53. I hope
-that it will also be gone with version 5.
+This only converts the first certificate to DER, not any of the other
+certificates.
 
-Thanks and regards
-Christoph
+>
+> Thanks,
+> --
+> Jerome
+>
+>
+> >
+> > Best Regards,
+> > Da
+
+Best Regards,
+Da
