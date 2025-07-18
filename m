@@ -4,61 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E063BC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 12:03:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F37C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 12:20:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 662868362A;
-	Fri, 18 Jul 2025 14:03:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1E90B83655;
+	Fri, 18 Jul 2025 14:19:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TDcd42Dj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cYyyRr/+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 091308362C; Fri, 18 Jul 2025 14:03:25 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B60618365E; Fri, 18 Jul 2025 14:19:57 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A576683623
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 14:03:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8E38983623
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 14:19:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 91446A54154;
- Fri, 18 Jul 2025 12:03:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 904E8C4CEEB;
- Fri, 18 Jul 2025 12:03:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752840200;
- bh=FilWV8R0JSgzXmNXwP98MBVlw2C/Cd6mg9fXE/EHrdY=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=TDcd42Dj1YssRANLcP8cj1eOYFsSR1vAUaI/cB10yEM6BBS2XtfCMIe652NbJlRyQ
- A9T6m1QiSQx1GaBvVeC2VIgNa3QiHIc7HxefdrgsGzX1xuvZW7oIJucOnsMTP/+aC6
- Gw5RaQcVPYjstRF709G/Wjhaf5GL36gQJuvzYtfogki7lO7mQvHQhJt8X1YxDYljEM
- TBYOyQCTORrh8qspYxG7NJanCTXc6LT1lSESsqPgASG5CFGLdTsaguvdyztaxjJAtx
- j7fOnFPWWe2xE51h0dgF3zJRgzQ634kTQR+VD3lcpG3C9F0iHMXd2o1FScFA22uxAN
- h42zihc9M7flA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: george chan <gchan9527@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>, Tom
- Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg
- <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>, Marek Vasut
- <marex@denx.de>, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v4 3/6] bootm: Append bootargs value when
- bootmeth_android provide cmdline
-In-Reply-To: <CADgMGSuN249mVLKja2r1cpN4Xn80CAkuv2F5rSizo3C_qaRpEA@mail.gmail.com>
-References: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
- <20250630-sc7180-android-boot-v4-3-24cdb50e860f@gmail.com>
- <871pqg4iar.fsf@kernel.org>
- <CADgMGSuN249mVLKja2r1cpN4Xn80CAkuv2F5rSizo3C_qaRpEA@mail.gmail.com>
-Date: Fri, 18 Jul 2025 14:03:17 +0200
-Message-ID: <871pqdaepm.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3b611665b96so1109364f8f.2
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 05:19:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752841195; x=1753445995; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EoxPV6TnrvvQ0ok6/UtvhX21TdTEcshWZPoYLn9AeeI=;
+ b=cYyyRr/+ZMEOuPbD92Hw1OaxgpXIRM1GDyXdTn4/1NGp7lc7s2dIT6SqTrQDA4+3r0
+ hJuCCOb4R2BbqVkSb24+URLyhj29u04EM6+TpU7md6mHkN/tJAjqHVH/E/g0zO8C6onb
+ 7AqXyfwtcSUQ4FX4tCk9NTjz8POiff5ioLIAaKse6CaBRFcxhmd4AC7e+bMWQ41zial6
+ bft3Gmx11i56+UGHAuB4kBew1qqd4T93snvCiMkaHJB0GnIx8qItlE0hzoYPnbJR+KeO
+ FwbcaV5JZjFy42XX8YGLTwcVOvuQ5Kp3e86nQtzHRP2u+tdCbtfgFVzcCOTg3ST08Cim
+ qkkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752841195; x=1753445995;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EoxPV6TnrvvQ0ok6/UtvhX21TdTEcshWZPoYLn9AeeI=;
+ b=h0IXCXO81PoV1sAiLvTC8Jrh1S4O8glwrLDK494cIkIafzDkkrrfeK3/Zq+CbR55Ba
+ zBf0ctOvUDNnJ/9d59oiWqWQl0d7T8LLS09uO8ZQv1eHhVmlghefySIC3cWIfqlGLko0
+ hG+3jq8SvZbXKi7wKch6Nv5045u5CWnPOIeMuagU47PlG8rfFtKIYPKPu4jGkR3n0pgE
+ K5NOvPOXQPeNX+u7L+5Zdfq6hMs5TDPAFgV2qSZeeEG76B+2xKzshG9B60IHbn6SJCbs
+ /r4Z+Tqr4n8pEG/tj9MH5vrScaqsk5f4oZs11LcWSYx/l8O6TkpWDbTk7uVqS+jsPaLI
+ 6HKA==
+X-Gm-Message-State: AOJu0YzU0DUdqZ0d2z7/71zhWgcP1c9iinjHRbmSEJuzUmaTjMKITW+K
+ L7elEQI75F/UR4VrhVgTHObR7MwQjsQ+FmS0CczPY0benesLyLVr2rYfsAnhsIHwUN8=
+X-Gm-Gg: ASbGnctim+7STTmH7LrBISfTC/l2URXUWjDOycuIKRhd4mvIH7Kzg1X33TDdEZkKjpx
+ nb9zP0ICC7dGOcL7KzAueT/+tDSRRX9DyyZWP1m6dMFkMwIcg2Lq89mXj0zk70cyQqs8EICv7LF
+ y1Jl/rRmNs2n9Y/R1qNzIF3+c+I9N1NKz/Qa95vurl8ZbeF5SMAuI8kts3vZNO55ewPjqs7/SJ9
+ /n6pTJlsyac/2Stg8EIru2hYIDsu81a/EZ8aefRQnIO4F3/kD+wnkxGe9Th8KsAN+rZBIg6bsfp
+ vqAx5nN9oRm/ltYCfjCoX093cxYfBqMZHUOCE2szAdroA7JTRMuTc0qPO2jU4tryHQApi10/60I
+ Qb9jWXeNFHkN/jaF14ngvhXqS9OaLG1KIb+MvA2Hh4NJXneWMktQ=
+X-Google-Smtp-Source: AGHT+IHmsNDczM1dtu3XbPuNZ8UktTjypn46R5Wny/q+lqP7b7VoZ3O1BrGGfnhHUQ7U7m2mHdAvfQ==
+X-Received: by 2002:a05:6000:2013:b0:3a4:e8bc:594 with SMTP id
+ ffacd0b85a97d-3b60e4c5132mr7930973f8f.8.1752841194710; 
+ Fri, 18 Jul 2025 05:19:54 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:eb9:1701:ef2b:6c47:de09:6843])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b61ca4894asm1706494f8f.49.2025.07.18.05.19.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Jul 2025 05:19:54 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Fri, 18 Jul 2025 13:19:54 +0100
+Subject: [PATCH] spl: NULL check variable before dereference
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250718-spl_loader-v1-1-835ff557b9f4@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAOk7emgC/x2NXQqDMBAGryL73ICmf9qriJSN+VoXNMqulIJ49
+ 8Y+DsMwGxlUYPQoNlJ8xGROGapTQf3A6Q0nMTP50l/Le1U7W8bnOHOEOjRn9tFfbqEG5SCwwQX
+ l1A9HMrGt0EMsipd8/5e22/cfuZrmAnUAAAA=
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,155 +99,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi George,
+In boot_from_devices the variable loader is not NULL checked after
+assignment and before first use but later code does check it for NULL.
+Add a NULL check before first use.
 
-On Wed, Jul 16, 2025 at 19:55, george chan <gchan9527@gmail.com> wrote:
+This issue was found by Smatch.
 
-> Hi Mattijs,
->
-> Thx for reply.
->
-> =E5=9C=A8 2025=E5=B9=B47=E6=9C=8816=E6=97=A5=E9=80=B1=E4=B8=89 17:05=EF=
-=BC=8CMattijs Korpershoek <mkorpershoek@kernel.org> =E5=AF=AB=E9=81=93=EF=
-=BC=9A
->
->> Hi George,
->>
->> Thank you for the patch.
->>
-> ...
->
->>
->> > -     ret =3D env_set("bootargs", cmdline);
->> > +     ret =3D android_image_modify_bootargs_env(cmdline, NULL);
->>
->> I don't think it can be done this way. bootm_boot_start() is used in the
->> ChromeOS bootmethod as well (boot/bootmeth_cros.c)
->>
->
-> I got your point. I have 3 ideas come out.
->
-> (1) The logic purposely empty the env bootargs, either developer don't use
-> env bootargs or those use cases touched bootargs in some early step. And
-> then wanna disregard previous u-boot bootmeth operation, and empty bootar=
-gs
-> for that ongoing bootmeth stage...well that's not congruent behavior; I
-> have a gut feeling this is a bug or band-aid anyway, it closed the door f=
-or
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ common/spl/spl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Simon, is it *intentional* that override the bootargs variable in
-commit daffb0be2c83 ("bootstd: cros: Add ARM support") ?
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index d8e26605d20..ed443c645a7 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -634,7 +634,7 @@ static int boot_from_devices(struct spl_image_info *spl_image,
+ 		if (CONFIG_IS_ENABLED(SHOW_ERRORS))
+ 			ret = -ENXIO;
+ 		for (loader = drv; loader != drv + n_ents; loader++) {
+-			if (bootdev != loader->boot_device)
++			if (loader && bootdev != loader->boot_device)
+ 				continue;
+ 			if (!CONFIG_IS_ENABLED(SILENT_CONSOLE)) {
+ 				if (loader)
 
-Shouldn't we get the bootargs from the environment, and append cmdline
-to the existing bootargs instead ?
+---
+base-commit: 0f83825802d8938fb584c12f115bde900efe71c1
+change-id: 20250718-spl_loader-e93a2d246b8e
 
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
-> people (potentially abootimg) inject needed boot param between bootmeth
-> stage. Perhaps, either clean up bootargs before bootmeth load stage, or a=
-dd
-> kconfig to check and enable this logic, a better representation.
->
-> (2) One more thing, the vendor_boot cmdline is not handle neither in
-> original logic nor in url from you provided. So I can say the url one is
-> not capable for extended with Android boot img version > 2 since
-> vendor_boot cmdline not handled.
-
-What do you mean by the vendor_boot cmdline is not handled?
-
-When parsing the vendor_boot image, we go through
-android_vendor_boot_image_v3_v4_parse_hdr()
-
-That function copies the vendor_boot cmdline with:
-
-	data->kcmdline_extra =3D hdr->cmdline;
-
-(to the struct andr_image_data).
-
-Later on, in android_image_get_kernel(), this gets copied to the
-bootargs:
-
-	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
-		if (*newbootargs) /* If there is something in newbootargs, a space is nee=
-ded */
-			strcat(newbootargs, " ");
-		strcat(newbootargs, img_data.kcmdline_extra);
-	}
-
-	env_set("bootargs", newbootargs);
-
->
-> (3) I don't think it is very much different between your mentioned url wi=
-th
-> my patch. There is nothing advanced, but just existing code logic reuse a=
-nd
-> that logic handled vendor_cmdline in other path. I prefer code logic reus=
-e.
-
-The difference is that in the patch I've linked is that we only change
-Android specific boot behaviour. So less risk to impact ChromeOS.
-
->
-> And I believe above are not the important thing....
->
->>
->> Changing this would potentially break ChromeOS boot behaviour so I'd
->> prefer to find another solution.
->>
->> I know that TI has a downstream patch that changes bootmeth_android.c
->> instead:
->>
->>
->> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=3Dti-u-boot-2024.0=
-4-next&id=3D9d802d798ac143e06ffe545606aa657a6c32cc63
->
->
-> ...
->
->
->> Would that work for you?
->>
->>
-> Well, the one from url also fine with me.
->
-> The important thing is here. So as to ease the change with "minimal impac=
-t"
-> gets in. I can add one extra check to maintain original behavior in case
-> people have concern of breakage. Code example as below:
->
-> + If (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS))
-> +   ret =3D android_image_modify_bootargs_env(cmdline, NULL);
-> + else
->       ret =3D env_set("bootargs", cmdline);
->
-> This logic eliminated the concern, but it also limited those potential use
-> cases for Android boot header version > 2, unless the newly introduced
-> CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS is defined.
-
-I'm not sure about why this is better, as from what I understand we
-handle vendor_boot cmdline properly already.
-
-Can you provide me with a test case or some example commands that show
-that vendor_boot cmdline is not handled properly?
-
->
-> Or this one with good extendible.
-> + /* Clean up bootargs purposely */
-> + if (IS_ENABLED(SOME_FLAG))
-> +    env_set("bootargs", "");
-> + ret =3D android_image_modify_bootargs_env(cmdline, NULL);
->
-> Either way. I prefer first one and can blindly apply without afford. I
-> leave the idea above to people more concern with it. Please let me know
-> your decision, I can provide one more revision later.
-
-I'm sorry there is so much back and forth on this series. I hope we can
-come to a common agreement and get something merged.
-
-Thanks
-Mattijs
-
->
-> Regards,
-> George
->
->>
