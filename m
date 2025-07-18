@@ -4,41 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC5DC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 00:00:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46EF3C83F34
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 01:14:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 455A78368F;
-	Fri, 18 Jul 2025 01:57:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 64B1583523;
+	Fri, 18 Jul 2025 03:14:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qkl+83FX";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D47F983689; Fri, 18 Jul 2025 01:57:21 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8DD258349B
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 01:57:19 +0200 (CEST)
+ id 61C7683526; Fri, 18 Jul 2025 03:14:24 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 263828350A
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 03:14:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5F8EE1762;
- Thu, 17 Jul 2025 16:57:11 -0700 (PDT)
-Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
- [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CC9773F694;
- Thu, 17 Jul 2025 16:57:17 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2edec6c5511so758471fac.2
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:14:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1752801261; x=1753406061; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KvyU0AL0wasoqVrqq5U9vxahb5pU6QQ8/R9zjvPIJT0=;
+ b=qkl+83FX+l1Na/noeh7cOi0J9eQiUXbOIG5rgwCByWUTkrFQbwPwPl2ED5nz4l1MSn
+ uAaNu8Dve1w7yfqHC50xqp30UG21W5H4lhDwcarB2MACrcAhAB8jUngQmRZRST+rUKKQ
+ 50ifw87XXMs1zaU9O2E1r2G1GiAbJlQxNgdaE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752801261; x=1753406061;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KvyU0AL0wasoqVrqq5U9vxahb5pU6QQ8/R9zjvPIJT0=;
+ b=YPExje50zFppMaAPNoR9Vb+O2Rxkd9EnPbbAS0AfpnPv9CLJhfLL9H4ty5Xo+686t2
+ AP1A/VrnaqXXpqrshKgITYPFirG/o6pPTk7G1I+j96rmA3LgC4Q3ClE/+th+zSYUwh3Z
+ EadH/aQN+VPgKiQ+kc8gKrOq6O8/nH9I8QXZgNwCW7Ee4DIQVOT9dUC6sYEVGN2dQcpb
+ nxndxa4hgksW3BxjAwx5wE+mAW7l4zcRnkNtwieEFruOB08TAaJGSnfid9ZY07JipL8k
+ eWitIJ6y+R2LGA5yZzJav2SkmsXvOy2iFdyHcJPSBu+xsqQcUQCxZvQOxhsN71hd2LXM
+ 8ErA==
+X-Gm-Message-State: AOJu0YzDXJ1iVWqV+bPP68eh/2W19EEFvN9I2cUGucLOsFYYspGslVmo
+ qj5kTbSkSnfaN868kGvQw2NDBHoNXgy9CHU4v8cJhBaFJnuXq3A3Dl+8GLkN3ycKmdHp/1wsYta
+ pn/ABbPU=
+X-Gm-Gg: ASbGnctozMsg46zdh8y7x8EMXtGvHP184G+MVARvrDDkI3kPrD4IO3A0KdaQHUZP535
+ qHKdUd2rq6T6v6yaaAP7zKGUCcKJOyJixlvV2Ewb8VuMtuLUwJMaEJgilAe+RK/LKdq/QZNuBXC
+ 2ze01+txAWQdysGCpqs53lYzNX422I642E366sYe72BdzZvXOFNHX53vi98BBoTlHB5RmkhDLx4
+ 9G+To+WcQhMdvCLtOTwgnIRWxc08L2D5F4U79k2fwCri+FiNCKDZZpN5Al7ggztNa+GK9c+qGG2
+ aX5dChPWz5jcO2qo1fr0DoY4Hmm8lB7ta0F+ldDkOinW5iPz1f0vHCj1T/caeQ6QcRfOebOWkAW
+ nQilaItfp9k1Y+E/KnNauRgeh4VMv3eYa9ZWgaCDudUhUHPCCKmn367HDgyJsOLSsIGShLg==
+X-Google-Smtp-Source: AGHT+IHivoIvn0BU7/ulcDQtXJvGlfYID9fGqLxa/2MgrXs1OzRWLxgrnzuIDn4k0vRBi1V9la0M5Q==
+X-Received: by 2002:a05:6871:6017:b0:2e4:c018:e5d7 with SMTP id
+ 586e51a60fabf-2ffaf22ed2emr6719794fac.3.1752801260730; 
+ Thu, 17 Jul 2025 18:14:20 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3010178978csm210495fac.5.2025.07.17.18.14.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Jul 2025 18:14:20 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
- Mikhail Kalashnikov <iuncuim@gmail.com>, Yixun Lan <dlan@gentoo.org>,
- Paul Kocialkowski <paulk@sys-base.io>, linux-sunxi@lists.linux.dev,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 20/20] sunxi: A523: add defconfigs for three boards
-Date: Fri, 18 Jul 2025 00:54:55 +0100
-Message-ID: <20250717235455.32528-21-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.46.3
-In-Reply-To: <20250717235455.32528-1-andre.przywara@arm.com>
-References: <20250717235455.32528-1-andre.przywara@arm.com>
+Cc: Lukasz Majewski <lukma@denx.de>,
+	Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v2] clk: Tighten some clock driver dependencies
+Date: Thu, 17 Jul 2025 19:14:18 -0600
+Message-ID: <20250718011418.1333739-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -57,176 +93,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So far developers seem to use three popular boards:
-- Avaota A1: dev board with USB 3.0, dual Ethernet, small display
-- X96QPro+: TV box with Gigabit Ethernet, USB 3.0, eMMC
-- Radxa A5E: small dev board with USB3/M.2 2230 (muxed), dual Ethernet
+A few clock drivers cannot build without access to some platform
+specific header files. Express those requirements in Kconfig as well.
 
-Add the defconfig files for those boards, containing the DRAM parameters
-and the usual Kconfig options.
-
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- board/sunxi/MAINTAINERS         | 15 +++++++++++++++
- configs/avaota-a1_defconfig     | 31 +++++++++++++++++++++++++++++++
- configs/radxa-a5e_defconfig     | 30 ++++++++++++++++++++++++++++++
- configs/x96q_pro_plus_defconfig | 32 ++++++++++++++++++++++++++++++++
- 4 files changed, 108 insertions(+)
- create mode 100644 configs/avaota-a1_defconfig
- create mode 100644 configs/radxa-a5e_defconfig
- create mode 100644 configs/x96q_pro_plus_defconfig
+Changes in v2:
+Also make CLK_CDCE9XX depend on ARCH_OMAP2PLUS rather than make the
+driver build for 64bit platforms.
 
-diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-index 1b4b7d87163..66e6a8ff962 100644
---- a/board/sunxi/MAINTAINERS
-+++ b/board/sunxi/MAINTAINERS
-@@ -137,6 +137,11 @@ M:	Chris Morgan <macromorgan@hotmail.com>
- S:	Maintained
- F:	configs/anbernic_rg35xx_h700_defconfig
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Sean Anderson <seanga2@gmail.com>
+---
+ drivers/clk/Kconfig        | 4 ++--
+ drivers/clk/at91/Kconfig   | 2 +-
+ drivers/clk/sifive/Kconfig | 2 +-
+ drivers/clk/ti/Kconfig     | 4 ++--
+ 4 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index ef1e5355be87..87534bc08ec0 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -131,7 +131,7 @@ config CLK_BOSTON
  
-+AVAOTA A1 BOARD
-+M:	Andre Przywara <andre.przywara@arm.com>
-+S:	Maintained
-+F:	configs/avaota-a1_defconfig
-+
- BANANAPI M1 PLUS
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
-@@ -531,6 +536,11 @@ M:	Quentin Schulz <quentin.schulz@free-electrons.com>
- S:	Maintained
- F:	configs/parrot_r16_defconfig
+ config CLK_CDCE9XX
+ 	bool "Enable CDCD9XX clock driver"
+-	depends on CLK
++	depends on CLK && ARCH_OMAP2PLUS
+ 	help
+ 	   Enable the clock synthesizer driver for CDCE913/925/937/949
+ 	   series of chips.
+@@ -169,7 +169,7 @@ config CLK_K210_SET_RATE
  
-+RADXA CUBIE A5E BOARD
-+M:	Andre Przywara <andre.przywara@arm.com>
-+S:	Maintained
-+F:	configs/radxa-a5e_defconfig
-+
- SINLINX SINA31s BOARD
- M:	Chen-Yu Tsai <wens@csie.org>
- S:	Maintained
-@@ -591,6 +601,11 @@ M:	Andre Przywara <andre.przywara@arm.com>
- S:	Maintained
- F:	configs/x96_mate_defconfig
+ config CLK_MPC83XX
+ 	bool "Enable MPC83xx clock driver"
+-	depends on CLK
++	depends on CLK && MPC83xx
+ 	help
+ 	  Support for the clock driver of the MPC83xx series of SoCs.
  
-+X96Q PRO+ TV BOX
-+M:	Andre Przywara <andre.przywara@arm.com>
-+S:	Maintained
-+F:	configs/x96q_pro_plus_defconfig
-+
- YONES TOPTECH BD1078 BOARD
- M:	Paul Kocialkowski <contact@paulk.fr>
- S:	Maintained
-diff --git a/configs/avaota-a1_defconfig b/configs/avaota-a1_defconfig
-new file mode 100644
-index 00000000000..55457edd3b3
---- /dev/null
-+++ b/configs/avaota-a1_defconfig
-@@ -0,0 +1,31 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-t527-avaota-a1"
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0d0d0d0d
-+CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUNXI_ODT_EN=0x84848484
-+CONFIG_DRAM_SUNXI_TPR0=0x80808080
-+CONFIG_DRAM_SUNXI_TPR1=0x06060606
-+CONFIG_DRAM_SUNXI_TPR6=0x38000000
-+CONFIG_DRAM_SUNXI_TPR10=0x802f3333
-+CONFIG_DRAM_SUNXI_TPR11=0xc7c5c4c2
-+CONFIG_DRAM_SUNXI_TPR12=0x3533302f
-+CONFIG_MACH_SUN55I_A523=y
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_R_I2C_ENABLE=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_REGULATOR_AXP=y
-+CONFIG_AXP717_POWER=y
-+CONFIG_AXP_I2C_ADDRESS=0x35
-+CONFIG_AXP_DCDC2_VOLT=920
-+CONFIG_AXP_DCDC3_VOLT=1160
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-diff --git a/configs/radxa-a5e_defconfig b/configs/radxa-a5e_defconfig
-new file mode 100644
-index 00000000000..012e7b4eeaf
---- /dev/null
-+++ b/configs/radxa-a5e_defconfig
-@@ -0,0 +1,30 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-a527-cubie-a5e"
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0d0d0d0d
-+CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUNXI_ODT_EN=0x84848484
-+CONFIG_DRAM_SUNXI_TPR0=0x80808080
-+CONFIG_DRAM_SUNXI_TPR1=0x06060606
-+CONFIG_DRAM_SUNXI_TPR6=0x38000000
-+CONFIG_DRAM_SUNXI_TPR10=0x802f3333
-+CONFIG_DRAM_SUNXI_TPR11=0xc7c5c4c2
-+CONFIG_DRAM_SUNXI_TPR12=0x3533302f
-+# BSP value: CONFIG_DRAM_SUNXI_TPR11=0xc6c4c2c0
-+# BSP value: CONFIG_DRAM_SUNXI_TPR12=0x3a373233
-+CONFIG_MACH_SUN55I_A523=y
-+CONFIG_R_I2C_ENABLE=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_REGULATOR_AXP=y
-+CONFIG_AXP717_POWER=y
-+CONFIG_AXP_DCDC2_VOLT=920
-+CONFIG_AXP_DCDC3_VOLT=1100
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-diff --git a/configs/x96q_pro_plus_defconfig b/configs/x96q_pro_plus_defconfig
-new file mode 100644
-index 00000000000..07d3b078bef
---- /dev/null
-+++ b/configs/x96q_pro_plus_defconfig
-@@ -0,0 +1,32 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-h728-x96qpro+"
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0c0c0c0c
-+CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUNXI_ODT_EN=0x90909090
-+CONFIG_DRAM_SUNXI_TPR0=0x80808080
-+CONFIG_DRAM_SUNXI_TPR1=0x06060606
-+CONFIG_DRAM_SUNXI_TPR6=0x3380807e
-+CONFIG_DRAM_SUNXI_TPR10=0x802f7788
-+CONFIG_DRAM_SUNXI_TPR11=0x8f919190
-+CONFIG_DRAM_SUNXI_TPR12=0x22222723
-+CONFIG_MACH_SUN55I_A523=y
-+CONFIG_SUNXI_DRAM_A523_DDR3=y
-+CONFIG_DRAM_CLK=792
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_R_I2C_ENABLE=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_REGULATOR_AXP=y
-+CONFIG_AXP717_POWER=y
-+CONFIG_AXP_DCDC2_VOLT=920
-+CONFIG_AXP_DCDC3_VOLT=1360
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
+diff --git a/drivers/clk/at91/Kconfig b/drivers/clk/at91/Kconfig
+index 4563892647be..faeaa2808b03 100644
+--- a/drivers/clk/at91/Kconfig
++++ b/drivers/clk/at91/Kconfig
+@@ -1,6 +1,6 @@
+ config CLK_AT91
+ 	bool "AT91 clock drivers"
+-	depends on CLK
++	depends on CLK && ARCH_AT91
+ 	select MISC
+ 	help
+ 	  This option is used to enable the AT91 clock driver.
+diff --git a/drivers/clk/sifive/Kconfig b/drivers/clk/sifive/Kconfig
+index 20fc004b59e9..01e4f33415e1 100644
+--- a/drivers/clk/sifive/Kconfig
++++ b/drivers/clk/sifive/Kconfig
+@@ -2,7 +2,7 @@
+ 
+ config CLK_SIFIVE
+ 	bool "SiFive SoC driver support"
+-	depends on CLK
++	depends on CLK && RISCV
+ 	help
+ 	  SoC drivers for SiFive Linux-capable SoCs.
+ 
+diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
+index fbcdefd889ae..e0f15f57f826 100644
+--- a/drivers/clk/ti/Kconfig
++++ b/drivers/clk/ti/Kconfig
+@@ -5,14 +5,14 @@
+ 
+ config CLK_TI_AM3_DPLL
+ 	bool "TI AM33XX Digital Phase-Locked Loop (DPLL) clock drivers"
+-	depends on CLK && OF_CONTROL
++	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
+ 	help
+ 	  This enables the DPLL clock drivers support on AM33XX SoCs. The DPLL
+ 	  provides all interface clocks and functional clocks to the processor.
+ 
+ config CLK_TI_CTRL
+ 	bool "TI OMAP4 clock controller"
+-	depends on CLK && OF_CONTROL
++	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
+ 	help
+ 	  This enables the clock controller driver support on TI's SoCs.
+ 
 -- 
-2.46.3
+2.43.0
 
