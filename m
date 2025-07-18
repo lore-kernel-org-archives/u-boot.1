@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0347C83F17
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 17:34:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ADF7C83F17
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 17:56:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D52E83677;
-	Fri, 18 Jul 2025 19:34:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=lessconfused.com
+	by phobos.denx.de (Postfix) with ESMTP id 06FB383616;
+	Fri, 18 Jul 2025 19:56:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=lessconfused.com header.i=@lessconfused.com header.b="A6SVq3Xb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CWWArEwo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A44CF8367F; Fri, 18 Jul 2025 19:34:26 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 24A388363D; Fri, 18 Jul 2025 19:56:56 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8155883612
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 19:34:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=lessconfused.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0CDE883612
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 19:56:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=da@lessconfused.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-b1fd59851baso1620680a12.0
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 10:34:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-72c27166ab3so1811092a34.1
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 10:56:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lessconfused.com; s=lessconfused; t=1752860062; x=1753464862;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nMuZzyyeP/bq3o9ObPMtAQw37FUeKvMg54QG5iYzdiY=;
- b=A6SVq3XbOxYnK4AECskVZ3uisYtu27qbEA5e81yGY8YHvleVONLoMauXxkIOlS7S3M
- 4GlVItZKlRxNEFVokNNzRtsGt0kdFV69koq5gAJ/4hJIaXQOXKXlb63HAN3vCsugxArM
- GqroNXDdJCJaRctZr7WxCxY0ousu09YJYEE9Y=
+ d=konsulko.com; s=google; t=1752861413; x=1753466213; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=u2oR0/GkbELdrooJ9rmw/dtZz3fhqeGUKaBXvFKuHG0=;
+ b=CWWArEwoEZS6Na2S1PYypbe+rbv5ulEkK6XbS6IMZBDZj0zUPlDIQEVsjt1pORNkS4
+ MYy9aQBeIDJrt0IL3ksK83djrNKBoFkDFsmL2J8GF/G9CJUmE6QdC3+H77lvhvXLFnEE
+ jiWPg2Kg0O5H460O0qoYx9jCmIA+gLSIOlP6U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752860062; x=1753464862;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nMuZzyyeP/bq3o9ObPMtAQw37FUeKvMg54QG5iYzdiY=;
- b=rpOmFcDlxaYO5f/YqrSET6xA4Je8y/q8Px1PpRkwc4kfGtGyusNJ9I5NwWFlRFyRO0
- C9yVwzLsioO36QBwcpuUfVRU6rJF/5KUVGM0cpXaMxIQpPxLkMZyP9p4u7FtEX+siT42
- mx5awOLMKhAmO+pupv3GwRwOhLn7kpQdzpQi3z/YsdJwCzt3Ovv2XjSEA+wdQGePc2X3
- jzVUmaysUu8ZR3F9kH8zN8BqXIvvWPeFoyNVGBQBjGCV2emgV+2ZW0vNmwWdBbOmrqVB
- WxL2lTBRS+I8cJC00CWhNZPcq28Lcn/HrugCDzDEMrDyhipY5yk77YqQnm9Ll+dm85S5
- TSRg==
-X-Gm-Message-State: AOJu0YyWkKcRc17zONS6nWgDbd1d93feToUhooW6Wat8Y8DEKmp5tzR2
- SFldVI1uaXl+q8pzdqnhAeiX6bLoFUwnwr4nR2WK1pGdsnypcxeOZ3Zx6w4NYPghNKfBfnr8xVB
- RaVObRupCunPqyLUbihENykOTEsN90SAubRfhTb3yZuL/YE+lmH+K
-X-Gm-Gg: ASbGncutqiRXDdTg/TS/bXAU+LBTk4KsyyfSgxmyCabjCw3UUwFmrOAZDHvX6fRTnkX
- o/RSOSaC5ZhH8GW2zk2kWoLOErTFZJ6Y/5VN5vqyjUX2Usj88H3mWZIwGNWiB2V/DrwqpgWK5mQ
- XMWPdAku6v5JBE3sYIUBV0z/itSbz1wyWIW0IektGnn4HhZqqJ4LfSJEFwsBInGhLimz5aVwSou
- bNURoLu14Ke/aINO+4hOPGm7ajILSea1riNmw==
-X-Google-Smtp-Source: AGHT+IFwAaIlf2N8KoxosTzCttc9d9V8Gb03xyeDsZs35J+NpjsF8PpP8KtmpJuiZDg3J4HLED0Uz92brSHwfUvKdU4=
-X-Received: by 2002:a17:90b:2c85:b0:311:e8cc:424c with SMTP id
- 98e67ed59e1d1-31c9f446ab2mr15007923a91.25.1752860061920; Fri, 18 Jul 2025
- 10:34:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752861413; x=1753466213;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u2oR0/GkbELdrooJ9rmw/dtZz3fhqeGUKaBXvFKuHG0=;
+ b=XVYFmGA4DFScL7+AeE/tjV16YlEE5nC54dngwTJUEVUmojdWwBK+LeQVz2McSj94ah
+ /V6VXmXLu8MDGR4Zovw7sXCoaEYqsynUP+shsRFM+3WO+TVLZda1HPAW5FPblNcEkaYY
+ Ol82AfpoU+ra5SDG0LT0EcQXoTgo7PjhYvumGG6Q2/vXwySJmJIg7ng4Et5FE4wEX3O4
+ e5XVg36/X1PANpq3SagGr/Uf1761P6HaDCOtffIbDA/TZw5iFwmFB7Bbc9xtZ+V0qHsB
+ GA91zT6JgOKMNPp9nUxL4KtnHfJa3lGBzlynhRmJrLqJiUcILeDZnrHxsR4zKvWtZP/f
+ dCiw==
+X-Gm-Message-State: AOJu0Ywi426FA9MXuBpDEUrLXmKdMitsgoE/bK125/XEq0kcdnINjVXW
+ zJz2sCym7k+LG+xHfQT6+Rg50Ls5DRnV/fPQB4+WF5DvRXc1+F0NT2jfs8RMGFjJkcean+27fgb
+ SHouB6Os=
+X-Gm-Gg: ASbGncun2FVWQ+ahIQGhxAkWponnDqI/yT00DInqT9EyPVtOJvEDIZBVg+tzxZjA7wc
+ lpYhSrRML+L3t2MoESIaUL8mnLJEYHU/I798YW9pO44VnXWo+6beiu7289aLYBFKYnmSPR//g3B
+ K3Q/9MhWzlrrds1UxrtKbWXSfedtNWUUQ4wQqz0n+A9O4xbXFs6t96kA5Dg1ShvSKvlf1Shhz0/
+ PRDC+NO1vw+AeWxoiyTVb0VQ0tD9QVKspnvFFwpuf4G37B82mjRzjLT0R7P9H1wy+awjSE6WxWr
+ 5qTcQp7P8BOINBNUeV/i4q76JJn9hdzSowl3p/p4Iy6Bd2xuW9fK4MyYnufK0b3ZjQANLD3m4ld
+ 4YfOlHrvHWxcsJ4XrBLgRwtO0OdMvHVcPNFj0h9s5CnxKqfKB0eTNPF0S
+X-Google-Smtp-Source: AGHT+IGdyj1jm+UyLsEApfnh8cFtUq7RnMP3+js9LSEUCrOrJku86nS13yXW7g3NvTw34pZMfjPpYw==
+X-Received: by 2002:a9d:3e09:0:b0:73c:d48f:6c6a with SMTP id
+ 46e09a7af769-73e66199eb8mr8294401a34.8.1752861412666; 
+ Fri, 18 Jul 2025 10:56:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73e8354df84sm770561a34.2.2025.07.18.10.56.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Jul 2025 10:56:51 -0700 (PDT)
+Date: Fri, 18 Jul 2025 11:56:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, chalianis1@gmail.com
+Subject: Re: [PATCH] pinctrl: gpio: sx150x: add Semtech SX150x I2C GPIO
+ expander and pinctrl driver
+Message-ID: <20250718175649.GX193579@bill-the-cat>
+References: <20250518212524.137534-1-chalianis1@gmail.com>
+ <174899275338.1527530.16332183618630503148.b4-ty@konsulko.com>
 MIME-Version: 1.0
-References: <cover.1740672437.git.jerome.forissier@linaro.org>
- <CACdvmAjUwxAx2_r3Mvacn_4oG97uYUaKsTmTQ4F4KzaN7+aaQA@mail.gmail.com>
- <4843f58a-357c-400e-bccb-34810e779366@linaro.org>
-In-Reply-To: <4843f58a-357c-400e-bccb-34810e779366@linaro.org>
-From: Da Xue <da@lessconfused.com>
-Date: Fri, 18 Jul 2025 13:34:10 -0400
-X-Gm-Features: Ac12FXyoBZNvIkjayFJZ_DXzFswUTWrK5WZ-dvdWuNnMQUdwRcoHh1ixmcU1p3A
-Message-ID: <CACdvmAi8_TDCxgkvZJq1_BkWUTnZMBZ+ad8xhX8hWfZyRWhQ9A@mail.gmail.com>
-Subject: Re: [PATCH 0/5] net: lwip: root certificates
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="g6xFh+Wm4agNnxrC"
+Content-Disposition: inline
+In-Reply-To: <174899275338.1527530.16332183618630503148.b4-ty@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,86 +97,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 18, 2025 at 10:08=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Hi Da,
->
-> On 7/15/25 06:45, Da Xue wrote:
-> > Hi Jerome,
-> >
-> >> Then new Kconfig symbols are added to support providing the certificat=
-es
-> >> at build time, as a DER or PEM encoded X509 collection:
-> >> WGET_BUILTIN_CACERT=3Dy and WGET_BUILTIN_CACERT_PATH=3D<some path>.
-> >> Note that PEM support requires MBEDTLS_LIB_X509_PEM=3Dy (for the cacer=
-t
-> >> command as well as for the builtin way).
-> >>
-> >> Here is a complete example (showing only the relevant output from the
-> >> various commands):
-> >>
-> >>  make qemu_arm64_lwip_defconfig
-> >>  wget https://curl.se/ca/cacert.pem
-> >>  echo CONFIG_WGET_BUILTIN_CACERT=3Dy >>.config
-> >>  echo CONFIG_WGET_BUILTIN_CACERT_PATH=3Dcacert.pem >>.config
-> >>  make olddefconfig
-> >>  make -j$(nproc) CROSS_COMPILE=3D"ccache aarch64-linux-gnu-"
-> >>  qemu-system-aarch64 -M virt -nographic -cpu max \
-> >>         -object rng-random,id=3Drng0,filename=3D/dev/urandom \
-> >>         -device virtio-rng-pci,rng=3Drng0 -bios u-boot.bin
-> >>  =3D> dhcp
-> >>  # HTTPS transfer using the builtin CA certificates
-> >>  =3D> wget https://www.google.com/
-> >>  18724 bytes transferred in 15 ms (1.2 MiB/s)
-> >>  # Disable certificate validation
-> >>  =3D> wget cacert 0 0
-> >>  # Unsafe HTTPS transfer
-> >>  =3D> wget https://www.google.com/
-> >>  WARNING: no CA certificates, HTTPS connections not authenticated
-> >>  16570 bytes transferred in 15 ms (1.1 MiB/s)
-> >>  # Dowload and apply CA certificates from the net
-> >>  =3D> wget https://curl.se/ca/cacert.pem
-> >>  WARNING: no CA certificates, HTTPS connections not authenticated
-> >>  ##
-> >>  233263 bytes transferred in 61 ms (3.6 MiB/s)
-> >>  =3D> wget cacert $fileaddr $filesize
-> >>  # Now HTTPS is authenticated against the new CA
-> >>  =3D> wget https://www.google.com/
-> >>  18743 bytes transferred in 14 ms (1.3 MiB/s)
-> >>  # Drop the certificates again...
-> >>  =3D> wget cacert 0 0
-> >>  # Check that transfer is not secure
-> >>  =3D> wget https://www.google.com/
-> >>  WARNING: no CA certificates, HTTPS connections not authenticated
-> >>  # Restore the builtin CA
-> >>  =3D> wget cacert builtin
-> >>  # No more WARNING
-> >>  =3D> wget https://www.google.com/
-> >>  18738 bytes transferred in 15 ms (1.2 MiB/s)
-> >
-> > Is there a simple way to convert multi-certificate root trust pem to
-> > der? I tried packing it as a PKCS#7 and got "Could not parse
-> > certificates (-8576)"
->
-> AFAICT MBed TLS should be able to parse multiple root certificates as
-> long as they are in DER form. U-Boot doesn't enable the PEM format at the
-> moment, it is less space-efficient. Please try:
->
-> openssl x509 -in cert.pem -outform DER -out cert.der
 
-This only converts the first certificate to DER, not any of the other
-certificates.
+--g6xFh+Wm4agNnxrC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
-> Thanks,
-> --
-> Jerome
->
->
-> >
-> > Best Regards,
-> > Da
+On Tue, Jun 03, 2025 at 05:19:13PM -0600, Tom Rini wrote:
+> On Sun, 18 May 2025 17:25:24 -0400, chalianis1@gmail.com wrote:
+>=20
+> >  implement a driver to use semtech pinctrl and
+> >  gpio expander, this driver is adapted from a
+> >  existent linux driver that is written by
+> >  Gregory Bean <gbean@codeaurora.org>.
+> >=20
+> >=20
+>=20
+> Applied to u-boot/next, thanks!
+>=20
+> [1/1] pinctrl: gpio: sx150x: add Semtech SX150x I2C GPIO expander and pin=
+ctrl driver
+>       commit: 5451504256d34dca5b810a512d3c8dec84ebb49c
 
-Best Regards,
-Da
+I see this isn't enabled anywhere. Further, I see warnings enabling it
+on sandbox. Please fix the warnings seen when enabling this on sandbox,
+thanks. Will a platform be upstreamed soon which makes use of this?
+
+--=20
+Tom
+
+--g6xFh+Wm4agNnxrC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh6it4ACgkQFHw5/5Y0
+tyy9FQv+P9lZNN4hJkONLTa0sd7IS6vYGiaLx3XFifdRk1iB83f4KzuKDHfzJ7ts
+7pw4caTUoynCDo/DkLad5zn+tB6VhKf01QLPyYBP6T9PKhPZsLhbRMgpgUN8ucvh
+/QJ/CbcpzYe8S3PctUomKyOHCgis3Ysh3Vq4Mu3J3FsrTHYBB7x1iwsv/QnPMzCK
+Fg3ihQF6u3hLhKlRMrKXdQiZgnmPDIuyOT0GE6ZpIyR6u7ndu9bL9PHpX5h/lx1i
+JbmRTrVyy/rIhVkFgjHjGqjT2W+Yb4zbGc0aGZJZDNlNgVn9Fhj7NmsY7tg1PWm3
+2EInPLRX4aYUGzwNcHe2NHeuv2kFEdJxUWiRh0T7pWTrePzF3+uYLA3/573uHFDN
+aAAE/6zVic15zZLc21wnWsSLwYac0NpHo6x1ihzpTSKh8x5unzdg8lKPErm2IkOU
+STrsctLuIQYgxuUQEd+9qiO3YCqTaNv4eu6+dAh6u1MezA1OCcD2nLBq3ogmhPsn
+Jy1O3Kx0
+=EYYc
+-----END PGP SIGNATURE-----
+
+--g6xFh+Wm4agNnxrC--
