@@ -4,82 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8A60C83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 15:01:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 017A5C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 17:08:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14712836A9;
-	Fri, 18 Jul 2025 17:01:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F2BA28353A;
+	Fri, 18 Jul 2025 19:08:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dYBeUFLo";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="gKeMbPSD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 659D783623; Fri, 18 Jul 2025 17:01:29 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA3C6836A9
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 17:01:26 +0200 (CEST)
+ id 67AF3835B0; Fri, 18 Jul 2025 19:08:39 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de
+ [IPv6:2a01:4f8:c0c:92be::1])
+ by phobos.denx.de (Postfix) with ESMTP id 9A727834B6
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 19:08:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-73e5792cb9dso679719a34.2
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 08:01:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752850885; x=1753455685; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=O1r0oM4YqFcvuddg/x0mj4sQc/JKIxUTEuV9hePaz8E=;
- b=dYBeUFLoG0StECIDtbbMlNb1QHwEjOMeb5X+hr6T4RRxuvTR56hC/iK4jmq93Kg10P
- 5ONQYjK9Wg6ypJ5YKrjT1ogQE89K6MG4Xu1PPuMU/1rqSgLlbGVu1ZSo3ag14Ko9RwR4
- JmFGnds1Hx5ZuwJqIqwLnZi8UHYz21Jhbbeig=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752850885; x=1753455685;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=O1r0oM4YqFcvuddg/x0mj4sQc/JKIxUTEuV9hePaz8E=;
- b=G+1z7O3w9iwL2jRyWkoM0bm7Um/T/RHF6ltnAdt6eU/8XAoCOvTA6/1hQt6MvWl6o4
- iDzfxnnoiDtk7KxnoxKDyriTzgvfi6Uq+AzR5PcVf4dKQ1LxqJI6oCYIqDKlCbc3MOuX
- BDz71q5v2jCOaoMF9dTYyMO2WTWRRE2jPeHu++AiYNZ7RNMTdA9/VmaR4yS8bMS+G9Sx
- WPsjzKhO/deITIl2nxSoXaXO/llBNaqdVCLqECsUE9erZy0TRrEgi1ZR3JA6ZfAEIU1v
- kOhBq/yFRLctL0s4osnGYCuN7EQxsTaWwgOTL8Nwro83OsV3zZXvd5p1m/DEmS/tv/PD
- 9Pkg==
-X-Gm-Message-State: AOJu0YwJKhwtYuw2ZvYib/vCgeM54DT/F+p+HFDnEa+AN4avHlts+UE3
- b06xXIVF/khIFcuJS8x/DjIP7KfsDohM++XRmwqZE/LS2SA09UtauH+A2xfkc/WaHyKcey0Fsxm
- jomucZRE=
-X-Gm-Gg: ASbGnctvqRFD9rHJD0qcTo2tcn76fqAK9GSHcKADPbJJs2FuYtRYMHTN44+TXW8gaAp
- psvCzQGJ6qNs+3SbDC6c4ogAo+EHhfjjUwX6Y0W6v4TOwnxmfg6qVA170lfF++o3a+QH/eopF0a
- V8jn0RtVAwLSSNCMJTAtW3Bave+t/weopxKUQ9PWcfbIEtXbO+4uLIew/nZNYPiEXZZHcyY67vq
- h1VmimsjXLm43psgUSYKSgNyLCfmTj5o4ns6B5Kvph2Lp1nUoHxthwlEVHaGX+3BxWumQK1a9DG
- JzM2hXVptrgQsca93CGXf6p2aznpq0BgUvM3JqeSgj9thi4tHHjW3rmY97bt2ilXhIE8zJig8Er
- xSUJdzwAkf6gSTq7/JUpCax+kgI42TDJzYAOiyBM5QiVUJdevXt2kAWuF
-X-Google-Smtp-Source: AGHT+IEGzykJnJK0y1UQcuGmnQ5nZ9YDT64SZ2Va72tZKN9t3M1Ql/OO73F3qecR8l6oyuVKrODtCw==
-X-Received: by 2002:a05:6830:630d:b0:72b:9b1f:2e33 with SMTP id
- 46e09a7af769-73e64a80b44mr8946438a34.18.1752850884034; 
- Fri, 18 Jul 2025 08:01:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e83bca6b5sm650233a34.59.2025.07.18.08.01.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 08:01:23 -0700 (PDT)
-Date: Fri, 18 Jul 2025 09:01:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] .gitignore: don't ignore .gitattributes files
-Message-ID: <20250718150121.GV193579@bill-the-cat>
-References: <20250718085634.13542-1-ravi@prevas.dk>
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1752858458;
+ bh=kTeCjPMCUA2UsR+OJInewVpWTcQnzR6TSjApFjCi7To=;
+ h=From:To:CC:Subject:Date:From;
+ b=gKeMbPSDETqadF0J7WMLBZmnAT5no5JlA2wmWESWst2fwGTr/H+vTwWZwFFNiTyLW
+ 4JEivqoDIkjB8mVYM6JjO7RYjTEcAzD/JX/e/TUC5kEOJhgDeIHaOP9a+ntCGMb1l5
+ zpsmg/03SwdRAgmiILS0GiLcqYzHFk7Grpx9lmCOIaqiuULbFYFvuHyIePsmhJFjkb
+ puQScKtkjL/dx8nBRrd/YbdL422/Yma/uqC7SCgqf7aCCC9YWVPBmRUS81V/j/dl9K
+ mDk4fSfeIa+2/AKmUtcGpKohk8EfuTxJ3Sswo/B90uRZBoRix7C1oRlAwyAOygm8G3
+ 7Se8y0sgoKkmQ==
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+To: <u-boot@lists.denx.de>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Andy Shevchenko
+ <andriy.shevchenko@linux.intel.com>, Casey Connolly
+ <casey.connolly@linaro.org>, Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Varadarajan Narayanan
+ <quic_varada@quicinc.com>, =?UTF-8?q?Vincent=20Stehl=C3=A9?=
+ <vincent.stehle@arm.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH V5 0/4] cmd: env: select: Add output for available environment
+ targets
+Date: Fri, 18 Jul 2025 19:05:58 +0200
+Message-ID: <20250718170602.10746-1-cniedermaier@dh-electronics.com>
+X-klartext: yes
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="v1UtnEt7ZfDhpam3"
-Content-Disposition: inline
-In-Reply-To: <20250718085634.13542-1-ravi@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,58 +73,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add the "-l" parameter to the "env select" command to print the available
+environment targets, convert all argument parsing in the file nvedit.c to
+getopt() and check that with unit tests.
 
---v1UtnEt7ZfDhpam3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The first patch converts the parsing of arguments to getopt() for all env
+commands. The second one avoids stopping unit test on console output
+"## Error: ". The third one adds unit tests for checking the env command.
+These were used to check the env commands before and after the conversion.
+The fourth patch adds the actual new parameter "-l" for the "env select"
+command.
 
-On Fri, Jul 18, 2025 at 10:56:34AM +0200, Rasmus Villemoes wrote:
+Christoph Niedermaier (3):
+  cmd: nvedit: Convert the parsing of arguments to getopt()
+  test/py: Avoid stopping the test on console output "## Error: "
+  test: cmd: nvedit: Add basic unit tests
+  cmd: env: select: Add output for available environment targets
 
-> In a private fork, it's not unreasonable to commit various binary
-> files associated to one's project, and thus put a suitable
-> .gitattributes file next to it to force git to treat that file as
-> binary. In my case, I have a .xslx spreadsheet used for computing
-> suitable RAM timing tables, which I wanted to put in
-> board/<vendor>/<project>. Git duly warned me that it would do LF/CRLF
-> mangling, so I also added a .gitattributes file next to it with
->=20
->   *.xlsx binary
->=20
-> but upon adding that file, git told me that I'd have to use -f because
-> it's a dot-file that is by default ignored.
->=20
-> Add .gitattributes to the list of dot-files that should not be
-> ignored.
->=20
-> While in here, sort the list and update the comment, as there are also
-> files which git itself does not make use of in the list, cf. linux
-> commit f46e65da48b2 (".gitignore: exclude .get_maintainer.ignore and
-> .gitattributes").
->=20
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+ cmd/nvedit.c            | 353 +++++++++--------
+ env/Kconfig             |   1 +
+ env/env.c               |  16 +
+ include/env.h           |   7 +
+ test/cmd/Makefile       |   1 +
+ test/cmd/nvedit.c       | 857 ++++++++++++++++++++++++++++++++++++++++
+ test/cmd_ut.c           |   2 +
+ test/py/console_base.py |   2 -
+ 8 files changed, 1064 insertions(+), 175 deletions(-)
+ create mode 100644 test/cmd/nvedit.c
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+---
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Michael Walle <mwalle@kernel.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Rasmus Villemoes <ravi@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: "Vincent Stehlé" <vincent.stehle@arm.com>
+Cc: Weijie Gao <weijie.gao@mediatek.com>
+-- 
+2.30.2
 
---=20
-Tom
-
---v1UtnEt7ZfDhpam3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh6YcEACgkQFHw5/5Y0
-tyz9OQv/bUOpeFJNamRxhmZpvJN9kSsisE8YB+djY680zHHnKRT0kQTyubBqrEen
-JB23sZv8Ny9fALb2Hd3FsQLoRED9pMXDRWLeYYYnVmro6tJiFduRfdN9Rdh4tAQS
-rh7lt2ifvZQpAWShhRBGYiNrzN2eYKTZ3kTFNFEqALBDPGmpZbhwWqHHVppztWy7
-bAIeksAa87DgQwzoTuvCUieFj8zTMciHEjwR331cze5Mu8MAKVtp8I3lVkbT93bp
-OEIfjMDrpvQVpkZUicAEXBbHHxEoE5LxgyFlnBi7fAR2eoPIfdGVnk2fK7bUYAwG
-W9K2rwl1nvjqOSNHQGKENVQlwcB5cGbQL2eleVfoAtr46gHa1d35MPSCUt66rDcZ
-cCjTNuZrULv92QyJpAB8+KcyOFN9jXEGWFbM0uNQTB9RpJttZFHL0Nia7Av9ExWE
-nlD5MfuB5SC6ikdFEunfc4L08gWD3HabYxJFNobmZ6jw8VMlybMol3K3XE8OBljX
-CkT9/c9H
-=BkeN
------END PGP SIGNATURE-----
-
---v1UtnEt7ZfDhpam3--
