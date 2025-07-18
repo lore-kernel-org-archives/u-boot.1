@@ -4,144 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E297C83F17
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 08:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D22C83F17
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 08:30:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80BE4835B2;
-	Fri, 18 Jul 2025 10:12:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5CF58835BF;
+	Fri, 18 Jul 2025 10:30:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="n9oY2HRz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R5/37r+G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA7DF835B0; Fri, 18 Jul 2025 10:12:45 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::62e])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C83BF835FD; Fri, 18 Jul 2025 10:30:22 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD2F4835B0
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 10:12:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE1378357F
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 10:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FUQ6CX4Xhasna0seuTd2e2S00DDaX+w6BSu/25l9Z0gQzCWQGRXCc++dOJpQRNGZmupEq2izrRhUCgCSz9xIhiHxbk9CaEGsiAHOIsHooP/f5xMxb7CAWs/8rMwxdk5sYvdchEcf1iUMKZQXjyb40ZlsNvko7ndEGAJTceid7oQRTMOlcNMZiMEDbh4ynyQ0Jk06rcmpSsdzHBiTIbGE+lCdwfoWrib3Ze6R9je+J6U18anMnspsUg2coaqokhK/V4KOFrnRGDbjvoxVOuD6sMbz8MKc95wGKB57xTrbDCysuOP+LLDBJBIGHqvdx8e2lieUMkSN6rbW+DoJ0l9IJw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xSdGf9rSfCSXV4Jz53iNYhD2OWHh+FKJVGzzf8n2Kfk=;
- b=RhYHXnvzHl4gjNKuzO7/tKKNLUl62SwFupqZ3OlqvnqPsrptM++BVEal1iz1DpOIbrYl46lx+ZvX6O1nr5ZbXn1yxTjnbqEE/w/5cU4IW0K+oKMjAjkOeHg6eNMnBA/QG6hffahEyR2HKeO62Rg9QtyJgs2Zl2rJRiev4Me9GpjqfrbzA+/UprpqFK4DuVNxTX3oaAd3z+7gMDMUe2zvZgsJINYR3VkGiIIwcmenGLr82ITy4hiFYSzyjrscr+IxgbJZ1Di4/Q4OYCXdgUORTTDo7Vc1bVD4TuO53vKUZrq1M9gAzy7WXihb9DSmgXxGAsJrWUyt3aniqyQ+mXWeOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xSdGf9rSfCSXV4Jz53iNYhD2OWHh+FKJVGzzf8n2Kfk=;
- b=n9oY2HRz1/XECJeqZ742I61loQbLqVKMbC8cYuJIgdnVvU99sZ5lin+kC77IdIiVrUq9e35ZCOA8/4yK5EusZHz2vGKO4eflQ5l+9G+aO2wUzXzujATnvx8dSNqIX5kb+iuPgfOOcncA1yheb8GNStqpByv1crjNiCTGzzdHPSI=
-Received: from BYAPR04CA0027.namprd04.prod.outlook.com (2603:10b6:a03:40::40)
- by CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.24; Fri, 18 Jul
- 2025 08:12:40 +0000
-Received: from SJ1PEPF000023D8.namprd21.prod.outlook.com
- (2603:10b6:a03:40:cafe::3b) by BYAPR04CA0027.outlook.office365.com
- (2603:10b6:a03:40::40) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.23 via Frontend Transport; Fri,
- 18 Jul 2025 08:12:40 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF000023D8.mail.protection.outlook.com (10.167.244.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8964.1 via Frontend Transport; Fri, 18 Jul 2025 08:12:40 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 18 Jul
- 2025 03:12:39 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 18 Jul
- 2025 03:12:38 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 18 Jul 2025 03:12:37 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Prasad Kummari <prasad.kummari@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] firmware: zynqmp: Simplify power-domain driver bind
-Date: Fri, 18 Jul 2025 10:12:34 +0200
-Message-ID: <c75627e92eeaffedf0f7e682edd4f6f39f0b5706.1752826352.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5561c20e2d5so2406280e87.0
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 01:30:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1752827418; x=1753432218; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RnJb6H1cvHOdaOov/t0VrpnEMYlRjbYFZS3Kq0gbTUo=;
+ b=R5/37r+GaSxK8JigdXp13zAV0UDBsnB/dDBAXFpOojc4wsVcb4MyK0GjLE0CEy6WZa
+ Y+RtZa/gO0W9lvgqLLhzzWoY3YUpYKkbOAoqyTpOOx9WpdAondzcosUrNBNuTl9linQ4
+ pO+eKbFI8cfRz7Tc5/HvtMHWvJpGq90zpzIX9Er39XhDaNPEA82LFcB0ebcI781efVSi
+ OeYkkc0+i7Kko32ZUqCfr2uq0hoQRdLD1h0G5BOEeYlApGDpVsREVnl+Jr9ui2ItSJDH
+ nwHg0+tveoku6EKIvueDq6/p0VRb9zw3Hr6q3F+DeLCzTcJK+10+/H52iRt961dIFiEK
+ qu2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752827418; x=1753432218;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RnJb6H1cvHOdaOov/t0VrpnEMYlRjbYFZS3Kq0gbTUo=;
+ b=d734hzHsCU9uPF4WNUgUNqo5GoT6B3BE63HdDQM6IxjGCNWRbcCOF0QmYMI8s4B/sf
+ XIkMZbQgKlkYgiJuH8BdEFoEJh7atGD6cXqy+A6WrYxurLqrpzFsohOfibK11ky5aopP
+ Bbcme2crhhcmAfVL07YqrDYmZMPs1wruB+s75sB/SkC8ZNAtlzhT9zyGBWksR2puLeju
+ hLfUiZmTEBF5bm2px8u36p/NgCzyftxkc9wwmxJ6ag/VN/knk7Q9y/QQovaowx9pvMBc
+ M5YhwQMy9U1wPzjon4I2QmadLv/IbAattr/lAffSsa+YTxdHmRY5W824vJd8Yy7ujPmr
+ VYmQ==
+X-Gm-Message-State: AOJu0YxuRM5lSuqFTmnuKiJylNBQCdATtaWfIJUtsY30Ax2vtEI+y12s
+ FEj7JzzBY2pLcdvWIOdAL7jLbdax59kCflXf70/mRm45pCJIalRbMMuRlUOAWl5egmH9t+VtLbT
+ QUgv0
+X-Gm-Gg: ASbGnctN9gpiQzTKIszBg2HLX8LPqQvRQRYTXNXrJrjTo9rJ0/ziv6Z8NxNUlqaOGf8
+ GzN5iqpZ4xPi66b12dJzZm+J9sCotFCJl0oIxOkxmpjqHPW8ktbuMGeFOIfnbN00G1/M/a/AoqM
+ 2PuXldGzkwUC/76lvqtR+iTauy6DzrNYolWTZ5SdLk6Ui4vIHexCAOPXQJd3O3mkOIQCWlZEzCE
+ mg88ssjV5lUxxUFXHRqu8WN9G2RSHDFe/GFDs0hax4qIHVIwcxGSz9UkPnBvMbKktlI9Y11JGOy
+ e0qvIRFfbjF3+ipQyTt5/rTG6YPGDQ95q3v/7AIQ/9WYbBDPvp1ms5ez8jPSSNzelzd+gYrAnlS
+ fSiGqLM3yOUSGX+4yntTfU3zmreWNNjpohv40qqjELP5/fbCa4A==
+X-Google-Smtp-Source: AGHT+IEOlj+j63lfCLo8j6TKqGalZ9Ri/Voi5lVqNlNWatqRPcEdpshdCsZ9+ULf80CicuELv6JpHA==
+X-Received: by 2002:a05:6512:3d0b:b0:553:2d93:d31 with SMTP id
+ 2adb3069b0e04-55a3184c007mr434927e87.22.1752827418365; 
+ Fri, 18 Jul 2025 01:30:18 -0700 (PDT)
+Received: from nuoska (85-76-141-8-nat.elisa-mobile.fi. [85.76.141.8])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-55a31a9b996sm175524e87.14.2025.07.18.01.30.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Jul 2025 01:30:17 -0700 (PDT)
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Mikko Rapeli <mikko.rapeli@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH v3 1/2] Makefile scripts/Makefile.lib: fix *_efi.so dependency
+ to PLATFORM_LIBGCC
+Date: Fri, 18 Jul 2025 11:29:58 +0300
+Message-ID: <20250718082959.416152-1-mikko.rapeli@linaro.org>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1203; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=qDOeOV2pjwzxN0twAzBnXiqlf52sI0SFWU0jgPTxUuk=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRUMX6eaKsQY6zBxOEc33Bo2ayJJ0sSDriELDx4ZWboZ
- 9nTz1TTO0pZGMQ4GGTFFFmmM+k4rPl2banY8sh8mDmsTCBDGLg4BWAiJYUMf7hzezsV0q51SEnH
- h+YHHuErMCizu7v+/52ftXcYJb7/38Xwh6dFdGHT7G7d54ZZk4PjbJhn7vi7euWRz2cSV/BvM8p
- +yQwA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D8:EE_|CYXPR12MB9337:EE_
-X-MS-Office365-Filtering-Correlation-Id: a7da1c72-d123-42ff-5c24-08ddc5d2dd9a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?M1gMfyyFknsqdqezFIE0Qlew5XcGjD29uJe2Og3AalHqWyfcGwatqAuOgrEG?=
- =?us-ascii?Q?kqj4RenW5vOVb7jqTBHibCDqb6KCPsVj+3VOQKrdAcrfxG3HOE9mLNufPKDm?=
- =?us-ascii?Q?auwKWdletFdJ6MhK7lnEOgf/p9mv3qCHEUvpJxz0HvmH9iTNHAn+vbWi+rzZ?=
- =?us-ascii?Q?jPqLnYRdZTnUf6l0Jx/r9aVmrc54cebFa1eMbVGf++FZD7JFCh3MdPR6V7U9?=
- =?us-ascii?Q?9Xp0lezahA6L5ocJuXlpPm7Mlv7p5dPTMFjGNQ8Rghv/ntj7f74gNz27KBIQ?=
- =?us-ascii?Q?bb5kuLtTln9R6ze3FQ73bohyEIe/cTNbDi2ee7oqf6mQg2Amnn1G8DK2Y6s5?=
- =?us-ascii?Q?i9qN1zP5Z14IYPR3iJt+Yd4pUYIy+ySrVbQ22bIj2rP0AHmrQmyalD3JhyvF?=
- =?us-ascii?Q?h3g9X9aF86OSVXSSJwGgi+cfCjAu0K9CVTsUsge/qGljmqQmpsvn7VNkJm/M?=
- =?us-ascii?Q?qC7nq/eA4kNp6G2HM6y953c9aYB1SlAbj91D41+0Qp0pC3RdFQg28IjPBX47?=
- =?us-ascii?Q?DSaSFIcpSRzAIKk6IU5JQVeptyhVSyYIkHlg0Dilx18Ztb+9b3nk9khDPukd?=
- =?us-ascii?Q?GLrw+YluVzsqdeWczRhaJfEqzn8w7Mkt63Gkwl9Fu2F14gnkIAATLVz78/YB?=
- =?us-ascii?Q?krw3LjO0J0+8Zo+MKtzhFi7WUYXmyOgU9LyIPv1jXwH4YTC0alCLvh5Ao0gY?=
- =?us-ascii?Q?OeAc9tSpHQw12DImBvLVnBl7BLhX2riIbdo6k+5FOIVMez6UfRsFOZTP4ibD?=
- =?us-ascii?Q?06uxR2JbLMg4q4r16bQrwePFZc/xS9Aq6jVj//WoNLFQndoSRHGsizGxreOc?=
- =?us-ascii?Q?7zMw48vl1gK0yE6+ZXzFoKdM8jAAPsezkrkCgaKQQTau4wIWOAGgRwu3y9JD?=
- =?us-ascii?Q?36pwDl3FCQG6GMkrl8Xc8A0rumdfdcVEwGTl8rlayl8yoXIFnjUOo7frCg64?=
- =?us-ascii?Q?N+F4IYxEZEkk4Sn5dxrYIiu3SY2KyRZqo/KEs1Qf4zVa+uVlCPodcK/QhEOd?=
- =?us-ascii?Q?2PPSPtQlnLhAbcouijvYUQgivB81GFIUrertt6VTc5sjwS3fqOUPf0opj16a?=
- =?us-ascii?Q?GoNJecyHkWv2wL/iKUY7u9z5vNfhSGF52MDIyTxCzYP8yUTFhbeLzNcrJayK?=
- =?us-ascii?Q?3jCdj5CxnSH5f9UeZkCXkzK6nwEvCpH1B5E0W3P74+ewSOhLFxJ2OzWbK/U0?=
- =?us-ascii?Q?bQk2rzy1F1iRSrndkwOJWoUBCDkoNddpBci2NJSjDcBqGQ0JV5vpsxSYpZ/z?=
- =?us-ascii?Q?rt+4+CcQw/LTCQ8kN2x9+Z0nFdo4Fd+FoXzx11vM9SITSGO/D5kRLXiDveG4?=
- =?us-ascii?Q?PswT+9ssTvygRpf3J7oAlhGyOHcY4l+7nWHPegmtW6o2Rmj9vSJQythXrMkm?=
- =?us-ascii?Q?Q3pEbeCuXBm5A56KOHV29U0K2mHvZGzxQfWZIY5b0YCmEPBbX1RNS2Nj2z0d?=
- =?us-ascii?Q?Bw21BRaXCG1A9OkTP9OgZqZ3MY7LkCNd/vSrDR1AutHJHfcSyyXUs7tX8kcv?=
- =?us-ascii?Q?UbnFCJMTViY46PSMHkWgYKQ0fIMPb5wGDLe0?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2025 08:12:40.6808 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7da1c72-d123-42ff-5c24-08ddc5d2dd9a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D8.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9337
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,35 +97,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_IS_ENABLED macro is covering CONFIG_POWER_DOMAIN or
-CONFIG_SPL_POWER_DOMAIN Kconfig symbols based on build target which
-simplify logic around binding power domain driver.
+When PLATFORM_LIBGCC was added to linker command it was not
+added to the dependency of the .so and other rules. Thus a build can
+try to link *_efi.so files before lib.a from PLATFORM_LIBGCC is available.
+This was seen in yocto autobuilder builds with u-boot 2025.07
+update, see https://lists.openembedded.org/g/openembedded-core/message/2200=
+04
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/2914600/raw_inline
+
+|    rm -f lib/efi_loader/built-in.o; arm-poky-linux-gnueabi-ar cDPrsT lib/=
+efi_loader/built-in.o lib/efi_loader/efi_bootmgr.o lib/efi_loader/efi_bootb=
+in.o lib/efi_loader/efi_boottime.o lib/efi_loader/efi_helper.o lib/efi_load=
+er/efi_console.o lib/efi_loader/efi_device_path.o lib/efi_loader/efi_device=
+_path_to_text.o lib/efi_loader/efi_device_path_utilities.o lib/efi_loader/e=
+fi_dt_fixup.o lib/efi_loader/efi_fdt.o lib/efi_loader/efi_file.o lib/efi_lo=
+ader/efi_hii.o lib/efi_loader/efi_hii_config.o lib/efi_loader/efi_image_loa=
+der.o lib/efi_loader/efi_load_options.o lib/efi_loader/efi_memory.o lib/efi=
+_loader/efi_root_node.o lib/efi_loader/efi_runtime.o lib/efi_loader/efi_set=
+up.o lib/efi_loader/efi_string.o lib/efi_loader/efi_unicode_collation.o lib=
+/efi_loader/efi_var_common.o lib/efi_loader/efi_var_mem.o lib/efi_loader/ef=
+i_variable.o lib/efi_loader/efi_var_file.o lib/efi_loader/efi_watchdog.o li=
+b/efi_loader/efi_disk.o lib/efi_loader/efi_net.o lib/efi_loader/efi_smbios.=
+o lib/efi_loader/efi_load_initrd.o lib/efi_loader/efi_conformance.o
+|   arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -znor=
+elro --no-warn-rwx-segments -L /srv/pokybuild/yocto-worker/oe-selftest-armh=
+ost/build/build-st-3119200/tmp/work/beaglebone_yocto-poky-linux-gnueabi/u-b=
+oot/2025.07/sources/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -shared =
+-Bsymbolic -s lib/efi_loader/helloworld.o lib/efi_loader/efi_crt0.o lib/efi=
+_loader/efi_reloc.o lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.a -o=
+ lib/efi_loader/helloworld_efi.so
+| arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such fi=
+le or directory
+| make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi.so]=
+ Error 1
+
+The issue is hard to reproduce but this change can artificially trigger it:
+
+  --- a/scripts/Makefile.build
+  +++ b/scripts/Makefile.build
+@@ -353,7 +353,7 @@ $(modorder-target): $(subdir-ym) FORCE
+ #
+ ifdef lib-target
+ quiet_cmd_link_l_target =3D AR      $@
+-cmd_link_l_target =3D rm -f $@; $(AR) cDPrsT$(KBUILD_ARFLAGS) $@ $(lib-y)
++cmd_link_l_target =3D rm -f $@ && echo "HACK, delaying build!" && sleep 60=
+ && $(AR) cDPrsT$(KBUILD_ARFLAGS) $@ $(lib-y)
+
+ $(lib-target): $(lib-y) FORCE
+        $(call if_changed,link_l_target)
+
+Then run a rebuild with:
+
+$  rm -f $( find build/ -name lib.a -or -name helloworld_efi.so ) && \
+   make
+...
+  arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -znorel=
+ro --no-warn-rwx-segments -L /home/mcfrisk/src/base/repo/poky/build_bea
+glebone/tmp/work/beaglebone_yocto-poky-linux-gnueabi/u-boot/2025.07/sources=
+/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -shared -Bsymbolic -s lib/e=
+fi_loader/helloworld.o lib/efi_loader/efi_crt0.o lib/efi_loader/efi_reloc.o=
+ lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.a -o lib/efi_loader/hel=
+loworld_efi.so
+arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such file=
+ or directory
+make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi.so] E=
+rror 1
+
+Fix by introducing PLATFORM_LIBGCC_LIBA variable with only lib.a
+filename which is then used to add the dependency in rules which use
+PLATFORM_LIBGCC. This should not impact builds which don't set
+PLATFORM_LIBGCC_LIBA and PLATFORM_LIBGCC usage stays as is.
+
+Fixes: 43d43241d1c9 ("scripts/Makefile.lib: add PLATFORM_LIBGCC to efi link=
+ing")
+
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
 ---
+ Makefile                     | 4 +++-
+ examples/standalone/Makefile | 2 +-
+ scripts/Makefile.lib         | 2 +-
+ scripts/Makefile.xpl         | 3 ++-
+ 4 files changed, 7 insertions(+), 4 deletions(-)
 
- drivers/firmware/firmware-zynqmp.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+v3: added "export PLATFORM_LIBGCC_LIBA" like PLATFORM_LIBGCC, not sure
+    how testing worked without this before
 
-diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-index d18ae523b6bc..e07ec3929b29 100644
---- a/drivers/firmware/firmware-zynqmp.c
-+++ b/drivers/firmware/firmware-zynqmp.c
-@@ -500,11 +500,8 @@ static int zynqmp_firmware_bind(struct udevice *dev)
- 	if (!smc_call_handler)
- 		return -EINVAL;
- 
--	if ((IS_ENABLED(CONFIG_XPL_BUILD) &&
--	     IS_ENABLED(CONFIG_SPL_POWER_DOMAIN) &&
--	     IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN)) ||
--	     (!IS_ENABLED(CONFIG_XPL_BUILD) &&
--	      IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN))) {
-+	if (CONFIG_IS_ENABLED(POWER_DOMAIN) &&
-+	    IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN)) {
- 		ret = device_bind_driver_to_node(dev, "zynqmp_power_domain",
- 						 "zynqmp_power_domain",
- 						 dev_ofnode(dev), &child);
--- 
+v2: introduced PLATFORM_LIBGCC_LIBA variable with just lib.a filename,
+    PLATFORM_LIBGCC can have other flags too
+    https://lists.denx.de/pipermail/u-boot/2025-July/594034.html
+
+v1: https://lists.denx.de/pipermail/u-boot/2025-July/593982.html
+
+diff --git a/Makefile b/Makefile
+index 1a5c77d7caf0..a0797f36f7f6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -911,7 +911,8 @@ u-boot-main :=3D $(libs-y)
+=20
+ # Add GCC lib
+ ifeq ($(CONFIG_USE_PRIVATE_LIBGCC),y)
+-PLATFORM_LIBGCC =3D arch/$(ARCH)/lib/lib.a
++PLATFORM_LIBGCC_LIBA =3D arch/$(ARCH)/lib/lib.a
++PLATFORM_LIBGCC =3D $(PLATFORM_LIBGCC_LIBA)
+ else
+ ifndef CONFIG_CC_IS_CLANG
+ PLATFORM_LIBGCC :=3D -L $(shell dirname `$(CC) $(c_flags) -print-libgcc-fi=
+le-name`) -lgcc
+@@ -926,6 +927,7 @@ endif
+=20
+ export PLATFORM_LIBS
+ export PLATFORM_LIBGCC
++export PLATFORM_LIBGCC_LIBA
+=20
+ # Special flags for CPP when processing the linker script.
+ # Pass the version down so we can handle backwards compatibility
+diff --git a/examples/standalone/Makefile b/examples/standalone/Makefile
+index 9b57f1c0c66c..aa9e3121cf9a 100644
+--- a/examples/standalone/Makefile
++++ b/examples/standalone/Makefile
+@@ -64,7 +64,7 @@ quiet_cmd_link_elf =3D LD      $@
+       cmd_link_elf =3D $(LD) $(KBUILD_LDFLAGS) $(LDFLAGS_STANDALONE) -g  \
+ 		     -o $@ -e $(SYM_PREFIX)$(@F) $< $(LIB) $(PLATFORM_LIBGCC)
+=20
+-$(ELF): $(obj)/%: $(obj)/%.o $(LIB) FORCE
++$(ELF): $(obj)/%: $(obj)/%.o $(LIB) $(PLATFORM_LIBGCC_LIBA) FORCE
+ 	$(call if_changed,link_elf)
+=20
+ $(obj)/%.srec: OBJCOPYFLAGS +=3D -O srec
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index e89a4a51b74d..cef3863dfdc4 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -508,7 +508,7 @@ $(obj)/efi_reloc.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_R=
+ELOC:.o=3D.c) $(recordmcoun
+ 	$(call cmd,force_checksrc)
+ 	$(call if_changed_rule,cc_o_c)
+=20
+-$(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/ef=
+i_freestanding.o
++$(obj)/%_efi.so: $(PLATFORM_LIBGCC_LIBA) $(obj)/%.o $(obj)/efi_crt0.o $(ob=
+j)/efi_reloc.o $(obj)/efi_freestanding.o
+ 	$(call cmd,efi_ld)
+=20
+ targets +=3D $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index 43f27874f9fe..68c88293f0d9 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -139,7 +139,8 @@ libs-y :=3D $(patsubst %/, %/built-in.o, $(libs-y))
+=20
+ # Add GCC lib
+ ifeq ($(CONFIG_USE_PRIVATE_LIBGCC),y)
+-PLATFORM_LIBGCC =3D arch/$(ARCH)/lib/lib.a
++PLATFORM_LIBGCC_LIBA =3D arch/$(ARCH)/lib/lib.a
++PLATFORM_LIBGCC =3D $(PLATFORM_LIBGCC_LIBA)
+ PLATFORM_LIBS :=3D $(filter-out %/lib.a, $(filter-out -lgcc, $(PLATFORM_LI=
+BS))) $(PLATFORM_LIBGCC)
+ endif
+=20
+--=20
 2.43.0
 
-base-commit: 1a9414936322f0983fb4318505c6697b77e5d358
