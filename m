@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C5BAC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 01:15:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609EBC83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 01:16:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83616835B6;
-	Fri, 18 Jul 2025 03:15:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D76988357D;
+	Fri, 18 Jul 2025 03:15:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LV86pWtU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mrBZJFdI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 346BE835D0; Fri, 18 Jul 2025 03:15:39 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id DB02B835EA; Fri, 18 Jul 2025 03:15:41 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D08C8357D
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 03:15:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C54688354B
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 03:15:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-41b8e41a2bdso1035954b6e.1
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:15:37 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-41c3addd37cso1180135b6e.3
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:15:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752801336; x=1753406136; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752801338; x=1753406138; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=gThS/jTEAxoKi9QmMAnvBZEj+E7D6C1y1JsUSu/Qx4Q=;
- b=LV86pWtUd0Bm5mCGQFrQAh7vOcOF16tlrcgucLzPugqd/Z1z2sRD0p9b+5r/RGsvsw
- LGANk4sEue+wUbP4V/Hwij6+GAMZlR/6S7sRlK0RtCdnM3Oj+NibeMXGXm6dtpib5UMy
- c/43tLKDd/gfKdfvbB3AcREpAolGVpV8kXAgU=
+ bh=o2YRp9bpn8/iWgi8wGFMEGjNiLeaz+htdckzZ22ACgk=;
+ b=mrBZJFdIB93JCp2UYZY4sO1y6zCNNOZVxti6x8huUcILUH9VtV5H0KwhiH3GwC9zbg
+ UK0hua1kWTv38j2NtHayGlJjV+A5k9r6jzqMT2fSjLAR1jDENQP8LIwBbRl5ewGM8+7Q
+ fH8yd3Cm2mAE9zoLYxTAMu652XGQ6Cn++1LBY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752801336; x=1753406136;
+ d=1e100.net; s=20230601; t=1752801338; x=1753406138;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gThS/jTEAxoKi9QmMAnvBZEj+E7D6C1y1JsUSu/Qx4Q=;
- b=OIJV7yWEvbyt/kCSoZRwD0MUZv0SydRtak23MKGCGTxoD5OJAh/uPKl7mf/riKXOCu
- BIIsyX4ENv2eAonHsZYbbk+/3HkK6GJpEShpdYdS5qt+HfDpw8x9HqZIHdnOAkcXkJUL
- QNGA2Mc/3HEpGqG+tnGAOqkI3tNZCfkTgssRikdhedDIQDpjNDF4BPDjeJLtIU+R2j25
- lXrHm2WMfVJLuIpoqih6Xog/1m2BKUH4yyF89ZwX41Lvchc+YAxGb1cIFGYC5DlYTY7S
- tii1O9hOqFxszF8HSYq6BaD5kvlM/71pSlFOMeKmWu47RinlhqmVfcg7c2U5dZJjmc9q
- xK1w==
-X-Gm-Message-State: AOJu0Yx/+ZZk4GCXTDJlsylTU72drzl54sSxgrWH0pyo6K38dV8pGWHG
- ehBg7NaDv5fu5J4ghOLQtstvKTwW/UoC1hqYnA4JrS/M3tEkQwVVMVq7+dKdNvxxLsJlJhR0fS1
- VGL4AzmE=
-X-Gm-Gg: ASbGncsWo26GFMV0FFo/Q1SNOZ3s2stg759r0rtog/73E9qHB2+7hznPTWgUUSldf7N
- lV52mOI55Awgzrl9SfQ6Ja91rSh/acWYrtMaPAwhLQpmpL3q1fDHJw4S3IPRZYxSlrkLNF6QRaH
- MLIgLE7apfnwsEouMmUOgGhfc7m9+J/4YEbMcZaplcWluvCBYugx//yJMwx+f8Z5bdpOSUctTA4
- lzDLaTQxDqDj3mXYVo3ZVixXb8eAYyAC9lytXM3gQ70cuRYSe9n1/E9wk7ISjf4sZLBZMkVMT8u
- 6L6MJyf6h0YhEOi4A6S+K5Vq5o8wGa9ceeTrBK5F9yy7Z1EWg4RYCH/PyT1haHvT4Hb7Mz6Y5wh
- Lr0lMNWVkr+tLD+VpPXGfgZmmZUoa2+jilpoRFAdbpmYafunZPk0jEnmF6e0=
-X-Google-Smtp-Source: AGHT+IHOR4MOaXXptgq7BGd4F6XCFCae0JaoILElM2862EHlOUkOtVwxS3NQzUMpqc5ykSu/RymbtQ==
-X-Received: by 2002:a05:6808:218b:b0:3f8:bbf3:3a18 with SMTP id
- 5614622812f47-41f61a660bfmr1564444b6e.16.1752801335742; 
- Thu, 17 Jul 2025 18:15:35 -0700 (PDT)
+ bh=o2YRp9bpn8/iWgi8wGFMEGjNiLeaz+htdckzZ22ACgk=;
+ b=OPn2k8cmMh4kBehA6h8jeC0quSvuM7rV2eRrTtwM+4vEqD+wBGOFOUVvNj0cQeIEMX
+ xmjA6KffhHTqehLgZrOnWUfIEPyh5LCHCxXL+iVeT88B1oDWiCekv1TGPAXLvf9L5zbG
+ bOL07nPQ7s0OCzVpTzEvla41F2hC7cu0bu/ucjtfTkuQfRD+Q9so5IjTINcdEyVYW/Ck
+ GrEoLBsVTEPpTBVPJ9wsdnfZowau9m1symDlnIpfqjR9yacAUkRSkR5zKFtCPf72rZb1
+ lxZ6Wsve+0ul39F/VNXkx1LU23MFGItcvGi8Q5FSrjnMATaVLAgj0hGArhgF8EmagNdq
+ 0BHg==
+X-Gm-Message-State: AOJu0YxAJxf5GC7gemVPUfvq+W5aVgEEbDJ2Bw5gR9KmCZFTISnsfTbm
+ WboJhRgYO3biJrotbrk8/THOGZYADELPxZuQ4Y+VC9LY5UoudQitOJ3Cwvcx8Dn82jMpGZT2rHB
+ u8GYvlK8=
+X-Gm-Gg: ASbGncvmwU6emKm1R4pHwmv/xjfqV+2mQKsz97awixW2kbmanG12BLW44ahCndvEdHr
+ fLIOIsCLURl+MFeQLnT/uQuTNtAxieKqPMjeWKYWABQY5icRMTnwe0bq2tRweCtT6/cTLHfbTml
+ HBDobgrO9Rz99BygtcvPe8l5gUE2TVtBnhEMC+Z32rRNx+lELfmuyG9wNaHYV+Y8Dqi7+Kq8mb/
+ 3J/YSIImLKsR95+qOXpLKJiUi5AqQalY4eGc3wFg+eeWGBrxDECwyKwjArMM9qezNQR0gzFGpsV
+ svPX/bXlIkEvkBc32XhLMpxbnoBWCTk12DQdIv35cv9lD/Ui+OCltmrIf+9ylXoeEil0ESogSZ8
+ 0kIopKxKF5BR6nLeBYVXmXSB8+kZdquajoKpjn+bkYueLCGFCQPfBZIS7fZE=
+X-Google-Smtp-Source: AGHT+IG7Rr153c8JkHaEL3atF+fGpXxZtR4RGN6+kDcIXgc4VOW2vcQBdeEYY8cdowqcmLYpwfRk5w==
+X-Received: by 2002:a05:6808:148a:b0:41b:e029:bbb4 with SMTP id
+ 5614622812f47-41d038e6d93mr5888263b6e.15.1752801338485; 
+ Thu, 17 Jul 2025 18:15:38 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-615bcab4e9esm76624eaf.12.2025.07.17.18.15.34
+ 5614622812f47-41fd10c22a3sm88481b6e.8.2025.07.17.18.15.37
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 18:15:34 -0700 (PDT)
+ Thu, 17 Jul 2025 18:15:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] drivers/net/ftgmac100.c: Fix a debug print
-Date: Thu, 17 Jul 2025 19:15:34 -0600
-Message-ID: <20250718011534.1333906-1-trini@konsulko.com>
+Subject: [PATCH] net: Add <cpu_func.h> to some platforms
+Date: Thu, 17 Jul 2025 19:15:37 -0600
+Message-ID: <20250718011537.1333932-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,27 +91,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the debug print in ftgmac100_send we want to say where the packet is
-in memory and what the length is, so use %p to print that.
+The common portable header for CPU related functions such as cache
+flushing and invalidation is <cpu_func.h> so add that to these drivers.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/net/ftgmac100.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/net/fsl_enetc.c | 1 +
+ drivers/net/hifemac.c   | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/drivers/net/ftgmac100.c b/drivers/net/ftgmac100.c
-index f5ea2e72d1bb..33d1f7da3d76 100644
---- a/drivers/net/ftgmac100.c
-+++ b/drivers/net/ftgmac100.c
-@@ -546,7 +546,7 @@ static int ftgmac100_send(struct udevice *dev, void *packet, int length)
- 		return -EPERM;
- 	}
+diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
+index 97cccda45190..a4ba27904bcb 100644
+--- a/drivers/net/fsl_enetc.c
++++ b/drivers/net/fsl_enetc.c
+@@ -6,6 +6,7 @@
+  */
  
--	debug("%s(%x, %x)\n", __func__, (int)packet, length);
-+	debug("%s(%p, %x)\n", __func__, packet, length);
+ #include <clk.h>
++#include <cpu_func.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdt_support.h>
+diff --git a/drivers/net/hifemac.c b/drivers/net/hifemac.c
+index 90cc247b3b6c..62182f922f8c 100644
+--- a/drivers/net/hifemac.c
++++ b/drivers/net/hifemac.c
+@@ -9,6 +9,7 @@
  
- 	length = (length < ETH_ZLEN) ? ETH_ZLEN : length;
- 
+ #include <dm.h>
+ #include <clk.h>
++#include <cpu_func.h>
+ #include <miiphy.h>
+ #include <net.h>
+ #include <reset.h>
 -- 
 2.43.0
 
