@@ -4,98 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35263C83F17
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 14:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C66DC83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 15:01:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5920D836AB;
-	Fri, 18 Jul 2025 16:17:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C21DC8367B;
+	Fri, 18 Jul 2025 17:01:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tHUykX8J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h3XNWUEh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72AC9835B0; Fri, 18 Jul 2025 16:17:06 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id C09BE83693; Fri, 18 Jul 2025 17:01:23 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61B13836D1
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 16:17:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D093834D4
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 17:01:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-4ab92d06ddeso29813871cf.3
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 07:17:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-2ff94cc4068so605682fac.3
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 08:01:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752848223; x=1753453023; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d3a41LTw8Z4/DKgAapyekLwNqa14G1EiEsYycnj4caw=;
- b=tHUykX8JAXj4ug/LmsSDNsmizQDQNTUVNOTwhBI/Xxie8oE0ZyNqX7Ok0++Vo/hiCb
- oExb4R4tg+1RhBEak4PgylEQC3/RPOlYUQUo/swS8xTrTwf7+cblQZblfuUpcLrTyE0T
- nW+2d+UvmPm2zJupV5hnEi52Soop19mH4VVLqAxaigUXmXBQTbf/k09jbc30IzCP6jus
- q97eg/9TqFgX77jovr419ga4zOzmge9Gf+OaizCxeC8VkL5yto+nMfWdKGYTH1ZB4Ohg
- RWDSS6YoNsByAokbzrJUYlBgdNE6w5BpLKUFTNsOGEAjNv9Rwc3rW+7ao8WSBE2niwKC
- uxwQ==
+ d=konsulko.com; s=google; t=1752850879; x=1753455679; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1QbvmY4CkuKz/nfZ0UzDM362/teR5IN0XZioe/VtdeM=;
+ b=h3XNWUEhDSahdhTYSuLul+3kv8WtJ0hCB2B6Qcl6dxiUD7xLkpNcpBbvYdnTF/nF7d
+ YbqkPA4xITtTUr6FkfbnF7UlJBZ0FWA9/ZE8G42trUD2MJ1wV+hbrV0CENemJG4PJbIO
+ /5AY5xYJLI/7Q2bL2vAqfki2NFHhMGxEUyRao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752848223; x=1753453023;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=d3a41LTw8Z4/DKgAapyekLwNqa14G1EiEsYycnj4caw=;
- b=Lt37B/2mtQ6TCcO+hQqWAo2NB002L8WOomhKS+5V8TMd/GVoKDCG+zzxl75lNvTyVI
- rtGwKoqN5d6/ioq5xWdprotq8j4EsRW+sVosad1gpzp/V7fMb0WR0v7V9A9M+nuns5Zn
- S5P6wQav4q1cgOTwTipcYugbk64cuhMUMIKi8SzYG5aJ/VZ2dsB021ZSMKnen+e3u/uN
- mdm1Lx/Uo6IgeJgqvvxQWV3BTrq/vJHCK3zmemx5Lh4/FCqZ12B0SVwIJtfthS7/qL0f
- 9T/fLZHq8UC4S34v2dB9VOgmKfDGQQ1pqZ5mI8CnkhFeXxotuL4K8BICtsraAZNVLA4X
- b3Kg==
-X-Gm-Message-State: AOJu0YzPhsMowxdtAxkCHcXCBe0s6gkQa5jG3BB5LNo/P0u+VpER2wpD
- AtalSlq3kaQEh7fepmybrO7J4ITm5AfyfxqiaP8+NXt6ZAbUzjdwbK+a1TRQYLR+dWk4/xBVdJ8
- nMpwU
-X-Gm-Gg: ASbGncsWiMFBxHSkHlbPFVL0a5wEdRR/CwVLS0FFf/QmQTUZhAPcKdZ+S7tJS3e803F
- hZTsaxagWm3JSxbidd00n5e/yqQ0slvy2YSWlbaHawrZzOyg3h8OrDcuqPmCUx55ywyX4tfeDwt
- 0m7wzCQhSkjOGkJfb6V9xCsoX3Gk3PujtcIFySUsGBcOBQDWHGODtIkU927Xk7CM9gulmh1MzHm
- pHfEiD6OaLHAOrCrHRLd+2bc0au8cyXmeLCXV0zDzCVZu5x/7TqhkffyPW6YkP73aRa0rFtXg0A
- TobX93DOvRZtjIKxITu/Gyy10fHyTFOyZL2zLr7iySQhLN6YWzh1K0Whvfdtty8LNQ7abIZRldr
- Ov0dHFB7oT6qXsP/R8aB7PnpB5hEJbMkY6Aihdvymy38RzS7N17gZYdwYwucVUW1PUjjTBewCn/
- cbkOLuh4k=
-X-Google-Smtp-Source: AGHT+IE3qCzIvdkuYuQhElWCyqHaj+z+DlKkkxsWzP2KhMgEXY4lR7m3KVt+ApZpq14yKSVKhrSVrA==
-X-Received: by 2002:ac8:5d07:0:b0:4a6:f518:6b11 with SMTP id
- d75a77b69052e-4ab93d8dee7mr158926291cf.28.1752848222566; 
- Fri, 18 Jul 2025 07:17:02 -0700 (PDT)
-Received: from ubuntu.localdomain (173-206-114-64.cpe.distributel.net.
- [173.206.114.64]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4abb499e91csm7558341cf.19.2025.07.18.07.17.00
+ d=1e100.net; s=20230601; t=1752850879; x=1753455679;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1QbvmY4CkuKz/nfZ0UzDM362/teR5IN0XZioe/VtdeM=;
+ b=mbR2A1qFIcRX4oyWgNAg7gpzTWyzI0Kxm+NOIWbQHxSvjfuGeNoYb77xMYpoeEd/dk
+ DJEIvP1SHr+0fwHqYbaun0z3PTOLtTNJiYOui4qcngGvFvJmEDrgaabE6+ar0us9oxF6
+ EO+5ig8O4WL028/PjkobmuMfhuddeE2mUoVQByX1vXvrkERbt+nHMzNifhS8mXUfz51x
+ HRen0UxHofeWOS7YrLkFHpqlfw8qCX0SO/dEKnKH0ZGhNpzg1pJlS70/iyax3oX13wrD
+ 4DdbOmGkjxLQOaOlCUq7wT32oggdeRt5B+1J98G1h4rb2Vq/lsGSACxCPICNL6TXhO33
+ LdIQ==
+X-Gm-Message-State: AOJu0YyjQwAeFBxEUcupRmojCufP43oNIC2nraPOKaAc4hLBoQZvgrS/
+ QV1wsujIO0lLKJLuextlvqHObte/MIAuEYhvqgjTVdK641N2npuqOvs3oA9pC+EUmN8=
+X-Gm-Gg: ASbGncvCS8Z/L42IAHQ9j3a560P2UDH1IJW6QRWuJFFSAu9twXMpYcmafaUxtZeb41b
+ avsPBwjYz+PNxtgRqvXt/EeKGWXrjbCDZk5u6qRJcbxqWdse4UkqVYAS5FbJLxMDMkuhOsGf/b7
+ 9v7U598NXjZd+7LvC0yoWl9ng1iKa+eiBdPBS7D1hKCF1VN9ozdnRwAZh0KAZSXuKF+hhRjWBh3
+ EwfSgOT+CM7R9OdqEGxCmiHykq+W6sVmLDq45lj1fnHXq/IBtc0Epuh0NdvnlI5QBAxlzQbUWLQ
+ DRNGv5XYdGOm95qiPKh192pBqwJDfhd5IQgXMl74Iz8yCbwL5mOujEsfzz1nrvG4QBJ+IiqwSVz
+ UxMT3jPXiKjV2YE64w0rvcIf4H8u9wro5fXNDZ2kJdQ==
+X-Google-Smtp-Source: AGHT+IFbtIZTwBbWyVKWiC0oUXVEqpQ0cRXg5XdnIBoVETlYnzkG34NyUFvhEpNrOznAqz+wJya2wQ==
+X-Received: by 2002:a05:6870:6b09:b0:2e9:4038:83d7 with SMTP id
+ 586e51a60fabf-300e8d11fe3mr2346042fac.11.1752850876768; 
+ Fri, 18 Jul 2025 08:01:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73e8354df84sm644240a34.2.2025.07.18.08.01.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 07:17:01 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v3 6/6] configs: Select OF_LIBFDT_OVERLAY to hand over DTO via
- bloblist
-Date: Fri, 18 Jul 2025 07:16:19 -0700
-Message-Id: <20250718141621.3147633-7-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250718141621.3147633-1-raymond.mao@linaro.org>
-References: <20250718141621.3147633-1-raymond.mao@linaro.org>
+ Fri, 18 Jul 2025 08:01:15 -0700 (PDT)
+Date: Fri, 18 Jul 2025 09:01:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heiko Schocher <hs@denx.de>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Frank Wunderlich <linux@fw-web.de>,
+ Padmarao Begari <padmarao.begari@amd.com>, dinesh.maniyam@altera.com,
+ Holger Brunck <holger.brunck@hitachi-powergrids.com>
+Subject: Re: Please pull u-boot-i2c master
+Message-ID: <20250718150113.GU193579@bill-the-cat>
+References: <06c2b16e-1e3d-7632-70be-d6df4232ff71@denx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2dnjUUj23ANX2bhd"
+Content-Disposition: inline
+In-Reply-To: <06c2b16e-1e3d-7632-70be-d6df4232ff71@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,41 +98,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Select OF_LIBFDT_OVERLAY for qemu_arm64 and vexpress_fvp_bloblist
-to hand over DTO via bloblist.
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
-Changes in v3:
-- Initial patch.
+--2dnjUUj23ANX2bhd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- configs/qemu_arm64_defconfig            | 1 +
- configs/vexpress_fvp_bloblist_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+On Thu, Jul 17, 2025 at 08:10:17AM +0200, Heiko Schocher wrote:
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 39afb837e41..a63cef0c1ea 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -7,6 +7,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x40200000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-arm64"
-+CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_LOAD_ADDR=0x40200000
- CONFIG_DEBUG_UART_BASE=0x9000000
- CONFIG_DEBUG_UART_CLOCK=0
-diff --git a/configs/vexpress_fvp_bloblist_defconfig b/configs/vexpress_fvp_bloblist_defconfig
-index 4d52b96202b..6cd0365ec68 100644
---- a/configs/vexpress_fvp_bloblist_defconfig
-+++ b/configs/vexpress_fvp_bloblist_defconfig
-@@ -1,5 +1,6 @@
- #include <configs/vexpress_fvp_defconfig>
- 
-+CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_BLOBLIST=y
- CONFIG_BLOBLIST_PASSAGE_MANDATORY=y
- CONFIG_BLOBLIST_SIZE_RELOC=0x10000
--- 
-2.25.1
+> Hello Tom,
+>=20
+> The following changes since commit 53bd87651e45b32efa398dd5e433d8b93d7814=
+45:
+>=20
+>   block: sandbox: Add support for SYS_64BIT_LBA (2025-07-11 11:33:25 -060=
+0)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-i2c.git i2c-for-2025.10
+>=20
+> for you to fetch changes up to 5e80c6757378d09950235083533e7a7c3aeae3be:
+>=20
+>   configs: agilex5_defconfig: Enable i3c configs for agilex5 (2025-07-16 =
+09:33:54 +0200)
+>=20
+> ----------------------------------------------------------------
+> i2c updates for v2025.10
+>=20
+> - i2c Kconfig updates from Tom
+>   - add some driver dependencies
+>   - added missing include delay.h in iproc_i2c.c
+>=20
+> - i2c: muxes: Add PCA9541 i2c arbitrator driver
+>   from Padmarao Begari
+>=20
+> - pca954x: add pca9545 support
+>   from Frank Wunderlich
+>=20
+> - cmd: i2c: fix build when CFG_SYS_I2C_NOPROBES defined with DM_I2C
+>   From Holger Brunck
+>=20
+> - added i3c support to U-Boot and enable it for agilex5
+>   board from Dinesh Maniyam
 
+Unfortunately the i3c support leads to this in coreboot:
+https://source.denx.de/u-boot/u-boot/-/jobs/1202949/raw
+
+Which looks like coreboot just gets stuck in a loop? And in turn, that
+lead me to do this locally:
+commit 03e9d5f4c61cba5d8e1db81d759fefd622b3ad49
+Author: Tom Rini <trini@konsulko.com>
+Date:   Thu Jul 17 15:22:08 2025 -0600
+
+    hack drop generic changes
+   =20
+    Signed-off-by: Tom Rini <trini@konsulko.com>
+
+diff --git a/include/dm/device.h b/include/dm/device.h
+index c5cfa18d09d6..678cd83c2716 100644
+--- a/include/dm/device.h
++++ b/include/dm/device.h
+@@ -169,7 +169,6 @@ enum {
+  * @dma_offset: Offset between the physical address space (CPU's) and the
+  *		device's bus address space
+  * @iommu: IOMMU device associated with this device
+- * @of_node: Associated device tree node
+  */
+ struct udevice {
+ 	const struct driver *driver;
+@@ -202,7 +201,6 @@ struct udevice {
+ #if CONFIG_IS_ENABLED(IOMMU)
+ 	struct udevice *iommu;
+ #endif
+-	struct device_node	*of_node;
+ };
+=20
+ static inline int dm_udevice_size(void)
+
+Which leads me (a) being concerned about what our coreboot support is up
+to and (b) why i3c needs this generic change? And I don't just want to
+see CONFIG_IS_ENABLED()'ing it, why do we have to handle the device tree
+that way and is there no standard mechanism we can use?
+
+--=20
+Tom
+
+--2dnjUUj23ANX2bhd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh6YbYACgkQFHw5/5Y0
+tyzLVgv45XgYagn0iBgjprKXxFghLpcVnp22wlEjvOuJ9g973gFQNWOeb48FUKAZ
+YWAfLUrPX7rJsVjOEs3d0oUVaRkEiTDhLs6Q34Y9JDslasauYdFd/hawgXOte18m
+paWg5IUSdX/feKvhAx45eqI4kVYI8HFBv9/REkNtte1t9Reo8H+D50Acnu4rsMlU
+P208BUcUQ7/+MJODOjCM0wkxEzEl44vUax89p1iy86oHmsWiYGKijeiXlhDstBkz
+y5DPpFTwx1ZpBII+1tlZKvT8Ez3SDOPCzYZPm4hgipkK31CVtPezlaRIVVGm0QnV
+d83kBjvTE3SaMZUje/SAlC/gX3S1DiPvnfWyAw65JaO0dG28Zw+QqfOXR2GpgLdX
+4Jldsx7e2pilrqyqietAgqFI7gOqyy+zu9TdsgG2gjmqC4LD68bwHmzsFVHLAeWB
+xaGzqrjLDi46Um5P0RcMZDZT4Aw1g/q/uQ/Fou3tikffpFfGyVk8UYrN3qwESOul
+ETdfCnA=
+=V0Tc
+-----END PGP SIGNATURE-----
+
+--2dnjUUj23ANX2bhd--
