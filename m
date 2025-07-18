@@ -4,61 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD8D3C83F17
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 17:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461DFC83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 17:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55A9683669;
-	Fri, 18 Jul 2025 19:12:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B9DEA83678;
+	Fri, 18 Jul 2025 19:17:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="e7kc/WVh";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="uP8UinCZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2A4E83678; Fri, 18 Jul 2025 19:12:21 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de
- [IPv6:2a01:4f8:c0c:92be::1])
- by phobos.denx.de (Postfix) with ESMTP id B548C834B6
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 19:12:18 +0200 (CEST)
+ id 179AC83692; Fri, 18 Jul 2025 19:17:12 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B0C17834EC
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 19:17:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1752858460;
- bh=iec9RvdyGi9uT/tEDfzXVbP56aRYdMeb48Q+GnCUwI8=;
- h=From:To:CC:Subject:Date:In-Reply-To:References:From;
- b=e7kc/WVh53o2x14kdNvG3XbG9xWIFkwlJB63QUq1XBgB5B4Zvcmv2c8CYJtLqL1lZ
- hRaCfirzvuV1JmIhWpLexs7uee2Hm9SI5GCmuCmKFr7gG5stHvHrBviyYYlB4PMzzD
- buRpfo1ypwIo9tPSbjG5FXUnUx7Jev+4OG8UR5agtX0DU/hDJ28VoCwOb+8k6oDLT1
- mCxjlivV/fkKDgQrBNEfWyRYxf7gQEnyW/Dybcw3sB3/hUcHvlqWB3Ta7XNo/+pyBS
- GUZH66RsiP6gdTLpwFMSKO48rGg3LwiecXcDu+nA7AM/y+4YUUL7ojNW3EPf5MH+/V
- ujng9N8XpzS8g==
+ s=dhelectronicscom; t=1752859003;
+ bh=6CROeabS+W1cVykibjIiwqwcuKG5kG4TIFhTohSB0MI=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=uP8UinCZwtWKb7DxnOOqqPnxO+GabwNCOCehb2EaFfeyKcpl7F7AUwYqGe4Xja3ev
+ 3KZjbafX/6GnXLeXwI3sNvL10rF04ra+UrV3Zz3WKCmF3TCzIfawFEN0yjJz8CF9Ka
+ oHGXIqubQCMTp2Z3sSpas7Jlo+/Av5hcF6FJa79iguTgPN2NwNQZNlaTRMc+5MRYro
+ NkHNDJBko+NvomQ7HZ8TFCPQwWaRbeGei579bfzgDfL4W6bMytO/izAyMXiLo680bi
+ v2CloPt7fAZhVDBjDM2h7L10Y81k435OHgi5Q3NmcWOnbiMKEFK/5A0q5HZc/fEzSt
+ koI7xHs8nnBlA==
+X-secureTransport-forwarded: yes
 From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-To: <u-boot@lists.denx.de>
-CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Andy Shevchenko
- <andriy.shevchenko@linux.intel.com>, Casey Connolly
- <casey.connolly@linaro.org>, Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
+Complaints-To: abuse@cubewerk.de
+To: Tom Rini <trini@konsulko.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Andy Shevchenko
+ <andriy.shevchenko@linux.intel.com>, Christian Marangi
+ <ansuelsmth@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
  <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Varadarajan Narayanan
- <quic_varada@quicinc.com>, =?UTF-8?q?Vincent=20Stehl=C3=A9?=
- <vincent.stehle@arm.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH V5 4/4] cmd: env: select: Add output for available environment
- targets
-Date: Fri, 18 Jul 2025 19:06:02 +0200
-Message-ID: <20250718170602.10746-5-cniedermaier@dh-electronics.com>
-X-klartext: yes
-In-Reply-To: <20250718170602.10746-1-cniedermaier@dh-electronics.com>
-References: <20250718170602.10746-1-cniedermaier@dh-electronics.com>
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, "Patrick
+ Delaunay" <patrick.delaunay@foss.st.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>
+Subject: RE: [PATCH V4 0/3] cmd: env: select: Add output for available
+ environment targets
+Thread-Topic: [PATCH V4 0/3] cmd: env: select: Add output for available
+ environment targets
+Thread-Index: AQHb6dGg1PMbxiI2V0e6dQQ7cHE56LQqhxUAgAKY0NCAAADmgIAANquwgArC0bA=
+Date: Fri, 18 Jul 2025 17:16:41 +0000
+Message-ID: <e7284037388042d089ded45ef18856ef@dh-electronics.com>
+References: <20250630151232.39100-1-cniedermaier@dh-electronics.com>
+ <20250710015826.GY6424@bill-the-cat>
+ <7d8b712b9e71485ca6f057e95f19af1e@dh-electronics.com>
+ <20250711174107.GK6424@bill-the-cat>
+ <073f00355c2d490ab8242e129d662ecf@dh-electronics.com>
+In-Reply-To: <073f00355c2d490ab8242e129d662ecf@dh-electronics.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,128 +84,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add parameter "-l" for printing available environment targets. The
-active target is marked with an asterisk. This is done by adding
-the function env_select_print_list().
+From: Christoph Niedermaier
+Sent: Friday, July 11, 2025 10:57 PM
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Friday, July 11, 2025 7:41 PM
+>> On Fri, Jul 11, 2025 at 05:37:55PM +0000, Christoph Niedermaier wrote:
+>>> From: Tom Rini <trini@konsulko.com>
+>>> Sent: Thursday, July 10, 2025 3:58 AM
+>>>> Subject: Re: [PATCH V4 0/3] cmd: env: select: Add output for available=
+ environment targets
+>>>>
+>>>> On Mon, Jun 30, 2025 at 05:12:29PM +0200, Christoph Niedermaier wrote:
+>>>>
+>>>>> Add the "-l" parameter to the "env select" command to print the avail=
+able
+>>>>> environment targets, convert all argument parsing in the file nvedit.=
+c to
+>>>>> getopt() and check that with unit tests.
+>>>>>
+>>>>> The first patch converts the parsing of arguments to getopt() for all=
+ env
+>>>>> commands. The second one adds unit tests for checking the env command=
+.
+>>>>> These were used to check the env commands before and after the conver=
+sion.
+>>>>> The third patch adds the actual new parameter "-l" for the "env selec=
+t"
+>>>>> command.
+>>>>>
+>>>>> Christoph Niedermaier (3):
+>>>>>   cmd: nvedit: Convert the parsing of arguments to getopt()
+>>>>>   test: cmd: nvedit: Add basic unit tests
+>>>>>   cmd: env: select: Add output for available environment targets
+>>>>
+>>>> Can you please make a v5 that's run through CI? I saw that am64x_evm_a=
+53
+>>>> fails to build now and I'm seeing the tests fail too:
+>>>> https://source.denx.de/u-boot/u-boot/-/jobs/1196652
+>>>
+>>> Sorry, I will have a look at it and make a new version.
+>>> Are my patches also the cause of the build issue with am64x_evm_a53?
+>>
+>> Yes, something in the series was leading to at least that platform and
+>> likely many others (I saw that in my local board testing, CI failed the
+>> pipeline before getting to the world stage so I don't know all of the
+>> ones that failed).
+>=20
+> OK, then I will also have a look at it.
+> Thanks for the clarification.
 
-If "env select" is called without a target parameter the result is
-"Select Environment on <NULL>: driver not found". Replace this not
-so useful output by showing the env usage message instead.
+I have submitted version 5, which should solve the problem with CI. I
+could not reproduce the problem when building for am64x_evm_a53. I hope
+that it will also be gone with version 5.
 
-Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
----
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Rasmus Villemoes <ravi@prevas.dk>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: "Vincent Stehlé" <vincent.stehle@arm.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
----
-V2: - Showing available environment targets by parameter "-l"
-    - Showing env usage message if env select is called without a target
-V3: - Convert the parsing of arguments to getopt()
-V4: - No changes
-V5: - No changes
----
- cmd/nvedit.c  | 18 +++++++++++++++++-
- env/env.c     | 16 ++++++++++++++++
- include/env.h |  7 +++++++
- 3 files changed, 40 insertions(+), 1 deletion(-)
-
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index 945db536bf2..604ce71f269 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -504,6 +504,22 @@ static int do_env_load(struct cmd_tbl *cmdtp, int flag, int argc,
- static int do_env_select(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
- {
-+	struct getopt_state gs;
-+	int opt;
-+
-+	if (!argv[1])
-+		return CMD_RET_USAGE;
-+
-+	getopt_init_state(&gs);
-+	while ((opt = getopt(&gs, argc, argv, "l")) > 0) {
-+		switch (opt) {
-+		case 'l': /* list */
-+			return env_select_print_list() ? 1 : 0;
-+		default:
-+			return CMD_RET_USAGE;
-+		}
-+	}
-+
- 	return env_select(argv[1]) ? 1 : 0;
- }
- #endif
-@@ -1180,7 +1196,7 @@ U_BOOT_LONGHELP(env,
- 	"env load - load environment\n"
- #endif
- #if defined(CONFIG_CMD_NVEDIT_SELECT)
--	"env select [target] - select environment target\n"
-+	"env select [-l] [target] - list/select environment target(s)\n"
- #endif
- #if defined(CONFIG_CMD_NVEDIT_EFI)
- 	"env set -e [-nv][-bs][-rt][-at][-a][-i addr:size][-v] name [arg ...]\n"
-diff --git a/env/env.c b/env/env.c
-index 7a9c96b4078..fb55215254c 100644
---- a/env/env.c
-+++ b/env/env.c
-@@ -353,6 +353,22 @@ int env_init(void)
- 	return ret;
- }
- 
-+int env_select_print_list(void)
-+{
-+	struct env_driver *drv;
-+	int prio;
-+
-+	printf("Available Environment targets:\n");
-+	for (prio = 0; (drv = env_driver_lookup(ENVOP_INIT, prio)); prio++) {
-+		if (gd->env_load_prio == prio)
-+			printf("* ");
-+		else
-+			printf("  ");
-+		printf("%s\n", drv->name);
-+	}
-+	return 0;
-+}
-+
- int env_select(const char *name)
- {
- 	struct env_driver *drv;
-diff --git a/include/env.h b/include/env.h
-index 01c3eeae7e2..4553c7bc109 100644
---- a/include/env.h
-+++ b/include/env.h
-@@ -286,6 +286,13 @@ int env_save(void);
-  */
- int env_erase(void);
- 
-+/**
-+ * env_select_print_list() - Print available environment targets
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int env_select_print_list(void);
-+
- /**
-  * env_select() - Select the environment storage
-  *
--- 
-2.30.2
-
+Thanks and regards
+Christoph
