@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DFF6C83F34
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 01:15:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6572FC83F34
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 01:15:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2A8183577;
-	Fri, 18 Jul 2025 03:15:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 151AC83560;
+	Fri, 18 Jul 2025 03:15:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t2Fzk4Ud";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OwkbIdqq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B74408357D; Fri, 18 Jul 2025 03:15:31 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id DBF1D8354B; Fri, 18 Jul 2025 03:15:35 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 986B883560
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 03:15:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9859835AA
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 03:15:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-73e64e87d49so963216a34.2
- for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:15:29 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-2fef7f6d776so520381fac.2
+ for <u-boot@lists.denx.de>; Thu, 17 Jul 2025 18:15:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752801328; x=1753406128; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1752801332; x=1753406132; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Fn6jSzvvR8D3vPenBKYku92iMDybh/meC2QKmuXitVk=;
- b=t2Fzk4UdkKDla3efhCNhWkXZHNCuzYXtVTjq9b6EUkqEL7xOLJM4QyDCYHmAUcRs6/
- K0JgQBVPvbui7rinp1GkgtXIyTvrO/MXZMMsw5WdvoNzjEuUFyMXCFocBfxYwTwjSsEP
- nqCPThyihviLddAQHCM9nNtlwD7GrtVCr8UF0=
+ bh=dNwEPPn2E2SfBWQKBPlnljzMOFynea9X5PRNTM5k7qU=;
+ b=OwkbIdqqVSWMd0XZ+ET4N/FCTSFGSiNjh3n2lzcfjqZ2FzGo+Qq7zWsmrnyOcDAQkM
+ 362QUnCzGxkPvts4svebuuClS+n0hgrt54CHcouLlEf5OGzm3EAOUiYgSt2chcTTMYtt
+ Ai8BJoz3K+yeu3e8xHAYZBFx8rEFws51//MB4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752801328; x=1753406128;
+ d=1e100.net; s=20230601; t=1752801332; x=1753406132;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Fn6jSzvvR8D3vPenBKYku92iMDybh/meC2QKmuXitVk=;
- b=wfk7yLRAKcHhuX46T/rybvujnafhabdoDYjT/q4Sepul3CHDd04tbgw2Kll5Dxypr6
- r3INjc+qeOj4w6j+2/2YwgOhSJOYtL86LISPUNuvsd/wwUeZuoFkr/aoaoGNa+CvIMBt
- XNbpI5hMWpMDr79ILWfXYu4cbI+P/Ky0r/bPl2142+J+QUnjTBYenQB3gP+1rjgJk8Ge
- 0RCi3CcrUUTtn6B3p/R48bySoL8dl4nXZZ6CSptOWvczg1aIBLRRcL1211OdFWIejClk
- US6DEEvVe3M4do6Gt4TW0TvDJr2PWb6FFju7mNV3qIbUEdBigKolExArVjYTNOzIPz/B
- Tu4A==
-X-Gm-Message-State: AOJu0YzRkjoczFK8q0KJ/VdxJPRPl7QBD71ZhgM7mbeCIEtIBPUnUEjd
- 0qFkOoQPNi/nA+g67MjxBgsi2MuJOobAdpe1LIBiGZqahUQczeWf0KdLTzJevSd1m1WRtRGXOf6
- jwgequ+g=
-X-Gm-Gg: ASbGnctkCQowOm+42Lhzao8hvuOllZuYr9VLjO16YZb3e9cHToXdRIqYlQwOKTSjrqU
- zKSg8Qx5aN8enC5n+t4VQZLIvd7KEjQIAF0On1FtFWn5MC0/Y4T2bdU8g6q91/2by40qh6/lD9a
- F1aW63avJBcaGle9LeJbHq/Y0Av19CLPXCUFuePjXyuGH4Xg401CD8OArmJ/i1yJ8aXCclzA4qx
- WGTYiZHttrXd0tOT7E4VuXQJTXulnHbzzNviTWEkegUX7oQf74+ui4Y1B/BM8b/pWTOh10vqoju
- kB5aqiDGVXrzydybdA/yjRoRXtbHB6/0Caz9/rw7gTcsnGH8iDlK+MmmXkXOMf8Yop9+QNCZtec
- M7Vy0fBUZeWrwQBqujAssxwEzZoafvzNExUbsjb28wX/iX/f0s+8ExihdkIQ=
-X-Google-Smtp-Source: AGHT+IEJuijJ3u8in3FFhqXdOEiBI7SSSZ086zHDmwlWF30B37O75+DLasb8FeGUWkuZmPnuwehN5w==
-X-Received: by 2002:a9d:3e55:0:b0:735:b9db:5939 with SMTP id
- 46e09a7af769-73e6619e35dmr6229744a34.10.1752801328174; 
- Thu, 17 Jul 2025 18:15:28 -0700 (PDT)
+ bh=dNwEPPn2E2SfBWQKBPlnljzMOFynea9X5PRNTM5k7qU=;
+ b=UioKmatIdNDR1sIkvwoCDvVd+sX6tNgMuPeqVkAJkma11dmdH+9vZxHD66UQzbM3oa
+ CJErnM1b1jUwMAtemajsRf3mnhgOtnQwY/+Crrpm+Ig29fbLQhaSipkK36XrDP1LNy2x
+ rBdrMdqXN64QLzNG5wP2vdGZiOcgqB/dt9Q+E1STRrO08mcq3eI5pdD5HZhwadvlWewJ
+ POam9jmr9lvhoEXgVb8qdlIM5O2dgknUY7Fv37K/zA1G65ZXaMmrUM2TSePyndTWNE5b
+ azBDPGg7P7TQC04UFxgINgvmt9mzFDYqCQkeQOxFiVo4jUewPPR1KlO1TW/yQBMgmYHE
+ 6yRw==
+X-Gm-Message-State: AOJu0YxDbP1DTHcuebf8q21t71hGtI3RwW7sfev48kfWFvsTtjGscleC
+ a9JCHaa8SL9gAPERR4xz/bVpxudfIMB+YbKKU18HUaJtPZRI7yjIVXqFc4tMCwbUTua5pcE7c56
+ hCn+uofw=
+X-Gm-Gg: ASbGnctrECCqq34PiL6qWtWfIzRYKG/9GnrUZ9kjnzAle6Wo+i9Qx5vKqyzOMMupZ7q
+ gfyyX0dagShoJaihEYnE+K+VplFblUFGFs4cf+nURgNkvrculXNCTmyH+TOlLQkVFnqaj3Hw2cC
+ 97H45b2xzaHgv9lw/eQwLajOQc3+bgKV6PHK88eNa9iZO08SwQp776KEZR9gjxHCPBa6bz8Bucb
+ B2QNshV+01kD1Faxb9Zdt3DcgGSVt1Hxvm+dCl+Kek50XK7s0Jlkt0XMpk8x8uS2idQqPoBEsKt
+ UvXcLCl3LEi7iph2O+led7ZkcvFx09zBILQ5LpiP5n7AdD/k8iKsygGp+Y85T7A0ZpzzzSWSf89
+ nKi18Fh//iAPMf3wWgB/cXCo3aIgELeYNMNcAU2ErsXXTVaLcqHIonaSsfgUwbjGxSOsBVw==
+X-Google-Smtp-Source: AGHT+IHVKdbfNMJC94ZnD9JjKMo8jJ7slXMs+cbeX35t5QUfAbZtGyb9UEtzgH0HAgNJTlmIto4LVQ==
+X-Received: by 2002:a05:6870:2052:b0:29e:766d:e969 with SMTP id
+ 586e51a60fabf-300e8d1ddb9mr763554fac.10.1752801332549; 
+ Thu, 17 Jul 2025 18:15:32 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e83be2689sm215773a34.63.2025.07.17.18.15.27
+ 586e51a60fabf-3010220aea0sm204065fac.20.2025.07.17.18.15.30
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 18:15:27 -0700 (PDT)
+ Thu, 17 Jul 2025 18:15:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] pci: Tighten some PCI controller dependencies
-Date: Thu, 17 Jul 2025 19:15:26 -0600
-Message-ID: <20250718011526.1333863-1-trini@konsulko.com>
+Subject: [PATCH] nvme: Tighten requirements on NVME_APPLE driver
+Date: Thu, 17 Jul 2025 19:15:30 -0600
+Message-ID: <20250718011530.1333880-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,59 +91,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A large number of PCI controllers cannot build without access to some
-platform specific header files. Express those requirements in Kconfig as
-well.
+This driver requires Apple rtkit headers in order to build.  Express
+that requirement in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/pci/Kconfig | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/nvme/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-index 8ffd88c722d9..b8568267ff8a 100644
---- a/drivers/pci/Kconfig
-+++ b/drivers/pci/Kconfig
-@@ -183,6 +183,7 @@ config SYS_FSL_PCI_VER_3_X
- config PCIE_FSL
- 	bool "FSL PowerPC PCIe support"
- 	select SYS_FSL_PCI_VER_3_X if ARCH_T2080 || ARCH_T4240
-+	depends on PPC
- 	help
- 	  Say Y here if you want to enable PCIe controller support on FSL
- 	  PowerPC MPC85xx, MPC86xx, B series, P series and T series SoCs.
-@@ -190,6 +191,7 @@ config PCIE_FSL
+diff --git a/drivers/nvme/Kconfig b/drivers/nvme/Kconfig
+index d138867666bd..b69fc4ed53d2 100644
+--- a/drivers/nvme/Kconfig
++++ b/drivers/nvme/Kconfig
+@@ -11,6 +11,7 @@ config NVME
  
- config PCI_MPC85XX
- 	bool "MPC85XX PowerPC PCI support"
-+	depends on MPC85xx
+ config NVME_APPLE
+ 	bool "Apple NVMe controller support"
++	depends on ARCH_APPLE
+ 	select NVME
  	help
- 	  Say Y here if you want to enable PCI controller support on FSL
- 	  PowerPC MPC85xx SoC.
-@@ -265,6 +267,7 @@ config PCIE_LAYERSCAPE
- 
- config PCIE_LAYERSCAPE_RC
- 	bool "Layerscape PCIe Root Complex mode support"
-+	depends on ARM
- 	select PCIE_LAYERSCAPE
- 	help
- 	  Enable Layerscape PCIe Root Complex mode driver support. The Layerscape
-@@ -286,6 +289,7 @@ config PCI_IOMMU_EXTRA_MAPPINGS
- 
- config PCIE_LAYERSCAPE_EP
- 	bool "Layerscape PCIe Endpoint mode support"
-+	depends on ARM
- 	select PCIE_LAYERSCAPE
- 	select PCI_ENDPOINT
- 	help
-@@ -296,6 +300,7 @@ config PCIE_LAYERSCAPE_EP
- 
- config PCIE_LAYERSCAPE_GEN4
- 	bool "Layerscape Gen4 PCIe support"
-+	depends on ARM
- 	help
- 	  Support PCIe Gen4 on NXP Layerscape SoCs, which may have one or
- 	  several PCIe controllers. The PCIe controller can work in RC or
+ 	  This option enables support for the NVMe storage
 -- 
 2.43.0
 
