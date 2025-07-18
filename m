@@ -4,56 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D53DC83F1A
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 08:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E297C83F17
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 08:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9773835CD;
-	Fri, 18 Jul 2025 10:10:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 80BE4835B2;
+	Fri, 18 Jul 2025 10:12:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Yfo281WT";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="n9oY2HRz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69CCD835D0; Fri, 18 Jul 2025 10:10:44 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id BA7DF835B0; Fri, 18 Jul 2025 10:12:45 +0200 (CEST)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2062e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::62e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE89F835B0
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 10:10:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id AD2F4835B0
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 10:12:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 35A0D41783;
- Fri, 18 Jul 2025 08:10:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8D5BC4CEEB;
- Fri, 18 Jul 2025 08:10:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752826240;
- bh=KfjK8UFTskt+Wq7eNx3vowzN/3OEbUKfjfJh7JF4aKg=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=Yfo281WTpWo6jVeaic5pxbmbcZJBWZ8HfXw+x9zDsgFjkbNYs7XxCHxPvj6PzBUzj
- fTp59vp41/R+54RVwViMJpAmNEobJEtmBCN/igtKk3WE38Km/YqOAseudbkf2/ksQX
- Pypnczh5cifOHPKenKjj+UeUcCZzS+DAtiCJav5gvFKVDtIQLv+9KEQlflt9T4Qq/X
- Eqstdwrf7arxDDodhn41OHw24Va5wsiya3ZCKaxp5FAsexXm8ER8n8jV2vzgVNea21
- qp+GYYlTPBOhjO0vNCnnE2zGtA4qoO0CErWMQ6b/hnD6kxphTzzzlocO3c0HpOt0MT
- bd1dXHpe4Cd1w==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Ariel D'Alessandro <ariel.dalessandro@collabora.com>, u-boot@lists.denx.de
-Cc: mkorpershoek@kernel.org, trini@konsulko.com,
- jerome.forissier@linaro.org, patrice.chotard@foss.st.com,
- ilias.apalodimas@linaro.org, andre.przywara@arm.com,
- casey.connolly@linaro.org, mwalle@kernel.org, Ariel D'Alessandro
- <ariel.dalessandro@collabora.com>
-Subject: Re: [PATCH v3] drivers: fastboot: Add support for SPI flash memory
-In-Reply-To: <20250717135854.25126-1-ariel.dalessandro@collabora.com>
-References: <20250717135854.25126-1-ariel.dalessandro@collabora.com>
-Date: Fri, 18 Jul 2025 10:10:37 +0200
-Message-ID: <874iv9aphe.fsf@kernel.org>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FUQ6CX4Xhasna0seuTd2e2S00DDaX+w6BSu/25l9Z0gQzCWQGRXCc++dOJpQRNGZmupEq2izrRhUCgCSz9xIhiHxbk9CaEGsiAHOIsHooP/f5xMxb7CAWs/8rMwxdk5sYvdchEcf1iUMKZQXjyb40ZlsNvko7ndEGAJTceid7oQRTMOlcNMZiMEDbh4ynyQ0Jk06rcmpSsdzHBiTIbGE+lCdwfoWrib3Ze6R9je+J6U18anMnspsUg2coaqokhK/V4KOFrnRGDbjvoxVOuD6sMbz8MKc95wGKB57xTrbDCysuOP+LLDBJBIGHqvdx8e2lieUMkSN6rbW+DoJ0l9IJw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xSdGf9rSfCSXV4Jz53iNYhD2OWHh+FKJVGzzf8n2Kfk=;
+ b=RhYHXnvzHl4gjNKuzO7/tKKNLUl62SwFupqZ3OlqvnqPsrptM++BVEal1iz1DpOIbrYl46lx+ZvX6O1nr5ZbXn1yxTjnbqEE/w/5cU4IW0K+oKMjAjkOeHg6eNMnBA/QG6hffahEyR2HKeO62Rg9QtyJgs2Zl2rJRiev4Me9GpjqfrbzA+/UprpqFK4DuVNxTX3oaAd3z+7gMDMUe2zvZgsJINYR3VkGiIIwcmenGLr82ITy4hiFYSzyjrscr+IxgbJZ1Di4/Q4OYCXdgUORTTDo7Vc1bVD4TuO53vKUZrq1M9gAzy7WXihb9DSmgXxGAsJrWUyt3aniqyQ+mXWeOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xSdGf9rSfCSXV4Jz53iNYhD2OWHh+FKJVGzzf8n2Kfk=;
+ b=n9oY2HRz1/XECJeqZ742I61loQbLqVKMbC8cYuJIgdnVvU99sZ5lin+kC77IdIiVrUq9e35ZCOA8/4yK5EusZHz2vGKO4eflQ5l+9G+aO2wUzXzujATnvx8dSNqIX5kb+iuPgfOOcncA1yheb8GNStqpByv1crjNiCTGzzdHPSI=
+Received: from BYAPR04CA0027.namprd04.prod.outlook.com (2603:10b6:a03:40::40)
+ by CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.24; Fri, 18 Jul
+ 2025 08:12:40 +0000
+Received: from SJ1PEPF000023D8.namprd21.prod.outlook.com
+ (2603:10b6:a03:40:cafe::3b) by BYAPR04CA0027.outlook.office365.com
+ (2603:10b6:a03:40::40) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.23 via Frontend Transport; Fri,
+ 18 Jul 2025 08:12:40 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF000023D8.mail.protection.outlook.com (10.167.244.73) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8964.1 via Frontend Transport; Fri, 18 Jul 2025 08:12:40 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 18 Jul
+ 2025 03:12:39 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 18 Jul
+ 2025 03:12:38 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 18 Jul 2025 03:12:37 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Prasad Kummari <prasad.kummari@amd.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] firmware: zynqmp: Simplify power-domain driver bind
+Date: Fri, 18 Jul 2025 10:12:34 +0200
+Message-ID: <c75627e92eeaffedf0f7e682edd4f6f39f0b5706.1752826352.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1203; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=qDOeOV2pjwzxN0twAzBnXiqlf52sI0SFWU0jgPTxUuk=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRUMX6eaKsQY6zBxOEc33Bo2ayJJ0sSDriELDx4ZWboZ
+ 9nTz1TTO0pZGMQ4GGTFFFmmM+k4rPl2banY8sh8mDmsTCBDGLg4BWAiJYUMf7hzezsV0q51SEnH
+ h+YHHuErMCizu7v+/52ftXcYJb7/38Xwh6dFdGHT7G7d54ZZk4PjbJhn7vi7euWRz2cSV/BvM8p
+ +yQwA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D8:EE_|CYXPR12MB9337:EE_
+X-MS-Office365-Filtering-Correlation-Id: a7da1c72-d123-42ff-5c24-08ddc5d2dd9a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?M1gMfyyFknsqdqezFIE0Qlew5XcGjD29uJe2Og3AalHqWyfcGwatqAuOgrEG?=
+ =?us-ascii?Q?kqj4RenW5vOVb7jqTBHibCDqb6KCPsVj+3VOQKrdAcrfxG3HOE9mLNufPKDm?=
+ =?us-ascii?Q?auwKWdletFdJ6MhK7lnEOgf/p9mv3qCHEUvpJxz0HvmH9iTNHAn+vbWi+rzZ?=
+ =?us-ascii?Q?jPqLnYRdZTnUf6l0Jx/r9aVmrc54cebFa1eMbVGf++FZD7JFCh3MdPR6V7U9?=
+ =?us-ascii?Q?9Xp0lezahA6L5ocJuXlpPm7Mlv7p5dPTMFjGNQ8Rghv/ntj7f74gNz27KBIQ?=
+ =?us-ascii?Q?bb5kuLtTln9R6ze3FQ73bohyEIe/cTNbDi2ee7oqf6mQg2Amnn1G8DK2Y6s5?=
+ =?us-ascii?Q?i9qN1zP5Z14IYPR3iJt+Yd4pUYIy+ySrVbQ22bIj2rP0AHmrQmyalD3JhyvF?=
+ =?us-ascii?Q?h3g9X9aF86OSVXSSJwGgi+cfCjAu0K9CVTsUsge/qGljmqQmpsvn7VNkJm/M?=
+ =?us-ascii?Q?qC7nq/eA4kNp6G2HM6y953c9aYB1SlAbj91D41+0Qp0pC3RdFQg28IjPBX47?=
+ =?us-ascii?Q?DSaSFIcpSRzAIKk6IU5JQVeptyhVSyYIkHlg0Dilx18Ztb+9b3nk9khDPukd?=
+ =?us-ascii?Q?GLrw+YluVzsqdeWczRhaJfEqzn8w7Mkt63Gkwl9Fu2F14gnkIAATLVz78/YB?=
+ =?us-ascii?Q?krw3LjO0J0+8Zo+MKtzhFi7WUYXmyOgU9LyIPv1jXwH4YTC0alCLvh5Ao0gY?=
+ =?us-ascii?Q?OeAc9tSpHQw12DImBvLVnBl7BLhX2riIbdo6k+5FOIVMez6UfRsFOZTP4ibD?=
+ =?us-ascii?Q?06uxR2JbLMg4q4r16bQrwePFZc/xS9Aq6jVj//WoNLFQndoSRHGsizGxreOc?=
+ =?us-ascii?Q?7zMw48vl1gK0yE6+ZXzFoKdM8jAAPsezkrkCgaKQQTau4wIWOAGgRwu3y9JD?=
+ =?us-ascii?Q?36pwDl3FCQG6GMkrl8Xc8A0rumdfdcVEwGTl8rlayl8yoXIFnjUOo7frCg64?=
+ =?us-ascii?Q?N+F4IYxEZEkk4Sn5dxrYIiu3SY2KyRZqo/KEs1Qf4zVa+uVlCPodcK/QhEOd?=
+ =?us-ascii?Q?2PPSPtQlnLhAbcouijvYUQgivB81GFIUrertt6VTc5sjwS3fqOUPf0opj16a?=
+ =?us-ascii?Q?GoNJecyHkWv2wL/iKUY7u9z5vNfhSGF52MDIyTxCzYP8yUTFhbeLzNcrJayK?=
+ =?us-ascii?Q?3jCdj5CxnSH5f9UeZkCXkzK6nwEvCpH1B5E0W3P74+ewSOhLFxJ2OzWbK/U0?=
+ =?us-ascii?Q?bQk2rzy1F1iRSrndkwOJWoUBCDkoNddpBci2NJSjDcBqGQ0JV5vpsxSYpZ/z?=
+ =?us-ascii?Q?rt+4+CcQw/LTCQ8kN2x9+Z0nFdo4Fd+FoXzx11vM9SITSGO/D5kRLXiDveG4?=
+ =?us-ascii?Q?PswT+9ssTvygRpf3J7oAlhGyOHcY4l+7nWHPegmtW6o2Rmj9vSJQythXrMkm?=
+ =?us-ascii?Q?Q3pEbeCuXBm5A56KOHV29U0K2mHvZGzxQfWZIY5b0YCmEPBbX1RNS2Nj2z0d?=
+ =?us-ascii?Q?Bw21BRaXCG1A9OkTP9OgZqZ3MY7LkCNd/vSrDR1AutHJHfcSyyXUs7tX8kcv?=
+ =?us-ascii?Q?UbnFCJMTViY46PSMHkWgYKQ0fIMPb5wGDLe0?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2025 08:12:40.6808 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7da1c72-d123-42ff-5c24-08ddc5d2dd9a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D8.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9337
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,484 +158,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ariel,
+CONFIG_IS_ENABLED macro is covering CONFIG_POWER_DOMAIN or
+CONFIG_SPL_POWER_DOMAIN Kconfig symbols based on build target which
+simplify logic around binding power domain driver.
 
-Thank you for the patch.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-On Thu, Jul 17, 2025 at 10:58, Ariel D'Alessandro <ariel.dalessandro@collabora.com> wrote:
+ drivers/firmware/firmware-zynqmp.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-> Fastboot currently supports MMC and NAND flash devices. Similarly,
-> extend the support to SPI flash memories.
->
-> Note that in this initial implementation, partitions on the device are
-> not supported yet, but raw partitions can be set in U-Boot environment.
->
-> To define a raw partition descriptor, add an environment variable
-> similar to the MMC case:
->
-> ```
-> fastboot_raw_partition_<raw partition name>=<offset> <size>
-> ```
->
-> for example:
->
-> ```
-> fastboot_raw_partition_boot=0x0 0x1000000
-> ```
->
-> Signed-off-by: Ariel D'Alessandro <ariel.dalessandro@collabora.com>
+diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
+index d18ae523b6bc..e07ec3929b29 100644
+--- a/drivers/firmware/firmware-zynqmp.c
++++ b/drivers/firmware/firmware-zynqmp.c
+@@ -500,11 +500,8 @@ static int zynqmp_firmware_bind(struct udevice *dev)
+ 	if (!smc_call_handler)
+ 		return -EINVAL;
+ 
+-	if ((IS_ENABLED(CONFIG_XPL_BUILD) &&
+-	     IS_ENABLED(CONFIG_SPL_POWER_DOMAIN) &&
+-	     IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN)) ||
+-	     (!IS_ENABLED(CONFIG_XPL_BUILD) &&
+-	      IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN))) {
++	if (CONFIG_IS_ENABLED(POWER_DOMAIN) &&
++	    IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN)) {
+ 		ret = device_bind_driver_to_node(dev, "zynqmp_power_domain",
+ 						 "zynqmp_power_domain",
+ 						 dev_ofnode(dev), &child);
+-- 
+2.43.0
 
-Thanks for the doc updates. This looks great!
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-> ---
->  doc/android/fastboot.rst        |  16 +-
->  drivers/fastboot/Kconfig        |   6 +-
->  drivers/fastboot/Makefile       |   1 +
->  drivers/fastboot/fb_command.c   |   8 +
->  drivers/fastboot/fb_getvar.c    |   6 +
->  drivers/fastboot/fb_spi_flash.c | 251 ++++++++++++++++++++++++++++++++
->  include/fb_spi_flash.h          |  42 ++++++
->  7 files changed, 326 insertions(+), 4 deletions(-)
->  create mode 100644 drivers/fastboot/fb_spi_flash.c
->  create mode 100644 include/fb_spi_flash.h
->
-> diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-> index 6f92cd28eb1..19e2ee9d407 100644
-> --- a/doc/android/fastboot.rst
-> +++ b/doc/android/fastboot.rst
-> @@ -32,7 +32,7 @@ The following OEM commands are supported (if enabled):
->  - ``oem console`` - this dumps U-Boot console record buffer
->  - ``oem board`` - this executes a custom board function which is defined by the vendor
->  
-> -Support for both eMMC and NAND devices is included.
-> +Support for eMMC, NAND and SPI flash memory devices is included.
->  
->  Client installation
->  -------------------
-> @@ -97,8 +97,9 @@ Raw partition descriptors
->  ^^^^^^^^^^^^^^^^^^^^^^^^^
->  
->  In cases where no partition table is present, a raw partition descriptor can be
-> -defined, specifying the offset, size, and optionally the MMC hardware partition
-> -number for a given partition name.
-> +defined, specifying the memory offset and size.
-> +
-> +Currently, this support is available only for eMMC and SPI flash memory devices.
->  
->  This is useful when using fastboot to flash files (e.g. SPL or U-Boot) to a
->  specific offset in the eMMC boot partition, without having to update the entire
-> @@ -106,6 +107,15 @@ boot partition.
->  
->  To define a raw partition descriptor, add an environment variable similar to::
->  
-> +    fastboot_raw_partition_<raw partition name>=<offset> <size>
-> +
-> +for example::
-> +
-> +    fastboot_raw_partition_boot=0x100 0x1f00
-> +
-> +Optionally, in the eMMC case, the hardware partition number can also be
-> +specified for a given partition name::
-> +
->      fastboot_raw_partition_<raw partition name>=<offset> <size> [mmcpart <num>]
->  
->  for example::
-> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> index 70207573de2..843171902ae 100644
-> --- a/drivers/fastboot/Kconfig
-> +++ b/drivers/fastboot/Kconfig
-> @@ -91,7 +91,7 @@ config FASTBOOT_USB_DEV
->  config FASTBOOT_FLASH
->  	bool "Enable FASTBOOT FLASH command"
->  	default y if ARCH_SUNXI || ARCH_ROCKCHIP
-> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
-> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || DM_SPI_FLASH
->  	select IMAGE_SPARSE
->  	help
->  	  The fastboot protocol includes a "flash" command for writing
-> @@ -119,6 +119,10 @@ config FASTBOOT_FLASH_NAND
->  	bool "FASTBOOT on NAND"
->  	depends on MTD_RAW_NAND && CMD_MTDPARTS
->  
-> +config FASTBOOT_FLASH_SPI
-> +	bool "FASTBOOT on SPI flash"
-> +	depends on DM_SPI_FLASH
-> +
->  endchoice
->  
->  config FASTBOOT_FLASH_MMC_DEV
-> diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-> index 048af5aa823..adedba0bf24 100644
-> --- a/drivers/fastboot/Makefile
-> +++ b/drivers/fastboot/Makefile
-> @@ -5,3 +5,4 @@ obj-y += fb_getvar.o
->  obj-y += fb_command.o
->  obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
->  obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
-> +obj-$(CONFIG_FASTBOOT_FLASH_SPI) += fb_spi_flash.o
-> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-> index 2cdbac50ac4..7697139b622 100644
-> --- a/drivers/fastboot/fb_command.c
-> +++ b/drivers/fastboot/fb_command.c
-> @@ -10,6 +10,7 @@
->  #include <fastboot-internal.h>
->  #include <fb_mmc.h>
->  #include <fb_nand.h>
-> +#include <fb_spi_flash.h>
->  #include <part.h>
->  #include <stdlib.h>
->  #include <vsprintf.h>
-> @@ -344,6 +345,10 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
->  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND))
->  		fastboot_nand_flash_write(cmd_parameter, fastboot_buf_addr,
->  					  image_size, response);
-> +
-> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_SPI))
-> +		fastboot_spi_flash_write(cmd_parameter, fastboot_buf_addr,
-> +					 image_size, response);
->  }
->  
->  /**
-> @@ -362,6 +367,9 @@ static void __maybe_unused erase(char *cmd_parameter, char *response)
->  
->  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND))
->  		fastboot_nand_erase(cmd_parameter, response);
-> +
-> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_SPI))
-> +		fastboot_spi_flash_erase(cmd_parameter, response);
->  }
->  
->  /**
-> diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-> index 9c2ce65a4e5..6775ea397ab 100644
-> --- a/drivers/fastboot/fb_getvar.c
-> +++ b/drivers/fastboot/fb_getvar.c
-> @@ -8,6 +8,7 @@
->  #include <fastboot-internal.h>
->  #include <fb_mmc.h>
->  #include <fb_nand.h>
-> +#include <fb_spi_flash.h>
->  #include <fs.h>
->  #include <part.h>
->  #include <version.h>
-> @@ -123,6 +124,11 @@ static int getvar_get_part_info(const char *part_name, char *response,
->  		r = fastboot_nand_get_part_info(part_name, &part_info, response);
->  		if (r >= 0 && size)
->  			*size = part_info->size;
-> +	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_SPI)) {
-> +		r = fastboot_spi_flash_get_part_info(part_name, &disk_part,
-> +						     response);
-> +		if (r >= 0 && size)
-> +			*size = disk_part.size * disk_part.blksz;
->  	} else {
->  		fastboot_fail("this storage is not supported in bootloader", response);
->  		r = -ENODEV;
-> diff --git a/drivers/fastboot/fb_spi_flash.c b/drivers/fastboot/fb_spi_flash.c
-> new file mode 100644
-> index 00000000000..691be7c7ef7
-> --- /dev/null
-> +++ b/drivers/fastboot/fb_spi_flash.c
-> @@ -0,0 +1,251 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2025 Collabora Ltd.
-> + */
-> +
-> +#include <blk.h>
-> +#include <config.h>
-> +#include <env.h>
-> +#include <fastboot.h>
-> +#include <image-sparse.h>
-> +#include <spi.h>
-> +#include <spi_flash.h>
-> +#include <dm.h>
-> +#include <dm/device-internal.h>
-> +
-> +static struct spi_flash *flash;
-> +
-> +__weak int board_fastboot_spi_flash_write_setup(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +__weak int board_fastboot_spi_flash_erase_setup(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +static int raw_part_get_info_by_name(const char *name,
-> +				     struct disk_partition *part_info)
-> +{
-> +	/* strlen("fastboot_raw_partition_") + PART_NAME_LEN + 1 */
-> +	char env_desc_name[23 + PART_NAME_LEN + 1];
-> +	char *raw_part_desc;
-> +	const char *argv[2];
-> +	const char **parg = argv;
-> +
-> +	/* check for raw partition descriptor */
-> +	strcpy(env_desc_name, "fastboot_raw_partition_");
-> +	strlcat(env_desc_name, name, sizeof(env_desc_name));
-> +	raw_part_desc = strdup(env_get(env_desc_name));
-> +	if (!raw_part_desc)
-> +		return -ENODEV;
-> +
-> +	/* parse partition descriptor: <start> <size> */
-> +	for (; parg < argv + sizeof(argv) / sizeof(*argv); ++parg) {
-> +		*parg = strsep(&raw_part_desc, " ");
-> +		if (!*parg) {
-> +			pr_err("Invalid number of arguments.\n");
-> +			return -ENODEV;
-> +		}
-> +	}
-> +
-> +	part_info->start = simple_strtoul(argv[0], NULL, 0);
-> +	part_info->size = simple_strtoul(argv[1], NULL, 0);
-> +	strlcpy((char *)part_info->name, name, PART_NAME_LEN);
-> +
-> +	return 0;
-> +}
-> +
-> +static int fastboot_spi_flash_probe(void)
-> +{
-> +	unsigned int bus = CONFIG_SF_DEFAULT_BUS;
-> +	unsigned int cs = CONFIG_SF_DEFAULT_CS;
-> +	struct udevice *new, *bus_dev;
-> +	int ret;
-> +
-> +	/* Remove the old device, otherwise probe will just be a nop */
-> +	ret = spi_find_bus_and_cs(bus, cs, &bus_dev, &new);
-> +	if (!ret)
-> +		device_remove(new, DM_REMOVE_NORMAL);
-> +
-> +	spi_flash_probe_bus_cs(bus, cs, &new);
-> +	flash = dev_get_uclass_priv(new);
-> +	if (!flash) {
-> +		printf("Failed to initialize SPI flash at %u:%u (error %d)\n",
-> +		       bus, cs, ret);
-> +		return 1;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int fastboot_spi_flash_unlock(struct spi_flash *flash,
-> +				     struct disk_partition *part_info)
-> +{
-> +	int ret = spi_flash_protect(flash, part_info->start, part_info->size,
-> +				    false);
-> +
-> +	if (ret && ret != -EOPNOTSUPP) {
-> +		printf("Failed to unlock SPI flash (%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static lbaint_t fb_spi_flash_sparse_write(struct sparse_storage *info,
-> +					  lbaint_t blk, lbaint_t blkcnt,
-> +					  const void *buffer)
-> +{
-> +	size_t len = blkcnt * info->blksz;
-> +	u32 offset = blk * info->blksz;
-> +	int ret;
-> +
-> +	ret = spi_flash_erase(flash, offset, ROUND(len, flash->erase_size));
-> +	if (ret < 0) {
-> +		printf("Failed to erase sparse chunk (%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = spi_flash_write(flash, offset, len, buffer);
-> +	if (ret < 0) {
-> +		printf("Failed to write sparse chunk (%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	return blkcnt;
-> +}
-> +
-> +static lbaint_t fb_spi_flash_sparse_reserve(struct sparse_storage *info,
-> +					    lbaint_t blk, lbaint_t blkcnt)
-> +{
-> +	return blkcnt;
-> +}
-> +
-> +/**
-> + * fastboot_spi_flash_get_part_info() - Lookup SPI partition by name
-> + *
-> + * @part_name: Named device to lookup
-> + * @part_info: Pointer to returned struct disk_partition
-> + * @response: Pointer to fastboot response buffer
-> + * Return: 0 if OK, -ENOENT if no partition name was given, -ENODEV on invalid
-> + * raw partition descriptor
-> + */
-> +int fastboot_spi_flash_get_part_info(const char *part_name,
-> +				     struct disk_partition *part_info,
-> +				     char *response)
-> +{
-> +	int ret;
-> +
-> +	if (!part_name || !strcmp(part_name, "")) {
-> +		fastboot_fail("partition not given", response);
-> +		return -ENOENT;
-> +	}
-> +
-> +	/* TODO: Support partitions on the device */
-> +	ret = raw_part_get_info_by_name(part_name, part_info);
-> +	if (ret < 0)
-> +		fastboot_fail("invalid partition or device", response);
-> +
-> +	return ret;
-> +}
-> +
-> +/**
-> + * fastboot_spi_flash_write() - Write image to SPI for fastboot
-> + *
-> + * @cmd: Named device to write image to
-> + * @download_buffer: Pointer to image data
-> + * @download_bytes: Size of image data
-> + * @response: Pointer to fastboot response buffer
-> + */
-> +void fastboot_spi_flash_write(const char *cmd, void *download_buffer,
-> +			      u32 download_bytes, char *response)
-> +{
-> +	struct disk_partition part_info;
-> +	int ret;
-> +
-> +	if (fastboot_spi_flash_get_part_info(cmd, &part_info, response))
-> +		return;
-> +
-> +	if (fastboot_spi_flash_probe())
-> +		return;
-> +
-> +	if (board_fastboot_spi_flash_write_setup())
-> +		return;
-> +
-> +	if (fastboot_spi_flash_unlock(flash, &part_info))
-> +		return;
-> +
-> +	if (is_sparse_image(download_buffer)) {
-> +		struct sparse_storage sparse;
-> +
-> +		sparse.blksz = flash->sector_size;
-> +		sparse.start = part_info.start / sparse.blksz;
-> +		sparse.size = part_info.size / sparse.blksz;
-> +		sparse.write = fb_spi_flash_sparse_write;
-> +		sparse.reserve = fb_spi_flash_sparse_reserve;
-> +		sparse.mssg = fastboot_fail;
-> +
-> +		printf("Flashing sparse image at offset " LBAFU "\n",
-> +		       sparse.start);
-> +
-> +		ret = write_sparse_image(&sparse, cmd, download_buffer,
-> +					 response);
-> +	} else {
-> +		printf("Flashing raw image at offset " LBAFU "\n",
-> +		       part_info.start);
-> +
-> +		ret = spi_flash_erase(flash, part_info.start,
-> +				      ROUND(download_bytes, flash->erase_size));
-> +		if (ret < 0) {
-> +			printf("Failed to erase raw image (%d)\n", ret);
-> +			return;
-> +		}
-> +		ret = spi_flash_write(flash, part_info.start, download_bytes,
-> +				      download_buffer);
-> +		if (ret < 0) {
-> +			printf("Failed to write raw image (%d)\n", ret);
-> +			return;
-> +		}
-> +		printf("........ wrote %u bytes\n", download_bytes);
-> +	}
-> +
-> +	if (ret)
-> +		fastboot_fail("error writing the image", response);
-> +	else
-> +		fastboot_okay(NULL, response);
-> +}
-> +
-> +/**
-> + * fastboot_spi_flash_erase() - Erase SPI for fastboot
-> + *
-> + * @cmd: Named device to erase
-> + * @response: Pointer to fastboot response buffer
-> + */
-> +void fastboot_spi_flash_erase(const char *cmd, char *response)
-> +{
-> +	struct disk_partition part_info;
-> +	int ret;
-> +
-> +	if (fastboot_spi_flash_get_part_info(cmd, &part_info, response))
-> +		return;
-> +
-> +	if (fastboot_spi_flash_probe())
-> +		return;
-> +
-> +	if (board_fastboot_spi_flash_erase_setup())
-> +		return;
-> +
-> +	if (fastboot_spi_flash_unlock(flash, &part_info))
-> +		return;
-> +
-> +	ret = spi_flash_erase(flash, part_info.start, part_info.size);
-> +	if (ret < 0) {
-> +		pr_err("failed erasing from SPI flash");
-> +		fastboot_fail("failed erasing from SPI flash", response);
-> +		return;
-> +	}
-> +
-> +	fastboot_okay(NULL, response);
-> +}
-> diff --git a/include/fb_spi_flash.h b/include/fb_spi_flash.h
-> new file mode 100644
-> index 00000000000..904654748a4
-> --- /dev/null
-> +++ b/include/fb_spi_flash.h
-> @@ -0,0 +1,42 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright 2025 Collabora Ltd.
-> + */
-> +
-> +#ifndef _FB_SPI_FLASH_H_
-> +#define _FB_SPI_FLASH_H_
-> +
-> +#include <part.h>
-> +
-> +/**
-> + * fastboot_spi_flash_get_part_info() - Lookup SPI flash partition by name
-> + *
-> + * @part_name: Named device to lookup
-> + * @part_info: Pointer to returned struct disk_partition
-> + * @response: Pointer to fastboot response buffer
-> + * Return: 0 if OK, -ENOENT if no partition name was given, -ENODEV on invalid
-> + * raw partition descriptor
-> + */
-> +int fastboot_spi_flash_get_part_info(const char *part_name,
-> +				     struct disk_partition *part_info,
-> +				     char *response);
-> +
-> +/**
-> + * fastboot_spi_flash_write() - Write image to SPI flash for fastboot
-> + *
-> + * @cmd: Named device to write image to
-> + * @download_buffer: Pointer to image data
-> + * @download_bytes: Size of image data
-> + * @response: Pointer to fastboot response buffer
-> + */
-> +void fastboot_spi_flash_write(const char *cmd, void *download_buffer,
-> +			      u32 download_bytes, char *response);
-> +
-> +/**
-> + * fastboot_spi_flash_erase() - Erase SPI flash for fastboot
-> + *
-> + * @cmd: Named device to erase
-> + * @response: Pointer to fastboot response buffer
-> + */
-> +void fastboot_spi_flash_erase(const char *cmd, char *response);
-> +#endif
-> -- 
-> 2.50.0
+base-commit: 1a9414936322f0983fb4318505c6697b77e5d358
