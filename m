@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0315DC83F17
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 14:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F30CC83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 14:16:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 559AD8366F;
-	Fri, 18 Jul 2025 16:16:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 227938368E;
+	Fri, 18 Jul 2025 16:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ci9ykNEL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iLX5fj0r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B212F83675; Fri, 18 Jul 2025 16:16:33 +0200 (CEST)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 01B5183692; Fri, 18 Jul 2025 16:16:40 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 511E0835B0
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 16:16:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98584835B0
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 16:16:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-4ab6646476aso13992281cf.3
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 07:16:31 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-73e64e87d49so1272945a34.2
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 07:16:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752848190; x=1753452990; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wP5jVOWtDc028IZglu9NEelTuaE/eI/ppGq5cuTXn1A=;
- b=Ci9ykNELru8bIC31HpogV/ivcU5esMaU6P3LY3xvN8rKvQZEFB3xFGi7q7EANcMqvr
- m/uJTQ1aALg9D8rsGcxYamH+tIBu6DYgxRK1hfygeYV/IPIXWjbfza3jeLXfA/RlPc8I
- Ie0y5kr9KSrV4uOkIozLO4mXCgyXDrycxVPNGKUEElXA7XQMeBqgPJRk7YU2NqSRedwD
- 1so96Rrkbe/E48k8d47RXBvGq1JOhr3TvZDbX+R72Xq8ObundkqapzXt+zSqkpSUK0MF
- H4AGwt2a6b3Wwv6XW1QDF0Lrr6e66RCKHmzOq8ZijkxSgHvOz5/Dtkc24rrdI/7nEL4H
- nhuA==
+ d=linaro.org; s=google; t=1752848195; x=1753452995; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IC1W6nahJ+JFbZN6XmVSp/n+nKuL7YvvO5Oi+In2FVs=;
+ b=iLX5fj0rg77QLLVjAykOQtFdqneezRmgs58KNFSCPMvd+akHRCwf6uUOrhZSZHjvuF
+ 20fT5q+9OgooLYTOffsde7iVc96jYbJUbc3WGDjiCpsL0kpWPyvq9yI6BYpnbzJ7M0ki
+ xNwekG1mJ9n/yLRnkUQyTqoJ+IjO3OsNGCpKZe4xbDJIRakQn70IRB3fa5kHnI95MT3+
+ 0qCAFbVcK9IVdfqWULk4rrTdO1rqo6bQbKgM5BQN3MGIsdu69HtwdSOncOSO+6rlW0s6
+ rO8JMeDkmIaaGPV42mPRTaMGtl/PkHx0p53fwCtfvB3wtxGpHYok1obklfG16VIwI8UX
+ HRug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752848190; x=1753452990;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wP5jVOWtDc028IZglu9NEelTuaE/eI/ppGq5cuTXn1A=;
- b=AHwzNMNhdF4gHzqF8wZAcfDvTs9laNDS0Q4yHkemxBKz3BBaeXf2ZXvM6lVVCuVR7H
- aASYVZO8uMOpF0Tpg0t6ovWpf6N9LHqx6YvT91oVqP+A3COh/Dltqb1xYinyGXP+GSM0
- PursjgIiAyvXKPTUXDPFhOArqZTVZJylYRyrB2eOm90seor9JwW7SEC+y4UqSnYJ2p6q
- alCbdy2ALvxVOAg+9JzNOQCsg+1+3l8t3IKbVu5RWcfFFmgNHCOOMhdx9MHxfZM9r5ou
- ZdxbflZTComwBkRlEHfQcpGjkSfHzw3wf17V/zJoPV5tWos6AYykN3sTinNQzr6xTRv1
- bhMw==
-X-Gm-Message-State: AOJu0YxlF4niD/ZhdxQnVPY5PFK+E5ucmfr8cO+8bxyIvuiXLeyV+SMF
- GpWnKkS56AZ0lNsxZinWaN8RkD9Nn36snCPTZIh/UwY56s+fB9uhasRPB4HWAxRfhT0nnT3Wlp7
- FgOc7
-X-Gm-Gg: ASbGncu5pEI2eGGimobs2bdZ3zKkRvy6nPXUXj3+qCrjWDiamBqygOxJ7DEck5e2PJi
- oU8Yd4l87c0paM55YmR0i4bCKfwYzEKdZi9ZVebl/Kbz3nhSeWZqjsvOjbFKDBHitXVVVs0OtNM
- BB2mDwNMwxwoDn4no9eth4Am+figralSttYQ4jsM2nfxWHVTRrzBoNjG+B7H3QJVpbSczb4U3gy
- 3PtARC93vTXbC0NsmZVKs1wRaXbIbt1obtYacNwbuZTUhqCQq8lgf29ixBCZ1YoaW45B1QuViy3
- iYWmmXOU/VDLN3z217YfyECo8xcziF273MktMeA35tCLC0hrozi7hYKVPiXuBzOEPC4pxFCiOVC
- RAvBvcCVbv1sq3qQfLIBFy4g8wB+IcRfF0Jig1K2kZJfDNKozFk9Zand5vTOrOkt3+KFaP57WcO
- P55rSA4KM=
-X-Google-Smtp-Source: AGHT+IH5Z4Qo1LXnYur/hsk82dKwbXWwO+Gn3GyFmOuJKURthiiZgEoNp20uvHyV6RH/kUfro2qwTQ==
-X-Received: by 2002:a05:622a:206:b0:4ab:65c3:37d0 with SMTP id
- d75a77b69052e-4aba3d93e26mr105264521cf.31.1752848189147; 
- Fri, 18 Jul 2025 07:16:29 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752848195; x=1753452995;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IC1W6nahJ+JFbZN6XmVSp/n+nKuL7YvvO5Oi+In2FVs=;
+ b=MjneK1pbJ93cTeKxVQKeWUSmZnPzQw+ZfQp/KuRmLlVKxtvv1bsI+zpoBaZ6Qduhc8
+ amWuVg9LJRLXnogCK+8yhUbgd9N1oOOGagHVcZGwK6VEjWmXLNvBbwvRdmohgJFw73Mj
+ vMlCpKIT0qIrBHHLZsqltF0w24MG5QleGeshMO1tzftafYwyooSB5VVpABI3/13sNaA0
+ HCIbExZScMMv29+L59QJSeWgI5BXLestmKO3iNvH/hoIwXc+RrfGrZ/yBbZ40u/Ng7HJ
+ 9y2WB+lfmCvWHfJeek4c7DTxznMqXNr5MUEmLBGGtIv+gBydaHAaV/8OtPth9ibzYjYr
+ ep3A==
+X-Gm-Message-State: AOJu0YxswXyzVvu2901bFpgh5Vl7LIn7u/0M1OByQNi3KuMPyb6xq4wv
+ eb8sLEqPaReIyexZBsjnjG+3JaE3f9CHKJVKv7eJe8fjvyxr3IezsH7IZh2/fQAVc9J/wRFr5PR
+ ndVn7
+X-Gm-Gg: ASbGnctW5kELSXevYGBWlwljVQ9eeFoTQxgAD4I4v1JsIwe2pLb7Uv/mVFBNN15JpZy
+ 3pDmuZsynkXY7ybvgZpgugwCd68Mgz5cnXsv3/SWut/XZ4bNOrcB5sfDs7+L/IX2lWoHvtBtXZO
+ Z6jtrIMuKd0b4VLc3/YzaGy6+ValOqlPN86ap22Wt5Y2RO1VRTdQdEvlQ5Ee7MDR8YJ+wAovRaR
+ UdrClI25jwSeDJ8SSTsWYfA779WwI37xKXLOYrxFxJCNu7u/6Up8VM5fMsr00wTaNQRbXvE2Pnv
+ a/WIhNsO728zZBiXVRqMOnlLqVXMQ5UjdSpUi7ZXS46Tqo2sOgSVLsJGUrCH/3qXiDqb9X2RePR
+ 4Ma9GDjbSYxL4ZzlsWAyYM28n655PoGFrLqUer+8s4py0tH0lwwh/v26MLyQLXu4BF0F19FyRBD
+ dGpA5TMo4=
+X-Google-Smtp-Source: AGHT+IFzX3IeMIi67VzpB//GqaLzTLpaS627XkAi3YxEqKV2Ctm+ZPL6oh2oEiF4Fn3fWuhNF2WNRg==
+X-Received: by 2002:a05:6830:4d87:b0:735:27:2703 with SMTP id
+ 46e09a7af769-73e66625210mr9000417a34.26.1752848195541; 
+ Fri, 18 Jul 2025 07:16:35 -0700 (PDT)
 Received: from ubuntu.localdomain (173-206-114-64.cpe.distributel.net.
  [173.206.114.64]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4abb499e91csm7558341cf.19.2025.07.18.07.16.27
+ d75a77b69052e-4abb499e91csm7558341cf.19.2025.07.18.07.16.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 07:16:28 -0700 (PDT)
+ Fri, 18 Jul 2025 07:16:35 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
@@ -78,19 +79,21 @@ Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
  Harrison Mutai <harrison.mutai@arm.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
  Matthias Brugger <mbrugger@suse.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v3 0/6] Add support for DT overlays handoff
-Date: Fri, 18 Jul 2025 07:16:13 -0700
-Message-Id: <20250718141621.3147633-1-raymond.mao@linaro.org>
+Subject: [PATCH v3 1/6] bloblist: add blob type for DT overlay
+Date: Fri, 18 Jul 2025 07:16:14 -0700
+Message-Id: <20250718141621.3147633-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250718141621.3147633-1-raymond.mao@linaro.org>
+References: <20250718141621.3147633-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,47 +112,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The series include refactoring on bloblist and fdtdec to support handoff
-of multiple DT overlays and applying them into the DT base during setup.
-All changes are aligned to the spec update for supporting DT overlay
-handoff[1].
-
-Notes for testing:
-
-Currently DT overlay is not yet enabled in TF-A, but with the test patches
-I provided for TF-A and OP-TEE build, importing a DT overlay blob file from
-QEMU to TF-A reserved memory is supported.
-Follow below instructions to build and run for test:
-$ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml
-Replace your local qemu_v8.xml with [2], which contains all necessary
-changes in both TF-A and OP-TEE build.
-$ repo sync
-$ cd build
-$ make toolchains
-$ make ARM_FIRMWARE_HANDOFF=y all
-Copy and rename your DT overlay blob as 'qemu_v8.dtb' into out/bin
-$ make ARM_FIRMWARE_HANDOFF=y run-only
+Add blob type for DT overlay according to the update of Firmware
+Handoff spec[1].
+Add an inline header to represent the 'subtype' in a DT overlay
+blob payload.
 
 [1] Add Transfer Entry for Devicetree Overlay
 https://github.com/FirmwareHandoff/firmware_handoff/pull/74
 
-[2] https://github.com/raymo200915/optee_manifest/blob/dt_overlay_handoff/qemu_v8.xml
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+Changes in v2:
+- Add inline header for 'subtype'.
+Changes in v3:
+- None.
 
-Raymond Mao (6):
-  bloblist: add blob type for DT overlay
-  bloblist: add helper functions
-  bloblist: fix a potential negative size for memmove
-  bloblist: add API for applying blobs with specified tag
-  fdtdec: apply DT overlays from bloblist
-  configs: Select OF_LIBFDT_OVERLAY to hand over DTO via bloblist
+ common/bloblist.c  |  1 +
+ include/bloblist.h | 13 ++++++++++++-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
- common/bloblist.c                       | 67 ++++++++++++++++++++-
- configs/qemu_arm64_defconfig            |  1 +
- configs/vexpress_fvp_bloblist_defconfig |  1 +
- include/bloblist.h                      | 34 ++++++++++-
- lib/fdtdec.c                            | 80 +++++++++++++++++++++++++
- 5 files changed, 181 insertions(+), 2 deletions(-)
-
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 6e4f020d7c4..1c690f58b56 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -43,6 +43,7 @@ static struct tag_name {
+ 	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+ 	{ BLOBLISTT_TPM_EVLOG, "TPM event log defined by TCG EFI" },
+ 	{ BLOBLISTT_TPM_CRB_BASE, "TPM Command Response Buffer address" },
++	{ BLOBLISTT_FDT_OVERLAY, "DT overlay" },
+ 
+ 	/* BLOBLISTT_AREA_FIRMWARE */
+ 	{ BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f32faf78560..c2d3065a43c 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -110,7 +110,8 @@ enum bloblist_tag_t {
+ 	BLOBLISTT_ACPI_TABLES = 4,
+ 	BLOBLISTT_TPM_EVLOG = 5,
+ 	BLOBLISTT_TPM_CRB_BASE = 6,
+-	BLOBLISTT_ACPI_PP = 7,
++	BLOBLISTT_FDT_OVERLAY = 7,
++	BLOBLISTT_ACPI_PP = 8,
+ 
+ 	/* Standard area to allocate blobs used across firmware components */
+ 	BLOBLISTT_AREA_FIRMWARE = 0x10,
+@@ -231,6 +232,16 @@ enum {
+ 	BLOBLIST_REC_HDR_SIZE		= sizeof(struct bloblist_rec),
+ };
+ 
++/*
++ * struct dto_blob_hdr - Blob inline header for BLOBLISTT_FDT_OVERLAY
++ *
++ * @subtype: IMP-DEF per the agreement between the DT overlay producer and
++ *	consumer. Default value is 0.
++ */
++struct dto_blob_hdr {
++	u64 subtype;
++};
++
+ /**
+  * bloblist_check_magic() - return a bloblist if the magic matches
+  *
 -- 
 2.25.1
 
