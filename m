@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A8CC83F17
-	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 14:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB678C83F1A
+	for <u-boot@archiver.kernel.org>; Fri, 18 Jul 2025 14:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 274B6836BE;
-	Fri, 18 Jul 2025 16:16:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2F64836A3;
+	Fri, 18 Jul 2025 16:17:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i9fjN2MR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NV/ZM+uP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7991836B4; Fri, 18 Jul 2025 16:16:56 +0200 (CEST)
+ id 35EA3836B4; Fri, 18 Jul 2025 16:17:03 +0200 (CEST)
 Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
  [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75974835B0
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 16:16:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C97EF835B0
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 16:16:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
 Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-4ab644b8dc1so22542151cf.1
- for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 07:16:54 -0700 (PDT)
+ d75a77b69052e-4ab7082b3f7so27492051cf.3
+ for <u-boot@lists.denx.de>; Fri, 18 Jul 2025 07:16:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752848213; x=1753453013; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1752848218; x=1753453018; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8u4BlrqMLJf/f5/wEcAL9DYvdP6nERV08kGu7lVRSu0=;
- b=i9fjN2MRCewHGDIASKODsk5SIKBkEZX5EWd69dljNyYvzIeB7llR+IPZFGNZVc8pHq
- Jjr7K+99IaFQ232cbQdht9b7xIWqVCjxQOBLBXo1OTXCZ1+SqTOsZ+wzWv57JTatFlAA
- f+5fp5xyVav6tsR4JhWxamGsdpfmnE6MiIDhps4yVHKU3fbSKKUTJo+1n+CINg+uLyxm
- q5LziU0R7HahiXEozUtWotxxe5mt86szsCq4NcbV3bw3PFx/vQQFWAeTuE1RhOHcHubK
- giF6MIxVBbTo+vkdVxifgtdI/EtVuYi8zNUENk6Do9/KxAPPqrg+qZ6VP6vY8NDG1ZM1
- PijA==
+ bh=lWdGtDByt/SJHSwQq5K8baz5B2xR7NDfkgL1LkvkTIc=;
+ b=NV/ZM+uP1dR4kAd3MDhbJ1TBzVl3erSIx85V7gc8xTHuCUDg3i2HNWC2z+Qp/4lmVH
+ o/z+bINFcM4Sf8Aeun5ZLzx6RLjELxJ47ey+8ZTyXAG6HfZYp5/2sX+zjZOa7oAJq61k
+ MkocljX9lAnZmZkTvpg//BKlGB1XClgbco1EP85pKgcd4GTdkeH66E09DuDJCKPobF9x
+ HMPEWG2GBBc2iw1syOqFgyPLogncNFsj2ruy38bh4l4UXAx+MKAUHvVbo6Bys4P9NW7r
+ kIdU1PqOqJG3X9Xux5I0rKXRhkA0bJQ7oWRnv3hna7fXd8jQCqEqnazpqp/KzDIZwXQE
+ Mb9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752848213; x=1753453013;
+ d=1e100.net; s=20230601; t=1752848218; x=1753453018;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8u4BlrqMLJf/f5/wEcAL9DYvdP6nERV08kGu7lVRSu0=;
- b=Q88U+I+NPinBu3mj25A5ZeIBD5jRY7ufQNhok55gN+Sy5p16VKCOlrJXFzDGNPid3C
- qxuHvzddPwIVDXDr9IYarLJmG+A9gKuOUN+SZ9G32fdA48uZiCpOhsLkm9M60rDQp/Rf
- ZAmlLy0VjRDdCNtbpnQ1xZvZRmA8FWVX2PZR+4wsw12QSTwyL45c8xrddycsqPw9pQ3o
- l9PH6JaQiYc4K8xL+SxQNOssAQmqYESSAokpplWRpaSq4LbOylDQP2qP5XBDihTidyPN
- AdRXHhnXCjKjuSPG4mdmTNbSL+RuMvwLqqZ7C3OnS4y+Znh1Gwyievkkk2TokNZzdAkC
- kXSA==
-X-Gm-Message-State: AOJu0YxMzUBgZ4DufNiAnRhRt+uGMxi/Y2Btj//TQIoKz36ss1OkUJmJ
- Qq+NZwmfveNr7DAAIqEy2YSRqVsqOVgRVIo7Y9AzLerZYzthklS8cTj6S5TZoSDIsfMmUshV8QE
- DPnR+
-X-Gm-Gg: ASbGncvZfHkhnfg8kdXxdTgXmmSdu2TwMijRBAuU8h9Czk0qv48Ua06Jh2gs1CTpPP6
- TU0i62uC8imkwS5lhT2eM5ikKb4WmVt/VinPihxH0foqT8y+ZcoZ9DlE6Y2oDcGpjT29owICdhu
- fzUm0H4vow34P2tQr3LhC7rRPgfXrKSGMH/GaOVpGXQ5UNj6oecGApWo4p++2FuNX8b0+Fm56Pb
- 4AtV7IzKuQ2iBGl1ctLJcDIqgpXo2aEoEv1GfVtIMFmq9GBCmxTi3+FAS6Zc9h0wr3LCjukPAgs
- cXFrzW4UeSZz/DZV7fRDOn8aXEKtAzkx96taOdVdvfPFl7qMlJs9pTAEE4BoU8wMn2TDyJYxFyv
- a88HaL41d/5b/jTB+iT0DUkenIC59thBPJnCOUwuGxepNiZlxlHeQEOUsnHwEmjk5uLsvm9JGrQ
- 2mBUmjiqE=
-X-Google-Smtp-Source: AGHT+IFJNaa50kz8NwePhqe7XVd6xzyXHynWj/t81V1yL8F/oQUQqsTegGxwvoJ/gCtRcW7MtNR5Tg==
-X-Received: by 2002:a05:622a:93:b0:4a9:ace0:b24e with SMTP id
- d75a77b69052e-4ab93dbe35emr154867781cf.37.1752848212760; 
- Fri, 18 Jul 2025 07:16:52 -0700 (PDT)
+ bh=lWdGtDByt/SJHSwQq5K8baz5B2xR7NDfkgL1LkvkTIc=;
+ b=Xz16RGXWm1tFk8POdqwZHunOsqUvPNjVk6r4/KRpqrmiBuixzT0tAobAWr87fLwSs3
+ drjUo7cls2ainLK1mYuttcqUWmVYdH1P9mpQauXjZuo2jtJ76rDNsSowH0sT9ozyrrY1
+ dmnfoN8AfwOg7WoKC0VsMn7cCe8M0cUXZN2YLvHR/7EBkyePgX9Vz7901/mZxlVRScVP
+ GtubnQdR0O/vGo7gJ/LUn7ChWzmTnb/jvStg9RTgAXHjGJngggHbPD5G0OaQJ7SUzLDE
+ GlmkDGpMG9NZXIJSVThoXHxJZM8YdHvN2EfSP6gXiB78oITBjzK6yphfR4Fz2mm5NrSU
+ ny7A==
+X-Gm-Message-State: AOJu0YzWBjNFfmWaoqJIPWML20KeDUGP+B3nEoc0LDqCPrxxjWTXujoO
+ 6R5wqdSTKdgMVhqcepwy8iiG630CyxOjgXfxQibY+1IDNqbx5lvgindFbS1pR+QX22kBRQJ0kKT
+ kMQEK
+X-Gm-Gg: ASbGnctQPORbJK6WydYwZUJeDoFRty66gxf9DRC5QVYn9CvnPWUrvqOlGbAQ/2r6j4G
+ FyFKTevVgTRgTDA2Se6rJaEk2/T4yR2RFBDMOhEIe5o+GaxTHXZeMUkffb0hgPp3EXzHnW/aSSq
+ cQwmkqk8x6ObGyQt4oHoUuAMS7v2eVarxc8b8wAPPWzLSME5qS1ti718uWITt4KJLsfJYgVgdJb
+ iH7zCx/CIdFqK44NdAYXIZtorw2DagkHf0jNq7mAvDVOSCd1ziLjvwrWAKl2Jb4x4dLJ1K4g9xh
+ k1tyM5luM5sfHjoxKxYRzF5DYimPvNWU2ih0pRtIZI8AE6PK6do06UcIx2UtU178YyBOljuRQoA
+ AaxEez9aJEAIbfIep0DKMw/yP0KPk8LxjJENsRCTP4K4/fD2zLtzSxhYvbGxux3RdtNm8V/284z
+ rUdHnGzAM=
+X-Google-Smtp-Source: AGHT+IGKdVx5Xlsp825ksAVqkonNs3EtAGbRSZ0gmm23ztQd4sNtd08Ndk4gPG2IRA/lIxWWyb/cSA==
+X-Received: by 2002:a05:622a:610:b0:4ab:66d1:dcdd with SMTP id
+ d75a77b69052e-4ab93d814demr226871561cf.39.1752848217747; 
+ Fri, 18 Jul 2025 07:16:57 -0700 (PDT)
 Received: from ubuntu.localdomain (173-206-114-64.cpe.distributel.net.
  [173.206.114.64]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4abb499e91csm7558341cf.19.2025.07.18.07.16.51
+ d75a77b69052e-4abb499e91csm7558341cf.19.2025.07.18.07.16.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 07:16:52 -0700 (PDT)
+ Fri, 18 Jul 2025 07:16:57 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
@@ -83,14 +83,15 @@ Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Harrison Mutai <harrison.mutai@arm.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
  Matthias Brugger <mbrugger@suse.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v3 4/6] bloblist: add API for applying blobs with specified tag
-Date: Fri, 18 Jul 2025 07:16:17 -0700
-Message-Id: <20250718141621.3147633-5-raymond.mao@linaro.org>
+Subject: [PATCH v3 5/6] fdtdec: apply DT overlays from bloblist
+Date: Fri, 18 Jul 2025 07:16:18 -0700
+Message-Id: <20250718141621.3147633-6-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250718141621.3147633-1-raymond.mao@linaro.org>
 References: <20250718141621.3147633-1-raymond.mao@linaro.org>
@@ -112,135 +113,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an API to search for the blobs with specified tag and use the
-hook function to apply the blob data.
-Add a helper function to return the inline header size as according
-to recent spec[1] updates, the actual data can be following an inline
-header instead of following the TE header immediately.
+During FDT setup, apply all existing DT overlays from the bloblist
+to the base FDT if bloblist is being used for handoff from previous
+boot stage.
+According to the Firmware Handoff spec update to support DT overlay [1],
+an overlay must have the same top-level compatible string as its target
+base DT has.
+Before applying the overlays, check whether sufficient space is
+reserved in the base DT blob, if not, resize the blob to the allowed
+padded size, which is limited by CONFIG_SYS_FDT_PAD and the bloblist
+spare space size.
+After all overlays are applied, resize the merged DT to its actual size.
 
-[1] Firmware Handoff spec:
-https://github.com/FirmwareHandoff/firmware_handoff
+[1] Add Transfer Entry for Devicetree Overlay
+https://github.com/FirmwareHandoff/firmware_handoff/pull/74
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2:
-- Add inline header into the blob payload.
-- Add arg 'size' to 'bloblist_apply_blobs()' for more general purpose.
+- Add more details into the commit message.
+- Check and compare the top-level compatible string of DT/DTO.
+- Check the reserved space in the base DT region, and skip resizing if
+  the space is sufficient.
+- Move the DT space shrinking to the end after all DT overlays are
+  applied.
 Changes in v3:
-- Add including errno.h.
+- Move resizing to the beginning and only do one time.
+- The max size to resize depends on SYS_FDT_PAD and the spare space left
+  in the bloblist.
+- Renaming and misc refactoring.
 
- common/bloblist.c  | 51 ++++++++++++++++++++++++++++++++++++++++++++++
- include/bloblist.h | 21 +++++++++++++++++++
- 2 files changed, 72 insertions(+)
+ lib/fdtdec.c | 80 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 80 insertions(+)
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 550c0c78ffc..2b5026e00da 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -235,6 +235,19 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
- 	return 0;
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index c38738b48c7..630b7d2bd69 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1687,6 +1687,83 @@ void fdtdec_setup_embed(void)
+ 	gd->fdt_src = FDTSRC_EMBED;
  }
  
-+static int bloblist_get_blob_data_offset(uint tag)
++static int fdtdec_match_dto_compatible(const void *base, const void *dto)
 +{
-+	switch (tag) {
-+	case BLOBLISTT_FDT_OVERLAY:
-+		return sizeof(struct dto_blob_hdr);
-+	/*
-+	 * return the data offset if it is not following the blob
-+	 * header immediately.
-+	 */
-+	}
-+	return 0;
-+}
++	const char *compat_base;
++	const char *compat_dto;
++	int len;
 +
- void *bloblist_find(uint tag, int size)
- {
- 	void *blob = NULL;
-@@ -261,6 +274,44 @@ void *bloblist_get_blob(uint tag, int *sizep)
- 	return (void *)rec + rec_hdr_size(rec);
- }
- 
-+int bloblist_apply_blobs(uint tag, int (*func)(void **data, int size))
-+{
-+	struct bloblist_hdr *hdr = gd->bloblist;
-+	struct bloblist_rec *rec;
-+
-+	if (!func || !hdr)
++	compat_base = (const char *)fdt_getprop(base, 0, "compatible", &len);
++	if (!compat_base || len <= 0)
 +		return -ENOENT;
 +
-+	foreach_rec(rec, hdr) {
-+		/* Apply all blobs with the specified tag */
-+		if (rec_tag(rec) == tag) {
-+			int ret;
-+			int tag = rec_tag(rec);
-+			void *blob = (void *)rec + rec_hdr_size(rec);
-+			int dat_off = bloblist_get_blob_data_offset(tag);
++	compat_dto = (const char *)fdt_getprop(dto, 0, "compatible", &len);
++	if (!compat_dto || len <= 0)
++		return -ENOENT;
 +
-+			blob += dat_off;
-+			ret = func(&blob, rec->size - dat_off);
-+			if (ret) {
-+				log_err("Failed to apply blob with tag %d\n",
-+					tag);
-+				return ret;
-+			}
-+
-+			rec = rec_from_blob(blob - dat_off);
-+			if (rec <= 0) {
-+				log_err("Blob corrupted\n");
-+				return -ENOENT;
-+			}
-+
-+			/* Mark applied blob record as void */
-+			void_blob(rec);
-+		}
-+	}
++	if (strcmp(compat_base, compat_dto))
++		return -EPERM;
 +
 +	return 0;
 +}
 +
- void *bloblist_add(uint tag, int size, int align_log2)
- {
- 	struct bloblist_rec *rec;
-diff --git a/include/bloblist.h b/include/bloblist.h
-index c2d3065a43c..e67b2a76358 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -73,6 +73,7 @@
- #define __BLOBLIST_H
- 
- #include <mapmem.h>
-+#include <linux/errno.h>
- 
- enum {
- 	BLOBLIST_VERSION	= 1,
-@@ -279,6 +280,26 @@ static inline void *bloblist_get_blob(uint tag, int *sizep)
- }
- #endif
- 
-+#if CONFIG_IS_ENABLED(BLOBLIST)
-+/**
-+ * bloblist_apply_blobs() - Apply the data of blobs by tag
-+ *
-+ * Scan the bloblist, find the blobs with the matching tag and apply the data
-+ * of blobs
-+ *
-+ * @tag:	Tag to search for (enum bloblist_tag_t)
-+ * @func:	Function to apply the data of blobs
-+ * Return: 0 if OK, otherwise error.
-+ */
-+int bloblist_apply_blobs(uint tag, int (*func)(void **data, int size));
-+#else
-+static inline int bloblist_apply_blobs(uint tag,
-+				       int (*func)(void **data, int size))
++static int fdtdec_apply_dto_blob(void **blob, __maybe_unused int size)
 +{
-+	return -EPERM;
-+}
-+#endif
++	int ret;
 +
- /**
-  * bloblist_find() - Find a blob
-  *
++	ret = fdt_check_header(*blob);
++	if (ret)
++		return ret;
++
++	ret = fdtdec_match_dto_compatible(gd->fdt_blob, *blob);
++	if (ret)
++		return ret;
++
++	return fdt_overlay_apply_verbose((void *)gd->fdt_blob, *blob);
++}
++
++static int fdtdec_apply_bloblist_dtos(void)
++{
++	int ret;
++	struct fdt_header *live_fdt;
++	int blob_size;
++	size_t padded_size, max_size;
++
++	if (!CONFIG_IS_ENABLED(OF_LIBFDT_OVERLAY) ||
++	    !CONFIG_IS_ENABLED(BLOBLIST))
++		return 0;
++
++	/* Get the total space reserved for FDT in blob */
++	live_fdt = bloblist_get_blob(BLOBLISTT_CONTROL_FDT, &blob_size);
++	if (live_fdt != gd->fdt_blob)
++		return -ENOENT;
++
++	/* Calculate the allowed padded size */
++	padded_size = fdt_totalsize(live_fdt) + CONFIG_SYS_FDT_PAD;
++	max_size = bloblist_get_total_size() - bloblist_get_size() + blob_size;
++	if (padded_size > max_size)
++		padded_size = max_size;
++
++	/* Resize if the current space is not sufficient */
++	if (blob_size < padded_size) {
++		ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, padded_size);
++		if (ret)
++			return ret;
++
++		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
++		if (ret)
++			return ret;
++	}
++
++	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY, fdtdec_apply_dto_blob);
++	if (ret)
++		return ret;
++
++	/* Shink the blob to the actual FDT size */
++	fdt_pack(live_fdt);
++	return bloblist_resize(BLOBLISTT_CONTROL_FDT, fdt_totalsize(live_fdt));
++}
++
+ int fdtdec_setup(void)
+ {
+ 	int ret = -ENOENT;
+@@ -1708,6 +1785,9 @@ int fdtdec_setup(void)
+ 				gd->fdt_src = FDTSRC_BLOBLIST;
+ 				log_debug("Devicetree is in bloblist at %p\n",
+ 					  gd->fdt_blob);
++				ret = fdtdec_apply_bloblist_dtos();
++				if (ret)
++					return ret;
+ 				goto setup_fdt;
+ 			} else {
+ 				log_debug("No FDT found in bloblist\n");
 -- 
 2.25.1
 
