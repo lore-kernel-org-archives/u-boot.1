@@ -4,82 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 133F1C83F27
-	for <u-boot@archiver.kernel.org>; Sat, 19 Jul 2025 22:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B70C83F27
+	for <u-boot@archiver.kernel.org>; Sat, 19 Jul 2025 23:06:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 328C6832E6;
-	Sun, 20 Jul 2025 00:57:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1801B832F9;
+	Sun, 20 Jul 2025 01:06:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=on-the-web.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=smtpservice.net header.i=@smtpservice.net header.b="ymf35mc+";
-	dkim=pass (2048-bit key; unprotected) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="hT/WxAw8";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=smtpservice.net header.i=@smtpservice.net header.b="nrzw+m0/";
+	dkim=pass (2048-bit key; unprotected) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="ZryfymsR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEA0D832F9; Sun, 20 Jul 2025 00:57:33 +0200 (CEST)
+ id 9C3C88334F; Sun, 20 Jul 2025 00:21:46 +0200 (CEST)
 Received: from e3i311.smtp2go.com (e3i311.smtp2go.com [158.120.85.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9B2283096
- for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 00:57:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0CD182C87
+ for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 00:21:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=on-the-web.ch
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounce.4pe2pfqm95qcyg6=l6omje7k6w8q=0cils6ldq58c2q@em923567.on-the-web.ch
+ smtp.mailfrom=bounce.py73rikruk5tiy5=2yy6wneldseb=426epkjxf2olgx@em923567.on-the-web.ch
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smtpservice.net;
- i=@smtpservice.net; q=dns/txt; s=a1-4; t=1752965843; h=feedback-id :
+ i=@smtpservice.net; q=dns/txt; s=a1-4; t=1752963694; h=feedback-id :
  x-smtpcorp-track : date : message-id : to : subject : from : reply-to
  : sender : list-unsubscribe : list-unsubscribe-post;
- bh=cLj2sQo9VUpAtsZa01wSUz1lMqPODl9ds1+nHtPsh2c=;
- b=ymf35mc+tsTrAxTsVb85WLlXAaTrXqPNweLlaDOzbxehnvX5AU80uXYVqtX39ETpVFyt1
- 9smgMZwkg+7WUlNWv58jns2woezBS1TD9k5VB/c07/kkykk9o5ZdJOYazPbjCu89C00Swsh
- fOyQdfnwsjVR2eEODJ2HbtN+RDMKykMlDvGsxzCWzT3TcRUsh6Yt/t9WG+Lin9Z9jUn0RE2
- dwQnew0tE9fRFD8IJVbLTGnSxcG7QK/FSnSVhapSlSthSYgfzWYUJDIFFGBbz8kbMz1icJL
- yXlRUmSw/MJYHW91CWRs3hT3iBTx76vgjcYS67a21SeCW59wem5RRcZbwKeQ==
+ bh=jPOc8G9HVTAHw2x9qxJoM5amO1xd7P7NshCRTPSWblQ=;
+ b=nrzw+m0/AxAWmxuazfBY0GXdl5sVBjHtxlxEpCIf8DpvZiRiU4Sc+4Prx5IwEXujqx3sh
+ PdsyALGWh260h1wonlKZeG55FY7smCftTCen/0ZAsggjsPPZTdk647ubqq9soxCKUEM7fYq
+ gAnY9M7Uog1okjVK/9LgM+OYV3awk+Qffn3PdGkcV3UTncmgmAra2DupHB1sd4inK+9hjFJ
+ p/PlFHCwXPHl34U/SN0VzSRT3YudR9pWGXaE/bPEzlteRMfIT1dckB7jxmfHlVcZV/U/oBO
+ jACPUc2CPeIfLt4gLooGFmx4DanQgeNHqxXSH1p3QXmw1goVlOXAEd6CsOUw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=on-the-web.ch;
- i=@on-the-web.ch; q=dns/txt; s=s923567; t=1752965843; h=from : subject
+ i=@on-the-web.ch; q=dns/txt; s=s923567; t=1752963694; h=from : subject
  : to : message-id : date;
- bh=cLj2sQo9VUpAtsZa01wSUz1lMqPODl9ds1+nHtPsh2c=;
- b=hT/WxAw8KxXzFrT6ddpFXobU2X6b8gOIwRPLDAoyp+sBSvhmlFvmiLxotWRWyh3b1KVB9
- 1N9gLKS70si9nyfnZypaSFsixqE6kxhoLMYkR79clgcg/xi9V2iORd8Eq/jcKSgDQuzCpFJ
- CrU0z1/HtPtRyvbhKh9Kcv2Yxy16p9u5Chto7HqFgwo6coYrnqupHaIEd03It+GXKEb+jHa
- YSDGGQ2OMQOdE7lQNmMHS7uZa02K886vLLmogECf4nL6GW/b0KdM0e7XhEwfaU/hkULRhIP
- slFQVxiN9jw8YTOyCpEaK8GPzKrbYGsQROFCmfupcwse33KJ95JxY/uHXoEQ==
+ bh=jPOc8G9HVTAHw2x9qxJoM5amO1xd7P7NshCRTPSWblQ=;
+ b=ZryfymsREVI5W7wQpqRqKNSfAsM2oHd7+nX852VJHzVUd290pLW6u8Q/3UoEFSpuo31c/
+ UnEr/YcCP7ZvQcJKzEg+qdBqn50ZmBsedHfg3MOI5TMANz3DWFRz8bj8Ov7l58HVRVWpruI
+ CqzcFtQhbHNhdf50OAmDBzZpSJxZifuO9eDjFDnla7fxZt5PcxBWPgDvny2nkfX8NlNY97x
+ f9SGlduzVHVXeMBsFCy2kO7BoIDBauR0EgG5prZPWdZtEOyMXEnR4XO/5wRfko57pUNw1Aq
+ 5AqQMszlm8eWBfFtVut6Wj0T7SFmXANtya115oLPI1kU12YrBlQnpIyWhF6g==
 Received: from [10.34.231.120] (helo=SmtpCorp) by smtpcorp.com with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
  (Exim 4.96-S2G) (envelope-from <sputnik@on-the-web.ch>)
- id 1udFOt-U24cwK-39; Sat, 19 Jul 2025 21:47:24 +0000
+ id 1udFOn-U24cpc-1Q; Sat, 19 Jul 2025 21:47:17 +0000
 Received: from [10.114.245.143] (helo=ch-web-troubles-5500.home)
  by smtpcorp.com with esmtpsa
  (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
  (Exim 4.98.1-S2G) (envelope-from <sputnik@on-the-web.ch>)
- id 1udFOs-FnQW0hPvgzA-ndy2; Sat, 19 Jul 2025 21:47:22 +0000
+ id 1udFOm-FnQW0hPvgzA-kCan; Sat, 19 Jul 2025 21:47:16 +0000
 From: Martin Herren <sputnik@on-the-web.ch>
 To: u-boot@lists.denx.de
-Cc: Martin Herren <sputnik@on-the-web.ch>, Michal Simek <michal.simek@amd.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
+Cc: Martin Herren <sputnik@on-the-web.ch>, Andreas Schwab <schwab@suse.de>,
+ Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
  Conor Dooley <conor.dooley@microchip.com>,
- Cyril Jean <cyril.jean@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>, E Shattow <e@freeshell.de>,
+ Green Wan <green.wan@sifive.com>, Hal Feng <hal.feng@starfivetech.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
  Padmarao Begari <padmarao.begari@amd.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Rick Chen <rick@andestech.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/4] riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
-Date: Sat, 19 Jul 2025 23:46:32 +0200
-Message-ID: <20250719214650.214931-2-sputnik@on-the-web.ch>
+ Sumit Garg <sumit.garg@kernel.org>,
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
+ Yao Zi <ziyao@disroot.org>, Yixun Lan <dlan@gentoo.org>,
+ Yuri Zaporozhets <yuriz@vodafonemail.de>
+Subject: [PATCH 0/4] Update riscv's SYS_BOOTM_LEN to the most commonly used
+ value.
+Date: Sat, 19 Jul 2025 23:46:31 +0200
+Message-ID: <20250719214650.214931-1-sputnik@on-the-web.ch>
 X-Mailer: git-send-email 2.50.0
-In-Reply-To: <20250719214650.214931-1-sputnik@on-the-web.ch>
-References: <20250719214650.214931-1-sputnik@on-the-web.ch>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Report-Abuse: Please forward a copy of this message, including all headers,
  to <abuse-report@smtp2go.com>
-Feedback-ID: 923567m:923567atSSOWT:923567sDtWEBps2L
-X-smtpcorp-track: i-GEfL1dLuqw.bMPPgTu2s7G6.KWjgmQNEngs
+Feedback-ID: 923567m:923567atSSOWT:923567sZnE37Y8eL
+X-smtpcorp-track: fQXLY2Y0_KUU.IGBPh6iibkn1.mw-cYweR6Jl
+X-Mailman-Approved-At: Sun, 20 Jul 2025 01:06:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,122 +114,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For all riscv defconfigs that use the current default value.
 
-This is done in provision of changing the default value to the most
-common used value of 0x4000000.
+The most commonly used SYS_BOOTM_LEN for riscv is 0x4000000 which is
+used in 25 of the current defconfigs.
 
-Acked-by: Michal Simek <michal.simek@amd.com> # xilinx_mbv
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+The previous default config value of 0x800000 was only used in 8
+defconfigs.
 
-Signed-off-by: Martin Herren <sputnik@on-the-web.ch>
----
+This patch sets the default to this value.
 
-(no changes since v1)
+No actual value for any board has been changed as all defconfigs have
+been adapted to keep the same SYS_BOOTM_LEN.
+Only exception is the Microchip Icicle which has been increased to the
+new default value.
 
+Command used to get the stats of the used values on RISCV defconfigs:
+
+```
+grep -l "CONFIG_RISCV=y" configs/* | \
+ xargs -I {} sh -c "grep -H CONFIG_SYS_BOOTM_LEN {} || echo {}:DEFAULT" | \
+ cut -d ':' -f 2 | sort | uniq -c
+```
+
+Changes in v3:
+- Add commit to change microchip_mpfs_icicle_defconfig to the new
+  SYS_BOOTM_LEN value, on Conor Dooley's request
+
+Martin Herren (4):
+  riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
+  riscv: Set SYS_BOOTM_LEN default to 0x4000000
+  riscv: Remove default SYS_BOOTM_LEN from defconfig
+  riscv: Increase Microchip Icicle's SYS_BOOTM_LEN
+
+ boot/Kconfig                            | 2 +-
+ configs/ae350_rv32_defconfig            | 1 -
+ configs/ae350_rv32_falcon_defconfig     | 1 -
+ configs/ae350_rv32_falcon_xip_defconfig | 1 -
+ configs/ae350_rv32_spl_defconfig        | 1 -
+ configs/ae350_rv32_spl_xip_defconfig    | 1 -
+ configs/ae350_rv32_xip_defconfig        | 1 -
+ configs/ae350_rv64_defconfig            | 1 -
+ configs/ae350_rv64_falcon_defconfig     | 1 -
+ configs/ae350_rv64_falcon_xip_defconfig | 1 -
+ configs/ae350_rv64_spl_defconfig        | 1 -
+ configs/ae350_rv64_spl_xip_defconfig    | 1 -
+ configs/ae350_rv64_xip_defconfig        | 1 -
+ configs/ibex-ast2700_defconfig          | 1 -
  configs/k230_canmv_defconfig            | 1 +
- configs/microchip_mpfs_icicle_defconfig | 1 +
+ configs/milkv_duo_defconfig             | 1 -
+ configs/qemu-riscv32_defconfig          | 1 -
+ configs/qemu-riscv32_smode_defconfig    | 1 -
+ configs/qemu-riscv32_spl_defconfig      | 1 -
+ configs/qemu-riscv64_defconfig          | 1 -
+ configs/qemu-riscv64_smode_defconfig    | 1 -
+ configs/qemu-riscv64_spl_defconfig      | 1 -
+ configs/sifive_unleashed_defconfig      | 1 -
+ configs/sifive_unmatched_defconfig      | 1 -
+ configs/sipeed_licheerv_nano_defconfig  | 1 -
  configs/sipeed_maix_bitm_defconfig      | 1 +
  configs/sipeed_maix_smode_defconfig     | 1 +
+ configs/starfive_visionfive2_defconfig  | 1 -
+ configs/th1520_lpi4a_defconfig          | 1 -
  configs/xilinx_mbv32_defconfig          | 1 +
  configs/xilinx_mbv32_smode_defconfig    | 1 +
  configs/xilinx_mbv64_defconfig          | 1 +
  configs/xilinx_mbv64_smode_defconfig    | 1 +
- 8 files changed, 8 insertions(+)
+ 33 files changed, 8 insertions(+), 26 deletions(-)
 
-diff --git a/configs/k230_canmv_defconfig b/configs/k230_canmv_defconfig
-index 47fa1add2a9..ed49a42b6fc 100644
---- a/configs/k230_canmv_defconfig
-+++ b/configs/k230_canmv_defconfig
-@@ -4,6 +4,7 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80400000
- CONFIG_DEFAULT_DEVICE_TREE="k230-canmv"
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0xc000000
- CONFIG_TARGET_K230_CANMV=y
- CONFIG_ARCH_RV64I=y
-diff --git a/configs/microchip_mpfs_icicle_defconfig b/configs/microchip_mpfs_icicle_defconfig
-index 6937aa224a1..99df10dc4c2 100644
---- a/configs/microchip_mpfs_icicle_defconfig
-+++ b/configs/microchip_mpfs_icicle_defconfig
-@@ -5,6 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="microchip/mpfs-icicle-kit"
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SYS_MEM_TOP_HIDE=0x400000
- # CONFIG_DEBUG_UART is not set
-diff --git a/configs/sipeed_maix_bitm_defconfig b/configs/sipeed_maix_bitm_defconfig
-index b2e21c7d7ae..c21cdace328 100644
---- a/configs/sipeed_maix_bitm_defconfig
-+++ b/configs/sipeed_maix_bitm_defconfig
-@@ -5,6 +5,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x803fffff
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0xfff000
- CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80000000
- CONFIG_SF_DEFAULT_BUS=3
- CONFIG_TARGET_SIPEED_MAIX=y
-diff --git a/configs/sipeed_maix_smode_defconfig b/configs/sipeed_maix_smode_defconfig
-index d838b252d53..3c77e40e47e 100644
---- a/configs/sipeed_maix_smode_defconfig
-+++ b/configs/sipeed_maix_smode_defconfig
-@@ -6,6 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x803fffff
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0xfff000
- CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80000000
- CONFIG_SF_DEFAULT_BUS=3
- CONFIG_TARGET_SIPEED_MAIX=y
-diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
-index 7dde2fc0a8f..dfcc51cb8e6 100644
---- a/configs/xilinx_mbv32_defconfig
-+++ b/configs/xilinx_mbv32_defconfig
-@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL_SIZE_LIMIT=0x40000
- CONFIG_SPL=y
-diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
-index b96b02c6125..0b14c7ce4c0 100644
---- a/configs/xilinx_mbv32_smode_defconfig
-+++ b/configs/xilinx_mbv32_smode_defconfig
-@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL_SIZE_LIMIT=0x40000
- CONFIG_SPL=y
-diff --git a/configs/xilinx_mbv64_defconfig b/configs/xilinx_mbv64_defconfig
-index 77fcf4d6865..a437895b5ab 100644
---- a/configs/xilinx_mbv64_defconfig
-+++ b/configs/xilinx_mbv64_defconfig
-@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv64"
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL_SIZE_LIMIT=0x40000
- CONFIG_SPL=y
-diff --git a/configs/xilinx_mbv64_smode_defconfig b/configs/xilinx_mbv64_smode_defconfig
-index e53c0771baf..87d1d17d5b9 100644
---- a/configs/xilinx_mbv64_smode_defconfig
-+++ b/configs/xilinx_mbv64_smode_defconfig
-@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv64"
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-+CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_SPL_SIZE_LIMIT=0x40000
- CONFIG_SPL=y
