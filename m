@@ -4,91 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ABF1C83F34
-	for <u-boot@archiver.kernel.org>; Sat, 19 Jul 2025 14:58:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 133F1C83F27
+	for <u-boot@archiver.kernel.org>; Sat, 19 Jul 2025 22:57:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C503A834B6;
-	Sat, 19 Jul 2025 16:58:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 328C6832E6;
+	Sun, 20 Jul 2025 00:57:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=on-the-web.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CHZsVUer";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=smtpservice.net header.i=@smtpservice.net header.b="ymf35mc+";
+	dkim=pass (2048-bit key; unprotected) header.d=on-the-web.ch header.i=@on-the-web.ch header.b="hT/WxAw8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDDB783510; Sat, 19 Jul 2025 16:58:25 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EEA0D832F9; Sun, 20 Jul 2025 00:57:33 +0200 (CEST)
+Received: from e3i311.smtp2go.com (e3i311.smtp2go.com [158.120.85.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E0E5833AD
- for <u-boot@lists.denx.de>; Sat, 19 Jul 2025 16:58:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2ea34731c5dso2119589fac.0
- for <u-boot@lists.denx.de>; Sat, 19 Jul 2025 07:58:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1752937102; x=1753541902; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PaTiTuGuRGS56uHFqbW3mX/yyMy4suW9kYtdiMgxo2E=;
- b=CHZsVUerMHV6omSXvjUixSBxCKSPHqGfiSApibWpqohRn/FWsD4jwedKbLIx5+X3yn
- /fCIf3tyup+IdbkHyqL3gV6+8JD+ds2LWbQZkWB8mCNJMOev1y06/emb1kbg2axc5pwO
- XWnIECyHKwSeOzdaXyCUcPE0wFv+Fp7iUMtMY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752937102; x=1753541902;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PaTiTuGuRGS56uHFqbW3mX/yyMy4suW9kYtdiMgxo2E=;
- b=Swrmf1ilSpT9Gd+QiAg4PY/vBkQ2uGXFADF80aUz3tmKHiWb0THgI7b6k57FMYO5Y3
- RhMos92hSJJA8E73e+odNll7yWeSqL8syoTSNjqtm7HHI1wA6G7Ig+kN4dAS3abJ0cwb
- XQZmQWgAXd5ZLy6FNQqDZBagQa0oXNjhdobMShJKDcn0FQqKh0EFbtB38DsdbNMuqSkc
- dhC3XLbRq+snqt8aQPBkcLr23fIFc4KwpGklXKQtSmDBLbhU2TUCrlVipQxvrVblnzBK
- nrr3yKqBg+YqP81Uf0Jf4pSlOASbZbQN9V5Ahtx7N2rNdYyu3ZYetW6k+p/ysUmJY+ME
- +Exg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVkH/Hv+jr/rF8ueJnwgUYDFElZHMZFMKJAlPfy8wVxx3qgAkFB4WlwnJAi2sDOhW8orZgWMOI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRdsefM5ZI4pvDbYR6InqX4G+wJ8G71W8KUMOIWis5Qp/ig53F
- vDMPsLwl554XIwPrQwKL4WSfvIGIwQJgm6/Up65UXOm7UoyIerwRdzT+tCc7uvcbGvk=
-X-Gm-Gg: ASbGncv9qZYrj9vxRMHWTQADePFc2WNPRCmHfPdZRPAutjJr8dR6wMqLDY/Lqglnid1
- BGTHgRT/QtZ90wdHA/a1pGnZXQ+h2Y3ge+nbeexeKDfIxUHfYOFtIbC98KTKCLUxKFgF3FN8lMN
- 9ZLZaw+e4fWMb9oFuhdIBIM7v5FSteHGKTLdETH8gVgRpy2jbyUGmT3pYNvKdRlsuzctvzIlDoD
- Ko3HFFgLJ4lJ7ywT5XwBcmFGnUqWgseLh7mYcPLHAZUrl0Sbh4rZFcizz+N+BmBGGrJKmkO1KvG
- 88JrpChjvLH/ORwZrkdA1PMjmvnD5HSt+ilNCPh3UGXU20ZSUSyyccxZIMCDsOCYny74X/vfIdz
- pkmv+Ub8neIjdEDTD5PwL5MxkF+lp8bQXwMNswY8jI9l/cruGwIPKgxTq
-X-Google-Smtp-Source: AGHT+IF5iW5oq/vK56BXIw6cKooiiXFL43nwtqANWWQ6OQNv5bS75/S00cnXfyAXRwV7vDyDc/sJzA==
-X-Received: by 2002:a05:6870:7051:20b0:300:d9f4:dfb5 with SMTP id
- 586e51a60fabf-300d9f533a1mr3370304fac.24.1752937102020; 
- Sat, 19 Jul 2025 07:58:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30104796fb0sm1737925fac.45.2025.07.19.07.58.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Jul 2025 07:58:20 -0700 (PDT)
-Date: Sat, 19 Jul 2025 08:58:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Sumit Garg <sumit.garg@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/7] airoha/an7581: add CONFIG_TARGET_AN7581=y to the
- defconfig
-Message-ID: <20250719145818.GZ193579@bill-the-cat>
-References: <20250719005717.113842-1-mikhail.kshevetskiy@iopsys.eu>
- <20250719005717.113842-3-mikhail.kshevetskiy@iopsys.eu>
+ by phobos.denx.de (Postfix) with ESMTPS id E9B2283096
+ for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 00:57:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=on-the-web.ch
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bounce.4pe2pfqm95qcyg6=l6omje7k6w8q=0cils6ldq58c2q@em923567.on-the-web.ch
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smtpservice.net;
+ i=@smtpservice.net; q=dns/txt; s=a1-4; t=1752965843; h=feedback-id :
+ x-smtpcorp-track : date : message-id : to : subject : from : reply-to
+ : sender : list-unsubscribe : list-unsubscribe-post;
+ bh=cLj2sQo9VUpAtsZa01wSUz1lMqPODl9ds1+nHtPsh2c=;
+ b=ymf35mc+tsTrAxTsVb85WLlXAaTrXqPNweLlaDOzbxehnvX5AU80uXYVqtX39ETpVFyt1
+ 9smgMZwkg+7WUlNWv58jns2woezBS1TD9k5VB/c07/kkykk9o5ZdJOYazPbjCu89C00Swsh
+ fOyQdfnwsjVR2eEODJ2HbtN+RDMKykMlDvGsxzCWzT3TcRUsh6Yt/t9WG+Lin9Z9jUn0RE2
+ dwQnew0tE9fRFD8IJVbLTGnSxcG7QK/FSnSVhapSlSthSYgfzWYUJDIFFGBbz8kbMz1icJL
+ yXlRUmSw/MJYHW91CWRs3hT3iBTx76vgjcYS67a21SeCW59wem5RRcZbwKeQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=on-the-web.ch;
+ i=@on-the-web.ch; q=dns/txt; s=s923567; t=1752965843; h=from : subject
+ : to : message-id : date;
+ bh=cLj2sQo9VUpAtsZa01wSUz1lMqPODl9ds1+nHtPsh2c=;
+ b=hT/WxAw8KxXzFrT6ddpFXobU2X6b8gOIwRPLDAoyp+sBSvhmlFvmiLxotWRWyh3b1KVB9
+ 1N9gLKS70si9nyfnZypaSFsixqE6kxhoLMYkR79clgcg/xi9V2iORd8Eq/jcKSgDQuzCpFJ
+ CrU0z1/HtPtRyvbhKh9Kcv2Yxy16p9u5Chto7HqFgwo6coYrnqupHaIEd03It+GXKEb+jHa
+ YSDGGQ2OMQOdE7lQNmMHS7uZa02K886vLLmogECf4nL6GW/b0KdM0e7XhEwfaU/hkULRhIP
+ slFQVxiN9jw8YTOyCpEaK8GPzKrbYGsQROFCmfupcwse33KJ95JxY/uHXoEQ==
+Received: from [10.34.231.120] (helo=SmtpCorp) by smtpcorp.com with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+ (Exim 4.96-S2G) (envelope-from <sputnik@on-the-web.ch>)
+ id 1udFOt-U24cwK-39; Sat, 19 Jul 2025 21:47:24 +0000
+Received: from [10.114.245.143] (helo=ch-web-troubles-5500.home)
+ by smtpcorp.com with esmtpsa
+ (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+ (Exim 4.98.1-S2G) (envelope-from <sputnik@on-the-web.ch>)
+ id 1udFOs-FnQW0hPvgzA-ndy2; Sat, 19 Jul 2025 21:47:22 +0000
+From: Martin Herren <sputnik@on-the-web.ch>
+To: u-boot@lists.denx.de
+Cc: Martin Herren <sputnik@on-the-web.ch>, Michal Simek <michal.simek@amd.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/4] riscv: Set SYS_BOOTM_LEN explicitly to 0x800000
+Date: Sat, 19 Jul 2025 23:46:32 +0200
+Message-ID: <20250719214650.214931-2-sputnik@on-the-web.ch>
+X-Mailer: git-send-email 2.50.0
+In-Reply-To: <20250719214650.214931-1-sputnik@on-the-web.ch>
+References: <20250719214650.214931-1-sputnik@on-the-web.ch>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Y2iOs74zF/No7sbX"
-Content-Disposition: inline
-In-Reply-To: <20250719005717.113842-3-mikhail.kshevetskiy@iopsys.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse: Please forward a copy of this message, including all headers,
+ to <abuse-report@smtp2go.com>
+Feedback-ID: 923567m:923567atSSOWT:923567sDtWEBps2L
+X-smtpcorp-track: i-GEfL1dLuqw.bMPPgTu2s7G6.KWjgmQNEngs
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,56 +96,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+For all riscv defconfigs that use the current default value.
 
---Y2iOs74zF/No7sbX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is done in provision of changing the default value to the most
+common used value of 0x4000000.
 
-On Sat, Jul 19, 2025 at 03:57:12AM +0300, Mikhail Kshevetskiy wrote:
+Acked-by: Michal Simek <michal.simek@amd.com> # xilinx_mbv
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 
-> This is required because airoha/en7523 will be added with the following
-> patches. Without this line config for en7523 will be created instead of
-> an7581.
->=20
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> ---
->  configs/an7581_evb_defconfig | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
-> index baa3fc3f5de..73af30cd693 100644
-> --- a/configs/an7581_evb_defconfig
-> +++ b/configs/an7581_evb_defconfig
-> @@ -1,5 +1,6 @@
->  CONFIG_ARM=3Dy
->  CONFIG_ARCH_AIROHA=3Dy
-> +CONFIG_TARGET_AN7581=3Dy
->  CONFIG_TEXT_BASE=3D0x81E00000
->  CONFIG_SYS_MALLOC_F_LEN=3D0x4000
->  CONFIG_NR_DRAM_BANKS=3D1
+Signed-off-by: Martin Herren <sputnik@on-the-web.ch>
+---
 
-This needs to be in the patch that adds the symbol.
+(no changes since v1)
 
---=20
-Tom
+ configs/k230_canmv_defconfig            | 1 +
+ configs/microchip_mpfs_icicle_defconfig | 1 +
+ configs/sipeed_maix_bitm_defconfig      | 1 +
+ configs/sipeed_maix_smode_defconfig     | 1 +
+ configs/xilinx_mbv32_defconfig          | 1 +
+ configs/xilinx_mbv32_smode_defconfig    | 1 +
+ configs/xilinx_mbv64_defconfig          | 1 +
+ configs/xilinx_mbv64_smode_defconfig    | 1 +
+ 8 files changed, 8 insertions(+)
 
---Y2iOs74zF/No7sbX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmh7sooACgkQFHw5/5Y0
-tyyJegv/Tw850zjoliaadf5DJsEpFP+5olerApZgPotivVQ3sU0FsbNua6jUnzRd
-ViWgwD11OAyc6Z/VEk8uyyqV2brmRRiIOTt7CF3LF/LPSVlWIyEbSSKrjTvTTN2h
-R4rAQvEWHZRT1huwtjyavqqD45Div6SPOPavTIEpsYOCfQ76ydAoMuGTt2ctaKV8
-rrNTeUxehHnXmIi6K1Wl1bPJ2hUMNOoJ1KmyGo6QlBU3SXYwBwdhml8E3I6RfyLo
-fLIjBeCtbeSHvjyMooOxY6JuIwc4QiV4Gj9Q/YhbDIYJJOcvvNJykNfBNxYq4qrN
-lidP+nN9lIS9HsttKP8otSyGRRbUKFSSg3USKoOYZ3nrC3WXHNvbooclvoPzBiCJ
-IRfIA6d0YYKNE3t05BCBG7oH8WzfUTr2h56j2TwNbHDErH09arLCze9bqWItwU5c
-NBPgSUqJGihi8jbOmlh78ZNbaxVpfPo9x2cVDPXMRX7Aa9ZgFsy6CTQ3yTjltzk0
-EwSixEsx
-=EcDe
------END PGP SIGNATURE-----
-
---Y2iOs74zF/No7sbX--
+diff --git a/configs/k230_canmv_defconfig b/configs/k230_canmv_defconfig
+index 47fa1add2a9..ed49a42b6fc 100644
+--- a/configs/k230_canmv_defconfig
++++ b/configs/k230_canmv_defconfig
+@@ -4,6 +4,7 @@ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80400000
+ CONFIG_DEFAULT_DEVICE_TREE="k230-canmv"
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0xc000000
+ CONFIG_TARGET_K230_CANMV=y
+ CONFIG_ARCH_RV64I=y
+diff --git a/configs/microchip_mpfs_icicle_defconfig b/configs/microchip_mpfs_icicle_defconfig
+index 6937aa224a1..99df10dc4c2 100644
+--- a/configs/microchip_mpfs_icicle_defconfig
++++ b/configs/microchip_mpfs_icicle_defconfig
+@@ -5,6 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DEFAULT_DEVICE_TREE="microchip/mpfs-icicle-kit"
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80200000
+ CONFIG_SYS_MEM_TOP_HIDE=0x400000
+ # CONFIG_DEBUG_UART is not set
+diff --git a/configs/sipeed_maix_bitm_defconfig b/configs/sipeed_maix_bitm_defconfig
+index b2e21c7d7ae..c21cdace328 100644
+--- a/configs/sipeed_maix_bitm_defconfig
++++ b/configs/sipeed_maix_bitm_defconfig
+@@ -5,6 +5,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x803fffff
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0xfff000
+ CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80000000
+ CONFIG_SF_DEFAULT_BUS=3
+ CONFIG_TARGET_SIPEED_MAIX=y
+diff --git a/configs/sipeed_maix_smode_defconfig b/configs/sipeed_maix_smode_defconfig
+index d838b252d53..3c77e40e47e 100644
+--- a/configs/sipeed_maix_smode_defconfig
++++ b/configs/sipeed_maix_smode_defconfig
+@@ -6,6 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x803fffff
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0xfff000
+ CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80000000
+ CONFIG_SF_DEFAULT_BUS=3
+ CONFIG_TARGET_SIPEED_MAIX=y
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+index 7dde2fc0a8f..dfcc51cb8e6 100644
+--- a/configs/xilinx_mbv32_defconfig
++++ b/configs/xilinx_mbv32_defconfig
+@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
+ CONFIG_SPL_STACK=0x80200000
+ CONFIG_SPL_BSS_START_ADDR=0x84000000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80200000
+ CONFIG_SPL_SIZE_LIMIT=0x40000
+ CONFIG_SPL=y
+diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
+index b96b02c6125..0b14c7ce4c0 100644
+--- a/configs/xilinx_mbv32_smode_defconfig
++++ b/configs/xilinx_mbv32_smode_defconfig
+@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
+ CONFIG_SPL_STACK=0x80200000
+ CONFIG_SPL_BSS_START_ADDR=0x84000000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80200000
+ CONFIG_SPL_SIZE_LIMIT=0x40000
+ CONFIG_SPL=y
+diff --git a/configs/xilinx_mbv64_defconfig b/configs/xilinx_mbv64_defconfig
+index 77fcf4d6865..a437895b5ab 100644
+--- a/configs/xilinx_mbv64_defconfig
++++ b/configs/xilinx_mbv64_defconfig
+@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv64"
+ CONFIG_SPL_STACK=0x80200000
+ CONFIG_SPL_BSS_START_ADDR=0x84000000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80200000
+ CONFIG_SPL_SIZE_LIMIT=0x40000
+ CONFIG_SPL=y
+diff --git a/configs/xilinx_mbv64_smode_defconfig b/configs/xilinx_mbv64_smode_defconfig
+index e53c0771baf..87d1d17d5b9 100644
+--- a/configs/xilinx_mbv64_smode_defconfig
++++ b/configs/xilinx_mbv64_smode_defconfig
+@@ -8,6 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv64"
+ CONFIG_SPL_STACK=0x80200000
+ CONFIG_SPL_BSS_START_ADDR=0x84000000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80200000
+ CONFIG_SPL_SIZE_LIMIT=0x40000
+ CONFIG_SPL=y
