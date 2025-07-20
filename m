@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D45C83F22
-	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 17:01:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF8CC83F1A
+	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 17:01:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C9D28300B;
-	Sun, 20 Jul 2025 19:01:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49E7683689;
+	Sun, 20 Jul 2025 19:01:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="ULI3MlgO";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="IfUEX9d9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86AC283689; Sun, 20 Jul 2025 19:00:59 +0200 (CEST)
-Received: from out-186.mta1.migadu.com (out-186.mta1.migadu.com
- [95.215.58.186])
+ id C622882F8E; Sun, 20 Jul 2025 19:00:59 +0200 (CEST)
+Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com
+ [95.215.58.174])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F78D82F8E
- for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 19:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E086183020
+ for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 19:00:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=grimler.se
 Authentication-Results: phobos.denx.de;
@@ -29,41 +29,40 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1753030854;
+ t=1753030856;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=WdUa+B/ULRh22RKCcO8ugH5y342g0oj9AgacaJO2Tl8=;
- b=ULI3MlgOu14y/yyWz9isLXa0ezPZGIxK1wha0Y3RVUg9AxfyvHHUhWBCMfzqpPIJluwSaJ
- QA/kAf6tt+q3Fonjc+TXYrOq1DMiiSseLQvKCb6+5JEtT9N8DIPJFLJ2diLOJuw1WAPlzx
- 30vrCtfTu7/f0k2wJptg9cNQkJOucP4=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ikRkk2BGOYAjpdwrlcm5yMKo99CLYS3YwBrueaHbMxU=;
+ b=IfUEX9d9dNXg26cKZkI8UVtj9zsRPAoNZkLsTcm0ASpxG/c5eucajTLvJ0PMEaSs5RFbcB
+ 8XgqLB1Z71i0fj4K6mTnW9OvEjccRedTQpdjU5Ycfuv8yNLoz8hyswtAHhLuFA1znjFjgD
+ omAziFAXzqgE5V9y3W+Eccfat+TK/sM=
 From: Henrik Grimler <henrik@grimler.se>
-Subject: [PATCH 0/3] mmc: add more exynos compatibles and fix cd-gpio
- handling in s5p_sdhci
-Date: Sun, 20 Jul 2025 19:00:25 +0200
-Message-Id: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
+Date: Sun, 20 Jul 2025 19:00:27 +0200
+Subject: [PATCH 2/3] mmc: s5p_sdhci: add samsung,exynos4210-sdhci
+ compatible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKkgfWgC/x3LQQqAIBBA0avErBtQK6KuEi3UppqFFg5FIN09a
- fn4/AxCiUlgrDIkuln4iAW6rsDvNm6EvBSDUaZTvW5RbJArbhiCx5UfElSe3DI0Q+N6D+U7E/2
- hbNP8vh8EhRqZYwAAAA==
-X-Change-ID: 20250714-samsung-mmc-fixes-0cebd9393b7c
+Message-Id: <20250720-samsung-mmc-fixes-v1-2-cb705abfa594@grimler.se>
+References: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
+In-Reply-To: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
 To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
  David Virag <virag.david003@gmail.com>, 
  Sam Protsenko <semen.protsenko@linaro.org>, 
  Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>
 Cc: ~postmarketos/upstreaming@lists.sr.ht, replicant@osuosl.org, 
  u-boot@lists.denx.de, Henrik Grimler <henrik@grimler.se>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1571; i=henrik@grimler.se;
- h=from:subject:message-id; bh=JiWPo9+BIdFuroXEzzo2/b9VjuZtlZWg6vrG0VNIRfI=;
- b=owEBbQGS/pANAwAKAbAHbkkLcWFrAcsmYgBofSC485+tKu87vd+SQbGZjbMgFmC7zbG31leMt
- D9emBhF+7WJATMEAAEKAB0WIQQsfymul4kfZBmp4s2wB25JC3FhawUCaH0guAAKCRCwB25JC3Fh
- a7lEB/9C2i6gQGHPLqkIu2CdVFf7EGDg26Xm8JnVYJMAOsnXuz8ntoF0fsJn+k52dmAfgaIJksW
- Be32B1aQ/kXCpDr9s5Gc4T44k75AH1iEkfVIUTszzPTO7Oo69dbHfeVPIXbBFqz/sVFHCi0RCIg
- BcaTrb6x4x/Ca51xStFAXa+9NBH3a1SMuz9F+rQnoxT+kUBmF4f0gIx8IEy3W/EZh0RNLC1ufNi
- QwKLMiWMTA4c96y5wRpj5gSQiu3g+3MBBGDgbTJMsY4VzZn14G5MTjacJg6yAPO7bJfCPnhRK8M
- HlAxBDMtw1bSkkF6PE112D2HHN+jupGu3PQkgbERyubNOtBE
+X-Developer-Signature: v=1; a=openpgp-sha256; l=880; i=henrik@grimler.se;
+ h=from:subject:message-id; bh=msRPp3w25VvgrhXbM5J57GaChxa9Vztt83lTqc7hISM=;
+ b=owEBbQGS/pANAwAKAbAHbkkLcWFrAcsmYgBofSC+4wvOqN08ZeQQ2CiLaDC8vHYyKiwxMmMUT
+ llThDTvSxaJATMEAAEKAB0WIQQsfymul4kfZBmp4s2wB25JC3FhawUCaH0gvgAKCRCwB25JC3Fh
+ a30dCAC1tKOi9xurGSc1kbtswF5KORNbaK5o+W8UUXDPig+v7L9gCQayi2FJtOfaUDN2UZIV083
+ LtqVE+N6BSOVcN1lZSrdd35Uoz3ixTczbL+ezFfF0scBF/ctTRJOBv35tI5Nwhm+m7WGlioh8t5
+ gS3mD4MuFk+F/At7Gv1VxUx7kOFmXUmAcoKbOxc0nzXD8o+XZkEu/tMUveiJGcShzjDX62fJ8s1
+ hnvyhGYo74H81eJUzE1nARw4Nk9aBvicFJWR8GD36SLdMQQA24ajFqyUJ/ct82tiuXFNf+vHFDO
+ Qh3zQ19xsRgpq6HFkxxcVc0G7LiR6KwkfUY2sbnBRhITDRAS
 X-Developer-Key: i=henrik@grimler.se; a=openpgp;
  fpr=2C7F29AE97891F6419A9E2CDB0076E490B71616B
 X-Migadu-Flow: FLOW_OUT
@@ -83,50 +82,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+the Exynos4210 devices in u-boot uses samsung,exynos4412-sdhci as
+sdhci compatible in their DTSes, while the upstream DTSes uses
+samsung,exynos4210-sdhci.
 
-This series does some preparatory work to s5p_sdhci and exynos_dw_mmc
-drivers to make it possible to move some exynos devices over to
-OF_UPSTREAM. I am planning to send additional patches for other
-subsystems as well, with the end goal of moving over
-exynos4412-odroid-u2 and exynos5422-odroid-xu4 to use OF_UPSTREAM.
-
-Patch 1, "mmc: s5p_sdhci: remove duplicated card detect code", was
-originally authored by Simon Shields:
-https://github.com/fourkbomb/u-boot/commit/2eac9dea7903, but I have
-not been able to get in contact with them and have therefore changed
-to set me as author instead.
-
-Best regards,
-Henrik Grimler
-
-To: Peng Fan <peng.fan@nxp.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>
-To: David Virag <virag.david003@gmail.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-To: Minkyu Kang <mk7.kang@samsung.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: ~postmarketos/upstreaming@lists.sr.ht
-Cc: replicant@osuosl.org
-Cc: u-boot@lists.denx.de
+Add samsung,exynos4210-sdhci compatible string for s5p_sdhci driver as
+well so that it can be used with upstream DTSes.
 
 Signed-off-by: Henrik Grimler <henrik@grimler.se>
 ---
-Henrik Grimler (2):
-      mmc: s5p_sdhci: remove duplicated card detect code
-      mmc: s5p_sdhci: add samsung,exynos4210-sdhci compatible
+ drivers/mmc/s5p_sdhci.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Jaehoon Chung (1):
-      mmc: exynos_dw_mmc: add exynos5420 compatibles
+diff --git a/drivers/mmc/s5p_sdhci.c b/drivers/mmc/s5p_sdhci.c
+index b2faecefc00f479f53c2c6156da66a8fe46e4529..c80033d87529b1928975608487961b205cc3afbf 100644
+--- a/drivers/mmc/s5p_sdhci.c
++++ b/drivers/mmc/s5p_sdhci.c
+@@ -226,6 +226,7 @@ static int s5p_sdhci_bind(struct udevice *dev)
+ 
+ static const struct udevice_id s5p_sdhci_ids[] = {
+ 	{ .compatible = "samsung,exynos4412-sdhci"},
++	{ .compatible = "samsung,exynos4210-sdhci"},
+ 	{ }
+ };
+ 
 
- drivers/mmc/exynos_dw_mmc.c |  6 ++++++
- drivers/mmc/s5p_sdhci.c     | 11 +----------
- 2 files changed, 7 insertions(+), 10 deletions(-)
----
-base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
-change-id: 20250714-samsung-mmc-fixes-0cebd9393b7c
-
-Best regards,
 -- 
-Henrik Grimler <henrik@grimler.se>
+2.50.1
 
