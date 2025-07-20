@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB54C83F1A
-	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 17:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D45C83F22
+	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 17:01:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5A708304A;
-	Sun, 20 Jul 2025 19:00:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C9D28300B;
+	Sun, 20 Jul 2025 19:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="G7Y+pHKS";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="ULI3MlgO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3B6783045; Sun, 20 Jul 2025 19:00:57 +0200 (CEST)
-Received: from out-177.mta1.migadu.com (out-177.mta1.migadu.com
- [95.215.58.177])
+ id 86AC283689; Sun, 20 Jul 2025 19:00:59 +0200 (CEST)
+Received: from out-186.mta1.migadu.com (out-186.mta1.migadu.com
+ [95.215.58.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFA6D83010
- for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 19:00:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F78D82F8E
+ for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 19:00:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=grimler.se
 Authentication-Results: phobos.denx.de;
@@ -29,39 +29,41 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1753030855;
+ t=1753030854;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hwpEDocfz4q30gj2FbAdY5nmqprb57HsFRosKgSSf/k=;
- b=G7Y+pHKSrFFBQIA/L7Twh+zxDnSsiDdHipa8qPSEMJJPc537cZBFr8E98jZnpeXyVURF3G
- ivkIw1UkIVSkE3mapVnnv6mzaT0It8hJE2wvxJmGnLeWZXrsuO/oZ9BoAaHW4ANNlV/KOS
- w9gR9hdJfxaf1dP6lYs697AXbnFEvdY=
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WdUa+B/ULRh22RKCcO8ugH5y342g0oj9AgacaJO2Tl8=;
+ b=ULI3MlgOu14y/yyWz9isLXa0ezPZGIxK1wha0Y3RVUg9AxfyvHHUhWBCMfzqpPIJluwSaJ
+ QA/kAf6tt+q3Fonjc+TXYrOq1DMiiSseLQvKCb6+5JEtT9N8DIPJFLJ2diLOJuw1WAPlzx
+ 30vrCtfTu7/f0k2wJptg9cNQkJOucP4=
 From: Henrik Grimler <henrik@grimler.se>
-Date: Sun, 20 Jul 2025 19:00:26 +0200
-Subject: [PATCH 1/3] mmc: s5p_sdhci: remove duplicated card detect code
+Subject: [PATCH 0/3] mmc: add more exynos compatibles and fix cd-gpio
+ handling in s5p_sdhci
+Date: Sun, 20 Jul 2025 19:00:25 +0200
+Message-Id: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250720-samsung-mmc-fixes-v1-1-cb705abfa594@grimler.se>
-References: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
-In-Reply-To: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
+X-B4-Tracking: v=1; b=H4sIAKkgfWgC/x3LQQqAIBBA0avErBtQK6KuEi3UppqFFg5FIN09a
+ fn4/AxCiUlgrDIkuln4iAW6rsDvNm6EvBSDUaZTvW5RbJArbhiCx5UfElSe3DI0Q+N6D+U7E/2
+ hbNP8vh8EhRqZYwAAAA==
+X-Change-ID: 20250714-samsung-mmc-fixes-0cebd9393b7c
 To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
  David Virag <virag.david003@gmail.com>, 
  Sam Protsenko <semen.protsenko@linaro.org>, 
  Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>
 Cc: ~postmarketos/upstreaming@lists.sr.ht, replicant@osuosl.org, 
  u-boot@lists.denx.de, Henrik Grimler <henrik@grimler.se>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1591; i=henrik@grimler.se;
- h=from:subject:message-id; bh=F7TRdR7UDHYqBDNqPRlP+A+3JBqZkgzTAjTKzHeLqtM=;
- b=owEBbQGS/pANAwAKAbAHbkkLcWFrAcsmYgBofSC7IJQBZn02bAQfXouzPcE8G3XoxEyGkErNI
- YZnlBfvNYqJATMEAAEKAB0WIQQsfymul4kfZBmp4s2wB25JC3FhawUCaH0guwAKCRCwB25JC3Fh
- a7N5B/9m8ms18qgdLkqbpFcz4eUedHF6OlJvXVE/G8JxjY3FUHbBnS7tpcIqpSCJGjXzANBJw+I
- AAThZMUXxgeEz/UfsqOwayKCIZltEG1JA6SG1FrnbIMgKSsWxCIVuuoDoWLyA0GcXfi1Z86ND5p
- FTgdrDz6LSJI9S0Og6/XLTEJk9Zlm4stsnKlqfe8heb3GrAGQfc64FrXiJUmClJQ5sVE1zNvQqg
- XNGYabPQSIwx6GWYPvFm4+94sKRowhGoUNe2ADnjOz9qeZn52262Bc4SCOvHy4PXLwbwzrBO0uZ
- 62GnLHHLHO4aN7ZbQq0OkLgi2WmBmUFONd1lBvCiwbRUcfBi
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1571; i=henrik@grimler.se;
+ h=from:subject:message-id; bh=JiWPo9+BIdFuroXEzzo2/b9VjuZtlZWg6vrG0VNIRfI=;
+ b=owEBbQGS/pANAwAKAbAHbkkLcWFrAcsmYgBofSC485+tKu87vd+SQbGZjbMgFmC7zbG31leMt
+ D9emBhF+7WJATMEAAEKAB0WIQQsfymul4kfZBmp4s2wB25JC3FhawUCaH0guAAKCRCwB25JC3Fh
+ a7lEB/9C2i6gQGHPLqkIu2CdVFf7EGDg26Xm8JnVYJMAOsnXuz8ntoF0fsJn+k52dmAfgaIJksW
+ Be32B1aQ/kXCpDr9s5Gc4T44k75AH1iEkfVIUTszzPTO7Oo69dbHfeVPIXbBFqz/sVFHCi0RCIg
+ BcaTrb6x4x/Ca51xStFAXa+9NBH3a1SMuz9F+rQnoxT+kUBmF4f0gIx8IEy3W/EZh0RNLC1ufNi
+ QwKLMiWMTA4c96y5wRpj5gSQiu3g+3MBBGDgbTJMsY4VzZn14G5MTjacJg6yAPO7bJfCPnhRK8M
+ HlAxBDMtw1bSkkF6PE112D2HHN+jupGu3PQkgbERyubNOtBE
 X-Developer-Key: i=henrik@grimler.se; a=openpgp;
  fpr=2C7F29AE97891F6419A9E2CDB0076E490B71616B
 X-Migadu-Flow: FLOW_OUT
@@ -81,53 +83,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The common sdhci infrastructure is already parsing the cd-gpios
-property, since commit 451931ea7002 ("mmc: sdhci: Read cd-gpio from
-devicetree"). The s5p code is therefore duplicated, and also broken
-since it assumes that the GPIO value is inverted, while the sdhci code
-correctly follows the ACTIVE_LOW/ACTIVE_HIGH flag specified in the
-device tree.
+Hi,
 
-This fix was originally authored by Simon Shields:
-https://github.com/fourkbomb/u-boot/commit/2eac9dea7903
+This series does some preparatory work to s5p_sdhci and exynos_dw_mmc
+drivers to make it possible to move some exynos devices over to
+OF_UPSTREAM. I am planning to send additional patches for other
+subsystems as well, with the end goal of moving over
+exynos4412-odroid-u2 and exynos5422-odroid-xu4 to use OF_UPSTREAM.
 
-The change has been tested on exynos4210-i9100, a device similar to
-exynos4210-trats.
+Patch 1, "mmc: s5p_sdhci: remove duplicated card detect code", was
+originally authored by Simon Shields:
+https://github.com/fourkbomb/u-boot/commit/2eac9dea7903, but I have
+not been able to get in contact with them and have therefore changed
+to set me as author instead.
+
+Best regards,
+Henrik Grimler
+
+To: Peng Fan <peng.fan@nxp.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>
+To: David Virag <virag.david003@gmail.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+To: Minkyu Kang <mk7.kang@samsung.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: ~postmarketos/upstreaming@lists.sr.ht
+Cc: replicant@osuosl.org
+Cc: u-boot@lists.denx.de
 
 Signed-off-by: Henrik Grimler <henrik@grimler.se>
 ---
- drivers/mmc/s5p_sdhci.c | 10 ----------
- 1 file changed, 10 deletions(-)
+Henrik Grimler (2):
+      mmc: s5p_sdhci: remove duplicated card detect code
+      mmc: s5p_sdhci: add samsung,exynos4210-sdhci compatible
 
-diff --git a/drivers/mmc/s5p_sdhci.c b/drivers/mmc/s5p_sdhci.c
-index 278019f02abbe7ee7f16c48758af3b48449ec078..b2faecefc00f479f53c2c6156da66a8fe46e4529 100644
---- a/drivers/mmc/s5p_sdhci.c
-+++ b/drivers/mmc/s5p_sdhci.c
-@@ -141,14 +141,6 @@ static int do_sdhci_init(struct sdhci_host *host)
- 		}
- 	}
- 
--	if (dm_gpio_is_valid(&host->cd_gpio)) {
--		ret = dm_gpio_get_value(&host->cd_gpio);
--		if (ret) {
--			debug("no SD card detected (%d)\n", ret);
--			return -ENODEV;
--		}
--	}
--
- 	return s5p_sdhci_core_init(host);
- }
- 
-@@ -183,8 +175,6 @@ static int sdhci_get_config(const void *blob, int node, struct sdhci_host *host)
- 
- 	gpio_request_by_name_nodev(offset_to_ofnode(node), "pwr-gpios", 0,
- 				   &host->pwr_gpio, GPIOD_IS_OUT);
--	gpio_request_by_name_nodev(offset_to_ofnode(node), "cd-gpios", 0,
--				   &host->cd_gpio, GPIOD_IS_IN);
- 
- 	return 0;
- }
+Jaehoon Chung (1):
+      mmc: exynos_dw_mmc: add exynos5420 compatibles
 
+ drivers/mmc/exynos_dw_mmc.c |  6 ++++++
+ drivers/mmc/s5p_sdhci.c     | 11 +----------
+ 2 files changed, 7 insertions(+), 10 deletions(-)
+---
+base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+change-id: 20250714-samsung-mmc-fixes-0cebd9393b7c
+
+Best regards,
 -- 
-2.50.1
+Henrik Grimler <henrik@grimler.se>
 
