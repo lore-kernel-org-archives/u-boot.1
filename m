@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C58D7C83F1A
-	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 20:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9B8C83F1A
+	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 20:19:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BEB483045;
-	Sun, 20 Jul 2025 22:00:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7490E82F8F;
+	Sun, 20 Jul 2025 22:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WlXJe7lP";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="A3dFPubN";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dMKI6kpy";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ih1YCnKs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DBB682DA1; Sun, 20 Jul 2025 22:00:49 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 29EB483010; Sun, 20 Jul 2025 22:19:48 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9F5783013
- for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 22:00:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17D1382DA1
+ for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 22:19:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4blZCL3Q2wz9snL;
- Sun, 20 Jul 2025 22:00:46 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4blZdD25jCz9tBf;
+ Sun, 20 Jul 2025 22:19:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753041646;
+ s=mail20150812; t=1753042784;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=0gooiqQTYme5yICqCoIU+5u2cM7BwCB/HIWs0u9Isvc=;
- b=WlXJe7lP5mkPUPUhu7kaojJ4S5cOLR9E6hNO6MOGJYKORPqSwEwbyEXVh6587awi82pmBa
- qfnw1gRkPU19BOwOzGIIbk4AvTo6DWX+zlfs6V0Z6Ro0MLUjl1+Bx9f9+NX/UR5ZW1p2uC
- VUNLH4d+L/U4pRDRgwJWshAhyI1xO/B0BQzOZe8F3gArXHDdivB/pK0TgB3ez1leQMceDK
- 0ykLj2tEupMqPaXc/jX66gnAwE+nuLVHg0ss6nKX9VbEBigQxT5EDhbD4stAtQM/+P24LF
- 6yGl3yXXkePs2O/vDa9Iwa9YdvAdpqDoxayM9jxggDIwXv3VGfiUGwg9FEXmbw==
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Dg9pWTp97+mJ93FPc0Axxl6SZl8qA5LM0NudAcfP4mE=;
+ b=dMKI6kpy1pW9VVFOZ9kvLCNmGAXKkbct+xJtx4KRfnX3OvSnbg5tzdObf1byRYgwVWuQ9y
+ UnsyLZ5jfFoew6H+yTz4BQt3140nDbvdNst9CtvBKOTUiNLTSOjIqYeFZQ+N7B4d8nltjz
+ 8pTsqNWNIzEA6XykrAcGxqBB1umhj+bl5ygqbJX4+Hyh5CcT7R/X/ptHwP3IKIENPrQBO5
+ e4Ju0KxwE4hX2rCrmlNs2X7v57c45oW7SAlwEjuJRTiq+edJ5ENSb1j9KZNEdgj/zQ6FAL
+ 7lVDtPdRIjN2r58lgIrR2V4traJuyMz9uR+vid0JmQTctBuC3PuUGNNWPqg/bA==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=A3dFPubN;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ih1YCnKs;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <08af1da8-dd2d-4b34-9fe8-f8de18a82149@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753041644;
+ s=mail20150812; t=1753042781;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=0gooiqQTYme5yICqCoIU+5u2cM7BwCB/HIWs0u9Isvc=;
- b=A3dFPubN74gM1IJj/VuCfNyHcLJYrQybRhjWZtQC/hCQrqVN4K2aP5NwubK+9dsuvql8C4
- Px8Rmf718bJSCAC3y/kWhre5nPuxZomGlWjfj8NiRn3Q2KKF9uJ3avDHZayyAQRFuTbfo+
- z0p9WMioKDGbWMtWtrTQhlburuIxpPwfDlrYPCdS7YgbJn6u6eQdP9kNZEETk+pldUXeRd
- Du/agbzxwiAf9V3756CAe8w7itKHs90RstsClcqtbJ4RPTJiNohyXX3SnD6D2RXnNOM0k5
- PMl4g0boz7XTw82Bod2HfU1Tvt+hwofGo0j7sGztglbJLv6T95UgkOxcwXS6Rg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] arm64: dts: renesas: r8a779g3: Describe generic SPI NOR
- support on Retronix R-Car V4H Sparrow Hawk board
-Date: Sun, 20 Jul 2025 21:59:43 +0200
-Message-ID: <20250720200003.414120-1-marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Dg9pWTp97+mJ93FPc0Axxl6SZl8qA5LM0NudAcfP4mE=;
+ b=ih1YCnKstNlYmz135pKQO3WY62Ft7jrhvAXGuWnrFjD5D/G3lqX+GJWGfekx3k8mM/eC4y
+ K3p5kUjLbqL82OuFRseNmtrGjecTQQufWZEOPqI9C1nUMtgulHx9dwY7dLxxxf8wa1P8ra
+ piROuCz6FF5Ki3tVPWBJj5gHFPPm3KO98rqH3WyLzY0IbSkmWiQRhWNBgNbWyBdayLF7Lu
+ 4rrDa/ckYDlynOd+TATYtNcsAYWjRE6SZZAPjcVt2Iz7zyPY8AyYAwOzMwsbZ/I8w+4jOJ
+ AZTUJ9A3xUCU4Dj2pOCMtEEyLClZ5RGSivmFEHePYE1mVjHkoJOq2HalbZsFBg==
+Date: Sun, 20 Jul 2025 22:19:39 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e64d096555e885d63db
-X-MBO-RS-META: y8go9bcawbwxmtheeb9b13imsyh34tro
-X-Rspamd-Queue-Id: 4blZCL3Q2wz9snL
+Subject: Re: [PATCH v3 7/9] net: sh_eth: Adjust RZ/A1, add RZ/A2 support
+To: Magnus Damm <magnus.damm@gmail.com>
+Cc: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
+ Chris.Brandt@renesas.com, geert+renesas@glider.be
+References: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
+ <175180136965.86839.10195243856147148306.sendpatchset@1.0.0.127.in-addr.arpa>
+ <0e525790-79f7-4653-808d-137c1e55ed09@mailbox.org>
+ <CANqRtoQUCmwfYF80KqoBSSYbhzJmR0488R6+zJFxBTyGYXLcwg@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CANqRtoQUCmwfYF80KqoBSSYbhzJmR0488R6+zJFxBTyGYXLcwg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 9zwird7x13pmu3x1izqk7rp1wyh3hxms
+X-MBO-RS-ID: 60d503971fdf12ef202
+X-Rspamd-Queue-Id: 4blZdD25jCz9tBf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,37 +97,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Retronix R-Car V4H Sparrow Hawk EVTA1 is populated with Spansion S25FS512S,
-EVTB1 is populated with Winbond W77Q51NW. Describe the SPI NOR using generic
-"spi-flash" compatible, because both flashes can be auto-detected based on
-their built-in IDs.
+On 7/7/25 7:03 PM, Magnus Damm wrote:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+Hello Magnus,
 
-diff --git a/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
-index b109095a0d8..a0fda441320 100644
---- a/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
-+++ b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
-@@ -623,7 +623,11 @@
- 	status = "okay";
- 
- 	flash@0 {
--		compatible = "spansion,s25fs512s", "jedec,spi-nor";
-+		/*
-+		 * EVTA1 is populated with Spansion S25fS512S
-+		 * EVTB1 is populated with Winbond W77Q51NW
-+		 */
-+		compatible = "jedec,spi-nor";
- 		reg = <0>;
- 		spi-max-frequency = <40000000>;
- 		spi-rx-bus-width = <4>;
--- 
-2.47.2
+I'm sorry for the late reply.
 
+>>> +++ work/drivers/net/sh_eth.c 2025-07-05 17:45:07.333754799 +0900
+>>> @@ -144,10 +144,10 @@ static int sh_eth_reset(struct sh_eth_in
+>>>    {
+>>>    #if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
+>>>        int ret = 0, i;
+>>> -
+>>
+>> Does something like this ...
+>>
+>> if (!device_is_compatible(dev, "..."))
+>>
+>> ... work instead of the ifdef ?
+>>
+>> If yes, it might be even improved into dedicated function:
+>>
+>> static bool device_is_rza2(struct udevice *dev)
+>> {
+>>     if (!IS_ENABLED(CONFIG_RZA2))
+>>       return false;
+>>     else
+>>       return device_is_compatible(dev, "...");
+>> }
+>>
+>> That should be compile-time checked and then optimized out, and in case
+>> of non-RZA2, this should be optimized out entirely.
+> 
+> While I'm all for trying to clean up the code, unfortunately I don't
+> think only adding compat string handling to RZ is going to help that
+> much. My apologies for prodding with DT in the SCIF driver for RZA2
+> only. The same thing applies there in my opinion. =) But we have to
+> start somewhere, that's for sure.
+
+I suspect cleaning up the sh_eth will be a larger undertaking, yes.
+
+> By the way, did you see the #ifdeffery and the compile time constants
+> in sh_eth.h? Also there seems to be a lot of overlap between
+> TYPE_GETHER and TYPE_RZ.
+
+I am aware of the ifdeffery, yes.
+
+> My first take on cleaning up the sh_eth.c driver would probably be to
+> dive deeper into the offset tables (such as sh_eth_offset_rz in
+> sh_eth.h) and convert the code to during runtime use the offset table
+> to determine if a register exists or not. That would take care of a
+> bunch of TYPE_GETHER and TYPE_RZ differences and remove some #ifdefs
+> from the code as long as the offset tables are correct (which they
+> don't seem to be for RZ so those need to be validated as well). Then
+> perhaps add some feature flag to handle corner cases like
+> 'device_needs_polled_reset' to clean up sh_eth_reset().
+
+The one thing you have to be careful about is to avoid increasing the 
+code size too much. Use if (IS_ENABLED()) and such macros, which do 
+compile the code, but then let gcc optimize it out. This retains code 
+coverage, but shouldn't increase the code size.
+
+> And during probe() or U-Boot equivalent then using the compat string
+> detection mechanism to select appropriate offset table would make
+> sense to me.
+> 
+> What do you think? This seems like incremental cleanups though, not
+> neccessarily related to RZ. I am happy to clean it up though, if you
+> think it would be helpful.
+
+I am happy with incremental clean ups .
+
+>>> +#if !defined(CONFIG_RZA2)
+>>>        /* Start e-dmac transmitter and receiver */
+>>>        sh_eth_write(port_info, EDSR_ENALL, EDSR);
+>>> -
+>>
+>> [...]
+>>
+>>> @@ -722,8 +726,11 @@ static int sh_ether_probe(struct udevice
+>>>                goto err_mdio_register;
+>>>
+>>>        priv->bus = mdiodev;
+>>> -
+>>> +#ifdef BASE_IO_ADDR
+>>>        port_info->iobase = (void __iomem *)(uintptr_t)BASE_IO_ADDR;
+>>> +#else
+>>> +     port_info->iobase = (void __iomem *)pdata->iobase;
+>>> +#endif
+>>
+>> Can the base address be pulled from DT?
+> 
+> Actually pdata->iobase comes from DT. Currently BASE_IO_ADDR is not
+> set in sh_eth.h for RZ/A1 and RZ/A2. In such case the code above uses
+> DT to get the device base address. Other processor variants still rely
+> on the compile time constants.
+
+Looking at sh_eth.h , it seems to me that every processor that is 
+currently supported can already pull the address from DT (Gen2, RZ/A1, 
+Gen3 V3H), the rest of the CPUs are not supported. Maybe the 
+BASE_IO_ADDR can be dropped outright instead ?
+
+> And good news, as I wrote in some cover
+> email, this driver is with this patch known to work in multi-port
+> configuration since RZ/A2 GR-Peach is using ch0 with MII and RZ/A2
+> RZA2MBTC is using ch1 RMII. The configuration all comes from DT.
+
+That is nice.
