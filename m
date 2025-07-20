@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9B8C83F1A
-	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 20:19:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B2CC83F22
+	for <u-boot@archiver.kernel.org>; Sun, 20 Jul 2025 20:48:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7490E82F8F;
-	Sun, 20 Jul 2025 22:19:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 58DD681D6A;
+	Sun, 20 Jul 2025 22:48:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dMKI6kpy";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ih1YCnKs";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ItZ4dfGT";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LNRyaMVY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29EB483010; Sun, 20 Jul 2025 22:19:48 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 97EED8303B; Sun, 20 Jul 2025 22:48:00 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17D1382DA1
- for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 22:19:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73115805D7
+ for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 22:47:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4blZdD25jCz9tBf;
- Sun, 20 Jul 2025 22:19:44 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4blbFp0fVsz9t1B;
+ Sun, 20 Jul 2025 22:47:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753042784;
+ s=mail20150812; t=1753044478;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Dg9pWTp97+mJ93FPc0Axxl6SZl8qA5LM0NudAcfP4mE=;
- b=dMKI6kpy1pW9VVFOZ9kvLCNmGAXKkbct+xJtx4KRfnX3OvSnbg5tzdObf1byRYgwVWuQ9y
- UnsyLZ5jfFoew6H+yTz4BQt3140nDbvdNst9CtvBKOTUiNLTSOjIqYeFZQ+N7B4d8nltjz
- 8pTsqNWNIzEA6XykrAcGxqBB1umhj+bl5ygqbJX4+Hyh5CcT7R/X/ptHwP3IKIENPrQBO5
- e4Ju0KxwE4hX2rCrmlNs2X7v57c45oW7SAlwEjuJRTiq+edJ5ENSb1j9KZNEdgj/zQ6FAL
- 7lVDtPdRIjN2r58lgIrR2V4traJuyMz9uR+vid0JmQTctBuC3PuUGNNWPqg/bA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ih1YCnKs;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <08af1da8-dd2d-4b34-9fe8-f8de18a82149@mailbox.org>
+ bh=+Fa5ai4jc+40/NpPqHvnkTnpcGE/uG8bPPwyw8AGCq0=;
+ b=ItZ4dfGTKvyMb2NWyDI03a26bXPBfCkspEX+ceM/AFEU7ZrCQyYvV25Vw1SFTH9m3ZaJ6L
+ p5Y/WAt1+Hh2DGzDbn9BwOae6PLDniS54Rm/oge8naZE1OVwoD8SmYYR9ZYPs2Oe/SRflB
+ nrRKDMbTGQ5tt7QGNPJvQy9gEa4Kh9C6b3ntnr/cvXdHgLvBscR793NN34LFIyYQND0AGu
+ o9r62zcAPTK7kBMuLVN0pwBj0xWW66y7mHbb5D6idq8binUOhknRLdLEcaQyFUpsNpzH/o
+ pWcOOVfmPjwubcsqA2Opov+F7OMahZamr5YV4/m71gpzx/EsZrgEHsCO0cNupQ==
+Message-ID: <f97fbf07-39c1-406a-9349-0ec84bf0300b@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753042781;
+ s=mail20150812; t=1753044476;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Dg9pWTp97+mJ93FPc0Axxl6SZl8qA5LM0NudAcfP4mE=;
- b=ih1YCnKstNlYmz135pKQO3WY62Ft7jrhvAXGuWnrFjD5D/G3lqX+GJWGfekx3k8mM/eC4y
- K3p5kUjLbqL82OuFRseNmtrGjecTQQufWZEOPqI9C1nUMtgulHx9dwY7dLxxxf8wa1P8ra
- piROuCz6FF5Ki3tVPWBJj5gHFPPm3KO98rqH3WyLzY0IbSkmWiQRhWNBgNbWyBdayLF7Lu
- 4rrDa/ckYDlynOd+TATYtNcsAYWjRE6SZZAPjcVt2Iz7zyPY8AyYAwOzMwsbZ/I8w+4jOJ
- AZTUJ9A3xUCU4Dj2pOCMtEEyLClZ5RGSivmFEHePYE1mVjHkoJOq2HalbZsFBg==
-Date: Sun, 20 Jul 2025 22:19:39 +0200
+ bh=+Fa5ai4jc+40/NpPqHvnkTnpcGE/uG8bPPwyw8AGCq0=;
+ b=LNRyaMVYwfuPRvyintEzHTI8pfaS4qrMqXoFAn9pa+JbtCSlgSLU1LSjBGfiIcCqqTH6nj
+ s9dhgf+OqbdELJQ6gCMScDRfY3J3xy4ImyYUggWHjtrOVcTGbq/f6y27XkGpy2TW9xfQ8F
+ 7UKll/uctIayLBKdjigQy7nOh3XaDMac+G5Nimsm4XJ84E1Ukq2yiOZGCtTqGz68ZON9WR
+ Ign1BdM3nxrh9/uvFiVLBu6mqtlQBI+c/e6KQaKIItv86MuJC6Cbw3PXSpmNA7qZk8Kust
+ j7XrLCcWFABZTL9xhZqMSYvng74H3HO9PYL66m3eIaPnrNs6oBMt9O/f+TqG8Q==
+Date: Sun, 20 Jul 2025 22:47:50 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 7/9] net: sh_eth: Adjust RZ/A1, add RZ/A2 support
-To: Magnus Damm <magnus.damm@gmail.com>
-Cc: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
- Chris.Brandt@renesas.com, geert+renesas@glider.be
-References: <175180131601.86839.3544906856404059041.sendpatchset@1.0.0.127.in-addr.arpa>
- <175180136965.86839.10195243856147148306.sendpatchset@1.0.0.127.in-addr.arpa>
- <0e525790-79f7-4653-808d-137c1e55ed09@mailbox.org>
- <CANqRtoQUCmwfYF80KqoBSSYbhzJmR0488R6+zJFxBTyGYXLcwg@mail.gmail.com>
+Subject: Re: [U-Boot, v1, 1/1] misc: fs_loader: Add
+ request_firmware_into_buf_via_env API for environment-based firmware loading
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de,
+ marek.vasut+renesas@mailbox.org, tien.fong.chee@altera.com,
+ trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, seanga2@gmail.com
+Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org,
+ albert-al.lee@airoha.com
+References: <20250720150404.25844-1-lucienzx159@gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CANqRtoQUCmwfYF80KqoBSSYbhzJmR0488R6+zJFxBTyGYXLcwg@mail.gmail.com>
+In-Reply-To: <20250720150404.25844-1-lucienzx159@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 9zwird7x13pmu3x1izqk7rp1wyh3hxms
-X-MBO-RS-ID: 60d503971fdf12ef202
-X-Rspamd-Queue-Id: 4blZdD25jCz9tBf
+X-MBO-RS-ID: 0bc228145ff0468b084
+X-MBO-RS-META: s5qcg7qwnrnzmu9whhcszdkrspkmyb6o
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,110 +91,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/7/25 7:03 PM, Magnus Damm wrote:
-
-Hello Magnus,
-
-I'm sorry for the late reply.
-
->>> +++ work/drivers/net/sh_eth.c 2025-07-05 17:45:07.333754799 +0900
->>> @@ -144,10 +144,10 @@ static int sh_eth_reset(struct sh_eth_in
->>>    {
->>>    #if defined(SH_ETH_TYPE_GETHER) || defined(SH_ETH_TYPE_RZ)
->>>        int ret = 0, i;
->>> -
->>
->> Does something like this ...
->>
->> if (!device_is_compatible(dev, "..."))
->>
->> ... work instead of the ifdef ?
->>
->> If yes, it might be even improved into dedicated function:
->>
->> static bool device_is_rza2(struct udevice *dev)
->> {
->>     if (!IS_ENABLED(CONFIG_RZA2))
->>       return false;
->>     else
->>       return device_is_compatible(dev, "...");
->> }
->>
->> That should be compile-time checked and then optimized out, and in case
->> of non-RZA2, this should be optimized out entirely.
+On 7/20/25 5:04 PM, Lucien.Jheng wrote:
+> This commit adds request_firmware_into_buf_via_env() to the fs_loader driver,
+> enabling firmware loading into a buffer
+> using environment variables for path and size.
+> It supports multiple entries via indexed variable names
+> (e.g., "fw_dir0", "fw_size0").
+> This provides flexible, scriptable firmware loading without hardcoded details.
 > 
-> While I'm all for trying to clean up the code, unfortunately I don't
-> think only adding compat string handling to RZ is going to help that
-> much. My apologies for prodding with DT in the SCIF driver for RZA2
-> only. The same thing applies there in my opinion. =) But we have to
-> start somewhere, that's for sure.
-
-I suspect cleaning up the sh_eth will be a larger undertaking, yes.
-
-> By the way, did you see the #ifdeffery and the compile time constants
-> in sh_eth.h? Also there seems to be a lot of overlap between
-> TYPE_GETHER and TYPE_RZ.
-
-I am aware of the ifdeffery, yes.
-
-> My first take on cleaning up the sh_eth.c driver would probably be to
-> dive deeper into the offset tables (such as sh_eth_offset_rz in
-> sh_eth.h) and convert the code to during runtime use the offset table
-> to determine if a register exists or not. That would take care of a
-> bunch of TYPE_GETHER and TYPE_RZ differences and remove some #ifdefs
-> from the code as long as the offset tables are correct (which they
-> don't seem to be for RZ so those need to be validated as well). Then
-> perhaps add some feature flag to handle corner cases like
-> 'device_needs_polled_reset' to clean up sh_eth_reset().
-
-The one thing you have to be careful about is to avoid increasing the 
-code size too much. Use if (IS_ENABLED()) and such macros, which do 
-compile the code, but then let gcc optimize it out. This retains code 
-coverage, but shouldn't increase the code size.
-
-> And during probe() or U-Boot equivalent then using the compat string
-> detection mechanism to select appropriate offset table would make
-> sense to me.
+> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+> ---
+> Change log:
+> - Re-sending as previous version and add more maintainers to review.
 > 
-> What do you think? This seems like incremental cleanups though, not
-> neccessarily related to RZ. I am happy to clean it up though, if you
-> think it would be helpful.
-
-I am happy with incremental clean ups .
-
->>> +#if !defined(CONFIG_RZA2)
->>>        /* Start e-dmac transmitter and receiver */
->>>        sh_eth_write(port_info, EDSR_ENALL, EDSR);
->>> -
->>
->> [...]
->>
->>> @@ -722,8 +726,11 @@ static int sh_ether_probe(struct udevice
->>>                goto err_mdio_register;
->>>
->>>        priv->bus = mdiodev;
->>> -
->>> +#ifdef BASE_IO_ADDR
->>>        port_info->iobase = (void __iomem *)(uintptr_t)BASE_IO_ADDR;
->>> +#else
->>> +     port_info->iobase = (void __iomem *)pdata->iobase;
->>> +#endif
->>
->> Can the base address be pulled from DT?
+>   drivers/misc/fs_loader.c | 59 ++++++++++++++++++++++++++++++++++++++++
+>   include/fs_loader.h      | 18 ++++++++++++
+>   2 files changed, 77 insertions(+)
 > 
-> Actually pdata->iobase comes from DT. Currently BASE_IO_ADDR is not
-> set in sh_eth.h for RZ/A1 and RZ/A2. In such case the code above uses
-> DT to get the device base address. Other processor variants still rely
-> on the compile time constants.
+> diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+> index 66803f4b997..a4f4448f5cc 100644
+> --- a/drivers/misc/fs_loader.c
+> +++ b/drivers/misc/fs_loader.c
+> @@ -228,6 +228,65 @@ int request_firmware_into_buf(struct udevice *dev,
+>   	return ret;
+>   }
+> 
+> +/**
+> + * request_firmware_into_buf_via_env - Load firmware using environment variables.
+> + * @dev: An instance of a driver.
+> + * @buf: Address of buffer to load firmware into.
+> + * @offset: Offset of a file for start reading into buffer.
+> + * @fw_index: Index of the firmware entry to load.
+> + *
+> + * This function loads firmware into the provided buffer using environment
+> + * variables to determine the firmware file path, address, and size. It supports
+> + * multiple firmware entries by using indexed environment variable names such as
+> + * "fw_dir0", "fw_size0", etc.
 
-Looking at sh_eth.h , it seems to me that every processor that is 
-currently supported can already pull the address from DT (Gen2, RZ/A1, 
-Gen3 V3H), the rest of the CPUs are not supported. Maybe the 
-BASE_IO_ADDR can be dropped outright instead ?
+To make this really scriptable, this code has to run a script which does 
+the firmware loading and then points the U-Boot code to the buffer with 
+data in it.
 
-> And good news, as I wrote in some cover
-> email, this driver is with this patch known to work in multi-port
-> configuration since RZ/A2 GR-Peach is using ch0 with MII and RZ/A2
-> RZA2MBTC is using ch1 RMII. The configuration all comes from DT.
+Instead of "fw_index", use "char *script_name" or some such. Then, run 
+the script. The script should set up two environment variables, call 
+them e.g. "fw_addr" and "fw_size" or some such . Then, this code should 
+read the two environment variables, validate them, and possibly copy 
+their content into $buf . Finally, the code should always unset fw_addr 
+and fw_size .
 
-That is nice.
+Note that request_firmware_into_buf_via_env() should also have 'size' 
+parameter which describes the maximum size of loaded firmware, so the 
+code could verify whether the copy of firmware into $buf would write 
+past the buffer and prevent that.
+
+> + * Return: Size of total read, negative value when error.
+> + */
+> +int request_firmware_into_buf_via_env(struct udevice *dev,
+> +				      void *buf, u32 offset,
+> +				      unsigned int fw_index)
+> +{
+I'm sorry for the slow response.
+
+[...]
