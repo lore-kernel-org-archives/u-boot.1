@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 686C3C83F26
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 22:09:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC874C83F25
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 22:09:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56859837F5;
-	Tue, 22 Jul 2025 00:08:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2728283753;
+	Tue, 22 Jul 2025 00:08:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ru8aOOub";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qHvdTk4M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33D2C830EA; Tue, 22 Jul 2025 00:08:19 +0200 (CEST)
+ id D4A62830EA; Tue, 22 Jul 2025 00:08:21 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0C2B8383E
+ by phobos.denx.de (Postfix) with ESMTPS id 051AA8383F
  for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 00:08:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1753135695; bh=U5Qc8sPa43YRvxZfpKml8hdj9zVIGWyvwEsd6DkREQM=;
- b=ru8aOOubW6KezZbmGMujDbXVvFI9j5tEmBHbC9EJqUMY3OJHxagfUkjzJ+vzEnk8GePTrJDJo
- rtHF/Cx42VELmYDqm1wwKeqKbPtT9gchw8sJmI9pbR8qlHuCggWPiwOrnXieC0KQqOATcTKh//l
- RWNJAZcsqONDfHPN4xHl0SPcYk028XGV81aIyXZB+Kqg/IT7+eKoYW5Z5yTNTybHHe/4nQvO6Dt
- ICwZ+IH7qX4Uyuw0BWUKka8hmP7Bnc7Q15OJeSQaIGkXgioUKKp1wWPr+qGslNji+MJ0wzOp0Gm
- D6EC8o8a7ZCULDm+IhedYThrqFCgTfcTilNHh0TS5eCQ==
-X-Forward-Email-ID: 687eba4a285c522641289574
+ t=1753135695; bh=DWNofZWsELtd9nIMUA5suLfA/VQaS1I9Sg8FuboOHcw=;
+ b=qHvdTk4MiG4NGTJd6lBNJzvzc4WLjlPFN4RZOAbRbmKPYTvhKewauS8mUQsLjdUMMvmBignTW
+ w7nckorpW25ZKWoSs+D3GFStHsnkbOwJJqPlQfGNjvfWeSOYt1hT0Ci4c7z3B0DP3HNOWVdqW+J
+ PTdyP/EjLAO/YvUE9/rJsgbvEuCmd3Su0WkXxmfSOOsOMUmyxUf8dONeg2o6ZKKh2cr870KiYMn
+ fjnPcHTdEMlpGVLccJ1/DA0zeSHHh9Bn/YjUaDOjYUt8W65DL3ufQ6DLP6bAd1Rlbc9ekkAnE1w
+ jKTdMq0kzwV3SxyppGW9OnjA7wh+F1gDrYJLbsgddKzw==
+X-Forward-Email-ID: 687eba4e285c522641289589
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.1.6
@@ -44,12 +44,12 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 09/10] rockchip: rk3576: Disable USB3OTG0 U3 port early
-Date: Mon, 21 Jul 2025 22:07:18 +0000
-Message-ID: <20250721220734.1617117-10-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH 10/10] rockchip: rk3588-generic: Move usb nodes to board dts
+Date: Mon, 21 Jul 2025 22:07:19 +0000
+Message-ID: <20250721220734.1617117-11-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250721220734.1617117-1-jonas@kwiboo.se>
 References: <20250721220734.1617117-1-jonas@kwiboo.se>
@@ -71,45 +71,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RK3576 SoC comes with USB OTG support using a DWC3 controller with
-a USB2 PHY and a USB3 PHY (USBDP PHY).
+After the commit 7a53abb18325 ("rockchip: rk3588: Remove USB3 DRD nodes
+in u-boot.dtsi") was merged for v2024.10 there is no reason to keep the
+usb nodes for the Generic RK3588 board in the board u-boot.dtsi.
 
-Some board designs may not use the USBDP PHY for USB3 purpose. For these
-board to use USB OTG the input clock source must change to use UTMI clk
-instead of PIPE clk.
+Move usb related nodes from board u-boot.dtsi to main board device tree.
 
-Change to always disable the USB3OTG0 U3 port early and leave it to the
-USBDP PHY driver to re-enable the U3 port when a usb3-phy is described
-in the board device tree.
+While at it, also drop use of the usb3-phy as we only want to enable the
+usb2-phy to be compatible with as many boards as possible.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3576/rk3576.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/arm/dts/rk3588-generic-u-boot.dtsi | 18 ------------------
+ arch/arm/dts/rk3588-generic.dts         | 16 ++++++++++++++++
+ configs/generic-rk3588_defconfig        |  1 -
+ 3 files changed, 16 insertions(+), 19 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
-index ba5c94b4b3dd..dc53941ab2f5 100644
---- a/arch/arm/mach-rockchip/rk3576/rk3576.c
-+++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
-@@ -29,6 +29,9 @@
- #define SGRF_DOMAIN_CON4	0x10
- #define SGRF_DOMAIN_CON5	0x14
+diff --git a/arch/arm/dts/rk3588-generic-u-boot.dtsi b/arch/arm/dts/rk3588-generic-u-boot.dtsi
+index f67301d87a6e..853ed58cfe58 100644
+--- a/arch/arm/dts/rk3588-generic-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-generic-u-boot.dtsi
+@@ -1,21 +1,3 @@
+ // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
  
-+#define USB_GRF_BASE		0x2601E000
-+#define USB3OTG0_CON1		0x0030
-+
- const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_EMMC] = "/soc/mmc@2a330000",
- 	[BROM_BOOTSOURCE_SD] = "/soc/mmc@2a310000",
-@@ -151,5 +154,8 @@ int arch_cpu_init(void)
- 	 */
- 	writel(0xffffff00, SYS_SGRF_BASE + SYS_SGRF_SOC_CON20);
+ #include "rk3588s-u-boot.dtsi"
+-
+-&u2phy0 {
+-	status = "okay";
+-};
+-
+-&u2phy0_otg {
+-	status = "okay";
+-};
+-
+-&usbdp_phy0 {
+-	status = "okay";
+-};
+-
+-&usb_host0_xhci {
+-	dr_mode = "peripheral";
+-	maximum-speed = "high-speed";
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
+index 95d757676f12..6740f9866f17 100644
+--- a/arch/arm/dts/rk3588-generic.dts
++++ b/arch/arm/dts/rk3588-generic.dts
+@@ -39,7 +39,23 @@
+ 	status = "okay";
+ };
  
-+	/* Disable USB3OTG0 U3 port, later enabled by USBDP PHY driver */
-+	writel(0xffff0188, USB_GRF_BASE + USB3OTG0_CON1);
++&u2phy0 {
++	status = "okay";
++};
 +
- 	return 0;
- }
++&u2phy0_otg {
++	status = "okay";
++};
++
+ &uart2 {
+ 	pinctrl-0 = <&uart2m0_xfer>;
+ 	status = "okay";
+ };
++
++&usb_host0_xhci {
++	dr_mode = "peripheral";
++	maximum-speed = "high-speed";
++	phys = <&u2phy0_otg>;
++	phy-names = "usb2-phy";
++	status = "okay";
++};
+diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
+index ed2f936b324b..dfa8efabe6be 100644
+--- a/configs/generic-rk3588_defconfig
++++ b/configs/generic-rk3588_defconfig
+@@ -53,7 +53,6 @@ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
+ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+-CONFIG_PHY_ROCKCHIP_USBDP=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_SPL_RAM=y
+ CONFIG_BAUDRATE=1500000
 -- 
 2.50.1
 
