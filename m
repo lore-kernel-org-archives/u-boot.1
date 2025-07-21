@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BB54C83F25
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 22:08:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FEEEC83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 22:08:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D692883767;
-	Tue, 22 Jul 2025 00:07:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8C2E9831E4;
+	Tue, 22 Jul 2025 00:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="pLprhZSh";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dUhpObd5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 944DD83767; Tue, 22 Jul 2025 00:07:53 +0200 (CEST)
+ id A0A21830EA; Tue, 22 Jul 2025 00:07:58 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CE32830C8
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 00:07:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78120831E4
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 00:07:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1753135670; bh=DbC9WcR5CLOYlM869P+Z8wWZZWYjPRSV9OGJc1yALN4=;
- b=pLprhZShCHgTrhWXGDOT6wbAIGHfDyxoeHVI3LVOj9DWsQ+1aYK/ekhLNJ6/wWwCg/DUEBFeJ
- M0bYYrz4Rtjv0n1vkOafsluzy9KNAMuwS+ZC76agkWdBXEVdQxZM4sJ6umiK0F93MO4ZoCHdGyR
- BAciomRT/6Z/EDOjyd+dnS6QTQg5qvhFwyH7vWkk3peeUhHsRFGiZpWuHo10FK4rT42pMGa9KpR
- W2z28X7507pPcsZBCVl0lPGDp76wgEW3DGugXLE1QyaH096UfgscVxNmlOoasTUouzMUTofqj/a
- u9lndC5/co/Altt0biUprVzwiGun6aWjeBREO39nTwGw==
-X-Forward-Email-ID: 687eba33285c5226412894df
+ t=1753135675; bh=29sDlvgh4WExxF8f7IqiFwNiFgoDZArUPxf0mC715ZQ=;
+ b=dUhpObd5oCioTY0l+187xNNykWsWqMMi7bMEPr5qys5g+Xh+DQsdxLlBynYMGioJKEEWtJXqr
+ aeYcSFMNUiI1+uBr4mCBpQ1Aw9VeoRN/aEOV2s6ZJ3TY+LQJagUCl56XRag6AlCA/ND8rGxY/b2
+ +EP4gxD5C/MhW2ZoPJdPdqCfxdBmQmkPh+7ZEFdcGJ4I8X9x09pLtht8u2d26k7XDqisqlHbwIi
+ M4G3LR/BgWBFAto+ez74BkUYChPt7RN7owWUxsVT2JRMg6+nGZJHHwRQlmQUsGLYHdSLnxgQd2P
+ KCpkHcZk/hrHvQeNPTKDSfLeIUKR+QiaX/3L8r84HMeg==
+X-Forward-Email-ID: 687eba36285c5226412894f4
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.1.6
@@ -47,9 +47,10 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 02/10] phy: rockchip: usbdp: Simplify init ops
-Date: Mon, 21 Jul 2025 22:07:11 +0000
-Message-ID: <20250721220734.1617117-3-jonas@kwiboo.se>
+Subject: [PATCH 03/10] phy: rockchip: naneng-combphy: Fix Generic PHY
+ reference counting
+Date: Mon, 21 Jul 2025 22:07:12 +0000
+Message-ID: <20250721220734.1617117-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250721220734.1617117-1-jonas@kwiboo.se>
 References: <20250721220734.1617117-1-jonas@kwiboo.se>
@@ -71,132 +72,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With working shared reference counting for Generic PHY ops there is no
-need for the Rockchip USBDP PHY driver to keep its own status (reference
-counting) handling.
+Generic PHY reference counting helps ensure driver ops for init/exit and
+power on/off are called at correct state. For this to work the PHY
+driver must initialize PHY-id to a persistent value in of_xlate ops.
 
-Simplify the init ops now that shared reference counting is working.
-This also removes the unused mode_change handling as part of the
-simplication.
+The Rockchip COMBPHY driver does not initialize the PHY-id field, this
+typically lead to use of unshared reference counting among different
+struct phy instances.
 
-No runtime change is expected with this simplication.
+Initialize the PHY-id in of_xlate ops to ensure use of shared reference
+counting among all struct phy instances.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/phy/rockchip/phy-rockchip-usbdp.c | 71 +++--------------------
- 1 file changed, 8 insertions(+), 63 deletions(-)
+ drivers/phy/rockchip/phy-rockchip-naneng-combphy.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
-index 56963c87183e..6cfbef02b4ac 100644
---- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
-+++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
-@@ -96,9 +96,7 @@ struct rockchip_udphy {
- 
- 	/* PHY status management */
- 	bool flip;
--	bool mode_change;
- 	u8 mode;
--	u8 status;
- 
- 	/* utilized for USB */
- 	bool hs; /* flag for high-speed */
-@@ -525,65 +523,6 @@ static int udphy_parse_dt(struct rockchip_udphy *udphy, struct udevice *dev)
- 	return 0;
- }
- 
--static int udphy_power_on(struct rockchip_udphy *udphy, u8 mode)
--{
--	int ret;
--
--	if (!(udphy->mode & mode)) {
--		dev_info(udphy->dev, "mode 0x%02x is not support\n", mode);
--		return 0;
--	}
--
--	if (udphy->status == UDPHY_MODE_NONE) {
--		udphy->mode_change = false;
--		ret = udphy_setup(udphy);
--		if (ret)
--			return ret;
--
--		if (udphy->mode & UDPHY_MODE_USB)
--			udphy_u3_port_disable(udphy, false);
--	} else if (udphy->mode_change) {
--		udphy->mode_change = false;
--		udphy->status = UDPHY_MODE_NONE;
--		if (udphy->mode == UDPHY_MODE_DP)
--			udphy_u3_port_disable(udphy, true);
--
--		ret = udphy_disable(udphy);
--		if (ret)
--			return ret;
--		ret = udphy_setup(udphy);
--		if (ret)
--			return ret;
--	}
--
--	udphy->status |= mode;
--
--	return 0;
--}
--
--static int udphy_power_off(struct rockchip_udphy *udphy, u8 mode)
--{
--	int ret;
--
--	if (!(udphy->mode & mode)) {
--		dev_info(udphy->dev, "mode 0x%02x is not supported\n", mode);
--		return 0;
--	}
--
--	if (!udphy->status)
--		return 0;
--
--	udphy->status &= ~mode;
--
--	if (udphy->status == UDPHY_MODE_NONE) {
--		ret = udphy_disable(udphy);
--		if (ret)
--			return ret;
--	}
--
--	return 0;
--}
--
- static int rockchip_u3phy_of_xlate(struct phy *phy,
- 				   struct ofnode_phandle_args *args)
- {
-@@ -603,6 +542,7 @@ static int rockchip_u3phy_of_xlate(struct phy *phy,
- static int rockchip_u3phy_init(struct phy *phy)
- {
- 	struct rockchip_udphy *udphy = dev_get_priv(phy->dev);
-+	int ret;
- 
- 	/* DP only or high-speed, disable U3 port */
- 	if (!(udphy->mode & UDPHY_MODE_USB) || udphy->hs) {
-@@ -610,7 +550,12 @@ static int rockchip_u3phy_init(struct phy *phy)
- 		return 0;
+diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+index 5145b517aa4c..a3038d067d3a 100644
+--- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
++++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+@@ -223,6 +223,7 @@ static int rockchip_combphy_xlate(struct phy *phy, struct ofnode_phandle_args *a
+ 		return -EINVAL;
  	}
  
--	return udphy_power_on(udphy, UDPHY_MODE_USB);
-+	ret = udphy_setup(udphy);
-+	if (ret)
-+		return ret;
-+
-+	udphy_u3_port_disable(udphy, false);
-+	return 0;
- }
++	phy->id = priv->id;
+ 	priv->mode = args->args[0];
  
- static int rockchip_u3phy_exit(struct phy *phy)
-@@ -621,7 +566,7 @@ static int rockchip_u3phy_exit(struct phy *phy)
- 	if (!(udphy->mode & UDPHY_MODE_USB) || udphy->hs)
- 		return 0;
- 
--	return udphy_power_off(udphy, UDPHY_MODE_USB);
-+	return udphy_disable(udphy);
- }
- 
- static const struct phy_ops rockchip_u3phy_ops = {
+ 	return 0;
 -- 
 2.50.1
 
