@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28DA2C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 20:32:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B2EC83F25
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 20:39:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BF4D831D7;
-	Mon, 21 Jul 2025 22:32:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A9BC183214;
+	Mon, 21 Jul 2025 22:39:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HcErkgXh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h7TVSR/v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D45D83214; Mon, 21 Jul 2025 22:32:08 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 3CC0783214; Mon, 21 Jul 2025 22:39:08 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68481830EA
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 22:32:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1AE6830EA
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 22:39:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-718389fb988so46278487b3.1
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:32:06 -0700 (PDT)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e8db917573dso116657276.1
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:39:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753129925; x=1753734725; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753130344; x=1753735144; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UqKK0cZVdrypYegZ7LUsbfcy8zg+dowygwHVWpGFGWM=;
- b=HcErkgXhV1/zdXi4FS+4MkNT32TCydF+od1uq/dBmL23QCYmb0/FCYkRd6NaGHLIKI
- H9OpElKcVIV0YJbEfLNW7L93RJPmGCvROGym0otxN4Jv7LtrS/pF0bu5Rf9wlbM4WDS3
- RPdpv1ao335c4nA0oKErg/yVU4t9RsNH+os2NUNeTjFFWJod+e0VpukSftfpKO1Rpug+
- Nx4OsiBdogJ1PynL1HBxm6PXdbX1YJvCJoCeOA2X5fwJJO7YmL1PnwUTi/iqXk6wyfzn
- 1ShIBViytCse8zICX0duD60YkiZZu9rsc0sb7X7zq+Zo+AqtD9GCQIsyR1H8zyG06kQF
- eHgQ==
+ bh=pm0nNxXHMBFIKbpriw3+J+gEsBdn9IvvSa51s+jlD6o=;
+ b=h7TVSR/vV6zqEjg15dGWJ3FR6hEvOsAJSDYqK8rxay0OgIDoy2Uf0qOkweHM7QbCvM
+ q2J8OBnQLA1nZ0Lfy/xE5wi50GN52pnPeH2ysdZhyRtJtBeaIaxn7UPLXDZkzjvCSwrH
+ 67WfFgDPI310YUnwNZ11p9RmsGZ6hVMzLixB7Fhwu9yGrIkd0osMppiDCft1LuQULuob
+ XMToLxHx0F5HRUvjIIQClZq0iUZgINZKlgzlg/UnGfEIwAZJIm9/NO8lS3vvmyhhd1Yk
+ qBwb0cV/mBAoBp4iiAdyI+Kj3hpKfATI5A9MSrjBBun0+caj9YfPA58Fc4jmkAYPVSpc
+ KL7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753129925; x=1753734725;
+ d=1e100.net; s=20230601; t=1753130344; x=1753735144;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UqKK0cZVdrypYegZ7LUsbfcy8zg+dowygwHVWpGFGWM=;
- b=gAwYNVvsIeuTVWKvjIVzyHQiXgnJnZ2j7PeSdQR8V/8OXYmu83J7/sgZr4KZhhyJRn
- ITjbLDWfCsDWnUPJT+jby/UoEdL6qUsslc0xTyyfUjxHor/XHcDoaq/9oZevxyiUMLkN
- ZJzl8G1lGzej3e3QW3I0Zjl0P1AVwF1aog/noW+YPI8ICGFwL9AxVJvPHOmDKzr5tY/a
- 0D9yXpVSl+GNIoHAp56JXpYh76QMSF/IxDq5eyY7LxATR9yfDGpSuaEit8/DY9oFLWZC
- d9zpzMcK249VITtyQaDbqM+IcAKZgoUJGie9UmqbOenT1o9biJJHCtExJUg6N6aBaF+L
- MozA==
+ bh=pm0nNxXHMBFIKbpriw3+J+gEsBdn9IvvSa51s+jlD6o=;
+ b=Low6paATlB/geWJigPHX9z6iQsYUgFxdXJxvPsXFFfqyyRkToh5GUM6/m8U21Dw9xH
+ m5tFsVSEoaTBUyO26nLVJvT34ZtJf5TXZU4KlNgc3J9xuA4n7bW0HykjLLSmgUVDu1zD
+ az0l89t9zqhLxJhavlyqOH+5o60vNkSOXSmCd4bEHuSq5XDoZ0eZog69Jn1MhYijGI+s
+ k2g9PU6KV9hJMFG57uZkEwL3NQ6SZRtmpr90iQU14tmltgIctWDIcQH5pIFRMVuqMG7k
+ pfCV/abGlHw5MJUokEFurDY0pgc7vbg2Q5lqj+w07z5cBT622PR3mvW8DWomenelCEpd
+ pQow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVnwmxxcSac62CMo+Etv/Ebsy9YU/l3pXrFCuymeNbrtM2bZKPQ5KownCAVxiYtYpdgHrfarU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyf94IgmV4LFTBRWzIejnXgBD6OaZD/WmVmye0qhbAYogUPGoik
- q4V70GLZCntQ8HbxGv2qeaxO6BQmNZJxHHfJgVsFyoRMrTzIrgewKpaiTEhOKpHwNmEkppbFQoH
- QKD7QAWjj6TS+nBEWxL1rLR2vILA2B76xi4IyKQWuUZxrTtf2ssLORso=
-X-Gm-Gg: ASbGncu/J5PbkbNYZW6MUbVMo727TuDIfDL2fM/6wTsU3mTx1Ar1eLHNlmbgxpzvOB5
- PrFzRv8TpOMO/54EKcweWQJTDfQJzC5t3olZAr1bw2w9StpbfmflbdzGMmxVwJP+/rMorGXtqvz
- +4l2EtN2J7poORokAYyg4TpFG86DhKTdG38YRqRgcvbafb5LzQUK15q9gSFK59yGr+ekH6nHo9h
- ULEZ+Q=
-X-Google-Smtp-Source: AGHT+IEdBRDafxBrmulSv00TCXs8b0zpabzVUu9lrZev0rkYY/wxGFiFKuQ0/5rexCTxQaZ14uq51WiC0yhrbE47dl4=
-X-Received: by 2002:a05:690c:6e0b:b0:710:e4c4:a92f with SMTP id
- 00721157ae682-71834f3680dmr235273917b3.5.1753129925206; Mon, 21 Jul 2025
- 13:32:05 -0700 (PDT)
+ AJvYcCUjfn4BBPmsjnuOypt0K7PEWGnSDRkJxwzrYUYDbjv3wVMZO9nVIUcbX+jhLjBdkERp+5lVRdY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1PjzYHotxsY33vTrmllgVqP+leDMxt6800Vp2IyaXD4B5aKMk
+ hPzHuZNUQZQBlQBdE9AkflDrVaocWKklNdIPO6CFJgqgZmMcKQSFP0U6PkQ94j56lZTr3Q9T4EU
+ kJoKDm0ckAhVis7N3DYN9Pxth2APZeAt7hlDggXnPVw==
+X-Gm-Gg: ASbGnctjoPN+EsLCcqTp7x4A4+ERDghXTzrheCM3RlDLjZ2CBCOH0h7qXTzd/uJejpE
+ E+RGnCYkrU8eBHMdf1cR8F1U0aA5Zohi/bfzUIWibwVaNt96M6Knwff1VycLo+jS3nRR0QvpjLK
+ 8X2puMmchz0XULXANJvKsqbD/rOf+ZgHSKEp4vxLOjlosdzHiig4BimRpcO9INhQSgtcbu6klZj
+ Z9LRF6I3zefruuuwQ==
+X-Google-Smtp-Source: AGHT+IEwVMM147RusOzCcH0LxNqd6PaX3v1++iMpIS0lZwbVU4ryn2z28ojSBakRhElEY+q0x8eodx18C5dUQGGyVTE=
+X-Received: by 2002:a05:690c:6007:b0:719:586d:dd11 with SMTP id
+ 00721157ae682-719586deae1mr152385937b3.21.1753130344525; Mon, 21 Jul 2025
+ 13:39:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
- <20250720-samsung-mmc-fixes-v1-2-cb705abfa594@grimler.se>
-In-Reply-To: <20250720-samsung-mmc-fixes-v1-2-cb705abfa594@grimler.se>
+ <20250720-samsung-mmc-fixes-v1-3-cb705abfa594@grimler.se>
+In-Reply-To: <20250720-samsung-mmc-fixes-v1-3-cb705abfa594@grimler.se>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Mon, 21 Jul 2025 15:31:54 -0500
-X-Gm-Features: Ac12FXyN9mCWPHw9IlaQ0z1muokEic5K3-gdYLtT-52roApnZP92dUAqkTyKMUc
-Message-ID: <CAPLW+4kEPKRTHYn1q6N6_PNxJo4VR7RnLtcEt4rx67vnoQUHqw@mail.gmail.com>
-Subject: Re: [PATCH 2/3] mmc: s5p_sdhci: add samsung,
- exynos4210-sdhci compatible
+Date: Mon, 21 Jul 2025 15:38:53 -0500
+X-Gm-Features: Ac12FXyw9vurWVQQ5wZiCtd1AD-4wVKJlrELGOWznRn1i0uQZ3FUy8Y9zS8aWqw
+Message-ID: <CAPLW+4mreJS4UDebSUH_TXy-9PLHLFZuCFyQQ=auetOQOwVfpA@mail.gmail.com>
+Subject: Re: [PATCH 3/3] mmc: exynos_dw_mmc: add exynos5420 compatibles
 To: Henrik Grimler <henrik@grimler.se>
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
  David Virag <virag.david003@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>, 
@@ -102,34 +101,43 @@ X-Virus-Status: Clean
 On Sun, Jul 20, 2025 at 12:00=E2=80=AFPM Henrik Grimler <henrik@grimler.se>=
  wrote:
 >
-> the Exynos4210 devices in u-boot uses samsung,exynos4412-sdhci as
-> sdhci compatible in their DTSes, while the upstream DTSes uses
-> samsung,exynos4210-sdhci.
+> From: Jaehoon Chung <jh80.chung@samsung.com>
 >
-> Add samsung,exynos4210-sdhci compatible string for s5p_sdhci driver as
-> well so that it can be used with upstream DTSes.
+> The exynos5420 DTSes in linux kernel uses the compatibles
+> samsung,exynos5420-dw-mshc{,-smu} instead of just
+> samsung,exynos-dwmmc. Match the additional compatibles in the driver
+> to make it possible to use it with DTSes from Linux kernel.
 >
+> Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
+> [ grimler: rebase after clksel reg abstraction and re-write commit messag=
+e ]
 > Signed-off-by: Henrik Grimler <henrik@grimler.se>
 > ---
 
 Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
->  drivers/mmc/s5p_sdhci.c | 1 +
->  1 file changed, 1 insertion(+)
+>  drivers/mmc/exynos_dw_mmc.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
-> diff --git a/drivers/mmc/s5p_sdhci.c b/drivers/mmc/s5p_sdhci.c
-> index b2faecefc00f479f53c2c6156da66a8fe46e4529..c80033d87529b192897560848=
-7961b205cc3afbf 100644
-> --- a/drivers/mmc/s5p_sdhci.c
-> +++ b/drivers/mmc/s5p_sdhci.c
-> @@ -226,6 +226,7 @@ static int s5p_sdhci_bind(struct udevice *dev)
->
->  static const struct udevice_id s5p_sdhci_ids[] =3D {
->         { .compatible =3D "samsung,exynos4412-sdhci"},
-> +       { .compatible =3D "samsung,exynos4210-sdhci"},
->         { }
->  };
->
+> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> index c8bf89d6d3552c1e0ebcaccc48a08087cbf3f596..12e37cb4b7884c5cdac030324=
+5c93988d034459a 100644
+> --- a/drivers/mmc/exynos_dw_mmc.c
+> +++ b/drivers/mmc/exynos_dw_mmc.c
+> @@ -372,6 +372,12 @@ static const struct udevice_id exynos_dwmmc_ids[] =
+=3D {
+>         {
+>                 .compatible     =3D "samsung,exynos4412-dw-mshc",
+>                 .data           =3D (ulong)&exynos4_drv_data,
+> +       }, {
+> +               .compatible     =3D "samsung,exynos5420-dw-mshc-smu",
+> +               .data           =3D (ulong)&exynos5_drv_data,
+> +       }, {
+> +               .compatible     =3D "samsung,exynos5420-dw-mshc",
+> +               .data           =3D (ulong)&exynos5_drv_data,
+>         }, {
+>                 .compatible     =3D "samsung,exynos-dwmmc",
+>                 .data           =3D (ulong)&exynos5_drv_data,
 >
 > --
 > 2.50.1
