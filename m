@@ -4,57 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC874C83F25
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 22:09:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0C8C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 23:01:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2728283753;
-	Tue, 22 Jul 2025 00:08:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7345483249;
+	Tue, 22 Jul 2025 01:01:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qHvdTk4M";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YVmj7irk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4A62830EA; Tue, 22 Jul 2025 00:08:21 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 09D1D831E4; Tue, 22 Jul 2025 00:07:42 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 051AA8383F
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 00:08:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE831830C8
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 00:07:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=dd2a=2D=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1753135695; bh=DWNofZWsELtd9nIMUA5suLfA/VQaS1I9Sg8FuboOHcw=;
- b=qHvdTk4MiG4NGTJd6lBNJzvzc4WLjlPFN4RZOAbRbmKPYTvhKewauS8mUQsLjdUMMvmBignTW
- w7nckorpW25ZKWoSs+D3GFStHsnkbOwJJqPlQfGNjvfWeSOYt1hT0Ci4c7z3B0DP3HNOWVdqW+J
- PTdyP/EjLAO/YvUE9/rJsgbvEuCmd3Su0WkXxmfSOOsOMUmyxUf8dONeg2o6ZKKh2cr870KiYMn
- fjnPcHTdEMlpGVLccJ1/DA0zeSHHh9Bn/YjUaDOjYUt8W65DL3ufQ6DLP6bAd1Rlbc9ekkAnE1w
- jKTdMq0kzwV3SxyppGW9OnjA7wh+F1gDrYJLbsgddKzw==
-X-Forward-Email-ID: 687eba4e285c522641289589
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.1.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH 10/10] rockchip: rk3588-generic: Move usb nodes to board dts
-Date: Mon, 21 Jul 2025 22:07:19 +0000
-Message-ID: <20250721220734.1617117-11-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250721220734.1617117-1-jonas@kwiboo.se>
-References: <20250721220734.1617117-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jeremy.bezairie@gmail.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6facf4d8ea8so37674806d6.0
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 15:07:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1753135658; x=1753740458; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=TsLbXaXd9ElChZB/4ar4i6PjnoeLHdJFadm02DeYuKA=;
+ b=YVmj7irkUyMUDDsAgV7R17Pj+mz6ATbkIQmSczDw6Mid138mqWaUiQV0Burv4RyAH6
+ 1eYcYZxrdB27jj6qdh63WcNNqQQxD2Irr8+DfR+LPgRZKcR8jpyp/6nzai2xLhepfeet
+ fsN8Lok4+agXYeq/E+SO6gvzpymZlJlJ7U0S96iRo9TrUmuuIua05XCous7iiL0VFQix
+ 64ftR0/NcRFW/OlCEaS6mTXe/nIJMySLAqc3kM2L7isGy75TSq7619yrBrbs2B+ZkdCc
+ 64ZB5EVXaWmKqwhE20yBB2/CwJGo+zShNMYv2GDeukhoEwoxkBKdgYxEjw1wCGUInqdW
+ PkUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753135658; x=1753740458;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=TsLbXaXd9ElChZB/4ar4i6PjnoeLHdJFadm02DeYuKA=;
+ b=MMxWpm+pVckeGW6MLuv19WmR0JbpGekVfwaWSh5CEsxLjsfzg+xXgFp6x/AOBbSb4Q
+ JK/ZAO9Y8KqLsNLNIuggCasnp4esI9wadMICSnh7NGWsdXTdDZyfOQ+EBpNWABq1Rio1
+ au0+d7GF40R2TZZBI1LEm/pkthW+3EyVnqk4G7co2lzQqqQBuStJUkjSmb85tmzQKvd8
+ rQn03zOKY0BnocC5ooEQuUMv0j35KRrOf0lSbD/hY3q1mEAR0B9FuRtfwrqBUwAmdE2o
+ j8AFcxC8HUZV2+DIbs7pgeelcf4s+gv6B/70Sa5iEfVUyCQ+CN7sFsSCGu1xXTzgbvTW
+ f/nQ==
+X-Gm-Message-State: AOJu0YwyMxpXf/Zr7zM9esMTJntDkqb/2mpNnaWRNLNIxFF40u0quJ9S
+ Q1boMQ9NzoBCrnU7nfg9u/LDmoUHSTnogxrSAECLuoqA5mNzvnBrH/Dezk4+y4HdFaAzFUVEU6s
+ JGYzP22w/KuL5FCLZJZqgXgE/3weGyHXTKkt87Mo=
+X-Gm-Gg: ASbGnctQdrwFEdiWxsgD6C67UvRFPP3XAwIRIMBTt8F3nxBlYgnj3mLV7Ytvvux/Ywi
+ O+XS44+iw3O6FriXmxzXSAL/Bw2h17coEI29qR9KKsJVaS9QDlxM3p9PyZkfC2enXGSogHWq5V2
+ t5w9yZfTZq8winxda2V8tPBKXUzHn+3AiYhqfm453cE7ChSUJGEcUOMlN9DOw1Trwff2bsgJl0J
+ 45FnbZYKxV8vhD3NBvf6w0GF9k0TJZCsJepLw==
+X-Google-Smtp-Source: AGHT+IGiAvTdDvHo0Mbt5BBi6VRsQRrLvl5v/tZi1vo5J+v34YmcwWN3xhm6NJtr+wwd+5Nqc57jYYNBmD/aje2pHEk=
+X-Received: by 2002:a05:6214:4611:b0:704:9275:a7c7 with SMTP id
+ 6a1803df08f44-704f47fa191mr315521176d6.2.1753135658060; Mon, 21 Jul 2025
+ 15:07:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: =?UTF-8?B?SsOpcsOpbXkgQsOpemFpcmll?= <jeremy.bezairie@gmail.com>
+Date: Mon, 21 Jul 2025 22:07:27 +0000
+X-Gm-Features: Ac12FXx6aM0e-43BPTsXKwwllQJPIxy0S9oBo7OS4NQ3o6TojqVXbt9iV5uQvOY
+Message-ID: <CAMdxF8AvrkcV=-PMZPQCUf1cB1qG-3yrk-y3eEL2=gTiF9p2iA@mail.gmail.com>
+Subject: No eMMC over USB if no partition
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Tue, 22 Jul 2025 01:01:45 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,88 +88,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After the commit 7a53abb18325 ("rockchip: rk3588: Remove USB3 DRD nodes
-in u-boot.dtsi") was merged for v2024.10 there is no reason to keep the
-usb nodes for the Generic RK3588 board in the board u-boot.dtsi.
+I already sent this email to x@xnux.eu ( https://xnux.eu/rk2aw/ , Author /
+Distribution ) at 17/7/2025, still no answer.
 
-Move usb related nodes from board u-boot.dtsi to main board device tree.
+Hi
 
-While at it, also drop use of the usb3-phy as we only want to enable the
-usb2-phy to be compatible with as many boards as possible.
+My PinePhone Pro has rk2aw on the SPI, on PC I'm on Arch Linux KDE.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3588-generic-u-boot.dtsi | 18 ------------------
- arch/arm/dts/rk3588-generic.dts         | 16 ++++++++++++++++
- configs/generic-rk3588_defconfig        |  1 -
- 3 files changed, 16 insertions(+), 19 deletions(-)
+If its eMMC is empty (no partition, all partitions deleted by eMMC over
+USB, KDE Partition Manager on PC), on the U-Boot menu (the 2. in
+https://xnux.eu/rk2aw/ , How rk2aw works) if I select eMMC over USB , it
+not works:
 
-diff --git a/arch/arm/dts/rk3588-generic-u-boot.dtsi b/arch/arm/dts/rk3588-generic-u-boot.dtsi
-index f67301d87a6e..853ed58cfe58 100644
---- a/arch/arm/dts/rk3588-generic-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-generic-u-boot.dtsi
-@@ -1,21 +1,3 @@
- // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
- 
- #include "rk3588s-u-boot.dtsi"
--
--&u2phy0 {
--	status = "okay";
--};
--
--&u2phy0_otg {
--	status = "okay";
--};
--
--&usbdp_phy0 {
--	status = "okay";
--};
--
--&usb_host0_xhci {
--	dr_mode = "peripheral";
--	maximum-speed = "high-speed";
--	status = "okay";
--};
-diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
-index 95d757676f12..6740f9866f17 100644
---- a/arch/arm/dts/rk3588-generic.dts
-+++ b/arch/arm/dts/rk3588-generic.dts
-@@ -39,7 +39,23 @@
- 	status = "okay";
- };
- 
-+&u2phy0 {
-+	status = "okay";
-+};
-+
-+&u2phy0_otg {
-+	status = "okay";
-+};
-+
- &uart2 {
- 	pinctrl-0 = <&uart2m0_xfer>;
- 	status = "okay";
- };
-+
-+&usb_host0_xhci {
-+	dr_mode = "peripheral";
-+	maximum-speed = "high-speed";
-+	phys = <&u2phy0_otg>;
-+	phy-names = "usb2-phy";
-+	status = "okay";
-+};
-diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-index ed2f936b324b..dfa8efabe6be 100644
---- a/configs/generic-rk3588_defconfig
-+++ b/configs/generic-rk3588_defconfig
-@@ -53,7 +53,6 @@ CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
--CONFIG_PHY_ROCKCHIP_USBDP=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_SPL_RAM=y
- CONFIG_BAUDRATE=1500000
--- 
-2.50.1
+** Invalid partition 1 **
+Couldn't find partition mmc 0
 
+So I booted
+https://github.com/manjaro-pinephone/plasma-mobile/releases/download/beta14/Manjaro-ARM-plasma-mobile-pinephonepro-beta14.img.xz
+on a microSD card, Terminal:
+
+sudo fdisk /dev/mmcblk2
+n
+
+
+
+w
+
+to create a new empty partition on the eMMC, now eMMC over USB works...
+
+Why should there be a partition?
+Maybe can you update U-Boot (or rk2aw) to eMMC over USB an empty eMMC?
+
+Thanks.
