@@ -4,65 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECB22C87FC5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 09:26:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3376C83F25
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 10:18:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FF2D830B3;
-	Mon, 21 Jul 2025 11:26:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 09041830A0;
+	Mon, 21 Jul 2025 12:18:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GAJL/gLm";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFCBA830C0; Mon, 21 Jul 2025 11:26:43 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2DDC08309A; Mon, 21 Jul 2025 11:18:54 +0200 (CEST)
+Received: from smtpbgbr2.qq.com (smtpbgbr2.qq.com [54.207.22.56])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A535E8309E
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 11:26:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 64A8482DA1
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 11:18:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4B3135C59EB;
- Mon, 21 Jul 2025 09:26:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CDE8C4CEED;
- Mon, 21 Jul 2025 09:26:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753090000;
- bh=X4IXRu7ARB47A/HcS1VY3q0HuS0M6YEVn9VZzy+DR1s=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=GAJL/gLmYOgR5hdBTHC/1h7xPjEbKKHhGfVvEULoD74QUzTLttSZuZl7YZ4zrjFSL
- KHJWkFHocBWWa/ZBtW6IEGjNdgLfne9YE2NhMY4biWOJMWX4Z2oiBZrYrP6CZ/5LbJ
- VSpXibplusm0YrcE9xbsrsRbhaT/xDiCyys8mjNa6HmoRcU9+pPTXytANOQluDHBsV
- fCxRY53Evb4QLZy7zw7ZbVcM3ymxx8uusfezsN/Vgut+ecRnp+nONObgaFRtmuneN3
- eIpTX6qx6mX64MHhi9SmCJ1PzcPIL+ocTbbwsvSO4fpZbqhlhpUZw1b1UMsAq1Bvot
- az+s1HFJBTMPw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Sam Protsenko <semen.protsenko@linaro.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, Minkyu Kang
- <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>, Simon Glass
- <sjg@chromium.org>, Oliver Gaskell <Oliver.Gaskell@analog.com>, Greg
- Malysa <malysagreg@gmail.com>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Jerome Forissier
- <jerome.forissier@linaro.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Roger Quadros <rogerq@kernel.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 1/9] phy: samsung: Add Exynos USB DRD PHY driver
-In-Reply-To: <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
-References: <20250709222926.24671-1-semen.protsenko@linaro.org>
- <20250709222926.24671-2-semen.protsenko@linaro.org>
- <87tt3b2ti7.fsf@kernel.org>
- <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
-Date: Mon, 21 Jul 2025 11:26:37 +0200
-Message-ID: <87ikjllws2.fsf@kernel.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=yt@radxa.com
+X-QQ-mid: zesmtpip3t1753089524t36fd31bb
+X-QQ-Originating-IP: N6HdzV/PgTSRYzcY4EM59bjhP01tpF70YSlwyVv4xYo=
+Received: from [IPV6:240e:3b7:3243:6880::cf8] ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with SMTP id 0
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 17:18:43 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 14393183196092005375
+Message-ID: <FB02908DDA84032E+c84dace3-80fc-466b-9fd5-aeba22192ed2@radxa.com>
+Date: Mon, 21 Jul 2025 17:18:41 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 20/20] sunxi: A523: add defconfigs for three boards
+To: u-boot@lists.denx.de
+References: <20250717235455.32528-1-andre.przywara@arm.com>
+ <20250717235455.32528-21-andre.przywara@arm.com>
+Content-Language: en-US
+From: ZHANG Yuntian <yt@radxa.com>
+Autocrypt: addr=yt@radxa.com; keydata=
+ xjMEZpEHyhYJKwYBBAHaRw8BAQdA4qVPuMNM8BBcBfleGQwYNbDzEK+kdLyQk3RNn+beJ7LN
+ HFpIQU5HIFl1bnRpYW4gPHl0QHJhZHhhLmNvbT7CmQQTFgoAQRYhBCbOTZ50WBO+M+YVR1cR
+ bofvBGCnBQJmkQfKAhsDBQkFo5qABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEFcR
+ bofvBGCnVIoA/j4tWCut3VckA9jx2doLX2d4DuKJ/n5pQO/PcjrS4DcOAQDWcXL0LYIzBO0B
+ 4dbTf0x0dOUsqAn8pGCqLTVwwC32As44BGaRB8oSCisGAQQBl1UBBQEBB0CiHP1qxI9yjijH
+ kATacFgDF9gRJJDZha90bUekC4uJVQMBCAfCeAQYFgoAIBYhBCbOTZ50WBO+M+YVR1cRbofv
+ BGCnBQJmkQfKAhsMAAoJEFcRbofvBGCnYK4BAKS7bmrao9BCMAY6DI2zoAd6Zz+yvcqKGjB2
+ HlhMQ/OtAQC5aLWeZ8HtPIR2MmKbkU1Dyz8BtlTsCh7oBhdBx2sMAA==
+In-Reply-To: <20250717235455.32528-21-andre.przywara@arm.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------j4rxKBiegowlyzt0OUqJ50gM"
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz6b-0
+X-QQ-XMAILINFO: M7n9VusxZAlP5xepuHhW/rVARZKOtAIw6yhVdSs0RDP7Y0zH69lVTbOz
+ t1celFqj4OHuwBZE5EYxxrbEcFcS/g3zwpFlM3Pw2Ge5hbqULOMlpeyY/SEUsjL7WxVldPm
+ 29xlrEyfSbt5+wRD12EI4HcBOqkx94WTaSHAUCGoiJ1Dqp270zGBcOIgPD087J0dIBv+YDs
+ 3hOguBP5pK3UccRZ8JskdReOLCojmasg8ayvcC0XFKk/AAAP0SA7K+XaC8V3hnTt8gzLQSG
+ x4XludEXJPPAl/qf1NNcXUNywGJ4aVd+v4a+ShPYyH2MEs8HjryZBHtzO3wUdahcXK2ts2h
+ fqr3bQRenB3tkjQhkGfqqrs5jimIJC4q9JPepR/tS3Zq3cVKT/MpWBm3Qif4hr/Dqciusm0
+ XnSjqEdEpx0dgiL0FRjZSqnvii1Y0UUCsFbLLsTz6cYt/CNmlMrFIYRCbew8nlOAh11LTbW
+ HgRKERPwlZZHOF21zP5SFpPLdN3tXkblGYECPPJ7neXvHCj4WvxUqBx5v9ui2N65DNaCpx4
+ DFFvrQ455JGzu+WvdzBqLw2hOfCdrtehsSxBTcB1tYIt9pxgzv4G0KwD8x+Kheqn0cbTiAR
+ puoD5I4zk7hoJ552gU5WgCelVooJ/pudoh/GhYS6/7xzgyLV8xgj5O1MqTtcJv7F8T/tA7d
+ XjJOSMpkyL6etK64F6Xvca+5xqfQMa0lryMfzqXIX1ClBzF0684hVDfQxxpFTcFY6w5ueVr
+ S5l9bLXgbiQpEwbIAR9spYyirVqcfW95CMR3fNEQs5fJjFw9a074ClNn1eVBWcmwSY5532N
+ F3Zfvbo4eTnNfSijW7vCUOelXhse/kfxFC+p3OBnWbx25cnC8TZgWfU+AiLss/3bYywXfx5
+ opJ1BDuFcEFi6fcvTOoFCbW+bKZAaE8d3Hw80cSSPB5wieyiawtVJ3DQyp35ra6xXpAFDMg
+ 2wosMDwxHeTrvkpsC43MZsTrujLZzvC6BtUc3NiV5ElzsCg==
+X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
+X-QQ-RECHKSPAM: 0
+X-Mailman-Approved-At: Mon, 21 Jul 2025 12:18:37 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,58 +88,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jul 20, 2025 at 14:57, Sam Protsenko <semen.protsenko@linaro.org> w=
-rote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------j4rxKBiegowlyzt0OUqJ50gM
+Content-Type: multipart/mixed; boundary="------------m1jVctbCo2VY4YSsapyk3L6u";
+ protected-headers="v1"
+From: ZHANG Yuntian <yt@radxa.com>
+To: u-boot@lists.denx.de
+Message-ID: <c84dace3-80fc-466b-9fd5-aeba22192ed2@radxa.com>
+Subject: Re: [PATCH v2 20/20] sunxi: A523: add defconfigs for three boards
+References: <20250717235455.32528-1-andre.przywara@arm.com>
+ <20250717235455.32528-21-andre.przywara@arm.com>
+In-Reply-To: <20250717235455.32528-21-andre.przywara@arm.com>
 
-> On Thu, Jul 17, 2025 at 1:58=E2=80=AFAM Mattijs Korpershoek
-> <mkorpershoek@kernel.org> wrote:
->>
->> Hi Sam,
->>
->> Thank you for the patch.
->>
->
-> [snip]
->
->> > +
->> > +#define EXYNOS850_DRD_UTMI                   0x50
->> > +#define UTMI_FORCE_SLEEP                     BIT(0)
->> > +#define UTMI_FORCE_SUSPEND                   BIT(1)
->> > +#define UTMI_DM_PULLDOWN                     BIT(2)
->> > +#define UTMI_DP_PULLDOWN                     BIT(3)
->> > +#define UTMI_FORCE_BVALID                    BIT(4)
->> > +#define UTMI_FORCE_VBUSVALID                 BIT(5)
->>
->> Comparing with the linux driver using
->> commit cc52a697f87e ("phy: exynos5-usbdrd: support Exynos USBDRD 3.2 4nm=
- controller")
->>
->> I notice that the defines are in reverse order (from 0 to 5 and linux
->> has from 5 to 0).
->>
->> Is there any particular reason for this?
->> I don't mind it too much but it makes diffing between linux and U-Boot a
->> bit harder.
->>
->> Anyway, I've compared this with the linux driver and it looks good to
->> me!
->>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->>
->
-> Thank for reviewing this, Mattijs! Yeah, I kinda flipped the register
-> bits w.r.t. kernel's version, just because it looks better to me this
-> way (easier to read when it's sorted properly). Due to the driver
-> model API differences between kernel and U-Boot I had to rework the
-> whole structure of the driver, and I only added Exynos850 support for
-> now, so the difference between U-Boot and kernel versions is quite big
-> as it is anyway, so I figured it's not a big deal to reorder things
-> even more. Hope it's ok with you?
+--------------m1jVctbCo2VY4YSsapyk3L6u
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-It's ok with me. I was just curious if there was any special reason for
-re-ordering. I agree that it's easier to read with the sorting you have
-applied.
-I've noticed that only Exynos850 is supported for now. That's fine as
-well in my opinion!
+SGkgQW5kcmUsDQoNCk9uIDcvMTgvMjUgMDc6NTQsIEFuZHJlIFByenl3YXJhIHdyb3RlOg0K
+PiBTbyBmYXIgZGV2ZWxvcGVycyBzZWVtIHRvIHVzZSB0aHJlZSBwb3B1bGFyIGJvYXJkczoN
+Cj4gLSBBdmFvdGEgQTE6IGRldiBib2FyZCB3aXRoIFVTQiAzLjAsIGR1YWwgRXRoZXJuZXQs
+IHNtYWxsIGRpc3BsYXkNCj4gLSBYOTZRUHJvKzogVFYgYm94IHdpdGggR2lnYWJpdCBFdGhl
+cm5ldCwgVVNCIDMuMCwgZU1NQw0KPiAtIFJhZHhhIEE1RTogc21hbGwgZGV2IGJvYXJkIHdp
+dGggVVNCMy9NLjIgMjIzMCAobXV4ZWQpLCBkdWFsIEV0aGVybmV0DQo+IA0KPiBBZGQgdGhl
+IGRlZmNvbmZpZyBmaWxlcyBmb3IgdGhvc2UgYm9hcmRzLCBjb250YWluaW5nIHRoZSBEUkFN
+IHBhcmFtZXRlcnMNCj4gYW5kIHRoZSB1c3VhbCBLY29uZmlnIG9wdGlvbnMuDQo+IA0KPiBT
+aWduZWQtb2ZmLWJ5OiBBbmRyZSBQcnp5d2FyYSA8YW5kcmUucHJ6eXdhcmFAYXJtLmNvbT4N
+Cj4gLS0tDQo+ICAgYm9hcmQvc3VueGkvTUFJTlRBSU5FUlMgICAgICAgICB8IDE1ICsrKysr
+KysrKysrKysrKw0KPiAgIGNvbmZpZ3MvYXZhb3RhLWExX2RlZmNvbmZpZyAgICAgfCAzMSAr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ICAgY29uZmlncy9yYWR4YS1hNWVf
+ZGVmY29uZmlnICAgICB8IDMwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KDQpD
+YW4gd2UgbmFtZSB0aGlzIHJhZHhhLWN1YmllLWE1ZV9kZWZjb25maWc/IFdlIHdpbGwgaGF2
+ZSBhIGZldyBtb3JlIA0KQWxsd2lubmVyIG9mZmVyaW5ncyB1bmRlciB0aGUgQ3ViaWUgZmFt
+aWx5Lg0KDQo+ICAgY29uZmlncy94OTZxX3Byb19wbHVzX2RlZmNvbmZpZyB8IDMyICsrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ICAgNCBmaWxlcyBjaGFuZ2VkLCAxMDgg
+aW5zZXJ0aW9ucygrKQ0KPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBjb25maWdzL2F2YW90YS1h
+MV9kZWZjb25maWcNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgY29uZmlncy9yYWR4YS1hNWVf
+ZGVmY29uZmlnDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGNvbmZpZ3MveDk2cV9wcm9fcGx1
+c19kZWZjb25maWcNCj4gDQo+IGRpZmYgLS1naXQgYS9ib2FyZC9zdW54aS9NQUlOVEFJTkVS
+UyBiL2JvYXJkL3N1bnhpL01BSU5UQUlORVJTDQo+IGluZGV4IDFiNGI3ZDg3MTYzLi42NmU2
+YThmZjk2MiAxMDA2NDQNCj4gLS0tIGEvYm9hcmQvc3VueGkvTUFJTlRBSU5FUlMNCj4gKysr
+IGIvYm9hcmQvc3VueGkvTUFJTlRBSU5FUlMNCj4gQEAgLTEzNyw2ICsxMzcsMTEgQEAgTToJ
+Q2hyaXMgTW9yZ2FuIDxtYWNyb21vcmdhbkBob3RtYWlsLmNvbT4NCj4gICBTOglNYWludGFp
+bmVkDQo+ICAgRjoJY29uZmlncy9hbmJlcm5pY19yZzM1eHhfaDcwMF9kZWZjb25maWcNCj4g
+ICANCj4gK0FWQU9UQSBBMSBCT0FSRA0KPiArTToJQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnBy
+enl3YXJhQGFybS5jb20+DQo+ICtTOglNYWludGFpbmVkDQo+ICtGOgljb25maWdzL2F2YW90
+YS1hMV9kZWZjb25maWcNCj4gKw0KPiAgIEJBTkFOQVBJIE0xIFBMVVMNCj4gICBNOglKYWdh
+biBUZWtpIDxqYWdhbkBhbWFydWxhc29sdXRpb25zLmNvbT4NCj4gICBTOglNYWludGFpbmVk
+DQo+IEBAIC01MzEsNiArNTM2LDExIEBAIE06CVF1ZW50aW4gU2NodWx6IDxxdWVudGluLnNj
+aHVsekBmcmVlLWVsZWN0cm9ucy5jb20+DQo+ICAgUzoJTWFpbnRhaW5lZA0KPiAgIEY6CWNv
+bmZpZ3MvcGFycm90X3IxNl9kZWZjb25maWcNCj4gICANCj4gK1JBRFhBIENVQklFIEE1RSBC
+T0FSRA0KPiArTToJQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJhQGFybS5jb20+DQo+
+ICtTOglNYWludGFpbmVkDQo+ICtGOgljb25maWdzL3JhZHhhLWE1ZV9kZWZjb25maWcNCj4g
+Kw0KPiAgIFNJTkxJTlggU0lOQTMxcyBCT0FSRA0KPiAgIE06CUNoZW4tWXUgVHNhaSA8d2Vu
+c0Bjc2llLm9yZz4NCj4gICBTOglNYWludGFpbmVkDQo+IEBAIC01OTEsNiArNjAxLDExIEBA
+IE06CUFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5d2FyYUBhcm0uY29tPg0KPiAgIFM6CU1h
+aW50YWluZWQNCj4gICBGOgljb25maWdzL3g5Nl9tYXRlX2RlZmNvbmZpZw0KPiAgIA0KPiAr
+WDk2USBQUk8rIFRWIEJPWA0KPiArTToJQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJh
+QGFybS5jb20+DQo+ICtTOglNYWludGFpbmVkDQo+ICtGOgljb25maWdzL3g5NnFfcHJvX3Bs
+dXNfZGVmY29uZmlnDQo+ICsNCj4gICBZT05FUyBUT1BURUNIIEJEMTA3OCBCT0FSRA0KPiAg
+IE06CVBhdWwgS29jaWFsa293c2tpIDxjb250YWN0QHBhdWxrLmZyPg0KPiAgIFM6CU1haW50
+YWluZWQNCj4gZGlmZiAtLWdpdCBhL2NvbmZpZ3MvYXZhb3RhLWExX2RlZmNvbmZpZyBiL2Nv
+bmZpZ3MvYXZhb3RhLWExX2RlZmNvbmZpZw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBp
+bmRleCAwMDAwMDAwMDAwMC4uNTU0NTdlZGQzYjMNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysg
+Yi9jb25maWdzL2F2YW90YS1hMV9kZWZjb25maWcNCj4gQEAgLTAsMCArMSwzMSBAQA0KPiAr
+Q09ORklHX0FSTT15DQo+ICtDT05GSUdfQVJDSF9TVU5YST15DQo+ICtDT05GSUdfREVGQVVM
+VF9ERVZJQ0VfVFJFRT0iYWxsd2lubmVyL3N1bjU1aS10NTI3LWF2YW90YS1hMSINCj4gK0NP
+TkZJR19TUEw9eQ0KPiArQ09ORklHX0RSQU1fU1VOWElfRFhfT0RUPTB4MDcwNzA3MDcNCj4g
+K0NPTkZJR19EUkFNX1NVTlhJX0RYX0RSST0weDBkMGQwZDBkDQo+ICtDT05GSUdfRFJBTV9T
+VU5YSV9DQV9EUkk9MHgwZTBlDQo+ICtDT05GSUdfRFJBTV9TVU5YSV9PRFRfRU49MHg4NDg0
+ODQ4NA0KPiArQ09ORklHX0RSQU1fU1VOWElfVFBSMD0weDgwODA4MDgwDQo+ICtDT05GSUdf
+RFJBTV9TVU5YSV9UUFIxPTB4MDYwNjA2MDYNCj4gK0NPTkZJR19EUkFNX1NVTlhJX1RQUjY9
+MHgzODAwMDAwMA0KPiArQ09ORklHX0RSQU1fU1VOWElfVFBSMTA9MHg4MDJmMzMzMw0KPiAr
+Q09ORklHX0RSQU1fU1VOWElfVFBSMTE9MHhjN2M1YzRjMg0KPiArQ09ORklHX0RSQU1fU1VO
+WElfVFBSMTI9MHgzNTMzMzAyZg0KPiArQ09ORklHX01BQ0hfU1VONTVJX0E1MjM9eQ0KPiAr
+Q09ORklHX01NQ19TVU5YSV9TTE9UX0VYVFJBPTINCj4gK0NPTkZJR19SX0kyQ19FTkFCTEU9
+eQ0KPiArIyBDT05GSUdfU1lTX01BTExPQ19DTEVBUl9PTl9JTklUIGlzIG5vdCBzZXQNCj4g
+K0NPTkZJR19TUExfSTJDPXkNCj4gK0NPTkZJR19TUExfU1lTX0kyQ19MRUdBQ1k9eQ0KPiAr
+Q09ORklHX1NZU19JMkNfTVZUV1NJPXkNCj4gK0NPTkZJR19TWVNfSTJDX1NMQVZFPTB4N2YN
+Cj4gK0NPTkZJR19TWVNfSTJDX1NQRUVEPTQwMDAwMA0KPiArQ09ORklHX1NVUFBPUlRfRU1N
+Q19CT09UPXkNCj4gK0NPTkZJR19SRUdVTEFUT1JfQVhQPXkNCj4gK0NPTkZJR19BWFA3MTdf
+UE9XRVI9eQ0KPiArQ09ORklHX0FYUF9JMkNfQUREUkVTUz0weDM1DQo+ICtDT05GSUdfQVhQ
+X0RDREMyX1ZPTFQ9OTIwDQo+ICtDT05GSUdfQVhQX0RDREMzX1ZPTFQ9MTE2MA0KPiArQ09O
+RklHX1VTQl9FSENJX0hDRD15DQo+ICtDT05GSUdfVVNCX09IQ0lfSENEPXkNCj4gZGlmZiAt
+LWdpdCBhL2NvbmZpZ3MvcmFkeGEtYTVlX2RlZmNvbmZpZyBiL2NvbmZpZ3MvcmFkeGEtYTVl
+X2RlZmNvbmZpZw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAw
+MC4uMDEyZTdiNGVlYWYNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9jb25maWdzL3JhZHhh
+LWE1ZV9kZWZjb25maWcNCj4gQEAgLTAsMCArMSwzMCBAQA0KPiArQ09ORklHX0FSTT15DQo+
+ICtDT05GSUdfQVJDSF9TVU5YST15DQo+ICtDT05GSUdfREVGQVVMVF9ERVZJQ0VfVFJFRT0i
+YWxsd2lubmVyL3N1bjU1aS1hNTI3LWN1YmllLWE1ZSINCj4gK0NPTkZJR19TUEw9eQ0KPiAr
+Q09ORklHX0RSQU1fU1VOWElfRFhfT0RUPTB4MDcwNzA3MDcNCj4gK0NPTkZJR19EUkFNX1NV
+TlhJX0RYX0RSST0weDBkMGQwZDBkDQo+ICtDT05GSUdfRFJBTV9TVU5YSV9DQV9EUkk9MHgw
+ZTBlDQo+ICtDT05GSUdfRFJBTV9TVU5YSV9PRFRfRU49MHg4NDg0ODQ4NA0KPiArQ09ORklH
+X0RSQU1fU1VOWElfVFBSMD0weDgwODA4MDgwDQo+ICtDT05GSUdfRFJBTV9TVU5YSV9UUFIx
+PTB4MDYwNjA2MDYNCj4gK0NPTkZJR19EUkFNX1NVTlhJX1RQUjY9MHgzODAwMDAwMA0KPiAr
+Q09ORklHX0RSQU1fU1VOWElfVFBSMTA9MHg4MDJmMzMzMw0KPiArQ09ORklHX0RSQU1fU1VO
+WElfVFBSMTE9MHhjN2M1YzRjMg0KPiArQ09ORklHX0RSQU1fU1VOWElfVFBSMTI9MHgzNTMz
+MzAyZg0KPiArIyBCU1AgdmFsdWU6IENPTkZJR19EUkFNX1NVTlhJX1RQUjExPTB4YzZjNGMy
+YzANCj4gKyMgQlNQIHZhbHVlOiBDT05GSUdfRFJBTV9TVU5YSV9UUFIxMj0weDNhMzczMjMz
+DQo+ICtDT05GSUdfTUFDSF9TVU41NUlfQTUyMz15DQo+ICtDT05GSUdfUl9JMkNfRU5BQkxF
+PXkNCj4gKyMgQ09ORklHX1NZU19NQUxMT0NfQ0xFQVJfT05fSU5JVCBpcyBub3Qgc2V0DQo+
+ICtDT05GSUdfU1BMX0kyQz15DQo+ICtDT05GSUdfU1BMX1NZU19JMkNfTEVHQUNZPXkNCj4g
+K0NPTkZJR19TWVNfSTJDX01WVFdTST15DQo+ICtDT05GSUdfU1lTX0kyQ19TTEFWRT0weDdm
+DQo+ICtDT05GSUdfU1lTX0kyQ19TUEVFRD00MDAwMDANCj4gK0NPTkZJR19SRUdVTEFUT1Jf
+QVhQPXkNCj4gK0NPTkZJR19BWFA3MTdfUE9XRVI9eQ0KPiArQ09ORklHX0FYUF9EQ0RDMl9W
+T0xUPTkyMA0KPiArQ09ORklHX0FYUF9EQ0RDM19WT0xUPTExMDANCj4gK0NPTkZJR19VU0Jf
+RUhDSV9IQ0Q9eQ0KPiArQ09ORklHX1VTQl9PSENJX0hDRD15DQo+IGRpZmYgLS1naXQgYS9j
+b25maWdzL3g5NnFfcHJvX3BsdXNfZGVmY29uZmlnIGIvY29uZmlncy94OTZxX3Byb19wbHVz
+X2RlZmNvbmZpZw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAw
+MC4uMDdkM2IwNzhiZWYNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9jb25maWdzL3g5NnFf
+cHJvX3BsdXNfZGVmY29uZmlnDQo+IEBAIC0wLDAgKzEsMzIgQEANCj4gK0NPTkZJR19BUk09
+eQ0KPiArQ09ORklHX0FSQ0hfU1VOWEk9eQ0KPiArQ09ORklHX0RFRkFVTFRfREVWSUNFX1RS
+RUU9ImFsbHdpbm5lci9zdW41NWktaDcyOC14OTZxcHJvKyINCj4gK0NPTkZJR19TUEw9eQ0K
+PiArQ09ORklHX0RSQU1fU1VOWElfRFhfT0RUPTB4MDcwNzA3MDcNCj4gK0NPTkZJR19EUkFN
+X1NVTlhJX0RYX0RSST0weDBjMGMwYzBjDQo+ICtDT05GSUdfRFJBTV9TVU5YSV9DQV9EUkk9
+MHgwZTBlDQo+ICtDT05GSUdfRFJBTV9TVU5YSV9PRFRfRU49MHg5MDkwOTA5MA0KPiArQ09O
+RklHX0RSQU1fU1VOWElfVFBSMD0weDgwODA4MDgwDQo+ICtDT05GSUdfRFJBTV9TVU5YSV9U
+UFIxPTB4MDYwNjA2MDYNCj4gK0NPTkZJR19EUkFNX1NVTlhJX1RQUjY9MHgzMzgwODA3ZQ0K
+PiArQ09ORklHX0RSQU1fU1VOWElfVFBSMTA9MHg4MDJmNzc4OA0KPiArQ09ORklHX0RSQU1f
+U1VOWElfVFBSMTE9MHg4ZjkxOTE5MA0KPiArQ09ORklHX0RSQU1fU1VOWElfVFBSMTI9MHgy
+MjIyMjcyMw0KPiArQ09ORklHX01BQ0hfU1VONTVJX0E1MjM9eQ0KPiArQ09ORklHX1NVTlhJ
+X0RSQU1fQTUyM19ERFIzPXkNCj4gK0NPTkZJR19EUkFNX0NMSz03OTINCj4gK0NPTkZJR19N
+TUNfU1VOWElfU0xPVF9FWFRSQT0yDQo+ICtDT05GSUdfUl9JMkNfRU5BQkxFPXkNCj4gKyMg
+Q09ORklHX1NZU19NQUxMT0NfQ0xFQVJfT05fSU5JVCBpcyBub3Qgc2V0DQo+ICtDT05GSUdf
+U1BMX0kyQz15DQo+ICtDT05GSUdfU1BMX1NZU19JMkNfTEVHQUNZPXkNCj4gK0NPTkZJR19T
+WVNfSTJDX01WVFdTST15DQo+ICtDT05GSUdfU1lTX0kyQ19TTEFWRT0weDdmDQo+ICtDT05G
+SUdfU1lTX0kyQ19TUEVFRD00MDAwMDANCj4gK0NPTkZJR19TVVBQT1JUX0VNTUNfQk9PVD15
+DQo+ICtDT05GSUdfUkVHVUxBVE9SX0FYUD15DQo+ICtDT05GSUdfQVhQNzE3X1BPV0VSPXkN
+Cj4gK0NPTkZJR19BWFBfRENEQzJfVk9MVD05MjANCj4gK0NPTkZJR19BWFBfRENEQzNfVk9M
+VD0xMzYwDQo+ICtDT05GSUdfVVNCX0VIQ0lfSENEPXkNCj4gK0NPTkZJR19VU0JfT0hDSV9I
+Q0Q9eQ0KDQoNCi0tIA0KQmVzdCByZWdhcmRzLA0KDQpaSEFORywgWXVudGlhbg0KDQpPcGVy
+YXRpbmcgU3lzdGVtIERldmVsb3Blcg0KUmFkeGEgQ29tcHV0ZXIgKFNoZW56aGVuKSBDby4s
+IEx0ZA0KU2hlbnpoZW4sIENoaW5hDQo=
 
-Feel free to pick this up through your tree.
+--------------m1jVctbCo2VY4YSsapyk3L6u--
+
+--------------j4rxKBiegowlyzt0OUqJ50gM
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQQmzk2edFgTvjPmFUdXEW6H7wRgpwUCaH4F8gAKCRBXEW6H7wRg
+p7PWAQDeTD/Pa0iPMx/+QrIVACcSp3qPQAFHPHHv9vIUGnW9awEAtjE5dNk/MlHm
+PuDG7SDHFM2vnIozBgRZn4zLH8/1BAQ=
+=mf9Y
+-----END PGP SIGNATURE-----
+
+--------------j4rxKBiegowlyzt0OUqJ50gM--
+
