@@ -4,76 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C33C83F27
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 06:22:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E88CC87FC5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 07:26:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6D7A8304F;
-	Mon, 21 Jul 2025 08:22:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A320583013;
+	Mon, 21 Jul 2025 09:26:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i9nr5cxL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YiCzuQEW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9831583093; Mon, 21 Jul 2025 08:22:02 +0200 (CEST)
+ id E6F4083013; Mon, 21 Jul 2025 09:26:42 +0200 (CEST)
 Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
  [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC81183013
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 08:21:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7621A8309A
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 09:26:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-7183dae670dso36399137b3.2
- for <u-boot@lists.denx.de>; Sun, 20 Jul 2025 23:21:59 -0700 (PDT)
+ 00721157ae682-70e3c6b88dbso27509197b3.0
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 00:26:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753078918; x=1753683718; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753082799; x=1753687599; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gabnE3YZYGDf+rO3oELiACmUJ9XzR7UM3KRNbVkeMJ0=;
- b=i9nr5cxLjRzambe2tGO+02c9CXtt3Csho4pOWB5SXH/5GOPdEAf09kjLmYBEzFbPFU
- sedHP2pv8FVocmmvJFeoiVzFuBkLnvYRb37e4OR/qMV23JpLrxYZennlxtsxvU/fssu5
- DmQYIAVVuXix73TW9H14CqYFsTPi9L1QM/oFEpvblm+uK+JUiWAQ09BFmR8qndgozCEH
- dX3zuSaYBwIkDZgg1FT+VVhoiV+X20ckPr5XfvaDwZt+9PDwSptVIiUkwD2QvXpgp4PH
- dpBMFAVQSx3tX5o/fozwJDK1rZas1ADaKgMHu7AKnGXc37PRNQvBBiIKF6u8fw8Fed/D
- 2f+w==
+ bh=hFvV5mgZBsi9rESWGP7PwQFNzd7Qfxu4NIDzPqCCgsw=;
+ b=YiCzuQEW5B6FqA/pjalujyMqq7LrfdXuPtIEGk+Hm5rzk0vt78ztTMAiFiJeBcc7N9
+ +ZH7egDhW5SrUo0IH7Y1xfnSjIaJPsnaVSfvUCI2Oxh0slWGAwRRAzriY2ELFxS0yo3m
+ r2lEXHkCNE3qwO7mvZtu0Qfv0zRheLGjwRf84APT0Xx+gOff7QPHgHdEQTprilRcUYkJ
+ 3F6bW/aLlkcnBl5/2tMe1S2AYt5DCuZJL8tJSGgIy/vRpcgqBX52eE4Nx5SdnyhdL+TD
+ nvlwT4Dg+FiwEl9VRb532ukyTHPzHsJVylzFGCF3pxar9TorlucQ2F9lLl+MvcHq7qy/
+ gh7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753078918; x=1753683718;
+ d=1e100.net; s=20230601; t=1753082799; x=1753687599;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gabnE3YZYGDf+rO3oELiACmUJ9XzR7UM3KRNbVkeMJ0=;
- b=bIRXItTcR/tFPZPjiI1AYvkNCt8suM/sSFOnLT3I9PjjuS8E2BnPecL78opgAh2ued
- Z++er5iX/C5QyRqm+ORPexuvtPSQeopnYl/TYt/hiyYDghCnzkMyd6PEhbUBhlDvz1iF
- KPz7wB0nt90NhCEtpsTjNz4eZ6aBE69kJcTR6K951c2oCLF+Fe1ltwLU6mSZBojk5GUU
- p4Vl9kSrmw5quaZSmy6H+d3rpL0bCKG/yV3tKeJymL1L1hFXQU/G1oZIS/NlHM232MKM
- w3RzpU+YzpHrMUfMMTCMIEUajpGCt6KsjozvVN17DMEM+kgUK8GAALsSDZZ2pkS+3KwI
- wylg==
-X-Gm-Message-State: AOJu0YwN0/vDS8JCo1VpAo42f2KSK4dP9TCe489TBuuO9i02bdgRNfbe
- EDIz4yr78vxt4OgX/jIAtR0w4oyMbve4ftZraSYokpt+v4vTpsA1Mhji/omwyVc3MHFOaa0Kon+
- hhJl+0TGUlAllxPDo0LwyysxqM74C3Zpv8uX9Z0nGBg==
-X-Gm-Gg: ASbGnctgAJ93cvLv6Ml9cbwq6DAxY1Ygu1y4fU1gILoU3kJCVVFEwX3zLHSfCtCfEJJ
- gZrs9uvTjhgN6DxnEEtumsCVH7w9G7L3eVNv6mscFnC7a4Dm/AvdHL3ZXuwXu61YROBzpRWb1q8
- 1LbCaANHEgJT2UwPejj8tgk/nkQMIFBI5jLqcIAvHS7EHkiS7NdbBidwlJ3eqc+ZLB+u8MWHdt/
- zkXK3g=
-X-Google-Smtp-Source: AGHT+IH0NRFRLF/kFMA9nuBngULslWQpDgq2SBZKNB0cXHKjGFR5CwAeGX9LR+ZJxypLsloEGEPYyg07FizF8vegRi8=
-X-Received: by 2002:a05:690c:650a:b0:710:f5c5:c9bf with SMTP id
- 00721157ae682-71836ca2a21mr239577107b3.15.1753078918440; Sun, 20 Jul 2025
- 23:21:58 -0700 (PDT)
+ bh=hFvV5mgZBsi9rESWGP7PwQFNzd7Qfxu4NIDzPqCCgsw=;
+ b=IDD+RdALMZUtRRUXSw8oLNhxk+9HLkGDa6W0SjoyRCAfnruw16TwNz0efCeaUB9UGt
+ T5Mrp/tYu19+CLeU+H5Emrr4SW1O+CsDCUgBKyflPnV03CBovrcO9k/8BsGGMqglVk2k
+ wqzZizih7cyNrQM3tJnyoDcufFkdtX3pDqCbffjE4yUCgV8DVbiytxrf9lTwusv6sExb
+ gcyxGo5xis87ZeAYZ/BaEFeQMb3c+hyx02X9ZdE6vFnBvtIy8ubwlO/iGx+vUdaCi4sf
+ PiTtmfUhkDugkd0suSv1a/AxQAgZJmUm/ZM3+konxD41f/RsYealeeP5D2RYo/d4H6Nj
+ gq5g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/XDH1Z4lUNgcnVmdxeAJRwsOiHMGucpdUY18pG2lUAcPquBsw4Q+6U9gCTeQw78mtEg7twbo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRelcnRoLUNUe+YPzqrEjQYykpYbZD7m3/k/CztoIMTGvoKgUH
+ NIX7iinODrbmg8kOhjWefhoODwkGHGtTZ3xoEa7eCr3GnyuNITx5vWONDywDA5xdPKxROKj85uR
+ gIfwerfmt4KU7BX/k9sXLYpfZ27jscwO7g7hZJRnNmg==
+X-Gm-Gg: ASbGncsEQFIsA5PZWUycEN0JcZcOHjVR25WXTxxbqtOKGyOttF1SAk1mFThuAL23Zww
+ XKDhtwiFGmeJ/InX8/YqShXtvfcHDrjZULdlauYy62gYOvNKsLVrRgKpXXm2prfN+sjq7cye9wh
+ Y4R3GoLwtLIbuOh/5n3BG9MFmfNHvf1zZaDBqxf83ICWJHk6rwuRBe5A2n27g/8VNowac7rXUYB
+ H3mCCc=
+X-Google-Smtp-Source: AGHT+IG1/rVgC+7J4NSipKP5wWpaEEPqqkjnrW2dNCagPuvssqfeFhnLmwIstASj8orUIr2295/lXxEC1w5q+eapAl0=
+X-Received: by 2002:a05:690c:2601:b0:70d:ecdd:9bd1 with SMTP id
+ 00721157ae682-718a9798fa7mr226191997b3.24.1753082799176; Mon, 21 Jul 2025
+ 00:26:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250712104558.77355-1-kettenis@openbsd.org>
- <175286780960.1647311.4448267827855078528.b4-ty@konsulko.com>
-In-Reply-To: <175286780960.1647311.4448267827855078528.b4-ty@konsulko.com>
+References: <20250627185723.342553-1-ilias.apalodimas@linaro.org>
+ <20250627185723.342553-2-ilias.apalodimas@linaro.org>
+ <CAPKp9uZPPOdQi_vFKEjTA4NE3oy0WPth-ugc21wKR7GPu4OD1Q@mail.gmail.com>
+ <20250717174148.GO193579@bill-the-cat>
+ <20250718-knowing-ludicrous-myna-ff5d69@sudeepholla>
+In-Reply-To: <20250718-knowing-ludicrous-myna-ff5d69@sudeepholla>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 21 Jul 2025 09:21:22 +0300
-X-Gm-Features: Ac12FXy-ze5wZ9azbxoSlmpKp_tN94ymSfMmLaM9vvkO-OOuLFrj9yjvlxGDSnY
-Message-ID: <CAC_iWjKq6b9WR+Nh09uwxFPDAp1-Wd3U7bT_e=L1ubV8ZUabGg@mail.gmail.com>
-Subject: Re: [PATCH] kbuild: Don't mandate gcc as the host compiler
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Mark Kettenis <kettenis@openbsd.org>
+Date: Mon, 21 Jul 2025 10:26:02 +0300
+X-Gm-Features: Ac12FXwfhpQ_EqjIybtHt4RjzKY8cYkg3jbaWQw_KBdZy8RMGd4buwrFVgYAJo0
+Message-ID: <CAC_iWjLHywMVnh0X6-PdpeuzrQfq11GXvfNPgAvNktFGWiP0eA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] kbuild: Bump the build system to 5.1
+To: Sudeep Holla <sudeep.holla@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, sughosh.ganu@linaro.org, 
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marek Vasut <marex@denx.de>, 
+ Olaf Mandel <o.mandel@menlosystems.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
+ Yannic Moog <y.moog@phytec.de>, 
+ Wadim Egorov <w.egorov@phytec.de>, Christoph Stoidner <c.stoidner@phytec.de>, 
+ Prasad Kummari <prasad.kummari@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,26 +112,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I was on PTO but fwiw this looks ok to me
+Hi Sudeep
+
+On Fri, 18 Jul 2025 at 11:30, Sudeep Holla <sudeep.holla@arm.com> wrote:
+>
+> On Thu, Jul 17, 2025 at 11:41:48AM -0600, Tom Rini wrote:
+> > On Thu, Jul 17, 2025 at 06:03:09PM +0100, Sudeep Holla wrote:
+> >
+> > > Hi,
+> > >
+> > > I see build break with clang after the commit 5f520875bdf0 ("kbuild:
+> > > Bump the build system to 5.1"):
+> > >
+> > > Build command:
+> > > $make -j`nproc` ARCH=arm64 O=$BUILD_DIR
+> > > CROSS_COMPILE=aarch64-none-linux-gnu- HOSTCC=clang
+> > > vexpress_aemv8a_semi_defconfig
+> > > $make -j`nproc` ARCH=arm   O=$BUILD_DIR
+> > > CROSS_COMPILE=aarch64-none-linux-gnu- HOSTCC=clang CC=clang all
+> >
+> > Does it still fail if you don't pass ARCH=? That's not valid in U-Boot
+> > and can lead to breakage.
+> >
+>
+> Yes it still breaks. I wasn't aware that ARCH= was not need in the build
+> step, thanks for that info. I always passed it AFAIR.
+
+Thanks for the report. There's a bigger upgrade we are doing to 6.10+
+kbuild as we speak.
+That will have  bigger changes wrt to clang. In the meantime I'll have
+a look at the current breakage
 
 Cheers
 /Ilias
-
-On Fri, 18 Jul 2025 at 22:43, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, 12 Jul 2025 12:45:58 +0200, Mark Kettenis wrote:
->
-> > Systems that use clang may not have gcc installed.  Set
-> > HOSTCC to cc and HOSTCXX to c++ like we did before to make those
-> > systems work again.
-> >
-> >
->
-> Applied to u-boot/master, thanks!
->
-> [1/1] kbuild: Don't mandate gcc as the host compiler
->       commit: bd0ade7d090a334b3986936d63a34001d99722ad
 > --
-> Tom
->
->
+> Regards,
+> Sudeep
