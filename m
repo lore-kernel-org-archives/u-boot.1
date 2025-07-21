@@ -4,119 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56DB3C83F25
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 11:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96B54C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 11:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D5AE830E4;
-	Mon, 21 Jul 2025 13:04:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DF58283106;
+	Mon, 21 Jul 2025 13:18:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dZYVzRDH";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B630830EA; Mon, 21 Jul 2025 13:04:23 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09ECA8309A
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:04:21 +0200 (CEST)
+ id 75201830F6; Mon, 21 Jul 2025 13:18:35 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 64580801DD
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:18:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4537edf2c3cso43750105e9.3
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 04:04:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753095860; x=1753700660; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=W8Jm8NmvSBdXJIzEX8gUh66o3zwq3KuE0HNfOYTqEk0=;
- b=dZYVzRDHcQUoZexd2DlXO4xe3A9/0QPqa67LkKVsyloWllySthGi4K+eVb6+x5ILW+
- SOTowXEYMf/W6uG1N312hrX02mNn+XP0WKPCPxKIng2YLFgr2PgfYbBULVYxQ9wA54f3
- eheeqXQxF4bPuY46klUsmfqX2yP1cWVD4UnnJAEpxLyjm6hiJrfLxqcK4mLEY0uPEhoM
- Cy0Bg8bevL8MmB6lcnv2Ch4WXgX/A+bkCU4gP7Cplte71G4yVnt3cOT7Kp4VSjL0KIz6
- l0pGuPDu/kO8kz0EL+sXAkkJvLBN8WGcIMFs696rDcorQS9eR+U53q7O0YC4q9pRab+s
- nTvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753095860; x=1753700660;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=W8Jm8NmvSBdXJIzEX8gUh66o3zwq3KuE0HNfOYTqEk0=;
- b=c3qTOJv76MMJ592l32p84Bgk/MgexNTlbQWZD0oZv1hgFZBcn2p8HdFu6+RA8EIubb
- YfSnVaXcSx8ch1asp/x8DuyQuK60j6zYBtIqbo/pmfRE4JIVdtkjNmJhsvIwq8hGLwdu
- skj0khTinb1wfcI7wpfecENCQUbb+cc8Gamj9B0s471NN+2674Nz2cOraYD1Z/KK/F/m
- Mf6CWJbqfCttIdFLH8ivH4C+MTnI+bHUnfi62+pf00JxOQPv6P5BxO0ODqqTcBtm0Q44
- pWG5vywNBt0ErAip6UQoC9/Q3NNbbhwYczK6+x/j38svFABQs/lwBTMIVJOLw8e6WZsk
- LDWQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUfFnGj6WokBDD9yA2och4Ymamz+6zQd7p+dSs3BJTFd1NjPmrqdAxynsb0Md/I6V9KYHtx8f0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGp2oQ91vx7l3L0dksYz5fLZ445LKHty/MH3ivkaGDBW0JePw7
- OR1Yd55edc2vB7CAp89ls+F6OOvFADXhSi7qaJEvduM6deGDpl0/arIyIIDSev+k0ec=
-X-Gm-Gg: ASbGncsSjKSumLqYtb0eHwdF5VSi+yTPp3C8/pwHkklWMDrVJCbQDR1Vt16fCrirNgI
- DqGGn3VUNVQFrMfd/ASDmEyLEUnwEPWZ7CA2YNEVz812wccKaZ1rfVp/bsVGdQ1WytnTyaPjs2+
- UyJQApongQXvd+XCri6/7y0dMkqAxO14RJJKd1zbBKPZqYQO2cNb+26AuW/WQG2xpXhpvE/QMtj
- cMsdAFs/6IjclpllJ2ZL7V2a9LNueqFKsIjLKTAtl7nRi8TZJoMmFez9lDMU2I+mZkFUOi6Imgj
- ixMeVgJrz8zdi3ReDJ9U8FGrKczpDlCYN2hg2gQNWcJ0ehALuhyeZmSe+anozPf0yZQ/lp+9Ok6
- Ivi+Mg5jeeuGQzUwxutMgzvJxZk1ucAMytYVEl524JsMhSBb4CFe0mSfEGv21pgdA6oAdZ5x319
- M=
-X-Google-Smtp-Source: AGHT+IHj7kbE7XmrkeIfi1wv+vYboIw4ESzTNe063JNmkbeS048BGx7ugVuJmzV8bKuVr9W1jxuO0A==
-X-Received: by 2002:a5d:5f86:0:b0:3a4:f7e6:2b29 with SMTP id
- ffacd0b85a97d-3b60dd4aa83mr15599006f8f.5.1753095860340; 
- Mon, 21 Jul 2025 04:04:20 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:d283:7a7e:4c57:678d?
- ([2a01:e0a:3d9:2080:d283:7a7e:4c57:678d])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca2cc06sm10072647f8f.35.2025.07.21.04.04.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Jul 2025 04:04:20 -0700 (PDT)
-Message-ID: <1154f736-14b0-4225-9230-9d93178274eb@linaro.org>
-Date: Mon, 21 Jul 2025 13:04:19 +0200
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BAB66153B;
+ Mon, 21 Jul 2025 04:18:25 -0700 (PDT)
+Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.26.61])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9745B3F6A8;
+ Mon, 21 Jul 2025 04:18:28 -0700 (PDT)
+From: abdellatif.elkhlifi@arm.com
+To: u-boot@lists.denx.de
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Adam Johnston <Adam.Johnston@arm.com>
+Subject: [PATCH v3 00/24] Introduce Firmware Update Support for Arm PSA
+Date: Mon, 21 Jul 2025 12:17:52 +0100
+Message-Id: <20250721111816.62340-1-abdellatif.elkhlifi@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFT v6 1/3] fastboot: blk: introduce fastboot block
- flashing support
-To: =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Dmitrii Merkurev <dimorinny@google.com>
-References: <20250630-topic-fastboot-blk-v6-0-7cdfd3a24786@linaro.org>
- <20250630-topic-fastboot-blk-v6-1-7cdfd3a24786@linaro.org>
- <20250702045934.15bc47ab@karo-electronics.de>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250702045934.15bc47ab@karo-electronics.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -129,164 +59,198 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-On 02/07/2025 04:59, Lothar Waßmann wrote:
-> Hi,
-> 
-> On Mon, 30 Jun 2025 17:19:57 +0200 Neil Armstrong wrote:
->> From: Dmitrii Merkurev <dimorinny@google.com>
->>
->> Introduce fastboot block flashing functions and helpers
->> to be shared with the MMC implementation.
->>
->> The write logic comes from the mmc implementation, while
->> the partition lookup is much simpler and could be extended.
->>
->> For the erase logic, allmost no block drivers exposes the
->> erase operation, except mmc & virtio, so in order to allow
->> erasiong any partition a soft-erase logic has been added
->> to write zero-ed buffers in a loop.
->>
->> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->> ---
->>   drivers/fastboot/fb_block.c | 323 ++++++++++++++++++++++++++++++++++++++++++++
->>   include/fb_block.h          | 105 ++++++++++++++
->>   2 files changed, 428 insertions(+)
->>
->> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
->> new file mode 100644
->> index 0000000000000000000000000000000000000000..b725397c91af2717812e69e2b624076eb30f781d
->> --- /dev/null
->> +++ b/drivers/fastboot/fb_block.c
->> @@ -0,0 +1,323 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + * Copyright (C) 2024 The Android Open Source Project
->> + */
->> +
->> +#include <blk.h>
->> +#include <div64.h>
->> +#include <fastboot-internal.h>
->> +#include <fastboot.h>
->> +#include <fb_block.h>
->> +#include <image-sparse.h>
->> +#include <part.h>
->> +#include <malloc.h>
->>
-> The alphabet seems to be a difficult concept for programmers to
-> grasp... ;-)
+This patch series adds Firmware Update (FWU) support for Arm PSA
+Certified platforms [1], enabling U-Boot to serve as
+the FWU Client, with the Secure World acting as the Update Agent that
+manages the firmware store and its metadata.
 
+This implementation adheres to the Platform Security Firmware Update
+specification [3] for the A-profile Arm Architecture and leverages the
+Trusted Services framework [4] to interact with the Secure World update
+agent. By delegating update management to the Secure World, U-Boot
+handles only the client-side coordination, invoking a well-defined set
+of ABIs over the FF-A interface [5] to deliver update capsules.
+
+Key features include:
+
+- Generic, platform-agnostic design.
+- FF-A-based ABI: All interactions between U-Boot and the update agent
+    occur over the FF-A interface, ensuring compatibility across
+    PSA-compliant systems.
+- Multi-payload capsules: Support for capsules containing multiple
+    payloads, start/end markers, signed firmware images.
+- ESRT support: Capsule payloads may be signed for authenticity, and
+    U-Boot can populate the EFI System Resource Table (ESRT) for
+     OS-level firmware management.
+- On-disk and standard capsule handling.
+
+For implementation details, please refer to the documentation [6].
+For a real world example, please see the Arm PSA FWU logs [7] when used
+for on-disk capsule update in Corstone-1000 [2].
+
+Changes in v3:
+
+- Remove "arm_ffa: Remove NULL pointer check for ops" commit
+  (Michal Simek recommendation)
+
+Cheers,
+Abdellatif
+
+[1]: PSA: https://www.psacertified.org
+[2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
+[3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest 
+[4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
+[5]: FF-A interface: doc/arch/arm64.ffa.rst
+[6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
+[7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
+
+```
+CapsuleApp: capsule block/size              0xDD741040/0x25ACE
+Found EFI system partition on Boot0001: OnDiskFWU
+FS2:;HD0b:;BLK4: 
+Succeed to write edk2-corstone1000-fvp-v6.uefi.capsule
+resetting ...
+NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
 ...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Regular State
+FWU: ABI version 1.0 detected
+FWU: Updating 1 payload(s)
+Applying capsule edk2-corstone1000-fvp-v6.uefi.capsule succeeded.
+Reboot after firmware update.
+NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Trial State
+...
+Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+...
+root@corstone1000-fvp:~# reboot
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Regular State
+...
+Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
 
-> 
->> +/**
->> + * FASTBOOT_MAX_BLOCKS_ERASE - maximum blocks to erase per derase call
->> + *
->> + * in the ERASE case we can have much larger buffer size since
->> + * we're not transferring an actual buffer
->> + */
->> +#define FASTBOOT_MAX_BLOCKS_ERASE 1048576
->> +/**
->> + * FASTBOOT_MAX_BLOCKS_SOFT_ERASE - maximum blocks to software erase at once
->> + */
->> +#define FASTBOOT_MAX_BLOCKS_SOFT_ERASE 4096
->> +/**
->> + * FASTBOOT_MAX_BLOCKS_WRITE - maximum blocks to write per dwrite call
->> + */
->> +#define FASTBOOT_MAX_BLOCKS_WRITE 65536
->> +
-> Why invent an arbitrary number here, when there is already
-> CONFIG_FASTBOOT_BUF_SIZE which could be used for this purpose?
+corstone1000-fvp login:
 
-Those are completely different purposes, this define is related to the
-image-sparse.h FASTBOOT_MAX_BLK_WRITE, but for a generic block write.
+root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
+0x0
+f1d883f9-dfeb-5363-98d8-686ee3b69f4f
+0
+6
+0
+6
+0
+0x0
+7fad470e-5ec5-5c03-a2c1-4756b495de61
+0
+0
+0
+0
+0
+0x0
+f1933675-5a8c-5b6d-9ef4-846739e89bc8
+0
+0
+0
+0
+0
+0x0
+f771aff9-c7e9-5f99-9eda-2369dd694f61
+0
+0
+0
+0
+0
+root@corstone1000-fvp:~# 
+```
 
-Note this is an initial implementation, any optimization could be done later.
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
+Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+Cc: Adam Johnston <Adam.Johnston@arm.com>
 
-> 
->> +struct fb_block_sparse {
->> +	struct blk_desc	*dev_desc;
->> +};
->> +
->> +/* Write 0s instead of using erase operation, inefficient but functional */
->> +static lbaint_t fb_block_soft_erase(struct blk_desc *block_dev, lbaint_t blk,
->> +				    lbaint_t cur_blkcnt, lbaint_t erase_buf_blks,
->> +				    void *erase_buffer)
->> +{
->> +	lbaint_t blks_written = 0;
->> +	int j;
->>
-> lbaint_t to match the type of cur_blkcnt and prevent integer overflow
-> on 32bit systems!
+Abdellatif El Khlifi (23):
+  arm_ffa: Add FFA_MEM_SHARE support
+  arm_ffa: Add FFA_MEM_RECLAIM support
+  arm_ffa: sandbox: Replace the emulator error log with debug log
+  arm_ffa: sandbox: Improve the readability of clearing the X registers
+  arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+  arm_ffa: sandbox: Add FFA_MEM_SHARE tests
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+  fwu_arm_psa: Initialize the update agent
+  fwu_arm_psa: Read the FWU directory through get_image_info()
+  fwu_arm_psa: Add staging ABIs
+  efi_loader: fwu_arm_psa: Add set_image and get_image_info support
+  efi_loader: fwu_arm_psa: Keep the FMP payload header
+  efi_loader: fwu: fwu_arm_psa: Skip accepting the payload after
+    set_image()
+  efi_loader: fwu: fwu_arm_psa: Disable trial state handling
+  fwu_arm_psa: Add FWU acceptance mechanism
+  fwu_arm_psa: Add ESRT support
+  fwu_arm_psa: Add ExitBootService() notification handler
+  fwu_arm_psa: corstone1000: Enable FWU support
+  fwu_arm_psa: corstone1000: Perform bank logic when reading boot index
+  fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootService()
+  fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
+  fwu_arm_psa: Document FWU support for Arm PSA
 
-Ack, will fix
+Emekcan Aras (1):
+  efi_loader: capsule: Add runtime capsule flags checks
 
-> 
->> +
->> +	memset(erase_buffer, 0, erase_buf_blks * block_dev->blksz);
->> +
->> +	for (j = 0; j < cur_blkcnt; j += erase_buf_blks) {
->> +		lbaint_t remain = min_t(lbaint_t, cur_blkcnt - j,
->> +				erase_buf_blks);
->> +
-> No need for min_t() here (see above).
-
-Ok
-
-> 
->> +		blks_written += blk_dwrite(block_dev, blk + j,
->> +				remain, erase_buffer);
->> +		printf(".");
->> +	}
->> +
->> +	return blks_written;
->> +}
->> +
->> +static lbaint_t fb_block_write(struct blk_desc *block_dev, lbaint_t start,
->> +			       lbaint_t blkcnt, const void *buffer)
->> +{
->> +	lbaint_t blk = start;
->> +	lbaint_t blks_written = 0;
->> +	lbaint_t cur_blkcnt = 0;
->>
-> useless initialization of cur_blkcnt; definition could be moved inside
-> the for loop.
-
-OK
-
->> +	lbaint_t blks = 0;
->> +	void *erase_buf = NULL;
->> +	int erase_buf_blks = 0;
->> +	int step = buffer ? FASTBOOT_MAX_BLOCKS_WRITE : FASTBOOT_MAX_BLOCKS_ERASE;
->> +	int i;
->>
-> lbaint_t for 'step' an 'i' to match the type of blkcnt!
-
-Indeed
-
-> 
->> +
->> +	for (i = 0; i < blkcnt; i += step) {
->> +		cur_blkcnt = min((int)blkcnt - i, step);
->>
-> No type cast needed.
-
-OK will fix those.
-
-Thank,
-Neil
+ MAINTAINERS                                   |    8 +
+ .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
+ board/armltd/corstone1000/corstone1000.c      |  255 ++-
+ board/armltd/corstone1000/corstone1000.env    |    8 +
+ configs/corstone1000_defconfig                |   13 +-
+ doc/arch/arm64.ffa.rst                        |    4 +
+ doc/develop/uefi/fwu_arm_psa.rst              |  154 ++
+ doc/develop/uefi/index.rst                    |    1 +
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  285 +++-
+ drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
+ drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
+ include/arm_ffa.h                             |  111 +-
+ include/arm_ffa_priv.h                        |  143 +-
+ include/efi_api.h                             |    8 +
+ include/efi_loader.h                          |    8 +
+ include/fwu_arm_psa.h                         |  427 +++++
+ lib/efi_loader/efi_capsule.c                  |   64 +-
+ lib/efi_loader/efi_firmware.c                 |   42 +-
+ lib/fwu_updates/Kconfig                       |   26 +
+ lib/fwu_updates/Makefile                      |    2 +
+ lib/fwu_updates/fwu.c                         |   29 +-
+ lib/fwu_updates/fwu_arm_psa.c                 | 1508 +++++++++++++++++
+ test/dm/ffa.c                                 |   73 +-
+ 24 files changed, 3216 insertions(+), 90 deletions(-)
+ create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+ create mode 100644 include/fwu_arm_psa.h
+ create mode 100644 lib/fwu_updates/fwu_arm_psa.c
 
 
-> 
-> Lothar Waßmann
+base-commit: 59e6462d7c08eeba744afa0f17846c398b8ef9e1
+-- 
+2.25.1
 
