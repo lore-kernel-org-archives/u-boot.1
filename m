@@ -4,108 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B89C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 10:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56DB3C83F25
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 11:04:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBA08830C0;
-	Mon, 21 Jul 2025 12:40:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 8D5AE830E4;
+	Mon, 21 Jul 2025 13:04:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="IQxP3Frd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dZYVzRDH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79DEC830E4; Mon, 21 Jul 2025 12:40:33 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B630830EA; Mon, 21 Jul 2025 13:04:23 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8966E8309A
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 12:40:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 09ECA8309A
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:04:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1753094430; x=1753699230; i=frank-w@public-files.de;
- bh=oCoTIdrvuI/CBODK1Pj4cbhO/ih7htlgESndafj+LrI=;
- h=X-UI-Sender-Class:Date:From:To:Subject:Message-ID:MIME-Version:
- Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=IQxP3FrdBzd6RYGW+myd8p0pd7XdQbC/xrioDihgqRuDA+8n6ouF4LBYUj2rezq6
- gOf8C+qTy4z3U8sMCYuSQh6dK2djYkNENchLRXlT0erzthRusM5oihYtfR8vJbmYj
- hCgoF4aXG+sQwMyo6yXcGBylGG6g3IHkqN2K0XxQaC0tjnG8eHC1HosBMecFa/4Kf
- RdFDrfLCyGDTZjs/q+1c7A2FFpq+drZQHan0CNcNTWerJHR+3qKETmnfHmovMv0TS
- 4pP9Nrfk4qJBe4SIvDSfPy+ZJyiTukuFBsOuOopuS+aah49rIZfVboCy2rR8SYQ/G
- ys4h7EKxH3OAW5x34Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([80.245.73.96]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MjjCF-1v1tQc3QxH-00pB3l; Mon, 21
- Jul 2025 12:40:29 +0200
-Date: Mon, 21 Jul 2025 12:40:30 +0200
-From: Frank Wunderlich <frank-w@public-files.de>
-To: u-boot@lists.denx.de, trini@konsulko.com
-Subject: Gitlab down
-User-Agent: K-9 Mail for Android
-Message-ID: <EB8511BA-0BBE-4770-85BC-EA2E8C56E5F5@public-files.de>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4537edf2c3cso43750105e9.3
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 04:04:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753095860; x=1753700660; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=W8Jm8NmvSBdXJIzEX8gUh66o3zwq3KuE0HNfOYTqEk0=;
+ b=dZYVzRDHcQUoZexd2DlXO4xe3A9/0QPqa67LkKVsyloWllySthGi4K+eVb6+x5ILW+
+ SOTowXEYMf/W6uG1N312hrX02mNn+XP0WKPCPxKIng2YLFgr2PgfYbBULVYxQ9wA54f3
+ eheeqXQxF4bPuY46klUsmfqX2yP1cWVD4UnnJAEpxLyjm6hiJrfLxqcK4mLEY0uPEhoM
+ Cy0Bg8bevL8MmB6lcnv2Ch4WXgX/A+bkCU4gP7Cplte71G4yVnt3cOT7Kp4VSjL0KIz6
+ l0pGuPDu/kO8kz0EL+sXAkkJvLBN8WGcIMFs696rDcorQS9eR+U53q7O0YC4q9pRab+s
+ nTvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753095860; x=1753700660;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=W8Jm8NmvSBdXJIzEX8gUh66o3zwq3KuE0HNfOYTqEk0=;
+ b=c3qTOJv76MMJ592l32p84Bgk/MgexNTlbQWZD0oZv1hgFZBcn2p8HdFu6+RA8EIubb
+ YfSnVaXcSx8ch1asp/x8DuyQuK60j6zYBtIqbo/pmfRE4JIVdtkjNmJhsvIwq8hGLwdu
+ skj0khTinb1wfcI7wpfecENCQUbb+cc8Gamj9B0s471NN+2674Nz2cOraYD1Z/KK/F/m
+ Mf6CWJbqfCttIdFLH8ivH4C+MTnI+bHUnfi62+pf00JxOQPv6P5BxO0ODqqTcBtm0Q44
+ pWG5vywNBt0ErAip6UQoC9/Q3NNbbhwYczK6+x/j38svFABQs/lwBTMIVJOLw8e6WZsk
+ LDWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUfFnGj6WokBDD9yA2och4Ymamz+6zQd7p+dSs3BJTFd1NjPmrqdAxynsb0Md/I6V9KYHtx8f0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGp2oQ91vx7l3L0dksYz5fLZ445LKHty/MH3ivkaGDBW0JePw7
+ OR1Yd55edc2vB7CAp89ls+F6OOvFADXhSi7qaJEvduM6deGDpl0/arIyIIDSev+k0ec=
+X-Gm-Gg: ASbGncsSjKSumLqYtb0eHwdF5VSi+yTPp3C8/pwHkklWMDrVJCbQDR1Vt16fCrirNgI
+ DqGGn3VUNVQFrMfd/ASDmEyLEUnwEPWZ7CA2YNEVz812wccKaZ1rfVp/bsVGdQ1WytnTyaPjs2+
+ UyJQApongQXvd+XCri6/7y0dMkqAxO14RJJKd1zbBKPZqYQO2cNb+26AuW/WQG2xpXhpvE/QMtj
+ cMsdAFs/6IjclpllJ2ZL7V2a9LNueqFKsIjLKTAtl7nRi8TZJoMmFez9lDMU2I+mZkFUOi6Imgj
+ ixMeVgJrz8zdi3ReDJ9U8FGrKczpDlCYN2hg2gQNWcJ0ehALuhyeZmSe+anozPf0yZQ/lp+9Ok6
+ Ivi+Mg5jeeuGQzUwxutMgzvJxZk1ucAMytYVEl524JsMhSBb4CFe0mSfEGv21pgdA6oAdZ5x319
+ M=
+X-Google-Smtp-Source: AGHT+IHj7kbE7XmrkeIfi1wv+vYboIw4ESzTNe063JNmkbeS048BGx7ugVuJmzV8bKuVr9W1jxuO0A==
+X-Received: by 2002:a5d:5f86:0:b0:3a4:f7e6:2b29 with SMTP id
+ ffacd0b85a97d-3b60dd4aa83mr15599006f8f.5.1753095860340; 
+ Mon, 21 Jul 2025 04:04:20 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:d283:7a7e:4c57:678d?
+ ([2a01:e0a:3d9:2080:d283:7a7e:4c57:678d])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b61ca2cc06sm10072647f8f.35.2025.07.21.04.04.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Jul 2025 04:04:20 -0700 (PDT)
+Message-ID: <1154f736-14b0-4225-9230-9d93178274eb@linaro.org>
+Date: Mon, 21 Jul 2025 13:04:19 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ZwHHcvsmm+E3z1OK3BAENH4zU3JtoCIzXLjOmaM6r4xmumIr93M
- tur5zYpjjuzDXcbzInikkOaFU9VxOMhpKRF2ETlDQVA+VDhndhJ//hAp7E8eu/KZg42tJK3
- FCW/V8f8Pf62UndI0QseVd1o/UkEdtXTr6uOJ2In8PkYarJGeyL2OTnDwkI4SxMpkj3Y2np
- a2sGhUSV1b3YYOUz1ztgw==
-UI-OutboundReport: notjunk:1;M01:P0:LZ6ScgBZwEI=;iecsCKZu8sDMbJW9IEWqp2PCh7L
- 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
- iDPg5ePOW1g==
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH RFT v6 1/3] fastboot: blk: introduce fastboot block
+ flashing support
+To: =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
+ Dmitrii Merkurev <dimorinny@google.com>
+References: <20250630-topic-fastboot-blk-v6-0-7cdfd3a24786@linaro.org>
+ <20250630-topic-fastboot-blk-v6-1-7cdfd3a24786@linaro.org>
+ <20250702045934.15bc47ab@karo-electronics.de>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250702045934.15bc47ab@karo-electronics.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,6 +129,7 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
@@ -124,16 +137,156 @@ X-Virus-Status: Clean
 
 Hi,
 
-I guess you already know,but gitlab on https://source=2Edenx=2Ede
-only prints a 502 message since at least yesterday=2E It does not look lik=
-e maintanance=2E
+On 02/07/2025 04:59, Lothar Waßmann wrote:
+> Hi,
+> 
+> On Mon, 30 Jun 2025 17:19:57 +0200 Neil Armstrong wrote:
+>> From: Dmitrii Merkurev <dimorinny@google.com>
+>>
+>> Introduce fastboot block flashing functions and helpers
+>> to be shared with the MMC implementation.
+>>
+>> The write logic comes from the mmc implementation, while
+>> the partition lookup is much simpler and could be extended.
+>>
+>> For the erase logic, allmost no block drivers exposes the
+>> erase operation, except mmc & virtio, so in order to allow
+>> erasiong any partition a soft-erase logic has been added
+>> to write zero-ed buffers in a loop.
+>>
+>> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>>   drivers/fastboot/fb_block.c | 323 ++++++++++++++++++++++++++++++++++++++++++++
+>>   include/fb_block.h          | 105 ++++++++++++++
+>>   2 files changed, 428 insertions(+)
+>>
+>> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+>> new file mode 100644
+>> index 0000000000000000000000000000000000000000..b725397c91af2717812e69e2b624076eb30f781d
+>> --- /dev/null
+>> +++ b/drivers/fastboot/fb_block.c
+>> @@ -0,0 +1,323 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (C) 2024 The Android Open Source Project
+>> + */
+>> +
+>> +#include <blk.h>
+>> +#include <div64.h>
+>> +#include <fastboot-internal.h>
+>> +#include <fastboot.h>
+>> +#include <fb_block.h>
+>> +#include <image-sparse.h>
+>> +#include <part.h>
+>> +#include <malloc.h>
+>>
+> The alphabet seems to be a difficult concept for programmers to
+> grasp... ;-)
 
-I change to GitHub repo,but i want to know if maybe your own gitlab instan=
-ce will be dropped=2E
+...
 
-I found a thread from december 2024
+> 
+>> +/**
+>> + * FASTBOOT_MAX_BLOCKS_ERASE - maximum blocks to erase per derase call
+>> + *
+>> + * in the ERASE case we can have much larger buffer size since
+>> + * we're not transferring an actual buffer
+>> + */
+>> +#define FASTBOOT_MAX_BLOCKS_ERASE 1048576
+>> +/**
+>> + * FASTBOOT_MAX_BLOCKS_SOFT_ERASE - maximum blocks to software erase at once
+>> + */
+>> +#define FASTBOOT_MAX_BLOCKS_SOFT_ERASE 4096
+>> +/**
+>> + * FASTBOOT_MAX_BLOCKS_WRITE - maximum blocks to write per dwrite call
+>> + */
+>> +#define FASTBOOT_MAX_BLOCKS_WRITE 65536
+>> +
+> Why invent an arbitrary number here, when there is already
+> CONFIG_FASTBOOT_BUF_SIZE which could be used for this purpose?
 
-<https://lists=2Edenx=2Ede/pipermail/u-boot/2024-December/573566=2Ehtml>
+Those are completely different purposes, this define is related to the
+image-sparse.h FASTBOOT_MAX_BLK_WRITE, but for a generic block write.
 
-But no actual one=2E
-regards Frank
+Note this is an initial implementation, any optimization could be done later.
+
+> 
+>> +struct fb_block_sparse {
+>> +	struct blk_desc	*dev_desc;
+>> +};
+>> +
+>> +/* Write 0s instead of using erase operation, inefficient but functional */
+>> +static lbaint_t fb_block_soft_erase(struct blk_desc *block_dev, lbaint_t blk,
+>> +				    lbaint_t cur_blkcnt, lbaint_t erase_buf_blks,
+>> +				    void *erase_buffer)
+>> +{
+>> +	lbaint_t blks_written = 0;
+>> +	int j;
+>>
+> lbaint_t to match the type of cur_blkcnt and prevent integer overflow
+> on 32bit systems!
+
+Ack, will fix
+
+> 
+>> +
+>> +	memset(erase_buffer, 0, erase_buf_blks * block_dev->blksz);
+>> +
+>> +	for (j = 0; j < cur_blkcnt; j += erase_buf_blks) {
+>> +		lbaint_t remain = min_t(lbaint_t, cur_blkcnt - j,
+>> +				erase_buf_blks);
+>> +
+> No need for min_t() here (see above).
+
+Ok
+
+> 
+>> +		blks_written += blk_dwrite(block_dev, blk + j,
+>> +				remain, erase_buffer);
+>> +		printf(".");
+>> +	}
+>> +
+>> +	return blks_written;
+>> +}
+>> +
+>> +static lbaint_t fb_block_write(struct blk_desc *block_dev, lbaint_t start,
+>> +			       lbaint_t blkcnt, const void *buffer)
+>> +{
+>> +	lbaint_t blk = start;
+>> +	lbaint_t blks_written = 0;
+>> +	lbaint_t cur_blkcnt = 0;
+>>
+> useless initialization of cur_blkcnt; definition could be moved inside
+> the for loop.
+
+OK
+
+>> +	lbaint_t blks = 0;
+>> +	void *erase_buf = NULL;
+>> +	int erase_buf_blks = 0;
+>> +	int step = buffer ? FASTBOOT_MAX_BLOCKS_WRITE : FASTBOOT_MAX_BLOCKS_ERASE;
+>> +	int i;
+>>
+> lbaint_t for 'step' an 'i' to match the type of blkcnt!
+
+Indeed
+
+> 
+>> +
+>> +	for (i = 0; i < blkcnt; i += step) {
+>> +		cur_blkcnt = min((int)blkcnt - i, step);
+>>
+> No type cast needed.
+
+OK will fix those.
+
+Thank,
+Neil
+
+
+> 
+> Lothar Waßmann
+
