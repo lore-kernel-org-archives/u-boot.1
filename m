@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A835CC83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 11:22:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E00D6C83F25
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 11:22:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87E2783804;
+	by phobos.denx.de (Postfix) with ESMTP id D62C883835;
 	Mon, 21 Jul 2025 13:19:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 633DC83152; Mon, 21 Jul 2025 13:19:15 +0200 (CEST)
+ id A654E83829; Mon, 21 Jul 2025 13:19:16 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3887683829
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:19:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 8063B83804
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B4EB926AC;
- Mon, 21 Jul 2025 04:19:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 14E763294;
+ Mon, 21 Jul 2025 04:19:08 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.26.61])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 673453F6A8;
- Mon, 21 Jul 2025 04:19:11 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DFF543F6A8;
+ Mon, 21 Jul 2025 04:19:12 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Tom Rini <trini@konsulko.com>,
  Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-Subject: [PATCH v3 21/24] fwu_arm_psa: corstone1000: Perform bank logic when
- reading boot index
-Date: Mon, 21 Jul 2025 12:18:13 +0100
-Message-Id: <20250721111816.62340-22-abdellatif.elkhlifi@arm.com>
+Subject: [PATCH v3 22/24] fwu_arm_psa: corstone1000: Notify SE Proxy SP on
+ ExitBootService()
+Date: Mon, 21 Jul 2025 12:18:14 +0100
+Message-Id: <20250721111816.62340-23-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250721111816.62340-1-abdellatif.elkhlifi@arm.com>
 References: <20250721111816.62340-1-abdellatif.elkhlifi@arm.com>
@@ -58,141 +58,102 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Move bank logic from board_late_init to fwu_plat_get_bootidx
-
-board_late_init is called very early before the FWU subsystem is setup.
-So, the metadata is still not initialized at that level. Reading the boot
-index at that level returns an invalid value.
-Moving the bank logic to fwu_plat_get_bootidx guarantees the returned
-boot index is reflecting the value read from the metadata.
+Implement the notification in fwu_notify_exit_boot_services()
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
 ---
- board/armltd/corstone1000/corstone1000.c | 63 +++++++++++-------------
- configs/corstone1000_defconfig           |  1 -
- 2 files changed, 29 insertions(+), 35 deletions(-)
+ board/armltd/corstone1000/corstone1000.c | 60 ++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
 
 diff --git a/board/armltd/corstone1000/corstone1000.c b/board/armltd/corstone1000/corstone1000.c
-index d2176b9174d..2ccf851e6c5 100644
+index 2ccf851e6c5..2532c5f10fa 100644
 --- a/board/armltd/corstone1000/corstone1000.c
 +++ b/board/armltd/corstone1000/corstone1000.c
-@@ -151,8 +151,6 @@ struct efi_capsule_update_info update_info = {
+@@ -5,6 +5,7 @@
+  * Rui Miguel Silva <rui.silva@linaro.org>
+  */
  
- #endif /* EFI_HAVE_CAPSULE_SUPPORT */
++#include <arm_ffa.h>
+ #include <blk.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+@@ -19,11 +20,28 @@
+ #include <dm/platform_data/serial_pl01x.h>
+ #include <asm/armv8/mmu.h>
+ #include <asm/global_data.h>
++#include <linux/bitfield.h>
  
--static int corstone1000_boot_idx;
--
- static struct mm_region corstone1000_mem_map[] = {
- 	{
- 		/* CVM */
-@@ -234,45 +232,37 @@ int dram_init_banksize(void)
- }
+ #define CORSTONE1000_KERNEL_PARTS 2
+ #define CORSTONE1000_KERNEL_PRIMARY "kernel_primary"
+ #define CORSTONE1000_KERNEL_SECONDARY "kernel_secondary"
  
- void fwu_plat_get_bootidx(uint *boot_idx)
--{
--	int ret;
--
--	/*
--	 * in our platform, the Secure Enclave is the one who controls
--	 * all the boot tries and status, so, every time we get here
--	 * we know that the we are booting from the active index
--	 */
--	ret = fwu_get_active_index(boot_idx);
--	if (ret < 0) {
--		*boot_idx = CONFIG_FWU_NUM_BANKS;
--		log_err("corstone1000: failed to read active index\n");
--	}
--}
--
--int board_late_init(void)
- {
- 	struct disk_partition part_info;
- 	struct udevice *dev, *bdev;
- 	struct nvmxip_plat *plat;
- 	struct blk_desc *desc;
- 	int ret;
-+	bool kernel_addr_set, kernel_size_set;
- 
- 	ret = uclass_first_device_err(UCLASS_NVMXIP, &dev);
- 	if (ret < 0) {
--		log_err("Cannot find kernel device\n");
--		return ret;
-+		log_err("Cannot find kernel device, err (%d)\n", ret);
-+		return;
- 	}
- 
- 	plat = dev_get_plat(dev);
- 	device_find_first_child(dev, &bdev);
- 	desc = dev_get_uclass_plat(bdev);
--	ret = fwu_get_active_index(&corstone1000_boot_idx);
-+	ret = fwu_get_active_index(boot_idx);
- 	if (ret < 0) {
-+		*boot_idx = CONFIG_FWU_NUM_BANKS;
- 		log_err("corstone1000: failed to read boot index\n");
--		return ret;
-+		return;
- 	}
- 
--	if (!corstone1000_boot_idx)
-+	kernel_addr_set = env_get_hex("kernel_addr", 0) ? true : false;
-+	kernel_size_set = env_get_hex("kernel_size", 0) ? true : false;
++/* The SE Proxy partition ID*/
++#define CORSTONE1000_SEPROXY_PART_ID (0x8002)
 +
-+	if (kernel_addr_set && kernel_size_set)
-+		return;
++/* Update service ID provided by  the SE Proxy SP*/
++#define CORSTONE1000_SEPROXY_UPDATE_SVC_ID (0x4)
++#define PREP_SEPROXY_SVC_ID_MASK GENMASK(31, 16)
++#define PREP_SEPROXY_SVC_ID(x)  (FIELD_PREP(PREP_SEPROXY_SVC_ID_MASK, (x)))
 +
-+	if (!(*boot_idx))
- 		ret = part_get_info_by_name(desc, CORSTONE1000_KERNEL_PRIMARY,
- 					    &part_info);
- 	else
-@@ -281,18 +271,23 @@ int board_late_init(void)
++/* Notification event used with SE Proxy SP */
++#define CORSTONE1000_UBOOT_EFI_STARTED_EVT (0x3)
++#define PREP_SEPROXY_EVT_MASK GENMASK(15, 0)
++#define PREP_SEPROXY_EVT(x) (FIELD_PREP(PREP_SEPROXY_EVT_MASK, (x)))
++
++/* Signal that there is no shared memory used when notifying SE Proxy SP */
++#define FFA_MEM_HANDLE_INVALID (0xffffffff)
++
+ #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
  
- 	if (ret < 0) {
- 		log_err("failed to fetch kernel partition index: %d\n",
--			corstone1000_boot_idx);
--		return ret;
-+			*boot_idx);
-+		return;
+ /* The total number of upgradable images including the start and end dummy payloads */
+@@ -291,3 +309,45 @@ void fwu_plat_get_bootidx(uint *boot_idx)
+ 				ret);
  	}
- 
--	ret = 0;
--
--	ret |= env_set_hex("kernel_addr", plat->phys_base +
--			   (part_info.start * part_info.blksz));
--	ret |= env_set_hex("kernel_size", part_info.size * part_info.blksz);
--
--	if (ret < 0)
--		log_err("failed to setup kernel addr and size\n");
-+	if (!kernel_addr_set) {
-+		ret = env_set_hex("kernel_addr", plat->phys_base +
-+				(part_info.start * part_info.blksz));
-+		if (ret)
-+			log_err("cannot set kernel_addr variable, err (%d)\n",
-+				ret);
-+	}
- 
--	return ret;
-+	if (!kernel_size_set) {
-+		ret = env_set_hex("kernel_size",
-+				  part_info.size * part_info.blksz);
-+		if (ret)
-+			log_err("cannot set kernel_size variable, err (%d)\n",
-+				ret);
-+	}
  }
-diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
-index 5b10e3f7484..d52d39a0b36 100644
---- a/configs/corstone1000_defconfig
-+++ b/configs/corstone1000_defconfig
-@@ -31,7 +31,6 @@ CONFIG_SYS_CBSIZE=512
- CONFIG_LOGLEVEL=7
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_BOARD_LATE_INIT=y
- CONFIG_SYS_PROMPT="corstone1000# "
- # CONFIG_CMD_CONSOLE is not set
- CONFIG_CMD_FWU_METADATA=y
++
++/**
++ * fwu_notify_exit_boot_services() - ExitBootService event handler
++ *
++ * Notify SE Proxy SP when reaching ExitBootService().
++ *
++ * Return:
++ *
++ * EFI_SUCCESS on success. Otherwise, failure
++ */
++efi_status_t fwu_notify_exit_boot_services(void)
++{
++	efi_status_t efi_ret = EFI_SUCCESS;
++	int ffa_ret;
++	struct ffa_send_direct_data msg = {0};
++	struct udevice *dev;
++
++	ffa_ret = uclass_first_device_err(UCLASS_FFA, &dev);
++	if (ffa_ret) {
++		log_err("Cannot find FF-A bus device, err (%d)\n", ffa_ret);
++		efi_ret = EFI_DEVICE_ERROR;
++		goto out;
++	}
++
++	msg.data0 = PREP_SEPROXY_SVC_ID(CORSTONE1000_SEPROXY_UPDATE_SVC_ID) |
++					PREP_SEPROXY_EVT(CORSTONE1000_UBOOT_EFI_STARTED_EVT);
++
++	msg.data1 = FFA_MEM_HANDLE_INVALID;
++	msg.data2 = FFA_MEM_HANDLE_INVALID;
++
++	ffa_ret = ffa_sync_send_receive(dev, CORSTONE1000_SEPROXY_PART_ID, &msg, 0);
++	if (ffa_ret) {
++		log_err("Cannot notify SE Proxy SP, err (%d)\n", ffa_ret);
++		efi_ret = EFI_NO_RESPONSE;
++		goto out;
++	}
++
++	log_debug("SE Proxy SP notified\n");
++
++out:
++	return efi_ret;
++}
 -- 
 2.25.1
 
