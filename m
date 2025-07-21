@@ -4,84 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B2EC83F25
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 20:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1FE4C83F1A
+	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 21:43:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9BC183214;
-	Mon, 21 Jul 2025 22:39:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C733D8320C;
+	Mon, 21 Jul 2025 23:43:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h7TVSR/v";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nE4UDYrj";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NfTqg8yg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CC0783214; Mon, 21 Jul 2025 22:39:08 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B37A3830B5; Mon, 21 Jul 2025 23:43:30 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1AE6830EA
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 22:39:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 419A0830B5
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 23:43:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e8db917573dso116657276.1
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 13:39:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753130344; x=1753735144; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pm0nNxXHMBFIKbpriw3+J+gEsBdn9IvvSa51s+jlD6o=;
- b=h7TVSR/vV6zqEjg15dGWJ3FR6hEvOsAJSDYqK8rxay0OgIDoy2Uf0qOkweHM7QbCvM
- q2J8OBnQLA1nZ0Lfy/xE5wi50GN52pnPeH2ysdZhyRtJtBeaIaxn7UPLXDZkzjvCSwrH
- 67WfFgDPI310YUnwNZ11p9RmsGZ6hVMzLixB7Fhwu9yGrIkd0osMppiDCft1LuQULuob
- XMToLxHx0F5HRUvjIIQClZq0iUZgINZKlgzlg/UnGfEIwAZJIm9/NO8lS3vvmyhhd1Yk
- qBwb0cV/mBAoBp4iiAdyI+Kj3hpKfATI5A9MSrjBBun0+caj9YfPA58Fc4jmkAYPVSpc
- KL7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753130344; x=1753735144;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pm0nNxXHMBFIKbpriw3+J+gEsBdn9IvvSa51s+jlD6o=;
- b=Low6paATlB/geWJigPHX9z6iQsYUgFxdXJxvPsXFFfqyyRkToh5GUM6/m8U21Dw9xH
- m5tFsVSEoaTBUyO26nLVJvT34ZtJf5TXZU4KlNgc3J9xuA4n7bW0HykjLLSmgUVDu1zD
- az0l89t9zqhLxJhavlyqOH+5o60vNkSOXSmCd4bEHuSq5XDoZ0eZog69Jn1MhYijGI+s
- k2g9PU6KV9hJMFG57uZkEwL3NQ6SZRtmpr90iQU14tmltgIctWDIcQH5pIFRMVuqMG7k
- pfCV/abGlHw5MJUokEFurDY0pgc7vbg2Q5lqj+w07z5cBT622PR3mvW8DWomenelCEpd
- pQow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUjfn4BBPmsjnuOypt0K7PEWGnSDRkJxwzrYUYDbjv3wVMZO9nVIUcbX+jhLjBdkERp+5lVRdY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw1PjzYHotxsY33vTrmllgVqP+leDMxt6800Vp2IyaXD4B5aKMk
- hPzHuZNUQZQBlQBdE9AkflDrVaocWKklNdIPO6CFJgqgZmMcKQSFP0U6PkQ94j56lZTr3Q9T4EU
- kJoKDm0ckAhVis7N3DYN9Pxth2APZeAt7hlDggXnPVw==
-X-Gm-Gg: ASbGnctjoPN+EsLCcqTp7x4A4+ERDghXTzrheCM3RlDLjZ2CBCOH0h7qXTzd/uJejpE
- E+RGnCYkrU8eBHMdf1cR8F1U0aA5Zohi/bfzUIWibwVaNt96M6Knwff1VycLo+jS3nRR0QvpjLK
- 8X2puMmchz0XULXANJvKsqbD/rOf+ZgHSKEp4vxLOjlosdzHiig4BimRpcO9INhQSgtcbu6klZj
- Z9LRF6I3zefruuuwQ==
-X-Google-Smtp-Source: AGHT+IEwVMM147RusOzCcH0LxNqd6PaX3v1++iMpIS0lZwbVU4ryn2z28ojSBakRhElEY+q0x8eodx18C5dUQGGyVTE=
-X-Received: by 2002:a05:690c:6007:b0:719:586d:dd11 with SMTP id
- 00721157ae682-719586deae1mr152385937b3.21.1753130344525; Mon, 21 Jul 2025
- 13:39:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bmDRM6t1zz9sZK;
+ Mon, 21 Jul 2025 23:43:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753134207;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=H3pflc7bDO2EcQI9Mnnk0QN1mXC6Zyt71AUqgkRlM38=;
+ b=nE4UDYrjcq+Ef1IeJOicz46CsngnmwCHLPkHFDMQ6yIJ1NdsCq0GhxWQka4pz0aLSACOdh
+ d5M7jVADq7SSjWTg5tZiextzS2AQPhE9s731R4IJ7FhttL6KDvvZnuMisHcOFXCQXEGcSf
+ fPVCsQo/zuEaw1q2oEn89LOoLNNWXH0G0kkJ8lnflvI9YaEbVOIwobP/oJfup7sXzhhrcw
+ X1N1VVQkk28y8Z/t3FY1cJA95ATf9pOfTy+gy17i8a9smOk8Idk7wzTDVOpSOw7W2cbse4
+ RXz5OztL+THGU0Nu43WafxfsJkN61WIirAl+jALv4Imxi07zxv+xcdzZLtNgLQ==
+Message-ID: <a0a07669-2192-487a-b8cf-9d8753a50385@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753134206;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=H3pflc7bDO2EcQI9Mnnk0QN1mXC6Zyt71AUqgkRlM38=;
+ b=NfTqg8ygt022Wk/pzEDx2PfC2/jdpWpEuEVXYm2xq2C/1oAo4Y346hlDtTqzNNHX4y+Vda
+ fw0iNlWvYSct/us5C9yt/PGf1wrpGO9IkjeCXgWNwydauB3nF2C5dGcKTIPzHhD9wa/Vg2
+ xHodPMZIsna3I7KOvdLbYyXpCxiQzgoJb0hRM9H6tbartv4kb/PG4bLlo9cKWs6HziYuGv
+ 0bxoI5Qp5iTqKbJWC8xJTIn5oBxBFq0O6NNXrSgdFM5iz9GQVMjE9UPEDdn/nbQ7VlysNO
+ NTpUJA40YTtZT62Exsz7VCjhAEWTnaGMWxJfxhMiQNm8Dvzv+qiPStC0EVtjHw==
+Date: Mon, 21 Jul 2025 23:43:20 +0200
 MIME-Version: 1.0
-References: <20250720-samsung-mmc-fixes-v1-0-cb705abfa594@grimler.se>
- <20250720-samsung-mmc-fixes-v1-3-cb705abfa594@grimler.se>
-In-Reply-To: <20250720-samsung-mmc-fixes-v1-3-cb705abfa594@grimler.se>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Mon, 21 Jul 2025 15:38:53 -0500
-X-Gm-Features: Ac12FXyw9vurWVQQ5wZiCtd1AD-4wVKJlrELGOWznRn1i0uQZ3FUy8Y9zS8aWqw
-Message-ID: <CAPLW+4mreJS4UDebSUH_TXy-9PLHLFZuCFyQQ=auetOQOwVfpA@mail.gmail.com>
-Subject: Re: [PATCH 3/3] mmc: exynos_dw_mmc: add exynos5420 compatibles
-To: Henrik Grimler <henrik@grimler.se>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- David Virag <virag.david003@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>, 
- Tom Rini <trini@konsulko.com>, ~postmarketos/upstreaming@lists.sr.ht, 
- replicant@osuosl.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 2/3] image: Add support for starting TFA BL31 as fitImage
+ loadables
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
+ <20250112223755.179959-2-marek.vasut+renesas@mailbox.org>
+ <4097bdb7-8c8e-42af-8538-41338d49b328@cherry.de>
+ <3523e011-b0f1-43bb-bc39-baa8fd2e51d7@mailbox.org>
+ <2be1029d-f0b4-4c28-bbf9-3cbb6b1c6156@cherry.de>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <2be1029d-f0b4-4c28-bbf9-3cbb6b1c6156@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: ca9593a8bb7f958c4e1
+X-MBO-RS-META: snrnfwedsaj74ojihmu5u89tyki3cyxa
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,47 +106,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jul 20, 2025 at 12:00=E2=80=AFPM Henrik Grimler <henrik@grimler.se>=
- wrote:
->
-> From: Jaehoon Chung <jh80.chung@samsung.com>
->
-> The exynos5420 DTSes in linux kernel uses the compatibles
-> samsung,exynos5420-dw-mshc{,-smu} instead of just
-> samsung,exynos-dwmmc. Match the additional compatibles in the driver
-> to make it possible to use it with DTSes from Linux kernel.
->
-> Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
-> [ grimler: rebase after clksel reg abstraction and re-write commit messag=
-e ]
-> Signed-off-by: Henrik Grimler <henrik@grimler.se>
-> ---
+On 1/29/25 6:51 PM, Quentin Schulz wrote:
 
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+>>> This would need to be added to the ITS spec, c.f. https:// 
+>>> fitspec.osfw.foundation/
+>>
+>> Where does one do that ?
+>>
+> 
+> https://github.com/open-source-firmware/flat-image-tree I guess?
 
->  drivers/mmc/exynos_dw_mmc.c | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-> index c8bf89d6d3552c1e0ebcaccc48a08087cbf3f596..12e37cb4b7884c5cdac030324=
-5c93988d034459a 100644
-> --- a/drivers/mmc/exynos_dw_mmc.c
-> +++ b/drivers/mmc/exynos_dw_mmc.c
-> @@ -372,6 +372,12 @@ static const struct udevice_id exynos_dwmmc_ids[] =
-=3D {
->         {
->                 .compatible     =3D "samsung,exynos4412-dw-mshc",
->                 .data           =3D (ulong)&exynos4_drv_data,
-> +       }, {
-> +               .compatible     =3D "samsung,exynos5420-dw-mshc-smu",
-> +               .data           =3D (ulong)&exynos5_drv_data,
-> +       }, {
-> +               .compatible     =3D "samsung,exynos5420-dw-mshc",
-> +               .data           =3D (ulong)&exynos5_drv_data,
->         }, {
->                 .compatible     =3D "samsung,exynos-dwmmc",
->                 .data           =3D (ulong)&exynos5_drv_data,
->
-> --
-> 2.50.1
->
+Thank you for adding the entry.
