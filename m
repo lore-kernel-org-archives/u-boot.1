@@ -4,93 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92DDC83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 10:09:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BCCC83F25
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 10:14:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13C12833C6;
-	Tue, 22 Jul 2025 12:09:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CC2FB832C8;
+	Tue, 22 Jul 2025 12:14:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eiOZE+os";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="QpywCgng";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 604CB833C6; Tue, 22 Jul 2025 11:20:35 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1067B83346; Tue, 22 Jul 2025 12:09:43 +0200 (CEST)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [217.70.183.196])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BABD8329B
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 11:20:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2F6982C65
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:09:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ae361e8ec32so911809666b.3
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 02:20:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753176033; x=1753780833; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qIPOpSlU17Kuk9Ixf7sfA960JtkiTNh6NieoRhPEdxc=;
- b=eiOZE+osuzKdVvfaV/eblmTgzAlcYX6n68Xeui7pOzhJMWtu+w6WO4EoDnvnZ8d6Dy
- BRuCRL1/F7CgNmfMYX/dHNaPAoE3KDY17jfElu/4/iD2e+rL0EhbHt2NkM/vZKMVZKqv
- nQied7oxK4WuVGY7vRbVfVVOoXZxYmpUzAkk9xOzkK+Srfh86QCihjgomSA9ieDaWaKi
- gbfIlwmrA8uEx+1Z6hmio+TvOGmiF4s+WCR0um6xLnJj+DB7Lam3q44BLWuIyU0iDR7u
- kFr6V5P9YhiIruxmh7VPxGUvUStCMaDJK+yVWNgk3xFLyAXcT743p+dujiM4Xx8rbUfM
- dHQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753176033; x=1753780833;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qIPOpSlU17Kuk9Ixf7sfA960JtkiTNh6NieoRhPEdxc=;
- b=g5tutIYiC633tl0cLz0PeO6WOZJ8AxlXh9cNQGpYfTSp7sKZoHV4DEd6peei8IKW2Y
- j0SivpGi27azvPd33QO4NC6O/0lQVM1zL0TBaiFi4RveTjq/U+SfRvD1qJhvN9yDb0cd
- NrLdXO4j0cs6UNXeHcuCMjpUweFnbYK1cbvKAPrh+8ak2QDtrPf2srcSuz/maDpFhdum
- T86rFo3w9fwlhEKUbpgAw41OQNIMTdg9/DzJuipBzpewSnRfotBQtKdQKETZwR4jMHv4
- STARSfM0qZZ1ODlonICiDezXTKgUVmZMYhG6s6WhGgS3QVUdax1haGOVef//92a2n3Ha
- uPWA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUfp9Vhzht0qRW74XtdkHFWk4d0L7zBai/hKC6xbME3qliDMvEJOPpdJWkafKJyXeVO5nCNcWw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxslssvHiYA5GjovYVxcqpWmUsOOtcZGjmOXUXWES4efqbweFqG
- FGf4jyMIxNPYBaWwtp+jOjLD/Kgosdn0GASbEMfZ31DoRC8RwqlFxqdTddJ6ahVfKQs=
-X-Gm-Gg: ASbGnctcLrFvpsFVs+MSt99936uTZlccoZER+cDuoYp+rVvh3dKM2xMyW2WRYy9n5Ho
- uPA1UXRQiBvBmohUgfhJJyog3AxqQjDBp9EU+aUBK1vHNvkKh3a1t0fBZpuHXUdIxbJzR1C/+ek
- rdmRQYIEedbxMBB3AqaglVSKyZNu95t5ZEYY/hzJYqKNxXuT1r9Vhir5G74B977wgaPn7Vf5QoU
- 7x1flr+gj0EKU/eLJizBl9/9MR7lY6d21Gtkd45WOBl6qblizJvYIFjrPpWIirGXwSCu+XQW5WA
- E7CwIBKjGqQWg+FPP+yT9pqDZYmzUqxx2iHwy8dwyBGfViB0Y6O6HffqHysbtQo9fErTN/IxRRW
- HEBpkUMp0BeE/LROo1rFsbUq5QjdcWSME8Y3fHaxVzg==
-X-Google-Smtp-Source: AGHT+IFP4mobpEaFgc/f6U0wArWrq63uF/egcveLWwFA8km+aqJtwM8qVbrKgvrTb4N7lKmx4RTx0Q==
-X-Received: by 2002:a17:906:b212:b0:ae0:b7c8:d735 with SMTP id
- a640c23a62f3a-ae9c9b6c4dfmr2091728466b.42.1753176032619; 
- Tue, 22 Jul 2025 02:20:32 -0700 (PDT)
-Received: from [172.20.10.10] ([46.97.171.248])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aec6ca7a3e1sm828627266b.105.2025.07.22.02.20.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Jul 2025 02:20:32 -0700 (PDT)
-Message-ID: <c3c99016-b6ae-443b-ac1e-a6c5144dd815@linaro.org>
-Date: Tue, 22 Jul 2025 10:20:30 +0100
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 6EE334336F;
+ Tue, 22 Jul 2025 10:09:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1753178979;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kNFHPacyPFXb/Oc8AU5d3QxKLgr4pXqeub209XlWKzU=;
+ b=QpywCgng/AvZ9YWYh85k0rLylpJuxs7qlxVXjcd2jC4i3ThFN4bLtHQtqEYY0bVnPL9m3A
+ oNzz3XoNu1Lu9QQrUFnWgzx+t5AADpQiR38qtlIsbC0pltWT4SHcfxC/7qseyMSykUCw+j
+ 5ScU5+yxANHMyE/JLpdx+XZLZ/lMdfAxeSgSu8qELhYasXM/UuuU1Tlm6kG8vBcOEt+xUP
+ YnMP/T2AMJvd37HBO7BjhZ8ok2baEDKUHi8JH1ecTyn7oeNEUo2cVKx/n3q0FuYlWWz+jm
+ wJyx2rVMBicCOgKgkVQBTgNRM7+v4i5pFntV3npxhvaUszYmyRm/lCzqyMcciQ==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Frieder Schrempf <frieder@fris.de>
+Cc: u-boot@lists.denx.de,  Jaehoon Chung <jh80.chung@samsung.com>,  Patrick
+ Wildt <patrick@blueri.se>,  Tom Rini <trini@konsulko.com>,  Frieder
+ Schrempf <frieder.schrempf@kontron.de>,  Fabio Estevam
+ <festevam@gmail.com>,  Tim Harvey <tharvey@gateworks.com>
+Subject: Re: [PATCH] imx: power-domain: Fix crash due to uninitialized 'id'
+ field
+In-Reply-To: <20250722083119.64084-1-frieder@fris.de> (Frieder Schrempf's
+ message of "Tue, 22 Jul 2025 10:31:18 +0200")
+References: <20250722083119.64084-1-frieder@fris.de>
+User-Agent: mu4e 1.12.7; emacs 30.1
+Date: Tue, 22 Jul 2025 12:09:38 +0200
+Message-ID: <878qkgcza5.fsf@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for Winbond W77Q51NW
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>
-References: <20250720195901.414083-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-In-Reply-To: <20250720195901.414083-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 22 Jul 2025 12:09:24 +0200
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdejgeeivdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefujghffgffkfggtgfgsehtqhertddtreejnecuhfhrohhmpefoihhquhgvlhcutfgrhihnrghluceomhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepffeghfejtdefieeguddukedujeektdeihfelleeuieeuveehkedvleduheeivdefnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepkedprhgtphhtthhopehfrhhivgguvghrsehfrhhishdruggvpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtohepjhhhkedtrdgthhhunhhgsehsrghmshhunhhgrdgtohhmpdhrtghpthhtohepphgrthhrihgtkhessghluhgvrhhirdhsvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehfrhhivgguvghrrdhstghhr
+ hgvmhhpfheskhhonhhtrhhonhdruggvpdhrtghpthhtohepfhgvshhtvghvrghmsehgmhgrihhlrdgtohhmpdhrtghpthhtohepthhhrghrvhgvhiesghgrthgvfihorhhkshdrtghomh
+X-GND-Sasl: miquel.raynal@bootlin.com
+X-Mailman-Approved-At: Tue, 22 Jul 2025 12:14:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,50 +79,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Frieder,
 
+On 22/07/2025 at 10:31:18 +02, Frieder Schrempf <frieder@fris.de> wrote:
 
-On 7/20/25 8:58 PM, Marek Vasut wrote:
-> Add IDs for Winbond W77Q51NW, 512M-bit Secure Serial Flash Memory
-> with Post-Quantum Cryptography, Dual/Quad SPI, QPI and DTR . The
-> flash part is similar to W25Q512NWM .
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> From: Frieder Schrempf <frieder.schrempf@kontron.de>
+>
+> In case of the i.MX8M power-domains (i.MX8MQ, MM, MN) there is only
+> one power-domain for each device. Therefore the 'id' field in struct
+> power_domain should always be zero.
+>
+> Currently if a power-domain is accessed after the initial bind, the
+> 'id' field is left uninitialized. This didn't cause any problems
+> until the following commits were introduced:
+>
+> 9086b64ca071 ("power-domain: Add support for refcounting (again)")
+> a785ef24487b ("imx: power-domain: Enable refcounting on imx8mp")
+>
+> Now the 'id' field gets accessed in the power_domain_off() sequence
+> and the invalid value causes "Synchronous Abort" failures.
+>
+> This was observed on a i.MX8MM board when running "usb start" and
+> then "usb stop".
+>
+> Fix this issue by setting power_domain->id to '0' in
+> imx8m_power_domain_of_xlate().
+>
+> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> Fixes: d08a194871fd ("imx: add support for i.MX8MQ power domain controlle=
+r")
+> Fixes: 9086b64ca071 ("power-domain: Add support for refcounting (again)")
 > ---
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
-> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> Cc: Vignesh R <vigneshr@ti.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-> index e7e97780d7c..0383175beb5 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -591,6 +591,7 @@ const struct flash_info spi_nor_ids[] = {
->  	{ INFO("w25m512jw", 0xef6119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->  	{ INFO("w25m512jv", 0xef7119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->  	{ INFO("w25h02jv", 0xef9022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-> +	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+>  drivers/power/domain/imx8m-power-domain.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/do=
+main/imx8m-power-domain.c
+> index b44aae78e6d..a7e64971a2a 100644
+> --- a/drivers/power/domain/imx8m-power-domain.c
+> +++ b/drivers/power/domain/imx8m-power-domain.c
+> @@ -468,6 +468,8 @@ out_clk_disable:
+>  static int imx8m_power_domain_of_xlate(struct power_domain *power_domain,
+>  				      struct ofnode_phandle_args *args)
+>  {
+> +	power_domain->id =3D 0;
+> +
+>  	return 0;
+>  }
 
+Looks like a correct fix. I wonder how many drivers do not properly set
+an id though. Thanks a lot!
 
-The patch is looking fine. Any idea why SFDP parsing is optional?
-I see a SPI_FLASH_SFDP_SUPPORT that guards it. Having SFDP optional
-introduces headaches as one has to specify all flash parameters statically
-at flash declaration. I assume it's about image size limitation. I also
-see a spi-nor-tiny.c, about which I'm not thrilled. Is there a general
-recommendation on when to split things? Maybe a question for Tom.
-
-Here it seems that you specify just data that can be discovered by SFDP.
-You won't need a flash entry at all if one adds a "spi-nor-generic"
-flash info that initializes the flash solely on its SFDP data, see
-linux. It would require porting the parsing of the 4bait table from
-linux and other small changes for the rest of parameters.
+Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
 Thanks,
-ta
+Miqu=C3=A8l
