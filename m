@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6557CC83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 19:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDF93C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 19:46:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6102283420;
+	by phobos.denx.de (Postfix) with ESMTP id BB33483447;
 	Tue, 22 Jul 2025 21:46:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bgq6JSyd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s1XwAyUl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 849B783444; Tue, 22 Jul 2025 21:46:11 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 5961583444; Tue, 22 Jul 2025 21:46:12 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 414C083403
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 21:46:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37B318331F
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 21:46:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-73e57751cd9so1799685a34.1
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:46:09 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-615950642d9so3328461eaf.1
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:46:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753213568; x=1753818368; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753213569; x=1753818369; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8sdB86iElIDOZBKjDepyPRN9b3E8kfwOCpVELNyJlg8=;
- b=Bgq6JSydSlChAnZBHMNSjEK9ZaEnOk5yiYmo02hEw1CN5LQBjWYQiAxvZ+A2euKrLE
- ePq1FEjckMWvB5YFxzwOG21bQRcq/mYEQuBcg1js+cCXe3vb+i+3uiGspuv3Jgnxra4X
- Uj6TfFH3XIijWSX5rZ5pQWwg/4brhiaD2AWF0=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Aq/D9UtpLc4ZcxQ+IwoncTJLQb+obNvBy16Kc7R5U8w=;
+ b=s1XwAyUllHLujfkZh+mJ7TSyk2LVRMhYgonmJ2IWto8A+FrLPStfC819mzV1N8EWmv
+ Uglryevom9dX24tYxC6lh60pxQeCPlWsXgryo69+RvHaWE6yz5ds5AdgtThMEUd6XTo6
+ dTO2XoOwT+5AZ1BgeR3m4n5l4sKet4NVyyPHQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753213568; x=1753818368;
+ d=1e100.net; s=20230601; t=1753213569; x=1753818369;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8sdB86iElIDOZBKjDepyPRN9b3E8kfwOCpVELNyJlg8=;
- b=OT9acxwLlTtEJz30ZV/UtAuF/dbSU/6ZTu9CwbzVZcZjPV08+HJDWvfRy67ddEBnIL
- TQiK5ctOAvjMhzmWDdNDeoF8GZYB7r5OMCLy7/b8OzjP6j+vHAwCvdXdUri6kfc5QSWm
- znJl/MwHYAJaPOtIqjHAw2sLZ1n2wW0ZtNGFpBFBseuT4Pg9WNn+SpjAnstpt3+JJwfQ
- iF0Gi5xEK/AedUO8t9LaY5BOBo7R8VqnY987uNtLIJ6nyn+/VBq064zXq4N9Y3qgSECH
- am8fiIh6drCh5Q14eYNCGEMqNcFBea5hWkIehfVNvd4YJK5myoJxdGvVfMhETcOcVFdQ
- e8fg==
-X-Gm-Message-State: AOJu0Yy/5uZaaxKTsrxFQQBPMuVSsS69HACtCmU5VGRD+TPwklg/v90w
- TXF2vRBezv0hMYDkCLjTm35I44sivAkpe7j1n4KxW+7XOlZ/z0k5CH5nTbaUIvRsw4720nzR7N2
- sx0dX
-X-Gm-Gg: ASbGncsBS6P3G6ZFSiM+GF1htm/jHWIDBE1TtmAV5zSwIPxMzY6l9hXBWVv6sIsYo2W
- aMN/hsaYHAW7nz+vpPNgEWq+sYGA12KznIB8W2vz5v/roOHTNHZMt5zTxi7MjGnd4g2cKe9PLlF
- EqFfkYvJT+v7S6FhHH4pKEWKK6t4Z+CCVaaWtVI4bFjCAtcdLFVOpIKD4KKIqsAM9JQWC9jQXxq
- B6YUwGzZj5tnUdmGIQCc65iUvZHuFvAfC4n6WxLgIR6aBPyG+Imkx1auiSsztg/3cALY2+7QsEB
- cSsPP6qgs483D3hzZQE+IjWDSG9fSwEL/huySCGNYl7D8DJJs6+Ge1YeZEPPCI6qKSCnNAB/aJy
- 3fRNply/0twfi1iLoufxcWeeinvSsFZJK071DgQXJWOrGzAO2NGDVTEc=
-X-Google-Smtp-Source: AGHT+IFOuXUQpo/8P3X04sy5zOYVnmmEpRx8VqblnJ9zoo8QpdSEEcadNwRFWx02Os3/hu3VrT2goQ==
-X-Received: by 2002:a05:6830:6a12:b0:73e:9cdc:a6d3 with SMTP id
- 46e09a7af769-74088cfb7c3mr384179a34.25.1753213567986; 
- Tue, 22 Jul 2025 12:46:07 -0700 (PDT)
+ bh=Aq/D9UtpLc4ZcxQ+IwoncTJLQb+obNvBy16Kc7R5U8w=;
+ b=U0lN3EGQSMsnnFsUhC12BUBm5rb54do1iGk4T/UqA2HH6Om4N2CcgLSOSYcnlr7mWz
+ 5JHt19n5q2dT7rzvFt5qWpdIC2NDAyx+FC+z8Q/9o1ko8WR3UJrhQboLe2VOe3QjYk6m
+ OgVLBUx6whRTFdKcpwOevz5Fs8ay+ETJ9Q4vWWS8lEvCbzsZvCGTOw4G6+eRQWxDclOb
+ j2S7IW7NR3ofyXoYjQrvjXjgJLW8S/L0O49oAkuli1Eayl44nDlSCnNMMAx3Zse3vLn4
+ eNwksFWN2QlG5uw3PdKB0nrUQv7xq3J8DqagcIHRNjAs4EoBr0mmfQAgudKWRJE75wrC
+ xcGQ==
+X-Gm-Message-State: AOJu0YxjdmXDVVo0IZdPvtqlY/3d9dN5/6AYfJeh+i6pB46vsk7UyGGi
+ Ri3EVJ/wkvEgDGsXbGxpv5qYcRacBO7ZSA+YdG2njCUqWScafBh/7KI2r0ZyWs0DuZM=
+X-Gm-Gg: ASbGncukaZ92S7goyQe7oTDE1cx7qvFmU3aZLo4klx3EuV8MM1Wz8iSdoCdxjZE5IFH
+ Ldx9LUlYUxYcF8jIz6Pc/HE7Hrr6JNYbI6DSb6RxB/e5StEHeZAkA+Cd2YT9srTJojPHhM7tOgV
+ mAJDRrnxD0dqWUo7cJSqqgpUUTM1ZT1QY5VtsDgaGV60R1Na/9KqCFrzij6fW7YnrjuVF3o5E91
+ UU3qY8Ag5LKN824CMkLJQUaHJCSG7buMdSYThhKalGgmLLReTzJ5m0B5OJ8+MfaCxkVpZliJgJA
+ NKv3CUko6LVG6MoRJr03QhfX09XGzsb72UElQE5C5ze3pazg7KLb/77Hqdg7GudV97iY2rX6GVL
+ fN9C9kMhyCpmtwCpgEBeeQP20oex/32G3D41oTiGgCg+EPaFPtu+FGFc=
+X-Google-Smtp-Source: AGHT+IFtSCulWwv15n1lWeCcwL9WZMn5TZRNbzQ+u23tItJOVGjkUxa1OqpNMODqYLLJeFM9HgnVnA==
+X-Received: by 2002:a05:6870:e2c8:b0:2ef:2af4:dfcb with SMTP id
+ 586e51a60fabf-306c72b3134mr155803fac.28.1753213568880; 
+ Tue, 22 Jul 2025 12:46:08 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e83b0c3fbsm3749811a34.30.2025.07.22.12.46.07
+ 46e09a7af769-73e83b0c3fbsm3749811a34.30.2025.07.22.12.46.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 12:46:07 -0700 (PDT)
+ Tue, 22 Jul 2025 12:46:08 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Holger Brunck <holger.brunck@hitachienergy.com>
-In-Reply-To: <20250714111651.2450845-1-holger.brunck@hitachienergy.com>
-References: <20250714111651.2450845-1-holger.brunck@hitachienergy.com>
-Subject: Re: [PATCH] arm: fix lmb region reservation when PRAM is defined
-Message-Id: <175321356721.77222.18282877244626762444.b4-ty@konsulko.com>
-Date: Tue, 22 Jul 2025 13:46:07 -0600
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250714-lmb_unreachable-v1-1-20173f22b6ca@linaro.org>
+References: <20250714-lmb_unreachable-v1-1-20173f22b6ca@linaro.org>
+Subject: Re: [PATCH] lmb: Remove unreachable code
+Message-Id: <175321356810.77222.8497081231103104402.b4-ty@konsulko.com>
+Date: Tue, 22 Jul 2025 13:46:08 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,18 +95,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Jul 2025 13:16:51 +0200, Holger Brunck wrote:
+On Mon, 14 Jul 2025 17:40:47 +0100, Andrew Goodbody wrote:
 
-> PRAM usage is not taken into account when reserving lmb for ARM
-> architecture, this means that predefined PRAM region is marked as
-> reserved by the architecture and cannot be used by other users.
+> Code after a break is unreachable so remove it.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] arm: fix lmb region reservation when PRAM is defined
-      commit: 01548afc43770020cfebecc4a62cfa0d8b05517e
+[1/1] lmb: Remove unreachable code
+      commit: b9db211e3906c0a620ced344a2ebe5f87ccbf951
 -- 
 Tom
 
