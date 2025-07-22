@@ -4,89 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC58C83F1A
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 14:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF63FC83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 14:10:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ED8083321;
-	Tue, 22 Jul 2025 16:06:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FC5E83339;
+	Tue, 22 Jul 2025 16:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jhYHedDh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qL6OMI3N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB6F9805D7; Tue, 22 Jul 2025 16:06:17 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id A0F8283898; Tue, 22 Jul 2025 16:10:12 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B652483339
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 16:06:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D008805D7
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 16:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4560d176f97so59836065e9.0
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 07:06:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3a51481a598so2964245f8f.3
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 07:10:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753193175; x=1753797975; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=G6ucfMS5OU9pYnnuYLa0fyLbsUIqQnH7ZgjPHwbEhBg=;
- b=jhYHedDhsOASR5Szjqo+bGLo+647xbWB26nSc3LC04uXZFfiEXAzy81atq982NhaIi
- Ck4L8B3yH/Lr71kCOK0ZNk8dhW/X/uqefFwQ2/aoTQkybW+jWfC0k20NKZhVzzTktoj7
- jKQOF6baV8YfEJUxrdvWel+uRchwN17aiCn7DTZHIV7yKFHtXY83TeCvcz3hJeYsjrNZ
- LToR/AXrFLdzw+LWPBrkGPuHljVCLkYt/M0Xr9IExJcE8kFigEC5I3qbtyZmpMRGx1lP
- 32kacCMv2zY6psM1icPzf0FxKNVCvOz2luqzsedNsPWSUWX7qGMfg3KqGZNv5nJpq9wi
- hkew==
+ d=linaro.org; s=google; t=1753193410; x=1753798210; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZbFOERsMUe6aQ6iefaYs6nYAF5FfSpfpC2cARj0+3e4=;
+ b=qL6OMI3NpM5m+8CMrkfYreWTQ3BPM3vE1QNC1vzgPVpRPWL1xc5vsZOq2vmnhRzbIi
+ XO8zZVfyfI3KJMsO0VfvqtBiDTvhDCI9CyEYSC2IzyzbFGL+t1uF9tPk0EtBRm2D4yBN
+ zbY9zLXO2WLn9NgqoVSSR3zMc3wxg0LsGjtVu9oLiZcqNgBexU4hcN1nb/Uxbtx93rlh
+ LBt1NmiDPQJdznFXwxN6xugy8JK0j5UVZs5gSPGzRBUR2642qqlwu9hzo4FnJtTGfi5f
+ p8KXs97GsPBlG9wjzLWhR2eO0gSeQB7A9UaJkZLUS0dHjHusFFu/c4TXt5o6tZXv4+g2
+ Ma8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753193175; x=1753797975;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=G6ucfMS5OU9pYnnuYLa0fyLbsUIqQnH7ZgjPHwbEhBg=;
- b=pX6DgJmwrivXabRm9TdqYw3tdps7K5FjFq1p4H66XITLdeu6AA/V76IVk2wd/uG07w
- UUkEw3Po0wToszHcYEeikwvfpDqUTbK+xh5s+zgOhOIzFxmM9iR0/massNbaMFSg1a+V
- o0PnubzEZSAHHSE5J341O7lH9n+Qwnv4PZUREvdSdJgzuI8Qrh5IqY7wWdiWD54lQaXS
- ETaOMTjVWJZGoYknzpUjMZ08v4SW3lqpc4pGRjnAUCXNclAwLp13BOyrFkt6eWVys8q7
- +qZWGm1LXBBGC40rtCGJsXHPnzslBB8QyckSeOOxP0RAzj9DwtKBG/GIEhhaeJqCO812
- NkYQ==
+ d=1e100.net; s=20230601; t=1753193410; x=1753798210;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZbFOERsMUe6aQ6iefaYs6nYAF5FfSpfpC2cARj0+3e4=;
+ b=srDQ4TGUKxj3EHQDjtCNNbxuDJF2ifIeLiY8VKlzQ9PuJIxRewe+dlCk+Vph9cLLlR
+ uPeHeKS+LHmKdMhMcnOtQl4jnrOOkEYY3vB7J14N1xSE9epUDPwX1UhbHwk6qSqx+Uv/
+ SmN+kaH/xoqhiKGZU9oayEQbGNHpwgJH67EgDsH7TnKvaIoxsHs0DrN/ARaC2BuQ+cfe
+ yef/ByjHFmC4JkIefPaXjWlgg8VIWn39dKrXEefiouIbWpjQUfAOkyJyaNDpScx3iBuX
+ ko/X5UUpI8ogcjNRiNfWelSETkJ16Q5kzMf82xKurWQNiQHWO1G4em1/kATgJzgmRNxo
+ v1QA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQREZaJf42T06KJE9jgQuKD1fgAt59I1dHgAPXaiK7YEQEDrTB+aouh6cdQRBp94hPjetM14s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwafHebxUbzErRs+OT+rgaYakaELRcomaPnGWD8AOx955fiLwWQ
- 2BixNp/JkjVqhB5scY5WeSjdQk080MEgmPCg5081duDrQFdwj2L9W09A8/A5B0EA5w1MskYfDmS
- rP5HX
-X-Gm-Gg: ASbGncuLGIXsZeG8Kv0DZx3vXY9A6cx7gTlN3cMaee4YkMVkj4C2CJ4Ie1mxcU2z0au
- a9ZNd67dIJunzfj7Q7Yc8HGrjbL5M10mjtQwdG8qWXLyGNAc93dZFpAD+OCxkB1caB2P6BGcprG
- yuZzTV1yIERwd7PUV9XYMP+03G72MIjSws5hutdSIT5BRAWE5S075I7Sj2O1PGu/ysnJV9je3G1
- mO5e6brV5fLdxoIgoqLoG35/Y+rG32E71nxN97P5s1bi+qMzRWvmZau47OJgmvHEvQGvZ9MeTAm
- WQs1tEMko+e5gpbcy44nOD7W+O8xaqlHVOcLM3SP++1sL/Hrm0qnrZNvbOhISzbT3VH3tCP2k3e
- 8ApfPwujRxMwVSS7K4VWxg2Xy4LUvpmR7IeLN0Y3KWNU3qpK8JNs=
-X-Google-Smtp-Source: AGHT+IESmEyV9d3QVuAb7fm9m/hjTGtBqPoydbnRv/ZsM333S5FcON/gg8kCHdoG2ik+ABTEUmNVRg==
-X-Received: by 2002:a05:600c:468b:b0:456:2419:dc05 with SMTP id
- 5b1f17b1804b1-4562e33db7fmr260061875e9.12.1753193174889; 
- Tue, 22 Jul 2025 07:06:14 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:eb9:1701:2943:d0d1:b3a5:d7fb])
+ AJvYcCWJG1o5/tNArP9QmIn+H5ZjYp/M9+0o7Cq5TfKIZuH9GoT7P8EsFz3Dp/L+YMHPrB/qPdlDU28=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyae+ObNzS2Xe4+HdrDI5GHO50Pi7HUwHsl8feoRfFKCJKitidr
+ Yx7ooItYAmjSxSpZ/hQA6e9WNQj+fU4NIxDr3B+vXcIkOzOGJJ+W2tEdOm2mfZD/yZ4=
+X-Gm-Gg: ASbGnctjAdB+7eM6ChNR8CJ8v5p4AJ/kAQJVUqSd2NvoaZsdHfE9ioAvb3Kwut06ocj
+ hUepUfKHPMTGSDqxaGWkI0ePMcmWsAPxme8jv9LkxVE/XGAl1+HNX66H3cMDEndGKz95rd+3K+/
+ cKu2Iah55GHwTin8SyD9Dxn0vmQ773gdXvTbaxmpOsVO31bX4MyNfizN7ay67XpONCJqkzBBKzg
+ 5sCX4zRbLL4UDXDmKmBJpwtUeWTpTiXO5OpjcZJo9LYE4cAEtPwVrPRu99rH88bp70S1C6LhkRr
+ abhAGDooXiG5Xbvfp3PEFlR+BMIysIP1JHCQsYw9wQYVxb6LGcExWP5EX4Wm4asIvZ8nrFUZH36
+ K8ikalxt/c8c58+hqVapbZQESuB+cb/prUOQB0xqdgn2+yUTLA+94eYnSXIV2rCo=
+X-Google-Smtp-Source: AGHT+IGyLzgWTVKH6JI6z8cls+CzrPqiQyNqE2eztCCtnbP2MCwIGXkhIRW1KZT91cSODRqILoR+aA==
+X-Received: by 2002:a05:6000:26d3:b0:3a4:febd:39f2 with SMTP id
+ ffacd0b85a97d-3b60e523ce1mr17980902f8f.37.1753193409960; 
+ Tue, 22 Jul 2025 07:10:09 -0700 (PDT)
+Received: from [192.168.1.36] (p549d4bd0.dip0.t-ipconnect.de. [84.157.75.208])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca319cbsm13790157f8f.38.2025.07.22.07.06.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 07:06:14 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 22 Jul 2025 15:06:14 +0100
-Subject: [PATCH] adc: meson-saradc: uint cannot be less than zero
+ ffacd0b85a97d-3b61ca5c8besm13505706f8f.81.2025.07.22.07.10.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Jul 2025 07:10:09 -0700 (PDT)
+Message-ID: <7105a92f-996c-493f-a093-c312fed9ac03@linaro.org>
+Date: Tue, 22 Jul 2025 16:10:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/6] Enable fastboot support for IPQ9574 based boards
+Content-Language: en-US
+To: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ lukma@denx.de, seanga2@gmail.com, marek.vasut+renesas@mailbox.org,
+ bhupesh.linux@gmail.com, alexeymin@postmarketos.org, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20250715101538.4072985-1-quic_varada@quicinc.com>
+ <7f4689e8-e727-438a-95c1-b1dd49890cea@linaro.org>
+ <aHcxIj299SjS8wzG@hu-varada-blr.qualcomm.com>
+ <cb99663c-07c7-4267-8cc9-d915e815bcf6@linaro.org>
+ <aHn1VnPLEkha4XkX@hu-varada-blr.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <aHn1VnPLEkha4XkX@hu-varada-blr.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250722-meson_saradc-v1-1-1ab45d53da9d@linaro.org>
-X-B4-Tracking: v=1; b=H4sIANWaf2gC/x2NQQqDMBAAvyJ7bkATxdavlCKbZNU9GGW3iCD+3
- ehxGIY5QEmYFLriAKGNlZeUoXoVECZMIxmOmcGWtilba81MuqReUTAGU3uPnxiqt3MOcuJRyXj
- BFKY7mlH/JLdYhQben8/3d54X6TFThXcAAAA=
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,51 +108,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-timeout is declared as a uint but then tested for being less than zero
-which must always fail. Change the while loop for a pre-decrement on
-timeout and test timeout for being zero.
 
-This issue was found by Smatch.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/adc/meson-saradc.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+On 18/07/2025 09:18, Varadarajan Narayanan wrote:
+> On Thu, Jul 17, 2025 at 03:01:04PM +0200, Casey Connolly wrote:
+>>
+>>
+>> On 16/07/2025 06:57, Varadarajan Narayanan wrote:
+>>> On Tue, Jul 15, 2025 at 02:30:09PM +0200, Casey Connolly wrote:
+>>>> Hi Varadarajan,
+>>>>
+>>>> On 7/15/25 12:15, Varadarajan Narayanan wrote:
+>>>>> This series enables MMC based fastboot flashing for IPQ9574 boards.
+>>>>> For this the following are added/enabled
+>>>>> 	* USB2 & USB3 phys support
+>>>>> 	* USB Gadget support, Fastboot-MMC related configs
+>>>>> 	* Flashing related documentation
+>>>>
+>>>> This is awesome! Glad to see you have the superspeed phy working. I'm a bit
+>>>> confused though since the of_fixup code in mach-snapdragon configures all
+>>>> the usb controllers for high speed only and removes the reference to the
+>>>> superspeed phy, is there some missing commit to adjust this?
+>>>
+>>> CONFIG_EVENT is not defined in ipq defconfig. Hence of_live_build() doesn't
+>>> notify the EVT_OF_LIVE_BUILT event and qcom_of_fixup_nodes -> fixup_usb_nodes
+>>> is not called.
+>>
+>> ohh I see, hmm
+>>
+>>>
+>>> 	=> bdinfo
+>>> 	. . .
+>>> 	fdt_blob    = 0x000000006fe3b5e0
+>>> 	. . .
+>>>
+>>> 	=> fdt addr 0x6fe3b5e0
+>>> 	Working FDT set to 6fe3b5e0
+>>>
+>>> 	=> fdt print /soc@0/usb@8af8800
+>>
+>> Just fyi, the fdt command won't show changes to the live tree, it does
+>> direct FDT parsing whereas the live-tree is an internal representation
+>> in U-Boot (which is what makes it faster to access and modify).
+> 
+> ok
+> 
+> [ . . . ]
+> 
+>>> Initially, I manually overrode the 'phys' and 'phy-names' to just have the usb2
+>>> phy and it didn't seem to work. Only after bringing up the USB3 phy did it work.
+>>> Not sure what the relation is between the two.
+>>
+>> Hmm, you don't even get high speed USB? probably an issue with clocks then.
+> 
+> If 'qcom,select-utmi-as-pipe-clk;' is added to the controller DT node it
+> works. Should I post a new version
+> 
+> 	(1) without SS phy + qcom,select-utmi-as-pipe-clk;
+> 
+> 		(or)
+> 
+> 	(2) with SS phy + qcom,select-utmi-as-pipe-clk; (i.e. same as
+> 	    this series, with just utmi as pipe clock added)
+> 
+> 		(or)
+> 
+> 	(3) leave the series as is
 
-diff --git a/drivers/adc/meson-saradc.c b/drivers/adc/meson-saradc.c
-index 60e348968fb..0144ff828c5 100644
---- a/drivers/adc/meson-saradc.c
-+++ b/drivers/adc/meson-saradc.c
-@@ -205,9 +205,9 @@ static int meson_saradc_lock(struct meson_saradc_priv *priv)
- 	do {
- 		udelay(1);
- 		regmap_read(priv->regmap, MESON_SAR_ADC_DELAY, &val);
--	} while (val & MESON_SAR_ADC_DELAY_BL30_BUSY && timeout--);
-+	} while (val & MESON_SAR_ADC_DELAY_BL30_BUSY && --timeout);
- 
--	if (timeout < 0) {
-+	if (!timeout) {
- 		printf("Timeout while waiting for BL30 unlock\n");
- 		return -ETIMEDOUT;
- 	}
-@@ -256,9 +256,9 @@ static int meson_saradc_wait_busy_clear(struct meson_saradc_priv *priv)
- 	do {
- 		udelay(1);
- 		regmap_read(priv->regmap, MESON_SAR_ADC_REG0, &regval);
--	} while (FIELD_GET(MESON_SAR_ADC_REG0_BUSY_MASK, regval) && timeout--);
-+	} while (FIELD_GET(MESON_SAR_ADC_REG0_BUSY_MASK, regval) && --timeout);
- 
--	if (timeout < 0)
-+	if (!timeout)
- 		return -ETIMEDOUT;
- 
- 	return 0;
+sorry for the delayed reply! It would be awesome to get superspeed
+working in U-Boot, if you have it working with this series then I'd like
+to merge it and start enabling superspeed on the rest of the SoCs.
 
----
-base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
-change-id: 20250722-meson_saradc-4bba9dc18333
+We can make the of_fixup code smarter by looking to see if there is a
+driver available for the superspeed phy and skip the fixup if so (not
+relevant for IPQ though I guess).
 
-Best regards,
+So I'd say keep the series as-is and I'll give it a review.
+
+> 
+> Kindly advice.
+> 
+> Thanks
+> VaradaKind regards,
+
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+// Casey (she/her)
 
