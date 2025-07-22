@@ -4,72 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A25B9C83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 13:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDF8FC83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 13:40:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1514B83865;
-	Tue, 22 Jul 2025 15:04:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 37CBF83847;
+	Tue, 22 Jul 2025 15:40:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g00TNbA9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j73Y004t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD3D183844; Tue, 22 Jul 2025 15:04:03 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFC6283865
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 15:04:00 +0200 (CEST)
+ id CD7318386D; Tue, 22 Jul 2025 15:40:28 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8668B833D1
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 15:40:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56MD3sI71049482;
- Tue, 22 Jul 2025 08:03:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753189434;
- bh=uSR148hPo9d852/RSEBi/ugfg5ebJFl6hLxpFLwWANA=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=g00TNbA9g1LNTDhzIGy6HoJt0CVMOzzbloU/ibi3sbyHj5694hRFJpWcIhxUJPq82
- cVttMe8JDu/1ODJM8UmN/VK284a8Zl+PKglZh2NL8hlPkelYqFtyZf/VprnPHNnSiR
- ti/FVn9NnfU3wyim7k+w6VgTXMpRcj/xdcLfFSBY=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56MD3rwf1636716
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 22 Jul 2025 08:03:53 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 22
- Jul 2025 08:03:53 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 22 Jul 2025 08:03:53 -0500
-Received: from localhost (uda0492258.dhcp.ti.com [172.24.227.169])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56MD3pW81364431;
- Tue, 22 Jul 2025 08:03:52 -0500
-Date: Tue, 22 Jul 2025 18:33:51 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <joe.hershberger@ni.com>, <rfried.dev@gmail.com>,
- <marek.vasut+renesas@mailbox.org>, <jerome.forissier@linaro.org>,
- <quentin.schulz@cherry.de>, <kever.yang@rock-chips.com>,
- <alexthreed@gmail.com>, <skylake.huang@mediatek.com>,
- <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <praneeth@ti.com>,
- <nm@ti.com>, <srk@ti.com>
-Subject: Re: [PATCH] net: phy: Support overriding Auto Negotiation timeout
- with env variable
-Message-ID: <9c497e20-a355-44aa-8d68-8867cf7f4fea@ti.com>
-References: <20250722060554.352952-1-s-vadapalli@ti.com>
- <6d6759e3-1ebe-4e60-bac3-93f1b40aa726@mailbox.org>
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-455b002833bso21641555e9.0
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 06:40:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753191626; x=1753796426; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uh1snK/FHV4PWlsYPmDBVC06fj2BIVun0/xi30Xsbhk=;
+ b=j73Y004ttyweWCxPRj6xko8NhpK5kcdBAB+G4c/3oWbO7g/wasWwhTt8r81P4XoqT1
+ Inxewq2rcBjc7dugs07hxvw1MNBoYT+NvsJVF2c9BozL8+WBK7HSF+bDcMnsPJNmEUt8
+ tPeUtAysNmHRLmxvYpiRomsQpG/zjXmq6YAjSRZRulPLLvxImuwdKcMbHm7BDQOuEqtl
+ T2LT32qf6kbVetPSVAcA067D71Ni929I42itJg3B04J7SCOZmYFhxo62jOiXkFHMnla4
+ IbG5CarPnUoYr8QW3cGudOfTj/XTq/J2bp3TY+vFpDZRR2NwsN2E+iBRHRFmeGqhoChx
+ 2KBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753191626; x=1753796426;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uh1snK/FHV4PWlsYPmDBVC06fj2BIVun0/xi30Xsbhk=;
+ b=eVfji7wPfdZ67NlNMIjt6eHhEq5bx6LQvurpKp2OwMTkbc57Njj4Or34SdrGn8VWxx
+ lKK1jNwJ1+IipakZwwzvKTuMFzlDYW9v6pXCPKm84WSw5lW+/U8sV0UXMFYTBy8WwnO+
+ LW+r18/r4S6eiBbQaVOn77ActG6YpciHFFZniOx2/idW3Zh0TVtOCp4ydv4u8RTM5HET
+ buDRKFyJVslTdNot3ukShy6mQMxaRBC5CzyzJsVqHCAFbTkbS4bZg8PHr95TMyw6Q8lC
+ x4qs90LJPgzx2BIalEWO+lBHcZa4ehTUBIzp4sVofAn/OSmyLj7+7ylNEttQ9k0YITk4
+ QdWA==
+X-Gm-Message-State: AOJu0Yxfh2bYmNjtKoN8j+fw0UBYR3tx9uXIIc7osjNXApRUn+TigVYD
+ mhQYa/Tft2WedyVlZ+bZqjaGk8JJRl0U4MiihV94mrAl4nFOtz7RMjVR3cMW0svLjK4=
+X-Gm-Gg: ASbGnctSSaUiQQc18T4pzOtlM7fTAe6gkZX1o9vHt4jbr9FHCTEOGG5x6xPFj7MMzvi
+ X1blTv/Blgm1+VX9IBaZl11vOq+bfCmhvefC5Zq3iuPmQMYVwNrzDz7kdWz1w9HRo8ZwIdqfIMm
+ ylnNZd61zKtvjmBGP8c26i156XoM5XbRmVvdY67yojKIajUByAN/+n2IPh9RllUg2rWyoCq4OIS
+ hhaB5dR4F8nwlqmZDDOH/J9+3Mr3CHEQ0cYuK+tM6Y/ZKVB7XWka3ijR6c8Yv/aCO3IyN+aVN6G
+ GNcYpiDOLQi9InIcsSqcj2rxhsd2R9eZLXDfbJeuv7us0h4Nw1ETQIYk6UesKlYwiYZT2Ocm0Vc
+ NFK07kL8xbnmdB+45jensUROC/FVYhizbeAh8+/IBWPOTrA+p4fw=
+X-Google-Smtp-Source: AGHT+IElOHSLn9hH9Ibee+5Lqb5ftGcXhJ26DF7/+Ft4wJsHrUNZFEcYw8pdYeIHjj6lqad4gMXj/g==
+X-Received: by 2002:a05:600c:310a:b0:456:58e:318e with SMTP id
+ 5b1f17b1804b1-4562e29c660mr255146175e9.30.1753191625556; 
+ Tue, 22 Jul 2025 06:40:25 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:eb9:1701:2943:d0d1:b3a5:d7fb])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4562e89c751sm186581485e9.31.2025.07.22.06.40.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Jul 2025 06:40:25 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Tue, 22 Jul 2025 14:40:24 +0100
+Subject: [PATCH] imx93: adc: local variable ret should not be unsigned
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <6d6759e3-1ebe-4e60-bac3-93f1b40aa726@mailbox.org>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250722-imx93_adc-v1-1-f7f272b54c6b@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAMeUf2gC/x2N0QqDMAxFf0XyvEIXp879yhgS21TzYDeSMQTx3
+ 1d9PNxzORsYq7DBo9pA+Scm71zgeqkgzJQndhILA3psfIfoZFn7eqAY3K1vE2Lyob1HKP5Ixm5
+ UymE+HgvZl/UYPspJ1jPyfO37H1Bjnx90AAAA
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,95 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 22, 2025 at 02:57:33PM +0200, Marek Vasut wrote:
-> On 7/22/25 8:05 AM, Siddharth Vadapalli wrote:
-> > The Auto Negotiation procedure between two Ethernet PHYs consists of
-> > determining the best commonly supported parameters among Speed,
-> > Duplex Mode and Flow Control.
-> > 
-> > The time taken for this procedure is not only dependent on the local
-> > PHY used, but also on the link-partner PHY.
-> > 
-> > While a timeout can be specified in the form of a "CONFIG" on the basis
-> > of the local PHY present on the device, since the timeout also depends
-> > on the link-partner PHY, it might be necessary to modify the timeout.
-> > 
-> > To avoid rebuilding the bootloader for a given device, just because it
-> > may be connected to various link-partner PHYs, each with a different
-> > timeout, introduce an environment variable named "phy_aneg_timeout" and
-> > override "CONFIG_PHY_ANEG_TIMEOUT" with "phy_aneg_timeout".
-> > 
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > ---
-> > 
-> > Hello,
-> > 
-> > This patch is based on commit
-> > 7598b469c16 Merge tag 'u-boot-dfu-next-20250703' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next
-> > of the next branch of Mainline U-Boot.
-> > 
-> > Patch has been tested on J784S4-EVM validating the following cases:
-> > 1. PHY Auto-Negotiation performed with "phy_aneg_timeout" unset.
-> >     CONFIG_PHY_TIMEOUT with a value of 4,000 takes effect.
-> >     => Auto Negotiation succeeds
-> > 2. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 10,000.
-> >     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
-> >     [Higher value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
-> >     => Auto Negotiation succeeds
-> > 3. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 2,000.
-> >     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
-> >     [Lower value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
-> >     => Auto Negotiation times out
-> > 
-> > Test Logs:
-> > https://gist.github.com/Siddharth-Vadapalli-at-TI/697eadcbb26786435df48a834c968375
-> > 
-> > Regards,
-> > Siddharth.
-> > 
-> >   doc/usage/environment.rst | 8 ++++++++
-> >   drivers/net/phy/phy.c     | 6 +++++-
-> >   2 files changed, 13 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
-> > index bb6c351b441..7447bb85d3e 100644
-> > --- a/doc/usage/environment.rst
-> > +++ b/doc/usage/environment.rst
-> > @@ -335,6 +335,14 @@ netretry
-> >       Useful on scripts which control the retry operation
-> >       themselves.
-> > +phy_aneg_timeout
-> > +    If set, the specified value will override CONFIG_PHY_ANEG_TIMEOUT
-> > +    which defaults to 4000. The default value of CONFIG_PHY_ANEG_TIMEOUT
-> > +    may be sufficient for most use-cases, but certain link-partners
-> > +    may require a larger timeout due to the Ethernet PHY they use.
-> > +    Alternatively, the timeout can be reduced as well if the use-case
-> > +    demands it.
-> > +
-> >   rng_seed_size
-> >       Size of random value added to device-tree node /chosen/rng-seed.
-> >       This variable is given as a decimal number.
-> > diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-> > index e6fed8c41d7..0f5c9685b59 100644
-> > --- a/drivers/net/phy/phy.c
-> > +++ b/drivers/net/phy/phy.c
-> > @@ -9,6 +9,7 @@
-> >    */
-> >   #include <console.h>
-> >   #include <dm.h>
-> > +#include <env.h>
-> >   #include <log.h>
-> >   #include <malloc.h>
-> >   #include <net.h>
-> > @@ -243,6 +244,9 @@ int genphy_update_link(struct phy_device *phydev)
-> >   	if ((phydev->autoneg == AUTONEG_ENABLE) &&
-> >   	    !(mii_reg & BMSR_ANEGCOMPLETE)) {
-> >   		int i = 0;
-> > +		char *s = env_get("phy_aneg_timeout");
-> env_get_ulong("phy_aneg_timeout", 10, CONFIG_PHY_ANEG_TIMEOUT);
+Local variable ret is declared as unsigned but is used to receive the
+return value of functions that return int. ret is then tested for being
+negative which must always fail. Change ret to be an int.
 
-Thank you for the suggestion. I will use the helper mentioned above
-instead of the custom implementation in the next version of the patch.
+This issue was found by Smatch.
 
-Regards,
-Siddharth.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/adc/imx93-adc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/adc/imx93-adc.c b/drivers/adc/imx93-adc.c
+index f593fb6447b..d671df79f68 100644
+--- a/drivers/adc/imx93-adc.c
++++ b/drivers/adc/imx93-adc.c
+@@ -221,7 +221,7 @@ static int imx93_adc_stop(struct udevice *dev)
+ static int imx93_adc_probe(struct udevice *dev)
+ {
+ 	struct imx93_adc_priv *adc = dev_get_priv(dev);
+-	unsigned int ret;
++	int ret;
+ 
+ 	ret = imx93_adc_calibration(adc);
+ 	if (ret < 0)
+@@ -238,7 +238,7 @@ static int imx93_adc_of_to_plat(struct udevice *dev)
+ {
+ 	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
+ 	struct imx93_adc_priv *adc = dev_get_priv(dev);
+-	unsigned int ret;
++	int ret;
+ 
+ 	adc->regs = dev_read_addr_ptr(dev);
+ 	if (adc->regs == (struct imx93_adc *)FDT_ADDR_T_NONE) {
+
+---
+base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+change-id: 20250722-imx93_adc-496f22f0c68d
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
