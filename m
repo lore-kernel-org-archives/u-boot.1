@@ -4,45 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B46C83F1A
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 00:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBA8C83F25
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 01:58:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8089D832AD;
-	Tue, 22 Jul 2025 02:37:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A419831A4;
+	Tue, 22 Jul 2025 03:58:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hf5CprCg";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E4DB83771; Tue, 22 Jul 2025 02:37:33 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B8C50830EA
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 02:37:28 +0200 (CEST)
+ id C82D3837E4; Tue, 22 Jul 2025 03:16:55 +0200 (CEST)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 61151831A4
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 03:16:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5D75F1595;
- Mon, 21 Jul 2025 17:37:22 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CDF953F66E;
- Mon, 21 Jul 2025 17:37:26 -0700 (PDT)
-Date: Tue, 22 Jul 2025 01:35:26 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: u-boot@lists.denx.de
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Mikhail Kalashnikov
- <iuncuim@gmail.com>, Yixun Lan <dlan@gentoo.org>, Paul Kocialkowski
- <paulk@sys-base.io>, linux-sunxi@lists.linux.dev, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH v2 20/20] sunxi: A523: add defconfigs for three boards
-Message-ID: <20250722013526.6297858c@minigeek.lan>
-In-Reply-To: <20250717235455.32528-21-andre.przywara@arm.com>
-References: <20250717235455.32528-1-andre.przywara@arm.com>
- <20250717235455.32528-21-andre.przywara@arm.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=roy.walker777@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-236470b2dceso39832035ad.0
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 18:16:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1753147011; x=1753751811; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=S3W8/x4wgLFjGVTAd+gEWijNraVANZlGcBE7neuLrKw=;
+ b=hf5CprCgsI62+mFruSn++JLqitoyYy5Q4672A1s9bdq4iVX6wtJmfSsy3hRySQnxMd
+ TUpIPmzknA/U/qPIw4teo2Ieu9f/Enh7EkOqfb++UPkAxqtLp4qfEAOz2sMTIZqTNDkq
+ /TdbYoGeJgBpT2siHOe44WA5r6hT4sDbuqbmwNFkmUCn55Pp/KzWOFfikzVhu7NXZVcl
+ G7OcPta/h76RqLmqgVNmq6RH83ju9I7QMwlLHUwlolFTSmG7+yMMYZ0/cFxVj2TNuwK/
+ iX437TtacT95MqykRsobJMDZtqaVweU/XBFwkrpoReQ5rfvbO+ZtgH+o9kIaOIFe8+Ee
+ CGqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753147011; x=1753751811;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=S3W8/x4wgLFjGVTAd+gEWijNraVANZlGcBE7neuLrKw=;
+ b=ZauMigAoCEznZPPhsZm4Vs4IUq+FBn52gORfKoBOcks6c/E4hZvymHcq3B0ynNt4Ho
+ 4yXqi19n0PpKAh9RtbWF7pjsXVneddIZMUL5UfW2cD0H3kdIq88oMO1uIR2Ng+xceSc2
+ KrtkMkQkA7jiSwcBx+wpgBEwiNDf8bVSx5a4/z8/7aQoskLCv/ihVur/PePLrWNSjL6y
+ iAZSJZBfn1DmoIOtzrbtpK66iah8exUDywSCBS5fPSfSbsYWQrDKIFkgXfpJPpVadPRe
+ FW75R5WeQCdmoQwtMgWcG37iV3nR1PnSyX7kgnVtItEcdf0lsybAyc+iFZyPlnphPktN
+ rWSA==
+X-Gm-Message-State: AOJu0YyAt7018Dvlo/DSA76CBFIEnZATfiAjI6Rx+Y2eunA0uQqd9GO5
+ rNKToa1QTfB851Zoc5Dfjw9vHSJnpvH0Y8vqL2rIdCChsPfC9sl7lHcQ5Zkvsv7Z0wXdfidGfU5
+ HRQ2uc2ylkTxm0T2VKBW5fx+HfhbIKdWwN8TR
+X-Gm-Gg: ASbGncv4aEND5O6phPQyVrP8lyM1QSYMRHz1dgbkBvGzI3/oHjnv4dySQwWwDg37GYa
+ W9s1wAW9SFUnDwarr06Cqao2cgkykLwAxfnC0KqysD49fhLtz+F+81q72dq8drVd5LwvwXWhvs1
+ BAWjVVKZU9PCJm4N3Oauv5Lb0mZqtsXHhjRYBXHLTCeJbCuvb+hAR3wXj+RCo87n1VkC15l72HF
+ Q12j6Q=
+X-Google-Smtp-Source: AGHT+IEWXDfjwlf5ehc12aB5/mc9JoXyYFHwSRHxHq2HgrAOPR+qnEnGaO9cGfkrGwtSeRV2mrX2vFWVz9JbT1p5OD4=
+X-Received: by 2002:a17:902:ce85:b0:23c:8f15:3d46 with SMTP id
+ d9443c01a7336-23e25750d9emr278265585ad.37.1753147011486; Mon, 21 Jul 2025
+ 18:16:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+From: Roy Walker <roy.walker777@gmail.com>
+Date: Mon, 21 Jul 2025 20:16:36 -0500
+X-Gm-Features: Ac12FXyGkLgvuKXbRNa5CaNNCoolaNepZKBAiqrjSc481co4ELocgMBbH5f3Uws
+Message-ID: <CAD-tQfUmsy=YN5gKSx1+RX_3GRgd-RbeqC3z2db3VXZvFvNeKg@mail.gmail.com>
+Subject: Mediatek build help
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Tue, 22 Jul 2025 03:58:03 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,192 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 18 Jul 2025 00:54:55 +0100
-Andre Przywara <andre.przywara@arm.com> wrote:
+I was trying to get Openwrt support working on a TP-Link Festa F61 access
+point and wrote the image to the wrong off-set.  Didn't realize until I
+restarted and was getting this on boot:
 
-Hi Yixun,
+U-Boot SPL 2018.09 (Jun 23 2023 - 11:14:20 +0800)
+Trying to boot from NOR
+Error: LZMA uncompression error: 1
+Trying to boot from UART
 
-see below for a comment on the missing eMMC support for the Radxa
-defconfig. My board doesn't have eMMC, so can you please check this on
-your end?
+Failed to load U-Boot image!
+Entering emergency mode.
+Please transmit a valid U-Boot image through this serial console.
+The U-Boot image will be booted up directly, and not be written to flash.
+Accepted mode is Ymoden-1K.
+I built a new u-boot image from source for the mt7621, but can't get past
+this:
 
-> So far developers seem to use three popular boards:
-> - Avaota A1: dev board with USB 3.0, dual Ethernet, small display
-> - X96QPro+: TV box with Gigabit Ethernet, USB 3.0, eMMC
-> - Radxa A5E: small dev board with USB3/M.2 2230 (muxed), dual Ethernet
-> 
-> Add the defconfig files for those boards, containing the DRAM parameters
-> and the usual Kconfig options.
-> 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> ---
->  board/sunxi/MAINTAINERS         | 15 +++++++++++++++
->  configs/avaota-a1_defconfig     | 31 +++++++++++++++++++++++++++++++
->  configs/radxa-a5e_defconfig     | 30 ++++++++++++++++++++++++++++++
->  configs/x96q_pro_plus_defconfig | 32 ++++++++++++++++++++++++++++++++
->  4 files changed, 108 insertions(+)
->  create mode 100644 configs/avaota-a1_defconfig
->  create mode 100644 configs/radxa-a5e_defconfig
->  create mode 100644 configs/x96q_pro_plus_defconfig
-> 
-> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-> index 1b4b7d87163..66e6a8ff962 100644
-> --- a/board/sunxi/MAINTAINERS
-> +++ b/board/sunxi/MAINTAINERS
-> @@ -137,6 +137,11 @@ M:	Chris Morgan <macromorgan@hotmail.com>
->  S:	Maintained
->  F:	configs/anbernic_rg35xx_h700_defconfig
->  
-> +AVAOTA A1 BOARD
-> +M:	Andre Przywara <andre.przywara@arm.com>
-> +S:	Maintained
-> +F:	configs/avaota-a1_defconfig
-> +
->  BANANAPI M1 PLUS
->  M:	Jagan Teki <jagan@amarulasolutions.com>
->  S:	Maintained
-> @@ -531,6 +536,11 @@ M:	Quentin Schulz <quentin.schulz@free-electrons.com>
->  S:	Maintained
->  F:	configs/parrot_r16_defconfig
->  
-> +RADXA CUBIE A5E BOARD
-> +M:	Andre Przywara <andre.przywara@arm.com>
-> +S:	Maintained
-> +F:	configs/radxa-a5e_defconfig
-> +
->  SINLINX SINA31s BOARD
->  M:	Chen-Yu Tsai <wens@csie.org>
->  S:	Maintained
-> @@ -591,6 +601,11 @@ M:	Andre Przywara <andre.przywara@arm.com>
->  S:	Maintained
->  F:	configs/x96_mate_defconfig
->  
-> +X96Q PRO+ TV BOX
-> +M:	Andre Przywara <andre.przywara@arm.com>
-> +S:	Maintained
-> +F:	configs/x96q_pro_plus_defconfig
-> +
->  YONES TOPTECH BD1078 BOARD
->  M:	Paul Kocialkowski <contact@paulk.fr>
->  S:	Maintained
-> diff --git a/configs/avaota-a1_defconfig b/configs/avaota-a1_defconfig
-> new file mode 100644
-> index 00000000000..55457edd3b3
-> --- /dev/null
-> +++ b/configs/avaota-a1_defconfig
-> @@ -0,0 +1,31 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_SUNXI=y
-> +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-t527-avaota-a1"
-> +CONFIG_SPL=y
-> +CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-> +CONFIG_DRAM_SUNXI_DX_DRI=0x0d0d0d0d
-> +CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-> +CONFIG_DRAM_SUNXI_ODT_EN=0x84848484
-> +CONFIG_DRAM_SUNXI_TPR0=0x80808080
-> +CONFIG_DRAM_SUNXI_TPR1=0x06060606
-> +CONFIG_DRAM_SUNXI_TPR6=0x38000000
-> +CONFIG_DRAM_SUNXI_TPR10=0x802f3333
-> +CONFIG_DRAM_SUNXI_TPR11=0xc7c5c4c2
-> +CONFIG_DRAM_SUNXI_TPR12=0x3533302f
-> +CONFIG_MACH_SUN55I_A523=y
-> +CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-> +CONFIG_R_I2C_ENABLE=y
-> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_SYS_I2C_LEGACY=y
-> +CONFIG_SYS_I2C_MVTWSI=y
-> +CONFIG_SYS_I2C_SLAVE=0x7f
-> +CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_SUPPORT_EMMC_BOOT=y
-> +CONFIG_REGULATOR_AXP=y
-> +CONFIG_AXP717_POWER=y
-> +CONFIG_AXP_I2C_ADDRESS=0x35
-> +CONFIG_AXP_DCDC2_VOLT=920
-> +CONFIG_AXP_DCDC3_VOLT=1160
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_OHCI_HCD=y
-> diff --git a/configs/radxa-a5e_defconfig b/configs/radxa-a5e_defconfig
-> new file mode 100644
-> index 00000000000..012e7b4eeaf
-> --- /dev/null
-> +++ b/configs/radxa-a5e_defconfig
-> @@ -0,0 +1,30 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_SUNXI=y
-> +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-a527-cubie-a5e"
-> +CONFIG_SPL=y
-> +CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-> +CONFIG_DRAM_SUNXI_DX_DRI=0x0d0d0d0d
-> +CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-> +CONFIG_DRAM_SUNXI_ODT_EN=0x84848484
-> +CONFIG_DRAM_SUNXI_TPR0=0x80808080
-> +CONFIG_DRAM_SUNXI_TPR1=0x06060606
-> +CONFIG_DRAM_SUNXI_TPR6=0x38000000
-> +CONFIG_DRAM_SUNXI_TPR10=0x802f3333
-> +CONFIG_DRAM_SUNXI_TPR11=0xc7c5c4c2
-> +CONFIG_DRAM_SUNXI_TPR12=0x3533302f
-> +# BSP value: CONFIG_DRAM_SUNXI_TPR11=0xc6c4c2c0
-> +# BSP value: CONFIG_DRAM_SUNXI_TPR12=0x3a373233
-> +CONFIG_MACH_SUN55I_A523=y
-> +CONFIG_R_I2C_ENABLE=y
-> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_SYS_I2C_LEGACY=y
-> +CONFIG_SYS_I2C_MVTWSI=y
-> +CONFIG_SYS_I2C_SLAVE=0x7f
-> +CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_REGULATOR_AXP=y
-> +CONFIG_AXP717_POWER=y
-> +CONFIG_AXP_DCDC2_VOLT=920
-> +CONFIG_AXP_DCDC3_VOLT=1100
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_OHCI_HCD=y
+Starting ymodem transfer. Press Ctrl+C to cancel.
+Transferring u-boot-mt7621.bin...
+100% 257 KB 8 KB/sec 00:00:31 1 Errors
 
-This is missing CONFIG_MMC_SUNXI_SLOT_EXTRA=2 and
-CONFIG_SUPPORT_EMMC_BOOT=y, as there are Radxa boards with eMMC.
-The DT describes this, so we should follow suit here, to allow eMMC
-booting. Should not harm boards without the eMMC chip.
+(SOH)/258(STX)/0(CAN) packets, 5 retries
+Loaded 263882 bytes
 
-Thanks,
-Andre
+MT7621 stage1 code Dec 16 2019 17:45:55 (ASIC)
 
-> diff --git a/configs/x96q_pro_plus_defconfig b/configs/x96q_pro_plus_defconfig
-> new file mode 100644
-> index 00000000000..07d3b078bef
-> --- /dev/null
-> +++ b/configs/x96q_pro_plus_defconfig
-> @@ -0,0 +1,32 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_SUNXI=y
-> +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-h728-x96qpro+"
-> +CONFIG_SPL=y
-> +CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-> +CONFIG_DRAM_SUNXI_DX_DRI=0x0c0c0c0c
-> +CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-> +CONFIG_DRAM_SUNXI_ODT_EN=0x90909090
-> +CONFIG_DRAM_SUNXI_TPR0=0x80808080
-> +CONFIG_DRAM_SUNXI_TPR1=0x06060606
-> +CONFIG_DRAM_SUNXI_TPR6=0x3380807e
-> +CONFIG_DRAM_SUNXI_TPR10=0x802f7788
-> +CONFIG_DRAM_SUNXI_TPR11=0x8f919190
-> +CONFIG_DRAM_SUNXI_TPR12=0x22222723
-> +CONFIG_MACH_SUN55I_A523=y
-> +CONFIG_SUNXI_DRAM_A523_DDR3=y
-> +CONFIG_DRAM_CLK=792
-> +CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-> +CONFIG_R_I2C_ENABLE=y
-> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_SYS_I2C_LEGACY=y
-> +CONFIG_SYS_I2C_MVTWSI=y
-> +CONFIG_SYS_I2C_SLAVE=0x7f
-> +CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_SUPPORT_EMMC_BOOT=y
-> +CONFIG_REGULATOR_AXP=y
-> +CONFIG_AXP717_POWER=y
-> +CONFIG_AXP_DCDC2_VOLT=920
-> +CONFIG_AXP_DCDC3_VOLT=1360
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_OHCI_HCD=y
+CPU=500000000 HZ BUS=166666666 HZ
 
+Change MPLL source from XTAL to CR...
+do MEMPLL setting..
+MEMPLL Config : 0x11000000
+3PLL mode + External loopback
+=== XTAL-40Mhz === DDR-1200Mhz ===
+
+Any help would be greatly appreciated.
+
+TIA
