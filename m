@@ -4,82 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD1B8C83F1A
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 20:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46E41C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 20:22:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B8C4833F8;
-	Tue, 22 Jul 2025 22:08:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6978183403;
+	Tue, 22 Jul 2025 22:22:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nzhnb.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VXlU0VLt";
+	dkim=pass (2048-bit key; unprotected) header.d=nzhnb-com.20200927.dkim.feishu.cn header.i=@nzhnb-com.20200927.dkim.feishu.cn header.b="ef1Ei0U6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 486D28341C; Tue, 22 Jul 2025 22:08:39 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id B4319833F1; Tue, 22 Jul 2025 19:47:45 +0200 (CEST)
+Received: from lf-1-35.ptr.blmpb.com (lf-1-35.ptr.blmpb.com [103.149.242.35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B52A8331F
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 22:08:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E61A8339C
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 19:47:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=nzhnb.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-740ecfff873so9807a34.2
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 13:08:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753214916; x=1753819716; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cauDPZiGF+Qtn3lILb3cVVv8aAA6E0a99F4NjJZcPT4=;
- b=VXlU0VLt6hiTF5D9286xrhoCNoB1YWjFwG/a12dgTqx0cPuLrDsf7Iqgm8sJKqMvEs
- wesCS0UiIQERrbILtx4YBOoZiLLY9ZAejB7kPEet9FIKEcvCDJAHd812EwIio/ty1XNK
- LKa62Ng7kpwKNIHNUwDYYlK54BaIXrIOd6suM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753214916; x=1753819716;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cauDPZiGF+Qtn3lILb3cVVv8aAA6E0a99F4NjJZcPT4=;
- b=nkrlToa5G0AB5JRevrIxq8/LhxYgm6ZH50y5Bp3oQY9who9xI7R1+O4/lua13eLZQC
- M593pPe1lQFSv1zz/JnmOfqmUdmNooKg+344N3ICTEO8tOfmbOehToHJ7DbnWQ+YTf5Y
- bR+VaCzdNuXreUzE1XybI6Yf8BB9NfvqB9zpxmNl32sTx8zKeFQeNt0Fx+RAjFX3n3Fx
- gkJChi9UVLEnbtImtRupARN4RruK/Qy+C1L0LSrvP0FeE+azkvxi9Tb98qyI9QFBRtCk
- lxwvR6xH/PWDaYIRHxqO364m0rA3lJQmAOda3sptvy9mfdayuE48TUgWrwlnRApeNQL7
- UlLg==
-X-Gm-Message-State: AOJu0Yy8GrX+FZpMHo935ds46focJYuKzIi4YBj/0flBxlWvMBc8H84f
- HZRjp1dU9+sanM/FBIfBsDkq6lRyUfVQ7xAXxBAzigM2z33OWMkODFnQI5hT2Pmsn4VCagWthQg
- ysbYo
-X-Gm-Gg: ASbGnctY+gfk0zQwsLMYaf0TthyqNvXk5gVkbV3hooSMhixx+xYBcFjg677pSd9Z6FC
- 9Ui9PQhKnKJhOQroIY21s+mqDCz2aW+tw1C4cvyyOxLkX0HfRevev7jxBPe57WHvVht9PHbvwNO
- eBS3uN7B4IkdlFpUpxjxYlAj6dQFJutusdkO4+0hRTBawe0v9bTIthWsgxwULICnTUIbfzVfRqZ
- cqVJubvgw9NbX/hR5wIFlYrVuU0onIhBbETGxQ7455jb3TfszIzJsuRCMJi4XSUtdY5vOpagNDK
- dE0rGWh2gggNXGIlnP7WgLMQf+18EDtENb40HM+t0anJ87HV0g3sQQh9SeRVQn6LyucqeEhJJlw
- iE4nw0GRnaufVvtexQUVYHBsfzPGBDZ5zOYMeEpL/H8qM/tt8wuklc4Fn
-X-Google-Smtp-Source: AGHT+IF12Gtn/RTf0j8G0vJSXkVQa8ncOBWCq4GZXsF/bKWmq/xqzb30cNipwY8+XXLtNeCknfLqCg==
-X-Received: by 2002:a05:6830:3805:b0:73e:93a2:3a68 with SMTP id
- 46e09a7af769-7408899af78mr374456a34.20.1753214915623; 
- Tue, 22 Jul 2025 13:08:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e83bd975bsm3726144a34.60.2025.07.22.13.08.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 13:08:34 -0700 (PDT)
-Date: Tue, 22 Jul 2025 14:08:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com
-Subject: Re: [u-boot-test-hooks PATCH] travis-ci: Wire MB-V targets for CI
-Message-ID: <20250722200832.GI2847763@bill-the-cat>
-References: <82725079ee90362468fe8096db24ef2959725af9.1753181505.git.michal.simek@amd.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YSWVia60rgtgrTRA"
-Content-Disposition: inline
-In-Reply-To: <82725079ee90362468fe8096db24ef2959725af9.1753181505.git.michal.simek@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=zhihong@nzhnb.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=nzhnb-com.20200927.dkim.feishu.cn; t=1753206451;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=PuyxAjMQoyA3IyrbDrnvxHtP2CGfZQuyWPQA+01igRI=;
+ b=ef1Ei0U6jKbFyAK6b8+qPzFUpzpCOP6zVRFjMr5EVjmnLbLY6RCHM2KUcsMwUi3yPGlnRv
+ MQkOdKde1Sj5PPAgS53Oub+K7oDGIU3mJRo6i2rG554hs8Mhylra3ESRKRPmV2hJaGmhkR
+ E/UX44U+iAlTbZ5iU1V5H5G8X5EYpUWWli28Gu2vD52HW3im2yZXHddMtIPqyFMEmVl93Y
+ qyl7JU1eqLk8YkDONdC9dOT1K0TymHFPnnK2tI5ymGJyics05p0Sglrk/5bRrNuvSeBNL8
+ 9LO3Nb5oQwbpDxkzDAIB0klrt/6CweVAYqV+fVadTQcPwLOfzKksjjTksF/Pyw==
+To: <u-boot@lists.denx.de>
+Subject: [PATCH] board: rockchip: Add Xunlong Orange Pi 5 Ultra
+Received: from nzhpc.lan ([116.234.144.157]) by smtp.feishu.cn with ESMTPS;
+ Wed, 23 Jul 2025 01:47:29 +0800
+From: "Zhihong" <zhihong@nzhnb.com>
+Date: Wed, 23 Jul 2025 01:47:24 +0800
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 7bit
+X-Original-From: Zhihong <zhihong@nzhnb.com>
+Content-Type: text/plain; charset=UTF-8
+Cc: "Niu Zhihong" <zhihong@nzhnb.com>
+Message-Id: <20250722174724.414401-1-zhihong@nzhnb.com>
+X-Lms-Return-Path: <lba+2687fceb2+79425f+lists.denx.de+zhihong@nzhnb.com>
+X-Mailman-Approved-At: Tue, 22 Jul 2025 22:22:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,33 +66,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Niu Zhihong <zhihong@nzhnb.com>
 
---YSWVia60rgtgrTRA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The Orange Pi 5 Ultra is another board in the Orange Pi 5 family.
 
-On Tue, Jul 22, 2025 at 12:51:45PM +0200, Michal Simek wrote:
+Orange Pi 5 Ultra uses Rockchip RK3588,
+a new generation of octa-core 64-bit ARM processor,
+which includes quad-core A76 and quad-core A55.
 
-> When QEMU v10 upgrade happens MB-V targets should be wired to add them to
-> CI that's why add configuration for it.
->=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+Features tested on a Orange Pi 5 Ultra 16GB:
+- SD-card boot
+- eMMC boot
+- PCIe/NVMe
+- USB 2.0 host
+- Ethernet
+- WiFi
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Niu Zhihong <zhihong@nzhnb.com>
+---
+ .../dts/rk3588-orangepi-5-ultra-u-boot.dtsi   | 20 +++++
+ board/rockchip/evb_rk3588/MAINTAINERS         |  6 ++
+ board/xunlong/orangepi-5-ultra-rk3588/Kconfig | 12 +++
+ .../orangepi-5-ultra-rk3588/MAINTAINERS       |  6 ++
+ configs/orangepi-5-ultra-rk3588_defconfig     | 88 +++++++++++++++++++
+ doc/board/rockchip/rockchip.rst               |  1 +
+ 6 files changed, 133 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+ create mode 100644 board/xunlong/orangepi-5-ultra-rk3588/Kconfig
+ create mode 100644 board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+ create mode 100644 configs/orangepi-5-ultra-rk3588_defconfig
 
---=20
-Tom
-
---YSWVia60rgtgrTRA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaH/vvQAKCRAr4qD1Cr/k
-CjtGAP4ykW7sUNQUNRkkJP2/6u/cqMZlCMjN7eLl5yuw4PIYNgEAz3vBLHIO6w4m
-As+E3FQWE/tnM0iCcry6OUaE3mdSIw4=
-=v6rj
------END PGP SIGNATURE-----
-
---YSWVia60rgtgrTRA--
+diff --git a/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+new file mode 100644
+index 00000000000..1ab31a4ec5a
+--- /dev/null
++++ b/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3588-u-boot.dtsi"
++
++&fspim1_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
++
++&sfc {
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
+diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+index 1232f05a387..379c85f48a4 100644
+--- a/board/rockchip/evb_rk3588/MAINTAINERS
++++ b/board/rockchip/evb_rk3588/MAINTAINERS
+@@ -48,3 +48,9 @@ S:	Maintained
+ F:	configs/orangepi-5-plus-rk3588_defconfig
+ F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
+ F:	arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
++
++ORANGEPI-5-RK3588-ULTRA
++M:	Niu Zhihong <zhihong@nzhnb.com>
++S:	Maintained
++F:	configs/orangepi-5-ultra-rk3588_defconfig
++F:	arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+diff --git a/board/xunlong/orangepi-5-ultra-rk3588/Kconfig b/board/xunlong/orangepi-5-ultra-rk3588/Kconfig
+new file mode 100644
+index 00000000000..43fc96b04c0
+--- /dev/null
++++ b/board/xunlong/orangepi-5-ultra-rk3588/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_ORANGEPI_5_ULTRA_RK3588
++
++config SYS_BOARD
++	default "orangepi-5-ultra-rk3588"
++
++config SYS_VENDOR
++	default "xunlong"
++
++config SYS_CONFIG_NAME
++	default "evb_rk3588"
++
++endif
+diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+new file mode 100644
+index 00000000000..be9c93f6b9d
+--- /dev/null
++++ b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+@@ -0,0 +1,6 @@
++ORANGEPI-5-RK3588-ULTRA
++M:	Niu Zhihong <zhihong@nzhnb.com>
++S:	Maintained
++F:	board/xunlong/orangepi-5-rk3588-ultra
++F:	configs/orangepi-5-ultra-rk3588_defconfig
++F:	arch/arm/dts/rk3588-orangepi-5-ultra.dts
+diff --git a/configs/orangepi-5-ultra-rk3588_defconfig b/configs/orangepi-5-ultra-rk3588_defconfig
+new file mode 100644
+index 00000000000..f3274325922
+--- /dev/null
++++ b/configs/orangepi-5-ultra-rk3588_defconfig
+@@ -0,0 +1,88 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=80000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-ultra"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_EVB_RK3588=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-ultra.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_XMC=y
++CONFIG_PHYLIB=y
++CONFIG_RTL8169=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index b88299cbba2..4f2eea09e06 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -161,6 +161,7 @@ List of mainline supported Rockchip boards:
+      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
+      - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
+      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
++     - Xunlong Orange Pi 5 Ultra (orangepi-5-ultra-rk3588)
+      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
+      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
+      - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
+-- 
+2.43.0
