@@ -4,47 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFAEDC83F1A
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 02:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D092C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 04:30:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3614283211;
-	Tue, 22 Jul 2025 04:49:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id 8B067830EA;
+	Tue, 22 Jul 2025 06:30:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 13CF48376C; Tue, 22 Jul 2025 04:49:49 +0200 (CEST)
-Received: from smtp.gentoo.org (woodpecker.gentoo.org
- [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D5CF830F6
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 04:49:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Received: from localhost (unknown [116.232.48.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id 62EF1340CE7;
- Tue, 22 Jul 2025 02:49:43 +0000 (UTC)
-Date: Tue, 22 Jul 2025 10:49:32 +0800
-From: Yixun Lan <dlan@gentoo.org>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
- Paul Kocialkowski <paulk@sys-base.io>, linux-sunxi@lists.linux.dev,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 20/20] sunxi: A523: add defconfigs for three boards
-Message-ID: <20250722024932-GYA724801@gentoo>
-References: <20250717235455.32528-1-andre.przywara@arm.com>
- <20250717235455.32528-21-andre.przywara@arm.com>
- <20250722013526.6297858c@minigeek.lan>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qy1cyjly";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0B08E831E0; Tue, 22 Jul 2025 06:30:55 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 17D8C82D32
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 06:30:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-70e302191a3so46733537b3.2
+ for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 21:30:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753158651; x=1753763451; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TRq2RgQ1LqDX55niBU1zdmC3/ZESTZW09ZuJrjIttRs=;
+ b=Qy1cyjlyTNkBrXI82rmG5LxXn/k+3SVLVx4joGRJG9Muh1hfXrbRMZW4WfSjLO/F9K
+ nIYHtxGugVg7dDSOfPSkExGnBr6LUmCI0vyEepeiGiS9LsUZEeylVexlIn58RJS+bhYl
+ oBjQ/5UviAVDQNQ1M/M9NMVUCMqPQBH3RVuxdYnIKYwsVXsjyzDeEcg0tUZlBExF6WXA
+ Y8UUnBHYRpXw23Y7lIcuTSoX5nxgAIUeD5zdC8hhRxG6DqaKXjip4PLaeG12lo+ZxSSe
+ /grogdldxVhq3G8tL1SgRudnC+/ueqdnIu/G2a2WsdSjjlsLH70JeMyp7NICMnjA757B
+ XJNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753158651; x=1753763451;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TRq2RgQ1LqDX55niBU1zdmC3/ZESTZW09ZuJrjIttRs=;
+ b=xVE9qsPC+ib8deyXV4K3DZ5NPkXovhujsosGmqboxkTxdK+n0fauvyYvnzPAmvXOaC
+ PyjN93y/L71o/th0aBCfJHZUmgAFnwzrYfvFzg4tNBC5C3vbBZsAz+N2DD4kooxsoWWm
+ ILDlLDF4/zVA67mXWhNXrJswjgb4nq6XnsHAcUsm9dpwyfoC405tqhabKXdIoStr9Ze4
+ s6mopisWz21TUwSIVn5duk0eGhzHco5GZvu1QqwUtvw/ICEUCPKoTLwwhpGWAfcEG10F
+ N8y8bRyb3NHfUIBnOx9uEE46mwWjQ5lldCQPKJDPhcyhYpk9HGZsDFEg3xdzGP1JOWkV
+ 3yXg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXYYj6pS/qPioBjhupQE9NsVB6vnVL2V+exZfPk4Tv7magDsOQwwzUgqUnevWe8xSNUrAvwXyk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxku88HOcZH70bfrx609M7kKOiT+xfP58AEnYzJJWxMLo6puLud
+ kbUTUYK+wvQbZQVOQloHlMySM62k6ajrksD3bpu/xvYZNvem/QiaJqMSZ8nVEml7LoDom8gCH1p
+ bUbbolISqw/hnlAFmyP3Ow4Wh6OWSawKBllef5QB+uw==
+X-Gm-Gg: ASbGncsei563T+sdXDMA2+x97aUuEOuESBLeFl7728/3zXEamlHDryNsLTtkyD3qUIg
+ +JU7gRlgJykMU0bvkE8FZIK90VAKTkX59BT/FFxKCGQAER7ni/SS/1QheGswpyDUJ6O2jsqACPW
+ zulM0OU85SoVOl618OV7wGLabhUhGd0R3IdWIeOedm1L6T+8zPF7yPdwebcKfVW8Js5xmsJzheO
+ sn9zzu6bYkZJTSOzA==
+X-Google-Smtp-Source: AGHT+IGftOja5SNR78hXv5vDE5P2KMsPNr+JiBUHW/MOKQ1QureC7OVDuMFtzELSxSc8A4goE4s47HLpIy9q7nyWe7E=
+X-Received: by 2002:a05:690c:9b0b:b0:719:4cde:84f with SMTP id
+ 00721157ae682-7194cde0b72mr207405047b3.10.1753158650875; Mon, 21 Jul 2025
+ 21:30:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250722013526.6297858c@minigeek.lan>
+References: <20250709222926.24671-1-semen.protsenko@linaro.org>
+ <20250709222926.24671-2-semen.protsenko@linaro.org>
+ <87tt3b2ti7.fsf@kernel.org>
+ <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
+ <87ikjllws2.fsf@kernel.org>
+In-Reply-To: <87ikjllws2.fsf@kernel.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Mon, 21 Jul 2025 23:30:40 -0500
+X-Gm-Features: Ac12FXzm5dI9cOXXKsMhlWaCdxpj2poLHcA85K3Ig5SzYo0Qf_58bmv-2apENkg
+Message-ID: <CAPLW+4ncXuT7=iP4wt6fuZ25cQvLJUTZe71oC6=y04Wefb5c6w@mail.gmail.com>
+Subject: Re: [PATCH 1/9] phy: samsung: Add Exynos USB DRD PHY driver
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
+ Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Greg Malysa <malysagreg@gmail.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,90 +105,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+On Mon, Jul 21, 2025 at 4:26=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@kernel.org> wrote:
+>
+> On Sun, Jul 20, 2025 at 14:57, Sam Protsenko <semen.protsenko@linaro.org>=
+ wrote:
+>
+> > On Thu, Jul 17, 2025 at 1:58=E2=80=AFAM Mattijs Korpershoek
+> > <mkorpershoek@kernel.org> wrote:
+> >>
+> >> Hi Sam,
+> >>
+> >> Thank you for the patch.
+> >>
+> >
+> > [snip]
+> >
+> >> > +
+> >> > +#define EXYNOS850_DRD_UTMI                   0x50
+> >> > +#define UTMI_FORCE_SLEEP                     BIT(0)
+> >> > +#define UTMI_FORCE_SUSPEND                   BIT(1)
+> >> > +#define UTMI_DM_PULLDOWN                     BIT(2)
+> >> > +#define UTMI_DP_PULLDOWN                     BIT(3)
+> >> > +#define UTMI_FORCE_BVALID                    BIT(4)
+> >> > +#define UTMI_FORCE_VBUSVALID                 BIT(5)
+> >>
+> >> Comparing with the linux driver using
+> >> commit cc52a697f87e ("phy: exynos5-usbdrd: support Exynos USBDRD 3.2 4=
+nm controller")
+> >>
+> >> I notice that the defines are in reverse order (from 0 to 5 and linux
+> >> has from 5 to 0).
+> >>
+> >> Is there any particular reason for this?
+> >> I don't mind it too much but it makes diffing between linux and U-Boot=
+ a
+> >> bit harder.
+> >>
+> >> Anyway, I've compared this with the linux driver and it looks good to
+> >> me!
+> >>
+> >> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> >>
+> >
+> > Thank for reviewing this, Mattijs! Yeah, I kinda flipped the register
+> > bits w.r.t. kernel's version, just because it looks better to me this
+> > way (easier to read when it's sorted properly). Due to the driver
+> > model API differences between kernel and U-Boot I had to rework the
+> > whole structure of the driver, and I only added Exynos850 support for
+> > now, so the difference between U-Boot and kernel versions is quite big
+> > as it is anyway, so I figured it's not a big deal to reorder things
+> > even more. Hope it's ok with you?
+>
+> It's ok with me. I was just curious if there was any special reason for
+> re-ordering. I agree that it's easier to read with the sorting you have
+> applied.
+> I've noticed that only Exynos850 is supported for now. That's fine as
+> well in my opinion!
+>
+> Feel free to pick this up through your tree.
 
-On 01:35 Tue 22 Jul     , Andre Przywara wrote:
-> On Fri, 18 Jul 2025 00:54:55 +0100
-> Andre Przywara <andre.przywara@arm.com> wrote:
-> 
-> Hi Yixun,
-> 
-> see below for a comment on the missing eMMC support for the Radxa
-> defconfig. My board doesn't have eMMC, so can you please check this on
-> your end?
-> 
-sure
-
-> > So far developers seem to use three popular boards:
-> > - Avaota A1: dev board with USB 3.0, dual Ethernet, small display
-> > - X96QPro+: TV box with Gigabit Ethernet, USB 3.0, eMMC
-> > - Radxa A5E: small dev board with USB3/M.2 2230 (muxed), dual Ethernet
-> > 
-> > Add the defconfig files for those boards, containing the DRAM parameters
-> > and the usual Kconfig options.
-> > 
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> >  board/sunxi/MAINTAINERS         | 15 +++++++++++++++
-> >  configs/avaota-a1_defconfig     | 31 +++++++++++++++++++++++++++++++
-> >  configs/radxa-a5e_defconfig     | 30 ++++++++++++++++++++++++++++++
-> >  configs/x96q_pro_plus_defconfig | 32 ++++++++++++++++++++++++++++++++
-> >  4 files changed, 108 insertions(+)
-> >  create mode 100644 configs/avaota-a1_defconfig
-> >  create mode 100644 configs/radxa-a5e_defconfig
-> >  create mode 100644 configs/x96q_pro_plus_defconfig
-> > 
-...
-> > diff --git a/configs/radxa-a5e_defconfig b/configs/radxa-a5e_defconfig
-> > new file mode 100644
-> > index 00000000000..012e7b4eeaf
-> > --- /dev/null
-> > +++ b/configs/radxa-a5e_defconfig
-> > @@ -0,0 +1,30 @@
-> > +CONFIG_ARM=y
-> > +CONFIG_ARCH_SUNXI=y
-> > +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-a527-cubie-a5e"
-> > +CONFIG_SPL=y
-> > +CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-> > +CONFIG_DRAM_SUNXI_DX_DRI=0x0d0d0d0d
-> > +CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-> > +CONFIG_DRAM_SUNXI_ODT_EN=0x84848484
-> > +CONFIG_DRAM_SUNXI_TPR0=0x80808080
-> > +CONFIG_DRAM_SUNXI_TPR1=0x06060606
-> > +CONFIG_DRAM_SUNXI_TPR6=0x38000000
-> > +CONFIG_DRAM_SUNXI_TPR10=0x802f3333
-> > +CONFIG_DRAM_SUNXI_TPR11=0xc7c5c4c2
-> > +CONFIG_DRAM_SUNXI_TPR12=0x3533302f
-> > +# BSP value: CONFIG_DRAM_SUNXI_TPR11=0xc6c4c2c0
-> > +# BSP value: CONFIG_DRAM_SUNXI_TPR12=0x3a373233
-> > +CONFIG_MACH_SUN55I_A523=y
-> > +CONFIG_R_I2C_ENABLE=y
-> > +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> > +CONFIG_SPL_I2C=y
-> > +CONFIG_SPL_SYS_I2C_LEGACY=y
-> > +CONFIG_SYS_I2C_MVTWSI=y
-> > +CONFIG_SYS_I2C_SLAVE=0x7f
-> > +CONFIG_SYS_I2C_SPEED=400000
-> > +CONFIG_REGULATOR_AXP=y
-> > +CONFIG_AXP717_POWER=y
-> > +CONFIG_AXP_DCDC2_VOLT=920
-> > +CONFIG_AXP_DCDC3_VOLT=1100
-> > +CONFIG_USB_EHCI_HCD=y
-> > +CONFIG_USB_OHCI_HCD=y
-> 
-> This is missing CONFIG_MMC_SUNXI_SLOT_EXTRA=2 and
-> CONFIG_SUPPORT_EMMC_BOOT=y, as there are Radxa boards with eMMC.
-confirmed, the two configs are exactly what I've added to make eMMC work
-
-> The DT describes this, so we should follow suit here, to allow eMMC
-> booting. Should not harm boards without the eMMC chip.
-> 
-agree!
-
-I'd assume you would take care of the config? and send out an updated
-version next time?
-
-thanks
-
--- 
-Yixun Lan (dlan)
+I don't have a maintainer tree unfortunately. The easiest way for this
+series would be probably to go through Samsung tree (Minkyu)?
