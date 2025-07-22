@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDF93C83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 19:46:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D2D7C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 19:46:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB33483447;
-	Tue, 22 Jul 2025 21:46:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D7D18346A;
+	Tue, 22 Jul 2025 21:46:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s1XwAyUl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cFktu29z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5961583444; Tue, 22 Jul 2025 21:46:12 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 3E6448331F; Tue, 22 Jul 2025 21:46:13 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37B318331F
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 21:46:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 280E683439
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 21:46:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-615950642d9so3328461eaf.1
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:46:10 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-73e55e829fcso3344136a34.1
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:46:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753213569; x=1753818369; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753213570; x=1753818370; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Aq/D9UtpLc4ZcxQ+IwoncTJLQb+obNvBy16Kc7R5U8w=;
- b=s1XwAyUllHLujfkZh+mJ7TSyk2LVRMhYgonmJ2IWto8A+FrLPStfC819mzV1N8EWmv
- Uglryevom9dX24tYxC6lh60pxQeCPlWsXgryo69+RvHaWE6yz5ds5AdgtThMEUd6XTo6
- dTO2XoOwT+5AZ1BgeR3m4n5l4sKet4NVyyPHQ=
+ bh=tcuTJSbe1ve3dxkucIlDL/THxI+ehpH7bq170KYWPfo=;
+ b=cFktu29zU4BDrkEkPNFwLDAk+6YxBoIeJAveL8JBfYkUaF9pCCPPivs3X/HE5rFr48
+ Wv67mN25Wc/AIqHcUMaMWfxKxp42/nOIzmg8G+0x/a9/gcGjZo93FGBkvTFbh/AEri0j
+ Qa0xvkKO+F5eVkbpnI5G5+h2aQDR48BqMRa2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753213569; x=1753818369;
+ d=1e100.net; s=20230601; t=1753213570; x=1753818370;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Aq/D9UtpLc4ZcxQ+IwoncTJLQb+obNvBy16Kc7R5U8w=;
- b=U0lN3EGQSMsnnFsUhC12BUBm5rb54do1iGk4T/UqA2HH6Om4N2CcgLSOSYcnlr7mWz
- 5JHt19n5q2dT7rzvFt5qWpdIC2NDAyx+FC+z8Q/9o1ko8WR3UJrhQboLe2VOe3QjYk6m
- OgVLBUx6whRTFdKcpwOevz5Fs8ay+ETJ9Q4vWWS8lEvCbzsZvCGTOw4G6+eRQWxDclOb
- j2S7IW7NR3ofyXoYjQrvjXjgJLW8S/L0O49oAkuli1Eayl44nDlSCnNMMAx3Zse3vLn4
- eNwksFWN2QlG5uw3PdKB0nrUQv7xq3J8DqagcIHRNjAs4EoBr0mmfQAgudKWRJE75wrC
- xcGQ==
-X-Gm-Message-State: AOJu0YxjdmXDVVo0IZdPvtqlY/3d9dN5/6AYfJeh+i6pB46vsk7UyGGi
- Ri3EVJ/wkvEgDGsXbGxpv5qYcRacBO7ZSA+YdG2njCUqWScafBh/7KI2r0ZyWs0DuZM=
-X-Gm-Gg: ASbGncukaZ92S7goyQe7oTDE1cx7qvFmU3aZLo4klx3EuV8MM1Wz8iSdoCdxjZE5IFH
- Ldx9LUlYUxYcF8jIz6Pc/HE7Hrr6JNYbI6DSb6RxB/e5StEHeZAkA+Cd2YT9srTJojPHhM7tOgV
- mAJDRrnxD0dqWUo7cJSqqgpUUTM1ZT1QY5VtsDgaGV60R1Na/9KqCFrzij6fW7YnrjuVF3o5E91
- UU3qY8Ag5LKN824CMkLJQUaHJCSG7buMdSYThhKalGgmLLReTzJ5m0B5OJ8+MfaCxkVpZliJgJA
- NKv3CUko6LVG6MoRJr03QhfX09XGzsb72UElQE5C5ze3pazg7KLb/77Hqdg7GudV97iY2rX6GVL
- fN9C9kMhyCpmtwCpgEBeeQP20oex/32G3D41oTiGgCg+EPaFPtu+FGFc=
-X-Google-Smtp-Source: AGHT+IFtSCulWwv15n1lWeCcwL9WZMn5TZRNbzQ+u23tItJOVGjkUxa1OqpNMODqYLLJeFM9HgnVnA==
-X-Received: by 2002:a05:6870:e2c8:b0:2ef:2af4:dfcb with SMTP id
- 586e51a60fabf-306c72b3134mr155803fac.28.1753213568880; 
- Tue, 22 Jul 2025 12:46:08 -0700 (PDT)
+ bh=tcuTJSbe1ve3dxkucIlDL/THxI+ehpH7bq170KYWPfo=;
+ b=iHZDaTTnEsZeESeGqzkNFQpLw5ZYrDkkxVv6DoumAxE/C99wduXVYqmOyG78efIEYE
+ Szha/RN5CmmG5adJrV0O0tqbJjwZa8/LCCS4UkAOa6flIC967Tv0P+5fAZtCsRvaqbg2
+ Yo7aiWCOc3vjLOvq9ZjILBaT43g1E08SbsWjZgKg9YV6a2+r9gyulxee4sBy6DQW3Cm9
+ P8ulU2IBWIghmkv/anAWjoHCPqOQU5HGAib/1u2GD0Vyqq3Kz/uazHq5uIBLYLfU1+wZ
+ ju9/UshuNOsoCZT4gT2ZrQp4IZ8kemuatG7tNUZnABiEnD8rJxmfKAcWU+kvK8hjO3or
+ dIZw==
+X-Gm-Message-State: AOJu0YznHGYNtOvrlF5kXRHc3YOsnqBlwwRYu5bSQkL12nlNpplVl4z4
+ XBUuj9ktPMQ9XGEsV1OSW/Hdzf36OTfxzX4NpDHf9lyYWBqW4RC5gC0m7OIG+wh37O0=
+X-Gm-Gg: ASbGncsIQzke+9ui6TwqvXrljNYK8GzNMMQZA70v/oaUrFto+4XPaXjrMp/Y/4foXM9
+ ynMuZSbSSaeqjnWggvqlPwDrv742lFcMfZls4jNekXp6ewwwbSF8fAgXk8KwyskFwF8rlCyNHQc
+ M/h0tsdz9fwdieq4J2zlsxLWp4icV1OhgCdtHt7vq7I7AR65pS6at+u/Ea2oOSvcldXpIqqYCmn
+ pUc0ozOod8tiB/Nosgr+sDdhy+ECFgryn3HNofNR1jWPwn99pyn73C5k7YdYXt0J6ZDC1TO3X9+
+ FgzNDxC48UC2ZKIO1aZtBYKTkFEQLhmM55k8iNbrZi8hIz0OhE/gC83R0KpqAEmxPyYjyBUccFR
+ inMy5YJ2eQcsWAoh1vZ1z0fWL9GoKn9Oc7j/B2BZn0iKNApKiOxuHm7I=
+X-Google-Smtp-Source: AGHT+IH5O5RFmvWL2jVmE6IZrKHmlQdlZcZ2OMobEifBl8uyimKZKuLweRSCeNFhBemKE0p3BE8HYw==
+X-Received: by 2002:a05:6830:2aac:b0:73e:9da9:bf0 with SMTP id
+ 46e09a7af769-74088ab2ce5mr398865a34.13.1753213569856; 
+ Tue, 22 Jul 2025 12:46:09 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e83b0c3fbsm3749811a34.30.2025.07.22.12.46.08
+ 46e09a7af769-73e83b0c3fbsm3749811a34.30.2025.07.22.12.46.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 12:46:08 -0700 (PDT)
+ Tue, 22 Jul 2025 12:46:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250714-lmb_unreachable-v1-1-20173f22b6ca@linaro.org>
-References: <20250714-lmb_unreachable-v1-1-20173f22b6ca@linaro.org>
-Subject: Re: [PATCH] lmb: Remove unreachable code
-Message-Id: <175321356810.77222.8497081231103104402.b4-ty@konsulko.com>
-Date: Tue, 22 Jul 2025 13:46:08 -0600
+To: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ Yannic Moog <y.moog@phytec.de>
+Cc: u-boot@lists.denx.de, Tim Harvey <tharvey@gateworks.com>
+In-Reply-To: <20250715-binman-typing-fix-v3-1-86739854cf4f@phytec.de>
+References: <20250715-binman-typing-fix-v3-1-86739854cf4f@phytec.de>
+Subject: Re: [PATCH v3] binman: Fix typing for python >= 3.7
+Message-Id: <175321356904.77222.11358293167435240326.b4-ty@konsulko.com>
+Date: Tue, 22 Jul 2025 13:46:09 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,16 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Jul 2025 17:40:47 +0100, Andrew Goodbody wrote:
+On Tue, 15 Jul 2025 08:21:24 +0200, Yannic Moog wrote:
 
-> Code after a break is unreachable so remove it.
+> To get the [] annotation working with python 3.7 and 3.8, import
+> annotations.
 > 
+> Tested-by:
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] lmb: Remove unreachable code
-      commit: b9db211e3906c0a620ced344a2ebe5f87ccbf951
+[1/1] binman: Fix typing for python >= 3.7
+      commit: 187ac12927c042a982961096c9a418287b8e97e2
 -- 
 Tom
 
