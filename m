@@ -4,91 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF25AC83F25
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 07:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B59C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 08:15:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D515830F6;
-	Tue, 22 Jul 2025 09:42:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 86204832BF;
+	Tue, 22 Jul 2025 10:15:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fHEKtB6V";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="JoUwayY8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4171583285; Tue, 22 Jul 2025 09:42:27 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C05B4832BC; Tue, 22 Jul 2025 10:15:28 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::610])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B513682E26
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 09:42:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D506832BC
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 10:15:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-73e88bc371cso1912726a34.2
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 00:42:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753170143; x=1753774943; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wGF7YnZOSKFuoaXu47tsnw7ZbscKvLrl1KGlHLZ8cX8=;
- b=fHEKtB6VB1bjCKsqwZb1sJWRvOgHuDl2pEG2JTpX9cPcl8o2Bjg1j6Qu9R49TQv4/+
- 6FHWHcjMA9PMycz4ptQFe9JpiMUzQ2EJFjyW00W3UmDDLyS4Yq7cQ8VWGcAUd7Y+jveS
- bJE1ICPVMVLWl+yqlPUi3ZN0srJBo+GlDjAUHxFBnV0sgY67mo/myT8ANjcjjQNMnI5o
- yHftdrld4oNx4Smx4v2STdF+1ZGKCOUfURrqFeJlUJ4JOD6+nSUXuxAPZXwnW8jMxS5k
- r1292KQvgPQqrsfH7I3LgJTe3tIvhLM1faS6a9idIC1xents1OuNRBcBsxN/FMx6dg3z
- kEoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753170143; x=1753774943;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wGF7YnZOSKFuoaXu47tsnw7ZbscKvLrl1KGlHLZ8cX8=;
- b=UKbLQW2EtgKxcHIXd6DtbH9U86GZJDOMa//Yqg57iigcLsxuL3Z97zL8NF8uWnpo9K
- zj0kb0ulYgUIF10+zbeoFangY/nu0e7fFJhVz+PxknrqkuSaROn7uOdW0Pg92DxVqoRc
- jUh3k+1rYbXkTU2zw1av+NGjzRyLhiSbVf0Kq9Spca7bzAiMnbOqqGVI69tQzdO7OP1D
- +tXyUWHieien5hAh67q5ELKWck7gdtExLPWkFJSdRo/Az2euOT74xqoxo6yV1MFR/fP2
- 3O+qPvIN/ctaG3iFZzyB9hZkh7fr1inGcOV9cFPJw/hCQGFkddiiGiQsAKssHp1NFxVM
- F+Nw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX9zakHEX6rrVM9R191Ufulwk/G0y2yYkDLCy8QS4+waY3u9lMFWOiJwLBSjuUBYCK1Gh7Zm68=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqtLh/njx5u7Loh06hI5Q6uRuVGXQSxqWCZCJ2B3uqZfw2lP+G
- FjU/a/+EUFMom6WWsnESH1hjqW13MSodEpUR7PB30x+pMLz/4ijMDpPrfsnDzDEGlF7gWLoz7gF
- huv5a9VpildiXBe07cEzsBnf5aYD3CBs=
-X-Gm-Gg: ASbGnctfDtbNOXOwt4BvaAF61zBZhjGvnUoPL97H36U5RSTDxqZaWuyCFoJOT+9uN5C
- PhOirBxhgMSkScAytW85lMmTPga0WQb4O8tDDXnZTgCY0ylMYeWmfLnYwwE9UMmbRPHQl+F0Mrg
- xLfSDwb8NMG224nDmPX+zEVM9XlRCVGr4xcnVJUfdHqcn6MtM7FjIXoTLw63NGiUl3qJ3TvAduP
- Rcb8nwZRgoxPDLT76Q1X3igr7pPlib2BLB39G9l
-X-Google-Smtp-Source: AGHT+IEUsxfFh0j4nTG82tXuX2XLh72RsUM8dacIF6kqK1XAhej/Z0gaDBU4eAhyW4+1CcIvNfNF1DhBqZ9CYfcKYd8=
-X-Received: by 2002:a05:6808:3c4b:b0:40a:56aa:c806 with SMTP id
- 5614622812f47-41d04c9599emr18486798b6e.22.1753170143441; Tue, 22 Jul 2025
- 00:42:23 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mo7Vdi7fS3A7+2yOUXOgcjUxnoFulpf/Rs6F0buf37fdzExDsjtxA8NlocVzDnnp04JZeWco4unlVTyI+ZA45dLsW+5OcwLFpmB92nf3FESuUC2zJo261o1fY+762FjZu6XgkmzclM4+BAF2DfRx3neqhgfzk9ySRABihNrO1f/rk+nBvtgFsZBwcUo9DirkEE2KfIPVajxmRTLrr2ejGsSj7ECasyiZ3t8yaQ+EyZ9S8dwOnCvb+WPBB8lJkBLzq6A3SX0OgMKFRLXgc541wpoucWnR+AMhd7n2df1/ZDL+FwnYYHMG4Z44dMO0tM+M5BiGrUHhWJHoKrF8hns/hg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Qt5U0P7Yspb/mxTVlIPiwPxsw5I79QkOCBcxkmruwTw=;
+ b=w5atP0LzISKhh1X3Nkc1wJc81y21HontjXWpyJDXG64qg0FIAsspmS87GYaFqc32su2pihLOLTI16cIS4k/RMZCkpEjra7/NIKh5xyP7cSZXeysfes6FJbTLwoP6l+Ifeg8/kdrS0wdPdFnMtIEDj91wdMIU0im7agTBTQOJHYzA5OI1Ijo5V/H76YOpqc16vhqBJNxBB2ui7iMOaYW36YymS7P0+Es3U9qj+T/ROJXl9J/Ukh7kHD+7p4MdZkmsCre8D5CBBTGOOjCWgZ/N4GoVcT9JWiMwAjFvrQ0f4thRxvhErYPjICVkIgnyLZhcov+53xUfqoXzD/6gtIXE5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Qt5U0P7Yspb/mxTVlIPiwPxsw5I79QkOCBcxkmruwTw=;
+ b=JoUwayY88fRsqnkUmiKuHyXq+bVJ4BuKyzuu54cS6rFIEhNW394d3EM6nO/GV21vgPTf7p9dF/aprKijcLa9pOfteYxXYqxc1704cT1BmAiiLd9G784rmt3eXRFsdeetljVbFxggp5v0SSUiIYOKBrPLgxe7F0SARBNqirX6f6A=
+Received: from BN1PR12CA0018.namprd12.prod.outlook.com (2603:10b6:408:e1::23)
+ by SA5PPF9D25F0C6D.namprd12.prod.outlook.com
+ (2603:10b6:80f:fc04::8d9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.27; Tue, 22 Jul
+ 2025 08:15:20 +0000
+Received: from BN1PEPF00004680.namprd03.prod.outlook.com
+ (2603:10b6:408:e1:cafe::61) by BN1PR12CA0018.outlook.office365.com
+ (2603:10b6:408:e1::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.29 via Frontend Transport; Tue,
+ 22 Jul 2025 08:15:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN1PEPF00004680.mail.protection.outlook.com (10.167.243.85) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8964.20 via Frontend Transport; Tue, 22 Jul 2025 08:15:19 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
+ 2025 03:15:10 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
+ 2025 03:15:09 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Tue, 22 Jul 2025 03:15:08 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Leo Yu-Chi Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] xilinx: Make XILINX_OF_BOARD_DTB_ADDR depending on OF_BOARD
+ only
+Date: Tue, 22 Jul 2025 10:15:05 +0200
+Message-ID: <063b2e618afb05a32d66218f3631a5f23b30ea3e.1753172103.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250709222926.24671-1-semen.protsenko@linaro.org>
- <20250709222926.24671-2-semen.protsenko@linaro.org>
- <87tt3b2ti7.fsf@kernel.org>
- <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
- <87ikjllws2.fsf@kernel.org>
- <CAPLW+4ncXuT7=iP4wt6fuZ25cQvLJUTZe71oC6=y04Wefb5c6w@mail.gmail.com>
-In-Reply-To: <CAPLW+4ncXuT7=iP4wt6fuZ25cQvLJUTZe71oC6=y04Wefb5c6w@mail.gmail.com>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Tue, 22 Jul 2025 16:42:12 +0900
-X-Gm-Features: Ac12FXyjolU_xZToM-G-ubIJflfvIAWMbPrT4_bz2adrM7gRqx-59vty7EhK1h8
-Message-ID: <CALrBrZ2gGjk9sqqvAESs=tC4HV65Cg5Bp0qJ_ggsjd2ix1xUOQ@mail.gmail.com>
-Subject: Re: [PATCH 1/9] phy: samsung: Add Exynos USB DRD PHY driver
-To: Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
- Minkyu Kang <mk7.kang@samsung.com>, Simon Glass <sjg@chromium.org>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Developer-Signature: v=1; a=openpgp-sha256; l=817; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=dNvk4l533NrBNi6UNQVjtz3cV7PRBhE1/CzfnfXW4xE=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTUe3SxLd1/bLOqZIyFsdOMp95X4or0Xrp7vKp4fGGj+
+ fPgjQ2bOkpZGMQ4GGTFFFmmM+k4rPl2banY8sh8mDmsTCBDGLg4BWAip88z/E/vbmYT5WeZEb1x
+ R9YkBoNb35nOW7R4vTqSL7utW9czJZyRYX2O+fG7V6petMx5z9Nx2H3OjckF0lw/EwoSJv9iaC7
+ p4wYA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004680:EE_|SA5PPF9D25F0C6D:EE_
+X-MS-Office365-Filtering-Correlation-Id: b8e4ea9a-b659-4daa-e85b-08ddc8f7e60d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Zez5X+Ac7fFBFjqVXhdLoXNqpWc6Q7BxKz9AJOpDg3A+8BUJMsWwjIL/Tav4?=
+ =?us-ascii?Q?4s2SywPYuUdvDFwG0xHyqCwmQlCKYJInG3nOC04UOnfYCQ9yy1plzcsjoCgb?=
+ =?us-ascii?Q?waVcA0uOQOFDwJ0UUBR0VqghCVfPnwA4quiNvIZ4FwM90eExrZ7vftEfHGfd?=
+ =?us-ascii?Q?Wndpbg3RAi07NradTTkghXhFyuseLjoQjqRrSZmwJedkb/rOg3y/AGJinkOv?=
+ =?us-ascii?Q?CqFEF0MyG4sDKoz7dbrzNnw4S8JHYQqAqkHmVF0SI9oLaC5kQo+o2siYHxk7?=
+ =?us-ascii?Q?M5XxfBmoX6IAQjn84vvAknoznLDAGHzz65E9W2OwGBVIP16x2M44DWfvPsiy?=
+ =?us-ascii?Q?pzVQdtK6cq6m/8JtoC1CjbtDnSfeLzbIHuWvi2S0nwZxmUsA3JD/TIjAvAxH?=
+ =?us-ascii?Q?L8YDutGWh2IRSlwPiWkBqC27nE2y2C2X+L9WUxRFJE06k/AfT8vKUpHvYdQ1?=
+ =?us-ascii?Q?ns0TIPvEOeAu9dmyVXPtpanbZ7an5XaR3f4LspBadSkXbbEjNI65QLt8hiqN?=
+ =?us-ascii?Q?o3oNBRJfen6g8XCyGOxMb8wvAVimwza1d33hDiwFxM6ZIKgQnNWLdIIJQZDQ?=
+ =?us-ascii?Q?2Yd3TRiRtz8/31LITooytN8fgqrzADVGVkJK1/iEb2VsFHCAOZGSCiiX0GrL?=
+ =?us-ascii?Q?8/wqbbehddZog0Uq2jKslxW+1YuV0VU13OJQIXQ6dovEe2Hkt95DLHYh8+wW?=
+ =?us-ascii?Q?9RtogjdVowAhjUlY4rMqOxl9mxOg8NYYrnavYo5/DO8vSAlq7AC621A/IRvB?=
+ =?us-ascii?Q?dq66rafDTVhJyjYDKXlDttzkTqaleyp8XSZ634ePOtOriq/bTdHxOEWInJjA?=
+ =?us-ascii?Q?Y+/Q9F2rWj9uj76ynOpsZsfuZm7kqag0nUtY8gbmCdtQnn7cD2aK6LaSfe+m?=
+ =?us-ascii?Q?N+BANM7j8uxwq0moVErr6S0k73pnyleIktoV1MQKmMetRyTwoGf7vVrz0TDf?=
+ =?us-ascii?Q?kYYqjw7MyyBHVca32i6qg1hu32kKVJeQTi9FNWpjXh2GsE4aigIYfNc32wRF?=
+ =?us-ascii?Q?uHD4pyNzlsbNaszqvy4w7nEtcfw1Qu3pe+t84qDhnRm6cPz3HM6lf8uUU/xB?=
+ =?us-ascii?Q?MS5Lkj6bQb7rVXO3z5xR+v+8MwNYWDE6m3ytt00lS7sEejFFnCBVM4ihkaMN?=
+ =?us-ascii?Q?9srcagKq0lEkQqUrKSCuKuAAzan0OzbP64+s8PDMshJsvCPwctkjyfiLE0Zp?=
+ =?us-ascii?Q?VjjAS/DITFwBthHtz276MU7iWen7Ln45x4QcdrO2O++k+LS/OqTBnw3FcdLM?=
+ =?us-ascii?Q?tD4ti3n+156+GB0HousZEqWs3WPXfrSS6i6qg9V1g9kox7p9jFaJ5r9RGn53?=
+ =?us-ascii?Q?s/PM8mi606O3MXHdWJNWRH7ZWil+HkwwvApIpuaj5NcEQ4r2NkYpcAvx+OF7?=
+ =?us-ascii?Q?tivZ//7cKN1Jej4iHLR8+Hm5mpjfbqxi9Bkg9a43OW/xakf3g9EZ8AQUZihB?=
+ =?us-ascii?Q?pXn40xA2NK6gKasEEPK3q4sWNqrtO0lW5CoJas3qa3t1/kHc+1KS7vtIbjbO?=
+ =?us-ascii?Q?1RcThJ29ZPQnU97TrJK2aD7F2geOOXurLuin?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2025 08:15:19.8205 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b8e4ea9a-b659-4daa-e85b-08ddc8f7e60d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004680.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPF9D25F0C6D
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,91 +157,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+board_fdt_blob_setup() is guarded by OF_BOARD already that's why make no
+sense to depend also on OF_SEPARATE.
 
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-2025=EB=85=84 7=EC=9B=94 22=EC=9D=BC (=ED=99=94) 13:30, Sam Protsenko <seme=
-n.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+ board/xilinx/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On Mon, Jul 21, 2025 at 4:26=E2=80=AFAM Mattijs Korpershoek
-> <mkorpershoek@kernel.org> wrote:
-> >
-> > On Sun, Jul 20, 2025 at 14:57, Sam Protsenko <semen.protsenko@linaro.or=
-g>
-> wrote:
-> >
-> > > On Thu, Jul 17, 2025 at 1:58=E2=80=AFAM Mattijs Korpershoek
-> > > <mkorpershoek@kernel.org> wrote:
-> > >>
-> > >> Hi Sam,
-> > >>
-> > >> Thank you for the patch.
-> > >>
-> > >
-> > > [snip]
-> > >
-> > >> > +
-> > >> > +#define EXYNOS850_DRD_UTMI                   0x50
-> > >> > +#define UTMI_FORCE_SLEEP                     BIT(0)
-> > >> > +#define UTMI_FORCE_SUSPEND                   BIT(1)
-> > >> > +#define UTMI_DM_PULLDOWN                     BIT(2)
-> > >> > +#define UTMI_DP_PULLDOWN                     BIT(3)
-> > >> > +#define UTMI_FORCE_BVALID                    BIT(4)
-> > >> > +#define UTMI_FORCE_VBUSVALID                 BIT(5)
-> > >>
-> > >> Comparing with the linux driver using
-> > >> commit cc52a697f87e ("phy: exynos5-usbdrd: support Exynos USBDRD 3.2
-> 4nm controller")
-> > >>
-> > >> I notice that the defines are in reverse order (from 0 to 5 and linu=
-x
-> > >> has from 5 to 0).
-> > >>
-> > >> Is there any particular reason for this?
-> > >> I don't mind it too much but it makes diffing between linux and
-> U-Boot a
-> > >> bit harder.
-> > >>
-> > >> Anyway, I've compared this with the linux driver and it looks good t=
-o
-> > >> me!
-> > >>
-> > >> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> > >>
-> > >
-> > > Thank for reviewing this, Mattijs! Yeah, I kinda flipped the register
-> > > bits w.r.t. kernel's version, just because it looks better to me this
-> > > way (easier to read when it's sorted properly). Due to the driver
-> > > model API differences between kernel and U-Boot I had to rework the
-> > > whole structure of the driver, and I only added Exynos850 support for
-> > > now, so the difference between U-Boot and kernel versions is quite bi=
-g
-> > > as it is anyway, so I figured it's not a big deal to reorder things
-> > > even more. Hope it's ok with you?
-> >
-> > It's ok with me. I was just curious if there was any special reason for
-> > re-ordering. I agree that it's easier to read with the sorting you have
-> > applied.
-> > I've noticed that only Exynos850 is supported for now. That's fine as
-> > well in my opinion!
-> >
-> > Feel free to pick this up through your tree.
->
-> I don't have a maintainer tree unfortunately. The easiest way for this
-> series would be probably to go through Samsung tree (Minkyu)?
+diff --git a/board/xilinx/Kconfig b/board/xilinx/Kconfig
+index f7152d6ee6d5..5c3240da0733 100644
+--- a/board/xilinx/Kconfig
++++ b/board/xilinx/Kconfig
+@@ -55,7 +55,7 @@ config XILINX_OF_BOARD_DTB_ADDR
+ 	default 0x8000 if MICROBLAZE
+ 	default 0x100000 if ARCH_ZYNQ || ARCH_ZYNQMP
+ 	default 0x83000000 if TARGET_XILINX_MBV
+-	depends on OF_BOARD || OF_SEPARATE
++	depends on OF_BOARD
+ 	help
+ 	  Offset in the memory where the board configuration DTB is placed.
+ 
+-- 
+2.43.0
 
-
-Yep. This patch is delegating to me.
-But unfortunately I have trouble to access to denx git on my office.
-I'm trying to fix it but not sure when it can be.
-So I'll ask to Tom to pick this up at this time.
-
-Dear Tom,
-
-Could you pick this up?
-
-Reviewed-by: Minkyu Kang <mk7.kang@samsung.com>
-
-
-Thanks,
-Minkyu Kang.
+base-commit: aeee1434e00edddda97a66cccb61d380b798db89
+branch: debian-sent3
