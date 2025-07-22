@@ -4,63 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FEDC83F1A
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 05:32:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC25C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 06:06:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8617830CA;
-	Tue, 22 Jul 2025 07:32:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
+	by phobos.denx.de (Postfix) with ESMTP id BE0CD830C8;
+	Tue, 22 Jul 2025 08:06:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="G0PPSihK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZnzPlzZN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 477D2830F6; Tue, 22 Jul 2025 07:32:28 +0200 (CEST)
-Received: from mxout4.routing.net (mxout4.routing.net [IPv6:2a03:2900:1:a::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E641A830C8
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 07:32:25 +0200 (CEST)
+ id 2933A830F6; Tue, 22 Jul 2025 08:06:12 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5363182D88
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 08:06:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=fw-web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
-Received: from mxbox4.masterlogin.de (unknown [192.168.10.79])
- by mxout4.routing.net (Postfix) with ESMTP id 64C5B100867;
- Tue, 22 Jul 2025 05:32:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
- s=20200217; t=1753162345;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OGuDlmVz1Jd5j/jVTjmpIskRXnl7+cijbzx355VDybM=;
- b=G0PPSihKEamK38ke5XdFRhaGfcZ6FgmX3E2sVctptTEH/nRe/abWt6FuQ1XEhuxHD26tGj
- xJgxNLZIFmbkwCooBTW1PC5YMg0ahYimbxkWuK810PTEqWHoc9Q18zOOTQr7f/eaMYmiS/
- vzzPLr7Hw1EcC/x+agvaDAq4Ek575YU=
-Received: from [127.0.0.1] (fttx-pool-194.15.83.252.bambit.de [194.15.83.252])
- by mxbox4.masterlogin.de (Postfix) with ESMTPSA id A41C880455;
- Tue, 22 Jul 2025 05:32:24 +0000 (UTC)
-Date: Tue, 22 Jul 2025 07:32:27 +0200
-From: Frank Wunderlich <linux@fw-web.de>
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>, "hs@denx.de" <hs@denx.de>, 
- Tom Rini <trini@konsulko.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Holger Brunck <holger.brunck@hitachi-powergrids.com>
-Subject: RE: Please pull u-boot-i2c master
-User-Agent: K-9 Mail for Android
-In-Reply-To: <PH7PR03MB6942C3609388E34D6B62CD69F75CA@PH7PR03MB6942.namprd03.prod.outlook.com>
-References: <06c2b16e-1e3d-7632-70be-d6df4232ff71@denx.de>
- <20250718150113.GU193579@bill-the-cat>
- <3ef949d6-9c42-0876-d5a7-a055340d52df@denx.de>
- <PH7PR03MB69424603B76A18A20C7C7994F753A@PH7PR03MB6942.namprd03.prod.outlook.com>
- <PH7PR03MB6942C3609388E34D6B62CD69F75CA@PH7PR03MB6942.namprd03.prod.outlook.com>
-Message-ID: <47613B37-8F06-482E-A7AF-30B432BFF335@fw-web.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56M660bv1428147;
+ Tue, 22 Jul 2025 01:06:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753164360;
+ bh=nytaGSi6Qgr0fjF+RACgSeyO7+LUFnxLncAnwB0/t9Y=;
+ h=From:To:CC:Subject:Date;
+ b=ZnzPlzZNAixVbuq57xj4yMfVZt7CLLDRo87NYaYMMc5W4yvnCcSF3iEHXGz9gQxMa
+ UW43JKwP2aPWD+ZzP/hK93FGGQcYKQ6aWyRxx8VaAiFMhSjO9KCo0O5se8bPb+rgYz
+ xrW32wi5onQ9KlMluy1p+sNSQTk/tpEiqaiYyF0Q=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56M6605k1892161
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 22 Jul 2025 01:06:00 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 22
+ Jul 2025 01:06:00 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 22 Jul 2025 01:06:00 -0500
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.227.169])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56M65tHS557151;
+ Tue, 22 Jul 2025 01:05:55 -0500
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <joe.hershberger@ni.com>,
+ <rfried.dev@gmail.com>, <marek.vasut+renesas@mailbox.org>,
+ <jerome.forissier@linaro.org>, <quentin.schulz@cherry.de>,
+ <kever.yang@rock-chips.com>, <alexthreed@gmail.com>,
+ <skylake.huang@mediatek.com>
+CC: <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <praneeth@ti.com>, <nm@ti.com>, 
+ <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH] net: phy: Support overriding Auto Negotiation timeout with
+ env variable
+Date: Tue, 22 Jul 2025 11:35:54 +0530
+Message-ID: <20250722060554.352952-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mail-ID: cc2fe745-364c-457a-801c-b6dcc33a0182
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,28 +83,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 22=2E Juli 2025 07:10:00 MESZ schrieb "Maniyam, Dinesh" <dinesh=2Emaniya=
-m@altera=2Ecom>:
-=2E=2E=2E
->
->I have done the rework, tried to run the CI in github before submitting t=
-o denx=2E
->https://github=2Ecom/u-boot/u-boot/pull/802
->
->However,
->
->Facing some failure due to :
->Cloning into '/tmp/uboot-test-hooks'=2E=2E=2E
->fatal: unable to access 'https://source=2Edenx=2Ede/u-boot/u-boot-test-ho=
-oks/': The requested URL returned error: 502
->
->seems like denx upstream server issue!
+The Auto Negotiation procedure between two Ethernet PHYs consists of
+determining the best commonly supported parameters among Speed,
+Duplex Mode and Flow Control.
 
-Yes see here: <https://lists=2Edenx=2Ede/pipermail/u-boot/2025-July/594708=
-=2Ehtml>
+The time taken for this procedure is not only dependent on the local
+PHY used, but also on the link-partner PHY.
 
->Regards,
->Dinesh
+While a timeout can be specified in the form of a "CONFIG" on the basis
+of the local PHY present on the device, since the timeout also depends
+on the link-partner PHY, it might be necessary to modify the timeout.
 
+To avoid rebuilding the bootloader for a given device, just because it
+may be connected to various link-partner PHYs, each with a different
+timeout, introduce an environment variable named "phy_aneg_timeout" and
+override "CONFIG_PHY_ANEG_TIMEOUT" with "phy_aneg_timeout".
 
-regards Frank
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
+
+Hello,
+
+This patch is based on commit
+7598b469c16 Merge tag 'u-boot-dfu-next-20250703' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next
+of the next branch of Mainline U-Boot.
+
+Patch has been tested on J784S4-EVM validating the following cases:
+1. PHY Auto-Negotiation performed with "phy_aneg_timeout" unset.
+   CONFIG_PHY_TIMEOUT with a value of 4,000 takes effect.
+   => Auto Negotiation succeeds
+2. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 10,000.
+   "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
+   [Higher value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
+   => Auto Negotiation succeeds
+3. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 2,000.
+   "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
+   [Lower value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
+   => Auto Negotiation times out
+
+Test Logs:
+https://gist.github.com/Siddharth-Vadapalli-at-TI/697eadcbb26786435df48a834c968375
+
+Regards,
+Siddharth.
+
+ doc/usage/environment.rst | 8 ++++++++
+ drivers/net/phy/phy.c     | 6 +++++-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+index bb6c351b441..7447bb85d3e 100644
+--- a/doc/usage/environment.rst
++++ b/doc/usage/environment.rst
+@@ -335,6 +335,14 @@ netretry
+     Useful on scripts which control the retry operation
+     themselves.
+ 
++phy_aneg_timeout
++    If set, the specified value will override CONFIG_PHY_ANEG_TIMEOUT
++    which defaults to 4000. The default value of CONFIG_PHY_ANEG_TIMEOUT
++    may be sufficient for most use-cases, but certain link-partners
++    may require a larger timeout due to the Ethernet PHY they use.
++    Alternatively, the timeout can be reduced as well if the use-case
++    demands it.
++
+ rng_seed_size
+     Size of random value added to device-tree node /chosen/rng-seed.
+     This variable is given as a decimal number.
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index e6fed8c41d7..0f5c9685b59 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -9,6 +9,7 @@
+  */
+ #include <console.h>
+ #include <dm.h>
++#include <env.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <net.h>
+@@ -243,6 +244,9 @@ int genphy_update_link(struct phy_device *phydev)
+ 	if ((phydev->autoneg == AUTONEG_ENABLE) &&
+ 	    !(mii_reg & BMSR_ANEGCOMPLETE)) {
+ 		int i = 0;
++		char *s = env_get("phy_aneg_timeout");
++		int phy_aneg_timeout = s ? (int)simple_strtol(s, NULL, 10) :
++					   CONFIG_PHY_ANEG_TIMEOUT;
+ 
+ 		printf("%s Waiting for PHY auto negotiation to complete",
+ 		       phydev->dev->name);
+@@ -250,7 +254,7 @@ int genphy_update_link(struct phy_device *phydev)
+ 			/*
+ 			 * Timeout reached ?
+ 			 */
+-			if (i > (CONFIG_PHY_ANEG_TIMEOUT / 50)) {
++			if (i > (phy_aneg_timeout / 50)) {
+ 				printf(" TIMEOUT !\n");
+ 				phydev->link = 0;
+ 				return -ETIMEDOUT;
+-- 
+2.34.1
+
