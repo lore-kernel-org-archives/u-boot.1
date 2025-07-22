@@ -4,63 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F51C83F25
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 09:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E01E4C83F25
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 09:56:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA7328334D;
-	Tue, 22 Jul 2025 11:34:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 1F25383768;
+	Tue, 22 Jul 2025 11:56:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WOsy/6Bd";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="mFV70zB6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8676483381; Tue, 22 Jul 2025 11:34:30 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A6C8283346; Tue, 22 Jul 2025 11:55:59 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7A7283346
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 11:34:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46EC883346
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 11:55:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=dd2a=2D=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1753176866;
- bh=HO5Tpc0GUw+fRcc61WfW58XpHoDRwSs/5vf0rj6bOZg=;
- b=WOsy/6BdZwgP3QC/VV+LHc8fI7xbRf6EkU53euuIOkLk70wQ7BMUHpk5rZplmvCJ5FncAG4QH
- n02VDk7B/uV1BwdFxbbr9acgO8FCDTVii/X8pOp7W9X0vi5xYfGxd225MD0s/pU3okMxDdlwArl
- 9da14hoV6EPImWGFwfEh21VtOTwadxulyN7WCEM5P/G63D9gV/EWdOgG7trLtmGqgdeG08BWRcF
- yp/WnGBmuhZ1CrIYt8A7VnKMhtynZVDBqqYicGeCnzABrpLx83KSHrTKCO8r6rjkMeXXmoRMKPI
- swaM+KVB6/0f0+otmJO1oSmJcPwVpcuDti+8DvEwd/iA==
-X-Forward-Email-ID: 687f5b1f3a34fab0dace9a38
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.1.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <1c37d473-d2c4-4a80-aa78-be19a68daebb@kwiboo.se>
-Date: Tue, 22 Jul 2025 11:34:19 +0200
+ dmarc=fail (p=none dis=none) header.from=thaumatec.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ae6f8d3bcd4so959850666b.1
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 02:55:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1753178157; x=1753782957;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+mYX14J4VNc+QHQwP2szw2tlcJnWrsxaeweigSFSKd4=;
+ b=mFV70zB6gqWW5MGCmJHard1SE7ksksdkMyXL9m7DkIZJw6RvaBftjPZEtHMLH0VxLF
+ 7z8XNTyy7qucklrWtfuc4NU7g1XEpHxEPqEot17lgTsQzQIlSSuLa6a/5FyymKBZhr0L
+ gWrsvUMgEyvofxMUvuue9w4+W8nzhaxIR7WU24cuh0TRBW29QeHuqbbnnT0jguh2veGf
+ BAltEmPcGRnVqiuLv4nUWleQ5OoCNHkOdfMb0fiE9QGTqfPz1ZJrLzFerXjB9K8u6SW5
+ r/C3S1/mTrfgv+ib8TD1v3o/aA5HfskEd4XPA9VbE6CyZ+MYf5Igy0MSsBu/tjbv+kUZ
+ YtRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753178157; x=1753782957;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+mYX14J4VNc+QHQwP2szw2tlcJnWrsxaeweigSFSKd4=;
+ b=GIVqKR3NxWb/aQiM0l5VWZzSSo1bcjDe9U8ZsYVJJixp/FTfFQhXRkAOBIh0Fi758/
+ oWzc+5MH5+NBQpFwvL2vZnPI4uX575LpxdfPp483eC0L5ahWG+qWkko/cAYV1yBrIHa4
+ WiLo/C9em60/Zg2qg0fEYPb1a4G9Re/ons6JaXgOfU6mwaLDEGizjSo89YmuO/4c9QCC
+ k6JrsyucRw82h9Lz7oN01CZHnuBKYU2iws7lZASB17jCJbRbtj3otTav8LL9s/bpIkAd
+ GTzT/k6fNKKMU7TqycqujeqogwZ98fOA6IQUMS7v4OIwDFviBwdbe5feh/krs/XEfnWv
+ aGbQ==
+X-Gm-Message-State: AOJu0Yxe8+VXZlmj54mu229tmZvVinCYutot9Kz/2WvEt+gHe8FqtS+e
+ t/lRfqda89EK5qN0BlQ1LjOFOF4ko8YiKwQ3egrUX8e4TDEce1ZYIMPxSDJ8Daq1M+Q=
+X-Gm-Gg: ASbGncv2A7KBgwJwR83OmXHB3ayfk5UaqwshXyjCpzwMkRfXxFiJaIrAzX9ae4/O3Xw
+ 7+c71ykoPUQYL5aUA21S/zt3AhRXaqckofAb/AvEeddOx3io6NMtdCwB8lAlQi4uzMOmeMoGZOX
+ Pednbyzy7Efl0hr9Uh+2Tg5i938om3UATUTo8vP5kKGCe65ffyes0K0bA/MaeeMdKVpnA6M3emY
+ HfTug2xTHrL0dyOcc6NI4xcfQ9ks+YIXu5Or4WKAuPuzqCdydFX4ug3/bAHmkL/OQzEX3Kf0W7G
+ deqTD0YQjshnMLMmtQvIme9DB2TiCHUqxQjgaDwMEP7cu0SnBiDVnHeM2+I+NpEJ2E81MEz4MtD
+ 5OQ+7CpokuuY7wRxMxEfCs/TZKjn2v6dxmw==
+X-Google-Smtp-Source: AGHT+IE9RFsKpeoYNzRMqeWkYQg0RI4Ndw6hQMntFHLykvVXGZT8xkjUtHmU8N21IfLPg+LJMrMGKQ==
+X-Received: by 2002:a17:907:3c83:b0:ae3:bd92:e69b with SMTP id
+ a640c23a62f3a-ae9c99814c7mr2558651766b.7.1753178156640; 
+ Tue, 22 Jul 2025 02:55:56 -0700 (PDT)
+Received: from [127.0.1.1] ([91.90.172.13]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aec6c79c279sm834754866b.28.2025.07.22.02.55.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Jul 2025 02:55:56 -0700 (PDT)
+From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+Subject: [PATCH v4 0/5] Extend usb_onboard_hub driver to support Cypress
+ HX3 hub family
+Date: Tue, 22 Jul 2025 11:55:32 +0200
+Message-Id: <20250722-usb_onboard_hub_cypress_hx3-v4-0-91c3ee958c0e@thaumatec.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] rockchip: rockchip-inno-usb2: Fix Synchronous Abort on
- usb start
-To: Alex Shumsky <alexthreed@gmail.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250703060517.3909695-1-alexthreed@gmail.com>
- <CAF4oh-NPW_nYdMoeh0y0wVK3e1c4gyroTvJUKh5tuXFNFvDOnw@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAF4oh-NPW_nYdMoeh0y0wVK3e1c4gyroTvJUKh5tuXFNFvDOnw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABRgf2gC/43N3wrCIBTH8VcJrzPUMzfrqveIGM4/6cVm6CaL2
+ Ltn3QwiRpff34HPeaJkojcJnXZPFE32yYehRLXfIeXkcDPY69KIEcZJxTieUteGoQsy6tZNXas
+ e92hSat0MmAmgRwGWGm1QEcrF+vmjX66lnU9jiI/Ps0zf639upphgUIpLUhPRKHsenZx6ORp1U
+ KFHbzuz1eOs3vZY8SwIVlGupah+erB6NSXbHhSPgyWgOwWENt/esiwvDApWxmoBAAA=
+To: u-boot@lists.denx.de
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,110 +101,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alex,
+This patch series extends the usb_onboard_hub driver to allow for
+support of more types of onboard hub devices, and adds the Cypress
+HX3 hub family.
 
-On 7/3/2025 8:29 AM, Alex Shumsky wrote:
-> Hi Jonas,
-> 
-> This time I had difficulties to reproduce Synchronous Abort on a real board, but
-> then I spotted a difference with my previous tests.
-> "usb start" abort happen when I boot upstream/current u-boot proper from
-> SD-card by older SPL/TPL installed on eMMC (stock/proprietary u-boot from 2019
-> installed by STB manufacturer).
-> There is no Sync Abort with upstream SPL/TPL. Looks like NULL dereference are
-> still there but some SPL/TPL init code prevents it from aborting.
+First patch in the series updates the bind function, so that it no
+longer uses hardcoded compatible strings.
+Next patch simplifies the code, by removing unnecessary dm_gpio
+function call.
+Third patch updates the remove function, which allows the prevent
+issues with usb devices reenumeration, in case of calling
+"usb reset". Although the issue could still occur in case of invalid
+initial state of reset gpio, it is minimized with no impact on main
+usb_hub driver.
+Fourth patch extends the driver with support for multiple power
+supplies, the same way it is done in kernel driver.
+Finally, last patch provides hub data and of_match table entries
+for Cypress HX3
 
-Thanks for taking a closer look at this and use of different TPL, SPL
-and/or TF-A versions is very likely the reasons why we initially had
-different results (a sync abort vs none).
+Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3399 Puma Haikou
+Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+---
+Changes in v4:
+- PATCH 4/5: Minor updates in for loop in usb_onboard_hub_power_off, as suggested by Quentin during review
+- Link to v3: https://lore.kernel.org/r/20250610-usb_onboard_hub_cypress_hx3-v3-0-53f03dbc3017@thaumatec.com
 
-I only have one small remark on this,
+Changes in v3:
+- Rebased on top of latest master
+- Updated usb_onboard_hub_power_off function to print error
+  message in case regulator_set_enable_if_allowed call fails,
+  as suggested by Quentin.
+- Link to v2: https://lore.kernel.org/r/20250526-usb_onboard_hub_cypress_hx3-v2-0-f382415da84f@thaumatec.com
 
-> 
-> On Thu, Jul 3, 2025 at 9:05 AM Alex Shumsky <alexthreed@gmail.com> wrote:
->>
->> Fix NULL pointer dereference that happen when rockchip-inno-usb2 clock
->> enabled before device probe. This early clock enable call happen in process
->> of parent clock activation added in ac30d90f3367.
->>
->> Fixes: 229218373c22 ("phy: rockchip-inno-usb2: Add support for clkout_ctl_phy").
->> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting")
->> Co-authored-by: Jonas Karlman <jonas@kwiboo.se>
->> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
->> ---
->>
->> Changes in v2:
->> - rework patch (add NULL check to code instead of dts modification)
->>
->>  drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 19 ++++++++++++++-----
->>  1 file changed, 14 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
->> index 88b33de1b2..3cc5956aed 100644
->> --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
->> +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
->> @@ -167,20 +167,27 @@ static struct phy_ops rockchip_usb2phy_ops = {
->>         .of_xlate = rockchip_usb2phy_of_xlate,
->>  };
->>
->> -static void rockchip_usb2phy_clkout_ctl(struct clk *clk, struct regmap **base,
->> -                                       const struct usb2phy_reg **clkout_ctl)
->> +static int rockchip_usb2phy_clkout_ctl(struct clk *clk, struct regmap **base,
->> +                                      const struct usb2phy_reg **clkout_ctl)
->>  {
->>         struct udevice *parent = dev_get_parent(clk->dev);
->>         struct rockchip_usb2phy *priv = dev_get_priv(parent);
->>         const struct rockchip_usb2phy_cfg *phy_cfg = priv->phy_cfg;
->>
->> -       if (priv->phy_cfg->clkout_ctl_phy.enable) {
->> +       // phy_cfg can be NULL if this function called before probe (when parent
->> +       // clocks are enabled)
+Changes in v2:
+- Replaced the method for finding hub in bind function with
+  uclass_find_device_by_ofnode, which seems more appropriate 
+- Added new patch that removes unnecessary dm_gpio_free call
+  in usb_onboard_hub_remove
+- Create separate static method for disabling supply regulators
+- Update error handling in probe function 
+- Link to v1: https://lore.kernel.org/r/20250425-usb_onboard_hub_cypress_hx3-v1-0-3cc5a06087cf@thaumatec.com
 
-Please use /* block comment style */ here, with that fixed this is:
+---
+Lukasz Czechowski (5):
+      usb: onboard-hub: Use the ofnode to check if the peer-hub was probed
+      usb: onboard-hub: Use devm API do automatically free the reset GPIO
+      usb: onboard-hub: Set the reset gpio pin before freeing
+      usb: onboard-hub: Add support for multiple power supplies
+      usb: onboard-hub: Add support for Cypress HX3 family
 
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+ common/usb_onboard_hub.c | 102 ++++++++++++++++++++++++++++++++++++-----------
+ drivers/usb/Kconfig      |   1 +
+ 2 files changed, 80 insertions(+), 23 deletions(-)
+---
+base-commit: 5a8dd2e0c848135b5c96af291aa96e79acc923ec
+change-id: 20250425-usb_onboard_hub_cypress_hx3-2831983f1ede
 
-Regards,
-Jonas
-
->> +       if (!phy_cfg)
->> +               return -EINVAL;
->> +
->> +       if (phy_cfg->clkout_ctl_phy.enable) {
->>                 *base = priv->phy_base;
->>                 *clkout_ctl = &phy_cfg->clkout_ctl_phy;
->>         } else {
->>                 *base = priv->reg_base;
->>                 *clkout_ctl = &phy_cfg->clkout_ctl;
->>         }
->> +
->> +       return 0;
->>  }
->>
->>  /**
->> @@ -206,7 +213,8 @@ int rockchip_usb2phy_clk_enable(struct clk *clk)
->>         const struct usb2phy_reg *clkout_ctl;
->>         struct regmap *base;
->>
->> -       rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
->> +       if (rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl))
->> +               return -ENOSYS;
->>
->>         /* turn on 480m clk output if it is off */
->>         if (!property_enabled(base, clkout_ctl)) {
->> @@ -230,7 +238,8 @@ int rockchip_usb2phy_clk_disable(struct clk *clk)
->>         const struct usb2phy_reg *clkout_ctl;
->>         struct regmap *base;
->>
->> -       rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
->> +       if (rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl))
->> +               return -ENOSYS;
->>
->>         /* turn off 480m clk output */
->>         property_enable(base, clkout_ctl, false);
->> --
->> 2.43.0
->>
->> base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
->> branch: fix-rk3328-usb2phy-clock-v2
+Best regards,
+-- 
+Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 
