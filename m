@@ -4,74 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0C8C83F1A
-	for <u-boot@archiver.kernel.org>; Mon, 21 Jul 2025 23:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7C6C83F25
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 00:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7345483249;
-	Tue, 22 Jul 2025 01:01:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 11039832DD;
+	Tue, 22 Jul 2025 02:16:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YVmj7irk";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09D1D831E4; Tue, 22 Jul 2025 00:07:42 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE831830C8
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 00:07:39 +0200 (CEST)
+ id 54F0A836F0; Tue, 22 Jul 2025 02:16:44 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 3AF93832AD
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 02:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jeremy.bezairie@gmail.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6facf4d8ea8so37674806d6.0
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 15:07:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753135658; x=1753740458; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=TsLbXaXd9ElChZB/4ar4i6PjnoeLHdJFadm02DeYuKA=;
- b=YVmj7irkUyMUDDsAgV7R17Pj+mz6ATbkIQmSczDw6Mid138mqWaUiQV0Burv4RyAH6
- 1eYcYZxrdB27jj6qdh63WcNNqQQxD2Irr8+DfR+LPgRZKcR8jpyp/6nzai2xLhepfeet
- fsN8Lok4+agXYeq/E+SO6gvzpymZlJlJ7U0S96iRo9TrUmuuIua05XCous7iiL0VFQix
- 64ftR0/NcRFW/OlCEaS6mTXe/nIJMySLAqc3kM2L7isGy75TSq7619yrBrbs2B+ZkdCc
- 64ZB5EVXaWmKqwhE20yBB2/CwJGo+zShNMYv2GDeukhoEwoxkBKdgYxEjw1wCGUInqdW
- PkUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753135658; x=1753740458;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TsLbXaXd9ElChZB/4ar4i6PjnoeLHdJFadm02DeYuKA=;
- b=MMxWpm+pVckeGW6MLuv19WmR0JbpGekVfwaWSh5CEsxLjsfzg+xXgFp6x/AOBbSb4Q
- JK/ZAO9Y8KqLsNLNIuggCasnp4esI9wadMICSnh7NGWsdXTdDZyfOQ+EBpNWABq1Rio1
- au0+d7GF40R2TZZBI1LEm/pkthW+3EyVnqk4G7co2lzQqqQBuStJUkjSmb85tmzQKvd8
- rQn03zOKY0BnocC5ooEQuUMv0j35KRrOf0lSbD/hY3q1mEAR0B9FuRtfwrqBUwAmdE2o
- j8AFcxC8HUZV2+DIbs7pgeelcf4s+gv6B/70Sa5iEfVUyCQ+CN7sFsSCGu1xXTzgbvTW
- f/nQ==
-X-Gm-Message-State: AOJu0YwyMxpXf/Zr7zM9esMTJntDkqb/2mpNnaWRNLNIxFF40u0quJ9S
- Q1boMQ9NzoBCrnU7nfg9u/LDmoUHSTnogxrSAECLuoqA5mNzvnBrH/Dezk4+y4HdFaAzFUVEU6s
- JGYzP22w/KuL5FCLZJZqgXgE/3weGyHXTKkt87Mo=
-X-Gm-Gg: ASbGnctQdrwFEdiWxsgD6C67UvRFPP3XAwIRIMBTt8F3nxBlYgnj3mLV7Ytvvux/Ywi
- O+XS44+iw3O6FriXmxzXSAL/Bw2h17coEI29qR9KKsJVaS9QDlxM3p9PyZkfC2enXGSogHWq5V2
- t5w9yZfTZq8winxda2V8tPBKXUzHn+3AiYhqfm453cE7ChSUJGEcUOMlN9DOw1Trwff2bsgJl0J
- 45FnbZYKxV8vhD3NBvf6w0GF9k0TJZCsJepLw==
-X-Google-Smtp-Source: AGHT+IGiAvTdDvHo0Mbt5BBi6VRsQRrLvl5v/tZi1vo5J+v34YmcwWN3xhm6NJtr+wwd+5Nqc57jYYNBmD/aje2pHEk=
-X-Received: by 2002:a05:6214:4611:b0:704:9275:a7c7 with SMTP id
- 6a1803df08f44-704f47fa191mr315521176d6.2.1753135658060; Mon, 21 Jul 2025
- 15:07:38 -0700 (PDT)
-MIME-Version: 1.0
-From: =?UTF-8?B?SsOpcsOpbXkgQsOpemFpcmll?= <jeremy.bezairie@gmail.com>
-Date: Mon, 21 Jul 2025 22:07:27 +0000
-X-Gm-Features: Ac12FXx6aM0e-43BPTsXKwwllQJPIxy0S9oBo7OS4NQ3o6TojqVXbt9iV5uQvOY
-Message-ID: <CAMdxF8AvrkcV=-PMZPQCUf1cB1qG-3yrk-y3eEL2=gTiF9p2iA@mail.gmail.com>
-Subject: No eMMC over USB if no partition
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B87C81595;
+ Mon, 21 Jul 2025 17:16:34 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 61CCC3F66E;
+ Mon, 21 Jul 2025 17:16:39 -0700 (PDT)
+Date: Tue, 22 Jul 2025 01:14:39 +0100
+From: Andre Przywara <andre.przywara@arm.com>
 To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Tue, 22 Jul 2025 01:01:45 +0200
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Mikhail Kalashnikov
+ <iuncuim@gmail.com>, Yixun Lan <dlan@gentoo.org>, Paul Kocialkowski
+ <paulk@sys-base.io>, linux-sunxi@lists.linux.dev, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH v2 12/20] sunxi: sun50i_h6: add A523 SPL clock setup code
+Message-ID: <20250722011439.401e1125@minigeek.lan>
+In-Reply-To: <20250717235455.32528-13-andre.przywara@arm.com>
+References: <20250717235455.32528-1-andre.przywara@arm.com>
+ <20250717235455.32528-13-andre.przywara@arm.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,35 +59,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I already sent this email to x@xnux.eu ( https://xnux.eu/rk2aw/ , Author /
-Distribution ) at 17/7/2025, still no answer.
+On Fri, 18 Jul 2025 00:54:47 +0100
+Andre Przywara <andre.przywara@arm.com> wrote:
 
-Hi
+> From: Jernej Skrabec <jernej.skrabec@gmail.com>
+> 
+> ---
+>  .../include/asm/arch-sunxi/clock_sun50i_h6.h  | 10 ++++++
+>  arch/arm/mach-sunxi/clock_sun50i_h6.c         | 32 ++++++++++++++-----
+>  2 files changed, 34 insertions(+), 8 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
+> index 5881ab88573..699d75f37c4 100644
+> --- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
+> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
+> @@ -108,6 +108,13 @@
+>  #define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002
+>  #define CCM_AHB3_DEFAULT		0x03000002
+>  #define CCM_APB1_DEFAULT		0x03000102
+> +
+> +#elif CONFIG_MACH_SUN55I_A523				/* A523 */
+> +
+> +#define CCM_PLL6_DEFAULT		0xe8116310	    /* 1200 MHz */
 
-My PinePhone Pro has rk2aw on the SPI, on PC I'm on Arch Linux KDE.
+This value is wrong, it must be 0xe8216310. Bits [22:20] program the 800
+MHz sub-clock, divided down from the nominal 2.4GHz base frequency. So
+the divider must be 3, encoded as 0b010. This is also the reset value.
+Linux will calculate the actual frequency, but won't change the
+setting, so it keeps and sees that clock as 1200 MHz, not 800 MHz. So
+things might still work correctly, but I guess it's called
+PLL_PERIPH0_800M for a reason, so let's keep it at this value.
 
-If its eMMC is empty (no partition, all partitions deleted by eMMC over
-USB, KDE Partition Manager on PC), on the U-Boot menu (the 2. in
-https://xnux.eu/rk2aw/ , How rk2aw works) if I select eMMC over USB , it
-not works:
-
-** Invalid partition 1 **
-Couldn't find partition mmc 0
-
-So I booted
-https://github.com/manjaro-pinephone/plasma-mobile/releases/download/beta14/Manjaro-ARM-plasma-mobile-pinephonepro-beta14.img.xz
-on a microSD card, Terminal:
-
-sudo fdisk /dev/mmcblk2
-n
+Cheers,
+Andre
 
 
+> +#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002	    /* 200 MHz */
+> +#define CCM_APB1_DEFAULT		0x03000005	    /* APB0 really */
+> +#define CCM_APB2_DEFAULT		0x03000005	    /* APB1 really */
+>  #endif
+>  
+>  /* apb2 bit field */
+> @@ -127,6 +134,7 @@
+>  /* MBUS clock bit field */
+>  #define MBUS_ENABLE			BIT(31)
+>  #define MBUS_RESET			BIT(30)
+> +#define MBUS_UPDATE			BIT(27)
+>  #define MBUS_CLK_SRC_MASK		GENMASK(25, 24)
+>  #define MBUS_CLK_SRC_OSCM24		(0 << 24)
+>  #define MBUS_CLK_SRC_PLL6X2		(1 << 24)
+> @@ -139,10 +147,12 @@
+>  #define GATE_SHIFT			(0)
+>  
+>  /* DRAM clock bit field */
+> +#define DRAM_CLK_ENABLE			BIT(31)
+>  #define DRAM_MOD_RESET			BIT(30)
+>  #define DRAM_CLK_UPDATE			BIT(27)
+>  #define DRAM_CLK_SRC_MASK		GENMASK(25, 24)
+>  #define DRAM_CLK_SRC_PLL5		(0 << 24)
+> +#define DRAM_CLK_M_MASK			(0x1f)
+>  #define DRAM_CLK_M(m)			(((m)-1) << 0)
+>  
+>  /* MMC clock bit field */
+> diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
+> index 3a4399a9c6c..80004f13a1e 100644
+> --- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
+> +++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
+> @@ -16,15 +16,22 @@ void clock_init_safe(void)
+>  	void *const ccm = (void *)SUNXI_CCM_BASE;
+>  	void *const prcm = (void *)SUNXI_PRCM_BASE;
+>  
+> -	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616)) {
+> -		/* this seems to enable PLLs on H616 */
+> +	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616))
+>  		setbits_le32(prcm + CCU_PRCM_SYS_PWROFF_GATING, 0x10);
+> +	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
+> +		setbits_le32(prcm + CCU_PRCM_SYS_PWROFF_GATING, 0x200);
+> +	udelay(1);
+> +
+> +	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616) ||
+> +	    IS_ENABLED(CONFIG_MACH_SUN55I_A523))
+>  		setbits_le32(prcm + CCU_PRCM_RES_CAL_CTRL, 2);
+> -	}
+> +	udelay(1);
+>  
+>  	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616) ||
+> -	    IS_ENABLED(CONFIG_MACH_SUN50I_H6)) {
+> +	    IS_ENABLED(CONFIG_MACH_SUN50I_H6) ||
+> +	    IS_ENABLED(CONFIG_MACH_SUN55I_A523)) {
+>  		clrbits_le32(prcm + CCU_PRCM_RES_CAL_CTRL, 1);
+> +		udelay(1);
+>  		setbits_le32(prcm + CCU_PRCM_RES_CAL_CTRL, 1);
+>  	}
+>  
+> @@ -41,9 +48,10 @@ void clock_init_safe(void)
+>  	while (!(readl(ccm + CCU_H6_PLL6_CFG) & CCM_PLL_LOCK))
+>  		;
+>  
+> -	clrsetbits_le32(ccm + CCU_H6_CPU_AXI_CFG,
+> -			CCM_CPU_AXI_APB_MASK | CCM_CPU_AXI_AXI_MASK,
+> -			CCM_CPU_AXI_DEFAULT_FACTORS);
+> +	if (!IS_ENABLED(CONFIG_MACH_SUN55I_A523))
+> +		clrsetbits_le32(ccm + CCU_H6_CPU_AXI_CFG,
+> +				CCM_CPU_AXI_APB_MASK | CCM_CPU_AXI_AXI_MASK,
+> +				CCM_CPU_AXI_DEFAULT_FACTORS);
+>  
+>  	writel(CCM_PSI_AHB1_AHB2_DEFAULT, ccm + CCU_H6_PSI_AHB1_AHB2_CFG);
+>  #ifdef CCM_AHB3_DEFAULT
+> @@ -55,7 +63,15 @@ void clock_init_safe(void)
+>  	 * The mux and factor are set, but the clock will be enabled in
+>  	 * DRAM initialization code.
+>  	 */
+> -	writel(MBUS_CLK_SRC_PLL6X2 | MBUS_CLK_M(3), ccm + CCU_H6_MBUS_CFG);
+> +	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523)) {
+> +		writel(MBUS_RESET, ccm + CCU_H6_MBUS_CFG);
+> +		udelay(1);
+> +		writel(MBUS_UPDATE | MBUS_CLK_SRC_OSCM24 | MBUS_CLK_M(4),
+> +		       ccm + CCU_H6_MBUS_CFG);
+> +	} else {
+> +		writel(MBUS_CLK_SRC_PLL6X2 | MBUS_CLK_M(3),
+> +		       ccm + CCU_H6_MBUS_CFG);
+> +	}
+>  }
+>  
+>  void clock_init_uart(void)
 
-w
-
-to create a new empty partition on the eMMC, now eMMC over USB works...
-
-Why should there be a partition?
-Maybe can you update U-Boot (or rk2aw) to eMMC over USB an empty eMMC?
-
-Thanks.
