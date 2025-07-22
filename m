@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50FEBC83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 11:04:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 244A8C83F25
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 11:04:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AC888384E;
-	Tue, 22 Jul 2025 13:04:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE1918383F;
+	Tue, 22 Jul 2025 13:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ToYGM7Ja";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="d9G+IkoT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1C5A8383F; Tue, 22 Jul 2025 13:04:31 +0200 (CEST)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::60e])
+ id 337628385B; Tue, 22 Jul 2025 13:04:35 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::623])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2259B8383E
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 13:04:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD96983852
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 13:04:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eSIP6I7xCVgMLOXdt+MK/fp5/5Pup2cSRcAVe4OkmGx/3La2L+3tQLfCWMVsRvg/AcqI00DNPbThIEhrU0UT819kuL5eztpyGS/SfLyfC9ZrwGRLUSFIMJOT+2aG3d2vG98xtb/wSgAXynfiBNUBZ3q7+gOiR6QsKNYDOCLE8ZA52SDPeDM36zT9RKx0HCPtza+UzCQUoguVwbwYlvb7de0mAr+5kc64XBRl3z/V8MtS1f+7OQN9//9qHtNbpM3rWpXttD/mtfXt8bJ+qt/kecwTyZUfu7K1szVlheBUX4i0EtV0HoTitgdf5stV3BIFc6pxC8vUZlI4ET+DvQNtgA==
+ b=Vdib7LDejnX0UKvdJwyg4k5Oav71QnoEkuIC1WFfQrkfNaq2A8KdB6NcuCih4JjKPffDXBzEebM/GV1xCCtX/IlGRsgNWHPF+Ht6N7LSESnHujNi/i8FmrSn3OXmHkdjuepTIHwRJzO9v0bmFtSQfIhQF2i5r67czDrHRMHVNbGfiEhnIWm+eHLJdBiVab4gYO9kPzsUz9dR12kYxy4y2PERFckbHxRu/hCsFSqkqZ5dy2cPohu96266Oo4yrN/mfxoXm0UhaAQKRxl36xOyCSuLSHgJ2DOF0CFXqWrMzgbjtPDOwhmTTMLa3Ie+7s+beBx2v2czXdM5Nyrap39Vgw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9gGc8/zbdLxxssxCt1ZeD3ikCCl/qoMBDsSk34HaSd4=;
- b=BRDjgw5GNpfBv05dp7Idv7lUtyavrWTiPWlTqYTupH3jLc+/6JVES2xEP1urKb/9DCnkoP6dInoN8tI1X3/8mdXamhz3TNPyHRR8ETg/KPlr3rUlL7UEaIi0pPCbYFcV0P3+YLLm6z7SXm+hd8oO2EwJY3vg5X6ajEhQqB6XpXC0SsSYE/3sAGCoBPlingv0eceCl77aoMw3ppCy6pzEww8dBmw5RMtAeD/9esfdWO6D6vAjbVex2AS4bVjs466Kpz4vyTKkailxSPWz9n7/kKB0ZiEXlmrmd9htbkZTd4uSwnbAkTOgNy4T9erF7kZAjTdsmn98IIme2rTVXKVxWw==
+ bh=hS23VkNxCeEpWbjpXSaSuJ1uZsfi71yH2BvyOk9TILk=;
+ b=ERnIhICAHRwpAotxjuIPoR466wa2rkohbpqmMpX9vgLazelIhqj7h1NcHpfDEQWjl2368xXeUbJ9i3N82Xhd5x4za+98S0ycNgzyopYaqNRq1uIEVvU28PEDFgOWeYP5AbS2fpuDfcF0ti/oWqF6WXTBSqwUnySj9dwfYK3vjmGx02l6pWP0aM7oXygVlYVm4Pfk5Go0S/Hp5gbGybohl1HW2Zocgnd4HOAMWoWbc6QY46Qec3TawhVnWWmsnWBC+/rRSwn+2gr3QE3TauUjmQ7gKO6VxlPDpnx0DQqOtzqwhsb/VDx0Xn30v68QcOG4fjZTbfBKvKdFSbXSwA+10w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9gGc8/zbdLxxssxCt1ZeD3ikCCl/qoMBDsSk34HaSd4=;
- b=ToYGM7Ja10+E00etbiSQ8iKgwxLU/2rHAgkyr/xk1/UkMRHypsvz1BzJ2YfPts5K9s/z/RRLfBQt0/cpIJSXEpQsYC1S2pKtXl73LTSKh2bwCR6Cpv2k8jh958iAL5S81asYcGfzH20HK/3VDrq/QA2pmae+jeD7p2LgP0xWTyo=
-Received: from CH5PR04CA0017.namprd04.prod.outlook.com (2603:10b6:610:1f4::17)
- by MW4PR12MB7311.namprd12.prod.outlook.com (2603:10b6:303:227::11)
+ bh=hS23VkNxCeEpWbjpXSaSuJ1uZsfi71yH2BvyOk9TILk=;
+ b=d9G+IkoT9fPCqpncB4GjVgI5LR4rXHgjiHCQ0zqxgVH1V5pbjHy3PDI5dgrKG5xvrjyISaLbNCiKuO9/ZRoUiq4GE05UtzHAZ9V11W9G6PbZysYYowetkhXC3FkWP4DDxHsB2j0wlx1kessJ/vqWVc/5lP3BJSODrM6tDYGM7xM=
+Received: from CH5PR04CA0014.namprd04.prod.outlook.com (2603:10b6:610:1f4::26)
+ by BL3PR12MB6522.namprd12.prod.outlook.com (2603:10b6:208:3be::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.30; Tue, 22 Jul
- 2025 11:04:25 +0000
+ 2025 11:04:27 +0000
 Received: from CH3PEPF0000000D.namprd04.prod.outlook.com
- (2603:10b6:610:1f4:cafe::ad) by CH5PR04CA0017.outlook.office365.com
- (2603:10b6:610:1f4::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8964.21 via Frontend Transport; Tue,
- 22 Jul 2025 11:04:25 +0000
+ (2603:10b6:610:1f4:cafe::5a) by CH5PR04CA0014.outlook.office365.com
+ (2603:10b6:610:1f4::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.29 via Frontend Transport; Tue,
+ 22 Jul 2025 11:04:27 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,90 +61,97 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  CH3PEPF0000000D.mail.protection.outlook.com (10.167.244.43) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8964.20 via Frontend Transport; Tue, 22 Jul 2025 11:04:25 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ 15.20.8964.20 via Frontend Transport; Tue, 22 Jul 2025 11:04:26 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
- 2025 06:04:21 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 06:04:25 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
- 2025 06:04:19 -0500
+ 2025 06:04:24 -0500
 Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 22 Jul 2025 06:04:19 -0500
+ Transport; Tue, 22 Jul 2025 06:04:23 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Leo <ycliang@andestech.com>, Padmarao Begari <padmarao.begari@amd.com>,
- Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/4] xilinx: mbv: Fix dt properties in interrupt controller
- node
-Date: Tue, 22 Jul 2025 13:03:45 +0200
-Message-ID: <d68dcc8f041567990a63176242c4acae33b56d4b.1753182218.git.michal.simek@amd.com>
+CC: Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Conor Dooley
+ <conor.dooley@microchip.com>, Eric Schikschneit
+ <eric.schikschneit@novatechautomation.com>, Hal Feng
+ <hal.feng@starfivetech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Junhui
+ Liu <junhui.liu@pigmoral.tech>, Kongyang Liu <seashell11234455@gmail.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>, Padmarao Begari
+ <padmarao.begari@amd.com>, Rick Chen <rick@andestech.com>, Simon Glass
+ <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH 4/4] xilinx: mbv: Use separate DTB for binman nodes
+Date: Tue, 22 Jul 2025 13:03:46 +0200
+Message-ID: <614e624d84b0f83d706b6b9b839da0dbe105a85e.1753182218.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1753182218.git.michal.simek@amd.com>
 References: <cover.1753182218.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1351; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=lNueEP7r25Ft5S/O/njxNSx75oCRxVvRQaJiI7QACh0=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTUF4jp1ZofkpsYOt1p5gvPzY2BiWGreLYEh29sm5H71
- /eHkNCFjlIWBjEOBlkxRZbpTDoOa75dWyq2PDIfZg4rE8gQBi5OAZjIkaeMDOe87vXE+Lx69mzi
- fs5Kj09S5yt0lp++tGmxUfSDxe8s5FoYGV40s+i+rCxLl7kyPS3R50HI3n/sL54tDq15f6hr8b0
- tZ/kA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4261; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=y+jwfSEHsFoCvzee8pJIa7GAItQ7YFaP9bUl+R/zmkw=;
+ b=kA0DAAgWqwf+8E71EfUByyZiAGh/cBbImbHDa13LsJXBaUqXpAgl5/iZc7/CZ3TJdIAZRjq93
+ 4h1BAAWCAAdFiEElwIsQKz21qUWp1lvqwf+8E71EfUFAmh/cBYACgkQqwf+8E71EfVOUwEApoTL
+ o0MuTkkEMJyWiaAePHRQZsuzu8CErvN6rmxQ+csA+wciQEhdlRaEy83fLgNdyCx0HF7Kbvj7WbY
+ 6eJ2UH38K
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000D:EE_|MW4PR12MB7311:EE_
-X-MS-Office365-Filtering-Correlation-Id: e9cf94ae-5908-49b1-2180-08ddc90f8541
+X-MS-TrafficTypeDiagnostic: CH3PEPF0000000D:EE_|BL3PR12MB6522:EE_
+X-MS-Office365-Filtering-Correlation-Id: c47669a0-f2d5-4335-e6a7-08ddc90f863a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?oj/yJk/ImReLe0uTTVXxytDbrJtsn3G9m3+IArkaXFdGt7ghaqaTmXitdovh?=
- =?us-ascii?Q?bOl4PqZvjX1ETnjqJutklTu4IiYTC/Qb8p1Z4RfehkcV6BDB3RoLewshAc6f?=
- =?us-ascii?Q?FNWR3r5/bg0OjufpG51oRJ6j3IWjO8kpfm+rwuDx5xYJTJNllCNQClP7TNqv?=
- =?us-ascii?Q?cXJEDlHJS6POwezJaXaf2kgR9vwYouN7FxLWOfCFtBUYLnsUiIq1rPQD99Tp?=
- =?us-ascii?Q?ABp6hi71kPdL1RmbxkSSCv1wTLjxpx7KbWBtn3i+6QJsZdlLpC/GzIX5KF8D?=
- =?us-ascii?Q?eKcppM9GHwluDNYeDAnQ5BLqGp6lEwYA3W6PojCa4Nb9hmflV5+yGFuae0fW?=
- =?us-ascii?Q?2zPB9DwlB0DrsPNsp11uimt2ubVaZipyL/fWJlsPl0x+mH52iZVBdBnQsEwZ?=
- =?us-ascii?Q?NSLlhPU9j5bNuDS1q0BXq602V6IMN8s/0K9BIXJqpwraNQibUX54MgnMbVWB?=
- =?us-ascii?Q?YU31/+kt4/lwKEcN0VA6ZO8nDd73gvEPF1jJiPEgi9ar6TSvD18QTUFA2E0T?=
- =?us-ascii?Q?Vt79yz9bE4UcaY0qnC7ikvrQBTFn9erlLd8F0hdC60ZcGKR6l/eD5hsxhJd6?=
- =?us-ascii?Q?xKWR5KOeogzJ3YBlsEI+F743NDvRLJv1te5JUy1uqpyauuEKLAmRW+j2P+20?=
- =?us-ascii?Q?0c5SLwonAZqc+A5/h7j1DfwnpW7TVkaXvQi8LCkeeV1gEGQtZ8O0RKmnQTo0?=
- =?us-ascii?Q?0NjZVLnvJfs8DO3jjX0T/JSMnR15p44qO1GzsznBk2Je8OU0lyIsatZKqyb/?=
- =?us-ascii?Q?5CGEC4m3ZmRtSVXIovq79Amrx2SzPFB2rAbk4of70uqztFh6biZuPrnUqYVP?=
- =?us-ascii?Q?OOFuysFgaDlmPBeXpzhgy8zitSAzdmDO7jc9LzyOZmXVALBhN9hPvnKIPrPC?=
- =?us-ascii?Q?kYN4nBakiRVf+IfRDxu/B6Qlzj9Tdn4aIOO1h3QgBBughJ/+FJJlxAxJi32L?=
- =?us-ascii?Q?mWfhS8PzACYdMwjGC5YplqRH0kgKxeMp4Zj3mgqdpObezUCjDiK3Ig4PKQC0?=
- =?us-ascii?Q?SYkQHFQIdX+b0pyqirUk3OitjPPXhox7NkRJ80DWcivVwzgIe10Xa9V1RBYM?=
- =?us-ascii?Q?fZMGA3BrHKsAhmBpO29S8o5COT5hAkSj0l28BBxRu+liv2t4GfSGqMtTxq9G?=
- =?us-ascii?Q?mjTSNxtwyWY46Ycyl5CP04Pn2tCCqBhJLVpg2YviqLvgM4G4aLSrOXGVoAE3?=
- =?us-ascii?Q?h+8zXDJe6pgtQ8dpxL4OS0fKgRClAekaImRgs/MwhAEbGkzq4FCa041MayRm?=
- =?us-ascii?Q?IRGcKeyC9FVah4vy9bKvuSdTlADIDyXpKeft/2Y2ShTZzfdzxvbiPU8ADVDW?=
- =?us-ascii?Q?25KJcgZCNIe/BeETAdUZbtkZZJupwgicqlbLnJklCfnt39aHM//oMFjRUDD4?=
- =?us-ascii?Q?/e2ZqZs2OT1eEtlfbgryQz1N1Ryee7y7SP9WfAB0hKdp+jnl9US0h3RiZcUy?=
- =?us-ascii?Q?D8xKIvgwoElaqAff1mYK+AEKJQuQY3GT4yfAm6btXbdOvm2UqpcoKA5/UDQ+?=
- =?us-ascii?Q?ojUoCnmwwFUso+pPViHim0cf2JIvG8mepJVPOOEwPW+wYyS/ueiqNSfbUA?=
- =?us-ascii?Q?=3D=3D?=
+ ARA:13230040|7416014|376014|82310400026|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZZipfwV6LM6ibVsjzBXa4GwvlA0IMmxHF5MANYhunXLO0G83NCEtLS36x284?=
+ =?us-ascii?Q?HT9eU2vkF6eWpPhketqew9S4HaeDYIG7WXDwex3bYYOWa5F2SqRzbCEOR37m?=
+ =?us-ascii?Q?E+mSgBroPtkp6cJEPj3F86HJCBc8zahFl3r+zDxiWybGu8V6pATizhO8PbIp?=
+ =?us-ascii?Q?eox1RuQuQGkLi8enDonM+2Tsb5YKpV7z+kDkQHD8VzRrwRDDdduvIOnYkiMk?=
+ =?us-ascii?Q?oHX+nEKHDaP82Sl6JYNp0W1mWonCGSSToAdDrT3najefPgkRKiT7mfLe29hi?=
+ =?us-ascii?Q?S89pfagwVceHyBKkrS6QEUZo00d4dXil1BH9289zUbx/trlMiiXuTLJXY2fr?=
+ =?us-ascii?Q?GJ8D9dMFe92OPsjdBM/RqZ7CnJU6lnuRZNVtNTgOdjNqHcbWTdBQ6Ctg1aJ8?=
+ =?us-ascii?Q?KrucK5+rUIXbrTfefEtB7sfslpqnKDXc6zdgDuBwywLhyYI9yXcdrm/rDhG7?=
+ =?us-ascii?Q?ZDz9ZtegorjCTTFZk6SEUkAGvTbdd3+hGCznOvEVZASCSOWVUcpp497dOXFp?=
+ =?us-ascii?Q?yvCs+zj5P8OnoTuVdyfdFVCcU3CWNJ6FoiYgJfIukFf7Tpd0SlxATXJzP41i?=
+ =?us-ascii?Q?2YRzIecBWGWeCkSdNABE/Hn1Bk4a6E9WYF4FEWm4qyS5bWCVwkm81IHhsIwM?=
+ =?us-ascii?Q?/mxPR2bqLLf3ILYjBt09JXI0v2jvlHa5hCzHHcl7aXOBJ8Uu8GCXpxYWoNTz?=
+ =?us-ascii?Q?UDkSmp0vPBPAh3byMHBu7VylPJK0tJ2yZg2kS5VG0RclUX1oaSChH3+1UKfX?=
+ =?us-ascii?Q?LAd33Np3wCkA6eAHetUrD+4Y9vkZ13s1CdOhgr/kS9yH1snTS6MApETN3n13?=
+ =?us-ascii?Q?itRqqOts/Ji7v5o/6MneKGi7G/4vWdgfI9wkPFfCyilR1twDLOdtd+664/R3?=
+ =?us-ascii?Q?wOIw0muTHzzVu0fJVEg97542dCzatg213kMPHNMlGpJevc8aT3T5BmMDNZck?=
+ =?us-ascii?Q?uG5jcUfyF4tdt6AX/Px8dOEGUsTGHYNFvd9B6FL16dYWUEKzy/0sX0ussRAV?=
+ =?us-ascii?Q?FiDaLroLjmYyClEVTTKcTBxLhsoDQqIGAZeXC1HDGkfsW63mC74ZPD5qt6g5?=
+ =?us-ascii?Q?2g6J8E7KHYDyLZ8kRIUHPTd4nRp8I3ZcSARTZgU0IKwN/2W5uKmXVHg+WA89?=
+ =?us-ascii?Q?+SQSaaFuoadoo7Q6KJGmMO/+rC8lRQj06xgCTKZ+BUOVbr/yaPV0BOMeUds1?=
+ =?us-ascii?Q?xtmNgc1ZYtiu27y+HdEwmhUCFvzRHZWskFLx+sPRuN18y7isczN2XpCP7rKe?=
+ =?us-ascii?Q?9CS5elC5GWIJbHjzE2NNqRUUv0LxghEs9OJ3I8VnKe2FcpZNImFMIyxEWJuo?=
+ =?us-ascii?Q?E4m15FGwHaTTtXbr88x9ykd0hVDG+d3SJg0BuQjeDjYgJLbIU5kLmbNpZ/W3?=
+ =?us-ascii?Q?83vGN3ILaN4VRvjgZtihXgIK/Da4aJ/BrX6dVgX8Zh2eJ2AxqknnF1Hijx8w?=
+ =?us-ascii?Q?hIJSl2Opdd5ywKE7bmrYg5LPCFqS2/AoTgwxjgVBP97LCXPyTP/vAMM5n+LK?=
+ =?us-ascii?Q?Xj7XuGWSvb6+F8PPrtY5zh8+1esj1ha5EJV2?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFS:(13230040)(7416014)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2025 11:04:25.3152 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e9cf94ae-5908-49b1-2180-08ddc90f8541
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2025 11:04:26.9661 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c47669a0-f2d5-4335-e6a7-08ddc90f863a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF0000000D.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7311
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6522
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,47 +168,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Properties didn't match dt binding that's why should be fixed.
+The commit d92fdb60677b ("binman: Add option for pointing to separate
+description") added support for separating binman description to own file
+not the be the part of DT for OS.
+The main reason is that binman is not passing dt schema validation that's
+why want to keep it separated.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
-Binding has been sent here:
-https://lore.kernel.org/r/6ddaf6f1e3748cdeda2e2e32ee69343a06c60dcb.1753166980.git.michal.simek@amd.com
-but it is used for more then 15 years unchanged.
----
- arch/riscv/dts/xilinx-mbv32.dts | 3 ++-
- arch/riscv/dts/xilinx-mbv64.dts | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ arch/riscv/dts/Makefile              |  1 +
+ arch/riscv/dts/xilinx-binman.dts     | 12 ++++++++++++
+ arch/riscv/dts/xilinx-mbv32.dts      |  2 --
+ arch/riscv/dts/xilinx-mbv64.dts      |  2 --
+ configs/xilinx_mbv32_defconfig       |  1 +
+ configs/xilinx_mbv32_smode_defconfig |  1 +
+ configs/xilinx_mbv64_defconfig       |  1 +
+ configs/xilinx_mbv64_smode_defconfig |  1 +
+ 8 files changed, 17 insertions(+), 4 deletions(-)
+ create mode 100644 arch/riscv/dts/xilinx-binman.dts
 
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index 2b10c2d6c019..68dfe9ce56d3 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -14,6 +14,7 @@ dtb-$(CONFIG_TARGET_SIPEED_MAIX) += k210-maix-bit.dtb
+ dtb-$(CONFIG_TARGET_TH1520_LPI4A) += th1520-lichee-pi-4a.dtb
+ dtb-$(CONFIG_TARGET_XILINX_MBV) += xilinx-mbv32.dtb
+ dtb-$(CONFIG_TARGET_XILINX_MBV) += xilinx-mbv64.dtb
++dtb-$(CONFIG_TARGET_XILINX_MBV) += xilinx-binman.dtb
+ dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += ast2700-ibex.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+diff --git a/arch/riscv/dts/xilinx-binman.dts b/arch/riscv/dts/xilinx-binman.dts
+new file mode 100644
+index 000000000000..715080ed763c
+--- /dev/null
++++ b/arch/riscv/dts/xilinx-binman.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * binman file for AMD MicroBlaze V
++ *
++ * (C) Copyright 2025, Advanced Micro Devices, Inc.
++ *
++ * Michal Simek <michal.simek@amd.com>
++ */
++
++/dts-v1/;
++
++#include "binman.dtsi"
 diff --git a/arch/riscv/dts/xilinx-mbv32.dts b/arch/riscv/dts/xilinx-mbv32.dts
-index 96e428062442..b426510f3434 100644
+index b426510f3434..f7a3e076fd50 100644
 --- a/arch/riscv/dts/xilinx-mbv32.dts
 +++ b/arch/riscv/dts/xilinx-mbv32.dts
-@@ -71,7 +71,8 @@
- 			interrupt-controller;
- 			interrupt-parent = <&cpu0_intc>;
- 			#interrupt-cells = <2>;
--			kind-of-intr = <0>;
-+			xlnx,num-intr-inputs = <2>;
-+			xlnx,kind-of-intr = <0>;
- 		};
+@@ -9,8 +9,6 @@
  
- 		xlnx_timer0: timer@41c00000 {
+ /dts-v1/;
+ 
+-#include "binman.dtsi"
+-
+ / {
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
 diff --git a/arch/riscv/dts/xilinx-mbv64.dts b/arch/riscv/dts/xilinx-mbv64.dts
-index 5a989c1697e4..3762def29f9a 100644
+index 3762def29f9a..e6235ed2f525 100644
 --- a/arch/riscv/dts/xilinx-mbv64.dts
 +++ b/arch/riscv/dts/xilinx-mbv64.dts
-@@ -71,7 +71,8 @@
- 			interrupt-controller;
- 			interrupt-parent = <&cpu0_intc>;
- 			#interrupt-cells = <2>;
--			kind-of-intr = <0>;
-+			xlnx,num-intr-inputs = <2>;
-+			xlnx,kind-of-intr = <0>;
- 		};
+@@ -9,8 +9,6 @@
  
- 		xlnx_timer0: timer@41c00000 {
+ /dts-v1/;
+ 
+-#include "binman.dtsi"
+-
+ / {
+ 	#address-cells = <2>;
+ 	#size-cells = <2>;
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+index 7dde2fc0a8f1..d2483b5089ce 100644
+--- a/configs/xilinx_mbv32_defconfig
++++ b/configs/xilinx_mbv32_defconfig
+@@ -39,5 +39,6 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_XILINX_UARTLITE=y
+ CONFIG_XILINX_TIMER=y
+ # CONFIG_BINMAN_FDT is not set
++CONFIG_BINMAN_DTB="./arch/riscv/dts/xilinx-binman.dtb"
+ CONFIG_PANIC_HANG=y
+ CONFIG_SPL_GZIP=y
+diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
+index b96b02c6125e..930a1e9f83b9 100644
+--- a/configs/xilinx_mbv32_smode_defconfig
++++ b/configs/xilinx_mbv32_smode_defconfig
+@@ -43,5 +43,6 @@ CONFIG_XILINX_UARTLITE=y
+ # CONFIG_RISCV_TIMER is not set
+ CONFIG_XILINX_TIMER=y
+ # CONFIG_BINMAN_FDT is not set
++CONFIG_BINMAN_DTB="./arch/riscv/dts/xilinx-binman.dtb"
+ CONFIG_PANIC_HANG=y
+ CONFIG_SPL_GZIP=y
+diff --git a/configs/xilinx_mbv64_defconfig b/configs/xilinx_mbv64_defconfig
+index 77fcf4d68651..c0f748c72c6a 100644
+--- a/configs/xilinx_mbv64_defconfig
++++ b/configs/xilinx_mbv64_defconfig
+@@ -40,5 +40,6 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_XILINX_UARTLITE=y
+ CONFIG_XILINX_TIMER=y
+ # CONFIG_BINMAN_FDT is not set
++CONFIG_BINMAN_DTB="./arch/riscv/dts/xilinx-binman.dtb"
+ CONFIG_PANIC_HANG=y
+ CONFIG_SPL_GZIP=y
+diff --git a/configs/xilinx_mbv64_smode_defconfig b/configs/xilinx_mbv64_smode_defconfig
+index e53c0771baf6..9817acac9dad 100644
+--- a/configs/xilinx_mbv64_smode_defconfig
++++ b/configs/xilinx_mbv64_smode_defconfig
+@@ -44,5 +44,6 @@ CONFIG_XILINX_UARTLITE=y
+ # CONFIG_RISCV_TIMER is not set
+ CONFIG_XILINX_TIMER=y
+ # CONFIG_BINMAN_FDT is not set
++CONFIG_BINMAN_DTB="./arch/riscv/dts/xilinx-binman.dtb"
+ CONFIG_PANIC_HANG=y
+ CONFIG_SPL_GZIP=y
 -- 
 2.43.0
 
