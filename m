@@ -4,65 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BCCC83F25
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 10:14:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11D06C83F25
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 10:30:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC2FB832C8;
-	Tue, 22 Jul 2025 12:14:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B8DB83346;
+	Tue, 22 Jul 2025 12:30:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="QpywCgng";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1067B83346; Tue, 22 Jul 2025 12:09:43 +0200 (CEST)
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [217.70.183.196])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2F6982C65
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:09:39 +0200 (CEST)
+ id 21B0E837B9; Tue, 22 Jul 2025 12:30:49 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 90D4683253
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:30:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 6EE334336F;
- Tue, 22 Jul 2025 10:09:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1753178979;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kNFHPacyPFXb/Oc8AU5d3QxKLgr4pXqeub209XlWKzU=;
- b=QpywCgng/AvZ9YWYh85k0rLylpJuxs7qlxVXjcd2jC4i3ThFN4bLtHQtqEYY0bVnPL9m3A
- oNzz3XoNu1Lu9QQrUFnWgzx+t5AADpQiR38qtlIsbC0pltWT4SHcfxC/7qseyMSykUCw+j
- 5ScU5+yxANHMyE/JLpdx+XZLZ/lMdfAxeSgSu8qELhYasXM/UuuU1Tlm6kG8vBcOEt+xUP
- YnMP/T2AMJvd37HBO7BjhZ8ok2baEDKUHi8JH1ecTyn7oeNEUo2cVKx/n3q0FuYlWWz+jm
- wJyx2rVMBicCOgKgkVQBTgNRM7+v4i5pFntV3npxhvaUszYmyRm/lCzqyMcciQ==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Frieder Schrempf <frieder@fris.de>
-Cc: u-boot@lists.denx.de,  Jaehoon Chung <jh80.chung@samsung.com>,  Patrick
- Wildt <patrick@blueri.se>,  Tom Rini <trini@konsulko.com>,  Frieder
- Schrempf <frieder.schrempf@kontron.de>,  Fabio Estevam
- <festevam@gmail.com>,  Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH] imx: power-domain: Fix crash due to uninitialized 'id'
- field
-In-Reply-To: <20250722083119.64084-1-frieder@fris.de> (Frieder Schrempf's
- message of "Tue, 22 Jul 2025 10:31:18 +0200")
-References: <20250722083119.64084-1-frieder@fris.de>
-User-Agent: mu4e 1.12.7; emacs 30.1
-Date: Tue, 22 Jul 2025 12:09:38 +0200
-Message-ID: <878qkgcza5.fsf@bootlin.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5A3BD152B;
+ Tue, 22 Jul 2025 03:30:40 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9256B3F59E;
+ Tue, 22 Jul 2025 03:30:44 -0700 (PDT)
+Date: Tue, 22 Jul 2025 11:30:36 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Yixun Lan <dlan@gentoo.org>
+Cc: <u-boot@lists.denx.de>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>, Paul Kocialkowski
+ <paulk@sys-base.io>, <linux-sunxi@lists.linux.dev>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH v2 20/20] sunxi: A523: add defconfigs for three boards
+Message-ID: <20250722113036.790447c0@donnerap.manchester.arm.com>
+In-Reply-To: <20250722024932-GYA724801@gentoo>
+References: <20250717235455.32528-1-andre.przywara@arm.com>
+ <20250717235455.32528-21-andre.przywara@arm.com>
+ <20250722013526.6297858c@minigeek.lan>
+ <20250722024932-GYA724801@gentoo>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdejgeeivdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefujghffgffkfggtgfgsehtqhertddtreejnecuhfhrohhmpefoihhquhgvlhcutfgrhihnrghluceomhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepffeghfejtdefieeguddukedujeektdeihfelleeuieeuveehkedvleduheeivdefnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepkedprhgtphhtthhopehfrhhivgguvghrsehfrhhishdruggvpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtohepjhhhkedtrdgthhhunhhgsehsrghmshhunhhgrdgtohhmpdhrtghpthhtohepphgrthhrihgtkhessghluhgvrhhirdhsvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehfrhhivgguvghrrdhstghhr
- hgvmhhpfheskhhonhhtrhhonhdruggvpdhrtghpthhtohepfhgvshhtvghvrghmsehgmhgrihhlrdgtohhmpdhrtghpthhtohepthhhrghrvhgvhiesghgrthgvfihorhhkshdrtghomh
-X-GND-Sasl: miquel.raynal@bootlin.com
-X-Mailman-Approved-At: Tue, 22 Jul 2025 12:14:18 +0200
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,58 +62,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frieder,
+On Tue, 22 Jul 2025 10:49:32 +0800
+Yixun Lan <dlan@gentoo.org> wrote:
 
-On 22/07/2025 at 10:31:18 +02, Frieder Schrempf <frieder@fris.de> wrote:
+Hi!
 
-> From: Frieder Schrempf <frieder.schrempf@kontron.de>
+> On 01:35 Tue 22 Jul     , Andre Przywara wrote:
+> > On Fri, 18 Jul 2025 00:54:55 +0100
+> > Andre Przywara <andre.przywara@arm.com> wrote:
+> > 
+> > Hi Yixun,
+> > 
+> > see below for a comment on the missing eMMC support for the Radxa
+> > defconfig. My board doesn't have eMMC, so can you please check this on
+> > your end?
+> >   
+> sure
 >
-> In case of the i.MX8M power-domains (i.MX8MQ, MM, MN) there is only
-> one power-domain for each device. Therefore the 'id' field in struct
-> power_domain should always be zero.
->
-> Currently if a power-domain is accessed after the initial bind, the
-> 'id' field is left uninitialized. This didn't cause any problems
-> until the following commits were introduced:
->
-> 9086b64ca071 ("power-domain: Add support for refcounting (again)")
-> a785ef24487b ("imx: power-domain: Enable refcounting on imx8mp")
->
-> Now the 'id' field gets accessed in the power_domain_off() sequence
-> and the invalid value causes "Synchronous Abort" failures.
->
-> This was observed on a i.MX8MM board when running "usb start" and
-> then "usb stop".
->
-> Fix this issue by setting power_domain->id to '0' in
-> imx8m_power_domain_of_xlate().
->
-> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> Fixes: d08a194871fd ("imx: add support for i.MX8MQ power domain controlle=
-r")
-> Fixes: 9086b64ca071 ("power-domain: Add support for refcounting (again)")
-> ---
->  drivers/power/domain/imx8m-power-domain.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/do=
-main/imx8m-power-domain.c
-> index b44aae78e6d..a7e64971a2a 100644
-> --- a/drivers/power/domain/imx8m-power-domain.c
-> +++ b/drivers/power/domain/imx8m-power-domain.c
-> @@ -468,6 +468,8 @@ out_clk_disable:
->  static int imx8m_power_domain_of_xlate(struct power_domain *power_domain,
->  				      struct ofnode_phandle_args *args)
->  {
-> +	power_domain->id =3D 0;
-> +
->  	return 0;
->  }
+> > > So far developers seem to use three popular boards:
+> > > - Avaota A1: dev board with USB 3.0, dual Ethernet, small display
+> > > - X96QPro+: TV box with Gigabit Ethernet, USB 3.0, eMMC
+> > > - Radxa A5E: small dev board with USB3/M.2 2230 (muxed), dual Ethernet
+> > > 
+> > > Add the defconfig files for those boards, containing the DRAM parameters
+> > > and the usual Kconfig options.
+> > > 
+> > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > > ---
+> > >  board/sunxi/MAINTAINERS         | 15 +++++++++++++++
+> > >  configs/avaota-a1_defconfig     | 31 +++++++++++++++++++++++++++++++
+> > >  configs/radxa-a5e_defconfig     | 30 ++++++++++++++++++++++++++++++
+> > >  configs/x96q_pro_plus_defconfig | 32 ++++++++++++++++++++++++++++++++
+> > >  4 files changed, 108 insertions(+)
+> > >  create mode 100644 configs/avaota-a1_defconfig
+> > >  create mode 100644 configs/radxa-a5e_defconfig
+> > >  create mode 100644 configs/x96q_pro_plus_defconfig
+> > >   
+> ...
+> > > diff --git a/configs/radxa-a5e_defconfig b/configs/radxa-a5e_defconfig
+> > > new file mode 100644
+> > > index 00000000000..012e7b4eeaf
+> > > --- /dev/null
+> > > +++ b/configs/radxa-a5e_defconfig
+> > > @@ -0,0 +1,30 @@
+> > > +CONFIG_ARM=y
+> > > +CONFIG_ARCH_SUNXI=y
+> > > +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun55i-a527-cubie-a5e"
+> > > +CONFIG_SPL=y
+> > > +CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
+> > > +CONFIG_DRAM_SUNXI_DX_DRI=0x0d0d0d0d
+> > > +CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
+> > > +CONFIG_DRAM_SUNXI_ODT_EN=0x84848484
+> > > +CONFIG_DRAM_SUNXI_TPR0=0x80808080
+> > > +CONFIG_DRAM_SUNXI_TPR1=0x06060606
+> > > +CONFIG_DRAM_SUNXI_TPR6=0x38000000
+> > > +CONFIG_DRAM_SUNXI_TPR10=0x802f3333
+> > > +CONFIG_DRAM_SUNXI_TPR11=0xc7c5c4c2
+> > > +CONFIG_DRAM_SUNXI_TPR12=0x3533302f
+> > > +# BSP value: CONFIG_DRAM_SUNXI_TPR11=0xc6c4c2c0
+> > > +# BSP value: CONFIG_DRAM_SUNXI_TPR12=0x3a373233
+> > > +CONFIG_MACH_SUN55I_A523=y
+> > > +CONFIG_R_I2C_ENABLE=y
+> > > +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> > > +CONFIG_SPL_I2C=y
+> > > +CONFIG_SPL_SYS_I2C_LEGACY=y
+> > > +CONFIG_SYS_I2C_MVTWSI=y
+> > > +CONFIG_SYS_I2C_SLAVE=0x7f
+> > > +CONFIG_SYS_I2C_SPEED=400000
+> > > +CONFIG_REGULATOR_AXP=y
+> > > +CONFIG_AXP717_POWER=y
+> > > +CONFIG_AXP_DCDC2_VOLT=920
+> > > +CONFIG_AXP_DCDC3_VOLT=1100
+> > > +CONFIG_USB_EHCI_HCD=y
+> > > +CONFIG_USB_OHCI_HCD=y  
+> > 
+> > This is missing CONFIG_MMC_SUNXI_SLOT_EXTRA=2 and
+> > CONFIG_SUPPORT_EMMC_BOOT=y, as there are Radxa boards with eMMC.  
+> confirmed, the two configs are exactly what I've added to make eMMC work
 
-Looks like a correct fix. I wonder how many drivers do not properly set
-an id though. Thanks a lot!
+Many thanks for testing!
 
-Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> > The DT describes this, so we should follow suit here, to allow eMMC
+> > booting. Should not harm boards without the eMMC chip.
+> >   
+> agree!
+> 
+> I'd assume you would take care of the config? and send out an updated
+> version next time?
 
-Thanks,
-Miqu=C3=A8l
+Yes, I will now include those two lines in the version I will merge.
+
+Cheers,
+Andre
