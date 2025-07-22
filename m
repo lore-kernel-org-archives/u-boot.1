@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FC1CC83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 15:36:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BF63C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 15:36:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6455C833DB;
+	by phobos.denx.de (Postfix) with ESMTP id AEE56838A5;
 	Tue, 22 Jul 2025 17:35:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dhE7Eflz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q/ZltqPQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 033308388C; Tue, 22 Jul 2025 17:35:16 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id E07FC8359F; Tue, 22 Jul 2025 17:35:16 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9088A8386D
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 17:35:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE5B9833DB
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 17:35:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3a6d77b43c9so4325273f8f.3
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 08:35:13 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3b5e6bfb427so3063994f8f.2
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 08:35:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753198513; x=1753803313; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753198514; x=1753803314; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=7/AGizxKX0ec1VlXlYDK0SqZKuODc/qqOoyycxQbwqI=;
- b=dhE7Eflztz+EWN9lke+N56FTLu7r9Xl31SVge3STbK82HHt1POuWU3nH2h6UoC6jjL
- wNcoWnsPtkdiUngtvqUz7yxGqrDPRg3Ed9iCBeVKdIvj+IxCErZ4aa6A+0h0l4TCpBCo
- Jfd9bYVi2CuD2hfwLHg4Ib4vSAcmwK9bwYHBK3HGyPtxLKfgo7DPDQjaB9h3bIu3mCst
- zxima09XuhTrrr0x0KLlUQi4AOorPPqVv+WtMEej4W6zGXxVhNpO9DGnBsB8JxFJDfHB
- 5dLXnlPJUDrTZx2ZLBr8HMALVutTSm5r6XcLmn8GFP4Hp1VX5B79po8XBmBIQD3+ieQe
- W6Gg==
+ :reply-to; bh=p/2XzchXvZNmpkro8kvXmizSps/fF7mffp2BWQGMFzc=;
+ b=q/ZltqPQJPMgH7Qd3lM5m7MuKXVlRO2DIS9GjEzKjoZ9+4oh4j7wh/s4RpaUmhSJGM
+ tjYE1Pu3lw6fp7384OIl9N2f7v0ybaeHK8xvOwlMktlfScSLQ/HK6Ts7fx7H3wjCNSy8
+ oJjRMMO8pfEHozuQ91YnkTRL71cFu22VhfQ0zvxVJB1DDGQXNYxyNomFjc5BA2ReMgAY
+ 0OddLhpjqLCWfYfnpl5q3BvdiEzszSIaGWHPyg7/EwHrGd6RfON5F3IM1zqtyvgvShX/
+ KM7uIsc+xxta+rw9PXXVZ0IanvB9lsuhRNeLCVZyFcOpmJH2JnECxT6bO+s1WyFo6v7z
+ F6fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753198513; x=1753803313;
+ d=1e100.net; s=20230601; t=1753198514; x=1753803314;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7/AGizxKX0ec1VlXlYDK0SqZKuODc/qqOoyycxQbwqI=;
- b=LhMSh2evu4O0VPT0FbfxlZKYBEfvJM0umbFl3Um+N1fIKzHcs+K5A1Wsr1IB4RSdOg
- Vm6wT9JO886KsxGvHuELLU6hpqtyPNA1Ek47G3P0FupCCx9Wru4SlEDLNYjR7gEZXF4X
- M9FgANAJClR3EP9L/IjzduRxqfsHpvHzp8pEqLpPa0q/Rg5AaUFGpGeYMrMTeKewf8Tt
- AMgu8o/rORo7ANxJg3q4lF0DHCdnXkaK3quH2Dx/AYWYR6cDbKN2m1vaJ7ckVM5Rd4wL
- dsZGg4Gh+eNzw0CvY7uHtToVT8BKMjuGU43u/sh0ulsBsyiggvIAlT9vaduO/gJ5uACV
- QqfA==
-X-Gm-Message-State: AOJu0YxsmJhvADzTHJHQNMq1OcKqLlBcwv0HNDz9Qy6P22JRTEQqLt1z
- CkP1ENgws0LiiuBDHu6Fh/Ze8AmVhK8ZHdhi0zBiOVPEHR119g9pGlShXx/hEm4lkPA=
-X-Gm-Gg: ASbGnctVydjJqx4yCuM2VMoSFN8vHjvavwEsy8UnPREPJAzaYiSqhrvsmZFzIuUSMKo
- gc2PNUyufJzjFiS8jxTZjFfj6wDXTzwS8taYCmpEumUr3u9pdX6UILkZSYFSOYbd+A8fXE2MkOI
- 2wBVzLSw0f46RrMB8h6wGH9kL5CAw2KOGMhYXgnSonzxRRUBGvu6otPo7HW8KwH11301ZXZ/EFl
- pliUlOUGXAYjrp15K/FTQWmOTCfSNg6rGAlkyn6k+A10ggXxebMGlL9k7v1+o02NRvMBWck1Z00
- Zk36heO/1UOxl8blZmbdzj/ZaqFIFsGJdMdMA6aTYMv0qbujPAZSmW9TrMuU3rgeHjBgNVbdMuo
- khLuf/qYmyb5VT+zG28yymtKUT142zcMwq3cmygl2rAOLY7SGOinfYgN2w+rr2Cjcww==
-X-Google-Smtp-Source: AGHT+IGEu7lv0G1D+p0yaGKpVzKqIwl21YhKzQ8XpUkC4QSguui2e/YqKYCBoR4ZHcCoy+gZ80zewA==
-X-Received: by 2002:a05:6000:2084:b0:3b2:e07f:757 with SMTP id
- ffacd0b85a97d-3b60e4be9a5mr20223056f8f.1.1753198512866; 
- Tue, 22 Jul 2025 08:35:12 -0700 (PDT)
+ bh=p/2XzchXvZNmpkro8kvXmizSps/fF7mffp2BWQGMFzc=;
+ b=a1Eh1c8oHq6eZYju9KThf/Gce0m+nAuWNJbuvTdjykeZS3TMBoZ4GE7kLma8c2Ba/x
+ 0mOxOjuHk7iE0LFYGs+Fb8iuTLp3un/572Ucke2BJjBfoDDENXLCorhDxsiWRXLRZURu
+ LCuPZFOCLp8u0bYVccIXTwy9vr4YT3bpSIlvFRoWizckt+1HmNzLFTU6h5/hY1IN/lxq
+ KycAlK0Zn0Cr+CiOZP2EKGvdGQPnPKgVxJGlMCT2CPk1mjoftfQKhZPL/sxOtn9OgxVs
+ aWuyplMUmJXuuScIt7sJHiGhg7X9XE5hl35uwSj6QSKfHWOMMCxKHL0s/Pr88m6AzDBX
+ fk7w==
+X-Gm-Message-State: AOJu0YzPQMGqfdPBYvgm0qxCPzFVZl/t1hWtveKmm2jG2ETUDA7j2DNa
+ 7nJAmEI8lvti2rh2m7zOGYznHf76pUXJeCy2eKPqpb+X/V/3gictjkvSP7XoiGY1dLc=
+X-Gm-Gg: ASbGncvvK12KMhYWcniG0M8ulThqsWCYm9tFj7JNUUjgEPCQ536O3WaOEtnuF2j2MQq
+ 1bk5TCiEWPfKZQvZJRJZIqjKJ3eWg3w/ON1xxnZtUXSCQ2O4PDvcSpnN3ujvgwWaOW8Qc8tEuFK
+ ES3AjXHpAL/yWXwtsAAkQlaBdWY/1XwjMA5MZq2iXkvgCQ8LeITxejraZ+RycC05X0qU2MlQIGZ
+ 6QDHJKneMZoWL/wjecyX+oAx4Yv4IH93WKSSGphzoikJqYzPYt5sWJCKWmwXcTW4905Ak+9meSJ
+ pjI250i61FngINGamWjPne1zpB02bWxJrIPjWHEtN7ljt7KuUcG58sqwwPxMJHsgUQNI6hBLGbo
+ bIHITFq2ZhVFY1HMwiKsoovJ1d5nh5qZJ3hzCh7r8npq4m55TAU6WEi9X8cLyy74t/HY+J2onM8
+ QA
+X-Google-Smtp-Source: AGHT+IFEOKLEQW0ROBlf3PcQoMcG4qKK4UlYFCTOh2zAjrrdZpscE94MH28SwtE9Mgj/WVsFaGYWRg==
+X-Received: by 2002:a05:6000:5c7:b0:3a5:7944:c9b with SMTP id
+ ffacd0b85a97d-3b61b0f0b18mr13224532f8f.16.1753198514304; 
+ Tue, 22 Jul 2025 08:35:14 -0700 (PDT)
 Received: from lion.localdomain (p549d4bd0.dip0.t-ipconnect.de.
  [84.157.75.208]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4562e886286sm198716285e9.26.2025.07.22.08.35.11
+ 5b1f17b1804b1-4562e886286sm198716285e9.26.2025.07.22.08.35.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 08:35:12 -0700 (PDT)
+ Tue, 22 Jul 2025 08:35:13 -0700 (PDT)
 From: Casey Connolly <caleb.connolly@linaro.org>
-Date: Tue, 22 Jul 2025 17:34:55 +0200
-Subject: [PATCH v5 5/8] binman: add support for building Qualcomm signed
- MBN ELF images
+Date: Tue, 22 Jul 2025 17:34:56 +0200
+Subject: [PATCH v5 6/8] configs: qualcomm: use fragments for debug UART
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250722-b4-qcom-tooling-improvements-v5-5-df143f1247fc@linaro.org>
+Message-Id: <20250722-b4-qcom-tooling-improvements-v5-6-df143f1247fc@linaro.org>
 References: <20250722-b4-qcom-tooling-improvements-v5-0-df143f1247fc@linaro.org>
 In-Reply-To: <20250722-b4-qcom-tooling-improvements-v5-0-df143f1247fc@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -88,13 +88,13 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3364;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2434;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=XmkAWcRbUhEPPz4ZKBLh2YXGvLjiQm2W8G645GM5bTk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoz69Ssao18ty2+d5SXokW3WkfIhg1svpcBh6/1/q2Yzt
- 27x2bm8o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyE+Twjw+ZUvvT+6RW/e/7z
- KVw542xmoS7cNmGd46qZfcHSx9dpT2NkaFy3aCpD48Y9Z4Vsl857WH/3S2fUwxV3o1i2TQzepWZ
- w+jsA
+ bh=JpUkLI9LMV7S7obvX76v6VTIfRnan1BIe3Wa9HP6qXY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoz69Svu/TtZF+x79kpVepvI3lKdow0hRZzhX59OF/qYZ
+ hpVJKLWUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACbS946Rof1A/u4H3S4nK/cW
+ 6gmmL5rC+N2SPa83tVBcTfjX+9T3NQz/E1cdy2HW335qUvmDKe2+m066yF86u5ozVZGLad/fT5s
+ 37gMA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,109 +115,81 @@ X-Virus-Status: Clean
 
 From: Casey Connolly <casey.connolly@linaro.org>
 
-Implement support for building u-boot.mbn files using the new mkmbn
-tool.
+The QCM6490 and QCS9100 targets always enable debug UART, but this is
+not really optimal for typical users.
+
+Move these debug UART options to config fragments so that they aren't
+enabled by default.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- tools/binman/btool/mkmbn.py      | 29 ++++++++++++++++++++++
- tools/binman/etype/u_boot_mbn.py | 53 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 82 insertions(+)
+ board/qualcomm/debug-qcm6490.config | 5 +++++
+ board/qualcomm/debug-qcs9100.config | 5 +++++
+ configs/qcm6490_defconfig           | 6 ------
+ configs/qcs9100_defconfig           | 6 ------
+ 4 files changed, 10 insertions(+), 12 deletions(-)
 
-diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
+diff --git a/board/qualcomm/debug-qcm6490.config b/board/qualcomm/debug-qcm6490.config
 new file mode 100644
-index 000000000000..232e2b442a16
+index 000000000000..9ea54758794e
 --- /dev/null
-+++ b/tools/binman/btool/mkmbn.py
-@@ -0,0 +1,29 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2025, Linaro Ltd.
-+#
-+"""Bintool implementation for mkmbn"""
-+
-+from binman import bintool
-+from u_boot_pylib.command import CommandResult
-+
-+class Bintoolmkmbn(bintool.Bintool):
-+    """Qualcomm MBN generator for U-Boot
-+    """
-+    def __init__(self, name):
-+        super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
-+
-+    # pylint: disable=R0913
-+    def run(self, infile: str) -> CommandResult:
-+        """Run mkmbn.py
-+        """
-+        args = [infile]
-+        return self.run_cmd_result(*args, raise_on_error=False)
-+
-+
-+    def get_path(self):
-+        path = super().get_path()
-+        return path
-+
-+
-+    def fetch(self, _method):
-+        return True
-diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
++++ b/board/qualcomm/debug-qcm6490.config
+@@ -0,0 +1,5 @@
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0x994000
++CONFIG_DEBUG_UART_MSM_GENI=y
++CONFIG_DEBUG_UART_CLOCK=14745600
+diff --git a/board/qualcomm/debug-qcs9100.config b/board/qualcomm/debug-qcs9100.config
 new file mode 100644
-index 000000000000..e470b31fa318
+index 000000000000..8ca042b440d1
 --- /dev/null
-+++ b/tools/binman/etype/u_boot_mbn.py
-@@ -0,0 +1,53 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (c) 2025 Linaro Ltd
-+# Authored by Casey Connolly <casey.connolly@linaro.org>
-+#
-+# Entry-type module for 'u-boot.mbn'
-+#
-+
-+from binman.entry import Entry
-+from binman.etype.blob import Entry_blob
-+from u_boot_pylib import tout
-+from u_boot_pylib import tools
-+from binman.btool.mkmbn import Bintoolmkmbn
-+
-+"""
-+Casey TODO:
-+
-+* move qcom-binman.dts back to arch/arm/dts and figure out how to make it build...
-+* set CONFIG_BINMAN_DTB in qcom_defconfig
-+* update docs
-+
-+"""
-+
-+class Entry_u_boot_mbn(Entry_blob):
-+    """U-Boot Qualcomm signed MBN ELF image
-+
-+    This is an ELF file with custom program headers containing Qualcomm
-+    specific hashes, signatures and other metadata. It contains the
-+    u-boot.bin image.
-+    """
-+    mkmbn: Bintoolmkmbn
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+
-+    def ObtainContents(self):
-+        self._pathname = tools.get_input_filename('u-boot.bin')
-+        res = self.mkmbn.run(self._pathname)
-+        if res is None:
-+            self.Raise('mkmbn not found or failed!')
-+        # Exit code 61 (ENODATA) indicates that an MBN file can't be built
-+        # for this board. This is non-fatal since it may not be required.
-+        # however we print the stderr which indicates how to add MBN support
-+        # if it is actually needed for this platform.
-+        if res.return_code == 61:
-+            print(res.stderr, end='')
-+        elif res.return_code != 0:
-+            self.Raise(f"mkmbn failed: \n========\n{res.stderr}=======")
-+        return self.ReadBlobContents()
-+
-+    def GetDefaultFilename(self):
-+        return 'u-boot.mbn'
-+
-+    def AddBintools(self, btools):
-+        self.mkmbn = self.AddBintool(btools, 'mkmbn')
++++ b/board/qualcomm/debug-qcs9100.config
+@@ -0,0 +1,5 @@
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0xA8C000
++CONFIG_DEBUG_UART_MSM_GENI=y
++CONFIG_DEBUG_UART_CLOCK=14745600
+diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
+index 5ddc5ab3ef8c..54eb5dedaecb 100644
+--- a/configs/qcm6490_defconfig
++++ b/configs/qcm6490_defconfig
+@@ -7,14 +7,8 @@
+ 
+ # Otherwise buildman thinks this isn't an ARM platform
+ CONFIG_ARM=y
+ 
+-CONFIG_DEBUG_UART=y
+-CONFIG_DEBUG_UART_ANNOUNCE=y
+-CONFIG_DEBUG_UART_BASE=0x994000
+-CONFIG_DEBUG_UART_MSM_GENI=y
+-CONFIG_DEBUG_UART_CLOCK=14745600
+-
+ # Address where U-Boot will be loaded
+ CONFIG_TEXT_BASE=0x9fc00000
+ CONFIG_REMAKE_ELF=y
+ 
+diff --git a/configs/qcs9100_defconfig b/configs/qcs9100_defconfig
+index cd48973599b5..216dfa3211ec 100644
+--- a/configs/qcs9100_defconfig
++++ b/configs/qcs9100_defconfig
+@@ -4,14 +4,8 @@
+ # a dedicated "uefi" partition for edk2/U-Boot)
+ 
+ #include "qcom_defconfig"
+ 
+-CONFIG_DEBUG_UART=y
+-CONFIG_DEBUG_UART_ANNOUNCE=y
+-CONFIG_DEBUG_UART_BASE=0xA8C000
+-CONFIG_DEBUG_UART_MSM_GENI=y
+-CONFIG_DEBUG_UART_CLOCK=14745600
+-
+ # Address where U-Boot will be loaded
+ CONFIG_TEXT_BASE=0xaf000000
+ CONFIG_REMAKE_ELF=y
+ CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs9100-ride-r3"
 
 -- 
 2.50.1
