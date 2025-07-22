@@ -4,94 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF63FC83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 14:10:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9DFC83F1A
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 14:30:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FC5E83339;
-	Tue, 22 Jul 2025 16:10:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 50669833E1;
+	Tue, 22 Jul 2025 16:30:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qL6OMI3N";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="d4BeqOM0";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="R68I0yuB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0F8283898; Tue, 22 Jul 2025 16:10:12 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E5664833E8; Tue, 22 Jul 2025 16:30:50 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D008805D7
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 16:10:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D61683323
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 16:30:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a51481a598so2964245f8f.3
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 07:10:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753193410; x=1753798210; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZbFOERsMUe6aQ6iefaYs6nYAF5FfSpfpC2cARj0+3e4=;
- b=qL6OMI3NpM5m+8CMrkfYreWTQ3BPM3vE1QNC1vzgPVpRPWL1xc5vsZOq2vmnhRzbIi
- XO8zZVfyfI3KJMsO0VfvqtBiDTvhDCI9CyEYSC2IzyzbFGL+t1uF9tPk0EtBRm2D4yBN
- zbY9zLXO2WLn9NgqoVSSR3zMc3wxg0LsGjtVu9oLiZcqNgBexU4hcN1nb/Uxbtx93rlh
- LBt1NmiDPQJdznFXwxN6xugy8JK0j5UVZs5gSPGzRBUR2642qqlwu9hzo4FnJtTGfi5f
- p8KXs97GsPBlG9wjzLWhR2eO0gSeQB7A9UaJkZLUS0dHjHusFFu/c4TXt5o6tZXv4+g2
- Ma8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753193410; x=1753798210;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZbFOERsMUe6aQ6iefaYs6nYAF5FfSpfpC2cARj0+3e4=;
- b=srDQ4TGUKxj3EHQDjtCNNbxuDJF2ifIeLiY8VKlzQ9PuJIxRewe+dlCk+Vph9cLLlR
- uPeHeKS+LHmKdMhMcnOtQl4jnrOOkEYY3vB7J14N1xSE9epUDPwX1UhbHwk6qSqx+Uv/
- SmN+kaH/xoqhiKGZU9oayEQbGNHpwgJH67EgDsH7TnKvaIoxsHs0DrN/ARaC2BuQ+cfe
- yef/ByjHFmC4JkIefPaXjWlgg8VIWn39dKrXEefiouIbWpjQUfAOkyJyaNDpScx3iBuX
- ko/X5UUpI8ogcjNRiNfWelSETkJ16Q5kzMf82xKurWQNiQHWO1G4em1/kATgJzgmRNxo
- v1QA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJG1o5/tNArP9QmIn+H5ZjYp/M9+0o7Cq5TfKIZuH9GoT7P8EsFz3Dp/L+YMHPrB/qPdlDU28=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyae+ObNzS2Xe4+HdrDI5GHO50Pi7HUwHsl8feoRfFKCJKitidr
- Yx7ooItYAmjSxSpZ/hQA6e9WNQj+fU4NIxDr3B+vXcIkOzOGJJ+W2tEdOm2mfZD/yZ4=
-X-Gm-Gg: ASbGnctjAdB+7eM6ChNR8CJ8v5p4AJ/kAQJVUqSd2NvoaZsdHfE9ioAvb3Kwut06ocj
- hUepUfKHPMTGSDqxaGWkI0ePMcmWsAPxme8jv9LkxVE/XGAl1+HNX66H3cMDEndGKz95rd+3K+/
- cKu2Iah55GHwTin8SyD9Dxn0vmQ773gdXvTbaxmpOsVO31bX4MyNfizN7ay67XpONCJqkzBBKzg
- 5sCX4zRbLL4UDXDmKmBJpwtUeWTpTiXO5OpjcZJo9LYE4cAEtPwVrPRu99rH88bp70S1C6LhkRr
- abhAGDooXiG5Xbvfp3PEFlR+BMIysIP1JHCQsYw9wQYVxb6LGcExWP5EX4Wm4asIvZ8nrFUZH36
- K8ikalxt/c8c58+hqVapbZQESuB+cb/prUOQB0xqdgn2+yUTLA+94eYnSXIV2rCo=
-X-Google-Smtp-Source: AGHT+IGyLzgWTVKH6JI6z8cls+CzrPqiQyNqE2eztCCtnbP2MCwIGXkhIRW1KZT91cSODRqILoR+aA==
-X-Received: by 2002:a05:6000:26d3:b0:3a4:febd:39f2 with SMTP id
- ffacd0b85a97d-3b60e523ce1mr17980902f8f.37.1753193409960; 
- Tue, 22 Jul 2025 07:10:09 -0700 (PDT)
-Received: from [192.168.1.36] (p549d4bd0.dip0.t-ipconnect.de. [84.157.75.208])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca5c8besm13505706f8f.81.2025.07.22.07.10.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Jul 2025 07:10:09 -0700 (PDT)
-Message-ID: <7105a92f-996c-493f-a093-c312fed9ac03@linaro.org>
-Date: Tue, 22 Jul 2025 16:10:08 +0200
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bmfnh02p1z9scR;
+ Tue, 22 Jul 2025 16:30:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753194648;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=8Uy6jgb+YX1rgOc/oBI46cD573Q7bG7TRnouAVAvYOM=;
+ b=d4BeqOM02Py2taA6+xvCezXBcJBUU95+lrGJyr/IR1LI0YXBcsQCtNFRNFyixP3T2Td+by
+ kLtezqbKvBTCkvArXRKGnt8jTtOPbWdu/PijPIg3ArO2kzaSwuoLxdYecm9QFVdUsu76aD
+ 8A/ZTw9rtgUTgY33kj3bdcLPgka2MvJS3odBnJvF2vmiK6JlC418Pkgyp9gPCfybR9L0sD
+ wPOK4gDjrQz13PKmC8yqp+6nlD+F4nqxUIzLdwfwFVFmh5fdjtg1XF8VX2ZEsdNws2tq9R
+ PaqT+l3yuEm2m9c6Vocchzyt2Nfh4mBpYdGukVvc9BSiP57nxWCOLMNSrGT5Vg==
+Message-ID: <260cc2f9-2270-46f1-a05f-2dea6a98e106@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753194646;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=8Uy6jgb+YX1rgOc/oBI46cD573Q7bG7TRnouAVAvYOM=;
+ b=R68I0yuBzjrGYh7SsABxmNh+lbu49ghwAiK2umyTX9NAj17TVfWN//eNejeffRSqezvPdu
+ TnU7E9JrUIlB9tSDg6KFPfcbiEpSG/EENDnOLxd8GF1XAD1fshyt/QyAMLHljyl+IblLI9
+ kAzLsQEhmQITRunnylqHPtRiSkr2KkENEs0nWNHwA2WAyRb7alFwxKwFUKXpQOmcqbXl6r
+ 1yBbiUOolrm4kSSF8QQ4EjgDxZaAw/j7UR8SDRlKXqfdZ5aq1QEfk7Zm99YD1cwV9rGSlG
+ cKfppJJJGMcvFQOvgON0f/XJL6NjoSkyxvE8Qx9kIa0v2bKRFkk/zRJ+bmcpVw==
+Date: Tue, 22 Jul 2025 16:30:43 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/6] Enable fastboot support for IPQ9574 based boards
+Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for Winbond W77Q51NW
+To: Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>
+References: <20250720195901.414083-1-marek.vasut+renesas@mailbox.org>
+ <c3c99016-b6ae-443b-ac1e-a6c5144dd815@linaro.org>
 Content-Language: en-US
-To: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- lukma@denx.de, seanga2@gmail.com, marek.vasut+renesas@mailbox.org,
- bhupesh.linux@gmail.com, alexeymin@postmarketos.org, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20250715101538.4072985-1-quic_varada@quicinc.com>
- <7f4689e8-e727-438a-95c1-b1dd49890cea@linaro.org>
- <aHcxIj299SjS8wzG@hu-varada-blr.qualcomm.com>
- <cb99663c-07c7-4267-8cc9-d915e815bcf6@linaro.org>
- <aHn1VnPLEkha4XkX@hu-varada-blr.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <aHn1VnPLEkha4XkX@hu-varada-blr.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <c3c99016-b6ae-443b-ac1e-a6c5144dd815@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: qeis9y5mhjcddrdnpc4wowpnj5g3ipfp
+X-MBO-RS-ID: f8b016f2b8cfd543ab2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,89 +93,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 18/07/2025 09:18, Varadarajan Narayanan wrote:
-> On Thu, Jul 17, 2025 at 03:01:04PM +0200, Casey Connolly wrote:
+On 7/22/25 11:20 AM, Tudor Ambarus wrote:
+> 
+> 
+> On 7/20/25 8:58 PM, Marek Vasut wrote:
+>> Add IDs for Winbond W77Q51NW, 512M-bit Secure Serial Flash Memory
+>> with Post-Quantum Cryptography, Dual/Quad SPI, QPI and DTR . The
+>> flash part is similar to W25Q512NWM .
 >>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Jagan Teki <jagan@amarulasolutions.com>
+>> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>> Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
+>> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+>> Cc: Vignesh R <vigneshr@ti.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>   drivers/mtd/spi/spi-nor-ids.c | 1 +
+>>   1 file changed, 1 insertion(+)
 >>
->> On 16/07/2025 06:57, Varadarajan Narayanan wrote:
->>> On Tue, Jul 15, 2025 at 02:30:09PM +0200, Casey Connolly wrote:
->>>> Hi Varadarajan,
->>>>
->>>> On 7/15/25 12:15, Varadarajan Narayanan wrote:
->>>>> This series enables MMC based fastboot flashing for IPQ9574 boards.
->>>>> For this the following are added/enabled
->>>>> 	* USB2 & USB3 phys support
->>>>> 	* USB Gadget support, Fastboot-MMC related configs
->>>>> 	* Flashing related documentation
->>>>
->>>> This is awesome! Glad to see you have the superspeed phy working. I'm a bit
->>>> confused though since the of_fixup code in mach-snapdragon configures all
->>>> the usb controllers for high speed only and removes the reference to the
->>>> superspeed phy, is there some missing commit to adjust this?
->>>
->>> CONFIG_EVENT is not defined in ipq defconfig. Hence of_live_build() doesn't
->>> notify the EVT_OF_LIVE_BUILT event and qcom_of_fixup_nodes -> fixup_usb_nodes
->>> is not called.
->>
->> ohh I see, hmm
->>
->>>
->>> 	=> bdinfo
->>> 	. . .
->>> 	fdt_blob    = 0x000000006fe3b5e0
->>> 	. . .
->>>
->>> 	=> fdt addr 0x6fe3b5e0
->>> 	Working FDT set to 6fe3b5e0
->>>
->>> 	=> fdt print /soc@0/usb@8af8800
->>
->> Just fyi, the fdt command won't show changes to the live tree, it does
->> direct FDT parsing whereas the live-tree is an internal representation
->> in U-Boot (which is what makes it faster to access and modify).
+>> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+>> index e7e97780d7c..0383175beb5 100644
+>> --- a/drivers/mtd/spi/spi-nor-ids.c
+>> +++ b/drivers/mtd/spi/spi-nor-ids.c
+>> @@ -591,6 +591,7 @@ const struct flash_info spi_nor_ids[] = {
+>>   	{ INFO("w25m512jw", 0xef6119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>>   	{ INFO("w25m512jv", 0xef7119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>>   	{ INFO("w25h02jv", 0xef9022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>> +	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
 > 
-> ok
 > 
-> [ . . . ]
-> 
->>> Initially, I manually overrode the 'phys' and 'phy-names' to just have the usb2
->>> phy and it didn't seem to work. Only after bringing up the USB3 phy did it work.
->>> Not sure what the relation is between the two.
->>
->> Hmm, you don't even get high speed USB? probably an issue with clocks then.
-> 
-> If 'qcom,select-utmi-as-pipe-clk;' is added to the controller DT node it
-> works. Should I post a new version
-> 
-> 	(1) without SS phy + qcom,select-utmi-as-pipe-clk;
-> 
-> 		(or)
-> 
-> 	(2) with SS phy + qcom,select-utmi-as-pipe-clk; (i.e. same as
-> 	    this series, with just utmi as pipe clock added)
-> 
-> 		(or)
-> 
-> 	(3) leave the series as is
+> The patch is looking fine. Any idea why SFDP parsing is optional?
 
-sorry for the delayed reply! It would be awesome to get superspeed
-working in U-Boot, if you have it working with this series then I'd like
-to merge it and start enabling superspeed on the rest of the SoCs.
+I suspect to reduce SPL size on platforms where SPL runs into SRAM size 
+constraints .
 
-We can make the of_fixup code smarter by looking to see if there is a
-driver available for the superspeed phy and skip the fixup if so (not
-relevant for IPQ though I guess).
+> I see a SPI_FLASH_SFDP_SUPPORT that guards it. Having SFDP optional
+> introduces headaches as one has to specify all flash parameters statically
+> at flash declaration. I assume it's about image size limitation. I also
+> see a spi-nor-tiny.c, about which I'm not thrilled. Is there a general
+> recommendation on when to split things? Maybe a question for Tom.
 
-So I'd say keep the series as-is and I'll give it a review.
+SPL is probably non-SFDP , unless the SRAM is big.
+U-Boot should be SFDP if possible.
 
-> 
-> Kindly advice.
-> 
-> Thanks
-> VaradaKind regards,
-
--- 
-// Casey (she/her)
-
+> Here it seems that you specify just data that can be discovered by SFDP.
+> You won't need a flash entry at all if one adds a "spi-nor-generic"
+> flash info that initializes the flash solely on its SFDP data, see
+> linux. It would require porting the parsing of the 4bait table from
+> linux and other small changes for the rest of parameters.
+Or maybe synchronize the entire framework again ?
