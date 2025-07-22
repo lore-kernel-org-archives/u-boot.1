@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10731C83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 16:42:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34E2C83F1A
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 17:27:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 419AF833C7;
-	Tue, 22 Jul 2025 18:42:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F2C6833C0;
+	Tue, 22 Jul 2025 19:27:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DJHh0XeE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uDVkfPYE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47C15833F8; Tue, 22 Jul 2025 18:42:25 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 29E8B833D7; Tue, 22 Jul 2025 19:27:57 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 915598339C
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 18:42:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17A828339C
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 19:27:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-45600581226so59243515e9.1
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 09:42:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-2ebb468cbb4so5081532fac.2
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 10:27:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753202542; x=1753807342; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2kX3mQUfK98qzfNsIorRnBV9IunYiwtd02f6Wxtz8GY=;
- b=DJHh0XeEafjtQ4QsLsb97KXg2FzEshjAG/SEI390FaqG3voMXQBL2ofvSyUlNHZ4F7
- vAjNeb2cGLF5YglOWVirWfe29lo/Msl0BNvo88uqP5O0XsJWvxAIh5BpuBnpxe9r7RIE
- kHyAUlM4OiVQ2YoVFboIVLR2BnsNqlQ+idne/C1RMvEq0yg1+VBvPP6X1DyyyPQhY+tt
- X1bMks0liNEazh/7mtXnwxuxk/o+8PWXZTCuSA4AOdVkqvKyBBGDyKPwFpp66bSXee5D
- YQ0FsmMbsC7AqdZ8+6Gx736m+OAax8fntwanekKcbY4kYEpGOMrdKqzwG4FCqyWvcNjI
- f96Q==
+ d=konsulko.com; s=google; t=1753205273; x=1753810073; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TF37lrux7T+6Ic6y7Hq+vws44hjeLrgTqbe2jliiz70=;
+ b=uDVkfPYE+BAU5Tu/q1e5DVHct74fb3UCq+uiAw1L7qB/ZDS0cSMbRoKwcL/eGMZERm
+ Xcqwt6KhTJVBOo+iO3dc8McImb7bpFo8EWojZ4MbaJYZNwMZnjdMDZPFZabmfkPteHml
+ Dopyq74TZlN4qrIPH8QhPTSo05Td4KbmKKpTI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753202542; x=1753807342;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2kX3mQUfK98qzfNsIorRnBV9IunYiwtd02f6Wxtz8GY=;
- b=LKEGlk+nrgqaIt7KIXsjm1gzN9EQujmI+8Eho70Rf1L6NFpoFpcz8MnWec/Bc5tzYk
- YvIaD8qiMIKHNOMBRX/DwYgLuZAPBTOJQlruFzao8Gl5gw2ScEU+WBlDm1/GVzQaqmHj
- 9h/jMCq1gnncN7VSmWcaTbzP2I0gr2RPvvtuB5jvUXayNB0tCkfDETz+6uMbPLC9XOxF
- rb6zOcgW9OJQHwYSmiW87Dreah8u5megwPmQBX0NH+YAe21LwY+XbbTZxgEb3pEFUK9M
- dlbZFHZd/dJt/LwS8PL0dEv91Ybmx3tjJTvOIiPvy1fMW/4D9qQ6Zcn5U+eJMGUqN3Gv
- zeXw==
-X-Gm-Message-State: AOJu0YxBeLv4NlsRzI4+FTnfomYGFpkwNCZjuwUWDn6z4dhe8Ew3UD6Q
- Yl/zrShc8+UAeYmF82jXazEHCSu3EOMZTN7nq7dJXGNCM009Gl0iOUlygi1jBQtnhJzlEmZeGc3
- Yyijl
-X-Gm-Gg: ASbGncuHJBbZtEHy0djGRd9LE9nON0HT7YH/51yt30Om3zFHM6DgrJDvNxD7lmD6Q9U
- 4+fO9G4CR9ykk6W5A7mRCsiwqD7/OCja+GGjTb3arVIrcxQ9swR0J+fgLgplNsBgypfaXegFee4
- HcbbZjMWlmeRGIHNl+dwDtHEmeTEFkp+vSa1Rw8ymPzmKCfI7E5XtvQN+UrUZdYMTLA0cnBNRuQ
- Mum1QIH1JQJdZPLOJJajjMlrkYF35vM7YJKZmW4YWTr+XjnQNTuCw3lmsI53kO1byoa8x7Jl/RW
- lLsZfVkAblW4KvT/4mHvvB2apYir7hGE1m4EImcbqaWbJoQa6CBmldijmB0QBqq56y9FLSEhfh5
- 04R94vFXF5DYs1upeo/wTrShjjQP9YDM8jP28pjWoyyeMdlKv2wBkgZR6Mo3GfQ==
-X-Google-Smtp-Source: AGHT+IGy/Ue5BI5pniRRRW+j/Yk+mi00p1AB6dLafiVHZfv0pEXDOlA7F8kkCCeIVOStddMzRvchdw==
-X-Received: by 2002:a05:600c:820f:b0:43c:ec0a:ddfd with SMTP id
- 5b1f17b1804b1-4562ed57638mr221639615e9.6.1753202541812; 
- Tue, 22 Jul 2025 09:42:21 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:eb9:1701:2943:d0d1:b3a5:d7fb])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4563b7404f3sm138811035e9.23.2025.07.22.09.42.21
+ d=1e100.net; s=20230601; t=1753205273; x=1753810073;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TF37lrux7T+6Ic6y7Hq+vws44hjeLrgTqbe2jliiz70=;
+ b=iUNtnjIEPBDZzb7q1f9CJYtMjsH1FoQARfjMtygCxKMhsNh6cecr0xZMp6wphDhkSd
+ kyws+mvVCn8mUJAfufXTrR8lZYE7fHOHX+1K5+xC4sT2q9zy9z9Q2/p9VyJy3MpKfJLQ
+ ssLl4FVfKPEZ1n6oPHF53Y9YuTpl9y2Cnw7l3riqycV/foPZNdeuXWTJukrsF4rqxE/y
+ dQQuprFJKc68hSs53dz8pllbp7AsL2sQVhUJwaYMyeuYr8K0jsYhnNsHFJBxemK8OPxh
+ DDtGZH0oUgKb1I4MFgEY4g+3EwM+13NYGYjGzKzcAwIPNwmY04NrI2Rpge+PQpDI6Qw/
+ xptQ==
+X-Gm-Message-State: AOJu0YzdbfcrKETc/Jlyvj2jlofKJNael3tP/2YHSn2iZn/SqdBVfeUw
+ q3h2WBSFd1Zrqx2rGPv15bGbJMjj6v3EsO77IFCJb4GvnZRuG0yeKDrA4s2zRuEvkhA=
+X-Gm-Gg: ASbGncuWxY0dyjH+tCvATb85cXLhZMYXpI9XnqIdY0LqF/9xeF6I6YvEeTa1BNxFpQs
+ m08NHymoXXEPEz5r4df/kJXvJPZq7vUkUaHn/MBYLdxF/gEtHKOcSVClPALVr37GAULQ3LiA1PH
+ 0mxAPp79PT7hG49ZlAKQ8y7Uq849TZHOgzwqh4olYxF3H9oUf9Q71QdoO8xW/UzBlZzFNAEhLhM
+ 1xjuLDFCSovPLYHn2XMaEJwNBLskNJlqXU8hzUiWrCZFpaXRQLIHISEAQxXR/gVjXQEyvI6IdGX
+ Rdg4LSbongjLrXYkdTDJKVXACp6v/bFCuJn4GHgYmxXKi57Y5BYxZSPTbkVQ+sd85n3OFqgwy5F
+ f53Jkw8JnTkllejwuJ0dS+Si/RRRTDjH+Ojfjf7WQtv6FKTNU9Nazf7y1
+X-Google-Smtp-Source: AGHT+IFwaboNe1t6Q729enxeK0Jn2uCaYJPyxS+uEJiyjPztZJouEQOYU3RaAL1LrZX+VXBTjWVy1A==
+X-Received: by 2002:a05:6870:71c5:b0:2d5:ba2d:80ed with SMTP id
+ 586e51a60fabf-2ffb243382emr16686725fac.25.1753205272688; 
+ Tue, 22 Jul 2025 10:27:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-30101790f62sm4599009fac.4.2025.07.22.10.27.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 09:42:21 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 22 Jul 2025 17:42:20 +0100
-Subject: [PATCH] sata: sata_mv: Remove always true test
+ Tue, 22 Jul 2025 10:27:52 -0700 (PDT)
+Date: Tue, 22 Jul 2025 11:27:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Weijie Gao <weijie.gao@mediatek.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Subject: Re: [PATCH] binman: include <CONFIG_SYS_BOARD>-u-boot.dtsi if exists
+Message-ID: <20250722172749.GA43479@bill-the-cat>
+References: <20250714030327.132114-1-weijie.gao@mediatek.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250722-sata_mv-v1-1-ad4f3589a67b@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAGu/f2gC/x2NwQrCQAwFf6Xk7MIaWor+iogk9dXm0FWSUoTSf
- 3frcZiB2SjghqBrs5FjtbB3qXA+NTRMUl5I9qxMnLnLPXMKWeQxr6nN6HMLvSgr1VolkNSlDNP
- RzxIL/BAfx2jf/+J23/cfdH3v0XIAAAA=
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="t8H1e892lkS0+8gl"
+Content-Disposition: inline
+In-Reply-To: <20250714030327.132114-1-weijie.gao@mediatek.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,142 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reported an issue with a test that was always true in that an
-unsigned variable will always be >= to zero. This led to a closer look
-at the code which showed that some static functions returned values that
-were always discarded so make those functions return void. Also make
-the passing of block counts in those functions always use lbaint_t.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/ata/sata_mv.c | 43 ++++++++++++++++---------------------------
- 1 file changed, 16 insertions(+), 27 deletions(-)
+--t8H1e892lkS0+8gl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
-index ac78760a33e..82dc5304dde 100644
---- a/drivers/ata/sata_mv.c
-+++ b/drivers/ata/sata_mv.c
-@@ -363,7 +363,7 @@ static int mv_start_edma_engine(struct udevice *dev, int port)
- 	return 0;
- }
- 
--static int mv_reset_channel(struct udevice *dev, int port)
-+static void mv_reset_channel(struct udevice *dev, int port)
- {
- 	struct mv_priv *priv = dev_get_plat(dev);
- 
-@@ -374,8 +374,6 @@ static int mv_reset_channel(struct udevice *dev, int port)
- 	udelay(25);		/* allow reset propagation */
- 	out_le32(priv->regbase + EDMA_CMD, 0);
- 	mdelay(10);
--
--	return 0;
- }
- 
- static void mv_reset_port(struct udevice *dev, int port)
-@@ -578,9 +576,9 @@ static void process_responses(struct udevice *dev, int port)
- 	}
- }
- 
--static int mv_ata_exec_ata_cmd(struct udevice *dev, int port,
--			       struct sata_fis_h2d *cfis,
--			       u8 *buffer, u32 len, u32 iswrite)
-+static void mv_ata_exec_ata_cmd(struct udevice *dev, int port,
-+				struct sata_fis_h2d *cfis,
-+				u8 *buffer, labint_t len, u32 iswrite)
- {
- 	struct mv_priv *priv = dev_get_plat(dev);
- 	struct crqb *req;
-@@ -589,7 +587,7 @@ static int mv_ata_exec_ata_cmd(struct udevice *dev, int port,
- 
- 	if (len >= 64 * 1024) {
- 		printf("We only support <64K transfers for now\n");
--		return -1;
-+		return;
- 	}
- 
- 	/* Initialize request */
-@@ -653,7 +651,7 @@ static int mv_ata_exec_ata_cmd(struct udevice *dev, int port,
- 	/* Wait for completion */
- 	if (wait_dma_completion(dev, port, slot, 10000)) {
- 		printf("ATA operation timed out\n");
--		return -1;
-+		return;
- 	}
- 
- 	process_responses(dev, port);
-@@ -664,16 +662,13 @@ static int mv_ata_exec_ata_cmd(struct udevice *dev, int port,
- 		invalidate_dcache_range(start,
- 					start + ALIGN(len, ARCH_DMA_MINALIGN));
- 	}
--
--	return len;
- }
- 
--static u32 mv_sata_rw_cmd_ext(struct udevice *dev, int port, lbaint_t start,
--			      u32 blkcnt,
--			      u8 *buffer, int is_write)
-+static void mv_sata_rw_cmd_ext(struct udevice *dev, int port, lbaint_t start,
-+			       labint_t blkcnt,
-+			       u8 *buffer, int is_write)
- {
- 	struct sata_fis_h2d cfis;
--	u32 res;
- 	u64 block;
- 
- 	block = (u64)start;
-@@ -693,18 +688,15 @@ static u32 mv_sata_rw_cmd_ext(struct udevice *dev, int port, lbaint_t start,
- 	cfis.sector_count_exp = (blkcnt >> 8) & 0xff;
- 	cfis.sector_count = blkcnt & 0xff;
- 
--	res = mv_ata_exec_ata_cmd(dev, port, &cfis, buffer,
--				  ATA_SECT_SIZE * blkcnt, is_write);
--
--	return res >= 0 ? blkcnt : res;
-+	mv_ata_exec_ata_cmd(dev, port, &cfis, buffer,
-+			    ATA_SECT_SIZE * blkcnt, is_write);
- }
- 
--static u32 mv_sata_rw_cmd(struct udevice *dev, int port, lbaint_t start,
--			  u32 blkcnt, u8 *buffer, int is_write)
-+static void mv_sata_rw_cmd(struct udevice *dev, int port, lbaint_t start,
-+			   lbaint_t blkcnt, u8 *buffer, int is_write)
- {
- 	struct sata_fis_h2d cfis;
- 	lbaint_t block;
--	u32 res;
- 
- 	block = start;
- 
-@@ -720,19 +712,16 @@ static u32 mv_sata_rw_cmd(struct udevice *dev, int port, lbaint_t start,
- 	cfis.lba_low = block & 0xff;
- 	cfis.sector_count = (u8)(blkcnt & 0xff);
- 
--	res = mv_ata_exec_ata_cmd(dev, port, &cfis, buffer,
--				  ATA_SECT_SIZE * blkcnt, is_write);
--
--	return res >= 0 ? blkcnt : res;
-+	mv_ata_exec_ata_cmd(dev, port, &cfis, buffer,
-+			    ATA_SECT_SIZE * blkcnt, is_write);
- }
- 
- static u32 ata_low_level_rw(struct udevice *dev, int port, lbaint_t blknr,
- 			    lbaint_t blkcnt, void *buffer, int is_write)
- {
- 	struct blk_desc *desc = dev_get_uclass_plat(dev);
--	lbaint_t start, blks;
-+	lbaint_t start, blks, max_blks;
- 	u8 *addr;
--	int max_blks;
- 
- 	debug("%s: " LBAFU " " LBAFU "\n", __func__, blknr, blkcnt);
- 
+On Mon, Jul 14, 2025 at 11:03:27AM +0800, Weijie Gao wrote:
 
----
-base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
-change-id: 20250722-sata_mv-40e704eb9b2b
+> This patch makes it possible to automatically include board-specific
+> additions to the device tree.
+>=20
+> Change-Id: If8cacca58696969fbdd3ede6457d8526b05ebe4f
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> ---
+>  doc/develop/devicetree/control.rst | 1 +
+>  scripts/Makefile.lib               | 2 ++
+>  tools/binman/binman.rst            | 1 +
+>  3 files changed, 4 insertions(+)
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+While this is conceptually good, it breaks some existing boards such as
+mt7988_rfb mt7988_sd_rfb mt7623a_unielec_u7623_02 mt7623n_bpir2.
 
+--=20
+Tom
+
+--t8H1e892lkS0+8gl
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaH/KEgAKCRAr4qD1Cr/k
+Ciu6AP91/ZYTAGtVXvgtUTE+g7hQyKSRZKgtAwpUuw8YPOthzwD+P8c0KJ5ybvoM
+0Saa979357eX5ckd+fVtf9TnTBfxQAE=
+=Yase
+-----END PGP SIGNATURE-----
+
+--t8H1e892lkS0+8gl--
