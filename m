@@ -4,152 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4A0C83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 08:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9354DC83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 08:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F13208331C;
-	Tue, 22 Jul 2025 10:43:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id CC92583322;
+	Tue, 22 Jul 2025 10:49:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ppHpvk0W";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="LN/OoDf9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AAD783346; Tue, 22 Jul 2025 10:43:10 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20627.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::627])
+ id C4F6E83322; Tue, 22 Jul 2025 10:49:10 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EBC4832C8
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 10:43:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65481832C8
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 10:49:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Hef7H73/viAfOnCWKGCtTuAMjNpY0RvrIYzVGUI55bxXXlUyNZHlaPmPYGdc9NTGpenohAhxsBcfYR+CWWxPr04xElMIYWBF5RbYGeM+dzr50/IJQyUnK8UwO1RimWtQOibnAN3JPRCjO4jaDndKsBmmbS4Cynuv543mXlffVRUBVUFrieYzb9RjFH5uhGAy0VQrzYPDnQuPKJNDbvpCG3cF62oVGu57mLp6phblYCaJhEFz2dSCTN444i3ICCw19xCbnHNuUyUb1pe0TdKBKzaTWlUUf6ZM3rZpDaREcCjgYTrEydWgs+eqzm8gehtkE2DwUP7EnqmdyKz1GTW/NQ==
+ b=YD+XR6MbJ64dvqf5RqaC27REiSGfYdVc/rGvqFTnIqBN0rTtnLDKXPDBq6VNeac0Db2fuh0ESHNuvKsgIsz3KYXFt7ws4pLcE6dvU+FpmbDTLhT2edxTvqPJyFG+PCoWlyPcEGBOjtv6J675g14rl4Q+8oE7c35x4REdcU+8t12PSbIdxFBzCNrXlbQN7YfK17Fu8a+EMd4juvD+9zOA8QqQzP7uJVFjrRdlDjgqPbincCle2d8eZfzNGshSVGkHPikneUbyGKEW+b2BV943zH4FJ7bT3u5rLkBMzLzFNKGA2vq9qZrbQNIii1PLjpnnCLKta+mVc0AB/yWfsAycHw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vIpZ95lgr8diJHjGQKYNJiLnEjtd1HleYVPxB13p+/w=;
- b=aKXy+hsRIYYzCsQnBiDZ6W7lJjWY6me3hcYHRDnyc4hyLpNFszgxriIFw8nPPPwHp37iBhhRQ6zedFsPa+/hSONaSUYybh5tKaZKX0ufc0M7FkLCS79o6sIpEO4yTXXNC+OLKLf+IYYv9RdcE/69AkNRny2hD9t5D1XCMOnsleiZ0p0KepgA1KIb2A7pZqI6X+sFqyxnnor5vcS+bEx8EQ1IxKgzMVbXLW8cnufetaAEMDx9fdnfd0cI2M9zPsnJRnA16OgbF9ARt7R8eXDrfm+/+IWZiPcJFTY4sr0kjRiTZbwPVX2gabH0QPIDxNZXME2Gv41gFZqYrDw2DGe+2A==
+ bh=BBK3kWLZTOnwjfefYnEK0IZD0eeOnTDazPRlaXyU254=;
+ b=ieiFQNZ9mYGK6YePVJyi3sx5dyV7zd64usdao9M/V9AgpKqsvTImZ+gVm0NLDCPpZweH94I1Y5Fq9suy8e5LJVJEhjyVRtqjzsDYM03MA6eg2zXM73Ctz5cqE8jAnmQT4K+TZebcXnX5OJ4GGi4NsqCQA9lJszJ5Tk1Ud4zun/yceBxOUxHPGT/dlDF08fH0MezzGm0ZrCNYoUytwE6B/sKYIcFm8AFPt/FldqLlATHTDKPSH3pqRnoinw/2Vw5ElVvE3t0VfeaXfT/+p/e+UAFYybm+D1NZsI0ITbTXakFT4ZH+/56x1VcIYx5gKiN1wQarhya3+w0QOe5DT1LERQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vIpZ95lgr8diJHjGQKYNJiLnEjtd1HleYVPxB13p+/w=;
- b=ppHpvk0WITRPFPG5EbP1PKfrn+cdU0FVlaSHqW7Yytj+Fg7MZAO31Gj1RB8eq/Tr/6Lrv/1R98ii54lfO/8FeJB0u5U0Bi8rZMLDteBcG0EtCjGljdGK1Eg5O7ab7KlZTlcVeWn3ONN67OjDwAvZhLZP7ipVwuzrpEMU+tMnqw14FbPr7x6I1oxiMJ7AU5WoeHuMiHHK06XYyVUHBDgA8jARfQGLQqdsAD/RJKhgtMUlxs3dI8vz5ZEnBYvTJYnU6sI+dWKR/84gVKG91GNpWAt/DbCboGTL21pCMUYPo+qbBCwl5d/MeNuhN3YCN8L9mpONQzF6vP8T1lIyPuMljA==
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by CH0PR03MB5970.namprd03.prod.outlook.com (2603:10b6:610:e1::22)
+ bh=BBK3kWLZTOnwjfefYnEK0IZD0eeOnTDazPRlaXyU254=;
+ b=LN/OoDf9T59j2IwcRjRPBClgS94i8HKuqDC9FQzbn0dija8eXIefQ1rTo+vhF7QuqaqvnXiDf67NLgDei6e7GyootXsh0Pnj32wcxik+bDvUNqwWPLD4eDRbh3UssHUcFO2d1ufWCJxhasyXfQQ+tRjDVf1GrZqta5sAcg9abHU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DB9PR04MB11510.eurprd04.prod.outlook.com (2603:10a6:10:5e2::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.30; Tue, 22 Jul
- 2025 08:43:05 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5%5]) with mapi id 15.20.8943.029; Tue, 22 Jul 2025
- 08:43:05 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Hea, Kok Kiang"
- <kok.kiang.hea@altera.com>, "Ng, Boon Khai" <boon.khai.ng@altera.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>, "Lim, Jit Loon"
- <jit.loon.lim@altera.com>, "Maniyam, Dinesh" <dinesh.maniyam@intel.com>
-Subject: RE: [PATCH] arch: arm: dts: agilex5: Set spi-max-freq to 50Mhz
-Thread-Topic: [PATCH] arch: arm: dts: agilex5: Set spi-max-freq to 50Mhz
-Thread-Index: AQHb8VSnFsQtZMPutEqIdvsjgGMoIrQ95o2g
-Date: Tue, 22 Jul 2025 08:43:05 +0000
-Message-ID: <LV8PR03MB8137079398F1970EAFA1CAC8A75CA@LV8PR03MB8137.namprd03.prod.outlook.com>
-References: <20250710043924.90780-1-dinesh.maniyam@altera.com>
-In-Reply-To: <20250710043924.90780-1-dinesh.maniyam@altera.com>
-Accept-Language: en-US
+ 2025 08:49:05 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.8943.029; Tue, 22 Jul 2025
+ 08:49:05 +0000
+Message-ID: <e92c9774-ad98-4f7b-bafe-eaf068f3ad72@cherry.de>
+Date: Tue, 22 Jul 2025 10:49:04 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: phy: Support overriding Auto Negotiation timeout
+ with env variable
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ marek.vasut+renesas@mailbox.org, jerome.forissier@linaro.org,
+ kever.yang@rock-chips.com, alexthreed@gmail.com, skylake.huang@mediatek.com
+Cc: u-boot@lists.denx.de, u-kumar1@ti.com, praneeth@ti.com, nm@ti.com,
+ srk@ti.com
+References: <20250722060554.352952-1-s-vadapalli@ti.com>
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|CH0PR03MB5970:EE_
-x-ms-office365-filtering-correlation-id: 520a43f0-a40f-47e2-25b2-08ddc8fbc6f3
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|7053199007|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?gp1vjF8KMuUDjrPR7h7ms6L2YYCulCzBX/hx+ieYW0FIGMRd9ant+vQBD61p?=
- =?us-ascii?Q?m/ITsKcwzgm6mVGX3ZnTMDzIb4UkzeYpZ69OOmrorL63bDaww5Xz7gC8Y2IZ?=
- =?us-ascii?Q?A1ChmzKwJhlLVVeecJXIiA2ZlRB0LANeov4FP6gfOQcxvhbgLa/vGtFtRuSP?=
- =?us-ascii?Q?8kYBl3FngLZIesaa67RoMZ0EftRIEyq7WaZ7enZDT1eiu2TOnAvw2Pe7UVt3?=
- =?us-ascii?Q?MsFL9GSJzCEqVrayPLgg0HHhdQIwThZcO8PSYRtSncCHINhjuXk+QbrUnSTz?=
- =?us-ascii?Q?RNdYCgvbYwcFprXxYoyfdzDk2VMimXKGXuWjnQ7FBBwTKHuv/O6cyXv7rhFy?=
- =?us-ascii?Q?lxzITGUI+r6zI5HqFtpYFO3eZBLIs3+CX8ECdAqnz1FaQYxZ0aXU1+lgXTwn?=
- =?us-ascii?Q?KjknHAPGQQntS9q/fBCewWdCBQ0bDKeos+Yvz4JQcfuDGPbV0thPzY6aCLBd?=
- =?us-ascii?Q?b8xVq6Zx7y8Fa4QnaJ4dogO9zJH8Wj4CPK9sd1y2S4cDIwJb7kHrri4yLBYL?=
- =?us-ascii?Q?58dO2ehDIEbl5MfoUmw6umRSFJaJEeoUqX/4fB4NHnYoXlLBWhJLiLg5+eSS?=
- =?us-ascii?Q?sjc4cWjUQFJ5yiftSz1XISTnLN6+WKDjjjt+X03ESKh+E0XoCseCRMxCpS2Z?=
- =?us-ascii?Q?bzHzuvCIZ2Kne7cUrYZ3INpC3WZkPOq3Ak6KvxcxHLvPXUMTElyI5e/QMpE3?=
- =?us-ascii?Q?y3G04czeltLN652OmCIogvCisp1O0Bj2afC8dclVKoBqNC1vEkEpO3mgYiwh?=
- =?us-ascii?Q?xUrhUT0hW0xIa50fxSjLRw9eI6UdZtyQK+cYqCDxWlyOpfjlUODY2EbI6pah?=
- =?us-ascii?Q?SNUKWegKAR8V0AxLkdNdgp3GO7yn1teMJZXa4LUaXxBAkeVdpNIiZ3E6zD0M?=
- =?us-ascii?Q?+bY6yTUC1wPB//VSY8Axmrr21H2Z7N2V020bYkQeDqPtk1fzHFGXnh48AfLs?=
- =?us-ascii?Q?Vfx9yNNY2JWS0TFK1xA6dj5a1zq+E1GiosszSBJeXscF+Fs1Z9yud2VvvL1u?=
- =?us-ascii?Q?n/M61aSI8Noe7HeyYDhfoOqxkLIRjrDCHY5g0qNwFVO2Ji0zLE5rZzUBVF/D?=
- =?us-ascii?Q?BWhX1nEu3bn/rMT3fwFk0c45BzSv4FzV2eEv+Jr5yaHrgHgsQbRi/aGHbNcA?=
- =?us-ascii?Q?acO6WnOztfbzK24fEgFnD62TpOn+45B1nUDolfaYcvF1NRo+ejcCagOoBNBu?=
- =?us-ascii?Q?19jW5Dgepcuj2jtBczCxbQFT3LYWjUyo341bwn9O4lUOEwaF/MBjpgdLKnf0?=
- =?us-ascii?Q?0AaUa/T9hbppoVdipaAVFZbnNg0jjsXxg4x9Ou6LolprB7alS86J1oDfufwx?=
- =?us-ascii?Q?GJPYd6JvIVaU4avRPxijwmc3Kb3BeUIDHutAPRFesE5WCzMPs+g96PgdF3PJ?=
- =?us-ascii?Q?WkqOkSX3Dgylxl0lYFc1nuY9Wq+XwkpKLodeh1Xefcr3fCmOnx02gP/BMgrS?=
- =?us-ascii?Q?/RevE199PNQniOlKQw8qxu6V6toegqQNKyq66odVf+tXPXRuyx/lyw=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(7053199007)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?u7qrXDK2TzExVvZZ0m3MzG2kjD+7kSjEEIeHGu9GErr9IJaEHwib3wRgmNC/?=
- =?us-ascii?Q?kgfyP+jujsO4Li9XNN2vM/gzPjrb/TL8xuAaeSDMnKspUyIlrfeqUd+YRtuJ?=
- =?us-ascii?Q?RyiY7lpATnY2RmKC0OIJpXQv5/3cPFGOATiLxyJi8QW2KsYMbmWpjV6sK8Rx?=
- =?us-ascii?Q?AOiHICDJPhuveZViuDi93Bt++lK3HLeaPcAG+dot+XhGsRYTEbK+jStZxzgw?=
- =?us-ascii?Q?H7oUZVH7NS2fPTQru0dXH8m6ho7r56RMPj/lahRdPOrdENjldF5AwJYY8Ad2?=
- =?us-ascii?Q?51S57IsosyBZ1tqm+tOD083hfyQeHtEobsx/uYtwZaD2mg9+WSNj09i3rsf5?=
- =?us-ascii?Q?yucH9VaBdGr6hIIgkhKH1oHvyvq35hwKwh8S2AGpEkUyLGvzsElfrfmotntY?=
- =?us-ascii?Q?Pq/PByn9A9MM0yFbCucWtck+gpUwBPI81kQCojpwuWvEu0akDYNg+00iDwgU?=
- =?us-ascii?Q?o2H5JddnkpK/X0k4bFBZ4OrpjNRG8JQ57N7bDElwzJ9XBRMqCkotkW+wDv9j?=
- =?us-ascii?Q?bc98q64+oHAdENg+DZYPx+1wsdbXof4F4wDx7Nd9+5dnKJIaGGRhPmEUk5fg?=
- =?us-ascii?Q?Xr725mjZruLMWKZlRZVTmkGh/y3n+sZL0LpCi5VYclcseRIokGv2A7wjQW7N?=
- =?us-ascii?Q?IXwZ93oixHCHsCW1T410zEs/N837xLZHdJLugCEAcvEaGWM2bSLRiiUI4pU4?=
- =?us-ascii?Q?2etD4LeOtyDuxoc7yG9OvDGBYC84lKXccEhW6u0dQCqtKnBKzfu2USraDO+X?=
- =?us-ascii?Q?sHPvutZDCR6qJfZPcZhiZ2D0uM233gNkz7D+ywtyUoDt/vXEa9Z7uQQZApOZ?=
- =?us-ascii?Q?Xo0Wez/warPZS+JVl7+5CtBTT63czx5Ze/EoivSNboFO+Ad04rmXJ3qEiiTW?=
- =?us-ascii?Q?WQE3CFo1FxikK1vlSiKrWBMwqPvQKUTtIQTqrIB0KpIc7py37MJ8WFwsSb1z?=
- =?us-ascii?Q?T1Y+XDyvnWB3+whuP2YzMsuavTH/n1c54hiqmZ/DB3qYx7nKcgOGH1cKdAxD?=
- =?us-ascii?Q?XR2CMBsDdmlm/vWiv5ULwztpP/rmUGtfdqSoR75dwGHWFrpX0/RyasyGr/rE?=
- =?us-ascii?Q?7h9VDLjizQg7bKZ5kOvg3G9u7Kx3I2y4wOo41H2DGYnduDQ4ozUkD15R24Zt?=
- =?us-ascii?Q?dpu8iG/Wi2+Stx6AhAhex/PAZrbqzdpHuEyXMnN8chnU1qjRNwG6oADaTz/R?=
- =?us-ascii?Q?+M6oyh7jEWgyycg6prVKdgegbklm08vQfeJQvmTbxCvH5FpFsEC8Inelg2wX?=
- =?us-ascii?Q?gXPW92dRBpVQZvgns4XOZmVlRgCuzihoeuvmBsTb2byOULyGZBk3blxndIsT?=
- =?us-ascii?Q?zJhdzFQ7HRGUpneKgq9HidfEhhUrqLjEQ6xbPsM3JneSWQsSVtOcilc9OgDq?=
- =?us-ascii?Q?jcBskkSHSc1JXPRrjbyk19Wem5MaPXzNF1mAbyNobbl37CAwSWR8h43aeBRD?=
- =?us-ascii?Q?piQLQLqhPBTvf+IifuKRW/VZORpYtNgWS98kNV5lOFxzdDlrAnMcf77yBhfg?=
- =?us-ascii?Q?t6tZxB1VmcDnMPjGaPT9mW31UULF2sPxR6fBTc5RaG5S8+MgO2McvzIU36fG?=
- =?us-ascii?Q?ri4fmShuA92y+5g/IauRfHAfi4e3nLsB6bUZii/T?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250722060554.352952-1-s-vadapalli@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR09CA0120.eurprd09.prod.outlook.com
+ (2603:10a6:803:78::43) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DB9PR04MB11510:EE_
+X-MS-Office365-Filtering-Correlation-Id: d4076cde-d9fa-445d-918c-08ddc8fc9d85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|7416014|376014|921020|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?N1pLRjZLUjdXcDNReHZ6d29NY2h1YTNGdzB0Y3hpeXY2L0xRNVBDMSt6dTI0?=
+ =?utf-8?B?TVFLMzlNaHIzQjNoMFE2VXhIbW91MGdQLzZzMC9sZCt3cklVK2UzaWpKUVVF?=
+ =?utf-8?B?YjdYN1Jta210THd2MW1kTGE0a0QrWTkwTS9WWmhZTXhnci81LzhzKzlGbzd5?=
+ =?utf-8?B?QkkyNDlMell6d0lRcHh5bDNSbWFXWGUxQTh6cEpxaTFZMHVWcmZwbEJ0MlIv?=
+ =?utf-8?B?YlhoaGZ5V003NlRIU3VPQmFsQ2hwZW96OXVXekpkQ3p1UGFCU2hZa0FMODRx?=
+ =?utf-8?B?VnBvckFCa0Q3ZFg1MEx3aEorZk1nODdmM1Z2TExsbERseC93a1MrUHEzVW1T?=
+ =?utf-8?B?OGtnalUwWFRiajFtYWVUeHg5TzBzQzlOSFpCRDVFVGZlL2hhQTJzcVJadXZM?=
+ =?utf-8?B?cjExMDBxMDRQNnNLVlhqY2wvOFAxL29UdWYrK0VSYXpJb2hvQmVUbnBRZk1K?=
+ =?utf-8?B?VnZoSUZaV2F0bVdUVHk0NGsyTmtzaEU4QWgxZFBhK1Q2TmZuc21EMTFsZTBn?=
+ =?utf-8?B?KzFUaDhLOVdhZFJuZ2JSL0svWncyVDRVVWJyMVJveVdzb1RlRU56cXlmK3lV?=
+ =?utf-8?B?UWlzaEY5UGRJc2VwdzdURlhSS0NtemtBNGpPMHlqVEgrVmFXb2JCbEJlSjBi?=
+ =?utf-8?B?RHM2QUVBcXZscHBjZnNmOWtrMXRtVmtSS3BrbE1TbExDVnZrdVM4Y3JBY1Bt?=
+ =?utf-8?B?MjNBRXk5L1BWeVYrS3drZnFjRm9HVDhRN2xhVkRyZWIxSTV4SWhmOW9aZkV1?=
+ =?utf-8?B?RVdtUVVVMXhqM0FZZ1RNeGp5Nm9ZU3ZkdzZKMTE4a0FFSzNzeTZzTEdVOC8w?=
+ =?utf-8?B?N2FQalQ5Mjk0K1g3RXMra2poNllxeUVSNU10UURSNW84NWpueDVGSEVDOE0v?=
+ =?utf-8?B?NjNTTTdWS2RrMUpFbUFZOC91NlhYUllNd0tWVlhGNmR2LzNra3l0Z1E4bHhX?=
+ =?utf-8?B?MUZoeXUxUjQ3ZHljaXJwK3RjK3hPalB1Y3hWSUw2V2Q0cTdRUm4zS2Q0cUVv?=
+ =?utf-8?B?a1VuR25udFM5Z1JrVHNlaFkzM3NhOVIxWFUzWk40RGlhMW9OTTVVT0dINDBO?=
+ =?utf-8?B?SjI4TGF4ZWRNT2lLTDNBRGhOTm82QzlVcVlQSXFWbzJ5cDRWNWx6U1RkVjkv?=
+ =?utf-8?B?Qk55QWRJQ1cwYVdEN1RodEpEZUNieElUK3pTNWdWUldEa0hsVWFVL1YwMmpX?=
+ =?utf-8?B?K2tsZ24xeEhLU0lkQXlETkUyUm9FRk9RWTBGdWFTNCt0M0J2K3VYalNKby9v?=
+ =?utf-8?B?bWE5UTBadGNPRCt1U1VWdjYrN3JSdko0MVhoL21haXk1Q1ZrMHE2NE45KzIw?=
+ =?utf-8?B?RmdEaFlzWEhHZDJoOWwvU0Y3eWFwa3lnSk5lajhUR0FZNThnZTVPclhCbGw1?=
+ =?utf-8?B?dmJSblFPTkJrbTNCb0RsdjI1YTFrVW1xY1B3TFVJV1F2OWpLRk5oQmNRd0hY?=
+ =?utf-8?B?UUdWRmhPYmJJeitqcndDbTdhNzh0bStpblYzaHVmL2RCTVgxTGcvSDYyRXdM?=
+ =?utf-8?B?a2pmN0o1WkIwQXA1T3lNd2RHQW1nSWo2U0Y1Rm9MWjN6S1IvRnJMdEdlam1o?=
+ =?utf-8?B?dmJsQXNVYWNqZTdSeE5TQ0huN2wyQ014N3hXM20vc1JobTNVNURFeTM0ODZx?=
+ =?utf-8?B?TmVqQm93RWpXMGQ2aTVtZ3ZPWGtpZXJWbklCSXd3TGR3Ry9TK1RnSHluVW9H?=
+ =?utf-8?B?MVhHWjQ0azhaL1NBYkplbjQxZWJiRzd4a0JZcXovOENJM1dpNHd4eis1cU56?=
+ =?utf-8?B?cTRhRWs0SVNMdlZGekc5UkNKN0xHYm5lTFNjUmFQMnl4UU5WNzliVnpiUGhy?=
+ =?utf-8?B?NmN4Ni9lQWJLSk80TThmMFRwT25Ud3Vxcms3TWFDQ3hIclBwK3ZGczRBTUhJ?=
+ =?utf-8?B?TnNiSGZBSDllNEpuZlhLeVFURGFUQ1k5UjlrbHFUZlZ0aUE9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(921020)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?alR2bjJCZzNUREs0b2s2aGU2dER4dGJzYXZKYjNvajhBZEIzSnNzTmNXbkY1?=
+ =?utf-8?B?QUc0dFpWSEdmemV0QzhhenFyUDR4aVdkalRQc2hHOU5mZGZRbGNYaUxwMVJw?=
+ =?utf-8?B?MnJ4VFpKMWQwSThDQ2oyRXhKdWsreHNQTVF2VjBFK3JORXhTb2Nva0dHdVZD?=
+ =?utf-8?B?QXYyOUx2NzlyK0dFajlYcjVwek5RWFVtYmJrUkVyQjUwU2RPei9QQklHNXB1?=
+ =?utf-8?B?a2E3czhoNHRpc1pIMmQrVkJGdDVnQlNIUkwzWW5KL0R4OS9pU2hJS2lWMmhr?=
+ =?utf-8?B?MkFQSS92dHNYOU5UUTRSbnJFZFJMMWk4QjZGNnZZT05IdmxWcG1HK3VXUUpT?=
+ =?utf-8?B?dXAxaGF4b2ZnbFNnT2ZUUlRWekRXekQ3M0dxcTB6STFyL0JXTG1LT1JJbjlx?=
+ =?utf-8?B?TlR5NGY3R0Q5Rno4QmFPVXZFU0hJaUxaSnRBWEhSMTlIVzE0SlBTWEJyY1Uz?=
+ =?utf-8?B?RGRubXdZSjhUMDBOVXgwNHNtaUlBWFFrZnVEOFNYNFRzRHRkV2RLWW1MNlhm?=
+ =?utf-8?B?MlE1UCtTOEVXRlBEZXBRUTdGTUVrNGtxbG1lTlZmWEdqMHJyVEo4MFlaTitB?=
+ =?utf-8?B?WjZ6U0Vyc01yQnlMVkJuSFJLVjZWRlZqYWZtMllxd1I0QVVndHZ3LzduZlI1?=
+ =?utf-8?B?M3hoV3NjVWordUxsakRBTnlMaUcrRkhBRUFWb2d6c2lYdXBkRWFtK2hBdS9Q?=
+ =?utf-8?B?RGpzOHgzbDBxdjk3T3c1ZWl1UDlFaGZiNGVreG92VXRlbFVLTVlqV2NHdlJz?=
+ =?utf-8?B?MktINTlFZDBpSzM3dk5KdW5LTkYzTGMzZ0FWcEQ5SndoNTYxaHdiU2huWkhx?=
+ =?utf-8?B?M0VQZUt4SldRdkM2WlhJZzdsU1QrYUhqaS94YTgwVzdic1UyazFGS1JEc05F?=
+ =?utf-8?B?U2dOQkZhT2gzeHNhV1k0M0tBeFZlUytTVUhTRXhoMzI2Q0Nidkw2L3lKTXFh?=
+ =?utf-8?B?M0tES1BCRTkyUHVpZVVaZkJZenRWR2VGNGMvVUVUdGtadmIwUy94Uy9TVUNp?=
+ =?utf-8?B?bXdnOS9xaFFrekZlM2o3SS9nQjNuTVFOblo2ajJsMUhXZWtlNElHb21WVjdl?=
+ =?utf-8?B?T0JaaWpPQ3huZFV0OUV2bm5SdXJMa3AzQ2wyUG9jQkI1aFpybFlaUS93SHA0?=
+ =?utf-8?B?ZkYzQ0NCUkduNDdVSDRSNlYxdjQ3NnhSMTRaaFEvMTViZ09Td2pLV2NkTkxn?=
+ =?utf-8?B?d0JFZWM3Y1dHbmkzeWVRQmRUTCsrNWc5MGRDQ1hicHFheGxxNWpzakpaaXhM?=
+ =?utf-8?B?SXJpRThHYjVLK2I3azBFY2NteEFyZURPOXRmOXhBTk8vRGxWOEQ5U1VQaG5I?=
+ =?utf-8?B?VjdoZnFzcW1GUHZ5UHVKNlRUamUzUng4Ny9SeDNqOUl4bjdSRkJXUTd0VFpq?=
+ =?utf-8?B?a2pNdkxTem5ZSlQ0QndPWDJNbFlYL3RTaWt2V1ZjbjVpMVhIUEpFZkVyNkxK?=
+ =?utf-8?B?M2NhVlZ0UTd4KzdFZHFsYUFzUGRCZ0E5c2hBWkZWSXZGdU9aY3d3akl2UjE5?=
+ =?utf-8?B?NXpXYitZTUpGeGtEb0QrdWVyMWwyZkRGWEVlQWZkSFVqb2JxRVdnZW1HWHlT?=
+ =?utf-8?B?OS9GbDBzZDN3U25ES2VOVVl4bHNvQ2kxMytVcUZZcFlqb1BKcEljZ2pZK2pl?=
+ =?utf-8?B?V0w2RExLQ21YZVBHOE51VWlDMSs3bUpPRmMvQUdOTm1tQm1yQ2RqTWpGZFJs?=
+ =?utf-8?B?SC8rbmNEbGJEdm0rL3VocXc1L09TTXhydHA3ejI2LzV5bDZQQ0tZdXZnSTRr?=
+ =?utf-8?B?SU9YL29HMHpqREw4dmR0THk0TVhscVQ5QzVuWTluUHlXMER1bGQycURidS9B?=
+ =?utf-8?B?MHY0dFlJbmtQWThkUkJ5emZHaklqaTRzT1FoNUw4NlhUa2E1VmxFdCtPQjkr?=
+ =?utf-8?B?THgxMjdaT0Q5dVQyeG5nRW9QNmg5VDZWNEZCR3plamZDTUNIazEyTkpDMndR?=
+ =?utf-8?B?bXlMUnpYUDNOemVsbFBKa3FpYTRFdDFqcWxtTUNxZk9GR3FPd3FISTlRcVdy?=
+ =?utf-8?B?ZTZUT055ejE1bTVheEZ2LytqUGZqTGZ1TUNDWkFQWlhwMG01SnJNZ2Q3MG9R?=
+ =?utf-8?B?THNlYVVmRmYwTWlkN2xrYkVWSVEza2lxcllQTXRwbk44STQ4dzRybCtzVXg0?=
+ =?utf-8?B?dUM2MTM0bURlVWNoYllvV2lVK3RKcVgyanh5ZFg4WjdwMFlBMDZPYjhxeDBo?=
+ =?utf-8?B?NWc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: d4076cde-d9fa-445d-918c-08ddc8fc9d85
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 520a43f0-a40f-47e2-25b2-08ddc8fbc6f3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jul 2025 08:43:05.6373 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: OIbnHdE5SBqdpfCdIxN09OR2mzwHB1uGhN0jF0YvmRr4L7QrKd1bRwAKte1n50oRXOGPcFLTJQYsmTtGDeFBfGqLS0OQC7cggLlPgsR4W08=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR03MB5970
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2025 08:49:05.8471 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ioxFfpvyFTCXEF0G5aXp3pnT6aivCckO0lQ4Yd2X/SYK4KAkSeLTdurWf60wPdlrYNsxpWWN0iKuvBwvVTywFa9gawle/TFEtpoRC60UUl4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB11510
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,62 +180,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Siddarth,
 
+On 7/22/25 8:05 AM, Siddharth Vadapalli wrote:
+> The Auto Negotiation procedure between two Ethernet PHYs consists of
+> determining the best commonly supported parameters among Speed,
+> Duplex Mode and Flow Control.
+> 
+> The time taken for this procedure is not only dependent on the local
+> PHY used, but also on the link-partner PHY.
+> 
+> While a timeout can be specified in the form of a "CONFIG" on the basis
+> of the local PHY present on the device, since the timeout also depends
+> on the link-partner PHY, it might be necessary to modify the timeout.
+> 
+> To avoid rebuilding the bootloader for a given device, just because it
+> may be connected to various link-partner PHYs, each with a different
+> timeout, introduce an environment variable named "phy_aneg_timeout" and
+> override "CONFIG_PHY_ANEG_TIMEOUT" with "phy_aneg_timeout".
+> 
 
-> -----Original Message-----
-> From: Maniyam, Dinesh <dinesh.maniyam@altera.com>
-> Sent: Thursday, July 10, 2025 12:39 PM
-> To: u-boot@lists.denx.de
-> Cc: Marek <marex@denx.de>; Simon <simon.k.r.goldschmidt@gmail.com>;
-> Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>; Chee,
-> Tien Fong <tien.fong.chee@altera.com>; Hea, Kok Kiang
-> <kok.kiang.hea@altera.com>; Maniyam, Dinesh
-> <dinesh.maniyam@altera.com>; Ng, Boon Khai <boon.khai.ng@altera.com>;
-> Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; Lim, Jit Loon
-> <jit.loon.lim@altera.com>; Dinesh Maniyam <dinesh.maniyam@intel.com>
-> Subject: [PATCH] arch: arm: dts: agilex5: Set spi-max-freq to 50Mhz
->=20
-> From: Dinesh Maniyam <dinesh.maniyam@intel.com>
->=20
-> This patch is to set spi-max-freq to 50Mhz. This will add support to the =
-driver
-> to set the operation speed according to the slave device up to 50Mhz.
-> Without this node, the driver just can adjust the operation speed to the
-> default speed which is far below the best operation speed of the SPI slav=
-e
-> device.
->=20
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
+I'm not entirely convinced it makes sense to do that but I'm not against 
+it, will let others decide. If we go forward with it, please see 
+comments below.
+
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 > ---
->  arch/arm/dts/socfpga_agilex5.dtsi | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/arch/arm/dts/socfpga_agilex5.dtsi
-> b/arch/arm/dts/socfpga_agilex5.dtsi
-> index 86322d7b0ce..9bc3864022b 100644
-> --- a/arch/arm/dts/socfpga_agilex5.dtsi
-> +++ b/arch/arm/dts/socfpga_agilex5.dtsi
-> @@ -388,6 +388,7 @@
->  			reg-io-width =3D <4>;
->  			num-cs =3D <4>;
->  			clocks =3D <&clkmgr AGILEX5_L4_MAIN_CLK>;
-> +			spi-max-frequency =3D <50000000>;
->  			status =3D "disabled";
->  		};
->=20
-> @@ -402,6 +403,7 @@
->  			reg-io-width =3D <4>;
->  			num-cs =3D <4>;
->  			clocks =3D <&clkmgr AGILEX5_L4_MAIN_CLK>;
-> +			spi-max-frequency =3D <50000000>;
->  			status =3D "disabled";
->  		};
->=20
-> --
-> 2.35.3
+> 
+> Hello,
+> 
+> This patch is based on commit
+> 7598b469c16 Merge tag 'u-boot-dfu-next-20250703' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next
+> of the next branch of Mainline U-Boot.
+> 
+> Patch has been tested on J784S4-EVM validating the following cases:
+> 1. PHY Auto-Negotiation performed with "phy_aneg_timeout" unset.
+>     CONFIG_PHY_TIMEOUT with a value of 4,000 takes effect.
+>     => Auto Negotiation succeeds
+> 2. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 10,000.
+>     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
+>     [Higher value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
+>     => Auto Negotiation succeeds
+> 3. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 2,000.
+>     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
+>     [Lower value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
+>     => Auto Negotiation times out
+> 
+> Test Logs:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/697eadcbb26786435df48a834c968375
+> 
+> Regards,
+> Siddharth.
+> 
+>   doc/usage/environment.rst | 8 ++++++++
+>   drivers/net/phy/phy.c     | 6 +++++-
+>   2 files changed, 13 insertions(+), 1 deletion(-)
+> 
+> diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+> index bb6c351b441..7447bb85d3e 100644
+> --- a/doc/usage/environment.rst
+> +++ b/doc/usage/environment.rst
+> @@ -335,6 +335,14 @@ netretry
+>       Useful on scripts which control the retry operation
+>       themselves.
+>   
+> +phy_aneg_timeout
+> +    If set, the specified value will override CONFIG_PHY_ANEG_TIMEOUT
+> +    which defaults to 4000. The default value of CONFIG_PHY_ANEG_TIMEOUT
+> +    may be sufficient for most use-cases, but certain link-partners
+> +    may require a larger timeout due to the Ethernet PHY they use.
+> +    Alternatively, the timeout can be reduced as well if the use-case
+> +    demands it.
+> +
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
+Please also update the Kconfig symbol's help to mention this new 
+variable can override the value in that symbol.
 
-Best regards,
-Tien Fong
+Please also mention the base and unit of that variable. Reading the 
+code, it seems it's forced decimal and the unit is milliseconds?
 
+>   rng_seed_size
+>       Size of random value added to device-tree node /chosen/rng-seed.
+>       This variable is given as a decimal number.
+> diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+> index e6fed8c41d7..0f5c9685b59 100644
+> --- a/drivers/net/phy/phy.c
+> +++ b/drivers/net/phy/phy.c
+
+Please also update other users of CONFIG_PHY_ANEG_TIMEOUT. I would 
+recommend to abstract the logic to get the timeout into a function so 
+that consumers don't have to do the parsing themselves, they simply call 
+that function to get the actual timeout.
+
+Users are drivers/net/phy/aquantia.c and drivers/net/xilinx_axi_emac.c 
+as well at the very least.
+
+I'm wondering if we should only have this environment variable and make 
+it default to CONFIG_PHY_ANEG_TIMEOUT instead? Then the logic would be 
+to simply read this variable.
+
+Cheers,
+Quentin
