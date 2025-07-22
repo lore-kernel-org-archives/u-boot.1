@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3623AC83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 15:35:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 931A0C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 15:35:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E42D833F5;
-	Tue, 22 Jul 2025 17:35:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 797BD8362C;
+	Tue, 22 Jul 2025 17:35:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tBdiV1We";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d1Zlc+l/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 344D383253; Tue, 22 Jul 2025 17:35:10 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 894C78359F; Tue, 22 Jul 2025 17:35:11 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 443EA8338C
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 17:35:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 781AB833DB
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 17:35:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3a50fc7ac4dso2621589f8f.0
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 08:35:08 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-45619d70c72so42455e9.0
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 08:35:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753198508; x=1753803308; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753198509; x=1753803309; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=iSLMkTzSY1/bZBiIIn9f9r1npCVEluBfBq0yxmEUQ1I=;
- b=tBdiV1WepbULwZuPc6DgZ1Eh6DrI3l2Li0WiZ9fzv8KeVo0hqEQOE8+JySuWl/dLC1
- MbEbiBksGqyo5L8UJmbo68dUhqfrPd/TPI7VudZWhSz2TvCm6kuhsBPUU32L6zYtAqPK
- GpH9D/DxJzNo8g0yTU6HsUWbRbeE5lVYZ9ABWuAAS7gRZMVZXg058gYZ2dNghtZM2BgV
- SDtqIWs83mFUA2UmnyniXvdsHMFcEkG+YW/voZZCmTqcmGt5oJSOVIE6MmHZiBC11bdC
- 9rz083gTxgSGWBPC48ivfb4qfqRaLYjP0bxQ9VJEhMEKfSN5jfsLvvqMnOoBXqg37JF1
- j3Dg==
+ :reply-to; bh=eLe2fLkvRFhxNeiCZe7zeBsyVTw8GCDak6b+S8qjPSQ=;
+ b=d1Zlc+l/wx25zxqLrvj7i6ZecpifwR42rTcldCOIRgIX/2o9X1ZUIHQWiS4OQOD17j
+ K+XITHPj7crajYXHeB/jQ2z6B+KA19xkH4d6v8uun8e1QgdLWbOqCyqF6utEIR6cBYZS
+ Ne1ilmro76H35+LU5A6RXyHU1Lyit5aSvbNa2V6B6hOhhQChq7dyca2rmZtOpYTe1Ndx
+ h1YICAgmiBw+9S9VJ1lqbhbsCadzsn+4LR1u0EWqRiOzq6YLSpgF8qQYa8Kn09cQAvok
+ EtCsBTYcPZHcDD3T0lzyhqMPcAvSeW8LVPP4dA12vTVkBau29QjSuc8EZOsPhSxaB3Ug
+ Zc3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753198508; x=1753803308;
+ d=1e100.net; s=20230601; t=1753198509; x=1753803309;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iSLMkTzSY1/bZBiIIn9f9r1npCVEluBfBq0yxmEUQ1I=;
- b=sXeixXN7IYnDtPC0xgal5CQV11XYI7Qbbx+zJfldt+dXZQaEBpI9qBYhIGMati/dVE
- wH7gkMUbyxaDcwBDHhB8LEQuCU0uZLTeWBmKFQKeFmGURvQyV08igd58b7lKdB6Jb9e+
- q/1/K4Hd2KGVn9qnUpMM5jcyNDzVQhCkvrLKLEeLf1T3RngvYJnRy4EXBRgrchaj8Vdg
- ivzQXnSbDD4o3jAfHkX9l3flyxALbSQAMub2JhpaRuyjB0ux0mGUSKRTNaP2NACiDOYB
- RHaVifBZ8vieNGjobbYRF4Us/GkxwwD3IEtFxQjIrNptNbou80KxGKy8/hUiZZIhiIZH
- CJlg==
-X-Gm-Message-State: AOJu0YydwWj9PvI/6p4c/hQ3MYsQHdAUFQZrf0J8pDEOAzsWywp/akGU
- mjptBSEOi9qRZPLJKelUoTSuBj2Bt2enqLzfgu0feGU1q/lNnJ3Sd22YSNEv3nsA2Jg=
-X-Gm-Gg: ASbGncuOy3Wgpgx0+wDDY6Df0ueKmELMNN8rZwk91oYYdEp6vVp2chzejhcNrYeykPh
- aO9x5TgKCNfjM66Jq4dHZ6NlFlCcg75xhmaihQbGZophevrT6JV0tWfoAVA1+9BEhtgKu3oh8lt
- NmYNlkwhBqHhW9yjH0AYEPkO1J2K+2sEMB1rMQakaLgYjQ2s8e3ivDgqCdL0VD2gP6ybdFE+SpL
- 2WqhYuTi85i9j+aboZXmrL/aS2DQBv3TW04WXvLX0wZXkucXGIs6eM7/4yRKYRhb3eakKACe18j
- a9Ok/PsuJlp+f/rd7LTrz6cYS72ZXN+U8llV6FeYEooZ6v56W8+n0iocH6gmaKgDKg0L1waOBSS
- MIdj6vr8Rt/5OruynvEBOd73mHQpJgGujcS8UQesITTa1pxB/hoTs7KOZ+bJC/YvOYA==
-X-Google-Smtp-Source: AGHT+IG9krJrURhV7uiGFyhodqmOn10a2lD1rFVFDD80V2Q3DUzYRhaomipLSXv3G9apUuZbPjJ6Eg==
-X-Received: by 2002:a05:6000:230b:b0:3b6:333:256f with SMTP id
- ffacd0b85a97d-3b613eb49f0mr16546586f8f.58.1753198507646; 
- Tue, 22 Jul 2025 08:35:07 -0700 (PDT)
+ bh=eLe2fLkvRFhxNeiCZe7zeBsyVTw8GCDak6b+S8qjPSQ=;
+ b=b9ESzvxW8hkNA7meOgoWia/iwWK8/DiZkyXtyUfE+javNNP5cTGnOb0iWA5f0ulF9H
+ QqAiG/C3v7PvH+/+y/xb0s4aSYJd4AXDj8sB9StjfbapPZX3zuVdSI1aV8BJim5Mm7e5
+ VjLz+QFiirgGeiIGUCXz9lsLLDupMje6Jn7eCPr7kn5BFd6KiJXzqdVjLWWoSiWimW7D
+ hjnGSHufcagGDQ6zFld7/0Pp/ziK+i9ezrsR9L+WIw8rxA4E1iD5JE6vZtlkJVwLtGof
+ ipHwiLTbNIJJYhH/5PUqDb86bxxRfYn2Bf33rvE9gqqhEjQpQMqkhHd7vk09Oj7kn+zr
+ QvQQ==
+X-Gm-Message-State: AOJu0YzQaRtmPR+MVjplwr7+PxBxmf4Aqsbs+XaiIsmYosBVmZhtxX5F
+ qFiOTf/Yrr+xHcLUmUhDnMIf88j83tegaupqgJK9aQbzJA1Bizf7NOJQQFdw4L+eCbAUr+zwkEQ
+ 0131Y
+X-Gm-Gg: ASbGncsAPgADJb9+HbuL0HiIlZQypwWlOrlkqfzy/SIHVntja+GJ4AbnH47EYJrrt0Z
+ dQ5ZRzG+5/Q5M+77+rIZx+0rIDhiI78RJGCiipwqe9gAoZlcAhQoM9lAPsyleCLzliR9omcl2NO
+ 2quLD1fQ6RDNRuD7hMfLi75VnxgHprpKiVMNJdzEO9uD3DIkwbuGV82/p4y2RAmw2y43uxzTgV4
+ lny4ZJUL9JiBuINFoiwFROH/JMD02tFbZFM2LbBQq1baSRdhMpSDmzix8C2i5Z7VX6upSr0n/nM
+ y7cPf/tEZwb93crJ4lDY93Jw1fhSF/XMyvvZ2wDoba1mrpKBA1Sv1R8naZJROOHB6xRXrKrtsrf
+ LQ9w9IqbdrOMRoY5ykALzRqtRHsuGn5OFT6hD+AOgU03FUHvCKpuBJcCdJofXz1o72A==
+X-Google-Smtp-Source: AGHT+IFu1584WY4Vd4137u+mVIeMtDHBbbYb1oIIcXQVFCWGhhwZA4VaxxBMoldB5fLZIrH3a4p77w==
+X-Received: by 2002:a05:6000:420a:b0:3b6:18c0:8b6d with SMTP id
+ ffacd0b85a97d-3b7634fa6bamr2839777f8f.28.1753198508869; 
+ Tue, 22 Jul 2025 08:35:08 -0700 (PDT)
 Received: from lion.localdomain (p549d4bd0.dip0.t-ipconnect.de.
  [84.157.75.208]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4562e886286sm198716285e9.26.2025.07.22.08.35.06
+ 5b1f17b1804b1-4562e886286sm198716285e9.26.2025.07.22.08.35.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 08:35:06 -0700 (PDT)
+ Tue, 22 Jul 2025 08:35:08 -0700 (PDT)
 From: Casey Connolly <caleb.connolly@linaro.org>
-Date: Tue, 22 Jul 2025 17:34:51 +0200
-Subject: [PATCH v5 1/8] binman: add $(srctree)/tools to toolpath
+Date: Tue, 22 Jul 2025 17:34:52 +0200
+Subject: [PATCH v5 2/8] binman: support building binman dtb when
+ OF_UPSTREAM is enabled
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250722-b4-qcom-tooling-improvements-v5-1-df143f1247fc@linaro.org>
+Message-Id: <20250722-b4-qcom-tooling-improvements-v5-2-df143f1247fc@linaro.org>
 References: <20250722-b4-qcom-tooling-improvements-v5-0-df143f1247fc@linaro.org>
 In-Reply-To: <20250722-b4-qcom-tooling-improvements-v5-0-df143f1247fc@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -87,13 +89,13 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=769;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1762;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=gNNa3fK2UrnGlTOCK1uwawi5K9QlEt+qLjSOLkF64Zk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoz69SusmA/tOjYjpe2j5/SfuY+eBwTmXPxwQcQvX0Wo2
- ElYKH9+RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZgIjyTDf6fI7q1V91Mm12/k
- 63NuilbKdZDI3f2vQurFlZMynd++7WJkWHD8W4e/JOe8N3EOE6+d+PenYIF03ZVJ968zTtynt3N
- Dmh8A
+ bh=fgp3QTIiXUnnwls86SVOD3GTWPGdaBR4NlYYUfgS8uw=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoz69Sv4N3JdaLikYdT5pappYYLXolLvcFGtBccjX/Fnv
+ L5kqvuxo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAExkaiDD/+QHz93llvzeO9Fi
+ VQX7+v8dnBmsc+eevb0nJj/CYo/dfleG/w5Js2z7szhTDh46WtCT+ipa/lzq60//RLmYM7YZ585
+ g2gIA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -114,32 +116,66 @@ X-Virus-Status: Clean
 
 From: Casey Connolly <casey.connolly@linaro.org>
 
-Not all tools need building, look in the srctree toolpath as well as
-the objtree.
+Since binman DTB files are not upstream they are kept in the U-Boot dts
+dirs, this means they will not be built when building with OF_UPSTREAM
+enabled. Resolve this by adding a rule to build the binman DTB if both
+conditions are met.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- Makefile | 5 +++++
- 1 file changed, 5 insertions(+)
+ dts/Makefile | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 93e9f4018423..5b361a0ee398 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1603,8 +1603,13 @@ else
- binman_dtb = ./u-boot.dtb
- endif
+diff --git a/dts/Makefile b/dts/Makefile
+index 86bf8dc21560..c620d84ccb13 100644
+--- a/dts/Makefile
++++ b/dts/Makefile
+@@ -25,8 +25,15 @@ local_dtbos := local-dtbos
+ else
+ local_dtbos :=
  endif
  
-+# Not all tools are in the output dir, use the srctree toolpath as well
-+ifneq ($(srctree),$(objtree))
-+BINMAN_TOOLPATHS += $(srctree)/tools
++binman_dtb := $(subst ",,$(CONFIG_BINMAN_DTB))
++ifneq ($(binman_dtb),)
++binman_dtb_target := binman-dtb
++else
++binman_dtb_target :=
 +endif
 +
- quiet_cmd_binman = BINMAN  $@
- cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		$(foreach f,$(BINMAN_TOOLPATHS),--toolpath $(f)) \
-                 --toolpath $(objtree)/tools \
+ ifneq ($(EXT_DTB),)
+ DTB := $(EXT_DTB)
+ else
+ DTB := $(dt_dir)/$(DEVICE_TREE).dtb
+@@ -45,9 +52,9 @@ $(obj)/dt.dtb: $(DTB) FORCE
+ endif
+ 
+ targets += dt.dtb
+ 
+-$(DTB): arch-dtbs $(local_dtbos)
++$(DTB): arch-dtbs $(local_dtbos) $(binman_dtb_target)
+ 	$(Q)test -e $@ || (						\
+ 	echo >&2;							\
+ 	echo >&2 "Device Tree Source ($@) is not correctly specified.";	\
+ 	echo >&2 "Please define 'CONFIG_DEFAULT_DEVICE_TREE'";		\
+@@ -64,8 +71,18 @@ PHONY += local-dtbos
+ local-dtbos:
+ 	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbos
+ endif
+ 
++# If CONFIG_BINMAN_DTB is set and CONFIG_OF_UPSTREAM is set then
++# ensure we build the binman DTB as well
++ifneq ($(binman_dtb),)
++ifeq ($(CONFIG_OF_UPSTREAM),y)
++PHONY += binman-dtb
++binman-dtb:
++	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts $(binman_dtb)
++endif
++endif
++
+ ifeq ($(CONFIG_XPL_BUILD),y)
+ obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
+ # support "out-of-tree" build for dtb-spl
+ $(obj)/dt-spl.dtb.o: $(obj)/dt-spl.dtb.S FORCE
 
 -- 
 2.50.1
