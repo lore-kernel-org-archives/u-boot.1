@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 384B4C83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 18:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B9CC83F1A
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 18:44:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96EB283390;
-	Tue, 22 Jul 2025 20:27:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B383283330;
+	Tue, 22 Jul 2025 20:44:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FtrpmfCO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CKTa0eGS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6ED9833EB; Tue, 22 Jul 2025 20:27:14 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 9495A833F1; Tue, 22 Jul 2025 20:44:53 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F5048331F
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 20:27:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABEDE805D7
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 20:44:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lordrasmus@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-456108bf94bso41837225e9.0
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 11:27:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3a53359dea5so2836996f8f.0
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 11:44:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753208831; x=1753813631; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/PKp+b0GPxQpMzuSzmkcyWv17u9BssXlZzJkKKShzIM=;
- b=FtrpmfCOwqhHk8v4pC6qvANdV+pGwJcMo67lUcNgK18W7+gU+978re5jlJO//wHdNe
- U1X2A2bTAcrGObDpfeksvR6xnZpiBUNtZmo8apefSyhq9s0dLYmH5yT3V/vsc/ZKcRhq
- 87sty35y8dfmWvS3IsDJALYB/UPofvkAHyxs5zWkZ0aTLJNEs/PAcJre4SUh1e1aSoQf
- y+x+qTzRyUriRwdCYnpa7B4JyFHYEi+MChN0lnIHpzGCNx+0QgNnxRDV2S9tipGkc2DF
- cpl67zzE0+a18voFO6QdMYSdncmKE+lHkeuQt2lspx+LsMDs0fO37TdKoUvpOc6mGxOq
- XNFw==
+ d=gmail.com; s=20230601; t=1753209891; x=1753814691; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cl9FbCf/5AmJ1Aea+AceqGTkpiUcnmS+DBMBFTpFfho=;
+ b=CKTa0eGS3x8L7zWbMNwu5C0azYhyc1BCyOmCw5y+tvRYIMR0gBxRCahkW19DSn2emQ
+ osziRhO0B7pLiiCpN1Z7ybVLefqbV9I2ZP2wGbTQk0DqhQztaS4fS0uRilYv2PJOTRD1
+ 98g9p+QRgVhg/0advQSTuNPurtPtSvmjLxDtjrl1cKVlpD+6JYZ0JloV5uT/FPg1UlZr
+ GbjtQWRvd+BuGkCK9NHIM2D5S4uolhp7cVn/USdu6L953Rw17aYMJ0ZTma+ViXwLO74X
+ VqKmvXIuorNIhRJlBL+VkUP9Ej/KTeXHVfTD8jin5Yi1JJYSEIyubg0aAmXRyPcd4+Nh
+ 6Scw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753208831; x=1753813631;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/PKp+b0GPxQpMzuSzmkcyWv17u9BssXlZzJkKKShzIM=;
- b=K3nMV6MuipkLTasnkvJeD9dsRoV+5P5XjVnhqeEKB1t4AS553OAclx7tH3uN6CbnKb
- Tpu82ZsrrdX2R9aRUatGMtR2kI92w358OKFj0jLqOXBiCB6dpfp1CPhufKS/r4RigzjC
- mwknsvEUcVeodQpMcHUpmUBeK67TC6uf/tkvA5HKNBnW41+R+wJg4wRwdAKveIpWycRL
- 0dBjhxPNgjfu04E/u+B8r/0+kWbyIHwuLFprInPh0tG+tc1vSD7O2wXR/qce4uJo7C6/
- yjUb8pgkFM0KR//0396kvF8qIE6Qmj3YVQfmH18Ckf/tG1T8uT0FdCHFzLZD8l4vzOTf
- DUrQ==
-X-Gm-Message-State: AOJu0YxGUloVs6oDEkBysRNVqVeZgmklo1FTXJlcMwCOi/2iMry6Z8bz
- 1K6QyvyCMgG2hShchdgGqtK7vNjH+sKtvDwvgek13jKPL5NHoOanJkAe8Up6GV4I
-X-Gm-Gg: ASbGnctM2PdLY5TCcHkjg01aIOtDdDT72ktht09zkVpbfB0MUd6I54g3EtvseZnNdsW
- HrZ2AZybb0o8hK1iYRYRe+/chQVg2yoqPygt28As9ZjFd/j3IMFfjRMfECR/zhuXKvDGO/bst97
- KecRP3Vu9aC720+e5QfGSQvgchWVlKVeZ7s9lwGMYRkHwTp3ohrF9iLvsjZncXX+a4UrLYF6VC3
- WQBapgTZ9L9A/dgg/7dTPx/BiAXo7T9TJIdoboa38/SOj9mI2ozFfsrIsZWUoNKqEGcxNk/RDBr
- jiC1yWgNrgRhZvFUhEWlZTH8KYzKIMsRyysJW2x8trnIytiCENngAcGe1JnMtLg93HpRomriMJ2
- GFn1cfGkqVIOUasbFtVU4zQrUJ7goeK0M4sNejg7ub4U1H+aDwQ9Pjhuie/s=
-X-Google-Smtp-Source: AGHT+IFWiJQsyaljua0N8+aw/CIM1j7yj2CSl6HSzkP71oFwNFOu6GNU95qvma2rKmQZ2GfWLpJiiA==
-X-Received: by 2002:a05:6000:2006:b0:3a4:eef9:818a with SMTP id
- ffacd0b85a97d-3b768ef3c4emr215192f8f.27.1753208831014; 
- Tue, 22 Jul 2025 11:27:11 -0700 (PDT)
-Received: from archlinux (p54b96342.dip0.t-ipconnect.de. [84.185.99.66])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca2bb48sm14224079f8f.24.2025.07.22.11.27.10
+ d=1e100.net; s=20230601; t=1753209891; x=1753814691;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cl9FbCf/5AmJ1Aea+AceqGTkpiUcnmS+DBMBFTpFfho=;
+ b=cL7E/xbTk2/XbqcQD40YUVPRRjWky2+jeiqgQ7SZICd/ouIAmr/iNLzQm0FdXgcdxY
+ M9HxQqg2sCnf9KeTWCE32uQXRwwy0VTI/wjjbI1cPY93NkPuoglxdFeHEdUaYUJvph8t
+ 1I7vfMsmrC8SH6hze4R/g7LoDSDw9EpHvK8/P3DS67pNS4RUofA9l34z3ecsM2St0Ig6
+ xT7ulk+7yPYzthRPIyWrUxV3KU6D1Vq0T1f1Foby060kagdNXGjX5YlqCwlUH9MzfC+9
+ Pp0e5h5OXPDTUPA+CGILT4qvKMk0pIN68haeaXx/MF5pkMadshV8b/uiaEHoMOWgCWkG
+ XigQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUD1LYcu1YGynOWrv3uyZAYm0Xvj124AHMTiEQ9hp3RADypgPMohp2o2Cg9KyNlpHzU2ukArM=@lists.denx.de
+X-Gm-Message-State: AOJu0YynvlynlwHNk9gDQuk1W1+p8wvOs3FPnix3cavTfWDwNN0Ry3NR
+ 5RaZ3fOcv4vcFMB609LWRJZorYNP3PHS2xcjsmQY18uU20J5TEidqWLz
+X-Gm-Gg: ASbGncvF+AkMqoBqyVWRmF8lixPgKM36SsEJBY29G+x98s6A16srU5LuIYk7TPEHU1H
+ hifUaV0lY3rp3WZ4KqHEQHI2a3WVv5jXcIfK0u4btrGgZI/PtBSZr8RA7JEKe3G/Gzb/wFzo040
+ JrKpykwpz+62agCm6zyoP9Ta8psM3Fo1p+giopkFLa6XlFgymlY7DBikKLmpW6j9/gMRIgVvk2P
+ zBa3w74LEE8FNLV+zoEs8OfR46HWKfACBurj13ljpDdDjLUyQCKsP/jDz+ZWJ5+jUq0ApffuSSX
+ Ol/3Gj8xJ5nOqFMnXyBEyYpa5AZVtwK3lzagUlTbdMQ9t+NMas3MYlveezwI551S0l1+0Vjzt5+
+ FO646xweQ9nYswTcaK+fqS1Ih
+X-Google-Smtp-Source: AGHT+IEXmuY8elXs3u49xTst+nksXNAeL1goKBYwC0TD3pwjzw24ug/cD2YKq3cab7W2yZ4tAH0q9w==
+X-Received: by 2002:a05:6000:2504:b0:3a5:25e0:ab53 with SMTP id
+ ffacd0b85a97d-3b768ef3ca6mr202013f8f.32.1753209890828; 
+ Tue, 22 Jul 2025 11:44:50 -0700 (PDT)
+Received: from Ansuel-XPS24 ([176.200.63.230])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-456485798fcsm85121685e9.24.2025.07.22.11.44.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 11:27:10 -0700 (PDT)
-From: Ramin Moussavi <lordrasmus@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Ramin Moussavi <lordrasmus@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Alexander Dahl <ada@thorsis.com>
-Subject: [PATCH] arm: spi: atmel_qspi: fix race condition in transfer
- completion check
-Date: Tue, 22 Jul 2025 20:27:09 +0200
-Message-ID: <20250722182710.6095-1-lordrasmus@gmail.com>
-X-Mailer: git-send-email 2.50.1
+ Tue, 22 Jul 2025 11:44:50 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de
+Subject: [PATCH] airoha: rework RAM size handling to support multiple RAM size
+Date: Tue, 22 Jul 2025 20:44:18 +0200
+Message-ID: <20250722184426.6964-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,69 +100,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In atmel_qspi_transfer(), the status register is polled with:
+There are multiple version of the same reference board with different
+RAM size and it's not enough to base the RAM size entirely from DT. To
+better support it use the get_ram_size way to scan for the actual RAM
+size of Airoha SoC and increase the size of the memory map.
 
-  imr = QSPI_SR_INSTRE | QSPI_SR_CSR;
-  return readl_poll_timeout(aq->regs + QSPI_SR, sr,
-                            (sr & imr) == imr,
-                            ATMEL_QSPI_TIMEOUT);
-
-However, this is racy: QSPI_SR_INSTRE can be set before QSPI_SR_CSR,
-and will then be cleared by the read. If that happens, the condition
-"(sr & imr) == imr" can never be true, and the function times out.
-
-This race condition is avoided in at91bootstrap by accumulating the
-status bits across reads until both bits have been observed:
-
-  /* Poll INSTruction End and Chip Select Rise flags. */
-  imr = (QSPI_SR_INSTRE | QSPI_SR_CSR);
-  sr = 0;
-  do {
-    udelay(1);
-    sr |= qspi_readl(qspi, QSPI_SR) & imr;
-  } while ((--timeout) && (sr != imr));
-
-Update U-Boot's atmel_qspi_transfer() to use the same pattern,
-ensuring that both flags are observed even if they are not set
-simultaneously.
-
-Signed-off-by: Ramin Moussavi <lordrasmus@gmail.com>
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/spi/atmel-quadspi.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+ arch/arm/mach-airoha/an7581/init.c | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/spi/atmel-quadspi.c b/drivers/spi/atmel-quadspi.c
-index 8aa7a83aef4..0f9ce409a0c 100644
---- a/drivers/spi/atmel-quadspi.c
-+++ b/drivers/spi/atmel-quadspi.c
-@@ -616,6 +616,8 @@ static int atmel_qspi_transfer(struct atmel_qspi *aq,
- 			       const struct spi_mem_op *op, u32 offset)
+diff --git a/arch/arm/mach-airoha/an7581/init.c b/arch/arm/mach-airoha/an7581/init.c
+index d149e0ee3c8..0f72365c4ab 100644
+--- a/arch/arm/mach-airoha/an7581/init.c
++++ b/arch/arm/mach-airoha/an7581/init.c
+@@ -2,10 +2,14 @@
+ 
+ #include <fdtdec.h>
+ #include <init.h>
++#include <linux/sizes.h>
+ #include <sysreset.h>
+ #include <asm/armv8/mmu.h>
++#include <asm/global_data.h>
+ #include <asm/system.h>
+ 
++DECLARE_GLOBAL_DATA_PTR;
++
+ int print_cpuinfo(void)
  {
- 	u32 sr, imr;
-+	u32 val = 0;
-+	unsigned long timeout;
+ 	printf("CPU:   Airoha AN7581\n");
+@@ -14,12 +18,23 @@ int print_cpuinfo(void)
  
- 	/* Skip to the final steps if there is no data */
- 	if (op->data.nbytes) {
-@@ -636,8 +638,16 @@ static int atmel_qspi_transfer(struct atmel_qspi *aq,
- 
- 	/* Poll INSTruction End and Chip Select Rise flags. */
- 	imr = QSPI_SR_INSTRE | QSPI_SR_CSR;
--	return readl_poll_timeout(aq->regs + QSPI_SR, sr, (sr & imr) == imr,
--				  ATMEL_QSPI_TIMEOUT);
+ int dram_init(void)
+ {
+-	return fdtdec_setup_mem_size_base();
++	int ret;
 +
-+	timeout = timer_get_us() + ATMEL_QSPI_TIMEOUT;
-+	while (1) {
-+		val |= readl(aq->regs + QSPI_SR) & imr;
-+		if ((val & imr) == imr)
-+			return 0;
++	ret = fdtdec_setup_mem_size_base();
++	if (ret)
++		return ret;
 +
-+		if (time_after(timer_get_us(), timeout))
-+			return -ETIMEDOUT;
-+	}
++	gd->ram_size = get_ram_size((void *)gd->ram_base, SZ_8G);
++
++	return 0;
  }
  
- static int atmel_qspi_sama7g5_set_cfg(struct atmel_qspi *aq,
+ int dram_init_banksize(void)
+ {
+-	return fdtdec_setup_memory_banksize();
++	gd->bd->bi_dram[0].start = gd->ram_base;
++	gd->bd->bi_dram[0].size = gd->ram_size;
++
++	return 0;
+ }
+ 
+ void reset_cpu(void)
+@@ -32,12 +47,12 @@ static struct mm_region an7581_mem_map[] = {
+ 		/* DDR */
+ 		.virt = 0x80000000UL,
+ 		.phys = 0x80000000UL,
+-		.size = 0x80000000UL,
++		.size = 0x200000000ULL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
+ 	}, {
+ 		.virt = 0x00000000UL,
+ 		.phys = 0x00000000UL,
+-		.size = 0x20000000UL,
++		.size = 0x40000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
 -- 
-2.50.1
+2.50.0
 
