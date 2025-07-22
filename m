@@ -4,71 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 529E9C83F25
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 10:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92DDC83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 10:09:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCA7F83381;
-	Tue, 22 Jul 2025 12:04:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 13C12833C6;
+	Tue, 22 Jul 2025 12:09:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HfkBdV6V";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eiOZE+os";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D832D833C6; Tue, 22 Jul 2025 12:04:00 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42ADD83346
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 12:03:58 +0200 (CEST)
+ id 604CB833C6; Tue, 22 Jul 2025 11:20:35 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BABD8329B
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 11:20:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56MA3oIl1471096;
- Tue, 22 Jul 2025 05:03:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753178630;
- bh=C0GfBbjwYwl3fvDuD984Pxwt9/Yw37h1f54bsN9nRRw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=HfkBdV6VS7KLPP2jYFQ3mv9wYMW7K5HWV8/n+gmKlqRbd2xOOjvLNlJ4hLYmLbJfG
- svZalXEF5GdgPjAw0rcQqCu2XbthSxvmue8kDB8meF9IjLLWvWAxVE/ERqWAy8htnk
- WwIDP4BpFpHNM8MgndfjTzOksKN7Jxuf4FltcLCk=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56MA3opc4019284
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 22 Jul 2025 05:03:50 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 22
- Jul 2025 05:03:49 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 22 Jul 2025 05:03:49 -0500
-Received: from localhost (uda0492258.dhcp.ti.com [172.24.227.169])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56MA3lxU854707;
- Tue, 22 Jul 2025 05:03:48 -0500
-Date: Tue, 22 Jul 2025 15:33:47 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <joe.hershberger@ni.com>, <rfried.dev@gmail.com>,
- <marek.vasut+renesas@mailbox.org>, <jerome.forissier@linaro.org>,
- <kever.yang@rock-chips.com>, <alexthreed@gmail.com>,
- <skylake.huang@mediatek.com>, <u-boot@lists.denx.de>,
- <u-kumar1@ti.com>, <praneeth@ti.com>, <nm@ti.com>, <srk@ti.com>
-Subject: Re: [PATCH] net: phy: Support overriding Auto Negotiation timeout
- with env variable
-Message-ID: <770cbe13-ff0a-4fb0-b912-43290b3435ca@ti.com>
-References: <20250722060554.352952-1-s-vadapalli@ti.com>
- <e92c9774-ad98-4f7b-bafe-eaf068f3ad72@cherry.de>
+ spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ae361e8ec32so911809666b.3
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 02:20:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753176033; x=1753780833; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=qIPOpSlU17Kuk9Ixf7sfA960JtkiTNh6NieoRhPEdxc=;
+ b=eiOZE+osuzKdVvfaV/eblmTgzAlcYX6n68Xeui7pOzhJMWtu+w6WO4EoDnvnZ8d6Dy
+ BRuCRL1/F7CgNmfMYX/dHNaPAoE3KDY17jfElu/4/iD2e+rL0EhbHt2NkM/vZKMVZKqv
+ nQied7oxK4WuVGY7vRbVfVVOoXZxYmpUzAkk9xOzkK+Srfh86QCihjgomSA9ieDaWaKi
+ gbfIlwmrA8uEx+1Z6hmio+TvOGmiF4s+WCR0um6xLnJj+DB7Lam3q44BLWuIyU0iDR7u
+ kFr6V5P9YhiIruxmh7VPxGUvUStCMaDJK+yVWNgk3xFLyAXcT743p+dujiM4Xx8rbUfM
+ dHQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753176033; x=1753780833;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qIPOpSlU17Kuk9Ixf7sfA960JtkiTNh6NieoRhPEdxc=;
+ b=g5tutIYiC633tl0cLz0PeO6WOZJ8AxlXh9cNQGpYfTSp7sKZoHV4DEd6peei8IKW2Y
+ j0SivpGi27azvPd33QO4NC6O/0lQVM1zL0TBaiFi4RveTjq/U+SfRvD1qJhvN9yDb0cd
+ NrLdXO4j0cs6UNXeHcuCMjpUweFnbYK1cbvKAPrh+8ak2QDtrPf2srcSuz/maDpFhdum
+ T86rFo3w9fwlhEKUbpgAw41OQNIMTdg9/DzJuipBzpewSnRfotBQtKdQKETZwR4jMHv4
+ STARSfM0qZZ1ODlonICiDezXTKgUVmZMYhG6s6WhGgS3QVUdax1haGOVef//92a2n3Ha
+ uPWA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUfp9Vhzht0qRW74XtdkHFWk4d0L7zBai/hKC6xbME3qliDMvEJOPpdJWkafKJyXeVO5nCNcWw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxslssvHiYA5GjovYVxcqpWmUsOOtcZGjmOXUXWES4efqbweFqG
+ FGf4jyMIxNPYBaWwtp+jOjLD/Kgosdn0GASbEMfZ31DoRC8RwqlFxqdTddJ6ahVfKQs=
+X-Gm-Gg: ASbGnctcLrFvpsFVs+MSt99936uTZlccoZER+cDuoYp+rVvh3dKM2xMyW2WRYy9n5Ho
+ uPA1UXRQiBvBmohUgfhJJyog3AxqQjDBp9EU+aUBK1vHNvkKh3a1t0fBZpuHXUdIxbJzR1C/+ek
+ rdmRQYIEedbxMBB3AqaglVSKyZNu95t5ZEYY/hzJYqKNxXuT1r9Vhir5G74B977wgaPn7Vf5QoU
+ 7x1flr+gj0EKU/eLJizBl9/9MR7lY6d21Gtkd45WOBl6qblizJvYIFjrPpWIirGXwSCu+XQW5WA
+ E7CwIBKjGqQWg+FPP+yT9pqDZYmzUqxx2iHwy8dwyBGfViB0Y6O6HffqHysbtQo9fErTN/IxRRW
+ HEBpkUMp0BeE/LROo1rFsbUq5QjdcWSME8Y3fHaxVzg==
+X-Google-Smtp-Source: AGHT+IFP4mobpEaFgc/f6U0wArWrq63uF/egcveLWwFA8km+aqJtwM8qVbrKgvrTb4N7lKmx4RTx0Q==
+X-Received: by 2002:a17:906:b212:b0:ae0:b7c8:d735 with SMTP id
+ a640c23a62f3a-ae9c9b6c4dfmr2091728466b.42.1753176032619; 
+ Tue, 22 Jul 2025 02:20:32 -0700 (PDT)
+Received: from [172.20.10.10] ([46.97.171.248])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aec6ca7a3e1sm828627266b.105.2025.07.22.02.20.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Jul 2025 02:20:32 -0700 (PDT)
+Message-ID: <c3c99016-b6ae-443b-ac1e-a6c5144dd815@linaro.org>
+Date: Tue, 22 Jul 2025 10:20:30 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <e92c9774-ad98-4f7b-bafe-eaf068f3ad72@cherry.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for Winbond W77Q51NW
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>
+References: <20250720195901.414083-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Tudor Ambarus <tudor.ambarus@linaro.org>
+In-Reply-To: <20250720195901.414083-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 22 Jul 2025 12:09:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,115 +107,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 22, 2025 at 10:49:04AM +0200, Quentin Schulz wrote:
-> Hi Siddarth,
-> 
-> On 7/22/25 8:05 AM, Siddharth Vadapalli wrote:
-> > The Auto Negotiation procedure between two Ethernet PHYs consists of
-> > determining the best commonly supported parameters among Speed,
-> > Duplex Mode and Flow Control.
-> > 
-> > The time taken for this procedure is not only dependent on the local
-> > PHY used, but also on the link-partner PHY.
-> > 
-> > While a timeout can be specified in the form of a "CONFIG" on the basis
-> > of the local PHY present on the device, since the timeout also depends
-> > on the link-partner PHY, it might be necessary to modify the timeout.
-> > 
-> > To avoid rebuilding the bootloader for a given device, just because it
-> > may be connected to various link-partner PHYs, each with a different
-> > timeout, introduce an environment variable named "phy_aneg_timeout" and
-> > override "CONFIG_PHY_ANEG_TIMEOUT" with "phy_aneg_timeout".
-> > 
-> 
-> I'm not entirely convinced it makes sense to do that but I'm not against it,
-> will let others decide. If we go forward with it, please see comments below.
-> 
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > ---
-> > 
-> > Hello,
-> > 
-> > This patch is based on commit
-> > 7598b469c16 Merge tag 'u-boot-dfu-next-20250703' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next
-> > of the next branch of Mainline U-Boot.
-> > 
-> > Patch has been tested on J784S4-EVM validating the following cases:
-> > 1. PHY Auto-Negotiation performed with "phy_aneg_timeout" unset.
-> >     CONFIG_PHY_TIMEOUT with a value of 4,000 takes effect.
-> >     => Auto Negotiation succeeds
-> > 2. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 10,000.
-> >     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
-> >     [Higher value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
-> >     => Auto Negotiation succeeds
-> > 3. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 2,000.
-> >     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
-> >     [Lower value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
-> >     => Auto Negotiation times out
-> > 
-> > Test Logs:
-> > https://gist.github.com/Siddharth-Vadapalli-at-TI/697eadcbb26786435df48a834c968375
-> > 
-> > Regards,
-> > Siddharth.
-> > 
-> >   doc/usage/environment.rst | 8 ++++++++
-> >   drivers/net/phy/phy.c     | 6 +++++-
-> >   2 files changed, 13 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
-> > index bb6c351b441..7447bb85d3e 100644
-> > --- a/doc/usage/environment.rst
-> > +++ b/doc/usage/environment.rst
-> > @@ -335,6 +335,14 @@ netretry
-> >       Useful on scripts which control the retry operation
-> >       themselves.
-> > +phy_aneg_timeout
-> > +    If set, the specified value will override CONFIG_PHY_ANEG_TIMEOUT
-> > +    which defaults to 4000. The default value of CONFIG_PHY_ANEG_TIMEOUT
-> > +    may be sufficient for most use-cases, but certain link-partners
-> > +    may require a larger timeout due to the Ethernet PHY they use.
-> > +    Alternatively, the timeout can be reduced as well if the use-case
-> > +    demands it.
-> > +
-> 
-> Please also update the Kconfig symbol's help to mention this new variable
-> can override the value in that symbol.
 
-Sure, I will do so.
 
+On 7/20/25 8:58 PM, Marek Vasut wrote:
+> Add IDs for Winbond W77Q51NW, 512M-bit Secure Serial Flash Memory
+> with Post-Quantum Cryptography, Dual/Quad SPI, QPI and DTR . The
+> flash part is similar to W25Q512NWM .
 > 
-> Please also mention the base and unit of that variable. Reading the code, it
-> seems it's forced decimal and the unit is milliseconds?
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Jagan Teki <jagan@amarulasolutions.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
+> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> Cc: Vignesh R <vigneshr@ti.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+> index e7e97780d7c..0383175beb5 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -591,6 +591,7 @@ const struct flash_info spi_nor_ids[] = {
+>  	{ INFO("w25m512jw", 0xef6119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>  	{ INFO("w25m512jv", 0xef7119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>  	{ INFO("w25h02jv", 0xef9022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
 
-The unit is the same as CONFIG_PHY_ANEG_TIMEOUT which it overrides.
 
-> 
-> >   rng_seed_size
-> >       Size of random value added to device-tree node /chosen/rng-seed.
-> >       This variable is given as a decimal number.
-> > diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-> > index e6fed8c41d7..0f5c9685b59 100644
-> > --- a/drivers/net/phy/phy.c
-> > +++ b/drivers/net/phy/phy.c
-> 
-> Please also update other users of CONFIG_PHY_ANEG_TIMEOUT. I would recommend
-> to abstract the logic to get the timeout into a function so that consumers
-> don't have to do the parsing themselves, they simply call that function to
-> get the actual timeout.
-> 
-> Users are drivers/net/phy/aquantia.c and drivers/net/xilinx_axi_emac.c as
-> well at the very least.
-> 
-> I'm wondering if we should only have this environment variable and make it
-> default to CONFIG_PHY_ANEG_TIMEOUT instead? Then the logic would be to
-> simply read this variable.
+The patch is looking fine. Any idea why SFDP parsing is optional?
+I see a SPI_FLASH_SFDP_SUPPORT that guards it. Having SFDP optional
+introduces headaches as one has to specify all flash parameters statically
+at flash declaration. I assume it's about image size limitation. I also
+see a spi-nor-tiny.c, about which I'm not thrilled. Is there a general
+recommendation on when to split things? Maybe a question for Tom.
 
-Would it be better to increase the default value of
-CONFIG_PHY_ANEG_TIMEOUT to maybe 20,000 instead? If auto negotiation
-completes earlier, then there won't be any issues for existing users.
-The only problem could be if it is expected to fail earlier for
-triggering a fallback mechanism. Please let me know what you think.
+Here it seems that you specify just data that can be discovered by SFDP.
+You won't need a flash entry at all if one adds a "spi-nor-generic"
+flash info that initializes the flash solely on its SFDP data, see
+linux. It would require porting the parsing of the 4bait table from
+linux and other small changes for the rest of parameters.
 
-Regards,
-Siddharth.
+Thanks,
+ta
