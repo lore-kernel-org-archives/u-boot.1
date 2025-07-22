@@ -4,91 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D092C83F27
-	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 04:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 556C7C83F27
+	for <u-boot@archiver.kernel.org>; Tue, 22 Jul 2025 04:43:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B067830EA;
-	Tue, 22 Jul 2025 06:30:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9523A831E0;
+	Tue, 22 Jul 2025 06:43:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qy1cyjly";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ljtOPyXA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B08E831E0; Tue, 22 Jul 2025 06:30:55 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17D8C82D32
- for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 06:30:52 +0200 (CEST)
+ id 485C083285; Tue, 22 Jul 2025 06:43:36 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E6D4A82BA7
+ for <u-boot@lists.denx.de>; Tue, 22 Jul 2025 06:43:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-70e302191a3so46733537b3.2
- for <u-boot@lists.denx.de>; Mon, 21 Jul 2025 21:30:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753158651; x=1753763451; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TRq2RgQ1LqDX55niBU1zdmC3/ZESTZW09ZuJrjIttRs=;
- b=Qy1cyjlyTNkBrXI82rmG5LxXn/k+3SVLVx4joGRJG9Muh1hfXrbRMZW4WfSjLO/F9K
- nIYHtxGugVg7dDSOfPSkExGnBr6LUmCI0vyEepeiGiS9LsUZEeylVexlIn58RJS+bhYl
- oBjQ/5UviAVDQNQ1M/M9NMVUCMqPQBH3RVuxdYnIKYwsVXsjyzDeEcg0tUZlBExF6WXA
- Y8UUnBHYRpXw23Y7lIcuTSoX5nxgAIUeD5zdC8hhRxG6DqaKXjip4PLaeG12lo+ZxSSe
- /grogdldxVhq3G8tL1SgRudnC+/ueqdnIu/G2a2WsdSjjlsLH70JeMyp7NICMnjA757B
- XJNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753158651; x=1753763451;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TRq2RgQ1LqDX55niBU1zdmC3/ZESTZW09ZuJrjIttRs=;
- b=xVE9qsPC+ib8deyXV4K3DZ5NPkXovhujsosGmqboxkTxdK+n0fauvyYvnzPAmvXOaC
- PyjN93y/L71o/th0aBCfJHZUmgAFnwzrYfvFzg4tNBC5C3vbBZsAz+N2DD4kooxsoWWm
- ILDlLDF4/zVA67mXWhNXrJswjgb4nq6XnsHAcUsm9dpwyfoC405tqhabKXdIoStr9Ze4
- s6mopisWz21TUwSIVn5duk0eGhzHco5GZvu1QqwUtvw/ICEUCPKoTLwwhpGWAfcEG10F
- N8y8bRyb3NHfUIBnOx9uEE46mwWjQ5lldCQPKJDPhcyhYpk9HGZsDFEg3xdzGP1JOWkV
- 3yXg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYYj6pS/qPioBjhupQE9NsVB6vnVL2V+exZfPk4Tv7magDsOQwwzUgqUnevWe8xSNUrAvwXyk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxku88HOcZH70bfrx609M7kKOiT+xfP58AEnYzJJWxMLo6puLud
- kbUTUYK+wvQbZQVOQloHlMySM62k6ajrksD3bpu/xvYZNvem/QiaJqMSZ8nVEml7LoDom8gCH1p
- bUbbolISqw/hnlAFmyP3Ow4Wh6OWSawKBllef5QB+uw==
-X-Gm-Gg: ASbGncsei563T+sdXDMA2+x97aUuEOuESBLeFl7728/3zXEamlHDryNsLTtkyD3qUIg
- +JU7gRlgJykMU0bvkE8FZIK90VAKTkX59BT/FFxKCGQAER7ni/SS/1QheGswpyDUJ6O2jsqACPW
- zulM0OU85SoVOl618OV7wGLabhUhGd0R3IdWIeOedm1L6T+8zPF7yPdwebcKfVW8Js5xmsJzheO
- sn9zzu6bYkZJTSOzA==
-X-Google-Smtp-Source: AGHT+IGftOja5SNR78hXv5vDE5P2KMsPNr+JiBUHW/MOKQ1QureC7OVDuMFtzELSxSc8A4goE4s47HLpIy9q7nyWe7E=
-X-Received: by 2002:a05:690c:9b0b:b0:719:4cde:84f with SMTP id
- 00721157ae682-7194cde0b72mr207405047b3.10.1753158650875; Mon, 21 Jul 2025
- 21:30:50 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56M4hInN1414051;
+ Mon, 21 Jul 2025 23:43:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753159398;
+ bh=wfEG678T1q4Pc7xsIMxZt8iujxYuyl7zSEh2Sx/w5Ng=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ljtOPyXAB6leic9eHBLBR9KfTFP32kjiSmv0oM86bHFHEcRXF+STTjh1IFrE5WG81
+ mslLqUl3Pix9iXnM8KIMDtWeYFeNfawxPnaqzlkMnGK9nV7/DeNkyEGxAQiTNRttPp
+ 6bmBrz/XLpWAH4cE2kdVxQe2OiykaWzpfMphQhOg=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56M4hHX61845789
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 21 Jul 2025 23:43:18 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 21
+ Jul 2025 23:43:17 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 21 Jul 2025 23:43:17 -0500
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56M4hDZx754711;
+ Mon, 21 Jul 2025 23:43:14 -0500
+Message-ID: <d15f3fef-247c-4f07-be57-dc36a5c09202@ti.com>
+Date: Tue, 22 Jul 2025 10:13:13 +0530
 MIME-Version: 1.0
-References: <20250709222926.24671-1-semen.protsenko@linaro.org>
- <20250709222926.24671-2-semen.protsenko@linaro.org>
- <87tt3b2ti7.fsf@kernel.org>
- <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
- <87ikjllws2.fsf@kernel.org>
-In-Reply-To: <87ikjllws2.fsf@kernel.org>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Mon, 21 Jul 2025 23:30:40 -0500
-X-Gm-Features: Ac12FXzm5dI9cOXXKsMhlWaCdxpj2poLHcA85K3Ig5SzYo0Qf_58bmv-2apENkg
-Message-ID: <CAPLW+4ncXuT7=iP4wt6fuZ25cQvLJUTZe71oC6=y04Wefb5c6w@mail.gmail.com>
-Subject: Re: [PATCH 1/9] phy: samsung: Add Exynos USB DRD PHY driver
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
- Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Greg Malysa <malysagreg@gmail.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] imx: power-domain: Enable refcounting on imx8mp
+To: Frieder Schrempf <frieder.schrempf@kontron.de>, Miquel Raynal
+ <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>
+CC: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, <u-boot@lists.denx.de>,
+ Samuel Holland <samuel.holland@sifive.com>, Wadim Egorov
+ <w.egorov@phytec.de>, Heiko Schocher <hs@denx.de>, Fabio Estevam
+ <festevam@denx.de>
+References: <20250425-ge-ian-display-support-v1-0-8a7a0fe75023@bootlin.com>
+ <20250425-ge-ian-display-support-v1-2-8a7a0fe75023@bootlin.com>
+ <0a2c9ba5-a0fa-4cd7-9e29-0874cf085f2c@kontron.de>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <0a2c9ba5-a0fa-4cd7-9e29-0874cf085f2c@kontron.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,65 +88,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jul 21, 2025 at 4:26=E2=80=AFAM Mattijs Korpershoek
-<mkorpershoek@kernel.org> wrote:
->
-> On Sun, Jul 20, 2025 at 14:57, Sam Protsenko <semen.protsenko@linaro.org>=
- wrote:
->
-> > On Thu, Jul 17, 2025 at 1:58=E2=80=AFAM Mattijs Korpershoek
-> > <mkorpershoek@kernel.org> wrote:
-> >>
-> >> Hi Sam,
-> >>
-> >> Thank you for the patch.
-> >>
-> >
-> > [snip]
-> >
-> >> > +
-> >> > +#define EXYNOS850_DRD_UTMI                   0x50
-> >> > +#define UTMI_FORCE_SLEEP                     BIT(0)
-> >> > +#define UTMI_FORCE_SUSPEND                   BIT(1)
-> >> > +#define UTMI_DM_PULLDOWN                     BIT(2)
-> >> > +#define UTMI_DP_PULLDOWN                     BIT(3)
-> >> > +#define UTMI_FORCE_BVALID                    BIT(4)
-> >> > +#define UTMI_FORCE_VBUSVALID                 BIT(5)
-> >>
-> >> Comparing with the linux driver using
-> >> commit cc52a697f87e ("phy: exynos5-usbdrd: support Exynos USBDRD 3.2 4=
-nm controller")
-> >>
-> >> I notice that the defines are in reverse order (from 0 to 5 and linux
-> >> has from 5 to 0).
-> >>
-> >> Is there any particular reason for this?
-> >> I don't mind it too much but it makes diffing between linux and U-Boot=
- a
-> >> bit harder.
-> >>
-> >> Anyway, I've compared this with the linux driver and it looks good to
-> >> me!
-> >>
-> >> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> >>
-> >
-> > Thank for reviewing this, Mattijs! Yeah, I kinda flipped the register
-> > bits w.r.t. kernel's version, just because it looks better to me this
-> > way (easier to read when it's sorted properly). Due to the driver
-> > model API differences between kernel and U-Boot I had to rework the
-> > whole structure of the driver, and I only added Exynos850 support for
-> > now, so the difference between U-Boot and kernel versions is quite big
-> > as it is anyway, so I figured it's not a big deal to reorder things
-> > even more. Hope it's ok with you?
->
-> It's ok with me. I was just curious if there was any special reason for
-> re-ordering. I agree that it's easier to read with the sorting you have
-> applied.
-> I've noticed that only Exynos850 is supported for now. That's fine as
-> well in my opinion!
->
-> Feel free to pick this up through your tree.
+Hi Frieder
 
-I don't have a maintainer tree unfortunately. The easiest way for this
-series would be probably to go through Samsung tree (Minkyu)?
+On 21/07/25 21:31, Frieder Schrempf wrote:
+> Hi Miquel,
+> 
+> Am 25.04.25 um 08:49 schrieb Miquel Raynal:
+>> Prevent enabling/disabling multiple times the same power domain to avoid
+>> breakages due to the same power domains being referenced several times
+>> by different device nodes.
+>>
+>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> 
+> I've stumbled upon some issue that seems to be related to this patch. I
+> saw you already had to bother with other breakages of existing
+> boards/platforms in the previous implementation. Unfortunately it looks
+> like this still causes some kind of regression in my case.
+> 
+> I'm working with an i.MX8MM board (kontron-sl-mx8mm_defconfig) and I see
+> a crash as soon as I do "usb start" and then "usb stop" (log for the
+> latter see below).
+> 
+> As soon as I revert this patch everything starts to work fine again. Do
+> you have any suggestions? The power-domains involved here are pgc_otg1
+> and pgc_hsiomix defined in imx8mm.dtsi.
+> 
+> Thanks
+> Frieder
+> 
+> 
+> => usb stop
+> stopping USB..
+> Sending event 6/(unknown) to spy 'efi_disk del'
+> Sending event 6/(unknown) to spy 'efi_disk del'
+> Looking for power-domain@0
+> Looking for power-domain@0
+>       - checking gpc@303a0000
+>       - checking power-domain@0
+>    - result for power-domain@0: power-domain@0 (ret=0)
+>    - result for power-domain@0: power-domain@0 (ret=0)
+> "Synchronous Abort" handler, esr 0x96000005, far 0x4ebacdc50
+> elr: 0000000040249c94 lr : 0000000040249c6c (reloc)
+> elr: 00000000fff4ec94 lr : 00000000fff4ec6c
+> x0 : 0000000000000001 x1 : 00000000fbf22750
+> x2 : 00000003efbab500 x3 : 00000000fffcdfb0
+> x4 : 0000000000000020 x5 : 0000000000000020
+> x6 : 00000000fbeea10f x7 : 00000000fbeea3d7
+> x8 : 00000000fffffffe x9 : 00000000fbeea1ec
+> x10: 00000000fbeea280 x11: 00000000ffffffd8
+> x12: 00000000fbeeb1b0 x13: 00000000fbeeb1b0
+> x14: 0000000000000002 x15: 0000000000000000
+> x16: 00000000fff4edc4 x17: 0000000000000000
+> x18: 00000000fbef4db0 x19: 00000004ebacdc50
+> x20: 00000000fbeeace8 x21: 00000000fbf21ad0
+> x22: 0000000000000000 x23: 0000000000000001
+> x24: 0000000000000000 x25: 00000000fbf28f10
+> x26: 0000000000000000 x27: 00000000fbf2ad40
+> x28: 00000000fbf2ada0 x29: 00000000fbeeac70
+> 
+> Code: f9400693 d37ef662 ab130833 54000140 (b8626820)
+> Resetting CPU ...
+> 
+> 
+>> ---
+>>  drivers/power/domain/imx8m-power-domain.c | 4 ++++
+>>  drivers/power/domain/imx8mp-hsiomix.c     | 4 ++++
+>>  drivers/power/domain/imx8mp-mediamix.c    | 4 ++++
+>>  3 files changed, 12 insertions(+)
+>>
+>> diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
+>> index e54ba5d9a5476f678fb48fb16e7217b031acd78a..b44aae78e6de9733e1e53bbec80f54562487a76b 100644
+>> --- a/drivers/power/domain/imx8m-power-domain.c
+>> +++ b/drivers/power/domain/imx8m-power-domain.c
+>> @@ -506,8 +506,12 @@ static int imx8m_power_domain_bind(struct udevice *dev)
+>>  static int imx8m_power_domain_probe(struct udevice *dev)
+>>  {
+>>  	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
+>> +	struct power_domain_plat *plat = dev_get_uclass_plat(dev);
+>>  	int ret;
+>>  
+>> +	/* Every subdomain has its own device node */
+>> +	plat->subdomains = 1;
+>> +
+>>  	/* Nothing to do for non-"power-domain" driver instances. */
+>>  	if (!strstr(dev->name, "power-domain"))
+>>  		return 0;
+>> diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
+>> index 455ad53ef525e18ae45068fa5d8c2be8a1b79335..1ca43880ef56a03ae10e70f7e260022acc447dbb 100644
+>> --- a/drivers/power/domain/imx8mp-hsiomix.c
+>> +++ b/drivers/power/domain/imx8mp-hsiomix.c
+>> @@ -201,8 +201,12 @@ int imx8mp_hsiomix_bind(struct udevice *dev)
+>>  static int imx8mp_hsiomix_probe(struct udevice *dev)
+>>  {
+>>  	struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
+>> +	struct power_domain_plat *plat = dev_get_uclass_plat(dev);
+>>  	int ret;
+>>  
+>> +	/* Definitions are in imx8mp-power.h */
+>> +	plat->subdomains = 5;
+
+
+Enabling LOG_DEBUG on drivers/power/domain/power-domain-uclass.c may
+help further
+
+Looks like setting of plat->subdomains needs updation? PD of HSIOMIX is
+17 (plat->subdomains is 5?)
+
+Looking at the numerous imx* devicetrees; plat->subdomains looks to be
+very different across each platform so hardcoding it in the probe of the
+power driver may not be a good idea I think?
+
+>> +
+>>  	priv->base = dev_read_addr_ptr(dev);
+>>  
+>>  	ret = clk_get_by_name(dev, "usb", &priv->clk_usb);
+>> diff --git a/drivers/power/domain/imx8mp-mediamix.c b/drivers/power/domain/imx8mp-mediamix.c
+>> index 78c32ca3d3a87febdefd5d128d39d817674b8d32..504c22f7d3631363d76eb21e43afd854258d4ea5 100644
+>> --- a/drivers/power/domain/imx8mp-mediamix.c
+>> +++ b/drivers/power/domain/imx8mp-mediamix.c
+>> @@ -143,9 +143,13 @@ static int imx8mp_mediamix_bind(struct udevice *dev)
+>>  
+>>  static int imx8mp_mediamix_probe(struct udevice *dev)
+>>  {
+>> +	struct power_domain_plat *plat = dev_get_uclass_plat(dev);
+>>  	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
+>>  	int ret;
+>>  
+>> +	/* Definitions are in imx8mp-power.h */
+>> +	plat->subdomains = 9;
+>> +
+>>  	priv->base = dev_read_addr_ptr(dev);
+>>  
+>>  	ret = clk_get_by_name(dev, "apb", &priv->clk_apb);
+>>
+> 
+
+-- 
+Thanking You
+Neha Malcom Francis
