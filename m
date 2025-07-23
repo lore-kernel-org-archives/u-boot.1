@@ -4,51 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1800EC83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 07:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CC8C83F25
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 08:10:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43DF982CA4;
-	Wed, 23 Jul 2025 09:13:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nzhnb.com
+	by phobos.denx.de (Postfix) with ESMTP id F284C8339C;
+	Wed, 23 Jul 2025 10:10:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nzhnb-com.20200927.dkim.feishu.cn header.i=@nzhnb-com.20200927.dkim.feishu.cn header.b="kNarW8rx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OR1tdj1/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7E5783253; Wed, 23 Jul 2025 06:22:35 +0200 (CEST)
-Received: from lf-2-50.ptr.blmpb.com (lf-2-50.ptr.blmpb.com [101.36.218.50])
+ id 718CE833D0; Wed, 23 Jul 2025 10:10:24 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEEAB82E34
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 06:22:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D2F98329B
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 10:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=nzhnb.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=zhihong@nzhnb.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=nzhnb-com.20200927.dkim.feishu.cn; t=1753244542;
- h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=7z5mTxOLQZt6rjHTbG2C7X4KbvEmQxljAhBNjVo7lFA=;
- b=kNarW8rx0tXhpLHeyWOidz3K8mlMpExoSkxh8g1HMt4750urDquNWrzt1ILdXQ5HLGFgYV
- R5nWHprgcGoLzhl6Zmr8+UTVeZajtsXR6MOXeQ3HDxnuiXq/jaO4ri/3zr3+2FOltSid5S
- kVfmoovUnRHmQTdE6mmq3eW3KSKW1D+gAVY7MScQvnwIYSaqjUN9X4ke35p4aQxGHL+MAT
- h4QCrcXLj4CZfw1JoZuTTm6ejv78X4WGrBGooWU50tVPp8nYwtLDipWKSy4paWKpFpvxyN
- laKXh3oGGkgOdOnBxlq+vUY06K4rvPeWkhYupD5knQxHRe7X1rMTv9WQZRgDhQ==
-X-Lms-Return-Path: <lba+26880637d+ece083+lists.denx.de+zhihong@nzhnb.com>
-To: <u-boot@lists.denx.de>
-From: "Niu Zhihong" <zhihong@nzhnb.com>
-Subject: [PATCH] board: rockchip: Add Xunlong Orange Pi 5 Ultra
-Message-Id: <20250723042217.4821-1-zhihong@nzhnb.com>
-X-Original-From: Niu Zhihong <zhihong@nzhnb.com>
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
-Date: Wed, 23 Jul 2025 12:22:17 +0800
-Received: from MacBookPro.lan ([101.52.204.106]) by smtp.feishu.cn with ESMTPS;
- Wed, 23 Jul 2025 12:22:20 +0800
-Content-Type: text/plain; charset=UTF-8
-X-Mailman-Approved-At: Wed, 23 Jul 2025 09:13:26 +0200
+ spf=pass smtp.mailfrom=prabhakar.csengg@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4563bc166a5so3886345e9.1
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 01:10:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1753258221; x=1753863021; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WVJdIbu7WAHaQTGqV63Wgu+7tUc71pwK1r9SWgLag1U=;
+ b=OR1tdj1/9R+X5TcxyBuzSjv649lGU2Eg80lZ49x1ZLgtAZQyEAWEb4rrDA+YXyyabw
+ 3IpfMckzh0uRtFGgznRsn/4Wv3eaWe6KMyd13BVPkS7KaSuQoJ8vjlnhprnP0lffhtDW
+ mcjjVwFUsUKu+BuO+GQI5YrE7c/b7+YrH4fkdYWoBOintZAaGPVbQ6uG5J/NJeBZHD+T
+ JiFumoK9aUcqRPeRiVfk8nVtkFY0/hr6kESzJtkEPPcSmpbuno1r5BeVVyUrnCqR04HX
+ QSk/aBN8g8AX+eUCACXtN72YEQf4w4KfyMDq0maxIet69CtYpdOZdfTAPatsn6Ph0a9y
+ wgRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753258221; x=1753863021;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WVJdIbu7WAHaQTGqV63Wgu+7tUc71pwK1r9SWgLag1U=;
+ b=CTQED/eWqORLpIiXE++B4gdZNKHGMAd4Dj5yYIZyRjsqVoyKw1MZ1YF6qpEjlypl8P
+ XZYUHTb7Q39+AL/5oqv9EbtoF/g83aASMrxDfA9H0sBEofyG6WXT3Vi63RH4ftj0f7Dl
+ +cZwW65CKIOe0J+atAMstGp+JG3HQ8HzbdkyuP1uegtHqe7OLaL1hJ0Ui6d9kxXKvSbM
+ unC7oLkk1lc4S8NsxqRFbRKGAzQyDkszuniqAMWjrzacryEtYj/D/jjGCjmvtlpzH698
+ a284DuShxa9GC9tDki9drY4PfihhHQO3zTxxQ5iQUkUvqOkCIYP9TN1xIhg/zgdpD+2a
+ Fs1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVyV0w9fNc+s3mjQTVjORgGoUF1ii1y8GJ9InYPfEVBDkYyUi6R0dZw6DSnhNPyKu5IuX4qizQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5ISglDRIMOfQ35Titor+fKs4VyJVJqE5duvPDOSQJLIgCJGyv
+ /z/9lx/GugdbcsN3otgSjU+a/WJlTxvNRnt2tuVN6x6BPq6ziRox4qPm3RwAYQ==
+X-Gm-Gg: ASbGncv5Piq4b0HKnIMa+VNdmKGdFNaZX3v/ETFrEqLFGfWh955Qsjtvdfyep74nQCh
+ vHRGrbwneQcfbl5Xl7MLarUNihGhW39V0hTPlO8XBJfGxjGPGDd80zHvdCrXTr8h1oB3i53cngI
+ wOZzw1h3xKD5XLqjzfMrF9RdCw3He1acNi4AKJXi74URi9F7sStQX7FdDgW6manD808iKUVp9sx
+ h4cu8ho7TrY76UQX8wcTL96rOMwYjwMUcVbbiU7ArqhXmyyxpxdyPqd6VBwCot/Gf6WQo8Gt0YB
+ sxwvC6y/7BL7azYKtFAuEnG1HtpI9TsC1iHRA87/H3Xw0js6ggQewgy3wnXkurb+np88RfO961B
+ viJlC+x7YAHIleyMZ+HmAYWB1vefc/qotuJMZS0gInQvUjFaKIUKP3Y8K+xkR/7GSGD8wYoObDW
+ pGaZpAU3s=
+X-Google-Smtp-Source: AGHT+IHoEu0uet1IKhUh6TXqWUlwjn0y6Yiqq2bjTRlC5eB7+x3YwPlKHikkCFWQ7XFKVh1zRPr2Xg==
+X-Received: by 2002:a05:600c:a293:b0:456:1122:8342 with SMTP id
+ 5b1f17b1804b1-4586271252bmr33803905e9.5.1753258220301; 
+ Wed, 23 Jul 2025 01:10:20 -0700 (PDT)
+Received: from iku.example.org (97e54365.skybroadband.com. [151.229.67.101])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45869199461sm15064375e9.8.2025.07.23.01.10.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Jul 2025 01:10:19 -0700 (PDT)
+From: Prabhakar <prabhakar.csengg@gmail.com>
+X-Google-Original-From: Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Adam Ford <aford173@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ "Cogent Embedded, Inc." <source@cogentembedded.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Chris Paterson <chris.paterson2@renesas.com>,
+ Prabhakar <prabhakar.csengg@gmail.com>,
+ Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Subject: [PATCH v3] configs: Remove redundant CONFIG_TEXT_BASE assignments for
+ Renesas defconfigs
+Date: Wed, 23 Jul 2025 09:10:15 +0100
+Message-ID: <20250723081015.278248-1-prabhakar.mahadev-lad.rj@bp.renesas.com>
+X-Mailer: git-send-email 2.50.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,211 +106,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Orange Pi 5 Ultra is another board in the Orange Pi 5 family.
+From: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 
-Orange Pi 5 Ultra uses Rockchip RK3588,
-a new generation of octa-core 64-bit ARM processor,
-which includes quad-core A76 and quad-core A55.
+The Renesas board defconfigs explicitly set CONFIG_TEXT_BASE=0x50000000,
+however U-Boot's POSITION_INDEPENDENT=y build default already places text
+at 0x0. These hardcoded overrides are therefore unnecessary and will be
+pruned automatically in upcoming resyncs.
 
-Features tested on a Orange Pi 5 Ultra 16GB:
-- SD-card boot
-- eMMC boot
+Remove the CONFIG_TEXT_BASE lines from the following defconfigs:
+  - hihope_rzg2_defconfig
+  - r8a77970_eagle_defconfig
+  - r8a77970_v3msk_defconfig
+  - r8a77990_ebisu_defconfig
+  - r8a77995_draak_defconfig
+  - r8a779a0_falcon_defconfig
+  - renesas_rzg2l_smarc_defconfig
+  - rz2_beacon_defconfig
+  - silinux_ek874_defconfig
 
-ROCKCHIP_TPL:
-https://github.com/rockchip-linux/rkbin/tree/master/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.18.bin
-
-BL31:
-https://github.com/rockchip-linux/rkbin/tree/master/bin/rk35/rk3588_bl31_v1.48.elf
-
-Signed-off-by: Niu Zhihong <zhihong@nzhnb.com>
+Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- .../dts/rk3588-orangepi-5-ultra-u-boot.dtsi   | 20 +++++
- board/rockchip/evb_rk3588/MAINTAINERS         |  6 ++
- board/xunlong/orangepi-5-ultra-rk3588/Kconfig | 12 +++
- .../orangepi-5-ultra-rk3588/MAINTAINERS       |  6 ++
- configs/orangepi-5-ultra-rk3588_defconfig     | 88 +++++++++++++++++++
- doc/board/rockchip/rockchip.rst               |  1 +
- 6 files changed, 133 insertions(+)
- create mode 100644 arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
- create mode 100644 board/xunlong/orangepi-5-ultra-rk3588/Kconfig
- create mode 100644 board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
- create mode 100644 configs/orangepi-5-ultra-rk3588_defconfig
+v2->v3:
+- Also included the r8a779a0_falcon_defconfig which was missed in the previous
+  patch.
 
-diff --git a/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
-new file mode 100644
-index 00000000000..1ab31a4ec5a
---- /dev/null
-+++ b/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588-u-boot.dtsi"
-+
-+&fspim1_pins {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-+
-+&sfc {
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+	};
-+};
-diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-index 1232f05a387..379c85f48a4 100644
---- a/board/rockchip/evb_rk3588/MAINTAINERS
-+++ b/board/rockchip/evb_rk3588/MAINTAINERS
-@@ -48,3 +48,9 @@ S:	Maintained
- F:	configs/orangepi-5-plus-rk3588_defconfig
- F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
- F:	arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
-+
-+ORANGEPI-5-RK3588-ULTRA
-+M:	Niu Zhihong <zhihong@nzhnb.com>
-+S:	Maintained
-+F:	configs/orangepi-5-ultra-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
-diff --git a/board/xunlong/orangepi-5-ultra-rk3588/Kconfig b/board/xunlong/orangepi-5-ultra-rk3588/Kconfig
-new file mode 100644
-index 00000000000..43fc96b04c0
---- /dev/null
-+++ b/board/xunlong/orangepi-5-ultra-rk3588/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ORANGEPI_5_ULTRA_RK3588
-+
-+config SYS_BOARD
-+	default "orangepi-5-ultra-rk3588"
-+
-+config SYS_VENDOR
-+	default "xunlong"
-+
-+config SYS_CONFIG_NAME
-+	default "evb_rk3588"
-+
-+endif
-diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
-new file mode 100644
-index 00000000000..be9c93f6b9d
---- /dev/null
-+++ b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
-@@ -0,0 +1,6 @@
-+ORANGEPI-5-RK3588-ULTRA
-+M:	Niu Zhihong <zhihong@nzhnb.com>
-+S:	Maintained
-+F:	board/xunlong/orangepi-5-rk3588-ultra
-+F:	configs/orangepi-5-ultra-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-orangepi-5-ultra.dts
-diff --git a/configs/orangepi-5-ultra-rk3588_defconfig b/configs/orangepi-5-ultra-rk3588_defconfig
-new file mode 100644
-index 00000000000..f3274325922
---- /dev/null
-+++ b/configs/orangepi-5-ultra-rk3588_defconfig
-@@ -0,0 +1,88 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_SPEED=80000000
-+CONFIG_SF_DEFAULT_MODE=0x2000
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-ultra"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_EVB_RK3588=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_SF_DEFAULT_BUS=5
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-ultra.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DWC_AHCI=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_XMC=y
-+CONFIG_PHYLIB=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SFC=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index b88299cbba2..4f2eea09e06 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -161,6 +161,7 @@ List of mainline supported Rockchip boards:
-      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
-      - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
-      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
-+     - Xunlong Orange Pi 5 Ultra (orangepi-5-ultra-rk3588)
-      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
-      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
-      - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
+v1->v2:
+- Instead of setting CONFIG_TEXT_BASE=0x0, removed the line entirely
+  as it is redundant and will be pruned in future resyncs.
+- Updated commit message to clarify the reason for removal.
+- Included renesas_rzg2l_smarc_defconfig
+---
+ configs/hihope_rzg2_defconfig         | 1 -
+ configs/r8a77970_eagle_defconfig      | 1 -
+ configs/r8a77970_v3msk_defconfig      | 1 -
+ configs/r8a77990_ebisu_defconfig      | 1 -
+ configs/r8a77995_draak_defconfig      | 1 -
+ configs/r8a779a0_falcon_defconfig     | 1 -
+ configs/renesas_rzg2l_smarc_defconfig | 1 -
+ configs/rzg2_beacon_defconfig         | 1 -
+ configs/silinux_ek874_defconfig       | 1 -
+ 9 files changed, 9 deletions(-)
+
+diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
+index f5bb28cb0c7..19fb14887c6 100644
+--- a/configs/hihope_rzg2_defconfig
++++ b/configs/hihope_rzg2_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN3=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xFFFE0000
+ CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a774a1-hihope-rzg2m-ex"
+diff --git a/configs/r8a77970_eagle_defconfig b/configs/r8a77970_eagle_defconfig
+index 4ab362f0d43..3734836fa61 100644
+--- a/configs/r8a77970_eagle_defconfig
++++ b/configs/r8a77970_eagle_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN3=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_ENV_OFFSET=0x700000
+diff --git a/configs/r8a77970_v3msk_defconfig b/configs/r8a77970_v3msk_defconfig
+index 5ef81682caa..d3df0fd0baf 100644
+--- a/configs/r8a77970_v3msk_defconfig
++++ b/configs/r8a77970_v3msk_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN3=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_ENV_OFFSET=0x700000
+diff --git a/configs/r8a77990_ebisu_defconfig b/configs/r8a77990_ebisu_defconfig
+index 414bfdebab1..7405f207612 100644
+--- a/configs/r8a77990_ebisu_defconfig
++++ b/configs/r8a77990_ebisu_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN3=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xFFFE0000
+diff --git a/configs/r8a77995_draak_defconfig b/configs/r8a77995_draak_defconfig
+index 12d92067de5..2d487722677 100644
+--- a/configs/r8a77995_draak_defconfig
++++ b/configs/r8a77995_draak_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN3=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xFFFE0000
+diff --git a/configs/r8a779a0_falcon_defconfig b/configs/r8a779a0_falcon_defconfig
+index f4f5c57451f..1b99ba1f02b 100644
+--- a/configs/r8a779a0_falcon_defconfig
++++ b/configs/r8a779a0_falcon_defconfig
+@@ -4,7 +4,6 @@ CONFIG_ARM=y
+ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN4=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_ENV_OFFSET=0xC00000
+ CONFIG_ENV_SECT_SIZE=0x40000
+diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
+index e7c0a7e1eae..4730c76248b 100644
+--- a/configs/renesas_rzg2l_smarc_defconfig
++++ b/configs/renesas_rzg2l_smarc_defconfig
+@@ -3,7 +3,6 @@ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_SYS_INIT_SP_BSS_OFFSET=1048576
+ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ARCH_RENESAS=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x80000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
+index 0b91337b17b..d3f7061f04d 100644
+--- a/configs/rzg2_beacon_defconfig
++++ b/configs/rzg2_beacon_defconfig
+@@ -3,7 +3,6 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN3=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0xFFFFE000
+diff --git a/configs/silinux_ek874_defconfig b/configs/silinux_ek874_defconfig
+index acdd1ad5205..af462d2086f 100644
+--- a/configs/silinux_ek874_defconfig
++++ b/configs/silinux_ek874_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN3=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x3F0000
 -- 
-2.43.0
+2.50.1
+
