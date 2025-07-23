@@ -4,138 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C584C83F27
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 03:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53876C83F25
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 03:08:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93BA4831C8;
+	by phobos.denx.de (Postfix) with ESMTP id E09DA8331F;
 	Wed, 23 Jul 2025 05:07:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nvidia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="f2i/X5/5";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="eoeqGo93";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D074D8329B; Wed, 23 Jul 2025 05:07:54 +0200 (CEST)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20622.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2409::622])
+ id C162583093; Wed, 23 Jul 2025 05:07:55 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2062b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::62b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D1A583093
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 05:07:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C28383253
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 05:07:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=nvidia.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=donalds@nvidia.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=g2T/dQUiGKfNRyPxB1pJdNyjNaWjVms+/eby+9mHB6oLqyJ8nsnRs55cp0Z1rgnkCQWRA/w78UeG/SC9GnIfEKpYSadU3OhcSEuS+0GgXuayxxIaTI6m2MChSK4N3lY6PLmC8D7hwjv9ruq1mi5yRoMCj/GRnf/eiocz0Gh/OnTG7pKLeo30aumcr0TlYNcs8LWoLw3UXV3IhkTW4hkdJTtrUntDv/JSHQbXbFFnYLS5yzAF6u0JE+bQyywxHfvRP3pWP3xX/mxdUETXpFDXjsuh8YCyFI9bPp8oZfCly8dFaGGmSw1G0eW0HzTC5xcBxqomQ3m2kWhbnBG3wzHLHQ==
+ b=IJjmauTUBLEI0P8hg5G7Pv037V4djF4kDh0gXdEyufbD0TPHbq8BIa/dX8Co9U4X7ovRozBnTl6bXd5PfiK+SY1Wg73egeVl5N0zpRt9cBiYEjl10rOHby+aqmEx0tnEIU9rafUXuPhTP0yHbHS77lb8CS7RfBRbsf5sXdn0L2yJztFrgqLGXZtnI+dkahvOjc0PYDjxqKR4llUGUvDxeOkc4RzGEr7c+uwHDKeaqr9ZXOgY/AZGEXwwtdfDbquKdne9HS3OvCtQdX9jyVLcWlc488LYKZ9yOTA0biyL/1AYgSkygfS6Peur5lQbOXTKmFUHHsSPMo29rHSSLElVHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7fbnsobRgwyaYIG9lcufUjKh+wqajCdxDxtft+iixxA=;
- b=X+F1jC0TLQRi66qLIIG5mJtY0tPdY76/UYOCEeD+w/TGprShJyjThkmNVwy6Pf9kQJZKqw9FO9ish89uGJw/voPcT1I54jOO5h++mofNw09aLnWwx9gDWWeHEE8VJeV2cRi8HJDt0KNQJcwymffS42FuxQDRJYPmY79T7gWS5ECD7mmJmFt2HPHNZBUpyyjduG1v2gifuQN5gbeVC1ggESCd2zaoMP8agSDp4tCWlQySKOQaqQ/DBUWC2wN7b9S0jhtJftVuRJFk0CVrZ7NjRQaUzcrkKSHIPbzfBaE3e6FOkNhJle0wRmfFC3Vxu1TZ1U4hP9SeLhYwl4yL+6h07g==
+ bh=18DpAayWeGLpEa/NGPG7X+ucqeC5lSkUdMmfq/Tm1nk=;
+ b=Vcq+Qxs1/RrSPvK7uIt/og7S7JQrJ8SE/9hPNhA1VV1hhYg+QuZTpJrCUnxBc+vbyxCHe4tzaoqnIesUlvx6/JmX6Lf9h+Hqc7OLMonamPnka4nfyZY6+28gVcbI7zPmkO2O2jlWpyDgwzlysBBB+6MMjUy1N7qCh/He0VeL1Umwjzdxg31fQmviHGYumcJ72tkwDbO4VUPemJv85BYIYUNgulQXF4q3SzQrSQghozmoy7bO1WdGJVOkFtr5XOAy3RNCLYPGycLO0jm8gdCJ9EK85wv9GvebaqdczxbMf3V6jWwv3HrKkuyla/E+NLhm071U0Xz01ro7hQOIW9MSBw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.118.233) smtp.rcpttodomain=aribaud.net smtp.mailfrom=nvidia.com;
+ 216.228.118.232) smtp.rcpttodomain=aribaud.net smtp.mailfrom=nvidia.com;
  dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7fbnsobRgwyaYIG9lcufUjKh+wqajCdxDxtft+iixxA=;
- b=f2i/X5/5vsJUhrTQdTDAfvsTbUlVhuXP7PhkocrOgVIt/DZk3qUAtFyAhjCXcd1egjfJlzYkduthz8vRF5LzmI6zJJ1mklD5CER69/R1TKfP3/NTIY6RytqjpGyL1xdqWEU42fmQNWXxLrSvCc18SYlwUQawKVyIAPwGJ6uSNE7exgUA6A3mOx5eLArc9z+3bD5i9HXEF1sOnUhDjY7WNlZpcSrDt3PWsdB0dqnU3SBSX3dHqj5hbp+0i7OSgcmp4aokNbmLPSrE7yi5EroXoPzVRwc1l8P3GDDzNzR5uv0qLnzJ6Tp+YdmMAv0mSdvlsMesWtCB6+QuBLf7xuhD5A==
-Received: from BY3PR10CA0020.namprd10.prod.outlook.com (2603:10b6:a03:255::25)
- by BN5PR12MB9461.namprd12.prod.outlook.com (2603:10b6:408:2a8::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.35; Wed, 23 Jul
- 2025 03:07:47 +0000
-Received: from SA2PEPF000015C8.namprd03.prod.outlook.com
- (2603:10b6:a03:255:cafe::a0) by BY3PR10CA0020.outlook.office365.com
- (2603:10b6:a03:255::25) with Microsoft SMTP Server (version=TLS1_3,
+ bh=18DpAayWeGLpEa/NGPG7X+ucqeC5lSkUdMmfq/Tm1nk=;
+ b=eoeqGo93Z01GHSaRKyDGQrb6nFBOaUfqSyg3RM8J+HSdSzVgjQXrlAEJ9YcAR4g3LNK7W6gNtTAj4FuWeWWjcWDFf7PVvFh3sA4ImIycqEhvxh8h71BNbkNMdLqNZ4RGlUsLlN3KYEnUVxF4kunoxf0SRVk2SrN7DHYcbp2y2oEneSzAk+DZ/5YkSC2AbXS04ca/1QlZT0oiEU2Q4IMxaLJzVUkudNSOznr8Ru7cF9H+KeNLAKfktHxLXN451iBB46B9CbAtgJ+k+q+tWFze11h4D6Wttv7ygUsV9TvHisfVw0PE6oK1VHIq6iSeGgDDtEoPLQU79bLoaOMczTlc+g==
+Received: from CH0PR04CA0009.namprd04.prod.outlook.com (2603:10b6:610:76::14)
+ by DS0PR12MB8245.namprd12.prod.outlook.com (2603:10b6:8:f2::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.28; Wed, 23 Jul
+ 2025 03:07:48 +0000
+Received: from CY4PEPF0000E9D2.namprd03.prod.outlook.com
+ (2603:10b6:610:76:cafe::5b) by CH0PR04CA0009.outlook.office365.com
+ (2603:10b6:610:76::14) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8964.21 via Frontend Transport; Wed,
  23 Jul 2025 03:07:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.233)
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.232)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.118.233 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.118.233; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.118.233) by
- SA2PEPF000015C8.mail.protection.outlook.com (10.167.241.198) with Microsoft
+ 216.228.118.232 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.118.232; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.118.232) by
+ CY4PEPF0000E9D2.mail.protection.outlook.com (10.167.241.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.8964.20 via Frontend Transport; Wed, 23 Jul 2025 03:07:47 +0000
-Received: from drhqmail203.nvidia.com (10.126.190.182) by mail.nvidia.com
- (10.127.129.6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 22 Jul
- 2025 20:07:41 -0700
+Received: from drhqmail201.nvidia.com (10.126.190.180) by mail.nvidia.com
+ (10.127.129.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Tue, 22 Jul
+ 2025 20:07:43 -0700
 Received: from drhqmail201.nvidia.com (10.126.190.180) by
- drhqmail203.nvidia.com (10.126.190.182) with Microsoft SMTP Server
+ drhqmail201.nvidia.com (10.126.190.180) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Tue, 22 Jul 2025 20:07:41 -0700
+ 15.2.1544.14; Tue, 22 Jul 2025 20:07:42 -0700
 Received: from dondevbox.nvidia.com (10.127.8.13) by mail.nvidia.com
  (10.126.190.180) with Microsoft SMTP Server id 15.2.1544.14 via Frontend
- Transport; Tue, 22 Jul 2025 20:07:41 -0700
+ Transport; Tue, 22 Jul 2025 20:07:42 -0700
 From: Donald Shannon <donalds@nvidia.com>
 To: <albert.u.boot@aribaud.net>, <andrew@codeconstruct.com.au>,
  <thai@nvidia.com>, <donalds@nvidia.com>, <dkodihalli@nvidia.com>,
  <etanous@nvidia.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2 0/1] ARM: dts: aspeed: Add NVIDIA GB200 UT3.0b
-Date: Tue, 22 Jul 2025 20:07:38 -0700
-Message-ID: <20250723030739.51264-1-donalds@nvidia.com>
+Subject: [PATCH v2 1/1] ARM: dts: aspeed: Add NVIDIA GB200 UT3.0b
+Date: Tue, 22 Jul 2025 20:07:39 -0700
+Message-ID: <20250723030739.51264-2-donalds@nvidia.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250723030739.51264-1-donalds@nvidia.com>
+References: <20250723030739.51264-1-donalds@nvidia.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-NV-OnPremToCloud: AnonymousSubmission
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015C8:EE_|BN5PR12MB9461:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74a210cb-c4b4-4d14-a6f1-08ddc99619fb
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D2:EE_|DS0PR12MB8245:EE_
+X-MS-Office365-Filtering-Correlation-Id: 80f22ebb-800c-4a06-bfee-08ddc9961a1c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KDQFFSXHZBPOtwFUk39EVeehSH5PXFienKh8258VhSwrMiNKpAMRR+YmTJ25?=
- =?us-ascii?Q?0apfTqopjyAPP3rnfyiq48OdMYv+wrKR3CgcPphI04/3xyTE06CLRqYziyrW?=
- =?us-ascii?Q?RyTjxzngtyBIaHDzwmRUKS9v/iPzhVKS9cR34G214Kspf0Ak22OJQYvHQuxM?=
- =?us-ascii?Q?D316o23RoE8tKnZAN+YsnG1xQ1ciU0tDjoIxVXe3xdEE5gf5aL3dufgF8Z10?=
- =?us-ascii?Q?D7W36CATDL730UzyQXWvbBh45+XQklZEEU9mGSyhgixA0+2CzAnqo0xcByAA?=
- =?us-ascii?Q?CCMkxfG3SC+gHWvy5bhJ6uh2604VjB0qmSlhuKiBrjvXoklOaL+6DbIyYjOV?=
- =?us-ascii?Q?PEXIfl4gchBqfJOgADc1uGuS62TaCVpdDNRZ/JMg9jzILxIqXaX/m1vopYze?=
- =?us-ascii?Q?AGzV85Ybu2gQI2NRLma/aUM1rkDKislELKDvn4vpBMzksKzzk4oWebNoJ76o?=
- =?us-ascii?Q?zMLBNtPAPtgjEIsEvmW2REfaFNlGsmQLT/BfeGfGefO5cJ8P8S0EFDfoOGsB?=
- =?us-ascii?Q?mzl3+fWNxSyp9oALqO6kGAct/gqadCttrfIQEQeZeS7dCzcuxXbbQhopQYmP?=
- =?us-ascii?Q?DAKitevNx9XR0VdYp4t+rnZN0P5PAJ1zYPzELudulvO8JTohuaUV7S8/H9HC?=
- =?us-ascii?Q?ZsaJBKceQgIELPwFMVg+P6LNECegDfNpJBJTqTuFHmHV0E/1P2us1lSKo25N?=
- =?us-ascii?Q?kzjZleFZ3lj3Fg9If/6INBppEY4WGcwXqJ+O69j8D0mUEUfOtHQAXJgvkVEc?=
- =?us-ascii?Q?QMfwOYkBMvd3JdTByyazjkY6/VKHW+2x13wq9PAVAq6j5dP00Ng9CaLUpLf9?=
- =?us-ascii?Q?lljcQye1LAL2zkd+aM3Nvjl4KGYsrTJT05m6r2NWbL1gAi0GO+paMJ3+pfio?=
- =?us-ascii?Q?wxRKJM3KbewWM17EjdJdbKyGwXFh9hwllOX3f5reTuVGHSQBrBuUeREKbtPC?=
- =?us-ascii?Q?WTSvMTuaApjBiQF1MHMaYqB6Hak8jEciihdk1ifFg7F2OnDy8uHkJY53qILM?=
- =?us-ascii?Q?j5N2M/cbzPoccVFkdSdHFoMN3CHLfGWMBQqSmTC1hT4etGIWahUxZwe8VmJY?=
- =?us-ascii?Q?swOa8rHq6/AFDg03KtQaoIFgmTPmij3fsO4J9mp2K9BiA7V1WTjAYHpzmPrG?=
- =?us-ascii?Q?cIci9Xn4JpMfvyjHzIVaAUzqn9cfc44R0yRp7UVJqWEgCLbAcVLmuiHWv860?=
- =?us-ascii?Q?FnqQQHA9Q/eAaNIBr1qRpfoKvnVI1lxCnFDhtIz0M27s0gP8oGfyKLo1MbJf?=
- =?us-ascii?Q?5Lx0h8pO/OCE6DPoAg7QNuOJFP2J19vjtmGpiJHqS+7mnvirCw+ctPQ5gQ0C?=
- =?us-ascii?Q?iHweZLWGvHjI3CwXFgxB7yZ4pnj4mm4/tzj0wsfB1xR9XJS6N9qyAr2HRXmN?=
- =?us-ascii?Q?pyBrXgJEK+xWsFDaqTcb/1PLFaD0ZWst2dIYdr3MBjWNeA1j3+PFBTbXyjsC?=
- =?us-ascii?Q?z3X+goSMZjeqNmjwDkQaKBFWbvhwomp/hQRWU+33qw1fh1zbA304Q5ixxcIM?=
- =?us-ascii?Q?/5zAK/J1wH6fheP9dW8DBERolUv0EMzOrJak?=
-X-Forefront-Antispam-Report: CIP:216.228.118.233; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc7edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(13003099007);
+ ARA:13230040|376014|1800799024|82310400026|36860700013|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xhPUO/Ek+HRmq9slPWdwEebQPR55QER82hPryxlbThOiQhhYrk1mefp66lAX?=
+ =?us-ascii?Q?ixkJUHqePbNf1qdx65Zb9ipTTBVjNBklc811Iqu0Lc7eoDEHKCBbeSepYe5Y?=
+ =?us-ascii?Q?uOWjlUMRLTfApItba7CHrAfVB/H1iybSy/9UJ40vdYzxuJ4TiG5x9+34KVae?=
+ =?us-ascii?Q?DVsNJ0SZuRXjq8Xc5wT7XBs6Tv2egxEqYmFdF7LGWtM/+O4fQYiPEcMlmir3?=
+ =?us-ascii?Q?b1hJJUuDDfy71EZO315HggUeSMcQgA0tF6HOcfe1fZ+8GykB0pOYTsTyGx8j?=
+ =?us-ascii?Q?CONP/j2+UrlVY+ANjlAjVoUGC+hdJKM1ogxfu7ftA9WQizbBxKZMSOvmq+dO?=
+ =?us-ascii?Q?2M58E3r5ede2bCYNhBpNVuTSU6rHq+zDCU4qMO2NxOgNfyOXzZrpktB7Eq1+?=
+ =?us-ascii?Q?tVBKu9x/l3+Tixo8YLnWSc88Unfqgk2iYime1kKfnoPWO1qevvaj6GI1rF3B?=
+ =?us-ascii?Q?d/FNWieOJc1htxkXcMq/r/9FkYLcXDqKQr9nVcMWSnqBjfSdq+FrMlk3jDys?=
+ =?us-ascii?Q?/FNEuRqlDgXNbtHtKTJc6rJP048qZmtpeyiMlCG3QiDmJ1G188aNzaikE+w6?=
+ =?us-ascii?Q?c36S7Q1pCorD4MLXokiV55ZVkyPVdUhx9jTyJTy+DeO9C2jLQFUVNRF2Caeq?=
+ =?us-ascii?Q?GuBRLXMpmo7XxrM7T3GA3o4UW98/HODrkTPnWr7TrtkIbX32gznWYN80gLNP?=
+ =?us-ascii?Q?CFUR7Dm/0c5bjrSlOVXNlndebD85+rtrm2VM7fQS131ebn9EtM3WZVMw2GXG?=
+ =?us-ascii?Q?KqiuYqD0/q7TBuKA71f/cY5Qi4mbDTQCR872k6kfPFujcflO7zUcoRv1CjDL?=
+ =?us-ascii?Q?tDvNnR8JH6rFArRSSUT5Gs6Nld1+n/HF5MmP4yoV8QtFuMjtjQ1g6uiGXFIS?=
+ =?us-ascii?Q?X+iKcYRkOR/89A0qkqY3gtqrEoZFGvHoASt18rBWjnVl4ifhgDs5H8AEKp47?=
+ =?us-ascii?Q?QQDgW6o02XfEky9wM2E7aBYRtO/Rya83lUZHa7/m6D4+WT/IfqhSZFWVZwhT?=
+ =?us-ascii?Q?DxbCOv4Vl6xqEjEumCG7EAD6Pz6cFS15zOprhu1ElxCa85sRHYrYY/Syi6J7?=
+ =?us-ascii?Q?5954h7B7yYFQrVBjWXFpR5EM8C5h7Ppi3Ymi/aPUyLq02SWStw0CwTz2ybsy?=
+ =?us-ascii?Q?od9gM439droL6pLtxvmS+xsDwl4hJ3WNuCS+UouMoqtREYKvJ96fW2055aFs?=
+ =?us-ascii?Q?eRqiWlJe51X5OI7+QlprMrjzhidBK+j+RZi2O+dGwEQv+F603kRoBJVy5zBk?=
+ =?us-ascii?Q?usS+Ts+twZoNXA0teH3MekPrOnZbPzp+zy3RjkbAlieZ3cPtJk1tbu56/PSE?=
+ =?us-ascii?Q?uCNsfopx/Q2QcMp+KJRDG4Jqs558mssLmm0nlQeaATZRsfS6WOT/unE9tNqM?=
+ =?us-ascii?Q?2vEoA/mCkBvE2Pi9ezRgcbwbXLlyercu29E9HheB6aOFuT2YcsI6MMDJBFH/?=
+ =?us-ascii?Q?M1q377q5G6Lr5v+PQutvztdAtzRxVvF2OZnL6XN6/LdF6A1dUORFO/e/Q0fp?=
+ =?us-ascii?Q?Q1GAHsjGCAZY47QxOLxFFCF8DoRfnjphrfyaOHnKRwDzOutiqqthVfc9SA?=
+ =?us-ascii?Q?=3D=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.118.232; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc7edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(13003099007);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2025 03:07:47.3370 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74a210cb-c4b4-4d14-a6f1-08ddc99619fb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2025 03:07:47.5849 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 80f22ebb-800c-4a06-bfee-08ddc9961a1c
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.118.233];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.118.232];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015C8.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D2.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9461
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8245
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,19 +167,267 @@ Link: https://nvdam.widen.net/s/wwnsxrhm2w/blackwell-datasheet-3384703 [2]
 
 Signed-off-by: Donald Shannon <donalds@nvidia.com>
 ---
-Changes v1 -> v2:
-  - Fixed whitespace issues
-
-Donald Shannon (1):
-  ARM: dts: aspeed: Add NVIDIA GB200 UT3.0b
-
  arch/arm/dts/Makefile                       |   1 +
  arch/arm/dts/ast2600-gb200-ut30b-nvidia.dts | 238 ++++++++++++++++++++
  2 files changed, 239 insertions(+)
  create mode 100644 arch/arm/dts/ast2600-gb200-ut30b-nvidia.dts
 
-
-base-commit: 8e15f5c0b1e7b11296ae6c88b686e65d509237d0
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index dbb2fafc4f..92a529e8f5 100755
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -688,6 +688,7 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
+ 	ast2600-evb.dtb \
+ 	ast2600-facebook.dtb \
+ 	ast2600-fpga.dtb \
++	ast2600-gb200-ut30b-nvidia.dtb \
+ 	ast2600-gb200nvl-bmc-nvidia.dtb \
+ 	ast2600-greatlakes.dtb \
+ 	ast2600-intel.dtb \
+diff --git a/arch/arm/dts/ast2600-gb200-ut30b-nvidia.dts b/arch/arm/dts/ast2600-gb200-ut30b-nvidia.dts
+new file mode 100644
+index 0000000000..68e1f51fe7
+--- /dev/null
++++ b/arch/arm/dts/ast2600-gb200-ut30b-nvidia.dts
+@@ -0,0 +1,238 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++#include "ast2600-u-boot.dtsi"
++
++/ {
++	model = "AST2600 GB200 UT3.0b BMC";
++	compatible = "nvidia,gb200nvl-bmc", "aspeed,ast2600";
++
++	memory {
++		device_type = "memory";
++		reg = <0x80000000 0x40000000>;
++	};
++
++	chosen {
++		stdout-path = &uart5;
++	};
++
++	aliases {
++		mmc0 = &emmc_slot0;
++		mmc1 = &sdhci_slot0;
++		mmc2 = &sdhci_slot1;
++		spi0 = &fmc;
++		spi1 = &spi1;
++		spi2 = &spi2;
++		ethernet0 = &mac0;
++		ethernet1 = &mac1;
++		ethernet2 = &mac2;
++		ethernet3 = &mac3;
++	};
++
++	cpus {
++		cpu@0 {
++			clock-frequency = <800000000>;
++		};
++		cpu@1 {
++			clock-frequency = <800000000>;
++		};
++	};
++};
++
++&uart5 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&sdrammc {
++	clock-frequency = <400000000>;
++};
++
++&wdt1 {
++	status = "okay";
++};
++
++&wdt2 {
++	status = "okay";
++};
++
++&wdt3 {
++	status = "okay";
++};
++
++&mdio {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_mdio1_default>;
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	ethphy0: ethernet-phy@0 {
++		reg = <0>;
++	};
++};
++
++&mac0 {
++	status = "okay";
++	phy-mode = "rgmii-rxid";
++	phy-handle = <&ethphy0>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_rgmii1_default>;
++};
++
++&fmc {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_fmcquad_default>;
++
++	flash@0 {
++		compatible = "spi-flash", "sst,w25q256";
++		status = "okay";
++		spi-max-frequency = <50000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++	};
++
++	flash@1 {
++		compatible = "spi-flash", "sst,w25q256";
++		status = "okay";
++		spi-max-frequency = <50000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++	};
++
++	flash@2 {
++		compatible = "spi-flash", "sst,w25q256";
++		status = "okay";
++		spi-max-frequency = <50000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++	};
++};
++
++&spi1 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_spi1_default &pinctrl_spi1abr_default
++			&pinctrl_spi1cs1_default &pinctrl_spi1wp_default
++			&pinctrl_spi1wp_default &pinctrl_spi1quad_default>;
++
++	flash@0 {
++		compatible = "spi-flash", "sst,w25q256";
++		status = "okay";
++		spi-max-frequency = <50000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++	};
++
++	flash@1 {
++		compatible = "spi-flash", "sst,w25q256";
++		status = "disabled";
++		spi-max-frequency = <50000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++	};
++};
++
++&spi2 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_spi2_default &pinctrl_spi2cs1_default
++			&pinctrl_spi2cs2_default &pinctrl_spi2quad_default>;
++	num-cs = <1>;
++
++	flash@0 {
++		compatible = "spi-flash", "sst,w25q256";
++		status = "okay";
++		spi-max-frequency = <50000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++	};
++
++};
++
++&i2c4 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c5_default>;
++};
++
++&i2c5 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c6_default>;
++};
++
++&i2c6 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c7_default>;
++};
++
++&i2c7 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c8_default>;
++};
++
++&i2c8 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c9_default>;
++};
++
++&i2c10 {
++	status = "okay";
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c11_default>;
++};
++
++&pcie_phy1 {
++	status = "okay";
++};
++
++&pcie_bridge {
++	status = "okay";
++};
++
++&ehci1 {
++	status = "okay";
++};
++
++&scu {
++	mac0-clk-delay = <0x10 0x0a
++			  0x10 0x10
++			  0x10 0x10>;
++	mac1-clk-delay = <0x10 0x0a
++			  0x10 0x10
++			  0x10 0x10>;
++	mac2-clk-delay = <0x08 0x04
++			  0x08 0x04
++			  0x08 0x04>;
++	mac3-clk-delay = <0x08 0x04
++			  0x08 0x04
++			  0x08 0x04>;
++};
++
++&hace {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&acry {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&display_port {
++	status = "okay";
++};
 -- 
 2.43.0
 
