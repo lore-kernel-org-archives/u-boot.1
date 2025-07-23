@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA97C83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 18:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA2FC83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 19:45:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B16328349B;
-	Wed, 23 Jul 2025 20:00:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A306E834AD;
+	Wed, 23 Jul 2025 21:45:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CqceQVZY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sPn449PJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FB408353A; Wed, 23 Jul 2025 20:00:28 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id E9AB38353A; Wed, 23 Jul 2025 21:45:04 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC99783297
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 20:00:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C095F83297
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 21:45:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-74b54af901bso154378b3a.2
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 11:00:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-73e65c09828so107353a34.3
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:45:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753293624; x=1753898424; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=c8sX1tlPLGjbOFk+W9SYzaTV6hldahfgTdoIyv0O/iE=;
- b=CqceQVZY418UP+udX+EHlsqoWSoAwAaY4lIFxL4lkDgm9vqkpEI3D69UJliw1jWMq5
- ZONIY4HPtKh8pIVv+UaLKz0HBNq07YsExUtIKBVlv/A3CseQ4GpEkWMZZIPMxtUleFFb
- 0jSu3j7NpmBBDS4Vud2udlKtzhbhG7evvLbC2F6MPDmsx8j75Y/ZIw+fy/VgO0r3/bJh
- qvxbfE9/+qibinw3RFk3E3JzC16xzmsBfdtGIGxzb4Yr3FdtVA8KTbn2qHNCuj3P63wR
- mMtGFH47rjSMdPRCmnAjWcxZThtzZTzlbgoRvz9wFlR4seIqUwYla353bZ+A4OIazQWq
- ndvg==
+ d=konsulko.com; s=google; t=1753299901; x=1753904701; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=D/qzIF0JSuBzqmz13wH1k1MpsVe5FRlE7OMX1fbO2gc=;
+ b=sPn449PJZSjP/jPITW5Irc9bekJYXmy+O0EcAihvQ65gRLusMA4b3Ez3Oqy6+EQRJ2
+ k7UIMhF6mBS+ax8Pd/y02r4Vt6GmQz4dmwNWuN/tLzUNDONB+nAavr541v2wnmIlCI/e
+ sSR3aPsi9EJbsdyA1wl4uZmLZvjWkCpAZxQuY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753293624; x=1753898424;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c8sX1tlPLGjbOFk+W9SYzaTV6hldahfgTdoIyv0O/iE=;
- b=rGnVoagnGPvY7NtYcneSIOqDk5r7R86N7AwcDT6YpMS4rK3H8L91YLlOTInpQJ+RC6
- LG5p64qppWojXH7lwOCg6RieRsOt65sTCbBjPr+qZvFDV6CYcsdmhl8nmV1/4/WnTvlU
- qSBqb7vxoSz8YPI399BKUw5QBVgQMT7IShfcf/WpgfUREZIDtVbeaDVCbirtCZUr4ZF4
- xMuAs2hXc1gg4+QrY6+bJOBolleYbixbYCATYeoK4qQaDumBSIIbQxSyPDfW9r0SOSdl
- L4nWWKQzGFH3w8soDanI9j78VwNiyxeJHwcXaQeW5kNaR/KnDRCH8sf9EwF3I8ODkq+y
- G1CA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVkXW57WhtA7hz7/PDaq2Y+SCnDyiDUVW6K2q2ekIT5ggw7IUGosJgkdE2iu+T35wH/hg2K8QY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwBVv0CO0lqloQPYDASMDFa6JBBCAv8mp0mqr3VurrqjMgNsqvj
- +zQmucejNWVBispSHqpJv9KPhEOtrMGGquKxJz3x55KeFfeBad8Awn3t
-X-Gm-Gg: ASbGncsNOEluTqLXBNkWW4vjcaO644IdPbCIrP5jJANOq9Jd1Yt/nVletJjLDJ0i9dJ
- 206nQVss67PGHRLZRl6jisPGCP+efglPWQvVdClhE65t6pId501ydI4hlOQiXJQKngM4KNHZfUa
- veGOleKQ67pASY37ZArXYs5s3riqxPGi5L/zuf/tp1sfCD2UmiMGxj0gO9ypMSL/b/f6AeOgPpS
- 7XdAj3r2wCfUcamvuElz7qXt3/Kc7YJOYhQ2y6n4OoVEEUw3ds1t2FzazBKU7+kP9LMUI3VTL1g
- QAodnECKw/eMtIGkvFyvb2qUl/DCVO8T1gr1cIKiu3ICz97L4QruD167hTCZIzKtLoOv/rYuk2x
- S33+GnhaK/thYX5xIUg5wYvlPQU18LPM3Ja3RzWhHy9a4CsU=
-X-Google-Smtp-Source: AGHT+IFtasAaeoa5XhKp4At4ZBw7D225wf3dtabUKXlAdYu7nOrFCu+9qiAcLnwSIQ9GtsYWWmTguQ==
-X-Received: by 2002:a05:6a00:228e:b0:749:122f:5fe5 with SMTP id
- d2e1a72fcca58-76035af83aamr6252433b3a.18.1753293624033; 
- Wed, 23 Jul 2025 11:00:24 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:db41:d59a:1994:977c])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-759cbc68184sm9869507b3a.136.2025.07.23.11.00.20
+ d=1e100.net; s=20230601; t=1753299901; x=1753904701;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=D/qzIF0JSuBzqmz13wH1k1MpsVe5FRlE7OMX1fbO2gc=;
+ b=DR6dpzUdF/cvr5dnGrHcNptuQJ7KIj1Y/l5B8ifmKIgUtWEDvdp3kOaVOf2eRyKVSA
+ x/9iq6BSY9FbCaR70VfqQCSp4iij9mqegi/m6affHfhotI6G2Otht5U7LtLTvS0GTQmS
+ cpzebAAugHy2/nn1KJe81/C0Si9B3gMGNnVxXfTd35OZkQ8UOOEeKNH8GXmCnkTJyDbL
+ WpYEMAEcotT/sQLvT8maH9QMS65C/88z2KvviA9PJtTtVzISPkaPShCTjam9u9Ew/xNw
+ FHgR2F+s8CBSeHqR2Cy1S6spPsJ+TWR8xBlLiopJZ7uu1ieiCwRyIt1TtpPHrP4eaElC
+ 64Nw==
+X-Gm-Message-State: AOJu0YxS9f04y4mtCPL7Fjvf+G8JvZtO4vEO4yTlu3gT4K/X58TO5LFW
+ ujS9E3ojVLgg7Z1yd+HjqsXt0v9gusqo6NYE2j4bOy8KGIWNegeVSw1byVrm2GvmrsnWk8AUoth
+ qpfXJUtQ=
+X-Gm-Gg: ASbGnctvHOZefqAV94X9gakAXkIm6p6t9uQe5AUdyjgYzZGJI6nZNbBNueNHTaJT7nO
+ 682zE9230W02B1z/MIaPnl9p9Qpg25AkPthcXSsOt+Tnr1gNR/5NyC/zXg4ErUFYeOqAvPyosXd
+ yvXmYaI3XQAUZ3aH6NGeoonwMXjHIgK2FBdmzrVZgwBLeB6iog81xxSPnK18IvKIvHIR7myzqTe
+ RN/bEuG0Ezeq2DjcLeKA0u+n/uL8lNbvt1+xTaapNUiJCYLwzi7zz1wtbtfeFWGZhpIZLckKHtA
+ FdngWAn/Sc2ifuVjCOtV/q+mA5g1CALVvbr3CDgJhzFXkZw2sVttvEDqqd2AeYpYGf1XdV1ZrKQ
+ aoSst2rKt45FGW6von/w0a4xUnDrZ6/nC4lYZXVL00owp6veIOBywNI3djeZ0aDeqpHrpXg==
+X-Google-Smtp-Source: AGHT+IEcVBLCJm+J/0yjqGJirGfFICR7qAgD/rq+buyYLzBOr48HsuT7Y1CxDgkM5osvFK8tuSgG7w==
+X-Received: by 2002:a05:6830:2695:b0:72b:9d2d:804 with SMTP id
+ 46e09a7af769-74088bc2c25mr3221720a34.26.1753299901377; 
+ Wed, 23 Jul 2025 12:45:01 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73e8367f410sm3893589a34.24.2025.07.23.12.44.59
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 11:00:23 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: uboot-imx@nxp.com
-Cc: seanga2@gmail.com, andrew.goodbody@linaro.org, javier.viguera@digi.com,
- trini@konsulko.com, u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] spl: spl_imx_container: Delete uninitialized variable
-Date: Wed, 23 Jul 2025 15:00:16 -0300
-Message-Id: <20250723180016.2021172-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Wed, 23 Jul 2025 12:45:00 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] patman: Update test for Anatolij's new email address
+Date: Wed, 23 Jul 2025 13:44:59 -0600
+Message-ID: <20250723194459.224015-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,42 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+This test was failing due to matching on Anatolij's old email address.
+Switch to the new one.
 
-The 'overhead' variable is uninitialized and actually shall not be used.
-Delete it to fix coverity CID 37041718 - Uninitialized scalar variable.
-
-Fixes: 73c40fcb7367 ("spl: Refactor spl_load_info->read to use units of bytes")
-Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-Signed-off-by: Ye Li <ye.li@nxp.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- common/spl/spl_imx_container.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/patman/test_cseries.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/spl/spl_imx_container.c b/common/spl/spl_imx_container.c
-index b3565efb225a..79d021f81dcd 100644
---- a/common/spl/spl_imx_container.c
-+++ b/common/spl/spl_imx_container.c
-@@ -31,7 +31,7 @@ static struct boot_img_t *read_auth_image(struct spl_image_info *spl_image,
- 					  ulong container_offset)
- {
- 	struct boot_img_t *images;
--	ulong offset, overhead, size;
-+	ulong offset, size;
- 	void *buf, *trampoline;
+diff --git a/tools/patman/test_cseries.py b/tools/patman/test_cseries.py
+index e58f2f683332..4c211c8ee896 100644
+--- a/tools/patman/test_cseries.py
++++ b/tools/patman/test_cseries.py
+@@ -3278,7 +3278,7 @@ Date:   .*
+         self.assertIn('bootm.c:1: check: Avoid CamelCase: <Fix>',
+                       err.getvalue())
+         self.assertIn(
+-            'Cc:  Anatolij Gustschin <agust@denx.de>', out.getvalue())
++            'Cc:  Anatolij Gustschin <ag.dev.uboot@gmail.com>', out.getvalue())
  
- 	if (image_index > container->num_images) {
-@@ -54,7 +54,7 @@ static struct boot_img_t *read_auth_image(struct spl_image_info *spl_image,
- 	debug("%s: container: %p offset: %lu size: %lu\n", __func__,
- 	      container, offset, size);
- 
--	buf = map_sysmem(images[image_index].dst - overhead, images[image_index].size);
-+	buf = map_sysmem(images[image_index].dst, images[image_index].size);
- 	if (IS_ENABLED(CONFIG_SPL_IMX_CONTAINER_USE_TRAMPOLINE) &&
- 	    arch_check_dst_in_secure(buf, size)) {
- 		trampoline = arch_get_container_trampoline();
+         self.assertTrue(os.path.exists(os.path.join(
+             self.tmpdir, '0001-video-Some-video-improvements.patch')))
 -- 
-2.34.1
+2.43.0
 
