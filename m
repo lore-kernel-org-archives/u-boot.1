@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A03C83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 13:46:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B115C83F1A
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 13:46:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43C1A8350A;
-	Wed, 23 Jul 2025 15:46:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 410C8834BC;
+	Wed, 23 Jul 2025 15:46:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="huSsFt6c";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dfq4tHKK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69A8F8350A; Wed, 23 Jul 2025 15:46:14 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id D5D188352B; Wed, 23 Jul 2025 15:46:16 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BCBF82BA1
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 15:46:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BA1382BA1
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 15:46:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-74924255af4so5793271b3a.1
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 06:46:12 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2363616a1a6so59556055ad.3
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 06:46:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753278371; x=1753883171; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1753278373; x=1753883173; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vsdYy4DWZ5E94wVXLyn9mUfwZTbquhchq0Doz0DzCvI=;
- b=huSsFt6cZhjb+XnawA0ZGdSHeX5gUG7bhIqroXqn7EJe6g4XNoOCSIOF6er3atkt8O
- 9xcBVdalvwwspqQrraVN4TTKDzCNiVqkeZFvAMToRkmoKce+mHkWm5GWNreCHVE7+h64
- yPgiJw2Y3Z4ixSKSQ9dvzB5fHRZZbYTCvk6FNYLvkS3EndtRMqVvx+IPWCXEVEoof+IK
- AdAjRngqy6JvtWrc2UKszT4GuPARc/mG0lRQ91DbD2b/+kbsNhSwaYQjkI1ecEooBY1o
- LPdqSGgotd/6hOCBl2XuhYSpxTeCNW8DlXRnuYSsRNfd0ZoOU7NPqj52d+iV/dts3vMJ
- i3kA==
+ bh=Y34BGiXE+FDCRVLooQ7vfctlBSrpdAF2GzyAIao8LtA=;
+ b=Dfq4tHKKRy7TovtE3NdnrtLWG0x6IzkL4IqHobzjuOs4mVDJVnhexeEvv2FlFduL+w
+ GAequrx3ivEQF9DmPBklhtyJcMmWnLDGZW3lW/rcuhp3xswAT+ygdUvYUztfnSFloAgy
+ nYQUH/2akhhdzZ9Bsc+2vq4f9v1CSkPnQGazkZ/60xw9vy2YDIVjk38+rvYdfLj7QSpN
+ MkbcAT0pjuOQgWN11GwtVLK4EQS5OBUFMsm5GPSg8xl8xf/5fqpXZbMjI798VxPBk0Lr
+ z09V1whNCd2gaBKCuPtk6wuzl8eldq6UyK28ihqkrkFXFKClwUnzoYZRCLoVth1pVw5J
+ Itsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753278371; x=1753883171;
+ d=1e100.net; s=20230601; t=1753278373; x=1753883173;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vsdYy4DWZ5E94wVXLyn9mUfwZTbquhchq0Doz0DzCvI=;
- b=Rm8Vd63AudmIw5F7DZpasdbKGcljGLhHnWAsGlNdiF4uV0/94UsNgmjLfryXQfiVLX
- 7ESmmkGGwQKK4ftOJjqK00d6L6MJdOARih1AQeeojLJt6CPVt0/M/lFRuYSOIFgRr/QN
- HgKa9VdR9cKnfoLm6AKXpDP9NAQUhU7uNxex0nNOyjHDw4GcYoX9fb4gHloQI48zqNbB
- oiroerqW8IdH0/en74hjMCskKd5zXvfj5eBtzUsGX2CvxtCwDZ8wzGHf/36ly41S/2S/
- wIbzzkpfPHjWcusHZGT4zVJjBPkV/T1Z0zrizawSg8HmjVPCr/m+ejxpu5W7W0U1Advx
- Gg2A==
+ bh=Y34BGiXE+FDCRVLooQ7vfctlBSrpdAF2GzyAIao8LtA=;
+ b=gVCmEpLfGOmdXTgXNA+zijplXhYfHs1fV445n7BxVQltt5ERBrIArxDz3aYeuajLFX
+ SmHggpN/JJurBHfzqAdG5XssJSAUkrbasfSYExQk3KFUfvCajF2HfzmwT92aKY0IoWH6
+ DJFxlA+Ea8MqTi75rwH3jmXZbjY0F7CbMf2FPl6/ODkAPo3lm/juCc61jdfK5Quaobag
+ UmNpH+fHRsKqzHIhKIEuu4Piw+9sLR71+xMYa1zFhoiZAaeYEALhGOvwluuRmYER0BQp
+ 30YbiZovKr+v9yPxMRDb3YVp3/Pz/MWSnSv/ynqDGdvyh6OeHpoQiRx2XjY6ATNAgAP9
+ N6PA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXRHbPMjFRhCBIS9tm6JcJBfCqm0RZ7Zf7Alz6WBqiZ8fFEbtywKkjCl5DZWfXloJPs2+A3oOU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8wzfJSlYDJHSoY5LL9yhtS7CNLtBTR1qRARqN0/cdvr6s78GW
- 4vCVRHiwbnK/RwFP45nNtcwGjQycVoZqTSz2SiV/Nle4/v+0Uj5PgVj1
-X-Gm-Gg: ASbGncttHfGEr7rAcPElSOcAxsQDUr4zcRFzlg0Ke8ZCenwUw0DQI3+n0IS5jZODkx2
- DvB9BHH/1X5tM0IgnH4E9YvfY9c/JO21A+Y4wpzuvi7VbajeLxAqiLE9r8MlcShkSpTyk6mxI9e
- 0OG3Xrd91Se+Ie4KSZd/IZsXLmgj8UNUViaet/T4f4wzaljaMoVNtrCfX9b40tmvWhL3QF9x74E
- QO3qiN4n399zSP17ZYF9Wt27oQNtVNn0N260dC4AvVOVkJ1bGyKdpvSc/XOontFAS03qBkyQOGO
- eLaDaSJKJdUDUih597H2Hh6rg7h189QxhTgHp6w3zoxqWqQ/pqbH+ml2vJXwYYrMpBsvdsoc8K2
- QKGTOG+jW9Qfj8nGoJD6DVRB1trL1jYu5QiYPS6jh/mUvJ6o=
-X-Google-Smtp-Source: AGHT+IFvvyz7qwoMnuUQtVHCoTRz/zsPWxC31PYLNsHRfhijOll70Ua9vtw1GO0Eqvq7Y8RXA8spCg==
-X-Received: by 2002:a05:6a20:9147:b0:220:1af3:d98f with SMTP id
- adf61e73a8af0-23d491221d4mr4735658637.26.1753278370637; 
- Wed, 23 Jul 2025 06:46:10 -0700 (PDT)
+ AJvYcCUoW1j4ufhdvwP4rzSOvWqRFswrw1n35EB6KMkobYA6M4sr+UCdtWjTyEk6Ht67ryqdq84vNFY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1ch5CgcZg/f6dVjhDD8tO0EZuZf8Ut5iFhQkhlkQN5OqhGumq
+ XgPhXX9bYqH00PL+dhU0D1Ck2+RSr8uy1knMFzsiMP1TUbkQovVOSk/G
+X-Gm-Gg: ASbGnctiwSQ1cu33OD2eaXbJrtUTxLiVFoB3g8Xi24eI5zE3eQO+acRLVz/xJ7W6Aec
+ bCIy9VQIzEP1fP90zFCizkfQXoYqcJ9KwpNEEEQ4x8OnO/wh5lsjdEdV9F0lZaTzO5W3untcSIj
+ pjNmj3mwdxqQwie1fCcjlOR1PAgK4lE39psKRpN6n8o67Cq9p9wV7TfJhdqQ0BaTCI2h2yqu6HA
+ eisL1P6x3/rq8RX7i6vGANRPvqsFQGuOIjSGA2bu6I8I+Yh7Uw7wusI7HYfPKUhoLopqWUDpKR4
+ TbU3HxA0kycEZyGzR0mO18WSicop7Y3OwdxWUTae0h8lBAUhz/0G1PVGPx7xRP71zd6naMgWNjd
+ Tx3sUDaF2sk42oYNrDeb6BXmkTqK+eO0eHd5/
+X-Google-Smtp-Source: AGHT+IGsHYEnFQGSK+Id6iWvBRMDr6o42RWqo4wNenzdyGIkD3A2XME3jKaYfPj7Dkoia/CYkQ0Ibw==
+X-Received: by 2002:a17:902:d4cc:b0:235:880:cf70 with SMTP id
+ d9443c01a7336-23f9814af1bmr34371445ad.14.1753278372860; 
+ Wed, 23 Jul 2025 06:46:12 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:db41:d59a:1994:977c])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b3f3c999588sm7154595a12.66.2025.07.23.06.46.08
+ 41be03b00d2f7-b3f3c999588sm7154595a12.66.2025.07.23.06.46.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 06:46:10 -0700 (PDT)
+ Wed, 23 Jul 2025 06:46:12 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: peng.fan@nxp.com
 Cc: trini@konsulko.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH 2/3] imx93_evk: Remove unneeded header files
-Date: Wed, 23 Jul 2025 10:45:56 -0300
-Message-Id: <20250723134557.1972331-2-festevam@gmail.com>
+Subject: [PATCH 3/3] imx93_evk: Remove PMIC and USB header files
+Date: Wed, 23 Jul 2025 10:45:57 -0300
+Message-Id: <20250723134557.1972331-3-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250723134557.1972331-1-festevam@gmail.com>
 References: <20250723134557.1972331-1-festevam@gmail.com>
@@ -100,29 +100,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is nothing in this file that makes use of the definitions from
-sizes.h and stringify.h.
+There is no PMIC and USB related C code in this file.
 
-Remove them.
+Remove these unneeded header files.
 
 Signed-off-by: Fabio Estevam <festevam@gmail.com>
 ---
- include/configs/imx93_evk.h | 2 --
- 1 file changed, 2 deletions(-)
+ board/freescale/imx93_evk/imx93_evk.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/include/configs/imx93_evk.h b/include/configs/imx93_evk.h
-index 94355cf61e49..e7db0161126e 100644
---- a/include/configs/imx93_evk.h
-+++ b/include/configs/imx93_evk.h
-@@ -6,8 +6,6 @@
- #ifndef __IMX93_EVK_H
- #define __IMX93_EVK_H
+diff --git a/board/freescale/imx93_evk/imx93_evk.c b/board/freescale/imx93_evk/imx93_evk.c
+index d84d56be5e1f..d62f94dc4189 100644
+--- a/board/freescale/imx93_evk/imx93_evk.c
++++ b/board/freescale/imx93_evk/imx93_evk.c
+@@ -13,11 +13,8 @@
+ #include <asm/arch/sys_proto.h>
+ #include <asm/arch-imx9/imx93_pins.h>
+ #include <asm/arch/clock.h>
+-#include <power/pmic.h>
+ #include <dm/device.h>
+ #include <dm/uclass.h>
+-#include <usb.h>
+-#include <dwc3-uboot.h>
  
--#include <linux/sizes.h>
--#include <linux/stringify.h>
- #include <asm/arch/imx-regs.h>
+ DECLARE_GLOBAL_DATA_PTR;
  
- #define CFG_SYS_UBOOT_BASE	\
 -- 
 2.34.1
 
