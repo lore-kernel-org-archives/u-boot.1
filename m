@@ -4,45 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8665BC83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 11:10:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7A1C83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 11:32:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A86D683429;
-	Wed, 23 Jul 2025 13:10:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id 81F8483457;
+	Wed, 23 Jul 2025 13:32:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7795F8349B; Wed, 23 Jul 2025 13:10:07 +0200 (CEST)
-Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EDCF83439
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 13:10:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Received: from localhost (unknown [116.232.48.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id 290EA341436;
- Wed, 23 Jul 2025 11:09:59 +0000 (UTC)
-Date: Wed, 23 Jul 2025 19:09:48 +0800
-From: Yixun Lan <dlan@gentoo.org>
-To: ZHANG Yuntian <yt@radxa.com>, Andre Przywara <andre.przywara@arm.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
- Paul Kocialkowski <paulk@sys-base.io>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 20/20] sunxi: A523: add defconfigs for three boards
-Message-ID: <20250723110948-GYA737651@gentoo>
-References: <20250717235455.32528-1-andre.przywara@arm.com>
- <20250717235455.32528-21-andre.przywara@arm.com>
- <FB02908DDA84032E+c84dace3-80fc-466b-9fd5-aeba22192ed2@radxa.com>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eznoBf6O";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 63F5683496; Wed, 23 Jul 2025 13:32:34 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6ACE583440
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 13:32:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-45617887276so43494515e9.2
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 04:32:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753270352; x=1753875152; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=G8Ur6WubS5Pcgicj90zKLKqJrMkJimX2Gc+7rHf809o=;
+ b=eznoBf6OJRSFCZELoW2zmMD5S4zKUaMxUJnn678ftRTuAKbqh+3FtUWwxhS4Qxncxc
+ 7nvtUQHngjFqP5XOYsrMrHBvr1yKeR2HB3l7f/on4+fYvtKjoMTqQRqKgjl+WxhJla2r
+ UN2LK6nHqmjFLxQsWlLtpdZUsCmkatNVyjqAkM0rtwbwaqXt4T6F3kawXfzlQg10qlKc
+ eVqBaKJnQJ6kgMOu3OB8gO367+qqIS4KQciQk1bH5jjGl5PP+BJdSqu4B1wkJYjW7Gfd
+ D4/1y5ftty/WYSlP/238ObygYvUg/m9/xzavcMFPAOqTN+99Fl+zkwBmkdWsxCAdWXKB
+ EnIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753270352; x=1753875152;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=G8Ur6WubS5Pcgicj90zKLKqJrMkJimX2Gc+7rHf809o=;
+ b=vo4t68Vcc99jGwLfo8EImZfpe9HOjVvx/DzpD8gP/RmQKbeoDpclRAWsRr2s+lpv5X
+ q+b7zt9M/cZN6CaomCw+syOsQuc/Nn4qYkhblyp+jSXy24Mz6+7TvC70D3KBFUwYrjxV
+ FenyJ3NwrNwj2AxH1XHtbh+S30O0kYWZ/bGtN6nAng7vQsjCVpwwiwS5N/7gLHZg+8/c
+ RbkQiqxT4jhD4vn5fovOW9c1D8gNsl2JuAOGeHFOG15L3haq1tiikj4HEB375nduwP+I
+ cBtTg/JLu5NC+biE6RqqUr4uU+Fluj8+P9bCisRaCrnjQPPjuEDe2kF106FgfoIo1Jnk
+ r3Aw==
+X-Gm-Message-State: AOJu0YzudByxQ/JY8/bilizuj3yuvNni4o28HoTBxEgth8cXJAQ0lPjq
+ mNZ643bypzYLbtK7yF5tUz6w+N2he7EJg9TrD4Ylmnb0VqZaeLvRYeA1vnxx+KzYn0JfNl+Aknt
+ Zw0It
+X-Gm-Gg: ASbGnctkS/0fVnAsAlnUlhuI02h4YpHBRTot23CEtvU7Ux9FSvtWDSftxCsJiDrtmIJ
+ wKdzasVeONJcffUmuS3GLs3Fkm8NfE/bbEU4R+vPox/DA0PsSr6G1SHl95fNra8oTw+nGuh8pfr
+ aTuaMrBtstZzGDSxGx7Lf0CBqpyafQNmt7us47IhxjatyJAPiBlf+LoYvHaOUM0Ug/Jp7bTffa7
+ mtIYH1NjXEjLL3jQ6nbCDAJwFeTFpafF5xcmI18/crlyAXalKNxcxNZRVI12Vz49XJZPvJzKou/
+ R+T2ka+ePfupilDZOERt1WH4izOMGTdvV9XHbLTXNfkwfZyVREsNQP0hfcsTk3+q/nv0J+V1igb
+ I8zIXMoaGzHbRUysyrmZnx+PgNI0lBa9KgAAYx7+eMv+jWswwl5s=
+X-Google-Smtp-Source: AGHT+IHLfco6Ck765lYr9/VwgcPN3ZZi4FNi3K1wHiVKG0SolQm8oYlGcZA8LII7Z7kQ0p12oMFyBg==
+X-Received: by 2002:a05:600c:3b1a:b0:43c:f8fc:f697 with SMTP id
+ 5b1f17b1804b1-45868c8d67amr23534255e9.9.1753270351665; 
+ Wed, 23 Jul 2025 04:32:31 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:eb9:1701:5143:c98d:3163:b66b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4586918303fsm21085505e9.5.2025.07.23.04.32.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Jul 2025 04:32:31 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Wed, 23 Jul 2025 12:32:31 +0100
+Subject: [PATCH] clk: n5x: Fix misplaced paren
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <FB02908DDA84032E+c84dace3-80fc-466b-9fd5-aeba22192ed2@radxa.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250723-altera-clk-v1-1-fc83094fbc07@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAE7IgGgC/x2N0QqDMAxFf0XyvEDtWhz7lbGHWKOGuToSEUH89
+ 1UfD+ce7g7GKmzwrHZQXsVkzgXqWwVppDwwSlcYvPPRNf6ONC2shGn6YONSeMSOY+gDlKAlY2y
+ VchrP5EtWpqf4KfeyXS+v93H8AbjTpK11AAAA
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,37 +101,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre, Yuntian,
+Smatch reported an issue about the precedence of shift being higher than
+mask in clk_get_emac_clk_hz. This turned out to be a misplaced paren in
+one of the calculations. Fix this by placing the paren in the same place
+as in the other similar calculations in the same function.
 
-On 17:18 Mon 21 Jul     , ZHANG Yuntian wrote:
-> Hi Andre,
-> 
-> On 7/18/25 07:54, Andre Przywara wrote:
-> > So far developers seem to use three popular boards:
-> > - Avaota A1: dev board with USB 3.0, dual Ethernet, small display
-> > - X96QPro+: TV box with Gigabit Ethernet, USB 3.0, eMMC
-> > - Radxa A5E: small dev board with USB3/M.2 2230 (muxed), dual Ethernet
-> > 
-> > Add the defconfig files for those boards, containing the DRAM parameters
-> > and the usual Kconfig options.
-> > 
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> >   board/sunxi/MAINTAINERS         | 15 +++++++++++++++
-> >   configs/avaota-a1_defconfig     | 31 +++++++++++++++++++++++++++++++
-> >   configs/radxa-a5e_defconfig     | 30 ++++++++++++++++++++++++++++++
-> 
-> Can we name this radxa-cubie-a5e_defconfig? We will have a few more 
-> Allwinner offerings under the Cubie family.
-> 
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/clk/altera/clk-n5x.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-while I personally do not have strong preference, adding 'cubie' is
-slightly better, it will help people to better search the product
-, also to match up the silk name of the PCB board..
+diff --git a/drivers/clk/altera/clk-n5x.c b/drivers/clk/altera/clk-n5x.c
+index 09db250ab6d..9e4e7a1d908 100644
+--- a/drivers/clk/altera/clk-n5x.c
++++ b/drivers/clk/altera/clk-n5x.c
+@@ -386,8 +386,8 @@ static u32 clk_get_emac_clk_hz(struct socfpga_clk_plat *plat, u32 emac_id)
+ 		} else {
+ 			clock /= 1 + ((CM_REG_READL(plat,
+ 				       CLKMGR_PERPLL_PLLOUTDIV) &
+-				       CLKMGR_PLLOUTDIV_C3CNT_MASK >>
+-				       CLKMGR_PLLOUTDIV_C3CNT_OFFSET));
++				       CLKMGR_PLLOUTDIV_C3CNT_MASK) >>
++				       CLKMGR_PLLOUTDIV_C3CNT_OFFSET);
+ 		}
+ 		break;
+ 
 
-to be honest, I don't mind to have a long name for the config, so
-even radxa-cubie-a5e-a527_defconfig is ok for me (which similar to 
-the style of radxa-zero-3-rk3566_defconfig)
+---
+base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+change-id: 20250723-altera-clk-70c485de54f4
 
+Best regards,
 -- 
-Yixun Lan (dlan)
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
