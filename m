@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3DCC83F1A
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 10:34:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA63C83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 10:35:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC6918344C;
-	Wed, 23 Jul 2025 12:34:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F114E8329B;
+	Wed, 23 Jul 2025 12:34:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rd5mzOHI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mPQNld13";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 664BC82E26; Wed, 23 Jul 2025 12:34:39 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 12E11834AD; Wed, 23 Jul 2025 12:34:41 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DAB98313F
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:34:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31E3C83297
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:34:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a575a988f9so3907626f8f.0
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 03:34:37 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-454f428038eso56132755e9.2
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 03:34:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1753266877; x=1753871677; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=f5exGR1tOoXpifMkruDkO+usvP303rZQedHA08uoVlU=;
- b=rd5mzOHIPHKBOZzIsbQQZ3oMs+zwGiPP5tExDIxupkAKpkS7l5VQbWTXvdpY4wHs+j
- RsmCq3BXuoR/TPDIUYqwHnjkvKnvTpB+tnCciE5GQ6BDeUFkOT209ZTEcWH+vsOwNTyy
- Tb0Oz2iaFFdIzIaEF52CrY3HznHEwQzTu437SvDSC/uT8FuseOpalQi/+Q+3uhp01DyX
- 1Bi4el6n6srLwX+de0Yo/W+x73JBovhvvcxpmLk7hVxnSfUTqOtaAvNCDaIN4YmChPSx
- 5CGoNtzoZNt3wyplJwR5ydRPZCRBDvqpaXFnDRZiKcNKWOf72MmBbHKUIDevmNjQ1sJJ
- V+Fg==
+ :reply-to; bh=lL89GNx5u83mHanQ6qzcFNEXa/07NOMbAM1DYdUMUc4=;
+ b=mPQNld13mrb7vTzQH7Pq+GY89NWWRCL/pUzZKd9kEOxErPPE4A19ZL5eFs7F6K/kw6
+ 2ySJQEPKbK3xzeWSrvXIeZW9UjCOQ44spJExfY0X3d4xPGatQGSFQ8MRvw6QlRgJApLl
+ gmEtvMFuB9C/g9727VsB/9Ci5p9Ma8vWjAp3aC4/1FDUsTTXA+R5Zg6v5cfWykcg6omA
+ dAmAJU0rwDNGFx88n69Rze+z0cYULarezjBlP1QOdpvyyAQcyVbvFBzKE4vZrxP7tjtW
+ SJmT47sbrOjPG1zy0XpFPUHWDFf0AS5axlF6o7GnLFAchQd5+QHN/SUxlGZl6AWr5XZr
+ pJwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1753266877; x=1753871677;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=f5exGR1tOoXpifMkruDkO+usvP303rZQedHA08uoVlU=;
- b=JzBkesSYbE1UelkDz/Wi8S6YmxdYKBVsXg0ZeqdR9eIZVCEN5TUMwuQCUEwkfRa1o7
- Ag9Racc8P9m2xgatlqPKBK4RHiqVpscXbQGIi40UN8SjC0FzBzHdltQ9jZ/ttu3Hkbk7
- ZNWHkhyFFc37slz5BhJilgUCVfjVHwtKK7tRic7mO6WkChDtc4RRCN9tzWXudN8HcNUn
- 0RRtNmUl1tbaRaNpofOGzUFXselVghvnhzeupu/HIp59nVN39zv5UKgpfnxH9GrBIJgH
- /Oq5+/MPIL0mxo5k1MP6HLzdJOVf/7CaKvgvAtLaCDs0CIVyaiNue/CjdPbUK0WDD5WS
- xtBg==
-X-Gm-Message-State: AOJu0YwGY4hdosvv4E0y/jzPeKsu3twPj7eTj/iH3SLtv0hwU78S3v4o
- Y5eieCnt1zCzt3EZb3/Vvih+YC+IAh/zeNGItUUMrq8EQcAnnEN0XLc0JUPdcjmHYDA=
-X-Gm-Gg: ASbGncttLnEQXdjm0XIbEi4hq4zAHv6Nfkzq8yT9QBmHf7DmTn8ekw00PRkyoiqZ8TT
- PNep62EcfL1eBG3LjMTga++HyFIMgxPXD7k3bzoXA4s1l53KMZYDeNgeiitfpOw6JEYc/Rz1a4W
- VNG+BpG9Cyc7W6tqaEqp0mlKLGXk9V4E1lCj/wcCrFuwe6tU+f+1YXCOdjApr8+HoDqxn9+XHEm
- OCZhBgvil8xvsoNmgy6EN09pfU574CtUhVaCau0/Bv/O/kqaz6ml6sXoZBezk3E+XqPJqYOKKkB
- tmW7Ewkl01T8hzwPqbDksOsMxipEdy/tHkJW33LEFDDgQgizFzL9m6KCOu67hf7vQCYu3co3ujo
- OMFpBhosE7sv+1HoEFufWgzJHWqEUkNVX4HWbCc9gmxk52KBctIY=
-X-Google-Smtp-Source: AGHT+IE8uUrzFFcTIZ0ivOzN6M7f5bgaQuNrzIWKi+vSiH7z9JhFbKVFjnsmXloOYD2S+EXaEe65hA==
-X-Received: by 2002:a05:6000:4023:b0:3b3:e3f6:4a9b with SMTP id
- ffacd0b85a97d-3b768f2304amr2096066f8f.41.1753266876770; 
- Wed, 23 Jul 2025 03:34:36 -0700 (PDT)
+ bh=lL89GNx5u83mHanQ6qzcFNEXa/07NOMbAM1DYdUMUc4=;
+ b=VZ9lAgIHhdj6bp7mw2KdLQcQC2CQgSBvDTg3NRXDiXIsQJdJnoimT7rHA7uBwbk89V
+ api3TFBMxmKoGWSu9Cd9zCWnzKPxWTpJJhF9RKzj1jbhySFCJ6QzOs5727qblkrbCBwQ
+ gLVSjiSgw3qYFGQ95q2Hd8PGtaRjAboXtJ6sT2XiCfNfYopaqnMF44Nr6T2ig3nsGLoa
+ uEfbN8T3SE+3Bsl6M7+j3c9xSak2jjc8JLT8A82gzsO9NPAYU4qCaF6qhu3ihHhmzHHv
+ 5QcU48ZMRcy0Djy/JggiTRt9kot0Vgj88bF/F2tosUu2R2tVw3P5Qi6V3Gu1eE06uFGz
+ 4WbQ==
+X-Gm-Message-State: AOJu0YxTxQfQuSo+861bouLhKJ95snkolm/3k1reL68UJp33x0y88pgX
+ IaNmw6zHh7gPzEd1ij9KpDBJLV/3M2ze1SWYVE8WR52SqVAof3cgutMhUbRNb6/ToAQ=
+X-Gm-Gg: ASbGncuPvtydtlkNIrUOBL6hrqmXuferkvzUd8+e0uWznpQt0wzYY5LqkIO1W4o8lkD
+ dVZPIVrByBaJyyx1opKSfsRdvOBlplOPMy5A5Nlo70K8IL2F7NZTcuKq6d+pTnfe/hQp59sX4GS
+ cJRlGkK/9V5fyiBUXIpZ8frPbpr5G1LZDj/xfFX7l3LGiQa+iLDSfiYfW0wRgf5a1p+N61rfKj5
+ r40LsJ+rDHjajtD2OZHPXJsv17eXYrbTsNnU33Zus/tvORt/eQ0fkWBBIHhBrXUmyh/IxOPACux
+ CY9K3MIanVtH9eoTelQXNpF/LIwWK6hl+XVo2rYBYxOXYELNHDmaZaj43rqG6H/ceSclIFsmIfS
+ C7bKUhIvToLZ5yfwfMo7f2/r40WcDLMx8Rdv1/sX6VTvI/3a3NhU=
+X-Google-Smtp-Source: AGHT+IFq+7aDpjo7g1tLn6McGqD/ZH64pJdMG11Vv7k/7TE/oBc46SGyMq7TdB6lnGd4sEAtW7B9PQ==
+X-Received: by 2002:a05:6000:258a:b0:3a3:6e85:a529 with SMTP id
+ ffacd0b85a97d-3b768f16099mr1985676f8f.51.1753266877516; 
+ Wed, 23 Jul 2025 03:34:37 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:eb9:1701:5143:c98d:3163:b66b])
  by smtp.gmail.com with ESMTPSA id
  ffacd0b85a97d-3b61ca2dfe0sm16015964f8f.36.2025.07.23.03.34.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 03:34:36 -0700 (PDT)
+ Wed, 23 Jul 2025 03:34:37 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 23 Jul 2025 11:34:35 +0100
-Subject: [PATCH 1/2] bios_emulator: Fix buffer overflow
+Date: Wed, 23 Jul 2025 11:34:36 +0100
+Subject: [PATCH 2/2] bios_emulator: Add parens to xorl macro
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250723-bios_emulator-v1-1-78b9ef7b9b4a@linaro.org>
+Message-Id: <20250723-bios_emulator-v1-2-78b9ef7b9b4a@linaro.org>
 References: <20250723-bios_emulator-v1-0-78b9ef7b9b4a@linaro.org>
 In-Reply-To: <20250723-bios_emulator-v1-0-78b9ef7b9b4a@linaro.org>
 To: Tom Rini <trini@konsulko.com>
@@ -98,30 +98,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Using strcpy to copy a 4 character string into a 4 byte field in a
-structure will overflow that field as it writes the terminating \0 into
-the following field. Correct this by using memcpy instead.
+The xorl macro lacked surrounding parens which meant that it could have
+unexpected results when used in expressions. Fix this by adding the
+surrounding parens to make its use predictable.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/bios_emulator/atibios.c | 2 +-
+ drivers/bios_emulator/x86emu/ops2.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/bios_emulator/atibios.c b/drivers/bios_emulator/atibios.c
-index d544ffb5ffb..e992a1aa822 100644
---- a/drivers/bios_emulator/atibios.c
-+++ b/drivers/bios_emulator/atibios.c
-@@ -99,7 +99,7 @@ static int atibios_debug_mode(BE_VGAInfo *vga_info, RMREGS *regs,
- 	regs->e.edi = buffer_adr;
- 	info = buffer;
- 	memset(info, '\0', sizeof(*info));
--	strcpy(info->signature, "VBE2");
-+	memcpy(info->signature, "VBE2", 4);
- 	BE_int86(0x10, regs, regs);
- 	if (regs->e.eax != 0x4f) {
- 		debug("VESA_GET_INFO: error %x\n", regs->e.eax);
+diff --git a/drivers/bios_emulator/x86emu/ops2.c b/drivers/bios_emulator/x86emu/ops2.c
+index 1ff27b2af95..29a166f7fe9 100644
+--- a/drivers/bios_emulator/x86emu/ops2.c
++++ b/drivers/bios_emulator/x86emu/ops2.c
+@@ -66,7 +66,7 @@ void x86emuOp2_illegal_op(
+     END_OF_INSTR();
+ }
+ 
+-#define xorl(a,b)   ((a) && !(b)) || (!(a) && (b))
++#define xorl(a, b)   (((a) && !(b)) || (!(a) && (b)))
+ 
+ /****************************************************************************
+ REMARKS:
 
 -- 
 2.39.5
