@@ -4,92 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CC8C83F25
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 08:10:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B0FC83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 09:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F284C8339C;
-	Wed, 23 Jul 2025 10:10:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EB32B82D88;
+	Wed, 23 Jul 2025 11:07:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OR1tdj1/";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="jLdcaKKq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 718CE833D0; Wed, 23 Jul 2025 10:10:24 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BEFB882E34; Wed, 23 Jul 2025 11:07:06 +0200 (CEST)
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on20620.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2408::620])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D2F98329B
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 10:10:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60E5D82D21
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 11:07:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=prabhakar.csengg@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4563bc166a5so3886345e9.1
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 01:10:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753258221; x=1753863021; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WVJdIbu7WAHaQTGqV63Wgu+7tUc71pwK1r9SWgLag1U=;
- b=OR1tdj1/9R+X5TcxyBuzSjv649lGU2Eg80lZ49x1ZLgtAZQyEAWEb4rrDA+YXyyabw
- 3IpfMckzh0uRtFGgznRsn/4Wv3eaWe6KMyd13BVPkS7KaSuQoJ8vjlnhprnP0lffhtDW
- mcjjVwFUsUKu+BuO+GQI5YrE7c/b7+YrH4fkdYWoBOintZAaGPVbQ6uG5J/NJeBZHD+T
- JiFumoK9aUcqRPeRiVfk8nVtkFY0/hr6kESzJtkEPPcSmpbuno1r5BeVVyUrnCqR04HX
- QSk/aBN8g8AX+eUCACXtN72YEQf4w4KfyMDq0maxIet69CtYpdOZdfTAPatsn6Ph0a9y
- wgRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753258221; x=1753863021;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WVJdIbu7WAHaQTGqV63Wgu+7tUc71pwK1r9SWgLag1U=;
- b=CTQED/eWqORLpIiXE++B4gdZNKHGMAd4Dj5yYIZyRjsqVoyKw1MZ1YF6qpEjlypl8P
- XZYUHTb7Q39+AL/5oqv9EbtoF/g83aASMrxDfA9H0sBEofyG6WXT3Vi63RH4ftj0f7Dl
- +cZwW65CKIOe0J+atAMstGp+JG3HQ8HzbdkyuP1uegtHqe7OLaL1hJ0Ui6d9kxXKvSbM
- unC7oLkk1lc4S8NsxqRFbRKGAzQyDkszuniqAMWjrzacryEtYj/D/jjGCjmvtlpzH698
- a284DuShxa9GC9tDki9drY4PfihhHQO3zTxxQ5iQUkUvqOkCIYP9TN1xIhg/zgdpD+2a
- Fs1g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVyV0w9fNc+s3mjQTVjORgGoUF1ii1y8GJ9InYPfEVBDkYyUi6R0dZw6DSnhNPyKu5IuX4qizQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5ISglDRIMOfQ35Titor+fKs4VyJVJqE5duvPDOSQJLIgCJGyv
- /z/9lx/GugdbcsN3otgSjU+a/WJlTxvNRnt2tuVN6x6BPq6ziRox4qPm3RwAYQ==
-X-Gm-Gg: ASbGncv5Piq4b0HKnIMa+VNdmKGdFNaZX3v/ETFrEqLFGfWh955Qsjtvdfyep74nQCh
- vHRGrbwneQcfbl5Xl7MLarUNihGhW39V0hTPlO8XBJfGxjGPGDd80zHvdCrXTr8h1oB3i53cngI
- wOZzw1h3xKD5XLqjzfMrF9RdCw3He1acNi4AKJXi74URi9F7sStQX7FdDgW6manD808iKUVp9sx
- h4cu8ho7TrY76UQX8wcTL96rOMwYjwMUcVbbiU7ArqhXmyyxpxdyPqd6VBwCot/Gf6WQo8Gt0YB
- sxwvC6y/7BL7azYKtFAuEnG1HtpI9TsC1iHRA87/H3Xw0js6ggQewgy3wnXkurb+np88RfO961B
- viJlC+x7YAHIleyMZ+HmAYWB1vefc/qotuJMZS0gInQvUjFaKIUKP3Y8K+xkR/7GSGD8wYoObDW
- pGaZpAU3s=
-X-Google-Smtp-Source: AGHT+IHoEu0uet1IKhUh6TXqWUlwjn0y6Yiqq2bjTRlC5eB7+x3YwPlKHikkCFWQ7XFKVh1zRPr2Xg==
-X-Received: by 2002:a05:600c:a293:b0:456:1122:8342 with SMTP id
- 5b1f17b1804b1-4586271252bmr33803905e9.5.1753258220301; 
- Wed, 23 Jul 2025 01:10:20 -0700 (PDT)
-Received: from iku.example.org (97e54365.skybroadband.com. [151.229.67.101])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45869199461sm15064375e9.8.2025.07.23.01.10.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 01:10:19 -0700 (PDT)
-From: Prabhakar <prabhakar.csengg@gmail.com>
-X-Google-Original-From: Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Adam Ford <aford173@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- "Cogent Embedded, Inc." <source@cogentembedded.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Chris Paterson <chris.paterson2@renesas.com>,
- Prabhakar <prabhakar.csengg@gmail.com>,
- Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v3] configs: Remove redundant CONFIG_TEXT_BASE assignments for
- Renesas defconfigs
-Date: Wed, 23 Jul 2025 09:10:15 +0100
-Message-ID: <20250723081015.278248-1-prabhakar.mahadev-lad.rj@bp.renesas.com>
-X-Mailer: git-send-email 2.50.1
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=x1p99ZjnoYdB7U6l4cndZG/5/uba97egmz0Px9Go33zKBLKXvSrTPvSZcYxxTHiha8WZdzRdH8mrMkcZ+VMeidoJjty5GXwpMmK7GtJ+HJt49c4iKPGj0Nl8tzhKACKM94Rt6wjC+KJ1JQGWkEes/v69/ikfYSELVDWVTji3xCF6CavPhfQ+OZHWlbKeY6LDohB3ko81j8313TlRSxD9IQ7iHBDYxFe6XxNOQ4TotHNDVYSADY3/5z+gNMXsN3/46eEz1qQAUL7aQQd/N7zECa4DhmcX08GbZOC2zh4rsCl34iN3Y6ApEGKSAW/rHjlun6OpzF70gZtpUx4yFne4hA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KmPG7ff3gzYZGHcfUy7UPm3J1BJTCx6RNUdTSlqQBnM=;
+ b=c8NW7iixS3S6ptyP+FPJoJ+sw5qLeyDfiHAxESK5NFu2vvYeC56HzKo05SaW8/7AzykkTm6q0ocfBG3APLx5+HlpaAmKMpB0wUTFKvnHUy8EkXe1BgQ9bRYPSingfnfxLWi4zCFBYR407LYCB8RbBFmZwdErN4epY3/S9K9pGssLloEZ9bhsDXJ7qWeCXnDZ5WIl5ffsANVmEhbqwtI/k91G8f/udyjNjBnKMo3lA7zBZD0GvQGjXGoEpyTO7MhZ+jgcKdRpTw3NMiNxPxv2HeRPrby7XHonCo+J4RVAkTKQ0eg64ZUCDcKOK1mDsnF1NfgJbzxDsIGYzlxuTp3xFg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KmPG7ff3gzYZGHcfUy7UPm3J1BJTCx6RNUdTSlqQBnM=;
+ b=jLdcaKKqaFnAj9WuGi+Wc6TaVJExIU9Jcw8QxBsIoPcuHGICzppYZ3GkLXyOaePGi/wQgar4tGKUQMRdap1MTJirxhQpZgDzheDpznI2s3txUpmr/lDhpVWS/jbTpshhq+HNS2Cxxz653VoCwzBYxBM98kgJHSHuQAKylHIHlP8=
+Received: from CH0PR04CA0059.namprd04.prod.outlook.com (2603:10b6:610:77::34)
+ by DM4PR12MB6231.namprd12.prod.outlook.com (2603:10b6:8:a6::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.21; Wed, 23 Jul
+ 2025 09:06:59 +0000
+Received: from DS1PEPF00017095.namprd03.prod.outlook.com
+ (2603:10b6:610:77:cafe::eb) by CH0PR04CA0059.outlook.office365.com
+ (2603:10b6:610:77::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8964.21 via Frontend Transport; Wed,
+ 23 Jul 2025 09:06:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DS1PEPF00017095.mail.protection.outlook.com (10.167.17.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8964.20 via Frontend Transport; Wed, 23 Jul 2025 09:06:59 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Jul
+ 2025 04:06:56 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Jul
+ 2025 04:06:54 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Wed, 23 Jul 2025 04:06:54 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] serial: uartlite: Use private data instead of platform
+Date: Wed, 23 Jul 2025 11:06:46 +0200
+Message-ID: <8d32af596f80a2220d9f5d7fb98476e6d2b5f303.1753261604.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2879; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=4eB9+KjlmlkspQVPkSet5irZSAbSVNE75qttW3EfacI=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ0LFM/qjFzaQPXl5trVr289cO52eRF0Iky2emNby9wH
+ t/Vuz65saOUhUGMg0FWTJFlOpOOw5pv15aKLY/Mh5nDygQyhIGLUwAm0i3JyDC5JpCt1eUZEzM/
+ 08cDhmGXRf3erljh8fK+9vpNct8WLr3AyNDi/sSpcvMs1WseFSfC092sytd/M5645OC7zVzp1hK
+ nLvIBAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017095:EE_|DM4PR12MB6231:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8156b4ac-4735-4709-5bbd-08ddc9c847e7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?cOtQQhUr65fl0SiFdv4NN1Nvfq8Y8WJjjmtYKWt32fty5qgtfys2UHWIh08B?=
+ =?us-ascii?Q?7apa1R61LKD2RafuPEwvAQhs78y6fQ/gxrylYiSyVKuAVluzZ9zWaDPNAvVe?=
+ =?us-ascii?Q?4NsOAqswj2Tbrir69bEhOZeIcUeFCwaputGCcU2k0KHnVGv6Qgl1EBSzXJF1?=
+ =?us-ascii?Q?sLWOr5Gtp1ZpnaV2yRPpH4UcBveA9oUTwHALMER5fH1MHuW3ro/OA65HnCLR?=
+ =?us-ascii?Q?BlFGXIaOy9hC3btEz4Sj1YpsadyQV5ebCr4LAB0zcSE2YunOSTBQTIQL6TDG?=
+ =?us-ascii?Q?yp3vUUVolbZZKhpCSllRY1E6MUEJjlW7VHJhIycdz1tAyns235hUrnn6r+G0?=
+ =?us-ascii?Q?XD5NwntX9fEr6WulnwnfRH2DWUxLJJ+sjJejcJOGaPo3BUHLk6lzRwyb4POY?=
+ =?us-ascii?Q?gVo1Et6Od3Dl/iMgQ8+9lJ+aVILvkxzNdP7g6GNaW+lHYsEV6yCitTkPp2ba?=
+ =?us-ascii?Q?MtYFL3k06pitKXAXWpQnfD+0Vp0Wm2WFbc4Ldpj7VhhgNz1ZCdmYVZgi27jm?=
+ =?us-ascii?Q?7VtKbRsa92A9FJhQwIAb94y2VN1c3mbFVeExTsIl7jmr2ZZFAuoaafZMD8zc?=
+ =?us-ascii?Q?IXfrM1BawUDcPTo5JE1Od3STAPATMuZyuOzW6ymMd7Ax+ntGsQw8DSs0GbUw?=
+ =?us-ascii?Q?vqPdUPNwnx2w/In0O+sfYzTcR9aXIuuTdIqWjrOd460Df8F9UczkhAOOw+JZ?=
+ =?us-ascii?Q?LuSaYbC4EiXBCNp7a+hfH7tqaJjq6e3TjQb0HZRmrf+rioGnAFM5ABa+3jRW?=
+ =?us-ascii?Q?B1FQPRPBX8/g7pUYJC1qWbYfAFUdwHdu/Y6X7LgF/85eqR5mJv2KL7zZ5v8Q?=
+ =?us-ascii?Q?8eQ9hThEwJkl09IPwd3lutfryGbilqu/mVyxU5DryG3pFl6l1Cxb03U4wkq/?=
+ =?us-ascii?Q?kHmwMNQpWQeCdHXMbD0OxyCojMY+pGAmK+h6Du2CgHi0TUDipKPpBbpOiVcg?=
+ =?us-ascii?Q?RktbDlCJqMXOmku3Tqg1zb44aWKcPKvAw+r3gJeXSYqEeUkkEcazyU2oYPN/?=
+ =?us-ascii?Q?XSuww3wEo+xH1PcKkl+nbEb6I4oXvy4DldIDOZQCGtf5NvOMnw3aoUPkxIaK?=
+ =?us-ascii?Q?zE8cxV9YWEg2HSJJZuPn3ePSxK+qF/EsBeYmhtOo9uZOsUywEm3o6X/m8ZF8?=
+ =?us-ascii?Q?K68zsLt3GYfpid3nyxcIY2nXVrbdQoYrhQKXDv5xU61jyvXwelsgqDDwP5w1?=
+ =?us-ascii?Q?4n6GzQ66KYNWfh5nfK7Yp61DeZUjnUl+NDkMfdnV7CyNHbOinGd0mzZhEhjO?=
+ =?us-ascii?Q?qpS3Df+SDSAh88t/XYkO+HusFkpBBqsLECPLZktAcTNKHokXSXc63A7nnu4H?=
+ =?us-ascii?Q?IlGRkqUZeYq/awBtZwAKoIhwH4CgbHOCPh3Uk2ixNIrMKYp2heUTEcDKsTdl?=
+ =?us-ascii?Q?R8F417KhKbP9aqNDvJUJGy2Bw0hh0mlEb5Cfr1Aj8dGuD4E2F3NIrudYEozD?=
+ =?us-ascii?Q?Ztbve/XpWuUk8+uK0bOzPZO74KBODCJQJuKL5XHlcbnM5UB2lTyX4wcd/BQA?=
+ =?us-ascii?Q?QORUT6D0PEzQiuDKa3qzZ7ATE4AMz8MCAcbX?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2025 09:06:59.2719 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8156b4ac-4735-4709-5bbd-08ddc9c847e7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017095.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6231
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,156 +158,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+plat data should be used only in probe or of_to_plat to fill it information
+from DT. Then in probe platform data should be stored in private structure
+which should be used by the other driver functions.
 
-The Renesas board defconfigs explicitly set CONFIG_TEXT_BASE=0x50000000,
-however U-Boot's POSITION_INDEPENDENT=y build default already places text
-at 0x0. These hardcoded overrides are therefore unnecessary and will be
-pruned automatically in upcoming resyncs.
-
-Remove the CONFIG_TEXT_BASE lines from the following defconfigs:
-  - hihope_rzg2_defconfig
-  - r8a77970_eagle_defconfig
-  - r8a77970_v3msk_defconfig
-  - r8a77990_ebisu_defconfig
-  - r8a77995_draak_defconfig
-  - r8a779a0_falcon_defconfig
-  - renesas_rzg2l_smarc_defconfig
-  - rz2_beacon_defconfig
-  - silinux_ek874_defconfig
-
-Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
-v2->v3:
-- Also included the r8a779a0_falcon_defconfig which was missed in the previous
-  patch.
 
-v1->v2:
-- Instead of setting CONFIG_TEXT_BASE=0x0, removed the line entirely
-  as it is redundant and will be pruned in future resyncs.
-- Updated commit message to clarify the reason for removal.
-- Included renesas_rzg2l_smarc_defconfig
----
- configs/hihope_rzg2_defconfig         | 1 -
- configs/r8a77970_eagle_defconfig      | 1 -
- configs/r8a77970_v3msk_defconfig      | 1 -
- configs/r8a77990_ebisu_defconfig      | 1 -
- configs/r8a77995_draak_defconfig      | 1 -
- configs/r8a779a0_falcon_defconfig     | 1 -
- configs/renesas_rzg2l_smarc_defconfig | 1 -
- configs/rzg2_beacon_defconfig         | 1 -
- configs/silinux_ek874_defconfig       | 1 -
- 9 files changed, 9 deletions(-)
+ drivers/serial/serial_xuartlite.c | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
-index f5bb28cb0c7..19fb14887c6 100644
---- a/configs/hihope_rzg2_defconfig
-+++ b/configs/hihope_rzg2_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a774a1-hihope-rzg2m-ex"
-diff --git a/configs/r8a77970_eagle_defconfig b/configs/r8a77970_eagle_defconfig
-index 4ab362f0d43..3734836fa61 100644
---- a/configs/r8a77970_eagle_defconfig
-+++ b/configs/r8a77970_eagle_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0x700000
-diff --git a/configs/r8a77970_v3msk_defconfig b/configs/r8a77970_v3msk_defconfig
-index 5ef81682caa..d3df0fd0baf 100644
---- a/configs/r8a77970_v3msk_defconfig
-+++ b/configs/r8a77970_v3msk_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0x700000
-diff --git a/configs/r8a77990_ebisu_defconfig b/configs/r8a77990_ebisu_defconfig
-index 414bfdebab1..7405f207612 100644
---- a/configs/r8a77990_ebisu_defconfig
-+++ b/configs/r8a77990_ebisu_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
-diff --git a/configs/r8a77995_draak_defconfig b/configs/r8a77995_draak_defconfig
-index 12d92067de5..2d487722677 100644
---- a/configs/r8a77995_draak_defconfig
-+++ b/configs/r8a77995_draak_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
-diff --git a/configs/r8a779a0_falcon_defconfig b/configs/r8a779a0_falcon_defconfig
-index f4f5c57451f..1b99ba1f02b 100644
---- a/configs/r8a779a0_falcon_defconfig
-+++ b/configs/r8a779a0_falcon_defconfig
-@@ -4,7 +4,6 @@ CONFIG_ARM=y
- CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN4=y
- CONFIG_COUNTER_FREQUENCY=16666666
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC00000
- CONFIG_ENV_SECT_SIZE=0x40000
-diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-index e7c0a7e1eae..4730c76248b 100644
---- a/configs/renesas_rzg2l_smarc_defconfig
-+++ b/configs/renesas_rzg2l_smarc_defconfig
-@@ -3,7 +3,6 @@ CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_SYS_INIT_SP_BSS_OFFSET=1048576
- CONFIG_ARCH_CPU_INIT=y
- CONFIG_ARCH_RENESAS=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x80000
- CONFIG_ENV_SIZE=0x20000
-diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
-index 0b91337b17b..d3f7061f04d 100644
---- a/configs/rzg2_beacon_defconfig
-+++ b/configs/rzg2_beacon_defconfig
-@@ -3,7 +3,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
-diff --git a/configs/silinux_ek874_defconfig b/configs/silinux_ek874_defconfig
-index acdd1ad5205..af462d2086f 100644
---- a/configs/silinux_ek874_defconfig
-+++ b/configs/silinux_ek874_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN3=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x3F0000
+diff --git a/drivers/serial/serial_xuartlite.c b/drivers/serial/serial_xuartlite.c
+index eb234108746d..00155aba5eb2 100644
+--- a/drivers/serial/serial_xuartlite.c
++++ b/drivers/serial/serial_xuartlite.c
+@@ -35,6 +35,10 @@ struct uartlite_plat {
+ 	struct uartlite *regs;
+ };
+ 
++struct uartlite_priv {
++	struct uartlite *regs;
++};
++
+ static u32 uart_in32(void __iomem *addr)
+ {
+ 	if (little_endian)
+@@ -53,8 +57,8 @@ static void uart_out32(void __iomem *addr, u32 val)
+ 
+ static int uartlite_serial_putc(struct udevice *dev, const char ch)
+ {
+-	struct uartlite_plat *plat = dev_get_plat(dev);
+-	struct uartlite *regs = plat->regs;
++	struct uartlite_priv *priv = dev_get_priv(dev);
++	struct uartlite *regs = priv->regs;
+ 
+ 	if (uart_in32(&regs->status) & SR_TX_FIFO_FULL)
+ 		return -EAGAIN;
+@@ -66,8 +70,8 @@ static int uartlite_serial_putc(struct udevice *dev, const char ch)
+ 
+ static int uartlite_serial_getc(struct udevice *dev)
+ {
+-	struct uartlite_plat *plat = dev_get_plat(dev);
+-	struct uartlite *regs = plat->regs;
++	struct uartlite_priv *priv = dev_get_priv(dev);
++	struct uartlite *regs = priv->regs;
+ 
+ 	if (!(uart_in32(&regs->status) & SR_RX_FIFO_VALID_DATA))
+ 		return -EAGAIN;
+@@ -77,8 +81,8 @@ static int uartlite_serial_getc(struct udevice *dev)
+ 
+ static int uartlite_serial_pending(struct udevice *dev, bool input)
+ {
+-	struct uartlite_plat *plat = dev_get_plat(dev);
+-	struct uartlite *regs = plat->regs;
++	struct uartlite_priv *priv = dev_get_priv(dev);
++	struct uartlite *regs = priv->regs;
+ 
+ 	if (input)
+ 		return uart_in32(&regs->status) & SR_RX_FIFO_VALID_DATA;
+@@ -89,9 +93,12 @@ static int uartlite_serial_pending(struct udevice *dev, bool input)
+ static int uartlite_serial_probe(struct udevice *dev)
+ {
+ 	struct uartlite_plat *plat = dev_get_plat(dev);
++	struct uartlite_priv *priv = dev_get_priv(dev);
+ 	struct uartlite *regs = plat->regs;
+ 	int ret;
+ 
++	priv->regs = regs;
++
+ 	uart_out32(&regs->control, 0);
+ 	uart_out32(&regs->control, ULITE_CONTROL_RST_RX | ULITE_CONTROL_RST_TX);
+ 	ret = uart_in32(&regs->status);
+@@ -131,6 +138,7 @@ U_BOOT_DRIVER(serial_uartlite) = {
+ 	.id	= UCLASS_SERIAL,
+ 	.of_match = uartlite_serial_ids,
+ 	.of_to_plat = uartlite_serial_of_to_plat,
++	.priv_auto	= sizeof(struct uartlite_priv),
+ 	.plat_auto	= sizeof(struct uartlite_plat),
+ 	.probe = uartlite_serial_probe,
+ 	.ops	= &uartlite_serial_ops,
 -- 
-2.50.1
+2.43.0
 
+base-commit: 877984a9b68bac862cca6f2d8885947a48e6fd50
