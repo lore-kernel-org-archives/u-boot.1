@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D422BC83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 23:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22CBEC83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 23:09:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A1BD835AA;
-	Thu, 24 Jul 2025 01:09:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 698A483599;
+	Thu, 24 Jul 2025 01:09:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V94gGweS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h2382DNI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2141835B0; Thu, 24 Jul 2025 01:09:26 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id BE1B2835B0; Thu, 24 Jul 2025 01:09:27 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE3D58353A
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 01:09:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A960583577
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 01:09:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-60bd30dd387so260234eaf.3
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 16:09:24 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-74121e0fb77so98009a34.2
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 16:09:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753312163; x=1753916963; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753312164; x=1753916964; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0glqTxZyRuxX0xWlud71DQkPcTTz8WCjOQ0mK9GTt4Y=;
- b=V94gGweSdl8ft8d5ARhrOZZedUulvCU1XMcus8R9gJyPG1MWaTfKAXg0KfxMEISoAw
- rstAo7PhuUKO7qqZrIGI3KO/3BIhJ8pyY+stQSTzDbMgmSg52MJg2kEVNJfX9Oxg0guG
- VIeRCX9rJEtgPWYh3qatJ9fag5I61qzB3131s=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=brlT5xVz5Rs4CtOcAQaRHrm1PF9SOVr8wiAwD7fbOPw=;
+ b=h2382DNInWwTH5RDXsztZ4r8pWp7foPbuLUao1T+oGb/R8WWOPMl12/dFQ1/Y9qL3U
+ OB7cIx0cVp3viIIkmyvjSINvRODRBT856TODOR0f0253041pHGOo9ofm7oyJtiuzFxQY
+ f2K0hvZKljdSV/K149ZQ3pCoaQH8flH6TPwsI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753312163; x=1753916963;
+ d=1e100.net; s=20230601; t=1753312164; x=1753916964;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0glqTxZyRuxX0xWlud71DQkPcTTz8WCjOQ0mK9GTt4Y=;
- b=M3lHtblU+UDKDc1RWGaLFZsnxBdOqBSoC3UtYBMDnjWHAFF5o3I+8CnDbzUzMTQEJS
- Q4+LhgWZoT+XE3erCjrr7WGzDwNuc9Gk5VQQIlkdvKgQttsAR3ZP96iACiwc16LCokCx
- c3bbgenpCLIPMHjdcruWJYbYHnT8sSjP7JSPgOY4tsc04KGtMKJfpNW99c12IlQnWE/6
- J0QOo27Y7YH2cGeb+gjVaheDXwBgJ9mRYdcYIlkNMus+JLutKxNSslY5eb1co2sqA+9a
- 5avg1s1gdpwurzwIt5/x+4d1ZYLc0TqM10+SexQJaQR1zoxhwMjM/bwvxCGlY8xMnuAM
- bJOg==
-X-Gm-Message-State: AOJu0YxKpAczyn6lfPKLG9WhyyFrVFQ6E/1P61SMbomVkicb3Ga9ivJS
- 5PLG0/MMpcN5FiWaoDw45EYNsmBKfRCN4h7ewwWbpFROfv8VBYrRM5ZBWP0Gk3SmdZU=
-X-Gm-Gg: ASbGnctjMHlCD4VgKM4IaUCnbQjQ10YiuVxvKtoyJ/UbzLyeZTXAmWCcJUUBFDaZgYX
- o8ttH54YgK5ptHB76CJs/OuDWE+NVjy0Kzavi1P6+0sZWKomRFqpBNOH1/eG/sUUBEVZVAzuYkb
- eURxhY0i5gwYhA62N79CF5HCYsDBCbdyTp58+1Vlliah1zgI8zb+9sDSGKUS4j8T/QywpSzOyUN
- HktvN/Wp64IPrFvTuFetHltcNL0FvK7N5iqoT6wjDi9oJbNDAY22plNqxNyzpQWfHvhrOFPXgGJ
- tHt77eq1gymw1RnT5I3k1re5K0RmOYFcFKxvqHmDIkevibjS2eU2/5d4M0vo9UuaT2hRM87Espa
- lt84iQcVkYb4yin1k6du/lKaQKi8sEot83v5qZfT34wVNu8l/EEJp0vg=
-X-Google-Smtp-Source: AGHT+IHxZk3OvXXSA+WhfvubKNWvkEJz1eX/fopz53ILtpxicEjQKvO9aH6fSlg9I20MGWg3D2xSyw==
-X-Received: by 2002:a05:6871:e003:b0:2d6:2a40:fb9d with SMTP id
- 586e51a60fabf-306c72f6a87mr3738272fac.28.1753312163432; 
- Wed, 23 Jul 2025 16:09:23 -0700 (PDT)
+ bh=brlT5xVz5Rs4CtOcAQaRHrm1PF9SOVr8wiAwD7fbOPw=;
+ b=Kh0Them/h+7zTx5MJ9VvYNj4l8m9a+vJWisRWxa5Ijad9xb4/HWNMoT75e7Qw3AROw
+ 1ptvLq0K3dWIJrMJY3+UrRjUHbN68xrETu83qpzU3UWbc6A4f+uWw3DamRPMff1kF4fL
+ zv05H5hhIiq6Nitg+FhnK9Qz45UeyDBhspXNZiLHRvz5gQyH9dYZwaNxR0vNGA77gemu
+ tTstbW29PQj4nFDUgby731fliF2CrP9dtIcIeJAK8Whk1s5o7CmOTs3tc8f+sm3xOBXR
+ UvGcPPi8bFEl6EVFiBEoFfaZgA3ppK1lwQOawdB9YWsT0kkCe/CoRZkYxiK6dlrZ0D4U
+ xB0w==
+X-Gm-Message-State: AOJu0YwSjLwzBVk2N/v02juR/3baON4KIEmNb2AM1vzkvQRo+hOPrSz5
+ mxP+43Z9FEI/gqMxalHtjzoqhoe2PpFfbQx2CqCjiWCZGcw3DisQeAQzKFTJrdLSIy0=
+X-Gm-Gg: ASbGncvp6A+bUdrrH4U0sINCt8GUYfckiRBabdBFDKH8BpDxjm1cgUf9AETX+1ZKbCX
+ CCvqGWaIeI+Vdlx0aJIuUbPg/hCzHwa4EUw3bq6r4gRjYkDkeLMysxR7V17Taf5XHWFzN591KZ0
+ DrDmcKEtrSjfnlzbmuDwOWO3Oulldj/O99JkjsNQlGo47QWzEtCdE9/7Gn4HBOPr/yuvGZdEuDj
+ Bc5O72beo67dhoHdvnfEuzIpvIQMEbgOyVEg4r5DEl6b0PjDOGrNH1XHjfivT4v6LXhCJ57Zine
+ oqJQTiObvoa65KKFv6iZGu7xIg9IU5LSt7vEFYIiuzgo7fXlPuSlun1uj8QFCN1AUJuWVT1yGlN
+ bBEpqy2zXNysgzCAonco93asrg1FhzHmBF4W+aY+e42mMSS8ysBWYXaX9UtLglZ0kJA==
+X-Google-Smtp-Source: AGHT+IGnkHvIpuMvZUSXJHijwpy+vhoMTB8E4KTdfG4TKhMxnw3MgOAYdoHbdm1HgzJ5/BMqU5uz7Q==
+X-Received: by 2002:a05:6830:2711:b0:73b:2617:87eb with SMTP id
+ 46e09a7af769-74088acb159mr3738442a34.17.1753312164321; 
+ Wed, 23 Jul 2025 16:09:24 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7412d0fa63csm52693a34.10.2025.07.23.16.09.22
+ 46e09a7af769-7412d0fa63csm52693a34.10.2025.07.23.16.09.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 16:09:22 -0700 (PDT)
+ Wed, 23 Jul 2025 16:09:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Aristo Chen <jj251510319013@gmail.com>
-Cc: jan.kiszka@siemens.com, baocheng.su@siemens.com, sjg@chromium.org, 
- ravi@prevas.dk, quentin.schulz@cherry.de, 
- Aristo Chen <aristo.chen@canonical.com>
-In-Reply-To: <20250715130317.3886-1-aristo.chen@canonical.com>
-References: <20250715130317.3886-1-aristo.chen@canonical.com>
-Subject: Re: [PATCH v2 0/3] mkimage: validate default configuration reference
-Message-Id: <175331216223.248145.17380522700660175789.b4-ty@konsulko.com>
-Date: Wed, 23 Jul 2025 17:09:22 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250723194459.224015-1-trini@konsulko.com>
+References: <20250723194459.224015-1-trini@konsulko.com>
+Subject: Re: [PATCH] patman: Update test for Anatolij's new email address
+Message-Id: <175331216354.248145.11170064829260153775.b4-ty@konsulko.com>
+Date: Wed, 23 Jul 2025 17:09:23 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,30 +93,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Jul 2025 13:03:04 +0000, Aristo Chen wrote:
+On Wed, 23 Jul 2025 13:44:59 -0600, Tom Rini wrote:
 
-> This patch series introduces a validation step in `mkimage` to ensure that
-> the `default` property under the `/configurations` node in a FIT image
-> references a valid subnode. If the referenced node does not exist, mkimage
-> now prints an error and fails early. This helps prevent runtime failures
-> when U-Boot attempts to boot using an undefined configuration.
+> This test was failing due to matching on Anatolij's old email address.
+> Switch to the new one.
 > 
-> The first patch implements the validation logic in `fit_image.c`. The second
-> patch fixes an invalid default configuration reference exposed by this new
-> check in the `k3-am65-iot2050-boot-image.dtsi`. The final patch adds a test
-> case to verify that mkimage correctly fails when an invalid default
-> configuration is present in the ITS file.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/3] arm: k3-am65-iot2050: Fix invalid default configuration reference
-      commit: f7b03695d46d7301fe78eed0fe8f8df9c08c33a4
-[2/3] tools: fit_image: validate existence of default configuration node
-      commit: edb4bf38688bb232ba0739585693aa94be5246f5
-[3/3] test: fit: add test case for invalid default configuration reference
-      commit: 93d09d3bd8ea941eff860443db2d8628cdbfe7e8
+[1/1] patman: Update test for Anatolij's new email address
+      commit: 67c791dcdf84f3b84e447685b0301400d9e2db73
 -- 
 Tom
 
