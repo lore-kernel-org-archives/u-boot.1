@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B115C83F1A
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 13:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CC7C83F1A
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 14:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 410C8834BC;
-	Wed, 23 Jul 2025 15:46:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D03783477;
+	Wed, 23 Jul 2025 16:13:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dfq4tHKK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JFJfogr1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5D188352B; Wed, 23 Jul 2025 15:46:16 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 92FD88352B; Wed, 23 Jul 2025 16:13:52 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BA1382BA1
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 15:46:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49DCE8317B
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 16:13:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2363616a1a6so59556055ad.3
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 06:46:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3a528243636so4081333f8f.3
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 07:13:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753278373; x=1753883173; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y34BGiXE+FDCRVLooQ7vfctlBSrpdAF2GzyAIao8LtA=;
- b=Dfq4tHKKRy7TovtE3NdnrtLWG0x6IzkL4IqHobzjuOs4mVDJVnhexeEvv2FlFduL+w
- GAequrx3ivEQF9DmPBklhtyJcMmWnLDGZW3lW/rcuhp3xswAT+ygdUvYUztfnSFloAgy
- nYQUH/2akhhdzZ9Bsc+2vq4f9v1CSkPnQGazkZ/60xw9vy2YDIVjk38+rvYdfLj7QSpN
- MkbcAT0pjuOQgWN11GwtVLK4EQS5OBUFMsm5GPSg8xl8xf/5fqpXZbMjI798VxPBk0Lr
- z09V1whNCd2gaBKCuPtk6wuzl8eldq6UyK28ihqkrkFXFKClwUnzoYZRCLoVth1pVw5J
- Itsw==
+ d=linaro.org; s=google; t=1753280030; x=1753884830; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y9LRLlXeeXcPS0bq77R9meGueMGDxrCBr1RYmCDEZ6Y=;
+ b=JFJfogr1b/dJjRfN89RFjeyDxDA+dd+uHQkQdVAkysOX372TMkmoLTExu+ntUcAEkT
+ /MKCYxFCXyBlpngFpHPqWN6D1fnwSv3xFkAArqYTTffdwOCjh67fWHSuqJQGTtdYPPPY
+ pHSNk1jGlMpjwnIgU373BBWvnExA8sxnoBQSJFtXZXK21rCeEGuDOpvvEtxD2+hfXa7V
+ Hnz3xRcs1iD2b5cW2bb5gYvNFczeK3guq3f3J7f5cNP9xIJHUxtPKHXPG6RDocQIsnDj
+ PplY0k+I3LfWaNb7fuMcRt49v85BEhHQl8W/6y9bunDmO9gJ86DAQc0o9tglL63H4fQJ
+ iQwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753278373; x=1753883173;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Y34BGiXE+FDCRVLooQ7vfctlBSrpdAF2GzyAIao8LtA=;
- b=gVCmEpLfGOmdXTgXNA+zijplXhYfHs1fV445n7BxVQltt5ERBrIArxDz3aYeuajLFX
- SmHggpN/JJurBHfzqAdG5XssJSAUkrbasfSYExQk3KFUfvCajF2HfzmwT92aKY0IoWH6
- DJFxlA+Ea8MqTi75rwH3jmXZbjY0F7CbMf2FPl6/ODkAPo3lm/juCc61jdfK5Quaobag
- UmNpH+fHRsKqzHIhKIEuu4Piw+9sLR71+xMYa1zFhoiZAaeYEALhGOvwluuRmYER0BQp
- 30YbiZovKr+v9yPxMRDb3YVp3/Pz/MWSnSv/ynqDGdvyh6OeHpoQiRx2XjY6ATNAgAP9
- N6PA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUoW1j4ufhdvwP4rzSOvWqRFswrw1n35EB6KMkobYA6M4sr+UCdtWjTyEk6Ht67ryqdq84vNFY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1ch5CgcZg/f6dVjhDD8tO0EZuZf8Ut5iFhQkhlkQN5OqhGumq
- XgPhXX9bYqH00PL+dhU0D1Ck2+RSr8uy1knMFzsiMP1TUbkQovVOSk/G
-X-Gm-Gg: ASbGnctiwSQ1cu33OD2eaXbJrtUTxLiVFoB3g8Xi24eI5zE3eQO+acRLVz/xJ7W6Aec
- bCIy9VQIzEP1fP90zFCizkfQXoYqcJ9KwpNEEEQ4x8OnO/wh5lsjdEdV9F0lZaTzO5W3untcSIj
- pjNmj3mwdxqQwie1fCcjlOR1PAgK4lE39psKRpN6n8o67Cq9p9wV7TfJhdqQ0BaTCI2h2yqu6HA
- eisL1P6x3/rq8RX7i6vGANRPvqsFQGuOIjSGA2bu6I8I+Yh7Uw7wusI7HYfPKUhoLopqWUDpKR4
- TbU3HxA0kycEZyGzR0mO18WSicop7Y3OwdxWUTae0h8lBAUhz/0G1PVGPx7xRP71zd6naMgWNjd
- Tx3sUDaF2sk42oYNrDeb6BXmkTqK+eO0eHd5/
-X-Google-Smtp-Source: AGHT+IGsHYEnFQGSK+Id6iWvBRMDr6o42RWqo4wNenzdyGIkD3A2XME3jKaYfPj7Dkoia/CYkQ0Ibw==
-X-Received: by 2002:a17:902:d4cc:b0:235:880:cf70 with SMTP id
- d9443c01a7336-23f9814af1bmr34371445ad.14.1753278372860; 
- Wed, 23 Jul 2025 06:46:12 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:db41:d59a:1994:977c])
+ d=1e100.net; s=20230601; t=1753280030; x=1753884830;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Y9LRLlXeeXcPS0bq77R9meGueMGDxrCBr1RYmCDEZ6Y=;
+ b=Zh3UjdB5ry0q/Qt9/C8Zacjr/Io+6YqoRbSFbHN+kS/YE28O8e4xTDfiEvA6/+CYgJ
+ //23tauVMmIGfrTTNVcwWk7UId62GnhvPTMcMwTYZLIoo75La117OlpImlIYdi182Jz4
+ dtWQ+9im26k55q1NI0+5qZedyvM3/hNKmLa0Edx0D4dyoXhnTh1H5IoJcmB0OGnvcaD1
+ ktWXEF4TL9rzoX7bIKZzhNCgkJBqR/n3lXHIHLPXbd0fgsiwx3h1wnjJ67FegTs1nmCq
+ YALhewHTMJ9DhDAAk1GBmEABVyrg9VAfhAFjWrkGZcmCB5LEMtG9nTVHUn4IH8j/ZMs/
+ 9XJA==
+X-Gm-Message-State: AOJu0Yw9fHyyzry8bSGWao535mbR5nkqXVycDJgtjz410cCTwSKBIctQ
+ B/OJuH5TLAB8H02ZGYWCAezrBV9bjsrrcfvEsb0uTLy1tyPjCOMVFfhlNM4OdiNwotA=
+X-Gm-Gg: ASbGnctOj5vfaTtgepGnGX4tiHFi41sLMAAW1dMrGdB/O7Ff8UiLs9Yp4t+L8b/T3sC
+ 0fTkmwy727qT0OBib3LvtlZZiAXwO1Txvx4SVv5eLb3W6yKUeJlLui0zzUnF7WwJ+7VTT93gq41
+ f13qetWdEV34z2mdqpsxlg0Twsb8pwj3JRNBgkIdNNpe3cYk3GMzLAtggnMxaKTv7+ZHYpL0ibP
+ xk16hf/pZpR23frfghOQj1Rg6U9+HdHQ6RoSQXopCZDojAvy+2ttqXalG7aysz8xW4abyqUbUD5
+ JghxCmVw9o6TXAUXiP65/a/NmiYNf82/G6kfMGZuPgMTUiwVNuNJFY5FjdqrSYXnVErNC7dvrQi
+ LkaNRciqj5joyA2+TMOkGeQKtfLkEO9LLKaXD0P6gDK8ZD2Cd1zA=
+X-Google-Smtp-Source: AGHT+IEqglYZ+kjRRtOSt3jB8yxBH3NyElMjJaHIAydQWKRN3VlvJM+eK84KJqCPK6n+PUAJfb9MSg==
+X-Received: by 2002:a5d:5f4a:0:b0:3b5:def6:4e4 with SMTP id
+ ffacd0b85a97d-3b768f22fe6mr2867308f8f.46.1753280029598; 
+ Wed, 23 Jul 2025 07:13:49 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:cdd8:a59a:1949:12ce])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b3f3c999588sm7154595a12.66.2025.07.23.06.46.10
+ ffacd0b85a97d-3b75baa7072sm9416857f8f.2.2025.07.23.07.13.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 06:46:12 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: peng.fan@nxp.com
-Cc: trini@konsulko.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH 3/3] imx93_evk: Remove PMIC and USB header files
-Date: Wed, 23 Jul 2025 10:45:57 -0300
-Message-Id: <20250723134557.1972331-3-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250723134557.1972331-1-festevam@gmail.com>
-References: <20250723134557.1972331-1-festevam@gmail.com>
+ Wed, 23 Jul 2025 07:13:49 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/2] clk: at91: Fix issues found by Smatch
+Date: Wed, 23 Jul 2025 15:13:47 +0100
+Message-Id: <20250723-at91_clk-v1-0-3b28da9bf12d@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABvugGgC/x2NUQrCMBAFr1L220ATtVGvIiLb9NUurVF2iwild
+ zf1c3jzmIUMKjC6VAspPmLyygX8rqI0cH7ASVeYQh2OdQx7x/PZ39M0OkR/ag6cGkRQ0Vs2uFY
+ 5p2E7PNlm6Da8Fb18/43rbV1/YgkeAXMAAAA=
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,31 +100,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no PMIC and USB related C code in this file.
+Unsigned variables will always fail tests that check for being negative.
+Use signed variables instead.
 
-Remove these unneeded header files.
-
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- board/freescale/imx93_evk/imx93_evk.c | 3 ---
- 1 file changed, 3 deletions(-)
+Andrew Goodbody (2):
+      clk: at91: Fix testing of unsigned variable to be negative
+      clk: at91: Fix use of unsigned loop index
 
-diff --git a/board/freescale/imx93_evk/imx93_evk.c b/board/freescale/imx93_evk/imx93_evk.c
-index d84d56be5e1f..d62f94dc4189 100644
---- a/board/freescale/imx93_evk/imx93_evk.c
-+++ b/board/freescale/imx93_evk/imx93_evk.c
-@@ -13,11 +13,8 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/arch-imx9/imx93_pins.h>
- #include <asm/arch/clock.h>
--#include <power/pmic.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
--#include <usb.h>
--#include <dwc3-uboot.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
+ drivers/clk/at91/clk-main.c   | 3 ++-
+ drivers/clk/at91/clk-master.c | 4 ++--
+ drivers/clk/at91/sckc.c       | 8 +++++---
+ 3 files changed, 9 insertions(+), 6 deletions(-)
+---
+base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+change-id: 20250723-at91_clk-e71864ac6e7e
+
+Best regards,
 -- 
-2.34.1
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
