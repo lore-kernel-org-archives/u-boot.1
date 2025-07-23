@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8922CC83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 10:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A39C83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 10:34:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C859A82BF6;
-	Wed, 23 Jul 2025 12:15:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6676583121;
+	Wed, 23 Jul 2025 12:34:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ThSakw/5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x9puga4P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 965D482B0F; Wed, 23 Jul 2025 12:15:49 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6138C82B07
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:15:46 +0200 (CEST)
+ id 316498341A; Wed, 23 Jul 2025 12:34:39 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F0A2482E26
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:34:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56NAFTsc1699161;
- Wed, 23 Jul 2025 05:15:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753265729;
- bh=IhXFEI5OwV7gblWQ5241NVApkSBGxPOIY3t4M6OUHaQ=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=ThSakw/5H9pJFiFhvxZ6f4rL0imZ4Mk16UbrWM0iprgi3g0qIGdB5adCpUygRq+5e
- AxVDtNJl79HQSrba2tIE5RVuEgX7NYXDwi2xAtsH9bWIv24wlMxzrNbG8XICjl+kCH
- FoHn2hdBnofpinRK1CSCFM1jMCaMSS6GYOYJQZwQ=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56NAFS8f2296261
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 23 Jul 2025 05:15:28 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 23
- Jul 2025 05:15:28 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 23 Jul 2025 05:15:27 -0500
-Received: from localhost (uda0492258.dhcp.ti.com [172.24.227.169])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56NAFQG62824618;
- Wed, 23 Jul 2025 05:15:27 -0500
-Date: Wed, 23 Jul 2025 15:45:26 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <joe.hershberger@ni.com>, <rfried.dev@gmail.com>,
- <michal.simek@amd.com>, <marek.vasut+renesas@mailbox.org>,
- <marek.vasut@mailbox.org>, <dsimic@manjaro.org>,
- <jerome.forissier@linaro.org>, <kever.yang@rock-chips.com>,
- <alexthreed@gmail.com>, <ilias.apalodimas@linaro.org>,
- <pbrobinson@gmail.com>, <paul.barker.ct@bp.renesas.com>,
- <lucienzx159@gmail.com>, <skylake.huang@mediatek.com>,
- <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <praneeth@ti.com>,
- <nm@ti.com>, <srk@ti.com>
-Subject: Re: [PATCH v2] net: phy: Support overriding Auto Negotiation timeout
- with env variable
-Message-ID: <4814febe-bc65-4fe0-926b-dcb94135cf9d@ti.com>
-References: <20250723062642.634345-1-s-vadapalli@ti.com>
- <c2c4887b-aeb0-4880-8241-058ef26552fd@cherry.de>
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3b611665b96so3684590f8f.2
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 03:34:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753266876; x=1753871676; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4vkAFUE0NSTZ2qFX53pInGuZiwITymhxL+AAVU0iVLY=;
+ b=x9puga4PqTPKh/+i4g8zNw5+Vsb//JCeZrwdDfIVhNW+ZnyGBH+l1lP5RpNOLQOcuF
+ tiXibzdrYfvVgDZ2oE+4fiA7DDoetxZMrvunx6Q0KRBTmC7+EDa1WH9yedU/u+FK+o9S
+ p6HVcZ3p9/HJWppx8jcTqdxD5gv+VZnnoYJUozttn2cSJ/L8Ti95cdNiYs63M4sPAIlu
+ up3VRfKEChsiLyv81mnQwg12BCJkHqjLFas2O4yV6JtannHonbm2xiUkz+0JDvj3KMnV
+ 3H5YaCfnENliAwM3zISuw9xz1U0nSEv/sArW8KMlfYqfdJA4XYHkmLS2AD19SfIPpCiU
+ lxug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753266876; x=1753871676;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4vkAFUE0NSTZ2qFX53pInGuZiwITymhxL+AAVU0iVLY=;
+ b=IuNuA91geO8GcDArGt2mAcNpPWll6VbP/CRPgEcY4ZnjpccZFK33NQGqHpPNAI+MGH
+ i6CHuJjTlvPzWtRk1VeHOj0HxMo6nzMcs93xkW7YQhFp7NJ7UyA54qNrhSnvEQXYeUQ8
+ l4HOnNonmvJWo1pB2kIvrwsBj6w6JDOz5FJ9FXCPy56rZ0WbjFaF/zh79+mnAgmNdHyT
+ CdI/c/OxB9uSje6mx0QGlKchsUTXlzeIMMEj21G0QjiOUn91w+8fRSXEkp21WOEcNLcx
+ yUXZjt/AlGpAg5Lkq46qtxM75LlAF5v+QKD2m2yoErodTboVuOAHqqJ+U+VgdazkedOo
+ bitA==
+X-Gm-Message-State: AOJu0Yye4KD7MSZQ+Ghbbc/IdUSxz8h4+g8EeYpBUeZocNf5q8e800lo
+ fy3DRXKdBQ9mIxA/t4l3pUc3kEObGvd0t9mQPxRg/TKq8qoMLDIhaapb0aVZApqKsow=
+X-Gm-Gg: ASbGncsS/derviD2VubqmVMyDQMr/x4mkBQbMOMaW6wigRx/l/8vX0uJsTx6/CrJaNq
+ v88+FSLqpoYNNTuSfwCqiiHP5dwN08KI2kfJWEXuju6VtKLXaDHCo9QlOJ3ELW2TdcwEKGC9cpO
+ NrSy+65z7AS1VE3gYOvKn7EQIZkISCkySgCDWtFOs5TGIhZoa7StNI6leI0PTRpn+y5ggdtRWKH
+ 9UOB1hWleUO6UYFc1+2IUOqJ2Fg5qjRVl2Tdlm8YYDzj5bmDU/flHpyiRSumnm/lDDpvXK1U0Lr
+ HcZQIf8ejhN0/hRvcPAyonuA92AGIdK/yDivJj/U0y8uoXSMUF04hTJgMA6m/PvRCkePV92hOc8
+ uIfPrUQlRGoTq/DpHkLPy18fd+YRvph/BNslDNa2jxzvUwHk/AgA=
+X-Google-Smtp-Source: AGHT+IEx/9vMoEeucRzY1TSP1MMVO092OUDfmw361rlRp2SQlsztRlFDkFJFQnxa6/qtKliT7g94xA==
+X-Received: by 2002:a5d:5d13:0:b0:3a4:ead4:5ea4 with SMTP id
+ ffacd0b85a97d-3b768cb1b1cmr2010122f8f.24.1753266876033; 
+ Wed, 23 Jul 2025 03:34:36 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:eb9:1701:5143:c98d:3163:b66b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b61ca2dfe0sm16015964f8f.36.2025.07.23.03.34.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Jul 2025 03:34:35 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/2] bios_emulator: Fix two issues found by Smatch
+Date: Wed, 23 Jul 2025 11:34:34 +0100
+Message-Id: <20250723-bios_emulator-v1-0-78b9ef7b9b4a@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <c2c4887b-aeb0-4880-8241-058ef26552fd@cherry.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALq6gGgC/x2N4QqCQBAGX0X2dwe2aUWvEhJ7+pULeRe7FoH47
+ p39HIZhFnKYwulSLWT4qGtOBfa7ivpR0gNBh8LENbf1iQ8havYbpvdT5mzhyCLSDDi3DVNpojh
+ CNEn9uFWT+AzbxMtw1+9/dO3W9QcP5YwweAAAAA==
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,178 +99,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 23, 2025 at 11:25:50AM +0200, Quentin Schulz wrote:
-> Hi Siddharth,
-> 
-> On 7/23/25 8:26 AM, Siddharth Vadapalli wrote:
-> > The Auto Negotiation procedure between two Ethernet PHYs consists of
-> > determining the best commonly supported parameters among Speed,
-> > Duplex Mode and Flow Control.
-> > 
-> > The time taken for this procedure is not only dependent on the local
-> > PHY used, but also on the link-partner PHY.
-> > 
-> > While a timeout can be specified in the form of a "CONFIG" on the basis
-> > of the local PHY present on the device, since the timeout also depends
-> > on the link-partner PHY, it might be necessary to modify the timeout.
-> > 
-> > To avoid rebuilding the bootloader for a given device, just because it
-> > may be connected to various link-partner PHYs, each with a different
-> > timeout, introduce an environment variable named "phy_aneg_timeout" and
-> > override "CONFIG_PHY_ANEG_TIMEOUT" with "phy_aneg_timeout".
-> > 
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > ---
-> > 
-> > Hello,
-> > 
-> > This patch is based on commit
-> > 7598b469c16 Merge tag 'u-boot-dfu-next-20250703' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next
-> > of the next branch of Mainline U-Boot.
-> > 
-> 
-> Between the release and -rc2 (excluded), please use master branch and not
-> next as your base, see
-> https://docs.u-boot.org/en/latest/develop/release_cycle.html
+Smatch found two issues in bios_emulator, a buffer overflow and missing
+parens for a macro. Fix them both.
 
-Thank you for pointing it out. I will base the patch on master.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Andrew Goodbody (2):
+      bios_emulator: Fix buffer overflow
+      bios_emulator: Add parens to xorl macro
 
-> 
-> > v1 of this patch is at:
-> > https://patchwork.ozlabs.org/project/uboot/patch/20250722060554.352952-1-s-vadapalli@ti.com/
-> > Changes since v1:
-> > - Switched to env_get_ulong() based on feedback from Marek Vasut at:
-> >    https://patchwork.ozlabs.org/project/uboot/patch/20250722060554.352952-1-s-vadapalli@ti.com/#3550426
-> > - Addressed feedback from Quentin Schulz at:
-> >    https://patchwork.ozlabs.org/project/uboot/patch/20250722060554.352952-1-s-vadapalli@ti.com/#3550263
-> >    by performing the following changes:
-> >    1) Updated drivers/net/phy/Kconfig by documenting that phy_aneg_timeout
-> >       env variable can override the value of CONFIG_PHY_ANEG_TIMEOUT
-> >    2) Updated doc/usage/environment.rst by documenting the base and unit
-> >       of phy_aneg_timeout
-> >    3) Updated drivers/net/phy/aquantia.c and drivers/net/xilinx_axi_emac.c
-> >       to support overriding CONFIG_PHY_ANEG_TIMEOUT with phy_aneg_timeout
-> > 
-> > Patch has been tested on J784S4-EVM validating the following cases:
-> > 1. PHY Auto-Negotiation performed with "phy_aneg_timeout" unset.
-> >     CONFIG_PHY_TIMEOUT with a value of 4,000 takes effect.
-> >     => Auto Negotiation succeeds
-> > 2. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 20,000.
-> >     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
-> >     [Higher value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
-> >     => Auto Negotiation succeeds
-> > 3. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 200.
-> >     "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
-> >     [Lower value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
-> >     => Auto Negotiation times out
-> > 
-> > Test Logs:
-> > https://gist.github.com/Siddharth-Vadapalli-at-TI/3e9cbdfedc541032768b14c15244f590
-> > 
-> > Regards,
-> > Siddharth.
-> > 
-> >   doc/usage/environment.rst     | 9 +++++++++
-> >   drivers/net/phy/Kconfig       | 4 +++-
-> >   drivers/net/phy/aquantia.c    | 8 +++++---
-> >   drivers/net/phy/phy.c         | 7 +++++--
-> >   drivers/net/xilinx_axi_emac.c | 7 +++++--
-> >   5 files changed, 27 insertions(+), 8 deletions(-)
-> > 
-> > diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
-> > index bb6c351b441..b48c11faffa 100644
-> > --- a/doc/usage/environment.rst
-> > +++ b/doc/usage/environment.rst
-> > @@ -335,6 +335,15 @@ netretry
-> >       Useful on scripts which control the retry operation
-> >       themselves.
-> > +phy_aneg_timeout
-> > +    If set, the specified value will override CONFIG_PHY_ANEG_TIMEOUT
-> > +    which defaults to 4000 (decimal) millisecond. This variable has
-> 
-> Please do not specify the default here, it may be different per board and
-> this would then be misleading.
+ drivers/bios_emulator/atibios.c     | 2 +-
+ drivers/bios_emulator/x86emu/ops2.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+---
+base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+change-id: 20250723-bios_emulator-62aaa4de8542
 
-I was referring to the default specified in the Kconfig for
-config PHY_ANEG_TIMEOUT
-But I understand that it may be interpret in the context of the board.
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
-> 
-> > +    the same base and unit as CONFIG_PHY_ANEG_TIMEOUT.
-> 
-> +that is, decimal and milliseconds.
-
-Ok.
-
-> 
-> > +    The default value of CONFIG_PHY_ANEG_TIMEOUT may be sufficient for
-> > +    most use-cases, but certain link-partners may require a larger
-> > +    timeout due to the Ethernet PHY they use. Alternatively, the timeout
-> > +    can be reduced as well if the use-case demands it.
-> > +
-> >   rng_seed_size
-> >       Size of random value added to device-tree node /chosen/rng-seed.
-> >       This variable is given as a decimal number.
-> > diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-> > index 3132718e4f8..7fa1a89fca4 100644
-> > --- a/drivers/net/phy/Kconfig
-> > +++ b/drivers/net/phy/Kconfig
-> > @@ -23,7 +23,9 @@ config PHY_ANEG_TIMEOUT
-> >   	int "PHY auto-negotiation timeout"
-> >   	default 4000
-> >   	help
-> > -	  Default PHY auto-negotiation timeout.
-> > +	  Default PHY auto-negotiation timeout in millisecond (decimal).
-> 
-> Not a native, but my gut says it should be "in milliseconds".
-
-https://physics.nist.gov/cuu/Units/checklist.html
-"Unit symbols are unaltered in the plural."
-
-	proper:
-		l = 75 cm
-	improper:
-		l = 75 cms
-
-> 
-> > +	  This can be overridden by the phy_aneg_timeout environment
-> > +	  variable that has the same base and unit.
-> >   if PHY_ADDR_ENABLE
-> >   config PHY_ADDR
-> > diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
-> > index d2db8d9f792..72f29824468 100644
-> > --- a/drivers/net/phy/aquantia.c
-> > +++ b/drivers/net/phy/aquantia.c
-> > @@ -552,13 +552,15 @@ int aquantia_config(struct phy_device *phydev)
-> >   int aquantia_startup(struct phy_device *phydev)
-> >   {
-> >   	u32 speed;
-> > -	int i = 0;
-> > +	ulong i = 0;
-> >   	int reg;
-> >   	phydev->duplex = DUPLEX_FULL;
-> >   	/* if the AN is still in progress, wait till timeout. */
-> >   	if (!aquantia_link_is_up(phydev)) {
-> > +		ulong aneg_timeout = env_get_ulong("phy_aneg_timeout", 10,
-> > +						   CONFIG_PHY_ANEG_TIMEOUT);
-> 
-> Considering phy_aneg_timeout stores a value in milliseconds, I believe a u32
-> is plenty enough as that would mean 4294967295 milliseconds max which is
-> almost 50 days, I think that's enough for a timeout :)
-> 
-> Up to you on the type of the variable but ulong seems overkill (it is what
-> env_get_ulong will return but we don't need more). Since this comes from the
-> user at runtime, I would suggest to *not* take a signed type so that a type
-> overflow is defined behavior (it wraps and is minimally 0).
-> 
-> Same remark for other drivers. ulong is fine as is, just taking a lot of
-> space in memory for no benefit.
-
-I used ulong since "env_get_ulong" returns ulong. I will use u32
-instead since it is good enough as long as an unsigned variable is used
-to store the value.
-
-Thank you for reviewing the patch and providing feedback.
-
-Regards,
-Siddharth.
