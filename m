@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C83DC83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 15:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68651C83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 15:19:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 536EC8354B;
-	Wed, 23 Jul 2025 17:17:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EF49E834E4;
+	Wed, 23 Jul 2025 17:19:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XNIs767O";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Pb1/XK2g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10C5E8354B; Wed, 23 Jul 2025 17:17:32 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7449183542; Wed, 23 Jul 2025 17:19:11 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E11A8834E4
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 17:17:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36DE1832FE
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 17:19:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-45622a1829eso22625035e9.1
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 08:17:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753283849; x=1753888649; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zpmhwTz7N3ngreL+6/LxWz0rdaZKdUQjiZURmKfIqPU=;
- b=XNIs767OZrgnE1zg9oGcc8rxfzyJstGjo5tcXyi/A1YA1cxn5615A75jlgU/UYnzm5
- DKwYvCTvv48zfoXXGzVPy+ZlKyIKQUkp4zwA8Ws04ytpdkZiSL7XdOv4WuO51fFWQYig
- wQvvQI+R2KYKLoCKrJvdd7HEwvg5KeaCNNx6gXEg490RegUxO6LydRNC7uD5xr5i7LVW
- RHJWQu6+VY35yyr+f8jasO0KyWXWd29IIjmlInMbY6HyJMP0qCzPMXDu9xsR4TbmXZzK
- KQq/jXY9ycXBo0kI2kaFEudVpr+jD2LsI7ZUPCAso3O1wRkoVrdThBKqrwpZVGpUXm5o
- ywzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753283849; x=1753888649;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zpmhwTz7N3ngreL+6/LxWz0rdaZKdUQjiZURmKfIqPU=;
- b=aKiFaLC++RDai+D9ROeVQC2IBw67A52Q6UZsGN04Lbij3IDHfDbVLGFmgT+oKunT3Z
- mNLSUaQjQyh+W6TXm1xEfnc+Y8D9OxXXlzO56zQnDCEaqRoYqnrQQVH8NmcA0lG6LKR+
- rl/He5A14nZqn4PUg9N9zKkJdXPCQsx3YAC4B6NjnjOqSFgkvdLJijdMz1/O6oscMnlQ
- 29UvJnme3v0NE/n1WO7wInx4RiWlY/LND5vtYZryfYd6tHI39sq3Fdhk3o+ciTmr67M7
- 0M9csHhStj+mQcU/nJhBTahJxXeAklCf0haL3XYqD7Ivk6QSixxA6rwSw3j0vlA+5G1n
- bLcw==
-X-Gm-Message-State: AOJu0YxR07b0z3bxFBvIKUv7O6TrCfErVShjnC+oKZCwlYUnmPb1vfdX
- cKtxeXQm/tGn+LJ7GQzX4Eh67UvCwyuI/bczyl5FiKUtdEnZDgWqYhPwwsKwEp31ZvQ=
-X-Gm-Gg: ASbGncvlHDormhSw2UT122oqJaDi57k9UUH5H3PtmgMB9O9b/plIXm5wJX+Gm6BzObW
- n4QpbUu1TM9KpInVL+yh5cWZYx8xSVR9j3akHXwfPtKpzNRPZI7PkDnmaWRAN82/H0ykqJLwUQ2
- TbS21GVltjjK/f0hfKk016Y4w0gkGN3mLm1z/UZorUAHMoLXefza360RM5ijai4jYDTUaedi1ss
- OkX+ucajlaOY+gXPlDATtqJsC6lxEF3tC8MrUZYB+3wkM9T6ubC9BjdBWZvXj6laax+6rD4ctSl
- XeuiLuuzAP6MKF+sfWF4knsNtyyjIglJqQRETuWLpqNbdH/0rnlYlOKs2KDg5Yk3+g7qC084D3j
- jSpnChT27ArRrllUSRh5HNkAbcbKKzfLD2F3bcnetQzKWwZzE9O8=
-X-Google-Smtp-Source: AGHT+IH3oOYqUH4kMeaWcy1aDnY9+A4ACisdKbmwUqaRr5PyL/AB1mwTUqrg42BGeYYPtYABbF63Ew==
-X-Received: by 2002:a05:600c:3d97:b0:456:237b:5e4e with SMTP id
- 5b1f17b1804b1-4586ae36d14mr23220395e9.32.1753283849238; 
- Wed, 23 Jul 2025 08:17:29 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:cdd8:a59a:1949:12ce])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca2cc06sm16591449f8f.35.2025.07.23.08.17.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 08:17:28 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 23 Jul 2025 16:17:28 +0100
-Subject: [PATCH] clk: cdce9xx: Remove always true test
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=929994e5a7=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56NFCEUr021312;
+ Wed, 23 Jul 2025 17:19:03 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ xzTCIpHIE5O5/jRfHS+H/o1KzGHHR6i8qSlA79FbiwM=; b=Pb1/XK2gq7BzzjmR
+ x5si6Ia5Zf85O1ObESEGnDePp1e/rfkv/5m37Q4kZy/OM5XrH7wZMfaNrjekuYqp
+ vN4v82t6wa5/CO0Oqyg6cnNDVL1E3PAVjS8SNXHOYnvhdyw3GZK0h3XdAXm1zITS
+ egWYROj+bZY8XSBkaoQe6gZ4YOTd8RFD/CLCVO5NkJRsKs6qrnuflF2Zhd1DvzUX
+ f4W79JUR82Pro5zBmu8LA6W4GflrbjVDL4neAAnO7i4by//ISJp451XRLC8nHZm6
+ Qd4AH+xg+w2n2qeMN6858jhA7J+maDx/zJEXMnBx+VqYDVQiMTvqeSmFdEQ8dKvP
+ wSzaxw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48028gc5ms-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 23 Jul 2025 17:19:03 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C74A74005F;
+ Wed, 23 Jul 2025 17:18:04 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 119A47A4CA0;
+ Wed, 23 Jul 2025 17:17:40 +0200 (CEST)
+Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Jul
+ 2025 17:17:39 +0200
+Message-ID: <6afd5864-dc54-44a0-965c-029e982091cf@foss.st.com>
+Date: Wed, 23 Jul 2025 17:17:20 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: ums command broken since commit c5d685b8993c ("usb: dwc2: Unify
+ flush and reset logic with v4.20a support")
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, Marek Vasut
+ <marex@denx.de>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
+ <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ <seashell11234455@gmail.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <16f6e5bf-f7fd-4e5b-95fe-1388975484b6@foss.st.com>
+ <5cf111d7-a209-4669-921e-10b6729cca26@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <5cf111d7-a209-4669-921e-10b6729cca26@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250723-cdce9xx_clk-v1-1-9cb1f734637b@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAAf9gGgC/x2N0QqDMAwAf0XyvELtkOp+ZQxp00yDWzcSGQXx3
- 617PI7jNlASJoVbs4HQj5U/uUJ7aQDnkCcynCqDs66z3l0NJqShlBFfixmotbZH36fooRYxKJk
- oIeN8Nu+gK8kpvkJPLv/N/bHvB3D+eq52AAAA
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+X-Originating-IP: [10.48.86.182]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-23_02,2025-07-23_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +93,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function dev_read_u32_default does not return an error and the
-variable 'val' is unsigned so testing for >= 0 will always be true so
-remove this test.
+Hi,
 
-This issue was found by Smatch.
+On 6/9/25 15:41, Patrice CHOTARD wrote:
+> +U-Boot mailing list i forgot to set.
+>
+> On 6/9/25 14:40, Patrice CHOTARD wrote:
+>> Hi all
+>>
+>> Since commit c5d685b8993c ("usb: dwc2: Unify flush and reset logic with v4.20a support") on next branch
+>> "ums" command is broken, we got the following issue on STM32MP157c-DK2 and STM32MP135f-DK boards:
+>>
+>>
+>> STM32MP> ums 0 mmc 0
+>>
+>> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1dacc00
+>> \dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> |dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> |dwc2_core_reset: Waiting for GINTSTS_CURM_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> \dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> dwc2_core_reset: Waiting for GINTSTS_CURE_HOST timeout
+>> dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> /c2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> -dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> -dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURM_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>> /dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout
+>>
+>>
+>> Thanks
+>> Patrice
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/clk/clk-cdce9xx.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/clk/clk-cdce9xx.c b/drivers/clk/clk-cdce9xx.c
-index e5f74e714d5..492a196604a 100644
---- a/drivers/clk/clk-cdce9xx.c
-+++ b/drivers/clk/clk-cdce9xx.c
-@@ -117,8 +117,7 @@ static int cdce9xx_clk_probe(struct udevice *dev)
- 	data->xtal_rate = clk_get_rate(&clk);
- 
- 	val = dev_read_u32_default(dev, "xtal-load-pf", -1);
--	if (val >= 0)
--		cdce9xx_reg_write(dev, CDCE9XX_REG_XCSEL, val << 3);
-+	cdce9xx_reg_write(dev, CDCE9XX_REG_XCSEL, val << 3);
- 
- 	return 0;
- }
+I think I found the root cause of the issue in the serir, I push the 
+next fixes:
 
----
-base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
-change-id: 20250723-cdce9xx_clk-9e1008c78db7
+[PATCH] usb: dwc2: fix reset logic in dwc2_core_reset
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+https://patchwork.ozlabs.org/project/uboot/list/?series=466391
+
+Tested on STM32MP13F-DK for device mode (forced).
+
+
+Regards
+
+Patrick
+
 
