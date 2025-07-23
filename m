@@ -4,83 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA63C83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 10:35:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE328C83F1A
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 10:58:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F114E8329B;
-	Wed, 23 Jul 2025 12:34:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15F618341A;
+	Wed, 23 Jul 2025 12:58:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mPQNld13";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OKZ+e6zg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12E11834AD; Wed, 23 Jul 2025 12:34:41 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 0D14A83429; Wed, 23 Jul 2025 12:58:08 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E3C83297
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:34:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB8EA83297
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:58:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-454f428038eso56132755e9.2
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 03:34:38 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-45622a1829eso21222495e9.1
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 03:58:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753266877; x=1753871677; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lL89GNx5u83mHanQ6qzcFNEXa/07NOMbAM1DYdUMUc4=;
- b=mPQNld13mrb7vTzQH7Pq+GY89NWWRCL/pUzZKd9kEOxErPPE4A19ZL5eFs7F6K/kw6
- 2ySJQEPKbK3xzeWSrvXIeZW9UjCOQ44spJExfY0X3d4xPGatQGSFQ8MRvw6QlRgJApLl
- gmEtvMFuB9C/g9727VsB/9Ci5p9Ma8vWjAp3aC4/1FDUsTTXA+R5Zg6v5cfWykcg6omA
- dAmAJU0rwDNGFx88n69Rze+z0cYULarezjBlP1QOdpvyyAQcyVbvFBzKE4vZrxP7tjtW
- SJmT47sbrOjPG1zy0XpFPUHWDFf0AS5axlF6o7GnLFAchQd5+QHN/SUxlGZl6AWr5XZr
- pJwQ==
+ d=linaro.org; s=google; t=1753268285; x=1753873085; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fLDEJ0OyPRTkMU0HEwHZlMzhDGNT4KRgx17dAMUAZEM=;
+ b=OKZ+e6zg3VHyMeQ8uFtbKPbUEq2lffNZCPP7qNTLPqiDQ6mjC1llRNgZnjS9GA9OkE
+ hio+GgbYOZ4nc3xqmMEx4O3cP7ppOSZXPwSICEzzcIYwExMMMYdNRs1Rp1C8GRSEVUQp
+ 35xW8gI8M34xcABqUqZgh5u5ufqjXZmMjOUXpYs60JOgc8EpUhyOy/aID41eSWGzxKuP
+ mExxS6Kv/Gy4jcMudxlhgO1y4lAf3uTArLgifIwXP8q6W8GI+1UwtAFu2PKPF17bVeX+
+ w1d21RKCTHCo6CFT3G1fDyuxpVfRCDCLG0Z337JYhwo7L38BjiLQcePoR4R9qUBCfFrA
+ wb7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753266877; x=1753871677;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lL89GNx5u83mHanQ6qzcFNEXa/07NOMbAM1DYdUMUc4=;
- b=VZ9lAgIHhdj6bp7mw2KdLQcQC2CQgSBvDTg3NRXDiXIsQJdJnoimT7rHA7uBwbk89V
- api3TFBMxmKoGWSu9Cd9zCWnzKPxWTpJJhF9RKzj1jbhySFCJ6QzOs5727qblkrbCBwQ
- gLVSjiSgw3qYFGQ95q2Hd8PGtaRjAboXtJ6sT2XiCfNfYopaqnMF44Nr6T2ig3nsGLoa
- uEfbN8T3SE+3Bsl6M7+j3c9xSak2jjc8JLT8A82gzsO9NPAYU4qCaF6qhu3ihHhmzHHv
- 5QcU48ZMRcy0Djy/JggiTRt9kot0Vgj88bF/F2tosUu2R2tVw3P5Qi6V3Gu1eE06uFGz
- 4WbQ==
-X-Gm-Message-State: AOJu0YxTxQfQuSo+861bouLhKJ95snkolm/3k1reL68UJp33x0y88pgX
- IaNmw6zHh7gPzEd1ij9KpDBJLV/3M2ze1SWYVE8WR52SqVAof3cgutMhUbRNb6/ToAQ=
-X-Gm-Gg: ASbGncuPvtydtlkNIrUOBL6hrqmXuferkvzUd8+e0uWznpQt0wzYY5LqkIO1W4o8lkD
- dVZPIVrByBaJyyx1opKSfsRdvOBlplOPMy5A5Nlo70K8IL2F7NZTcuKq6d+pTnfe/hQp59sX4GS
- cJRlGkK/9V5fyiBUXIpZ8frPbpr5G1LZDj/xfFX7l3LGiQa+iLDSfiYfW0wRgf5a1p+N61rfKj5
- r40LsJ+rDHjajtD2OZHPXJsv17eXYrbTsNnU33Zus/tvORt/eQ0fkWBBIHhBrXUmyh/IxOPACux
- CY9K3MIanVtH9eoTelQXNpF/LIwWK6hl+XVo2rYBYxOXYELNHDmaZaj43rqG6H/ceSclIFsmIfS
- C7bKUhIvToLZ5yfwfMo7f2/r40WcDLMx8Rdv1/sX6VTvI/3a3NhU=
-X-Google-Smtp-Source: AGHT+IFq+7aDpjo7g1tLn6McGqD/ZH64pJdMG11Vv7k/7TE/oBc46SGyMq7TdB6lnGd4sEAtW7B9PQ==
-X-Received: by 2002:a05:6000:258a:b0:3a3:6e85:a529 with SMTP id
- ffacd0b85a97d-3b768f16099mr1985676f8f.51.1753266877516; 
- Wed, 23 Jul 2025 03:34:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753268285; x=1753873085;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fLDEJ0OyPRTkMU0HEwHZlMzhDGNT4KRgx17dAMUAZEM=;
+ b=HQOd+3niu9AI94sIbvx4RQY9djF5mxjcWRLLnTCu6BhLvtXAmxz8xkvKaBOJIYzgbs
+ DI2poTPMaQzE+KayglxMol9LTqKRC4GlIMiHV9ZYOhCm4i6YRboLr8Ve3c8FCtHXTv3p
+ 3BgMddODC3ejCKNyNlNC2118i7qzKNGmtNZ245ClnZNj5yeNurNJyXeMNXGAWE5MbeX1
+ M9McHsn1CLcOLYtsoO7ZFGyUqsv1tW+5TucEuSrHp95UTFjrdwXzkdkb4/fVBmzk8CV/
+ Rp4ej0HMCTSCuGp0DRvDseJGRE1uR/P8sehRHaoy4U/vvIlUAP+lyTIg0ZP4kaaJIuHE
+ JnDw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWVwr3a7FwCuEpTjS23UgLVrigQVIhsWfZQCkkVFoFrjsTzgMf+bv5/9w5ZLht0NXzFp5nOA+o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwanXOVPDzjoj8SROhY7ityQc9KWlr6oPxmstXffzNZzE9CBQd7
+ EA84xLNCJJzmnQCo/8wm9DnXovDyaOkNoOUDq1u+BaoKNUOecaeuUYXstvGdiYKzHmI=
+X-Gm-Gg: ASbGncvNiQ9d8fLSWrbXw1Tbf2ePGskp6VNrCHSoUJP/rx2zSOO2U5UMJhttiqtPRdW
+ 5EnSpoyRUkrPmIGckDcHX54ol1+c4K6Qlhs3wICD3cbY75LoA9pczgvfYAseQSJDP9N0dnypKef
+ eAEvLhj2gU2SLWL8MxRFKoQMOgIQuzWTMKRmDadLUlJZFtaxaW9NbQ5iP22ueudFu4e9TgyU8YF
+ a2SMqtfTMxboYgpXRk/eqUjkc1VOTluhgCjHEIZFVWibbvXDibgO4ZqI3kSxjtPPuyb/xOVjDfl
+ 3e7glu74SyIUGmqikZyQikvRchdFnBGpfg2i4k7hgUQVQhFNTdJLuPapnIuhoqdOH6ZTC6gkN7O
+ 1vRMCqU6otEgfDCp5yTBQJ3lyyoXsbwOaYPR2f4iTn8QpYoi93cs=
+X-Google-Smtp-Source: AGHT+IGlwn+TZqAfPpqcvlArlP9PVIHXdpJ3Tac9tVHrzuW+zxMka+4iBZIsOayCTq0+0V5ohBExAA==
+X-Received: by 2002:a05:600c:46d2:b0:456:19b2:6aa8 with SMTP id
+ 5b1f17b1804b1-45868d48911mr21717315e9.19.1753268285189; 
+ Wed, 23 Jul 2025 03:58:05 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:eb9:1701:5143:c98d:3163:b66b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca2dfe0sm16015964f8f.36.2025.07.23.03.34.36
+ 5b1f17b1804b1-45869199461sm19670865e9.8.2025.07.23.03.58.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 03:34:37 -0700 (PDT)
+ Wed, 23 Jul 2025 03:58:04 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 23 Jul 2025 11:34:36 +0100
-Subject: [PATCH 2/2] bios_emulator: Add parens to xorl macro
+Date: Wed, 23 Jul 2025 11:58:04 +0100
+Subject: [PATCH] button: qcom-pmic: Fix dereference of uninitialised
+ pointer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250723-bios_emulator-v1-2-78b9ef7b9b4a@linaro.org>
-References: <20250723-bios_emulator-v1-0-78b9ef7b9b4a@linaro.org>
-In-Reply-To: <20250723-bios_emulator-v1-0-78b9ef7b9b4a@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+Message-Id: <20250723-button-qcom-pmic-v1-1-9c317ac71167@linaro.org>
+X-B4-Tracking: v=1; b=H4sIADvAgGgC/x2NywrCMBAAf6Xs2YU2Gi3+injIY7V7SFJ3oxRK/
+ 72px2EYZgUlYVK4dysI/Vi55AbDqYMwufwm5NgYTG9sfzNn9N9aS8ZPKAnnxAHH0QRvL4ON8Qo
+ t804JvbgcpiNMTivJIWahFy//1+O5bTuHBHN8ewAAAA==
+To: Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,31 +105,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The xorl macro lacked surrounding parens which meant that it could have
-unexpected results when used in expressions. Fix this by adding the
-surrounding parens to make its use predictable.
+The pointer 'label' is declared and later dereferenced without ever
+having a value assigned to it. Add an assignment to this pointer so it
+will be valid later when dereferenced.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/bios_emulator/x86emu/ops2.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/button/button-qcom-pmic.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/bios_emulator/x86emu/ops2.c b/drivers/bios_emulator/x86emu/ops2.c
-index 1ff27b2af95..29a166f7fe9 100644
---- a/drivers/bios_emulator/x86emu/ops2.c
-+++ b/drivers/bios_emulator/x86emu/ops2.c
-@@ -66,7 +66,7 @@ void x86emuOp2_illegal_op(
-     END_OF_INSTR();
- }
+diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+index 85addfe32a2..b823490d6d5 100644
+--- a/drivers/button/button-qcom-pmic.c
++++ b/drivers/button/button-qcom-pmic.c
+@@ -195,8 +195,9 @@ static int button_qcom_pmic_bind(struct udevice *parent)
+ 			continue;
+ 		}
  
--#define xorl(a,b)   ((a) && !(b)) || (!(a) && (b))
-+#define xorl(a, b)   (((a) && !(b)) || (!(a) && (b)))
- 
- /****************************************************************************
- REMARKS:
++		label = ofnode_get_name(node);
+ 		ret = device_bind_driver_to_node(parent, "qcom_pwrkey",
+-						 ofnode_get_name(node),
++						 label,
+ 						 node, &dev);
+ 		if (ret) {
+ 			printf("Failed to bind %s! %d\n", label, ret);
 
+---
+base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+change-id: 20250723-button-qcom-pmic-882cb5415dd6
+
+Best regards,
 -- 
-2.39.5
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
