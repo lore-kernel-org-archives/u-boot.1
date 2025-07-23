@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA2FC83F17
-	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 19:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 125DFC83F17
+	for <u-boot@archiver.kernel.org>; Wed, 23 Jul 2025 20:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A306E834AD;
-	Wed, 23 Jul 2025 21:45:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4BDCC8352B;
+	Wed, 23 Jul 2025 22:27:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sPn449PJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l2BDi+kQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9AB38353A; Wed, 23 Jul 2025 21:45:04 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id D9D0483577; Wed, 23 Jul 2025 22:27:29 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C095F83297
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 21:45:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 613E78313F
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 22:27:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-73e65c09828so107353a34.3
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 12:45:02 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-73e8cc38e80so685114a34.1
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 13:27:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753299901; x=1753904701; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753302446; x=1753907246; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=D/qzIF0JSuBzqmz13wH1k1MpsVe5FRlE7OMX1fbO2gc=;
- b=sPn449PJZSjP/jPITW5Irc9bekJYXmy+O0EcAihvQ65gRLusMA4b3Ez3Oqy6+EQRJ2
- k7UIMhF6mBS+ax8Pd/y02r4Vt6GmQz4dmwNWuN/tLzUNDONB+nAavr541v2wnmIlCI/e
- sSR3aPsi9EJbsdyA1wl4uZmLZvjWkCpAZxQuY=
+ bh=q1jKJAnghDlqAa/e4vruQ0azzTRywMSc54Y6/jQTCYk=;
+ b=l2BDi+kQjgHs+4QbLUiXuMhBiZ/3c0MzbpkVWgHW43+F1+t7Nnnn+cqWyp6yaOHzKs
+ TArAXGUjTA+iLiJue5w1V1UXJPZe56x/EzIo1AczoJIMUzRMe6IjR7qlJ+4ueDstekC0
+ SH+l1KGmolw6lFMnHdVSle4asgNzU1YHM+358=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753299901; x=1753904701;
+ d=1e100.net; s=20230601; t=1753302446; x=1753907246;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=D/qzIF0JSuBzqmz13wH1k1MpsVe5FRlE7OMX1fbO2gc=;
- b=DR6dpzUdF/cvr5dnGrHcNptuQJ7KIj1Y/l5B8ifmKIgUtWEDvdp3kOaVOf2eRyKVSA
- x/9iq6BSY9FbCaR70VfqQCSp4iij9mqegi/m6affHfhotI6G2Otht5U7LtLTvS0GTQmS
- cpzebAAugHy2/nn1KJe81/C0Si9B3gMGNnVxXfTd35OZkQ8UOOEeKNH8GXmCnkTJyDbL
- WpYEMAEcotT/sQLvT8maH9QMS65C/88z2KvviA9PJtTtVzISPkaPShCTjam9u9Ew/xNw
- FHgR2F+s8CBSeHqR2Cy1S6spPsJ+TWR8xBlLiopJZ7uu1ieiCwRyIt1TtpPHrP4eaElC
- 64Nw==
-X-Gm-Message-State: AOJu0YxS9f04y4mtCPL7Fjvf+G8JvZtO4vEO4yTlu3gT4K/X58TO5LFW
- ujS9E3ojVLgg7Z1yd+HjqsXt0v9gusqo6NYE2j4bOy8KGIWNegeVSw1byVrm2GvmrsnWk8AUoth
- qpfXJUtQ=
-X-Gm-Gg: ASbGnctvHOZefqAV94X9gakAXkIm6p6t9uQe5AUdyjgYzZGJI6nZNbBNueNHTaJT7nO
- 682zE9230W02B1z/MIaPnl9p9Qpg25AkPthcXSsOt+Tnr1gNR/5NyC/zXg4ErUFYeOqAvPyosXd
- yvXmYaI3XQAUZ3aH6NGeoonwMXjHIgK2FBdmzrVZgwBLeB6iog81xxSPnK18IvKIvHIR7myzqTe
- RN/bEuG0Ezeq2DjcLeKA0u+n/uL8lNbvt1+xTaapNUiJCYLwzi7zz1wtbtfeFWGZhpIZLckKHtA
- FdngWAn/Sc2ifuVjCOtV/q+mA5g1CALVvbr3CDgJhzFXkZw2sVttvEDqqd2AeYpYGf1XdV1ZrKQ
- aoSst2rKt45FGW6von/w0a4xUnDrZ6/nC4lYZXVL00owp6veIOBywNI3djeZ0aDeqpHrpXg==
-X-Google-Smtp-Source: AGHT+IEcVBLCJm+J/0yjqGJirGfFICR7qAgD/rq+buyYLzBOr48HsuT7Y1CxDgkM5osvFK8tuSgG7w==
-X-Received: by 2002:a05:6830:2695:b0:72b:9d2d:804 with SMTP id
- 46e09a7af769-74088bc2c25mr3221720a34.26.1753299901377; 
- Wed, 23 Jul 2025 12:45:01 -0700 (PDT)
+ bh=q1jKJAnghDlqAa/e4vruQ0azzTRywMSc54Y6/jQTCYk=;
+ b=fLZYThANP0H3kUSQJGhx+HLGmOUo3MSBoUEkxc8JBi/3AoC4Tj+w19LbgdBy3vhoYQ
+ NpfRs10gUV1YsPQkSkzIR+gO1+ZDegtLkFPHZSXPya8lTwBeCXunSq+3dZs5khKQL6v0
+ 1HmZbBvBSsPPwvuBdCJLi5yKl2W/+8cIDqIS3EO952Im6flloeauMCco0qSaOzbxH96A
+ VInfFSLlScZ3pn1QIeVHiBnAI8BPUgJep4yfW+K4bZk+wEBiOEEAjZ1zfyvxNAFdjTCh
+ M/ZOUcTOTWGQkeor99VDCwULLZvsYvQkngEVG3j+HnSmN5bmk669oGZVgWRSslfjdjxH
+ Rh0w==
+X-Gm-Message-State: AOJu0Yz4Z8RJZ+Ho8JBFVJPFXDs3NP1lk5pSpv6ZU0Wkxz10HuVWfL8H
+ ZOmYxh8dse+7NXqtFZvCaTbS4COeoB8i28/nG8keCzJyyO12ExOwHc+Kd79JlXh/O61o44c53VC
+ mkgx9Zp0=
+X-Gm-Gg: ASbGncvqi0yebZ/KjPTCs0Co57uUroncPVqrIjxlMt0DXZm5Ix9eqLVdL5EnW/h66b9
+ +2vRmnyXN6PbeAO7oKbiMScg20RKu8Pdxi8o4t9mmO60QYnuMVSuFenS++PW/r9mSqJfxmefek9
+ GlmxKTJcue1qNMkm/zBUUugIQqzQAFrBf7DosyAUwA0hgIJPV4Zbx0vxDngXnfExAzsW9i2a8oR
+ H4cSSv/P6skHJ9w1o17K1A+fxJtqd9lu97oD/QMH6Xc9AGPQJ+Fis6wFnngd/6u1+W5B5IOE+Id
+ 38qyQDxRdp3tTHYcDiCJx8+2QAqu2m2NauyajiQOxTB9i/Z0KDhBeQ5bfddI4MOrp99kGN2fCek
+ ZaV1XBEORdKCHfmwbeqpe2Uz5Z2ka9M5teRIU/nbAzBQlNjccpl5p100J/1qhHEiQm3et3w==
+X-Google-Smtp-Source: AGHT+IFKa64u2LMP1ythOiwRbiVKpgZ1naapJLj11D2K6y0HwJIxJd5z4asRFIbcG78Sd9PRwkNIdg==
+X-Received: by 2002:a9d:7dd8:0:b0:735:a6df:babc with SMTP id
+ 46e09a7af769-73ebb838cfdmr5994216a34.3.1753302446030; 
+ Wed, 23 Jul 2025 13:27:26 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73e8367f410sm3893589a34.24.2025.07.23.12.44.59
+ 46e09a7af769-73e8354c931sm4158710a34.9.2025.07.23.13.27.25
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 12:45:00 -0700 (PDT)
+ Wed, 23 Jul 2025 13:27:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] patman: Update test for Anatolij's new email address
-Date: Wed, 23 Jul 2025 13:44:59 -0600
-Message-ID: <20250723194459.224015-1-trini@konsulko.com>
+Subject: [PATCH] Azure: Temporarily switch to GitHub mirror of
+ u-boot-test-hooks
+Date: Wed, 23 Jul 2025 14:27:24 -0600
+Message-ID: <20250723202724.228868-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,27 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This test was failing due to matching on Anatolij's old email address.
-Switch to the new one.
+In order to unblock this CI workflow for the moment, switch to using a
+mirror of u-boot-test-hooks on GitHub rather than source.denx.de.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- tools/patman/test_cseries.py | 2 +-
+ .azure-pipelines.yml | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/patman/test_cseries.py b/tools/patman/test_cseries.py
-index e58f2f683332..4c211c8ee896 100644
---- a/tools/patman/test_cseries.py
-+++ b/tools/patman/test_cseries.py
-@@ -3278,7 +3278,7 @@ Date:   .*
-         self.assertIn('bootm.c:1: check: Avoid CamelCase: <Fix>',
-                       err.getvalue())
-         self.assertIn(
--            'Cc:  Anatolij Gustschin <agust@denx.de>', out.getvalue())
-+            'Cc:  Anatolij Gustschin <ag.dev.uboot@gmail.com>', out.getvalue())
- 
-         self.assertTrue(os.path.exists(os.path.join(
-             self.tmpdir, '0001-video-Some-video-improvements.patch')))
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index b3fd4ceef135..966a66ff5678 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -251,7 +251,7 @@ stages:
+           # the below corresponds to .gitlab-ci.yml "before_script"
+           cd \${WORK_DIR}
+           git config --global --add safe.directory \${WORK_DIR}
+-          git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
++          git clone --depth=1 https://github.com/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
+           # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
+           # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
+           ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
 -- 
 2.43.0
 
