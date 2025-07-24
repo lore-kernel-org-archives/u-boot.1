@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 234FEC87FC5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 08:30:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A109C83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 08:30:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5712C8365C;
-	Thu, 24 Jul 2025 10:30:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5C2B83675;
+	Thu, 24 Jul 2025 10:30:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qBLUR1h7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XYBzy9Od";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1380B83675; Thu, 24 Jul 2025 10:30:10 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 7EB278367B; Thu, 24 Jul 2025 10:30:45 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C41483616
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 10:30:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91D9A83616
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 10:30:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-45555e3317aso3267215e9.3
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 01:30:08 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a4e742dc97so947975f8f.0
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 01:30:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753345807; x=1753950607; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753345843; x=1753950643; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=gzKrSLaq1ZTyVT4LnrRBse8XQg0JW5ygybJqV/kfD6Q=;
- b=qBLUR1h7jblR65m/DiqZNuIsdb3QIvf2EkrSvhoHPuir7f5uyN0D5+2TKTB5NkMorN
- pJbm3FcaffLPW4YxSGEm34+ypAr9z0F35B3ZcrPNn2AAdcJ2Ve/5W4MrTWULO8m+esnk
- awNddoCpAgZnYw/k6vCPpPN+ENb0U+UlYHC6aYY/4jXUTKD5mXaA9uQo7HFfXLauX71H
- FTlIpnB440ZR0oTZgCd4X5PdZ8LCDPegrpjG0SeaSGHfmQ4RGtMQkfajr0DChcKLPJVi
- GBLfmXuafDZI4F2rhQ4pxiIli6QPMZeLLnB3Wr2/tCERwlqJML1FeLSHrp/Q6fOFmF2R
- l5Hw==
+ :reply-to; bh=XuG6KVRHo2C+iB3ddTGNs6hYkbiFrpONss8PFjYLxrc=;
+ b=XYBzy9OdKxA6TkerhUS159cikD+FtznfsxfIurBxzKU+y3wHrGoi3sVSUYWUSbMrCk
+ w5bgEHPl25f5BeJIvLcWZR2qy33EG8E42chm9d4tnKeZQdWvO+9BEC/YlYyB/vkn0v8K
+ AVY8Byv4z2vbIhXmDTCtn+7XOHVRUpsyAA8PRY7Ej/vzZ4RzC+5rVQQcqrNVZi4L8bwo
+ H2+9ROLgYtZR8MJSSQH3ga9xiQwCAaSEcQ36ySrCE2JtVHcD361HK+yRP3ESpP4Ky1kl
+ 6b9gbGv/L5IeCiqn9GCSrODtO1tlHTr7L1/0tzzAuFBDhYroHFYdNdOy6Ui8XD121x4f
+ Rpqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753345807; x=1753950607;
+ d=1e100.net; s=20230601; t=1753345843; x=1753950643;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=gzKrSLaq1ZTyVT4LnrRBse8XQg0JW5ygybJqV/kfD6Q=;
- b=TUXilsmC4W9MK7YooUYMIOUksAWWFUh47kw3ZFkywdQ0e0AvQ7dQzGMzz7ECCx80Od
- wPZwTSG/A3DfJCc+eO9DOA8Mpjy8FZfu6HTF9BM/mwpsiuPZE4CoAwCKjR7Nyf8xlIIS
- N5+yHcuHCpBLmtn0zegBx2TvUSDMhcb65mrAKbD+tTRJwi1Hz3wpGV23hY5jp5mM2gc9
- bHRRmHBKfebjHsmocBB+9JUlh2CEtioezqTCecnXql84esEJvCe9mixQjUCEEDBCwQ0O
- EC3A75U/5YD6LBYvIZGTmr0T0GBNCx2dqkNEirepnWnxvTu9IzhwtImHZ/vHG3MBD08p
- RkeQ==
+ bh=XuG6KVRHo2C+iB3ddTGNs6hYkbiFrpONss8PFjYLxrc=;
+ b=gYvlci3uS1aSmGeew/gczGhFhQA9XXIegnYQsUPjRtuu/7PpJ3coGE7VpDM2D/aF41
+ vqc7yOvKZZPWZxdjtwddQTNAgn4MrwJRLgXNRfcjfn89A7MMi33vF2lA6nPlXFcpgx7K
+ Gl/ARDIXPa+zrjwqt8igT8t+5bP0gFlCw8/Sqkwj/ixzK7B5HOee1W9xDURxumNMavOp
+ fvUEXTrHgfvLCR568iI2JsZRYySpi9TsSoyx73cFYxKygoi8KXROMU/YQFowICp/P116
+ qYvx/JxrNPqj27E6fWAbmssXoRpYbSbiudjzulumpkZ2JQFQk5ysuBm5Q1NJEZ8twG4U
+ V4wA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUS6Slei0Gkz8hf0JRDFmzoJ5FOuIfgUUUnl66NelQSObfK6lNErn1qpBiZRd8pp88GRzV9cE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxIyoKYb8d+FxSHALuu4qANbr4msZGxZK0BnQFE/thd1o/XR9/F
- M0wHKxMLUURq9FUbuz6gs5zpyOOjCOkkLpYeGZZ7YCidSX7DRtmf8siSN/Iz3ThFiBc=
-X-Gm-Gg: ASbGnctvwU3pwiB5jKu76ZtP4P2pRUMeMqIVjUPO268Rv0y0dDGeQvI91cRXPcPmpu9
- aT+2DX0BoPCksnB+eA7VjXoA+KTedrrpzDZw+RQXPmZ9+ucRCv1+jovLz72NOK0EHnJcMEtc8FL
- MeVWfojciO4TcUqdg9xkeDABqA6Gp94gI3AKpPemmf5wjgrh1VXhC0epabrHm2Kkg85/EXgy/ls
- 1DS26wZQqHJuGdtrgn62YIbBgYfHUZit1z7jeB4jvVhimvqLpd4sGKGtX/Rv/uWB3xuYrL8N+lM
- DRz7TViUO5HMP+z/nKsziupusQVjitBXoCjPBBcv8UIUFWZTRBfVKERZCkQgKe2LrQ1vARjFO9H
- zduQAJzu8+V0BKUYV9SdZOfyX8LH0QAoH
-X-Google-Smtp-Source: AGHT+IEqRSm8F4M5nLtj2/YydnIn92cdGu3S4AJXdauwCewfuZ9IdIZEFnNotTyxDLOfaXOq1fK3lw==
-X-Received: by 2002:a05:600c:8211:b0:445:1984:247d with SMTP id
- 5b1f17b1804b1-4586f5f5cfemr12318335e9.7.1753345807467; 
- Thu, 24 Jul 2025 01:30:07 -0700 (PDT)
+ AJvYcCU4onJ+4aJ73dwaIyelRaVqm8YGLXBe1M1Pj+Ml4quov5+kHOh1D05ugxZkUqvbLAPbmPtIO5I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxeKqU9uIpsc4fLV5EGfgky6op2+UKv/kpSqw67ySWyq3BdKeF4
+ k/XLwkieIY1yTSSWbJPn3y8BERvxENs7oa1C8SW1Hmaq0LWIt7c7nC7QHe0Im3WpoRY=
+X-Gm-Gg: ASbGncudmFuoeWffwvTq1PDl3osLHYneg7uEgXxQuVn2FIobvWjy/6sxVvmSaeXOy8Y
+ 4YFZGxXwJOVz0iWOHsP5HVZ7cV1Xreua7HZBQzxXOlTA/Q5YqwVzjRoRdpcWeFPjfkyGFOq3Brt
+ N2GEOrQCWwPhWN/W0Minua8EikD7Ny3bJxpXiSKI1TkjrvhVgJecJF1kri8r6XFTjWiC6MDs3Gh
+ maWAPu0gU0MAKt9qTIW2IOe6OwmuoR5RYnabMiSaf6JtmS4Uqc3ge25fsuWQkdG9WTq2ctYsz39
+ qOesqPdPGCE0h2NKYp3bEXkNIbRHTDo29HA5LG9vNuy3/HipQ15RX0lruFK9xeIMZ9l8A9zaeTS
+ rPCpZ6XoOV2a/tHX2INeE6u6BdfnSsueS
+X-Google-Smtp-Source: AGHT+IHbaUWN3oGzht6uST0yjv6d2XtqP8SkqgbaYOQ/UYleZIrCKpQgnU7vJnYzUrRBpDEI6qYvsg==
+X-Received: by 2002:a05:6000:4021:b0:3a5:8991:64b7 with SMTP id
+ ffacd0b85a97d-3b77137beefmr801829f8f.26.1753345842862; 
+ Thu, 24 Jul 2025 01:30:42 -0700 (PDT)
 Received: from [172.20.10.3] ([78.246.240.195])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458705bcb96sm11522485e9.21.2025.07.24.01.30.06
+ 5b1f17b1804b1-45870532b38sm11641265e9.6.2025.07.24.01.30.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Jul 2025 01:30:07 -0700 (PDT)
-Message-ID: <64196c27-1df7-4ab9-bf59-b00621362bf0@linaro.org>
-Date: Thu, 24 Jul 2025 10:30:05 +0200
+ Thu, 24 Jul 2025 01:30:42 -0700 (PDT)
+Message-ID: <17e87341-745b-4f5e-af9c-4c9abe9a2e72@linaro.org>
+Date: Thu, 24 Jul 2025 10:30:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] clk: meson: Remove unreachable code
-To: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] adc: meson-saradc: uint cannot be less than zero
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-References: <20250723-clk_meson-v1-1-8cd6e73145a4@linaro.org>
+References: <20250722-meson_saradc-v1-1-1ab45d53da9d@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -110,7 +108,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250723-clk_meson-v1-1-8cd6e73145a4@linaro.org>
+In-Reply-To: <20250722-meson_saradc-v1-1-1ab45d53da9d@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,34 +128,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23/07/2025 18:37, Andrew Goodbody wrote:
-> A second return following the first return is unreachable code so remove
-> it.
+On 22/07/2025 16:06, Andrew Goodbody wrote:
+> timeout is declared as a uint but then tested for being less than zero
+> which must always fail. Change the while loop for a pre-decrement on
+> timeout and test timeout for being zero.
 > 
 > This issue was found by Smatch.
 > 
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->   drivers/clk/meson/g12a.c | 2 --
->   1 file changed, 2 deletions(-)
+>   drivers/adc/meson-saradc.c | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
 > 
-> diff --git a/drivers/clk/meson/g12a.c b/drivers/clk/meson/g12a.c
-> index 5d7faaa3eab..a7a42b2edb6 100644
-> --- a/drivers/clk/meson/g12a.c
-> +++ b/drivers/clk/meson/g12a.c
-> @@ -916,8 +916,6 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
->   			return -EINVAL;
->   	case CLKID_PCIE_PLL:
->   		return meson_pcie_pll_set_rate(clk, rate);
-> -
-> -		return 0;
->   	case CLKID_VPU:
->   		return meson_clk_set_rate_by_id(clk,
->   				meson_mux_get_parent(clk, CLKID_VPU), rate,
+> diff --git a/drivers/adc/meson-saradc.c b/drivers/adc/meson-saradc.c
+> index 60e348968fb..0144ff828c5 100644
+> --- a/drivers/adc/meson-saradc.c
+> +++ b/drivers/adc/meson-saradc.c
+> @@ -205,9 +205,9 @@ static int meson_saradc_lock(struct meson_saradc_priv *priv)
+>   	do {
+>   		udelay(1);
+>   		regmap_read(priv->regmap, MESON_SAR_ADC_DELAY, &val);
+> -	} while (val & MESON_SAR_ADC_DELAY_BL30_BUSY && timeout--);
+> +	} while (val & MESON_SAR_ADC_DELAY_BL30_BUSY && --timeout);
+>   
+> -	if (timeout < 0) {
+> +	if (!timeout) {
+>   		printf("Timeout while waiting for BL30 unlock\n");
+>   		return -ETIMEDOUT;
+>   	}
+> @@ -256,9 +256,9 @@ static int meson_saradc_wait_busy_clear(struct meson_saradc_priv *priv)
+>   	do {
+>   		udelay(1);
+>   		regmap_read(priv->regmap, MESON_SAR_ADC_REG0, &regval);
+> -	} while (FIELD_GET(MESON_SAR_ADC_REG0_BUSY_MASK, regval) && timeout--);
+> +	} while (FIELD_GET(MESON_SAR_ADC_REG0_BUSY_MASK, regval) && --timeout);
+>   
+> -	if (timeout < 0)
+> +	if (!timeout)
+>   		return -ETIMEDOUT;
+>   
+>   	return 0;
 > 
 > ---
 > base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
-> change-id: 20250723-clk_meson-3d90bc29f8dc
+> change-id: 20250722-meson_saradc-4bba9dc18333
 > 
 > Best regards,
 
