@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0643DC83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D19C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:18:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8912983906;
-	Thu, 24 Jul 2025 23:17:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E66DA8390B;
+	Thu, 24 Jul 2025 23:18:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R/Png8Bc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SRfnv6AA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A8868390B; Thu, 24 Jul 2025 23:17:36 +0200 (CEST)
+ id 17E768390D; Thu, 24 Jul 2025 23:18:04 +0200 (CEST)
 Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
  [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 237B3835B2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:17:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E7CD835B2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:18:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
 Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-553d771435fso1518949e87.3
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:17:34 -0700 (PDT)
+ 2adb3069b0e04-55502821bd2so1658008e87.2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:18:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753391853; x=1753996653; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1753391881; x=1753996681; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RHuWVXTAMJdRFUQtgVLeaVIxKD/nUsB1DugOvTfNyoo=;
- b=R/Png8BcDRLuPLsL1Ic1jz0W/OEdFB08Cu7VWFkMLp8ltk1EZwEjuk7xC62kqmG2qz
- kMABv2sJX9AGuR8MFO7hd5YjgX62kIcURTZ4Chu2RRwR8fSaHOlylyn+0Swcrtaie6oC
- EVaAAyOKzeeDbjlG/mBHHdNZgDhZTQlwjpG9QZnk+EMfU1fFyqI/PtR73hUT1mqT2Fvo
- XRwYv1T1rU6tmaD78UeLjTavVL/GhmpJXsxcul5QsxUrreqqAYA65uIdkBIARfJZ9WMZ
- XTiL0R60oW7HieoXUm2iFC50SXCsBymVr1jJrsq+rM4YJ6FF5/1+xs9y2FxZbAxf6DUQ
- 0lIw==
+ bh=oEBT+SJ3256CSzrTCv4lTFzPHgZSa2Rqf37uNjec7W0=;
+ b=SRfnv6AARtad4vWiny1NwoXdrEup9HTSaPee4SYJ5AUS7YlIcUEcuiFSlKFkj7644J
+ 1mtCbSpyCZkAJXgg3IuA1SzmShiOz1lX/Vor5Ekpi7TwLOT7CuFviaWFfKiwqGFWj27L
+ bnqi3bs23lHvE38HuQTnlzQ0Cx19WcSpeHEKwwlgMU/HXGjYZpIa8ghNPNPwn3PRE6gb
+ QNLt0u/37k9MBPLa1nUBpOQdy+wGAwKvMUeYyWoNXFeGHbR6r59nZpGWiNSZJjtYAi4+
+ JO3Tv5Lx+KGhJbINi25w57/yrXBZ6870XYBlqw/I3vN0c/oeJ1Mze3ZtQ2SQMXANxlFN
+ 3Uzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753391853; x=1753996653;
+ d=1e100.net; s=20230601; t=1753391881; x=1753996681;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RHuWVXTAMJdRFUQtgVLeaVIxKD/nUsB1DugOvTfNyoo=;
- b=QHD911H5adPLsdfI+qX94jQ+rxo6zrrVXpnxyAiM9ZQDwQedp0jn9TwGqO0kOa6K3R
- OzPKhwPqPLA+3K6531TngINONDDCxDsdkRXoVq+Dfeth4LtN0VbV4tFOBycFUj1E061i
- VGn5usE4N/FkhTewSiOgmsv550TV+JeOb//SxMLrf9ffWWqeaxxzFEbClraeok/k9TXq
- giQfRUEIA5Cw8LmDx67UlWC32RGU+9No5cdbdlccHc05oM+k+0zBdRgz9N+nCyGpfH5E
- h9o1ezkTUGZL2yoexRwzJOc+gYRp1lQmv2R5QWh6mZzzPWZUdXk9u7e4v9rSaKO8C4jw
- o1lQ==
+ bh=oEBT+SJ3256CSzrTCv4lTFzPHgZSa2Rqf37uNjec7W0=;
+ b=IlZ420Wl/85A+9JvRWETX/OWNqCTK4msrjA9W3Yx99Kea6uDWedibNmCVX/QZvPCjU
+ VST3meWIy7TtOABl9LULE96Ttsp0gMKZ3h+h3tr03cVoYaXlBrHdjxFQp8zgB/3uonmz
+ OPjrP1wLlHetRzHjmev4lJ4Ewl2yJEoidIOvksAri0gvEtlK1//urWyh2pktAg/SaqIu
+ S/D1avxC/zN5zE1rtYr7OagMPehsd6mY282x7RBvSjd8BI2wbdhJF6rzf2hZzQri7qrx
+ b+bMCyi6pK6F/FqTRpv25cwBPP4RVDKjvDqM6RBIErLYKhAJZDMb1WWTmMG3+4Ywleww
+ E+Mg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtQUrujBFxdN/D8tkSsNkggMvJp0ugB6d3BV4cgrJXn9u/cnCcZg6QuaFJrVyBAXJQ79wfOJs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyx4si/wpfagcUbTdaYKkDhB4qpnIqLqTtStD9XZ159GVHUhnT5
- Ou2FURMbyCpE/YJzzC4bQuCWuHflWaLvddrjRhVafJddz4MuQtD4QtkjywuqkwYV2VonZBsuJR6
- nGXSaDdXiDtMf9TSd+ke40vjnwwX1U98=
-X-Gm-Gg: ASbGncvb3tQDxWEaxCfXDWe05sNWnrwFHf12SHzBRqhvpibDNQRgfBzAa2ZY1cH759P
- mVrYlmjaRPiryj7lbJHKqPjEYJojalWNxtzEgOAhfcP9hW0QLG3CV4hFNSoyTNy+gg78SLc0Jnp
- 0E/qS5q0LU7a1ufatQnJIS/K888osHVes0Thpw2LrP01QoS7FVJZsg0GAK/qMKEBkFivsIsQQ02
- piNWthfX8j060BSR3PeQG6WIB8j+BrE6DY9Qdc=
-X-Google-Smtp-Source: AGHT+IGvgzDVNeDzXK4G0X0nOPZgQt3LG2KqiFPYHzsRKmAWxjjyE/WruuLW6D3Ap8Se/RUMXqtEzlHWGCPJxT67+ME=
-X-Received: by 2002:a05:6512:3f21:b0:553:2e90:98b4 with SMTP id
- 2adb3069b0e04-55a5134d99cmr2838725e87.17.1753391853213; Thu, 24 Jul 2025
- 14:17:33 -0700 (PDT)
+ AJvYcCXexbwTg7etWmWPt1sdlsDJKdJV5ouN0ecvmfxRygREB7A6N5e7buZpQ/bWXxWAHUa2gL8dLms=@lists.denx.de
+X-Gm-Message-State: AOJu0YyE4ipeX8DDGCB0hQKIIqmqu0GR5IslHi/wqf5vwa8G0SAKfPuA
+ YkgY/jf9CZb4iPHb+mQEMZ7ChdnlIYmDDL5xy05wTKWCkrjcC+AW3mPEQclav4e3fGLe9nOvgqu
+ a+M83FM3mN4yoyCa5VBdA713PHoDqB8T2+w==
+X-Gm-Gg: ASbGncsRyDgghvUFXIIIllPlSXqvRZTRfjSLfazuM3jb1Ta34GoJA8MNH4w0GnChRPX
+ H9Q1h5mDMcEcRpWeydlb0aFVIhFYE4r5Cx4Xz6Wh7co4U0N+WLUmRNPunggGjnu/6zcwrkW4x/m
+ XuvlgSlBiMQTOH/vdwpvgeeYRcnhsWVchlZ8HcbGXFDMkyf51TGle8QNvTLraaK8YWUvyy8l6ax
+ QlYAT6UkTzWQpvwH7DWQuXf0TGdkmIT29mxHiQ=
+X-Google-Smtp-Source: AGHT+IFt9psAxND0+2TQ1hA5mrbewpMQW4qWwlGYNvFgB3bzYxJoGOh1oBrX+mxVhaMpULuO59lhUKR1hhNYL2ThYF8=
+X-Received: by 2002:a05:6512:ba9:b0:55a:e1f6:bd98 with SMTP id
+ 2adb3069b0e04-55ae1f6c27bmr2389531e87.6.1753391881071; Thu, 24 Jul 2025
+ 14:18:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250722-imx93_adc-v1-1-f7f272b54c6b@linaro.org>
-In-Reply-To: <20250722-imx93_adc-v1-1-f7f272b54c6b@linaro.org>
+References: <20250723134557.1972331-1-festevam@gmail.com>
+In-Reply-To: <20250723134557.1972331-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 24 Jul 2025 18:17:21 -0300
-X-Gm-Features: Ac12FXylNqKLexWF3szr97B2zbZJbuFU1m3oEsLl_Vr0WJrRF3jBevn2EE8SiFk
-Message-ID: <CAOMZO5AMxLBnFehaqGfQZ7KQEsUQ=rcka_8GdFwHc8-d8VT0eQ@mail.gmail.com>
-Subject: Re: [PATCH] imx93: adc: local variable ret should not be unsigned
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Thu, 24 Jul 2025 18:17:49 -0300
+X-Gm-Features: Ac12FXzXigLry7f9i7yihQMvpyHX_zxmsyVf0mEotVQZhbtBzeSLysqPM2Z853c
+Message-ID: <CAOMZO5DRLueuA2nJ6FWe1vxrNbuuFrjdJk3dpBogVyHM6NYJTQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] imx93_evk: Fix the board name in MAINTAINERS title
+To: peng.fan@nxp.com
+Cc: trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,15 +94,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 22, 2025 at 10:50=E2=80=AFAM Andrew Goodbody
-<andrew.goodbody@linaro.org> wrote:
+On Wed, Jul 23, 2025 at 10:46=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 >
-> Local variable ret is declared as unsigned but is used to receive the
-> return value of functions that return int. ret is then tested for being
-> negative which must always fail. Change ret to be an int.
+> The board name is "i.MX93 EVK", not "MEK".
 >
-> This issue was found by Smatch.
+> Fix it accordingly.
 >
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
-Applied, thanks.
+Applied the series, thanks.
