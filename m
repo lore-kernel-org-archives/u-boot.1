@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29334C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 01:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB70C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 01:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE21B835CB;
-	Thu, 24 Jul 2025 03:37:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 28AB082BA7;
+	Thu, 24 Jul 2025 03:37:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sTHMaDXY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jc/IJ1GA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BD0482BA1; Thu, 24 Jul 2025 03:37:32 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 4E0D282B0F; Thu, 24 Jul 2025 03:37:34 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6962A82BA7
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 03:37:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3972482B0F
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 03:37:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-42a56f2e953so19830b6e.2
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 18:37:30 -0700 (PDT)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-61390809a36so159813eaf.1
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 18:37:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753321049; x=1753925849; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753321051; x=1753925851; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wln+1l9QGJqp9WDl1pAFKEPNribtAiPh3wmOC4LPrVE=;
- b=sTHMaDXYE7gnlbKJUODRxRwbDsUa5msx+P0YlvMIQSRH1xOwC7ph0G1x1TDx0Kq7hU
- mK4OPvkroTieDNr/mXmwPzyoRkuy30omxWA3Y4KIlvEAC8OMU+N+KNQtklFDxIjRSq/C
- M+i4mtP8UCMncgU63btw++2MSyml0w+Gh+8L0=
+ bh=ZpLMo+8HIFqJz/bhC9QddE2/2Jpnu+XzEllZHXqZtfo=;
+ b=jc/IJ1GA885k1a470ezTr1VjGKoevSPmY3VLPNwRNHidpXL3bJEUf+OfVbZLCzwB6a
+ LAJnQ/c7dFcdXL4/DLSssX1iYCxnU2Kq9HKo5paAFspeFJg0uO9PIBtSCc7nxbpzAvRg
+ 7CQP53YGzXStBinznEiekhg8YMJs/kXVSarsw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753321049; x=1753925849;
+ d=1e100.net; s=20230601; t=1753321051; x=1753925851;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wln+1l9QGJqp9WDl1pAFKEPNribtAiPh3wmOC4LPrVE=;
- b=pQPUu92HfBo/7xTbNg9kC4igY16PvM7Z0yw1UA36MvFNoP8BNKI/P46j2k0hwRR3ny
- fBcqs1MJAWYe82p4wIdTlSDYFtUnamp218CAUb7Ubo7RiufApLAjMLTSEKkBGrSBPONe
- WuBiQKAsz29ueDDJWZDxz0irNE4SrpjcMn5KkgnFr43gAJ1BtJdVvOD6frwUpoqBA/Xi
- S/fULMGyq4PcMR1L0tyQpAWYNK3kkxSLwk5rHzoxYpeeQ3Fm8GX5qgn4xPPzEO7Jr1Vp
- T3SIR8fMzXsWVQkVQsbMCnn/p5LtNQWliJcb48LyTt41XzzFV34RWIDgcyuscHKro1V0
- TD7w==
-X-Gm-Message-State: AOJu0Yz+UK9R5tzFql0uT6obb4akM+Fsoa4gMPqE+GEbCQCgmzZrmEYN
- po8NsE3vTmOCipGwgswoaD6nWfx1fciaFmKg1U1n4wqdHYpuAZr4sGDrk0dIkAHQrmg4ndnc1sC
- n2F8nANw=
-X-Gm-Gg: ASbGncsAQlqTYmGiSYB+VvFQNEuNhXWGlAmr1/9s6v+KPYbbPz/lwvPMoDKQfVFfAcp
- whqH/w5cycglupzv3G5va5Z2Wc7JivEbtxg7qg77wJIbL4Z0fg4HmTVhFL9SdRf689hRNpMptFE
- r5h4LnQDIZ+ULTi9m0xyl/aGTvK/x0pqoQT/lCpw0+Jdja2qRRarpEliIby8Xm0k4XBk6OnoNv/
- +B860rgFobe9T7DzA3KtDYS8gyxQuELkiY9VFASx4HaxIT82GX/yrhUKvGpblk1c1sxYXQ8zZvy
- uduXXQ2SnyjWLha50VVmW3mR+4Kj5qrLcpp0rkMB6+5Q/xmYIGOT75K3MUwjYIPW0TUJrOsFeuA
- wf4cphLDEANUv+KqNbQ/Z5dLSEBbh23J6TdKkTWdQ9AD46SaPjLNZ1ag=
-X-Google-Smtp-Source: AGHT+IF3WD8x1t2VTDwqmSsIpJg9BizUmF7bLAJ6u3hpmGz+T3JGNAm8CBwkQJDtp7ZOwZTYbNcfyQ==
-X-Received: by 2002:a05:6808:50a1:b0:426:4ed1:8c30 with SMTP id
- 5614622812f47-426c1242e1cmr4294687b6e.1.1753321049086; 
- Wed, 23 Jul 2025 18:37:29 -0700 (PDT)
+ bh=ZpLMo+8HIFqJz/bhC9QddE2/2Jpnu+XzEllZHXqZtfo=;
+ b=m1VVy21ZmGRCT1py5833APPMyX9eUlKvUF3eF8G/C+zVtV4rfzVG8C68M4PL6ZLG3O
+ cVa21+wH4RhBnJUF9gFp72O4BaqyqbsXcDWu7UdVSuYwIQ5NH9PDc5PafjJXamJD5P8y
+ 3xnuucVy6GscK9EGenEtI6WA3bIGEa3xuJTMblj0wffMyS4vSe56/kKuKVm7GkKzzeaN
+ osojWHe3GmRo4LHcDB5i0UiiaRsR3dRBt9nmf81yre8FE5nADCnhTSKbiVGuSDN+ZhXB
+ PEEGIhgl8eaenYBp0kFm9cyEyta1ttkFg58VwC70dp4nm75C3MePxu+GomHmiDO/uMx7
+ loCQ==
+X-Gm-Message-State: AOJu0YzKknUisCVOZ7JE2Lu0T1ePU7N6jYBGSMC6XKRrEPFkbXPfJKmh
+ 1zdTM8cDX+W80ozYjDjTs/W0p+RaI+E9g3qXDsPaHSCRlExbCgolvSK/ueRranuqWBc=
+X-Gm-Gg: ASbGncsmNVtLYQ7PXza4oFUKDJr5Wdm5SkBLSaQw2Vf+5QdA9n7aBpETpf1PrBOZdI2
+ 83naIoRtpvj50+QNliUQIRYl16NjJIT8LnUc5fFQS1AcNKQANeWFl5Jjz9XNG9yKKN3d2i5QCqK
+ nN8mPm1i/3w/Oj74EmflQouUM602YRrU2B3MBI1PsJVwpGNvkOF7sJ/u7dpXJCIgIE6UVs5h82X
+ b3NZ6XFGQ1iAR+PnGSgD/88OHQ35L07Ro06AbfOjENJkuHJ+Yup3ZLYSeE9CDd4qBEOGn6j0vyH
+ NGExP2oJ4e4MFxd5ydJpA+I7N/tRrG9ty48OHJratnhlkrTukz4aCjXbiyCzXzoJ67dcMu9mmYW
+ zUt7+fzipXhb0DmZ3ypZrrNRguNqsbBx8DTl5LRpTdd1/rGNkhwx3kBw=
+X-Google-Smtp-Source: AGHT+IFZDkvDcZsTX0QjTNj0M37c+qL50z0y5ryrcpQwlokV52VpCmcsO6Zhw5QdoI7x4p8+bogDkQ==
+X-Received: by 2002:a4a:ee19:0:b0:615:e0e6:3d5e with SMTP id
+ 006d021491bc7-6187d8de76fmr3930438eaf.4.1753321050930; 
+ Wed, 23 Jul 2025 18:37:30 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-618fb4431a3sm102604eaf.13.2025.07.23.18.37.27
+ 006d021491bc7-618fb4431a3sm102604eaf.13.2025.07.23.18.37.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 18:37:28 -0700 (PDT)
+ Wed, 23 Jul 2025 18:37:30 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250716-gpt_offby1-v1-1-6aa3546069ba@linaro.org>
-References: <20250716-gpt_offby1-v1-1-6aa3546069ba@linaro.org>
-Subject: Re: [PATCH] cmd: gpt: Fix off by 1 errors
-Message-Id: <175332104796.263924.7177911568370816128.b4-ty@konsulko.com>
-Date: Wed, 23 Jul 2025 19:37:27 -0600
+To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>, Sam Day <me@samcday.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>
+In-Reply-To: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
+References: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
+Subject: Re: [PATCH] sysreset: psci: Fix SPL dependency
+Message-Id: <175332104921.263924.7401304646896219029.b4-ty@konsulko.com>
+Date: Wed, 23 Jul 2025 19:37:29 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,21 +96,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Jul 2025 11:55:47 +0100, Andrew Goodbody wrote:
+On Thu, 17 Jul 2025 10:41:32 +0200, Michal Simek wrote:
 
-> The buffer for a name to be copied into must also contain the
-> terminating 0 byte but strlen returns the length of the string without
-> counting that 0 byte. Adjust the length checks to take this into
-> account.
+> SYSRESET_PSCI should select SPL_ARM_PSCI_FW only when SPL_SYSRESET is
+> enabled/required. This change saves 1.6kB on Xilinx ZynqMP Kria platform.
 > 
-> This issue found by Smatch.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] cmd: gpt: Fix off by 1 errors
-      commit: 25d3e0509c7d812e05d21c2c73038dce6fe9d889
+[1/1] sysreset: psci: Fix SPL dependency
+      commit: cf13f33d3a684c12f1ef835793cd66193df00c47
 -- 
 Tom
 
