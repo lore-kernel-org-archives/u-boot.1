@@ -4,96 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE70C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 19:16:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 937F3C87FC5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:13:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D468838E6;
-	Thu, 24 Jul 2025 21:16:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1F94983858;
+	Thu, 24 Jul 2025 23:13:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pKBtLoAu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RMi/BQDj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAFC0838E7; Thu, 24 Jul 2025 21:16:55 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id C8C61838EE; Thu, 24 Jul 2025 23:13:47 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05FFF838C2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 21:16:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E5D183844
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:13:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-708d90aa8f9so15012757b3.3
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 12:16:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-749248d06faso1342830b3a.2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:13:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753384612; x=1753989412; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wH8MkJqrQtXPo32ZCSl9949iFWKndon5m5aMbHuiLng=;
- b=pKBtLoAuo0EOQIWiIt4Ndgy0IiHpp4QEsm+EYhLuY96ptxnYP5aoA1Ve7VaCiqk/Vc
- wiuOcvky1z54EBFaNy/jilmC+XbpZVy+7riqDvQGOBrFbN+H24De75D4PdbRSmbNbMWI
- Y40Vw+wTbcVJsLQmowq0RI0YpHIBnKv9jYkUfLx5sCLcQd5ENEp4yas61fpibfqI47/q
- 34C/V6Pie59RYgYif6hZuvGGKnWKkvItRgW1dr49JdjxKDsrwk5D1yzv+qoWKjnfnPUy
- 7/6t+vlPbYJ/BTzAIJEWX5IJJMmiBoo/CD//9JBxSxcGpqz7iCQ/yZLdJUsLO3xLk7SC
- gyfw==
+ d=gmail.com; s=20230601; t=1753391624; x=1753996424; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kgL1qSR2UpzxSal/TtQOMbTEHbNtFE344M4nrQAW3kc=;
+ b=RMi/BQDjbGItZCpi+c7i+pvjFhmCLDFyeaTn6o8beOLVon2tU2MEaX8wW7cIz4Lank
+ 8q+ziOGLSqJlfQHYXlMhmzchg1DF95k2kHOnazLqmjk5++VEyHU7hz8g9ugkzs26gp55
+ O8XkGkECi3+jX+63UVAC9ywiC+aFukBftnpH8D+oGarJlNdrTUx+6EP07aWNO0UzznXJ
+ bxL6StPr+p2QrAkmZ7qgQqSa4JcO0iRzGbRW+nZDGZ4RYEV35OBywTfWf++WxjX/Uvzq
+ exT5tNNdJVfUssWKrafzIVsSWFS150Dp0m2uzHk82tgLk6ljkDN5tMj/pyWrFU1km3T9
+ ceAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753384612; x=1753989412;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wH8MkJqrQtXPo32ZCSl9949iFWKndon5m5aMbHuiLng=;
- b=IS9Kz71VrVKUPhzDiYQWlD0rW3H4EQzxQuxFTGOSL5uKEjUddiXiMFtI2OSE3iJjWz
- uoO3l8zM8X1L/vQkewUj8MprgX6wpag1t1DJkifYX6H69eyxDZ20AiUx62IxdBeg3eEv
- 52Oe5GBrJM0PlAyOZfzGu2OqokXUouLyKxHXlF4jFbctFfPA6m1JkLb9p7tleM/9Yvua
- BYX5yguS9TMJrgHMtbhOjl9g2Jg0R6IWRkM8ToRAKzPeV6qxJvcaTVhCcRHV4DEgmrST
- G9yOBwdUMCLCaO4/6ZVND+8e+SRWdsNoGhgwjuTd/s5nmtnKMcPxdkjB3/Ca+BGTq5Ju
- IGsA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIOAsW+2aBXg1nd6TjlGmEt3p70hqR0bXbZ2/iV33vZAOQNB9DLc3DzEttZaSZcxD8fPre9/w=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsizvIH/9aPrmTE3rMxPb2srCO5Y2JK3RJWmtPeP1ICUlczS+x
- JlTifImne0dgxnE1lJAprMoBG9DDPWyyV8u7csZbf6d1okFaKsHUnU7QLKVCEjhKulzkBd/os0Y
- DrDSQx0LbzfSOp+A9CMYg6InYYWIGxTN2xvsb3uG5bA==
-X-Gm-Gg: ASbGncvQRq/kF0haY702ogahOxF+jkaBCmKWi6m9HhOlZWLQbhh4G2HjzCqDXzSpfvl
- nwtkWRzo7glcM41yQOt6iMkR5gPWZ/7vlChPl24S4L7AdL+64o+4GSM2HbXYT12KilkSq2Xh0Kk
- PKhnhrjqGVennjnMeDN9QXkikm9VrGj9whpDcisprfkWc86GXWzfvv6q08qF6iaXpt2Vgqh1+dG
- Em3Dh8=
-X-Google-Smtp-Source: AGHT+IFjWGt9BvuM6gxo064cn5ABCwxe6O0tcuUyK80fQdCVoQsGhxC0e/L8DnPJmyRMcGAANZZeEK3c9PpXAueVI/o=
-X-Received: by 2002:a05:690c:6c8e:b0:718:385e:58e1 with SMTP id
- 00721157ae682-719b40e6c74mr110319717b3.0.1753384611664; Thu, 24 Jul 2025
- 12:16:51 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753391624; x=1753996424;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kgL1qSR2UpzxSal/TtQOMbTEHbNtFE344M4nrQAW3kc=;
+ b=W0HRheAtUigJggbbRgQta403sfjzMP27DmcP+uxUc4LdhJScUOUfql2dKFb2l07zEN
+ y1URUWSxZ/V3DOR7aIObZ7TE6lPoHNSs0xQBWs/yevkuAjgAK4Eox0UnODnFM5Z+r81o
+ nvaLuR817CH79TH7ywDckENjgg51jIBgxwG+k4IkfILsGFpwUy+z5W3BboFgQOYwJoUK
+ 5kKyaYZb3fc7mj/fqcAJiA/Eht/w4ZqC+A5gLsNJYwfz0vgkTPzT2XJDSVV1QgfkRgZb
+ dMLzTOHB7dSIjKz2vo7llh43Wd6mcwPBcyU6eIl3hH9XJd7iZH7mOA/9O1+NtW9xOGTz
+ Mn8A==
+X-Gm-Message-State: AOJu0Yw4PTGHdzCGluJUURuqiBeK0Zgm09TNGFmd+mcnhwyY7awE72z4
+ cqMmm0iSFZomLZ3HlFdoVW7j3S6vQp88ucRR7gjZMK+2qnZkkkREwlPcQHueCg==
+X-Gm-Gg: ASbGnctHwY+UQCz5OaR//ZQwUThtPqdQtA6bS6rDS6+d+TrxIM+K3M+2EAgZhBSwdC8
+ OJwIcrfhkor3sHrOGQrJv9xQgVO/APEUTR7g6ztASCZXVMEDa/VcEoFTgDRSp/LjIwyZd/E/1OI
+ Hbzv0Ki1WMpuoIQpoG7Kq3xqbNNzOuWJLqwivIRWEjNleZIDUkoziZxlCt3ghdS6GAqAQchUBYN
+ t5xsQ17HpD6r+kpllXJCUF8IrlEaefI2MTbK2Dxg6GgRVTU6Hd2E0vKRsEfCiBVJVomp2viRM0z
+ A3zpDz6Wt2m8zKpQ61TwrIy1YOJwlWZjBxcn6hjIqltW/IXIMUZcLxR83Ua0p5A88xhjVfmsZtK
+ b4MsD5aEQf4AP8hSV0KGWcpqxM/tk2cm2sRa0
+X-Google-Smtp-Source: AGHT+IGHOF2MNypQ0sEg+9afKmLr78eJ2AtNiYYnoezUQo2KFKEoK+DJa/GWs2vMzV5cIXzTzxJZMQ==
+X-Received: by 2002:a05:6a00:138f:b0:74e:ac15:10ff with SMTP id
+ d2e1a72fcca58-76034c57330mr13064862b3a.4.1753391623583; 
+ Thu, 24 Jul 2025 14:13:43 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:49ad:5ec7:6dba:a80f])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-761adc708aasm2379009b3a.19.2025.07.24.14.13.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Jul 2025 14:13:43 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20250724
+Date: Thu, 24 Jul 2025 18:13:39 -0300
+Message-Id: <20250724211339.2275409-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250709222926.24671-1-semen.protsenko@linaro.org>
- <20250709222926.24671-2-semen.protsenko@linaro.org>
- <87tt3b2ti7.fsf@kernel.org>
- <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
- <87ikjllws2.fsf@kernel.org>
- <CAPLW+4ncXuT7=iP4wt6fuZ25cQvLJUTZe71oC6=y04Wefb5c6w@mail.gmail.com>
- <CALrBrZ2gGjk9sqqvAESs=tC4HV65Cg5Bp0qJ_ggsjd2ix1xUOQ@mail.gmail.com>
- <CAPLW+4=gdMZqoP3zZn0Dk6p5GY4N0pCDnKsXcqtLK41P-Qqu3w@mail.gmail.com>
- <CALrBrZ2Rouk+G9HCS=pbAwxJ76ZvLKhkWp=mW_ztE5R5OPiPSQ@mail.gmail.com>
-In-Reply-To: <CALrBrZ2Rouk+G9HCS=pbAwxJ76ZvLKhkWp=mW_ztE5R5OPiPSQ@mail.gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 24 Jul 2025 14:16:40 -0500
-X-Gm-Features: Ac12FXzfTINAYhbxE9Ihe1uZFRhLEZHWKyy1GCkqY0-pFcv1JqR9t2x_E6lOwdY
-Message-ID: <CAPLW+4=W=e0jJhuyKEe02Q_OKVu4y1ReMvQLQfN61YsUxO7eSg@mail.gmail.com>
-Subject: Re: [PATCH 1/9] phy: samsung: Add Exynos USB DRD PHY driver
-To: Minkyu Kang <promsoft@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Marek Vasut <marex@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
- Simon Glass <sjg@chromium.org>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,35 +94,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 24, 2025 at 4:45=E2=80=AFAM Minkyu Kang <promsoft@gmail.com> wr=
-ote:
+Hi Tom,
 
-[snip]
+Please pull from u-boot-imx/master, thanks.
 
->> Hi Minkyu,
->>
->> FYI: it might not be on your side. I can't access denx gitlab right
->> now as well. There is some relevant discussion going on on #u-boot
->> IRC. See also [1] thread.
->>
->> [1] https://lists.denx.de/pipermail/u-boot/2025-July/594671.html
->
->
-> Yes, now it works.
-> But, patchset was failed to apply on latest tree.
-> Could you please rebase?
->
+The following changes since commit 3532f1f5edfc97c9dcea723cdeb732eda44bc669:
 
-That's weird, I just checked and this series applies fine as is for
-me. I tried rebasing it on the most recent master, but after doing
-that I didn't see any changes in v2 patches (as compared to v1
-patches). For the reference, I checked it by applying on top of this
-master commit: 7bf2a52b4943 ("Merge tag 'xilinx-for-v2025.10-rc1-v2'
-of https://source.denx.de/u-boot/custodians/u-boot-microblaze").
+  block: Remove blk_find_first/next (2025-07-23 17:37:14 -0600)
 
-Can I ask which tree you are trying to apply it to? Also, if possible
-please share the errors you are seeing when applying this.
+are available in the Git repository at:
 
-Thanks!
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20250724
 
-[snip]
+for you to fetch changes up to b40c9b0c22773c23322423e6206f049d8f82c25d:
+
+  imx93_frdm: Add initial board support (2025-07-24 08:01:03 -0300)
+
+u-boot-imx-master-20250724
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/27149
+
+- Add support for the NXP imx93 frdm board.
+- imx93_evk and phycore-imx93 cleanups.
+- Convert imx6dl-sielaff to OF_UPSTREAM and fix serial download mode boot.
+- Fix crash in imx power-domain.
+- Migrate Phytec imx8mm boards to standard boot.
+- Fix smatch warnings.
+----------------------------------------------------------------
+Andrew Goodbody (1):
+      imx93: adc: local variable ret should not be unsigned
+
+Fabio Estevam (4):
+      imx93_evk: Fix the board name in MAINTAINERS title
+      imx93_evk: Remove unneeded header files
+      imx93_evk: Remove PMIC and USB header files
+      imx93_frdm: Add initial board support
+
+Frieder Schrempf (3):
+      imx6dl-sielaff: Convert to OF_UPSTREAM
+      configs: imx6dl_sielaff: Set CONFIG_SDP_LOADADDR to fix SDP boot
+      imx: power-domain: Fix crash due to uninitialized 'id' field
+
+Primoz Fiser (2):
+      board: phytec: phycore-imx93: Drop unused PMIC define
+      board: phytec: phycore-imx93: Drop unused include files
+
+Vitor Soares (1):
+      toradex: tdx-cfg-block: add verdin i.mx8m mini 0216 pid4
+
+Yannic Moog (1):
+      board: phytec: migrate imx8mm boards to standard boot
+
+Ye Li (1):
+      spl: spl_imx_container: Delete uninitialized variable
+
+ arch/arm/dts/Makefile                           |    2 +-
+ arch/arm/dts/imx6dl-sielaff.dts                 |  533 ------
+ arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi       |  186 +++
+ arch/arm/dts/imx93-11x11-frdm.dts               |  603 +++++++
+ arch/arm/include/asm/arch-imx9/ddr.h            |    1 +
+ arch/arm/mach-imx/imx9/Kconfig                  |    9 +
+ board/freescale/imx93_evk/MAINTAINERS           |    2 +-
+ board/freescale/imx93_evk/imx93_evk.c           |    3 -
+ board/freescale/imx93_frdm/Kconfig              |   12 +
+ board/freescale/imx93_frdm/MAINTAINERS          |    6 +
+ board/freescale/imx93_frdm/Makefile             |   11 +
+ board/freescale/imx93_frdm/imx93_frdm.c         |   59 +
+ board/freescale/imx93_frdm/imx93_frdm.env       |   31 +
+ board/freescale/imx93_frdm/lpddr4_timing.h      |   12 +
+ board/freescale/imx93_frdm/lpddr4x_1gb_timing.c | 1996 +++++++++++++++++++++++
+ board/freescale/imx93_frdm/lpddr4x_2gb_timing.c | 1995 ++++++++++++++++++++++
+ board/freescale/imx93_frdm/spl.c                |  195 +++
+ board/phytec/phycore_imx8mm/phycore_imx8mm.env  |   72 +-
+ board/phytec/phycore_imx93/phycore-imx93.c      |    3 -
+ board/phytec/phycore_imx93/spl.c                |    7 -
+ board/toradex/common/tdx-cfg-block.c            |    1 +
+ board/toradex/common/tdx-cfg-block.h            |    1 +
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c     |    3 +-
+ common/spl/spl_imx_container.c                  |    4 +-
+ configs/imx6dl_sielaff_defconfig                |    4 +-
+ configs/imx8mm-phygate-tauri-l_defconfig        |   15 +-
+ configs/imx93_frdm_defconfig                    |  124 ++
+ configs/phycore-imx8mm_defconfig                |   14 +-
+ doc/board/nxp/imx93_frdm.rst                    |   75 +
+ doc/board/nxp/index.rst                         |    1 +
+ drivers/adc/imx93-adc.c                         |    4 +-
+ drivers/power/domain/imx8m-power-domain.c       |    2 +
+ include/configs/imx93_evk.h                     |    2 -
+ include/configs/imx93_frdm.h                    |   30 +
+ 34 files changed, 5379 insertions(+), 639 deletions(-)
+ delete mode 100644 arch/arm/dts/imx6dl-sielaff.dts
+ create mode 100644 arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx93-11x11-frdm.dts
+ create mode 100644 board/freescale/imx93_frdm/Kconfig
+ create mode 100644 board/freescale/imx93_frdm/MAINTAINERS
+ create mode 100644 board/freescale/imx93_frdm/Makefile
+ create mode 100644 board/freescale/imx93_frdm/imx93_frdm.c
+ create mode 100644 board/freescale/imx93_frdm/imx93_frdm.env
+ create mode 100644 board/freescale/imx93_frdm/lpddr4_timing.h
+ create mode 100644 board/freescale/imx93_frdm/lpddr4x_1gb_timing.c
+ create mode 100644 board/freescale/imx93_frdm/lpddr4x_2gb_timing.c
+ create mode 100644 board/freescale/imx93_frdm/spl.c
+ create mode 100644 configs/imx93_frdm_defconfig
+ create mode 100644 doc/board/nxp/imx93_frdm.rst
+ create mode 100644 include/configs/imx93_frdm.h
