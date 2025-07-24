@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B22C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 08:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E98FC83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 08:58:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CBD983692;
-	Thu, 24 Jul 2025 10:56:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01BA8836A4;
+	Thu, 24 Jul 2025 10:58:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aCm3/kwX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bimq2qAL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A2BF836A6; Thu, 24 Jul 2025 10:56:42 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id D0A66836A6; Thu, 24 Jul 2025 10:58:34 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4660683666
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 10:56:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D93B283666
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 10:58:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4555f89b236so6588285e9.1
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 01:56:40 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-456108bf94bso4271695e9.0
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 01:58:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753347400; x=1753952200; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753347512; x=1753952312; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=L/dgIKydSrTAvPOKLEK4s0Mk2cw02ww0r/3Av0RP3fU=;
- b=aCm3/kwXewY9PStkRF5e4LcAO2Gm/oDW8aiSSkJSRxg68JGvdmpBxzKzx1zeeL4kv6
- ygWsnqNis7CmxR2z6uZz0JHOsRKDjexOtZVteGwgoz6lhn7CJhxkD9SoCHpXUUvWR2yR
- K36R6ybkPC6/OAB4YgjxGexiZDIckOUmqwu64YGYTqG83KDP2EYsEl8UvBvr2ULcWygM
- OHFQdupAoPr6HTYrdKajxoLw52SVpS4hJTeH9berI6udleMRR5gmODqO6BY4P15iqc2K
- i0/niKyLNISOhIjljJHLNCYoeABysdFZ80+ltoVE7jWGynmwzTTcOGGBjixY6U/SyAHs
- YSlA==
+ bh=vbb3DqfGo6vCGeDQahMAHUmns6/fCAWAK3zsNuYHeB0=;
+ b=Bimq2qAL3yibwmyfiXLyBaWqxSOEDDHlWpgr67OzGpeks018lPK4tRue6Vp16t5m04
+ 7jfd9970z+LmYFTsz1LOHEw8ki5fWe8wNlRoU3jWHS1nSbW3fpvr7dAHoxs78DCgnAQf
+ l3WQNm95MnXDQp8JZ1IFfKymmqPTzl3eq82mMBCu/36kCP811PyJFBS3neQqIg8boA9B
+ gU7fctFc5/bS0xMT/ekPAiKbUrzwPrdSX3PtzaXlD4mdpiuD27dx3MnBKBZ3phoEIBw+
+ RkzaQ08ShhctEbWHiBpllyT0TD1OYRnhWffCIwChnJiTI5YOciXmbvZL9mMk3J/M/N8n
+ 9bIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753347400; x=1753952200;
+ d=1e100.net; s=20230601; t=1753347512; x=1753952312;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=L/dgIKydSrTAvPOKLEK4s0Mk2cw02ww0r/3Av0RP3fU=;
- b=DFgn61S1f4dr4OAPgWzXkj6maapcSUt2rmheoJ4hNtomkx+Nblz9b6BF9ySJc8S5l4
- O7kENx+PmrBdjzouAhcJ6/r4DEnbuJEFJyPSw9Xzuu2Tl4XbywRqhKMTem7/MFUEJIrc
- Wcdk/PjByh7rAZsrwC4M2HimwexKUhzuscbkurgUdqYEX3yhWJpTlfBYZKT2FSz40mq3
- vUv1sgXu0zjjoitKqJJtu43YafpgHDi3xWuiaTDs3HnWlmoq3SjkUvB/2uywDE1VXJxQ
- hSPy63qLGTAALq1GOFcY8LR+9u1antAbETsz/DAz0lBOjnjP2AH+mi8Qz8OB33Sifp0A
- 2vtA==
-X-Gm-Message-State: AOJu0YwJFBvhqs9SWvyoGXRPyvJLA9zjosuxxfd6HpePjmoZKyyHUOYA
- dGcTDcuz1Io7nJxiS9KLhPQXH+xrNCSkslumokDwY7jS4GhRmR56+aunVc78d+QQLqHBEbzfmqA
- b6WeGEmQ=
-X-Gm-Gg: ASbGnctsamFRTXCDACS8dB0eUP834oB8xC4lbL75OYnpw1QnSb101jqscaFIDEo8vGi
- vUzPLF3VDMZf3QxAy0KgseMdqLXwWsAJdfwmy1nDmvh94hSAIDfajJkWQOk5WtVMQI+sv8flalY
- zjLz3U7wc5EMSk5qAtDwBwptMcwQ03TUUmqC0D76SiyX7NdDL4Xq3Ez+7YJ/TR4jLtKpPAgVD7P
- ukNfbVtkA5Q+BoZnjCtxgckIBtog39chzsw3bej9SGdvfXWXzeaoMHbLvs2oiC/CINDSkQx1a8T
- cKKLmTvXDvg24MjkU89FfVqZvHJef5R6vYQv1ByuO2kCsFreM2FmQ8+4X0znH+oZPadxKJijp3u
- /LLHIWozaEh0NBxDytnO4lkCK41wONH4PbpRjEmz0dBBkzzdbpus6K4mwNGkiEa8JS+ZpaDjEe5
- 9bJmCcwEjLesyc
-X-Google-Smtp-Source: AGHT+IEm56FOIfkABnz4XkSnsU3NRQC2zdh647nMeg2JY+M6OtD245+DyhF+/t/EOMY7THNT/j82wA==
-X-Received: by 2002:a05:600c:4f4f:b0:456:1006:5418 with SMTP id
- 5b1f17b1804b1-4586987e38bmr43878965e9.13.1753347399559; 
- Thu, 24 Jul 2025 01:56:39 -0700 (PDT)
+ bh=vbb3DqfGo6vCGeDQahMAHUmns6/fCAWAK3zsNuYHeB0=;
+ b=UEVKDtFH/2KSS07usA18sXbX8ZJ9TA+DZHhgf804gRZPMp14Hf/iP3Bz+YSy1atKx2
+ JXbRkBmpxVyUzgr8Q7ihiDrxv04d+y+LpBD1twMSVT5zscRDe0vhU5zMJFPEqrD58Fsm
+ 5i5OWm3fGHKOaRHXNDLxJhqotWsWlrrpboq9cA/SvO83MX2vwggKUi88FX0CpDZk/E04
+ gSf2fPWAJweCVT+SnJN8KWMD2IJ+DAx7Cn9nLPSVe1X+c0NfOnrySC2Cbgr6Q1/6NY23
+ Tw/6xlwK4qPs0k1dUYmZz4FIqkhuhnef6iZHPWnzCQLekZyaQ5eF6Kamw75j0aSnDdg+
+ laBA==
+X-Gm-Message-State: AOJu0Yy7AXKmwxCPha+QImZq2ZEjMVwhkiASXELPJAZOnhdUPE++w+MG
+ XMF9GAQOcy3ZyfggddRsYgu2EAhj6p6MjnP6K4RsnbaNylfmK2zcHA/O8QB7vjfvflE=
+X-Gm-Gg: ASbGnctXfn5qvLbi5FaDQt8p0Cpf6h/F4ZdELdsjAcS7Km0U6ZCyBIRLRZbOydbK74m
+ uxk+6nDYlYEPCunuLMsO3NrgkGcWpZaw2itpfvSdddQA3XF6AjuxzNyy2qYKe3YLyYyd0Ip1vKS
+ viC/OPmiSAo9hYUHPE85G2j4gc7dN1T7IJJ5PlNULAt+ihA5NTT2WteqFWtX9R7CeNsP+3skZkj
+ XaH4zvo4xUnNyPmsQT+U+a5q65I0k0pSDA8wifx+cJcJPN7kb41zti0oR7xtyEeAKsFtdbay1ma
+ ll3tiwLYFfmwB8YFvpN2SpxE5HZwF8T1IwvuA6FJ0fzduxWMf889xVL9WpF5aUfQqi+TALK6aEm
+ O4Irr9Z7Otx0nTiSt4NCUBB9gCbyGi59jS1s63VeuEbuj+QR6iinOOHcHHw5rBzVW4uPA/dsv78
+ andQ==
+X-Google-Smtp-Source: AGHT+IEWiIMAiu/vPW96k5enX+SDeteJN6FbuGI8XFUkfwwOtCAcwoWRrb1DQrW7geVtyDxPikipPg==
+X-Received: by 2002:a05:600c:8b55:b0:456:25aa:e9c0 with SMTP id
+ 5b1f17b1804b1-45868c954dfmr60182555e9.14.1753347511794; 
+ Thu, 24 Jul 2025 01:58:31 -0700 (PDT)
 Received: from ?IPV6:2a0a:ef40:f9e:3c01:e4d2:a911:6ad2:b1ce?
  ([2a0a:ef40:f9e:3c01:e4d2:a911:6ad2:b1ce])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4587054ef47sm11888455e9.8.2025.07.24.01.56.38
+ 5b1f17b1804b1-4587054f31fsm11622515e9.10.2025.07.24.01.58.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Jul 2025 01:56:38 -0700 (PDT)
-Message-ID: <cd88a1ef-7a55-4c36-81ad-9890ea90e096@linaro.org>
-Date: Thu, 24 Jul 2025 09:56:38 +0100
+ Thu, 24 Jul 2025 01:58:31 -0700 (PDT)
+Message-ID: <092aff1e-dffb-4ac2-8a2c-2a0e1faa5269@linaro.org>
+Date: Thu, 24 Jul 2025 09:58:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: nand: Prevent dereference of NULL pointer
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] cmd: mtd: Prevent use of uninitialised variable
+To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-References: <20250701-mtd_nand_fixes-v1-1-f31517bdce2e@linaro.org>
+References: <20250626-mtd_fix-v1-1-1ffcc59a9d0a@linaro.org>
 Content-Language: en-GB
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20250701-mtd_nand_fixes-v1-1-f31517bdce2e@linaro.org>
+In-Reply-To: <20250626-mtd_fix-v1-1-1ffcc59a9d0a@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,36 +103,35 @@ X-Virus-Status: Clean
 
 ping?
 
-On 01/07/2025 17:12, Andrew Goodbody wrote:
-> In nand_wait_ready there is a loop that includes a NULL check for
-> chip->dev_ready before it is dereferenced. Use a NULL check once the
-> loop is exited as well to cover the case where it exits due to a timeout
-> and it is therefore not known if chip->dev_ready is NULL or not.
+On 26/06/2025 11:49, Andrew Goodbody wrote:
+> ret maybe used uninitialised in some cases so instead
+> initialise it first to prevent this.
 > 
-> This issue found by Smatch.
+> This issue was found by Smatch.
 > 
+> Fixes: 9671243e8d10 (cmd: mtd: Use the subcmd infrastructure to declare mtd sub-commands)
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->   drivers/mtd/nand/raw/nand_base.c | 2 +-
+>   cmd/mtd.c | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-> index d3d1b93947b..48e3685d995 100644
-> --- a/drivers/mtd/nand/raw/nand_base.c
-> +++ b/drivers/mtd/nand/raw/nand_base.c
-> @@ -566,7 +566,7 @@ void nand_wait_ready(struct mtd_info *mtd)
->   				break;
->   	}
+> diff --git a/cmd/mtd.c b/cmd/mtd.c
+> index c25997cfb24..1651a4a6b3e 100644
+> --- a/cmd/mtd.c
+> +++ b/cmd/mtd.c
+> @@ -474,7 +474,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+>   	struct mtd_info *mtd;
+>   	u32 oob_len;
+>   	u8 *buf;
+> -	int ret;
+> +	int ret = CMD_RET_SUCCESS;
 >   
-> -	if (!chip->dev_ready(mtd))
-> +	if (!chip->dev_ready || !chip->dev_ready(mtd))
->   		pr_warn("timeout while waiting for chip to become ready\n");
->   }
->   EXPORT_SYMBOL_GPL(nand_wait_ready);
+>   	if (argc < 2)
+>   		return CMD_RET_USAGE;
 > 
 > ---
-> base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
-> change-id: 20250701-mtd_nand_fixes-191e5a19932d
+> base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+> change-id: 20250626-mtd_fix-bb1ae86f33aa
 > 
 > Best regards,
 
