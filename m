@@ -4,92 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE9A7C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 11:37:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F348C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 11:42:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47463836D5;
-	Thu, 24 Jul 2025 13:37:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF50883744;
+	Thu, 24 Jul 2025 13:42:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XGCQ3ly2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tXDpqQOC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FCF583744; Thu, 24 Jul 2025 13:37:42 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id CB5CD83831; Thu, 24 Jul 2025 13:42:41 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE01F836A3
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 13:37:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E64FF836A3
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 13:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a57ae5cb17so433055f8f.0
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 04:37:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-451d3f72391so8587875e9.3
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 04:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753357059; x=1753961859; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Tavawb6UbZESjqhA8MVNvd4nDHqluf+xtxrYIIODa/U=;
- b=XGCQ3ly2A+mhHjYmOnuT2n8fZ1uAnfs414bGB/o/5PNGJRI/5iA5xI+ObliIQMl86H
- ECTHwnz8bPqu1wwVpwHbxyR/98/WrC62WW5v08VQ5uEaWl4ivzJHgOE18slK2CIJoYxr
- kUmvJYJ3pfOmlEG2jhgmsd0JU0TgRCP8ZSGovkfITFvWpsBbSDvCwLpdyWHL4kuqPfxP
- EAvp6z3RVnGvVbkD9JBIPEm2nTztdJPLa7x1/0VaE3NQLPWpKr8e3mel8XxWnCBZjA3X
- fPtXpe/oJBpEqBxff5zohqYe6hqVJrdZ4XpLtvEvXiDJFpumGgIt3LNCWp0+P7UqXpEz
- BhAw==
+ d=linaro.org; s=google; t=1753357358; x=1753962158; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=pSYUTBi9n/qx75TWBeiwSOnQBA9UQcfD0NhaOEKGkLc=;
+ b=tXDpqQOCzCe9kqdx1yoVPu93T09ZaEWQeopyNFg24fK/t/iTU6OCWlnkIpsfXID58A
+ icqgzxcEu6jUpIhF5DH0YgDbldAHQyfw0h8zXoOYrrOeYiQm7pzBFES6leR8iTLt4drV
+ ZtIkosoXyq3Q4PL18B+nBkRHr/l/5cOyRcv6pmIx/8+6x3kN58dog8L35jJ715rvLGw+
+ G2p1gUjXs94by13ko3hTv8zJjyUCpfrSzI48elXdTpsLuiM4uUJkrQfeJMZYcVKkUoZN
+ KPXR78ZNqNmh09P9mEVUCVPpkzFC9jyuAOT6c8VyVP/orsQ82YKwZYWIRAKG+imzT32O
+ G+yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753357059; x=1753961859;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Tavawb6UbZESjqhA8MVNvd4nDHqluf+xtxrYIIODa/U=;
- b=DHCeZctkDkQiY+acZdwc4e4FAxhxkdvHybEDzcJf7kiVKs7fXpWGd0dNAeBf42/8GW
- lBR4zCCxiVEa2Otr3G1TXBA4Wt4CORIUORtQJ6OuE8Ws5ztCgnOd3615xLuEtwcwAyDr
- yFDxAOGN6xvZ6Evm0GfC8TZ4gewKSmawGhmt1TJsH2miW0wi+wLPAmAfyNjXI/HE4wgw
- I3qzsJt53AfISPTmem1+zoOAGIq2bbuXTydjbIbikMbUlk2GheNp6UpdsVn4ZfmEFce0
- tYCrEtF7Lh+ZHbcOrVEVSlskeBp9j52ALf915YAW6OcEJ5PzsiZJuNp9ANpqtFR2kZec
- TFcg==
+ d=1e100.net; s=20230601; t=1753357358; x=1753962158;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=pSYUTBi9n/qx75TWBeiwSOnQBA9UQcfD0NhaOEKGkLc=;
+ b=W5JDeYgavMOm358N6lfAMa5a00aeU4XFzkIC6xfLxn3qNo363gcV+fYNyHwJDhyx8o
+ dKwlPZmxezmnigdSi5j7/4Jalsn7GHq8b3NrLaDCz166ezYvlTVd607bhuhbeZYnvMx+
+ ahDXwoVRj2asKl2jpFEGDxa7e4CQsTyYI2dYj+7IzXl+Fd8+cUMbAVfTsndGAJ0CMeZR
+ ASyI1+3VvbnRyHNe87zgc4YSpCUxozDW7CDEERa9H6Ot3WlhR5Fa6eRh29IqZfjL/vve
+ PerqMelEnCkc+EiXU4nskVrVvVg456bEjioCy/bE9eGISZCS+fS+pIpnGXZ/EdeppUuA
+ P6bw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWW7yhphms8eLJ76hajm9OgmB7ZFrgODKJgVPkPxNC/9iu1dDke1wCcI2JFGuxQw7vWbMmUglg=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywa4vvOjULS1Wumjo0yTzTO/cbplk4hXoBiXbdVRvH3vDJiHKMc
- PShE6wOHY8UsN4tM46GE2q8iEVneza2SdFpdLGQA7paV5eZQQn1T37sK4HlHqIyPFL9e/veesZb
- mXjLJ4Fo=
-X-Gm-Gg: ASbGncuZAsyjuHgOw4njvDm//gVs3n768IYrr1wI1YAWCV8QuX499xkVxA4xbtRMpUJ
- sAqy9owX/EfCIq9+yhstEhgTYacJFNosN2POerYohvjEfvk/Sq5RCkCuJgNh7x2RCBvGLkFgq6V
- 00fYCewb4gAI5I4+W/MQ5Um66op2x1hsVyu2ResTtn7RHs6uXX5Rerje8CQN1pb9/OKjx0MsYX4
- SWuOEdDBE7isEIG/snYBA/yIv7BPkvobd1t3ytcZAfS6JpDRv8UG+krnesXPyJJ6a67N6MKKfp8
- l3ROy2ruMHl9fo12LkzbGkkiiWwGB2YQ+VVQm9S/YiIRpNk4jMeXTfkJWjixHrYSMbql6mG9jFv
- 7yGOj/ULbsW0dK8Smvnc+M3/XBs9XQXGuj/kXSaDgXfqlsXgiexs=
-X-Google-Smtp-Source: AGHT+IEw4iHqJh6Ei5lkkIxQHxUu3cEuE8y5MLFC1QLb+YgKVC4L9LlVV20dGLX/KwC9GrUNVMfGyg==
-X-Received: by 2002:a05:6000:2288:b0:3aa:c9a8:a387 with SMTP id
- ffacd0b85a97d-3b768c585a3mr5586666f8f.0.1753357058968; 
- Thu, 24 Jul 2025 04:37:38 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:e4d2:a911:6ad2:b1ce])
+ AJvYcCVKygPWF9z+Ph5ve849NOAFUqjCz/US0U3hybdbtcSWhqjSddeHefqaQQwiaavgkB05WLFRhT4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9vqO9hu5SDHvFslAC+nDwsc7QXKdnkegun0hzhokwYS/7Ogse
+ SgrWkYWEBCBzDzyINExk41NeIOhWVUuKtyz2KKtsGC6rBumZQB39eNkuEJmVle8wE1Y=
+X-Gm-Gg: ASbGncvow0WyYmgu8IHIluRVeZK/ULetjn0NkgXUcWXCYXyh4VxsHGqty2WB6BkGpQz
+ l1Mda0VoRvy1Vi2ss01IBbaTopWS6D1o6tbM3927bAon/GWmwxL7S+Ikn8eaOl0UhLRLNogyR5C
+ XCE6alj2PKdWtlGvoASVYFbRK+5p13BBziecVMwtm4AEo5sXAOJ0P4CZ899ZKl56o6/bZ2O5Eu4
+ 4EbwVxfWy1Q6df2NDDh48vVm4Eybc9hb4gKUJMTXbBhDNbTZ9T8y/RoOhrjnR1o3WWcznRaq7bc
+ byot3aGaCvnx08bofEoqjZ6mLYDYahY3G8wl1UkWph4A9O1ldVPqnLiehdIGtlJ2Ilp/mF92epo
+ xrnSDDknVIw3woFjxRmLB9ynhYmpswsPq55GbZPavKNURBdjBkSuCf52fYABd2ayBmP4UutVQF+
+ k=
+X-Google-Smtp-Source: AGHT+IH/3/cxzr5apqUjQc7T5Eqf9HJZSBIOI5Hv35126EMUqwLW5vpV4EF57nptoUrTn1dakFS/Dg==
+X-Received: by 2002:a05:600c:8716:b0:456:11a6:a511 with SMTP id
+ 5b1f17b1804b1-45868cfb2ecmr51032195e9.20.1753357358271; 
+ Thu, 24 Jul 2025 04:42:38 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:cad:2140:e2d3:d328:dc00:f187?
+ ([2a01:e0a:cad:2140:e2d3:d328:dc00:f187])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b76fc60585sm1935490f8f.5.2025.07.24.04.37.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 04:37:38 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 24 Jul 2025 12:37:38 +0100
-Subject: [PATCH] clk: stm32: Wrong macros used in register read
+ 5b1f17b1804b1-45870554a02sm17632755e9.21.2025.07.24.04.42.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Jul 2025 04:42:37 -0700 (PDT)
+Message-ID: <1491319a-fb54-4d1b-8ffa-2ab2a2f74704@linaro.org>
+Date: Thu, 24 Jul 2025 13:42:29 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH v2] qcom_defconfig: Add VID/PID to represent fastboot
+ device
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
+Cc: casey.connolly@linaro.org, trini@konsulko.com,
+ dmitry.baryshkov@oss.qualcomm.com, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20250724111911.67872-1-sumit.garg@kernel.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250724111911.67872-1-sumit.garg@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250724-clk_stm32-v1-1-c12dd33d28c2@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAAEbgmgC/x2NUQqDMBAFryL73UC6sYi9SimSxI0u1ii7Ugri3
- Y39HN48ZgclYVJ4VjsIfVl5yQXutwri6PNAhvvCgBYftsHaxM/U6TY7NMG2Te8wuUQtFD94JRP
- E5zhej9nrRnINq1Di3z/yeh/HCReqSQF0AAAA
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,44 +127,41 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reported a warning about a shift macro being used as a mask. Make
-the obvious changes to make this register read calculation work the same
-as the previous ones.
+On 24/07/2025 13:19, Sumit Garg wrote:
+> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> 
+> Currently fastboot mode is enumerated as VID/PID: 0000:0000 which is
+> not appropriate. On Qcom platforms, fastboot mode is rather enumerated
+> as VID/PID: 18d1:d00d in ABL or from fastboot.efi app. So lets use the
+> same VID/PID pair in U-Boot to represent fastboot mode.
+> 
+> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> ---
+> 
+> Changes in v2:
+> - Rebased to tip of master since v1 didn't apply cleanly there.
+> 
+>   configs/qcom_defconfig | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index b9ba7a677d9..4e24a43b888 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -140,6 +140,8 @@ CONFIG_USB_XHCI_DWC3=y
+>   CONFIG_USB_DWC3=y
+>   CONFIG_USB_DWC3_GENERIC=y
+>   CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
+>   CONFIG_USB_FUNCTION_MASS_STORAGE=y
+>   CONFIG_UFS=y
+>   CONFIG_QCOM_UFS=y
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
-This fix is somewhat speculative as it is being made without
-reference to any manual.
----
- drivers/clk/stm32/clk-stm32h7.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/clk/stm32/clk-stm32h7.c b/drivers/clk/stm32/clk-stm32h7.c
-index aa3be414a29..df82db69738 100644
---- a/drivers/clk/stm32/clk-stm32h7.c
-+++ b/drivers/clk/stm32/clk-stm32h7.c
-@@ -549,8 +549,8 @@ static u32 stm32_get_PLL1_rate(struct stm32_rcc_regs *regs,
- 	divr1 = readl(&regs->pll1divr) & RCC_PLL1DIVR_DIVR1_MASK;
- 	divr1 = (divr1 >> RCC_PLL1DIVR_DIVR1_SHIFT) + 1;
- 
--	fracn1 = readl(&regs->pll1fracr) & RCC_PLL1DIVR_DIVR1_MASK;
--	fracn1 = fracn1 & RCC_PLL1DIVR_DIVR1_SHIFT;
-+	fracn1 = readl(&regs->pll1fracr) & RCC_PLL1FRACR_FRACN1_MASK;
-+	fracn1 = (fracn1 >> RCC_PLL1FRACR_FRACN1_SHIFT) + 1;
- 
- 	vco = (pllsrc / divm1) * divn1;
- 	rate = (pllsrc * fracn1) / (divm1 * 8192);
-
----
-base-commit: 3532f1f5edfc97c9dcea723cdeb732eda44bc669
-change-id: 20250724-clk_stm32-b097d32f3fe9
-
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
