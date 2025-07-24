@@ -4,89 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D33C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 18:54:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE70C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 19:16:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AACEC838DF;
-	Thu, 24 Jul 2025 20:54:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D468838E6;
+	Thu, 24 Jul 2025 21:16:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dcMDuGzT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pKBtLoAu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36D95838E7; Thu, 24 Jul 2025 20:54:14 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id EAFC0838E7; Thu, 24 Jul 2025 21:16:55 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A82D83844
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 20:54:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05FFF838C2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 21:16:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-73e82d2ec21so686283a34.2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 11:54:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-708d90aa8f9so15012757b3.3
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 12:16:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753383250; x=1753988050; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PVWsN/A2zfvV6A4YksVx+LsY5KUjgVKSCU4pCG7Botw=;
- b=dcMDuGzTLgnjiJm3q0vN1ajfO0kPLOIXrMUXR2ctMzmVRs5aEEOV198MKsfUzl3fzn
- F/M6AwPRmfBNLzUevUymQdXUvLUJbkMeD6L7oQsg/euncHYXn9Kvn74UmvsYSZ6HZ+Wl
- WmtUEyXAWdN7T6YSVxFu2FRSakrjTft+BzaSw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753383250; x=1753988050;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1753384612; x=1753989412; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PVWsN/A2zfvV6A4YksVx+LsY5KUjgVKSCU4pCG7Botw=;
- b=DNAmUmC497ObmWxNRvn2DphEVdaj7f7itTuRSV6cGbjwsbPk4sVr7bvg3svzxQPMRt
- ngHGzm81NvyCWKrZ4csZl3XDn2ciQnH1lHTe4Kn4O+/REVuylP5YwrkyXU95O0p+dpLo
- UNDnD9z4M7qcY8I0my1t2T4qD2WUHSr4VpycT8leie/21MjhyKzzi6pSBXAtl4a/nAhP
- WXb0VMag5YqDV6HxfpUzqJU9+I07PrIBLVccLd8UYwT8t2sWO1alsoRPpUeZyP/jzAam
- wkUq9ciqy6BWJGej0b6pDOLIBQqZ1BYDaHyJHtaRHAjP2H5zidqpjMK1PN8Jn3SnqegO
- gnNg==
+ bh=wH8MkJqrQtXPo32ZCSl9949iFWKndon5m5aMbHuiLng=;
+ b=pKBtLoAuo0EOQIWiIt4Ndgy0IiHpp4QEsm+EYhLuY96ptxnYP5aoA1Ve7VaCiqk/Vc
+ wiuOcvky1z54EBFaNy/jilmC+XbpZVy+7riqDvQGOBrFbN+H24De75D4PdbRSmbNbMWI
+ Y40Vw+wTbcVJsLQmowq0RI0YpHIBnKv9jYkUfLx5sCLcQd5ENEp4yas61fpibfqI47/q
+ 34C/V6Pie59RYgYif6hZuvGGKnWKkvItRgW1dr49JdjxKDsrwk5D1yzv+qoWKjnfnPUy
+ 7/6t+vlPbYJ/BTzAIJEWX5IJJMmiBoo/CD//9JBxSxcGpqz7iCQ/yZLdJUsLO3xLk7SC
+ gyfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753384612; x=1753989412;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wH8MkJqrQtXPo32ZCSl9949iFWKndon5m5aMbHuiLng=;
+ b=IS9Kz71VrVKUPhzDiYQWlD0rW3H4EQzxQuxFTGOSL5uKEjUddiXiMFtI2OSE3iJjWz
+ uoO3l8zM8X1L/vQkewUj8MprgX6wpag1t1DJkifYX6H69eyxDZ20AiUx62IxdBeg3eEv
+ 52Oe5GBrJM0PlAyOZfzGu2OqokXUouLyKxHXlF4jFbctFfPA6m1JkLb9p7tleM/9Yvua
+ BYX5yguS9TMJrgHMtbhOjl9g2Jg0R6IWRkM8ToRAKzPeV6qxJvcaTVhCcRHV4DEgmrST
+ G9yOBwdUMCLCaO4/6ZVND+8e+SRWdsNoGhgwjuTd/s5nmtnKMcPxdkjB3/Ca+BGTq5Ju
+ IGsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFhnMwg5FvZG1qNjtEXxF8STUPM6MEpwgFvIQ3m4yn5HQT5Dxs3a4BesCXzVq7Zv2Yvjv+QoU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyl4q6ZisQI/gIql1cxbQgo2VZH+swIsLQVU5xzeXW96eK/sYZr
- l443G8+PXLoCA3Z/p/3Nq2c4VdgAWgfl/gW9cxOEveBFovTrow8pjB3j4/jb0rvTfWpdCN1n9Oe
- 1irqxlpY=
-X-Gm-Gg: ASbGncsyuQzxpHI3dkcSTOmgVVjJ9qdbuCHT6pg7yk5M5S1gpUMNGwkW0WmK/68Jtba
- MUpLtdINSP4rjUnabMbcNg2ArWC3eqOtZ/mFxjmUe3RnVAFSI8P+CgDDpiwFYNDUqmJyZdk0UmH
- 3peC62434JLIZrPahHcdxaojg0wq+xsIDYUd5yBPk4tiyCwDnMt6L/5W00wi5gK43UJnZTjNN6L
- 9CjsM09oa2BoJIsZA3tv3+HeqpP4IIk5pbF3MxmHnBgNiM0+8wMSczzfzr+Qp0RlCSJ1S3pQA9v
- PAzpXBnrTdQb/UvLGFKf/v0+TStA8hC6Sf0KrVRlYaaDNrzA5/YY+wgo8gQAQukFwrtZpDkDhxs
- +VcK6LZ2lx+n0J9EaRQTsHXJoMud59PcmnVK+qSJJqYJzHzsqNT8pjFNt
-X-Google-Smtp-Source: AGHT+IGXj4csGCFOITWcbjb+fAqaM+sG9pARilHhiG2gZ+6Ibr3zSyGERy7N0rJhrQSj3BIsAmVo/w==
-X-Received: by 2002:a05:6830:3741:b0:73e:5def:537 with SMTP id
- 46e09a7af769-7408898cf54mr7676588a34.21.1753383250199; 
- Thu, 24 Jul 2025 11:54:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7412d2eb6c4sm363528a34.43.2025.07.24.11.54.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 11:54:09 -0700 (PDT)
-Date: Thu, 24 Jul 2025 12:54:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: Eoin Dickson <Eoin.Dickson@microchip.com>, u-boot@lists.denx.de,
- rick@andestech.com, Conor.Dooley@microchip.com,
- Jamie.Gibbons@microchip.com, Praveen.Kumar@microchip.com,
- Cyril.Jean@microchip.com, jagan@amarulasolutions.com
-Subject: Re: [PATCH v3 1/2] gpio: add PolarFire SoC GPIO and Core GPIO driver
-Message-ID: <20250724185407.GA1808768@bill-the-cat>
-References: <20250708130121.1769247-1-Eoin.Dickson@microchip.com>
- <20250708130121.1769247-2-Eoin.Dickson@microchip.com>
- <aHiMY22VV6ib7JzI@swlinux02>
+ AJvYcCUIOAsW+2aBXg1nd6TjlGmEt3p70hqR0bXbZ2/iV33vZAOQNB9DLc3DzEttZaSZcxD8fPre9/w=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsizvIH/9aPrmTE3rMxPb2srCO5Y2JK3RJWmtPeP1ICUlczS+x
+ JlTifImne0dgxnE1lJAprMoBG9DDPWyyV8u7csZbf6d1okFaKsHUnU7QLKVCEjhKulzkBd/os0Y
+ DrDSQx0LbzfSOp+A9CMYg6InYYWIGxTN2xvsb3uG5bA==
+X-Gm-Gg: ASbGncvQRq/kF0haY702ogahOxF+jkaBCmKWi6m9HhOlZWLQbhh4G2HjzCqDXzSpfvl
+ nwtkWRzo7glcM41yQOt6iMkR5gPWZ/7vlChPl24S4L7AdL+64o+4GSM2HbXYT12KilkSq2Xh0Kk
+ PKhnhrjqGVennjnMeDN9QXkikm9VrGj9whpDcisprfkWc86GXWzfvv6q08qF6iaXpt2Vgqh1+dG
+ Em3Dh8=
+X-Google-Smtp-Source: AGHT+IFjWGt9BvuM6gxo064cn5ABCwxe6O0tcuUyK80fQdCVoQsGhxC0e/L8DnPJmyRMcGAANZZeEK3c9PpXAueVI/o=
+X-Received: by 2002:a05:690c:6c8e:b0:718:385e:58e1 with SMTP id
+ 00721157ae682-719b40e6c74mr110319717b3.0.1753384611664; Thu, 24 Jul 2025
+ 12:16:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hsNJLLOZPlyvyUdY"
-Content-Disposition: inline
-In-Reply-To: <aHiMY22VV6ib7JzI@swlinux02>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250709222926.24671-1-semen.protsenko@linaro.org>
+ <20250709222926.24671-2-semen.protsenko@linaro.org>
+ <87tt3b2ti7.fsf@kernel.org>
+ <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
+ <87ikjllws2.fsf@kernel.org>
+ <CAPLW+4ncXuT7=iP4wt6fuZ25cQvLJUTZe71oC6=y04Wefb5c6w@mail.gmail.com>
+ <CALrBrZ2gGjk9sqqvAESs=tC4HV65Cg5Bp0qJ_ggsjd2ix1xUOQ@mail.gmail.com>
+ <CAPLW+4=gdMZqoP3zZn0Dk6p5GY4N0pCDnKsXcqtLK41P-Qqu3w@mail.gmail.com>
+ <CALrBrZ2Rouk+G9HCS=pbAwxJ76ZvLKhkWp=mW_ztE5R5OPiPSQ@mail.gmail.com>
+In-Reply-To: <CALrBrZ2Rouk+G9HCS=pbAwxJ76ZvLKhkWp=mW_ztE5R5OPiPSQ@mail.gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 24 Jul 2025 14:16:40 -0500
+X-Gm-Features: Ac12FXzfTINAYhbxE9Ihe1uZFRhLEZHWKyy1GCkqY0-pFcv1JqR9t2x_E6lOwdY
+Message-ID: <CAPLW+4=W=e0jJhuyKEe02Q_OKVu4y1ReMvQLQfN61YsUxO7eSg@mail.gmail.com>
+Subject: Re: [PATCH 1/9] phy: samsung: Add Exynos USB DRD PHY driver
+To: Minkyu Kang <promsoft@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Marek Vasut <marex@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Greg Malysa <malysagreg@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,80 +110,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jul 24, 2025 at 4:45=E2=80=AFAM Minkyu Kang <promsoft@gmail.com> wr=
+ote:
 
---hsNJLLOZPlyvyUdY
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+[snip]
 
-On Thu, Jul 17, 2025 at 01:38:43PM +0800, Leo Liang wrote:
-> On Tue, Jul 08, 2025 at 06:31:20PM +0530, Eoin Dickson wrote:
-> > From: Eoin Dickson <eoin.dickson@microchip.com>
-> >=20
-> > This driver adds GPIO support for PolarFire SoC family, this is required
-> > to add sd card support on the Beagle-V-Fire as it uses GPIO chip selects
-> >=20
-> > Signed-off-by: Eoin Dickson <eoin.dickson@microchip.com>
-> > ---
-> >  drivers/gpio/Kconfig     |   5 +
-> >  drivers/gpio/Makefile    |   1 +
-> >  drivers/gpio/mpfs_gpio.c | 198 +++++++++++++++++++++++++++++++++++++++
-> >  3 files changed, 204 insertions(+)
-> >  create mode 100644 drivers/gpio/mpfs_gpio.c
->=20
-> Acked-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+>> Hi Minkyu,
+>>
+>> FYI: it might not be on your side. I can't access denx gitlab right
+>> now as well. There is some relevant discussion going on on #u-boot
+>> IRC. See also [1] thread.
+>>
+>> [1] https://lists.denx.de/pipermail/u-boot/2025-July/594671.html
+>
+>
+> Yes, now it works.
+> But, patchset was failed to apply on latest tree.
+> Could you please rebase?
+>
 
-Nothing enables this driver today. Enabling it on sandbox gives:
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c: In function =E2=80=
-=98mchp_gpio_probe=E2=80=99:
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:139:20: error: assi=
-gnment to =E2=80=98const struct mpfs_gpio_reg_offsets *=E2=80=99 from =E2=
-=80=98ulong=E2=80=99 {aka =E2=80=98long unsigned int=E2=80=99} makes pointe=
-r from integer without a cast [-Werror=3Dint-conversion]
-  139 |         plat->regs =3D dev_get_driver_data(dev);
-      |                    ^
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c: At top level:
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:163:25: error: init=
-ialization of =E2=80=98long unsigned int=E2=80=99 from =E2=80=98const struc=
-t mpfs_gpio_reg_offsets *=E2=80=99 makes integer from pointer without a cas=
-t [-Werror=3Dint-conversion]
-  163 |                 .data =3D &mpfs_reg_offsets,
-      |                         ^
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:163:25: note: (near=
- initialization for =E2=80=98mchp_gpio_match[0].data=E2=80=99)
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:166:25: error: init=
-ialization of =E2=80=98long unsigned int=E2=80=99 from =E2=80=98const struc=
-t mpfs_gpio_reg_offsets *=E2=80=99 makes integer from pointer without a cas=
-t [-Werror=3Dint-conversion]
-  166 |                 .data =3D &coregpio_reg_offsets,
-      |                         ^
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:166:25: note: (near=
- initialization for =E2=80=98mchp_gpio_match[1].data=E2=80=99)
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:174:35: error: init=
-ialization of =E2=80=98int (*)(struct udevice *, unsigned int)=E2=80=99 fro=
-m incompatible pointer type =E2=80=98_Bool (*)(struct udevice *, u32)=E2=80=
-=99 {aka =E2=80=98_Bool (*)(struct udevice *, unsigned int)=E2=80=99} [-Wer=
-ror=3Dincompatible-pointer-types]
-  174 |         .get_value              =3D mchp_gpio_get_value,
-      |                                   ^~~~~~~~~~~~~~~~~~~
-/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:174:35: note: (near=
- initialization for =E2=80=98mchp_gpio_ops.get_value=E2=80=99)
-cc1: all warnings being treated as errors
+That's weird, I just checked and this series applies fine as is for
+me. I tried rebasing it on the most recent master, but after doing
+that I didn't see any changes in v2 patches (as compared to v1
+patches). For the reference, I checked it by applying on top of this
+master commit: 7bf2a52b4943 ("Merge tag 'xilinx-for-v2025.10-rc1-v2'
+of https://source.denx.de/u-boot/custodians/u-boot-microblaze").
 
-Please fix, thanks.
+Can I ask which tree you are trying to apply it to? Also, if possible
+please share the errors you are seeing when applying this.
 
---=20
-Tom
+Thanks!
 
---hsNJLLOZPlyvyUdY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIKBSwAKCRAr4qD1Cr/k
-Ci46AP9WmlgrX8yEDJ92qg+04s9BYgVjX14zW3tG53UidQjWFQD/RjO1kr98pC9z
-h+g3PvKRkBf7w4L5qxWCed/qOHGvnw8=
-=Ytks
------END PGP SIGNATURE-----
-
---hsNJLLOZPlyvyUdY--
+[snip]
