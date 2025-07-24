@@ -4,71 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 147A1C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 18:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D33C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 18:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4118D838DD;
-	Thu, 24 Jul 2025 20:51:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AACEC838DF;
+	Thu, 24 Jul 2025 20:54:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XEKK3VHN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dcMDuGzT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9F53838DF; Thu, 24 Jul 2025 20:51:34 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AC9783844
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 20:51:32 +0200 (CEST)
+ id 36D95838E7; Thu, 24 Jul 2025 20:54:14 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A82D83844
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 20:54:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56OIpRID1557098;
- Thu, 24 Jul 2025 13:51:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753383087;
- bh=ummnQnzNyXtKkncU5dFqvldbU25dL7efsyRylCj1vnw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=XEKK3VHNm1Tqc8dAVFsmR7jK6gJB+7J60CAi72yWZPztiOLkMomz/i6ctctDTjUaF
- RAHDYw5w+ktkEFBergkBn4q0oizj53l8NK6nYh5iIpgglcm1lFWFEJhxqNaDEzogEQ
- 1FZuzIa8qlCOslUdJgJXV5wj5u2tL+mMKoVDRW0g=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56OIpRuF3297883
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 24 Jul 2025 13:51:27 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 24
- Jul 2025 13:51:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 24 Jul 2025 13:51:27 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56OIpRsb592956;
- Thu, 24 Jul 2025 13:51:27 -0500
-Message-ID: <314d7869-dd80-423b-8d7a-0599ecea3b51@ti.com>
-Date: Thu, 24 Jul 2025 13:51:27 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-73e82d2ec21so686283a34.2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 11:54:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753383250; x=1753988050; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PVWsN/A2zfvV6A4YksVx+LsY5KUjgVKSCU4pCG7Botw=;
+ b=dcMDuGzTLgnjiJm3q0vN1ajfO0kPLOIXrMUXR2ctMzmVRs5aEEOV198MKsfUzl3fzn
+ F/M6AwPRmfBNLzUevUymQdXUvLUJbkMeD6L7oQsg/euncHYXn9Kvn74UmvsYSZ6HZ+Wl
+ WmtUEyXAWdN7T6YSVxFu2FRSakrjTft+BzaSw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753383250; x=1753988050;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PVWsN/A2zfvV6A4YksVx+LsY5KUjgVKSCU4pCG7Botw=;
+ b=DNAmUmC497ObmWxNRvn2DphEVdaj7f7itTuRSV6cGbjwsbPk4sVr7bvg3svzxQPMRt
+ ngHGzm81NvyCWKrZ4csZl3XDn2ciQnH1lHTe4Kn4O+/REVuylP5YwrkyXU95O0p+dpLo
+ UNDnD9z4M7qcY8I0my1t2T4qD2WUHSr4VpycT8leie/21MjhyKzzi6pSBXAtl4a/nAhP
+ WXb0VMag5YqDV6HxfpUzqJU9+I07PrIBLVccLd8UYwT8t2sWO1alsoRPpUeZyP/jzAam
+ wkUq9ciqy6BWJGej0b6pDOLIBQqZ1BYDaHyJHtaRHAjP2H5zidqpjMK1PN8Jn3SnqegO
+ gnNg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFhnMwg5FvZG1qNjtEXxF8STUPM6MEpwgFvIQ3m4yn5HQT5Dxs3a4BesCXzVq7Zv2Yvjv+QoU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyl4q6ZisQI/gIql1cxbQgo2VZH+swIsLQVU5xzeXW96eK/sYZr
+ l443G8+PXLoCA3Z/p/3Nq2c4VdgAWgfl/gW9cxOEveBFovTrow8pjB3j4/jb0rvTfWpdCN1n9Oe
+ 1irqxlpY=
+X-Gm-Gg: ASbGncsyuQzxpHI3dkcSTOmgVVjJ9qdbuCHT6pg7yk5M5S1gpUMNGwkW0WmK/68Jtba
+ MUpLtdINSP4rjUnabMbcNg2ArWC3eqOtZ/mFxjmUe3RnVAFSI8P+CgDDpiwFYNDUqmJyZdk0UmH
+ 3peC62434JLIZrPahHcdxaojg0wq+xsIDYUd5yBPk4tiyCwDnMt6L/5W00wi5gK43UJnZTjNN6L
+ 9CjsM09oa2BoJIsZA3tv3+HeqpP4IIk5pbF3MxmHnBgNiM0+8wMSczzfzr+Qp0RlCSJ1S3pQA9v
+ PAzpXBnrTdQb/UvLGFKf/v0+TStA8hC6Sf0KrVRlYaaDNrzA5/YY+wgo8gQAQukFwrtZpDkDhxs
+ +VcK6LZ2lx+n0J9EaRQTsHXJoMud59PcmnVK+qSJJqYJzHzsqNT8pjFNt
+X-Google-Smtp-Source: AGHT+IGXj4csGCFOITWcbjb+fAqaM+sG9pARilHhiG2gZ+6Ibr3zSyGERy7N0rJhrQSj3BIsAmVo/w==
+X-Received: by 2002:a05:6830:3741:b0:73e:5def:537 with SMTP id
+ 46e09a7af769-7408898cf54mr7676588a34.21.1753383250199; 
+ Thu, 24 Jul 2025 11:54:10 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7412d2eb6c4sm363528a34.43.2025.07.24.11.54.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Jul 2025 11:54:09 -0700 (PDT)
+Date: Thu, 24 Jul 2025 12:54:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: Eoin Dickson <Eoin.Dickson@microchip.com>, u-boot@lists.denx.de,
+ rick@andestech.com, Conor.Dooley@microchip.com,
+ Jamie.Gibbons@microchip.com, Praveen.Kumar@microchip.com,
+ Cyril.Jean@microchip.com, jagan@amarulasolutions.com
+Subject: Re: [PATCH v3 1/2] gpio: add PolarFire SoC GPIO and Core GPIO driver
+Message-ID: <20250724185407.GA1808768@bill-the-cat>
+References: <20250708130121.1769247-1-Eoin.Dickson@microchip.com>
+ <20250708130121.1769247-2-Eoin.Dickson@microchip.com>
+ <aHiMY22VV6ib7JzI@swlinux02>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mach-k3: am62*: am62*_init: Prohibit boot from UDA w/
- eMMC boot
-To: Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, <u-boot@lists.denx.de>
-References: <20250710171135.669838-1-jm@ti.com>
- <20250717152950.n5bfcobot66stpz3@bryanbrattlof.com>
- <20250717160213.gs5m6cdpibkrvtdz@bryanbrattlof.com>
- <a5e4d6d5-4c11-4138-989b-4ef05a6e87de@ti.com>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <a5e4d6d5-4c11-4138-989b-4ef05a6e87de@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hsNJLLOZPlyvyUdY"
+Content-Disposition: inline
+In-Reply-To: <aHiMY22VV6ib7JzI@swlinux02>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,117 +103,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
 
-On 7/17/25 12:12 PM, Andrew Davis wrote:
-> On 7/17/25 11:02 AM, Bryan Brattlof wrote:
->> On July 17, 2025 thus sayeth Bryan Brattlof:
->>> On July 10, 2025 thus sayeth Judith Mendez:
->>>> This removes support from booting from UDA when in eMMC boot.
->>>>
->>>> When user selects eMMC boot [0], that is, boot from eMMC boot0 or
->>>> boot1 HW partitions, we should not boot from eMMC UDA. The current
->>>> logic confuses the end user and mixes two different boot modes.
->>>>
->>>> The logic was added for AM62A/AM62P with commit: 3b7893145e36, but
->>>
->>> If we end up respinning this we should probably use the standard
->>> 'commit: <sha> "(<msg>)"' syntax.
->>>
->>>> this is not a clean solution and fix will come later for falcon boot.
->>>>
->>>> Logic was also added for AM62X with commit: 664593464634, but this
->>>> logic is incorrect according to TRM [0] under Primary Boot Mode 
->>>> Selection
->>>> for 'eMMC Boot'.
->>>>
->>>> Fixes: 3b7893145e36 ("mach-k3: add eMMC FS boot support for am62[ap]")
->>>> Fixes: 664593464634 ("arm: mach-k3: am625: Relax emmc boot condition")
->>>> Signed-off-by: Judith Mendez <jm@ti.com>
->>>> ---
->>>>   arch/arm/mach-k3/am62ax/am62a7_init.c | 4 ----
->>>>   arch/arm/mach-k3/am62px/am62p5_init.c | 4 ----
->>>>   arch/arm/mach-k3/am62x/am625_init.c   | 4 ----
->>>>   3 files changed, 12 deletions(-)
->>>>
->>>> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c 
->>>> b/arch/arm/mach-k3/am62ax/am62a7_init.c
->>>> index edd43a1d78d..1d8644bd073 100644
->>>> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
->>>> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
->>>> @@ -217,10 +217,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const 
->>>> u32 boot_device)
->>>>       switch (bootmode) {
->>>>       case BOOT_DEVICE_EMMC:
->>>> -        if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
->>>> -            return MMCSD_MODE_EMMCBOOT;
->>>> -        if (IS_ENABLED(CONFIG_SPL_FS_FAT) || 
->>>> IS_ENABLED(CONFIG_SPL_FS_EXT4))
->>>> -            return MMCSD_MODE_FS;
->>>
->>> If we're booting from what ROM calls eMMC boot, which ROM has the
->>> limitation where we can only boot from MMC0 in 8bit 1v8 and in RAW mode.
->>> So I see the need to soften this requirement.
->>>
->>>>           return MMCSD_MODE_EMMCBOOT;
->>>>       case BOOT_DEVICE_MMC:
->>>
->>> But it also has what they call MMC/SD mode which gives us the option of
->>> booting from both MMC0 and MMC1 and in RAW or FS mode by setting the
->>> PORT and RAW pins which we can read in the WKUP_CTRL_MMR0. And can give
->>> us the same configuration as the previous boot mode.
->>>
->>
->> Wait no this is wrong. I think I should point out that this bootmode
->> only works in UDA mode. MMC/SD mode can be configured to use RAW offsets
->> or a FS to find the binary, but will not look in the boot partitions.
->>
->>> I agree if we know the next phases of boot won't fit in the boot
->>> partition we should be using this bootmode.
->>>
->>> But I know this takes away some functionality after people have
->>> already had their boards made and who cannot realistically change
->>> their bootmode pins. I wonder if we should mark this as __weak so
->>> people can override this in the board/ directory if needed?
->>
->> I still tend to agree we don't really want to modify the boodmode for
->> the next phase but with falcon mode and how massive U-Boot can be
->> sometimes. I don't think we can get away from this unless we let
->> individual boards modify this for their own need.
->>
-> 
-> Core issue is we assume all boot stages are stored on the same boot
-> media. Usually this is a good assumption, and without it we would
-> have to hard-code where the next boot stage is located at compile
-> time. The big exception being the eMMC BOOT partition which is not
-> big enough for all stages, so at some point we have to switch
-> (usually to the eMMC's UDA partition), but *when* we switch is
-> not clear. It could be after R5 SPL, or A53 SPL, or after
-> U-Boot proper (only kernel/rootfs need stored on UDA).
-> 
-> The logic we have in U-Boot now is that you pick when you want to
-> switch by disabling CONFIG_SUPPORT_EMMC_BOOT for the stage before
-> the stage on the UDA FS partition. But this is confusing, forces
-> FS mode, and only works if you don't switch between the two
-> A53 stages.
-> 
-> Some better way to configure when to switch would be useful,
-> and not just for eMMC, for instance I test R5 SPL by loading test
-> builds over UART, but I want the next stages that I'm not testing
-> to be loaded from the SD card, could we make a simple way to encode
-> this without overwriting spl_boot_device()?
+--hsNJLLOZPlyvyUdY
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The goal of this patch was to clean up code due to questions we
-get asked: I am booting with eMMC boot, but why is the wrong
-image used, eMMC boot doesn't boot from UDA, why is the code returning
-MMCSD_MODE_FS, etc... What you are suggesting is to further enhance
-the feature that we have atm. If the end-user selects eMMC boot
-based-off the TRM boot mode pins and with some flags or bits, we
-can select not only MMCSD boot from UDA, but other boot modes, won't
-this make the issue worse???
+On Thu, Jul 17, 2025 at 01:38:43PM +0800, Leo Liang wrote:
+> On Tue, Jul 08, 2025 at 06:31:20PM +0530, Eoin Dickson wrote:
+> > From: Eoin Dickson <eoin.dickson@microchip.com>
+> >=20
+> > This driver adds GPIO support for PolarFire SoC family, this is required
+> > to add sd card support on the Beagle-V-Fire as it uses GPIO chip selects
+> >=20
+> > Signed-off-by: Eoin Dickson <eoin.dickson@microchip.com>
+> > ---
+> >  drivers/gpio/Kconfig     |   5 +
+> >  drivers/gpio/Makefile    |   1 +
+> >  drivers/gpio/mpfs_gpio.c | 198 +++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 204 insertions(+)
+> >  create mode 100644 drivers/gpio/mpfs_gpio.c
+>=20
+> Acked-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 
-~ Judith
+Nothing enables this driver today. Enabling it on sandbox gives:
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c: In function =E2=80=
+=98mchp_gpio_probe=E2=80=99:
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:139:20: error: assi=
+gnment to =E2=80=98const struct mpfs_gpio_reg_offsets *=E2=80=99 from =E2=
+=80=98ulong=E2=80=99 {aka =E2=80=98long unsigned int=E2=80=99} makes pointe=
+r from integer without a cast [-Werror=3Dint-conversion]
+  139 |         plat->regs =3D dev_get_driver_data(dev);
+      |                    ^
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c: At top level:
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:163:25: error: init=
+ialization of =E2=80=98long unsigned int=E2=80=99 from =E2=80=98const struc=
+t mpfs_gpio_reg_offsets *=E2=80=99 makes integer from pointer without a cas=
+t [-Werror=3Dint-conversion]
+  163 |                 .data =3D &mpfs_reg_offsets,
+      |                         ^
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:163:25: note: (near=
+ initialization for =E2=80=98mchp_gpio_match[0].data=E2=80=99)
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:166:25: error: init=
+ialization of =E2=80=98long unsigned int=E2=80=99 from =E2=80=98const struc=
+t mpfs_gpio_reg_offsets *=E2=80=99 makes integer from pointer without a cas=
+t [-Werror=3Dint-conversion]
+  166 |                 .data =3D &coregpio_reg_offsets,
+      |                         ^
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:166:25: note: (near=
+ initialization for =E2=80=98mchp_gpio_match[1].data=E2=80=99)
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:174:35: error: init=
+ialization of =E2=80=98int (*)(struct udevice *, unsigned int)=E2=80=99 fro=
+m incompatible pointer type =E2=80=98_Bool (*)(struct udevice *, u32)=E2=80=
+=99 {aka =E2=80=98_Bool (*)(struct udevice *, unsigned int)=E2=80=99} [-Wer=
+ror=3Dincompatible-pointer-types]
+  174 |         .get_value              =3D mchp_gpio_get_value,
+      |                                   ^~~~~~~~~~~~~~~~~~~
+/home/trini/work/u-boot/u-boot/drivers/gpio/mpfs_gpio.c:174:35: note: (near=
+ initialization for =E2=80=98mchp_gpio_ops.get_value=E2=80=99)
+cc1: all warnings being treated as errors
 
+Please fix, thanks.
 
+--=20
+Tom
 
+--hsNJLLOZPlyvyUdY
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIKBSwAKCRAr4qD1Cr/k
+Ci46AP9WmlgrX8yEDJ92qg+04s9BYgVjX14zW3tG53UidQjWFQD/RjO1kr98pC9z
+h+g3PvKRkBf7w4L5qxWCed/qOHGvnw8=
+=Ytks
+-----END PGP SIGNATURE-----
+
+--hsNJLLOZPlyvyUdY--
