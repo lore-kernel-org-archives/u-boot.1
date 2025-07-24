@@ -4,205 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 268A7C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 07:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A87DAC83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 07:33:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA95E83641;
-	Thu, 24 Jul 2025 09:07:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 186528365E;
+	Thu, 24 Jul 2025 09:33:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3LkJ+R5v";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MKqNbibU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4788083653; Thu, 24 Jul 2025 09:07:15 +0200 (CEST)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on20610.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2407::610])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9AAE783655; Thu, 24 Jul 2025 09:33:24 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 465B48362A
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 09:07:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BD1783669
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 09:33:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fMClIJM2xEy/3cYSbV0YI7FvN9gcNY0+nr8dlungquS+tbMTk1nyzXcMzAbbUEaMpeKZWtrwJY1TfABogfJo9dN+k3Md8XuM2tuiAIKUN1TBKtL66EPOh8jgAXu2mycbRXPkvb8kD5b8UGR9lqHLWrEjDBcwegfhm1PB96eFK0fgLz9nFoJf8r2arQLwBBDmJze0aUcx2MUeWWdmZL1P4/qiMMbxgVdoa87Xf2MtE+bmpI+yP8dvZuet4hZPT3WyBVfKVywRMoa7p6nNIigcnKTBzOjq1ZzQJUgGbmeA5tRkweFrBEgcltGJUiFSKE8CgYvnTXfCWX1o4DffX2mBuQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PWA5aUgaBNUdzLHFdfw0TZVXX0NLHjZrPcTyJJHXpuU=;
- b=k4519BKm1CWSjcs3cJiBp4zOauEHamqJoT+txO3w98pT4R+RzF7/laCMaXVEkpY9eT+y6E8F87bymVthNiqnFuOH5iIVjerM60Z+pdQpdxS8fKW7vUkIRgX3rQ86bNq/XMVo9mTolEZJsSn1V9nKFANICoVRQFHGPCKNZ4P158UprfC7nJCqqpRMc3aeDZ0vyvRSLx0Y7bUCtzYC7C780YWHTTo++CEEE7aWNXjZ7ZZttEunfgxU4/vMFGxMdde8JxUNSFhu+UV7eoUYOjMhDznO+v6Y7jCyaD3E3WETKdcLKKX7JnFCiguMLQQJUvB6M6XtHQQUdBO2nqHf1p6DiA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PWA5aUgaBNUdzLHFdfw0TZVXX0NLHjZrPcTyJJHXpuU=;
- b=3LkJ+R5v7kJDgvPx1kJj4E3XTm9pMxPrODPYORBuEe+8Nnd7+t1MNDgKm8EgROZpjJY7UN/KMuo3Zp254knMI09uZ0OLJZ4jVj+YQtgZNv4trSNuOSuWV7Ge7ebe4z7wKmmI9DLv92IPW0XHFP18ZiyLiKG5H2WpTCYcZ3KcjuA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DS2PR12MB9661.namprd12.prod.outlook.com (2603:10b6:8:27b::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.22; Thu, 24 Jul
- 2025 07:07:10 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.8943.029; Thu, 24 Jul 2025
- 07:07:10 +0000
-Message-ID: <b7657f36-0268-4cdb-84c9-96a6ee2db8ed@amd.com>
-Date: Thu, 24 Jul 2025 09:07:00 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] firmware: zynqmp: Simplify power-domain driver bind
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Prasad Kummari <prasad.kummari@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <c75627e92eeaffedf0f7e682edd4f6f39f0b5706.1752826352.git.michal.simek@amd.com>
-Content-Language: en-US
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <c75627e92eeaffedf0f7e682edd4f6f39f0b5706.1752826352.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR10CA0109.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:803:28::38) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aef575ad59eso116030466b.2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 00:33:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1753342402; x=1753947202; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3easQBFGuv9t7rYjXTWDF1fSzLR0+RX/O6Bk/T4ZYAg=;
+ b=MKqNbibUIK9cFL3/5TZHsR/jNKl8IFTQ8iiKoFG6x9C0TU7Vt+b0sMlU+mcdv8lKpk
+ b924615QZ5Oj21+h9P8K5Shdf8hMuaNnC8AzKC/q7Z3ejv168L+XtEMIMgmQ5/Dvemr4
+ BR+FmjR7Q2XhxC1x9VNfC8cLTBeY+tW72hXgnkFc2kExFZhhLz4phw9r4OW31hEp1tC7
+ CBcHQTUUjllFNgKuXWWHIflRMpJUAKlaA4Xe9Twf0YCSv2zacJA7sT8Ds0M4GhCIGUFl
+ kDIDHsilCHFIGWnLwmGymuRmy9aPPtOa2uw4PW9W0ea5k3kCiko8aEzud6tcSKAa5uVy
+ mNvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753342402; x=1753947202;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3easQBFGuv9t7rYjXTWDF1fSzLR0+RX/O6Bk/T4ZYAg=;
+ b=VldCo8YPCzDs76VhvtaQ3/Tf0UEGJqGqAgbQN53/lPqBEN595QtWfdtRl/ATneAe9q
+ tTejc7SqXLt2aTl89PcwtQjUNLSqP0K7MCVFtdUVNhMz9mCqTnHub3B9uS4y+chfpnDj
+ P0u4ueWYdUBa0cJeiADWCnWwolR+/n11AR2Yxx+1WrC1Mk1k9saC27tfEUlW5p3DAMQg
+ 0CwCOYVNTVds1AFrzcSTMYqgbn4NplFQNhtYQVwhSahDFY+J1orq9ZljYOCRAn+QfB9+
+ xjC2cmR2/7ieXNQQpE3ZgVnOMDMG6W8T7qGS6NqJE3DUZVvbAWTECKSqJQC0jirYBOll
+ NWMw==
+X-Gm-Message-State: AOJu0YzxU6QOFcEkLivJjxmgiBKpPgJ1YXZdz1Mdoj3cQcn5LT2CffGK
+ /yNGykCGgRo9hPvQS4wop1Wd+m356GW+exxSm5h6CDKlMobdCMDQBEN3m45TWQLNFTWWBFeK2RQ
+ p1GPHdbyaKI2uLIA/JbnWUU5Nu/jGFqb82+Pc
+X-Gm-Gg: ASbGncug6yIe2LjHM3zKtkRqhz795Pymbk1VkEK1zuMfQ5i+FSuT0FDO2AM3iJLSvjb
+ mwwvs+G5F93XNDdD9yHLWszn+Uujhn1SrciOPkLg5IOVtjWbnc+9x58+xNf287xZPSsTu9xL4/0
+ dyiRXfsKLqnEQgZLKzjt22YQN1Aj1RCTiQu5avLqkNR7MZNiKxdntpVlNJoxATGoaf7wIP2tJXz
+ Z3LFxYmSXsSXMF3/IW7rJY3P4hrG+kuWGT31zYGz7CmpKi7SuM=
+X-Google-Smtp-Source: AGHT+IF6qiaZ0lcLzOkLYxmylovLXpmqRw3LJKRyOVSichhA4nxbplZsgxcQkhFUGgqdmkqItUSq0LpVGAlE7I1vHvE=
+X-Received: by 2002:a17:907:9444:b0:ae3:5e70:330d with SMTP id
+ a640c23a62f3a-af2f66c1f64mr599486866b.12.1753342401334; Thu, 24 Jul 2025
+ 00:33:21 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS2PR12MB9661:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3fdcfb0c-c427-4711-0c08-08ddca80b55a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TS8yMCtKbmxwbUhDMCtZdGNpUVR0TFJNT3I0NGo2RXNoTXF4bTBHS1BoK05u?=
- =?utf-8?B?UTA1UENVNEtFbzNndUNOTm5jM0x2b05aY0VLaDNuQnUrellhMnhwMlNOMnE4?=
- =?utf-8?B?VmsxRjVoQ2lJeUxVUEZxSHFCbVFnRThwZDZ2VDZ2YWJ4UCtSSEh5dFl0UDln?=
- =?utf-8?B?V3NxNmJkcWpBcGpIMzhDYU1UUzZGc3FSSEp5NktxMnM3blJ5N1ZQWWhSVWd6?=
- =?utf-8?B?TitQWSsxYWRUVmMzUVNWSjZ3UlpDZ2Zoekh4L0lXazJvVThIWjRnM3Ara2ZY?=
- =?utf-8?B?WEF3Wm5OMGd0U285cFBGTlE4OGoreDA4Ry8wK1lKSFJOdEk4MTR1cjgvek10?=
- =?utf-8?B?emZqTnh6ZC9UTjc4TzZHcTVKQUE5M1hSemtWNndrSUE4a3Z4VTE0ZUdtVngw?=
- =?utf-8?B?V1VWM05OVm9FL0M2M0xXd2JWMDBlbytXWm1hb0dENUFVczdFYnU5dVRyYzdB?=
- =?utf-8?B?Q1F4YVFsTDZrbkxYUlc3cE1MaHcxQ0grN1dJa214dGFMR3FZakpNWW9uZTFP?=
- =?utf-8?B?Y0FNcXMyMG5WMG0ySk9GcjdUUXkvM3hyVHFXcXUwaVdtMEdFR015MnlxTWdI?=
- =?utf-8?B?SitqMkVxdWExajFCK3NpRnQ5TTlXVk9pUktaMFh0UmdTdGFSTkVpMHVtZVhB?=
- =?utf-8?B?TVpPWE45RVg0UDNCNGR6K3JLeEFsZE5FK200aVBIcUdaOTZHRTJWTHZuQ2lI?=
- =?utf-8?B?bGdiaGJYWHZtMFJHWDNwOG5BMUNhV0gxanRxaStYck9JdkF6MlRrZjI4b0xG?=
- =?utf-8?B?THRQMmxQNXZzTlZJb0p5RDNwUHhSaUFxVjNmU2tpOHlsaHV5ZjF3RVBPa21i?=
- =?utf-8?B?RFMzYmZLRktyUmtKYU14OS9iZUpqK2hVcHRXaWxwZ2YzQXI4aUpPOEFxSFVC?=
- =?utf-8?B?T0NHeVk5RC9EZkJTd3JzZ2FxUHFmQ3ZXTnh0TDYvak1nMW83Z2xJVDA4RDlZ?=
- =?utf-8?B?eUVVSHFKQ253ekNoeE9xQzBEa2NWOVNSc0htemx6WDlIa3dSdUVRenNvQTJQ?=
- =?utf-8?B?VlBiUHh5V1dPcVVEQjkvekdlU1djRnJWNjF1TFh6ZnhvY2pqTEZ6Z056RWhF?=
- =?utf-8?B?NUJkcTUwUVc4RXRzWHNpZmRnSEZmSzFlUzFiRnk5dnJwbThXbm5zM2NrUlUv?=
- =?utf-8?B?OWZCbVQ3aTdGQzRRdnorc1U0OGpRci92ejZBcmZVVTEzUkM0YWlZamVEYk9X?=
- =?utf-8?B?Z1VDRkcwdnNCVFBKYVlZMDc3NXRjcGR4em04WE9oMXVRSmt2NWxCbWZDV0tp?=
- =?utf-8?B?NU1PeHBvT3FYRlF4Uy9YSUFDQXlPWFlUSG1EVlhCS1AzNFZnNEpEYXhMMVRl?=
- =?utf-8?B?bERHL0ZWZGVpeHhnMXFpbVphdmJya0xuY3pWbFFhVERMRVlILzhVQXhpQWFk?=
- =?utf-8?B?VDNOOEMvYkpEOTFjc2VBOEtOKzA4cVIyTEdoK2wyT1pnQzgwK0x6c1JjdGZl?=
- =?utf-8?B?MytTSFdQQ3JDMVhQYnllSU81WlpGZzN1SktRV2NiZnZmSjdRSU9RQ2VGcFl5?=
- =?utf-8?B?bDI5R0RrYk1rZk8yQ3dqQUFacEk2d0YzdjM1TlB3OVV0UFFXUzBPbm00bWd1?=
- =?utf-8?B?czFlK1pTeTFFZlZZYUpHT24zQ3diZFlrS1luRUlLNHQvaGZNcnNrOGgzcWlx?=
- =?utf-8?B?NlpQam1WMmVISFU1WXVxbVZydVFHcFM0UVBjVFVtTWFEdXg4TkxkclpyZ3hS?=
- =?utf-8?B?ZGNDeTBpNS9BUGlrTDBPQzRaN3N2SGRycGwxUXlXaWMxUUdXRVMvRTUrQmN5?=
- =?utf-8?B?aVpyTDRqd21Ha1dPWVRlRHRqVWtIN1BkVW50Ymc3Q3lMenZRUmp2cWZQUCtQ?=
- =?utf-8?B?Z0NsdmZMZDAzL3FvRzR3TGRvM04zQ1h5VHdUWkVMblJrVFFJZlpNc2gyeG1x?=
- =?utf-8?B?OUpaWjNCT1UrQlQyU0pDT3VmeVdzVUJBZEttV25JT00yYkF2Z3M3R0p0eERP?=
- =?utf-8?Q?cP3HgENhq7Q=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VTNuSklvMjQyeTdMdXVQM09FY0lXbUN5V2dPY3pOQ2N1d1N6L0g1WVh5QmxN?=
- =?utf-8?B?bTFmRGkwdlVGbitLZkQyZVBkOGEzdHJQZVVnZ3hBUThNMzZteFA2blMwN0N4?=
- =?utf-8?B?U2NqQWNpK2xEVU81bFpTeTNnb0lYUkNWUjBzc1ZBWGsvVjV1cFprRWpOU3RI?=
- =?utf-8?B?dFlyVzdxSHR5WFg3cXhFUXV3RzJjU3lmejVhQ1grdTA3enpHeFYzWFFEWUh1?=
- =?utf-8?B?WU5pQ2g5UWtjQWFYRnZndTNCRHBGMlJrd1hCS05mSjdzNFU4UklMN1pEcGtn?=
- =?utf-8?B?VC84RDhEb21sb0RLQW9IbGlRclV1QkNqaEtldzEwSVBtdnZFUVJhZVljSk1s?=
- =?utf-8?B?YWtiTlhBeHpNaU4zamZ5R0VmK3pzbVBQd1MweitrTERibG5kdG5FTFpVMVcw?=
- =?utf-8?B?YSt2YXl2TGpONE9OQmdXZkdlQitncmNNVFA2RVZNT1dQeWFwOXRaSG1INThL?=
- =?utf-8?B?QjhRbWtxTkJrbHBVRCswOUZ2eDl3eFk2KzRwNzl5RllrQnFCRG42QnZrdmdl?=
- =?utf-8?B?UG4xNjN2c3pIdnFXQVRvMXp2K0lQNFhIS0h3YkNnWTlwVFo1NVdKVWovR3Jr?=
- =?utf-8?B?M3RKRFFMazlMb3AvSzNQdkVqN3kxRldRQmNqeDJnYXdaRFFmWXQ4eEgvdElD?=
- =?utf-8?B?eUpheVkzejZsS25YZW9DNk5ObS9lbU91cFIrdTI0T2pSOHVpMmZnUlQ4MzJp?=
- =?utf-8?B?OWNNcHA3TTF6N0NlNnlxOHZLQjYwMFRhdU9GK2FCS2Q4YUtIYXBDQU5uYTBN?=
- =?utf-8?B?Wldid1F0NG5hZ0lJYmd3TmVsZWpDL2xyZ0txMHFjKzZCQWcvNy9sMHZrNUFU?=
- =?utf-8?B?Zzh2S3Q3TjVtRFNib2duSTIvK25ZVDBTUWhKVTFOZGFYM3FsOFZLcVBoaDlL?=
- =?utf-8?B?TW1oenRGT1pVcFZON3JPTGtMYU5vcHFMZnBQNCtQNUxSMVErTHdnNGF2UmNi?=
- =?utf-8?B?NzgvQW8xeWtNUkgzQlBNQUZSaWJnUWJuK2tvUW4zeFhmS1FSaGhJdDJuRkY5?=
- =?utf-8?B?MWtadW9TRElyeXBLbkxudHFsRXR1cVZGMlpscWdsRTlHQisvYzlFTWJLbGJj?=
- =?utf-8?B?VFM2WDQ1NGJhOXRScFBkTVhTRDVhTEFqcUR6dGlJdEZkNmV0RzJnUU9rYWt2?=
- =?utf-8?B?TXA1OVNUbnFZRlJQeGdUSTc4NFkraElMM25oQWZaMU9lZkplVWhSMFF4VlI5?=
- =?utf-8?B?QXVVSVdEaXBTSExwNDZGRDJvbXhtcFZybGpZZlpSeHBJZjZRa3hCVlNNZ2ZM?=
- =?utf-8?B?NmZtVDh5MUQ5NFRkS2dVZ0pld3dCbjAwYVJEYldzNEJKU1lwM2E4bCtaM3pO?=
- =?utf-8?B?T1pJQmc5Z2d4NHBaVkNrSDFQcVZsUnpiWHM3dUoyd3VwK3FUNGFlZ1NHTkp4?=
- =?utf-8?B?dU9BL3FiaEJHbjhTQVdkbzkxR2xSaGxqUTRmQVpzL0J4MTE3YTBENnF4UGtn?=
- =?utf-8?B?cC9vOXBPcCswa1F0Z2VMTitKY29OZG5LdVlCaXpycU5IVFMzQk56TkVyc1dV?=
- =?utf-8?B?L3Bac2s0eGdFYlUweThLVlB4eU1Ndlo2T29adGd5b1dYdnpVT2JSbWlvTVYy?=
- =?utf-8?B?OWVBUnZ4em9GTHV4Z3RBWHNpMjEvLzBIQWgzaURKM0lWWHU0SmIvdnRQU1BL?=
- =?utf-8?B?TWtkWEw3eWhxV3ZYSUQwREpBT3pxeXNzcjRiSE1laE1hQnB0MzNDckF4Y29u?=
- =?utf-8?B?dWZqNlZNSE1kQm9HSFl1b1BiU0pnTUorNFpjRDRlVzJpL1hBWnhjZmpmcHJv?=
- =?utf-8?B?ZEVpUVRlZDZmSmFUV0ZqaTZFRHpqbWVTbTkzc21RRnJ3dHlWRzdiUmtpdlV1?=
- =?utf-8?B?bUZpcHE3QlhBbnBjQVRBZEZmbWJNTTZNcUxBeHhIUEF2M2ozd2h4Kzk2V2cy?=
- =?utf-8?B?cjEzeHFTd21IaWxoSk1UcTdOb0RxdGk1akowbTNHNUg2ajNQaGVVNkRKdUV3?=
- =?utf-8?B?MFIzM0FTWEFybHNuQmdXc2wvNG94K2I3Y1ovWk1GUnlBQW1sdlhEQjVYUTFS?=
- =?utf-8?B?S1BwU0Y2dDRvdlo5RjBLWkp0dTB1OHZFeHZ0andDT3pFQW9hM2dBd09jaEJj?=
- =?utf-8?B?WjNHUFJJM2R1M1hLd2p0THgyMi9aVko5SEEyRkxTK2FzRU5Nbk1EQklaRmla?=
- =?utf-8?Q?nLmVc3a2J2a89XVLPNG/3AbX4?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3fdcfb0c-c427-4711-0c08-08ddca80b55a
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2025 07:07:10.6974 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Gwa4wAyz1S0XAtXWSJQSLCqKb2w3FDMQfTxlg6lhtpRaEl/Zogd8Siyb5q6rLjVT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9661
+References: <jwv8qkea94d.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+In-Reply-To: <jwv8qkea94d.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 24 Jul 2025 08:33:10 +0100
+X-Gm-Features: Ac12FXx16CN2rIRQmC1ReWG_XzPOSjxl3vSFVlI7Qsfnwr98E9F2pMjTJVu9obU
+Message-ID: <CALeDE9NDru0WLy14gFRAnk=O+hVUS7D-b1Qg3Su+96FQQ8EVBA@mail.gmail.com>
+Subject: Re: HDMI support for rockchip SBC
+To: Stefan Monnier <monnier@iro.umontreal.ca>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -219,37 +90,243 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 23 Jul 2025 at 23:40, Stefan Monnier <monnier@iro.umontreal.ca> wrote:
+>
+> [ AFAICT this mailing-list is used for development of U-Boot more than
+>   for users of U-Boot.  I s there a more appropriate mailing-list, for
+>   users?  ]
+>
+> I'm building the bootloader for two different SBCs, both based on rk3568
+> (NanoPi R5S and Odroid-M1), and using the default config for those boards
+> I can easily make a bootloader that successfully loads my Debian
+> installation, but sadly it's all "blind" until the Linux kernel
+> initializes the display.
+>
+> I saw that the default config does not include support for the HDMI
+> output, so I figured it would be easy to fix but I still haven't managed
+> to get any visual.
+>
+> I made the following changes:
+>
+> - Set CONFIG_BOOTDELAY to 10, to minimize the risk that my monitor
+>   sleeps through it all.
+> - I enabled: CONFIG_USB_KEYBOARD, CONFIG_VIDEO, CONFIG_VIDEO_ROCKCHIP,
+>   CONFIG_DISPLAY_ROCKCHIP_HDMI, CONFIG_DISPLAY, and CONFIG_VIDEO_DT_SIMPLEFB.
+>
+> but still, nothing shows up on my screen until the Linux kernel
+> configures the display (and pressing a key on the keyboard doesn't seem
+> to prevent autobooting).
+>
+> What am I missing?
 
+Support for the rk35xx isn't upstream yet, this patch series is likely
+a good start:
+https://lists.denx.de/pipermail/u-boot/2025-June/591737.html
 
-On 7/18/25 10:12, Michal Simek wrote:
-> CONFIG_IS_ENABLED macro is covering CONFIG_POWER_DOMAIN or
-> CONFIG_SPL_POWER_DOMAIN Kconfig symbols based on build target which
-> simplify logic around binding power domain driver.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->   drivers/firmware/firmware-zynqmp.c | 7 ++-----
->   1 file changed, 2 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-> index d18ae523b6bc..e07ec3929b29 100644
-> --- a/drivers/firmware/firmware-zynqmp.c
-> +++ b/drivers/firmware/firmware-zynqmp.c
-> @@ -500,11 +500,8 @@ static int zynqmp_firmware_bind(struct udevice *dev)
->   	if (!smc_call_handler)
->   		return -EINVAL;
->   
-> -	if ((IS_ENABLED(CONFIG_XPL_BUILD) &&
-> -	     IS_ENABLED(CONFIG_SPL_POWER_DOMAIN) &&
-> -	     IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN)) ||
-> -	     (!IS_ENABLED(CONFIG_XPL_BUILD) &&
-> -	      IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN))) {
-> +	if (CONFIG_IS_ENABLED(POWER_DOMAIN) &&
-> +	    IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN)) {
->   		ret = device_bind_driver_to_node(dev, "zynqmp_power_domain",
->   						 "zynqmp_power_domain",
->   						 dev_ofnode(dev), &child);
-
-Applied.
-M
+>         Stefan
+>
+>
+> --- .config.ORIG        2025-07-23 20:27:50.725403359 +0000
+> +++ .config     2025-07-23 21:12:52.281271378 +0000
+> @@ -464,6 +464,7 @@
+>  CONFIG_BOOTSTD_FULL=y
+>  CONFIG_BOOTSTD_DEFAULTS=y
+>  CONFIG_BOOTSTD_BOOTCOMMAND=y
+> +CONFIG_BOOTSTD_MENU=y
+>  CONFIG_BOOTMETH_GLOBAL=y
+>  # CONFIG_BOOTMETH_ANDROID is not set
+>  # CONFIG_BOOTMETH_CROS is not set
+> @@ -480,6 +481,7 @@
+>  # CONFIG_BOOTMETH_VBE_ABREC is not set
+>  CONFIG_BOOTMETH_VBE_SIMPLE_OS=y
+>  # CONFIG_SPL_BOOTMETH_VBE_SIMPLE is not set
+> +CONFIG_EXPO=y
+>  # CONFIG_BOOTMETH_RAUC is not set
+>  CONFIG_BOOTMETH_SCRIPT=y
+>  # CONFIG_UPL is not set
+> @@ -512,7 +514,7 @@
+>  # Autoboot options
+>  #
+>  CONFIG_AUTOBOOT=y
+> -CONFIG_BOOTDELAY=2
+> +CONFIG_BOOTDELAY=10
+>  # CONFIG_AUTOBOOT_KEYED is not set
+>  # CONFIG_AUTOBOOT_USE_MENUKEY is not set
+>  # CONFIG_BOOT_RETRY is not set
+> @@ -531,6 +533,7 @@
+>  # CONFIG_OF_SYSTEM_SETUP is not set
+>  # CONFIG_OF_STDOUT_VIA_ALIAS is not set
+>  # CONFIG_FDT_FIXUP_PARTITIONS is not set
+> +# CONFIG_FDT_SIMPLEFB is not set
+>  CONFIG_ARCH_FIXUP_FDT_MEMORY=y
+>  # CONFIG_USE_BOOTARGS is not set
+>  # CONFIG_BOOTARGS_SUBST is not set
+> @@ -544,6 +547,7 @@
+>  #
+>  # Configuration editor
+>  #
+> +# CONFIG_CEDIT is not set
+>
+>  #
+>  # Console
+> @@ -565,7 +569,7 @@
+>  # CONFIG_SYS_CONSOLE_IS_IN_ENV is not set
+>  # CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE is not set
+>  # CONFIG_SYS_CONSOLE_INFO_QUIET is not set
+> -# CONFIG_SYS_STDIO_DEREGISTER is not set
+> +CONFIG_SYS_STDIO_DEREGISTER=y
+>  # CONFIG_SPL_SYS_STDIO_DEREGISTER is not set
+>  # CONFIG_SYS_DEVICE_NULLDEV is not set
+>
+> @@ -945,6 +949,7 @@
+>  # Misc commands
+>  #
+>  # CONFIG_CMD_2048 is not set
+> +# CONFIG_CMD_BMP is not set
+>  # CONFIG_CMD_BSP is not set
+>  CONFIG_CMD_BLOCK_CACHE=y
+>  # CONFIG_CMD_CACHE is not set
+> @@ -967,6 +972,8 @@
+>  # CONFIG_CMD_PSTORE is not set
+>  # CONFIG_CMD_TERMINAL is not set
+>  # CONFIG_CMD_UUID is not set
+> +CONFIG_CMD_VIDCONSOLE=y
+> +# CONFIG_CMD_SELECT_FONT is not set
+>
+>  #
+>  # TI specific command line interface
+> @@ -1368,9 +1375,12 @@
+>  # CONFIG_I2C_MUX is not set
+>  CONFIG_INPUT=y
+>  # CONFIG_SPL_INPUT is not set
+> -# CONFIG_DM_KEYBOARD is not set
+> +CONFIG_DM_KEYBOARD=y
+>  # CONFIG_SPL_DM_KEYBOARD is not set
+> +# CONFIG_APPLE_SPI_KEYB is not set
+> +# CONFIG_BUTTON_KEYBOARD is not set
+>  # CONFIG_CROS_EC_KEYB is not set
+> +# CONFIG_I8042_KEYB is not set
+>  # CONFIG_TWL4030_INPUT is not set
+>
+>  #
+> @@ -2138,9 +2148,13 @@
+>  # USB peripherals
+>  #
+>  CONFIG_USB_STORAGE=y
+> -# CONFIG_USB_KEYBOARD is not set
+> +CONFIG_USB_KEYBOARD=y
+>  # CONFIG_USB_ONBOARD_HUB is not set
+>  CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=1000
+> +CONFIG_USB_KEYBOARD_FN_KEYS=y
+> +CONFIG_SYS_USB_EVENT_POLL=y
+> +# CONFIG_SYS_USB_EVENT_POLL_VIA_INT_QUEUE is not set
+> +# CONFIG_SYS_USB_EVENT_POLL_VIA_CONTROL_EP is not set
+>  # CONFIG_USB_HOST_ETHER is not set
+>  # CONFIG_USB_GADGET is not set
+>  # CONFIG_SPL_USB_GADGET is not set
+> @@ -2153,7 +2167,105 @@
+>  #
+>  # Graphics support
+>  #
+> -# CONFIG_VIDEO is not set
+> +CONFIG_VIDEO=y
+> +# CONFIG_VIDEO_FONT_4X6 is not set
+> +CONFIG_VIDEO_FONT_8X16=y
+> +# CONFIG_VIDEO_FONT_SUN12X22 is not set
+> +# CONFIG_VIDEO_FONT_16X32 is not set
+> +CONFIG_VIDEO_LOGO=y
+> +CONFIG_BACKLIGHT=y
+> +CONFIG_VIDEO_PCI_DEFAULT_FB_SIZE=0x0
+> +# CONFIG_VIDEO_COPY is not set
+> +CONFIG_VIDEO_DAMAGE=y
+> +CONFIG_BACKLIGHT_PWM=y
+> +# CONFIG_BACKLIGHT_GPIO is not set
+> +CONFIG_VIDEO_BPP8=y
+> +CONFIG_VIDEO_BPP16=y
+> +CONFIG_VIDEO_BPP32=y
+> +CONFIG_VIDEO_ANSI=y
+> +# CONFIG_VIDEO_MIPI_DSI is not set
+> +CONFIG_CONSOLE_NORMAL=y
+> +# CONFIG_CONSOLE_ROTATION is not set
+> +# CONFIG_CONSOLE_TRUETYPE is not set
+> +CONFIG_SYS_WHITE_ON_BLACK=y
+> +# CONFIG_NO_FB_CLEAR is not set
+> +CONFIG_VIDEO_SYNC_MS=100
+> +CONFIG_PANEL=y
+> +CONFIG_SIMPLE_PANEL=y
+> +# CONFIG_PANEL_HX8238D is not set
+> +
+> +#
+> +# TrueType Fonts
+> +#
+> +# CONFIG_VIDEO_BOCHS is not set
+> +# CONFIG_VIDEO_VESA is not set
+> +# CONFIG_VIDEO_LCD_ANX9804 is not set
+> +# CONFIG_ATMEL_LCD_BGR555 is not set
+> +# CONFIG_VIDEO_BCM2835 is not set
+> +# CONFIG_VIDEO_LCD_ENDEAVORU is not set
+> +# CONFIG_VIDEO_LCD_HIMAX_HX8394 is not set
+> +# CONFIG_VIDEO_LCD_MOT is not set
+> +# CONFIG_VIDEO_LCD_NOVATEK_NT35510 is not set
+> +# CONFIG_VIDEO_LCD_ORISETECH_OTM8009A is not set
+> +# CONFIG_VIDEO_LCD_LG_LD070WX3 is not set
+> +# CONFIG_VIDEO_LCD_LG_LH400WV3 is not set
+> +# CONFIG_VIDEO_LCD_RAYDIUM_RM68200 is not set
+> +# CONFIG_VIDEO_LCD_RENESAS_R61307 is not set
+> +# CONFIG_VIDEO_LCD_RENESAS_R69328 is not set
+> +# CONFIG_VIDEO_LCD_SAMSUNG_LTL106HL02 is not set
+> +# CONFIG_VIDEO_LCD_SHARP_LQ079L1SX01 is not set
+> +# CONFIG_VIDEO_LCD_SHARP_LQ101R1SX01 is not set
+> +# CONFIG_VIDEO_LCD_SSD2828 is not set
+> +# CONFIG_VIDEO_LCD_TDO_TL070WSH30 is not set
+> +# CONFIG_VIDEO_LCD_HITACHI_TX10D07VM0BAA is not set
+> +# CONFIG_VIDEO_LCD_HITACHI_TX18D42VM is not set
+> +# CONFIG_VIDEO_MESON is not set
+> +# CONFIG_VIDEO_MVEBU is not set
+> +CONFIG_I2C_EDID=y
+> +# CONFIG_I2C_EDID_STANDARD is not set
+> +CONFIG_DISPLAY=y
+> +# CONFIG_NXP_TDA19988 is not set
+> +# CONFIG_ATMEL_HLCD is not set
+> +# CONFIG_BACKLIGHT_AAT2870 is not set
+> +# CONFIG_BACKLIGHT_LM3532 is not set
+> +# CONFIG_BACKLIGHT_LM3533 is not set
+> +# CONFIG_BACKLIGHT_LP855x is not set
+> +# CONFIG_AM335X_LCD is not set
+> +# CONFIG_VIDEO_EXYNOS is not set
+> +# CONFIG_LOGICORE_DP_TX is not set
+> +CONFIG_VIDEO_ROCKCHIP=y
+> +CONFIG_VIDEO_ROCKCHIP_MAX_XRES=3840
+> +CONFIG_VIDEO_ROCKCHIP_MAX_YRES=2160
+> +# CONFIG_DISPLAY_ROCKCHIP_EDP is not set
+> +# CONFIG_DISPLAY_ROCKCHIP_LVDS is not set
+> +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+> +# CONFIG_DISPLAY_ROCKCHIP_MIPI is not set
+> +# CONFIG_DISPLAY_ROCKCHIP_DW_MIPI is not set
+> +# CONFIG_VIDEO_ARM_MALIDP is not set
+> +# CONFIG_VIDEO_STM32 is not set
+> +# CONFIG_VIDEO_TIDSS is not set
+> +# CONFIG_VIDEO_BRIDGE is not set
+> +# CONFIG_HOST1X_TEGRA is not set
+> +# CONFIG_VIDEO_TEGRA is not set
+> +# CONFIG_TEGRA_BACKLIGHT_PWM is not set
+> +# CONFIG_VIDEO_TEGRA124 is not set
+> +# CONFIG_IMX_LCDIF is not set
+> +# CONFIG_VIDEO_MXS is not set
+> +# CONFIG_VIDEO_SEPS525 is not set
+> +CONFIG_CONSOLE_SCROLL_LINES=1
+> +CONFIG_VIDEO_DW_HDMI=y
+> +# CONFIG_VIDEO_SIMPLE is not set
+> +CONFIG_VIDEO_DT_SIMPLEFB=y
+> +# CONFIG_VIDEO_MCDE_SIMPLE is not set
+> +# CONFIG_OSD is not set
+> +# CONFIG_VIDEO_REMOVE is not set
+> +# CONFIG_SPLASH_SCREEN is not set
+> +# CONFIG_BMP is not set
+> +CONFIG_VIDEO_LOGO_MAX_SIZE=0x100000
+> +CONFIG_VIDEO_BMP_RLE8=y
+> +# CONFIG_BMP_16BPP is not set
+> +# CONFIG_BMP_24BPP is not set
+> +# CONFIG_BMP_32BPP is not set
+>  # CONFIG_SPL_VIDEO is not set
+>
