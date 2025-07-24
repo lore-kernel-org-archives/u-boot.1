@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D90C83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 01:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29334C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 01:37:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61F538353A;
+	by phobos.denx.de (Postfix) with ESMTP id CE21B835CB;
 	Thu, 24 Jul 2025 03:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TSF0AAJT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sTHMaDXY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 545C0835B0; Thu, 24 Jul 2025 03:37:31 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 7BD0482BA1; Thu, 24 Jul 2025 03:37:32 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37E9F82B0F
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 03:37:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6962A82BA7
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 03:37:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-41bebd9dd8dso139733b6e.2
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 18:37:29 -0700 (PDT)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-42a56f2e953so19830b6e.2
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 18:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753321048; x=1753925848; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753321049; x=1753925849; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EnPPNZaakNAolvHE1H5kfCmFK6twVJko63kiPTEeXyA=;
- b=TSF0AAJTykFMr/9tPqn2ow8fXVj65gLvO/XXdH62GqrHaBLsx0N+dRoP6lhR+UTXmc
- D2kggM5m2qAlVOO4GNWXKTUOOckiFzOkDjnlV62IcjC1bA7x9yB3DNGdIFnvVWmuxakS
- cUHw6cPF3W/Xg25/XTAAKW+ugRHm0OCA9b4Qg=
+ bh=wln+1l9QGJqp9WDl1pAFKEPNribtAiPh3wmOC4LPrVE=;
+ b=sTHMaDXYE7gnlbKJUODRxRwbDsUa5msx+P0YlvMIQSRH1xOwC7ph0G1x1TDx0Kq7hU
+ mK4OPvkroTieDNr/mXmwPzyoRkuy30omxWA3Y4KIlvEAC8OMU+N+KNQtklFDxIjRSq/C
+ M+i4mtP8UCMncgU63btw++2MSyml0w+Gh+8L0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753321048; x=1753925848;
+ d=1e100.net; s=20230601; t=1753321049; x=1753925849;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EnPPNZaakNAolvHE1H5kfCmFK6twVJko63kiPTEeXyA=;
- b=O1LqhkR9+NnRsPPPMX7y9fl/nm7BYrPGG2FyLkCnaq4EkX1OpN0VRJkOxEVs1TH/NQ
- qs3eVZWnRuH23zGr94KBkeL3Yn0CxwHQkQ7Pzs7Xt+hLVDACNxWQovvKboq518TNmjg4
- GV/qfXBL9JmGpORd1fWWYKQKvw6LtIWkIYrveSx4HqkICeP37Smeg5jRTsMOBFYW9klu
- INWVTp+eXrfYINc/aSUGT12uKXpnb8hCbgptB47EdcaVaBY8vbX1BR6xvPUhUtnCVWhe
- IyfzRPPoMIS4/shrLLrycjRYnUFAQO67lN2KE37Yz7vwb1lG3eoQ4L41wnhnIhwF8wBe
- NMXQ==
-X-Gm-Message-State: AOJu0YzoN3Gp/EGiWl0sHnp6CZZJMS7Rcuve9yFZvKeecRpbqJfn7RjP
- 1chQAzVNHI7kLTePOaKcyuMkEeOEzlbN4AzRlgjx0SKsnf8uKgreaKz5bKwmS7Yhy8g=
-X-Gm-Gg: ASbGncvmNjSiesPV/ZXwXBAdccD3AdkQKUi6OItJ554P/EQnVInen/tDjn3aRnTqkX9
- h8l/BEjNEMEojlwYa8flUyuUWM/xEmCaQ0L5gb4IDsH/eE7QB7bRwJMwVqU6DaSL3DCrAhSRRqz
- 8NurzkoYNYXy+JLiSU6mDfxYKpNgvRjKv3ZsdRHvfDf9M4QCr1D4chBU1LRdTLpE/OVcFcM3mjO
- hLSzIP0WKrzOI/oXVThTW+Nonl9aFI/hRcfPaH6rB7M65XoiWtxmNw7y0gCm80lnIpnZbUH6M16
- miNOk5HoiJzP3zteJku1Lkq3A3Bi2arYyrg/5u68tddK7+RzYvF7HTIj/CpDPnZHcSHcLujN0tj
- YVbF1w/iMVD97p9eZNnwGnZq9b7uo7bcTKgE07/gFLQN/V/LAaxPOydM=
-X-Google-Smtp-Source: AGHT+IGf3+aP9+TYLAqNP9uJUG9U2kxspCCSFvap0zBSJBUf2Ma5AZ5YFxunAZIcihIySE/xLMJXsQ==
-X-Received: by 2002:a05:6808:398a:b0:40b:3816:6637 with SMTP id
- 5614622812f47-426c6049210mr4178002b6e.24.1753321047740; 
- Wed, 23 Jul 2025 18:37:27 -0700 (PDT)
+ bh=wln+1l9QGJqp9WDl1pAFKEPNribtAiPh3wmOC4LPrVE=;
+ b=pQPUu92HfBo/7xTbNg9kC4igY16PvM7Z0yw1UA36MvFNoP8BNKI/P46j2k0hwRR3ny
+ fBcqs1MJAWYe82p4wIdTlSDYFtUnamp218CAUb7Ubo7RiufApLAjMLTSEKkBGrSBPONe
+ WuBiQKAsz29ueDDJWZDxz0irNE4SrpjcMn5KkgnFr43gAJ1BtJdVvOD6frwUpoqBA/Xi
+ S/fULMGyq4PcMR1L0tyQpAWYNK3kkxSLwk5rHzoxYpeeQ3Fm8GX5qgn4xPPzEO7Jr1Vp
+ T3SIR8fMzXsWVQkVQsbMCnn/p5LtNQWliJcb48LyTt41XzzFV34RWIDgcyuscHKro1V0
+ TD7w==
+X-Gm-Message-State: AOJu0Yz+UK9R5tzFql0uT6obb4akM+Fsoa4gMPqE+GEbCQCgmzZrmEYN
+ po8NsE3vTmOCipGwgswoaD6nWfx1fciaFmKg1U1n4wqdHYpuAZr4sGDrk0dIkAHQrmg4ndnc1sC
+ n2F8nANw=
+X-Gm-Gg: ASbGncsAQlqTYmGiSYB+VvFQNEuNhXWGlAmr1/9s6v+KPYbbPz/lwvPMoDKQfVFfAcp
+ whqH/w5cycglupzv3G5va5Z2Wc7JivEbtxg7qg77wJIbL4Z0fg4HmTVhFL9SdRf689hRNpMptFE
+ r5h4LnQDIZ+ULTi9m0xyl/aGTvK/x0pqoQT/lCpw0+Jdja2qRRarpEliIby8Xm0k4XBk6OnoNv/
+ +B860rgFobe9T7DzA3KtDYS8gyxQuELkiY9VFASx4HaxIT82GX/yrhUKvGpblk1c1sxYXQ8zZvy
+ uduXXQ2SnyjWLha50VVmW3mR+4Kj5qrLcpp0rkMB6+5Q/xmYIGOT75K3MUwjYIPW0TUJrOsFeuA
+ wf4cphLDEANUv+KqNbQ/Z5dLSEBbh23J6TdKkTWdQ9AD46SaPjLNZ1ag=
+X-Google-Smtp-Source: AGHT+IF3WD8x1t2VTDwqmSsIpJg9BizUmF7bLAJ6u3hpmGz+T3JGNAm8CBwkQJDtp7ZOwZTYbNcfyQ==
+X-Received: by 2002:a05:6808:50a1:b0:426:4ed1:8c30 with SMTP id
+ 5614622812f47-426c1242e1cmr4294687b6e.1.1753321049086; 
+ Wed, 23 Jul 2025 18:37:29 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-618fb4431a3sm102604eaf.13.2025.07.23.18.37.26
+ 006d021491bc7-618fb4431a3sm102604eaf.13.2025.07.23.18.37.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 18:37:26 -0700 (PDT)
+ Wed, 23 Jul 2025 18:37:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250715-abuf_test-v1-1-d4eef5cb79e7@linaro.org>
-References: <20250715-abuf_test-v1-1-d4eef5cb79e7@linaro.org>
-Subject: Re: [PATCH] abuf: Remove code that prevented test code running
-Message-Id: <175332104663.263924.16896177628768985432.b4-ty@konsulko.com>
-Date: Wed, 23 Jul 2025 19:37:26 -0600
+In-Reply-To: <20250716-gpt_offby1-v1-1-6aa3546069ba@linaro.org>
+References: <20250716-gpt_offby1-v1-1-6aa3546069ba@linaro.org>
+Subject: Re: [PATCH] cmd: gpt: Fix off by 1 errors
+Message-Id: <175332104796.263924.7177911568370816128.b4-ty@konsulko.com>
+Date: Wed, 23 Jul 2025 19:37:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,27 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Jul 2025 10:03:30 +0100, Andrew Goodbody wrote:
+On Wed, 16 Jul 2025 11:55:47 +0100, Andrew Goodbody wrote:
 
-> When abuf was introduced some test code was prevented from running using
-> a 'return 0' early in the functions. A comment said it crashed on
-> sandbox due to a 'bug' in realloc. Some time later a bug in abuf_realloc
-> was fixed but this test code was never enabled.
+> The buffer for a name to be copied into must also contain the
+> terminating 0 byte but strlen returns the length of the string without
+> counting that 0 byte. Adjust the length checks to take this into
+> account.
 > 
-> Remove the early 'return 0' instances so that the test code can run.
-> Also remove some checks that relied on the implementation details of the
-> U-Boot memory code as these can fail on sandbox which uses system memory
-> code. Besides that this code should be testing abuf implementation not
-> the underlying memory code which has its own tests.
-> Finally use a new #define for the allocs that are meant to fail to
-> ensure they do fail on all CI platforms.
+> This issue found by Smatch.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] abuf: Remove code that prevented test code running
-      commit: d29c1092ebe113d31bc95792644350592d1211ff
+[1/1] cmd: gpt: Fix off by 1 errors
+      commit: 25d3e0509c7d812e05d21c2c73038dce6fe9d889
 -- 
 Tom
 
