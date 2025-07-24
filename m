@@ -4,76 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A87DAC83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 07:33:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E86C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 07:37:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 186528365E;
-	Thu, 24 Jul 2025 09:33:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2FD7B8362A;
+	Thu, 24 Jul 2025 09:37:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MKqNbibU";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="EvK6C7bJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AAE783655; Thu, 24 Jul 2025 09:33:24 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ADDB783653; Thu, 24 Jul 2025 09:37:12 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BD1783669
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 09:33:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75B8A83616
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 09:37:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aef575ad59eso116030466b.2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 00:33:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753342402; x=1753947202; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3easQBFGuv9t7rYjXTWDF1fSzLR0+RX/O6Bk/T4ZYAg=;
- b=MKqNbibUIK9cFL3/5TZHsR/jNKl8IFTQ8iiKoFG6x9C0TU7Vt+b0sMlU+mcdv8lKpk
- b924615QZ5Oj21+h9P8K5Shdf8hMuaNnC8AzKC/q7Z3ejv168L+XtEMIMgmQ5/Dvemr4
- BR+FmjR7Q2XhxC1x9VNfC8cLTBeY+tW72hXgnkFc2kExFZhhLz4phw9r4OW31hEp1tC7
- CBcHQTUUjllFNgKuXWWHIflRMpJUAKlaA4Xe9Twf0YCSv2zacJA7sT8Ds0M4GhCIGUFl
- kDIDHsilCHFIGWnLwmGymuRmy9aPPtOa2uw4PW9W0ea5k3kCiko8aEzud6tcSKAa5uVy
- mNvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753342402; x=1753947202;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3easQBFGuv9t7rYjXTWDF1fSzLR0+RX/O6Bk/T4ZYAg=;
- b=VldCo8YPCzDs76VhvtaQ3/Tf0UEGJqGqAgbQN53/lPqBEN595QtWfdtRl/ATneAe9q
- tTejc7SqXLt2aTl89PcwtQjUNLSqP0K7MCVFtdUVNhMz9mCqTnHub3B9uS4y+chfpnDj
- P0u4ueWYdUBa0cJeiADWCnWwolR+/n11AR2Yxx+1WrC1Mk1k9saC27tfEUlW5p3DAMQg
- 0CwCOYVNTVds1AFrzcSTMYqgbn4NplFQNhtYQVwhSahDFY+J1orq9ZljYOCRAn+QfB9+
- xjC2cmR2/7ieXNQQpE3ZgVnOMDMG6W8T7qGS6NqJE3DUZVvbAWTECKSqJQC0jirYBOll
- NWMw==
-X-Gm-Message-State: AOJu0YzxU6QOFcEkLivJjxmgiBKpPgJ1YXZdz1Mdoj3cQcn5LT2CffGK
- /yNGykCGgRo9hPvQS4wop1Wd+m356GW+exxSm5h6CDKlMobdCMDQBEN3m45TWQLNFTWWBFeK2RQ
- p1GPHdbyaKI2uLIA/JbnWUU5Nu/jGFqb82+Pc
-X-Gm-Gg: ASbGncug6yIe2LjHM3zKtkRqhz795Pymbk1VkEK1zuMfQ5i+FSuT0FDO2AM3iJLSvjb
- mwwvs+G5F93XNDdD9yHLWszn+Uujhn1SrciOPkLg5IOVtjWbnc+9x58+xNf287xZPSsTu9xL4/0
- dyiRXfsKLqnEQgZLKzjt22YQN1Aj1RCTiQu5avLqkNR7MZNiKxdntpVlNJoxATGoaf7wIP2tJXz
- Z3LFxYmSXsSXMF3/IW7rJY3P4hrG+kuWGT31zYGz7CmpKi7SuM=
-X-Google-Smtp-Source: AGHT+IF6qiaZ0lcLzOkLYxmylovLXpmqRw3LJKRyOVSichhA4nxbplZsgxcQkhFUGgqdmkqItUSq0LpVGAlE7I1vHvE=
-X-Received: by 2002:a17:907:9444:b0:ae3:5e70:330d with SMTP id
- a640c23a62f3a-af2f66c1f64mr599486866b.12.1753342401334; Thu, 24 Jul 2025
- 00:33:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <jwv8qkea94d.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
-In-Reply-To: <jwv8qkea94d.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 24 Jul 2025 08:33:10 +0100
-X-Gm-Features: Ac12FXx16CN2rIRQmC1ReWG_XzPOSjxl3vSFVlI7Qsfnwr98E9F2pMjTJVu9obU
-Message-ID: <CALeDE9NDru0WLy14gFRAnk=O+hVUS7D-b1Qg3Su+96FQQ8EVBA@mail.gmail.com>
-Subject: Re: HDMI support for rockchip SBC
-To: Stefan Monnier <monnier@iro.umontreal.ca>
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Dh4ygrf2Kre89cLXG77HNt1XvKjpQndpMuVSfti6m5V+mwBRDrRXFMf3byMMKUC+gLZkvMByiXs7qMeV1WA4Z0WFwLMLu+AZUQF8WTjx7wxo3qfyD6EFxelzVi7PaCt58ic24uB0W79RohPvbxiY4vQCAmT+T4jACSXzDaVRAQP7sX18dPgZuMIh/brRC7nW44ZNDLoYIkIGFzYED2kU0cL5B9n+sVYpu3soThtHB1WqxJr7+7aL/PV93YRcK8amQZMNbYTzaWdplrcz0LtxyLqpHvSk3kPx9m7JcQo4X0WzN7rGln/j0CtZaqcvjp67sS53qMVteuOOWc+M+a2CEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M1kBshF+t1ICw1/dT0exnYARyMt8eperX/+rXANJRYI=;
+ b=DlUr7NsmIVwzXKIWRjot0Hhu0luW/VjKtt1aZFmTAOqHX2sdO9gJ/4BOLREjmQ40Dzr4/3HbIe67nxAjCSguwYRtqg9fEkqmBE78preH7vUdrqTdd3ZwZEY/0hMXVaqYsnX/3yvdLQnrKgu2jVpgnHqmxSaKU++LegMFfTX0llP0PGDzlVMZJVsWDmmftGKTNUIN1SujRQ+S/Dh7+heYUWob21Rit61xSZiS36s/tybt46c9YTiQ86VN2QkVY79vFVynhhxpnUm5TS45r3FraU4kICrMZTyo+hA9byLCkgnLM7mD2fgNB5IIyDH4cqWmfU8q+t4GCGOxwBdwR1nuLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M1kBshF+t1ICw1/dT0exnYARyMt8eperX/+rXANJRYI=;
+ b=EvK6C7bJTTFOY63b2gIfbz9WodG2jfwq/DM+ktXD4XvTbuOWhn3dF4pgsgpRs7RDumRGVNP/AwTuQRaIYRqPdfwlvUe05I8wVGE3GTpXmsKUzDrAKUMDb8Sl8h4lF25xChWIat3JE9z254wlxk4FBoWmwhYei0vH71MierEFxhW6k+RpcB9H/z0bElklk2FtZHJnxL8PAoojGFamBvvNckpuxmVdyD2xJrcgq/fGWl429pUh4az8jUe918RIjXEL+0pkZ/qCw0enOrZzX628meOWAPM5n6kiERkzpHa9kDSQQrwvN1rifAri8l17SobTEBpC1BB4smfiVPgpnqmMEw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by GV1PR04MB11486.eurprd04.prod.outlook.com (2603:10a6:150:281::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.21; Thu, 24 Jul
+ 2025 07:37:07 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8964.021; Thu, 24 Jul 2025
+ 07:37:07 +0000
+Date: Thu, 24 Jul 2025 16:47:33 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: [GIT PULL] please pull mmc-master-2025-07-24
+Message-ID: <20250724084733.GA30707@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: MA0PR01CA0083.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:ae::9) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|GV1PR04MB11486:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2e47a707-215d-4974-4a5b-08ddca84e44a
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|366016|19092799006|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?oU2R59dOx+oqISWfdHkWV3rc5CQGyix112gjqKGqPdU3daB2R8EFpZBUQLIo?=
+ =?us-ascii?Q?zhxjgW0ja1is87XI6Z+eBM8beYGYrhASM1TjIjq1HO52WIdwdDCW5qm6+9Yr?=
+ =?us-ascii?Q?tAMsWunncvMfQcAM/8qO5sThvZIdRikAMzaL+DdYZYvodvHrmtiC1d4oTdx4?=
+ =?us-ascii?Q?bj3qPV+n6fZ5S9P1iJFuXjVBMNHyEDFRyBmirxLK5JV4TEGYRWHpKQq+D0/+?=
+ =?us-ascii?Q?S25FJDlBEMFcFhvPzZ/S2AegP2vrVgpaBj+ziu5ElEFOm0AvcWM7xqPO+TQP?=
+ =?us-ascii?Q?Ffch3112Sgq7n92KUPbRa3lNUetr1evz9D85fvlZtLrSH22V32wXzCJa0Yt5?=
+ =?us-ascii?Q?FYMnynOM8E4SYAa6bf//RnhP1JIJ9Hnupw1NCDWbZ3Rm1K/0iFeBYSwOPslC?=
+ =?us-ascii?Q?sOO45EWQ3QrjfvQFutugT/pAo1mUOXEEc2MWazOdsRBHQ+0DlaCs0KG1rcVM?=
+ =?us-ascii?Q?L8Kk+EwUyUYTvEtnPBmUZNJ1alFAjXlKRUzikxFkKyHomjDtMQb9pGhhSoso?=
+ =?us-ascii?Q?+2ln+qalX4FD+Rc2WFOLB/3/wWXL9O9K33hs4fj16Jlv5+64ryFxMTMUF2su?=
+ =?us-ascii?Q?AOQW8Y9HejI6g6dSAS5pQ7dAR9NbyHAs2IDMZN8MZPptkhtwj3uQrZuvO2WU?=
+ =?us-ascii?Q?cebo8M82b1YlmDXKS23lSTgA7ispOun2JbahW643f+M80UzM9WClk9eqTR7C?=
+ =?us-ascii?Q?CVaOHynu1A/uFjdiHuSfsak0jBdcZr+8wGyXUkWFVx3JnfGQ+jaMNQgEfLaM?=
+ =?us-ascii?Q?lzaNUca51Mto3bZR/lf1rLojstgApRLeIj4VFO36VV9oXYxrDwSOZZeFuZTD?=
+ =?us-ascii?Q?2M/M2Dsfz/y6HPxG3mWfSxuFCGi4rKWsLJ6vmQYB7zkcBwJ+pmIWq37q/wmk?=
+ =?us-ascii?Q?BeNUMsv68i7MIa1AuieCB/aDWboOoOMEr/PE72s3W15zUWpiNgr9Nq2JsPAn?=
+ =?us-ascii?Q?MpQ1ahLhVmCMTE3Bcm1EODBITNNeZNeZcC9ZhB3CbwuQrkKAUXO6BKZh4E9G?=
+ =?us-ascii?Q?XhH2HzYK3m01w6sRhT/02Z4lXMmlsjp+5amqYNBUGoEuVAfpAhTxTuRdu69D?=
+ =?us-ascii?Q?hW4a9qFgvUflW2oEiuhIEFazXQujr9GFZsybYuIJgVBNxFoYcBX/Xf7C1c5V?=
+ =?us-ascii?Q?VD/NUV/BTNfSJX2G2cKYSKXwddZmNB/0nSIWuBwjUHYpERdqIZ9xjoQMS1KC?=
+ =?us-ascii?Q?3MIezx3vXZZ2Ats4j31/glovtJVewYUTf5KOXjHP+LkB/+7Q3/AgDhMpnA84?=
+ =?us-ascii?Q?YUdO2eiELOZANLLKQhuJ5fxqBcp+HY9RL7lAht0F2PDO8ISYODEp+3FUXzX/?=
+ =?us-ascii?Q?2qRnlxMr2D9crClPsAuU7tuAmTXSMYk5mGqBoE+MsUs+uqJNyr47lXXTYq3y?=
+ =?us-ascii?Q?Kyho0XldSYeQhA+vY7YlcZv6FdqOSU9cGn2uEahe2MH7c1YN6sDEdHmi2Wb7?=
+ =?us-ascii?Q?cD8paMSxOcs=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(366016)(19092799006)(1800799024)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?d2T8uBd35qkUZmzN7CB1juddMixEqPnZlrwTArjm3y98+T1O0R6ORlIE0ntb?=
+ =?us-ascii?Q?Mazy05zE4gvAX/jZ+YwY5ttWa1otwk3WpPVBqKf4Q1qciSa8QQ1LAXC1vYqA?=
+ =?us-ascii?Q?IKwOXBGwQibUHKcIoQgqkqQowZ9fJzNLf/7DCbGfyCk3RqkbJt3W5O07WpXs?=
+ =?us-ascii?Q?uuf5B9FTV/yMoTi+i05wj9d1lCsfOU0MBQjt43ZWh4w4Rj3vSGALnl9zHL7c?=
+ =?us-ascii?Q?HjqM4sMW5Q6EOwIj7GDChlaweW6xJIU+z1pmSrMdL7CQW9YkeUVy2mB7P0ZA?=
+ =?us-ascii?Q?wlkvcNxS996St3xhTYoh1QYNoO++seCcXYqL0XHEoz/gaXq0VqgPIoNGA2vv?=
+ =?us-ascii?Q?hTpPGfJX5mZN926yFhkuWmRZ//PqjgolfJPwidezsKCRntb6PO6RPF+Q6Lqj?=
+ =?us-ascii?Q?SsIcAc4I+X6uRtpJjSRFB7pu22MoCnQATKxFNLR1gFx1AwoW/Qqd13y35lW1?=
+ =?us-ascii?Q?DU8KX2evPSSqZFRpm8bm0eylovuRLyk6V2DXBr7UEj8OSnbGL3aGh2J1Abz3?=
+ =?us-ascii?Q?GlYRzwvf5JiT+AuOTWKL5V+AGL3TlUGWXWgUEvX21jibct2qh5mUdGPpJOlW?=
+ =?us-ascii?Q?oYEKFf8w+LAxfH7TEaue6USj4JWznqMBpknGSea1foPt0Lmm5XraKojHDfXs?=
+ =?us-ascii?Q?LXkD+5LRd0F8xpxWvfiK3I8xIeIkYa1jz4gq9tysEipjubaNrnWUNL5ARPaY?=
+ =?us-ascii?Q?zSpv9+1fox6z3XAzvJHyE0bsm2J44v3Gd0HK/JweGNEuGxJs7/59yBnpCwgO?=
+ =?us-ascii?Q?W0NIUvKFRwVaMxRwdJzarSrFWkrGqoo/yPqggjwFrNiev/3EOqpJwQA46htR?=
+ =?us-ascii?Q?fqLkl8zarJq6+Vwx9yBwMkVGbcWRWfGNWFBTKv5kiQjkZgy8nNyp6Rgsdkey?=
+ =?us-ascii?Q?wEojRnPNJRzsuHU9s9h/KJ9z56kiS/e1UdGOAbLBbWRbnRfdbckqtKFw6Nck?=
+ =?us-ascii?Q?vdQgiLXTxbt/PtG3SNi42wxlW4ACrar5mRNiY+UMJmYVOYXyr1ZHaNsHmDs7?=
+ =?us-ascii?Q?/5uBTyt4Jebt5wumiQ7BuzcHEa1Ldj6OkDCpcLTOGWExxn3xVvhkM3SmAPOb?=
+ =?us-ascii?Q?vjVxsNGBAsHO7PXuQgdRUMaUsWjD8V2aU+tbSYVpDuaJANa8Gt9n4gw9jtJ2?=
+ =?us-ascii?Q?oFHTvd4K/USrjEcyredqRmeCSH0M8mYnQRlcplr+f6a0Bm7u+0eltxIYvRhO?=
+ =?us-ascii?Q?FB2x+NtQ2ivLL6TyuGP61rZA1cGRI/F5DJuW2H/4WLUSKJ0mduSKXLIS+0Oe?=
+ =?us-ascii?Q?bOesZI4tFrx6M/lMzL/lYKuWNfhAOixiFSvhtMshIVrRJNRXq5MRuGUiMlvQ?=
+ =?us-ascii?Q?sAJcQ3ICK/nHt0DAhr7k598CwHUP9Hi8hgYcehbMbyejwGw2peCXbZj9W9vv?=
+ =?us-ascii?Q?yTLBRl9SVXgLsy9PpEnp34xtbfZmN6PlGkR47j6Pw8pf8PlzllHmSHqsaKc9?=
+ =?us-ascii?Q?wSgVwa7kYf0oS0QtL8uhRmN1/owuk/cMphv+MJcllShhvQ8m31r29f0f991I?=
+ =?us-ascii?Q?Cyx0zYQYbDHOLA+BT1r5KfCmrbVQ0BCAfDN1ukmmzT7/8j10mFQEQAJnm+qq?=
+ =?us-ascii?Q?QZgQWFE30iOvKG771oH0OQj4gBp4PFof8xLo5t2c?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2e47a707-215d-4974-4a5b-08ddca84e44a
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2025 07:37:07.3577 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: x03qSSyeVKiCxXt6T1NnV/8ag0lDik4gR5d2VqC7BuusZgOOLhi647maRGiiJEv0IdLMRkG57cZVXWMVEaCSVg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB11486
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,243 +158,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Jul 2025 at 23:40, Stefan Monnier <monnier@iro.umontreal.ca> wrote:
->
-> [ AFAICT this mailing-list is used for development of U-Boot more than
->   for users of U-Boot.  I s there a more appropriate mailing-list, for
->   users?  ]
->
-> I'm building the bootloader for two different SBCs, both based on rk3568
-> (NanoPi R5S and Odroid-M1), and using the default config for those boards
-> I can easily make a bootloader that successfully loads my Debian
-> installation, but sadly it's all "blind" until the Linux kernel
-> initializes the display.
->
-> I saw that the default config does not include support for the HDMI
-> output, so I figured it would be easy to fix but I still haven't managed
-> to get any visual.
->
-> I made the following changes:
->
-> - Set CONFIG_BOOTDELAY to 10, to minimize the risk that my monitor
->   sleeps through it all.
-> - I enabled: CONFIG_USB_KEYBOARD, CONFIG_VIDEO, CONFIG_VIDEO_ROCKCHIP,
->   CONFIG_DISPLAY_ROCKCHIP_HDMI, CONFIG_DISPLAY, and CONFIG_VIDEO_DT_SIMPLEFB.
->
-> but still, nothing shows up on my screen until the Linux kernel
-> configures the display (and pressing a key on the keyboard doesn't seem
-> to prevent autobooting).
->
-> What am I missing?
+Hi Tom,
 
-Support for the rk35xx isn't upstream yet, this patch series is likely
-a good start:
-https://lists.denx.de/pipermail/u-boot/2025-June/591737.html
+Please pull mmc-master-2025-07-24
 
->         Stefan
->
->
-> --- .config.ORIG        2025-07-23 20:27:50.725403359 +0000
-> +++ .config     2025-07-23 21:12:52.281271378 +0000
-> @@ -464,6 +464,7 @@
->  CONFIG_BOOTSTD_FULL=y
->  CONFIG_BOOTSTD_DEFAULTS=y
->  CONFIG_BOOTSTD_BOOTCOMMAND=y
-> +CONFIG_BOOTSTD_MENU=y
->  CONFIG_BOOTMETH_GLOBAL=y
->  # CONFIG_BOOTMETH_ANDROID is not set
->  # CONFIG_BOOTMETH_CROS is not set
-> @@ -480,6 +481,7 @@
->  # CONFIG_BOOTMETH_VBE_ABREC is not set
->  CONFIG_BOOTMETH_VBE_SIMPLE_OS=y
->  # CONFIG_SPL_BOOTMETH_VBE_SIMPLE is not set
-> +CONFIG_EXPO=y
->  # CONFIG_BOOTMETH_RAUC is not set
->  CONFIG_BOOTMETH_SCRIPT=y
->  # CONFIG_UPL is not set
-> @@ -512,7 +514,7 @@
->  # Autoboot options
->  #
->  CONFIG_AUTOBOOT=y
-> -CONFIG_BOOTDELAY=2
-> +CONFIG_BOOTDELAY=10
->  # CONFIG_AUTOBOOT_KEYED is not set
->  # CONFIG_AUTOBOOT_USE_MENUKEY is not set
->  # CONFIG_BOOT_RETRY is not set
-> @@ -531,6 +533,7 @@
->  # CONFIG_OF_SYSTEM_SETUP is not set
->  # CONFIG_OF_STDOUT_VIA_ALIAS is not set
->  # CONFIG_FDT_FIXUP_PARTITIONS is not set
-> +# CONFIG_FDT_SIMPLEFB is not set
->  CONFIG_ARCH_FIXUP_FDT_MEMORY=y
->  # CONFIG_USE_BOOTARGS is not set
->  # CONFIG_BOOTARGS_SUBST is not set
-> @@ -544,6 +547,7 @@
->  #
->  # Configuration editor
->  #
-> +# CONFIG_CEDIT is not set
->
->  #
->  # Console
-> @@ -565,7 +569,7 @@
->  # CONFIG_SYS_CONSOLE_IS_IN_ENV is not set
->  # CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE is not set
->  # CONFIG_SYS_CONSOLE_INFO_QUIET is not set
-> -# CONFIG_SYS_STDIO_DEREGISTER is not set
-> +CONFIG_SYS_STDIO_DEREGISTER=y
->  # CONFIG_SPL_SYS_STDIO_DEREGISTER is not set
->  # CONFIG_SYS_DEVICE_NULLDEV is not set
->
-> @@ -945,6 +949,7 @@
->  # Misc commands
->  #
->  # CONFIG_CMD_2048 is not set
-> +# CONFIG_CMD_BMP is not set
->  # CONFIG_CMD_BSP is not set
->  CONFIG_CMD_BLOCK_CACHE=y
->  # CONFIG_CMD_CACHE is not set
-> @@ -967,6 +972,8 @@
->  # CONFIG_CMD_PSTORE is not set
->  # CONFIG_CMD_TERMINAL is not set
->  # CONFIG_CMD_UUID is not set
-> +CONFIG_CMD_VIDCONSOLE=y
-> +# CONFIG_CMD_SELECT_FONT is not set
->
->  #
->  # TI specific command line interface
-> @@ -1368,9 +1375,12 @@
->  # CONFIG_I2C_MUX is not set
->  CONFIG_INPUT=y
->  # CONFIG_SPL_INPUT is not set
-> -# CONFIG_DM_KEYBOARD is not set
-> +CONFIG_DM_KEYBOARD=y
->  # CONFIG_SPL_DM_KEYBOARD is not set
-> +# CONFIG_APPLE_SPI_KEYB is not set
-> +# CONFIG_BUTTON_KEYBOARD is not set
->  # CONFIG_CROS_EC_KEYB is not set
-> +# CONFIG_I8042_KEYB is not set
->  # CONFIG_TWL4030_INPUT is not set
->
->  #
-> @@ -2138,9 +2148,13 @@
->  # USB peripherals
->  #
->  CONFIG_USB_STORAGE=y
-> -# CONFIG_USB_KEYBOARD is not set
-> +CONFIG_USB_KEYBOARD=y
->  # CONFIG_USB_ONBOARD_HUB is not set
->  CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=1000
-> +CONFIG_USB_KEYBOARD_FN_KEYS=y
-> +CONFIG_SYS_USB_EVENT_POLL=y
-> +# CONFIG_SYS_USB_EVENT_POLL_VIA_INT_QUEUE is not set
-> +# CONFIG_SYS_USB_EVENT_POLL_VIA_CONTROL_EP is not set
->  # CONFIG_USB_HOST_ETHER is not set
->  # CONFIG_USB_GADGET is not set
->  # CONFIG_SPL_USB_GADGET is not set
-> @@ -2153,7 +2167,105 @@
->  #
->  # Graphics support
->  #
-> -# CONFIG_VIDEO is not set
-> +CONFIG_VIDEO=y
-> +# CONFIG_VIDEO_FONT_4X6 is not set
-> +CONFIG_VIDEO_FONT_8X16=y
-> +# CONFIG_VIDEO_FONT_SUN12X22 is not set
-> +# CONFIG_VIDEO_FONT_16X32 is not set
-> +CONFIG_VIDEO_LOGO=y
-> +CONFIG_BACKLIGHT=y
-> +CONFIG_VIDEO_PCI_DEFAULT_FB_SIZE=0x0
-> +# CONFIG_VIDEO_COPY is not set
-> +CONFIG_VIDEO_DAMAGE=y
-> +CONFIG_BACKLIGHT_PWM=y
-> +# CONFIG_BACKLIGHT_GPIO is not set
-> +CONFIG_VIDEO_BPP8=y
-> +CONFIG_VIDEO_BPP16=y
-> +CONFIG_VIDEO_BPP32=y
-> +CONFIG_VIDEO_ANSI=y
-> +# CONFIG_VIDEO_MIPI_DSI is not set
-> +CONFIG_CONSOLE_NORMAL=y
-> +# CONFIG_CONSOLE_ROTATION is not set
-> +# CONFIG_CONSOLE_TRUETYPE is not set
-> +CONFIG_SYS_WHITE_ON_BLACK=y
-> +# CONFIG_NO_FB_CLEAR is not set
-> +CONFIG_VIDEO_SYNC_MS=100
-> +CONFIG_PANEL=y
-> +CONFIG_SIMPLE_PANEL=y
-> +# CONFIG_PANEL_HX8238D is not set
-> +
-> +#
-> +# TrueType Fonts
-> +#
-> +# CONFIG_VIDEO_BOCHS is not set
-> +# CONFIG_VIDEO_VESA is not set
-> +# CONFIG_VIDEO_LCD_ANX9804 is not set
-> +# CONFIG_ATMEL_LCD_BGR555 is not set
-> +# CONFIG_VIDEO_BCM2835 is not set
-> +# CONFIG_VIDEO_LCD_ENDEAVORU is not set
-> +# CONFIG_VIDEO_LCD_HIMAX_HX8394 is not set
-> +# CONFIG_VIDEO_LCD_MOT is not set
-> +# CONFIG_VIDEO_LCD_NOVATEK_NT35510 is not set
-> +# CONFIG_VIDEO_LCD_ORISETECH_OTM8009A is not set
-> +# CONFIG_VIDEO_LCD_LG_LD070WX3 is not set
-> +# CONFIG_VIDEO_LCD_LG_LH400WV3 is not set
-> +# CONFIG_VIDEO_LCD_RAYDIUM_RM68200 is not set
-> +# CONFIG_VIDEO_LCD_RENESAS_R61307 is not set
-> +# CONFIG_VIDEO_LCD_RENESAS_R69328 is not set
-> +# CONFIG_VIDEO_LCD_SAMSUNG_LTL106HL02 is not set
-> +# CONFIG_VIDEO_LCD_SHARP_LQ079L1SX01 is not set
-> +# CONFIG_VIDEO_LCD_SHARP_LQ101R1SX01 is not set
-> +# CONFIG_VIDEO_LCD_SSD2828 is not set
-> +# CONFIG_VIDEO_LCD_TDO_TL070WSH30 is not set
-> +# CONFIG_VIDEO_LCD_HITACHI_TX10D07VM0BAA is not set
-> +# CONFIG_VIDEO_LCD_HITACHI_TX18D42VM is not set
-> +# CONFIG_VIDEO_MESON is not set
-> +# CONFIG_VIDEO_MVEBU is not set
-> +CONFIG_I2C_EDID=y
-> +# CONFIG_I2C_EDID_STANDARD is not set
-> +CONFIG_DISPLAY=y
-> +# CONFIG_NXP_TDA19988 is not set
-> +# CONFIG_ATMEL_HLCD is not set
-> +# CONFIG_BACKLIGHT_AAT2870 is not set
-> +# CONFIG_BACKLIGHT_LM3532 is not set
-> +# CONFIG_BACKLIGHT_LM3533 is not set
-> +# CONFIG_BACKLIGHT_LP855x is not set
-> +# CONFIG_AM335X_LCD is not set
-> +# CONFIG_VIDEO_EXYNOS is not set
-> +# CONFIG_LOGICORE_DP_TX is not set
-> +CONFIG_VIDEO_ROCKCHIP=y
-> +CONFIG_VIDEO_ROCKCHIP_MAX_XRES=3840
-> +CONFIG_VIDEO_ROCKCHIP_MAX_YRES=2160
-> +# CONFIG_DISPLAY_ROCKCHIP_EDP is not set
-> +# CONFIG_DISPLAY_ROCKCHIP_LVDS is not set
-> +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
-> +# CONFIG_DISPLAY_ROCKCHIP_MIPI is not set
-> +# CONFIG_DISPLAY_ROCKCHIP_DW_MIPI is not set
-> +# CONFIG_VIDEO_ARM_MALIDP is not set
-> +# CONFIG_VIDEO_STM32 is not set
-> +# CONFIG_VIDEO_TIDSS is not set
-> +# CONFIG_VIDEO_BRIDGE is not set
-> +# CONFIG_HOST1X_TEGRA is not set
-> +# CONFIG_VIDEO_TEGRA is not set
-> +# CONFIG_TEGRA_BACKLIGHT_PWM is not set
-> +# CONFIG_VIDEO_TEGRA124 is not set
-> +# CONFIG_IMX_LCDIF is not set
-> +# CONFIG_VIDEO_MXS is not set
-> +# CONFIG_VIDEO_SEPS525 is not set
-> +CONFIG_CONSOLE_SCROLL_LINES=1
-> +CONFIG_VIDEO_DW_HDMI=y
-> +# CONFIG_VIDEO_SIMPLE is not set
-> +CONFIG_VIDEO_DT_SIMPLEFB=y
-> +# CONFIG_VIDEO_MCDE_SIMPLE is not set
-> +# CONFIG_OSD is not set
-> +# CONFIG_VIDEO_REMOVE is not set
-> +# CONFIG_SPLASH_SCREEN is not set
-> +# CONFIG_BMP is not set
-> +CONFIG_VIDEO_LOGO_MAX_SIZE=0x100000
-> +CONFIG_VIDEO_BMP_RLE8=y
-> +# CONFIG_BMP_16BPP is not set
-> +# CONFIG_BMP_24BPP is not set
-> +# CONFIG_BMP_32BPP is not set
->  # CONFIG_SPL_VIDEO is not set
->
+-----------------------------------------------------
+Fix emmc error state after mmc write timeout
+Minor cleanup s5p_sdhci
+Support DT upstream for exynos5420 and exynos4210 mmc
+-----------------------------------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/27140
+
+Thanks
+Peng
+
+The following changes since commit 3532f1f5edfc97c9dcea723cdeb732eda44bc669:
+
+  block: Remove blk_find_first/next (2025-07-23 17:37:14 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-mmc.git tags/mmc-master-2025-07-24
+
+for you to fetch changes up to 1080815650a00257929f645bedf4e1795bf188bf:
+
+  Fix emmc error state after mmc write timeout (2025-07-24 12:43:31 +0800)
+
+----------------------------------------------------------------
+Henrik Grimler (2):
+      mmc: s5p_sdhci: remove duplicated card detect code
+      mmc: s5p_sdhci: add samsung,exynos4210-sdhci compatible
+
+Iulian Banaga (1):
+      Fix emmc error state after mmc write timeout
+
+Jaehoon Chung (1):
+      mmc: exynos_dw_mmc: add exynos5420 compatibles
+
+ drivers/mmc/exynos_dw_mmc.c |  6 ++++++
+ drivers/mmc/mmc_write.c     | 12 ++++++++++--
+ drivers/mmc/s5p_sdhci.c     | 11 +----------
+ 3 files changed, 17 insertions(+), 12 deletions(-)
