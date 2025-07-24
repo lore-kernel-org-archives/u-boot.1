@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C43DC83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 09:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9038AC83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 09:03:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6CCF83721;
-	Thu, 24 Jul 2025 11:00:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 292AA836CE;
+	Thu, 24 Jul 2025 11:03:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wLkF2TvJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B2b18EQi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2B3783666; Thu, 24 Jul 2025 11:00:55 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 5E0AD83826; Thu, 24 Jul 2025 11:03:04 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6D1D836D2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 11:00:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BC2D83666
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 11:03:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a54690d369so655357f8f.3
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 02:00:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4563bc166a5so4664655e9.1
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 02:03:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753347653; x=1753952453; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=y9uKGreBFkdGmxHiQrbvULM6OaEgWKDZ2e3JjSeNiGM=;
- b=wLkF2TvJ8xEIzrEJL7IYl+MeUkwCRGVVlp3Jl8m44uVaahYDgnp0OAwPoIYQU+TSJ6
- gm5Ctx2oh3kZdz2DJ4v8mDI8d56qk4a3X3u75NMdBh/jV8C4TFbhGcZaPThzuLV1IcAy
- 3Z0Rk8UVtZoE6C625QER2BDm93oD1WJghXz8wlg4ASWW54YSefHfjp5c8TYV1wLkkqIU
- 5Q5waIxOCwHQosuZ4/KUoV1JKYjcjIGSQedzs5+ptoWRiVKh7RTnkBbZ4lPXUlNHWuBF
- sli37ORt0u/uVhlp5f3WY7u6PP2LE8dk4Idf0ZqzAZj8HrtR4Puok1cfpNPRWk2hmJrU
- 1oYw==
+ d=linaro.org; s=google; t=1753347781; x=1753952581; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SHqTQ9LcUnHgVlRlaZcj3lSq7If1i46b9dgiIeEVS0w=;
+ b=B2b18EQi5RhsKs2swvoyh15TiGEsYXtJme5wxXYItLrLpmhRYyD7qC+wk3YYT0xg4H
+ ZWZt9NyoGWmnfZdKY1YZ9fP0fcXlhUm1KH9pZvktoIrucp4/raMbb9+0OzjcCdygRBmL
+ DRq54aZSkZHYpyJ0QB5obEYK7YzaqHpEhRnq79FZbRzzHmVCOIoe4h1s/kG8ZnPVxT+A
+ d/Xlmx+6WC50lTOnyVQWGNGTSGxXw5gxwa/nfNwZR0w4wVab3Ip3GWIb9iK9JLTdsRjP
+ u3rpgtDbEdHPy5TmedTQWGOaZRI4il4YnItmvpjXtkc9WuXCbfzTI4Zn7yunG14pb9EU
+ 56hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753347653; x=1753952453;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=y9uKGreBFkdGmxHiQrbvULM6OaEgWKDZ2e3JjSeNiGM=;
- b=YPUZbKlqj7F9cYQvEt76Kh5RmykiCzUXWdW1wfOW3bPMsQTlW11/5fx+GYFvGfpKkq
- Tynp58oWovwFsSc4J3V36PFm2ErnjeaeIiCRCDorO5RnYwVT19L2ll7pHg47C/9UdGRZ
- ZMQ/8PtRngEXUg3qnUCxKu/NEZaP5969hX0IAvBpVMH9FTYc94Q63LiKIGqRD+e8+GTL
- 44cnVlH15A0yhkhXU+rEzzrp30VVgZ65Ox3VV1n6C7NmnSiDNlG1MhwiIXiN5spgOd2z
- 2L2SLA4S7Dd+ALbqeeHsJv+2YmfglIWLBaEB1fzNrZ8IvdL2rs+bgP3vZkqizIQFXq/G
- rSdw==
-X-Gm-Message-State: AOJu0YzNJtEttG+Y6DmQuDGP0TfdXjRZxohE4V+0rr5Rkqb7akZBgYmU
- rHSDQtwsZbFRxMp8egpIMtG9ze/XSJ/oBhH4NsJNdOAcKOvOoc9STt8NkGyCB4U2r0Y=
-X-Gm-Gg: ASbGncvFA2Yc8kKn2jMqxYyE3HuENu6tECFXUv9N7G7iHSyQI/6beWxmupj1+ZBQZUY
- s0Aql75qIqSrsKVJHAKgUfRcXU6Lr9Jyo34SWWKkKPfOi069uCFCurmIFfVF5wVixXryDFlyY7f
- UqcG19VSrdXM2DPvjFEzrSHgxyxq8MC0rBMsgA6/0BmUIuY+RF6b/mgpuCgYsDdSVNgZT1pCTXV
- iKtPYfThtP3HXUoM3N7BMzmHzGGWwYPUqNNoe4CT62gVtxbkJvgN9S/UPcqjajUYdeewjA9F9zu
- xrUQNBfje0CTOB3SMjGTbkMi+7TpcROi0ii98IijB42wguGZuL/uxpTzHx6i5e/nYJ1SwsJZ+Bg
- hcRnw26xUgJRgoNxNycclpi0CyoYeGzPd7mWgPdiuia5T4wWuHdtZ72/jtRcuGGx7VXh4c3h1Vd
- ieHA==
-X-Google-Smtp-Source: AGHT+IHXuxC5PZBBSEjvMqGvJ0efMxYfGo3ATUgfrivIoyBmsHjbxPuUcxamU99RO8pDiCzCTFFyiA==
-X-Received: by 2002:a05:6000:230d:b0:3a4:fc07:f453 with SMTP id
- ffacd0b85a97d-3b768c9c063mr4735736f8f.8.1753347653201; 
- Thu, 24 Jul 2025 02:00:53 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:f9e:3c01:e4d2:a911:6ad2:b1ce?
- ([2a0a:ef40:f9e:3c01:e4d2:a911:6ad2:b1ce])
+ d=1e100.net; s=20230601; t=1753347781; x=1753952581;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SHqTQ9LcUnHgVlRlaZcj3lSq7If1i46b9dgiIeEVS0w=;
+ b=wCDOnN1MiKnsYr+CzIqo66CoSvnM7ITAD4hP3Xhu8nskWEOWVwmbeQessGxAvZjtVy
+ kkcf4WgYzy9L7A9fgzLqNpJ/RG9TFk38+bx229JhguoY8/sNTdOHAr4ucdWkIHMqOBrT
+ SuWm3BtNfVxG90qtBw6Xz9E8f3iNlyOj+TVh+HcnsWbZXDFJkC5D0IGnga3WER4+S6PI
+ phAGjQXU/l4StBTQa7E/jxWUZ4EaCGh+pqSfJAO/+TGsKvF3aaMYf+aNr7jnqTQb8CTP
+ L8T9EX+i02QdyjaYfGlAxIhX59ELSv9G5X1ZZ2qFQRe+/iDMgxUXyWlv0ZZv6go/WaL1
+ kaaw==
+X-Gm-Message-State: AOJu0YzOomRL4TjbDTVX5g14uqFl5u5VBhnnqGh7MSFs2vt2DPmgsbGi
+ ePV2JRX/MyZgU3iJ+fBq23CqlR/yjBNuI5Zula2MJbG68Q0dUEcc094PCkzwOFx2iRLy6qezvU3
+ BWg4M/tPNFw==
+X-Gm-Gg: ASbGncuiFzRrBTFPaTtSOV32AkMpPqfdPMhMwbnx/bwv/Xb2D7BdDBtg6fc4kPY3yg5
+ JY+KESCgEBGYN+KHPzMfu1lHIGXnzQQz4fBGsuKG+odoOVS/ifzbzD+bQuatsut75C/qTcZLHWe
+ LioCTFXEk5E+QJv1L684vUUDV9A4MZApFoKXQt24fH5c2nVS77FeaWPz3Tg91IDe11l/JnNnqfp
+ HDkYymKye+TrAGxKOnVo6fXMqFJ8VSLaJAeYV+pNW5tBYzUDIn4JCylYEebOzlv8VdYSeUSiKe1
+ oa/J3BJ7d/YURDQOnvRPf31et+TilCUOyS8DoMcUKWlzw1/43H5MUfLzVY6RggeFipP4qLQkNED
+ Wz9UDmIg1njz1DdofzOKOG/eLe+RBzA==
+X-Google-Smtp-Source: AGHT+IEJxLW1qWXJDUmwHtGz56IQ8nudFucnvWuuTSQSC9GQdoYiiY8tHpiNAcx5LYfMni4/HZ/nmg==
+X-Received: by 2002:a05:600d:19:b0:456:1d06:f37d with SMTP id
+ 5b1f17b1804b1-4587058a757mr11294065e9.16.1753347780144; 
+ Thu, 24 Jul 2025 02:03:00 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:bcf7:2df7:a82:bef9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45870532a4csm12187545e9.7.2025.07.24.02.00.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Jul 2025 02:00:52 -0700 (PDT)
-Message-ID: <c5308be3-c351-48b4-9221-2f9a7f88e41d@linaro.org>
-Date: Thu, 24 Jul 2025 10:00:52 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: Return value calculated by ERR_PTR
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ 5b1f17b1804b1-45870577af8sm11958715e9.32.2025.07.24.02.02.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Jul 2025 02:02:59 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Leonard Anderweit <l.anderweit@phytec.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250703-clk_uclass_fix-v1-1-9b6cc81c9490@linaro.org>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20250703-clk_uclass_fix-v1-1-9b6cc81c9490@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [PATCH v2 0/2] bintool fixes
+Date: Thu, 24 Jul 2025 11:02:34 +0200
+Message-ID: <20250724090247.59221-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,39 +98,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ping?
+Two small fixes for binman (bintool). The first patch avoids a warning,
+the second one makes sure the APT package list is up-to-date when
+running apt_install(). That one fixes a CI issue I encountered.
 
-On 03/07/2025 15:40, Andrew Goodbody wrote:
-> In clk_set_default_get_by_id ret is passed to ERR_PTR but nothing is
-> done with the value that this calculates which is obviously not the
-> intention of the code. This is confirmed by the code around where this
-> function is called.
-> Instead return the value from ERR_PTR.
-> 
-> This issue found by Smatch.
-> 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   drivers/clk/clk-uclass.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index 2167cd5ad0f..cf48de766fe 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -194,7 +194,7 @@ static struct clk *clk_set_default_get_by_id(struct clk *clk)
->   		if (ret) {
->   			debug("%s(): could not get parent clock pointer, id %lu\n",
->   			      __func__, clk->id);
-> -			ERR_PTR(ret);
-> +			return ERR_PTR(ret);
->   		}
->   	}
->   
-> 
-> ---
-> base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
-> change-id: 20250703-clk_uclass_fix-eaf648b2ebb5
-> 
-> Best regards,
+Changes in v2:
+- Use apt-get instead of apt
 
+Jerome Forissier (2):
+  binman: bintool: use apt-get instead of apt
+  binman: bintool: run 'apt-get update -y' on first invocation of
+    apt_install()
+
+ tools/binman/bintool.py | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+-- 
+2.43.0
+
+base-commit: 3532f1f5edfc97c9dcea723cdeb732eda44bc669
+branch: bintool-apt-fixes
