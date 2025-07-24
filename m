@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5138C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 16:34:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C849C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 17:28:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EB82838D7;
-	Thu, 24 Jul 2025 18:34:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C1346838C7;
+	Thu, 24 Jul 2025 19:28:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="F3kh6AnS";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QB0PW8OR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ez5n9Unb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5457C838DC; Thu, 24 Jul 2025 18:34:39 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E3FEF838CC; Thu, 24 Jul 2025 19:28:41 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43D7B838C7
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 18:34:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE1F5838C2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 19:28:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4bnxRd0CYQz9smL;
- Thu, 24 Jul 2025 18:34:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753374877;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JlgEieGOoLARI32H6mOvDkFgp6yQcSDjVCxfQhBY7Yg=;
- b=F3kh6AnSLBZMPazb/aUDuG1yLpEaDzqsyQlfSo7e9iVBtQAlHG8yWEjunnAaw41Gjn+qWT
- 8DRO7G544Q9EIgie0GLfMftpHaezXJF0pql226Hxp+ITGliXngRdhRVeA7JVijb6Izk/9i
- nx3Bhf7Dm24+oYQ766mgXqY2/b9EjnOMAYSjlbRpUllYiWCdg2/2VagiIhia0rEsquUNTf
- 258n/9AuyxTxuaoqW3iOgEI8R+shkd7eKprKCNwZ5z0fywHRGo240l6MhmU1T5AX0ghE0m
- DRNoCcwkNlUzYYhM8FREBrkKrgUItVpOLrHH/BYzG6kMOvRpQsIGh0UhTnSJYg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=QB0PW8OR;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <38db3eea-3846-410a-9f5c-89410b153fcc@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753374874;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JlgEieGOoLARI32H6mOvDkFgp6yQcSDjVCxfQhBY7Yg=;
- b=QB0PW8ORw6MVSTen+Ma8KlgKhI1XuHxOUmkq6QHZ0nahv0Z+o1JVvlGrgMH1a4ozMPEgMx
- VL8gk8I4ObjKD00iduAGZM6nhkJ7wRHzstdyePQ75P69KBFu0C0gKjKkKF241z5c8WTWbO
- e6I6qoGSxdiU53ccB1xSUK63LHuCQ4QrRphUV/rm3OEy4qfK/HuOQHz8wiENuAIpmR9xqT
- Or0GYX/2JczpCUjLVwR33cEUBmTnAa+d4cytRpGuLRo8RLCaBT8uneI0BwZWjTN1zWeNxD
- 5KCj3J5FrhmYVvjHKJSUTGxBgAIumEvYz+3p+bapKNcULeupEIG5+wf+EZKrNw==
-Date: Thu, 24 Jul 2025 18:34:31 +0200
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-60c5b8ee2d9so2620006a12.2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 10:28:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1753378119; x=1753982919; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3gD9lIGwVZIqaIKjoUQdyQxi2NasEB+3AOtQv4xktR4=;
+ b=Ez5n9Unb5BRv5UCaZJfsuJur1chBGqfH9vBYVecKXwaYkRd5m8BoF2yLhCJHfVNt2c
+ B5NCA+GJG0S67vBG/NlsqWO94MmqC/3Q6PDfddcICN3I7Vrn3ZkMDSaKgnJbNXocKwDH
+ k/tlYukDnBfPoMXIzYBlatSsgmSZrZIgnNetXTrj5CkDG4PvEmRy452nTmzUjkpGj8h3
+ oqo8lFrmzUtcLgH7eezg768RBRDMsd576fNmq8Dmqh0hRDwTQPG8bpBPnXrsKUCQB5oV
+ C7KFP+GiO9MM86K8MhE018mrGspfDPGqCEjVleIkwS7AMVADvrE9ZvPjX2Rq2wWXbE8V
+ wtPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753378119; x=1753982919;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3gD9lIGwVZIqaIKjoUQdyQxi2NasEB+3AOtQv4xktR4=;
+ b=Pbx4EMHEI5vGgCR0Tu1G3Ysn0808ul/jAHiubwhySKJpfbfX2z3NQ4VFgGip+9O2bq
+ yZaVFjVAhSyu9nnh/VPycCRKObnJqBykDGUbyUpQ90U/C+iNnaUoFnCGpqRTpKZE6iJU
+ dOd6lPArV1HevXjdpgsfMBOtkxTauke1zjMzoA4cR1MK+OAsCmbg8Tx6e0WtjpY4sobS
+ QGplp2A5gqp3zHH0eRDzKcWz8il4HOgz+tYwq35G/crBgHpZyqjRiQwlxzkT8uezrRik
+ Yho/52IKthFeAu427oY6/Y3eC0dMJLoc3wi+ES/BLuu7Y1HDHUEbRMLZuKRSzl7hKyCK
+ m3xA==
+X-Gm-Message-State: AOJu0Yy9Ln444DTXtrGQH0Nd91rI5YjpBskWeqbexjdFc2RKYJ9DeoXb
+ glp0GkYOZB4YlSC5YOPO8VSMUCdgKdmq1LT+po9h612ti0jmTld60UiLnED5TKypfYpZI0WK6+4
+ WgtImRlPp/0JyeibeAkNJBn8omk8VpPVLrw==
+X-Gm-Gg: ASbGncsk/780A/BdRnm6087ax7MaAdVdDhIvqUxcYtPt74JVKUah+Wu9JpoQHzLKObm
+ zQNBb5d8fDwNQCt0q8uLjjyAm757FQWaiD8pf5DTD8BIBZNT71ycGOh6OSM89zQkFWqOLGKF+P/
+ EMPyGPYwyq2evY7Ox2mgKoxvVah87UUW3umvKT86dvZBqw7O874NHY2gaKLjOS447pr4P34wXbc
+ Zp4SMMZBAX7qzRDwPp+PVbUoy4nBzXcanOywDIWuHfg/GHcBUs=
+X-Google-Smtp-Source: AGHT+IFoO918NJ2SXJb2j84tfB2KIofxCgpyQAHSYloBxoPaEHtxdwKLIKiG66TNF7vMrT1kOUU4qtI1Ee7jI8Vevlc=
+X-Received: by 2002:a05:6402:4309:b0:612:e108:93fa with SMTP id
+ 4fb4d7f45d1cf-6149b594191mr6963269a12.16.1753378118640; Thu, 24 Jul 2025
+ 10:28:38 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] clk: renesas: Do not test unsigned variable to be less
- than 0
-To: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>
+References: <jwv8qkea94d.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+ <CALeDE9NDru0WLy14gFRAnk=O+hVUS7D-b1Qg3Su+96FQQ8EVBA@mail.gmail.com>
+ <jwvpldpsgva.fsf-monnier+Inbox@gnu.org>
+In-Reply-To: <jwvpldpsgva.fsf-monnier+Inbox@gnu.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 24 Jul 2025 18:28:26 +0100
+X-Gm-Features: Ac12FXxDn-GJ805MahqTylf3M2nSjDqRDacJdGhZwu_VOf2bDebhG4A8NAsOJyA
+Message-ID: <CALeDE9Neg2HFtUC940xRfSTFwKENXH2mxdqHgoByVMaBeJ0_bg@mail.gmail.com>
+Subject: Re: HDMI support for rockchip SBC
+To: Stefan Monnier <monnier@iro.umontreal.ca>
 Cc: u-boot@lists.denx.de
-References: <20250724-rcar-cpg-lib-v1-1-46d64ffbf5aa@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250724-rcar-cpg-lib-v1-1-46d64ffbf5aa@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 8fd58933d5d86d50cb5
-X-MBO-RS-META: umifhzqxp3okxhq3yrrda9yy4k555q4y
-X-Rspamd-Queue-Id: 4bnxRd0CYQz9smL
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,17 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/24/25 12:48 PM, Andrew Goodbody wrote:
-> In rcar_clk_set_rate64_div_table the unsigned variable 'value' is used
-> to receive the return value from rcar_clk_get_table_val which returns an
-> int and then attempts to test for being less than 0, which can never be
-> true. Instead declare value as an int so the code can behave as
-> expected. Also remove initial values from 'value' and 'div' as they are
-> not needed.
-> 
-> This issue was found by Smatch.
-> 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+On Thu, 24 Jul 2025 at 17:26, Stefan Monnier <monnier@iro.umontreal.ca> wrote:
+>
+> > Support for the rk35xx isn't upstream yet,
+>
+> Ah... I didn't notice any weird failure or warnings during the build so
+> I naively assumed it was working.
+>
+> > this patch series is likely a good start:
+> > https://lists.denx.de/pipermail/u-boot/2025-June/591737.html
+>
+> Thanks.
+>
+> Is there a place that tracks the state of feature-support, like
 
-Thanks !
+I don't believe so, Allwinner stuff tends to be purely community led,
+so they have organisation, the rockchip stuff is a mix so there's no
+real central location run by either rockchip or the community.
