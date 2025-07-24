@@ -4,128 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05DEBC83F26
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 00:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A65EFC83F26
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 00:27:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DCAA836D3;
-	Fri, 25 Jul 2025 02:21:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BB5F83700;
+	Fri, 25 Jul 2025 02:27:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="EoyTVKhn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R5x0x+GB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C02A8838FA; Fri, 25 Jul 2025 02:21:48 +0200 (CEST)
-Received: from TYVP286CU001.outbound.protection.outlook.com
- (mail-japaneastazolkn190110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d405::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AC5C583927; Thu, 24 Jul 2025 23:30:35 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B217983666
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 02:21:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86C158391A
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yangshiji66@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S39GbGhzsKp0LZjFBIzJey3TPzZeqL+jZpBlNOTej59/JBLFvFcJLyZbKR0Md9SIyoPJUDXxre1ZI8crn9wt73sOUw1dEuOycN6JgV0OEq+AqAYcxHwPkEbKbz1InCYJcgEhlDPMqQvm619YGjksFT3sAtVyf773x5w+Hw/3DrehloCH2dVox5PUztcxKoom2I/x0Gco8KiVeiv/cophdzUWlSCOyNXxs5N2kZux3EqGgjpuKxcmngP7+TKEGLPtBM7D9s2CflrOAJXhxGPKlEcvL0F7NkmA9CZFigjh88cTeqPoeC0VFYeo/Ig7sc7Xg0xQc5SdPhLoHVp1AqXIMw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MyNxOHKUh1Iw6MIZDmS1tUXfZLQjJi1+wuULSTy5w3k=;
- b=EViWGLSrZAlIyfr3te5YEr3kK91i4nl1hNA+o4ntsq8zhlQOBo/yZ7vUKoUq+mwi/O+yj/NafGRkKyRrGPUsote7x+ojrPJ6XMnauS0RrbMuVyHMFVqJW15RYXTC1SVl7bdELjRHDyTm3etB/Ayeyk/sJgwqQCQbWxv4UV0JBSyGeQlLQo5xG4JopNJZgvwRzvSGCe0s+QJts1ClnSuH6O1DkgFKj82p3DsfBKlkbnOuUWKf6XGToX9VqmsrlxuDiuAZ3uyX5dgiU3aZhziKnpfSoYEgoZvhsylLGyCI757xaEx+4sdSyGjLyVoQuJ5S5sfPrSnvqhoq4cvci/STbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MyNxOHKUh1Iw6MIZDmS1tUXfZLQjJi1+wuULSTy5w3k=;
- b=EoyTVKhnct+VgWlTN07hVUitEQVimnCGovum8JTZueuYKN5Z1DEdgZNRANzYVGKT+qObUfSwZaPKjfYnHZMghAdbiD5iUQOcN/lCxDAvjMB8KnAPaxSTjRmfW53Xi9eJowwLCe9+KPJE7MuEBzFmsncQPtbDQCFFo1rR/5WXueUjS7mTK/pb/wbX+fO5m/aN7m95WlzM0EXVRGIc7avdGtwG4Enw6BajLkV+Xsh+iGIE3JQHPMqtgDvlQfkoxFIbQaJ0JOSgu/KfIaNMgtJ+DGXJoscjO/jHBx73jQDzO1E6yFFnbhMVdIdDB+5BRYmsGo8xswddsnAcsccZp9rjlQ==
-Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com (2603:1096:603:2::18)
- by TYRPR01MB16229.jpnprd01.prod.outlook.com (2603:1096:405:2e8::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.22; Fri, 25 Jul
- 2025 00:21:43 +0000
-Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com
- ([fe80::c00:ec4e:ee7e:9b7f]) by OSBPR01MB1670.jpnprd01.prod.outlook.com
- ([fe80::c00:ec4e:ee7e:9b7f%7]) with mapi id 15.20.8964.023; Fri, 25 Jul 2025
- 00:21:43 +0000
-From: Shiji Yang <yangshiji66@outlook.com>
-To: u-boot@lists.denx.de
-Cc: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Shiji Yang <yangshiji66@outlook.com>
-Subject: [PATCH 2/2] env: mtd: initialize saved_buf pointer
-Date: Fri, 25 Jul 2025 08:20:45 +0800
-Message-ID: <OSBPR01MB1670F35FC517694360204B4FBC59A@OSBPR01MB1670.jpnprd01.prod.outlook.com>
-X-Mailer: git-send-email 2.50.0
-In-Reply-To: <OSBPR01MB1670E56647F1F8B4BA66A931BC59A@OSBPR01MB1670.jpnprd01.prod.outlook.com>
-References: <OSBPR01MB1670E56647F1F8B4BA66A931BC59A@OSBPR01MB1670.jpnprd01.prod.outlook.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR04CA0005.apcprd04.prod.outlook.com
- (2603:1096:4:197::16) To OSBPR01MB1670.jpnprd01.prod.outlook.com
- (2603:1096:603:2::18)
-X-Microsoft-Original-Message-ID: <20250725002045.7673-2-yangshiji66@outlook.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2ffa81b41d7so784556fac.0
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:30:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753392632; x=1753997432; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZPxVMYbbKVbjD1LnqDvMp6mdQbbSwvqoiCWolQ08/gE=;
+ b=R5x0x+GBjwvH0Yjdnh6IM4ivGoEfrzDChTdYCjn42+XZxxu2XBrwL3NCRkZrFit1cq
+ 5YD2c/lCsib/85G3E1TDpc5g9sHv7u8mIWDSnbG+6g65BUHmWMbBTC0s8XCTF+CncUEL
+ 8Nxf9deGd1auEJiwIiVk4jZArT0/VikiiD+6o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753392632; x=1753997432;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZPxVMYbbKVbjD1LnqDvMp6mdQbbSwvqoiCWolQ08/gE=;
+ b=dqsdv1UJUdhvJBxktj8XPdQ+Vm21Kgih72ejOzZ6jysYt3yfaHaNFcHF/f7ooO6ZUd
+ DCOL6TryOopEfB0hw4+6aEn4FuIYaE8GFolb06pxu22MOl5wrHtSV3oTqXHN0yAUI3Fn
+ BbdBPZX2ca5r97/tHosxkuwqjWs4QRN+TNaZWS5LgJVB8aaBtV+FUvUx3Q/+rn4zHqvK
+ TLvsVEFhusdCugPtQAXoQZ27Xxi+DU50jFj4E022ESo9DfrqvHCmHL33zIK1ybHF7e04
+ mc4bU8Q6FLbdbWkJc/JXhgJziE01sGL+kRAMk927hhzhfhvtyMUquCmTBws8/26llkAH
+ xDhw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhBev2S8D4WeL7kfDH82Nh4ierm4ShN0RBeeyRmFcAPYt9ItL2wj7GUD58Us14m+KV2zn9erY=@lists.denx.de
+X-Gm-Message-State: AOJu0YygVRUv+kSSMYNAbYkFWzLaIMJQNUsRivJXI9kS3L40uaDO6VlU
+ K3t9xtOYVChfEdSKckOY85Fj4c4DuiaHDSRhm2L0LLKtClbJL3eOen9ldW9xq8tSCis=
+X-Gm-Gg: ASbGncta4GIJwtsNKD5gZA9Ps0LvWZYzIa3qUbgkqNKF0M6eygCDC1HN/f2BvY8ML7m
+ 5Fpz+9BARiNrnzVTHgzluUg2iCKneSDzJFnv9/hEZK5xsdxjbr21e4HJRcdOoTuH9EtCC4ii2kZ
+ j7687cSCcfcZIgaC7Y3j3c7gBuaadZx28hC6oqtQbsPEkrIrlAHax2GkH97M7TvJz3xDguAUx59
+ IlBRMUNqJrESHg4kJiilTPaxoDgAl4KkamIr3AMgL49XmyGpWCXEYE3cELm200kUSZQno08/ymT
+ edhYDiLZ5aZDtNmQxOPTO2t5jVlWRKy9Ps6bm2eqW+q0gWzT5VTM9ibopUFtes8H+BGRivdKoV7
+ f2tcnsBY9S/LaklSJ0PO5bj07LxmB6kVLyy/lIQmqqkIpr9z5+S5spcE=
+X-Google-Smtp-Source: AGHT+IG0FY2EDvYGbb64jrHdiWUQWKS88Y8wn2wbX8Iy1WYMr5QZ7j5xiKwzKDoUxQj8GpweL8iRng==
+X-Received: by 2002:a05:6870:6f0c:b0:303:5cb:4296 with SMTP id
+ 586e51a60fabf-306c728975emr6224526fac.30.1753392632210; 
+ Thu, 24 Jul 2025 14:30:32 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-306e1f8a7adsm660520fac.42.2025.07.24.14.30.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Jul 2025 14:30:31 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Aaron Williams <awilliams@marvell.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
+ Ben Horgan <ben.horgan@arm.com>, Adam Ford <aford173@gmail.com>, 
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
+ Anand Gore <anand.gore@broadcom.com>, 
+ William Zhang <william.zhang@broadcom.com>, 
+ Kursad Oney <kursad.oney@broadcom.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Junhui Liu <junhui.liu@pigmoral.tech>, 
+ Sergey Temerkhanov <s.temerkhanov@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Gilles Talis <gilles.talis@gmail.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Matteo Lisi <matteo.lisi@engicam.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Eric Nelson <eric@nelint.com>, 
+ Peter Griffin <peter.griffin@linaro.org>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Michael Walle <michael@walle.cc>, Sam Shih <sam.shih@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Julien Masson <jmasson@baylibre.com>, Fabien Parent <fparent@baylibre.com>, 
+ Stanley Chu <yschu@nuvoton.com>, Jim Liu <JJLIU0@nuvoton.com>, 
+ Tianrui Wei <tianrui-wei@outlook.com>, 
+ Garrett Giordano <ggiordano@phytec.com>, Wadim Egorov <w.egorov@phytec.de>, 
+ liuhao <liuhao@phytium.com.cn>, shuyiqi <shuyiqi@phytium.com.cn>, 
+ lixinde <lixinde@phytium.com.cn>, 
+ weichangzheng <weichangzheng@phytium.com.cn>, 
+ Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>, 
+ Paul Barker <paul@pbarker.dev>, Simon Glass <sjg@chromium.org>, 
+ Mario Six <mario.six@gdsys.cc>, Le Jin <le.jin@siemens.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Sean Anderson <seanga2@gmail.com>, 
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Kamil Lulko <kamil.lulko@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Dillon Min <dillon.minfei@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
+ Bryan Brattlof <bb@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
+ Apurva Nandan <a-nandan@ti.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
+ Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>, 
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
+ Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, u-boot@dh-electronics.com, 
+ uboot-stm32@st-md-mailman.stormreply.com
+In-Reply-To: <20250717024426.26953-1-semen.protsenko@linaro.org>
+References: <20250717024426.26953-1-semen.protsenko@linaro.org>
+Subject: Re: [PATCH] treewide: Remove empty board_init() function from all
+ boards
+Message-Id: <175339262777.1899261.14751318047956466864.b4-ty@konsulko.com>
+Date: Thu, 24 Jul 2025 15:30:27 -0600
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OSBPR01MB1670:EE_|TYRPR01MB16229:EE_
-X-MS-Office365-Filtering-Correlation-Id: d74d0772-6f5a-4566-17c4-08ddcb113b94
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|461199028|8022599003|19110799012|15080799012|8060799015|5072599009|440099028|3412199025|1710799026;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RLJbV68dX1tUODBV8StCmaZBbcLPGpsYBlVukrU6Wvj+Bi1qJGGN+X8WfZQv?=
- =?us-ascii?Q?Xq3aLLhT7uAbv9onitJvETCTjXdTSTlzPYyTxmYtCqOALWIorG/ksfqsU1lZ?=
- =?us-ascii?Q?j32dj+ZtLYeTRWqAlxMW7RFHM5w7v02JWpahp4kQ8xp72qteb0M3Ptgm1t2/?=
- =?us-ascii?Q?H3hkhyeK2uRsLdJJbkRUroCZTW6CY4LIwYGgEclVLZiYeGMxHoD0fNMkUMTl?=
- =?us-ascii?Q?7JMpCaILm2SbgHjUvVbAS4xKKZx4ZjtQkD6hy3c5X7jqLMnxfM2ZybAMS2LI?=
- =?us-ascii?Q?0SJXIgGPi9e/AFrskd4BKbiyZP+GEkRx0jDCj9YIrptYyqcmzV21zuTcjEbc?=
- =?us-ascii?Q?EJeord/eADy1ipiJ0Qfw63WVEFjRUp50GGjN9ACv3846wghU3ROwnlK4yp7Q?=
- =?us-ascii?Q?aSveX0qumKpAe4vn9EEFg9SlfqWi+e5/xnPG4vlqKZS+8pYPF8S7p9fuxB/k?=
- =?us-ascii?Q?8OfwR4QBfsgbI9MhrApbLrv/KCz/+zYnE7hHwumaEpngflYFhGF0T76nRZAi?=
- =?us-ascii?Q?ZEpsJbP4HKLp4TdZ9ir3mgfvowF/2IBH4VQUsycesXqnORHnFgN+0nHVK5pG?=
- =?us-ascii?Q?JRtuBrNkjvnx30GgJZ0OvHIvVnW6LG5oQTPCqyNYhdqrW9zUfEfSyiGYlcDd?=
- =?us-ascii?Q?a8eSCWISM/cJhOrUc/llRb2wG21KbilpnEVcQuxeXPDTcy5roYcoa/GqrewL?=
- =?us-ascii?Q?Ze4PHf+IB+FkFE09O39cIm9PyjA7WFau94zZjMpdFDHS7/OW5dKM2ATM1wbf?=
- =?us-ascii?Q?LybLTCzTlR43kSxxqOUbfsrnWAvnpeoc+gv8wtdejcIXxnEvUepHkc0HKiLe?=
- =?us-ascii?Q?qUfYW8zu1BpHQQyCMS38a47lruwXkUE2j5NtryU6bJfYtpLsfZ/VLKTh55lt?=
- =?us-ascii?Q?GR4J4vuXIeGxoyWoC3/Gi45E0g/7Zskd6PGj9ldA78cwp2UE/69WihoKvODx?=
- =?us-ascii?Q?yb2i8aX3e3bHqgYZv4fDRxLCYCJ/+fzWdCMiSOrM/E+YR6jPz0Rt/OiIekKJ?=
- =?us-ascii?Q?eQm9vrDwMAxb1GP9vEO1X2hvKsQs0v6+2QuQXOgQnmLTFKqDyo+lTYPbE/nY?=
- =?us-ascii?Q?gNvhZVJQbyJv1KsTzNIZV8B65NTQ5GukA1MHwzPEnzfVCAM+RAGicL/lh/ho?=
- =?us-ascii?Q?lpp1/OGqIKWxHjQsaV/1TFW4B0ClPaw2gw=3D=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/YhGNjVL9v1mKjsr336jfy4otFndrGwzoB78IFFu4HtgM07KWulIMo6atpc0?=
- =?us-ascii?Q?rUjTaBQW0hOJ7wRjN4X/ZdRMotJWKcRqCQSkvnbk2TY4lT8M1nocssYV2WAw?=
- =?us-ascii?Q?TRFU8RvJNTaBfzpGsl7o+WSg7le8qwuGeKf9/YhU2MXKRQxBv9CcKYvyE8Yf?=
- =?us-ascii?Q?1ODNWgib/ww0qUfxkxNRECG59L9C4/9nqojatWCd9IRCrKE++v31f2X2A8BB?=
- =?us-ascii?Q?oqD1WK2kzbZzXsP8Oe2LOtrr14t1DP6/bYOI4T0JNWOoqX228zS6DN4pdZRO?=
- =?us-ascii?Q?TStmEmgp9FlaBrZje2Af/TCAQtYAUPojKj9Al9M3qm/yf7bhAWJwa87J121f?=
- =?us-ascii?Q?eB1IdA+r+3HYS6+2U2nIKc5p+JfC7W0zdLA5NAQwdMWxJVMPHJkMXCuvK/i7?=
- =?us-ascii?Q?NX1lnfQ+E1pXdWQkAdaBc4hGlvOFaBi+Yyu8UXOVBAG3T7YNTcSBIT/gNyYL?=
- =?us-ascii?Q?bCNGSbubAXw+CWulT1b1OQBS2CMdYgwSJ1IbZ9j4+wXaBUKrAJlz5BC/5G6U?=
- =?us-ascii?Q?p1P1CyX0jgPS9kpddjS94JcKqZZvpdhEZaUgwzMhPdHTDokSD1jGBy7yPGWa?=
- =?us-ascii?Q?mVmjAgsY4DSGV8f7NMvIIl+OROcxHtrWBGCBSHfsHU2hC6Eo1E3OBJT+kZVs?=
- =?us-ascii?Q?UW703j0JqezgrheqpLkX7GR6REaW8xvfGqhhO24tTILhyYsLvikPKJdbOaTy?=
- =?us-ascii?Q?tIgY4kJBjBK7EayY+ENz7o06/RyG5494GTSeWmJFEYxt4SSCTXap6briCiAL?=
- =?us-ascii?Q?5zYFgYwkCPODMQwB+fLvsiHUzA0QGF/7ydFm4hTFCYsNAdf5pc/oE+7QJFKp?=
- =?us-ascii?Q?9x6GBTwO8wgF0QBqWBP3EbKneWlAKcR4RSnS1bMiP4BbmJcCoVHm/BO+p33z?=
- =?us-ascii?Q?G2pFdEL6mD3z6bsEXp3/9KytQAf7UNtJf1t8tMAdBG1PDc5wRbjs2iwhwpmc?=
- =?us-ascii?Q?ypzmQ6PArcsC1Zkb1bDogZi05iU7wBoJ3tiuuuSNVwWNslir0VSKE3xVCei7?=
- =?us-ascii?Q?6epzsM7qScTgB8g8LldwbjWCdq/MnswK52nTMky/fgedmuC4+Lh1kQ3bbLmQ?=
- =?us-ascii?Q?i6lY2AmOk6xaHaU9q/k24UmNt+5H+5Mh0kuidcuxgoTDMq26ijzZr2jGdRqF?=
- =?us-ascii?Q?DQdgrPsC9m2SyVMw7+lw8g/RXLFSI3RlgUMkxj/y74GuFw3w7V7UYA9Kop+m?=
- =?us-ascii?Q?scB4K2n8rVyeJyd8VCvN9w1cEY3S4n8znPNyZHyjLlbnG0CcbI0s7kr/kd8E?=
- =?us-ascii?Q?MXbenIP0MjjLGNvImlMV?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d74d0772-6f5a-4566-17c4-08ddcb113b94
-X-MS-Exchange-CrossTenant-AuthSource: OSBPR01MB1670.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2025 00:21:43.6500 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYRPR01MB16229
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Fri, 25 Jul 2025 02:27:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,28 +154,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When sect_size is greater than the CONFIG_ENV_SIZE, this wild
-pointer will cause CPU halt or system crash.
+On Wed, 16 Jul 2025 21:44:26 -0500, Sam Protsenko wrote:
 
-Fixes: 03fb08d4aef8 ("env: Introduce support for MTD")
-Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
----
- env/mtd.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Commit 86acdce2ba88 ("common: add config for board_init() call")
+> introduced CONFIG_BOARD_INIT option. This option can be disabled for the
+> boards where board_init() function is not needed. Remove empty
+> board_init() calls for all boards where it's possible, and disable
+> CONFIG_BOARD_INIT in all related defconfigs.
+> 
+> This cleanup was made semi-automatically using these scripts: [1].
+> 
+> [...]
 
-diff --git a/env/mtd.c b/env/mtd.c
-index ad263ed4b29..b26ee80985a 100644
---- a/env/mtd.c
-+++ b/env/mtd.c
-@@ -201,7 +201,7 @@ static int env_mtd_erase(void)
- {
- 	struct mtd_info *mtd_env;
- 	u32 sect_size, sect_num;
--	char *saved_buf, *tmp;
-+	char *saved_buf = NULL, *tmp;
- 	struct erase_info ei;
- 	size_t ret_len;
- 	int remaining;
+Applied to u-boot/master, thanks!
+
+[1/1] treewide: Remove empty board_init() function from all boards
+      commit: 70a4d1fa1ddb2f5f8f9a27442563f182549abbb5
 -- 
-2.50.0
+Tom
+
 
