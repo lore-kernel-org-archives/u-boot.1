@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D19C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 255A8C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E66DA8390B;
-	Thu, 24 Jul 2025 23:18:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF91F8390D;
+	Thu, 24 Jul 2025 23:18:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SRfnv6AA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="itHFeuYy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17E768390D; Thu, 24 Jul 2025 23:18:04 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 367E783914; Thu, 24 Jul 2025 23:18:36 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E7CD835B2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:18:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A4D4835B2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:18:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-55502821bd2so1658008e87.2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:18:02 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-55502821bd2so1658638e87.2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:18:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753391881; x=1753996681; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1753391913; x=1753996713; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oEBT+SJ3256CSzrTCv4lTFzPHgZSa2Rqf37uNjec7W0=;
- b=SRfnv6AARtad4vWiny1NwoXdrEup9HTSaPee4SYJ5AUS7YlIcUEcuiFSlKFkj7644J
- 1mtCbSpyCZkAJXgg3IuA1SzmShiOz1lX/Vor5Ekpi7TwLOT7CuFviaWFfKiwqGFWj27L
- bnqi3bs23lHvE38HuQTnlzQ0Cx19WcSpeHEKwwlgMU/HXGjYZpIa8ghNPNPwn3PRE6gb
- QNLt0u/37k9MBPLa1nUBpOQdy+wGAwKvMUeYyWoNXFeGHbR6r59nZpGWiNSZJjtYAi4+
- JO3Tv5Lx+KGhJbINi25w57/yrXBZ6870XYBlqw/I3vN0c/oeJ1Mze3ZtQ2SQMXANxlFN
- 3Uzw==
+ bh=J53bXYV2iGn5ZEl5khX8M01QSd1ksfi3VaTTGmGtUWk=;
+ b=itHFeuYycwzIebzfZieKAs7JrF7mS1iYOrcS98aOQqJc/gLJpGDiLTMnh1LL82yvMb
+ dM/i9/E1ubQY6XvQtqFh8H/9xWAnash7JkpFq8C5fu8l0lH3ire4+87wZTkntOSUr4xp
+ qd8uy/sX6njt/dYJwm7Zg3hNYQtBXV6okA9dkBVWmp2G/7W/U+lnzxpj/d3I1Ngysn+/
+ biAC3c9FyJtX0YtoBbbCTXOmmgPa0wqHwD3/YeKyBYmnguHSvDVRB+tRnCDMsdMmh5uO
+ 9av65qMfHQHxVRJfrk4OGhoY3G5ZfbPV/CBswZhcYj8gP3ZXgpl6zHBzXqpELUju6DEI
+ DfyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753391881; x=1753996681;
+ d=1e100.net; s=20230601; t=1753391913; x=1753996713;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oEBT+SJ3256CSzrTCv4lTFzPHgZSa2Rqf37uNjec7W0=;
- b=IlZ420Wl/85A+9JvRWETX/OWNqCTK4msrjA9W3Yx99Kea6uDWedibNmCVX/QZvPCjU
- VST3meWIy7TtOABl9LULE96Ttsp0gMKZ3h+h3tr03cVoYaXlBrHdjxFQp8zgB/3uonmz
- OPjrP1wLlHetRzHjmev4lJ4Ewl2yJEoidIOvksAri0gvEtlK1//urWyh2pktAg/SaqIu
- S/D1avxC/zN5zE1rtYr7OagMPehsd6mY282x7RBvSjd8BI2wbdhJF6rzf2hZzQri7qrx
- b+bMCyi6pK6F/FqTRpv25cwBPP4RVDKjvDqM6RBIErLYKhAJZDMb1WWTmMG3+4Ywleww
- E+Mg==
+ bh=J53bXYV2iGn5ZEl5khX8M01QSd1ksfi3VaTTGmGtUWk=;
+ b=hR6fx96Hlnusu/vLod6JPFZhYmv3wysvozOAQRxQ8XD1xYhBEvk2piuql5tbL0pbaB
+ lSokY7ZNNa9mVEzC87dEyUG7DGk5k2ZEbqwmtZqQjdFPlOyzsBHXXub/sekooi53GYoW
+ hivLWzrYXoEqVMiB5ihPsaHdlG13h4WStw/J3bXtFyCb6KHp+QoHZ8aUQOFKUvSBbpkW
+ FR6+fkkuyIgFZKbvHUOIiJmnl0PNtH/WJLiWvkCIwp13R4jzt722ze6m2lwh62/o0XdH
+ gW5TfoHHGE56LUM3pRrYqB/y6NqfRNOgCUR2YFyogwEcoQdu7zVnLFBWqgk/cGsTXyPC
+ wNww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXexbwTg7etWmWPt1sdlsDJKdJV5ouN0ecvmfxRygREB7A6N5e7buZpQ/bWXxWAHUa2gL8dLms=@lists.denx.de
-X-Gm-Message-State: AOJu0YyE4ipeX8DDGCB0hQKIIqmqu0GR5IslHi/wqf5vwa8G0SAKfPuA
- YkgY/jf9CZb4iPHb+mQEMZ7ChdnlIYmDDL5xy05wTKWCkrjcC+AW3mPEQclav4e3fGLe9nOvgqu
- a+M83FM3mN4yoyCa5VBdA713PHoDqB8T2+w==
-X-Gm-Gg: ASbGncsRyDgghvUFXIIIllPlSXqvRZTRfjSLfazuM3jb1Ta34GoJA8MNH4w0GnChRPX
- H9Q1h5mDMcEcRpWeydlb0aFVIhFYE4r5Cx4Xz6Wh7co4U0N+WLUmRNPunggGjnu/6zcwrkW4x/m
- XuvlgSlBiMQTOH/vdwpvgeeYRcnhsWVchlZ8HcbGXFDMkyf51TGle8QNvTLraaK8YWUvyy8l6ax
- QlYAT6UkTzWQpvwH7DWQuXf0TGdkmIT29mxHiQ=
-X-Google-Smtp-Source: AGHT+IFt9psAxND0+2TQ1hA5mrbewpMQW4qWwlGYNvFgB3bzYxJoGOh1oBrX+mxVhaMpULuO59lhUKR1hhNYL2ThYF8=
-X-Received: by 2002:a05:6512:ba9:b0:55a:e1f6:bd98 with SMTP id
- 2adb3069b0e04-55ae1f6c27bmr2389531e87.6.1753391881071; Thu, 24 Jul 2025
- 14:18:01 -0700 (PDT)
+ AJvYcCXtkTns7sONqJK3m8uQESovIx38ISGxJU9vBnIQnuFkHtjDV5usHOUz60KVarmoEg1WGCXA+b8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzL/Dci88jLpwC82VbdrbUjJCepCUiwwVbbbych6YTFDfhen1cL
+ SGPCjRg3HbyEDyxPgvRpR4OfJQfyJg+Lf4YqyNfxHGNaDQq3zD2MmyOxkALk6mnOPiebblm6Bu1
+ 4ErC7iRRVNQOctBCtAz0X0Jzk3/q70UzDAQ==
+X-Gm-Gg: ASbGncvcXmyU2wOKteDHLp/zXdlHHAessScUoQFlQMcWd/hO+k8+Atr8UXO+zOLYwXM
+ ezPlrKtFrSzA0QW3c3w/jvt4Jr6pGvEebMz1ketGmcriCNZDdScULFoftzziKZEWz+3IdgsWKFA
+ Ytl+DP6YikWFkv0bVjnIkWdf1LEDxNnAbUFyXyzk21KsBgZU2JDzcq8t4rb1qyeUu/oNX4E5IGy
+ ColtuVdxjxs4G9rutLzbaLrE427APg7spY4+bNXej7ev/dstw==
+X-Google-Smtp-Source: AGHT+IG/Gzw3ljayZeoCAuOZblnFxZuasdbJWJ3N2g2ogcJJSEw8yWmUfRr+mv+qXXOoSQaw+BZBMSdghsTbvsvyr60=
+X-Received: by 2002:a05:6512:3d0b:b0:553:2dbd:6a61 with SMTP id
+ 2adb3069b0e04-55a51380dc9mr2988438e87.14.1753391913375; Thu, 24 Jul 2025
+ 14:18:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250723134557.1972331-1-festevam@gmail.com>
-In-Reply-To: <20250723134557.1972331-1-festevam@gmail.com>
+References: <20250723180016.2021172-1-festevam@gmail.com>
+In-Reply-To: <20250723180016.2021172-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 24 Jul 2025 18:17:49 -0300
-X-Gm-Features: Ac12FXzXigLry7f9i7yihQMvpyHX_zxmsyVf0mEotVQZhbtBzeSLysqPM2Z853c
-Message-ID: <CAOMZO5DRLueuA2nJ6FWe1vxrNbuuFrjdJk3dpBogVyHM6NYJTQ@mail.gmail.com>
-Subject: Re: [PATCH 1/3] imx93_evk: Fix the board name in MAINTAINERS title
-To: peng.fan@nxp.com
-Cc: trini@konsulko.com, u-boot@lists.denx.de
+Date: Thu, 24 Jul 2025 18:18:21 -0300
+X-Gm-Features: Ac12FXyAltioFNawhs1lbNFRb1jzc0AhCmDPNrl3icb6dcgHJsA5pSx2ZyHm2qs
+Message-ID: <CAOMZO5B7sQBQbaae+S9TjP=Ms1aw5xig1Pkoyj6=rmCNCtQjvw@mail.gmail.com>
+Subject: Re: [PATCH] spl: spl_imx_container: Delete uninitialized variable
+To: uboot-imx@nxp.com
+Cc: seanga2@gmail.com, andrew.goodbody@linaro.org, javier.viguera@digi.com, 
+ trini@konsulko.com, u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,13 +96,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 23, 2025 at 10:46=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
- wrote:
+On Wed, Jul 23, 2025 at 3:00=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> The board name is "i.MX93 EVK", not "MEK".
+> From: Ye Li <ye.li@nxp.com>
 >
-> Fix it accordingly.
+> The 'overhead' variable is uninitialized and actually shall not be used.
+> Delete it to fix coverity CID 37041718 - Uninitialized scalar variable.
 >
+> Fixes: 73c40fcb7367 ("spl: Refactor spl_load_info->read to use units of b=
+ytes")
+> Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
 > Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
-Applied the series, thanks.
+Applied, thanks.
