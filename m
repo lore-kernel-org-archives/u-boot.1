@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69AD2C87FC5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E435EC87FC5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:30:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A06D383929;
-	Thu, 24 Jul 2025 23:30:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F2928391E;
+	Thu, 24 Jul 2025 23:30:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J+2limFu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m4Q0qnLu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C71583927; Thu, 24 Jul 2025 23:30:36 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 867E883927; Thu, 24 Jul 2025 23:30:37 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74834838F0
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:30:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30BB38391E
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:30:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2ff8d43619cso1082739fac.1
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:30:34 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2ff8d43619cso1082743fac.1
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:30:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753392633; x=1753997433; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753392634; x=1753997434; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z5MMo2uKHZoaYq+zg98GaeG+EyQd19UF/xTr2aXLKrI=;
- b=J+2limFux7V+b4oZYPsfl11kHpN9AFcazQLo84YWMMWaL00YrIjSf+7NXqLxUy5PsA
- rqYflud5vOf51wHRfkgnWc2ZXbr1Z7erNdkqfYy4mL22//Ou+DAaZ6gdtLULi8tuA1M6
- u2KNKAg5vXEFIGQl2tyaGYxePA4H0ETyIflCc=
+ bh=Bg+eaCjjR0lQgSkM49U+OehtpaF2OlcBDbGZIWivXp8=;
+ b=m4Q0qnLuC/XWCNcrym0N64vXX6Z7hX2hDJUnghlYsiwmijHC1NoI0tWZPMzgdu/AH3
+ Hh70k3y8PTudqwbRV+xWFSLPWfJULUc1lxyRVTV2Hz20zMhYsFnW51bE0cvCTCl43eeF
+ 3axWfO2yJ+lzlMXwl3kPO+k1nF5QjuZCmQP8E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753392633; x=1753997433;
+ d=1e100.net; s=20230601; t=1753392634; x=1753997434;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z5MMo2uKHZoaYq+zg98GaeG+EyQd19UF/xTr2aXLKrI=;
- b=o0DVJa8SDzJwd5CK2qGm4TYot2na90+CT+zW3GwvgZ6PyHsSM+cgQb0uX+IOYEW3At
- ZKj5W1wCJDW6UyvPU/ZgYk+nTNshBjHntthf4yofv9WQcTJKF65DNAlh7nq2T68HqEVN
- UYMTJm3s8cizFHXElMO7DNXTGSu9lRPHHAGZCsL11Jr852TavGGOJR5rgyxCZaUDAUKX
- hTsIPdSibadAdwcANv+HInZbSokkeRp11gXHVzrhZ0g0/weCJZ1ODEQYmIJksKebozj9
- qaiCAh8A3wId7I83TzlvU3B1j/+EH+C5j4N7xu+2/LNtBG398apLGb9dDo2pjwnanXd4
- 9vHA==
-X-Gm-Message-State: AOJu0Yzu28WMWMMu2skdgsCdTeeiP2oEenuS6suph5vnMcvBGfr9XE0p
- ToaVOSOb44Js52EJ6yoCSrNmfo1GCH89aaIKSaxUYd7FeTl/12D83uCbRlepFSPd3ng=
-X-Gm-Gg: ASbGncskOekWZLlocx788/Er1kKMAE//fKD0TFym99mevLVjr+Ui6Ihn5eKGIppocE/
- F7ntvlEjHmmuZK6Si6fEzMiGG1tUKUCfZeQ+Vh94aR39sXM2I22sqZnoLj/m3IvNkX+LBmhfyCF
- O2bbGI+ut+iCrt1WEPOtraCsxAzz3SuM0fsVag9YcTcbsyk1TkLdoPjVkb2wWup50CZXgUHPFjv
- M8ifGWu+6NjMuJq1O8lZ+kFzzRixHCoCesQUDR5NS2i4p97faAGCaO9AyC+6U6l18lu3PE6z8zb
- VeXk6Swiv0M0O2EOlu3QR/pirpzawbij/cBi7cPGhojg2i1yMdfUgNSoWQ6GTEMAfj2476LqmJv
- GwhLJeo4mBEjlq6jMngKZwHHy8z+4NZmcUTre2tG7FqPP1cbJeXxZs0jpclczj8bamQ==
-X-Google-Smtp-Source: AGHT+IFC3Gk9d0adVgEE90UMNHKjXc+bopvtABpk5VD6vJ3+PcFd1bsK1tS+6CRId20wCkbfeIVnEA==
-X-Received: by 2002:a05:6871:b28:b0:2bc:7d6f:fa85 with SMTP id
- 586e51a60fabf-306c702783emr5274456fac.16.1753392633189; 
+ bh=Bg+eaCjjR0lQgSkM49U+OehtpaF2OlcBDbGZIWivXp8=;
+ b=CC7GwDUOxue+UJAp2SFRWo0s2y8x36RhtynOQDL18F/8hI0Rf7ExAodxyB34m29o4d
+ vSjORVUYGi/RsLmq2qRYj5wMUnm1twf669MBoZwI8ZdStz6hBEz0sQWLopd0gGpO34ry
+ kYjd2PTGUmfT9iVplNP0y7TPKva+gVXck2+BAwzEOFQ0TA+aHCs0zZ3Vvb33OQf8gocK
+ 9u8YzlvvP+4+WQ5ySXXiNv/6Fcyr6SAV8eMT+jnyidPne9MUSbdJh4moFh70KDHUxCbH
+ 7ZP/qYI5JuAqXYZjLt0LgqRndHEZG6D19J18N6nlvnfSR+taQ2JejrYcDlsVPtNrHNJq
+ 56Ow==
+X-Gm-Message-State: AOJu0YzGRcjoLlCTmnrsFio2NafZ/JxXoxo9+P5itYsEqDMN1zfE6OGC
+ rm4bVoey+Psd7AH/G2S0dOnhK2gppewnZS7bkJGYftWjWgqbMUrzdJpao1CAEiNqxggwflQEz49
+ NI14skww=
+X-Gm-Gg: ASbGncshJkEoDF+eU1uPAMgCiO+Q0/DSYxYfOTlWlXFL22TX53EG/XWqmS7sPpTN6oy
+ TWTMq2rkEMITiQoGZvFzrbWvtRO0QA1DZTJJAxcclxvHNbF5vJQs6Val1vPcXQ04tdOztLeNQ66
+ G2aomc87IKa8vIpkJV9S3rmb5bCilVOrKyldzIF0O6hAonlnuu2yrKqtTwVUmQhVmzNq8vl7dQC
+ qy4+0TSbXnZVHq2aMxcZaxQpI5QVJa57WkNejbQKcqygcSoCpF75R700oH03xuPo3KPjyZ5sVVr
+ XP8rS/zORj+JudwkMsWRAPLju/S6EIWU0uBUhVxkViFP79IhO5ySijOET8QeqVoPEheYSfPabm7
+ W1C4u0/Vx+9HzuzphTSm2MoMOnvfPo0uhkfjX309grzo193LPV9EJCt8=
+X-Google-Smtp-Source: AGHT+IEBVesH4B6rBvX+18F/rvLA+0KFKAylwn+2aY192w7uIltzHuwAJXNPfTWV9PBppMzpTFlBtg==
+X-Received: by 2002:a05:6870:7988:b0:2eb:a8fb:8622 with SMTP id
+ 586e51a60fabf-306c702784amr5487728fac.15.1753392633942; 
  Thu, 24 Jul 2025 14:30:33 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-306e1f8a7adsm660520fac.42.2025.07.24.14.30.32
+ 586e51a60fabf-306e1f8a7adsm660520fac.42.2025.07.24.14.30.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 14:30:32 -0700 (PDT)
+ Thu, 24 Jul 2025 14:30:33 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250717-sandbox-raw-v1-1-934ffc784d36@linaro.org>
-References: <20250717-sandbox-raw-v1-1-934ffc784d36@linaro.org>
-Subject: Re: [PATCH] sandbox: eth-raw: Prevent possible buffer overflow
-Message-Id: <175339263239.1899261.14495207607284532963.b4-ty@konsulko.com>
-Date: Thu, 24 Jul 2025 15:30:32 -0600
+In-Reply-To: <20250717-exfat_label-v2-1-b012eacca67c@linaro.org>
+References: <20250717-exfat_label-v2-1-b012eacca67c@linaro.org>
+Subject: Re: [PATCH v2] fs: exfat: Remove unused label code
+Message-Id: <175339263327.1899261.373446122723160915.b4-ty@konsulko.com>
+Date: Thu, 24 Jul 2025 15:30:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,19 +96,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 17 Jul 2025 12:09:15 +0100, Andrew Goodbody wrote:
+On Thu, 17 Jul 2025 16:29:21 +0100, Andrew Goodbody wrote:
 
-> Instead of strcpy which is unbounded use strlcpy to ensure that the
-> receiving buffer cannot be overflowed.
-> 
-> This issue found by Smatch.
+> Smatch reported a possible buffer overflow in exfat_set_label but it
+> turns out that this code is unused so just guard the function with
+> '#ifndef __UBOOT__' as well as exfat_get_label that is also unused and
+> the helper static find_label.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] sandbox: eth-raw: Prevent possible buffer overflow
-      commit: 5c0827eededc8392472823d8e3e50cd0f5fad47b
+[1/1] fs: exfat: Remove unused label code
+      commit: 8f3820dc3a262b0d11c261bf3c526159d8c771e3
 -- 
 Tom
 
