@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F419C87FC5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:16:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EAF2C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:16:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AB48838F4;
-	Thu, 24 Jul 2025 23:16:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC26E838FD;
+	Thu, 24 Jul 2025 23:16:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HFALV9D+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VvcqBtoY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B041838FD; Thu, 24 Jul 2025 23:16:00 +0200 (CEST)
+ id 755FE83900; Thu, 24 Jul 2025 23:16:39 +0200 (CEST)
 Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
  [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18A87835B2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:15:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42F8E835B2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:16:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
 Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-32b50f357ecso13507471fa.2
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:15:58 -0700 (PDT)
+ 38308e7fff4ca-32f144d0db8so9808021fa.0
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:16:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753391757; x=1753996557; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1753391796; x=1753996596; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+TjmNVEz6DVk3s6XDfI+vlhacHs96fJlyqwAsOGJYe8=;
- b=HFALV9D+RtHxUhWTPDdere5HsaEbt39s1UauMw5FmPJZWWLu3GFZSRZ07fqKhx1Fsn
- AhzQhCJ2Rgb9/9wZwlw2K1iC7w5c8lJSFz/CwkJyDgzZub0HMDG/7OxzEvJmWtZXTXV3
- Vcw7KUgmA7dJhp6n/52sbn+PUIYgmKsv77tLwewwCHah5jwwZWF86a1F56+GleAhA04l
- c+PNGqkwfHeoVf34f5kPGAEy4Wp2AjeWxBBJH15hP6ID1vlYTF2U1xhWDd8YkPD932D+
- kLVrlmFIpVa5GHRSRR/yPs79ljen+re64bbng0kP/M3WcXkMZTdCjwQASJU79irQa0dA
- lA6w==
+ bh=k5/xwgis50JyrCJAQX42iJWVBKcgQdtykvkIRozbsDA=;
+ b=VvcqBtoYOhcr4BgyBpnCNLx1tCre7nKGmbXMJapFiN47dmc5QOblEveGNQhkHLD7m8
+ iGDhgx+twPJr5z4Ep+ll37Mfi0inGwzqvLpOFKI3A6cf+YA2R01R4PxW7Hft5Fca+6rm
+ hHsDdYiyNOy6KqSGMyfjTLtsNKMhj3xEJqXHPgu/zTYxV7LZEmDEa7Ch7BF30eMLNY5L
+ RXyh2K26f+WS+4LxZa+w1UEVzAJM4+2bwrMq7sF1lq6rvPo/+zBJExRfInu3jpLZA9A6
+ zqNrpO9vgwLmIWN0ZUxseI+IoG4+UwjksG2oCA05RF7ql4fR+E2i6aJGV4VVZOY8jAta
+ Lseg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753391757; x=1753996557;
+ d=1e100.net; s=20230601; t=1753391796; x=1753996596;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+TjmNVEz6DVk3s6XDfI+vlhacHs96fJlyqwAsOGJYe8=;
- b=ic3QAv9OJZNtzOMi/AOhPC0bwNM/VNrWL4WAnXdsw4j2H/Y2hCTi7gdmBO4wqhF6hV
- q/OYIP4EuXKWHgO02225L8fPkVfDPuAvkdYAgSTLjlgjK56KPG2SnT1P8kxxxC6XjFPl
- eOTULG5+iPw4BxXgFs5K8PRk7S680IqDUCtLWsf2A0DwYZgVkuQLCdY1LtpnokFY4XdB
- b0DcBIwb9yDJoek2d7Nm0SXVvmL3QaVp2s8Q8YsL7M2IUNgJEG4XdxO3zAIHdbBRPAFa
- eomVL0dMTGEddIwt+TBmDCLQAJ/67a7ocQe+/sK8OgTpwmbxl7jgQqGJ++yRgJF5ZxW7
- Orkw==
-X-Gm-Message-State: AOJu0YzCTcM4fPsXn8qaiQQ26jv2MYbkbnW+eDtTBOdbc+aCGfiKhGve
- XR4Iuk59gyxjPC3/QzD+CJ0yTa5PNo+EYLNWyvwohDcmt2r1V7X5CSoy4/5+S6CtOudaPHtO44h
- Qq6Pd93nyrZ8Z4/eRaGu199xPaLu+GI8=
-X-Gm-Gg: ASbGncva5QJXSHwqulUVroggDW3poDl64ndpif9ZbSj82H707TFYb00mqU9qW4qPFaR
- 0pOyYUxLPttAIFfFDwJxKZ8t9Ykl+ckJf6Hfxzog4Lx8N49s+8EMD7WbN0fYXZyvoo2YWzV6uV8
- /jKd0GN8eAAJIVAV6852+V1V1eP0V4pn0Xvssxka7TbkJxBYw08j92ksvaBVGA4UsKKn95v91NF
- d9cTboDVBbUh9HdLWeePT8hkiScKeshpu1UZZQ=
-X-Google-Smtp-Source: AGHT+IE8dCwjyUNvcwZdbMC9EvU3ib3z/XCdTWMwGH1l1g6cgHjorecRcUh7mjADc0zDYJbY27ldpybMcVFQGr3uTPM=
-X-Received: by 2002:a05:651c:2105:b0:32b:4773:7a80 with SMTP id
- 38308e7fff4ca-330dfd27fc8mr30757751fa.25.1753391757127; Thu, 24 Jul 2025
- 14:15:57 -0700 (PDT)
+ bh=k5/xwgis50JyrCJAQX42iJWVBKcgQdtykvkIRozbsDA=;
+ b=BfltvYR5Sen3jFANL99Cygxz9ZLTy1FEOifw6cHrtSq4VZ3WTdCzbjJiLLZfhY1nID
+ 2OLFl3oji9C4BYnf60lc7ujRWdPGMlTcnVMO5M1kzOHee2KMyXKQsdZdv2DKcPpqPd9q
+ ojz5lPzdwHGodtPan/T6NSfPIlcxBtqQ7uorQqoRRN3DKi20Ix99u0W88MC6/2uWux6Z
+ xuG9X6A1H53DG3Xt/Yami4Kh0Y/iTBydlWj3aq7uOg6C3UOKiuBH0uOsKELEEK9cR6bH
+ /S6gXwP60/rcwAIBwNHE2ks1MMKsKcqyAmzmyxCCWVYl3ROhBZSN+nZnl19/dwivonvW
+ 3b/g==
+X-Gm-Message-State: AOJu0YxFueU14DLC1iDS2za/Foz4NOIOfcqDBTwptnSi9zxyJQ11tGR7
+ yI/gQW0LNskgkDKXQsWXotoPTBNGerqTloDMAM95wbNT+mfaKxMLGZFUmp2PU59L0NNWfXa/Ycm
+ zT3AlfyvJbYWm1BBYH2frD0ImYLysSAE=
+X-Gm-Gg: ASbGncsFjbl8mVhFpuv22EMu1wNKM7kYFXG3m6oODnOo9cxm1M099pVf7jeJ3m5qg/0
+ 3JEIhyrZbNdcO1WPdzNcVOzyVKfKhmJRYqC+T+idevPd4ZTEXTCeD2bDNY8rJxZKerPpMXaB+2S
+ gyB0upYPGvJVT3hHYuMBTl5Jy0C6g4V7UOKriUHTU/BCyqbx79tz/7iJRRQPVycmYMg2XSi+oAW
+ +DAVKhGax924T5m8BBDYQGjoTjbSfMdWqX48GU=
+X-Google-Smtp-Source: AGHT+IEWlGpBtM/frkau5AASdlr4f9lvrcaWYcRuUwrFAYLg4yVwzISgeh05hIAZThbzYMqLzaM5iQcx08AHWSGsjls=
+X-Received: by 2002:a05:651c:408f:b0:32b:c74e:268 with SMTP id
+ 38308e7fff4ca-331e25b5ademr6219041fa.17.1753391796292; Thu, 24 Jul 2025
+ 14:16:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250722083119.64084-1-frieder@fris.de>
-In-Reply-To: <20250722083119.64084-1-frieder@fris.de>
+References: <20250722103915.105561-1-frieder@fris.de>
+In-Reply-To: <20250722103915.105561-1-frieder@fris.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 24 Jul 2025 18:15:45 -0300
-X-Gm-Features: Ac12FXzcqoiOAMJyhS5KFQhy2-y9VB6416jfI4L6N8ZI_Oo7KaoWel7MFIl2bio
-Message-ID: <CAOMZO5ApfBWx8dZP0k0-i2Vervc-cWZRCp=AfA_0pS7zzr8bRg@mail.gmail.com>
-Subject: Re: [PATCH] imx: power-domain: Fix crash due to uninitialized 'id'
- field
+Date: Thu, 24 Jul 2025 18:16:25 -0300
+X-Gm-Features: Ac12FXw9XKPBWKWTHGXjPQY9SYkDXE9GlSrGrwHkIJLetqw36HAsCpUdPRhIKPk
+Message-ID: <CAOMZO5D+yT_JyipqOLaQX+a5mCq+dcs5ZJa7E=xpDh1FyEUgQQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] imx6dl-sielaff: Convert to OF_UPSTREAM
 To: Frieder Schrempf <frieder@fris.de>
-Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Patrick Wildt <patrick@blueri.se>, 
- Tom Rini <trini@konsulko.com>, Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
+ Fabio Estevam <festevam@denx.de>, Greg Malysa <malysagreg@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Prasad Kummari <prasad.kummari@amd.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,34 +104,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 22, 2025 at 7:24=E2=80=AFAM Frieder Schrempf <frieder@fris.de> =
+On Tue, Jul 22, 2025 at 7:40=E2=80=AFAM Frieder Schrempf <frieder@fris.de> =
 wrote:
 >
 > From: Frieder Schrempf <frieder.schrempf@kontron.de>
 >
-> In case of the i.MX8M power-domains (i.MX8MQ, MM, MN) there is only
-> one power-domain for each device. Therefore the 'id' field in struct
-> power_domain should always be zero.
->
-> Currently if a power-domain is accessed after the initial bind, the
-> 'id' field is left uninitialized. This didn't cause any problems
-> until the following commits were introduced:
->
-> 9086b64ca071 ("power-domain: Add support for refcounting (again)")
-> a785ef24487b ("imx: power-domain: Enable refcounting on imx8mp")
->
-> Now the 'id' field gets accessed in the power_domain_off() sequence
-> and the invalid value causes "Synchronous Abort" failures.
->
-> This was observed on a i.MX8MM board when running "usb start" and
-> then "usb stop".
->
-> Fix this issue by setting power_domain->id to '0' in
-> imx8m_power_domain_of_xlate().
+> Switch to OF_UPSTREAM to make use of the upstream devicetree.
 >
 > Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> Fixes: d08a194871fd ("imx: add support for i.MX8MQ power domain controlle=
-r")
-> Fixes: 9086b64ca071 ("power-domain: Add support for refcounting (again)")
 
-Applied, thanks.
+Applied the series, thanks.
