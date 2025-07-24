@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA8FC83F1A
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 14:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3210C83F26
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 14:46:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 187488388C;
-	Thu, 24 Jul 2025 16:23:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47ACB83890;
+	Thu, 24 Jul 2025 16:46:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S7RMdFnJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rAmKB+H7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D85D783893; Thu, 24 Jul 2025 16:23:13 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 63A5D83893; Thu, 24 Jul 2025 16:46:52 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7157583844
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 16:23:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7379D83844
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 16:46:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4560add6cd2so9044765e9.0
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 07:23:11 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4563cfac19cso11809505e9.2
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 07:46:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753366991; x=1753971791; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753368410; x=1753973210; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DyZv9w+R07eRLGGBUgQqCYASiBWuvWRCq1UEbcShjKc=;
- b=S7RMdFnJn6i9Vy/wRIC21gz3FmPtMdN2VcqpQOL4yJ0TRwZsZFgx2OMrvE1EP4TQH2
- tO6PdKIW9DNR0BHf7FXja9GNjX192azTTrk7hv04rdy9Q9qAmDdLcLOmnVTap9AqEgkN
- bEthu8V8QfFxa3JncLuSz4wXG0aC1sFZedChtz3qyqYBcDKrW3pOUz8vsk098u/ue45e
- MPru9FePSUikvmxF38rSMVcZxObXMJ5IQZl2UNmaXV8FFwlTIyVJ3QV5jmJVdeFK+pKd
- KWN08kcUzf77ir49LVSrndspA1SJi7GS1uS2GAkj4g3S6XB4XEA5Vg0ugIEckF4/uCGM
- c2tA==
+ bh=FDpqcerWeHLwEaKn09OLAtgccCiVXA6eF0JEQU8NQHE=;
+ b=rAmKB+H75qzUbJUcMO6gZ2983mnbegr3kYuZXaiGZ3eawVEa3S9NkvxPia6Pp2+Oxf
+ N4EGitEw3aFRVJ1fZGb6FY5FAGcwSnbW/MvjuRxc0tcUkj64NtvaB/qtTNNIuQ4aqP+L
+ hm9IMoi+8R7uKAcoviLt2WYHKrZHdnc/+p64N9Oys70Psp5DSrjbtECgSeqihpdsvCI/
+ dxvURBX1ydkigncAoc93gBa2wesNKc+uppUnyF5r59+7PqwOR4vGLSTImgDrwOqAOyp2
+ ZMbHwXmZsiMjSe0Q9wnxeiKpgJqNIlEtutpoqxRo2l2NinMl3drXIsGekawAMnnBYK/W
+ wcYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753366991; x=1753971791;
+ d=1e100.net; s=20230601; t=1753368410; x=1753973210;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DyZv9w+R07eRLGGBUgQqCYASiBWuvWRCq1UEbcShjKc=;
- b=UdxVx8ArZkaN4wg19SBpRaZvyHEpBhEg9+8L2gxN4NqpIy2bUwuW7LxI6b1o4P1lkz
- eRk1USgqdfBlQ8p6+JSgZEDQv0J5++hWQ/6677Yaq8Kcx/R6X6F8XRtRS9sMS2GEbiM/
- dfn39ZO5F6YPZVScogH0i5IISYVJjfl7jSxN+PkybDeSwlvnXXlxHs8awVc504zQgnfu
- 4j9qn0rUBTqVOrpwI4xpNXy2fR+X6UKZ4Na2dpStKl4GHv2PhijtNysjAX5UkIgiHHgS
- wTeGuXH3jLne5CC3afFTrBn5tZnfHiouKUJqCcIE3FWY8/trzR+t9h9a4rEo8Rgoenoy
- aDzA==
-X-Gm-Message-State: AOJu0YzTUd6DBK3UMg/Qa0EsVFEKNYY0atT9/l5sYEd6iU+qi5/6UvwO
- Dzt1S46SGlrsi1JNTwZR78qRTfM7ry6x9/Ij6DBsJvzQ/dTKBkVFgMuecLh3yzPdrfOyG1v+cCj
- B1ylbAY4=
-X-Gm-Gg: ASbGncsq+16HF1O6KOwDlDS+kkZunuxTWL5AvMxIlAhsayfrf6Am2on2nWcNpcEcEOU
- i6C7K7JP9wxEEVJBkzmtKoo6gwkQRdNDw/v1ooRqRNoSV5naqdwOkxHPUC6mrx/+C6QZ5YHAr7R
- ws74o9NKfp9N/F5mhHzIXw5zL2IbZjTEGvQNE3ejfkACRAATXJVVFUkvQ/36x4azXbxNaAm+nQr
- +GHKl212h92Kg7o5e6iNPrxnxiB0FsnjQXUyaIZAtq3ipyN/f/edNRjNQ/Z32dQUhmLHGHCLGkk
- /vEfnm0zdDcU6kF/n/yD8feBwKgKwJqXOKgWfaW718uxueft5M9mJZNtN9Wgz4Yl7z1ybXWLGr7
- ySdAhOevBPX8awWq5pPK4fTr7XXQF9kqR6TQhwOANT05AfdN4SXw=
-X-Google-Smtp-Source: AGHT+IHTDDjUoCcVJMsAY2nkgVy2CRuRQDeQrRnqe8n9o+Ge3HrYj15cljO0mF4cUbI1qlyqHuoSJg==
-X-Received: by 2002:a05:600c:12d4:b0:456:23e7:2568 with SMTP id
- 5b1f17b1804b1-45870580784mr16402955e9.13.1753366990679; 
- Thu, 24 Jul 2025 07:23:10 -0700 (PDT)
+ bh=FDpqcerWeHLwEaKn09OLAtgccCiVXA6eF0JEQU8NQHE=;
+ b=wziMzaymKc6grSjBQgLn8mEIlA6SRBvenOHMtDq5nYE0XJUrWXtYHQssldoGvsjB6/
+ WFTIRZiZqQTgIAjCcmjbw+eoPL1dqd62kMXFZYruTzahRYjzDecVUBEJyTOEcErbAsWo
+ e6H0k3bwQ0a8DCr99XGeQHc9wFpNqy5qfC+7GjjGU85oHAy2bnVjXi4SWNprDGgoEtpE
+ L3QpIZGERyoSYWPIDE4yk+ujl9xMLykl9s4q9ld3SJKWqlrni4V5n2SN8YAlcosA92uW
+ xn2jRboO1ROpHaNPcjX730mjT3LjRkuR+FC/Xxij8egMYBuqVXPZGIY3D1BQg7DPh0iS
+ ZnMw==
+X-Gm-Message-State: AOJu0YzDvUFRn3Vozn4PQjBvUM/FbBUkUrLxpgCIUt0+CRhejfnNqwAb
+ zdsLy/6HevXZ3BhZM9mYN8q3hi5IWiEgKxP+IRY3/fj5gufCibZs8P9yO6L6K7pd9TQIWkiI2ly
+ Ihk70VW0=
+X-Gm-Gg: ASbGncsOCmzgtL2kQpZi3Kw2gogQGsFunAl7WapoZQBR3L0jpHLVIP+u9Tc6+SWiRns
+ JFpBkVg4jSclmXlgEajeLio3epQPaknk6/GoUqkCcRcX2KTVNXPVGsnncOaMRWmmMMGcyg8znMI
+ Cvi+bS+w9T0U1QsVzFIoSg8uiOic/0eFGBzBpd9H+U2KckFxTQ1NXBOKTm6sCPRU5xF0JVLVEIQ
+ HWd6hpBrWOdNkCM00eJbXD/2EJpsstlq1bphfz6sVEn0wRq64L9nsoyQJqkkrHc+Dg0jscYS8nB
+ 7id4AbKpGJL/AuOmU7F6CKoFspQ/sb3XXpMhZOIAaNvOir7DUOwsEYFJLsM7+R8hf2ijaBeSr5g
+ B5EejkY3KoDRYDZa1O0ka1g/ITChkOcqpPMNbyQ3WGlrb3oD1K4nxvtwlN5xSYg==
+X-Google-Smtp-Source: AGHT+IF44Y/CGF7wdUSxWzx0niRFQZ0WoLJ6cXJRUjzyLoWMHzZcJnrj+5/Xad6T4kJVlZCiKWO1Qg==
+X-Received: by 2002:a05:6000:26c9:b0:3b1:9259:3ead with SMTP id
+ ffacd0b85a97d-3b768ef72b1mr5858361f8f.28.1753368409688; 
+ Thu, 24 Jul 2025 07:46:49 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:e4d2:a911:6ad2:b1ce])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4586f5169a2sm16203945e9.4.2025.07.24.07.23.09
+ 5b1f17b1804b1-458705bcb61sm22052795e9.20.2025.07.24.07.46.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 07:23:10 -0700 (PDT)
+ Thu, 24 Jul 2025 07:46:49 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 24 Jul 2025 15:23:10 +0100
-Subject: [PATCH] arm: mach-bcm283x: Fix binary logic
+Date: Thu, 24 Jul 2025 15:46:49 +0100
+Subject: [PATCH] cpu: imx8_cpu: Provide default temperatures
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250724-bcm283x-v1-1-f56f1a458991@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAM1BgmgC/x2NQQqDQAwAvyI5dyGmK5Z+RXrIrlFzcFsSKYL49
- 649DjMwB7iYisOzOcDkq67vUqG9NZAXLrMEHSsDIXXYUwwpr/S474EiM2IfxwlbqHVil5CMS16
- ufmXfxC7xMZl0/y+G13n+ACurdH1yAAAA
+Message-Id: <20250724-imx8_cpu-v1-1-f72f2755f0bb@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAFhHgmgC/x2N0QqDMBAEf0XuuYEkVmz9lVIkxlXvwSh3bRHEf
+ zf2cdhZZieFMJSaYifBj5WXlMHdCopTSCMM95nJW1/Z2t8Nz9ujjevXlCV6OOuHZ+0o611QmE5
+ CitN1mIN+INewCgbe/o3X+zhOHna0w3MAAAA=
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
@@ -100,34 +100,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In bcm_cpu_probe the test on the return value from clk_enable is
-incorrect and will not work as intended. Change the || to && in order to
-achieve the desired effect.
+Add setting default temperatures to the weak version of
+get_cpu_temp_grade so these values will not be used uninitialised.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/cpu/bcm283x_cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/cpu/imx8_cpu.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/cpu/bcm283x_cpu.c b/drivers/cpu/bcm283x_cpu.c
-index 59a7b142c95..7db00dadd90 100644
---- a/drivers/cpu/bcm283x_cpu.c
-+++ b/drivers/cpu/bcm283x_cpu.c
-@@ -174,7 +174,7 @@ static int bcm_cpu_probe(struct udevice *dev)
- 	ret = clk_get_by_index(dev, 0, &clk);
- 	if (!ret) {
- 		ret = clk_enable(&clk);
--		if (ret && (ret != -ENOSYS || ret != -EOPNOTSUPP))
-+		if (ret && (ret != -ENOSYS && ret != -EOPNOTSUPP))
- 			return ret;
- 		ret = clk_get_rate(&clk);
- 		if (IS_ERR_VALUE(ret))
+diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
+index 4836bddd93b..950630453f9 100644
+--- a/drivers/cpu/imx8_cpu.c
++++ b/drivers/cpu/imx8_cpu.c
+@@ -201,6 +201,10 @@ static int cpu_imx_get_temp(struct cpu_imx_plat *plat)
+ 
+ __weak u32 get_cpu_temp_grade(int *minc, int *maxc)
+ {
++	if (minc && maxc) {
++		*minc = 0;
++		*maxc = 95;
++	}
+ 	return 0;
+ }
+ 
 
 ---
 base-commit: 3532f1f5edfc97c9dcea723cdeb732eda44bc669
-change-id: 20250724-bcm283x-24aa0074df01
+change-id: 20250724-imx8_cpu-33ede102f971
 
 Best regards,
 -- 
