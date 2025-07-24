@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB70C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 01:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4952CC83F1A
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 01:38:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28AB082BA7;
+	by phobos.denx.de (Postfix) with ESMTP id 6C919835EA;
 	Thu, 24 Jul 2025 03:37:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jc/IJ1GA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mfdIuOv4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E0D282B0F; Thu, 24 Jul 2025 03:37:34 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 92F3C82B0F; Thu, 24 Jul 2025 03:37:35 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3972482B0F
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 03:37:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C630835B3
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 03:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-61390809a36so159813eaf.1
- for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 18:37:32 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-615ee07353bso306675eaf.0
+ for <u-boot@lists.denx.de>; Wed, 23 Jul 2025 18:37:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753321051; x=1753925851; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753321052; x=1753925852; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZpLMo+8HIFqJz/bhC9QddE2/2Jpnu+XzEllZHXqZtfo=;
- b=jc/IJ1GA885k1a470ezTr1VjGKoevSPmY3VLPNwRNHidpXL3bJEUf+OfVbZLCzwB6a
- LAJnQ/c7dFcdXL4/DLSssX1iYCxnU2Kq9HKo5paAFspeFJg0uO9PIBtSCc7nxbpzAvRg
- 7CQP53YGzXStBinznEiekhg8YMJs/kXVSarsw=
+ bh=42mAPWp2imGy+7HSss1YisVAlsqh98DRhlBZFVxPi6I=;
+ b=mfdIuOv4lwUZWfT4lBnRrGRYmypspC4D5k1zNawKOedSNSd6kFB5JrCiHB6lFFJAzs
+ v/w51zD6eabaM3Ad8I61InKP0FKV7OheP/1uaiFmbAWTKcGOd+qf7odRMNGAfA9eLBnT
+ AgBT0ceDCspSQ16thFbmOd3oqRWjAXktv47y8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753321051; x=1753925851;
+ d=1e100.net; s=20230601; t=1753321052; x=1753925852;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZpLMo+8HIFqJz/bhC9QddE2/2Jpnu+XzEllZHXqZtfo=;
- b=m1VVy21ZmGRCT1py5833APPMyX9eUlKvUF3eF8G/C+zVtV4rfzVG8C68M4PL6ZLG3O
- cVa21+wH4RhBnJUF9gFp72O4BaqyqbsXcDWu7UdVSuYwIQ5NH9PDc5PafjJXamJD5P8y
- 3xnuucVy6GscK9EGenEtI6WA3bIGEa3xuJTMblj0wffMyS4vSe56/kKuKVm7GkKzzeaN
- osojWHe3GmRo4LHcDB5i0UiiaRsR3dRBt9nmf81yre8FE5nADCnhTSKbiVGuSDN+ZhXB
- PEEGIhgl8eaenYBp0kFm9cyEyta1ttkFg58VwC70dp4nm75C3MePxu+GomHmiDO/uMx7
- loCQ==
-X-Gm-Message-State: AOJu0YzKknUisCVOZ7JE2Lu0T1ePU7N6jYBGSMC6XKRrEPFkbXPfJKmh
- 1zdTM8cDX+W80ozYjDjTs/W0p+RaI+E9g3qXDsPaHSCRlExbCgolvSK/ueRranuqWBc=
-X-Gm-Gg: ASbGncsmNVtLYQ7PXza4oFUKDJr5Wdm5SkBLSaQw2Vf+5QdA9n7aBpETpf1PrBOZdI2
- 83naIoRtpvj50+QNliUQIRYl16NjJIT8LnUc5fFQS1AcNKQANeWFl5Jjz9XNG9yKKN3d2i5QCqK
- nN8mPm1i/3w/Oj74EmflQouUM602YRrU2B3MBI1PsJVwpGNvkOF7sJ/u7dpXJCIgIE6UVs5h82X
- b3NZ6XFGQ1iAR+PnGSgD/88OHQ35L07Ro06AbfOjENJkuHJ+Yup3ZLYSeE9CDd4qBEOGn6j0vyH
- NGExP2oJ4e4MFxd5ydJpA+I7N/tRrG9ty48OHJratnhlkrTukz4aCjXbiyCzXzoJ67dcMu9mmYW
- zUt7+fzipXhb0DmZ3ypZrrNRguNqsbBx8DTl5LRpTdd1/rGNkhwx3kBw=
-X-Google-Smtp-Source: AGHT+IFZDkvDcZsTX0QjTNj0M37c+qL50z0y5ryrcpQwlokV52VpCmcsO6Zhw5QdoI7x4p8+bogDkQ==
-X-Received: by 2002:a4a:ee19:0:b0:615:e0e6:3d5e with SMTP id
- 006d021491bc7-6187d8de76fmr3930438eaf.4.1753321050930; 
- Wed, 23 Jul 2025 18:37:30 -0700 (PDT)
+ bh=42mAPWp2imGy+7HSss1YisVAlsqh98DRhlBZFVxPi6I=;
+ b=rLRa5D78UCfjneuBo2G7Yw62l/jXI2Q39nQAt7mzYBnH/LxsAamJNrtsT/bPs3dWlP
+ /GTeQxNWsPNJ8+bMl2s5LLi7kfnIYAW8PosWfTJ4VGdFsTMFT3wzcYQ1I86JlbxApHnk
+ CKPDZfK+IMFQpnlU0H7rjT2WhGONXDzLsqqQpX4m7auCL1xXgzbAh0Qf+LjjzkUOZyd2
+ zBk970P5FyNzwr4uWf/x3qC71vhbKsZzRTXmEHqChwYMzoZC2OVbKpjDiab7wORcl7dV
+ n0DWsM6beEjh+T5btQ3oupdA/fHIiaYncy1Ha3ihgC2ASfylLUQ07HduJcPNifdVKIMp
+ p2ug==
+X-Gm-Message-State: AOJu0YzwwXCP4uZku2YrkW+CmH6Yk1OzI8VkVrxS2x7/fAIkUqT6RW7Y
+ oyK13ZT3mLqgLlGlKqdNVhtfgFclEYNBeoi2dVM/wjMedEblkytxVBeCCkzVlN+a/tSkeL3rO1f
+ 21+MB7Pg=
+X-Gm-Gg: ASbGncvtmjjErEKJrNfbkLGkOkUrtjszw8930CBwue11rkO7n5wczIWbXJ9S+fZ7mel
+ MVhA9DumTg0VEJdBp2kJwhB69snkixVUVCz/9FpS1QukYEXMcZggYwaYPozv48SzNMmSWEMbI5z
+ nrp2FDIPZQeIJdHO/u+dtirUMpJUa+TeHlh/2bRyKtC1yZ3NtzWnZZuwIFkS7ESlqIBEKTSZwYp
+ 1sHRq28hJcpKh6BvNKQFRPzn4L1GM8F7KZQPmXjGx3wEc82NUbWjUqSGoxOFXfFWjJiC0zB+J8h
+ xmUBSf758AAQ29nPimja5/GZTOjmZr1bMeDG//Nl1aE+8Xz8k9AJcUc3wHyE3z1AxHG+ceJCekY
+ Im5yddLkLZpXAIu2Mej7t66lnTil8CNchNy/gmkkxGV125lkAy1So/CQ=
+X-Google-Smtp-Source: AGHT+IErc7pRNSTYqNTC4S+qAdKmnUXMGA9STs9LDRDrdPklIKvuUzZY+IkQCedn2EPF3rdRSrwbiA==
+X-Received: by 2002:a05:6820:4dcd:b0:615:ecc5:c07b with SMTP id
+ 006d021491bc7-61862dd3e6emr2987793eaf.0.1753321052274; 
+ Wed, 23 Jul 2025 18:37:32 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-618fb4431a3sm102604eaf.13.2025.07.23.18.37.29
+ 006d021491bc7-618fb4431a3sm102604eaf.13.2025.07.23.18.37.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 18:37:30 -0700 (PDT)
+ Wed, 23 Jul 2025 18:37:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>, Sam Day <me@samcday.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>
-In-Reply-To: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
-References: <9233da992c6bdc0b77e63631da18178ec9d64a99.1752741690.git.michal.simek@amd.com>
-Subject: Re: [PATCH] sysreset: psci: Fix SPL dependency
-Message-Id: <175332104921.263924.7401304646896219029.b4-ty@konsulko.com>
-Date: Wed, 23 Jul 2025 19:37:29 -0600
+To: u-boot@lists.denx.de, Greg Malysa <malysagreg@gmail.com>
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Alexey Romanov <avromanov@salutedevices.com>, Heiko Schocher <hs@denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <20250717102012.10018-1-malysagreg@gmail.com>
+References: <20250717102012.10018-1-malysagreg@gmail.com>
+Subject: Re: [PATCH] block: Remove blk_find_first/next
+Message-Id: <175332105109.263924.15857659734899462292.b4-ty@konsulko.com>
+Date: Wed, 23 Jul 2025 19:37:31 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +102,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 17 Jul 2025 10:41:32 +0200, Michal Simek wrote:
+On Thu, 17 Jul 2025 06:19:01 -0400, Greg Malysa wrote:
 
-> SYSRESET_PSCI should select SPL_ARM_PSCI_FW only when SPL_SYSRESET is
-> enabled/required. This change saves 1.6kB on Xilinx ZynqMP Kria platform.
+> In [0], Andrew noted a code quality issue in the implementation of
+> blk_find_first and blk_find_next. This led to the observation that the
+> logic of these functions was also likely incorrect, and based on a quick
+> check it seemed the functions were unused outside of test code, which
+> did not exercise the potential failure case, so we felt they should be
+> removed. In [1], a test patch which illustrates the failure in sandbox
+> is provided for reference.
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] sysreset: psci: Fix SPL dependency
-      commit: cf13f33d3a684c12f1ef835793cd66193df00c47
+[1/1] block: Remove blk_find_first/next
+      commit: 3532f1f5edfc97c9dcea723cdeb732eda44bc669
 -- 
 Tom
 
