@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7581C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69AD2C87FC5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 21:30:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F38683903;
-	Thu, 24 Jul 2025 23:30:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A06D383929;
+	Thu, 24 Jul 2025 23:30:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GGi8d+SG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J+2limFu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 022FC8390C; Thu, 24 Jul 2025 23:30:31 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 8C71583927; Thu, 24 Jul 2025 23:30:36 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D712E838F0
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:30:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74834838F0
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:30:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-2e95f0b6cb7so722298fac.3
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:30:28 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-2ff8d43619cso1082739fac.1
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:30:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753392627; x=1753997427; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753392633; x=1753997433; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Lr9bdU5nQW6EsVsfUJEvWlq7XuRzgJ525q4P/E3hN9M=;
- b=GGi8d+SGsTtkmhWSqZETtKQLpsakgd9JBgB5rCjkosaqh/vwXl9eMEL5P1Ueg7piD2
- b4AlXRivsXanJEFbXBJ8m8361FjgP/k/5+RuMkiDcsjrpePeJCEQoKBgJSXAAA5RNj1k
- eCUuWQPrrs2rQwu2rT2s/FgLTGJBSZm6g5m6w=
+ bh=Z5MMo2uKHZoaYq+zg98GaeG+EyQd19UF/xTr2aXLKrI=;
+ b=J+2limFux7V+b4oZYPsfl11kHpN9AFcazQLo84YWMMWaL00YrIjSf+7NXqLxUy5PsA
+ rqYflud5vOf51wHRfkgnWc2ZXbr1Z7erNdkqfYy4mL22//Ou+DAaZ6gdtLULi8tuA1M6
+ u2KNKAg5vXEFIGQl2tyaGYxePA4H0ETyIflCc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753392627; x=1753997427;
+ d=1e100.net; s=20230601; t=1753392633; x=1753997433;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Lr9bdU5nQW6EsVsfUJEvWlq7XuRzgJ525q4P/E3hN9M=;
- b=s6Rd9zMeRD0eD91VjuMUOgjkHxobpFftHP5RnT5uo9YpOtzIAlIjWhzgc95atqgZZt
- VH6WvFVjrm0aYFM6nyGGqGKunt8HPr3rN/2FeQsU4n1AV9YdHX/ArnCCCl3+DrtnNUAS
- 2yE6YcAm4VqrAAgK4OoaAI13hvujLHPO7EWaZRpCaV3OYxyrkBek8wxcxHBRtm5F/JQ0
- IhTqlGNPNWukieZT/cBn5+RrieDmWJbI/fJELSPYOZM3B6OzqvljAqwqrTDRSJXlq7pa
- Hrpm1WMXdmpexjVyoM2ydqV5mrxA69ggnAT/DAvhs88lkYnx4UN9+oezMJLYp+RlhU/I
- OQ3w==
-X-Gm-Message-State: AOJu0YxAR2Y458IlGITU9dyXvo+Dey0QgCfRiiZX1FNcmy94pgqIcpZr
- gMs9HWoaxPYaaZJmx1ZHv+Wm827k4EDW0VT+kfOBt5E1Thn2J7waDRb7hCnzqpyfcVk=
-X-Gm-Gg: ASbGncuZ4E6vrZU4QT1MnLoxqTMRIP80fslytNYfznVYyui+qEKCzCiAZ27ujhquB9k
- iUxpS9jy2Lqh7Izxl75M18zYGukh+YE0hb+gnXrH9kS88Kp+V8wHVQb9/2gjSM5hQ/EgMpvJ/X3
- at5c8j4p7ttApbwV0jJ+7+TuqQ1QRgT8KwAKrVWIPJ5dqBjMM0A0T6i1z214EBrL3/AtFrgH1Lt
- 1GtzX5lad/OMVkP8xDUG05uart7bvFC8D+JN73GTJ1SY42L1Kdas4aI7Kdz+Ey3oNMVXWbNXoHU
- YsL9VmNNmEuS9gIAp1bwEsNQm/uINMpLAD1lbfVVGNHuNMTHPI7VpLKvB2xINOyednUELI0EKfN
- mEpU4n8AS8m/VPYYH0ADbt1eHlp/7006VBi1pHpgG3Y3J54ENoa8KHsm3QB2XZ451uQ==
-X-Google-Smtp-Source: AGHT+IEZaZrIDKuj+jxu4cKvxoJ7JqUMiRCceeRxxDTJT+SeKz82ChReMyUcx8VZyAbq6zwSTATyXA==
-X-Received: by 2002:a05:6871:ea84:b0:2ff:8f57:917f with SMTP id
- 586e51a60fabf-306c73033dfmr5412672fac.39.1753392627519; 
- Thu, 24 Jul 2025 14:30:27 -0700 (PDT)
+ bh=Z5MMo2uKHZoaYq+zg98GaeG+EyQd19UF/xTr2aXLKrI=;
+ b=o0DVJa8SDzJwd5CK2qGm4TYot2na90+CT+zW3GwvgZ6PyHsSM+cgQb0uX+IOYEW3At
+ ZKj5W1wCJDW6UyvPU/ZgYk+nTNshBjHntthf4yofv9WQcTJKF65DNAlh7nq2T68HqEVN
+ UYMTJm3s8cizFHXElMO7DNXTGSu9lRPHHAGZCsL11Jr852TavGGOJR5rgyxCZaUDAUKX
+ hTsIPdSibadAdwcANv+HInZbSokkeRp11gXHVzrhZ0g0/weCJZ1ODEQYmIJksKebozj9
+ qaiCAh8A3wId7I83TzlvU3B1j/+EH+C5j4N7xu+2/LNtBG398apLGb9dDo2pjwnanXd4
+ 9vHA==
+X-Gm-Message-State: AOJu0Yzu28WMWMMu2skdgsCdTeeiP2oEenuS6suph5vnMcvBGfr9XE0p
+ ToaVOSOb44Js52EJ6yoCSrNmfo1GCH89aaIKSaxUYd7FeTl/12D83uCbRlepFSPd3ng=
+X-Gm-Gg: ASbGncskOekWZLlocx788/Er1kKMAE//fKD0TFym99mevLVjr+Ui6Ihn5eKGIppocE/
+ F7ntvlEjHmmuZK6Si6fEzMiGG1tUKUCfZeQ+Vh94aR39sXM2I22sqZnoLj/m3IvNkX+LBmhfyCF
+ O2bbGI+ut+iCrt1WEPOtraCsxAzz3SuM0fsVag9YcTcbsyk1TkLdoPjVkb2wWup50CZXgUHPFjv
+ M8ifGWu+6NjMuJq1O8lZ+kFzzRixHCoCesQUDR5NS2i4p97faAGCaO9AyC+6U6l18lu3PE6z8zb
+ VeXk6Swiv0M0O2EOlu3QR/pirpzawbij/cBi7cPGhojg2i1yMdfUgNSoWQ6GTEMAfj2476LqmJv
+ GwhLJeo4mBEjlq6jMngKZwHHy8z+4NZmcUTre2tG7FqPP1cbJeXxZs0jpclczj8bamQ==
+X-Google-Smtp-Source: AGHT+IFC3Gk9d0adVgEE90UMNHKjXc+bopvtABpk5VD6vJ3+PcFd1bsK1tS+6CRId20wCkbfeIVnEA==
+X-Received: by 2002:a05:6871:b28:b0:2bc:7d6f:fa85 with SMTP id
+ 586e51a60fabf-306c702783emr5274456fac.16.1753392633189; 
+ Thu, 24 Jul 2025 14:30:33 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-306e1f8a7adsm660520fac.42.2025.07.24.14.30.26
+ 586e51a60fabf-306e1f8a7adsm660520fac.42.2025.07.24.14.30.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 14:30:26 -0700 (PDT)
+ Thu, 24 Jul 2025 14:30:32 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
+To: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250714-blk-uclass-v3-0-1fc761606df6@linaro.org>
-References: <20250714-blk-uclass-v3-0-1fc761606df6@linaro.org>
-Subject: Re: (subset) [PATCH v3 0/2] Remove unreachable code and cleanup
- code with fixed return
-Message-Id: <175339262651.1899261.8794267583201203136.b4-ty@konsulko.com>
-Date: Thu, 24 Jul 2025 15:30:26 -0600
+In-Reply-To: <20250717-sandbox-raw-v1-1-934ffc784d36@linaro.org>
+References: <20250717-sandbox-raw-v1-1-934ffc784d36@linaro.org>
+Subject: Re: [PATCH] sandbox: eth-raw: Prevent possible buffer overflow
+Message-Id: <175339263239.1899261.14495207607284532963.b4-ty@konsulko.com>
+Date: Thu, 24 Jul 2025 15:30:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,18 +97,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Jul 2025 10:58:37 +0100, Andrew Goodbody wrote:
+On Thu, 17 Jul 2025 12:09:15 +0100, Andrew Goodbody wrote:
 
-> Smatch reported unreachable code in blk-uclass.c which led to noticing
-> that uclass_find_next_device always returned 0 which meant it had no
-> need of any return value.
+> Instead of strcpy which is unbounded use strlcpy to ensure that the
+> receiving buffer cannot be overflowed.
+> 
+> This issue found by Smatch.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[2/2] uclass: Cleanup uclass_find_next_device
-      commit: 70bf6e33e15e2ce56f6e3e9a3f725136c9c6f486
+[1/1] sandbox: eth-raw: Prevent possible buffer overflow
+      commit: 5c0827eededc8392472823d8e3e50cd0f5fad47b
 -- 
 Tom
 
