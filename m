@@ -4,82 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A887C83F26
-	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 16:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5254C87FC5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Jul 2025 16:34:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 195CF838E3;
-	Thu, 24 Jul 2025 18:33:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C59F0838EF;
+	Thu, 24 Jul 2025 18:33:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=iro.umontreal.ca
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ubuefmNa";
+	dkim=pass (2048-bit key; unprotected) header.d=iro.umontreal.ca header.i=@iro.umontreal.ca header.b="bjN6dUS6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 726B0838C7; Thu, 24 Jul 2025 18:33:45 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 93F3D838DF; Thu, 24 Jul 2025 18:26:22 +0200 (CEST)
+Received: from mailscanner.iro.umontreal.ca (mailscanner.iro.umontreal.ca
+ [132.204.25.50])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59400838DC
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 18:33:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35631838C7
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 18:26:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=iro.umontreal.ca
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-41b8e837427so349078b6e.3
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 09:33:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753374822; x=1753979622; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xCgUcJrWdOqe6MDJICmx11s3VWg21mVBUeiuZFvVm6w=;
- b=ubuefmNa2xWUJXUEi/wZqSuHerC10DeiG0IBP0LygEV5ezKR78mr91TIEQdaHMPTqR
- +P9brsnwryrZe2unXUH/OBnYpDwfeQ+7tSw4sy9Hf+2cS+G2C5z8auSOFZRU3TlkQsqU
- fZXHZVsezdZF4ElO8LAuXv5hU+FyZkOiwIACQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753374822; x=1753979622;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xCgUcJrWdOqe6MDJICmx11s3VWg21mVBUeiuZFvVm6w=;
- b=Y113Dun/LessyOIkfy/U3g1JX0QvfmV6Dr7oc52i387a0xUUmnoFMrNWHZe8t9zomS
- nXiZGtK+O3HAUmQA2HYk33qfMj7XCiUq5e5wBwKhVPFxCLHq/TgkALLMXp8M9NAtJzB5
- hTezNKCud0QSdJ8XRB7FGgtNOjQYAWiCYEX7ULbSnXkjyzoI1qF7/+5qJwbVseZuVjUD
- 1vCYiE//QxYJn6YwU0Gvok6MnruWdkdjY3v/+IZBP7muSe2OlSqDOahqAiRt6GOm6gMC
- g+Y6TxQth3X6/B1RiGBVgArED2QyKV6tGpzqIkMkwSoyQ0qEHQN0/9JKTDWqviz1xy1h
- qkxQ==
-X-Gm-Message-State: AOJu0Yxi0mSvWLbGDZYE4l0jRBaulErdfywj/JZMY/kxhjcWUyqaU5uM
- 3VA6JZnc0t0Qw3EczTzf1B/l7RJok0KR5QmIBTiAD8wp9w/mBFdxRzrtZEO8XjBvTCrytQz3yq/
- d5A4gbow=
-X-Gm-Gg: ASbGncuuqmY+JevtWDpCnHhLzKDHpFqPHO1yp+Yq1VWYNYe9A36TBIXpv9TZLaCL85X
- ifXJC58g2saO7RzH1pQZdCwE4Qcj9yyEQWc/YbCP7fqAJnK6++nQ0fWYRsQEWJud8HBDTcoTbVN
- X+cFnrkoxxL5N1yj/6LXK5ul8/A2337IfsU1Epn51cKw/ksW1iu/CIHJhg2mTZn/y3EcG4+jScw
- lV2hWl7TYYBHdsiIc7dZc41fGr0uCX/7Z4n/rGNMKS2qzSNHehwog8Ek2PMaB2cYDNCFKnGPJOF
- pc3u47u30VHWFFXzwJAmFPNswB+LAP0ZYt4F1BmrgE7vVg3rWAvpmBFjhYjNfg66Uoo1XER0iih
- Fcv0esWfU/lKsozzuNWI8K/Rr1Jx0D2FRANJxiotNBEfFzH4KVgADSQs=
-X-Google-Smtp-Source: AGHT+IHi4mD20hpiwxlyKs7rohDwObCZGRtoNAhAubKxh+yQPBIvI2t1NSLGeNp2xjgEgvf1dbDvdg==
-X-Received: by 2002:a05:6808:2182:b0:41b:eb59:7c63 with SMTP id
- 5614622812f47-426c43f3db3mr6662804b6e.1.1753374821818; 
- Thu, 24 Jul 2025 09:33:41 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-42a33092eb8sm294351b6e.33.2025.07.24.09.33.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 09:33:41 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-In-Reply-To: <fec4bd62-0883-40c5-a1a6-cb672e489075@amd.com>
-References: <fec4bd62-0883-40c5-a1a6-cb672e489075@amd.com>
-Subject: Re: [GIT PULL] AMD/Xilinx/FPGA changes for 2025-10-rc1-v
-Message-Id: <175337482119.467777.9896983563142440007.b4-ty@konsulko.com>
-Date: Thu, 24 Jul 2025 10:33:41 -0600
+ spf=pass smtp.mailfrom=monnier@iro.umontreal.ca
+Received: from pmg2.iro.umontreal.ca (localhost.localdomain [127.0.0.1])
+ by pmg2.iro.umontreal.ca (Proxmox) with ESMTP id 6229C8001E;
+ Thu, 24 Jul 2025 12:26:17 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=iro.umontreal.ca;
+ s=mail; t=1753374376;
+ bh=l5aTgZEO6divQRqopEfYTFJyM+wzolWqSA+sDuhjOS8=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=bjN6dUS6lVdxZzZVqk/27Qn/gMsnCiYxYUObJW70TsJ3YMpjiqaSJfoJSDjC8+v1n
+ G6Mi3Ym23EQZ9IWaqJX3Iu3klJHnuraX7Zi90HVHLpqevVtOR48PeubnVh2XC2n9OE
+ CW7QedzmVcxhMmSqSllwBHNme85Pq8A53JIz4Qc55u+iwTT4lBU2kBjF62kpfZbvmF
+ gRw8Zwr0GLnrArTTgbHWlm73GxBUfnYwE8L4U/A6v9V5kpRmOxW4BWoKxFGMkwiKgP
+ DNgcvGukX4eTzADONwEBJI9YWtvONSxNXBTpmPNxYkgaBzj8rd/Y+UGom1xPc0KE4l
+ e+EQJNmb9LzpQ==
+Received: from mail01.iro.umontreal.ca (unknown [172.31.2.1])
+ by pmg2.iro.umontreal.ca (Proxmox) with ESMTP id 8633580387;
+ Thu, 24 Jul 2025 12:26:16 -0400 (EDT)
+Received: from pastel (unknown [104.247.225.139])
+ by mail01.iro.umontreal.ca (Postfix) with ESMTPSA id 6077B1204BC;
+ Thu, 24 Jul 2025 12:26:16 -0400 (EDT)
+From: Stefan Monnier <monnier@iro.umontreal.ca>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: HDMI support for rockchip SBC
+In-Reply-To: <CALeDE9NDru0WLy14gFRAnk=O+hVUS7D-b1Qg3Su+96FQQ8EVBA@mail.gmail.com>
+Message-ID: <jwvpldpsgva.fsf-monnier+Inbox@gnu.org>
+References: <jwv8qkea94d.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+ <CALeDE9NDru0WLy14gFRAnk=O+hVUS7D-b1Qg3Su+96FQQ8EVBA@mail.gmail.com>
+Date: Thu, 24 Jul 2025 12:26:15 -0400
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain
+X-Mailman-Approved-At: Thu, 24 Jul 2025 18:33:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +74,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 24 Jul 2025 14:10:05 +0200, Michal Simek wrote:
+> Support for the rk35xx isn't upstream yet,
 
-> I am sending you another series of patches for rc1. Gitlab CI is not showing any
-> issue. The biggest is FPGA series and there is on patch revert in spi which
-> should get to tree.
-> I have some other patches pending but I want to give others more time for review
-> that's why will apply them in future.
-> 
-> Thanks,
-> Michal
-> 
-> [...]
+Ah... I didn't notice any weird failure or warnings during the build so
+I naively assumed it was working.
 
-Merged into u-boot/master, thanks!
+> this patch series is likely a good start:
+> https://lists.denx.de/pipermail/u-boot/2025-June/591737.html
 
--- 
-Tom
+Thanks.
 
+Is there a place that tracks the state of feature-support, like
+
+    https://linux-sunxi.org/Mainline_U-Boot
+
+?
+
+
+        Stefan
 
