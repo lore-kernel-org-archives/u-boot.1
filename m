@@ -4,90 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6686AC83F26
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 05:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B368BC83F27
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 05:09:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89D1A838FE;
-	Fri, 25 Jul 2025 07:07:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6CEE8390C;
+	Fri, 25 Jul 2025 07:09:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D5NE3zvg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q1W5l7Eo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E2928390C; Fri, 25 Jul 2025 07:07:52 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 464BB8391B; Fri, 25 Jul 2025 07:09:07 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F439838FA
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 07:07:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61040838FA
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 07:09:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-60402c94319so987134eaf.1
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 22:07:48 -0700 (PDT)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-615a4b504b2so440090eaf.1
+ for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 22:09:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753420067; x=1754024867; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1753420143; x=1754024943; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lsOp9FW4rm36tz9o26DktKx3tbBv9aioe08I2B3B7cM=;
- b=D5NE3zvgXkEp1HZPCYs+qPluYDszRzZMA65dpxW7Q5XnUDGJvP8GDMRIwVU+k8dCVl
- /uIXSJW7zQKyoQyU2rT8maUlOEzELRvcFF+//lJtp6yW9lIR6mjI2KoUPGaGswr7fH4M
- 4n9ENIBZah1XXza8Ev3QFheEWzn2m/HqBpjuH1FLTAobVH7wPgUVofsEDSbZWEWhPGUy
- MUuwM4MOwXXCbrRlJSSgCo+HW/epr46TPC16e0ixDGLTTa1dk0GCF7cKHkx5BbYJCyyc
- OmFtxcAeU/Gvg3WjbkoTZn2Hnz4E3urU6iO7xY9SC5qsupqmtiWkgyhhWTQhstCeHafu
- h3cQ==
+ bh=qGtVv8FzSwtB7llxpA2NsJQRSEo8bod+Lrhjq4C9nTU=;
+ b=Q1W5l7Eo1l30TuxmE46wWo2Xk545Yn8BDBNfyFYfAhRRJJsVH4qs+Da9aZQpbnc0NA
+ QHvwxaxQqdnI4MaoUFB6NY33so/fSQTKPANSrScjJyRE0ccDv944p+9OInlaKW8cnMw5
+ Mau9fcG83mYO013XXOZyCQlZJ0mbBw7jsFDzb2Ys6jeGgnJkIvFKTlciInwzPc/SgmAB
+ jcBpDaRcEf/A0iarEiC2xUI9oXTZFH0YhDSNV6DGLByBzP4KhO8eyHoZbCANFesR24R+
+ lg8dtn1RVWXTHWqCxyT5igou9+0sHkqcvawdGgUJp2gbsv7oBHwMCTKS1C/IS5dSSY5F
+ zaQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753420067; x=1754024867;
+ d=1e100.net; s=20230601; t=1753420143; x=1754024943;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lsOp9FW4rm36tz9o26DktKx3tbBv9aioe08I2B3B7cM=;
- b=oVA9HwUm7D+J5D+snIC2n6fGcyvx1u3/s/br0qCgLN1KaB1wzN5PQ+bhq5yJ14d7l8
- 7EllruVDmNDNr4mc9TGHa8wQVfEAJe9Dem1qLtJNzt0LUETR+Xy05wWtp/MRihSFroJP
- qA/T9ROKG2OPhOPJ7b/Y5bnfIEzTMr/kc6ZNIQZJ9DqAsYCIbshuCRRfVVVE0BoIK28A
- 9bJa7edKxz/3SihyKRhsUshZB124f5sAx1npTejsCceZtc+Llrc9kmQQiH6E9WydnwZ/
- 2I57SCIHO+cGT5SjeYakKnuORZe5ThXHjRAxrZUVRJrROKcSAtyux2u/gLOz6FXwji5/
- Lgsg==
+ bh=qGtVv8FzSwtB7llxpA2NsJQRSEo8bod+Lrhjq4C9nTU=;
+ b=cF6OKRnXfc386bQ0wGxWsa97KTsXgVT+l+epc5iadhSe1qSYEpRas7Mkp039YpxqrP
+ 8W2M9FcJPQISjM9ghQEQzBM6ZirL2xo+Sv1GSr3YWap7CFNpWLAjR9T7K8RsFKLAALVh
+ aH89VOa4cAPDhETE3gS6LrQA7b1VodmBbB1Rl/Qsxz4z0B7u6WxbXzWaVlJ6OaxY6C3V
+ hgXRbaMo3BA3C7tVO7uXQz4VX+4kcZH5wTIdzi8xj0pKnFXZc6Su8SVkK8vrVFS130g6
+ VFUnkk09v77eRv9dafADmw6/Jl8NbesI6G9UmpzEgWV0t8/AfAYyiorNCQSlxr36Vw2l
+ 1mww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJ18iyAWJ+pblQSCvDkG/baXowCcBfl4Pcv0JlZ/4RNfJhUgjCNsu0bLI9eWC8bWygO4LsBOo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+wGNp9hnBBHCaqrtUaQnAX0sb1bKFwwocirDOzNjtGcNv5VqA
- vF/WIOVkayDhZiEjXZiuX7yY9EaJh9UCxQAODMSwkAToCrx6wfoZSUv/LlxzSKljQ3h2pQW20GI
- TFhTxjRqeHX8Iv9VlcYI3zrn1Ff23xgg=
-X-Gm-Gg: ASbGncsYQQGMp/DWUDiGMkORzCBxywkFlPzN6UiXgUZ6x2KGwy0Bjk8X6F90YgBYhTn
- aBVtlWRvfr3MMKpmSPY1yW77DhqFNubPmUDZYkJMNjGVJWmLT6UIDpsgv68QXOPFZhVFLSsBWq0
- AfUo6zSB+YHZDSJfArDwwB1/vwLv1ctMFko835qq7iDAAJ62seFPIk87h/eQNKJOdIXAvQEk5Ah
- /2DsURfg108rve3jCecpoK5SkOWhLhT+G4ixagG
-X-Google-Smtp-Source: AGHT+IFkBDe2pwzWlt3vn3RO8+ToY+X3hxWN0pRcSQTvp1xncg4/B4M4B4RSiSD6TL2r05cX2WEUnUmWa6mPxp6JfPw=
-X-Received: by 2002:a05:6820:2918:b0:615:f834:2eb5 with SMTP id
- 006d021491bc7-6190c9b7959mr230316eaf.5.1753420066809; Thu, 24 Jul 2025
- 22:07:46 -0700 (PDT)
+ AJvYcCVTOkCEUL+UBiJd9TZf57uuUrpzu6bPleHqXKz+NA1AaR2ky/ggofzE9X02vW5PrO7MFWSt17Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6BvG75m9sYq4Rs64HYEAQme42DEcti9ECadMTl4ncGuwO96y9
+ 27YK0aIYOVxAzPIosKAZJwX27uzbooo5SoCMIMsV5F40p7jSVKqeGUdmmk15tZG995wGeLAWG0H
+ vuxrvymhBXc0U2XWqbf9wAIomNCfPXAg=
+X-Gm-Gg: ASbGncukNrB61XbHSFbSihTrrSZj2gkg/9l2C7mB2QdhnA4IU9ZJmI2PZxKTTn3TJvO
+ rAIqMZjEpZOrtpsqgBzHgmm4/BWA6OH8QTdFKBONENwIpjyhLvIXKH6Gr6LAt+OBnp0d6whHCde
+ 0ZWI4vFkJUXVmnpZnGlPPJNDiExRGfdCEQivbU3POgnugHIWTed5Q4TFLeCS3Hy5ItsghrmTdhk
+ c4dHK0IvPozZRfFa3JcRUUwvTN6s0+733HWshkF
+X-Google-Smtp-Source: AGHT+IEPHJ/nZY7VXaGo+c5laUU/qH0OUPicPi0ucJrpxJ1W1/rdWHvc76TuSCd0W9/vXufcMsfAHhsMTWTi4+BFClA=
+X-Received: by 2002:a05:6808:221e:b0:40b:4208:8602 with SMTP id
+ 5614622812f47-42bb76d9006mr220779b6e.4.1753420143078; Thu, 24 Jul 2025
+ 22:09:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250709222926.24671-1-semen.protsenko@linaro.org>
- <20250709222926.24671-2-semen.protsenko@linaro.org>
- <87tt3b2ti7.fsf@kernel.org>
- <CAPLW+4moDYL0Q9TjSuWbqOuLQV2KCCrrzR_02-YUhivWuvQ=SA@mail.gmail.com>
- <87ikjllws2.fsf@kernel.org>
- <CAPLW+4ncXuT7=iP4wt6fuZ25cQvLJUTZe71oC6=y04Wefb5c6w@mail.gmail.com>
- <CALrBrZ2gGjk9sqqvAESs=tC4HV65Cg5Bp0qJ_ggsjd2ix1xUOQ@mail.gmail.com>
- <CAPLW+4=gdMZqoP3zZn0Dk6p5GY4N0pCDnKsXcqtLK41P-Qqu3w@mail.gmail.com>
- <CALrBrZ2Rouk+G9HCS=pbAwxJ76ZvLKhkWp=mW_ztE5R5OPiPSQ@mail.gmail.com>
- <CAPLW+4=W=e0jJhuyKEe02Q_OKVu4y1ReMvQLQfN61YsUxO7eSg@mail.gmail.com>
-In-Reply-To: <CAPLW+4=W=e0jJhuyKEe02Q_OKVu4y1ReMvQLQfN61YsUxO7eSg@mail.gmail.com>
+In-Reply-To: <20250709222926.24671-1-semen.protsenko@linaro.org>
 From: Minkyu Kang <promsoft@gmail.com>
-Date: Fri, 25 Jul 2025 14:07:35 +0900
-X-Gm-Features: Ac12FXyNomroZsY_3Wpx0c2aJ2Aopfc8H7geKrAJG_OKbiOtxFXqQQgCwLF2bIo
-Message-ID: <CALrBrZ0eUPZjm1y681B-vbbJtZq+8=T=8xY9aRk88KBLqBU4gw@mail.gmail.com>
-Subject: Re: [PATCH 1/9] phy: samsung: Add Exynos USB DRD PHY driver
+Date: Fri, 25 Jul 2025 14:08:52 +0900
+X-Gm-Features: Ac12FXwcd1g7VlgH7QIwRts0zzUjhTyKIileSw1JDv7MievXIDQjFYyo2Bq3zv0
+Message-ID: <CALrBrZ1Si8q_zcRXDxerXshyrwyskS3mwx2ouJt7JSmxGDiQzQ@mail.gmail.com>
+Subject: Re: [PATCH 0/9] board: samsung: e850-96: Enable USB
 To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
+ Minkyu Kang <mk7.kang@samsung.com>, Simon Glass <sjg@chromium.org>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Marek Vasut <marex@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
- Simon Glass <sjg@chromium.org>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Greg Malysa <malysagreg@gmail.com>,
+ Greg Malysa <malysagreg@gmail.com>, 
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
  Jerome Forissier <jerome.forissier@linaro.org>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -114,40 +105,51 @@ X-Virus-Status: Clean
 Hi,
 
 
-2025=EB=85=84 7=EC=9B=94 25=EC=9D=BC (=EA=B8=88) 04:16, Sam Protsenko <seme=
+2025=EB=85=84 7=EC=9B=94 10=EC=9D=BC (=EB=AA=A9) 07:29, Sam Protsenko <seme=
 n.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-> On Thu, Jul 24, 2025 at 4:45=E2=80=AFAM Minkyu Kang <promsoft@gmail.com> =
-wrote:
+> This series enables USB and related features on the E850-96 board. For
+> now only USB gadget is enabled; USB host will be added later. Next
+> features are enabled:
+>   - Fastboot
+>   - DFU
+>   - EFI Capsule Update (not really USB related, but DFU related)
 >
-> [snip]
+> All features are tested with Linux and Android partition tables, as well
+> as updating 'boot0' eMMC area where E850-96 firmware reside.
 >
-> >> Hi Minkyu,
-> >>
-> >> FYI: it might not be on your side. I can't access denx gitlab right
-> >> now as well. There is some relevant discussion going on on #u-boot
-> >> IRC. See also [1] thread.
-> >>
-> >> [1] https://lists.denx.de/pipermail/u-boot/2025-July/594671.html
-> >
-> >
-> > Yes, now it works.
-> > But, patchset was failed to apply on latest tree.
-> > Could you please rebase?
-> >
+> Sam Protsenko (9):
+>   phy: samsung: Add Exynos USB DRD PHY driver
+>   usb: dwc3-generic: Add Exynos850 support
+>   board: samsung: e850-96: Setup serial# env var
+>   board: samsung: e850-96: Add dfu_alt_info
+>   board: samsung: e850-96: Add Android partitions
+>   configs: e850-96: Increase malloc() pool size
+>   configs: e850-96: Enable USB gadget and fastboot
+>   board: samsung: e850-96: Enable EFI Capsule Update mechanism
+>   doc: samsung: Describe flashing process for E850-96
 >
-> That's weird, I just checked and this series applies fine as is for
-> me. I tried rebasing it on the most recent master, but after doing
-> that I didn't see any changes in v2 patches (as compared to v1
-> patches). For the reference, I checked it by applying on top of this
-> master commit: 7bf2a52b4943 ("Merge tag 'xilinx-for-v2025.10-rc1-v2'
-> of https://source.denx.de/u-boot/custodians/u-boot-microblaze").
+>  MAINTAINERS                       |   1 +
+>  board/samsung/e850-96/e850-96.c   |  77 ++++++
+>  board/samsung/e850-96/e850-96.env |  44 ++++
+>  configs/e850-96_defconfig         |  25 +-
+>  doc/board/samsung/e850-96.rst     |  85 ++++++-
+>  drivers/phy/Kconfig               |   9 +
+>  drivers/phy/Makefile              |   1 +
+>  drivers/phy/phy-exynos-usbdrd.c   | 386 ++++++++++++++++++++++++++++++
+>  drivers/usb/dwc3/dwc3-generic.c   |   1 +
+>  include/configs/e850-96.h         |  21 ++
+>  10 files changed, 637 insertions(+), 13 deletions(-)
+>  create mode 100644 drivers/phy/phy-exynos-usbdrd.c
 >
-> Can I ask which tree you are trying to apply it to? Also, if possible
-> please share the errors you are seeing when applying this.
+> --
+> 2.39.5
+>
 
-
-oh, yes my fault.
-there's no problem!
+applied to u-boot-samsung.
 
 Thanks.
+Minkyu Kang.
+
+
+>
