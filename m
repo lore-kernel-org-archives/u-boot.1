@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A110C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 13:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1C7C87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 13:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AF878398D;
-	Fri, 25 Jul 2025 15:55:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B283883995;
+	Fri, 25 Jul 2025 15:56:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IfRUvhyL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tvXWQmn+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C3B18398D; Fri, 25 Jul 2025 15:55:28 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 52BFB839A9; Fri, 25 Jul 2025 15:56:05 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E158483987
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 15:55:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 313AE83987
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 15:56:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-73e8cc38e80so1549206a34.1
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 06:55:25 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-73e58d5108dso1332950a34.3
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 06:56:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753451724; x=1754056524; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753451762; x=1754056562; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rg7WhUBYn7IEWU853351K1vdTRbEBsuqFBD7Akuk9Ew=;
- b=IfRUvhyLZzJ4+K0WApy8H9J4KULpBNeVVj3dQgNThe578e1vqqq3BQbL1HULRi69ZK
- CednMrgjFBHXZdyWedJMsvDA2fMGJwB+gQn+b3a4g1zCHK9kg3AYcGzbkJzesmOx6ii8
- enz55b1pC2BhakUF7Qbe4LW9VL+q0Uql0+zqg=
+ bh=gSJBhTj4zkQUqtrhaBBMOA6EaeFM1BKLOoA1/wvWi/A=;
+ b=tvXWQmn+XzSg5onPgVKplV3UVBoFtbSAOj0d9CZM5q7dYw32hufO7xQrc5KGHFhEE3
+ 23q/L5xHaVomNDtMKOwERGMs7N9Vkf3GlHnq+uKG6LoN0DoIkbUNkEphsUih/S+BcjN4
+ oqKq555cy48t+NRqnuq2HFrlH0BJE1xHCzGlg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753451724; x=1754056524;
+ d=1e100.net; s=20230601; t=1753451762; x=1754056562;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rg7WhUBYn7IEWU853351K1vdTRbEBsuqFBD7Akuk9Ew=;
- b=aUKQbXlVFmgUiLEImK1SRewdGR7Xx9f1dLs9NDU4ckA2Q9aK5oaDT8A7rXBvAR1t9v
- k6NP7BUXFby9C13Id9+DyIhPKiGrW+tgMe7cM/9Q5vsKrgeBzdFtNzGMgCgMEs2AmDfP
- fRR7wnJr5XtREpHQs7IsZdMVcfQnthLtnY+5FI9IoaFVh64zNQrVi72VO1ZjvPoAuslG
- vab6rfzv5E2b0yoCFjqvKKiBBJddmkgcolwzHzl1Pfck2h+tdzHgwHv8yAZ+zzfAs01C
- R1g+Z0E8iLsLPdAek3deBuEuVmhmmRsIgm9IcuOuF7bZgI+oSlQ6sEZAvOKQednuhXVo
- N3Ag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXeirnR/J+QKenipbWJ0vMoTjEhwUkDxzLoBmsh6BYT/nutDppYt7/REYuKXW1qi5uUtHdPBqY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxESbc1lM4zN4pKuj8/9/GIwqOiIboCsKwLsuHgOxlxQamFtBnp
- sV96IIEWyQPyyKMKgQlvozCZISIAVklqkynEaXgDoSRwj1vYxU8OnWlvGv1iB8ZfvG4=
-X-Gm-Gg: ASbGncvxgXEFCSd/HLBzGgMgdRxbwlyMhv+mrhFsccT42sNJF8Lq+nge9b1ImCct5FP
- +9kfy3s4p5fiaAas1l0vEr1HLz7Bv73kNQSemOTmCUo1DMdJvh0bdGIpGFS2QR8JJE6c9Tuf2SE
- 3in5ymOiMFemFHJv3wKxRSVnJL73d8KeshgtKMxYZfeoTNqS1eV+4MnWgQqGwLGsHB59Od5xzVV
- p1dTIkb4QoyORE3MFC5WdBqkMYl5KvPxPxf9yfNVqKE2N8ZJOhnECBuamdhM2C+r0tVPokvABQ0
- jTpHAhI4dbaRLmebAsa20BrFMHjkyCNmbMcNstvFW+wh5wqLCW0f7qR6US0dh1XlOZNtOC3ypj/
- cQJICOdmJa1ODFqTbFi93xUxEECXICURVaPiQJ5SEIE1SbrUKWKIh5f1b
-X-Google-Smtp-Source: AGHT+IH7s6H+oF2TIS0FjniqFyAjNTNqAoHfqLL+ohuYKT01lQtwmf0pgRMQYhnyHfs34oBqKxnuFg==
-X-Received: by 2002:a05:6808:1a18:b0:40b:31ef:8784 with SMTP id
- 5614622812f47-42b9d82e88bmr1066007b6e.7.1753451724515; 
- Fri, 25 Jul 2025 06:55:24 -0700 (PDT)
+ bh=gSJBhTj4zkQUqtrhaBBMOA6EaeFM1BKLOoA1/wvWi/A=;
+ b=ufFANzP/0d5QQdSyw1OenKjlLvg3BMaQ8/K5cKqJ8Cs0RrVwcKaDaXZG0KhJGqoayM
+ PqsugOSsTs1dT+9w8MqwsugCnvLw9EFjv7mOtn02AI61xFFqOPN9gtgaIgqFNsq4J0mj
+ TF5WK71/dEYLz3NO7dcIt//PnU3eIB/yCZIiS5r8FXFSEGFcWVzDHi3xEi4SoBFRHOCA
+ W8oCE79GacgN58DSeeDdVsi6rW2l17L2ZEadIu6p9+a+8j2AgfazTszY3SS5sLotCxi2
+ kcdyxuMkEfLVf02QU9CEdtNZJB/kCujYQYufaSym47RpMKo5uFMlRcTKn634Df01iwF/
+ 8TjA==
+X-Gm-Message-State: AOJu0YzQHc/MZLa7UYQyntRgDWfnJjeB1G/Aw0OSIoVoZWaoJ1WDpHrR
+ +9XBYHZXbC5aCcKT7Efu/v4EJ8jrDBKN1vNUmBWGTdAcSuWZWiid1hnRo0g0yrxVQp0=
+X-Gm-Gg: ASbGncuP0EMcqXWUnS+ol192baqOvlu/eiCCCJch9tAK8WOaIZzofkuJV+UGNCB3365
+ A9BzstiEb2D9F7iZMTWE0c7G908sUL1KXDPZknYvYEcDwuzOGJ1qW983eCPm5iWAZeGpq6HsMzm
+ Sm89nJP1DsNVDzKHd7Us5sabral3BzLQ9pWHFtPh+dgyaDUsEUoHqgQx1/YgP3xgJWpfuTS6GLr
+ R3dM489vlFcYIMJ5Xvj1gXlCLarScCNYSWHVsSYawmxLNVzu8iUb6Clmt7Kml8Fz72VMuq1NG/6
+ J3G4w8YbqLq45T7phXQHQyhbTHLufy8sIT12kO50zOdbOsYOJbjM++jmSjCNLgqsmHSMjNxpgFq
+ OuFGpoHamZPqwtOc2sC7SurkntljmUOoGU0R4A9fl0kPaiCvTnNbtWx4M
+X-Google-Smtp-Source: AGHT+IFxiBQQIo7kxrPjbo7bQ3Hhhteyvl14le8+DNIxjKrOo3bo+Zkr/LI97+YFLdv2QpSYRI4img==
+X-Received: by 2002:a05:6808:6801:b0:421:4d86:67b with SMTP id
+ 5614622812f47-42bb92476f5mr1170639b6e.26.1753451761886; 
+ Fri, 25 Jul 2025 06:56:01 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-42a334709ccsm614401b6e.34.2025.07.25.06.55.23
+ 5614622812f47-42a3098cdc0sm602028b6e.10.2025.07.25.06.55.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 06:55:23 -0700 (PDT)
-Date: Fri, 25 Jul 2025 07:55:21 -0600
+ Fri, 25 Jul 2025 06:56:01 -0700 (PDT)
+Date: Fri, 25 Jul 2025 07:55:58 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Sumit Garg <sumit.garg@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
- Teresa Remmet <t.remmet@phytec.de>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] Add imx8mp-libra-fpsc board
-Message-ID: <20250725135521.GB1807455@bill-the-cat>
-References: <20250725-imx8mp-libra-initial-support-v1-0-d9982df21a4b@phytec.de>
- <20250725-imx8mp-libra-initial-support-v1-3-d9982df21a4b@phytec.de>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, p.bruenn@beckhoff.com,
+ Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH 0/3] fpga: Remove lattice and ACEX1 support
+Message-ID: <20250725135558.GC1807455@bill-the-cat>
+References: <cover.1753442748.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="D9oIiN4k0Hh+JTnk"
+ protocol="application/pgp-signature"; boundary="8Uy72jVYjYizg3rV"
 Content-Disposition: inline
-In-Reply-To: <20250725-imx8mp-libra-initial-support-v1-3-d9982df21a4b@phytec.de>
+In-Reply-To: <cover.1753442748.git.michal.simek@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,129 +104,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---D9oIiN4k0Hh+JTnk
+--8Uy72jVYjYizg3rV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 25, 2025 at 12:35:40PM +0200, Benjamin Hahn wrote:
+On Fri, Jul 25, 2025 at 01:25:51PM +0200, Michal Simek wrote:
 
-> Add new imx8mp-libra-fpsc board.
-> USB is not working yet, as the entry in the upstream devicetree is
-> missing.
+> Hi,
 >=20
-> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
-> ---
->  arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi     |   78 +
->  arch/arm/mach-imx/imx8m/Kconfig                    |    9 +
->  board/phytec/imx8mp-libra-fpsc/Kconfig             |   16 +
->  board/phytec/imx8mp-libra-fpsc/MAINTAINERS         |    8 +
->  board/phytec/imx8mp-libra-fpsc/Makefile            |   10 +
->  board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c |  114 ++
->  .../phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.env |   30 +
->  board/phytec/imx8mp-libra-fpsc/lpddr4_timing.c     | 1846 ++++++++++++++=
-++++++
->  board/phytec/imx8mp-libra-fpsc/spl.c               |  131 ++
->  configs/imx8mp-libra-fpsc_defconfig                |  170 ++
->  include/configs/imx8mp-libra-fpsc.h                |   27 +
->  11 files changed, 2439 insertions(+)
->=20
-> diff --git a/arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi b/arch/arm/dt=
-s/imx8mp-libra-rdk-fpsc-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..8f0f86d9f09e
-> --- /dev/null
-> +++ b/arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi
-> @@ -0,0 +1,78 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright (C) 2025 PHYTEC Messtechnik GmbH
-> + */
-> +
-> +#include "imx8mp-u-boot.dtsi"
-> +
-> +/ {
-> +	wdt-reboot {
-> +		compatible =3D "wdt-reboot";
-> +		wdt =3D <&wdog1>;
-> +		bootph-pre-ram;
-> +	};
-> +};
-> +
-> +&reg_usdhc2_vmmc {
-> +	bootph-pre-ram;
-> +};
+> when fpga drivers were enabled via sandbox some coverity issues came and
+> make no sense to fix them when there is no user of these drivers that's w=
+hy
+> it is easier just remove them completely.
 
-Please note the bootph tags should be upstreamed.
-
-[snip]
-> diff --git a/board/phytec/imx8mp-libra-fpsc/MAINTAINERS b/board/phytec/im=
-x8mp-libra-fpsc/MAINTAINERS
-> new file mode 100644
-> index 000000000000..16b18b605e0d
-> --- /dev/null
-> +++ b/board/phytec/imx8mp-libra-fpsc/MAINTAINERS
-> @@ -0,0 +1,8 @@
-> +Libra-i.MX 8M Plus
-> +M:      Teresa Remmet <t.remmet@phytec.de>
-> +W: 	https://www.phytec.eu/en/produkte/system-on-modules/phycore-imx-8m-p=
-lus-fpsc/
-> +S:      Maintained
-> +F:      arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi
-> +F:      board/phytec/imx8mp-libra-fpsc/
-> +F:      configs/imx8mp-libra-fpsc_defconfig
-> +F:      include/configs/imx8mp-libra-fpsc.h
-
-These should all be tabs.
-
-[snip]
-> diff --git a/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c b/board/p=
-hytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c
-> new file mode 100644
-> index 000000000000..89b3b6f90ecb
-> --- /dev/null
-> +++ b/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c
-> @@ -0,0 +1,114 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright (C) 2025 PHYTEC Messtechnik GmbH
-> + */
-> +
-> +#include <asm/arch/clock.h>
-> +#include <asm/arch/sys_proto.h>
-> +#include <asm/global_data.h>
-> +#include <linux/io.h>
-> +#include <asm/mach-imx/boot_mode.h>
-> +#include <dwc3-uboot.h>
-> +#include <env.h>
-> +#include <init.h>
-> +#include <fdt_support.h>
-> +#include <jffs2/load_kernel.h>
-> +#include <miiphy.h>
-> +#include <mtd_node.h>
-> +#include <usb.h>
-> +#include <i2c.h>
-> +
-> +#if IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION)
-> +#include "../common/imx8m_som_detection.h"
-> +#endif
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-
-Please audit this, gd isn't referenced for example. Thanks.
+Ah, thanks for taking care of these.
 
 --=20
 Tom
 
---D9oIiN4k0Hh+JTnk
+--8Uy72jVYjYizg3rV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIOMxgAKCRAr4qD1Cr/k
-CnGVAP9fHuLSduIwirzQLeEgXAwZS7kmONxtmhipuDah8MpRKQEAlLZfgC3PeHWH
-57rBAvozcQhPwUTEL6tCCfxCLPwy9g0=
-=jq4x
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIOM7gAKCRAr4qD1Cr/k
+CvQyAPsE7aHB9eNk9iQL0XXIXoDCo8muTTDAeRtAGl/VXrmRzAD/eXD+mAVlH11C
+hhNvVlOpsfInL4Zs1vkhJUCcYaQIFQY=
+=W057
 -----END PGP SIGNATURE-----
 
---D9oIiN4k0Hh+JTnk--
+--8Uy72jVYjYizg3rV--
