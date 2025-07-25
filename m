@@ -4,112 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E483C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 17:56:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29D7C87FCE
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 19:04:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B352583939;
-	Fri, 25 Jul 2025 19:56:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 140C683987;
+	Fri, 25 Jul 2025 21:04:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RR/wBoG0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="anZaCA5j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 909FC8396F; Fri, 25 Jul 2025 19:56:43 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3DB07839C6; Fri, 25 Jul 2025 21:04:38 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8371083710
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 19:56:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13A57836A3
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 21:04:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1753466200; x=1754071000; i=xypron.glpk@gmx.de;
- bh=r+uryOWdzhMJQFRzWQifJXfgvCFOI3KjtrI2/U2ACZE=;
- h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=RR/wBoG0ZO2Mk2emiCIiex7lThoAwdYM8Fcpge3Y0GwHm2ZsLZK+tUxxJ5DbczWU
- Nd03P3DUMv38Nm5FKPS5IoHRrPxJtmwvgl0RdClAHe8L62dZHOMdRcgoxFTrDL59l
- rRvsNl8IQkceTCgu3OcZp+Px/vCz+PksT0l8xEtOis/znYYCfqtHYnD10+nut9zGG
- gF5Walylxeg7Nl0iER0VSxGfc4JBYBbhpPRVK3wqgh9ytaSYN0UVUCLVbYtZ57I7Z
- SLP9Rm07Pp/R9IOb4S2uBBqxQE/0biTOsH7GmvUE2DiFfnZHhdKHuDkTJxGSW9N6L
- bvthRkmUhFfk2MOi/w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N0G1n-1uSFSB0TQN-00sYj5; Fri, 25
- Jul 2025 19:56:40 +0200
-Date: Fri, 25 Jul 2025 19:56:39 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] efi_loader: Add support for .wic files in URI boot path
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250725173534.247188-1-javier.tia@linaro.org>
-References: <20250725173534.247188-1-javier.tia@linaro.org>
-Message-ID: <46A97A81-B04A-4BCC-A5EF-2639593DD86F@gmx.de>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-615a256240bso1121131eaf.3
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 12:04:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753470275; x=1754075075; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HhhzJyjeDTqg05j5hqNOpqsuuPoVgpRf8RFpjAaVVeg=;
+ b=anZaCA5j6y45dKSIz9EKv+xkZTLoBsOvza7Fe5XoBE9BD2jHETOd9CkVwfxqIkHV/X
+ EUHSi+XvEA9WZ8FwusMwWnPKZl5jxchzUD8Y/7D3XE18BKj8RP75xbJGsKNr5Gk/Y5hL
+ JznZEj644Km6PXP98apFsMh6T69b8ditspa8U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753470275; x=1754075075;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HhhzJyjeDTqg05j5hqNOpqsuuPoVgpRf8RFpjAaVVeg=;
+ b=sGhrfNAdkKoFmoMc6tl/mFU0mj5fUWvNUjlooXN+cn9VY/+iolNeuV+fKKHMT7KAY5
+ esikzLY9L5m8vtV5RXClKr/7slPfZLcEMQzTjSq0ejiynwiuxZzlFzCij6gD8wd1pzZQ
+ Npg23eFC4H1mO/SKWV7kzDFm8gTGrz/G0fLAC4eZ6emJksdr3Ux2CD629BkSgtZm3HYH
+ loWWi/LJYn3e+U5SgHVHnQWLgwtAGDUjTvHJ2yBqsFYZ01OfLaECHtrD8Bmny26dJIGV
+ /N6XlV4cZJ3BndWToFqeBrtYc77bDPi1AHHqLc8VWP93/B3VzBmLk8P81DIWjZtTuNde
+ bJaA==
+X-Gm-Message-State: AOJu0Yy3j1qL8izifNPiRSwzmOmhtuFvxwAHJYSusYbGCdm8zs0/hShk
+ rx9fdcVhiQ6FShr1I+9B29O2kDeNaBrou2bRZsG4aLvtyqwgxebhHqo4UXCUUFVImAubYWJljRA
+ mjjLchlU=
+X-Gm-Gg: ASbGncss0/udMOWLMv6y2boc5yp+uJ2N4rxjMB00ZvVgdPjmoiMhkNYgvksURf0CQYE
+ t8mQQRLpZsJCpRaNwy+z6l+AKD6RCMHEMLaYFa3QPEvoqeOp5mR6mslmCz70DKoGGzbJZPU96uF
+ QQzNqU4K5HY4c5dsLhuGUiU2yQcPB/1ET4BC6N7XHsmczuqFpj3bVhC8JhQRitv8ZpSt5LRypUW
+ JGCWajPA5z/+pepaaKElYcGMiLucsh1hWR8W7m9Yp25zuxAsx7RKSmjNcBVZBMLSUvA+Fwcysxh
+ dKlcHyaaNRrlM6q3M3evX21flqXIjtka4IVuhkb5NKMj1ultsR5tZqtDWwUmYXQbmMsnqxhWvpz
+ wuRA9kZ8JwaQsWzEO+GpqmEvt+7mQYMuyJrt3yzDW3a+t7RKyfqiAEJaq7BE=
+X-Google-Smtp-Source: AGHT+IGGgcN+vkRxny3/ZxUCygrXMfwS/TOYR6ZvMRyHzZm7jDkuRN+3bAiu1lG/xbtrj0sbHONUMQ==
+X-Received: by 2002:a05:6820:1e85:b0:615:e20a:64cd with SMTP id
+ 006d021491bc7-6190ca41113mr1897633eaf.7.1753470274479; 
+ Fri, 25 Jul 2025 12:04:34 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6191410b759sm78994eaf.30.2025.07.25.12.04.33
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Jul 2025 12:04:34 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] Docker, CI: Update to latest Ubuntu and Dockerfile
+Date: Fri, 25 Jul 2025 13:04:32 -0600
+Message-ID: <20250725190432.4152488-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Vt6CHpgpte6rdFbyNWPN6Rwto02QkwVG5dr+cbhSya5s+VWrG5m
- v2gaCImKWkwR6hL1PRiFvv9y56Ee5nxET4edTgHJqjLWoStmVJnSnLk0RSATrgaxygtuQxT
- dnjHAtgFmTYzGM8sYBbkEdA58Hg9jVoFOpV55y41MBmxNpQOCcKj5SnlapkDsTpzK5b5z1j
- /fcb43G+PbZqYC8BxmWYg==
-UI-OutboundReport: notjunk:1;M01:P0:r+X27PH9mkI=;SUWFbVPMq4skIVqD7OEorq9wbSN
- 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
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,72 +91,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 25=2E Juli 2025 19:35:33 MESZ schrieb Javier Tia <javier=2Etia@linaro=2E=
-org>:
->Together with current '=2Eiso' and '=2Eimg', the try_load_from_uri_path
->function now allows files with the '=2Ewic' extension as viable bootable
->images=2E
+- Update to Ubuntu "Jammy" 20250714 tag
+- Update to current Dockerfile which brings us QEMU 10.0.2 and newer
+  coreboot and pulls in lz4 via the non-legacy package name.
 
-Why wouldn't you simply name your files *=2Eimg?
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .azure-pipelines.yml    | 2 +-
+ .gitlab-ci.yml          | 2 +-
+ tools/docker/Dockerfile | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-Shouldn't we get away from the DOS age routine of relying on filename exte=
-nsions?
-
-Just check if the fileheader is a PE header or if it is a known partitonin=
-g scheme=2E
-
-Best regards
-
-Heinrich=20
-
-
->
->Very frequent in the Yocto project, the WIC files are disk image files,
->which should be handled similarly to other disk images: mounted as RAM
->disks and subsequently searched for the EFI boot file=2E
->
->This improvement enables the EFI boot manager of U-Boot to boot from WIC
->images downloaded via HTTP, therefore extending the supported image
->formats for network-based booting situations=2E
->
->Signed-off-by: Javier Tia <javier=2Etia@linaro=2Eorg>
->---
-> lib/efi_loader/efi_bootmgr=2Ec | 7 ++++---
-> 1 file changed, 4 insertions(+), 3 deletions(-)
->
->diff --git a/lib/efi_loader/efi_bootmgr=2Ec b/lib/efi_loader/efi_bootmgr=
-=2Ec
->index 662993fb809=2E=2E587efee3169 100644
->--- a/lib/efi_loader/efi_bootmgr=2Ec
->+++ b/lib/efi_loader/efi_bootmgr=2Ec
->@@ -407,7 +407,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct =
-uridp_context *ctx)
-> 	if (!ctx)
-> 		return ret;
->=20
->-	/* cleanup for iso or img image */
->+	/* cleanup for iso, img, or wic image */
-> 	if (ctx->ramdisk_blk_dev) {
-> 		ret =3D efi_add_memory_map(ctx->image_addr, ctx->image_size,
-> 					 EFI_CONVENTIONAL_MEMORY);
->@@ -516,13 +516,14 @@ static efi_status_t try_load_from_uri_path(struct e=
-fi_device_path_uri *uridp,
-> 	image_size =3D ALIGN(image_size, SZ_2M);
->=20
-> 	/*
->-	 * If the file extension is "=2Eiso" or "=2Eimg", mount it and try to l=
-oad
->+	 * If the file extension is "=2Eiso", "=2Eimg", or "=2Ewic", mount it a=
-nd try to load
-> 	 * the default file=2E
-> 	 * If the file is PE-COFF image, load the downloaded file=2E
-> 	 */
-> 	uri_len =3D strlen(uridp->uri);
-> 	if (!strncmp(&uridp->uri[uri_len - 4], "=2Eiso", 4) ||
->-	    !strncmp(&uridp->uri[uri_len - 4], "=2Eimg", 4)) {
->+	    !strncmp(&uridp->uri[uri_len - 4], "=2Eimg", 4) ||
->+	    !strncmp(&uridp->uri[uri_len - 4], "=2Ewic", 4)) {
-> 		ret =3D prepare_loaded_image(lo_label, image_addr, image_size,
-> 					   &loaded_dp, &blk);
-> 		if (ret !=3D EFI_SUCCESS)
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index b1de8a6103ac..8209d2b329cb 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -2,7 +2,7 @@ variables:
+   windows_vm: windows-2022
+   ubuntu_vm: ubuntu-24.04
+   macos_vm: macOS-14
+-  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20250404-29Apr2025
++  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025
+   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
+   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
+   # since our $(ci_runner_image) user is not root.
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index dd628fb1cfa7..85401d3e09b1 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -20,7 +20,7 @@ workflow:
+ 
+ # Grab our configured image.  The source for this is found
+ # in the u-boot tree at tools/docker/Dockerfile
+-image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20250404-29Apr2025
++image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025
+ 
+ # We run some tests in different order, to catch some failures quicker.
+ stages:
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index a83c80db496c..5b4c75f84005 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -2,7 +2,7 @@
+ # This Dockerfile is used to build an image containing basic stuff to be used
+ # to build U-Boot and run our test suites.
+ 
+-FROM ubuntu:jammy-20250404
++FROM ubuntu:jammy-20250714
+ LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
+ LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
+ 
+-- 
+2.43.0
 
