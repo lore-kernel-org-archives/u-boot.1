@@ -4,86 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C5A2C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 12:04:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A65C87FCE
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 12:07:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A88483957;
-	Fri, 25 Jul 2025 14:04:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 46D5E8393F;
+	Fri, 25 Jul 2025 14:07:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pQ+m3hSs";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="NY9gsarY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F3CF8396E; Fri, 25 Jul 2025 14:04:31 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CE42C83966; Fri, 25 Jul 2025 14:06:59 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB0838393F
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 14:04:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7703C82F00
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 14:06:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3b7788749b0so93259f8f.2
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 05:04:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753445068; x=1754049868; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=J61oznRTc6xUqpwqnkdhihpmbSQJZ/T5lVvzOYU9BGQ=;
- b=pQ+m3hSszdTVsARdTy19+TZEfsVjA8EHyxQ3CBG/Tk1iRhQ9KJdVut6Xm6570fJHAT
- fDPOiCmRWt0UP0ehBn4qJ9AkLhJQyrdk4aVyX4sJD2h4lrvU4TfhUmuTDFtC3a5msUBG
- dC62ygVasrGLRTBaLfIAsmd4KgS2UNdgEYtmfIukCtDpj+VB+3wwj5XSp8LZTZvmSZok
- mrLw4DTHxvBEzdkdZ7ChHwI/x/m3pjnWhgevf25Uy13+IJlChxM0opp3VNdR9FgIPUb/
- w2rAIMlIwTkdBPUjBcMiMa/ozHLFX5JHHB4HvDeUiaH4w66t7u4DE6iDEDtVDKt6u/wo
- pbcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753445068; x=1754049868;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=J61oznRTc6xUqpwqnkdhihpmbSQJZ/T5lVvzOYU9BGQ=;
- b=NcJRB9Y4cjUac8ty7mmICZSbBT2tPXntVO/L8zsNNJHsyb7t4gBt2ZRLCYRPJRenO2
- oahIN3R0UVbgcxdan0TZDtyVyHnCXQfTXLdDy6bcc1Vvcx3xkFBm072izd1OK+PH+x4H
- tksZS+DpT8VSfE5FlBKxJrc1PxxXwMLl6BCHpFksElZH9nlY5fkqlIrjH1D1hx7HtVdc
- aWjgjnu4GCrQZZr+iUm0RebpRZ80mcEZSv0+CGUHezWaBj4nZDOne2EYZmBayASRR1my
- 6roG6W8mAbdz2qUMBp/WxXSDhTUVQ1FQsq3iGG3vLAWxlBvxd5sJ5a02SIcMn3/74mAm
- +FkQ==
-X-Gm-Message-State: AOJu0Yx5s0j8N5CLsuzstfNfBgn6Dm1VeOq8jpn430GUJDTcXjYFQWoy
- 7g2tGjGHNn/2usu5ezuPICFIeequtIVNdpW1OewusqIIWzvnhVE+O5jbpeHFUYoLtf71QT9yoxt
- w8m7DTaY=
-X-Gm-Gg: ASbGncv+e5PnvEXKsIW4vfaTKYyvojTtUhc3yK1m52HBemHOHsZcLaIZOM6CMRZLqyX
- EljjiZ2jNS7RA0wP3jdehjY/3vlnhvdG98n0sZ84p3b8SwR613JvOKpHB4bllwdX7Tqt3fttP7o
- DAzWzhbgoN2K2QhK79qwTWirpJQf4zAFgFLOKeFowWz8AdnqfR0CP+Y8yfPLwscNje01YaJ14Cr
- GENnYqCP2tSAlAFOFskCGDHzlgNbzK6LzGM3q/wYsu4Kllj7GH1sOS1K5EA+FF0gPLA+6j+dN/e
- 5sNiFdRI3Rgpt+BCk2lY9hwSnxq6208WscyJ7eUwxvyM7r9p1WGGhRKS4UHODloi+Z8+MdrRQNf
- GSWnJvqilZtx/iGvqHBW9RA5G98GVi3tMApHj8L52gfO5zGx+4A==
-X-Google-Smtp-Source: AGHT+IHxEC9n6HOuZpN9Yt6sNdsquDKwqD3LxH1bBBcU+cJLgjDiOM2WUwb5K9QFwc5UqcL8o6vNuQ==
-X-Received: by 2002:a05:6000:4308:b0:3a4:fc52:f5d4 with SMTP id
- ffacd0b85a97d-3b776780e64mr1587861f8f.47.1753445068024; 
- Fri, 25 Jul 2025 05:04:28 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:707a:1ff:4c94:1748])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b76fc6d2e8sm4844613f8f.20.2025.07.25.05.04.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 05:04:27 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 25 Jul 2025 13:04:26 +0100
-Subject: [PATCH] gpio: intel_gpio: Initialise or0 and or1
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=s8sHjeenXQNfC9315hispmVu6PV/JVt+AmdBm3MgoavPt2HwKGVMrYZPTBRXXXXc9YHbi+1152EHm7xf31fiTYpCjuyuqnAhd6IjFGtuHyUbZcrbcDMfBT0zdmJeaHxT5Q1FYCY6hWbAFslYy3nvYhzJT4VMa0wC84BGZpm3SBW4xyVVwIPHF9XOSCuucKN8Pc8gAtoWEQN/Q8WNribx23wsFI7Q554+iwuUsccTbn4S6JqTD+piNGHJOGB5BL5S6RTMmuTC1Y/k/9j+NwM3kVvIg1GOmSmlgh68xCHVKI/6HFkdF8ovySbEJOjakFmqCShI1pe4QZytThVoVvpufg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=37ShRFQfOGx2pk/sqDFVb787XiXfxi40KXsf7TQh7+0=;
+ b=mScWUYANGBfhtTMB6cu+wRedC5mhMC+9lL8CQshIBkvpqekI/T6HoQQSQ5n9SYvzONrS+PQGqXH+QEAO5nOp96fjlOclJbJMfvYuG0pQXQoqTLlBcO9ECTnJJPlC3dyFDXEaHtk+uTLganf58K0UmtwEJTU6X8aY9guyVM2P7jD9C2S0srNkneEfXWfV5IKdhDUWFsQIjWhIQVYGxgsnzqRVdN77yrgbnADYXb8T4Tm8V2iv2I7OcMSzG+YF7s9xXqsvNHqdryKBq47g2+y60xoR2OzaaZ84VC8Q/3RiaD8LmPZQcaoQ2RJQnxHuavMIfDjslfQB43wWk6B/acvD1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=37ShRFQfOGx2pk/sqDFVb787XiXfxi40KXsf7TQh7+0=;
+ b=NY9gsarYh33zePeMzG0LgbOiSBSlyXiANe5u7UsX2ghLkhge4apdm+RH2EYqcfDoBphjKITlQqWj35M5xob+Ee0zMviLGlHI42NIYMGLImLTgsXFCYCqYyMR83xjfhTGo5+jfIMnlaMQmkwB26J7E2pOem2XAxTM2Cl9VjZ0ncg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAXPR04MB9008.eurprd04.prod.outlook.com (2603:10a6:102:20d::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.23; Fri, 25 Jul
+ 2025 12:06:55 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.8964.023; Fri, 25 Jul 2025
+ 12:06:55 +0000
+Message-ID: <6eef2eb4-5f1c-459e-be6a-1d5343b5de6f@cherry.de>
+Date: Fri, 25 Jul 2025 14:06:52 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] gpio: dwapb_gpio: Using wrong function to free memory
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250725-dwapb_gpio-v1-1-ee09ac9db7eb@linaro.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250725-dwapb_gpio-v1-1-ee09ac9db7eb@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250725-intel_gpio-v1-1-20a917eb1cf6@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAMlyg2gC/x2N0QpFQBBAf0XzbGutFutXJC13MMXSjKTk3+/ye
- Dqdzg2CTChQJzcwniS0hQhZmsAw+zChol9kMNpYXRqrKBy4dNNOm7LOOFdU2ukshxj0XlD17MM
- wv8nq5UB+xc440vVdmvZ5/oPTwWZ1AAAA
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+X-ClientProxiedBy: FR4P281CA0182.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ca::12) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB9008:EE_
+X-MS-Office365-Filtering-Correlation-Id: ae612e7b-1d32-463a-818d-08ddcb73bf9a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ck16ZTY1U3dnMU9za1VkemErZW5ZR3NaQ1I1Z3VUcHhmYmRCNWJDRk5nQVBo?=
+ =?utf-8?B?WnAwRkdmN1RNZENCQktpZldXMWMySGcrc2dRS2FPczNnQWRhYTR0ZEwxKzlw?=
+ =?utf-8?B?SmpDYjFKd25GcWRrUmhnYTgzbUVwUFJ3b1NQUWhDSUgrOWRRWW9OTXFHSVZj?=
+ =?utf-8?B?blJZRVVFaXlTOVVLSWFrWTRNNUk2T0l5QWJ4elNhUnRmcXJ6a29XZUhjNm1M?=
+ =?utf-8?B?U1BNQ2lyTUVPTFdHM3h0eGpwUlovQkFrUElmN0RsTnZ0U1VFb0ZkMk9GWGpM?=
+ =?utf-8?B?LzVNOERvVmQ0MmVPc1dwdDB4bEtvY2FNdXBsVzYzWW9PNnpyY2JMMElQL0xC?=
+ =?utf-8?B?bTNmSytzTThZalZFVCsvUWIxRllocDRhdFplOWhiU0VVbGpLTGg4RFZHWTln?=
+ =?utf-8?B?ZkxBY2d3czVGc0R6ZzBHZkJTQW0ybmtrKzhlMFY1bkh2NkhZTGJyMnd4YUdD?=
+ =?utf-8?B?MzlPM2M0T0NMOXR2bU12d1lZWTlpY0ZndEk0Ukg2bmNPV0l4VmNrTnRXU1V3?=
+ =?utf-8?B?VW5raitzOUcyU2c0Y2c3cndhNjZ2cTZsMGZDamxnYTZTOS9CSUdEUy9ObjF2?=
+ =?utf-8?B?NjdnOWtnUU9jUmVuSkNKdG9LaFdKMlEyWXNqQzdsYWRQTUt6b0FnWFlGZzFS?=
+ =?utf-8?B?MTRESHpqWUFrRTBwK3cxdzB5bVhGL2wzdnF0TjNVdWtzUEhycFlzd0lXSGZq?=
+ =?utf-8?B?dXhiVFlrWEM2dnVTZFR3MmNhVEJtWFRUYzVHOGJxRG5QYXM1aGplUndhbmtu?=
+ =?utf-8?B?NkdPcTdKOGJ4VEdhRnNyS0E5MFNjL1J3RE9ZQmJSUW1DN0E5NFpxK3dpR3Va?=
+ =?utf-8?B?QjFGZ0FDa2lQNGNYbkpvT1prNlJGUUhVVDJISVJ2UmUvbyszK3JqNVZ6bVdR?=
+ =?utf-8?B?eTlaZzBFSWxmMTBqQTc3d1p0SjJuT01EVFR1UDhJcUxRRDhrVGQ1V0xLZjI2?=
+ =?utf-8?B?dDlzMDZ3VWwvVUNoUmFkQU1wWmJERWVyYTdmWGpKVThScEVQTTV2cEFGei9U?=
+ =?utf-8?B?UktDaE5SOFM1d2xST3hIZVgwdDJWSG9CUmtzQ3VFYjlrVFQ4K0k0aHpqWHps?=
+ =?utf-8?B?UUtDdSt3OXVrcENQT0xWNFBCS0sxRHBQc0lZZHhBdzB3bERmZkJHMTRuWDNz?=
+ =?utf-8?B?ZnNJSG5HeFRxdlpiZm03V1czcXBnQkcwNGp1Z3ErcnJtcGdrQlIrRlE2alJE?=
+ =?utf-8?B?NE4wSHhEVDNSMUo4SUc2YnBYbkRreVZ2MXRUWDlLSXByYXNoNTZLdE5DUnBo?=
+ =?utf-8?B?SUIwWktkTHZBeC9BTEdBeFlQUWpZaTNzWlh3NE84R1NpY2w0aEVsMzlDV1dw?=
+ =?utf-8?B?b2lTcW1PVkp3K2pJUjlmMmpRU01IZlhzMlpQL01rWFQrUlhhVWVjUTZmdFE1?=
+ =?utf-8?B?NUtUYzUxS2Rrd0JjTHVyVXo0djVIMTlUa0YrLzZjcmhmczM2Y09BVzFEZTBP?=
+ =?utf-8?B?SW1yR0VnS3VCRno0elVJWE5GVWd6ci9Ua2lzbmhYeVU1eFlBWjgzTmNIc2tp?=
+ =?utf-8?B?OVpleFFiL3ZiSm5DNFhGUmJGUjJjQ1liTGc4dmk1WFFuWmw4ZzlITkx6c1hl?=
+ =?utf-8?B?YTFFdnNIU0czVWRXVXZFbVdaLzV4ZmtFS1hEZVhZdURBVy9qaGxEVDhscEFK?=
+ =?utf-8?B?blpWU09Uak1nSGlmUlBVcjc5QnFCNkhtbms0MHg3L3J6TnkweUdidmMyUkU1?=
+ =?utf-8?B?NTE2ajI2OWlrRGxxV1huQXNXZk16WTVhTGdPa1lGQktYQTVrZDhDMmY1dEFD?=
+ =?utf-8?B?VXduNDUzQ0o5cGloZkNhZGFlN2hvMHdmS1VWZmlMRUpQWHFTMFNxeDJmeDdt?=
+ =?utf-8?B?c1NralRZaTQ2dTZkNjNONC83RHJRRGxPaUtxemt4YjJXaWRKOVhsNXBUUnBs?=
+ =?utf-8?B?UWpFaGxQT0VKTDJKd2I4NWlOSVJaSG9nN3o1clBOcWJJVDFGOUUyVHcwaUxC?=
+ =?utf-8?Q?kMn3BnsdQ2c=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M20rcTVZOFhhVjJwZUp2MG1hSEh1eDdNNFM5TGdDNlZkUXZmQzhYNlA5NUJk?=
+ =?utf-8?B?SW9UN0h2R2J0UFpIUVFWcFlaL1ZTNXhpQzNuclZNa080aWtkQzJRa1pUMldo?=
+ =?utf-8?B?L1VNRzNyYk1Cckd6N2JnWDNpOFNaVVo1ZGVobmtpemNEWG8wNHRUd0w2eFBB?=
+ =?utf-8?B?S1RpVW9WM204SEhxUE04Z1JtY1pHV3JtVFRQUkxLdGkyUnVFaUkxbi9DZWhG?=
+ =?utf-8?B?bFphRUg3YjJYZkNyazVldkZUZ3BjbGdJeGZCNzBNV0M2VE1lOWQ4cWlHUjht?=
+ =?utf-8?B?VC9kM2dPM2VEbzF2L2dNY2VtYXZPby92Ny9NRk4zbGYvc2ROUVhFcHdPTG82?=
+ =?utf-8?B?TjZybTlBb2lBbWRxNVNibkU4YlNJY0JuODRxckhxZllWdlM3cDlTMFVQcWgw?=
+ =?utf-8?B?SzEwNzBxRkVlcVpVK20waEs0UGQzNTFJdDBwd0ZETnhFdDFnMTNteDFMRk9i?=
+ =?utf-8?B?anJnclFrOGd0U3Z2aFB2dEcrVHRoRGVFQnlORWI1cVB5OTVSWHlBb3kxNjI4?=
+ =?utf-8?B?VjRZa2Q1RzJBWk5iUW9ZUFpFTVR2S3dqWEs1MUpXZ3BvT0JTM1VPSlpTVFp6?=
+ =?utf-8?B?OUtSYXVDOGxCQzhsenNmcVhGQWhQb2VNSG13ZTlqRmVPbGFkM3BUTkZxWTBp?=
+ =?utf-8?B?WWlQMUR6MTB2OU5OeFRXdGxpSmpXN2lZak1Qb1Mxd3psZ1NWNHVxKzZSQmJ1?=
+ =?utf-8?B?bUJzTzVkeitYMmlwZzBOKzY0S2MxSWZRTVFyQWdBTkVNSXpDYUpZOEZNaGtJ?=
+ =?utf-8?B?S2pQYnZyUE52eXRidW1HTW1RZUJBV2RINS9UWHlRS0lQek5zMGxyQ0NhUVgz?=
+ =?utf-8?B?MWV6NTJRR1Y3bmtOZnVDS29mZUIweW9UWW5KTmdsR3NiOW5vMnNmWjFHOGxm?=
+ =?utf-8?B?Yzc2UmdLd1hFcWM5em1LWkFLeVYzMmw2bVV0ZzA4bGRBcnhvWXJpNmNDV0p2?=
+ =?utf-8?B?R0w0UTlNUVlLek9QL0gwQTVDcWRFUXIvblNEeStuVW9RLzJESXBVMTBaSU4v?=
+ =?utf-8?B?NHU3RFoyNjZGL1lnKzIxVGpYMjhCWnAyREw4eHFmRkFnWnREUHR4T1BlREQr?=
+ =?utf-8?B?d05GZDhDYkZJQmNtY2dWeXhydDZNNW1LTVQ1bkdiMkI3ckFndVR0cCtZTTdS?=
+ =?utf-8?B?K0RCSkdaSzAyelJrTXZ2N0toZTdCWWdXYlNQbFlvcUdGUUxtcU9HME5oN2du?=
+ =?utf-8?B?c1hkOUpaZWh1dzFhUlpmV2tCOVZtZldwREIvRjYxTlV0aHM0NHdFbjUvT3NT?=
+ =?utf-8?B?Tmh5RVdydHVTdWU2RHhqeXZ1Q2QyeFNJMmFJajFleS9qZjJKT3hGM3kybFhv?=
+ =?utf-8?B?b0pwRTUzLzhVWi8rWldIL3F1cHI5UHhmNXlxcGpYOHBNcXEyMGxZTW5vTzdv?=
+ =?utf-8?B?QWN3THExTlFDODBrUGVycUJhMmsrNmROazhLaFJtbkNEZDl6Qk9Mc05WS290?=
+ =?utf-8?B?eWU5VUpGc0htOTMvVjI4YkFncG80TVlIR0hWNitPeFJJVGhybHZPQXRrVjdD?=
+ =?utf-8?B?eVpOZzdzWTUrUzk3cU9OSEhZcGhoVWNnZ1NBTDBYa0tJRzJ2WG1BdUQyVlJO?=
+ =?utf-8?B?bWxUWWFQbWRPNC84OG5zWXpkaUhUY1U4MXZVanBkdDIvc21KOStxeDVVKzZm?=
+ =?utf-8?B?WTc0SmNMM1l0OTlMUVZHL1JmZTJSbGY5czdZaEkwQ05COUVzUzFITGp5WmF1?=
+ =?utf-8?B?NXlTbEZYS3FRU1dUcS9PSGJhSXdabDBNY2ZPSlRtTlNwYzgxZmEvOVpTNEo5?=
+ =?utf-8?B?bFBQc0N1cFVIV2RNTitOdEIxRk9Eei83amEzUTNFWFRIa1FzSWtSUFVkSzlw?=
+ =?utf-8?B?L3duelpXbkh5OCs5N0hMeTJoOGxOVDY2OTNKTlh2TmlGVVFOYzVKemdKZkF1?=
+ =?utf-8?B?UGM4eGRqVURJWk9oNkt2c2ZjeWF0VlVNYSs3ejEreFkydHowcE5SenoyTkhP?=
+ =?utf-8?B?eE1oRytjN3I2T1dHdFgvNEJkd1ZWeHY2bFpOWnNJZmJ5ZlpLdDA0TDNqdXFD?=
+ =?utf-8?B?NlM5ZUV5Z0U0Z3NOTk5kRGNxeWVpQ0M3LytwR0VHVEkzeTBYdUJoZk5MLzRP?=
+ =?utf-8?B?bG5UTWhCYXVhOHFmVXFSTFpNd3BVUnRxZW11Mk1ZMzVmeVVTb1lNd2RGMmNt?=
+ =?utf-8?B?b0FaMTNUeTJkYVp2R3pORkoyT3NLT1RPR3VSVTBHTXhWTmpNa1JrRnBkbGhh?=
+ =?utf-8?B?Snc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: ae612e7b-1d32-463a-818d-08ddcb73bf9a
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2025 12:06:55.4477 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: iVV6PWPSSkxrKMmbVHpGvvBMd9QVmGiLRWuGtKIhtFq82SghyuF3MjWuHmZJMTVMXp37iPeePa0G0fMJqtdFqqPqH+I9FvORYEKZYtiKxOg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9008
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,66 +174,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In intel_gpio_set_flags the two variables or0 and or1 may be used
-uninitialised. Correct this by setting initial values in the
-declaration.
-Also there is no need to use '|=' when the initial value is 0 and there
-is only one assignment performed to each variable so just use '='
-instead.
+Hi Andrew,
 
-This issue was found by Smatch.
+On 7/25/25 1:48 PM, Andrew Goodbody wrote:
+> In gpio_dwapb_bind plat is used to reference memory allocated by
+> devm_kcalloc but it is attempted to be freed using kfree. Instead free
+> this memory using the correct devm_kfree function.
+> 
+> This issue was found by Smatch.
+> 
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>   drivers/gpio/dwapb_gpio.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpio/dwapb_gpio.c b/drivers/gpio/dwapb_gpio.c
+> index 04639a4cb68..7ab48780332 100644
+> --- a/drivers/gpio/dwapb_gpio.c
+> +++ b/drivers/gpio/dwapb_gpio.c
+> @@ -193,7 +193,7 @@ static int gpio_dwapb_bind(struct udevice *dev)
+>   				 ofnode_get_name(node));
+>   			plat->name = strdup(name);
+>   			if (!plat->name) {
+> -				kfree(plat);
+> +				devm_kfree(dev, plat);
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/gpio/intel_gpio.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+Why do we even need a free in the first place, isn't that the role of 
+devm_<wahetever> to undo things properly in case of failed probe (or 
+removal of the driver)?
 
-diff --git a/drivers/gpio/intel_gpio.c b/drivers/gpio/intel_gpio.c
-index 0ab6e8a90bc..ac2fb8bc2cc 100644
---- a/drivers/gpio/intel_gpio.c
-+++ b/drivers/gpio/intel_gpio.c
-@@ -116,26 +116,26 @@ static int intel_gpio_set_flags(struct udevice *dev, unsigned int offset,
- {
- 	struct udevice *pinctrl = dev_get_parent(dev);
- 	u32 bic0 = 0, bic1 = 0;
--	u32 or0, or1;
-+	u32 or0 = 0, or1 = 0;
- 	uint config_offset;
- 
- 	config_offset = intel_pinctrl_get_config_reg_offset(pinctrl, offset);
- 
- 	if (flags & GPIOD_IS_OUT) {
--		bic0 |= PAD_CFG0_MODE_MASK | PAD_CFG0_RX_STATE |
-+		bic0 = PAD_CFG0_MODE_MASK | PAD_CFG0_RX_STATE |
- 			PAD_CFG0_TX_DISABLE;
--		or0 |= PAD_CFG0_MODE_GPIO | PAD_CFG0_RX_DISABLE;
-+		or0 = PAD_CFG0_MODE_GPIO | PAD_CFG0_RX_DISABLE;
- 	} else if (flags & GPIOD_IS_IN) {
--		bic0 |= PAD_CFG0_MODE_MASK | PAD_CFG0_TX_STATE |
-+		bic0 = PAD_CFG0_MODE_MASK | PAD_CFG0_TX_STATE |
- 			PAD_CFG0_RX_DISABLE;
--		or0 |= PAD_CFG0_MODE_GPIO | PAD_CFG0_TX_DISABLE;
-+		or0 = PAD_CFG0_MODE_GPIO | PAD_CFG0_TX_DISABLE;
- 	}
- 	if (flags & GPIOD_PULL_UP) {
--		bic1 |= PAD_CFG1_PULL_MASK;
--		or1 |= PAD_CFG1_PULL_UP_20K;
-+		bic1 = PAD_CFG1_PULL_MASK;
-+		or1 = PAD_CFG1_PULL_UP_20K;
- 	} else if (flags & GPIOD_PULL_DOWN) {
--		bic1 |= PAD_CFG1_PULL_MASK;
--		or1 |= PAD_CFG1_PULL_DN_20K;
-+		bic1 = PAD_CFG1_PULL_MASK;
-+		or1 = PAD_CFG1_PULL_DN_20K;
- 	}
- 
- 	pcr_clrsetbits32(pinctrl, PAD_CFG0_OFFSET(config_offset), bic0, or0);
+According to 
+https://lore.kernel.org/u-boot/20250722-usb_onboard_hub_cypress_hx3-v4-2-91c3ee958c0e@thaumatec.com/, 
+you need DEVRES to be enabled for that to happen.
+So I'm really wondering what's the purpose of having devm_ functions if 
+we need to undo them by hand if DEVRES isn't enabled. This is very 
+confusing and misleading and will lead to mistakes (I for sure will 
+never remember to undo devm functions in drivers I write or modify).
 
----
-base-commit: 021783860f7e628f7c4e0c101707cd4250e6d61f
-change-id: 20250725-intel_gpio-592996809013
+This patch looks good anyway, so
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 
+Thanks!
+Quentin
