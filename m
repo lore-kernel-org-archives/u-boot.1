@@ -4,115 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF5AC87FCE
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 12:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F02C87FCE
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 12:42:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D3018211F;
-	Fri, 25 Jul 2025 14:37:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id A07A6833FC;
+	Fri, 25 Jul 2025 14:42:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="As2b3Mhy";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="KpuLOPd2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E60F829F5; Fri, 25 Jul 2025 14:37:07 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3CCE8833FC; Fri, 25 Jul 2025 14:42:06 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::61e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F03F18144A
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 14:37:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9B2A3833C8
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 14:42:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56P88niq008715
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 12:37:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=Qac8zNXdzX0QxnbW0yYt8NmZRasRWTXSoqR
- J4nZGPmg=; b=As2b3MhysPAG6sE9Erpc7C1cv1uZKotLphvm3zcBq8A1ttZL3So
- gIvJTnb3HY1DPFsDaRmKaPFslxt0PXLGkM+zNqBH5j3qYltcr6TF+E/KeRCgfhiE
- wdOsSwyhnmw9TX4ePX504FkVimcBVwFIvjYXA2RAXnedEbhvS6v9zFNuse84by9D
- 2bA/Wr5pn6BJNGsDVSkOH5eSoC7JqrhLU4JdHMbAkx4j3ad7lFdvn9eKM44Q3Zsk
- UVWTr0Ghee2571xxj8mfjp/iS3pQDZ72NfPPTWKyLNa/Lu3EycT6ExY1Z+ps2N90
- 8Yo0txC8r7bgKr5IrZ2ywZydqYQTn3jPidw==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4846590qg6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 12:37:03 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-3141f9ce4e2so3421815a91.1
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 05:37:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753447022; x=1754051822;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Qac8zNXdzX0QxnbW0yYt8NmZRasRWTXSoqRJ4nZGPmg=;
- b=K+FjU4877gsRfr3qSKQw9ggYEd9E9MSBSUYu2obi3fcqOnuDqJIzKvC4ka1Hk+g1OH
- PiXCKVaTKnV9qaS2WspFshXoBJU2kkgaXgyxzOFkMZNxejqZHVx98XiHvjpmkdYBa3GT
- MYNjSRkWFNpoUAA0NQ8DZkqkGr7LomTGzOnKEchmJxQEo6qGTrqw6+2aBMwDglANWCHD
- ZzgF42Jh/mC7hxPJYcxUsBND2FReV02tTRVMBN9n/R5bmr8Pb4sY/SMBc1UxK3VUaO1S
- AtTLRSDNTIEwV7gYYdyFHqzB6L9k8f4LVntuSNntPNFCJBl4xvm7LNlpH1h2su5vssLa
- W/Xg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVb3wVmQg4OV1nanVbtfsoNw/TdgWD8FWEW9J1m2tJj0st7lWaUcBXRWmQiJjbXCg4aO8eRrzA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWwic6IQ6iByUNT0SLoQ3Vn5zql1DJBVSWE722nf5Al6tR5NOm
- NANtWupTB+YR9EOLrFBHE9W2uhph0mHN5ekvETTdrhteSOfYwUFrBVqEs8vejXD89gjAoOIbvLU
- tpygSZ0F1AJTozXKJ3OxB0NKToFkQxhIoTIPb8l7q72e8zPrZUg8RFKwR
-X-Gm-Gg: ASbGncvMTQJEgpogOWL70hf3/ai4yG9dhGYhFO05sP/TRMdf1c+66bptrodUsbujFhi
- fNrJsX1klMGPtdtdZSDJ5Sdiy7TWbgmBhx2nJvcgsy1xXpZXMnfb9v7V39ow3GF4clGTiTlHik6
- 9c1RHE6OqVRsZE/ltYtgMGgoSIrEjaKmzi03Ic4Ko5N88G3QKJ5u28xZangnD/QrOaOxR8VFhoR
- 7lOQX0ckegrd5DdnljgwUl04gdQDOJqqhGF/UOTb25pIm19U2x5pa9GyFA8ji5oeufSoMJpyvJI
- I/MGeYFAsjB7wvPSruKXb9aLVhFZKa+jOFDSe5HYWNDpggyo4T77HRYrMYCALTkwiOs/2YS8Jp2
- 3aQDFWUXs9nLet/z6I6ubCnbOzQTWJ9QKDw4N40dsDiUgdHSkDxj+mAsyUzI=
-X-Received: by 2002:a17:90b:1e4a:b0:31e:3f8b:216 with SMTP id
- 98e67ed59e1d1-31e77a2f7d9mr2987041a91.11.1753447022243; 
- Fri, 25 Jul 2025 05:37:02 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGZbjOH8sLgio5FCsySMX/hCuCchb7h2LI1oOH1jYC59Krh3YAJYJWJR/NNGV8FmgKx9kHCIA==
-X-Received: by 2002:a17:90b:1e4a:b0:31e:3f8b:216 with SMTP id
- 98e67ed59e1d1-31e77a2f7d9mr2987004a91.11.1753447021833; 
- Fri, 25 Jul 2025 05:37:01 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31e662e0105sm3455828a91.31.2025.07.25.05.36.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 05:37:01 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com, kettenis@openbsd.org, u-boot@lists.denx.de
-Subject: [PATCH v1] efi_loader: Remove authentication header in efi variable
- data
-Date: Fri, 25 Jul 2025 18:06:53 +0530
-Message-Id: <20250725123653.513252-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CvXuECeiWYsrwlROf4D1lJYEODPsGiKbWiF3RrBCLmsTa/csVWR9abw5dKkWZtHzLcQ5FsBL100pIeJa7SZv8+nq+8MQZB5t7B+4jDIw8XNxHWau4LYumeYDxbcMkXMT+UgNP0WuhT5HdPNsSOwo/U18zGnVf5RurEswec0eONpJmyxo5UaP5xCV8HG4r4Rp9UPjG6E8CjLNHxz9mtz+4zND5z4aHMK36kWcOwFP/eduw5W2B6SYCenxwO+GEpxFjB1RdqKHtniBVRxO07Lok+LV6DRvyt6IdZDGWCvFigAfNCh6vhLkfqsiYpHJBXAjQegdzcpyVtDdKv+0x5gfdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0TNMk0NKf85INbNbIq5dr0Eq7M6RB/fiZKwN+DaY31I=;
+ b=VrMS8EOXoSxNHuJARHZlLjaFmb6wMWlAFsSMXBCkzSguxTCp7xVZUXsLrmPT2V/BFBKb39Ul8TftzJvccMZXBKO/iR3C6Ets/Nv2ODIWAbozyLE58wfB8L6pLbux6Lu9CCfcuE7G0IEQacQaeyw8s6KpEqtdIj+/cZ4f2JnOXbI3pfHAgOJffBjsj+hah9Jqp4gfnoJCMqvL9qLrRNEdadV04YopKVLoMFUbrKtBqdWVfWd2gGX1TGvUIA/WfG7AU4j1I2HvBpm3u21AiUEG3lpGPaRrRkFTOlweRqvG3f3PDBNP9sq/ZsFircgcRxjQ9pKvMzcbjTTNlrCdV7WhMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0TNMk0NKf85INbNbIq5dr0Eq7M6RB/fiZKwN+DaY31I=;
+ b=KpuLOPd2Y2S7eexfUsf7GEuI3jvVACZ+vo2lJ8xZeACMWCO4XKE+VKOhdjUKyCHC6Xfpp52TSp4Sr96SR9OoDtO/ZFV3Quaqo8iab1xoCYxmcE/a9A6E6ykRiXW/o1cN8QkRlqZuaiJ5UjEUBLBlP/dbocVYvnLzCVDcZ6Tk3Zw=
+Received: from BY3PR10CA0012.namprd10.prod.outlook.com (2603:10b6:a03:255::17)
+ by CH1PR12MB9573.namprd12.prod.outlook.com (2603:10b6:610:2ae::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.24; Fri, 25 Jul
+ 2025 12:41:58 +0000
+Received: from SJ1PEPF00001CE2.namprd05.prod.outlook.com
+ (2603:10b6:a03:255:cafe::43) by BY3PR10CA0012.outlook.office365.com
+ (2603:10b6:a03:255::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8964.22 via Frontend Transport; Fri,
+ 25 Jul 2025 12:41:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ1PEPF00001CE2.mail.protection.outlook.com (10.167.242.10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8964.20 via Frontend Transport; Fri, 25 Jul 2025 12:41:58 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 25 Jul
+ 2025 07:41:56 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 25 Jul 2025 07:41:55 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Tom Rini <trini@konsulko.com>
+Subject: [PATCH] exception: Add missing string.h
+Date: Fri, 25 Jul 2025 14:41:52 +0200
+Message-ID: <e9b3fd74e233ea783e64fe1d1c3de5d4f3c6610c.1753447310.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1824; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=2a7SLoEbzKkXJvfaPABjcak8JAPFMwVB14ycTffQyd8=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ0V0886jpb4Wy8VYijZP0S6RhH7/U6zz7zh91IFkncf
+ 8Bvd0FSRykLgxgHg6yYIst0Jh2HNd+uLRVbHpkPM4eVCWQIAxenAEzEXZPhf9kvyykefpd+XHM4
+ ZB6Vf3ZtVciB+a63m1pbfPOXv22dUMPwzyKpQlbuxvVlzoc27Vlhfu6Zo9rjcO3sDazuf5h3f3C
+ /xAAA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 0bgiuo-SX7nei3rcRWtmcMpim_pdAfcg
-X-Proofpoint-GUID: 0bgiuo-SX7nei3rcRWtmcMpim_pdAfcg
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI1MDEwNyBTYWx0ZWRfX/epgPMHovrva
- EEwqzq3AevkZQN1i2NdWRMVEwV8yVBpkNR8BwrXhrb3YPdiXlia6HOAcirPYf8bPzQX5U9Q6E7f
- 0q16Ynn27mEFyic2ZnkYMDbmQkumS3YbZHRjNaaLnC1ylso08XOO/SR9oeksh6LAchwxy9iwXf0
- RFXER5CWSlolzVx8fnWCZDaN5BZsmvP7UjFIryGN8J6a6JPvjK4wC1dvWzb+esWf+oIS7eXlIXW
- 5BqQbjg8TH9U3qc6pCVMZ3i4tUt8wt0eIbL073weS2hXjhlolRjNWcR3I3LbzDPQJ5jA94Gc4+h
- JqxvmhgK3r4BKJsqYPCXKtRQqGceooNFUiaT+cRELfkVSC20TCvrXl+XwRNWxcfP4OjKkKchIt6
- 3EZmfp+bdAAAlJdt6Qi+fgfe6N7iJ7FLX+tS33nTwob6PI4ENOvcsQfgjRLzZq7jX3DhsVY/
-X-Authority-Analysis: v=2.4 cv=Vo8jA/2n c=1 sm=1 tr=0 ts=68837a6f cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=SGchKGV523nns16CKNQA:9
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-25_03,2025-07-24_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 mlxlogscore=999 adultscore=0 impostorscore=0 suspectscore=0
- phishscore=0 spamscore=0 clxscore=1015 bulkscore=0 priorityscore=1501
- lowpriorityscore=0 malwarescore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505280000 definitions=main-2507250107
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE2:EE_|CH1PR12MB9573:EE_
+X-MS-Office365-Filtering-Correlation-Id: 53d32589-e616-4317-3fbc-08ddcb78a535
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JwPXIRIGBKRBIA6ZO0FMBnFaNESmpchTh3hWn2aiolWs0nY29d4eU80W1a+q?=
+ =?us-ascii?Q?ZJk9MuWakg7ic7NUcsO/yyjXJ0q7hFCc1DAcC2BZZaw1Cz9NRfBPCq1CnzLH?=
+ =?us-ascii?Q?5IUHkX0Yd+cYAcnPHjrDhS4SrsOMNpGli9+7dNgz8aoarn3x7Q0EgJTIqhpK?=
+ =?us-ascii?Q?TwYjx6tZIzqkPCt3U+1iEM4bOzPK4yo95Ese1Nta0SE0fo1bTrXAoOhd0MPD?=
+ =?us-ascii?Q?nPQDswd17XQL9pTO3HKO/en2Lb1vDSGW8Qp03tBJzzNjrwfQUNfiYjNK2Di9?=
+ =?us-ascii?Q?K/jw42al2G1vaJ2Rtpfn4g+3U/J/2xUxICV+sjZ+/Et/5sktZOnAKzrJSlUT?=
+ =?us-ascii?Q?S8SNR3cU6Np0ENlezvmF2uAGjbTLdnGMRCMCZGddUTLIR65FyinvWsdAhxZd?=
+ =?us-ascii?Q?zl+xKIclgWDXyEEwn3LRwPDWIcQXtuziDRTqAkbQOnJX48JB8rhphNf24B06?=
+ =?us-ascii?Q?JopkqPPQZZ/CTho6swCF8zm6nMz0p3ey2Ybbek3m92OBh0sH5lgfV+2TnMXW?=
+ =?us-ascii?Q?fKdJPwE7Xz5ArzIlHXnUZEgxuWl8vrRKafHPBEtPkmi/szZS9eawRBOhnXA8?=
+ =?us-ascii?Q?Q7bWWB/EuEud8PiSg2uKATyAxca3iqsF0ZC7pYH1U1NloBsP28iKakMEeugT?=
+ =?us-ascii?Q?tUeMT/ivQz6dhSYrU3LKpM8EkIPH4Jd8nxNsgDWtEMpcWOcvHv5fBs2G8FFs?=
+ =?us-ascii?Q?I8D8EJE0X1f1T66BdUFaTnuG31k9CGSKiN4YwFybQH0bDcmykKbin4RU+Nak?=
+ =?us-ascii?Q?x86F7qCc/fmIvRuZuogMAz6A21DXNGosAUSuYvlIsoxKTVnsLnWmw681lzj4?=
+ =?us-ascii?Q?+LhX+splEUajplYlWTZ/CSR7UutRX/eHqBdiFWd7+auFPLoAjiR8qtRp/Xom?=
+ =?us-ascii?Q?G6lH5vXTqsEg5fU5GB+51UTqRvgW2sNwvFZodEiTZvaMVvWqV56xLg8zKbTo?=
+ =?us-ascii?Q?vw1uNPyhOXqQSvvSieuJtBRL8k2iv8UfwrE4bUxf1GozJGNJMlDg9sRlD3M+?=
+ =?us-ascii?Q?+KJSKl3mAYXnKW8cEgh2bovSihO6jWakZHBNJ0zV6jXiK59WQsVqZYBoszRw?=
+ =?us-ascii?Q?nEUPTn2QkLuAZXPpXgtYxIhfU5OCTkmA7AIBUePcWXsBrr+BJlw1yZJANRJd?=
+ =?us-ascii?Q?Zx3ELw7gUO7J8oMuyp0KxzvHcF/Tmra/wkkBjFCIfyUH6zGx2VwRrEgUfs4d?=
+ =?us-ascii?Q?eaM4EmRUXnXw+uNw7WIMobkVNSNlJlqzct6QKfypMDxZF5tuaWtX/ZY8ZiGR?=
+ =?us-ascii?Q?WEztqS+sdcS3qX3Amwe1TJPOnqSBdYfhZW2wrSHDI4LDuTIme0TG8PXFDLxA?=
+ =?us-ascii?Q?Y0Rxybw5cbevtTR5HutW/BMeqo2Lh5YG2oBdJJUG0Dj8Cd6UGyvSI62OhV7N?=
+ =?us-ascii?Q?ZNNAY5F0gmnpteRYMW/Yb3gIHXU5/e/tww4VNk/7QYGZElwnN3RgiqNyViLm?=
+ =?us-ascii?Q?H5p3UENgVqFmjFTWSgCXXsy5n1HlQJbfjPwaTnm6A9FtDE1a/uN8ccvtmwgp?=
+ =?us-ascii?Q?SDtVEQNEzTuzul4oClYxE7vmmFC+6l1I6scK?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2025 12:41:58.3374 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53d32589-e616-4317-3fbc-08ddcb78a535
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CE2.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PR12MB9573
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,88 +154,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-efi_get_variable_mem() returned auth header along with ESL data for
-authenticated variables like PK, KEK, and DB. This caused issues in
-later stages where the auth header was misinterpreted as ESL data,
-leading to parsing failures, the efi_get_variable_mem() is expected
-to return esl data alone.
-Added a check to remove the auth header if the variable has the
-EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS attribute. Now,
-only the ESL data is returned from the function.
+The commit 1e50f7457fca ("include/command.h: Drop <env.h>") removed env.h
+which also included string.h which generate compilation error.
+But because none is enabling CMD_EXCEPTION it by default it hasn't been
+spot.
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
- lib/efi_loader/efi_var_mem.c | 42 +++++++++++++++++++++++++++++-------
- 1 file changed, 34 insertions(+), 8 deletions(-)
 
-diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-index 31180df9e3a..f73daf8bdc9 100644
---- a/lib/efi_loader/efi_var_mem.c
-+++ b/lib/efi_loader/efi_var_mem.c
-@@ -309,9 +309,12 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
- 		     u32 *attributes, efi_uintn_t *data_size, void *data,
- 		     u64 *timep, u32 mask)
- {
--	efi_uintn_t old_size;
-+	efi_uintn_t old_size, var_data_size, auth_size;
- 	struct efi_var_entry *var;
- 	u16 *pdata;
-+	void *var_data;
-+	struct efi_time *timestamp;
-+	struct win_certificate_uefi_guid *cert;
+  CC      drivers/mtd/mtd-uclass.o
+In file included from cmd/riscv/exception.c:91:
+include/exception.h: In function 'exception_complete':
+include/exception.h:41:23: error: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   41 |                 len = strlen(argv[1]);
+      |                       ^~~~~~
+include/exception.h:1:1: note: 'strlen' is defined in header '<string.h>'; this is probably fixable by adding '#include <string.h>'
+  +++ |+#include <string.h>
+    1 | /* SPDX-License-Identifier: GPL-2.0+ */
+include/exception.h:49:22: error: implicit declaration of function 'strncmp' [-Wimplicit-function-declaration]
+   49 |                 if (!strncmp(argv[1], cmdtp->name, len))
+      |                      ^~~~~~~
+include/exception.h:49:22: note: 'strncmp' is defined in header '<string.h>'; this is probably fixable by adding '#include <string.h>'
+make[2]: *** [scripts/Makefile.build:297: cmd/riscv/exception.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+  CC      drivers/serial/serial-uclass.o
+
+---
+ include/exception.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/exception.h b/include/exception.h
+index a7f21e73d753..0d4dff49954b 100644
+--- a/include/exception.h
++++ b/include/exception.h
+@@ -6,6 +6,7 @@
+  */
  
- 	if (!variable_name || !vendor || !data_size)
- 		return EFI_INVALID_PARAMETER;
-@@ -335,19 +338,42 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
- 	if (!u16_strcmp(variable_name, vtf))
- 		return efi_var_collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
+ #include <command.h>
++#include <string.h>
  
-+	for (pdata = var->name; *pdata; ++pdata)
-+		;
-+	++pdata;
-+
-+	var_data = (void *)pdata;
-+	var_data_size = var->length;
-+
-+	/* Handle EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS */
-+	if (var->attr & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS) {
-+		if (var_data_size > sizeof(struct efi_time)) {
-+			timestamp = (struct efi_time *)var_data;
-+			cert = (struct win_certificate_uefi_guid *)(timestamp + 1);
-+			auth_size = sizeof(struct efi_time) + cert->hdr.dwLength;
-+			if (var_data_size > auth_size) {
-+				var_data = (u8 *)var_data + auth_size;
-+				var_data_size -= auth_size;
-+			}
-+		}
-+	}
-+	/*
-+	 * EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS type is old & not
-+	 * expected for auth variables
-+	 */
-+	else if (var->attr & EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS)
-+		return EFI_INVALID_PARAMETER;
-+
- 	old_size = *data_size;
--	*data_size = var->length;
--	if (old_size < var->length)
-+	*data_size = var_data_size;
-+
-+	if (old_size < var_data_size)
- 		return EFI_BUFFER_TOO_SMALL;
- 
- 	if (!data)
- 		return EFI_INVALID_PARAMETER;
- 
--	for (pdata = var->name; *pdata; ++pdata)
--		;
--	++pdata;
--
--	efi_memcpy_runtime(data, pdata, var->length);
-+	efi_memcpy_runtime(data, var_data, var_data_size);
- 
- 	return EFI_SUCCESS;
- }
+ static int do_exception(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			char *const argv[])
 -- 
-2.34.1
+2.43.0
 
+base-commit: 2aed9f720ab6fddcf49bdc361063e53451a7dddb
+branch: debian-sent3
