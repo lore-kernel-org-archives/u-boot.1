@@ -4,86 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0858C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 11:48:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AE97C87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 12:00:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 012E683935;
-	Fri, 25 Jul 2025 13:48:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 71F278393C;
+	Fri, 25 Jul 2025 14:00:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zXWQ1XHT";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="nDbL1+Qr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 314598393C; Fri, 25 Jul 2025 13:48:26 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 111A88393F; Fri, 25 Jul 2025 14:00:55 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 117F9836A3
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 13:48:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a6cd1a6fecso1785030f8f.3
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 04:48:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753444103; x=1754048903; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rApfXgBueQ38mgvvPWop4glhbqIxQYAaoJ0xJp1UaUE=;
- b=zXWQ1XHTi5nlLpgg6bK0FUzCexuDe9br16RtPTpQfi3Gb2xloOQMj//tKKo8PyX63j
- SWBt/tqUDeT1/MUqfjr0YdoSEzpXG7ddZS7Oo/y/hTWBLWOL/Al+3lrHz3LQisJsAFmh
- 45pCQgnsNuQ9BrO/7QWTzuPgT8ghOoafvefjbmtc7vD3baewSb6/sS+8ypntkEDEZtkT
- 6qL7M00PH2i+lvOI77D0OeSoeOINT8PxOlJWj7zENozg2TwvfNmjTWLLRbBsRjlYXdZf
- UHgG7VTjcs8zm60J1Pq/w6IrYeh3GjIzUVGBYlTIBN008Nrhhcbzi4SoenPEM++JEhQU
- wPhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753444103; x=1754048903;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rApfXgBueQ38mgvvPWop4glhbqIxQYAaoJ0xJp1UaUE=;
- b=BhYpz7NO2gWi0zThCvSGA9aJyZJzi9gAZcJ+UdrbtIE1KV/lLS3QdFi47/smwo36fJ
- v1dFmP4l+7d5Sq/+Pr/eyMnLIi4Kjw4YNhRO7G03RFZKEoGUsDcOp0iuISYF9t00QOh0
- jZZqHWp0Sm7GjmiZKkM12v1NH4EbnsfZVgxYWUK/ErfaWcBl+H0xgLFK/Re6xjP+4LtG
- ALatujrdvTIaoAtssz1MlIK4sD5tAEGETzBfdlr6/B+DC1VVOew/nK8406oEI3i+b5BY
- a62RkB1G2R4OzlgZPq49Elz/QvMjyzcXPCZsXUD/j6qg3P+yZZ4mhZIH75ttQ9TH4ltl
- WZQw==
-X-Gm-Message-State: AOJu0YwopBegKkiczm+93NJSmvhvAbkiqXQlOSwQ1ZTBTvYOiulWNCI2
- ELiO17bMv9+QFTACvjj0XiVW23h3UT0AdwvWAEMgFfv1kBYC91hbbiuSedDWSkQ389ICX/s70rD
- HuWQQThU=
-X-Gm-Gg: ASbGnctqhlRxye+4NzWem3SpTOkKHzpIt0aLecQasxwL5dT91PFuwkWYHTzOi2En+Tj
- sQsY4gJ6pnFb9Y7uDXTcowy0Zeg/v9cDKHl62TybIrO0mqL9KtMQitOBnce2r929Xl9O+Xf6HVA
- qI/QJdMuh+qsgeX5zgXRA2mL7YtOTlDI/zuumkrvGv3TUnBaRb9xuATkNkqJIjspkn6fZMMHx4V
- 8KDrknOS4ucPPX5rmDLt9ays3WllT3gA90PsddDC5LNCpTbntxReOA5pXekKyH5Uxs8gqM07rpA
- pR10yp+JsGBWMcn7jYiJd7wpS5Ij1fLgT8Czj48K+7CkhDNP7FzsnoZF1Ub2U8Ni5rsV89TzdmN
- XX10Jk9SqKnjouD4n/676Hf4YOqd9ucpoAuuIXKjz0wQb5kIkIw==
-X-Google-Smtp-Source: AGHT+IGCJOGWxZ9lOF50QImI5FvGmD0WqjQA8ktMhhTagzR/zqHJKOFzrTb1Wfdrc4nN3cwVYFCboA==
-X-Received: by 2002:a05:6000:2209:b0:3a4:f50a:bd5f with SMTP id
- ffacd0b85a97d-3b776644ea3mr1491698f8f.31.1753444103385; 
- Fri, 25 Jul 2025 04:48:23 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:707a:1ff:4c94:1748])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b76fc6eaf3sm4812782f8f.27.2025.07.25.04.48.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 04:48:22 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 25 Jul 2025 12:48:22 +0100
-Subject: [PATCH] gpio: dwapb_gpio: Using wrong function to free memory
+ by phobos.denx.de (Postfix) with ESMTPS id 072568391C
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 14:00:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 32ADA1488E19; Fri, 25 Jul 2025 14:00:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1753444851; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=TL7C+zdDa/wPsVbRBXOWwMH0O2oGQ7u6xc+c5r7fTgc=;
+ b=nDbL1+QrM+FjMhRZcTx/0s2Jtivnq2JSP/RbGN+SL2xKtQcTtmE7/MuQZHUAn8pVYIWnJP
+ iluHtTo6AsGLprQTdnfmAHIqmlwpbA34g1D4ErhMDlt+1iNXPdZjnsLqJrbK2cn9NVaUBe
+ bpH84s58z4Xh6NIOEIkHLdBsDSDQd2ASFTih/KZFgbghj4Ta31hzxa1fzEEechsTojuytA
+ DYY1A1lfAUSHciAFRkz4CrU1rvRk02ck2SLpRkJQw/3rCtGyj9TJeY2XvmpKqNg3RGfFgE
+ rX85i2LyLv+wNMkFtuRP93VacJRVBTJDl4Xzv7i+3bJkatBOT24bc99kJBUZ6g==
+Date: Fri, 25 Jul 2025 14:00:45 +0200
+From: Alexander Dahl <ada@thorsis.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, p.bruenn@beckhoff.com,
+ Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 0/3] fpga: Remove lattice and ACEX1 support
+Message-ID: <20250725-residence-stingray-818201348f2f@thorsis.com>
+Mail-Followup-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
+ git@xilinx.com, p.bruenn@beckhoff.com,
+ Alexander Graf <agraf@csgraf.de>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>,
+ Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <cover.1753442748.git.michal.simek@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250725-dwapb_gpio-v1-1-ee09ac9db7eb@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAAVvg2gC/x2NwQrCMBAFf6Xs2UATaYv+iohs0me7B9OwW1Qo/
- XdTj8MwzEYGFRhdm40UbzFZcgV/aijNnCc4GStTaEPXDqFz44dLfExFFud56H1I6C84Uw0iG1x
- Uzmk+khfbCj1EUTzl+7/c7vv+A+8xv1J1AAAA
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1753442748.git.michal.simek@amd.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,36 +84,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In gpio_dwapb_bind plat is used to reference memory allocated by
-devm_kcalloc but it is attempted to be freed using kfree. Instead free
-this memory using the correct devm_kfree function.
+Hello Michal,
 
-This issue was found by Smatch.
+Am Fri, Jul 25, 2025 at 01:25:51PM +0200 schrieb Michal Simek:
+> Hi,
+> 
+> when fpga drivers were enabled via sandbox some coverity issues came and
+> make no sense to fix them when there is no user of these drivers that's why
+> it is easier just remove them completely.
+> 
+> Another candidate for removal is FPGA_CYCLON2 which is enabled only by
+> mx53cx9020_defconfig.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/gpio/dwapb_gpio.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+We use FPGA_CYCLON2 downstream with devices containing Altera Cyclone
+III and IV or Efinix Trion T20 chips.  These are _not_ legacy devices,
+few quantities per year, but still produced and sold.
 
-diff --git a/drivers/gpio/dwapb_gpio.c b/drivers/gpio/dwapb_gpio.c
-index 04639a4cb68..7ab48780332 100644
---- a/drivers/gpio/dwapb_gpio.c
-+++ b/drivers/gpio/dwapb_gpio.c
-@@ -193,7 +193,7 @@ static int gpio_dwapb_bind(struct udevice *dev)
- 				 ofnode_get_name(node));
- 			plat->name = strdup(name);
- 			if (!plat->name) {
--				kfree(plat);
-+				devm_kfree(dev, plat);
- 				return -ENOMEM;
- 			}
- 		}
+If you need board code to keep the upstream support, I would need
+to talk to some people here if we can upstream our board code, or at
+least some of it.  That might be difficult though, so if there are
+alternatives, please advise.  O:-)
 
----
-base-commit: 021783860f7e628f7c4e0c101707cd4250e6d61f
-change-id: 20250725-dwapb_gpio-1a7612ce69e3
+Greets
+Alex
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+> Patrick: Is this board still maintained?
+> 
+> Thanks,
+> Michal
+> 
+> 
+> Michal Simek (3):
+>   fpga: xilinx: Check valid desc structure
+>   fpga: Remove ancient ACEX1K support
+>   fpga: lattice: Remove unused support
+> 
+>  configs/sandbox_defconfig |    2 -
+>  drivers/fpga/ACEX1K.c     |  245 ---
+>  drivers/fpga/Kconfig      |   12 -
+>  drivers/fpga/Makefile     |    2 -
+>  drivers/fpga/altera.c     |    5 +-
+>  drivers/fpga/fpga.c       |   23 -
+>  drivers/fpga/ivm_core.c   | 3149 -------------------------------------
+>  drivers/fpga/lattice.c    |  379 -----
+>  drivers/fpga/xilinx.c     |    3 +
+>  include/ACEX1K.h          |   49 -
+>  include/fpga.h            |    1 -
+>  include/lattice.h         |  298 ----
+>  12 files changed, 4 insertions(+), 4164 deletions(-)
+>  delete mode 100644 drivers/fpga/ACEX1K.c
+>  delete mode 100644 drivers/fpga/ivm_core.c
+>  delete mode 100644 drivers/fpga/lattice.c
+>  delete mode 100644 include/lattice.h
+> 
+> -- 
+> 2.43.0
+> 
+> base-commit: 021783860f7e628f7c4e0c101707cd4250e6d61f
+> branch: debian-sent3
