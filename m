@@ -4,122 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D38C87FCE
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 17:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C552CC87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 17:18:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38659839D5;
-	Fri, 25 Jul 2025 19:12:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 22F1A839D6;
+	Fri, 25 Jul 2025 19:18:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="VnV1D5/7";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="m+6lIQmb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EF7F839D6; Fri, 25 Jul 2025 19:12:07 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1FD51839E8; Fri, 25 Jul 2025 19:18:44 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D2A4839CF
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 19:12:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id AC605839CF
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 19:18:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56PAXau1000784
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:12:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- HygVCEj/p7BrJlzxgbf/8T29wQTRMD2yM9z2GJs0K5c=; b=VnV1D5/7kdbPasf3
- 0i3WTWV7BUWxPMFsWZTUrptxlmg6Ya1c6Cu9+R/LguWb2UXtO73Je34XEOIg4y+i
- 21/q0wzFhBuoykeRLTlUzsy9GvrwLWnwbxcQl7z4lL2zNRGpyJ02Wulp0uYozxrP
- JyyJU+jP9EeWl7nZ/ph6ZV8bX68MeQ4vqSpm2cWrPh0DvFmiTBec/aYiuD1X2eWd
- yK+Ra3fEtHsRIXVEwv1+Yj/K2vBO0reurJrVfMKluoEfNQ8MHw1XAgSsGRJz3Xxk
- qHbG5BYfI8Hili2zLg0QC7MoPQXzW8RuXifGrgBlemuIhm0DXICU1sU7HsP67LHX
- 0rAxEw==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 48489713fv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:12:02 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-313ff01d2a6so2498722a91.3
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 10:12:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753463521; x=1754068321;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HygVCEj/p7BrJlzxgbf/8T29wQTRMD2yM9z2GJs0K5c=;
- b=eHNzw5rvfEshBV+maA0i0/NpHuGyGDW3FcKEnHiKfxLK0LpNZ/kI18jHIS5/lAAlyq
- 7U1TFN0tk2++PcGTRucyAZQXJz6mYjxixrwGoLNdty2HwY/PaHvSfjVxaQN8MM4Y0m7S
- rHbnIYcvq/XBBZmwvT/alrsEiTwOUwPd0vjv13cAE5zu9eGRLl0N3XDcGW3gkfuiCd3V
- gvoCqcVshBCpGjNpjhVFcFACRzBRMvba2NJDyczo2Ppzi3vMBRs03fzfeRjOeF3E6bea
- eCRuaaLG+fzf32+MBMSdKkTUXsYyO0xHdYtNruThxwR5DvSoDcM7dlUISbMkESupvooJ
- 6R0Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXg2NTSs8idqFL7DBZ4lm69nJPJpAB4wWjMD7YgQfHUtwt5BBYKYr28asyHvDPicGO2zr+F7eY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyeGtaRikhm8YVqUmYiWOhNK/+T/Nqjc4yLxlRTKPN05U0ngvIA
- C3BaRDjtG9qqwr8WqEzIY4yHBUb2uOlzZKwIaTuQXJAoywLgbXs8j68Z8JG1bCKgOA+RLkykmP4
- fRnVyY2gBqz246BdN061uWdD/nRydR0/tQKpIg4fK5VNnhXYMA52nDDJoSdwdKw2r
-X-Gm-Gg: ASbGnctKfIkRwA7mMj2NHEdtACLkkyAjXOUWKTd3klTe17i9GlSz0atfvdw0ROPRORJ
- hlvHN/CkoUHyERQzJkC18Ew37C99/jdytMcT2zcPct1WJmTUDAQ+YOfh9r+SKv1t7nKEUiJqgTb
- dACebx3KB4qs7NMTdIIjcYYpqPv2YubIikyizkdDepuZgeAFO44BS017zBKT0dLRhE866im+EQV
- FJocXtTeuIVIRCBUXdUmOKS9v55n1qqhSCO181pMrpSsabMkoUDFC8SWnvYshVnOU5ELFDrNIEN
- CmIFVOPMd6pYMAIyfIQnBZJsmdngKfdf1lOgvHi7f/hXxHYx57Hr1kKeP8EJEdeGpdQ=
-X-Received: by 2002:a17:90b:1f82:b0:313:d346:f347 with SMTP id
- 98e67ed59e1d1-31e77a4595fmr3774512a91.35.1753463521436; 
- Fri, 25 Jul 2025 10:12:01 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGozs44DXor77IA6v7H5rH5VPJhwtaZoxQMZyX3urVLWwtu+Y8tazslCaLtGIkZjo5jaSgiQA==
-X-Received: by 2002:a17:90b:1f82:b0:313:d346:f347 with SMTP id
- 98e67ed59e1d1-31e77a4595fmr3774474a91.35.1753463520860; 
- Fri, 25 Jul 2025 10:12:00 -0700 (PDT)
-Received: from [192.168.1.3] ([223.178.85.118])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31e83508500sm121935a91.22.2025.07.25.10.11.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Jul 2025 10:12:00 -0700 (PDT)
-Message-ID: <306cb986-34ed-4c17-94be-ded25800451f@oss.qualcomm.com>
-Date: Fri, 25 Jul 2025 22:41:57 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] efi_loader: Remove authentication header in efi
- variable data
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: ilias.apalodimas@linaro.org, trini@konsulko.com, kettenis@openbsd.org,
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1753463913; x=1754068713; i=xypron.glpk@gmx.de;
+ bh=/FV72h1vbEKzOwTH8A/j42f+9vkJqtf8K2A9lDBkkqk=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=m+6lIQmbH92e1JdNWeOPoCIruqEEZob3+vozbyQNO6dJA9cDzlv8FLnRcUk+5fXY
+ ZcRZVENVYI0DwSyYk7WFSfIBN4rS+38TG4j1/CRonGsmB67MgQXyF5gqsClWrY7jK
+ 3KoSV6fL+F3PUJDyFHhmVtNBH43UJtuMZOla+hwzlntVoM5v1lCZroeT3e7BshPjh
+ HwC0nQyvgi+hkS+Y7Wtf25tK0KQltme7cBTCSMH8DqUkh+d9a1wX3k3NG8lVSvJTC
+ 40TG7V+PWufYii5E0CMSemYerGrFSmR8vGjmW9xlZShq7XOAlErBKpKPQCQzdhjiS
+ 4RyQAuErs+cwHnJ63g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([46.114.110.103]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MF3DM-1uuh4C3ee0-00BPj7; Fri, 25
+ Jul 2025 19:18:33 +0200
+Date: Fri, 25 Jul 2025 19:18:30 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+CC: ilias.apalodimas@linaro.org, trini@konsulko.com, kettenis@openbsd.org,
  u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v1=5D_efi=5Floader=3A_Remove_auth?=
+ =?US-ASCII?Q?entication_header_in_efi_variable_data?=
+User-Agent: Thunderbird for Android
+In-Reply-To: <306cb986-34ed-4c17-94be-ded25800451f@oss.qualcomm.com>
 References: <20250725123653.513252-1-aswin.murugan@oss.qualcomm.com>
  <d387c730-9d9d-49b6-9775-da5e69023a87@gmx.de>
-Content-Language: en-US
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <d387c730-9d9d-49b6-9775-da5e69023a87@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 9tEwlnQIMGXrywasBDaTJPRXrbe6LfCP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI1MDE0NyBTYWx0ZWRfX/pqc3nfi4yZS
- 9sM4MNHVLpRiyPEYisUERaVlGlZ9vVFQJHgWw05hWPirLFJKeTPhPU26Z0zWMYtjZEgr7IvexG3
- BT/Enpz4L793LdapD8Z45GLzQbEYuEfvkF70Igbq7jdqz6Aku76sCnsLgnDYFRBvTGMmles6+44
- hkzCXT2x34ZLFkmRlSuRzubPixC6YSV8dcibotjY5o/lI+b+UIRIcErG9QgoJoARfVjGi+Q2P4V
- +9b75VcwXcuEbeaoZ46UMzdNHaWpOXbAqjo9BbMpGRC9LtJ9YfCbC67ZYZQ3HebRcdHWl2bwNxQ
- GLqldLF8n1dO7jvxvDFRn21KTws/OPuHAzh5FmsaQlO0QKEHMf/yvNIWMB/+BTt7vtaBHzLeXH9
- 0UwEQd5y2DB50lvB9/w0psLrYzohCYvkVi58n5JsRku6CHkzN2IX8jmU+efNYiLBI20tPgQ2
-X-Authority-Analysis: v=2.4 cv=VJjdn8PX c=1 sm=1 tr=0 ts=6883bae3 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=4Z0N7fgVbAaKUD7rZNXfww==:17
- a=IkcTkHD0fZMA:10 a=Wb1JkmetP80A:10 a=YfCOm-DyAAAA:8 a=EUspDBNiAAAA:8
- a=WZNsmSi8g9YvzsU7_bIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22 a=zQLMK8awuJ6_Hvp-_9Ux:22
-X-Proofpoint-ORIG-GUID: 9tEwlnQIMGXrywasBDaTJPRXrbe6LfCP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-25_04,2025-07-24_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0
- priorityscore=1501 spamscore=0 malwarescore=0 adultscore=0 mlxscore=0
- bulkscore=0 phishscore=0 mlxlogscore=999 classifier=spam authscore=0
- authtc=n/a authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505280000 definitions=main-2507250147
+ <306cb986-34ed-4c17-94be-ded25800451f@oss.qualcomm.com>
+Message-ID: <9F595DB2-F612-40F2-966B-910E1BC41993@gmx.de>
+MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:E8OhBfppENGKo1Tq5+DxnTkx9sdu0oNS51vy0dO01uHIGSloZjA
+ vsIiJZH9OCucWmev8BK/0BPfJjNbUM11Oq0/e1tPmc+2FVANWUCOxMdRLpDBS2Zp0SJ20EM
+ gi1G06J/Ua+5RKMCG49ZCfaPsAwA36BPp+R7oBcs//LVaSc5v/qX7I8Cra0y2eJn4/skilt
+ X+nL4cGZWVAI0KQH4cDCg==
+UI-OutboundReport: notjunk:1;M01:P0:bGfu7ukRLjg=;nBCXQTd6dAaE/llAUskBWdUC9QO
+ 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
+ SFx4ajxZ/+QmpK4KSb8ddo4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,135 +130,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Am 25=2E Juli 2025 19:11:57 MESZ schrieb Aswin Murugan <aswin=2Emurugan@oss=
+=2Equalcomm=2Ecom>:
+>
+>On 7/25/2025 6:56 PM, Heinrich Schuchardt wrote:
+>> On 25=2E07=2E25 14:36, Aswin Murugan wrote:
+>>> efi_get_variable_mem() returned auth header along with ESL data for
+>>> authenticated variables like PK, KEK, and DB=2E This caused issues in
+>>> later stages where the auth header was misinterpreted as ESL data,
+>>=20
+>> Which later stages are you relating to?
+>> In the current implementation of efi_signature_store()
+>> https://source=2Edenx=2Ede/u-boot/u-boot/-/blob/master/lib/efi_loader/e=
+fi_signature=2Ec#L809,
+>> the db variable is retrieved using efi_get_var() and passed directly to
+>> efi_build_signature_store()=2E However, for authenticated variables, th=
+e data
+>> returned by efi_get_var() includes the authentication header=2E
+>> efi_build_signature_store() expects the data pointer to begin at the st=
+art
+>> of the EFI Signature List, not the authentication header=2E This mismat=
+ch leads
+>> to a parsing error, as the header is misinterpreted as part of the sign=
+ature
+>> list, resulting in an invalid signature list format=2E
+>>=20
+>> How can the error be reproduced?
+>> Created the ubootefi=2Evar through tools/efivar=2Epy and enabled EFI_VA=
+RIABLES_PRESEED for secure boot,
+>> during image authentication, wrong siglist format error was observed=2E
+>>=20
+>>> leading to parsing failures, the efi_get_variable_mem() is expected
+>>> to return esl data alone=2E
+>>> Added a check to remove the auth header if the variable has the
+>>> EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS attribute=2E Now,
+>>> only the ESL data is returned from the function=2E
+>>=20
+>> Please, have a look at chapter 8=2E2=2E1 GetVariable in the UEFI spec=
+=2E
+>>=20
+>> When the attribute EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS is set, t=
+he Data buffer shall be interpreted as follows:
+>> // NOTE: =E2=80=9C||=E2=80=9D indicates concatenation=2E
+>> // Example: EFI_VARIABLE_AUTHENTICATION_3_TIMESTAMP_TYPE
+>> EFI_VARIABLE_AUTHENTICATION_3 || EFI_TIME || EFI_VARIABLE_AUTHENTICATIO=
+N_3_CERT_ID || Data
+>> // Example: EFI_VARIABLE_AUTHENTICATION_3_NONCE_TYPE
+>> EFI_VARIABLE_AUTHENTICATION_3 || EFI_VARIABLE_AUTHENTICATION_3_NONCE ||=
+ EFI_VARIABLE_AUTHENTICATION_3_CERT_ID || Data
+>>=20
+> Isn't removing the authentication header violating the EFI specification=
+?
+> I belive that stripping the auth header during variable read might not v=
+iolate the spec=2E
 
-On 7/25/2025 6:56 PM, Heinrich Schuchardt wrote:
-> On 25.07.25 14:36, Aswin Murugan wrote:
->> efi_get_variable_mem() returned auth header along with ESL data for
->> authenticated variables like PK, KEK, and DB. This caused issues in
->> later stages where the auth header was misinterpreted as ESL data,
->
-> Which later stages are you relating to?
-> In the current implementation of efi_signature_store()
-> https://source.denx.de/u-boot/u-boot/-/blob/master/lib/efi_loader/efi_signature.c#L809,
-> the db variable is retrieved using efi_get_var() and passed directly to
-> efi_build_signature_store(). However, for authenticated variables, the 
-> data
-> returned by efi_get_var() includes the authentication header.
-> efi_build_signature_store() expects the data pointer to begin at the start
-> of the EFI Signature List, not the authentication header. This 
-> mismatch leads
-> to a parsing error, as the header is misinterpreted as part of the 
-> signature
-> list, resulting in an invalid signature list format.
->
-> How can the error be reproduced?
-> Created the ubootefi.var through tools/efivar.py and enabled 
-> EFI_VARIABLES_PRESEED for secure boot,
-> during image authentication, wrong siglist format error was observed.
->
->> leading to parsing failures, the efi_get_variable_mem() is expected
->> to return esl data alone.
->> Added a check to remove the auth header if the variable has the
->> EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS attribute. Now,
->> only the ESL data is returned from the function.
->
-> Please, have a look at chapter 8.2.1 GetVariable in the UEFI spec.
->
-> When the attribute EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS is set, 
-> the Data buffer shall be interpreted as follows:
-> // NOTE: “||” indicates concatenation.
-> // Example: EFI_VARIABLE_AUTHENTICATION_3_TIMESTAMP_TYPE
-> EFI_VARIABLE_AUTHENTICATION_3 || EFI_TIME || 
-> EFI_VARIABLE_AUTHENTICATION_3_CERT_ID || Data
-> // Example: EFI_VARIABLE_AUTHENTICATION_3_NONCE_TYPE
-> EFI_VARIABLE_AUTHENTICATION_3 || EFI_VARIABLE_AUTHENTICATION_3_NONCE 
-> || EFI_VARIABLE_AUTHENTICATION_3_CERT_ID || Data
->
-> Isn't removing the authentication header violating the EFI specification?
-> I belive that stripping the auth header during variable read might not 
-> violate the spec.
->
-> Is tests/test_efi_secboot/test_authvar.py still passing with your patch?
-> Yes, it passed
->>
->> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
->> ---
->>   lib/efi_loader/efi_var_mem.c | 42 +++++++++++++++++++++++++++++-------
->>   1 file changed, 34 insertions(+), 8 deletions(-)
->>
->> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
->> index 31180df9e3a..f73daf8bdc9 100644
->> --- a/lib/efi_loader/efi_var_mem.c
->> +++ b/lib/efi_loader/efi_var_mem.c
->> @@ -309,9 +309,12 @@ efi_get_variable_mem(const u16 *variable_name, 
->> const efi_guid_t *vendor,
->>                u32 *attributes, efi_uintn_t *data_size, void *data,
->>                u64 *timep, u32 mask)
->>   {
->> -    efi_uintn_t old_size;
->> +    efi_uintn_t old_size, var_data_size, auth_size;
->>       struct efi_var_entry *var;
->>       u16 *pdata;
->> +    void *var_data;
->> +    struct efi_time *timestamp;
->> +    struct win_certificate_uefi_guid *cert;
->
-> Please, move variable definitions to the innermost code block where 
-> they are used.
->
-> Best regards
->
-> Heinrich
->
->>         if (!variable_name || !vendor || !data_size)
->>           return EFI_INVALID_PARAMETER;
->> @@ -335,19 +338,42 @@ efi_get_variable_mem(const u16 *variable_name, 
->> const efi_guid_t *vendor,
->>       if (!u16_strcmp(variable_name, vtf))
->>           return efi_var_collect_mem(data, data_size, 
->> EFI_VARIABLE_NON_VOLATILE);
->>   +    for (pdata = var->name; *pdata; ++pdata)
->> +        ;
->> +    ++pdata;
->> +
->> +    var_data = (void *)pdata;
->> +    var_data_size = var->length;
->> +
->> +    /* Handle EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS */
->> +    if (var->attr & 
->> EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS) {
->> +        if (var_data_size > sizeof(struct efi_time)) {
->> +            timestamp = (struct efi_time *)var_data;
->> +            cert = (struct win_certificate_uefi_guid *)(timestamp + 1);
->> +            auth_size = sizeof(struct efi_time) + cert->hdr.dwLength;
->> +            if (var_data_size > auth_size) {
->> +                var_data = (u8 *)var_data + auth_size;
->> +                var_data_size -= auth_size;
->> +            }
->> +        }
->> +    }
->> +    /*
->> +     * EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS type is old & not
->> +     * expected for auth variables
->> +     */
->> +    else if (var->attr & EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS)
->> +        return EFI_INVALID_PARAMETER;
->> +
->>       old_size = *data_size;
->> -    *data_size = var->length;
->> -    if (old_size < var->length)
->> +    *data_size = var_data_size;
->> +
->> +    if (old_size < var_data_size)
->>           return EFI_BUFFER_TOO_SMALL;
->>         if (!data)
->>           return EFI_INVALID_PARAMETER;
->>   -    for (pdata = var->name; *pdata; ++pdata)
->> -        ;
->> -    ++pdata;
->> -
->> -    efi_memcpy_runtime(data, pdata, var->length);
->> +    efi_memcpy_runtime(data, var_data, var_data_size);
->>         return EFI_SUCCESS;
->>   }
->
+How could you return a different value from GetVariable() than required by=
+ the spec and call it compliant?
+
+Please, adjust the function consuming the value=2E
+
+Best regards
+
+Heinrich
+
+>>=20
+>> Is tests/test_efi_secboot/test_authvar=2Epy still passing with your pat=
+ch?
+>> Yes, it passed
+>>>=20
+>>> Signed-off-by: Aswin Murugan <aswin=2Emurugan@oss=2Equalcomm=2Ecom>
+>>> ---
+>>> =C2=A0 lib/efi_loader/efi_var_mem=2Ec | 42 +++++++++++++++++++++++++++=
+++-------
+>>> =C2=A0 1 file changed, 34 insertions(+), 8 deletions(-)
+>>>=20
+>>> diff --git a/lib/efi_loader/efi_var_mem=2Ec b/lib/efi_loader/efi_var_m=
+em=2Ec
+>>> index 31180df9e3a=2E=2Ef73daf8bdc9 100644
+>>> --- a/lib/efi_loader/efi_var_mem=2Ec
+>>> +++ b/lib/efi_loader/efi_var_mem=2Ec
+>>> @@ -309,9 +309,12 @@ efi_get_variable_mem(const u16 *variable_name, co=
+nst efi_guid_t *vendor,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 u32 *attributes, efi_uintn_t *data_size, void *data,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 u64 *timep, u32 mask)
+>>> =C2=A0 {
+>>> -=C2=A0=C2=A0=C2=A0 efi_uintn_t old_size;
+>>> +=C2=A0=C2=A0=C2=A0 efi_uintn_t old_size, var_data_size, auth_size;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct efi_var_entry *var;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u16 *pdata;
+>>> +=C2=A0=C2=A0=C2=A0 void *var_data;
+>>> +=C2=A0=C2=A0=C2=A0 struct efi_time *timestamp;
+>>> +=C2=A0=C2=A0=C2=A0 struct win_certificate_uefi_guid *cert;
+>>=20
+>> Please, move variable definitions to the innermost code block where the=
+y are used=2E
+>>=20
+>> Best regards
+>>=20
+>> Heinrich
+>>=20
+>>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!variable_name || !vendor ||=
+ !data_size)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return EFI_INVA=
+LID_PARAMETER;
+>>> @@ -335,19 +338,42 @@ efi_get_variable_mem(const u16 *variable_name, c=
+onst efi_guid_t *vendor,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!u16_strcmp(variable_name, vtf))
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return efi_var_=
+collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
+>>> =C2=A0 +=C2=A0=C2=A0=C2=A0 for (pdata =3D var->name; *pdata; ++pdata)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ;
+>>> +=C2=A0=C2=A0=C2=A0 ++pdata;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 var_data =3D (void *)pdata;
+>>> +=C2=A0=C2=A0=C2=A0 var_data_size =3D var->length;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 /* Handle EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WR=
+ITE_ACCESS */
+>>> +=C2=A0=C2=A0=C2=A0 if (var->attr & EFI_VARIABLE_TIME_BASED_AUTHENTICA=
+TED_WRITE_ACCESS) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (var_data_size > sizeof=
+(struct efi_time)) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ti=
+mestamp =3D (struct efi_time *)var_data;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ce=
+rt =3D (struct win_certificate_uefi_guid *)(timestamp + 1);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 au=
+th_size =3D sizeof(struct efi_time) + cert->hdr=2EdwLength;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if=
+ (var_data_size > auth_size) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 var_data =3D (u8 *)var_data + auth_size;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 var_data_size -=3D auth_size;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> +=C2=A0=C2=A0=C2=A0 }
+>>> +=C2=A0=C2=A0=C2=A0 /*
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0 * EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS ty=
+pe is old & not
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0 * expected for auth variables
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0 */
+>>> +=C2=A0=C2=A0=C2=A0 else if (var->attr & EFI_VARIABLE_AUTHENTICATED_WR=
+ITE_ACCESS)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return EFI_INVALID_PARAMET=
+ER;
+>>> +
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 old_size =3D *data_size;
+>>> -=C2=A0=C2=A0=C2=A0 *data_size =3D var->length;
+>>> -=C2=A0=C2=A0=C2=A0 if (old_size < var->length)
+>>> +=C2=A0=C2=A0=C2=A0 *data_size =3D var_data_size;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 if (old_size < var_data_size)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return EFI_BUFF=
+ER_TOO_SMALL;
+>>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!data)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return EFI_INVA=
+LID_PARAMETER;
+>>> =C2=A0 -=C2=A0=C2=A0=C2=A0 for (pdata =3D var->name; *pdata; ++pdata)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ;
+>>> -=C2=A0=C2=A0=C2=A0 ++pdata;
+>>> -
+>>> -=C2=A0=C2=A0=C2=A0 efi_memcpy_runtime(data, pdata, var->length);
+>>> +=C2=A0=C2=A0=C2=A0 efi_memcpy_runtime(data, var_data, var_data_size);
+>>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return EFI_SUCCESS;
+>>> =C2=A0 }
+>>=20
+
