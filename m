@@ -4,81 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4AC1C87FCE
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 16:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5A7AC87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 16:54:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6DB6839BE;
-	Fri, 25 Jul 2025 18:31:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 20DF3839C1;
+	Fri, 25 Jul 2025 18:54:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CtZJTsEQ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jf/nHnZV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE0DE839CC; Fri, 25 Jul 2025 18:31:35 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1B1F68397B; Fri, 25 Jul 2025 15:02:14 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA00383977
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 18:31:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3CAE82C84
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 15:02:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4240b693522so1020314b6e.2
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 09:31:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753461091; x=1754065891; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=X7XpRc7n/tiCzBNP3x0BNtEjtBim/a4F2qsT5IW/wmQ=;
- b=CtZJTsEQLL5w/XZYfsJf33o/G6oVPKGLl/bA2W105gmjyFObP98QoMXm5d0+c33qbJ
- URikAQwPvIEGa1oAwZ73CM+I/wsrCkny+BkePgALZAzaEq+hu9mTa6RoaNNa8Bv9CKnS
- aK2VPHElpkCYm0ai98StnooZ0V6J63aOb3ffM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753461091; x=1754065891;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=X7XpRc7n/tiCzBNP3x0BNtEjtBim/a4F2qsT5IW/wmQ=;
- b=CJSvzvJArvXuYR/b+y8xPoPa/eKFnPs7Hf3nvDckyIoi7MjXt7p3VEuazPBlquvn3M
- Ef3l/yrdnOuzG3cphodtOSKU5WI0m/mUlo9v9pCbKI9atG3BrwEqjvbPf8VSEHO3wasS
- Ng+rrY+p77TESrGxigzo3GtXlOhrJBZLeiD10fFamOcKKnDtBVbD52aQSOaMgWUqGJ1U
- qctr20ISMHGsS7xIJR6ewd4VGNv52DCD4el6RyrBoRORdkizMuPJXqsyWqx7jotZjiNq
- 3Mc2zjaPStzsFac2M9cOoo0ITOEx1ftqnQrAPhZLD+Sj7Vb1ef6PI3L7dgEwIKdWlSdb
- UA4w==
-X-Gm-Message-State: AOJu0YyoD/2oN7NVreSG0T/xIzXGq9sEXuqphWPFOvpEi4X5aKEppb3o
- 7fHY56+4bCMolrSV+b5Vk3gvhpbNpLgGntz754GgDPVUg/Z4amG/tCfAlmsjo5m3wWHklraT9AE
- AoBP1s9Y=
-X-Gm-Gg: ASbGncvYkdsoL1d13fgAO5V/+zQRMnLSTJRQkb0SdlJh/pNcy7jO3kwfxI4cZcTQDFc
- 2Jfb7qEQbjOAJ6Q2p9BA8nnlMvJUQFO2vNXA9VTGRj+14gXpK5V36lMlulIzBxJZiOFScaWvtOZ
- m4cmrAAnPcCHiuzmm+3ue0KyQxiB7bzQYSbVddc8mmlGBrG8D4aGwISJ1b/69GORmShR/iMP6Ej
- jg3ds0N7DPpMvWxiLG7vpeRHgzG3WTBHm62oZeKKvPaIQsM9UUe07ZULJ2tRt4UBXzHiil4C/nx
- nFTQUf6C1j7Zu2vtgCfh8ot8OT51DwdzLt7PAmjUONDoCYzG7McT5Yq1cUocssn53Pn/SqY6Yhm
- xGiMOd5x4PGpjva9lWv14MxGBhi3WgWD1rhMqFqT/0sT6L+KJK4J1SvA=
-X-Google-Smtp-Source: AGHT+IEAJ4W6dkt+UneRnQLVgtyiU0mAOETXOwbVt/FVvSb/27qRvtSAdXB3/43Qiyt9acpkS/VatQ==
-X-Received: by 2002:a05:6808:d47:b0:41e:11e1:a855 with SMTP id
- 5614622812f47-42bb9916421mr1511813b6e.19.1753461091381; 
- Fri, 25 Jul 2025 09:31:31 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-42c7d8ba8dbsm5675b6e.29.2025.07.25.09.31.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 09:31:30 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Minkyu Kang <mk7.kang@samsung.com>
-In-Reply-To: <0c5201dbfd36$189bda10$49d38e30$@samsung.com>
-References: <CGME20250725073112epcas1p364a18714ffddd807ea6c1fd1b8b373bd@epcas1p3.samsung.com>
- <0c5201dbfd36$189bda10$49d38e30$@samsung.com>
-Subject: Re: Please pull u-boot-samsung master
-Message-Id: <175346109045.2110707.17968158622004895852.b4-ty@konsulko.com>
-Date: Fri, 25 Jul 2025 10:31:30 -0600
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bpSh14LGcz9stY;
+ Fri, 25 Jul 2025 15:02:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753448529;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LpZqbWVYTB0+SLXAYr5WEesKxZNbA2zWRyWPjiQSIKU=;
+ b=jf/nHnZVs3qvGkL0VIwA/CYfSKZIqMA7iF1B2yzwO2AY+iSDopkm8FALFw9OGgGqiW8MVd
+ EcwSJxSoKTDSdD8Zq0ReMNWkr2EEfV9xX1OS4dUhkVnd8XD4j6+kOrbFAKpCHvMosnixni
+ M5A07uq9CY+JTANG30A/U/NrvFnOUrawm+Taz+T76GM1kfBkZ743uwvEG4OGiENyg6gKZC
+ rssAk7xFiYZCc8Or6spJwMUFUnpFu/blOTihMhhJze5WCFEKh7kP5UbydDWLO1I1HRY0yH
+ fQNH4Iji0xFe488Dzg+4aHY/beYD4vtY5lpIMO0w0FDX+SE3qe88DQ6vbXb+oQ==
+Message-ID: <d0e95f4a-6870-451d-a730-0eef30ed4401@mailbox.org>
+Date: Fri, 25 Jul 2025 15:02:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: Smatch issues reported for Marvell a38x DDR4
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <fbf8148c-1b30-40bd-b709-1b4b6817de4d@linaro.org>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <fbf8148c-1b30-40bd-b709-1b4b6817de4d@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-MBO-RS-META: h7jqk37jfroozthyru6j76sk9bet3rxb
+X-MBO-RS-ID: 5f39b3cef1b30d453f4
+X-Mailman-Approved-At: Fri, 25 Jul 2025 18:53:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,21 +75,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Jul 2025 16:31:11 +0900, Minkyu Kang wrote:
+Hi Andrew,
 
-> The following changes since commit 3532f1f5edfc97c9dcea723cdeb732eda44bc669:
+On 24.07.25 18:01, Andrew Goodbody wrote:
+> Hi Stefan,
 > 
->   block: Remove blk_find_first/next (2025-07-23 17:37:14 -0600)
+> Smatch reports the following issues
 > 
-> are available in the Git repository at:
+> drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c:1029 
+> mv_ddr4_center_of_mass_calc() warn: unsigned 'd_min' is never less than 
+> zero.
+> drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c:2192 
+> mv_ddr4_dm_tuning() warn: unsigned 'reg_val' is never less than zero.
+> drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c:2270 
+> mv_ddr4_dm_tuning() warn: unsigned 'reg_val' is never less than zero.
+> drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c:662 
+> mv_ddr4_centralization() warn: unsigned 'if_id' is never less than zero.
+> drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c:662 
+> mv_ddr4_centralization() warn: we never enter this loop
+> drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c:911 
+> mv_ddr4_dqs_reposition() warn: always true condition '(delta >= 0) => 
+> (0-255 >= 0)'
+> drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c:924 
+> mv_ddr4_dqs_reposition() warn: unsigned 'delta' is never less than zero.
 > 
->   https://source.denx.de/u-boot/custodians/u-boot-samsung.git master
-> 
-> [...]
+> As I have no way to validate the correctness of the code I am not 
+> confident enough to attempt to make the appropriate fixes in this case 
+> as it could affect its operation. Perhaps you would like to take a look?
 
-Merged into u-boot/master, thanks!
+Sure, thanks for all your work on these smatch issues. Really
+appreciated.
 
--- 
-Tom
+But frankly, it's not easy to test anything in this area. I still have
+access to one board (AFAIK), but minor changes usually don't really
+make a notable difference in the DDR controller configuration here.
 
+My suggestion is to send the patches (or one patch) "as best as you can"
+to the list for official review. I'll try to review and perhaps someone
+else with access to such a board will take a look.
+
+Thanks,
+Stefan
 
