@@ -4,158 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7497CC87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:31:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED24C87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:50:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DC95839B5;
-	Fri, 25 Jul 2025 17:31:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 66CC78394E;
+	Fri, 25 Jul 2025 17:50:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gEHmFJLu";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80833839BB; Fri, 25 Jul 2025 17:31:06 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23899801DD
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:31:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ id D09D9839BB; Fri, 25 Jul 2025 17:50:27 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 0539083015
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KUOD9RmeR42WDbr/LUaIWvLGFMynbFIA8JUzaMEbv/xeFwZf9brl60duapUqpuSUKDXs3N4Rmg9OY4VtA1PGWKso1yZWYP/yULTaIo7QT8IraWqC4PALLybmD/CEQmErGyKNLiNN6w6ybdaJM6neB1MhCaZ1IPbxzRyZRUulclNaBu5FZ7ZHJ7CUZ5PkgaI0eW+SIABjaA7J8g23pvEtZHfkKgZWLxGuMJeOmjlYIrkQTAVRm42Zt/2Bag9fVTYtEGHmRLyZ0jaoK4woqo8CY4+E1HcwRaQgY57dxqkvLvPftaHRBDPmMrY7bTeVzYadlWNoutu3HT4WRErc9IC4yQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A+F1Zq2OI482ZDfHzCulbMX9g7KFLVFPhCl5Frk/GP4=;
- b=srTTVwHFR+OvRPgHqdXO++eZ5xZb1A+u5rODLRICyzLXBfE1MS9I465k5j1fvmQ16P5wAUs/tlU8Zm6KBEoU2Bz7RgOQgSIhkOPajPiMoFQk+kWc9cmxtOitjVguzWvY3ZelODc+Q6u0xNf5R8X3W5JT4Vyxq1DzBQSO15Irrfb2K2LX7e729uV1Ih7B77z/xTTdKblz98chKOi5IaBwbdlQOAq6/zr6TmKoNLiiSgHNA7ILAxuwCZ5cle/oDCKNK/W6gCpvqcsKWMlkw399s4yFGa0Y+0ApC+pwtHYKW25i7A0Q7Ab3wh2zlqKBWQAcgVpukjQA/033vICtg6zEVw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A+F1Zq2OI482ZDfHzCulbMX9g7KFLVFPhCl5Frk/GP4=;
- b=gEHmFJLu8FuzTAtchYP3Ux4+gaioJN0Z9oB91RBkx5dNE3oC8EkdLOA0IN0oMQa1XoRHYUlsLcNB6k09HYHeVtc41LosodfvAUkdwRQ0uidlbkowEPJJUDrhJOQ1gol9bQQ5BWSZ2T5448lGvjKVUYKu3urfG+Ln5FZOcYJNACk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI1PR04MB6927.eurprd04.prod.outlook.com (2603:10a6:803:139::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.23; Fri, 25 Jul
- 2025 15:31:00 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.8964.023; Fri, 25 Jul 2025
- 15:31:00 +0000
-Message-ID: <ad876397-a18f-42b8-ab84-47282b7a4f48@cherry.de>
-Date: Fri, 25 Jul 2025 17:30:59 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pylibfdt: setup.py: Drop license_files
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>
-References: <20250725151821.2067853-1-trini@konsulko.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250725151821.2067853-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P195CA0086.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:802:59::39) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 66DE8176C;
+ Fri, 25 Jul 2025 08:50:17 -0700 (PDT)
+Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.31.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3CB193F66E;
+ Fri, 25 Jul 2025 08:50:21 -0700 (PDT)
+From: abdellatif.elkhlifi@arm.com
+To: u-boot@lists.denx.de
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Adam Johnston <Adam.Johnston@arm.com>
+Subject: [PATCH v4 00/24] Introduce Firmware Update Support for Arm PSA
+Date: Fri, 25 Jul 2025 16:49:46 +0100
+Message-Id: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI1PR04MB6927:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d010062-81a4-49c5-1d55-08ddcb9041dd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V0YrTzkwaDZ6UndLelRFS0JjUVl0bmIrWTdFTzdsdkwyZHNxblUxTUVKb21p?=
- =?utf-8?B?Q0gzTzk3ZkhSVjhpVms4b2kybUhydmF5Uk1iV3lScDZoOWdNYUdxbXV0ejZq?=
- =?utf-8?B?QUtINWNwUTVsT3NGaHZIdk4ycnp4QjBIMG9SNlB5a0lyaTZoU0k5eUJ4bzF6?=
- =?utf-8?B?NVRPNVN1d2NVVDR0U00xU0IzR1VVR2VYcWFqVis0WHluaGJ6WjRmSUErMS96?=
- =?utf-8?B?TFNrQXJnS2dlM2srUXBVdUZEV2RnVit3Q2tNa0krdXdwdEhhcGI5WTJoTnRX?=
- =?utf-8?B?Zjhmb2lxa2hhbmFqTFZGOXFNaVhCSXd1STJraW51Z01UOWozNEY5eTUycWhR?=
- =?utf-8?B?WGJ4YzVRMmtFcmRDTTFlRFpBcGdhOEw0b1FWV3cyR01kRHpwaStxd2xWL0NB?=
- =?utf-8?B?b1VRekZxWElab0ErUkhYdVUrOFJmNWpDb3BwRDV6d0dJNW5PRnFVSHI0K0Qy?=
- =?utf-8?B?RUpuZ2QwWTNhMS92cXZsOGJ3VEY0UGgzTFNhVHE5dDl4MkVha0NsUElQclgz?=
- =?utf-8?B?UndjVTNBOFJlYW12OE9pS2g0SkowMDZnNTRtZ2d4T3NPV3QyeG84bGtwZGFq?=
- =?utf-8?B?Rm5JMW50Z1ZNaUdVZG9hQnFQYzZvcktQT2JSWmhWanhWVVJ0MnFhUmMvMzg3?=
- =?utf-8?B?ekZXekhWLzRiekZCS0lWWlVTeWZEdDM1UXoweVQwUjEzdHRNUkwzUmx5RlRz?=
- =?utf-8?B?U3haVlEyRUtFZElHdWxoM1N4enNwMFF4d3FDbTNITVBrQ0tpeExHQTNZaGEv?=
- =?utf-8?B?NUhHdkx3VjI4RExmQzIrUXcydGVUV2Z2MGdZRVZVZ3kreDBaTGdqbzZDSmhQ?=
- =?utf-8?B?VFRkQ1kyNUtWaERuMVZ2NCtSWXhZWkE2eFJQVUZtM280VEdJeGVocEJxM3NF?=
- =?utf-8?B?elhWZWE1cUdJVWEzTXRiNDB1NFAwb1JYUW5mWGcxR1BLWFRucjVkaVg0YU5j?=
- =?utf-8?B?QmJ0OU42d1FrT2xzaDFJaVR4amx2T3J5Q0pyYXVqdEVkb0NtcndhSG9uTlRH?=
- =?utf-8?B?Ukhjbmh0T0ZWL1dtQ1NEYzZkNjJsWlJzcUZXdEpSbmx2TktBeUJkT09DU0VE?=
- =?utf-8?B?NFBEM1Y5Wkc0bUd2aDh4UlBNUS8rWTZLalpodmpwUlBHSzg3QXMwRFhpUzZT?=
- =?utf-8?B?dmp2MXAwN0NxK2ZSOGJnU1QreEEvL0FUaTF0RlIxRm9xYVpKOTVqQ2VsSldt?=
- =?utf-8?B?WDQzVlFSS3dFcG9sQVdHSFRsaUJCaGFlMzJmLzRXZmlrdFdFOURMWmtKL00y?=
- =?utf-8?B?TnpranVDS2p3Ky80UzQ1WDQ0Y1A3aDhLWE5GZzBUZ0lFaGlMQTVxTTBCcGVm?=
- =?utf-8?B?cnhpZzlHT3JwRVpqb2RKTjYxeHF5ODFyTjVSMm1VSDdiT3pSS29vWXA2NWRl?=
- =?utf-8?B?MVZnMDE1ZEtjcXN6UkNaajFKNEdkQkM2RmJEMEFEV0s2UWlucVZoZzh1ZjZh?=
- =?utf-8?B?N3czZS9PSmsybWNnQmZxWHpBdXhXbHNrdmEyNVRJSDZiUmVLUWxDUHJzZ3A2?=
- =?utf-8?B?OFoweG8zSzREcmJjeWl1ZkpRbFMvYkYvUTdFbFJiVVJ3WkgzZzgwejNaUzY5?=
- =?utf-8?B?QU1YREVxckMvZ2JuaXhacW5mRmRyY2NYZzBqbGtUVUtyaStPT0dLRDVCN1Nm?=
- =?utf-8?B?TnhiNjFxRnVMRE93N0Uxc3VtdG9GbllRUWhCcUFkT3lOOU1ia0Fqb3ljMkJI?=
- =?utf-8?B?aERsbEkzUEZIMkFDZmxCajB3OVFEQlZncHB4NE5Rdk9PbjF2UXNWeU9JRHVu?=
- =?utf-8?B?eUg2U0ozaGhEelNSeGJpaUFmdHFia2FVV0hSeE12YS9ZSGNKWUR4UnI3YXN5?=
- =?utf-8?Q?sw4eS3FlcV2pWaC6EAKlIyAkFQ1/K9qP+0kao=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OC9ncWZiZHVROHZmS21lNUNzN3lyT3pvckpkNGh3MFJyWWw4TWdCbnU1WWlR?=
- =?utf-8?B?VVV0ZkkzWkJNL2dJSlBycjJjMlVYSElUZFhZemEzN2h3dnVpUmE0Um9WcEg3?=
- =?utf-8?B?cmJ4SXIvWmxvaGdYb2RzeGhOOUhEZCsxdUt4SHVQazg5V1BLcTZvOEhkVThP?=
- =?utf-8?B?WG9nR0FVOS9tWTNza08rR2dVb2xhRmM2bFhkWTdJNm4wVFR4NVhSNTRJdUFi?=
- =?utf-8?B?U3cvWkxPa21BdXV5QlhJVElobUlaaDRObEJ0NHdSZ1JXTllJL05OK01STWla?=
- =?utf-8?B?VzhqVTVPUmh5QW5ZMElsQ0ROeTRELzg3TE9HQXhMSkM1WlJyZWdScUhMcVFG?=
- =?utf-8?B?a2lZMlJDOEt6VEl3SnpKUlhjZ0xKYjB3S3o2eTNhaGNPcncyUFNUaEpLUDBh?=
- =?utf-8?B?MzQxbnRMZDFoenZZeHNxVkJxMFBWSUNhSldmeTRVaXdad3gxQWtveFBVcmdK?=
- =?utf-8?B?N1JNZ1YvTWJ6dWZLL1BJMVU5WUlWMFRGV1l2MjFrem52VENNcEZXZm5mektZ?=
- =?utf-8?B?clJPK1BlenVlUFNvNHJZTXEwUTR2ZW40SFlJUG9RcFdIVEdHb2VZZWxCSCtt?=
- =?utf-8?B?L1VrNlB1a2xuVTBSVG16bllPT0pmckpoRUw4c2gxOGRhVHVWVGpOcjVqNVFS?=
- =?utf-8?B?Mm0rVmcxdDRCcUs3VS9LbFg4N2poU0VjbXhKb0ZzMzg4dUQzbFpuNnlXQlJa?=
- =?utf-8?B?R2lZT25ERGYwYXZUeXQ3K2pIbXlwOGpKblE3eGd1MHp3RHBvd0xkYWJNekw1?=
- =?utf-8?B?RTExZXlmYW5rUnBiWUhJS2o3aUh6d3FUY1R0TGFoNTB3WnJDazRZY0ZQaVVM?=
- =?utf-8?B?NG9neWVEbm82R2RVeHgzQXJsYlgyc2RCUXFEMThLeXdCZDV3ZlllVFVncTY4?=
- =?utf-8?B?bUpnQ3k0ZVpWdlpSNW5wNXdqYkJoTXpUa2NsN2YrdjBoa2pFUm9jdjg4OEtt?=
- =?utf-8?B?VmQ3cUNvWmZEODBTaXYzZnJjQklWU3lPUnlqWGYxRHNmMjN0R0xmNmxMRHJw?=
- =?utf-8?B?OEZZbEdLS2swODZDNnRFU2dJUytzUDVZaFRrVnlSdFE0RE1GczlsYVBUcEI0?=
- =?utf-8?B?RGM2TjlpRXc1c0JSNVlMN0FMNGNGc3JOTm1kVlp5dndEdlJGTDh3T2xDSitW?=
- =?utf-8?B?VHZXclBvY0c2RHZRS3ljN21pK3NZbU5EV2QvUk5IUUlYYmZLbkcveEdGWnoy?=
- =?utf-8?B?Y0QzZjE3U09QZmVzMmh4T29sZzZwSm01V0VSTUdCc0hmTDJ4ZFZ3dGtCbjIy?=
- =?utf-8?B?ZzdwM01XY1pYQ1A3QjZhbWkvRFJrajlma3F4K05rN3lGUUxibE5UK1BmSWQ3?=
- =?utf-8?B?S2FtUTY5SFVwNzhQeVhmZ2N4KzRxcDJjb0JwYVFDOVNQeUk5R2Y0MksxaHAy?=
- =?utf-8?B?UEJ1NzVyRnBvbkVNeEovOHRTTjFtQVN1blpPZmNEMEpOK0RlTkZjYms1TXh0?=
- =?utf-8?B?aUlIQ2FzcTR2MXF3MjBLc1BUYTE2OEZNOHVKS21sUUJINUV5NWJMdTU5SE5n?=
- =?utf-8?B?dGZiemFJQ1VoVHJwelJNbWVXL2Z4Z0htdWRNVkVCOHdxV0hCMlRpbldIVmJT?=
- =?utf-8?B?U3FTVXdvQVdBVjZIQWZmb0U3SDNyenBLdWhOVFRPdHFudzRVSUVJUStjNXBF?=
- =?utf-8?B?MmFab0JKYTJtZmIvVWMwd2ZkUnI2SmdjbVllV2lRWjN3a0Fwcmxia0pvdG9i?=
- =?utf-8?B?YnpCcVZrWmNqWU9ZREJRc0J6TXFuRTJCQ1gwZjl3Yi9aSGsrK3YvdDVCeXp3?=
- =?utf-8?B?cXdpMDFkekM3UkFkcGJsK3BXMDZYNXAwVSsvSHp2V09UNk1DS2F0Z0tLLzRO?=
- =?utf-8?B?NVM4NWVGSmRQSWd2cklmWWxjVFNnc1psdmNpS1JjTERZMkN4UFY1alJVdDdH?=
- =?utf-8?B?SEpzUVk5V0dWTkpuUFVUdzl1cHNvMXgwU3NnL1UrOWN4VFBqUGJVMmRZNzdj?=
- =?utf-8?B?U29Hdk5sUlhYYjFEenpvd0NacklDcUVRSy9JTTRJM3hidUpST3IwWlkrVmNw?=
- =?utf-8?B?ZlZNTm5pV0dyV1pSTVIxRXpuNjc4ZTVzY0dKR0FLWjJGMTdYem5nY0ptV0NB?=
- =?utf-8?B?bXUxOEFaNWZ1RGZ3NkhMT3YwQ3FTaGhCR2RJY3JiRnZiMU4xLzJqWUpMSHE0?=
- =?utf-8?B?NjBzdDJGUnpRTDF3dFc0T092WnRkNnpoZnlXRE1PemNOdmN0ZTJNbmczTmo5?=
- =?utf-8?B?TUE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d010062-81a4-49c5-1d55-08ddcb9041dd
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2025 15:31:00.0188 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Em/RvJGRF1KAUmGynF0BAt8yqr03z8BPbvd1Dr42gkyrFgk8GTK/h8UClmSBNb+skr9Bis7p+lutdiWA1z5G3qcj5ZuXG9IxuWbAM7dOU34=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6927
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,30 +64,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-On 7/25/25 5:18 PM, Tom Rini wrote:
-> On more recent versions of setuptools the warning about not being able
-> to find the files specified in license_files has re-appeared. This is
-> because as best I can tell, it can't and won't look in $(srctree) but
-> rather only subdirectories of scripts/dtc/pylibfdt. Since we already
-> provide both SPDX tags and a license field with the SPDX contents, let
-> us just drop license_files as it's not mandatory.
-> 
+This patch series adds Firmware Update (FWU) support for Arm PSA
+Certified platforms [1], enabling U-Boot to serve as
+the FWU Client, with the Secure World acting as the Update Agent that
+manages the firmware store and its metadata.
 
-IANAL but I believe we need to ship the file, that's part of the license 
-requirements for both GPL-2.0-or-later and BSD-2-Clause.
+This implementation adheres to the Platform Security Firmware Update
+specification [3] for the A-profile Arm Architecture and leverages the
+Trusted Services framework [4] to interact with the Secure World update
+agent. By delegating update management to the Secure World, U-Boot
+handles only the client-side coordination, invoking a well-defined set
+of ABIs over the FF-A interface [5] to deliver update capsules.
 
-Can you try with a relative path, like ../../../ in front of Licenses?
+Key features include:
 
-If not enough, it's possible it's because it cannot read in parent 
-directories? What if we have a symlink, does it copy the symlink or the 
-target of the symlink?
+- Generic, platform-agnostic design.
+- FF-A-based ABI: All interactions between U-Boot and the update agent
+    occur over the FF-A interface, ensuring compatibility across
+    PSA-compliant systems.
+- Multi-payload capsules: Support for capsules containing multiple
+    payloads, start/end markers, signed firmware images.
+- ESRT support: Capsule payloads may be signed for authenticity, and
+    U-Boot can populate the EFI System Resource Table (ESRT) for
+     OS-level firmware management.
+- On-disk and standard capsule handling.
 
-Reading 
-https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html, the 
-license_files should then be automatically included in the sdist 
-tarball, so the presence of the files in it shouldn't be an issue here.
+For implementation details, please refer to the documentation [6].
+For a real world example, please see the Arm PSA FWU logs [7] when used
+for on-disk capsule update in Corstone-1000 [2].
+
+Changes in v4:
+
+- Update the function headers in fwu_arm_psa.c to pass kernel-doc tests
 
 Cheers,
-Quentin
+Abdellatif
+
+[1]: PSA: https://www.psacertified.org
+[2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
+[3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest 
+[4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
+[5]: FF-A interface: doc/arch/arm64.ffa.rst
+[6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
+[7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
+
+```
+CapsuleApp: capsule block/size              0xDD741040/0x25ACE
+Found EFI system partition on Boot0001: OnDiskFWU
+FS2:;HD0b:;BLK4: 
+Succeed to write edk2-corstone1000-fvp-v6.uefi.capsule
+resetting ...
+NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Regular State
+FWU: ABI version 1.0 detected
+FWU: Updating 1 payload(s)
+Applying capsule edk2-corstone1000-fvp-v6.uefi.capsule succeeded.
+Reboot after firmware update.
+NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Trial State
+...
+Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+...
+root@corstone1000-fvp:~# reboot
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Regular State
+...
+Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+
+corstone1000-fvp login:
+
+root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
+0x0
+f1d883f9-dfeb-5363-98d8-686ee3b69f4f
+0
+6
+0
+6
+0
+0x0
+7fad470e-5ec5-5c03-a2c1-4756b495de61
+0
+0
+0
+0
+0
+0x0
+f1933675-5a8c-5b6d-9ef4-846739e89bc8
+0
+0
+0
+0
+0
+0x0
+f771aff9-c7e9-5f99-9eda-2369dd694f61
+0
+0
+0
+0
+0
+root@corstone1000-fvp:~# 
+```
+
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
+Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+Cc: Adam Johnston <Adam.Johnston@arm.com>
+
+Abdellatif El Khlifi (23):
+  arm_ffa: Add FFA_MEM_SHARE support
+  arm_ffa: Add FFA_MEM_RECLAIM support
+  arm_ffa: sandbox: Replace the emulator error log with debug log
+  arm_ffa: sandbox: Improve the readability of clearing the X registers
+  arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+  arm_ffa: sandbox: Add FFA_MEM_SHARE tests
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+  fwu_arm_psa: Initialize the update agent
+  fwu_arm_psa: Read the FWU directory through get_image_info()
+  fwu_arm_psa: Add staging ABIs
+  efi_loader: fwu_arm_psa: Add set_image and get_image_info support
+  efi_loader: fwu_arm_psa: Keep the FMP payload header
+  efi_loader: fwu: fwu_arm_psa: Skip accepting the payload after
+    set_image()
+  efi_loader: fwu: fwu_arm_psa: Disable trial state handling
+  fwu_arm_psa: Add FWU acceptance mechanism
+  fwu_arm_psa: Add ESRT support
+  fwu_arm_psa: Add ExitBootService() notification handler
+  fwu_arm_psa: corstone1000: Enable FWU support
+  fwu_arm_psa: corstone1000: Perform bank logic when reading boot index
+  fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootService()
+  fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
+  fwu_arm_psa: Document FWU support for Arm PSA
+
+Emekcan Aras (1):
+  efi_loader: capsule: Add runtime capsule flags checks
+
+ MAINTAINERS                                   |    8 +
+ .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
+ board/armltd/corstone1000/corstone1000.c      |  255 ++-
+ board/armltd/corstone1000/corstone1000.env    |    8 +
+ configs/corstone1000_defconfig                |   13 +-
+ doc/arch/arm64.ffa.rst                        |    4 +
+ doc/develop/uefi/fwu_arm_psa.rst              |  154 ++
+ doc/develop/uefi/index.rst                    |    1 +
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  285 +++-
+ drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
+ drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
+ include/arm_ffa.h                             |  111 +-
+ include/arm_ffa_priv.h                        |  143 +-
+ include/efi_api.h                             |    8 +
+ include/efi_loader.h                          |    8 +
+ include/fwu_arm_psa.h                         |  427 +++++
+ lib/efi_loader/efi_capsule.c                  |   64 +-
+ lib/efi_loader/efi_firmware.c                 |   42 +-
+ lib/fwu_updates/Kconfig                       |   26 +
+ lib/fwu_updates/Makefile                      |    2 +
+ lib/fwu_updates/fwu.c                         |   29 +-
+ lib/fwu_updates/fwu_arm_psa.c                 | 1470 +++++++++++++++++
+ test/dm/ffa.c                                 |   73 +-
+ 24 files changed, 3178 insertions(+), 90 deletions(-)
+ create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+ create mode 100644 include/fwu_arm_psa.h
+ create mode 100644 lib/fwu_updates/fwu_arm_psa.c
+
+
+base-commit: 59e6462d7c08eeba744afa0f17846c398b8ef9e1
+-- 
+2.25.1
+
