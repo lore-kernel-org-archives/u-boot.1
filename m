@@ -4,118 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42A91C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 14:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3202C87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 14:20:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2239839A9;
-	Fri, 25 Jul 2025 16:01:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54CB0839AD;
+	Fri, 25 Jul 2025 16:20:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iCniPe7+";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PqrLtT97";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCE07839B9; Fri, 25 Jul 2025 16:01:41 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id C7D21839AF; Fri, 25 Jul 2025 16:20:24 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F63883987
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 16:01:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A13E0839A1
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 16:20:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1753452081; x=1754056881; i=xypron.glpk@gmx.de;
- bh=3WvWlrNwKzPwFJKRw/rbWSY1FfZNJhOqNqf0TQMTXe4=;
+ s=s31663417; t=1753453216; x=1754058016; i=xypron.glpk@gmx.de;
+ bh=R/HwtDd/7i/6G9NXKhlVVfsuSPeZPnx+KPLbrIphKQE=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
  References:Cc:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=iCniPe7+B0ZDPxlgoTN/3693UZBXP9ratQnz+JeGnzP0veLNgKNmRYwYZGbHiDB+
- jPWoAhn4ize82Od2vJHM4x25YnGJXX0Ztkx4xWtvncRmOhMwK7kjM+JF70e1IKv3+
- nkkD94t79SqjkcE9BVEIsGpBhkqFv+QhS9WJSWy7yT7Xbn960QhHrZ8sdTunMg1g2
- H4HvbTv1nLET/zEAKPWEjjwF19zq/VkqkqexHcevtyQ0lBjRcN2VLHPGcYRCu+ok4
- u0mv6gFlCr0FfLxacrJtFGlnygZQ6dTgmqUIkdIfSMsZ5xoewCrhtotcR13kZtRXr
- l5UM9JdKYq8YerxJAw==
+ b=PqrLtT97lWiCd/8a2uhtJlUs/IQEADt2vw/5bIz6Wl1kZi6zmU7/B64P14Effj4X
+ tKWcbIPxymdyQBwdnkrZNP9RISYm36Jqb467aXdTdkaYFF/TVmwqwRGBJ26dfCR03
+ hCpJMlLHYxeH333fFRiYkw5Ki6EfuZ31mCJ9jtorGUOfrfWfUmvaU12xFKnAQ0c+2
+ JH9kJ8+wkrkIAVWftncjopt7J+MMXYA2RjnodbKl78JjYNfnzsxpsCC1f+hkbX7Z0
+ R/K/wp9B4x5pwXB9GdNL5yzEaruZdrW8QC/kW9sO/3//GAvFP43kjq6D8ERkxg7Fd
+ lRjOnrEFQbHdWCM8yA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MBDnC-1uqsEZ0G7y-00EGTF; Fri, 25
- Jul 2025 16:01:21 +0200
-Message-ID: <0ccad71c-6fc8-4c10-b017-85f31f77c161@gmx.de>
-Date: Fri, 25 Jul 2025 16:01:19 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1ML9yc-1uwQSY19Xe-00QGl1; Fri, 25
+ Jul 2025 16:20:16 +0200
+Message-ID: <1b8c2fcf-5ca2-4e76-96dd-35a8e37f9b4a@gmx.de>
+Date: Fri, 25 Jul 2025 16:20:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] efi_loader: improve device path matching for
- partition lookup
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v1 2/2] capsule_update: fix partition match to exclude
+ uefisecapps
+To: Casey Connolly <casey.connolly@linaro.org>
 References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
- <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
+ <20250724090009.569341-3-balaji.selvanathan@oss.qualcomm.com>
+ <786a2fca-d137-45ff-91d4-6f9e8cf95f75@linaro.org>
 Content-Language: en-US
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, ilias.apalodimas@linaro.org, adrianox@gmail.com,
- moritzf@google.com, sjg@chromium.org, maks.mishinfz@gmail.com,
- javierm@redhat.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ ilias.apalodimas@linaro.org, adrianox@gmail.com, moritzf@google.com,
+ sjg@chromium.org, maks.mishinfz@gmail.com, javierm@redhat.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <786a2fca-d137-45ff-91d4-6f9e8cf95f75@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ZhvoavAZG+IYuneIWVfliBZz5ykicariHCsHGXeFTfGpXg2wOgy
- xzgvxVS8sXhB7Ke2lh7OPVCmtmPDz1W4vg8nSKOv4c60MarE3UXN6LPfc6C5UyhN3CffAu+
- 9G+e12FjN3uvjNdrwdKTaMFtIU5PE4SvPIQcdUztBimctyl+cHcncO4+aCODrINNB8Uvhba
- kfWKRyVR1ndWPyp7WKREg==
-UI-OutboundReport: notjunk:1;M01:P0:DQSlptzojUI=;GInMXDTavIOsOtGdCOuNu9X6TQS
- 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
- rNzNAw/SdRLZb6F7jg3zX0Y=
+X-Provags-ID: V03:K1:JYXKILOOLrasBaCtVB+By3bz8CqdFsPfivVOSpdZBgnIJwNu8x9
+ xpGqSX/KL88TQky0aQiJ23oHjhJpW1599uqLwsES+MmPybYu0jl3XfnJByOiVh4bRwNEQhz
+ cLBL8DgFXlpD6Be+i5AdSymCXkRW67Iqb5mCmTQBaTHQX5R74PMdqO7/CsWWOuJyqzgGA1R
+ oeIQ9rHZB4fVle10iv3HQ==
+UI-OutboundReport: notjunk:1;M01:P0:8uxPVXGWkSY=;snRoY9whEGNVIDTLx6OGt9rcuzf
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,161 +134,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24.07.25 11:00, Balaji Selvanathan wrote:
-> - Refactor find_handle() to improve device path comparison logic.
-> - Original logic only compared paths when len_current <=3D len.
-> - This fails when searching for ESP inside a larger boot device.
-> - ESP partition path is longer than boot device path by design.
+On 25.07.25 15:11, Casey Connolly wrote:
+> Hi Balaji,
+>=20
+> On 24/07/2025 11:00, Balaji Selvanathan wrote:
+>> - Update partition name match to use "uefi_" instead of "uefi".
+>> - Prevents incorrect matches with partitions like uefisecapps_a/b.
+>> - Ensures only uefi_a and uefi_b partitions are considered valid.
+>> - Fixes capsule update logic when identifying target partitions.
+>> - Avoids flashing to unintended secure apps partitions.
+>=20
+> Please rewrite this in sentences rather than bullet points, this should
+> only take a sentence or two to explain.
+>=20
+> Kind regards,
 
-Thank you for reporting an issue you have with capsule updates.
+The patch does not describe why the change is needed.
 
-Could you, please, describe how to reproduce the issue you are seeing.
+Wouldn't the suggested patch break existing systems using uefia and=20
+uefib as partition names?
 
-Which caller fails for you?
-What are the values of the UEFI Boot####, BootNext variables that you=20
-use to find the capsule?
-What is the device-path of the ESP?
+What is wrong about calling the A- and B-partition uefia and uefib=20
+respectively? Looking at the code it seems only important that the=20
+suffix is different. The suffix value seems to be ignored.
+
+Reading the documentation I would not know if uefi_ALPHA and uefi_BRAVO=20
+are valid partition names for the A- and B-slots. I would have expected=20
+a matching documentation change in doc/boards/qualcomm describing the=20
+precise restrictions on naming the A- and B-partitions.
 
 Best regards
 
 Heinrich
 
-
-> - New logic allows matching when dp is a prefix of dp_current.
-> - Without this change, it was not able to find ESP and capsule
->    update fails to start.
 >=20
-> - Also update efi_fs_from_path() to use system partition GUID.
-> - Above ensures ESP's EFI handle is returned which contains
->    file system protocol.
-> - Without this change, it was returning a wrong EFI handle
->    that was not ESP handle.
->=20
-> - These changes improves reliability for capsule updates.
->=20
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->   lib/efi_loader/efi_device_path.c | 62 ++++++++++++++++++++++----------
->   lib/efi_loader/efi_disk.c        |  2 +-
->   2 files changed, 45 insertions(+), 19 deletions(-)
->=20
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
-e_path.c
-> index b3fb20b2501..3716165e963 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -107,54 +107,80 @@ struct efi_device_path *efi_dp_shorten(struct efi_=
-device_path *dp)
->    * @rem:	pointer to receive remaining device path
->    * Return:	matching handle
->    */
-> +
->   static efi_handle_t find_handle(struct efi_device_path *dp,
->   				const efi_guid_t *guid, bool short_path,
->   				struct efi_device_path **rem)
->   {
->   	efi_handle_t handle, best_handle =3D NULL;
-> -	efi_uintn_t len, best_len =3D 0;
-> +	efi_uintn_t len, len_current, best_len =3D 0;
-> +	efi_status_t ret;
-> +	struct efi_device_path *dp_current;
-> +	struct efi_handler *handler;
->  =20
->   	len =3D efi_dp_instance_size(dp);
->  =20
->   	list_for_each_entry(handle, &efi_obj_list, link) {
-> -		struct efi_handler *handler;
-> -		struct efi_device_path *dp_current;
-> -		efi_uintn_t len_current;
-> -		efi_status_t ret;
-> -
->   		if (guid) {
->   			ret =3D efi_search_protocol(handle, guid, &handler);
->   			if (ret !=3D EFI_SUCCESS)
->   				continue;
->   		}
-> -		ret =3D efi_search_protocol(handle, &efi_guid_device_path,
-> -					  &handler);
-> +
-> +		ret =3D efi_search_protocol(handle, &efi_guid_device_path, &handler);
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
-> +
->   		dp_current =3D handler->protocol_interface;
->   		if (short_path) {
->   			dp_current =3D efi_dp_shorten(dp_current);
->   			if (!dp_current)
->   				continue;
->   		}
-> +
->   		len_current =3D efi_dp_instance_size(dp_current);
-> +
->   		if (rem) {
-> -			if (len_current > len)
-> +			/* If current path is shorter than or equal to input path */
-> +			if (len_current <=3D len) {
-> +				if (memcmp(dp_current, dp, len_current))
-> +					continue;
-> +				if (!rem)
-> +					return handle;
-> +				if (len_current > best_len) {
-> +					best_len =3D len_current;
-> +					best_handle =3D handle;
-> +					*rem =3D (void *)((u8 *)dp + len_current);
-> +				}
-> +			}
-> +			/* If current path is greater than input path */
-> +			else if (len_current > len) {
-> +				if (memcmp(dp, dp_current, len))
-> +					continue;
-> +				if (len > best_len) {
-> +					best_len =3D len;
-> +					best_handle =3D handle;
-> +					*rem =3D (struct efi_device_path *)((u8 *)dp_current + len);
-> +				}
-> +			} else {
->   				continue;
-> +			}
->   		} else {
-> -			if (len_current !=3D len)
-> +			if (len_current =3D=3D len) {
-> +				if (memcmp(dp_current, dp, len_current))
-> +					continue;
-> +			}
-> +			/* If current path is greater than input path */
-> +			else if (len_current > len) {
-> +				if (memcmp(dp, dp_current, len))
-> +					continue;
-> +			} else {
->   				continue;
-> -		}
-> -		if (memcmp(dp_current, dp, len_current))
-> -			continue;
-> -		if (!rem)
-> +			}
->   			return handle;
-> -		if (len_current > best_len) {
-> -			best_len =3D len_current;
-> -			best_handle =3D handle;
-> -			*rem =3D (void*)((u8 *)dp + len_current);
->   		}
->   	}
-> +
->   	return best_handle;
->   }
->  =20
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index 130c4db9606..49f8b5935f4 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -339,7 +339,7 @@ efi_fs_from_path(struct efi_device_path *full_path)
->   	efi_free_pool(file_path);
->  =20
->   	/* Get the EFI object for the partition */
-> -	efiobj =3D efi_dp_find_obj(device_path, NULL, NULL);
-> +	efiobj =3D efi_dp_find_obj(device_path, &efi_system_partition_guid, NU=
-LL);
->   	efi_free_pool(device_path);
->   	if (!efiobj)
->   		return NULL;
+>>
+>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>> ---
+>>   arch/arm/mach-snapdragon/capsule_update.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-snapdragon/capsule_update.c b/arch/arm/mach-=
+snapdragon/capsule_update.c
+>> index 4dced4961b6..11ef4a0f4b9 100644
+>> --- a/arch/arm/mach-snapdragon/capsule_update.c
+>> +++ b/arch/arm/mach-snapdragon/capsule_update.c
+>> @@ -136,7 +136,7 @@ static int find_target_partition(int *devnum, enum =
+uclass_id *uclass,
+>>   			 * flags might not be set so we assume the A partition unless the =
+B
+>>   			 * partition is active.
+>>   			 */
+>> -			if (!strncmp(info.name, "uefi", strlen("uefi"))) {
+>> +			if (!strncmp(info.name, "uefi_", strlen("uefi_"))) {
+>>   				/*
+>>   				 * If U-Boot was chainloaded somehow we can't be flashed to
+>>   				 * the uefi partition
 
