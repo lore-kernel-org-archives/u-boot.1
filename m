@@ -4,140 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A65EFC83F26
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 00:27:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1117CC87FCC
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 00:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BB5F83700;
-	Fri, 25 Jul 2025 02:27:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 74D5D838D5;
+	Fri, 25 Jul 2025 02:38:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R5x0x+GB";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="eOAkD2Ev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC5C583927; Thu, 24 Jul 2025 23:30:35 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2DE6A838F8; Fri, 25 Jul 2025 02:38:10 +0200 (CEST)
+Received: from TYVP286CU001.outbound.protection.outlook.com
+ (mail-japaneastazolkn190110001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d405::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86C158391A
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 23:30:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2C97836A3
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 02:38:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-2ffa81b41d7so784556fac.0
- for <u-boot@lists.denx.de>; Thu, 24 Jul 2025 14:30:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753392632; x=1753997432; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZPxVMYbbKVbjD1LnqDvMp6mdQbbSwvqoiCWolQ08/gE=;
- b=R5x0x+GBjwvH0Yjdnh6IM4ivGoEfrzDChTdYCjn42+XZxxu2XBrwL3NCRkZrFit1cq
- 5YD2c/lCsib/85G3E1TDpc5g9sHv7u8mIWDSnbG+6g65BUHmWMbBTC0s8XCTF+CncUEL
- 8Nxf9deGd1auEJiwIiVk4jZArT0/VikiiD+6o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753392632; x=1753997432;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZPxVMYbbKVbjD1LnqDvMp6mdQbbSwvqoiCWolQ08/gE=;
- b=dqsdv1UJUdhvJBxktj8XPdQ+Vm21Kgih72ejOzZ6jysYt3yfaHaNFcHF/f7ooO6ZUd
- DCOL6TryOopEfB0hw4+6aEn4FuIYaE8GFolb06pxu22MOl5wrHtSV3oTqXHN0yAUI3Fn
- BbdBPZX2ca5r97/tHosxkuwqjWs4QRN+TNaZWS5LgJVB8aaBtV+FUvUx3Q/+rn4zHqvK
- TLvsVEFhusdCugPtQAXoQZ27Xxi+DU50jFj4E022ESo9DfrqvHCmHL33zIK1ybHF7e04
- mc4bU8Q6FLbdbWkJc/JXhgJziE01sGL+kRAMk927hhzhfhvtyMUquCmTBws8/26llkAH
- xDhw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhBev2S8D4WeL7kfDH82Nh4ierm4ShN0RBeeyRmFcAPYt9ItL2wj7GUD58Us14m+KV2zn9erY=@lists.denx.de
-X-Gm-Message-State: AOJu0YygVRUv+kSSMYNAbYkFWzLaIMJQNUsRivJXI9kS3L40uaDO6VlU
- K3t9xtOYVChfEdSKckOY85Fj4c4DuiaHDSRhm2L0LLKtClbJL3eOen9ldW9xq8tSCis=
-X-Gm-Gg: ASbGncta4GIJwtsNKD5gZA9Ps0LvWZYzIa3qUbgkqNKF0M6eygCDC1HN/f2BvY8ML7m
- 5Fpz+9BARiNrnzVTHgzluUg2iCKneSDzJFnv9/hEZK5xsdxjbr21e4HJRcdOoTuH9EtCC4ii2kZ
- j7687cSCcfcZIgaC7Y3j3c7gBuaadZx28hC6oqtQbsPEkrIrlAHax2GkH97M7TvJz3xDguAUx59
- IlBRMUNqJrESHg4kJiilTPaxoDgAl4KkamIr3AMgL49XmyGpWCXEYE3cELm200kUSZQno08/ymT
- edhYDiLZ5aZDtNmQxOPTO2t5jVlWRKy9Ps6bm2eqW+q0gWzT5VTM9ibopUFtes8H+BGRivdKoV7
- f2tcnsBY9S/LaklSJ0PO5bj07LxmB6kVLyy/lIQmqqkIpr9z5+S5spcE=
-X-Google-Smtp-Source: AGHT+IG0FY2EDvYGbb64jrHdiWUQWKS88Y8wn2wbX8Iy1WYMr5QZ7j5xiKwzKDoUxQj8GpweL8iRng==
-X-Received: by 2002:a05:6870:6f0c:b0:303:5cb:4296 with SMTP id
- 586e51a60fabf-306c728975emr6224526fac.30.1753392632210; 
- Thu, 24 Jul 2025 14:30:32 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-306e1f8a7adsm660520fac.42.2025.07.24.14.30.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 14:30:31 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Aaron Williams <awilliams@marvell.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
- Ben Horgan <ben.horgan@arm.com>, Adam Ford <aford173@gmail.com>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Anand Gore <anand.gore@broadcom.com>, 
- William Zhang <william.zhang@broadcom.com>, 
- Kursad Oney <kursad.oney@broadcom.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Linus Walleij <linus.walleij@linaro.org>, 
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Junhui Liu <junhui.liu@pigmoral.tech>, 
- Sergey Temerkhanov <s.temerkhanov@gmail.com>, Marek Vasut <marex@denx.de>, 
- Gilles Talis <gilles.talis@gmail.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Matteo Lisi <matteo.lisi@engicam.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- Alice Guo <alice.guo@nxp.com>, Eric Nelson <eric@nelint.com>, 
- Peter Griffin <peter.griffin@linaro.org>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Michael Walle <michael@walle.cc>, Sam Shih <sam.shih@mediatek.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Julien Masson <jmasson@baylibre.com>, Fabien Parent <fparent@baylibre.com>, 
- Stanley Chu <yschu@nuvoton.com>, Jim Liu <JJLIU0@nuvoton.com>, 
- Tianrui Wei <tianrui-wei@outlook.com>, 
- Garrett Giordano <ggiordano@phytec.com>, Wadim Egorov <w.egorov@phytec.de>, 
- liuhao <liuhao@phytium.com.cn>, shuyiqi <shuyiqi@phytium.com.cn>, 
- lixinde <lixinde@phytium.com.cn>, 
- weichangzheng <weichangzheng@phytium.com.cn>, 
- Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>, 
- Paul Barker <paul@pbarker.dev>, Simon Glass <sjg@chromium.org>, 
- Mario Six <mario.six@gdsys.cc>, Le Jin <le.jin@siemens.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Sean Anderson <seanga2@gmail.com>, 
- Thomas Bonnefille <thomas.bonnefille@bootlin.com>, 
- Huan Zhou <pericycle.cc@gmail.com>, Kamil Lulko <kamil.lulko@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dillon Min <dillon.minfei@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Bryan Brattlof <bb@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
- Apurva Nandan <a-nandan@ti.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
- Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>, 
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
-In-Reply-To: <20250717024426.26953-1-semen.protsenko@linaro.org>
-References: <20250717024426.26953-1-semen.protsenko@linaro.org>
-Subject: Re: [PATCH] treewide: Remove empty board_init() function from all
- boards
-Message-Id: <175339262777.1899261.14751318047956466864.b4-ty@konsulko.com>
-Date: Thu, 24 Jul 2025 15:30:27 -0600
+ spf=pass smtp.mailfrom=yangshiji66@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kMo3+DSiP8cjse/9i1xYwYMJ2ifKncwN/bsnjbgFEjvs7IECuGoEeIlMcIsHiBOz2uj1mCS1ZWvzO0Nf1U4DdukmS/bAIPCjQlrXNhWCTbHK3hcaRsh3DoxNR/vugVloO+mEbQPcYa+lJaNbW9X7mX+wghMD5H345Enj6K12g7uXfhB4xJG1XMG+5v0n6FfQLuW5SYCROcCg3zOh5S520bDThAdslFahi+huWDeKDmfJfAyLdV/72prWbHX27ztzKo0FaEksbXJPSTjVVmcnmYLXWg7HdBp45zV6c9sJQzxXzicxmrUSy9Tz739Tk17icRYbJNAT0sIbY+KmPL5YIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xUqGJ3anoGz2rjTRAenRFW/RLuBCaND3Ozl6/sD11sg=;
+ b=P7J07cpyvWZjwWf4GN/68kWUuQhvsLVmMxxjWsV4D/NRM1Sz/BLci9fxOKmnYXyCQSODmQ7+GxMkudOayK9ZQrGuCpj43k/Qw8porVhloIOIhj6eM4duvUT1A8ccnWIBlPBNap3TTxUWIaOf2Ocog+UevkuTJDWCPzgPySZx1OKprgTKX1o23piftW4iG8q++Ud5lj7ahg87oVwIuEvRLN/jsQuF5+1UE3ASkq+GdNGtlQh3uRdG6XABiIeHRajXFQc7wRty2J9ILSu593VRvAfQwey1xpJ9XAmHnFherVo5uTdn86fnS4atRgiY4DmWskB6IgCHm4dcnfBC2CiG2g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xUqGJ3anoGz2rjTRAenRFW/RLuBCaND3Ozl6/sD11sg=;
+ b=eOAkD2Ev+CrRHRt/PlLg/knghDgdha4Tjv4JrI2hKzOLcNjha/drRuIlU2BxT87x6lKTaHj1KSB6AFAnwQt0zHLsRpKssUYoh8rnsMqKJHrFs3ugrUTa9QtNDnhbwdH8hh75V21NVaQgl0JyEMl7XrP/cIX/3tEZQPv0Tw7pIeJmXAbIVroTH1XjzcfQLESCCDmibL+5d94ly5aIUZHCZbxYkZO/HrUlVT2ezEdotLI9+en8+h9AkvgC0IBIUDSUOI1hTzwGKA2Bmclgj3P/W08tL1L8KWRhhF0j3hBS6GpE+np8OMhzFKa87a2x2H0LxXOASzpu0ZxbzafS77qdjQ==
+Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com (2603:1096:603:2::18)
+ by TYCPR01MB7268.jpnprd01.prod.outlook.com (2603:1096:400:f3::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.22; Fri, 25 Jul
+ 2025 00:38:03 +0000
+Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com
+ ([fe80::c00:ec4e:ee7e:9b7f]) by OSBPR01MB1670.jpnprd01.prod.outlook.com
+ ([fe80::c00:ec4e:ee7e:9b7f%7]) with mapi id 15.20.8964.023; Fri, 25 Jul 2025
+ 00:38:03 +0000
+From: Shiji Yang <yangshiji66@outlook.com>
+To: u-boot@lists.denx.de
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Shiji Yang <yangshiji66@outlook.com>
+Subject: [PATCH] mips: mtmips: do not select PINCONF Kconfig symbol for MT7620
+Date: Fri, 25 Jul 2025 08:37:42 +0800
+Message-ID: <OSBPR01MB167018BE339065B656265691BC59A@OSBPR01MB1670.jpnprd01.prod.outlook.com>
+X-Mailer: git-send-email 2.50.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR02CA0023.apcprd02.prod.outlook.com
+ (2603:1096:4:195::11) To OSBPR01MB1670.jpnprd01.prod.outlook.com
+ (2603:1096:603:2::18)
+X-Microsoft-Original-Message-ID: <20250725003742.15646-1-yangshiji66@outlook.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
-X-Mailman-Approved-At: Fri, 25 Jul 2025 02:27:04 +0200
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: OSBPR01MB1670:EE_|TYCPR01MB7268:EE_
+X-MS-Office365-Filtering-Correlation-Id: dd7a8a0a-ac3e-47dd-0f83-08ddcb1383c8
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|461199028|15080799012|8060799015|5062599005|19110799012|5072599009|40105399003|52005399003|3412199025|440099028|1710799026;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?y7ZHcOjlluTEV3IBnPX9aPNbzz4HEh1pfCPkI8s6AVREUG1dDSMHhHVuGyaU?=
+ =?us-ascii?Q?pPgmNSUOZxLJQjccGCaI9x9OH7+EK8EXFnoYj9d7czlOk39H2oUJaTuSRs0a?=
+ =?us-ascii?Q?S2WEbv9sNXorT5T80Drke00ExvGQ+06HYD+r5bRwsYRWtRktsifUeZiVQTRv?=
+ =?us-ascii?Q?C+S3gWMvW55iof7WKtaDVQyVfLuALRMVZO0L1i+111TyJzy2oy5midn/szap?=
+ =?us-ascii?Q?UaURWzncsl+TV9DbOUyGkQCKhxjpSL8ND6MY1I89fTG86irD7umqbTM/WJ0Q?=
+ =?us-ascii?Q?UQ7KpYh7A1gIjhRwKj9yl6w21VUAoFt9Qroy7vycfc0dK5p9qXC0QDANAabv?=
+ =?us-ascii?Q?Pmh0c/tTq4cEk67OgJc29HkEu4xidSLE9GleIlISIGRceaQ34jZQWgumvC5g?=
+ =?us-ascii?Q?OJsVqg5cuJGlXVR1Y/rdZ/GHZB9tngMwHzMmcd8wLpJYNIjwroN1cfnPg7+O?=
+ =?us-ascii?Q?NIZkrKzYuwM/FFgj1qVXdJEGCB8GkrqrvLtapa0gt4MmfqBY8ct5tYNSvj8x?=
+ =?us-ascii?Q?PiAX/LYGXoXWkSVfBPJj9jMJXjc1xjq82v5+aZPbHIl341Y8JAcS2PTOTHpX?=
+ =?us-ascii?Q?ZbU0Ncoznxz+zrnUBntprsQFI6/vo8lj7nLaxgjA5ghjHjqV/Sr0yJh//9yJ?=
+ =?us-ascii?Q?U4CVS2YRWCJ/RrH0L5WQatn94d8jK1f9Jr3IcXEJ41B0Muqeo2KrTcww/bM+?=
+ =?us-ascii?Q?cZU1ZlYS4IajKHtsU/I+yopC6aSyQ5xyRm1gUkfzAb4cTKsKmOxh9iR/EknG?=
+ =?us-ascii?Q?AFoARsrX3XB3McfDilW0o9LzKn0XKFzuKxdRbrbBIcKZqieFUlPElAU5rpkI?=
+ =?us-ascii?Q?r0h1/13h0NfwdQveOjNnsQ1mn/3W+d/1bTQrufsf6lKSpWXp6QbPDfKronVN?=
+ =?us-ascii?Q?8+/9MQrlpiA8cD+gDdAwcVupOsXsMiSrbGxBOG/z2U/+SWFfvpWvPacgbk8q?=
+ =?us-ascii?Q?vjX/q78LIv5T+5XeEWFOxheYzrcpvIflsOE86AV3SgQvaahfiMrU8L8Py8HS?=
+ =?us-ascii?Q?S5ge5pfzmER9Mw8IuJ1loumDg8bttxMH7KNm5flaz9GQK5/wOHrOgPik8S4R?=
+ =?us-ascii?Q?vqZYW4xyqBI6UMxXJzp+5IWIv4j/bk963Hb9gzLhmKlHLQ9vlWZKWPQE0cDW?=
+ =?us-ascii?Q?dOs2gHUgtuEtE3IhWtuo3645eViucUWszbisvWFmhXIPah3eS29bjB9lIhVV?=
+ =?us-ascii?Q?WgDN2Adezhp7uUg1CDbdqvWb/OddjD1mdrDmzw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ChwSpn3zGfz0kM6yaEtJxuG9uFnJSDjJEDc58Li2SbOUIKhS7XnNSFI4Aot+?=
+ =?us-ascii?Q?BBZ3/6TqM/zKRIXy0vn9Pudil62tuETSsD9WRkLOxIltG7ZfMfwreLpJ51Sv?=
+ =?us-ascii?Q?fxtjlzONCxWqfSF1pQwQoNJ41yNfFKTr/eJYhhx6mTTR/oX5YBQuBs58ZyPj?=
+ =?us-ascii?Q?yHXIXav/xCpICaFJnL+t4OSJsbQ73bvxGj2wdzjqbC4dOqiRkHqtpjT4LRoK?=
+ =?us-ascii?Q?lNovP//CFFhYKbfpAmI2ISHL8ucRwE4QiIyYV16KP00G0IC8vs+yzq24ZCl/?=
+ =?us-ascii?Q?5O2wk1unk+SPwsKrkoKEgYwRX/JMMYPMTWKOTWWnph6Vpu8nfmlunpvN6S1G?=
+ =?us-ascii?Q?N+pFdPhhLvyw0Msfo/3Gjvf5/RaumPLk1u0uBejbeliYjfOPRIBf3SL4SQk4?=
+ =?us-ascii?Q?YVTC96P9OMUYz1+NcEJolLWHp195FtlCeKy/XOJxIRkPP6O+XjjZPF/dhUxo?=
+ =?us-ascii?Q?HWun9+tGh3Zznzxej5fvbvSg3xJE1rgswUJnIG7zbMMwHtD1WUkGBgjuEyLO?=
+ =?us-ascii?Q?2sXEqZYGM++9K80+w31qti9MqyAZlU17BKwaAt+CqypEkOICs70z5+84jIGK?=
+ =?us-ascii?Q?OhRafl9dvU5xo2cO7gCiGkMfZq8lBqh+OyCTXWwW7rGpx8YsDnZOjuaPEjq0?=
+ =?us-ascii?Q?4PeEeA2ieF/7JKb7oF2W3kZ3AEbCees0qHZ7EjRvlZFgd87AK+Xe0PvSoqWy?=
+ =?us-ascii?Q?KYHiHmQNCsOocaBZcY4h0E2eSJDe/UbSQLvqjBIz50XL27uILGL+5/OTTkLU?=
+ =?us-ascii?Q?865mCsHSBKOxmd3HwuyhuLlRU0vW4SO0nzoJI1wNE2t8nNRRyZRl/N28BUTi?=
+ =?us-ascii?Q?uS/GuvNMKeydigeYKVuAGFH/J2/J8lnYsJd9VZGVmAd9A7020z2XEZQAT8v/?=
+ =?us-ascii?Q?gQ4LskgJyKHBvWgJ6hGmYj+Pd18HRWZuAid52vvy5CTh0ibeiH3V7r4NWELl?=
+ =?us-ascii?Q?NhSUdxLII3OCu6p/f7jNJwqAyXeJH55wQQv0/pHHGgq3/dXwOYylZk3KfOxl?=
+ =?us-ascii?Q?KR5v8gsLp6WGMlINOL/LrcICQ+hEN9L7wNLB+q1jbJvViXvEZFc1hUJyTeUZ?=
+ =?us-ascii?Q?gvCs326+Ci+VVbNSkS1EOtj+58BrSp6BKatAKQPtWZN2VKuzfnbE1/u/0CNT?=
+ =?us-ascii?Q?8tl9AgJ71DNA9k+RXbCUT9BUoZdY4RWUX/o4tQm/6zfeQPy9P825YuXb1yPZ?=
+ =?us-ascii?Q?dd1oDKBFG98+1kogzheEyiIZI/ANBEMCyO8Og4sPKhNUr7BwurIB1ENSm74N?=
+ =?us-ascii?Q?gORN64n9ry2Rce67jvmt?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dd7a8a0a-ac3e-47dd-0f83-08ddcb1383c8
+X-MS-Exchange-CrossTenant-AuthSource: OSBPR01MB1670.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2025 00:38:03.7811 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB7268
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,23 +142,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Jul 2025 21:44:26 -0500, Sam Protsenko wrote:
+Mediatek MT7620 u-boot does not have PINCONF implementation.
 
-> Commit 86acdce2ba88 ("common: add config for board_init() call")
-> introduced CONFIG_BOARD_INIT option. This option can be disabled for the
-> boards where board_init() function is not needed. Remove empty
-> board_init() calls for all boards where it's possible, and disable
-> CONFIG_BOARD_INIT in all related defconfigs.
-> 
-> This cleanup was made semi-automatically using these scripts: [1].
-> 
-> [...]
+Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
+---
+ arch/mips/Kconfig             | 1 -
+ arch/mips/mach-mtmips/Kconfig | 2 ++
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-Applied to u-boot/master, thanks!
-
-[1/1] treewide: Remove empty board_init() function from all boards
-      commit: 70a4d1fa1ddb2f5f8f9a27442563f182549abbb5
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index a0317011de7..36612756294 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -75,7 +75,6 @@ config ARCH_MTMIPS
+ 	select DM_SERIAL
+ 	select PINCTRL
+ 	select PINMUX
+-	select PINCONF
+ 	select RESET_MTMIPS
+ 	imply MTD
+ 	imply DM_SPI
+diff --git a/arch/mips/mach-mtmips/Kconfig b/arch/mips/mach-mtmips/Kconfig
+index 3fcd0b8465b..9c190cfc6ff 100644
+--- a/arch/mips/mach-mtmips/Kconfig
++++ b/arch/mips/mach-mtmips/Kconfig
+@@ -84,6 +84,7 @@ config SOC_MT7621
+ 	select SYS_CACHE_SHIFT_5
+ 	select SYS_MIPS_CACHE_INIT_RAM_LOAD
+ 	select PINCTRL_MT7621
++	select PINCONF
+ 	select MTK_SERIAL
+ 	select REGMAP
+ 	select SYSCON
+@@ -101,6 +102,7 @@ config SOC_MT7628
+ 	select MIPS_SRAM_INIT
+ 	select SYS_MIPS_CACHE_INIT_RAM_LOAD
+ 	select PINCTRL_MT7628
++	select PINCONF
+ 	select MTK_SERIAL
+ 	select SYSRESET
+ 	select SYSRESET_RESETCTL
 -- 
-Tom
-
+2.50.0
 
