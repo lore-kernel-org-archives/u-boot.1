@@ -4,32 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 166E9C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60295C87FCE
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:52:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D54983A2D;
-	Fri, 25 Jul 2025 17:50:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 94789839E2;
+	Fri, 25 Jul 2025 17:50:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 923A583A30; Fri, 25 Jul 2025 17:50:48 +0200 (CEST)
+ id 77C1F83A32; Fri, 25 Jul 2025 17:50:50 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 43FEA8395B
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:50:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 618DC83A2B
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:50:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CBA4C25DD;
- Fri, 25 Jul 2025 08:50:38 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EF5261A00;
+ Fri, 25 Jul 2025 08:50:40 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.31.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A52063F66E;
- Fri, 25 Jul 2025 08:50:43 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D1D3A3F66E;
+ Fri, 25 Jul 2025 08:50:45 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Davidson kumaresan <davidson.kumaresan@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -37,10 +36,9 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Casey Connolly <casey.connolly@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v4 12/24] efi_loader: fwu_arm_psa: Add set_image and
- get_image_info support
-Date: Fri, 25 Jul 2025 16:49:58 +0100
-Message-Id: <20250725155010.285831-13-abdellatif.elkhlifi@arm.com>
+Subject: [PATCH v4 13/24] efi_loader: fwu_arm_psa: Keep the FMP payload header
+Date: Fri, 25 Jul 2025 16:49:59 +0100
+Message-Id: <20250725155010.285831-14-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
 References: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
@@ -64,13 +62,12 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Implement set_image and get_image_info through RAW functions
+Allow sending the payload with its FMP header
 
-The implementation is done using efi_firmware_raw_set_image()
-and efi_firmware_get_image_info()
+The Secure world needs the data provided by the payload
+FMP header. So, let's keep it in case of FWU_ARM_PSA.
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
@@ -80,92 +77,28 @@ Cc: Michal Simek <michal.simek@amd.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Casey Connolly <casey.connolly@linaro.org>
 Cc: Adriano Cordova <adrianox@gmail.com>
-
 ---
-
-Changelog of changes:
-===========================
-
-v2:
-
-* Following Heinrich comment: The changes at efi_firmware_raw_set_image()
-    simplified by removing the "else" so it is clear we are just adding FWU_ARM_PSA
-    support and skipping the use of DFU in case of FWU_ARM_PSA
-
-v1:
-
-* Add set_image and get_image_info support for FWU_ARM_PSA
-
- lib/efi_loader/efi_firmware.c | 35 +++++++++++++++++++++++++++++++----
- 1 file changed, 31 insertions(+), 4 deletions(-)
+ lib/efi_loader/efi_firmware.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 75501e21557..38945b34e7b 100644
+index 38945b34e7b..e1fc3f577d4 100644
 --- a/lib/efi_loader/efi_firmware.c
 +++ b/lib/efi_loader/efi_firmware.c
-@@ -4,6 +4,12 @@
-  *
-  *  Copyright (c) 2020 Linaro Limited
-  *			Author: AKASHI Takahiro
-+ *
-+ * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ *
-+ * Authors:
-+ *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+ *   Davidson kumaresan <davidson.kumaresan@arm.com>
-  */
+@@ -517,8 +517,11 @@ static void efi_firmware_get_fw_version(const void **p_image,
+ 		/* FMP header is inserted above the capsule payload */
+ 		state->fw_version = header->fw_version;
  
- #define LOG_CATEGORY LOGC_EFI
-@@ -14,6 +20,7 @@
- #include <efi_variable.h>
- #include <env.h>
- #include <fwu.h>
-+#include <fwu_arm_psa.h>
- #include <image.h>
- #include <signatures.h>
- 
-@@ -601,10 +608,21 @@ efi_status_t EFIAPI efi_firmware_get_image_info(
- 	     !descriptor_size || !package_version || !package_version_name))
- 		return EFI_EXIT(EFI_INVALID_PARAMETER);
- 
--	ret = efi_fill_image_desc_array(image_info_size, image_info,
--					descriptor_version, descriptor_count,
--					descriptor_size, package_version,
--					package_version_name);
-+	if (IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
-+		ret = fwu_arm_psa_get_image_info(image_info_size, image_info,
-+						 descriptor_version,
-+						 descriptor_count,
-+						 descriptor_size,
-+						 package_version,
-+						 package_version_name);
-+	} else {
-+		ret = efi_fill_image_desc_array(image_info_size, image_info,
-+						descriptor_version,
-+						descriptor_count,
-+						descriptor_size,
-+						package_version,
-+						package_version_name);
-+	}
- 
- 	return EFI_EXIT(ret);
+-		*p_image += header->header_size;
+-		*p_image_size -= header->header_size;
++		if (!IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
++			*p_image += header->header_size;
++			*p_image_size -= header->header_size;
++		}
++
+ 	}
  }
-@@ -749,6 +767,15 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
- 	if (status != EFI_SUCCESS)
- 		return EFI_EXIT(status);
  
-+	if (IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
-+		if (fwu_update_image(image, image_index, image_size))
-+			return EFI_EXIT(EFI_DEVICE_ERROR);
-+
-+		efi_firmware_set_fmp_state_var(&state, image_index);
-+
-+		return EFI_EXIT(EFI_SUCCESS);
-+	}
-+
- 	/*
- 	 * dfu_alt_num is assigned from 0 while image_index starts from 1.
- 	 * dfu_alt_num is calculated by (image_index - 1) when multi bank update
 -- 
 2.25.1
 
