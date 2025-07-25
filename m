@@ -4,71 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 133E6C83F26
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 08:32:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D8FDC87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 10:26:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 632248392E;
-	Fri, 25 Jul 2025 10:32:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C69F5838FA;
+	Fri, 25 Jul 2025 12:26:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KUeDmiYH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Mm9TZFyY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0BD583930; Fri, 25 Jul 2025 10:32:37 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 00EF18391A; Fri, 25 Jul 2025 12:26:00 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE69283927
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 10:32:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 902BF838F0
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 12:25:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pbiel7@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-315f6b20cf9so2125870a91.2
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 01:32:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-45611a6a706so9686755e9.1
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 03:25:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753432354; x=1754037154; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=x9tNN6OXrGFcO/mMIF+tDxC41jlX/mrabBhT3qrzL9I=;
- b=KUeDmiYHdDTwAOMaOVuYibaAG6N98adixXntvDJg4xLyvCRTV2eD5je8CciA+yMDAn
- 46KE+KRulBa4eIUZNfIpmQ6RPjQk0Sc8Hpkti8ioOH6Tl8HJrT4fVRE1PwMjH5rOfDA4
- RZKS6uUoM8Jjh7q1ZHf46ka2D7EQEkvWdCxDx8i+uc+jsehpzza4mh85uGFwdAlaByht
- NtAobvtr5Z8NiQZwJ/UC1JA9fLlMH9IrY7FsZd8Zqpi2fjoq3ZoeD4CrNFlwXuwzcwu6
- 7wKTy3HN4wyHKKyuggCCtuL75Re8DlqCcqTE24jfP+iyiOGn5wnhnxI+7bZCgM4zldPo
- mqLQ==
+ d=linaro.org; s=google; t=1753439157; x=1754043957; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LX4DONskVa/cTeFtYXmQe1uaA7iDxnew3iUcWsIEfak=;
+ b=Mm9TZFyYhq8idhJ7aT+OcEWC4bg+W1LPJFxC4t6zp5ao7af0hty/rja8LqoYWjv6+B
+ Ou+50c7lRcnTwAihqqijSq/Hd9xP/uw4TdS66QVWCSUashqS1oTwbPLSwHBhWgkq/GZ7
+ wyRgbkkD0PARugCDzDfxmUJEeBNs3zfExrCUgZ++pQpre3MI4v8c5K7sJGu9cUccGMAB
+ mQkKI1KHPdwznjAeA7hKYlDSRN57axEVlELsAvCN4xiFGr5IRzL1cU/svUieVR1v2WB3
+ Q5TkLsDLIeqgr4Zw3IFm8PMANvkbrU8WP6vT6+BByEr1SRRpyuMr4fhLfZYo8ZCsFh/8
+ 60RQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753432354; x=1754037154;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=x9tNN6OXrGFcO/mMIF+tDxC41jlX/mrabBhT3qrzL9I=;
- b=JyWaAwAlKU+aUvkN1PI2eN49SNKNoQYDfm6oeZ/6soR/u1o9SNeXobmWJyd2IeF1ab
- rVBGliIWWqk+dKAQKHr94tr0aAiiYgmHuxfoi4pMF1Mvdp/o3DoJuv1ZOA9sdbt9WYB3
- 8Uf8FMpI2NeXuvI/ZCePd8uq2LAiQAINnwdz+gMNYgX1AdB9j63fqEpqLQ2NXYaqDE4Y
- bKIJQSMLPG8ecd2D59C8vLNA+psD3WWb9kAmOa+RUrAaThcPDuVvqxvVMvaFTo4KEZiy
- FNJahVlgpmoTmo6RO/d7bsGboLtaPen5d50SsSBOCDKT+nMNKC6jkEhsk7vn3SQO/DcP
- +hQA==
-X-Gm-Message-State: AOJu0Yyj+bQbL6gLVM1NqjoaNIcVPGAEGG3pj7aepMIZOnxpD4BliNHA
- t0rIO6GebN4xriz32QniHE8T7O7G/YPp8hCBrAPOpNNA2WTQpX0qGVcK0LJH3oCRGAzNrnfm48d
- 9tMdR9SmtIjQcOFhQ4rowlXNqjIARBf2ICgOrBX8=
-X-Gm-Gg: ASbGncs7/xMWx2v//7+T2p2nDcRMKvoUamMXD9rWEpa/DtcGSNJy1cm+l5PGytfl0DY
- uchrU47st1TseqVYUXrLO16DhVfftmEMMLFpb3Qcqj98Ki0380yCCrgBmD6e7EXAu4pFypCKlzj
- /uBXrB7gFch/awN0SIEvm+oZPrc93+Y+NgzpKBQERNArb0aVgz+HkEnOYkP6B0WXGajodCBnUUa
- ztBAA==
-X-Google-Smtp-Source: AGHT+IF/AwbqAwe7XzvpM+WqpO+pVjUWnH27N8k8o6aYzH6J3jumqicwZC5nquhUfvY4A08NCkyWCT20yED6RYuW1jc=
-X-Received: by 2002:a17:90b:5245:b0:313:62ee:45a with SMTP id
- 98e67ed59e1d1-31e77a2f7cemr1374968a91.13.1753432353953; Fri, 25 Jul 2025
- 01:32:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753439157; x=1754043957;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=LX4DONskVa/cTeFtYXmQe1uaA7iDxnew3iUcWsIEfak=;
+ b=DN2pe1YRypquZuexz/ey3nMgMhZh6dtKasNTwoKXuq22/CVIJAK3AOkEHD5896WHSI
+ SRaOlZdLFjer709xRyVCsWePm19QvbZbPMYcDRkKK9tIfWRCc9tamBBxPqitTa7XqvuJ
+ SxnVF02kG5ZbYRs/Q65Pz9TY3gyfeNiTvczHjXBwp2nqShftBSop2Hb9aZ2XAxz+Cg7U
+ XJE6mlejOcOy3SK/jZlAnssRF1tmPVOzT4jDzl1I4cCq2mEl/rnzsiVCXfkhq3JC4TpH
+ tlIkegtFrokQ/k/SPOJ7qkOc0n+1PxjTFv+api2repdPgsQAzbNB90DwfBvWBFQbuchq
+ ykGQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVVKTgsmJ724JecZ3Ml51qodZ5zPG04X7k30DQjARNR8bfP84XVfO5KMe2C5dt1/YhNrXwKrN0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIeO/hoi1SvCvAN9B6uwzSMBUC/h7Bw/H5DHOrxe4dh8AAyTtF
+ sBzOtF5cGpl0Sm15E2H6c/gIAwXcIcSvszOrrx0lsHcwEhaM6KqVok6ns8kWqIo6DWogltoJ3RD
+ h5ApG
+X-Gm-Gg: ASbGncsrBW5hfGkaHSqDWNcvDuMqf4DVRarAggJiVuyx1Vn8EdT1eyhfK254KMb6pFR
+ p5V3pZRGvSPPp1gQA9QY7XFgKIC0ow3W0KE5M8ISVBMYhrzOvidK4vBIHLdpt39QQKiyokbDYTJ
+ L0qU5926J7XJG6d/dA1SlumsECQBmif0gqG4iYdeE60s/Zcel2olubySsOA01WOZcvu2F7MA4DE
+ caM13XDJJWuGx/QaDFri/V7504vnwcL4hsJWEj1pWo8BkgGf5THmNJF6LsLYAndcLGU+nDRHepw
+ LeDJIZ+g2yISru9QspF8YeAEt/OLWX9+05c6moX0VZZMB1ykbMRCyKB0DKy/FQQgdHa4H3GpCwA
+ 6qXWsIli4US1cOy/WoVHS81A/+c6ZbmLfdFlMHMVWUTEQPzSHVVwzAN6xr6oPth9qNUsuU7qEnA
+ pCFQqhSikcsA==
+X-Google-Smtp-Source: AGHT+IEIZODAmFgNvJSGPXB1Rp5lKUbaM2/HdqxPXvsZDRtGt6vO0ZhSv/3zLjHbvxaOwARe2qzArQ==
+X-Received: by 2002:a05:600c:4f87:b0:456:133f:a02d with SMTP id
+ 5b1f17b1804b1-4587644278emr14122975e9.17.1753439156909; 
+ Fri, 25 Jul 2025 03:25:56 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:707a:1ff:4c94:1748?
+ ([2a0a:ef40:f9e:3c01:707a:1ff:4c94:1748])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-458705ce781sm48770715e9.31.2025.07.25.03.25.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Jul 2025 03:25:56 -0700 (PDT)
+Message-ID: <4e615e60-f9f1-4700-87a5-620bbe1ccb05@linaro.org>
+Date: Fri, 25 Jul 2025 11:25:55 +0100
 MIME-Version: 1.0
-From: Patryk <pbiel7@gmail.com>
-Date: Fri, 25 Jul 2025 10:32:23 +0200
-X-Gm-Features: Ac12FXzV6fXvau48_UMOZFqhtjtmvJFrdlePVhBvA0zZGLMM3TLh9MIsZLr1Oc0
-Message-ID: <CA+DkFDYBjKgNOgXKQ_K9w5=vPymj+q9scbrqVSS20KEJevR9OQ@mail.gmail.com>
-Subject: Migrating custom board to "Standard Boot"
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: Michal Simek <michal.simek@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: Smatch report in drivers/fpga/socfpga_arria10.c
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,47 +102,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
-I've been working on a custom board based on NXP LS1028A and
-considering migrating the boot flow to "Standard Boot".
-The motivation to migrate to "Standard Boot" is that the current boot
-setup provided by NXP feels a bit messy. Looking at the e.g. LS1028A
-boards they support distro_boot mixed with runtime bootcmd override
-based on TF-A boot source detection.
-For example, if the platform booted from eMMC then u-boot overrides
-bootcmd to call emmc_boot.
-Maybe it will be easier if I describe what I want to achieve:
-For non production I would like to be able to:
-- boot from either SD or eMMC (depending on boot dev detected by TF-A)
-- boot from pxe / pxe network
-- boot using boot script
-- support A/B slots for kernel and rootfs
-For production I would like to:
-- restrict boot device only to eMMC
-- support A/B slots for kernel and rootfs
-- boot via signed and validated boot script (validated through
-escb_validate command that's used to validate signed kernel, signed
-scripts and so on).
+Smatch is reporting this issue
 
-That's being said, and given the following statement from U-BOOT's
-docs: "If you are using custom boot scripts for your board, consider
-creating your own bootmeth to hold the logic" I'm thinking about
-creating my own boot method that would:
-- check boot dev
-- check if there is a boot script (and optionally validate it if
-secure boot is enabled)
-- select A/B slots for boot
-- boot the system using boot script and FIT image
-But I'm not sure if this makes sense and whether or not it's the right
-/ modern way to boot OS on today's u-boot.
-The other thing I'm wondering is - taking all the above requirements -
- how to integrate bootcounter and bootlimit in the overall solution?
-Should I use altbootcmd or handle bootcounter liimit and A/B selection
-in the boot script, or perhaps integrate everything in my custom
-bootmethod?
+drivers/fpga/socfpga_arria10.c:536 get_rbf_image_info() warn: ignoring 
+unreachable code.
 
-I would be grateful if someone could point me in the right direction
-regarding modern U-Boot practices for this type of setup.
+Looking at the code, that for loop is a bit strange and I am not sure 
+what was intended here. Could you please take a look?
 
-Best regards
-// Patryk
+Thanks,
+Andrew
