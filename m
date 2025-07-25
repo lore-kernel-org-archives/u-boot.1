@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECA4FC87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 13:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C86C87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 13:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F1D983990;
-	Fri, 25 Jul 2025 15:23:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2BDE8399B;
+	Fri, 25 Jul 2025 15:25:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rNto1eXL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RwqwHz8P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAD6D83993; Fri, 25 Jul 2025 15:23:55 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 33A228399D; Fri, 25 Jul 2025 15:25:28 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70BCA8398C
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 15:23:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38A8683993
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 15:25:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-45555e3317aso11869075e9.3
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 06:23:53 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4563a57f947so15636625e9.1
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 06:25:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753449833; x=1754054633; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753449926; x=1754054726; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ixARUCEq5bEkqL/JvqusyItOduS5+N6vlFsWeRfX/dA=;
- b=rNto1eXLx8jynFFidhRCgAUlBIU6b/fXrLvRrZBVUTo1ICQvJUfXaWStPWLnSzEYe6
- dRvNWBYmWXfoiSPXHOU8sOfnubJHIL48cxJxJEUpspw1bgGmCJypG02aR5T/mESCORaL
- fwea/8YKMANcaTYz5tA1z33+xm+GLzI047u/K9WbI8jkQodhD9jCVnyGiwUamY3mMq8y
- 1nAsKD1HpCe0awLsUVlPva+bf0/oFz3AQrx51GeACpM3qr67vpn/YAq6bKNklEIDynLJ
- 3RrI7zBws5UFzt5v8lVpaixLv9pvgxV+zfaRGnMNdQsJb8lsLq19Btbtcs6+CfNiNS4E
- U5IQ==
+ bh=3gCRT5FMJWCV8qL3gi5jCx0Seu4Yi3AfXafY/grRzyI=;
+ b=RwqwHz8Pk+tenTklXVdZ9slVwlzFuqXeEsPKVzM9TKxeIweGUPEBFxUfikn6hbEy22
+ 0+wRmZtiLxAUF6n3SOIB/V4aVx+Zl8dYKp02KTb77BVvQ6PnQHoMm/rHOJJh9rc5jNay
+ nXnAz5PECVM/K4q9sOjwa6AOB67BKj72AVJ8OVoX53gmoMC7ZEHfWRVzq2MPKWBLIUyN
+ aelRJCEsT4i9eOa5FkyKD9PfwQfW5gCm5/01oL/Hg0XumjCPoTmHzPlsjQ+M5ZI62Nds
+ DPuPJP3uZuMe4/BL4LPcU/JG0Gw+kKI6R0TP+0EhkdMRP3Qx0V10Zzk//yFoL/z93Qyh
+ Ue3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753449833; x=1754054633;
+ d=1e100.net; s=20230601; t=1753449926; x=1754054726;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ixARUCEq5bEkqL/JvqusyItOduS5+N6vlFsWeRfX/dA=;
- b=ZkoCU7JLZtF/T7dq/c9v8slrjSm9wFgOBYExXv5UCa5B6AY5N1UdF1aeT6WVcxz4SU
- /cvhEnAyi9HkScegHCqRp/9b7ijW8GCM44SKMwTrPOunX+u1flh919zy3klroBwtHW/z
- yhJ6TcR33QTRzioCoEXbrSG04k3r4PbqhnBaH6VGRCEMHLvzq+t4v/T3ReGDDiSe58Bp
- AuzdOsSWppo/aQbytUw00+16iDBMnUCCyA8aD8e6N/agyevms2yRmvvuJgY5w8eb+w60
- OI0xI+ioo84xYt41BjRNiOsawTuQDYB4w7/i7SqbeDT2ZD26Krl2ZfjvjZK2aM9n5kbp
- DVKQ==
-X-Gm-Message-State: AOJu0YxFu4oJ8Q2V65a3dfqot2vFCfYF+beqKIhQfgC/67+8nCElRUIG
- PxzP+P3SsWBVLMTeOMK32UQ6qK4ofeqLyXLi68zLmS+Pxpx8xmHAcMxiilCZn3jpzZg=
-X-Gm-Gg: ASbGnctzkXbEcxFCVS3zk5sZNU6pHstQQCMJuDTetXPwYTFun56p9nr0l0hyy0v6HBT
- 0GkRirfv1TzxVmpvurvcg4DeVKqfilHNzny7E9wAHAgs76vR9JqygugGU6FA5sVz4GnimFaBasn
- 6QjNVX55BhjqR2mJOZDxz61fIIEPTr6WI146vi+9a32mQKpwz3C3K+ifBQN+UkqF76+0CPz7exI
- 1InDlNnKlnsjfXUWe8EWC5ElEW/HHO/jie/vunTfq/w4qOXpphsLGSgLp0gIQeYTbzkYs5KwWw9
- RRl/ln6tJQBdYGqt+ILMVuAqn0W5OUtFLdPDktuwlf9yTEx4SlVQ7A7zH2DL79E6/pDxyQIFzDG
- msAYJHA0WrBh6ySfl05uxOEMBR21k/J1mL2APNvKbmGwkuG2PjibHLrwe7d+mAGM=
-X-Google-Smtp-Source: AGHT+IEcOSE1rcRHwR9i4oxWPzVPFiRWlbmw0g3mQdIpYfJFsjYfx81eUCD3u6tjIlsHnmX99Hl7fw==
-X-Received: by 2002:a05:600c:4ed1:b0:456:e98:9d17 with SMTP id
- 5b1f17b1804b1-4587630365cmr18369725e9.5.1753449832853; 
- Fri, 25 Jul 2025 06:23:52 -0700 (PDT)
+ bh=3gCRT5FMJWCV8qL3gi5jCx0Seu4Yi3AfXafY/grRzyI=;
+ b=dcVYS/+Lu80V66mtcayVUyifxyp7Bh/qeTZRMU/Wm85jhCbA/B4KqVPlTq9PlPSoVS
+ izHSQDINTlQOkVY2/AfX7tkNJEw1AJTetq0cBvLPPmCEqWULuWxsa8l14cTnQXtimmOY
+ UZnN4znwVQ/jMIju/YmDEjhqvKUqcnfyQVynzI6Sjcf/XZaQkmlUtY37TsiOMXUEoBLz
+ FOuIvdqaI18TT9zm8RlWuAUFrr2rV3WKGDcLBq8Wa5jarg8MuOR6jRLealWnx5DFdWsL
+ jQZGU4jF+z9iZKPck6oK/34pmT9W7+3PdBBgwovzhB2PwMJzAAySxX6pCTUNQm4EAxtI
+ PnjA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW3RPYlvNgbezbpWjMpncUy+7dhVu/VOYd3uBB++uTQKcIu8qOwjIco5MhYZRf1pww181to/Rg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyhdvr3fgK6vD0XsuivO3wz+a6JiLX9/wuGrpFydqYwqq9VFrGw
+ RLv4OMyjZ+7SuwLXQcheW8nx8dp5K3lb74cJaXpc7ZIJW6gsoMLlYa1ismFtx2shV9w=
+X-Gm-Gg: ASbGncvdWh40amFIPMZSiL9hf77WFkzBg74bwXixWh7H+aKJalBC1Ri5EYWsoAMnO91
+ 8r2Wojhp+4Hy2z2fku9PuvMsugk/vd481MBLBVmpfHvJ6MlZV/8ckP2HzRhs7t0bTK3CKcwTW3D
+ S4xQWbjmmjZJPcfS672wBvmx+/4PaItmN+KFpP+0QMaLzupgl8oA1FBqSq6PqUvEHO4UPhmIyMN
+ NYeEE9fUcpMGrm5rekmmLvhgCmIH6iCXlMeo8Qy9rdL1YXM8+cLu1A9lqPNi5FpjGbFAgqodg92
+ fhjurcs7ssM7edHonvoGNYPLLVK4ESwj7/P/UN4Gnp/x4smLu4bujWxsr8p5r5TpO5B5hOlFbMk
+ EqzezsHCI64PnAJ5Sq5xiT+lucy76JGadFTzA5mqN//eATUyE9CjIme6tEyvsY2g=
+X-Google-Smtp-Source: AGHT+IGgFtALdLIYOPjEg5lKcJhxPBKRNdPaklzUHru2/EQdoZ40O+CGvM1W3RRa313qwyRYW8VCdA==
+X-Received: by 2002:a05:600c:4c24:b0:456:18b3:df2a with SMTP id
+ 5b1f17b1804b1-45872976cbemr19868745e9.7.1753449925559; 
+ Fri, 25 Jul 2025 06:25:25 -0700 (PDT)
 Received: from [192.168.1.37] (p549d4bd0.dip0.t-ipconnect.de. [84.157.75.208])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4586eef77e8sm41231895e9.3.2025.07.25.06.23.51
+ 5b1f17b1804b1-4587054c562sm52816085e9.10.2025.07.25.06.25.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Jul 2025 06:23:52 -0700 (PDT)
-Message-ID: <8dfaba78-110e-4658-a77e-3ebfa2534f6e@linaro.org>
-Date: Fri, 25 Jul 2025 15:23:51 +0200
+ Fri, 25 Jul 2025 06:25:24 -0700 (PDT)
+Message-ID: <a0b9ba21-eb35-47cc-9efe-fce5a8b19f10@linaro.org>
+Date: Fri, 25 Jul 2025 15:25:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/8] clk/qcom: Add SM6350 clock driver
+Subject: Re: [PATCH] button: qcom-pmic: Fix dereference of uninitialised
+ pointer
 Content-Language: en-US
-To: Luca Weiss <luca.weiss@fairphone.com>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
- <20250618-sm6350-bringup-v1-1-3cc22aab7a7a@fairphone.com>
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250723-button-qcom-pmic-v1-1-9c317ac71167@linaro.org>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250618-sm6350-bringup-v1-1-3cc22aab7a7a@fairphone.com>
+In-Reply-To: <20250723-button-qcom-pmic-v1-1-9c317ac71167@linaro.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,61 +104,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Luca,
 
-On 18/06/2025 16:25, Luca Weiss wrote:
-> Add Clock driver for the GCC block found in the SM6350 SoC.
+
+On 23/07/2025 12:58, Andrew Goodbody wrote:
+> The pointer 'label' is declared and later dereferenced without ever
+> having a value assigned to it. Add an assignment to this pointer so it
+> will be valid later when dereferenced.
 > 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
-> ---
->  drivers/clk/qcom/Kconfig        |   8 ++
->  drivers/clk/qcom/Makefile       |   1 +
->  drivers/clk/qcom/clock-sm6350.c | 194 ++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 203 insertions(+)
+> This issue was found by Smatch.
 > 
-> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> index 3ea01f3c969a3456a7c2ebf731b8b74b66d93f96..e0e91dadd854e6e3a7beb1ef351734a5ab77787f 100644
-> --- a/drivers/clk/qcom/Kconfig
-> +++ b/drivers/clk/qcom/Kconfig
-> @@ -79,6 +79,14 @@ config CLK_QCOM_SM6115
->  	  on the Snapdragon SM6115 SoC. This driver supports the clocks
->  	  and resets exposed by the GCC hardware block.
->  
-
-[snip]
-
-> +static ulong sm6350_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +	const struct freq_tbl *freq;
-> +
-> +	if (clk->id < priv->data->num_clks)
-> +		debug("%s: %s, requested rate=%ld\n", __func__,
-> +		      priv->data->clks[clk->id].name, rate);
-> +
-> +	switch (clk->id) {
-> +	case GCC_QUPV3_WRAP1_S3_CLK: /*UART9*/
-> +		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap1_s3_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, GCC_SE12_UART_RCG_REG,
-> +				     freq->pre_div, freq->m, freq->n, freq->src,
-> +				     16);
-> +
-> +		return freq->freq;
-> +	case GCC_SDCC2_APPS_CLK:
-> +		/* Enable GPLL7 so that we can point SDCC2_APPS_CLK_SRC at it */
-> +		clk_enable_gpll0(priv->base, &gpll7_vote_clk);
-> +		freq = qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
-> +		printf("%s: got freq %u\n", __func__, freq->freq);
-
-Please drop this printf, then add
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 
 Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
-I think we'll have to do some kind of improvement around the frequency
-selection stuff eventually... Not the end of the world today as we'll at
-least get warnings if something goes wrong due to DTS or driver changes.
-
-Kind regards,
+> ---
+>  drivers/button/button-qcom-pmic.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+> index 85addfe32a2..b823490d6d5 100644
+> --- a/drivers/button/button-qcom-pmic.c
+> +++ b/drivers/button/button-qcom-pmic.c
+> @@ -195,8 +195,9 @@ static int button_qcom_pmic_bind(struct udevice *parent)
+>  			continue;
+>  		}
+>  
+> +		label = ofnode_get_name(node);
+>  		ret = device_bind_driver_to_node(parent, "qcom_pwrkey",
+> -						 ofnode_get_name(node),
+> +						 label,
+>  						 node, &dev);
+>  		if (ret) {
+>  			printf("Failed to bind %s! %d\n", label, ret);
+> 
+> ---
+> base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+> change-id: 20250723-button-qcom-pmic-882cb5415dd6
+> 
+> Best regards,
 
 -- 
 // Casey (she/her)
