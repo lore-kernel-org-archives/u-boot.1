@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29D7C87FCE
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 19:04:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8E73C87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 19:42:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 140C683987;
-	Fri, 25 Jul 2025 21:04:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F22B839BB;
+	Fri, 25 Jul 2025 21:42:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="anZaCA5j";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UNQvdwC9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DB07839C6; Fri, 25 Jul 2025 21:04:38 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id AAA99839C6; Fri, 25 Jul 2025 21:42:19 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13A57836A3
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 21:04:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E57983980
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 21:42:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-615a256240bso1121131eaf.3
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 12:04:36 -0700 (PDT)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-41b6561d3c5so713162b6e.1
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 12:42:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753470275; x=1754075075; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753472536; x=1754077336; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=HhhzJyjeDTqg05j5hqNOpqsuuPoVgpRf8RFpjAaVVeg=;
- b=anZaCA5j6y45dKSIz9EKv+xkZTLoBsOvza7Fe5XoBE9BD2jHETOd9CkVwfxqIkHV/X
- EUHSi+XvEA9WZ8FwusMwWnPKZl5jxchzUD8Y/7D3XE18BKj8RP75xbJGsKNr5Gk/Y5hL
- JznZEj644Km6PXP98apFsMh6T69b8ditspa8U=
+ bh=lI/cPsmrviJPPwsGex1vu8pDFal0EYvt+pR5sgoacIs=;
+ b=UNQvdwC96QJG8YRtSLA1V4E8Yw5frX1coAXrZO6cY3a6tYopmJw1hTvfYB755C31bO
+ k+aTRhg0EPkCSDPMB9xkyEs/cicdAtGdXkLYP38gBxFJKep3hhsFGtiHwFX/4IsyfmxQ
+ WT5q+Ev4xfCg0YIzPqx3c1d+GT6U0utN3edQs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753470275; x=1754075075;
+ d=1e100.net; s=20230601; t=1753472536; x=1754077336;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HhhzJyjeDTqg05j5hqNOpqsuuPoVgpRf8RFpjAaVVeg=;
- b=sGhrfNAdkKoFmoMc6tl/mFU0mj5fUWvNUjlooXN+cn9VY/+iolNeuV+fKKHMT7KAY5
- esikzLY9L5m8vtV5RXClKr/7slPfZLcEMQzTjSq0ejiynwiuxZzlFzCij6gD8wd1pzZQ
- Npg23eFC4H1mO/SKWV7kzDFm8gTGrz/G0fLAC4eZ6emJksdr3Ux2CD629BkSgtZm3HYH
- loWWi/LJYn3e+U5SgHVHnQWLgwtAGDUjTvHJ2yBqsFYZ01OfLaECHtrD8Bmny26dJIGV
- /N6XlV4cZJ3BndWToFqeBrtYc77bDPi1AHHqLc8VWP93/B3VzBmLk8P81DIWjZtTuNde
- bJaA==
-X-Gm-Message-State: AOJu0Yy3j1qL8izifNPiRSwzmOmhtuFvxwAHJYSusYbGCdm8zs0/hShk
- rx9fdcVhiQ6FShr1I+9B29O2kDeNaBrou2bRZsG4aLvtyqwgxebhHqo4UXCUUFVImAubYWJljRA
- mjjLchlU=
-X-Gm-Gg: ASbGncss0/udMOWLMv6y2boc5yp+uJ2N4rxjMB00ZvVgdPjmoiMhkNYgvksURf0CQYE
- t8mQQRLpZsJCpRaNwy+z6l+AKD6RCMHEMLaYFa3QPEvoqeOp5mR6mslmCz70DKoGGzbJZPU96uF
- QQzNqU4K5HY4c5dsLhuGUiU2yQcPB/1ET4BC6N7XHsmczuqFpj3bVhC8JhQRitv8ZpSt5LRypUW
- JGCWajPA5z/+pepaaKElYcGMiLucsh1hWR8W7m9Yp25zuxAsx7RKSmjNcBVZBMLSUvA+Fwcysxh
- dKlcHyaaNRrlM6q3M3evX21flqXIjtka4IVuhkb5NKMj1ultsR5tZqtDWwUmYXQbmMsnqxhWvpz
- wuRA9kZ8JwaQsWzEO+GpqmEvt+7mQYMuyJrt3yzDW3a+t7RKyfqiAEJaq7BE=
-X-Google-Smtp-Source: AGHT+IGGgcN+vkRxny3/ZxUCygrXMfwS/TOYR6ZvMRyHzZm7jDkuRN+3bAiu1lG/xbtrj0sbHONUMQ==
-X-Received: by 2002:a05:6820:1e85:b0:615:e20a:64cd with SMTP id
- 006d021491bc7-6190ca41113mr1897633eaf.7.1753470274479; 
- Fri, 25 Jul 2025 12:04:34 -0700 (PDT)
+ bh=lI/cPsmrviJPPwsGex1vu8pDFal0EYvt+pR5sgoacIs=;
+ b=s3huTXxOV2Lb366hWtPgVZRkzhbPi1c18fZI7ZMtZAw9JvQgzs76aOqi7lazZawL2c
+ 9usPvHHPtk2ZJjORSZ/SRWkd1LSTqDWSSj6XUZoS2ix6SQwK6RvfM182r+JD43xtvwda
+ rt1zJC1ibADUAN1fKSLaH9Yscjes1GN4TOP44RsuBClw5PeT19uKb4QmZyk/698p+n9W
+ QoCfgc+WQQo2NMOa6EX5EPQP77JmWvwgfXExWShDYsh9FqCM5JQURZGo9ocKyW9CLbgP
+ JfKyBDy78IVpMjH8ODSt+xFpbsXg4u7qyhkUCby93VDYNx5IwQylL1gGyundelzkUSMh
+ nOEg==
+X-Gm-Message-State: AOJu0YwoxF26YK9140yjWBfDJT1LdUOdTBaVz+DL88y+EfCTyb7JVlvW
+ g+cKcKeapsj18MK7qbCeYc+ZXf23VwFlomdmdbRttf+JnApOt0AOt8UXOzSoZYYCEMudtzRHR+K
+ sAIVRq9s=
+X-Gm-Gg: ASbGnctEyHdQG4COh3/DKbxmgpLOzVyAYCONaXn3svcDk8nzZn8cJTTZ7E8Q7+AUJv4
+ El6EAf8TmKfpkw5ehwrLKXT6WWxKrbkOmKsbg4j44XmNnJYU22cQ3zthvJp5GakqFXyMKrLM8Oz
+ y+EMskDFbcYWE8uuWbXUlxQrhL6v0CM6wSbkFSMoSZa4v6H/Oku+d9k47isE3Rq3X7IliUgvowA
+ sXNBhrWYvFThaF2pRFEIsjyDVov5XoTPx9qlIxatk4mYk51ei5nG2c+uQNwZ2cZLVvUyUewCW85
+ A5kW/sgws9DtC0oW3eqCtP8rFNda2Mu9TKMaNLgV82GBI7Z7FqeDgnrJS4o9UDS1Snv+3I553GL
+ gkO0YxnPjjoMdx80hfdQeSa02ixIuR/5RN86wLdJHksUnWiC++U860NX2IE8=
+X-Google-Smtp-Source: AGHT+IHQTrXcEEKM8y5LVdjpJqaKXiIQDigcDuDJNfMp9npAYHvqD6NF+awxC1EzDtEXlTMfHZa3Mw==
+X-Received: by 2002:a05:6808:21a6:b0:409:f8e:727f with SMTP id
+ 5614622812f47-42bb75e3773mr1534434b6e.3.1753472536057; 
+ Fri, 25 Jul 2025 12:42:16 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6191410b759sm78994eaf.30.2025.07.25.12.04.33
+ 006d021491bc7-61913f4cde7sm100555eaf.5.2025.07.25.12.42.15
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 12:04:34 -0700 (PDT)
+ Fri, 25 Jul 2025 12:42:15 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] Docker, CI: Update to latest Ubuntu and Dockerfile
-Date: Fri, 25 Jul 2025 13:04:32 -0600
-Message-ID: <20250725190432.4152488-1-trini@konsulko.com>
+Subject: [PATCH] test: py: test_fit_mkimage_validate: Only run either test on
+ sandbox
+Date: Fri, 25 Jul 2025 13:42:14 -0600
+Message-ID: <20250725194214.4156440-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,55 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Update to Ubuntu "Jammy" 20250714 tag
-- Update to current Dockerfile which brings us QEMU 10.0.2 and newer
-  coreboot and pulls in lz4 via the non-legacy package name.
+Both of these tests are only valid for sandbox (and require dtc) so both
+tests need the pytest annotations.
 
+Fixes 93d09d3bd8ea ("test: fit: add test case for invalid default configuration reference")
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- .azure-pipelines.yml    | 2 +-
- .gitlab-ci.yml          | 2 +-
- tools/docker/Dockerfile | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ test/py/tests/test_fit_mkimage_validate.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index b1de8a6103ac..8209d2b329cb 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -2,7 +2,7 @@ variables:
-   windows_vm: windows-2022
-   ubuntu_vm: ubuntu-24.04
-   macos_vm: macOS-14
--  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20250404-29Apr2025
-+  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025
-   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
-   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
-   # since our $(ci_runner_image) user is not root.
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index dd628fb1cfa7..85401d3e09b1 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -20,7 +20,7 @@ workflow:
+diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests/test_fit_mkimage_validate.py
+index ef974c8c7622..170b2a8cbbb6 100644
+--- a/test/py/tests/test_fit_mkimage_validate.py
++++ b/test/py/tests/test_fit_mkimage_validate.py
+@@ -57,6 +57,8 @@ def test_fit_invalid_image_reference(ubman):
+     assert result.returncode != 0, "mkimage should fail due to missing image reference"
+     assert "references undefined image 'notexist'" in result.stderr
  
- # Grab our configured image.  The source for this is found
- # in the u-boot tree at tools/docker/Dockerfile
--image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20250404-29Apr2025
-+image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025
- 
- # We run some tests in different order, to catch some failures quicker.
- stages:
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index a83c80db496c..5b4c75f84005 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -2,7 +2,7 @@
- # This Dockerfile is used to build an image containing basic stuff to be used
- # to build U-Boot and run our test suites.
- 
--FROM ubuntu:jammy-20250404
-+FROM ubuntu:jammy-20250714
- LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
- LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.requiredtool('dtc')
+ def test_fit_invalid_default_config(ubman):
+     """Test that mkimage fails when default config is missing"""
  
 -- 
 2.43.0
