@@ -4,116 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D57C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7497CC87FCA
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09315839B9;
-	Fri, 25 Jul 2025 17:23:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9DC95839B5;
+	Fri, 25 Jul 2025 17:31:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tyI9mvQv";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gEHmFJLu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D383A839BB; Fri, 25 Jul 2025 17:23:53 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 80833839BB; Fri, 25 Jul 2025 17:31:06 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F31F3839B5
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:23:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23899801DD
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:31:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1753457021; x=1754061821; i=xypron.glpk@gmx.de;
- bh=42DtQigjfR6xBYB9HOH7vO95PnU6BoGq1YlXQ7Qf16A=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=tyI9mvQv78gYC1PBpMgsw89gbgqRfVwGIpmfRHNgz5wi4E6QhavEKWwfXCl9v+re
- CugF+8lNaoibFlzBfynqLWu8erZgXyBuB93/EFBek3okEYjf/o7Bcqeo4w2dK8kSj
- L2sX1EGPSimTkCLZL5PrBiDlbeV1vHRW3Ccdy10LkFcjADBaZ/Xm3MX5ydD26+4OD
- YyZAlaH2pUegZ4eXVbmMOKapUZQZiyR59vuFoClqYf78ZwUIQTg8IUE45XUBE5wt5
- h7fC+D7+QvYGclGcJ5TeCrHPWblFwdQReH8/l/6CkkfJ5jrI4wbRWabma9BPfU0f4
- bEZaA++oIX8jXvsfWA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MDQic-1uoeC23uDu-00GTLZ; Fri, 25
- Jul 2025 17:23:41 +0200
-Message-ID: <e91ce58d-405a-4161-85b6-36afb63aa1fc@gmx.de>
-Date: Fri, 25 Jul 2025 17:23:38 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KUOD9RmeR42WDbr/LUaIWvLGFMynbFIA8JUzaMEbv/xeFwZf9brl60duapUqpuSUKDXs3N4Rmg9OY4VtA1PGWKso1yZWYP/yULTaIo7QT8IraWqC4PALLybmD/CEQmErGyKNLiNN6w6ybdaJM6neB1MhCaZ1IPbxzRyZRUulclNaBu5FZ7ZHJ7CUZ5PkgaI0eW+SIABjaA7J8g23pvEtZHfkKgZWLxGuMJeOmjlYIrkQTAVRm42Zt/2Bag9fVTYtEGHmRLyZ0jaoK4woqo8CY4+E1HcwRaQgY57dxqkvLvPftaHRBDPmMrY7bTeVzYadlWNoutu3HT4WRErc9IC4yQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A+F1Zq2OI482ZDfHzCulbMX9g7KFLVFPhCl5Frk/GP4=;
+ b=srTTVwHFR+OvRPgHqdXO++eZ5xZb1A+u5rODLRICyzLXBfE1MS9I465k5j1fvmQ16P5wAUs/tlU8Zm6KBEoU2Bz7RgOQgSIhkOPajPiMoFQk+kWc9cmxtOitjVguzWvY3ZelODc+Q6u0xNf5R8X3W5JT4Vyxq1DzBQSO15Irrfb2K2LX7e729uV1Ih7B77z/xTTdKblz98chKOi5IaBwbdlQOAq6/zr6TmKoNLiiSgHNA7ILAxuwCZ5cle/oDCKNK/W6gCpvqcsKWMlkw399s4yFGa0Y+0ApC+pwtHYKW25i7A0Q7Ab3wh2zlqKBWQAcgVpukjQA/033vICtg6zEVw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A+F1Zq2OI482ZDfHzCulbMX9g7KFLVFPhCl5Frk/GP4=;
+ b=gEHmFJLu8FuzTAtchYP3Ux4+gaioJN0Z9oB91RBkx5dNE3oC8EkdLOA0IN0oMQa1XoRHYUlsLcNB6k09HYHeVtc41LosodfvAUkdwRQ0uidlbkowEPJJUDrhJOQ1gol9bQQ5BWSZ2T5448lGvjKVUYKu3urfG+Ln5FZOcYJNACk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by VI1PR04MB6927.eurprd04.prod.outlook.com (2603:10a6:803:139::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.23; Fri, 25 Jul
+ 2025 15:31:00 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.8964.023; Fri, 25 Jul 2025
+ 15:31:00 +0000
+Message-ID: <ad876397-a18f-42b8-ab84-47282b7a4f48@cherry.de>
+Date: Fri, 25 Jul 2025 17:30:59 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] arm64: stack backtraces
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250725-b4-arm64-backtrace-symbols-v2-0-230a9665085b@linaro.org>
+Subject: Re: [PATCH] pylibfdt: setup.py: Drop license_files
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>
+References: <20250725151821.2067853-1-trini@konsulko.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250725-b4-arm64-backtrace-symbols-v2-0-230a9665085b@linaro.org>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250725151821.2067853-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:uh6BgdDyJtxX19PqKEEhM/dwNo9unH8wigoKZT9VEBp1oBVRnf/
- /AtdunbmsRmaAwrWCpcBoo/y1zly+MuJjPPmscrZB+IZV5uXadJNGzHr92T4YRc3wwi6HP+
- 6bfaWxNwON8ujsCN3mA6sraWyj2kQAZr46L/Mkpi9WW5sgemGchtZ3tTr+iN1Lt9IjXkN6Y
- BvKVBdyAYDWYUqEXdHIHA==
-UI-OutboundReport: notjunk:1;M01:P0:0b0SSqLLr1U=;8cYtNvEG3Bm7bDk8GSbCjXZBd5n
- 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
- rA+/ov3MUoe8ojsSgGO1H8WrKzoEhsLk=
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P195CA0086.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:59::39) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI1PR04MB6927:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1d010062-81a4-49c5-1d55-08ddcb9041dd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?V0YrTzkwaDZ6UndLelRFS0JjUVl0bmIrWTdFTzdsdkwyZHNxblUxTUVKb21p?=
+ =?utf-8?B?Q0gzTzk3ZkhSVjhpVms4b2kybUhydmF5Uk1iV3lScDZoOWdNYUdxbXV0ejZq?=
+ =?utf-8?B?QUtINWNwUTVsT3NGaHZIdk4ycnp4QjBIMG9SNlB5a0lyaTZoU0k5eUJ4bzF6?=
+ =?utf-8?B?NVRPNVN1d2NVVDR0U00xU0IzR1VVR2VYcWFqVis0WHluaGJ6WjRmSUErMS96?=
+ =?utf-8?B?TFNrQXJnS2dlM2srUXBVdUZEV2RnVit3Q2tNa0krdXdwdEhhcGI5WTJoTnRX?=
+ =?utf-8?B?Zjhmb2lxa2hhbmFqTFZGOXFNaVhCSXd1STJraW51Z01UOWozNEY5eTUycWhR?=
+ =?utf-8?B?WGJ4YzVRMmtFcmRDTTFlRFpBcGdhOEw0b1FWV3cyR01kRHpwaStxd2xWL0NB?=
+ =?utf-8?B?b1VRekZxWElab0ErUkhYdVUrOFJmNWpDb3BwRDV6d0dJNW5PRnFVSHI0K0Qy?=
+ =?utf-8?B?RUpuZ2QwWTNhMS92cXZsOGJ3VEY0UGgzTFNhVHE5dDl4MkVha0NsUElQclgz?=
+ =?utf-8?B?UndjVTNBOFJlYW12OE9pS2g0SkowMDZnNTRtZ2d4T3NPV3QyeG84bGtwZGFq?=
+ =?utf-8?B?Rm5JMW50Z1ZNaUdVZG9hQnFQYzZvcktQT2JSWmhWanhWVVJ0MnFhUmMvMzg3?=
+ =?utf-8?B?ekZXekhWLzRiekZCS0lWWlVTeWZEdDM1UXoweVQwUjEzdHRNUkwzUmx5RlRz?=
+ =?utf-8?B?U3haVlEyRUtFZElHdWxoM1N4enNwMFF4d3FDbTNITVBrQ0tpeExHQTNZaGEv?=
+ =?utf-8?B?NUhHdkx3VjI4RExmQzIrUXcydGVUV2Z2MGdZRVZVZ3kreDBaTGdqbzZDSmhQ?=
+ =?utf-8?B?VFRkQ1kyNUtWaERuMVZ2NCtSWXhZWkE2eFJQVUZtM280VEdJeGVocEJxM3NF?=
+ =?utf-8?B?elhWZWE1cUdJVWEzTXRiNDB1NFAwb1JYUW5mWGcxR1BLWFRucjVkaVg0YU5j?=
+ =?utf-8?B?QmJ0OU42d1FrT2xzaDFJaVR4amx2T3J5Q0pyYXVqdEVkb0NtcndhSG9uTlRH?=
+ =?utf-8?B?Ukhjbmh0T0ZWL1dtQ1NEYzZkNjJsWlJzcUZXdEpSbmx2TktBeUJkT09DU0VE?=
+ =?utf-8?B?NFBEM1Y5Wkc0bUd2aDh4UlBNUS8rWTZLalpodmpwUlBHSzg3QXMwRFhpUzZT?=
+ =?utf-8?B?dmp2MXAwN0NxK2ZSOGJnU1QreEEvL0FUaTF0RlIxRm9xYVpKOTVqQ2VsSldt?=
+ =?utf-8?B?WDQzVlFSS3dFcG9sQVdHSFRsaUJCaGFlMzJmLzRXZmlrdFdFOURMWmtKL00y?=
+ =?utf-8?B?TnpranVDS2p3Ky80UzQ1WDQ0Y1A3aDhLWE5GZzBUZ0lFaGlMQTVxTTBCcGVm?=
+ =?utf-8?B?cnhpZzlHT3JwRVpqb2RKTjYxeHF5ODFyTjVSMm1VSDdiT3pSS29vWXA2NWRl?=
+ =?utf-8?B?MVZnMDE1ZEtjcXN6UkNaajFKNEdkQkM2RmJEMEFEV0s2UWlucVZoZzh1ZjZh?=
+ =?utf-8?B?N3czZS9PSmsybWNnQmZxWHpBdXhXbHNrdmEyNVRJSDZiUmVLUWxDUHJzZ3A2?=
+ =?utf-8?B?OFoweG8zSzREcmJjeWl1ZkpRbFMvYkYvUTdFbFJiVVJ3WkgzZzgwejNaUzY5?=
+ =?utf-8?B?QU1YREVxckMvZ2JuaXhacW5mRmRyY2NYZzBqbGtUVUtyaStPT0dLRDVCN1Nm?=
+ =?utf-8?B?TnhiNjFxRnVMRE93N0Uxc3VtdG9GbllRUWhCcUFkT3lOOU1ia0Fqb3ljMkJI?=
+ =?utf-8?B?aERsbEkzUEZIMkFDZmxCajB3OVFEQlZncHB4NE5Rdk9PbjF2UXNWeU9JRHVu?=
+ =?utf-8?B?eUg2U0ozaGhEelNSeGJpaUFmdHFia2FVV0hSeE12YS9ZSGNKWUR4UnI3YXN5?=
+ =?utf-8?Q?sw4eS3FlcV2pWaC6EAKlIyAkFQ1/K9qP+0kao=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OC9ncWZiZHVROHZmS21lNUNzN3lyT3pvckpkNGh3MFJyWWw4TWdCbnU1WWlR?=
+ =?utf-8?B?VVV0ZkkzWkJNL2dJSlBycjJjMlVYSElUZFhZemEzN2h3dnVpUmE0Um9WcEg3?=
+ =?utf-8?B?cmJ4SXIvWmxvaGdYb2RzeGhOOUhEZCsxdUt4SHVQazg5V1BLcTZvOEhkVThP?=
+ =?utf-8?B?WG9nR0FVOS9tWTNza08rR2dVb2xhRmM2bFhkWTdJNm4wVFR4NVhSNTRJdUFi?=
+ =?utf-8?B?U3cvWkxPa21BdXV5QlhJVElobUlaaDRObEJ0NHdSZ1JXTllJL05OK01STWla?=
+ =?utf-8?B?VzhqVTVPUmh5QW5ZMElsQ0ROeTRELzg3TE9HQXhMSkM1WlJyZWdScUhMcVFG?=
+ =?utf-8?B?a2lZMlJDOEt6VEl3SnpKUlhjZ0xKYjB3S3o2eTNhaGNPcncyUFNUaEpLUDBh?=
+ =?utf-8?B?MzQxbnRMZDFoenZZeHNxVkJxMFBWSUNhSldmeTRVaXdad3gxQWtveFBVcmdK?=
+ =?utf-8?B?N1JNZ1YvTWJ6dWZLL1BJMVU5WUlWMFRGV1l2MjFrem52VENNcEZXZm5mektZ?=
+ =?utf-8?B?clJPK1BlenVlUFNvNHJZTXEwUTR2ZW40SFlJUG9RcFdIVEdHb2VZZWxCSCtt?=
+ =?utf-8?B?L1VrNlB1a2xuVTBSVG16bllPT0pmckpoRUw4c2gxOGRhVHVWVGpOcjVqNVFS?=
+ =?utf-8?B?Mm0rVmcxdDRCcUs3VS9LbFg4N2poU0VjbXhKb0ZzMzg4dUQzbFpuNnlXQlJa?=
+ =?utf-8?B?R2lZT25ERGYwYXZUeXQ3K2pIbXlwOGpKblE3eGd1MHp3RHBvd0xkYWJNekw1?=
+ =?utf-8?B?RTExZXlmYW5rUnBiWUhJS2o3aUh6d3FUY1R0TGFoNTB3WnJDazRZY0ZQaVVM?=
+ =?utf-8?B?NG9neWVEbm82R2RVeHgzQXJsYlgyc2RCUXFEMThLeXdCZDV3ZlllVFVncTY4?=
+ =?utf-8?B?bUpnQ3k0ZVpWdlpSNW5wNXdqYkJoTXpUa2NsN2YrdjBoa2pFUm9jdjg4OEtt?=
+ =?utf-8?B?VmQ3cUNvWmZEODBTaXYzZnJjQklWU3lPUnlqWGYxRHNmMjN0R0xmNmxMRHJw?=
+ =?utf-8?B?OEZZbEdLS2swODZDNnRFU2dJUytzUDVZaFRrVnlSdFE0RE1GczlsYVBUcEI0?=
+ =?utf-8?B?RGM2TjlpRXc1c0JSNVlMN0FMNGNGc3JOTm1kVlp5dndEdlJGTDh3T2xDSitW?=
+ =?utf-8?B?VHZXclBvY0c2RHZRS3ljN21pK3NZbU5EV2QvUk5IUUlYYmZLbkcveEdGWnoy?=
+ =?utf-8?B?Y0QzZjE3U09QZmVzMmh4T29sZzZwSm01V0VSTUdCc0hmTDJ4ZFZ3dGtCbjIy?=
+ =?utf-8?B?ZzdwM01XY1pYQ1A3QjZhbWkvRFJrajlma3F4K05rN3lGUUxibE5UK1BmSWQ3?=
+ =?utf-8?B?S2FtUTY5SFVwNzhQeVhmZ2N4KzRxcDJjb0JwYVFDOVNQeUk5R2Y0MksxaHAy?=
+ =?utf-8?B?UEJ1NzVyRnBvbkVNeEovOHRTTjFtQVN1blpPZmNEMEpOK0RlTkZjYms1TXh0?=
+ =?utf-8?B?aUlIQ2FzcTR2MXF3MjBLc1BUYTE2OEZNOHVKS21sUUJINUV5NWJMdTU5SE5n?=
+ =?utf-8?B?dGZiemFJQ1VoVHJwelJNbWVXL2Z4Z0htdWRNVkVCOHdxV0hCMlRpbldIVmJT?=
+ =?utf-8?B?U3FTVXdvQVdBVjZIQWZmb0U3SDNyenBLdWhOVFRPdHFudzRVSUVJUStjNXBF?=
+ =?utf-8?B?MmFab0JKYTJtZmIvVWMwd2ZkUnI2SmdjbVllV2lRWjN3a0Fwcmxia0pvdG9i?=
+ =?utf-8?B?YnpCcVZrWmNqWU9ZREJRc0J6TXFuRTJCQ1gwZjl3Yi9aSGsrK3YvdDVCeXp3?=
+ =?utf-8?B?cXdpMDFkekM3UkFkcGJsK3BXMDZYNXAwVSsvSHp2V09UNk1DS2F0Z0tLLzRO?=
+ =?utf-8?B?NVM4NWVGSmRQSWd2cklmWWxjVFNnc1psdmNpS1JjTERZMkN4UFY1alJVdDdH?=
+ =?utf-8?B?SEpzUVk5V0dWTkpuUFVUdzl1cHNvMXgwU3NnL1UrOWN4VFBqUGJVMmRZNzdj?=
+ =?utf-8?B?U29Hdk5sUlhYYjFEenpvd0NacklDcUVRSy9JTTRJM3hidUpST3IwWlkrVmNw?=
+ =?utf-8?B?ZlZNTm5pV0dyV1pSTVIxRXpuNjc4ZTVzY0dKR0FLWjJGMTdYem5nY0ptV0NB?=
+ =?utf-8?B?bXUxOEFaNWZ1RGZ3NkhMT3YwQ3FTaGhCR2RJY3JiRnZiMU4xLzJqWUpMSHE0?=
+ =?utf-8?B?NjBzdDJGUnpRTDF3dFc0T092WnRkNnpoZnlXRE1PemNOdmN0ZTJNbmczTmo5?=
+ =?utf-8?B?TUE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1d010062-81a4-49c5-1d55-08ddcb9041dd
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2025 15:31:00.0188 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Em/RvJGRF1KAUmGynF0BAt8yqr03z8BPbvd1Dr42gkyrFgk8GTK/h8UClmSBNb+skr9Bis7p+lutdiWA1z5G3qcj5ZuXG9IxuWbAM7dOU34=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6927
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,181 +172,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.07.25 14:57, Casey Connolly wrote:
-> Implement support for printing stack backtraces on ARM64, make
-> framepointer support configurable by the build system with
-> CONFIG_FRAMEPOINTER and teach U-Boot to walk the framepointers and
-> unwind the stack when an exception occurs. Also show all 64 bits of the
-> exception syndrom register (ESR).
->=20
-> Additionally, a new global unwind_stack() function is added, this can
-> be called from anywhere to print a backtrace which can be useful when
-> debugging certain problems.
->=20
-> In the future, stack unwinding with symbol support could be extended
-> to for example only emit log messages when a function is called in a
-> specific code path. This would allow for less noise when debugging hot
-> paths under certain conditions, but this feature is left as future work.
->=20
-> =3D=3D=3D Handling relocation =3D=3D=3D
->=20
-> Since U-Boot relocates itself at runtime, and can be built to be
-> position independent in the first place (effectively "relocating" itself
-> when it first starts too), we can't really rely on gd->reloc_off.
->=20
-> The approach taken here is to subtract CONFIG_TEXT_BASE from the address
-> of each symbol in the lookup table (while it's being generated), then
-> when decoding we just subtract the address of the _start label since it
-> is always correct pre and post relocation. This allows us to avoid all
-> the awkward maths since the symbols are always relative to 0x0 in the
-> lookup table.
->=20
-> Example output:
->=20
-> "Synchronous Abort" handler, esr 0x0000000096000004, far 0xfffffffffffff
-> elr: 000000009fc6f768 lr : 000000009fc6f710 (reloc)
-> elr: 00000001ffe49768 lr : 00000001ffe49710
-> x0 : 000fffffffffffff x1 : 0000000000000009
-> x2 : 00000001efdbadd0 x3 : 0000000000000000
-> x4 : 00000001efd99a28 x5 : 00000001ffec7676
-> x6 : 00000001efdbac70 x7 : 0000000000000000
-> x8 : 0000000000000002 x9 : 0000000000000034
-> x10: 000000000000000d x11: 0000000000000006
-> x12: 0000000000001000 x13: 00000000c3400000
-> x14: 00000000fffffff8 x15: 00000001efd99837
-> x16: 00000001ffe146b8 x17: 0000000000000000
-> x18: 00000001efdbac70 x19: 000000000a6f8800
-> x20: 00000001efe06fd0 x21: 0000000000000001
-> x22: 00000001ffef5b80 x23: 00000001ffee08c0
-> x24: 0000000000000002 x25: 0000000000000000
-> x26: 0000000000000000 x27: 0000000000000000
-> x28: 00000001efe512c0 x29: 00000001efd99c80
->=20
-> Code: 2a010000 b9001260 d5033fbf 92fffe00 (39400001)
->=20
-> CONFIG_TEXT_BASE   : 0x9fc00000
-> Relocated base addr: 0x1ffdda000
-> Backtrace:
-> 	<0x000001ffe496d0> dwc3_qcom_glue_configure+0x40
-> 	<0x000001ffe494a4> dwc3_glue_probe+0x10c
-> 	<0x000001ffe1757c> device_probe+0x254
-> 	<0x000001ffe1757c> device_probe+0x114
-> 	<0x000001ffe4ff70> usb_init+0x158
-> 	<0x000001ffe00fe4> do_usb_start+0xc
-> 	<0x000001ffe01018> do_usb+0x78
-> 	<0x000001ffe0dec4> cmd_process+0x140
-> 	<0x000001ffe04e24> run_list_real+0x6f0
-> 	<0x000001ffe05554> parse_stream_outer+0x148
-> 	<0x000001ffe04d30> parse_string_outer+0x90
-> 	<0x000001ffe0d148> run_command_list+0x50
-> 	<0x000001ffe02be0> main_loop+0x28
-> 	<0x000001ffe065c0> board_init_r+0x3c8
-> 	<0x000001ffddd00c> relocation_return+0x4
->=20
-> Resetting CPU ...
+Hi Tom,
 
-Thank you Casey for picking this up.
+On 7/25/25 5:18 PM, Tom Rini wrote:
+> On more recent versions of setuptools the warning about not being able
+> to find the files specified in license_files has re-appeared. This is
+> because as best I can tell, it can't and won't look in $(srctree) but
+> rather only subdirectories of scripts/dtc/pylibfdt. Since we already
+> provide both SPDX tags and a license field with the SPDX contents, let
+> us just drop license_files as it's not mandatory.
+> 
 
-It working fine but there are some points to think about:
+IANAL but I believe we need to ship the file, that's part of the license 
+requirements for both GPL-2.0-or-later and BSD-2-Clause.
 
-It would make sense to show both the relocated and the non-relocated=20
-addresses like we do for elr and lr. The value after subtracting the=20
-relocation address is what I need when looking at the objdump.
+Can you try with a relative path, like ../../../ in front of Licenses?
 
-The format of addresses with and without symbols does not match:
+If not enough, it's possible it's because it cannot read in parent 
+directories? What if we have a symlink, does it copy the symlink or the 
+target of the symlink?
 
-Backtrace:
-         <0x0000007f6ba868> cmd_process+0x130
-         <0x0000007f6af900> run_list_real+0x718
-         <0x0000007f6b0058> parse_stream_outer+0x14c
-         <0x0000007f6b06b4> parse_file_outer+0x34
-         <0x0000007f6b9dfc> cli_loop+0x18
-         <0x0000007f6ad6b0> main_loop+0x50
-         <0x0000007f6b0f94> board_init_r+0x378
-         <0x0000007f68400c> relocation_return+0x4
+Reading 
+https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html, the 
+license_files should then be automatically included in the sdist 
+tarball, so the presence of the files in it shouldn't be an issue here.
 
-Backtrace:
-         (0x0000007f6d394c)
-         (0x0000007f6c8fcc)
-         (0x0000007f6c9158)
-         (0x0000007f6c969c)
-         (0x0000007f6d2dc8)
-         (0x0000007f6c66b4)
-         (0x0000007f6ca2c0)
-         (0x0000007f69d010)
-
-I don't think parentheses are needed. But if we use them they should=20
-look the same for the same content.
-
-I guess symbol lookup could be used in other places in future. I don't=20
-see a necessity to let it depend on frame-pointers. Instead=20
-frame-pointers should imply symbol-lookup. 'imply' should also work on=20
-RISC-V where symbol-lookup is still missing.
-
-There should be at least one defconfig for 32-bit and one defconfig for=20
-64-bit that builds with both.
-
-I am missing the function name and offset for the function where the=20
-exception actually occurred. Could we treat the value of elr like a=20
-framepointer and add it as first line?
-
-Best regards
-
-Heinrich
-
->=20
-> ---
-> Changes in v2:
-> - Include calling function in backtrace (current LR)
-> - Implement support for runtime symbol lookup
-> - Use symbol lookup to print more informative backtraces when available
-> - Adjust backtrace format and print U-Boot base address
-> - Link to v1: https://lore.kernel.org/u-boot/20250703051951.43372-1-hein=
-rich.schuchardt@canonical.com
->=20
-> To: Tom Rini <trini@konsulko.com>
-> To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Ben Dooks <ben.dooks@codethink.co.uk>
-> Cc: Rick Chen <rick@andestech.com>
-> Cc: Leo <ycliang@andestech.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: u-boot@lists.denx.de
->=20
-> ---
-> Casey Connolly (3):
->        drop unused kallsyms support
->        add support for symbol lookups
->        arm64: implement printing backtraces with symbols
->=20
-> Heinrich Schuchardt (4):
->        cmd/exception: missing include string.h
->        Kconfig: make CONFIG_FRAMEPOINTER available on arm64
->        arm64: initialize the frame pointer register
->        arm64: simplify interrupt code
->=20
->   Kconfig                      |  25 ++
->   Makefile                     |  24 +-
->   arch/arm/Makefile            |   9 +-
->   arch/arm/lib/crt0_64.S       |   1 +
->   arch/arm/lib/interrupts_64.c | 133 ++++++---
->   arch/riscv/Kconfig           |  21 --
->   common/Makefile              |   1 -
->   common/kallsyms.c            |  42 ---
->   common/system_map.c          |   8 -
->   include/exception.h          |   1 +
->   include/symbols.h            |  22 ++
->   lib/Kconfig                  |   9 +
->   lib/symbols.c                | 141 ++++++++++
->   tools/Makefile               |   3 +
->   tools/symbols.c              | 646 +++++++++++++++++++++++++++++++++++=
-++++++++
->   15 files changed, 965 insertions(+), 121 deletions(-)
-> ---
-> base-commit: f2f451d9d6d3756458d5037e3e5135e5211582d7
->=20
-> // Caleb (they/them)
->=20
->=20
-
+Cheers,
+Quentin
