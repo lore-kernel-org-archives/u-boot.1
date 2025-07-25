@@ -4,120 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3202C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 14:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F58BC87FCE
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 14:31:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54CB0839AD;
-	Fri, 25 Jul 2025 16:20:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 68D53839AF;
+	Fri, 25 Jul 2025 16:31:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PqrLtT97";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qewvWsxR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7D21839AF; Fri, 25 Jul 2025 16:20:24 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 072C9839B5; Fri, 25 Jul 2025 16:31:14 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A13E0839A1
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 16:20:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C15F839A1
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 16:31:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1753453216; x=1754058016; i=xypron.glpk@gmx.de;
- bh=R/HwtDd/7i/6G9NXKhlVVfsuSPeZPnx+KPLbrIphKQE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:Cc:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=PqrLtT97lWiCd/8a2uhtJlUs/IQEADt2vw/5bIz6Wl1kZi6zmU7/B64P14Effj4X
- tKWcbIPxymdyQBwdnkrZNP9RISYm36Jqb467aXdTdkaYFF/TVmwqwRGBJ26dfCR03
- hCpJMlLHYxeH333fFRiYkw5Ki6EfuZ31mCJ9jtorGUOfrfWfUmvaU12xFKnAQ0c+2
- JH9kJ8+wkrkIAVWftncjopt7J+MMXYA2RjnodbKl78JjYNfnzsxpsCC1f+hkbX7Z0
- R/K/wp9B4x5pwXB9GdNL5yzEaruZdrW8QC/kW9sO/3//GAvFP43kjq6D8ERkxg7Fd
- lRjOnrEFQbHdWCM8yA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1ML9yc-1uwQSY19Xe-00QGl1; Fri, 25
- Jul 2025 16:20:16 +0200
-Message-ID: <1b8c2fcf-5ca2-4e76-96dd-35a8e37f9b4a@gmx.de>
-Date: Fri, 25 Jul 2025 16:20:15 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-3005517e7d0so594894fac.0
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 07:31:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753453870; x=1754058670; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PWPtAptNIEolGbZm1uezY9j81zXhj7JDBJ7PK610mxA=;
+ b=qewvWsxRvde2ywaiAM7MB4JXAMHSOjxmaPV2SqPWwytgCy352BSLCvrjXq4rKLmpVR
+ 3wXo5tMHf7KGgqveOB2X2CQWWBRv5+A5QBTyPdxcHAPA9kiSyR3majil2H86M2IC6sOs
+ dHxA04be4tPeIFC8VA9UW4Tqedji+oCGpJ7Rg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753453870; x=1754058670;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PWPtAptNIEolGbZm1uezY9j81zXhj7JDBJ7PK610mxA=;
+ b=o9d0m9AQf9tQ1ByEmBBewywH5+/HaW2Tgjw0oskonZgEt1sSiYP5NxKge5Zxuev1Nv
+ 0CQPGTgKxZ24TXWgTNdy2KLbXQ+BRNXikrq8RJ/AoY7c5Nj3Q99d3445bHyVvlTJifJA
+ K2JKkL0xF5DMkGddBFn3KXdh4nqcLqZVUNvdVkqkqSXBSHw1taICmufExOF6ToDCejqz
+ n3g0D9KEjQ/pX78r9TQGoGOP+BOxt2OLUpGW1x5yayoGHg2bDScskN1mNvEq/dXJ3kNK
+ WY8llLgNEyudbKTBT/Ehmk+AwW7dMzhtRxkCR6pAj43IdSERWGfO77KZ+WG+zifr29NA
+ 2Dag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWYaj+efmfweXKI92542TYkh+0N1rtP9GJUPjLHMEyKTdLUPKIKLjLwV9d0HD+liPK2YgM0RyI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyUFLf7xwhIiNMaQTiCqoG38eeR1NfHhchmuIiC4GFqlq+6ec6O
+ PS+q7nI/iMObuBMOKWGe3tuyaLmpRZ0Brt61t8aBFrAoK73VD1hZ8hom566B+OUoCCU=
+X-Gm-Gg: ASbGncsnN/+0TuTRss2VY7jQCoxLM6OKH7wgmND010a7BR562pQ8Q/MIm0q3adV67p1
+ eY/OgLo36DMzTXQptv+f1+PPb+8Q1I6TtljzBCp+v3+mwyrQvUc1G26wi08YX6KoBO8BccdqVm1
+ ALoX65sQ+bgqMOTKTj/JRoEtcUMD2IDx8lWcaxMR/gN1ZbFzdW/We9ZB0fpEeTcsJyMHCJBtqGW
+ 3U683sKRbxZqebLxnJnAKPA7e8YT0DLWvkjKGc80mU7f+U02IehO/XFoTBxKqGoxG3qPd4E43Hv
+ poQOwsn1MzwR0pQrPTn41dGxXim/C/xXPhtHTBlk6SoBl747Ii5r8BICIQhTEa4QcGSOSXtmdPM
+ rVvCEt7usRp7TNRHlpwNtbCp+0m5GgM57FvpnJ+6YjPp6jP7AO08M9iA1
+X-Google-Smtp-Source: AGHT+IEQU7fUCda2SnbPNZBK3xdBIUUJSj/E4L2g3jdKQcZA2cq8uJMs6gWZRWtMUpnpJ0+HKhLMQg==
+X-Received: by 2002:a05:6870:b41b:b0:2ff:a87d:5c71 with SMTP id
+ 586e51a60fabf-3070209d4dfmr1309634fac.33.1753453870026; 
+ Fri, 25 Jul 2025 07:31:10 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-306e1f7b0e7sm1092578fac.40.2025.07.25.07.31.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Jul 2025 07:31:09 -0700 (PDT)
+Date: Fri, 25 Jul 2025 08:31:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, git@xilinx.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] exception: Add missing string.h
+Message-ID: <20250725143107.GE1807455@bill-the-cat>
+References: <e9b3fd74e233ea783e64fe1d1c3de5d4f3c6610c.1753447310.git.michal.simek@amd.com>
+ <a745fa32-44cc-4671-811f-c9eae8a092e7@gmx.de>
+ <7aaba571-eb98-4e54-a11e-2cd05a1cc035@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] capsule_update: fix partition match to exclude
- uefisecapps
-To: Casey Connolly <casey.connolly@linaro.org>
-References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
- <20250724090009.569341-3-balaji.selvanathan@oss.qualcomm.com>
- <786a2fca-d137-45ff-91d4-6f9e8cf95f75@linaro.org>
-Content-Language: en-US
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- ilias.apalodimas@linaro.org, adrianox@gmail.com, moritzf@google.com,
- sjg@chromium.org, maks.mishinfz@gmail.com, javierm@redhat.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <786a2fca-d137-45ff-91d4-6f9e8cf95f75@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:JYXKILOOLrasBaCtVB+By3bz8CqdFsPfivVOSpdZBgnIJwNu8x9
- xpGqSX/KL88TQky0aQiJ23oHjhJpW1599uqLwsES+MmPybYu0jl3XfnJByOiVh4bRwNEQhz
- cLBL8DgFXlpD6Be+i5AdSymCXkRW67Iqb5mCmTQBaTHQX5R74PMdqO7/CsWWOuJyqzgGA1R
- oeIQ9rHZB4fVle10iv3HQ==
-UI-OutboundReport: notjunk:1;M01:P0:8uxPVXGWkSY=;snRoY9whEGNVIDTLx6OGt9rcuzf
- 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
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="t9m/Z739LTj52h48"
+Content-Disposition: inline
+In-Reply-To: <7aaba571-eb98-4e54-a11e-2cd05a1cc035@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,60 +100,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.07.25 15:11, Casey Connolly wrote:
-> Hi Balaji,
+
+--t9m/Z739LTj52h48
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Jul 25, 2025 at 03:29:27PM +0200, Michal Simek wrote:
 >=20
-> On 24/07/2025 11:00, Balaji Selvanathan wrote:
->> - Update partition name match to use "uefi_" instead of "uefi".
->> - Prevents incorrect matches with partitions like uefisecapps_a/b.
->> - Ensures only uefi_a and uefi_b partitions are considered valid.
->> - Fixes capsule update logic when identifying target partitions.
->> - Avoids flashing to unintended secure apps partitions.
 >=20
-> Please rewrite this in sentences rather than bullet points, this should
-> only take a sentence or two to explain.
+> On 7/25/25 14:46, Heinrich Schuchardt wrote:
+> > On 25.07.25 14:41, Michal Simek wrote:
+> > > The commit 1e50f7457fca ("include/command.h: Drop <env.h>") removed e=
+nv.h
+> > > which also included string.h which generate compilation error.
+> > > But because none is enabling CMD_EXCEPTION it by default it hasn't be=
+en
+> > > spot.
+> > >=20
+> > > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > > ---
+> > >=20
+> > > =A0=A0 CC=A0=A0=A0=A0=A0 drivers/mtd/mtd-uclass.o
+> > > In file included from cmd/riscv/exception.c:91:
+> > > include/exception.h: In function 'exception_complete':
+> > > include/exception.h:41:23: error: implicit declaration of function
+> > > 'strlen' [- Wimplicit-function-declaration]
+> > > =A0=A0=A0 41 |=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 len =
+=3D strlen(argv[1]);
+> > > =A0=A0=A0=A0=A0=A0 |=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0 ^~~~~~
+> > > include/exception.h:1:1: note: 'strlen' is defined in header
+> > > '<string.h>'; this is probably fixable by adding '#include
+> > > <string.h>'
+> > > =A0=A0 +++ |+#include <string.h>
+> > > =A0=A0=A0=A0 1 | /* SPDX-License-Identifier: GPL-2.0+ */
+> > > include/exception.h:49:22: error: implicit declaration of function
+> > > 'strncmp' [-Wimplicit-function-declaration]
+> > > =A0=A0=A0 49 |=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (!s=
+trncmp(argv[1], cmdtp->name, len))
+> > > =A0=A0=A0=A0=A0=A0 |=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0 ^~~~~~~
+> > > include/exception.h:49:22: note: 'strncmp' is defined in header
+> > > '<string.h>'; this is probably fixable by adding '#include
+> > > <string.h>'
+> > > make[2]: *** [scripts/Makefile.build:297: cmd/riscv/exception.o] Erro=
+r 1
+> > > make[2]: *** Waiting for unfinished jobs....
+> > > =A0=A0 CC=A0=A0=A0=A0=A0 drivers/serial/serial-uclass.o
+> > >=20
+> > > ---
+> > > =A0 include/exception.h | 1 +
+> > > =A0 1 file changed, 1 insertion(+)
+> > >=20
+> > > diff --git a/include/exception.h b/include/exception.h
+> > > index a7f21e73d753..0d4dff49954b 100644
+> > > --- a/include/exception.h
+> > > +++ b/include/exception.h
+> > > @@ -6,6 +6,7 @@
+> > > =A0=A0 */
+> > > =A0 #include <command.h>
+> > > +#include <string.h>
+> > > =A0 static int do_exception(struct cmd_tbl *cmdtp, int flag, int argc,
+> > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 char *const argv[])
+> >=20
+> > This patch just looks like
+> > https://patchwork.ozlabs.org/project/uboot/patch/20250702205818.44188-1-
+> > heinrich.schuchardt@canonical.com/
+> > and
+> > https://patchwork.ozlabs.org/project/uboot/patch/20250703051951.43372-2-
+> > heinrich.schuchardt@canonical.com/
+> > which were positively reviewed.
+> >=20
+> > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 >=20
-> Kind regards,
-
-The patch does not describe why the change is needed.
-
-Wouldn't the suggested patch break existing systems using uefia and=20
-uefib as partition names?
-
-What is wrong about calling the A- and B-partition uefia and uefib=20
-respectively? Looking at the code it seems only important that the=20
-suffix is different. The suffix value seems to be ignored.
-
-Reading the documentation I would not know if uefi_ALPHA and uefi_BRAVO=20
-are valid partition names for the A- and B-slots. I would have expected=20
-a matching documentation change in doc/boards/qualcomm describing the=20
-precise restrictions on naming the A- and B-partitions.
-
-Best regards
-
-Heinrich
-
+> yes it is the same.
 >=20
->>
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->> ---
->>   arch/arm/mach-snapdragon/capsule_update.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-snapdragon/capsule_update.c b/arch/arm/mach-=
-snapdragon/capsule_update.c
->> index 4dced4961b6..11ef4a0f4b9 100644
->> --- a/arch/arm/mach-snapdragon/capsule_update.c
->> +++ b/arch/arm/mach-snapdragon/capsule_update.c
->> @@ -136,7 +136,7 @@ static int find_target_partition(int *devnum, enum =
-uclass_id *uclass,
->>   			 * flags might not be set so we assume the A partition unless the =
-B
->>   			 * partition is active.
->>   			 */
->> -			if (!strncmp(info.name, "uefi", strlen("uefi"))) {
->> +			if (!strncmp(info.name, "uefi_", strlen("uefi_"))) {
->>   				/*
->>   				 * If U-Boot was chainloaded somehow we can't be flashed to
->>   				 * the uefi partition
+> Tom: Please drop this one and take origin one
 
+OK. If it's not ugent, it will come with v2 of the arm64 stack
+backtraces that Casey posted today, once that's ready to merge.
+
+--=20
+Tom
+
+--t9m/Z739LTj52h48
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIOVIwAKCRAr4qD1Cr/k
+CsIaAQDArLgwlS7H88UedjnHuUkR9MBDiPO4x/uR3B5j3KCR2gEA8PqpwP30SU6J
+BEMREQypRLIt904IsAK/ty2zcueFkQo=
+=+zbJ
+-----END PGP SIGNATURE-----
+
+--t9m/Z739LTj52h48--
