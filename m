@@ -4,42 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CBD9C87FCA
-	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:52:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB01EC87FCE
+	for <u-boot@archiver.kernel.org>; Fri, 25 Jul 2025 15:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3483983A3A;
-	Fri, 25 Jul 2025 17:50:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8281B839FA;
+	Fri, 25 Jul 2025 17:50:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B83983A3A; Fri, 25 Jul 2025 17:50:55 +0200 (CEST)
+ id E3B5083A44; Fri, 25 Jul 2025 17:50:57 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2E0D3839CC
- for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:50:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3BA8383A37
+ for <u-boot@lists.denx.de>; Fri, 25 Jul 2025 17:50:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C1A6F2C3D;
- Fri, 25 Jul 2025 08:50:45 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CE0E52C3E;
+ Fri, 25 Jul 2025 08:50:47 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.31.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BC7C93F66E;
- Fri, 25 Jul 2025 08:50:50 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C73903F66E;
+ Fri, 25 Jul 2025 08:50:52 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v4 15/24] efi_loader: fwu: fwu_arm_psa: Disable trial state
- handling
-Date: Fri, 25 Jul 2025 16:50:01 +0100
-Message-Id: <20250725155010.285831-16-abdellatif.elkhlifi@arm.com>
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH v4 16/24] fwu_arm_psa: Add FWU acceptance mechanism
+Date: Fri, 25 Jul 2025 16:50:02 +0100
+Message-Id: <20250725155010.285831-17-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
 References: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
@@ -63,12 +60,18 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-No need for trial state handling in U-Boot for FWU Arm PSA
+Accept the FWU at ExitBootServices()
 
-In FWU Arm PSA mode, trial state is handled by Secure world.
+Provide the FWU_ACCEPT_IMAGE ABI and setup an event triggered
+on ExitBootServices().
+This mechanism notifies Secure world that the system booted
+successfully by accepting the images in trial state.
+
+Also, add FWU_ARM_PSA_ACCEPT_IMAGES config
+to allow platforms to switch off image acceptance
+in ExitBootServices().
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -76,63 +79,305 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Michal Simek <michal.simek@amd.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Adriano Cordova <adrianox@gmail.com>
----
- lib/efi_loader/efi_capsule.c | 7 +++++--
- lib/fwu_updates/fwu.c        | 8 +++++++-
- 2 files changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 1dac691d24d..113cfe30fde 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -562,7 +562,9 @@ static efi_status_t efi_capsule_update_firmware(
- 	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
- 		if (fwu_empty_capsule(capsule_data)) {
- 			if (fwu_empty_capsule_checks_pass()) {
--				return fwu_empty_capsule_process(capsule_data);
-+				return !IS_ENABLED(CONFIG_FWU_ARM_PSA) ?
-+					fwu_empty_capsule_process(capsule_data) :
-+					0;
- 			} else {
- 				log_err("FWU empty capsule checks failed. Cannot start update\n");
- 				return EFI_INVALID_PARAMETER;
-@@ -1377,7 +1379,8 @@ efi_status_t efi_launch_capsules(void)
+---
+
+Changelog of changes:
+===========================
+
+v4:
+
+* Update the function headers in fwu_arm_psa.c to pass kernel-doc tests
+
+v2:
+
+* As suggested by Michal: Add /** for marking kernel-doc format
+
+v1:
+
+* Accept the FWU at ExitBootServices()
+
+ include/fwu_arm_psa.h         |  22 ++++-
+ lib/fwu_updates/Kconfig       |   8 ++
+ lib/fwu_updates/fwu_arm_psa.c | 176 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 205 insertions(+), 1 deletion(-)
+
+diff --git a/include/fwu_arm_psa.h b/include/fwu_arm_psa.h
+index 00c78ba7e7c..6400cf44d1b 100644
+--- a/include/fwu_arm_psa.h
++++ b/include/fwu_arm_psa.h
+@@ -84,9 +84,10 @@ enum fwu_abis {
+ 	FWU_WRITE_STREAM = 20,
+ 	FWU_READ_STREAM = 21,
+ 	FWU_COMMIT = 22,
++	FWU_ACCEPT_IMAGE = 23,
+ 	/* To be updated when adding new FWU IDs */
+ 	FWU_FIRST_ID = FWU_DISCOVER, /* Lowest number ID */
+-	FWU_LAST_ID = FWU_COMMIT, /* Highest number ID */
++	FWU_LAST_ID = FWU_ACCEPT_IMAGE, /* Highest number ID */
+ };
  
- 	efi_capsule_scan_done();
+ enum fwu_abi_errcode {
+@@ -311,6 +312,25 @@ struct __packed fwu_write_stream_resp {
+ 	int status;
+ };
  
--	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
-+	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE) &&
-+	    !IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
- 		if (capsule_update == true && update_status == true) {
- 			ret = fwu_post_update_process(fw_accept_os);
- 		} else if (capsule_update == true && update_status == false) {
-diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-index 46b6f9356a7..7ae3dfffae2 100644
---- a/lib/fwu_updates/fwu.c
-+++ b/lib/fwu_updates/fwu.c
-@@ -345,6 +345,11 @@ int fwu_get_mdata(struct fwu_mdata *mdata)
- 		if (parts_ok[i])
- 			continue;
++/**
++ * struct fwu_accept_image_args - fwu_accept_image ABI arguments
++ * @function_id: fwu_accept_image service ID
++ * @image_type_guid: GUID of the image to be accepted
++ */
++struct __packed fwu_accept_image_args {
++	u32 function_id;
++	u32 reserved;
++	efi_guid_t image_type_guid;
++};
++
++/**
++ * struct fwu_accept_image_resp - fwu_accept_image ABI returns
++ * @status: The ABI return status
++ */
++struct __packed fwu_accept_image_resp {
++	int status;
++};
++
+ /*
+  * FWU directory information structures
+  */
+diff --git a/lib/fwu_updates/Kconfig b/lib/fwu_updates/Kconfig
+index cdc96109f0a..958e54dec37 100644
+--- a/lib/fwu_updates/Kconfig
++++ b/lib/fwu_updates/Kconfig
+@@ -57,6 +57,14 @@ config FWU_ARM_PSA
+ 	  driver that supports the Arm PSA firmware update specification as
+ 	  mentioned in https://developer.arm.com/documentation/den0118/a/
  
-+		if (IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
-+			log_err("FWU metadata copy %d invalid\n", i);
-+			return -ENOTSYNC;
++config FWU_ARM_PSA_ACCEPT_IMAGES
++	bool "Accept images at EFI ExitBootServices() level"
++	depends on FWU_ARM_PSA
++	default y
++	help
++	  Select this option if reaching ExitBootServices() level means the boot succeeded
++	  This option will add a callback at ExitBootServices() that accepts all the images.
++
+ config FWU_BUFFER_PAGES
+ 	int "Number of 4KB pages in the FWU shared buffer"
+ 	depends on FWU_ARM_PSA
+diff --git a/lib/fwu_updates/fwu_arm_psa.c b/lib/fwu_updates/fwu_arm_psa.c
+index 77f7c2f2359..42c002e0f25 100644
+--- a/lib/fwu_updates/fwu_arm_psa.c
++++ b/lib/fwu_updates/fwu_arm_psa.c
+@@ -8,6 +8,7 @@
+  */
+ #include <arm_ffa.h>
+ #include <dm.h>
++#include <fwu.h>
+ #include <fwu_arm_psa.h>
+ #include <fwu.h>
+ #include <log.h>
+@@ -113,6 +114,14 @@ static struct fwu_abi_errmap err_msg_map[FWU_ERRMAP_COUNT] = {
+ 			"FWU_DENIED: The system is not in a Staging state",
+ 		},
+ 	},
++	[FWU_ID_TO_ERRMAP_ID(FWU_ACCEPT_IMAGE)] = {
++		{
++			[FWU_UNKNOWN] =
++			"FWU_UNKNOWN: Image with type=image_type_guid is not managed by the Update Agent",
++			[FWU_DENIED] =
++			"FWU_DENIED: The system has not booted with the active bank, or the image cannot be accepted before being activated",
++		},
++	},
+ };
+ 
+ /**
+@@ -685,6 +694,35 @@ static int fwu_write_stream(u32 handle, const u8 *payload, u32 payload_size)
+ 	return ret;
+ }
+ 
++/**
++ * fwu_accept() -  fwu_accept_image ABI
++ *
++ * @guid: GUID of the image to be accepted
++ *
++ * Description: Sets the status of the firmware image, with a given GUID
++ * to "accepted" in the active firmware bank.
++ *
++ * Return: 0 on success. Otherwise, failure.
++ */
++static int fwu_accept(const efi_guid_t *guid)
++{
++	struct fwu_accept_image_args *args = g_fwu_buf;
++	struct fwu_accept_image_resp *resp = g_fwu_buf;
++	char *svc_name = "FWU_ACCEPT_IMAGE";
++
++	if (!guid)
++		return -EINVAL;
++
++	/* Filling the arguments in the shared buffer */
++	args->function_id = FWU_ACCEPT_IMAGE;
++
++	guidcpy(&args->image_type_guid, guid);
++
++	/* Executing the FWU ABI through the FF-A bus */
++	return fwu_invoke_svc(args->function_id, svc_name,
++			     sizeof(*args), sizeof(*resp), NULL);
++}
++
+ /**
+  * fwu_update_image() - Update an image
+  *
+@@ -1022,6 +1060,138 @@ failure:
+ 	return ret;
+ }
+ 
++/**
++ * fwu_one_image_accepted() - Accept one image in trial state
++ *
++ * @img_entry: Pointer to the image entry.
++ * @active_idx: Active bank index.
++ * @image_number: Image number for logging purposes.
++ *
++ * Description: Invoke FWU accept image ABI to accept the image.
++ *
++ * Return: true is returned on success, false on failure.
++ */
++static bool fwu_one_image_accepted(const struct fwu_image_entry *img_entry,
++				   u32 active_idx,
++				   u32 image_number)
++{
++	const struct fwu_image_bank_info *bank_info =
++		&img_entry->img_bank_info[active_idx];
++	int fwu_ret;
++
++	if (!bank_info->accepted) {
++		fwu_ret = fwu_accept(&bank_info->image_guid);
++		if (fwu_ret) {
++			log_err("FWU: Failed to accept image #%d\n",
++				image_number + 1);
++			return false;
++		}
++		log_debug("FWU: Image #%d accepted\n", image_number + 1);
++	}
++
++	return true;
++}
++
++/**
++ * fwu_all_images_accepted() - Accept any pending firmware update images
++ *
++ * @fwu_data: Pointer to FWU data structure
++ *
++ * Description: Read from the metadata the acceptance state of each image.
++ * Then, accept the images which are not accepted yet.
++ *
++ * Return: true is returned on success, false on failure.
++ */
++static bool fwu_all_images_accepted(const struct fwu_data *fwu_data)
++{
++	int fwu_ret;
++	u32 active_idx;
++	u32 i;
++	bool accepted;
++
++	fwu_ret = fwu_get_active_index(&active_idx);
++	if (fwu_ret) {
++		log_err("FWU: Failed to read boot index, err (%d)\n",
++			fwu_ret);
++		return false;
++	}
++
++	for (i = 0 ; i < CONFIG_FWU_NUM_IMAGES_PER_BANK ; i++) {
++		accepted = fwu_one_image_accepted(&fwu_data->fwu_images[i], active_idx, i);
++		if (!accepted)
++			return false;
++	}
++
++	return true;
++}
++
++/**
++ * fwu_accept_notify_exit_boot_services() - ExitBootServices callback
++ *
++ * @event:	callback event
++ * @context:	callback context
++ *
++ * Description: Reaching ExitBootServices() level means the boot succeeded.
++ * So, accept all the images.
++ *
++ * Return: EFI_SUCCESS on success. Otherwise, failure.
++ */
++static void EFIAPI fwu_accept_notify_exit_boot_services(struct efi_event *event,
++							void *context)
++{
++	efi_status_t efi_ret = EFI_SUCCESS;
++	bool all_accepted;
++	struct fwu_data *fwu_data;
++
++	EFI_ENTRY("%p, %p", event, context);
++
++	fwu_data = fwu_get_data();
++	if (!fwu_data) {
++		log_err("FWU: Cannot get FWU data\n");
++		efi_ret = EFI_INVALID_PARAMETER;
++		goto out;
++	}
++
++	if (fwu_data->trial_state) {
++		all_accepted = fwu_all_images_accepted(fwu_data);
++		if (!all_accepted) {
++			efi_ret = EFI_ACCESS_DENIED;
++			goto out;
 +		}
 +
- 		memcpy(parts_mdata[i], parts_mdata[1 - i], mdata_size);
- 		err = fwu_sync_mdata(parts_mdata[i], i ? SECONDARY_PART : PRIMARY_PART);
- 		if (err) {
-@@ -786,7 +791,8 @@ static int fwu_boottime_checks(void)
++	} else {
++		log_info("FWU: ExitBootServices: Booting in regular state\n");
++	}
++
++out:
++	EFI_EXIT(efi_ret);
++}
++
++/**
++ * fwu_setup_accept_event() - Setup the FWU accept event
++ *
++ * Description: Create a FWU accept event triggered on ExitBootServices().
++ *
++ * Return: 0 is returned on success. Otherwise, failure.
++ */
++static int fwu_setup_accept_event(void)
++{
++	efi_status_t efi_ret;
++	struct efi_event *evt = NULL;
++
++	efi_ret = efi_create_event(EVT_SIGNAL_EXIT_BOOT_SERVICES, TPL_CALLBACK,
++				   fwu_accept_notify_exit_boot_services, NULL,
++				   &efi_guid_event_group_exit_boot_services,
++				   &evt);
++	if (efi_ret != EFI_SUCCESS) {
++		log_err("FWU: Cannot install accept event %p, err (%lu)\n", evt,
++			efi_ret);
++		return -EPERM;
++	}
++
++	return 0;
++}
++
+ /**
+  * fwu_agent_init() - Setup the FWU agent
+  *
+@@ -1074,6 +1244,12 @@ int fwu_agent_init(void)
+ 	if (ret)
+ 		goto failure;
  
- 	in_trial = in_trial_state();
++	if (IS_ENABLED(CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES)) {
++		ret = fwu_setup_accept_event();
++		if (ret)
++			goto failure;
++	}
++
+ 	g_fwu_initialized = true;
  
--	ret = in_trial ? fwu_trial_count_update() : trial_counter_update(NULL);
-+	ret = (in_trial && !IS_ENABLED(CONFIG_FWU_ARM_PSA)) ?
-+	       fwu_trial_count_update() : trial_counter_update(NULL);
- 
- 	if (!ret)
- 		boottime_check = 1;
+ 	return 0;
 -- 
 2.25.1
 
