@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE29C83F17
-	for <u-boot@archiver.kernel.org>; Sat, 26 Jul 2025 16:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42304C83F17
+	for <u-boot@archiver.kernel.org>; Sat, 26 Jul 2025 16:49:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E72EA8309E;
-	Sat, 26 Jul 2025 18:30:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 75C34830A0;
+	Sat, 26 Jul 2025 18:49:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="R2IAYpg3";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="dGqi2Q45";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65C42830A0; Sat, 26 Jul 2025 18:30:58 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ id 3BC7B830E4; Sat, 26 Jul 2025 18:49:17 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 465F08307F
- for <u-boot@lists.denx.de>; Sat, 26 Jul 2025 18:30:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CD1882F8F
+ for <u-boot@lists.denx.de>; Sat, 26 Jul 2025 18:49:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: f81d6706-6a3d-11f0-84d2-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
+X-KPN-MessageId: 846fc771-6a40-11f0-8592-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
  by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id f81d6706-6a3d-11f0-84d2-005056992ed3;
- Sat, 26 Jul 2025 18:31:23 +0200 (CEST)
+ id 846fc771-6a40-11f0-8592-00505699b430;
+ Sat, 26 Jul 2025 18:49:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
  h=subject:to:from:message-id:date;
- bh=7ie5fLSodXTZ1GJYctckcRTT+3765RAYzdAJ6teTi8M=;
- b=R2IAYpg3msdEIKa3GwTtM+qf2Rp/uMig0nXNxAgLOlGxwhkN4ixLfOPBgKLi086aGdbXvyj1BRGqJ
- QRuYQ1gJbvLoKQCNP48imY2EpqfHoGLvnzsIyRSl6k8LHPA2a90TMz+UBeFFUhLWUSOFzq5ctSe1tm
- FGsR/U8wnmYaBvgQpN6MenTQ9o/Adb1NvwO4ZXGccl21Z5NeHYqryOzy7ThOMgRN3TzDUGleLedygN
- rviRJxHn/BIUkVO7y+SbJlTyAfBsiv6/+G7rALPk+qkX3dy8gYdB6gg9KoI0fvMTfZiQZLh7i09d3+
- G84Mgdr4/UUROKOHF4XWHhf/6XYsJuQ==
-X-KPN-MID: 33|0WwXs1jCYGYixFF3M2C6mVYXHkfv3eaOoGZmCMZhO1ITnkFK0Dw3ZZR+lnZEt0H
- gBAHo58TBqF8xoANi84aO8Q==
+ bh=xgfQatuZ+Iqz3WCmb0WMkCs0JtN8acwqnKVSIqWOG0I=;
+ b=dGqi2Q458YZkCbNF0Jj1bzUEfeGWmPP7GIqAQfJoLifZ6pnagm+FsOvm8DgeJpCrHZQPqtk+6TvsS
+ bdH6oeeb55gjXc1CDbjPLPi8vCQbSngHbyHKhb3uYXWx2AaooGfwmQK3NCH0qv9KxG73WY5IxbS+i4
+ bWZOTrRJDo37PUmsP66RVTaBQDCO/2Kh/qaRlOCHGQFfK368o4+vTURvSAWZbNGtIxrFYdRjmH/gsv
+ Z/8vFEnt0NRcEy59M/Ma1IdPfQQsrIyHyPZtd5kPxOsPKSJ5+gaAShmWueuoWLSwDqZI1noIj5TCwW
+ EiGnsv0BULPgqKsG0EDcPfAl0fGvJdQ==
+X-KPN-MID: 33|IPjkZTLIKoidJtrZI1p1ziFzMPqazC7vDwm8IRRQun1/TOpM8IdtDrAZPTIS0bZ
+ ofsuka36HuS6880ypHpqZcoVbAw2qHSqP+jwJe9Wmwzk=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|eXoboHxwORbmQs3Fad250E9dfLpQLZSltmWlIhHbrdufrTm7xkimPVlFpmW0mhW
- Rsc9GuGgmqBqYftPNG6mVPg==
+X-CMASSUN: 33|HyFzSZHkP+WgA4jcT7HZeudzn/ImENNJvSzKdcV6H7kSa8ML1Qqx1SlV4gZMD6N
+ Hepur0iOOxiae2QVAblRMgA==
 X-Originating-IP: 80.61.163.207
 Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
  [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id e6f955b6-6a3d-11f0-a618-005056998788;
- Sat, 26 Jul 2025 18:30:55 +0200 (CEST)
-Date: Sat, 26 Jul 2025 18:30:54 +0200
-Message-Id: <87freiap8h.fsf@bloch.sibelius.xs4all.nl>
+ id 75d5d00a-6a40-11f0-8887-00505699d6e5;
+ Sat, 26 Jul 2025 18:49:14 +0200 (CEST)
+Date: Sat, 26 Jul 2025 18:49:13 +0200
+Message-Id: <87ecu2aody.fsf@bloch.sibelius.xs4all.nl>
 From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Tom Rini <trini@konsulko.com>
-Cc: xypron.glpk@gmx.de, javier.tia@linaro.org, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org
-In-Reply-To: <20250726154516.GG1807455@bill-the-cat> (message from Tom Rini on
- Sat, 26 Jul 2025 09:45:16 -0600)
-Subject: Re: [PATCH] efi_loader: Add support for .wic files in URI boot path
-References: <20250725173534.247188-1-javier.tia@linaro.org>
- <46A97A81-B04A-4BCC-A5EF-2639593DD86F@gmx.de>
- <20250726154516.GG1807455@bill-the-cat>
+To: Enric Balletbo i Serra <eballetbo@kernel.org>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, ekovsky@redhat.com,
+ loic.poulain@linaro.org, tobias@eub.se
+In-Reply-To: <CALE0LRuihERtJ-ghH9OXnFz8Y+JV28g5=nSmnw_LdboWV60=aQ@mail.gmail.com>
+ (message from Enric Balletbo i Serra on Tue, 22 Jul 2025 17:48:43
+ +0200)
+Subject: Re: [RFC] Plan to Migrate U-Boot from OpenSSL Engines to Providers
+References: <CALE0LRuihERtJ-ghH9OXnFz8Y+JV28g5=nSmnw_LdboWV60=aQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,34 +75,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Sat, 26 Jul 2025 09:45:16 -0600
-> From: Tom Rini <trini@konsulko.com>
-> 
-> On Fri, Jul 25, 2025 at 07:56:39PM +0200, Heinrich Schuchardt wrote:
-> > Am 25. Juli 2025 19:35:33 MESZ schrieb Javier Tia <javier.tia@linaro.org>:
-> > >Together with current '.iso' and '.img', the try_load_from_uri_path
-> > >function now allows files with the '.wic' extension as viable bootable
-> > >images.
-> > 
-> > Why wouldn't you simply name your files *.img?
-> 
-> The answer has been lost to time at this point, since output has been
-> ".wic" for over a decade now.
+> From: Enric Balletbo i Serra <eballetbo@kernel.org>
+> Date: Tue, 22 Jul 2025 17:48:43 +0200
 
-Note that other EFI implementations don't support '.wic' either.
-WHich is why we switched the OpenBSD installer disk images from '.fs'
-to '.img' some years ago specifically to support EFI HTTP boot.
+Hi Eddie and Enric,
 
-> > Shouldn't we get away from the DOS age routine of relying on
-> > filename extensions?
-> > 
-> > Just check if the fileheader is a PE header or if it is a known
-> > partitoning scheme.
+> Hi all,
 > 
-> Looking in to a cleaner more general solution is worthwhile, I agree.
+> As many of you may be aware, recent Linux distributions (such as
+> Fedora) are removing support for OpenSSL engines, following the
+> deprecation of the ENGINE API in OpenSSL 3.x. This is already
+> impacting the ability to build U-Boot with hardware-backed signing on
+> these systems, and the situation is likely to become more widespread
+> as other distros follow suit.
 > 
-> -- 
-> Tom
+> To address this, we would like to propose the following plan for U-Boot:
 > 
-> [2:application/pgp-signature Show Save:signature.asc (228B)]
+> * Introduce a new config option OPENSSL_NO_DEPRECATED.
+> This option will allow building U-Boot without any ENGINE support.
+> When enabled, hardware-backed signing (PKCS#11, etc.) will not be
+> available, but U-Boot will be buildable on distributions that have
+> removed ENGINE support from OpenSSL.
+> 
+> * Add support for OpenSSL Providers
+> Migrate the relevant signing and key-loading code to use the OpenSSL
+> Provider API, which is the officially supported mechanism in OpenSSL
+> 3.x and beyond. Providers are the modern way to access both software
+> and hardware cryptography, including PKCS#11, and are supported in all
+> current OpenSSL releases.
+> 
+> Arguments for this change:
+> 
+> * Future-proofing: The ENGINE API is deprecated and will eventually be
+> removed from OpenSSL. Providers are the supported path forward.
+> * Compatibility: Many distributions are already disabling or removing
+> ENGINE support, making it impossible to build U-Boot with signing
+> support out-of-the-box.
+> * Security: The Provider API receives active maintenance and security
+> updates, while ENGINE is legacy code.
+> * Flexibility: Providers can support both software and hardware
+> cryptography, and are more flexible for future enhancements.
+> 
+> 
+> Impact:
+> 
+> Users who require hardware-backed signing will need to ensure their
+> provider (e.g., PKCS#11 provider) is available and configured.
+> 
+> The transition will be gradual: ENGINE support can be kept as an
+> option for a while, but the default and recommended path will be
+> providers.
+> 
+> 
+> Questions for the community:
+> 
+> * Do we need to maintain ENGINE compatibility for a transition period,
+> or can we remove ENGINE support entirely and move fully to providers?
+> 
+> * Are there users or workflows that still depend on ENGINE-based
+> hardware signing that cannot be migrated to providers?
+> 
+> * Any other concerns or suggestions regarding this migration?
+
+Please make sure that it remains possible to build U-Boot with
+LibreSSL.
+
+It is my understanding that the LibreSSL developers have no plans to
+add the OpenSSL Provider API, so I think that means making that code
+optional and only enabling it if the libcrypto includes the OpenSSL
+Provider API.
+
+Note that LibreSSL already neutered ENGINE support.  So the existing
+code that uses the ENGINE API will fail at runtime.  That hasn't
+caused me any issues, probably because hardware-backed signing is
+somewhat of a niche use-case.
+
+> Next Steps:
+> 
+> * Add the OPENSSL_NO_DEPRECATED config and update documentation.
+> * Begin refactoring the signing code to use providers by default.
+> 
+> 
+> Note that we feel comfortable with adding the OPENSSL_NO_DEPRECATED
+> config option and can proceed with that change. However, we are not
+> very familiar with the details of migrating from OpenSSL Engines to
+> Providers. Any help, guidance, or code contributions from community
+> members experienced with the OpenSSL provider API would be greatly
+> appreciated.
+> 
+> Please let us know your thoughts, concerns, or if you are interested
+> in helping or you are already working with this migration.
+> 
+> Best regards,
+> 
+>   Eddie and Enric
 > 
