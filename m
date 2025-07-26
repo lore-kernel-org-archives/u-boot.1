@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 985D7C83F17
-	for <u-boot@archiver.kernel.org>; Sat, 26 Jul 2025 15:20:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AFC0C87FCA
+	for <u-boot@archiver.kernel.org>; Sat, 26 Jul 2025 15:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B99B183087;
-	Sat, 26 Jul 2025 17:20:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 25E5C830C0;
+	Sat, 26 Jul 2025 17:20:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D1EV6Awe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X4+HuPeb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 773E6830A0; Sat, 26 Jul 2025 17:20:40 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 9CBB683087; Sat, 26 Jul 2025 17:20:41 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AC7F83087
- for <u-boot@lists.denx.de>; Sat, 26 Jul 2025 17:20:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AE178309D
+ for <u-boot@lists.denx.de>; Sat, 26 Jul 2025 17:20:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-73e586fcc28so2037799a34.0
- for <u-boot@lists.denx.de>; Sat, 26 Jul 2025 08:20:38 -0700 (PDT)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-40a4de175a3so1818464b6e.0
+ for <u-boot@lists.denx.de>; Sat, 26 Jul 2025 08:20:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753543237; x=1754148037; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753543238; x=1754148038; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bfIHzASAmg8HGUFss3ZpMnfenAFyP7j4HLpuN0+5SuM=;
- b=D1EV6AweEnzM2ahuM6AQ1jhp51YqfjKXL3AP7xVDIQb503JxhYuHth3NQ0FARPyRG5
- tsZcESCz6+ZKFbbSYahYZgEPFgxmKqra8Sk3xYhPs3hzW9K4dbiUndB9OuR25W18uKfI
- 5mSDLlhB8p4zU85sB1mvRdYLkv8CFyLq2CTMQ=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Ss5hXoy52/L5iXK07gZQQLvMSWrgoE5Y/acCVGw1Mdg=;
+ b=X4+HuPebLnzG2po42VbatsUcF0rE+0N7tZl/rO/9GaU4fPIms8Ojt34K5ZNKB1p2zY
+ EXRLUl6aN+50FdjiC5DtKvTt4ch3Edv4TWe27XZ6FA5K9NCzMUiRfX2t/MD+/BP5m3UE
+ 6YqyVppJc8HG+VVUsqSAsJ84O3nL4Dt+sc+K8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753543237; x=1754148037;
+ d=1e100.net; s=20230601; t=1753543238; x=1754148038;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bfIHzASAmg8HGUFss3ZpMnfenAFyP7j4HLpuN0+5SuM=;
- b=HPg1VVNP/NYhtuQ2Zw0/iCYLxsN1jWDA3gMiAvFI84ZZ5Tu3/1b6Q/z42KbV2cMvdS
- mmjArfJSWLna3DGWuldtNntdI6K4omqky2T5cKZHwZxt8xoxhEhVwGpVnmuGLolkPTze
- 15RlSvrbMBQJoGcJZ/FpktNZCRIH1iKgZTNSR1QmJqp0ihimlsX6dhnK8mm6im6ieTkU
- /ZLmTWGHP0U9CbAVs1oINYDRI/5me7z7qPfVTjNA/gD1Rny1HFrnvxK8f1klSOpwSFxG
- zi3QriIGevT8tGOQ5oFrG5BndZ5gCIKtc8ZHHpY56VgwFBTZ1IIZAcCXnigyLXJIm/si
- ggxQ==
-X-Gm-Message-State: AOJu0Yy4dqAEoGg/ACi9qCFsu82Rrb8GWVCNydtmHyJJGF2i3Nui39Fq
- KiCmv1rUW/QFROxVDwExJxS+61NMx7NJ1g88dPF3QmYmIpmdIg/htuNlLfPt6cD0dfc=
-X-Gm-Gg: ASbGncvhrwzkJuN/UO4PIsUyWX2VO3wHgJDUNfmAJnoaZpB7zM7Mb6uXcE9VRQdS08y
- 67MyXlrMYfpET9uydEBKsMlV6/IJP+bBIB8iWh30H4VFlBvhCwezm6wSHCo+g09Au1Gzx6TxVOC
- FozGb9UmJTY14qjlHc1SIWZ7r8Atys2TgSUk+rp+1kg4FmLzcqje/dCnaaEz0Fv8sOuCrrtJv/j
- MiekIsLHLBX7qeGrz8NKI8E5UiuJ1wu2P3WRS23qCoAx7+Q4Qpe4k0nRYrROX9rJW+Oglf+EVMf
- 3gryDm+etSexJ541PqPg9fvUoZkHMSLyz0k7cW7avK7GIfbELnhyrLwb5trIn1UoutgWghZDqtS
- b0jr4cgfTZqGWOCLhLB63Eos9UT5b+VC20xwB/n2IFyktFZ+4S2OeVB8=
-X-Google-Smtp-Source: AGHT+IGJ5+V/p/CfpRax1E9EsTagwUk2HuX4A3c7UvHgBbh+vRqf6XfWzeZKV+YgFwQHj/KmlC9orw==
-X-Received: by 2002:a05:6808:1a18:b0:40b:31ef:8784 with SMTP id
- 5614622812f47-42b9d82e88bmr3549867b6e.7.1753543236826; 
- Sat, 26 Jul 2025 08:20:36 -0700 (PDT)
+ bh=Ss5hXoy52/L5iXK07gZQQLvMSWrgoE5Y/acCVGw1Mdg=;
+ b=WApofPR/wezqa3dgyoa7M+TWvcnijn+JSzkO/44ZscJbCo1mLu05qDqfqYDdb2Tf8K
+ zNKUfysuBeTHaL6EdrSLARyupzRkD3NJ9YUckNGfKADm8Ubn38pWXX66xQLcXqZtAnfS
+ qhq5E9z/7q+j3faG0dk8GhC6bca9SO6H9ag2cPkRHyehLO26Ejmd/Hpq0WARRRtd5IfZ
+ hLuHe1ZW1AZ6zoELeOlvmXWn1uAPgnWgJWhEoMhD+JgO/lGMDItEO1dREnVw6wVBIIhk
+ Y+/pbO6xYQKPulNmX2viStPCvEAXzpYTkHOKec+vQ0AVMH5+u1lbc5r1APKH6qZLzzmB
+ tn5A==
+X-Gm-Message-State: AOJu0YysxVVMWveiAAC6tvjZ1Mp8naHrzKZGD588CKMJnBoEH8ngna7p
+ 2NoBWosfYG//LrfYKl87lZhtRZXI+10bsLSdlMT+XTJIyuN2dhbZpb7VqCPYWrSwLF2B+6jWGKH
+ MxvOg3+4=
+X-Gm-Gg: ASbGncvkgFyZxw1FLdxj5p0HDYaWhB5/z2KbH/UNtBn52zZ5afwIeYYY+keugQ87D6e
+ THDl4sqk8Hz6vXNb0We6SzJeQk3Uj4ugr20i4k6/iUgsq1R0fyJeQzojlhG+O6zouMBGuCStebT
+ I94RHnYobD/NNwjWXBkzpK/vVZIG4PXgO2tCgVtE/X1cY05DHZkcIzbpfvfW2kDMsshr4X7YYUu
+ 7ZEsSad82vXSbxI1FnP5V5Bk6mI0Y0BkUjQroOqfh7u/9CYBQULoLaEpR71fLSAy6MdwAyFSBHp
+ zO1g0EyG2FAhjH3/Ma8vzc+D5GP1vGwOuLEIBXddvWetR1XOYCFlsGrElhF8Cg86PELCgFlGQnS
+ M9uUIHxDYGkQxjycGQugNRoVD5lwuXqkiwWIYjYAH01rEvaz1IZMprug=
+X-Google-Smtp-Source: AGHT+IGMdz4EXXykBeLJXFDdI/yH7WrNHzgSEnWWAZRCSsg0tWCRLCrSX+JzCQhjwdewN0YswjWULw==
+X-Received: by 2002:a05:6808:1889:b0:40d:f3d:cef7 with SMTP id
+ 5614622812f47-42bb71f53d5mr3836341b6e.4.1753543238139; 
+ Sat, 26 Jul 2025 08:20:38 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-42c7b93cb45sm353388b6e.18.2025.07.26.08.20.35
+ 5614622812f47-42c7b93cb45sm353388b6e.18.2025.07.26.08.20.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Jul 2025 08:20:35 -0700 (PDT)
+ Sat, 26 Jul 2025 08:20:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Paul Walmsley <paul.walmsley@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Anup Patel <anup@brainfault.org>, 
- Atish Patra <atishp@atishpatra.org>
-In-Reply-To: <20250716001539.2483390-1-trini@konsulko.com>
-References: <20250716001539.2483390-1-trini@konsulko.com>
-Subject: Re: [PATCH 1/3] CI: Disable sifive_unleashed_sdcard QEMU testing
-Message-Id: <175354323512.77109.7014165045030952952.b4-ty@konsulko.com>
-Date: Sat, 26 Jul 2025 09:20:35 -0600
+In-Reply-To: <20250725190432.4152488-1-trini@konsulko.com>
+References: <20250725190432.4152488-1-trini@konsulko.com>
+Subject: Re: [PATCH] Docker, CI: Update to latest Ubuntu and Dockerfile
+Message-Id: <175354323694.77109.5596187087358287405.b4-ty@konsulko.com>
+Date: Sat, 26 Jul 2025 09:20:36 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,22 +94,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Jul 2025 18:15:37 -0600, Tom Rini wrote:
+On Fri, 25 Jul 2025 13:04:32 -0600, Tom Rini wrote:
 
-> Changes in upstream QEMU have lead to this specific configuration of the
-> sifive_unleashed platform not working in QEMU. Until this can be
-> root caused and resolved, disable this test for now.
+> - Update to Ubuntu "Jammy" 20250714 tag
+> - Update to current Dockerfile which brings us QEMU 10.0.2 and newer
+>   coreboot and pulls in lz4 via the non-legacy package name.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/3] CI: Disable sifive_unleashed_sdcard QEMU testing
-      commit: 4f8755fe0860fd6cf5ccf49b8b7569c6dc56291c
-[2/3] Dockerfile: Update to QEMU 10.0.2
-      commit: 910aa6c1ef2ed17ff6f738e9365664fa8b24a347
-[3/3] CI: Update to coreboot 25.03
-      commit: 0fabedfcde546a0d5bd17c89338d982903c2436c
+[1/1] Docker, CI: Update to latest Ubuntu and Dockerfile
+      commit: 1d782a3f229c269d01e5b7a94744bcd7f53e3f47
 -- 
 Tom
 
