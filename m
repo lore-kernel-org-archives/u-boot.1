@@ -4,129 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13E9AC87FCC
-	for <u-boot@archiver.kernel.org>; Sun, 27 Jul 2025 05:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44905C87FCE
+	for <u-boot@archiver.kernel.org>; Sun, 27 Jul 2025 07:43:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D3F182F00;
-	Sun, 27 Jul 2025 07:55:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 46F23830EA;
+	Sun, 27 Jul 2025 09:43:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="RzsOPx42";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="G6BLyz4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F03AD82F33; Sun, 27 Jul 2025 07:55:51 +0200 (CEST)
+ id B579B830EE; Sun, 27 Jul 2025 09:43:07 +0200 (CEST)
 Received: from TYVP286CU001.outbound.protection.outlook.com
  (mail-japaneastazolkn190110001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:d405::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D62381FEE
- for <u-boot@lists.denx.de>; Sun, 27 Jul 2025 07:55:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08E9F830C8
+ for <u-boot@lists.denx.de>; Sun, 27 Jul 2025 09:43:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=yangshiji66@outlook.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yTqAS+FNdhojPH8iTVloYDNaHWyNs9QQMGW9ZhtpJNhGPqXaWZWz8cS9NW8GKyy5sKQoSbLHDJCxbgNLDvs9vFfISFf6jEQ4CjINCbpED7yCLdBb/CVOtLkjW55RaxS0dRTh8XWgZXQlLzDSUdcJvSUh8n9So+yNl2PtvdNFpiTs1Wuhs5gWjTjoHYM31Z9Uh5o2ZbuDU/f2Jd00tVS/I0w5rt/gIYe3NWFwegIEQACq0wyW76D4jT/5BuSPAE74rReiIycV+0W3PB+QPUEJ5125JVi3//ga208kTBpOSRRzFqE/dfvwJ2yRgvCoYPs4Aol+V1HA9pguuXX+eRoFuw==
+ b=Q95qQhsE3A10m31DtkN1s5RWdTTXTi8pP52nApCj3KVRk9aBFYGoZsqnf03XiLMZdUZyhVPEi5YC6vLYO6VL159FzrbO3UmPEhXKH0yFRJ0yuDr3NVI1iTi9yO8Wcn39UDYewEbU2blM7wgB37X404TGMVPyrfE/f97+1oHVaaZR5ZAJvoUotkfuTzLjkFGnJAvxBGZSXJVvWmjXbuP0Gv8LEPSyEeIAaVka2PV+hGsbznOtuDVckE27D5z9quBXjw5612Q0pxof4Vb/n1D/2wWblpNG+NFb50kmBkK6qUv0JR/LrTGoXcN0kf4H2evY3u8uWLeAHqISsvhhNN9B/A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tTERgMx0xNcslND/5r4T/1YxutkQjeqXJQPdRTM4zmw=;
- b=tvHLimMKEK91Qaj7Ceu7GsL4D8YUbJHijjalI6Mhvhm8H7AV2x3zlUInmHAaJ0ML2vTUW2HQQ3sGRQNe7TnU+zHENAMx6TZzUQJWmrkh8vyeFGjpXLoSxc9yHDb04h57H+9Z7yEsyaaMr1oAZ25nZVQofq4uHTp86SqZRtseD/+amAc7Wlq9ULUxeX/BxQ1fdQ4cpw2b51niChwOzEXRL763+7w/qiH7t5ARx6YjvdUAObYRAl4uD1/u4lR7LRH6H8n68l6jHvu8GmiNXfIGTqDy13/4q497YOWXFFoh9sq8ivy6SBDk5cUcVZqAkzvHncNlVNAuuo37ETpaWcp8BA==
+ bh=COIrSVJwebMofSDKJcsShNbVi879/0GGwo5qoSZtcow=;
+ b=sQOblEUP81yx/l1f/ihIqkST09pZyjuJC4qVYUaJIA2GPMJs1JR/ZQ6cRKyMskr8zY1ynb2AlV6o6+8rId8eybsyY6NMpKuoKum0wAtEgUAIVXaullMqh1xVQraEs/qpYP/5SEO87uB7HuwOaFclsg7kwxHcngewX0AobDI08fZyHG0pQl2mS9/kn/HnlidQT4PyKK5tclTTe5rktiMqDsk6v3So7TC0DRbdzyXzT8S9tjUughYly8iXerAvPW88vCMwCeHntnXssmsl6sGOvgBOMj2ZLIk138JF6rUmENoafju59YUpZKosRZX+nCyNaG8nZJpADeosM1Pic7BiRw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tTERgMx0xNcslND/5r4T/1YxutkQjeqXJQPdRTM4zmw=;
- b=RzsOPx427MTHTUdMqKjYXO+XkzXrwDmgY+WAwLhSlg0WPBNUOvkhJGXX5qbeWNhZVx80JqwMyuNxbgQoP12SUZ2CNk4orJcPEaTVNIrjV/opFoU0wHwTgD7YJnwPAAGQXnXguaqXOcrrAxjgCGnKyCW9tvSZVKcU3BUzt6fQlkXxWq/ZYGor/bc9P1DDKqdZ5avEFLPJMb3QqEUbjQFeuP2K1aL9+0a064vfW7TeXQjHzSlSr3YIEHKObSmqmdv+Cobt/yQhjTjdy4NIpeb6IBFuMj3LR9Sr/hZNT817wNjDWmJ270nbtwPLNFwkg0iMeOnXTYMpwWr7u5qu5ALNFQ==
-Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com (2603:1096:603:2::18)
- by TYCPR01MB6333.jpnprd01.prod.outlook.com (2603:1096:400:78::13) with
+ bh=COIrSVJwebMofSDKJcsShNbVi879/0GGwo5qoSZtcow=;
+ b=G6BLyz4aqgV/KWs6Y6kBwUpqndA+TD0CgWnNa/AQICzsWimkFPPVCjcCkWp9slEIsqGIP3TokK8/4gq/A15N+XueLcceyt/aBI6B+hZDZNj57EwIWgE042ramEUn7TTiPlUccMxAAdSupeuIN9oVQSFqLWxUevRX7kZrArqh8MKO+1MvDAAT9gyG/BdNYDiu93JLuhPNVCIx95MtWKCFBJuoWnvdnM+E5e/5wvfNRPJx+7OtXttc9Cn7ildkI4EH+6uBmyqev7gCM6zSU0hyWfdMO20RDfyidF4CseWjErxXAmvnseHvWeyEho026MtCNYmEtqISmmGxqjNxPe5Jlg==
+Received: from TY1PR01MB1676.jpnprd01.prod.outlook.com (2603:1096:403:7::21)
+ by TYCPR01MB11658.jpnprd01.prod.outlook.com (2603:1096:400:378::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.25; Sun, 27 Jul
- 2025 05:55:45 +0000
-Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com
- ([fe80::c00:ec4e:ee7e:9b7f]) by OSBPR01MB1670.jpnprd01.prod.outlook.com
- ([fe80::c00:ec4e:ee7e:9b7f%7]) with mapi id 15.20.8964.024; Sun, 27 Jul 2025
- 05:55:45 +0000
+ 2025 07:43:00 +0000
+Received: from TY1PR01MB1676.jpnprd01.prod.outlook.com
+ ([fe80::7b8b:3f71:75f6:fcaf]) by TY1PR01MB1676.jpnprd01.prod.outlook.com
+ ([fe80::7b8b:3f71:75f6:fcaf%7]) with mapi id 15.20.8964.024; Sun, 27 Jul 2025
+ 07:43:00 +0000
 From: Shiji Yang <yangshiji66@outlook.com>
 To: u-boot@lists.denx.de
-Cc: Weijie Gao <weijie.gao@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Tom Rini <trini@konsulko.com>, Shiji Yang <yangshiji66@outlook.com>
-Subject: [PATCH] mips: mtmips: add CPU reset support for MT7628
-Date: Sun, 27 Jul 2025 13:55:20 +0800
-Message-ID: <OSBPR01MB1670973BD7364B102A973F79BC5BA@OSBPR01MB1670.jpnprd01.prod.outlook.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Shiji Yang <yangshiji66@outlook.com>
+Subject: [PATCH] meminfo: correct "free" memory region size
+Date: Sun, 27 Jul 2025 15:42:01 +0800
+Message-ID: <TY1PR01MB16764FB6BEC2FDBCE2D96060BC5BA@TY1PR01MB1676.jpnprd01.prod.outlook.com>
 X-Mailer: git-send-email 2.50.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SI2PR02CA0033.apcprd02.prod.outlook.com
- (2603:1096:4:195::20) To OSBPR01MB1670.jpnprd01.prod.outlook.com
- (2603:1096:603:2::18)
-X-Microsoft-Original-Message-ID: <20250727055520.24051-1-yangshiji66@outlook.com>
+X-ClientProxiedBy: SI2PR04CA0008.apcprd04.prod.outlook.com
+ (2603:1096:4:197::20) To TY1PR01MB1676.jpnprd01.prod.outlook.com
+ (2603:1096:403:7::21)
+X-Microsoft-Original-Message-ID: <20250727074201.1074-1-yangshiji66@outlook.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OSBPR01MB1670:EE_|TYCPR01MB6333:EE_
-X-MS-Office365-Filtering-Correlation-Id: fc70d5e3-09c2-47f3-a27b-08ddccd239c9
+X-MS-TrafficTypeDiagnostic: TY1PR01MB1676:EE_|TYCPR01MB11658:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2d9e9dd7-97c7-43db-a90e-08ddcce13509
 X-Microsoft-Antispam: BCL:0;
- ARA:14566002|8060799015|15080799012|19110799012|461199028|5072599009|21061999006|5062599005|41001999006|440099028|3412199025|51005399003|40105399003|1710799026;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dVVhI1AAm214pRFtuTwPNAODHLqOd6FxK+JUHWvdiGIiXBL9KQ6jNdoKXVYT?=
- =?us-ascii?Q?dLCAjOXNsWIWQ+68QRo7GfMJS/X+fa8LeqODyDcDRmKme52QTU2YbqCBsYxs?=
- =?us-ascii?Q?gJl8lvb73vfS5BR7K3IPLzAtyTjzTcNQoHqr939L8rOa8lJxrMM23o90UB+G?=
- =?us-ascii?Q?LZKopGm4w2vb8QSaLp//u6TAcQmFSUCaVMqF1i8KJ3a7CoNJPqyXIU9plYMn?=
- =?us-ascii?Q?5hV0QrYrdWFqSfdXm51g/kdAvPyt6BcX7iteFqh3Ob7HbBOKGCuWrMYx0TMz?=
- =?us-ascii?Q?KvOgRvy2jaSsfez9smzirpqePHYmEUwoakEFTYbrC0+USSMLc63qOhiBCNLP?=
- =?us-ascii?Q?bWLyfRMmydGtKmvAhQkyLcY5rTJstJpz1384q2SLd9/g518kxeoeCLDRXdWP?=
- =?us-ascii?Q?A38F4ZSMcCGKGb53kaXPFoMW9NJP090by0ixEk/ZFmdn4zyc+5OoQpNtt+Cz?=
- =?us-ascii?Q?roz/WGty+EJuJeiDayBkQDby/Tjzhm0J6X30RP27I7vIMhLBxJifyw6hl4sj?=
- =?us-ascii?Q?N7PTkaQy/P6zHB+HqMj0GI540ynbToxj8OB/tt8jZe2oH4cMrogNJZK/7I2/?=
- =?us-ascii?Q?0vTYv+AkHegV4JyyeVFi4E16LxmCIDMId6pMnDNA7KvDJmbDeaaJTZveyeDT?=
- =?us-ascii?Q?uJWyKGHYeRfD9FMHcbdQSro9Ucc0vl6jL0xBiZnDBR7GpRpSMOYuPSUPzUbX?=
- =?us-ascii?Q?VYEA3ZrQrumbf/7yU6BIgYGP2kGSVZIcg82XEGuMt6GatrmMNbX+XHUyTqfe?=
- =?us-ascii?Q?rlyc4zFaThMek2M/Px+Px0Eh55LSpZAqeAAPYAT0fcWOLfeQ2vUjdS3L8C9v?=
- =?us-ascii?Q?izxVlaZkf78al8b88cDNXS8h2LjVR00EuFHevDaTaDriwLm6w7Jg2PrfqBsP?=
- =?us-ascii?Q?4l2i17ttMx9epCCprwehqDF4SPo1AFabm4jbe4VmFP1H5Wqoi0Uc8q/Hsz3F?=
- =?us-ascii?Q?1RxYEnNufuH3IY3dY+H8LMYFv1Ab3fe8DJQJxbXDPM/6kPwJqOIv21AoxpaX?=
- =?us-ascii?Q?pYXcWLxlL2gXIyXbKXJn14S6DLwV72VbCWNVmJSNnaocKg0HwgY3PaWQdUCX?=
- =?us-ascii?Q?nNbRnZwl53j848aSaYQ+148wnfiQweXCi4x1EdtrfovXjR4W+Yb7DYdbAr9p?=
- =?us-ascii?Q?hbH/dgESqFwxGFo4CpOqS/58xFbwcuZiWMjhbWTMfrteNoRe+AQnS8N4m3Qw?=
- =?us-ascii?Q?ly90NvfLwiDA9AFDMe4kN6cCnC9/r/aDpsvWwRaFuwtkpfpPh8b3HGH+GcA3?=
- =?us-ascii?Q?wFsGINOuHcExIfe8RyACd3+tsbQs802j8xtNoJgoRQ=3D=3D?=
+ ARA:14566002|5062599005|41001999006|5072599009|461199028|8060799015|15080799012|19110799012|39105399003|40105399003|3412199025|440099028|11031999003|12091999003|1710799026;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?s2YoptQc9T3i1TUjhKYekL33AL6+6x2fbA3mCziiKmRJb68Jwcyi4fTDMYX9?=
+ =?us-ascii?Q?g20FYWT7uNVXhJpk2bhYGd8/wjUYYg1XVXRJ0zSIyy810RLi6cWZsjMPRZuN?=
+ =?us-ascii?Q?Q1Itj7JrAUvAOISCkr0ZOpIwuJUPcxTrCInxuFrVCfXU1ohADOHlBMdLwhJj?=
+ =?us-ascii?Q?U4heYoSD6m1mqNdmkDbrTYUoK9qTajN8UgotOPLA0piq/HDNGO8HgOsWcALZ?=
+ =?us-ascii?Q?xLF5Ya33fiE708LoAM7qSzCoqV6ZbGaahXzRWzdl5pIj2+wvgdUz0MNKs/44?=
+ =?us-ascii?Q?f5CsuQii/64tbxauOW795fhRgIN98bezwMJjE/deVQ00fkW5TrGsy22getHJ?=
+ =?us-ascii?Q?phaJfXitTe7WhWnK2Kf+RlWInvd8p0ppKWwdkTSl0F7Ia99IU6RsofrtjysN?=
+ =?us-ascii?Q?QzD6VE+D95ryLpO1XWGNPE2Z+R/U9UCubCMAf7r9eDtoeLsB9Dq7KTdUHy0n?=
+ =?us-ascii?Q?0rgbz0KWQfWU/bTdfTQuKS6QHK6wOsxfM629v0AgUyycqqYlWyxzo2M9rQH1?=
+ =?us-ascii?Q?KU8xVEuWnhGjy6/rjRpxQT48uyuZMP2NVgTOtW9jC8YgkKGgEKluHLTivRTP?=
+ =?us-ascii?Q?2fH7H48eNP7wyapU4DPjSVe2phWHG/hO9uS5yccu7mdy/Pcnp6EQKRNqZOi6?=
+ =?us-ascii?Q?fRQP1Xjw3mY7VQW9vSdocyTqU1mJOVBbkX6PdoUAgBoFHUH6CwbEaBsekRL9?=
+ =?us-ascii?Q?LVDMZmnSIxyXtZRNZX2r+6ZHxB147pIeiVpbhPiYR8mb1ImFBocRf+IKFYr7?=
+ =?us-ascii?Q?OpVv3mVrm2KLnsuROiv/P6MnBwwsptxBnhkyX7/Is849VJkUVTUeiyOY+qoK?=
+ =?us-ascii?Q?wAs6iJUSeJHXhO8QH5yC4VXvD8jVdZcZVCzQgzaX7eeCMfjf5tI0tV7NtoiM?=
+ =?us-ascii?Q?kq0MoaJ7r6PCNHmIEk6UG1qO4GbO9T3swYFxOpVhSKv2kMYfqKjPZuih7NA6?=
+ =?us-ascii?Q?8mmfZnhYtgP9Khp0w40dlcjinWOlIo4QhNCXA2g8rOZl0TtTVOXjHvAy3/E2?=
+ =?us-ascii?Q?Yk7FMn/XPeYD5whF4ahH8GjSgrPgGpenqjZD9/K3/gn/oi++RktryA94z/d3?=
+ =?us-ascii?Q?lekk3h0dlLYoDbqE8P6hO2NpV4ukwua7dyhr2CeNYH4akua1Y7DlPlaiJrDz?=
+ =?us-ascii?Q?PhKQ3nLTjjqzxhp5KTryB+V+h9LGe4gCjTzCTVDeGllZBlwPuiQHgMkJGWfL?=
+ =?us-ascii?Q?D5JjUVRhOYnOvTXb9v4CbJScaOib36yui4okoOLgWuwgVJt0vsQdATXxD0XJ?=
+ =?us-ascii?Q?+cmx+vfgslZbS0ojJp8JDcp/fYB+QVobvHdxBbk8uPYUnLO+JaeDExCSRjok?=
+ =?us-ascii?Q?yfU=3D?=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KTCwNcXRDj6l1PXjPObhD4Xyx3Pa+MA2P+97qR0kzBrWoPzReNG4djzNPn5j?=
- =?us-ascii?Q?7OG8+i5XGYB0kYl6XZP/E/DXlAV9o+nc+FoaE/jNwVUH7SmwSXzX4HrWwEVv?=
- =?us-ascii?Q?ooIfB+c4RjloV+IIJgpxtjrm/BHtXKVqc+/MvS8z9bIvzzB2oKsvSRQ0pP1p?=
- =?us-ascii?Q?KTT3bT0C9XJqApJeLHIoOr4FNYeSlu6WN7J4Akj+dIYJxfBspgBnLMkiJqbp?=
- =?us-ascii?Q?U0uC9S5RND+QPErvTnAkQ9UNeI5yQUc1Pgam7TjwdSqmTOxxsKC8Z+QAFxiN?=
- =?us-ascii?Q?mfBqwm6b55FsA+qahYl1Z/+ewvv4atM+DOLO8IZg2l48nvqQm7jeIhidTOmn?=
- =?us-ascii?Q?R3sPRBUkVHr9hraTqa9PzeXNzlJWGk1FxRbBCcKrgCfQUZfyY9qZ2bSu2TjC?=
- =?us-ascii?Q?dkb+XZl3kaoUEtIHoFxISHQ9ULj52gvkoxntbfDXYolbw3Jfs1Fn7SlZMqza?=
- =?us-ascii?Q?i4iLSDuANumkuWxMmiCvgFRwbBWm+fXeGH9vVcv4suAIxohnyUurXJiB0KLP?=
- =?us-ascii?Q?BXNaQGqNcLzk1wIeP69tZp6kwrtSuLlVwmdObsBKKP8gWmItTD4+pt9mhuxs?=
- =?us-ascii?Q?1oiqLNRrklT55x/kBwTpOPgDLaVzH6h5Zkz8/Rmtv6zDaZ6RlvJgP5tigI7I?=
- =?us-ascii?Q?o1/cQHsomlHcy7+nitOtldr4YcrufKik+YCKL8CruBXDjc9dNvjF/obrO+4V?=
- =?us-ascii?Q?u53n/L2ghnLjfPqimrDB1MFNTKCNExnNxMy0sHA55zHp0fugwH/BQANxy6dX?=
- =?us-ascii?Q?LOUQWap0iK3wbWrLuxxmIk0TOZyjjvMvAlynCTBN0vyWt6J55vMyBC7YBbFL?=
- =?us-ascii?Q?T0aEeuHDM5v9YUE0ET64TJzsaz+5oIpEaPZPtf6VuXeuIhtVfX8lEh5LrhZB?=
- =?us-ascii?Q?YO8ssdenZfLYiDxXEA3PGPCcyvfm9GN7TuppE4H0uD2HfKxSLZy2uW8oyTIs?=
- =?us-ascii?Q?oDXBa4YOWrsfgu9U2J1Ab4GCs8crkEQ/WXX5Xn6H9wb22dlX3AXUh2sz2WM6?=
- =?us-ascii?Q?v3aX547HKtGNgjPGKrqhGadiudTf3hw3rc39z1bGXnC3T2KXlwjZC0egfCXd?=
- =?us-ascii?Q?j1YTefFxwnwZpMeOJzPjaM4BtGxw6VsY9Kz4qLo4g3VCDFflcy50WeiLSYNN?=
- =?us-ascii?Q?sF+OMkQCFNUpRqSFIgjh4LdlTZS3WGOQ+ogn7BIqjs+ydldsl0fv+UpLjKz3?=
- =?us-ascii?Q?rj2Zfgx5qh9/cTAI1oEveGlY8pybOq+W2r+IejbFxNs9fwFtJce64guyZiM6?=
- =?us-ascii?Q?zzfXBVn76Drt6lXlmh+8?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Aoj56TKocx7nJ+0u6BETkgc23vMenYf6j0588GfO7Ksk/LzD4tNmUQU3mtps?=
+ =?us-ascii?Q?xZQI+5Kkym0KYA0axE0R+Ez+QHw07AhUYJ1MGN2+UJ4BNhyICdO3IUsSbTHn?=
+ =?us-ascii?Q?HLth0SZoHkUxLqJL6Z6TNTvBR8dJSDS2B0YbxKwWMu9Tdi360lHKjrPqeaK6?=
+ =?us-ascii?Q?q7mMS/tGNx5fWZejyTVmXCs4/Z1yXRgv6/LjAJ/ryg0SjiXBUeOElmX6Q4xT?=
+ =?us-ascii?Q?pFcya2U7cDpKCAobe6v1u3tkcwuGAOJSmlJkWhxEXn2Sl8oHVeltSCIIirYR?=
+ =?us-ascii?Q?sUj9XMUKooSbTpxJOufkFbc9fwCx64M/oxfebT75LEOr9v1TZug2qkhEi6Xu?=
+ =?us-ascii?Q?SXzhR7d8zZl/aI9OdBSnZdWhUl04t0OvGeFtVujZlr3zSVtsAcIQkzoYWdDo?=
+ =?us-ascii?Q?0nLLzKnXlSktEwdOThxj/e/H6qTH8g50pfFVc7GdpUfp1JgEQe3CtVu3PoPy?=
+ =?us-ascii?Q?mdMiIEbaR8OW8nTcNNsuF/gM4lJGSEXkcavZy//IgIYelufTuIUZRs7BbKET?=
+ =?us-ascii?Q?fzdjd19c/jLKT7qOkVru8J17bokRhva6dsa7DL2NEoJR7+NVU8Bj/a6KI3G8?=
+ =?us-ascii?Q?OwmwZ4qvDd9md2ol74tbS6u4Ba1TjFWrHHOVn7v7Eit8phB06CP1/AtFeqsf?=
+ =?us-ascii?Q?JcnRA0hWJ2NHUSC9FncoV3dz775mReEOhX26Olvh105nx2jG41i8/oLO3UzX?=
+ =?us-ascii?Q?HU6A4Z67uod9hE88SR5aga4rLlsA3yI/aQMhRXxd2qrEApRBWzk+ZMQC8Nch?=
+ =?us-ascii?Q?f5hnjYCdWjZ9rYyw44a1Czw2vLAheZl9iRuWUphBu3BftyyIp8B0oCRESOx0?=
+ =?us-ascii?Q?tiwu3t2+l7VCeW4/VflhO0hgL4S5c1bpSw48+70xr/9EQ+46LsktmYa3RPdm?=
+ =?us-ascii?Q?zXtqjjMrQ1+OL6GtjDNeT0UVcF7OpKFZfGDMdyaT27N2u/zZD6bPkQQNgWsM?=
+ =?us-ascii?Q?vA9bgEZtwi2+EBJt3r/9KRAcegTctMA8f6hXYxm1fNknJhKfi8pl+acKWmpl?=
+ =?us-ascii?Q?6gLqvG8GMlb/AsJiOosXOpmNOubOP3/HFO2uYqt3GuELTIHC0uj2oIYcc5xp?=
+ =?us-ascii?Q?vEEx6ghghOsfogCRdwnchoNAkkPd+GJBgl2NXTeNOZ5Rk0kBex1ygHUOLE5P?=
+ =?us-ascii?Q?ID6k+NUheeVspJvn1I0KvbkdhzX66RJXysSCVOzBAX0RtiLrLb5grm6Slq5C?=
+ =?us-ascii?Q?HVbyBNG/tgzeF8U/QjqsT0hi0BmwsZXL29NiR74pV5Y00xs8rhkIhiEZ6xV1?=
+ =?us-ascii?Q?PbCnqvL7FoWbgjSCVlkH?=
 X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc70d5e3-09c2-47f3-a27b-08ddccd239c9
-X-MS-Exchange-CrossTenant-AuthSource: OSBPR01MB1670.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d9e9dd7-97c7-43db-a90e-08ddcce13509
+X-MS-Exchange-CrossTenant-AuthSource: TY1PR01MB1676.jpnprd01.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2025 05:55:44.6901 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2025 07:43:00.5150 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB6333
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB11658
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,66 +145,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow the system to reset the CPU without calling the reset
-controller. This patch also removed the default SYSRESET controller
-for MT7628, as it is now optional.
+The size of free memory should be $lmb_base - $ram_base.
 
 Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
 ---
- arch/mips/mach-mtmips/Kconfig         | 3 ---
- arch/mips/mach-mtmips/mt7628/init.c   | 8 ++++++++
- arch/mips/mach-mtmips/mt7628/mt7628.h | 1 +
- 3 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/arch/mips/mach-mtmips/Kconfig b/arch/mips/mach-mtmips/Kconfig
-index 3fcd0b8465b..337d2259fa1 100644
---- a/arch/mips/mach-mtmips/Kconfig
-+++ b/arch/mips/mach-mtmips/Kconfig
-@@ -102,8 +102,6 @@ config SOC_MT7628
- 	select SYS_MIPS_CACHE_INIT_RAM_LOAD
- 	select PINCTRL_MT7628
- 	select MTK_SERIAL
--	select SYSRESET
--	select SYSRESET_RESETCTL
- 	select SPL_SEPARATE_BSS if SPL
- 	select SPL_INIT_STACK_WITHOUT_MALLOC_F if SPL
- 	select SPL_LOADER_SUPPORT if SPL
-@@ -111,7 +109,6 @@ config SOC_MT7628
- 	select SPL_SIMPLE_BUS if SPL_DM
- 	select SPL_DM_SERIAL if SPL_DM
- 	select SPL_CLK if SPL_DM && SPL_SERIAL
--	select SPL_SYSRESET if SPL_DM
- 	select SPL_OF_LIBFDT if SPL_OF_CONTROL
- 	help
- 	  This supports MediaTek MT7628/MT7688.
-diff --git a/arch/mips/mach-mtmips/mt7628/init.c b/arch/mips/mach-mtmips/mt7628/init.c
-index 2996fd9ef4e..a0e731121c9 100644
---- a/arch/mips/mach-mtmips/mt7628/init.c
-+++ b/arch/mips/mach-mtmips/mt7628/init.c
-@@ -110,3 +110,11 @@ ulong notrace get_tbclk(void)
- {
- 	return gd->arch.timer_freq;
+Before:
+=> meminfo
+DRAM:  64 MiB
+
+Region           Base     Size      End      Gap
+------------------------------------------------
+code         83fa0000    5fdf8 83fffdf8
+malloc       83e90000   110000 83fa0000        0
+board_info   83e8ffd0       30 83e90000        0
+global_data  83e8ff10       b4 83e8ffc4        c
+devicetree   83e8e690     186d 83e8fefd       13
+stack        82e8e000  1000000 83e8e000      690
+lmb          82e8e000  1172000 84000000 fee8e000
+free         80000000 82e8e000  2e8e000 80000000
+
+After:
+=> meminfo
+DRAM:  64 MiB
+
+Region           Base     Size      End      Gap
+------------------------------------------------
+code         83fa0000    5f260 83fff260
+malloc       83e90000   110000 83fa0000        0
+board_info   83e8ffd0       30 83e90000        0
+global_data  83e8ff10       b4 83e8ffc4        c
+devicetree   83e8e690     186d 83e8fefd       13
+stack        82e8e000  1000000 83e8e000      690
+lmb          82e8e000  1172000 84000000 fee8e000
+free         80000000  2e8e000 82e8e000        0
+
+ cmd/meminfo.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmd/meminfo.c b/cmd/meminfo.c
+index acdb38dcba0..aa3b5bafe17 100644
+--- a/cmd/meminfo.c
++++ b/cmd/meminfo.c
+@@ -93,7 +93,7 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	print_region("stack", stk_bot, CONFIG_STACK_SIZE, &upto);
+ 	if (IS_ENABLED(CONFIG_LMB))
+ 		show_lmb(lmb_get(), &upto);
+-	print_region("free", gd->ram_base, upto, &upto);
++	print_region("free", gd->ram_base, upto - gd->ram_base, &upto);
+ 
+ 	return 0;
  }
-+
-+void _machine_restart(void)
-+{
-+	void __iomem *sysc = ioremap_nocache(SYSCTL_BASE, SYSCTL_SIZE);
-+
-+	while (1)
-+		writel(SYS_RST, sysc + SYSCTL_RSTCTL_REG);
-+}
-diff --git a/arch/mips/mach-mtmips/mt7628/mt7628.h b/arch/mips/mach-mtmips/mt7628/mt7628.h
-index 391880b014e..aac6e1278b2 100644
---- a/arch/mips/mach-mtmips/mt7628/mt7628.h
-+++ b/arch/mips/mach-mtmips/mt7628/mt7628.h
-@@ -49,6 +49,7 @@
- 
- #define SYSCTL_RSTCTL_REG		0x34
- #define MC_RST				0x400
-+#define SYS_RST				0x01
- 
- #define SYSCTL_AGPIO_CFG_REG		0x3c
- #define EPHY_GPIO_AIO_EN_S		17
 -- 
 2.50.0
 
