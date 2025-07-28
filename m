@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613DCC87FCC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 02:15:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8193EC87FCE
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 02:15:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AE4D830EA;
-	Mon, 28 Jul 2025 04:14:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA52682F8E;
+	Mon, 28 Jul 2025 04:15:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="RgLm3iSt";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="YqYyjsYz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8458F82F14; Mon, 28 Jul 2025 04:14:53 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 1B3B68315B; Mon, 28 Jul 2025 04:14:59 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 505BE8315B
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 04:14:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0187582F14
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 04:14:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UtIPocy7M5B/qtCfhnHlWRlQaVisDCQJ4WI+kPJpPNhPxT7zWjZrk/Ttm6ukqj1AX/XaGjQSCodpQkCNB1LxqivNawjs3Pco6IDoOpqFSh9GCH0VaXymk0pVExNkIr0MW3d9c2//NMamFfVjw0w80csLMq17jULhnIIjGYhBOV09sDkAXAQe/nU7M6qVl0no8nwmRIK9259/iALvbSZBzZjVV1pWFZ1vRSouZN1mbxaMegiyqjTQ/j8Ti7v5ENRf8ei0KD7V8Jk2DGPNP+2382XnA6+vrS3UqgSOcctOpiBybr54X5ijgwwcyHR2FOZJ3ydQLU3P0T8qPDhKL/LZsw==
+ b=WYcEUuiG1ai415pziyWlh+vsIcrxX5QpmExMe1mzgcJPkcBVlhIITaRIeSZEW3Mlp/yiA9l7zSNktn5HaYXbMtRyyxFNMr8DksG/gfdLWVI9zFUGTLmX52gr91c5ypMNx3WcBdI6AOGBSWDf1noiuAvqyCtz93+aIpNNPwj+6XnFuglsSKDcmo07gRNkh1uvsAy7I6jLCI0YeAGikbAWJpUNdCgkubveXxfU4TffHCeZ+c3A9eYuT7wPud8e1oOYu9rzQfjqKGVXmSxmxi29adR8IZ7mp2QCH/pA3KOjYsz0fr9gHcQCuNIhrmlG3lqVFJhcWHKDWJzINhLZxY0g0A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MxSnCjW7RQDOgoX77nnT810Q9u8pQj14gTVfqBaaZPw=;
- b=cHmi0yyd07zpmktiqd2oojyo9FogI9f8n/U2yLdNjlkCT2mK6IWTvo2GrPpq+mJpfAWj72lRZ5Q+se/QhLYC/bWqm7xTEWnKkzFc3r/JI3soqPBXLM0Mot8wNSGc6IG8b9NHzHVIJeK39R7E7zKNLyFsTdLqzgvRF6FgvMT0pfG8B8MHgSguuHpdeFsiOYd+uM7QT4YnvSpgiPTEsj6XxJErYNjiYZ1L+TXdS6CXmV82eK/Y08ke2fr+AWkeMyW2a6hg2J9pneulxkF4lqEqSuNYNNHyIte9M2n1BZ2uYFLCcf2V/jazXf3iY2GQUn/aJImsg799dLoo0KGxyS8Qgw==
+ bh=yTvRV17M/EjPjc8BmXmdF1GfwAbDdducKdTWr+p5+B0=;
+ b=pb+8DGiAsGL4ao3JTJoIKmXcrrzyhuSBnmqEu1PYA8B5oT0eucAau5P3cLeXh5F4nH7tkhBqzBkhLEq1HWbUN0ANlfRuHakXQD7skleG4v3X27CQdfMThhXECarM4lW9oEeI95cM5cu62AKNawBly0fZfGnIS7WDvlJbGN5eTxhNMBB9zo2rEWE/nVjF/x0EoIJfxdOTAgtw8SU8J9MKuNODqgtl+IlFrfEms7ORX3/ycIvNF++wjoafjLUOrkVIEduXchUnQAasyWOPjI+aLG7o5fbzV6ppQrnYkdBy1j5gKfeqpzU3ulmXt4WWqo4jXy1bBDcjgFCVoa5k2Ll4kw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MxSnCjW7RQDOgoX77nnT810Q9u8pQj14gTVfqBaaZPw=;
- b=RgLm3iStc6VeGul3HEQlkZIno+0+6S9wABKa3OeFkuyh9EvLC91flfg+4egJwzIl9amm0J+xU0blSZFPhwZxh/gqd3aASBA/9cKoMz2/Jd+gm2MvITp5ZG464Q2htoFxqKjBNvcMnyHFWb8u17jL60z6FK+Ver+19sk1JpeGZMn2ipG/e2znV27gmxeiP9IIvZEYS/aNfoUUK+fQqBFqRtEAD7lyA/SX+M2pdIM6vZDvXsaSYBq6jalzlgAlkEBAuUcwAMo49hX77aKZI2ceSHhkis4g8v5EkmO6XneQMG7bR3M9sLtJkDw2j4QCIKFgNQHEKZ1Z6ptm8tyfXRljUA==
+ bh=yTvRV17M/EjPjc8BmXmdF1GfwAbDdducKdTWr+p5+B0=;
+ b=YqYyjsYzF4VFL6n4WL2K3cY//cK6hnwvNbYkpqc6xPu3Oafe0/KRln1nr6Yg2TRfQnfR9flYrl/+NLfC+RPJ5qp2yYOIMLFS2l9VNheJWQieOmekRb5QfIPqgOg1UFT2az6rwRhiS0fUMU3NChazOEXKQ7lbL+nwAJHKjFvMNXo2rx8DvkLY0LMIE/1iDFbPcZnxhsg+d2+GSfxSFOq/fDzjmPWa6UCwunQe8EPDan4yr2utnBkBnXkNzWsRFy2mAKZ6lNRGyihcJNItZq4SZzU1OHyScGa07y/Cadl7hpAKm4o13eoJW1S6uMHeF5nosb2PKukL8m7kJwDKDWi50g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by AS8PR04MB8546.eurprd04.prod.outlook.com (2603:10a6:20b:421::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.26; Mon, 28 Jul
- 2025 02:14:50 +0000
+ 2025 02:14:55 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8964.025; Mon, 28 Jul 2025
- 02:14:50 +0000
+ 02:14:55 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Mon, 28 Jul 2025 11:24:54 +0800
-Subject: [PATCH 8/9] ddr: imx9: Implement Synopsys LPDDR PHY QuickBoot flow
+Date: Mon, 28 Jul 2025 11:24:55 +0800
+Subject: [PATCH 9/9] ddr: imx9: Add errata registers support
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250728-ddr-imx-v1-8-73da75bb33d3@nxp.com>
+Message-Id: <20250728-ddr-imx-v1-9-73da75bb33d3@nxp.com>
 References: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
 In-Reply-To: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
- Viorel Suman <viorel.suman@nxp.com>
+ Viorel Suman <viorel.suman@nxp.com>, Tom Zheng <haidong.zheng@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Florin Pavelescu <florin.pavelescu@nxp.com>
 X-Mailer: b4 0.14.2
 X-ClientProxiedBy: MW4PR04CA0277.namprd04.prod.outlook.com
  (2603:10b6:303:89::12) To PAXPR04MB8459.eurprd04.prod.outlook.com
@@ -73,96 +74,96 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB8546:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5fbfb24a-65c4-4384-d267-08ddcd7c8811
+X-MS-Office365-Filtering-Correlation-Id: 9e3e67ee-58e2-4c99-5027-08ddcd7c8b5f
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|52116014|366016|1800799024|19092799006|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?STFlNlppSU1BR0VIcmg2Tk9CNUxKVE1zNnl6SFJPaTJlZnNyQ1QvUXFwY1RM?=
- =?utf-8?B?N2M4ME5VM3BGZEx3ajJhblMxQi9UeDNVdnBhcUdtbkZEUjE0S2tnYzUzWCtH?=
- =?utf-8?B?V2lGUHBtODMwK2ZTQWxCTjIvd1BFWm1EZXNHMlJWSXdTS3pXNm1wdU5HcWxW?=
- =?utf-8?B?Vk5JRldjeDBUam0yTXVralNYVGVNaUdobzRLczJaYVdDT0RhSjVmeVdJcmZa?=
- =?utf-8?B?OHM0VGJjb01LTUJtWjczRDJnVHlDWkEvekMvUGU1ZmNlbTRNZVZKSUNTTHdV?=
- =?utf-8?B?VytHTVRYTkgwekJiM2lCMlFxSnI0VDRjY3dJTXlGQjVsdi85ZVpCVzBhcG05?=
- =?utf-8?B?bitSVXNJNHRlUlVPUXpQOE0wUEt1L0ltZEdtVTlFaDY0SDh2VVptNUR0MENQ?=
- =?utf-8?B?c0RqMXBaRjBkLytPc0k2N2Zva1c4NVh4SFF5b25mODJyNktBTUxKMzFYeUZK?=
- =?utf-8?B?YmRMVGtJaHlONGFVdmI2OWtBMW03S3J2QzBqM3ZxSzQrVkdmbTY4V2YyUjRH?=
- =?utf-8?B?Q3ZqRzl5cVkzaDlVM3FvMHJQcjN1YXZVWkdZU00yTGRqalhwVjZEYkJTVEN2?=
- =?utf-8?B?ZnBXbzJTMVFyVmpXdVN3bUNSS2RpOXRmNXFUbVMxSVFja3JNbGd3djBxT2hy?=
- =?utf-8?B?NHdDemx5T2oxZmVycHJSZ29ENkppSnpiZ3FMV1dKWXhYeFVGbDFZZjlDNjhU?=
- =?utf-8?B?cHBTWVZQTE9iZWNsNXd3OEhaWXJnL21ZK3FJZzVNd2Z3R1R5aHhGZ1ZtT0pn?=
- =?utf-8?B?bCt4QWVtRmQxQWpjSlNuQ3gxOU9ldnBQdFdFSG11cDdWU0pldzNWT01EcS9i?=
- =?utf-8?B?SFRpT2tpTmxpdURYdEFHUFN2RGlBSklWLzJYdW5SNWtFcTBKTi8zUi9ZSC9O?=
- =?utf-8?B?ZTJKTjJzdG9ScWJVNVIzdWdwUXFiWWxBVERlMXRUeGJ6UzBadXBYVlhPdUpi?=
- =?utf-8?B?UGYweDlKNzJiTEFYV2JpSkplck00M2RLUndLOUwwWGE0Y08zckZTMURqQXVs?=
- =?utf-8?B?bVo1Q1dZQlp6SE1EVXhvdUhRSDM0bnNtbFZGYzNWSWZPaExjTU1nblhONVBR?=
- =?utf-8?B?OExSZlZTOXpvMldTTFdsMEZLUkVHdm5RcFpSSUoveDVDckNkWnZ0cE5LeXZo?=
- =?utf-8?B?QmxIU2craFV3aU9yYVV5eXpEZkkzZHkzMFY5d0NIQldhMCtya1V2OGlkN3F4?=
- =?utf-8?B?ZWNtWGVZZVVjWGl1R1ZvZTdWYkpXb01IWGNLVzh4QWNXR1JxRXpoNURaTXRx?=
- =?utf-8?B?Vk91L2RCSk9zTWFpTzNPbDZ0RkNYdi9ETCszdTNwNTNsQ3Zib1E2V2hRcXRW?=
- =?utf-8?B?R1VxTzZEajF5UVdaNEVIZXFRdWlzVjdGNjJLcXE2cVgwakRFaHRkVjdXaFM1?=
- =?utf-8?B?SkFLVUlyV0J2Y2ZLR2pnb3BNeE5Jb2lGeDJZaXZpd2FvdU5uTWF5MFFZMWZQ?=
- =?utf-8?B?SlRXdHQwSVp4L2JWUXBDSWRPamh3UGUyWWxaWlFEV3dVWWZTVmVuWU9tVVVo?=
- =?utf-8?B?dkNaQzEwc0VhN2hGVXRKbHJtTHdzVzFZemsrbm9ZY0J6OEN5VUtaSzdsV2Jr?=
- =?utf-8?B?cGhtNDQ2ZU44eFYzcXNocE1NTWRWL3NOVmNlbHczSGUrK0pjaW0wSDQ2YUw3?=
- =?utf-8?B?b3A2b0tmTnhUOEI4c2Z1cDZMRzBVcWYxa0h5cVlZZk9IOGVkUXpvYXpVbSsy?=
- =?utf-8?B?Qk9kUCtqT0JwamEzMEdORTlRbXlZSHVjZ1ZXcXZjL3FKV3YxMEx3VTYxUkFJ?=
- =?utf-8?B?UFdINXNIeWN5aXU0bXRIQWlSc3psSDZ3bWJEc2RnK2t3b0tFekQ3eUMzWWVV?=
- =?utf-8?B?VGtDekJBc0Y0WWxTV0pHd0EwdDhqYmdDWlU1OFZJQ21nK0d6cDFLSEVLWnJk?=
- =?utf-8?B?QUMvK0crK3h1TW5zTSttSzR3RVRna1pLMFBFVzRCOXowVmg4c3ExNTFmZDJz?=
- =?utf-8?B?L1NxRXJPN09SY1g1K1NjOEo0ZUI1b1VJc2ZDTnd2SFRCOUU1WVRydFRPZUFR?=
- =?utf-8?B?SWtHcnZoaTJRPT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NmVsVlJZRXBZSmRMcUF5b1JvdkVoejdtWGJ1MTBCYkpFblFYK2Z1dDBtM0p1?=
+ =?utf-8?B?K2hyRXg0azFSOUkzSXBXeGF4dXFyTGJPWm9yVElmcTBoV05qclpYTTZ3QlhC?=
+ =?utf-8?B?ZXg2ZGZiT0E5dXJmazFsWFBXdWZPNVBGNEM5TXZjMzRRUkJSVmxJWStGY280?=
+ =?utf-8?B?VWdvcjc1OGlpUkxHYnVkbVNOdytvRWkwTXlJRUhpS0ZUcHgwNXBkWlJYcTAr?=
+ =?utf-8?B?YzJXVDVmVnRyRTRHNkV2b3hMdStZRFVRSkdka2lhNi8zcXF2WExYRnJLbVJz?=
+ =?utf-8?B?bXdTODJaQ1lVZTdnUzFvNVB6QjN4RWZLaUdGS1dFVnp1d25PcXVIOGliQVNZ?=
+ =?utf-8?B?cko2SHdpQlFTcnd0VGVVMEFsSkpuRnhFRWt6YWxrSmhpVU8xWDJvWDduU2ND?=
+ =?utf-8?B?VXJuMWhtbTRSOUJMb1ZtSWpEYkVNMTgvTkxyRGF3TzFsMm9KREQ0Y0g0VDcz?=
+ =?utf-8?B?ZUlvMnRxU3BJSnRVVjMzTlFLRGtQZy95SE52SnE1L01jRko4dzFUTlJWOHMz?=
+ =?utf-8?B?U3c2OGRqUGtac21jaDVTLzlIOFhvZW0wWnlnNy9uZXRLSTJ6Zkw2ekVoMnpl?=
+ =?utf-8?B?alF5U1k4K3hsYTNYUzV1OVBXNlM2UzluNGcxdk4xTk9hOGJwOUNyM2x1NU1M?=
+ =?utf-8?B?RHdnWGsxd3dQc2s5UkZFdnZRRFk1ZHZud2FDY2pqNlBHR1hQR0F0UGlOWVJn?=
+ =?utf-8?B?Z2NFUUd0L3JtOG9FRzRPMzlzL2FQaTVIdnlSc3NtbXJ4cUNranI3MlQzMTNj?=
+ =?utf-8?B?WitaYkRXQ3pRUzdhUGlST0tncHJlc3IyanBVTjZMMElWT2xCQjlkZkJYWkEv?=
+ =?utf-8?B?Y2N2MWMzcmNmcGJtYTFnV2wvMWRxOHFUSUZxN3phS3ViclUzbUp3dVJPTjlZ?=
+ =?utf-8?B?em1RWVBiQTk2UGluY05KTzQ0bnZaYjhJZHlpMm5tZzJFajRUTitNYVpGZ1pG?=
+ =?utf-8?B?T1FjcDVzdWJrZTNyK3J4L1ZtT09IWTJGZnUydDdHNzVTZ3FVbjRMTU9BQkE1?=
+ =?utf-8?B?VVpoM3BXM1F5dU5yY1Q3aWRjZEcxcnRUZnNjMjJZcjFNa2VWWC9vSlZYV1Bx?=
+ =?utf-8?B?U0YvWDl1Vm1KbzM0Wkd6dmZSSmZzSG1jdkZEZXFIdTFlODE2N2YyeXNxNis1?=
+ =?utf-8?B?NkRKTWZPTE9uNWdabWdxUXRaMXBNdnZuWndaY2pCZ0ZsTndLbjdHc2gveWNy?=
+ =?utf-8?B?cFdkTEdBWTlrZmZicU5rRGtrSnE1c3lqRlZqaFdIZUhGTWVKMUhpNitMeGQ2?=
+ =?utf-8?B?ZXR6WlA0TThpaWlNZDE1Uko3endlclB6K1F1S1paMzVjVERMYVlONnFUSzBv?=
+ =?utf-8?B?ZWU2aWxYMnZqUTI3b1UwT2dDcHJmVm0veitONDg5dnJLUEhIVWw1YlBRKzNS?=
+ =?utf-8?B?Snk5QUZEL2gwZS9ldHdnYU1ZTWM2eVJHdDZ6S3cxcDYyR08wK09scERqc3FS?=
+ =?utf-8?B?aEp4TncwSGN3VFd0eDBRZ3pZMXJ3VFRDc093NndyR1hPeUJ2OHZHVEJLWnh5?=
+ =?utf-8?B?YzNZMmd2MmF3VGFQaU1ZOXlXdHMzeGgxYXN3WTlLSjF4UDc4SjNNR0ticTU3?=
+ =?utf-8?B?S2J5UC9ISkhsTUliVFhhODkrR3lSTHZSdW9WSU55clZ0V2RpQ25iVCtSbm52?=
+ =?utf-8?B?MmpjaXREY0xibzJld0o3T2FoMG5rdTNjK0pSU0JBcDlzSFl1U0Q5aHI0b1I0?=
+ =?utf-8?B?RFM0Q2drRkZPT3NpZFFvdjJIZmx5WTlZU1c3MStBcExkRVBSRVBmaGdQZ1Zt?=
+ =?utf-8?B?QlcyUHJWQlBQUGVxcVRreER6Z29pN251ZmRSMUJVMnBseGZQYUJzQ2YySDh2?=
+ =?utf-8?B?T2dYOUpXam9EV0RnRzBkaEJ0Y3RrT1NlU0dUaS9RVkRBUnBPUlQ4YTlBeGh5?=
+ =?utf-8?B?WG9haXZzS3Z2a1FnempFSjVZZ25TeCtJb2VjY0FSYU1TME4rTFdNd3p3V1BO?=
+ =?utf-8?B?bHkvVGlDMFNUM1V4c1IxbVh6cEdMZnlwS0krdWplMm5wdWUzaEg1aGZzSzRT?=
+ =?utf-8?B?OTlkb2lBdmh3PT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(52116014)(366016)(1800799024)(19092799006)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UWlxb2tpUnZpdWY1YlBGVWxEdktzaUQ3Q0lBM0dLckMwNEZjQmZvT3ZjWmhS?=
- =?utf-8?B?a295L3BJa21FY2d2L1ErY0NMRU9aaUgvYStocmQwa1VyVTFVbzdqelpxR2R2?=
- =?utf-8?B?THlldmtkeVIzOURTL0hLQ05JZHY5eG15YitaOE4wT0tud0RrU1R5RDZINHFQ?=
- =?utf-8?B?TEJSNjEwTXBmZ2V1eUt5eDRYOGozY25SZ1dtM2doUVdoQ1UxTmUzYzlPMzcx?=
- =?utf-8?B?N2hINHBGdTY4czhRK2NwbVJxUWhhdTBzeWZzSjdzak93bDVUUmFwZ1dMUW4v?=
- =?utf-8?B?UFlIc2p3clF3WGpnV1ZmaEZUOTlzaGpwOTgxSkRvcWZGNEJ6L3hCNDB0Qy9S?=
- =?utf-8?B?d0tKTTJqcndLVWdEZDNqRzhjSWxFUzZpN29NcE14eFhYWlIwMzNvOFVjUmdy?=
- =?utf-8?B?elFybEY2YjVCNmpvQ1BWWVJLZkNQS1FENUprUlRpbnJkMXhOa1d0czd4R2dZ?=
- =?utf-8?B?MGltelBZcFJtaFk3cUkrMWtvcEZReFlqcWxTM1ZoUDkvdkp1Rm9oQXh6anRv?=
- =?utf-8?B?dXNIYWZ6b1hFNHpCSmdCa0JZK2lpaDV1dDgrMG5SS1h4bGMrN1lVRXNTKzVN?=
- =?utf-8?B?dHF4dW9HQ1doTEhvdlNSd1pKMVJhZlRrcGtPcXNiRjFlaENpNW1oZ1hHUTBB?=
- =?utf-8?B?ZkNhNDBuWENORUpOclFwWWdpVHJtMkpOZzM5UEhrMGo3bm4wQ0xjWkRlMkxL?=
- =?utf-8?B?dENhd0tNQ1kvdHBGTHI5cThpUS9BRjVqSy8yZVd4RGl0WU0va0ttZnRpN0JY?=
- =?utf-8?B?TnZkVExydW9FQkM3U2psUm1KZXF5a0YxVTVObDBER0FaSGpkMG5VNGQ5T29Q?=
- =?utf-8?B?MWhIVEZTcUd4bjZSM3NwdHhSNmZxUWt5RnIwMGZNbnpmdjc0SWIwR1hrUWpM?=
- =?utf-8?B?eUFNOXFDWUNOdWtVdzlySTV1eDNwUWVleDhTc0Y2T2pTYWtQSHhvTEQ0YVBu?=
- =?utf-8?B?N3FHNVpQc2dINEZ0cHdaOGZ4L3hnOHIrVnBSdjMvWUtnbXFZM2pEdUF6R0tU?=
- =?utf-8?B?azY2REl4RzlzRnE5SUk2WktvMmhTUUtLSUloYkNDbnVFTGU3OGEyQmptT2t2?=
- =?utf-8?B?b2h6Y2lSNDc5YmhaNktJMEhaWkNVM0dMbkRqZWZoWHpEUGd5bkFJSTV1UEQy?=
- =?utf-8?B?SHM5bjFKN0s3andKRWRpN0lnM3N5Z2FQQnovNjBTY3RmZlU0R0tZNkJaTnpo?=
- =?utf-8?B?Zzd0eVlBbVVEUmQxOFc0RkFXRER0V29EemY0K3ZhYUlqajlpRFNNbk4xUnNW?=
- =?utf-8?B?Z0U0VDV5bThSZitZeHR0ejRsZHY0U3VhNGdvdFVHOFhHbEdabHdmY3o3d05L?=
- =?utf-8?B?a1B2dGkvRmZUY1Q3TUVmS2V0aE5wTlFHeGlrRnFnVlIrUWtTU05KOW9OMXgx?=
- =?utf-8?B?U2R0S0lkbUJvRW1aZkh5cGRoVkNQVFhpUlh4d3JIUHFRRlZFQVBrRTZtajlo?=
- =?utf-8?B?S1B5Yk5Zd3NLY2R5YXh4bnRqM1czNVJaRU9VRFVHUVZleFF4Q2dXai9wWTUr?=
- =?utf-8?B?c29pQURadjRqRFBsakJjeTMwNlh4TUd5NXluSGJ4NENHUjBTZnJxSXJ4dVJk?=
- =?utf-8?B?QXFmd0VnQ2xkWDFWb1RMMk9FSkVyNnJDZkxxbUdUQStDYkVoY2xCZkRITUtT?=
- =?utf-8?B?dmdqQVk2eFo5Z1BkT2tSUURhRkRETTJTV0wvY281Q0txUmEvYXAxWGlkSUEr?=
- =?utf-8?B?cEcwc1I1NFh5djFRb1VQdEt5K1I3OUQ3bDFHVFA5am9zUEllbXRBU0xnSE9t?=
- =?utf-8?B?L0M2NFRBdDlQRExvOUJhVG5lbktmbDJqTFFDTlBiN21qdVR2SkNuVHpJUXdL?=
- =?utf-8?B?TUZyWlBVV0pvcTBKaEkrK3V0Mm42Z1B0THJrNWhBWkhYN2M4aWNKQTZhbGhN?=
- =?utf-8?B?T0xqRWtZc2YvZWVJY0kwODJNbEtrald6Y2FEWGhMU29CejVOVjRacUtMMVpQ?=
- =?utf-8?B?U0pEVzB3R25NNXdhSE54NFZrTnU0SnVreWZ3c0NTQ0tQY3J6UWlhczZ2bjYw?=
- =?utf-8?B?RDRsT0NSWERGeHpObUp4M0VmZzdQUkJQQlRmazhTRkNBc1I4Umx4U1FsbXgw?=
- =?utf-8?B?Z2NnTFJmSWZ5ZGhiQ3Nyb2twcE95SmVRWWI2T0doTExpeUFLQUNLV0t0b2h1?=
- =?utf-8?Q?98x0E+vkuD77qi4FOx4fdJb6P?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MFRzVDhmM1RxdEVkMDNKaGhHcDRheFFyOVdhQmVVQTRzazI2QjV6Smg0MnRj?=
+ =?utf-8?B?ZjRsQlNJWTdkcVVzakJ1bDVRZ1o1Qlcrc1pwNHpJSjU5QnNvOGpWWFdEMm1l?=
+ =?utf-8?B?OVVjcER6M0NSWVpvcjZ1dnoyWWYrbzhUQzZSNTZINC9RSkxQVUxrVnlxdmZW?=
+ =?utf-8?B?b1dsVUpudmIwOUdqMzU3cGFpaHVwWFU2eEI4TFYza21MVUdud0J0MXh1bVhu?=
+ =?utf-8?B?YytZM3Z2cWRtT3F1MnZKRUNFYWNVWG1jNXpTcWErSTlEU09hb1ZkRUtLNkJO?=
+ =?utf-8?B?dTluRWdqeEd1QU1xVDVodWFyUFlIdGdrK0dzZGFIcFQ3R05lbERmenhjeHY2?=
+ =?utf-8?B?Wjg5N0dUNnAycG9WT1RyMXQzaUNPY3A2cnYrSlYrRUprdmptZy9vUkpWem5s?=
+ =?utf-8?B?Vi9jbGdIaWN1dWtHVDZzV2ZSVFYyOU1PYVlzTkNHWFpzODM4Y2NrNjRqeVVz?=
+ =?utf-8?B?MjZQVjVGRlB0cEMxR2FNTTJLNW1TWUlkZXliRXdNc2FMcUJvZEcwblB4eCt1?=
+ =?utf-8?B?MTlHM1R0c0RxY1BGSmY0OWwrb29VNnB0VXIyd0c5MkQra1ZJOVU0N3k2aFhQ?=
+ =?utf-8?B?cUhFeUxwOXpRT2ppOFZFLzZhZGVXd0hUZHdxOGR6c1cwOEJDSlNHK3VyZDVI?=
+ =?utf-8?B?azBNWTE0c1FML3hZR0w3Ui8zSUh3dEpHd0FUb2UxUUNhWldEbVVCRk9QemFD?=
+ =?utf-8?B?cDU1SnluWkMweTZjMWs3amJkbjZvYWZvWDZnQUg1QjFHYmwvbys4ZzRIMUFF?=
+ =?utf-8?B?Nmc1YnBjRnpmVGZqZjBieGVmRFdxdmZYTXZBLzJUYjlqVjRVSWNqalRKa3g3?=
+ =?utf-8?B?aXRwVnNiNUxEUUtIT1ZwSHFKWGRhdUdWK2JIRUtiWFVmSThoK3JsdjFYV1o5?=
+ =?utf-8?B?OWI5MHQ0ZjF6Y0ZHdzZzVGFDcEpoT2ZUbDZWTEZCenBpZ3V6dmlDS1lkSTNK?=
+ =?utf-8?B?YmdVZ3djM1gwaEoxZENrVGdmZnk4YWxDeHNBaFI5RG5pdEx4eGFLV2N4VVFW?=
+ =?utf-8?B?djZwMFV6VzB0K2RQelcwclpzRmZjRm5zcklWOEtvVTlJWUpjTktsZ1pzOWFm?=
+ =?utf-8?B?akplak53QXp4UnhVVlhIUXJYeWM4MXNRTXA1NERCbW1nUDNSYmc0V2QwbEZS?=
+ =?utf-8?B?RjN3cEJqL3NLbEJwK1RrZ3llbXp4bHRFS2EwZ2pydHkvRVZWNjA4SFNRRmQv?=
+ =?utf-8?B?dHVUUnpxN3d2MFBXbmFaQ09IWWVZTlJXc3kyMndybm5SU205NWtXSzU5VFlx?=
+ =?utf-8?B?WklQMi84Y296bXF1QXJJYVUwNVJZOVE2T3BhaXBzakFjSXQrWjBtR29GNjZ1?=
+ =?utf-8?B?SXZDUUpMVTl1SWptekxRQnlyNW93V0pkTzF3S0NJWVNZblNCeDNDbWVRMUpN?=
+ =?utf-8?B?M2hBMWplU1ByWUhua0VnLzEvUXJwK2RtTkVtV1N4azZyRnQ3Wndsa01YYk1Q?=
+ =?utf-8?B?b0JPTGNIWE1uQm9nMUpOYktkNnpXNmhKVnEvTEsxUE5aMnVEc0ZCTER6NzFL?=
+ =?utf-8?B?Q3M4bnhlMm40OXIralhTcitRelpET214cXZOaVQyaGlzNm9pY0szK3NGbzJ6?=
+ =?utf-8?B?aUhxeGFsUDRHQytUbFVSaldNazRiZ1VVbEdqaXRuYmFMcjVGVlpoa0pmQ2Zl?=
+ =?utf-8?B?OXVnVE0rUHZBUDh5Z1ZTMkNlWDNHd3poRlJBaW5NTjUzQk5RbDY3VDNVMlZx?=
+ =?utf-8?B?YldlWnFqR1BHUkR0NDhCZGJuQXQxQlRUNk8wRmptN3R5RzNhTUtjcGh5R2I0?=
+ =?utf-8?B?NUtWWXFsc1VieXo1MitnZS9CbGFjY2xTd3JtaGVMUUx4NVNsVUp3QVBmY1BV?=
+ =?utf-8?B?NU53Y055bmw5bTRRMERrTGdUZWdrSUl6bDhFTHBJdHB1RVp4YTR1NjdpMnBZ?=
+ =?utf-8?B?czNwOFBrKzUzdU9lK0grOUp5YmVoUDZLNXBOVE5UaW1yYXZjSVNpa3NNbjEx?=
+ =?utf-8?B?dE1jaWJpUkNoSit4dTBLaGZIN2JQOVF6NUdjdmhYUEZQa0FQVE1IaGhLQk9Q?=
+ =?utf-8?B?WHdXc295V2UzSDMyaHNZcUxZL1NDeXZVZGlLYVJROVFBampYQTA2VUJyck1M?=
+ =?utf-8?B?SzJoZzhZRVR6dnZCVGoxRi9tblFiMjlIUjM0WDVtbi9qeGRNNzVMWVVMSkxU?=
+ =?utf-8?Q?SGD4Lq4WJITeNV8Zv63gdaiWI?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5fbfb24a-65c4-4384-d267-08ddcd7c8811
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e3e67ee-58e2-4c99-5027-08ddcd7c8b5f
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2025 02:14:49.9939 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2025 02:14:55.6205 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LmUna3wx5Hs5GLlnUb3IU+Hm24NDy03XuBlSE1FMOm1bb9SK2IULckJ5ygFdFfHOk/YPYpcQuvtobo2f4wDvpA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Fu3HBX1bq6Dou1pe2bw92JkpIGJ0tcPO+HjxsrT0lppkHvFZxuBFGZ/VnH9B2gLulHGBLbsLAtbD7QPSqTHm+w==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8546
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -182,308 +183,138 @@ X-Virus-Status: Clean
 
 From: Viorel Suman <viorel.suman@nxp.com>
 
-Implement Synopsys LPDDR PHY QuickBoot flow.
+Collect errata registers values after the training and restore errata
+registers values before starting quick boot firmware.
 
 Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+Reviewed-by: Tom Zheng <haidong.zheng@nxp.com>
+Reviewed-by: Ye Li <ye.li@nxp.com>
+Tested-by: Florin Pavelescu <florin.pavelescu@nxp.com>
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/include/asm/arch-imx9/ddr.h |   7 ++-
- drivers/ddr/imx/imx9/ddr_init.c      |   9 +++-
- drivers/ddr/imx/phy/Kconfig          |   6 +++
- drivers/ddr/imx/phy/Makefile         |   1 +
- drivers/ddr/imx/phy/ddrphy_qb.c      | 100 +++++++++++++++++++++++++++++++++++
- drivers/ddr/imx/phy/helper.c         |  39 +++++++++++++-
- 6 files changed, 158 insertions(+), 4 deletions(-)
+ arch/arm/include/asm/arch-imx9/ddr.h   |  5 ++++-
+ drivers/ddr/imx/phy/Makefile           |  4 ++--
+ drivers/ddr/imx/phy/ddrphy_qb.c        |  4 ++++
+ drivers/ddr/imx/phy/ddrphy_qb_errata.c | 39 ++++++++++++++++++++++++++++++++++
+ drivers/ddr/imx/phy/ddrphy_qb_gen.c    |  3 +++
+ 5 files changed, 52 insertions(+), 3 deletions(-)
 
 diff --git a/arch/arm/include/asm/arch-imx9/ddr.h b/arch/arm/include/asm/arch-imx9/ddr.h
-index 4c092509111c66c09cd006711131db107dbf17e3..6e5a3e3b6793d0171c2fbe6415821968ac1d3ba4 100644
+index 6e5a3e3b6793d0171c2fbe6415821968ac1d3ba4..e30274035ca620fbcee46932b33374055aba3378 100644
 --- a/arch/arm/include/asm/arch-imx9/ddr.h
 +++ b/arch/arm/include/asm/arch-imx9/ddr.h
-@@ -101,7 +101,7 @@ struct dram_timing_info {
+@@ -103,6 +103,7 @@ extern struct dram_timing_info dram_timing;
  
- extern struct dram_timing_info dram_timing;
- 
--#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
-+#if (defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) || defined(CONFIG_IMX_SNPS_DDR_PHY_QB))
+ #if (defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) || defined(CONFIG_IMX_SNPS_DDR_PHY_QB))
  #define DDRPHY_QB_FSP_SIZE	3
++#define DDRPHY_QB_ERR_SIZE	6
  #define DDRPHY_QB_CSR_SIZE	1792
  #define DDRPHY_QB_FLAG_2D	BIT(0)	/* =1 if First boot used 2D training, =0 otherwise */
-@@ -118,8 +118,13 @@ struct ddrphy_qb_state {
+ 
+@@ -110,13 +111,15 @@ struct ddrphy_qb_state {
+ 	u32 crc;
+ 	u32 flags;
+ 	u32 fsp[DDRPHY_QB_FSP_SIZE];
++	u32 err[DDRPHY_QB_ERR_SIZE];
+ 	u32 csr[DDRPHY_QB_CSR_SIZE];
+ };
+ 
+ #define DDRPHY_QB_STATE_SIZE \
+-	(sizeof(u32) * (1 + DDRPHY_QB_FSP_SIZE + DDRPHY_QB_CSR_SIZE))
++	(sizeof(u32) * (1 + DDRPHY_QB_FSP_SIZE + DDRPHY_QB_ERR_SIZE + DDRPHY_QB_CSR_SIZE))
  
  extern struct ddrphy_qb_state qb_state;
- 
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
- int ddrphy_qb_save(void);
- #endif
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+int ddr_cfg_phy_qb(struct dram_timing_info *timing_info, int fsp_id);
-+#endif
-+#endif
- 
- void ddr_load_train_firmware(enum fw_type type);
- int ddr_init(struct dram_timing_info *timing_info);
-diff --git a/drivers/ddr/imx/imx9/ddr_init.c b/drivers/ddr/imx/imx9/ddr_init.c
-index 758a4049139228198a86449bdf2f9106c0773040..7d40e199ad9900c51c689c530999dd83dc983144 100644
---- a/drivers/ddr/imx/imx9/ddr_init.c
-+++ b/drivers/ddr/imx/imx9/ddr_init.c
-@@ -375,6 +375,12 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 	/* default to the frequency point 0 clock */
- 	ddrphy_init_set_dfi_clk(initial_drate);
- 
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+	/* Configure PHY in QuickBoot mode */
-+	ret = ddr_cfg_phy_qb(dram_timing, 0);
-+	if (ret)
-+		return ret;
-+#else
- 	/*
- 	 * Start PHY initialization and training by
- 	 * accessing relevant PUB registers
-@@ -391,6 +397,7 @@ int ddr_init(struct dram_timing_info *dram_timing)
++extern const u32 ddrphy_err_cfg[DDRPHY_QB_ERR_SIZE];
  
  #if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
- 	ddrphy_qb_save();
-+#endif
- #endif
- 	/* save the ddr PHY trained CSR in memory for low power use */
- 	ddrphy_trained_csr_save(dram_timing->ddrphy_trained_csr,
-@@ -400,7 +407,7 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 
- 	update_umctl2_rank_space_setting(dram_timing, dram_timing->fsp_msg_num - 1);
- 
--	/* rogram the ddrc registers */
-+	/* program the ddrc registers */
- 	debug("DDRINFO: ddrc config start\n");
- 	ddrc_config(dram_timing);
- 	debug("DDRINFO: ddrc config done\n");
-diff --git a/drivers/ddr/imx/phy/Kconfig b/drivers/ddr/imx/phy/Kconfig
-index 28a9eca0788f96355e8459427a92832446be0e02..b0554172af3654da50d8ed929c382ef54506464b 100644
---- a/drivers/ddr/imx/phy/Kconfig
-+++ b/drivers/ddr/imx/phy/Kconfig
-@@ -8,3 +8,9 @@ config IMX_SNPS_DDR_PHY_QB_GEN
- 	depends on IMX_SNPS_DDR_PHY
- 	help
- 	  Select the DDR PHY training data generation for QuickBoot support on i.MX9 SOC.
-+
-+config IMX_SNPS_DDR_PHY_QB
-+	bool "i.MX Synopsys DDR PHY QuickBoot mode"
-+	depends on IMX_SNPS_DDR_PHY && !IMX_SNPS_DDR_PHY_QB_GEN
-+	help
-+	  Select the DDR PHY QuickBoot mode on i.MX9 SOC.
+ int ddrphy_qb_save(void);
 diff --git a/drivers/ddr/imx/phy/Makefile b/drivers/ddr/imx/phy/Makefile
-index d82842759e72d104aba41110b9c6e01b997d78fb..2310e69ab5c3036a2903465f4c4e95a79bf0b2c5 100644
+index 2310e69ab5c3036a2903465f4c4e95a79bf0b2c5..75c11625e8a23152e81700b747b216338af1406b 100644
 --- a/drivers/ddr/imx/phy/Makefile
 +++ b/drivers/ddr/imx/phy/Makefile
-@@ -7,4 +7,5 @@
+@@ -6,6 +6,6 @@
+ 
  ifdef CONFIG_XPL_BUILD
  obj-$(CONFIG_IMX_SNPS_DDR_PHY) += helper.o ddrphy_utils.o ddrphy_train.o
- obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) += ddrphy_qb_gen.o
-+obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB) += ddrphy_qb.o
+-obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) += ddrphy_qb_gen.o
+-obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB) += ddrphy_qb.o
++obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) += ddrphy_qb_gen.o ddrphy_qb_errata.o
++obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB) += ddrphy_qb.o ddrphy_qb_errata.o
  endif
 diff --git a/drivers/ddr/imx/phy/ddrphy_qb.c b/drivers/ddr/imx/phy/ddrphy_qb.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..04a6520be5464ac26e30a516265b1b6993eec38c
---- /dev/null
+index 04a6520be5464ac26e30a516265b1b6993eec38c..2bd34bf91fad46e41b3581d79db3523b5442654e 100644
+--- a/drivers/ddr/imx/phy/ddrphy_qb.c
 +++ b/drivers/ddr/imx/phy/ddrphy_qb.c
-@@ -0,0 +1,100 @@
+@@ -47,6 +47,10 @@ static int ddrphy_qb_restore(struct dram_timing_info *info, int fsp_id)
+ 		ddrphy_w(0x5403c, 0x78, qb_state.fsp[2] >> 8);   /* TrainedVREFDQ_B1 -> MR14_B1 */
+ 	}
+ 
++	/* restore errata registers */
++	for (i = 0; i < DDRPHY_QB_ERR_SIZE; i++)
++		dwc_ddrphy_apb_wr(ddrphy_err_cfg[i], qb_state.err[i]);
++
+ 	/* save CSRs to address starting with 0x54800 */
+ 	for (i = 0, to_addr = 0x54800; i < DDRPHY_QB_CSR_SIZE; i++, to_addr++)
+ 		dwc_ddrphy_apb_wr(to_addr, qb_state.csr[i]);
+diff --git a/drivers/ddr/imx/phy/ddrphy_qb_errata.c b/drivers/ddr/imx/phy/ddrphy_qb_errata.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..91843ab2d939fc973af35ce07a63b1b375463b92
+--- /dev/null
++++ b/drivers/ddr/imx/phy/ddrphy_qb_errata.c
+@@ -0,0 +1,39 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2025 NXP
 + */
 +
 +#include <asm/arch/ddr.h>
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
 +#include <linux/types.h>
 +
-+struct ddrphy_qb_state qb_state;
++/** Errata CSRs
++ * STAR_3141216	0x020021 -> in ddrphy_csr_cfg
++ * STAR_3256585	0x02000b -> in ddrphy_csr_cfg
++ *		0x12000b -> in ddrphy_csr_cfg
++ *		0x22000b -> in ddrphy_csr_cfg
++ * STAR_3975199	0x0200c7
++ *		0x0200ca
++ *		0x1200c7
++ *		0x1200ca
++ *		0x2200c7
++ *		0x2200ca
++ * STAR_4101789	0x0200c7 -> covered by STAR_3975199
++ *		0x0200c5 -> in ddrphy_csr_cfg
++ *		0x1200c7 -> covered by STAR_3975199
++ *		0x1200c5 -> in ddrphy_csr_cfg
++ *		0x2200c7 -> covered by STAR_3975199
++ *		0x2200c5 -> in ddrphy_csr_cfg
++ */
 +
-+static void ddrphy_w(u32 addr, u32 offset, u32 value)
-+{
-+	u32 val = dwc_ddrphy_apb_rd(addr);
-+	bool hight = (offset % 2);
-+
-+	val &= (hight ? 0x00FF : 0xFF00);
-+	val |= value << (hight ? 8 : 0);
-+
-+	dwc_ddrphy_apb_wr(addr, val);
-+}
-+
-+static int ddrphy_qb_restore(struct dram_timing_info *info, int fsp_id)
-+{
-+	int i;
-+	u32 to_addr;
-+	struct dram_fsp_msg *fsp_msg;
-+	struct dram_cfg_param *dram_cfg;
-+
-+	fsp_msg = &info->fsp_msg[fsp_id];
-+	for (i = 0; i < fsp_msg->fsp_cfg_num; i++) {
-+		dram_cfg = &fsp_msg->fsp_cfg[i];
-+		dwc_ddrphy_apb_wr(dram_cfg->reg, dram_cfg->val);
-+	}
-+
-+	/* enable the ddrphy apb */
-+	dwc_ddrphy_apb_wr(0xd0000, 0x00);
-+	dwc_ddrphy_apb_wr(0x54008, 0x01); /* SequenceCtrl = 0x1 (DevInit Only)*/
-+	ddrphy_w(0x5400c, 0x19, 0x1);     /* Lp4Quickboot = 0x1 */
-+
-+	/* Adjust MR14_xy if pstate=0 and 2D training data collected during training phase */
-+	if (fsp_id == 0 && (qb_state.flags & DDRPHY_QB_FLAG_2D)) {
-+		ddrphy_w(0x5401c, 0x39, qb_state.fsp[0] >> 8);   /* TrainedVREFDQ_A0 -> MR14_A0 */
-+		ddrphy_w(0x54022, 0x45, qb_state.fsp[1] & 0xFF); /* TrainedVREFDQ_A1 -> MR14_A1 */
-+		ddrphy_w(0x54036, 0x6c, qb_state.fsp[2] & 0xFF); /* TrainedVREFDQ_B0 -> MR14_B0 */
-+		ddrphy_w(0x5403c, 0x78, qb_state.fsp[2] >> 8);   /* TrainedVREFDQ_B1 -> MR14_B1 */
-+	}
-+
-+	/* save CSRs to address starting with 0x54800 */
-+	for (i = 0, to_addr = 0x54800; i < DDRPHY_QB_CSR_SIZE; i++, to_addr++)
-+		dwc_ddrphy_apb_wr(to_addr, qb_state.csr[i]);
-+
-+	/* disable the ddrphy apb */
-+	dwc_ddrphy_apb_wr(0xd0000, 0x01);
-+
-+	return 0;
-+}
-+
-+int ddr_cfg_phy_qb(struct dram_timing_info *dram_timing, int fsp_id)
-+{
-+	int ret;
-+
-+	/* MemReset Toggle */
-+	dwc_ddrphy_apb_wr(0xd0000, 0x0);
-+	dwc_ddrphy_apb_wr(0x20060, 0x3);
-+	dwc_ddrphy_apb_wr(0x2008F, 0x1);
-+
-+	/* load the dram quick boot firmware image */
-+	dwc_ddrphy_apb_wr(0xd0000, 0x0);
-+	ddr_load_train_firmware(FW_1D_IMAGE);
-+	ddrphy_qb_restore(dram_timing, fsp_id);
-+
-+	/* excute the firmware */
-+	dwc_ddrphy_apb_wr(0xd0000, 0x0);
-+	dwc_ddrphy_apb_wr(0xc0080, 0x3);
-+	dwc_ddrphy_apb_wr(0xd0031, 0x1);
-+	dwc_ddrphy_apb_wr(0xd0000, 0x1);
-+	dwc_ddrphy_apb_wr(0xd0099, 0x9);
-+	dwc_ddrphy_apb_wr(0xd0099, 0x1);
-+	dwc_ddrphy_apb_wr(0xd0099, 0x0);
-+
-+	/* Wait for the quick boot firmware to complete */
-+	ret = wait_ddrphy_training_complete();
-+	if (ret)
-+		return ret;
-+
-+	/* Halt the microcontroller. */
-+	dwc_ddrphy_apb_wr(0xd0099, 0x1);
-+	dwc_ddrphy_apb_wr(0xd0000, 0x0);
-+
-+	get_trained_CDD(0);
-+
-+	/* step I Configure PHY for hardware control */
-+	dwc_ddrphy_apb_wr(0xd00e7, 0x400);
-+	dwc_ddrphy_apb_wr(0xc0080, 0x2);
-+	dwc_ddrphy_apb_wr(0xd0000, 0x1);
-+
-+	return 0;
-+}
-diff --git a/drivers/ddr/imx/phy/helper.c b/drivers/ddr/imx/phy/helper.c
-index b0dfc3a0b4f3f8cbbefc27b122b360e64d6cd6a2..877cc4fb42d72222cb889f0edb1182265b853d76 100644
---- a/drivers/ddr/imx/phy/helper.c
-+++ b/drivers/ddr/imx/phy/helper.c
-@@ -13,6 +13,9 @@
- #include <asm/arch/ddr.h>
- #include <asm/arch/ddr.h>
- #include <asm/sections.h>
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+#include <u-boot/crc.h>
-+#endif
++/**
++ * All from STAR_3975199, the remaining errata registers
++ * are covered by either ddrphy_csr_cfg or STAR_3975199
++ */
++const u32 ddrphy_err_cfg[DDRPHY_QB_ERR_SIZE] = {
++	0x000200c7,
++	0x000200ca,
++	0x001200c7,
++	0x001200ca,
++	0x002200c7,
++	0x002200ca,
++};
+diff --git a/drivers/ddr/imx/phy/ddrphy_qb_gen.c b/drivers/ddr/imx/phy/ddrphy_qb_gen.c
+index d77bb8480d85770d29e4408c2a723b20377833f0..981bfa88dc59c69905d14ffc6cfad4a92da35843 100644
+--- a/drivers/ddr/imx/phy/ddrphy_qb_gen.c
++++ b/drivers/ddr/imx/phy/ddrphy_qb_gen.c
+@@ -1819,6 +1819,9 @@ int ddrphy_qb_save(void)
+ 	/* enable the ddrphy apb */
+ 	dwc_ddrphy_apb_wr(0xd0000, 0x0);
  
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -30,7 +33,12 @@ binman_sym_declare(ulong, ddr_1d_imem_fw, size);
- binman_sym_declare(ulong, ddr_1d_dmem_fw, image_pos);
- binman_sym_declare(ulong, ddr_1d_dmem_fw, size);
- 
--#if !IS_ENABLED(CONFIG_IMX8M_DDR3L)
-+#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+binman_sym_declare(ulong, ddr_qb_state, image_pos);
-+binman_sym_declare(ulong, ddr_qb_state, size);
-+#endif
++	for (i = 0; i < DDRPHY_QB_ERR_SIZE; i++)
++		qb_state.err[i] = dwc_ddrphy_apb_rd(ddrphy_err_cfg[i]);
 +
-+#if !IS_ENABLED(CONFIG_IMX8M_DDR3L) && !IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
- binman_sym_declare(ulong, ddr_2d_imem_fw, image_pos);
- binman_sym_declare(ulong, ddr_2d_imem_fw, size);
+ 	for (i = 0; i < DDRPHY_QB_CSR_SIZE; i++)
+ 		qb_state.csr[i] = dwc_ddrphy_apb_rd(ddrphy_csr_cfg[i]);
  
-@@ -42,13 +50,21 @@ binman_sym_declare(ulong, ddr_2d_dmem_fw, size);
- void ddr_load_train_firmware(enum fw_type type)
- {
- 	u32 tmp32, i;
--	u32 error = 0;
- 	unsigned long pr_to32, pr_from32;
- 	uint32_t fw_offset = type ? IMEM_2D_OFFSET : 0;
- 	unsigned long imem_start = (unsigned long)_end + fw_offset;
- 	unsigned long dmem_start;
- 	unsigned long imem_len = IMEM_LEN, dmem_len = DMEM_LEN;
- 	static enum fw_type last_type = -1;
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+	unsigned long qbst_start;
-+	unsigned long qbst_len = sizeof(struct ddrphy_qb_state);
-+	int size;
-+	u32 *to32 = (u32 *)&qb_state;
-+	u32 crc;
-+#else
-+	u32 error = 0;
-+#endif
- 
- 	/* If FW doesn't change, we can save the loading. */
- 	if (last_type == type)
-@@ -65,6 +81,9 @@ void ddr_load_train_firmware(enum fw_type type)
- #endif
- 
- 	dmem_start = imem_start + imem_len;
-+#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+	qbst_start = dmem_start + dmem_len;
-+#endif
- 
- 	if (BINMAN_SYMS_OK) {
- 		switch (type) {
-@@ -73,6 +92,10 @@ void ddr_load_train_firmware(enum fw_type type)
- 			imem_len = binman_sym(ulong, ddr_1d_imem_fw, size);
- 			dmem_start = binman_sym(ulong, ddr_1d_dmem_fw, image_pos);
- 			dmem_len = binman_sym(ulong, ddr_1d_dmem_fw, size);
-+#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+			qbst_start = binman_sym(ulong, ddr_qb_state, image_pos);
-+			qbst_len = binman_sym(ulong, ddr_qb_state, size);
-+#endif
- 			break;
- 		case FW_2D_IMAGE:
- #if !IS_ENABLED(CONFIG_IMX8M_DDR3L)
-@@ -111,6 +134,17 @@ void ddr_load_train_firmware(enum fw_type type)
- 		i += 4;
- 	}
- 
-+#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
-+	size = qbst_len / sizeof(*to32);
-+	pr_from32 = qbst_start;
-+	for (i = 0; i < size; i += 1, pr_from32 += 4, to32 += 1)
-+		(*to32) = readl(pr_from32);
-+
-+	crc = crc32(0, (void *)&qb_state.flags, DDRPHY_QB_STATE_SIZE);
-+	if (crc != qb_state.crc)
-+		log_err("DDRPHY TD CRC error FW BIN -> U-Boot: fw=0x%08x, uboot=0x%08x\n",
-+			qb_state.crc, crc);
-+#else
- 	debug("check ddr_pmu_train_imem code\n");
- 	pr_from32 = imem_start;
- 	pr_to32 = IMEM_OFFSET_ADDR;
-@@ -154,6 +188,7 @@ void ddr_load_train_firmware(enum fw_type type)
- 		printf("check ddr_pmu_train_dmem code fail=%d", error);
- 	else
- 		debug("check ddr_pmu_train_dmem code pass\n");
-+#endif
- }
- 
- void ddrphy_trained_csr_save(struct dram_cfg_param *ddrphy_csr,
 
 -- 
 2.35.3
