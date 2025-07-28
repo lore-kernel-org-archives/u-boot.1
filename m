@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF08C87FC9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:15:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 562ADC87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:15:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 141FA83145;
+	by phobos.denx.de (Postfix) with ESMTP id 6C97B8318E;
 	Mon, 28 Jul 2025 17:14:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rcSH2hY8";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DF0GpcU5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F4B282E26; Mon, 28 Jul 2025 16:52:18 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id C3F0882E26; Mon, 28 Jul 2025 16:52:49 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1770482CA4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:52:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8759782CA4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:52:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEpulS2782335;
- Mon, 28 Jul 2025 09:51:56 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEq9Oq2306394;
+ Mon, 28 Jul 2025 09:52:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753714316;
- bh=Tjml7hrrvmE7TUcml7GaQbEy8P8cLY0iyc8g+Baksag=;
+ s=ti-com-17Q1; t=1753714329;
+ bh=7rxK5iyyiPX/v83Mz61viP3sgRAsYtjONDuuz7f0X/w=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=rcSH2hY8C35QCuyyTiOJTTcfsgmERnuuRdC3YNDMl9p7JD7+WZYcftXi0CIe0Afw0
- kMMdpf3nE9BiDG2UqdaIPPQfsqFM6RUZ76WhiipHKUXYsHSroC+SkRPeKsbgkOyo37
- 34TA/yYxiGZpvNm9rl4A/h4Q9bOLJl6wIVkE3xGg=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEptEg1130008
+ b=DF0GpcU5ffU74olyfd++SG0HiocOzrFrKd3FEo2tBdgkj7UnaBFUFgV0E5HsmV9vl
+ ucf7LrOFmDZXzWuC2Wy/TbKJA0nlHiD++6YGA0a0SProE64kejkH8Hw7ptTWwQgVQj
+ 0rG0ZJI0C9qyQYY5TuTC80nldoX7Z0d/tYsV+J5A=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEq9EH1761463
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 28 Jul 2025 09:51:55 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 28 Jul 2025 09:52:09 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
- Jul 2025 09:51:55 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2025 09:52:08 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 28 Jul 2025 09:51:55 -0500
+ Frontend Transport; Mon, 28 Jul 2025 09:52:08 -0500
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 56SEoZu41924403; Mon, 28 Jul 2025 09:51:42 -0500
+ 56SEoZu51924403; Mon, 28 Jul 2025 09:51:55 -0500
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <vigneshr@ti.com>, <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
@@ -70,10 +70,10 @@ To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <joao.goncalves@toradex.com>
 CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <srk@ti.com>,
  <s-vadapalli@ti.com>
-Subject: [PATCH 05/45] configs: am335x_hs_evm_uart_defconfig: Increase aneg
- timeout to 20000 ms
-Date: Mon, 28 Jul 2025 20:19:54 +0530
-Message-ID: <20250728145034.225997-6-s-vadapalli@ti.com>
+Subject: [PATCH 06/45] configs: am43xx_evm_defconfig: Increase aneg timeout to
+ 20000 ms
+Date: Mon, 28 Jul 2025 20:19:55 +0530
+Message-ID: <20250728145034.225997-7-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250728145034.225997-1-s-vadapalli@ti.com>
 References: <20250728145034.225997-1-s-vadapalli@ti.com>
@@ -99,31 +99,32 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Increase the PHY Auto-Negotiation timeout to 20,000 ms from the current
-default of 4,000 ms inherited from "Kconfig" for PHY_ANEG_TIMEOUT.
+value of 8,000 ms.
 
 The motivation for this change is that existing devices will continue
 working as-is (timeout is an upper bound and auto-negotiation can be
 done earlier), while older Hardware connected to the board that might
-occasionally take longer than 4,000 ms for the Auto-Negotiation process
+occasionally take longer than 8,000 ms for the Auto-Negotiation process
 will benefit from an increased timeout.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- configs/am335x_hs_evm_uart_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/am43xx_evm_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/am335x_hs_evm_uart_defconfig b/configs/am335x_hs_evm_uart_defconfig
-index fd8aa3dbfa8..47876254a2e 100644
---- a/configs/am335x_hs_evm_uart_defconfig
-+++ b/configs/am335x_hs_evm_uart_defconfig
-@@ -70,6 +70,7 @@ CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
- CONFIG_SYS_NAND_U_BOOT_OFFS=0xc0000
- CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_WINBOND=y
+diff --git a/configs/am43xx_evm_defconfig b/configs/am43xx_evm_defconfig
+index 6d41a94738e..099da648801 100644
+--- a/configs/am43xx_evm_defconfig
++++ b/configs/am43xx_evm_defconfig
+@@ -72,7 +72,7 @@ CONFIG_SYS_NAND_OOBSIZE=0xe0
+ CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+ CONFIG_SYS_NAND_U_BOOT_OFFS=0x180000
+ CONFIG_SPI_FLASH_MACRONIX=y
+-CONFIG_PHY_ANEG_TIMEOUT=8000
 +CONFIG_PHY_ANEG_TIMEOUT=20000
- CONFIG_PHY_ATHEROS=y
- CONFIG_PHY_SMSC=y
+ CONFIG_PHY_GIGE=y
  CONFIG_MII=y
+ CONFIG_DRIVER_TI_CPSW=y
 -- 
 2.34.1
 
