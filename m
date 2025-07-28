@@ -4,85 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17C10C87FC9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 14:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 531D4C87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 14:25:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A486E82E26;
-	Mon, 28 Jul 2025 16:21:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 52B2B82E26;
+	Mon, 28 Jul 2025 16:25:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VQs3w5re";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d0fdYh9Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B7DB82E52; Mon, 28 Jul 2025 16:21:34 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 7EA0D82E52; Mon, 28 Jul 2025 16:25:20 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19B5A82CBB
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:21:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 840EF82CBB
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:25:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-301fb587dfeso2005914fac.3
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 07:21:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-55502821bd2so5115822e87.2
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 07:25:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753712491; x=1754317291; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TPKte/0JEGwKxTfd5YIls/QReHZ2wwTW3Fmp5QTwum0=;
- b=VQs3w5rej1bq3jmLct0HrP29YeZT7Ju9o73zU9ASsvgkQ56EmuUQAqp1WoJrDZ71yh
- K8ViwsYWZ3M1Nm6cQNUAeB0MXjB99AeOJ40Bw9It0mpdtJ3RJCKXago2N0E+kXJ61VKB
- LA7SB8lVCcOUk35V0V729Bar2XQcWP68pGDLw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753712491; x=1754317291;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1753712718; x=1754317518; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TPKte/0JEGwKxTfd5YIls/QReHZ2wwTW3Fmp5QTwum0=;
- b=jCVF9GRjcfvV+SprxYGahmxgjkvejC3oWX4e4KsRsbV/nSf6aHieTizy1fROi6Vuhl
- bxmQSvILeSt9F0v5WFg23B8xpIZA0Ko9+ug0n81XQ9q46WVWj+n2N1GDLjh9wFVEIFJI
- UpSy3If9NKligwSHrYgnd4uFJztunnk5827zfFh9q8dqDYdGOViwcmW5WiiXM9f6enoN
- xPJ1lokB6NvWiuDqn8UOpyeMwvzcl27nVQsCA6E5L73Dl22zKDK9tGpc65TM8aL5jwke
- wCHPWlOmRSNCAuludnEt2+IP7ltTNLBWlXDcMLt92efHEhZG6922O5dABTPrAWdE7ghW
- nGCQ==
-X-Gm-Message-State: AOJu0Yx6EuBAGSBJR4uLI1kQWCHk1pNt78CaD9CCnu6QvrJ9dZS9A+D2
- vEfcp66PUlKz17DofbV81bT/pXussjbCKDfEqIQZcMrKQgWk/ZmKLfpeeNUBWBbtdro=
-X-Gm-Gg: ASbGnctDzvazbIafschHRB7CKGdXZdsZOd3F3gkzXKoSw8ZYcf2XTe5ICO6Gl4mxd0l
- 7m2qDX3RztoviN8sc4CZG0Ze1GByjqUn79T8eXfLn9BwuyYgYm7WNkpPfLR0ukcYTpzTtQbNUR9
- jQYyXvQ3ukH1ghRmIdemLwnnBrS8Ew/Wvg/njkaQxitC2gKDZSABKnFg26so56L2/oEp+23kXJn
- WM2CKJp6eP4R2SWmdyRahb2W3gIrLhwx7JrPY1gQggwjBi32iFx9wC3mwH0XLweRF9IltvKTHS+
- pve9YmM3itf+BNx1131cBxIg4AFHMro0b4qRJ33EA6qym54WDWXSLK+o+FCEbMP4xQosRz3fS9R
- fL+Wa4vhjn42pwOG9YP2yUguL3HHoW4KsQbi3PNlCTUzsQYCHjwfYUkIa
-X-Google-Smtp-Source: AGHT+IHfTUEC21o15gptXiIq/1jw9+Is/KpiHhgn2/Wt5e7bZjKLfsc5ots3wf6WrREZO895seQgxw==
-X-Received: by 2002:a05:6870:5e50:b0:306:d617:a36c with SMTP id
- 586e51a60fabf-30701bd341fmr7257346fac.39.1753712490565; 
- Mon, 28 Jul 2025 07:21:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3071359935bsm1646339fac.21.2025.07.28.07.21.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Jul 2025 07:21:29 -0700 (PDT)
-Date: Mon, 28 Jul 2025 08:21:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bryan Brattlof <bb@ti.com>
-Subject: Re: [PATCH] pylibfdt: setup.py: Drop license_files
-Message-ID: <20250728142127.GH1807455@bill-the-cat>
-References: <20250725151821.2067853-1-trini@konsulko.com>
- <ad876397-a18f-42b8-ab84-47282b7a4f48@cherry.de>
- <20250725155720.GF1807455@bill-the-cat>
- <b33e3834-b0db-4940-8f39-e76b173e4bc1@cherry.de>
+ bh=2iN5eSswLbxx8MiTsdnrLn73rrdEcjnprJlx2ONV8aQ=;
+ b=d0fdYh9ZPXLSeLRShgo73hv5W0Yjl/mubPjMKfZfNz4mTINq3yPQLzfqBi9kdowWtF
+ 4NlAlMt0w1jrKOCjBPbzWCWuOO8R1sORnqWX93xDJ4u/29TqPnfuzjCTYortr0SwlZw/
+ d/smZcZo9CJyc5MjP9VGykHZNWFQNH36NOpkIdl1x3RG9tST+LQ3KA/KeMGkpcr0Eiif
+ pIF0ZccdfLQpLU5SVZx3g2ppVVCa+hzE/I2UiVdS0kdhv6cbNOTSs/nJlpAVBmZuLhe4
+ WPf8Ygou35zbf2sBpwMfY7GSk4FQ0h3iltF7RdU3lqD/ya+9DMiikCWkLq6bESfkufKd
+ 6A0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753712718; x=1754317518;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2iN5eSswLbxx8MiTsdnrLn73rrdEcjnprJlx2ONV8aQ=;
+ b=lIEyNvL0UjXgIpx+isPsY9/QZGQsm4b4d4pyDguocwhBknOKCoYou+OJ1ArajEXL3V
+ DEV30Cp2O+23kyB/yX33r1b3JuynVze1hfsuSbhl4egh+Myc1BEjUDunwZOzri4ba3gL
+ 3KezITFloWMRNxBe93z+3Ezy1cBGx/QSi4N3CFTPXQSs/7IGom2+gFdFy4MN5gKVqMbA
+ jyLdJ1fOr3aSLocVvhhZQbn4xlfYZFm4pipiuySq9M/pDDke53LiBD17xAOwWilC2vsJ
+ WTw7ECEQTz8dm9HvT9GfK1zH0zag2gXQuqNBGuoAJKKa4Nv+JFl/KUeU/8cIFekWFKqD
+ d2rQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXb4BMox3aIR7bnfq/nxC8QHO8J+9jCARtC/CpPC9m6qknOSTiW43RMZlA7OqCJvxCbpC/f714=@lists.denx.de
+X-Gm-Message-State: AOJu0YynWqj412q3kVVR2d2fW8HwBWhx2OgfkMJDEaMn0o3I9ASF3HYp
+ /OpT0SOn5X00UYF0nXtLwi720AZ1hJQ5p8cLrl+j+jZTcwiAFV59Qrrgo1MURD2ue0hK9Zh4BEu
+ SDBiA8r0n68kuUhx3OuMJ1+MDxwfF04Y=
+X-Gm-Gg: ASbGncvZFUaNCuCVLTlevp7tXltUPU077Q/wkp59oUpR6rEMbOcz04do4GV+Zgkp1M/
+ +cuIc+K3fos7EV477SNeviDwvO5U/wCl0pNgfc9xPXwNTPOcQ7yqQ2p12+73gbcR1l/3JNttLGt
+ Tvck4fvbZVzLACNVWVqCIPc1JO0QWk5y4wd0np9aa7RuOHjeeJ+5oUXCfs4dKDxf3r3CabVkrW4
+ nZ8kS0o4mUiEybrzLT23eWbGCyRZbp58FJwZFQ=
+X-Google-Smtp-Source: AGHT+IEqONhIjdTayHlPRqOegRY+ktZClu5X0N/P3qekmRt5tbXpOtef8CFCF9bKQLjOPKmKnR5cdAZ5nkVGh061Tw8=
+X-Received: by 2002:a05:6512:a8e:b0:55b:2242:a9ce with SMTP id
+ 2adb3069b0e04-55b5f3cf936mr3174130e87.5.1753712717416; Mon, 28 Jul 2025
+ 07:25:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="icZj2czlSTeibsxq"
-Content-Disposition: inline
-In-Reply-To: <b33e3834-b0db-4940-8f39-e76b173e4bc1@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250722-v1-fix-imx95-usb-boot-v1-1-dec7f2384405@toradex.com>
+ <20250724033822.GE18395@nxa18884-linux.ap.freescale.net>
+ <kn34dabjpqywranhgrtpy77bmuviluhzgf2pgtdguqvgwk7e3d@3zud5czxsewc>
+ <20250728102923.GA32387@francesco-nb>
+In-Reply-To: <20250728102923.GA32387@francesco-nb>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 28 Jul 2025 11:25:04 -0300
+X-Gm-Features: Ac12FXwfjHTltTgYH0symNzhafU9UQz2ApWVMhZGc54znYMW2fJUKWymFzuEFkQ
+Message-ID: <CAOMZO5DT=ua+vCX5OQq6sx1nfcFjFY0S1hJ8OmNE1RWCQAmxJg@mail.gmail.com>
+Subject: Re: [PATCH] arm: imx: imx9: scmi: Fix booting from USB
+To: Francesco Dolcini <francesco@dolcini.it>,
+ Tim Harvey <tharvey@gateworks.com>
+Cc: =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
+ <jpaulo.silvagoncalves@gmail.com>, 
+ Peng Fan <peng.fan@oss.nxp.com>, Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, 
+ Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,66 +105,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Francesco,
 
---icZj2czlSTeibsxq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Jul 28, 2025 at 7:29=E2=80=AFAM Francesco Dolcini <francesco@dolcin=
+i.it> wrote:
 
-On Mon, Jul 28, 2025 at 10:19:31AM +0200, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 7/25/25 5:57 PM, Tom Rini wrote:
-> > On Fri, Jul 25, 2025 at 05:30:59PM +0200, Quentin Schulz wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 7/25/25 5:18 PM, Tom Rini wrote:
-> > > > On more recent versions of setuptools the warning about not being a=
-ble
-> > > > to find the files specified in license_files has re-appeared. This =
-is
-> > > > because as best I can tell, it can't and won't look in $(srctree) b=
-ut
-> > > > rather only subdirectories of scripts/dtc/pylibfdt. Since we already
-> > > > provide both SPDX tags and a license field with the SPDX contents, =
-let
-> > > > us just drop license_files as it's not mandatory.
-> > > >=20
-> > >=20
-> > > IANAL but I believe we need to ship the file, that's part of the lice=
-nse
-> > > requirements for both GPL-2.0-or-later and BSD-2-Clause.
-> >=20
-> > I mean, we who? As part of "we should re-examine how we bundle Python
-> > stuff", yes, I don't know if our pylibfdt stuff is at all optimal
-> > anymore and we should maybe we talking with upstream dtc more. But
-> > $(srctree)/Licenses/gpl-2.0.txt and
-> > $(srctree)/Licenses/bsd-2-clause.txt exist and we don't publish the
-> > python binaries.
-> >=20
->=20
-> Yeah I guess it's the last part that matters, as far as I understood from
-> what you wrote, this means it's essentially only used locally and never
-> uploaded anywhere for consumption by users, so I believe that would be fi=
-ne.
->=20
-> I guess this patch is an ok stop-gap measure?
+> You worked on a similar topic, for imx8m, some time ago, commit
+> d175982c207b ("imx8mn/8mp: Allow booting via USB"). What's your opinion
+> here? How should we fix this?
 
-Well, until such future point as we try and handle libfdt/dtc stuff
-differently, maybe.
+The solution on the commit you mentioned is related to the
+i.MX8MN/i.MX8MP boot ROM implementation, and it works there.
 
---=20
-Tom
+What confuses me about Jo=C3=A3o's patch is that it was not tested against
+the mainline U-Boot.
 
---icZj2czlSTeibsxq
-Content-Type: application/pgp-signature; name="signature.asc"
+Can U-Boot mainline boot over serial download on i.MX95?
 
------BEGIN PGP SIGNATURE-----
+Adding Tim, as he has been trying to get USB boot to work with i.MX95.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIeHYwAKCRAr4qD1Cr/k
-ClqjAQCASqVor11Ex/H3y+GQvhybFqHju+roA1FnTC7nc3FpoQEAlv3kGN2P+pZU
-lVl+8gKTuHPYDEVR3WSVbcDsXPRM5wI=
-=fnuf
------END PGP SIGNATURE-----
-
---icZj2czlSTeibsxq--
+I don't have access to any i.MX95 board to try it myself, so I
+appreciate some help here.
