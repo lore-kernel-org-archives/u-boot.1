@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6DBDC83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 14:27:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23F32C87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:04:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8C6A82E26;
-	Mon, 28 Jul 2025 16:26:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3625682CBB;
+	Mon, 28 Jul 2025 17:04:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T5cQhsUh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aqpG2nAx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FE9482E52; Mon, 28 Jul 2025 16:26:49 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id B293B82E26; Mon, 28 Jul 2025 17:04:46 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3407B82CBB
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:26:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A09E582CA4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:04:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a528243636so2699001f8f.3
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 07:26:43 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-455fdfb5d04so24925715e9.2
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 08:04:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753712796; x=1754317596; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753715084; x=1754319884; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2dOJXrzVJRcRsAPo/E1pCAJmnrruqwYsH3qGTCuPOUs=;
- b=T5cQhsUhWPVdfvrVRCgjKD09Y3m77WA3GtU7Z1VmK/w6SjOW06+/ydN/opXjs3uxgH
- aDqZypv1UwqX8Z8xgX8LTdhzR8jqfZ3DMZU41foajTznUa8lDerFkO4uCZK/yu+WH6Yw
- H9A8VXeZOKGPgISOEjB0TCV05LyWF8rVe1bYuf8y3s/LQQTKrUmWbeFi6sZ5sPPI4YzA
- Ch1L8OCEIHvHkboENCjGcnIv/w1p+Ph99OahQwIkJVZa/+keg9FLyOkgk49eID9aKZY6
- NNMMcEogkkMS5nFb9mbZP9FuiSW+/0DAMtdtPfS0Vfshj9cWM34eosZU4/hdDcvksGRV
- +6Yg==
+ bh=77EaQFaaBMAypnzqkem4N8T3B/GLUh4fYLru+9w9Dy8=;
+ b=aqpG2nAxM5o0NWVIIXv9gFWNAUs7yGbrKG1EnZIpjzZ7YGM8CXdRf3vhfncKB0ClGz
+ Fm41sxBBB4g1XNY+eofezrnSoLHe8SRglWZhN+x9ph7aYabhB59wO30Nys2UQUJNxMsX
+ gmCvWypcOzYp5ngIbhJ4QsaHsVgjnmQbcvpezYWWsQQ9lxj8aW3E0eZ5XTxKHiRViKak
+ 54iordqGmIHRs5+yyNfOg3/4Dsgxw1amzhvbdv9af4xI00HrwT8q8f1rlRgGBOEtvo3/
+ XJI1Pl0ObbM8T7v0gdkBrF1xnHxv88715PtmMuFcptsWWGNW++hhaoJsPcyWw+YGNHx8
+ IIOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753712796; x=1754317596;
+ d=1e100.net; s=20230601; t=1753715084; x=1754319884;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2dOJXrzVJRcRsAPo/E1pCAJmnrruqwYsH3qGTCuPOUs=;
- b=g//CvPNIGswwBZ9i3weYYDDJ9rRyayo760VecCDzJ6L+sy2wnIYoJdHm8RxTyljOpr
- 96g+XkBbnedIx+VQHoX2I5ZdpAzkFJFhswPnsv403MlLQnCNNfUD16VA99gbJLQylEcA
- wyWSA2pb9e5E8Swh5V5RBaB20LFiioxCgqNjuQpzQrjoVIv42PjHF20yQjEhRNwjFsAU
- qLGYwbhiqlw0iY8Jr3xX9sKUEIamhwZJAThYeJkSV9HYOYGD0kmTj7ZYwbbfVqE4v0PV
- Ab81vgIqFZqreszPLt+iIMMs3c+y1PAsuQ+8gmyeVTDgDtDatN7yHiQy4WYHFgll8k1H
- dG7w==
-X-Gm-Message-State: AOJu0Yy5h1c50vfAhEd4i3xeCx+yj6VYUzo7aK3wE+SgSzn9yXOs9v9w
- S/luzqAXKzTiQr8fZTVgeyJA4tcDoJyr4pOrCmhUf5UKw/mIpV1vf5d6wOKkpDXF1f3SETi7Xbw
- +p9jt
-X-Gm-Gg: ASbGncvtC51TzmSDQ/XyyZ0WFR7dUCX7oTZFzrgmoc2S7/5uHk8GJcnIKtFIKo+1EJN
- I93TdBIJi3bcjFrCDtPZRiRNnrHtxmy6abUU4z14HA2hnD5ypXS+C1Az9D5CX8zEdBJ0yTffUhG
- 6X+kqgRn1CcOK1UJOnwoWfHK8n2RI5Ux/N8RYfLbd/w7mQMRNZvZGY2YbGTGNJQJHwVj9JCQZtM
- xPcjT3DV0LnZf+8liATXVMIAIiHK7JtLQFX8OUwaq/bUGYyh042wEdP+8sDDgeAsI2HlKdvhOA1
- rrKka8gNhp6hXdMJpWNT/Ce22vmaLq+FInVtFKpOcIf9a0mS3yG3Vm2HHRCSe/IqrcseaVCglEm
- RstdhzmKBVQeUmu+niq/bRSxg8AnNLuM53ZXZWFSBcX4zNCH2gA==
-X-Google-Smtp-Source: AGHT+IHzjp/Gcr6uF6tO0uwUrpd1GDTL1q1dLjnHdHWaIIzGYpJ9YS+FZa2Bs4vH72LeXJePjcWDRg==
-X-Received: by 2002:a05:6000:1a8c:b0:3a4:f663:acb9 with SMTP id
- ffacd0b85a97d-3b7765e59b3mr8559018f8f.9.1753712795666; 
- Mon, 28 Jul 2025 07:26:35 -0700 (PDT)
+ bh=77EaQFaaBMAypnzqkem4N8T3B/GLUh4fYLru+9w9Dy8=;
+ b=XSGZy2eD4qCIWNQWYcJwMQn/zjdCyWvExsLZ3rufr3rP1UTYtSTNyt/iicyVwPvU1o
+ wd3vDhslaWcAA4xrp/WwI+aszWAXmC5+MHIJxweykcnTF86BddgUnjGVQIf6PTNNOoSo
+ gJPYmzqOBDZHfLCN+JnJkvNeseCG67STZUA+IwqeWGiNk3qh0uerE/G5aqn0KbtrX3d6
+ oW1IzWzwWQBRtHwk8Y0CfyS1UrUXReiKSvVcM9xqUANQbwL5zaq92JbxOtRnx00X2ody
+ OnPRKphrMgAJQtz4odIN72AfajOJ6tIiDQk1Vqw0MDnEi4IC4+5b3OIECRGKigsdmqJx
+ pJSA==
+X-Gm-Message-State: AOJu0YzCMEZCjmojRFTT3X32zSe33m/PQ71wnSBqbiVH1y3FwlEu6Z+c
+ pwwmmt3bbbV9Ey9v82Uj4Phj9Z7nOlLCi9tSZaNOpZIJW15D+r9JoROSrPQ1CtnCSnw=
+X-Gm-Gg: ASbGncvDIbxAFm8FCTSkpj+Ox9uGmhS16aZQ5y5dkLkb1ppood0RLQUofhR9dJcDhhg
+ vhc6PRy2dmXkcXXWV78Iclebpo7qTiSCPikUpShC3QrJ7LPAqcwvZCzWQUFLB9znIjX8iN0X6J0
+ E3H4rAEpajlb5HraGDK299qiTwRAc+I3wmNoYyDRSzh1l0URppjpJ0b3j3VCBUfG+y8w/TMGTGm
+ xp4ivL1rBpQKlxkD/xvWgJXa+X7n4fHM59Gmba3c2IulPivyTyKgWUhsMJeNjt6Kjw+4AZ1YpJv
+ X/T8HumnC/HXRpFjKb8Opk9lmG2yDKanWyNF8unQd95E2bhpZNGEcCtx+PWGOzCmfQvJ2odMK7P
+ 4vKktxo9EoeVdHPXnZsH22LY5TaVWRrbtNyvwlKR0vsPaKZO0Tg==
+X-Google-Smtp-Source: AGHT+IEOAWltYY3XOn3WxYLDZJ16uGAac9NHFyEX/BZY5WoSF1v89bT2DI0wicv0t3dEZcdku9n6Kw==
+X-Received: by 2002:a05:600c:3e0e:b0:442:c993:6f94 with SMTP id
+ 5b1f17b1804b1-458828a9babmr52781125e9.12.1753715083914; 
+ Mon, 28 Jul 2025 08:04:43 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:2df:19e4:8abd:eea3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b77db8a944sm7791914f8f.52.2025.07.28.07.26.34
+ 5b1f17b1804b1-4586eeb5f3asm108148115e9.2.2025.07.28.08.04.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Jul 2025 07:26:35 -0700 (PDT)
+ Mon, 28 Jul 2025 08:04:43 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 28 Jul 2025 15:26:34 +0100
-Subject: [PATCH] ddr: marvell: a38x: Fix unsigned issues
+Date: Mon, 28 Jul 2025 16:04:43 +0100
+Subject: [PATCH] i2c: rcar_iic: Do not use unitialised variable
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250728-a38x_ddr-v1-1-4102aa87697c@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAJmIh2gC/x2NQQqEMAxFryJZT8GpWotXGQaJbdQs7EgigyDe3
- ery8d/nHaAkTApdcYDQn5V/KcP7VUCYMU1kOGYGW9qmbK03WPm9j1GMq4Nro0dXoYWsD6hkBsE
- U5vuwoG4k97AKjbw/jc/3PC/JAnwKcwAAAA==
-To: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
+Message-Id: <20250728-rcar_iic-v1-1-00dd08660421@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAIqRh2gC/x2NQQqDQBAEvyJzzsJmiVHylRBkHFudQzZhRiQg/
+ t01x6KrqY0cpnB6VBsZVnX95ALXS0Uyc54QdChMKaY6NqkNJmydqgRwhMjYDHy7U9F7doTeOMt
+ 8Ht7sC+wcvoZRf//G87XvB4HL0lFzAAAA
+To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Heiko Schocher <hs@denx.de>, 
+ Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
@@ -100,76 +101,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Cannot test an unsigned variable to be less than 0, it will always fail.
+In rcar_iic_xfer if nmsgs == 0 the ret will not be assigned to. As ret
+will always be 0 if the for loop is entered, may as well just return 0.
+
+This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ drivers/i2c/rcar_iic.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c b/drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c
-index 31b6209416b..84156a1e8ad 100644
---- a/drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c
-+++ b/drivers/ddr/marvell/a38x/mv_ddr4_training_calibration.c
-@@ -64,7 +64,7 @@ static u8 center_high_element_get(u8 dir, u8 pbs_element, u16 lambda, u8 pbs_max
- static int mv_ddr4_centralization(u8 dev_num, u16 (*lambda)[MAX_BUS_NUM][BUS_WIDTH_IN_BITS], u8 (*copt)[MAX_BUS_NUM],
- 				  u8 (*pbs_result)[MAX_BUS_NUM][BUS_WIDTH_IN_BITS], u8 (*vw_size)[MAX_BUS_NUM],
- 				  u8 mode, u16 param0, u8 param1);
--static int mv_ddr4_dqs_reposition(u8 dir, u16 *lambda, u8 *pbs_result, char delta, u8 *copt, u8 *dqs_pbs);
-+static int mv_ddr4_dqs_reposition(u8 dir, u16 *lambda, u8 *pbs_result, s8 delta, u8 *copt, u8 *dqs_pbs);
- static int mv_ddr4_copt_get(u8 dir, u16 *lambda, u8 *vw_l, u8 *vw_h, u8 *pbs_result, u8 *copt);
- static int mv_ddr4_center_of_mass_calc(u8 dev_num, u8 if_id, u8 subphy_num, u8 mode, u8 *vw_l, u8 *vw_h, u8 *vw_v,
- 				       u8 vw_num, u8 *v_opt, u8 *t_opt);
-@@ -659,7 +659,7 @@ static int mv_ddr4_centralization(u8 dev_num, u16 (*lambda)[MAX_BUS_NUM][BUS_WID
- 	} /* if_id */
+diff --git a/drivers/i2c/rcar_iic.c b/drivers/i2c/rcar_iic.c
+index e019d06be41..42d575e29ba 100644
+--- a/drivers/i2c/rcar_iic.c
++++ b/drivers/i2c/rcar_iic.c
+@@ -191,7 +191,7 @@ static int rcar_iic_xfer(struct udevice *dev, struct i2c_msg *msg, int nmsgs)
+ 			return -EREMOTEIO;
+ 	}
  
- 	/* restore cs enable value*/
--	for (if_id = 0; if_id < MAX_INTERFACE_NUM - 1; if_id++) {
-+	for (if_id = 0; if_id < MAX_INTERFACE_NUM; if_id++) {
- 		VALIDATE_IF_ACTIVE(tm->if_act_mask, if_id);
- 		status = ddr3_tip_if_write(dev_num, ACCESS_TYPE_UNICAST, if_id, DUAL_DUNIT_CFG_REG,
- 					   cs_ena_reg_val[if_id], MASK_ALL_BITS);
-@@ -895,7 +895,7 @@ static int mv_ddr4_copt_get(u8 dir, u16 *lambda, u8 *vw_l, u8 *vw_h, u8 *pbs_res
-  * It provides with a solution for a single subphy (8 bits).
-  * The calling function is responsible for any additional pbs taps for dqs
-  */
--static int mv_ddr4_dqs_reposition(u8 dir, u16 *lambda, u8 *pbs_result, char delta, u8 *copt, u8 *dqs_pbs)
-+static int mv_ddr4_dqs_reposition(u8 dir, u16 *lambda, u8 *pbs_result, s8 delta, u8 *copt, u8 *dqs_pbs)
- {
- 	u8 dq_idx;
- 	u32 pbs_max_val = 0;
-@@ -952,7 +952,8 @@ static int mv_ddr4_center_of_mass_calc(u8 dev_num, u8 if_id, u8 subphy_num, u8 m
- 	int t_opt_temp = 0, v_opt_temp = 0;
- 	int vw_avg = 0, v_avg = 0;
- 	int s0 = 0, s1 = 0, s2 = 0, slope = 1, r_sq = 0;
--	u32 d_min = 10000, reg_val = 0;
-+	u32 reg_val = 0;
-+	int d_min = 10000;
- 	int status;
+-	return ret;
++	return 0;
+ }
  
- 	/*
-@@ -2189,7 +2190,7 @@ int mv_ddr4_dm_tuning(u32 cs, u16 (*pbs_tap_factor)[MAX_BUS_NUM][BUS_WIDTH_IN_BI
- 				for (dq = 0; dq < BUS_WIDTH_IN_BITS; dq++) {
- 					idx = dq + subphy * BUS_WIDTH_IN_BITS;
- 					reg_val = new_dq_pbs[dq] - dq_pbs_diff;
--					if (reg_val < 0) {
-+					if (new_dq_pbs[dq] < dq_pbs_diff) {
- 						DEBUG_DM_TUNING(DEBUG_LEVEL_ERROR,
- 								("unexpected negative value found\n"));
- 						return MV_FAIL;
-@@ -2267,7 +2268,7 @@ int mv_ddr4_dm_tuning(u32 cs, u16 (*pbs_tap_factor)[MAX_BUS_NUM][BUS_WIDTH_IN_BI
- 						idx = dq + subphy * BUS_WIDTH_IN_BITS;
- 						pad = dq_map_table[idx];
- 						reg_val = new_dq_pbs[dq] - dq_pbs_diff;
--						if (reg_val < 0) {
-+						if (new_dq_pbs[dq] < dq_pbs_diff) {
- 							DEBUG_DM_TUNING(DEBUG_LEVEL_ERROR,
- 									("unexpected negative value found\n"));
- 							return MV_FAIL;
+ static int rcar_iic_set_speed(struct udevice *dev, uint speed)
 
 ---
 base-commit: 4c3b5fcd810081bd7f3c51859fe1b5f0c159803c
-change-id: 20250728-a38x_ddr-64c67d8a63a2
+change-id: 20250728-rcar_iic-ea0eccf7da46
 
 Best regards,
 -- 
