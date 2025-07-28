@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA90EC83F26
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 21:44:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FD9C83F26
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 22:25:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E49882D21;
-	Mon, 28 Jul 2025 23:44:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0571F82E34;
+	Tue, 29 Jul 2025 00:25:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="R9RaUwCP";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qpTIDr6x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XsZumuiy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6FB282F00; Mon, 28 Jul 2025 23:44:19 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7557B82E34; Tue, 29 Jul 2025 00:25:39 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60465829E7
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 23:44:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBB1B82D21
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 00:25:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4brX740zFVz9tbD;
- Mon, 28 Jul 2025 23:44:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753739056;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BByOQ+ZrfUxnzecuIOkMSF38nrkiVllYmrJ6wrTzslQ=;
- b=R9RaUwCPR7tucc+UrMQgwJiS6pUoaTl5k/T59qlDv2T7ysDam/+AoUh1B4bAykRYK5MbWE
- nixKCf4ub5O7kptHkLd0/UM5mhPS8vRZReIYhPFheKpGTvc8knFwYKRHlOTx1fP0Oc7xzM
- yIPnrcL+MQecNH3RqqaJt+OErtAQLbAjtgp/G0lo12YocLlJCjzJivCL7WyqOb5cs2Nuf1
- otocQCik2EIUBp/YlbqIW4gB10lu7eoEglLARaR9WIU4Tt8nprBuoX4LzGZYX4HrRVh9IL
- kOrRK3SFNsK/b8VU/c1HylgJIbIA7WOeJXz5NAGXfjSXm91fwm14+ilgCJS09w==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=qpTIDr6x;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <64b05f5d-b5c5-4aca-b326-0dbc720009be@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753739054;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BByOQ+ZrfUxnzecuIOkMSF38nrkiVllYmrJ6wrTzslQ=;
- b=qpTIDr6xOgliFKVi9DDIVTWeV3BOswneCJBDlqqHrXugKlY3EI0m0DdlrpkgnEh+BdmL0Q
- c4/QoFMVDZvnRYXt4bRBKBn3Nwr2ZjXwFHRK3v4V5C2VOQ50Pn6hwipwMQtBfiyJdRVyju
- buF99VBPKrEnuIzmfL/sq9zK9xHFAWUMrLe/4NAupEeCAeXiuuvfBhmRKB13lf0jGAimZl
- a8vso1WBi1UPLGuPG/SZUVzPt5ifzuhBZrfMvyx6tqYgDCPH7kAkJ5napvlIbpDFCQU9eC
- d8a7/S8zbukcR+/TwITc875MbtgniORALFP84SIMSeJjHJOpMUNxAffblvFG9g==
-Date: Mon, 28 Jul 2025 23:44:10 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-73ff32d8b8aso997519a34.1
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 15:25:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753741535; x=1754346335; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DaZ21b/PlK23qUcRh2Vep8rnUol9ySnosa1MQExS/Qk=;
+ b=XsZumuiykbStrlT1KFoFN2exZIdfzNaPDW6Hmf3lmEfX7gbZ4wie3eOSXxE6iqxmGO
+ NlzXZu8UTSi9PY67kYF9AvVXdvzr+cWvwNdrGCo8R81wFJWnKCA0n3CzCkBWx4twUOXr
+ MWYYd6fTga4R9cW0nnCSkXMWAmFSmtXjEmN9E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753741535; x=1754346335;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DaZ21b/PlK23qUcRh2Vep8rnUol9ySnosa1MQExS/Qk=;
+ b=XeNE4ILfT9dRhqzWQ+pbYbS7Cgwccxut1A90gpNYF/xae8Dr1/f4msnaqKUFT3mrmy
+ Fx1fASuN53QvXp7jIPx70LhvkcrhOZh8vHsc1zxb94joh+3Rt/yBUa1xkykQivjhcNcI
+ 7yKDNdBgYOrBSGxqIfw2mdEOY6Zc9tmgk7LbDQuQHiAutvpMjUseEwOO4z3gl2xUhuNF
+ qTREPY9vGERpPCMMw3I1227hiEtBu+NUKj7pLZ7Vv3L9pB0XDAUiazWfj6gHkqMUaBMN
+ mazSYWxcRvp95Ed8f2ElVrQz9hICbAuIdakWzQ6Ns5ufZ07CLJNb2v/sxngFbOzQU2ih
+ Yl0Q==
+X-Gm-Message-State: AOJu0YxkVH4jbpiipSnvCytMLwseGKzH2/rP1JBoF246+0QU6X8/TYmz
+ o4Hm0WNRJanR4AXkVPf3PaLGBy8popVbs2vJb8LJBTvkUvrmE14M89Y9mJlY1TeThp4=
+X-Gm-Gg: ASbGncvo7dxDjSZ09kY932cD6vdOb/j+aC9snJPp9n6bn0bMMDmVPctJBIcm1rrAQxV
+ kH95A2wNGHkrXTga4jrqjA+hunN0oa/1M8m0DNkyxYMspR9qobi877idILSRueoDjn1YtVzbUT3
+ xEARHFYjbt3qOi+uLXPq9T2KX8lhSVJT5dXUM9xYrAtS8ioJdmw5QdOsIHeDI7cmc3X9q3zr9N5
+ fT8/nRWA6EcEo2/zKZUpPuj+BCUmDCbsRNCXd95lFkBPnV/WMmkl/T0M4UP8eWVajzTB4bHk80Z
+ iA4BgiQicN5nG4wJy44Ni3+QqRpp6MJ1vtn+uiQ28uwo9DEZNN6USSRSdxg4cFtZwo/Q9LTV9ji
+ Z+OxhBMIgiSPgyhPbEn27TZhsg/FOV8Vd6I/DS6kxU8fkaTfPX9N17HUHXDlnYpLjoJY=
+X-Google-Smtp-Source: AGHT+IHfaxKo3RSsP1G3BJEnYvTHlJ+cSpFRnvaW4kiUabpIS8nDgcyNvf7UPIrppZYRON12n3pABw==
+X-Received: by 2002:a05:6808:198f:b0:41f:79f9:1b4a with SMTP id
+ 5614622812f47-42bb7bc293bmr7928030b6e.12.1753741535455; 
+ Mon, 28 Jul 2025 15:25:35 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-61913f96d2esm1009803eaf.10.2025.07.28.15.25.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Jul 2025 15:25:34 -0700 (PDT)
+Date: Mon, 28 Jul 2025 16:25:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Philip Oberfichtner <pro@denx.de>
+Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v4 1/3] Makefile: Add size check for u-boot-with-spl.bin
+Message-ID: <20250728222531.GA1754718@bill-the-cat>
+References: <20250708103959.26129-1-pro@denx.de>
+ <20250708103959.26129-2-pro@denx.de>
 MIME-Version: 1.0
-Subject: Re: [U-Boot, v2, 1/1] misc: fs_loader: Add
- request_firmware_into_buf_via_script() for flexible firmware loading via
- U-Boot script
-To: frank-w@public-files.de, "Lucien.Jheng" <lucienzx159@gmail.com>,
- u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
- tien.fong.chee@altera.com, trini@konsulko.com, sjg@chromium.org,
- xypron.glpk@gmx.de, seanga2@gmail.com
-Cc: lucien.jheng@airoha.com, daniel@makrotopia.org
-References: <20250727141609.15425-1-lucienzx159@gmail.com>
- <2f6dcd69-1e18-4a9a-a07e-9b59f79212da@mailbox.org>
- <f4be2285-eb0a-49c1-8595-a73a231465e8@gmail.com>
- <F1C856C7-A075-4EFA-A39B-905A9C40D524@public-files.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <F1C856C7-A075-4EFA-A39B-905A9C40D524@public-files.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: n8rz3kiqy45hk7uk8b6cio3geoekrwmx
-X-MBO-RS-ID: d3d3f4d183526a7f4d5
-X-Rspamd-Queue-Id: 4brX740zFVz9tbD
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="FnzVf1lM8EuqsF+K"
+Content-Disposition: inline
+In-Reply-To: <20250708103959.26129-2-pro@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,53 +104,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/28/25 8:08 PM, Frank Wunderlich wrote:
-> Am 28. Juli 2025 18:34:01 MESZ schrieb "Lucien.Jheng" <lucienzx159@gmail.com>:
->>
->> Marek Vasut 於 2025/7/27 下午 10:46 寫道:
->>> On 7/27/25 4:16 PM, Lucien.Jheng wrote:
->>>> This commit introduces a new API, request_firmware_into_buf_via_script(),
->>>> to the fs_loader framework.
->>>> This function allows firmware to be loaded into memory
->>>> using a user-defined U-Boot script,
->>>> providing greater flexibility for firmware loading scenarios that cannot be handled
->>>> by static file paths or device/partition selection alone.
->>>
->>> Please run some 'fmt -w 72' on the paragraph above.
->> Got it. Will modify for the next version.
->>> [...]
->>>
->>>> I've validated this API on the Banana Pi R3 Mini. Here are my test commands and logs:
->>>> 1.  `env set en8811h_load_firmware 'env set fw_addr 0x46000000 && env set fw_size 0x24000 && load mmc 0:3 0x46000000 /boot/EthMD32.dm.bin && load mmc 0:3 0x46004000 /boot/EthMD32.DSP.bin
->>>
->>> The 'load' command sets $filesize variable AFTER the load completed. The $filesize variable contains the actual size of the loaded data. You will likely need to expand the script a bit:
->>>
->>> env set fw_addr 0x46000000 && env set fw_size 0x24000 && \
->>> mw.b ${fw_addr} 0 ${fw_size} && # Make sure the memory backing the
->>>                                  # firmware is initialized to some valid
->>>                                  # content.
->>> load mmc 0:3 0x46000000 /boot/EthMD32.dm.bin && \
->>> if test ${filesize} -lt 0x4000 ; then # Validate that the size of loaded
->>>                                        # data is correct
->>>    load mmc 0:3 0x46004000 /boot/EthMD32.DSP.bin
->>>    # Validate loaded data size here again
->>> else
->>>    env set fw_size 0                   # Indicate failure
->>>    exit 1
->>> fi
->> OK. I will expand the script you mention.
->>>
->>> [...]
->>>
->>> Looks pretty good otherwise I think , thanks !
->> Thank you for your great advice.
-> 
-> Hi,
-> 
-> Is it possible to trigger it from uboot console?
-> 
-> E.g. setting these vars from there and then call the firmware load function and maybe network init?
-For some devices (like PCIe and USB) it might be possible, since those 
-are initialized after 'pci enum' and 'usb start' . For devices which are 
-started early, set the script, saveenv , and reset. For some devices it 
-might be possible to experiment with this using CMD_BIND too.
+
+--FnzVf1lM8EuqsF+K
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jul 08, 2025 at 12:39:57PM +0200, Philip Oberfichtner wrote:
+
+> Like other images, u-boot-with-spl.bin may be subject to size
+> restrictions. Extend CONFIG_SPL_SIZE_LIMIT to handle this case.
+>=20
+> Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> ---
+>=20
+> Notes:
+>     Changes in v4: none
+>    =20
+>     Changes in v3:
+>     	Reuse existing SPL_SIZE_LIMIT instead of implementing a new option
+>    =20
+>     Changes in v2: none
+>=20
+>  Makefile           | 1 +
+>  common/spl/Kconfig | 2 +-
+>  2 files changed, 2 insertions(+), 1 deletion(-)
+
+This is not quite right enough, sorry. This causes a number of boards
+(evb-ast2600 ibm-sbp1 stm32746g-eval_spl stm32f746-disco_spl
+stm32f769-disco_spl) which have size checks and are fine to now fail
+their size checks, presumably because they're checking the "wrong" file
+now or similar. So if you can't see a way to fix both them and your
+board then sigh, I was wrong initially and we will need another size
+check method like you proposed to start with.
+
+--=20
+Tom
+
+--FnzVf1lM8EuqsF+K
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIf41wAKCRAr4qD1Cr/k
+CpwjAP90lvwSW0Eks6Anh0U5qgeE6a2cSEHif1oZiv/rxUv5AgD+KSoqDk57cW3v
+Me04gZnrdnsHNotc85hdHC78pY7C2gY=
+=fIHz
+-----END PGP SIGNATURE-----
+
+--FnzVf1lM8EuqsF+K--
