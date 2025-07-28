@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03B43C83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 14:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17C10C87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 14:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F0AA82E26;
-	Mon, 28 Jul 2025 16:16:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A486E82E26;
+	Mon, 28 Jul 2025 16:21:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zox8/PwU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VQs3w5re";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A20DF82EB8; Mon, 28 Jul 2025 16:16:34 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 4B7DB82E52; Mon, 28 Jul 2025 16:21:34 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3772B82CBB
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:16:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19B5A82CBB
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:21:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-32b3b250621so43698131fa.2
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 07:16:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-301fb587dfeso2005914fac.3
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 07:21:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753712191; x=1754316991; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fZeomxyrzyfYuYi4Fgpey5WRZmw2cBVjZYAf8ul+p80=;
- b=Zox8/PwUdFyqvVqnQf3Hzl6CuyyFMcu/EeLSKHbXgzZdhF2JlFlRKKCtS+NL4EwFNl
- 4g4jRDhuuWXBcnGvdB5nxF9ceupIYFLKyACD4ptG1KQdPtSeykFM5gssWNki9v0NO+cd
- B5vSwZrT+W9tz6aOeWALbmTyGJGPaRXevdlsh8dRaS9pezegRxQPvlrhUmpFO+viGa3n
- sC92LK9dDjN3VrDKuC3b+MvvIJviaW9w9e18hZNyETeK8NnPM9xTb+h5Cl3+yV4qWbtU
- PMDA2ngZy/dgnlRusMhdEZEf40UUhGm7nczg3IMmFQ8mXfbyYIQGMf+4guU/rmeOZfzb
- LC8A==
+ d=konsulko.com; s=google; t=1753712491; x=1754317291; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TPKte/0JEGwKxTfd5YIls/QReHZ2wwTW3Fmp5QTwum0=;
+ b=VQs3w5rej1bq3jmLct0HrP29YeZT7Ju9o73zU9ASsvgkQ56EmuUQAqp1WoJrDZ71yh
+ K8ViwsYWZ3M1Nm6cQNUAeB0MXjB99AeOJ40Bw9It0mpdtJ3RJCKXago2N0E+kXJ61VKB
+ LA7SB8lVCcOUk35V0V729Bar2XQcWP68pGDLw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753712191; x=1754316991;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fZeomxyrzyfYuYi4Fgpey5WRZmw2cBVjZYAf8ul+p80=;
- b=LJg6agu/ico65aZ2KELgOw84xJKHpia0lJgsp3sjc+VNqv2CXzQZnbjzP4LN3kZ/iC
- pKq+bVDA7oBwEu7r0HKEQDK9no347+RcmA+OrC1XgC8eUh2JxlinT5Fq+4VKXh9YvgXR
- EGK/3Oj8XABjh/2OFoOEGNpIRrIvG+tawMNXbkpijn+caWYQlTtS6Kf2LR8CZN35ElOH
- 16Jp2J66xy5XhNQlY7FuTlfo71IKwiySnZOk7/kvjhJU0dopl/ldw2UAsqmEmSyOyMrc
- 4nBk3J871LOd4dCQZOwKJZrIfh2ef7DrpgJj/8IV4AHpn19nf0vMO3qhnJd2DsEJE5S8
- xG+A==
-X-Gm-Message-State: AOJu0YxOzcUmKuCI7UVtrJ12SlGdtge1Rcne330c//3JtO5JmwvfeuE8
- IzK7Fxufr6Trm49bhk58NEsR1pfCKryFKjOfqeSFxhcuwabNArtFNNAMRTqh1FL80vb0hOfEPYn
- QmFhBBnBG9sycC8MfdiEycr85O94ZKJaJDGI3
-X-Gm-Gg: ASbGncswRC4aErt92FB7FVT9p2I3yTZfPda7rgJ/To4oVy7eZunI48iCMo5Hdsy7nJV
- +lV0y7505AWAj+WXRR/GaRKxql0j2beKOjwRx66zDbniR974nSKPPKk5IqIEKqDuvhIjZVcjfO0
- YqUlPsotByGdej/D7CJEHAqFCAYStBf7WOV25+QDJONR7Nokn/n/kZwFxDRjyrkVMseY1lErBhi
- LRiK4s1xpkwyA8v4HHPdv3xrITRmgq7mc41U8o=
-X-Google-Smtp-Source: AGHT+IHWdvUad4PRLkzWH2YoFPavWiuc5ksljYk5YrNeygh7J2alOHnyU7eZFuCzoUg7ntzV7axDnJVLbxcD7BDifn8=
-X-Received: by 2002:a05:651c:1a0b:b0:32f:1c10:fa with SMTP id
- 38308e7fff4ca-331ee7e2600mr49821981fa.28.1753712191123; Mon, 28 Jul 2025
- 07:16:31 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753712491; x=1754317291;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TPKte/0JEGwKxTfd5YIls/QReHZ2wwTW3Fmp5QTwum0=;
+ b=jCVF9GRjcfvV+SprxYGahmxgjkvejC3oWX4e4KsRsbV/nSf6aHieTizy1fROi6Vuhl
+ bxmQSvILeSt9F0v5WFg23B8xpIZA0Ko9+ug0n81XQ9q46WVWj+n2N1GDLjh9wFVEIFJI
+ UpSy3If9NKligwSHrYgnd4uFJztunnk5827zfFh9q8dqDYdGOViwcmW5WiiXM9f6enoN
+ xPJ1lokB6NvWiuDqn8UOpyeMwvzcl27nVQsCA6E5L73Dl22zKDK9tGpc65TM8aL5jwke
+ wCHPWlOmRSNCAuludnEt2+IP7ltTNLBWlXDcMLt92efHEhZG6922O5dABTPrAWdE7ghW
+ nGCQ==
+X-Gm-Message-State: AOJu0Yx6EuBAGSBJR4uLI1kQWCHk1pNt78CaD9CCnu6QvrJ9dZS9A+D2
+ vEfcp66PUlKz17DofbV81bT/pXussjbCKDfEqIQZcMrKQgWk/ZmKLfpeeNUBWBbtdro=
+X-Gm-Gg: ASbGnctDzvazbIafschHRB7CKGdXZdsZOd3F3gkzXKoSw8ZYcf2XTe5ICO6Gl4mxd0l
+ 7m2qDX3RztoviN8sc4CZG0Ze1GByjqUn79T8eXfLn9BwuyYgYm7WNkpPfLR0ukcYTpzTtQbNUR9
+ jQYyXvQ3ukH1ghRmIdemLwnnBrS8Ew/Wvg/njkaQxitC2gKDZSABKnFg26so56L2/oEp+23kXJn
+ WM2CKJp6eP4R2SWmdyRahb2W3gIrLhwx7JrPY1gQggwjBi32iFx9wC3mwH0XLweRF9IltvKTHS+
+ pve9YmM3itf+BNx1131cBxIg4AFHMro0b4qRJ33EA6qym54WDWXSLK+o+FCEbMP4xQosRz3fS9R
+ fL+Wa4vhjn42pwOG9YP2yUguL3HHoW4KsQbi3PNlCTUzsQYCHjwfYUkIa
+X-Google-Smtp-Source: AGHT+IHfTUEC21o15gptXiIq/1jw9+Is/KpiHhgn2/Wt5e7bZjKLfsc5ots3wf6WrREZO895seQgxw==
+X-Received: by 2002:a05:6870:5e50:b0:306:d617:a36c with SMTP id
+ 586e51a60fabf-30701bd341fmr7257346fac.39.1753712490565; 
+ Mon, 28 Jul 2025 07:21:30 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3071359935bsm1646339fac.21.2025.07.28.07.21.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Jul 2025 07:21:29 -0700 (PDT)
+Date: Mon, 28 Jul 2025 08:21:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Bryan Brattlof <bb@ti.com>
+Subject: Re: [PATCH] pylibfdt: setup.py: Drop license_files
+Message-ID: <20250728142127.GH1807455@bill-the-cat>
+References: <20250725151821.2067853-1-trini@konsulko.com>
+ <ad876397-a18f-42b8-ab84-47282b7a4f48@cherry.de>
+ <20250725155720.GF1807455@bill-the-cat>
+ <b33e3834-b0db-4940-8f39-e76b173e4bc1@cherry.de>
 MIME-Version: 1.0
-References: <20250728141209.92123-1-antoine.picard@bootlin.com>
-In-Reply-To: <20250728141209.92123-1-antoine.picard@bootlin.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 28 Jul 2025 11:16:18 -0300
-X-Gm-Features: Ac12FXwD5adY9-rGfVQiADdKizuaTS7AwIWJocC4Vu5WdqqWgbVUUlCjJqFEOPM
-Message-ID: <CAOMZO5BOKD2EQUaUS0r3z7Qz=7js2n6bgW3V=d9jZ6JzwLi-QA@mail.gmail.com>
-Subject: Re: [PATCH u-boot v1 0/2] Add initial support for the i.MX93 11x11
-To: Antoine Picard <antoine.picard@bootlin.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="icZj2czlSTeibsxq"
+Content-Disposition: inline
+In-Reply-To: <b33e3834-b0db-4940-8f39-e76b173e4bc1@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,28 +99,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Antoine,
 
-On Mon, Jul 28, 2025 at 11:13=E2=80=AFAM Antoine Picard
-<antoine.picard@bootlin.com> wrote:
->
-> This series introduces initial support for the i.MX93 11x11 FRDM
-> development board
-> in U-Boot. It includes:
->
-> - Device tree files tailored for the board.
-> - Board configuration header defining memory layout and basic hardware
-> addresses.
-> - Defconfig and Kconfig entries to enable building for the new board.
->
-> A minimal working configuration has been tested on the hardware but
-> without secure os.
->
-> Feedback and suggestions are welcome.
->
-> Signed-off-by: Antoine Picard <antoine.picard@bootlin.com>
+--icZj2czlSTeibsxq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-U-Boot support for this board has been recently added:
+On Mon, Jul 28, 2025 at 10:19:31AM +0200, Quentin Schulz wrote:
+> Hi Tom,
+>=20
+> On 7/25/25 5:57 PM, Tom Rini wrote:
+> > On Fri, Jul 25, 2025 at 05:30:59PM +0200, Quentin Schulz wrote:
+> > > Hi Tom,
+> > >=20
+> > > On 7/25/25 5:18 PM, Tom Rini wrote:
+> > > > On more recent versions of setuptools the warning about not being a=
+ble
+> > > > to find the files specified in license_files has re-appeared. This =
+is
+> > > > because as best I can tell, it can't and won't look in $(srctree) b=
+ut
+> > > > rather only subdirectories of scripts/dtc/pylibfdt. Since we already
+> > > > provide both SPDX tags and a license field with the SPDX contents, =
+let
+> > > > us just drop license_files as it's not mandatory.
+> > > >=20
+> > >=20
+> > > IANAL but I believe we need to ship the file, that's part of the lice=
+nse
+> > > requirements for both GPL-2.0-or-later and BSD-2-Clause.
+> >=20
+> > I mean, we who? As part of "we should re-examine how we bundle Python
+> > stuff", yes, I don't know if our pylibfdt stuff is at all optimal
+> > anymore and we should maybe we talking with upstream dtc more. But
+> > $(srctree)/Licenses/gpl-2.0.txt and
+> > $(srctree)/Licenses/bsd-2-clause.txt exist and we don't publish the
+> > python binaries.
+> >=20
+>=20
+> Yeah I guess it's the last part that matters, as far as I understood from
+> what you wrote, this means it's essentially only used locally and never
+> uploaded anywhere for consumption by users, so I believe that would be fi=
+ne.
+>=20
+> I guess this patch is an ok stop-gap measure?
 
-https://github.com/u-boot/u-boot/commit/b40c9b0c22773c23322423e6206f049d8f8=
-2c25d
+Well, until such future point as we try and handle libfdt/dtc stuff
+differently, maybe.
+
+--=20
+Tom
+
+--icZj2czlSTeibsxq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIeHYwAKCRAr4qD1Cr/k
+ClqjAQCASqVor11Ex/H3y+GQvhybFqHju+roA1FnTC7nc3FpoQEAlv3kGN2P+pZU
+lVl+8gKTuHPYDEVR3WSVbcDsXPRM5wI=
+=fnuf
+-----END PGP SIGNATURE-----
+
+--icZj2czlSTeibsxq--
