@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E8FC83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:47:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6995EC83F26
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 16:12:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FC43830B4;
-	Mon, 28 Jul 2025 17:47:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D26D82CBB;
+	Mon, 28 Jul 2025 18:12:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RS694uz1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ywv9xgvd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 469BC830EA; Mon, 28 Jul 2025 17:47:13 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 890E382CBB; Mon, 28 Jul 2025 18:12:16 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 082E482F6F
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:47:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E4C082103
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 18:12:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a528243636so2758830f8f.3
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 08:47:11 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-454f428038eso40707065e9.2
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 09:12:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753717630; x=1754322430; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753719134; x=1754323934; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jvNkJrp9KYOo8llD6JdLAgIrb3fsqkechyet8Wm1aAY=;
- b=RS694uz1MS/biO03+bPSlNGv7Z0WtFn/HbfNXtPt3K5qEqcIgqUrvh7+Z8yleJmWxP
- kVM0R37ZT5SKZzA/4GIqhq/Lshw10LzYmB3i5/ngkjGodD3RFDsyyPE+hjBbvdbEHvOp
- wU6n6GsXedUIzLC8HCfp/dRALdIrBdMN3GgtgbewtpvSeSNZFfPRqSJZfOJih0R0Cphp
- 5Q9u/v53KaUNcQY9BbVIMjsoZR3zKM3/yQtLNSU50Kx4fgrS4N0XivBtjRhzsChUFvp8
- ooUbnes5tqNiPz24rwo/yaJ8HR35cSrrZ709b1xsEFjUvVDj5yxvn8qUPzneqBvjG8an
- CTMA==
+ bh=F5bZz7xsK8O/kWU4UAx2HoiL5k+OGFP/WEfveSAn9Kw=;
+ b=ywv9xgvd4DdS8PHyAvc8sdqomv3utKwQEmiLfWV5yRyOOpVzvJIh9h/XWQr8LWifW4
+ LOjRqmYQRJRCmIKokwSbDRQsfmwFaoO7kfyQxZE+oaPXHhNZCSa1+vvgKx4I0SRBjii1
+ xJOV0YzS80ut6PW64/mGIOpBvTPwcUNlivqj1fZNuRUACkt2VAVdnpFWAKSkM9yHuYnZ
+ 6y76Ow9SxQK0dTUgbcwnowIu9ftjHCdifLppyKgoS300dmi9ZhRe0aWrLo2N7nrbJNv3
+ pswFKN248jH/ZoB3SkV6+P+aUP8JAsqdwYo/HaZ4lPrqW8AEMorrEKepWg05EOP/SoF6
+ YoUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753717630; x=1754322430;
+ d=1e100.net; s=20230601; t=1753719134; x=1754323934;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jvNkJrp9KYOo8llD6JdLAgIrb3fsqkechyet8Wm1aAY=;
- b=h4frp3MgxMePZNqtMM3JlwzXD0bM83WUFUvWXqvCma7vtmnPFMeIUESx8WgvrvzjHu
- d1t//wfrbISAuko+fuQvxAqbTkH6JxXqH1MqqUlMtBi2V+ho++YIRUrlWQMH6/UHI2Pj
- p+2V/TSdWZ3glsG+wjxuHrztGPd7NVDWnvn4+6YQ0dFz3boMK6GaEKITCJEGTLCCkN3J
- Hq68iUIK+L/tn5Bhq5PyJ8+kreqs4nyGGKMmlrQQA9wQXG9DqnOGmhJYr8lZySpk7BQd
- lUo4DLjUvywHsM8IU7cVPinKN+3M2UTXoEolm6ogDhT4Qoj+rj/zd3LcO2karBx2ROjv
- vVVA==
-X-Gm-Message-State: AOJu0YzdWzLZ8ky/jirc1Z+dO4KiOMh0E1zSm1iQaitvaCaOpUR1UTNG
- KsC3wquHSqFAbxBBy5rtcTZ4NyctS8sq+C0ZVdBtmECwvfipvqzgMRRgKtcGCUgfgPvhuRQnxIe
- YXZ7M
-X-Gm-Gg: ASbGncs2/EcNTyXsE6x4HIUN5/X2XEg0McRidnLdNe3UGqZ49a6RobXbZNOoz+cemlh
- KvtVPqPszhZH89/6raNaBcuCYkYTpY+/AkjB37ZRYpGEWyJ3XQj9Aw5uesV6KjMEJ1eAv/NYxlB
- SacfmJ0YwQpgx50uWZ+CS5MkmhMHfRiitgqgAM23tBsDIye5YYTpSOI1bDFm2qLKonLagcxPJQf
- k19i3vd/lvFEroiNtkC6a3AP/7v9C9OfwusXN3GiiPVS9QP7gBlMVLNVOfEDk5bvNwviYtHlWHW
- 24XsJ4tI7AZRfV83opflgtU0HsRxr72c9ddHudWZizjIZ/mut/EwEEe5W5bbLOA67XzFUGWp826
- NdhQpp/jIB5hoXGdrwr8PZ4T6dAMFwK7Q/ZMBlll3sx9Rd13uGA==
-X-Google-Smtp-Source: AGHT+IFkLAMPGjU0yIcvdt3hvjK+TXbbmOXRnIwzDoHLXnLE/20dkCq0OYfaDTgBI/RYEi0N4+BbhQ==
-X-Received: by 2002:a5d:6b09:0:b0:3b7:767f:b2a5 with SMTP id
- ffacd0b85a97d-3b7767fba9cmr6497196f8f.31.1753717630226; 
- Mon, 28 Jul 2025 08:47:10 -0700 (PDT)
+ bh=F5bZz7xsK8O/kWU4UAx2HoiL5k+OGFP/WEfveSAn9Kw=;
+ b=HoTNpjZ0U0BDt9HIvNdrpgCagRo0nbXzEDfDWmUKqLX337UNPymjOTPMWxwcy7GFrz
+ U7RJKIWPvPL/NiYw4C7SV2tK62LwxF9Tp2vmCff2c2ywWKYyGiPZQwl5e1xLEId2Yoo1
+ ga/HsYc+BdiUHBTnYAlp7yVv0lQCSPx27h43ZH96OOcCzX+oI2uNDrMa+VVLS0dQyzDx
+ NfIymtIHALSJ/Ool2UnSs/cV3HPQWGGWSxyIFeRHv/Dfs0M+vccldcWIhL8V3iOjW48j
+ UCZg0L26RASZeJDJQsrM14MCovNHIrZZNtRqPw3kLQp2fOCrIApRluYGphZ9CXAmMXfx
+ nGAw==
+X-Gm-Message-State: AOJu0Ywr7ZLtY6rPqANCbexbwwvDPXo/TF0EcsQ9Sp49SNs6ZzGftsad
+ GCYpiR/bDu57Sy4EOtl9RpJrdu5V3hFVodgcvWV8oy3bsWcm6qAQA4IUkC3ww1Ef/zU=
+X-Gm-Gg: ASbGncv7mhc4bcEvWS4dwlTJZ0Q1fIp9MuLDh6/VNtPuOZg46gCAHSsaKJNPyf9ONTN
+ rL3T8412ZF8oXVVdG/mdiyr7hdfozDG080gmUuMBmOAToBVXBjZ4CheAYfU79DXuIsX1Pzh0JCo
+ tKdieQWjFYFHPYMCIpupJX+kPY8P7a2Pg9Fr2SRGUj/4WFisEP/ew2LbrdqKo/kbfdsHgVHh4lt
+ 7IwhpQ/DHCaf0ne8ff/RFI9TXsD6r0gJuGG8sptb1vi26oIiqAKR3vaG9ARAuGfAxcSvwc6moRj
+ cspCY1gyGpk5MZXLw++S6Bd/WURq1I98MLJG5KsMFPWP5PPDrGoos6jGXRYQ+noHG5jb7AyQbO2
+ AqFiVPvwCZIZ2QKWci9mfDX0z6fCwDUJxjI0aPCXRfOu9MVIYtg==
+X-Google-Smtp-Source: AGHT+IELX5yJnyzI231fnmU6LSKhXH1z19z98yOn9hPj4zb56ewm6XeWYPxgeDxKv9i++hn8feUlLg==
+X-Received: by 2002:a05:600c:8b52:b0:456:1156:e5f5 with SMTP id
+ 5b1f17b1804b1-4588cd345d6mr5211625e9.31.1753719133812; 
+ Mon, 28 Jul 2025 09:12:13 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:2df:19e4:8abd:eea3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b778f0c64fsm8917134f8f.60.2025.07.28.08.47.09
+ 5b1f17b1804b1-458705c4fcfsm161108335e9.29.2025.07.28.09.12.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Jul 2025 08:47:09 -0700 (PDT)
+ Mon, 28 Jul 2025 09:12:13 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 28 Jul 2025 16:47:09 +0100
-Subject: [PATCH] mailbox: zynqmp: Fix off by 1 errors
+Date: Mon, 28 Jul 2025 17:12:13 +0100
+Subject: [PATCH] mfd: atmel-smc: Ensure match is initialised
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250728-zynqmp-ipi-v1-1-b2bd144a9521@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAHybh2gC/x2NQQ6CMBAAv0L27CZtDaHyFeOhLavsgVJ3jQEJf
- 6d4nEwms4GSMCn0zQZCX1aecwV7aSCNIb8IeagMzrjWdM7jb83vqSAXRhNtd7Pu6o1voQYxKGG
- UkNN4JlPQD8kpitCTl//l/tj3A8g1k5V1AAAA
-To: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
+Message-Id: <20250728-atmel-smc-v1-1-b3b8e1a4f1ad@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAFyhh2gC/x2N0QqDMAxFf0XyvIDrtBN/ZewhrVEDayeJjIH47
+ 1YfD/dczgbGKmzQVxso/8TkmwvcbxXEmfLEKENhcLVr66frkNbEH7QU0bsmPLrQtH70UPxAxhi
+ UcpzPRyJbWc9hUR7lf0Ve730/AO8whV10AAAA
+To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
@@ -100,60 +99,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use resource_size to correctly calculate the size to pass to
-devm_ioremap and avoid the off by 1 errors previously present.
+If the test in the for loop is never matched then the variable 'match'
+will never be assigned to. Provide an initial value so this cannot be a
+problem.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/mailbox/zynqmp-ipi.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/mfd/atmel-smc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mailbox/zynqmp-ipi.c b/drivers/mailbox/zynqmp-ipi.c
-index 851aa737c03..f62277385fb 100644
---- a/drivers/mailbox/zynqmp-ipi.c
-+++ b/drivers/mailbox/zynqmp-ipi.c
-@@ -188,7 +188,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
- 		return -EINVAL;
- 	};
- 	zynqmp->local_req_regs = devm_ioremap(dev, res.start,
--					      (res.start - res.end));
-+					      resource_size(&res));
- 	if (!zynqmp->local_req_regs)
- 		return -EINVAL;
- 
-@@ -197,7 +197,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
- 		return -EINVAL;
- 	};
- 	zynqmp->local_res_regs = devm_ioremap(dev, res.start,
--					      (res.start - res.end));
-+					      resource_size(&res));
- 	if (!zynqmp->local_res_regs)
- 		return -EINVAL;
- 
-@@ -206,7 +206,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
- 		return -EINVAL;
- 	};
- 	zynqmp->remote_req_regs = devm_ioremap(dev, res.start,
--					       (res.start - res.end));
-+					       resource_size(&res));
- 	if (!zynqmp->remote_req_regs)
- 		return -EINVAL;
- 
-@@ -215,7 +215,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
- 		return -EINVAL;
- 	};
- 	zynqmp->remote_res_regs = devm_ioremap(dev, res.start,
--					       (res.start - res.end));
-+					       resource_size(&res));
- 	if (!zynqmp->remote_res_regs)
- 		return -EINVAL;
+diff --git a/drivers/mfd/atmel-smc.c b/drivers/mfd/atmel-smc.c
+index 15296f71a16..94e5e7b67a0 100644
+--- a/drivers/mfd/atmel-smc.c
++++ b/drivers/mfd/atmel-smc.c
+@@ -347,7 +347,7 @@ const struct atmel_hsmc_reg_layout *
+ atmel_hsmc_get_reg_layout(ofnode np)
+ {
+ 	int i;
+-	const struct udevice_id *match;
++	const struct udevice_id *match = NULL;
+ 	const char *name;
+ 	int len;
  
 
 ---
 base-commit: 4c3b5fcd810081bd7f3c51859fe1b5f0c159803c
-change-id: 20250728-zynqmp-ipi-0b1791238085
+change-id: 20250728-atmel-smc-624b38b456f6
 
 Best regards,
 -- 
