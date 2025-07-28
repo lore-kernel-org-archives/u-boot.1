@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5E4C83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:17:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDD0DC87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5726083281;
+	by phobos.denx.de (Postfix) with ESMTP id A049C8328F;
 	Mon, 28 Jul 2025 17:14:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Uu3KJivX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ScaQhOzE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F91082E26; Mon, 28 Jul 2025 16:55:07 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id B556C82E26; Mon, 28 Jul 2025 16:55:13 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 134E382CA4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:55:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84EE882CA4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:55:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEsYTJ2751194;
- Mon, 28 Jul 2025 09:54:34 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEsms22306963;
+ Mon, 28 Jul 2025 09:54:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753714474;
- bh=lKR7hSc7Nc6VFl4ljbGVFcsPaq2J8zURELpmMDE0aiM=;
+ s=ti-com-17Q1; t=1753714488;
+ bh=tmMuB5qd5cHVn3MK8WnW6J6oquOQLEnTYBeWdLKAk9Q=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Uu3KJivXvTg4g9UKMmKkwSE4dQNBFV1d9Hb+PdoJgs2AEoYuLjuJQuuUbmzW96Y6a
- bcautmS5ctXvGg04c+62tnaiNImDv2/ZONYsbmFqUNwHEeADfONqnv6BAPgZ+/3iCc
- PnlzJsURQnCcey0CJp8/XqTDyJusVzQyubBizEi0=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEsY2M1762941
+ b=ScaQhOzEzRMf2N+EdKu8yZpVjaZa4q5lzuAUyB4GlF/KAXUigytOx++ROEvO3VFi8
+ lHBAr5Bf9KSRkm0YEOxTeB9LpuzQ1uu0erQOcnyz3tv65wD+n2iX319Tt7vFwJDO/h
+ 5VXBtgY0dHIX9m9Njbdpv8BsGwjKNTZPtpKuCG0o=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEslpS1131651
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 28 Jul 2025 09:54:34 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 28 Jul 2025 09:54:47 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
- Jul 2025 09:54:33 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2025 09:54:46 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 28 Jul 2025 09:54:33 -0500
+ Frontend Transport; Mon, 28 Jul 2025 09:54:46 -0500
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 56SEoZuG1924403; Mon, 28 Jul 2025 09:54:20 -0500
+ 56SEoZuH1924403; Mon, 28 Jul 2025 09:54:34 -0500
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <vigneshr@ti.com>, <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
@@ -70,10 +70,10 @@ To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <joao.goncalves@toradex.com>
 CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <srk@ti.com>,
  <s-vadapalli@ti.com>
-Subject: [PATCH 17/45] configs: am62x_beagleplay_a53_defconfig: Increase aneg
- timeout to 20000 ms
-Date: Mon, 28 Jul 2025 20:20:06 +0530
-Message-ID: <20250728145034.225997-18-s-vadapalli@ti.com>
+Subject: [PATCH 18/45] configs: am62x_evm_a53_defconfig: Increase aneg timeout
+ to 20000 ms
+Date: Mon, 28 Jul 2025 20:20:07 +0530
+Message-ID: <20250728145034.225997-19-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250728145034.225997-1-s-vadapalli@ti.com>
 References: <20250728145034.225997-1-s-vadapalli@ti.com>
@@ -109,21 +109,21 @@ will benefit from an increased timeout.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- configs/am62x_beagleplay_a53_defconfig | 1 +
+ configs/am62x_evm_a53_defconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index 05853317fea..79cc9e7521b 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -92,6 +92,7 @@ CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_SPL_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_AM654=y
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index 4da668396d0..723c42e79ca 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -108,6 +108,7 @@ CONFIG_SPI_FLASH_SOFT_RESET=y
+ CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
+ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_S28HX_T=y
 +CONFIG_PHY_ANEG_TIMEOUT=20000
- CONFIG_PHY_REALTEK=y
- CONFIG_PHY_TI=y
- CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_TI_DP83867=y
+ CONFIG_PHY_FIXED=y
+ CONFIG_TI_AM65_CPSW_NUSS=y
 -- 
 2.34.1
 
