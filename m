@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7EBC83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 07:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A1BC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 07:08:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F7DB830E4;
+	by phobos.denx.de (Postfix) with ESMTP id D0CD683108;
 	Mon, 28 Jul 2025 09:08:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ueoyRUgP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mkzgF3a0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B91B830EE; Mon, 28 Jul 2025 09:08:18 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::60c])
+ id 0981B82F00; Mon, 28 Jul 2025 09:08:19 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2062e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::62e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C809782F00
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 09:08:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9081B830E4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 09:08:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Qn5a4k9ipjxEhfst/4m++Hza++fjo/cH3IkoNzX9A7Fsdhz/JzsxTpJCbNfzX24MFtNJytyd2j1R5hpzxEkGjAETqCl6YPIzzug0nzcR9ndwiLm9ehFPjF0L40ANTNZN5XfmCVKOphQGaoK2aFDfv5rqhuZn5UjVwcNnqEFgOXjt3j+OR1Jegbs8QZsZVVouf1yRvOTmmZcMSMknnqWuMPfdQ5KMd3cOGznmDAYLFPnx/Gc0iMGHTyubO25MFcngjaOmjx7eyty0yD0Acm6D+x0UDU669J1K+Uyu2iGXvomkrBVqVG2Kx87oE6vNtq8HW62oEIrS0dpk1A59T8QLgA==
+ b=kFP3PuPyi2iODTCp3mLfNI6pVHKLfFNwiOuWk1NI4lKUFNHrWt4cfTznw2xV+5zbsA70qe7jkYSn3ioRHV91KVItSRrIIGeEDjpg6hsPqji1QUI6QHpenziL7zyI2MSVeQPX934LfqyNUdbAJEuKeOd8EruVs5COrSkZTYxyRT41tfBlKWpq5uNTsWu3e2phASgA/05fPNzkfiORbD9eVPRXi2/WHY3+anA8LxmzL/V6Trw0feE+/Xw6weXmyNqNZLhjy4TvJiaWdulplFCgBy3lJnOC4w2XKKy/ZVFPPq/Vb28SjX6QnCklizVoxcbcBpIAdKz/Yfg3EBRqaT/Kqg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5auhN/F4y+IyDJgtEayvzpujHXn8Lkocvlioe+O/L0Q=;
- b=dYhc77SZ9jwDGGfBQEcg5Qa8khM5IrIrCeVhfl4vqKY0nNOrgzFMOe1JLAVr1W86fE0zfgtoe5mqHQXkilsis1k+95QSP3XfljnhS+IRPFO4tqsc9myeMKULElJVYeY17UGW741Y1rmfitFBC+JlAXWnL6K6Icw6nhC1U7dgzwrrKGwvzeVvgO9FSGa5x29EAoW/6mFPRwOFj4wuEAabAO3bB6r6UZOnxEw0eiV2AxFwU+2/Jqs5YTQ6hycuc+gtGTtoXp1VBYLvghOvc26LJ+jMfWTgYWf3FMXwNZs5bPP4JgWGoN9/ZSVDkCQcuC1j99PJXzSojD7Pc1ceMNwUfg==
+ bh=j4VGhFZgp5amsWJjPGKpzfnIHlP0YyUQPTyaJYS2NQA=;
+ b=Bc/Q9i2kpynBh8HWveBw8o4NZIahS4HGh0okp0+W4Su4YNYnNDOW/7F6ranMWrvZ3cWpf69+SZonpMeFylcX6KxfRMhJepzMJnMKm42ALRpCcFBS3eh452Jyu9Czqo6dWheKlniyAHrCAOpBi1njmm1T4wc4bE5+yyHCGZKmvNj1OTOTUpOX80G7U2HQJ8LAnqNv3Aa0ur2JyhJl+TImAJKLENciqUqZ+NQP2eV9dnEwNMQbW8vW4WhrrRMnakvSU/aciSBmzXBRKtG4PzrX58HkQw0buV1aaEwSNgP+inHDV2EP4n1HfSFUv76ciaMJGKs/KRximyv+sjw0bfGLVw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5auhN/F4y+IyDJgtEayvzpujHXn8Lkocvlioe+O/L0Q=;
- b=ueoyRUgPiYhiUH9IjsYbzRvwhUO6O/Q/NTmIcwCwbC6/8mlgE6CK8b28CPls3sCHW31+mj1FQifW8CBgUwqsbjUcccZ6KbvrwRzErhmRY51f1TnXkXpN8XEr243tucw/P5ckxw9VGi109TVbNIpNg0xUA8IeOPRsCzvEVK92n7E=
-Received: from SJ0PR05CA0119.namprd05.prod.outlook.com (2603:10b6:a03:334::34)
- by MW4PR12MB5665.namprd12.prod.outlook.com (2603:10b6:303:187::17)
+ bh=j4VGhFZgp5amsWJjPGKpzfnIHlP0YyUQPTyaJYS2NQA=;
+ b=mkzgF3a0Nt66KYuwkAqBam8QvlmIrXhj5qTopLXpBI0rnnL04x0pDY/U79dWD6UZv+c/hJxEzlQym4gt56ELUXRLiSPyb19OHpGEOuFPNpnQ9+scs1Y/9pe6+JpcZ0LxOg8IveggECs9r99pwv9DsMgZdR59PWYCkO8KuZsGI48=
+Received: from SJ0PR05CA0118.namprd05.prod.outlook.com (2603:10b6:a03:334::33)
+ by IA1PR12MB6090.namprd12.prod.outlook.com (2603:10b6:208:3ee::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.25; Mon, 28 Jul
- 2025 07:08:10 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.26; Mon, 28 Jul
+ 2025 07:08:11 +0000
 Received: from CY4PEPF0000FCC5.namprd03.prod.outlook.com
- (2603:10b6:a03:334:cafe::ef) by SJ0PR05CA0119.outlook.office365.com
- (2603:10b6:a03:334::34) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:a03:334:cafe::5d) by SJ0PR05CA0118.outlook.office365.com
+ (2603:10b6:a03:334::33) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8989.11 via Frontend Transport; Mon,
- 28 Jul 2025 07:08:10 +0000
+ 28 Jul 2025 07:08:11 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,39 +61,36 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
  CY4PEPF0000FCC5.mail.protection.outlook.com (10.167.242.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8989.10 via Frontend Transport; Mon, 28 Jul 2025 07:08:10 +0000
+ 15.20.8989.10 via Frontend Transport; Mon, 28 Jul 2025 07:08:11 +0000
 Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Jul
- 2025 02:08:06 -0500
+ 2025 02:08:08 -0500
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
  (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Jul
- 2025 02:08:03 -0500
+ 2025 02:08:06 -0500
 Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 28 Jul 2025 02:08:03 -0500
+ Transport; Mon, 28 Jul 2025 02:08:06 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>, <p.bruenn@beckhoff.com>
-CC: Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
- "Dmitry Rokosov" <ddrokosov@salutedevices.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "Mattijs Korpershoek" <mkorpershoek@kernel.org>, Muhammad Hazim Izzat Zamri
- <muhammad.hazim.izzat.zamri@altera.com>, Pieter Van Trappen
- <pieter.van.trappen@cern.ch>, Simon Glass <sjg@chromium.org>, "Svyatoslav
- Ryhel" <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 0/3] fpga: Remove lattice and ACEX1 support
-Date: Mon, 28 Jul 2025 09:07:51 +0200
-Message-ID: <cover.1753686468.git.michal.simek@amd.com>
+CC: Pieter Van Trappen <pieter.van.trappen@cern.ch>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH v2 1/3] fpga: xilinx: Check valid desc structure
+Date: Mon, 28 Jul 2025 09:07:52 +0200
+Message-ID: <876b6f8dbc99ca305460183dbd18635a35ccc989.1753686468.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1753686468.git.michal.simek@amd.com>
+References: <cover.1753686468.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1404; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=9kwzlis+Fr0xQF5jg/gk369v9dVuFlZ8dbe/brUwyfY=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWS0K548vnDTxQbdJjPFu+YeP64dPbS/vKO5+MSsG3/52
- 66cvxwW2VHKwiDGwSArpsgynUnHYc23a0vFlkfmw8xhZQIZwsDFKQATOf6fkeHXsdLUzHLn7afl
- 1jg+/vzAdr3kfkG1Kv53CwrqjPuLP3gxMjxV/iXLY+X3ZlbPopm6JrY7Th+3dBa7te+b6rsTB45
- ek+IHAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=781; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=UWhLyqyJnY5ch9i9H+LqKtl7VyggdexQZ2vd8iqgVgc=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWS0K55XFO7j3jHlsnCgWGVIJWvlaU31jTXr3lx/VrHUi
+ qWp69GOjlIWBjEOBlkxRZbpTDoOa75dWyq2PDIfZg4rE8gQBi5OAZgIxy1GhtW5anOYMk3Yr0YV
+ WrKeXL9j2c+k9AdlB06wFy825L+5WJHhf6hiJ2OledVfk8WXJ/4r6qnyEXjBvZ3rVsfJnd1mCxa
+ 9YwUA
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -102,52 +99,52 @@ Received-SPF: None (SATLEXMB05.amd.com: michal.simek@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC5:EE_|MW4PR12MB5665:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8dad9863-965d-46bb-fa15-08ddcda582a1
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC5:EE_|IA1PR12MB6090:EE_
+X-MS-Office365-Filtering-Correlation-Id: 42357d6d-b949-4928-1a94-08ddcda5833c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|7416014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BOdlPgtnFuqT3ZnGQucuArzkJ2bb4tvPa74DcnYV6YznVlUdGMyfEQZC7r/Q?=
- =?us-ascii?Q?rw/riIGdfokoKneuPl4agiwqKktan3bldcUsJDCrys0mLTI64AdwK/h5jYgb?=
- =?us-ascii?Q?1VqNilbyaumBcBNbV/I/OMS8DVAfKdmMYo0JnFXolWmpbxafxj0Wi0mq57K3?=
- =?us-ascii?Q?13eBjCMYXLG41cRNWrmpmS3qEL6jJsy4NO7o7aq1olCORBlpuBNfxNHjqeo5?=
- =?us-ascii?Q?ajf/SxOvrddfYdft7bchI3kEYX5+tXSeNnpEb2Y7VH/whdRYTsrI7LbQDeQ5?=
- =?us-ascii?Q?yvmUwxQyxputnmm9GBjPeFJifhPbIf2ddHpPpNgtOmcnp3JZAcGhbEyv0UqW?=
- =?us-ascii?Q?zMsKdNmU6T/1tHJtdkIrAFccLEhN8xNeJVJedbBk7QL4u8C3cj4fJtU1sHx8?=
- =?us-ascii?Q?gnwnaN+LyqOAiDU8moflbd7qCl6ErJhfwfWys5giwC4mtj69uvJODTLS/LqU?=
- =?us-ascii?Q?6EVFSNzfl5x5/2/W1mYzMjo9ZkdAPFA+QQ9NrcbGpUBgLDgo0QjzK+AQa5Ab?=
- =?us-ascii?Q?d5F6NGcUocy7WkgqXBZU8G7+eAu8d0gLa3+8dTKGCVa7Ylze5r+b0XqJAKDh?=
- =?us-ascii?Q?+muE7oT5fv8rpq5BWkQ7oHSD7VVhttmS56avZUzCS2k9D98+skNsOjRoU3d3?=
- =?us-ascii?Q?ZI10ZMB2FBjgoUeYxqZF5nRtXqreCA0pzkmet9CSU67kqv6dyWUpp5y3XUcE?=
- =?us-ascii?Q?JBi9+cYMv1c76Ne4EuLkQ3CyzHb7vCAAYG9Ah9bS2ZtHk0r+iA6Q/MUIokwP?=
- =?us-ascii?Q?TW+XItNL6mSBHEQCQJbDPZsVZMU0EhbwA+lfGlch+vZsTLDZipq+Z2JrvbWr?=
- =?us-ascii?Q?m7z9JQJBAaYJSlvY0D932jn9aDHubV+tL6Lvq8fWef8usvsnYhEidkOqLP4L?=
- =?us-ascii?Q?uqv4v4AaKyJh6wXRHVKp8M+81kGzcT0xVBXyYgMM193j23/+okbxrf5Ki9ru?=
- =?us-ascii?Q?RBCUrjgbCfwGMpglrOrQWTfSN5feVC00kVgTWKUsVS3k8YtCvkCyYSQJWKYq?=
- =?us-ascii?Q?nVBknolW4LG2MAUrk/xhApqsyQpOUu4/2g1A3MLxemOkS8oQjoBTjq5bdJwK?=
- =?us-ascii?Q?MSyi/AsVsbBJry/E9ZMQYdlG/649Lcp9B3IkjAQQTe6IX6nFo7lJlXnN3ZPq?=
- =?us-ascii?Q?WCOfymeGM6guoOxi2cRW1VbUzHUth+FNzDGsBvFMZJqNBOWcd1dWtU/meML7?=
- =?us-ascii?Q?B+ooZGu7M1Twfd7WdLX5Q3ujUmYoGAqYsxfd2T+jlVyl6s/Idw0SG+UG5OlP?=
- =?us-ascii?Q?1/EReCxlfGPRWgq/AbV3kzpOeUEQrPh6xgKUG9hZexyqsqsJHQt6q6j5SnKf?=
- =?us-ascii?Q?eVQ9fEZZeJJ1OMP/schUK+VcIp8Nlf6nEINOdSRB1wbCYaPVLsXbeClZy96t?=
- =?us-ascii?Q?py3npxlCSWgjeWjNGH5E4f3W05CD1+Nnf3lDy+voqTBtwmtUiaAMG3ElzJS6?=
- =?us-ascii?Q?iJHwm9jWafovGIBQkmWzjpyMJvPWyYcp0v8G4BHCwwSxY0ab0yfqT1hMalmC?=
- =?us-ascii?Q?3/2AyDxnyRwFmVKy5848ATLJs8xnb9v7WigT?=
+ ARA:13230040|376014|36860700013|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?b+rfFCzwZtR93Mszph4g2Lucv2siLauRAOuuQMlZiehMeELo/ffRl6kE9BcU?=
+ =?us-ascii?Q?WZ8iYrUs40mKCxPuYCxHFkjm9S7dGrFpAH5cYtqwnY/GG0Qe1glhGFPrbqyb?=
+ =?us-ascii?Q?DdXKR5VkuYWzLnyNPRpaL8MmH2LCK7sCK2FPLk2ZnspjdprMpd42WKN4hAgK?=
+ =?us-ascii?Q?B33gqryKjQyk+V8td8zpTIocG4O/GrUOMME6UeMb4VDsu/kyc/alL1aKpoDQ?=
+ =?us-ascii?Q?/BPdVwPrU8IBVuctDzm3yGCnTUYMKBN2SdXn5bmxfLdgrq7iXN/uzKO0mBgK?=
+ =?us-ascii?Q?oR26fYiP2Avf20MBJA7sKFyvPuiSvhHhlhZD7bUBZKalCndE2YbAcwD+jlZl?=
+ =?us-ascii?Q?W7X7rGzdPXL4EUiUi+DiOwPeJ/4zRkHQ/QcFLy79z0HzIxcYz54zquIKJ50k?=
+ =?us-ascii?Q?p9J27B/5OMzCsFnZkBFvkL24rv9Fg4uVmFCWC+dJWW4Nu1OUbUxQA6pUf0Zh?=
+ =?us-ascii?Q?6Wcf7GTEj4P147sH7QKGNZ5OkJYpJBSk2QAAOsRaudUVbSnjYAcJnjkv6h3w?=
+ =?us-ascii?Q?7AhGXzhIE2WWKB3Qzp2EPkrumKs7XIOIFa95nMN2o+1xujUO49bdVC4o/8yR?=
+ =?us-ascii?Q?bVntG9At/RKMU5+LzGisGWyLLmY9KUYMNT1WTk2R4oVGVjkWc5vE0sLbc92f?=
+ =?us-ascii?Q?JnoejpSQSm5g/KM+Wx/po6nbDqkmVQKf5L9CAnKFr0jHguhPehVvMccqN41K?=
+ =?us-ascii?Q?JmZKJHkvouZEDZAhRGoGbl4aLwm6Q7vdEqYJDiH0JXVQfprWB/ZSwld/SE+M?=
+ =?us-ascii?Q?PKNJ3ltEVZZnmLHGxQcoWiG0bSFq4enSsN6XwMILmPkp+Cw8840CSLJfzEMm?=
+ =?us-ascii?Q?mg9Gz0ZeWhZto446ZdIG8Pjmhq//9DyBNXGoe2B06VQsH8eS9//132+KUQKz?=
+ =?us-ascii?Q?sytmzomgcXVwVFhFqXxR7ZD1MOFllGgwzaBcsYTE0nQy52ivDs5O41EQqvOu?=
+ =?us-ascii?Q?oxtR65jk3UmL8ZyyP3Us8hQxFHKRn/XnzoIlzz363ci3TY/lsmazJHVbQbgR?=
+ =?us-ascii?Q?iUoyxS8l2Bltoz/Jicz5hW2IaFugdeweuHAVeTX11XYWuWfvAw7XaPV0P9Pg?=
+ =?us-ascii?Q?VJWm0uPWsP7L+USB22YJVVE004+xElO7IvNH81HcVO3IjAJXU9MvCnTiWfeR?=
+ =?us-ascii?Q?lRQzqwDyLjJo4ykD5Yx8Vow32Ud+C/vVwBOFG1WT0yN9AG+plrfhLo8GnRj9?=
+ =?us-ascii?Q?7Xsj+IWlJ+C3asQhOUIuogS3ChxtGIbN8jjD1lz/hjUbl9PIRWk3ZVgqjL8Z?=
+ =?us-ascii?Q?5C6cEGZT3WpHdQXOrv6I/hWhgpLFIUEzpnJIGl5lnKyAud0xN0X9G3ra1fZ3?=
+ =?us-ascii?Q?WaIOWRQV+E2NkhHHrvtw1c/ybJYC1AZOFy0GTkvFJllBnbutiD2mz/DoxL8W?=
+ =?us-ascii?Q?YQD6DYuYgi8a5GRNGDOhy7pkN/jMgp1oOdBUu7PEcrGHGiUi9CBgI3L0VXov?=
+ =?us-ascii?Q?wXZpHfx121tUqlH/PLOte2fA7hUwbsA2BbQEDb/q4YMezbzNhuwFAKlwCqyq?=
+ =?us-ascii?Q?uJWEd91tTbIktFlKYXDpYviFtveY45aRBDvJ?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(7416014)(1800799024); DIR:OUT;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2025 07:08:10.0550 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8dad9863-965d-46bb-fa15-08ddcda582a1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2025 07:08:11.0650 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42357d6d-b949-4928-1a94-08ddcda5833c
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC5.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB5665
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6090
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,47 +161,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+FPGA validation can fail and return value needs to be checked.
 
-when fpga drivers were enabled via sandbox some coverity issues came and
-make no sense to fix them when there is no user of these drivers that's why
-it is easier just remove them completely.
+Addresses-Coverity-ID: CID 583150: Null pointer dereferences  (NULL_RETURNS)
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-Another candidate for removal is FPGA_CYCLON2 which is enabled only by
-mx53cx9020_defconfig.
-Patrick: Is this board still maintained?
+(no changes since v1)
 
-Thanks,
-Michal
+ drivers/fpga/xilinx.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Changes in v2:
-- Get EP2/EP3/EP4 sizes back even they are not used by any code today
-
-Michal Simek (3):
-  fpga: xilinx: Check valid desc structure
-  fpga: Remove ancient ACEX1K support
-  fpga: lattice: Remove unused support
-
- configs/sandbox_defconfig |    2 -
- drivers/fpga/ACEX1K.c     |  245 ---
- drivers/fpga/Kconfig      |   12 -
- drivers/fpga/Makefile     |    2 -
- drivers/fpga/altera.c     |    5 +-
- drivers/fpga/fpga.c       |   23 -
- drivers/fpga/ivm_core.c   | 3149 -------------------------------------
- drivers/fpga/lattice.c    |  379 -----
- drivers/fpga/xilinx.c     |    3 +
- include/ACEX1K.h          |   32 -
- include/fpga.h            |    1 -
- include/lattice.h         |  298 ----
- 12 files changed, 4 insertions(+), 4147 deletions(-)
- delete mode 100644 drivers/fpga/ACEX1K.c
- delete mode 100644 drivers/fpga/ivm_core.c
- delete mode 100644 drivers/fpga/lattice.c
- delete mode 100644 include/lattice.h
-
+diff --git a/drivers/fpga/xilinx.c b/drivers/fpga/xilinx.c
+index 28c68faba55f..25b348648eff 100644
+--- a/drivers/fpga/xilinx.c
++++ b/drivers/fpga/xilinx.c
+@@ -50,6 +50,9 @@ int fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
+ 	dataptr = (unsigned char *)fpgadata;
+ 	/* Find out fpga_description */
+ 	desc = fpga_validate(devnum, dataptr, 0);
++	if (!desc)
++		return FPGA_FAIL;
++
+ 	/* Assign xilinx device description */
+ 	xdesc = desc->devdesc;
+ 
 -- 
 2.43.0
 
-base-commit: 4c3b5fcd810081bd7f3c51859fe1b5f0c159803c
-branch: debian-sent3
