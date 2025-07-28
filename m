@@ -4,76 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA92C87FCE
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 08:49:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7961EC87FCE
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 09:02:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D217E830EA;
-	Mon, 28 Jul 2025 10:49:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D3D2083045;
+	Mon, 28 Jul 2025 11:02:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="DneM861p";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SBX/3qOv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 208C5830EE; Mon, 28 Jul 2025 10:49:55 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4E8CB830B4; Mon, 28 Jul 2025 11:02:14 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B23D830E4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 10:49:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4287C82F14
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 11:02:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=030437f29f=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56S7rLdu024803;
- Mon, 28 Jul 2025 10:49:43 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- WXjIAupCTAEk8KSWO+WtSS1/5Rh7V2z0yjMTpAgTBjA=; b=DneM861pYYR6vu/3
- SPGqNoHw6/LJAnfytUyKPANnA3nZVJpBcvQyJV3kJzqIROq7VurAnrJS1VC6uyTR
- 1HK4f0pcfs854GQAVjnpJmrGFlHOjmWsO2C3nvSwbKlbg37n/t4uQLOrsDSXoN1n
- bY63dKhiEPcXFB+qDZGDOkvjka82Bco8he5+2WevSNyfmICaL7Ux8XwRkL1jMjKh
- AO8ih4uidIsZAriYkiRY7nHlr7h83oSF8vtNMnoPquGab7eopxm+R+e9xO+onbv9
- QqqQ1cfiuwl5yGH4uEgyLYbTlZTMfaAVBapE/NtEaJliqUrfWoCu1CfhRSOSI8ph
- 1rwnEA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484pc278ah-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Jul 2025 10:49:43 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 904B24008B;
- Mon, 28 Jul 2025 10:48:44 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 818C86C9722;
- Mon, 28 Jul 2025 10:47:35 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Jul
- 2025 10:47:35 +0200
-Message-ID: <cb580383-8aa9-45e9-88a3-344232eec428@foss.st.com>
-Date: Mon, 28 Jul 2025 10:47:34 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3b78a034f17so556124f8f.2
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 02:02:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753693331; x=1754298131; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XPIZ31WvWQq9fDqBLSUu3bCftZLEtTQhIV4EIa031jU=;
+ b=SBX/3qOv8v31EAV/Zg5xcgUQSqz3K06ecY/vFTAbpQXSJCkrx1Ysm0dO2L06w4aPzu
+ MvBCIiZM7HBftqPgJ5Xq3stOJCZLY1xq8WhxpUBth2NiRrzq0MVKyFl96BLVEf1nLKOh
+ 6n3NiEDQchKmePBLYVF7xT6B9ewR5wQ/dh6540dJVglrp1iVIVPUVeo6JULFQ5GUNnGN
+ XA8aI7rL2PWYC/KNcyMFZswc0vMmjO11dfNpKFu44SKfQG88+3pX+GSZu5IRVk0zb8IM
+ 7/l1pCHOwqumGjlybh5SD2XL+ptsvUjS57gMbXRXK8KmnG9rOekAnvKZRQsPsKAyf7c+
+ Jt1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753693331; x=1754298131;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XPIZ31WvWQq9fDqBLSUu3bCftZLEtTQhIV4EIa031jU=;
+ b=GPchTB47sR04M/Kv8L63wFsKACCXPY06QfJaZPO0wFzhEWLTyk3LhI6s/drzJ8NDWK
+ 2kigMChFjxofSMMeKj2XaBFi4Au8/7hlgSQJX+V/cHIy2cU/9q3bXsU9m9fG/I/oaPix
+ elEm586t1agBoyl4aek5XMWz3+En2GtMvbY8VGrG93qBBSOc8GJ0srjwHcwR9OHhmzY0
+ h7YqTVj5K0g5K92cGn8lxI9EfUvN5gXENscSp5KjxRwu4oskaP4TxONa/doKCAXjgCny
+ Tuq3qzerV+EHpLSMU9kdHtQLFh2Y7TCsPdYlZ1Ju1ljDECL5EGjf8mMGRdoBNgfSCMyb
+ 6tAQ==
+X-Gm-Message-State: AOJu0Yw9zVvWnY+Be9UolkbaG8Q2qwxEQ8Kc8Lzwm6ndLggq0FNek7Ky
+ dS6Yy4C5SLOkZS8ejU1TbG7mztupDkKDmz4s2P+Jfiv/k6bxPdHsk6wySQEX4gcV3k8=
+X-Gm-Gg: ASbGnctxHe/3kcta0zrW0tilxYpIQbS+DMFto6VoJjQy0W3RjISiM+E9CvKyTFtm6AI
+ dK1G6LDnVOA0649OMoZJuL0VVlMNqZuqzhXPSxatvzRNbIAM7TqyHndkCVVBEwkr6lxpm4Fhxly
+ xwiXKlf0SNpqNPzjAHeuNqMdMkYUAfvsv3UyCm+rjS50LfxpnLPXcJUakH2j0cggfuKCv7Spk12
+ 3iRymMRFlgUz7PciD4L5dUAVs7mvAKG9NYyvaDoDbfUT19WXvEstvussdku1CLwQ3ZhshuCMEzh
+ 59fbXX1HrUOEj8r2A9HToAzBfJt7vrV02x7AWl1QT/0P/YzQZOZJ3PXbHf60aq/gh3q+DAoVSlV
+ VHh1EFXlsam6MNK4jsevhXPSnVoO8m4RqvyYuyNPZhS2m1xSAtteQF7JtvtLuACwzu2n88lMXop
+ Y=
+X-Google-Smtp-Source: AGHT+IFpEYQp4N7UevKVObhacgwRc6hVzGJx/Y5+WrUycORKIRz8AxSVZXtHiA4KesEP05NF0VbpQw==
+X-Received: by 2002:a05:6000:2883:b0:3a5:2e9c:edb with SMTP id
+ ffacd0b85a97d-3b77668d454mr8673518f8f.47.1753693331260; 
+ Mon, 28 Jul 2025 02:02:11 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:2df:19e4:8abd:eea3?
+ ([2a0a:ef40:f9e:3c01:2df:19e4:8abd:eea3])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4587ac7625esm91270195e9.31.2025.07.28.02.02.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Jul 2025 02:02:10 -0700 (PDT)
+Message-ID: <2a7826fd-1573-4f4a-8540-afbefe3b0d0b@linaro.org>
+Date: Mon, 28 Jul 2025 10:02:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: stm32: Wrong macros used in register read
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>
-CC: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-References: <20250724-clk_stm32-v1-1-c12dd33d28c2@linaro.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250724-clk_stm32-v1-1-c12dd33d28c2@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-28_03,2025-07-24_01,2025-03-28_01
+Subject: Re: [PATCH] cmd: ufetch: Initialise size before first use
+To: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20250626-ufetch_fix-v1-1-025afdb85dc2@linaro.org>
+ <84393d64-b2c6-4287-8fe3-10c6b23dd8d4@linaro.org>
+ <013b1877-e199-4f98-bcb6-54a06d86ae7d@linaro.org>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <013b1877-e199-4f98-bcb6-54a06d86ae7d@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,45 +106,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Thanks Casey. It is just that this patch still shows as 'New' in 
+patchwork rather than 'Accepted'.
 
+Andrew
 
-On 7/24/25 13:37, Andrew Goodbody wrote:
-> Smatch reported a warning about a shift macro being used as a mask. Make
-> the obvious changes to make this register read calculation work the same
-> as the previous ones.
+On 25/07/2025 14:19, Casey Connolly wrote:
+> Hi Andrew,
 > 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
-> This fix is somewhat speculative as it is being made without
-> reference to any manual.
-> ---
->  drivers/clk/stm32/clk-stm32h7.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> Sorry I missed the thank you letter for this one. This patch was picked
+> as 8830e72092e0
 > 
-> diff --git a/drivers/clk/stm32/clk-stm32h7.c b/drivers/clk/stm32/clk-stm32h7.c
-> index aa3be414a29..df82db69738 100644
-> --- a/drivers/clk/stm32/clk-stm32h7.c
-> +++ b/drivers/clk/stm32/clk-stm32h7.c
-> @@ -549,8 +549,8 @@ static u32 stm32_get_PLL1_rate(struct stm32_rcc_regs *regs,
->  	divr1 = readl(&regs->pll1divr) & RCC_PLL1DIVR_DIVR1_MASK;
->  	divr1 = (divr1 >> RCC_PLL1DIVR_DIVR1_SHIFT) + 1;
->  
-> -	fracn1 = readl(&regs->pll1fracr) & RCC_PLL1DIVR_DIVR1_MASK;
-> -	fracn1 = fracn1 & RCC_PLL1DIVR_DIVR1_SHIFT;
-> +	fracn1 = readl(&regs->pll1fracr) & RCC_PLL1FRACR_FRACN1_MASK;
-> +	fracn1 = (fracn1 >> RCC_PLL1FRACR_FRACN1_SHIFT) + 1;
->  
->  	vco = (pllsrc / divm1) * divn1;
->  	rate = (pllsrc * fracn1) / (divm1 * 8192);
+> Kind regards,
 > 
-> ---
-> base-commit: 3532f1f5edfc97c9dcea723cdeb732eda44bc669
-> change-id: 20250724-clk_stm32-b097d32f3fe9
+> On 24/07/2025 10:59, Andrew Goodbody wrote:
+>> ping?
+>>
+>> On 26/06/2025 15:12, Andrew Goodbody wrote:
+>>> The local variable size is not assigned to before it is used
+>>> for the first time. Correct this.
+>>>
+>>> This issue was found by Smatch.
+>>>
+>>> Fixes: 86d462c05d57 (cmd: add a fetch utility)
+>>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>>> ---
+>>>    cmd/ufetch.c | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+>>> index 46bd16824e6..bc5db08eee1 100644
+>>> --- a/cmd/ufetch.c
+>>> +++ b/cmd/ufetch.c
+>>> @@ -93,7 +93,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int
+>>> flag, int argc,
+>>>        const char *model, *compatible;
+>>>        char *ipaddr;
+>>>        int n_cmds, n_cpus = 0, compatlen;
+>>> -    size_t size;
+>>> +    size_t size = 0;
+>>>        ofnode np;
+>>>        bool skip_ascii = false;
+>>>   
+>>> ---
+>>> base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+>>> change-id: 20250626-ufetch_fix-54b741710142
+>>>
+>>> Best regards,
+>>
 > 
-> Best regards,
 
-Hi Andrew
-
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
