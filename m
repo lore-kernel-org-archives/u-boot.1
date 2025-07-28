@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA76C83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCA1C87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:22:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB3ED83759;
-	Mon, 28 Jul 2025 17:14:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DDCF831C8;
+	Mon, 28 Jul 2025 17:19:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DyVbxeqc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KW2LZ2te";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9704882E26; Mon, 28 Jul 2025 17:01:18 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C72382CA4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:01:15 +0200 (CEST)
+ id 5306F831D8; Mon, 28 Jul 2025 17:19:09 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 96E11831BE
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:19:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SF0koJ2752943;
- Mon, 28 Jul 2025 10:00:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753714846;
- bh=c2pLWd4fEYI3xh8b1FQ2mYmXzEpvFekguh3JAhDJGD0=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=DyVbxeqcF0d6hWu/zO3wCInQpJR+SEoskSz1OF0zps9HewWigHY5uXV8xDVRB7Dnu
- 1dXtoppOnKqkqOZTCxkPRJqDiABCzCOLoqVPr/A1f2L1OGDGKe50YoLnq+U2/v9kIg
- GJEmrU0lCtpxNaroZuIyE8Rgxlh+pVtxhFm6CGEQ=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SF0jXq1135922
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 28 Jul 2025 10:00:45 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
- Jul 2025 10:00:44 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 28 Jul 2025 10:00:44 -0500
-Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 56SEoZui1924403; Mon, 28 Jul 2025 10:00:31 -0500
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
- <vigneshr@ti.com>, <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
- <m-chawdhry@ti.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>,
- <a-nandan@ti.com>, <ggiordano@phytec.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <paulk@sys-base.io>,
- <marek.vasut+renesas@mailbox.org>, <romain.gantois@bootlin.com>,
- <kory.maincent@bootlin.com>, <mkorpershoek@kernel.org>,
- <festevam@gmail.com>, <a-dutta@ti.com>, <ddrokosov@salutedevices.com>,
- <anshuld@ti.com>, <jm@ti.com>, <sjg@chromium.org>, <p-mantena@ti.com>,
- <n-francis@ti.com>, <s-k6@ti.com>, <rogerq@kernel.org>,
- <seanga2@gmail.com>, <kamlesh@ti.com>, <a-shenai@ti.com>,
- <c-vankar@ti.com>, <kishon@ti.com>, <dannenberg@ti.com>,
- <e@freeshell.de>, <h-salunke@ti.com>, <semen.protsenko@linaro.org>,
- <u-kumar1@ti.com>, <peng.fan@nxp.com>, <quentin.schulz@cherry.de>,
- <sumit.garg@kernel.org>, <d.schultz@phytec.de>,
- <emanuele.ghidoli@toradex.com>, <hiago.franco@toradex.com>,
- <joao.goncalves@toradex.com>
-CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <srk@ti.com>,
- <s-vadapalli@ti.com>
-Subject: [PATCH 45/45] configs: verdin-am62p_a53_defconfig: Increase aneg
- timeout to 20000 ms
-Date: Mon, 28 Jul 2025 20:20:34 +0530
-Message-ID: <20250728145034.225997-46-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250728145034.225997-1-s-vadapalli@ti.com>
-References: <20250728145034.225997-1-s-vadapalli@ti.com>
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-61557997574so951409a12.3
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 08:19:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753715946; x=1754320746; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=hswj5MqffyJQr+UUmp09lTIxaqsY9MvOHoNju1i68R4=;
+ b=KW2LZ2tetOqQAZ8BTq1VHJHvjhtr4j7yMG5sdxrm5nBixV0Zues+vcB528/XD+v3jC
+ inN2Vf0y1mV6x+ovyTu2B9zkabIRx7HSlSBvFOBKF9cokjPkAY5L8Sbt54pW0r3BhttF
+ CtaoyWJCpxD8j861PUkQ0djpGcJ1IfZRlVDievIY/OU2UE60+MUbHceRQ56nzbaCrWtl
+ uyOUltm+vM2zAV61586XRgffwbewUnNDK4XmoSrXCO4VBiMhRyA3jyUcvzGUONtRO839
+ VfBm+o3HtL06Xnlzl8zfIWM7E7aUt/QwH0MIw0HskEwKRJ9lV5LTZWca7o/tA0jSqvOA
+ A0WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753715946; x=1754320746;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hswj5MqffyJQr+UUmp09lTIxaqsY9MvOHoNju1i68R4=;
+ b=VdhLwPABET91fMbcxFkRqU3uAzok/RzCyHXHWt5s+FEU9P4vfAzxFJQ0xMimviYdoF
+ S+rEu9Zz2vE98VwMreV7MmIbMWgw0FI4qpucOQ3fBgVRWz+ztCBBRMWygOhpdCWJfTPF
+ LJVKGDFAKNNMWthbiC9plsuJYS/US5ZlOrTVo9oLBKkpYM5yUtcT1Z5g5X5nJH8HAVZZ
+ DESKqru6rA8NFCgBzj0IEeII65nFymcjRIqiynpvWBL6h4k1YWrbAwv2stxIrUcp6w7s
+ +sYyvX8BRSiUtkTr3jGucfgr/c3eO2kZLpbLKnB66/ni8gQ7se5BWlLQNdpFskHCxKVL
+ KOzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX19UnyTIAE3dFpKpT3wwLwfDTVzBwizZenFeMnrDrZ5xKmklNzA+/3A1avGi54Oo90PUeJXwQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0oLWEat0hZQ+pSXYjqTDPkT+0GnyjAJP48M7gR3HEmZSmBjxI
+ cUeOR2JIICTJ2KKxGDhcRCWbGmhGcwXyDSpeGMMnMZQKwDVqEebDZqjkSPcb6E2nFZA=
+X-Gm-Gg: ASbGncsoymCslkb9zRYzRgWPZMH2gzU+3R7oGoBQ/9dX415Fbrn8VDrMO4y+5ewkegD
+ B+zG8I5Bdlnl0H2DZzeIWVBwAvOIhcW1AmchobvzLwgUhzSuD2DJddG9kFamks8J2wV6JxOC98h
+ 6wLG3/Od2vLh0mJFByv9frb04lVki/AiTwQ43KQloMfk//TtGm5RbWOpnSMiTeu/Gm7dVSswbt6
+ x7cEeYRnfgN8zxtO2AVUr6GmG8SEGsWIFv9Rc34LXl8B/3fSKXlBFzHeIYZJhKWMEjhQBDzfkGi
+ RhcB6LKLLB6L/0n+Z8EWvx+jmiZ6RoU2fSVmcXCZUTxpVU0E01+ZkOqwxX/2tSKb9kdXDDnJoCo
+ zjDLfad1OpDRFt+ee0TkL7uMIJ4+qV2+6qXcz
+X-Google-Smtp-Source: AGHT+IEtWQ5bn9Q8npJGH1Kgun4DCup2FHmuPPdvNneAlqXXc9i/OrNyeSCIaH8XV/zxP1++CTpWgQ==
+X-Received: by 2002:a05:6402:1d4c:b0:60c:791e:586b with SMTP id
+ 4fb4d7f45d1cf-614f1a88a18mr12344937a12.3.1753715946004; 
+ Mon, 28 Jul 2025 08:19:06 -0700 (PDT)
+Received: from [192.168.91.100] ([185.132.172.209])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-61500491c53sm3419656a12.10.2025.07.28.08.19.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Jul 2025 08:19:05 -0700 (PDT)
+Message-ID: <dad9299a-4005-4cef-b5f1-a7dec22afb9b@linaro.org>
+Date: Mon, 28 Jul 2025 18:19:01 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Mon, 28 Jul 2025 17:14:15 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/6] Add support for sama7d65 SoC and sama7d65 curiosity
+ board
+To: Varshini Rajendran <varshini.rajendran@microchip.com>,
+ ryan.wanner@microchip.com, lukma@denx.de, seanga2@gmail.com,
+ manikandan.m@microchip.com, nicolas.ferre@microchip.com, sjg@chromium.org,
+ balamanikandan.gunasundar@microchip.com, Romain.Sioen@microchip.com,
+ u-boot@lists.denx.de
+References: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,32 +105,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Increase the PHY Auto-Negotiation timeout to 20,000 ms from the current
-default of 4,000 ms inherited from "Kconfig" for PHY_ANEG_TIMEOUT.
 
-The motivation for this change is that existing devices will continue
-working as-is (timeout is an upper bound and auto-negotiation can be
-done earlier), while older Hardware connected to the board that might
-occasionally take longer than 4,000 ms for the Auto-Negotiation process
-will benefit from an increased timeout.
 
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
----
- configs/verdin-am62p_a53_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+On 7/7/25 14:29, Varshini Rajendran wrote:
+> This patch series adds support for the new SoC sama7d65.
+>  - sama7d65 SoC is added
+>  - Clock driver for sama7d65 is added
+>  - Target board SAMA7D65 Curiosity is added with its differences in DT
+>  and MMC config support
+> 
+> Ryan Wanner (6):
+>   clk: at91: Update MAX PLL and master clk ID
+>   clk: at91: sama7d65: add clock support
+>   ARM: mach-at91: add support for new SoC sama7d65
+>   ARM: dts: at91: sama7d65-curiosity: Add DT tweaks for
+>     sama7d65-curiosity board
+>   board: sama7d65_curiosity: Add support for sama7d65_curiosity
+>   configs: sama7d65_curiosity: Add defconfig for sama7d65_curiosity
+> 
+>  .../dts/at91-sama7d65_curiosity-u-boot.dtsi   |   80 +
+>  arch/arm/mach-at91/Kconfig                    |   13 +
+>  arch/arm/mach-at91/armv7/Makefile             |    1 +
+>  arch/arm/mach-at91/armv7/sama7d65_devices.c   |   31 +
+>  arch/arm/mach-at91/include/mach/hardware.h    |    2 +
+>  arch/arm/mach-at91/include/mach/sama7d65.h    |  107 ++
+>  board/atmel/sama7d65_curiosity/Kconfig        |   15 +
+>  board/atmel/sama7d65_curiosity/MAINTAINERS    |    6 +
+>  board/atmel/sama7d65_curiosity/Makefile       |    7 +
+>  .../sama7d65_curiosity/sama7d65_curiosity.c   |   75 +
+>  configs/sama7d65_curiosity_mmc1_defconfig     |  108 ++
+>  drivers/clk/at91/Makefile                     |    1 +
+>  drivers/clk/at91/clk-master.c                 |    2 +-
+>  drivers/clk/at91/clk-sam9x60-pll.c            |    2 +-
+>  drivers/clk/at91/sama7d65.c                   | 1451 +++++++++++++++++
+>  include/configs/sama7d65_curiosity.h          |   20 +
+>  16 files changed, 1919 insertions(+), 2 deletions(-)
+>  create mode 100644 arch/arm/dts/at91-sama7d65_curiosity-u-boot.dtsi
+>  create mode 100644 arch/arm/mach-at91/armv7/sama7d65_devices.c
+>  create mode 100644 arch/arm/mach-at91/include/mach/sama7d65.h
+>  create mode 100644 board/atmel/sama7d65_curiosity/Kconfig
+>  create mode 100644 board/atmel/sama7d65_curiosity/MAINTAINERS
+>  create mode 100644 board/atmel/sama7d65_curiosity/Makefile
+>  create mode 100644 board/atmel/sama7d65_curiosity/sama7d65_curiosity.c
+>  create mode 100644 configs/sama7d65_curiosity_mmc1_defconfig
+>  create mode 100644 drivers/clk/at91/sama7d65.c
+>  create mode 100644 include/configs/sama7d65_curiosity.h
+> 
 
-diff --git a/configs/verdin-am62p_a53_defconfig b/configs/verdin-am62p_a53_defconfig
-index 3daf22ff8ff..4fa69117d0c 100644
---- a/configs/verdin-am62p_a53_defconfig
-+++ b/configs/verdin-am62p_a53_defconfig
-@@ -144,6 +144,7 @@ CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_SPL_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_AM654=y
- CONFIG_PHY_ADDR_ENABLE=y
-+CONFIG_PHY_ANEG_TIMEOUT=20000
- CONFIG_PHY_MICREL=y
- CONFIG_PHY_MICREL_KSZ90X1=y
- CONFIG_PHY_TI_DP83867=y
--- 
-2.34.1
 
+Applied to u-boot-at91/master , thanks !
