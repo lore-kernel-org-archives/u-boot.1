@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23F32C87FC9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EA32C83F17
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:14:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3625682CBB;
-	Mon, 28 Jul 2025 17:04:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 76E2882CBB;
+	Mon, 28 Jul 2025 17:14:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aqpG2nAx";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UKAJfPq2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B293B82E26; Mon, 28 Jul 2025 17:04:46 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A09E582CA4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:04:44 +0200 (CEST)
+ id 1678282E26; Mon, 28 Jul 2025 16:51:18 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D18D82CA4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:51:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-455fdfb5d04so24925715e9.2
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 08:04:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753715084; x=1754319884; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=77EaQFaaBMAypnzqkem4N8T3B/GLUh4fYLru+9w9Dy8=;
- b=aqpG2nAxM5o0NWVIIXv9gFWNAUs7yGbrKG1EnZIpjzZ7YGM8CXdRf3vhfncKB0ClGz
- Fm41sxBBB4g1XNY+eofezrnSoLHe8SRglWZhN+x9ph7aYabhB59wO30Nys2UQUJNxMsX
- gmCvWypcOzYp5ngIbhJ4QsaHsVgjnmQbcvpezYWWsQQ9lxj8aW3E0eZ5XTxKHiRViKak
- 54iordqGmIHRs5+yyNfOg3/4Dsgxw1amzhvbdv9af4xI00HrwT8q8f1rlRgGBOEtvo3/
- XJI1Pl0ObbM8T7v0gdkBrF1xnHxv88715PtmMuFcptsWWGNW++hhaoJsPcyWw+YGNHx8
- IIOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753715084; x=1754319884;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=77EaQFaaBMAypnzqkem4N8T3B/GLUh4fYLru+9w9Dy8=;
- b=XSGZy2eD4qCIWNQWYcJwMQn/zjdCyWvExsLZ3rufr3rP1UTYtSTNyt/iicyVwPvU1o
- wd3vDhslaWcAA4xrp/WwI+aszWAXmC5+MHIJxweykcnTF86BddgUnjGVQIf6PTNNOoSo
- gJPYmzqOBDZHfLCN+JnJkvNeseCG67STZUA+IwqeWGiNk3qh0uerE/G5aqn0KbtrX3d6
- oW1IzWzwWQBRtHwk8Y0CfyS1UrUXReiKSvVcM9xqUANQbwL5zaq92JbxOtRnx00X2ody
- OnPRKphrMgAJQtz4odIN72AfajOJ6tIiDQk1Vqw0MDnEi4IC4+5b3OIECRGKigsdmqJx
- pJSA==
-X-Gm-Message-State: AOJu0YzCMEZCjmojRFTT3X32zSe33m/PQ71wnSBqbiVH1y3FwlEu6Z+c
- pwwmmt3bbbV9Ey9v82Uj4Phj9Z7nOlLCi9tSZaNOpZIJW15D+r9JoROSrPQ1CtnCSnw=
-X-Gm-Gg: ASbGncvDIbxAFm8FCTSkpj+Ox9uGmhS16aZQ5y5dkLkb1ppood0RLQUofhR9dJcDhhg
- vhc6PRy2dmXkcXXWV78Iclebpo7qTiSCPikUpShC3QrJ7LPAqcwvZCzWQUFLB9znIjX8iN0X6J0
- E3H4rAEpajlb5HraGDK299qiTwRAc+I3wmNoYyDRSzh1l0URppjpJ0b3j3VCBUfG+y8w/TMGTGm
- xp4ivL1rBpQKlxkD/xvWgJXa+X7n4fHM59Gmba3c2IulPivyTyKgWUhsMJeNjt6Kjw+4AZ1YpJv
- X/T8HumnC/HXRpFjKb8Opk9lmG2yDKanWyNF8unQd95E2bhpZNGEcCtx+PWGOzCmfQvJ2odMK7P
- 4vKktxo9EoeVdHPXnZsH22LY5TaVWRrbtNyvwlKR0vsPaKZO0Tg==
-X-Google-Smtp-Source: AGHT+IEOAWltYY3XOn3WxYLDZJ16uGAac9NHFyEX/BZY5WoSF1v89bT2DI0wicv0t3dEZcdku9n6Kw==
-X-Received: by 2002:a05:600c:3e0e:b0:442:c993:6f94 with SMTP id
- 5b1f17b1804b1-458828a9babmr52781125e9.12.1753715083914; 
- Mon, 28 Jul 2025 08:04:43 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:2df:19e4:8abd:eea3])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4586eeb5f3asm108148115e9.2.2025.07.28.08.04.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Jul 2025 08:04:43 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 28 Jul 2025 16:04:43 +0100
-Subject: [PATCH] i2c: rcar_iic: Do not use unitialised variable
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEooOQ2782006;
+ Mon, 28 Jul 2025 09:50:50 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753714250;
+ bh=cmHrwB46vlW+EPGRSOZCY8+j/Khb4VwTFcNrTDPw3nU=;
+ h=From:To:CC:Subject:Date;
+ b=UKAJfPq2Jeo25/5d5wNV+kgc91Z3jiJOttkyO9i6CpIDLm3AjQj1PnV/IEt195a+m
+ Kk2L2p6vMHChspr2R8PnGDWNK3KzXWT8l4p27WA6ub4ydFDyu4f8saDGzXHavaXMFR
+ F49oQ4QNBH3StDqRb7L3m3uWzxz89Cs/pJ2Kl8DU=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEoopb2092787
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 28 Jul 2025 09:50:50 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
+ Jul 2025 09:50:48 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 28 Jul 2025 09:50:48 -0500
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
+ 56SEoZtx1924403; Mon, 28 Jul 2025 09:50:36 -0500
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
+ <vigneshr@ti.com>, <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
+ <m-chawdhry@ti.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>,
+ <a-nandan@ti.com>, <ggiordano@phytec.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <paulk@sys-base.io>,
+ <marek.vasut+renesas@mailbox.org>, <romain.gantois@bootlin.com>,
+ <kory.maincent@bootlin.com>, <mkorpershoek@kernel.org>,
+ <festevam@gmail.com>, <a-dutta@ti.com>, <ddrokosov@salutedevices.com>,
+ <anshuld@ti.com>, <jm@ti.com>, <sjg@chromium.org>, <p-mantena@ti.com>,
+ <n-francis@ti.com>, <s-k6@ti.com>, <rogerq@kernel.org>,
+ <seanga2@gmail.com>, <kamlesh@ti.com>, <a-shenai@ti.com>,
+ <c-vankar@ti.com>, <kishon@ti.com>, <dannenberg@ti.com>,
+ <e@freeshell.de>, <h-salunke@ti.com>, <semen.protsenko@linaro.org>,
+ <u-kumar1@ti.com>, <peng.fan@nxp.com>, <quentin.schulz@cherry.de>,
+ <sumit.garg@kernel.org>, <d.schultz@phytec.de>,
+ <emanuele.ghidoli@toradex.com>, <hiago.franco@toradex.com>,
+ <joao.goncalves@toradex.com>
+CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <srk@ti.com>,
+ <s-vadapalli@ti.com>
+Subject: [PATCH 00/45] TI SoC based Boards: Increase Aneg Timeout to 20, 000 ms
+Date: Mon, 28 Jul 2025 20:19:49 +0530
+Message-ID: <20250728145034.225997-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250728-rcar_iic-v1-1-00dd08660421@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAIqRh2gC/x2NQQqDQBAEvyJzzsJmiVHylRBkHFudQzZhRiQg/
- t01x6KrqY0cpnB6VBsZVnX95ALXS0Uyc54QdChMKaY6NqkNJmydqgRwhMjYDHy7U9F7doTeOMt
- 8Ht7sC+wcvoZRf//G87XvB4HL0lFzAAAA
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Heiko Schocher <hs@denx.de>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Mon, 28 Jul 2025 17:14:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,35 +95,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In rcar_iic_xfer if nmsgs == 0 the ret will not be assigned to. As ret
-will always be 0 if the for loop is entered, may as well just return 0.
+Hello,
 
-This issue was found by Smatch.
+This series is based on commit
+088d24eb96f Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-samsung
+of the master branch of Mainline U-Boot.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/i2c/rcar_iic.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The Auto Negotiation procedure between two Ethernet PHYs consists of
+determining the best commonly supported parameters among Speed,
+Duplex Mode and Flow Control.
 
-diff --git a/drivers/i2c/rcar_iic.c b/drivers/i2c/rcar_iic.c
-index e019d06be41..42d575e29ba 100644
---- a/drivers/i2c/rcar_iic.c
-+++ b/drivers/i2c/rcar_iic.c
-@@ -191,7 +191,7 @@ static int rcar_iic_xfer(struct udevice *dev, struct i2c_msg *msg, int nmsgs)
- 			return -EREMOTEIO;
- 	}
- 
--	return ret;
-+	return 0;
- }
- 
- static int rcar_iic_set_speed(struct udevice *dev, uint speed)
+The time taken for this procedure is not only dependent on the local
+PHY used, but also on the link-partner PHY.
 
----
-base-commit: 4c3b5fcd810081bd7f3c51859fe1b5f0c159803c
-change-id: 20250728-rcar_iic-ea0eccf7da46
+While the board and its PHY may be capable of completing the
+Auto-Negotiation process in under 10,000 ms (highest timeout specified
+in the configs of one of the boards prior to this series updating it),
+the Link-Partner connected to it may not be capable of guaranteeing
+this. As a result, we might observe intermittent timeouts. An example
+of such a Link-Partner is a Network Switch with around 25 Ports with
+each port connected to a different Board, and all Boards possibly
+starting the Auto-Negotiation process in tandem. This is unlikely, but
+when it does occur, it might result in a timeout. Therefore, this
+series is increasing the timeout to 20,000 ms to be on the safe side.
+Since the parameter being modified is a timeout, there should be no
+adverse affect except in cases where a timeout is expected earlier -
+possibly to initiate the fallback mechanism quickly.
 
-Best regards,
+Regards,
+Siddharth.
+
+Siddharth Vadapalli (45):
+  configs: am335x_baltos_defconfig: Increase aneg timeout to 20000 ms
+  configs: am335x_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: am335x_evm_spiboot_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: am335x_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: am335x_hs_evm_uart_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: am43xx_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: am43xx_evm_qspiboot_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: am43xx_evm_rtconly_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: am43xx_evm_usbhost_boot_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: am43xx_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: am43xx_hs_evm_qspi_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: am57xx_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: am57xx_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: am57xx_hs_evm_usb_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: am62ax_evm_a53_defconfig: Increase aneg timeout to 20000 ms
+  configs: am62px_evm_a53_defconfig: Increase aneg timeout to 20000 ms
+  configs: am62x_beagleplay_a53_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: am62x_evm_a53_defconfig: Increase aneg timeout to 20000 ms
+  configs: am62x_evm_r5_ethboot_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: am64x_evm_{r5,a53}_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: am65x_evm_a53_defconfig: Increase aneg timeout to 20000 ms
+  configs: am67a_beagley_ai_a53_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: dra7xx_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: dra7xx_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: j7200_evm_a72_defconfig: Increase aneg timeout to 20000 ms
+  configs: j721e_beagleboneai64_a72_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: j721e_evm_a72_defconfig: Increase aneg timeout to 20000 ms
+  configs: j721s2_evm_a72_defconfig: Increase aneg timeout to 20000 ms
+  configs: j722s_evm_a53_defconfig: Increase aneg timeout to 20000 ms
+  configs: j784s4_evm_a72_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2e_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2e_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2g_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2g_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2hk_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2hk_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2l_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: k2l_hs_evm_defconfig: Increase aneg timeout to 20000 ms
+  configs: phycore_am62ax_a53_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: phycore_am62ax_r5_ethboot_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: phycore_am62x_a53_defconfig: Increase aneg timeout to 20000
+    ms
+  configs: phycore_am62x_r5_ethboot_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: phycore_am64x_{r5,a53}_defconfig: Increase aneg timeout to
+    20000 ms
+  configs: verdin-am62_a53_defconfig: Increase aneg timeout to 20000 ms
+  configs: verdin-am62p_a53_defconfig: Increase aneg timeout to 20000 ms
+
+ configs/am335x_baltos_defconfig             | 1 +
+ configs/am335x_evm_defconfig                | 1 +
+ configs/am335x_evm_spiboot_defconfig        | 1 +
+ configs/am335x_hs_evm_defconfig             | 1 +
+ configs/am335x_hs_evm_uart_defconfig        | 1 +
+ configs/am43xx_evm_defconfig                | 2 +-
+ configs/am43xx_evm_qspiboot_defconfig       | 2 +-
+ configs/am43xx_evm_rtconly_defconfig        | 2 +-
+ configs/am43xx_evm_usbhost_boot_defconfig   | 2 +-
+ configs/am43xx_hs_evm_defconfig             | 2 +-
+ configs/am43xx_hs_evm_qspi_defconfig        | 2 +-
+ configs/am57xx_evm_defconfig                | 2 +-
+ configs/am57xx_hs_evm_defconfig             | 2 +-
+ configs/am57xx_hs_evm_usb_defconfig         | 2 +-
+ configs/am62ax_evm_a53_defconfig            | 1 +
+ configs/am62px_evm_a53_defconfig            | 1 +
+ configs/am62x_beagleplay_a53_defconfig      | 1 +
+ configs/am62x_evm_a53_defconfig             | 1 +
+ configs/am62x_evm_r5_ethboot_defconfig      | 1 +
+ configs/am64x_evm_a53_defconfig             | 1 +
+ configs/am64x_evm_r5_defconfig              | 1 +
+ configs/am65x_evm_a53_defconfig             | 1 +
+ configs/am67a_beagley_ai_a53_defconfig      | 1 +
+ configs/dra7xx_evm_defconfig                | 1 +
+ configs/dra7xx_hs_evm_defconfig             | 1 +
+ configs/j7200_evm_a72_defconfig             | 1 +
+ configs/j721e_beagleboneai64_a72_defconfig  | 1 +
+ configs/j721e_evm_a72_defconfig             | 1 +
+ configs/j721s2_evm_a72_defconfig            | 1 +
+ configs/j722s_evm_a53_defconfig             | 1 +
+ configs/j784s4_evm_a72_defconfig            | 1 +
+ configs/k2e_evm_defconfig                   | 1 +
+ configs/k2e_hs_evm_defconfig                | 1 +
+ configs/k2g_evm_defconfig                   | 2 +-
+ configs/k2g_hs_evm_defconfig                | 2 +-
+ configs/k2hk_evm_defconfig                  | 1 +
+ configs/k2hk_hs_evm_defconfig               | 1 +
+ configs/k2l_evm_defconfig                   | 1 +
+ configs/k2l_hs_evm_defconfig                | 1 +
+ configs/phycore_am62ax_a53_defconfig        | 1 +
+ configs/phycore_am62ax_r5_ethboot_defconfig | 1 +
+ configs/phycore_am62x_a53_defconfig         | 1 +
+ configs/phycore_am62x_r5_ethboot_defconfig  | 1 +
+ configs/phycore_am64x_a53_defconfig         | 1 +
+ configs/phycore_am64x_r5_defconfig          | 1 +
+ configs/verdin-am62_a53_defconfig           | 1 +
+ configs/verdin-am62p_a53_defconfig          | 1 +
+ 47 files changed, 47 insertions(+), 11 deletions(-)
+
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.34.1
 
