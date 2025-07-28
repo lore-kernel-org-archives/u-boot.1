@@ -4,94 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67FAAC83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 16:53:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78250C83F26
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 18:01:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90F378312A;
-	Mon, 28 Jul 2025 18:53:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E95A82E52;
+	Mon, 28 Jul 2025 20:01:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="StwrfRGn";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="rjVmLn5R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBA0482EB8; Mon, 28 Jul 2025 18:34:11 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 7074982EB8; Mon, 28 Jul 2025 20:01:54 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E505082D06
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 18:34:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FEDD82E34
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 20:01:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2403c13cac3so969885ad.0
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 09:34:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2e95f0b6cb7so2143257fac.3
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 11:01:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753720447; x=1754325247; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Lt1yB1TqjL1lxtLKh1DvguSg+5WMzgLjDt6xz5O/fHo=;
- b=StwrfRGnJTQKrcdi5br1mwWhtbFob61/Us/rcCQ7cdD/MjdhMjaMU+Uoc+oh43B0Al
- eNh72pm7YtCQNMo0n0CNoGW43cuo1pJTFAld/+HSDwU1P7XZb8buyffev7xaZFqNxpEk
- GMafFBYtTbNm/gAGRZqh+1+fR3wvE7Xs0vm35JMdzsrK+RbVURWkgnFu3AYFmbKpznTs
- LNPZKcPDnuFAoHZOzVFk3mh7OwtlBwZN9YGgRM7nTfYF7DRZ/IV29iBllwJ27O0WYiLs
- 3WwvSG4EZo2Yf9rhCF4rLnG0Ee1KtM+o8JXztiLW9snbHyQEKCtslteJLfr75RY3zh59
- Cptg==
+ d=gateworks.com; s=google; t=1753725711; x=1754330511; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hpHeaD6OItM/Ldx0FQnmUUTflLpuYaeWeNxuS+ICTUo=;
+ b=rjVmLn5RUI+pKxb8WWm+ePEAXJtG9cyNUSyYOCpltbb5ppbWechYeAl7K+++wKw3PR
+ Q+cShje9ZgojpVVhulrrPWv04PT6BejNczeo32MZSQ8Dda+yf0qJl6jO9u10AB6PnRn3
+ l5jPBXMQ66UzQhTgroGZn8PFAOfEUiiGF8bct/+Lfwas2wN49D9BViK92hKQy2L2qC86
+ 2DuGT3xTTxEQNd+VIGTPtlpWzd1xb7A28tAoB/ZJ2QkCU07X8oa/HeUJzvRKqnxlXV+D
+ R9Ihva4/0dEZdR46X12bOG87equVX8HDPpou//CEG6D7KNfrolVT68YWgS4oQw8m7VdC
+ XjXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753720447; x=1754325247;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Lt1yB1TqjL1lxtLKh1DvguSg+5WMzgLjDt6xz5O/fHo=;
- b=k80Zp7USGeLHFMcJwk84rVThW0ZMtBNC9jw9MgJeBj9aS3ET1xKYqpu/kVK0zLOVnq
- 5/a6Ml9V5O8Hl1wW/uDVgsop9Qo1BqPxmp9ic9sS1vlp7rfPGaUtwq2GetQT67nKuYrI
- CDHZf2eMhlZ53w3RlLbi/9WMOcIgosSf4uVo0X0F0uJEwvByl/sBZL17eSRgXC5zDxaF
- r21mMW2/Z88Svs7BSz9AbUEPsL8HA3rMILz9moy6RNOD+xcdWNfWpSSz8BNntsEyFTiD
- U1ecUBLtmApCV6VAQgugCdBAsFoPEu6/Kxr6KcpbafYSvnn/V/K3sQuPh0XmseZcQ1Om
- cdJQ==
+ d=1e100.net; s=20230601; t=1753725711; x=1754330511;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hpHeaD6OItM/Ldx0FQnmUUTflLpuYaeWeNxuS+ICTUo=;
+ b=GCCg94+wRvkQy5HhOMo+cn0PyRhQHQybYBpZv7wppxQMDvvBWAT4bZGmMdqwXDY3pt
+ Mfd+FCFlPfqDCuNASwkvJDQqSJKIVstsxIDpPTG84WsgW7+foLMDQhb/c7Jtnk/mJoNK
+ BdHTMdgDuYSIF3S+jPwCa/z3uAJ71uRrDwEGyHGV/p9BgkIYxiqOjZDQU+MsBC9d7KP1
+ CfTomnU4KiYLiFPovEJ3DgP9SqI2SALv1WAc8tFkAhBsojCyjU0ky+2D/ZbM1FOMdq4T
+ PIzgX9DmAyEl7f48hFgB4DrCFOOn+LP5WYL4L6oGJgABjqox1MQ6ApLBE+m8QzAejn8e
+ Zb9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFePNwU+JhNZL0/AKdGvDmcUcchuA+zlagn0RuV1/5kROHiRnjYlqEQa3v7A81B/WSMKeavHM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxjx7AG1jg8KGTRwXR77a/pWJrOcFdkBMUA70nRe9VxToB0Xgkq
- YMx/7+ibI1sLYO5vExmn5Bk1bzlKxrFUXPj/RemhzifIXJUvmNdRLzg3
-X-Gm-Gg: ASbGncvgQh1Az/aEqihqDySeM3Dms1sT7YOgfkuTyj/zoPVhI9WgQHjNgO6qL8iBC/K
- 3YuisxCLZNaW32UB4stqtjBhNicf3PprNn3/oLAJB+vT7iEFEzIYA9T7j2Xmkkomapr30MGhevN
- VKdzKpMmIvdqWY00lbu49e8zoVVylZqStO87+lfwulaMAuD5hmk1IX0BuHVPGJLhbEB4Mh/e61V
- ZF/YqLQvkvyi6uKgu2SNSnLsZftvKX2qfZepokknpIgFfdQe+7qxm2eEeWq1qg6EyGul1ec3wwv
- c0L00MS3gCZUFgrHv5xgfyDrsBIYvlJj5TwKQqxtLkBSpz6lwAMbKv/oWFwtAwMNIUO9egfBW5m
- gyqxS5eprXJ/0RaP0CzjJJP7IFcRgtVxZGXbnHB6Oyw+q9pMSrCbjWAWvWM8nLCdkTUWdTJxPDI
- 3YjvZerAA=
-X-Google-Smtp-Source: AGHT+IFuJeL9P+jNgsdw0A72ZVx2NdYZpufsaC+qcRMnJJJEiz5gdUocCPvEivag0UJiWPKd0PdYxg==
-X-Received: by 2002:a17:903:304a:b0:235:f091:11e5 with SMTP id
- d9443c01a7336-24063d03a12mr2100715ad.10.1753720447292; 
- Mon, 28 Jul 2025 09:34:07 -0700 (PDT)
-Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2403f335075sm16284155ad.185.2025.07.28.09.34.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Jul 2025 09:34:06 -0700 (PDT)
-Message-ID: <f4be2285-eb0a-49c1-8595-a73a231465e8@gmail.com>
-Date: Tue, 29 Jul 2025 00:34:01 +0800
+ AJvYcCUMPohy7J93IWtqzoZO9GtLgFbrVsTF/hPcUAtSDDMCaqqbjqCUjWhCxGlUeNQKASh/9yQ2eCk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzLZc7aOwb9FqO3u3GrImFfy6lt2fGdFh+TsjZYHErFZaiTaqZk
+ IkslI2+QwJV+0qwNYvWOdIaoNu+4DTK3531fjD9Xr19824XqFP2/Hy5KjjExYfnbP6JJoHazmr9
+ LkwSGVLmd9zSHUArMA1R5cTElBQr2KSZMd8fSUGdJ1w==
+X-Gm-Gg: ASbGnctwDiAZmYbZPE6zHfy5qrysbZ2xErpjTTYO1NAqSD/vvnTZuYwIGh7t0VSl7c6
+ mq35xmfuhzSyPX1TLJ1n1KpnRWFVQXaGb25Au0QtbDwmhfNQ00KdpOwnO1nciqZmfh8b49ABozT
+ T29t++5l5tEI7xsUq+LWe/+m55atiVns2br9g+GbitSo8XN5XYQhSLtIDz5JbrLcQBMQ9fc7Wzm
+ lfnuxsILZiFvsmy5Q==
+X-Google-Smtp-Source: AGHT+IGou8VEwPdMPgpLYSSPsq0I3+ybqWrEU0cVDKGr9lFdcgx5h0ZKuBwpBXRq2HZgEjX6jnV2BEc9W+kU97oE2XU=
+X-Received: by 2002:a05:6820:328b:b0:619:222e:b697 with SMTP id
+ 006d021491bc7-619222eb7eemr3119080eaf.5.1753725710680; Mon, 28 Jul 2025
+ 11:01:50 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [U-Boot, v2, 1/1] misc: fs_loader: Add
- request_firmware_into_buf_via_script() for flexible firmware loading via
- U-Boot script
-To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- marek.vasut+renesas@mailbox.org, tien.fong.chee@altera.com,
- trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, seanga2@gmail.com
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org
-References: <20250727141609.15425-1-lucienzx159@gmail.com>
- <2f6dcd69-1e18-4a9a-a07e-9b59f79212da@mailbox.org>
-Content-Language: en-US
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-In-Reply-To: <2f6dcd69-1e18-4a9a-a07e-9b59f79212da@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 28 Jul 2025 18:53:53 +0200
+References: <20250708-imx95b0-v1-0-01759e9c855f@oss.nxp.com>
+In-Reply-To: <20250708-imx95b0-v1-0-01759e9c855f@oss.nxp.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 28 Jul 2025 11:01:39 -0700
+X-Gm-Features: Ac12FXxJVFH61_irfDjX641b9vNCF9P811YcpoHgnomlunm1CmIN618uvNDGwRg
+Message-ID: <CAJ+vNU2G=CMiHc4mU4fjQEz7zwjvx_EuiWWQo8MBVHGJdmTarA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] imx: add i.MX95 b0 support
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Ye Li <ye.li@nxp.com>
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, 
+ Alice Guo <alice.guo@nxp.com>, Jacky Bai <ping.bai@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,48 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Jul 14, 2025 at 11:41=E2=80=AFPM Alice Guo (OSS) <alice.guo@oss.nxp=
+.com> wrote:
+>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> ---
+> Alice Guo (2):
+>       tools: imx8image: Add 2 new commands CMD_CNTR_VERSION and CMD_DUMMY=
+_DDR
+>       imx95_evk: Add i.MX95 B0 support
+>
+> Ye Li (2):
+>       arm: imx: Update ELE get_info structure for i.MX94
+>       spl: imx: Add support for new PQC container
+>
+>  arch/arm/dts/imx95-u-boot.dtsi            |  8 ++---
+>  arch/arm/include/asm/mach-imx/ele_api.h   |  2 ++
+>  arch/arm/mach-imx/image-container.c       |  2 +-
+>  arch/arm/mach-imx/imx9/Kconfig            |  1 +
+>  arch/arm/mach-imx/imx9/scmi/container.cfg |  1 +
+>  arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  5 +--
+>  common/spl/Kconfig                        |  7 ++++
+>  doc/board/nxp/imx95_evk.rst               | 12 +++----
+>  include/imx8image.h                       |  6 ++++
+>  include/imx_container.h                   | 11 ++++++
+>  tools/imx8image.c                         | 57 ++++++++++++++++++++++++-=
+------
+>  11 files changed, 86 insertions(+), 26 deletions(-)
+> ---
+> base-commit: cd79a2839b01571b6f2915c219f71c05e3c97482
+> change-id: 20250708-imx95b0-e12a13552658
+>
+> Best regards,
+> --
+> Alice Guo <alice.guo@oss.nxp.com>
+>
 
-Marek Vasut 於 2025/7/27 下午 10:46 寫道:
-> On 7/27/25 4:16 PM, Lucien.Jheng wrote:
->> This commit introduces a new API, 
->> request_firmware_into_buf_via_script(),
->> to the fs_loader framework.
->> This function allows firmware to be loaded into memory
->> using a user-defined U-Boot script,
->> providing greater flexibility for firmware loading scenarios that 
->> cannot be handled
->> by static file paths or device/partition selection alone.
->
-> Please run some 'fmt -w 72' on the paragraph above.
-Got it. Will modify for the next version.
-> [...]
->
->> I've validated this API on the Banana Pi R3 Mini. Here are my test 
->> commands and logs:
->> 1.  `env set en8811h_load_firmware 'env set fw_addr 0x46000000 && env 
->> set fw_size 0x24000 && load mmc 0:3 0x46000000 /boot/EthMD32.dm.bin 
->> && load mmc 0:3 0x46004000 /boot/EthMD32.DSP.bin
->
-> The 'load' command sets $filesize variable AFTER the load completed. 
-> The $filesize variable contains the actual size of the loaded data. 
-> You will likely need to expand the script a bit:
->
-> env set fw_addr 0x46000000 && env set fw_size 0x24000 && \
-> mw.b ${fw_addr} 0 ${fw_size} && # Make sure the memory backing the
->                                 # firmware is initialized to some valid
->                                 # content.
-> load mmc 0:3 0x46000000 /boot/EthMD32.dm.bin && \
-> if test ${filesize} -lt 0x4000 ; then # Validate that the size of loaded
->                                       # data is correct
->   load mmc 0:3 0x46004000 /boot/EthMD32.DSP.bin
->   # Validate loaded data size here again
-> else
->   env set fw_size 0                   # Indicate failure
->   exit 1
-> fi
-OK. I will expand the script you mention.
->
-> [...]
->
-> Looks pretty good otherwise I think , thanks !
-Thank you for your great advice.
+Hi Alice,
+
+It would appear that some of these changes break compatibility with A0
+silicon chips. I've tried rolling some things back using the old ahab
+container and older imx-oei but am still not able to boot my
+imx95_19x19_evk with A0. Can you please explain what is necessary for
+A0 vs B0?
+
+Best Regards,
+
+Tim
