@@ -4,91 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCA1C87FC9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:22:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FBEC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:42:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DDCF831C8;
-	Mon, 28 Jul 2025 17:19:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0BF5882E26;
+	Mon, 28 Jul 2025 17:42:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KW2LZ2te";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UoUWGhui";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5306F831D8; Mon, 28 Jul 2025 17:19:09 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id ACB2182F6F; Mon, 28 Jul 2025 17:42:17 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96E11831BE
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:19:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F09A82CBB
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:42:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-61557997574so951409a12.3
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 08:19:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-615d75ee53dso1028129eaf.0
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 08:42:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753715946; x=1754320746; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=hswj5MqffyJQr+UUmp09lTIxaqsY9MvOHoNju1i68R4=;
- b=KW2LZ2tetOqQAZ8BTq1VHJHvjhtr4j7yMG5sdxrm5nBixV0Zues+vcB528/XD+v3jC
- inN2Vf0y1mV6x+ovyTu2B9zkabIRx7HSlSBvFOBKF9cokjPkAY5L8Sbt54pW0r3BhttF
- CtaoyWJCpxD8j861PUkQ0djpGcJ1IfZRlVDievIY/OU2UE60+MUbHceRQ56nzbaCrWtl
- uyOUltm+vM2zAV61586XRgffwbewUnNDK4XmoSrXCO4VBiMhRyA3jyUcvzGUONtRO839
- VfBm+o3HtL06Xnlzl8zfIWM7E7aUt/QwH0MIw0HskEwKRJ9lV5LTZWca7o/tA0jSqvOA
- A0WA==
+ d=konsulko.com; s=google; t=1753717334; x=1754322134; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WlLDF0pLLn8LnA2cmQjtNwEyK+bagknTXBqDwdIP9Vc=;
+ b=UoUWGhuiEFIyQwLHQm8siqxIXddB37o1qPwNuWvtOLzOwkn679Ab0BrMac2vxYbUnE
+ ygdgI2P3/uIHTXKZ2pVfP0PcbuVzzqsVJThJU7rmJdQm8Ech1Z692nOfsKh/BY0mvZFs
+ FWxiFbOxj9WzyQnhvuVxIU/6TSc69d054oYPY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753715946; x=1754320746;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hswj5MqffyJQr+UUmp09lTIxaqsY9MvOHoNju1i68R4=;
- b=VdhLwPABET91fMbcxFkRqU3uAzok/RzCyHXHWt5s+FEU9P4vfAzxFJQ0xMimviYdoF
- S+rEu9Zz2vE98VwMreV7MmIbMWgw0FI4qpucOQ3fBgVRWz+ztCBBRMWygOhpdCWJfTPF
- LJVKGDFAKNNMWthbiC9plsuJYS/US5ZlOrTVo9oLBKkpYM5yUtcT1Z5g5X5nJH8HAVZZ
- DESKqru6rA8NFCgBzj0IEeII65nFymcjRIqiynpvWBL6h4k1YWrbAwv2stxIrUcp6w7s
- +sYyvX8BRSiUtkTr3jGucfgr/c3eO2kZLpbLKnB66/ni8gQ7se5BWlLQNdpFskHCxKVL
- KOzw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX19UnyTIAE3dFpKpT3wwLwfDTVzBwizZenFeMnrDrZ5xKmklNzA+/3A1avGi54Oo90PUeJXwQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0oLWEat0hZQ+pSXYjqTDPkT+0GnyjAJP48M7gR3HEmZSmBjxI
- cUeOR2JIICTJ2KKxGDhcRCWbGmhGcwXyDSpeGMMnMZQKwDVqEebDZqjkSPcb6E2nFZA=
-X-Gm-Gg: ASbGncsoymCslkb9zRYzRgWPZMH2gzU+3R7oGoBQ/9dX415Fbrn8VDrMO4y+5ewkegD
- B+zG8I5Bdlnl0H2DZzeIWVBwAvOIhcW1AmchobvzLwgUhzSuD2DJddG9kFamks8J2wV6JxOC98h
- 6wLG3/Od2vLh0mJFByv9frb04lVki/AiTwQ43KQloMfk//TtGm5RbWOpnSMiTeu/Gm7dVSswbt6
- x7cEeYRnfgN8zxtO2AVUr6GmG8SEGsWIFv9Rc34LXl8B/3fSKXlBFzHeIYZJhKWMEjhQBDzfkGi
- RhcB6LKLLB6L/0n+Z8EWvx+jmiZ6RoU2fSVmcXCZUTxpVU0E01+ZkOqwxX/2tSKb9kdXDDnJoCo
- zjDLfad1OpDRFt+ee0TkL7uMIJ4+qV2+6qXcz
-X-Google-Smtp-Source: AGHT+IEtWQ5bn9Q8npJGH1Kgun4DCup2FHmuPPdvNneAlqXXc9i/OrNyeSCIaH8XV/zxP1++CTpWgQ==
-X-Received: by 2002:a05:6402:1d4c:b0:60c:791e:586b with SMTP id
- 4fb4d7f45d1cf-614f1a88a18mr12344937a12.3.1753715946004; 
- Mon, 28 Jul 2025 08:19:06 -0700 (PDT)
-Received: from [192.168.91.100] ([185.132.172.209])
+ d=1e100.net; s=20230601; t=1753717334; x=1754322134;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WlLDF0pLLn8LnA2cmQjtNwEyK+bagknTXBqDwdIP9Vc=;
+ b=nPXHXYP+w2WDjaYt6lFFIeVHbTcWgF4ZFnCdixo4/1ccv2Hx3uX+VTsk+ke+cWqHVm
+ G0CSuIRBW24axwVwfYKjTaFMdkBvAMmJigiRwAdH7YtiKWcXJxKV+eMGJFBn0/uF/yHJ
+ DuODjQuBAEBvvA44DHwOLaa8E5H8xPcBe88yVaUcRXwAaTOc9Jgo1/xtl+soJ+2BR1xt
+ 400m156aqJGGqiF/QjW6OTB9RN3u+FaDe2pzJ4cK0KsrzPTlvRlNGqeTO8WfGF/ZI6O/
+ sAf9QMHBMfM1jFDuq4I2wD4+XWllgzVy9VtIDpsjU2barjhU/eN29l5c33m6cV+vKAmP
+ Toqg==
+X-Gm-Message-State: AOJu0YwVnWQfzJERiAJ8pbW4/jE4kBsjYtxW/gzhHLXzrzzfQlHsfeS3
+ c7G4buGFFRQJG2XZnwb5lpOKc05U0TEjGABnU9L7XDAzFyh9Kq+pGEyDd4aYHyDFVhTr6w22YeR
+ EZi4UTvU=
+X-Gm-Gg: ASbGncuJkW3gqbE1Jn7RyKaBreih1YH5UGj46xVDM0dMt9XvxR0NN2f3r1UrbaBDaVM
+ sFzvsa9mwJZaz86RPbUaB9xRdkUQq7eeWVuE4OK0Qxr7YlusLIym8avXG9KxwwP6BQ8cEgyyVZs
+ C3bn9jLlK9xVO9t3v/FAVgnaxExK77zbhnH84iiW8JiaH/YwQ7u5jpwB4f/046ffB20CAAPgA/h
+ CXbazrnEPm0xONwJsCzdFnrKfwvkeJ/JFZlazZchUnQgSbHQVMLaTHtvAq+RJfe6RRUYCgdSqvh
+ 010tM4j1BPWiiOCc5EnRamsp7d8esvjoe+NsBEQykaRbSRaRyejhL+sww9mesKrPNXqc1PeBmD1
+ ZVSEWb82b0QVwI7vfTx9pGPpoUCA0JdStAzej94XmMWxq6/sqbY9f8ZQ=
+X-Google-Smtp-Source: AGHT+IHXlamr9Lxjnj3UEhb2cZW5quwnwm+1jsA5KKz9BXMb/YqrV0/vDkUUfwtbtreOGKDEAiN5KQ==
+X-Received: by 2002:a4a:e903:0:b0:615:e61d:2dca with SMTP id
+ 006d021491bc7-6190c944cfcmr7937886eaf.2.1753717334171; 
+ Mon, 28 Jul 2025 08:42:14 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61500491c53sm3419656a12.10.2025.07.28.08.19.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Jul 2025 08:19:05 -0700 (PDT)
-Message-ID: <dad9299a-4005-4cef-b5f1-a7dec22afb9b@linaro.org>
-Date: Mon, 28 Jul 2025 18:19:01 +0300
+ 006d021491bc7-61913f4f177sm1015128eaf.7.2025.07.28.08.42.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Jul 2025 08:42:13 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Mikhail Kalashnikov <iuncuim@gmail.com>, linux-sunxi@lists.linux.dev
+In-Reply-To: <20250728004516.19032-1-andre.przywara@arm.com>
+References: <20250728004516.19032-1-andre.przywara@arm.com>
+Subject: Re: [GIT PULL] u-boot-sunxi/master for v2025.10
+Message-Id: <175371733338.368338.4272008367229350972.b4-ty@konsulko.com>
+Date: Mon, 28 Jul 2025 09:42:13 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] Add support for sama7d65 SoC and sama7d65 curiosity
- board
-To: Varshini Rajendran <varshini.rajendran@microchip.com>,
- ryan.wanner@microchip.com, lukma@denx.de, seanga2@gmail.com,
- manikandan.m@microchip.com, nicolas.ferre@microchip.com, sjg@chromium.org,
- balamanikandan.gunasundar@microchip.com, Romain.Sioen@microchip.com,
- u-boot@lists.denx.de
-References: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250707112934.4128905-1-varshini.rajendran@microchip.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,52 +97,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 28 Jul 2025 01:45:16 +0100, Andre Przywara wrote:
 
-
-On 7/7/25 14:29, Varshini Rajendran wrote:
-> This patch series adds support for the new SoC sama7d65.
->  - sama7d65 SoC is added
->  - Clock driver for sama7d65 is added
->  - Target board SAMA7D65 Curiosity is added with its differences in DT
->  and MMC config support
+> please pull those sunxi changes into v2025.10: they add support for the
+> new Allwinner A523/A527/T527 SoC (all same die), alongside with defconfigs
+> for three boards using one of those SoCs.
+> The patches are the usual combination of refactoring (of the SPL clock
+> code this time), tweaks to existing drivers to support peripherals in
+> their A523 versions, and new drivers for pincontrol and clocks. A big
+> chunk is of course the DRAM controller init routines, many thanks to
+> Jernej and Mikhail for providing this code, after a big reverse
+> engineering effort.
+> Since the DTs for the three supported boards have been merged into the
+> kernel repo recently, this is concluded by cherry-picks of those patches,
+> and the defconfig files to finally enable booting those boards.
 > 
-> Ryan Wanner (6):
->   clk: at91: Update MAX PLL and master clk ID
->   clk: at91: sama7d65: add clock support
->   ARM: mach-at91: add support for new SoC sama7d65
->   ARM: dts: at91: sama7d65-curiosity: Add DT tweaks for
->     sama7d65-curiosity board
->   board: sama7d65_curiosity: Add support for sama7d65_curiosity
->   configs: sama7d65_curiosity: Add defconfig for sama7d65_curiosity
-> 
->  .../dts/at91-sama7d65_curiosity-u-boot.dtsi   |   80 +
->  arch/arm/mach-at91/Kconfig                    |   13 +
->  arch/arm/mach-at91/armv7/Makefile             |    1 +
->  arch/arm/mach-at91/armv7/sama7d65_devices.c   |   31 +
->  arch/arm/mach-at91/include/mach/hardware.h    |    2 +
->  arch/arm/mach-at91/include/mach/sama7d65.h    |  107 ++
->  board/atmel/sama7d65_curiosity/Kconfig        |   15 +
->  board/atmel/sama7d65_curiosity/MAINTAINERS    |    6 +
->  board/atmel/sama7d65_curiosity/Makefile       |    7 +
->  .../sama7d65_curiosity/sama7d65_curiosity.c   |   75 +
->  configs/sama7d65_curiosity_mmc1_defconfig     |  108 ++
->  drivers/clk/at91/Makefile                     |    1 +
->  drivers/clk/at91/clk-master.c                 |    2 +-
->  drivers/clk/at91/clk-sam9x60-pll.c            |    2 +-
->  drivers/clk/at91/sama7d65.c                   | 1451 +++++++++++++++++
->  include/configs/sama7d65_curiosity.h          |   20 +
->  16 files changed, 1919 insertions(+), 2 deletions(-)
->  create mode 100644 arch/arm/dts/at91-sama7d65_curiosity-u-boot.dtsi
->  create mode 100644 arch/arm/mach-at91/armv7/sama7d65_devices.c
->  create mode 100644 arch/arm/mach-at91/include/mach/sama7d65.h
->  create mode 100644 board/atmel/sama7d65_curiosity/Kconfig
->  create mode 100644 board/atmel/sama7d65_curiosity/MAINTAINERS
->  create mode 100644 board/atmel/sama7d65_curiosity/Makefile
->  create mode 100644 board/atmel/sama7d65_curiosity/sama7d65_curiosity.c
->  create mode 100644 configs/sama7d65_curiosity_mmc1_defconfig
->  create mode 100644 drivers/clk/at91/sama7d65.c
->  create mode 100644 include/configs/sama7d65_curiosity.h
-> 
+> [...]
+
+Merged into u-boot/master, thanks!
+
+-- 
+Tom
 
 
-Applied to u-boot-at91/master , thanks !
