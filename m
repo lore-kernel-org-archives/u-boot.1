@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E0AC83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ECCC87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:18:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42F5B8331D;
+	by phobos.denx.de (Postfix) with ESMTP id 9683E83323;
 	Mon, 28 Jul 2025 17:14:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AkmPmR3h";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j++/UgEy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DFEE82E26; Mon, 28 Jul 2025 16:56:08 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 7593982E26; Mon, 28 Jul 2025 16:56:32 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4602382CBB
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:56:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49C2382CA4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:56:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEts7n2783480;
- Mon, 28 Jul 2025 09:55:54 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEu8Xs2751681;
+ Mon, 28 Jul 2025 09:56:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753714554;
- bh=EY2xS6/HPgEC2ZnVkqjNhGR2MdniDEkobFLtE6tw6Ww=;
+ s=ti-com-17Q1; t=1753714568;
+ bh=ogOst5ALPkurnNridLpa72o4XV+S5S3csL2diBcw5nE=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=AkmPmR3hCbFTUtej5a+dRo/RD/Y7QaFI62QyXWbXo4vp5unKh2QmF++AyruRSM1BI
- nfdmBPHc2jANdEiRBOy9+epO5ZN/ywGW2WDvlGmhw9kr7lKbAq/2HsjEuTtVpyYjnf
- rHa22o63Apwebh4ifHqeKR9bcOGl6Bx2clDHG0M4=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEtrb7374621
+ b=j++/UgEyomN521pwSN2p4wiqt8MbQLTBik0AVFAVsz0vnPjd/+6oYqlHkKCkcbQ2P
+ b0EdPLdPrJpLj/6uE/KQiNwQZu8/5kUKb/y14ltUeKPQwDcgQ/xlxiqoRKalz10jxj
+ 4xdvHdWOFXQ4hnFx2N9LRN9RGmidz6GuQVI4W198=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEu7Ve1132308
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 28 Jul 2025 09:55:53 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 28 Jul 2025 09:56:07 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
- Jul 2025 09:55:53 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2025 09:56:06 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 28 Jul 2025 09:55:53 -0500
+ Frontend Transport; Mon, 28 Jul 2025 09:56:06 -0500
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 56SEoZuM1924403; Mon, 28 Jul 2025 09:55:40 -0500
+ 56SEoZuN1924403; Mon, 28 Jul 2025 09:55:53 -0500
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <vigneshr@ti.com>, <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
@@ -70,10 +70,10 @@ To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <joao.goncalves@toradex.com>
 CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <srk@ti.com>,
  <s-vadapalli@ti.com>
-Subject: [PATCH 23/45] configs: dra7xx_evm_defconfig: Increase aneg timeout to
- 20000 ms
-Date: Mon, 28 Jul 2025 20:20:12 +0530
-Message-ID: <20250728145034.225997-24-s-vadapalli@ti.com>
+Subject: [PATCH 24/45] configs: dra7xx_hs_evm_defconfig: Increase aneg timeout
+ to 20000 ms
+Date: Mon, 28 Jul 2025 20:20:13 +0530
+Message-ID: <20250728145034.225997-25-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250728145034.225997-1-s-vadapalli@ti.com>
 References: <20250728145034.225997-1-s-vadapalli@ti.com>
@@ -109,14 +109,14 @@ will benefit from an increased timeout.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- configs/dra7xx_evm_defconfig | 1 +
+ configs/dra7xx_hs_evm_defconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
-index 53e7a33af3a..521bc209703 100644
---- a/configs/dra7xx_evm_defconfig
-+++ b/configs/dra7xx_evm_defconfig
-@@ -108,6 +108,7 @@ CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+diff --git a/configs/dra7xx_hs_evm_defconfig b/configs/dra7xx_hs_evm_defconfig
+index 9b308548951..2bcd8d6329f 100644
+--- a/configs/dra7xx_hs_evm_defconfig
++++ b/configs/dra7xx_hs_evm_defconfig
+@@ -99,6 +99,7 @@ CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
  CONFIG_SYS_NAND_U_BOOT_OFFS=0x140000
  CONFIG_DM_SPI_FLASH=y
  CONFIG_SPI_FLASH_SPANSION=y
