@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABECBC87FCE
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 02:15:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613DCC87FCC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 02:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15A8583123;
-	Mon, 28 Jul 2025 04:14:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7AE4D830EA;
+	Mon, 28 Jul 2025 04:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="grq0WzwN";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="RgLm3iSt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 779B182F14; Mon, 28 Jul 2025 04:14:50 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 8458F82F14; Mon, 28 Jul 2025 04:14:53 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35B7383152
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 04:14:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 505BE8315B
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 04:14:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=X3RVY1e++lfxWb3GfZ9kiZoNBDfyX2nlH8tfAsbJKS7IGs7Dla7LBSGI0ZjyIX/tRV9eB+u58UQO5W8H9EFVpQt+LoG55PEWRnIpBNCirv2K23nuExfLtgrIujKSmIjkSqwhPWz019RGHRh/y/epsYMFWoUOFlgMVwY8qlQvGJWyiu6VaXDoEdq9n7oxR3ROwyGP7GlXU2xZj+1l39LvLMfmuuAgAQ52i3Y8Wmd004Bg6KNXqRJKFyR1+IREtPiNjuwAOnOrKOC6hsMz2NXSRf8XWXhoyfPHpWaiKYGHBtdWlmpw6kqU+DhLp6QesU++WSDMYvSOil1R+t5qulSS9g==
+ b=UtIPocy7M5B/qtCfhnHlWRlQaVisDCQJ4WI+kPJpPNhPxT7zWjZrk/Ttm6ukqj1AX/XaGjQSCodpQkCNB1LxqivNawjs3Pco6IDoOpqFSh9GCH0VaXymk0pVExNkIr0MW3d9c2//NMamFfVjw0w80csLMq17jULhnIIjGYhBOV09sDkAXAQe/nU7M6qVl0no8nwmRIK9259/iALvbSZBzZjVV1pWFZ1vRSouZN1mbxaMegiyqjTQ/j8Ti7v5ENRf8ei0KD7V8Jk2DGPNP+2382XnA6+vrS3UqgSOcctOpiBybr54X5ijgwwcyHR2FOZJ3ydQLU3P0T8qPDhKL/LZsw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kCKGnQfe6a2Um37VCIYDyIV30oKpE1abADtL+t94VQg=;
- b=iitqZaA+3aldTf84gGEugneSR2U0CEoqqxztauR0kpj5Mv7ci2s1FTBY4L+Cuv/m+bBP4qutE6Zj0tFzKxWxvW9RcOOfP2fshW42aXvcvpXAXhSbakT/zykbQl6E8B/hdnEuK4GUStTpWTpIrSgRJcpAAwP7DfX0CWbINEhPbtaRGiy4C4gy4lI45lHEZnU1QsMjMRJzw7xEJCkQgejWRtg2dAhgxhihysnyiYh5KLDAuQqkujudVZkX9c44vcFOvTUYrERYUr3xi7CdXJDm5KQXfSb4KK6PiBydiQjkcRiG+gveYmaRDCTp176utqNaxB5NacslJUjESORCGWzsDA==
+ bh=MxSnCjW7RQDOgoX77nnT810Q9u8pQj14gTVfqBaaZPw=;
+ b=cHmi0yyd07zpmktiqd2oojyo9FogI9f8n/U2yLdNjlkCT2mK6IWTvo2GrPpq+mJpfAWj72lRZ5Q+se/QhLYC/bWqm7xTEWnKkzFc3r/JI3soqPBXLM0Mot8wNSGc6IG8b9NHzHVIJeK39R7E7zKNLyFsTdLqzgvRF6FgvMT0pfG8B8MHgSguuHpdeFsiOYd+uM7QT4YnvSpgiPTEsj6XxJErYNjiYZ1L+TXdS6CXmV82eK/Y08ke2fr+AWkeMyW2a6hg2J9pneulxkF4lqEqSuNYNNHyIte9M2n1BZ2uYFLCcf2V/jazXf3iY2GQUn/aJImsg799dLoo0KGxyS8Qgw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kCKGnQfe6a2Um37VCIYDyIV30oKpE1abADtL+t94VQg=;
- b=grq0WzwNnX39fLsQQ3OkmbuflgU10pejexlMvz9dR/vZe5VLKQXdWmnljlKzcuaR/fzCytTAPmhGeDI++NaTTK24InYNXP9fm9AuUI4JCrroOI+xDRqVyTVoEkWk3ODMmSUGJeNvSsFsSqVnCpKoBIFO2gF4JHMOJC7ZsCyDF5yicj+9WvfXMnQZ45MoaJeryHaGgnDli5Vqvr2GVHROYZSc32xlVCNhT4JaLZE/pAv9WdOK0SylnmcaDvoW/rnLrU/cKTKp/05aWZmTDjGjoOT6/WSEulxjK8vFFdaurHhNFSgumFaztCSqswI3Of2ajRvsBm4F/sGKCEoAsXOLcQ==
+ bh=MxSnCjW7RQDOgoX77nnT810Q9u8pQj14gTVfqBaaZPw=;
+ b=RgLm3iStc6VeGul3HEQlkZIno+0+6S9wABKa3OeFkuyh9EvLC91flfg+4egJwzIl9amm0J+xU0blSZFPhwZxh/gqd3aASBA/9cKoMz2/Jd+gm2MvITp5ZG464Q2htoFxqKjBNvcMnyHFWb8u17jL60z6FK+Ver+19sk1JpeGZMn2ipG/e2znV27gmxeiP9IIvZEYS/aNfoUUK+fQqBFqRtEAD7lyA/SX+M2pdIM6vZDvXsaSYBq6jalzlgAlkEBAuUcwAMo49hX77aKZI2ceSHhkis4g8v5EkmO6XneQMG7bR3M9sLtJkDw2j4QCIKFgNQHEKZ1Z6ptm8tyfXRljUA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by AS8PR04MB8546.eurprd04.prod.outlook.com (2603:10a6:20b:421::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.26; Mon, 28 Jul
- 2025 02:14:45 +0000
+ 2025 02:14:50 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8964.025; Mon, 28 Jul 2025
- 02:14:45 +0000
+ 02:14:50 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Mon, 28 Jul 2025 11:24:53 +0800
-Subject: [PATCH 7/9] ddr: imx9: Add Synopsys LPDDR training data collect
+Date: Mon, 28 Jul 2025 11:24:54 +0800
+Subject: [PATCH 8/9] ddr: imx9: Implement Synopsys LPDDR PHY QuickBoot flow
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250728-ddr-imx-v1-7-73da75bb33d3@nxp.com>
+Message-Id: <20250728-ddr-imx-v1-8-73da75bb33d3@nxp.com>
 References: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
 In-Reply-To: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
@@ -73,96 +73,96 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB8546:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4705a8a6-72e3-44ef-c2c9-08ddcd7c8563
+X-MS-Office365-Filtering-Correlation-Id: 5fbfb24a-65c4-4384-d267-08ddcd7c8811
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|52116014|366016|1800799024|19092799006|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NDdMalY5bTFWZXFUNForckZ1ZThRajNRTG1qSEJ3NkppZVQ0ZGJ3T3g1eVlz?=
- =?utf-8?B?a1B6c0Z6cC9HM0hDcWQ5djM5SDc0ZElLSkdmbTNVM0t3RDg2WWFrcEo0dTRU?=
- =?utf-8?B?S1pyM3lkK3U5dVFJeDlRLzlqOVlSa1hNc0xpdzlzZ2Y0ZEJYYis2YmQwVGJE?=
- =?utf-8?B?L2dUeWF5ZHgvbUpiZTFydE5lNTJTTGRBRG8yYWs5S0YwWEI4U041dnhUSHkz?=
- =?utf-8?B?Zk1sK1Y0YkcvS1VNcURqRWV3ckU4dmdWN081TjluZmd1aUJnWDJNTlpjNzNP?=
- =?utf-8?B?OTVzVUpGMU1xdm9zZHduVVlLcDF4YVJGdUxvUkhxWjZQNzA2RndYWU1VUjQ2?=
- =?utf-8?B?V2ZjRDRHcnNIME1jdUplSUE2Qno1ZVRFUWNzKzhORWpYaktqcnQ0Ulhzb1Bp?=
- =?utf-8?B?Rk9CbDdrWnd0SE8wSWRPYWd1NFBQZ1N4aUo3M1JwMFVScldmTG9CRTEwMThC?=
- =?utf-8?B?V3BFV0RmeXRNYTJZR0txUy9KMFY2T0pYci8zeGIxcHRBKzFMTGxRNFAvZTRE?=
- =?utf-8?B?N2RxRlpuNXNuaE9mYzNldTRDV0ZvNkN1WDBoRko3Ky9ZVjF4U3lSYy80b0dK?=
- =?utf-8?B?eTBNUVR3eE9UUkJ3ekhidXY0aWhwZG9DdTVDWnNMOUtncUVZWEJCaW5ZTlQ2?=
- =?utf-8?B?M0x1OTVWNTYzd0Frekg1eXZZbGdBeHpSaHRkRFdKald4a1QxcXpPZ0piQ1dG?=
- =?utf-8?B?bVlzZHJVSURHL1dFT2lVTm83N2R5R1lDNFBtVEFYV2dsSVI5blVLQkxvKy9y?=
- =?utf-8?B?eERqdWxLRXVqRENxS3JGb1A2bjRuaHFkTXNtem4xUzVOa25JZm5Pd1krWm4z?=
- =?utf-8?B?dzhaQnlMa0l3c3I0cEZZQ1Z4UlRaRnZ4LzNhL2xzbVpaS0I1RUY5ei9CWW9S?=
- =?utf-8?B?cWp5ZTFScDFsRDBWUktJY3k0OHUwaUJxODBNSFpaNmdNU1hYRGgvb0t5Q2JQ?=
- =?utf-8?B?ZHZJblErOWphOTFKV0c0ZytyTXpDWU8yS0xNTitMSHFqdXloL3FVbVBKbm1S?=
- =?utf-8?B?RUg3aTZoYVVqT0ppaXJTYUlOMGNPT0t4cVRidEtTb0hQdGVTamppd1F6Y2tU?=
- =?utf-8?B?QjU2aXkwTUVWWUNCZGNKc0tPM1orbmJtNXRiOERBcjZ0SnQrK0FzZFVoLzRZ?=
- =?utf-8?B?amZJY0pWVkcwdjY4U2ZzMjRMR0tqYnVndE4xVjRoS3R5dUhCZGsyTVFhRSta?=
- =?utf-8?B?L0dRd1lPQzZnWnAxVnBUM3IwNXhjTDZ0ejhFdXJZeEFrVU9XRjlmSmxERVVZ?=
- =?utf-8?B?WmtRSERFaXMzSXBjZkZ5bTlKWDB5ODJuTzR0cnFHQjQ4NnFkMWMxWDZpSG1u?=
- =?utf-8?B?UnNUUVROcTh4SU5aMDBXTmZ6V1orRTZmWE9TTW4yV0ZsQ0d4U3BUT3hyRFJV?=
- =?utf-8?B?YkVEanhwV1hrd3JQd2lDVmNHSCtJTURjdWd4c1lZM1BHZ005ZjZnaDV6ZHRV?=
- =?utf-8?B?REVVWDFwMXUyY01ObUJhTG4rNWp6MDg5Tk5ESURUeTJzcVhDMlgvbVVLS3BQ?=
- =?utf-8?B?MkRJaDAzSDdOdVhvazlVb0FBLzJMM05GTExibFVMSHorRWxpWThJS1NIZENF?=
- =?utf-8?B?UnJVQk5iNXZ2Wkc1aXdHbmZibHpsSitmYnFQUDcxbkJOYmpPWWlGUlphTTRa?=
- =?utf-8?B?aU40bWI2VlZYd1pMTDg2OU5QdVN1LzI5dTNWWDFQQjVZdTRRYkFPdUwxM255?=
- =?utf-8?B?WU9QUVZsb2RUT1VuVjdkOVRmUUhsTm05ZDlYQjdYazA0QnV2cUVqeFozVGc2?=
- =?utf-8?B?OXFhNTJxZmlmY29idXRFQ1c1Q1pNNUU5QVJtUnUzK0J6NnRQREV1Q3RuM1ly?=
- =?utf-8?B?aFo1TFd3YjlkZmRka1JwdGVvZEh5K3NUaE9mdStWSHRJVVVrcW84UUlncUtQ?=
- =?utf-8?B?Ny8rZW1CZ1AyZnBCb0dpMVJXUUVSRHE2Mk05WWVvNFRaN3RvRGRvcHQyd1g1?=
- =?utf-8?B?R1hWNFVOSlR6TVFkTTVvTGg1SURBTFhuQ0lOakJ0ME12cTBIRnpLMGNnUTV4?=
- =?utf-8?B?VzRoNVJtc0lBPT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?STFlNlppSU1BR0VIcmg2Tk9CNUxKVE1zNnl6SFJPaTJlZnNyQ1QvUXFwY1RM?=
+ =?utf-8?B?N2M4ME5VM3BGZEx3ajJhblMxQi9UeDNVdnBhcUdtbkZEUjE0S2tnYzUzWCtH?=
+ =?utf-8?B?V2lGUHBtODMwK2ZTQWxCTjIvd1BFWm1EZXNHMlJWSXdTS3pXNm1wdU5HcWxW?=
+ =?utf-8?B?Vk5JRldjeDBUam0yTXVralNYVGVNaUdobzRLczJaYVdDT0RhSjVmeVdJcmZa?=
+ =?utf-8?B?OHM0VGJjb01LTUJtWjczRDJnVHlDWkEvekMvUGU1ZmNlbTRNZVZKSUNTTHdV?=
+ =?utf-8?B?VytHTVRYTkgwekJiM2lCMlFxSnI0VDRjY3dJTXlGQjVsdi85ZVpCVzBhcG05?=
+ =?utf-8?B?bitSVXNJNHRlUlVPUXpQOE0wUEt1L0ltZEdtVTlFaDY0SDh2VVptNUR0MENQ?=
+ =?utf-8?B?c0RqMXBaRjBkLytPc0k2N2Zva1c4NVh4SFF5b25mODJyNktBTUxKMzFYeUZK?=
+ =?utf-8?B?YmRMVGtJaHlONGFVdmI2OWtBMW03S3J2QzBqM3ZxSzQrVkdmbTY4V2YyUjRH?=
+ =?utf-8?B?Q3ZqRzl5cVkzaDlVM3FvMHJQcjN1YXZVWkdZU00yTGRqalhwVjZEYkJTVEN2?=
+ =?utf-8?B?ZnBXbzJTMVFyVmpXdVN3bUNSS2RpOXRmNXFUbVMxSVFja3JNbGd3djBxT2hy?=
+ =?utf-8?B?NHdDemx5T2oxZmVycHJSZ29ENkppSnpiZ3FMV1dKWXhYeFVGbDFZZjlDNjhU?=
+ =?utf-8?B?cHBTWVZQTE9iZWNsNXd3OEhaWXJnL21ZK3FJZzVNd2Z3R1R5aHhGZ1ZtT0pn?=
+ =?utf-8?B?bCt4QWVtRmQxQWpjSlNuQ3gxOU9ldnBQdFdFSG11cDdWU0pldzNWT01EcS9i?=
+ =?utf-8?B?SFRpT2tpTmxpdURYdEFHUFN2RGlBSklWLzJYdW5SNWtFcTBKTi8zUi9ZSC9O?=
+ =?utf-8?B?ZTJKTjJzdG9ScWJVNVIzdWdwUXFiWWxBVERlMXRUeGJ6UzBadXBYVlhPdUpi?=
+ =?utf-8?B?UGYweDlKNzJiTEFYV2JpSkplck00M2RLUndLOUwwWGE0Y08zckZTMURqQXVs?=
+ =?utf-8?B?bVo1Q1dZQlp6SE1EVXhvdUhRSDM0bnNtbFZGYzNWSWZPaExjTU1nblhONVBR?=
+ =?utf-8?B?OExSZlZTOXpvMldTTFdsMEZLUkVHdm5RcFpSSUoveDVDckNkWnZ0cE5LeXZo?=
+ =?utf-8?B?QmxIU2craFV3aU9yYVV5eXpEZkkzZHkzMFY5d0NIQldhMCtya1V2OGlkN3F4?=
+ =?utf-8?B?ZWNtWGVZZVVjWGl1R1ZvZTdWYkpXb01IWGNLVzh4QWNXR1JxRXpoNURaTXRx?=
+ =?utf-8?B?Vk91L2RCSk9zTWFpTzNPbDZ0RkNYdi9ETCszdTNwNTNsQ3Zib1E2V2hRcXRW?=
+ =?utf-8?B?R1VxTzZEajF5UVdaNEVIZXFRdWlzVjdGNjJLcXE2cVgwakRFaHRkVjdXaFM1?=
+ =?utf-8?B?SkFLVUlyV0J2Y2ZLR2pnb3BNeE5Jb2lGeDJZaXZpd2FvdU5uTWF5MFFZMWZQ?=
+ =?utf-8?B?SlRXdHQwSVp4L2JWUXBDSWRPamh3UGUyWWxaWlFEV3dVWWZTVmVuWU9tVVVo?=
+ =?utf-8?B?dkNaQzEwc0VhN2hGVXRKbHJtTHdzVzFZemsrbm9ZY0J6OEN5VUtaSzdsV2Jr?=
+ =?utf-8?B?cGhtNDQ2ZU44eFYzcXNocE1NTWRWL3NOVmNlbHczSGUrK0pjaW0wSDQ2YUw3?=
+ =?utf-8?B?b3A2b0tmTnhUOEI4c2Z1cDZMRzBVcWYxa0h5cVlZZk9IOGVkUXpvYXpVbSsy?=
+ =?utf-8?B?Qk9kUCtqT0JwamEzMEdORTlRbXlZSHVjZ1ZXcXZjL3FKV3YxMEx3VTYxUkFJ?=
+ =?utf-8?B?UFdINXNIeWN5aXU0bXRIQWlSc3psSDZ3bWJEc2RnK2t3b0tFekQ3eUMzWWVV?=
+ =?utf-8?B?VGtDekJBc0Y0WWxTV0pHd0EwdDhqYmdDWlU1OFZJQ21nK0d6cDFLSEVLWnJk?=
+ =?utf-8?B?QUMvK0crK3h1TW5zTSttSzR3RVRna1pLMFBFVzRCOXowVmg4c3ExNTFmZDJz?=
+ =?utf-8?B?L1NxRXJPN09SY1g1K1NjOEo0ZUI1b1VJc2ZDTnd2SFRCOUU1WVRydFRPZUFR?=
+ =?utf-8?B?SWtHcnZoaTJRPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(52116014)(366016)(1800799024)(19092799006)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MXYwWWxWM0Z6UXdXS0FaUTczVmtBWEd6eE5meWRCMlZVVVZrQVU1d3JiR1Bn?=
- =?utf-8?B?b1dQM2krdVlUTTA4eFpOdE11K1VPbjlBbWh6MU1zY0VMakZKTTZFRlZybUJX?=
- =?utf-8?B?WEVieDJFamx0TjF1RldxSXlqZ0ZIdGxZMHk5VkVSdWJhcm9xTlBldkdlL1N3?=
- =?utf-8?B?cStPak5vbHNON2c0Z3ZsSUhxK0N6Vk84ekNmSkVPSnJMS3l4WnRRRHp1MmVN?=
- =?utf-8?B?MzNQeVlVZ3BLU0lWcFNOWUxSaVppWU1TcHBEcmZyRmlCQ3NDTGJ3cDVmV1Y2?=
- =?utf-8?B?b3hLNDBta0d5cmh6ZEVScGs2cW9SdkZxZkh6OXhBVFY4VEtVem1wK1ZxOUNt?=
- =?utf-8?B?aGxvNEtqa20rdDVHZ3BZZ3M2NHRkandmZngyaEVZdVQybUF6NjBnOVh5Z1Zh?=
- =?utf-8?B?NjlnaXJUOXVYK0dYd3krWHJTMitqblF2Y0tRMFFlTTdlS21OeDRCa0toVnJu?=
- =?utf-8?B?bG1vN2lPY0llVW5QcnFsK0lMQ0ZYUTg2dFJTNjlqZXk4amF6VG1wUm9qQzgy?=
- =?utf-8?B?NDFndmFIYTdHcFpwelBCMWx5QUg0R1lNd0VGMmd1NVVFZGRVS2hlZ3Q0V1hv?=
- =?utf-8?B?ajJSTldOekgrQVNwbFl0VCsyV0dhZTdCS25yTDJUbmR6enZCSWkvZjFhdWdr?=
- =?utf-8?B?NTZZb2piSXJxUTliSDhrMFRXcll2VDhETUZkcnlzUlNzZkRSUXpBb3c3dUJX?=
- =?utf-8?B?TEt0OHFHQy9IdzI1VUpINjA0WW4ySVJpRmNScEI5UkIyaXJneVRYUzFrSW9m?=
- =?utf-8?B?bEptMHJsUnkzaElFMnhIcDRLZVprRXFYRG1ITUFCRmpoUXkzY2plTUpIcVZT?=
- =?utf-8?B?Zm9BUEJ2SWRHTE8rZmhVKy9yeVo2SWZoK3ViNENuUUhkYW95V0NuQjdmZmFm?=
- =?utf-8?B?RGtHY2ZnUmFKTFN2OW13Y2pwNWVoazd6RDdUS2tHajBmSVBncHFvZ0p1eUJU?=
- =?utf-8?B?b0hsUW5UemxsYjNabmVvMFRzOEd1Zk9KRTVveU1lMkpocWc4ZnZpdWRFZVRm?=
- =?utf-8?B?SzFvbVllQ0prK1BESnRXMks4cjFFWVovTVMwN3dQNDh4dkZzYVhWcmtlQUlu?=
- =?utf-8?B?YzY2RENCODBqaSszS2s5MVhoZmNmMi9FTXVabkVLTkpSSHpZUHhnT29URW5Z?=
- =?utf-8?B?c1dBV0pyZVZoTHhkMnJPeEN0cGdteTJsSG9wT2Q4bmQ1cDFWRlZ2OGhuME5C?=
- =?utf-8?B?eC9YZmJLa0RobHdsbHd0SmxpbXlHREo1cVRvTmlNRlNJd1BIUXNLRU5GcHNO?=
- =?utf-8?B?aDZ1L1FQNkROTXQyaXk1YklyM0srdDlsejVqNFY4MWlJcHg3ZDJ6SXRSdDBy?=
- =?utf-8?B?MW1HSjAzYjh5QVp0ZTdCR3VaeHptSGNwcEVKZU1xUFh5c1dkb2ZzT0dFcTB2?=
- =?utf-8?B?M2dGTENGd2crTWNVc21OT2sxZHJHVndJZ0llUVpGMk5TdWJ0TDhHcTJkVWR4?=
- =?utf-8?B?R1pvS0dxYXoySE8wV2pzZGFOUjBMeVJQQTJ3QnV1dDJrTk1CVUNPditBT1dW?=
- =?utf-8?B?RVoxK3Z1cDZRemRicXVHWE9vMFRGZzliZHpLQUFGOHl5eEtjNlpGY1hFUGpy?=
- =?utf-8?B?azR0Sk1VWXZTeHF2aklDM0xtd3d2VXBaL2xiQzV2Q29nU25RWkJMLzBEQjAz?=
- =?utf-8?B?U0JZc2pnNTVkY2hCMlRtK1ZtS2FxTGZkMTdlY2lzSWpKUHRadHJGT1pDYUN4?=
- =?utf-8?B?MTlmVVdFbmxnRWFRSUNYMDdOT3F3Y1AxZXE3SmJvTWtVZFlkOTF1STBQbmdj?=
- =?utf-8?B?OHZqK05aQVVjZWxtbVozKzZOTkhRZm16eGJLQmFmSW40Q1hCakh6MHM1Ynov?=
- =?utf-8?B?Vjg5MWFzd0tyRTl1YU9TOUFOOTdLT2NwdmNubHNJNlFTYkV2c3ZsVXVsR3hz?=
- =?utf-8?B?Z0tDMFQ4TzBidHQ0Q3pieE1JWDV4SDNrTVZVRXNHRU9RbDZmYlFON1R1Y3lT?=
- =?utf-8?B?QkZOZHdaaUVzL1crczZvS0N3QnprVGtGUC9hWDFwUnpWMTZ3eUVweHpuSDF3?=
- =?utf-8?B?Ym83cUowRFJaVjRsOHFrZFV1QU56MTZIT216TTlXL1IvTE5VMEZ0d0VaOXR3?=
- =?utf-8?B?TTF5ZDVNZStDTk1mbDhzY29CRVZVc3ljcExaVmdlNlIrRHpQQ3l2WVZHTnBP?=
- =?utf-8?Q?iQz2kTn0Xcwqii6eqAMCnj0VG?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UWlxb2tpUnZpdWY1YlBGVWxEdktzaUQ3Q0lBM0dLckMwNEZjQmZvT3ZjWmhS?=
+ =?utf-8?B?a295L3BJa21FY2d2L1ErY0NMRU9aaUgvYStocmQwa1VyVTFVbzdqelpxR2R2?=
+ =?utf-8?B?THlldmtkeVIzOURTL0hLQ05JZHY5eG15YitaOE4wT0tud0RrU1R5RDZINHFQ?=
+ =?utf-8?B?TEJSNjEwTXBmZ2V1eUt5eDRYOGozY25SZ1dtM2doUVdoQ1UxTmUzYzlPMzcx?=
+ =?utf-8?B?N2hINHBGdTY4czhRK2NwbVJxUWhhdTBzeWZzSjdzak93bDVUUmFwZ1dMUW4v?=
+ =?utf-8?B?UFlIc2p3clF3WGpnV1ZmaEZUOTlzaGpwOTgxSkRvcWZGNEJ6L3hCNDB0Qy9S?=
+ =?utf-8?B?d0tKTTJqcndLVWdEZDNqRzhjSWxFUzZpN29NcE14eFhYWlIwMzNvOFVjUmdy?=
+ =?utf-8?B?elFybEY2YjVCNmpvQ1BWWVJLZkNQS1FENUprUlRpbnJkMXhOa1d0czd4R2dZ?=
+ =?utf-8?B?MGltelBZcFJtaFk3cUkrMWtvcEZReFlqcWxTM1ZoUDkvdkp1Rm9oQXh6anRv?=
+ =?utf-8?B?dXNIYWZ6b1hFNHpCSmdCa0JZK2lpaDV1dDgrMG5SS1h4bGMrN1lVRXNTKzVN?=
+ =?utf-8?B?dHF4dW9HQ1doTEhvdlNSd1pKMVJhZlRrcGtPcXNiRjFlaENpNW1oZ1hHUTBB?=
+ =?utf-8?B?ZkNhNDBuWENORUpOclFwWWdpVHJtMkpOZzM5UEhrMGo3bm4wQ0xjWkRlMkxL?=
+ =?utf-8?B?dENhd0tNQ1kvdHBGTHI5cThpUS9BRjVqSy8yZVd4RGl0WU0va0ttZnRpN0JY?=
+ =?utf-8?B?TnZkVExydW9FQkM3U2psUm1KZXF5a0YxVTVObDBER0FaSGpkMG5VNGQ5T29Q?=
+ =?utf-8?B?MWhIVEZTcUd4bjZSM3NwdHhSNmZxUWt5RnIwMGZNbnpmdjc0SWIwR1hrUWpM?=
+ =?utf-8?B?eUFNOXFDWUNOdWtVdzlySTV1eDNwUWVleDhTc0Y2T2pTYWtQSHhvTEQ0YVBu?=
+ =?utf-8?B?N3FHNVpQc2dINEZ0cHdaOGZ4L3hnOHIrVnBSdjMvWUtnbXFZM2pEdUF6R0tU?=
+ =?utf-8?B?azY2REl4RzlzRnE5SUk2WktvMmhTUUtLSUloYkNDbnVFTGU3OGEyQmptT2t2?=
+ =?utf-8?B?b2h6Y2lSNDc5YmhaNktJMEhaWkNVM0dMbkRqZWZoWHpEUGd5bkFJSTV1UEQy?=
+ =?utf-8?B?SHM5bjFKN0s3andKRWRpN0lnM3N5Z2FQQnovNjBTY3RmZlU0R0tZNkJaTnpo?=
+ =?utf-8?B?Zzd0eVlBbVVEUmQxOFc0RkFXRER0V29EemY0K3ZhYUlqajlpRFNNbk4xUnNW?=
+ =?utf-8?B?Z0U0VDV5bThSZitZeHR0ejRsZHY0U3VhNGdvdFVHOFhHbEdabHdmY3o3d05L?=
+ =?utf-8?B?a1B2dGkvRmZUY1Q3TUVmS2V0aE5wTlFHeGlrRnFnVlIrUWtTU05KOW9OMXgx?=
+ =?utf-8?B?U2R0S0lkbUJvRW1aZkh5cGRoVkNQVFhpUlh4d3JIUHFRRlZFQVBrRTZtajlo?=
+ =?utf-8?B?S1B5Yk5Zd3NLY2R5YXh4bnRqM1czNVJaRU9VRFVHUVZleFF4Q2dXai9wWTUr?=
+ =?utf-8?B?c29pQURadjRqRFBsakJjeTMwNlh4TUd5NXluSGJ4NENHUjBTZnJxSXJ4dVJk?=
+ =?utf-8?B?QXFmd0VnQ2xkWDFWb1RMMk9FSkVyNnJDZkxxbUdUQStDYkVoY2xCZkRITUtT?=
+ =?utf-8?B?dmdqQVk2eFo5Z1BkT2tSUURhRkRETTJTV0wvY281Q0txUmEvYXAxWGlkSUEr?=
+ =?utf-8?B?cEcwc1I1NFh5djFRb1VQdEt5K1I3OUQ3bDFHVFA5am9zUEllbXRBU0xnSE9t?=
+ =?utf-8?B?L0M2NFRBdDlQRExvOUJhVG5lbktmbDJqTFFDTlBiN21qdVR2SkNuVHpJUXdL?=
+ =?utf-8?B?TUZyWlBVV0pvcTBKaEkrK3V0Mm42Z1B0THJrNWhBWkhYN2M4aWNKQTZhbGhN?=
+ =?utf-8?B?T0xqRWtZc2YvZWVJY0kwODJNbEtrald6Y2FEWGhMU29CejVOVjRacUtMMVpQ?=
+ =?utf-8?B?U0pEVzB3R25NNXdhSE54NFZrTnU0SnVreWZ3c0NTQ0tQY3J6UWlhczZ2bjYw?=
+ =?utf-8?B?RDRsT0NSWERGeHpObUp4M0VmZzdQUkJQQlRmazhTRkNBc1I4Umx4U1FsbXgw?=
+ =?utf-8?B?Z2NnTFJmSWZ5ZGhiQ3Nyb2twcE95SmVRWWI2T0doTExpeUFLQUNLV0t0b2h1?=
+ =?utf-8?Q?98x0E+vkuD77qi4FOx4fdJb6P?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4705a8a6-72e3-44ef-c2c9-08ddcd7c8563
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5fbfb24a-65c4-4384-d267-08ddcd7c8811
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2025 02:14:45.7011 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2025 02:14:49.9939 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8P4hMzfoScFu5wMZlc29GkSLf1weB21UYSPviaK9aeH4KGX5osjrtP75alXp+1fYyNHmvKPBb68tFjlKle3BYA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: LmUna3wx5Hs5GLlnUb3IU+Hm24NDy03XuBlSE1FMOm1bb9SK2IULckJ5ygFdFfHOk/YPYpcQuvtobo2f4wDvpA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8546
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -182,132 +182,110 @@ X-Virus-Status: Clean
 
 From: Viorel Suman <viorel.suman@nxp.com>
 
-Add the functionality required for collecting Synopsys LPDDR training
-data in SPL context.
+Implement Synopsys LPDDR PHY QuickBoot flow.
 
 Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/include/asm/arch-imx9/ddr.h |   20 +
- drivers/ddr/imx/imx9/Kconfig         |    8 +
- drivers/ddr/imx/imx9/ddr_init.c      |   11 +
- drivers/ddr/imx/phy/Kconfig          |    6 +
- drivers/ddr/imx/phy/Makefile         |    1 +
- drivers/ddr/imx/phy/ddrphy_qb_gen.c  | 1842 ++++++++++++++++++++++++++++++++++
- drivers/ddr/imx/phy/ddrphy_utils.c   |    2 +-
- 7 files changed, 1889 insertions(+), 1 deletion(-)
+ arch/arm/include/asm/arch-imx9/ddr.h |   7 ++-
+ drivers/ddr/imx/imx9/ddr_init.c      |   9 +++-
+ drivers/ddr/imx/phy/Kconfig          |   6 +++
+ drivers/ddr/imx/phy/Makefile         |   1 +
+ drivers/ddr/imx/phy/ddrphy_qb.c      | 100 +++++++++++++++++++++++++++++++++++
+ drivers/ddr/imx/phy/helper.c         |  39 +++++++++++++-
+ 6 files changed, 158 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm/include/asm/arch-imx9/ddr.h b/arch/arm/include/asm/arch-imx9/ddr.h
-index 31c420198f667f0dd334c896fe9ab0b06797641e..4c092509111c66c09cd006711131db107dbf17e3 100644
+index 4c092509111c66c09cd006711131db107dbf17e3..6e5a3e3b6793d0171c2fbe6415821968ac1d3ba4 100644
 --- a/arch/arm/include/asm/arch-imx9/ddr.h
 +++ b/arch/arm/include/asm/arch-imx9/ddr.h
-@@ -101,6 +101,26 @@ struct dram_timing_info {
+@@ -101,7 +101,7 @@ struct dram_timing_info {
  
  extern struct dram_timing_info dram_timing;
  
+-#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
++#if (defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) || defined(CONFIG_IMX_SNPS_DDR_PHY_QB))
+ #define DDRPHY_QB_FSP_SIZE	3
+ #define DDRPHY_QB_CSR_SIZE	1792
+ #define DDRPHY_QB_FLAG_2D	BIT(0)	/* =1 if First boot used 2D training, =0 otherwise */
+@@ -118,8 +118,13 @@ struct ddrphy_qb_state {
+ 
+ extern struct ddrphy_qb_state qb_state;
+ 
 +#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
-+#define DDRPHY_QB_FSP_SIZE	3
-+#define DDRPHY_QB_CSR_SIZE	1792
-+#define DDRPHY_QB_FLAG_2D	BIT(0)	/* =1 if First boot used 2D training, =0 otherwise */
-+
-+struct ddrphy_qb_state {
-+	u32 crc;
-+	u32 flags;
-+	u32 fsp[DDRPHY_QB_FSP_SIZE];
-+	u32 csr[DDRPHY_QB_CSR_SIZE];
-+};
-+
-+#define DDRPHY_QB_STATE_SIZE \
-+	(sizeof(u32) * (1 + DDRPHY_QB_FSP_SIZE + DDRPHY_QB_CSR_SIZE))
-+
-+extern struct ddrphy_qb_state qb_state;
-+
-+int ddrphy_qb_save(void);
+ int ddrphy_qb_save(void);
+ #endif
++#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
++int ddr_cfg_phy_qb(struct dram_timing_info *timing_info, int fsp_id);
 +#endif
-+
++#endif
+ 
  void ddr_load_train_firmware(enum fw_type type);
  int ddr_init(struct dram_timing_info *timing_info);
- int ddr_cfg_phy(struct dram_timing_info *timing_info);
-diff --git a/drivers/ddr/imx/imx9/Kconfig b/drivers/ddr/imx/imx9/Kconfig
-index 0a45340ffb6549d1e7a7e273e19abefbcc6793b3..450ca0abb952a13b23322751596bf6d5c617e2b4 100644
---- a/drivers/ddr/imx/imx9/Kconfig
-+++ b/drivers/ddr/imx/imx9/Kconfig
-@@ -29,4 +29,12 @@ config SAVED_DRAM_TIMING_BASE
- 	  info into memory for low power use.
- 	default 0x2051C000
- 
-+config SAVED_QB_STATE_BASE
-+	hex "Define the base address for saved QuickBoot state"
-+	depends on IMX_SNPS_DDR_PHY_QB_GEN
-+	help
-+	  Once DRAM is trained, need to save the dram related timing
-+	  info into memory in order to be reachable from U-Boot.
-+	default 0x83100000
-+
- endmenu
 diff --git a/drivers/ddr/imx/imx9/ddr_init.c b/drivers/ddr/imx/imx9/ddr_init.c
-index 50c2dbd40084c6a4d750f628c5c1fc76fa017596..758a4049139228198a86449bdf2f9106c0773040 100644
+index 758a4049139228198a86449bdf2f9106c0773040..7d40e199ad9900c51c689c530999dd83dc983144 100644
 --- a/drivers/ddr/imx/imx9/ddr_init.c
 +++ b/drivers/ddr/imx/imx9/ddr_init.c
-@@ -381,10 +381,17 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 	 */
- 	debug("DDRINFO:ddrphy config start\n");
+@@ -375,6 +375,12 @@ int ddr_init(struct dram_timing_info *dram_timing)
+ 	/* default to the frequency point 0 clock */
+ 	ddrphy_init_set_dfi_clk(initial_drate);
  
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
-+	qb_state.flags = 0;
-+#endif
-+
- 	ret = ddr_cfg_phy(dram_timing);
- 	if (ret)
- 		return ret;
++#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
++	/* Configure PHY in QuickBoot mode */
++	ret = ddr_cfg_phy_qb(dram_timing, 0);
++	if (ret)
++		return ret;
++#else
+ 	/*
+ 	 * Start PHY initialization and training by
+ 	 * accessing relevant PUB registers
+@@ -391,6 +397,7 @@ int ddr_init(struct dram_timing_info *dram_timing)
  
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
-+	ddrphy_qb_save();
+ #if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
+ 	ddrphy_qb_save();
 +#endif
+ #endif
  	/* save the ddr PHY trained CSR in memory for low power use */
  	ddrphy_trained_csr_save(dram_timing->ddrphy_trained_csr,
- 				dram_timing->ddrphy_trained_csr_num);
-@@ -447,6 +454,10 @@ int ddr_init(struct dram_timing_info *dram_timing)
- 					  ARRAY_SIZE(saved_timing->fsp_cfg[1].mr_cfg));
- 	}
+@@ -400,7 +407,7 @@ int ddr_init(struct dram_timing_info *dram_timing)
  
-+#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
-+	memcpy((struct ddrphy_qb_state *)CONFIG_SAVED_QB_STATE_BASE,
-+		&qb_state, sizeof(struct ddrphy_qb_state));
-+#endif
- 	return 0;
- }
+ 	update_umctl2_rank_space_setting(dram_timing, dram_timing->fsp_msg_num - 1);
  
+-	/* rogram the ddrc registers */
++	/* program the ddrc registers */
+ 	debug("DDRINFO: ddrc config start\n");
+ 	ddrc_config(dram_timing);
+ 	debug("DDRINFO: ddrc config done\n");
 diff --git a/drivers/ddr/imx/phy/Kconfig b/drivers/ddr/imx/phy/Kconfig
-index d3e589b23c48fb0b5e09e9fcdf462e85215c3e64..28a9eca0788f96355e8459427a92832446be0e02 100644
+index 28a9eca0788f96355e8459427a92832446be0e02..b0554172af3654da50d8ed929c382ef54506464b 100644
 --- a/drivers/ddr/imx/phy/Kconfig
 +++ b/drivers/ddr/imx/phy/Kconfig
-@@ -2,3 +2,9 @@ config IMX_SNPS_DDR_PHY
- 	bool "i.MX Snopsys DDR PHY"
+@@ -8,3 +8,9 @@ config IMX_SNPS_DDR_PHY_QB_GEN
+ 	depends on IMX_SNPS_DDR_PHY
  	help
- 	  Select the DDR PHY driver support on i.MX8M and i.MX9 SOC.
+ 	  Select the DDR PHY training data generation for QuickBoot support on i.MX9 SOC.
 +
-+config IMX_SNPS_DDR_PHY_QB_GEN
-+	bool "i.MX Synopsys DDR PHY training data generation for QuickBoot mode"
-+	depends on IMX_SNPS_DDR_PHY
++config IMX_SNPS_DDR_PHY_QB
++	bool "i.MX Synopsys DDR PHY QuickBoot mode"
++	depends on IMX_SNPS_DDR_PHY && !IMX_SNPS_DDR_PHY_QB_GEN
 +	help
-+	  Select the DDR PHY training data generation for QuickBoot support on i.MX9 SOC.
++	  Select the DDR PHY QuickBoot mode on i.MX9 SOC.
 diff --git a/drivers/ddr/imx/phy/Makefile b/drivers/ddr/imx/phy/Makefile
-index 95c93ba16d52270df6e8c669b948d1a194bddfce..d82842759e72d104aba41110b9c6e01b997d78fb 100644
+index d82842759e72d104aba41110b9c6e01b997d78fb..2310e69ab5c3036a2903465f4c4e95a79bf0b2c5 100644
 --- a/drivers/ddr/imx/phy/Makefile
 +++ b/drivers/ddr/imx/phy/Makefile
-@@ -6,4 +6,5 @@
- 
+@@ -7,4 +7,5 @@
  ifdef CONFIG_XPL_BUILD
  obj-$(CONFIG_IMX_SNPS_DDR_PHY) += helper.o ddrphy_utils.o ddrphy_train.o
-+obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) += ddrphy_qb_gen.o
+ obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN) += ddrphy_qb_gen.o
++obj-$(CONFIG_IMX_SNPS_DDR_PHY_QB) += ddrphy_qb.o
  endif
-diff --git a/drivers/ddr/imx/phy/ddrphy_qb_gen.c b/drivers/ddr/imx/phy/ddrphy_qb_gen.c
+diff --git a/drivers/ddr/imx/phy/ddrphy_qb.c b/drivers/ddr/imx/phy/ddrphy_qb.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..d77bb8480d85770d29e4408c2a723b20377833f0
+index 0000000000000000000000000000000000000000..04a6520be5464ac26e30a516265b1b6993eec38c
 --- /dev/null
-+++ b/drivers/ddr/imx/phy/ddrphy_qb_gen.c
-@@ -0,0 +1,1842 @@
++++ b/drivers/ddr/imx/phy/ddrphy_qb.c
+@@ -0,0 +1,100 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2025 NXP
@@ -317,1851 +295,195 @@ index 0000000000000000000000000000000000000000..d77bb8480d85770d29e4408c2a723b20
 +#include <linux/errno.h>
 +#include <linux/kernel.h>
 +#include <linux/types.h>
-+#include <u-boot/crc.h>
-+
-+static const u32 ddrphy_csr_cfg[DDRPHY_QB_CSR_SIZE] = {
-+	0x00090201,
-+	0x00090202,
-+	0x00090203,
-+	0x00090204,
-+	0x00090205,
-+	0x00090206,
-+	0x00090207,
-+	0x00090208,
-+	0x00190201,
-+	0x00190202,
-+	0x00190203,
-+	0x00190204,
-+	0x00190205,
-+	0x00190206,
-+	0x00190207,
-+	0x00190208,
-+	0x00290201,
-+	0x00290202,
-+	0x00290203,
-+	0x00290204,
-+	0x00290205,
-+	0x00290206,
-+	0x00290207,
-+	0x00290208,
-+	0x00390201,
-+	0x00390202,
-+	0x00390203,
-+	0x00390204,
-+	0x00390205,
-+	0x00390206,
-+	0x00390207,
-+	0x00390208,
-+	0x00090000,
-+	0x00090001,
-+	0x00090002,
-+	0x00090003,
-+	0x00090004,
-+	0x00090005,
-+	0x00090006,
-+	0x00090007,
-+	0x00090008,
-+	0x00090009,
-+	0x0009000a,
-+	0x0009000b,
-+	0x0009000c,
-+	0x0009000d,
-+	0x0009000e,
-+	0x0009000f,
-+	0x00090010,
-+	0x00090011,
-+	0x00090012,
-+	0x00090013,
-+	0x00090014,
-+	0x00090015,
-+	0x00090016,
-+	0x00090017,
-+	0x00090018,
-+	0x00090019,
-+	0x0009001a,
-+	0x0009001b,
-+	0x0009001c,
-+	0x0009001d,
-+	0x0009001e,
-+	0x0009001f,
-+	0x00090020,
-+	0x00090021,
-+	0x00090022,
-+	0x00090023,
-+	0x00090024,
-+	0x00090025,
-+	0x00090026,
-+	0x00090027,
-+	0x00090028,
-+	0x00090029,
-+	0x0009002a,
-+	0x0009002b,
-+	0x0009002c,
-+	0x0009002d,
-+	0x0009002e,
-+	0x0009002f,
-+	0x00090030,
-+	0x00090031,
-+	0x00090032,
-+	0x00090033,
-+	0x00090034,
-+	0x00090035,
-+	0x00090036,
-+	0x00090037,
-+	0x00090038,
-+	0x00090039,
-+	0x0009003a,
-+	0x0009003b,
-+	0x0009003c,
-+	0x0009003d,
-+	0x0009003e,
-+	0x0009003f,
-+	0x00090040,
-+	0x00090041,
-+	0x00090042,
-+	0x00090043,
-+	0x00090044,
-+	0x00090045,
-+	0x00090046,
-+	0x00090047,
-+	0x00090048,
-+	0x00090049,
-+	0x0009004a,
-+	0x0009004b,
-+	0x0009004c,
-+	0x0009004d,
-+	0x0009004e,
-+	0x0009004f,
-+	0x00090050,
-+	0x00090051,
-+	0x00090052,
-+	0x00090053,
-+	0x00090054,
-+	0x00090055,
-+	0x00090056,
-+	0x00090057,
-+	0x00090058,
-+	0x00090059,
-+	0x0009005a,
-+	0x0009005b,
-+	0x0009005c,
-+	0x0009005d,
-+	0x0009005e,
-+	0x0009005f,
-+	0x00090060,
-+	0x00090061,
-+	0x00090062,
-+	0x00090063,
-+	0x00090064,
-+	0x00090065,
-+	0x00090066,
-+	0x00090067,
-+	0x00090068,
-+	0x00090069,
-+	0x0009006a,
-+	0x0009006b,
-+	0x0009006c,
-+	0x0009006d,
-+	0x0009006e,
-+	0x0009006f,
-+	0x00090070,
-+	0x00090071,
-+	0x00090072,
-+	0x00090073,
-+	0x00090074,
-+	0x00090075,
-+	0x00090076,
-+	0x00090077,
-+	0x00090078,
-+	0x00090079,
-+	0x0009007a,
-+	0x0009007b,
-+	0x0009007c,
-+	0x0009007d,
-+	0x0009007e,
-+	0x0009007f,
-+	0x00090080,
-+	0x00090081,
-+	0x00090082,
-+	0x00090083,
-+	0x00090084,
-+	0x00090085,
-+	0x00090086,
-+	0x00090087,
-+	0x00090088,
-+	0x00090089,
-+	0x0009008a,
-+	0x0009008b,
-+	0x0009008c,
-+	0x0009008d,
-+	0x0009008e,
-+	0x0009008f,
-+	0x00090090,
-+	0x00090091,
-+	0x00090092,
-+	0x00090093,
-+	0x00090094,
-+	0x00090095,
-+	0x00090096,
-+	0x00090097,
-+	0x00090098,
-+	0x00090099,
-+	0x0009009a,
-+	0x0009009b,
-+	0x0009009c,
-+	0x0009009d,
-+	0x0009009e,
-+	0x0009009f,
-+	0x000900a0,
-+	0x000900a1,
-+	0x000900a2,
-+	0x000900a3,
-+	0x000900a4,
-+	0x000900a5,
-+	0x000900a6,
-+	0x000900a7,
-+	0x000900a8,
-+	0x000900a9,
-+	0x000900aa,
-+	0x000900ab,
-+	0x000900ac,
-+	0x000900ad,
-+	0x000900ae,
-+	0x000900af,
-+	0x000900b0,
-+	0x000900b1,
-+	0x000900b2,
-+	0x000900b3,
-+	0x000900b4,
-+	0x000900b5,
-+	0x000900b6,
-+	0x000900b7,
-+	0x000900b8,
-+	0x000900b9,
-+	0x000900ba,
-+	0x000900bb,
-+	0x000900bc,
-+	0x000900bd,
-+	0x000900be,
-+	0x000900bf,
-+	0x000900c0,
-+	0x000900c1,
-+	0x000900c2,
-+	0x000900c3,
-+	0x000900c4,
-+	0x000900c5,
-+	0x000900c6,
-+	0x000900c7,
-+	0x000900c8,
-+	0x000900c9,
-+	0x000900ca,
-+	0x000900cb,
-+	0x000900cc,
-+	0x000900cd,
-+	0x000900ce,
-+	0x000900cf,
-+	0x000900d0,
-+	0x000900d1,
-+	0x000900d2,
-+	0x000900d3,
-+	0x000900d4,
-+	0x000900d5,
-+	0x000900d6,
-+	0x000900d7,
-+	0x000900d8,
-+	0x000900d9,
-+	0x000900da,
-+	0x000900db,
-+	0x000900dc,
-+	0x000900dd,
-+	0x000900de,
-+	0x000900df,
-+	0x000900e0,
-+	0x000900e1,
-+	0x000900e2,
-+	0x000900e3,
-+	0x000900e4,
-+	0x000900e5,
-+	0x000900e6,
-+	0x000900e7,
-+	0x000900e8,
-+	0x000900e9,
-+	0x000900ea,
-+	0x000900eb,
-+	0x000900ec,
-+	0x000900ed,
-+	0x000900ee,
-+	0x000900ef,
-+	0x000900f0,
-+	0x000900f1,
-+	0x000900f2,
-+	0x000900f3,
-+	0x000900f4,
-+	0x000900f5,
-+	0x000900f6,
-+	0x000900f7,
-+	0x000900f8,
-+	0x000900f9,
-+	0x000900fa,
-+	0x000900fb,
-+	0x000900fc,
-+	0x000900fd,
-+	0x000900fe,
-+	0x000900ff,
-+	0x00090100,
-+	0x00090101,
-+	0x00090102,
-+	0x00090103,
-+	0x00090104,
-+	0x00090105,
-+	0x00090106,
-+	0x00090107,
-+	0x00090108,
-+	0x00090109,
-+	0x0009010a,
-+	0x0009010b,
-+	0x0009010c,
-+	0x0009010d,
-+	0x0009010e,
-+	0x0009010f,
-+	0x00090110,
-+	0x00090111,
-+	0x00090112,
-+	0x00090113,
-+	0x00090114,
-+	0x00090115,
-+	0x00090116,
-+	0x00090117,
-+	0x00090118,
-+	0x00090119,
-+	0x0009011a,
-+	0x0009011b,
-+	0x0009011c,
-+	0x0009011d,
-+	0x0009011e,
-+	0x0009011f,
-+	0x00090120,
-+	0x00090121,
-+	0x00090122,
-+	0x00090123,
-+	0x00090124,
-+	0x00090125,
-+	0x00090126,
-+	0x00090127,
-+	0x00090128,
-+	0x00090129,
-+	0x0009012a,
-+	0x0009012b,
-+	0x0009012c,
-+	0x0009012d,
-+	0x0009012e,
-+	0x0009012f,
-+	0x00090130,
-+	0x00090131,
-+	0x00090132,
-+	0x00090133,
-+	0x00090134,
-+	0x00090135,
-+	0x00090136,
-+	0x00090137,
-+	0x00090138,
-+	0x00090139,
-+	0x0009013a,
-+	0x0009013b,
-+	0x0009013c,
-+	0x0009013d,
-+	0x0009013e,
-+	0x0009013f,
-+	0x00090140,
-+	0x00090141,
-+	0x00090142,
-+	0x00090143,
-+	0x00090144,
-+	0x00090145,
-+	0x00090146,
-+	0x00090147,
-+	0x00090148,
-+	0x00090149,
-+	0x0009014a,
-+	0x0009014b,
-+	0x0009014c,
-+	0x0009014d,
-+	0x0009014e,
-+	0x0009014f,
-+	0x00090150,
-+	0x00090151,
-+	0x00090152,
-+	0x00090153,
-+	0x00090154,
-+	0x00090155,
-+	0x00090156,
-+	0x00090157,
-+	0x00090158,
-+	0x00090159,
-+	0x0009015a,
-+	0x0009015b,
-+	0x0009015c,
-+	0x0009015d,
-+	0x0009015e,
-+	0x0009015f,
-+	0x00090160,
-+	0x00090161,
-+	0x00090162,
-+	0x00090163,
-+	0x00090164,
-+	0x00090165,
-+	0x00090166,
-+	0x00090167,
-+	0x00090168,
-+	0x00090169,
-+	0x0009016a,
-+	0x0009016b,
-+	0x0009016c,
-+	0x0009016d,
-+	0x0009016e,
-+	0x0009016f,
-+	0x00090170,
-+	0x00090171,
-+	0x00090172,
-+	0x00090173,
-+	0x00090174,
-+	0x00090175,
-+	0x00090176,
-+	0x00090177,
-+	0x00090178,
-+	0x00090179,
-+	0x0009017a,
-+	0x0009017b,
-+	0x0009017c,
-+	0x0009017d,
-+	0x0009017e,
-+	0x0009017f,
-+	0x00090180,
-+	0x00090181,
-+	0x00090182,
-+	0x00090183,
-+	0x00090184,
-+	0x00090185,
-+	0x00090186,
-+	0x00090187,
-+	0x00090188,
-+	0x00090189,
-+	0x0009018a,
-+	0x0009018b,
-+	0x0009018c,
-+	0x0009018d,
-+	0x0009018e,
-+	0x0009018f,
-+	0x00090190,
-+	0x00090191,
-+	0x00090192,
-+	0x00090193,
-+	0x00090194,
-+	0x00090195,
-+	0x00090196,
-+	0x00090197,
-+	0x00090198,
-+	0x00090199,
-+	0x0009019a,
-+	0x0009019b,
-+	0x000902ff,
-+	0x00040080,
-+	0x00040081,
-+	0x00040082,
-+	0x00040083,
-+	0x00040084,
-+	0x00040085,
-+	0x00040086,
-+	0x00040087,
-+	0x00040088,
-+	0x00040089,
-+	0x0004008a,
-+	0x0004008b,
-+	0x0004008c,
-+	0x0004008d,
-+	0x0004008e,
-+	0x0004008f,
-+	0x00140080,
-+	0x00140081,
-+	0x00140082,
-+	0x00140083,
-+	0x00140084,
-+	0x00140085,
-+	0x00140086,
-+	0x00140087,
-+	0x00140088,
-+	0x00140089,
-+	0x0014008a,
-+	0x0014008b,
-+	0x0014008c,
-+	0x0014008d,
-+	0x0014008e,
-+	0x0014008f,
-+	0x00240080,
-+	0x00240081,
-+	0x00240082,
-+	0x00240083,
-+	0x00240084,
-+	0x00240085,
-+	0x00240086,
-+	0x00240087,
-+	0x00240088,
-+	0x00240089,
-+	0x0024008a,
-+	0x0024008b,
-+	0x0024008c,
-+	0x0024008d,
-+	0x0024008e,
-+	0x0024008f,
-+	0x00340080,
-+	0x00340081,
-+	0x00340082,
-+	0x00340083,
-+	0x00340084,
-+	0x00340085,
-+	0x00340086,
-+	0x00340087,
-+	0x00340088,
-+	0x00340089,
-+	0x0034008a,
-+	0x0034008b,
-+	0x0034008c,
-+	0x0034008d,
-+	0x0034008e,
-+	0x0034008f,
-+	0x00040000,
-+	0x00040001,
-+	0x00040002,
-+	0x00040003,
-+	0x00040004,
-+	0x00040005,
-+	0x00040006,
-+	0x00040007,
-+	0x00040008,
-+	0x00040009,
-+	0x0004000a,
-+	0x0004000b,
-+	0x0004000c,
-+	0x0004000d,
-+	0x0004000e,
-+	0x0004000f,
-+	0x00040010,
-+	0x00040011,
-+	0x00040012,
-+	0x00040013,
-+	0x00040014,
-+	0x00040015,
-+	0x00040016,
-+	0x00040017,
-+	0x00040018,
-+	0x00040019,
-+	0x0004001a,
-+	0x0004001b,
-+	0x0004001c,
-+	0x0004001d,
-+	0x0004001e,
-+	0x0004001f,
-+	0x00040020,
-+	0x00040021,
-+	0x00040022,
-+	0x00040023,
-+	0x00040024,
-+	0x00040025,
-+	0x00040026,
-+	0x00040027,
-+	0x00040028,
-+	0x00040029,
-+	0x0004002a,
-+	0x0004002b,
-+	0x0004002c,
-+	0x0004002d,
-+	0x0004002e,
-+	0x0004002f,
-+	0x00040030,
-+	0x00040031,
-+	0x00040032,
-+	0x00040033,
-+	0x00040034,
-+	0x00040035,
-+	0x00040036,
-+	0x00040037,
-+	0x00040038,
-+	0x00040039,
-+	0x0004003a,
-+	0x0004003b,
-+	0x0004003c,
-+	0x0004003d,
-+	0x0004003e,
-+	0x0004003f,
-+	0x00040040,
-+	0x00040041,
-+	0x00040042,
-+	0x00040043,
-+	0x00040044,
-+	0x00040045,
-+	0x00040046,
-+	0x00040047,
-+	0x00040048,
-+	0x00040049,
-+	0x0004004a,
-+	0x0004004b,
-+	0x0004004c,
-+	0x0004004d,
-+	0x0004004e,
-+	0x0004004f,
-+	0x00040050,
-+	0x00040051,
-+	0x00040052,
-+	0x00040053,
-+	0x00040054,
-+	0x00040055,
-+	0x00040056,
-+	0x00040057,
-+	0x00040058,
-+	0x00040059,
-+	0x0004005a,
-+	0x0004005b,
-+	0x0004005c,
-+	0x0004005d,
-+	0x0004005e,
-+	0x0004005f,
-+	0x00040060,
-+	0x00040061,
-+	0x00040062,
-+	0x00040063,
-+	0x00040064,
-+	0x00040065,
-+	0x00040066,
-+	0x00040067,
-+	0x00040068,
-+	0x00040069,
-+	0x0004006a,
-+	0x0004006b,
-+	0x0004006c,
-+	0x0004006d,
-+	0x0004006e,
-+	0x0004006f,
-+	0x00040070,
-+	0x00040071,
-+	0x00040072,
-+	0x00040073,
-+	0x00040074,
-+	0x00040075,
-+	0x00040076,
-+	0x00040077,
-+	0x00040078,
-+	0x00040079,
-+	0x0004007a,
-+	0x0004007b,
-+	0x0004007c,
-+	0x0004007d,
-+	0x0004007e,
-+	0x0004007f,
-+	0x00040080,
-+	0x00040081,
-+	0x00040082,
-+	0x00040083,
-+	0x00040084,
-+	0x00040085,
-+	0x00040086,
-+	0x00040087,
-+	0x00040088,
-+	0x00040089,
-+	0x0004008a,
-+	0x0004008b,
-+	0x0004008c,
-+	0x0004008d,
-+	0x0004008e,
-+	0x0004008f,
-+	0x00040090,
-+	0x00040091,
-+	0x00040092,
-+	0x00040093,
-+	0x00040094,
-+	0x00040095,
-+	0x00040096,
-+	0x00040097,
-+	0x00040098,
-+	0x00040099,
-+	0x0004009a,
-+	0x0004009b,
-+	0x0004009c,
-+	0x0004009d,
-+	0x0004009e,
-+	0x0004009f,
-+	0x000400a0,
-+	0x000400a1,
-+	0x000400a2,
-+	0x000400a3,
-+	0x000400a4,
-+	0x000400a5,
-+	0x000400a6,
-+	0x000400a7,
-+	0x000400a8,
-+	0x000400a9,
-+	0x000400aa,
-+	0x000400ab,
-+	0x000400ac,
-+	0x000400ad,
-+	0x000400ae,
-+	0x000400af,
-+	0x000400b0,
-+	0x000400b1,
-+	0x000400b2,
-+	0x000400b3,
-+	0x000400b4,
-+	0x000400b5,
-+	0x000400b6,
-+	0x000400b7,
-+	0x000400b8,
-+	0x000400b9,
-+	0x000400ba,
-+	0x000400bb,
-+	0x000400bc,
-+	0x000400bd,
-+	0x000400be,
-+	0x000400bf,
-+	0x000400c0,
-+	0x000400c1,
-+	0x000400c2,
-+	0x000400c3,
-+	0x000400c4,
-+	0x000400c5,
-+	0x000400c6,
-+	0x000400c7,
-+	0x000400c8,
-+	0x000400c9,
-+	0x000400ca,
-+	0x000400cb,
-+	0x000400cc,
-+	0x000400cd,
-+	0x000400ce,
-+	0x000400cf,
-+	0x000400d0,
-+	0x000400d1,
-+	0x000400d2,
-+	0x000400d3,
-+	0x000400d4,
-+	0x000400d5,
-+	0x000400d6,
-+	0x000400d7,
-+	0x000400d8,
-+	0x000400d9,
-+	0x000400da,
-+	0x000400db,
-+	0x000400dc,
-+	0x000400dd,
-+	0x000400de,
-+	0x000400df,
-+	0x000400e0,
-+	0x000400e1,
-+	0x000400e2,
-+	0x000400e3,
-+	0x000400e4,
-+	0x000400e5,
-+	0x000400e6,
-+	0x000400e7,
-+	0x000400e8,
-+	0x000400e9,
-+	0x000400ea,
-+	0x000400eb,
-+	0x000400ec,
-+	0x000400ed,
-+	0x000400ee,
-+	0x000400ef,
-+	0x000400f0,
-+	0x000400f1,
-+	0x000400f2,
-+	0x000400f3,
-+	0x000400f4,
-+	0x000400f5,
-+	0x000400f6,
-+	0x000400f7,
-+	0x000400f8,
-+	0x000400f9,
-+	0x000400fa,
-+	0x000400fb,
-+	0x000400fc,
-+	0x000400fd,
-+	0x000400fe,
-+	0x000400ff,
-+	0x000100b2,
-+	0x000100b4,
-+	0x000101b2,
-+	0x000101b4,
-+	0x000102b2,
-+	0x000102b4,
-+	0x000103b2,
-+	0x000103b4,
-+	0x000104b2,
-+	0x000104b4,
-+	0x000105b2,
-+	0x000105b4,
-+	0x000106b2,
-+	0x000106b4,
-+	0x000107b2,
-+	0x000107b4,
-+	0x000108b2,
-+	0x000108b4,
-+	0x00010011,
-+	0x00010012,
-+	0x00010013,
-+	0x00010018,
-+	0x00010002,
-+	0x000110b2,
-+	0x000110b4,
-+	0x000111b2,
-+	0x000111b4,
-+	0x000112b2,
-+	0x000112b4,
-+	0x000113b2,
-+	0x000113b4,
-+	0x000114b2,
-+	0x000114b4,
-+	0x000115b2,
-+	0x000115b4,
-+	0x000116b2,
-+	0x000116b4,
-+	0x000117b2,
-+	0x000117b4,
-+	0x000118b2,
-+	0x000118b4,
-+	0x00011011,
-+	0x00011012,
-+	0x00011013,
-+	0x00011018,
-+	0x00011002,
-+	0x000120b2,
-+	0x000120b4,
-+	0x000121b2,
-+	0x000121b4,
-+	0x000122b2,
-+	0x000122b4,
-+	0x000123b2,
-+	0x000123b4,
-+	0x000124b2,
-+	0x000124b4,
-+	0x000125b2,
-+	0x000125b4,
-+	0x000126b2,
-+	0x000126b4,
-+	0x000127b2,
-+	0x000127b4,
-+	0x000128b2,
-+	0x000128b4,
-+	0x00012011,
-+	0x00012012,
-+	0x00012013,
-+	0x00012018,
-+	0x00012002,
-+	0x000130b2,
-+	0x000130b4,
-+	0x000131b2,
-+	0x000131b4,
-+	0x000132b2,
-+	0x000132b4,
-+	0x000133b2,
-+	0x000133b4,
-+	0x000134b2,
-+	0x000134b4,
-+	0x000135b2,
-+	0x000135b4,
-+	0x000136b2,
-+	0x000136b4,
-+	0x000137b2,
-+	0x000137b4,
-+	0x000138b2,
-+	0x000138b4,
-+	0x00013011,
-+	0x00013012,
-+	0x00013013,
-+	0x00013018,
-+	0x00013002,
-+	0x000140b2,
-+	0x000140b4,
-+	0x000141b2,
-+	0x000141b4,
-+	0x000142b2,
-+	0x000142b4,
-+	0x000143b2,
-+	0x000143b4,
-+	0x000144b2,
-+	0x000144b4,
-+	0x000145b2,
-+	0x000145b4,
-+	0x000146b2,
-+	0x000146b4,
-+	0x000147b2,
-+	0x000147b4,
-+	0x000148b2,
-+	0x000148b4,
-+	0x00014011,
-+	0x00014012,
-+	0x00014013,
-+	0x00014018,
-+	0x00014002,
-+	0x000150b2,
-+	0x000150b4,
-+	0x000151b2,
-+	0x000151b4,
-+	0x000152b2,
-+	0x000152b4,
-+	0x000153b2,
-+	0x000153b4,
-+	0x000154b2,
-+	0x000154b4,
-+	0x000155b2,
-+	0x000155b4,
-+	0x000156b2,
-+	0x000156b4,
-+	0x000157b2,
-+	0x000157b4,
-+	0x000158b2,
-+	0x000158b4,
-+	0x00015011,
-+	0x00015012,
-+	0x00015013,
-+	0x00015018,
-+	0x00015002,
-+	0x000160b2,
-+	0x000160b4,
-+	0x000161b2,
-+	0x000161b4,
-+	0x000162b2,
-+	0x000162b4,
-+	0x000163b2,
-+	0x000163b4,
-+	0x000164b2,
-+	0x000164b4,
-+	0x000165b2,
-+	0x000165b4,
-+	0x000166b2,
-+	0x000166b4,
-+	0x000167b2,
-+	0x000167b4,
-+	0x000168b2,
-+	0x000168b4,
-+	0x00016011,
-+	0x00016012,
-+	0x00016013,
-+	0x00016018,
-+	0x00016002,
-+	0x000170b2,
-+	0x000170b4,
-+	0x000171b2,
-+	0x000171b4,
-+	0x000172b2,
-+	0x000172b4,
-+	0x000173b2,
-+	0x000173b4,
-+	0x000174b2,
-+	0x000174b4,
-+	0x000175b2,
-+	0x000175b4,
-+	0x000176b2,
-+	0x000176b4,
-+	0x000177b2,
-+	0x000177b4,
-+	0x000178b2,
-+	0x000178b4,
-+	0x00017011,
-+	0x00017012,
-+	0x00017013,
-+	0x00017018,
-+	0x00017002,
-+	0x000180b2,
-+	0x000180b4,
-+	0x000181b2,
-+	0x000181b4,
-+	0x000182b2,
-+	0x000182b4,
-+	0x000183b2,
-+	0x000183b4,
-+	0x000184b2,
-+	0x000184b4,
-+	0x000185b2,
-+	0x000185b4,
-+	0x000186b2,
-+	0x000186b4,
-+	0x000187b2,
-+	0x000187b4,
-+	0x000188b2,
-+	0x000188b4,
-+	0x00018011,
-+	0x00018012,
-+	0x00018013,
-+	0x00018018,
-+	0x00018002,
-+	0x000190b2,
-+	0x000190b4,
-+	0x000191b2,
-+	0x000191b4,
-+	0x000192b2,
-+	0x000192b4,
-+	0x000193b2,
-+	0x000193b4,
-+	0x000194b2,
-+	0x000194b4,
-+	0x000195b2,
-+	0x000195b4,
-+	0x000196b2,
-+	0x000196b4,
-+	0x000197b2,
-+	0x000197b4,
-+	0x000198b2,
-+	0x000198b4,
-+	0x00019011,
-+	0x00019012,
-+	0x00019013,
-+	0x00019018,
-+	0x00019002,
-+	0x00020010,
-+	0x00020011,
-+	0x00120010,
-+	0x00120011,
-+	0x00220010,
-+	0x00220011,
-+	0x00320010,
-+	0x00320011,
-+	0x00020088,
-+	0x000200f0,
-+	0x000200f1,
-+	0x000200f2,
-+	0x000200f3,
-+	0x000200f4,
-+	0x000200f5,
-+	0x000200f6,
-+	0x000200f7,
-+	0x0002000b,
-+	0x0002000c,
-+	0x0002000d,
-+	0x0002000e,
-+	0x0002002e,
-+	0x00020024,
-+	0x00020056,
-+	0x00020008,
-+	0x0002007c,
-+	0x000200b2,
-+	0x000200fa,
-+	0x00020019,
-+	0x0002002d,
-+	0x000200b0,
-+	0x000200b4,
-+	0x000200c5,
-+	0x00020062,
-+	0x00020063,
-+	0x00020064,
-+	0x00020065,
-+	0x00020066,
-+	0x00020067,
-+	0x00020068,
-+	0x000200f0,
-+	0x000200f1,
-+	0x000200f2,
-+	0x000200f3,
-+	0x000200f4,
-+	0x000200f5,
-+	0x000200f6,
-+	0x000200f7,
-+	0x0012000b,
-+	0x0012000c,
-+	0x0012000d,
-+	0x0012000e,
-+	0x0012002e,
-+	0x00120024,
-+	0x00120056,
-+	0x00120008,
-+	0x0012007c,
-+	0x001200b2,
-+	0x001200fa,
-+	0x00120019,
-+	0x0012002d,
-+	0x001200b0,
-+	0x001200b4,
-+	0x001200c5,
-+	0x00120062,
-+	0x00120063,
-+	0x00120064,
-+	0x00120065,
-+	0x00120066,
-+	0x00120067,
-+	0x00120068,
-+	0x000200f0,
-+	0x000200f1,
-+	0x000200f2,
-+	0x000200f3,
-+	0x000200f4,
-+	0x000200f5,
-+	0x000200f6,
-+	0x000200f7,
-+	0x0022000b,
-+	0x0022000c,
-+	0x0022000d,
-+	0x0022000e,
-+	0x0022002e,
-+	0x00220024,
-+	0x00220056,
-+	0x00220008,
-+	0x0022007c,
-+	0x002200b2,
-+	0x002200fa,
-+	0x00220019,
-+	0x0022002d,
-+	0x002200b0,
-+	0x002200b4,
-+	0x002200c5,
-+	0x00220062,
-+	0x00220063,
-+	0x00220064,
-+	0x00220065,
-+	0x00220066,
-+	0x00220067,
-+	0x00220068,
-+	0x000200f0,
-+	0x000200f1,
-+	0x000200f2,
-+	0x000200f3,
-+	0x000200f4,
-+	0x000200f5,
-+	0x000200f6,
-+	0x000200f7,
-+	0x0032000b,
-+	0x0032000c,
-+	0x0032000d,
-+	0x0032000e,
-+	0x0032002e,
-+	0x00320024,
-+	0x00320056,
-+	0x00320008,
-+	0x0032007c,
-+	0x003200b2,
-+	0x003200fa,
-+	0x00320019,
-+	0x0032002d,
-+	0x003200b0,
-+	0x003200b4,
-+	0x003200c5,
-+	0x00320062,
-+	0x00320063,
-+	0x00320064,
-+	0x00320065,
-+	0x00320066,
-+	0x00320067,
-+	0x00320068,
-+	0x0002003a,
-+	0x00020018,
-+	0x00020075,
-+	0x00020050,
-+	0x00020088,
-+	0x0002005b,
-+	0x0002005c,
-+	0x00020025,
-+	0x00020131,
-+	0x00020130,
-+	0x00020137,
-+	0x00020138,
-+	0x00020139,
-+	0x0002013a,
-+	0x00020001,
-+	0x0002002c,
-+	0x00020027,
-+	0x00020021,
-+	0x00020023,
-+	0x00020071,
-+	0x00020098,
-+	0x000200ef,
-+	0x00020060,
-+	0x00020061,
-+	0x00020120,
-+	0x00020132,
-+	0x00020135,
-+	0x00020100,
-+	0x00020110,
-+	0x00020121,
-+	0x00020133,
-+	0x00020136,
-+	0x00020101,
-+	0x00020111,
-+	0x00020122,
-+	0x00020134,
-+	0x00020102,
-+	0x00020112,
-+	0x00020123,
-+	0x00020103,
-+	0x00020113,
-+	0x00020124,
-+	0x00020104,
-+	0x00020114,
-+	0x00020125,
-+	0x00020105,
-+	0x00020115,
-+	0x00020126,
-+	0x00020106,
-+	0x00020116,
-+	0x00020127,
-+	0x00020107,
-+	0x00020117,
-+	0x00020128,
-+	0x00020108,
-+	0x00020118,
-+	0x00020129,
-+	0x00020109,
-+	0x00020119,
-+	0x0002012a,
-+	0x0002012b,
-+	0x0002012c,
-+	0x0002012d,
-+	0x0002012e,
-+	0x0002012f,
-+	0x00000043,
-+	0x00000055,
-+	0x00001043,
-+	0x00001055,
-+	0x00002043,
-+	0x00002055,
-+	0x00003043,
-+	0x00003055,
-+	0x00004043,
-+	0x00004055,
-+	0x00005043,
-+	0x00005055,
-+	0x00006043,
-+	0x00006055,
-+	0x00007043,
-+	0x00007055,
-+	0x00008043,
-+	0x00008055,
-+	0x00009043,
-+	0x00009055,
-+	0x0000a043,
-+	0x0000a055,
-+	0x0000b043,
-+	0x0000b055,
-+	0x0002007d,
-+	0x00020020,
-+	0x0012007d,
-+	0x00120020,
-+	0x0022007d,
-+	0x00220020,
-+	0x0032007d,
-+	0x00320020,
-+	0x00020077,
-+	0x00020072,
-+	0x00020073,
-+	0x00020005,
-+	0x000200cb,
-+	0x00000080,
-+	0x00100080,
-+	0x00200080,
-+	0x00300080,
-+	0x00001080,
-+	0x00101080,
-+	0x00201080,
-+	0x00301080,
-+	0x00002080,
-+	0x00102080,
-+	0x00202080,
-+	0x00302080,
-+	0x00003080,
-+	0x00103080,
-+	0x00203080,
-+	0x00303080,
-+	0x00004080,
-+	0x00104080,
-+	0x00204080,
-+	0x00304080,
-+	0x00005080,
-+	0x00105080,
-+	0x00205080,
-+	0x00305080,
-+	0x00006080,
-+	0x00106080,
-+	0x00206080,
-+	0x00306080,
-+	0x00007080,
-+	0x00107080,
-+	0x00207080,
-+	0x00307080,
-+	0x00008080,
-+	0x00108080,
-+	0x00208080,
-+	0x00308080,
-+	0x00009080,
-+	0x00109080,
-+	0x00209080,
-+	0x00309080,
-+	0x0000a080,
-+	0x0010a080,
-+	0x0020a080,
-+	0x0030a080,
-+	0x0000b080,
-+	0x0010b080,
-+	0x0020b080,
-+	0x0030b080,
-+	0x000100c0,
-+	0x00010068,
-+	0x00010040,
-+	0x00010030,
-+	0x00010062,
-+	0x000101c0,
-+	0x00010168,
-+	0x00010140,
-+	0x00010130,
-+	0x00010162,
-+	0x000102c0,
-+	0x00010268,
-+	0x00010240,
-+	0x00010230,
-+	0x00010262,
-+	0x000103c0,
-+	0x00010368,
-+	0x00010340,
-+	0x00010330,
-+	0x00010362,
-+	0x000104c0,
-+	0x00010468,
-+	0x00010440,
-+	0x00010430,
-+	0x00010462,
-+	0x000105c0,
-+	0x00010568,
-+	0x00010540,
-+	0x00010530,
-+	0x00010562,
-+	0x000106c0,
-+	0x00010668,
-+	0x00010640,
-+	0x00010630,
-+	0x00010662,
-+	0x000107c0,
-+	0x00010768,
-+	0x00010740,
-+	0x00010730,
-+	0x00010762,
-+	0x000108c0,
-+	0x00010868,
-+	0x00010840,
-+	0x00010830,
-+	0x00010862,
-+	0x000100d0,
-+	0x0001008c,
-+	0x00010090,
-+	0x00010080,
-+	0x000101d0,
-+	0x0001018c,
-+	0x00010190,
-+	0x00010180,
-+	0x000100c1,
-+	0x00010069,
-+	0x000101c1,
-+	0x00010169,
-+	0x000102c1,
-+	0x00010269,
-+	0x000103c1,
-+	0x00010369,
-+	0x000104c1,
-+	0x00010469,
-+	0x000105c1,
-+	0x00010569,
-+	0x000106c1,
-+	0x00010669,
-+	0x000107c1,
-+	0x00010769,
-+	0x000108c1,
-+	0x00010869,
-+	0x000100d1,
-+	0x0001008d,
-+	0x00010091,
-+	0x00010081,
-+	0x000101d1,
-+	0x0001018d,
-+	0x00010191,
-+	0x00010181,
-+	0x00010020,
-+	0x000100ae,
-+	0x000100af,
-+	0x00010048,
-+	0x00010041,
-+	0x0001004b,
-+	0x0001004d,
-+	0x00010049,
-+	0x00010043,
-+	0x0001005f,
-+	0x00010141,
-+	0x0001014b,
-+	0x0001014d,
-+	0x00010149,
-+	0x00010143,
-+	0x0001015f,
-+	0x001100c0,
-+	0x001101c0,
-+	0x001102c0,
-+	0x001103c0,
-+	0x001104c0,
-+	0x001105c0,
-+	0x001106c0,
-+	0x001107c0,
-+	0x001108c0,
-+	0x001100d0,
-+	0x0011008c,
-+	0x00110090,
-+	0x00110080,
-+	0x001101d0,
-+	0x0011018c,
-+	0x00110190,
-+	0x00110180,
-+	0x001100c1,
-+	0x001101c1,
-+	0x001102c1,
-+	0x001103c1,
-+	0x001104c1,
-+	0x001105c1,
-+	0x001106c1,
-+	0x001107c1,
-+	0x001108c1,
-+	0x001100d1,
-+	0x0011008d,
-+	0x00110091,
-+	0x00110081,
-+	0x001101d1,
-+	0x0011018d,
-+	0x00110191,
-+	0x00110181,
-+	0x00110020,
-+	0x001100ae,
-+	0x001100af,
-+	0x00110048,
-+	0x00110041,
-+	0x0011004b,
-+	0x0011004d,
-+	0x00110049,
-+	0x00110043,
-+	0x0011005f,
-+	0x00110141,
-+	0x0011014b,
-+	0x0011014d,
-+	0x00110149,
-+	0x00110143,
-+	0x0011015f,
-+	0x002100c0,
-+	0x002101c0,
-+	0x002102c0,
-+	0x002103c0,
-+	0x002104c0,
-+	0x002105c0,
-+	0x002106c0,
-+	0x002107c0,
-+	0x002108c0,
-+	0x002100d0,
-+	0x0021008c,
-+	0x00210090,
-+	0x00210080,
-+	0x002101d0,
-+	0x0021018c,
-+	0x00210190,
-+	0x00210180,
-+	0x002100c1,
-+	0x002101c1,
-+	0x002102c1,
-+	0x002103c1,
-+	0x002104c1,
-+	0x002105c1,
-+	0x002106c1,
-+	0x002107c1,
-+	0x002108c1,
-+	0x002100d1,
-+	0x0021008d,
-+	0x00210091,
-+	0x00210081,
-+	0x002101d1,
-+	0x0021018d,
-+	0x00210191,
-+	0x00210181,
-+	0x00210020,
-+	0x002100ae,
-+	0x002100af,
-+	0x00210048,
-+	0x00210041,
-+	0x0021004b,
-+	0x0021004d,
-+	0x00210049,
-+	0x00210043,
-+	0x0021005f,
-+	0x00210141,
-+	0x0021014b,
-+	0x0021014d,
-+	0x00210149,
-+	0x00210143,
-+	0x0021015f,
-+	0x003100c0,
-+	0x003101c0,
-+	0x003102c0,
-+	0x003103c0,
-+	0x003104c0,
-+	0x003105c0,
-+	0x003106c0,
-+	0x003107c0,
-+	0x003108c0,
-+	0x003100d0,
-+	0x0031008c,
-+	0x00310090,
-+	0x00310080,
-+	0x003101d0,
-+	0x0031018c,
-+	0x00310190,
-+	0x00310180,
-+	0x003100c1,
-+	0x003101c1,
-+	0x003102c1,
-+	0x003103c1,
-+	0x003104c1,
-+	0x003105c1,
-+	0x003106c1,
-+	0x003107c1,
-+	0x003108c1,
-+	0x003100d1,
-+	0x0031008d,
-+	0x00310091,
-+	0x00310081,
-+	0x003101d1,
-+	0x0031018d,
-+	0x00310191,
-+	0x00310181,
-+	0x00310020,
-+	0x003100ae,
-+	0x003100af,
-+	0x00310048,
-+	0x00310041,
-+	0x0031004b,
-+	0x0031004d,
-+	0x00310049,
-+	0x00310043,
-+	0x0031005f,
-+	0x00310141,
-+	0x0031014b,
-+	0x0031014d,
-+	0x00310149,
-+	0x00310143,
-+	0x0031015f,
-+	0x000100aa,
-+	0x00010001,
-+	0x000100a0,
-+	0x000100a1,
-+	0x000100a2,
-+	0x000100a3,
-+	0x000100a4,
-+	0x000100a5,
-+	0x000100a6,
-+	0x000100a7,
-+	0x00010000,
-+	0x0001004a,
-+	0x000110c0,
-+	0x00011068,
-+	0x00011040,
-+	0x00011030,
-+	0x00011062,
-+	0x000111c0,
-+	0x00011168,
-+	0x00011140,
-+	0x00011130,
-+	0x00011162,
-+	0x000112c0,
-+	0x00011268,
-+	0x00011240,
-+	0x00011230,
-+	0x00011262,
-+	0x000113c0,
-+	0x00011368,
-+	0x00011340,
-+	0x00011330,
-+	0x00011362,
-+	0x000114c0,
-+	0x00011468,
-+	0x00011440,
-+	0x00011430,
-+	0x00011462,
-+	0x000115c0,
-+	0x00011568,
-+	0x00011540,
-+	0x00011530,
-+	0x00011562,
-+	0x000116c0,
-+	0x00011668,
-+	0x00011640,
-+	0x00011630,
-+	0x00011662,
-+	0x000117c0,
-+	0x00011768,
-+	0x00011740,
-+	0x00011730,
-+	0x00011762,
-+	0x000118c0,
-+	0x00011868,
-+	0x00011840,
-+	0x00011830,
-+	0x00011862,
-+	0x000110d0,
-+	0x0001108c,
-+	0x00011090,
-+	0x00011080,
-+	0x000111d0,
-+	0x0001118c,
-+	0x00011190,
-+	0x00011180,
-+	0x000110c1,
-+	0x00011069,
-+	0x000111c1,
-+	0x00011169,
-+	0x000112c1,
-+	0x00011269,
-+	0x000113c1,
-+	0x00011369,
-+	0x000114c1,
-+	0x00011469,
-+	0x000115c1,
-+	0x00011569,
-+	0x000116c1,
-+	0x00011669,
-+	0x000117c1,
-+	0x00011769,
-+	0x000118c1,
-+	0x00011869,
-+	0x000110d1,
-+	0x0001108d,
-+	0x00011091,
-+	0x00011081,
-+	0x000111d1,
-+	0x0001118d,
-+	0x00011191,
-+	0x00011181,
-+	0x00011020,
-+	0x000110ae,
-+	0x000110af,
-+	0x00011048,
-+	0x00011041,
-+	0x0001104b,
-+	0x0001104d,
-+	0x00011049,
-+	0x00011043,
-+	0x0001105f,
-+	0x00011141,
-+	0x0001114b,
-+	0x0001114d,
-+	0x00011149,
-+	0x00011143,
-+	0x0001115f,
-+	0x001110c0,
-+	0x001111c0,
-+	0x001112c0,
-+	0x001113c0,
-+	0x001114c0,
-+	0x001115c0,
-+	0x001116c0,
-+	0x001117c0,
-+	0x001118c0,
-+	0x001110d0,
-+	0x0011108c,
-+	0x00111090,
-+	0x00111080,
-+	0x001111d0,
-+	0x0011118c,
-+	0x00111190,
-+	0x00111180,
-+	0x001110c1,
-+	0x001111c1,
-+	0x001112c1,
-+	0x001113c1,
-+	0x001114c1,
-+	0x001115c1,
-+	0x001116c1,
-+	0x001117c1,
-+	0x001118c1,
-+	0x001110d1,
-+	0x0011108d,
-+	0x00111091,
-+	0x00111081,
-+	0x001111d1,
-+	0x0011118d,
-+	0x00111191,
-+	0x00111181,
-+	0x00111020,
-+	0x001110ae,
-+	0x001110af,
-+	0x00111048,
-+	0x00111041,
-+	0x0011104b,
-+	0x0011104d,
-+	0x00111049,
-+	0x00111043,
-+	0x0011105f,
-+	0x00111141,
-+	0x0011114b,
-+	0x0011114d,
-+	0x00111149,
-+	0x00111143,
-+	0x0011115f,
-+	0x002110c0,
-+	0x002111c0,
-+	0x002112c0,
-+	0x002113c0,
-+	0x002114c0,
-+	0x002115c0,
-+	0x002116c0,
-+	0x002117c0,
-+	0x002118c0,
-+	0x002110d0,
-+	0x0021108c,
-+	0x00211090,
-+	0x00211080,
-+	0x002111d0,
-+	0x0021118c,
-+	0x00211190,
-+	0x00211180,
-+	0x002110c1,
-+	0x002111c1,
-+	0x002112c1,
-+	0x002113c1,
-+	0x002114c1,
-+	0x002115c1,
-+	0x002116c1,
-+	0x002117c1,
-+	0x002118c1,
-+	0x002110d1,
-+	0x0021108d,
-+	0x00211091,
-+	0x00211081,
-+	0x002111d1,
-+	0x0021118d,
-+	0x00211191,
-+	0x00211181,
-+	0x00211020,
-+	0x002110ae,
-+	0x002110af,
-+	0x00211048,
-+	0x00211041,
-+	0x0021104b,
-+	0x0021104d,
-+	0x00211049,
-+	0x00211043,
-+	0x0021105f,
-+	0x00211141,
-+	0x0021114b,
-+	0x0021114d,
-+	0x00211149,
-+	0x00211143,
-+	0x0021115f,
-+	0x003110c0,
-+	0x003111c0,
-+	0x003112c0,
-+	0x003113c0,
-+	0x003114c0,
-+	0x003115c0,
-+	0x003116c0,
-+	0x003117c0,
-+	0x003118c0,
-+	0x003110d0,
-+	0x0031108c,
-+	0x00311090,
-+	0x00311080,
-+	0x003111d0,
-+	0x0031118c,
-+	0x00311190,
-+	0x00311180,
-+	0x003110c1,
-+	0x003111c1,
-+	0x003112c1,
-+	0x003113c1,
-+	0x003114c1,
-+	0x003115c1,
-+	0x003116c1,
-+	0x003117c1,
-+	0x003118c1,
-+	0x003110d1,
-+	0x0031108d,
-+	0x00311091,
-+	0x00311081,
-+	0x003111d1,
-+	0x0031118d,
-+	0x00311191,
-+	0x00311181,
-+	0x00311020,
-+	0x003110ae,
-+	0x003110af,
-+	0x00311048,
-+	0x00311041,
-+	0x0031104b,
-+	0x0031104d,
-+	0x00311049,
-+	0x00311043,
-+	0x0031105f,
-+	0x00311141,
-+	0x0031114b,
-+	0x0031114d,
-+	0x00311149,
-+	0x00311143,
-+	0x0031115f,
-+	0x000110aa,
-+	0x00011001,
-+	0x000110a0,
-+	0x000110a1,
-+	0x000110a2,
-+	0x000110a3,
-+	0x000110a4,
-+	0x000110a5,
-+	0x000110a6,
-+	0x000110a7,
-+	0x00011000,
-+	0x0001104a,
-+};
-+
-+static const u32 ddrphy_fsp_cfg[DDRPHY_QB_FSP_SIZE] = {
-+	0x00054026, /* TrainedVREFDQ_A0,   Byte offset 0x4d,      CSR Addr 0x54026 */
-+	0x00054027, /* TrainedVREFDQ_A1,   Byte offset 0x4e,      CSR Addr 0x54027 */
-+	0x00054040, /* TrainedVREFDQ_B0&1, Byte offset 0x80&0x81, CSR Addr 0x54040 */
-+};
 +
 +struct ddrphy_qb_state qb_state;
 +
-+int ddrphy_qb_save(void)
++static void ddrphy_w(u32 addr, u32 offset, u32 value)
++{
++	u32 val = dwc_ddrphy_apb_rd(addr);
++	bool hight = (offset % 2);
++
++	val &= (hight ? 0x00FF : 0xFF00);
++	val |= value << (hight ? 8 : 0);
++
++	dwc_ddrphy_apb_wr(addr, val);
++}
++
++static int ddrphy_qb_restore(struct dram_timing_info *info, int fsp_id)
 +{
 +	int i;
++	u32 to_addr;
++	struct dram_fsp_msg *fsp_msg;
++	struct dram_cfg_param *dram_cfg;
++
++	fsp_msg = &info->fsp_msg[fsp_id];
++	for (i = 0; i < fsp_msg->fsp_cfg_num; i++) {
++		dram_cfg = &fsp_msg->fsp_cfg[i];
++		dwc_ddrphy_apb_wr(dram_cfg->reg, dram_cfg->val);
++	}
 +
 +	/* enable the ddrphy apb */
-+	dwc_ddrphy_apb_wr(0xd0000, 0x0);
++	dwc_ddrphy_apb_wr(0xd0000, 0x00);
++	dwc_ddrphy_apb_wr(0x54008, 0x01); /* SequenceCtrl = 0x1 (DevInit Only)*/
++	ddrphy_w(0x5400c, 0x19, 0x1);     /* Lp4Quickboot = 0x1 */
 +
-+	for (i = 0; i < DDRPHY_QB_CSR_SIZE; i++)
-+		qb_state.csr[i] = dwc_ddrphy_apb_rd(ddrphy_csr_cfg[i]);
++	/* Adjust MR14_xy if pstate=0 and 2D training data collected during training phase */
++	if (fsp_id == 0 && (qb_state.flags & DDRPHY_QB_FLAG_2D)) {
++		ddrphy_w(0x5401c, 0x39, qb_state.fsp[0] >> 8);   /* TrainedVREFDQ_A0 -> MR14_A0 */
++		ddrphy_w(0x54022, 0x45, qb_state.fsp[1] & 0xFF); /* TrainedVREFDQ_A1 -> MR14_A1 */
++		ddrphy_w(0x54036, 0x6c, qb_state.fsp[2] & 0xFF); /* TrainedVREFDQ_B0 -> MR14_B0 */
++		ddrphy_w(0x5403c, 0x78, qb_state.fsp[2] >> 8);   /* TrainedVREFDQ_B1 -> MR14_B1 */
++	}
++
++	/* save CSRs to address starting with 0x54800 */
++	for (i = 0, to_addr = 0x54800; i < DDRPHY_QB_CSR_SIZE; i++, to_addr++)
++		dwc_ddrphy_apb_wr(to_addr, qb_state.csr[i]);
 +
 +	/* disable the ddrphy apb */
-+	dwc_ddrphy_apb_wr(0xd0000, 0x1);
++	dwc_ddrphy_apb_wr(0xd0000, 0x01);
 +
-+	qb_state.crc = crc32(0, (void *)&qb_state.flags, DDRPHY_QB_STATE_SIZE);
 +	return 0;
 +}
 +
-+void ddrphy_init_read_msg_block(enum fw_type type)
++int ddr_cfg_phy_qb(struct dram_timing_info *dram_timing, int fsp_id)
 +{
-+	int i;
++	int ret;
 +
-+	if (type != FW_2D_IMAGE)
-+		return;
++	/* MemReset Toggle */
++	dwc_ddrphy_apb_wr(0xd0000, 0x0);
++	dwc_ddrphy_apb_wr(0x20060, 0x3);
++	dwc_ddrphy_apb_wr(0x2008F, 0x1);
 +
-+	qb_state.flags |= DDRPHY_QB_FLAG_2D;
-+	for (i = 0; i < DDRPHY_QB_FSP_SIZE; i++)
-+		qb_state.fsp[i] = dwc_ddrphy_apb_rd(ddrphy_fsp_cfg[i]);
++	/* load the dram quick boot firmware image */
++	dwc_ddrphy_apb_wr(0xd0000, 0x0);
++	ddr_load_train_firmware(FW_1D_IMAGE);
++	ddrphy_qb_restore(dram_timing, fsp_id);
++
++	/* excute the firmware */
++	dwc_ddrphy_apb_wr(0xd0000, 0x0);
++	dwc_ddrphy_apb_wr(0xc0080, 0x3);
++	dwc_ddrphy_apb_wr(0xd0031, 0x1);
++	dwc_ddrphy_apb_wr(0xd0000, 0x1);
++	dwc_ddrphy_apb_wr(0xd0099, 0x9);
++	dwc_ddrphy_apb_wr(0xd0099, 0x1);
++	dwc_ddrphy_apb_wr(0xd0099, 0x0);
++
++	/* Wait for the quick boot firmware to complete */
++	ret = wait_ddrphy_training_complete();
++	if (ret)
++		return ret;
++
++	/* Halt the microcontroller. */
++	dwc_ddrphy_apb_wr(0xd0099, 0x1);
++	dwc_ddrphy_apb_wr(0xd0000, 0x0);
++
++	get_trained_CDD(0);
++
++	/* step I Configure PHY for hardware control */
++	dwc_ddrphy_apb_wr(0xd00e7, 0x400);
++	dwc_ddrphy_apb_wr(0xc0080, 0x2);
++	dwc_ddrphy_apb_wr(0xd0000, 0x1);
++
++	return 0;
 +}
-diff --git a/drivers/ddr/imx/phy/ddrphy_utils.c b/drivers/ddr/imx/phy/ddrphy_utils.c
-index 8e350de8315e40372f583c7a84c3ee5ed8b827d9..33275656469ecc24853f228b760229572e73aa48 100644
---- a/drivers/ddr/imx/phy/ddrphy_utils.c
-+++ b/drivers/ddr/imx/phy/ddrphy_utils.c
-@@ -184,6 +184,6 @@ void ddrphy_init_set_dfi_clk(unsigned int drate)
+diff --git a/drivers/ddr/imx/phy/helper.c b/drivers/ddr/imx/phy/helper.c
+index b0dfc3a0b4f3f8cbbefc27b122b360e64d6cd6a2..877cc4fb42d72222cb889f0edb1182265b853d76 100644
+--- a/drivers/ddr/imx/phy/helper.c
++++ b/drivers/ddr/imx/phy/helper.c
+@@ -13,6 +13,9 @@
+ #include <asm/arch/ddr.h>
+ #include <asm/arch/ddr.h>
+ #include <asm/sections.h>
++#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
++#include <u-boot/crc.h>
++#endif
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -30,7 +33,12 @@ binman_sym_declare(ulong, ddr_1d_imem_fw, size);
+ binman_sym_declare(ulong, ddr_1d_dmem_fw, image_pos);
+ binman_sym_declare(ulong, ddr_1d_dmem_fw, size);
+ 
+-#if !IS_ENABLED(CONFIG_IMX8M_DDR3L)
++#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
++binman_sym_declare(ulong, ddr_qb_state, image_pos);
++binman_sym_declare(ulong, ddr_qb_state, size);
++#endif
++
++#if !IS_ENABLED(CONFIG_IMX8M_DDR3L) && !IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
+ binman_sym_declare(ulong, ddr_2d_imem_fw, image_pos);
+ binman_sym_declare(ulong, ddr_2d_imem_fw, size);
+ 
+@@ -42,13 +50,21 @@ binman_sym_declare(ulong, ddr_2d_dmem_fw, size);
+ void ddr_load_train_firmware(enum fw_type type)
+ {
+ 	u32 tmp32, i;
+-	u32 error = 0;
+ 	unsigned long pr_to32, pr_from32;
+ 	uint32_t fw_offset = type ? IMEM_2D_OFFSET : 0;
+ 	unsigned long imem_start = (unsigned long)_end + fw_offset;
+ 	unsigned long dmem_start;
+ 	unsigned long imem_len = IMEM_LEN, dmem_len = DMEM_LEN;
+ 	static enum fw_type last_type = -1;
++#if defined(CONFIG_IMX_SNPS_DDR_PHY_QB)
++	unsigned long qbst_start;
++	unsigned long qbst_len = sizeof(struct ddrphy_qb_state);
++	int size;
++	u32 *to32 = (u32 *)&qb_state;
++	u32 crc;
++#else
++	u32 error = 0;
++#endif
+ 
+ 	/* If FW doesn't change, we can save the loading. */
+ 	if (last_type == type)
+@@ -65,6 +81,9 @@ void ddr_load_train_firmware(enum fw_type type)
+ #endif
+ 
+ 	dmem_start = imem_start + imem_len;
++#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
++	qbst_start = dmem_start + dmem_len;
++#endif
+ 
+ 	if (BINMAN_SYMS_OK) {
+ 		switch (type) {
+@@ -73,6 +92,10 @@ void ddr_load_train_firmware(enum fw_type type)
+ 			imem_len = binman_sym(ulong, ddr_1d_imem_fw, size);
+ 			dmem_start = binman_sym(ulong, ddr_1d_dmem_fw, image_pos);
+ 			dmem_len = binman_sym(ulong, ddr_1d_dmem_fw, size);
++#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
++			qbst_start = binman_sym(ulong, ddr_qb_state, image_pos);
++			qbst_len = binman_sym(ulong, ddr_qb_state, size);
++#endif
+ 			break;
+ 		case FW_2D_IMAGE:
+ #if !IS_ENABLED(CONFIG_IMX8M_DDR3L)
+@@ -111,6 +134,17 @@ void ddr_load_train_firmware(enum fw_type type)
+ 		i += 4;
  	}
+ 
++#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB)
++	size = qbst_len / sizeof(*to32);
++	pr_from32 = qbst_start;
++	for (i = 0; i < size; i += 1, pr_from32 += 4, to32 += 1)
++		(*to32) = readl(pr_from32);
++
++	crc = crc32(0, (void *)&qb_state.flags, DDRPHY_QB_STATE_SIZE);
++	if (crc != qb_state.crc)
++		log_err("DDRPHY TD CRC error FW BIN -> U-Boot: fw=0x%08x, uboot=0x%08x\n",
++			qb_state.crc, crc);
++#else
+ 	debug("check ddr_pmu_train_imem code\n");
+ 	pr_from32 = imem_start;
+ 	pr_to32 = IMEM_OFFSET_ADDR;
+@@ -154,6 +188,7 @@ void ddr_load_train_firmware(enum fw_type type)
+ 		printf("check ddr_pmu_train_dmem code fail=%d", error);
+ 	else
+ 		debug("check ddr_pmu_train_dmem code pass\n");
++#endif
  }
  
--void ddrphy_init_read_msg_block(enum fw_type type)
-+__weak void ddrphy_init_read_msg_block(enum fw_type type)
- {
- }
+ void ddrphy_trained_csr_save(struct dram_cfg_param *ddrphy_csr,
 
 -- 
 2.35.3
