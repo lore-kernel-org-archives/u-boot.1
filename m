@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D796FC83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:19:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FEFC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:20:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCC4383414;
-	Mon, 28 Jul 2025 17:14:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1362E83423;
+	Mon, 28 Jul 2025 17:14:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AC3OECHy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MWP6/sVp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56EBF82E26; Mon, 28 Jul 2025 16:58:58 +0200 (CEST)
+ id 3747582CBB; Mon, 28 Jul 2025 16:59:07 +0200 (CEST)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4FD282CA4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:58:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEB2C82CA4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:59:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEwXEn2783852;
- Mon, 28 Jul 2025 09:58:33 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEwkRK2783868;
+ Mon, 28 Jul 2025 09:58:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753714713;
- bh=WaeWMmpGfqBx+DlF4HGPhoO/P8MazTLdTeIG6L3m+nQ=;
+ s=ti-com-17Q1; t=1753714726;
+ bh=QJEE2uZESqSVcABToiCFtTmTmnkqWIS79b0EDIfKdlE=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=AC3OECHyIIRZgxw9vAry3sJFBj9bCwAWscAt4oUqqvVQyuDF84XF5eDhTKUNzdKGc
- yuZBbMQJ8dd0QT5X0epaTV8x3bnV0GVRFANGZTeWAE5S/gitiqbTdOdlVkfIXsPm0i
- tT8S1fli7oChBHBEuH1aQ1Seffov0LjWfndlWY0A=
+ b=MWP6/sVpaAgj1pL9Hd1VYll/hSYMVoKL4k7vhINtnLTpeAZaj1uq99nQ9B6Q2vSD7
+ 0V9RkpBzVpkFCWlV9/4xrGpWOFgy6hca4XseIi3vIfMHdfAK18qZ2ajZJPB1AXmWRv
+ wM2oHMO5H3tdf1ELnZ21zJo1+bEc8w7RPjTYSAbo=
 Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEwX721764664
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEwke72096686
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 28 Jul 2025 09:58:33 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE103.ent.ti.com
+ Mon, 28 Jul 2025 09:58:46 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE103.ent.ti.com
  (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
- Jul 2025 09:58:32 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2025 09:58:45 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 28 Jul 2025 09:58:32 -0500
+ Frontend Transport; Mon, 28 Jul 2025 09:58:45 -0500
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 56SEoZuY1924403; Mon, 28 Jul 2025 09:58:19 -0500
+ 56SEoZuZ1924403; Mon, 28 Jul 2025 09:58:32 -0500
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <vigneshr@ti.com>, <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
@@ -70,10 +70,10 @@ To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <joao.goncalves@toradex.com>
 CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <srk@ti.com>,
  <s-vadapalli@ti.com>
-Subject: [PATCH 35/45] configs: k2hk_evm_defconfig: Increase aneg timeout to
- 20000 ms
-Date: Mon, 28 Jul 2025 20:20:24 +0530
-Message-ID: <20250728145034.225997-36-s-vadapalli@ti.com>
+Subject: [PATCH 36/45] configs: k2hk_hs_evm_defconfig: Increase aneg timeout
+ to 20000 ms
+Date: Mon, 28 Jul 2025 20:20:25 +0530
+Message-ID: <20250728145034.225997-37-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250728145034.225997-1-s-vadapalli@ti.com>
 References: <20250728145034.225997-1-s-vadapalli@ti.com>
@@ -109,14 +109,14 @@ will benefit from an increased timeout.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- configs/k2hk_evm_defconfig | 1 +
+ configs/k2hk_hs_evm_defconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/configs/k2hk_evm_defconfig b/configs/k2hk_evm_defconfig
-index b3756c60efc..67032fcc189 100644
---- a/configs/k2hk_evm_defconfig
-+++ b/configs/k2hk_evm_defconfig
-@@ -83,6 +83,7 @@ CONFIG_NAND_DAVINCI=y
+diff --git a/configs/k2hk_hs_evm_defconfig b/configs/k2hk_hs_evm_defconfig
+index 0025412b10f..f8930399e36 100644
+--- a/configs/k2hk_hs_evm_defconfig
++++ b/configs/k2hk_hs_evm_defconfig
+@@ -57,6 +57,7 @@ CONFIG_NAND_DAVINCI=y
  CONFIG_DM_SPI_FLASH=y
  CONFIG_SPI_FLASH_STMICRO=y
  CONFIG_PHYLIB=y
