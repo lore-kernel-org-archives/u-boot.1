@@ -4,53 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38067C87FC9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 14:13:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99E8C87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 14:13:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A39982F6F;
-	Mon, 28 Jul 2025 16:13:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 142D582CBB;
+	Mon, 28 Jul 2025 16:13:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JoF0URZU";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="fPkUbjCn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E43682E26; Mon, 28 Jul 2025 16:12:17 +0200 (CEST)
+ id EEB2382E26; Mon, 28 Jul 2025 16:12:21 +0200 (CEST)
 Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [217.70.183.196])
+ [IPv6:2001:4b98:dc4:8::224])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1DED82CA4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:12:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35BBB82CA4
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:12:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=antoine.picard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 3B3B8443A1;
- Mon, 28 Jul 2025 14:12:13 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 8749E41DE2;
+ Mon, 28 Jul 2025 14:12:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1753711933;
+ t=1753711938;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=XT90lEFd6ewoCYlS1nIectOdFTGuQS3o0Vo+V20TKC0=;
- b=JoF0URZU1m08pflY17hE548qxNbDSPEG1eFI4jLSH+GOmjUlkjQrbqVQE69je/M+TPtHD3
- uKVLzlLTekqZoxiqAGbnRqRxnSeXf9kpN2BccJaLUYbpmo61iyAAoWNqhlWy4pKJ4c/IUn
- 7+irjvGdU0uMo5gMJaSYykOOc3C7d8H5RuyyNRx4hsz35MkNC/e+Ub9jP8LIZ3DFm4PZww
- oB2ErIxhPIdJe+cXhjntKIAq3p5WwxFv4U3uGRAVveXgKn3XeWW7A9SydwvZ3nLRRZtfMb
- OmVmiyIDhXySmFtVjtLacgt0S1SAva/TD3IyAMhPeXp6aveivaFAdlByRYO42Q==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=28hs36x6/l+dTcsb+mN+OYY7NWK1jjVZgsn54elLDSo=;
+ b=fPkUbjCn/nU2rAyIId/XXOfyRiZDrys3Q65vpHAyPl7XmTYBzj3gyv3FXXxiUjQsYRFGr1
+ IiwDzKcbcy8hnQ1APsDJxfY4ARCHHVYTCw5wVBIZiOOCmmLwcF8bzftSW6Fepjho4YJc9U
+ Vj2fWnz5i9gQWR+kBVa+45RkP+XaRpPGSMLwNKJaOBO08tVMOTWFCCOzjdrth1qqWUiXBz
+ dw9oxpxfwHB0qPeW4NC9Ol/KbdGKeewuTh2NKyZnGLzwfC+zx+s8+WCok8T+0Uj9B/yubJ
+ LmvUmE4jBlvLEh5e7tUNJCP3NEOdUwmDNyUFdhgz4ATfdNVkGMCCD9jxuoHOng==
 From: Antoine Picard <antoine.picard@bootlin.com>
 To: u-boot@lists.denx.de
-Cc: antoine.picard@bootlin.com
-Subject: [PATCH u-boot v1 0/2] Add initial support for the i.MX93 11x11
-Date: Mon, 28 Jul 2025 16:12:06 +0200
-Message-ID: <20250728141209.92123-1-antoine.picard@bootlin.com>
+Cc: antoine.picard@bootlin.com,
+	Antoine Picard <antoinepicard38@gmail.com>
+Subject: [PATCH u-boot v1 1/2] arm: dts: imx93: add device tree for
+ imx93-11x11-frdm board
+Date: Mon, 28 Jul 2025 16:12:07 +0200
+Message-ID: <20250728141209.92123-2-antoine.picard@bootlin.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250728141209.92123-1-antoine.picard@bootlin.com>
+References: <20250728141209.92123-1-antoine.picard@bootlin.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-GND-State: clean
 X-GND-Score: 0
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdelvdefjecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpeetnhhtohhinhgvucfrihgtrghrugcuoegrnhhtohhinhgvrdhpihgtrghrugessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepfedvtdfhveekgeekgfdvjeegvedttefgledtgedtgfehtefhheegleetudetgeegnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopegrnhhtohhinhgvqdgirffuqddufedqleefjedtrddrpdhmrghilhhfrhhomheprghnthhoihhnvgdrphhitggrrhgusegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedvpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtoheprghnthhoihhnvgdrphhitggrrhgusegsohhothhlihhnrdgtohhm
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdelvdefjecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeetnhhtohhinhgvucfrihgtrghrugcuoegrnhhtohhinhgvrdhpihgtrghrugessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnheptddvudetveffteffledtueefveejfeetkeefuedvieejtdeuueeuteekjeduueehnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopegrnhhtohhinhgvqdgirffuqddufedqleefjedtrddrpdhmrghilhhfrhhomheprghnthhoihhnvgdrphhitggrrhgusegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeefpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtoheprghnthhoihhnvgdrphhitggrrhgusegsohhothhlihhnrdgtohhmpdhrtghpthhtoheprghnthhoihhnvghpihgtrghrugefkeesghhmrghilhdrtghomh
 X-GND-Sasl: antoine.picard@bootlin.com
 X-Mailman-Approved-At: Mon, 28 Jul 2025 16:13:10 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -69,52 +74,678 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series introduces initial support for the i.MX93 11x11 FRDM
-development board
-in U-Boot. It includes:
+From: Antoine Picard <antoinepicard38@gmail.com>
 
-- Device tree files tailored for the board.
-- Board configuration header defining memory layout and basic hardware
-addresses.
-- Defconfig and Kconfig entries to enable building for the new board.
+Add the following device tree files for the i.MX93 11x11 FRDM board:
 
-A minimal working configuration has been tested on the hardware but
-without secure os. 
+  - `imx93-11x11-frdm.dts`: base device tree for the board
+  - `imx93-11x11-frdm-u-boot.dtsi`: U-Boot specific overrides
+  - Update to `arch/arm/dts/Makefile` to build the new DTS
 
-Feedback and suggestions are welcome.
+These files provide the initial DT support for U-Boot on the i.MX93 FRDM
+platform.
 
 Signed-off-by: Antoine Picard <antoine.picard@bootlin.com>
-
-Antoine Picard (2):
-  arm: dts: imx93: add device tree for imx93-11x11-frdm board
-  board: freescale: add initial support for imx93_frdm board
-
- arch/arm/dts/Makefile                         |    1 +
- arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi     |   53 +
- arch/arm/dts/imx93-11x11-frdm.dts             |  574 +++++
- arch/arm/mach-imx/imx9/Kconfig                |    6 +
- board/freescale/imx93_frdm/Kconfig            |   19 +
- board/freescale/imx93_frdm/MAINTAINERS        |    5 +
- board/freescale/imx93_frdm/Makefile           |   16 +
- board/freescale/imx93_frdm/imx93_frdm.c       |  350 +++
- .../freescale/imx93_frdm/lpddr4x_2gb_timing.c | 1996 ++++++++++++++++
- .../imx93_frdm/lpddr4x_ecc_2gb_timing.c       | 1997 +++++++++++++++++
- board/freescale/imx93_frdm/spl.c              |  201 ++
- configs/imx93_11x11_frdm_defconfig            |  158 ++
- include/configs/imx93_frdm.h                  |   27 +
- 13 files changed, 5403 insertions(+)
+---
+ arch/arm/dts/Makefile                     |   1 +
+ arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi |  53 ++
+ arch/arm/dts/imx93-11x11-frdm.dts         | 574 ++++++++++++++++++++++
+ 3 files changed, 628 insertions(+)
  create mode 100644 arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
  create mode 100644 arch/arm/dts/imx93-11x11-frdm.dts
- create mode 100644 board/freescale/imx93_frdm/Kconfig
- create mode 100644 board/freescale/imx93_frdm/MAINTAINERS
- create mode 100644 board/freescale/imx93_frdm/Makefile
- create mode 100644 board/freescale/imx93_frdm/imx93_frdm.c
- create mode 100644 board/freescale/imx93_frdm/lpddr4x_2gb_timing.c
- create mode 100644 board/freescale/imx93_frdm/lpddr4x_ecc_2gb_timing.c
- create mode 100644 board/freescale/imx93_frdm/spl.c
- create mode 100644 configs/imx93_11x11_frdm_defconfig
- create mode 100644 include/configs/imx93_frdm.h
 
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 32b698a7f41..2792a101b51 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -918,6 +918,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+ 	imx8mq-librem5-r4.dtb
+ 
+ dtb-$(CONFIG_ARCH_IMX9) += \
++	imx93-11x11-frdm.dtb \
+ 	imx93-var-som-symphony.dtb \
+ 	imx93-phyboard-segin.dtb
+ 
+diff --git a/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi b/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
+new file mode 100644
+index 00000000000..5cecc6e4cf8
+--- /dev/null
++++ b/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
+@@ -0,0 +1,53 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2024-2025 NXP
++ */
++
++#include "imx93-u-boot.dtsi"
++
++&pinctrl_uart1 {
++	bootph-pre-ram;
++};
++
++&lpuart1 {
++	bootph-pre-ram;
++};
++
++&s4muap {
++	bootph-some-ram;
++	status = "okay";
++};
++
++&clk {
++	bootph-pre-ram;
++};
++
++&osc_32k {
++	bootph-pre-ram;
++};
++
++&osc_24m {
++	bootph-pre-ram;
++};
++
++&clk_ext1 {
++	bootph-pre-ram;
++};
++
++&lpi2c2 {
++	bootph-pre-ram;
++    status = "okay";
++    clock-frequency = <100000>;
++};
++
++&pinctrl_lpi2c2 {
++    bootph-pre-ram;
++};
++
++&{/soc@0/bus@44000000/i2c@44350000/pmic@25} {
++	bootph-pre-ram;
++};
++
++&{/soc@0/bus@44000000/i2c@44350000/pmic@25/regulators} {
++	bootph-pre-ram;
++};
+\ No newline at end of file
+diff --git a/arch/arm/dts/imx93-11x11-frdm.dts b/arch/arm/dts/imx93-11x11-frdm.dts
+new file mode 100644
+index 00000000000..1e96b1f5605
+--- /dev/null
++++ b/arch/arm/dts/imx93-11x11-frdm.dts
+@@ -0,0 +1,574 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright 2024-2025 NXP
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/usb/pd.h>
++#include "imx93.dtsi"
++
++/ {
++	model = "NXP i.MX93 11X11 FRDM board";
++	compatible = "fsl,imx93-11x11-frdm", "fsl,imx93";
++
++	aliases {
++		rtc0 = &pcf2131;
++	 };
++
++	chosen {
++		bootargs = "console=ttyLP0,115200";
++		stdout-path = &lpuart1;
++	};
++
++	reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		linux,cma {
++			compatible = "shared-dma-pool";
++			reusable;
++			alloc-ranges = <0 0x80000000 0 0x40000000>;
++			size = <0 0x10000000>;
++			linux,cma-default;
++		};
++	};
++
++	reg_can2_stby: regulator-can2-stby {
++		compatible = "regulator-fixed";
++		regulator-name = "can2-stby";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		gpio = <&pcal6524 23 GPIO_ACTIVE_LOW>;
++		enable-active-high;
++	};
++
++	reg_vref_1v8: regulator-adc-vref {
++		compatible = "regulator-fixed";
++		regulator-name = "vref_1v8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++
++	reg_usdhc2_vmmc: regulator-usdhc2 {
++		compatible = "regulator-fixed";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_reg_usdhc2_vmmc>;
++		regulator-name = "VSD_3V3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		gpio = <&gpio3 7 GPIO_ACTIVE_HIGH>;
++		off-on-delay-us = <12000>;
++		enable-active-high;
++	};
++
++	reg_vdd_12v: regulator-vdd-12v {
++		compatible = "regulator-fixed";
++		regulator-name = "reg_vdd_12v";
++		regulator-min-microvolt = <12000000>;
++		regulator-max-microvolt = <12000000>;
++		gpio = <&pcal6524 14 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++    leds {
++    compatible = "gpio-leds";
++
++		led_red {
++			label = "led-red";
++			gpios = <&gpio2 13 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++
++		led_green {
++			label = "led-green";
++			gpios = <&gpio2 4 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++
++		led_blue {
++			label = "led-blue";
++			gpios = <&gpio2 12 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++	};
++};
++
++
++&adc1 {
++	vref-supply = <&reg_vref_1v8>;
++	status = "okay";
++};
++
++&mu1 {
++	status = "okay";
++};
++
++&mu2 {
++	status = "okay";
++};
++
++&eqos {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_eqos>;
++	phy-mode = "rgmii-id";
++	phy-handle = <&ethphy1>;
++	status = "okay";
++
++	mdio {
++		compatible = "snps,dwmac-mdio";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		clock-frequency = <5000000>;
++
++		ethphy1: ethernet-phy@1 {
++			reg = <1>;
++			eee-broken-1000t;
++
++			reset-gpios = <&pcal6524 15 GPIO_ACTIVE_LOW>;
++			reset-assert-us = <15000>;
++			reset-deassert-us = <100000>;
++		};
++	};
++};
++
++&fec {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_fec>;
++	phy-mode = "rgmii-id";
++	phy-handle = <&ethphy2>;
++	fsl,magic-packet;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		clock-frequency = <5000000>;
++
++		ethphy2: ethernet-phy@2 {
++			reg = <2>;
++			eee-broken-1000t;
++		};
++	};
++};
++
++&lpi2c1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	clock-frequency = <400000>;
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&pinctrl_lpi2c1>;
++	pinctrl-1 = <&pinctrl_lpi2c1>;
++	status = "okay";
++};
++
++&lpi2c2 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	clock-frequency = <400000>;
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&pinctrl_lpi2c2>;
++	pinctrl-1 = <&pinctrl_lpi2c2>;
++	status = "okay";
++
++	pmic@25 {
++		compatible = "nxp,pca9451a";
++		reg = <0x25>;
++		interrupt-parent = <&pcal6524>;
++		interrupts = <11 IRQ_TYPE_EDGE_FALLING>;
++
++		regulators {
++			buck1: BUCK1 {
++				regulator-name = "BUCK1";
++				regulator-min-microvolt = <650000>;
++				regulator-max-microvolt = <2237500>;
++				regulator-boot-on;
++				regulator-always-on;
++				regulator-ramp-delay = <3125>;
++			};
++
++			buck2: BUCK2 {
++				regulator-name = "BUCK2";
++				regulator-min-microvolt = <600000>;
++				regulator-max-microvolt = <2187500>;
++				regulator-boot-on;
++				regulator-always-on;
++				regulator-ramp-delay = <3125>;
++			};
++
++			buck4: BUCK4{
++				regulator-name = "BUCK4";
++				regulator-min-microvolt = <600000>;
++				regulator-max-microvolt = <3400000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			buck5: BUCK5{
++				regulator-name = "BUCK5";
++				regulator-min-microvolt = <600000>;
++				regulator-max-microvolt = <3400000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			buck6: BUCK6 {
++				regulator-name = "BUCK6";
++				regulator-min-microvolt = <600000>;
++				regulator-max-microvolt = <3400000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			ldo1: LDO1 {
++				regulator-name = "LDO1";
++				regulator-min-microvolt = <1600000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			ldo4: LDO4 {
++				regulator-name = "LDO4";
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			ldo5: LDO5 {
++				regulator-name = "LDO5";
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++		};
++	};
++
++	pcal6524: gpio@22 {
++		compatible = "nxp,pcal6524";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_pcal6524>;
++		reg = <0x22>;
++		gpio-controller;
++		#gpio-cells = <2>;
++		interrupt-controller;
++		#interrupt-cells = <2>;
++		interrupt-parent = <&gpio3>;
++		interrupts = <27 IRQ_TYPE_EDGE_FALLING>;
++	};
++	eeprom: eeprom@50 {
++		compatible = "atmel,24c256";
++		reg = <0x50>;
++		pagesize = <64>;
++	};
++
++};
++
++&lpi2c3 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	clock-frequency = <400000>;
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&pinctrl_lpi2c3>;
++	pinctrl-1 = <&pinctrl_lpi2c3>;
++	status = "okay";
++
++	pcf2131: rtc@53 {
++		compatible = "nxp,pcf2131";
++		reg = <0x53>;
++		interrupt-parent = <&pcal6524>;
++		interrupts = <1 IRQ_TYPE_EDGE_FALLING>;
++		status = "okay";
++	};
++
++	ptn5110: tcpc@50 {
++		compatible = "nxp,ptn5110", "tcpci";
++		reg = <0x50>;
++		interrupt-parent = <&gpio3>;
++		interrupts = <27 IRQ_TYPE_EDGE_FALLING>;
++		status = "okay";
++
++		port {
++			typec1_dr_sw: endpoint {
++				remote-endpoint = <&usb1_drd_sw>;
++			};
++		};
++
++		typec1_con: connector {
++			compatible = "usb-c-connector";
++			label = "USB-C";
++			power-role = "dual";
++			data-role = "dual";
++			try-power-role = "sink";
++			source-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>;
++			sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)
++				     PDO_VAR(5000, 20000, 3000)>;
++			op-sink-microwatt = <15000000>;
++			self-powered;
++		};
++	};
++
++};
++
++&lpuart1 { /* console */
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart1>;
++	status = "okay";
++};
++
++&media_blk_ctrl {
++	status = "okay";
++};
++
++&usbotg1 {
++	dr_mode = "otg";
++	hnp-disable;
++	srp-disable;
++	adp-disable;
++	usb-role-switch;
++	disable-over-current;
++	samsung,picophy-pre-emp-curr-control = <3>;
++	samsung,picophy-dc-vol-level-adjust = <7>;
++	status = "okay";
++
++	port {
++		usb1_drd_sw: endpoint {
++			remote-endpoint = <&typec1_dr_sw>;
++		};
++	};
++};
++
++&usbotg2 {
++	dr_mode = "host";
++	disable-over-current;
++	samsung,picophy-pre-emp-curr-control = <3>;
++	samsung,picophy-dc-vol-level-adjust = <7>;
++	status = "okay";
++};
++
++&usdhc1 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
++	bus-width = <8>;
++	non-removable;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
++	cd-gpios = <&gpio3 00 GPIO_ACTIVE_LOW>;
++	vmmc-supply = <&reg_usdhc2_vmmc>;
++	bus-width = <4>;
++	status = "okay";
++	no-sdio;
++	no-mmc;
++};
++
++&usdhc3 {
++	status = "disabled";
++};
++
++&wdog3 {
++	status = "okay";
++};
++
++&iomuxc {
++	pinctrl_eqos: eqosgrp {
++		fsl,pins = <
++			MX93_PAD_ENET1_MDC__ENET_QOS_MDC			0x57e
++			MX93_PAD_ENET1_MDIO__ENET_QOS_MDIO			0x57e
++			MX93_PAD_ENET1_RD0__ENET_QOS_RGMII_RD0			0x57e
++			MX93_PAD_ENET1_RD1__ENET_QOS_RGMII_RD1			0x57e
++			MX93_PAD_ENET1_RD2__ENET_QOS_RGMII_RD2			0x57e
++			MX93_PAD_ENET1_RD3__ENET_QOS_RGMII_RD3			0x57e
++			MX93_PAD_ENET1_RXC__CCM_ENET_QOS_CLOCK_GENERATE_RX_CLK	0x5fe
++			MX93_PAD_ENET1_RX_CTL__ENET_QOS_RGMII_RX_CTL		0x57e
++			MX93_PAD_ENET1_TD0__ENET_QOS_RGMII_TD0			0x57e
++			MX93_PAD_ENET1_TD1__ENET_QOS_RGMII_TD1			0x57e
++			MX93_PAD_ENET1_TD2__ENET_QOS_RGMII_TD2			0x57e
++			MX93_PAD_ENET1_TD3__ENET_QOS_RGMII_TD3			0x57e
++			MX93_PAD_ENET1_TXC__CCM_ENET_QOS_CLOCK_GENERATE_TX_CLK	0x5fe
++			MX93_PAD_ENET1_TX_CTL__ENET_QOS_RGMII_TX_CTL		0x57e
++		>;
++	};
++
++	pinctrl_flexspi: flexspigrp {
++		fsl,pins = <
++			MX93_PAD_SD3_CMD__FLEXSPI1_A_SS0_B      0x3fe
++			MX93_PAD_SD3_CLK__FLEXSPI1_A_SCLK       0x3fe
++			MX93_PAD_SD3_DATA0__FLEXSPI1_A_DATA00   0x3fe
++			MX93_PAD_SD3_DATA1__FLEXSPI1_A_DATA01   0x3fe
++			MX93_PAD_SD3_DATA2__FLEXSPI1_A_DATA02   0x3fe
++			MX93_PAD_SD3_DATA3__FLEXSPI1_A_DATA03   0x3fe
++		>;
++	};
++
++	pinctrl_fec: fecgrp {
++		fsl,pins = <
++			MX93_PAD_ENET2_MDC__ENET1_MDC			0x57e
++			MX93_PAD_ENET2_MDIO__ENET1_MDIO			0x57e
++			MX93_PAD_ENET2_RD0__ENET1_RGMII_RD0		0x57e
++			MX93_PAD_ENET2_RD1__ENET1_RGMII_RD1		0x57e
++			MX93_PAD_ENET2_RD2__ENET1_RGMII_RD2		0x57e
++			MX93_PAD_ENET2_RD3__ENET1_RGMII_RD3		0x57e
++			MX93_PAD_ENET2_RXC__ENET1_RGMII_RXC		0x5fe
++			MX93_PAD_ENET2_RX_CTL__ENET1_RGMII_RX_CTL	0x57e
++			MX93_PAD_ENET2_TD0__ENET1_RGMII_TD0		0x57e
++			MX93_PAD_ENET2_TD1__ENET1_RGMII_TD1		0x57e
++			MX93_PAD_ENET2_TD2__ENET1_RGMII_TD2		0x57e
++			MX93_PAD_ENET2_TD3__ENET1_RGMII_TD3		0x57e
++			MX93_PAD_ENET2_TXC__ENET1_RGMII_TXC		0x5fe
++			MX93_PAD_ENET2_TX_CTL__ENET1_RGMII_TX_CTL	0x57e
++		>;
++	};
++
++	pinctrl_lpi2c1: lpi2c1grp {
++		fsl,pins = <
++			MX93_PAD_I2C1_SCL__LPI2C1_SCL			0x40000b9e
++			MX93_PAD_I2C1_SDA__LPI2C1_SDA			0x40000b9e
++		>;
++	};
++
++	pinctrl_lpi2c2: lpi2c2grp {
++		fsl,pins = <
++			MX93_PAD_I2C2_SCL__LPI2C2_SCL			0x40000b9e
++			MX93_PAD_I2C2_SDA__LPI2C2_SDA			0x40000b9e
++		>;
++	};
++
++	pinctrl_lpi2c3: lpi2c3grp {
++		fsl,pins = <
++			MX93_PAD_GPIO_IO28__LPI2C3_SDA			0x40000b9e
++			MX93_PAD_GPIO_IO29__LPI2C3_SCL			0x40000b9e
++		>;
++	};
++
++	pinctrl_pcal6524: pcal6524grp {
++		fsl,pins = <
++			MX93_PAD_CCM_CLKO2__GPIO3_IO27			0x31e
++		>;
++	};
++
++	pinctrl_uart1: uart1grp {
++		fsl,pins = <
++			MX93_PAD_UART1_RXD__LPUART1_RX			0x31e
++			MX93_PAD_UART1_TXD__LPUART1_TX			0x31e
++		>;
++	};
++
++	/* need to config the SION for data and cmd pad, refer to ERR052021 */
++	pinctrl_usdhc1: usdhc1grp {
++		fsl,pins = <
++			MX93_PAD_SD1_CLK__USDHC1_CLK		0x1582
++			MX93_PAD_SD1_CMD__USDHC1_CMD		0x40001382
++			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x40001382
++			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x40001382
++			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x40001382
++			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x40001382
++			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x40001382
++			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x40001382
++			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x40001382
++			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x40001382
++			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x1582
++		>;
++	};
++
++	/* need to config the SION for data and cmd pad, refer to ERR052021 */
++	pinctrl_usdhc1_100mhz: usdhc1-100mhzgrp {
++		fsl,pins = <
++			MX93_PAD_SD1_CLK__USDHC1_CLK		0x158e
++			MX93_PAD_SD1_CMD__USDHC1_CMD		0x4000138e
++			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x4000138e
++			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x4000138e
++			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x4000138e
++			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x4000138e
++			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x4000138e
++			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x4000138e
++			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x4000138e
++			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x4000138e
++			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x158e
++		>;
++	};
++
++	/* need to config the SION for data and cmd pad, refer to ERR052021 */
++	pinctrl_usdhc1_200mhz: usdhc1-200mhzgrp {
++		fsl,pins = <
++			MX93_PAD_SD1_CLK__USDHC1_CLK		0x15fe
++			MX93_PAD_SD1_CMD__USDHC1_CMD		0x400013fe
++			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x400013fe
++			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x400013fe
++			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x400013fe
++			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x400013fe
++			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x400013fe
++			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x400013fe
++			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x400013fe
++			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x400013fe
++			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x15fe
++		>;
++	};
++
++	pinctrl_reg_usdhc2_vmmc: regusdhc2vmmcgrp {
++		fsl,pins = <
++			MX93_PAD_SD2_RESET_B__GPIO3_IO07	0x31e
++		>;
++	};
++
++	pinctrl_usdhc2_gpio: usdhc2gpiogrp {
++		fsl,pins = <
++			MX93_PAD_SD2_CD_B__GPIO3_IO00		0x31e
++		>;
++	};
++
++	pinctrl_usdhc2_gpio_sleep: usdhc2-gpio-grp {
++		fsl,pins = <
++			MX93_PAD_SD2_CD_B__GPIO3_IO00		0x51e
++		>;
++	};
++
++	/* need to config the SION for data and cmd pad, refer to ERR052021 */
++	pinctrl_usdhc2: usdhc2grp {
++		fsl,pins = <
++			MX93_PAD_SD2_CLK__USDHC2_CLK		0x1582
++			MX93_PAD_SD2_CMD__USDHC2_CMD		0x40001382
++			MX93_PAD_SD2_DATA0__USDHC2_DATA0	0x40001382
++			MX93_PAD_SD2_DATA1__USDHC2_DATA1	0x40001382
++			MX93_PAD_SD2_DATA2__USDHC2_DATA2	0x40001382
++			MX93_PAD_SD2_DATA3__USDHC2_DATA3	0x40001382
++			MX93_PAD_SD2_VSELECT__USDHC2_VSELECT	0x51e
++		>;
++	};
++
++	/* need to config the SION for data and cmd pad, refer to ERR052021 */
++	pinctrl_usdhc2_100mhz: usdhc2-100mhzgrp {
++		fsl,pins = <
++			MX93_PAD_SD2_CLK__USDHC2_CLK		0x158e
++			MX93_PAD_SD2_CMD__USDHC2_CMD		0x4000138e
++			MX93_PAD_SD2_DATA0__USDHC2_DATA0	0x4000138e
++			MX93_PAD_SD2_DATA1__USDHC2_DATA1	0x4000138e
++			MX93_PAD_SD2_DATA2__USDHC2_DATA2	0x4000138e
++			MX93_PAD_SD2_DATA3__USDHC2_DATA3	0x4000138e
++			MX93_PAD_SD2_VSELECT__USDHC2_VSELECT	0x51e
++		>;
++	};
++
++	/* need to config the SION for data and cmd pad, refer to ERR052021 */
++	pinctrl_usdhc2_200mhz: usdhc2-200mhzgrp {
++		fsl,pins = <
++			MX93_PAD_SD2_CLK__USDHC2_CLK		0x15fe
++			MX93_PAD_SD2_CMD__USDHC2_CMD		0x400013fe
++			MX93_PAD_SD2_DATA0__USDHC2_DATA0	0x400013fe
++			MX93_PAD_SD2_DATA1__USDHC2_DATA1	0x400013fe
++			MX93_PAD_SD2_DATA2__USDHC2_DATA2	0x400013fe
++			MX93_PAD_SD2_DATA3__USDHC2_DATA3	0x400013fe
++			MX93_PAD_SD2_VSELECT__USDHC2_VSELECT	0x51e
++		>;
++	};
++};
 -- 
 2.43.0
 
