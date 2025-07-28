@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FD9C83F26
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 22:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E924C83F26
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 22:39:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0571F82E34;
-	Tue, 29 Jul 2025 00:25:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CA70382E34;
+	Tue, 29 Jul 2025 00:39:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XsZumuiy";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WxH3X0jT";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OhnLIpIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7557B82E34; Tue, 29 Jul 2025 00:25:39 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6353082EB8; Tue, 29 Jul 2025 00:39:05 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBB1B82D21
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 00:25:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6510182D21
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 00:39:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-73ff32d8b8aso997519a34.1
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 15:25:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753741535; x=1754346335; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DaZ21b/PlK23qUcRh2Vep8rnUol9ySnosa1MQExS/Qk=;
- b=XsZumuiykbStrlT1KFoFN2exZIdfzNaPDW6Hmf3lmEfX7gbZ4wie3eOSXxE6iqxmGO
- NlzXZu8UTSi9PY67kYF9AvVXdvzr+cWvwNdrGCo8R81wFJWnKCA0n3CzCkBWx4twUOXr
- MWYYd6fTga4R9cW0nnCSkXMWAmFSmtXjEmN9E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753741535; x=1754346335;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DaZ21b/PlK23qUcRh2Vep8rnUol9ySnosa1MQExS/Qk=;
- b=XeNE4ILfT9dRhqzWQ+pbYbS7Cgwccxut1A90gpNYF/xae8Dr1/f4msnaqKUFT3mrmy
- Fx1fASuN53QvXp7jIPx70LhvkcrhOZh8vHsc1zxb94joh+3Rt/yBUa1xkykQivjhcNcI
- 7yKDNdBgYOrBSGxqIfw2mdEOY6Zc9tmgk7LbDQuQHiAutvpMjUseEwOO4z3gl2xUhuNF
- qTREPY9vGERpPCMMw3I1227hiEtBu+NUKj7pLZ7Vv3L9pB0XDAUiazWfj6gHkqMUaBMN
- mazSYWxcRvp95Ed8f2ElVrQz9hICbAuIdakWzQ6Ns5ufZ07CLJNb2v/sxngFbOzQU2ih
- Yl0Q==
-X-Gm-Message-State: AOJu0YxkVH4jbpiipSnvCytMLwseGKzH2/rP1JBoF246+0QU6X8/TYmz
- o4Hm0WNRJanR4AXkVPf3PaLGBy8popVbs2vJb8LJBTvkUvrmE14M89Y9mJlY1TeThp4=
-X-Gm-Gg: ASbGncvo7dxDjSZ09kY932cD6vdOb/j+aC9snJPp9n6bn0bMMDmVPctJBIcm1rrAQxV
- kH95A2wNGHkrXTga4jrqjA+hunN0oa/1M8m0DNkyxYMspR9qobi877idILSRueoDjn1YtVzbUT3
- xEARHFYjbt3qOi+uLXPq9T2KX8lhSVJT5dXUM9xYrAtS8ioJdmw5QdOsIHeDI7cmc3X9q3zr9N5
- fT8/nRWA6EcEo2/zKZUpPuj+BCUmDCbsRNCXd95lFkBPnV/WMmkl/T0M4UP8eWVajzTB4bHk80Z
- iA4BgiQicN5nG4wJy44Ni3+QqRpp6MJ1vtn+uiQ28uwo9DEZNN6USSRSdxg4cFtZwo/Q9LTV9ji
- Z+OxhBMIgiSPgyhPbEn27TZhsg/FOV8Vd6I/DS6kxU8fkaTfPX9N17HUHXDlnYpLjoJY=
-X-Google-Smtp-Source: AGHT+IHfaxKo3RSsP1G3BJEnYvTHlJ+cSpFRnvaW4kiUabpIS8nDgcyNvf7UPIrppZYRON12n3pABw==
-X-Received: by 2002:a05:6808:198f:b0:41f:79f9:1b4a with SMTP id
- 5614622812f47-42bb7bc293bmr7928030b6e.12.1753741535455; 
- Mon, 28 Jul 2025 15:25:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61913f96d2esm1009803eaf.10.2025.07.28.15.25.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Jul 2025 15:25:34 -0700 (PDT)
-Date: Mon, 28 Jul 2025 16:25:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Philip Oberfichtner <pro@denx.de>
-Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v4 1/3] Makefile: Add size check for u-boot-with-spl.bin
-Message-ID: <20250728222531.GA1754718@bill-the-cat>
-References: <20250708103959.26129-1-pro@denx.de>
- <20250708103959.26129-2-pro@denx.de>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4brYLG0kZ6z9t8w;
+ Tue, 29 Jul 2025 00:39:02 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753742342;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=D61wAKYzSpC6oB+suuX+Rh7E12Sk/QlCXYBNdGKW3sM=;
+ b=WxH3X0jTp0jinjxG5wNDLPAgXuElMDCLIMYsk1M3dSm0L6PjIN51vd6ajMLaGO0WJSSfeo
+ kIjaP8zgNGAL4F/miC0hFhIBddMePbmTVnZlEfVjVyaYWVVc1HfnhL+Z/nUBD7X41lJHgq
+ pDj+acLu8oQAsHqNra9EsN5OQFv1zaEFtc6kBakooEsSWDp5cmpWMPZxFyl0tNfuiGizc/
+ LfIbFh1hDQ7q6bzBsbX7gKUomm/j8T67bTGsuzogdSdhoDzGHzadAFGyS6270LWbhQM51x
+ K4uf6nzN4sDBCGUCzZlm9VNsWJtARbBESr60ukHRwvyeFCDGMwIV7ROOg9IpWw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=OhnLIpIT;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+From: Marek Vasut <marek.vasut@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753742340;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=D61wAKYzSpC6oB+suuX+Rh7E12Sk/QlCXYBNdGKW3sM=;
+ b=OhnLIpITymPxquTMNsn75u8LDUTWYFnxl83XltBM7n5zrKj+QAt3Ut7d29iNMVYZoUX+wr
+ gAkafaWEIUjUbmRSCQMjWxSOfL0AUcRA/dp0ZbMsOEyDgmeCVwVIshTq/C5LO4iNAoCPK8
+ SFKspI1NxuT96EkEyTMP+w7CyhTiXOOegmkgNaPUdQi3EKnn8Jhsr+T0xe8i5q5WzPThrB
+ ETRHmk1mL2ObOnVIluK0LQcai0o9jevl6wm1+BcrTW55bd+jurFLH1Gti/dN5yHtSH+wdT
+ LMvzZYa1H3VuzjXSWYM+zMYw/jbmICDjYyyDBwt9m2xYGVHX2fgLlmqBifQs3Q==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut@mailbox.org>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Subject: [PATCH] ARM: imx6: dh-imx6: Enable USB OTG ID pin pull up in SPL
+Date: Tue, 29 Jul 2025 00:38:34 +0200
+Message-ID: <20250728223849.87212-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FnzVf1lM8EuqsF+K"
-Content-Disposition: inline
-In-Reply-To: <20250708103959.26129-2-pro@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 2275760f0c8474133d6
+X-MBO-RS-META: 1qrkwncdhq8zb7trs673p74uo7zohaai
+X-Rspamd-Queue-Id: 4brYLG0kZ6z9t8w
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,52 +90,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable SoC pull up for USB OTG ID pin in SPL. There is no dedicated pull up
+resistor on the SoM itself, and the pull up is mandatory for correct USB OTG
+ID pin detection. U-Boot proper already configures the USB OTG ID pin pull
+up via DT pinctrl node entry.
 
---FnzVf1lM8EuqsF+K
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+---
+Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ board/dhelectronics/dh_imx6/dh_imx6_spl.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-On Tue, Jul 08, 2025 at 12:39:57PM +0200, Philip Oberfichtner wrote:
+diff --git a/board/dhelectronics/dh_imx6/dh_imx6_spl.c b/board/dhelectronics/dh_imx6/dh_imx6_spl.c
+index a50763e1926..eb9bc93d973 100644
+--- a/board/dhelectronics/dh_imx6/dh_imx6_spl.c
++++ b/board/dhelectronics/dh_imx6/dh_imx6_spl.c
+@@ -49,6 +49,10 @@
+ 	(PAD_CTL_PUS_47K_UP | PAD_CTL_SPEED_LOW | PAD_CTL_DSE_80ohm |	\
+ 	 PAD_CTL_SRE_FAST | PAD_CTL_HYS)
+ 
++#define OTG_PAD_CTRL							\
++	(PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED | PAD_CTL_DSE_40ohm |	\
++	 PAD_CTL_SRE_SLOW | PAD_CTL_HYS)
++
+ static const struct mx6dq_iomux_ddr_regs dhcom6dq_ddr_ioregs = {
+ 	.dram_sdclk_0	= 0x00020030,
+ 	.dram_sdclk_1	= 0x00020030,
+@@ -509,7 +513,7 @@ int board_mmc_init(struct bd_info *bis)
+ 
+ /* USB */
+ static iomux_v3_cfg_t const usb_pads[] = {
+-	IOMUX_PADS(PAD_GPIO_1__USB_OTG_ID	| MUX_PAD_CTRL(NO_PAD_CTRL)),
++	IOMUX_PADS(PAD_GPIO_1__USB_OTG_ID	| MUX_PAD_CTRL(OTG_PAD_CTRL)),
+ 	IOMUX_PADS(PAD_EIM_D31__GPIO3_IO31	| MUX_PAD_CTRL(NO_PAD_CTRL)),
+ };
+ 
+-- 
+2.47.2
 
-> Like other images, u-boot-with-spl.bin may be subject to size
-> restrictions. Extend CONFIG_SPL_SIZE_LIMIT to handle this case.
->=20
-> Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> ---
->=20
-> Notes:
->     Changes in v4: none
->    =20
->     Changes in v3:
->     	Reuse existing SPL_SIZE_LIMIT instead of implementing a new option
->    =20
->     Changes in v2: none
->=20
->  Makefile           | 1 +
->  common/spl/Kconfig | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
-
-This is not quite right enough, sorry. This causes a number of boards
-(evb-ast2600 ibm-sbp1 stm32746g-eval_spl stm32f746-disco_spl
-stm32f769-disco_spl) which have size checks and are fine to now fail
-their size checks, presumably because they're checking the "wrong" file
-now or similar. So if you can't see a way to fix both them and your
-board then sigh, I was wrong initially and we will need another size
-check method like you proposed to start with.
-
---=20
-Tom
-
---FnzVf1lM8EuqsF+K
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIf41wAKCRAr4qD1Cr/k
-CpwjAP90lvwSW0Eks6Anh0U5qgeE6a2cSEHif1oZiv/rxUv5AgD+KSoqDk57cW3v
-Me04gZnrdnsHNotc85hdHC78pY7C2gY=
-=fIHz
------END PGP SIGNATURE-----
-
---FnzVf1lM8EuqsF+K--
