@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D94AC87FCE
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 01:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 412BCC87FCE
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 01:13:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B495583013;
-	Mon, 28 Jul 2025 03:05:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 76E3F83013;
+	Mon, 28 Jul 2025 03:13:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VwFq1JRb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BEDk1AXG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F51583045; Mon, 28 Jul 2025 03:05:47 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 3C46F83045; Mon, 28 Jul 2025 03:13:31 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA0C482E26
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 03:05:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEFB982F14
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 03:13:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2403ceef461so1023065ad.3
- for <u-boot@lists.denx.de>; Sun, 27 Jul 2025 18:05:44 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-75b5be236deso3095340b3a.0
+ for <u-boot@lists.denx.de>; Sun, 27 Jul 2025 18:13:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753664743; x=1754269543; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ttQCb5nIIM5kdNmxD0KgxK2nkXEp3s4dE2YUbq+wHvw=;
- b=VwFq1JRbbaIf794IHNyIA+yEL+6NRG0DaZjIx+LLy7y98JJsjUbW+FjaTmqjWeKyqj
- oCUhDXrHkjR+m1yWitJQPOxIXrxUtugHVqGIZM+tfHVynbVHDjQKY5ehAj/tBSYHA4hU
- pTdELQWeGM9ACUyP5UNNTeoA+/b41hjAroY/jReF7FY1ZXlXFGMcqVmv5jWnZtYwyx4i
- 6mFI+OFbBD3Cf+Vn7pn1zyYchZKlzyleZRH7QBayf3uZ6T2uVqP4C99RIHnBqh7Ehnda
- JzWSSdymDK1RDQoibJYXYCVhzh+WczA+Hkrs21iHmUl8VXTRS7X9fha2e3IxF8UJO3bU
- lsBg==
+ d=gmail.com; s=20230601; t=1753665207; x=1754270007; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kD5MD6RKDA7co1+snM/qTYC+dhNA7NqOkQAv610Uc1g=;
+ b=BEDk1AXGpr8vwz2ROjKwynIBCMO8dRT8Y8lwLoTvDoKVOnBe/zD08EZzSef5UbYYPA
+ hFl41TadszY5yTwh9UNbMd833Nq60K92v6D72rLkdAsKcOlMDmD9cRAq3k6yDhy0mrFr
+ d2ycNnVILK2tpN0e8fUUcUPhHNJ4kQ8fGJ2qtTi15UPi1sC/CN/YztLNYlHiRfRnF4H8
+ nkmrMPK3pnjuChbQyItlhEGEiBcL0OJNVqnjAD34rRrFVDqdMiBa02TXIv/SARUMTP/X
+ YPuv+qhdI5PW4frcFOxk7DSlIhQfmDBgvhbgP2iDK8bxhXY5VeXnDNkjBxdmXNPnpMah
+ 2U+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753664743; x=1754269543;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ttQCb5nIIM5kdNmxD0KgxK2nkXEp3s4dE2YUbq+wHvw=;
- b=SDefvWArC5My6yhY6DDBF+J1TT6ieoVHOPyQFNWjyRkGhQE1rEFbh0bJ2WB2FZ6BzE
- Skhd3/8ugL61R1BZLA4wqfhelDCGgw2zQl2ZLBfZxEOMcJfVXOCiOc+pDZwWOQgxdbg6
- 9uuvZ0HTDxzoYZaPBhh8pN/M9em2tlfVsjmzYF5L24uDbnJYvVsDyHICUGHskk60wAa2
- jmIonMcbaSgZunL3OwpyxsZNA/pqS1LotddkXY2n9vLsUUmms87k/1PMspIwrWlBggWn
- 42O19+zvtpq7vhehs7+3ijWzDh/812MGKqesQ2xU5MfLQs/JVWZqOsRJ8C4l5T2CjVqc
- lADA==
-X-Gm-Message-State: AOJu0YxMJ9LlJRHzkeXWbCCFmVBC2UV2FKbhyxJxvskeS//xmm7wRh0J
- mmeJtVAU5EWx/hC/lPar0ehL6czLCE3BD6m/afbLUpsotYrM6DkADR0g03zJ3g==
-X-Gm-Gg: ASbGncvNwBbSo0Uym4l7q8k5fJeynBya6kyCb2Bj12bqZFNUzr4jo5sPxekANkfcTvt
- N2gxOIvVuLJkoW52QZf4tMlwz3Iq40QLsuGpWtySmhHUFKQKaSGGBwL5MTX9SyKxHpeJ8+rhzDu
- CaCccvtFLs35EgvKK5ZIcckypumb/YqTrIWCtGdVKAcydglLgzIXbq0h7eTiZCh0hv+q/OHn9EM
- iR7wTbJS2W/YFme+IhX+Gkx5/KrTrwdf18I0F5CIJVp7g6IMIZgqy8u5xuJgVPDMJgUyaYXtDVy
- a3Tl6iuZjDrZAo+Fa32VYbDPP1bO+qNXr1NdZpczIk/b+enpXMmto3ok/qx9rELchzSHiVe9lyd
- LPqgdsCz+tdrTVQAxIjxWujVujIBdR9XT5NAgOXTE2+Mh3r2D3avWtHehrlHI1dCA9ReOaKXLPC
- 6nAKUk3fMJyC1zOEI=
-X-Google-Smtp-Source: AGHT+IFMa9snuJPELzK9B/wgW/xHnVJdwBd7WoDBBbM4etz1Ol17BaVveDjHpcEOFyLuBpQoAsOUDg==
-X-Received: by 2002:a17:902:f606:b0:240:aa0:1584 with SMTP id
- d9443c01a7336-2400aa017b2mr51232215ad.38.1753664743279; 
- Sun, 27 Jul 2025 18:05:43 -0700 (PDT)
-Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
+ d=1e100.net; s=20230601; t=1753665207; x=1754270007;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kD5MD6RKDA7co1+snM/qTYC+dhNA7NqOkQAv610Uc1g=;
+ b=SAP86C4y4b+mb9wplRdFhATfzNvsoF1hNdkkX0XkPpA/wmgG/U37gg2bYA1hxP+2Os
+ fBbOuGdCa6CUHItLn5/ws1nugHkmFfP0SOHL2u6cfg3NdQr/zoJUdalxSP8Glx6sxagJ
+ XuXKASmuFNbMS8qjnFjdaKpavqw8aovm/KxRmmVaOf8HiNDtJAzvyxwco2eWZRdSRUS7
+ QNEsXy26i90Yaj+8Gp6A+DDnI9RiA/Ppiu76HwYRsrevtcTtfVAfGDXg72Mw/55DMJMy
+ VmP/GWuzujk61+6soATWDhNN3/Dso4Yoe2pvcjSDthkXZRjlBZzSwr4yvoOMr7WE8lNR
+ sxag==
+X-Gm-Message-State: AOJu0Yz6EsfuQaWQoDDOmzeHn/Ci1/bFuFZL13sUKOqVQXzRWqQ68FeV
+ i772Tb6kqMoBWZOWSEBn3Bo1ll57odPh+IZvJGeEcbKlSUcvvw8cL8sfk1kh+Q==
+X-Gm-Gg: ASbGncsQuC2BitSPz4HEO+SDbVgtpgNSHrMLlO5KWmYvjrLu4hpcOht8/ykeTvGYO+J
+ orSSGL9sFPZPsM5JemL6FAHVI8pmsJMe8WPPBYMeAJwrAko9/cdcOT34v9E4kxgCpU1yP4oELGs
+ 55S/mXcbfXSS90wqDHURwOo6i1ign2o+PYl+Ns4Zr46JTJBwI9LpFxNlPNZ7r0uDqSq2TUF1B+l
+ kLHtsIpTEgpCKNbIAQDbiSWaJGy+LSWVJaCpB6weIBf3FuFLjjJcvTR0C4q09n2ofvBIETKyJ5s
+ bRvfcG/vqbo/S4mCKYT5P3cJztEyUg6JjWgwkYpcSyRt7CBhjq8eRQOC5cfR19euYg5qMVZQzn+
+ JXdd7qsfUDIC9ALEwOyf/x3PgdbwUy1M0RNX33SCsKU7lT3keBmAW277br8/dqwq9/LssA8xH+A
+ ==
+X-Google-Smtp-Source: AGHT+IG26mY08lJz8BeOXbA5ZZg61Ix1yUJOHgjEoRE43U/nBzSKktiGByJIxEstZIESUEI+ebD84g==
+X-Received: by 2002:a05:6a00:1395:b0:75f:9622:4ec4 with SMTP id
+ d2e1a72fcca58-76334fac30amr14466450b3a.20.1753665207107; 
+ Sun, 27 Jul 2025 18:13:27 -0700 (PDT)
+Received: from [192.168.0.10] (KD106168128197.ppp-bb.dion.ne.jp.
  [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23fbe545087sm41039695ad.178.2025.07.27.18.05.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Jul 2025 18:05:42 -0700 (PDT)
-From: tkuw584924@gmail.com
-X-Google-Original-From: Takahiro.Kuwano@infineon.com
+ d2e1a72fcca58-7640baa8173sm4167051b3a.146.2025.07.27.18.13.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 27 Jul 2025 18:13:26 -0700 (PDT)
+Message-ID: <10a37d2e-87cf-4a48-a430-1efa09dd213f@gmail.com>
+Date: Mon, 28 Jul 2025 10:13:22 +0900
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: spi-nor: Fix return value of s25_s28_mdp_read()
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- tudor.ambarus@linaro.org, pratyush@kernel.org, tkuw584924@gmail.com,
- Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ tudor.ambarus@linaro.org, pratyush@kernel.org, Bacem.Daassi@infineon.com,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
  Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>
-Subject: [PATCH] mtd: spi-nor: Fix return value of s25_s28_mdp_read()
-Date: Mon, 28 Jul 2025 10:04:46 +0900
-Message-Id: <20250728010446.29087-1-Takahiro.Kuwano@infineon.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250728010446.29087-1-Takahiro.Kuwano@infineon.com>
+Content-Language: en-US
+From: Takahiro Kuwano <tkuw584924@gmail.com>
+In-Reply-To: <20250728010446.29087-1-Takahiro.Kuwano@infineon.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,34 +103,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+On 7/28/2025 10:04 AM, tkuw584924@gmail.com wrote:
+> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> 
+> s25_s28_mdp_ready() returns 1 when spansion_sr_ready() returns negative
+> value (error code). Fix this problem by following Linux implementation.
+> 
+> Fixes: 1c3dd193b5b ("mtd: spi-nor-core: Add fixups for Cypress s25hl-t/s25hs-t")
+> Reported-by: Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>
+> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> ---
+>  drivers/mtd/spi/spi-nor-core.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+> index 655bf3aaf81..76c33b24368 100644
+> --- a/drivers/mtd/spi/spi-nor-core.c
+> +++ b/drivers/mtd/spi/spi-nor-core.c
+> @@ -3784,8 +3784,10 @@ static int s25_s28_mdp_ready(struct spi_nor *nor)
+>  
+>  	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
+>  		ret = spansion_sr_ready(nor, addr, nor->rdsr_dummy);
+> -		if (!ret)
+> +		if (ret < 0)
+>  			return ret;
+> +		else if (ret == 0)
+> +			return 0;
+>  	}
+>  
+>  	return 1;
+Please discard this.
+I will resend with correct title.
+s25_s28_mdp_read() -> s25_s28_mdp_ready()
 
-s25_s28_mdp_ready() returns 1 when spansion_sr_ready() returns negative
-value (error code). Fix this problem by following Linux implementation.
-
-Fixes: 1c3dd193b5b ("mtd: spi-nor-core: Add fixups for Cypress s25hl-t/s25hs-t")
-Reported-by: Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>
-Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
----
- drivers/mtd/spi/spi-nor-core.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 655bf3aaf81..76c33b24368 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3784,8 +3784,10 @@ static int s25_s28_mdp_ready(struct spi_nor *nor)
- 
- 	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
- 		ret = spansion_sr_ready(nor, addr, nor->rdsr_dummy);
--		if (!ret)
-+		if (ret < 0)
- 			return ret;
-+		else if (ret == 0)
-+			return 0;
- 	}
- 
- 	return 1;
--- 
-2.34.1
+Thanks,
+Takahiro
 
