@@ -4,92 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FFB0C83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 11:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D1BC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 11:25:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C49282D06;
-	Mon, 28 Jul 2025 13:25:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 824B982C87;
+	Mon, 28 Jul 2025 13:25:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o3mnJdD7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DWvrV5uT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5E7582D06; Mon, 28 Jul 2025 13:25:13 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id D3DDC82F14; Mon, 28 Jul 2025 13:25:33 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FA6481E14
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 13:25:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D71F281E14
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 13:25:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4538bc52a8dso31609415e9.2
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 04:25:11 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3b7746135acso1953445f8f.2
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 04:25:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753701911; x=1754306711; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=K482/APcpQ0SMplrQZmYaErTOy+nbgFiAA2Hy5EMS7A=;
- b=o3mnJdD74Uhc/9HmEAysVe9VcV0BrIZhY6HQWCWRg8fzSpg47kT3VckrD6pi6GSlPO
- Nph1l9mV1bjpEA3cY+3x6v6jAnnoMqjzlIVSWngyUog+Ifp516cmo7UZIS0qgomGmUkE
- 5XYGKgCWqtVZjans5Phsm/F26hUE9wHw2MblJ1ByIfkC2C/nX2w/TNbf1bmsh0asRP30
- OY2Al6CvR9liwv7zjLGup/LK2ifGGm32rl2NZKx9SJzUhXC0CwGo/usG4T4VzPktgKAI
- 9EO6wi19aZDWJcqMjT9Im2f3aPQcKR7RyrP68cECuGxRM1yfcXhypOD957cU91IYcyNU
- lVrw==
+ d=linaro.org; s=google; t=1753701930; x=1754306730; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R1UWrQMCjr4/4aOvtmFNgbbeYasvnYjKIXn6jSKhQSk=;
+ b=DWvrV5uTtyq+XBXdGHX/Y0+yO3oWnvNSlEkdx2vjLJGnbJP42lQ7mS2wKsMvOp5S+7
+ paAj/ZB9fxnHwjhOQNf/Cac9mJqh635ZAdrCqicgTP9NNff3KdWyNXKCD/zQwwIVtLV7
+ 62tXygncNb0yluEz3jutIE76I+pxdfbLGnu/GS17ZOfyY1jihOrhpdjC80n3gpH7KNWC
+ hr13VEOBDZgnfKJCaL6JBbmgAD09uB8e0gSYOU/b+Zb46U26v2WgoKVWddvSEmuMtTUY
+ nxtl6VPcgK2BQv0YdJX79tZARRhwW/OfrFv6SY4vwn1vsYC062etaOxImOTvEto97U0b
+ caWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753701911; x=1754306711;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=K482/APcpQ0SMplrQZmYaErTOy+nbgFiAA2Hy5EMS7A=;
- b=xGmO0lXNJN45GomeQdvmjWcQdSqulFB8KWziLE4vIC9Swvn5INvRbCIxvmZUX2yysP
- o/ZgT3gjon6tokNVMlVzsOJnjaPHcqEyDv0fcTd26xKiFvbKCnKcuCv2ldHSLYUeonQg
- Y3vl/5hQ6Khf+V2NQC9mmNlvADUNfe16RF6CWXoGFUS8U0flH43Rx829FBo9M9MDIzlx
- 8942D2Mpgm6WyXNqUxDC88hL9j4XUDsNaUlz1LYS5odafDeQwYMHo6eEl0iKd4UXGRnP
- Tnko1jtkji/qsEY5mDqJJS2igfqjq85z5/lCZ7VPLRoT2ehhS0YwJgv8m6f7wynelxsd
- +lwQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUcTlgPpDlvo9hpf6S324oknTZtEacNE+enZpstap+kUGx17doQ/jUk1vd4G0iFbO6U4TN9SOA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxF+eM4D0a/54M5G+uhEbrL2LoSow+1JNHweiFmpMUw+yQV5CG/
- ks2in1qSR9khb5iGDFPTykHtIZ1h8rQ2K+vZR2T4u1PSVHT1Yj3iB9kDGg33OmFSb1LYai1BxZ3
- JBsf2
-X-Gm-Gg: ASbGnctOCYNng6os2NpEVvmM13ZRIPApQBKIG3A7ao/ead2nzcURoFyU7UFkaVSrByW
- T5k7mNux3/R3U1yp0vaSBYEsurYmu0kJxMIoNRO58s0ruHpVUULVwiu2NFt8ano8Rh+pi9doKw6
- voLRdvz9R1RgPZS+rm2ekzNw++tjF6dM/Trt3gUX9zXQ4G6rJx9D2b73QRrTeAtNF/8b+3pKRWr
- 9PDnApb4nKh0DigCVRVK614s/rlnydImRxvaYj2a4hBxNui+8TIIRwLVNuPGK8fQdE1L+ZQ1KXK
- AMLB/DxzqHuWE/W0He068JtacpLtAnBCzV14Y79+ztchoeQRVeboUTmrYx21wO879exmPImC/1a
- P4DAaa6qcV2xyJagFhoki6bFcQ+KKEFs1T07b9/Zm7gOVomGIMTHwkm2hvTB3xgbfcvGcBYbrNf
- 0=
-X-Google-Smtp-Source: AGHT+IFfahIXnkjBa/rLKTmgUE8UrcFBKQ+X38vkZASWHQNRz4cC+19ijA3QYVZ/DZVLro/7pr839w==
-X-Received: by 2002:a05:600c:1da8:b0:456:1006:5415 with SMTP id
- 5b1f17b1804b1-4587d83d695mr54841755e9.6.1753701910902; 
- Mon, 28 Jul 2025 04:25:10 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:f9e:3c01:2df:19e4:8abd:eea3?
+ d=1e100.net; s=20230601; t=1753701930; x=1754306730;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R1UWrQMCjr4/4aOvtmFNgbbeYasvnYjKIXn6jSKhQSk=;
+ b=RtUxZMDWvxQVpD6QXF9h+8K2hCTTFvTqPub7RKNUw/fxlcb0OU/vnmcQJQxL2imoZD
+ 0feoTXtDlt+UYRsfB2a8UNsXFtwP23EGtq1d1AjwjMSHMHk4TofgSp346AS+ciihKApn
+ AmFVSzPWqZ1+CQqTCa6wW9rBYs5fQL7M1S4d7oR9ppGCULZdqsY+9J75Xj5RYCBD+9+b
+ 8KYEaAYQaFY/bPsFkiKKFmPrM+jmJUyBeTUKfFCaW6PvYLi3dlkFTvuIDApEuEwZ656L
+ eDT8sQv6pIshSvIDLkIZFDVHpCe1/sEOCezP8lL+GtqTghr9YDnCR2p8RMmZNMbPQvK4
+ gdIQ==
+X-Gm-Message-State: AOJu0Yyvs0IpsSlt9zq83cPIJ/iZf08moQ//dcuY4C2lYwSY4imeExfd
+ qhzkd9n5CQEYq/VMAdqS1uoEDsaPO8pKZSw9TYvvRpGZfyANut3lY7YCqITsvd51xOQ=
+X-Gm-Gg: ASbGncuzV/4+i0d0CluabQaTabayJsA11xjQ1YLEpTjIkALEjtFBv6mX7FWReuWdZTR
+ DpX8tj8f5GH2x8NjK7dgYKMlAjzGOgfcfBDXXGnR3BetMV3SCruhcixiNS+jvPh8GwKW5dAViAg
+ WNe7O9Sx29gWRVdch6RU/HNzdHsazOrMJokVyFyvtZMdcv9bkGLhY+ljTPbiLuRvQVrlRqQwoBU
+ dHFR04hcmIHWFMi0HXu8ZG3Zpv92wSaCkeGrfkIKUtzZQVUdhtQaJdFfLpzoFZk5YHb8wm2o3er
+ kZUB451s44IEU6lZ3MFk6U4xeMwrHNEXiMibzRDRp97x+JPknvxB/7k9Ezgc3kUu+nIrdXfMek6
+ dS6c67jlF2FzDMqCBfV1g0HV36Yb8ex+JsssNbIAU7nDH4jGAZdCHFvj6bb43I+AXuByj9tA=
+X-Google-Smtp-Source: AGHT+IEmIOvd6E8n9r4yhyNAlJLIlc/H4vr769qlLjDQI51Znzo/x5y9o+Xzm6dcQCU+XwQoHO1RuA==
+X-Received: by 2002:a5d:5d88:0:b0:3b6:938:86b7 with SMTP id
+ ffacd0b85a97d-3b77663f6ccmr8515975f8f.35.1753701930477; 
+ Mon, 28 Jul 2025 04:25:30 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:2df:19e4:8abd:eea3])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458705ce781sm152236915e9.31.2025.07.28.04.25.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Jul 2025 04:25:10 -0700 (PDT)
-Message-ID: <5bfc235e-d199-4afe-bc07-a03b27fa5f87@linaro.org>
-Date: Mon, 28 Jul 2025 12:25:09 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Smatch report for drivers/fpga/socfpga_gen5.c
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-References: <31ac4742-d516-4b5e-8f7d-6f8d23b77119@linaro.org>
- <48b253d1-1ae0-4fa8-910d-b6ade557a5a7@gmx.de>
-Content-Language: en-GB
+ ffacd0b85a97d-3b778eb2aa0sm8643932f8f.8.2025.07.28.04.25.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Jul 2025 04:25:29 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <48b253d1-1ae0-4fa8-910d-b6ade557a5a7@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Date: Mon, 28 Jul 2025 12:25:29 +0100
+Subject: [PATCH] arm: socfpga: Remove unnecessary for loop
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250725-socfpga_gen5-v1-1-1cf2e209f374@linaro.org>
+X-B4-Tracking: v=1; b=H4sIACheh2gC/x2N0QqDMAwAf0XyvIINduJ+ZQyJXax5sEoiIoj/v
+ rrH4zjuBGMVNnhVJyjvYrLkAv5RQZwoJ3byLQxYY6hbDM6WOK6J+sQ5uA6Zgo/Ns0MPJRnI2A1
+ KOU53NJNtrLdYlUc5/p/357p+d45YWncAAAA=
+To: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,36 +100,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25/07/2025 13:22, Heinrich Schuchardt wrote:
-> On 25.07.25 13:09, Andrew Goodbody wrote:
->> Smatch reports this issue
->>
->> drivers/fpga/socfpga_gen5.c:135 fpgamgr_program_poll_cd() warn: 
->> duplicate check 'reg & mask' (previous on line 129)
->>
->> Looking at the code I am not sure that it will work as intended. There 
->> are two if statements within the for loop that test for opposite 
->> conditions so could easily be combined into if..else with a single 
->> test. But also both if statements result in the for loop being exited, 
->> and one of them must be satisfied so the for loop can only ever be 
->> executed once. This surely must not be the intention. It is not clear 
->> to me whether the error test is wrong and should be changed to a 
->> different test or it should simply be removed. Could you take a look 
->> please?
->>
->> Thanks,
->> Andrew
-> 
-> As we have been running with a single iteration since 2017, probably the 
-> for loop and the if statement relating to FPGA_TIMEOUT_CNT should be 
-> removed.
-> 
-> Best regards
-> 
-> Heinrich
+The for loop in fpgamgr_program_poll_cd will always terminate after a
+single pass and so is not necessary. Remove it and all related code and
+leave only the code that is effective.
 
-Thanks.
+This issue was found by Smatch.
 
-Patch coming.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/fpga/socfpga_gen5.c | 25 ++++++-------------------
+ 1 file changed, 6 insertions(+), 19 deletions(-)
 
-Andrew
+diff --git a/drivers/fpga/socfpga_gen5.c b/drivers/fpga/socfpga_gen5.c
+index 9473f057328..964a5cc8789 100644
+--- a/drivers/fpga/socfpga_gen5.c
++++ b/drivers/fpga/socfpga_gen5.c
+@@ -119,27 +119,14 @@ static int fpgamgr_program_poll_cd(void)
+ {
+ 	const uint32_t mask = FPGAMGRREGS_MON_GPIO_EXT_PORTA_NS_MASK |
+ 			      FPGAMGRREGS_MON_GPIO_EXT_PORTA_CD_MASK;
+-	unsigned long reg, i;
++	unsigned long reg;
+ 
+-	/* (3) wait until full config done */
+-	for (i = 0; i < FPGA_TIMEOUT_CNT; i++) {
+-		reg = readl(&fpgamgr_regs->gpio_ext_porta);
+-
+-		/* Config error */
+-		if (!(reg & mask)) {
+-			printf("FPGA: Configuration error.\n");
+-			return -3;
+-		}
+-
+-		/* Config done without error */
+-		if (reg & mask)
+-			break;
+-	}
++	reg = readl(&fpgamgr_regs->gpio_ext_porta);
+ 
+-	/* Timeout happened, return error */
+-	if (i == FPGA_TIMEOUT_CNT) {
+-		printf("FPGA: Timeout waiting for program.\n");
+-		return -4;
++	/* Config error */
++	if (!(reg & mask)) {
++		printf("FPGA: Configuration error.\n");
++		return -3;
+ 	}
+ 
+ 	/* Disable AXI configuration */
+
+---
+base-commit: 021783860f7e628f7c4e0c101707cd4250e6d61f
+change-id: 20250725-socfpga_gen5-92ea51c46921
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
