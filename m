@@ -4,56 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBF2C87FC9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 13:04:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A269C87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 13:09:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1D0A82F14;
-	Mon, 28 Jul 2025 15:04:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
+	by phobos.denx.de (Postfix) with ESMTP id AACAA82E26;
+	Mon, 28 Jul 2025 15:09:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="vnAwD2Vs";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tjS33sHF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D600482F8E; Mon, 28 Jul 2025 15:04:11 +0200 (CEST)
-Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 82ACC82E34; Mon, 28 Jul 2025 15:09:29 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E55CF82D88
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 15:04:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=philipmolloy.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2D6B982D88
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 15:09:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philip@philipmolloy.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail3; t=1753707848; x=1753967048;
- bh=Xi1GUh178JCdLHIfWQpS30WriJSQAV5AoggcYxoxpsA=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=vnAwD2VsQxbjaBfn5pFtjsQ5J9isu3Z2GPtLSd7ti9KFWmNmXlYKtT48akRNOTBO0
- hoHoyjxs24i0UJXM8ryC42b9JUpW/VQusdsJGyDZyr8cEERPx/8hk8ylKtcL7N+TZ+
- CXe+qBHDA99LzQL1QtF299KgEBtoK5YCj23cJk6IFU5W9Zlu5uDmHQW4Xm8BUXBSW5
- KO2Bf7mVU1TYqQ2q9xkPfu5OxHYxRvk4DsHihCnsNFGrzicsDgZ9/WUfPLd+0ZmXcy
- caF0SbGKp947aO0NlK08UA8CY132q0Pc6chK35ZMu4Gu567/yUTnoX384ZyJNtB0zL
- tfbgLslhBjzNA==
-Date: Mon, 28 Jul 2025 13:04:03 +0000
-To: u-boot@lists.denx.de
-From: Philip Molloy <philip@philipmolloy.com>
-Cc: Michael Hennerich <michael.hennerich@analog.com>,
- Philip Molloy <philip.molloy@analog.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH 1/1] Makefile: Remove expansion of undefined variable
-Message-ID: <20250728150333.1716886-2-philip@philipmolloy.com>
-In-Reply-To: <20250728150333.1716886-1-philip@philipmolloy.com>
-References: <20250728150333.1716886-1-philip@philipmolloy.com>
-Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: 45271710a02a89fc5b5664ffa052bd0cb68a864b
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=030437f29f=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56SD6Rtu015064;
+ Mon, 28 Jul 2025 15:09:25 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=1bvzEDZALde7/atIq8Rd0/
+ +2lOjz/IZ7zWLcEPwEl2o=; b=tjS33sHFyR4tHnZpvtuiD88GQTyv161DqCFus7
+ TVoUMllRFoSW5NeKC8mQKmlKqrakdlrUKDhP2CfqXLTYm5TWIC3Aumt2gbArZSpO
+ 6zHGxoE2PAo4xOMYpn4gA7ZJQHblv935EC+XVqGswer3P3QwAsN6FBJ0102RTBef
+ hUgipzwCzjRDXGubmu77F2wy/pxPo1bhvN0fH9/B0TZp81HlfGB98hdsGi06iJe9
+ dTLrwHpeBDjknXWfZmo/Hb9w6iQjvsFLOUSDx5lnlmCwtgLL9q4MdTRpJ/7L2k/8
+ iPGbR5Rc5p0NasAFxW/F+ZN7OtVbSThM9hg3ooyFQAETITAQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4859ynde7n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 28 Jul 2025 15:09:25 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 073AD4004F;
+ Mon, 28 Jul 2025 15:08:45 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EFE4577E1F4;
+ Mon, 28 Jul 2025 15:08:33 +0200 (CEST)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Jul
+ 2025 15:08:33 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] treewide: Fix STMicroelectronics spelling
+Date: Mon, 28 Jul 2025 15:08:31 +0200
+Message-ID: <20250728130832.25954-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-28_03,2025-07-28_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,45 +86,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Philip Molloy <philip.molloy@analog.com>
+Fix STMicroelectronics spelling in comments.
 
-The U-Boot environment was previously stored in the boot loader stream
-using ldr, but it has been replaced by the default environment built
-into the U-Boot executable or an environment on external storage
-
-Fixes: ea3310e8aafa ("Blackfin: Remove")
-
-Signed-off-by: Philip Molloy <philip.molloy@analog.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- Makefile             | 1 -
- scripts/Makefile.xpl | 1 -
- 2 files changed, 2 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 1a5c77d7caf..e57594aa755 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1370,7 +1370,6 @@ u-boot-nodtb.bin: u-boot FORCE
- =09$(BOARD_SIZE_CHECK)
-=20
- u-boot.ldr:=09u-boot
--=09=09$(CREATE_LDR_ENV)
- =09=09$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
- =09=09$(BOARD_SIZE_CHECK)
-=20
-diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index 43f27874f9f..408d5cde7a6 100644
---- a/scripts/Makefile.xpl
-+++ b/scripts/Makefile.xpl
-@@ -390,7 +390,6 @@ $(obj)/$(BOARD)-spl.bin: $(obj)/u-boot-spl.bin
- endif
-=20
- $(obj)/u-boot-spl.ldr: $(obj)/u-boot-spl
--=09$(CREATE_LDR_ENV)
- =09$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
- =09$(BOARD_SIZE_CHECK)
-=20
---=20
-2.50.1
+ arch/arm/include/asm/arch-am33xx/mem.h | 2 +-
+ arch/arm/include/asm/arch-omap5/mem.h  | 2 +-
+ include/configs/stm32mp25_st_common.h  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/arch/arm/include/asm/arch-am33xx/mem.h b/arch/arm/include/asm/arch-am33xx/mem.h
+index 0fd52f82f59..316ec09318a 100644
+--- a/arch/arm/include/asm/arch-am33xx/mem.h
++++ b/arch/arm/include/asm/arch-am33xx/mem.h
+@@ -29,7 +29,7 @@
+  *
+  * Currently valid part Names are (PART):
+  * M_NAND - Micron NAND
+- * STNOR - STMicrolelctronics M29W128GL
++ * STNOR - STMicroelectronics M29W128GL
+  */
+ #define GPMC_SIZE_256M		0x0
+ #define GPMC_SIZE_128M		0x8
+diff --git a/arch/arm/include/asm/arch-omap5/mem.h b/arch/arm/include/asm/arch-omap5/mem.h
+index bd72fb611d1..4f26daf1c43 100644
+--- a/arch/arm/include/asm/arch-omap5/mem.h
++++ b/arch/arm/include/asm/arch-omap5/mem.h
+@@ -29,7 +29,7 @@
+  *
+  * Currently valid part Names are (PART):
+  * M_NAND - Micron NAND
+- * STNOR - STMicrolelctronics M29W128GL
++ * STNOR - STMicroelectronics M29W128GL
+  */
+ #define GPMC_SIZE_256M		0x0
+ #define GPMC_SIZE_128M		0x8
+diff --git a/include/configs/stm32mp25_st_common.h b/include/configs/stm32mp25_st_common.h
+index ab5a4a91644..cb679eb1be2 100644
+--- a/include/configs/stm32mp25_st_common.h
++++ b/include/configs/stm32mp25_st_common.h
+@@ -2,7 +2,7 @@
+ /*
+  * Copyright (C) 2022, STMicroelectronics - All Rights Reserved
+  *
+- * Configuration settings for the STMicroelectonics STM32MP25x boards
++ * Configuration settings for the STMicroelectronics STM32MP25x boards
+  */
+ 
+ #ifndef __CONFIG_STM32MP25_ST_COMMON_H__
+-- 
+2.25.1
 
+base-commit: 15368cb1164cdd9273dd3791f8af206da525c4a6
+branch: Fix_STMicroelectronics_spelling
