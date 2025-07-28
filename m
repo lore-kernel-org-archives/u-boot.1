@@ -4,85 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB80C83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 18:04:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACFA7C83F17
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 18:09:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8315582E52;
-	Mon, 28 Jul 2025 20:04:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 89AC982E52;
+	Mon, 28 Jul 2025 20:09:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="bRoZILx5";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="Jd3a+t3H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D930A82EB8; Mon, 28 Jul 2025 20:04:32 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AB5E582E34; Mon, 28 Jul 2025 20:09:04 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0261D82E34
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 20:04:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AA1682E34
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 20:09:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-61914ab3c66so1559444eaf.1
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 11:04:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1753725868; x=1754330668; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=etIfJDF3Xscb5GzSs3WOYXorwKZafB8IbhIbN/dUvXk=;
- b=bRoZILx5uzNgIsNG/0zGPlNH1brp1D4F2o/6k3xGmEm6z4VnGx3TQtmT9M+b3rIS+T
- aOyWgOhipWhNH201dkV7YcjrhNR83NzPA8R7PNEyJkmdZYUY970wRKCkEn+3PZla9ZdT
- VS6GfKN7Lh0m8ICpVjIvAKPmDMR2H3Ed9TkJdBhujysSgKkavqR0sa+sO4m7TiraxmqK
- HQSrNcBOegDpU+MaRBFPNvYrUl3RRSTThLy0+sENOeSK3uzVzXXF1tYC4FCpQ49B/TBI
- Xk9qeSvhPCKD4tOW4L6Zizuz6JGHC7z3uCtR2rFhfjq6chWsjBP0xJksoZ2SGtQOHJZL
- YDgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753725868; x=1754330668;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=etIfJDF3Xscb5GzSs3WOYXorwKZafB8IbhIbN/dUvXk=;
- b=S1usnIYBHoiIjXDFCC6I0UOg8sZSOIH8ACyrI3Gmk2sn5hO30t4werh1yxz3xl2NlT
- dNqAsgR2KxA89hHqZyWCTLaHMSmwkCzvkU1zZit6m5BZ/pxQIhOlgqzfi/e3MQpsIJhh
- O0HCEoEKDdBrR5F+6zelYmQWzbToXEEa6dGGSqpUiW6VAgNEet7Sfx+sjKYSEtSGzo36
- 9exhesdD6xvJaqaxQFkbpZvT7phGoM3Jlrh5PhiALkjlLKRXwe3Gaxp2PUsCmZAqcBbh
- fApLm2OPYj9wCk7H44BkIg1h3E8nvitDEgDtdvr1XDJv2SBgdG5cyLHVbM8Z2+pAe73u
- 8/CA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKtwmTYFFeFadN9XZm35BdQi1C+TUUfpqVJGeAPkHSaYV5bNoqXjES1SkDHl/c7z0FSo7efRU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxmlFnUGRNtbjZM2zrZOyYYNwl3kCK7lRh21jJLIg5LU05ZrL1j
- ncDry4Emj/3uLOZx4mbDEg+1F2dKFYzpd6EvmTn0ag6qz/R2ipTfuYAstzlbwqdZWVCcUnKrQ2W
- cK8hSGb9f6Zqg5qawn48act67PugRxKd+0Dn2NjnWDA==
-X-Gm-Gg: ASbGnctMWklPp19TyL2k0YrZ+8sW6Pv/wByEn8RUVzLVrgsIV2r6sGTDPJr8/O+dZBg
- Zi+ItYDkNe3IURMH3jCuQjKLwX2IADeGn93x2AL3+RnxUIdR8gcsXqtT8SZ6uaSD3BSxPKk/64v
- Y/6rdtp7HAKgjyOHZ1ZvD4NzUm/G2MG+eEx0kdeIfm928/CLjWnMp9Tnee/64QAbuggYZDHfdFC
- BLIMIQ=
-X-Google-Smtp-Source: AGHT+IFMT4TiLODb3cIVLuoxBUylSWm4GU5HcmsnTYAXsPEgeDWVHu8lReE4acz6gzfmmp9K9MLOVyqSHVrb8yraNOI=
-X-Received: by 2002:a05:6820:4dc3:b0:613:bd19:54fb with SMTP id
- 006d021491bc7-6190c826745mr7125769eaf.2.1753725868313; Mon, 28 Jul 2025
- 11:04:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
+ s=s31663417; t=1753726124; x=1754330924; i=frank-w@public-files.de;
+ bh=xoI8BvFMBES6/8G2OZXeJLIJtWy0PqqiwCScPOBAwZA=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:Reply-to:In-Reply-To:
+ References:Message-ID:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Jd3a+t3HznrHo53+1KohMBEoz5CW0ISXcScAdB5DpoSr7JNYt9NuYjmbxWPh5tfm
+ 6ZV5b6rZd2DlhX1pJBAM458PihAq6zQyNlKKlodmSOUNtPSdZth6rfjEvrwic4HSI
+ mzTEB23sSvCerWoUwSC6oY2MTDO6svAbvchRxKhvog7t3S8youx1nSPQZac6OZv/K
+ GKYZmm+Qa4xke0Ii0SRQB/GVpIRSBePalFk/m0SB6ed6ki8ZEKGBAsFO1D2HebKz/
+ fmUsclhSy3A8XzrborXjpqHYj7Pu/TtA3HT0u3pX16TyTS2PL/osc5LqGoLC+jw6+
+ br3EykQuemRJxIqD/A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([217.61.158.239]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MStCe-1v7QXd2ydS-00NqXb; Mon, 28
+ Jul 2025 20:08:43 +0200
+Date: Mon, 28 Jul 2025 20:08:42 +0200
+From: Frank Wunderlich <frank-w@public-files.de>
+To: "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
+ tien.fong.chee@altera.com, trini@konsulko.com, sjg@chromium.org,
+ xypron.glpk@gmx.de, seanga2@gmail.com
+CC: lucien.jheng@airoha.com, daniel@makrotopia.org
+Subject: =?US-ASCII?Q?Re=3A_=5BU-Boot=2C_v2=2C_1/1=5D_misc=3A_fs=5Fl?=
+ =?US-ASCII?Q?oader=3A_Add_request=5Ffirmware=5Finto?=
+ =?US-ASCII?Q?=5Fbuf=5Fvia=5Fscript=28=29_for_flexible_f?=
+ =?US-ASCII?Q?irmware_loading_via_U-Boot_script?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <f4be2285-eb0a-49c1-8595-a73a231465e8@gmail.com>
+References: <20250727141609.15425-1-lucienzx159@gmail.com>
+ <2f6dcd69-1e18-4a9a-a07e-9b59f79212da@mailbox.org>
+ <f4be2285-eb0a-49c1-8595-a73a231465e8@gmail.com>
+Message-ID: <F1C856C7-A075-4EFA-A39B-905A9C40D524@public-files.de>
 MIME-Version: 1.0
-References: <20250721180205.2696763-1-tharvey@gateworks.com>
- <20250724034438.GH18395@nxa18884-linux.ap.freescale.net>
-In-Reply-To: <20250724034438.GH18395@nxa18884-linux.ap.freescale.net>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 28 Jul 2025 11:04:16 -0700
-X-Gm-Features: Ac12FXzIEK8qW9mPFhgGPyZydiuUlK0klRtW2Ju6KK91auKtX526I-hKPDJqSLo
-Message-ID: <CAJ+vNU0bm6ZB3cZP6Az45sNsMZ3QZJEVj7C20yFygF_YSqa5bA@mail.gmail.com>
-Subject: Re: [PATCH v2] usb: ehci-mx6: Add i.MX95 OTG support
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
- Alice Guo <alice.guo@oss.nxp.com>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, peng.fan@nxp.com,
- Stefano Babic <sbabic@nabladev.com>, 
- Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:/YEVUkkqEUKc02zTF4ZejupQzRvkvK6JPFQSh09XBtalGGsiFBK
+ Vx6G37XSy0ZvoIi1O4VbxUwoG9ci7Xquhyevj0CJNnCfkH4yn1VMB4l+uGTZL+x4ifrZgVd
+ sniP/Mbvo0D/uT4mbknUX94UoGi22tHlNcUBPab9R8Xvkld/uJIkQQz1ocA1iRZuP4kDtz1
+ unDiPcu6fIFdq2Dl+3Gsg==
+UI-OutboundReport: notjunk:1;M01:P0:jNOl9SW3CoE=;aC6l4DEzehRVEmTRQM+/3569TjE
+ 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
+ uGp48=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,56 +133,76 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: frank-w@public-files.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 23, 2025 at 7:34=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> wro=
-te:
+Am 28=2E Juli 2025 18:34:01 MESZ schrieb "Lucien=2EJheng" <lucienzx159@gmai=
+l=2Ecom>:
 >
-> Hi Tim,
->
-> On Mon, Jul 21, 2025 at 11:02:05AM -0700, Tim Harvey wrote:
-> >When the usb node is defined dr_mode=3D"otg" ehci_usb_phy_mode() is call=
-ed
-> >to determine the mode from status registers.
-> >
-> >The IMX95RM does not currently define the USBNC STATUS register but it i=
-s
-> >assumed to be an omission as the first three registers are defined.
-> >It has been expirimentally verified that the USBNC_PHY_STATUS register
-> >at offset 0x23C bit4 (USBNC_PHYSTATUS_ID_DIG) reads 0 when USB_ID is GND
-> >and 1 when floating.
-> >
-> >Use is_imx9() as this driver works for i.MX91, i.MX93 and i.MX95 and all
-> >of these determine the role based on the USBNC_PHY_STATUS register.
->
-> Just a question, does your board use USB2.0 port for SDP? And any public
-> patches ready for that?
->
+>Marek Vasut =E6=96=BC 2025/7/27 =E4=B8=8B=E5=8D=88 10:46 =E5=AF=AB=E9=81=
+=93:
+>> On 7/27/25 4:16 PM, Lucien=2EJheng wrote:
+>>> This commit introduces a new API, request_firmware_into_buf_via_script=
+(),
+>>> to the fs_loader framework=2E
+>>> This function allows firmware to be loaded into memory
+>>> using a user-defined U-Boot script,
+>>> providing greater flexibility for firmware loading scenarios that cann=
+ot be handled
+>>> by static file paths or device/partition selection alone=2E
+>>=20
+>> Please run some 'fmt -w 72' on the paragraph above=2E
+>Got it=2E Will modify for the next version=2E
+>> [=2E=2E=2E]
+>>=20
+>>> I've validated this API on the Banana Pi R3 Mini=2E Here are my test c=
+ommands and logs:
+>>> 1=2E=C2=A0 `env set en8811h_load_firmware 'env set fw_addr 0x46000000 =
+&& env set fw_size 0x24000 && load mmc 0:3 0x46000000 /boot/EthMD32=2Edm=2E=
+bin && load mmc 0:3 0x46004000 /boot/EthMD32=2EDSP=2Ebin
+>>=20
+>> The 'load' command sets $filesize variable AFTER the load completed=2E =
+The $filesize variable contains the actual size of the loaded data=2E You w=
+ill likely need to expand the script a bit:
+>>=20
+>> env set fw_addr 0x46000000 && env set fw_size 0x24000 && \
+>> mw=2Eb ${fw_addr} 0 ${fw_size} && # Make sure the memory backing the
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 # firmware is initialized to som=
+e valid
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 # content=2E
+>> load mmc 0:3 0x46000000 /boot/EthMD32=2Edm=2Ebin && \
+>> if test ${filesize} -lt 0x4000 ; then # Validate that the size of loade=
+d
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 # data is correct
+>> =C2=A0 load mmc 0:3 0x46004000 /boot/EthMD32=2EDSP=2Ebin
+>> =C2=A0 # Validate loaded data size here again
+>> else
+>> =C2=A0 env set fw_size 0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 # Indicate =
+failure
+>> =C2=A0 exit 1
+>> fi
+>OK=2E I will expand the script you mention=2E
+>>=20
+>> [=2E=2E=2E]
+>>=20
+>> Looks pretty good otherwise I think , thanks !
+>Thank you for your great advice=2E
 
-Hi Peng,
+Hi,
 
-Yes, I am using the USB2.0 interface for SDP. Aside from this patch
-the usb2 nodes need to be added to the dt (usbphynop, usb2, usbmisc
-which are already in kernel but not yet in uboot dts/upstream).
+Is it possible to trigger it from uboot console?
 
-However, unlike SDP on the USB3.0 interface which I was able to get
-working, I was getting stuck somewhere between the ATF and U-Boot
-proper on USB2.0. I can no longer boot software on my imx95_19x19_evk
-after the changes merged for B0 so I'm unable to test and compare
-notes at the moment.
-
-Best Regards,
-
-Tim
-
-
-> >
-> >Fixes: 801b5fafd35d "(usb: ehci-mx6: Add i.MX95 support")
-> >Signed-off-by: Tim Harvey <tharvey@gateworks.com>
->
-> LGTM:
->
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+E=2Eg=2E setting these vars from there and then call the firmware load fun=
+ction and maybe network init?
+regards Frank
