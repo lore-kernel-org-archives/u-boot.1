@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DFCDC87FC9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:18:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A567AC83F17
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 15:18:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA62B83340;
-	Mon, 28 Jul 2025 17:14:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4374683297;
+	Mon, 28 Jul 2025 17:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="e+jIM8F3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KKv8H1Mh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BA8582E26; Mon, 28 Jul 2025 16:56:42 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 9A9DA82CA4; Mon, 28 Jul 2025 16:57:05 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4BD782CA4
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:56:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7632082E26
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 16:57:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEuLi82783531;
- Mon, 28 Jul 2025 09:56:21 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SEuXxw2307459;
+ Mon, 28 Jul 2025 09:56:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753714581;
- bh=fqvfMDQW3ZfjpWa8MSCx6m7q2SmEyf9Cvjwv4Gwoemo=;
+ s=ti-com-17Q1; t=1753714593;
+ bh=bkZGwYXrIcD4kt466PRyijorJ+/ayvTE/y0g/IAo5VQ=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=e+jIM8F35e0JqA4Vtiv0iinFQk0Eg9YhmWSXGqg2NvIEvu8kNsIzSNw9GerFDa/fH
- Wfo6D5nKab6kqnloAv7jMM/gpBiRON21+LRrtkldw/LZcrtGvmPgxqdvwnoqeEgzHa
- 4VzOGpU4SQ4hnW5E+w5S7wSaRVBALmpGD/g8ppZk=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEuKLX1132380
+ b=KKv8H1MhhxU+oG+5KVz/m5vDzbDW9RmOg2yldxxV5XDz0cUtvl39s8IBqNHzHbXNc
+ pe/wy4SdTfT24sqylfCtHTGw138pIVt85YWfYrnawRBdBpgeToKEF7BddqwNk6aeH0
+ Zez7uvZtoDYsI4OP0cAKWtiSAqx1SCrmIxLaQ9T0=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SEuXhE375108
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 28 Jul 2025 09:56:20 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 28 Jul 2025 09:56:33 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
- Jul 2025 09:56:19 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2025 09:56:32 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 28 Jul 2025 09:56:19 -0500
+ Frontend Transport; Mon, 28 Jul 2025 09:56:32 -0500
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 56SEoZuO1924403; Mon, 28 Jul 2025 09:56:06 -0500
+ 56SEoZuP1924403; Mon, 28 Jul 2025 09:56:20 -0500
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <vigneshr@ti.com>, <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
@@ -70,10 +70,10 @@ To: <trini@konsulko.com>, <yegorslists@googlemail.com>, <afd@ti.com>,
  <joao.goncalves@toradex.com>
 CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <srk@ti.com>,
  <s-vadapalli@ti.com>
-Subject: [PATCH 25/45] configs: j7200_evm_a72_defconfig: Increase aneg timeout
- to 20000 ms
-Date: Mon, 28 Jul 2025 20:20:14 +0530
-Message-ID: <20250728145034.225997-26-s-vadapalli@ti.com>
+Subject: [PATCH 26/45] configs: j721e_beagleboneai64_a72_defconfig: Increase
+ aneg timeout to 20000 ms
+Date: Mon, 28 Jul 2025 20:20:15 +0530
+Message-ID: <20250728145034.225997-27-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250728145034.225997-1-s-vadapalli@ti.com>
 References: <20250728145034.225997-1-s-vadapalli@ti.com>
@@ -109,19 +109,19 @@ will benefit from an increased timeout.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- configs/j7200_evm_a72_defconfig | 1 +
+ configs/j721e_beagleboneai64_a72_defconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index 36274804881..d18d5d31fac 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -144,6 +144,7 @@ CONFIG_SPI_FLASH_MTD=y
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+index e7f708a60c5..ba2cb0de331 100644
+--- a/configs/j721e_beagleboneai64_a72_defconfig
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -123,6 +123,7 @@ CONFIG_SPL_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_AM654=y
  CONFIG_MULTIPLEXER=y
- CONFIG_SPL_MUX_MMIO=y
  CONFIG_MUX_MMIO=y
 +CONFIG_PHY_ANEG_TIMEOUT=20000
- CONFIG_PHY_TI_DP83869=y
+ CONFIG_PHY_TI_DP83867=y
  CONFIG_PHY_FIXED=y
  CONFIG_TI_AM65_CPSW_NUSS=y
 -- 
