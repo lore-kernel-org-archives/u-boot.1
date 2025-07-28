@@ -4,49 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 463A3C83F17
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 13:04:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBF2C87FC9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 13:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7609E82E26;
-	Mon, 28 Jul 2025 15:04:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D1D0A82F14;
+	Mon, 28 Jul 2025 15:04:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="ym6lzYzN";
+	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="vnAwD2Vs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C078F82E34; Mon, 28 Jul 2025 15:04:01 +0200 (CEST)
-Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
- [109.224.244.22])
+ id D600482F8E; Mon, 28 Jul 2025 15:04:11 +0200 (CEST)
+Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA10882D88
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 15:03:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E55CF82D88
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 15:04:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philip@philipmolloy.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail3; t=1753707839; x=1753967039;
- bh=zkp+vP0BhMQ9BulC+BWnSBNXKanjLIkKJtyyC8ztrlc=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=ym6lzYzNTQ02WlsFrOseSrFJIopqoovS7tLEBjZ9WjTf8FG6AT42HQsSVQ5NvXMfN
- 9YYA5vHGm+CXpPlJ+uuRVGgl1P1XeqBhWFIexRDX16LMvnbV7MCeK9l/B7OIONSfuv
- D9gQwYeBTLCJ4D46ojdlwLlIb/fCHv2LYK34Hd00mhDgaPkSKBP9FGuD9YK1x+D8hH
- MpPwaMV/TrpvZshRX+aZmneWGyXGoFA+LW90M/q0vUZjIv6sNU6C16hiWN7elYRhoD
- L/+Nk+kjNCAX1x8EgqlYy+r/eZrFIZfjuKlQ3bF/ZOjb1GVU0+fDH1ImGOaJ+c5Or4
- ZHH6xjTE3FFbQ==
-Date: Mon, 28 Jul 2025 13:03:52 +0000
+ s=protonmail3; t=1753707848; x=1753967048;
+ bh=Xi1GUh178JCdLHIfWQpS30WriJSQAV5AoggcYxoxpsA=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=vnAwD2VsQxbjaBfn5pFtjsQ5J9isu3Z2GPtLSd7ti9KFWmNmXlYKtT48akRNOTBO0
+ hoHoyjxs24i0UJXM8ryC42b9JUpW/VQusdsJGyDZyr8cEERPx/8hk8ylKtcL7N+TZ+
+ CXe+qBHDA99LzQL1QtF299KgEBtoK5YCj23cJk6IFU5W9Zlu5uDmHQW4Xm8BUXBSW5
+ KO2Bf7mVU1TYqQ2q9xkPfu5OxHYxRvk4DsHihCnsNFGrzicsDgZ9/WUfPLd+0ZmXcy
+ caF0SbGKp947aO0NlK08UA8CY132q0Pc6chK35ZMu4Gu567/yUTnoX384ZyJNtB0zL
+ tfbgLslhBjzNA==
+Date: Mon, 28 Jul 2025 13:04:03 +0000
 To: u-boot@lists.denx.de
 From: Philip Molloy <philip@philipmolloy.com>
 Cc: Michael Hennerich <michael.hennerich@analog.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Philip Molloy <philip@philipmolloy.com>
-Subject: [PATCH 0/1] Remove expansion of undefined make variable
-Message-ID: <20250728150333.1716886-1-philip@philipmolloy.com>
+ Philip Molloy <philip.molloy@analog.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH 1/1] Makefile: Remove expansion of undefined variable
+Message-ID: <20250728150333.1716886-2-philip@philipmolloy.com>
+In-Reply-To: <20250728150333.1716886-1-philip@philipmolloy.com>
+References: <20250728150333.1716886-1-philip@philipmolloy.com>
 Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: fc5d23d9254b89d53140b318b5777867b3a74cd1
+X-Pm-Message-ID: 45271710a02a89fc5b5664ffa052bd0cb68a864b
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -66,17 +70,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Came across this while digging into the ADI ldr, which generates boot loade=
-r
-streams for ADI DSP processors.
+From: Philip Molloy <philip.molloy@analog.com>
 
-Philip Molloy (1):
-  Makefile: Remove expansion of undefined variable
+The U-Boot environment was previously stored in the boot loader stream
+using ldr, but it has been replaced by the default environment built
+into the U-Boot executable or an environment on external storage
 
+Fixes: ea3310e8aafa ("Blackfin: Remove")
+
+Signed-off-by: Philip Molloy <philip.molloy@analog.com>
+---
  Makefile             | 1 -
  scripts/Makefile.xpl | 1 -
  2 files changed, 2 deletions(-)
 
+diff --git a/Makefile b/Makefile
+index 1a5c77d7caf..e57594aa755 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1370,7 +1370,6 @@ u-boot-nodtb.bin: u-boot FORCE
+ =09$(BOARD_SIZE_CHECK)
+=20
+ u-boot.ldr:=09u-boot
+-=09=09$(CREATE_LDR_ENV)
+ =09=09$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
+ =09=09$(BOARD_SIZE_CHECK)
+=20
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index 43f27874f9f..408d5cde7a6 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -390,7 +390,6 @@ $(obj)/$(BOARD)-spl.bin: $(obj)/u-boot-spl.bin
+ endif
+=20
+ $(obj)/u-boot-spl.ldr: $(obj)/u-boot-spl
+-=09$(CREATE_LDR_ENV)
+ =09$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
+ =09$(BOARD_SIZE_CHECK)
+=20
 --=20
 2.50.1
 
