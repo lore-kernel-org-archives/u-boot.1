@@ -4,117 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31D29C83F26
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 08:25:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4A4C83F26
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 08:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 451D082D06;
-	Tue, 29 Jul 2025 10:25:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4CEDC83121;
+	Tue, 29 Jul 2025 10:28:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vh1Lbzsi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Vlu7KWQ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5B5682F00; Tue, 29 Jul 2025 10:25:46 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92A8C82C87
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 10:25:44 +0200 (CEST)
+ id AC24082D21; Tue, 29 Jul 2025 07:15:44 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 143D982B0F
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 07:15:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-455b002833bso20082065e9.0
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 01:25:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753777544; x=1754382344; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=uRPOgENsCUYwosfY8rkvj7KplNFpHu9Aqo4/4bd2mN8=;
- b=vh1LbzsizngrUXTpO4wWCD+Sl+RGC2NzsH/NBrlSj8MPszPAEwF9+5E+YT33+XhPHM
- jhLxI04hf/ysBOC371VoeGrtRQ5rTZzZH9prhoqVLGouhhLqrlBSawBxCekj8QIKZBtQ
- t+12FpeHWxxBlkt3Da72S4SgAo7oUz+J2Kqy/D2Df5KhYm+OcPK37nbVHdY17xRGLuDu
- /r08JV62+TsE4aU+tvo5wJTBogW8auk7AbtTjsVx1qRCkkmPp3bNrGnbL8JvQCWSIiec
- pt+V8WzkQKOnpTSppgdGNCDTxpLjpiTKedOhnS3rcnFas4aPdluDZeBCikyMTelYgIi4
- 5BpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753777544; x=1754382344;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=uRPOgENsCUYwosfY8rkvj7KplNFpHu9Aqo4/4bd2mN8=;
- b=Q1oc0dmmLzwTIz/MOr34XlH+7TEbS6ueUq13pci4mbbdIYcU+ZLdNyRUvfwEdSh86m
- O67Mh7m2aWg9w1ehS5o/u4HkRoiJ3bjMnRbRFc1i3Q6T/3SRGvU6r30Jx1M9HcpU8qbR
- h4s9sRcrfZedu7VE6I+mTSNc2B1+T63zfdrQvW6LeXunfKBsHyf3WqjVEyY9bxV/Gfsp
- E9UrSxVrTdflKvent9GcPW5G7qviEuEhImF5ogbmTSH3LXGO0Ks4xljUCBg4MOLxZ9LS
- 9q4Hnp4KhcG9KGC840JxJ+UQ+LBmCIXjkd3EtivIW/mF1VcwBS9wXt2s1EyXyxbTeqBV
- zkMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmkWDk5yHmyzsK0NfFT2LzpEYLZxg2FDZBPk2y/lSyyKMp9sPyDoyI2wH2zM2tnrEvHkBSm38=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQ37PbayF0JmXJLEhx//D7Env6JN/q7ZVuReGaPy2pdCfuXDkB
- z3EBwSsR+TqJSI9XyIMRD4OBKzz2Fk1+Vsll4lkYG1xTqpv7/oqDMzba2CUviR28Trkv1CoAQH5
- 9cBsH
-X-Gm-Gg: ASbGncts+XaiSPy2XV47Ur0J5U6sCqy1UXIQqh7fkaLK2iEul3el/kZi3mnW+IT/JLn
- b1PlIyaoqePhv3w8oqUmG9Ow8MAyYtYUTifhL2orciRy3+6RTdyr3z3X6n0pGKMhyOaLXGoZsyD
- J5NGvJTVFcpgKE9xW3HFQsHQ/HAABTNUg17hExo+FdsbTxeiUV4deuMaGOidchvw9/af8wvpAyI
- 0CZY+tu3IQHrRes3rGVOM0qD5VWxofEDibirhh34UKBnyDVvCWNjvhzGBMFCIux8ZppDVF5biE3
- gQg0Ot4R1/TTSEnlqosh3e3KKfIbGHmFmbRo1z4ryxXSCnlt6ozRDhU3z9Tm7P2L8SX3wUf8epP
- 0dBIsrxjq/vpClMcBZXMW2KelZZDJzsUYdIevTYq6mbe3yFdkBINnDp+VX0YVYQWARhfwI4Jx
-X-Google-Smtp-Source: AGHT+IEBF/an0iFrzaoGR4n9rgcEmcb6m1Jh6EgNdeCylCMjrfSrBCMOmh3vti4Sd/PAhKGKgZX0cQ==
-X-Received: by 2002:a05:600c:810c:b0:442:f97f:8174 with SMTP id
- 5b1f17b1804b1-458765475bcmr128129765e9.18.1753777543761; 
- Tue, 29 Jul 2025 01:25:43 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:3ae8:20b:c783:9328?
- ([2a01:e0a:3d9:2080:3ae8:20b:c783:9328])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4588e5b7677sm14133665e9.7.2025.07.29.01.25.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Jul 2025 01:25:43 -0700 (PDT)
-Message-ID: <26a8955c-5990-4cb4-a5c4-478a3a86f2b8@linaro.org>
-Date: Tue, 29 Jul 2025 10:25:42 +0200
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56T5FARt2442657;
+ Tue, 29 Jul 2025 00:15:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753766111;
+ bh=Aaf4S2HFlikJcSHt1tm/TuxH3VC88HS2I1kC2xzrBWE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Vlu7KWQ/HvTcq0xkgE7009Oo3HCnWtfSJUGOfZSFfkefa8iKIhxXS6bW738DviDu4
+ RTV+IpuXZHUsa9jK66AKdQaRLiJqsqBt7P1tLCCM4q3eULOnk18rdqr6yW7hK+2u8h
+ 5I4tklPy3L9EOdO9SRpiyHRV2ZC43zoNyRpxWYHY=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56T5FAux2524431
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 29 Jul 2025 00:15:10 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 29
+ Jul 2025 00:15:09 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 29 Jul 2025 00:15:09 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [172.24.231.84])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56T5F8w42878414;
+ Tue, 29 Jul 2025 00:15:08 -0500
+Date: Tue, 29 Jul 2025 10:45:07 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
+ <yegorslists@googlemail.com>, <afd@ti.com>, <vigneshr@ti.com>,
+ <bb@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
+ <m-chawdhry@ti.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>,
+ <a-nandan@ti.com>, <ggiordano@phytec.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <paulk@sys-base.io>,
+ <marek.vasut+renesas@mailbox.org>, <romain.gantois@bootlin.com>,
+ <kory.maincent@bootlin.com>, <mkorpershoek@kernel.org>,
+ <festevam@gmail.com>, <a-dutta@ti.com>, <ddrokosov@salutedevices.com>,
+ <anshuld@ti.com>, <jm@ti.com>, <sjg@chromium.org>, <p-mantena@ti.com>,
+ <n-francis@ti.com>, <s-k6@ti.com>, <rogerq@kernel.org>,
+ <seanga2@gmail.com>, <kamlesh@ti.com>, <a-shenai@ti.com>,
+ <c-vankar@ti.com>, <kishon@ti.com>, <dannenberg@ti.com>,
+ <e@freeshell.de>, <h-salunke@ti.com>, <semen.protsenko@linaro.org>,
+ <peng.fan@nxp.com>, <quentin.schulz@cherry.de>,
+ <sumit.garg@kernel.org>, <d.schultz@phytec.de>,
+ <emanuele.ghidoli@toradex.com>, <hiago.franco@toradex.com>,
+ <joao.goncalves@toradex.com>, <u-boot@lists.denx.de>,
+ <praneeth@ti.com>, <srk@ti.com>
+Subject: Re: [PATCH 01/45] configs: am335x_baltos_defconfig: Increase aneg
+ timeout to 20000 ms
+Message-ID: <1c747fc2-f622-4586-ad7a-6d295ebf4a9e@ti.com>
+References: <20250728145034.225997-1-s-vadapalli@ti.com>
+ <20250728145034.225997-2-s-vadapalli@ti.com>
+ <a0f6b8ef-ac29-4f53-8d02-c20b1cb0305c@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v1] drivers: scsi: fix inaccurate block count reporting in
- scsi operations
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, quic_varada@quicinc.com, casey.connolly@linaro.org,
- andrew.goodbody@linaro.org, lehmanju@devpi.de, u-boot@lists.denx.de
-References: <20250728162105.63429-1-balaji.selvanathan@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250728162105.63429-1-balaji.selvanathan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <a0f6b8ef-ac29-4f53-8d02-c20b1cb0305c@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Tue, 29 Jul 2025 10:28:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,107 +95,33 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28/07/2025 18:21, Balaji Selvanathan wrote:
-> The 'blks' variable in scsi_read/write/erase functions is updated
-> regardless of pass/fail of the scsi operation . If the scsi operation
-> fails, 'blkcnt' is updated using an incorrect value of 'blks'. This
-> wrong 'blkcnt' is returned to the caller and it assumes all blocks were
-> processed correctly.
-> 
-> Fix this by updating the 'blks' variable only if the scsi operation
-> succeeds.
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> ---
->   drivers/scsi/scsi.c | 13 ++++++-------
->   1 file changed, 6 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-> index 78efed6b66a..05608399be1 100644
-> --- a/drivers/scsi/scsi.c
-> +++ b/drivers/scsi/scsi.c
-> @@ -228,13 +228,11 @@ static ulong scsi_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
->   			blocks = max_blks;
->   			scsi_setup_read_ext(pccb, start, blocks);
->   			start += max_blks;
-> -			blks -= max_blks;
->   		} else {
->   			pccb->datalen = block_dev->blksz * blks;
->   			blocks = blks;
->   			scsi_setup_read_ext(pccb, start, blocks);
->   			start += blks;
-> -			blks = 0;
->   		}
->   		debug("scsi_read_ext: startblk " LBAF
->   		      ", blccnt " LBAF " buffer %lX\n",
-> @@ -244,6 +242,7 @@ static ulong scsi_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
->   			blkcnt -= blks;
->   			break;
->   		}
-> +		blks -= blocks;
->   		buf_addr += pccb->datalen;
->   	} while (blks != 0);
->   	debug("scsi_read_ext: end startblk " LBAF
-> @@ -286,13 +285,11 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
->   			blocks = max_blks;
->   			scsi_setup_write_ext(pccb, start, blocks);
->   			start += max_blks;
-> -			blks -= max_blks;
->   		} else {
->   			pccb->datalen = block_dev->blksz * blks;
->   			blocks = blks;
->   			scsi_setup_write_ext(pccb, start, blocks);
->   			start += blks;
-> -			blks = 0;
->   		}
->   		debug("%s: startblk " LBAF ", blccnt " LBAF " buffer %lx\n",
->   		      __func__, start, blocks, buf_addr);
-> @@ -301,6 +298,7 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
->   			blkcnt -= blks;
->   			break;
->   		}
-> +		blks -= blocks;
->   		buf_addr += pccb->datalen;
->   	} while (blks != 0);
->   
-> @@ -322,7 +320,7 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
->   	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
->   	struct udevice *bdev = dev->parent;
->   	struct scsi_plat *uc_plat = dev_get_uclass_plat(bdev);
-> -	lbaint_t start, blks, max_blks;
-> +	lbaint_t start, blks, max_blks, blocks;
->   	struct scsi_cmd *pccb = (struct scsi_cmd *)&tempccb;
->   
->   	/* Setup device */
-> @@ -339,19 +337,20 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
->   	      __func__, block_dev->devnum, start, blks);
->   	do {
->   		if (blks > max_blks) {
-> +			blocks = max_blks;
->   			scsi_setup_erase_ext(pccb, start, max_blks);
->   			start += max_blks;
-> -			blks -= max_blks;
->   		} else {
-> +			blocks = blks;
->   			scsi_setup_erase_ext(pccb, start, blks);
->   			start += blks;
-> -			blks = 0;
->   		}
->   		if (scsi_exec(bdev, pccb)) {
->   			scsi_print_error(pccb);
->   			blkcnt -= blks;
->   			break;
->   		}
-> +		blks -= blocks;
->   	} while (blks != 0);
->   	return blkcnt;
->   }
+On Mon, Jul 28, 2025 at 09:03:49PM +0530, Kumar, Udit wrote:
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Hello Udit,
+
+> 
+> On 7/28/2025 8:19 PM, Siddharth Vadapalli wrote:
+> > Increase the PHY Auto-Negotiation timeout to 20,000 ms from the current
+> > default of 4,000 ms inherited from "Kconfig" for PHY_ANEG_TIMEOUT.
+> > 
+> > The motivation for this change is that existing devices will continue
+> > working as-is (timeout is an upper bound and auto-negotiation can be
+> > done earlier), while older Hardware connected to the board that might
+> > occasionally take longer than 4,000 ms for the Auto-Negotiation process
+> > will benefit from an increased timeout.
+> 
+> 
+> Can we think of using TI_COMMON_OPTION , similar to TI_COMMON_CMD_OPTIONS
+
+Andrew's suggestion of updating Kconfig [0] seems better to me and I will
+prefer that approach. Let me know if you think otherwise.
+
+[0]: https://patchwork.ozlabs.org/project/uboot/patch/20250728145034.225997-2-s-vadapalli@ti.com/#3553223
+
+Regards,
+Siddharth.
