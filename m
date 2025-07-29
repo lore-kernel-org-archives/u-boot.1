@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D28C87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA84DC83F26
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:08:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E52F98311B;
-	Tue, 29 Jul 2025 18:07:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AC598304F;
+	Tue, 29 Jul 2025 18:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gHnceN6c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HzvU9dei";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 724D982B07; Tue, 29 Jul 2025 18:07:42 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 5BCDC83145; Tue, 29 Jul 2025 18:07:49 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7692A82B07
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:07:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08221831A4
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:07:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3b7920354f9so675344f8f.2
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:07:40 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4561ed868b5so37899345e9.0
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:07:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753805260; x=1754410060; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753805264; x=1754410064; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=tIHGpbh5H27iDqdxx5maHsd8aRW6MX0LXAiA6myMieQ=;
- b=gHnceN6cElBvBSb9ZdO9hxdee8uiJiTgL38dX1niAyi9bcSrgwP8CcTXRNJ0MRSnpj
- eX9o/8S7bjYPbJ+BxIJCWhaa0ZJfTanppx0T6F00BJLgspthE7PYCGNQMVEuCVbJLQda
- PqxnjeDRySZBftc+M6DWnzO9NSUsaCs7NbGZem732FhEGmpApvtJasmEqymOgYQT3qnC
- OoetEv0qvbijozj6Mhw81diNwGUjd2ZocWC+wAPc5Hn8BsinprxTwU2gGpJeHKYU8TU4
- rxcdNQt7seJcHRvsVAf/F2TBK4NqyzkDe2Mej6cvNi600q559bZB8xfVESdBzCU+yuNz
- Kh6A==
+ :reply-to; bh=OAU8u7dJ3enNuLl7+lbjMPH36mBB6d7JKMJPH8OPjp8=;
+ b=HzvU9deikmLGAfFYmryrfeXt0Wd+iFnH/GG8A662shWRCY9JexNNiHzyOmdJ4zUiF6
+ xT7veT/Ne21Hrw3kwfVZcPjm9ONJkZc5afj4Kl4DMo1G5frl3CCwZCUuBLJopkdKjZuv
+ Am1uKvlOwXrNFyRvNldl+lJv8dAO4NpdeeF8etp+xntfL0HNViSG9z+j4xSBG5gND+HQ
+ DIBn8kfw4XBPSzhceQ99HrY3deyFxHIrcBWOijVNF5IKJ6iWgJKNBw/ukwmVVm+wMh/q
+ 7JMKfk/NvUFqjHVmD3SV9xu0DSYvhEpo1GW0UhNNDiI1/uVaZYIiiSFSkeeYMFjoTRU0
+ +xBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753805260; x=1754410060;
+ d=1e100.net; s=20230601; t=1753805264; x=1754410064;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tIHGpbh5H27iDqdxx5maHsd8aRW6MX0LXAiA6myMieQ=;
- b=Q2WuEP/gjD8gRu2bo7pMN5816EGlqVTgbY/EHr1Cpc5ftQ0OaEU46n+T3hTm1Z8Hmq
- Yq4wku4MvRehQ8sSok67Zf2PI7ig2HHseg+mz6trIa5M+JPKljMe1Yx7htv7wy3rAuQ1
- WAki8gMeh+FRir80BzLgVNtm5bJWKsLR7MMF2N2EYv3Vp6PGwdCgOXl0UgyT/oMxKyZo
- 7bvs8acWeD5ckLnEHiQxtTxMNlMxMXCKjPOSnqf5HddxCeZHcjiume2IJzZWEbCPI+lc
- jZGnZh7x/m3FDTgnHpd/l+GVYFX7AlfrQik0m9CQhJJPbJvTZJ3bhdac3Lc6c70wvCLZ
- VOUg==
+ bh=OAU8u7dJ3enNuLl7+lbjMPH36mBB6d7JKMJPH8OPjp8=;
+ b=BjkzGfgVMTtD62coU1ajxQ0wUGp0dmE+U2zmuOTVzj+HJX3aQhBDcnCfj8sXOnukCY
+ xo5wc7DUq8MrnfAxwRH6Lp1d9BC0nffOrbBrdoeDCVzUKrRuLWomhizuSKRl+lxWqNaS
+ 9tNA4mDhZJzFfRo96VuKTvB6NIcZMY9b3ey7cBaaF6xRiSBN3TYXBsU+pMnCZK+QeSpz
+ 6CHUAGe07/B1aIXwqB7BtVNWi+MWbg3iVym3uxdomSb2QB7DmYwAV08DZ7YyzJUWGMri
+ xoIkvKqji6PA8mP/p/eBiCQdgkC1ba6P8ZUY/gSj11bBLL/KsjolyCjPMPmgbfdCmRwS
+ ITsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUwVBOf/A8TZ+4ToBbTRsbclldM8wm7PL4yFE9WeMav19zF3djnZeg2iAtzxOv+b4s2k+eSYB8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+u771SNU84xgNriNBmr2WAnjM9fN0G84gLwNYXUwFmqg5/iCo
- RuIy4cGIZNyEkz7T3GzluQKAcSBCPRIOf49zKeueWZjyWJVcbhEQkA9OSV5gxFgAF5M=
-X-Gm-Gg: ASbGncvLt8JohdS/xVQjLJgJb59/ON/2RU9hqttK/LIm4+NXktai1CTdVDk2LaifxHc
- 6KncO8ZM9crm5kS1MkCblKmWtXAF6t9k66FpGyLvCPZWEyAKS7w2hMNajhZtJjwyRBeetxJlv/B
- ShNqt+jY8hGCi4ul14X4hVFRV6MOecxjCiSvvi8xQNgy1sYtICc5MgTTe+5ENgQ2ip9pcK1CQwm
- +wT2NwvV7msZu3wKzNFDWCBPdUhgU3U2FwmMVxAhEv3LhqXkbFfWWyKtuH3NFmKwY1a7Y6nQpcm
- Lf36jfLZqC+CQP33fPSAImoUYA+KCfXIpaivdw+JVYVU/DHWTyMpwghsjfPG0M7l8yzVwRyz5Qp
- 8Rx6aL+vkSmFu2av0nLczQ8swzAgz0HvG8nrs9e8zpgACN5nEunss7fnc7yX7QIT0W/76EiaIwa
- wJeul7C/97aQ==
-X-Google-Smtp-Source: AGHT+IGYk4eTMMg4PE5exKWUlEkMIqKVExWBh4tvWmCSnTX/szIkIzLFjXF/r5A0kUcKuKZ6jk8uHg==
-X-Received: by 2002:a05:6000:2c04:b0:3b7:7d96:e24a with SMTP id
- ffacd0b85a97d-3b79501ed3cmr169251f8f.35.1753805259854; 
- Tue, 29 Jul 2025 09:07:39 -0700 (PDT)
+ AJvYcCXErEtb0jlZJCqyxeXY8JoV/klQ+4AF8HXh9QCMVGNtMGthweFXO4iwMMI1w14iYwgGzL3YHT0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzHN45oySfc30LXuTTmaUD/LPzIYufno1fS2YgQVUY/+ewRVnO
+ kc2yW0mjH8syxaHxmRKRvZzjwgtvYKv+wML2pkJhQwQ2ZmHO71MU7hEfM1CsoMVYlOU=
+X-Gm-Gg: ASbGncv2Q3spMpSEZi7ej6GLBvOz8q2uC57NokX8BJbrkivlsz9VH2R2ly+pnhW8nLA
+ SNhysz28KznYElEKdnWZwdvSMYsrM98CrGVVhhLqCNA7x50QTCf5Ugudmf+PfBmCStJHr3pvlri
+ uv2D3llw3ZqKbcF2f5/bt7T1UNwAFoDzYXoDHz6cmYkuq7sSoLcxe222dHg7vhYpcgBXnlcWCMJ
+ JP8Vq9X6B89quduhHM5XhNS0BMSk8UZZmevDg/Ejccj1xYgXM0iOFGJo8uI4jRWJV/CieZbcqvi
+ 1u8gbUOjT1p2GAIpkgNeHe67wqx+cP/ktmO0SX8DGDDY/rUOrqbcSjKYXfkIIkCltla9PSsIYn2
+ yA4WDc8sQ8u6CiMje+oGf9VcxL4GSrtSk2kxSJY6btZxsVGjMqpdHkNzppUywGFWvjyLGGD0Cjr
+ 8YqJXn5weHTQ==
+X-Google-Smtp-Source: AGHT+IGkHomiPDfo6EkoWYTlSUmZinAyI6IFcckXkdDGopWsjQsa3fWP9RBxb5J/97GyBB+XtWBjgQ==
+X-Received: by 2002:a05:600c:1d19:b0:456:18f3:b951 with SMTP id
+ 5b1f17b1804b1-45892ba16b5mr3684805e9.15.1753805264362; 
+ Tue, 29 Jul 2025 09:07:44 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (ip-185-104-138-124.ptr.icomera.net.
  [185.104.138.124]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b781d2fc1csm10512075f8f.5.2025.07.29.09.07.36
+ ffacd0b85a97d-3b781d2fc1csm10512075f8f.5.2025.07.29.09.07.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 09:07:39 -0700 (PDT)
+ Tue, 29 Jul 2025 09:07:43 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 29 Jul 2025 18:07:23 +0200
-Subject: [PATCH v5 02/10] arm64: initialize the frame pointer register
+Date: Tue, 29 Jul 2025 18:07:24 +0200
+Subject: [PATCH v5 03/10] Kconfig: make CONFIG_FRAMEPOINTER available on arm64
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250729-b4-arm64-backtrace-symbols-v5-2-0009c4620a46@linaro.org>
+Message-Id: <20250729-b4-arm64-backtrace-symbols-v5-3-0009c4620a46@linaro.org>
 References: <20250729-b4-arm64-backtrace-symbols-v5-0-0009c4620a46@linaro.org>
 In-Reply-To: <20250729-b4-arm64-backtrace-symbols-v5-0-0009c4620a46@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -89,21 +89,21 @@ Cc: Simon Glass <sjg@chromium.org>,
  Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=994;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2793;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=vzLGLPqeum6SV1jaUPioF2BciGorBkrir+9VBG2Aj4g=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiPHBd+Sj5JnCHz60XZysmKfwnH8DYcm1xCI6D
- sKnrYgctSeJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjxwQAKCRAFgzErGV9k
- tq1ID/9FzzmOINL4JgsL999dN/BCR4njmbUonRawGzsULE13Bd62jKo9Q0IZDsOEkClj2V00gIx
- WLgW5WhnAYOTGRXCPAvTLkGs86lIWj/+3MllAHfN5Jr/lgSfUgGvV8LMnOWscKuRpsRaDaTk2BR
- 1uJI188gxJs0F7rkglvztp1/mkBykDh/ExlgMamJF8lAcEWXEsenmWsEHWNItkN4EO0+cHeg25J
- r5TRZrwg6CX8GNZywbem5ILfwRWZBFhQk82Yj7bk06WiwWTVr78Q9C8qq8jC5NiFvNQD/IP+yE/
- ZAzabDb82ztFDtfgk4eszVuf9tavwC5BFMEMu/mLTwiX++t904E4xrxb2Fk03T0kqijdSlYkz7F
- yhwD4/njdToEQXLqqSjX64AGpsGlDLBjpKcnpxZQNHrV5OLG5yKpoywLrJA16y2zzmNRd3Mp8yQ
- /1eFhioTDisuY1OdHT3bluO1VCBNVQV3/4AdQJiCiJynkYOAvddLDD7XngOPx2KahyhmLXowUD4
- L23ZKaLY31oCjVpROLprI2RmK+YX/w5iPpbCB4LVRUUEQQ746ptIXRgUPQhVVzc1kOt9m1929of
- jX9AeEcTAyGjhWjVQLN7tv6cXm22WJ1ixY2ft3kQ3mxrKoSCo6T4qqHuDI9Jr0U8q9xLv1Bpqwj
- reQOZFt88xryKnQ==
+ bh=Mw4RH2YSTpmzvYgrGKinq7mtwPHmaYZ0Rd4QoQyJZCs=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiPHB/LbcBMnNOMXh4TCNmUwIr2rcfF/08q9KD
+ LZdKcVWWXeJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjxwQAKCRAFgzErGV9k
+ tpD0D/0S2BgxZIEQWwWnn9zW3yqbLyQTClINGoYzYEezZ5yay68bL3WUPTPuxRmO2u9CImNWqpm
+ 24ljKRGtZnYdZjU8cqsgYglfIcwxrDEQUNHyfh3t727drZb50cyGElRlqvPL/Pr3URVplaafM+T
+ cP7NCyGy+daR3xj78J9szrIr1H1kaEjamx8IEagZIGBtaiDbWoo36CVU4Ui8psRptGcp1YJqygM
+ V/STUfnJ6biVYrKH167NNzlo1gRZsVHWmYoPEoampHqXQYytbmP3hLbBzK+AAw41MAs2tk2hawk
+ nKphCdi8TOxLGUXB5qiLD+28oYDgHQTv3QVbNzqyM0FF2ebfF8eizdTlP+hNc5FwWPALN9ICaGf
+ B+H7tE3dyhiMI3e8y0Eu1G60luYXwggX3EfTUTjdYWE2B1gpvtJPVSR4Eh1GAd708VkyvfBvAdW
+ aMEvYbOleZIsAkPSrpGGd/1+o97wfnJMKRIJ2k1FK+2Y65Xjfco+7nkhpWXQgyPYW6c8KH2fyuU
+ 4q8MkW6nW0HkslxynCnWUTwTpQ6KSS/OuOPEb4VeYgA/Cn+Dqd4fOnTvFYBN+LtvJoPP/ehqzNS
+ 2lF0vVOg9GZyOv+DlO4NFdSBKsdxoQmnNE8kEAyHf6h6nhhqisMYsyxfcto2Qq7wYcTYiVdgPBi
+ kDl6d19RetmAMgg==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -124,32 +124,87 @@ X-Virus-Status: Clean
 
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-U-Boot may be compiled with frame pointers depending on defaults built into
-compilers are via explicitly passing -fno-omit-frame-pointer.
-
-To stop walking frames it is necessary that the initial value of the frame
-pointer register is 0.
+Move the frame pointer configuration to the generic setup section as it is
+applicable for multiple architectures (RISC-V, arm64).
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/lib/crt0_64.S | 1 +
- 1 file changed, 1 insertion(+)
+ Kconfig            | 25 +++++++++++++++++++++++++
+ arch/riscv/Kconfig | 21 ---------------------
+ 2 files changed, 25 insertions(+), 21 deletions(-)
 
-diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-index f3f279f2c39cd27cc30801805999092d582cef52..3ff0577e9c87076e7fc6626fde3703fe952f07c8 100644
---- a/arch/arm/lib/crt0_64.S
-+++ b/arch/arm/lib/crt0_64.S
-@@ -167,8 +167,9 @@ clear_loop:
+diff --git a/Kconfig b/Kconfig
+index c883f11545952588aff574fdceb88b43407352d9..d8e117d0b1a511f12f7a54be1c84f4c45634828a 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -178,8 +178,33 @@ config CC_COVERAGE
+ 	help
+ 	  Enabling this option will pass "--coverage" to gcc to compile
+ 	  and link code instrumented for coverage analysis.
  
- 	/* call board_init_r(gd_t *id, ulong dest_addr) */
- 	mov	x0, x18				/* gd_t */
- 	ldr	x1, [x18, #GD_RELOCADDR]	/* dest_addr */
-+	mov	x29, 0				/* frame pointer */
- 	b	board_init_r			/* PC relative jump */
++if ARM64 || RISCV
++
++config FRAMEPOINTER
++	bool "Build with frame pointer for stack unwinding"
++	help
++	  Choose this option to use the frame pointer so the stack can be
++	  unwound if needed. This is useful for tracing where faults came
++	  from as the source may be several functions back
++
++	  If you say Y here, then the code size will be increased due to
++	  having to store the fp.
++
++config SPL_FRAMEPOINTER
++	bool "Build SPL with frame pointer for stack unwinding"
++	depends on SPL
++	help
++	  Choose this option to use the frame pointer so the stack can be
++	  unwound if needed. This is useful for tracing where faults came
++	  from as the source may be several functions back
++
++	  If you say Y here, then the code size will be increased due to
++	  having to store the fp.
++
++endif
++
+ config ASAN
+ 	bool "Enable AddressSanitizer"
+ 	depends on SANDBOX
+ 	help
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 8c6feae5735592ad12880f1d460568768b848a44..f60ad5e9acec76aca773fb77a4016cecf41fc679 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -149,29 +149,8 @@ config ARCH_RV64I
+ 	  Choose this option to target the RV64I base integer instruction set.
  
- 	/* NOTREACHED - board_init_r() does not return */
- #endif
+ endchoice
+ 
+-config FRAMEPOINTER
+-	bool "Build with frame pointer for stack unwinding"
+-	help
+-	  Choose this option to use the frame pointer so the stack can be
+-	  unwound if needed. This is useful for tracing where faults came
+-	  from as the source may be several functions back
+-
+-	  If you say Y here, then the code size will be increased due to
+-	  having to store the fp.
+-
+-config SPL_FRAMEPOINTER
+-	bool "Build SPL with frame pointer for stack unwinding"
+-	depends on SPL
+-	help
+-	  Choose this option to use the frame pointer so the stack can be
+-	  unwound if needed. This is useful for tracing where faults came
+-	  from as the source may be several functions back
+-
+-	  If you say Y here, then the code size will be increased due to
+-	  having to store the fp.
+-
+ choice
+ 	prompt "Code Model"
+ 	default CMODEL_MEDLOW
+ 
 
 -- 
 2.50.0
