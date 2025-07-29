@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF2ECC87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:12:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDB3C87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:12:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F5DC8320C;
+	by phobos.denx.de (Postfix) with ESMTP id E03D88324C;
 	Wed, 30 Jul 2025 07:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="PVMF7Byp";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="FfcWiNFB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4043883045; Tue, 29 Jul 2025 18:22:47 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id E7BCA83045; Tue, 29 Jul 2025 18:23:05 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21ACB82BCD
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:22:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E65D682BCD
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:23:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YNAKvKdtArcZ6669A52QCAJiWMydmgvTzOZDGJYdENBwDWfhiNU/fWv7acO5GrWTqfqHHJLaDN4jaltEXWA/FtmHlb8KEzeXINs14dO4OCNJqiHXoPH1xKXVGF7xsGdecT/bC9TR/bxBkzcxKrU8kRBnrinD5EOq7bzHIh/LkXWpWfXNYzdUBortmCQ7TrpvsTFzVwHApkCbVgDBpq0o1WqWSx/6a852TnQPfl01UJ/IIKfXG9n+6TiWXmoIWO3j4ZjTj+5BE7xEYseZBXgG84SRnL5KPamw1RvnSEuA1QY/5jj7tbsbF8ViFIHStbGTr+U73zxUncBzK46l3Z8fSg==
+ b=gebbutcQKvi3WsGgFRPr5guYGkL+H++q8qVD0Md8m9QV6RpGA6uvgzklJs9947w6XkEz4KP+VZE0oFBqx67gju42ISElStBVSEFsOVveaOOz1tSgacndRm8gWa7893OUbPy2IX42Uynywb6mhzM8Tfn6RGcsCqvGl49AlaTVqcBvDXB1uQ1kNavtTVDvq8eKEA5HFwkX4/h1y/+WZ1R6BX4qXachTcf6yQxJPhceZOi4tW0pfqXc+cVZQMTv+fo1GnO82PQly+hCgU0p2BJpWfeeKegE5r1Q2lhWy0PwY1BNkyrJzi2SnQdMmINFL/ie/NtP8RhyVLbxE4pUMbdUoQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ftO9I6cW+XoWlPhxUfIMT2e31Hp6N/rhVCBWDcVejxs=;
- b=a5MS8X6ZGs6lRXCfVuStbPGL7jvTS6k6d7urpow4FqXjJfUb467ynE9c19BD/Bb8wi35LrM7nXVxrn8eTyQ3Hoc5NTBVXvf3Ynac/rFCB3OcAplP4hntIHpjQu6O900MgCokyjlNnjTVeG4UyfRPWS8TpqfezFiqoYiEXXbseXTRoaakX9NSddRPuUO8P7bQJi/HkvQenZ53lO+0+E6npzBVaPCy0CC9C3nfFtnk2wBn6gfVcZ1HIrlnakSFLaV8iqHBfhOOrYs8IsIWUnK89Zkgm5EsRFsyLK4QG/rlXxQ3shtIr9Y3O/jWlgOhUN+xkZPmbZlr4yAQ6V0FS6gh0A==
+ bh=dJkuNUK7c62Zz4f0E16cS5K6MLL+EQNLk5a85VTvfPs=;
+ b=QNHmBhK8Ive57xKNVcdU6PPnz/bbHOR4d/cRAnVONFgQOV0NOOneq8ZtoOxQ9FVxtm305faY9xaodo90BnzxVolAwH0QC86CfAmykwhFPvI87Pb0Wrl2tKbN922RWP37Mkv5LSOZAfpnNEmN16OCD/lr8pRygBu/B0Nm3UqBnit1MBSosy5QHbwWO4jO1XD9LnJz1KZQqcsAPGK2OSyJ5HxG/jMXlQa3pLzB39UWYA6epUg2XwfWhjzWWrELLwy7YXcZMfdCV4g/gg14kQb6tuMjQ3ZZST/2pG/RC7sHyhWPiy9ZOS2dGqFojr48s3jEnMjaXATQqopzrT366gJ6sw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ftO9I6cW+XoWlPhxUfIMT2e31Hp6N/rhVCBWDcVejxs=;
- b=PVMF7BypU80mDdN4gdR65t8WSFfWEnLkgxzlryogunl2h1RrvDbB5IiAkAPNYVFa2E6doN/n6qcA+P98d+aHACA9AwMW8jBV4M535Hkwrtj4Q5b/B5jCdyt7xL0waoFmUjuTJwOXhbbZKrEVEshrdev5clSkomN/2jMvUww4K6pi0Ysq0AURakEWAblXVLioh2Rcaa3B+Au7R3cK3LS6QlhdVQRL7h8kYIAL/cQwuVlz7E34UTC+rXbL76me93Z8ELD44qxmfEBiTENAnIQ9tUGC7OJVQXKrFsNJnzIc5RUnlSpeatb0b37VPXcYTB1K5F/di7BU6Ivi/8x6Mq1tYg==
+ bh=dJkuNUK7c62Zz4f0E16cS5K6MLL+EQNLk5a85VTvfPs=;
+ b=FfcWiNFBMvqwCKZ0beElZjqjeBM929ur8TWzBilQNS992jfweZYUAswuGDQfGvfhKaEi7tkQF0WZ9pXedg345J1yO5M5aB81qBb1SFwwO0vmU7A+o+dWukjlUhoE4UceAwSQ7DwU6rdcQnkjhLEmpSg0kimPWsr5NIGg3NGNiAnXJS6KfP8kQsVCzQpiIbQ6GR987x5AIqVXtVzGL0bZu2ZD1o5N+YvjEq3qdcZDoqJnHzUJLdi4/IVRf4zNvB29hSYYCq8wLI7fbt18nxhkbkxv/ay+WkiHHNl0I8YiOWsJO7SovNajC3tZ06oLNfYq5u72VVZfX16FX7CZmtR1Dg==
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
  by AM7PR09MB4021.eurprd09.prod.outlook.com (2603:10a6:20b:114::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.11; Tue, 29 Jul
- 2025 16:22:43 +0000
+ 2025 16:23:01 +0000
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7%4]) with mapi id 15.20.8964.025; Tue, 29 Jul 2025
- 16:22:43 +0000
+ 16:23:01 +0000
 From: Uros Stajic <uros.stajic@htecgroup.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Chao-ying Fu
  <cfu@mips.com>, Uros Stajic <uros.stajic@htecgroup.com>
-Subject: [PATCH v3 03/12] gpio: Add GPIO driver for Intel EG20T
-Thread-Topic: [PATCH v3 03/12] gpio: Add GPIO driver for Intel EG20T
-Thread-Index: AQHcAKUD28fSHCQkeESapUXseb4Olg==
-Date: Tue, 29 Jul 2025 16:22:43 +0000
-Message-ID: <20250729162035.209849-4-uros.stajic@htecgroup.com>
+Subject: [PATCH v3 04/12] pci: xilinx: Avoid writing memory base/limit for
+ root bridge
+Thread-Topic: [PATCH v3 04/12] pci: xilinx: Avoid writing memory base/limit
+ for root bridge
+Thread-Index: AQHcAKUNTvlfJcwzp0acirICMq4Vkg==
+Date: Tue, 29 Jul 2025 16:23:01 +0000
+Message-ID: <20250729162035.209849-5-uros.stajic@htecgroup.com>
 References: <20250729162035.209849-1-uros.stajic@htecgroup.com>
 In-Reply-To: <20250729162035.209849-1-uros.stajic@htecgroup.com>
 Accept-Language: en-US
@@ -70,69 +72,69 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|AM7PR09MB4021:EE_
-x-ms-office365-filtering-correlation-id: 6f9db976-eaa0-465e-653b-08ddcebc2594
+x-ms-office365-filtering-correlation-id: dda08a2c-d34d-417a-56ee-08ddcebc3076
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?afeNpxQKji06437d75u9nRpd/27F81XQX4OjqGkecoWIRFbEqfRS3b2tZi?=
- =?iso-8859-1?Q?IOYJmfZ+KFFsCknaExTjuRAtU0zF0iHrhALwOUdaXZ4t4gjKxFGTDm4WuR?=
- =?iso-8859-1?Q?2ltGblaNJFy7tsg9UZeXNRr4/J3JYzSD4b/XJP8AJMZz/X/aRGGb8BVM5+?=
- =?iso-8859-1?Q?EiLh+EmjTS86wP778ZRlQ896C8a07T6iiaUFv386rw7czO8612c1L09uDN?=
- =?iso-8859-1?Q?SpJGsfvF24iXenbpbX5RflUp6khfEP9alxy/nq8ZGBMWOuXXPPfVGbzuG5?=
- =?iso-8859-1?Q?c8fuRbnwadfieGeTAgX0Qj5J1siUQdCQzc81K/9K1DqgSE9dV8xhAbX9Zo?=
- =?iso-8859-1?Q?HB0xdj2iX6Gg8sHChSy44Mz8Trs1015DSN6VIGSYhtp91q5AXBsq8NFhAu?=
- =?iso-8859-1?Q?xmb+Ge5BKddY/Qy4TILif67286HceNAeescaL0EnCa9t2XsEyqlJEQ1yR3?=
- =?iso-8859-1?Q?mYvPpv3yYDTOBfc9ELIekBO0wKl48Ak8tBcWsnOZaopixw+hik3CNKZaK3?=
- =?iso-8859-1?Q?PWwWi5MufHpAcuXAJtkxNbZt+mXbnXpIn/leIwsfoPbEIyH/oNjHj3b+OD?=
- =?iso-8859-1?Q?CpvbdhaIz2j3YeK6PmZbIThEPaGXHibJ8vbaMJOg7ijhV69Ruuiy+Yxunk?=
- =?iso-8859-1?Q?biCIfPKjoufsMsD51yjvs9gA9EqnjvoD0u4ofh1oNvnTVe+Ov/ADG4HOdt?=
- =?iso-8859-1?Q?n8iTjeBFJjXJvTkpv61NaBIj1bqSMcXTpBcFr0LYZpUPJ0HqMMQypGqwlg?=
- =?iso-8859-1?Q?GhUQi7/P63P6OaE4tHmeA9wiJjeysp3PYfevDIYd6iD6MiYHVeWYQmSr4W?=
- =?iso-8859-1?Q?kdBFjcO6zvYsxmNRmlEAJcZh/OXJMiNiQ7mR9cZuUPeDCiYetB3oxrFlFs?=
- =?iso-8859-1?Q?WLrw49afzHsZLgLKJwc0bPZs1h2gn0eDBBDaz7uMGdPMw3DBTSOEeC2Zl3?=
- =?iso-8859-1?Q?lNeaNH8TfLNgPnUy8C+/xeGSUBrl2MyQ4uRoY2gLaMa5rWo6smsgSLgvHp?=
- =?iso-8859-1?Q?nkH1ltd4+RxbkiXXGf1jqHvv880CoPzf8UcYV0tAq3jcSKNgZ4q+Xgi47F?=
- =?iso-8859-1?Q?O3UEL/7sGoEKbckZZBo1SD2VpvitOfLWFmT+qlnkZ/8wFV9EcC1BQUS+t6?=
- =?iso-8859-1?Q?eP2i9s3DPYN9LxdRDccBbJrKLrGFaj9yxzOlaszSBl33EAEA7ng5mjJPGN?=
- =?iso-8859-1?Q?zZkRYdWODr4PQm5Ou3mzaf6rq492IRjOhjmAxw3ZiWvPE7viIhqdPG+Unp?=
- =?iso-8859-1?Q?uBTnvAwFO1t4soLIYU5f5wTCotXvoWz5Kw+tqVX5PwvAnDIc7WBmCaPftx?=
- =?iso-8859-1?Q?3CQEU4hUpzx980Nv/pgb2oybNrrO/MGpjjR48a7h1dN5gsqUVdYHxbUO8O?=
- =?iso-8859-1?Q?Sx8RYq9EzI/iw2YojgOGLo0K9AGLzJWswrT62dlC0noYGdMWPEYlPY7Xjk?=
- =?iso-8859-1?Q?gQUOmNF7HK2tWama+2uQW4QjUa0txlHSwbCsbK6Xm2JZi3CaFyeo02svX4?=
- =?iso-8859-1?Q?KQWxXuG5IsseXjO6uGtInG+0honcmwDuqf0DCp2SBefCIu/FyPoyJOPlo1?=
- =?iso-8859-1?Q?NYLqdOs=3D?=
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?7YVY2rULc+52FE1T6wR7NNNopSMaEImyB3HJjpMVAm+8Ox/Z8eO0K1fb88?=
+ =?iso-8859-1?Q?rcVBYhl0Y12X7F37z1pBv+tCdP+R9DHRWi1TYJkecssuJnj4i0ujweCgWf?=
+ =?iso-8859-1?Q?Ir2KwEX+aMf9q421iTbSLSOWPw6LnXK6p2hn5dx4uozLXvEx8h4NJUJ/wF?=
+ =?iso-8859-1?Q?Dn6AGjAryZGf5vtj8N0Tm6WtFHb3U5ttxJj2HVeXnHnBl5VYQTHnzpacCP?=
+ =?iso-8859-1?Q?CdT4CsV+5g5YELqTxPBd4VTOdaL2CMTTseVbKGazOgd2/IodnqinfQ00bp?=
+ =?iso-8859-1?Q?suUIo0AqUpfQfPqVfB+qBGIV9SySy8EJZ1xKVXCEdvTNRL1Yi64Had5/jI?=
+ =?iso-8859-1?Q?8Fb+SfjpKwHgGvCtKkZRrYMd9GxxeFipG4m2zFcaRZqTwv5+uUEiIWuvoy?=
+ =?iso-8859-1?Q?P9+uaPk7kRlpe3EuTb9gkcmsGq/l9PMxygD1cF/a3AhThOHPsoqZ3atz0z?=
+ =?iso-8859-1?Q?HQA/ASIuSIKVU1hNgjU0xmsSC/8tCDDzsZ0C+N1r8O4LVNVy2hi/DYyi1m?=
+ =?iso-8859-1?Q?QHtDBHRnRwLjAal7shqm9lBsKeUcsMiWuu42QJWFwfSVv1HMLjnSwt4dmX?=
+ =?iso-8859-1?Q?QXwPTNYVcD5tdTi62/GruBWrjYktensO9L+4aEpjh5KruT5vnCSuVKuPCW?=
+ =?iso-8859-1?Q?GT+PS0XntG4tzVZGXyjDgUPYfEHdrH4DEELk7bSXG2Pwqj0z/xVWeHDjjQ?=
+ =?iso-8859-1?Q?0cZZSzYyotxUupQeE3tmzBoDSrBSBBJO1WNE5mz03a/kptW+GntMbPdO34?=
+ =?iso-8859-1?Q?WMyFmfkiqxuUU9uwMWFjfejLdso+XJKUtlm/lht1epgqdXB8Tjv0IHT3mp?=
+ =?iso-8859-1?Q?TcMrBcW4Ac6b4MQqBGDwhxvt4R1CINnjhs/NJgXENEfeB+24y85nnSULiw?=
+ =?iso-8859-1?Q?f5t3F9H4/6YjzWx+TYFcB3VG66Fr+lN/IIXrrQ5j4loS0NJkqpOuzO5/tV?=
+ =?iso-8859-1?Q?gL5dH6Aq0h17rXMu5C114enMxDWI4wW0JdgBZODZqWXXMGO/tN2JYZeV52?=
+ =?iso-8859-1?Q?1VoAFKt0v+Bz6VEH0hqiMD+7hQiI3zDkl0x1LCT3/PmDUVqgKWUaCthSAZ?=
+ =?iso-8859-1?Q?oTXRx2MjqwejuMQSWGkolSmwcjsrWkUXyLZYYym1hc+36z5xwBCNdVrrER?=
+ =?iso-8859-1?Q?c9PwBaEtS0cTztVYdmQCp+oSEBFRqgPQ7oUI6FPCo6TLc/cxN7LcxNFVK9?=
+ =?iso-8859-1?Q?t6EYCoo8xxPhUdfM4csTj2MStklJrjTyNii9JZd1LduIYtW90zbrz+1nHz?=
+ =?iso-8859-1?Q?LGFYkTWkbKQpd/+/sQcJUgj7NZKV+K7opIEvB6LG5RwDfi2Rn7OQO5iGFE?=
+ =?iso-8859-1?Q?RML5E3n1kk+TWTILzo0T72Pk6DJRAeyUlbszhyjQ350CoYqvBBsKDVbpOH?=
+ =?iso-8859-1?Q?vHRlXvokFKzO2obn0IqARnxsWiUaSbClTBR+AyLwxYF4xW1yvLGNeYmzWD?=
+ =?iso-8859-1?Q?uxRJp3nHNgnAbOE1KILzyDHZ2GNWIy9BWYx8pNqt0TNTxWQL32PzpTCzfv?=
+ =?iso-8859-1?Q?nnkgGRL8ZjttmZJUJzIRbDaPdZpFJxCl+M8BUO0ORQtBJmyFIiXGL3yYrz?=
+ =?iso-8859-1?Q?kT5XuYk=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?JAa9wkSQ3+1hr0GAsksNVC8cPDgnJo/x1oK4C3kxWSvTNY37gJCeTtRjq3?=
- =?iso-8859-1?Q?1Kss4KAYSluNtIlv4I+k1CHn8ao3JslVHe+SYjxUyR4ZFSU3T9gbdh/5ZI?=
- =?iso-8859-1?Q?gp3wc1DlWHoud06mDoEjklSafE3nmr0JIJMXHEfPSFAIpE9jeq3euTKDU2?=
- =?iso-8859-1?Q?E9b4BUiKhMtTskjf6BnusleNoe7SZbBq7AXTG6Ybxj+0wSLZUALHoQiuCy?=
- =?iso-8859-1?Q?D9jQhi1EHd5QNPmr6Ot90vIo72G3cki1o+Q3af0CU30xaJIU6kzM2Ufrmz?=
- =?iso-8859-1?Q?aEGTKLsZkIDYXuwwDO1plZh7y9MbbfUxAULGLA/DU+Tl9aZiXS8AR6Q/N/?=
- =?iso-8859-1?Q?jGYvLHTg3Lcm+U9Gl/NwLJTpQrw6aFw9G/ozz/6S0rCTv1guNp9n+0ozz6?=
- =?iso-8859-1?Q?aK+RbpzVnFzQJePgTYymLUhltv8PkaGd3czLwyEmFxnLgVv7EThk3w3HHh?=
- =?iso-8859-1?Q?GWn9QdstKKG8Hgx0Ma/sTmxJvW+8RPeEWjsBa6bCCyScU8J048nbSeyjUq?=
- =?iso-8859-1?Q?HchS40dxoKey0yGYqZqWpR+7uJk44oMJyKxwh0+nEfBcprIJeC19nlt2Mr?=
- =?iso-8859-1?Q?AGD+tTi6U6ZnGo0PWoFaUXn35CE+yZNi6TLztPmSHXgVTJDeI79TDzwrZf?=
- =?iso-8859-1?Q?b6XuzLr8OC8MNvaSvbNyglyP8XSJA+FSaqNmfO+PjoHscP7D36G8SJXb3z?=
- =?iso-8859-1?Q?h5ZW0QoDi+elN7TkyVnyU/b+p674QkCIvh5D4ntAT+QJlFx0HUzBfUQW9L?=
- =?iso-8859-1?Q?SiqNOVhdFWRaD370GgF+xARK0QYEMUuArWLmXQlF869GIkbCdfufju4vpV?=
- =?iso-8859-1?Q?frUbULuxgU9LBrAgL6TSDdC9eGtXWbA48B5xs6yDGCS3jpWGomqe1HFFtO?=
- =?iso-8859-1?Q?j1GBeW2Ab2xQ6k0kWoV7Zks+AR4Ve0SJanGZFnEaHH7znVWwniNnpRybby?=
- =?iso-8859-1?Q?lCE+07jTKsdGY2rRyle627PYvDImRpD3L/ZKkEa2rvSgjMFn2fxLYzT3le?=
- =?iso-8859-1?Q?BpaUREchHbS4/QdB6lnWIXseJ4v8iS/ijujDH5mZ1NVHM35U+8tAEjjI9A?=
- =?iso-8859-1?Q?bgqMHARwnuTDM4bdU0YTzwyUGMf9jYOWixz9PYiNc321ofS+QCOpTeyDAZ?=
- =?iso-8859-1?Q?RSIwEliU/rGLrFdx8e1EQUHI0yXa44elXlBHlZfNe1vY5XNlBUyQ5ajc2f?=
- =?iso-8859-1?Q?ng9bulVpMCNM7X8M7mkQAvkxqFIvmo1BOpPSeGRt31vnN4KW/OJ2gaVag/?=
- =?iso-8859-1?Q?qdB80kN40o7xTqi9Pcj37y5qUtfxi01Wn6Akgk6vJ5pvoXardSHs1SDSxJ?=
- =?iso-8859-1?Q?tRE3sQDynJFi0s8GnRDgoFSd8LQ4R6SLnxbjfpCxcX0K5EUiwnyzuY7IUg?=
- =?iso-8859-1?Q?OaO+cfQSd8IdjyjRFgSkysfO/JMJkrO3ChHJ2N68ZmwEMFLNnTxnyvIyB9?=
- =?iso-8859-1?Q?8qFpLn3NhQNBTA2aJ96xkeJciQvkBfa3T+ADBb8Z32Zw+D/IAlZYHXRvg+?=
- =?iso-8859-1?Q?KkgStoUU9SzaZ0tU59S9cmM+m7CDkiLoBf0cRzaeQb8njvAPhK5/vzLwPO?=
- =?iso-8859-1?Q?LWnxiuzkfVgOefVdLSAwXnnY9zjbggCkbTk1b+ws6CQWVQhuWmqon1tfvS?=
- =?iso-8859-1?Q?owQ3344x211nRLmc/4HcERWQgFSqYNwQDOScMjnvBeV3T+ffmHSQe5fQ?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?9kBi6rW0hWHARlRXYan0SuSvn2n5FIyaA9HH8XiRURPTcFEhtJfGrxqvcq?=
+ =?iso-8859-1?Q?ZK0IaMBd9moAx9mP//3/jT3vKz/p/oufHnKCnCq1bpjdB0s8NmkVQ/0glS?=
+ =?iso-8859-1?Q?IWwVr9fsrdMOvQiYDOderB5iMLhs8IJViRQkru5A0qIgoaKBLVt9DPDnFi?=
+ =?iso-8859-1?Q?iaeScE42Ceoa1/VuLVabr/Um52uLDCyXCqEc4pR0LXOSz+oTWUUYl+S2df?=
+ =?iso-8859-1?Q?NHJ81hRBRhQtSBL3BPUwTPICc/T2o8FwTt/s4T2fXwBcaBcVv9krzws0sx?=
+ =?iso-8859-1?Q?m5JimhZFeNpRAYdtzg19nKZ8QG8xYbMvb+w4tMrZoJqBcdn2aut9p10Bjc?=
+ =?iso-8859-1?Q?eYSqU2o3ZbSfJKRXRwjiqYtb7KMZB/QM+y7D0/DjTB7xhzm1xFMltIpNlw?=
+ =?iso-8859-1?Q?E1H2b9eRv/EKhPzAhvuZvWVmVgmgA5Kiymqn4oj3uO3/AbG9icOXJO034A?=
+ =?iso-8859-1?Q?ITZrziLcoOn05qrZK26YeNz5Smt/fia+izugULCPEb+u9Nz0RyvVaQpC1+?=
+ =?iso-8859-1?Q?/4y2bDO7pCLMobn0vtiHa9vTvmERPPoQGdA+0v9ZfL9xIvPKhYNX+w1AKH?=
+ =?iso-8859-1?Q?rrqwfcbf6HuS+ah4W6XdTBx1AobI/UX7uQMQxplE/gKcJgcSm1zyEjqdDg?=
+ =?iso-8859-1?Q?OoeeUOyb4lkxoMRR+qRXMcm31J6E9bKIZQJl21jrhQneY6/kmToO2fEX/I?=
+ =?iso-8859-1?Q?b+In41X6YWk7VBmAB3HID4n02VJvqjERzGLLUd0W7SnLKWcWYuQafp3KTm?=
+ =?iso-8859-1?Q?Usd1XIV/JHuM68kHkzjYFdtWcZPvoFc1lYQTkU8s2bsY0DEkAb5U7uZR8Y?=
+ =?iso-8859-1?Q?nUsGlWLgTaiimRw2Wn1aMvvqdQ4nIsGRAm24HUi6VMoN3A2yv2kpCEXNUH?=
+ =?iso-8859-1?Q?yQukzF3PACraxglQzE+VyqIg7FsdR4zR+Y9ZlUG8DZtg1mn+os3rjXRHm5?=
+ =?iso-8859-1?Q?xPO89wixUiCNUh9eckZbhE/RkkpAurUsDb3wG48czuKOeTiKgOYNv2rMNU?=
+ =?iso-8859-1?Q?cF9FJHJK0o19ifY8XZ/WbaRBIU4hl3R13Nwu9fj5E8Liz6h+ncGs1FHPkj?=
+ =?iso-8859-1?Q?IzyrojPrX49u5wjsRn4F7ZgpgzTg06J4yj9lG43oRRetS5HLlC6Lf7ctgK?=
+ =?iso-8859-1?Q?4ItjHb2vLUpfjo0JqZVyRYCXneBYQg3SQ0qfZyppHOhN0zaLRYi9y93/X8?=
+ =?iso-8859-1?Q?QGfodfgjuZcTh+BBgZnPDpRNfsLVyY9rPj7uQ+OLRW0j3Zh5FRffPJmOES?=
+ =?iso-8859-1?Q?3JMmAmnn6CS9pXQXBwz8WQsPLg2qInLffHnd3ImXPVkMduTBYkO+1ph9hB?=
+ =?iso-8859-1?Q?KQkBYcoYMr14VOByYxbMSVlr4oapENgjYyZ/ARaDvzAYl35V7ezSiPiig5?=
+ =?iso-8859-1?Q?rTjCe/CAxcWjdYdCD6kLVLXEqB2YYDlKRh4deYp70TdHCpAHrcov9jpgtX?=
+ =?iso-8859-1?Q?6xm1Nmo8fyf1Azmn+vQ25BXJIi0qxufCc3mTjK7Y2LqYljA/kwVKLKstRB?=
+ =?iso-8859-1?Q?qTyH6p2HG+zEXwQWZ+bPdb8WSCMN36Xbj8IqvBCD0PZL8Ousn6WXhTAVvd?=
+ =?iso-8859-1?Q?JrDmmn5zZec57ygyzf4bepvp32yYGQWMDjpQ3bEn3xshNLxDxufcAYwJiG?=
+ =?iso-8859-1?Q?I7G2wUnbmpnt0ArmlxytaG0/xmTKLjVW2r/sGJECaZ/NQwa8ERYnUmVQ?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -140,12 +142,12 @@ MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6f9db976-eaa0-465e-653b-08ddcebc2594
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jul 2025 16:22:43.6086 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dda08a2c-d34d-417a-56ee-08ddcebc3076
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jul 2025 16:23:01.8429 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: tTZbI7tZs61OQ9cJZU/LrZzuAjkVD6/gFW4ofr1Ens+K+RMWhazgzQ/8YfN0n5wjcQLhzgzdriugR/IU6z1XSITPqAa+YRJviOaFeEh54EQ=
+X-MS-Exchange-CrossTenant-userprincipalname: 4JKqzZ0heRHfg55n0Vc4pOsBUc6plld95nQXMgLdFe9KkHEI1Mefx4G0M9a+0Dg2qtz6Zc90CMyer0ZNFs7ae8zF5RyXJkHjfqRiuU+0d6o=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR09MB4021
 X-Mailman-Approved-At: Wed, 30 Jul 2025 07:10:08 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -166,208 +168,42 @@ X-Virus-Status: Clean
 
 From: Chao-ying Fu <cfu@mips.com>
 
-Add a GPIO driver for the Intel EG20T Platform Controller Hub, which
-exposes a set of 12 GPIOs via PCI MMIO.
+Avoid writing to PCI_MEMORY_BASE and PCI_MEMORY_LIMIT registers for
+bus 0, device 0 (the root bridge) in the Xilinx PCIe driver.
 
-The driver implements basic GPIO operations (input/output direction,
-value read/write, and function query) using the U-Boot driver model
-infrastructure. It maps the required BAR1 region via `dm_pci_map_bar`
-and uses internal registers to control pin state and direction.
+On platforms such as the MIPS Boston board, writing to these fields
+results in incorrect values (e.g. base =3D 0x0, limit =3D 0x1600), which
+causes Linux to fail PCIe memory space assignment.
 
-This driver is required for platforms using EG20T, such as P8700-based
-systems, to access GPIOs through the standard U-Boot DM GPIO framework.
+As a result, Linux can boot successfully and probe the PCIe bus and
+all connected devices on platforms like the MIPS Boston board.
 
 Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
 ---
- board/mips/boston-riscv/MAINTAINERS |   1 +
- drivers/gpio/Kconfig                |   7 ++
- drivers/gpio/Makefile               |   1 +
- drivers/gpio/eg20t-gpio.c           | 138 ++++++++++++++++++++++++++++
- 4 files changed, 147 insertions(+)
- create mode 100644 drivers/gpio/eg20t-gpio.c
+ drivers/pci/pcie_xilinx.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/board/mips/boston-riscv/MAINTAINERS b/board/mips/boston-riscv/=
-MAINTAINERS
-index e350121395e..bc59a628c79 100644
---- a/board/mips/boston-riscv/MAINTAINERS
-+++ b/board/mips/boston-riscv/MAINTAINERS
-@@ -7,3 +7,4 @@ F:  arch/riscv/cpu/p8700/
- F:  arch/riscv/include/asm/arch-p8700/
- F:  configs/boston-p8700_defconfig
- F:  arch/riscv/dts/boston-p8700.dts
-+F:  drivers/gpio/eg20t-gpio.c
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 58e464106a3..26040947a69 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -726,3 +726,10 @@ config MPFS_GPIO
- 		Enable to support the GPIO driver on Polarfire SoC
-=20
- endif
-+
-+config EG20T_GPIO
-+        bool "Intel EG20T GPIO driver"
-+        depends on DM_GPIO && DM_PCI
-+        help
-+          Enable this to support the GPIO controller found in the Intel EG=
-20T
-+          Platform Controller Hub.
-diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index 83e10c79b91..e44122cb9aa 100644
---- a/drivers/gpio/Makefile
-+++ b/drivers/gpio/Makefile
-@@ -81,3 +81,4 @@ obj-$(CONFIG_FTGPIO010)		+=3D ftgpio010.o
- obj-$(CONFIG_$(PHASE_)ADP5585_GPIO)	+=3D adp5585_gpio.o
- obj-$(CONFIG_RZG2L_GPIO)	+=3D rzg2l-gpio.o
- obj-$(CONFIG_MPFS_GPIO)	+=3D mpfs_gpio.o
-+obj-$(CONFIG_EG20T_GPIO)	+=3D eg20t-gpio.o
-diff --git a/drivers/gpio/eg20t-gpio.c b/drivers/gpio/eg20t-gpio.c
-new file mode 100644
-index 00000000000..d41ca4bfb17
---- /dev/null
-+++ b/drivers/gpio/eg20t-gpio.c
-@@ -0,0 +1,138 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2016 Imagination Technologies
-+ */
-+
-+#include <dm.h>
-+#include <errno.h>
-+#include <pci.h>
-+#include <asm/io.h>
-+#include <asm/gpio.h>
-+#include <log.h>
-+
-+enum {
-+	REG_IEN		=3D 0x00,
-+	REG_ISTATUS	=3D 0x04,
-+	REG_IDISP	=3D 0x08,
-+	REG_ICLR	=3D 0x0c,
-+	REG_IMASK	=3D 0x10,
-+	REG_IMASKCLR	=3D 0x14,
-+	REG_PO		=3D 0x18,
-+	REG_PI		=3D 0x1c,
-+	REG_PM		=3D 0x20,
-+};
-+
-+struct eg20t_gpio_priv {
-+	void *base;
-+};
-+
-+static int eg20t_gpio_get_value(struct udevice *dev, unsigned int offset)
-+{
-+	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
-+	u32 pm, pval;
-+
-+	pm =3D readl(priv->base + REG_PM);
-+	if ((pm >> offset) & 0x1)
-+		pval =3D readl(priv->base + REG_PO);
-+	else
-+		pval =3D readl(priv->base + REG_PI);
-+
-+	return (pval >> offset) & 0x1;
-+}
-+
-+static int eg20t_gpio_set_value(struct udevice *dev, unsigned int offset,
-+				int value)
-+{
-+	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
-+	u32 po;
-+
-+	po =3D readl(priv->base + REG_PO);
-+	if (value)
-+		po |=3D 1 << offset;
-+	else
-+		po &=3D ~(1 << offset);
-+	writel(po, priv->base + REG_PO);
-+	return 0;
-+}
-+
-+static int eg20t_gpio_direction_input(struct udevice *dev, unsigned int of=
-fset)
-+{
-+	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
-+	u32 pm;
-+
-+	pm =3D readl(priv->base + REG_PM);
-+	pm &=3D ~(1 << offset);
-+	writel(pm, priv->base + REG_PM);
-+	return 0;
-+}
-+
-+static int eg20t_gpio_direction_output(struct udevice *dev, unsigned int o=
-ffset,
-+				       int value)
-+{
-+	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
-+	u32 pm;
-+
-+	pm =3D readl(priv->base + REG_PM);
-+	pm |=3D 1 << offset;
-+	writel(pm, priv->base + REG_PM);
-+
-+	return eg20t_gpio_set_value(dev, offset, value);
-+}
-+
-+static int eg20t_gpio_get_function(struct udevice *dev, unsigned int offse=
-t)
-+{
-+	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
-+	u32 pm;
-+
-+	pm =3D readl(priv->base + REG_PM);
-+
-+	if ((pm >> offset) & 0x1)
-+		return GPIOF_OUTPUT;
-+
-+	return GPIOF_INPUT;
-+}
-+
-+static const struct dm_gpio_ops eg20t_gpio_ops =3D {
-+	.direction_input	=3D eg20t_gpio_direction_input,
-+	.direction_output	=3D eg20t_gpio_direction_output,
-+	.get_value		=3D eg20t_gpio_get_value,
-+	.set_value		=3D eg20t_gpio_set_value,
-+	.get_function		=3D eg20t_gpio_get_function,
-+};
-+
-+static int eg20t_gpio_probe(struct udevice *dev)
-+{
-+	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
-+	struct gpio_dev_priv *uc_priv =3D dev->uclass_priv;
-+
-+	priv->base =3D dm_pci_map_bar(dev, PCI_BASE_ADDRESS_1, PCI_REGION_MEM);
-+	if (!priv->base) {
-+		debug("failed to map GPIO registers\n");
-+		return -EINVAL;
+diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
+index 63058e8e7c5..4ef20474a0b 100644
+--- a/drivers/pci/pcie_xilinx.c
++++ b/drivers/pci/pcie_xilinx.c
+@@ -132,6 +132,15 @@ static int pcie_xilinx_write_config(struct udevice *bu=
+s, pci_dev_t bdf,
+ 				    uint offset, ulong value,
+ 				    enum pci_size_t size)
+ {
++	if (bdf =3D=3D PCI_BDF(bus->seq_, 0, 0)) {
++		switch (offset) {
++		case PCI_MEMORY_BASE:
++		case PCI_MEMORY_LIMIT:
++			/* Writing the memory base or limit causes problems */
++			return 0;
++		}
 +	}
 +
-+	uc_priv->gpio_count =3D 12;
-+	uc_priv->bank_name =3D "eg20t";
-+	return 0;
-+}
-+
-+static const struct udevice_id eg20t_gpio_ids[] =3D {
-+	{ .compatible =3D "intel,eg20t-gpio" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(eg20t_gpio) =3D {
-+	.name	=3D "eg20t-gpio",
-+	.id	=3D UCLASS_GPIO,
-+	.of_match =3D eg20t_gpio_ids,
-+	.probe	=3D eg20t_gpio_probe,
-+	.priv_auto_alloc_size =3D sizeof(struct eg20t_gpio_priv),
-+	.ops	=3D &eg20t_gpio_ops,
-+};
-+
-+static struct pci_device_id eg20t_gpio_supported[] =3D {
-+	{ PCI_VENDOR_ID_INTEL, 0x8803 },
-+	{ },
-+};
-+
-+U_BOOT_PCI_DEVICE(eg20t_gpio, eg20t_gpio_supported);
+ 	return pci_generic_mmap_write_config(bus, pcie_xilinx_config_address,
+ 					     bdf, offset, value, size);
+ }
 --=20
 2.34.1
