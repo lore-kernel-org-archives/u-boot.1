@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7358C87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D28C87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CFA582BA1;
-	Tue, 29 Jul 2025 18:07:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E52F98311B;
+	Tue, 29 Jul 2025 18:07:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lh86aQra";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gHnceN6c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 175EE83197; Tue, 29 Jul 2025 18:07:39 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 724D982B07; Tue, 29 Jul 2025 18:07:42 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E0B482EB8
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:07:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7692A82B07
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:07:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3b7920354f9so675288f8f.2
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:07:37 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3b7920354f9so675344f8f.2
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:07:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753805256; x=1754410056; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753805260; x=1754410060; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=eG215o2L6dTF5UVmOvDhoEeJt/2JGwDj8B519N713YU=;
- b=lh86aQraN72bO8owo7mEJbXGS5HrmVzwE1ZptIA/ckUyUTTHyi+hja5y5FL6XvtW0z
- PraPPn5YbxyKKG7fTxbyLgupNjlpUkUkcsV+dhNqbDjPsfL6QPvnizM2sMRjAkvDKLSu
- prSL/4pyNyZV1XCkuAuFiXp5+r0MtvGT6f9e031mIlD1a6SPyJpJoQzq2su5Omioir36
- CPepS6A7M9MSwjVwXzZ9A28NUQ5vEpYQILkKJkLuraSgvyBJ/MZNVT8CNzQb7dc/6JuD
- p5fgUWdQwlgMO4/NYh2xsqovin+ng8mWs5uhAXSTIkr0PwbbYeQk5gl/YxQs4BuzQT8Z
- sFqg==
+ :reply-to; bh=tIHGpbh5H27iDqdxx5maHsd8aRW6MX0LXAiA6myMieQ=;
+ b=gHnceN6cElBvBSb9ZdO9hxdee8uiJiTgL38dX1niAyi9bcSrgwP8CcTXRNJ0MRSnpj
+ eX9o/8S7bjYPbJ+BxIJCWhaa0ZJfTanppx0T6F00BJLgspthE7PYCGNQMVEuCVbJLQda
+ PqxnjeDRySZBftc+M6DWnzO9NSUsaCs7NbGZem732FhEGmpApvtJasmEqymOgYQT3qnC
+ OoetEv0qvbijozj6Mhw81diNwGUjd2ZocWC+wAPc5Hn8BsinprxTwU2gGpJeHKYU8TU4
+ rxcdNQt7seJcHRvsVAf/F2TBK4NqyzkDe2Mej6cvNi600q559bZB8xfVESdBzCU+yuNz
+ Kh6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753805256; x=1754410056;
+ d=1e100.net; s=20230601; t=1753805260; x=1754410060;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eG215o2L6dTF5UVmOvDhoEeJt/2JGwDj8B519N713YU=;
- b=Tlu7wPIKQT12i2NSVBgsGWRR4FPu1PWJ4Lt5Ks9rrpyL7bhvEMeTsFH06KjBaw/qmJ
- oLtqn9sdXp2WxXPLHMGMSsqbcYG3oi+1P9kc5cKgPOGtHsZgCgBFTp9XTSOaw/3Kh6n+
- kb3NMJY7nILWCGIB7dJSNnLlW+jFLb0hjm2OT8+XSY4u0UHywztFJZIYbcu4r2/8XB2z
- aKuxMq3uhsVYcG5EGkFSqlcKPNZtpsiS0deWayP7AXYJHL31ye7NW+YDENc1xpF4LtOM
- 231vskVNXiiBFC/8jz3SKb/rzy3uuPOQh17PNlY+UEPMqopLSH0BXu0N87Vq0LfvCMP2
- 7W3Q==
+ bh=tIHGpbh5H27iDqdxx5maHsd8aRW6MX0LXAiA6myMieQ=;
+ b=Q2WuEP/gjD8gRu2bo7pMN5816EGlqVTgbY/EHr1Cpc5ftQ0OaEU46n+T3hTm1Z8Hmq
+ Yq4wku4MvRehQ8sSok67Zf2PI7ig2HHseg+mz6trIa5M+JPKljMe1Yx7htv7wy3rAuQ1
+ WAki8gMeh+FRir80BzLgVNtm5bJWKsLR7MMF2N2EYv3Vp6PGwdCgOXl0UgyT/oMxKyZo
+ 7bvs8acWeD5ckLnEHiQxtTxMNlMxMXCKjPOSnqf5HddxCeZHcjiume2IJzZWEbCPI+lc
+ jZGnZh7x/m3FDTgnHpd/l+GVYFX7AlfrQik0m9CQhJJPbJvTZJ3bhdac3Lc6c70wvCLZ
+ VOUg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOqQ6u+ZzFjY5rDVr6/WA+YOHuCv06rLQIlYQbCAJa+szTuOV9ClALF8xcJKi6qAnJcePq7jo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDF5FOoNrrEhBIj0xwDa/cluKgb3JaPA4V0oqMYhaKU9atKdem
- Mu0srLam1Hryv73mpn5bxivjiWq1QD91CewDIO/q6Hz5MZDtigu5EtsNKJOj2mLcRTs=
-X-Gm-Gg: ASbGnctbUFOd/QQTK3lTGBdUzfnVpQRLtI3n324GHZphfjcxXKQg+S+HhliG0zzwjHT
- ZDY1rNgp6MZzVhFamPg/MmJRaYfOfqOxZ9wVsP4zbDk6GI4m0uMDaNt0Z6u/hK3j1iyyAJjSr4l
- Uu4R33vqCajwToAVpx70oBd6H+PtVa/W90yV2nZR8imOsmCPJmFznPOfPfLPjU3Yz7rXu0VO2F/
- lazP5NTG/WetlrDwJor8ZcJCqxR7jGRMiBUuP9ZvZTK4cz1gjR/w277TbmiZ+9iY9LvIbLMpsRs
- gebaNxLOwotRRPxqTd0dHQ8tLdBfJyBXLvXG0Jc44EFx7jvr2IqXmJt7u4Zax2mjudmjp2tSBgA
- 8+KBGmgplqjaQm+Nz37yt7AVqmnPFctZpMqHMXaib5tbZF6Kg4LO4R0P1biy9fTPnMyTryznqwW
- VcELzZ908J7A==
-X-Google-Smtp-Source: AGHT+IExDffx4u7h4yHk1AU5chDXXvSZ6MmjY7f/wkIWhl/pIYSYEtlvRLtnB/kQX7Ag1oLlm+ouOw==
-X-Received: by 2002:a05:6000:200e:b0:3a5:243c:6042 with SMTP id
- ffacd0b85a97d-3b794fe4e34mr182517f8f.2.1753805256347; 
- Tue, 29 Jul 2025 09:07:36 -0700 (PDT)
+ AJvYcCUwVBOf/A8TZ+4ToBbTRsbclldM8wm7PL4yFE9WeMav19zF3djnZeg2iAtzxOv+b4s2k+eSYB8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+u771SNU84xgNriNBmr2WAnjM9fN0G84gLwNYXUwFmqg5/iCo
+ RuIy4cGIZNyEkz7T3GzluQKAcSBCPRIOf49zKeueWZjyWJVcbhEQkA9OSV5gxFgAF5M=
+X-Gm-Gg: ASbGncvLt8JohdS/xVQjLJgJb59/ON/2RU9hqttK/LIm4+NXktai1CTdVDk2LaifxHc
+ 6KncO8ZM9crm5kS1MkCblKmWtXAF6t9k66FpGyLvCPZWEyAKS7w2hMNajhZtJjwyRBeetxJlv/B
+ ShNqt+jY8hGCi4ul14X4hVFRV6MOecxjCiSvvi8xQNgy1sYtICc5MgTTe+5ENgQ2ip9pcK1CQwm
+ +wT2NwvV7msZu3wKzNFDWCBPdUhgU3U2FwmMVxAhEv3LhqXkbFfWWyKtuH3NFmKwY1a7Y6nQpcm
+ Lf36jfLZqC+CQP33fPSAImoUYA+KCfXIpaivdw+JVYVU/DHWTyMpwghsjfPG0M7l8yzVwRyz5Qp
+ 8Rx6aL+vkSmFu2av0nLczQ8swzAgz0HvG8nrs9e8zpgACN5nEunss7fnc7yX7QIT0W/76EiaIwa
+ wJeul7C/97aQ==
+X-Google-Smtp-Source: AGHT+IGYk4eTMMg4PE5exKWUlEkMIqKVExWBh4tvWmCSnTX/szIkIzLFjXF/r5A0kUcKuKZ6jk8uHg==
+X-Received: by 2002:a05:6000:2c04:b0:3b7:7d96:e24a with SMTP id
+ ffacd0b85a97d-3b79501ed3cmr169251f8f.35.1753805259854; 
+ Tue, 29 Jul 2025 09:07:39 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (ip-185-104-138-124.ptr.icomera.net.
  [185.104.138.124]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b781d2fc1csm10512075f8f.5.2025.07.29.09.07.33
+ ffacd0b85a97d-3b781d2fc1csm10512075f8f.5.2025.07.29.09.07.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 09:07:35 -0700 (PDT)
+ Tue, 29 Jul 2025 09:07:39 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 29 Jul 2025 18:07:22 +0200
-Subject: [PATCH v5 01/10] cmd/exception: missing include string.h
+Date: Tue, 29 Jul 2025 18:07:23 +0200
+Subject: [PATCH v5 02/10] arm64: initialize the frame pointer register
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20250729-b4-arm64-backtrace-symbols-v5-1-0009c4620a46@linaro.org>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250729-b4-arm64-backtrace-symbols-v5-2-0009c4620a46@linaro.org>
 References: <20250729-b4-arm64-backtrace-symbols-v5-0-0009c4620a46@linaro.org>
 In-Reply-To: <20250729-b4-arm64-backtrace-symbols-v5-0-0009c4620a46@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -89,21 +89,21 @@ Cc: Simon Glass <sjg@chromium.org>,
  Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1149;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=994;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=ht0PVAG/UPdWKeozeEuxksuwC/pt0UiZIujECKi0GJI=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiPHBLIpIbhthzqGqdbiqLR8V+Wy4HkOekivdv
- 22MJLeCteSJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjxwQAKCRAFgzErGV9k
- tk93D/0aVBwQfqXlOVeDkCLX8f0UHHLEUitYrE3dAmyq7EdW6z0iCdqfF77p0yNo2uD8jQW2fvH
- GjXOKOKjWfoP2V0tKJXyL7cWQdVUjqxYMfIN07bZ0K9rO384mTvHzNR2Euq4LMvfJQ4PcChx83R
- Scsi6lKzPaQqLsAiFsShT97X4BHjP64ztmY9U5S1oNyQQPtTgVwL6ila9oEQyynvkkKi4G6a6N/
- 8+8kUOxvYYZdZFeU7e8liI2ptYyc6xd4by0jUj1MEvhC/1BkuC8A6nxA/sVT38MoHUMx5yO57O1
- DGqH0geTAlw7+aLrRVy5lEQm6P4VAg+xkoiQHI/yh1tcCtkZ6nbHku4K3Cks6ZroFKG7WqbsRBH
- YgYWgLh5rY4dVgRtWsJBuuJGZ/BhkufKrysy0AiaE21I+XXgypHW5qzJu5DySPfkPUBiNsqfEP2
- U+Ajg8gtboNi5ciHQaY+YcS47ErhnT4HRxIs3yeRZV/LvtcQmhIHVAR/6bdFGGm+T9GV0mZuCwh
- ZqOuADzIZHyeF7YDmJ1qATLxMZxefJzVeHanrEpK20yjsM1xPtsi2fYtud62hLidCdJaED3OmBF
- 5wrQGqEZTZ3fKmmZlZFf2j9Yyuh5fUWgA45ednj3FsW25+Ako1KT1DKKFucYDDGev8iwId3XIx5
- +Ap/TbZ06zjkdFw==
+ bh=vzLGLPqeum6SV1jaUPioF2BciGorBkrir+9VBG2Aj4g=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiPHBd+Sj5JnCHz60XZysmKfwnH8DYcm1xCI6D
+ sKnrYgctSeJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjxwQAKCRAFgzErGV9k
+ tq1ID/9FzzmOINL4JgsL999dN/BCR4njmbUonRawGzsULE13Bd62jKo9Q0IZDsOEkClj2V00gIx
+ WLgW5WhnAYOTGRXCPAvTLkGs86lIWj/+3MllAHfN5Jr/lgSfUgGvV8LMnOWscKuRpsRaDaTk2BR
+ 1uJI188gxJs0F7rkglvztp1/mkBykDh/ExlgMamJF8lAcEWXEsenmWsEHWNItkN4EO0+cHeg25J
+ r5TRZrwg6CX8GNZywbem5ILfwRWZBFhQk82Yj7bk06WiwWTVr78Q9C8qq8jC5NiFvNQD/IP+yE/
+ ZAzabDb82ztFDtfgk4eszVuf9tavwC5BFMEMu/mLTwiX++t904E4xrxb2Fk03T0kqijdSlYkz7F
+ yhwD4/njdToEQXLqqSjX64AGpsGlDLBjpKcnpxZQNHrV5OLG5yKpoywLrJA16y2zzmNRd3Mp8yQ
+ /1eFhioTDisuY1OdHT3bluO1VCBNVQV3/4AdQJiCiJynkYOAvddLDD7XngOPx2KahyhmLXowUD4
+ L23ZKaLY31oCjVpROLprI2RmK+YX/w5iPpbCB4LVRUUEQQ746ptIXRgUPQhVVzc1kOt9m1929of
+ jX9AeEcTAyGjhWjVQLN7tv6cXm22WJ1ixY2ft3kQ3mxrKoSCo6T4qqHuDI9Jr0U8q9xLv1Bpqwj
+ reQOZFt88xryKnQ==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -124,38 +124,32 @@ X-Virus-Status: Clean
 
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-When building qemu_arm64_defconfig with CMD_EXCEPTION a build error occurs:
+U-Boot may be compiled with frame pointers depending on defaults built into
+compilers are via explicitly passing -fno-omit-frame-pointer.
 
-    In file included from cmd/arm/exception64.c:87:
-    include/exception.h: In function ‘exception_complete’:
-    include/exception.h:41:23: error: implicit declaration of
-    function ‘strlen’ [-Wimplicit-function-declaration]
-       41 |                 len = strlen(argv[1]);
-          |                       ^~~~~~
-
-Add the missing include.
+To stop walking frames it is necessary that the initial value of the frame
+pointer register is 0.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- include/exception.h | 1 +
+ arch/arm/lib/crt0_64.S | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/include/exception.h b/include/exception.h
-index a7f21e73d7530972eefb3255d799ed45de30c82f..0d4dff49954ba1445a16c151ab480d9859a7bea8 100644
---- a/include/exception.h
-+++ b/include/exception.h
-@@ -5,8 +5,9 @@
-  * Copyright (c) 2018, Heinrich Schuchardt <xypron.glpk@gmx.de>
-  */
+diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
+index f3f279f2c39cd27cc30801805999092d582cef52..3ff0577e9c87076e7fc6626fde3703fe952f07c8 100644
+--- a/arch/arm/lib/crt0_64.S
++++ b/arch/arm/lib/crt0_64.S
+@@ -167,8 +167,9 @@ clear_loop:
  
- #include <command.h>
-+#include <string.h>
+ 	/* call board_init_r(gd_t *id, ulong dest_addr) */
+ 	mov	x0, x18				/* gd_t */
+ 	ldr	x1, [x18, #GD_RELOCADDR]	/* dest_addr */
++	mov	x29, 0				/* frame pointer */
+ 	b	board_init_r			/* PC relative jump */
  
- static int do_exception(struct cmd_tbl *cmdtp, int flag, int argc,
- 			char *const argv[])
- {
+ 	/* NOTREACHED - board_init_r() does not return */
+ #endif
 
 -- 
 2.50.0
