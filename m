@@ -4,118 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D19C83F26
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 15:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CDBC87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 15:50:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90C9B8277D;
-	Tue, 29 Jul 2025 17:34:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 48294829E7;
+	Tue, 29 Jul 2025 17:50:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iV5vLgew";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OIkYLBx2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61B8482BA1; Tue, 29 Jul 2025 17:34:26 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3E9BE81E14; Tue, 29 Jul 2025 17:50:11 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C607382103
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 17:34:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38AA4829E7
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 17:50:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1753803255; x=1754408055; i=xypron.glpk@gmx.de;
- bh=cDerpflVPcafT1Te0stqBzUhoy91PG9KMUDYlE+dckw=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=iV5vLgewjTf3iSo7/k4iqvOXsseQzuQV6GsezSEQvvzf8wZ9/Nyywi1X7aK+2gxy
- Z2gRUNfpbS87QsK34LTS9Mbgxug2FxifZbpjf3eGZ2SxqTScvdPZnTtvwQ4+/mSeA
- soz7JPz0Lu9Shlwqr7oaYvOBUHPFVAZS79xuwgyVe3xOOnDgPy9rfOHu70ON/4b6b
- tBunlNyZKvw715TyPesumnyjcmfuQ4IoxKC0KJcv9iU7kF4wFtJ6zILV2LxLo2LzR
- Ky8UUFGZJVrz0yvciGkyG+92Pn5iXfEl5RAFuvuM2+AMBzvrt87ytbkuJAEFfD2zS
- NC7BXln98rWuDvKWAQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MRCK6-1v3pUx1upY-00SaHu; Tue, 29
- Jul 2025 17:34:15 +0200
-Message-ID: <eaeb50e6-cdb7-40ab-baa1-d280ad61ed61@gmx.de>
-Date: Tue, 29 Jul 2025 17:34:09 +0200
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-455ecacfc32so24074525e9.3
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 08:50:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753804207; x=1754409007; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zUGtzTGIHp3lHHkhb7GjAGLV5i60tGv67auQDIXGt2o=;
+ b=OIkYLBx2sRH3JR7kFgWu23y2VcFGHtMIt7xUWpz/fLK6TDSTl0JaXkaCIDGjekvska
+ uilWiAyiff/inzmurxGB+paTfdc6jIKFpEx8PIGBJYolZdo67X0HVR6SLCtH7LFyTJ+M
+ cxG4AX8J9dx5TZ0Y/n24O5mIwyWERsE3yACQDUtlFPmmei/rA9SJvjadPyG1TlUP9Tx3
+ NhHGMuhrU6YbMrj9lGXvCnEVXXdJMMDpMeBm1sXTZwjBdcmTWU4i1XD7VMWIYYaN36br
+ yPmKEq/33brwbFdJtPWMvxiGTy8+v/CkrjFAE7lXgsfgsCVtNGqAf5jq4f46ajZ8nnyF
+ 6n6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753804207; x=1754409007;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zUGtzTGIHp3lHHkhb7GjAGLV5i60tGv67auQDIXGt2o=;
+ b=KrCU9AoHmBQlUA6roRwzGqfvHlOJJAClgvogy7zAjCnbJe4dN02lc/asJaN7Vd4tkr
+ lSOfrExrrzYpkJYREn+va5jQuQFWLzgEcvKPfTXOUz6u21TOc6chdQTDTHvVJSf8RG/e
+ A26KdDICN3+msEhKt321o0l0zdGQO3buvI4dIg1NprlHUNyPaVqMfWrTNvS8np07Qi00
+ CkaXikqB7xz212HlbrgM2a1S/dq2aaJeQNxGkWi2x8BeQMike1l1ZTSBKNaeJAL+LZQP
+ YxB6hxhBVKQWdpFtSDdNBF9YTLu+A+HDbr6hDEKPnFaXC7m2rNC9wK3pflU+BsVLtKfT
+ wRkQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVyV0vej4g9Qdy5eGnfOA7ZFHd03WUendrdxMWAFHIVb1Mz5tV8ZNOeE602izB9qJbfIgOdtAs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2nSF6uh6wjZ1YEVkHFXlULkKuCXrBtWzYrTO4V7Vm8I7ohKLm
+ FPikafl5aySaF4W4zEsHMTiqbzn1Sxg+EVE0oixUq+iAmaS3YFtgo1k4MPo9MHCvZBM=
+X-Gm-Gg: ASbGncu3QBcBR/0h7g8TB/NTLTiAcUwINT8e7bIGcT+lAnBFe1Rp1vBO+LF+ZdiGQ4t
+ N+cnVfmp9jUHXdWdmH0G0NcrY+GgLbaB6nYKQUzjeyBq6k4ZNvXteajMfWluFspBsJTufU86pVT
+ O0oSfgFp0HqUlTL8q138wpCLiSTAk1P8CDrNbogr9i9d3cJP8lpopc5wFi3OF/uW+GmYM2LXVq5
+ pDN051fL9jguTiqGREEz9UuuVlR7Bd7qceJp6HZkTw6zs8Ods7bGeVie+6pJn7G9Hw5SoCHtl7k
+ kZnbR7l+nEQFhRN/LQI1e6gg+0Np1C9qxuSQJX10ibXE92HRNYaaGZTs6tW10JYBUkV9AIiYYRS
+ zjOo7jF9uyIktofPn+nTDK7g2w+6mDqmSZyBkw7aiH0LqDCp1i3GTMOEmKiGldkr35lH2Nm1Q66
+ Sd3XLzsNgcrw==
+X-Google-Smtp-Source: AGHT+IGei7YBSVIn3jK0j3sW74hTyZXDgA0i7TtmqMa+e4fyoPp/IUheLx3BtedOtQrWl7twJWhGDA==
+X-Received: by 2002:a05:6000:2486:b0:3b7:928e:b384 with SMTP id
+ ffacd0b85a97d-3b79501e4efmr100282f8f.27.1753804206488; 
+ Tue, 29 Jul 2025 08:50:06 -0700 (PDT)
+Received: from toyger.tail248178.ts.net (ip-185-104-138-124.ptr.icomera.net.
+ [185.104.138.124]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4588e5c1a2fsm30635875e9.12.2025.07.29.08.50.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Jul 2025 08:50:05 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH v3 00/10] arm64: stack backtraces
+Date: Tue, 29 Jul 2025 17:49:58 +0200
+Message-Id: <20250729-b4-arm64-backtrace-symbols-v3-0-6f258b34fe8c@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] arm64: stack backtraces
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250725-b4-arm64-backtrace-symbols-v2-0-230a9665085b@linaro.org>
- <e91ce58d-405a-4161-85b6-36afb63aa1fc@gmx.de>
- <81467621-2ad5-4980-bc3d-2be38a3ee725@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <81467621-2ad5-4980-bc3d-2be38a3ee725@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:zSqDAi34q5xlVXc6iPTfnOKw9KBAi4h3ghRuO0vVwqgL1NlgLaj
- Ib/dKjo6urknvRwyuAn/Wm8uxvfobX1z+GFH3Om/5NEknFphJBzNolHwCBvtf1uurR5E1/A
- T6yaypScO4Q+woDrtxK0E+nQf/vnMjJkhkn83+RXDHmk1eyLxopT5+S8cxR/O1UrOmEJIYa
- Cu3rym70gYOJ/j9h23Eew==
-UI-OutboundReport: notjunk:1;M01:P0:7fS+KXdIiOg=;QLqTVCVLaGWQJw3Lt4dM+an3qY2
- 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
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKbtiGgC/43NTQ6CMBCG4auQWTumDpS/lfcwLKZYoBGomRIiI
+ dzdyglcPt/i/XYIVpwNUCc7iF1dcH6OSC8JtAPPvUX3jAZSpFVBGk2GLFOeoeH2tQi3FsM2GT8
+ G5K7SRUW3jMoSYuAttnOfM/5oogcXFi/b+bXSb/0ruxIqpFRxledaldrcRzez+KuXHprjOL78M
+ QD/xQAAAA==
+X-Change-ID: 20250725-b4-arm64-backtrace-symbols-af9579214288
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ben Dooks <ben.dooks@codethink.co.uk>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Casey Connolly <casey.connolly@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5826;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=keLlREM7buT7FIH9mYonicyuThoExo5UqFVSc257h8I=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiO2pnCevW98qV/KnLXjKPjbGwwfQDkuJDtu+v
+ UXBRhrfQlyJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjtqQAKCRAFgzErGV9k
+ tsYzD/43/kxCOEUJv3lU/Lt6AzYHxZp5VjzpKWZwsR2P7RxmSgm8DeotCx9grSmqaxdpwKgYZjN
+ xkmeYGbqnbV1zkV/9Z+QWUhu2pgEOvBLrLJYPJyD6ATlD356jms//tvqeIRNgHO8A08BumvKeB9
+ bLqeGNEwbY3Xm4hJQE9ev3y6hh5JOMLUreUug0nNVP/3SfkEkEoWSum4KpjxacuR7w56EZcaEvU
+ D+PVquAzHQyFmQ5iyE+w9c1mJ9wpdQZ9w4DPw6/ShuNc4jmG+9YS5RAXriU6+RUE2VasC2tUHb3
+ isVI17SAm6EMVi+LBNO6582DrQ+HiOXl0Um6+bWuoYG4FazH78s7fd/e+jdi8slpbC5TVHVq0Cj
+ zLx2BbpW0ssF4sR6lIgb9smmFBP0mAjXva2kKY+nUu3oqE1G1wl1MjNIEMtcCxhp96P8IE3kp/4
+ MM/l4whXGBgsDH5p3MD9GfORZrYpyH0L0LhsLw6kTtyqU24XOP72EUpE9Mca6OzYCBs3ZsZYfa5
+ l43VfP77zy36gM1O0S6A70T5stwq1G3+/bXa3pWDEz6OiMUweFc+iml7cizUXr2SvuPNOMv9TxD
+ Aa69nxuVd6jdHetf8UE3ntCto8ARmwaOMFfxVI6GmDcLti5LS7vaGp+zuJNMG/cdwjlKBegOhdy
+ m509s4cC2JuxgYw==
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,262 +125,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 29.07.25 14:34, Casey Connolly wrote:
->=20
->=20
-> On 7/25/25 17:23, Heinrich Schuchardt wrote:
->> On 25.07.25 14:57, Casey Connolly wrote:
->>> Implement support for printing stack backtraces on ARM64, make
->>> framepointer support configurable by the build system with
->>> CONFIG_FRAMEPOINTER and teach U-Boot to walk the framepointers and
->>> unwind the stack when an exception occurs. Also show all 64 bits of th=
-e
->>> exception syndrom register (ESR).
->>>
->>> Additionally, a new global unwind_stack() function is added, this can
->>> be called from anywhere to print a backtrace which can be useful when
->>> debugging certain problems.
->>>
->>> In the future, stack unwinding with symbol support could be extended
->>> to for example only emit log messages when a function is called in a
->>> specific code path. This would allow for less noise when debugging hot
->>> paths under certain conditions, but this feature is left as future wor=
-k.
->>>
->>> =3D=3D=3D Handling relocation =3D=3D=3D
->>>
->>> Since U-Boot relocates itself at runtime, and can be built to be
->>> position independent in the first place (effectively "relocating" itse=
-lf
->>> when it first starts too), we can't really rely on gd->reloc_off.
->>>
->>> The approach taken here is to subtract CONFIG_TEXT_BASE from the addre=
-ss
->>> of each symbol in the lookup table (while it's being generated), then
->>> when decoding we just subtract the address of the _start label since i=
-t
->>> is always correct pre and post relocation. This allows us to avoid all
->>> the awkward maths since the symbols are always relative to 0x0 in the
->>> lookup table.
->>>
->>> Example output:
->>>
->>> "Synchronous Abort" handler, esr 0x0000000096000004, far 0xfffffffffff=
-ff
->>> elr: 000000009fc6f768 lr : 000000009fc6f710 (reloc)
->>> elr: 00000001ffe49768 lr : 00000001ffe49710
->>> x0 : 000fffffffffffff x1 : 0000000000000009
->>> x2 : 00000001efdbadd0 x3 : 0000000000000000
->>> x4 : 00000001efd99a28 x5 : 00000001ffec7676
->>> x6 : 00000001efdbac70 x7 : 0000000000000000
->>> x8 : 0000000000000002 x9 : 0000000000000034
->>> x10: 000000000000000d x11: 0000000000000006
->>> x12: 0000000000001000 x13: 00000000c3400000
->>> x14: 00000000fffffff8 x15: 00000001efd99837
->>> x16: 00000001ffe146b8 x17: 0000000000000000
->>> x18: 00000001efdbac70 x19: 000000000a6f8800
->>> x20: 00000001efe06fd0 x21: 0000000000000001
->>> x22: 00000001ffef5b80 x23: 00000001ffee08c0
->>> x24: 0000000000000002 x25: 0000000000000000
->>> x26: 0000000000000000 x27: 0000000000000000
->>> x28: 00000001efe512c0 x29: 00000001efd99c80
->>>
->>> Code: 2a010000 b9001260 d5033fbf 92fffe00 (39400001)
->>>
->>> CONFIG_TEXT_BASE=C2=A0=C2=A0 : 0x9fc00000
->>> Relocated base addr: 0x1ffdda000
->>> Backtrace:
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe496d0> dwc3_qcom_glue_configure+0x=
-40
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe494a4> dwc3_glue_probe+0x10c
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe1757c> device_probe+0x254
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe1757c> device_probe+0x114
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe4ff70> usb_init+0x158
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe00fe4> do_usb_start+0xc
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe01018> do_usb+0x78
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe0dec4> cmd_process+0x140
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe04e24> run_list_real+0x6f0
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe05554> parse_stream_outer+0x148
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe04d30> parse_string_outer+0x90
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe0d148> run_command_list+0x50
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe02be0> main_loop+0x28
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffe065c0> board_init_r+0x3c8
->>> =C2=A0=C2=A0=C2=A0=C2=A0<0x000001ffddd00c> relocation_return+0x4
->>>
->>> Resetting CPU ...
->>
->> Thank you Casey for picking this up.
->>
->> It working fine but there are some points to think about:
->=20
-> Thanks for taking a look!
->=20
->>
->> It would make sense to show both the relocated and the non-relocated=20
->> addresses like we do for elr and lr. The value after subtracting the=20
->> relocation address is what I need when looking at the objdump.
->=20
-> OK, I can see why that would be useful, I'll give it a whirl.
->=20
->>
->> The format of addresses with and without symbols does not match:
->>
->> Backtrace:
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f6ba868> cmd=
-_process+0x130
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f6af900> run=
-_list_real+0x718
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f6b0058> par=
-se_stream_outer+0x14c
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f6b06b4> par=
-se_file_outer+0x34
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f6b9dfc> cli=
-_loop+0x18
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f6ad6b0> mai=
-n_loop+0x50
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f6b0f94> boa=
-rd_init_r+0x378
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 <0x0000007f68400c> rel=
-ocation_return+0x4
->>
->> Backtrace:
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f6d394c)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f6c8fcc)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f6c9158)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f6c969c)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f6d2dc8)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f6c66b4)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f6ca2c0)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000007f69d010)
->>
->> I don't think parentheses are needed. But if we use them they should=20
->> look the same for the same content.
->=20
-> I was trying to differentiate between the addresses being symbol=20
-> addresses vs lr addresses, but yeah maybe the different parentheses=20
-> doesn't add much here. I used the <> to follow the kernel style.
->=20
->>
->> I guess symbol lookup could be used in other places in future. I don't=
-=20
->> see a necessity to let it depend on frame-pointers. Instead frame-=20
->> pointers should imply symbol-lookup. 'imply' should also work on RISC-=
-=20
->> V where symbol-lookup is still missing.
->=20
-> Makes sense to me.
->=20
->>
->> There should be at least one defconfig for 32-bit and one defconfig=20
->> for 64-bit that builds with both.
->=20
-> Hmm, well I'll enable it in qcom_defconfig for sure, I don't have any=20
-> 32-bit boards to test though, can you help with this?
+Implement support for printing stack backtraces on ARM64, make
+framepointer support configurable by the build system with
+CONFIG_FRAMEPOINTER and teach U-Boot to walk the framepointers and
+unwind the stack when an exception occurs. Also show all 64 bits of the
+exception syndrom register (ESR).
 
-QEMU is good enough for ensure compilation and manually testing using=20
-the exception instruction or lib/efi_selftest/efi_selftest_exception.
+Additionally, a new global unwind_stack() function is added, this can
+be called from anywhere to print a backtrace which can be useful when
+debugging certain problems. It is now used during panic() when available
+to provide more useful information for debugging.
 
-I did not test your code with a crash in an EFI application yet.
+A new printf format specifier is added: %pS will print a symbol name
+from an address, this is particularly useful for function pointers
 
-Best regards
+=== Handling relocation ===
 
-Heinrich
+Since U-Boot relocates itself at runtime, and can be built to be
+position independent in the first place (effectively "relocating" itself
+when it first starts too), we can't really rely on gd->reloc_off.
 
->=20
->>
->> I am missing the function name and offset for the function where the=20
->> exception actually occurred. Could we treat the value of elr like a=20
->> framepointer and add it as first line?
->=20
-> Oh yeah, I messed this up actually we should pass elr in except_msg(),=
-=20
-> I'll fix that.
->=20
-> Kind regards,
-> // Casey (she/her)
->=20
->>
->> Best regards
->>
->> Heinrich
->>
->>>
->>> ---
->>> Changes in v2:
->>> - Include calling function in backtrace (current LR)
->>> - Implement support for runtime symbol lookup
->>> - Use symbol lookup to print more informative backtraces when availabl=
-e
->>> - Adjust backtrace format and print U-Boot base address
->>> - Link to v1: https://lore.kernel.org/u-boot/20250703051951.43372-1-=
-=20
->>> heinrich.schuchardt@canonical.com
->>>
->>> To: Tom Rini <trini@konsulko.com>
->>> To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>> Cc: Simon Glass <sjg@chromium.org>
->>> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>> Cc: Ben Dooks <ben.dooks@codethink.co.uk>
->>> Cc: Rick Chen <rick@andestech.com>
->>> Cc: Leo <ycliang@andestech.com>
->>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>> Cc: u-boot@lists.denx.de
->>>
->>> ---
->>> Casey Connolly (3):
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drop unused kallsyms support
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 add support for symbol lookups
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 arm64: implement printing backtra=
-ces with symbols
->>>
->>> Heinrich Schuchardt (4):
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cmd/exception: missing include st=
-ring.h
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Kconfig: make CONFIG_FRAMEPOINTER=
- available on arm64
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 arm64: initialize the frame point=
-er register
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 arm64: simplify interrupt code
->>>
->>> =C2=A0 Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
-=C2=A0 25 ++
->>> =C2=A0 Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=
- 24 +-
->>> =C2=A0 arch/arm/Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 9 +-
->>> =C2=A0 arch/arm/lib/crt0_64.S=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=
-=A0=C2=A0 1 +
->>> =C2=A0 arch/arm/lib/interrupts_64.c | 133 ++++++---
->>> =C2=A0 arch/riscv/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 21 --
->>> =C2=A0 common/Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 -
->>> =C2=A0 common/kallsyms.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 42 ---
->>> =C2=A0 common/system_map.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 |=C2=A0=C2=A0 8 -
->>> =C2=A0 include/exception.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>> =C2=A0 include/symbols.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 22 ++
->>> =C2=A0 lib/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 9 +
->>> =C2=A0 lib/symbols.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 141 ++++++++++
->>> =C2=A0 tools/Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 3 +
->>> =C2=A0 tools/symbols.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 646 ++++++++++++++++++++++++++++++++=20
->>> + ++++++++++
->>> =C2=A0 15 files changed, 965 insertions(+), 121 deletions(-)
->>> ---
->>> base-commit: f2f451d9d6d3756458d5037e3e5135e5211582d7
->>>
->>> // Caleb (they/them)
->>>
->>>
->>
-> .
+The approach taken here is to subtract CONFIG_TEXT_BASE from the address
+of each symbol in the lookup table (while it's being generated), then
+when decoding we just subtract the address of the _start label since it
+is always correct pre and post relocation. This allows us to avoid all
+the awkward maths since the symbols are always relative to 0x0 in the
+lookup table.
+
+Example output (CONFIG_TEXT_BASE is 0 in this case):
+
+"Synchronous Abort" handler, esr 0x0000000096000021, far 0x16dd3e2d3
+elr: 0000000000028f64 lr : 00000000000344f0 (reloc)
+elr: 000000017dda1f64 lr : 000000017ddad4f0
+x0 : 0000000000001011 x1 : 000000016dd3e2d3
+x2 : 0000000000000001 x3 : 000000016dde7eb8
+x4 : 000000017dda1f30 x5 : 000000016dde7ef0
+x6 : 0000000000000064 x7 : 000000016dde9000
+x8 : 00000000ffffffd8 x9 : 000000016dd3e238
+x10: 000000000000000d x11: 0000000000000006
+x12: 0000000000000001 x13: 000000016dd3d920
+x14: 00000000fffffffd x15: 0000000000000002
+x16: 000000017dda1f30 x17: 0000000000000000
+x18: 000000016dd59c70 x19: 000000017de87788
+x20: 0000000000000000 x21: 0000000000000000
+x22: 000000016dde7eb0 x23: 0000000000000002
+x24: 000000017de9addc x25: 0000000000000000
+x26: 0000000000000000 x27: 0000000000000000
+x28: 000000016dde7f10 x29: 000000016dd3e2d0
+
+Code: a8c17bfd d65f03c0 910003e1 b2400421 (c8dffc20) 
+Relocated base addr: 0x17dd79000
+Backtrace:
+elr:    <0x00000000028f64 R-> 0x0000017dda1f64> do_unaligned+0x34
+lr:     <0x000000000344f0 R-> 0x0000017ddad4f0> cmd_process+0x130
+        <0x0000000002b99c R-> 0x0000017dda499c> run_list_real+0x718
+        <0x0000000002bb28 R-> 0x0000017dda4b28> parse_stream_outer+0x14c
+        <0x0000000002c06c R-> 0x0000017dda506c> parse_file_outer+0x34
+        <0x00000000033818 R-> 0x0000017ddac818> cli_loop+0x18
+        <0x00000000029084 R-> 0x0000017dda2084> main_loop+0x54
+        <0x0000000002cdec R-> 0x0000017dda5dec> board_init_r+0x3c8
+        <0x00000000003014 R-> 0x0000017dd7c014> relocation_return+0x4
+
+Resetting CPU ...
+
+---
+Changes in v3:
+- Reorder patches to try and avoid breaking bisects
+- Include pre/post relocation addresses for symbols
+- Print elr and lr in the exception case to capture the full callstack
+- Change print_sym to print the LR value rather than the symbol address
+- Make symaddr and offset optional in symbol_lookup()
+- Implement %pS format specifier and use it in backtrace print
+- Export unwind_stack() when CONFIG_FRAMEPOINTER enabled, call it from
+  panic()
+- Link to v2: https://lore.kernel.org/r/20250725-b4-arm64-backtrace-symbols-v2-0-230a9665085b@linaro.org
+
+Changes in v2:
+- Include calling function in backtrace (current LR)
+- Implement support for runtime symbol lookup
+- Use symbol lookup to print more informative backtraces when available
+- Adjust backtrace format and print U-Boot base address
+- Link to v1: https://lore.kernel.org/u-boot/20250703051951.43372-1-heinrich.schuchardt@canonical.com
+
+To: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>
+Cc: Rick Chen <rick@andestech.com>
+Cc: Leo <ycliang@andestech.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de
+
+---
+Casey Connolly (6):
+      drop unused kallsyms support
+      add support for symbol lookups
+      lib: vsprintf: implement %pS format specifier
+      arm64: implement printing backtraces with symbols
+      lib: expose unwind_stack() and call it from panic()
+      qcom_defconfig: enable framepointer for backtraces
+
+Heinrich Schuchardt (4):
+      cmd/exception: missing include string.h
+      arm64: initialize the frame pointer register
+      Kconfig: make CONFIG_FRAMEPOINTER available on arm64
+      arm64: simplify interrupt code
+
+ Kconfig                      |  26 ++
+ Makefile                     |  24 +-
+ arch/arm/Makefile            |   9 +-
+ arch/arm/lib/crt0_64.S       |   1 +
+ arch/arm/lib/interrupts_64.c | 146 +++++++---
+ arch/riscv/Kconfig           |  21 --
+ common/Makefile              |   1 -
+ common/kallsyms.c            |  42 ---
+ common/system_map.c          |   8 -
+ configs/qcom_defconfig       |   1 +
+ include/exception.h          |   1 +
+ include/symbols.h            |  31 +++
+ lib/Kconfig                  |   8 +
+ lib/panic.c                  |   7 +
+ lib/symbols.c                | 143 ++++++++++
+ lib/vsprintf.c               |  25 ++
+ tools/Makefile               |   3 +
+ tools/symbols.c              | 646 +++++++++++++++++++++++++++++++++++++++++++
+ 18 files changed, 1021 insertions(+), 122 deletions(-)
+---
+base-commit: 182cb30084516c3085d2ca5dde3f105f7625d774
+change-id: 20250725-b4-arm64-backtrace-symbols-af9579214288
+
+Casey Connolly <casey.connolly@linaro.org>
 
