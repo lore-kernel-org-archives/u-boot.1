@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E924C83F26
-	for <u-boot@archiver.kernel.org>; Mon, 28 Jul 2025 22:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EAECC83F26
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 00:20:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA70382E34;
-	Tue, 29 Jul 2025 00:39:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6DFF982CFA;
+	Tue, 29 Jul 2025 02:20:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WxH3X0jT";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OhnLIpIT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Oe2dzPlU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6353082EB8; Tue, 29 Jul 2025 00:39:05 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1342882EB8; Tue, 29 Jul 2025 02:20:43 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6510182D21
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 00:39:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C22228277D
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 02:20:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4brYLG0kZ6z9t8w;
- Tue, 29 Jul 2025 00:39:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753742342;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=D61wAKYzSpC6oB+suuX+Rh7E12Sk/QlCXYBNdGKW3sM=;
- b=WxH3X0jTp0jinjxG5wNDLPAgXuElMDCLIMYsk1M3dSm0L6PjIN51vd6ajMLaGO0WJSSfeo
- kIjaP8zgNGAL4F/miC0hFhIBddMePbmTVnZlEfVjVyaYWVVc1HfnhL+Z/nUBD7X41lJHgq
- pDj+acLu8oQAsHqNra9EsN5OQFv1zaEFtc6kBakooEsSWDp5cmpWMPZxFyl0tNfuiGizc/
- LfIbFh1hDQ7q6bzBsbX7gKUomm/j8T67bTGsuzogdSdhoDzGHzadAFGyS6270LWbhQM51x
- K4uf6nzN4sDBCGUCzZlm9VNsWJtARbBESr60ukHRwvyeFCDGMwIV7ROOg9IpWw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=OhnLIpIT;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-From: Marek Vasut <marek.vasut@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753742340;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=D61wAKYzSpC6oB+suuX+Rh7E12Sk/QlCXYBNdGKW3sM=;
- b=OhnLIpITymPxquTMNsn75u8LDUTWYFnxl83XltBM7n5zrKj+QAt3Ut7d29iNMVYZoUX+wr
- gAkafaWEIUjUbmRSCQMjWxSOfL0AUcRA/dp0ZbMsOEyDgmeCVwVIshTq/C5LO4iNAoCPK8
- SFKspI1NxuT96EkEyTMP+w7CyhTiXOOegmkgNaPUdQi3EKnn8Jhsr+T0xe8i5q5WzPThrB
- ETRHmk1mL2ObOnVIluK0LQcai0o9jevl6wm1+BcrTW55bd+jurFLH1Gti/dN5yHtSH+wdT
- LMvzZYa1H3VuzjXSWYM+zMYw/jbmICDjYyyDBwt9m2xYGVHX2fgLlmqBifQs3Q==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut@mailbox.org>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-Subject: [PATCH] ARM: imx6: dh-imx6: Enable USB OTG ID pin pull up in SPL
-Date: Tue, 29 Jul 2025 00:38:34 +0200
-Message-ID: <20250728223849.87212-1-marek.vasut@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2ffa1b10918so2829285fac.2
+ for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 17:20:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753748439; x=1754353239; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+T25S8Zwg3JOHFA26ZDJ5Wf2VBc/1tCAUc81dD89lxc=;
+ b=Oe2dzPlUoy4OMwXX43E7HvsYqR2E5Ey/rfOSCAGSCiHPQczc3yjIaU7H9yKlF7aqwy
+ JqC1MXblWZ66ivwhLUoe2D6lkPOGqr0QW4JXapCZNuKiv90tWYqbmjrvX2g09n5JqVla
+ m8JVqu2PXakZIoxNLVDjJBirLINcULoB6g91s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753748439; x=1754353239;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+T25S8Zwg3JOHFA26ZDJ5Wf2VBc/1tCAUc81dD89lxc=;
+ b=HBC+XjFEmdnwMU0zkXvpyIRfiqIASMBwFoBGeWbo3O6SzxSLmOlMce8l1iJ8Nu6dpq
+ 3sql4qQU+4EztrQLWmhZiuQ2R35Zzdu/ePRGFEKF8IAvADcHbaM/6fNWrfzqinpc+hYS
+ NSfLbym7hX7fQnc1kTiNfBcJglYY2IqFyMNZBQ2z656361Eq+md5gq0WDc9Ar0GNR2kf
+ lKDximGdw350o9wZaPi1jT07fIF6rIe2lTmgzCVPyQ50oKncPA2Q8A/pGrbSsBXcwx0B
+ Ah7qHMdKYbeUmyJ8e0rYzmS+UuL4qrbxGjGF8kqkMRMqOfgVuwg0S1VxBRu6wj8K9CIR
+ WwBg==
+X-Gm-Message-State: AOJu0Ywz3qxatTKhMuzEbIMufk/LUqWzGf70ouhZeINSBH6/SeL06fep
+ FKDqhH4R7gDAGR0LExv2ZSMGDBa6CgLkVHKrm2gED0BPWKkB3+sgLlzocG7qNHCkhnw=
+X-Gm-Gg: ASbGnct5Th3FYrlDgwrglv2U+H1S1etH7CyiCuPHdp3XFL7UAxulKixow5FLJl4aO8i
+ CjG1JjJ18glYh7II8D6x1UHXiKjdxMI5ZNGu0sf9KvSdFOlvpWKOe9Bysc6qhr72ApVGLtg7tOV
+ xt8LabILhZH3R7BU4hIZ1UZ8FuOVxj3wAP48XKwxPmyp009P6vyqrQKJH6gDFU1EX30DSrSkw0G
+ /v/zHT9XaTE+QX/6fzuu+ZEGgEwN0FGmIOsuFjbsG3if8UImPxyn9jML1i3WJVONX2x5EWe16i3
+ FD24yNm0JXvoNcbHcdzyQSlDlUY9GSq3ATEfUAY5f39nh2XfpTba1W176RF5kJUMt7rXj7I9fbz
+ xtEmTDOiqURzxckiNoTee1bdhbmnGFcKYp4fHCWNhGtBNxYj0CH5q1Yk=
+X-Google-Smtp-Source: AGHT+IF3gELZ+znw0R865d37Jeauj53xzRfmHUETGPMu8jyX9iYCdIN7EZrszPC9WBrdzi+yUzA+cw==
+X-Received: by 2002:a05:6870:f214:b0:29e:3c8d:61a0 with SMTP id
+ 586e51a60fabf-30701cc39e2mr7827800fac.8.1753748439517; 
+ Mon, 28 Jul 2025 17:20:39 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-30713239f12sm1907491fac.11.2025.07.28.17.20.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Jul 2025 17:20:38 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250721-elfboot-v1-1-00b431844e3b@linaro.org>
+References: <20250721-elfboot-v1-1-00b431844e3b@linaro.org>
+Subject: Re: [PATCH] cmd: elf: Prevent possible buffer overflow
+Message-Id: <175374843849.1767077.9170284249498354175.b4-ty@konsulko.com>
+Date: Mon, 28 Jul 2025 18:20:38 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2275760f0c8474133d6
-X-MBO-RS-META: 1qrkwncdhq8zb7trs673p74uo7zohaai
-X-Rspamd-Queue-Id: 4brYLG0kZ6z9t8w
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,46 +95,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable SoC pull up for USB OTG ID pin in SPL. There is no dedicated pull up
-resistor on the SoM itself, and the pull up is mandatory for correct USB OTG
-ID pin detection. U-Boot proper already configures the USB OTG ID pin pull
-up via DT pinctrl node entry.
+On Mon, 21 Jul 2025 15:43:36 +0100, Andrew Goodbody wrote:
 
-Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
----
-Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
-Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
----
- board/dhelectronics/dh_imx6/dh_imx6_spl.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+> In do_bootvx the environment variable 'bootdev' is fetched and copied
+> into a buffer without confirming that it will not overflow that buffer.
+> Use strlcpy to ensure that the buffer will not be overflowed.
+> 
+> This issue was found by Smatch.
+> 
+> 
+> [...]
 
-diff --git a/board/dhelectronics/dh_imx6/dh_imx6_spl.c b/board/dhelectronics/dh_imx6/dh_imx6_spl.c
-index a50763e1926..eb9bc93d973 100644
---- a/board/dhelectronics/dh_imx6/dh_imx6_spl.c
-+++ b/board/dhelectronics/dh_imx6/dh_imx6_spl.c
-@@ -49,6 +49,10 @@
- 	(PAD_CTL_PUS_47K_UP | PAD_CTL_SPEED_LOW | PAD_CTL_DSE_80ohm |	\
- 	 PAD_CTL_SRE_FAST | PAD_CTL_HYS)
- 
-+#define OTG_PAD_CTRL							\
-+	(PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED | PAD_CTL_DSE_40ohm |	\
-+	 PAD_CTL_SRE_SLOW | PAD_CTL_HYS)
-+
- static const struct mx6dq_iomux_ddr_regs dhcom6dq_ddr_ioregs = {
- 	.dram_sdclk_0	= 0x00020030,
- 	.dram_sdclk_1	= 0x00020030,
-@@ -509,7 +513,7 @@ int board_mmc_init(struct bd_info *bis)
- 
- /* USB */
- static iomux_v3_cfg_t const usb_pads[] = {
--	IOMUX_PADS(PAD_GPIO_1__USB_OTG_ID	| MUX_PAD_CTRL(NO_PAD_CTRL)),
-+	IOMUX_PADS(PAD_GPIO_1__USB_OTG_ID	| MUX_PAD_CTRL(OTG_PAD_CTRL)),
- 	IOMUX_PADS(PAD_EIM_D31__GPIO3_IO31	| MUX_PAD_CTRL(NO_PAD_CTRL)),
- };
- 
+Applied to u-boot/master, thanks!
+
+[1/1] cmd: elf: Prevent possible buffer overflow
+      commit: b83f865e75aecf7edbc75c3794b3e29ef5bff5a2
 -- 
-2.47.2
+Tom
+
 
