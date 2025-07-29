@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6DD5C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:10:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E21AC87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:10:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C249781E13;
-	Wed, 30 Jul 2025 07:10:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D73B82BA7;
+	Wed, 30 Jul 2025 07:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Auqnvrxd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BQjtJT0T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5BED82BCD; Tue, 29 Jul 2025 14:50:54 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 143E482BCD; Tue, 29 Jul 2025 14:51:03 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD53782063
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 14:50:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 193AE82063
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 14:51:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ae0b2ead33cso166826266b.0
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 05:50:52 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ae9be1697easo170262266b.1
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 05:51:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753793452; x=1754398252; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=t+cF6v5FZJLmspMLrIfHIoNXnCXZUEW5y0Kt9alUaIo=;
- b=AuqnvrxdNSp6F6s7S/t+63bv7WN9PYGZzQXEp1kI0+6lIEUGy/w2eo1+5taQ9D399z
- VIZVkXz0brhMQnF8SfrdpQWNmMirvpspTVyFBWXNIPWLgoRGHfKf0m89ztFrOw4uNiw5
- nykFhADTLGL8Swtj6z/chO5+1Tr+cJm3iK0FNaCyKbjOul6biMC4U31kP2A1xWck/O+0
- WcEk11731VLH+ik5rJY+Eb7UTzZ87pXDHr7B4VWBxX3GmDJFHsKD7Wf+h1h4qFbxUo4T
- 91CcGq3SW8jCdBniXh6ti2/7JV150kS6xFDJ1fSNh9/SAp3tWl18LtG4zttsZqPqgb3h
- MN1A==
+ d=gmail.com; s=20230601; t=1753793460; x=1754398260; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZqKwYProZdkDOF8Q2eyR82xVddt8tUbcfKhEDjgGemU=;
+ b=BQjtJT0T5ISiCFpqGoPoud2UmVG6deyU93hN9NdWNXZTMQSi7Ix1G7prdky/MnUyX3
+ gTurAq+4MTWsrgASj8Xn8Dh59JeYOz5nQF4KpuJKLqxc3xLBvKPtNd2xb4nmjVoEzaKw
+ 4LDLGNwvFnRKDF2AObb/aWz4JJGiiww3Ddn3ZnrlEYr7WXugP2OvjxUumZL5YsXgx6v+
+ zSwtawDvgksPlXjBkFmEn6HSj0poHboRltrUD8ygvtQMuXBXfikJHzxDPt4QPfJ6plND
+ 19vx1omIrGWyIVjZBI5FGUj27rMr/FwAUDmvbGRCTaVK2yYUI/W+SFMWmWgxtgJIZQNq
+ a8mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753793452; x=1754398252;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t+cF6v5FZJLmspMLrIfHIoNXnCXZUEW5y0Kt9alUaIo=;
- b=dkDx3JUJt0F6e7jcRbWezgczA7YFEdqEIjLmlKaEWs/AH1tBo1kj+mKayQylOszrwz
- pPHJrM/opOj2QyEDqWurY70eFqma1BBglM6rLCn+3bTsuAGoafk3WoRpZZKcyuCuMjzW
- envwf1n9mEUSO+o1c2y+RYU+82VnDnt78XugYHCBeBNm73lk2RmVCja9tDUl9qaOSiMp
- hQ3IOTjot16Jg4PAf+yuyC5KDOBi6PTpJSip4S9TIIx+Sd9dZ4DZtsvNOVCxTd9CYWn/
- +kViyRlzaOWKDuZgYnedcPA0LloqQowJkvGluoFVElPvlUb2AV3Qzyv4y4dsLT4aTTNW
- i5qQ==
-X-Gm-Message-State: AOJu0Yz3lUb2g2b+gInc0BeVo0yR5jwXXQDq9GE9GrYdlC9RvjA6bBBc
- UYcCB7Sa2kt/eZJXFBcwN2VYIIt5L9PHpi4DvvGec79JbHJBTxWB1Kc2HFCt6Q7Q
-X-Gm-Gg: ASbGncsKz9tfdhzs2ksBVZJI33OsNTK128UF/5KsBK1hwaeqrYV6xAL0vWQ+oyGV14n
- ExjzUsxMHJSvKD2ChgnB2CLiO+bcdagYdOHvK3X/LDZEZweK1dNparD9cW1uZaHtF046bPty987
- kaYVVTlxwiJhSOU7bKfjJ0JJUCdIFCx6U49CUlbqUHeHerBlcyrsEdU2shUmglNlwx47eLh6ekZ
- 6fbiO7UV36hnuB0cAswlJNblVDzQeR9CqK5IMeTAbqMcsOeNIqW54NHzMthrXvWshLQqIhvd3Xs
- nnRQn+gK5RyKL1fpfXhdZ6Bs453Ksp/+RdPDYktAkSY1w5Ks/DD5tGZlq7PD542nygitmRy+go+
- SrniwRjYFTQzldiLuP7xRQysmVz8E330sVLhCVPDU3fkAF/d+7/GBnZU+tDyScejRoWdmr6o=
-X-Google-Smtp-Source: AGHT+IEJxxNdD8CwHILAshtppTak6nxukF/accqMPlnfKLMGDRfNMd64sP/5rJLnGcFypgn7AJ/CHQ==
-X-Received: by 2002:a17:907:7fac:b0:ad8:959c:c567 with SMTP id
- a640c23a62f3a-af7bf9ffb01mr397418866b.10.1753793451443; 
- Tue, 29 Jul 2025 05:50:51 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753793460; x=1754398260;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZqKwYProZdkDOF8Q2eyR82xVddt8tUbcfKhEDjgGemU=;
+ b=vlBLW6AwxiQYbta2ga7U2U7f3LH5ucCAL95ZVpaXfSfCZoVpYFti49FKw8uP2B5Si4
+ uNduzSeWXG8x5riGZFMiKFQtMqY0Dww+sC5W128h3d5XDtSrcphyl+/hvL6FTC16H+8M
+ Kt/2KuQWg/Pc1dPdoTOEKJp3FPtQC/kak+vM9gzkt+mPrax3Ihp+kjQenvEIdtSismJj
+ zrml4/t1X8BX9Nep1YmdZZptelGvf0hd1AUaayuUg2UrP2QoKa/hS27IMbdnlsnD7Sx+
+ HP9Xco0eZrUu4My9BEH9UZaZLYA7xBcnHfIqDNTxMWAue1gDIjyv6V7Ds7CRktdckePo
+ X/xw==
+X-Gm-Message-State: AOJu0YysDlEgscUGpTcCTO4SgacIm8HPuSp+uQe97TCHgR+OXlG40kI+
+ LWbdQ8odTVlUISxNiRK+OZaXxUqkaYMM6NlMOiAt44DyTwzKMg/regnca4vwiM9S
+X-Gm-Gg: ASbGncvOe88WKeACsvR1KmYA2/6kk5aphDG1k68z7nYL6AAM73kL45ojBLWTR4mZMVy
+ JWgv9cj9zS6U93BI6j1Z6/YcsC7V02hRiM+UiB9h48tLEsASWHN/pOZapyiBuydFG2pruneVBan
+ vel+qMgTSKXhqE8pfWCC0M7KfYm0HW/ZaD5VRH8AK7yDNUqnzvyO2E9dDWRfQyrTLMaRj5vUazC
+ M3KAwQiopWk96PADr4JPfv5kxoTvyqIBt7v0pkykrW8H9pS2jEHP1Lnr5uf1dmtiR0NrbCFFVxc
+ vJLE+VbLwQYfIt5itKJLRTN9K7ZDdbYpLsV5SBuCLBLf9/7hcbt05yiwiu9pORMf0pxGDhVQyC+
+ XC2OGUokntQzUeumk4QVtl18XLWPQHRmbODb325FlenBj5NeDSb14H2WsxJgt8nvR+WTkL2E=
+X-Google-Smtp-Source: AGHT+IFQGeCEhiYvXjxZ04ZgiERh4QqCn+5gh1SkP9Wu6g3/HtMTRavfAupWW3w2NMPAYEZC1B/m6A==
+X-Received: by 2002:a17:907:3c8e:b0:ae6:d51a:4ca3 with SMTP id
+ a640c23a62f3a-af7bfd76504mr351883166b.25.1753793459949; 
+ Tue, 29 Jul 2025 05:50:59 -0700 (PDT)
 Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
  [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af635acc99esm572223366b.115.2025.07.29.05.50.45
+ a640c23a62f3a-af635acc99esm572223366b.115.2025.07.29.05.50.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 05:50:50 -0700 (PDT)
+ Tue, 29 Jul 2025 05:50:59 -0700 (PDT)
 From: Aristo Chen <jj251510319013@gmail.com>
 X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
@@ -78,11 +79,12 @@ Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
  ggiordano@phytec.com, n-francis@ti.com, afd@ti.com, d.schultz@phytec.de,
  d-gole@ti.com, ravi@prevas.dk, carlos.lopezr4096@gmail.com,
  Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 0/5] mkimage: Detect FIT image load address overlaps and
- fix related test/DTS issues
-Date: Tue, 29 Jul 2025 12:48:51 +0000
-Message-ID: <20250729125022.4220-1-aristo.chen@canonical.com>
+Subject: [PATCH v1 1/5] binman: Fix FIT image overlap issues
+Date: Tue, 29 Jul 2025 12:48:52 +0000
+Message-ID: <20250729125022.4220-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250729125022.4220-1-aristo.chen@canonical.com>
+References: <20250729125022.4220-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 30 Jul 2025 07:10:08 +0200
@@ -102,68 +104,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series enhances FIT image robustness. It adds **memory
-region overlap detection** to `mkimage` and fixes existing overlaps
-in DTS files and `binman` tests.
+Fix three binman tests that has memory region overlap issue, the test
+cases needed to be updated to use non-overlapping memory layouts.
 
-The primary goal is to prevent runtime memory corruption from
-conflicting load addresses in FIT images.
+* Tests fixed:
+  - testFitFirmwareLoadables
+  - testFitSignSimple
+  - testFitSignNoSingatureNodes
 
-Key Changes:
+* Changes made:
+  Updated DTB test files to change U-Boot load addresses from 0x0 to
+  0x2000 to avoid overlapping with ATF in the 0x10-0xfc range:
+  - 276_fit_firmware_loadables.dts
+  - 340_fit_signature.dts
+  - 342_fit_signature.dts
 
-1.  `mkimage` Overlap Detection: A new validation in
-    `tools/fit_image.c` checks for overlapping load addresses
-    within FIT configurations. `mkimage` now errors out with 
-    detailed info on conflicts. This prevents bad FIT image
-    creation.
+An upcoming commit will validate if the memory region is overlapped
 
-2.  New Test Case: A Python test verifies the new detection.
-    It intentionally creates an overlap (kernel and FDT)
-    to confirm correct error handling.
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ tools/binman/test/276_fit_firmware_loadables.dts | 4 ++--
+ tools/binman/test/340_fit_signature.dts          | 4 ++--
+ tools/binman/test/342_fit_signature.dts          | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-3.  Fixes for Existing Overlaps:
-    * Board DTS (k3-am6xx): Adjusted load addresses for TI
-        firmware stubs to prevent conflicts. This resolves
-        previously undetected overlaps.
-    * `binman` Tests: Fixed several tests. U-Boot load
-        addresses were shifted to avoid ATF conflicts. A new
-        linker script for TEE ELF sections ensures distinct
-        memory layouts.
-
-Impact:
-
-This series improves FIT image reliability. Catching overlaps
-at build time helps developers resolve issues before runtime
-failures.
-
-Aristo Chen (5):
-  binman: Fix FIT image overlap issues
-  binman: Fix FIT image overlap issues for testFitSplitElf
-  arm: dts: k3-am6xx: Fix FIT image memory overlap in binman
-    configurations
-  tools: mkimage: detect overlapping load regions in FIT configurations
-  test: Add test case for FIT image load address overlap detection
-
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 22 +++---
- arch/arm/dts/k3-am625-sk-binman.dtsi          | 16 ++--
- .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 16 ++--
- arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 22 +++---
- arch/arm/dts/k3-am62a-sk-binman.dtsi          | 16 ++--
- arch/arm/dts/k3-am642-phycore-som-binman.dtsi |  6 +-
- test/py/tests/test_fit_mkimage_validate.py    | 65 ++++++++++++++++
- tools/binman/ftest.py                         |  2 +-
- .../test/276_fit_firmware_loadables.dts       |  4 +-
- tools/binman/test/340_fit_signature.dts       |  4 +-
- tools/binman/test/342_fit_signature.dts       |  4 +-
- tools/binman/test/Makefile                    |  6 +-
- tools/binman/test/elf_sections_tee.c          |  1 +
- tools/binman/test/elf_sections_tee.lds        | 31 ++++++++
- tools/fit_image.c                             | 78 +++++++++++++++++++
- tools/mkimage.c                               |  3 +-
- 16 files changed, 238 insertions(+), 58 deletions(-)
- create mode 120000 tools/binman/test/elf_sections_tee.c
- create mode 100644 tools/binman/test/elf_sections_tee.lds
-
+diff --git a/tools/binman/test/276_fit_firmware_loadables.dts b/tools/binman/test/276_fit_firmware_loadables.dts
+index 2f79cdc9bb8..d344036a11a 100644
+--- a/tools/binman/test/276_fit_firmware_loadables.dts
++++ b/tools/binman/test/276_fit_firmware_loadables.dts
+@@ -19,8 +19,8 @@
+ 					arch = "arm64";
+ 					os = "u-boot";
+ 					compression = "none";
+-					load = <0x00000000>;
+-					entry = <0x00000000>;
++					load = <0x00002000>;
++					entry = <0x00002000>;
+ 
+ 					u-boot-nodtb {
+ 					};
+diff --git a/tools/binman/test/340_fit_signature.dts b/tools/binman/test/340_fit_signature.dts
+index 9dce62e52de..1c25d52cba4 100644
+--- a/tools/binman/test/340_fit_signature.dts
++++ b/tools/binman/test/340_fit_signature.dts
+@@ -20,8 +20,8 @@
+ 					arch = "arm64";
+ 					os = "u-boot";
+ 					compression = "none";
+-					load = <0x00000000>;
+-					entry = <0x00000000>;
++					load = <0x00002000>;
++					entry = <0x00002000>;
+ 
+ 					u-boot-nodtb {
+ 					};
+diff --git a/tools/binman/test/342_fit_signature.dts b/tools/binman/test/342_fit_signature.dts
+index 267105d0f68..2ac600b1c70 100644
+--- a/tools/binman/test/342_fit_signature.dts
++++ b/tools/binman/test/342_fit_signature.dts
+@@ -20,8 +20,8 @@
+ 					arch = "arm64";
+ 					os = "u-boot";
+ 					compression = "none";
+-					load = <0x00000000>;
+-					entry = <0x00000000>;
++					load = <0x00002000>;
++					entry = <0x00002000>;
+ 
+ 					u-boot-nodtb {
+ 					};
 -- 
 2.43.0
 
