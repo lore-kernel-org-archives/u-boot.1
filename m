@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDB3C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:12:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F38C87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E03D88324C;
-	Wed, 30 Jul 2025 07:10:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF14E8313B;
+	Wed, 30 Jul 2025 07:10:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="FfcWiNFB";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="Coa6wdKG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7BCA83045; Tue, 29 Jul 2025 18:23:05 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 420A983045; Tue, 29 Jul 2025 18:23:33 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E65D682BCD
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:23:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D54682BCD
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:23:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gebbutcQKvi3WsGgFRPr5guYGkL+H++q8qVD0Md8m9QV6RpGA6uvgzklJs9947w6XkEz4KP+VZE0oFBqx67gju42ISElStBVSEFsOVveaOOz1tSgacndRm8gWa7893OUbPy2IX42Uynywb6mhzM8Tfn6RGcsCqvGl49AlaTVqcBvDXB1uQ1kNavtTVDvq8eKEA5HFwkX4/h1y/+WZ1R6BX4qXachTcf6yQxJPhceZOi4tW0pfqXc+cVZQMTv+fo1GnO82PQly+hCgU0p2BJpWfeeKegE5r1Q2lhWy0PwY1BNkyrJzi2SnQdMmINFL/ie/NtP8RhyVLbxE4pUMbdUoQ==
+ b=AkQafiI4/8zmHj031W/02i/Qn/e/rqJdB4bRVJNJpURZZk/WmzQ85X02fiLGe/yTPp+X1D8chX7ZW4wZFO8j8U6AYocYX2b7+gmYaghUbHI8Zj8+8SAYV7W5K5/6dzrOz1a1xZzgWNC3RQYy+XjVJ6ppXV4pZC6bAz9kh0m9TX04aGtqJJjLvdppX7jQ3M8/KAnCSNx/cDxoF6IxaD8dMqOQvEoe7yU85WVQUB+9BQPvf4UCMkq90z9iPc18bmar/40GmdOSAhxnyjdo/q3FtYBCf6ZpdzzM9zJmhwAiITRf0U/oEQ8lzexu1M7YQKg1/Pq7AybMu6KRVWKPolhePg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dJkuNUK7c62Zz4f0E16cS5K6MLL+EQNLk5a85VTvfPs=;
- b=QNHmBhK8Ive57xKNVcdU6PPnz/bbHOR4d/cRAnVONFgQOV0NOOneq8ZtoOxQ9FVxtm305faY9xaodo90BnzxVolAwH0QC86CfAmykwhFPvI87Pb0Wrl2tKbN922RWP37Mkv5LSOZAfpnNEmN16OCD/lr8pRygBu/B0Nm3UqBnit1MBSosy5QHbwWO4jO1XD9LnJz1KZQqcsAPGK2OSyJ5HxG/jMXlQa3pLzB39UWYA6epUg2XwfWhjzWWrELLwy7YXcZMfdCV4g/gg14kQb6tuMjQ3ZZST/2pG/RC7sHyhWPiy9ZOS2dGqFojr48s3jEnMjaXATQqopzrT366gJ6sw==
+ bh=gxaznrnMJMfKZhNrxTRwZFLNHpIo4UNax96dmcWNK8I=;
+ b=Tu0JgnDZpbvkdoj+8a3qsfyFS4nvBQy4wg/vymJ2JBGSQBnD8KR72EI9rQrEEPIQuESPsdNaTufi+hapeIhZjoqRDK0tQgH+HRtfMB/Lo1CWQZe/HLmX0w55Hw1UYKhy8CYrq9BM3geoHNXXpRfbQBI8OlZYdIsbHK8hH1X0E9BWneVdTqKq59V38kHzubxYVwanP3DbgVGqwHncRpD5lwQm2di+80nqBHTTnOei7gW54ZsaIuldyk4IkDgTh9cx8RQ8V45D6PRxnnSOfPjjRn4OM4WWpu0hEF0feSF1EYNTLbjU3lLmAIcKNXU0m2i4UmyCIy9CGIok+9KuX3zMag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dJkuNUK7c62Zz4f0E16cS5K6MLL+EQNLk5a85VTvfPs=;
- b=FfcWiNFBMvqwCKZ0beElZjqjeBM929ur8TWzBilQNS992jfweZYUAswuGDQfGvfhKaEi7tkQF0WZ9pXedg345J1yO5M5aB81qBb1SFwwO0vmU7A+o+dWukjlUhoE4UceAwSQ7DwU6rdcQnkjhLEmpSg0kimPWsr5NIGg3NGNiAnXJS6KfP8kQsVCzQpiIbQ6GR987x5AIqVXtVzGL0bZu2ZD1o5N+YvjEq3qdcZDoqJnHzUJLdi4/IVRf4zNvB29hSYYCq8wLI7fbt18nxhkbkxv/ay+WkiHHNl0I8YiOWsJO7SovNajC3tZ06oLNfYq5u72VVZfX16FX7CZmtR1Dg==
+ bh=gxaznrnMJMfKZhNrxTRwZFLNHpIo4UNax96dmcWNK8I=;
+ b=Coa6wdKG2XM0XTaIJakakjAJaj6tQMcMWfqz+wfxAzT7Ml9uHxFUd2WY26etBvJ8AzxcfaQPeITHJlmtYkP9YVapg8xu7dm+qR3Fp/0Dv0CyfrVZRv6CbpaPlqdbhVXEgxMOd6HgtmOr6ZlfYKd+1Ar6DfAz1moyeGisrMtcvM99RmZoRnPGXBhN4zN2awBF97Flx/Y6L8cgBmBXRvz5C9eHHVbelG6K39Wro/ztZ+f9RvBJyUxRrSqEX+U6slEWXytPhc9gcgr+XfWk9dXFRYGIiBIx6vh94qQsEF3CPDhVpMpJWy4rinl/YeBMQX18+OXcrHKp02ATbeUhP7hSXg==
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
- by AM7PR09MB4021.eurprd09.prod.outlook.com (2603:10a6:20b:114::24) with
+ by VI0PR09MB8338.eurprd09.prod.outlook.com (2603:10a6:800:2b3::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.11; Tue, 29 Jul
- 2025 16:23:01 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.23; Tue, 29 Jul
+ 2025 16:23:28 +0000
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7%4]) with mapi id 15.20.8964.025; Tue, 29 Jul 2025
- 16:23:01 +0000
+ 16:23:28 +0000
 From: Uros Stajic <uros.stajic@htecgroup.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Chao-ying Fu
  <cfu@mips.com>, Uros Stajic <uros.stajic@htecgroup.com>
-Subject: [PATCH v3 04/12] pci: xilinx: Avoid writing memory base/limit for
- root bridge
-Thread-Topic: [PATCH v3 04/12] pci: xilinx: Avoid writing memory base/limit
- for root bridge
-Thread-Index: AQHcAKUNTvlfJcwzp0acirICMq4Vkg==
-Date: Tue, 29 Jul 2025 16:23:01 +0000
-Message-ID: <20250729162035.209849-5-uros.stajic@htecgroup.com>
+Subject: [PATCH v3 05/12] riscv: Add support for MIPS GIC syscon on RISC-V SoCs
+Thread-Topic: [PATCH v3 05/12] riscv: Add support for MIPS GIC syscon on
+ RISC-V SoCs
+Thread-Index: AQHcAKUdX1DpbX/RZ0ibMsQDF9K8qg==
+Date: Tue, 29 Jul 2025 16:23:28 +0000
+Message-ID: <20250729162035.209849-6-uros.stajic@htecgroup.com>
 References: <20250729162035.209849-1-uros.stajic@htecgroup.com>
 In-Reply-To: <20250729162035.209849-1-uros.stajic@htecgroup.com>
 Accept-Language: en-US
@@ -71,70 +70,69 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|AM7PR09MB4021:EE_
-x-ms-office365-filtering-correlation-id: dda08a2c-d34d-417a-56ee-08ddcebc3076
+x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|VI0PR09MB8338:EE_
+x-ms-office365-filtering-correlation-id: a7515a35-d93d-4d5c-4f88-08ddcebc4063
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?7YVY2rULc+52FE1T6wR7NNNopSMaEImyB3HJjpMVAm+8Ox/Z8eO0K1fb88?=
- =?iso-8859-1?Q?rcVBYhl0Y12X7F37z1pBv+tCdP+R9DHRWi1TYJkecssuJnj4i0ujweCgWf?=
- =?iso-8859-1?Q?Ir2KwEX+aMf9q421iTbSLSOWPw6LnXK6p2hn5dx4uozLXvEx8h4NJUJ/wF?=
- =?iso-8859-1?Q?Dn6AGjAryZGf5vtj8N0Tm6WtFHb3U5ttxJj2HVeXnHnBl5VYQTHnzpacCP?=
- =?iso-8859-1?Q?CdT4CsV+5g5YELqTxPBd4VTOdaL2CMTTseVbKGazOgd2/IodnqinfQ00bp?=
- =?iso-8859-1?Q?suUIo0AqUpfQfPqVfB+qBGIV9SySy8EJZ1xKVXCEdvTNRL1Yi64Had5/jI?=
- =?iso-8859-1?Q?8Fb+SfjpKwHgGvCtKkZRrYMd9GxxeFipG4m2zFcaRZqTwv5+uUEiIWuvoy?=
- =?iso-8859-1?Q?P9+uaPk7kRlpe3EuTb9gkcmsGq/l9PMxygD1cF/a3AhThOHPsoqZ3atz0z?=
- =?iso-8859-1?Q?HQA/ASIuSIKVU1hNgjU0xmsSC/8tCDDzsZ0C+N1r8O4LVNVy2hi/DYyi1m?=
- =?iso-8859-1?Q?QHtDBHRnRwLjAal7shqm9lBsKeUcsMiWuu42QJWFwfSVv1HMLjnSwt4dmX?=
- =?iso-8859-1?Q?QXwPTNYVcD5tdTi62/GruBWrjYktensO9L+4aEpjh5KruT5vnCSuVKuPCW?=
- =?iso-8859-1?Q?GT+PS0XntG4tzVZGXyjDgUPYfEHdrH4DEELk7bSXG2Pwqj0z/xVWeHDjjQ?=
- =?iso-8859-1?Q?0cZZSzYyotxUupQeE3tmzBoDSrBSBBJO1WNE5mz03a/kptW+GntMbPdO34?=
- =?iso-8859-1?Q?WMyFmfkiqxuUU9uwMWFjfejLdso+XJKUtlm/lht1epgqdXB8Tjv0IHT3mp?=
- =?iso-8859-1?Q?TcMrBcW4Ac6b4MQqBGDwhxvt4R1CINnjhs/NJgXENEfeB+24y85nnSULiw?=
- =?iso-8859-1?Q?f5t3F9H4/6YjzWx+TYFcB3VG66Fr+lN/IIXrrQ5j4loS0NJkqpOuzO5/tV?=
- =?iso-8859-1?Q?gL5dH6Aq0h17rXMu5C114enMxDWI4wW0JdgBZODZqWXXMGO/tN2JYZeV52?=
- =?iso-8859-1?Q?1VoAFKt0v+Bz6VEH0hqiMD+7hQiI3zDkl0x1LCT3/PmDUVqgKWUaCthSAZ?=
- =?iso-8859-1?Q?oTXRx2MjqwejuMQSWGkolSmwcjsrWkUXyLZYYym1hc+36z5xwBCNdVrrER?=
- =?iso-8859-1?Q?c9PwBaEtS0cTztVYdmQCp+oSEBFRqgPQ7oUI6FPCo6TLc/cxN7LcxNFVK9?=
- =?iso-8859-1?Q?t6EYCoo8xxPhUdfM4csTj2MStklJrjTyNii9JZd1LduIYtW90zbrz+1nHz?=
- =?iso-8859-1?Q?LGFYkTWkbKQpd/+/sQcJUgj7NZKV+K7opIEvB6LG5RwDfi2Rn7OQO5iGFE?=
- =?iso-8859-1?Q?RML5E3n1kk+TWTILzo0T72Pk6DJRAeyUlbszhyjQ350CoYqvBBsKDVbpOH?=
- =?iso-8859-1?Q?vHRlXvokFKzO2obn0IqARnxsWiUaSbClTBR+AyLwxYF4xW1yvLGNeYmzWD?=
- =?iso-8859-1?Q?uxRJp3nHNgnAbOE1KILzyDHZ2GNWIy9BWYx8pNqt0TNTxWQL32PzpTCzfv?=
- =?iso-8859-1?Q?nnkgGRL8ZjttmZJUJzIRbDaPdZpFJxCl+M8BUO0ORQtBJmyFIiXGL3yYrz?=
- =?iso-8859-1?Q?kT5XuYk=3D?=
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?1qxzmu+cjTgyZdefUg8Gcygecodx9VMw1/8q3mnIn+LldjCBVVETk0G8XF?=
+ =?iso-8859-1?Q?QT9lUmK0ikao6s135BJl5jZwbX8uGlATf+giY7UxGpN0it6PAGTpi2pIEh?=
+ =?iso-8859-1?Q?W6MEcf8jv7nDKF3n2N+1RPcztqzQekgYs8SCkPg3nYpB5ckriR0uvVd5Tn?=
+ =?iso-8859-1?Q?8436GJT8gVqObVVcKZz4fj0eJAEcWcE5I0wmJ8/dPUwOWNv9XFxNuaKLVQ?=
+ =?iso-8859-1?Q?os5ps04OSVUMrc+TYqyejJ982y7N8q6zzCJQtkdpKeskjLrifG12neNgtm?=
+ =?iso-8859-1?Q?059rSTw95cL8bViK7s/OacCFld+sPHMovh/txGlToeifJbwF5BGaALP074?=
+ =?iso-8859-1?Q?ethZLFamZa9Y8KqobCQsoMKbmQZflDXB2J27TQI92ilueNNz1UxGqL7Heu?=
+ =?iso-8859-1?Q?8Ly6QNytSDqLd/iMAlJPZqrBrB8yNgcF5sELp9ceWSU5mfRh3NOiOlKVNP?=
+ =?iso-8859-1?Q?ikZrFaFfM2GrXBJyW03DVNQ7r4TS0G7gNN3ySWZV/iT4sG4+qvEiODhmQM?=
+ =?iso-8859-1?Q?mv1Bw9GvsXAnOuwRB119S9d3ll6qvYQajwYWgBaSvYgnrIxQ1FjRN5UKn3?=
+ =?iso-8859-1?Q?rq+Hbn0Z3ao1VHux4muPQcXcj/kdGk9MkKLkRw1RpGxl3woDFcCJoADpwK?=
+ =?iso-8859-1?Q?mdQXFQ6HJUnJ8603JDwSoVfx5nbt39/MBSkCOzUNRIkfrAgIOtFoEmHrpU?=
+ =?iso-8859-1?Q?0KYq+xNFW0BfdDcgkWLm89qrj8aVtGUiIsUUiHKB67E3xv74q2uGVO5wqI?=
+ =?iso-8859-1?Q?kaPBt6JDrY8ImCMOAJlX1VaZ/0EeWE1z/mLOV6daoXbPCzGU1E/Mr1SFEH?=
+ =?iso-8859-1?Q?eWsJlfv8goWG+8VzB0mX6Qgk1uuh9FE4S29TIVjSZJdDo3KIyIfOFdNjXc?=
+ =?iso-8859-1?Q?ogOMkaPqjc78WDFHU51PsA8ikP1Z/JzuWeupsvl5U7LzE4zQi4FoiJGGj+?=
+ =?iso-8859-1?Q?dlxOhc3nUrdBENiq5F0eFE7LDgtRrc5PUeg6N0SNzkmu72k9lfi3v/PENO?=
+ =?iso-8859-1?Q?+pttDidKwm8pMDyDVi4rqD9i2fqs8GldTLaBSQSCqA/l12gPwNKWLgAsJ3?=
+ =?iso-8859-1?Q?mVh+cwdrsAwBXZCrFcyO4kkDO1jLT0jTLprAbW1lbsQfG6F/QhvuHCsDvW?=
+ =?iso-8859-1?Q?IvR6lspA5SY0BP2hgXjksqz6EUS0q8GHvov5jHs7rouZz/CD2L9DG6g0ss?=
+ =?iso-8859-1?Q?Vrt/qi+sGr+fh9z1Y6wjf73iUM4oP/PH9RlROm4iwcEHXDpK3lYDbxMhgW?=
+ =?iso-8859-1?Q?J4cxDFygPaDPJDvrbYWOgDrHulfiAA6y42NQWf+UmgGpmZTTWyaTP6yCqj?=
+ =?iso-8859-1?Q?VIwkR3vu6Nd7iQKw/dE/cYZQ11YnZ7Or+WAI8/1hkDY0CquSTXAaxbLpA9?=
+ =?iso-8859-1?Q?hHniHhTNt3r8NtImjOJTVZDfRp8kRvuQq6jzcie60pV+7kppdCfzXj8PTb?=
+ =?iso-8859-1?Q?qv5YW4X0CBkCq8v0s5LIm67fVhuoFVy6LZtyLTyLCerHbfEmcW1OjBkcC5?=
+ =?iso-8859-1?Q?SzfPRieu17RJqkckyTb+h+dyqVcIW4293PH45YEw9CLA=3D=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?9kBi6rW0hWHARlRXYan0SuSvn2n5FIyaA9HH8XiRURPTcFEhtJfGrxqvcq?=
- =?iso-8859-1?Q?ZK0IaMBd9moAx9mP//3/jT3vKz/p/oufHnKCnCq1bpjdB0s8NmkVQ/0glS?=
- =?iso-8859-1?Q?IWwVr9fsrdMOvQiYDOderB5iMLhs8IJViRQkru5A0qIgoaKBLVt9DPDnFi?=
- =?iso-8859-1?Q?iaeScE42Ceoa1/VuLVabr/Um52uLDCyXCqEc4pR0LXOSz+oTWUUYl+S2df?=
- =?iso-8859-1?Q?NHJ81hRBRhQtSBL3BPUwTPICc/T2o8FwTt/s4T2fXwBcaBcVv9krzws0sx?=
- =?iso-8859-1?Q?m5JimhZFeNpRAYdtzg19nKZ8QG8xYbMvb+w4tMrZoJqBcdn2aut9p10Bjc?=
- =?iso-8859-1?Q?eYSqU2o3ZbSfJKRXRwjiqYtb7KMZB/QM+y7D0/DjTB7xhzm1xFMltIpNlw?=
- =?iso-8859-1?Q?E1H2b9eRv/EKhPzAhvuZvWVmVgmgA5Kiymqn4oj3uO3/AbG9icOXJO034A?=
- =?iso-8859-1?Q?ITZrziLcoOn05qrZK26YeNz5Smt/fia+izugULCPEb+u9Nz0RyvVaQpC1+?=
- =?iso-8859-1?Q?/4y2bDO7pCLMobn0vtiHa9vTvmERPPoQGdA+0v9ZfL9xIvPKhYNX+w1AKH?=
- =?iso-8859-1?Q?rrqwfcbf6HuS+ah4W6XdTBx1AobI/UX7uQMQxplE/gKcJgcSm1zyEjqdDg?=
- =?iso-8859-1?Q?OoeeUOyb4lkxoMRR+qRXMcm31J6E9bKIZQJl21jrhQneY6/kmToO2fEX/I?=
- =?iso-8859-1?Q?b+In41X6YWk7VBmAB3HID4n02VJvqjERzGLLUd0W7SnLKWcWYuQafp3KTm?=
- =?iso-8859-1?Q?Usd1XIV/JHuM68kHkzjYFdtWcZPvoFc1lYQTkU8s2bsY0DEkAb5U7uZR8Y?=
- =?iso-8859-1?Q?nUsGlWLgTaiimRw2Wn1aMvvqdQ4nIsGRAm24HUi6VMoN3A2yv2kpCEXNUH?=
- =?iso-8859-1?Q?yQukzF3PACraxglQzE+VyqIg7FsdR4zR+Y9ZlUG8DZtg1mn+os3rjXRHm5?=
- =?iso-8859-1?Q?xPO89wixUiCNUh9eckZbhE/RkkpAurUsDb3wG48czuKOeTiKgOYNv2rMNU?=
- =?iso-8859-1?Q?cF9FJHJK0o19ifY8XZ/WbaRBIU4hl3R13Nwu9fj5E8Liz6h+ncGs1FHPkj?=
- =?iso-8859-1?Q?IzyrojPrX49u5wjsRn4F7ZgpgzTg06J4yj9lG43oRRetS5HLlC6Lf7ctgK?=
- =?iso-8859-1?Q?4ItjHb2vLUpfjo0JqZVyRYCXneBYQg3SQ0qfZyppHOhN0zaLRYi9y93/X8?=
- =?iso-8859-1?Q?QGfodfgjuZcTh+BBgZnPDpRNfsLVyY9rPj7uQ+OLRW0j3Zh5FRffPJmOES?=
- =?iso-8859-1?Q?3JMmAmnn6CS9pXQXBwz8WQsPLg2qInLffHnd3ImXPVkMduTBYkO+1ph9hB?=
- =?iso-8859-1?Q?KQkBYcoYMr14VOByYxbMSVlr4oapENgjYyZ/ARaDvzAYl35V7ezSiPiig5?=
- =?iso-8859-1?Q?rTjCe/CAxcWjdYdCD6kLVLXEqB2YYDlKRh4deYp70TdHCpAHrcov9jpgtX?=
- =?iso-8859-1?Q?6xm1Nmo8fyf1Azmn+vQ25BXJIi0qxufCc3mTjK7Y2LqYljA/kwVKLKstRB?=
- =?iso-8859-1?Q?qTyH6p2HG+zEXwQWZ+bPdb8WSCMN36Xbj8IqvBCD0PZL8Ousn6WXhTAVvd?=
- =?iso-8859-1?Q?JrDmmn5zZec57ygyzf4bepvp32yYGQWMDjpQ3bEn3xshNLxDxufcAYwJiG?=
- =?iso-8859-1?Q?I7G2wUnbmpnt0ArmlxytaG0/xmTKLjVW2r/sGJECaZ/NQwa8ERYnUmVQ?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?FJEbKg4Pr+tBLYhcXjat8gXY6F+gwN0O2ORk4BJPGvCe1Z5eAW/+gY4bm/?=
+ =?iso-8859-1?Q?9z1XtTAwHMe9vFvb6Dm2hYr5PaKIo9izsx3eu2nxk1qz+sizSYxFOw3PAi?=
+ =?iso-8859-1?Q?+qQFSyCRkNnITnRoakDfs9fB9WW/zIKWy63uDiV56jdXIve5dhuhMnGJIh?=
+ =?iso-8859-1?Q?ecfMzTS0Z4qUo+gwFhVewbzBnmxQOiBUrYP1DTTl0ypt18MXmUb9joGpQ3?=
+ =?iso-8859-1?Q?6F3ptXhdj87GAKJuSp15w76WSPWdlv6MZAFTSfibWq+SNeU/W9fiT0/Rcu?=
+ =?iso-8859-1?Q?22n8ynPXj79Xaz829RvJr1JzmkLxQ78dWcKmi1DSoxYHqwX5EbfRxZeaR8?=
+ =?iso-8859-1?Q?LAsK0Uqe2z32sjuy5qIwC5KXCHq6Zfsk8jlkc3Tzn/ReAk+9pq2CySLrT7?=
+ =?iso-8859-1?Q?U8wSWNWDnzPya9BIR+t4Ycox1FoEicMUdfmgWlwYXj3tG1ehQexfyT9s6y?=
+ =?iso-8859-1?Q?YMOAoeoRwuuzwsqhZsuhupOzm/skYfubDmSOGJ1LEOakSB8Vl3uWHlzsNt?=
+ =?iso-8859-1?Q?3Iq/bMPCx1S4syQaRXrU80OCLYSAHifJucyboaDHoqCuWneAXTP1x7QeVV?=
+ =?iso-8859-1?Q?dEbaSRcs/wwt5JSoTnNMcwP2iCmBkCKP5PUVwzm3/yeiJKtWhbEotaIVpT?=
+ =?iso-8859-1?Q?XixH/u1kxvrK0kUpYQ9YeqvsTmdYhnmEHDhaL5nTbpk4N0USEmSA98bxzV?=
+ =?iso-8859-1?Q?SD7HfX5hFrAoAYHTuiwjr2CvY068abM2Mq8FvCnlb24lnd8p09Y/OiF8mu?=
+ =?iso-8859-1?Q?Sm/v5P11G9+RzcfoaJY2Szgt1tTI+aduS8zIrfJLQ+qHPsc1OaIGShC8zZ?=
+ =?iso-8859-1?Q?HUg+QW3j7OcCbPjXqTs5MDmfiHwzE2ytstVWJnxpTC03ccqiEJSSOQ/+db?=
+ =?iso-8859-1?Q?5dzX/3jYfBeasSjb8bIez7MJQ2CGYoWRRzrg5EGNiaq8Q4BegX1D7oMYvo?=
+ =?iso-8859-1?Q?vLApmyag/0he8uMBooe3YN8eVtYXvW5bahKxOOaJXWc9+5XHQetWpadYQ5?=
+ =?iso-8859-1?Q?U5cT4jAqqCh4RljyBPRTtBBAPYx/1bywDNvbXdCeryYjIiw1ZCtIjQ0k2w?=
+ =?iso-8859-1?Q?VM4w24p/ScT4vkya87x1MOPQ7qjNDcNSrtbqRDKOn4irPnX7FCean+bP3N?=
+ =?iso-8859-1?Q?D3aHQkEDgFm6+ZY1HOXcn5WpHTrepT83os8ZbC8+7GG+3xrvWTrkAkYfk6?=
+ =?iso-8859-1?Q?iWfR+jSm0TxAdQOyEktPW4gt1Tw/MRs2H0H+qerjzfdwb3+tH0ATQpXxsD?=
+ =?iso-8859-1?Q?GsrpZ8tDSsM7hpouYEvTeT79azWc5gVhh8kRWYA6ik2OrqBNyjVExPGuCX?=
+ =?iso-8859-1?Q?PJjBH018KDAx7yuKJ3k8m74jGNY2VFrsf8ykvAsSBFSbsewWlNxoxjfISz?=
+ =?iso-8859-1?Q?ODWmtNBXyCZ5n+rTbWBbK+fgaaEK1zCKcWqt7tMIyE2OVYkoEwdbCFgMkc?=
+ =?iso-8859-1?Q?Lc9mXrVSs41zV5aeN9jr+00jdqkCmlAvQwzL1S40m2DB0sMj6Sy0W1qO/z?=
+ =?iso-8859-1?Q?f2Es640vru8uR5fu2iAzkI+2YtYcWMrQ0Ns3k1QbL3x5GchcfnjrFgrrQl?=
+ =?iso-8859-1?Q?758IDGSJ5w7fyIDh4hG48KQIMwIU8uVP2JviCaj7N5EzYVu+gZQQz3VPcf?=
+ =?iso-8859-1?Q?rINwWQ/bHIgTQie7X2eycKrvst+lfFCfVVFbTDKR1QtmTnD7HJbI204Q?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -142,13 +140,13 @@ MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dda08a2c-d34d-417a-56ee-08ddcebc3076
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jul 2025 16:23:01.8429 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7515a35-d93d-4d5c-4f88-08ddcebc4063
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jul 2025 16:23:28.5705 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4JKqzZ0heRHfg55n0Vc4pOsBUc6plld95nQXMgLdFe9KkHEI1Mefx4G0M9a+0Dg2qtz6Zc90CMyer0ZNFs7ae8zF5RyXJkHjfqRiuU+0d6o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR09MB4021
+X-MS-Exchange-CrossTenant-userprincipalname: owqpyd6cKtWkc9rRA/HktzHfMGh16bpqcATTMm+z1bPZ56Iq/gR0jlbrqcmAwhJZl+LZ0N2eCaTSuNyummAVaRklQqvooNdZVG+nAp1NfEM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR09MB8338
 X-Mailman-Approved-At: Wed, 30 Jul 2025 07:10:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -168,42 +166,129 @@ X-Virus-Status: Clean
 
 From: Chao-ying Fu <cfu@mips.com>
 
-Avoid writing to PCI_MEMORY_BASE and PCI_MEMORY_LIMIT registers for
-bus 0, device 0 (the root bridge) in the Xilinx PCIe driver.
-
-On platforms such as the MIPS Boston board, writing to these fields
-results in incorrect values (e.g. base =3D 0x0, limit =3D 0x1600), which
-causes Linux to fail PCIe memory space assignment.
-
-As a result, Linux can boot successfully and probe the PCIe bus and
-all connected devices on platforms like the MIPS Boston board.
+Add basic support for the MIPS GIC syscon used on the P8700 SoC.
+Enables access to interrupt control via device tree matching.
 
 Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
 ---
- drivers/pci/pcie_xilinx.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/riscv/Kconfig                  | 11 +++++++
+ arch/riscv/cpu/p8700/Kconfig        |  2 +-
+ arch/riscv/lib/Makefile             |  1 +
+ arch/riscv/lib/mips_gic.c           | 47 +++++++++++++++++++++++++++++
+ board/mips/boston-riscv/MAINTAINERS |  1 +
+ 5 files changed, 61 insertions(+), 1 deletion(-)
+ create mode 100644 arch/riscv/lib/mips_gic.c
 
-diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
-index 63058e8e7c5..4ef20474a0b 100644
---- a/drivers/pci/pcie_xilinx.c
-+++ b/drivers/pci/pcie_xilinx.c
-@@ -132,6 +132,15 @@ static int pcie_xilinx_write_config(struct udevice *bu=
-s, pci_dev_t bdf,
- 				    uint offset, ulong value,
- 				    enum pci_size_t size)
- {
-+	if (bdf =3D=3D PCI_BDF(bus->seq_, 0, 0)) {
-+		switch (offset) {
-+		case PCI_MEMORY_BASE:
-+		case PCI_MEMORY_LIMIT:
-+			/* Writing the memory base or limit causes problems */
-+			return 0;
-+		}
-+	}
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index b05e0622908..aada4f4061e 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -385,6 +385,17 @@ config SIFIVE_CACHE
+ 	help
+ 	  This enables the operations to configure SiFive cache
+=20
++config MIPS_GIC
++	bool
++	depends on RISCV_MMODE || SPL_RISCV_MMODE
++	select REGMAP
++	select SYSCON
++	select SPL_REGMAP if SPL
++	select SPL_SYSCON if SPL
++	help
++	  The MIPS GIC block holds memory-mapped control and status registers
++	  associated with software and timer interrupts.
 +
- 	return pci_generic_mmap_write_config(bus, pcie_xilinx_config_address,
- 					     bdf, offset, value, size);
- }
+ config ANDES_PLICSW
+ 	bool
+ 	depends on RISCV_MMODE || SPL_RISCV_MMODE
+diff --git a/arch/riscv/cpu/p8700/Kconfig b/arch/riscv/cpu/p8700/Kconfig
+index 0e5e4c9eda6..223130d5443 100644
+--- a/arch/riscv/cpu/p8700/Kconfig
++++ b/arch/riscv/cpu/p8700/Kconfig
+@@ -8,7 +8,7 @@ config P8700_RISCV
+ 	imply CPU
+ 	imply CPU_RISCV
+ 	imply RISCV_TIMER
+-	imply SIFIVE_CLINT if (RISCV_MMODE || SPL_RISCV_MMODE)
++	imply MIPS_GIC if (RISCV_MMODE || SPL_RISCV_MMODE)
+ 	imply CMD_CPU
+ 	imply SPL_CPU_SUPPORT
+ 	imply SPL_OPENSBI
+diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
+index db8d235c699..692b56cc3f0 100644
+--- a/arch/riscv/lib/Makefile
++++ b/arch/riscv/lib/Makefile
+@@ -15,6 +15,7 @@ obj-$(CONFIG_SYS_CACHE_THEAD_CMO) +=3D thead_cmo.o
+ ifeq ($(CONFIG_$(PHASE_)RISCV_MMODE),y)
+ obj-$(CONFIG_$(PHASE_)RISCV_ACLINT) +=3D aclint_ipi.o
+ obj-$(CONFIG_ANDES_PLICSW) +=3D andes_plicsw.o
++obj-$(CONFIG_MIPS_GIC) +=3D mips_gic.o
+ else
+ obj-$(CONFIG_SBI) +=3D sbi.o
+ obj-$(CONFIG_SBI_IPI) +=3D sbi_ipi.o
+diff --git a/arch/riscv/lib/mips_gic.c b/arch/riscv/lib/mips_gic.c
+new file mode 100644
+index 00000000000..7d761c58e74
+--- /dev/null
++++ b/arch/riscv/lib/mips_gic.c
+@@ -0,0 +1,47 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
++ *
++ * U-Boot syscon driver for MIPS GIC.
++ */
++
++#include <dm.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <asm/io.h>
++#include <asm/syscon.h>
++#include <linux/err.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int riscv_init_ipi(void)
++{
++	return 0;
++}
++
++int riscv_send_ipi(int hart)
++{
++	return 0;
++}
++
++int riscv_clear_ipi(int hart)
++{
++	return 0;
++}
++
++int riscv_get_ipi(int hart, int *pending)
++{
++	return 0;
++}
++
++static const struct udevice_id mips_gic_ids[] =3D {
++	{ .compatible =3D "mips,gic0", .data =3D RISCV_SYSCON_PLICSW },
++	{ }
++};
++
++U_BOOT_DRIVER(mips_gic) =3D {
++	.name		=3D "mips_gic",
++	.id		=3D UCLASS_SYSCON,
++	.of_match	=3D mips_gic_ids,
++	.flags		=3D DM_FLAG_PRE_RELOC,
++};
+diff --git a/board/mips/boston-riscv/MAINTAINERS b/board/mips/boston-riscv/=
+MAINTAINERS
+index bc59a628c79..0d9a951441f 100644
+--- a/board/mips/boston-riscv/MAINTAINERS
++++ b/board/mips/boston-riscv/MAINTAINERS
+@@ -8,3 +8,4 @@ F:  arch/riscv/include/asm/arch-p8700/
+ F:  configs/boston-p8700_defconfig
+ F:  arch/riscv/dts/boston-p8700.dts
+ F:  drivers/gpio/eg20t-gpio.c
++F:  arch/riscv/lib/mips_gic.c
 --=20
 2.34.1
