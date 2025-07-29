@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5986DC87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 15:53:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C22C87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 15:53:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75093831D8;
-	Tue, 29 Jul 2025 17:52:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 640928320C;
+	Tue, 29 Jul 2025 17:53:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lJ7lezqu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ujNmpmN6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DBF5831C8; Tue, 29 Jul 2025 17:52:55 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 8DF6F831E4; Tue, 29 Jul 2025 17:52:57 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60F66831BB
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 17:52:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54890831BB
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 17:52:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-45892deb25dso470005e9.1
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 08:52:52 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-451d3f72391so53369955e9.3
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 08:52:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753804371; x=1754409171; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753804374; x=1754409174; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=2Vm1Kf9FnWyQXequsCVuishhir3ePfrhUnNZWIH3+M0=;
- b=lJ7lezqu/oWdaKs653VkoT0J/NMHbN+1D8/CQHkLVU+qjwLwLLkHJ+3T5EszOuT9iV
- PbvgaSSAJfw99eAK2AcTAayV+QXHvkIm5vupsiQFi5tFXnYZVX8wLbGEudMpJrEd3fhq
- u60rXXTjT1fc2pwjw9c+3W7I11eztIpbnsRmItYLhGQTN9HbIgA0Lum7juQy0Ui4fz9z
- fWDszQHw6KdSuGk9FfJ4ib8tvIb2wz09yeTHlzbcRLRjTpKrwdjKGMgi/rYNGWzL2SXu
- WsxYcGBLq0mPk555e6rjESBb9yokOHy/mLHKGjIfvk2K20bQZ1/GuaRKkXtHhcv35xJX
- zzUA==
+ :reply-to; bh=0kCY89KGKiEAE0pE8jXEx0PB/aN9TrUhdpshpKiW8IA=;
+ b=ujNmpmN6Jn93xoFo77FLfl+E0z1uSciZ0lihWWG3Sfym5nOXidD5RR082+IWd+X0QL
+ 4JYJN4Of3B+JRONNxy9goQyzKLtmK9Eu+c38APfPG6xVFifJS881auuE7wR3OEtm9F/J
+ xgfWYpW3IwDTfnUAWuCheP3UK0y9ss9qyd4frObrC8fqKaAsZtbopZ9Sy9y03E+SPqn4
+ O7kJs3j1QtL99wMv5fZMniqisatcY+A9SH6M6gEyjFVeiKg/0vE/YeRe0wjjNfIfsWHe
+ xfrkRSQ66HAInAzxdT4AcujTY8ozmxVNFw3XY3eNturVuCx7ErOv/NOsYtL3ksm94lfP
+ JH+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753804371; x=1754409171;
+ d=1e100.net; s=20230601; t=1753804374; x=1754409174;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2Vm1Kf9FnWyQXequsCVuishhir3ePfrhUnNZWIH3+M0=;
- b=rnrAHXigtJOlC1GCRsVOj2O6dOkhatDRQ3pvmbzqE9r9uKoDanT0iQ8GHDDqzLwYOW
- zkYv/0U6Ev80TogubP0SgOGV+RGkAfCImw1CCWRkLOrvZBwSbpwaeVN504ZL6sFOWsJb
- plyPDSF/cKiIObwczWoAyg6QkOdX5mvXl0SitGk3gv1o/O7JS51yAmaiFAftRQadE5al
- 1CSEssvzKxQ0En2z6fGroqGJ/eFh7KR9RekB2vtttkfs+UL7P4g5Ycy078FaRUJo5ob6
- Cn+Kd0mpiLFuRRZblv6oNgz2OS3mJz9zEoGIjDmnUw1K1JvxUloKIqgWv6MotK5GVlrO
- znxA==
+ bh=0kCY89KGKiEAE0pE8jXEx0PB/aN9TrUhdpshpKiW8IA=;
+ b=wDEqo7RuZ6SgPOruk4PjQHdHM9Y8mY34yxWhCJvBn1SRbLFYLKuFoXvkswPryMV+Mc
+ qvbfbKFTrRG5wjrhU1VHhRSOSeY6Kl+ZLyUNauBUapyW1Le+DtwU+Bk//hf6FTRgBMTg
+ ZTRLFFoLtC6TJiLIqHFx5yWbPu43b1E/rNhvfsaH0TyfAhHKOv5Ra2nEf/I537Y8PZxg
+ YoRr/dV1UQtWM7jgxtAym6ReaFQsX3cHSxQ+p7e2w0a7wrPVloqsw7W7SiZs0e+NEJJ7
+ yED7g8kiifq6ToLnC/kV9SZtUtqk2Tzv5KYEB8qPv/YofSwHViaa7/Ho1KAxl8UPYLeW
+ zIWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWynTCs98B2FML5jM3J662F+T9cDKpkzr6PbUXHT9L+VNPvj44uUCWIxVxE5/s2iAwTX6ZFHEA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyG26HLUu6JHAVB/bDg3tOwUmFSBY/WfCwh1ipwLS7hjHuH6+eL
- dv4kJFqgDIo0G1WSmNZ9PIgg9Ggltsb5wdKBT+cTONgc7STf/mTSjOMyM+0fCZg8ZvkeVKwUL1k
- mWRqc
-X-Gm-Gg: ASbGncvXwbvC5Wsn9gj7ZH0+EChbojKunJmflh1cocXv+mBsRm6pyABcnuFKpEMKL5G
- 45xXM/Q+u6C+YZ11M37reszcezLKNxxtGPREfyCCpESgugM+3R2UaBSRV2lao+i21yQcDY25I+P
- G4WDHhmmQBNvlChrO64pY/RuA0tOlHlJUAIM3VadSonmvaB6CH4bg5W/bQlysgzGg8LTWp4Yn3j
- 2v4xrM7+/ZX3l7n8U9YCFb+tOhPapO6CWNaCflWqX6VepT5ntFehzBt1vvi7NOvqhjcdkHBxdiW
- AXif/DyEWlkOtkQ2N7PGNcbtzd/2p3p7K281M2hTaHXj8/TsBneIpAQf03KoZxi/yS9Z9uqGLTG
- 6wJ5GJWxPm9i2OP1fECSGqd5qFWSFjVmoUm15eDyuRr/X7Q7Aq1PTZ3D+9gfM9zln7RQ5mFBy40
- n01GNJcVyZeHGnQIW8EoOz
-X-Google-Smtp-Source: AGHT+IHIyH/mHqffVwtyhx/Pwoe6JGFsFTEu/GIw+nOau8hsDYncxU2DcGOuqHcF/O/NWaQlEvg3eg==
-X-Received: by 2002:a05:600c:810c:b0:456:f9f:657 with SMTP id
- 5b1f17b1804b1-45892bcfb1amr2609605e9.27.1753804371419; 
- Tue, 29 Jul 2025 08:52:51 -0700 (PDT)
+ AJvYcCUEdjsrgKgW2h7P/HtmvhD61BVhq30dcuaaYLjpXlJ7qLLbt2Q6BmkwLxBCHGDVlRCnT7sRN8Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4d9aiMRi3d3Y4luVaCiui8FMQ/iUITa3rkpV47esEmjNKDV6/
+ pC5KfJzHhoLB7TViNSRqwhtvRc/g3vcnWoEzvLv+CPfPCS4V0S8ZPFW4LB3Im9zH9ZjYkvDPhlD
+ 3K7e9
+X-Gm-Gg: ASbGncuhYXv8BbXtwVcfBJ4QB5CX/YcFT0dgf4+Augvf0r67BCgeNaCTxsYxpaqxk4p
+ QLu/y6RMgS6hsUCdTJ7seHn1quk32OwRW7MqwgbD7odPsAK/UiXgcxQgzsCV5Q8tV0WnDjEo7iT
+ K3EjvYxoGHEPRkJhvOJ0znF50xq+teS7jmfIqZm+vzEgH7qNnw2eGm1oPHrbIUxDOkeBJXjF0iV
+ HAdv//mhqAvIVTCfnUiMtH/NwUjZbmjmGPmCMGxAO/HHZWRyklK7Zdzvfwsqwk5C38tk/SDczfc
+ 1xyXxymKABCCbPNiAN2Tj0iLvrbToUadMxfqCjG62ERkvyJg9NhRkwsKt3uVv7+h0w2OAGFp6It
+ s6WegKmDGSVh/8udHFXcyv62M67sKUCCkfe/pipsq4FFR4mYAJKOU848H5cJQ+s8ahbI9mr8umj
+ o9zGZTQlU5UhNttUgSLjPB571AEr5ldcw=
+X-Google-Smtp-Source: AGHT+IGOCG5sL3fcmKhDfkRag9zPhRTFwXCxiQf2qsmOFhEnr0le0noqFdiMDCPGE/vlGmRAPhxrjQ==
+X-Received: by 2002:a05:6000:2003:b0:3b7:886b:fb8d with SMTP id
+ ffacd0b85a97d-3b795026234mr107328f8f.31.1753804374395; 
+ Tue, 29 Jul 2025 08:52:54 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (ip-185-104-138-124.ptr.icomera.net.
  [185.104.138.124]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4588dda59cfsm18948535e9.3.2025.07.29.08.52.49
+ 5b1f17b1804b1-4588dda59cfsm18948535e9.3.2025.07.29.08.52.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 08:52:50 -0700 (PDT)
+ Tue, 29 Jul 2025 08:52:53 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 29 Jul 2025 17:52:06 +0200
-Subject: [PATCH v4 08/10] arm64: implement printing backtraces with symbols
+Date: Tue, 29 Jul 2025 17:52:07 +0200
+Subject: [PATCH v4 09/10] lib: expose unwind_stack() and call it from panic()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250729-b4-arm64-backtrace-symbols-v4-8-8d8bda8e22c1@linaro.org>
+Message-Id: <20250729-b4-arm64-backtrace-symbols-v4-9-8d8bda8e22c1@linaro.org>
 References: <20250729-b4-arm64-backtrace-symbols-v4-0-8d8bda8e22c1@linaro.org>
 In-Reply-To: <20250729-b4-arm64-backtrace-symbols-v4-0-8d8bda8e22c1@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -89,21 +89,21 @@ Cc: Simon Glass <sjg@chromium.org>,
  Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5844;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3664;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=32gzmMZLwsCDU/kN0Div80xllFvWa9Rr47UxkUylazI=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiO4kc2QBXB9cfRv56NGk/f/i+lj9R4ziLo5zz
- fYW4NXiH/KJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjuJAAKCRAFgzErGV9k
- thgkD/42Py6LhLIUrwndmwZhPaSujPTgCN9SUEN6rrEeTyMNW8BjTI3vqObdo/8tKP0trXOpd8+
- CM2daax1sD6E3O5OLwUJGAfwsByuK+g6OMmx6XMfZ3FusZ95mxYlQlJejU2brcfSDBl5PRiEES2
- M/xK9k4sycJshPLWZVdHrwQe1Ps81kx/Ib0R1aenRslEuTbohSKoIH6w1He6VNXR2h8CioNcce1
- ZfoFjr8loJgfndesgGGxjm7yEWItdfS0ZVgoxJg1ZNdgK48BTX/6SgbvCwe8bMxJAMj9+392VHV
- +gtRupbRcytiiXjw0pXw+wAy4WCY+bWL4zngAAOQjF5IP8O9uo6M/DyQm5Ex0aYl7FlAiMDsGnP
- Puw5YKfbdJPVUx0zjsYCjYsA/LlVS7K1IIRzEEksc7dbrWhpee/0CufPGqfym4nc842UJ+6HMUg
- zTz0OWTFHtTzIxTk0syiy2wZrx4AEGQrZW7KZnsJWxcWZDOcxrrNr2uK1RKDmBjwQwqK/TCpa5W
- w8gLBwYwWxVESH14Je5AjsUyn9WmSvOQhZTFFTtrvQfHXbEdSLtj4rqqkbtiWBWme3Bs9R7A/P+
- v4CLqyD925l60+EOyEOzPgJ/3E1aqJqkALLfysx8eMYH9eKmSNmhcwE6P0jtdiPzA8IOdOGsot5
- 3yYjDlB3PsKaj8g==
+ bh=8NNVe4Djqcx3dshqmzh5gNAE3JvDvAKB3ImiVXLSrks=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiO4k+hsMZCgYeiT74VdGbwAtqYmdDFRmuxUn1
+ fPqm3i1pMqJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjuJAAKCRAFgzErGV9k
+ tsRzD/9hMjyHYewvETnYw8MGD4UxiT+h6UeIOW+AcdtJOkHh2ATKtNN5NjOnQDdrNLuOoYaDuI/
+ cejar0BpvHm32aLR3vSEYjap1vuStW2JBODbRj86zLtWpjsgYy+BgUKB3BhOxbzd9j2kGW1j3JJ
+ uYLRso8Dh1rPJrS3zdS96y5sdxze+Zoa0FJQrongqaPsZaqWGeUhawSB6ddUauNI9xFaSz8VlAr
+ gJRruTOydsc17UyORJoGMy/Xfnmv+8fHgJL7ILYRCwSZ14xBqSdbJxv7oDchaADWYACSAcokckL
+ 557Hn7JuAl+dMnlp+m5vLNoUvDnYL3CdP14qTHnQwf+zaAh6/MyIlBYAPtm6tXoXRZOLN7oBExC
+ f1egWLxi3vddrs+4hvA4MbeSj4fkGjkigQL/uFpzOmULTIZeGa2DkVpAuryU4yuALm9RSpGsTBA
+ UPjOgrInbak7BX2rvOOWdiYBqHu75py2Gsi83kbsu9PIyTzgeYaEvTTE+MiXTWuRMHJC3ma10Me
+ W7M0MeyW25SEqDvLrEnOAek646kPEQA1ulRUxY8vee5WzgDHwyYFH3Cm1KVYJqyvt+95ZX8XrXE
+ t4yJBHYO/5g7wjr/01uK59tXPsyc0rTdFjc7XTSUfvbDk44ewqTu/hMHNHOp6Ry45j4TR1QAHIA
+ /YNnnkcJ3LnjOdA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -122,180 +122,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Using the framepointer register and optional symbol lookup support, we
-can now walk through the stack frames and print the link register values
-(branch location) as well as the name of the function we branched from.
+unwind_stack() will walk the callstack and show the symbol names
+if available by using the architecture-specific framepointer
+implementation.
 
-When symbol lookup support is disabled, we simply print the LR value to
-still allow for manual lookups in a decompiled U-Boot binary.
+When available, call unwind_stack() during a panic to give more
+information about what caused the panic and help with debugging.
 
-In addition, print the address of _start and CONFIG_TEXT_BASE since they
-are typically required to convert the runtime addresses to the addresses
-in the U-Boot binary/ELF.
-_start is used instead of relocaddr since it will be correct both pre
-and post relocation.
+Adjust the interrupt handlers to call panic_str() to avoid duplicating
+the backtrace.
 
-Co-developed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- arch/arm/Makefile            |  9 +++++-
- arch/arm/lib/interrupts_64.c | 77 ++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 85 insertions(+), 1 deletion(-)
+ arch/arm/lib/interrupts_64.c | 8 ++++----
+ include/symbols.h            | 9 ++++++++-
+ lib/panic.c                  | 7 +++++++
+ 3 files changed, 19 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-index 5ecadb2ef1bc46ffa68b04658168647eaad9bc97..41e75b5bcb1cd068501f118d72bdb1c486b6784f 100644
---- a/arch/arm/Makefile
-+++ b/arch/arm/Makefile
-@@ -32,8 +32,15 @@ endif
- 
- # Evaluate arch cc-option calls now
- arch-y := $(arch-y)
- 
-+ifeq ($(CONFIG_$(PHASE_)FRAMEPOINTER),y)
-+	ARCH_FLAGS += -fno-omit-frame-pointer
-+endif
-+
-+PLATFORM_CPPFLAGS	+= $(ARCH_FLAGS)
-+CFLAGS_EFI		+= $(ARCH_FLAGS)
-+
- # This selects how we optimise for the processor.
- tune-$(CONFIG_CPU_ARM720T)	=-mtune=arm7tdmi
- tune-$(CONFIG_CPU_ARM920T)	=
- tune-$(CONFIG_CPU_ARM926EJS)	=
-@@ -46,9 +53,9 @@ tune-$(CONFIG_ARM64)		=
- 
- # Evaluate tune cc-option calls now
- tune-y := $(tune-y)
- 
--PLATFORM_CPPFLAGS += $(arch-y) $(tune-y)
-+PLATFORM_CPPFLAGS += $(ARCH_FLAGS) $(arch-y) $(tune-y)
- 
- # Machine directory name.  This list is sorted alphanumerically
- # by CONFIG_* macro name.
- machine-$(CONFIG_ARCH_AIROHA)		+= airoha
 diff --git a/arch/arm/lib/interrupts_64.c b/arch/arm/lib/interrupts_64.c
-index d13ee8d9f81dc8c41ef4732167663b223ab6ab3b..08d81ca7f654c586521ff97bb5ca37229c9b939d 100644
+index 08d81ca7f654c586521ff97bb5ca37229c9b939d..949ae0f94168fd53036c1dff376b574808ebf9ea 100644
 --- a/arch/arm/lib/interrupts_64.c
 +++ b/arch/arm/lib/interrupts_64.c
-@@ -3,15 +3,17 @@
-  * (C) Copyright 2013
-  * David Feng <fenghua@phytium.com.cn>
-  */
+@@ -109,10 +109,10 @@ struct stack_frame {
  
-+#include <asm-generic/sections.h>
- #include <asm/esr.h>
- #include <asm/global_data.h>
- #include <asm/ptrace.h>
- #include <irq_func.h>
- #include <linux/compiler.h>
- #include <efi_loader.h>
- #include <semihosting.h>
+ static void print_sym(unsigned long lr)
+ {
+ 	/* Print the symbol address and the offset to the LR */
+-	printf("\t<%#016lx> %s+%#lx\n", lr - (gd->flags & GD_FLG_RELOC ? gd->reloc_off : 0),
+-	       symname, offset);
++	printf("\t<%#016lx> %pS\n", lr - (gd->flags & GD_FLG_RELOC ? gd->reloc_off : 0),
++	       (void *)lr);
+ }
+ 
+ /**
+  * show_backtrace - show backtrace using frame pointers
+@@ -228,9 +228,9 @@ static void except_msg(const char *msg, struct pt_regs *pt_regs)
+ 	show_regs(pt_regs);
+ 	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+ 		show_backtrace(pt_regs->elr, pt_regs->regs[30], pt_regs->regs[29]);
+ 	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	panic_str("Resetting CPU ...\n");
+ }
+ 
+ /*
+  * do_bad_sync handles the impossible case in the Synchronous Abort vector.
+@@ -279,9 +279,9 @@ void do_sync(struct pt_regs *pt_regs)
+ 	show_regs(pt_regs);
+ 	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
+ 		show_backtrace(pt_regs->elr, pt_regs->regs[30], pt_regs->regs[29]);
+ 	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	panic_str("Resetting CPU ...\n");
+ }
+ 
+ /*
+  * do_irq handles the Irq exception.
+diff --git a/include/symbols.h b/include/symbols.h
+index c5267edbe768f304bc0f6235e71a39b6c3835a67..845f993060f042139df46bcc51a0180faadc35bc 100644
+--- a/include/symbols.h
++++ b/include/symbols.h
+@@ -4,9 +4,9 @@
+ #include <string.h>
+ 
+ #define KSYM_NAME_LEN 127
+ 
+-#if IS_ENABLED(CONFIG_SYMBOL_LOOKUP)
++#if CONFIG_IS_ENABLED(SYMBOL_LOOKUP)
+ const char * __attribute__((weak)) symbol_lookup(unsigned long addr, unsigned long *symaddr, unsigned long *offset,
+ 			   char *namebuf);
+ #else
+ static inline const char *symbol_lookup(unsigned long addr, unsigned long *symaddr, unsigned long *offset,
+@@ -21,4 +21,11 @@ static inline const char *symbol_lookup(unsigned long addr, unsigned long *symad
+ 	namebuf[3] = '\0';
+ 	return namebuf;
+ }
+ #endif
++
++#if CONFIG_IS_ENABLED(FRAMEPOINTER)
++/**
++ * unwind_stack - unwind the callstack and print a backtrace.
++ */
++void unwind_stack(void);
++#endif
+diff --git a/lib/panic.c b/lib/panic.c
+index 0f578b5b5131589d215f5f4b16b95d9c9f3e8ce3..6f8bd7cc1eef7e5d97ba925bef65cc46924b4418 100644
+--- a/lib/panic.c
++++ b/lib/panic.c
+@@ -14,8 +14,9 @@
+ #include <command.h>
+ #endif
+ #include <linux/delay.h>
+ #include <stdio.h>
 +#include <symbols.h>
  
- DECLARE_GLOBAL_DATA_PTR;
+ static void panic_finish(void) __attribute__ ((noreturn));
  
- int interrupt_init(void)
-@@ -97,8 +99,79 @@ void show_regs(struct pt_regs *regs)
- 	printf("\n");
- 	dump_instr(regs);
- }
- 
-+/* Stack frames automatically generated by compiler emitted code */
-+struct stack_frame {
-+	struct stack_frame *prev;
-+	unsigned long lr;
-+	char data[];
-+};
+ static void panic_finish(void)
+@@ -44,8 +45,14 @@ void panic(const char *fmt, ...)
+ 	va_list args;
+ 	va_start(args, fmt);
+ 	vprintf(fmt, args);
+ 	va_end(args);
 +
-+static void print_sym(unsigned long lr)
-+{
-+	/* Print the symbol address and the offset to the LR */
-+	printf("\t<%#016lx> %s+%#lx\n", lr - (gd->flags & GD_FLG_RELOC ? gd->reloc_off : 0),
-+	       symname, offset);
-+}
-+
-+/**
-+ * show_backtrace - show backtrace using frame pointers
-+ * @elr: exception link register when called from an exception context
-+ * @lr: link register (x30) of the current function
-+ * @x29: frame pointer (x29) of the current function
-+ */
-+static void show_backtrace(unsigned long elr, unsigned long lr, unsigned long x29)
-+{
-+	struct stack_frame *fp = (struct stack_frame *)x29;
-+
-+	/* If we're pre-relocation then _start and text base might be the same */
-+	if (CONFIG_TEXT_BASE && CONFIG_TEXT_BASE != (unsigned long)_start)
-+		printf("\nCONFIG_TEXT_BASE   : %#lx\n", (unsigned long)CONFIG_TEXT_BASE);
-+	printf("Relocated base addr: %#lx\n", (unsigned long)_start);
-+	printf("Backtrace:\n");
-+
-+	/* ELR tells us where the exception occurred */
-+	if (elr) {
-+		printf("elr:");
-+		print_sym(elr);
++	if (CONFIG_IS_ENABLED(FRAMEPOINTER)) {
++		puts("\n");
++		unwind_stack();
 +	}
 +
-+	/*
-+	 * LR tells us the calling function, for exceptions this is the function that called
-+	 * the function where the exception occurred. For unwind_stack() case this is the caller
-+	 * of unwind_stack().
-+	 */
-+	printf("lr:");
-+	print_sym(lr);
-+
-+	/* Now we get the rest of the backtrace from the frame pointers */
-+	while (fp) {
-+		print_sym(fp->lr);
-+		fp = fp->prev;
-+	}
-+	printf("\n");
-+}
-+
-+/**
-+ * unwind_stack() - Unwind the callstack and print a backtrace.
-+ *
-+ * This function can be called for debugging purposes to walk backwards through
-+ * stack frames, printing the function name and offset of the branch instruction.
-+ *
-+ * It reads out the link register (x30) which contains the return address of the
-+ * caller, and x29 which contains the frame pointer of the caller.
-+ */
-+void unwind_stack(void)
-+{
-+	unsigned long x29, x30;
-+
-+	asm("mov %0, x29" : "=r" (x29));
-+	asm("mov %0, x30" : "=r" (x30));
-+
-+	show_backtrace(0, x30, x29);
-+}
-+
- /*
-  * Try to "emulate" a semihosting call in the event that we don't have a
-  * debugger attached.
-  */
-@@ -152,8 +225,10 @@ static void except_msg(const char *msg, struct pt_regs *pt_regs)
- {
- 	efi_restore_gd();
- 	printf("%s handler, esr 0x%016lx\n", msg, pt_regs->esr);
- 	show_regs(pt_regs);
-+	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-+		show_backtrace(pt_regs->elr, pt_regs->regs[30], pt_regs->regs[29]);
- 	show_efi_loaded_images(pt_regs);
- 	panic("Resetting CPU ...\n");
- }
- 
-@@ -201,8 +276,10 @@ void do_sync(struct pt_regs *pt_regs)
- 	printf("\"Synchronous Abort\" handler, esr 0x%016lx", pt_regs->esr);
- 	dump_far(pt_regs->esr);
- 	printf("\n");
- 	show_regs(pt_regs);
-+	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-+		show_backtrace(pt_regs->elr, pt_regs->regs[30], pt_regs->regs[29]);
- 	show_efi_loaded_images(pt_regs);
- 	panic("Resetting CPU ...\n");
+ #endif
+ 	panic_finish();
  }
  
 
