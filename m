@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73F91C83F26
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A87C87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CDE583045;
-	Tue, 29 Jul 2025 18:16:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C1D4D82F00;
+	Tue, 29 Jul 2025 18:16:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QnCClH/w";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="oFPYJV1i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E8E0831A4; Tue, 29 Jul 2025 18:16:22 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id EE8CC82B20; Tue, 29 Jul 2025 18:16:23 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AECE82F00
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:16:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1F618304F
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:16:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-45618ddd62fso57201575e9.3
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:16:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-73e82d2ea1dso3444450a34.2
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:16:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753805779; x=1754410579; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=me7DcGCMJxl2VSVGe1i1MtnORMPqtHdBH7NZfh+M8LM=;
- b=QnCClH/wePAhmKufx7gu+30/44ZdKiJ/GMKNhgF0aI77nx4cpEv6rVGTAFRKg8qbOp
- /hXIgOhRdpEn5Dpvtkv3g1XW868ab4ifKVNUhXTCIuxwivKUba4xE2/V8ESPMgcMH0F6
- OzGlu8ji4X/IiWrkXoKbBali38K4uJjbIakGXjhH0KrlRn+euz0+VSpardTtgTAw1LmB
- oRxMfaDvQLSM0HUldvXH9HIf73eRoOHvcTrBgyHwcX1ZfIK71VUzBoHJH4Bjou3euBnq
- v2vDeU9RNoqZ6kqne4xwZhLrjM904qnwSmtjkXf23gbtQvSnDtcQM0IZVOONibSCwWE1
- 5aFQ==
+ d=gateworks.com; s=google; t=1753805780; x=1754410580; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DquNu0RWH1dxZoKN0esKM8YoXNa8fZQpZpuKq3SeEAc=;
+ b=oFPYJV1iNt5iVaF8jgwOJvR2B6vx/xjEhniOi1GCYCjAJGsTq2ctU8JCpVNhzQGP/V
+ c6Y7+v44Lgl411JBJ5dJ0KKK22jn+Lasl8Cl9rqf8HcTfseNpFqmLswOdXarKNek7k3E
+ LkDyE6jzxtXd/VmuO1erLDZ/Wf0U3bWQ82HD2Al1j8NHP9yjgkyfXBfZYwGd26y00P/Q
+ zqgflUnnjkCsaNnQwzUMkq4PL3AtrlKG9VQdi5h4ankw5LydmIw0FS62+YDfqLuiiQav
+ yZQ8pDCTqU68R2LyKUiJ4z+1o48gWosLXJuGLHh8F5/cC/55Hh4FwUgh1oZnbaEBa4W4
+ T6xQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753805779; x=1754410579;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1753805780; x=1754410580;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=me7DcGCMJxl2VSVGe1i1MtnORMPqtHdBH7NZfh+M8LM=;
- b=YIrRTh3KM6yGMuHin2+muE5cN3GA2iXgg0RxH58iaTSsnuuuhOk78SRVt4lZa65b5p
- f71428c/nfTqpoRGxS9NG4senwWXsMwaesWODDbwwE6WBGUzTmYdDT08xdBscySlQycB
- gBxmaHwRH/afrpEFYOdUjuet/JKdHgHVeRn2sgWd1S/4OMapGHPj17sFeoj5wUjEwN3B
- 4ypf+jBb9miPPtzbwFzO1P7IwBDtICs3TNwjsmRpzJ/lr6A6trYcpH3is5gJFOE/+1sy
- Fuw/w86Ns1ha+Ge2Habvo4pWimk5lRKEi6O2bHPPGI0VWugSNtkNUdhOHhVHF5/2+Xu3
- +WEQ==
-X-Gm-Message-State: AOJu0YzovADrK0cWf4VNa6PdJ+tl8qiTyoYy14FmlnPM52bboKpdNZvI
- O+3XIOejvBlaA9dwrtllZ9ui/qes9cS0ioMvYkY/ZPEFAZ/EpWnkGInlxM1yvaFJq3g=
-X-Gm-Gg: ASbGnctwC8NOzU/Nq4LCdaRsZkLz8kXbJepgUFcr9OH2c6vOs08KPjk9WQ98tzIhDKx
- 1u/lmnz5rdtZNKaSUz2dVvLIq/2/3iuNlznJe7Y9699d064bvoJwzWFyqfE50S98xxfKOhBKFF6
- cvDLkhoDWK8WTbjoaxeGk8PUwIY0117aN9+aIUJMN7DGLlmLoiKfzPzte6BtFgcW8jTT6lidY5B
- KR7jxkyCej9nXsl+0Nj0VCFkSeKjLHXvkhWJxobuqArft7xvS6h2JC75tmzGGUOYpMzuxmLP4Gf
- uuzTz57Xt5Q0x1lumBp2oOsx42Hz/GXy/Wpmx1+cGurfp1be9J1X4tZzAfyVmYo30Md/E5Li8/R
- Ugk+e4xqqfQDbbitxoSXD4XFAz4GHhL5oi17oTugUa+Lmwl40lPbJ559+uZlyMQ==
-X-Google-Smtp-Source: AGHT+IFtV+bq/lYxG8cHBITUj6DK1/o/EKVopz5NUuhoRP7ePx3D1IUUE+lBl90/QE151HP2ChpLUg==
-X-Received: by 2002:a05:600c:3512:b0:456:302:6dc3 with SMTP id
- 5b1f17b1804b1-45892bcfbf0mr3291935e9.26.1753805778875; 
- Tue, 29 Jul 2025 09:16:18 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:b80c:a2c7:328a:9067])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4588e5da136sm29993275e9.23.2025.07.29.09.16.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 09:16:18 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 29 Jul 2025 17:16:17 +0100
-Subject: [PATCH 2/2] mmc: gen_atmel_mci: NULL check variable before use
+ bh=DquNu0RWH1dxZoKN0esKM8YoXNa8fZQpZpuKq3SeEAc=;
+ b=EDdT+I1ur08R7qFXLENigrceMfZ7UamUD0hJoZ58zeWAIpm8ScVFYTRjOW8yKNjbxT
+ 1p7XfD0sGJdForU619ecVFclX8xCEiiUj2JKl1DkSuRWWerdQrtxCf7jRQ68+nFI+vEz
+ xo2rPBw96LN9DBJXCYAgYgn9q1UVcBKsHIR+OkJ01wav+nnf0trZopqBUAn6i1XgbuSr
+ sqfoW8i41ijpjMIO8josEymBg+7G9eNltHGVJHcMse4ocRGBPO0MhaE3CCzXQ+XYIWro
+ a9lzUAeDuDrJ9IYgokp4nxPch0Nw4qOHyuqAk66Jeq5zGeabxDmvxbCMRUI1QwD2qSJe
+ 2XJw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW9CpuFOr8SBi39ZKfP4iZCELPrCWRgm3gFolDjcfuCstBngKqI9LyyRdrTxDAjSq6xz15/iog=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZJGLsC8Grm/G3VAytYiNsPy6i/pCHFvcpn37Ek1z5VmSvqXlR
+ 1j+9kk0xITVQtjpNEq4UD1hMWMRM/slfpw8HatQX3OIPlzh83UOJyCoK9wJptcgLqOSN54iN//T
+ q0LyG0gwGO/785wvPWA31MZOk39sNMP/XN1Dzpp8Atg==
+X-Gm-Gg: ASbGncuio9felnh4UTDt0ZOu4Tksut5/kEPAtz2+aQwAXeGpjvmUq4IRDKjLoh+ZyIO
+ 9ueoUhNGVj4E3xs210CZiJNNE24CkheeTwjsX5Z43wnoJg4AXJIgRfUx7fHTzzjFFuRo1QrXKhJ
+ HJcW4BSanhN6cE5m6mIo7rOyGoRy264NSki5YitdI3LAa+BMjCmijP/AzQpeqO4HOD0e03qhUvw
+ puT+8c=
+X-Google-Smtp-Source: AGHT+IEUbg6y8XqOb85pM5tmtNckyHQaMPuj3Hl1yCQwAc++Nm2nyyXPQbHkcbMqBiC3oSeq3VQCJitz0gCMPOEHv8c=
+X-Received: by 2002:a05:6808:2018:b0:426:25b6:5868 with SMTP id
+ 5614622812f47-4319bff2093mr172489b6e.32.1753805780380; Tue, 29 Jul 2025
+ 09:16:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250729-gen_atmel_mci-v1-2-ea0fddf587a0@linaro.org>
-References: <20250729-gen_atmel_mci-v1-0-ea0fddf587a0@linaro.org>
-In-Reply-To: <20250729-gen_atmel_mci-v1-0-ea0fddf587a0@linaro.org>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+References: <20250720-imx95-v1-0-759619b47b1f@oss.nxp.com>
+ <20250720-imx95-v1-4-759619b47b1f@oss.nxp.com>
+In-Reply-To: <20250720-imx95-v1-4-759619b47b1f@oss.nxp.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 29 Jul 2025 09:16:09 -0700
+X-Gm-Features: Ac12FXzEHk99Mm7poAPo6-WKRw1HUI_XchsMJeYKZ3ggJawTNJ_w3Dt7QwN-iAI
+Message-ID: <CAJ+vNU20LLZn5uq7xFdwgQHymMc4hSqwBBh3XQh1ukYYWkQp-g@mail.gmail.com>
+Subject: Re: [PATCH 4/6] imx95: Remove ROM info USB instance workaround for B0
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Troy Kisky <troy.kisky@boundarydevices.com>,
+ Adrian Alonso <adrian.alonso@nxp.com>, 
+ Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marex@denx.de>, 
+ Alice Guo <alice.guo@nxp.com>, u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,43 +101,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In mci_send_cmd the pointer 'data' is optional so guard its use with a
-NULL check to prevent any attempt to dereference it when not provided.
+On Tue, Jul 29, 2025 at 4:20=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
+>
+> From: Ye Li <ye.li@nxp.com>
+>
+> There was a bug in ROM on A0 for USB instance: USB1 is 3, USB2 is 4.
+> So u-boot had a workaround to match with it.
+> Since the issue is fixed on B0, so need a additional change.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  arch/arm/mach-imx/imx9/scmi/soc.c | 2 --
+>  1 file changed, 2 deletions(-)
+>
+> diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/s=
+cmi/soc.c
+> index 13f13ca7d10..b21b18110b1 100644
+> --- a/arch/arm/mach-imx/imx9/scmi/soc.c
+> +++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+> @@ -719,8 +719,6 @@ enum boot_device get_boot_device(void)
+>                 break;
+>         case BT_DEV_TYPE_USB:
+>                 boot_dev =3D boot_instance + USB_BOOT;
+> -               if (IS_ENABLED(CONFIG_IMX95))
+> -                       boot_dev -=3D 3; //iMX95 usb instance start at 3
+>                 break;
+>         default:
+>                 break;
+>
+> --
+> 2.43.0
+>
 
-This issue was found by Smatch.
+Hi Alice,
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/mmc/gen_atmel_mci.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+NAK. Please do not drop support for A0 (or send B0 EVK's to every user
+who has an A0 EVK) or you will not be able to get any testing from
+anyone in the community.
 
-diff --git a/drivers/mmc/gen_atmel_mci.c b/drivers/mmc/gen_atmel_mci.c
-index 62aa6b3cb0b..838b4f4a65a 100644
---- a/drivers/mmc/gen_atmel_mci.c
-+++ b/drivers/mmc/gen_atmel_mci.c
-@@ -263,13 +263,15 @@ mci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd, struct mmc_data *data)
- 	/* Figure out the transfer arguments */
- 	cmdr = mci_encode_cmd(cmd, data, &error_flags);
- 
--	mci_set_blklen(mci, data->blocksize);
-+	if (data) {
-+		mci_set_blklen(mci, data->blocksize);
- 
--	/* For multi blocks read/write, set the block register */
--	if ((cmd->cmdidx == MMC_CMD_READ_MULTIPLE_BLOCK)
--			|| (cmd->cmdidx == MMC_CMD_WRITE_MULTIPLE_BLOCK))
--		writel(data->blocks | MMCI_BF(BLKLEN, data->blocksize),
--		       &mci->blkr);
-+		/* For multi blocks read/write, set the block register */
-+		if (cmd->cmdidx == MMC_CMD_READ_MULTIPLE_BLOCK ||
-+		    cmd->cmdidx == MMC_CMD_WRITE_MULTIPLE_BLOCK)
-+			writel(data->blocks | MMCI_BF(BLKLEN, data->blocksize),
-+			       &mci->blkr);
-+	}
- 
- 	/* Send the command */
- 	writel(cmd->cmdarg, &mci->argr);
+Best Regards,
 
--- 
-2.39.5
-
+Tim
