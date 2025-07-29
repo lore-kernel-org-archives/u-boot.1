@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F11DEC87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 18:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 931EBC87FCA
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 21:13:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3C8282BCD;
-	Tue, 29 Jul 2025 20:37:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6AB4E82B20;
+	Tue, 29 Jul 2025 23:13:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dTpqurPq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WyZcOl8X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23A75830EA; Tue, 29 Jul 2025 20:37:10 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8A3C82BA1
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 20:37:05 +0200 (CEST)
+ id 3CCC482BCD; Tue, 29 Jul 2025 23:13:36 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E55082B07
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 23:13:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56TIb1v53023643;
- Tue, 29 Jul 2025 13:37:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753814221;
- bh=StbxMpxDwFin9QEUgSkH6WaL0NosVgeKfXtpybQKjsg=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=dTpqurPq8z6yvQ9PbB5m1cM4Y4qs7roFF1dbKMZPngHa1ylSRfqIfsudZ0vyu5yrP
- 3VZjiN9J0GrHIlBbBKw9ffwC28jFr0V/+on/07MlYDlXREgwNQ7b9Kb9qOPD2p6eiE
- DR2eURa7BHOo+R5N0h0thLDG7b4YOQB+ovyWvfEc=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56TIb1Vk1313197
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 29 Jul 2025 13:37:01 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 29
- Jul 2025 13:37:01 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 29 Jul 2025 13:37:01 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56TIb1Kh4172152;
- Tue, 29 Jul 2025 13:37:01 -0500
-From: Bryan Brattlof <bb@ti.com>
-Date: Tue, 29 Jul 2025 13:36:57 -0500
-Subject: [PATCH 2/2] arm: dts: k3-am62a-phycore: remove GP tiboot3 builds
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-740ecfff873so3858715a34.2
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 14:13:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753823613; x=1754428413; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cWkjAyTP1hqgDPMtYiEal4DmHGF4/ixABAJgI7wlgXo=;
+ b=WyZcOl8Xjqy88MKHTOapqIvKDC9mBQe/JWVmc66CXWb5Qg4URe8syQaoqQdO3ak43a
+ gJEJ7CN3MxSEAwrWE6dMSRJLV4w0T9ToVYauNuApnrJis3utiNMbz7GqR6vjI0EXOEVv
+ SRL7TeWxVV/13qsFeOYnhryPx7TipVm8fDNfg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753823613; x=1754428413;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cWkjAyTP1hqgDPMtYiEal4DmHGF4/ixABAJgI7wlgXo=;
+ b=KFv2dn8gLh8XhXcOSqmBYHO+sMsOksC8WImpgA7D6dLmCv+0D+6yockxWX8+J55dEu
+ cwEQUSiIi04UDlfgeZO6ixegngFTh50wE5IZCIGRqGKBuOPT2IICuhxVRJbxV2a0QO/n
+ +ghk/LLWhiKrrG5NJ24xYJJefdJGZD04fTOzlUdRkuvcizc8RAlQp3HDGizbXjyv2sOo
+ aTX0nsjKfDlm7iT5Ow8BUXBWObPIUeogZcDExZWxt6XFkXJbYvSe8G7xdXnMoC6Pev3e
+ CqCOWRUFOsrlroB//g+AvcrU53AAnts7MpETeO7rF+nbMz7rIaL0YVg6lDTUwBnzGnKf
+ owlg==
+X-Gm-Message-State: AOJu0YxiU/TxXJBunBJ/2bgHev+NusMFlA/9sIBSoIko3f44Fn/OS/19
+ GWtR0qaRD+kyEktRN68CurR9XkC0allFKjuRZzZ4GV6nJsYct0W6EvIJaktxKuLsMcY=
+X-Gm-Gg: ASbGncuF6eXKQOxSVZD6cEb1g1Z60xXvfYmJ1IuTLbfgbmiQLMqNDoenHqADKE7mQQz
+ GuCvJdDZ+A1zMPUrffV+tjmVhOFlK5QX56KdxiE25ukvS87VolM1Zcs7y8DNNVMJPzzh/Y8e3ar
+ DwGsPaSdiz9xYUm1jxMgMSBD9kgoqciPic9+3MKh5QBZfYMCFyRHpvkC0+etL7RRlBVsfPidXbY
+ wUCdZa6iJ8oAAOjye/PiLfQdfTkEE1R4OCuvrl1Ae4lTvEbb8ZUtbFCk7zRT5it+RWB8lGJMFbF
+ 79jmA1J3Ps4Da/GrLsUHb21Vq3+Z8tTubjID4LHiyqvai9ssImOIX0ZX3Ngw1D0Q8o+jVi6Wj3y
+ EySCFh8vmp91/2W0NFIPrCBWgEit7NDnA7tgwyMU5QeMi6G04/f2q93CrakmQeNsi7Q==
+X-Google-Smtp-Source: AGHT+IERemXGc2ESIYOVxO9/S9QMeEtqvlAPAUdaC+l0YeT0JJmYUCdrFYh1IWjfLuRoJh7G5yAwnw==
+X-Received: by 2002:a05:6830:912:b0:73e:9ebd:9f1e with SMTP id
+ 46e09a7af769-74177b2ff9bmr969228a34.10.1753823612728; 
+ Tue, 29 Jul 2025 14:13:32 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7416dce11ffsm404756a34.57.2025.07.29.14.13.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Jul 2025 14:13:32 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250718-spl_loader-v1-1-835ff557b9f4@linaro.org>
+References: <20250718-spl_loader-v1-1-835ff557b9f4@linaro.org>
+Subject: Re: [PATCH] spl: NULL check variable before dereference
+Message-Id: <175382361195.2002397.15773328500688056416.b4-ty@konsulko.com>
+Date: Tue, 29 Jul 2025 15:13:31 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250729-no-62a-gp-v1-2-1dbdb4469ad3@ti.com>
-References: <20250729-no-62a-gp-v1-0-1dbdb4469ad3@ti.com>
-In-Reply-To: <20250729-no-62a-gp-v1-0-1dbdb4469ad3@ti.com>
-To: Tom Rini <trini@konsulko.com>, Garrett Giordano <ggiordano@phytec.com>,
- Wadim Egorov <w.egorov@phytec.de>
-CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5631; i=bb@ti.com;
- h=from:subject:message-id; bh=qDzap9iEkAIUm5oQJQcLcPHkuQoHY8oAnQlstyAsdBY=;
- b=owNCWmg5MUFZJlNZR5A2TAAAZf///n//+7+9+/yWr37tv9Bz3u3u/f8K+8r52W3599vX2XywA
- RmYIeoeoAAAB6gAAaAAHqA9QA0PUA9RoaDQAAyD1DTQ0A9IADQGmmIyaPRkyhyNBoAGQAyZGnpG
- gNBkNGmRo0DaTQZNPUNHoI0eoGjQAaDTQ0AAGmmgwjTQDQBkjEbRNNGQBk09JoaaAAMgaBpiAAA
- A0A00BkyAMQDRppozRGmIAZBoMjQChQYNcAC+ZHwLf8wfDQLdPNOI4GjWBD+iFIgNC/UIJNWQUo
- hCI7bL+8hDQ+EBOe02bzfqSdekSZ90jjVPUGWAhWGZ/SeC5Xv+eZqv7rW6tgzlevvsk3ZJIOMJh
- xuGnJoVgUMuKcG2AG6ATBkwRPBMUCtgfMcy574z192oNTgmeFxq5tqfC3M7I9fSM0L0Swwde0Da
- ceXUY12+RCWBcQrscl7NpIhmXXKaBntECXaEYc7violevO3NUOtF3RfT5GzZv9KIkAa/tEuGDci
- Qkrm1MnOoVA89dn1YS/DUHCr9aWB9tnWkckQPsGl8fwtAfoBCvXyVRKkyrCSrxhWv3Scz2sow1T
- mInPXrOCs2SpGAYw4CtSAdXW5CMllyVw5xYZYMaUwAaTRtTy7BHjSgWFjphoDIRhMklpiOLgwQD
- DZw1kqNN/xdyRThQkEeQNkw
-X-Developer-Key: i=bb@ti.com; a=openpgp;
- fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,240 +95,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The AM62Ax SoC family was the last part from TI to support the GP
-security variant, however this security variant was used mostly
-internally and with select early partners and never sold publicly.
+On Fri, 18 Jul 2025 13:19:54 +0100, Andrew Goodbody wrote:
 
-To simplify things and to avoid any confusion on which parts are
-supported in the future, remove the GP tiboo3.bin builds from binman.
+> In boot_from_devices the variable loader is not NULL checked after
+> assignment and before first use but later code does check it for NULL.
+> Add a NULL check before first use.
+> 
+> This issue was found by Smatch.
+> 
+> 
+> [...]
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
----
- arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 182 +-------------------------
- 1 file changed, 1 insertion(+), 181 deletions(-)
+Applied to u-boot/master, thanks!
 
-diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
-index 9bcdf74ffe46368ddc6a872d02f26378aba763a9..a284226320ccdf9953f2f107ee6595664e425156 100644
---- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
-@@ -101,43 +101,6 @@
- 	};
- };
- 
--&binman {
--	tiboot3-am62ax-gp-phycore-som.bin {
--		filename = "tiboot3-am62ax-gp-phycore-som.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
--				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
--			combined;
--			dm-data;
--			content-sbl = <&u_boot_spl_unsigned>;
--			load = <CONFIG_SPL_TEXT_BASE>;
--			content-sysfw = <&ti_fs_gp>;
--			load-sysfw = <0x40000>;
--			content-sysfw-data = <&combined_tifs_cfg_gp>;
--			load-sysfw-data = <0x67000>;
--			content-dm-data = <&combined_dm_cfg_gp>;
--			load-dm-data = <0x43c3a800>;
--			sw-rev = <1>;
--			keyfile = "ti-degenerate-key.pem";
--		};
--		u_boot_spl_unsigned: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_gp: ti-fs-gp.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62ax-gp.bin";
--			type = "blob-ext";
--		};
--		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
--	};
--};
--
- #include "k3-binman-capsule-r5.dtsi"
- 
- &capsule_tiboot3 {
-@@ -197,23 +160,6 @@
- 
- 	};
- 
--	tifsstub-gp {
--		filename = "tifsstub.bin_gp";
--		ti-secure-rom {
--			content = <&tifsstub_gp>;
--			core = "secure";
--			load = <0x60000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
--			tifsstub;
--		};
--		tifsstub_gp: tifsstub-gp.bin {
--			filename = "ti-sysfw/ti-fs-stub-firmware-am62ax-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--	};
--
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-@@ -245,18 +191,6 @@
- 					};
- 				};
- 
--				tifsstub-gp {
--					description = "TIFSSTUB";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9ca00000>;
--					entry = <0x9ca00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
- 				dm {
- 					ti-secure {
- 						content = <&dm>;
-@@ -289,7 +223,7 @@
- 					description = "k3-am62a7-phyboard-lyra-rdk";
- 					firmware = "atf";
- 					loadables = "tee", "dm", "spl",
--					"tifsstub-hs", "tifsstub-fs", "tifsstub-gp";
-+					"tifsstub-hs", "tifsstub-fs";
- 					fdt = "fdt-0";
- 				};
- 			};
-@@ -403,120 +337,6 @@
- 	};
- };
- 
--&binman {
--	ti-spl_unsigned {
--		insert-template = <&ti_spl_unsigned_template>;
--
--		fit {
--			images {
--				tifsstub-hs {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-hs";
--					load = <0x9ca00000>;
--					entry = <0x9ca00000>;
--					blob-ext {
--						filename = "tifsstub.bin_hs";
--					};
--				};
--
--				tifsstub-fs {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-fs";
--					load = <0x9ca00000>;
--					entry = <0x9ca00000>;
--					blob-ext {
--						filename = "tifsstub.bin_fs";
--					};
--				};
--
--				tifsstub-gp {
--					description = "tifsstub";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "tifsstub-gp";
--					load = <0x9ca00000>;
--					entry = <0x9ca00000>;
--					blob-ext {
--						filename = "tifsstub.bin_gp";
--					};
--				};
--				dm {
--					ti-dm {
--						filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-am62a7-phyboard-lyra-rdk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					spl_am62a7_phyboard_lyra_dtb_unsigned: blob {
--						filename = SPL_AM62A7_PHYBOARD_LYRA_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am62a7-phyboard-lyra-rdk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl",
--					"tifsstub-hs", "tifsstub-fs", "tifsstub-gp";
--					fdt = "fdt-0";
--				};
--			};
--		};
--	};
--};
--
--&binman {
--	u-boot_unsigned {
--		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM62Ax board";
--				};
--
--				fdt-0 {
--					description = "k3-am62a7-phyboard-lyra-rdk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = AM62A7_PHYBOARD_LYRA_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am62a7-phyboard-lyra-rdk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
--	};
--};
--
- #include "k3-binman-capsule.dtsi"
- 
- &capsule_tispl {
-
+[1/1] spl: NULL check variable before dereference
+      commit: ae409a84e7bffb0c5a0d420d72806ac7b854f619
 -- 
-2.50.1
+Tom
+
 
