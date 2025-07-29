@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC97C87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 18:07:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 160CFC87FCA
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 18:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ADF682B20;
-	Tue, 29 Jul 2025 20:07:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A59582B20;
+	Tue, 29 Jul 2025 20:37:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gpJ9x4pb";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="r5Vb693I";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G9BOXFqj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26CDE82BA1; Tue, 29 Jul 2025 20:07:44 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEB3E82B07
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 20:07:40 +0200 (CEST)
+ id E1D9382E52; Tue, 29 Jul 2025 20:37:07 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA7282B07
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 20:37:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bs3Gh5JY7z9shm;
- Tue, 29 Jul 2025 20:07:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753812460;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=t8Ckp0aXvNQuMk9NfR3vQR3mMjwZaKGYoJEJq9b2W/8=;
- b=gpJ9x4pbDIppwl8bAdjZ5s9QPmEaGy6l3lBiCLjmbPAhbQur1n/2qKJqXhPQhUm1GRa4/7
- drjzVsBIvNLTRBuGQWg/aiKsIKJTw0g+GcvoivXxOc8vRqfQo1tbBm7kxxORIhb+dW1fDU
- Yi5fDAjQmM/Oi7kj4kNc5wz6Vpyenf5O7/eh74rYWDzhFhqYVO22f9wsc6zYny0GJPGp33
- n26O4KsJbgkTslIIaG69LlB79GC8c7w6FFx08z2tYHOigPXubAKxP3zEAlQEWyXhPS1itH
- gSHl17xhhiEbn6hDySLCRDceiudFZtAETJZ9R9ww4fxr8jg+o/BVXCdqF1s8JQ==
-Message-ID: <ed7d3970-b550-431a-9f41-3fccdf5bed73@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1753812458;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=t8Ckp0aXvNQuMk9NfR3vQR3mMjwZaKGYoJEJq9b2W/8=;
- b=r5Vb693IIaCqYEdu/Y4uq4Xgz6t5rR/Q8qpQEMOe+1CFow5kkLhWsuA3enFlN5gLUF+q/Z
- ozp0TCsXPXRxNeV8m0Iytnx6GMKG2a5EZDi8+z2hNczSYQmEQGkIcVokkXhD+GWADilnyI
- jot3f78B/+uHjBsVKuTWMBdk9zLWjgRU2HoEPH8GtzguVxvTOvQOWZorurZNX5KEa1gGRP
- OZrDYw6sTstgppANH88IRdPFDR85Jl0qTEAY0GWsKCjZKX2aTUiKPVpE2Tk/xnw7Bkn+sr
- psPKeew30PWy/GzO1VEVRQ/CpW5TD1F5po75cB/NpBrEksU9nEQXVPX5VL7O6Q==
-Date: Tue, 29 Jul 2025 20:07:35 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56TIb1CB2606033;
+ Tue, 29 Jul 2025 13:37:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753814221;
+ bh=jIr2yNovRPh4k8Z302ToLtj2abNI/MlB9ZO/mBRxk2w=;
+ h=From:Subject:Date:To:CC;
+ b=G9BOXFqjnWwS6E/zYBfOX8KOMu2Ev6jfFg5+v8+SMHdvGj14nJIQTyUTSE1gcZOna
+ FlH9ML3f6Phb2iUoRq3XDStDAXtNhZaIoRH7d97ZGsIrRmOCOaPLoQPna2nU1fQ4/Y
+ tAxtwli/5UFT0gvOO2bBa/YkTP5XpgkSpMhaP2rs=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56TIb12X1313190
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 29 Jul 2025 13:37:01 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 29
+ Jul 2025 13:37:01 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 29 Jul 2025 13:37:01 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56TIb1E94172145;
+ Tue, 29 Jul 2025 13:37:01 -0500
+From: Bryan Brattlof <bb@ti.com>
+Subject: [PATCH 0/2] arm: dts: k3-am62a: remove GP security variant for AM62A
+Date: Tue, 29 Jul 2025 13:36:55 -0500
+Message-ID: <20250729-no-62a-gp-v1-0-1dbdb4469ad3@ti.com>
 MIME-Version: 1.0
-Subject: Re: [U-Boot, v3, 1/1] misc: fs_loader: Add
- request_firmware_into_buf_via_script() for flexible firmware loading via
- U-Boot script
-To: "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de,
- marek.vasut+renesas@mailbox.org, tien.fong.chee@altera.com,
- trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, seanga2@gmail.com
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org,
- albert-al.lee@airoha.com
-References: <20250729145146.2935-1-lucienzx159@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250729145146.2935-1-lucienzx159@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 8ff6e5082fdea50e4b6
-X-MBO-RS-META: s3fdh94yd9qdwz6ntzzop88u1wx17eqd
+X-B4-Tracking: v=1; b=H4sIAMcUiWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDcyNL3bx8XTOjRN30At1kM0tLA3Pj1CQzk0QloPqCotS0zAqwWdGxtbU
+ A4/eMBFsAAAA=
+X-Change-ID: 20250729-no-62a-gp-c699073eb64a
+To: Tom Rini <trini@konsulko.com>, Garrett Giordano <ggiordano@phytec.com>,
+ Wadim Egorov <w.egorov@phytec.de>
+CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1112; i=bb@ti.com;
+ h=from:subject:message-id; bh=ehL6xIp9lWVU6kzfRR3EOZwZesBudgmNpesJ0cRH4m0=;
+ b=owNCWmg5MUFZJlNZcOGjNwAAbX////7tU/f3G8vLe+/K8eb//V7v63/P3dfZ+Kj5vPbek22wA
+ RmsDFGmgaABoDQZA0NABoaAZGmjRoAAAAA0MgGQyAD1DIPUbSabSep5IyZkRA0ZDRoMjQaDQMCA
+ BiANGgDABMgGmgDRiDJkDRo0NMCMmEMJoMQ0DDIj1NPU9JtEPKGj1DQNNGgAAZNNBoaANAAA00A
+ 9Q9RoaGQAAB6mIeoaGgeoaNABBKO0p0zuCXCu72IulRkMeXhT8SHdWLFtlIA4EUD5U9polLmkWa
+ lIn2/E1rfTsviAJM8Ex30qxOyboVv3UTrAdujEl9EBg45lpe1LKhvJzqXhEiWN4GI14Gq3zejRr
+ NAI/6vCZfYqM+bP6Tzpm6fJx8pHgboGp/JBlgjOZ9xMAPDPcCR+u79fWVBj9lBvGwmnGGbQFEIh
+ XDlQogrkQptcZZ4UeMSZzMzAxURnC8PKwkGS6Nxks8tEwuA7Vn0Fk4IjPrLIzolefJWvpO6u2Ps
+ RehPGiDTWZaXMe6FLsbxkM4rmyRGSeBfrdUn/flxqpTLBnShqBywvwOcFX/i0+pVsmmdcYasYhC
+ /vAZCYJE2mMgAA6GDYJ6odUVFhabZzR+BkxQgnERDcY3wOm/i10INj7pv71LpHJRO8lKNgqXah2
+ w/xdyRThQkHDhozcA==
+X-Developer-Key: i=bb@ti.com; a=openpgp;
+ fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,35 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/29/25 4:51 PM, Lucien.Jheng wrote:
+Hello Everyone,
 
-[...]
+The AM62Ax was created right when TI was shifting to their high security 
+(HS-FS and HS-SE) processes. During this transition a small subset of 
+AM62A parts where configured to use the old "GP" security for internal 
+and for select groups of partners but never sold for the wider public.
 
-> +int request_firmware_into_buf_via_script(void **buf, size_t max_size,
-> +                                      const char *script_name)
-> +{
+To help simplify the build and to avoid any confusion of which security 
+configurations are supported going forward remove the GP builds for the 
+AM62A SoCs.
 
-[...]
+Happy Hacking
+~Bryan
 
-> +	*buf = (void *)memdup((void *)addr, size);
-> +	if (!*buf) {
-> +		log_err("Failed to allocate memory for firmware copy.\n");
-> +		return -ENOMEM;
-> +	}
-One more nitpick, do we want to memdup() the firmware here, or would it 
-be better if user passed an already pre-allocated buffer pointer into 
-this function and this function would only copy up to 'max_size' bytes 
-into that buffer ?
+Signed-off-by: Bryan Brattlof <bb@ti.com>
+---
+Bryan Brattlof (2):
+      arm: dts: k3-am62a-sk: remove GP tiboot3 builds
+      arm: dts: k3-am62a-phycore: remove GP tiboot3 builds
 
-This:
+ arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 182 +-------------------------
+ arch/arm/dts/k3-am62a-sk-binman.dtsi          | 181 +------------------------
+ doc/board/ti/am62ax_sk.rst                    |   7 +-
+ 3 files changed, 3 insertions(+), 367 deletions(-)
+---
+base-commit: 182cb30084516c3085d2ca5dde3f105f7625d774
+change-id: 20250729-no-62a-gp-c699073eb64a
 
-int request_firmware_into_buf_via_script(void *buf, size_t max_size,
-                                          const char *script_name)
-...
-memcpy(buf, addr, min(size, max_size));
-...
+Best regards,
+-- 
+Bryan Brattlof <bb@ti.com>
 
-What do you think ?
-
-Also, I would really like if someone else voiced their opinion this 
-firmware loading mechanism.
