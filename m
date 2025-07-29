@@ -4,79 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB34C83F26
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9159C83F26
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:40:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AA4A82E34;
-	Tue, 29 Jul 2025 18:32:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3586082E34;
+	Tue, 29 Jul 2025 18:40:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W8TEhIC4";
+	dkim=pass (1024-bit key; secure) header.d=ixit.cz header.i=@ixit.cz header.b="Y2YAihC+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C24C182F00; Tue, 29 Jul 2025 18:32:09 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 981E682EB8; Tue, 29 Jul 2025 18:40:10 +0200 (CEST)
+Received: from ixit.cz (ip-94-112-25-9.bb.vodafone.cz [94.112.25.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17F2682BCD
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:32:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 645D682063
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:40:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-73e88bc3776so2219222a34.1
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:32:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753806726; x=1754411526; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Nfvu1ChhGPFCnjKqOLp7BOVdhE6UggcwtipxDxyRmUI=;
- b=W8TEhIC4B+uJZHvLI90EW0m2jqGvRW7j5FePbSYGOqew0bdn7zJzIMxs4iOzXufqsV
- 4cXdO1dcT5D7O2obG2VbjzQBQd6QwGtgl7EAoUaEPIMYNGhDCvjXKpa/uXK6KzTOTGpU
- BH/2htAydLfky3F3k4rZhjitbtcQd/ccEZLyk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753806726; x=1754411526;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Nfvu1ChhGPFCnjKqOLp7BOVdhE6UggcwtipxDxyRmUI=;
- b=jxYx11MNp7S75SbQk04acXLpDPMDylk0g4KkbZuoNxENNT8zjaayQxsaROxTKBgiXG
- upHMWDzRGsabdmPrLjEpDQUfCzHw3Bwtvreainl7dfuWts1Fbf8xjfxm9kBMmScwZxqE
- 8PKNTkoVd7F3Qw7+6vgbC/rShwbtIqdQ8GInuUP3tUls4UVegnqxa0gErGX8Igo88M7P
- XaAfxRnkUBeQ9TZ+epgjaff2iY3SS2SGlh40PnSaOVmrjoUuT/QNsDPblrPg7XfLPzTv
- dJoy9vMIlAQO/5cP2g0CyNotAboDsrzdT2tTTIK3nJKXz9FjQyo+4D0cNY//Q4QzSjCP
- cflQ==
-X-Gm-Message-State: AOJu0YxqXGZDaWpdfFL5//6dS5DqtsHb17x6rOhACp2u0+wV7yyORM8f
- vZSMPfJOCDNVUW+q8y4l3rKaiPraMxc6gZ02sdWoqB7HDo1ELEzAC5dVlGw2MRwAfj4mSZAY/bk
- X3EfQDmg=
-X-Gm-Gg: ASbGncsgpddc111ydtfEaPKK5cMVcvMkrqi0SSakIQOBepvHXT7ZBk3omdrubo5vLOA
- PM4F+tygHF/MCCOhkjrgB8YsAEtUPtAr8LEY2CP1K015hG/goPN/k5LR74hmuuUhjbMbspOzZT7
- MUhaxhMHp8kM28MF9Cl2xLL3j06ucQJVDTI7P7SE+3Pv5LOqtRcFZRyJ23bg6qgMfUWcmXH6hBC
- TIk9ULgC5naF8gbxB3XsnzMQ0+8x7/j8yvQ3s0V0d/SSAmydFYS1079k7bf1lKtQ+KPrA5wMMw0
- DVB7Xnd9j6YyFpAd4Fu20tSWmayjbvlYsR//bhmAppSo8kv0ap/Xe/5xWi0KmKRS1Nk2W5VKdgv
- CryUhUMzHwF/awRYVzeirb1Hm6fFSteo/QRCinaH9QVdEhRBT8mqoDov0
-X-Google-Smtp-Source: AGHT+IEcudmpjhlio6XbCOcwDGyolg4eUe0O+SFZDZokvxul4wcgMAtELfuW5YIfkqM0z761ht24Kw==
-X-Received: by 2002:a05:6830:6f4b:b0:73e:9ee1:3d5f with SMTP id
- 46e09a7af769-74177cacd4cmr393915a34.25.1753806725726; 
- Tue, 29 Jul 2025 09:32:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-74148246f0fsm1495382a34.51.2025.07.29.09.32.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 09:32:05 -0700 (PDT)
-Date: Tue, 29 Jul 2025 10:32:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Heiko Schocher <hs@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20250729163203.GM1807455@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=david@ixit.cz
+Received: from [10.0.0.200] (unknown [10.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by ixit.cz (Postfix) with ESMTPSA id 382E9160277;
+ Tue, 29 Jul 2025 18:40:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+ t=1753807207;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=BeWQteB3nLLyXM7wgZtRNe3aWDa0KjurkE0pEaZjyCM=;
+ b=Y2YAihC+MxA+qxhXccQGXZkETSVnF50S1c7fpMWYB4ZHmCZyYmmXgBZXuDQfK7y2LU5bP8
+ bv9q/RrowMXSS0pBv916nIYmfwi2NaZNiF0CEhrt+RNGwbmXyYlTYn5OnZJ86D9+G/7Yta
+ xOtYklfW4WsdvI++fN6ahepc1hwLBCI=
+Message-ID: <422baca4-6380-4810-b243-e7440e7c4fbd@ixit.cz>
+Date: Tue, 29 Jul 2025 18:40:06 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YSoUulFi3JouSYvX"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: Add pixel3_defconfig for Pixel 3 / 3 XL
+To: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
+References: <20250729103950.1154040-2-david@ixit.cz>
+ <ea359f49-2961-430f-8abf-a6e3e4650791@linaro.org>
+ <a8b5d85e-1cd1-4281-b799-310e15a4c8a3@ixit.cz>
+ <96e236f9-32c9-42f5-8483-03814230bd32@linaro.org>
+Content-Language: en-US
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <96e236f9-32c9-42f5-8483-03814230bd32@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,157 +115,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 29/07/2025 18:04, Casey Connolly wrote:
+> 
+> 
+> On 7/29/25 17:59, David Heidelberg wrote:
+>> Hello Casey.
+>>
+>> On 29/07/2025 13:52, Casey Connolly wrote:
+>>> Hi David,
+>>>
+>>> Thanks for the patch! Great to see more devices up and running :D
+>>>
+>>> On 7/29/25 12:39, David Heidelberg wrote:
+>>>> Introduce a defconfig for the Pixel 3 and Pixel 3 XL.
+>>>>
+>>>> On these devices, U-Boot must be chainloaded via Fastboot. However, 
+>>>> due to
+>>>> a Fastboot bug, U-Boot won’t start unless a specific condition is met.
+>>>>
+>>>> To work around this, U-Boot must provide a TEXT_OFFSET of 0x00080000,
+>>>> which allows Fastboot to successfully launch U-Boot.
+>>>
+>>> tbh I think we could just make this the default TEXT_BASE, since we 
+>>> don't set one in qcom_defconfig. I don't think(?) that would mess up 
+>>> anything else since U-Boot is relocatable anyways.
+>>>
+>>> Neil: any thoughts there?
+>>>
+>>>>
+>>>> Clearing the framebuffer improves the Pixel 3 experience,
+>>>> as it prevents collisions with the Fastboot logo left on the display.
+>>>
+>>> Does framebuffer actually work on the 3 (non-XL)? This reminds me 
+>>> that we should turn off dcache flush for simplefb heh
+>>
+>> I can't confirm for Pixel 3 (at least until I meet with Petr Hodina 
+>> and test), but generally after defining the FB node in dts, it *should*.
+> 
+> I was never able to get simplefb working in Linux, nor did it work when 
+> i tried U-Boot on blueline, I think panel self-refresh is disabled there 
+> for some reason :/
 
---YSoUulFi3JouSYvX
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In Linux, it doesn't work for me on Pixel 3 XL either (there is driver 
+for the AMOLED used on Samsung S9, but probably regulators aren't 
+right), but the u-boot with correct simplefb config showed output on 
+first good.>
+>>
+>>>
+>>>>
+>>>> Instead of:
+>>>> $ make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig 
+>>>> qcom- phone.config
+>>>> do
+>>>> $ make CROSS_COMPILE=aarch64-linux-gnu- O=.output pixel3_defconfig 
+>>>> qcom-phone.config
+>>>>
+>>>> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+>>>> Cc: Casey Connolly <casey.connolly@linaro.org>
+>>>> Signed-off-by: David Heidelberg <david@ixit.cz>
+>>>> ---
+>>>>   configs/pixel3_defconfig | 13 +++++++++++++
+>>>>   1 file changed, 13 insertions(+)
+>>>>   create mode 100644 configs/pixel3_defconfig
+>>>
+>>> I think this makes more sense as a config fragment than a standalone 
+>>> defconfig, since it's just changing a few core options that don't 
+>>> have any other effects
+>>>
+>>> $ make qcom_defconfig google-blueline.config qcom-phone.config
+>>>
+>>> What do you think? Otherwise it should be renamed to 
+>>> qcom_google_blueline_defconfig or something like that.
+>>
+>> I have nothing against config fragment, but the blueline and 
+>> crosshatch are HW wise almost identical differentiating in 
+>> peripherals, so this configuration should be common for both of them.
+> right, it can be called blueline and still used for both.
+> 
+> I forgot to ask, please also add a new file in doc/board/qualcomm to 
+> describe the Pixel 3, it should just explain the need for the fragment/ 
+> custom defconfig and then :ref: to the generic board.rst documentation.
+> 
+> Another todo of mine is to introduce a hardware support table like 
+> amlogic have to document all the boards.
 
-So I ran Coverity with the newest scan version and this is good news.
-Only a few newly found issues in existing code.
+Would be nice, I'll sent brief blueline/crosshatch introduction.
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Tue, Jul 29, 2025 at 10:04=E2=80=AFAM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
+> 
+>>
+>>>
+>>>>
+>>>> diff --git a/configs/pixel3_defconfig b/configs/pixel3_defconfig
+>>>> new file mode 100644
+>>>> index 00000000000..9c0c8ca63c4
+>>>> --- /dev/null
+>>>> +++ b/configs/pixel3_defconfig
+>>>> @@ -0,0 +1,13 @@
+>>>> +# Pixel 3 has special requirement to have TEXT_BASE set for the 
+>>>> fastboot.
+>>>> +
+>>>> +#include "qcom_defconfig"
+>>>> +
+>>>> +# Otherwise buildman thinks this isn't an ARM platform
+>>>> +CONFIG_ARM=y
+>>>> +
+>>>> +# some Pixel 3 bootloaders aren't able to start without TEXT_BASE
+>>>> +CONFIG_TEXT_BASE=0x80080000
+>>>> +CONFIG_HAVE_SYS_UBOOT_START=y
+>>>
+>>> Can you explain the purpose of HAVE_SYS_UBOOT_START here? It just 
+>>> allows for SYS_UBOOT_START which afaict isn't used?
+>>
+>> I re-did the testing and this option is not needed, so I'm happy to 
+>> drop it in next revision.
+> 
+> Great
+> 
+>>
+>>>
+>>>> +
+>>>> +# fastboot logo distorts u-boot output
+>>>> +# CONFIG_NO_FB_CLEAR is not set
+>>>
+>>> I'd like to add this to qcom_defconfig, I was holding off until I 
+>>> could add an option to prevent simplefb from doing dcache flash on 
+>>> qcom which makes display refreshes actually fast... Would you be 
+>>> interested in adding a config option for that?
+>>
+>> If you can insert this option into the qcom_defconfig, that would 
+>> likely make sense.
+> 
+> My plan is to add that after adding an option to disable dcache flush, 
+> since otherwise it introduces a huge delay to booting for no real reason 
+> on most devices.
 
+I didn't know for other devices it causing delay, on Pixel 3 XL it's fine.
 
-Hi,
+David
 
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
+> 
+> Kind regards,
+> // Casey(she/her)
+> 
+>>
+>>
+>> Thank you for the review,
+>> David
+>>
+>>>
+>>> Kind regards,// Casey (she/her)
+>>
+> 
 
-   - *New Defects Found:* 3
-   - 12 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 3 of 3 defect(s)
+-- 
+David Heidelberg
 
-Defect Details
-
-** CID 583415:       Integer handling issues  (INTEGER_OVERFLOW)
-/cmd/i2c.c: 369           in do_i2c_write()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 583415:         Integer handling issues  (INTEGER_OVERFLOW)
-/cmd/i2c.c: 369             in do_i2c_write()
-363     			return i2c_report_err(ret, I2C_ERR_WRITE);
-364     	} else {
-365     		/*
-366     		 * Repeated addressing - perform <length> separate
-367     		 * write transactions of one byte each
-368     		 */
->>>     CID 583415:         Integer handling issues  (INTEGER_OVERFLOW)
->>>     Expression "length--", where "length" is known to be equal to 0, un=
-derflows the type of "length--", which is type "uint".
-369     		while (length-- > 0) {
-370     #if CONFIG_IS_ENABLED(DM_I2C)
-371     			i2c_chip->flags |=3D DM_I2C_CHIP_WR_ADDRESS;
-372     			ret =3D dm_i2c_write(dev, devaddr++, memaddr++, 1);
-373     #else
-374     			ret =3D i2c_write(chip, devaddr++, alen, memaddr++, 1);
-
-** CID 583414:       Memory - corruptions  (OVERRUN)
-/cmd/eficonfig.c: 334           in eficonfig_append_menu_entry()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 583414:         Memory - corruptions  (OVERRUN)
-/cmd/eficonfig.c: 334             in eficonfig_append_menu_entry()
-328
-329     	entry =3D calloc(1, sizeof(struct eficonfig_entry));
-330     	if (!entry)
-331     		return EFI_OUT_OF_RESOURCES;
-332
-333     	entry->title =3D title;
->>>     CID 583414:         Memory - corruptions  (OVERRUN)
->>>     "sprintf" will overrun its first argument "entry->key" which can ac=
-commodate 3 bytes.  The number of bytes written may be 11 bytes, including =
-the terminating null.
-334     	sprintf(entry->key, "%d", efi_menu->count);
-335     	entry->efi_menu =3D efi_menu;
-336     	entry->func =3D func;
-337     	entry->data =3D data;
-338     	entry->num =3D efi_menu->count++;
-339     	list_add_tail(&entry->list, &efi_menu->list);
-
-** CID 583357:         (INTEGER_OVERFLOW)
-/lib/zlib/deflate.c: 1714           in deflate_slow()
-/lib/zlib/deflate.c: 1706           in deflate_slow()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 583357:           (INTEGER_OVERFLOW)
-/lib/zlib/deflate.c: 1714             in deflate_slow()
-1708
-1709                 /* Insert in hash table all strings up to the end
-of the match.
-1710                  * strstart-1 and strstart are already inserted.
-If there is not
-1711                  * enough lookahead, the last two strings are not
-inserted in
-1712                  * the hash table.
-1713                  */
->>>     CID 583357:           (INTEGER_OVERFLOW)
->>>     Expression "s->lookahead", where "s->prev_length - 1U" is known to =
-be equal to 4294967270, underflows the type of "s->lookahead", which is typ=
-e "uInt".
-1714                 s->lookahead -=3D s->prev_length-1;
-1715                 s->prev_length -=3D 2;
-1716                 do {
-1717                     if (++s->strstart <=3D max_insert) {
-1718                         INSERT_STRING(s, s->strstart, hash_head);
-1719                     }
-/lib/zlib/deflate.c: 1706             in deflate_slow()
-1700             if (s->prev_length >=3D MIN_MATCH && s->match_length <=3D
-s->prev_length) {
-1701                 uInt max_insert =3D s->strstart + s->lookahead - MIN_M=
-ATCH;
-1702                 /* Do not insert strings in hash table beyond this. */
-1703
-1704                 check_match(s, s->strstart-1, s->prev_match,
-s->prev_length);
-1705
->>>     CID 583357:           (INTEGER_OVERFLOW)
->>>     Expression "len", where "s->prev_length - 3U" is known to be equal =
-to 4294967267, overflows the type of "len", which is type "uch".
-1706                 _tr_tally_dist(s, s->strstart -1 - s->prev_match,
-1707                                s->prev_length - MIN_MATCH, bflush);
-1708
-1709                 /* Insert in hash table all strings up to the end
-of the match.
-1710                  * strstart-1 and strstart are already inserted.
-If there is not
-1711                  * enough lookahead, the last two strings are not
-inserted in
-
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
-
-Best regards,
-
-The Coverity Scan Admin Team
-
------ End forwarded message -----
-
---=20
-Tom
-
---YSoUulFi3JouSYvX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIj3ggAKCRAr4qD1Cr/k
-CqbMAP9y1QC/Ug1JpAnBQqmhx9cdTU5EQH7TwgxgllFv8c5QxAEAgJ66KyVmYwGX
-Zg9d5Jvd6SU9U7QWpV52IcJ+h1x15AI=
-=cyhP
------END PGP SIGNATURE-----
-
---YSoUulFi3JouSYvX--
