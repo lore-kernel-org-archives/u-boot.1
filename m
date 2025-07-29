@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7CBFC83F26
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 15:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCB22C87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 15:53:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3CAD83197;
-	Tue, 29 Jul 2025 17:52:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A26082BCD;
+	Tue, 29 Jul 2025 17:52:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ywahvWiw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FMTisRyd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 747BA831B4; Tue, 29 Jul 2025 17:52:50 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id C497E831BB; Tue, 29 Jul 2025 17:52:51 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86EB682BCD
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 17:52:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB10E81E14
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 17:52:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4563cfac19cso59635885e9.2
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 08:52:47 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3b783d851e6so2798482f8f.0
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 08:52:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753804366; x=1754409166; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753804369; x=1754409169; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=eSutJAQhix6AK8D4OOMY2w/iba1TyHYSvBdAQQ++znw=;
- b=ywahvWiwg2v1EqQKCLcAZcOqQOavTCal/87gvzz0my+ulNpl9qjNYtSkQECrbeZOae
- jiK7Mi2TJF7MZu7j+Oyj5JmooNL9P+WmBveMcbVxd80q7cgkrlsKZQP579NTE3OlHQeU
- 798wGpDDc9+R0rTZSVH0+v7cPBC/FC34Q6uCRo+zOWzKUvekW75siJM6COV6bJ0MDITS
- f/Xdluihi4bydHPF5PVMJZlpuwFnZTU7RygoeMUXIdWGdie2iaRsGKHGeegU/zUkeEc1
- CV0zHl7iLHs2JU/EWCowevO2pakPzI+a2xGXlNKSrLuOOuRCkmZIvw0M6gb3OcxMeAMm
- RXFw==
+ :reply-to; bh=FdvkfD40QhuGJ5QakwIHoYzEZ/nfFxwURI/GQfV8frg=;
+ b=FMTisRydstMNm1KtiLo199YH//pDDtTmbdgCu+bb2z9aUVOS9zX0wLUn6ZaScTHVZy
+ qAhy35Ufa5Ruf7JXJ5Pbzf/EFZgjepmNYr3oEkU83dSdfhTzYG6OBQttT7t+p6K4skBI
+ StvBiMWa08Muo7PTm4XZw7QT/4a65OqqicL5qomS0K/4nbDBRuXT0H9mkIYSPv5yitpU
+ mmKFKzHQTi2OMWBMTzYVsxRNgxsa1hDxc0SIIxqhJ/RqUubbR0w/sHmypf8O4T1fco5b
+ dChn/nsYc7R+rMnjOi8K/QAiJKV4s0b2NZzRMjlmcHzHKeX5H5ZS4BxuKQRgHciB1nZ8
+ xomA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753804366; x=1754409166;
+ d=1e100.net; s=20230601; t=1753804369; x=1754409169;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eSutJAQhix6AK8D4OOMY2w/iba1TyHYSvBdAQQ++znw=;
- b=lyDwvFzsxbbKoqmUfls+v05qZkHuugcEifftp24tOIq75Nb8vCjUPfDS1gUar+orOc
- 7TGK481OPK3w7KW6khkgctH/G4BFgcT0wUYZeovcM/uBu3Y7BPh/cae3C14ThBdyCa2X
- st4bqworqNr5RLuITr57Q7RBTytmZ9qFsoZrmJXQFb3fQ6NbW0DqePsLPcmb8hHVRQyc
- y0Ww2xQi38pYM2sFpvYkX8hxEYzp4oDwr4u+dBbIYsV/O/ym4K/lKmZOLRKy126l78ht
- ZSrfOir62CBq4EELUKiH7N/++BEkNJRKLQn3KQhANKhGuLMbqUzAXUUaQU4hEhetyn/E
- 42tw==
+ bh=FdvkfD40QhuGJ5QakwIHoYzEZ/nfFxwURI/GQfV8frg=;
+ b=kmxIz1u0EyKgjXRVMGn8dprOBFESYaDIOrvu5+2wlXVMH5hHjKJMo0mL+NSUCehZdF
+ LZBzMPbI3wwlPI3SG1gVdjSMmetNmIkzCVt3cagdeohclRP+HVvyH2BUEBXK4Ffz3HmI
+ Zq9+0qWcSmAbcosj7bVPahixSZyStXDiv8LKUGVniPUuD0BuN1SiVc/rHWYAouad3q5o
+ jxvoafCepWhfhikwP1s4v05/4j3rsdwt/z9fSMA0cNdQ0yBPkMrJoBK64CaIXedzpBNP
+ kfkunHXG9BNf9xVw6GY/VP5b4COrheYA992DWI+Vh+vozg82LHBOAYCpaPwF+1i6aeSq
+ 9mrg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVM2fHM4vn7ekWg03eFjXugAuGHxVT9oZueiGjTOr9KydtSipmOo2GKSrMHuP0MXxZOX28W8OY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMdidMQagDy4T4cXHK24+knP6K/uFpyz+st6zIa4iM9HdB88G6
- WnZLKeLhk3Tx9nkBcZsiRRIPXov/LLCWS8l9eS/fdZHRe1+N6F+qe2BsBxmL920gfC8rHse8AOL
- SQXXP
-X-Gm-Gg: ASbGncuXiBZcAs/vsgq0NCWivmOsV0k6ZnxzGntzasN2j/pCO5I2JEXsY1rAWBqnZS5
- NJubdo2bjLsbR3qPnlVPj2lSjg/DjyNsudxsVR9hKLmqQmFpOtamKWcuYFKytQ1TD4Sp8jhPyXU
- xwxpxyiRuLgUaExBmcwqKfPNYAseuGbEYpYS07iEcGPWRu5kXtqpj8fop5TCmLhZw/eNc9Z2zHM
- mwGLXqmj4pzqhAlzYuzManSDIsJTVZH2wLbRt6VXwQsyWIRqs9J7NjjuBGvK04yerIhWl2y1hkB
- ILjB++9gK4g+jva7JPz1eRkgBlxSrHs/Z6jaF1sBim8AwjpT1ZlnqOZ0VzE0uL2Oy+iN8XoO89g
- P983aIuWnJAQJ6HQ3V9UqBKdXDE1zjMTk888ExlJImkvXt28RlhoZInmrFnwabU0vcSYC4Qr0Tj
- JRlnOzYY6iRQ==
-X-Google-Smtp-Source: AGHT+IGahRh52hneMgWubYKwyRizNqPpKyXiaNz4kohmc2+W34VUVzJ4dc6oPNmoCFN6aCblB08Xhg==
-X-Received: by 2002:a05:600c:8210:b0:456:161c:3d61 with SMTP id
- 5b1f17b1804b1-45892bc6d4emr2477225e9.22.1753804366174; 
- Tue, 29 Jul 2025 08:52:46 -0700 (PDT)
+ AJvYcCVpi9+5o6iKsBsSjk0mFVs6CGWnGjqnLt4cfIrRXypvhXBld0rdNHT63rXxnHOzG5GtyGy+amY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyR6i49Tdnmc3jF4GwDtW3hIAi+Mm/nIYZt5WrHZ1Dw7ZFCnr35
+ OxUz1FZ5tIf+D5ZGothn9zF+ezcFGgxRC2yb6mJ69A8TWEi4na5nksr7M8CkS7CYY078EP1ztgr
+ 5whn6
+X-Gm-Gg: ASbGnctVwE0ugdvRN7SsvKE80Xo2nGVjdPL3nCfm5cqKGdXOjrUGoLgwsDEpQzWD2UZ
+ gRx2Vw/woepoM/e1Vrqz9vUO4Wx+34KAFn1waQMWDw/+BaYQoDGNjcqzXD2+WbhTWbkSlo6m9Ut
+ FeBB0bHiE1Bb+Hswx4M/bjYFeLqnoYZKfnsxCZuZj68qF+7kZskkoPHKH7cPBTt4PMY2rjQ7I+c
+ T1J0I9dh2SiMW+XpdAjRSJfsuQthLXAFEN/Ez4swzD+lBgwflwGaRv+gV2kjzdwlQOzzsCMqGAy
+ tF7SYjvB9qdGmCOckyXurwLIE5IQQtRh4P5DRoMgw0ZCzcDM7OEJ1o6ooBIcNY+MMoRXoMaKkFB
+ XMsz2Nd+rLjelCX78YFS6rrg24fmqYQ+608wvrvdYcm1baQQnUy8gCMKIukokrLPGw7I4OIzpDE
+ RqCX02ctRUQw==
+X-Google-Smtp-Source: AGHT+IEFdu6CnVRGzh1usjOio1HAlnnNXa34xb6wr7f0fw8NS7hG9GYZQ47OdIHvMF+AX96WWAyOHQ==
+X-Received: by 2002:a05:6000:238a:b0:3a4:e480:b5df with SMTP id
+ ffacd0b85a97d-3b79500efd4mr138536f8f.44.1753804368853; 
+ Tue, 29 Jul 2025 08:52:48 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (ip-185-104-138-124.ptr.icomera.net.
  [185.104.138.124]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4588dda59cfsm18948535e9.3.2025.07.29.08.52.37
+ 5b1f17b1804b1-4588dda59cfsm18948535e9.3.2025.07.29.08.52.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 08:52:45 -0700 (PDT)
+ Tue, 29 Jul 2025 08:52:48 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 29 Jul 2025 17:52:04 +0200
-Subject: [PATCH v4 06/10] add support for symbol lookups
+Date: Tue, 29 Jul 2025 17:52:05 +0200
+Subject: [PATCH v4 07/10] lib: vsprintf: implement %pS format specifier
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250729-b4-arm64-backtrace-symbols-v4-6-8d8bda8e22c1@linaro.org>
+Message-Id: <20250729-b4-arm64-backtrace-symbols-v4-7-8d8bda8e22c1@linaro.org>
 References: <20250729-b4-arm64-backtrace-symbols-v4-0-8d8bda8e22c1@linaro.org>
 In-Reply-To: <20250729-b4-arm64-backtrace-symbols-v4-0-8d8bda8e22c1@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -89,21 +89,21 @@ Cc: Simon Glass <sjg@chromium.org>,
  Leo <ycliang@andestech.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=27058;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2802;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=grNllWEJpSmWRyieQQ37SPp9MF+VYeIJzkc05G/j0mc=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiO4kbVqIhsgxAozoTaKCs78e/SHDgyBHqSjQQ
- KArTGyJAAuJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjuJAAKCRAFgzErGV9k
- tl00D/9S+q9Vws7be0r3xgtfAUmwvP4COfV3U83VgTlRhMHDx/kCDFElM27ity+ORYUe6P99aWe
- BOKl86+Yyipod6XEkIXq4GYdiYfQZn3+eDtDuh7J+oFGql6yfub7DL1n9taXo2w/Dx+0b4oLgx4
- Puvry8LTtahXEBksjvsN6A6x3LuDs9nRx1SxbfvLF9mVxqdQn7SteUC6b4L+OP4WYChLXR6NNjF
- 01TraHDpvGi12W3cIe+1bSdQYlMbLUmH10iV3P26WWUUjuylxAwMn4nH2FdrUbgGYkLqkuAgZ5y
- JL04zu2QlgFDyyxv4a1MTbYXNbDy0/Bzdqao+DMgxlG98JPFPGjIzDyOHRAs7W2L36jNrwCMDgd
- I1FAyqAIAh1DDwf2A/kGykWrvvF+ODl2q4FsB9ZikPn+Un7rFagMzgMHBGjDA6opKOm07IDAiZh
- XdqzOcPqnjLakhBUlUR7ZF64KjX4NNRNw76OV/UFWNBao0RHaL9f0s8ncEm7ebLx3FOmOAvlEZp
- GOcvQ1D56Z9ZgxoB7jvSScGIoSmvJU2MDwZd1t6P7MIlQ9mFCuyw6JtsIe4AkDchUiR05EUpXOo
- s7w9pXVGZsG5alsf7y7r9CdGswfsX5tvS+qzCA7AxpiL7ea7gqwyasgKt5FSoQlyGZyvlN9Bo90
- DeAUPsrEdaFECbA==
+ bh=fjkctfZmx7fK/2AEGpNwCbueEtXHSL4gM94bYU1iPnw=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiO4kACRbOXQUOMamjiSFCA/qYQBjmqLPBefRs
+ g1diABx+nqJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjuJAAKCRAFgzErGV9k
+ tkh+D/0TTr7XqZdhQn2z2m0fCCqIf6FwFX3cQyMPAi+mwd4GCXonzq/JrvOi2dvjBRsYenM5olD
+ ovwb7Sl0t5TaDvL5tmsKPTTXAXVs9aGTrTT3Ws88tvJCmSAV0Xq4dczR3TNeopISV8IL1uyagC9
+ MnL9N8NQKFgZUO3D2kCGRmU+t6CoJG9C+u9nFnGEJtBMvdgZdXszgETDiz/Wv2O30fIik3zRr6D
+ 15HbE05BqZUpADXqIcqQgtV550vuGBPB1FNjeWkQxvqvlXXyiAmldbXHDHUuGe7hhgHIvhMtyGU
+ umNVL6c9xt49mOSUKycSoPHxi+otZaB+SFNlNLaJYRWf/ruGoTN2UGg0J8u20yFyrYuycuidUL6
+ QxZHgXG4ml6DQgw6BtycD0ExCch5dUq/uwSj0Xq6EH1xxy/WWTy+M1cRb0fkl+UZakqIhftX8N7
+ YRR7Emqy3GaMR/AVaAdkiAizhdB82/KhVSgDTZqzulEHUeifPlLkvtb7DRYmpjmMo3zZKJfO81r
+ qt8DFytefC2N7Ccsg6KhE2L0PQc4XbuS/JeM6hX3WumRNv7QyeNNyE0R2zTT7wkvRK1twYql4A0
+ M7k4hrCpx6R2LdY8JTIuM5IhsFAwaL5xXtNmZKfI+eBMvVTHvHElbnjAn/5TZSjwNmJiqWxjiA5
+ R/umwclNTXT85eg==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -122,941 +122,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is mostly a port of the Xen hypervisor implementation. The
-U-Boot binary is built as normal, then its symbol table is fed into
-tools/symbols to generate an optimised lookup table. U-Boot is rebuilt
-with the symbol table and handling code in lib/symbols.c.
-
-Based on code from Xen at c20850540ad6 ("x86/altcall: always use a temporary parameter stashing variable")
+%pS is a kernel extension for printing the name and offset of a symbol.
+This is useful for function pointers/callbacks especially. When symbol
+lookup is enabled this can make for much easier debugging of driver ops
+and other places.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- Kconfig           |   1 +
- Makefile          |  15 +-
- include/symbols.h |  24 ++
- lib/Kconfig       |   8 +
- lib/symbols.c     | 143 ++++++++++++
- tools/Makefile    |   3 +
- tools/symbols.c   | 646 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 7 files changed, 839 insertions(+), 1 deletion(-)
+ lib/vsprintf.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/Kconfig b/Kconfig
-index d8e117d0b1a511f12f7a54be1c84f4c45634828a..6087df448fe41de2ddfe726f2fb4bea63ce00250 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -182,8 +182,9 @@ config CC_COVERAGE
- if ARM64 || RISCV
- 
- config FRAMEPOINTER
- 	bool "Build with frame pointer for stack unwinding"
-+	imply SYMBOL_LOOKUP
- 	help
- 	  Choose this option to use the frame pointer so the stack can be
- 	  unwound if needed. This is useful for tracing where faults came
- 	  from as the source may be several functions back
-diff --git a/Makefile b/Makefile
-index 3d557b301b0517935f1afe4ece87119df314c0c7..7daee498d7a0fa8ebe08c7411244546bd6a8b68b 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2013,16 +2013,29 @@ quiet_cmd_u-boot__ ?= LD      $@
- 		$(LD) $(KBUILD_LDFLAGS) $(LDFLAGS_u-boot) -o $@			\
- 		-T u-boot.lds $(u-boot-init)					\
- 		--whole-archive							\
- 			$(u-boot-main)						\
-+			$(if $(shell [ "$@" = "u-boot" ] && echo "true"),lib/symbols.o u-boot.sym.o,)	\
- 		--no-whole-archive						\
- 		$(PLATFORM_LIBS) -Map u-boot.map;				\
- 		$(if $(ARCH_POSTLINK), $(MAKE) -f $(ARCH_POSTLINK) $@, true)
- endif
- 
--u-boot:	$(u-boot-init) $(u-boot-main) $(u-boot-keep-syms-lto) u-boot.lds FORCE
-+u-boot.nosyms:	$(u-boot-init) $(u-boot-main) $(u-boot-keep-syms-lto) u-boot.lds FORCE
- 	+$(call if_changed,u-boot__)
- 
-+ifeq ($(CONFIG_SYMBOL_LOOKUP),y)
-+u-boot: u-boot.nosyms FORCE
-+	@$(NM) -n -pa --format=sysv u-boot.nosyms | tools/symbols --all-symbols --sysv --sort > u-boot.sym.S
-+	@$(CC) $(c_flags) -c $(srctree)/lib/symbols.c -o lib/symbols.o
-+	@$(AS) u-boot.sym.S -o u-boot.sym.o
-+	@$(call cmd,u-boot__)
-+else
-+u-boot: u-boot.nosyms FORCE
-+	+$(call if_changed,copy)
-+endif
-+
-+
- ifeq ($(CONFIG_RISCV),y)
- 	@tools/prelink-riscv $@
- endif
- 
-diff --git a/include/symbols.h b/include/symbols.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..c5267edbe768f304bc0f6235e71a39b6c3835a67
---- /dev/null
-+++ b/include/symbols.h
-@@ -0,0 +1,24 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#include <asm/types.h>
-+#include <string.h>
-+
-+#define KSYM_NAME_LEN 127
-+
-+#if IS_ENABLED(CONFIG_SYMBOL_LOOKUP)
-+const char * __attribute__((weak)) symbol_lookup(unsigned long addr, unsigned long *symaddr, unsigned long *offset,
-+			   char *namebuf);
-+#else
-+static inline const char *symbol_lookup(unsigned long addr, unsigned long *symaddr, unsigned long *offset,
-+			   char *namebuf)
-+{
-+	/* We can't find the actual symbol address so just use the search address */
-+	if (symaddr)
-+		*symaddr = addr;
-+	if (offset)
-+		*offset = 0;
-+	strcpy(namebuf, "???");
-+	namebuf[3] = '\0';
-+	return namebuf;
-+}
-+#endif
-diff --git a/lib/Kconfig b/lib/Kconfig
-index fbc9de90669aa70bee0b0d9bb30c68c26f3281e2..6215e0963c1215b092d46470538115646ab0ebd0 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1094,8 +1094,16 @@ config VPL_OF_LIBFDT_ASSUME_MASK
- 	  are made, and libfdt is able to deal with malicious data. A value of
- 	  0xff means all assumptions are made and any invalid data may cause
- 	  unsafe execution. See FDT_ASSUME_PERFECT, etc. in libfdt_internal.h
- 
-+config SYMBOL_LOOKUP
-+	bool "Enable symbol lookup"
-+	depends on ARM64
-+	help
-+	  This enables support for looking up symbol names from addresses. When
-+	  enabled U-Boot will print stack traces with function names when an
-+	  exception occurs.
-+
- menu "System tables"
- 	depends on (!EFI_CLIENT && !SYS_COREBOOT) || (ARM && EFI_LOADER)
- 
- config BLOBLIST_TABLES
-diff --git a/lib/symbols.c b/lib/symbols.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..0b289ad1519ea7e427d513a21ab43c31df41d35b
---- /dev/null
-+++ b/lib/symbols.c
-@@ -0,0 +1,143 @@
-+/*
-+ * symbols.c: in-kernel printing of symbolic oopses and stack traces.
-+ * Ported from Xen hypervisor
-+ *
-+ * Copyright 2002 Rusty Russell <rusty@rustcorp.com.au> IBM Corporation
-+ *
-+ * ChangeLog:
-+ *
-+ * (25/Aug/2004) Paulo Marques <pmarques@grupopie.com>
-+ *      Changed the compression method from stem compression to "table lookup"
-+ *      compression (see tools/symbols.c for a more complete description)
-+ */
-+
-+#include <asm-generic/sections.h>
-+#include <asm/esr.h>
-+#include <asm/global_data.h>
-+#include <asm/ptrace.h>
-+#include <hexdump.h>
-+#include <linux/compiler.h>
+diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+index c7340a047b2e9385b9366d90e1363c99882db398..11cc3e6c0e9abd0440b76219b0d56056345ddd7f 100644
+--- a/lib/vsprintf.c
++++ b/lib/vsprintf.c
+@@ -24,8 +24,9 @@
+ #include <linux/ctype.h>
+ #include <linux/err.h>
+ #include <linux/types.h>
+ #include <linux/string.h>
 +#include <symbols.h>
-+
-+extern const uint64_t symbols_offsets[];
-+extern const unsigned int symbols_num_syms;
-+extern const u8 symbols_names[];
-+extern const u8 symbols_token_table[];
-+extern const u16 symbols_token_index[];
-+extern const unsigned int symbols_markers[];
-+
-+#define symbols_address(n) (symbols_offsets[n] + 0UL)
-+
+ 
+ /* we use this so that we can do without the ctype library */
+ #define is_digit(c)	((c) >= '0' && (c) <= '9')
+ 
+@@ -437,8 +438,25 @@ static char *uuid_string(char *buf, char *end, u8 *addr, int field_width,
+ 	return string(buf, end, uuid, field_width, precision, flags);
+ }
+ #endif
+ 
 +/*
-+ * expand a compressed symbol data into the resulting uncompressed string,
-+ * given the offset to where the symbol is in the compressed stream.
++ * Given an address, print the symbol name and offset to the address.
 + */
-+static unsigned int symbols_expand_symbol(unsigned int off, char *result)
++static char *ptr_symbol(phys_addr_t addr, char *buf, char *end,
++			int field_width, int precision, int flags)
 +{
-+	int len, skipped_first = 0;
-+	const u8 *tptr, *data;
++	unsigned long offset;
++	char namebuf[KSYM_NAME_LEN + 1] = { 0 };
 +
-+	/* get the compressed symbol length from the first symbol byte */
-+	data = &symbols_names[off];
-+	len = *data;
-+	data++;
++	symbol_lookup(addr, NULL, &offset, namebuf);
 +
-+	/* update the offset to return the offset for the next symbol on
-+	 * the compressed stream */
-+	off += len + 1;
++	strlcat(namebuf, "+0x", KSYM_NAME_LEN + 1);
 +
-+	/* for every byte on the compressed symbol data, copy the table
-+	 * entry for that byte */
-+	while (len) {
-+		tptr = &symbols_token_table[symbols_token_index[*data]];
-+		data++;
-+		len--;
-+
-+		while (*tptr) {
-+			if (skipped_first) {
-+				*result = *tptr;
-+				result++;
-+			} else
-+				skipped_first = 1;
-+			tptr++;
-+		}
-+	}
-+
-+	*result = '\0';
-+
-+	/* return to offset to the next symbol */
-+	return off;
++	buf = string(buf, end, namebuf, field_width, precision, flags);
++	return number(buf, end, offset, 16, field_width, precision, flags);
 +}
 +
-+/* find the offset on the compressed stream given and index in the
-+ * symbols array */
-+static unsigned int get_symbol_offset(unsigned long pos)
-+{
-+	const u8 *name;
-+	int i;
-+
-+	/* use the closest marker we have. We have markers every 256 positions,
-+	 * so that should be close enough */
-+	name = &symbols_names[symbols_markers[pos >> 8]];
-+
-+	/* sequentially scan all the symbols up to the point we're searching for.
-+	 * Every symbol is stored in a [<len>][<len> bytes of data] format, so we
-+	 * just need to add the len to the current pointer for every symbol we
-+	 * wish to skip */
-+	for (i = 0; i < (pos & 0xFF); i++)
-+		name = name + (*name) + 1;
-+
-+	return name - symbols_names;
-+}
-+
-+/**
-+ * symbol_lookup - look up a symbol by address
-+ * @addr: address nearest to the symbol (typically link register value)
-+ * @symaddr: pointer to store the actual address of the symbol (optional)
-+ * @offset: pointer to store the offset between @search_addr and the found symbol address (optional)
-+ * @namebuf: buffer to store the symbol name (must be at least KSYM_NAME_LEN + 1 bytes long)
-+ * Return: pointer to the symbol name (namebuf)
-+ */
-+const char *symbol_lookup(unsigned long search_addr, unsigned long *symaddr, unsigned long *offset, char *namebuf)
-+{
-+	unsigned long low, high, mid;
-+
-+	/* Symbol addresses are not relative to the load address of U-Boot */
-+	search_addr -= (unsigned long)_start;
-+
-+	namebuf[KSYM_NAME_LEN] = 0;
-+	namebuf[0] = '?';
-+
-+	/* do a binary search on the sorted symbols_addresses array */
-+	low = 0;
-+	high = symbols_num_syms;
-+
-+	while (high - low > 1) {
-+		mid = (low + high) / 2;
-+		if (symbols_address(mid) <= search_addr) {
-+			low = mid;
-+		} else {
-+			high = mid;
-+		}
-+	}
-+
-+	/* search for the first aliased symbol. Aliased symbols are
-+	 * symbols with the same address */
-+	while (low && symbols_address(low - 1) == symbols_address(low))
-+		--low;
-+
-+	/* Grab name */
-+	symbols_expand_symbol(get_symbol_offset(low), namebuf);
-+
-+	/*
-+	 * _start is used over gd->relocaddr because it will always be correct,
-+	 * even if U-Boot was built as relocatable and loaded at an arbitrary
-+	 * address (both pre and post-relocation) since it is fixed up before
-+	 * the C runtime is initialized.
-+	 */
-+	if (symaddr)
-+		*symaddr = symbols_address(low) + (unsigned long)_start;
-+	if (offset)
-+		*offset = search_addr - symbols_address(low);
-+	return namebuf;
-+}
-diff --git a/tools/Makefile b/tools/Makefile
-index 02297e8c93a3c8d00ad165639d5f070804e17ec2..3fe957f4936668d3d1a12f7aab8a88d85581bfef 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -242,8 +242,11 @@ hostprogs-$(CONFIG_ARCH_MVEBU) += kwboot
- 
- hostprogs-y += proftool
- proftool-objs = proftool.o generated/lib/abuf.o
- 
-+HOSTCFLAGS_symbols.o += -DCONFIG_TEXT_BASE=$(CONFIG_TEXT_BASE)
-+hostprogs-$(CONFIG_SYMBOL_LOOKUP) += symbols
-+
- hostprogs-$(CONFIG_STATIC_RELA) += relocate-rela
- hostprogs-$(CONFIG_RISCV) += prelink-riscv
- 
- hostprogs-$(CONFIG_ARCH_OCTEON) += update_octeon_header
-diff --git a/tools/symbols.c b/tools/symbols.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..9e3c4f62cf245bb4dbce89d46ea2959db76ebfb4
---- /dev/null
-+++ b/tools/symbols.c
-@@ -0,0 +1,646 @@
-+/* Generate assembler source containing symbol information
-+ *
-+ * Copyright 2002       by Kai Germaschewski
-+ *
-+ * Based on Xen implementation as of March 2024
-+ *	c20850540ad6 ("x86/altcall: always use a temporary parameter stashing variable")
-+ *
-+ * Simplified and adjusted for U-Boot, notably the generated ASM is simplified with the
-+ * text offset applied at runtime to better support U-Boot relocation.
-+ *
-+ * This software may be used and distributed according to the terms
-+ * of the GNU General Public License, incorporated herein by reference.
-+ *
-+ * Usage: nm -n vmlinux | scripts/symbols [--all-symbols] > symbols.S
-+ *
-+ * ChangeLog:
-+ *
-+ * (25/Aug/2004) Paulo Marques <pmarques@grupopie.com>
-+ *      Changed the compression method from stem compression to "table lookup"
-+ *      compression
-+ *
-+ *      Table compression uses all the unused char codes on the symbols and
-+ *  maps these to the most used substrings (tokens). For instance, it might
-+ *  map char code 0xF7 to represent "write_" and then in every symbol where
-+ *  "write_" appears it can be replaced by 0xF7, saving 5 bytes.
-+ *      The used codes themselves are also placed in the table so that the
-+ *  decompresion can work without "special cases".
-+ *      Applied to kernel symbols, this usually produces a compression ratio
-+ *  of about 50%.
-+ *
-+ */
-+
-+#ifndef _GNU_SOURCE
-+#define _GNU_SOURCE
-+#endif
-+
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <stdint.h>
-+#include <stdbool.h>
-+#include <ctype.h>
-+
-+#define KSYM_NAME_LEN		127
-+
-+
-+struct sym_entry {
-+	unsigned long long addr;
-+	unsigned int len;
-+	unsigned char *sym;
-+	char *orig_symbol;
-+	unsigned int addr_idx;
-+	unsigned int stream_offset;
-+	unsigned char type;
-+};
-+#define SYMBOL_NAME(s) ((char *)(s)->sym + 1)
-+
-+static struct sym_entry *table;
-+static unsigned int table_size, table_cnt;
-+static unsigned long long _stext, _etext, _sinittext, _einittext, _sextratext, _eextratext;
-+static int all_symbols = 0;
-+static int sort_by_name = 0;
-+static int map_only = 0;
-+static char symbol_prefix_char = '\0';
-+static enum { fmt_bsd, fmt_sysv } input_format;
-+static int compare_name(const void *p1, const void *p2);
-+
-+int token_profit[0x10000];
-+
-+/* the table that holds the result of the compression */
-+unsigned char best_table[256][2];
-+unsigned char best_table_len[256];
-+
-+
-+static void usage(void)
-+{
-+	fprintf(stderr, "Usage: symbols [--all-symbols] [--symbol-prefix=<prefix char>] < in.map > out.S\n");
-+	exit(1);
-+}
-+
-+/*
-+ * This ignores the intensely annoying "mapping symbols" found
-+ * in ARM ELF files: $a, $t and $d.
-+ */
-+static inline int is_arm_mapping_symbol(const char *str)
-+{
-+	return str[0] == '$' && strchr("atd", str[1])
-+	       && (str[2] == '\0' || str[2] == '.');
-+}
-+
-+static int read_symbol(FILE *in, struct sym_entry *s)
-+{
-+	char str[500], type[20] = "";
-+	char *sym, stype;
-+	static char *filename = NULL;
-+	int rc = -1;
-+
-+	switch (input_format) {
-+	case fmt_bsd:
-+		rc = fscanf(in, "%llx %c %499s\n", &s->addr, &stype, str);
+ /*
+  * Show a '%p' thing.  A kernel extension is that the '%p' is followed
+  * by an extra set of alphanumeric characters that are extended format
+  * specifiers.
+@@ -450,8 +468,9 @@ static char *uuid_string(char *buf, char *end, u8 *addr, int field_width,
+  * - 'I' [46] for IPv4/IPv6 addresses printed in the usual way (dot-separated
+  *       decimal for v4 and colon separated network-order 16 bit hex for v6)
+  * - 'i' [46] for 'raw' IPv4/IPv6 addresses, IPv6 omits the colons, IPv4 is
+  *       currently the same
++ * - 'S' for a symbol address, it prints the symbol name and offset
+  */
+ static char *pointer(const char *fmt, char *buf, char *end, void *ptr,
+ 		int field_width, int precision, int flags)
+ {
+@@ -502,8 +521,14 @@ static char *pointer(const char *fmt, char *buf, char *end, void *ptr,
+ 			return ip4_addr_string(buf, end, ptr, field_width,
+ 					       precision, flags);
+ 		flags &= ~SPECIAL;
+ 		break;
++	case 'S':
++		if (IS_ENABLED(CONFIG_SYMBOL_LOOKUP))
++			return ptr_symbol((phys_addr_t)ptr, buf, end,
++					  field_width, precision, flags);
++		flags |= SPECIAL;
 +		break;
-+	case fmt_sysv:
-+		while (fscanf(in, "\n") == 1)
-+			/* nothing */;
-+		rc = fscanf(in, "%499[^ |] |%llx | %c |",
-+			    str, &s->addr, &stype);
-+		if (rc == 3 && fscanf(in, " %19[^ |] |", type) != 1)
-+			*type = '\0';
-+		break;
-+	}
-+	if (rc != 3) {
-+		if (rc != EOF) {
-+			/* skip line */
-+			if (fgets(str, 500, in) == NULL)
-+				return -1; /* must check fgets result */
-+		
-+			//printf("SKIP: %s\n", str);
-+		}
-+		return -1;
-+	}
-+
-+	sym = strrchr(str, '.');
-+	if (strcasecmp(type, "FILE") == 0 ||
-+	    (/*
-+	      * GNU nm prior to binutils commit 552e55ed06 (expected to
-+	      * appear in 2.27) doesn't produce a type for EFI binaries.
-+	      */
-+	     input_format == fmt_sysv && !*type && stype == '?' && sym &&
-+	     sym[1] && strchr("cSsoh", sym[1]) && !sym[2])) {
-+		free(filename);
-+		//filename = *str ? strdup(str) : NULL;
-+		goto skip_tail;
-+	}
-+
-+	/*
-+	 * Keep all symbols relative to TEXT_BASE, it gets added back at runtime.
-+	 * this simplifies handling relocation.
-+	 */
-+	s->addr -= CONFIG_TEXT_BASE;
-+
-+	rc = -1;
-+
-+	sym = str;
-+	/* skip prefix char */
-+	if (symbol_prefix_char && str[0] == symbol_prefix_char)
-+		sym++;
-+
-+	/* Ignore most absolute/undefined (?) symbols. */
-+	if (strcmp(sym, "_stext") == 0)
-+		_stext = s->addr;
-+	else if (strcmp(sym, "_etext") == 0)
-+		_etext = s->addr;
-+	else if (strcmp(sym, "_sinittext") == 0)
-+		_sinittext = s->addr;
-+	else if (strcmp(sym, "_einittext") == 0)
-+		_einittext = s->addr;
-+	else if (strcmp(sym, "_sextratext") == 0)
-+		_sextratext = s->addr;
-+	else if (strcmp(sym, "_eextratext") == 0)
-+		_eextratext = s->addr;
-+	else if (toupper((uint8_t)stype) == 'A')
-+	{
-+		/* Keep these useful absolute symbols */
-+		if (strcmp(sym, "__gp"))
-+			goto skip_tail;
-+	}
-+	else if (toupper((uint8_t)stype) == 'U' ||
-+		 toupper((uint8_t)stype) == 'N' ||
-+		 is_arm_mapping_symbol(sym))
-+		goto skip_tail;
-+	/* exclude also MIPS ELF local symbols ($L123 instead of .L123) */
-+	else if (str[0] == '$')
-+		goto skip_tail;
-+
-+	/* include the type field in the symbol name, so that it gets
-+	 * compressed together */
-+	s->len = strlen(str) + 1;
-+	if (islower((unsigned char)stype) && filename)
-+		s->len += strlen(filename) + 1;
-+	s->sym = malloc(s->len + 1);
-+	sym = SYMBOL_NAME(s);
-+	if (islower((unsigned char)stype) && filename) {
-+		sym = stpcpy(sym, filename);
-+		*sym++ = ':';
-+	}
-+	strcpy(sym, str);
-+	if (sort_by_name || map_only) {
-+		s->orig_symbol = strdup(SYMBOL_NAME(s));
-+		s->type = stype; /* As s->sym[0] ends mangled. */
-+	}
-+	s->sym[0] = stype;
-+	rc = 0;
-+
-+ skip_tail:
-+	if ((input_format == fmt_sysv) && fgets(str, 500, in) == NULL)
-+		/* ignore errors while discarding rest of line */;
-+
-+	return rc;
-+}
-+
-+static int symbol_valid(struct sym_entry *s)
-+{
-+	int offset = 1;
-+
-+	/* skip prefix char */
-+	if (symbol_prefix_char && *(s->sym + 1) == symbol_prefix_char)
-+		offset++;
-+
-+	/* if --all-symbols is not specified, then symbols outside the text
-+	 * and inittext sections are discarded */
-+	if (!all_symbols) {
-+		if ((s->addr < _stext || s->addr > _etext)
-+		    && (s->addr < _sinittext || s->addr > _einittext)
-+		    && (s->addr < _sextratext || s->addr > _eextratext))
-+			return 0;
-+		/* Corner case.  Discard any symbols with the same value as
-+		 * _etext _einittext or _eextratext; they can move between pass
-+		 * 1 and 2 when the symbols data are added.  If these symbols
-+		 * move then they may get dropped in pass 2, which breaks the
-+		 * symbols rules.
-+		 */
-+		if ((s->addr == _etext && strcmp((char*)s->sym + offset, "_etext")) ||
-+		    (s->addr == _einittext && strcmp((char*)s->sym + offset, "_einittext")) ||
-+		    (s->addr == _eextratext && strcmp((char*)s->sym + offset, "_eextratext")))
-+			return 0;
-+	}
-+
-+	/* Exclude symbols which vary between passes. */
-+	if (strstr((char *)s->sym + offset, "_compiled."))
-+		return 0;
-+
-+	return 1;
-+}
-+
-+static void read_map(FILE *in)
-+{
-+	while (!feof(in)) {
-+		if (table_cnt >= table_size) {
-+			table_size += 10000;
-+			table = realloc(table, sizeof(*table) * table_size);
-+			if (!table) {
-+				fprintf(stderr, "out of memory\n");
-+				exit (1);
-+			}
-+		}
-+		if (read_symbol(in, &table[table_cnt]) == 0)
-+			table_cnt++;
-+	}
-+}
-+
-+static void output_label(char *label)
-+{
-+	if (symbol_prefix_char)
-+		printf(".globl %c%s\n", symbol_prefix_char, label);
-+	else
-+		printf(".globl %s\n", label);
-+	printf("\t.align 8\n");
-+	if (symbol_prefix_char)
-+		printf("%c%s:\n", symbol_prefix_char, label);
-+	else
-+		printf("%s:\n", label);
-+}
-+
-+/* uncompress a compressed symbol. When this function is called, the best table
-+ * might still be compressed itself, so the function needs to be recursive */
-+static int expand_symbol(unsigned char *data, int len, char *result)
-+{
-+	int c, rlen, total=0;
-+
-+	while (len) {
-+		c = *data;
-+		/* if the table holds a single char that is the same as the one
-+		 * we are looking for, then end the search */
-+		if (best_table[c][0]==c && best_table_len[c]==1) {
-+			*result++ = c;
-+			total++;
-+		} else {
-+			/* if not, recurse and expand */
-+			rlen = expand_symbol(best_table[c], best_table_len[c], result);
-+			total += rlen;
-+			result += rlen;
-+		}
-+		data++;
-+		len--;
-+	}
-+	*result=0;
-+
-+	return total;
-+}
-+
-+/* Sort by original (non mangled) symbol name, then type. */
-+static int compare_name_orig(const void *p1, const void *p2)
-+{
-+	const struct sym_entry *sym1 = p1;
-+	const struct sym_entry *sym2 = p2;
-+	int rc;
-+
-+	rc = strcmp(sym1->orig_symbol, sym2->orig_symbol);
-+
-+	if (!rc)
-+		rc = sym1->type - sym2->type;
-+
-+	return rc;
-+}
-+
-+static void write_src(void)
-+{
-+	unsigned int i, k, off;
-+	unsigned int best_idx[256];
-+	unsigned int *markers;
-+	char buf[KSYM_NAME_LEN+1];
-+
-+	if (map_only) {
-+		for (i = 0; i < table_cnt; i++)
-+			printf("%#llx %c %s\n", table[i].addr, table[i].type,
-+						table[i].orig_symbol);
-+
-+		return;
-+	}
-+	printf("\t.section .rodata, \"a\"\n");
-+
-+	output_label("symbols_offsets");
-+	for (i = 0; i < table_cnt; i++) {
-+		printf("\t.quad\t%#llx\n", table[i].addr);
-+	}
-+	printf("\n");
-+
-+	output_label("symbols_num_syms");
-+	printf("\t.long\t%d\n", table_cnt);
-+	printf("\n");
-+
-+	/* table of offset markers, that give the offset in the compressed stream
-+	 * every 256 symbols */
-+	markers = (unsigned int *) malloc(sizeof(unsigned int) * ((table_cnt + 255) / 256));
-+
-+	output_label("symbols_names");
-+	off = 0;
-+	for (i = 0; i < table_cnt; i++) {
-+		if ((i & 0xFF) == 0)
-+			markers[i >> 8] = off;
-+
-+		printf("\t.byte 0x%02x", table[i].len);
-+		for (k = 0; k < table[i].len; k++)
-+			printf(", 0x%02x", table[i].sym[k]);
-+		printf("\n");
-+
-+		table[i].stream_offset = off;
-+		off += table[i].len + 1;
-+	}
-+	printf("\n");
-+
-+	output_label("symbols_markers");
-+	for (i = 0; i < ((table_cnt + 255) >> 8); i++)
-+		printf("\t.long\t%d\n", markers[i]);
-+	printf("\n");
-+
-+
-+	output_label("symbols_token_table");
-+	off = 0;
-+	for (i = 0; i < 256; i++) {
-+		best_idx[i] = off;
-+		expand_symbol(best_table[i], best_table_len[i], buf);
-+		printf("\t.asciz\t\"%s\"\n", buf);
-+		off += strlen(buf) + 1;
-+	}
-+	printf("\n");
-+
-+	output_label("symbols_token_index");
-+	for (i = 0; i < 256; i++)
-+		printf("\t.short\t%d\n", best_idx[i]);
-+	printf("\n");
-+
-+	if (!sort_by_name) {
-+		free(markers);
-+		return;
-+	}
-+
-+	/* Sorted by original symbol names and type. */
-+	qsort(table, table_cnt, sizeof(*table), compare_name_orig);
-+
-+	output_label("symbols_sorted_offsets");
-+	/* A fixed sized array with two entries: offset in the
-+	 * compressed stream (for symbol name), and offset in
-+	 * symbols_addresses (or symbols_offset). */
-+	for (i = 0; i < table_cnt; i++) {
-+		printf("\t.long %u, %u\n", table[i].stream_offset, table[i].addr_idx);
-+	}
-+	printf("\n");
-+
-+	free(markers);
-+}
-+
-+
-+/* table lookup compression functions */
-+
-+/* count all the possible tokens in a symbol */
-+static void learn_symbol(unsigned char *symbol, int len)
-+{
-+	int i;
-+
-+	for (i = 0; i < len - 1; i++)
-+		token_profit[ symbol[i] + (symbol[i + 1] << 8) ]++;
-+}
-+
-+/* decrease the count for all the possible tokens in a symbol */
-+static void forget_symbol(unsigned char *symbol, int len)
-+{
-+	int i;
-+
-+	for (i = 0; i < len - 1; i++)
-+		token_profit[ symbol[i] + (symbol[i + 1] << 8) ]--;
-+}
-+
-+/* remove all the invalid symbols from the table and do the initial token count */
-+static void build_initial_tok_table(void)
-+{
-+	unsigned int i, pos;
-+
-+	pos = 0;
-+	for (i = 0; i < table_cnt; i++) {
-+		if ( symbol_valid(&table[i]) ) {
-+			if (pos != i)
-+				table[pos] = table[i];
-+			learn_symbol(table[pos].sym, table[pos].len);
-+			pos++;
-+		}
-+	}
-+	table_cnt = pos;
-+}
-+
-+static void *memmem_pvt(void *h, size_t hlen, void *n, size_t nlen)
-+{
-+	char *p;
-+	for (p = h; (p - (char *)h) <= (long)(hlen - nlen); p++)
-+		if (!memcmp(p, n, nlen)) return p;
-+	return NULL;
-+}
-+
-+/* replace a given token in all the valid symbols. Use the sampled symbols
-+ * to update the counts */
-+static void compress_symbols(unsigned char *str, int idx)
-+{
-+	unsigned int i, len, size;
-+	unsigned char *p1, *p2;
-+
-+	for (i = 0; i < table_cnt; i++) {
-+
-+		len = table[i].len;
-+		p1 = table[i].sym;
-+
-+		table[i].addr_idx = i;
-+		/* find the token on the symbol */
-+		p2 = memmem_pvt(p1, len, str, 2);
-+		if (!p2) continue;
-+
-+		/* decrease the counts for this symbol's tokens */
-+		forget_symbol(table[i].sym, len);
-+
-+		size = len;
-+
-+		do {
-+			*p2 = idx;
-+			p2++;
-+			size -= (p2 - p1);
-+			memmove(p2, p2 + 1, size);
-+			p1 = p2;
-+			len--;
-+
-+			if (size < 2) break;
-+
-+			/* find the token on the symbol */
-+			p2 = memmem_pvt(p1, size, str, 2);
-+
-+		} while (p2);
-+
-+		table[i].len = len;
-+
-+		/* increase the counts for this symbol's new tokens */
-+		learn_symbol(table[i].sym, len);
-+	}
-+}
-+
-+/* search the token with the maximum profit */
-+static int find_best_token(void)
-+{
-+	int i, best, bestprofit;
-+
-+	bestprofit=-10000;
-+	best = 0;
-+
-+	for (i = 0; i < 0x10000; i++) {
-+		if (token_profit[i] > bestprofit) {
-+			best = i;
-+			bestprofit = token_profit[i];
-+		}
-+	}
-+	return best;
-+}
-+
-+/* this is the core of the algorithm: calculate the "best" table */
-+static void optimize_result(void)
-+{
-+	int i, best;
-+
-+	/* using the '\0' symbol last allows compress_symbols to use standard
-+	 * fast string functions */
-+	for (i = 255; i >= 0; i--) {
-+
-+		/* if this table slot is empty (it is not used by an actual
-+		 * original char code */
-+		if (!best_table_len[i]) {
-+
-+			/* find the token with the breates profit value */
-+			best = find_best_token();
-+			if (token_profit[best] == 0)
-+			        break;
-+
-+			/* place it in the "best" table */
-+			best_table_len[i] = 2;
-+			best_table[i][0] = best & 0xFF;
-+			best_table[i][1] = (best >> 8) & 0xFF;
-+
-+			/* replace this token in all the valid symbols */
-+			compress_symbols(best_table[i], i);
-+		}
-+	}
-+}
-+
-+/* start by placing the symbols that are actually used on the table */
-+static void insert_real_symbols_in_table(void)
-+{
-+	unsigned int i, j, c;
-+
-+	memset(best_table, 0, sizeof(best_table));
-+	memset(best_table_len, 0, sizeof(best_table_len));
-+
-+	for (i = 0; i < table_cnt; i++) {
-+		for (j = 0; j < table[i].len; j++) {
-+			c = table[i].sym[j];
-+			best_table[c][0]=c;
-+			best_table_len[c]=1;
-+		}
-+	}
-+}
-+
-+static void optimize_token_table(void)
-+{
-+	build_initial_tok_table();
-+
-+	insert_real_symbols_in_table();
-+
-+	/* When valid symbol is not registered, exit to error */
-+	if (!table_cnt) {
-+		fprintf(stderr, "No valid symbol.\n");
-+		exit(1);
-+	}
-+
-+	optimize_result();
-+}
-+
-+static int compare_value(const void *p1, const void *p2)
-+{
-+	const struct sym_entry *sym1 = p1;
-+	const struct sym_entry *sym2 = p2;
-+
-+	if (sym1->addr < sym2->addr)
-+		return -1;
-+	if (sym1->addr > sym2->addr)
-+		return +1;
-+	/* Prefer global symbols. */
-+	if (isupper(*sym1->sym))
-+		return -1;
-+	if (isupper(*sym2->sym))
-+		return +1;
-+	return 0;
-+}
-+
-+static int compare_name(const void *p1, const void *p2)
-+{
-+	const struct sym_entry *sym1 = p1;
-+	const struct sym_entry *sym2 = p2;
-+
-+	return strcmp(SYMBOL_NAME(sym1), SYMBOL_NAME(sym2));
-+}
-+
-+int main(int argc, char **argv)
-+{
-+	unsigned int i;
-+	bool unsorted = false, warn_dup = false, error_dup = false, found_dup = false;
-+
-+	if (argc >= 2) {
-+		for (i = 1; i < argc; i++) {
-+			if(strcmp(argv[i], "--all-symbols") == 0)
-+				all_symbols = 1;
-+			else if (strncmp(argv[i], "--symbol-prefix=", 16) == 0) {
-+				char *p = &argv[i][16];
-+				/* skip quote */
-+				if ((*p == '"' && *(p+2) == '"') || (*p == '\'' && *(p+2) == '\''))
-+					p++;
-+				symbol_prefix_char = *p;
-+			} else if (strcmp(argv[i], "--sysv") == 0)
-+				input_format = fmt_sysv;
-+			else if (strcmp(argv[i], "--sort") == 0)
-+				unsorted = true;
-+			else if (strcmp(argv[i], "--sort-by-name") == 0)
-+				sort_by_name = 1;
-+			else if (strcmp(argv[i], "--warn-dup") == 0)
-+				warn_dup = true;
-+			else if (strcmp(argv[i], "--error-dup") == 0)
-+				warn_dup = error_dup = true;
-+			else if (strcmp(argv[i], "--xensyms") == 0)
-+				map_only = true;
-+			else
-+				usage();
-+		}
-+	} else if (argc != 1)
-+		usage();
-+
-+	read_map(stdin);
-+
-+	if (warn_dup) {
-+		qsort(table, table_cnt, sizeof(*table), compare_name);
-+		for (i = 1; i < table_cnt; ++i)
-+			if (strcmp(SYMBOL_NAME(table + i - 1),
-+				   SYMBOL_NAME(table + i)) == 0 &&
-+			    table[i - 1].addr != table[i].addr) {
-+				fprintf(stderr,
-+					"Duplicate symbol '%s' (%llx != %llx)\n",
-+					SYMBOL_NAME(table + i),
-+					table[i].addr, table[i - 1].addr);
-+				found_dup = true;
-+			}
-+		unsorted = true;
-+	}
-+
-+	if (error_dup && found_dup)
-+		exit(1);
-+
-+	if (unsorted)
-+		qsort(table, table_cnt, sizeof(*table), compare_value);
-+
-+	optimize_token_table();
-+	write_src();
-+
-+	return 0;
-+}
+ #ifdef CONFIG_LIB_UUID
+ 	case 'U':
+ 		return uuid_string(buf, end, ptr, field_width, precision,
+ 				   flags, fmt);
 
 -- 
 2.50.0
