@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA5BC87FCA
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 21:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B67F1C87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 23:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C630B82F00;
-	Tue, 29 Jul 2025 23:13:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AFCF582B07;
+	Wed, 30 Jul 2025 01:37:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qe1aSMwD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gYzHtFjA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1997882B07; Tue, 29 Jul 2025 23:13:37 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id D749682B20; Wed, 30 Jul 2025 01:37:15 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3FE382BA1
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 23:13:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D627381FEE
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 01:37:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-73ff32d8b87so197397a34.1
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 14:13:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5550dca1241so5554381e87.0
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 16:37:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753823613; x=1754428413; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1753832233; x=1754437033; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7w6spv82Kn8oSRiz9/6lswb0s+3wGZF7OR3hgq7UxA8=;
- b=qe1aSMwDGaLLcRzh1dTEi8K0ykQUbceWQoyQ4cLjgsHWKhuBiMYH6r9ML47wwSDBaG
- fCw69sRqIS7yJqgpkKPJ9bpybpSGWHi6NI2xM/8MlsFhOGvCeiNDGpTXAHJUs+pD56vq
- t5+QS7q+Ndn/JQK0TFdpJNF5GowfqI4AyB9SM=
+ bh=r3OgxQWBJTjsbDXC1pHKEle+GDC/vomPAoNBttYIztc=;
+ b=gYzHtFjAH2K8zC1uwztoLbXFK+KOc3eLPnzOKUcQc2iqZdnJgT0F4WwGan+Lo2COVr
+ yO9T7GdvArtQOdjEXPCEZp7/aCZeCp7U3PdUTr3YwUNl4FjjjOXNcF1U9qoJbeTq9+1/
+ 5P3Wd9sN3Dvd5qIHXxCP0WEfmYb1PWVXdvNpevl6FNSHEe0wmnNu7j33euYfsgQCas1h
+ HCuN5U/nL8HOFLroIaxvFd6HSl9vxM7i1Ne2EVf/AHAQwVX/7AQoddjpJFTc37KUXGNB
+ w04kkOFaYIst1/fwble3ZtYAQQw95FWFa4RZN8DqI+kVdw1Rq/URq3NTnvYoerXp7WAO
+ 8hQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753823613; x=1754428413;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1753832233; x=1754437033;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7w6spv82Kn8oSRiz9/6lswb0s+3wGZF7OR3hgq7UxA8=;
- b=SsRj8TahJavsphMvqk6j+VEZ6qkMqktsE/mE5cjwDhSBFua3gHqVhaBbdsCuYhHU33
- hvWAXK6PnyRFFcYtbbZN8Wk/MKBqQKTmzyvQ73TCXKVgTNzULZBYhER+d5BsqjQ7CVb0
- 2lqIIKTn+YRS0mxI5PEhGNE/fkM3+G9z7CMi5kBmCpotSrubkA81m4vgPY348OA7iPk/
- j3ky5SsiG8kWE2LphsXF5Fc5okotz7G5CkoRJ/XcKaVNyCjm4OrbZm4bf6lnBp/S6HUh
- t8tG+nVBB8ziOnFIrK1p9mpDNuNp6/PP8XI33nMvAILFbSaGIJuvL5c6rG7Pv9eN3gv/
- iR4g==
-X-Gm-Message-State: AOJu0YyB1NJZZBS24pCeyiy+RItoARptfApF0hbUMm20fqw2bDZ7Roqr
- KgDIB6cxK9FeUmoBMcNeIcummTWlkihG7KulTP0n0ZZs7dGWqVNi2kD4NH9G6osmkjw=
-X-Gm-Gg: ASbGncvyVGJaOO0FHX7yG9qJt72xMtcGB0GH3PbCcodb8zwIh5cWhkYILajfU5NaSEp
- /C2jJYzQYHRaFfdbytnOkA79wBXOl8bYVnBEuM/D08ADSZPxz4wBXLCL4kYeJzyMWfCQ5CC7aQp
- DJsIodNDvuotdtxAhn8IB8pahejnNDHKGHdbH3pj84W+oSGRLY9QsRzxJ83OSC6i+U5hz/U4u+c
- ZK2AJKR3mlHghA7+nd4nnlUvrvalIVueERa9wAJKTNUY8VM7TeAJxteXuqXQxjqY0cNiJms+ZcJ
- 61smQeBRaMnzKjIBlHa7oQgnCNZYYKgEAkXsK6ERt9qJezp8Q8a0vBNLGOb+rg99F5k106OygzO
- iQvkpKmgnpVQ6Zh5OXgyQZU5qPOCYEYy+6bc4CWT5SnBsqmbj4OpdQa4=
-X-Google-Smtp-Source: AGHT+IHR7smqxIqtIlaX2Lk9JOPbbWPlhXfz6ze3GNhP+B9T1JTdQfBVVaCiPi+kAfec7mdqZ4Lseg==
-X-Received: by 2002:a05:6830:380e:b0:73a:8d4d:426f with SMTP id
- 46e09a7af769-74178d7553dmr791566a34.2.1753823613558; 
- Tue, 29 Jul 2025 14:13:33 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7416dce11ffsm404756a34.57.2025.07.29.14.13.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 14:13:33 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250723-bios_emulator-v1-0-78b9ef7b9b4a@linaro.org>
-References: <20250723-bios_emulator-v1-0-78b9ef7b9b4a@linaro.org>
-Subject: Re: [PATCH 0/2] bios_emulator: Fix two issues found by Smatch
-Message-Id: <175382361283.2002397.4559428106232990250.b4-ty@konsulko.com>
-Date: Tue, 29 Jul 2025 15:13:32 -0600
+ bh=r3OgxQWBJTjsbDXC1pHKEle+GDC/vomPAoNBttYIztc=;
+ b=EX3DNKOFSS2+BLPESxJzhz044uCuM1ybQaUVhemnKIML5LiDex1eziegaczmBG4qQX
+ hG/wXXu51JNBnAgKgFYa0vXpA/dprxSUBs5k9cGvZ5xnw/GpaRoMJ+1uQh7vgbxTz4fu
+ mB/oV4t7CzsXUiy0cgO91W22qVrvCRqUT2EGYjCTu2XjZRRt4GrULGDcsZoPgQGvyKcV
+ /hVcSMWouvU2VVkoWzbvz/iVzE5MtA7KOmN6sgz/V1wO9BiwCRlTuhHAtjxew5r1Co1Q
+ +dwN75ypt+EJMSyXRM7q68YV0JJZBW+CcQesIeoiB/7ab5HZnoAFI907tOJDNpcDzo9e
+ qmeA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUpPtFv10uG3ydn0ArxjvQU6X0p0SO/goZoP0MhA5djiEaZqXO87uKbMGv2cscy0W0jbEa7r9A=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8yGFxPkvduZwy66mxIAFIbuhjXvsUV6aRVUl7l3VD6xhEvylk
+ N5eBhYD7XVPxHvIyIOCy1C2IAzLJ8kfrlLu8GTA0bQjF/ILVDi/lS6Bdc/TSCttAF8/MRc9yjEW
+ bVeLWYwOnVyZAkye/yhUrvsvf5AYNCnYosA==
+X-Gm-Gg: ASbGncuN63H9FlnjP2LonsXcqm4MsghFWunwRzdry8JRS8xrlEzKDnsegMBQrZIxMYh
+ /9Uc9umswLCYVYtl65pP5fxGIGhYQZ5+7LInrYvL+Z7J07ii1+Ny5+2W4cu1MX89dWStkCRPYM7
+ 0leywmNo49HvMElz46vvzim4GNaD6ZZNJVK1TSxIy/ctMTKvbaPdOTnDlPF4NvbnE58MAB43Gst
+ LPSOQ72Fvoka+9RPt2VF9F7gA3nOm8WC1bCx6c=
+X-Google-Smtp-Source: AGHT+IGPI+Mdj6Ez+4phbrz7rT/p7GG77EbWFF4+l/syqqu5kfvvIxyQNbr8VcW0V0fSgPgvm2SDNuzOfvd/tn/2/ME=
+X-Received: by 2002:a05:6512:3c9c:b0:553:2e27:6769 with SMTP id
+ 2adb3069b0e04-55b7bff26ebmr351957e87.7.1753832232827; Tue, 29 Jul 2025
+ 16:37:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250708-imx95b0-v1-0-01759e9c855f@oss.nxp.com>
+ <CAJ+vNU2G=CMiHc4mU4fjQEz7zwjvx_EuiWWQo8MBVHGJdmTarA@mail.gmail.com>
+ <PAXPR04MB9644BC97420DB4E3D877C2E2E225A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <CAJ+vNU1asw79GMnsTxNevg+xRo-1SQ9j_f+4e-TEy4TPZ+Qt+Q@mail.gmail.com>
+In-Reply-To: <CAJ+vNU1asw79GMnsTxNevg+xRo-1SQ9j_f+4e-TEy4TPZ+Qt+Q@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 29 Jul 2025 20:37:01 -0300
+X-Gm-Features: Ac12FXz7l_37mdO7fcrj2XQHQsRNf5SxOxVx78-i5JeTKs7yoqz1IJxl2TA8UyE
+Message-ID: <CAOMZO5BN_kxD=t0n3h=g3XhL1dLMmhgLHf0TtBtaX8ad3M878w@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] imx: add i.MX95 b0 support
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>, 
+ Stefano Babic <sbabic@nabladev.com>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Alice Guo <alice.guo@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,20 +103,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Jul 2025 11:34:34 +0100, Andrew Goodbody wrote:
+On Tue, Jul 29, 2025 at 1:02=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 
-> Smatch found two issues in bios_emulator, a buffer overflow and missing
-> parens for a macro. Fix them both.
-> 
-> 
+> This is unacceptable. Had I known this series was doing this I would
+> have NAK'd it. There was no mention in the commit log that this would
+> drop support for A0. There are many vendors like myself who have A0
 
-Applied to u-boot/master, thanks!
+Same here: I didn't notice that this series would remove A0 support.
 
-[1/2] bios_emulator: Fix buffer overflow
-      commit: 4b8aba93bdba168f284036cd7f8cb0e988bf3f92
-[2/2] bios_emulator: Add parens to xorl macro
-      commit: 0fdcca86d87b3b723cdfc9901f02f14adba9df60
--- 
-Tom
+> silicon evk's that will likely never get upgraded and should not
+> become bricks.
+>
+> We need to at least know how to get back to working boot firmware for
+> A0. I would be fine if there was just a Kconfig to select A0.
 
-
+Yes, I would appreciate it if someone could send patches to restore
+it.MX95 A0 support.
