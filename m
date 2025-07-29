@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA84DC83F26
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6005C87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AC598304F;
-	Tue, 29 Jul 2025 18:07:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1B8382EB8;
+	Tue, 29 Jul 2025 18:07:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HzvU9dei";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r6PmAmXW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BCDC83145; Tue, 29 Jul 2025 18:07:49 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 3C42883102; Tue, 29 Jul 2025 18:07:50 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08221831A4
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:07:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2576882EB8
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:07:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4561ed868b5so37899345e9.0
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:07:45 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3b78d337dd9so947041f8f.3
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753805264; x=1754410064; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1753805267; x=1754410067; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=OAU8u7dJ3enNuLl7+lbjMPH36mBB6d7JKMJPH8OPjp8=;
- b=HzvU9deikmLGAfFYmryrfeXt0Wd+iFnH/GG8A662shWRCY9JexNNiHzyOmdJ4zUiF6
- xT7veT/Ne21Hrw3kwfVZcPjm9ONJkZc5afj4Kl4DMo1G5frl3CCwZCUuBLJopkdKjZuv
- Am1uKvlOwXrNFyRvNldl+lJv8dAO4NpdeeF8etp+xntfL0HNViSG9z+j4xSBG5gND+HQ
- DIBn8kfw4XBPSzhceQ99HrY3deyFxHIrcBWOijVNF5IKJ6iWgJKNBw/ukwmVVm+wMh/q
- 7JMKfk/NvUFqjHVmD3SV9xu0DSYvhEpo1GW0UhNNDiI1/uVaZYIiiSFSkeeYMFjoTRU0
- +xBw==
+ :reply-to; bh=9fiiMiVJRf1i31Avgztmf9WmZhaG7v+AEL3q+uQl2no=;
+ b=r6PmAmXW6JApmX0oi2fnSfK4kzYmP8xxMw4waPE52bbTsKJczGyGscMTvE3+PKsYfr
+ HS+IBkTG5Ga5jyEuLRm1htucjf13bJVH5euy8Rz252GjxkALPvKPJh76lCrhXnkbcSvK
+ vNjPlHjxxCsvK82+NziyT8f1jNoicnEDy8ebxW48IbWf+SOiarCemsU2hNma2NwE+aRw
+ d1Mvo1NPdD9764xeQBFEb7aC4+PYmLOeQzA3Lg/vIzqANiWzEpJVyfksmZ1/VARRo9Rw
+ +vSvTxN6RZYxCpfdQ3lcUREd45l1YrGRVhSOY4t79mKKm6jpKvVQKXvhiiZK2iu6auPW
+ W/iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753805264; x=1754410064;
+ d=1e100.net; s=20230601; t=1753805267; x=1754410067;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OAU8u7dJ3enNuLl7+lbjMPH36mBB6d7JKMJPH8OPjp8=;
- b=BjkzGfgVMTtD62coU1ajxQ0wUGp0dmE+U2zmuOTVzj+HJX3aQhBDcnCfj8sXOnukCY
- xo5wc7DUq8MrnfAxwRH6Lp1d9BC0nffOrbBrdoeDCVzUKrRuLWomhizuSKRl+lxWqNaS
- 9tNA4mDhZJzFfRo96VuKTvB6NIcZMY9b3ey7cBaaF6xRiSBN3TYXBsU+pMnCZK+QeSpz
- 6CHUAGe07/B1aIXwqB7BtVNWi+MWbg3iVym3uxdomSb2QB7DmYwAV08DZ7YyzJUWGMri
- xoIkvKqji6PA8mP/p/eBiCQdgkC1ba6P8ZUY/gSj11bBLL/KsjolyCjPMPmgbfdCmRwS
- ITsA==
+ bh=9fiiMiVJRf1i31Avgztmf9WmZhaG7v+AEL3q+uQl2no=;
+ b=YX15rfM1j8Nd/dHxEsoPKb/1zmVSyyIUbuVJ3FZr4lvNoqj6LT4YXfaWq1U1LTQtnn
+ MEnODR9o6mEUzTDwwq7A48Yta6Yr+mQGtprwNbo+WDfj2BbJtcEtLaQzFhHz1p+d8WV1
+ z4oBxAepEJAeAPNSgfX1rujRAi8NXYaggu83eXHZ7msFEFwLgt0J2ZyAIfNj+MsEIfz5
+ 87WieCGirVAp6jY+GSg5+vkrZybOHs4fsd+MgMDzkb3uyD26Urg3K6ChQCzBZ/l6doX6
+ MNGomiYevsa5aIxvUi9349BJGkPBbXTNx/jDNHUhdOFnqJc5TevoDr0zzmXcauhJUHhO
+ OWgA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXErEtb0jlZJCqyxeXY8JoV/klQ+4AF8HXh9QCMVGNtMGthweFXO4iwMMI1w14iYwgGzL3YHT0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzzHN45oySfc30LXuTTmaUD/LPzIYufno1fS2YgQVUY/+ewRVnO
- kc2yW0mjH8syxaHxmRKRvZzjwgtvYKv+wML2pkJhQwQ2ZmHO71MU7hEfM1CsoMVYlOU=
-X-Gm-Gg: ASbGncv2Q3spMpSEZi7ej6GLBvOz8q2uC57NokX8BJbrkivlsz9VH2R2ly+pnhW8nLA
- SNhysz28KznYElEKdnWZwdvSMYsrM98CrGVVhhLqCNA7x50QTCf5Ugudmf+PfBmCStJHr3pvlri
- uv2D3llw3ZqKbcF2f5/bt7T1UNwAFoDzYXoDHz6cmYkuq7sSoLcxe222dHg7vhYpcgBXnlcWCMJ
- JP8Vq9X6B89quduhHM5XhNS0BMSk8UZZmevDg/Ejccj1xYgXM0iOFGJo8uI4jRWJV/CieZbcqvi
- 1u8gbUOjT1p2GAIpkgNeHe67wqx+cP/ktmO0SX8DGDDY/rUOrqbcSjKYXfkIIkCltla9PSsIYn2
- yA4WDc8sQ8u6CiMje+oGf9VcxL4GSrtSk2kxSJY6btZxsVGjMqpdHkNzppUywGFWvjyLGGD0Cjr
- 8YqJXn5weHTQ==
-X-Google-Smtp-Source: AGHT+IGkHomiPDfo6EkoWYTlSUmZinAyI6IFcckXkdDGopWsjQsa3fWP9RBxb5J/97GyBB+XtWBjgQ==
-X-Received: by 2002:a05:600c:1d19:b0:456:18f3:b951 with SMTP id
- 5b1f17b1804b1-45892ba16b5mr3684805e9.15.1753805264362; 
- Tue, 29 Jul 2025 09:07:44 -0700 (PDT)
+ AJvYcCU8Q1B5Th/gA9O2BlwSR+X+uI4jqS8V3ZUqp4MZzTHHfEFyMNKF8swkH//Bh8Ahg5i+eBUBOfw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwktwuhwalM79R5GpkJEgvHJOujwoSEn888JzEKTOUUuGHaTiKS
+ +kFyQqMTPeJDJcRX80SF/PHnkQnEINSypNw+gG7d0RTv09xKqDHx2HTgtFRyzrCq0zs=
+X-Gm-Gg: ASbGncuYcRBQ/fbTtVaEwlifhERkHdzSVAllD7ApFNOJdhEejeo32RcItSZLLU01zdH
+ cYYm3JGrjAbqMLZec9pl+a4nEaZAXFCwkP1QP++rt+0dL6b+sxZGVh6VHBCGps5zc7la7ktwsUS
+ Q7L6f/wxx/K2Ca8BtWlt/S0YWAOYH3+D4FBtIogXExiQjVSBavIT8ADw1vw7C2kr1CByrBp25Se
+ BC69lnIdUt1w/fS8rI3DME+cuz8lg2COJe5DFMKmU45I+q46TmAPtWeC+HuGK2gIVZOhfDV+xa4
+ qmBq7zWJVif6jMaPYdUu0p+0b9EjCSMh8J0Bw6Z7PW9+OlLo6HskPwfXOtIWTgDmSxYusdkpNXE
+ 6iy++narnDO4vO13hebfAt8aG0oByLK5pj+OyeWVVPN3o6O4lgFP75dCroOFjXen6eYtvQLSr82
+ E3YO9QCc3ukg==
+X-Google-Smtp-Source: AGHT+IEwU08t1csWYvO4u1sz7cQUfRHxXV3Vu9JkkvyRyQ05MZwkYei8OnjzeUlHtWvMV3scUlDsGw==
+X-Received: by 2002:a5d:5f54:0:b0:3b4:990a:a0d6 with SMTP id
+ ffacd0b85a97d-3b794fd5a7bmr178145f8f.19.1753805267548; 
+ Tue, 29 Jul 2025 09:07:47 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (ip-185-104-138-124.ptr.icomera.net.
  [185.104.138.124]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b781d2fc1csm10512075f8f.5.2025.07.29.09.07.40
+ ffacd0b85a97d-3b781d2fc1csm10512075f8f.5.2025.07.29.09.07.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 09:07:43 -0700 (PDT)
+ Tue, 29 Jul 2025 09:07:46 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 29 Jul 2025 18:07:24 +0200
-Subject: [PATCH v5 03/10] Kconfig: make CONFIG_FRAMEPOINTER available on arm64
+Date: Tue, 29 Jul 2025 18:07:25 +0200
+Subject: [PATCH v5 04/10] arm64: simplify interrupt code
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250729-b4-arm64-backtrace-symbols-v5-3-0009c4620a46@linaro.org>
+Message-Id: <20250729-b4-arm64-backtrace-symbols-v5-4-0009c4620a46@linaro.org>
 References: <20250729-b4-arm64-backtrace-symbols-v5-0-0009c4620a46@linaro.org>
 In-Reply-To: <20250729-b4-arm64-backtrace-symbols-v5-0-0009c4620a46@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -89,21 +89,21 @@ Cc: Simon Glass <sjg@chromium.org>,
  Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2793;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4376;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=Mw4RH2YSTpmzvYgrGKinq7mtwPHmaYZ0Rd4QoQyJZCs=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiPHB/LbcBMnNOMXh4TCNmUwIr2rcfF/08q9KD
- LZdKcVWWXeJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjxwQAKCRAFgzErGV9k
- tpD0D/0S2BgxZIEQWwWnn9zW3yqbLyQTClINGoYzYEezZ5yay68bL3WUPTPuxRmO2u9CImNWqpm
- 24ljKRGtZnYdZjU8cqsgYglfIcwxrDEQUNHyfh3t727drZb50cyGElRlqvPL/Pr3URVplaafM+T
- cP7NCyGy+daR3xj78J9szrIr1H1kaEjamx8IEagZIGBtaiDbWoo36CVU4Ui8psRptGcp1YJqygM
- V/STUfnJ6biVYrKH167NNzlo1gRZsVHWmYoPEoampHqXQYytbmP3hLbBzK+AAw41MAs2tk2hawk
- nKphCdi8TOxLGUXB5qiLD+28oYDgHQTv3QVbNzqyM0FF2ebfF8eizdTlP+hNc5FwWPALN9ICaGf
- B+H7tE3dyhiMI3e8y0Eu1G60luYXwggX3EfTUTjdYWE2B1gpvtJPVSR4Eh1GAd708VkyvfBvAdW
- aMEvYbOleZIsAkPSrpGGd/1+o97wfnJMKRIJ2k1FK+2Y65Xjfco+7nkhpWXQgyPYW6c8KH2fyuU
- 4q8MkW6nW0HkslxynCnWUTwTpQ6KSS/OuOPEb4VeYgA/Cn+Dqd4fOnTvFYBN+LtvJoPP/ehqzNS
- 2lF0vVOg9GZyOv+DlO4NFdSBKsdxoQmnNE8kEAyHf6h6nhhqisMYsyxfcto2Qq7wYcTYiVdgPBi
- kDl6d19RetmAMgg==
+ bh=fPu0dk9AHL3tpJtCCPWHurvWt0zPiyF9h4DkBoYxn6o=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoiPHB2tym8hkKl37HXrtlHjOshqCQmbklWVg4R
+ EFQ0l8Y9KuJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaIjxwQAKCRAFgzErGV9k
+ tjM2D/9dHCxBYovbNA1B2wRtCG2Ojs+ABegGDV/27+5cWY+xFTO5rYIz6wlDwdZkD1f+lAk9Kc6
+ 3HruELdCWqdKw8mmRJNJHcrp8CTNMM2vCEDx/YiNdnZl25SGHh0mCcEX8kOeECNEmxXRzZl0tI/
+ jyeh6qmwZOKif+Iss0grDAzVImrdMSvj/v9/YSIlh6wwYL5+4OAaVUd2vV277SccQOCqJPTvyjG
+ 3NJhWl0CXCgOsAFDTIQzQmjSv4ZbqfPNvdFSQZTBIUubZpLkk6izo+upTZRiWG+rV+EoH4RJy8O
+ a0GpkaaSHCtiJyl23JS3YGuoqUyoIacieVbgQQ+ML0yFGGGOQrn+aBlnTxcGIURqoEFZrcioO8m
+ 6fQMev1Gc25Y7l+ebUv6fdNy8Rl+I7JFsV8G6i8KhPVfN6QW8TjDi9rBroXn7YEoRowaDue73Nv
+ EhxZxYeBvL5lTuYaJXnzCATwnfE1hx8/gINkQo83YvQbxz/BFfd3zADS0Otnxihyd/isdeQfx6D
+ 3VnbN29rjPIQ3UXrfm6D/T6SzmpUR+zr9UEl1ot/3Kubjw+1/ixN7Kfas+7ocb52nAlVRmH2fVa
+ 9jY2q/BbaIdBGSY4On3eNYJwpiRuon/Swtv15RV+sTQWhjLXNwlIN4i4vHaCrm5rNmutWrc0zDN
+ +T8yjHkZQEJMBIA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -124,87 +124,150 @@ X-Virus-Status: Clean
 
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Move the frame pointer configuration to the generic setup section as it is
-applicable for multiple architectures (RISC-V, arm64).
+Carve out a function except_msg() to handle the output for most type of
+interrupts.
+
+Consistently use 16 digits for printing the exception syndrome register
+esr to match the register size.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- Kconfig            | 25 +++++++++++++++++++++++++
- arch/riscv/Kconfig | 21 ---------------------
- 2 files changed, 25 insertions(+), 21 deletions(-)
+ arch/arm/lib/interrupts_64.c | 62 ++++++++++++++++++--------------------------
+ 1 file changed, 25 insertions(+), 37 deletions(-)
 
-diff --git a/Kconfig b/Kconfig
-index c883f11545952588aff574fdceb88b43407352d9..d8e117d0b1a511f12f7a54be1c84f4c45634828a 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -178,8 +178,33 @@ config CC_COVERAGE
- 	help
- 	  Enabling this option will pass "--coverage" to gcc to compile
- 	  and link code instrumented for coverage analysis.
+diff --git a/arch/arm/lib/interrupts_64.c b/arch/arm/lib/interrupts_64.c
+index b3024ba514ec363bfc3b957df203fc784278037e..d13ee8d9f81dc8c41ef4732167663b223ab6ab3b 100644
+--- a/arch/arm/lib/interrupts_64.c
++++ b/arch/arm/lib/interrupts_64.c
+@@ -139,55 +139,55 @@ static bool smh_emulate_trap(struct pt_regs *regs)
+ 	regs->elr += size;
+ 	return true;
+ }
  
-+if ARM64 || RISCV
++/**
++ * except_msg() - print exception message
++ *
++ * Print exception message, register contents, backtrace, loaded EFI images.
++ *
++ * @msg:	message describing exception type
++ * @pt_regs:	registers
++ */
++static void except_msg(const char *msg, struct pt_regs *pt_regs)
++{
++	efi_restore_gd();
++	printf("%s handler, esr 0x%016lx\n", msg, pt_regs->esr);
++	show_regs(pt_regs);
++	show_efi_loaded_images(pt_regs);
++	panic("Resetting CPU ...\n");
++}
 +
-+config FRAMEPOINTER
-+	bool "Build with frame pointer for stack unwinding"
-+	help
-+	  Choose this option to use the frame pointer so the stack can be
-+	  unwound if needed. This is useful for tracing where faults came
-+	  from as the source may be several functions back
-+
-+	  If you say Y here, then the code size will be increased due to
-+	  having to store the fp.
-+
-+config SPL_FRAMEPOINTER
-+	bool "Build SPL with frame pointer for stack unwinding"
-+	depends on SPL
-+	help
-+	  Choose this option to use the frame pointer so the stack can be
-+	  unwound if needed. This is useful for tracing where faults came
-+	  from as the source may be several functions back
-+
-+	  If you say Y here, then the code size will be increased due to
-+	  having to store the fp.
-+
-+endif
-+
- config ASAN
- 	bool "Enable AddressSanitizer"
- 	depends on SANDBOX
- 	help
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 8c6feae5735592ad12880f1d460568768b848a44..f60ad5e9acec76aca773fb77a4016cecf41fc679 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -149,29 +149,8 @@ config ARCH_RV64I
- 	  Choose this option to target the RV64I base integer instruction set.
+ /*
+  * do_bad_sync handles the impossible case in the Synchronous Abort vector.
+  */
+ void do_bad_sync(struct pt_regs *pt_regs)
+ {
+-	efi_restore_gd();
+-	printf("Bad mode in \"Synchronous Abort\" handler, esr 0x%08lx\n",
+-	       pt_regs->esr);
+-	show_regs(pt_regs);
+-	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	except_msg("Bad mode in \"Synchronous Abort\"", pt_regs);
+ }
  
- endchoice
+ /*
+  * do_bad_irq handles the impossible case in the Irq vector.
+  */
+ void do_bad_irq(struct pt_regs *pt_regs)
+ {
+-	efi_restore_gd();
+-	printf("Bad mode in \"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
+-	show_regs(pt_regs);
+-	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	except_msg("Bad mode in \"Irq\"", pt_regs);
+ }
  
--config FRAMEPOINTER
--	bool "Build with frame pointer for stack unwinding"
--	help
--	  Choose this option to use the frame pointer so the stack can be
--	  unwound if needed. This is useful for tracing where faults came
--	  from as the source may be several functions back
--
--	  If you say Y here, then the code size will be increased due to
--	  having to store the fp.
--
--config SPL_FRAMEPOINTER
--	bool "Build SPL with frame pointer for stack unwinding"
--	depends on SPL
--	help
--	  Choose this option to use the frame pointer so the stack can be
--	  unwound if needed. This is useful for tracing where faults came
--	  from as the source may be several functions back
--
--	  If you say Y here, then the code size will be increased due to
--	  having to store the fp.
--
- choice
- 	prompt "Code Model"
- 	default CMODEL_MEDLOW
+ /*
+  * do_bad_fiq handles the impossible case in the Fiq vector.
+  */
+ void do_bad_fiq(struct pt_regs *pt_regs)
+ {
+-	efi_restore_gd();
+-	printf("Bad mode in \"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
+-	show_regs(pt_regs);
+-	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	except_msg("Bad mode in \"Fiq\"", pt_regs);
+ }
  
+ /*
+  * do_bad_error handles the impossible case in the Error vector.
+  */
+ void do_bad_error(struct pt_regs *pt_regs)
+ {
+-	efi_restore_gd();
+-	printf("Bad mode in \"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
+-	show_regs(pt_regs);
+-	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	except_msg("Bad mode in \"Error\"", pt_regs);
+ }
+ 
+ /*
+  * do_sync handles the Synchronous Abort exception.
+@@ -197,9 +197,9 @@ void do_sync(struct pt_regs *pt_regs)
+ 	if (CONFIG_IS_ENABLED(SEMIHOSTING_FALLBACK) &&
+ 	    smh_emulate_trap(pt_regs))
+ 		return;
+ 	efi_restore_gd();
+-	printf("\"Synchronous Abort\" handler, esr 0x%08lx", pt_regs->esr);
++	printf("\"Synchronous Abort\" handler, esr 0x%016lx", pt_regs->esr);
+ 	dump_far(pt_regs->esr);
+ 	printf("\n");
+ 	show_regs(pt_regs);
+ 	show_efi_loaded_images(pt_regs);
+@@ -210,25 +210,17 @@ void do_sync(struct pt_regs *pt_regs)
+  * do_irq handles the Irq exception.
+  */
+ void do_irq(struct pt_regs *pt_regs)
+ {
+-	efi_restore_gd();
+-	printf("\"Irq\" handler, esr 0x%08lx\n", pt_regs->esr);
+-	show_regs(pt_regs);
+-	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	except_msg("\"Irq\"", pt_regs);
+ }
+ 
+ /*
+  * do_fiq handles the Fiq exception.
+  */
+ void do_fiq(struct pt_regs *pt_regs)
+ {
+-	efi_restore_gd();
+-	printf("\"Fiq\" handler, esr 0x%08lx\n", pt_regs->esr);
+-	show_regs(pt_regs);
+-	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	except_msg("\"Fiq\"", pt_regs);
+ }
+ 
+ /*
+  * do_error handles the Error exception.
+@@ -237,10 +229,6 @@ void do_fiq(struct pt_regs *pt_regs)
+  * in processor specific code.
+  */
+ void __weak do_error(struct pt_regs *pt_regs)
+ {
+-	efi_restore_gd();
+-	printf("\"Error\" handler, esr 0x%08lx\n", pt_regs->esr);
+-	show_regs(pt_regs);
+-	show_efi_loaded_images(pt_regs);
+-	panic("Resetting CPU ...\n");
++	except_msg("\"Error\"", pt_regs);
+ }
 
 -- 
 2.50.0
