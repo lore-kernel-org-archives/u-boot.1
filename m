@@ -4,94 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7F5C87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 10:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17463C87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 11:18:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 646C181E06;
-	Tue, 29 Jul 2025 12:10:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3575382C87;
+	Tue, 29 Jul 2025 13:18:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hBw6vp5x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tgkWyGGe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6EBB82C65; Tue, 29 Jul 2025 12:10:15 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 0F4CC82CFA; Tue, 29 Jul 2025 13:18:44 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77091805D7
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 12:10:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D33182BCD
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 13:18:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4560cdf235cso25955025e9.1
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 03:10:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3b783ea5014so1533775f8f.0
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 04:18:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753783813; x=1754388613; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Klqzh+nzp7yPieg4QEzre+saFKuizwFoHoWLRVEl77g=;
- b=hBw6vp5xpXVncDVeXY1r/JnPM3FFYhpfDU6leyq8ON5aoHlHpYPwY+eOdUlezry2jx
- G2vnprtgv9MFqBooXFzW5oSIIXVh4tfPuxBEH0vYk4eZxSzWlU/tFo6NNmh40fk8mx/4
- iwEtrq8dfBQsmdPhcE96UcIK5JCf0WlSfy08NoTpQcEcpluqIGUM1/WL9SqGctp7YSsB
- VLSkA/Wl0KNeZC2WS19/6IzmvPWvaXIUn21hFsJkeJ/YI4KF9xIyjzeoxMWCyTKezn4O
- o41mjpVcJdoookI8exiqFt7KLSiUNkTaObukfkwrf8HnS6MKAUkgziO4ZuO25CD/oa7B
- +5RA==
+ d=linaro.org; s=google; t=1753787921; x=1754392721; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=66PSssizo4dOeBKQjOMt4jZ7O7j3BG0qJWLDUjX8C8M=;
+ b=tgkWyGGeT4HXI6hnur8Zj4/UOdownmKvHLXtAItn8ZIzPauts63uSwHwr0PIfINhO/
+ sERdX+7nCpQKqi7D5qnwsalTj56aCTt6yR6c5WcYVfi3uVZ9FSGIGPRUjPj3WohtXdW5
+ VWiWONZbYOJoXGZOYVjHDkF+eb50bZlIyXJOrYc8h42QCaZc8W1ptQB1nbSOtmRqhg08
+ kdMxoCjIeUShJeaJd0MopRjO4Q4V3lSJVYcUeUcAHNNwYWeNoTT/R6qqwcVAMsQTg598
+ DJEpP3XmWzGDlGCFBeVcjSERePTMss0kRbww52nsdU35BiFAIh8F/D2mgqWpurVw4oJh
+ PPqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753783813; x=1754388613;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Klqzh+nzp7yPieg4QEzre+saFKuizwFoHoWLRVEl77g=;
- b=wdshFsVL3eNjWYZKwpkkMVGQ0VON4sAPdDt32tciKyX44i+2c/dSK/WNEw/wdlhWFE
- uvxNEXo2KR0DC/O+RErG3VwLtlUiITdxvURn9t2KshbcWHY1Gc/iQjjCsASMxUKvjFCY
- MgisJ5pi9caZHbVFlCU807gKRUW6mEJQZIOh11HoJXg/BuugtCK7VW9AYY7dzphfv4N5
- jaMSy+CXD4tntha1k8Sjfxa8oKVqm7zl9q44KMuaSBfG5FUFfGzDq8SpMqw1TgApJ73C
- 2qrcuf8JBDVJ+05FQ2AcBzGfV/yFsRh7TJ6JClGHU+RWrjsxTDcLFvUz1BEkrtW/55F8
- HuGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVjJZZD8oawE4BgJwrrTanBOfyn0/0L2N2XEMsCHHbcyI2AQQaLoE0TAAAd/WrwRV9JKfKfRDA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdjyCCXY2cnVI6fE7Q/doDf8Xh2Sk2qH5giSP5OxaVoSifzBzb
- hCrDwDJwzxPREegU7fUZ0U/oZ5EEMI5GxPDxJj9zaKIkIUxxC+r1jMTfma687/ZzYG0=
-X-Gm-Gg: ASbGncvqQLvvFVhgM6yJXY7VYRi2rS3BFlydYNxsExXx2ui0rCN2/bBjj1mQ9Kg2Paf
- 4fCACO/AmEFVO2P0Z0ZoIiNXkskVsmzQACDvqEx5hXZrGmiBmzmoyMkiDZ5GoA0y52b3kqyqVtC
- Z/zBoWDnh9ds3yzImS0FHNBhlrWnLP+lgZfrC6SqFHaH4i2//7pYkN/pW3NKkll1C3WALRzTiOh
- aJ6MaqHg0kJM2ZkyERgSZJI7Dsh7KXZsO6KlRPWOV9LooRrU7nxgWRvpjCd06ntWzkywdSQnUZ/
- 7W+5Puy2Dd7elmoDawIbY2OvWqcxgwL9BHvgjkVufAv8KowroR9ZByqP0ROUTz3ZqST8R8zYzP8
- MgBFE4uUw7Rmzz4uvjgwTcOAEARmSC2NYsklUTvnR8g==
-X-Google-Smtp-Source: AGHT+IHSYR0DRFAbKrEiiL1iAWGw5XoUp12DRANa/cfXlwurYCmF9qRO0u8088Ucj3H72re2X1aJ0g==
-X-Received: by 2002:a05:600c:19d1:b0:456:eab:6344 with SMTP id
- 5b1f17b1804b1-4587631448fmr147061325e9.15.1753783812757; 
- Tue, 29 Jul 2025 03:10:12 -0700 (PDT)
-Received: from [172.20.10.8] ([185.99.24.47]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45870555065sm195698955e9.15.2025.07.29.03.10.10
+ d=1e100.net; s=20230601; t=1753787921; x=1754392721;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=66PSssizo4dOeBKQjOMt4jZ7O7j3BG0qJWLDUjX8C8M=;
+ b=GdetoBZGaCXvS+RYkkV+V5PcvPUThRC9wSLRXAVfy7Z+F5rd7NSmn3UnqgPvJTNIpY
+ OBNLoHBYw00Kzsb3YzDyhwUEHRcAKFhtZD7KCtRMmrxMltg4XNvsCCWM3hcFVzw5HlOk
+ 9MNJCSAHx3HTlxHvD0zDiMYUixwxr8hdtaxnIUFpRuEB1JVC9z3G9RSabTOPyAeUPNHo
+ n7aEofy28AUoQ4u7gsRm52AVzZUVzyhE3RoLvgzRXTkLLuwsYMAqLCPsVVbT0z3JoRHW
+ wXp3ddavndxxWz/uoUi2ckDctgPyZHCUk6cG4JDhgIzi+r763FWDols/UKKdejTiWyCY
+ 6bmQ==
+X-Gm-Message-State: AOJu0YxiF+xodJL5yrO7O7IHZr4FJ3zhOEPbe91Q8wfFQeLAHNuOVnx7
+ Dvnow3skRa1qMtrPXoF2cMbVE0fBHjNA/PO9E+yGigqncm84ZrX7FugWQA0tdPBtX3E=
+X-Gm-Gg: ASbGncs2jlEoUrk3+hjuxxK8hsXl+AfQJqCB67rmccmHxgP09juWIdTXaLP8iddiNdR
+ kl74TPJRaCm1syQSKVuTo8+LRb0iRmlZFYPGsQgbIGrubRXsdPv7r12BqotseIJPIwRHsfcV4tv
+ 1AMuSvKCl1RocyR5Rm/bVQqHZ3baFgtWNM5Tt41r24NbmUTKy9efBWZu7QBIjMQgh1ywD0nTVmw
+ pAr3vR1yQPVxhBHn7oDCZRl56ify51rlwqSykGLDV3hzQ1rgfW5vNHTN0hnQ/GBPKJLseS4i/M2
+ I1SOX7+fUJK4WH7CcsnSXRQKwDbhwSBLpZc8DoqetTBb9D4K6MonSnr+Jm2+Hh/N28ScdDThowJ
+ ifXeY/HDw9IfSdbn9tQbXL7I/KXAAzUx2/hOZG0NEj0omS2YQ/sKcyvUxpjHMr78Fi1DhWi2Qg2
+ K7vg==
+X-Google-Smtp-Source: AGHT+IGGXxa2s8dXz60EpIHRRSZ+QZDwdyKIh/XyTTSFg3owK8951X5P1BIDOJhtSVtMJs/JpM5xqw==
+X-Received: by 2002:a05:6000:3111:b0:3a4:f6ba:51da with SMTP id
+ ffacd0b85a97d-3b7765eda40mr9894663f8f.15.1753787920706; 
+ Tue, 29 Jul 2025 04:18:40 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:b80c:a2c7:328a:9067?
+ ([2a0a:ef40:f9e:3c01:b80c:a2c7:328a:9067])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4587054f31fsm186198585e9.10.2025.07.29.04.18.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Jul 2025 03:10:11 -0700 (PDT)
-Message-ID: <64795ab5-9516-4d8d-b228-8babbb6a34a4@linaro.org>
-Date: Tue, 29 Jul 2025 12:10:09 +0200
+ Tue, 29 Jul 2025 04:18:40 -0700 (PDT)
+Message-ID: <876b019c-4505-43cd-9247-3a63991e664c@linaro.org>
+Date: Tue, 29 Jul 2025 12:18:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] capsule_update: fix partition match to exclude
- uefisecapps
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- ilias.apalodimas@linaro.org, adrianox@gmail.com, moritzf@google.com,
- sjg@chromium.org, maks.mishinfz@gmail.com, javierm@redhat.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
- <20250724090009.569341-3-balaji.selvanathan@oss.qualcomm.com>
- <786a2fca-d137-45ff-91d4-6f9e8cf95f75@linaro.org>
- <1b8c2fcf-5ca2-4e76-96dd-35a8e37f9b4a@gmx.de>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <1b8c2fcf-5ca2-4e76-96dd-35a8e37f9b4a@gmx.de>
+Content-Language: en-GB
+To: Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan
+ <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: Smatch error report in drivers/misc/imx_ele/fuse.c
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,89 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Smatch reports the following error.
 
+drivers/misc/imx_ele/fuse.c:218 fuse_sense() error: buffer overflow 
+'data' 4 <= 7
 
-On 7/25/25 16:20, Heinrich Schuchardt wrote:
-> On 25.07.25 15:11, Casey Connolly wrote:
->> Hi Balaji,
->>
->> On 24/07/2025 11:00, Balaji Selvanathan wrote:
->>> - Update partition name match to use "uefi_" instead of "uefi".
->>> - Prevents incorrect matches with partitions like uefisecapps_a/b.
->>> - Ensures only uefi_a and uefi_b partitions are considered valid.
->>> - Fixes capsule update logic when identifying target partitions.
->>> - Avoids flashing to unintended secure apps partitions.
->>
->> Please rewrite this in sentences rather than bullet points, this should
->> only take a sentence or two to explain.
->>
->> Kind regards,
-> 
-> The patch does not describe why the change is needed.
-> 
-> Wouldn't the suggested patch break existing systems using uefia and 
-> uefib as partition names?
-> 
-> What is wrong about calling the A- and B-partition uefia and uefib 
-> respectively? Looking at the code it seems only important that the 
-> suffix is different. The suffix value seems to be ignored.
-> 
-> Reading the documentation I would not know if uefi_ALPHA and uefi_BRAVO 
-> are valid partition names for the A- and B-slots. I would have expected 
-> a matching documentation change in doc/boards/qualcomm describing the 
-> precise restrictions on naming the A- and B-partitions.
+Looking at the code I can see that at line 198, word is checked to be 
+less than 8. Later at line 203 data is declared as a 4 element array. 
+Then at line 218 word is used to index into data which means a possible 
+out of bounds access if word >=4.
 
-Some docs explaining this would be a good idea.
+There seems little point in increasing the array size of data as 
+ele_read_common_fuse will only ever read into the first 4 elements of 
+the array.
 
-These partitions are "firmware", they are provisioned from the factory 
-with these names and they always follow the same pattern. We make the 
-same assumption in U-Boot that these partitions exist and follow a 
-certain scheme. We do assume that there will never be a "uefia" 
-partition (if there were it would be added by the user probably on a 
-different LUN and this would not be where U-Boot is flashed anyway).
+So I am not sure what the correct fix is here. Is there any guarantee 
+that word will be < 4 in the case of word_index == 1? Or should this be 
+an additional check?
 
-If there is a product with a custom scheme which isn't supported by this 
-code then at that point we would look at adjusting this code to be more 
-generic somehow.
-
-iirc these partitions also have custom GPT type UUIDs, so it would 
-probably make sense to use those in the future rather than matching the 
-names and then we can avoid any potential confusion.
-
-In any case, I'm in favour of adding some docs with the expected 
-partition layout, I'll send a separate patch for that.
-
-Kind regards,
-// Casey (she/her)
-
-> 
-> Best regards
-> 
-> Heinrich
-> 
->>
->>>
->>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->>> ---
->>>   arch/arm/mach-snapdragon/capsule_update.c | 2 +-
->>>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/arch/arm/mach-snapdragon/capsule_update.c b/arch/arm/ 
->>> mach-snapdragon/capsule_update.c
->>> index 4dced4961b6..11ef4a0f4b9 100644
->>> --- a/arch/arm/mach-snapdragon/capsule_update.c
->>> +++ b/arch/arm/mach-snapdragon/capsule_update.c
->>> @@ -136,7 +136,7 @@ static int find_target_partition(int *devnum, 
->>> enum uclass_id *uclass,
->>>                * flags might not be set so we assume the A partition 
->>> unless the B
->>>                * partition is active.
->>>                */
->>> -            if (!strncmp(info.name, "uefi", strlen("uefi"))) {
->>> +            if (!strncmp(info.name, "uefi_", strlen("uefi_"))) {
->>>                   /*
->>>                    * If U-Boot was chainloaded somehow we can't be 
->>> flashed to
->>>                    * the uefi partition
-> 
-
+Thanks,
+Andrew
