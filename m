@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 487C6C87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:11:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82930C87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:11:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E80E38313F;
-	Wed, 30 Jul 2025 07:10:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C8C783197;
+	Wed, 30 Jul 2025 07:10:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ux81v9jl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hHl8zirp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E8A482BCD; Tue, 29 Jul 2025 14:51:33 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 19E0D82BA7; Tue, 29 Jul 2025 16:53:22 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4387982063
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 14:51:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D63D82B20
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 16:53:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aec5a714ae9so809392866b.3
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 05:51:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-76a3374b143so715182b3a.0
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 07:53:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753793490; x=1754398290; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TJMieX5OQv7o0ma5M4ETmr16p62GTM3QAVrJPgdsSKE=;
- b=Ux81v9jlYCxSkQsPoYNO+5cFcKGubtCyBBgFwKcfQgAyj2bjh9J61Cv27B3lVEQogN
- 83J7aVx8bFw19CzGv5KizbaqjlYAihPQfAlIr5JjdFAuPEwHe6Uc+Wfzo/qF/2hcpPlh
- g9qQrI0qbREBWPgPUYbxFpiWyZA9x/d+Qh5CRN4/wJeSJVyVCUtPuOodfS2260t8TuIZ
- CqgGhIuqeugwJXrqKMI33xBawkWANVc4iAJ9RUSAvWynh4hWQNFlixpSp0cfdJy6UQRf
- 2ceehvXtibZfYGYI+rR8iRla4z5JuOQaUjm4wUb7gOqokU96lKXiBh6Dq0d361f+rfjO
- sCqQ==
+ d=gmail.com; s=20230601; t=1753800797; x=1754405597; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KGkzBzpWaLPFnSXVG3yEQYA7LO3xz9tvWrBbImOvh8M=;
+ b=hHl8zirpYn8VpyhLtAUiSKBL1qgHjjynqJVABaNJV2rmcjQQHhv+3ic6cK8t6MjmXm
+ BSJj44aUdqko2opDSCpfh1YnsiJBROI4Bf+Bjj5Vx+Kgq5sQGCLpSr31+Zp4YxOFqaBq
+ wlnPpIgOB+lxANjtXGrMAmdLfpGqlJznrfC4dOgGqP8p4KzVWnp4EmSNJhWTrRxsyRxR
+ NY3Smp/G6YJ5qhZt/RqCAWRfPRspCN8luQxpmFBO75Ty4eU9lBKTo922C5j15qkb/POw
+ Md3JWtdj5eeFqdq/sTxT3T5etXfzGG755x9PEAhH1ewn6/k+sDqlzYByjt4aCfx9gMSN
+ Y7rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753793490; x=1754398290;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TJMieX5OQv7o0ma5M4ETmr16p62GTM3QAVrJPgdsSKE=;
- b=HfQ2MoKoK30r/EU6IBD5tVW1BAvFqSF3x127F7YjxbQx/vWjy0IEnXceex11UIwlZL
- 992j58v8Jjud6MC986nfNhmob+IAJ6a9CSSrL4SusUArj4XYMsK4BlNxEvh4KxqZVMyj
- gpjWJAmTclN4pfww41dsOEsjhVIEBVBhikQlip+pfmrk/7/4aYjT5foCtR4vWTRIiTvN
- N3TNZrGaNNd0nSN46mEXxqsAX2Vh4MR5OMsZz1lNAtk5neQeIHD2hMFx2qwkjiwZZJSj
- LX6dFKlZynRoAvGbX/twMEBgGQtCCu4lCGpbARkEdJV7TGIvZ2aXofU54ijooQOd+DOs
- a8ow==
-X-Gm-Message-State: AOJu0YzAi+D4l5ZIozMMYWFD5S3jDnB6W1mnhTufvoY8Iy8TQ+9bW1zp
- qhmFJiQpEh3OxvfsVu9pggmaWhnUyuOSerqcUJsYQXcdgp+8QlQxjATLdIJtU0Z1
-X-Gm-Gg: ASbGncsR93p8tUn/e4uMb9V+QUk8eYzqsmO1lajr7Q0gC2Vh9DQwFAfgoeDtRqWHA8O
- P23S2skWZrRcR6DvxQuYgqtHQsfa/rxg2DQLORJqBMXzJdqmJPM5RksqRMKAnhln+IFjzpzgO2t
- Ox5JLJM7RUYin91Wc58UGH6wGqcKeLT+9aesG6GlkwVUA9jnCuhX70Xm4xGR/L15SV9BuqzO91D
- BRJffC7vhFVJF3VQStNi0ROuP28HX6yXKGEIlA013JeMRq1GPrQKGglTE7Pc7Q6TgYGzq/Q1NmF
- sD+11oxOmPx1+wxUHl8GgZ3i+jRLvCLNBLLCbSIHBgtntYPzqG4Qbh0SepPNKrANOeakrvYD6XQ
- R2+OcgEHJ6I33S0K8UPzMx6UrcvsdAWzYByC1JKIK5hGlO5v0qwNddmzblvdYINUqUOYS4FM=
-X-Google-Smtp-Source: AGHT+IHJDfHnWPn0n4op+E4gVybpckOvTInM6aB4Bn9LvGM7PQAzc1JuJ6ee6fmtjNK8eeAi+hX9LA==
-X-Received: by 2002:a17:907:8691:b0:ae3:7113:d6f1 with SMTP id
- a640c23a62f3a-af61cf9830fmr1836084466b.25.1753793490354; 
- Tue, 29 Jul 2025 05:51:30 -0700 (PDT)
-Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
- [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af635acc99esm572223366b.115.2025.07.29.05.51.24
+ d=1e100.net; s=20230601; t=1753800797; x=1754405597;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KGkzBzpWaLPFnSXVG3yEQYA7LO3xz9tvWrBbImOvh8M=;
+ b=tvJbUKr41uOXTKpQ1ELT+CujuHSRYLxrzvsE5l78GIsjoW6Ce+j82L6LD6XhJkr4wK
+ tEfBCmrB59owW1TXypqJXQHm26ck84DVmnITkogw55vk4LkjgWG0dqZbLzS/T6GOuh2G
+ fYS7lnX3JJu4y8Uud9wyOobQY9xUKcENwiG4nxzWLlBjUjKpXv95/Xr0h0lnDe9DBCHL
+ sZ2Oa9uZ3DoSr4U7xHKXLAMuZnm+fkSEcwDmWJ379iC3etjZ6hgs19eUjD7xZYV0uRYz
+ cpXb56gJAnI2jmvnyI9W/0y9BBmG84dYlZIpmV/+sbO5tLCOtnpYrlcJaxOes42aiFf5
+ 3Q9g==
+X-Gm-Message-State: AOJu0YzeugigdfBaymn7pVHhZsPubhEoLWYptOMm4iPXvKhl4md3qbkk
+ OSps5fyiGKqvb+FLfbx3J57xKNgRudLtuZmMDe5+p/haKfReX3JJvI+nxnf8xQ==
+X-Gm-Gg: ASbGncv4mTkJGRRnOjGjoHJunTz3skbQEhGfH7XPkjodi1Ib442mYy2zArMuc2mKKWe
+ 81q+D1u9picCoSAzSufyfdskQ1jL2a8dWOJU8SxjaiiN6ZAUTE0NLxMl06+jrnRBDikCcDwpyZD
+ q9K6Y8NekAqa2G93XRbWiAIOKw2imcMuNiKlx3sD8PRSkrM7h3bdQgIwo5vDIC7MoKVCJkddZt4
+ GM/GYQzP7qelSy4oiTP3bQT2fKCBA9LX9B4almtGnSgwPzK1LINyG+3Gql+OUpP0TJkP48YO713
+ ngcR4b3ERIfhE6BE/ffYB31W8iz1IThXOn1JCvqeQZ2f6IrsA7wtRbzMr3EoD3YTZgMAMn9sm2Q
+ LRfC988f+mNq/GGpD6jE4S9Yr4pWd3jJOBL4n84MJ/97Kq3RQdLV8CsteISrtl+grdawuFq+PWt
+ nn9cscU3K6F+Z4v2bBqg==
+X-Google-Smtp-Source: AGHT+IFPqsBdCjBqw5pbgSfyfCefdSXzyBYYXp2b/e82YK1r2ZYST2mwt+TqqjJeprOtc+qxDD0b/g==
+X-Received: by 2002:a05:6a20:3ca3:b0:239:c5f:62a1 with SMTP id
+ adf61e73a8af0-23d701a8e3dmr22651502637.33.1753800797242; 
+ Tue, 29 Jul 2025 07:53:17 -0700 (PDT)
+Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7640b4c8516sm8232951b3a.106.2025.07.29.07.53.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 05:51:30 -0700 (PDT)
-From: Aristo Chen <jj251510319013@gmail.com>
-X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
- al.kochet@gmail.com, paul.henrys_ext@softathome.com, bb@ti.com,
- y.moog@phytec.de, w.egorov@phytec.de, francesco.dolcini@toradex.com,
- ggiordano@phytec.com, n-francis@ti.com, afd@ti.com, d.schultz@phytec.de,
- d-gole@ti.com, ravi@prevas.dk, carlos.lopezr4096@gmail.com,
- Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 5/5] test: Add test case for FIT image load address overlap
- detection
-Date: Tue, 29 Jul 2025 12:48:56 +0000
-Message-ID: <20250729125022.4220-6-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250729125022.4220-1-aristo.chen@canonical.com>
-References: <20250729125022.4220-1-aristo.chen@canonical.com>
+ Tue, 29 Jul 2025 07:53:16 -0700 (PDT)
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+To: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
+ tien.fong.chee@altera.com, trini@konsulko.com, sjg@chromium.org,
+ xypron.glpk@gmx.de, seanga2@gmail.com
+Cc: lucienzx159@gmail.com, lucien.jheng@airoha.com, frank-w@public-files.de,
+ daniel@makrotopia.org, albert-al.lee@airoha.com
+Subject: [U-Boot, v3,
+ 1/1] misc: fs_loader: Add request_firmware_into_buf_via_script() for
+ flexible firmware loading via U-Boot script
+Date: Tue, 29 Jul 2025 22:51:46 +0800
+Message-Id: <20250729145146.2935-1-lucienzx159@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 30 Jul 2025 07:10:08 +0200
@@ -105,102 +101,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new test case to verify that mkimage properly detects and reports
-memory region overlaps in FIT image configurations.
+This commit introduces a new API,
+request_firmware_into_buf_via_script(), to the fs_loader framework.
+This function allows firmware to be loaded into memory using
+a user-defined U-Boot script, providing greater flexibility for
+firmware loading scenarios that cannot be handled by static file
+paths or device/partition selection alone.
 
-The test creates a FIT image with kernel and FDT components that have
-the same load address (0x40000), which should trigger the overlap
-detection logic and cause mkimage to fail with an appropriate error
-message.
+Key features:
+- The API runs a specified U-Boot script (by name), which is responsible
+  for loading the firmware into memory by any means (e.g., load from MMC, USB, network, etc.).
+- The script must set two environment variables: 'fw_addr'
+  (the memory address where the firmware is loaded) and
+  'fw_size' (the size of the firmware in bytes).
+- The function validates these variables, copies the firmware into a newly
+  allocated buffer (using memdup), and returns the pointer
+  via the provided double pointer argument.
+- The maximum allowed firmware size is checked to prevent buffer overflows.
+- The environment variables are cleared after use to avoid stale data.
+- Detailed error messages are provided for all failure conditions to aid debugging.
 
-Test verifies:
-- mkimage returns non-zero exit code when overlap is detected
-- Error message contains "Error: Overlap detected:"
-- Error message identifies the specific overlapping components
-  (kernel@1 and fdt@1)
+Usage example:
+1. Define a U-Boot script in the environment that loads the firmware
+   and sets the required variables:
+   => env set my_fw_script 'load mmc 0:1 ${loadaddr} firmware.bin &&
+   env set fw_addr ${loadaddr} && env set fw_size ${filesize}'
 
-This test ensures the overlap detection feature works correctly and
-prevents deployment of FIT images with conflicting memory layouts
-that could cause runtime failures.
+2. In your code, call the new API:
+   void *fw_buf = NULL;
+   int ret = request_firmware_into_buf_via_script(&fw_buf, 0x46000000, "my_fw_script");
+   if (ret < 0)
+      return ret;
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+This approach allows board integrators and users to customize the firmware
+loading process without modifying the source code,
+simply by changing the script in the U-Boot environment.
+
+Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
 ---
- test/py/tests/test_fit_mkimage_validate.py | 65 ++++++++++++++++++++++
- 1 file changed, 65 insertions(+)
+Change in PATCH v3:
+air_en8811h.c:
+ * Use "fmt -w 72" to shrink the commit message to fit within 72 characters.
+ * expand the script en8811h_load_firmware to erase memory before loading firmware,
+   and to check the filesize after loading the first part of the firmware
 
-diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests/test_fit_mkimage_validate.py
-index ef974c8c762..51f7f64b257 100644
---- a/test/py/tests/test_fit_mkimage_validate.py
-+++ b/test/py/tests/test_fit_mkimage_validate.py
-@@ -101,3 +101,68 @@ def test_fit_invalid_default_config(ubman):
- 
-     assert result.returncode != 0, "mkimage should fail due to missing default config"
-     assert re.search(r"Default configuration '.*' not found under /configurations", result.stderr)
+Since the Airoha EN8811H requires MD32 firmware to be loaded via MDIO,
+and U-Boot currently supports various FW loading methods (e.g., partition or rootfs for MMC),
+I've followed Marek Vasut's advice [1] to implement this via U-Boot scripts.
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20250617081641.8385-5-marek.vasut+renesas@mailbox.org/
+
+This commit expands the existing `fs_loader` concept by adding U-Boot script functionality.
+This leverages U-Boot environment variables, providing significant flexibility
+for FW loading without requiring CONFIG_* modifications or recompilations.
+
+I've validated this API on the Banana Pi R3 Mini. Here are my test commands and logs:
+1.  `env set en8811h_load_firmware 'env set fw_addr 0x46000000 && env set fw_size 0x24000 && mw.b ${fw_addr} 0 ${fw_size} && load mmc 0:3 0x46000000 /boot/EthMD32.dm.bin && if test ${filesize} -eq 4000; then load mmc 0:3 0x46004000 /boot/EthMD32.DSP.bin; else echo "loading MD32 FW failed"; env set fw_size 0; exit 1;fi'`
+````Test Log````
+Net:   16384 bytes read in 1 ms (15.6 MiB/s)
+131072 bytes read in 9 ms (13.9 MiB/s)
+addr: 0x46000000, size: 0x24000
+Found Airoha Firmware.
+MD32 firmware version: 24112802
+````End of Test Log````
+
+2.  `env set en8811h_load_firmware 'env set fw_addr 0x46000000 && env set fw_size 0x24000 && mmc partconf 0 1 2 2 && mmc read $fw_addr 0x0 0x120 && mmc partconf 0 1 1 0'`
+````Test Log````
+Net:   MMC read: dev # 0, block # 0, count 288 ... 288 blocks read: OK
+addr: 0x46000000, size: 0x24000
+Found Airoha Firmware.
+MD32 firmware version: 24112802
+````End of Test Log````
+
+Test Logs:
+https://gist.github.com/bjxlucX123/6098f927c790861dbcebb87ea0059af5
+
+ drivers/misc/fs_loader.c | 72 ++++++++++++++++++++++++++++++++++++++++
+ include/fs_loader.h      | 24 ++++++++++++++
+ 2 files changed, 96 insertions(+)
+
+diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+index 66803f4b997..202ee7c7bfb 100644
+--- a/drivers/misc/fs_loader.c
++++ b/drivers/misc/fs_loader.c
+@@ -228,6 +228,78 @@ int request_firmware_into_buf(struct udevice *dev,
+ 	return ret;
+ }
+
++/**
++ * request_firmware_into_buf_via_script() -
++ * Load firmware using a U-Boot script and copy to buffer
++ * @buf: Pointer to a void* that will receive a pointer to the copied firmware buffer.
++ * @max_size: Maximum allowed size for the firmware to be loaded.
++ * @script_name: Name of the U-Boot script to execute for firmware loading.
++ *
++ * Executes a U-Boot script (@script_name) that loads firmware into
++ * memory and sets the environment variables 'fw_addr' (address) and
++ * 'fw_size' (size in bytes). Allocates a buffer, copies the firmware
++ * from the given address, and returns the pointer via @buf.
++ *
++ * The script must set these environment variables:
++ *   fw_addr - Address where firmware is loaded in memory
++ *   fw_size - Size of the firmware in bytes
++ *
++ * The script should be defined in the U-Boot environment, for example:
++ *   env set script_name 'load mmc 0:1 ${loadaddr} firmware.bin &&
++ *   env set fw_addr ${loadaddr} && env set fw_size ${filesize}
++ * Return: 0 on success, negative value on error.
++ */
++int request_firmware_into_buf_via_script(void **buf, size_t max_size,
++                                      const char *script_name)
++{
++	ulong addr, size;
++	int ret;
++	char cmd[32];
 +
-+def test_fit_load_addr_overlap(ubman):
-+    """Test that mkimage fails when load address overlap"""
++	if (!buf || !script_name || !max_size)
++		return -EINVAL;
 +
-+    its_fname = fit_util.make_fname(ubman, "invalid.its")
-+    itb_fname = fit_util.make_fname(ubman, "invalid.itb")
-+    kernel = fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
-+    fdt = fit_util.make_dtb(ubman, '''
-+/dts-v1/;
-+/ {
-+    model = "Test FDT";
-+    compatible = "test";
-+};
-+''', 'test')
++	/* Create command to run the firmware loading script */
++	snprintf(cmd, sizeof(cmd), "run %s", script_name);
 +
-+    # Write ITS with an invalid reference to a nonexistent default config
-+    its_text = '''
-+/dts-v1/;
++	/* Run the firmware loading script */
++	ret = run_command_list(cmd, -1, 0);
++	if (ret) {
++		log_err("Firmware loading script '%s' not defined or failed.\n",
++		       script_name);
++		return -EINVAL;
++	}
 +
-+/ {
-+    images {
-+        kernel@1 {
-+            description = "Test Kernel";
-+            data = /incbin/("kernel.bin");
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x40000>;
-+            entry = <0x40000>;
-+        };
-+        fdt@1 {
-+            description = "Test FDT";
-+            data = /incbin/("test.dtb");
-+            type = "flat_dt";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x40000>;
-+            entry = <0x40000>;
-+        };
-+    };
++	/* Find out where the firmware got loaded and how long it is */
++	addr = env_get_hex("fw_addr", 0);
++	size = env_get_hex("fw_size", 0);
 +
-+    configurations {
-+        default = "conf@1";
-+        conf@1 {
-+            kernel = "kernel@1";
-+            fdt = "fdt@1";
-+        };
-+    };
-+};
-+'''
++	/* Clear the variables set by the firmware loading script */
++	env_set("fw_addr", NULL);
++	env_set("fw_size", NULL);
 +
-+    with open(its_fname, 'w') as f:
-+        f.write(its_text)
++	if (!addr || !size) {
++		log_err("Firmware address (0x%lx) or size (0x%lx) are invalid.\n",
++			addr, size);
++		return -EINVAL;
++	}
 +
-+    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
-+    cmd = [mkimage, '-f', its_fname, itb_fname]
++	/* Validate the firmware size against the buffer size */
++	if (size > max_size) {
++		log_err("Firmware size (0x%lx) exceeds buffer size (0x%zx).\n",
++			size, max_size);
++		return -EINVAL;
++	}
 +
-+    result = subprocess.run(cmd, capture_output=True, text=True)
++	*buf = (void *)memdup((void *)addr, size);
++	if (!*buf) {
++		log_err("Failed to allocate memory for firmware copy.\n");
++		return -ENOMEM;
++	}
 +
-+    assert result.returncode != 0, "mkimage should fail due to memory overlap"
-+    assert "Error: Overlap detected:" in result.stderr
-+    # Check that it identifies the specific overlapping components
-+    assert "kernel@1" in result.stderr and "fdt@1" in result.stderr
--- 
-2.43.0
++	return 0;
++}
++
+ static int fs_loader_of_to_plat(struct udevice *dev)
+ {
+ 	u32 phandlepart[2];
+diff --git a/include/fs_loader.h b/include/fs_loader.h
+index 5eb5b7ab4a1..97ed4cc2af0 100644
+--- a/include/fs_loader.h
++++ b/include/fs_loader.h
+@@ -64,4 +64,28 @@ int request_firmware_into_buf(struct udevice *dev,
+  * Return: 0 on success, negative value on error
+  */
+ int get_fs_loader(struct udevice **dev);
++
++/**
++ * request_firmware_into_buf_via_script() -
++ * Load firmware using a U-Boot script and copy to buffer
++ * @buf: Pointer to a void* that will receive a pointer to the copied firmware buffer.
++ * @max_size: Maximum allowed size for the firmware to be loaded.
++ * @script_name: Name of the U-Boot script to execute for firmware loading.
++ *
++ * Executes a U-Boot script (@script_name) that loads firmware into
++ * memory and sets the environment variables 'fw_addr' (address) and
++ * 'fw_size' (size in bytes). Allocates a buffer, copies the firmware
++ * from the given address, and returns the pointer via @buf.
++ *
++ * The script must set these environment variables:
++ *   fw_addr - Address where firmware is loaded in memory
++ *   fw_size - Size of the firmware in bytes
++ *
++ * The script should be defined in the U-Boot environment, for example:
++ *   env set script_name 'load mmc 0:1 ${loadaddr} firmware.bin &&
++ *   env set fw_addr ${loadaddr} && env set fw_size ${filesize}
++ * Return: 0 on success, negative value on error.
++ */
++int request_firmware_into_buf_via_script(void **buf, size_t max_size,
++                                      const char *script_name);
+ #endif
+--
+2.34.1
 
