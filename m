@@ -4,124 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFDE3C87FCA
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 04:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E2FC87FC9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 05:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6129982CBB;
-	Tue, 29 Jul 2025 06:30:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 777D782CFA;
+	Tue, 29 Jul 2025 07:33:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="LdTQJOMR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ttj6YPkB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 288A282CFA; Tue, 29 Jul 2025 06:30:30 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B985C82C65
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 06:30:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56SM3wYu005231
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 04:30:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- uyZkHyLoYMns8FUcvFDoERvxTnS/9LEh60Xsxy0vTX8=; b=LdTQJOMRzwYWRTBj
- EU3isym1XQIV/rweaWRYvP5vPsSmVF6RyUA+lPQ3N0vz2M4aF59A3NHPc7G3rkz0
- DN4Qn2MNc/6VbbKKUt5tnEi0CUdW0MqukwfPNJBIt2yEJ4rME09iRDnZ8esrw5dF
- wIf1iDuwtkk/uL/cHBk4iiwxNlnGahP63mPHhpgkP1Kk9GTbml8Vo7I3LA2KKaIx
- lf7VJHoHNwmYpJknP8j0v6J0PoHvh1ME+T5ODyusG6eNQkPqM/EJMay1TYwdz0XV
- 6D1vY0wG5/nmsjiaG/7x79ijlFp1FSLKYs//aWm65h7QZX9+DE8EvoIvBdzsSKOx
- sAA5vg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 484nytxy6k-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 04:30:25 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-31f2dd30823so797753a91.0
- for <u-boot@lists.denx.de>; Mon, 28 Jul 2025 21:30:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753763424; x=1754368224;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uyZkHyLoYMns8FUcvFDoERvxTnS/9LEh60Xsxy0vTX8=;
- b=p1F9s/RnHiulR3UHO5j+n9CRqx+HzxIAGAOFAIf7F7RxN7y+GGc04mQ3Vb08QVoNgA
- F134g14otKhBQ7kzYX+TZwYVimpyM3zVoyaZQ0T/kqgOEOG8jOAMwRWjglBHgK+UbgW1
- MahHlr6mPqPDJWIkf8zIDiR1d4JcM1lHPjqyxPdvGpbUADPNzSCnjA4h3x4In3ReSTN8
- SBQm0zm1aLHQambxEtfwXsJjAxizmVnj7X8rsz/llvu39ZykdFQetzStjz5bv2w4Xdz+
- zqXW6Y0dsLgOovEtWd8jxBOpz+EFulBn6jfPzrwhO8fy1bukB9BczKcWALaY2vZ22Vnf
- bqHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEYLNsxcVet/XJXRuwsrnK3t9SNDCae3/422IaZ8se8RzVeqUm9tPPpfJ5vFx44cklclxJhkQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrOwgch7wCit4phcfITwBr+15O3yKF6tebaX2RKb9EljBkzVD0
- kOOqUTvybUsYZe7eQWmCCxCC9YZfCilKeU+iDY8Cy4jl0Yb7XxL0rRiNnV+pOE9E+VMsUjMkEQ/
- m7F+Cx2dG2Pwq/58Zkuf9OVsB580MMYIhvEvO6oKvekWGbMHRopRdGgmF8vZzhwkL
-X-Gm-Gg: ASbGncvxvqUQ9s8tu0Hue68I1dywqAI2BoFbziz6I/o9D9Q3EM7srQ3YH7A33aQ9bJH
- OYJVEmJpqH9HOvbXQgOY8Yu/rDCe/1pYT82u85H3eLM3abGzqlOzhfrNAxvaiWFVUCzmnmqkscP
- x5X+4zJ5AVjib0Y2yL0BLfGHEr5fqEUufvE0ELM5Oww8A0bGzy/MJQ7HvIJeuVlTxUnkKE4KIXQ
- 2n2/7j4+Z0zL5wPgcIi32I6eiW08yQO+1PBeQwjbbvHMui+BF4rysk8JbC/EunicpX4/0vsVbLX
- zJ4RhkhtiJNpFckXsgmwOhWgxf3JpUpcpeiHHVUdZhG6abgcP1V62OwpJdC66E+Oz9vCYsv2
-X-Received: by 2002:a17:90b:4f46:b0:31f:3c3:947c with SMTP id
- 98e67ed59e1d1-31f03c395camr6748992a91.10.1753763424346; 
- Mon, 28 Jul 2025 21:30:24 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEU3j+9GPBsvhD8gc8QumCH5vqwkLZ3S+A+M24Jzi6wf1HsVa2qhmqUX/RQ4XpPvG/H64sk2g==
-X-Received: by 2002:a17:90b:4f46:b0:31f:3c3:947c with SMTP id
- 98e67ed59e1d1-31f03c395camr6748941a91.10.1753763423744; 
- Mon, 28 Jul 2025 21:30:23 -0700 (PDT)
-Received: from [10.151.41.95] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31f328b9dfcsm413186a91.16.2025.07.28.21.30.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Jul 2025 21:30:23 -0700 (PDT)
-Message-ID: <434bd963-2e86-42fa-843f-a49932b99a1b@oss.qualcomm.com>
-Date: Tue, 29 Jul 2025 10:00:17 +0530
+ id 317B082D21; Tue, 29 Jul 2025 07:33:34 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 996D982BCD
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 07:33:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56T5XQoC2888857;
+ Tue, 29 Jul 2025 00:33:26 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753767206;
+ bh=RwN1RAKgq6F0dBsfMJqk2KVirZJABZwDf68Gb9WobfM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Ttj6YPkBM7Syq1skU5tIRs+0JLhHUP2ehZzqZ4a2vb+RXy9ZptlDG/evk+0W9yJu7
+ zzoODmloYJ6XhtFgbYx2OEy8VzkkH/cJNBa1ReP8b75TySj5aj/0SMcE5xTtzQ7cyg
+ fvDfyV9Z1vltbqQ4hy4L0jImQ6lEuh7JvXWJOrB8=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56T5XQG51582328
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 29 Jul 2025 00:33:26 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 29
+ Jul 2025 00:33:25 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 29 Jul 2025 00:33:25 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [172.24.231.84])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56T5XOYM2900862;
+ Tue, 29 Jul 2025 00:33:25 -0500
+Date: Tue, 29 Jul 2025 11:03:24 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Andrew Davis <afd@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>, "Siddharth
+ Vadapalli" <s-vadapalli@ti.com>, <vigneshr@ti.com>,
+ <bb@ti.com>, <nm@ti.com>, <m-chawdhry@ti.com>, <vaishnav.a@ti.com>,
+ <j-choudhary@ti.com>, <a-nandan@ti.com>, <a-dutta@ti.com>,
+ <anshuld@ti.com>, <jm@ti.com>, <p-mantena@ti.com>, <n-francis@ti.com>,
+ <s-k6@ti.com>, <rogerq@kernel.org>, <kamlesh@ti.com>,
+ <a-shenai@ti.com>, <c-vankar@ti.com>, <kishon@ti.com>,
+ <dannenberg@ti.com>, <h-salunke@ti.com>, <u-boot@lists.denx.de>,
+ <praneeth@ti.com>, <srk@ti.com>
+Subject: Re: [PATCH 01/45] configs: am335x_baltos_defconfig: Increase aneg
+ timeout to 20000 ms
+Message-ID: <106bb841-8fb1-490f-bc84-e49877b74db7@ti.com>
+References: <20250728145034.225997-1-s-vadapalli@ti.com>
+ <20250728145034.225997-2-s-vadapalli@ti.com>
+ <a0f6b8ef-ac29-4f53-8d02-c20b1cb0305c@ti.com>
+ <9303e5f8-9723-45e4-9ef6-5aef6234bd10@ti.com>
+ <20250728165329.GI1807455@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] efi_loader: improve device path matching for
- partition lookup
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, ilias.apalodimas@linaro.org, adrianox@gmail.com,
- moritzf@google.com, sjg@chromium.org, maks.mishinfz@gmail.com,
- javierm@redhat.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
- <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
- <0ccad71c-6fc8-4c10-b017-85f31f77c161@gmx.de>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <0ccad71c-6fc8-4c10-b017-85f31f77c161@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: BRcO1ty5tthEXCAkLnJUWaWaU67XjpM_
-X-Proofpoint-ORIG-GUID: BRcO1ty5tthEXCAkLnJUWaWaU67XjpM_
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI5MDAyOCBTYWx0ZWRfX40i53zLYTJ4k
- chGx2IT+BaIs6yvxCQFoZh8JqG6YZvNmByslbM7a26SyRn8sdIszCFZfQZ4NoWv20mwjkkQigLV
- DUhaFknNHGhLW8rOdiS+auIgIzCP7FIFSOiBedC2i5YmaxBoFy0bhfwcgPnSXcyE/rWRHBy9Ku3
- V0YYdvYSTe5z/fEJfn/hvtN2FGrjy4U0ICSVpSRDcDq683tLHhOlG7uoAZ+RRmKmoqMchS6H2y9
- zNraN0eqmGMqSha0puR11yxBVgCKLZqQmIVmoOWvIm9bMGaVOFd1xG/zF8/E0VxftRhUfUop/nj
- NCvjBBQrA38LpnXZoKWzY1KTieJOkthzOaz6gbKBcmHXwQYue4DiVDkehp/bKzGhAsb1zCLGeIr
- l0a58U1u/6pBjG8C4ANhROqkCDTrWVI20zV4OruU4Z83N/uKpufTHzUmolLRO6WCUdRimtfV
-X-Authority-Analysis: v=2.4 cv=CLoqXQrD c=1 sm=1 tr=0 ts=68884e61 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=Wb1JkmetP80A:10 a=7ikdQer9Sff-Y0ePSHEA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-29_01,2025-07-28_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 adultscore=0 suspectscore=0 mlxlogscore=981 spamscore=0
- priorityscore=1501 phishscore=0 lowpriorityscore=0 malwarescore=0 bulkscore=0
- clxscore=1015 impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507290028
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250728165329.GI1807455@bill-the-cat>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,40 +91,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Mon, Jul 28, 2025 at 10:53:29AM -0600, Tom Rini wrote:
 
-Please find the answers to your queries below:
+Hello Tom,
 
-How to reproduce:
-                 1.Take the upstream code
-                 2.Place the capsule in /EFI/UpdateCapsule in the ESP 
-partition (in kernel)
-                 3.Reboot
-                 4.U-Boot fails to find the ESP partition and continues 
-with normal boot
+> On Mon, Jul 28, 2025 at 11:36:53AM -0500, Andrew Davis wrote:
+> > On 7/28/25 10:33 AM, Kumar, Udit wrote:
+> > > 
+> > > On 7/28/2025 8:19 PM, Siddharth Vadapalli wrote:
+> > > > Increase the PHY Auto-Negotiation timeout to 20,000 ms from the current
+> > > > default of 4,000 ms inherited from "Kconfig" for PHY_ANEG_TIMEOUT.
+> > > > 
+> > > > The motivation for this change is that existing devices will continue
+> > > > working as-is (timeout is an upper bound and auto-negotiation can be
+> > > > done earlier), while older Hardware connected to the board that might
+> > > > occasionally take longer than 4,000 ms for the Auto-Negotiation process
+> > > > will benefit from an increased timeout.
+> > > 
+> > > 
+> > > Can we think of using TI_COMMON_OPTION , similar to TI_COMMON_CMD_OPTIONS
+> > > 
+> > 
+> > Or simply change the default in Kconfig to something like:
+> > 
+> > default 20000 if ARCH_K3 || ARCH_OMAP2PLUS || ARCH_KEYSTONE
+> > default 4000
+> > 
+> > Much better than 45 patches updating each board defconfig individually.
+> > 
+> > Side question, if this is right for TI plats, why is it not right for
+> > all the other platforms? Should this be the new base default timeout?
+> > I don't really think so in either case, the point of the timeout is to
+> > switch to a fallback port or boot mode in a reasonable time, not sure
+> > 20 seconds is reasonable..
+> > 
+> > (you probably don't need ~50 people in the TO/CC on this one either, not
+> > everyone who has ever touched the defconfigs cares about PHY timeouts)
+> 
+> [trimmed the CC list a bit]
+> 
+> The other part of this to me is, is this even right outside of "we have
+> a big test board farm" ? And since this is read from the environment now
+> (yes?) can we instead not just expect big labs to update the
+> environment? Or no, too many of these will lack persistent environments?
 
-Which caller fails:
-/find_boot_device /function in /efi_capsule_scan_dir/ fails; 
-particularly /device_is_present_and_system_part/ in /find_boot_device/ 
-(line 990) fails for all boot options
-                 In /device_is_present_and_system_part/, 
-"/efi_dp_find_obj(dp, &efi_system_partition_guid, &rem);/" fails
-                 In /efi_dp_find_obj/ function, in /find_handle/ 
-function, this condition is triggered (in line 142): "/if (len_current > 
-len)/", because of which it skips the ESP partition handle. From the 
-below paths, we can see that the length of the ESP's path (len_current) 
-is greater than the length of the boot0000's path (len).
+I have posted a patch to allow overriding the timeout in the form of an
+environment variable [0].
 
-boot0000's device path:
-/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,6e00000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,7e00000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,6c00000000000000)/Scsi(0,0)
+I agree that end users should override the config for their use-case and
+it is mostly in the Test Farm that we see issues - the process takes
+around 8 seconds once in a while and that triggers a timeout. However,
+since the "config" is a timeout rather than a delay, it will not
+increase the time taken for the auto-negotiation process. So it might be
+safe to increase the timeout, except in cases where we wish to detect a
+timeout early (if it doesn't complete within 4 seconds, we don't expect
+it to ever complete, so there is no point waiting for 20 seconds).
 
-ESP handle's device path:
-/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,6e00000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,7e00000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,6c00000000000000)/Scsi(0,0)/HD(1,GPT,2f2a74a5-4b82-da72-3110-7287ec562fb1,0x6,0x20000)
+Please let me know which among the following seem acceptable:
+1. The patch at [0] is the proper method to override the timeout and the
+   config shouldn't be modified.
+2. The default value is modified in Kconfig based on Andrew's suggestion:
+	default 20000 if ARCH_K3 || ARCH_OMAP2PLUS || ARCH_KEYSTONE
+	default 4000
+3. Another approach that you may wish to suggest in order to address the
+   problem.
 
-On 7/25/2025 7:31 PM, Heinrich Schuchardt wrote:
-> Could you, please, describe how to reproduce the issue you are seeing.
->
-> Which caller fails for you?
-> What are the values of the UEFI Boot####, BootNext variables that you 
-> use to find the capsule?
-> What is the device-path of the ESP?
+[0]: https://patchwork.ozlabs.org/project/uboot/patch/20250724141536.1222764-1-s-vadapalli@ti.com/
+
+Regards,
+Siddharth.
