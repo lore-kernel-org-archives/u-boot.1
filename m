@@ -4,94 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE29C87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB34C83F26
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 16:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CA4983045;
-	Tue, 29 Jul 2025 18:28:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1AA4A82E34;
+	Tue, 29 Jul 2025 18:32:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="phFvnk5R";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W8TEhIC4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94C6E82F00; Tue, 29 Jul 2025 18:28:24 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id C24C182F00; Tue, 29 Jul 2025 18:32:09 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61ACD82BCD
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:28:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17F2682BCD
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 18:32:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-301a83477e5so4065976fac.1
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:28:22 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-73e88bc3776so2219222a34.1
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 09:32:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753806501; x=1754411301; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6B6SSNfaRHIAx8Jv6y5pqzQ6aSwdPTSTelBr9XFv0tI=;
- b=phFvnk5RqHrOo05O/5X0p1SUD6BBnX3RQ2VCd5jBgpA7spMuB6M6XnirjT1W1Tde0R
- 4q+YEvjfUyTb4TRfdn9nyqaw4Ko60soDXFtIYjCtRT6gCUu676di/0pBcDfyV+8MLd9e
- pMfrtgnxyX7ZErPua8wij43p6np7BEjc7Pgzg=
+ d=konsulko.com; s=google; t=1753806726; x=1754411526; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Nfvu1ChhGPFCnjKqOLp7BOVdhE6UggcwtipxDxyRmUI=;
+ b=W8TEhIC4B+uJZHvLI90EW0m2jqGvRW7j5FePbSYGOqew0bdn7zJzIMxs4iOzXufqsV
+ 4cXdO1dcT5D7O2obG2VbjzQBQd6QwGtgl7EAoUaEPIMYNGhDCvjXKpa/uXK6KzTOTGpU
+ BH/2htAydLfky3F3k4rZhjitbtcQd/ccEZLyk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753806501; x=1754411301;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6B6SSNfaRHIAx8Jv6y5pqzQ6aSwdPTSTelBr9XFv0tI=;
- b=o4Iu82pfNGoHwMSbWd67pX4GKGnSQhyHBLjd813yGTP8wJrd2NUIKFSgkIlW3T4RsZ
- ALk5G9GRbvCuGNvBnO+zwCgrupLy+Xj/Fb1g8xqyBBleJO65dmjGbk8RAnc2sEpfeGsr
- 8A2Xf1wUkP+sC/BxSeYB7cNdg+q9HAsvE+Dzh1Q7FcguqfR28UQw8tVICzqWNdKrOW6x
- f5u2qsEUIT5X4DhHerjtoyjz92i9FMPFI1vLciPD/L2sM86wGDVjya5QAOmG/f2HXH0J
- IcckxqzxMqjdOuAqnQ+v1qV6BLS6dhDLy1tvj0CDwzTc79zIMfdi1yjB0Ngi2JqGpMAI
- dndw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWdixlUXgEQlJmNhlee4L804n9T6zQKmyxnlUJ9cm1n4eN6KLhGWO9tOCnFNBT26ner1kP//1E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy6PDm9cZ/rsrqmpd7IpULjVzajfcxw1+SEQMi0F3Yjn3CyxRLm
- LklgKqzN7RNExYjoa8qUPlLBjXxytbwAkIHw6oaCeBtM8zTIMBOqtq+EAF28unPsXX5v04bI+fZ
- L0x+GOCo=
-X-Gm-Gg: ASbGnct20nllmraVzCni3C+B82tGjtnjzpS2h6KzS6AIuY1CwLj2wvWDPmMjGxWRsTz
- LmZY8LGHNVKrttXx5CK3QUVvQ99KhHJHqSL9E5rqMWUjmxZqEkH8IBa8eGC8mrKMXnaEGOrUrQk
- 2WR5supzuSPGyLUAU+/Ay2iTOSp2KMcZHjdfKQVM3eMD06bcUkCMFfUP92PML1tGzP5sN2tpWzP
- j6CV+I8kOgHIrWO51eWFHmHst3NzBCH1jvo+pCGOBo4biKIKfp9Cwn/o+s5ugcf+kGa1yXoJt6v
- wS8XfGCXAopXeIgVxXT0CADMrLjjB2EjkZV9ezs6WlffCswVlOZQ2iEKPNg98Nx1NbAp55OeU6Q
- J2cTodQ5hqOyr5CUgxKBgb0ihWkL+Ac9cgX2EX3mPULINkCEfJ74HBYVz
-X-Google-Smtp-Source: AGHT+IEBImxBZmng0acQ7Wdqh49rHFdJBO3310PCTfjsttg1wsVde2OmNoQqpllldGt1MnRkQ6+Oog==
-X-Received: by 2002:a05:6870:c6a6:b0:2bc:6675:2043 with SMTP id
- 586e51a60fabf-30785a2a9c9mr16056fac.14.1753806501042; 
- Tue, 29 Jul 2025 09:28:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753806726; x=1754411526;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nfvu1ChhGPFCnjKqOLp7BOVdhE6UggcwtipxDxyRmUI=;
+ b=jxYx11MNp7S75SbQk04acXLpDPMDylk0g4KkbZuoNxENNT8zjaayQxsaROxTKBgiXG
+ upHMWDzRGsabdmPrLjEpDQUfCzHw3Bwtvreainl7dfuWts1Fbf8xjfxm9kBMmScwZxqE
+ 8PKNTkoVd7F3Qw7+6vgbC/rShwbtIqdQ8GInuUP3tUls4UVegnqxa0gErGX8Igo88M7P
+ XaAfxRnkUBeQ9TZ+epgjaff2iY3SS2SGlh40PnSaOVmrjoUuT/QNsDPblrPg7XfLPzTv
+ dJoy9vMIlAQO/5cP2g0CyNotAboDsrzdT2tTTIK3nJKXz9FjQyo+4D0cNY//Q4QzSjCP
+ cflQ==
+X-Gm-Message-State: AOJu0YxqXGZDaWpdfFL5//6dS5DqtsHb17x6rOhACp2u0+wV7yyORM8f
+ vZSMPfJOCDNVUW+q8y4l3rKaiPraMxc6gZ02sdWoqB7HDo1ELEzAC5dVlGw2MRwAfj4mSZAY/bk
+ X3EfQDmg=
+X-Gm-Gg: ASbGncsgpddc111ydtfEaPKK5cMVcvMkrqi0SSakIQOBepvHXT7ZBk3omdrubo5vLOA
+ PM4F+tygHF/MCCOhkjrgB8YsAEtUPtAr8LEY2CP1K015hG/goPN/k5LR74hmuuUhjbMbspOzZT7
+ MUhaxhMHp8kM28MF9Cl2xLL3j06ucQJVDTI7P7SE+3Pv5LOqtRcFZRyJ23bg6qgMfUWcmXH6hBC
+ TIk9ULgC5naF8gbxB3XsnzMQ0+8x7/j8yvQ3s0V0d/SSAmydFYS1079k7bf1lKtQ+KPrA5wMMw0
+ DVB7Xnd9j6YyFpAd4Fu20tSWmayjbvlYsR//bhmAppSo8kv0ap/Xe/5xWi0KmKRS1Nk2W5VKdgv
+ CryUhUMzHwF/awRYVzeirb1Hm6fFSteo/QRCinaH9QVdEhRBT8mqoDov0
+X-Google-Smtp-Source: AGHT+IEcudmpjhlio6XbCOcwDGyolg4eUe0O+SFZDZokvxul4wcgMAtELfuW5YIfkqM0z761ht24Kw==
+X-Received: by 2002:a05:6830:6f4b:b0:73e:9ee1:3d5f with SMTP id
+ 46e09a7af769-74177cacd4cmr393915a34.25.1753806725726; 
+ Tue, 29 Jul 2025 09:32:05 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3071323a99csm2366506fac.12.2025.07.29.09.28.19
+ 46e09a7af769-74148246f0fsm1495382a34.51.2025.07.29.09.32.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 09:28:20 -0700 (PDT)
-Date: Tue, 29 Jul 2025 10:28:18 -0600
+ Tue, 29 Jul 2025 09:32:05 -0700 (PDT)
+Date: Tue, 29 Jul 2025 10:32:03 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>,
- Ye Li <ye.li@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Alice Guo <alice.guo@nxp.com>, Jacky Bai <ping.bai@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-Subject: Re: ??????: [PATCH v2 0/4] imx: add i.MX95 b0 support
-Message-ID: <20250729162818.GL1807455@bill-the-cat>
-References: <20250708-imx95b0-v1-0-01759e9c855f@oss.nxp.com>
- <CAJ+vNU2G=CMiHc4mU4fjQEz7zwjvx_EuiWWQo8MBVHGJdmTarA@mail.gmail.com>
- <PAXPR04MB9644BC97420DB4E3D877C2E2E225A@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <20250729113902.GA27993@francesco-nb>
- <20250729160805.GA31189@nxa18884-linux.ap.freescale.net>
- <20250729150438.GB48479@francesco-nb>
+To: u-boot@lists.denx.de
+Cc: Heiko Schocher <hs@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20250729163203.GM1807455@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8PupOrvwbeo7F9av"
+ protocol="application/pgp-signature"; boundary="YSoUulFi3JouSYvX"
 Content-Disposition: inline
-In-Reply-To: <20250729150438.GB48479@francesco-nb>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,50 +94,156 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8PupOrvwbeo7F9av
-Content-Type: text/plain; charset=us-ascii
+--YSoUulFi3JouSYvX
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 29, 2025 at 05:04:38PM +0200, Francesco Dolcini wrote:
-> On Wed, Jul 30, 2025 at 12:08:05AM +0800, Peng Fan wrote:
-> > On Tue, Jul 29, 2025 at 01:39:02PM +0200, Francesco Dolcini wrote:
-> > >On Tue, Jul 29, 2025 at 02:21:19AM +0000, Alice Guo (OSS) wrote:
-> > >> A0 has been dropped.
-> > >
-> > >Dropping support for A0 i.MX95 SoC variant in mainline U-Boot is not a
-> > >decision from NXP.
-> > >
-> > >There are multiple boards around with such SoC variant, just dropping
-> > >support for it with no explanation does not seem ok to me.
-> >=20
-> > A0 may not goes into mass production, so I think it will phase out.
-> > It would be better to update your boards to use B0.
-> >=20
-> > Since B0 is here, continuing A0 does not make much sense.
->=20
-> This was clear and known to me.
->=20
-> But that does mean that we have to just drop support from U-Boot? Is
-> there a significant increased maintenance effort to keep A0 silicon
-> alive that justify dropping support for it now? We have new products
-> shipping with A0/A1 silicon as of now.
+So I ran Coverity with the newest scan version and this is good news.
+Only a few newly found issues in existing code.
 
-Given Tim's answer in this thread as well, it sounds like A0/A1 support
-can't be dropped and a support path needs to be figured out.
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Tue, Jul 29, 2025 at 10:04=E2=80=AFAM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
+
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to *Das U-Boot*
+found with Coverity Scan.
+
+   - *New Defects Found:* 3
+   - 12 defect(s), reported by Coverity Scan earlier, were marked fixed in
+   the recent build analyzed by Coverity Scan.
+   - *Defects Shown:* Showing 3 of 3 defect(s)
+
+Defect Details
+
+** CID 583415:       Integer handling issues  (INTEGER_OVERFLOW)
+/cmd/i2c.c: 369           in do_i2c_write()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 583415:         Integer handling issues  (INTEGER_OVERFLOW)
+/cmd/i2c.c: 369             in do_i2c_write()
+363     			return i2c_report_err(ret, I2C_ERR_WRITE);
+364     	} else {
+365     		/*
+366     		 * Repeated addressing - perform <length> separate
+367     		 * write transactions of one byte each
+368     		 */
+>>>     CID 583415:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "length--", where "length" is known to be equal to 0, un=
+derflows the type of "length--", which is type "uint".
+369     		while (length-- > 0) {
+370     #if CONFIG_IS_ENABLED(DM_I2C)
+371     			i2c_chip->flags |=3D DM_I2C_CHIP_WR_ADDRESS;
+372     			ret =3D dm_i2c_write(dev, devaddr++, memaddr++, 1);
+373     #else
+374     			ret =3D i2c_write(chip, devaddr++, alen, memaddr++, 1);
+
+** CID 583414:       Memory - corruptions  (OVERRUN)
+/cmd/eficonfig.c: 334           in eficonfig_append_menu_entry()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 583414:         Memory - corruptions  (OVERRUN)
+/cmd/eficonfig.c: 334             in eficonfig_append_menu_entry()
+328
+329     	entry =3D calloc(1, sizeof(struct eficonfig_entry));
+330     	if (!entry)
+331     		return EFI_OUT_OF_RESOURCES;
+332
+333     	entry->title =3D title;
+>>>     CID 583414:         Memory - corruptions  (OVERRUN)
+>>>     "sprintf" will overrun its first argument "entry->key" which can ac=
+commodate 3 bytes.  The number of bytes written may be 11 bytes, including =
+the terminating null.
+334     	sprintf(entry->key, "%d", efi_menu->count);
+335     	entry->efi_menu =3D efi_menu;
+336     	entry->func =3D func;
+337     	entry->data =3D data;
+338     	entry->num =3D efi_menu->count++;
+339     	list_add_tail(&entry->list, &efi_menu->list);
+
+** CID 583357:         (INTEGER_OVERFLOW)
+/lib/zlib/deflate.c: 1714           in deflate_slow()
+/lib/zlib/deflate.c: 1706           in deflate_slow()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 583357:           (INTEGER_OVERFLOW)
+/lib/zlib/deflate.c: 1714             in deflate_slow()
+1708
+1709                 /* Insert in hash table all strings up to the end
+of the match.
+1710                  * strstart-1 and strstart are already inserted.
+If there is not
+1711                  * enough lookahead, the last two strings are not
+inserted in
+1712                  * the hash table.
+1713                  */
+>>>     CID 583357:           (INTEGER_OVERFLOW)
+>>>     Expression "s->lookahead", where "s->prev_length - 1U" is known to =
+be equal to 4294967270, underflows the type of "s->lookahead", which is typ=
+e "uInt".
+1714                 s->lookahead -=3D s->prev_length-1;
+1715                 s->prev_length -=3D 2;
+1716                 do {
+1717                     if (++s->strstart <=3D max_insert) {
+1718                         INSERT_STRING(s, s->strstart, hash_head);
+1719                     }
+/lib/zlib/deflate.c: 1706             in deflate_slow()
+1700             if (s->prev_length >=3D MIN_MATCH && s->match_length <=3D
+s->prev_length) {
+1701                 uInt max_insert =3D s->strstart + s->lookahead - MIN_M=
+ATCH;
+1702                 /* Do not insert strings in hash table beyond this. */
+1703
+1704                 check_match(s, s->strstart-1, s->prev_match,
+s->prev_length);
+1705
+>>>     CID 583357:           (INTEGER_OVERFLOW)
+>>>     Expression "len", where "s->prev_length - 3U" is known to be equal =
+to 4294967267, overflows the type of "len", which is type "uch".
+1706                 _tr_tally_dist(s, s->strstart -1 - s->prev_match,
+1707                                s->prev_length - MIN_MATCH, bflush);
+1708
+1709                 /* Insert in hash table all strings up to the end
+of the match.
+1710                  * strstart-1 and strstart are already inserted.
+If there is not
+1711                  * enough lookahead, the last two strings are not
+inserted in
+
+
+
+View Defects in Coverity Scan
+<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+
+Best regards,
+
+The Coverity Scan Admin Team
+
+----- End forwarded message -----
 
 --=20
 Tom
 
---8PupOrvwbeo7F9av
+--YSoUulFi3JouSYvX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIj2ngAKCRAr4qD1Cr/k
-CgJpAQChrYotz47XZpeWJmXJlyF0icPfdO3kIdypye2A7FIjlwD/dbrludJIZUI9
-8qrQeWoN+e59vhzBpeE06unzRcv47wY=
-=YDbz
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIj3ggAKCRAr4qD1Cr/k
+CqbMAP9y1QC/Ug1JpAnBQqmhx9cdTU5EQH7TwgxgllFv8c5QxAEAgJ66KyVmYwGX
+Zg9d5Jvd6SU9U7QWpV52IcJ+h1x15AI=
+=cyhP
 -----END PGP SIGNATURE-----
 
---8PupOrvwbeo7F9av--
+--YSoUulFi3JouSYvX--
