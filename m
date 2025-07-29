@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00262C87FC9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 11:50:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78C19C83F26
+	for <u-boot@archiver.kernel.org>; Tue, 29 Jul 2025 11:52:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44916829F5;
-	Tue, 29 Jul 2025 13:50:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8528829F5;
+	Tue, 29 Jul 2025 13:52:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lTgQptbc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WWxLZkI8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E150282ADA; Tue, 29 Jul 2025 13:50:50 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 4E2FF82ADA; Tue, 29 Jul 2025 13:52:22 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98C2882103
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 13:50:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DE7D82103
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 13:52:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3b77b8750acso623107f8f.0
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 04:50:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-45617887276so31383015e9.2
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 04:52:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753789848; x=1754394648; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EJBTIpchyI3wEqaczadtzQXr7w+gP5mylFxJOB9BVBU=;
- b=lTgQptbckwJ5S3mZfH8ToUJiNa7Lq7D3reyZkDkVHgmXnGMiWZWOt6ZXkFaQuAy6/f
- gY0e4G2F7rITzrZg1ZyJ1MBFtXEAvAHfioIKe/D7OEhXjOqQVvljbM8gvWgbWsR2Gj2+
- jTT6wWARlYizvDALe7PY8pUIPZ//22VLGNzEu6hCCPmqX6Q/06fRX+clOTn68buMTUgs
- eYRLyZqEOvQBbI1NrDQnfnmnKtMVzeYLAJEU+lVsLxiftSLjWYf8lUSAep6goFBYGveJ
- ZhhTxI9PLq5ayLP5+MKsCRIVMajtNItx03Sf+aQqiyNm0WB6LxPnlnRQCZc332hWhHBH
- 3RWA==
+ d=linaro.org; s=google; t=1753789940; x=1754394740; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/mDIPytXdYbBta79c/lzj2IcyIm2Ld8iH0BeZDwkR6A=;
+ b=WWxLZkI8NuxzcOis+nFuu0MU6RD67aml0FV6txPoySI9MnueTwZwQpDzCCQItvfImS
+ 6ouSAmamPnqtIHdeIp2OP2zJYuGATPq20JeGFnqw2khdB+357PlU7uL0ci4wxnHJXG/y
+ unfYDGItJ45hPtHK4rN99/MwCbp4+JtBSvwYuz5G8bUv0XjQbejXUQsqBf/5E6qq/ZV5
+ u7aWEFiJG5NU6lY3Xc7WNCkRyoYvcUzBn3neGkapiCEVyLiqsGh3obih6bzyUca9Yfnm
+ WBzT4n8XTE5dom1hycnZKEJ90Xx7iy8mUS8T+662T5lpTGLOl4k9PuT3olIs/yPvrtuw
+ Xuug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753789848; x=1754394648;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EJBTIpchyI3wEqaczadtzQXr7w+gP5mylFxJOB9BVBU=;
- b=Qcqq7s7aAmZfEaVUXYhSl54Q0VtjaKMRAaQ2FdrmGtWtL4hnfU3au54DmFi6COp7tx
- gWbxaa3lU6cyRqaVcQGqr1IGxnv8PsRyIuWxAhnGKKJ4+y3yeA23xdFVgfkjyggaRR3l
- 6JD5LqiFAVTpAfEI9Qld01YJWhAHdHQWrzUXZPbXjQ5OdH2Cks4Gs5J+9JV1+kB7GiOv
- z1FSD95RuYf4T24eKxuKACqQ143Mz4s7QG6HurcPY+oXTXmiWs1zkXkmHO1U0s3I6KpD
- xw2TNHn+EAUjtJYaVm8YzveWAc60duAgvUty09XFOMGP8NVo8afmcnft2RCHoEWtWfiL
- UjdA==
-X-Gm-Message-State: AOJu0YwWo7wKTHkBOgurbJTcyNyoD/v9c4/lloAEJMxr2BW0qCeQzmC2
- 2bp5U92SkG3Hlqpa8Kdisn5oj+4tY+BFggs/b0itE+fDJbK2EvkjRCnA6yX3vslMQH+Bmz4mnK5
- zpYHL
-X-Gm-Gg: ASbGncuigiXeTqJeKv6yVPE6LDPBgCeFiKwnFUtv/oyK2TGquyDmN2nxTvJb/w3oj/T
- a6Vx4mvKyAmY2vsuTZm92LLwZURJq4jHuxXDdvIF8om7NaqE+M6ZnMdIUPG2Magz9xFHS8vyE8K
- VltNzXQhPtEMwsNpGWuXjUTqEGMUu4QyCVOJa25uPiFnwmG2VaLMTAyeXxo1KGtWu6ZtQZc47Ue
- zoL6CCvs6c5dgGnpOm5sBje7wam2ff+ui22+C5hIYruFBVT59fgDMkJW2fNB4PHzGgeCHyDK63V
- kG2VYM0JrOHGQHl0ldXtviPJn3nyKZnh5LwYskIbTwpjachPIynfYQDOhw79WBpJLhm8KliJCfA
- mdaePchGnNTKkRuxYAsWhWQ1jVLBN35VAT/ukyGMSIkCFyflX7Xq0iHbwdZMpuw==
-X-Google-Smtp-Source: AGHT+IGOZa6HujiexvSoiyLGqmKWBs4jISLbKXaTMobJNI+kwnleJo+tWq5XYfxxtOWHlt4S5ltC0w==
-X-Received: by 2002:a05:6000:24c7:b0:3a5:281b:9fac with SMTP id
- ffacd0b85a97d-3b78e50252amr2378452f8f.17.1753789848013; 
- Tue, 29 Jul 2025 04:50:48 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:b80c:a2c7:328a:9067])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b778f104ffsm11773779f8f.66.2025.07.29.04.50.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 04:50:47 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 29 Jul 2025 12:50:47 +0100
-Subject: [PATCH] socfpga_dtreg: Ensure reg is initialised before use
+ d=1e100.net; s=20230601; t=1753789940; x=1754394740;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/mDIPytXdYbBta79c/lzj2IcyIm2Ld8iH0BeZDwkR6A=;
+ b=tCNJWraGEhxbKM4flWJMXrzulDQAf+2bdrX3ozdYXcBxSM+7HI1VEKeyUb60Jqt6Zs
+ 6Bth0y1LcqyqCbs6YoJIAniPIDNUlB671YPVp7JZq4k8o758rsWq5d1GNDvmp9uIiq3Y
+ nAM66YDqaFopMoN4f6CWEZPvP631tEnd+DJtHgNR+0MvegkP3EtQIL7xGWKiOlY97GY1
+ +HbFyQMzLmk7YIdppHsWs1sCjbv6ZPd0T7gOExZCjR3MyTZFaU4oJzE0mWQBoNXdvHOc
+ x3UxawrpXBUrPVoP8ubgx8z39OWnR448JRLIItMQQh5NcEykNRZZEvHGTTxHW4Tzn7PU
+ CqYw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUAuo3wlWZr/JOwht7aG84rydxuIGczf7D8gpzCb8i5Zz9dUZUJc7Fc7JRMHlMB4Fp3cif2+Uo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpA9vh84n1/oIi53iNIFdCzLXZcqJI/a8eFm3tKHaoxc/aXVKT
+ XK44XTmORPggwLWiitA1ppWSzBDQO9wko0A/Xla9ANSbgeOPKn6IG22iCiYSerYfc3s=
+X-Gm-Gg: ASbGnctWQhVBfLhA5k8wPN7HeoJkFADGMfMbOKych9TkNLTfmlxgY190djhGt2Ciy9D
+ BS88uH28BS+AxahV12zlZWHdO4zxNSK58xyo7LWqs2xttY0ejYPxvXOoNkm63ihpXjdoZGESkyN
+ AWoAwlCmDlvPnNoAvzNYShkbM5YQBsNo/zT3hbn/QX7+UirtIhstNNVg6TmiDRMXFeMPQKj0PEw
+ qUwO9HvwKRCAR/u2R36IxusS7hJWegrAyxlITz3ciWqtn/tcx+XVpZhcfYjXYRxuQXC9O+6VMHV
+ a+OB86ZguGv3159HIXEcH3AWEOSh3tuSuALw21p9Y8QliDWSIczzfloGh53nJ1UviSfo6HcwMLh
+ Hwaxyh1QVcY0FSi02oAAzD8j8ZXYUXF5REtbCruf4LAb1ltGvFA5j+kPX6FnUDb2r1UmYCDKeJQ
+ EMV8AAX9s94BMbTm7H5SA=
+X-Google-Smtp-Source: AGHT+IE4MQR3Hs6/zukNsdrHiZBKL83Sc4WuodkELUpbo2hOYhu87OdTBtsLyh0+fm83roMYZFB2PQ==
+X-Received: by 2002:a05:600c:6309:b0:456:161c:3d77 with SMTP id
+ 5b1f17b1804b1-4588072e3femr96210865e9.16.1753789939685; 
+ Tue, 29 Jul 2025 04:52:19 -0700 (PDT)
+Received: from [172.18.195.54] (ip-185-104-138-124.ptr.icomera.net.
+ [185.104.138.124]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b778f0c1b8sm11998331f8f.56.2025.07.29.04.52.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Jul 2025 04:52:19 -0700 (PDT)
+Message-ID: <ea359f49-2961-430f-8abf-a6e3e4650791@linaro.org>
+Date: Tue, 29 Jul 2025 13:52:11 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250729-socfpga_dtreg-v1-1-346cc5d367a9@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAJa1iGgC/x2N0QqDMAwAf0XyvEIXJ879yhgjrWnNw6okMgbiv
- 6/6eBzHbWCswgaPZgPlr5jMpcL10kCcqGR2MlYG9Nj5Hgdnc0xLpve4Kmc3UO9DurXY4h1qE8j
- YBaUSp6P6kK2sh1iUk/zO0fO173/PoSy5eAAAAA==
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: Add pixel3_defconfig for Pixel 3 / 3 XL
+To: David Heidelberg <david@ixit.cz>, Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
+References: <20250729103950.1154040-2-david@ixit.cz>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250729103950.1154040-2-david@ixit.cz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,47 +102,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In socfpga_dtreg_probe it is possible that if mask is 0 then reg will
-not be assigned to before first use. Refactor the code slightly to
-ensure that reg is always assigned to and remove a piece of duplicated
-code.
+Hi David,
 
-This issue was found by Smatch.
+Thanks for the patch! Great to see more devices up and running :D
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/misc/socfpga_dtreg.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+On 7/29/25 12:39, David Heidelberg wrote:
+> Introduce a defconfig for the Pixel 3 and Pixel 3 XL.
+> 
+> On these devices, U-Boot must be chainloaded via Fastboot. However, due to
+> a Fastboot bug, U-Boot won’t start unless a specific condition is met.
+> 
+> To work around this, U-Boot must provide a TEXT_OFFSET of 0x00080000,
+> which allows Fastboot to successfully launch U-Boot.
 
-diff --git a/drivers/misc/socfpga_dtreg.c b/drivers/misc/socfpga_dtreg.c
-index ea5d0bcdf51..dd6809433e3 100644
---- a/drivers/misc/socfpga_dtreg.c
-+++ b/drivers/misc/socfpga_dtreg.c
-@@ -76,16 +76,15 @@ static int socfpga_dtreg_probe(struct udevice *dev)
- 				return -EINVAL;
- 			}
- 
-+			reg = base + offset;
-+
- 			if (mask != 0) {
- 				if (mask == 0xffffffff) {
--					reg = base + offset;
- 					writel(val, (uintptr_t)reg);
- 				} else {
- 					/* Mask the value with the masking bits */
- 					set_mask = val & mask;
- 
--					reg = base + offset;
--
- 					/* Clears and sets specific bits in the register */
- 					clrsetbits_le32((uintptr_t)reg, mask, set_mask);
- 				}
+tbh I think we could just make this the default TEXT_BASE, since we 
+don't set one in qcom_defconfig. I don't think(?) that would mess up 
+anything else since U-Boot is relocatable anyways.
 
----
-base-commit: 182cb30084516c3085d2ca5dde3f105f7625d774
-change-id: 20250729-socfpga_dtreg-9a70bf432328
+Neil: any thoughts there?
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+> 
+> Clearing the framebuffer improves the Pixel 3 experience,
+> as it prevents collisions with the Fastboot logo left on the display.
 
+Does framebuffer actually work on the 3 (non-XL)? This reminds me that 
+we should turn off dcache flush for simplefb heh
+
+> 
+> Instead of:
+> $ make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config
+> do
+> $ make CROSS_COMPILE=aarch64-linux-gnu- O=.output pixel3_defconfig qcom-phone.config
+> 
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+> ---
+>   configs/pixel3_defconfig | 13 +++++++++++++
+>   1 file changed, 13 insertions(+)
+>   create mode 100644 configs/pixel3_defconfig
+
+I think this makes more sense as a config fragment than a standalone 
+defconfig, since it's just changing a few core options that don't have 
+any other effects
+
+$ make qcom_defconfig google-blueline.config qcom-phone.config
+
+What do you think? Otherwise it should be renamed to 
+qcom_google_blueline_defconfig or something like that.
+
+> 
+> diff --git a/configs/pixel3_defconfig b/configs/pixel3_defconfig
+> new file mode 100644
+> index 00000000000..9c0c8ca63c4
+> --- /dev/null
+> +++ b/configs/pixel3_defconfig
+> @@ -0,0 +1,13 @@
+> +# Pixel 3 has special requirement to have TEXT_BASE set for the fastboot.
+> +
+> +#include "qcom_defconfig"
+> +
+> +# Otherwise buildman thinks this isn't an ARM platform
+> +CONFIG_ARM=y
+> +
+> +# some Pixel 3 bootloaders aren't able to start without TEXT_BASE
+> +CONFIG_TEXT_BASE=0x80080000
+> +CONFIG_HAVE_SYS_UBOOT_START=y
+
+Can you explain the purpose of HAVE_SYS_UBOOT_START here? It just allows 
+for SYS_UBOOT_START which afaict isn't used?
+
+> +
+> +# fastboot logo distorts u-boot output
+> +# CONFIG_NO_FB_CLEAR is not set
+
+I'd like to add this to qcom_defconfig, I was holding off until I could 
+add an option to prevent simplefb from doing dcache flash on qcom which 
+makes display refreshes actually fast... Would you be interested in 
+adding a config option for that?
+
+Kind regards,// Casey (she/her)
