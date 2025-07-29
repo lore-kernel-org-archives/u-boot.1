@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73777C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:10:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3493EC87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:10:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 860F082E52;
+	by phobos.denx.de (Postfix) with ESMTP id D76FC83045;
 	Wed, 30 Jul 2025 07:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WxkyWJb9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P/vDGa1H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30E0D82BCD; Tue, 29 Jul 2025 14:51:10 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 17DF682BCD; Tue, 29 Jul 2025 14:51:18 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3548082063
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 14:51:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC14882063
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 14:51:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ae0b2ead33cso166881166b.0
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 05:51:08 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-60c5b8ee2d9so11584379a12.2
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 05:51:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753793467; x=1754398267; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1753793475; x=1754398275; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+CiaD+gmgT5RLVgL5AwCsT7QGKSBTn68CVd5G1GN13c=;
- b=WxkyWJb9WWoEMKsugxbnH8ndjfS7FmLMpwNL2iD2Y9MF1roaRxESze0Dtc9tjkBMoy
- DyM3/3lN6nBTyXeoFISSJH7uoLy9NWYiEVp97KBItBXwGJMEAyJQnwL0DZGSNsiy6gnq
- +fZRk3S+wxw1GPrsC9UVPzU+mAoONKHwrCqEmUvmmTnRrCgVK07a/YdzBYlE0o5ZkxXg
- r2bhcd/r6dO8UONWWhSzKSqczN6GVXeZJBnk9mjbj+qXpB/sqFfAm9qD7RYz0if11TJS
- GeJpC2HC5M9FVea7h13Zpu7LAcsfURKfcnHCpreO6MIGmlsP+jIdAROhcbrCeoyOljvP
- Gxtg==
+ bh=+kW+czL4QjPddpnAkQ+TzP3eik80nh1Sli2uxZTK9UI=;
+ b=P/vDGa1HDGuLEl9ty4iMrM3QdMnua4/KNx795SNS85nE1xGhumeMnz1o6rNnj8XCvZ
+ 17VX9FguF5vKFQu/0LE7OqwqPL1GRQFJgNOxQI6QQyWvoLCsqKruaqy/R5d32koX8uj3
+ FU/7Cjhwq9nfNLH0zHSw7OPRrJKxlUpwBbjr5VEraSqy2iZHEaX6RcB+LiSDxl+8UDIa
+ WYMrIlaPVO3BzfPMxERZp0SwGvrHLpiwwZMeQrKRWdzw4/cwmU/Hst0KxQ2Xdgy3uQLz
+ 7xns28jl5Dg7vUPISUpTagFlYx/RpQG5fWjm8ie85hGOu1u/pXHGGclRbozcm1bqjJLM
+ AhDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753793467; x=1754398267;
+ d=1e100.net; s=20230601; t=1753793475; x=1754398275;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+CiaD+gmgT5RLVgL5AwCsT7QGKSBTn68CVd5G1GN13c=;
- b=aJ0dgZRYfRltvl8njSSqhy5vJZtEFbxGVw7vOKiwwhYU+BweAS8WVWthRAOor3TNc2
- NK0AcCoy4epTuYRSztRqIjAGC6S4xw9RnnVYe3dyc0c+a7b0XjYRWYg84DEtqtSivDb9
- 5ro62W69Q40MD1SgdGcXlC7e4EYLDe8XDChFgUM7Y4KNWDNnIelTVWG/qZVrTR9f7MD+
- 9xzoWJkOs6AzbiUJKe//wNcAqLV0s9eqQVMeHZbUfPhNur0V7doOQST4Q0+DVlBwpdl0
- Z6+jOVr0tr34B5uKqCC3O1OnX7Y26F61G9RdSt6NC4/oaThbZ3uR2RJIf2T6Yr0UmX8/
- VY6w==
-X-Gm-Message-State: AOJu0YzrohOs2FFnt1c1MPuuRrvEv5TTJ16gbEW54dMX+ep+F/FaBF60
- 35M9lOYtnH2mIM1uQd/w47bxEzAiK/acU6hemtfFXMf4NsLv3c8PyKH79egyg8Ox
-X-Gm-Gg: ASbGncuFXtCpUiXN7bf6XrwZ+sjN4lVLdKueU+Pd3A8dL0736byGMhYHy43Mv0OHj+3
- AzrXXcJDFdqlppGZjiuYRqbSkHaWSrk4rMhhoHK2eHVERDTcsJ2fX5xKr7pAojU4H6PAgatZGnq
- l0UY7YSk8P8F/Un3PeIL0kGWR/3N8U2neywNebkvFbgA6m22TJ9KEJGpgabtk8aGh2e6zFztx8h
- fQ8h6dd8Q4XYCZUvQGu4358TB44d3v9kAqR8KIy98Sjj0h/Vj9rWzGQced6Hx40sNNqpYxwt0oY
- Ob/mfuUyM7rU7o/cHR3wFFnJAoUDLX9T1iAz0aEvy/E1B6NfNayA49TvTx7jZe8W3m1X5LOPnU+
- qTSMauesCvDv0NfJfwPlLVbrXVHlQzmBK2ST+wBMjTbPqtvTGZ556I/FJZhaqs198kM74UzA=
-X-Google-Smtp-Source: AGHT+IH0xEEs6XvJYDvWEgrN4MUbQWJsN/bU8oCNogTrtrPknhQE6UIs7BAX2GDtTf8Vh6RPUmlT8A==
-X-Received: by 2002:a17:907:868b:b0:ae3:6038:ad6f with SMTP id
- a640c23a62f3a-af7ab56a4ccmr406858566b.3.1753793467316; 
- Tue, 29 Jul 2025 05:51:07 -0700 (PDT)
+ bh=+kW+czL4QjPddpnAkQ+TzP3eik80nh1Sli2uxZTK9UI=;
+ b=asUVv9HNWiOU2joKbr6H+ld5aJXTmRmfN0pvQF+JJXn5wEjenDV5SdlpOvNbZZnlzO
+ ngyzXqbJ4s/DkxryDOTpuKP3OZnw6Fgg8Gx0rA+HEn1y4yXzcfa8MqcirGBODS4DNAj0
+ RrVIQ8FIIFtRfT4ncIWWAgy9j97LWNaDLbKG0Zt64vAH1kh7e7iCHfEryfbapqH+L6AZ
+ m2ILA/y00D1Ljq999OGHyD+p3DhOF6CSLWkUNzmg3QwOkeuSGoSmlcbsL+nl+WpZqvvF
+ w9kFwVRvE2BLVU6047NuJQl3la5IPxaKmNgT3yKnZIox+zUFT/DAP4OMvuYsH05I79Ab
+ f55A==
+X-Gm-Message-State: AOJu0YwoBb5qZ22RmkUqPtfKCKZtk/pEYxKpK8m8Hp6eEWZiYUNl99dR
+ 2TJ5ZwVFbchkDCotDYFJdJ1XxcooxrUd/4FmzgVx1+ZaP2ysw+4tojdU5e3lK9+R
+X-Gm-Gg: ASbGncvyZ/mjHvLZcWpCSp0g5hPH/yi1whN87ZJ8fnzI011VpukqEL1aG8K06jIkX4q
+ s37LAO1RDFR5TIYU6ItjtpwlhChAooM0BnJKzG5TJmofbFZTbMtOgs52ePUIxpWdeOKukIR2H3d
+ Orxte+wYqL5kEBGYU2SXIis+PVIFL7uTbUm92Yxef7pEf4EfQmN3vt9ukzRhf1qryQbwEY0iK83
+ 78bqq1vbwj181GsgGNA43/H7SsxSB9XUZ5CTsgoOqpKmShKkh83pcMmr0j74/G5qxdMrdeavwEY
+ SJZEw7WJNVESTGnU8ePCSj+gtStTKHW10uGm8vn243GluZ4LMej29QP8rr93KVn8kBKBqYrZ3Aj
+ hkraaij/IcDWNBDTMRm9c1HEHvebXQZ0F/LtrTHrT61qFOQo3UJvdms63oA1iNYQVdM4Y15c=
+X-Google-Smtp-Source: AGHT+IGoc7mdzA8VUs96udUR0rxqqZ9yVMkfan/PQY7WCwj4vYA8xiajXFRxnUmYF5u7y5OwpoO90A==
+X-Received: by 2002:a17:907:3cc4:b0:ae0:b3cd:b7f8 with SMTP id
+ a640c23a62f3a-af619608944mr1732636266b.40.1753793474880; 
+ Tue, 29 Jul 2025 05:51:14 -0700 (PDT)
 Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
  [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af635acc99esm572223366b.115.2025.07.29.05.51.01
+ a640c23a62f3a-af635acc99esm572223366b.115.2025.07.29.05.51.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 05:51:06 -0700 (PDT)
+ Tue, 29 Jul 2025 05:51:14 -0700 (PDT)
 From: Aristo Chen <jj251510319013@gmail.com>
 X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
@@ -79,10 +79,10 @@ Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
  ggiordano@phytec.com, n-francis@ti.com, afd@ti.com, d.schultz@phytec.de,
  d-gole@ti.com, ravi@prevas.dk, carlos.lopezr4096@gmail.com,
  Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 2/5] binman: Fix FIT image overlap issues for
- testFitSplitElf
-Date: Tue, 29 Jul 2025 12:48:53 +0000
-Message-ID: <20250729125022.4220-3-aristo.chen@canonical.com>
+Subject: [PATCH v1 3/5] arm: dts: k3-am6xx: Fix FIT image memory overlap in
+ binman configurations
+Date: Tue, 29 Jul 2025 12:48:54 +0000
+Message-ID: <20250729125022.4220-4-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250729125022.4220-1-aristo.chen@canonical.com>
 References: <20250729125022.4220-1-aristo.chen@canonical.com>
@@ -105,119 +105,361 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix one binman test that has memory region overlap issue, the test case
-needed to be updated to use non-overlapping memory layouts.
+Fix memory overlaps in FIT image configurations for TI AM62x and AM64x
+PHYCore and SK boards.
 
-* Tests fixed:
-  - testFitSplitElf
+The overlaps occurred in two categories:
 
-* Changes made:
-  1. ELF section layouts: added elf_sections_tee.lds with different
-     address for TEE to avoid overlap with ATF address defined in
-     elf_sections.lds
-  2. Makefile to properly build elf_sections_tee binary
-  3. Updat ftest.py to use separate ELF files for TEE vs ATF components
-     in split-elf operations.
+1. TI firmware stub images (tifsstub-hs, tifsstub-fs, tifsstub-gp):
+   These mutually exclusive firmware variants were incorrectly assigned
+   the same load address within FIT configurations, causing overlap
+   detection to fail. Adjust addresses with 64KB spacing:
+   - tifsstub-hs: Keep original address
+   - tifsstub-fs: Move to +64KB offset
+   - tifsstub-gp: Move to +128KB offset
+
+2. Device tree overlay images (som-no-rtc, som-no-spi, som-no-eth):
+   These overlay files had insufficient spacing between load addresses,
+   causing actual memory overlaps. Increase spacing to 8KB boundaries
+   to accommodate overlay sizes safely.
 
 An upcoming commit will validate if the memory region is overlapped
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- tools/binman/ftest.py                  |  2 +-
- tools/binman/test/Makefile             |  6 ++++-
- tools/binman/test/elf_sections_tee.c   |  1 +
- tools/binman/test/elf_sections_tee.lds | 31 ++++++++++++++++++++++++++
- 4 files changed, 38 insertions(+), 2 deletions(-)
- create mode 120000 tools/binman/test/elf_sections_tee.c
- create mode 100644 tools/binman/test/elf_sections_tee.lds
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 22 +++++++++----------
+ arch/arm/dts/k3-am625-sk-binman.dtsi          | 16 +++++++-------
+ .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 16 +++++++-------
+ arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 22 +++++++++----------
+ arch/arm/dts/k3-am62a-sk-binman.dtsi          | 16 +++++++-------
+ arch/arm/dts/k3-am642-phycore-som-binman.dtsi |  6 ++---
+ 6 files changed, 49 insertions(+), 49 deletions(-)
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index a90db3c9351..f0c0487300d 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -252,7 +252,7 @@ class TestFunctional(unittest.TestCase):
-         TestFunctional._MakeInputFile('bl31.elf',
-             tools.read_file(cls.ElfTestFile('elf_sections')))
-         TestFunctional.tee_elf_path = TestFunctional._MakeInputFile('tee.elf',
--            tools.read_file(cls.ElfTestFile('elf_sections')))
-+            tools.read_file(cls.ElfTestFile('elf_sections_tee')))
- 
-         # Newer OP_TEE file in v1 binary format
-         cls.make_tee_bin('tee.bin')
-diff --git a/tools/binman/test/Makefile b/tools/binman/test/Makefile
-index 4d152eee9c0..66279e0e207 100644
---- a/tools/binman/test/Makefile
-+++ b/tools/binman/test/Makefile
-@@ -30,12 +30,13 @@ LDS_BINMAN_BAD := -T $(SRC)u_boot_binman_syms_bad.lds
- LDS_BINMAN_X86 := -T $(SRC)u_boot_binman_syms_x86.lds
- LDS_BINMAN_EMBED := -T $(SRC)u_boot_binman_embed.lds
- LDS_EFL_SECTIONS := -T $(SRC)elf_sections.lds
-+LDS_EFL_SECTIONS_TEE := -T $(SRC)elf_sections_tee.lds
- LDS_BLOB := -T $(SRC)blob_syms.lds
- 
- TARGETS = u_boot_ucode_ptr u_boot_no_ucode_ptr bss_data bss_data_zero \
- 	u_boot_binman_syms u_boot_binman_syms.bin u_boot_binman_syms_bad \
- 	u_boot_binman_syms_size u_boot_binman_syms_x86 embed_data \
--	u_boot_binman_embed u_boot_binman_embed_sm elf_sections blob_syms.bin
-+	u_boot_binman_embed u_boot_binman_embed_sm elf_sections elf_sections_tee blob_syms.bin
- 
- all: $(TARGETS)
- 
-@@ -84,6 +85,9 @@ blob_syms: blob_syms.c
- elf_sections: CFLAGS += $(LDS_EFL_SECTIONS)
- elf_sections: elf_sections.c
- 
-+elf_sections_tee: CFLAGS += $(LDS_EFL_SECTIONS_TEE)
-+elf_sections_tee: elf_sections_tee.c
-+
- clean:
- 	rm -f $(TARGETS)
- 
-diff --git a/tools/binman/test/elf_sections_tee.c b/tools/binman/test/elf_sections_tee.c
-new file mode 120000
-index 00000000000..01b200a365e
---- /dev/null
-+++ b/tools/binman/test/elf_sections_tee.c
-@@ -0,0 +1 @@
-+elf_sections.c
-\ No newline at end of file
-diff --git a/tools/binman/test/elf_sections_tee.lds b/tools/binman/test/elf_sections_tee.lds
-new file mode 100644
-index 00000000000..501d85a1f68
---- /dev/null
-+++ b/tools/binman/test/elf_sections_tee.lds
-@@ -0,0 +1,31 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2016 Google, Inc
-+ */
-+
-+OUTPUT_FORMAT("elf32-i386", "elf32-i386", "elf32-i386")
-+OUTPUT_ARCH(i386)
-+ENTRY(_start)
-+
-+SECTIONS
-+{
-+	. = 0x00100010;
-+	_start = .;
-+
-+	. = ALIGN(4);
-+	.text :
-+	{
-+		*(.text*)
-+	}
-+
-+	. = 0x00101000;
-+	.sram :
-+	{
-+		*(.sram*)
-+	}
-+
-+	/DISCARD/ : {
-+		*(.comment)
-+		*(.dyn*)
-+	}
-+}
+diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+index a9bd5a2be84..4344cefeba3 100644
+--- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
++++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+@@ -234,8 +234,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc10000>;
++					entry = <0x9dc10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -247,8 +247,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc20000>;
++					entry = <0x9dc20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+@@ -322,7 +322,7 @@
+ 					description = "k3-am6xx-phycore-disable-spi-nor";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F001000>;
++					load = <0x8F002000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_spi_not_dtbo>;
+@@ -337,7 +337,7 @@
+ 					description = "k3-am6xx-phycore-disable-eth-phy";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F002000>;
++					load = <0x8F004000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_eth_phy_dtbo>;
+@@ -352,7 +352,7 @@
+ 					description = "k3-am6xx-phycore-qspi-nor";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F003000>;
++					load = <0x8F006000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_qspi_nor_dtbo>;
+@@ -479,8 +479,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc10000>;
++					entry = <0x9dc10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -492,8 +492,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc20000>;
++					entry = <0x9dc20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
+index f743c4353b4..1619f733a0d 100644
+--- a/arch/arm/dts/k3-am625-sk-binman.dtsi
++++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
+@@ -231,8 +231,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc10000>;
++					entry = <0x9dc10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -244,8 +244,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc20000>;
++					entry = <0x9dc20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+@@ -362,8 +362,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc10000>;
++					entry = <0x9dc10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -375,8 +375,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc20000>;
++					entry = <0x9dc20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+index 65fef6e4790..6c4ad72d936 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+@@ -219,8 +219,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc10000>;
++					entry = <0x9dc10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -232,8 +232,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc20000>;
++					entry = <0x9dc20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+@@ -346,8 +346,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc10000>;
++					entry = <0x9dc10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -359,8 +359,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9dc00000>;
+-					entry = <0x9dc00000>;
++					load = <0x9dc20000>;
++					entry = <0x9dc20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+index 9bcdf74ffe4..20e34398225 100644
+--- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
++++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+@@ -238,8 +238,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca10000>;
++					entry = <0x9ca10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -251,8 +251,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca20000>;
++					entry = <0x9ca20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+@@ -326,7 +326,7 @@
+ 					description = "k3-am6xx-phycore-disable-spi-nor";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F001000>;
++					load = <0x8F002000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_spi_not_dtbo>;
+@@ -341,7 +341,7 @@
+ 					description = "k3-am6xx-phycore-disable-eth-phy";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F002000>;
++					load = <0x8F004000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_eth_phy_dtbo>;
+@@ -356,7 +356,7 @@
+ 					description = "k3-am6xx-phycore-qspi-nor";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F003000>;
++					load = <0x8F006000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_qspi_nor_dtbo>;
+@@ -428,8 +428,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca10000>;
++					entry = <0x9ca10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -441,8 +441,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca20000>;
++					entry = <0x9ca20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+index 0685bdd7e0c..8f66b67681b 100644
+--- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
++++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+@@ -222,8 +222,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca10000>;
++					entry = <0x9ca10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -235,8 +235,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca20000>;
++					entry = <0x9ca20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+@@ -351,8 +351,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-fs";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca10000>;
++					entry = <0x9ca10000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_fs";
+ 					};
+@@ -364,8 +364,8 @@
+ 					arch = "arm32";
+ 					compression = "none";
+ 					os = "tifsstub-gp";
+-					load = <0x9ca00000>;
+-					entry = <0x9ca00000>;
++					load = <0x9ca20000>;
++					entry = <0x9ca20000>;
+ 					blob-ext {
+ 						filename = "tifsstub.bin_gp";
+ 					};
+diff --git a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
+index 966905bd64d..59d8902bf48 100644
+--- a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
++++ b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
+@@ -371,7 +371,7 @@
+ 					description = "k3-am6xx-phycore-disable-spi-nor";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F001000>;
++					load = <0x8F002000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_spi_not_dtbo>;
+@@ -386,7 +386,7 @@
+ 					description = "k3-am6xx-phycore-disable-eth-phy";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F002000>;
++					load = <0x8F004000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_eth_phy_dtbo>;
+@@ -401,7 +401,7 @@
+ 					description = "k3-am6xx-phycore-qspi-nor";
+ 					type = "flat_dt";
+ 					compression = "none";
+-					load = <0x8F003000>;
++					load = <0x8F006000>;
+ 					arch = "arm";
+ 					ti-secure {
+ 						content = <&am6xx_phycore_disable_qspi_nor_dtbo>;
 -- 
 2.43.0
 
