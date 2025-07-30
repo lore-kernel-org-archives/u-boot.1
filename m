@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373EDC87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D76CC87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 05:13:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EDAC83327;
-	Wed, 30 Jul 2025 07:10:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B9B483340;
+	Wed, 30 Jul 2025 07:10:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DLo2ZsGt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JMTCvLqx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF77882B07; Wed, 30 Jul 2025 04:19:15 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id D7AE782063; Wed, 30 Jul 2025 04:44:50 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88D2881FEE
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 04:19:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4931380C83
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 04:44:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chalianis1@gmail.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7dfc604107eso562642185a.2
- for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 19:19:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=roy.walker777@gmail.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-b3f80661991so354945a12.0
+ for <u-boot@lists.denx.de>; Tue, 29 Jul 2025 19:44:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753841952; x=1754446752; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TM6VStVA419HaGA/XMYEvjKW1ilGPkiqxC8O9R2j5CE=;
- b=DLo2ZsGt0Z43ckhn+8h5l7nYMX0FwWnpZT7p0XlhMhhmenIqKqFHHaHx+/ZBN0CyN0
- 21HaFCSiWJekQRB574hYC+1XkQHusAgVIGOvJPrvsraOlTp3HHQ8lH6NacDd9EzyR3fT
- qhAEbT3P2gimsg+EsGU+USgVLamVGedr2HSyICK7N0C5HoUvSsmZVdhzPtT1EU9EYCVa
- bhkkNffQgVvczcO85vWJhIrGqScjzKzbQQBSy3eaggmfPIg8K7y0rKG0Gg6vjLk3hK1r
- 1nYl3xZfnnTAZvsGJ1LDSc3Hhdik6/xIzuAmaJeWt3CfKboU8EmIszNerlKlGRFsrOio
- ISVg==
+ d=gmail.com; s=20230601; t=1753843486; x=1754448286; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Q3Fpmj+I/whXXDLw53SJ68WYicSIG3Sq/QXTO6CNLso=;
+ b=JMTCvLqxn4IUhZysDoX6W6NojW+ih2/nPancEvAjMHh/a3CDJfiaBPFFelMjYDYSww
+ IChke1qX9IRvax/Yg7thNCyso3JnVP/qfOjY5w2Qk2IGo2AUNjNE6sWdlE6Jjefob/yu
+ yRaRE3+YRyj+CFAW7ggeKnIBRW6lu/12LEiJFPycrqJVanTy7xo688BWAmTjBIMe+0zE
+ mrG0tIrGJiKDpIqZx0aH2ns6Aoi4m26jKbOmMAJFPPoEhqvRGswc6YvmORsDc76JDCDD
+ 4ARsG/Z5PP6nGju6/woZ71Kw3mc5MTcUhdkJvWPwtVx4nUm767l4JUuuIfRrgPIdK+jy
+ C6jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753841952; x=1754446752;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TM6VStVA419HaGA/XMYEvjKW1ilGPkiqxC8O9R2j5CE=;
- b=dK8u4Z2pnA1y6vHbL853ghV6NjSsLew1Jnyu3W2JyX1I1Q3TXR3IMSPzyso882LoXr
- 2Vb3BhVOC56d8QImgvn/ccAfx9RaMcXqohm5xSMLuesQ3rpRoJgpCAO6QyESPX1h9wnM
- PgglvJPE7fUei3T24UmNBMhl4V7Gu8o/wsiLUoiyUH8G3gMlx432XXDh/zXJxnNqeqgJ
- Z6lJKerQRZ8a1od7gE6FwPuyZoU19g4ejtKCVoreYl6/A5WB8ac/2J1u5AxQkZmTGtyk
- JmvqYzC40acuLVkyz/jVPU5zqvWkYNbOscZLezrd1PF03N6udDZ422F8nXIt6bmf60ml
- Shvg==
-X-Gm-Message-State: AOJu0YxxqmhfICgW3ErrtEzA1DNgRzvUiYf85/x1cvABaCU1ckESOHw7
- JJ4ghHnrIBYpieNIKXJMkBlVYkvaBOMvFvIDiO0dPhM8J/ykVHVBIq1g
-X-Gm-Gg: ASbGncvRgb4Rl0OL39ip5SFMw43ll2qJw1zylAKWmRZGCgRJAqN5+9ab1dYl6mPlnCB
- ZNjcMDlfB7z99z3+pxbIsZeHsmHrcbH5X0TT8CVG4wQfdNxJ1K0xdI55ws34dkUa96xQu7OxyrA
- LKPS6WQRvNAEWlooZNAmB0g+FlJfjxbd829Foqmgk1LNmcvYHTLle6btKXvxjoJYi8d8kdzPt/A
- 5BG7MexSXzBwn38gwol9Ldg4L9gR4L8Tsj31JzM/37E6QSClBzHBeCZLuoTlWzdVY7BuXXnF6Yq
- rDdJ4SowIA2rHej0TVyWwmDwCzT4My8bQObpwhQIYCbCVzKNTgJx6DNF4PfP+zk67AEVf8HJ9cv
- rQxOtsZzXsLB/lP490bnxkvNxVHGJniTOwBQqTIF6
-X-Google-Smtp-Source: AGHT+IG5cU7RYUrVRHSbIGJekfFcwpEatl51qSSErcArsKhBwysTKmCzAECXSN3TKcuRVFa85QnhDw==
-X-Received: by 2002:a05:620a:190a:b0:7e0:2c05:6ba1 with SMTP id
- af79cd13be357-7e66eece2b1mr298265085a.0.1753841952242; 
- Tue, 29 Jul 2025 19:19:12 -0700 (PDT)
-Received: from Latitude-7490.ht.home
- ([2607:fa49:8c41:2600:c720:4b12:12bb:8a7a])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7e643879157sm503951285a.59.2025.07.29.19.19.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 19:19:11 -0700 (PDT)
-From: chalianis1@gmail.com
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de,
-	Chali Anis <chalianis1@gmail.com>
-Subject: [PATCH] pinctrl: gpio: sx150x: fix compilation warnings.
-Date: Tue, 29 Jul 2025 22:19:08 -0400
-Message-Id: <20250730021908.3268071-1-chalianis1@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1753843486; x=1754448286;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Q3Fpmj+I/whXXDLw53SJ68WYicSIG3Sq/QXTO6CNLso=;
+ b=BEUH2i9YLp1XdJ/K12OhaWEhGjdYJX4RSHybMkjZGGM08H/HrXhtPJq4MmWq4teRnw
+ kAjX2oPgmLlFcUHhsftbC6xJDEBVW3XHR0NCYx91M5r2RbGDnu0Ox3AZIAFyzOh6x2Fw
+ NnquaKS1AQSbCjkdKZ8Hhe6iOuxv1ET4fZ+awBkLgOMzY4aVA0twacYamoX2Y+gQLh/6
+ mNJq0dUy5nzc2W36zACf7ZH8EAaeEeI5XVQdLHrkOvKBRYCL2zSSDDcDx/eEJk4NfXP+
+ EchtvChFN7nJF0BGi+tS4BuXaIibP2L2jEMdGcXSRgPZiqgrxWFu/aEaBoWmqg4VCh47
+ QtUw==
+X-Gm-Message-State: AOJu0Yw45UxnEtvE0tThOYsQ76QqTyIcwa20abJQiSbg2HXD1HMI5ghw
+ kEj3QKUfgVN9rdyI8QxmeWMKHZbQMy8IRYn2uomsKApR76PZDF+h/Zdrvv7KodYGo1OKbWxJpwD
+ hJ12KoJS6xGGjbIslxOEixaKUgwMxLKLr/lCX
+X-Gm-Gg: ASbGncvOfIDEF0ublZz1CAI2r9yVP0hVuaBfHRhR1c9lyW7Xt5Kk2x1qpZ9xpoKizYa
+ BD5mu0z3ZpP5g2ZK6F2lZw4EA1JK9Igc3lUkfzHzvQtIIVEIthH5CK9/3RMaa1/5i9mTp9+/El+
+ uPSOh3vdCkyDkd0AOsOhejNzWmKH6XqXtSs7uKMJHwUSExz6MADhhDjVS48yKZ6UYp5tjycb0CO
+ LH529U=
+X-Google-Smtp-Source: AGHT+IEiUcxx5wLAYSCLbJF4iaU5ZV5aKIegw34JiJgY4ut5uQIHRvOKuMFqk05Nf95Ini4Hmu88mzp+IJXYEJ1tpqc=
+X-Received: by 2002:a17:90a:ec83:b0:313:aefa:b08 with SMTP id
+ 98e67ed59e1d1-31f5dd3b442mr2008694a91.16.1753843486306; Tue, 29 Jul 2025
+ 19:44:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Roy Walker <roy.walker777@gmail.com>
+Date: Tue, 29 Jul 2025 21:44:29 -0500
+X-Gm-Features: Ac12FXy7a5AYHQda_nZ-4LT2ALrwOvXU6UdoAAtdnuzO6YvxoKumW-SKngWEZj4
+Message-ID: <CAD-tQfVy8CqKGeeWXJaR1HoC9DMrZZ2Ynq1UkYt-0pxkt4oS5w@mail.gmail.com>
+Subject: MT7621 help
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Wed, 30 Jul 2025 07:10:08 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,109 +88,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chali Anis <chalianis1@gmail.com>
+I was attempting to put OpenWRT on a TP-Link Festa F61.  I messed up and
+wiped out the u-boot image.  I am trying to build a new u-boot image and
+ymodem it there.  Followed the exact steps here:
+https://docs.u-boot.org/en/stable/board/mediatek/mt7621.html.
 
-Fixes: 5451504256d3 ("pinctrl: gpio: sx150x: add Semtech SX150x I2C GPIO expander and pinctrl driver")
+When it boots I get this and it hangs:
 
-Signed-off-by: Chali Anis <chalianis1@gmail.com>
----
- drivers/pinctrl/pinctrl-sx150x.c | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
+U-Boot 2025.07-00889-gbd0ade7d090a (Jul 22 2025 - 16:25:47 -0500)
 
-diff --git a/drivers/pinctrl/pinctrl-sx150x.c b/drivers/pinctrl/pinctrl-sx150x.c
-index 324d7af8fcd0..cddde8822edb 100644
---- a/drivers/pinctrl/pinctrl-sx150x.c
-+++ b/drivers/pinctrl/pinctrl-sx150x.c
-@@ -7,7 +7,6 @@
-  * <gbean@codeaurora.org>
-  */
- 
--#include <asm/gpio.h>
- #include <dm.h>
- #include <dm/device-internal.h>
- #include <dm/device.h>
-@@ -22,6 +21,8 @@
- #include <log.h>
- #include <power/regulator.h>
- #include <regmap.h>
-+#include <linux/bug.h>
-+#include <asm/gpio.h>
- 
- #define err(format, arg...) printf("ERR:" format "\n", ##arg)
- #define dbg(format, arg...) printf("DBG:" format "\n", ##arg)
-@@ -413,7 +414,7 @@ static int sx150x_reg_read(struct sx150x_pinctrl_priv *pctl, unsigned int reg,
- {
- 	int ret, n;
- 	const int width = sx150x_reg_width(pctl, reg);
--	unsigned int idx, val;
-+	unsigned int val, idx;
- 
- 	/*
- 	 * There are four potential cases covered by this function:
-@@ -444,8 +445,9 @@ static int sx150x_reg_read(struct sx150x_pinctrl_priv *pctl, unsigned int reg,
- 	 *		reg  3 [ 3 3 2 2 1 1 0 0 ]
- 	 */
- 
--	for (n = width, val = 0, idx = reg; n > 0; n -= 8, idx) {
-+	for (n = width, val = 0; n > 0; n -= 8) {
- 		val <<= 8;
-+		idx = reg;
- 
- 		ret = dm_i2c_reg_read(pctl->i2c, idx);
- 		if (ret < 0)
-@@ -475,7 +477,6 @@ static int sx150x_reg_write(struct sx150x_pinctrl_priv *pctl, unsigned int reg,
- 		if (ret < 0)
- 			return ret;
- 
--		reg;
- 		n -= 8;
- 	} while (n >= 0);
- 
-@@ -724,7 +725,7 @@ static const struct udevice_id sx150x_pinctrl_of_match[] = {
- 	{},
- };
- 
--static const struct pinconf_param sx150x_conf_params[] = {
-+static const struct pinconf_param __maybe_unused sx150x_conf_params[] = {
- 	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
- 	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 1 },
- 	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_DOWN, 1 },
-@@ -750,7 +751,7 @@ static const char *sx150x_pinctrl_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static int sx150x_pinctrl_conf_set(struct udevice *dev, unsigned int pin,
-+static int __maybe_unused sx150x_pinctrl_conf_set(struct udevice *dev, unsigned int pin,
- 				   unsigned int param, unsigned int arg)
- {
- 	int ret;
-@@ -834,13 +835,11 @@ static int sx150x_pinctrl_conf_set(struct udevice *dev, unsigned int pin,
- static int sx150x_pinctrl_bind(struct udevice *dev)
- {
- 	struct sx150x_pinctrl_priv *pctl = dev_get_plat(dev);
--	int ret, reg;
-+	int ret;
- 
- 	if (!dev_read_bool(dev, "gpio-controller"))
- 		return 0;
- 
--	reg = (int)dev_read_addr_ptr(dev);
--
- 	ret = device_bind(dev, &sx150x_gpio_driver, dev_read_name(dev), NULL,
- 			  dev_ofnode(dev), &pctl->gpio);
- 	if (ret)
-@@ -861,7 +860,10 @@ static int sx150x_pinctrl_probe(struct udevice *dev)
- 
- 	pctl->data = drv_data;
- 
--	reg = (int)dev_read_addr_ptr(dev);
-+	reg = dev_read_u32_default(dev, "reg", -ENODEV);
-+	if (reg < 0)
-+		return -ENODEV;
-+
- 	ret = dm_i2c_probe(dev->parent, reg, 0, &pctl->i2c);
- 	if (ret) {
- 		err("Cannot find I2C chip %02x (%d)", reg, ret);
--- 
-2.34.1
+CPU:   MediaTek MT7621A ver 1, eco 3
+Boot:  DDR3, SPI-NOR 3-Byte Addr
+Clock: CPU: 880MHz, DDR: 1200MT/s, Bus: 220MHz, XTAL: 40MHz
+Model: MediaTek MT7621 RFB (SPI-NOR)
+DRAM:
 
+Is this a newer version of the MT7621 that is not compatible?  Maybe a
+different DRAM binary is needed?  Here is a link with DMESG and boot logs -
+https://forum.openwrt.org/t/support-for-tp-link-festa-f61-v1-6/236744/3.
+
+TIA
