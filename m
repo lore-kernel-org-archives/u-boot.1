@@ -4,85 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFBDBC87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 10:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B0CC87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 10:15:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE5D781E13;
-	Wed, 30 Jul 2025 12:11:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CC4CC81E13;
+	Wed, 30 Jul 2025 12:15:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WrTVhb7J";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hcVrWG0F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD7AD81F6B; Wed, 30 Jul 2025 12:11:49 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 421B481F6B; Wed, 30 Jul 2025 12:15:37 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 502C4803CC
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 12:11:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 519B7803CC
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 12:15:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3b7886bee77so2825555f8f.0
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 03:11:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753870306; x=1754475106; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=18wQUVS55t8PM9HLH1/6kP897FflXA4hroXx3zPVOmk=;
- b=WrTVhb7JgfODeDx4tr3Dc/GdhK2Y3yode0yGU5leyn4sVFjjCAXfPrQnSrQSoB3E9l
- Obaz2VV8fvkTQoRskBM1xPW8N1WZRzYJcxVzd9n4+vgsOQytvu6BVEbRidtk/izxQpUJ
- 5tv80Cg4YDGQdrS5podl0B+R7sCFYxS2U2MOXltPoztRsFLIPnt3r1gGb6PLZXCyenvq
- PifIVdDvnx9wbF25AuWg2h8tf7elGYzRI7rTB6N/HNYhL8KtRQna1DfZ5I75rXQeE8nk
- BpkMt4qJvPsw9IXLdlXcAPcU0gzQ/Eqi0ZsEkFqQR/AFGvMaDxnf2HeszuA1vLtAnIeW
- 2/fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753870306; x=1754475106;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=18wQUVS55t8PM9HLH1/6kP897FflXA4hroXx3zPVOmk=;
- b=R4fHNh1Ajg6UaXvKa7l3+Kp5p/2vgcNUS4X3m0pw2oHkBftotKn0di2pRIJ7SFo9CI
- pVYuVEWdJIM5dqSWDoQdrZ6SLn/bob4nnniLj99POhlyb8fbBb06xpnQgWv3oajM6PUG
- MpiPCwDvj9PT+HTg2dXu+6JchRpvNNrrMIoWz5rU8Cv0a0WfGnetESgvBJBlqKBwOyos
- GDbzKwmMz205ax4pvPW3YRpe81OACG+A4Us/aSWaqzZpc3lZduuJMCeea1sQr7y0fV+8
- 2Qd0TBQhH7B9BWNTHjCOYCAJkOwYOqDxc9tpuDgtV16RVHeiCtAPPXmSKN+1GcCOb/uf
- T7Bw==
-X-Gm-Message-State: AOJu0YyZ96s0+thU/rhdLBpCN4b2joPb1rMz0D5WTK3rG589gLmFnG3m
- nOrnHOT4iDXx3BbRPIMzVQ0WSjjMo9RYEP8wlIG15sSxoM0yZXaMxRElQln07OSR0rwHuOP00y6
- +8hYyP/uInw==
-X-Gm-Gg: ASbGnculiwX39j/7ApCR12pG1Ectgn6hrF7ZeUlQa0HiWGJ7+vxKYXRWXNGMhfIJSaI
- UDYdl4NY7424awh1+ao7KrTgLWMGovl1CTObUxda5D9icw5T/oQSbD0YCi7e6ZQoHLUeLzKek3u
- DkSEvROUAju2HfdYbIFB2mKSrXK0H2JurfK5trglt1jiTm4Mo1p16bOsKZA0p7ZA/uhRQzNSAWh
- 9xU0Ess8A1TSscO/QT5IHvGgNRn8BAGWaHIwwrs4lxvaxHS2hnFH4hzmUVILO7/ZwBGDWYK8nRE
- 4Y8A/eMUxZHckAypj9sszwJcekfFIPgqF9eqjxCeyVoW0ErzwsPLNdlL0LoGWVbz4uJgVSJjJuw
- 76ik/lXII/tIG6WqRefN2HucAI6PcEoE=
-X-Google-Smtp-Source: AGHT+IF2fBnBq+RdTI75WI0Oa9hR+lOCxp2Qj0iBzr6qTpRwnj5stNjRKlZo6NfezXqtZB4X7k0ILQ==
-X-Received: by 2002:a5d:5d0c:0:b0:3b7:75e8:bd17 with SMTP id
- ffacd0b85a97d-3b794fe4f05mr1829687f8f.8.1753870306518; 
- Wed, 30 Jul 2025 03:11:46 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:943a:6bdf:fddf:44a6])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b795fa0890sm1946396f8f.39.2025.07.30.03.11.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Jul 2025 03:11:46 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] lwip: provide a sntp_format_time() function
-Date: Wed, 30 Jul 2025 12:11:31 +0200
-Message-ID: <20250730101136.1504730-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4bsSlS2r0jz9sVt;
+ Wed, 30 Jul 2025 12:15:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1753870532;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SjWsjpXxtYk9oxzcxMZMAXNjN6khyiKbMS1X1CHr2tQ=;
+ b=hcVrWG0FQAzQp+TqpzXKqnl6xk3jISTIPJb7hC5j2BEjZeCCy/JMxvQAiGn7tV4M/jvomk
+ 2hPG81hEhyVOx5Jtw0NUZSDhePv9/I298Gw3Sd0d8Ah1Ccm9iaPUd8iNLBquX2UlZSFyjO
+ 1sKLnGk/hNWIoAXbPSlEkj1FlVr5Emn6Umrs87pWvZqY6pt8AyHnI/Ng4ys/i3/ipRAWib
+ eouDCYDe8e2wfgXINlAFiGvrKirrCdFkiuKolbqXYH6geBmipypPOfjXegWT0Mm6tt5aVi
+ 2LmOpPJrF/uHds5Uap1R7SrT2b/Eqiuc+0VHNeWHAOpOg5AMTFcJHN/JRuzO1A==
+Message-ID: <aecc4d69-3b7a-44b2-9f7f-a0376505bdec@mailbox.org>
+Date: Wed, 30 Jul 2025 12:15:30 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v2 0/4] watchdog for STM32MP family
+To: Antonio Borneo <antonio.borneo@foss.st.com>, u-boot@lists.denx.de,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Lionel Debieve <lionel.debieve@foss.st.com>,
+ =?UTF-8?Q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
+References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
+ <20250523094658.299730-1-antonio.borneo@foss.st.com>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <20250523094658.299730-1-antonio.borneo@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 2fd5a40bd343ebfc96d
+X-MBO-RS-META: 3i9qyf5zw6srob4obwep4eg8ehhanaza
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,39 +79,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a trivial implementation of sntp_format_time() to fix a build
-error when CONFIG_LWIP_DEBUG=y:
+On 23.05.25 11:46, Antonio Borneo wrote:
+> This series addresses the two watchdog drivers used on STM32MPxx
+> family platforms.
+> 
+> On the generic watchdog framework, it adds a new method
+> wdt_set_force_autostart() used by the watchdog drivers to force
+> the autostart status of the watchdog.
+> This is used when the driver detects that the watchdog has already
+> been started by a previous boot stage (e.g. HW, bootrom, Secure
+> OS, ...) and needs to be kicked by U-Boot regardless of the
+> autostart flag set in DT or in config.
+> 
+> On the driver arm_smc_wdt, it adds the API to query the Secure OS
+> about the state of the watchdog, and if at probe the watchdog is
+> already started it invokes wdt_set_force_autostart().
+> 
+> On the driver stm32mp_wdt, it adds the code to detect the state of
+> the watchdog, and if at probe the watchdog is already started it
+> invokes wdt_set_force_autostart().
+> 
+> At last, since all the watchdog drivers used on STM32MPxx family
+> platforms can query the status of the watchdog and use it
+> consequently, set WATCHDOG_AUTOSTART default to 'n' on such
+> platforms. This implies that U-Boot, by default, will respect the
+> status of the watchdog set by a previous boot stage.
+> For backward compatibility on platforms using SPL, still let
+> U-Boot to autostart the watchdog.
+> 
+> V1 ==> V2
+> - Fix backward compatibility on defconfig based on SPL
+> - Fix inconsistency in the commit message
+> - Rebase on current branch next
+> 
+> Antonio Borneo (2):
+>    watchdog: wdt-uclass.c: add wdt_set_force_autostart() helper
+>    watchdog: arm_smc_wdt: get wdt status through SMCWD_GET_TIMELEFT
+> 
+> Clément Le Goffic (1):
+>    watchdog: stm32mp: check the watchdog status
+> 
+> Patrice Chotard (1):
+>    watchdog: don't autostart watchdog on STM32MP architecture
+> 
+>   ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |  1 +
+>   ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  1 +
+>   ...-microgea-stm32mp1-microdev2-of7_defconfig |  1 +
+>   ...mp15-microgea-stm32mp1-microdev2_defconfig |  1 +
+>   configs/stm32mp15_basic_defconfig             |  1 +
+>   configs/stm32mp15_dhsom.config                |  1 +
+>   drivers/watchdog/Kconfig                      |  1 +
+>   drivers/watchdog/arm_smc_wdt.c                | 17 ++++++++++
+>   drivers/watchdog/stm32mp_wdt.c                | 33 +++++++++++++++++++
+>   drivers/watchdog/wdt-uclass.c                 |  9 +++++
+>   include/wdt.h                                 |  9 +++++
+>   11 files changed, 75 insertions(+)
 
-lib/lwip/lwip/src/apps/sntp/sntp.c: In function ‘sntp_format_time’:
-lib/lwip/lwip/src/apps/sntp/sntp.c:283:10: error: implicit declaration of function ‘ctime’ [-Werror=implicit-function-declaration]
-  283 |   return ctime(&ut);
-      |          ^~~~~
+Applied to u-boot-watchdog/master
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
+Thanks,
+Stefan
 
- lib/lwip/u-boot/arch/cc.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
-index f91127ac565..92476db7502 100644
---- a/lib/lwip/u-boot/arch/cc.h
-+++ b/lib/lwip/u-boot/arch/cc.h
-@@ -47,4 +47,12 @@
- void sntp_set_system_time(uint32_t sec);
- #define SNTP_SET_SYSTEM_TIME(sec) sntp_set_system_time(sec)
- 
-+static inline const char *sntp_format_time(time_t t)
-+{
-+	static char buf[29]; /* "(time_t)" + 20 digits max + \0 */
-+
-+	snprintf(buf, sizeof(buf), "(time_t)%llu", t);
-+	return buf;
-+}
-+#define sntp_format_time sntp_format_time
- #endif /* LWIP_ARCH_CC_H */
--- 
-2.43.0
-
-base-commit: a8f20bb6650df56d2600cda2c66f9349df9e49c8
-branch: lwip-debug-fix
