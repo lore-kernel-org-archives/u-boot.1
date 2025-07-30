@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB981C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 11:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E2CC87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 11:11:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A4DE8313F;
+	by phobos.denx.de (Postfix) with ESMTP id 74B6F8318E;
 	Wed, 30 Jul 2025 13:11:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D01082BA7; Wed, 30 Jul 2025 13:11:14 +0200 (CEST)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42a9])
+ id 2B7E281E13; Wed, 30 Jul 2025 13:11:14 +0200 (CEST)
+Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc0b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C34E281E13
+ by phobos.denx.de (Postfix) with ESMTPS id 1E13D83045
  for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 13:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bsTzg373LzXRm;
- Wed, 30 Jul 2025 13:11:11 +0200 (CEST)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bsTzf5bmdzWmL;
+ Wed, 30 Jul 2025 13:11:10 +0200 (CEST)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4bsTzf5XMCzvDb; Wed, 30 Jul 2025 13:11:10 +0200 (CEST)
+ id 4bsTzf0lgyzyJf; Wed, 30 Jul 2025 13:11:10 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 30 Jul 2025 13:10:22 +0200
-Subject: [PATCH 6/6] arm64: dts: rockchip: disable unrouted USB controllers
- and PHY on RK3399 Puma with Haikou
+Date: Wed, 30 Jul 2025 13:10:21 +0200
+Subject: [PATCH 5/6] arm64: dts: rockchip: disable unrouted USB controllers
+ and PHY on RK3399 Puma
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250730-puma-usb-cypress-v1-6-b1c203c733f9@cherry.de>
+Message-Id: <20250730-puma-usb-cypress-v1-5-b1c203c733f9@cherry.de>
 References: <20250730-puma-usb-cypress-v1-0-b1c203c733f9@cherry.de>
 In-Reply-To: <20250730-puma-usb-cypress-v1-0-b1c203c733f9@cherry.de>
 To: Klaus Goger <klaus.goger@cherry.de>, Tom Rini <trini@konsulko.com>, 
@@ -68,25 +68,13 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The u2phy0_host port is the part of the USB PHY0 (namely the
-HOST0_DP/DM lanes) which routes directly to the USB2.0 HOST
+The u2phy1_host port is the part of the USB PHY1 (namely the
+HOST1_DP/DM lanes) which routes directly to the USB2.0 HOST
 controller[1]. The other lanes of the PHY are routed to the USB3.0 OTG
 controller (dwc3), which we do use.
 
-The HOST0_DP/DM lanes aren't routed on RK3399 Puma so let's simply
-disable the USB2.0 controllers.
-
-USB3 OTG has been known to be unstable on RK3399 Puma Haikou for a
-while, one of the recurring issues being that only USB2 is detected and
-not USB3 in host mode. Reading the justification above and seeing that
-we are keeping u2phy0_host in the Haikou carrierboard DTS probably may
-have bothered you since it should be changed to u2phy0_otg. The issue is
-that if it's switched to that, USB OTG on Haikou is entirely broken. I
-have checked the routing in the Gerber file, the lanes are going to the
-expected ball pins (that is, NOT HOST0_DP/DM).
-u2phy0_host is for sure the wrong part of the PHY to use, but it's the
-only one that works at the moment for that board so keep it until we
-figure out what exactly is broken.
+The HOST1_DP/DM lanes aren't routed on RK3399 Puma so let's simply
+disable the USB2.0 controllers and associated part in USB2.0 PHY.
 
 No intended functional change.
 
@@ -96,35 +84,43 @@ No intended functional change.
 Fixes: 2c66fc34e945 ("arm64: dts: rockchip: add RK3399-Q7 (Puma) SoM")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Link: https://lore.kernel.org/r/20250425-onboard_usb_dev-v2-5-4a76a474a010@thaumatec.com
+Link: https://lore.kernel.org/r/20250425-onboard_usb_dev-v2-4-4a76a474a010@thaumatec.com
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: febd8c6ab52c683b447fe22fc740918c86feae43 ]
+[ upstream commit: 3373af1d76bacd054b37f3e10266dd335ce425f8 ]
 
-(cherry picked from commit 0a0ebebfdd4558512675e1aff34bddb770086cb0)
+(cherry picked from commit 97640da1f41d022484c1a4725bed943a5ae56073)
 ---
- dts/upstream/src/arm64/rockchip/rk3399-puma-haikou.dts | 8 --------
- 1 file changed, 8 deletions(-)
+ dts/upstream/src/arm64/rockchip/rk3399-puma.dtsi | 12 ------------
+ 1 file changed, 12 deletions(-)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3399-puma-haikou.dts b/dts/upstream/src/arm64/rockchip/rk3399-puma-haikou.dts
-index f2234dabd66411ccf6d0a59e970b00cad0a266f0..70979079923c103a701b380da6cac20435fac7e4 100644
---- a/dts/upstream/src/arm64/rockchip/rk3399-puma-haikou.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3399-puma-haikou.dts
-@@ -312,14 +312,6 @@
- 	status = "okay";
+diff --git a/dts/upstream/src/arm64/rockchip/rk3399-puma.dtsi b/dts/upstream/src/arm64/rockchip/rk3399-puma.dtsi
+index 314d9dfdba5732c574283271fdb1e8f8ed5405ca..587e89d7fc5e4267b877cbf8c9474bbf97b7b7af 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3399-puma.dtsi
++++ b/dts/upstream/src/arm64/rockchip/rk3399-puma.dtsi
+@@ -585,10 +585,6 @@
+ 	u2phy1_otg: otg-port {
+ 		status = "okay";
+ 	};
+-
+-	u2phy1_host: host-port {
+-		status = "okay";
+-	};
  };
  
--&usb_host0_ehci {
--	status = "okay";
--};
--
--&usb_host0_ohci {
--	status = "okay";
--};
--
- &vopb {
- 	status = "okay";
+ &usbdrd3_1 {
+@@ -622,11 +618,3 @@
+ 		vdd2-supply = <&vcc3v3_sys>;
+ 	};
  };
+-
+-&usb_host1_ehci {
+-	status = "okay";
+-};
+-
+-&usb_host1_ohci {
+-	status = "okay";
+-};
 
 -- 
 2.50.1
