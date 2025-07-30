@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BADC87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 22:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F6DC87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 22:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E0B8831B4;
-	Thu, 31 Jul 2025 00:19:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id ADA8B8319C;
+	Thu, 31 Jul 2025 00:49:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yupqLBF7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BjUZkA09";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FB70831D7; Thu, 31 Jul 2025 00:19:14 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D2CA802C1
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 00:19:10 +0200 (CEST)
+ id 2B6B6831B4; Thu, 31 Jul 2025 00:49:51 +0200 (CEST)
+Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
+ [IPv6:2607:f8b0:4864:20::e2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 983A28318E
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 00:49:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56UMJ9V23341774;
- Wed, 30 Jul 2025 17:19:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753913949;
- bh=+OrA7rxz1mu6V2qdp5HEZpsqaM3Alc87fVYY1iEKjWw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=yupqLBF7e7cNhU58XXRE0TCAbvPr+UhvnDs+s7VnQIKxZggUlzTYKl1OQ/yTDKuFw
- G6AJg7UhPV78pTKHVuqUukPwZjIMYmnuphh8j08k+nbU2MBvBDSoNiryXoQWkK1zCb
- wGx5K2vn4fg2g8vFt7cB/AM7K+pcdcGIrKpoJCyM=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56UMJ8Ys3494681
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 30 Jul 2025 17:19:08 -0500
-Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 30
- Jul 2025 17:19:08 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.1748.24; Wed, 30 Jul
- 2025 17:19:08 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 30 Jul 2025 17:19:08 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56UMJ8dE1917859;
- Wed, 30 Jul 2025 17:19:08 -0500
-Date: Wed, 30 Jul 2025 17:19:08 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Wadim Egorov <w.egorov@phytec.de>, Garrett Giordano
- <ggiordano@phytec.com>, <u-boot@lists.denx.de>, Daniel Schultz
- <d.schultz@phytec.de>
-Subject: Re: [PATCH 0/2] arm: dts: k3-am62a: remove GP security variant for
- AM62A
-Message-ID: <20250730221908.sqxudugdd3oa3gre@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20250729-no-62a-gp-v1-0-1dbdb4469ad3@ti.com>
- <03e3be58-3c69-407d-8bf8-3f90e6b19e6c@phytec.de>
- <20250730142624.GO1807455@bill-the-cat>
- <9d812fd3-6bbd-40c4-9485-f1aca43804b9@phytec.de>
- <20250730155258.GQ1807455@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=javier.tia@linaro.org
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-4efbfe9c7a5so956793137.0
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 15:49:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753915785; x=1754520585; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eUgq7hLO2vQch/gEIC9bTMfMcd4nz4HavE1O3PDDE8E=;
+ b=BjUZkA092xr7ovmmwvbsRpf5GVErM3cQssLZyzcUtgQiE/yhuDWEF81mdyamjL6vQN
+ K7+FU2H6WnMuuqRaltu2JxlTkXETuxBn5D+PapNvLQRMsJwZSkN+QORE/uqaCN7gTM7Y
+ WD7EYX+joreupWPav93UxLn6U9bs38cQqvuqUd7/WigF7T1NWUfRBXKlLH6rFu+eZoA0
+ HCVGDrpkSgebGraeJHVCdKvkFkXN5Gb4bHF0gxaRI14C5MW+eh1G2hPdiiItJQKe9CST
+ ORYApvNNOrdg8WZFu6r+sqceBDw93xzWFLgOuAa+05TIxsNSsJv76ZhB9103mKMFodHu
+ LBzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753915785; x=1754520585;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=eUgq7hLO2vQch/gEIC9bTMfMcd4nz4HavE1O3PDDE8E=;
+ b=s2YpZ87mWrl+aBLup4RLHFEo/nAsXthq8uK/AerqC/EFz1R/2IJFdywQZB+L4j3X7x
+ PBVgmgfenXf47Yx4a14k3tmgGvnuiQh8yac2bkYHG0pJEfC5PqELvNVISSMuvNgmzIpa
+ hvwwMFPSzr6yzQkBM1GjzpUUnDBWqiG3zjJm9W/tkYm4TLmVqSrrRpsHh7wRSYv9YowK
+ 0ETKfLk2o7sSGep3IQm+yJ4NqJky4MyTsW11twF1TOcZNg4Pwf4P/gl2vaLux/1I8I3Q
+ U06bT7yGQ5L0S0i8xGJv/1zu4vBpf8RlcXXNQ+zIOxw0kIO0UwRR7flpVO/35n/UqaBp
+ ftEQ==
+X-Gm-Message-State: AOJu0Yyz9P9WhWoH3lFfw5y758G3v5mcSGv6tU3dFeAsWnw8PqaPcYt8
+ uiGoW9GAjyGySFx2VgUz7rdaccviKqVic4Clw1RJqEU3QdB1g1ksFG8XTjPSEdwdox382t+05AQ
+ 58Cfy
+X-Gm-Gg: ASbGncsvqc+QegX4qYJc8lsnQCXcKT1cskZzrwadeghLXsLeI/UjHJqiYaDujDc7WEd
+ UT4hKgli31CMWpH4OjEM951oXy344V9/b23uBvYAmIA2Rau7hJFaWnc8v8EgTh7eKthYDE1jHxw
+ dszYCSVoP4l3HmnT2W5wX6HzQ+t4g9JBODwf4ZwXvvsM+hvTYHQWedxgpdiN2uqaTe65yYCcEhc
+ WInm164xXvZbYcpzXcfdee5JZFN4Bts0zn0S5VMceP1UtVMzkhuE2Qwm1cPRckphXkPpzWJgiAR
+ Lq1zViDRQGipFMQLfzbDT+kizhFGn3BwFU9KY6VFWSt0KfFmJSsM9unaXSWtO7Dgi3lUnv5Ty1h
+ VggwI3r5b7sOk5HEHGTXQBZf3qU+AZWikNFF+59fj6adzN3rQhRc=
+X-Google-Smtp-Source: AGHT+IHZkz12LkrYhjloSMARuAMwUDxBxT/HZlffnpS+N1+AZZEfQjEHyzke5XoMu8I1Mud6woLwNg==
+X-Received: by 2002:a05:6102:f95:b0:4df:9281:5ec3 with SMTP id
+ ada2fe7eead31-4fbe9cdfb15mr3282293137.2.1753915785132; 
+ Wed, 30 Jul 2025 15:49:45 -0700 (PDT)
+Received: from jetm-rog-crosshair-hero-x870e ([190.113.103.157])
+ by smtp.gmail.com with ESMTPSA id
+ ada2fe7eead31-4fc0d42bba7sm37748137.11.2025.07.30.15.49.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Jul 2025 15:49:44 -0700 (PDT)
+From: Javier Tia <javier.tia@linaro.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] disk: efi_loader: Add function to detect disk image type
+Date: Wed, 30 Jul 2025 16:49:41 -0600
+Message-ID: <20250730224942.755510-1-javier.tia@linaro.org>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20250730155258.GQ1807455@bill-the-cat>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,46 +95,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On July 30, 2025 thus sayeth Tom Rini:
-> On Wed, Jul 30, 2025 at 06:34:42PM +0300, Wadim Egorov wrote:
-> > 
-> > 
-> > On 7/30/25 5:26 PM, Tom Rini wrote:
-> > > On Wed, Jul 30, 2025 at 04:12:48PM +0300, Wadim Egorov wrote:
-> > > > 
-> > > > 
-> > > > On 7/29/25 9:36 PM, Bryan Brattlof wrote:
-> > > > > Hello Everyone,
-> > > > > 
-> > > > > The AM62Ax was created right when TI was shifting to their high security
-> > > > > (HS-FS and HS-SE) processes. During this transition a small subset of
-> > > > > AM62A parts where configured to use the old "GP" security for internal
-> > > > > and for select groups of partners but never sold for the wider public.
-> > > > 
-> > > > I guess I will need to update my hardware to an HS-FS device :/
-> > > 
-> > > Did these chips then get sold to the wider public? Or just distributed
-> > > within phytec? I'm wondering if we have another i.MX95 A0 type situation
-> > > or not
-> > > (https://lore.kernel.org/u-boot/PAXPR04MB96443299A51764EE05533DE0E224A@PAXPR04MB9644.eurprd04.prod.outlook.com/)
-> > > 
-> > 
-> > I am pretty sure I got a super early prototype for bringup. AFAIK there are
-> > no other SoMs with this revision in the wild.
+This commit introduces a new function, detect_disk_image_type(), which
+checks if a buffer contains a disk image. This function is used to
+detect disk images based on their headers, rather than relying on file
+extensions.
 
-Ha you scared me for a bit. I was told no-one had these samples :)
+The function checks for ISO 9660, DOS MBR, and GPT protective MBR
+signatures. It returns 1 if a disk image is detected, and 0 otherwise.
 
-Even the teams producing the TIFS and DM firmware binaries have lost 
-their ability to test on any real GP hardware. So it's only a matter of 
-time before these boards bit rot away
+This function is then used in the efi_bootmgr.c file to determine if a
+downloaded file is a PE-COFF image or a disk image. This change
+improves the reliability of disk image detection, as it no longer
+relies on file extensions, which can be easily changed or omitted.
 
-~Bryan
+Signed-off-by: Javier Tia <javier.tia@linaro.org>
+---
+ disk/part.c                  | 46 ++++++++++++++++++++++++++++++++++++
+ include/part.h               |  9 +++++++
+ lib/efi_loader/efi_bootmgr.c | 29 ++++++++++-------------
+ 3 files changed, 68 insertions(+), 16 deletions(-)
 
-> 
-> OK, I'll assume things will get worked out then, barring further "wait
-> no, this is in the wild!" reports.
-> 
-> -- 
-> Tom
-
+diff --git a/disk/part.c b/disk/part.c
+index 66e2b3a7219..9d9483b216c 100644
+--- a/disk/part.c
++++ b/disk/part.c
+@@ -855,3 +855,49 @@ int part_get_bootable(struct blk_desc *desc)
+ 
+ 	return 0;
+ }
++
++/**
++* detect_disk_image_type() - Detect if buffer contains a disk image
++*
++* @buffer:  Buffer containing potential disk image data
++* @size:    Size of the buffer
++* Return:   1 if disk image detected, 0 otherwise
++*/
++int detect_disk_image_type(void *buffer, size_t size)
++{
++	unsigned char *buf = (unsigned char *)buffer;
++
++	/* Need at least 512 bytes for basic checks */
++	if (!buffer || size < 512)
++		return 0;
++
++#if IS_ENABLED(CONFIG_ISO_PARTITION)
++	/* Check for ISO 9660 signature "CD001" at offset 0x8001 */
++	if (size > 0x8005) {
++		if (buf[0x8001] == 'C' && buf[0x8002] == 'D' &&
++		    buf[0x8003] == '0' && buf[0x8004] == '0' &&
++		    buf[0x8005] == '1') {
++			return 1;
++		}
++	}
++#endif
++
++#if IS_ENABLED(CONFIG_DOS_PARTITION)
++	/* Check for DOS MBR signature 0x55AA at offset 0x1FE */
++	if (buf[0x1FE] == 0x55 && buf[0x1FF] == 0xAA) {
++		return 1;
++	}
++#endif
++
++#if IS_ENABLED(CONFIG_EFI_PARTITION)
++	/* Check for GPT protective MBR */
++	if (buf[0x1FE] == 0x55 && buf[0x1FF] == 0xAA) {
++		/* Check if partition type is 0xEE (GPT protective) */
++		if (buf[0x1C2] == 0xEE) {
++			return 1;
++		}
++	}
++#endif
++
++	return 0;
++}
+diff --git a/include/part.h b/include/part.h
+index b772fb34c8a..39c04e0c8f7 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -727,6 +727,15 @@ int part_get_type_by_name(const char *name);
+  */
+ int part_get_bootable(struct blk_desc *desc);
+ 
++/**
++ * detect_disk_image_type() - Detect if buffer contains a disk image
++ *
++ * @buffer: Buffer containing potential disk image data
++ * @size:   Size of the buffer
++ * Return:  1 if disk image detected, 0 otherwise
++ */
++int detect_disk_image_type(void *buffer, size_t size);
++
+ #else
+ static inline int part_driver_get_count(void)
+ { return 0; }
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 662993fb809..da63ad41b40 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -17,6 +17,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <net.h>
++#include <part.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
+ #include <asm/unaligned.h>
+@@ -407,7 +408,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+ 	if (!ctx)
+ 		return ret;
+ 
+-	/* cleanup for iso or img image */
++	/* cleanup for image file */
+ 	if (ctx->ramdisk_blk_dev) {
+ 		ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
+ 					 EFI_CONVENTIONAL_MEMORY);
+@@ -466,7 +467,6 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ {
+ 	char *s;
+ 	int err;
+-	int uri_len;
+ 	efi_status_t ret;
+ 	void *source_buffer;
+ 	efi_uintn_t source_size;
+@@ -516,21 +516,10 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 	image_size = ALIGN(image_size, SZ_2M);
+ 
+ 	/*
+-	 * If the file extension is ".iso" or ".img", mount it and try to load
+-	 * the default file.
+-	 * If the file is PE-COFF image, load the downloaded file.
++	 * Check if the downloaded file is a PE-COFF image or a disk image.
++	 * Use header-based detection instead of file extensions.
+ 	 */
+-	uri_len = strlen(uridp->uri);
+-	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+-	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+-		ret = prepare_loaded_image(lo_label, image_addr, image_size,
+-					   &loaded_dp, &blk);
+-		if (ret != EFI_SUCCESS)
+-			goto err;
+-
+-		source_buffer = NULL;
+-		source_size = 0;
+-	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
++	if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
+ 		/*
+ 		 * loaded_dp must exist until efi application returns,
+ 		 * will be freed in return_to_efibootmgr event callback.
+@@ -544,6 +533,14 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 
+ 		source_buffer = (void *)image_addr;
+ 		source_size = image_size;
++	} else if (detect_disk_image_type((void *)image_addr, image_size)) {
++		ret = prepare_loaded_image(lo_label, image_addr, image_size,
++					   &loaded_dp, &blk);
++		if (ret != EFI_SUCCESS)
++			goto err;
++
++		source_buffer = NULL;
++		source_size = 0;
+ 	} else {
+ 		log_err("Error: file type is not supported\n");
+ 		ret = EFI_UNSUPPORTED;
+-- 
+2.50.1
 
