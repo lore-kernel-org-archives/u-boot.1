@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE320C83F26
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 17:24:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19294C83F26
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 17:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CE378211F;
-	Wed, 30 Jul 2025 19:24:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6DE60831C6;
+	Wed, 30 Jul 2025 19:47:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dI5WJt28";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FsiVKeLu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FE6882EB8; Wed, 30 Jul 2025 19:24:45 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id CBB04831C6; Wed, 30 Jul 2025 19:47:22 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30100803CC
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 19:24:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE2DA8319C
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 19:47:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-306db05b292so53336fac.1
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 10:24:42 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-40a4de175a3so36217b6e.0
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 10:47:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753896281; x=1754501081; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753897637; x=1754502437; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HqH0f15Rh0NNAZDtfWJYhnRWTwtFPs1k463wYgj1wcQ=;
- b=dI5WJt28QCOQ2udGn9qdulWar6m2GGFQqDYV1B6N8eZRpYmYdpU7MM/crG4NVXjyux
- MrULz1f0Cl6Z7zpqr9ntbCF0PM7JPTkEYZQUYUlE/5463X6Tjw5XETBCRJl+vnJg2ov9
- laieTmlpqyc02wfj8t7Del3jTfnYXf1aUJZJw=
+ bh=e+rbJw8uzy4hPCYKzqhzUvZaZW1HbVd/ccLJCHYePKM=;
+ b=FsiVKeLuZ8HieRNBNlBVr+hoKt4CqJaS4F8ME09GsECKuS2cxtCS3fc2ID0MDuvXmr
+ Zhsm7ID3JY2O4LDa/TUu8dKwzL7LUCjD2EmQEl+1kQsd9/GddWvHOHR7MNzjT6RToWBR
+ uJga2UQOve5llMeG9t3AyTyk/9pAek6LGvnBg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753896281; x=1754501081;
+ d=1e100.net; s=20230601; t=1753897637; x=1754502437;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HqH0f15Rh0NNAZDtfWJYhnRWTwtFPs1k463wYgj1wcQ=;
- b=DW5l5aje8k6IHFnYU6mibOfxGiUMIMv6T7uzt73qgK1ZAWB5a8SlM4R4bkOedJZUQE
- 7mncyxp6XAc8nZlNAn7HZgvB96SM14bhbEE002sgVjknRB4kuqJexv2JCABH0Czj2joP
- dRfP36Nb0UIX61nmCcUtnyroPA3xLlQD7k74soE7Kx25D8QMy0EaYeTVTfBrarOMiBPk
- quOcj7g1sYsXC1eF/dZKBMG/x843VjqmMCET+0BIJd7IagU4W7ufBYBYOknLOSLpapHy
- by7I31JqRwVD78hoISn3p1vtpmWKmiM484T1T8g24gGDN7PWxDmlVcIe/8U6ikg7hSJD
- raxw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+kKTHMjx+yBnFa7KFNqPHccIfWLJ+l8Wj4cCabJRiFlnquaXYK8GFhAXZaMBTP8Eg92SCeSM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzB4e7haIR4++lR+cHoWTwGOkSpWLd9UOV/HksJqh/TqjVXGdbU
- h6HE+BzLXIB2f3V6TLwLuHPE8WqyVwJG6h8R2e9+8w4TRYYD/M2O8XG+u6xrt0E2LpU=
-X-Gm-Gg: ASbGncsjHBB4G/faGBthQcPK2qxa78cZMeS4jUbfqJEj0mMIo6JtAN8lLaAu2qek+bO
- RcaoOupcnRhlEAGBheHRrbme4474gGxf96ose5XZ6Cp8MvT/PqI6ukT7zvtTvbqkJH44ubghUmb
- 9jwaW9scIckM6UdwcIsdV1AuwIB3lvHxFyyn401IjVYLpB1GQk+hTHPEmY1WHIbM/joh6O6mN5c
- z7Yo3IudRi9ohmQrO/XWxpmDBH8OlRUYV7b+q8r+flMB3dh6yuHhtsopGihVux17WHOd9bCZ58X
- 2b4803ynYqNrIdTqlJgHva9jibkrmThzr0KT+EdfgRXexVQ3+YjPPCEk64jpUE83G3Q5lT6Sc0W
- F4KUE4oscFyO2aIRP6nvP36ZqMJC1cUJ/a++7hzpLo2udr4QREbLCKmWkY6KLFc89cR4=
-X-Google-Smtp-Source: AGHT+IGf2UMWSKiQgFWg8L91qXFwNr9rI3HGYt4m/e53KDrdBaKm7JNXir73XLybyvkMkIspc45Thw==
-X-Received: by 2002:a05:6871:56c8:b0:301:a823:9cd1 with SMTP id
- 586e51a60fabf-30785c938f1mr2576662fac.22.1753896280755; 
- Wed, 30 Jul 2025 10:24:40 -0700 (PDT)
+ bh=e+rbJw8uzy4hPCYKzqhzUvZaZW1HbVd/ccLJCHYePKM=;
+ b=lK/DvjNhEPwi0xAWtYLMkguxONZ0rir9vz0mquujIMIRLgfURg1JoP8qmHGAFnjURE
+ IoyENbjT2DT+OATMnvKOxHLzmHbEktA02j4JYeusIxTVv5mLuUunmS+R1LcIldYtgVnv
+ 4uxEwXJ/xgOvgiGi3eCDuBIB746PuGpqtL2UXpx8nh6iinLDE8bDgvzTsbl326rRq7aJ
+ /YnErEFWg61+kDxIegkmVySZnr3WhUpFY/KyxZDd4qx0iIXGYU81XIrL4G74t3pyajFI
+ l4jppc5bCjbXzwxqIErZSXJz+/Kx4ugAEtNEMCpOwzeH7CAZYzN33ivKF1A+bu8ezE8K
+ 94rQ==
+X-Gm-Message-State: AOJu0YxT5CSEgFvp0o1zyWCDO+oPVjXrLatToT8mCDdGx++wBkSJe41k
+ ic7BtfBFatD3qptR/l8OIgSiRcL46Krp50/8a22N9d1WO3WJcIm6YVyyZYFKGZiU4kV6CKGYbzY
+ 74Pmn6gY=
+X-Gm-Gg: ASbGncsDeHVQZNk2v6eLRUNo0X0B6/zqDSsHi0f3rJqWZmLugD1d/vRbkSLFPbrpwek
+ 23BEBF1nNxQ822vnIBoTNVAwKkmFryQgRTAwOOcQRR/9Zj2WXm0j76B9lXKOnOD7WEnN5j+W5Rh
+ LrGM4xCLrJVYkoYe25x9tmlAotDLIqFFLQjN0A1w8Scv4K9wn1d7lqZ/czC6UGdFlIBx6lI5NM1
+ ucBV1JoGoRdvEih8KD+6T/Rvuze4w6F4+EXRWZaCEOLRxy4HmGUmLSjVrQIf0NMBaAG5OHsUbvL
+ 6g3U64J0b++HBC2IUpDjqOpqvWRwI2ic6dCbnAIwOEbrLHu55gS5vkCBch4LxgZei5e+ILldtr0
+ w9EneV29saLMPRuJUaNFYRjFljC6/QCkMddxGKxwVFy61xDUMsGzKzHVN
+X-Google-Smtp-Source: AGHT+IEBfgoDuMM/qZUvWck4ZHkBRBFjW/94vuljLQH+fV38UzTVahd2yGzNLRvfXCwvah8oeTCI3w==
+X-Received: by 2002:a05:6808:4445:b0:406:7704:b2e9 with SMTP id
+ 5614622812f47-43199d8fcd1mr2675970b6e.9.1753897637448; 
+ Wed, 30 Jul 2025 10:47:17 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-74147f82c59sm2103361a34.13.2025.07.30.10.24.39
+ 586e51a60fabf-30713592187sm2997006fac.22.2025.07.30.10.47.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Jul 2025 10:24:40 -0700 (PDT)
-Date: Wed, 30 Jul 2025 11:24:38 -0600
+ Wed, 30 Jul 2025 10:47:16 -0700 (PDT)
+Date: Wed, 30 Jul 2025 11:47:14 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH RFC] rockchip: add /chosen/bootsource to U-Boot proper DT
-Message-ID: <20250730172438.GU1807455@bill-the-cat>
-References: <20250730-dt-chosen-bootsource-v1-1-955f045b386b@cherry.de>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: Re: [ANN] U-Boot v2025.10-rc1 released
+Message-ID: <20250730174714.GV1807455@bill-the-cat>
+References: <20250729002400.GJ1807455@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0N17S/O03/A0OyJ1"
+ protocol="application/pgp-signature"; boundary="9/xtiocAPXWaPvrZ"
 Content-Disposition: inline
-In-Reply-To: <20250730-dt-chosen-bootsource-v1-1-955f045b386b@cherry.de>
+In-Reply-To: <20250729002400.GJ1807455@bill-the-cat>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,76 +97,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0N17S/O03/A0OyJ1
+--9/xtiocAPXWaPvrZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 30, 2025 at 02:03:18PM +0200, Quentin Schulz wrote:
+On Mon, Jul 28, 2025 at 06:24:00PM -0600, Tom Rini wrote:
+> Hey all,
+>=20
+> So it's release day and I have tagged and pushed things out. Looking at
+> my own queue, I think it's in reasonable shape. I do think there's a
+> few other pull requests that need to happen still and I am optimistic
+> will come shortly (but I've not reached out to anyone in particular). If
+> there's anything big that people see missing, please speak up.
+>=20
+> We're continuing with a community meeting following the release and the
+> calendar link is
+> https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DN280=
+N2tlcXE3aDVtbjlicnNkcm82YnA1bDAgODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1ZjB=
+hYmQxMWMxYjgzNjA2MWFlMDZjMWM3ZGJjZDE4ZGY0MUBn&tmsrc=3D89be7b813136bec06a83d=
+e4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.calendar.google.com
+> and once again this is the same time as the previous meeting. The
+> meeting details itself are:
+> https://meet.google.com/btj-wgcg-euw
+> July 29th, 2025. 9am (GMT -06:00)
+>=20
+> To join by phone:
+> https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
 
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->=20
-> U-Boot typically can be loaded from different storage media, such as
-> eMMC, SD card, SPI flash, but also from non-persistent media such as USB
-> (via proprietary protocols loading directly into SRAM, or fastboot, DFU,
->  etc..), JTAG, ...
->=20
-> This information is usually reported by the BootROM via some proprietary
-> mechanism (some specific address in registers/DRAM for example). For
-> Rockchip, that information is stored in a register
-> (BROM_BOOTSOURCE_ID_ADDR).
->=20
-> While we already have the information about which medium was used to
-> load U-Boot proper from SPL (via /chosen/u-boot,spl-boot-device), this
-> new property represents the medium used to load U-Boot first phase
-> (depending on configuration, can be VPL/TPL/SPL) which absolutely may
-> differ from the one used to load U-Boot proper!
->=20
-> It would be useful to know which medium was used to load the first phase
-> of U-Boot, for example to check fallback mechanisms (proper loaded from
-> a different medium than first phase) are actually working.
->=20
-> For now, this only applies to Rockchip's U-Boot proper DT but could be
-> applied to the kernel's as well and possibly for other architectures or
-> vendors.
->=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> I have a board (RK3399 Puma) running U-Boot which currently has 9 boot
-> scenarios (eMMC/SD/SPI-NOR for the first phase, eMMC/SD/SPI-NOR for the
-> next phases; not counting USB loading yet, which would make it a few
-> more). I cannot force the BootROM of this board to select a specific
-> device aside from erasing the other media.
->=20
-> The only way to identify which device was used for the first phase is to
-> parse U-Boot first phase console output or add some custom logic for my
-> board. To validate that a new version of the bootloader works, including
-> the fallback mechanisms, I need to make sure the BootROM loads the first
-> phase from the expected device otherwise I may have false positives.
-> This would be useful for automated testing.
->=20
-> Patches pending in the devicetree-spec[1] and dt-schema[2], hence the
-> RFC here.
->=20
-> [1] https://lore.kernel.org/devicetree-spec/20250505-bootsource-v2-1-5a31=
-5d9bff26@cherry.de/
-> [2] https://github.com/devicetree-org/dt-schema/pull/169
+The summary of the call is roughly:
+- I gave an overview of where we are with rc1 being out and that we're
+  in good shape I think. I reiterated that I'll be taking the v6.16-dts
+  tag as soon as possible.
+- Casey talked about the arm64 stack backtrace series and asked a few
+  questions about how to handle things, I offered suggestions.
 
-I am conceptually fine with the changes, but this needs to have the
-schema side approved first, just for the record.
+It was a short call.
 
 --=20
 Tom
 
---0N17S/O03/A0OyJ1
+--9/xtiocAPXWaPvrZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIpVVQAKCRAr4qD1Cr/k
-Ci5PAQD3ehcRwSHprEWBtz4MrjXR0ASD3yHL1Shz6hT+267N2gEAwv9NuywldHAR
-IoVHsXV2hPjT5OH0XfFgO1roZ8RFFA4=
-=Kp/U
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIpangAKCRAr4qD1Cr/k
+CpPoAP99zDJg2AqWh59cDe9IuHt3UkAzzhNjEY1n/dSlNVdcDwEA/gj9qGJuVHMt
+7XHpN5J053FZnxtw7rFuha0ToFQPgQo=
+=G5PB
 -----END PGP SIGNATURE-----
 
---0N17S/O03/A0OyJ1--
+--9/xtiocAPXWaPvrZ--
