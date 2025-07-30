@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E98C87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 11:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700FFC87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 11:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1ECF81E13;
-	Wed, 30 Jul 2025 13:14:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D183481E13;
+	Wed, 30 Jul 2025 13:18:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ys1CY6lV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HPNttCEs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F337582BA1; Wed, 30 Jul 2025 13:14:02 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id E555982BA1; Wed, 30 Jul 2025 13:18:10 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC41F81E06
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 13:14:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF88981E06
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 13:18:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-55b81b58eb7so589070e87.2
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 04:14:00 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-558f7472d64so803444e87.0
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 04:18:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753874040; x=1754478840; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1753874288; x=1754479088; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cX+Hq9u4J8NA0fIy43np69sBRMc4bHVX3uMyDAp3/dE=;
- b=Ys1CY6lV79U9h0G3a5pgSi4yx4tbhugfsfV77BRja/sWoxYmlMtZSYtZHEa7sw5fBO
- dx8rN+fWtydk3AvuEkod5FsqXTORqKDvGWvHip6XBPCtMIofTb4HvnSHeO70gqAat1vl
- 7OFwC44ol8Ict/1BDs00ojgRYHmrQzfohU2UpCLbduyBgmMFtLIZRS/bOTHghGrMSGEP
- GzuR4u8TSYAaSAgKr+F214YJk/AXhdPpE8OpHmI6Y8oZE65XhKhCkRHcP954Sf/JSVaO
- k5HoJmYS+ygCcPqZResLCzagZlYsL8Ns6FVlTOd/cj8sLHu9Ozxr09Rl02HWPs3HBpSY
- DHoQ==
+ bh=0BhVR4p5sBlQgPLBCD1OTzFM6elA9TGAGVzNp6PrxAI=;
+ b=HPNttCEsGAlEMwCy53cMgS+vlUN9chW3O74cOfBzRLq3BslGTWyN9Vx+/xF6A/ACN0
+ zT5/KQZjnW5SEip1L6Ec7ozcTcnqcvMOtrpaOIxCer/Li1rmRzPFVIgcQCfrDq5cl8bx
+ eOggijOUwEJ5bB4k1pgrl2TbbiyTavuDfB4q60GpnmGrzSI2AR759KhARu1vYDioyffk
+ bfV2FdbqHcvLiny46vsSZ+0hfPBcvfGlKv7KzH7elXiOCkH63h0QW+PZp9FEhce+rYPM
+ QJUDAYthfWFMGaiVJEsQiTfL6SH7SRd6Wty/gD9epOdKmOE6rOARV2ihtdMrUxPQ9C6o
+ MznA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753874040; x=1754478840;
+ d=1e100.net; s=20230601; t=1753874288; x=1754479088;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cX+Hq9u4J8NA0fIy43np69sBRMc4bHVX3uMyDAp3/dE=;
- b=T6F01aRR9au5ti/imGlE1mFGT/v24AlYcRwNg7ojXhrIITZFW8/2k9RO6Mwf5HNoug
- 8HcsvLybHgXweJPcpmIP6dxU/A4B6tVGm4nKyOpD4qY0efI38v7m8ey2+oryNV871sBm
- /WGoLtZBtOfX2wtMT2ofB/kV3JDU4FCHnLl51Cf4PEi+5wJsZZattmHffXvUBPvAmFl1
- VTH5HYPshtD/aSDLSD2KqZYg+CeUbCPe4wvRaP1wPQSshdwkviujycLGLsA6wT/aLwKl
- yoK3kOgR7fKMdd0Mud5D8MmcA71U24QgolQjeiv+hKEc8iwidAYBbDIhhfG/QvA5Zjav
- ibLQ==
+ bh=0BhVR4p5sBlQgPLBCD1OTzFM6elA9TGAGVzNp6PrxAI=;
+ b=a2bEXv4Ln0HGjB9G6r/EJfRkVN2Y2++09uMFb5c5Fr+FM1AYy3s52H01kxvXIzYflH
+ JgHNChue/gaY0yljz4svGl8x1sWpmn2rO61x0WG87lNxadpRe3Rm/riuiYmSjNEDkLxS
+ SqCKp5MzsJSlBzxAJptL/z0ZzOMFNdRCRtF6Jo0x2ms217n4hCbhHG04aSJA8xXlLVms
+ afaOrTuf2hld6ogK6asNbf+yNflHYwGqE72tBGfAmieVR4pVYzQK52glArs6HccXbSMM
+ mlmXSvfIC6J3ZSHeI00JxiD0UrI4VsXJnEbKxQXuxVFMQQ5g8j/FkxqfI9tDYZcrt4Ds
+ DLMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXobAFqMlACJZRjg55+YalrX5N4wodxUEt3fg8FgDLow7i3hpSUaHur1jn9wHna2h1Ao7/oPxU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzNF1IKJzwGhu25qTtwmhRgkguaNv+9nfmUOma3CMN7J2IcVkae
- lJjZtqBJDuYTWlcqfsUUbiKs8E7zr3KBNokEkogiJ4NcGTuFDSCY4f2KXlYzw7sFIpnNBd/PUXV
- BMWYMLqRUqDDNeiP7vSSctpRP9m+0N10=
-X-Gm-Gg: ASbGncvTrC64sNRQD1flJkSLB3sYGkkPQTcuV8gm9ljxq/NfsuG04qWzr+nvCCvxh31
- WiZm8b8LO8iL8jYLpR2CApICiocfR8ZNJOxh/PALVvGuEHMOHf/0jDlnJziG6IR+yNpwYIebQRJ
- AkqqkB5jwhhy8E0eY4af0BayB+jJAod4WANRjvX3djufZORqzTCWLMKI+uDNL7wBSZL/V817JiV
- b/MZqjtw5ngsV2nQx1347KZe/HbWQSR9qqNHso=
-X-Google-Smtp-Source: AGHT+IHfplZQs//127P36LG1ClKiZTKUsCNth/HpNRt0sL7F2tGl4y+YVYgFBVRDA79drbEzUZJYNXY7Us65u3r0eTc=
-X-Received: by 2002:ac2:4c4b:0:b0:553:2fec:b139 with SMTP id
- 2adb3069b0e04-55b7c02c650mr923443e87.24.1753874039749; Wed, 30 Jul 2025
- 04:13:59 -0700 (PDT)
+ AJvYcCU6Ii+HIMez3EDAOBbCqVIbbLZpJ8lX5qTO56/BoHNCocLeSOH2w1I2OYca6y8kQW0XyKwh8Bk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+jLAV5Rap0LjSHu2gVjCiE53Fw1trtQ5Z3gzR6WeU7+raKyet
+ xxu/DkFLu/PFhMP4BUFPSCJOTqFyZL/zBJoXG7SYdjKvXfF+cvhXxo2HWUTpmlHSspQ3cs42eo5
+ hN31APaQNeoZYLmlTKf2ORfuu5V/G4Mw=
+X-Gm-Gg: ASbGnct6fcoPZkXo7LSxhtxtBvHRN4dOpENdtxo7olr8boNQdgXdWj3qwAWVnKF4fTv
+ eu5OeiHRI+PkVGlJhC8DzdIwoJQu6wDeQI4DE4/6MhWJHJ7QJzvtVAWc6+w1w6lQ9PRLfPVXBOG
+ 7nYsqRPKxkKCo6/Ip81Qu2CxS78q3kbgnJEV02RETkcHUUJptp5VHMFgdr3gvFdIElPlFOfV4Mv
+ 9zRK4QIrVjG4OxIOJZctDsq1+6eR1yfe1s+opeyLObUYO6cPw==
+X-Google-Smtp-Source: AGHT+IH68otZLeOiCKNFpBP6lqfZAV7kboe9toQtDNnvQXr412D0Nxj3x10GBGH5pNzTXUFIifQLGRO1KvMYTYebJss=
+X-Received: by 2002:a05:6512:1384:b0:54a:c4af:15 with SMTP id
+ 2adb3069b0e04-55b7c366181mr1091442e87.19.1753874287904; Wed, 30 Jul 2025
+ 04:18:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
- <20250728-ddr-imx-v1-8-73da75bb33d3@nxp.com>
-In-Reply-To: <20250728-ddr-imx-v1-8-73da75bb33d3@nxp.com>
+ <20250728-ddr-imx-v1-2-73da75bb33d3@nxp.com>
+In-Reply-To: <20250728-ddr-imx-v1-2-73da75bb33d3@nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 30 Jul 2025 08:13:48 -0300
-X-Gm-Features: Ac12FXwzkSBSaNHo8vwNZLjygud-grsrBWGS90zA1jPrsC5dFDi7y3rqfhPAqi8
-Message-ID: <CAOMZO5D=p-BHD6KTLVWo_A-Gp+rn0k19Z-WFmtbS9o-x6stxzg@mail.gmail.com>
-Subject: Re: [PATCH 8/9] ddr: imx9: Implement Synopsys LPDDR PHY QuickBoot flow
+Date: Wed, 30 Jul 2025 08:17:56 -0300
+X-Gm-Features: Ac12FXxyZKd3w-d1e1Gd8kFHkskRJS9XsD7DeStAUPVPr7ehtYDANvIMxFLs6v4
+Message-ID: <CAOMZO5Biqa8jf4Hv2mY+M=cxJDGwxjvkFYW_obQXDDX1CumtSw@mail.gmail.com>
+Subject: Re: [PATCH 2/9] ddr: imx9: Fix DDR MRS bug
 To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
 Cc: Stefano Babic <sbabic@nabladev.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Peng Fan <peng.fan@nxp.com>, Viorel Suman <viorel.suman@nxp.com>
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,98 +100,21 @@ X-Virus-Status: Clean
 
 On Sun, Jul 27, 2025 at 11:14=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.c=
 om> wrote:
->
-> From: Viorel Suman <viorel.suman@nxp.com>
->
-> Implement Synopsys LPDDR PHY QuickBoot flow.
 
-What does "QuickBoot flow" mean? What are the motivations/advantages
-of adding support for it?
+> diff --git a/drivers/ddr/imx/imx9/ddr_init.c b/drivers/ddr/imx/imx9/ddr_i=
+nit.c
+> index 5b0ad773875da9f6a57faa8c618b232056d1e702..7bade70bd0a1ca4d205ff4fb8=
+525511188cb504f 100644
+> --- a/drivers/ddr/imx/imx9/ddr_init.c
+> +++ b/drivers/ddr/imx/imx9/ddr_init.c
+> @@ -291,6 +291,8 @@ void ddrc_mrs(u32 cs_sel, u32 opcode, u32 mr)
+>         regval =3D (cs_sel << 28) | (opcode << 6) | (mr);
+>         writel(regval, REG_DDR_SDRAM_MD_CNTL);
+>         setbits_le32(REG_DDR_SDRAM_MD_CNTL, BIT(31));
+> +       while ((readl(REG_DDR_SDRAM_MD_CNTL) & 0x80000000) =3D=3D 0x80000=
+000)
+> +               ;
 
-Please expand the commit message to explain why you are doing this.
+If this condition is not met, the system will hang forever.
 
-> +config IMX_SNPS_DDR_PHY_QB
-> +       bool "i.MX Synopsys DDR PHY QuickBoot mode"
-> +       depends on IMX_SNPS_DDR_PHY && !IMX_SNPS_DDR_PHY_QB_GEN
-> +       help
-> +         Select the DDR PHY QuickBoot mode on i.MX9 SOC.
-
-Nothing selects IMX_SNPS_DDR_PHY_QB in this series, so this patch is
-only adding dead code.
-
-> +static int ddrphy_qb_restore(struct dram_timing_info *info, int fsp_id)
-> +{
-> +       int i;
-> +       u32 to_addr;
-> +       struct dram_fsp_msg *fsp_msg;
-> +       struct dram_cfg_param *dram_cfg;
-> +
-> +       fsp_msg =3D &info->fsp_msg[fsp_id];
-> +       for (i =3D 0; i < fsp_msg->fsp_cfg_num; i++) {
-> +               dram_cfg =3D &fsp_msg->fsp_cfg[i];
-> +               dwc_ddrphy_apb_wr(dram_cfg->reg, dram_cfg->val);
-> +       }
-> +
-> +       /* enable the ddrphy apb */
-> +       dwc_ddrphy_apb_wr(0xd0000, 0x00);
-> +       dwc_ddrphy_apb_wr(0x54008, 0x01); /* SequenceCtrl =3D 0x1 (DevIni=
-t Only)*/
-> +       ddrphy_w(0x5400c, 0x19, 0x1);     /* Lp4Quickboot =3D 0x1 */
-> +
-> +       /* Adjust MR14_xy if pstate=3D0 and 2D training data collected du=
-ring training phase */
-> +       if (fsp_id =3D=3D 0 && (qb_state.flags & DDRPHY_QB_FLAG_2D)) {
-> +               ddrphy_w(0x5401c, 0x39, qb_state.fsp[0] >> 8);   /* Train=
-edVREFDQ_A0 -> MR14_A0 */
-> +               ddrphy_w(0x54022, 0x45, qb_state.fsp[1] & 0xFF); /* Train=
-edVREFDQ_A1 -> MR14_A1 */
-> +               ddrphy_w(0x54036, 0x6c, qb_state.fsp[2] & 0xFF); /* Train=
-edVREFDQ_B0 -> MR14_B0 */
-> +               ddrphy_w(0x5403c, 0x78, qb_state.fsp[2] >> 8);   /* Train=
-edVREFDQ_B1 -> MR14_B1 */
-> +       }
-> +
-> +       /* save CSRs to address starting with 0x54800 */
-> +       for (i =3D 0, to_addr =3D 0x54800; i < DDRPHY_QB_CSR_SIZE; i++, t=
-o_addr++)
-> +               dwc_ddrphy_apb_wr(to_addr, qb_state.csr[i]);
-> +
-> +       /* disable the ddrphy apb */
-> +       dwc_ddrphy_apb_wr(0xd0000, 0x01);
-
-Lots of magic numbers in this function.
-
-> +
-> +       return 0;
-
-No need to return 0. Make the function 'void'.
-
-> +int ddr_cfg_phy_qb(struct dram_timing_info *dram_timing, int fsp_id)
-> +{
-> +       int ret;
-> +
-> +       /* MemReset Toggle */
-> +       dwc_ddrphy_apb_wr(0xd0000, 0x0);
-> +       dwc_ddrphy_apb_wr(0x20060, 0x3);
-> +       dwc_ddrphy_apb_wr(0x2008F, 0x1);
-> +
-> +       /* load the dram quick boot firmware image */
-> +       dwc_ddrphy_apb_wr(0xd0000, 0x0);
-> +       ddr_load_train_firmware(FW_1D_IMAGE);
-> +       ddrphy_qb_restore(dram_timing, fsp_id);
-> +
-> +       /* excute the firmware */
-> +       dwc_ddrphy_apb_wr(0xd0000, 0x0);
-> +       dwc_ddrphy_apb_wr(0xc0080, 0x3);
-> +       dwc_ddrphy_apb_wr(0xd0031, 0x1);
-> +       dwc_ddrphy_apb_wr(0xd0000, 0x1);
-> +       dwc_ddrphy_apb_wr(0xd0099, 0x9);
-> +       dwc_ddrphy_apb_wr(0xd0099, 0x1);
-> +       dwc_ddrphy_apb_wr(0xd0099, 0x0);
-> +
-> +       /* Wait for the quick boot firmware to complete */
-
-Is there a special firmware for this quick boot firmware?
-
-Please explain the details. It is not clear why or how someone should
-enable this QuickBoot feature.
+Better use readl_poll_timeout() instead.
