@@ -4,99 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA16CC87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:54:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED32AC87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E74982BA1;
-	Wed, 30 Jul 2025 14:54:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 546E882BCD;
+	Wed, 30 Jul 2025 14:55:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Vt7Jnf6h";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QHhJ45sG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99DD882BCD; Wed, 30 Jul 2025 14:54:37 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3E76982F00; Wed, 30 Jul 2025 14:54:59 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97F2D81D6A
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:54:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28A1081D6A
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:54:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 22FA63F57D
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 12:54:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1753880075;
- bh=e2vOJZhzufmVHYwi8570f1yooJ7WyPl/kfPXy7sSh2c=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=Vt7Jnf6hWMv4IlJU1LvxBa7JymPjoml88JSaDKdySQC2bpj2XuKnvcLAqPFYyDf8G
- yQKoT2wWmJRp8pYQLChNII6L1w0woKDD6Q7pS14slQw9xVVXVePpunn4qAq1iA2Nbd
- 9NoP2h24FAXkIC+Gvb50N9F4JQnVuA1jZIsKWbHx0NnSeHcBnrWHX1XzfrmERlgR6d
- dlvUwKkXedpNPICpN8LR05TlB4ozb8m6hTNRmF0F+yJN5/7rhlsoGDzLguF2nOn1Xk
- ZCAG1ZYDciCjQrnqNAblueDJimPcdsWujUi9OiBQ2BXmzu9OsDHperCMYE39coR9DM
- vcKMW8rfELGTA==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3b793f76a46so1445673f8f.2
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 05:54:35 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753880072; x=1754484872;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=e2vOJZhzufmVHYwi8570f1yooJ7WyPl/kfPXy7sSh2c=;
- b=lofkWYnnlPRAwwLXz/jfCednlFeMcc5FpcZSADe4/V2qfuYs3Tp7iQ+jlL9E5sDJNV
- NgvxxGK9/e8hB0xZiigmX5VlMbax3xFHQ6flABbGYe34uY2aOKxWz+GkaD82m3ZGv4Hx
- oJYEIx0AZy8cYwg2m7Y3f6mGQ5p6CsweTlTlIi4N4qdhD+ie1RIs0zze0J7DjUCJEa9/
- te20Wp8e7IB4ToGFIwSodmClxxAxtolDa7lSzHpj+M19U2O3YQu+r2B2yTCy9kOkrHTp
- 1PqAMybTTCzZbRrAoEzRnBHmTKjaXWdKr7GV4oeiID4AWsUpPZN3+WxTj0Reja1xRaTv
- TY2g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXTHtqdmfmWzp8GbeaUnT5rPsYIqWFTSm5G+ardVqnGgxQ7duC+cWoqOj3X9xVrJkdw/dSLIYI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdIJRXAgWtzmSftgicxOJNEUFSXckFDWu/qpIrVFvNG+BP5BYP
- 9FdW02TEUmXa6fPi/GwWp/93/mylee+LhNCqpkjiJHf0g9AzTA+gP0yXR+eGQX+BtpThw19tIIO
- wTO9makWAYhh5vOL2o86sAB/lp499iSRYrAEG7wdWH/pRpVr2tt0lDwWLM8lH5PV9Eg//MVM=
-X-Gm-Gg: ASbGncuGhCBESws+O478f6eqdMK6OoqKvjqEuqNFz+0pYOU5x361uNg0kPj2mnpX9KZ
- TKNrtrUqcMF6R3MIV2HbC062sDMzH5qs0C0IW/CqAS4kue7gIZfXLcSbLOlyU4861daT/BeLCW5
- cB47sfOL6hMyfaJjUx/ZLwEvAJkkMOxcIh0+Kgr13YtDNiGE3EWkCvI+aEOrSped9wFJspgdDsG
- e6dNoGNDSDZAkGLc/TvCtBuZGSWxIWECQ0ix/vXRLr3U5RIgGuJ+meDBwEbq6guV39QZ1MJyrt7
- eDZ18iM68MzekkuVaCt6kONJUXJxqC6ngeh1iL9bIup5qyk4EuKt5E9Ll2G969rTrNeH8tavEni
- NtNIyaHuIko+WD+QtVSIQprwdkJyR3Q==
-X-Received: by 2002:a5d:588a:0:b0:3b7:664a:8416 with SMTP id
- ffacd0b85a97d-3b794ff5d0cmr2707937f8f.23.1753880072501; 
- Wed, 30 Jul 2025 05:54:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGo0XP5C5c5OfUCi+aXiOupfBX2253m3FGSOgkPn5k+vLm5UNinQKbrch8LADKGvMkg9JK/LA==
-X-Received: by 2002:a5d:588a:0:b0:3b7:664a:8416 with SMTP id
- ffacd0b85a97d-3b794ff5d0cmr2707919f8f.23.1753880072171; 
- Wed, 30 Jul 2025 05:54:32 -0700 (PDT)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b798867061sm933936f8f.15.2025.07.30.05.54.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Jul 2025 05:54:31 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Paul Kocialkowski <contact@paulk.fr>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Trevor Woerner <twoerner@gmail.com>, Marek Vasut <marex@denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] Kconfig: typo restict
-Date: Wed, 30 Jul 2025 14:54:27 +0200
-Message-ID: <20250730125427.587976-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.50.0
+ smtp.mailfrom=prvs=0306251bd0=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56UCCUAC017878;
+ Wed, 30 Jul 2025 14:54:55 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=kCXCNc95KaGljLg+wkAMMg
+ zgJy8lIS6GiLyrlOxDAgk=; b=QHhJ45sG7+78bLypFHXx6We29xCftkepX8jp4m
+ MbChxkvO0+3ARlsVKN/AtUZ4B83s1TLoEL3tcY868FX9lW9LzUop1X+8Jm14a0NG
+ EfwCg/t40Xmgg9DAEtfAG7bnFA/xu1i884On6iZXjxstr7eHm16hBud7YxQIJIOO
+ C/Zqo1Z31yM6TuH+F08BNmAbcnF2tdGJhEVr43M+DQlZbU04J/AHNLnNsPyAseSD
+ qPkeLFPMV28ZwYd3+s9yUH8AYFbWDxlxmAC1CErqyDomj6Il5u7bbmdklzf9nkD2
+ R+nK062zxqQxJP+iEDxKFak66EgltPwAJBcDFZZOlDVA22vA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484nwgsftc-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 30 Jul 2025 14:54:54 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3DAF140044;
+ Wed, 30 Jul 2025 14:54:04 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 16791768F38;
+ Wed, 30 Jul 2025 14:53:47 +0200 (CEST)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Jul
+ 2025 14:53:46 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Gabriel Fernandez
+ <gabriel.fernandez@foss.st.com>, Marek Vasut <marek.vasut@mailbox.org>, Tom
+ Rini <trini@konsulko.com>
+Subject: [PATCH] reset: stm32: Fix set_clr field
+Date: Wed, 30 Jul 2025 14:53:44 +0200
+Message-ID: <20250730125345.27273-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-30_04,2025-07-30_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,28 +88,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/restict/restrict/
+STM32F4/F7 and H7 series doesn't have a clear reset register, so
+set_clr field must be set to false.
 
-SPL and TPL have separate options (plural).
+Fixes: 0994a627c278 ("reset: stm32mp25: add stm32mp25 reset driver")
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- Kconfig | 2 +-
+
+ drivers/reset/stm32/stm32-reset.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Kconfig b/Kconfig
-index c883f115459..22636da6444 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -552,7 +552,7 @@ config BOARD_SIZE_LIMIT
- 	  Maximum size of the U-Boot image. When defined, the build system
- 	  checks that the actual size does not exceed it.  This does not
- 	  include SPL nor TPL, on platforms that use that functionality, they
--	  have a separate option to restict size.
-+	  have separate options to restrict size.
+diff --git a/drivers/reset/stm32/stm32-reset.c b/drivers/reset/stm32/stm32-reset.c
+index 918e81e588f..024f15cb25e 100644
+--- a/drivers/reset/stm32/stm32-reset.c
++++ b/drivers/reset/stm32/stm32-reset.c
+@@ -19,7 +19,7 @@ static const struct stm32_reset_cfg *stm32_get_reset_line(struct reset_ctl *rese
  
- config SYS_CUSTOM_LDSCRIPT
- 	bool "Use a custom location for the U-Boot linker script"
+ 	ptr_line->offset = bank;
+ 	ptr_line->bit_idx = offset;
+-	ptr_line->set_clr = true;
++	ptr_line->set_clr = false;
+ 
+ 	return ptr_line;
+ }
 -- 
-2.50.0
+2.25.1
 
+base-commit: 05bacd747c8eef2dd6b8081bc917dedd6c983b72
+branch: fix_reset_stm32
