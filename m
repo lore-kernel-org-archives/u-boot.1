@@ -4,52 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB15C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 16:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D7B3C83F26
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 16:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64A6480194;
+	by phobos.denx.de (Postfix) with ESMTP id C143580C93;
 	Wed, 30 Jul 2025 18:42:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=race-technology.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=wolfssl.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=race-technology.com header.i=@race-technology.com header.b="R2IR4I4j";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=wolfssl-com.20230601.gappssmtp.com header.i=@wolfssl-com.20230601.gappssmtp.com header.b="tTqb7sqx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0F8A803CC; Wed, 30 Jul 2025 17:20:01 +0200 (CEST)
-Received: from server.race-technology.com (mail.race-technology.com
- [178.32.229.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 00698805D7; Wed, 30 Jul 2025 17:40:41 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A728091A
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 17:19:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=race-technology.com
+ by phobos.denx.de (Postfix) with ESMTPS id E2D44801BE
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 17:40:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew@race-technology.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 server.race-technology.com E135770CAD
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=race-technology.com;
- s=default; t=1753888798;
- bh=gGL61bMx9ZXD+Aw8SfSzDRYpSdN6VATeISzqQYuL7Ac=;
- h=From:To:Subject:Date:From;
- b=R2IR4I4jfUm2g93MKgGBudbvN692sBx2QuwUZPC2565roptTsiK8pcqQg/hr9hdDO
- 2TvEEpbP+o1PJK4biVYL51D5M3nt+DP8Y3+3J1vEyq7JaESzM5Oc/G9q7yS8PlA3jp
- HKJ0rV3H10zhlImUoSGisx0ThWoZLUweeDhmVkqTOdVnbyLt69KHS+5mAWO+DNgVxP
- Q5UhMRxk5MralQYOSOcrJwL1DEqRv6kjI7RvXPZziKKDuIrHsS7ab38U5vZRlZ8Vo/
- 5VE3jAOMjJd3CGte823e/I3O+J8LSxsqaEx5j/OAojEo5wqLmqGs9TJoNHBqh7M0sO
- MGnVw5PbSt4mg==
-From: <andrew@race-technology.com>
-To: <u-boot@lists.denx.de>
-Subject: RPI CM5 has 130s delay on boot
-Date: Wed, 30 Jul 2025 16:19:55 +0100
-Message-ID: <013401dc0165$67e6b5d0$37b42170$@race-technology.com>
+ dmarc=fail (p=none dis=none) header.from=wolfssl.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aidan@wolfssl.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7416d362e7aso1097477a34.1
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 08:40:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=wolfssl-com.20230601.gappssmtp.com; s=20230601; t=1753890036; x=1754494836;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=poo9FquyQkfoPGHeFHCUa/xOn+THm2DT/AhJxNFM4VU=;
+ b=tTqb7sqxIEntX68IhKH5Kz+P/WMOJR4SPOg+JbaTWZFBM5gnX8mHDIxgwWCBFtpNrr
+ liXze7cAqkPe+7zXYt9g74hX/n4cwpafoDXqZ09b0UmSaeEegT6oejppPiBhTIdH4oUy
+ ncKbvgaYoC6w7ZDvOMQozCXCbY958T/tBFr1UGU+G9j2E/8q1+AIHfysoodWGNh6FEbw
+ gjpGuJSiEyxwsV7zp+7pBcjz7BL0n8/aj0/59QMyrT2MvgKUq0tveZnd9FlbYUzRpepY
+ i5iUZUYxEIWv6ICjIlO8WUSDMjDg/EqdN9YvcEK1oFpBVr06Gs6Zo09vmc8a6jU/ZiU3
+ 0puw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753890036; x=1754494836;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=poo9FquyQkfoPGHeFHCUa/xOn+THm2DT/AhJxNFM4VU=;
+ b=REvZx4XLKiIRwPIaaQD9YaOE29F5RKYhnclERGO/BexACB0qv6v6nn4v5nPRLbi7AD
+ 52BnrLZPCYZG8IfZwF9nq64iF6sy+M9CgSUnCBa0YHn4rYAecL5ncb/8c9iK/5948aWK
+ UJrvuU5ywKSHefOaVWPX2Hu2mK5vjLbTLC0VQjs+2QXEbgjuP0yKMD3B/GyjO1yrLevq
+ tGK1enE2OPJdqB78lc+k+d3wu8CBA24JamwmSnJiOnGFKc2rz+WLxS7BfMTFvkdykfej
+ xbnxNDe6dYNi5w878vsiEFK+K4dIINfdNbpjk76S3aZO2Q6stFY5UGZRZZ7KAVn8NmA6
+ hWKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWh0/u5PxxjCQ+ifZ7qE7AJYU4+DcA8KVr2NvnH4tql7GZsu22BoIObVZ9nlGMgPJGME+6kkY0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzx1EG11WfFSuDdp2WFvU1BNPpCJPm6PkJqqRQ4O6rQUNdB0VpN
+ 3y+g3Zp1NMkrCkiETWR0yOrForV0JEwKmUJGyDBaK3NCtNnqngT1nMm7f52DmVtJdXIody+XAe2
+ AWpQQp8vZzfZ5y3EwTHme5oItiyoFUocG1iEkv+qJeA==
+X-Gm-Gg: ASbGnctYKDjOs0oyDWGdQKGjm2CsKKKwZytEs6zqfwW/gGQZmeDgZ8Rnt6V6lu/JGoP
+ RFg3JBXf788vV67dpjvvP7/cNFqgeTI6wAvHA3BDdRdTdIvP7PTEsocFiwOmVcP+qXw+AEvzz3u
+ CDI/fwujWqabavABKBH3T/jDBlD2tLd/APrnhNIxMW/Vpkx6roM8e/2UKv+MSaSr3QN+NyB8skM
+ qj+KuQJ
+X-Google-Smtp-Source: AGHT+IEpBo8AS1hGPvhwao2ZpyYp3F80/KJrTwULoHTbnnLDzjJiqg73eLhQZJPm7pQ1hWYXxB6Eiqt+YiwcLcH9lT4=
+X-Received: by 2002:a05:6808:221e:b0:40b:4208:8038 with SMTP id
+ 5614622812f47-431998a2a0cmr2340560b6e.4.1753890036534; Wed, 30 Jul 2025
+ 08:40:36 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AdwBZWcDJjretYJuSWGJPS7qI3opXg==
-Content-Language: en-gb
+References: <145501C2-B034-44EC-A16D-4F1A150347FB@wolfssl.com>
+ <CAFLszTjgsSj47P6u2JohHv3vV1=sOWQxQ7qS3RDuBYBQsejKWA@mail.gmail.com>
+In-Reply-To: <CAFLszTjgsSj47P6u2JohHv3vV1=sOWQxQ7qS3RDuBYBQsejKWA@mail.gmail.com>
+From: Aidan Garske <aidan@wolfssl.com>
+Date: Wed, 30 Jul 2025 08:40:25 -0700
+X-Gm-Features: Ac12FXyqsgQOuBgAgLBcAkO3myyZhQklL2SqgM-sJMCe13QG7ah9eqQ4z5jGZ2Q
+Message-ID: <CANqXHyEShK3bCA-5K4K=zH_b19i9+o9DRPYW8LHo-gFpMB2Hkg@mail.gmail.com>
+Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
+To: Simon Glass <sjg@chromium.org>
+Cc: David Garske <david@wolfssl.com>, u-boot@lists.denx.de,
+ Todd Ouska <todd@wolfssl.com>, 
+ Larry Stefonic <larry@wolfssl.com>, Wolfram Kusterer <wolfram@wolfssl.com>
 X-Mailman-Approved-At: Wed, 30 Jul 2025 18:42:01 +0200
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -67,55 +99,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello all,
+Hi Simon,
 
- 
+Thank you for the great feedback. Currently I am working in the refactor
+you suggested and I wanted to ask a question about some of your comments.
 
-I'm feeling a bit out my depth and hoping someone can help me. We've been
-using uboot on the RPI CM4 with great success, it's been perfect.
+1. What exactly is the "driver code" you are referring to in this case?
+2. Do you want me to separate out our helper functions into a
+`cmd/wolftpm-common.c` or should I keep them in `cmd/wolftpm.c`?
 
- 
+Looking forward to your response,
+Aidan
+-------------------------------------
+Aidan Garske
+Engineering Intern, wolfSSL
++1 (916) 337-1246
+-------------------------------------
 
-We are migrating some projects to the RPI CM5 but have hit a roadblock. The
-boot process regularly (but not always) gets stuck for exactly 130s, as
-shown here:
 
- 
 
-[ 3.403341] Waiting for root device /dev/mmcblk0p2...
-[ 3.403453] usb 1-1.7: Product: WS170120
-[ 3.403454] usb 1-1.7: Manufacturer: WaveShare
-[ 3.403455] usb 1-1.7: SerialNumber: 220211
-[ 3.429612] input: WaveShare WS170120 Touchscreen as
-/devices/platform/axi/1000480000.usb/usb1/1-1/1-1.7/1-1.7:1.0/0003:0EEF:0005
-.0001/input/input0
-[ 3.443253] hid-generic 0003:0EEF:0005.0001: input,hiddev96,hidraw0: USB HID
-v1.11 Device [WaveShare WS170120] on usb-1000480000.usb-1.7/input0
-[ 134.202779] mmc0: Command Queue Engine enabled, 16 tags
-[ 134.208450] mmc0: new HS400 Enhanced strobe MMC card at address 0001
-[ 134.215432] mmcblk0: mmc0:0001 BJTD4R 29.1 GiB
-[ 134.221178] mmcblk0: p1 p2 p3 p4 < p5 p6 >
-[ 134.226023] mmcblk0: mmc0:0001 BJTD4R 29.1 GiB
-[ 134.230952] mmcblk0boot0: mmc0:0001 BJTD4R 4.00 MiB
+On Sat, May 10, 2025 at 4:25=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
 
- 
-
-After searching, this appears to be the same issue as reported here:
-
- 
-
-https://lore.kernel.org/u-boot/421019670.5226453.1745000686387@mail.yahoo.co
-m/
-
- 
-
-but I cannot see any solution. Can anyone assist please?
-
- 
-
-KR, Andrew
-
- 
-
- 
-
+> Hi David,
+>
+> On Thu, 8 May 2025 at 00:41, David Garske <david@wolfssl.com> wrote:
+> >
+> > Hi Denx,
+> >
+> > We at wolfSSL have developed a port for wolfTPM in U-Boot. The patch
+> allows using the current built-in TPM 2.0 support or switching to wolfTPM
+> via CONFIG_TPM_WOLF=3Dy. It also supports TPM 2.0 firmware update for the
+> Infineon SLB9672 and SLB9673.
+> >
+> > I think there is probably some more cleanup and testing needed, but I
+> wanted to submit this to start the discussion and see your thoughts.
+> >
+> > The wolfTPM library is GPLv2 and added as a submodule. If the license o=
+r
+> submodule is an issue let=E2=80=99s discuss! I=E2=80=99m positive we can =
+resolve anything.
+> >
+> > Attached is the patch based on latest master 3b6760ddeb4 to review.
+>
+> Thank you for doing this!
+>
+> Here are a few thoughts:
+>
+> - Use lower case for function names
+> - Avoid camel case
+> - What is XMEMSET()? - Can you use memset() ?
+> - Convert most prinf() functions to log_debug()
+> - Can you use subcommands (from command.h) instead of parsing the
+> subcommand yourself?
+> - put the FIRMWARE_UPGRADE thing into Kconfig, as well as WOLFTPM_SLB9672=
+/3
+> - put the driver code into drivers/ with just the command code in cmd/
+> - add config WOLFTPM, separate from CMD_WOLFTPM
+> - can you add a test in test/ and docs in doc/usage/cmd/  ?
+>
+> Regards,
+> Simon
+>
+>
+> >
+> > =EF=BF=BC
+> >
+> > Thanks,
+> > David Garske
+> > Software Engineer, wolfSSL
+> > +1 (530) 409-2990
+> > https://www.wolfssl.com <https://www.wolfssl.com/>
+> > https://github.com/wolfssl
+> >
+>
