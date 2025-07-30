@@ -4,93 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB826C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 14:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03473C87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 14:50:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 492AF801DD;
-	Wed, 30 Jul 2025 16:32:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 19E1280548;
+	Wed, 30 Jul 2025 16:50:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="toSxACNl";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1753887020;
+	bh=jc5/7ycIm/mqcS3ClPNMsozFpqWyQgmuJQ5G6ceXHWE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jZFU+Viw/sWKDsx4FNt79eX7lZOj7yMbzRzorpfmDJBtXqbjoJL27lT7EaDfHmYiW
+	 DlYubDTRioppID+V6iKIajVkUIu0uiBz35bJIXzYNexeQ9Lh2q1g9KzH/mfpfED247
+	 alOdxc2Oox2ez91v/V8sNPcrs+z9FHZHb3tH/dGoBpjuHea5lVUdHaohqdTQ31XdqX
+	 TzOJj8HDO3nU/05+gH75RjJTPd7XZMPKMVI72QGZzow72vqCzoUkN9DjAQqZx++dF0
+	 H3MsPUtLeMfYmBA/xjDo8yGcBXwRQfxmcXuzMb6J8K4Q7tggtBXb+PdIJhBzIR+LPt
+	 LwIeeAWV5nMDg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A8B680C93; Wed, 30 Jul 2025 16:32:58 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A6B40805D7; Wed, 30 Jul 2025 16:50:18 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3575801BE
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 16:32:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C2C1803CC
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 16:50:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-60402c94319so590348eaf.1
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 07:32:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753885973; x=1754490773; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wgGcMAshT2eMvIIfxwbKxwRFEz55dfTWhJSIi/aKUdE=;
- b=toSxACNlkMqWjMIbL1u6Oq8PBM8v0XjHW/kXtkhkEFf3iSrarpsANYLKb6y0RBjqHY
- zcVWl+/Xep0hit14AWH3qKa8/aqH8yKa38i7IbalcI6yrw2bYSk9UOT5QeEhzXTnaEJd
- zBJXFyjCm3hA355GtDmJPC/y0r9tGqYrnVvl8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753885973; x=1754490773;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wgGcMAshT2eMvIIfxwbKxwRFEz55dfTWhJSIi/aKUdE=;
- b=NarsoF7DVNLeAJuCE5ABO/BTvmheEp9fyHCX7AR4nDIBD0/IOv6dhIIwXrMWnYnRMy
- O0eoH3s+OTLO5xn/Km4LqWmbMzfonQlDoj/EZH8AAPYFcabCAzEJXt9CAZ3dfI3Bafh1
- yntrRPP6zKIFyvMeIzEApla/qP8mpBsFJDZBEzrVhAm/ePPd0DKy/6DQZncNdw1Pndph
- L2hdSq4uxJbsTuaMeF3xlEHbYodmQEJnDkzgPMVC2oxoLAHTNR9Asp6UcUUwXiXNjN4B
- Zz0uuS1l912JDMEMx3GqYCzHFR+Dq+zj4jJt5lmosm9JB+FNRyJIzKnhxAZERyMjfYx/
- K7sw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXca+2qxEverCA1/wNqLy7xcRiSqDzlHUAnOHErYRL9JC6IcFqcqmDurQoLNizSKZITYC+/Q34=@lists.denx.de
-X-Gm-Message-State: AOJu0YydJW/qN9KGCv3OS3hjNdLDPZpQ6UrbtjyS1rI60HV7/mLBNLZx
- Z68SMxUa7gVTbmuHzPgltoiQJfx8qhg/IeQY+JardCU3XNiiLOYYPBbAOLX7xmKhMuc=
-X-Gm-Gg: ASbGncukVENfqQc8XUEpFWvnLSceJuzfBO1mZ5t8D4S4wrGpPziqSP9ldasOLjJhIyq
- QrgWZQlKxOxWboPkd9K1U1VoYEMhA4V0tMbwYz0NDgyzq92OzSNNbuHm41ODGLydUPGV1yaAuef
- VYSiC6dCNzj2/jKoorOBy5JnOR+j/3k5/U/ete44iOQk5ccaJgeSxLzyhMRUWjtiruWGGRJCIAb
- 5MILgtB+QJ5FhXtuenXdMbBXR+CgGRW2iBq4xs+O0OY+tFJ4JT1vbnYVOJ0IbdXpA8bQ/PvHafI
- cwj59l9hXxgNFXKdV7prNS0Zijr3mT2l0trfRqGUOyeMhKG4nfUL5F9JwsmOALG0cZlHHMSPk6q
- e960nKNcbRRxuL8oTbmxWnOA/PPhqQI8teYMS98fkqb1PVNbifqNpZP3T
-X-Google-Smtp-Source: AGHT+IGELSEWBO2aBznnFVchn5KAM2M95M/hM1T96wN34qcypiPyVvG9valXiv8+VRQ3tGGbNQkzRg==
-X-Received: by 2002:a05:6820:80cb:b0:615:ecc5:c07b with SMTP id
- 006d021491bc7-6195cf8bb38mr2315956eaf.0.1753885973545; 
- Wed, 30 Jul 2025 07:32:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6194b39f498sm747846eaf.22.2025.07.30.07.32.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Jul 2025 07:32:52 -0700 (PDT)
-Date: Wed, 30 Jul 2025 08:32:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="V+UqfQDU"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 5E4BA1038C126; 
+ Wed, 30 Jul 2025 16:50:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1753887015; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=jc5/7ycIm/mqcS3ClPNMsozFpqWyQgmuJQ5G6ceXHWE=;
+ b=V+UqfQDUaQax2SqkGL2LVSDXV4lrMKw2kUbhY0VezRqICMYUls+YEQGQQ4MTDnaBi4oNpK
+ hBgP00YLAqwHUXvJG5zkI726trU/5cFWmPDOYTIEt7xwzXMqRU1lTz7SyKEsszKAqb1OSG
+ uCk8NMf8B54Ii48KAbFbv5uC2Qxu/xbJOL1VJu7AQEJQQ9N1uPofR8ujY9yamfZmcCN2S7
+ M0SesqQwy8AeBIcKZNhRbHogbb3CsWhvy8n0rl82Wqqtx77xeGITOoUu32QN4lWxVnaFop
+ 9RUF1G/+4ohkGNYmULX7sm9ZyNimMQfAcoYDvULXix+5U+tc9TwqRSoa3Vtk8A==
+Date: Wed, 30 Jul 2025 16:50:10 +0200
+From: Philip Oberfichtner <pro@denx.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Paul Kocialkowski <contact@paulk.fr>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Greg Malysa <malysagreg@gmail.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Trevor Woerner <twoerner@gmail.com>, Marek Vasut <marex@denx.de>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Philip Oberfichtner <pro@denx.de>
+ Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de
 Subject: Re: [PATCH 1/1] Kconfig: typo restict
-Message-ID: <20250730143250.GP1807455@bill-the-cat>
+Message-ID: <aIoxIl6rdyN3NbNc@antares>
 References: <20250730125427.587976-1-heinrich.schuchardt@canonical.com>
  <3f34945e-9e4f-451e-85eb-5a5e4e5cd265@cherry.de>
  <0b5e6888-6652-4ec7-971e-710dc9cd3a77@canonical.com>
+ <20250730143250.GP1807455@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KaOk7pX21gShCJz1"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <0b5e6888-6652-4ec7-971e-710dc9cd3a77@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20250730143250.GP1807455@bill-the-cat>
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,66 +86,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> > With VPL_SIZE_LIMIT and a patch for UBOOT_WITH_SPL_SIZE_LIMIT pending things
+> > get even more involved.
+> > 
+> > We should think about a documentation page on size limits:
+> > 
+> > CONFIG_HAS_BOARD_SIZE_LIMIT
+> > CONFIG_BOARD_SIZE_LIMIT
+> > CONFIG_SPL_SIZE_LIMIT
+> > CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD
+> > CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC
+> > CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK
+> > CONFIG_TPL_SIZE_LIMIT
+> > CONFIG_VPL_SIZE_LIMIT
+> 
+> As Philip has hit adding a new MIPS board and need for specific size
+> check, yes, better documentation (and then perhaps adjusting and
+> cleanup) of our various size checks is much needed and would be
+> appreciated.
 
---KaOk7pX21gShCJz1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Wed, Jul 30, 2025 at 03:05:59PM +0200, Heinrich Schuchardt wrote:
-> On 30.07.25 14:58, Quentin Schulz wrote:
-> > Hi Heinrich,
-> >=20
-> > On 7/30/25 2:54 PM, Heinrich Schuchardt wrote:
-> > > %s/restict/restrict/
-> > >=20
-> > > SPL and TPL have separate options (plural).
-> > >=20
-> >=20
-> > Looks good to me.
-> >=20
-> > Wondering if we couldn't add which options are to be used for TPL/SPL
-> > Would that be TPL_MAX_SIZE and SPL_MAX_SIZE maybe?
-> >=20
-> > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >=20
-> > Thanks!
-> > Quentin
->=20
-> Thanks for reviewing.
->=20
-> With VPL_SIZE_LIMIT and a patch for UBOOT_WITH_SPL_SIZE_LIMIT pending thi=
-ngs
-> get even more involved.
->=20
-> We should think about a documentation page on size limits:
->=20
-> CONFIG_HAS_BOARD_SIZE_LIMIT
-> CONFIG_BOARD_SIZE_LIMIT
-> CONFIG_SPL_SIZE_LIMIT
-> CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD
-> CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC
-> CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK
-> CONFIG_TPL_SIZE_LIMIT
-> CONFIG_VPL_SIZE_LIMIT
+Just adding the reference to my current proposal on how to simplify the
+Makefile:
 
-As Philip has hit adding a new MIPS board and need for specific size
-check, yes, better documentation (and then perhaps adjusting and
-cleanup) of our various size checks is much needed and would be
-appreciated.
+https://lore.kernel.org/u-boot/20250730123833.249923-2-pro@denx.de/T/#u
 
---=20
-Tom
+Best regards,
+Philip
 
---KaOk7pX21gShCJz1
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+> 
+> -- 
+> Tom
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIotEgAKCRAr4qD1Cr/k
-ClbsAP4pNAC2idOmZ1yqRJ/yHBrzdAB2TNLINsza5dRJde5hqwD/fIMRu4gIfWZZ
-dloCaBpuQq4ur4XFV3WwYXxHbaHZGgs=
-=0HF8
------END PGP SIGNATURE-----
 
---KaOk7pX21gShCJz1--
+
+-- 
+=====================================================================
+DENX Software Engineering GmbH,
+Managing Director: Johanna Denk, Tabea Lutz
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+=====================================================================
