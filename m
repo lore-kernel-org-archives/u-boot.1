@@ -4,142 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4991FC87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 14:32:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB826C87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 14:33:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC8BE803CC;
-	Wed, 30 Jul 2025 16:32:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 492AF801DD;
+	Wed, 30 Jul 2025 16:32:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Ot5P059g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="toSxACNl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3103F803CC; Wed, 30 Jul 2025 16:32:28 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::623])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2A8B680C93; Wed, 30 Jul 2025 16:32:58 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91C0B801BE
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 16:32:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3575801BE
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 16:32:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eLnpEZ4GjlENv0tkg1Ps53Fqug/C+Xag/oPq3gB8OKOwpeK4LlUkcOBCX0ZM6FNWgvnDbkmIv1jvyG7d9YJvb2yjbH/qMIhaF04eTMFA5TgvGtDmXhdfhX5LYdQfgwTXiKswUXm7PZ8z+eAmwGHNfqtA3Hs0Xg3IfTPGriIbmL5o6z9leX1FZR7/a+0sO0PRYpz+KyB6Q5rdfI9TIYT32YuHq8G91Oxo9ofnr5Z81HIM/3zbz0Ie56zjJLeXjCohXMxoNJKVTpmTX6BKDtdObvTqlTuRcKdnix1+sI+r6/IEojU0qotHzt1s4xvh39nEKUMjkp6SOkykULG3TLNimQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WPWqxGplmxQJNnPyun889mV/jbkuLVEzfuMXUz8402g=;
- b=ebewLqHakJLXrG8WWzJmvx0xG04J9ucrMFlDMKZRQj13d/4V6vLIIdD57q0mwTMXnFxFJ48P59Jwy/PNFMN9/J5ycoWywDrY60/jP/SttpSgu6D+miffAEXtSERMvYnlRTWWIFVDmxIrKy87cZi7dgctRAbMd7pMft2cIdmeDP5E0PXopWgQKIWFlmHK2sm5p60oDkbKFYRugSxDAju9GNahFS8tGwr8Hk2jkl4ZbNsCVA7ch+toDisSLyhu2n8NgfHj+Jp1jkTvOCGMRtxuvyK5R5cvv1aFAb7FlKaJhkAtvwRNfi14ylRhEAgCmo3qke0JQ7Ywe1J6w2aiMV6v0g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WPWqxGplmxQJNnPyun889mV/jbkuLVEzfuMXUz8402g=;
- b=Ot5P059gLDvpDpu6+g5veMIgHXJtZSNw/pUyRakp+NL5IE776A425JwSjFAEpy6y5YpoV+msTW6aAK6XYgKyGg5Hr/qEtTxZShkFqp9fDKsE7DGAl6lXgH0VKqYXWJ1ZBimH/8GC1nsSaGK6Cx/17u+GINumrxPBiMhPWGAVIQQ=
-Received: from BN9P222CA0009.NAMP222.PROD.OUTLOOK.COM (2603:10b6:408:10c::14)
- by SA5PPF8ECEC29A9.namprd12.prod.outlook.com
- (2603:10b6:80f:fc04::8d5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.21; Wed, 30 Jul
- 2025 14:32:22 +0000
-Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
- (2603:10b6:408:10c:cafe::67) by BN9P222CA0009.outlook.office365.com
- (2603:10b6:408:10c::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8989.11 via Frontend Transport; Wed,
- 30 Jul 2025 14:32:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8989.10 via Frontend Transport; Wed, 30 Jul 2025 14:32:21 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Jul
- 2025 09:32:09 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 30 Jul 2025 09:32:09 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] arm64: versal2: Define BOOTENV_DEV_SHARED_XSPI when distro is
- disabled
-Date: Wed, 30 Jul 2025 16:32:01 +0200
-Message-ID: <4c195468c0341ddd2aca98f83cdcbd40117cc9ee.1753885919.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-60402c94319so590348eaf.1
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 07:32:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753885973; x=1754490773; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wgGcMAshT2eMvIIfxwbKxwRFEz55dfTWhJSIi/aKUdE=;
+ b=toSxACNlkMqWjMIbL1u6Oq8PBM8v0XjHW/kXtkhkEFf3iSrarpsANYLKb6y0RBjqHY
+ zcVWl+/Xep0hit14AWH3qKa8/aqH8yKa38i7IbalcI6yrw2bYSk9UOT5QeEhzXTnaEJd
+ zBJXFyjCm3hA355GtDmJPC/y0r9tGqYrnVvl8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753885973; x=1754490773;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wgGcMAshT2eMvIIfxwbKxwRFEz55dfTWhJSIi/aKUdE=;
+ b=NarsoF7DVNLeAJuCE5ABO/BTvmheEp9fyHCX7AR4nDIBD0/IOv6dhIIwXrMWnYnRMy
+ O0eoH3s+OTLO5xn/Km4LqWmbMzfonQlDoj/EZH8AAPYFcabCAzEJXt9CAZ3dfI3Bafh1
+ yntrRPP6zKIFyvMeIzEApla/qP8mpBsFJDZBEzrVhAm/ePPd0DKy/6DQZncNdw1Pndph
+ L2hdSq4uxJbsTuaMeF3xlEHbYodmQEJnDkzgPMVC2oxoLAHTNR9Asp6UcUUwXiXNjN4B
+ Zz0uuS1l912JDMEMx3GqYCzHFR+Dq+zj4jJt5lmosm9JB+FNRyJIzKnhxAZERyMjfYx/
+ K7sw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXca+2qxEverCA1/wNqLy7xcRiSqDzlHUAnOHErYRL9JC6IcFqcqmDurQoLNizSKZITYC+/Q34=@lists.denx.de
+X-Gm-Message-State: AOJu0YydJW/qN9KGCv3OS3hjNdLDPZpQ6UrbtjyS1rI60HV7/mLBNLZx
+ Z68SMxUa7gVTbmuHzPgltoiQJfx8qhg/IeQY+JardCU3XNiiLOYYPBbAOLX7xmKhMuc=
+X-Gm-Gg: ASbGncukVENfqQc8XUEpFWvnLSceJuzfBO1mZ5t8D4S4wrGpPziqSP9ldasOLjJhIyq
+ QrgWZQlKxOxWboPkd9K1U1VoYEMhA4V0tMbwYz0NDgyzq92OzSNNbuHm41ODGLydUPGV1yaAuef
+ VYSiC6dCNzj2/jKoorOBy5JnOR+j/3k5/U/ete44iOQk5ccaJgeSxLzyhMRUWjtiruWGGRJCIAb
+ 5MILgtB+QJ5FhXtuenXdMbBXR+CgGRW2iBq4xs+O0OY+tFJ4JT1vbnYVOJ0IbdXpA8bQ/PvHafI
+ cwj59l9hXxgNFXKdV7prNS0Zijr3mT2l0trfRqGUOyeMhKG4nfUL5F9JwsmOALG0cZlHHMSPk6q
+ e960nKNcbRRxuL8oTbmxWnOA/PPhqQI8teYMS98fkqb1PVNbifqNpZP3T
+X-Google-Smtp-Source: AGHT+IGELSEWBO2aBznnFVchn5KAM2M95M/hM1T96wN34qcypiPyVvG9valXiv8+VRQ3tGGbNQkzRg==
+X-Received: by 2002:a05:6820:80cb:b0:615:ecc5:c07b with SMTP id
+ 006d021491bc7-6195cf8bb38mr2315956eaf.0.1753885973545; 
+ Wed, 30 Jul 2025 07:32:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6194b39f498sm747846eaf.22.2025.07.30.07.32.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Jul 2025 07:32:52 -0700 (PDT)
+Date: Wed, 30 Jul 2025 08:32:50 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Trevor Woerner <twoerner@gmail.com>, Marek Vasut <marex@denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Philip Oberfichtner <pro@denx.de>
+Subject: Re: [PATCH 1/1] Kconfig: typo restict
+Message-ID: <20250730143250.GP1807455@bill-the-cat>
+References: <20250730125427.587976-1-heinrich.schuchardt@canonical.com>
+ <3f34945e-9e4f-451e-85eb-5a5e4e5cd265@cherry.de>
+ <0b5e6888-6652-4ec7-971e-710dc9cd3a77@canonical.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=707; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=oOUhKrv4aZUMB83Y6j+6T8LrEUitYFfnmm2Yk706mPQ=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWR06TwS3NKnEHu90ZNbSdb79QdGTckFh292dfTse7Jze
- uC26xuvdJSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBE2tsY/ru/jPVpPcpedUkj
- Z/8Jg8ad4Q87Z2fKNG720Ng8eXts+AuGfxrWLew6j2pPSmhaZxbdlQz4fcG/ZL/zfIXzr4J3s9y
- t4gcA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|SA5PPF8ECEC29A9:EE_
-X-MS-Office365-Filtering-Correlation-Id: 825d444c-4c1b-4699-ce2c-08ddcf75e530
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?UM+QUflOBXrp42+crGG3QVII1RgL7Kfx3VDx0zHf4wNWO8vBymD2XemL+1xL?=
- =?us-ascii?Q?4DjKSDt45SQm7Z3gtk3o99yM3Esje8VdqSLD/oLsV33JWcPzGE6qbXYi1eD3?=
- =?us-ascii?Q?ypG6GsnsKlThVsvgSRKpT4SBkn9APauowKiYedeyg4Hhepe9KUTU4QAne0tV?=
- =?us-ascii?Q?pXAKO0yreCzWn0GWMO8lQtuoco2biyAH3ci7pPG5t8ur3QW/dJNGJ7Z8u+lz?=
- =?us-ascii?Q?604fGSJ0mdBmBiK7Lf/WZtD/LCn3c2HMwlCpHlsIPidNYR7TAq88UK0fDHk1?=
- =?us-ascii?Q?enM4LedVrgOt3njDNkz0SVaasciuz5PnVSdo807nIWsQqFu5mxzvHiK6X3fs?=
- =?us-ascii?Q?Zi3Dao5Tfd9rgcHEOsiMoxzH+yKEIxwyNydog8W2r2IP+dFwZHrzUnibTI1/?=
- =?us-ascii?Q?Y+gLydMN6q0N2kRpawIvms74wdqc1TDNjGePmk0ZK3vgJUDjod+qCOq013Il?=
- =?us-ascii?Q?aC3BXjKTOdhVMCyQemL41ddFTxP4gT5ClEEkQzyTmXeXKLQQvOP0XDy/vDi+?=
- =?us-ascii?Q?kBTNz+0QmvAB/i2bpoWkjDTDPP/MCUM6wN3k2BzhUNo42ea0jBOztDbIZWVV?=
- =?us-ascii?Q?ecBZ1t+PtdgI6rW/98vJx/tLflQ3ym6PE2Qs7Z3Xu9ED3p/XaBtFXQ1HJlt/?=
- =?us-ascii?Q?k2mCFvffaCzQKTgbk4/+LF1f6tdGrZeU16p29n49ZDjYrkqS/6IHPKZZGEYO?=
- =?us-ascii?Q?1vl6ScMgBvo89cu7NJqA/MdRoY6ZrclFUk5A63JVRIFZcS685Asw5KG9v2X5?=
- =?us-ascii?Q?TFy5OdoxCQTEPTJM/kdviapqJ+zrtnflEOUz6QkDRe7pNEuqIR6b8+3pahk8?=
- =?us-ascii?Q?923ldxUy/ADWm/vT21kEj3ghvLoDWh/3Gp4nf19j9T2npqt4gfcUd9DKqZ3v?=
- =?us-ascii?Q?ACBg/nw1aEpD44LggXZpvbhwQXn8VWYU88D7+epUYAbEqkWVTIelL0g7qVLZ?=
- =?us-ascii?Q?EyDjH6hfr7j93zGiONew6N2P4bgiex4xNAGlK0xTU4flxNIFucyVeY0e52Hc?=
- =?us-ascii?Q?mEbrAq4s6zZIRoSPFD4KsbmrW88JXy1T6St77WJpJGW+5sNqMrFqUi75T3RP?=
- =?us-ascii?Q?dMrEmvhbbHL9e/F8i7dcWoNBBKRNchfCpoUUx1fIrtqs+2LVG/LzLS6aC3Wo?=
- =?us-ascii?Q?XAkw7ua5mx3Vinn5vBZwMWtAIQFZw2ZiJlRE3O6QX531KS6cuYWsZ2yZvPsS?=
- =?us-ascii?Q?gz+kw4fv3sbDPE7cqE48nwP6BlyFBAP1AXSdQcw5IyjfDnHMuQiyBYdg1jsH?=
- =?us-ascii?Q?liiC3EzsZJJN5KIscxf8kPlAW8jksCfz6QgSEyjbiwacNoPkbYi+FEd2DJ6Y?=
- =?us-ascii?Q?MPs4YWeryHZyS7SopuytcDGBgbwp3rmEAGtCflJzIilnB5JKlUp/fYFuquP1?=
- =?us-ascii?Q?Vo4EAXQ/TexW8LQ/gf2dT1yvj+GMqc8V4miqsqFQ9CBtDpaYYco1qsUb9ZZ0?=
- =?us-ascii?Q?EFzeGPORaEpUGpBbByyxykUqpg9CZwonlmxBI6Gh6J5QdaDYS0XutxHXd2LF?=
- =?us-ascii?Q?xsyBZpnvswf8JLyJmIOmFlHhCxSdq9FXSLk/?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2025 14:32:21.9337 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 825d444c-4c1b-4699-ce2c-08ddcf75e530
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD8.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPF8ECEC29A9
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KaOk7pX21gShCJz1"
+Content-Disposition: inline
+In-Reply-To: <0b5e6888-6652-4ec7-971e-710dc9cd3a77@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,29 +107,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When DISTRO_DEFAULT is disabled there is missing empty
-BOOTENV_DEV_SHARED_XSPI macro defined.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+--KaOk7pX21gShCJz1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- include/configs/amd_versal2.h | 1 +
- 1 file changed, 1 insertion(+)
+On Wed, Jul 30, 2025 at 03:05:59PM +0200, Heinrich Schuchardt wrote:
+> On 30.07.25 14:58, Quentin Schulz wrote:
+> > Hi Heinrich,
+> >=20
+> > On 7/30/25 2:54 PM, Heinrich Schuchardt wrote:
+> > > %s/restict/restrict/
+> > >=20
+> > > SPL and TPL have separate options (plural).
+> > >=20
+> >=20
+> > Looks good to me.
+> >=20
+> > Wondering if we couldn't add which options are to be used for TPL/SPL
+> > Would that be TPL_MAX_SIZE and SPL_MAX_SIZE maybe?
+> >=20
+> > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >=20
+> > Thanks!
+> > Quentin
+>=20
+> Thanks for reviewing.
+>=20
+> With VPL_SIZE_LIMIT and a patch for UBOOT_WITH_SPL_SIZE_LIMIT pending thi=
+ngs
+> get even more involved.
+>=20
+> We should think about a documentation page on size limits:
+>=20
+> CONFIG_HAS_BOARD_SIZE_LIMIT
+> CONFIG_BOARD_SIZE_LIMIT
+> CONFIG_SPL_SIZE_LIMIT
+> CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD
+> CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC
+> CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK
+> CONFIG_TPL_SIZE_LIMIT
+> CONFIG_VPL_SIZE_LIMIT
 
-diff --git a/include/configs/amd_versal2.h b/include/configs/amd_versal2.h
-index 1ade6adfa0bc..bd52e5a895f1 100644
---- a/include/configs/amd_versal2.h
-+++ b/include/configs/amd_versal2.h
-@@ -145,6 +145,7 @@
- 
- #else /* CONFIG_DISTRO_DEFAULTS */
- # define BOOTENV
-+# define BOOTENV_DEV_SHARED_XSPI
- #endif /* CONFIG_DISTRO_DEFAULTS */
- 
- /* Initial environment variables */
--- 
-2.43.0
+As Philip has hit adding a new MIPS board and need for specific size
+check, yes, better documentation (and then perhaps adjusting and
+cleanup) of our various size checks is much needed and would be
+appreciated.
 
-base-commit: 4bf2731f030926c65b5031e0109e092013cb225b
-branch: debian-sent3
+--=20
+Tom
+
+--KaOk7pX21gShCJz1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIotEgAKCRAr4qD1Cr/k
+ClbsAP4pNAC2idOmZ1yqRJ/yHBrzdAB2TNLINsza5dRJde5hqwD/fIMRu4gIfWZZ
+dloCaBpuQq4ur4XFV3WwYXxHbaHZGgs=
+=0HF8
+-----END PGP SIGNATURE-----
+
+--KaOk7pX21gShCJz1--
