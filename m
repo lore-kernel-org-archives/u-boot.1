@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED69DC87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 13:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D580C83F26
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 14:26:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22920801DD;
-	Wed, 30 Jul 2025 15:51:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BD77E801DD;
+	Wed, 30 Jul 2025 16:26:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RzSCXqXg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I4nBA/1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D69CA80548; Wed, 30 Jul 2025 15:51:49 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 947FD803CC; Wed, 30 Jul 2025 16:26:32 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC8D980194
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 15:51:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DAA84801BE
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 16:26:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-55b823c9129so653746e87.3
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 06:51:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-2ffa8e58654so3641183fac.3
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 07:26:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753883507; x=1754488307; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PIkPH+I23cA0840CfX8/f8PDEjtn1ZivaTWLN3zdQ5M=;
- b=RzSCXqXgwkgauXE22lW1cr4jkbDFAyJmf1LA977aZt8sDCL899HAoe2Ugo43bGDcOT
- 7adaA2EjbdRCR8w4y1QyIYL8JMXhdmg5GbotxQET+yp/ZOw7hS94Us4QuWjb9fdAr794
- SrKWlQZZDaBIVCMJWakkicSCXd+2rNSPWuubwCFQ+sfdpCNO8pKq4e/Nb/lc2WNN0S4F
- vgXt9ZDyBG20B9+MJqIuZSqt9uSYm7hlNIFPJpEGt0bblplq+HPf4q40CP2sHjs4BEYg
- EFpmr5y1YEt0R1MFaW15h2MjFVaugcfhx4DfxAKoEnLPUszpp7MbdYBBlhv6tLxVooe4
- eNzQ==
+ d=konsulko.com; s=google; t=1753885588; x=1754490388; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aFjIiuxeoCWt34yFhogv2mADXDdHIIAXac8l5wGy6/0=;
+ b=I4nBA/1zOCDvuPB/SIscPHtVzi0rQlu+S4xVEkkljI4qr0kg6tsTsClFpct0uvFBE2
+ h70PmeA7xLkID0QSP/ZLIH3P3zhSsUNsjnfZGGV+4HGFAnNb4Rm29SbgdDFFlgBYDaIo
+ vd8zXi5nKuL1HFETE0TpVpc/XHp0TkapRkdWA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753883507; x=1754488307;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PIkPH+I23cA0840CfX8/f8PDEjtn1ZivaTWLN3zdQ5M=;
- b=HPDFz7bwGKw+AX5mktJD0wnt+bAmxpmobSRhWWMMYVR8/xCQ02SYOmX5gxPOrXHsPd
- g3+dBvvI1U5FTDb9qjaJhtKd2nlJ/Dsk8O0kp6t4orWOL5a2uVmJTRaFMXoP8KPQFw5j
- DkyAEiMxKVfsG3VICaWj2JEyM80wAoBZYUGZECXcwWRADJYTg+riM+KoIRG53xX49IGf
- DSPNEcKa3yX5PeHJAreoYXKq/VeXFHWGTKEikJxVnffJioNXQuE8s/PekwI2zSU+8oee
- x05enX34NbHj3rm4I6S1Ybji/2uleWXk9/0hQHU+aqEp/IUD944HQB6nArF5OY81kAvy
- aiOQ==
+ d=1e100.net; s=20230601; t=1753885588; x=1754490388;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aFjIiuxeoCWt34yFhogv2mADXDdHIIAXac8l5wGy6/0=;
+ b=wt4t4dyq3Fb2fogrRq0KhVhKWtbQGYf0FLULmjoq9EGAMPVfeZPZtz1fO0W8Tm9+dW
+ SbrBYT8KawqvcB3P+8SxNU/+ATrjNNB1iLHqbYSWAbPaP4JaSS0qv8Jrp7+xL/EDCs6d
+ 1wtvVOTG2/1FH/bkpxJn1KrtNDTtnCSws8XPE+2Ao9C0coH47eAXdAJP2DolC46AKvY9
+ f2CkAFegtrRSlq79NVNjI7MAWKQECih7Vpz0p0PYXUzOPIbBr6ExOWFubMygqNvrzqoQ
+ eW7v6YZ5dslmjvNFBGOVWVKioHOrqJs0BQhoC1Q458Qel2mVkbGZLmCFXtx2Gb06HP18
+ lGWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVfEw41Z/rLtNNXtoAYqwpanOgsga0E5DfDb7jG6pDs9wHMHNWytPN++VHMZTzvd2TyOfaOmxE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzBloGvTffE/pxtbFLR0alJMCu0LCrKOxV92PFjuig1F1v0pWQ
- m5HWMobmorkqn3s6Npbia3tFy7NxDkDZbLCv+6PeBGyxSTBHYEdjnw/6K6t901k8B04QgAPXPIK
- YoShOH1+rFiL48Z16nPfa3ohRDmU1jdk=
-X-Gm-Gg: ASbGnct4TNCZwYg8SJ7tmWpB7ysl/douGvlDeMgRaZ7y1r251/K4tVJFF0DHI8k/WVG
- eco2FQQWbGsprHJ0cGjUaUOoXYUmBtaxR+9zh/C1PhBhmjrU/TAqJ18cJl1nhak1Xv6ynw+rcIg
- FhH0d7RyewbmsLi1RhdAa3/lP4E3gKijZLrWF7xiIabp1lqcF6QxScQrsQYZ6VET90/38VHXUMN
- vHJUkckMnZdZeY7Mv95vQAmDiZt9jV6Km2eBuk=
-X-Google-Smtp-Source: AGHT+IFeQ7QMaEMRY01qsjUTVFa3+wA9ZBOjCevTMGkFZE+XxSND50w1dKY+OSJg+mk0Y1dwHUmO78G6I5KqybLuULs=
-X-Received: by 2002:a05:6512:e86:b0:553:3770:c91d with SMTP id
- 2adb3069b0e04-55b7bff3a0emr1137512e87.4.1753883506872; Wed, 30 Jul 2025
- 06:51:46 -0700 (PDT)
+ AJvYcCVNsJHqvWdtXuqsar9Yox5wRkIH7g15D1WVaOKE9NWcbWwbhLGDDBnGJ11nUQ4B0gQ+5bWA2jg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyb1mMqnDd/PyqRWWnJFjLzvyZNB+yuKyKTrBzKXvYLrQ3H1VlC
+ nvbFTfQK2Nrh3L/qpDqpBL6Xturyq9MPtiujqDrvt9UI0NjkF5mR2S/pIHiTNaLRo4E=
+X-Gm-Gg: ASbGncv+fHjUf1XIO2sOqp20JxD22DZVraO1AC2aqu5Je55W2Tjz34foRFcTFC/Y68Z
+ 2V5kTNrIjl4/6ftvEB01fQTMV7n4U9cArnx8Oxz+ZxXNpM89onf9FKd9F39jf6/3KUo0MZUGhFd
+ 0R/hCkSELck2A2LTjKgM58pnbuQ2mtC50TMXxuw/iv25Nu1R9pzlK65x4c6xRjkDLkMqrDMimXD
+ KqFbWfZ8GtzJUpiple3HF3vEDEdw9Fr6GykqcfrsUd+LFAa16Rl07zcOI3x1bW9Z26UqDe1ytMX
+ d7tR8qZz29DeYnrAfU+Yr7ruAyNyjRljvkszrw4wlAMrukvG3foqpFTsjYOEMIe2goFMxxHEoKp
+ T3Ah6C9mo/84nZ9K42YpqY1Nb9lWkH8V0/K9sfVFpkCf92UgThiWYUc7Wex8UaFWO3c0=
+X-Google-Smtp-Source: AGHT+IHSpz9hSgJtxPirv5gOU0GmY8C462lpR1WQXESgWgX3oNYFP3zpmnOW8+WyNcd5YuFIaiX3YA==
+X-Received: by 2002:a05:6870:d1ca:b0:2d5:b7b7:2d6e with SMTP id
+ 586e51a60fabf-30785dd920emr1991727fac.38.1753885587780; 
+ Wed, 30 Jul 2025 07:26:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-30713592187sm2896645fac.22.2025.07.30.07.26.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Jul 2025 07:26:26 -0700 (PDT)
+Date: Wed, 30 Jul 2025 08:26:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Wadim Egorov <w.egorov@phytec.de>
+Cc: Bryan Brattlof <bb@ti.com>, Garrett Giordano <ggiordano@phytec.com>,
+ u-boot@lists.denx.de, Daniel Schultz <d.schultz@phytec.de>
+Subject: Re: [PATCH 0/2] arm: dts: k3-am62a: remove GP security variant for
+ AM62A
+Message-ID: <20250730142624.GO1807455@bill-the-cat>
+References: <20250729-no-62a-gp-v1-0-1dbdb4469ad3@ti.com>
+ <03e3be58-3c69-407d-8bf8-3f90e6b19e6c@phytec.de>
 MIME-Version: 1.0
-References: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
- <20250728-ddr-imx-v1-9-73da75bb33d3@nxp.com>
-In-Reply-To: <20250728-ddr-imx-v1-9-73da75bb33d3@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 30 Jul 2025 10:51:35 -0300
-X-Gm-Features: Ac12FXxPbiHHLwz_ejVKXucQcGnI00qBfLtmx0f86oX4IFfZ7xz9dRKov-ZHYO0
-Message-ID: <CAOMZO5D_byNG+rRmM=ax0w_gspcqi8k7EFCgzhsnv1GaWmZ1Bg@mail.gmail.com>
-Subject: Re: [PATCH 9/9] ddr: imx9: Add errata registers support
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Peng Fan <peng.fan@nxp.com>, Viorel Suman <viorel.suman@nxp.com>, 
- Tom Zheng <haidong.zheng@nxp.com>, Ye Li <ye.li@nxp.com>, 
- Florin Pavelescu <florin.pavelescu@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/KgKxVjmOCoLm4zh"
+Content-Disposition: inline
+In-Reply-To: <03e3be58-3c69-407d-8bf8-3f90e6b19e6c@phytec.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,12 +100,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jul 27, 2025 at 11:14=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.c=
-om> wrote:
->
-> From: Viorel Suman <viorel.suman@nxp.com>
->
-> Collect errata registers values after the training and restore errata
-> registers values before starting quick boot firmware.
 
-Please explain why.
+--/KgKxVjmOCoLm4zh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jul 30, 2025 at 04:12:48PM +0300, Wadim Egorov wrote:
+>=20
+>=20
+> On 7/29/25 9:36 PM, Bryan Brattlof wrote:
+> > Hello Everyone,
+> >=20
+> > The AM62Ax was created right when TI was shifting to their high security
+> > (HS-FS and HS-SE) processes. During this transition a small subset of
+> > AM62A parts where configured to use the old "GP" security for internal
+> > and for select groups of partners but never sold for the wider public.
+>=20
+> I guess I will need to update my hardware to an HS-FS device :/
+
+Did these chips then get sold to the wider public? Or just distributed
+within phytec? I'm wondering if we have another i.MX95 A0 type situation
+or not
+(https://lore.kernel.org/u-boot/PAXPR04MB96443299A51764EE05533DE0E224A@PAXP=
+R04MB9644.eurprd04.prod.outlook.com/)
+
+--=20
+Tom
+
+--/KgKxVjmOCoLm4zh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIorjAAKCRAr4qD1Cr/k
+Co6QAP9S0wUU//sCzsCkJJkApqF/YqNFqiw59Do27+s2OkJmfgEAxyVw8FeESkWq
+VzsIRdV470OXQ0NvHHjBABxTp5q6ugY=
+=New5
+-----END PGP SIGNATURE-----
+
+--/KgKxVjmOCoLm4zh--
