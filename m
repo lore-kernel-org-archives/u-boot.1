@@ -4,51 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0198C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:39:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFC6DC87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 592C282E52;
-	Wed, 30 Jul 2025 14:39:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C5D5282D32;
+	Wed, 30 Jul 2025 14:39:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1753879143;
-	bh=uGbJc8cC4A5QxGoW5+U0tmFGsyahg00O3LNT3YKfh3k=;
+	s=phobos-20191101; t=1753879146;
+	bh=ztPJjRn179c1cthhe4TAwWalp5od7uVpXxRhtX+Eb4w=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bBIofvrADtkcOnkFFSjq60+9HTiG3hL1+gS7n3YmZeiifvg2vX2NwHcypYyCm7kg3
-	 p8PfOLbszPBP+cZ6ihZ8+HktrJ15kj8YSq0udK9jg9rZQ2xFdqSn21HKz6VvL13I/j
-	 13D7Xq07y9BBTHAJGc+KyC5lIEghWE0qmOZB/UjNj7D7BC4SYNjx7G1egOV9gsxkqY
-	 XupK0ewVMHQQwSOVi/NdV/PtysZXqlolUVhDiZihh1iq3fjQ4zk9n+WNoPZwabNrjV
-	 w6x3HrOVrB6zk3twF9FPiynO6I8oO8FSQ1qNu2qp4Sg4aNopMhCLhG2V0NPJWD6yXn
-	 jII3ZIUgIKdkw==
+	b=StJTEEK56r+fYJo69BZSwObRUnRrWoknxpe3oDyPFF6IJQXXm2XBgWTku4C/EZfx5
+	 oYXeUWc5ZhgMr6GQ2LQ+qjkVqIJw15/T8RC3SnueimsEMTVkjWQQfxHZiOoKgsk3I6
+	 tmu3AZBPkpCTgd3L7k41pcXtSQMF5t7FjS0ZFokavMJDcJRa0FBcYnkrkm8WO+b3F7
+	 8+2pii0KSmdCgQKc5UWvKpyg/ekUH5IqG5d7el49gjA+A+5FklKhHIyMfhuZpNmood
+	 2ePqB2qNxV7EeNfXAiCDnv3SXiGZJJdSNH2vC0CLZf52oJ0v6y2gzNdPyK+R1GJSKw
+	 q/kPOuhPY/SDA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9631082E34; Wed, 30 Jul 2025 14:39:02 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 567108004F; Wed, 30 Jul 2025 14:39:05 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24CF98004F
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:39:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 258CF80FA1
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:39:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="aZzFIOmR"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="MtDtoNUZ"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 25B841038C129; 
- Wed, 30 Jul 2025 14:38:57 +0200 (CEST)
+ with ESMTPSA id 7E9B21038C12A; 
+ Wed, 30 Jul 2025 14:39:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1753879138; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1753879142; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=uGbJc8cC4A5QxGoW5+U0tmFGsyahg00O3LNT3YKfh3k=;
- b=aZzFIOmRR88fscDsM1vNhfAFOSgp75PgJkOyWK4x1CVkfbFVAvO9kBC4ttyDWEcKuOFb8D
- cXAVYCoj3Fq07j64PcHcL1xmx4yZ64bpqWLNJJ3cjLYIkV+cDPDzG1Un7tqG5QTDEL3mZ0
- qlOPTeDJtS2dcoHCDr3I43QO8yBpDOEncv42NI9iQ7fTy04iuR/j7WrHfyagbzQYUcjysj
- RF3hKSO28/DERGt4T5fjvELzkm7794hI9xqyr6A1bBCwMBDEblrbyh/D/Vpx4LlRwpEBhi
- IxOWyHSKybUzPQrd+sdnF5WxLRv5vyJPME1+5jztoavmTNj3XSG0ZPWm3XDzVw==
+ bh=ztPJjRn179c1cthhe4TAwWalp5od7uVpXxRhtX+Eb4w=;
+ b=MtDtoNUZ6vgKMo66Vm+nGznMx/01wBU7sb1dsuDg9wsMwzBXzR5r96d07Oy0wwYV9by4TI
+ EJuuvhoZajufkApLOSizQyA6UP0OggozAJgRyktP8n7Xb9I3HZodMto2cVp5/jDYqZ5dqO
+ V6i4bhQSa7G5u2Jedfg1uUTUjLgZbao/eIGUtIOgmitQdT5N3U2A3Ac6zYBFVJa772/rXa
+ aKOn2nyMDU/OIwT3MwRWdSynTnIe2F31bhI0srYKGHA11gMcXXNx4mXoqZ6w7W3QyBu0wE
+ t0KCIiFxcbtPd4hshP3b6ziPGxokxLt19Do5T7k7c35j5qD7TwjirAbU9p1BKQ==
 From: Philip Oberfichtner <pro@denx.de>
 To: u-boot@lists.denx.de
 Cc: Philip Oberfichtner <pro@denx.de>, Andre Przywara <andre.przywara@arm.com>,
@@ -63,9 +62,9 @@ Cc: Philip Oberfichtner <pro@denx.de>, Andre Przywara <andre.przywara@arm.com>,
  Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
  Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 1/4] Makefile: Simplify size check
-Date: Wed, 30 Jul 2025 14:38:30 +0200
-Message-Id: <20250730123833.249923-2-pro@denx.de>
+Subject: [PATCH v5 2/4] Makefile: Add size check for u-boot-with-spl.bin
+Date: Wed, 30 Jul 2025 14:38:31 +0200
+Message-Id: <20250730123833.249923-3-pro@denx.de>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250730123833.249923-1-pro@denx.de>
 References: <20250730123833.249923-1-pro@denx.de>
@@ -88,8 +87,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Deduplicate some redundancies within the SIZE_CHECK code in the toplevel
-Makefile. No functional changes.
+Introduce another SIZE_CHECK macro for u-boot-with-spl.bin.
+
+Note that we cannot reuse BOARD_SIZE_LIMIT here, as this also applies to
+intermediate u-boot*bin images, which, before being compressed, may be
+larger than the final combined image.
+
+Also SPL_SIZE_LIMIT has to be a separate option, as some boards might
+just want to restrict SPL size while still allowing u-boot-with-spl.bin
+to be bigger.
 
 Signed-off-by: Philip Oberfichtner <pro@denx.de>
 ---
@@ -98,141 +104,48 @@ Notes:
     Changes in v5:
     	- Fix for broken boards reported in v4
     	- See https://patchwork.ozlabs.org/project/uboot/patch/20250708103959.26129-2-pro@denx.de/
+    
+    Changes in v4: none
+    
+    Changes in v3:
+    	Reuse existing SPL_SIZE_LIMIT instead of implementing a new option
+    
+    Changes in v2: none
 
- Makefile               | 44 ++++++++++--------------------------------
- tools/spl_size_limit.c |  2 +-
- 2 files changed, 11 insertions(+), 35 deletions(-)
+ Makefile           | 1 +
+ common/spl/Kconfig | 7 +++++++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/Makefile b/Makefile
-index c31bf7ecea9..aefa44c327f 100644
+index aefa44c327f..e10d75384bf 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -432,7 +432,7 @@ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
- define size_check
- 	actual=$$( wc -c $1 | awk '{print $$1}'); \
- 	limit=$$( printf "%d" $2 ); \
--	if test $$actual -gt $$limit; then \
-+	if test $$limit -gt 0 && test $$actual -gt $$limit; then \
- 		echo "$1 exceeds file size limit:" >&2; \
- 		echo "  limit:  $$(printf %#x $$limit) bytes" >&2; \
- 		echo "  actual: $$(printf %#x $$actual) bytes" >&2; \
-@@ -1103,30 +1103,6 @@ LDPPFLAGS += \
- #########################################################################
- #########################################################################
+@@ -1716,6 +1716,7 @@ OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
+ 				   --pad-to=$(CONFIG_SPL_PAD_TO)
+ u-boot-with-spl.bin: $(SPL_IMAGE) $(SPL_PAYLOAD) FORCE
+ 	$(call if_changed,pad_cat)
++	@$(call size_check,$@,$(CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT))
  
--ifneq ($(CONFIG_BOARD_SIZE_LIMIT),)
--BOARD_SIZE_CHECK= @ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
--else
--BOARD_SIZE_CHECK =
--endif
--
--ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
--SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
--else
--SPL_SIZE_CHECK =
--endif
--
--ifneq ($(CONFIG_TPL_SIZE_LIMIT),0x0)
--TPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
--else
--TPL_SIZE_CHECK =
--endif
--
--ifneq ($(CONFIG_VPL_SIZE_LIMIT),0x0)
--VPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_VPL_SIZE_LIMIT))
--else
--VPL_SIZE_CHECK =
--endif
--
- # Statically apply RELA-style relocations (currently arm64 only)
- # This is useful for arm64 where static relocation needs to be performed on
- # the raw binary, but certain simulators only accept an ELF file (but don't
-@@ -1470,7 +1446,7 @@ endif
+ ifeq ($(CONFIG_ARCH_LPC32XX)$(CONFIG_SPL),yy)
+ MKIMAGEFLAGS_lpc32xx-spl.img = -T lpc32xximage -a $(CONFIG_SPL_TEXT_BASE)
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index ab05536bd02..b5c0c60ff6b 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -36,6 +36,13 @@ config SPL_FRAMEWORK_BOARD_INIT_F
+ 	  - initialize the serial (preloader_console_init)
+ 	  Unless you want to provide your own board_init_f, you should say Y.
  
- %.imx: $(IMX_DEPS) %.bin
- 	$(Q)$(MAKE) $(build)=arch/arm/mach-imx $@
--	$(BOARD_SIZE_CHECK)
-+	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
- 
- %.vyb: %.imx
- 	$(Q)$(MAKE) $(build)=arch/arm/cpu/armv7/vf610 $@
-@@ -1571,12 +1547,12 @@ endif
- 
- u-boot-nodtb.bin: u-boot FORCE
- 	$(call if_changed,objcopy_uboot)
--	$(BOARD_SIZE_CHECK)
-+	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
- 
- u-boot.ldr:	u-boot
- 		$(CREATE_LDR_ENV)
- 		$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
--		$(BOARD_SIZE_CHECK)
-+		@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
- 
- # binman
- # ---------------------------------------------------------------------------
-@@ -1703,7 +1679,7 @@ u-boot-dtb.img u-boot.img u-boot.kwb u-boot.pbl u-boot-ivt.img: \
- 			$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_SANDBOX),dts/dt.dtb) \
- 		,$(UBOOT_BIN)) FORCE
- 	$(call if_changed,mkimage)
--	$(BOARD_SIZE_CHECK)
-+	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
- 
- ifeq ($(CONFIG_SPL_LOAD_FIT_FULL),y)
- MKIMAGEFLAGS_u-boot.itb =
-@@ -1718,12 +1694,12 @@ u-boot.itb: u-boot-nodtb.bin \
- 		$(if $(CONFIG_MULTI_DTB_FIT),$(FINAL_DTB_CONTAINER)) \
- 		$(U_BOOT_ITS) FORCE
- 	$(call if_changed,mkfitimage)
--	$(BOARD_SIZE_CHECK)
-+	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
- endif
- 
- u-boot-with-spl.kwb: u-boot.bin spl/u-boot-spl.bin FORCE
- 	$(call if_changed,mkimage)
--	$(BOARD_SIZE_CHECK)
-+	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
- 
- u-boot.dis:	u-boot
- 		$(OBJDUMP) -d $< > $@
-@@ -2342,7 +2318,7 @@ u-boot.lds: $(LDSCRIPT) prepare FORCE
- 
- spl/u-boot-spl.bin: spl/u-boot-spl
- 	@:
--	$(SPL_SIZE_CHECK)
-+	@$(call size_check,$@,$$(tools/spl_size_limit))
- 
- spl/u-boot-spl-dtb.bin: spl/u-boot-spl
- 	@:
-@@ -2367,14 +2343,14 @@ spl/boot.bin: spl/u-boot-spl
- 
- tpl/u-boot-tpl.bin: tpl/u-boot-tpl
- 	@:
--	$(TPL_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
- 
- tpl/u-boot-tpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
- 	$(Q)$(MAKE) obj=tpl -f $(srctree)/scripts/Makefile.xpl all
- 
- vpl/u-boot-vpl.bin: vpl/u-boot-vpl
- 	@:
--	$(VPL_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_VPL_SIZE_LIMIT))
- 
- vpl/u-boot-vpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
- 	$(Q)$(MAKE) obj=vpl -f $(srctree)/scripts/Makefile.xpl all
-diff --git a/tools/spl_size_limit.c b/tools/spl_size_limit.c
-index c6c139e834f..137f0fca898 100644
---- a/tools/spl_size_limit.c
-+++ b/tools/spl_size_limit.c
-@@ -28,6 +28,6 @@ int main(int argc, char *argv[])
- #endif
- #endif
- 
--	printf("%d", spl_size_limit);
-+	printf("%d", spl_size_limit > 0 ? spl_size_limit : 0);
- 	return 0;
- }
++config UBOOT_WITH_SPL_SIZE_LIMIT
++	hex "Maximum size of u-boot-with-spl.bin"
++	default 0x0
++	help
++	  Specifies the maximum length of the u-boot-with-spl.bin image.
++	  If this value is zero, it is ignored.
++
+ config SPL_SIZE_LIMIT
+ 	hex "Maximum size of SPL image"
+ 	default 0x11000 if ARCH_MX6 && !MX6_OCRAM_256KB
 -- 
 2.39.5
 
