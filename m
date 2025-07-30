@@ -4,174 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15BD6C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 06:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8358C87FC9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 07:23:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C54382B20;
-	Wed, 30 Jul 2025 08:35:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
+	by phobos.denx.de (Postfix) with ESMTP id E20F282BA1;
+	Wed, 30 Jul 2025 09:23:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kontron.de header.i=@kontron.de header.b="oe6/GrdI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N24PMn7u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0316E82BA1; Wed, 30 Jul 2025 08:35:50 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 493A582BA1; Wed, 30 Jul 2025 09:23:31 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C32E82063
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 08:35:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5202582B20
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 09:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=kontron.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TvQRXBWaeLaYkIYqEypx7J75YqK3apocevVsjxLVVUJpp6y0K+LnZEaHGwxHwCKBvHBsrZ9EoQblRGLWadawkJ07xSC6IlzPmIhRY6zb76u18M9JP0vzf15Lvqz+PeqQY2h4vgXog3twogOvhv88Vnl8scP6zo2mZVqblxTqHSFPlIRNaYQDfx0BL4/cxhbDJggAphCCh3sjhd7EjVuKGqnO71dHmFY6L4Bi/fUPqyjQSZ6/R2e0Y48MzGzar977Ql/KZtPDF0Qzq9NiPGNIBZakokDPFreody7GaUVpCvWc3ZcAJZraHWGEH3LKy33gGnUNM16VDBwr49AWr/tm4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ul+mlrwBbiFpbb1+4B0zJdHJdLuNH7V84Kas71JoCHU=;
- b=roFmQ2UmItXl4HjXGogOoOu/YihcuB6PUbVGzN8CQFDLMyam5c2+g/zPdXgOl7/f0XuWApN+WcMmUj4jr6VgNvWQQkGeCMumMooqXowNQNM9yYbrKk4yY1+vbFxYVrlBhz/2B86GNIiCZgaMkFm8jGk7BhtLUe/RzrKWZrov/d6AYXUB084BAtoqptkJE7VdTm6Vc96z99ePdlS9lwGVBe0pd6wERzhmCIh9gFGZBlUtajphdNMjKZm9U7DQtLOAbHZUO8Gp8EdkGMLX5aI6zLI4Zzfk4zz3DCaRsSISTofmm6OyfLrYjLVpg9w71UtQohenlqgpkB//qVXElTTULQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ul+mlrwBbiFpbb1+4B0zJdHJdLuNH7V84Kas71JoCHU=;
- b=oe6/GrdIwcMq3J+PL/tHDQJe5RU+WRGBuRD9Tucsh6PKocQypV7I9Mtd2jmL5vm0YUACGKOdY7FOeoCghYJvkzE/MYB4wO391oOha/UV5mNFEjau7NN4PKV3k1SGk/kJeiHMbHrUPmKci9RF1y5NIvpXqrRLGzneX3+U+I5ks4YqoAoWZ/2S4UXv2x/N9UW9uInZ4A9nMjISozE1ZST+JeRAZ8WC+BFtBHeN49DuRAw4JYEqOrgcPcrc4++6nZhX/DPwigOeDBrB1c1Xl58FX0gIa2qBjpr4TLXtU41JF13gVZSB7oIXmNZrsA2Ql2CbCsBHMzj+NBBRvODVdYrO4Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
- by DB8PR10MB3531.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:13f::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.11; Wed, 30 Jul
- 2025 06:35:45 +0000
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19%4]) with mapi id 15.20.8964.019; Wed, 30 Jul 2025
- 06:35:43 +0000
-Message-ID: <e5c64596-b118-4394-87b6-1b121c801af2@kontron.de>
-Date: Wed, 30 Jul 2025 08:35:40 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: imx: imx9: scmi: Fix booting from USB
-To: Francesco Dolcini <francesco@dolcini.it>,
- Fabio Estevam <festevam@gmail.com>
-Cc: Tim Harvey <tharvey@gateworks.com>,
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>,
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
-References: <20250722-v1-fix-imx95-usb-boot-v1-1-dec7f2384405@toradex.com>
- <20250724033822.GE18395@nxa18884-linux.ap.freescale.net>
- <kn34dabjpqywranhgrtpy77bmuviluhzgf2pgtdguqvgwk7e3d@3zud5czxsewc>
- <20250728102923.GA32387@francesco-nb>
- <CAOMZO5DT=ua+vCX5OQq6sx1nfcFjFY0S1hJ8OmNE1RWCQAmxJg@mail.gmail.com>
- <20250728164441.GA15074@francesco-nb>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <20250728164441.GA15074@francesco-nb>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0113.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a3::12) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:263::10)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6088d856c6eso1121312a12.0
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 00:23:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753860208; x=1754465008; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aeuJspwy03GvUkcOMJa0AIny7FOgV0FWjMu9HjUosFs=;
+ b=N24PMn7uFshp5GLOYQgOzulBVe92Q9v+fxiDQA7cNXfeIexzS6UjIsewQaZV12FyQd
+ Ys10luGbCijH6sJixtTNwmnnFvUQRvxgCs7eoC1tWsttCz8TbB/fubSGfSygJDUHOB+7
+ Ha0nIfxdZAJsp+FkhYyFMm+d6ZYgmqrQRlwK11aaUS9ltKPnB1HAP+4B3WkDVxJB+k1R
+ 4ooH8qGhCyb1uP/CbcvbmOnlyn/vSv/sZKFVnZzw1/6bGEI53nMQpdutUMChRqNFs5Bn
+ Ow4DoT9Ag4mSW9ybh14KdbZoVTIvTRgyJlvZ3RsnHEa3BVIcFgO2/9iL+1KJtnSXvBFG
+ dSCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753860208; x=1754465008;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aeuJspwy03GvUkcOMJa0AIny7FOgV0FWjMu9HjUosFs=;
+ b=DqimtIvgZ6dv6NjFlGaLH/9UKAJe6lhTban7Rovze+m9UAFHQxhObUvj7d48vS2s4a
+ 01/H5tRYAF6xt5J5P5pAN4jcwli8BZXO/hdTDC1TORE9akRRGhEPkM0jYlfHP0yFLCHk
+ z4lTy73NOECQvoRoA4D2r+5bLCLgFYlg1AMzHQG6uouQGEQLRLYilB0EYoNlUbTiMJ3a
+ e/xMTQ2qtBjFVIyweFVmnnw4841BE7KUdNpfh+qB75FxzhSDJN0BEm8EP1B2NX2hUpTk
+ a2Wgfb9noGjXtG1097n1Q7AJ5wmuYurZceercDNvcqZnRydGsYEOMewk/8XNCMQGAZnO
+ 0GQA==
+X-Gm-Message-State: AOJu0YwpVQZMM2jZCSToEd5M/hKIKnso6HT3LHlvzKYfh8wBTe/HR75d
+ TxijXjTYHsx7lcOlLsOPQuvJCbQw1MAzqkw9YlYAhpbnh+fS9HmZz221MWZnyhAq1o8=
+X-Gm-Gg: ASbGncu6WhS99RakgD4ljwZxC2Vdg6n/YhftNIoDhdJwDYGye6vuajPGwXBXIBYVsn1
+ UBQBM/VYaBgOMVd1grJ1rcjHasM4tshJgyS7pJQYoIoZqY/q/8ZHxCs+jyIH2QmA0mWal8CEYiw
+ 2KeTsCsNBWQXxcWDm4XzpJYCeP8ZwpIfbSW8XjBOOKNkJmzlo9jviBkWM8awJ7GfWTAsNCoG+7O
+ TPSNW+KK/FcIBKNZWyaIz9Gln3x/9LcSfHXY6le+Nx730wug3ugiM3P7sCHQqx9ovbNRhvh+Q6O
+ 6OH0Kx/7tglmA3qrf24kyuNGUonJHONZvTjSMB2XkcSbUunuaVZBy3icRXnQc0v7/j8AM76v56r
+ BJt616iZ09WsV4Xo5NQs0AonBqRqQFJk3w6FlOUJJMMDZ7z/7BnhJP7P1W/+EpZT/3G3ZuYvfdL
+ JcFrkWeRM6JOlX
+X-Google-Smtp-Source: AGHT+IEImBAEQ5noKQXVssmtXOb+r7uRP8SB2zjEtEkiJo6ZbeL/nM+7uSAVZvvZgK25VAm5irsEcQ==
+X-Received: by 2002:a05:6402:180d:b0:606:a26c:6f46 with SMTP id
+ 4fb4d7f45d1cf-615870b14ebmr2136862a12.19.1753860207540; 
+ Wed, 30 Jul 2025 00:23:27 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:a542:3dbd:67dc:3d1d?
+ ([2a01:e0a:3cb:7bb0:a542:3dbd:67dc:3d1d])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-615226558d3sm4631282a12.45.2025.07.30.00.23.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Jul 2025 00:23:27 -0700 (PDT)
+Message-ID: <2ee1be9d-7c8c-4db2-a10c-bb9dd9e87d49@linaro.org>
+Date: Wed, 30 Jul 2025 09:23:25 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|DB8PR10MB3531:EE_
-X-MS-Office365-Filtering-Correlation-Id: e4b24269-8602-432d-3c95-08ddcf334e93
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|366016|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TlYrK29WVStTUFhkVW5oUXRWTGJQeldab0N2d1NraDFDNVoyeXFEUDRRUlJG?=
- =?utf-8?B?SU4rMkpBNmcwVGRwMzRCdHNTVlMrQ1JzN2pXem14TTJzanhrNkNJRXpDL0Fi?=
- =?utf-8?B?bTdqZG9GYW0xZVhqbTlZSmdhTHlHN0QyOVRUZXJpSHNKbFltZVBxNTBFUGxa?=
- =?utf-8?B?TU5GM3NSK3ZhN1pySkxBWEhtZUg4SE1WY0RxSkdlMUlRZzF1TWIwL0R3Umk1?=
- =?utf-8?B?QjE4emF4TDFNVXZiN2U5amtMN3MydU43c2NnOVpVeXZsTUt3Uytuak5XSjFo?=
- =?utf-8?B?cVY0LzFQaWdmZ0dBeDRjanNZUGRtS1pPcTg4SDVUN2NvWHlxUk1Vbm5SQjcr?=
- =?utf-8?B?aTU1d3djZVkwOTlUWkkyOXFTZnM3NUpHNkc2YURESFNLNWVpVnoyWXE1TzZm?=
- =?utf-8?B?NkxJSzBqeWNWVFpOMkpSWlBneHFlN0RKMlgyYXJjbkllS282V0V4dy9BV3RF?=
- =?utf-8?B?a2U1cnVDNVY5KzZYdUo2cm1GczBWOHBrb0NYVEZnVDdybGJlK2ZTL0p0L2ZV?=
- =?utf-8?B?cTBocThtakFzVWIxRnkvRnJuNHBua2ozNkdSZEJLQ2YvTnBTazdEd25HWEYy?=
- =?utf-8?B?YlNOU1NmNmxJelVJSkRLM1FLdm0xbEY5UGFNalRqVnpYQ1JsNlVwKzIwa3hm?=
- =?utf-8?B?ZWpiTTEwWm9xcEFDR2dKUU5aaTJBTG40ejVpM3p6VFRpdjVkRnpRd2xnbkFz?=
- =?utf-8?B?dk9LOFUvenlaOElVYnhudmVBYjA5QlB1KzJORVhpQTVockpnY3FNUzZjYjlp?=
- =?utf-8?B?VEhTcXhMSGVaZUh0ejUxUmcwLzF4OE1Tb1pVREE1TVMzK3dHbVdUT0NxbzR0?=
- =?utf-8?B?OXg0RmV5QldkUmltKzVWei9iV1R3WnQ5cVYvVEsyN1JwbEdsR0J3c3VybE83?=
- =?utf-8?B?RWs2KzY0cDE5ZXNmOUYyVXdHNGZDWEIxRjF0RjI0T0gvOVVhemFjY1BiRDlI?=
- =?utf-8?B?eFRMVmcwK3BNeFBKWEhJQVdGamw1L3JBSkh6M1RISGpQUXVYTC9QMThYUUlz?=
- =?utf-8?B?NWtCTkM5b1NKaFZ3L3RhOWdMdnVPdndyajNsTXpyKzQ4VmhGUUJtaGtHY2lR?=
- =?utf-8?B?QmFzd1lKY0NLVktkcGFHR0xubTZmMFplcUpDV0xFV2hvc2RzSEdIeHFva0FE?=
- =?utf-8?B?dkR5SzJkRzlaTm0yNit5eVRtcC9lUyswbmx3eEMveWNjUEhDNmgycXpaa1pp?=
- =?utf-8?B?c3cwNGhRMEtIdUhPckZSeXhBN0RJaWxXTUVybDF3YWI5RHFWZVk3N0pMclZt?=
- =?utf-8?B?WnlVSGlxWGtpNm5yMnUzNktub1IyaVFVSVZDYWpHaW9zVnltT3I4TFBiVm84?=
- =?utf-8?B?WVJWQWtKM2NIWmdXZWMwSllmVXBVYmkweFNZbnJtZFozQjlBUm0wOW53VnB3?=
- =?utf-8?B?aEdiT2QwdGRETUt5aVViMUwyUWJSc2c1cVhQMDd1RlVWem1BQ0ZEdVBVd0hO?=
- =?utf-8?B?RUFiWVl3M2lzamM3ejE1a3ZwLzZGN2dtTjNvZmtlZzZGTGpGVFowYytXdDN6?=
- =?utf-8?B?b2RrZmF5M20zTnoxU3A0RVJJWUQrVmt4Q1RuUTFjdGxDNzUzWUF2NHNuL2Vx?=
- =?utf-8?B?OUY0bFJ0bVBZVXU0d3AyR1VOajFFZzJ5bnZuTVdIQU1WcjJDdm5hanJ2VkVi?=
- =?utf-8?B?bHJ4YjRUTmhrM0hoamErcHd2UVc4bG5zT2NTUE41d3lRRmJ1VW9USUpqODY1?=
- =?utf-8?B?VHNSVHczNy91b0xGbzBod2d1VE5Qd0lQYThLQms4R2ZtV1kxV3FRZ1ZiLzQy?=
- =?utf-8?B?SmZOcGVlZ3lkNXMrZDAvclk2WG1MTGN1ZWpNenJVWm5DUkpaY1hyQjdEcHpo?=
- =?utf-8?Q?XBo23GUbUlMiQvY4NueokC9FTkvWx5cFP+kSM=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(366016)(376014)(7053199007); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L0pqZHhzbjNUK3Q2N0VKVHBLcmZUelU0NDl0dTBCNkhDejd4T3JIU2dScEtE?=
- =?utf-8?B?YWkzU2wrVkN1OTJHU2ZqNjViLzFLUkhvc1hpVDVXVHpac0tSN3NpaEZnZUVZ?=
- =?utf-8?B?ZE9Rcm12L0labUNQT1llZXJMRC9NelBCbEJ0K2d1RkcycDFUVU1TRjlFamhk?=
- =?utf-8?B?aEl5aWdsRWsrRU1oOVo0dkMzdWZ4ODhZMGVjbWJLT2NPNStDaXJXZThwMGtH?=
- =?utf-8?B?SkNIUVMrdEJTRUdzWG8xTDB1TXQ0bW5aTEwzak1Kb1hBMExGeWpIN1VuZWo0?=
- =?utf-8?B?bCtnLzZsT0JMOUs5eUpDR1h6OWFCdldvNklHZG5teHVCemdCSVA0eGdyZWZl?=
- =?utf-8?B?d2tQajc3YzlCNjNYQlQ2WE5SZEpEem9VVUNhY0lCYzJzM0o0Z0lOMG0vdTVi?=
- =?utf-8?B?VEFJK2RROFdJZWhnQktPeDM3UC84YkZydnZsdURmbTk5bkx3T3ZUa0xGaTY5?=
- =?utf-8?B?QWYzY1lqM1dlRXBSZFd4Zmg2NjlkaHA5V3FCSk45dFVjRTZvcnFmOW9Odkpk?=
- =?utf-8?B?ZzdDbnJKZERibEQ2Qm1FYVpqWE5GaE5kNmp4RDMrbXV5L3ExQ0hzYXJNbllH?=
- =?utf-8?B?R3M5dy9kc0swMHVMaHVLVVNtNVA2WklleS9ZWnJNaVRsNERKcTFnK3JYMXh1?=
- =?utf-8?B?RENIZjVjNEZxSG5EMCs3RW5vUStlU1ZQU0UwSGFTRGVEaFhYMHNNRnNqSkhz?=
- =?utf-8?B?Vmt1UHJDVVZFN211NXBoWmdtNzRLcWZrQy9jSlA1THA3bVF4WVpOKzZhZXBL?=
- =?utf-8?B?U0VXZDd3Sy9rRXJzOXhsSFlnSFV1MUZQSVVEcUhrV0tKUlR4Vkl0b0pRZVZZ?=
- =?utf-8?B?bmpMK2F3QXQyVjNxUEVRMWxrMWJBNU9ybmFORmhVM0tnZFMxZml4YkRPTmNk?=
- =?utf-8?B?dzJFNDVlRGVPWVhTTnRSVFJ0S3RtWnh4elI0YW5UZ0plc0dUVFhhTFMvV3lB?=
- =?utf-8?B?QzBUMlZqLzNXMFh5b1FjelZ4VDdFR09ZTXhaNXNUaCttcXo4cXVFWnBPUmR0?=
- =?utf-8?B?cnN0MlQ3VlJ2K3JsWTR1TUtkdTBEODZNNVpvQU9xdlJhRmJ1VlF5MTdBU0g2?=
- =?utf-8?B?blZpY0xpd1JvSzFleXRCQkpvVlpVMHc0S3N0YmhaWE9NS2N3bTVMWE9zTGQw?=
- =?utf-8?B?aU9tU1MxOENPRStrUlYxRFZqb0VndnROSTBHcUZQWm1iQktGL2tZTnJUTVVJ?=
- =?utf-8?B?Q291UnlXZTdIRWl2dmJURTBQNklSWnJjaWVMMFR6MkFCMllaalJGMFZ0T1Rq?=
- =?utf-8?B?eXBJVnNsbGgwN1RVZENrSDNReWJlVGJ1bzFmeDZsOWpSUUJKY0d2M0NTMzRl?=
- =?utf-8?B?V1doY21HNjE2bjdZckM4THZPcXJSNEdaR0FkZmlwWmE5bm9IRGs5dmJYMGYr?=
- =?utf-8?B?dUE4c1V2WVBYSXViaGh4bmxDb29Id1lEZ1pIb3NJcDUzb211ZERxeEFWNFEv?=
- =?utf-8?B?QjF2cDBrRWlZTzlRcUNhN3BVZFYrR2ZSRGNYMHRSbHhoV1F2M2VmTFc0N0l6?=
- =?utf-8?B?V09VNkJXbWNoemI3R0NiQTJzdEx2dUROQ25aVHN4WVpFY1NiNDBBTzZ1bzBG?=
- =?utf-8?B?WUJXSm1uOU5XUklVbFMvTDcwZWZPelM1VHN6RWxJNTZSR1NaVndjeG1Pc3FQ?=
- =?utf-8?B?N1Y2NlhZb1V3ekFVd1lvbWJ4YmplclhDeVFzdm9xRVRqRXVEWWFTUGxLUitU?=
- =?utf-8?B?T0ZIdzhGOWQ5SXJUTGFxSUtHdStuajhKM1FySkZ6b1dEWldFTW15NG1kRnBO?=
- =?utf-8?B?akJGc016UWhXTDVZblh0dTBjcnRDWmkycklxaG8reWNkUkdQVi9SZ21xa2dO?=
- =?utf-8?B?ZHVqcWMrTm1OMUo3VFFDZWdvN0VUZElwL2lQcGdPcEhqSEIxdGJIU2NmaFhp?=
- =?utf-8?B?dzVKcGFEWXI3TnF5VUxpYjNDWEh5bHozdU04QTkyb0tmdkFzS0tiUXIrRXMv?=
- =?utf-8?B?UnBJd211M1FlZGc2WE5xSkNUa28wQ1RlTTRDc1o5eWZzRTJHczI5QWVRanVG?=
- =?utf-8?B?cjh2TWVPRWdKVldscTJ2TEVoSExMZkwyVmxEREw0NE14UE5lemFlR0U4OWI3?=
- =?utf-8?B?SFZXZEczMXcxMUdGQlFuUXNiOHFBNzh0TDUwWk4raFN6WlpRYXEvVVluVFgv?=
- =?utf-8?B?QlJzeWd1NjZCdWsvVG9NbWtHY0tjK1RMMFo3UlJCc2ZldFNEYzVoOFlJaUNa?=
- =?utf-8?B?Q2c9PQ==?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: e4b24269-8602-432d-3c95-08ddcf334e93
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2025 06:35:42.7984 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QVs9mt+yjWV4z7Gt8NqV9/mk4o3NJW5K3Yp6E7Xdak5dzvm0y0GXlAAPqRRshMww4QYJMc+cDZdyF5q4U7GI1LwuRpXvbWdsgSTKlcM8mRs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3531
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] net: phy: Support overriding Auto Negotiation timeout
+ with env variable
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ michal.simek@amd.com, marek.vasut+renesas@mailbox.org,
+ marek.vasut@mailbox.org, quentin.schulz@cherry.de,
+ kever.yang@rock-chips.com, alexthreed@gmail.com,
+ ilias.apalodimas@linaro.org, pbrobinson@gmail.com,
+ paul.barker.ct@bp.renesas.com, romain.gantois@bootlin.com,
+ lucienzx159@gmail.com, skylake.huang@mediatek.com
+Cc: u-boot@lists.denx.de, u-kumar1@ti.com, praneeth@ti.com, nm@ti.com,
+ srk@ti.com
+References: <20250724141536.1222764-1-s-vadapalli@ti.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250724141536.1222764-1-s-vadapalli@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,85 +110,239 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Siddharth,
 
-Am 28.07.25 um 18:44 schrieb Francesco Dolcini:
-> On Mon, Jul 28, 2025 at 11:25:04AM -0300, Fabio Estevam wrote:
->> On Mon, Jul 28, 2025 at 7:29 AM Francesco Dolcini <francesco@dolcini.it> wrote:
->>
->>> You worked on a similar topic, for imx8m, some time ago, commit
->>> d175982c207b ("imx8mn/8mp: Allow booting via USB"). What's your opinion
->>> here? How should we fix this?
->>
->> The solution on the commit you mentioned is related to the
->> i.MX8MN/i.MX8MP boot ROM implementation, and it works there.
->>
->> What confuses me about João's patch is that it was not tested against
->> the mainline U-Boot.
->>
->> Can U-Boot mainline boot over serial download on i.MX95?
->>
->> Adding Tim, as he has been trying to get USB boot to work with i.MX95.
->>
->> I don't have access to any i.MX95 board to try it myself, so I
->> appreciate some help here.
+Replying since this patch has been standing in my queue (u-boot-net) and Tom
+asked me to give my opinion.
+
+On 7/24/25 16:15, Siddharth Vadapalli wrote:
+> The Auto Negotiation procedure between two Ethernet PHYs consists of
+> determining the best commonly supported parameters among Speed,
+> Duplex Mode and Flow Control.
 > 
-> The issue here is not specific about USB, this is about code assuming
-> that the relevant env config options are enabled without checking
-> anything AND assuming that ENVL_NOWHERE is working as a default in any
-> case.
+> The time taken for this procedure is not only dependent on the local
+> PHY used, but also on the link-partner PHY.
 > 
-> See also env_locations in env/env.c and arch_env_get_location()
+> While a timeout can be specified in the form of a "CONFIG" on the basis
+> of the local PHY present on the device, since the timeout also depends
+> on the link-partner PHY, it might be necessary to modify the timeout.
 > 
-> Francesco
+> To avoid rebuilding the bootloader for a given device, just because it
+> may be connected to various link-partner PHYs, each with a different
+> timeout, introduce an environment variable named "phy_aneg_timeout" and
+> override "CONFIG_PHY_ANEG_TIMEOUT" with "phy_aneg_timeout".
+> 
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> ---
 
-I have the below patch in our downstream fork to fix the issue mentioned
-here for i.MX93. It is derived from Fabio's patch [1]. I'm not sure if
-it's correct, though.
+This looks sane to me. Based on a private email thread where various
+options were discussed, I think that:
+- Modifying the tree-wide default value for PHY_ANEG_TIMEOUT is probably
+not a good idea. Sure it is a timeout not a delay, so increasing it will
+go unnoticed for board that succeed the negotiation in less time. But it
+will have an impact on boot time if it is expected that one phy times
+out and another phy gets activated for example.
+- Making the default different for TI boards makes little sense. This is
+not an arch-specific thing.
+- Therfore, allowing the user to override the timeout via an env var for
+very specific deployment cases  seems like a good idea.
 
-[1]
-https://source.denx.de/u-boot/u-boot/-/commit/d175982c207bb2ace592d7985cd3f05ab99759d9
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-Best regards
-Frieder
-
-
-From 49b028284e36eeb7516f618e31bbf569956295ad Mon Sep 17 00:00:00 2001
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-Date: Thu, 16 May 2024 14:27:39 +0200
-Subject: [PATCH] arm: imx: imx9: Allow booting via USB
-
-When trying to boot via USB on i.MX93 it is necessary to specify
-the U-Boot environment location, otherwise the boot process simply
-hangs (unless CONFIG_ENV_IS_NOWHERE is enabled).
-
-Specify the environment location when booting from USB.
-
-Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
----
- arch/arm/mach-imx/imx9/soc.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
-index 829b3b7b748..5bb0ab871ac 100644
---- a/arch/arm/mach-imx/imx9/soc.c
-+++ b/arch/arm/mach-imx/imx9/soc.c
-@@ -808,6 +808,14 @@ enum env_location arch_env_get_location(enum
-env_operation op, int prio)
-                return ENVL_UNKNOWN;
-
-        switch (dev) {
-+       case USB_BOOT:
-+               if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
-+                       return ENVL_SPI_FLASH;
-+               if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
-+                       return ENVL_MMC;
-+               if (CONFIG_IS_ENABLED(ENV_IS_NOWHERE))
-+                       return ENVL_NOWHERE;
-+               return ENVL_UNKNOWN;
-        case QSPI_BOOT:
-                if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
-                        return ENVL_SPI_FLASH;
+Regards,
 -- 
-2.50.1
+Jerome
 
+> 
+> Hello,
+> 
+> This patch is based on commit
+> 3532f1f5edf block: Remove blk_find_first/next
+> of the master branch of Mainline U-Boot.
+> 
+> v2 of this patch is at:
+> https://patchwork.ozlabs.org/project/uboot/patch/20250723062642.634345-1-s-vadapalli@ti.com/
+> Changes since v2:
+> - Addressed feedback from Quentin Schulz at:
+>   https://patchwork.ozlabs.org/project/uboot/patch/20250723062642.634345-1-s-vadapalli@ti.com/#3550923
+>   by performing the following changes:
+>   1) Based the patch on the master branch of U-Boot instead of the next
+>      branch.
+>   2) Updated doc/usage/environment.rst by removing the default value of
+>      CONFIG_PHY_ANEG_TIMEOUT which was taken from its Kconfig file.
+>   3) Updated doc/usage/environment.rst by specificially mentioning the
+>      base and unit of the "phy_aneg_timeout" variable as decimal and
+>      millisecond.
+>   4) Updated
+>      a) drivers/net/phy/aquantia.c
+>      b) drivers/net/phy/phy.c
+>      c) drivers/net/xilinx_axi_emac.c
+>      by using "u32" instead of "ulong" for storing the value of the
+>      "phy_aneg_timeout" and also for the variable whose value is
+>      compared against "phy_aneg_timeout".
+> 
+> v1 of this patch is at:
+> https://patchwork.ozlabs.org/project/uboot/patch/20250722060554.352952-1-s-vadapalli@ti.com/
+> Changes since v1:
+> - Switched to env_get_ulong() based on feedback from Marek Vasut at:
+>   https://patchwork.ozlabs.org/project/uboot/patch/20250722060554.352952-1-s-vadapalli@ti.com/#3550426
+> - Addressed feedback from Quentin Schulz at:
+>   https://patchwork.ozlabs.org/project/uboot/patch/20250722060554.352952-1-s-vadapalli@ti.com/#3550263
+>   by performing the following changes:
+>   1) Updated drivers/net/phy/Kconfig by documenting that phy_aneg_timeout
+>      env variable can override the value of CONFIG_PHY_ANEG_TIMEOUT
+>   2) Updated doc/usage/environment.rst by documenting the base and unit
+>      of phy_aneg_timeout
+>   3) Updated drivers/net/phy/aquantia.c and drivers/net/xilinx_axi_emac.c
+>      to support overriding CONFIG_PHY_ANEG_TIMEOUT with phy_aneg_timeout
+> 
+> Patch has been tested on J784S4-EVM validating the following cases:
+> 1. PHY Auto-Negotiation performed with "phy_aneg_timeout" unset.
+>    CONFIG_PHY_TIMEOUT with a value of 4,000 takes effect.
+>    => Auto Negotiation succeeds
+> 2. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 20,000.
+>    "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
+>    [Higher value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
+>    => Auto Negotiation succeeds
+> 3. PHY Auto-Negotiation performed with "phy_aneg_timeout" set to 200.
+>    "phy_aneg_timeout" overrides CONFIG_PHY_TIMEOUT.
+>    [Lower value than default specified by CONFIG_PHY_ANEG_TIMEOUT]
+>    => Auto Negotiation times out
+> 
+> Test Logs:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/b1ee7ea655212c03e77a7eb1b9453728
+> 
+> Regards,
+> Siddharth.
+> 
+>  doc/usage/environment.rst     | 9 +++++++++
+>  drivers/net/phy/Kconfig       | 5 ++++-
+>  drivers/net/phy/aquantia.c    | 9 +++++----
+>  drivers/net/phy/phy.c         | 7 +++++--
+>  drivers/net/xilinx_axi_emac.c | 4 +++-
+>  5 files changed, 26 insertions(+), 8 deletions(-)
+> 
+> diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+> index bb6c351b441..77197d79380 100644
+> --- a/doc/usage/environment.rst
+> +++ b/doc/usage/environment.rst
+> @@ -335,6 +335,15 @@ netretry
+>      Useful on scripts which control the retry operation
+>      themselves.
+>  
+> +phy_aneg_timeout
+> +    If set, the specified value will override CONFIG_PHY_ANEG_TIMEOUT.
+> +    This variable has the same base and unit as CONFIG_PHY_ANEG_TIMEOUT
+> +    which is "decimal" and "millisecond" respectively. The default value
+> +    of CONFIG_PHY_ANEG_TIMEOUT may be sufficient for most use-cases, but
+> +    certain link-partners may require a larger timeout due to the Ethernet
+> +    PHY they use. Alternatively, the timeout can be reduced as well if the
+> +    use-case demands it.
+> +
+>  rng_seed_size
+>      Size of random value added to device-tree node /chosen/rng-seed.
+>      This variable is given as a decimal number.
+> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+> index 8d88c142900..21bf983056a 100644
+> --- a/drivers/net/phy/Kconfig
+> +++ b/drivers/net/phy/Kconfig
+> @@ -23,7 +23,10 @@ config PHY_ANEG_TIMEOUT
+>  	int "PHY auto-negotiation timeout"
+>  	default 4000
+>  	help
+> -	  Default PHY auto-negotiation timeout.
+> +	  Value of PHY auto-negotiation timeout with the base being
+> +	  "decimal" and the unit being "millisecond". This can be
+> +	  overridden by the "phy_aneg_timeout" environment variable
+> +	  that has the same base (decimal) and unit (millisecond).
+>  
+>  if PHY_ADDR_ENABLE
+>  config PHY_ADDR
+> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
+> index d2db8d9f792..c29d8facdee 100644
+> --- a/drivers/net/phy/aquantia.c
+> +++ b/drivers/net/phy/aquantia.c
+> @@ -551,14 +551,15 @@ int aquantia_config(struct phy_device *phydev)
+>  
+>  int aquantia_startup(struct phy_device *phydev)
+>  {
+> -	u32 speed;
+> -	int i = 0;
+> +	u32 speed, i = 0;
+>  	int reg;
+>  
+>  	phydev->duplex = DUPLEX_FULL;
+>  
+>  	/* if the AN is still in progress, wait till timeout. */
+>  	if (!aquantia_link_is_up(phydev)) {
+> +		u32 aneg_timeout = env_get_ulong("phy_aneg_timeout", 10,
+> +						 CONFIG_PHY_ANEG_TIMEOUT);
+>  		printf("%s Waiting for PHY auto negotiation to complete",
+>  		       phydev->dev->name);
+>  		do {
+> @@ -566,9 +567,9 @@ int aquantia_startup(struct phy_device *phydev)
+>  			if ((i++ % 500) == 0)
+>  				printf(".");
+>  		} while (!aquantia_link_is_up(phydev) &&
+> -			 i < (4 * CONFIG_PHY_ANEG_TIMEOUT));
+> +			 i < (4 * aneg_timeout));
+>  
+> -		if (i > CONFIG_PHY_ANEG_TIMEOUT)
+> +		if (i > aneg_timeout)
+>  			printf(" TIMEOUT !\n");
+>  	}
+>  
+> diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+> index e6fed8c41d7..9702d042296 100644
+> --- a/drivers/net/phy/phy.c
+> +++ b/drivers/net/phy/phy.c
+> @@ -9,6 +9,7 @@
+>   */
+>  #include <console.h>
+>  #include <dm.h>
+> +#include <env.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <net.h>
+> @@ -242,7 +243,9 @@ int genphy_update_link(struct phy_device *phydev)
+>  
+>  	if ((phydev->autoneg == AUTONEG_ENABLE) &&
+>  	    !(mii_reg & BMSR_ANEGCOMPLETE)) {
+> -		int i = 0;
+> +		u32 i = 0;
+> +		u32 aneg_timeout = env_get_ulong("phy_aneg_timeout", 10,
+> +						 CONFIG_PHY_ANEG_TIMEOUT);
+>  
+>  		printf("%s Waiting for PHY auto negotiation to complete",
+>  		       phydev->dev->name);
+> @@ -250,7 +253,7 @@ int genphy_update_link(struct phy_device *phydev)
+>  			/*
+>  			 * Timeout reached ?
+>  			 */
+> -			if (i > (CONFIG_PHY_ANEG_TIMEOUT / 50)) {
+> +			if (i > (aneg_timeout / 50)) {
+>  				printf(" TIMEOUT !\n");
+>  				phydev->link = 0;
+>  				return -ETIMEDOUT;
+> diff --git a/drivers/net/xilinx_axi_emac.c b/drivers/net/xilinx_axi_emac.c
+> index 4d87e2d1f36..f072ac84990 100644
+> --- a/drivers/net/xilinx_axi_emac.c
+> +++ b/drivers/net/xilinx_axi_emac.c
+> @@ -343,6 +343,8 @@ static int axiemac_phy_init(struct udevice *dev)
+>  
+>  static int pcs_pma_startup(struct axidma_priv *priv)
+>  {
+> +	u32 aneg_timeout = env_get_ulong("phy_aneg_timeout", 10,
+> +					 CONFIG_PHY_ANEG_TIMEOUT);
+>  	u32 rc, retry_cnt = 0;
+>  	u16 mii_reg;
+>  
+> @@ -361,7 +363,7 @@ static int pcs_pma_startup(struct axidma_priv *priv)
+>  	 * and the external PHY is not obtained.
+>  	 */
+>  	debug("axiemac: waiting for link status of the PCS/PMA PHY");
+> -	while (retry_cnt * 10 < CONFIG_PHY_ANEG_TIMEOUT) {
+> +	while (retry_cnt * 10 < aneg_timeout) {
+>  		rc = phyread(priv, priv->pcsaddr, MII_BMSR, &mii_reg);
+>  		if ((mii_reg & BMSR_LSTATUS) && mii_reg != 0xffff && !rc) {
+>  			debug(".Done\n");
