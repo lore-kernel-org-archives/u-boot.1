@@ -4,47 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB1C5C87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA16CC87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:54:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A16758313B;
-	Wed, 30 Jul 2025 14:47:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 2E74982BA1;
+	Wed, 30 Jul 2025 14:54:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Vt7Jnf6h";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26E2C82F14; Wed, 30 Jul 2025 14:47:11 +0200 (CEST)
-Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
- [45.157.188.14])
+ id 99DD882BCD; Wed, 30 Jul 2025 14:54:37 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6093782D32
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:47:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97F2D81D6A
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:54:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bsX6L1VM7zdjd;
- Wed, 30 Jul 2025 14:47:06 +0200 (CEST)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4bsX6K5RqbzlSD; Wed, 30 Jul 2025 14:47:05 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 30 Jul 2025 14:46:34 +0200
-Subject: [PATCH 2/3] board: theobroma-systems: add instructions for how to
- use upstream TF-A
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 22FA63F57D
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 12:54:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1753880075;
+ bh=e2vOJZhzufmVHYwi8570f1yooJ7WyPl/kfPXy7sSh2c=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Vt7Jnf6hWMv4IlJU1LvxBa7JymPjoml88JSaDKdySQC2bpj2XuKnvcLAqPFYyDf8G
+ yQKoT2wWmJRp8pYQLChNII6L1w0woKDD6Q7pS14slQw9xVVXVePpunn4qAq1iA2Nbd
+ 9NoP2h24FAXkIC+Gvb50N9F4JQnVuA1jZIsKWbHx0NnSeHcBnrWHX1XzfrmERlgR6d
+ dlvUwKkXedpNPICpN8LR05TlB4ozb8m6hTNRmF0F+yJN5/7rhlsoGDzLguF2nOn1Xk
+ ZCAG1ZYDciCjQrnqNAblueDJimPcdsWujUi9OiBQ2BXmzu9OsDHperCMYE39coR9DM
+ vcKMW8rfELGTA==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3b793f76a46so1445673f8f.2
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 05:54:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753880072; x=1754484872;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e2vOJZhzufmVHYwi8570f1yooJ7WyPl/kfPXy7sSh2c=;
+ b=lofkWYnnlPRAwwLXz/jfCednlFeMcc5FpcZSADe4/V2qfuYs3Tp7iQ+jlL9E5sDJNV
+ NgvxxGK9/e8hB0xZiigmX5VlMbax3xFHQ6flABbGYe34uY2aOKxWz+GkaD82m3ZGv4Hx
+ oJYEIx0AZy8cYwg2m7Y3f6mGQ5p6CsweTlTlIi4N4qdhD+ie1RIs0zze0J7DjUCJEa9/
+ te20Wp8e7IB4ToGFIwSodmClxxAxtolDa7lSzHpj+M19U2O3YQu+r2B2yTCy9kOkrHTp
+ 1PqAMybTTCzZbRrAoEzRnBHmTKjaXWdKr7GV4oeiID4AWsUpPZN3+WxTj0Reja1xRaTv
+ TY2g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXTHtqdmfmWzp8GbeaUnT5rPsYIqWFTSm5G+ardVqnGgxQ7duC+cWoqOj3X9xVrJkdw/dSLIYI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdIJRXAgWtzmSftgicxOJNEUFSXckFDWu/qpIrVFvNG+BP5BYP
+ 9FdW02TEUmXa6fPi/GwWp/93/mylee+LhNCqpkjiJHf0g9AzTA+gP0yXR+eGQX+BtpThw19tIIO
+ wTO9makWAYhh5vOL2o86sAB/lp499iSRYrAEG7wdWH/pRpVr2tt0lDwWLM8lH5PV9Eg//MVM=
+X-Gm-Gg: ASbGncuGhCBESws+O478f6eqdMK6OoqKvjqEuqNFz+0pYOU5x361uNg0kPj2mnpX9KZ
+ TKNrtrUqcMF6R3MIV2HbC062sDMzH5qs0C0IW/CqAS4kue7gIZfXLcSbLOlyU4861daT/BeLCW5
+ cB47sfOL6hMyfaJjUx/ZLwEvAJkkMOxcIh0+Kgr13YtDNiGE3EWkCvI+aEOrSped9wFJspgdDsG
+ e6dNoGNDSDZAkGLc/TvCtBuZGSWxIWECQ0ix/vXRLr3U5RIgGuJ+meDBwEbq6guV39QZ1MJyrt7
+ eDZ18iM68MzekkuVaCt6kONJUXJxqC6ngeh1iL9bIup5qyk4EuKt5E9Ll2G969rTrNeH8tavEni
+ NtNIyaHuIko+WD+QtVSIQprwdkJyR3Q==
+X-Received: by 2002:a5d:588a:0:b0:3b7:664a:8416 with SMTP id
+ ffacd0b85a97d-3b794ff5d0cmr2707937f8f.23.1753880072501; 
+ Wed, 30 Jul 2025 05:54:32 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGo0XP5C5c5OfUCi+aXiOupfBX2253m3FGSOgkPn5k+vLm5UNinQKbrch8LADKGvMkg9JK/LA==
+X-Received: by 2002:a5d:588a:0:b0:3b7:664a:8416 with SMTP id
+ ffacd0b85a97d-3b794ff5d0cmr2707919f8f.23.1753880072171; 
+ Wed, 30 Jul 2025 05:54:32 -0700 (PDT)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b798867061sm933936f8f.15.2025.07.30.05.54.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Jul 2025 05:54:31 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Paul Kocialkowski <contact@paulk.fr>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Trevor Woerner <twoerner@gmail.com>, Marek Vasut <marex@denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] Kconfig: typo restict
+Date: Wed, 30 Jul 2025 14:54:27 +0200
+Message-ID: <20250730125427.587976-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250730-tsd-readme-update-v1-2-5a96672d2211@cherry.de>
-References: <20250730-tsd-readme-update-v1-0-5a96672d2211@cherry.de>
-In-Reply-To: <20250730-tsd-readme-update-v1-0-5a96672d2211@cherry.de>
-To: Klaus Goger <klaus.goger@cherry.de>, 
- Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,155 +113,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+%s/restict/restrict/
 
-Upstream TF-A has support for RK3588 since v2.12 so let's document how
-to use upstream TF-A instead of the prebuilt binary blob from Rockchip
-if one wants to do that.
+SPL and TPL have separate options (plural).
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- doc/board/theobroma-systems/jaguar_rk3588.rst | 38 +++++++++++++++++++++++----
- doc/board/theobroma-systems/tiger_rk3588.rst  | 38 +++++++++++++++++++++++----
- 2 files changed, 66 insertions(+), 10 deletions(-)
+ Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/doc/board/theobroma-systems/jaguar_rk3588.rst b/doc/board/theobroma-systems/jaguar_rk3588.rst
-index 33cd7276852c5b74b750ad14ce2beb4a9440ef3f..eff0ee7347c7d0e810d9dba542ce3aaf28ef359d 100644
---- a/doc/board/theobroma-systems/jaguar_rk3588.rst
-+++ b/doc/board/theobroma-systems/jaguar_rk3588.rst
-@@ -32,14 +32,13 @@ It provides the following features:
- Here is the step-by-step to boot to U-Boot on SBC-RK3588-AMR Jaguar from Theobroma
- Systems.
+diff --git a/Kconfig b/Kconfig
+index c883f115459..22636da6444 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -552,7 +552,7 @@ config BOARD_SIZE_LIMIT
+ 	  Maximum size of the U-Boot image. When defined, the build system
+ 	  checks that the actual size does not exceed it.  This does not
+ 	  include SPL nor TPL, on platforms that use that functionality, they
+-	  have a separate option to restict size.
++	  have separate options to restrict size.
  
--Get the TF-A and DDR init (TPL) binaries
------------------------------------------
-+Get DDR init (TPL) binary
-+-------------------------
- 
- .. prompt:: bash
- 
-    git clone https://github.com/rockchip-linux/rkbin
-    cd rkbin
--   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
-    export ROCKCHIP_TPL=$(readlink -f bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v*.bin | head -1)
-    sed -i 's/^uart baudrate=.*$/uart baudrate=115200/' tools/ddrbin_param.txt
-    python3 ./tools/ddrbin_tool.py rk3588 tools/ddrbin_param.txt "$ROCKCHIP_TPL"
-@@ -47,8 +46,32 @@ Get the TF-A and DDR init (TPL) binaries
-    export RKDB=$(readlink -f rk3588_spl_loader_v*.bin | head -1)
- 
- This will setup all required external dependencies for compiling U-Boot. This will
--be updated in the future once upstream Trusted-Firmware-A supports RK3588 or U-Boot
--gains support for open-source DRAM initialization in TPL.
-+be updated in the future once U-Boot gains support for open-source DRAM initialization
-+in TPL.
-+
-+Get TF-A
-+--------
-+
-+There are two possible options, pick one or the other. Note that the instructions need
-+to be run from the ``rkbin`` directory.
-+
-+Prebuilt binary from Rockchip
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+.. prompt:: bash
-+
-+   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
-+
-+Upstream
-+~~~~~~~~
-+
-+.. prompt:: bash
-+
-+   cd ../
-+   git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-+   cd trusted-firmware-a
-+   make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3588 bl31
-+   export BL31=$PWD/build/rk3588/release/bl31/bl31.elf
- 
- Build U-Boot
- ------------
-@@ -58,6 +81,11 @@ Build U-Boot
-    cd ../u-boot
-    make CROSS_COMPILE=aarch64-linux-gnu- jaguar-rk3588_defconfig all
- 
-+.. note::
-+   If using upstream TF-A, one should disable ``SPL_ATF_NO_PLATFORM_PARAM`` symbol in
-+   U-Boot config (via e.g. ``make CROSS_COMPILE=aarch64-linux-gnu- menuconfig``) which
-+   will, among other things, enable console output in TF-A.
-+
- This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
- (eMMC or SD card).
- 
-diff --git a/doc/board/theobroma-systems/tiger_rk3588.rst b/doc/board/theobroma-systems/tiger_rk3588.rst
-index 71dbe4c59de8f8b3ccb6ece440a780459db127b1..493f191020fd4326bd19aa3a3c927ea9258a4720 100644
---- a/doc/board/theobroma-systems/tiger_rk3588.rst
-+++ b/doc/board/theobroma-systems/tiger_rk3588.rst
-@@ -39,14 +39,13 @@ It provides the following feature set:
- Here is the step-by-step to boot to U-Boot on SOM-RK3588-Q7 Tiger from Theobroma
- Systems.
- 
--Get the TF-A and DDR init (TPL) binaries
------------------------------------------
-+Get DDR init (TPL) binary
-+-------------------------
- 
- .. prompt:: bash
- 
-    git clone https://github.com/rockchip-linux/rkbin
-    cd rkbin
--   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
-    export ROCKCHIP_TPL=$(readlink -f bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v*.bin | head -1)
-    sed -i 's/^uart baudrate=.*$/uart baudrate=115200/' tools/ddrbin_param.txt
-    sed -i 's/^uart iomux=.*$/uart iomux=2/' tools/ddrbin_param.txt
-@@ -55,8 +54,32 @@ Get the TF-A and DDR init (TPL) binaries
-    export RKDB=$(readlink -f rk3588_spl_loader_v*.bin | head -1)
- 
- This will setup all required external dependencies for compiling U-Boot. This will
--be updated in the future once upstream Trusted-Firmware-A supports RK3588 or U-Boot
--gains support for open-source DRAM initialization in TPL.
-+be updated in the future once U-Boot gains support for open-source DRAM initialization
-+in TPL.
-+
-+Get TF-A
-+--------
-+
-+There are two possible options, pick one or the other. Note that the instructions need
-+to be run from the ``rkbin`` directory.
-+
-+Prebuilt binary from Rockchip
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+.. prompt:: bash
-+
-+   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
-+
-+Upstream
-+~~~~~~~~
-+
-+.. prompt:: bash
-+
-+   cd ../
-+   git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-+   cd trusted-firmware-a
-+   make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3588 bl31
-+   export BL31=$PWD/build/rk3588/release/bl31/bl31.elf
- 
- Build U-Boot
- ------------
-@@ -66,6 +89,11 @@ Build U-Boot
-    cd ../u-boot
-    make CROSS_COMPILE=aarch64-linux-gnu- tiger-rk3588_defconfig all
- 
-+.. note::
-+   If using upstream TF-A, one should disable ``SPL_ATF_NO_PLATFORM_PARAM`` symbol in
-+   U-Boot config (via e.g. ``make CROSS_COMPILE=aarch64-linux-gnu- menuconfig``) which
-+   will, among other things, enable console output in TF-A.
-+
- This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
- (eMMC or SD card).
- 
-
+ config SYS_CUSTOM_LDSCRIPT
+ 	bool "Use a custom location for the U-Boot linker script"
 -- 
-2.50.1
+2.50.0
 
