@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAF95C87FCB
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0198C87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 12:39:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04A2080C93;
-	Wed, 30 Jul 2025 14:38:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 592C282E52;
+	Wed, 30 Jul 2025 14:39:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1753879135;
-	bh=VomDLmjss5S8kHH77svzEUmSs9EeAqUs86vxsuWJpVw=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=qtDkxtRnPxb9pIhAirm367l19ge7RwTghwMJxpUw2QHvk5Rrr6Y8awVUPq4/multr
-	 dLH2ZgO9eRyTYDtp5wGo4U8GTRcuA1TQcXT0HkL2MWdLfTSMK7IeHXWgj6A29MTm6r
-	 HgCCOTlUZntjnbIbWIXgMAc8QA7xSKGyxibxB09T3vEevmiCiyEizOmYt40FntGAOP
-	 L2CtUcPfcp5imp6rL7PrRQLSxMosf5z+EoGoGlqodyVG5aWDelmkyEVqyo5sYBa+Iq
-	 U7D5BKMl17jFvLMXZg+rH89m0adMsqe+cnfyUL+ewL8GK1OdsU7X8nh7Cb7RaKvu89
-	 1JJzJXqC/vHRg==
+	s=phobos-20191101; t=1753879143;
+	bh=uGbJc8cC4A5QxGoW5+U0tmFGsyahg00O3LNT3YKfh3k=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=bBIofvrADtkcOnkFFSjq60+9HTiG3hL1+gS7n3YmZeiifvg2vX2NwHcypYyCm7kg3
+	 p8PfOLbszPBP+cZ6ihZ8+HktrJ15kj8YSq0udK9jg9rZQ2xFdqSn21HKz6VvL13I/j
+	 13D7Xq07y9BBTHAJGc+KyC5lIEghWE0qmOZB/UjNj7D7BC4SYNjx7G1egOV9gsxkqY
+	 XupK0ewVMHQQwSOVi/NdV/PtysZXqlolUVhDiZihh1iq3fjQ4zk9n+WNoPZwabNrjV
+	 w6x3HrOVrB6zk3twF9FPiynO6I8oO8FSQ1qNu2qp4Sg4aNopMhCLhG2V0NPJWD6yXn
+	 jII3ZIUgIKdkw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76AF880FA1; Wed, 30 Jul 2025 14:38:53 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 9631082E34; Wed, 30 Jul 2025 14:39:02 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AD068004F
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:38:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24CF98004F
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 14:39:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="eJqOpqix"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="aZzFIOmR"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 928601038C126; 
- Wed, 30 Jul 2025 14:38:44 +0200 (CEST)
+ with ESMTPSA id 25B841038C129; 
+ Wed, 30 Jul 2025 14:38:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1753879130; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=VomDLmjss5S8kHH77svzEUmSs9EeAqUs86vxsuWJpVw=;
- b=eJqOpqixusnysvCRV7lYE+BjCbbad9ERcdRm8bIrSGgceJ5jhBNmcrBszP7QCWNBjv/d5K
- 1Tri4HVV/Bm3Gp31MsPmahq3SehmAGOS8ccsITeQWCFWDirAxWy30M5y6IDQY7B6eGeUl1
- zfOgat0h93tzbGrllGCW4KYHIynEyk/r5GRg9Kn7HC8hXug14phluM4dUPvBfAKysgxZ9E
- 1sKD3BmSBFcm12ziuWQ5C+IwSDf037Lrno1oQAhPaXYAAgs9KfCM3f9gnd9OMlhgYJQ5DB
- 03Mo7x2FitCGbfZDAyKFDzOf6iB4CybyeBAF1UWKMlAHD9Z01uHa5T12A9NVyw==
+ t=1753879138; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding:in-reply-to:references;
+ bh=uGbJc8cC4A5QxGoW5+U0tmFGsyahg00O3LNT3YKfh3k=;
+ b=aZzFIOmRR88fscDsM1vNhfAFOSgp75PgJkOyWK4x1CVkfbFVAvO9kBC4ttyDWEcKuOFb8D
+ cXAVYCoj3Fq07j64PcHcL1xmx4yZ64bpqWLNJJ3cjLYIkV+cDPDzG1Un7tqG5QTDEL3mZ0
+ qlOPTeDJtS2dcoHCDr3I43QO8yBpDOEncv42NI9iQ7fTy04iuR/j7WrHfyagbzQYUcjysj
+ RF3hKSO28/DERGt4T5fjvELzkm7794hI9xqyr6A1bBCwMBDEblrbyh/D/Vpx4LlRwpEBhi
+ IxOWyHSKybUzPQrd+sdnF5WxLRv5vyJPME1+5jztoavmTNj3XSG0ZPWm3XDzVw==
 From: Philip Oberfichtner <pro@denx.de>
 To: u-boot@lists.denx.de
-Cc: Philip Oberfichtner <pro@denx.de>, Anshul Dalal <anshuld@ti.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+Cc: Philip Oberfichtner <pro@denx.de>, Andre Przywara <andre.przywara@arm.com>,
+ Anshul Dalal <anshuld@ti.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Greg Malysa <malysagreg@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
+ Marek Vasut <marex@denx.de>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
  Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v5 0/4] Add Onion Omega2/2+ board support
-Date: Wed, 30 Jul 2025 14:38:29 +0200
-Message-Id: <20250730123833.249923-1-pro@denx.de>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 1/4] Makefile: Simplify size check
+Date: Wed, 30 Jul 2025 14:38:30 +0200
+Message-Id: <20250730123833.249923-2-pro@denx.de>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250730123833.249923-1-pro@denx.de>
+References: <20250730123833.249923-1-pro@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -85,54 +88,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the MediaTek based boards by Onion. Commit one to three are
-rather generic, whereas the last commit adds the actual board support.
+Deduplicate some redundancies within the SIZE_CHECK code in the toplevel
+Makefile. No functional changes.
 
-Changes in v5:
-	- Reimplement the Makefile size check
+Signed-off-by: Philip Oberfichtner <pro@denx.de>
+---
 
-Changes in v4:
-	- Rebase board support to v2025.07
-	- Add new commit to silence warning in arch/mips/
+Notes:
+    Changes in v5:
+    	- Fix for broken boards reported in v4
+    	- See https://patchwork.ozlabs.org/project/uboot/patch/20250708103959.26129-2-pro@denx.de/
 
-Changes in v3:
-	- Simplify image size check
+ Makefile               | 44 ++++++++++--------------------------------
+ tools/spl_size_limit.c |  2 +-
+ 2 files changed, 11 insertions(+), 35 deletions(-)
 
-Changes in v2:
-	- I forgot to run checkpatch in v1. Fix some style issues in v2.
-
-Philip Oberfichtner (4):
-  Makefile: Simplify size check
-  Makefile: Add size check for u-boot-with-spl.bin
-  mips: serial: Silence "unused variable" warning
-  mips: mt7628: Add Onion Omega2/2+ board support
-
- Makefile                                  |  45 ++------
- arch/mips/dts/Makefile                    |   1 +
- arch/mips/dts/onion-omega2p.dts           |  58 ++++++++++
- arch/mips/mach-mtmips/mt7620/serial.c     |   2 +-
- arch/mips/mach-mtmips/mt7621/spl/serial.c |   2 +-
- arch/mips/mach-mtmips/mt7628/Kconfig      |   7 ++
- arch/mips/mach-mtmips/mt7628/serial.c     |   2 +-
- board/onion/omega2p/Kconfig               |  12 ++
- board/onion/omega2p/MAINTAINERS           |  10 ++
- board/onion/omega2p/Makefile              |   3 +
- board/onion/omega2p/board.c               | 134 ++++++++++++++++++++++
- board/onion/omega2p/omega2p.env           |  32 ++++++
- common/spl/Kconfig                        |   7 ++
- configs/onion-omega2p_defconfig           |  82 +++++++++++++
- include/configs/onion-omega2p.h           |  15 +++
- tools/spl_size_limit.c                    |   2 +-
- 16 files changed, 376 insertions(+), 38 deletions(-)
- create mode 100644 arch/mips/dts/onion-omega2p.dts
- create mode 100644 board/onion/omega2p/Kconfig
- create mode 100644 board/onion/omega2p/MAINTAINERS
- create mode 100644 board/onion/omega2p/Makefile
- create mode 100644 board/onion/omega2p/board.c
- create mode 100644 board/onion/omega2p/omega2p.env
- create mode 100644 configs/onion-omega2p_defconfig
- create mode 100644 include/configs/onion-omega2p.h
-
+diff --git a/Makefile b/Makefile
+index c31bf7ecea9..aefa44c327f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -432,7 +432,7 @@ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
+ define size_check
+ 	actual=$$( wc -c $1 | awk '{print $$1}'); \
+ 	limit=$$( printf "%d" $2 ); \
+-	if test $$actual -gt $$limit; then \
++	if test $$limit -gt 0 && test $$actual -gt $$limit; then \
+ 		echo "$1 exceeds file size limit:" >&2; \
+ 		echo "  limit:  $$(printf %#x $$limit) bytes" >&2; \
+ 		echo "  actual: $$(printf %#x $$actual) bytes" >&2; \
+@@ -1103,30 +1103,6 @@ LDPPFLAGS += \
+ #########################################################################
+ #########################################################################
+ 
+-ifneq ($(CONFIG_BOARD_SIZE_LIMIT),)
+-BOARD_SIZE_CHECK= @ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+-else
+-BOARD_SIZE_CHECK =
+-endif
+-
+-ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
+-SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
+-else
+-SPL_SIZE_CHECK =
+-endif
+-
+-ifneq ($(CONFIG_TPL_SIZE_LIMIT),0x0)
+-TPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
+-else
+-TPL_SIZE_CHECK =
+-endif
+-
+-ifneq ($(CONFIG_VPL_SIZE_LIMIT),0x0)
+-VPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_VPL_SIZE_LIMIT))
+-else
+-VPL_SIZE_CHECK =
+-endif
+-
+ # Statically apply RELA-style relocations (currently arm64 only)
+ # This is useful for arm64 where static relocation needs to be performed on
+ # the raw binary, but certain simulators only accept an ELF file (but don't
+@@ -1470,7 +1446,7 @@ endif
+ 
+ %.imx: $(IMX_DEPS) %.bin
+ 	$(Q)$(MAKE) $(build)=arch/arm/mach-imx $@
+-	$(BOARD_SIZE_CHECK)
++	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+ 
+ %.vyb: %.imx
+ 	$(Q)$(MAKE) $(build)=arch/arm/cpu/armv7/vf610 $@
+@@ -1571,12 +1547,12 @@ endif
+ 
+ u-boot-nodtb.bin: u-boot FORCE
+ 	$(call if_changed,objcopy_uboot)
+-	$(BOARD_SIZE_CHECK)
++	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+ 
+ u-boot.ldr:	u-boot
+ 		$(CREATE_LDR_ENV)
+ 		$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
+-		$(BOARD_SIZE_CHECK)
++		@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+ 
+ # binman
+ # ---------------------------------------------------------------------------
+@@ -1703,7 +1679,7 @@ u-boot-dtb.img u-boot.img u-boot.kwb u-boot.pbl u-boot-ivt.img: \
+ 			$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_SANDBOX),dts/dt.dtb) \
+ 		,$(UBOOT_BIN)) FORCE
+ 	$(call if_changed,mkimage)
+-	$(BOARD_SIZE_CHECK)
++	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+ 
+ ifeq ($(CONFIG_SPL_LOAD_FIT_FULL),y)
+ MKIMAGEFLAGS_u-boot.itb =
+@@ -1718,12 +1694,12 @@ u-boot.itb: u-boot-nodtb.bin \
+ 		$(if $(CONFIG_MULTI_DTB_FIT),$(FINAL_DTB_CONTAINER)) \
+ 		$(U_BOOT_ITS) FORCE
+ 	$(call if_changed,mkfitimage)
+-	$(BOARD_SIZE_CHECK)
++	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+ endif
+ 
+ u-boot-with-spl.kwb: u-boot.bin spl/u-boot-spl.bin FORCE
+ 	$(call if_changed,mkimage)
+-	$(BOARD_SIZE_CHECK)
++	@ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+ 
+ u-boot.dis:	u-boot
+ 		$(OBJDUMP) -d $< > $@
+@@ -2342,7 +2318,7 @@ u-boot.lds: $(LDSCRIPT) prepare FORCE
+ 
+ spl/u-boot-spl.bin: spl/u-boot-spl
+ 	@:
+-	$(SPL_SIZE_CHECK)
++	@$(call size_check,$@,$$(tools/spl_size_limit))
+ 
+ spl/u-boot-spl-dtb.bin: spl/u-boot-spl
+ 	@:
+@@ -2367,14 +2343,14 @@ spl/boot.bin: spl/u-boot-spl
+ 
+ tpl/u-boot-tpl.bin: tpl/u-boot-tpl
+ 	@:
+-	$(TPL_SIZE_CHECK)
++	@$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
+ 
+ tpl/u-boot-tpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
+ 	$(Q)$(MAKE) obj=tpl -f $(srctree)/scripts/Makefile.xpl all
+ 
+ vpl/u-boot-vpl.bin: vpl/u-boot-vpl
+ 	@:
+-	$(VPL_SIZE_CHECK)
++	@$(call size_check,$@,$(CONFIG_VPL_SIZE_LIMIT))
+ 
+ vpl/u-boot-vpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
+ 	$(Q)$(MAKE) obj=vpl -f $(srctree)/scripts/Makefile.xpl all
+diff --git a/tools/spl_size_limit.c b/tools/spl_size_limit.c
+index c6c139e834f..137f0fca898 100644
+--- a/tools/spl_size_limit.c
++++ b/tools/spl_size_limit.c
+@@ -28,6 +28,6 @@ int main(int argc, char *argv[])
+ #endif
+ #endif
+ 
+-	printf("%d", spl_size_limit);
++	printf("%d", spl_size_limit > 0 ? spl_size_limit : 0);
+ 	return 0;
+ }
 -- 
 2.39.5
 
