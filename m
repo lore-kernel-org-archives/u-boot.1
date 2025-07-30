@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 434F2C83F26
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 17:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A83C87FCB
+	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 17:23:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18E25831A4;
-	Wed, 30 Jul 2025 19:18:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E5D738211F;
+	Wed, 30 Jul 2025 19:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z7WK1oxq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lE8E7U3l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F0A78211F; Wed, 30 Jul 2025 19:18:54 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id C07EC82BA1; Wed, 30 Jul 2025 19:23:37 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E98A8211F
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 19:18:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CFD7803CC
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 19:23:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-41b7d124016so13926b6e.1
- for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 10:18:49 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-73e810dc01aso42260a34.0
+ for <u-boot@lists.denx.de>; Wed, 30 Jul 2025 10:23:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753895929; x=1754500729; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cSjZYEOpGfqegW6pgc5WCqdzMMNlaUUuHhPrT1Rhppw=;
- b=Z7WK1oxqcAACnr7y51wwCRKw1IVKYfM9G+flSePiR/mhkn8JACO/2Si5n8XD3U5Cpb
- 8kkWFmuZWlITS/wAs3dq26d8TS78jS7lrGq+kqRYouLAzvywwyBi7UcVJPnYuaeDymkU
- n0421tn0BKQpn6PGD/qTz8MUWRqF0NDqUAtpA=
+ d=konsulko.com; s=google; t=1753896214; x=1754501014; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lWG7/aYF6V47dQ4cbXAXo8WjlLCM2NmBbfSPpphwqAI=;
+ b=lE8E7U3lb8cfhoOktJBwiqavPuSbKuWh5GV5QoR0ytRZuWBFz1VR8kWRKjF66kdYP/
+ s9f+BZPSqmZxS7EH69x/5CKGIiZEzlT5o6k+d4ZCbjs2kBqY974CxkJV2kK67xp1S17F
+ nl2E5RFATv+Hgr0dR/EZCufg6iCztxEAS/KDk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753895929; x=1754500729;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cSjZYEOpGfqegW6pgc5WCqdzMMNlaUUuHhPrT1Rhppw=;
- b=dZgQ2myRcIgF+M5Sck2Uu0WHKwnlqsk90fAu4vJtkKlzas2o03q6CUgNo+uMTJkH25
- r2LEeiu1bu5tZmyhFj6CwVnjLcXZyFXM2u7YT7WIbLh5HtoyzMIchjO9xA9eoRXVPPtX
- 3LTQ8s6w8PKtrXLmUq8zb79ePnsV6GkpEFuIS/k+kZ1nG2/QpC7LivTRD4Jw2Rz5OsWU
- wvRd90s6287HRpl0g+886qMoTtdAU6YVnRkEYYEKZYZ7F/9p/ok1EZlcFWJ8nOcFep1g
- oTXyjJJcgNkEsNeLvFvJkhQ9RRwZ6Gkv0+knVG3XNqpUTrzUofSGhc82nGGvPlde4Io2
- J4YQ==
-X-Gm-Message-State: AOJu0Yx0tGPcvmyCrELB1wgvrw85IDMfY7ELGHJdoGRJe3UdGftFEyN5
- pcw6VSbbAHh3vufTqrDUHnbsLGBn0FWUUCMbxm1iE6AccVGAP6gZGJCzYY2+9eq12TA60CV3p8G
- MLiyKJ8I=
-X-Gm-Gg: ASbGncu00M0iNoabeHCS+fUlAP6LKhYm/T18YA1iofIXL0R3Z4s6O8vmYw7w+WTP+PW
- tU8BAc/9J8MqSllRa9k5msHcw1dBqffZO0UiFF1pWEr7RBnJRIxpjYpdQnNqWl5nsurfpwJOVJJ
- I1rfAOwromQLoa2+28hWuOYgf7Bx2I2r9SUl7pIA26MCFxq8YEMVm1qaviqUpKnofvQfQbWmpoH
- mVZ2f18bd4RMsCUgccwB3IGsYmkVeY6rJe0kQE2LdtZQj4g87BgggGX2P0cJdDVoiYcViNYxx5/
- /s6n4TWmjw9CNm5eR1UNFTO5aQRRmjNWBXW9F40kiXUeER67YxUCnEs9Rf3HHt6qWSanwyXMxa4
- FJ7nKK/p59dX+Z0QsjYKPbWpbRhfmkctyAbCBD6CHGTvF3JPjw0+R8Bp+QQPqjmJW0s8=
-X-Google-Smtp-Source: AGHT+IFEn9lLrX0Url1Yd6EHWipt8L3CNLVNtu/X8xflG2/Rzpft7P09a4cJOXDXav99wJOcEvuP1A==
-X-Received: by 2002:a05:6808:2227:b0:408:fbed:c3a5 with SMTP id
- 5614622812f47-4319b632ad8mr2811400b6e.20.1753895928557; 
- Wed, 30 Jul 2025 10:18:48 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753896214; x=1754501014;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lWG7/aYF6V47dQ4cbXAXo8WjlLCM2NmBbfSPpphwqAI=;
+ b=r8xtRzoEsFHB0lQESlk7TiYX0M19Gt15sl5USwkksqaIT24jO9BEyoIGA7meJ4SDJJ
+ EceNpAA6UoFmF6J05wWBt1wUQl7ogzsQct7DxZeH3t4m7Y6JOJJm94tYSGaDGBq+tPS+
+ hx04MBBxzw+pIXkTto102ukedaSheHwJ34Q15cBMHxDM0zeeCZIK1J45/g1Pf0o5F3m+
+ pIPfojYPCokKBKC/wlu3hp+/5GJlXYCDZK+nITM3ofW3TqE0SAAqVyup1L0vq3oQO4mz
+ B1YJqZK1GT2sRr/JUws/zMKflHupc2aQNH1g0uNi/bXsAzx79Mv7LCev/UooxiAzNj5j
+ 3FwQ==
+X-Gm-Message-State: AOJu0YzsgzJYpou6YcTkMKsUcADCjFrR5RMQO2DEn7HjjFKmetAjzWRp
+ SSToMDmY2hlVOId1yPhOcLN1j4f/JYzEZp6C8t9DeDpFwRPGbMlCr5oRAW3tZjbnNm8=
+X-Gm-Gg: ASbGnctoVkjLlLIHffnDnhXA+BYs9RWeo9BD1AX5IQDN/x3fZ9nQuzbCZ0SVg8PEQ8V
+ Q/bn8jiEgq3Z0vPqsITsAjZHE2M9qONIteHgPHC1zYVC02KOwP3dxBAQfoGd1NTy7vwSMujmG7h
+ EACv+BVa6tAzBeAkMDIhUE6nF4CCZfbINPoV8Sd1iZo7shQHbjNyLUC2caikEE1PNTn1Q6gG43+
+ nu/VMqo/iTQ7WBL0PpyATtTiLCoVI7j3PlLUE1o2GYagh93ag/80WrsRV8lnJG66mmacjMtz4lY
+ hwkwTE9DwZ98/0kZT5Kn1RYF/MThCZgrp0buaBD6umArGOyY+Nkfw40LiXco78Gmtpmaxw5wCn4
+ HX6CWDKQGpjGDtAmu5madq35djGuVt4DcHHBLn163rV3iJXksqUFPIiTt
+X-Google-Smtp-Source: AGHT+IE2lzUaSzTBp2k7Ec9aYSUrUKUlfyfn+Bv6tTmnfi1OgbHlro822VMjBQSIaTjkCoayoHpPrQ==
+X-Received: by 2002:a05:6808:d4d:b0:41c:9719:478c with SMTP id
+ 5614622812f47-4319a66bcdbmr2626813b6e.17.1753896213801; 
+ Wed, 30 Jul 2025 10:23:33 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-42c7b267d0csm2013268b6e.11.2025.07.30.10.18.47
+ 5614622812f47-42c7b55be77sm1891016b6e.14.2025.07.30.10.23.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Jul 2025 10:18:47 -0700 (PDT)
-Date: Wed, 30 Jul 2025 11:18:45 -0600
+ Wed, 30 Jul 2025 10:23:32 -0700 (PDT)
+Date: Wed, 30 Jul 2025 11:23:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>
-Subject: Updated to v6.16-dts tag
-Message-ID: <20250730171845.GR1807455@bill-the-cat>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] CI: Wire mbv32 combinations
+Message-ID: <20250730172330.GT1807455@bill-the-cat>
+References: <dc52619a474c6374d43e7fb232480cab3392b00a.1753874707.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oGElSbcD7Bc9sAcc"
+ protocol="application/pgp-signature"; boundary="gWxyFyP1tQWwvvgt"
 Content-Disposition: inline
+In-Reply-To: <dc52619a474c6374d43e7fb232480cab3392b00a.1753874707.git.michal.simek@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,99 +100,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oGElSbcD7Bc9sAcc
+--gWxyFyP1tQWwvvgt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+On Wed, Jul 30, 2025 at 01:25:09PM +0200, Michal Simek wrote:
 
-I've updated to the v6.16-dts tag in master now, and there's a few
-things with that change. First, to avoid some breakage on Rockhip with
-Quentin's help I've applied a few Rockchip and also one USB series to
-keep things in sync. Sorry for stepping on toes here. Second, I had to
-perform a few fixups of existing dts* files. I'm pretty sure these
-changes are right based on reading the diff from v6.15-dts to v6.16-dts
-but for the record, here's the partial merge commit diffs for review:
+> After upgrading to QEMU 10 by commit 1d782a3f229c ("Docker, CI: Update to
+> latest Ubuntu and Dockerfile") let's wire mbv32 which is the part of QEMU
+> to have it under regression.
+>=20
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>=20
+> gitlab I have tested.
+> azure I didn't test it but did blindly all changes as they are in github
+> one.
+>=20
+> This patch has be applied on the top of this series
+> https://lore.kernel.org/r/cover.1753182218.git.michal.simek@amd.com
 
-diff --cc arch/arm/dts/apq8016-sbc-u-boot.dtsi
-index c8a46ed14483,000000000000..26d4506815ea
-mode 100644,000000..100644
---- a/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-+++ b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-@@@ -1,20 -1,0 +1,20 @@@
- +// SPDX-License-Identifier: GPL-2.0
- +/*
- + * Copyright (c) 2024, Linaro Ltd.
- + */
- +
- +/ {
- +	/* When running as a first-stage bootloader this isn't filled in automat=
-ically */
- +	memory@80000000 {
- +		reg =3D <0 0x80000000 0 0x40000000>;
- +	};
- +};
- +
- +/*
- + * When running as a first-stage bootloader, we need to re-configure the =
-UART pins
- + * because SBL de-initialises them. Indicate that the UART pins should be=
- configured
- + * during all boot stages.
- + */
-- &blsp_uart2_default {
-++&blsp_uart2_console_default {
- +	bootph-all;
- +};
-diff --cc arch/arm/dts/apq8016-schneider-hmibsc.dts
-index 75c6137e5a11,000000000000..d8257fc077f9
-mode 100644,000000..100644
---- a/arch/arm/dts/apq8016-schneider-hmibsc.dts
-+++ b/arch/arm/dts/apq8016-schneider-hmibsc.dts
-@@@ -1,491 -1,0 +1,491 @@@
+For v2, take this via your tree.
+
 [snip]
- +
-- &blsp_uart1_default {
-++&blsp_uart1_console_default {
- +	bootph-all;
- +};
- +
-[snip]
-diff --cc arch/arm/dts/sun8i-v3s.dtsi
-index 9e13c2aa8911,000000000000..b3a325347629
-mode 100644,000000..100644
---- a/arch/arm/dts/sun8i-v3s.dtsi
-+++ b/arch/arm/dts/sun8i-v3s.dtsi
-@@@ -1,656 -1,0 +1,656 @@@
-[snip]
- +		csi1: camera@1cb4000 {
- +			compatible =3D "allwinner,sun8i-v3s-csi";
- +			reg =3D <0x01cb4000 0x3000>;
- +			interrupts =3D <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>;
- +			clocks =3D <&ccu CLK_BUS_CSI>,
-- 				 <&ccu CLK_CSI1_SCLK>,
-++				 <&ccu CLK_CSI_SCLK>,
- +				 <&ccu CLK_DRAM_CSI>;
- +			clock-names =3D "bus", "mod", "ram";
- +			resets =3D <&ccu RST_BUS_CSI>;
- +			status =3D "disabled";
- +		};
- +	};
- +};
+> ---
+>  .azure-pipelines.yml | 20 ++++++++++++++++++--
+>  .gitlab-ci.yml       | 32 ++++++++++++++++++++++++++++++--
+>  2 files changed, 48 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 8209d2b329cb..76a0ba097f93 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -258,11 +258,11 @@ stages:
+>            ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/p=
+y/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+>            ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
+>            ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
+> -          if [[ "\${TEST_PY_BD}" =3D=3D "qemu-riscv32_spl" ]]; then
+> +          if [[ "\${TEST_PY_BD}" =3D=3D "qemu-riscv32_spl" ]] || [[ "${T=
+EST_PY_BD}" =3D=3D "xilinx_mbv32_smode" ]]; then
+
+You missed an escape here and it should be:
+"\${TEST_PY_BD}" =3D=3D "xilinx_mbv32_smode"
+
+>                wget -O - https://github.com/riscv-software-src/opensbi/re=
+leases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>                export OPENSBI=3D/tmp/opensbi-1.3.1-rv-bin/share/opensbi/i=
+lp32/generic/firmware/fw_dynamic.bin;
+>            fi
+> -          if [[ "\${TEST_PY_BD}" =3D=3D "qemu-riscv64_spl" ]] || [[ "\${=
+TEST_PY_BD}" =3D=3D "sifive_unleashed" ]]; then
+> +          if [[ "\${TEST_PY_BD}" =3D=3D "qemu-riscv64_spl" ]] || [[ "\${=
+TEST_PY_BD}" =3D=3D "sifive_unleashed" ]] || [[ "${TEST_PY_BD}" =3D=3D "xil=
+inx_mbv64_smode" ]]; then
+
+Same here.
+
+The rest of the Azure side looks right.
 
 --=20
 Tom
 
---oGElSbcD7Bc9sAcc
+--gWxyFyP1tQWwvvgt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIpT7AAKCRAr4qD1Cr/k
-CgNRAQDD+m46nhMAC+OLa8V8cU2pnbjlZ5iwgUbsxwjLl8PP4gEAgtoa+Fy28e97
-K2GnLRPlA94aEq21d6yh8XoWWGW48QQ=
-=+ZSU
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIpVEgAKCRAr4qD1Cr/k
+CoACAQCoPyfquQCaskp1T7WNnjiOvMhSauJSoPlD9jHJmmyqAgEAn8/JwGk9BxVP
+79G5DQx5FVN/tJcNe7fXIXg/Fa8PGAg=
+=Y/j4
 -----END PGP SIGNATURE-----
 
---oGElSbcD7Bc9sAcc--
+--gWxyFyP1tQWwvvgt--
