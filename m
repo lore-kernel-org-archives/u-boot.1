@@ -4,91 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A35FAC87FCA
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 16:05:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED5AC87FCA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 16:05:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97E81838F3;
-	Thu, 31 Jul 2025 18:05:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7E798383A;
+	Thu, 31 Jul 2025 18:05:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jEDkwHzZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IceH0ryC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A93A838F3; Thu, 31 Jul 2025 18:05:23 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id BE2908390B; Thu, 31 Jul 2025 18:05:30 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B3C78309D
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 18:05:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 446058309D
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 18:05:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-41bc2668f75so561787b6e.0
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:05:21 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-306db05b292so195727fac.1
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:05:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753977920; x=1754582720; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753977927; x=1754582727; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7wiLTgNirISwhXsZBkquFLnxeN97HaEaGUis9+dmx64=;
- b=jEDkwHzZfy1qqCDvPGxRdeXeFuYPuaTakmCI8S3PPkD5wfikNW11XDhrkAsZUTV8Gm
- yvCNvU5j8f6Sz5FGJxommC9cZFXNnvCsjh+JAeFdPouiowHD6apPXQtcMScgeCQQvmaJ
- vAklY0+C3C8BraGQ0O3J1dce2pcIpjL9hErmQ=
+ bh=J1cXDO9SlgmUWVcbpKgD/iXZQMkORwKvTOZoSWi/Pnk=;
+ b=IceH0ryCXgK/WrwxdkB+e4F3ik23LX37+vo134hmLoskYd8vfo1nixWDwTyLWIFiBX
+ 7O26XZsBsZem9DVdhIGacPhe6UBGp/NHa6PGBPWwE/WdIkKOBB5J5hbiWTTINyNRBlac
+ wqAxMA9f2YSel1GrY3FjxHX/M/fGwTmmS916M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753977920; x=1754582720;
+ d=1e100.net; s=20230601; t=1753977927; x=1754582727;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7wiLTgNirISwhXsZBkquFLnxeN97HaEaGUis9+dmx64=;
- b=Ee1WRvrlpnmuQMMguXaqG139FJDtuVN7c9dmTUNH2XeI5/35CBmaN/3r0Q5zRuC5Tn
- N+D5zo247hQCdQR6veZxAaTkGITWs8s4ToaFZucAWY2shLdAJQ6la1HsT8r6mkIVwW8Y
- sCBgZUBRxeEtbiWOydmtKgyarlXWnVRaOQIKT6wHfQiAKZTgQA3kJThTBgZHlozOwgpa
- MMIeN2AOFlmIhtJ+h15yrGfxfQTkQ1hWBMeYarXBDF7wjDyPA2C1bDe/lvOq482DAtTs
- ya/2Jf/HyG8EFW6NATOGB5vMoeAAnA0o87TpXBm5M32G6OIe15h1D9A+d7m84efZOH0T
- AMQw==
-X-Gm-Message-State: AOJu0YwpfXBtgDB+XKMUUqMbuhmYMa32kbvclFOkEuhNw6N0sgEjnvM3
- aF0cj5lQWjYyjb77k5sOCMtcA6l0KOCOszU9wDi3/Mc6CDqWcEm19klzbPNiSF9oNTI=
-X-Gm-Gg: ASbGncuQJAEtaNDDInTRWdB57r3Jz2gkC9GhQcHGgFF1c9+ntnv68gW0P1CtqWz41Ul
- JZJeiNbSLJ6SKbU+R6NvBVUV64Nliq1r/x4QSvZqY5gUC+N/6um5mr2ps0Qv8C2UZ2fMNROGpsj
- Yno85yqEdDgec/5fiLPWmlw1sIdEiXXb17P1l3xVQlOdSF+5OkzcIDUP9bGVDH3RZnZD4NvpTpN
- xpk5CSZz+03TULmv6s9AFqEowT0Ldn+CshbOgEVRpW5i6DJIAnecu5wFv/B461Fbts8Qjn8YBA0
- UwOxTzu7forXDV0hF0KZQR7NF0j7+bkugyunwq6Z6HGJ1OWqMIz5ObEK3A8l0E5HNDjfv4/LDQV
- AwzhPLMHBTd6lWeMQOqCiXpbahiikQ7yeUIlqF6xOP9NVhguPF/38c3X+
-X-Google-Smtp-Source: AGHT+IGIIXxqWoZ7IrPzdJNGuKY/1nM0pMqYFYhmL2THSMb2dar9rU8wPD7ilDiFle6YMILR43ukJA==
-X-Received: by 2002:a05:6808:3998:b0:425:767e:9ca2 with SMTP id
- 5614622812f47-4319999cb6dmr5020880b6e.1.1753977919928; 
- Thu, 31 Jul 2025 09:05:19 -0700 (PDT)
+ bh=J1cXDO9SlgmUWVcbpKgD/iXZQMkORwKvTOZoSWi/Pnk=;
+ b=Encb/cxauwY1UeYc2AwHJZrk5GwpUJli4O+veZyqG3QiicYDuadWNwcvOoPodAptM7
+ ehNCIggSU5x+dOx/YAMGFM1st+MsNJ44VIVuLo7xA22lSM5DWxUTKaTdN3RcsA2moXo7
+ cu/RrDaa11RMFjehqReulhAz8ruNiSyvpNaSNRjbz/5o2LYkcadBm0LNljt5ro3w3SOo
+ oyA/yo/FO6DCDMhJLmT6dOTeWjCQ9848ceLRU/Z7BhurPc6GRzFmc7zX+sifHqMEqE5w
+ 4MwOlcO5zR7bxhfgCKO98U4w6qbU0brm6vmU4Vwv1lNo66McZVeA/r4rsrptwmXaXM8L
+ xfMQ==
+X-Gm-Message-State: AOJu0YwnPGZCB0C3ePlx8DkYUQXyQWMWHg4imnX/2DSY9kKRLUaIKT7S
+ 2SSVWST4gK+GA4xDMArasuXPfwXwIHcPx2EM16F4DinbbeDMOpFChPdMTEfox6iZsSE=
+X-Gm-Gg: ASbGnct31DQno4rW+XmrRKVazJ90eSYZzkFQWfoWXJuk14rLggI5mPkecHsizT7Ojcp
+ mrf2OmqRw28pe4lSWhgCHazvn3E4l/2xCqkY9OC2l76jj0/HH3DcOMkJG/mwYy0Vkk566AH/eKH
+ YIVN+dTcPBISA6fnD/Jx9kM03Hva/d1E6leptkUjjL+aR1GRqiWoJTZGoYirB85LznsedrhODBf
+ wgLG8EFg1iV+qoDmkH9ox2iKFjAM9sXYknKunpy9gIf/eBDVRTpAp9ok1Y2cTJuPjjjcWrcsdz2
+ xmd2np/ZYWZffx6S7jLVzxagm2j6n1U3zz3lcx+KHtKgyqyASK2nHms0n5MQrSUHs8ALfV+zgrS
+ Q6d3TWU2dRwgYicXiZHj1bh7qwMAnfCzKjh8kBtkDL6pixKX9B6M/bYDw
+X-Google-Smtp-Source: AGHT+IGUpbRe9qhc0jQBo1QdW1gsidgID5xaXmJb/k9CwM/niKaxqAwTHbaUDT5Y375izrnZGJ4b8g==
+X-Received: by 2002:a05:6870:589:b0:307:5faf:4f72 with SMTP id
+ 586e51a60fabf-30785aec2e9mr5117011fac.14.1753977926579; 
+ Thu, 31 Jul 2025 09:05:26 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4335938b264sm309390b6e.37.2025.07.31.09.05.18
+ 586e51a60fabf-307a71200b4sm445860fac.7.2025.07.31.09.05.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 09:05:19 -0700 (PDT)
-Date: Thu, 31 Jul 2025 10:05:16 -0600
+ Thu, 31 Jul 2025 09:05:25 -0700 (PDT)
+Date: Thu, 31 Jul 2025 10:05:23 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Philip Oberfichtner <pro@denx.de>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
- Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v5 2/4] Makefile: Add size check for u-boot-with-spl.bin
-Message-ID: <20250731160516.GY1807455@bill-the-cat>
-References: <20250730123833.249923-1-pro@denx.de>
- <20250730123833.249923-3-pro@denx.de>
+To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ "Maniyam, Dinesh" <dinesh.maniyam@altera.com>,
+ "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
+ "andrew.goodbody@linaro.org" <andrew.goodbody@linaro.org>,
+ "Hea, Kok Kiang" <kok.kiang.hea@altera.com>
+Subject: Re: Pull request: SoCFPGA changes for u-boot-socfpga-next-20250731
+Message-ID: <20250731160523.GZ1807455@bill-the-cat>
+References: <LV8PR03MB813752D257E7C6949E76863DA727A@LV8PR03MB8137.namprd03.prod.outlook.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hoExF2ZDpbQXbzza"
+ protocol="application/pgp-signature"; boundary="qWUWWewIcgmFLubF"
 Content-Disposition: inline
-In-Reply-To: <20250730123833.249923-3-pro@denx.de>
+In-Reply-To: <LV8PR03MB813752D257E7C6949E76863DA727A@LV8PR03MB8137.namprd03.prod.outlook.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,39 +101,92 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hoExF2ZDpbQXbzza
+--qWUWWewIcgmFLubF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 30, 2025 at 02:38:31PM +0200, Philip Oberfichtner wrote:
+On Thu, Jul 31, 2025 at 03:15:52AM +0000, Chee, Tien Fong wrote:
 
-> Introduce another SIZE_CHECK macro for u-boot-with-spl.bin.
+> Dear Tom,
 >=20
-> Note that we cannot reuse BOARD_SIZE_LIMIT here, as this also applies to
-> intermediate u-boot*bin images, which, before being compressed, may be
-> larger than the final combined image.
+> This pull request includes updates for the SoCFPGA platform intended for =
+the 2025.10 release cycle. The highlights focus on enabling the Power Manag=
+er for Agilex5, NAND boot support enhancements, and various bug fixes and c=
+leanups across SoCFPGA components.
 >=20
-> Also SPL_SIZE_LIMIT has to be a separate option, as some boards might
-> just want to restrict SPL size while still allowing u-boot-with-spl.bin
-> to be bigger.
+> Summary of changes:
 >=20
-> Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> Agilex5 Power Manager:
+>=20
+>   *   Initial driver support and DT bindings are added for the Agilex5 Po=
+wer Manager, enabling better power domain control.
+>=20
+> NAND Boot Support for Agilex5:
+>=20
+>   *   SPL support for NAND boot is enabled.
+>   *   UBI/UBIFS support is configured in defconfigs.
+>   *   Memory layout updates (malloc and BSS relocation) ensure proper boo=
+t behavior.
+>=20
+> Code Quality Improvements:
+>=20
+>   *   Coverity and runtime bug fixes (e.g., jtag_usercode check, sub-devi=
+ce conditionals).
+>   *   Several cleanup patches addressing formatting, logic, and initializ=
+ation issues.
+>=20
+> General Maintenance:
+>=20
+>   *   SPDX license tags and header include fixes.
+>   *   Device tree updates to limit SPI clock frequency and other minor ad=
+justments.
+>=20
+>=20
+> These contributions come from Alif Zakuan Yuslaimi, Andrew Goodbody, Dine=
+sh Maniyam, Naresh Kumar Ravulapalli, and Tingting Meng.
+>=20
+> This patch set has been tested on Agilex 5 devkit.
+>=20
+> Passing all pipeline tests at SoCFPGA U-boot custodian https://source.den=
+x.de/u-boot/custodians/u-boot-socfpga/-/pipelines/27221
+>=20
+> Thanks.
+>=20
+> Best regards,
+> Tien Fong
+>=20
+> The following changes since commit a8f20bb6650df56d2600cda2c66f9349df9e49=
+c8:
+>=20
+>   Merge patch series "bios_emulator: Fix two issues found by Smatch" (202=
+5-07-29 13:14:52 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-socfpga.git tags/u-boot=
+-socfpga-next-20250731
+>=20
+> for you to fetch changes up to 4064e7c9fc42c1c376bd919a80b451273472f3df:
+>=20
+>   socfpga_agilex5: config: Relocate malloc and bss address (2025-07-30 17=
+:45:31 +0800)
+>=20
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---hoExF2ZDpbQXbzza
+--qWUWWewIcgmFLubF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIuUPAAKCRAr4qD1Cr/k
-ClZlAP4izpc90F67xjrP8u6737k0jGCrnYfZJ13wczMhApeyywEAsufNC2tY9OO0
-AY3sNVIXuCkTT/52UIToXE3gYt2pXgQ=
-=LvzR
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIuUQgAKCRAr4qD1Cr/k
+CvB/AP40zi1DRuocBsPNDgqYgoTjRShjL/FA2NVVg8ksnw4CBAEA6+4a7brzrwxX
+LnJSGm/4MWtm+vHk53lEih0cHQMgpgY=
+=jx5F
 -----END PGP SIGNATURE-----
 
---hoExF2ZDpbQXbzza--
+--qWUWWewIcgmFLubF--
