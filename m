@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC64DC87FCA
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 21:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10DF5C87FD2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 21:52:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4744A8399A;
-	Thu, 31 Jul 2025 23:50:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4FCA88396C;
+	Thu, 31 Jul 2025 23:50:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=agorria.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=agorria.com header.i=@agorria.com header.b="qxALLoJZ";
+	dkim=pass (2048-bit key; secure) header.d=agorria.com header.i=@agorria.com header.b="uehwH4AD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D2FF83948; Thu, 31 Jul 2025 21:37:19 +0200 (CEST)
+ id 0AAD48394A; Thu, 31 Jul 2025 21:37:21 +0200 (CEST)
 Received: from mout-y-111.mailbox.org (mout-y-111.mailbox.org
  [IPv6:2001:67c:2050:103:465::111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 412AC83938
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 21:37:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D9928393F
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 21:37:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=agorria.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ion@agorria.com
@@ -30,20 +30,20 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-y-111.mailbox.org (Postfix) with ESMTPS id 4btK990NCmz9y8X;
- Thu, 31 Jul 2025 21:37:17 +0200 (CEST)
+ by mout-y-111.mailbox.org (Postfix) with ESMTPS id 4btK9B645Hz9y9f;
+ Thu, 31 Jul 2025 21:37:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agorria.com; s=MBO0001;
- t=1753990637;
+ t=1753990638;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9gXWMuX/qUfIK3PphMc6+4HgUyWhfgVi8woe3MQhyp0=;
- b=qxALLoJZQON2xSUALmr6dGDH9WxnI39DjzZg6SaomSzH8H/V37L2HDdW3CxstpOtLkk/YS
- 9MuOwc6k00DVQ3eqgzt+qyqKDLdH2/yTii95qy41citd4nWijDQC7S21fPTDwJjzj6hzVv
- XJabjVxqA9/pvj3Z4WNgUstIY68AsLgsqykgyjKS+zEimYz9QqGT4FITe8l0R15+trEkPK
- RpOdnVdOMLOK2K1btPRuWltfKOswk3NsGD4xgGmL9lLraVKR7IoWLzKuj1i4Dbxez6SN4D
- 75ni/YDMh92OFfjpYCUTB5WuvXdeQ78dZTvBIiL+OBLny6Hk6AakBz2IM3hB8Q==
+ bh=Hdd5DYEOV5K8/1GpcwSKMwCAoQ9c+cdt4Lnz19nHoCI=;
+ b=uehwH4ADE4v5IvzjU/WlwJKEJ+EWqnk3H4ITdMs9IoDTmstcNehnwd2EHlKo8cM300csJb
+ FLksvPL7jqeBM5uk+/pdzXLJjZC8zaYIQL7CCdLU8VMILfQQ+AM04ya5Om2sLRd+64rFr4
+ 3RdeHrWUsjC8TUdbemkIU7BbUBYYzmxGJOSnLg5v2+Is0udoDSp7aKEDrwF6xknAVxpvc/
+ poAtRdVG1uvP9MMQ92y/9goQdwMpv5YPoYd8iu7TE/+pW9M0yzWdTAKsyNy9xMupvnDLDU
+ HzRalgwMDJNPLRYFn8El/lXUtKfjX144Wkx6/joyp/m+15XkD2pzZohqFXCkag==
 Authentication-Results: outgoing_mbo_mout; dkim=none;
  spf=pass (outgoing_mbo_mout: domain of ion@agorria.com designates
  2001:67c:2050:b231:465::1 as permitted sender) smtp.mailfrom=ion@agorria.com
@@ -53,14 +53,15 @@ To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Ion Agorria <ion@agorria.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 3/5] video: panel: add Samsung S6E63M0 panel driver
-Date: Thu, 31 Jul 2025 21:36:54 +0200
-Message-ID: <20250731193656.286806-4-ion@agorria.com>
+Subject: [PATCH v1 4/5] video: bridge: add Samsung CMC623 image converter
+ driver
+Date: Thu, 31 Jul 2025 21:36:55 +0200
+Message-ID: <20250731193656.286806-5-ion@agorria.com>
 In-Reply-To: <20250731193656.286806-1-ion@agorria.com>
 References: <20250731193656.286806-1-ion@agorria.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4btK990NCmz9y8X
+X-Rspamd-Queue-Id: 4btK9B645Hz9y9f
 X-Mailman-Approved-At: Thu, 31 Jul 2025 23:50:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,392 +79,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Samsung S6E63M0 controller is found in some OLED panels like one used in
-the Samsung Captivate Glide. Currently only DBI C panel is implemented.
+Add support for a Samsung CMC623 image converter chip found in several
+Samsung devices such as Samsung Galaxy R (I9103) and Samsung Galaxy
+Tab 10.1 (GT-P75xx).
 
 Signed-off-by: Ion Agorria <ion@agorria.com>
 ---
- drivers/video/Kconfig           |   8 +
- drivers/video/Makefile          |   1 +
- drivers/video/samsung-s6e63m0.c | 393 ++++++++++++++++++++++++++++++++
- 3 files changed, 402 insertions(+)
- create mode 100644 drivers/video/samsung-s6e63m0.c
+ drivers/video/bridge/Kconfig  |   8 ++
+ drivers/video/bridge/Makefile |   1 +
+ drivers/video/bridge/cmc623.c | 234 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 243 insertions(+)
+ create mode 100644 drivers/video/bridge/cmc623.c
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index 1e405e743ae..a02501583eb 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -700,6 +700,14 @@ config VIDEO_LCD_SONY_L4F00430T01
- 	  WVGA resolution (480x800) and is setup over SPI, video
- 	  data comes from RGB.
- 
-+config VIDEO_LCD_SAMSUNG_S6E63M0
-+	tristate "Samsung S6E63M0 controller based panel support"
-+	depends on PANEL && BACKLIGHT
-+	help
-+	  Say Y here if you want to enable support for Samsung S6E63M0
-+	  controller found in some panels like on Samsung Captivate Glide.
-+	  Currently only DBI C panel is implemented.
+diff --git a/drivers/video/bridge/Kconfig b/drivers/video/bridge/Kconfig
+index be53034bd3d..a48cec7a138 100644
+--- a/drivers/video/bridge/Kconfig
++++ b/drivers/video/bridge/Kconfig
+@@ -66,3 +66,11 @@ config VIDEO_BRIDGE_LVDS_CODEC
+ 	help
+ 	  Support for transparent LVDS encoders and decoders that don't
+ 	  require any configuration.
 +
- config VIDEO_LCD_SPI_CS
- 	string "SPI CS pin for LCD related config job"
- 	depends on VIDEO_LCD_SSD2828 || VIDEO_LCD_HITACHI_TX18D42VM
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index 2151353551d..040333fb3a6 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -75,6 +75,7 @@ obj-$(CONFIG_VIDEO_LCD_SHARP_LQ101R1SX01) += sharp-lq101r1sx01.o
- obj-$(CONFIG_VIDEO_LCD_SSD2828) += ssd2828.o
- obj-$(CONFIG_VIDEO_LCD_TDO_TL070WSH30) += tdo-tl070wsh30.o
- obj-$(CONFIG_VIDEO_LCD_SONY_L4F00430T01) += sony-l4f00430t01.o
-+obj-$(CONFIG_VIDEO_LCD_SAMSUNG_S6E63M0) += samsung-s6e63m0.o
- obj-$(CONFIG_VIDEO_MCDE_SIMPLE) += mcde_simple.o
- obj-${CONFIG_VIDEO_MESON} += meson/
- obj-${CONFIG_VIDEO_MIPI_DSI} += mipi_dsi.o
-diff --git a/drivers/video/samsung-s6e63m0.c b/drivers/video/samsung-s6e63m0.c
++config VIDEO_BRIDGE_SAMSUNG_CMC623
++	bool "Samsung CMC623 Image Converter driver"
++	depends on VIDEO_BRIDGE && DM_GPIO
++	select DM_I2C
++	help
++	  Samsung CMC623 image converter chip driver.
++	  Found in several Samsung devices such as N1
+diff --git a/drivers/video/bridge/Makefile b/drivers/video/bridge/Makefile
+index 63dc6e62c49..520f36a7a6f 100644
+--- a/drivers/video/bridge/Makefile
++++ b/drivers/video/bridge/Makefile
+@@ -11,3 +11,4 @@ obj-$(CONFIG_VIDEO_BRIDGE_ANALOGIX_ANX6345) += anx6345.o
+ obj-$(CONFIG_VIDEO_BRIDGE_SOLOMON_SSD2825) += ssd2825.o
+ obj-$(CONFIG_VIDEO_BRIDGE_TOSHIBA_TC358768) += tc358768.o
+ obj-$(CONFIG_VIDEO_BRIDGE_LVDS_CODEC) += lvds-codec.o
++obj-$(CONFIG_VIDEO_BRIDGE_SAMSUNG_CMC623) += cmc623.o
+diff --git a/drivers/video/bridge/cmc623.c b/drivers/video/bridge/cmc623.c
 new file mode 100644
-index 00000000000..7497fc0f53a
+index 00000000000..78dafef8145
 --- /dev/null
-+++ b/drivers/video/samsung-s6e63m0.c
-@@ -0,0 +1,393 @@
++++ b/drivers/video/bridge/cmc623.c
+@@ -0,0 +1,234 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (c) 2025 Ion Agorria <ion@agorria.com>
 + */
 +
-+#include <backlight.h>
++#include <clk.h>
 +#include <dm.h>
-+#include <panel.h>
++#include <dm/ofnode_graph.h>
++#include <i2c.h>
 +#include <log.h>
-+#include <malloc.h>
-+#include <spi.h>
-+#include <mipi_display.h>
++#include <backlight.h>
++#include <panel.h>
++#include <video_bridge.h>
 +#include <linux/delay.h>
++#include <linux/err.h>
++#include <linux/kernel.h>
++#include <linux/math64.h>
 +#include <power/regulator.h>
 +#include <asm/gpio.h>
 +
-+#define S6E63M0_DCS_CMD			0
-+#define S6E63M0_DCS_DATA		1
-+
-+#define S6E63M0_INFO_FLAG_PGAMMACTL	BIT(0)
-+#define S6E63M0_INFO_FLAG_GAMMA_DELTA	BIT(1)
-+
-+#define S6E63M0_GTCON_FLAG_FLIP_H	BIT(0)
-+#define S6E63M0_GTCON_FLAG_FLIP_V	BIT(1)
-+
-+/* Manufacturer Command Set */
-+#define MCS_PENTILE_1			0xb3
-+#define MCS_GAMMA_DELTA_Y_RED		0xb5
-+#define MCS_GAMMA_DELTA_X_RED		0xb6
-+#define MCS_GAMMA_DELTA_Y_GREEN		0xb7
-+#define MCS_GAMMA_DELTA_X_GREEN		0xb8
-+#define MCS_GAMMA_DELTA_Y_BLUE		0xb9
-+#define MCS_GAMMA_DELTA_X_BLUE		0xba
-+#define MCS_DISCTL			0xf2
-+#define MCS_SRCCTL			0xf6
-+#define MCS_IFCTL			0xf7
-+#define MCS_PANELCTL			0xf8
-+#define MCS_PGAMMACTL			0xfa
-+
-+#define MCS_PANELCTL_LEN		14
-+#define MCS_IFCTL_LEN			3
-+#define MCS_PGAMMACTL_LEN		22
-+#define MCS_GAMMA_DELTA_Y_LEN		32
-+#define MCS_GAMMA_DELTA_X_LEN		16
-+
-+struct s6e63m0_priv {
-+	struct udevice *vdd3;
-+	struct udevice *vci;
-+
-+	struct s6e63m0_info *info;
-+
-+	struct gpio_desc reset_gpio;
-+
-+	u8 gtcon;
++static const char * const cmc623_supplies[] = {
++	"vdd3v0-supply", "vdd1v2-supply", "vddio1v8-supply"
 +};
 +
-+struct s6e63m0_info {
-+	const u32 flags;
++struct cmc623_priv {
++	struct udevice *panel;
 +	struct display_timing timing;
-+	const u8 cmd_mcs_panelctl[MCS_PANELCTL_LEN];
-+	const u8 cmd_mcs_pgammactl_1[MCS_PGAMMACTL_LEN];
-+	const u8 cmd_mcs_pgammactl_2;
-+	const u8 cmd_mcs_gamma_delta_y[MCS_GAMMA_DELTA_Y_LEN];
-+	const u8 cmd_mcs_gamma_delta_x[MCS_GAMMA_DELTA_X_LEN];
++
++	struct udevice *supplies[ARRAY_SIZE(cmc623_supplies)];
++
++	struct gpio_desc enable_gpio; /* also known as FAILSAFE */
++	struct gpio_desc bypass_gpio;
 +};
 +
-+static const struct s6e63m0_info s6e63m0_generic_info = {
-+	.flags = S6E63M0_INFO_FLAG_GAMMA_DELTA,
-+	.timing = {
-+		.pixelclock.typ		= 25628,
-+		.hactive.typ		= 480,
-+		.hfront_porch.typ	= 16,
-+		.hback_porch.typ	= 16,
-+		.hsync_len.typ		= 2,
-+		.vactive.typ		= 800,
-+		.vfront_porch.typ	= 28,
-+		.vback_porch.typ	= 1,
-+		.vsync_len.typ		= 2,
-+		.flags			= DISPLAY_FLAGS_HSYNC_LOW | DISPLAY_FLAGS_VSYNC_LOW,
-+	},
-+	.cmd_mcs_panelctl = {
-+		0x01,	/* DOCT */	0x27,	/* CLWEA */
-+		0x27,	/* CLWEB*/	0x07,	/* CLTE */
-+		0x07,	/* SHE */	0x54,	/* FLTE */
-+		0x9F,	/* FLWE */	0x63,	/* SCTE */
-+		0x8F,	/* SCWE */	0x1A,	/* INTE */
-+		0x33,	/* INWE */	0x0D,	/* EMPS */
-+		0x00,	/* E_INTE */	0x00	/* E_INWE */
-+	},
-+	.cmd_mcs_pgammactl_1 = {
-+		0x00, 0x18, 0x08, 0x24, 0x64, 0x56, 0x33, 0xb6,
-+		0xba, 0xa8, 0xac, 0xb1, 0x9d, 0xc1, 0xc1, 0xb7,
-+		0x00, 0x9c, 0x00, 0x9f, 0x00, 0xd6
-+	},
-+	.cmd_mcs_pgammactl_2 = 0x01,
-+	.cmd_mcs_gamma_delta_y = {
-+		0x2c, 0x12, 0x0c, 0x0a, 0x10, 0x0e, 0x17, 0x13,
-+		0x1f, 0x1a, 0x2a, 0x24, 0x1f, 0x1b, 0x1a, 0x17,
-+		0x2b, 0x26, 0x22, 0x20, 0x3a, 0x34, 0x30, 0x2c,
-+		0x29, 0x26, 0x25, 0x23, 0x21, 0x20, 0x1e, 0x1e
-+	},
-+	.cmd_mcs_gamma_delta_x = {
-+		0x00, 0x00, 0x11, 0x22, 0x33, 0x44, 0x44, 0x44,
-+		0x55, 0x55, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66
-+	},
-+};
-+
-+static const struct s6e63m0_info samsung_bose_panel_info = {
-+	.flags = S6E63M0_INFO_FLAG_PGAMMACTL | S6E63M0_INFO_FLAG_GAMMA_DELTA,
-+	.timing = {
-+		.pixelclock.typ		= 24000000,
-+		.hactive.typ		= 480,
-+		.hfront_porch.typ	= 16,
-+		.hback_porch.typ	= 14,
-+		.hsync_len.typ		= 2,
-+		.vactive.typ		= 800,
-+		.vfront_porch.typ	= 28,
-+		.vback_porch.typ	= 1,
-+		.vsync_len.typ		= 2,
-+		.flags			= DISPLAY_FLAGS_HSYNC_LOW | DISPLAY_FLAGS_VSYNC_LOW |
-+					  DISPLAY_FLAGS_DE_LOW | DISPLAY_FLAGS_PIXDATA_NEGEDGE,
-+	},
-+	.cmd_mcs_panelctl = {
-+		0x01,	/* DOCT */	0x27,	/* CLWEA */
-+		0x27,	/* CLWEB*/	0x07,	/* CLTE */
-+		0x07,	/* SHE */	0x54,	/* FLTE */
-+		0x9F,	/* FLWE */	0x63,	/* SCTE */
-+		0x86,	/* SCWE */	0x1A,	/* INTE */
-+		0x33,	/* INWE */	0x0D,	/* EMPS */
-+		0x00,	/* E_INTE */	0x00	/* E_INWE */
-+	},
-+	.cmd_mcs_pgammactl_1 = {
-+		0x02, 0x18, 0x08, 0x24, 0x70, 0x6e, 0x4e, 0xbc,
-+		0xc0, 0xaf, 0xb3, 0xb8, 0xa5, 0xc5, 0xc7, 0xbb,
-+		0x00, 0xb9, 0x00, 0xb8, 0x00, 0xfc
-+	},
-+	.cmd_mcs_pgammactl_2 = 0x03,
-+	.cmd_mcs_gamma_delta_y = {
-+		0x2c, 0x12, 0x0c, 0x0a, 0x10, 0x0e, 0x17, 0x13,
-+		0x1f, 0x1a, 0x2a, 0x24, 0x1f, 0x1b, 0x1a, 0x17,
-+		0x2b, 0x26, 0x22, 0x20, 0x3a, 0x34, 0x30, 0x2c,
-+		0x29, 0x26, 0x25, 0x23, 0x21, 0x20, 0x1e, 0x1e
-+	},
-+	.cmd_mcs_gamma_delta_x = {
-+		0x00, 0x00, 0x11, 0x22, 0x33, 0x44, 0x44, 0x44,
-+		0x55, 0x55, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66
-+	},
-+};
-+
-+static int s6e63m0_dcs_write(struct udevice *dev, u8 cmd, const u8 *seq, size_t len)
++static int cmc623_attach(struct udevice *dev)
 +{
++	struct cmc623_priv *priv = dev_get_priv(dev);
 +	int ret;
-+	u8 data[2];
-+	int i;
 +
-+	data[0] = S6E63M0_DCS_CMD;
-+	data[1] = cmd;
-+
-+	ret = dm_spi_xfer(dev, 9, &data, NULL, SPI_XFER_ONCE);
++	/* Perform panel setup */
++	ret = panel_enable_backlight(priv->panel);
 +	if (ret)
 +		return ret;
 +
-+	for (i = 0; i < len; i++) {
-+		data[0] = S6E63M0_DCS_DATA;
-+		data[1] = seq[i];
++	return 0;
++}
 +
-+		ret = dm_spi_xfer(dev, 9, &data, NULL, SPI_XFER_ONCE);
-+		if (ret)
-+			return ret;
-+	}
++static int cmc623_set_backlight(struct udevice *dev, int percent)
++{
++	struct cmc623_priv *priv = dev_get_priv(dev);
++
++	return panel_set_backlight(priv->panel, percent);
++}
++
++static int cmc623_panel_timings(struct udevice *dev, struct display_timing *timing)
++{
++	struct cmc623_priv *priv = dev_get_priv(dev);
++
++	memcpy(timing, &priv->timing, sizeof(*timing));
 +
 +	return 0;
 +}
 +
-+#define s6e63m0_dcs_write_seq_static(dev, cmd, seq ...) ({	\
-+	static const u8 d[] = { seq };				\
-+	ret = s6e63m0_dcs_write(dev, cmd, d, ARRAY_SIZE(d));	\
-+	if (ret)						\
-+		return ret;					\
-+})
-+
-+static int s6e63m0_enable_backlight(struct udevice *dev)
++static int cmc623_hw_init(struct udevice *dev)
 +{
-+	struct s6e63m0_priv *priv = dev_get_priv(dev);
-+	struct s6e63m0_info *info = priv->info;
-+	u8 cmd_mcs_ifctl[MCS_IFCTL_LEN];
-+	int ret;
++	struct cmc623_priv *priv = dev_get_priv(dev);
++	struct video_bridge_priv *uc_priv = dev_get_uclass_priv(dev);
++	int i, ret;
 +
-+	ret = s6e63m0_dcs_write(dev, MCS_PANELCTL, info->cmd_mcs_panelctl, MCS_PANELCTL_LEN);
-+	if (ret)
-+		return ret;
-+
-+	s6e63m0_dcs_write_seq_static(dev, MCS_DISCTL,
-+				     0x02,	/* Number of Line */
-+				     0x03,	/* VBP */
-+				     0x1c,	/* VFP */
-+				     0x10,	/* HBP */
-+				     0x10);	/* HFP */
-+
-+	cmd_mcs_ifctl[0] = priv->gtcon;	/* GTCON */
-+	cmd_mcs_ifctl[1] = 0x00;	/* Display Mode */
-+	cmd_mcs_ifctl[2] = 0x00;	/* Vsync/Hsync, DOCCLK, RGB mode */
-+	ret = s6e63m0_dcs_write(dev, MCS_IFCTL, cmd_mcs_ifctl, MCS_IFCTL_LEN);
-+	if (ret)
-+		return ret;
-+
-+	if (info->flags & S6E63M0_INFO_FLAG_PGAMMACTL) {
-+		ret = s6e63m0_dcs_write(dev, MCS_PGAMMACTL, info->cmd_mcs_pgammactl_1,
-+					MCS_PGAMMACTL_LEN);
-+		if (ret)
++	/* enable supplies */
++	for (i = 0; i < ARRAY_SIZE(cmc623_supplies); i++) {
++		ret = regulator_set_enable_if_allowed(priv->supplies[i], 1);
++		if (ret) {
++			log_debug("%s: cannot enable %s %d\n", __func__,
++				  cmc623_supplies[i], ret);
 +			return ret;
-+
-+		s6e63m0_dcs_write(dev, MCS_PGAMMACTL, &info->cmd_mcs_pgammactl_2, 1);
++		}
 +	}
 +
-+	s6e63m0_dcs_write_seq_static(dev, MCS_SRCCTL, 0x00, 0x8e, 0x07);
-+	s6e63m0_dcs_write_seq_static(dev, MCS_PENTILE_1, 0x6c);
++	mdelay(10);
 +
-+	if (info->flags & S6E63M0_INFO_FLAG_GAMMA_DELTA) {
-+		ret = s6e63m0_dcs_write(dev, MCS_GAMMA_DELTA_Y_RED, info->cmd_mcs_gamma_delta_y,
-+					MCS_GAMMA_DELTA_Y_LEN);
-+		if (ret)
-+			return ret;
-+
-+		ret = s6e63m0_dcs_write(dev, MCS_GAMMA_DELTA_X_RED, info->cmd_mcs_gamma_delta_x,
-+					MCS_GAMMA_DELTA_X_LEN);
-+		if (ret)
-+			return ret;
-+
-+		ret = s6e63m0_dcs_write(dev, MCS_GAMMA_DELTA_Y_GREEN, info->cmd_mcs_gamma_delta_y,
-+					MCS_GAMMA_DELTA_Y_LEN);
-+		if (ret)
-+			return ret;
-+
-+		ret = s6e63m0_dcs_write(dev, MCS_GAMMA_DELTA_X_GREEN, info->cmd_mcs_gamma_delta_x,
-+					MCS_GAMMA_DELTA_X_LEN);
-+		if (ret)
-+			return ret;
-+
-+		ret = s6e63m0_dcs_write(dev, MCS_GAMMA_DELTA_Y_BLUE, info->cmd_mcs_gamma_delta_y,
-+					MCS_GAMMA_DELTA_Y_LEN);
-+		if (ret)
-+			return ret;
-+
-+		ret = s6e63m0_dcs_write(dev, MCS_GAMMA_DELTA_X_BLUE, info->cmd_mcs_gamma_delta_x,
-+					MCS_GAMMA_DELTA_X_LEN);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	s6e63m0_dcs_write_seq_static(dev, MIPI_DCS_EXIT_SLEEP_MODE);
-+	s6e63m0_dcs_write_seq_static(dev, MIPI_DCS_SET_DISPLAY_ON);
-+
-+	return 0;
-+}
-+
-+static int s6e63m0_set_backlight(struct udevice *dev, int percent)
-+{
-+	return 0;
-+}
-+
-+static int s6e63m0_get_display_timing(struct udevice *dev, struct display_timing *timing)
-+{
-+	struct s6e63m0_priv *priv = dev_get_priv(dev);
-+
-+	memcpy(timing, &priv->info->timing, sizeof(*timing));
-+
-+	return 0;
-+}
-+
-+static int s6e63m0_of_to_plat(struct udevice *dev)
-+{
-+	struct s6e63m0_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = device_get_supply_regulator(dev, "vdd3-supply", &priv->vdd3);
++	ret = dm_gpio_set_value(&uc_priv->reset, 1);
 +	if (ret) {
-+		log_debug("%s: cannot get vdd3-supply: ret = %d\n",
-+			  __func__, ret);
++		log_debug("%s: error at reset = 1 (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	ret = device_get_supply_regulator(dev, "vci-supply", &priv->vci);
++	ret = dm_gpio_set_value(&priv->enable_gpio, 0);
 +	if (ret) {
-+		log_debug("%s: cannot get vci-supply: ret = %d\n",
-+			  __func__, ret);
++		log_debug("%s: error at enable = 0 (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	ret = gpio_request_by_name(dev, "reset-gpios", 0,
-+				   &priv->reset_gpio, GPIOD_IS_OUT);
++	ret = dm_gpio_set_value(&priv->bypass_gpio, 0);
 +	if (ret) {
-+		log_debug("%s: cannot decode reset-gpios (%d)\n",
-+			  __func__, ret);
++		log_debug("%s: error at bypass = 0 (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	if (dev_read_bool(dev, "flip-horizontal"))
-+		priv->gtcon |= S6E63M0_GTCON_FLAG_FLIP_H;
-+
-+	if (dev_read_bool(dev, "flip-vertical"))
-+		priv->gtcon |= S6E63M0_GTCON_FLAG_FLIP_V;
-+
-+	return 0;
-+}
-+
-+static int s6e63m0_hw_init(struct udevice *dev)
-+{
-+	struct s6e63m0_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 1);
++	ret = dm_gpio_set_value(&uc_priv->sleep, 0);
 +	if (ret) {
-+		log_debug("%s: error entering reset (%d)\n", __func__, ret);
++		log_debug("%s: error at sleep = 0 (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	ret = regulator_set_enable_if_allowed(priv->vdd3, 1);
++	udelay(2000);
++
++	ret = dm_gpio_set_value(&priv->enable_gpio, 1);
 +	if (ret) {
-+		log_debug("%s: enabling vdd3-supply failed (%d)\n",
-+			  __func__, ret);
++		log_debug("%s: error at enable = 1 (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	mdelay(1);
++	udelay(2000);
 +
-+	ret = regulator_set_enable_if_allowed(priv->vci, 1);
++	ret = dm_gpio_set_value(&priv->bypass_gpio, 1);
 +	if (ret) {
-+		log_debug("%s: enabling vci-supply failed (%d)\n",
-+			  __func__, ret);
++		log_debug("%s: error at bypass = 1 (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	mdelay(26);
++	udelay(2000);
 +
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 0);
++	ret = dm_gpio_set_value(&uc_priv->sleep, 1);
 +	if (ret) {
-+		log_debug("%s: error exiting reset (%d)\n", __func__, ret);
++		log_debug("%s: error at sleep = 1 (%d)\n", __func__, ret);
++		return ret;
++	}
++
++	udelay(2000);
++
++	ret = dm_gpio_set_value(&uc_priv->reset, 0);
++	if (ret) {
++		log_debug("%s: error at sleep = 0 (%d)\n", __func__, ret);
++		return ret;
++	}
++
++	mdelay(10);
++
++	ret = dm_gpio_set_value(&uc_priv->reset, 1);
++	if (ret) {
++		log_debug("%s: error at sleep = 1 (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
@@ -472,52 +272,89 @@ index 00000000000..7497fc0f53a
 +	return 0;
 +}
 +
-+static int s6e63m0_probe(struct udevice *dev)
++static int cmc623_get_panel(struct udevice *dev)
 +{
-+	struct s6e63m0_priv *priv = dev_get_priv(dev);
-+	struct spi_slave *slave = dev_get_parent_priv(dev);
-+	int ret;
++	struct cmc623_priv *priv = dev_get_priv(dev);
++	int i, ret;
 +
-+	if (device_get_uclass_id(dev->parent) != UCLASS_SPI)
-+		return -EPROTONOSUPPORT;
++	u32 num = ofnode_graph_get_port_count(dev_ofnode(dev));
 +
-+	ret = spi_claim_bus(slave);
++	for (i = 0; i < num; i++) {
++		ofnode remote = ofnode_graph_get_remote_node(dev_ofnode(dev), i, -1);
++
++		ret = uclass_get_device_by_ofnode(UCLASS_PANEL, remote, &priv->panel);
++		if (!ret)
++			return 0;
++	}
++
++	/* If this point is reached, no panels were found */
++	return -ENODEV;
++}
++
++static int cmc623_probe(struct udevice *dev)
++{
++	struct cmc623_priv *priv = dev_get_priv(dev);
++	int i, ret;
++
++	/* get supplies */
++	for (i = 0; i < ARRAY_SIZE(cmc623_supplies); i++) {
++		ret = device_get_supply_regulator(dev, cmc623_supplies[i], &priv->supplies[i]);
++		if (ret) {
++			log_debug("%s: cannot get %s %d\n", __func__, cmc623_supplies[i], ret);
++			if (ret != -ENOENT)
++				return log_ret(ret);
++		}
++	}
++
++	/* get control gpios */
++	ret = gpio_request_by_name(dev, "enable-gpios", 0, &priv->enable_gpio, GPIOD_IS_OUT);
 +	if (ret) {
-+		log_err("SPI bus allocation failed (%d)\n", ret);
++		log_debug("%s: could not get enable-gpios (%d)\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	priv->info = (struct s6e63m0_info *)dev_get_driver_data(dev);
++	ret = gpio_request_by_name(dev, "bypass-gpios", 0, &priv->bypass_gpio, GPIOD_IS_OUT);
++	if (ret) {
++		log_debug("%s: could not get bypass-gpios (%d)\n", __func__, ret);
++		return ret;
++	}
 +
-+	return s6e63m0_hw_init(dev);
++	ret = cmc623_hw_init(dev);
++	if (ret) {
++		log_debug("%s: error doing hw init, ret %d\n", __func__, ret);
++		return ret;
++	}
++
++	ret = cmc623_get_panel(dev);
++	if (ret) {
++		log_debug("%s: panel not found, ret %d\n", __func__, ret);
++		return ret;
++	}
++
++	panel_get_display_timing(priv->panel, &priv->timing);
++
++	return 0;
 +}
 +
-+static const struct panel_ops s6e63m0_ops = {
-+	.enable_backlight	= s6e63m0_enable_backlight,
-+	.set_backlight		= s6e63m0_set_backlight,
-+	.get_display_timing	= s6e63m0_get_display_timing,
++static const struct video_bridge_ops cmc623_ops = {
++	.attach			= cmc623_attach,
++	.set_backlight		= cmc623_set_backlight,
++	.get_display_timing	= cmc623_panel_timings,
 +};
 +
-+static const struct udevice_id s6e63m0_ids[] = {
-+	{
-+		.compatible = "samsung,s6e63m0",
-+		.data = (ulong)&s6e63m0_generic_info
-+	},
-+	{
-+		.compatible = "samsung,bose-panel",
-+		.data = (ulong)&samsung_bose_panel_info
-+	},
++static const struct udevice_id cmc623_ids[] = {
++	{ .compatible = "samsung,cmc623" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(samsung_s6e63m0) = {
-+	.name		= "samsung_s6e63m0",
-+	.id		= UCLASS_PANEL,
-+	.of_match	= s6e63m0_ids,
-+	.ops		= &s6e63m0_ops,
-+	.of_to_plat	= s6e63m0_of_to_plat,
-+	.probe		= s6e63m0_probe,
-+	.priv_auto	= sizeof(struct s6e63m0_priv),
++U_BOOT_DRIVER(samsung_cmc623) = {
++	.name		= "samsung_cmc623",
++	.id		= UCLASS_VIDEO_BRIDGE,
++	.of_match	= cmc623_ids,
++	.ops		= &cmc623_ops,
++	.bind		= dm_scan_fdt_dev,
++	.probe		= cmc623_probe,
++	.priv_auto	= sizeof(struct cmc623_priv),
 +};
 -- 
 2.50.0
