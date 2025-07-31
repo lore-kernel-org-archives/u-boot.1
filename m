@@ -4,120 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96153C87FD2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 21:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED01AC87FCA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 21:48:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2813883946;
-	Thu, 31 Jul 2025 23:40:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2BC5783946;
+	Thu, 31 Jul 2025 23:48:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uMu5O5UQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="gcJX+VDD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F10083948; Thu, 31 Jul 2025 23:40:33 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 7D25283952; Thu, 31 Jul 2025 23:48:27 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 150ED835D8
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 23:40:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CD4E8393F
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 23:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-4abd3627e7eso10669161cf.0
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 14:40:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-6197886a6eeso434212eaf.0
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 14:48:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753998029; x=1754602829; darn=lists.denx.de;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1753998503; x=1754603303; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tSGdwXQJhYZoi+51RuIJazFqyqL4ZGY5Khx6wiS4ZFY=;
- b=uMu5O5UQqTxa2gXJxWLnhq2H5xJl1bgCfOIQ8cNrwAxgOqECDMfId3dGhGk464UuL5
- xv0Cgxb7nb+lnXQTNRmYw1O7E9oNvWj3CNLJCRi+AGMhU0ao2zzyo8lhx0Qp4vyOmdm0
- 6OkEHjcgZMcA0r4eYW18ok0Hk07fsZknPqHb4CvHJCjY8ov3AuPYxiUpdBfqxQyjtqzV
- pemB8undrfd7eOUdyPOqHiwmQHEljcQU/vfZBldvfz72w/Wa+0EHP+mRdTtekwgwzQHp
- 7zYGr3OAeazbdHTS19fTl8CA/lrKReA1cGcFUoB9olRhG+A8ydoOwE0zENt46ArD/Fz5
- 15iQ==
+ bh=gnsG7U5m+1ePcVNwQR85n1ZqpzZsZFLr11kX6UfJP1U=;
+ b=gcJX+VDDoFzzSc5dar2I35Oi9/UDVJ9TaJeAIxlC5Ej+UX+5IEbDObpOaMXBqV81/N
+ QJowLB2KNpTcuj/en1wTQlWxXDIVbMdrEeQCPQ/eeIklUuAmWR4m3P9F9iJyLHbHgErf
+ EfOsaIBl7NlAK/kDyLRe1vSanmzZqCQUJFl1C7FF/Y6lWInOQv6HH8hHKfv6j1XIv61N
+ RjY4A7rv7oOmVOZ/VVejRNVwqeSjjab+SHDEKZRrbLhYBslvK0xxMsulabNR0kVJrCDa
+ SUKhLANOsCaMCVjWPN9mF5rpamPRZAKLadyJcG4FhHlQIibPHjdN1TSHjj3slm2ZgHWV
+ kSrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753998029; x=1754602829;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=tSGdwXQJhYZoi+51RuIJazFqyqL4ZGY5Khx6wiS4ZFY=;
- b=tsgMWLpiWQwtES9FWpRvizd/mM0XYmDPwlIgjFOwxH1pfKfdnAyvwXgsPShnNkeGpF
- 5veGDLSLQt98uG3P1XdtyY6dgG4KLdmKMnK2YJtPGcAafVc8xlOeK1v7T/s35o0QuCVC
- D1Gx5JBz1ZBtkl/3PNgQJiRaCZnVSfKCRkvrRjD63NsyZTIgovQmECVRoYevUxAs/43r
- W/lUHFcakpvAcuGcbB6mjCsR3njeWOHQW1WQbE8eOFFA2/CE3l9OkggzVKXPB9sQaMC6
- MTkFo3f7IQBgmhefboCmRYipniNcEAiGucXqu7wZqSt6k6qZ6zjrNTeJKUagVXSr6PAo
- IaUg==
-X-Gm-Message-State: AOJu0YxTNlSi3T0+B08xmJ5x71mh4Go+pvj/0NYV1Zwhs3p+gmxL2SPM
- RPPBRveSpKyykfrRUA2L6KhJPx68U4onbQcBSYCyeDGVy9I2clZbhwSj106414du2anrXUkC9S2
- jVenG
-X-Gm-Gg: ASbGnctu2llbf76lTjxkfVzAecbgVGKqfQFAsPnFKhEa6x/u5NAY/7D1h3kgrpZ7TR8
- n8ec4ekaW+YvSqNFUlsWOtwKzbVvngWwMo5Q4oeQAVFaqtpw9Q/p3sIc1rrX5eIHOTdGzKixR9+
- fyTwoH5nfVTVLST94gU0GYL2ekYtYaNZr8Kguftq7C7zlud3rFFcBr3+wOJvWr1qUV1894bMMuu
- jW6cnZbLIBlD6vn60Hk7vqO4re5QeED/TiS5GYAYtddrOR3VJ3uvN8/TjqrANhdCklauwGr9fUX
- z4cNyzcsXHnHIMYApPShxt455wA4jvKctkVOS+8e+Fw51PRy/tS5aqdoi5LFLG8Fki7H3Ln8tON
- /vbMxs63xuMmOIjoKg01jgbAZPZqVVllGJ72RiLpCn0ug3E00HgWLb4+xVa50x+0d3J/MLUycfu
- FSxOXczaR/1RwKRQ==
-X-Google-Smtp-Source: AGHT+IEcad936JPLChXsYaLCqDXTSRUqg5Yk+G7jAAJyO4asQztxhFwaNroost8UauO/vOrzKfz1xQ==
-X-Received: by 2002:a05:622a:110f:b0:4ae:f6eb:fb9a with SMTP id
- d75a77b69052e-4af00931750mr3280161cf.49.1753998028630; 
- Thu, 31 Jul 2025 14:40:28 -0700 (PDT)
-Received: from fauth-a2-smtp.messagingengine.com
- (fauth-a2-smtp.messagingengine.com. [103.168.172.201])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4aeeebdcfb7sm13426281cf.13.2025.07.31.14.40.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 14:40:28 -0700 (PDT)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfauth.phl.internal (Postfix) with ESMTP id F1D41F40067;
- Thu, 31 Jul 2025 17:40:27 -0400 (EDT)
-Received: from phl-imap-07 ([10.202.2.97])
- by phl-compute-05.internal (MEProxy); Thu, 31 Jul 2025 17:40:27 -0400
-X-ME-Sender: <xms:y-KLaJV4_TmExuj8ZXpshjXad0jXv8zdCWUTBRfdfB9muX8_6NobaA>
- <xme:y-KLaJlRlBIAf1AHVY77PNWkhHWff4_YGUYwCXWLiw94TlSI3odjRXpBcdM7bG9hQ
- Tt0T8xLVVzRtMeeJDY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgddutdduledvucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
- gurhepofggfffhvfevkfgjfhfutgfgsehtqhertdertdejnecuhfhrohhmpedflfgrvhhi
- vghrucfvihgrfdcuoehjrghvihgvrhdrthhirgeslhhinhgrrhhordhorhhgqeenucggtf
- frrghtthgvrhhnpefhfeetvdfhgfeifeeuudefudeuvdfhueehteeftddvkeehtdetveei
- gfekhedtkeenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuih
- iivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhgrvhhivghrodhmvghsmhhtphgr
- uhhthhhpvghrshhonhgrlhhithihqdduhedvkeekleehkeefqdefudefieegvdeliedqjh
- grvhhivghrrdhtihgrpeeplhhinhgrrhhordhorhhgsehjvghtmhdrmhgvpdhnsggprhgt
- phhtthhopeegpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeighihprhhonhdrgh
- hlphhksehgmhigrdguvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtgho
- mhdprhgtphhtthhopehilhhirghsrdgrphgrlhhoughimhgrsheslhhinhgrrhhordhorh
- hgpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
-X-ME-Proxy: <xmx:y-KLaCf87dFW5y2fJLf5mqnyzgqREvjVlzGvlWkdfY5LEgm05OkS0Q>
- <xmx:y-KLaFqcFCZLVy-OPzQwTklF8Bmt3kFLovyq-NJ5h3yf9A_xVYOeyg>
- <xmx:y-KLaDG8zTip5bZhs_Gb1hnOGY8R1M6XtzksvMf32o9lkJ_znZODuw>
- <xmx:y-KLaFs6xIkP-JQ4vQ9w7OklEoPyFEoSy4YN1ifQPhAfOAL1byEZfg>
- <xmx:y-KLaFWBC8a2gIYJ7imiKfA9IpPHArmiGFU25vjlHwlAo9fcOfgGyfjK>
-Feedback-ID: idd3648b2:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id C9C591EA0068; Thu, 31 Jul 2025 17:40:27 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ d=1e100.net; s=20230601; t=1753998503; x=1754603303;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gnsG7U5m+1ePcVNwQR85n1ZqpzZsZFLr11kX6UfJP1U=;
+ b=bFEkxBY357PNPTC1MEMJfUtBsqv9OtRAW1xBmDLhIOlbtQhWIpClgR0nbTw0E3qLJw
+ p29RzekXEILBERFAFi+HDSIab9Dj6SqkC6K5AVhoBTlDv+r45eZFUh3Jo4xe6lhCwwDb
+ Dk31Oe1T8m6jYV8kt1fi3CJQsN+hfWrDvhaJfVZ59AmzyIxzIZfiVUJ2RSurJpIys/xJ
+ JTPOR1YyRn2ZCI/y3izYyOj+DqpUKq/4cCIlAbtfZbFFoQDsUBp7RbLVowDJsAid67UR
+ n3pa/2az+t2+omhVS3hRYcMuvQFQ6beHoXAdLLN7DOOm4k3b49dqgeyPjnK+2F93f50h
+ 9ngA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfdvQxAaUSE6IgY4KvEOnI1Q4O04MmeRnQCsuIyLGvDZp0PaXvuzX1o4zTwbWi5y08Oti4ap8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx02oFqsBDY6LqB47sR82xSeTLA59a6TSq0IykfLbURnXXQ1Pky
+ g+MMJMHxZ/Xu4MnBhiNj0JmfIAREcfeK4n9FHfTrgW1JFcrort28LLPugrlv5+ziThECdB+/gUV
+ zsNeg413LzdQsLhZsevypABf27aKuSoQAdscj+dATFQ==
+X-Gm-Gg: ASbGncvALR8cxicZJPX3Sv12nh0nWwaD0JIGlzhmJD+M8K8Bff2BE4frNvf7BkBtT8W
+ fmSxjD1dmNw/6wZdPjJfzhd/oS2L47ST5+hyAryLFf+kq+HT/mCCEdJrPAOuSsUs1XHXkAHhyv+
+ Gb2B07VfNuxSe9quN0OGX/7J53DJqd/Jqk62oET2O47dfFBMdxybvVZY5ZM2t6r7t6ty+8qqRUl
+ HCMt+o=
+X-Google-Smtp-Source: AGHT+IGW00SAn7Ud1NEA5cNwf2jf96MTsxvgV+BGdrFSnjUPwsDN23250iJx4fem+BYr10smuu+zOQ7vibMATzc75Y0=
+X-Received: by 2002:a05:6820:2d08:b0:611:3e54:8d0a with SMTP id
+ 006d021491bc7-6197060910bmr2663797eaf.1.1753998503319; Thu, 31 Jul 2025
+ 14:48:23 -0700 (PDT)
 MIME-Version: 1.0
-X-ThreadId: AQY6sa-VJDp3
-Date: Thu, 31 Jul 2025 15:40:07 -0600
-From: "Javier Tia" <javier.tia@linaro.org>
-To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, "Tom Rini" <trini@konsulko.com>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Message-Id: <a67d755e-bc50-426e-a570-9ff8da84f78b@app.fastmail.com>
-In-Reply-To: <d151f1a5-40de-4084-9a0d-e2727d65e97c@gmx.de>
-References: <20250730224942.755510-1-javier.tia@linaro.org>
- <d151f1a5-40de-4084-9a0d-e2727d65e97c@gmx.de>
-Subject: Re: [PATCH] disk: efi_loader: Add function to detect disk image type
-Content-Type: text/plain; charset=utf-8
+References: <20250708-imx95b0-v1-0-01759e9c855f@oss.nxp.com>
+ <CAJ+vNU2G=CMiHc4mU4fjQEz7zwjvx_EuiWWQo8MBVHGJdmTarA@mail.gmail.com>
+ <PAXPR04MB9644BC97420DB4E3D877C2E2E225A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <CAJ+vNU1asw79GMnsTxNevg+xRo-1SQ9j_f+4e-TEy4TPZ+Qt+Q@mail.gmail.com>
+ <PAXPR04MB9644E7123DD43D118AF21CA9E227A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB9644E7123DD43D118AF21CA9E227A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 31 Jul 2025 14:48:12 -0700
+X-Gm-Features: Ac12FXyE8O8I53BIPKAxZIwfiKV09FB8ZK4Lyw-FmvLbytpG1E4ILX3ZYlaiOHA
+Message-ID: <CAJ+vNU0fu3WdLjrFKh++SZGFdZ7J4hvWUH_jpJH99LMXk9G+fA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] imx: add i.MX95 b0 support
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Alice Guo <alice.guo@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -135,198 +103,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Thu, Jul 31, 2025, at 8:05 AM, Heinrich Schuchardt wrote:
-> On 31.07.25 00:49, Javier Tia wrote:
->> This commit introduces a new function, detect_disk_image_type(), which
->> checks if a buffer contains a disk image. This function is used to
->> detect disk images based on their headers, rather than relying on file
->> extensions.
->>=20
->> The function checks for ISO 9660, DOS MBR, and GPT protective MBR
->> signatures. It returns 1 if a disk image is detected, and 0 otherwise.
->>=20
->> This function is then used in the efi_bootmgr.c file to determine if a
->> downloaded file is a PE-COFF image or a disk image. This change
->> improves the reliability of disk image detection, as it no longer
->> relies on file extensions, which can be easily changed or omitted.
->>=20
->> Signed-off-by: Javier Tia <javier.tia@linaro.org>
+On Thu, Jul 31, 2025 at 2:32=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
 >
-> It would be easier to use efi_check_pe() to identify if the downloaded=20
-> file is a PE-COFF image. Otherwise try booting it as a disk image.
+> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Tim Harvey <tharvey@gateworks.com>
+> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B47=E6=9C=8830=E6=97=
+=A5 0:03
+> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>; P=
+eng Fan
+> > <peng.fan@nxp.com>; Ye Li <ye.li@nxp.com>
+> > =E6=8A=84=E9=80=81: Stefano Babic <sbabic@nabladev.com>; Fabio Estevam
+> > <festevam@gmail.com>; dl-uboot-imx <uboot-imx@nxp.com>; Tom Rini
+> > <trini@konsulko.com>; u-boot@lists.denx.de; Alice Guo <alice.guo@nxp.co=
+m>;
+> > Jacky Bai <ping.bai@nxp.com>
+> > =E4=B8=BB=E9=A2=98: Re: [PATCH v2 0/4] imx: add i.MX95 b0 support
+> >
+> > On Mon, Jul 28, 2025 at 7:21=E2=80=AFPM Alice Guo (OSS) <alice.guo@oss.=
+nxp.com>
+> > wrote:
+> > >
+> > > Hi Tim,
+> > >
+> >
+> > Hi Alice,
+> >
+> > Please stop top-posting in replies - It forces users to read the mail i=
+n a
+> > backwards order to properly understand, content gets lost and out of or=
+der and
+> > threads get broken.
+> >
+> > > A0 has been dropped.
+> >
+> > This is unacceptable. Had I known this series was doing this I would ha=
+ve NAK'd
+> > it. There was no mention in the commit log that this would drop support=
+ for A0.
+> > There are many vendors like myself who have A0 silicon evk's that will =
+likely
+> > never get upgraded and should not become bricks.
+> >
+> > We need to at least know how to get back to working boot firmware for A=
+0. I
+> > would be fine if there was just a Kconfig to select A0.
+> >
+> > >
+> > > Please use mx95a0-ahab-container.img and the older imx-oei, and then =
+you
+> > can check if this change needs to be added.
+> >
+> > Yes, I tried mx95a0-ahab-container.img but I think you need to be more =
+specific
+> > with the 'older imx-oei' - there are obviously patches in the OEI's tha=
+t also drop
+> > support for A0. Regardless, I've gone back to the OEI that I was using =
+previously
+> > (lf-6.6.52-2.2.0) and I'm still not booting and reverting commit 993672=
+4aa9b
+> > ("imx95_evk: Add i.MX95 B0
+> > support") didn't get me booting either. I'm still trying to figure it o=
+ut.
 >
-> You could use part_driver_lookup_type() to determine the partition typ=
-e.
+> git clone -b master https://github.com/nxp-imx/imx-oei.git
+> cd imx-oei
+> make board=3Dmx95lp5 oei=3Dddr DEBUG=3D1 r=3DA0 DDR_CONFIG=3DXIMX95LPD5EV=
+K19_6400mbps_train_timing_a1
+> make board=3Dmx95lp5 oei=3Dtcm DEBUG=3D1 r=3DA0 DDR_CONFIG=3DXIMX95LPD5EV=
+K19_6400mbps_train_timing_a1
 
-I have addressed your comments in the next patch: https://lore.kernel.or=
-g/u-boot/20250731213547.654823-1-javier.tia@linaro.org/T/#u.
+Hi Alice,
 
-Thanks.
+Thanks - its good to know the OEI didn't drop support and also good to
+understand something changed with the DDR configs. Note the tcm
+doesn't use DDR_CONFIG so that can be dropped.
 
-> Best regards
->
-> Heinrich
->
->> ---
->>   disk/part.c                  | 46 +++++++++++++++++++++++++++++++++=
-+++
->>   include/part.h               |  9 +++++++
->>   lib/efi_loader/efi_bootmgr.c | 29 ++++++++++-------------
->>   3 files changed, 68 insertions(+), 16 deletions(-)
->>=20
->> diff --git a/disk/part.c b/disk/part.c
->> index 66e2b3a7219..9d9483b216c 100644
->> --- a/disk/part.c
->> +++ b/disk/part.c
->> @@ -855,3 +855,49 @@ int part_get_bootable(struct blk_desc *desc)
->>  =20
->>   	return 0;
->>   }
->> +
->> +/**
->> +* detect_disk_image_type() - Detect if buffer contains a disk image
->> +*
->> +* @buffer:  Buffer containing potential disk image data
->> +* @size:    Size of the buffer
->> +* Return:   1 if disk image detected, 0 otherwise
->> +*/
->> +int detect_disk_image_type(void *buffer, size_t size)
->> +{
->> +	unsigned char *buf =3D (unsigned char *)buffer;
->> +
->> +	/* Need at least 512 bytes for basic checks */
->> +	if (!buffer || size < 512)
->> +		return 0;
->> +
->> +#if IS_ENABLED(CONFIG_ISO_PARTITION)
->> +	/* Check for ISO 9660 signature "CD001" at offset 0x8001 */
->> +	if (size > 0x8005) {
->> +		if (buf[0x8001] =3D=3D 'C' && buf[0x8002] =3D=3D 'D' &&
->> +		    buf[0x8003] =3D=3D '0' && buf[0x8004] =3D=3D '0' &&
->> +		    buf[0x8005] =3D=3D '1') {
->> +			return 1;
->> +		}
->> +	}
->> +#endif
->> +
->> +#if IS_ENABLED(CONFIG_DOS_PARTITION)
->> +	/* Check for DOS MBR signature 0x55AA at offset 0x1FE */
->> +	if (buf[0x1FE] =3D=3D 0x55 && buf[0x1FF] =3D=3D 0xAA) {
->> +		return 1;
->> +	}
->> +#endif
->> +
->> +#if IS_ENABLED(CONFIG_EFI_PARTITION)
->> +	/* Check for GPT protective MBR */
->> +	if (buf[0x1FE] =3D=3D 0x55 && buf[0x1FF] =3D=3D 0xAA) {
->> +		/* Check if partition type is 0xEE (GPT protective) */
->> +		if (buf[0x1C2] =3D=3D 0xEE) {
->> +			return 1;
->> +		}
->> +	}
->> +#endif
->> +
->> +	return 0;
->> +}
->> diff --git a/include/part.h b/include/part.h
->> index b772fb34c8a..39c04e0c8f7 100644
->> --- a/include/part.h
->> +++ b/include/part.h
->> @@ -727,6 +727,15 @@ int part_get_type_by_name(const char *name);
->>    */
->>   int part_get_bootable(struct blk_desc *desc);
->>  =20
->> +/**
->> + * detect_disk_image_type() - Detect if buffer contains a disk image
->> + *
->> + * @buffer: Buffer containing potential disk image data
->> + * @size:   Size of the buffer
->> + * Return:  1 if disk image detected, 0 otherwise
->> + */
->> +int detect_disk_image_type(void *buffer, size_t size);
->> +
->>   #else
->>   static inline int part_driver_get_count(void)
->>   { return 0; }
->> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmg=
-r.c
->> index 662993fb809..da63ad41b40 100644
->> --- a/lib/efi_loader/efi_bootmgr.c
->> +++ b/lib/efi_loader/efi_bootmgr.c
->> @@ -17,6 +17,7 @@
->>   #include <log.h>
->>   #include <malloc.h>
->>   #include <net.h>
->> +#include <part.h>
->>   #include <efi_loader.h>
->>   #include <efi_variable.h>
->>   #include <asm/unaligned.h>
->> @@ -407,7 +408,7 @@ static efi_status_t efi_bootmgr_release_uridp(str=
-uct uridp_context *ctx)
->>   	if (!ctx)
->>   		return ret;
->>  =20
->> -	/* cleanup for iso or img image */
->> +	/* cleanup for image file */
->>   	if (ctx->ramdisk_blk_dev) {
->>   		ret =3D efi_add_memory_map(ctx->image_addr, ctx->image_size,
->>   					 EFI_CONVENTIONAL_MEMORY);
->> @@ -466,7 +467,6 @@ static efi_status_t try_load_from_uri_path(struct=
- efi_device_path_uri *uridp,
->>   {
->>   	char *s;
->>   	int err;
->> -	int uri_len;
->>   	efi_status_t ret;
->>   	void *source_buffer;
->>   	efi_uintn_t source_size;
->> @@ -516,21 +516,10 @@ static efi_status_t try_load_from_uri_path(stru=
-ct efi_device_path_uri *uridp,
->>   	image_size =3D ALIGN(image_size, SZ_2M);
->>  =20
->>   	/*
->> -	 * If the file extension is ".iso" or ".img", mount it and try to l=
-oad
->> -	 * the default file.
->> -	 * If the file is PE-COFF image, load the downloaded file.
->> +	 * Check if the downloaded file is a PE-COFF image or a disk image.
->> +	 * Use header-based detection instead of file extensions.
->>   	 */
->> -	uri_len =3D strlen(uridp->uri);
->> -	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
->> -	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
->> -		ret =3D prepare_loaded_image(lo_label, image_addr, image_size,
->> -					   &loaded_dp, &blk);
->> -		if (ret !=3D EFI_SUCCESS)
->> -			goto err;
->> -
->> -		source_buffer =3D NULL;
->> -		source_size =3D 0;
->> -	} else if (efi_check_pe((void *)image_addr, image_size, NULL) =3D=3D=
- EFI_SUCCESS) {
->> +	if (efi_check_pe((void *)image_addr, image_size, NULL) =3D=3D EFI_S=
-UCCESS) {
->>   		/*
->>   		 * loaded_dp must exist until efi application returns,
->>   		 * will be freed in return_to_efibootmgr event callback.
->> @@ -544,6 +533,14 @@ static efi_status_t try_load_from_uri_path(struc=
-t efi_device_path_uri *uridp,
->>  =20
->>   		source_buffer =3D (void *)image_addr;
->>   		source_size =3D image_size;
->> +	} else if (detect_disk_image_type((void *)image_addr, image_size)) {
->> +		ret =3D prepare_loaded_image(lo_label, image_addr, image_size,
->> +					   &loaded_dp, &blk);
->> +		if (ret !=3D EFI_SUCCESS)
->> +			goto err;
->> +
->> +		source_buffer =3D NULL;
->> +		source_size =3D 0;
->>   	} else {
->>   		log_err("Error: file type is not supported\n");
->>   		ret =3D EFI_UNSUPPORTED;
+In order to restore support for IMX95 A0 silicon I also had to revert
+all the changes to the imximage.cfg from commit 9936724aa9b
+("imx95_evk: Add i.MX95 B0 support"):
+diff --git a/arch/arm/mach-imx/imx9/scmi/imximage.cfg
+b/arch/arm/mach-imx/imx9/scmi/imximage.cfg
+index c2c92174c1c..6af1c4ba628 100644
+--- a/arch/arm/mach-imx/imx9/scmi/imximage.cfg
++++ b/arch/arm/mach-imx/imx9/scmi/imximage.cfg
+@@ -3,14 +3,13 @@
+  * Copyright 2025 NXP
+  */
 
---=20
-=C2=BB Javier Tia =E2=9C=8D
+-CNTR_VERSION 2
+ BOOT_FROM SD
+ SOC_TYPE IMX9
+-APPEND mx95b0-ahab-container.img
++APPEND mx95a0-ahab-container.img
+ CONTAINER
+-DUMMY_DDR
+ IMAGE OEI m33-oei-ddrfw.bin 0x1ffc0000
+ HOLD 0x10000
++IMAGE OEI oei-m33-tcm.bin 0x1ffc0000
+ IMAGE M33 m33_image.bin 0x1ffc0000
+ IMAGE A55 spl/u-boot-spl.bin 0x20480000
+ DUMMY_V2X 0x8b000000
+
+So to restore A0 support we need the following:
+- add a IMX95_A0 Kconfig selectable for IMX95
+- use the config in imxiamge.cfg
+- update doc/board/nxp/imx95_evk.rst to show differences in building
+for the various versions of the imx95_evk that are out there (whatever
+they may be)
+imx95_19x19 with A0:
+make -C imx-oei board=3Dmx95lp5 oei=3Dddr DEBUG=3D1 r=3DA0
+DDR_CONFIG=3DXIMX95LPD5EVK19_6400mbps_train_timing_a1
+cp imx-oei/build/mx95lp5/ddr/oei-m33-ddr.bin .
+make -C imx-oei board=3Dmx95lp5 oei=3Dtcm DEBUG=3D1 r=3DA0
+cp imx-oei/build/mx95lp5/tcm/oei-m33-tcm.bin .
+
+Please put this together in a patch that has a fixes tag for commit
+9936724aa9b ("imx95_evk: Add i.MX95 B0 support").
+
+Best Regards,
+
+Tim
