@@ -4,67 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 936B0C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 07:13:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16AEDC83F17
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 07:21:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA8948334A;
-	Thu, 31 Jul 2025 09:13:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E7DF58334A;
+	Thu, 31 Jul 2025 09:21:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IE9qBiJu";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ueFQLcUo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C73E7833C6; Thu, 31 Jul 2025 09:13:51 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17DCC8318E
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:13:48 +0200 (CEST)
+ id 48640833D1; Thu, 31 Jul 2025 09:21:35 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DF5EF8318E
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:21:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V7Dijj2946607;
- Thu, 31 Jul 2025 02:13:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753946024;
- bh=nFrmXVUT+be1IK19r1/mIv+jytoBTYwWOx9fTa/SnfM=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=IE9qBiJuQMRh/5wxC8FFsSdwgwdud3m3SdDerV0m1n53SNMSyEGCEitSLn686sVui
- xR+13TenKUUNPytYAdiQM4qazQOyTQW0fVyK3sR4b/z2T08l+sBvTMW/uu1yHUyCMJ
- sGB5QaWPGNZPZM5AzZuC8DBkhAzZuOmqxgLyOY4M=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V7DiOh3139283
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 31 Jul 2025 02:13:44 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 31
- Jul 2025 02:13:43 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 31 Jul 2025 02:13:43 -0500
-Received: from [172.24.235.200]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V7Dflf2209713;
- Thu, 31 Jul 2025 02:13:42 -0500
-Message-ID: <7195b4ed-541e-4886-8958-b81e5bbeb2cd@ti.com>
-Date: Thu, 31 Jul 2025 12:43:41 +0530
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nlpj31EwPZNrAJ1PQ3HAUvdy0T7IhkyL+L9CfbcU+OlS44fnjl//kGIion9KcLhIMRrNMCcSOjUHPWjPVSVcZgNfpt4HnwH04mQnWAr3Zksp9/ZybuDOUBEl6NECDay32Hf6jdThSCbARMpkPA8w8vEj1mzpWQZh/nWmYRy0iLjKyQnnaW4VeE5E5OFk/jyo3BApgjOvO6T7uiYWAzNLY2i56RlAzyKLRetbHqNTmvD7mVmjWEtXB4UNL7Ta+4noMwETp5rUppjvhDSNxWfwOYw+KZRqcX1qtCYVquSa/DoRXD4ApL3kfBIMFXodF7O3GEpzFWW0ovi3yUcAQtaDKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tZ7ON+BdOknah4ZQB15svoO92IOuDc9wUBcq4IyM5K4=;
+ b=Xo3rASq2rq5HC0DBk5QQmJotCsVEadkCRAVus9qoKTUeoyRpyMBPZEPrI7ZjLn+xF8bsg8iLSR2IPAHahvfSD6rgROxLV/IgjZm8vTu4RF3Bedf+fUePmqsNNwvF4UKpWGwV4fa5xH2ywWlbHtgYnk2ah+1++BY8MJEvdmfKBIDZckHjf8eTwAoV/h/3rSQ+kmcm7OEL8XviFqjrZL77wFBcpnYiQtRaM2K63VtS58NzIacIriHAnHG0hqbLMAzWDTXYul+pz7/whe3gR/Gg5D4KKNzJjZHJhCgj+Q3LtT4V+0R5Lwu8WMSkxASUl5X5P8HY1SW+FjTZQTfXPoQwng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tZ7ON+BdOknah4ZQB15svoO92IOuDc9wUBcq4IyM5K4=;
+ b=ueFQLcUoHeoKkAKHdBkhwuY5GzNMxP2m6NCqAjNeWvbVSjgQihquHTl2k27+tK8gCwdbd/FICOO6qDKLMnzLaULvSEGA5O7pXJKncPl0oP2IYGtnIndbuIKhHRflHoDvSIMlB5ykr0TOpY6qsj69gAdzpfh7zwbqzuZ4XhdUqg/5WRGGj3kPay9Pdjg8DP/W9uvrjSEVnCT+iNEPLIySygn938nzoxnVEfY7jq4W07wBcWZrGoxkryhGWo+dLL65fse9sbNl+1IF+ezk0Jx7MxM+WlNfEccFrxoKpTejTMLqtI6Dhh4zIWnFp3mRAs80DTK0auwkkwNaSJEIv7dZ1w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS4PR04MB9574.eurprd04.prod.outlook.com (2603:10a6:20b:4fc::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.13; Thu, 31 Jul
+ 2025 07:21:29 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8989.013; Thu, 31 Jul 2025
+ 07:21:28 +0000
+Date: Thu, 31 Jul 2025 16:32:12 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Peng Fan <peng.fan@nxp.com>, Viorel Suman <viorel.suman@nxp.com>,
+ Tom Zheng <haidong.zheng@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Florin Pavelescu <florin.pavelescu@nxp.com>
+Subject: Re: [PATCH 9/9] ddr: imx9: Add errata registers support
+Message-ID: <20250731083212.GB329@nxa18884-linux.ap.freescale.net>
+References: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
+ <20250728-ddr-imx-v1-9-73da75bb33d3@nxp.com>
+ <CAOMZO5D_byNG+rRmM=ax0w_gspcqi8k7EFCgzhsnv1GaWmZ1Bg@mail.gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5D_byNG+rRmM=ax0w_gspcqi8k7EFCgzhsnv1GaWmZ1Bg@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SG2PR02CA0069.apcprd02.prod.outlook.com
+ (2603:1096:4:54::33) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] disk: efi_loader: Add function to detect disk image type
-To: Javier Tia <javier.tia@linaro.org>, <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250730224942.755510-1-javier.tia@linaro.org>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250730224942.755510-1-javier.tia@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS4PR04MB9574:EE_
+X-MS-Office365-Filtering-Correlation-Id: 105ee4db-8c25-4905-f44f-08ddd002ddb4
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|376014|1800799024|19092799006|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?d7JSpnvQ3jo9EGseQ3KiXh/aQhI3FC/YO5q4UzN9sXM5VJCPXcO+Gu4Swrey?=
+ =?us-ascii?Q?lgqWphs6M4+A2TdJMh6vpPN8AoWlRpJlNAB8aO/lTmX5fDrRxrsHz3UgKXcu?=
+ =?us-ascii?Q?64LfciBLjyfSY4gzLy/nmOrV6TmSXZyVFGj4Y2ffy5PfN0uUgr9DEAd7PCPJ?=
+ =?us-ascii?Q?nMZIVAJ9zwHo2SZPawEsp498gE0xK5exPq3+eNlhY4MhiX3yQ5AOy7YCGoNy?=
+ =?us-ascii?Q?BLr59+wtNkwbw0j+F8TOG2nRwPo9mF7EXocWFpXMDgf8x6bQCOj7ZF/vjBJ9?=
+ =?us-ascii?Q?Bo5BM8Lcga8Zzzh4tYZv/Ege8pU5H5lw0kWcVfECSsmlxuWF/Lxs8TZ/RUWy?=
+ =?us-ascii?Q?GM5H1RPtI7AUWfKiQR2F9jmXZTLHCpKPbffyuG3VwHO5AOp0Oq8WBfiod+sj?=
+ =?us-ascii?Q?LFD6B27VBd7RXt4vhcF/XWkSk6kD4dIETVlrvfOmflgI5oObEaXOD0MvbCGs?=
+ =?us-ascii?Q?FoiGQHBld/74vmK06U6aBa3eDk+tgr5ShmpOHntnM3GLFc9vI94aPKAnor2c?=
+ =?us-ascii?Q?HLdV2wJ2d1L6MR0zJWrdnubRf8Ibv0ZBZVnCXfKllxg67vpKId482K2jug2z?=
+ =?us-ascii?Q?FqrS1Hy7ERnCnDkexVaTkJB8qvTasww8pbfF0FX98Wej4hmaCZj6Rm8XSYOG?=
+ =?us-ascii?Q?ln7gYLSc/cmSiMqQsxvYlCdyYLC5II1c5f7Nm+J5m8VfSHLu67Eylx8TxOor?=
+ =?us-ascii?Q?KOLWjzEHDaLtOFKm1va0roAXEcZ9aUdUlOXzfqMyMCmh/LBMQIsVq7WRzoQ1?=
+ =?us-ascii?Q?FwLmHLTcfVgwAdUx6ShgEJe6vMO49jZtil7j5xydjDZBUFV1ThUqMv3NyV1D?=
+ =?us-ascii?Q?TBalzEZxBFrrjvKpw52JsQplAzjJumnJU3LSIg+JMCQvWwC9qwc7tDqDbMO3?=
+ =?us-ascii?Q?ozG9yp48+cD4pTebUQHCbak4AFYhb9E+CNXnYWVNahvC3AGpQ7eB3LyTocWr?=
+ =?us-ascii?Q?SCF/ATzav2Cb+9RMCvuyAff5fk9ID6ZYWEM+zuhHW+7evyxr3zXpyuCkV2u5?=
+ =?us-ascii?Q?k1Ja/yOtPvYiz99UMR/tiLLmFXN+LXvFju2Ro77DbRg+097oAgK5lk2hBsZz?=
+ =?us-ascii?Q?tBbQFz+r5A2GOsXhCN5rW/kS6I7dWiwFh6V6eNUYgS5ImmYyBWFH6dYcZ8mY?=
+ =?us-ascii?Q?+hyZAOw+mI/q4xeAMQX52nPCyoVYsIVsrHIFJDWNg2zOP+Vx2jrRzPpZ9/Am?=
+ =?us-ascii?Q?3MDj3BkfoXMaXUxeXrFfwmlCtryV4TC+Q0TU78sIUZtntks1oiVJvdhReCGD?=
+ =?us-ascii?Q?2YRBqbuSrZI7uXcUr3811NuDGPwXO/jNqjYJdkjCKBd8N626F2wrkzFPuDE2?=
+ =?us-ascii?Q?rv1lEA/8DQEC30HpCubnLHgDNZRkOzvlTw5tUdyG5OuxkMf763hPUkE0i0cK?=
+ =?us-ascii?Q?9+AdWT358WbcNC4Z2W+AWSb6S943mghpYLrO+ndHPVK6xP3+TSKGi3Sj69FG?=
+ =?us-ascii?Q?savpmP1qA9OMp7DNyHdmZWg2p9/v7b3HL3QJjV3VTgWH9Z+gYINUYA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(1800799024)(19092799006)(366016)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TjLgZOHBxCwgeUgjXZkRplx6udgM298EIjQAX+teuBXaUPZHIFt6mujO7bZV?=
+ =?us-ascii?Q?X9QbktItLqDb67YPxicDfBU69ZkiCsBohZSjWq4zIREs7CmlPbyCMYOqtmZq?=
+ =?us-ascii?Q?fHyLz9jplvupRnBb5qYcr0gZ1dV6hOZdcsIWLYhH1Ple8FXRZTmlTGyrqdit?=
+ =?us-ascii?Q?lZoWOzxOw6Egfg0//RiwppdxHk7/0I1T0tPhLeTQaTg2P60d0ATLvQtw7dlD?=
+ =?us-ascii?Q?r+6QM37akPMc5CbZZJ6g2MdJVj5gL15IumCqjazby4dQmsdnn9HmoQOhiHDV?=
+ =?us-ascii?Q?6MI07CsCritVCNb+ZvdWLlesPDch+46DLXib59nj0mso7FBQE5DeBZaYZ471?=
+ =?us-ascii?Q?COc94x3IHj0JNgWpRKEC7/ikU/N7WFfw1Z5c8nimV/bKYuuDg7bZThY3VNPW?=
+ =?us-ascii?Q?zR4YYM+Fpowqfr5nuid/jqCyFCHrovUtqemu4amjezX7XLHLnURe8giuv8rF?=
+ =?us-ascii?Q?sfwUrmx9i2NCNAmxigDOeF/qR9vA2+ubOvefFme8dMQ6wkStrALpSm/retzt?=
+ =?us-ascii?Q?wZj22x4Zr7P0AJL/z0qd9jCQBkwMtzzxEIan976U3d9nooKMvPjdvrYR6Bf2?=
+ =?us-ascii?Q?uweI++NT0+YFM5Ng3z/a7/3GYkq0jUqHYR7Miw++CyvDiUT1kg56h/MVXx5l?=
+ =?us-ascii?Q?jAVKR6jj58iLLNS84vG5uiAM5H+kwxeWAX8W7V4mHvz7JA2d18KKRQq2k6Mf?=
+ =?us-ascii?Q?8j2peE4CB+qc6KfxHzz1v0Q8u+AfszOEROmkir2yEtAXyvct5mz2TLTIBCy+?=
+ =?us-ascii?Q?Wb6/3nPPq0bMCsRhdu6Ir1klVwXrLaGUlixMZeJzPXEkpa77HeOvq70MdeNw?=
+ =?us-ascii?Q?LX3cdR29dRi8XjgsIMvBX/d43dm67UXbNQmsqaYHQNvaWZ250Ginf2tl/CAj?=
+ =?us-ascii?Q?EoSntloJle4xvQWKjVc9os8XIT7NimJzCpCBf6iEkwLt3KXXu9mwywEw3IMi?=
+ =?us-ascii?Q?sb27PJnmjKQL617nea9Xj+yJ5pHeqevw+wJ6XQquOKsdQb1Z+2sbZXjtQKnP?=
+ =?us-ascii?Q?HlLLUOc4m/WL9niFNkl2o+4dYotUBrC6IaQrYEbRu6fi7zKxSfNWHvwrTCdg?=
+ =?us-ascii?Q?8jueSkoM/3365O5A1tP1ASTLq/Cr6fYRHvuh6lniggel5sAbHAKvuAHF4wsd?=
+ =?us-ascii?Q?4BpkA3ATqb0/47oQs4Z0kPDVZS35V0rvPXC1Z7wrK5/Y/nuMjTn7gc5j+/Oi?=
+ =?us-ascii?Q?SBFjAbEpx5EHqtSNLPeM7WAe6rL2DJ+oONoisI/rmnktNfKOciJodDmYSGMW?=
+ =?us-ascii?Q?Lt+2L6cfSAG+hBEP3OvKRRemh7hnIJ7qN8oZaYsy/wjxisaK/YgI6dtaLH7J?=
+ =?us-ascii?Q?CelgzejOVVxKD/8Bu3px2lUZt5dMwznsz+kGeI5cdF7CfNv/dxItZHLB24dR?=
+ =?us-ascii?Q?o3/KzWP4xsuI0x0lOiLlxP8XzZeTPnTXMP+5yedL3wOzkxY+nYDL33uOSrsu?=
+ =?us-ascii?Q?0cQ0r10w2lCXhM2SqyEfI9VTpyV02K1amEjc8bjseJurflViFxdm3e5DKWW2?=
+ =?us-ascii?Q?V4QwIBG7P6ffvipVjhv9pksfW+epF0MpQ2sypWeOPWUPA08cecYBvJAQveYY?=
+ =?us-ascii?Q?PXC5OnbI9tsqb+Sfx2O6jIdcVqYu0l0EuR6XNmWV?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 105ee4db-8c25-4905-f44f-08ddd002ddb4
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2025 07:21:28.7100 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: xzJm37TETRjP7gC/aEU3Z/wJlzE8eoZ2UDXOHDCwIzAnjgpuG2q7OcgyjhQlGHskMrLtXp4iNxLq6PMJi+9WPA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9574
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,179 +166,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Javier
+On Wed, Jul 30, 2025 at 10:51:35AM -0300, Fabio Estevam wrote:
+>On Sun, Jul 27, 2025 at 11:14???PM Peng Fan (OSS) <peng.fan@oss.nxp.com> wrote:
+>>
+>> From: Viorel Suman <viorel.suman@nxp.com>
+>>
+>> Collect errata registers values after the training and restore errata
+>> registers values before starting quick boot firmware.
+>
+>Please explain why.
 
-On 31/07/25 04:19, Javier Tia wrote:
-> This commit introduces a new function, detect_disk_image_type(), which
-> checks if a buffer contains a disk image. This function is used to
-> detect disk images based on their headers, rather than relying on file
-> extensions.
-> 
-> The function checks for ISO 9660, DOS MBR, and GPT protective MBR
-> signatures. It returns 1 if a disk image is detected, and 0 otherwise.
-> 
-> This function is then used in the efi_bootmgr.c file to determine if a
-> downloaded file is a PE-COFF image or a disk image. This change
-> improves the reliability of disk image detection, as it no longer
-> relies on file extensions, which can be easily changed or omitted.
-> 
-> Signed-off-by: Javier Tia <javier.tia@linaro.org>
-> ---
->  disk/part.c                  | 46 ++++++++++++++++++++++++++++++++++++
->  include/part.h               |  9 +++++++
->  lib/efi_loader/efi_bootmgr.c | 29 ++++++++++-------------
->  3 files changed, 68 insertions(+), 16 deletions(-)
-> 
-> diff --git a/disk/part.c b/disk/part.c
-> index 66e2b3a7219..9d9483b216c 100644
-> --- a/disk/part.c
-> +++ b/disk/part.c
-> @@ -855,3 +855,49 @@ int part_get_bootable(struct blk_desc *desc)
->  
->  	return 0;
->  }
-> +
-> +/**
-> +* detect_disk_image_type() - Detect if buffer contains a disk image
-> +*
-> +* @buffer:  Buffer containing potential disk image data
-> +* @size:    Size of the buffer
-> +* Return:   1 if disk image detected, 0 otherwise
-> +*/
-> +int detect_disk_image_type(void *buffer, size_t size)
-> +{
-> +	unsigned char *buf = (unsigned char *)buffer;
-> +
-> +	/* Need at least 512 bytes for basic checks */
-> +	if (!buffer || size < 512)
-> +		return 0;
-> +
-> +#if IS_ENABLED(CONFIG_ISO_PARTITION)
-> +	/* Check for ISO 9660 signature "CD001" at offset 0x8001 */
-> +	if (size > 0x8005) {
-> +		if (buf[0x8001] == 'C' && buf[0x8002] == 'D' &&
-> +		    buf[0x8003] == '0' && buf[0x8004] == '0' &&
-> +		    buf[0x8005] == '1') {
-> +			return 1;
-> +		}
-> +	}
-> +#endif
-> +
-> +#if IS_ENABLED(CONFIG_DOS_PARTITION)
-> +	/* Check for DOS MBR signature 0x55AA at offset 0x1FE */
-> +	if (buf[0x1FE] == 0x55 && buf[0x1FF] == 0xAA) {
-> +		return 1;
-> +	}
-> +#endif
-> +
-> +#if IS_ENABLED(CONFIG_EFI_PARTITION)
-> +	/* Check for GPT protective MBR */
-> +	if (buf[0x1FE] == 0x55 && buf[0x1FF] == 0xAA) {
-> +		/* Check if partition type is 0xEE (GPT protective) */
-> +		if (buf[0x1C2] == 0xEE) {
-> +			return 1;
-> +		}
-> +	}
-> +#endif
-> +
-> +	return 0;
-> +}
-> diff --git a/include/part.h b/include/part.h
-> index b772fb34c8a..39c04e0c8f7 100644
-> --- a/include/part.h
-> +++ b/include/part.h
-> @@ -727,6 +727,15 @@ int part_get_type_by_name(const char *name);
->   */
->  int part_get_bootable(struct blk_desc *desc);
->  
-> +/**
-> + * detect_disk_image_type() - Detect if buffer contains a disk image
-> + *
-> + * @buffer: Buffer containing potential disk image data
-> + * @size:   Size of the buffer
-> + * Return:  1 if disk image detected, 0 otherwise
-> + */
-> +int detect_disk_image_type(void *buffer, size_t size);
-> +
->  #else
->  static inline int part_driver_get_count(void)
->  { return 0; }
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 662993fb809..da63ad41b40 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -17,6 +17,7 @@
->  #include <log.h>
->  #include <malloc.h>
->  #include <net.h>
-> +#include <part.h>
->  #include <efi_loader.h>
->  #include <efi_variable.h>
->  #include <asm/unaligned.h>
-> @@ -407,7 +408,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
->  	if (!ctx)
->  		return ret;
->  
-> -	/* cleanup for iso or img image */
-> +	/* cleanup for image file */
->  	if (ctx->ramdisk_blk_dev) {
->  		ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
->  					 EFI_CONVENTIONAL_MEMORY);
-> @@ -466,7 +467,6 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
->  {
->  	char *s;
->  	int err;
-> -	int uri_len;
->  	efi_status_t ret;
->  	void *source_buffer;
->  	efi_uintn_t source_size;
-> @@ -516,21 +516,10 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
->  	image_size = ALIGN(image_size, SZ_2M);
->  
->  	/*
-> -	 * If the file extension is ".iso" or ".img", mount it and try to load
-> -	 * the default file.
-> -	 * If the file is PE-COFF image, load the downloaded file.
-> +	 * Check if the downloaded file is a PE-COFF image or a disk image.
-> +	 * Use header-based detection instead of file extensions.
->  	 */
-> -	uri_len = strlen(uridp->uri);
-> -	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
-> -	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
-> -		ret = prepare_loaded_image(lo_label, image_addr, image_size,
-> -					   &loaded_dp, &blk);
-> -		if (ret != EFI_SUCCESS)
-> -			goto err;
-> -
-> -		source_buffer = NULL;
-> -		source_size = 0;
-> -	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
-> +	if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
->  		/*
->  		 * loaded_dp must exist until efi application returns,
->  		 * will be freed in return_to_efibootmgr event callback.
+will update in V2.
 
-I haven't done much on EFI loading, but was intrigued. Is there any
-reason why you've also changed the ordering? It probably doesn't matter;
-but I assume a disk image is more common than a PE-COFF image, at least
-in U-Boot? Or is it not?
-
-> @@ -544,6 +533,14 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
->  
->  		source_buffer = (void *)image_addr;
->  		source_size = image_size;
-> +	} else if (detect_disk_image_type((void *)image_addr, image_size)) {
-> +		ret = prepare_loaded_image(lo_label, image_addr, image_size,
-> +					   &loaded_dp, &blk);
-> +		if (ret != EFI_SUCCESS)
-> +			goto err;
-> +
-> +		source_buffer = NULL;
-> +		source_size = 0;
->  	} else {
->  		log_err("Error: file type is not supported\n");
->  		ret = EFI_UNSUPPORTED;
-
--- 
-Thanking You
-Neha Malcom Francis
+Thanks,
+Peng.
