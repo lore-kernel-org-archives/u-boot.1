@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7636C87FCC
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409C7C87FCC
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:21:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9E078360D;
-	Thu, 31 Jul 2025 10:19:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C9D48362A;
+	Thu, 31 Jul 2025 10:19:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LEnDXTNq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qQZvJuKA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C50F83423; Thu, 31 Jul 2025 10:06:56 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 2981C833F6; Thu, 31 Jul 2025 10:06:56 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 283D48334A
+ by phobos.denx.de (Postfix) with ESMTPS id 44E81833EC
  for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 10:06:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
 Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86kPV2984816;
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86k1Y3442391;
  Thu, 31 Jul 2025 03:06:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1753949206;
- bh=vtTtUsM9AY5SQukn4Pt2Y9WIR0Mz5x1zsU1RxsTLbak=;
+ bh=8RkgCMOLlA/Yc7RYBtj+tXL5NTAJpLCjPt9cXhkCM0s=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=LEnDXTNqGzziePhUHXFxwz1cYKsaisYAla+Xmd90LOZFPjtaolezPqa2hIzBKANan
- 8/Fi9Kxti6miMh9iPveznOtGuHSH288WOIBR2+eGaQpCpIbzGVf35SLUJe/Kn0bMYq
- uHgn81+zQ9/ojqQv5hZnYUKbFuOjt+NaiINacvzk=
+ b=qQZvJuKAHa6RKPtcpbZfJw7oE7hea4fOvIQDuLVOj6KhpYB8zEItOiDw8S+MFXSpw
+ w0J4ZjzNts4JWLFXIWrk50LsDgQD9oP9/U/b07DtbmcQMGA2It8QKMN8l2AqHIHlTV
+ QIxA1mofMYpTH8Ez4lJyz+wpZt4F/Nm2LLiiFrqo=
 Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86kx74075509
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86kx54075509
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
  Thu, 31 Jul 2025 03:06:46 -0500
 Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
@@ -48,8 +48,8 @@ Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE114.ent.ti.com
  Frontend Transport; Thu, 31 Jul 2025 03:06:45 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.231.164])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80TKe2271721;
- Thu, 31 Jul 2025 03:00:30 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80bko2272176;
+ Thu, 31 Jul 2025 03:00:38 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  <semen.protsenko@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, "Jonathan
@@ -70,10 +70,10 @@ To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  Vaishnav Achath <vaishnav.a@ti.com>, Bryan Brattlof <bb@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 13/21] configs: am62px_evm_a53_ethboot: Enable configs
- required for Ethboot
-Date: Thu, 31 Jul 2025 13:29:48 +0530
-Message-ID: <20250731075956.605474-14-c-vankar@ti.com>
+Subject: [PATCH v4 17/21] configs: j722s_evm_a53_ethboot: Enable configs
+ required for Ethernet boot
+Date: Thu, 31 Jul 2025 13:29:52 +0530
+Message-ID: <20250731075956.605474-18-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250731075956.605474-1-c-vankar@ti.com>
 References: <20250731075956.605474-1-c-vankar@ti.com>
@@ -98,40 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable config options needed to support Ethernet boot on SK-AM62P-LP.
+Enable configs required to support Ethernet boot for J722S.
 
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v3:
-https://lore.kernel.org/u-boot/20250225114903.2080616-12-c-vankar@ti.com/
+https://lore.kernel.org/u-boot/20250225114903.2080616-16-c-vankar@ti.com/
 
 Changes from v3 to v4:
 - No changes.
 
- configs/am62px_evm_a53_ethboot_defconfig | 13 +++++++++++++
+ configs/j722s_evm_a53_ethboot_defconfig | 13 +++++++++++++
  1 file changed, 13 insertions(+)
- create mode 100644 configs/am62px_evm_a53_ethboot_defconfig
+ create mode 100644 configs/j722s_evm_a53_ethboot_defconfig
 
-diff --git a/configs/am62px_evm_a53_ethboot_defconfig b/configs/am62px_evm_a53_ethboot_defconfig
+diff --git a/configs/j722s_evm_a53_ethboot_defconfig b/configs/j722s_evm_a53_ethboot_defconfig
 new file mode 100644
-index 00000000000..57da40d4b2e
+index 00000000000..a5a2a15849c
 --- /dev/null
-+++ b/configs/am62px_evm_a53_ethboot_defconfig
++++ b/configs/j722s_evm_a53_ethboot_defconfig
 @@ -0,0 +1,13 @@
-+#include <configs/am62px_evm_a53_defconfig>
++#include <configs/j722s_evm_a53_defconfig>
 +
 +CONFIG_ARM=y
 +CONFIG_ARCH_K3=y
-+CONFIG_SOC_K3_AM62P5=y
-+CONFIG_TARGET_AM62P5_A53_EVM=y
-+CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62p5-sk"
++CONFIG_SOC_K3_J722S=y
++CONFIG_TARGET_J722S_A53_EVM=y
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j722s-evm"
 +CONFIG_SPL_STACK_R_ADDR=0x82000000
 +CONFIG_SPL_DRIVERS_MISC=y
 +CONFIG_SPL_DMA=y
 +CONFIG_SPL_ETH=y
 +CONFIG_SPL_NET=y
-+CONFIG_SPL_NET_VCI_STRING="AM62PX U-Boot A53 SPL"
++CONFIG_SPL_NET_VCI_STRING="J722S U-Boot A53 SPL"
 -- 
 2.34.1
 
