@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A134C87FD2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 21:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37210C87FCA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 21:51:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67ADC8395B;
+	by phobos.denx.de (Postfix) with ESMTP id B75808396E;
 	Thu, 31 Jul 2025 23:50:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=yngvason.is
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=yngvason.is header.i=@yngvason.is header.b="ijtAbipY";
+	dkim=pass (1024-bit key; secure) header.d=yngvason.is header.i=@yngvason.is header.b="D8noIIZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E20A583857; Thu, 31 Jul 2025 20:15:56 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 503D683857; Thu, 31 Jul 2025 20:15:58 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2C8083900
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 20:15:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09AE383927
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 20:15:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=yngvason.is
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andri@yngvason.is
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3b78d729bb8so24342f8f.0
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 11:15:54 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3b7910123a0so1217804f8f.1
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 11:15:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=yngvason.is; s=google; t=1753985754; x=1754590554; darn=lists.denx.de;
+ d=yngvason.is; s=google; t=1753985755; x=1754590555; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MSnNoTi2fTws3wgOUhvZ6vtr0v4rugOmaln/CynCSbQ=;
- b=ijtAbipYe7kWluTxrd0aomZjwQc7KrfPKdCG+N0AtwJlqh+Lm1ag9ZJq3GZlxLDMj0
- reE+Jsm74XnSi6P/ySvxeKgpUehucgf5InNMqAJHT1f/5PusfMdAmN5/wlMdN+vu79tG
- 5KcbBwuYY+a2KHtGKlbpO+taDh0qk8LkC+kDc=
+ bh=O/4gQmNApAaEk+0JLQUftLNUXzigmx37hrE4IifsT8c=;
+ b=D8noIIZTJ7UGP4flVaSfgY0epnzwLtKd6cX8/nUf8BBc9CkIk61QP8RZbFeLw/SzSU
+ 8LiChMJNYSTSZf/j3JM/hLGwq3efKHi3eQBRPQKk9FH4TdWR8GS94f2Bt4J9fitAqiQO
+ /2hDMrXGtRIrqokCHa71u7HBuHY31f6YZ4XMg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753985754; x=1754590554;
+ d=1e100.net; s=20230601; t=1753985755; x=1754590555;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MSnNoTi2fTws3wgOUhvZ6vtr0v4rugOmaln/CynCSbQ=;
- b=iwKwAjVOhTv6wbDTrh+rQZ/XjBxNrJ4sNQ42QGGHVNey9Itu/sZIWH+QtoKpQjnXrQ
- FVUqjpdlDtgHjiT+7B381ibjoU0mMBLkLFk+hCP0UbeQbBJNzWTRLs/d3odp3GwRF07h
- TN+GqJsPYEGmfZpUwNI6EKe4xlrD+A/XPQi6eJ8JwVSJ918WVxHGBLi3vBUKeleLro17
- oJPlvqI4cVDFgRbGTr9N1O9+lvpVQcRE/Zo5cO7R7s7RLgXou1kCjHSoY+vUBPge2tiO
- bf0E310uE7GR2RhiaU2GtiOsg6aXjbqXKWE0jE4b+NU0TzdtIk7M3Es0pFt6LqWF5KvH
- WwFw==
-X-Gm-Message-State: AOJu0Ywr9aGt2vRF1jNsSsXhMdDVfaigRy+8AYUEB9TLFdy4ci/xgeZn
- hpEMavtDqcSRtd95WhMmH2Osjibn8+8qTrCwKvnXwEbNS6tRNhe4ya+jl10HU40e4JDH7VPCfjJ
- rTZe+70lSMQ==
-X-Gm-Gg: ASbGnctxsJYhx4LjyDGbPlPTOfZ7sCPj8kQYL/js9PKFamHsLth8wVZtAxMZugJpm7b
- UQH8x0b9a9bruqxtPBld3PLAwQXUIpT54Rsed108FZu0Ez4zmAAIMzWcx2L/DEITBl2VZuiM930
- E76XIjuJLEuLKQZAyUbY0SC0FLrSBqCMAD+jMgM3xTtCAEqb5NJUQ8sh8qp+ccbvItTUrGMsRWG
- W4Hj3RDDuPAH7Abkeg4bBk/RT69tYdwEE+mJ23srLYCNmEuhIEC0IywFqsjt4bGJ21zDFvN+9K6
- 5H81DruBJQZkyOlplcaBQA//9t9SynEBNQkqxU5a9AfNZtPjqfJsfJcZAO3DfGXeMFkH/wMkMQS
- OBHBhYMuHYjsAcOU1Rpc+arB1Ho2/iOmsKAOaJNqaI1AgSKzWuW4ZFTOjMhqkUTggn3KXEw==
-X-Google-Smtp-Source: AGHT+IGGWo6+FYsTQ3haTM0NYY+kpB2kfuHW2wChMNPLa0w75mUfdmseRCAYZ+KaO7MkkE8GGJUvwQ==
-X-Received: by 2002:a05:6000:2008:b0:3b7:9350:d372 with SMTP id
- ffacd0b85a97d-3b794fde45dmr6845117f8f.24.1753985754270; 
- Thu, 31 Jul 2025 11:15:54 -0700 (PDT)
+ bh=O/4gQmNApAaEk+0JLQUftLNUXzigmx37hrE4IifsT8c=;
+ b=GMAuiusVGNFAO9m/GqwFVVXOtouZKzvGrk18n4NGVVtKTiMSBLbLTxe63ODGkHgU3J
+ XBg+gHqM14hL5mCfqX3D+pimm70zaWIzcM4DiK/fi0IJC0BxE/HfI7Zi/Y9b/mKEySsX
+ e9HjIKc/APxSupfad1/1WZNrn3c9Dwlo7RLlB6BIv556BTeLmWuGNxpZSWQLz0zvKPpy
+ cwdlR/FNCHIC6msFhwCd5hpvUF+6OGCt1T5E6Z7D4d3cjMqVUWZzogW+VF5FuZvp5TuF
+ xUPD8C05tnpVoiFdnCScWjKZ+poq+GkPbU66ratPk1QtTpH97alxgALQPcQSjEdwDnQU
+ UU/w==
+X-Gm-Message-State: AOJu0YwxNAXTE93PzPuOmRN3huF19SoZla3/8apnNyp61mPsoD2tGuAS
+ bXSSj8VuRpF4bdtNtSPl/R79v4r1bYQGL9Cuz69QFJ8cq6Fq6EPEcCtL72S7ZHevFmOlZtMcEW4
+ 3c0x8bpJ1xw==
+X-Gm-Gg: ASbGncuaJ7zTJzve42SNVSNI4smFqpD0NUJvX/ayUDeRH3oNFBQJ2iWgnkq45su2jXz
+ sjDGaKk3TWvI7KE/WWLsxPsXFSFhWLxhb+A6DU/3fLFummbVGHVJXotMUytitySOO+auteiiFG5
+ tXCYohMpfY/n+5PRKaXCIi35ailuss3NaWsrQ1rCZeHlIcPh1uuKNQ1MwEvJKIOzt/FpCi1DaGS
+ WLfV4349gpLUJ7ymZyR+oNBaQl0cQFEEum2RhEHVoxW5t0ZPP3UajfsQrSosp+tS29pTizfk8Ch
+ VebXqHvW+KREst2NKB6STe65bq6m1KpBGq7ocEspNFLllUIYeDIkFpDRKEzuMQGadsj5QfXR2U/
+ NRHepYFN3/J/I6QYFbU/9UzzQ/wx0yRUVYmAUD9kyOTZgqTK0+P9GArMgnRo=
+X-Google-Smtp-Source: AGHT+IH4ptxmig3H0bbgeNMR3n2a9SHGa7ytLIZerqOyUtr6xFaF5HHSakGZmFblEE7ABwfJZH0uWQ==
+X-Received: by 2002:a05:6000:26d1:b0:3b7:930a:bb25 with SMTP id
+ ffacd0b85a97d-3b795029b20mr5815262f8f.39.1753985755216; 
+ Thu, 31 Jul 2025 11:15:55 -0700 (PDT)
 Received: from andri-workstation.turninn.appdynamic.com
  ([2a01:8280:aa07:ad:7285:c2ff:fef0:4baf])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c3abedesm3236129f8f.3.2025.07.31.11.15.53
+ ffacd0b85a97d-3b79c3abedesm3236129f8f.3.2025.07.31.11.15.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 11:15:53 -0700 (PDT)
+ Thu, 31 Jul 2025 11:15:54 -0700 (PDT)
 From: Andri Yngvason <andri@yngvason.is>
 To: u-boot@lists.denx.de
 Cc: Andri Yngvason <andri@yngvason.is>
-Subject: [PATCH 1/2] spl: Add A/B sector mode for mmc raw mode
-Date: Thu, 31 Jul 2025 18:15:32 +0000
-Message-ID: <20250731181533.1872390-2-andri@yngvason.is>
+Subject: [PATCH 2/2] Forward chosen raw mmc A/B sector to OS
+Date: Thu, 31 Jul 2025 18:15:33 +0000
+Message-ID: <20250731181533.1872390-3-andri@yngvason.is>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250731181533.1872390-1-andri@yngvason.is>
 References: <20250731181533.1872390-1-andri@yngvason.is>
@@ -97,199 +97,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This makes it possible to select between 2 raw sectors from which
-to boot U-Boot Proper by writing to one pre-defined sector.
+This adds a property named u-boot,mmc-boot-sector to the /chosen node in
+the device tree. It can be either "a" or "b", based on which sector was
+chosen by the SPL to boot U-Boot Proper.
 
-If the first byte of the sector contains the value 1, SPL will load
-U-Boot Proper. The second byte, if set to 1 or 2, instructs SPL to try
-loading only once from A or B, respectively.
+This makes it possible to check from the OS if an upgrade to U-Boot was
+successful before committing to it.
+
+The way this is intended to be used is as follows:
+
+ - Write new U-Boot image to the sector that's currently unused
+ - Write 00 XX to control sector, where XX = 1 for A and 2 for B
+ - Reboot
+ - If u-boot,mmc-boot-sector contains the correct value, update the
+   control sector to boot from the new U-Boot.
+ - If it contains the wrong value, then the update must have failed.
 
 Signed-off-by: Andri Yngvason <andri@yngvason.is>
 ---
- common/spl/Kconfig   | 28 +++++++++++++++++--
- common/spl/spl_mmc.c | 66 ++++++++++++++++++++++++++++++++++++++++++--
- include/spl.h        |  1 +
- 3 files changed, 90 insertions(+), 5 deletions(-)
+ boot/fdt_support.c   | 20 ++++++++++++++++++++
+ common/bloblist.c    |  1 +
+ common/spl/spl_mmc.c | 21 ++++++++++++++++++++-
+ include/bloblist.h   |  1 +
+ include/spl.h        |  9 +++++++++
+ 5 files changed, 51 insertions(+), 1 deletion(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index ab05536bd02..706f7db1225 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -565,6 +565,14 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
- 	  Use sector number for specifying U-Boot location on MMC/SD in
- 	  raw mode.
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index b7331bb76b3..309f3726314 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -27,6 +27,8 @@
+ #include <fdtdec.h>
+ #include <version.h>
+ #include <video.h>
++#include <bloblist.h>
++#include <spl.h>
  
-+config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
-+	bool "MMC raw mode: by sector with A/B selection"
-+	select SPL_LOAD_BLOCK
-+	select SPL_MMC_WRITE
-+	help
-+	  Use sector numbers for specifying U-Boot location on MMC/SD in
-+	  raw mode. Allows selecting between two sectors.
-+
- config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
- 	bool "MMC raw mode: by partition"
- 	select SPL_LOAD_BLOCK
-@@ -583,7 +591,8 @@ endchoice
+ DECLARE_GLOBAL_DATA_PTR;
  
- config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
- 	hex "Address on the MMC to load U-Boot from"
--	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR || \
-+		   SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
- 	default 0x40 if ARCH_SUNXI
- 	default 0x75 if ARCH_DAVINCI
- 	default 0x8a if ARCH_MX6 || ARCH_MX7
-@@ -598,9 +607,24 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
- 	  Address on the MMC to load U-Boot from, when the MMC is being used
- 	  in raw mode. Units: MMC sectors (1 sector = 512 bytes).
+@@ -342,6 +344,7 @@ int fdt_chosen(void *fdt)
+ 	int   nodeoffset;
+ 	int   err;
+ 	const char *str;		/* used to set string properties */
++	__maybe_unused struct spl_mmcsd_raw_ab_handoff *handoff;
  
-+config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_B
-+	hex "Secondary address on the MMC to load U-Boot from"
-+	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
-+	help
-+	  Address on the MMC to load secondary U-Boot from, when the MMC is
-+	  being used in raw mode. Units: MMC sectors (1 sector = 512 bytes).
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_AB_CONTROL_SECTOR
-+	hex "Raw MMC A/B boot control sector"
-+	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
-+	help
-+	  Location of A/B bool control sector on the MMC. The contents of this
-+	  sector control from which sector U-Boot is loaded.
-+
- config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
- 	hex "U-Boot main hardware partition image offset"
--	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR || \
-+		   SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
- 	default 0x10 if ARCH_SUNXI
- 	default 0x0
- 	help
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index d06f9f0dee6..f4a1a3425b5 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -29,7 +29,8 @@ static ulong h_spl_load_read(struct spl_load_info *load, ulong off,
- 
- static __maybe_unused unsigned long spl_mmc_raw_uboot_offset(int part)
- {
--#if IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR)
-+#if IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR) || \
-+	IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB)
- 	if (part == 0)
- 		return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET;
- #endif
-@@ -137,7 +138,8 @@ static int mmc_load_image_raw_partition(struct spl_image_info *spl_image,
- 		return ret;
+ 	err = fdt_check_header(fdt);
+ 	if (err < 0) {
+@@ -396,6 +399,23 @@ int fdt_chosen(void *fdt)
+ 		return err;
  	}
  
--#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+#if defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR) || \
-+	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB)
- 	return mmc_load_image_raw_sector(spl_image, bootdev, mmc, info.start + sector);
- #else
- 	return mmc_load_image_raw_sector(spl_image, bootdev, mmc, info.start);
-@@ -270,6 +272,8 @@ u32 __weak spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	return MMCSD_MODE_FS;
- #elif defined(CONFIG_SUPPORT_EMMC_BOOT)
- 	return MMCSD_MODE_EMMCBOOT;
-+#elif defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB)
-+	return MMCSD_MODE_RAW_AB;
- #else
- 	return MMCSD_MODE_RAW;
- #endif
-@@ -323,6 +327,53 @@ int __weak spl_mmc_emmc_boot_partition(struct mmc *mmc)
- 	return default_spl_mmc_emmc_boot_partition(mmc);
++	if (IS_ENABLED(CONFIG_BLOBLIST) &&
++	    IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB)) {
++		handoff = bloblist_find(BLOBLISTT_MMCSD_RAW_AB,
++					sizeof(struct spl_mmcsd_raw_ab_handoff));
++		if (handoff) {
++			err = fdt_setprop(fdt, nodeoffset, "u-boot,mmc-boot-sector",
++					  handoff->sector == SPL_MMCSD_RAW_B_SECTOR ? "b" : "a", 2);
++			if (err < 0) {
++				printf("WARNING: could not set u-boot,mmc-boot-sector %s.\n",
++				       fdt_strerror(err));
++				return err;
++			}
++		} else {
++			printf("WARNING: Missing mmc a/b boot sector\n");
++		}
++	}
++
+ 	return fdt_fixup_stdout(fdt, nodeoffset);
  }
  
-+#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
-+unsigned long spl_mmc_get_raw_ab_sector(struct mmc *mmc, unsigned long raw_sect)
-+{
-+	u8 buf[512];
-+	int ret = blk_dread(mmc_get_blk_desc(mmc),
-+			CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_AB_CONTROL_SECTOR,
-+			1, buf);
-+	if (ret < 0) {
-+		puts("Failed to read mmc a/b control sector\n");
-+		log_debug("(error=%d)\n", ret);
-+		goto out;
-+	}
-+
-+	switch (buf[1]) {
-+	case 1:
-+		raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
-+		puts("Trying to boot from mmc raw sector A\n");
-+		break;
-+	case 2:
-+		raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_B;
-+		puts("Trying to boot from mmc raw sector B\n");
-+		break;
-+	default:
-+		if (buf[0] != 1) {
-+			raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
-+			puts("Selected mmc raw sector A\n");
-+		} else {
-+			raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_B;
-+			puts("Selected mmc raw sector B\n");
-+		}
-+		return raw_sect;
-+	}
-+
-+	buf[1] = 0xff;
-+	ret = blk_dwrite(mmc_get_blk_desc(mmc),
-+			 CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_AB_CONTROL_SECTOR,
-+			 1, buf);
-+	if (ret < 0) {
-+		puts("Failed to update mmc a/b control sector\n");
-+		log_debug("(error=%d)\n", ret);
-+	}
-+
-+out:
-+	return raw_sect;
-+}
-+#endif
-+
- static int spl_mmc_get_mmc_devnum(struct mmc *mmc)
- {
- 	struct blk_desc *block_dev;
-@@ -385,6 +436,14 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- 			return ret;
- 		}
- 		/* Fall through */
-+#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
-+	case MMCSD_MODE_RAW_AB:
-+		debug("spl: mmc boot mode: raw a/b\n");
-+
-+		raw_sect = spl_mmc_get_raw_ab_sector(mmc, raw_sect);
-+
-+		fallthrough;
-+#endif
- 	case MMCSD_MODE_RAW:
- 		debug("spl: mmc boot mode: raw\n");
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 6e4f020d7c4..cafa2036084 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -61,6 +61,7 @@ static struct tag_name {
+ 	{ BLOBLISTT_U_BOOT_SPL_HANDOFF, "SPL hand-off" },
+ 	{ BLOBLISTT_VBE, "VBE" },
+ 	{ BLOBLISTT_U_BOOT_VIDEO, "SPL video handoff" },
++	{ BLOBLISTT_MMCSD_RAW_AB, "MMC raw A/B boot sector" },
  
-@@ -403,7 +462,8 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- 		if (!ret)
- 			return 0;
+ 	/* BLOBLISTT_VENDOR_AREA */
+ };
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index f4a1a3425b5..22cea00bc96 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -16,6 +16,7 @@
+ #include <mmc.h>
+ #include <image.h>
+ #include <imx_container.h>
++#include <bloblist.h>
+ 
+ static ulong h_spl_load_read(struct spl_load_info *load, ulong off,
+ 			     ulong size, void *buf)
+@@ -330,6 +331,7 @@ int __weak spl_mmc_emmc_boot_partition(struct mmc *mmc)
+ #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB
+ unsigned long spl_mmc_get_raw_ab_sector(struct mmc *mmc, unsigned long raw_sect)
+ {
++	__maybe_unused struct spl_mmcsd_raw_ab_handoff *handoff;
+ 	u8 buf[512];
+ 	int ret = blk_dread(mmc_get_blk_desc(mmc),
+ 			CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_AB_CONTROL_SECTOR,
+@@ -357,7 +359,7 @@ unsigned long spl_mmc_get_raw_ab_sector(struct mmc *mmc, unsigned long raw_sect)
+ 			raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_B;
+ 			puts("Selected mmc raw sector B\n");
+ 		}
+-		return raw_sect;
++		goto out;
+ 	}
+ 
+ 	buf[1] = 0xff;
+@@ -370,6 +372,23 @@ unsigned long spl_mmc_get_raw_ab_sector(struct mmc *mmc, unsigned long raw_sect)
+ 	}
+ 
+ out:
++	if (IS_ENABLED(CONFIG_BLOBLIST)) {
++		ret = bloblist_ensure_size(BLOBLISTT_MMCSD_RAW_AB,
++					   sizeof(struct spl_mmcsd_raw_ab_handoff),
++					   0, (void **)&handoff);
++		if (ret)
++			return raw_sect;
++
++		switch (raw_sect) {
++		case CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR:
++			handoff->sector = SPL_MMCSD_RAW_A_SECTOR;
++			break;
++		case CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_B:
++			handoff->sector = SPL_MMCSD_RAW_B_SECTOR;
++			break;
++		}
++	}
++
+ 	return raw_sect;
+ }
  #endif
--#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+#if defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR) || \
-+	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR_AB)
- 		ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
- 						raw_sect +
- 						spl_mmc_raw_uboot_offset(part));
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f32faf78560..bf50b82ef3c 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -153,6 +153,7 @@ enum bloblist_tag_t {
+ 	BLOBLISTT_U_BOOT_SPL_HANDOFF	= 0xfff000, /* Hand-off info from SPL */
+ 	BLOBLISTT_VBE			= 0xfff001, /* VBE per-phase state */
+ 	BLOBLISTT_U_BOOT_VIDEO		= 0xfff002, /* Video info from SPL */
++	BLOBLISTT_MMCSD_RAW_AB		= 0xfff003, /* MMC A/B Sector from SPL */
+ };
+ 
+ /**
 diff --git a/include/spl.h b/include/spl.h
-index 7c10c7f792e..7736b00c474 100644
+index 7736b00c474..e1895db736b 100644
 --- a/include/spl.h
 +++ b/include/spl.h
-@@ -28,6 +28,7 @@ struct legacy_img_hdr;
- #define MMCSD_MODE_RAW		1
- #define MMCSD_MODE_FS		2
- #define MMCSD_MODE_EMMCBOOT	3
-+#define MMCSD_MODE_RAW_AB	4
+@@ -804,6 +804,15 @@ struct spl_image_loader {
+ 			  struct spl_boot_device *bootdev);
+ };
  
- struct blk_desc;
- struct legacy_img_hdr;
++enum spl_mmcsd_raw_ab_sector {
++	SPL_MMCSD_RAW_A_SECTOR = 0,
++	SPL_MMCSD_RAW_B_SECTOR,
++};
++
++struct spl_mmcsd_raw_ab_handoff {
++	enum spl_mmcsd_raw_ab_sector sector;
++};
++
+ /* Helper function for accessing the name */
+ static inline const char *spl_loader_name(const struct spl_image_loader *loader)
+ {
 -- 
 2.50.0
 
