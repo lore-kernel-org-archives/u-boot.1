@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EFBAC87FCC
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 11:53:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46CB0C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 11:55:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED597838AB;
-	Thu, 31 Jul 2025 13:53:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BD7CF83857;
+	Thu, 31 Jul 2025 13:55:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mg3+ODMq";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="y77Lzq88";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8331D83852; Thu, 31 Jul 2025 13:53:22 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7F6AF838AB; Thu, 31 Jul 2025 13:55:09 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16F0083852
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 13:53:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6BAC83852
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 13:55:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-55b797ad392so915957e87.3
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 04:53:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753962799; x=1754567599; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KeLvsvwRGp4uSJXK4XfMGUK3W4ln46neOemZFB8ajjg=;
- b=mg3+ODMq6JJSK+FE/XIHei12CZHBPTo/R77gdv+e5kP0Us2NAuakBlD/whlE7ljdyP
- xWtfC/Z483ZxpMg1p6ORf1UQgsVW2CJ7VV2CKp9Cl4PN6ums80qZPQce5SrL+iaCpXL/
- lWmuw4nfYIlFOdJ54AYD4AB5YKRZzj3ZJBSlmNJfiPU0EHTXlmaZEhIENOovL6WJ/BnU
- yqqSgYUCkFTzXVXsa22JOFeOZXlvkkonnmmMZrE53S50jH8eWlfNaGaeIl+1K0CASkks
- nl1Fr+pb38jDSDtkzQKagYsVrYiQvnmhz2CNasOD0nBRo9PfsHmkZin+ArY9cB2XTNpq
- 7InQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753962799; x=1754567599;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KeLvsvwRGp4uSJXK4XfMGUK3W4ln46neOemZFB8ajjg=;
- b=BITwxtzeCQhyomTPjjlk7aNsycqQKY1bpYafWEk51Rmb73K2+j6QysRpjNl4EJuHTQ
- +r6dwzcSzDNxaTaXQ8ta08jucepJeKjgrjoP+Tw/H8UmWeOB0LkfWs+hwINsP8WNonoD
- 36wPGhyhHzA7wgV3/2qGDGrG0/RpCSuqWJuLtoaA7j0VxyrDdbTL/n84grI2Y7kThshK
- rDKUnPCZHyK+5jL9FG5O2XqNz4I4Qih6GJJtMbaNOGUuI37qCa/7IihzLKryc6aiwvgE
- DX9JMmuEUmOFJk4MFjtOzn8QBKXlURA3SyWRfHsUU/gqZ/dzU32lqoCJY+6M5+8HO81H
- g1zw==
-X-Gm-Message-State: AOJu0Yz5LkdugVm2Z7vIFXMdiNYyZOqByUk26JteXfGZCRXsbqvCsCCg
- YPjkKj11DBDWu39ToB77i9NMAy9qFytQTEXl6d+9xJ2InQIFqi4w1viB6ZOcUUqisVFQtsPMLos
- mVbLh2Ws=
-X-Gm-Gg: ASbGnctQdFYQVfnmIXEZOZpdVV8CEZ6R4fHENUGgm7209K0o348YfbCYEciT7jflEHH
- gIN46GrWVI9E7LRZ710nrKWbzk4RP2z5Gc9DdQW7XkSxMDzXrEb2qCvJHdHJxrBwghjdXqVzqWI
- RsVt8j1uMuC7c5HJPCytybLjAWS1FsUg0SLnYyarNuHVr7J3WzfsAwXixQiJT/wh++e8iceZUYs
- ugMlNAMgtFO3SnULfUp/7WNUoetoCfNHea0dHM5EiY6VkEF7KZpaHsED1sbXYgBVQReh3yJ5nUc
- cPj9AFKn0wVKw2SaGbuaLp3beLBIiliAVVkG5ZDr7OEk3hGKZjwkBwSKbToAdVtLTS6hnzwKXvR
- 1nLHIDkAVqwaZBirjknaM7TSbWB6J7hk8jSrCE7bB1P971RuEMJX+7PI=
-X-Google-Smtp-Source: AGHT+IHX7CpmkpMSbij5vaociOEgsQake/XbNIe5dVwl7PLSQv7VFW7jxGyV40ocleYFuvtKmWnYqQ==
-X-Received: by 2002:a05:6512:3050:b0:55b:8a28:3cbc with SMTP id
- 2adb3069b0e04-55b8a283d8cmr493806e87.51.1753962799233; 
- Thu, 31 Jul 2025 04:53:19 -0700 (PDT)
-Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b889a8278sm205823e87.57.2025.07.31.04.53.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 04:53:18 -0700 (PDT)
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Mikko Rapeli <mikko.rapeli@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v4] Makefile: add dependency from lib to arch/$(ARCH)/lib
-Date: Thu, 31 Jul 2025 14:52:48 +0300
-Message-ID: <20250731115248.264837-1-mikko.rapeli@linaro.org>
-X-Mailer: git-send-email 2.50.0
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0307a9198e=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56VAGJi4030935;
+ Thu, 31 Jul 2025 13:55:01 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=/sgq77nsM+yMfIHjoWxg8b
+ JZO0F17OZnu0qqBk8++JU=; b=y77Lzq88og9vVbausVZPErqBxyD7fLyIFrOOiq
+ DU2D3eGJEsl3vSQAjE7Jpyr1r77Z3vgaq02LF7L47Ye/PvofW2ApPZrP5Y8GTZsh
+ spHy4AuojthNL0z7TGDXPqyMmdKlFyTEN0GwV353Fywo8dSD/fucgafDfc0uGei4
+ QZCvbmXL1xg7jtaljKh3ellb/z1ecVYCN5wOZv2ZPkKnqbNtXZFSbXdAjaJki13v
+ og7ILy7KizE5XO3jclFiK+LG3wUTlBgJLS5OZDgLBjsjI4nCpp9oUgWlXj+6T2bT
+ GNcLc2lL9lPtkSwlmFPOIZ3oDmKiTdFGw3jiJJhVKQvaULDQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484memyhjs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 31 Jul 2025 13:55:00 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2A8C240045;
+ Thu, 31 Jul 2025 13:53:58 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1452E76373E;
+ Thu, 31 Jul 2025 13:53:36 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 31 Jul
+ 2025 13:53:35 +0200
+Message-ID: <dd84eff8-cbc6-4ae5-b19c-0ae52f09e363@foss.st.com>
+Date: Thu, 31 Jul 2025 13:53:35 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Content-Language: en-US
+To: TOM Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Alice Guo <alice.guo@nxp.com>, Andrew Goodbody
+ <andrew.goodbody@linaro.org>,
+ Cheick Traore <cheick.traore@foss.st.com>, Marek Vasut <marex@denx.de>,
+ <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>
+Subject: [PULL] Pull request for u-boot master / v2025.10 =
+ u-boot-stm32-20250731
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-31_02,2025-07-31_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,90 +90,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Top level Makefile starts separate "make" processes for each each
-subdirectory. lib/efi_loader apps now depend on lib.a from
-arch/$(ARCH)/lib if CONFIG_USE_PRIVATE_LIBGCC is enabled which creates
-a race conditions since dependency from lib/efi_loader EFI apps to
-arch/$(ARCH)/lib/lib.a is not explicit:
+Hi Tom
 
-arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such file or directory
-make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/testapp_efi.so] Error 1
+Please pull the STM32 related patches for u-boot/master, v2025.10 = u-boot-stm32-20250731
 
-This error was seen on yocto/OE-core CI builds after u-boot 2025.07 update:
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/27236
 
-https://lists.openembedded.org/g/openembedded-core/message/220004
+Thanks
+Patrice
 
-https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/2914600/raw_inline
+The following changes since commit 182cb30084516c3085d2ca5dde3f105f7625d774:
 
-    |    rm -f lib/efi_loader/built-in.o; arm-poky-linux-gnueabi-ar cDPrsT lib/efi_loader/built-in.o lib/efi_loader/efi_bootmgr.o lib/efi_loader/efi_bootbin.o lib/efi_loader
-/efi_boottime.o lib/efi_loader/efi_helper.o lib/efi_loader/efi_console.o lib/efi_loader/efi_device_path.o lib/efi_loader/efi_device_path_to_text.o lib/efi_loader/efi_device_
-path_utilities.o lib/efi_loader/efi_dt_fixup.o lib/efi_loader/efi_fdt.o lib/efi_loader/efi_file.o lib/efi_loader/efi_hii.o lib/efi_loader/efi_hii_config.o lib/efi_loader/efi
-_image_loader.o lib/efi_loader/efi_load_options.o lib/efi_loader/efi_memory.o lib/efi_loader/efi_root_node.o lib/efi_loader/efi_runtime.o lib/efi_loader/efi_setup.o lib/efi_
-loader/efi_string.o lib/efi_loader/efi_unicode_collation.o lib/efi_loader/efi_var_common.o lib/efi_loader/efi_var_mem.o lib/efi_loader/efi_variable.o lib/efi_loader/efi_var_
-file.o lib/efi_loader/efi_watchdog.o lib/efi_loader/efi_disk.o lib/efi_loader/efi_net.o lib/efi_loader/efi_smbios.o lib/efi_loader/efi_load_initrd.o lib/efi_loader/efi_confo
-rmance.o
-    |   arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -znorelro --no-warn-rwx-segments -L /srv/pokybuild/yocto-worker/oe-selftest-armhost/build/build-st-
-3119200/tmp/work/beaglebone_yocto-poky-linux-gnueabi/u-boot/2025.07/sources/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -shared -Bsymbolic -s lib/efi_loader/helloworld.o
-lib/efi_loader/efi_crt0.o lib/efi_loader/efi_reloc.o lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.a -o lib/efi_loader/helloworld_efi.so
-    | arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such file or directory
-    | make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi.so] Error 1
+  Prepare v2025.10-rc1 (2025-07-28 18:23:01 -0600)
 
-The different "make" processes share common scripts/Makefile.build
-and scripts/Makefile.libs but since they are separate processes
-the Makefile rules can't add a dependency from lib/uefi_loader targets
-to arch/$(ARCH)/lib/lib.a. Or the file level dependency can be added but
-then "make" produces a too sparse error message which does not mention
-that one of the dependencies like arch/$(ARCH)/lib/lib.a was not found:
+are available in the Git repository at:
 
-make[3]: *** No rule to make target 'lib/efi_loader/helloworld.efi', needed by '__build'.  Stop.
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20250731
 
-Fix this dependency problem by building arch/$(ARCH)/lib before lib
-if CONFIG_USE_PRIVATE_LIBGCC was enabled.
+for you to fetch changes up to e064db5fe77caaddb21a7793f266119ad89dd79a:
 
-To reproduce the race condition more reliably, add a "sleep 10" delay
-before linker command cmd_link_l_target with 2025.07
-or to $(lib-target): target in scripts/Makefile.build with master branch
-after Kbuild update.
+  reset: stm32: Fix set_clr field (2025-07-30 14:55:17 +0200)
 
-Fixes: 43d43241d1c9 ("scripts/Makefile.lib: add PLATFORM_LIBGCC to efi linking")
+----------------------------------------------------------------
+Add support for STM32 TIMERS and STM32 PWM on STM32MP25
+Add STM32MP13xx SPL and OpTee-OS start support
+Fix header misuse in stm32 reset drivers
+Fix STMicroelectronics spelling
+Fix clk-stm32h7 wrong macros used in register read
+Fix PRE_CON_BUF_ADDR on STM32MP13
+Fix clock identifier passed to struct scmi_clk_parent_set_in
+Fix stm32 reset for STM32F4/F7 and H7
+Enable OF_UPSTREAM_BUILD_VENDOR for stm32mp13_defconfig
+Add STM32MP23 SoC and stm32mp235f-dk board support
 
-Cc: Adriano Cordova <adrianox@gmail.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
----
- Makefile | 5 +++++
- 1 file changed, 5 insertions(+)
+----------------------------------------------------------------
+Alice Guo (1):
+      clk: scmi: Fix clock identifier passed to struct scmi_clk_parent_set_in
 
-v4: replaces two patches from v3 which did not fix the root cause correctly.
-    Top level Makefile level dependency is needed to fix the race
-    condition.
+Andrew Goodbody (1):
+      clk: stm32: Wrong macros used in register read
 
-v3: added "export PLATFORM_LIBGCC_LIBA" like PLATFORM_LIBGCC, not sure
-    how testing worked without this before
-    https://lists.denx.de/pipermail/u-boot/2025-July/594581.html
+Cheick Traore (3):
+      arm: stm32mp2: add multifunction timer support for stm32mp25
+      pwm: stm32: add support for stm32mp25
+      configs: stm32mp25: Enable MFD timer and PWM for stm32mp25_defconfig
 
-v2: introduced PLATFORM_LIBGCC_LIBA variable with just lib.a filename,
-    PLATFORM_LIBGCC can have other flags too
-    https://lists.denx.de/pipermail/u-boot/2025-July/594034.html
+Marek Vasut (11):
+      reset: stm32: Fix header misuse
+      ARM: stm32: Add STM32MP13xx SPL Kconfig options
+      ARM: stm32: Add STM32MP13xx SPL hardware initialization
+      ARM: stm32: Limit early cache enablement in SPL to STM32MP15xx
+      ARM: stm32: Add STM32MP13xx PMIC initialization for DDR3 DRAM type
+      ARM: stm32: Add STM32MP13xx debug UART initialization
+      ARM: dts: stm32: Add stm32mp13-ddr.dtsi template
+      ARM: dts: stm32: Add 512 MiB DRAM settings for DH STM32MP13xx DHCOR DHSBC
+      ARM: dts: stm32: Add STM32MP13x SPL specific DT additions
+      ARM: dts: stm32: Add SPL specifics for DH STM32MP13xx DHCOR DHSBC
+      ARM: dts: stm32: Switch defconfig to SPL for DH STM32MP13xx DHCOR DHSBC
 
-v1: https://lists.denx.de/pipermail/u-boot/2025-July/593982.html
+Patrice Chotard (6):
+      ARM: stm32mp: Add STM32MP23 support
+      ARM: dts: stm32: Add stm32mp235f-dk-u-boot
+      arm: stm32mp: replace space by tab in sys_proto.h
+      configs: stm32mp13: Enable OF_UPSTREAM_BUILD_VENDOR
+      treewide: Fix STMicroelectronics spelling
+      reset: stm32: Fix set_clr field
 
-diff --git a/Makefile b/Makefile
-index c31bf7ecea97..b03f87a93fb9 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2131,6 +2131,11 @@ $(filter-out tools, $(u-boot-dirs)): tools
- # is "yes"), so compile examples after U-Boot is compiled.
- examples: $(filter-out examples, $(u-boot-dirs))
- 
-+ifeq ($(CONFIG_USE_PRIVATE_LIBGCC),y)
-+# lib/efi_loader apps depend on arch/$(ARCH)/lib for lib.a
-+lib: $(filter arch/$(ARCH)/lib, $(u-boot-dirs))
-+endif
-+
- # The setlocalversion script comes from linux and expects a
- # KERNELVERSION variable in the environment for figuring out which
- # annotated tags are relevant. Pass UBOOTVERSION.
--- 
-2.43.0
+Patrick Delaunay (1):
+      ARM: stm32: fix PRE_CON_BUF_ADDR on STM32MP13
 
+ MAINTAINERS                                            |   1 -
+ arch/arm/dts/stm32mp1-ddr.dtsi                         | 187 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp13-ddr.dtsi                        |  49 +++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp13-u-boot.dtsi                     |  89 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi             | 160 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ arch/arm/dts/stm32mp15-ddr.dtsi                        | 170 +-----------------------------------------------------------------------------------------------------------
+ arch/arm/dts/stm32mp23-u-boot.dtsi                     | 104 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp235f-dk-u-boot.dtsi                |  27 ++++++++++++++++++
+ arch/arm/include/asm/arch-am33xx/mem.h                 |   2 +-
+ arch/arm/include/asm/arch-omap5/mem.h                  |   2 +-
+ arch/arm/mach-stm32mp/Kconfig                          |  34 ++++++++++++++++++++--
+ arch/arm/mach-stm32mp/Kconfig.13x                      |   5 ++--
+ arch/arm/mach-stm32mp/Kconfig.23x                      |  37 ++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/Makefile                         |   1 +
+ arch/arm/mach-stm32mp/cmd_stm32key.c                   |   8 +++---
+ arch/arm/mach-stm32mp/include/mach/stm32.h             |  10 ++++---
+ arch/arm/mach-stm32mp/include/mach/sys_proto.h         |  53 +++++++++++++++++++++++-----------
+ arch/arm/mach-stm32mp/include/mach/timers.h            |   9 ++++++
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c                   |   9 ++++--
+ arch/arm/mach-stm32mp/stm32mp1/spl.c                   |   3 +-
+ arch/arm/mach-stm32mp/stm32mp1/stm32mp13x.c            | 204 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp2/Makefile                |   1 +
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c            | 191 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/timers.c                         |  34 +++++++++++++++++++++-
+ board/st/common/Kconfig                                |   2 +-
+ board/st/common/stpmic1.c                              |  51 ++++++++++++++++++++++-----------
+ board/st/stm32mp1/debug_uart.c                         |  21 ++++++++++++--
+ board/st/stm32mp2/Kconfig                              |  14 +++++++++
+ configs/stm32mp13_defconfig                            |   2 ++
+ configs/stm32mp13_dhcor_defconfig                      |  30 +++++++++++++------
+ configs/stm32mp15_dhsom.config                         |  48 +++++--------------------------
+ configs/stm32mp23_defconfig                            |  82 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ configs/stm32mp25_defconfig                            |   4 +++
+ configs/stm32mp_dhsom.config                           |  35 +++++++++++++++++++++--
+ drivers/clk/clk_scmi.c                                 |   4 +--
+ drivers/clk/stm32/clk-stm32h7.c                        |   4 +--
+ drivers/pwm/pwm-stm32.c                                |  11 ++++++-
+ drivers/reset/stm32/Kconfig                            |   2 +-
+ drivers/reset/stm32/stm32-reset-core.c                 |   2 +-
+ drivers/reset/stm32/stm32-reset-mp1.c                  |   2 +-
+ drivers/reset/stm32/stm32-reset-mp25.c                 |   2 +-
+ drivers/reset/stm32/stm32-reset.c                      |   4 +--
+ include/configs/stm32mp23_common.h                     | 130 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ include/configs/stm32mp23_st_common.h                  |  51 +++++++++++++++++++++++++++++++++
+ include/configs/stm32mp25_st_common.h                  |   2 +-
+ 46 files changed, 1701 insertions(+), 292 deletions(-)
+ create mode 100644 arch/arm/dts/stm32mp1-ddr.dtsi
+ create mode 100644 arch/arm/dts/stm32mp13-ddr.dtsi
+ create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
+ create mode 100644 arch/arm/dts/stm32mp23-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp235f-dk-u-boot.dtsi
+ create mode 100644 arch/arm/mach-stm32mp/Kconfig.23x
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c
+ create mode 100644 configs/stm32mp23_defconfig
+ create mode 100644 include/configs/stm32mp23_common.h
+ create mode 100644 include/configs/stm32mp23_st_common.h
