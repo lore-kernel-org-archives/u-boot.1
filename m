@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AF5C87FCC
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 09:20:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FDD8C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 09:20:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D7EE83623;
-	Thu, 31 Jul 2025 11:19:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DDE7B83641;
+	Thu, 31 Jul 2025 11:19:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ecOC1oNU";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="U01VjXIU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8422483612; Thu, 31 Jul 2025 11:19:56 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id CE76E83641; Thu, 31 Jul 2025 11:19:58 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 865C68349B
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 11:19:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2DA98349B
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 11:19:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0307a9198e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V9Ehig002503;
- Thu, 31 Jul 2025 11:19:50 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V8Ruko027400;
+ Thu, 31 Jul 2025 11:19:52 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- SdQTT1/gv7w1VWfV5Tk/DiGVup0fE+vVnCMLbt8HaTs=; b=ecOC1oNUj+U56gxJ
- uJVbEDY91xnqCanStRMv9lW/jGetPQYPEhhgIPsmgnAXUUaKnP4/jtGu/ecJaKlO
- gnCpA+rxxN2TtaH7CkYNpbJe2Q3RbVpxroyUtPG7QOyDMz7TJR3A8sh9ugxAOiu6
- VAKZ868maxmf5oH+75C773Qku2HD05CiwX26YDru/PWQGVHkmjmjmENW79g/NWxq
- qNV/F/oXF9KrpPuMy4R/Soyg/UNR0RZ3nGcnKDqarKMqEEpNFlWP1ejyNRYAQvuz
- tOdtJ+00E63bT+YQhud5E6GRpVwG6QJk0HroG+aP5S2Hvun/tobONbQI2KWWuZzt
- 0S73qQ==
+ m1h6gnVGxmrQtV1tQCd3gQew3CvGjkBBADeVXRNQAv0=; b=U01VjXIUj4Rohy4T
+ mtbuWHfoS/Bx1Bd9jBuwMyNHmO5niuSYNjLAHnl3yEbhwi1Is6c7tVVYyu/0kfcr
+ v1OZo/fWsJSHVT5aGfRbWdvbSzR3wNFqHR2HOgu7D2mpe4y+2CRfa5C+RGrAIFlR
+ QbykuU/uS+yIbfoC4vvO1g1pBZUQJ7gGZ/RnVETYcnu4J50BcFh1uQCt+oZhIEPJ
+ 8Pq8iM35p5J61ROv6zB+6zhXUbvBymlnS2f/lcahbIp8EXMZLPNhy9oMI5j02+6O
+ 56IgxcjYYlXv7w3zof5byVCXlHUUMvTpPOzq3aqVjurgjcPbKWNR3kdhiZCXW9VS
+ axO/9Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4859ynu60j-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484m59dwdp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Jul 2025 11:19:50 +0200 (MEST)
+ Thu, 31 Jul 2025 11:19:51 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D868140058;
- Thu, 31 Jul 2025 11:18:53 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D94DA40056;
+ Thu, 31 Jul 2025 11:18:46 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 958C47530B4;
- Thu, 31 Jul 2025 11:18:21 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7E2167530B0;
+ Thu, 31 Jul 2025 11:18:14 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 31 Jul
- 2025 11:18:20 +0200
-Message-ID: <dc20598a-d2b1-451d-87ee-54909a9cbff1@foss.st.com>
-Date: Thu, 31 Jul 2025 11:18:20 +0200
+ 2025 11:18:13 +0200
+Message-ID: <a8744b8a-423c-4bd8-a597-62bd5e027714@foss.st.com>
+Date: Thu, 31 Jul 2025 11:18:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/10] ARM: stm32: Add STM32MP13xx PMIC initialization
- for DDR3 DRAM type
+Subject: Re: [PATCH v2 03/10] ARM: stm32: Limit early cache enablement in SPL
+ to STM32MP15xx
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
 CC: Cheick Traore <cheick.traore@foss.st.com>, Fabrice Gasnier
  <fabrice.gasnier@foss.st.com>, Gatien Chevallier
@@ -69,10 +69,10 @@ CC: Cheick Traore <cheick.traore@foss.st.com>, Fabrice Gasnier
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
  <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
- <20250630001053.952342-4-marek.vasut@mailbox.org>
+ <20250630001053.952342-3-marek.vasut@mailbox.org>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250630001053.952342-4-marek.vasut@mailbox.org>
+In-Reply-To: <20250630001053.952342-3-marek.vasut@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -100,9 +100,10 @@ X-Virus-Status: Clean
 
 
 On 6/30/25 02:10, Marek Vasut wrote:
-> The STM32MP13xx PMIC initialization for DDR3 DRAM type is similar
-> to the STM32MP15xx PMIC initialization, except the VTT rail is not
-> enabled. Fill in the STM32MP13xx support.
+> The STM32MP13xx SRAM size is half that the SRAM size on STM32MP15xx,
+> disable early dcache start on STM32MP13xx as the TLB itself takes
+> about a quarter of the SPL size. The dcache will be enabled later,
+> once DRAM is available and TLB can be placed in DRAM.
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
@@ -123,87 +124,64 @@ On 6/30/25 02:10, Marek Vasut wrote:
 > ---
 > V2: Add RB from Patrice
 > ---
->  board/st/common/stpmic1.c | 51 ++++++++++++++++++++++++++-------------
->  1 file changed, 34 insertions(+), 17 deletions(-)
+>  arch/arm/mach-stm32mp/stm32mp1/cpu.c | 9 ++++++---
+>  arch/arm/mach-stm32mp/stm32mp1/spl.c | 3 ++-
+>  2 files changed, 8 insertions(+), 4 deletions(-)
 > 
-> diff --git a/board/st/common/stpmic1.c b/board/st/common/stpmic1.c
-> index 45c2bb5bcea..b46f89dacb9 100644
-> --- a/board/st/common/stpmic1.c
-> +++ b/board/st/common/stpmic1.c
-> @@ -14,8 +14,19 @@
->  #include <power/pmic.h>
->  #include <power/stpmic1.h>
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> index 8c09d91de05..e0c6f8ba937 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> @@ -28,7 +28,9 @@
+>   * early TLB into the .data section so that it not get cleared
+>   * with 16kB allignment (see TTBR0_BASE_ADDR_MASK)
+>   */
+> +#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
+>  u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
+> +#endif
 >  
-> +static bool is_stm32mp13xx(void)
-> +{
-> +	if (!IS_ENABLED(CONFIG_STM32MP13X))
-> +		return false;
-> +
-> +	return of_machine_is_compatible("st,stm32mp131") ||
-> +	       of_machine_is_compatible("st,stm32mp133") ||
-> +	       of_machine_is_compatible("st,stm32mp135");
-> +}
-> +
->  int board_ddr_power_init(enum ddr_type ddr_type)
+>  u32 get_bootmode(void)
 >  {
-> +	bool is_mp13 = is_stm32mp13xx();
->  	struct udevice *dev;
->  	bool buck3_at_1800000v = false;
->  	int ret;
-> @@ -30,18 +41,21 @@ int board_ddr_power_init(enum ddr_type ddr_type)
->  	switch (ddr_type) {
->  	case STM32MP_DDR3:
->  		/* VTT = Set LDO3 to sync mode */
-> -		ret = pmic_reg_read(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3));
-> -		if (ret < 0)
-> -			return ret;
+> @@ -95,18 +97,19 @@ void dram_bank_mmu_setup(int bank)
+>   */
+>  static void early_enable_caches(void)
+>  {
+> +#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
+>  	/* I-cache is already enabled in start.S: cpu_init_cp15 */
 > -
-> -		ret &= ~STPMIC1_LDO3_MODE;
-> -		ret &= ~STPMIC1_LDO12356_VOUT_MASK;
-> -		ret |= STPMIC1_LDO_VOUT(STPMIC1_LDO3_DDR_SEL);
-> -
-> -		ret = pmic_reg_write(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
-> -				     ret);
-> -		if (ret < 0)
-> -			return ret;
-> +		if (!is_mp13) {
-> +			/* Enable VTT only on STM32MP15xx */
-> +			ret = pmic_reg_read(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3));
-> +			if (ret < 0)
-> +				return ret;
-> +
-> +			ret &= ~STPMIC1_LDO3_MODE;
-> +			ret &= ~STPMIC1_LDO12356_VOUT_MASK;
-> +			ret |= STPMIC1_LDO_VOUT(STPMIC1_LDO3_DDR_SEL);
-> +
-> +			ret = pmic_reg_write(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
-> +					     ret);
-> +			if (ret < 0)
-> +				return ret;
-> +		}
+>  	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+>  		return;
 >  
->  		/* VDD_DDR = Set BUCK2 to 1.35V */
->  		ret = pmic_clrsetbits(dev,
-> @@ -69,11 +83,14 @@ int board_ddr_power_init(enum ddr_type ddr_type)
->  		mdelay(STPMIC1_DEFAULT_START_UP_DELAY_MS);
+>  #if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> -		gd->arch.tlb_size = PGTABLE_SIZE;
+> -		gd->arch.tlb_addr = (unsigned long)&early_tlb;
+> +	gd->arch.tlb_size = PGTABLE_SIZE;
+> +	gd->arch.tlb_addr = (unsigned long)&early_tlb;
+>  #endif
 >  
->  		/* Enable VTT = LDO3 */
-> -		ret = pmic_clrsetbits(dev,
-> -				      STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
-> -				      STPMIC1_LDO_ENA, STPMIC1_LDO_ENA);
-> -		if (ret < 0)
-> -			return ret;
-> +		if (!is_mp13) {
-> +			/* Enable VTT only on STM32MP15xx */
-> +			ret = pmic_clrsetbits(dev,
-> +					      STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
-> +					      STPMIC1_LDO_ENA, STPMIC1_LDO_ENA);
-> +			if (ret < 0)
-> +				return ret;
-> +		}
+>  	/* enable MMU (default configuration) */
+>  	dcache_enable();
+> +#endif
+>  }
 >  
->  		mdelay(STPMIC1_DEFAULT_START_UP_DELAY_MS);
+>  /*
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> index 9c4fafbf478..e63bdaaf42f 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> @@ -220,10 +220,11 @@ void board_init_f(ulong dummy)
+>  	 * activate cache on DDR only when DDR is fully initialized
+>  	 * to avoid speculative access and issue in get_ram_size()
+>  	 */
+> -	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> +	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF) && !IS_ENABLED(CONFIG_STM32MP13X)) {
+>  		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
+>  						CONFIG_DDR_CACHEABLE_SIZE,
+>  						DCACHE_DEFAULT_OPTION);
+> +	}
+>  }
 >  
+>  void spl_board_prepare_for_boot(void)
 Applied to u-boot-stm32/master
 
 Thanks
