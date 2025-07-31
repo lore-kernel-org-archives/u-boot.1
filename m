@@ -4,84 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6779C87FCC
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 16:06:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A92FAC87FCA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 16:06:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49A7A83918;
-	Thu, 31 Jul 2025 18:05:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9582383914;
+	Thu, 31 Jul 2025 18:05:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nKvHTbXT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W/4u2HFn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4A588309D; Thu, 31 Jul 2025 18:05:36 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id E80B58391A; Thu, 31 Jul 2025 18:05:42 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7585283914
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 18:05:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 379E983914
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 18:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-2ffb85aed35so708977fac.0
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:05:33 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-73e88bc38bbso650706a34.3
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:05:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753977932; x=1754582732; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753977939; x=1754582739; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vom0EiFYXoy00k0eQ94zWi6ThZnFOKxGYN+H8upquIM=;
- b=nKvHTbXTNLYAp6WkTL47APhanrHn3a8RBBJHeHDvbWn66l4q2n3x9FtL4EjRFVv6t8
- qY3N6lbqxRZkMrKOT7LQjT9/Kdr84uuhWRLrBYRxl1OU+nhWQU4XUf6xrH2M5O4D2Z4/
- +JKMVa1PKuezFAX8oEgcc7cz7xDKZwEDs4l+0=
+ bh=sZvtY6BXKR0mt3NuU1TTc8bYZtKmd+blT/dkYXQwHYI=;
+ b=W/4u2HFnhsbTYOPdhVBxd+9IbVFQR7SsAgwACMbE5+zpwWSGApYr+dvj0vLnp0u37v
+ SdYjqUezI+CFIo9vpdSSUMtZRINjkmlVITS79nTt1Me8OUqXnCR4l7E/5W1k6kShKXIu
+ fd26RmDGRP+2Du+fzcXRIdUZCARM9I6XQrxcM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753977932; x=1754582732;
+ d=1e100.net; s=20230601; t=1753977939; x=1754582739;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vom0EiFYXoy00k0eQ94zWi6ThZnFOKxGYN+H8upquIM=;
- b=Tu3gxuFgtSd0NiY6MpNL+WLvD0mFb/hqjbkAEjZoZwL7jzkghTfHc50xk+kTXY0NdJ
- J9UqO4g1OVD16T398jxFcsXdrpNG1tjfP6KJJfO2X5/LLmpolattXZtFtPzTnLlO5SoE
- ivSAAACOHrcDs4JB+RuLpFIa4H7rASWXhvUhMzHAigv1lirK0wewd6WH7VavfD66BrA+
- H8FNsUFOpQz11PKVK2l6GjunlZXIVNkuQPDgWrEhISxxGB4tQcKdwwzEYZGOigd45xGT
- 4dtMPw9NqaMH8CNzme9kEk4FqWhFdYJ0JDyJAhU7dIeKOIz/llvXnNTulwAHBLqxsoac
- 43lg==
-X-Gm-Message-State: AOJu0YyysejD3qFLExmjtDnhqnb/Qn5GJ8FJ7nylR/sXP/OqQRsPMWtA
- PJ8Ypfo3WCXuuat1qo7S2R85LCQ/DXYmVW1u7fnGGKjZU0u9928TB7Q045nUchpEdwA=
-X-Gm-Gg: ASbGncummzuflAzT3bQRUwzmQQVGwqIuRu2ZsdFjVqsURUFVR0iy+tN0vfDqVwBv8Us
- bbK9bCPIzPBsO3yNBY3lZHtPaxqyIW30CgM59xf6HkWTeNC/WsYid5Q+Q3GgzAfPbaprik4VESg
- +7CG3CasLfvG1vQoOw3Ut7yzVEiocjUvQYPcG+F1iZ6usmII5dv0Y4VxE9FNV7fiDzsDa69zgyt
- MsdlDPd4L7hPUhmjKmSOb/sKOjUYfftT5q2yAssuST29Oq0ddcr0qOzflooHiyN44QwbDDaOroM
- vBi8E/3P50Fj+O1rtMTG02ru+iZbN070Z/twq3PqNvkC9UgKoWCfS0N9SLXILhyptauxcaPvnX0
- xR3hkUtWK65+T6nbT37F4DI7Q+04alJp1A+5M7OT0zZ1Au4RGYnzrG+IN0VS3GK/GshM=
-X-Google-Smtp-Source: AGHT+IErEYQrh0qGwRjXXbgVtgW4zFhEhrieHj/XTRr/VVjB/yZBQkxWERKbbeEEQQSmZgwv5nMydQ==
-X-Received: by 2002:a05:6870:5b9e:b0:2d5:2534:ac19 with SMTP id
- 586e51a60fabf-307859d571emr5535248fac.4.1753977932014; 
- Thu, 31 Jul 2025 09:05:32 -0700 (PDT)
+ bh=sZvtY6BXKR0mt3NuU1TTc8bYZtKmd+blT/dkYXQwHYI=;
+ b=Y+1KaRg+k80Ic4/sHJv/eS4r2g0oqAS9UuLlYmKH2+x4rL1pc68aZY2SC7kb6X822+
+ 5WilIHlAB9GQrJWKuTe4TWbiz5UcpqI5kE7Rl8nW6TIUfB3uZeMKy0X8Q2sh70fqDoyw
+ ebrvjauwud6vQFFLazFOTxGsoaO5sZcuGGbGuAUQ+6XMXeStgnBY+ftOcGPEjdIywjZX
+ rnmsN1km+bG9V9+PROYrxKb/gGq5OgFC5gikNJLAqQ5JNJsbe5Zc36dfhMLZB/R1HKU2
+ GwrZUl85A4BPpreL5bzOdNO0gqtoa7DmKJimuxM7JqKKYag3K1vNjbQd9quH+FHmaZVx
+ TtwQ==
+X-Gm-Message-State: AOJu0Yw170lLaOqllwN2laBjTCed0ORam/ghCnOtzHqiHL8sfvPkvSEB
+ 0oPnv57E3ulBziPD/TMiE4KNWQwRWwMdqZOWeLCVuDFCUgKWtJMujyDRW7EQogA+daA=
+X-Gm-Gg: ASbGncvgYMxLwyWNOTMzzzGI2U6/CaOyAwTWFhS3YqR5ZVslUeQFq0lnnSjhuplPsTa
+ qjAq469RZYapyyN9AoGqaqeN74gTxdmP5A7BOwYtS/IPxdLMz9OgtOBvmZzlqfgtFhybsZovCa8
+ X7xFiqAcpPbtAul5OR46vOXWZ87F8WJNDYw1ynJSxsYdesWdyYk5fpsszg3VYcjGXBFZKLjgBiB
+ OimFMjhRIYKnF6S6vTdzB8/dNQr2gZRKN+2mMLNdEx9jrVWlqPv8ijR9URvmOV7JK8EKyqMEz5T
+ KdaS6bVXnu66RcOemx4mjbwjaCblzXk5TJjh0q80k1CwN6/wSp7Hh7oPGdL+lFJIUWnw5nhq8PN
+ DQ/nGkjaZ+SEgKMr0RfmA74Xc3mjvNR3cPZkFg+/aiYGiVvfcvRraAX9o
+X-Google-Smtp-Source: AGHT+IFcbHpBd2/Gdwa6pH0RvHyv+Q5bI/H8vBWSBX+YjINGXSRwk7oyRXAMMYeiIwQutRmbHq1g/w==
+X-Received: by 2002:a05:6830:390b:b0:73e:9fea:f2bd with SMTP id
+ 46e09a7af769-74177e24375mr5747568a34.26.1753977938838; 
+ Thu, 31 Jul 2025 09:05:38 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-307a7120beesm441012fac.6.2025.07.31.09.05.30
+ 46e09a7af769-74186cc4d97sm338080a34.17.2025.07.31.09.05.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 09:05:31 -0700 (PDT)
-Date: Thu, 31 Jul 2025 10:05:28 -0600
+ Thu, 31 Jul 2025 09:05:38 -0700 (PDT)
+Date: Thu, 31 Jul 2025 10:05:35 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, Adriano Cordova <adrianox@gmail.com>,
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2] CI: Wire mbv32 combinations
-Message-ID: <20250731160528.GA1807455@bill-the-cat>
-References: <02e5c14552b05200ece94136db0077cbdd47738c.1753945577.git.michal.simek@amd.com>
+ Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: Re: [PATCH V5 0/4] cmd: env: select: Add output for available
+ environment targets
+Message-ID: <20250731160535.GB1807455@bill-the-cat>
+References: <20250718170602.10746-1-cniedermaier@dh-electronics.com>
+ <20250728190320.GA1732232@bill-the-cat>
+ <3770ea5747c249d49499737f4889f177@dh-electronics.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZLrL+y4cmZ+x+gja"
+ protocol="application/pgp-signature"; boundary="l/JxzhSs1pBwXto9"
 Content-Disposition: inline
-In-Reply-To: <02e5c14552b05200ece94136db0077cbdd47738c.1753945577.git.michal.simek@amd.com>
+In-Reply-To: <3770ea5747c249d49499737f4889f177@dh-electronics.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,33 +114,63 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZLrL+y4cmZ+x+gja
+--l/JxzhSs1pBwXto9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 31, 2025 at 09:06:18AM +0200, Michal Simek wrote:
-
-> After upgrading to QEMU 10 by commit 1d782a3f229c ("Docker, CI: Update to
-> latest Ubuntu and Dockerfile") let's wire mbv32 which is the part of QEMU
-> to have it under regression.
+On Thu, Jul 31, 2025 at 09:58:27AM +0000, Christoph Niedermaier wrote:
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Monday, July 28, 2025 9:03 PM
+> > On Fri, Jul 18, 2025 at 07:05:58PM +0200, Christoph Niedermaier wrote:
+> >=20
+> >> Add the "-l" parameter to the "env select" command to print the availa=
+ble
+> >> environment targets, convert all argument parsing in the file nvedit.c=
+ to
+> >> getopt() and check that with unit tests.
+> >>
+> >> The first patch converts the parsing of arguments to getopt() for all =
+env
+> >> commands. The second one avoids stopping unit test on console output
+> >> "## Error: ". The third one adds unit tests for checking the env comma=
+nd.
+> >> These were used to check the env commands before and after the convers=
+ion.
+> >> The fourth patch adds the actual new parameter "-l" for the "env selec=
+t"
+> >> command.
+> >>
+> >> Christoph Niedermaier (3):
+> >>   cmd: nvedit: Convert the parsing of arguments to getopt()
+> >>   test/py: Avoid stopping the test on console output "## Error: "
+> >>   test: cmd: nvedit: Add basic unit tests
+> >>   cmd: env: select: Add output for available environment targets
+> >=20
+> > I'm sorry, but it seems like a lot of the tests fail in CI?
+> > https://source.denx.de/u-boot/u-boot/-/jobs/1209804
+> > https://source.denx.de/u-boot/u-boot/-/jobs/1209794
+> > For example.
 >=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> I think I fixed my test, but broke other tests in the process.
+> I'm very sorry. I will try to fix the problem, but it is difficult
+> to reproduce the entire CI locally. I will try my best, sorry again.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+You can trigger CI runs too via GitHub / Azure, BTW:
+https://docs.u-boot.org/en/latest/develop/ci_testing.html
 
 --=20
 Tom
 
---ZLrL+y4cmZ+x+gja
+--l/JxzhSs1pBwXto9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIuUSAAKCRAr4qD1Cr/k
-Cqw6AP4vws3uNX1sdSmd2ZifHP5o5v34UY5j7hcAdKkRolX3rgD8CUEgBkGcPs1s
-Pu1Goq5H0xG3tuckrMx66LLWKxgsJw4=
-=ZmY1
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIuUTgAKCRAr4qD1Cr/k
+CopRAP4g4k7VtinvdDyQb6csBQ2MWMip0F3aYNpPWucF0J3QRAD+LplWMBXgXgrm
+qDOItq17y/kMWO6YG1hI877mh2h6bAE=
+=VJ9Y
 -----END PGP SIGNATURE-----
 
---ZLrL+y4cmZ+x+gja--
+--l/JxzhSs1pBwXto9--
