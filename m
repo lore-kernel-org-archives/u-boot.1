@@ -4,76 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46CB0C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 11:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46BD5C87FCC
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 12:09:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD7CF83857;
-	Thu, 31 Jul 2025 13:55:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id A5260838AA;
+	Thu, 31 Jul 2025 14:09:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="y77Lzq88";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GIsuNhR4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F6AF838AB; Thu, 31 Jul 2025 13:55:09 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 180EC838C5; Thu, 31 Jul 2025 14:09:55 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6BAC83852
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 13:55:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E33A838A0
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 14:09:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0307a9198e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56VAGJi4030935;
- Thu, 31 Jul 2025 13:55:01 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=/sgq77nsM+yMfIHjoWxg8b
- JZO0F17OZnu0qqBk8++JU=; b=y77Lzq88og9vVbausVZPErqBxyD7fLyIFrOOiq
- DU2D3eGJEsl3vSQAjE7Jpyr1r77Z3vgaq02LF7L47Ye/PvofW2ApPZrP5Y8GTZsh
- spHy4AuojthNL0z7TGDXPqyMmdKlFyTEN0GwV353Fywo8dSD/fucgafDfc0uGei4
- QZCvbmXL1xg7jtaljKh3ellb/z1ecVYCN5wOZv2ZPkKnqbNtXZFSbXdAjaJki13v
- og7ILy7KizE5XO3jclFiK+LG3wUTlBgJLS5OZDgLBjsjI4nCpp9oUgWlXj+6T2bT
- GNcLc2lL9lPtkSwlmFPOIZ3oDmKiTdFGw3jiJJhVKQvaULDQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484memyhjs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Jul 2025 13:55:00 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2A8C240045;
- Thu, 31 Jul 2025 13:53:58 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1452E76373E;
- Thu, 31 Jul 2025 13:53:36 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 31 Jul
- 2025 13:53:35 +0200
-Message-ID: <dd84eff8-cbc6-4ae5-b19c-0ae52f09e363@foss.st.com>
-Date: Thu, 31 Jul 2025 13:53:35 +0200
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D72A03F57D
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 12:09:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1753963789;
+ bh=wqfUcvPG3MbhEHnZ1fHJlhWxdvwsvouXsNGEIZt/chk=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=GIsuNhR40IDeZvVmLM4Kp8IzyzwD/mryK0LuvPeXFrJG/kEgIL79Hwie40/UhrRJT
+ FlvacFJR1J0noI+HbIyRoTdVFJiR/xybVf8db2YokRAZB7qloGGlAhUTxIAvI0di7V
+ LzS85Hwzt2oY9bgN9nVGnsrJmLX+SPQwMyjDAqa2Mp9LAiHg51etXuoB+CC1XdWeAg
+ guoakcbfrPyhLY1nRcE+i2ZWDKVVnZAmpeuorQ+EKOK79TzLwZISLjIQ9/4teDh44y
+ Z5w+qwrPu0qOrX+EQ0Z/MkxwIguPVF4snVhV/CRnRBpUBKuDVTHK7c313c4PecMB6e
+ erNejjfonMc2Q==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4562985ac6aso6039175e9.3
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 05:09:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753963789; x=1754568589;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wqfUcvPG3MbhEHnZ1fHJlhWxdvwsvouXsNGEIZt/chk=;
+ b=OPhebAL/Jv3N17qiSC26BWpZMTrYwjF7o1YfBrUlSZqm+7PkqctBYi1M37NqDbSqjI
+ N4g1cO+Nf5RyWNycu3O26ZmjRa8cHopy8YvhwfafbDrked7NzuVlYiO7kYZga4ZnWKkJ
+ awHMC3gGaoArBrnq8SzbSyDYiKntkxLIhZ872pc57GO4Su8f+4hkiJvwexOrQbzbuKSM
+ spWAylOQM694zPv1hViJcQLmZHudvKFI8lu7cffRgptGSDb8cX7N+ENemcgm+uDKzpmS
+ WYk9EnuinIkM1vqaBbWrAMZIlK/xpjmgPxQ2maKQlpVMTGzcDh+ydffYNBXab1YIymQp
+ HREA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWj1mtmYBCRcThJrg2IZZuLV28vnIOTj+fMGrlfoV2ko4JEdKKuj0cI2xHK9u9lhfleww6hUnQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyeItcfFi0o6ZwsfN/clauAdIsIQvsquY6UPnr5/z0EX4xxZU5e
+ e7MlBn0ZrnHG/GGHZCpOqYuicPpbxeVNo5L7RpZNYnb9eb7UVQ11XQpWcH1YLw3xa+50E/fxFt2
+ OMrp3sg6zu9Y+c6PccCHEyMhUuZPTQFMwyvE2kyeo6ExkPJYO+nSfARE+P1M/OI3YalyyCjw=
+X-Gm-Gg: ASbGncv8Sq6qtISQ6S+L6FW4wiQTQ5JWgWXQemAkGZMvsUeXdib8Rciy/JsiYJmoMRr
+ WM6ZL9rKTLrQB0vj5jAOVaeT1f6VfeMolenJnb+H4bMUvOBJ7GVsiPY8DkLu7ZzlIwTo+VctzFb
+ uTzxFcA6Yxjvp6BtsfZmMs64zeIMh0NYjg6Z8x2mKUNKBjkRhYA61taM0Z9uTs2ej3HdGhYZbVE
+ ykI3LBZmfra+Y9nrzG+Z3mRXl4koUIZJozMKth0mDil+cyZ5Bi+cpebnoMyyHQ0kTmN9phgy1+M
+ adHvheMhqhqAdODQUHO/tPyJRSqPLgMBNfvRzAnBMsW5xOGuXV8rrdaJ9cp6Gz4UUuwZo3OKyuo
+ Mwk9riM5B553YFcsm6wVo/NBtw0ERsp4JOtbgLqEDzJwzrg==
+X-Received: by 2002:a05:600c:4fcb:b0:456:a1b:e906 with SMTP id
+ 5b1f17b1804b1-45892bdecacmr58113745e9.33.1753963788523; 
+ Thu, 31 Jul 2025 05:09:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHNlO6bA63FMlV4LjbMfEEKwPaQUl3lyCvrcvxlcM3Bezz2VT369hJ85/eUxA1Bg8j0khZsJA==
+X-Received: by 2002:a05:600c:4fcb:b0:456:a1b:e906 with SMTP id
+ 5b1f17b1804b1-45892bdecacmr58113325e9.33.1753963787938; 
+ Thu, 31 Jul 2025 05:09:47 -0700 (PDT)
+Received: from [192.168.103.102]
+ (dynamic-046-114-109-032.46.114.pool.telefonica.de. [46.114.109.32])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45895377748sm63444395e9.9.2025.07.31.05.09.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Jul 2025 05:09:47 -0700 (PDT)
+Message-ID: <ba2bce0d-b2b2-4092-a73c-f53637917e68@canonical.com>
+Date: Thu, 31 Jul 2025 14:09:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: Re: [RFC PATCH v1 2/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
+To: Philip Oberfichtner <pro@denx.de>
+Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Gary Bisson <bisson.gary@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
+ Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de
+References: <20250731114044.264745-1-pro@denx.de>
+ <20250731114044.264745-3-pro@denx.de>
 Content-Language: en-US
-To: TOM Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Alice Guo <alice.guo@nxp.com>, Andrew Goodbody
- <andrew.goodbody@linaro.org>,
- Cheick Traore <cheick.traore@foss.st.com>, Marek Vasut <marex@denx.de>,
- <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>
-Subject: [PULL] Pull request for u-boot master / v2025.10 =
- u-boot-stm32-20250731
-Content-Type: text/plain; charset="UTF-8"
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250731114044.264745-3-pro@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-31_02,2025-07-31_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,129 +124,656 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+On 31.07.25 13:40, Philip Oberfichtner wrote:
+> CONFIG_HAS_BOARD_SIZE_LIMIT is superfluous, if we interpret the value
+> "zero" as "unlimited". This is exactly how all the other
+> CONFIG_XXX_SIZE_LIMIT work.
+> 
+> No functional changes.
+> 
+> Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> ---
+>   Kconfig                                        | 10 +---------
+>   cmd/Kconfig                                    |  2 +-
+>   configs/bk4r1_defconfig                        |  1 -
+>   configs/chromebook_link_defconfig              |  1 -
+>   configs/colibri_vf_defconfig                   |  1 -
+>   configs/ea-lpc3250devkitv2_defconfig           |  1 -
+>   configs/gardena-smart-gateway-mt7688_defconfig |  1 -
+>   configs/guruplug_defconfig                     |  1 -
+>   configs/imx28_btt3_defconfig                   |  1 -
+>   configs/imx28_xea_defconfig                    |  1 -
+>   configs/legoev3_defconfig                      |  1 -
+>   configs/linkit-smart-7688_defconfig            |  1 -
+>   configs/lschlv2_defconfig                      |  1 -
+>   configs/lsxhl_defconfig                        |  1 -
+>   configs/lxr2_defconfig                         |  1 -
+>   configs/mx51evk_defconfig                      |  1 -
+>   configs/mx53loco_defconfig                     |  1 -
+>   configs/mx6sabresd_defconfig                   |  1 -
+>   configs/mx7ulp_com_defconfig                   |  1 -
+>   configs/openrd_base_defconfig                  |  1 -
+>   configs/openrd_client_defconfig                |  1 -
+>   configs/openrd_ultimate_defconfig              |  1 -
+>   configs/pcm052_defconfig                       |  1 -
+>   configs/pico-dwarf-imx6ul_defconfig            |  1 -
+>   configs/pico-dwarf-imx7d_defconfig             |  1 -
+>   configs/pico-hobbit-imx6ul_defconfig           |  1 -
+>   configs/pico-hobbit-imx7d_defconfig            |  1 -
+>   configs/pico-imx6_defconfig                    |  1 -
+>   configs/pico-imx6ul_defconfig                  |  1 -
+>   configs/pico-imx7d_bl33_defconfig              |  1 -
+>   configs/pico-imx7d_defconfig                   |  1 -
+>   configs/pico-nymph-imx7d_defconfig             |  1 -
+>   configs/pico-pi-imx6ul_defconfig               |  1 -
+>   configs/pico-pi-imx7d_defconfig                |  1 -
+>   configs/sheevaplug_defconfig                   |  1 -
+>   configs/stm32mp15_dhsom.config                 |  1 -
+>   configs/tbs2910_defconfig                      |  1 -
+>   configs/turris_1x_nor_defconfig                |  1 -
+>   configs/turris_1x_sdcard_defconfig             |  1 -
+>   configs/turris_omnia_defconfig                 |  1 -
+>   configs/udoo_neo_defconfig                     |  1 -
+>   configs/vf610twr_defconfig                     |  1 -
+>   configs/vf610twr_nand_defconfig                |  1 -
+>   configs/warp7_bl33_defconfig                   |  1 -
+>   configs/warp7_defconfig                        |  1 -
+>   lib/efi_loader/Kconfig                         |  6 +++---
+>   46 files changed, 5 insertions(+), 56 deletions(-)
+> 
+> diff --git a/Kconfig b/Kconfig
+> index c883f115459..d0c0a6a1d53 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -535,19 +535,11 @@ config BUILD_TARGET
+>   	  special image will be automatically built upon calling
+>   	  make / buildman.
+>   
+> -config HAS_BOARD_SIZE_LIMIT
+> -	bool "Define a maximum size for the U-Boot image"
+> -	depends on !COMPILE_TEST
+> -	default y if RCAR_32 || RCAR_64
+> -	help
+> -	  In some cases, we need to enforce a hard limit on how big the U-Boot
+> -	  image itself can be.
+> -
+>   config BOARD_SIZE_LIMIT
+>   	int "Maximum size of the U-Boot image in bytes"
+> +	default 0
 
-Please pull the STM32 related patches for u-boot/master, v2025.10 = u-boot-stm32-20250731
+The first match is used as default. Therefore the generic default must 
+be last.
 
-CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/27236
+Otherwise looks good to me.
 
-Thanks
-Patrice
+Best regards
 
-The following changes since commit 182cb30084516c3085d2ca5dde3f105f7625d774:
+Heinrich
 
-  Prepare v2025.10-rc1 (2025-07-28 18:23:01 -0600)
+>   	default 524288 if RCAR_32
+>   	default 1048576 if RCAR_64
+> -	depends on HAS_BOARD_SIZE_LIMIT
+>   	help
+>   	  Maximum size of the U-Boot image. When defined, the build system
+>   	  checks that the actual size does not exceed it.  This does not
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index b3b5be1ea79..99d91e9e5a9 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2331,7 +2331,7 @@ config CMD_EFIDEBUG
+>   
+>   config CMD_EFICONFIG
+>   	bool "eficonfig - provide menu-driven uefi variables maintenance interface"
+> -	default y if !HAS_BOARD_SIZE_LIMIT
+> +	default y if BOARD_SIZE_LIMIT = 0
+>   	depends on EFI_BOOTMGR
+>   	select MENU
+>   	help
+> diff --git a/configs/bk4r1_defconfig b/configs/bk4r1_defconfig
+> index fd3b6188776..ca63cf71db8 100644
+> --- a/configs/bk4r1_defconfig
+> +++ b/configs/bk4r1_defconfig
+> @@ -18,7 +18,6 @@ CONFIG_TARGET_BK4R1=y
+>   CONFIG_SYS_MEMTEST_START=0x80010000
+>   CONFIG_SYS_MEMTEST_END=0x87c00000
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=520192
+>   # CONFIG_EFI_LOADER is not set
+>   CONFIG_FIT=y
+> diff --git a/configs/chromebook_link_defconfig b/configs/chromebook_link_defconfig
+> index b5b3851a010..9bdeb604292 100644
+> --- a/configs/chromebook_link_defconfig
+> +++ b/configs/chromebook_link_defconfig
+> @@ -15,7 +15,6 @@ CONFIG_DEBUG_UART=y
+>   CONFIG_HAVE_MRC=y
+>   CONFIG_SMP=y
+>   CONFIG_HAVE_VGA_BIOS=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=630000
+>   # CONFIG_EFI_LOADER is not set
+>   CONFIG_FIT=y
+> diff --git a/configs/colibri_vf_defconfig b/configs/colibri_vf_defconfig
+> index 1364fe45291..9c3077cc16f 100644
+> --- a/configs/colibri_vf_defconfig
+> +++ b/configs/colibri_vf_defconfig
+> @@ -15,7 +15,6 @@ CONFIG_TARGET_COLIBRI_VF=y
+>   CONFIG_SYS_MEMTEST_START=0x80010000
+>   CONFIG_SYS_MEMTEST_END=0x87c00000
+>   CONFIG_ENV_VARS_UBOOT_CONFIG=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=520192
+>   # CONFIG_EFI_LOADER is not set
+>   CONFIG_BOOTDELAY=1
+> diff --git a/configs/ea-lpc3250devkitv2_defconfig b/configs/ea-lpc3250devkitv2_defconfig
+> index c3af7afced1..5a3cdb45f7c 100644
+> --- a/configs/ea-lpc3250devkitv2_defconfig
+> +++ b/configs/ea-lpc3250devkitv2_defconfig
+> @@ -12,7 +12,6 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80000f20
+>   CONFIG_TARGET_EA_LPC3250DEVKITV2=y
+>   CONFIG_DEFAULT_DEVICE_TREE="lpc3250-ea3250"
+>   CONFIG_SYS_LOAD_ADDR=0x80100000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=1048575
+>   CONFIG_DISTRO_DEFAULTS=y
+>   # CONFIG_AUTOBOOT is not set
+> diff --git a/configs/gardena-smart-gateway-mt7688_defconfig b/configs/gardena-smart-gateway-mt7688_defconfig
+> index 3c2bcc6a3c4..39e3cd04251 100644
+> --- a/configs/gardena-smart-gateway-mt7688_defconfig
+> +++ b/configs/gardena-smart-gateway-mt7688_defconfig
+> @@ -27,7 +27,6 @@ CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
+>   # CONFIG_MIPS_BOOT_ENV_LEGACY is not set
+>   CONFIG_MIPS_BOOT_FDT=y
+>   CONFIG_ENV_VARS_UBOOT_CONFIG=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=655360
+>   CONFIG_FIT=y
+>   CONFIG_FIT_SIGNATURE=y
+> diff --git a/configs/guruplug_defconfig b/configs/guruplug_defconfig
+> index e046a5ee8b1..a8697113cd3 100644
+> --- a/configs/guruplug_defconfig
+> +++ b/configs/guruplug_defconfig
+> @@ -13,7 +13,6 @@ CONFIG_ENV_OFFSET=0xE0000
+>   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-guruplug-server-plus"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_IDENT_STRING="\nMarvell-GuruPlug"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=917504
+>   CONFIG_BOOTDELAY=3
+>   CONFIG_USE_BOOTCOMMAND=y
+> diff --git a/configs/imx28_btt3_defconfig b/configs/imx28_btt3_defconfig
+> index 07c805faa2f..0efbea20109 100644
+> --- a/configs/imx28_btt3_defconfig
+> +++ b/configs/imx28_btt3_defconfig
+> @@ -31,7 +31,6 @@ CONFIG_ENV_OFFSET_REDUND=0x90000
+>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>   CONFIG_SPL_SPI=y
+>   CONFIG_SPL_PAYLOAD="u-boot.img"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=458752
+>   CONFIG_TIMESTAMP=y
+>   CONFIG_FIT=y
+> diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
+> index 8715893bbcc..9a54efdb8da 100644
+> --- a/configs/imx28_xea_defconfig
+> +++ b/configs/imx28_xea_defconfig
+> @@ -29,7 +29,6 @@ CONFIG_ENV_OFFSET_REDUND=0x90000
+>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>   CONFIG_SPL_SPI=y
+>   CONFIG_SPL_PAYLOAD="u-boot.img"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=458752
+>   CONFIG_TIMESTAMP=y
+>   CONFIG_FIT=y
+> diff --git a/configs/legoev3_defconfig b/configs/legoev3_defconfig
+> index dee19a95d55..571ff928029 100644
+> --- a/configs/legoev3_defconfig
+> +++ b/configs/legoev3_defconfig
+> @@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x4000
+>   CONFIG_DEFAULT_DEVICE_TREE="da850-lego-ev3"
+>   CONFIG_SYS_LOAD_ADDR=0xc0700000
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=262144
+>   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+>   CONFIG_BOOTDELAY=0
+> diff --git a/configs/linkit-smart-7688_defconfig b/configs/linkit-smart-7688_defconfig
+> index 1602ff5b73a..e2f232d549b 100644
+> --- a/configs/linkit-smart-7688_defconfig
+> +++ b/configs/linkit-smart-7688_defconfig
+> @@ -23,7 +23,6 @@ CONFIG_MIPS_CACHE_DISABLE=y
+>   CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
+>   # CONFIG_MIPS_BOOT_ENV_LEGACY is not set
+>   CONFIG_MIPS_BOOT_FDT=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=524288
+>   CONFIG_FIT=y
+>   CONFIG_FIT_SIGNATURE=y
+> diff --git a/configs/lschlv2_defconfig b/configs/lschlv2_defconfig
+> index 3a53d49ba83..b296feeec1b 100644
+> --- a/configs/lschlv2_defconfig
+> +++ b/configs/lschlv2_defconfig
+> @@ -18,7 +18,6 @@ CONFIG_DM_GPIO=y
+>   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-lschlv2"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_IDENT_STRING=" LS-CHLv2"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=393216
+>   # CONFIG_BOOTSTD is not set
+>   CONFIG_DISTRO_DEFAULTS=y
+> diff --git a/configs/lsxhl_defconfig b/configs/lsxhl_defconfig
+> index 83a0a6f5415..ff1ce7a79cc 100644
+> --- a/configs/lsxhl_defconfig
+> +++ b/configs/lsxhl_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_DM_GPIO=y
+>   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-lsxhl"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_IDENT_STRING=" LS-XHL"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=393216
+>   # CONFIG_BOOTSTD is not set
+>   CONFIG_DISTRO_DEFAULTS=y
+> diff --git a/configs/lxr2_defconfig b/configs/lxr2_defconfig
+> index f2afed1c4ba..c9852fb6470 100644
+> --- a/configs/lxr2_defconfig
+> +++ b/configs/lxr2_defconfig
+> @@ -26,7 +26,6 @@ CONFIG_SPL_LIBDISK_SUPPORT=y
+>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>   CONFIG_SPL_SPI=y
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715766
+>   CONFIG_FIT=y
+>   CONFIG_SPL_FIT_PRINT=y
+> diff --git a/configs/mx51evk_defconfig b/configs/mx51evk_defconfig
+> index bcbef81d1d4..14b7e80c86b 100644
+> --- a/configs/mx51evk_defconfig
+> +++ b/configs/mx51evk_defconfig
+> @@ -10,7 +10,6 @@ CONFIG_DM_GPIO=y
+>   CONFIG_DEFAULT_DEVICE_TREE="imx51-babbage"
+>   CONFIG_SYS_LOAD_ADDR=0x92000000
+>   # CONFIG_CMD_BMODE is not set
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=785408
+>   CONFIG_USE_BOOTCOMMAND=y
+>   CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
+> diff --git a/configs/mx53loco_defconfig b/configs/mx53loco_defconfig
+> index 1f7da84fbea..0413e2ee55a 100644
+> --- a/configs/mx53loco_defconfig
+> +++ b/configs/mx53loco_defconfig
+> @@ -11,7 +11,6 @@ CONFIG_DM_GPIO=y
+>   CONFIG_DEFAULT_DEVICE_TREE="imx53-qsb"
+>   CONFIG_SYS_LOAD_ADDR=0x72000000
+>   # CONFIG_CMD_BMODE is not set
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=785408
+>   CONFIG_SUPPORT_RAW_INITRD=y
+>   CONFIG_USE_BOOTCOMMAND=y
+> diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
+> index 75a655a0e0d..9c5105883a0 100644
+> --- a/configs/mx6sabresd_defconfig
+> +++ b/configs/mx6sabresd_defconfig
+> @@ -20,7 +20,6 @@ CONFIG_SPL=y
+>   CONFIG_SPL_LIBDISK_SUPPORT=y
+>   CONFIG_PCI=y
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715766
+>   CONFIG_FIT=y
+>   CONFIG_SPL_FIT_PRINT=y
+> diff --git a/configs/mx7ulp_com_defconfig b/configs/mx7ulp_com_defconfig
+> index a49cb2a728f..22ceae1c0ba 100644
+> --- a/configs/mx7ulp_com_defconfig
+> +++ b/configs/mx7ulp_com_defconfig
+> @@ -12,7 +12,6 @@ CONFIG_LDO_ENABLED_MODE=y
+>   CONFIG_TARGET_MX7ULP_COM=y
+>   CONFIG_SYS_BOOTM_LEN=0x1000000
+>   CONFIG_SYS_LOAD_ADDR=0x60800000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=785408
+>   CONFIG_USE_BOOTCOMMAND=y
+>   CONFIG_BOOTCOMMAND="if run loadimage; then run mmcboot; fi"
+> diff --git a/configs/openrd_base_defconfig b/configs/openrd_base_defconfig
+> index cfad5fb037b..6811c9a29da 100644
+> --- a/configs/openrd_base_defconfig
+> +++ b/configs/openrd_base_defconfig
+> @@ -16,7 +16,6 @@ CONFIG_ENV_OFFSET=0x80000
+>   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-base"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_IDENT_STRING="\nOpenRD-Base"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=524288
+>   CONFIG_BOOTSTD_FULL=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/openrd_client_defconfig b/configs/openrd_client_defconfig
+> index e0a393e478c..8b745c8d5e2 100644
+> --- a/configs/openrd_client_defconfig
+> +++ b/configs/openrd_client_defconfig
+> @@ -17,7 +17,6 @@ CONFIG_ENV_OFFSET=0x80000
+>   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-client"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_IDENT_STRING="\nOpenRD-Client"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=524288
+>   CONFIG_BOOTSTD_FULL=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/openrd_ultimate_defconfig b/configs/openrd_ultimate_defconfig
+> index 23415ef12ee..a14fb130ffe 100644
+> --- a/configs/openrd_ultimate_defconfig
+> +++ b/configs/openrd_ultimate_defconfig
+> @@ -17,7 +17,6 @@ CONFIG_ENV_OFFSET=0x80000
+>   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-ultimate"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_IDENT_STRING="\nOpenRD-Ultimate"
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=524288
+>   CONFIG_BOOTSTD_FULL=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/pcm052_defconfig b/configs/pcm052_defconfig
+> index 64f5f777e5c..434495bf417 100644
+> --- a/configs/pcm052_defconfig
+> +++ b/configs/pcm052_defconfig
+> @@ -14,7 +14,6 @@ CONFIG_ENV_OFFSET_REDUND=0xC0000
+>   CONFIG_TARGET_PCM052=y
+>   CONFIG_SYS_MEMTEST_START=0x80010000
+>   CONFIG_SYS_MEMTEST_END=0x87c00000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=520192
+>   # CONFIG_EFI_LOADER is not set
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/pico-dwarf-imx6ul_defconfig b/configs/pico-dwarf-imx6ul_defconfig
+> index e1f6e6f91f2..296095f0103 100644
+> --- a/configs/pico-dwarf-imx6ul_defconfig
+> +++ b/configs/pico-dwarf-imx6ul_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_SPL_LIBDISK_SUPPORT=y
+>   CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0x88000000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/pico-dwarf-imx7d_defconfig b/configs/pico-dwarf-imx7d_defconfig
+> index c1389ac4066..cc9cead2e0e 100644
+> --- a/configs/pico-dwarf-imx7d_defconfig
+> +++ b/configs/pico-dwarf-imx7d_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+>   CONFIG_IMX_RDC=y
+>   CONFIG_IMX_BOOTAUX=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTCOMMAND="run findfdt; run finduuid; run distro_bootcmd"
+> diff --git a/configs/pico-hobbit-imx6ul_defconfig b/configs/pico-hobbit-imx6ul_defconfig
+> index 137541d373a..6ef97863ce9 100644
+> --- a/configs/pico-hobbit-imx6ul_defconfig
+> +++ b/configs/pico-hobbit-imx6ul_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_SPL_LIBDISK_SUPPORT=y
+>   CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0x88000000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/pico-hobbit-imx7d_defconfig b/configs/pico-hobbit-imx7d_defconfig
+> index 72e1a3bccc1..34ad3627193 100644
+> --- a/configs/pico-hobbit-imx7d_defconfig
+> +++ b/configs/pico-hobbit-imx7d_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+>   CONFIG_IMX_RDC=y
+>   CONFIG_IMX_BOOTAUX=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTCOMMAND="run findfdt; run finduuid; run distro_bootcmd"
+> diff --git a/configs/pico-imx6_defconfig b/configs/pico-imx6_defconfig
+> index 6f46d9bf8a1..139fa6e863c 100644
+> --- a/configs/pico-imx6_defconfig
+> +++ b/configs/pico-imx6_defconfig
+> @@ -16,7 +16,6 @@ CONFIG_SPL_MMC=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_SPL=y
+>   CONFIG_SPL_LIBDISK_SUPPORT=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_FIT=y
+>   CONFIG_SPL_FIT_PRINT=y
+> diff --git a/configs/pico-imx6ul_defconfig b/configs/pico-imx6ul_defconfig
+> index 70b79622be1..2f9fa4911fc 100644
+> --- a/configs/pico-imx6ul_defconfig
+> +++ b/configs/pico-imx6ul_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_SPL_LIBDISK_SUPPORT=y
+>   CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0x88000000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/pico-imx7d_bl33_defconfig b/configs/pico-imx7d_bl33_defconfig
+> index b5485bf8d0b..ff9b9104f9b 100644
+> --- a/configs/pico-imx7d_bl33_defconfig
+> +++ b/configs/pico-imx7d_bl33_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+>   CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0xa0000000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_FIT=y
+>   CONFIG_FIT_SIGNATURE=y
+> diff --git a/configs/pico-imx7d_defconfig b/configs/pico-imx7d_defconfig
+> index 4707062053b..a55a293fda5 100644
+> --- a/configs/pico-imx7d_defconfig
+> +++ b/configs/pico-imx7d_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+>   CONFIG_IMX_RDC=y
+>   CONFIG_IMX_BOOTAUX=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTCOMMAND="run findfdt; run finduuid; run distro_bootcmd"
+> diff --git a/configs/pico-nymph-imx7d_defconfig b/configs/pico-nymph-imx7d_defconfig
+> index c1389ac4066..cc9cead2e0e 100644
+> --- a/configs/pico-nymph-imx7d_defconfig
+> +++ b/configs/pico-nymph-imx7d_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+>   CONFIG_IMX_RDC=y
+>   CONFIG_IMX_BOOTAUX=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTCOMMAND="run findfdt; run finduuid; run distro_bootcmd"
+> diff --git a/configs/pico-pi-imx6ul_defconfig b/configs/pico-pi-imx6ul_defconfig
+> index 40db7e23797..99abd245db7 100644
+> --- a/configs/pico-pi-imx6ul_defconfig
+> +++ b/configs/pico-pi-imx6ul_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_SPL_LIBDISK_SUPPORT=y
+>   CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0x88000000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/pico-pi-imx7d_defconfig b/configs/pico-pi-imx7d_defconfig
+> index 26fccf90db7..1b68ba18463 100644
+> --- a/configs/pico-pi-imx7d_defconfig
+> +++ b/configs/pico-pi-imx7d_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+>   CONFIG_IMX_RDC=y
+>   CONFIG_IMX_BOOTAUX=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=715776
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTCOMMAND="run findfdt; run finduuid; run distro_bootcmd"
+> diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfig
+> index a7f6c73ecba..a7bd54c37cd 100644
+> --- a/configs/sheevaplug_defconfig
+> +++ b/configs/sheevaplug_defconfig
+> @@ -17,7 +17,6 @@ CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-sheevaplug"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_IDENT_STRING="\nMarvell-Sheevaplug"
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=524288
+>   CONFIG_BOOTSTD_FULL=y
+>   CONFIG_BOOTDELAY=3
+> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+> index 565b49584e3..52b2215fc6c 100644
+> --- a/configs/stm32mp15_dhsom.config
+> +++ b/configs/stm32mp15_dhsom.config
+> @@ -21,7 +21,6 @@ CONFIG_CONSOLE_MUX=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
+>   CONFIG_DM_HWSPINLOCK=y
+>   CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_HWSPINLOCK_STM32=y
+>   CONFIG_KS8851_MLL=y
+> diff --git a/configs/tbs2910_defconfig b/configs/tbs2910_defconfig
+> index 070dce234d6..37532bf2686 100644
+> --- a/configs/tbs2910_defconfig
+> +++ b/configs/tbs2910_defconfig
+> @@ -15,7 +15,6 @@ CONFIG_AHCI=y
+>   CONFIG_SYS_MEMTEST_START=0x10000000
+>   CONFIG_SYS_MEMTEST_END=0x2f400000
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=392192
+>   # CONFIG_EFI_LOADER is not set
+>   # CONFIG_BOOTSTD is not set
+> diff --git a/configs/turris_1x_nor_defconfig b/configs/turris_1x_nor_defconfig
+> index cc7d4a1e0d6..df2b781aa1a 100644
+> --- a/configs/turris_1x_nor_defconfig
+> +++ b/configs/turris_1x_nor_defconfig
+> @@ -21,7 +21,6 @@ CONFIG_PCIE2=y
+>   CONFIG_PCIE3=y
+>   CONFIG_OPTIMIZE_INLINING=y
+>   CONFIG_ENV_VARS_UBOOT_CONFIG=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=786432
+>   CONFIG_MP=y
+>   CONFIG_FIT=y
+> diff --git a/configs/turris_1x_sdcard_defconfig b/configs/turris_1x_sdcard_defconfig
+> index ee18cc21443..77bf6f5f065 100644
+> --- a/configs/turris_1x_sdcard_defconfig
+> +++ b/configs/turris_1x_sdcard_defconfig
+> @@ -30,7 +30,6 @@ CONFIG_OF_BOARD_FIXUP=y
+>   CONFIG_PCIE1=y
+>   CONFIG_PCIE2=y
+>   CONFIG_PCIE3=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=1048576
+>   CONFIG_MP=y
+>   CONFIG_FIT=y
+> diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
+> index de39e19ec6d..4461ceeaaf3 100644
+> --- a/configs/turris_omnia_defconfig
+> +++ b/configs/turris_omnia_defconfig
+> @@ -36,7 +36,6 @@ CONFIG_OF_BOARD_FIXUP=y
+>   CONFIG_SYS_MEMTEST_START=0x00800000
+>   CONFIG_SYS_MEMTEST_END=0x00ffffff
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=983040
+>   CONFIG_FIT=y
+>   CONFIG_FIT_VERBOSE=y
+> diff --git a/configs/udoo_neo_defconfig b/configs/udoo_neo_defconfig
+> index d4fb271e03a..ef5f6b207e6 100644
+> --- a/configs/udoo_neo_defconfig
+> +++ b/configs/udoo_neo_defconfig
+> @@ -19,7 +19,6 @@ CONFIG_SPL=y
+>   CONFIG_SPL_LIBDISK_SUPPORT=y
+>   # CONFIG_CMD_BMODE is not set
+>   CONFIG_LTO=y
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=523264
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_BOOTCOMMAND="run findfdt; run distro_bootcmd"
+> diff --git a/configs/vf610twr_defconfig b/configs/vf610twr_defconfig
+> index 556190728e1..b16b1522d1a 100644
+> --- a/configs/vf610twr_defconfig
+> +++ b/configs/vf610twr_defconfig
+> @@ -12,7 +12,6 @@ CONFIG_DEFAULT_DEVICE_TREE="vf610-twr"
+>   CONFIG_SYS_LOAD_ADDR=0x82000000
+>   CONFIG_SYS_MEMTEST_START=0x80010000
+>   CONFIG_SYS_MEMTEST_END=0x87c00000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=520192
+>   CONFIG_BOOTDELAY=3
+>   CONFIG_USE_BOOTCOMMAND=y
+> diff --git a/configs/vf610twr_nand_defconfig b/configs/vf610twr_nand_defconfig
+> index 7fe9d822110..31b1468650e 100644
+> --- a/configs/vf610twr_nand_defconfig
+> +++ b/configs/vf610twr_nand_defconfig
+> @@ -12,7 +12,6 @@ CONFIG_DEFAULT_DEVICE_TREE="vf610-twr"
+>   CONFIG_SYS_LOAD_ADDR=0x82000000
+>   CONFIG_SYS_MEMTEST_START=0x80010000
+>   CONFIG_SYS_MEMTEST_END=0x87c00000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=520192
+>   CONFIG_BOOTDELAY=3
+>   CONFIG_USE_BOOTCOMMAND=y
+> diff --git a/configs/warp7_bl33_defconfig b/configs/warp7_bl33_defconfig
+> index 5a94062f5e2..eb047236f87 100644
+> --- a/configs/warp7_bl33_defconfig
+> +++ b/configs/warp7_bl33_defconfig
+> @@ -11,7 +11,6 @@ CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+>   CONFIG_IMX_HAB=y
+>   CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0xa0000000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=785408
+>   CONFIG_FIT=y
+>   CONFIG_FIT_SIGNATURE=y
+> diff --git a/configs/warp7_defconfig b/configs/warp7_defconfig
+> index 03d68aa9a3f..22f611f4ccd 100644
+> --- a/configs/warp7_defconfig
+> +++ b/configs/warp7_defconfig
+> @@ -14,7 +14,6 @@ CONFIG_IMX_BOOTAUX=y
+>   CONFIG_IMX_HAB=y
+>   CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0xa0000000
+> -CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=785408
+>   CONFIG_FIT=y
+>   CONFIG_FIT_VERBOSE=y
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index c2aa88f59fb..36eed766d31 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -74,7 +74,7 @@ config EFI_SIGNATURE_SUPPORT
+>   
+>   config EFI_DEBUG_SUPPORT
+>   	bool "EFI Debug Support"
+> -	default y if !HAS_BOARD_SIZE_LIMIT
+> +	default y if BOARD_SIZE_LIMIT = 0
+>   	help
+>   	  Select this option if you want to setup the EFI Debug Support
+>   	  Table and the EFI_SYSTEM_TABLE_POINTER which is used by the debug
+> @@ -396,7 +396,7 @@ config EFI_DT_FIXUP
+>   
+>   config EFI_LOADER_HII
+>   	bool "HII protocols"
+> -	default y if !HAS_BOARD_SIZE_LIMIT
+> +	default y if BOARD_SIZE_LIMIT = 0
+>   	help
+>   	  The Human Interface Infrastructure is a complicated framework that
+>   	  allows UEFI applications to draw fancy menus and hook strings using
+> @@ -416,7 +416,7 @@ if EFI_UNICODE_COLLATION_PROTOCOL2
+>   
+>   config EFI_UNICODE_CAPITALIZATION
+>   	bool "Support Unicode capitalization"
+> -	default y if !HAS_BOARD_SIZE_LIMIT
+> +	default y if BOARD_SIZE_LIMIT = 0
+>   	help
+>   	  Select this option to enable correct handling of the capitalization of
+>   	  Unicode codepoints in the range 0x0000-0xffff. If this option is not
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20250731
-
-for you to fetch changes up to e064db5fe77caaddb21a7793f266119ad89dd79a:
-
-  reset: stm32: Fix set_clr field (2025-07-30 14:55:17 +0200)
-
-----------------------------------------------------------------
-Add support for STM32 TIMERS and STM32 PWM on STM32MP25
-Add STM32MP13xx SPL and OpTee-OS start support
-Fix header misuse in stm32 reset drivers
-Fix STMicroelectronics spelling
-Fix clk-stm32h7 wrong macros used in register read
-Fix PRE_CON_BUF_ADDR on STM32MP13
-Fix clock identifier passed to struct scmi_clk_parent_set_in
-Fix stm32 reset for STM32F4/F7 and H7
-Enable OF_UPSTREAM_BUILD_VENDOR for stm32mp13_defconfig
-Add STM32MP23 SoC and stm32mp235f-dk board support
-
-----------------------------------------------------------------
-Alice Guo (1):
-      clk: scmi: Fix clock identifier passed to struct scmi_clk_parent_set_in
-
-Andrew Goodbody (1):
-      clk: stm32: Wrong macros used in register read
-
-Cheick Traore (3):
-      arm: stm32mp2: add multifunction timer support for stm32mp25
-      pwm: stm32: add support for stm32mp25
-      configs: stm32mp25: Enable MFD timer and PWM for stm32mp25_defconfig
-
-Marek Vasut (11):
-      reset: stm32: Fix header misuse
-      ARM: stm32: Add STM32MP13xx SPL Kconfig options
-      ARM: stm32: Add STM32MP13xx SPL hardware initialization
-      ARM: stm32: Limit early cache enablement in SPL to STM32MP15xx
-      ARM: stm32: Add STM32MP13xx PMIC initialization for DDR3 DRAM type
-      ARM: stm32: Add STM32MP13xx debug UART initialization
-      ARM: dts: stm32: Add stm32mp13-ddr.dtsi template
-      ARM: dts: stm32: Add 512 MiB DRAM settings for DH STM32MP13xx DHCOR DHSBC
-      ARM: dts: stm32: Add STM32MP13x SPL specific DT additions
-      ARM: dts: stm32: Add SPL specifics for DH STM32MP13xx DHCOR DHSBC
-      ARM: dts: stm32: Switch defconfig to SPL for DH STM32MP13xx DHCOR DHSBC
-
-Patrice Chotard (6):
-      ARM: stm32mp: Add STM32MP23 support
-      ARM: dts: stm32: Add stm32mp235f-dk-u-boot
-      arm: stm32mp: replace space by tab in sys_proto.h
-      configs: stm32mp13: Enable OF_UPSTREAM_BUILD_VENDOR
-      treewide: Fix STMicroelectronics spelling
-      reset: stm32: Fix set_clr field
-
-Patrick Delaunay (1):
-      ARM: stm32: fix PRE_CON_BUF_ADDR on STM32MP13
-
- MAINTAINERS                                            |   1 -
- arch/arm/dts/stm32mp1-ddr.dtsi                         | 187 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp13-ddr.dtsi                        |  49 +++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp13-u-boot.dtsi                     |  89 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi             | 160 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
- arch/arm/dts/stm32mp15-ddr.dtsi                        | 170 +-----------------------------------------------------------------------------------------------------------
- arch/arm/dts/stm32mp23-u-boot.dtsi                     | 104 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp235f-dk-u-boot.dtsi                |  27 ++++++++++++++++++
- arch/arm/include/asm/arch-am33xx/mem.h                 |   2 +-
- arch/arm/include/asm/arch-omap5/mem.h                  |   2 +-
- arch/arm/mach-stm32mp/Kconfig                          |  34 ++++++++++++++++++++--
- arch/arm/mach-stm32mp/Kconfig.13x                      |   5 ++--
- arch/arm/mach-stm32mp/Kconfig.23x                      |  37 ++++++++++++++++++++++++
- arch/arm/mach-stm32mp/Makefile                         |   1 +
- arch/arm/mach-stm32mp/cmd_stm32key.c                   |   8 +++---
- arch/arm/mach-stm32mp/include/mach/stm32.h             |  10 ++++---
- arch/arm/mach-stm32mp/include/mach/sys_proto.h         |  53 +++++++++++++++++++++++-----------
- arch/arm/mach-stm32mp/include/mach/timers.h            |   9 ++++++
- arch/arm/mach-stm32mp/stm32mp1/cpu.c                   |   9 ++++--
- arch/arm/mach-stm32mp/stm32mp1/spl.c                   |   3 +-
- arch/arm/mach-stm32mp/stm32mp1/stm32mp13x.c            | 204 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-stm32mp/stm32mp2/Makefile                |   1 +
- arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c            | 191 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-stm32mp/timers.c                         |  34 +++++++++++++++++++++-
- board/st/common/Kconfig                                |   2 +-
- board/st/common/stpmic1.c                              |  51 ++++++++++++++++++++++-----------
- board/st/stm32mp1/debug_uart.c                         |  21 ++++++++++++--
- board/st/stm32mp2/Kconfig                              |  14 +++++++++
- configs/stm32mp13_defconfig                            |   2 ++
- configs/stm32mp13_dhcor_defconfig                      |  30 +++++++++++++------
- configs/stm32mp15_dhsom.config                         |  48 +++++--------------------------
- configs/stm32mp23_defconfig                            |  82 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- configs/stm32mp25_defconfig                            |   4 +++
- configs/stm32mp_dhsom.config                           |  35 +++++++++++++++++++++--
- drivers/clk/clk_scmi.c                                 |   4 +--
- drivers/clk/stm32/clk-stm32h7.c                        |   4 +--
- drivers/pwm/pwm-stm32.c                                |  11 ++++++-
- drivers/reset/stm32/Kconfig                            |   2 +-
- drivers/reset/stm32/stm32-reset-core.c                 |   2 +-
- drivers/reset/stm32/stm32-reset-mp1.c                  |   2 +-
- drivers/reset/stm32/stm32-reset-mp25.c                 |   2 +-
- drivers/reset/stm32/stm32-reset.c                      |   4 +--
- include/configs/stm32mp23_common.h                     | 130 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- include/configs/stm32mp23_st_common.h                  |  51 +++++++++++++++++++++++++++++++++
- include/configs/stm32mp25_st_common.h                  |   2 +-
- 46 files changed, 1701 insertions(+), 292 deletions(-)
- create mode 100644 arch/arm/dts/stm32mp1-ddr.dtsi
- create mode 100644 arch/arm/dts/stm32mp13-ddr.dtsi
- create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
- create mode 100644 arch/arm/dts/stm32mp23-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp235f-dk-u-boot.dtsi
- create mode 100644 arch/arm/mach-stm32mp/Kconfig.23x
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c
- create mode 100644 configs/stm32mp23_defconfig
- create mode 100644 include/configs/stm32mp23_common.h
- create mode 100644 include/configs/stm32mp23_st_common.h
