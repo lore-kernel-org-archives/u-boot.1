@@ -4,135 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 979D1C87FCA
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 07:26:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B81C9C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAD148334A;
-	Thu, 31 Jul 2025 09:26:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 1A487833EC;
+	Thu, 31 Jul 2025 10:00:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="mvrDs0Z7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HcoK5kSD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AC09833E1; Thu, 31 Jul 2025 09:26:06 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E80D8318E
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:26:03 +0200 (CEST)
+ id 6798F833F5; Thu, 31 Jul 2025 10:00:20 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 99951833EC
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 10:00:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-af0dc229478so95185066b.1
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 00:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1753946762; x=1754551562;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=i0tXoGUUcnUStcYrzhVn51Kg4NJukyLHpTXfgSiQGko=;
- b=mvrDs0Z78r34//ncm0MaGgCoXGEd+aASVaQ8AoKgeX56Ze6TyGdszOJvtQpD6tT9+i
- DTyFDCRMDHGASzA0bJPcxin1MXXTLSNDjTES6ZFKxZEFMaZrP9CjJ2Fpb9LJoYuhR1nj
- sAGgERFwlbzXWVlmSBydmrLDQQsV1ujc2twLB+aUH1Sa8pfwOQBgBRdlLQFUCULOmOyM
- Yub5Fs+I9C8dPsNRZq8ZlrnMCCkV4im8CarP9b/jDbJA7X5XTU+BKojsALo4Q0/Ox9hW
- mF/y8S0vgXZgLCGe3E6smEnb8RJeVxNEw5eO64tLvh8OKnhcq2yyxAVS5t7HDy4eYK4f
- nPZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753946762; x=1754551562;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i0tXoGUUcnUStcYrzhVn51Kg4NJukyLHpTXfgSiQGko=;
- b=wsXOLoLZDHxc/PDeOtksPTFYWESCnj8PiqAe0bzzJ96FN/6yAQVt8uwxqtvzcKe2r8
- BYWLO64NZJdyFpdVMnDnPHAXFIUeIydp3KFTumawtAtfq7RHMwuLp8W43SS3CFMfwF17
- 9iRgEJihS13yM3+6rbg3fGrwt75NHprLy+5MZKftF15rdptTiEM3B7yDhi5MPLGl0vW7
- +12rpNoKAPnMGtIl8Lhkm2WogkomSeFeZdQXvrLRzIfMd7iAfnwBCXjjy1r53smieYMg
- vO7XFXKgjWAreVfOJcYetjcx2isMfoK+qbYKa5PIV8rQ4Y5annyziFwsTcmkqTl5p7I4
- 2JUg==
-X-Gm-Message-State: AOJu0YwUm1WgreoAPmqWXQmI4i00BiKhbFfhlJmM0814dBwhtPfdNqAE
- kln14rvPG0CJOC5CzQXfDBvmWVfldMEUbTWnIp7bc9BFCp70pdtgV04HQ5VJF+6tRQ==
-X-Gm-Gg: ASbGncsAnFHnvvt80F9PSt7kH2GJGg4yIo9PNfm13dnddfY8ioqgB0zicmWj2nC5mUK
- 0Ty2wu+6TYXOX31s/qH4QBaNtAHCqf2uE+R8We9Gqr/YBYJChfljW05jSfywYMgsl5WXa/ckvvo
- mKwSFNnjhVjPss4yfbt8VEZRhWCx8LX1NiOjbQMpPcq7pSD8GE6gm4JzHjWi3cMwpjeG+RP6DVw
- bSw/vf7EvlmuQa8EC4SONXe9McEU36pjnjd6yO403BF4t6sqq47bFvFag8WTYP6Q6eY8bEWeQQi
- DC4wfCZgMJw/f4qh2v4txKXCTMg7XcCqH7B6sQ5nLU4ibdUrhTtFCAgrI7+DNFUMgIl5/btBQB+
- yub6Qz0QAyK+YoCSa7ilWuJGODup1MX0Jfn0=
-X-Google-Smtp-Source: AGHT+IFYTYs0mTGOa2WNxbz1Gj38/wXLQmToqRUbQwo25YJ1n0i+noC6bkp6UEqsO6gWHgihZcXQOA==
-X-Received: by 2002:a17:907:971e:b0:ae0:a116:b9d3 with SMTP id
- a640c23a62f3a-af8fda92edfmr701958766b.60.1753946762173; 
- Thu, 31 Jul 2025 00:26:02 -0700 (PDT)
-Received: from [10.254.183.223] ([149.199.62.131])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af91a21c0afsm64046766b.117.2025.07.31.00.25.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Jul 2025 00:26:01 -0700 (PDT)
-Message-ID: <f4febb56-8a92-4798-9b21-728e65afbe32@monstr.eu>
-Date: Thu, 31 Jul 2025 09:25:54 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V803BQ2954328;
+ Thu, 31 Jul 2025 03:00:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753948803;
+ bh=04iAjKPYkJdb1Hv/tx8acULmzwU+eRc1PLdRVJy/U7A=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=HcoK5kSDyETt9KKLlhl3tMuIx6mOsJAaJr2K59CNnAKII/Gz/JM3kf1JE01UvzLwu
+ Q4KUa5pbkf8W82488q7RlLRpJrKucB3bPuxx7J6xC3CecWopuT7CKYQVM5m44xMeBk
+ VVbrApD3NqEZ2fkLnbiBqPbQ01udk1DwNz+ATJ70=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V803jl3800376
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 31 Jul 2025 03:00:03 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 31
+ Jul 2025 03:00:02 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 31 Jul 2025 03:00:02 -0500
+Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.231.164])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V801XG2262833;
+ Thu, 31 Jul 2025 03:00:02 -0500
+From: Chintan Vankar <c-vankar@ti.com>
+To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, "Jonathan
+ Humphreys" <j-humphreys@ti.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bhavya Kapoor <b-kapoor@ti.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Moteen Shah <m-shah@ti.com>,
+ "Beleswar Padhi" <b-padhi@ti.com>, Anshul Dalal <anshuld@ti.com>, Sughosh
+ Ganu <sughosh.ganu@linaro.org>, Neha Malcom Francis <n-francis@ti.com>,
+ "Prasanth Babu Mantena" <p-mantena@ti.com>, Wadim Egorov
+ <w.egorov@phytec.de>, "Simon Glass" <sjg@chromium.org>, Alexander Sverdlin
+ <alexander.sverdlin@siemens.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Kishon Vijay Abraham I <kishon@ti.com>,
+ Chintan Vankar <c-vankar@ti.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCH v4 01/21] net: ti: am65-cpsw-nuss: Define bind method for CPSW
+ driver
+Date: Thu, 31 Jul 2025 13:29:36 +0530
+Message-ID: <20250731075956.605474-2-c-vankar@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250731075956.605474-1-c-vankar@ti.com>
+References: <20250731075956.605474-1-c-vankar@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] CI: Wire mbv32 combinations
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, Adriano Cordova
- <adrianox@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>
-References: <dc52619a474c6374d43e7fb232480cab3392b00a.1753874707.git.michal.simek@amd.com>
- <20250730172330.GT1807455@bill-the-cat>
-Content-Language: en-US
-From: Michal Simek <monstr@monstr.eu>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <20250730172330.GT1807455@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Thu, 31 Jul 2025 10:00:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,68 +98,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+CPSW driver is defined as UCLASS_MISC driver which needs to be probed
+explicitly. Define bind method for CPSW driver to scan and bind
+ethernet-ports with UCLASS_ETH driver which will eventually probe CPSW
+driver and avoid probing CPSW driver explicitly.
 
+Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+---
 
-On 7/30/25 19:23, Tom Rini wrote:
-> On Wed, Jul 30, 2025 at 01:25:09PM +0200, Michal Simek wrote:
-> 
->> After upgrading to QEMU 10 by commit 1d782a3f229c ("Docker, CI: Update to
->> latest Ubuntu and Dockerfile") let's wire mbv32 which is the part of QEMU
->> to have it under regression.
->>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> ---
->>
->> gitlab I have tested.
->> azure I didn't test it but did blindly all changes as they are in github
->> one.
->>
->> This patch has be applied on the top of this series
->> https://lore.kernel.org/r/cover.1753182218.git.michal.simek@amd.com
-> 
-> For v2, take this via your tree.
-> 
-> [snip]
->> ---
->>   .azure-pipelines.yml | 20 ++++++++++++++++++--
->>   .gitlab-ci.yml       | 32 ++++++++++++++++++++++++++++++--
->>   2 files changed, 48 insertions(+), 4 deletions(-)
->>
->> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
->> index 8209d2b329cb..76a0ba097f93 100644
->> --- a/.azure-pipelines.yml
->> +++ b/.azure-pipelines.yml
->> @@ -258,11 +258,11 @@ stages:
->>             ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
->>             ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
->>             ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
->> -          if [[ "\${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
->> +          if [[ "\${TEST_PY_BD}" == "qemu-riscv32_spl" ]] || [[ "${TEST_PY_BD}" == "xilinx_mbv32_smode" ]]; then
-> 
-> You missed an escape here and it should be:
-> "\${TEST_PY_BD}" == "xilinx_mbv32_smode"
-> 
->>                 wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
->>                 export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
->>             fi
->> -          if [[ "\${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
->> +          if [[ "\${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]] || [[ "${TEST_PY_BD}" == "xilinx_mbv64_smode" ]]; then
-> 
-> Same here.
-> 
-> The rest of the Azure side looks right.
-> 
+Link to v3:
+https://lore.kernel.org/u-boot/20250225114903.2080616-2-c-vankar@ti.com/
 
-Sent v2 with this fixed and yes will take it via my tree.
+Changes from v3 to v4:
+- Moved initialization part from "am65_cpsw_probe_nuss()" to
+  "am65_cpsw_nuss_bind()" method.
 
-Thanks,
-Michal
+ drivers/net/ti/am65-cpsw-nuss.c | 40 +++++++++++++++++++++++++++------
+ 1 file changed, 33 insertions(+), 7 deletions(-)
 
+diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+index 9b69f36d04d..754076d807c 100644
+--- a/drivers/net/ti/am65-cpsw-nuss.c
++++ b/drivers/net/ti/am65-cpsw-nuss.c
+@@ -705,7 +705,6 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
+ 	struct am65_cpsw_common *cpsw_common = dev_get_priv(dev);
+ 	ofnode ports_np, node;
+ 	int ret, i;
+-	struct udevice *port_dev;
+ 
+ 	cpsw_common->dev = dev;
+ 	cpsw_common->ss_base = dev_read_addr(dev);
+@@ -732,6 +731,7 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
+ 	ports_np = dev_read_subnode(dev, "ethernet-ports");
+ 	if (!ofnode_valid(ports_np)) {
+ 		ret = -ENOENT;
++		dev_err(dev, "Invalid device tree node %d\n", ret);
+ 		goto out;
+ 	}
+ 
+@@ -763,12 +763,6 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
+ 			continue;
+ 
+ 		cpsw_common->ports[port_id].disabled = disabled;
+-		if (disabled)
+-			continue;
+-
+-		ret = device_bind_driver_to_node(dev, "am65_cpsw_nuss_port", ofnode_get_name(node), node, &port_dev);
+-		if (ret)
+-			dev_err(dev, "Failed to bind to %s node\n", ofnode_get_name(node));
+ 	}
+ 
+ 	for (i = 0; i < AM65_CPSW_CPSWNU_MAX_PORTS; i++) {
+@@ -798,6 +792,37 @@ out:
+ 	return ret;
+ }
+ 
++static int am65_cpsw_nuss_bind(struct udevice *dev)
++{
++	struct uclass_driver *drv;
++	struct udevice *port_dev;
++	ofnode ports_np, node;
++	int ret;
++
++	drv = lists_uclass_lookup(UCLASS_ETH);
++	if (!drv) {
++		puts("Cannot find eth driver");
++		return -ENOENT;
++	}
++
++	ports_np = dev_read_subnode(dev, "ethernet-ports");
++	if (!ofnode_valid(ports_np))
++		return -ENOENT;
++
++	ofnode_for_each_subnode(node, ports_np) {
++		const char *node_name;
++
++		node_name = ofnode_get_name(node);
++
++		ret = device_bind_driver_to_node(dev, "am65_cpsw_nuss_port", node_name, node,
++						 &port_dev);
++		if (ret)
++			dev_err(dev, "Failed to bind to %s node\n", node_name);
++	}
++
++	return ret;
++}
++
+ static const struct udevice_id am65_cpsw_nuss_ids[] = {
+ 	{ .compatible = "ti,am654-cpsw-nuss" },
+ 	{ .compatible = "ti,j721e-cpsw-nuss" },
+@@ -809,6 +834,7 @@ U_BOOT_DRIVER(am65_cpsw_nuss) = {
+ 	.name	= "am65_cpsw_nuss",
+ 	.id	= UCLASS_MISC,
+ 	.of_match = am65_cpsw_nuss_ids,
++	.bind	= am65_cpsw_nuss_bind,
+ 	.probe	= am65_cpsw_probe_nuss,
+ 	.priv_auto = sizeof(struct am65_cpsw_common),
+ };
 -- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+2.34.1
 
