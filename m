@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409C7C87FCC
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:21:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19C1EC83F17
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:21:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C9D48362A;
+	by phobos.denx.de (Postfix) with ESMTP id 5110F8363D;
 	Thu, 31 Jul 2025 10:19:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qQZvJuKA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tzTYx7Un";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2981C833F6; Thu, 31 Jul 2025 10:06:56 +0200 (CEST)
+ id B24CE83346; Thu, 31 Jul 2025 10:06:59 +0200 (CEST)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44E81833EC
+ by phobos.denx.de (Postfix) with ESMTPS id 0C26E833F8
  for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 10:06:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
 Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86k1Y3442391;
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86kBu3442395;
  Thu, 31 Jul 2025 03:06:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1753949206;
- bh=8RkgCMOLlA/Yc7RYBtj+tXL5NTAJpLCjPt9cXhkCM0s=;
+ bh=brryz1CBCkJX7QfZUkdZ0ZLAwBsu2zA4xZijGba/ILc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qQZvJuKAHa6RKPtcpbZfJw7oE7hea4fOvIQDuLVOj6KhpYB8zEItOiDw8S+MFXSpw
- w0J4ZjzNts4JWLFXIWrk50LsDgQD9oP9/U/b07DtbmcQMGA2It8QKMN8l2AqHIHlTV
- QIxA1mofMYpTH8Ez4lJyz+wpZt4F/Nm2LLiiFrqo=
+ b=tzTYx7UnMJRKQ5iLbdKVE08OtukuV6V38d0SuAQ4pftG+RxA0hhIv+etV7A9Oldq0
+ oS5q0F9f8I/CkEmSDBkVBtku9myror/IwmPzzZB2oa1uij/DoEoAIfKZXtRDFfkaPN
+ KCGU1peccMDfw1ppnCOV4+ZljxR5YL/GJQH8mqtU=
 Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86kx54075509
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86k5U4075516
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
  Thu, 31 Jul 2025 03:06:46 -0500
 Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
@@ -45,11 +45,11 @@ Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
 Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE114.ent.ti.com
  (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 31 Jul 2025 03:06:45 -0500
+ Frontend Transport; Thu, 31 Jul 2025 03:06:46 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.231.164])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80bko2272176;
- Thu, 31 Jul 2025 03:00:38 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80CeB2269984;
+ Thu, 31 Jul 2025 03:00:13 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  <semen.protsenko@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, "Jonathan
@@ -70,10 +70,10 @@ To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  Vaishnav Achath <vaishnav.a@ti.com>, Bryan Brattlof <bb@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 17/21] configs: j722s_evm_a53_ethboot: Enable configs
- required for Ethernet boot
-Date: Thu, 31 Jul 2025 13:29:52 +0530
-Message-ID: <20250731075956.605474-18-c-vankar@ti.com>
+Subject: [PATCH v4 04/21] Revert "arm: mach-k3: am62x: am625_init: Probe AM65
+ CPSW NUSS"
+Date: Thu, 31 Jul 2025 13:29:39 +0530
+Message-ID: <20250731075956.605474-5-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250731075956.605474-1-c-vankar@ti.com>
 References: <20250731075956.605474-1-c-vankar@ti.com>
@@ -98,40 +98,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable configs required to support Ethernet boot for J722S.
+This reverts commit 35bddf889652081f150f60740618851b5d4817f4.
+
+Bind method of "am65_cpsw_nuss" driver will ensure binding of it's child
+driver "am65_cpsw_nuss_ports", and there is no need to probe CPSW driver
+explicitly.
 
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v3:
-https://lore.kernel.org/u-boot/20250225114903.2080616-16-c-vankar@ti.com/
+https://lore.kernel.org/u-boot/20250225114903.2080616-3-c-vankar@ti.com/
 
 Changes from v3 to v4:
-- No changes.
+- Revert the commit which has introduced this patch instead of updating
+  the content.
 
- configs/j722s_evm_a53_ethboot_defconfig | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 configs/j722s_evm_a53_ethboot_defconfig
+ arch/arm/mach-k3/am62x/am625_init.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/configs/j722s_evm_a53_ethboot_defconfig b/configs/j722s_evm_a53_ethboot_defconfig
-new file mode 100644
-index 00000000000..a5a2a15849c
---- /dev/null
-+++ b/configs/j722s_evm_a53_ethboot_defconfig
-@@ -0,0 +1,13 @@
-+#include <configs/j722s_evm_a53_defconfig>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_SOC_K3_J722S=y
-+CONFIG_TARGET_J722S_A53_EVM=y
-+CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j722s-evm"
-+CONFIG_SPL_STACK_R_ADDR=0x82000000
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_ETH=y
-+CONFIG_SPL_NET=y
-+CONFIG_SPL_NET_VCI_STRING="J722S U-Boot A53 SPL"
+diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
+index a422919fab1..8f4ddf59753 100644
+--- a/arch/arm/mach-k3/am62x/am625_init.c
++++ b/arch/arm/mach-k3/am62x/am625_init.c
+@@ -294,15 +294,6 @@ void board_init_f(ulong dummy)
+ 	}
+ 	spl_enable_cache();
+ 
+-	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
+-	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
+-		struct udevice *cpswdev;
+-
+-		if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
+-						&cpswdev))
+-			printf("Failed to probe am65_cpsw_nuss driver\n");
+-	}
+-
+ 	fixup_a53_cpu_freq_by_speed_grade();
+ }
+ 
 -- 
 2.34.1
 
