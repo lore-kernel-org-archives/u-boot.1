@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19C1EC83F17
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:21:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F84AC87FCC
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:22:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5110F8363D;
-	Thu, 31 Jul 2025 10:19:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9FED58344E;
+	Thu, 31 Jul 2025 10:19:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tzTYx7Un";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="I55bOmY/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B24CE83346; Thu, 31 Jul 2025 10:06:59 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id CD59E83346; Thu, 31 Jul 2025 10:06:59 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C26E833F8
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 10:06:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C642C83420
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 10:06:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
 Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86kBu3442395;
- Thu, 31 Jul 2025 03:06:46 -0500
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86lW02984828;
+ Thu, 31 Jul 2025 03:06:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753949206;
- bh=brryz1CBCkJX7QfZUkdZ0ZLAwBsu2zA4xZijGba/ILc=;
+ s=ti-com-17Q1; t=1753949207;
+ bh=tncoj8aOvg7gE7wT2g7wZinlBItJ7rPf3tZbap4CgPI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=tzTYx7UnMJRKQ5iLbdKVE08OtukuV6V38d0SuAQ4pftG+RxA0hhIv+etV7A9Oldq0
- oS5q0F9f8I/CkEmSDBkVBtku9myror/IwmPzzZB2oa1uij/DoEoAIfKZXtRDFfkaPN
- KCGU1peccMDfw1ppnCOV4+ZljxR5YL/GJQH8mqtU=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86k5U4075516
+ b=I55bOmY/NFpzvx5SR2KCQNz4ueAl1GqAn3n0KvA3JxouyozsiyoDi/jCobaItQiSy
+ Ku0Gy+ZGrFV+MlgtUjGoJRW0kpGkZgItAf7QKc28H2KJSQbPbOi10wwjyKNC4At/wn
+ dR4b6MfDyzDkXgWwR+n03plp6yinR0MW8onYK1i4=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86l1r4075521
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 31 Jul 2025 03:06:46 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 31 Jul 2025 03:06:47 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 31
- Jul 2025 03:06:45 -0500
+ Jul 2025 03:06:46 -0500
 Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE114.ent.ti.com
  (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
  Frontend Transport; Thu, 31 Jul 2025 03:06:46 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.231.164])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80CeB2269984;
- Thu, 31 Jul 2025 03:00:13 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80V322271810;
+ Thu, 31 Jul 2025 03:00:32 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  <semen.protsenko@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, "Jonathan
@@ -70,10 +70,10 @@ To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  Vaishnav Achath <vaishnav.a@ti.com>, Bryan Brattlof <bb@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 04/21] Revert "arm: mach-k3: am62x: am625_init: Probe AM65
- CPSW NUSS"
-Date: Thu, 31 Jul 2025 13:29:39 +0530
-Message-ID: <20250731075956.605474-5-c-vankar@ti.com>
+Subject: [PATCH v4 14/21] arm: mach-k3: j722s: Update SoC autogenerated data
+ to enable Ethernet boot
+Date: Thu, 31 Jul 2025 13:29:49 +0530
+Message-ID: <20250731075956.605474-15-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250731075956.605474-1-c-vankar@ti.com>
 References: <20250731075956.605474-1-c-vankar@ti.com>
@@ -98,45 +98,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This reverts commit 35bddf889652081f150f60740618851b5d4817f4.
-
-Bind method of "am65_cpsw_nuss" driver will ensure binding of it's child
-driver "am65_cpsw_nuss_ports", and there is no need to probe CPSW driver
-explicitly.
+Update dev-data and clk-data to include CPSW device which is required to
+enable Ethernet boot.
 
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v3:
-https://lore.kernel.org/u-boot/20250225114903.2080616-3-c-vankar@ti.com/
+https://lore.kernel.org/u-boot/20250225114903.2080616-13-c-vankar@ti.com/
 
 Changes from v3 to v4:
-- Revert the commit which has introduced this patch instead of updating
-  the content.
+- No changes.
 
- arch/arm/mach-k3/am62x/am625_init.c | 9 ---------
- 1 file changed, 9 deletions(-)
+ arch/arm/mach-k3/r5/j722s/clk-data.c | 50 ++++++++++++++++++++++------
+ arch/arm/mach-k3/r5/j722s/dev-data.c | 34 +++++++++----------
+ 2 files changed, 56 insertions(+), 28 deletions(-)
 
-diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-index a422919fab1..8f4ddf59753 100644
---- a/arch/arm/mach-k3/am62x/am625_init.c
-+++ b/arch/arm/mach-k3/am62x/am625_init.c
-@@ -294,15 +294,6 @@ void board_init_f(ulong dummy)
- 	}
- 	spl_enable_cache();
+diff --git a/arch/arm/mach-k3/r5/j722s/clk-data.c b/arch/arm/mach-k3/r5/j722s/clk-data.c
+index b4f27af333d..238d57d0aa0 100644
+--- a/arch/arm/mach-k3/r5/j722s/clk-data.c
++++ b/arch/arm/mach-k3/r5/j722s/clk-data.c
+@@ -5,7 +5,7 @@
+  * This file is auto generated. Please do not hand edit and report any issues
+  * to Bryan Brattlof <bb@ti.com>.
+  *
+- * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
+  */
  
--	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
--	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
--		struct udevice *cpswdev;
--
--		if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
--						&cpswdev))
--			printf("Failed to probe am65_cpsw_nuss driver\n");
--	}
--
- 	fixup_a53_cpu_freq_by_speed_grade();
- }
+ #include <linux/clk-provider.h>
+@@ -57,9 +57,15 @@ static const char * const clkout0_ctrl_out0_parents[] = {
+ 	"hsdiv4_16fft_main_2_hsdivout1_clk",
+ };
  
+-static const char * const main_emmcsd0_refclk_sel_out0_parents[] = {
+-	"postdiv4_16ff_main_0_hsdivout5_clk",
+-	"hsdiv4_16fft_main_2_hsdivout2_clk",
++static const char * const main_cp_gemac_cpts_clk_sel_out0_parents[] = {
++	"postdiv4_16ff_main_2_hsdivout5_clk",
++	"postdiv4_16ff_main_0_hsdivout6_clk",
++	"board_0_cp_gemac_cpts0_rft_clk_out",
++	NULL,
++	"board_0_mcu_ext_refclk0_out",
++	"board_0_ext_refclk1_out",
++	NULL,
++	"sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
+ };
+ 
+ static const char * const main_emmcsd1_refclk_sel_out0_parents[] = {
+@@ -94,8 +100,8 @@ static const char * const main_timerclkn_sel_out0_parents[] = {
+ 	"board_0_cp_gemac_cpts0_rft_clk_out",
+ 	"hsdiv4_16fft_main_1_hsdivout3_clk",
+ 	"postdiv4_16ff_main_2_hsdivout6_clk",
+-	NULL,
+-	NULL,
++	"cpsw_3guss_am67_main_0_cpts_genf0",
++	"cpsw_3guss_am67_main_0_cpts_genf1",
+ 	NULL,
+ 	NULL,
+ 	NULL,
+@@ -143,7 +149,12 @@ static const struct clk_data clk_list[] = {
+ 	CLK_FIXED_RATE("board_0_mmc1_clk_out", 0, 0),
+ 	CLK_FIXED_RATE("board_0_ospi0_dqs_out", 0, 0),
+ 	CLK_FIXED_RATE("board_0_ospi0_lbclko_out", 0, 0),
++	CLK_FIXED_RATE("board_0_rmii1_ref_clk_out", 0, 0),
++	CLK_FIXED_RATE("board_0_rmii2_ref_clk_out", 0, 0),
+ 	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
++	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_cpts_genf0", 0, 0),
++	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_cpts_genf1", 0, 0),
++	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_mdio_mdclk_o", 0, 0),
+ 	CLK_FIXED_RATE("dmtimer_dmc1ms_main_0_timer_pwm", 0, 0),
+ 	CLK_FIXED_RATE("emmcsd4ss_main_0_emmcsdss_io_clk_o", 0, 0),
+ 	CLK_FIXED_RATE("fss_ul_main_0_ospi_0_ospi_oclk_clk", 0, 0),
+@@ -194,7 +205,7 @@ static const struct clk_data clk_list[] = {
+ 	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents, 2, 0x4020000, 0),
+ 	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x4020118, 0, 5, 0, 0),
+ 	CLK_MUX("clkout0_ctrl_out0", clkout0_ctrl_out0_parents, 2, 0x108010, 0, 1, 0),
+-	CLK_MUX("main_emmcsd0_refclk_sel_out0", main_emmcsd0_refclk_sel_out0_parents, 2, 0x108160, 0, 1, 0),
++	CLK_MUX("main_cp_gemac_cpts_clk_sel_out0", main_cp_gemac_cpts_clk_sel_out0_parents, 8, 0x108140, 0, 3, 0),
+ 	CLK_MUX("main_emmcsd1_refclk_sel_out0", main_emmcsd1_refclk_sel_out0_parents, 2, 0x108168, 0, 1, 0),
+ 	CLK_MUX("main_gtcclk_sel_out0", main_gtcclk_sel_out0_parents, 8, 0x43008030, 0, 3, 0),
+ 	CLK_MUX("main_ospi_ref_clk_sel_out0", main_ospi_ref_clk_sel_out0_parents, 2, 0x108500, 0, 1, 0),
+@@ -209,6 +220,24 @@ static const struct clk_data clk_list[] = {
+ };
+ 
+ static const struct dev_clk soc_dev_clk_data[] = {
++	DEV_CLK(13, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(13, 3, "main_cp_gemac_cpts_clk_sel_out0"),
++	DEV_CLK(13, 4, "postdiv4_16ff_main_2_hsdivout5_clk"),
++	DEV_CLK(13, 5, "postdiv4_16ff_main_0_hsdivout6_clk"),
++	DEV_CLK(13, 6, "board_0_cp_gemac_cpts0_rft_clk_out"),
++	DEV_CLK(13, 8, "board_0_mcu_ext_refclk0_out"),
++	DEV_CLK(13, 9, "board_0_ext_refclk1_out"),
++	DEV_CLK(13, 11, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(13, 13, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 14, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 15, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 16, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 17, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 19, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 20, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 21, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 22, "board_0_rmii1_ref_clk_out"),
++	DEV_CLK(13, 23, "board_0_rmii2_ref_clk_out"),
+ 	DEV_CLK(16, 0, "hsdiv4_16fft_main_0_hsdivout1_clk"),
+ 	DEV_CLK(16, 1, "hsdiv4_16fft_main_0_hsdivout2_clk"),
+ 	DEV_CLK(16, 2, "hsdiv4_16fft_main_0_hsdivout3_clk"),
+@@ -233,10 +262,8 @@ static const struct dev_clk soc_dev_clk_data[] = {
+ 	DEV_CLK(36, 10, "board_0_cp_gemac_cpts0_rft_clk_out"),
+ 	DEV_CLK(36, 11, "hsdiv4_16fft_main_1_hsdivout3_clk"),
+ 	DEV_CLK(36, 12, "postdiv4_16ff_main_2_hsdivout6_clk"),
+-	DEV_CLK(57, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+-	DEV_CLK(57, 2, "main_emmcsd0_refclk_sel_out0"),
+-	DEV_CLK(57, 3, "postdiv4_16ff_main_0_hsdivout5_clk"),
+-	DEV_CLK(57, 4, "hsdiv4_16fft_main_2_hsdivout2_clk"),
++	DEV_CLK(36, 13, "cpsw_3guss_am67_main_0_cpts_genf0"),
++	DEV_CLK(36, 14, "cpsw_3guss_am67_main_0_cpts_genf1"),
+ 	DEV_CLK(58, 0, "main_emmcsd1_io_clklb_sel_out0"),
+ 	DEV_CLK(58, 1, "board_0_mmc1_clklb_out"),
+ 	DEV_CLK(58, 2, "board_0_mmc1_clk_out"),
+@@ -279,6 +306,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
+ 	DEV_CLK(157, 62, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+ 	DEV_CLK(157, 74, "mshsi2c_main_0_porscl"),
+ 	DEV_CLK(157, 135, "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk"),
++	DEV_CLK(157, 140, "cpsw_3guss_am67_main_0_mdio_mdclk_o"),
+ 	DEV_CLK(157, 143, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
+ 	DEV_CLK(157, 145, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
+ 	DEV_CLK(157, 157, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
+diff --git a/arch/arm/mach-k3/r5/j722s/dev-data.c b/arch/arm/mach-k3/r5/j722s/dev-data.c
+index 59176c98999..d6832266884 100644
+--- a/arch/arm/mach-k3/r5/j722s/dev-data.c
++++ b/arch/arm/mach-k3/r5/j722s/dev-data.c
+@@ -5,7 +5,7 @@
+  * This file is auto generated. Please do not hand edit and report any issues
+  * to Bryan Brattlof <bb@ti.com>.
+  *
+- * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
+ #include "k3-dev.h"
+@@ -23,16 +23,16 @@ static struct ti_pd soc_pd_list[] = {
+ 
+ static struct ti_lpsc soc_lpsc_list[] = {
+ 	[0] = PSC_LPSC(0, &soc_psc_list[0], &soc_pd_list[0], NULL),
+-	[1] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
+-	[2] = PSC_LPSC(13, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
+-	[3] = PSC_LPSC(20, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[4] = PSC_LPSC(21, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[5] = PSC_LPSC(23, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[6] = PSC_LPSC(28, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[7] = PSC_LPSC(34, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[8] = PSC_LPSC(53, &soc_psc_list[0], &soc_pd_list[1], &soc_lpsc_list[7]),
++	[1] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[4]),
++	[2] = PSC_LPSC(13, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[4]),
++	[3] = PSC_LPSC(21, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[4] = PSC_LPSC(23, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[5] = PSC_LPSC(28, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[6] = PSC_LPSC(34, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[7] = PSC_LPSC(42, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[8] = PSC_LPSC(53, &soc_psc_list[0], &soc_pd_list[1], &soc_lpsc_list[6]),
+ 	[9] = PSC_LPSC(56, &soc_psc_list[0], &soc_pd_list[2], &soc_lpsc_list[8]),
+-	[10] = PSC_LPSC(72, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[7]),
++	[10] = PSC_LPSC(72, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[6]),
+ 	[11] = PSC_LPSC(73, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[10]),
+ 	[12] = PSC_LPSC(74, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[11]),
+ };
+@@ -43,13 +43,13 @@ static struct ti_dev soc_dev_list[] = {
+ 	PSC_DEV(61, &soc_lpsc_list[0]),
+ 	PSC_DEV(178, &soc_lpsc_list[1]),
+ 	PSC_DEV(179, &soc_lpsc_list[2]),
+-	PSC_DEV(57, &soc_lpsc_list[3]),
+-	PSC_DEV(58, &soc_lpsc_list[4]),
+-	PSC_DEV(161, &soc_lpsc_list[5]),
+-	PSC_DEV(75, &soc_lpsc_list[6]),
+-	PSC_DEV(36, &soc_lpsc_list[7]),
+-	PSC_DEV(102, &soc_lpsc_list[7]),
+-	PSC_DEV(146, &soc_lpsc_list[7]),
++	PSC_DEV(58, &soc_lpsc_list[3]),
++	PSC_DEV(161, &soc_lpsc_list[4]),
++	PSC_DEV(75, &soc_lpsc_list[5]),
++	PSC_DEV(36, &soc_lpsc_list[6]),
++	PSC_DEV(102, &soc_lpsc_list[6]),
++	PSC_DEV(146, &soc_lpsc_list[6]),
++	PSC_DEV(13, &soc_lpsc_list[7]),
+ 	PSC_DEV(166, &soc_lpsc_list[8]),
+ 	PSC_DEV(135, &soc_lpsc_list[9]),
+ 	PSC_DEV(170, &soc_lpsc_list[10]),
 -- 
 2.34.1
 
