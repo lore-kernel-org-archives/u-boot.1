@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15890C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 09:19:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AF5C87FCC
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 09:20:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 910C3835D8;
-	Thu, 31 Jul 2025 11:19:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D7EE83623;
+	Thu, 31 Jul 2025 11:19:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="lI6A21WB";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ecOC1oNU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 208CF83457; Thu, 31 Jul 2025 11:19:45 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 8422483612; Thu, 31 Jul 2025 11:19:56 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E13A835B3
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 11:19:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 865C68349B
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 11:19:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0307a9198e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V8Rukk027400;
- Thu, 31 Jul 2025 11:19:38 +0200
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V9Ehig002503;
+ Thu, 31 Jul 2025 11:19:50 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- PvkqUfZgI6hTNIGbiFekazFGRPTCzwnYjvZvP0h4znA=; b=lI6A21WBfsrnNred
- nF8YfdvyI446dnz3nitn+6v4NIOjG2/sN863w+Gdy9zGLvplHIAxhREfz5H1NJNk
- 90PkcLno+9daBeTURVrAm7Ur1qwgPJZaGo5Da/1VdpQj+761Li4+bhxjgZdF6x4J
- LdbDzuhhEeS7nT1bhy9/g53PK8gDMlKHGbHQuBxa9hlFxbNF9+9EPMfBR5G3CMQh
- 7Yd5Ym/DToUaElzMfNBdDSf+unmKJnj2b7n/QLdajX62iFVfTyXBsXZt8q8xTTQV
- e0/Jp8jIiVlC/FhDvhAh6R4XnOMQxPZoREJIKP2MxrF8SPQXiQp7jSYztm0t3cxo
- mff3hQ==
+ SdQTT1/gv7w1VWfV5Tk/DiGVup0fE+vVnCMLbt8HaTs=; b=ecOC1oNUj+U56gxJ
+ uJVbEDY91xnqCanStRMv9lW/jGetPQYPEhhgIPsmgnAXUUaKnP4/jtGu/ecJaKlO
+ gnCpA+rxxN2TtaH7CkYNpbJe2Q3RbVpxroyUtPG7QOyDMz7TJR3A8sh9ugxAOiu6
+ VAKZ868maxmf5oH+75C773Qku2HD05CiwX26YDru/PWQGVHkmjmjmENW79g/NWxq
+ qNV/F/oXF9KrpPuMy4R/Soyg/UNR0RZ3nGcnKDqarKMqEEpNFlWP1ejyNRYAQvuz
+ tOdtJ+00E63bT+YQhud5E6GRpVwG6QJk0HroG+aP5S2Hvun/tobONbQI2KWWuZzt
+ 0S73qQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484m59dwc9-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4859ynu60j-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Jul 2025 11:19:37 +0200 (MEST)
+ Thu, 31 Jul 2025 11:19:50 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B10464002D;
- Thu, 31 Jul 2025 11:18:30 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D868140058;
+ Thu, 31 Jul 2025 11:18:53 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 495FE7530AB;
- Thu, 31 Jul 2025 11:17:57 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 958C47530B4;
+ Thu, 31 Jul 2025 11:18:21 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 31 Jul
- 2025 11:17:56 +0200
-Message-ID: <409ecfc7-361b-4e1f-aabd-63207d24d8a1@foss.st.com>
-Date: Thu, 31 Jul 2025 11:17:56 +0200
+ 2025 11:18:20 +0200
+Message-ID: <dc20598a-d2b1-451d-87ee-54909a9cbff1@foss.st.com>
+Date: Thu, 31 Jul 2025 11:18:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/10] ARM: stm32: Add STM32MP13xx SPL Kconfig options
+Subject: Re: [PATCH v2 04/10] ARM: stm32: Add STM32MP13xx PMIC initialization
+ for DDR3 DRAM type
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
 CC: Cheick Traore <cheick.traore@foss.st.com>, Fabrice Gasnier
  <fabrice.gasnier@foss.st.com>, Gatien Chevallier
@@ -68,9 +69,10 @@ CC: Cheick Traore <cheick.traore@foss.st.com>, Fabrice Gasnier
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
  <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
+ <20250630001053.952342-4-marek.vasut@mailbox.org>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250630001053.952342-1-marek.vasut@mailbox.org>
+In-Reply-To: <20250630001053.952342-4-marek.vasut@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -98,9 +100,9 @@ X-Virus-Status: Clean
 
 
 On 6/30/25 02:10, Marek Vasut wrote:
-> Introduce Kconfig options used by SPL on STM32MP13xx and isolate
-> the Kconfig options only used in case TFA BL2 is used as a SPL
-> behind CONFIG_TFABOOT dependency.
+> The STM32MP13xx PMIC initialization for DDR3 DRAM type is similar
+> to the STM32MP15xx PMIC initialization, except the VTT rail is not
+> enabled. Fill in the STM32MP13xx support.
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
@@ -121,51 +123,87 @@ On 6/30/25 02:10, Marek Vasut wrote:
 > ---
 > V2: Add RB from Patrice
 > ---
->  arch/arm/mach-stm32mp/Kconfig     | 7 +++++--
->  arch/arm/mach-stm32mp/Kconfig.13x | 3 ++-
->  2 files changed, 7 insertions(+), 3 deletions(-)
+>  board/st/common/stpmic1.c | 51 ++++++++++++++++++++++++++-------------
+>  1 file changed, 34 insertions(+), 17 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index 09b7d5123ae..c658ac19b41 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -40,16 +40,19 @@ choice
->  config STM32MP13X
->  	bool "Support STMicroelectronics STM32MP13x Soc"
->  	select ARCH_EARLY_INIT_R
-> -	select ARM_SMCCC
-> +	select ARM_SMCCC if TFABOOT
-> +	select ARCH_SUPPORT_PSCI if !TFABOOT
-> +	select BINMAN if !TFABOOT
->  	select CPU_V7A
->  	select CPU_V7_HAS_NONSEC
->  	select CPU_V7_HAS_VIRT
-> -	select OF_BOARD
-> +	select OF_BOARD if TFABOOT
->  	select OF_BOARD_SETUP
->  	select PINCTRL_STM32
->  	select STM32_RCC
->  	select STM32_RESET
->  	select STM32_SERIAL
-> +	select SUPPORT_SPL if !TFABOOT
->  	select SYS_ARCH_TIMER
->  	imply CMD_NVEDIT_INFO
->  	imply OF_UPSTREAM
-> diff --git a/arch/arm/mach-stm32mp/Kconfig.13x b/arch/arm/mach-stm32mp/Kconfig.13x
-> index bc8b3f8cf77..cecf9e3b8c7 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig.13x
-> +++ b/arch/arm/mach-stm32mp/Kconfig.13x
-> @@ -20,7 +20,8 @@ config TARGET_ST_STM32MP13X
->  endchoice
+> diff --git a/board/st/common/stpmic1.c b/board/st/common/stpmic1.c
+> index 45c2bb5bcea..b46f89dacb9 100644
+> --- a/board/st/common/stpmic1.c
+> +++ b/board/st/common/stpmic1.c
+> @@ -14,8 +14,19 @@
+>  #include <power/pmic.h>
+>  #include <power/stpmic1.h>
 >  
->  config TEXT_BASE
-> -	default 0xC0000000
-> +	default 0xC0000000 if TFABOOT
-> +	default 0xC0100000 if !TFABOOT
+> +static bool is_stm32mp13xx(void)
+> +{
+> +	if (!IS_ENABLED(CONFIG_STM32MP13X))
+> +		return false;
+> +
+> +	return of_machine_is_compatible("st,stm32mp131") ||
+> +	       of_machine_is_compatible("st,stm32mp133") ||
+> +	       of_machine_is_compatible("st,stm32mp135");
+> +}
+> +
+>  int board_ddr_power_init(enum ddr_type ddr_type)
+>  {
+> +	bool is_mp13 = is_stm32mp13xx();
+>  	struct udevice *dev;
+>  	bool buck3_at_1800000v = false;
+>  	int ret;
+> @@ -30,18 +41,21 @@ int board_ddr_power_init(enum ddr_type ddr_type)
+>  	switch (ddr_type) {
+>  	case STM32MP_DDR3:
+>  		/* VTT = Set LDO3 to sync mode */
+> -		ret = pmic_reg_read(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3));
+> -		if (ret < 0)
+> -			return ret;
+> -
+> -		ret &= ~STPMIC1_LDO3_MODE;
+> -		ret &= ~STPMIC1_LDO12356_VOUT_MASK;
+> -		ret |= STPMIC1_LDO_VOUT(STPMIC1_LDO3_DDR_SEL);
+> -
+> -		ret = pmic_reg_write(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
+> -				     ret);
+> -		if (ret < 0)
+> -			return ret;
+> +		if (!is_mp13) {
+> +			/* Enable VTT only on STM32MP15xx */
+> +			ret = pmic_reg_read(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3));
+> +			if (ret < 0)
+> +				return ret;
+> +
+> +			ret &= ~STPMIC1_LDO3_MODE;
+> +			ret &= ~STPMIC1_LDO12356_VOUT_MASK;
+> +			ret |= STPMIC1_LDO_VOUT(STPMIC1_LDO3_DDR_SEL);
+> +
+> +			ret = pmic_reg_write(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
+> +					     ret);
+> +			if (ret < 0)
+> +				return ret;
+> +		}
 >  
->  config PRE_CON_BUF_ADDR
->  	default 0xC0800000
-
+>  		/* VDD_DDR = Set BUCK2 to 1.35V */
+>  		ret = pmic_clrsetbits(dev,
+> @@ -69,11 +83,14 @@ int board_ddr_power_init(enum ddr_type ddr_type)
+>  		mdelay(STPMIC1_DEFAULT_START_UP_DELAY_MS);
+>  
+>  		/* Enable VTT = LDO3 */
+> -		ret = pmic_clrsetbits(dev,
+> -				      STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
+> -				      STPMIC1_LDO_ENA, STPMIC1_LDO_ENA);
+> -		if (ret < 0)
+> -			return ret;
+> +		if (!is_mp13) {
+> +			/* Enable VTT only on STM32MP15xx */
+> +			ret = pmic_clrsetbits(dev,
+> +					      STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
+> +					      STPMIC1_LDO_ENA, STPMIC1_LDO_ENA);
+> +			if (ret < 0)
+> +				return ret;
+> +		}
+>  
+>  		mdelay(STPMIC1_DEFAULT_START_UP_DELAY_MS);
+>  
 Applied to u-boot-stm32/master
 
 Thanks
