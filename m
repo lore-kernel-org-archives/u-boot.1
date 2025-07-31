@@ -4,72 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DDEEC83F17
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 11:45:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30034C83F17
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 11:46:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE3BC83824;
-	Thu, 31 Jul 2025 13:45:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id ACC0483824;
+	Thu, 31 Jul 2025 13:46:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1753962324;
-	bh=coIhclRXIDq8r9iw7TiihKK7jIMO8+pAThXCQ7pwjng=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=v0irfjvHR6i1KkC5jeiqVUrPPIstolBpxEiSPHownRgNiqmdmn/Uq2SVaWntufZmG
-	 RWz6eZhPFzLzEk7s0TWCowIk6s9/69MWon0fOqIYyWyMEXjW5EJ8lO8KayD4u+NnHF
-	 9rvst23SdBcrpFLGXZn0LXNsQS/UJx5MDijQpJeeOt8lyYtFaOoYTlJRoZi41ab3yo
-	 86ZHwWXzrLiEKzo3CMvSBUJnBYphIK9p1ZwMcc+dZsjc8xL+h+EqTcpUjzSjiwLw53
-	 snomv8eOZHYcK4xhO+WNdVun7mTATPSMInyQhOPR178Mn7S2RQ4iQOU8rJtWbB+1Y2
-	 yjgnSY5EAOTPQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C2D7283885; Thu, 31 Jul 2025 13:45:22 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEE8C83816
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 13:45:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="auDRvi3D"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0EE5C1038C126; 
- Thu, 31 Jul 2025 13:45:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1753962318; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=coIhclRXIDq8r9iw7TiihKK7jIMO8+pAThXCQ7pwjng=;
- b=auDRvi3D6HpLWCGf5I/znysIdzr5jSEViT2butCZ+ZpQom6afhN4De/pK03c7A6/vtnyXy
- 0J8X+TMde1xYChu1usdi921zNi4tz7kJblS2APh2fvU/ctPFLbBRSLO7aJg17vzGbVn/Kg
- t4OTQhYb5ll8Ee5rLQpoV5QTdoygGfwpWYQpCZjxfMbYhlei9YkviT0feYqO52mKNnYxwW
- FkLi1qDqAOAuNzCPlh0eqx386C5qclmLhzqN8vySboQ4twoeRRmfpVjyBCh+gGWN37t2ah
- SAM82H76eiZP+rBAxjU+nwv8P1JLgpGkSirIfBzdpCQ3KkbQUTl1TZe0fT0poQ==
-Date: Thu, 31 Jul 2025 13:45:15 +0200
-From: Philip Oberfichtner <pro@denx.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Paul Kocialkowski <contact@paulk.fr>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Trevor Woerner <twoerner@gmail.com>, Marek Vasut <marex@denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] Kconfig: typo restict
-Message-ID: <aItXSz1FcmATTYQe@antares>
-References: <20250730125427.587976-1-heinrich.schuchardt@canonical.com>
- <3f34945e-9e4f-451e-85eb-5a5e4e5cd265@cherry.de>
- <0b5e6888-6652-4ec7-971e-710dc9cd3a77@canonical.com>
- <20250730143250.GP1807455@bill-the-cat> <aIoxIl6rdyN3NbNc@antares>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TxerLRd0";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C10AE8388C; Thu, 31 Jul 2025 13:46:13 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CB30383816
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 13:46:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-45618ddd62fso7819205e9.3
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 04:46:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1753962371; x=1754567171; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cyDVf4CWgzKlzBHI/HJh9P0+CTibYzvPtFLz8BJUR6I=;
+ b=TxerLRd0rmjTTvwCJc9ezXW0s5S8eGTzjfFT1hN5PaD6UlBxbhTbxQzz3AZn/GoPth
+ DTBiXbKlU7q3JNx6rVjja12SRNa3HISgMAv+Caae48z3HB0i6KhxEuI5aiOLBcCQJDvi
+ OlxVEjCNtEiUnX/22UNCxOulTDZCFDuVjMh+4q9Q9SKJjn8bwkI64PQmXafPBWhHaBSR
+ JSG3kHp8KhVGZllYLEtCjHfb9gZLgp5fHGQwaL5yrwVIr5YTirTAVDUcHywIfcEc4hkJ
+ 73U/z0PewRPZbH8pzTOKMdK2Il4kBd+5e4FbQHa13z1H75E/AQ4o6DjCh6clTS9uXokD
+ Dc4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753962371; x=1754567171;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cyDVf4CWgzKlzBHI/HJh9P0+CTibYzvPtFLz8BJUR6I=;
+ b=RsmgY6PKPmQ1SOc5Vltojcqx0fcahB+N97+9LM5xuaxz86oGhN2zaNa+K64uEO1AiQ
+ MrXzMxcGF+sCyKT7wqEXolmkojdo+9cK2auWsXgre+PmMhnAv50b8oxIIOM9HIex8TJP
+ 1zK/JskSSSsX7pKAVGjiG2cypbIBbIVzfFkk3UGvKhI43ABuYkALODyGb8arUxXF6akX
+ LJbYwQT3jXDpxd1kSkttdbJbxA8VLb5hOnCXllPXduOA+bhRWEtRjArIC9p8HfN7P48E
+ jbZAc/JJoLdvMskfyeH3zdIKbSGRsc6FnZ1Ibk9mutWusEK5kwRXKF0PnoBryi3upE4V
+ 7LEg==
+X-Gm-Message-State: AOJu0YxDc6RYOX19hQ1OmkmJE9pmeVLBTjD1DrZQJkQS7DuD/jPwkvQc
+ 1UA45EbeoPtv94VxoWk8Kc7rtQYJw/g7Ml599DGeEB3V1gLRn+/XleGjSRMvsrYgrMQ=
+X-Gm-Gg: ASbGncveSbxS/Cx1VXhRcaMagZ4MpE8d+uOv4nfLrzNUliHn/fBaR4EonQn9BpXZBO8
+ 28ZgnAG4c24DpqMBcxoaPnEK9uIChpDYtuU8P2zEJ56cOOTsE1mqNpeApgXM3PfLf/kMuvUjl65
+ cuSmuvYn3Jk78Vy5hAxJ79Q58v3GR9L3gtz1voHxGm3Np9Wsev705Qh0W9ZPtkgBK+lIzq1ltdM
+ 126VLwl38qJqDm8FSxjW3L8f4z6Swng0MyKmJc89R2n/z4VX2U4uOEhwVUuzUuu6Ftz14z4EHcH
+ RnJQps+7FSHxw41/w9/+unVjFOj8zkuCZECSy2iHAEE03q7u+IXrgVlghhgaTaKD8WyORjjH2am
+ o3sDNmmVBs7jNFUOgOHKB4+pMj2pYdw+2Y4XTT5n4/9/bq1neLzls+NgYGNVB
+X-Google-Smtp-Source: AGHT+IGKAh2pCEoEdSGNn/C6msifgGKnvZUCv7p83IqhbwRbdsWHaPbQnXDzResqvbIbO6IczkIRyA==
+X-Received: by 2002:a05:6000:2c0b:b0:3a5:57b7:cd7b with SMTP id
+ ffacd0b85a97d-3b794fd735emr5714449f8f.22.1753962371221; 
+ Thu, 31 Jul 2025 04:46:11 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:14a5:dbc6:afe:7138])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c3ac115sm2174846f8f.12.2025.07.31.04.46.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Jul 2025 04:46:10 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 31 Jul 2025 12:46:10 +0100
+Subject: [PATCH] mmc: rockchip_sdhci: Do not test unsigned for being less
+ than 0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aIoxIl6rdyN3NbNc@antares>
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250731-mmc_rockchip-v1-1-74baef656cca@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAIFXi2gC/x2N0QrCMAwAf2Xk2cLSMSr+iohkMdog7UYyRBj7d
+ zsfj+O4DVxMxeHSbWDyUde5NsBTB5ypviToozHEPo59GjCUwneb+c1Zl5DOKSKlEXFAaMlELmE
+ yqpyPqJCvYodYTJ76/X+ut33/ASYQ2zd3AAAA
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,33 +102,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 30, 2025 at 04:50:15PM +0200, Philip Oberfichtner wrote:
-> > > With VPL_SIZE_LIMIT and a patch for UBOOT_WITH_SPL_SIZE_LIMIT pending things
-> > > get even more involved.
-> > > 
-> > > We should think about a documentation page on size limits:
-> > > 
-> > > CONFIG_HAS_BOARD_SIZE_LIMIT
-> > > CONFIG_BOARD_SIZE_LIMIT
-> > > CONFIG_SPL_SIZE_LIMIT
-> > > CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD
-> > > CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC
-> > > CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK
-> > > CONFIG_TPL_SIZE_LIMIT
-> > > CONFIG_VPL_SIZE_LIMIT
-> > 
+In rockchip_sdhci_execute_tuning the variable tuning_loop_counter is
+tested for being less than 0. Ensure that it is a signed type by
+declaring it as s8 instead of char.
 
-Hi again,
+This issue was found by Smatch.
 
-> > As Philip has hit adding a new MIPS board and need for specific size
-> > check, yes, better documentation (and then perhaps adjusting and
-> > cleanup) of our various size checks is much needed and would be
-> > appreciated.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/mmc/rockchip_sdhci.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I just posted an RFC on how we might want to start cleaning up the
-current situation:
+diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+index 761e3619329..5e025d76a82 100644
+--- a/drivers/mmc/rockchip_sdhci.c
++++ b/drivers/mmc/rockchip_sdhci.c
+@@ -500,7 +500,7 @@ static int rockchip_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
+ {
+ 	struct rockchip_sdhc *priv = dev_get_priv(mmc->dev);
+ 	struct sdhci_host *host = &priv->host;
+-	char tuning_loop_counter = SDHCI_TUNING_LOOP_COUNT;
++	s8 tuning_loop_counter = SDHCI_TUNING_LOOP_COUNT;
+ 	struct mmc_cmd cmd;
+ 	u32 ctrl, blk_size;
+ 	int ret;
 
-https://patchwork.ozlabs.org/project/uboot/list/?series=467406
+---
+base-commit: 79f3e77133bd7248e4579827effc13f97a32a8a8
+change-id: 20250731-mmc_rockchip-78721a751131
 
-Best,
-Philip
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
