@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 268CFC87FCC
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 11:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EFBAC87FCC
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 11:53:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BDEA83857;
-	Thu, 31 Jul 2025 13:53:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED597838AB;
+	Thu, 31 Jul 2025 13:53:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YaSYpW8n";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mg3+ODMq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09E148389A; Thu, 31 Jul 2025 13:53:14 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 8331D83852; Thu, 31 Jul 2025 13:53:22 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8B0983852
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 13:52:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16F0083852
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 13:53:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-32e14ce168eso7557461fa.1
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 04:52:18 -0700 (PDT)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-55b797ad392so915957e87.3
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 04:53:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753962738; x=1754567538; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Nio0j49pSrqmq/7Ca55B42BZGKgT2v/vpoF1mqezeYI=;
- b=YaSYpW8nukbr+Ll+84RA3CRXdhn5KEdHQPDpDYzQqybVV9X2+5x+SYt7/hzkKjZFyk
- ep5WEeRtoLMMvWAidIZB0Ojk30T2dgruf9NJmwDtthweWI8FAASHLfTeD2fyVnsocp8r
- ts9D7eHli+TUUux45TeU6lCGHlqv84U5B3BEOBVDwBnA5yDpTuEsoqyjt/2hN+zDQmbp
- NPJ3HmhTXYcM8VjEKG9v5IeF9p1wZDf7d3IYi3dRLkHP770HmHie91sMaYqpFI2TgoCZ
- /awNfGywG1CY9CDnLdbaBkDLH5t9GFD003gKG8hznZXDRZa4JmUWab9jnwBGHvR9qZ9u
- 8K8Q==
+ d=linaro.org; s=google; t=1753962799; x=1754567599; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KeLvsvwRGp4uSJXK4XfMGUK3W4ln46neOemZFB8ajjg=;
+ b=mg3+ODMq6JJSK+FE/XIHei12CZHBPTo/R77gdv+e5kP0Us2NAuakBlD/whlE7ljdyP
+ xWtfC/Z483ZxpMg1p6ORf1UQgsVW2CJ7VV2CKp9Cl4PN6ums80qZPQce5SrL+iaCpXL/
+ lWmuw4nfYIlFOdJ54AYD4AB5YKRZzj3ZJBSlmNJfiPU0EHTXlmaZEhIENOovL6WJ/BnU
+ yqqSgYUCkFTzXVXsa22JOFeOZXlvkkonnmmMZrE53S50jH8eWlfNaGaeIl+1K0CASkks
+ nl1Fr+pb38jDSDtkzQKagYsVrYiQvnmhz2CNasOD0nBRo9PfsHmkZin+ArY9cB2XTNpq
+ 7InQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753962738; x=1754567538;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Nio0j49pSrqmq/7Ca55B42BZGKgT2v/vpoF1mqezeYI=;
- b=aY4fn4IcPbOC5yBXcmKBo1FrcHRLt4d3NSdyg9jx9TrX9KX01+3Q+ruImStENZUabb
- 67A03myuAYZbC5ST7E46ORQqIWgrDscGdgmfPWNKcle5q/csIzGuTue5voInLzNwMAD5
- Z8ko2iddlAozfLyjo92xrv6FlSdCrQ2Zl+gY12/pr2GEFWxqwxpZGwzwJ34qhCBIqVX+
- Vdi1nCmruLdKiNw40rMvWLyVXixg8RAkaI2MHp6LGkJYffcbmQKciwpN8TsojD3IVXKJ
- PjmPYlOYfyIVuWWKQfM3wxD+H5+zP2YHT3tL7FR0kwaJTz9d5KVUxEinsvQ9Eyqy7xj5
- qaYw==
-X-Gm-Message-State: AOJu0YzftDN5eGv6NW7lZ4QC88AWROeAfY5IafU5o6kP08MLxJlMr/Nj
- lbD/1fGQZSM/O1oeuKuA7Xe7HFw2mjQiCh/mf1dKxw23UDpBVQMyQ1DpZTwZMV7Jt0Y=
-X-Gm-Gg: ASbGncsah6cSGFdf5n7lUhxD08EP02Hrij6DHrudVVHrL9i11LbZ8T1epP9TLIzSo20
- ouL5OWyB+66T7iC6frS0ZJeh4oQSG5VksNyb1H6aSWewYZnz+z8XrAuLKunKhFeEtKMkBvYJYOr
- 9a+kGZTKQ1mrf5zY0+qXT/VOR9HBSAZ/xrs5kyDMQn2XO4u/dq37bibIlCdmQ+4ImA+YYq1zphr
- rKBZwR5JGH8QgF24iY1PZt1QbVMo3gfJEcu/Qe3b/RAcaAskhHbqxkkWf/tgI7CelyUonfyG1DQ
- HPGhMgx0Xcc+n8dQuyDla5QUC0mhoIu/JMK+H4ELzxiLgYzj4VoONiOG1NSG1RBdflEzN1kP7dc
- 7Jf8+zmmBAYliWMD10XRUbK0+oToAnYvU4OUFGzNeJnceVuxwkenA114=
-X-Google-Smtp-Source: AGHT+IFkK4ZPTdYzDOuRRvjcJ+QlddQlal3nAVTX1PR1hm6Htk4kHcSp3wvEahS9qgiVqzLfjBORQg==
-X-Received: by 2002:a05:6512:3402:b0:553:2a6a:884b with SMTP id
- 2adb3069b0e04-55b7c042d7amr1996488e87.23.1753962737531; 
- Thu, 31 Jul 2025 04:52:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753962799; x=1754567599;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KeLvsvwRGp4uSJXK4XfMGUK3W4ln46neOemZFB8ajjg=;
+ b=BITwxtzeCQhyomTPjjlk7aNsycqQKY1bpYafWEk51Rmb73K2+j6QysRpjNl4EJuHTQ
+ +r6dwzcSzDNxaTaXQ8ta08jucepJeKjgrjoP+Tw/H8UmWeOB0LkfWs+hwINsP8WNonoD
+ 36wPGhyhHzA7wgV3/2qGDGrG0/RpCSuqWJuLtoaA7j0VxyrDdbTL/n84grI2Y7kThshK
+ rDKUnPCZHyK+5jL9FG5O2XqNz4I4Qih6GJJtMbaNOGUuI37qCa/7IihzLKryc6aiwvgE
+ DX9JMmuEUmOFJk4MFjtOzn8QBKXlURA3SyWRfHsUU/gqZ/dzU32lqoCJY+6M5+8HO81H
+ g1zw==
+X-Gm-Message-State: AOJu0Yz5LkdugVm2Z7vIFXMdiNYyZOqByUk26JteXfGZCRXsbqvCsCCg
+ YPjkKj11DBDWu39ToB77i9NMAy9qFytQTEXl6d+9xJ2InQIFqi4w1viB6ZOcUUqisVFQtsPMLos
+ mVbLh2Ws=
+X-Gm-Gg: ASbGnctQdFYQVfnmIXEZOZpdVV8CEZ6R4fHENUGgm7209K0o348YfbCYEciT7jflEHH
+ gIN46GrWVI9E7LRZ710nrKWbzk4RP2z5Gc9DdQW7XkSxMDzXrEb2qCvJHdHJxrBwghjdXqVzqWI
+ RsVt8j1uMuC7c5HJPCytybLjAWS1FsUg0SLnYyarNuHVr7J3WzfsAwXixQiJT/wh++e8iceZUYs
+ ugMlNAMgtFO3SnULfUp/7WNUoetoCfNHea0dHM5EiY6VkEF7KZpaHsED1sbXYgBVQReh3yJ5nUc
+ cPj9AFKn0wVKw2SaGbuaLp3beLBIiliAVVkG5ZDr7OEk3hGKZjwkBwSKbToAdVtLTS6hnzwKXvR
+ 1nLHIDkAVqwaZBirjknaM7TSbWB6J7hk8jSrCE7bB1P971RuEMJX+7PI=
+X-Google-Smtp-Source: AGHT+IHX7CpmkpMSbij5vaociOEgsQake/XbNIe5dVwl7PLSQv7VFW7jxGyV40ocleYFuvtKmWnYqQ==
+X-Received: by 2002:a05:6512:3050:b0:55b:8a28:3cbc with SMTP id
+ 2adb3069b0e04-55b8a283d8cmr493806e87.51.1753962799233; 
+ Thu, 31 Jul 2025 04:53:19 -0700 (PDT)
 Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b8898bfa4sm206104e87.21.2025.07.31.04.52.16
+ 2adb3069b0e04-55b889a8278sm205823e87.57.2025.07.31.04.53.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 04:52:17 -0700 (PDT)
-Date: Thu, 31 Jul 2025 14:52:14 +0300
+ Thu, 31 Jul 2025 04:53:18 -0700 (PDT)
 From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Fabio Estevam <festevam@gmail.com>
-Subject: Re: [PATCH v3 1/2] Makefile scripts/Makefile.lib: fix *_efi.so
- dependency to PLATFORM_LIBGCC
-Message-ID: <aItY7pLA59ejo1Sa@nuoska>
-References: <20250718082959.416152-1-mikko.rapeli@linaro.org>
- <20250728214349.GA1750405@bill-the-cat>
+To: u-boot@lists.denx.de
+Cc: Mikko Rapeli <mikko.rapeli@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH v4] Makefile: add dependency from lib to arch/$(ARCH)/lib
+Date: Thu, 31 Jul 2025 14:52:48 +0300
+Message-ID: <20250731115248.264837-1-mikko.rapeli@linaro.org>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20250728214349.GA1750405@bill-the-cat>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,116 +96,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Top level Makefile starts separate "make" processes for each each
+subdirectory. lib/efi_loader apps now depend on lib.a from
+arch/$(ARCH)/lib if CONFIG_USE_PRIVATE_LIBGCC is enabled which creates
+a race conditions since dependency from lib/efi_loader EFI apps to
+arch/$(ARCH)/lib/lib.a is not explicit:
 
-On Mon, Jul 28, 2025 at 03:43:49PM -0600, Tom Rini wrote:
-> On Fri, Jul 18, 2025 at 11:29:58AM +0300, Mikko Rapeli wrote:
->=20
-> > When PLATFORM_LIBGCC was added to linker command it was not
-> > added to the dependency of the .so and other rules. Thus a build can
-> > try to link *_efi.so files before lib.a from PLATFORM_LIBGCC is availab=
-le.
-> > This was seen in yocto autobuilder builds with u-boot 2025.07
-> > update, see https://lists.openembedded.org/g/openembedded-core/message/=
-220004
-> >=20
-> > https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/2914600/raw_i=
-nline
-> >=20
-> > |    rm -f lib/efi_loader/built-in.o; arm-poky-linux-gnueabi-ar cDPrsT =
-lib/efi_loader/built-in.o lib/efi_loader/efi_bootmgr.o lib/efi_loader/efi_b=
-ootbin.o lib/efi_loader/efi_boottime.o lib/efi_loader/efi_helper.o lib/efi_=
-loader/efi_console.o lib/efi_loader/efi_device_path.o lib/efi_loader/efi_de=
-vice_path_to_text.o lib/efi_loader/efi_device_path_utilities.o lib/efi_load=
-er/efi_dt_fixup.o lib/efi_loader/efi_fdt.o lib/efi_loader/efi_file.o lib/ef=
-i_loader/efi_hii.o lib/efi_loader/efi_hii_config.o lib/efi_loader/efi_image=
-_loader.o lib/efi_loader/efi_load_options.o lib/efi_loader/efi_memory.o lib=
-/efi_loader/efi_root_node.o lib/efi_loader/efi_runtime.o lib/efi_loader/efi=
-_setup.o lib/efi_loader/efi_string.o lib/efi_loader/efi_unicode_collation.o=
- lib/efi_loader/efi_var_common.o lib/efi_loader/efi_var_mem.o lib/efi_loade=
-r/efi_variable.o lib/efi_loader/efi_var_file.o lib/efi_loader/efi_watchdog.=
-o lib/efi_loader/efi_disk.o lib/efi_loader/efi_net.o lib/efi_loader/efi_smb=
-ios.o lib/efi_loader/efi_load_initrd.o lib/efi_loader/efi_conformance.o
-> > |   arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -=
-znorelro --no-warn-rwx-segments -L /srv/pokybuild/yocto-worker/oe-selftest-=
-armhost/build/build-st-3119200/tmp/work/beaglebone_yocto-poky-linux-gnueabi=
-/u-boot/2025.07/sources/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -sha=
-red -Bsymbolic -s lib/efi_loader/helloworld.o lib/efi_loader/efi_crt0.o lib=
-/efi_loader/efi_reloc.o lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.=
-a -o lib/efi_loader/helloworld_efi.so
-> > | arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No suc=
-h file or directory
-> > | make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi=
-=2Eso] Error 1
-> >=20
-> > The issue is hard to reproduce but this change can artificially trigger=
- it:
-> >=20
-> >   --- a/scripts/Makefile.build
-> >   +++ b/scripts/Makefile.build
-> > @@ -353,7 +353,7 @@ $(modorder-target): $(subdir-ym) FORCE
-> >  #
-> >  ifdef lib-target
-> >  quiet_cmd_link_l_target =3D AR      $@
-> > -cmd_link_l_target =3D rm -f $@; $(AR) cDPrsT$(KBUILD_ARFLAGS) $@ $(lib=
--y)
-> > +cmd_link_l_target =3D rm -f $@ && echo "HACK, delaying build!" && slee=
-p 60 && $(AR) cDPrsT$(KBUILD_ARFLAGS) $@ $(lib-y)
-> >=20
-> >  $(lib-target): $(lib-y) FORCE
-> >         $(call if_changed,link_l_target)
-> >=20
-> > Then run a rebuild with:
-> >=20
-> > $  rm -f $( find build/ -name lib.a -or -name helloworld_efi.so ) && \
-> >    make
-> > ...
-> >   arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -zn=
-orelro --no-warn-rwx-segments -L /home/mcfrisk/src/base/repo/poky/build_bea
-> > glebone/tmp/work/beaglebone_yocto-poky-linux-gnueabi/u-boot/2025.07/sou=
-rces/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -shared -Bsymbolic -s l=
-ib/efi_loader/helloworld.o lib/efi_loader/efi_crt0.o lib/efi_loader/efi_rel=
-oc.o lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.a -o lib/efi_loader=
-/helloworld_efi.so
-> > arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such =
-file or directory
-> > make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi.s=
-o] Error 1
-> >=20
-> > Fix by introducing PLATFORM_LIBGCC_LIBA variable with only lib.a
-> > filename which is then used to add the dependency in rules which use
-> > PLATFORM_LIBGCC. This should not impact builds which don't set
-> > PLATFORM_LIBGCC_LIBA and PLATFORM_LIBGCC usage stays as is.
-> >=20
-> > Fixes: 43d43241d1c9 ("scripts/Makefile.lib: add PLATFORM_LIBGCC to efi =
-linking")
-> >=20
-> > Cc: Adriano Cordova <adrianox@gmail.com>
-> > Cc: Fabio Estevam <festevam@gmail.com>
-> > Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
->=20
-> So, this series needs a cover letter. And to reword the commit messages,
-> so that the diff to make things fail shows up below the "---". But the
-> fatal problem for right now is this needs to be put through CI next
-> time. This seems to cause some of the EFI apps to not be built now:
-> https://source.denx.de/u-boot/u-boot/-/jobs/1209924
->=20
-> I assume Azure would have failed too if I let it get that far. Thanks.
+arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such file or directory
+make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/testapp_efi.so] Error 1
 
-I think I finally figured this out and will send a patch to Makefile in v4.
-arch/$(ARCH)/lib and lib are compiled by separate "make" processes started
-by top level Makefile, and both use the same scripts/Makefile.build etc. Th=
-is
-threw me off quite a bit. And "make" does not tell which dependencies of a
-target are missing if the file level dependency to lib.a is explicit when l=
-inking
-the EFI apps.
+This error was seen on yocto/OE-core CI builds after u-boot 2025.07 update:
 
-I think the single change to build "arch/$(ARCH)/lib" directory before "lib"
-in top level Makefile is simple enough to explain in commit message
-without a coverletter, similar to how "examples" directory is compiled after
-all other directories for u-boot binaries.
+https://lists.openembedded.org/g/openembedded-core/message/220004
 
-Cheers,
+https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/2914600/raw_inline
 
--Mikko
+    |    rm -f lib/efi_loader/built-in.o; arm-poky-linux-gnueabi-ar cDPrsT lib/efi_loader/built-in.o lib/efi_loader/efi_bootmgr.o lib/efi_loader/efi_bootbin.o lib/efi_loader
+/efi_boottime.o lib/efi_loader/efi_helper.o lib/efi_loader/efi_console.o lib/efi_loader/efi_device_path.o lib/efi_loader/efi_device_path_to_text.o lib/efi_loader/efi_device_
+path_utilities.o lib/efi_loader/efi_dt_fixup.o lib/efi_loader/efi_fdt.o lib/efi_loader/efi_file.o lib/efi_loader/efi_hii.o lib/efi_loader/efi_hii_config.o lib/efi_loader/efi
+_image_loader.o lib/efi_loader/efi_load_options.o lib/efi_loader/efi_memory.o lib/efi_loader/efi_root_node.o lib/efi_loader/efi_runtime.o lib/efi_loader/efi_setup.o lib/efi_
+loader/efi_string.o lib/efi_loader/efi_unicode_collation.o lib/efi_loader/efi_var_common.o lib/efi_loader/efi_var_mem.o lib/efi_loader/efi_variable.o lib/efi_loader/efi_var_
+file.o lib/efi_loader/efi_watchdog.o lib/efi_loader/efi_disk.o lib/efi_loader/efi_net.o lib/efi_loader/efi_smbios.o lib/efi_loader/efi_load_initrd.o lib/efi_loader/efi_confo
+rmance.o
+    |   arm-poky-linux-gnueabi-ld.bfd -nostdlib -zexecstack -znocombreloc -znorelro --no-warn-rwx-segments -L /srv/pokybuild/yocto-worker/oe-selftest-armhost/build/build-st-
+3119200/tmp/work/beaglebone_yocto-poky-linux-gnueabi/u-boot/2025.07/sources/u-boot-2025.07 -T arch/arm/lib/elf_arm_efi.lds -shared -Bsymbolic -s lib/efi_loader/helloworld.o
+lib/efi_loader/efi_crt0.o lib/efi_loader/efi_reloc.o lib/efi_loader/efi_freestanding.o arch/arm/lib/lib.a -o lib/efi_loader/helloworld_efi.so
+    | arm-poky-linux-gnueabi-ld.bfd: cannot find arch/arm/lib/lib.a: No such file or directory
+    | make[3]: *** [scripts/Makefile.lib:512: lib/efi_loader/helloworld_efi.so] Error 1
+
+The different "make" processes share common scripts/Makefile.build
+and scripts/Makefile.libs but since they are separate processes
+the Makefile rules can't add a dependency from lib/uefi_loader targets
+to arch/$(ARCH)/lib/lib.a. Or the file level dependency can be added but
+then "make" produces a too sparse error message which does not mention
+that one of the dependencies like arch/$(ARCH)/lib/lib.a was not found:
+
+make[3]: *** No rule to make target 'lib/efi_loader/helloworld.efi', needed by '__build'.  Stop.
+
+Fix this dependency problem by building arch/$(ARCH)/lib before lib
+if CONFIG_USE_PRIVATE_LIBGCC was enabled.
+
+To reproduce the race condition more reliably, add a "sleep 10" delay
+before linker command cmd_link_l_target with 2025.07
+or to $(lib-target): target in scripts/Makefile.build with master branch
+after Kbuild update.
+
+Fixes: 43d43241d1c9 ("scripts/Makefile.lib: add PLATFORM_LIBGCC to efi linking")
+
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+---
+ Makefile | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+v4: replaces two patches from v3 which did not fix the root cause correctly.
+    Top level Makefile level dependency is needed to fix the race
+    condition.
+
+v3: added "export PLATFORM_LIBGCC_LIBA" like PLATFORM_LIBGCC, not sure
+    how testing worked without this before
+    https://lists.denx.de/pipermail/u-boot/2025-July/594581.html
+
+v2: introduced PLATFORM_LIBGCC_LIBA variable with just lib.a filename,
+    PLATFORM_LIBGCC can have other flags too
+    https://lists.denx.de/pipermail/u-boot/2025-July/594034.html
+
+v1: https://lists.denx.de/pipermail/u-boot/2025-July/593982.html
+
+diff --git a/Makefile b/Makefile
+index c31bf7ecea97..b03f87a93fb9 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2131,6 +2131,11 @@ $(filter-out tools, $(u-boot-dirs)): tools
+ # is "yes"), so compile examples after U-Boot is compiled.
+ examples: $(filter-out examples, $(u-boot-dirs))
+ 
++ifeq ($(CONFIG_USE_PRIVATE_LIBGCC),y)
++# lib/efi_loader apps depend on arch/$(ARCH)/lib for lib.a
++lib: $(filter arch/$(ARCH)/lib, $(u-boot-dirs))
++endif
++
+ # The setlocalversion script comes from linux and expects a
+ # KERNELVERSION variable in the environment for figuring out which
+ # annotated tags are relevant. Pass UBOOTVERSION.
+-- 
+2.43.0
+
