@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470D3C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:22:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44700C87FCC
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 08:22:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAD248353A;
-	Thu, 31 Jul 2025 10:19:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44FAA835AA;
+	Thu, 31 Jul 2025 10:19:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PH4yctPP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VIVnAmIX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D94358334A; Thu, 31 Jul 2025 10:06:59 +0200 (CEST)
+ id 61D1283346; Thu, 31 Jul 2025 10:07:00 +0200 (CEST)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 747BF8341A
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 10:06:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B429833F9
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 10:06:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86kOZ2984820;
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V86kbF2984824;
  Thu, 31 Jul 2025 03:06:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1753949206;
- bh=wJPhK5hwsQYNECsPVU2vEid/sNwVCe22cYTaQp3bMAk=;
+ bh=yLWiPcV/nksjdMlfk49Hn4Jz3PJqUYeg6vk2dMVr0lo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=PH4yctPP4SLb5Dl2Gpmre7FoL+irz2aqrv0WU0md8FezYUMR66agwgK85pg0ePqya
- QShzoLHBqG91g8ET5YyAVsejhMKawaXU5we0NwKl9NxWWJlD+Ydiu8PsdeagDjpp9k
- GlX0lTFdFo5dpWMyLXknzCaoRhl7hjd1TlKluhLA=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86kwg4075515
+ b=VIVnAmIXuOaU8OuB9RMNs9GMTRLuOA4FdNZNFFTdEoMT1fZekT6L7MAikgDMst1mp
+ UTVjfBnqgW9HBQdetTRv62p74p9XLssX43jskk8yUTw2xXwuLx29Risc3J6CBg/1zX
+ OITGJkBMOp5IyWLU8feNFEl2am/JKr6Ad491ANEU=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V86ks33170830
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
  Thu, 31 Jul 2025 03:06:46 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 31
- Jul 2025 03:06:45 -0500
+ Jul 2025 03:06:46 -0500
 Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE114.ent.ti.com
  (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 31 Jul 2025 03:06:45 -0500
+ Frontend Transport; Thu, 31 Jul 2025 03:06:46 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.231.164])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80XuV2271905;
- Thu, 31 Jul 2025 03:00:34 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V80SaR2271607;
+ Thu, 31 Jul 2025 03:00:28 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  <semen.protsenko@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, "Jonathan
@@ -70,9 +70,10 @@ To: Richard Genoud <richard.genoud@bootlin.com>, Sam Protsenko
  Vaishnav Achath <vaishnav.a@ti.com>, Bryan Brattlof <bb@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 15/21] board: ti: j722s: evm: Enable cache for J722s
-Date: Thu, 31 Jul 2025 13:29:50 +0530
-Message-ID: <20250731075956.605474-16-c-vankar@ti.com>
+Subject: [PATCH v4 12/21] configs: am62px_evm_r5_ethboot: Add configs to
+ enable Ethernet boot in R5SPL
+Date: Thu, 31 Jul 2025 13:29:47 +0530
+Message-ID: <20250731075956.605474-13-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250731075956.605474-1-c-vankar@ti.com>
 References: <20250731075956.605474-1-c-vankar@ti.com>
@@ -97,48 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable cache for J722s to optimize performance of CPU to access data from
-memory.
+From: Andreas Dannenberg <dannenberg@ti.com>
 
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Add configs for enabling Ethernet boot in R5SPL, also disable not required
+configs to avoid memory limitation.
+
+Signed-off-by: Andreas Dannenberg <dannenberg@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v3:
-https://lore.kernel.org/u-boot/20250225114903.2080616-14-c-vankar@ti.com/
+https://lore.kernel.org/u-boot/20250225114903.2080616-11-c-vankar@ti.com/
 
 Changes from v3 to v4:
-- Collected Reviewed-by from Alexander Sverdlin.
+- No changes.
 
- board/ti/j722s/evm.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/am62px_evm_r5_ethboot_defconfig | 29 +++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 configs/am62px_evm_r5_ethboot_defconfig
 
-diff --git a/board/ti/j722s/evm.c b/board/ti/j722s/evm.c
-index d2b94913c12..32d767cb7d2 100644
---- a/board/ti/j722s/evm.c
-+++ b/board/ti/j722s/evm.c
-@@ -8,6 +8,7 @@
- 
- #include <asm/arch/hardware.h>
- #include <asm/io.h>
-+#include <cpu_func.h>
- #include <dm/uclass.h>
- #include <env.h>
- #include <fdt_support.h>
-@@ -15,6 +16,13 @@
- #include <asm/arch/k3-ddr.h>
- #include "../common/fdt_ops.h"
- 
-+#if IS_ENABLED(CONFIG_SPL_BUILD)
-+void spl_board_init(void)
-+{
-+	enable_caches();
-+}
-+#endif
+diff --git a/configs/am62px_evm_r5_ethboot_defconfig b/configs/am62px_evm_r5_ethboot_defconfig
+new file mode 100644
+index 00000000000..dfd944ad7c0
+--- /dev/null
++++ b/configs/am62px_evm_r5_ethboot_defconfig
+@@ -0,0 +1,29 @@
++#include<configs/am62px_evm_r5_defconfig>
 +
- #if defined(CONFIG_XPL_BUILD)
- void spl_perform_fixups(struct spl_image_info *spl_image)
- {
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SOC_K3_AM62P5=y
++CONFIG_TARGET_AM62P5_R5_EVM=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-r5-sk"
++CONFIG_NET=y
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_ETH=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_NET=y
++CONFIG_SPL_NET_VCI_STRING="AM62PX U-Boot R5 SPL"
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_SPL_SPI=n
++CONFIG_SPL_MMC=n
++CONFIG_SPL_MTD_LOAD=n
++CONFIG_SPL_NAND_SPI_SUPPORT=n
++CONFIG_SPL_DM_DEVICE_REMOVE=n
++CONFIG_DM_MTD=n
++CONFIG_MTD_SPI_NAND=n
++CONFIG_DM_SPI_FLASH=n
++CONFIG_SPI=n
++CONFIG_DM_SPI=n
++CONFIG_CADENCE_QSPI=n
 -- 
 2.34.1
 
