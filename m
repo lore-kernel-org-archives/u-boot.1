@@ -4,57 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466A3C87FC9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Jul 2025 23:55:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B619C87FCA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 05:11:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7C2283322;
-	Thu, 31 Jul 2025 01:54:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id CC32E8319A;
+	Thu, 31 Jul 2025 07:11:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="L1Uq7N9Z";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PQhpHE5v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E984983287; Thu, 31 Jul 2025 01:54:13 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB5A683285
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 01:54:03 +0200 (CEST)
+ id 8C2D48319C; Thu, 31 Jul 2025 07:11:41 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 23E2B8313B
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 07:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5dd1=2M=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1753919642; bh=XrumoHeIOzOdeTe21zCGbkRmPUn8lYBZ+N/FtFoAilU=;
- b=L1Uq7N9ZER6erfbSul0FcLNIVRd7eAjxGzKdivorG7Ufkhq+KPLouaiPbNgkAI2/eT7T4Zc7N
- wBqUZAQm/yeUydzblt6X/BkOzFvU29KYfIGXP0VjBk1SCMqAJyHwyrNvc+UuchPQ42+hlfT01+T
- Bo1Tm+GmoveTrN8XGHQCJ1/QEHTdPM2SMAbXolpuYxmCfNx3kAfu59fVxFTH5KpU/hZAqeZ2z9t
- rXBk4go+ss4HBTJDsJDNii9PHfs0c7zOPQorjeKok77GHlQQ3GhbfBtDAv69y0G2MzplXze2VIW
- 8Tr6uNNeNJxYkR+7NYSUR+9wcXxZE7jAXDJ+2r+o6dqQ==
-X-Forward-Email-ID: 688ab0701851584377f62105
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.1.8
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 4/8] rockchip: rk3528: Disable USB3OTG U3 port early
-Date: Wed, 30 Jul 2025 23:52:45 +0000
-Message-ID: <20250730235301.1774089-5-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250730235301.1774089-1-jonas@kwiboo.se>
-References: <20250730235301.1774089-1-jonas@kwiboo.se>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V5BbFT2951587;
+ Thu, 31 Jul 2025 00:11:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1753938697;
+ bh=9+/bVWrO/t06ImXACe74hRIvhNMj5eYbMY1zrftfsA4=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=PQhpHE5vA9X4vUT7NEkiDtKFZBfkgkdeNrlMOrH+dp3/wsqWzw6cTHi/zPM8EneUS
+ f2WrvTacKr9b9K7QjXuntr6H6TiPrd2tzEwb4neUJx7qCywChOsZsaRDWQYyoflkAy
+ N3QaJ300Ca4RC94QajHq28l11vVJvm8Lgmlp37mY=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V5BaUx3711078
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 31 Jul 2025 00:11:36 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 31
+ Jul 2025 00:11:36 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 31 Jul 2025 00:11:36 -0500
+Received: from [172.24.235.200]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V5BXa22364708;
+ Thu, 31 Jul 2025 00:11:34 -0500
+Message-ID: <ad1d6d7d-cbb5-4873-971e-c754f2bc5038@ti.com>
+Date: Thu, 31 Jul 2025 10:41:32 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/9] ddr: imx8m: Fix DDR inline ECC scruber configuration
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Stefano Babic
+ <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
+ Team" <uboot-imx@nxp.com>
+CC: <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>, Ye Li
+ <ye.li@nxp.com>, Oliver Chen <oliver.chen@nxp.com>
+References: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
+ <20250728-ddr-imx-v1-1-73da75bb33d3@nxp.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250728-ddr-imx-v1-1-73da75bb33d3@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,46 +84,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RK3528 SoC comes with USB OTG support using a DWC3 controller with
-a USB2 PHY and a USB3 PHY (COMBPHY).
+Hi Peng
 
-Some board designs may not use the COMBPHY for USB3 purpose. For these
-board to use USB OTG the input clock source must change to use UTMI clk
-instead of PIPE clk.
+On 28/07/25 08:54, Peng Fan (OSS) wrote:
+> From: Ye Li <ye.li@nxp.com>
+> 
+> The ECC scruber setting is incorrect and decreases the DDR performance
+> in ECC enabled mode.
+> 
 
-Change to always disable the USB3OTG U3 port early and leave it to the
-COMBPHY driver to re-enable the U3 port when a usb3-phy is described in
-the board device tree.
+nitpick: s/scruber/scrubber
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/mach-rockchip/rk3528/rk3528.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+> Detail changes:
+> -Before, scrub_burst was 0; this is not allowed per SNPS umctl2 spec.
+>  Set to "2" to align with DXL whichw as found to be most optimal setting
+> -Before, scrub_interval was set to 1, which means back-to-back scrubber
+>  reads will occur very frequently, potentially effecting performance.
+> -Set scrub_interval to 0xFF which is the default value. However, users
+>  can tune this to meet their system needs.
+> 
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Oliver Chen <oliver.chen@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
-diff --git a/arch/arm/mach-rockchip/rk3528/rk3528.c b/arch/arm/mach-rockchip/rk3528/rk3528.c
-index 4892ff6ba9d2..f9bfc445b857 100644
---- a/arch/arm/mach-rockchip/rk3528/rk3528.c
-+++ b/arch/arm/mach-rockchip/rk3528/rk3528.c
-@@ -9,6 +9,9 @@
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/hardware.h>
- 
-+#define VPU_GRF_BASE			0xff340000
-+#define USB3OTG_CON1			0x44
-+
- #define FIREWALL_DDR_BASE		0xff2e0000
- #define FW_DDR_MST6_REG			0x58
- #define FW_DDR_MST7_REG			0x5c
-@@ -69,6 +72,9 @@ int arch_cpu_init(void)
- 	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST16_REG);
- 	writel(val & 0xffff0000, FIREWALL_DDR_BASE + FW_DDR_MST16_REG);
- 
-+	/* Disable USB3OTG U3 port, later enabled in COMBPHY driver */
-+	writel(0xffff0181, VPU_GRF_BASE + USB3OTG_CON1);
-+
- 	return 0;
- }
- 
+I understand you are porting downstream patches and retaining the tags,
+but aren't both R/B and SO/B tags for a single person is redundant? I
+have not seen it elsewhere yet.
+
+> ---
+>  drivers/ddr/imx/imx8m/ddr_init.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/ddr/imx/imx8m/ddr_init.c b/drivers/ddr/imx/imx8m/ddr_init.c
+> index e9209ce8b61d7ed3507bc102cc8f57ebba077067..7fdcfee1d9c982d391fe0d20e373a66d71d26e23 100644
+> --- a/drivers/ddr/imx/imx8m/ddr_init.c
+> +++ b/drivers/ddr/imx/imx8m/ddr_init.c
+> @@ -58,9 +58,9 @@ void ddrc_inline_ecc_scrub(unsigned int start_address,
+>  	/* Step11: Disable SBR by programming SBRCTL.scrub_en=0 */
+>  	clrbits_le32(DDRC_SBRCTL(0), 0x1);
+>  	/* Step12: Prepare for normal scrub operation(Read) and set scrub_interval*/
+> -	reg32_write(DDRC_SBRCTL(0), 0x100);
+> +	reg32_write(DDRC_SBRCTL(0), 0xFF20);
+>  	/* Step13: Enable the SBR by programming SBRCTL.scrub_en=1 */
+> -	reg32_write(DDRC_SBRCTL(0), 0x101);
+> +	reg32_write(DDRC_SBRCTL(0), 0xFF21);
+
+Changing the write value to using macros like SBRBURST | SBRINTV | SBREN
+will help. Especially since you've mentioned that these parameters are
+tunable.
+
+>  	/* Step14: Enable AXI ports by programming */
+>  	reg32_write(DDRC_PCTRL_0(0), 0x1);
+>  	/* Step15: Disable quasi-dynamic programming */
+> 
+
 -- 
-2.50.1
-
+Thanking You
+Neha Malcom Francis
