@@ -4,72 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77ED6C83F17
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 05:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C836DC87FCA
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 06:54:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3EEF83321;
-	Thu, 31 Jul 2025 07:59:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 087308318E;
+	Thu, 31 Jul 2025 08:54:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IsfGVLsS";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="REFyYXLY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E316D83322; Thu, 31 Jul 2025 07:59:51 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60D608318E
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 07:59:49 +0200 (CEST)
+ id 1A9528319A; Thu, 31 Jul 2025 08:54:02 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F1C138313B
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 08:53:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56V5xlJg3373278;
- Thu, 31 Jul 2025 00:59:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1753941587;
- bh=daEljzpwmkJ0vjcLdMlfj6ymC2JfXRHpu4kvjkoqoVQ=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=IsfGVLsSDGUwC2L1Qf2l5B7Ahs0admvoQwOiZfYltd1cx0lSoC+GBM/r9D8LC5Oze
- OpXP2tDWGBry2ArHpxug72TpdFiJU2CHzZzaYz1rk8bS7T607F4i+RtnlfIKuNeKVM
- qJcTOTNx87scqNcn1PAvLKbQCVPKFW8Xdek6BKR0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56V5xlFu3096199
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 31 Jul 2025 00:59:47 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 31
- Jul 2025 00:59:47 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 31 Jul 2025 00:59:47 -0500
-Received: from [172.24.235.200]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56V5xiuB2119196;
- Thu, 31 Jul 2025 00:59:45 -0500
-Message-ID: <cf2b5da3-ede1-407b-86d0-6b03126648d2@ti.com>
-Date: Thu, 31 Jul 2025 11:29:44 +0530
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=h/Ne/rgjryir7/hhq2IISVLMXRXuad9cNCTtaciRm/WX7hbLlWTDR73+LAX15UWFPyat8RD0wjJlSdVJlOgYa8CYMSnqgv2epjnwpDSDwA2qAIa+YYWsgD1/JtnjFwqcuvEfgAjA//Thc/PA497mPsC4DUE7SJZ3DdQ9UcXVQy4ikE4eFhZ9BrK0dxjy9mx7ZQD2g87fPdzKJuZ0bfEdAIR33wK1wteXs8ObWPqW5A8cYFPUG8PW3OfPDwZGLr+FInUkT6zbi72ImdOm67sHwob604dq2zSKmUqromtTq113xbvBF8isrhNVHgcvWKXlVc1o0oEnBo7JvPWk/3UOnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kNS04W0U9JyYLZkRwwmj3oIDxBgYzwRRfH7GDzUz3Ak=;
+ b=UJ4AY8PHYkuY6cqQBAL/4IAXFerRiCcpzp2BrQ/wLc9ttshhu2SABUReHrq4PftAaD1WmicQhf3qLFos8RLcbrbV7Xsts9Xg+SA8Hu0+JEHDwYeQuSRfGjzpmKNXfAG1T1y2iT2gNdIzajl7IwVcr0IkupoYjP4HsCLsZyX1mGCFlfCnTRf98QCqjEaZuPtkbtjsSjNxDLyc4RPs2YXrblst1wT0deHIwgWhXc2e+5NDixROpNNzhMSZnJvSAWuGxD2F+HZM9GKEzQJVZVMo7CtgA6QXvB+fCA26ROKiJaB6Lfonyx8AaTIHdXAeBMdeO03wPjtPpfdQAtHSzfk/Kw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kNS04W0U9JyYLZkRwwmj3oIDxBgYzwRRfH7GDzUz3Ak=;
+ b=REFyYXLYGXJhxVZJnnhD9LXpksIAXg2fisq7Jpk2kt0iSEuWZONDNyHyFJa/cxrD+Z8qkJvuhxET09y71ODdNDpWj5jN7GUqayzVvii9XNsvPWNDxqX1lQSAWVBmvfw+eOpHcgqLMgyF9wDDp0RjXotqOJplcFhD6lGjUPzAG/Q9LZYQpmoLeRlfiwcHSjxbxToCwbeL+gh1a/r2tpGQQ+XRlaM46MSJsygG2BASgb6KIktw+bKrNd+Q19uCuE+SP83k9KI9nCNpRl5yWUkxTRK2qKJrTbNV/kzbJMbRTNXQ+x28/rIoHsOEo6ufQ1xLE7l5S1hY6FFMRW6w+C5deg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS8PR04MB8801.eurprd04.prod.outlook.com (2603:10a6:20b:42c::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.14; Thu, 31 Jul
+ 2025 06:53:57 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%7]) with mapi id 15.20.8989.013; Thu, 31 Jul 2025
+ 06:53:57 +0000
+Date: Thu, 31 Jul 2025 16:04:35 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] mmc: iproc_sdhci: Cannot test unsigned variable for
+ negative
+Message-ID: <20250731080435.GA329@nxa18884-linux.ap.freescale.net>
+References: <20250730-iproc_sdhci-v1-1-310015b22944@linaro.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250730-iproc_sdhci-v1-1-310015b22944@linaro.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SI2PR01CA0048.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::17) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 8/9] ddr: imx9: Implement Synopsys LPDDR PHY QuickBoot flow
-To: Peng Fan <peng.fan@nxp.com>, Fabio Estevam <festevam@gmail.com>, "Peng Fan
- (OSS)" <peng.fan@oss.nxp.com>
-CC: Stefano Babic <sbabic@nabladev.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Viorel Suman
- <viorel.suman@nxp.com>
-References: <20250728-ddr-imx-v1-0-73da75bb33d3@nxp.com>
- <20250728-ddr-imx-v1-8-73da75bb33d3@nxp.com>
- <CAOMZO5D=p-BHD6KTLVWo_A-Gp+rn0k19Z-WFmtbS9o-x6stxzg@mail.gmail.com>
- <PAXPR04MB84595C1559CF7B32D6631B7E8824A@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <PAXPR04MB84595C1559CF7B32D6631B7E8824A@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB8801:EE_
+X-MS-Office365-Filtering-Correlation-Id: 731dd691-e1f6-4d3e-9f35-08ddcfff0572
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|376014|19092799006|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?+Bn1IvCtQz3YdBeestu/31tx9qujZ2rHygWTeXaST+dGgSc53zsdvBdfSyi0?=
+ =?us-ascii?Q?o1mJl1gb2JjfZx1C7nTwI8cPitM1AX6/70I10acM4ZhWGk0zE4TCNKnc3MBE?=
+ =?us-ascii?Q?QEQ18lqcnm+EeiR3pWkYH65VeKg/0P3H/Oocvz0J4tMzbdyEMJAAxhJfKKmy?=
+ =?us-ascii?Q?XF28SZlLA2fReGbFCYfbgYKu0brJkBSWo3YNh2pB+GQB44W6hkRawUJn68/t?=
+ =?us-ascii?Q?TerfwORIEbJkv9nyDBH71LUJ2rW3iF6qxqqWMjAUYtj/IlmMOpe004UliRd6?=
+ =?us-ascii?Q?e8e+FYkUB+YH+tsDRo0CEDBtEKVZYx3Djk397NeewVFNZYamDJSDTYPbeDD9?=
+ =?us-ascii?Q?dgtwyvKcRM/0qVBkMpSh5MDOlDPMC/YUoXkpBQSp2hRaxPZbEJsIDsatgO9l?=
+ =?us-ascii?Q?/iB+KyDJ1+z2zA/wBirjYx2dpi/4jKnWeUr0NX6jrbZkLyJf3T0THdlclGMR?=
+ =?us-ascii?Q?UFRFMpSXX/54wXVVb6zZfDzbwy9QFyBzjRgRzXU8263sqsS26pjSBkc0w+LO?=
+ =?us-ascii?Q?7/4qNefRCy0rT8XgnvS4SgN77AaWnCPyi+YGSU0YExtwVUSjd08vBa4bnCz1?=
+ =?us-ascii?Q?Bwpa2upO+YtV30GWiJv1EEIeivbcgPhLQMv5wwjOVLTnXvAtoQXAVDTKfWMM?=
+ =?us-ascii?Q?LR/A8jNh/eQAhBI2n+UeBHrlWgA31IbirBmz5A28fPX3DAV4+90EpdrZsz1H?=
+ =?us-ascii?Q?KRybJbFSBDyvTydFsvAD4w/HfL/K4CNlgP23dZjjwEVBAgVwNrINum8NkuO+?=
+ =?us-ascii?Q?xyaXLErYiedCRblQr2Nm2bTOQbFqaCHxxb9eGQlRJHvT7WF2z1OYDsPEOQCC?=
+ =?us-ascii?Q?CFrhGlwKjma/+/tcUBUduww/rTkh8MBGPqHVdh6Wj37ZGLA1IuOR8GgiA9RE?=
+ =?us-ascii?Q?IFhwRDrlXaC0PxqFchqOEYjdVRS71ffTSw8LgrtmygmB5O+gO2IRIoX7nC9Q?=
+ =?us-ascii?Q?SbfIdfMvxKVF74Jno3olhmAxLO1C5hN6C3dxtgY6OSXciGOuXYFuegUu9whD?=
+ =?us-ascii?Q?e5jYZHEC6l+aD4lnyQIAlDpz3TAo+TuLDyGOoGI/nq5tGog5wZUCPvaf/Rue?=
+ =?us-ascii?Q?ua5D6cA4v3jdAxu0B+LYpS2tNOymKcN/jmSx52ONpECcTLzPQQq4qWAQq6K7?=
+ =?us-ascii?Q?N4xBAZ1BuhK4/72hGRH0mr9ktkMWQzIDnqH3FAilHflRrpx21vnwZi3Xv81X?=
+ =?us-ascii?Q?e0Wspv9AvRpqcKlO3yMnTgZvVsy8atPFYlTYVuFByA6JSHSaT3OCsrKueuZ9?=
+ =?us-ascii?Q?W/24vhSH1U/uBQup0Sfpc3DqzYbRGBGrhGsxbD0IO/EmhgNw/KczZN1kfP+s?=
+ =?us-ascii?Q?yg/FqSSYyIXxUz5H63uS+vd2IPaZXKG6fNlJnzArrhxtvlyZICIRUtAhF5j5?=
+ =?us-ascii?Q?NJR3UbuWUWSCFs2UKNyTk1yBpjzjfALpa9w3FnnpN7nO4jt034fUq2tZqfcC?=
+ =?us-ascii?Q?sh83GhS+h/Psho3TKSrlfeDgP+GLFekAREDZ7Wu7DOq8ad+itzCoqA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(19092799006)(1800799024)(366016)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QmCu+I+EWZC6ZADNiVtlJPklciuxVVHaeN5D7KJWVAJQHaPlQiUyCfZXdHep?=
+ =?us-ascii?Q?0OqPxSfd7TIObjliaJixCoILzMNO2DteacsLNMK1BAq3/YriYscssk1BAgFE?=
+ =?us-ascii?Q?dcGbtgYi2kLA3yblWLfnrYfgXocOY1xKWfdNvU8qXhwMG+ajkQ0OVALQM1bk?=
+ =?us-ascii?Q?/gyOBQNFJkDNJ/dA6Ce1aKVoUXku0FqxEihCoyrVuCnyBhznvK7uPv9xtYzH?=
+ =?us-ascii?Q?VQQXquSQlB4icnL2iKkeH6jJGurwHVN+XgU0oAoimUxwKkq/ObDFARpZimRs?=
+ =?us-ascii?Q?CLH5bbCXQVoeuOhF6wqoWZiciwf1KiovU+25gFpLkXOIDjuwuESh11F18R3A?=
+ =?us-ascii?Q?gihkbheCQErPSy4b05zd6z3hYBcqDMQN+DhmtyntBo90ab+4MHG+jWXl9DQb?=
+ =?us-ascii?Q?HsyZSYsPeSs5jvBrlz412yURRXmNqVhIAkCkRELVhFCc+9GOwUr2ksFGtefa?=
+ =?us-ascii?Q?Ac2Q/D4jdqdM4ev4PpCi3PDnkOaXEkJPHA6JQCF2VkcizZk2lZOeQkzQm/C2?=
+ =?us-ascii?Q?LEcr9w/lybq2vBsCSY2ry60YXt0RSi0jubHfOsHSzyACvF23NKYP4wcwDEjL?=
+ =?us-ascii?Q?Nnv/IslXiSuxTEQs/V4zsydhDTcegpxi/Yyl+/05XvNLdyii5fx90ytdeFkJ?=
+ =?us-ascii?Q?iHheCMwmhUdysc5Kd1uMOdEv7aAF2zakQ6pCyKR0shCNo/m0Ex0zIOKxbG4s?=
+ =?us-ascii?Q?j+Oz9SW+BvwD9pv+CqBlQd7EGTf5O6YVqkZ8X9YCfTeTD74VezmS/FziMqdG?=
+ =?us-ascii?Q?tqtsjx2Pr+upgjjaMrfH2jPgqd1RaGcE1sgJWsY7xI7QO7XAjLDB9buAGu9/?=
+ =?us-ascii?Q?u/OHFpj5Xp+434LTDq0rZbaJK/OAWMr4S48DgVJ8RuiKMC1FM82mOEVGcf+S?=
+ =?us-ascii?Q?7vhm6Q35lb0JzDDv1SCVBSVPsBf98anGF9m1ho794cVqOzAXTBcOOC+rfkbn?=
+ =?us-ascii?Q?JB1kFfbKZI2qWriqLZ+u97qFB/v/EjOLJzCd6mo1y0MFjN4RDmatoblUmTN7?=
+ =?us-ascii?Q?lCoq6cvPi3uAQDviBKOQ0wZTDC5ZCHcvRAplYgqPFVFpAhu9m6U92C6h6xWS?=
+ =?us-ascii?Q?bD/G7ktEMlBuJs7ag4394q/wz2oWNZWMNZtoLe+jg0azj8vk1x3Zsuce5p2F?=
+ =?us-ascii?Q?HmP+Jnr/8Qpi3Ez3PdiYKAW+Nqsk/baup4jVO0SsyRHH3jv2D06SZzgBzACk?=
+ =?us-ascii?Q?aGhV5+bKt0OOje/aaFXyLCN+CJWSxxiY1mB2PVWw3YdmjEkpxa1DqFw28Q5O?=
+ =?us-ascii?Q?F645SwqKI4VckFKWe2l6GVCphNqvL99JtmKOGb5HVtT0rLDj8nZF8dEnqAV7?=
+ =?us-ascii?Q?qP9KrAz94IK9gC/u9CgIHMIuwFf7bCk3DzudjUVNFNE5HDn9/rGsFNhq569h?=
+ =?us-ascii?Q?tW/8WxxG2+nLqJq9Rvrb5DFSujg2uyPuLT5kRSRz8dhyiuyjerGn+ZDhvUTW?=
+ =?us-ascii?Q?3cY+tOXeAUlNFSc9Gon28PlEca5jNpjRsu6wq8lpFIygarFJH9g7zORkWfH1?=
+ =?us-ascii?Q?o3sBIg4EoPxEWjh0cHXFhuXtZSBswZBgYUkX1UltSPaDSymuDmxXg2wTHzYk?=
+ =?us-ascii?Q?h6Z7feTYAN6U+nLX0bt5C+Qwz9znvPmqwGMq7YbO?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 731dd691-e1f6-4d3e-9f35-08ddcfff0572
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2025 06:53:57.4449 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Bt/I45NW1KQDb6HudKsy2R2whUZprCg7v0D0RTfgOwdizzO97C03hqu58UNhKj6myMTs+XaQzRP6f0EfRKX7fQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8801
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,140 +162,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 30/07/25 18:03, Peng Fan wrote:
->> Subject: Re: [PATCH 8/9] ddr: imx9: Implement Synopsys LPDDR PHY
->> QuickBoot flow
->>
->> On Sun, Jul 27, 2025 at 11:14 PM Peng Fan (OSS)
->> <peng.fan@oss.nxp.com> wrote:
->>>
->>> From: Viorel Suman <viorel.suman@nxp.com>
->>>
->>> Implement Synopsys LPDDR PHY QuickBoot flow.
->>
->> What does "QuickBoot flow" mean? What are the
->> motivations/advantages of adding support for it?
-> 
-> Save the training data, then next time, the boot
-> will be quick and no need ddr phy training step
-> which would consume 4~5 seconds.
-> 
->>
->> Please expand the commit message to explain why you are doing this.
->>
->>> +config IMX_SNPS_DDR_PHY_QB
->>> +       bool "i.MX Synopsys DDR PHY QuickBoot mode"
->>> +       depends on IMX_SNPS_DDR_PHY
->> && !IMX_SNPS_DDR_PHY_QB_GEN
->>> +       help
->>> +         Select the DDR PHY QuickBoot mode on i.MX9 SOC.
->>
->> Nothing selects IMX_SNPS_DDR_PHY_QB in this series, so this patch is
->> only adding dead code.
-> 
-> I could add user in V2.
-> 
->>
->>> +static int ddrphy_qb_restore(struct dram_timing_info *info, int
->>> +fsp_id) {
->>> +       int i;
->>> +       u32 to_addr;
->>> +       struct dram_fsp_msg *fsp_msg;
->>> +       struct dram_cfg_param *dram_cfg;
->>> +
->>> +       fsp_msg = &info->fsp_msg[fsp_id];
->>> +       for (i = 0; i < fsp_msg->fsp_cfg_num; i++) {
->>> +               dram_cfg = &fsp_msg->fsp_cfg[i];
->>> +               dwc_ddrphy_apb_wr(dram_cfg->reg, dram_cfg->val);
->>> +       }
->>> +
->>> +       /* enable the ddrphy apb */
->>> +       dwc_ddrphy_apb_wr(0xd0000, 0x00);
->>> +       dwc_ddrphy_apb_wr(0x54008, 0x01); /* SequenceCtrl = 0x1
->> (DevInit Only)*/
->>> +       ddrphy_w(0x5400c, 0x19, 0x1);     /* Lp4Quickboot = 0x1 */
->>> +
->>> +       /* Adjust MR14_xy if pstate=0 and 2D training data collected
->> during training phase */
->>> +       if (fsp_id == 0 && (qb_state.flags & DDRPHY_QB_FLAG_2D)) {
->>> +               ddrphy_w(0x5401c, 0x39, qb_state.fsp[0] >> 8);   /*
->> TrainedVREFDQ_A0 -> MR14_A0 */
->>> +               ddrphy_w(0x54022, 0x45, qb_state.fsp[1] & 0xFF); /*
->> TrainedVREFDQ_A1 -> MR14_A1 */
->>> +               ddrphy_w(0x54036, 0x6c, qb_state.fsp[2] & 0xFF); /*
->> TrainedVREFDQ_B0 -> MR14_B0 */
->>> +               ddrphy_w(0x5403c, 0x78, qb_state.fsp[2] >> 8);   /*
->> TrainedVREFDQ_B1 -> MR14_B1 */
->>> +       }
->>> +
->>> +       /* save CSRs to address starting with 0x54800 */
->>> +       for (i = 0, to_addr = 0x54800; i < DDRPHY_QB_CSR_SIZE; i++,
->> to_addr++)
->>> +               dwc_ddrphy_apb_wr(to_addr, qb_state.csr[i]);
->>> +
->>> +       /* disable the ddrphy apb */
->>> +       dwc_ddrphy_apb_wr(0xd0000, 0x01);
->>
->> Lots of magic numbers in this function.
-> 
-> We could not do much on this. Synopsys release
-> reference code to NXP. Using macros to replace
-> the numbers will make upgrading much harder.
-> 
->>
->>> +
->>> +       return 0;
->>
->> No need to return 0. Make the function 'void'.
-> 
-> ok.
-> 
->>
->>> +int ddr_cfg_phy_qb(struct dram_timing_info *dram_timing, int
->> fsp_id)
->>> +{
->>> +       int ret;
->>> +
->>> +       /* MemReset Toggle */
->>> +       dwc_ddrphy_apb_wr(0xd0000, 0x0);
->>> +       dwc_ddrphy_apb_wr(0x20060, 0x3);
->>> +       dwc_ddrphy_apb_wr(0x2008F, 0x1);
->>> +
->>> +       /* load the dram quick boot firmware image */
->>> +       dwc_ddrphy_apb_wr(0xd0000, 0x0);
->>> +       ddr_load_train_firmware(FW_1D_IMAGE);
->>> +       ddrphy_qb_restore(dram_timing, fsp_id);
->>> +
->>> +       /* excute the firmware */
->>> +       dwc_ddrphy_apb_wr(0xd0000, 0x0);
->>> +       dwc_ddrphy_apb_wr(0xc0080, 0x3);
->>> +       dwc_ddrphy_apb_wr(0xd0031, 0x1);
->>> +       dwc_ddrphy_apb_wr(0xd0000, 0x1);
->>> +       dwc_ddrphy_apb_wr(0xd0099, 0x9);
->>> +       dwc_ddrphy_apb_wr(0xd0099, 0x1);
->>> +       dwc_ddrphy_apb_wr(0xd0099, 0x0);
->>> +
->>> +       /* Wait for the quick boot firmware to complete */
->>
->> Is there a special firmware for this quick boot firmware?
-> 
-> Yes.
-> 
->>
->> Please explain the details. It is not clear why or how someone should
->> enable this QuickBoot feature.
-> 
-> I think needs to use B0 chip to use this feature. I could
-> add more information in V2.
+On Wed, Jul 30, 2025 at 05:52:56PM +0100, Andrew Goodbody wrote:
+>In sdhci_iproc_execute_tuning the variable tuning_loop_counter is
+>unsigned and therefore will always fail the test for it being less than
+>0. Fix this by changing the variable type to be s8.
+>
+>This issue was found by Smatch.
+>
 
-Also please add more information on the flow, I see you use the binman
-symbol from the image to grab the offset of this Quick Boot f/w. Please
-add the flow as to what is the expectation of your boot image as well.
+Per my understanding GCC default takes char as signed. But after
+doing some study, char could be signed or unsigned. So it
+make sense to use s8 to avoid potential issue.
 
-> 
-> Regards
-> Peng. 
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
 
--- 
-Thanking You
-Neha Malcom Francis
+Thanks,
+Peng
