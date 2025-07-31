@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED5AC87FCA
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 16:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6779C87FCC
+	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 16:06:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7E798383A;
-	Thu, 31 Jul 2025 18:05:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49A7A83918;
+	Thu, 31 Jul 2025 18:05:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IceH0ryC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nKvHTbXT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE2908390B; Thu, 31 Jul 2025 18:05:30 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id B4A588309D; Thu, 31 Jul 2025 18:05:36 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 446058309D
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 18:05:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7585283914
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 18:05:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-306db05b292so195727fac.1
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:05:28 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2ffb85aed35so708977fac.0
+ for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 09:05:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1753977927; x=1754582727; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1753977932; x=1754582732; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=J1cXDO9SlgmUWVcbpKgD/iXZQMkORwKvTOZoSWi/Pnk=;
- b=IceH0ryCXgK/WrwxdkB+e4F3ik23LX37+vo134hmLoskYd8vfo1nixWDwTyLWIFiBX
- 7O26XZsBsZem9DVdhIGacPhe6UBGp/NHa6PGBPWwE/WdIkKOBB5J5hbiWTTINyNRBlac
- wqAxMA9f2YSel1GrY3FjxHX/M/fGwTmmS916M=
+ bh=Vom0EiFYXoy00k0eQ94zWi6ThZnFOKxGYN+H8upquIM=;
+ b=nKvHTbXTNLYAp6WkTL47APhanrHn3a8RBBJHeHDvbWn66l4q2n3x9FtL4EjRFVv6t8
+ qY3N6lbqxRZkMrKOT7LQjT9/Kdr84uuhWRLrBYRxl1OU+nhWQU4XUf6xrH2M5O4D2Z4/
+ +JKMVa1PKuezFAX8oEgcc7cz7xDKZwEDs4l+0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753977927; x=1754582727;
+ d=1e100.net; s=20230601; t=1753977932; x=1754582732;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J1cXDO9SlgmUWVcbpKgD/iXZQMkORwKvTOZoSWi/Pnk=;
- b=Encb/cxauwY1UeYc2AwHJZrk5GwpUJli4O+veZyqG3QiicYDuadWNwcvOoPodAptM7
- ehNCIggSU5x+dOx/YAMGFM1st+MsNJ44VIVuLo7xA22lSM5DWxUTKaTdN3RcsA2moXo7
- cu/RrDaa11RMFjehqReulhAz8ruNiSyvpNaSNRjbz/5o2LYkcadBm0LNljt5ro3w3SOo
- oyA/yo/FO6DCDMhJLmT6dOTeWjCQ9848ceLRU/Z7BhurPc6GRzFmc7zX+sifHqMEqE5w
- 4MwOlcO5zR7bxhfgCKO98U4w6qbU0brm6vmU4Vwv1lNo66McZVeA/r4rsrptwmXaXM8L
- xfMQ==
-X-Gm-Message-State: AOJu0YwnPGZCB0C3ePlx8DkYUQXyQWMWHg4imnX/2DSY9kKRLUaIKT7S
- 2SSVWST4gK+GA4xDMArasuXPfwXwIHcPx2EM16F4DinbbeDMOpFChPdMTEfox6iZsSE=
-X-Gm-Gg: ASbGnct31DQno4rW+XmrRKVazJ90eSYZzkFQWfoWXJuk14rLggI5mPkecHsizT7Ojcp
- mrf2OmqRw28pe4lSWhgCHazvn3E4l/2xCqkY9OC2l76jj0/HH3DcOMkJG/mwYy0Vkk566AH/eKH
- YIVN+dTcPBISA6fnD/Jx9kM03Hva/d1E6leptkUjjL+aR1GRqiWoJTZGoYirB85LznsedrhODBf
- wgLG8EFg1iV+qoDmkH9ox2iKFjAM9sXYknKunpy9gIf/eBDVRTpAp9ok1Y2cTJuPjjjcWrcsdz2
- xmd2np/ZYWZffx6S7jLVzxagm2j6n1U3zz3lcx+KHtKgyqyASK2nHms0n5MQrSUHs8ALfV+zgrS
- Q6d3TWU2dRwgYicXiZHj1bh7qwMAnfCzKjh8kBtkDL6pixKX9B6M/bYDw
-X-Google-Smtp-Source: AGHT+IGUpbRe9qhc0jQBo1QdW1gsidgID5xaXmJb/k9CwM/niKaxqAwTHbaUDT5Y375izrnZGJ4b8g==
-X-Received: by 2002:a05:6870:589:b0:307:5faf:4f72 with SMTP id
- 586e51a60fabf-30785aec2e9mr5117011fac.14.1753977926579; 
- Thu, 31 Jul 2025 09:05:26 -0700 (PDT)
+ bh=Vom0EiFYXoy00k0eQ94zWi6ThZnFOKxGYN+H8upquIM=;
+ b=Tu3gxuFgtSd0NiY6MpNL+WLvD0mFb/hqjbkAEjZoZwL7jzkghTfHc50xk+kTXY0NdJ
+ J9UqO4g1OVD16T398jxFcsXdrpNG1tjfP6KJJfO2X5/LLmpolattXZtFtPzTnLlO5SoE
+ ivSAAACOHrcDs4JB+RuLpFIa4H7rASWXhvUhMzHAigv1lirK0wewd6WH7VavfD66BrA+
+ H8FNsUFOpQz11PKVK2l6GjunlZXIVNkuQPDgWrEhISxxGB4tQcKdwwzEYZGOigd45xGT
+ 4dtMPw9NqaMH8CNzme9kEk4FqWhFdYJ0JDyJAhU7dIeKOIz/llvXnNTulwAHBLqxsoac
+ 43lg==
+X-Gm-Message-State: AOJu0YyysejD3qFLExmjtDnhqnb/Qn5GJ8FJ7nylR/sXP/OqQRsPMWtA
+ PJ8Ypfo3WCXuuat1qo7S2R85LCQ/DXYmVW1u7fnGGKjZU0u9928TB7Q045nUchpEdwA=
+X-Gm-Gg: ASbGncummzuflAzT3bQRUwzmQQVGwqIuRu2ZsdFjVqsURUFVR0iy+tN0vfDqVwBv8Us
+ bbK9bCPIzPBsO3yNBY3lZHtPaxqyIW30CgM59xf6HkWTeNC/WsYid5Q+Q3GgzAfPbaprik4VESg
+ +7CG3CasLfvG1vQoOw3Ut7yzVEiocjUvQYPcG+F1iZ6usmII5dv0Y4VxE9FNV7fiDzsDa69zgyt
+ MsdlDPd4L7hPUhmjKmSOb/sKOjUYfftT5q2yAssuST29Oq0ddcr0qOzflooHiyN44QwbDDaOroM
+ vBi8E/3P50Fj+O1rtMTG02ru+iZbN070Z/twq3PqNvkC9UgKoWCfS0N9SLXILhyptauxcaPvnX0
+ xR3hkUtWK65+T6nbT37F4DI7Q+04alJp1A+5M7OT0zZ1Au4RGYnzrG+IN0VS3GK/GshM=
+X-Google-Smtp-Source: AGHT+IErEYQrh0qGwRjXXbgVtgW4zFhEhrieHj/XTRr/VVjB/yZBQkxWERKbbeEEQQSmZgwv5nMydQ==
+X-Received: by 2002:a05:6870:5b9e:b0:2d5:2534:ac19 with SMTP id
+ 586e51a60fabf-307859d571emr5535248fac.4.1753977932014; 
+ Thu, 31 Jul 2025 09:05:32 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-307a71200b4sm445860fac.7.2025.07.31.09.05.24
+ 586e51a60fabf-307a7120beesm441012fac.6.2025.07.31.09.05.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 09:05:25 -0700 (PDT)
-Date: Thu, 31 Jul 2025 10:05:23 -0600
+ Thu, 31 Jul 2025 09:05:31 -0700 (PDT)
+Date: Thu, 31 Jul 2025 10:05:28 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- "Maniyam, Dinesh" <dinesh.maniyam@altera.com>,
- "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
- "andrew.goodbody@linaro.org" <andrew.goodbody@linaro.org>,
- "Hea, Kok Kiang" <kok.kiang.hea@altera.com>
-Subject: Re: Pull request: SoCFPGA changes for u-boot-socfpga-next-20250731
-Message-ID: <20250731160523.GZ1807455@bill-the-cat>
-References: <LV8PR03MB813752D257E7C6949E76863DA727A@LV8PR03MB8137.namprd03.prod.outlook.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v2] CI: Wire mbv32 combinations
+Message-ID: <20250731160528.GA1807455@bill-the-cat>
+References: <02e5c14552b05200ece94136db0077cbdd47738c.1753945577.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qWUWWewIcgmFLubF"
+ protocol="application/pgp-signature"; boundary="ZLrL+y4cmZ+x+gja"
 Content-Disposition: inline
-In-Reply-To: <LV8PR03MB813752D257E7C6949E76863DA727A@LV8PR03MB8137.namprd03.prod.outlook.com>
+In-Reply-To: <02e5c14552b05200ece94136db0077cbdd47738c.1753945577.git.michal.simek@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,92 +100,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qWUWWewIcgmFLubF
+--ZLrL+y4cmZ+x+gja
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 31, 2025 at 03:15:52AM +0000, Chee, Tien Fong wrote:
+On Thu, Jul 31, 2025 at 09:06:18AM +0200, Michal Simek wrote:
 
-> Dear Tom,
+> After upgrading to QEMU 10 by commit 1d782a3f229c ("Docker, CI: Update to
+> latest Ubuntu and Dockerfile") let's wire mbv32 which is the part of QEMU
+> to have it under regression.
 >=20
-> This pull request includes updates for the SoCFPGA platform intended for =
-the 2025.10 release cycle. The highlights focus on enabling the Power Manag=
-er for Agilex5, NAND boot support enhancements, and various bug fixes and c=
-leanups across SoCFPGA components.
->=20
-> Summary of changes:
->=20
-> Agilex5 Power Manager:
->=20
->   *   Initial driver support and DT bindings are added for the Agilex5 Po=
-wer Manager, enabling better power domain control.
->=20
-> NAND Boot Support for Agilex5:
->=20
->   *   SPL support for NAND boot is enabled.
->   *   UBI/UBIFS support is configured in defconfigs.
->   *   Memory layout updates (malloc and BSS relocation) ensure proper boo=
-t behavior.
->=20
-> Code Quality Improvements:
->=20
->   *   Coverity and runtime bug fixes (e.g., jtag_usercode check, sub-devi=
-ce conditionals).
->   *   Several cleanup patches addressing formatting, logic, and initializ=
-ation issues.
->=20
-> General Maintenance:
->=20
->   *   SPDX license tags and header include fixes.
->   *   Device tree updates to limit SPI clock frequency and other minor ad=
-justments.
->=20
->=20
-> These contributions come from Alif Zakuan Yuslaimi, Andrew Goodbody, Dine=
-sh Maniyam, Naresh Kumar Ravulapalli, and Tingting Meng.
->=20
-> This patch set has been tested on Agilex 5 devkit.
->=20
-> Passing all pipeline tests at SoCFPGA U-boot custodian https://source.den=
-x.de/u-boot/custodians/u-boot-socfpga/-/pipelines/27221
->=20
-> Thanks.
->=20
-> Best regards,
-> Tien Fong
->=20
-> The following changes since commit a8f20bb6650df56d2600cda2c66f9349df9e49=
-c8:
->=20
->   Merge patch series "bios_emulator: Fix two issues found by Smatch" (202=
-5-07-29 13:14:52 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-socfpga.git tags/u-boot=
--socfpga-next-20250731
->=20
-> for you to fetch changes up to 4064e7c9fc42c1c376bd919a80b451273472f3df:
->=20
->   socfpga_agilex5: config: Relocate malloc and bss address (2025-07-30 17=
-:45:31 +0800)
->=20
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 
-Applied to u-boot/master, thanks!
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---qWUWWewIcgmFLubF
+--ZLrL+y4cmZ+x+gja
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIuUQgAKCRAr4qD1Cr/k
-CvB/AP40zi1DRuocBsPNDgqYgoTjRShjL/FA2NVVg8ksnw4CBAEA6+4a7brzrwxX
-LnJSGm/4MWtm+vHk53lEih0cHQMgpgY=
-=jx5F
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaIuUSAAKCRAr4qD1Cr/k
+Cqw6AP4vws3uNX1sdSmd2ZifHP5o5v34UY5j7hcAdKkRolX3rgD8CUEgBkGcPs1s
+Pu1Goq5H0xG3tuckrMx66LLWKxgsJw4=
+=ZmY1
 -----END PGP SIGNATURE-----
 
---qWUWWewIcgmFLubF--
+--ZLrL+y4cmZ+x+gja--
