@@ -4,84 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20F45C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 19:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B19D5C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 20:33:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECD7B83A84;
-	Fri,  1 Aug 2025 21:32:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E59FB83A92;
+	Fri,  1 Aug 2025 22:33:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kc+tIGyY";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qxRUmHi/";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qEjc1UYG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D87C683A8D; Fri,  1 Aug 2025 21:32:05 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 8A33383AF6; Fri,  1 Aug 2025 22:33:11 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C3C483A1C
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 21:32:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BFD1839E8
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 22:33:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4btx0g1k3wz9swD;
- Fri,  1 Aug 2025 21:32:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754076723;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9u0Au1vqmAUK+flIjJqfFDbj5kxUTA6/fv84KUVIi/E=;
- b=kc+tIGyYqyyjhAJ+XLDeuUK6JR+LwflpvgAGCGjVO6s82i8g5o/YS5YCbeWAi8TbUD0Ddf
- YTLcCi3kCtNY7z3aIXe05oF9N9YLEPGVr0kbwj/bho9fUjM5sobNPQmOSBxJN5PB6SP0U6
- Bk0TDPKAIAuoSqsPs5yEob6JC/JacVkgpBJkkEhoWEUImlUn2x1EJdXfHl2FCe9R0v/2vB
- ZZHOn3vcqC0QzYWwmhR0oF2hc7jVec1qhUCGOLh3tW3NYbhPP+Z/O/fLM0avZsTo/BT5Mj
- zXzLpxQQx1nL0QF3L6AZ/XQ9tGUirGgVJw6PKjx5TvJD9qZTGLyTX76ftY/s7Q==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="qxRUmHi/";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <0aa5523b-d384-48c2-b156-e7a8a91da29c@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754076721;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9u0Au1vqmAUK+flIjJqfFDbj5kxUTA6/fv84KUVIi/E=;
- b=qxRUmHi/5CTQFK4tPDCgvPHFCoP9wybJswv25K6htTY7qugtJyywof+vqpC0buoDi1/BTF
- 8BB5sFcMFqCdx7u/fV63ElqG4m4SwdoaVPuRZnKeGPBPVgqvCxWjupxFh2MSD3dp8o/MXw
- 0xG8uKSkDvvwX9BVa5HvyM2XH02WZRt49lUmjCFBsZWIKlAT7LlUxw2CVfaMU7MlPLBtvY
- WhUlCUucuEH5gQrTpraVI5VcK1yjiV1B+j4jQR/XHiq+NkZ3ZoF3PuBK/K6xGtzFe90xcA
- puM7aJ9aUSIGL/VJ7vhEmZf8UATetI+PjqiZkG0hrG0R9lttX0gQChUgaX26RQ==
-Date: Fri, 1 Aug 2025 21:31:57 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=984e=2O=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1754080385;
+ bh=AlbWwx4ZRZzn9Brd/dsYeFMwWb8fUPqyZcCur7LRHHM=;
+ b=qEjc1UYGPnR3MbPM/HpWhdLEtEFB2rBs4bBXGxxhUg2AKrGOC3vpvkJaxjGPFr/vlj4UDcU/x
+ YBg8O3FNTjwGT1Iml1E2Qb6VZ6GCkiDp0j0W3vE0UYcvL/JaoEOT4U3Lpp32HxjBmY8sMvtQ9rV
+ 0iVJQDp/po8TxtB4izSBjESdzn8tqW37rehQBAAslAYCbYR68gveZApvNOeTRxhiM3yWocAOiBE
+ cMUD8GbqnfMEfssx9UlUScnnxF9nV0kthNR34XwbDjdMURS40qfm0/UZ8HRp3BmjmL1PfXlSwsD
+ Hq9sezglqtjJr1eQM375gJ9k0k+QdIrXFKMj+h6AkO5g==
+X-Forward-Email-ID: 688d247c03c11ad4017607f6
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.1.8
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3 0/8] rockchip: rk3576: Add rng,
+ checkboard() and generic board
+Date: Fri,  1 Aug 2025 20:32:36 +0000
+Message-ID: <20250801203255.2590535-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Subject: Re: [PATCH] imx95_evk: Restore support for i.MX95 A0 silicon
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, tharvey@gateworks.com,
- sbabic@nabladev.com, festevam@gmail.com, uboot-imx@nxp.com,
- trini@konsulko.com, peng.fan@nxp.com, ye.li@nxp.com, alice.guo@nxp.com,
- sumit.garg@oss.qualcomm.com, marek.vasut+renesas@mailbox.org,
- aford173@gmail.com, sjg@chromium.org, Zhiqiang.Hou@nxp.com
-Cc: u-boot@lists.denx.de
-References: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: ee4b6a9af056477c9af
-X-MBO-RS-META: ort5cabyppgwab558sf6nt4t5znrz7f6
-X-Rspamd-Queue-Id: 4btx0g1k3wz9swD
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,60 +70,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/22/25 10:47 PM, Alice Guo (OSS) wrote:
-> From: Alice Guo <alice.guo@nxp.com>
-> 
-> This patch is used to restore support for i.MX95 A0 silicon. The usage
-> is updated in imx95_evk.rst.
-> 
-> Fixes: 9936724aa9b ("imx95_evk: Add i.MX95 B0 support")
-> 
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> ---
->   arch/arm/mach-imx/imx9/Kconfig            |   5 +-
->   arch/arm/mach-imx/imx9/scmi/container.cfg |   2 +
->   arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  11 ++
->   configs/imx95_a0_19x19_evk_defconfig      | 153 ++++++++++++++++++++++
->   doc/board/nxp/imx95_evk.rst               |  41 +++++-
->   5 files changed, 207 insertions(+), 5 deletions(-)
->   create mode 100644 configs/imx95_a0_19x19_evk_defconfig
-> 
-> diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-> index 4e0e194690b..a306203b111 100644
-> --- a/arch/arm/mach-imx/imx9/Kconfig
-> +++ b/arch/arm/mach-imx/imx9/Kconfig
-> @@ -25,6 +25,9 @@ config IMX91
->   	select ARCH_MISC_INIT
->   	select ARMV8_SPL_EXCEPTION_VECTORS
->   
-> +config IMX95_A0
-> +	bool "Choice i.MX95 A0"
-> +
->   config IMX95
->   	bool
->   	select ARCH_MISC_INIT
-> @@ -33,7 +36,7 @@ config IMX95
->   	select DM_MAILBOX
->   	select SCMI_FIRMWARE
->   	select SPL_IMX_CONTAINER_USE_TRAMPOLINE
-> -	select IMX_PQC_SUPPORT
-> +	select IMX_PQC_SUPPORT if !IMX95_A0
->   
->   config SYS_SOC
->   	default "imx9"
-> diff --git a/arch/arm/mach-imx/imx9/scmi/container.cfg b/arch/arm/mach-imx/imx9/scmi/container.cfg
-> index b25f3b726c5..bc10cdb227b 100644
-> --- a/arch/arm/mach-imx/imx9/scmi/container.cfg
-> +++ b/arch/arm/mach-imx/imx9/scmi/container.cfg
-> @@ -3,7 +3,9 @@
->    * Copyright 2025 NXP
->    */
->   
-> +#ifndef CONFIG_IMX95_A0
->   CNTR_VERSION 2
-> +#endif
->   BOOT_FROM SD
->   SOC_TYPE IMX9
->   CONTAINER
-Generate this whole file using binman, and then specify the SoC variant 
-in control DT, as yet another binman image etype property .
+This is a follow-up series on top of the original "Support for the
+RK3576" series, merged in v2025.07. It adds support for RNG, USB, a
+generic board and printing of the running SoC variant.
+
+Changes in v3:
+- Add USB glue and USB PHY related patches
+- Drop use of USBDP PHY for generic board
+- Drop device tree patches merged with the v6.16-dts sync
+- Collect r-b tag
+
+Changes in v2:
+- Add RNG node by picking a commit from devicetree-rebasing
+- Add compatible for RK3576 to RNG driver
+- Add default USB_GADGET_PRODUCT_NUM for RK3576
+- Add USB OTG nodes to the minimal generic RK3576 board
+- Split the checkboard() patch in two
+- Split out the ArmSoM Sige5 patch into a separate series
+
+It is recommended to also apply "rockchip: Fix misc USB PHY related
+issues" [1] to ensure USB can work reliable.
+
+[1] https://patchwork.ozlabs.org/cover/2114085/
+
+Frank Wang (2):
+  phy: rockchip-inno-usb2: Add support for RK3576
+  phy: rockchip: usbdp: Add support for RK3576
+
+Jonas Karlman (6):
+  rng: rockchip_rng: Add compatible for RK3576
+  rockchip: Add default USB_GADGET_PRODUCT_NUM for RK3576
+  board: rockchip: Add minimal generic RK3576 board
+  rockchip: rk3576: Implement checkboard() to print SoC variant
+  arm: dts: rockchip: Include OTP in U-Boot pre-reloc phase for RK3576
+  usb: dwc3-generic: Use combined glue and ctrl node for RK3576
+
+ arch/arm/dts/rk3576-generic-u-boot.dtsi       |  3 +
+ arch/arm/dts/rk3576-generic.dts               | 63 +++++++++++++++++++
+ arch/arm/dts/rk3576-u-boot.dtsi               |  4 ++
+ arch/arm/mach-rockchip/rk3576/MAINTAINERS     |  5 ++
+ arch/arm/mach-rockchip/rk3576/rk3576.c        | 48 ++++++++++++++
+ configs/generic-rk3576_defconfig              | 50 +++++++++++++++
+ doc/board/rockchip/rockchip.rst               |  1 +
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 26 ++++++++
+ drivers/phy/rockchip/phy-rockchip-usbdp.c     | 26 ++++++++
+ drivers/rng/rockchip_rng.c                    |  4 ++
+ drivers/usb/dwc3/dwc3-generic.c               |  1 +
+ drivers/usb/gadget/Kconfig                    |  1 +
+ 12 files changed, 232 insertions(+)
+ create mode 100644 arch/arm/dts/rk3576-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3576-generic.dts
+ create mode 100644 arch/arm/mach-rockchip/rk3576/MAINTAINERS
+ create mode 100644 configs/generic-rk3576_defconfig
+
+-- 
+2.50.1
+
