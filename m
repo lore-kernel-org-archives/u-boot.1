@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2EF2C87FCA
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 21:08:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED136C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 21:09:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63BC083B86;
-	Fri,  1 Aug 2025 23:08:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D228B83BCF;
+	Fri,  1 Aug 2025 23:09:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="VXdoUp4+";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BewO48Cg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBB4E83B86; Fri,  1 Aug 2025 23:08:55 +0200 (CEST)
+ id 4308483BD2; Fri,  1 Aug 2025 23:09:00 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4E6A83B24
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 23:07:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7FB483B7E
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 23:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1754082421; bh=lwY8krNw+phQHlaqoSH/ggTkrIglJ64+rRRTkeA7oH0=;
- b=VXdoUp4+VWpw5ATWB77l2wvCiZG+1k6JIzWLx7Pgdvxsk1zkctXudYpYzCy0mbz8UxCSvosjD
- tTjvVZxAyvXN+fLpfTwTUWq/4xT3ouufvWP6Mggl+gBohdpJQDvasz1xOiuSDtu4RoaD07I9KDL
- P8lUuFhWgMeC5Egz3JBUlTFngOsxbQO1+3MttMm1iWeE0qkc6Y7+6kuvmxLh34cUOM3QkvIQFxW
- NN8fmhzh7dFW7zb1qubN6kohIS7l4tBBGdii6sDGpQ1tGoVKX3gKWjkAkve6yKVug7UVJxJT+TH
- UvZ5WJ5h09WfIy18a8V7Tfpy9iXfc/VcK7//lT9/iEIA==
-X-Forward-Email-ID: 688d2c5603c11ad4017643aa
+ t=1754082419; bh=8R14OmvOgUutX0nU8+FR0FdOgFxp9c3XxN5L3h2icOU=;
+ b=BewO48Cg7yTdRC9mtCv4uJfEcPJHV6FqaFh5F5gqrpl+k/n472/+3wwB8bSj/orD0BM+Tmtk5
+ OZ/522fa7dUmaLF4cRNXsBLpGoQ3uJEs9r1DbmHUdWPkVbVJati2XGoGgQ8Aeo8sS6xlPXZ1ZiY
+ VyxhCqrkgNQUut3AOkgOLzZ/I43ofK2+nDemO1QInJ9INP4JJ+FwCjJjElu2itbc6MLr8MGhBMt
+ zz0qESjOZ9pv62ugPy4HV5Ut9J9AKy/TlJG9H22LNqvAwnlxbUit5MDd39pp8Qdw6qLPmZNkR2W
+ es3intn7C09R4orzNyFpj7Ivf6aNMXCV7LOrZJn6KH0w==
+X-Forward-Email-ID: 688d2c5903c11ad4017643e1
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.1.8
@@ -47,9 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 2/4] rockchip: spl: Add a read_brom_bootsource_id() helper
-Date: Fri,  1 Aug 2025 21:06:10 +0000
-Message-ID: <20250801210619.2618622-3-jonas@kwiboo.se>
+Subject: [PATCH v2 3/4] rockchip: rk3576: Add SPI Flash boot support
+Date: Fri,  1 Aug 2025 21:06:11 +0000
+Message-ID: <20250801210619.2618622-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250801210619.2618622-1-jonas@kwiboo.se>
 References: <20250801210619.2618622-1-jonas@kwiboo.se>
@@ -71,62 +71,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootsource ids reported by BootROM of RK3576 for e.g. SPI NOR and
-USB differs slightly compared to prior SoCs:
+The bootsource ids reported by BootROM of RK3576 for SPI NOR and USB
+differs slightly compared to prior SoCs:
 
 - Booting from sfc0 (ROCK 4D) report the normal bootsource id 0x3.
 - Booting from sfc1 M1 (NanoPi M5) report a new bootsource id 0x23.
 - Booting from sfc1 M0 has not been tested (no board using this config).
 - Booting from USB report a new bootsource id 0x81.
 
-Add a helper function to read the bootsource id. This helper function
-will be used to translate the new values to the common BROM_BOOTSOURCE
-enum values on RK3576.
+Add a RK3576 specific read_brom_bootsource_id() function to help decode
+the new bootsource id values and the required boot_devices mapping of
+sfc0 and sfc1 to help support booting from SPI flash on RK3576.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: No change
 ---
- arch/arm/include/asm/arch-rockchip/bootrom.h | 2 ++
- arch/arm/mach-rockchip/spl.c                 | 7 ++++++-
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ arch/arm/dts/rk3576-u-boot.dtsi        | 36 ++++++++++++++++++++++++++
+ arch/arm/mach-rockchip/rk3576/rk3576.c | 23 ++++++++++++++++
+ 2 files changed, 59 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
-index e736772fda75..b15938c021d6 100644
---- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-+++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-@@ -64,4 +64,6 @@ extern const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1];
-  */
- #define BROM_BOOTSOURCE_ID_ADDR   (CFG_IRAM_BASE + 0x10)
+diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
+index fb5a107f47d9..c7ed09e03eec 100644
+--- a/arch/arm/dts/rk3576-u-boot.dtsi
++++ b/arch/arm/dts/rk3576-u-boot.dtsi
+@@ -6,6 +6,11 @@
+ #include "rockchip-u-boot.dtsi"
  
-+u32 read_brom_bootsource_id(void);
+ / {
++	aliases {
++		spi5 = &sfc0;
++		spi6 = &sfc1;
++	};
 +
- #endif
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index f4d29bbdd17e..1ce3a3b05547 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -31,6 +31,11 @@ int board_return_to_bootrom(struct spl_image_info *spl_image,
- __weak const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+ 	chosen {
+ 		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
+ 	};
+@@ -16,6 +21,17 @@
+ 	};
  };
  
-+__weak u32 read_brom_bootsource_id(void)
++#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
++&binman {
++	simple-bin-spi {
++		mkimage {
++			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
++			offset = <0x8000>;
++		};
++	};
++};
++#endif
++
+ &cru {
+ 	bootph-all;
+ };
+@@ -45,6 +61,16 @@
+ 	bootph-some-ram;
+ };
+ 
++&fspi0_csn0 {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&fspi0_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
+ &ioc_grf {
+ 	bootph-all;
+ };
+@@ -116,6 +142,16 @@
+ 	bootph-some-ram;
+ };
+ 
++&sfc0 {
++	bootph-some-ram;
++	u-boot,spl-sfc-no-dma;
++};
++
++&sfc1 {
++	bootph-some-ram;
++	u-boot,spl-sfc-no-dma;
++};
++
+ &sys_grf {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
+index a6c2fbdc4840..3d5bdeeeb846 100644
+--- a/arch/arm/mach-rockchip/rk3576/rk3576.c
++++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
+@@ -36,8 +36,17 @@
+ #define USB_GRF_BASE		0x2601E000
+ #define USB3OTG0_CON1		0x0030
+ 
++enum {
++	BROM_BOOTSOURCE_FSPI0 = 3,
++	BROM_BOOTSOURCE_FSPI1_M0 = 4,
++	BROM_BOOTSOURCE_FSPI1_M1 = 6,
++};
++
+ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+ 	[BROM_BOOTSOURCE_EMMC] = "/soc/mmc@2a330000",
++	[BROM_BOOTSOURCE_FSPI0] = "/soc/spi@2a340000/flash@0",
++	[BROM_BOOTSOURCE_FSPI1_M0] = "/soc/spi@2a300000/flash@0",
++	[BROM_BOOTSOURCE_FSPI1_M1] = "/soc/spi@2a300000/flash@0",
+ 	[BROM_BOOTSOURCE_SD] = "/soc/mmc@2a310000",
+ };
+ 
+@@ -85,6 +94,20 @@ void board_debug_uart_init(void)
+ {
+ }
+ 
++u32 read_brom_bootsource_id(void)
 +{
-+	return readl(BROM_BOOTSOURCE_ID_ADDR);
++	u32 bootsource_id = readl(BROM_BOOTSOURCE_ID_ADDR);
++
++	if (bootsource_id == 0x23)
++		return BROM_BOOTSOURCE_FSPI1_M1;
++	else if (bootsource_id == 0x81)
++		return BROM_BOOTSOURCE_USB;
++	else if (bootsource_id > BROM_LAST_BOOTSOURCE)
++		log_debug("Unknown bootsource %x\n", bootsource_id);
++
++	return bootsource_id;
 +}
 +
- const char *board_spl_was_booted_from(void)
- {
- 	static u32 brom_bootsource_id_cache = BROM_BOOTSOURCE_UNKNOWN;
-@@ -40,7 +45,7 @@ const char *board_spl_was_booted_from(void)
- 	if (brom_bootsource_id_cache != BROM_BOOTSOURCE_UNKNOWN)
- 		bootdevice_brom_id = brom_bootsource_id_cache;
- 	else
--		bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
-+		bootdevice_brom_id = read_brom_bootsource_id();
- 
- 	if (bootdevice_brom_id < ARRAY_SIZE(boot_devices))
- 		bootdevice_ofpath = boot_devices[bootdevice_brom_id];
+ #define HP_TIMER_BASE			CONFIG_ROCKCHIP_STIMER_BASE
+ #define HP_CTRL_REG			0x04
+ #define TIMER_EN			BIT(0)
 -- 
 2.50.1
 
