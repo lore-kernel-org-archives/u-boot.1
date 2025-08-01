@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCFC8C87FCA
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 20:44:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F368C87FCA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 20:44:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C04B883B87;
-	Fri,  1 Aug 2025 22:44:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 305ED83B8F;
+	Fri,  1 Aug 2025 22:44:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ilV1QjQu";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oNAPmGlH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FFDB83B7E; Fri,  1 Aug 2025 22:44:04 +0200 (CEST)
+ id 632BB83B90; Fri,  1 Aug 2025 22:44:07 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B2B783B85
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 22:44:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEF9683B85
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 22:44:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1754081040; bh=2aCTkpQAm5nhOCYxLupFdemw1mrwky0trBrWD7r7LL4=;
- b=ilV1QjQuCKcrsxAKXCIFnqFtSzjz9RlzbC8yoCeE6GzDdcdZofVwYA23IOyHmr9nFQaY+bSxC
- qUy0Zuf7ppWAQK4mUa1Eqz7WkBbUm89o7GL8fV7IQKwLsi0hYcSwdIZoyGJq64iX/XwUgPAsdti
- 2lP4SBMoyOETNkVLFcP8jg6lsJYZTCqYBLjgR3Mp4L2m3xAYFI4NTxoc5MaNjZmvcPHEPAYp6Yy
- EP9gHu12vCgaWjdZJ8OjJxpzAcfsf7j29h3VU3yKM789WbQuyYbCjWYxO3u2yBx8Ki9jORvgVWH
- aPFFkljjrP7Kf3IgDhBG5hOsPTOLE332edIjhJfcHIDA==
-X-Forward-Email-ID: 688d2709f149f34f87aecb4d
+ t=1754081043; bh=fr/eL+RPPfdCiBHodsZoScmZnv9YmrAZ+mar9YcvxG4=;
+ b=oNAPmGlHAMYVf9sXYmwSDPwNFT5W3Ahb+9uGLsWmbmRL3l/0VvGMh/hVI2bFay/69/7rkGJKL
+ y2RE3V9DCqtAMWkRWoobj/fFOCFnHtiTENPEoijUUSnLAeT9YD8kZ+C/6WXloRwNEUYk61+0af5
+ 5H97afHigkFPh41eq8Ey9nqC/EK++JXd8ZjTzUqxGEjLLvV1FR+gfZYbT4VyodM0SuupY3f97np
+ B3Y4L+5EUSF62SL/xmPgKVoXrosLSifV7I3JNBwgQXA1daqNqyyD/FaXIz2Z6k3g8otfQHgtCJz
+ eWOdCBf3hYr+xBvkgyi+op8TL5RS7WHCC/H0CQwa3L9Q==
+X-Forward-Email-ID: 688d2711f149f34f87aecb77
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.1.8
@@ -45,13 +45,11 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 1/3] rockchip: clk: clk_rk3576: Add dummy CLK_REF_PCIEx_PHY
- support
-Date: Fri,  1 Aug 2025 20:43:37 +0000
-Message-ID: <20250801204345.2603723-2-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, u-boot@lists.denx.de
+Subject: [PATCH v3 3/3] board: rockchip: Add ArmSoM Sige5
+Date: Fri,  1 Aug 2025 20:43:39 +0000
+Message-ID: <20250801204345.2603723-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250801204345.2603723-1-jonas@kwiboo.se>
 References: <20250801204345.2603723-1-jonas@kwiboo.se>
@@ -73,30 +71,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add dummy support for the CLK_REF_PCIEx_PHY clocks to allow probe of the
-phy-rockchip-naneng-combphy driver on RK3576.
+ArmSoM-Sige5 adopts the second-generation 8nm high-performance AIOT
+platform Rockchip RK3576, with a 6 TOPS computing power NPU and support
+for up to 16GB of large memory. It supports 4K video encoding and
+decoding, offers rich interfaces including dual gigabit Ethernet ports,
+WiFi 6 & BT5, and various video outputs.
+
+Features tested on a ArmSoM Sige5 v1.1:
+- SD-card boot
+- eMMC boot
+- Ethernet
+- PCIe NVMe
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-v3: No change
-v2: New patch
----
- drivers/clk/rockchip/clk_rk3576.c | 2 ++
- 1 file changed, 2 insertions(+)
+Changes in v3:
+- No change
 
-diff --git a/drivers/clk/rockchip/clk_rk3576.c b/drivers/clk/rockchip/clk_rk3576.c
-index e84a0943a940..125b08ee8322 100644
---- a/drivers/clk/rockchip/clk_rk3576.c
-+++ b/drivers/clk/rockchip/clk_rk3576.c
-@@ -2168,6 +2168,8 @@ static ulong rk3576_clk_set_rate(struct clk *clk, ulong rate)
- 	case CLK_CPLL_DIV10:
- 	case FCLK_DDR_CM0_CORE:
- 	case ACLK_PHP_ROOT:
-+	case CLK_REF_PCIE0_PHY:
-+	case CLK_REF_PCIE1_PHY:
- 		ret = 0;
- 		break;
- #ifndef CONFIG_SPL_BUILD
+Changes in v2:
+- Enable PCIe, NVMe and USB Kconfig options
+- Collect r-b tag
+---
+ arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi | 18 ++++++
+ arch/arm/mach-rockchip/rk3576/MAINTAINERS    |  6 ++
+ configs/sige5-rk3576_defconfig               | 66 ++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst              |  1 +
+ 4 files changed, 91 insertions(+)
+ create mode 100644 arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
+ create mode 100644 configs/sige5-rk3576_defconfig
+
+diff --git a/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi b/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
+new file mode 100644
+index 000000000000..7e0530d85d16
+--- /dev/null
++++ b/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3576-u-boot.dtsi"
++
++/ {
++	aliases {
++		mmc0 = &sdhci;
++		mmc1 = &sdmmc;
++	};
++};
++
++&red_led {
++	default-state = "on";
++};
++
++&sdhci {
++	cap-mmc-highspeed;
++};
+diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+index b5190c818468..94ef74d429f9 100644
+--- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
++++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+@@ -3,3 +3,9 @@ M:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+ F:	arch/arm/dts/rk3576-generic*
+ F:	configs/generic-rk3576_defconfig
++
++SIGE5-RK3576
++M:	Jonas Karlman <jonas@kwiboo.se>
++S:	Maintained
++F:	arch/arm/dts/rk3576-armsom-sige5*
++F:	configs/sige5-rk3576_defconfig
+diff --git a/configs/sige5-rk3576_defconfig b/configs/sige5-rk3576_defconfig
+new file mode 100644
+index 000000000000..c515e1455952
+--- /dev/null
++++ b/configs/sige5-rk3576_defconfig
+@@ -0,0 +1,66 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-armsom-sige5"
++CONFIG_ROCKCHIP_RK3576=y
++CONFIG_SYS_LOAD_ADDR=0x40c00800
++CONFIG_DEBUG_UART_BASE=0x2AD40000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-armsom-sige5.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
++CONFIG_CMD_ADC=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MISC=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_RNG=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 42fdeafec28b..dec07bd3477a 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -134,6 +134,7 @@ List of mainline supported Rockchip boards:
+      - Radxa ROCK 3B (rock-3b-rk3568)
+ 
+ * rk3576
++     - ArmSoM Sige5 (sige5-rk3576)
+      - Firefly ROC-RK3576-PC (roc-pc-rk3576)
+      - Generic RK3576 (generic-rk3576)
+ 
 -- 
 2.50.1
 
