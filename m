@@ -4,87 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23D13C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 11:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7DAC87FCA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 12:41:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73C8983A48;
-	Fri,  1 Aug 2025 13:59:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1FD9E83A84;
+	Fri,  1 Aug 2025 14:41:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S9ocA58t";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="MWwsq2N8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0281E83A7D; Fri,  1 Aug 2025 13:59:44 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 63BA9839F1; Fri,  1 Aug 2025 14:32:48 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E555A83A47
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 13:59:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4561ed868b5so11937455e9.0
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 04:59:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754049581; x=1754654381; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=x86om6SlYg8xti+03S2SLtaJcTDs1dORAsnwrJpTQDk=;
- b=S9ocA58tz+V0DRq0SPmb3xy35wZFN3z9PSFbnbiBQz8YvBENVtOIjG85oHlViB+oJm
- jZTl1xglXzNpCzeCe1WF7kpMG0PpU7xDRdepjrIrDa0tbxQCFtENrIbhPMCZMJ0JTwB8
- CRCmIuTdVb0BWd2Q1I23ktBlhW0KQBrBLJjcTpjjuCPuUDXRclIuEf7DwIow7zlqpFFv
- gcZg61feCXn3gUxfB8hePiD03rhNUPQ+0vC+PC7kveMg8GqHndAhR7qfRroDtSP9AEXV
- pWfbWM5lk3e3Rz6RxFoL477CvSyal40M0voe+M6FeQMSF9M0H6tOXpIu2xsYKzC9gcoj
- HCyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754049581; x=1754654381;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=x86om6SlYg8xti+03S2SLtaJcTDs1dORAsnwrJpTQDk=;
- b=AIEG6JIN31gBFhLy58SGKERtFox9iEF/r+iK6G6pne176zoniR1YJf+IGJ178boiso
- NbKinZ40YjH2SK+1k7aLn44EpDGmubVBLc8sLEfOxL2C61Ff4QqjcS8TX1vBdaEhnYs9
- /ugLbuFX0KiEtpZ1SHcRkeHbXVXZ9O6MhCsOwg8RXdVKIVbPyMyxJWMOFkIigZsGpmYd
- IGHRB+4rqzywrIaaCKWp4Agay/tCV7fp4iALE2Mn/hqjtC4+ootcO999yhDibqh9+Cu0
- S710ywnEWquWRi2TlSQwI1kNG2YKlh2cdQHVyMIh8X+L72K1KbYxfUMroVXW9mFE9HUe
- Wfqw==
-X-Gm-Message-State: AOJu0Yxs05u7HFwaMMiBsIO0EyU13sSEcsJdMiifOCdOm/2UINZHdcY+
- e6bdIqoITSyK7n/0/uLyaBDV84RGgTz2QVjktNrFogPAZuesfJ+Sb82ljR7/PWqikcA=
-X-Gm-Gg: ASbGncuSv3yk+vIN5cc7qQ101dJzEVGfjTmoRy0waLnuDT8cIswb4nY5+ACbw6hKRhC
- bhpbUaxTqxCOwrHBe2g8h24cFLzR/1VaJ4+2Gxi7L/enXp310mOOWnoPlF8k5rzF8uJ+FiKLDRs
- VF9w/DMMucdqRI1J18Aaazy/MLIPNecZvtqEfe0jvCngHXzRM4Brg9J3ZOO6pWRNPAFL1PZzow4
- P+zJqS/1VHt3u+aKqc/pXE1dUgi67PeX9nkb6X4yuOI5fnWEVc+KdiU3YQy/RAB/MyO8agcnL4d
- GRotWliBA1/wcmAi3Xq+KIp6Q56JocK5ZNuSLggRvEaPjkqBn5RHbTmXBWLbBZ2nAOiXQHG5u0K
- rgilaJoY7MbLmFqyOFrkdqdzHoWMBiut3SB+2+0JoqmwYXPshcsvRIxtoMhkbwg==
-X-Google-Smtp-Source: AGHT+IEl0GxlKWtNe5qFtSBa5fD7AQLGonQz5kHlDgF1B08+RFFIyXa/JbB0uySobqbC+Ne5L4udIA==
-X-Received: by 2002:a05:600c:470e:b0:43d:4e9:27ff with SMTP id
- 5b1f17b1804b1-458aa318403mr23672065e9.7.1754049581391; 
- Fri, 01 Aug 2025 04:59:41 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:cc6e:5422:ab75:92e8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c467994sm5629653f8f.50.2025.08.01.04.59.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Aug 2025 04:59:40 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 01 Aug 2025 12:59:40 +0100
-Subject: [PATCH] net: cortina_ni: Fix typo accessing wrong phy
+ by phobos.denx.de (Postfix) with ESMTPS id A26D3839F1
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 14:32:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=301ae58c2=Jamie.Gibbons@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1754051558; x=1785587558;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=/kdt+467TJ5o3OK0SANNXckFLOVrBoOMWhrz3LmSPtM=;
+ b=MWwsq2N81QykBkUV5lfz3rsnNj63SoznWtawxOikOLxawzyXTeLeFHGQ
+ U7qVUCHOri4hqvVC1D7nJw15Nck9eaRNK6jA8mK6D0oOuKayyCTr4a6Pd
+ xdMS7RAy218kxSSFVjvgYI0r/g0KdWQazK6XAwPV/obL3cP8RJNE6Ks7Z
+ XiabBvWj+2BPup90FFxI6bP8Gs9Xn0zdzdka86QD/Ub7jdvCn+qJzByrT
+ oajcKP+yzuufP7KaOLCdF/MBKZwoCyTz85ShBUIaBv2UZsgrXJx4HR61u
+ 1VV/Kq1OCDYhqmDJeCyolABmKrs8ehDyIDb05/zdQjVY0s1gWjnaqDQt7 w==;
+X-CSE-ConnectionGUID: bOK7yHieQUO4D5yc5zbu5g==
+X-CSE-MsgGUID: BvSsEdPQQ1CF5iy4rFqsOw==
+X-IronPort-AV: E=Sophos;i="6.17,255,1747724400"; d="scan'208";a="44692462"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 01 Aug 2025 05:32:34 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44; Fri, 1 Aug 2025 05:32:27 -0700
+Received: from jamie-dev.microchip.com (10.10.85.11) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
+ 15.1.2507.44 via Frontend Transport; Fri, 1 Aug 2025 05:32:25 -0700
+From: Jamie Gibbons <jamie.gibbons@microchip.com>
+To: <u-boot@lists.denx.de>
+CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
+ <valentina.fernandezalanis@microchip.com>, Cyril Jean
+ <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>, Leo Yu-Chi Liang
+ <ycliang@andestech.com>, <jamie.gibbons@microchip.com>
+Subject: [PATCH 1/6] configs: microchip_mpfs_icicle: enable
+ CONFIG_OF_BOARD_SETUP
+Date: Fri, 1 Aug 2025 13:36:21 +0100
+Message-ID: <20250801123626.1972658-2-jamie.gibbons@microchip.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250801123626.1972658-1-jamie.gibbons@microchip.com>
+References: <20250801123626.1972658-1-jamie.gibbons@microchip.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250801-net_cortina_ni-v1-1-2e492a59fe09@linaro.org>
-X-B4-Tracking: v=1; b=H4sIACusjGgC/x2NQQqDQAwAvyI5dyHaVWq/UorENWoOjSVZSkH8e
- 9ceh2GYHZxN2OFe7WD8EZdNC9SXCtJKunCQqTA02LR4wzoo5yFtlkVpUAnxyl3bx4gYeyjRSM5
- hNNK0ntmLPLOd4m08y/d/ejyP4wemnoa4eQAAAA==
-To: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Mailman-Approved-At: Fri, 01 Aug 2025 14:41:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,36 +85,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In ca_phy_probe when checking for an external phy it uses a field from
-the internal phy due to what is assumed to be a copy/paste typo. Make
-the obvious fix to use the field from the external phy.
+Enable CONFIG_OF_BOARD_SETUP and other dependencies to allow the use of
+the ft_board_setup() function to replace fdt set in boot scripts for
+Microchip's MPFS Icicle kit.
 
-This issue was found by Smatch.
-
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
 ---
- drivers/net/cortina_ni.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configs/microchip_mpfs_icicle_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/net/cortina_ni.c b/drivers/net/cortina_ni.c
-index 79026882800..21b7089176c 100644
---- a/drivers/net/cortina_ni.c
-+++ b/drivers/net/cortina_ni.c
-@@ -499,7 +499,7 @@ static int ca_phy_probe(struct udevice *dev)
- 				 dev, priv->phy_interface);
- 	if (ext_phydev) {
- 		ext_phydev->supported &= PHY_GBIT_FEATURES;
--		ext_phydev->advertising = int_phydev->supported;
-+		ext_phydev->advertising = ext_phydev->supported;
- 		phy_config(ext_phydev);
- 	} else {
- 		printf("CA NI %s: There is no external phy device\n", __func__);
-
----
-base-commit: f5e968a28e7cdc2c4365f5a382e02f074ee03fac
-change-id: 20250801-net_cortina_ni-43e659440049
-
-Best regards,
+diff --git a/configs/microchip_mpfs_icicle_defconfig b/configs/microchip_mpfs_icicle_defconfig
+index 6937aa224a1..7aefcc5fa86 100644
+--- a/configs/microchip_mpfs_icicle_defconfig
++++ b/configs/microchip_mpfs_icicle_defconfig
+@@ -5,6 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DEFAULT_DEVICE_TREE="microchip/mpfs-icicle-kit"
++CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_SYS_LOAD_ADDR=0x80200000
+ CONFIG_SYS_MEM_TOP_HIDE=0x400000
+ # CONFIG_DEBUG_UART is not set
+@@ -12,14 +13,17 @@ CONFIG_TARGET_MICROCHIP_ICICLE=y
+ CONFIG_ARCH_RV64I=y
+ CONFIG_RISCV_SMODE=y
+ CONFIG_FIT=y
++CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_DEFAULT_FDT_FILE="microchip/mpfs-icicle-kit.dtb"
+ CONFIG_SYS_CBSIZE=256
+ CONFIG_SYS_PBSIZE=282
++CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_DISPLAY_CPUINFO=y
+ CONFIG_DISPLAY_BOARDINFO=y
+ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_OF_UPSTREAM=y
++CONFIG_OVERWRITE_ETHADDR_ONCE=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_BOOTP_SEND_HOSTNAME=y
+ CONFIG_DM_MTD=y
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.43.0
 
