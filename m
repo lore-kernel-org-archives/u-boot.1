@@ -4,47 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E216C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 12:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AABCBC87FCA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 14:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1A5A83A94;
-	Fri,  1 Aug 2025 14:58:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id D6CBD83A92;
+	Fri,  1 Aug 2025 16:39:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="ZO+fGOBR";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="RtW8SFz2";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="4L22L3zd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D23FC83A95; Fri,  1 Aug 2025 14:58:06 +0200 (CEST)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.36])
+ id 04B4983A94; Fri,  1 Aug 2025 16:39:54 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8740383A92
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 14:58:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id 2FC5C83A8E
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 16:39:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding; 
- bh=Kmmt4DXqeu4l2QhZORb+JMMHMl8zjuxlN/2ZZQP1M2I=;
- b=ZO+fGOBRmI7zrNbS8fG7SMt8P8G6SV+wFlcXnKvLTjoVfao8r+dQbCk2cMPKEYTzGgFX2kSNojkUVD5N4tJxGDaqJAqdtvUBd1eCBKA6zE+URMlfXoBu8PEPmW+9UMEsFkigqTd7zjIKobKnw6a9j0uWwbZ6sGNwegtk/i6y3OX1gVCuEyJxZSuFSZTU0+eg0khSbzSgZQZapMgidgWPPv+Fs1eR4Eo3GIKMemCby+58iZ0FhGpdKOW3Dc
- vvW0pa5HokwlwqG1AL3ikTNGNrAqtj/VEoNkbG61wT5AHVv15go0UA99Qrbjgeg2xIaBLLBY8BsbX+K5Cg+wI5M2p/WA==
-Received: from TkB (188-24-194-92.rdsnet.ro [188.24.194.92])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Fri, 1 Aug 2025 12:57:59 +0000
-From: Marius Dinu <m95d+git@psihoexpert.ro>
-To: u-boot@lists.denx.de
-Cc: Marius Dinu <m95d+git@psihoexpert.ro>
-Subject: [PATCH] Timers: prevent conflict between ARM Generic Timer and Timer
- drivers
-Date: Fri,  1 Aug 2025 12:57:30 +0000
-Message-ID: <20250801125730.1485-1-m95d+git@psihoexpert.ro>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=b.spranger@linutronix.de
+Date: Fri, 1 Aug 2025 16:43:33 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1754059190;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=flgkNfZxTjP9WFA3c9MCmQLZ1pZ7CGzGrOn4i1mx0WM=;
+ b=RtW8SFz2ShxZyAxKml57CdrTfU/r6f+RuqlVepdkOmszetfdTGzs3oYdz3xsO+EsDbRUmQ
+ XPB9J8nuFUVXE9pgyTqDd4ibe7YVZ50jXPXqV0e6OUAI/b4xaRwELQfxNx/y6y+jdUVelN
+ oeO0Kee0ZEqkbDQOEbEoVFfOXEpygUpnJSq6zelJaa9gPTx0et1ssRmM+XnV/eV6T5Me91
+ juOQPMpAAt/1zDrZ8wT5MpLO9lMyzO/ib3kI94MdaR6gs3OhW1K95KAKZdTcdOOutcBk7G
+ 2U6zDxwKrV/hzTXxOc1GKRLnvNeczsmPyaecOpaQvbhWrURwTg7VtZSet7WJUA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1754059190;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=flgkNfZxTjP9WFA3c9MCmQLZ1pZ7CGzGrOn4i1mx0WM=;
+ b=4L22L3zd3xkcCKq5HTJ8ihX0xVlgSw63Dd9ThFjO+tQ5VG//tbkJ1Ci/0tGcn2om6YhKPh
+ 03oyQrcGl53m7TCg==
+From: Benedikt Spranger <b.spranger@linutronix.de>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, John Ogness <john.ogness@linutronix.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: Smatch report for ubispl
+Message-ID: <20250801164333.1221fa13@mitra>
+In-Reply-To: <d34b63c9-4fd1-46fd-a984-a22cc0dd3e0c@linaro.org>
+References: <d34b63c9-4fd1-46fd-a984-a22cc0dd3e0c@linaro.org>
+Organization: Linutronix GmbH
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,54 +76,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Can't enable both CONFIG_SYS_ARCH_TIMER and CONFIG_TIMER_*.
-This error occurs:
-  ld: lib/time.o: in function `get_tbclk':
-  /usr/src/u-boot/lib/time.c:72: multiple definition of `get_tbclk'; arch/arm/cpu/armv7/arch_timer.o:/usr/src/u-boot/arch/arm/cpu/armv7/arch_timer.c:63: first defined here
-  ld: lib/time.o: in function `get_ticks':
-  /usr/src/u-boot/lib/time.c:87: multiple definition of `get_ticks'; arch/arm/cpu/armv7/arch_timer.o:/usr/src/u-boot/arch/arm/cpu/armv7/arch_timer.c:44: first defined here
+On Fri, 1 Aug 2025 12:42:06 +0100
+Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
 
-This commit makes timer drivers only available when ARM Generic Timer is not selected.
-If it's selected, shows a warning explaining why Timers aren't visible.
+> Smatch reports the following error.
+Fine.
 
-Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
----
- arch/arm/Kconfig      | 2 ++
- drivers/timer/Kconfig | 5 +++++
- 2 files changed, 7 insertions(+)
+> drivers/mtd/ubispl/ubispl.c:782 ubi_scan_fastmap() error: memcpy()
+> 'vh' too small (64 vs 268)
+OK. And how does it come to that conclusion?
+What config - what extra shebang was used to get here?
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 4e7593616d8..afa581dcf78 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -453,6 +453,8 @@ config SYS_ARCH_TIMER
- 	  It is mandatory for ARMv8 implementation and widely available
- 	  on ARMv7 systems.
- 
-+	  Note: Timer drivers (CONFIG_TIMER) are unavailable when this timer is selected.
-+
- config ARM_SMCCC
- 	bool "Support for ARM SMC Calling Convention (SMCCC)"
- 	depends on CPU_V7A || ARM64
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index cb6fc0e7fda..f1020661dc0 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -1,8 +1,13 @@
- menu "Timer Support"
- 
-+comment "Timer drivers are unavailable when ARM Generic Timer (CONFIG_SYS_ARCH_TIMER) is selected."
-+	depends on DM
-+	depends on SYS_ARCH_TIMER
-+
- config TIMER
- 	bool "Enable driver model for timer drivers"
- 	depends on DM
-+	depends on !SYS_ARCH_TIMER
- 	help
- 	  Enable driver model for timer access. It uses the same API as
- 	  lib/time.c, but now implemented by the uclass. The first timer
--- 
-2.49.0
+> I do not know the code well enough to attempt a fix in this case.
+And I have no glasball to get sufficient information...
 
+So please provide more information, what you are doing, what
+configuration you use, what is going on behind the scenes.
 
+We are talking mainly about SPL code here. How are you shure that the
+suggestion of your tool is correct? Can your tool handle code which
+interacts with flat mamory without any memory management?
+
+And last but not least how is UBI_FM_MAX_BLOCKS configured?
+
+Regards
+    Benedikt Spranger
