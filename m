@@ -4,59 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F80BC87FCA
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 17:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA13C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 17:49:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D408E83AD1;
-	Fri,  1 Aug 2025 19:09:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3498283ABE;
+	Fri,  1 Aug 2025 19:49:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="pOM6BIyo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I+c38XjI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88DE583AAD; Fri,  1 Aug 2025 19:09:55 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 780F083AD1; Fri,  1 Aug 2025 19:49:43 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C466A83AE9
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 19:09:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31E6483AAD
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 19:49:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=984e=2O=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1754068191; bh=emRlogJEajskU7NP9rGTXtvRsF4EcY7IpYtZ3nVQ34E=;
- b=pOM6BIyosVKUNJ6bBXY445cILlyfqQvXX9K+dXdL308Qu+xzBo7mugntBFIJNwHqMuvHVZ3jV
- RgYjeQeNCDuP2sXAgKxsQgR7coFaJFjQRfWQgHp2B3zybjJKT4GAOnLq2MPDbzAdxKRy31dN/56
- /vIJPuKNLknZjw2hBc3xdtlRTE/2s90CUcSMrx+yWabNU4nmN+wJCEHOy3VOfX3HDebvh0pWwvP
- hZi48e8t1ETVaWmWQpwbOob9S4LSyvLkgF+EzUn/GZp8k6danCYMIIvaAd22ixcM00P+y2cfSdH
- 46nS4GlpIKiZSq0I9X5yU6+GFk71q+jKgWSPluvxCHgg==
-X-Forward-Email-ID: 688cf4dbba56726f0787e082
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.1.8
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Sebastian Reichel <sebastian.reichel@collabora.com>,
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] rockchip: rock5b-rk3588: Add support for ROCK 5B+
-Date: Fri,  1 Aug 2025 17:09:28 +0000
-Message-ID: <20250801170933.2530191-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250801170933.2530191-1-jonas@kwiboo.se>
-References: <20250801170933.2530191-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-3323d8e0ac4so16879221fa.0
+ for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 10:49:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1754070580; x=1754675380; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ym6sghZJARvJYdd3BUg9ZmR6Uh7L+6M7GBYY1BeuUXg=;
+ b=I+c38XjIq7He8/ac7povCXmVHZTOOmuhJxBOBQPi+uciTNnn7rDGm9VSOayKQruLP/
+ wIxu1ldxg/v42ZE74NwiQryarasXmXiMJE15O3FKEeFDh3dvqw/IjfqYTKY1ZmVeD6SS
+ I/hRoAy1QGlLQmOG21KvDGsFIquMRfylLti/gj+ZkgHSMVjFK3aBZOABSVH5qbu6HfyZ
+ yM0/NG0eouFNDC8Qz97sZ7GdCwlTetKJD6VooytkQl1h8Ey4a3ghnykQD2epqGpcpd0K
+ a54q/Bm46ipIymsGN1t74FmJm5aCzobfH5TRSMTOYCOsDEEFKANAGO1aqsYTPT4i/SR/
+ p5nA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754070580; x=1754675380;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ym6sghZJARvJYdd3BUg9ZmR6Uh7L+6M7GBYY1BeuUXg=;
+ b=M9NyjzUEpKDIz5P94WD0hMZLWMpLbH/B7PRPeZ0T4cyhK9KvSxtGpN9M+O5xQ/MKWD
+ b5d5RPim9QqhB5q8GJ6O6gXROGsdv/lxOUcEnapl4xaG4yD3ub2WPdiMs5afRrmWpQnS
+ i3WWNdcs2nuWayYtIX0HTt/w9AJ4rD0Ad17V4/mNmckS8L+w3nXUH38qnWm8f4sLzViq
+ ehjdXZK8mQcMrhA6DZ3AcDQgFVojyjuYvI4O6iOAbli6xiyXeyZxtMhnsVdtjlPMi7AS
+ riDmkGN5uaPN34EygS6hssjHnR7IBALTmoTVly+9bscwwAXrNX9FEwOy5qOC+OhHZzfC
+ x2Xg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXP+HLtylJtHfbdUZ3OL7xvd0OWMnBVjCgx5u1UZE/HEMMPIDc0YUHRX47toH7KGYyy4C6QaX8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYWEsnj8eH91+nmAOSABMsopOy9WAJze8W2yGvqfT9xa2o93zz
+ u8zu2f6J4Tq5DfjgYordmmW5jQgvMaEF2eQ6Dik5/I4uUbM9e/cWBNTLWrTAPlotwKis4sKD13h
+ 6wP6JCVQZqOrih4kw8j37OfJOPu9vEcI=
+X-Gm-Gg: ASbGncu8f6svwaEd3XWLqCT49kVYTiWWrxuIGudxbdqj/NwCvuulefD0GGticpghn6u
+ g1BQjncco1Sxz7JjoVkxiuHYXxoE0sQy89ONwyYqJjCu0q4uDdQIK15JPjI/286qJeeKdPEzQzD
+ VFN3qRBDtG+RO+gufrvfM+bXYzqqJrAnYbGtWKmW/mXOlaWUHre66qD5AyeC2WK4xz8BSXIbK7j
+ J+MW94UgcSgoHT3zLYV4IIjo8Fk1TqYtnmoJ6E=
+X-Google-Smtp-Source: AGHT+IHYIf1K8XolS9w8qc8q7V04//DxBmYpb8gg8H+kkbIN7bSeyfBDyPLIbQAicI8/QtoUmDAjtUHn8q/KzxHU3tg=
+X-Received: by 2002:a05:651c:31db:b0:32a:7826:4d42 with SMTP id
+ 38308e7fff4ca-332567e7391mr773921fa.31.1754070580107; Fri, 01 Aug 2025
+ 10:49:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
+In-Reply-To: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 1 Aug 2025 14:49:28 -0300
+X-Gm-Features: Ac12FXx4uOoDzGPSTGs7t2VQnGGRFbkEC4e0XSIFBYSfjFbxZFY6vHZbvKlT24Y
+Message-ID: <CAOMZO5A1q1vhDV7rR1i-qu7A8n7bcL9pXgCMdzGNnO6BY=dggw@mail.gmail.com>
+Subject: Re: [PATCH] imx95_evk: Restore support for i.MX95 A0 silicon
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: tharvey@gateworks.com, sbabic@nabladev.com, uboot-imx@nxp.com, 
+ trini@konsulko.com, peng.fan@nxp.com, ye.li@nxp.com, alice.guo@nxp.com, 
+ sumit.garg@oss.qualcomm.com, marek.vasut+renesas@mailbox.org, 
+ aford173@gmail.com, sjg@chromium.org, Zhiqiang.Hou@nxp.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,190 +98,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include FDTs for both ROCK 5B and 5B+ in the FIT and add board selection
-code to load the 5B+ FDT when the DRAM type is LPDDR5 and ADC channel 5
-value is close to 4095.
+Hi Alice,
 
-  U-Boot 2025.07 (Jul 14 2025 - 21:28:20 +0000)
+On Fri, Aug 1, 2025 at 6:52=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
+om> wrote:
 
-  Model: Radxa ROCK 5B+
-  SoC:   RK3588
-  DRAM:  8 GiB
+> +config IMX95_A0
+> +       bool "Choice i.MX95 A0"
 
-Features tested on a ROCK 5B+ v1.2:
-- SD-card boot
-- eMMC boot
-- SPI flash boot
-- PCIe/NVMe
-- Ethernet
-- USB/TCPM
+"Support for i.MX95 A0 silicon version"
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-Changes in v2:
-- Add DRAM type check in addition to SARADC check
----
- arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi |  3 +
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi      |  5 ++
- board/radxa/rock5b-rk3588/Kconfig            |  5 ++
- board/radxa/rock5b-rk3588/MAINTAINERS        |  3 +-
- board/radxa/rock5b-rk3588/rock5b-rk3588.c    | 63 ++++++++++++++++++++
- configs/rock5b-rk3588_defconfig              |  1 +
- doc/board/rockchip/rockchip.rst              |  2 +-
- 7 files changed, 79 insertions(+), 3 deletions(-)
- create mode 100644 arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
+> diff --git a/configs/imx95_a0_19x19_evk_defconfig b/configs/imx95_a0_19x1=
+9_evk_defconfig
+> new file mode 100644
+> index 00000000000..e3b17152b50
+> --- /dev/null
+> +++ b/configs/imx95_a0_19x19_evk_defconfig
 
-diff --git a/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
-new file mode 100644
-index 000000000000..c07696c83913
---- /dev/null
-+++ b/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588-rock-5b-u-boot.dtsi"
-diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-index d51fbf51cb88..e07b549c767f 100644
---- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-@@ -46,6 +46,11 @@
- 	};
- };
- 
-+&saradc {
-+	bootph-pre-ram;
-+	vdd-microvolts = <1800000>;
-+};
-+
- &sdhci {
- 	cap-mmc-highspeed;
- 	mmc-hs200-1_8v;
-diff --git a/board/radxa/rock5b-rk3588/Kconfig b/board/radxa/rock5b-rk3588/Kconfig
-index 41dfe2402b12..98d630117836 100644
---- a/board/radxa/rock5b-rk3588/Kconfig
-+++ b/board/radxa/rock5b-rk3588/Kconfig
-@@ -9,4 +9,9 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "rock5b-rk3588"
- 
-+config BOARD_SPECIFIC_OPTIONS # dummy
-+	def_bool y
-+	select ADC
-+	select SPL_ADC
-+
- endif
-diff --git a/board/radxa/rock5b-rk3588/MAINTAINERS b/board/radxa/rock5b-rk3588/MAINTAINERS
-index 4460c9971a96..c8a43769105e 100644
---- a/board/radxa/rock5b-rk3588/MAINTAINERS
-+++ b/board/radxa/rock5b-rk3588/MAINTAINERS
-@@ -5,5 +5,4 @@ S:	Maintained
- F:	board/radxa/rock5b-rk3588
- F:	include/configs/rock5b-rk3588.h
- F:	configs/rock5b-rk3588_defconfig
--F:	arch/arm/dts/rk3588-rock-5b.dts
--F:	arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-rock-5b*
-diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-index fc2f69db2241..6bf4497ce3ae 100644
---- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-+++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-@@ -3,8 +3,71 @@
-  * Copyright (c) 2023-2024 Collabora Ltd.
-  */
- 
-+#include <adc.h>
-+#include <env.h>
- #include <fdtdec.h>
- #include <fdt_support.h>
-+#include <asm/arch-rockchip/sdram.h>
-+#include <linux/errno.h>
-+
-+#define PMU1GRF_BASE		0xfd58a000
-+#define OS_REG2_REG		0x208
-+
-+#define HW_ID_CHANNEL		5
-+
-+struct board_model {
-+	unsigned int dram;
-+	unsigned int low;
-+	unsigned int high;
-+	const char *fdtfile;
-+};
-+
-+static const struct board_model board_models[] = {
-+	{ LPDDR5, 4005, 4185, "rockchip/rk3588-rock-5b-plus.dtb" },
-+};
-+
-+static const struct board_model *get_board_model(void)
-+{
-+	unsigned int val, dram_type;
-+	int i, ret;
-+
-+	dram_type = rockchip_sdram_type(PMU1GRF_BASE + OS_REG2_REG);
-+
-+	ret = adc_channel_single_shot("adc@fec10000", HW_ID_CHANNEL, &val);
-+	if (ret)
-+		return NULL;
-+
-+	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
-+		unsigned int dram = board_models[i].dram;
-+		unsigned int min = board_models[i].low;
-+		unsigned int max = board_models[i].high;
-+
-+		if (dram == dram_type && min <= val && val <= max)
-+			return &board_models[i];
-+	}
-+
-+	return NULL;
-+}
-+
-+int rk_board_late_init(void)
-+{
-+	const struct board_model *model = get_board_model();
-+
-+	if (model)
-+		env_set("fdtfile", model->fdtfile);
-+
-+	return 0;
-+}
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	const struct board_model *model = get_board_model();
-+
-+	if (model && !strcmp(name, model->fdtfile))
-+		return 0;
-+
-+	return -EINVAL;
-+}
- 
- #ifdef CONFIG_OF_BOARD_SETUP
- int ft_board_setup(void *blob, struct bd_info *bd)
-diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-index 6349e8791456..967cebc2054f 100644
---- a/configs/rock5b-rk3588_defconfig
-+++ b/configs/rock5b-rk3588_defconfig
-@@ -47,6 +47,7 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
-+CONFIG_OF_LIST="rockchip/rk3588-rock-5b rockchip/rk3588-rock-5b-plus"
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SPL_REGMAP=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index b88299cbba23..7a1385789c20 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -152,7 +152,7 @@ List of mainline supported Rockchip boards:
-      - Pine64 QuartzPro64 (quartzpro64-rk3588)
-      - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
-      - Radxa ROCK 5A (rock5a-rk3588s)
--     - Radxa ROCK 5B (rock5b-rk3588)
-+     - Radxa ROCK 5B/5B+ (rock5b-rk3588)
-      - Radxa ROCK 5C (rock-5c-rk3588s)
-      - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
-      - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
--- 
-2.50.1
+Instead of duplicating the defconfigs, please create a common
+defconfig that can be shared between imx95_a0_19x19_evk_defconfig and
+imx95_19x19_evk_defconfig.
 
+Then include this common defconfig. This helps reduce the maintainance effo=
+rts.
+
+Check this idea in commit b2a39e4cb893 ("arm64: imx: Deduplicate DH
+i.MX8MP DHSOM defconfigs")
+
+> +i.MX95 A0:
+
+i.MX95 A0 silicon version
+
+> +
+> +.. code-block:: bash
+> +
+> +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-1.3=
+.0-17945fc.bin
+> +   $ sh firmware-ele-imx-1.3.0-17945fc.bin --auto-accept
+> +   $ cp firmware-ele-imx-1.3.0-17945fc/mx95a0-ahab-container.img $(srctr=
+ee)
+> +
+> +i.MX95 B0:
+
+i.MX95 B0 silicon version
+
+> +
+>  .. code-block:: bash
+>
+>     $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-2.0=
+.2-89161a8.bin
+> @@ -53,12 +63,24 @@ branch: master
+>     $ export TOOLS=3D$PWD
+>     $ git clone -b master https://github.com/nxp-imx/imx-oei.git
+>     $ cd imx-oei
+> -   $ make board=3Dmx95lp5 oei=3Dddr DEBUG=3D1
+> +
+> +i.MX95 A0:
+
+i.MX95 A0 silicon version
+
+> +i.MX95 B0:
+
+i.MX95 B0 silicon version
+
+
+>  Build the Bootloader Image
+>  --------------------------
+>
+> +i.MX95 A0:
+
+i.MX95 A0 silicon version
+
+> +
+> +.. code-block:: bash
+> +
+> +   $ export CROSS_COMPILE=3Daarch64-poky-linux-
+> +   $ make imx95_a_19x19_evk_defconfig
+
+There is a typo here (should be a0 instead of a).
