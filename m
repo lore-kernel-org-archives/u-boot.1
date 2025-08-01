@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59742C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 11:27:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 919BFC87FCA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 11:42:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EE7483A5B;
-	Fri,  1 Aug 2025 13:26:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id DC26B83A48;
+	Fri,  1 Aug 2025 13:42:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="a6yhKILA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sU84uH2w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AEF283A62; Fri,  1 Aug 2025 13:26:58 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 9B3E583A48; Fri,  1 Aug 2025 13:42:10 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A8F6839F1
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 13:26:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16BFB83A3B
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 13:42:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ae0df6f5758so144738766b.0
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 04:26:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-45555e3317aso4169115e9.3
+ for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 04:42:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1754047615; x=1754652415;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dXDRGB+rhv8uLdIYNZ3Nq1sRTqkH3oH9PzymKXdA6DY=;
- b=a6yhKILAy+QI4RrLLTDgoV1hig8WSI7oo3TumJVVW+qh/BMO/gJ4gbkrAt7VNM6EvA
- udoUEot+DSopUwz0XNEmpTKRyQFHVsZYkcDpnpr93v/tquulgtNRzj1h2y+lHQXowluZ
- jba37y8AVCufYa1e+4hYUHtr0V+hk6oaU1Momt0j0tVUjQ3FALtqnzuEuPaR1QMBIY2b
- piC31JcmiZzJGzaoF9VNwNr9PcQ9/EmMzmeJ4mylDyaOfG77nc82mf0KWZTgPGNKmkX3
- ts0sH13/mrQEPgQb5AKfcv5X2rP9un7++xpMgGkviiFMHD5QHKvdgvvfLx9c8dPLmyvb
- dA0g==
+ d=linaro.org; s=google; t=1754048527; x=1754653327; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n6gVvh+zogiPEBrUFRl2HqVLe8+yujX84OZvrWpTwnk=;
+ b=sU84uH2wA7Ts9+rA1jND/ptghQQXzR2GosTJroJXOE15kopTQ532jsRK62snfeBGzr
+ eGQz3AjXBW7V5fmdEAMUNyb1IjAMuICDSleyHVY7gstQFHcTl0b4vBVomJQ6hq7fXfyU
+ UgxBKCtMhO5LmVlg/l/eZQ+WRkFiKZgffy+nS5Ve7pExeatY5FHrRRcBT3WAyBaEMNtN
+ zPqb0nQ49AccBl6nB3/3H6ZwWByQXzaF2fJ+VOtIf0rI4WUzPFI/QW5B1oLNt5z+bdva
+ biSvh0OAB2gNoGYqxpqs7SNiXZ6TUXP/+OG7HyD5Xvp9wdLd8xGSzAZL8hvkjR/kMx3s
+ qs5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754047615; x=1754652415;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dXDRGB+rhv8uLdIYNZ3Nq1sRTqkH3oH9PzymKXdA6DY=;
- b=sKgPWQMCrxvVchuU1IUP7GV+h9F5XEd+F/mCk1DFfplpQOBLhkfKUbB5XPr9gtfll2
- aUhFHwp8EV0vgZeTL0l8JCZEfr+tnQXhlclkPfiKWJDoOopu8heOPA6S0+R+xxm6yGOF
- yfatfKMpUl0Z6nDw8sfmHeO++y/cTANfyp2PHsktRrSsLkO6Dz2jgS8sUnhtpHhBEea9
- Gv4jyYZigjWBPVMMiTrdmK4JzvS4YHR2S8Q0SnlLJDlYqpfAf40H4CLV5cbBWAtXFHW7
- /0ke1LqS+B118Pg1toWozQgDjfScYuH2qxB5YziVNhAyviALW0QgZkvRSddwukeQ0HLo
- 1tmg==
-X-Gm-Message-State: AOJu0YyJ1p5fMD2mihNs27+Ty2pg11CtWfpslNk9SE/CYEH032yhdFFt
- SGg6izM+zG9/aNPsFKUQ6a/nZtK2pVinA5GIWuL9EccysEX0Ww12N8SC3TYqrr9G1Q==
-X-Gm-Gg: ASbGncvG6ofYpSglbZxeyL/JtwB6Zv6mIXIr1eVBCuW6gLzhuF8KLH2DceKyi4dhR8B
- LW2NH2qLBXLWMtUbQrABYBOs+1VE2iux4j+GX6sIWZlw87/GAqrY9RZmh+Hr4FM1FLqMOwjpkjB
- OMvoCgDfJSS9BeSsgiHi7ukB4w0vs5GuIR2PcaaR3a2QGns0YVAVUXV/+WgsOYsZMZp+Rk82DRR
- q7F6tk6SkOaFbCLnO7mQMZywfIfNZJogXlWSBGKLkmZt2FQxx4+X9qpajMMkrCmKWCun8pyOQ5g
- qZMsqKukHUyO/UwZOwGkJ09kwjoxpGsoIhAIMHjfLZHQmcpDb0ItaUkLNYWSMixJ3qqIWZkLYSO
- 4RqOPMsJToegUvyPVxgNqDjMcydyYreFrCz0=
-X-Google-Smtp-Source: AGHT+IH542bIctYR5OFlWEnepxYLvY36igaE7jVNUEsAShgRqxcW4D2BQxwYwv4JnS45zx6TBryVzA==
-X-Received: by 2002:a17:907:3c8a:b0:ae0:c7b4:b797 with SMTP id
- a640c23a62f3a-af8fd9b1923mr1288603466b.45.1754047614807; 
- Fri, 01 Aug 2025 04:26:54 -0700 (PDT)
-Received: from [10.254.183.223] ([149.199.62.131])
+ d=1e100.net; s=20230601; t=1754048527; x=1754653327;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=n6gVvh+zogiPEBrUFRl2HqVLe8+yujX84OZvrWpTwnk=;
+ b=TB8e8HnfkZ8Eqq09pwQDkttKiDO8WBUbVzDl689+OnVk2JDCOCCs17MA0hDspdsXVQ
+ JBPAIzW5RKXQxzd1/IElcAoYxMDwDa07tzwOfKUsv8dztgM/k6HU4qsR5pDUuuDEWXxP
+ f0AkmaBaQ37RVMtDFsiAuLADVW3fAkgSj4aM2z6ZVoufTkoHe72/3rWuI30YXBvgZLdB
+ ByanwPq+aFR1y08Apm4Rf/CInBE5tFDoCmfz9IRWTNPp8l/M0rZDC20+AvvnImJVQkE/
+ UlTt9tCo8T2d/PXCwDmOhb1sedvOeAEzj79bWHF4ETIx5m1K/QA4qelND7mPSzFNoh5A
+ C3mQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWnlyX1e4Gr1jXrlNKNVkFb/QTvz99Uhb9aq13FxI9lYxTLy4OaITL454zi/B+EpexbpIbVauQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCkHVMeaCYUx0vnKvMkEOeWs/XJmtBv3oWCiMr3eUAaLDFd2h1
+ TTTpsolIPQ8W+Jxd+yXHJeDVl9MZK4cPIbChNJcTqPHKksjYFRGQ5YjHs4zg1lvHdPc=
+X-Gm-Gg: ASbGncsx6B4/VRcEBMqIu/TfwaAAkugJXRmuLBwfpezcA3OmM5yqp4vlpfPnrA0hMXB
+ V9aXPPbi3YBO5Itqk3cgntHrNwyGjLFVSW/P/NauYOMuEUjlEUHnBmKxi06CP4eW2FJfHw9YlwL
+ lEv/zNu2FLgdmx2jE91A9rtQP07xhSs9b78LMnWhnC5x1t1Ivh6dMnwt0Qx5LGxydyFbONVnLT1
+ frnwaqhV8eYlLSNaZxyyOi07dyumgdUuc4/X6VDX7ssSavIOoA3P3tkrSjhMWQnSX8tNU7pgQCo
+ wgPFeIs3ClL1OY2s+4Z0oGaPPscLQgV+V3D4iIsuIQBIX1dGWdyczaZSAFC6Zs1Lvqm6E67MPYw
+ ZMb4/uSFv+KZQF8/WdzGcWcZJuKzferSb8S+cRGd7CSXk0Jdfs42GITBzF+PzcfvWdrL/rS4op/
+ xSEQ==
+X-Google-Smtp-Source: AGHT+IH71YkmbFsdLCkoVanmo+j1mY0ML5mgxjHVaxj5xQkYDVBJWQwXgiZw20h3Ah4tou1Xrcn4bw==
+X-Received: by 2002:a05:600c:1f92:b0:456:1b93:76b with SMTP id
+ 5b1f17b1804b1-45892b952d8mr114302315e9.4.1754048527391; 
+ Fri, 01 Aug 2025 04:42:07 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:cc6e:5422:ab75:92e8?
+ ([2a0a:ef40:f9e:3c01:cc6e:5422:ab75:92e8])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af91a078bcbsm276229066b.13.2025.08.01.04.26.52
+ 5b1f17b1804b1-4589ee4f0f8sm62902365e9.15.2025.08.01.04.42.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Aug 2025 04:26:54 -0700 (PDT)
-Message-ID: <e7ec8cf9-0faf-4b6b-87d5-8578679a33c7@monstr.eu>
-Date: Fri, 1 Aug 2025 13:26:50 +0200
+ Fri, 01 Aug 2025 04:42:06 -0700 (PDT)
+Message-ID: <d34b63c9-4fd1-46fd-a984-a22cc0dd3e0c@linaro.org>
+Date: Fri, 1 Aug 2025 12:42:06 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mailbox: zynqmp: Fix off by 1 errors
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250728-zynqmp-ipi-v1-1-b2bd144a9521@linaro.org>
-Content-Language: en-US
-From: Michal Simek <monstr@monstr.eu>
-In-Reply-To: <20250728-zynqmp-ipi-v1-1-b2bd144a9521@linaro.org>
+Content-Language: en-GB
+To: Tom Rini <trini@konsulko.com>
+Cc: John Ogness <john.ogness@linutronix.de>,
+ Benedikt Spranger <b.spranger@linutronix.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: Smatch report for ubispl
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,73 +103,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Smatch reports the following error.
 
+drivers/mtd/ubispl/ubispl.c:782 ubi_scan_fastmap() error: memcpy() 'vh' 
+too small (64 vs 268)
 
-On 7/28/25 17:47, Andrew Goodbody wrote:
-> Use resource_size to correctly calculate the size to pass to
-> devm_ioremap and avoid the off by 1 errors previously present.
-> 
-> This issue was found by Smatch.
-> 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   drivers/mailbox/zynqmp-ipi.c | 8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/mailbox/zynqmp-ipi.c b/drivers/mailbox/zynqmp-ipi.c
-> index 851aa737c03..f62277385fb 100644
-> --- a/drivers/mailbox/zynqmp-ipi.c
-> +++ b/drivers/mailbox/zynqmp-ipi.c
-> @@ -188,7 +188,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
->   		return -EINVAL;
->   	};
->   	zynqmp->local_req_regs = devm_ioremap(dev, res.start,
-> -					      (res.start - res.end));
-> +					      resource_size(&res));
->   	if (!zynqmp->local_req_regs)
->   		return -EINVAL;
->   
-> @@ -197,7 +197,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
->   		return -EINVAL;
->   	};
->   	zynqmp->local_res_regs = devm_ioremap(dev, res.start,
-> -					      (res.start - res.end));
-> +					      resource_size(&res));
->   	if (!zynqmp->local_res_regs)
->   		return -EINVAL;
->   
-> @@ -206,7 +206,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
->   		return -EINVAL;
->   	};
->   	zynqmp->remote_req_regs = devm_ioremap(dev, res.start,
-> -					       (res.start - res.end));
-> +					       resource_size(&res));
->   	if (!zynqmp->remote_req_regs)
->   		return -EINVAL;
->   
-> @@ -215,7 +215,7 @@ static int zynqmp_ipi_dest_probe(struct udevice *dev)
->   		return -EINVAL;
->   	};
->   	zynqmp->remote_res_regs = devm_ioremap(dev, res.start,
-> -					       (res.start - res.end));
-> +					       resource_size(&res));
->   	if (!zynqmp->remote_res_regs)
->   		return -EINVAL;
->   
-> 
-> ---
-> base-commit: 4c3b5fcd810081bd7f3c51859fe1b5f0c159803c
-> change-id: 20250728-zynqmp-ipi-0b1791238085
-> 
-> Best regards,
+I do not know the code well enough to attempt a fix in this case.
 
-Applied.
-M
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
-
+Andrew
