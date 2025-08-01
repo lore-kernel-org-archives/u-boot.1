@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BEAEC87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 10:39:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0567C87FCA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 10:40:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12B9A83A3D;
-	Fri,  1 Aug 2025 12:39:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1528683A2B;
+	Fri,  1 Aug 2025 12:40:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ludYlV4k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G0FESh/G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9798183A3D; Fri,  1 Aug 2025 12:39:28 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 91AB483A35; Fri,  1 Aug 2025 12:40:07 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B347483A2A
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 12:39:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50F6383612
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 12:39:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-45892deb246so7044175e9.2
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 03:39:16 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3b7834f2e72so1254209f8f.2
+ for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 03:39:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754044756; x=1754649556; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=93PE7q57Gy+rBExAALoJu4umqN1hy37MNozddY4X/ZA=;
- b=ludYlV4kpOpfjJI0bMSM/qE6jNqVUHspSgbbkvO9AJzm+5IYKuzMeL5r/VVRNSSYi2
- P6qlfCIkt1mxnYwedL7XiNdi7PfJJNhaGhVRZIXYKgY+yjeglKIF02RMIH0J3nxvx2yb
- MySLjG1KYsuZwffvIxp6/xn1MK84r3ssj/J/LWQcfiLQDc2re40ZzvuOMqLDRW+CcNxi
- QoRdfd+i+Nb/eBXpSWI3pdcCh1tmjcHi2OByA7hB484dsNys9VUM1EIsiDWexoU+IaKI
- tKM9tQTeJtnKXQkBCTZTrzdawUYZzvENFJpnfJRuRiFHgwaY5jyBbT9dGjla/tsXifGM
- /Rwg==
+ d=linaro.org; s=google; t=1754044754; x=1754649554; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LYzp0X/Lxkw/uBsGb2sxIi00jcrFv/9fFhZrhBGB2qo=;
+ b=G0FESh/GebBFkx5LUXC+dcWnFkhFBHxwpnmGaDurgwM4NNUqaMmKs3CDzbqO1MugBI
+ 73XRXqZt/da43mHy923u4T866iUy6By0+aAD3YVO+lO7rZQyVFOYKzPwjBL+ZFXwlPGB
+ tIvJrRiLnkt0RYldILeuebixfLt87cWQAhiZpJfrio3kaOh56GvLNHNO6gOyHq+6k0OR
+ KBhUaEbZgFnJlYh1Pm16v9kUtJxjDeIescwFkyiZ6KQFivnN6GzPv5gmGlkQQb+4Xoxw
+ +GbZec4ecfSHovdT7fe8pf56rGIKjdskaz8Tl80r33U/KzpP8ftwMD7HsD5GaSIhPdcd
+ F5EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754044756; x=1754649556;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=93PE7q57Gy+rBExAALoJu4umqN1hy37MNozddY4X/ZA=;
- b=R7jVLQfXomJwxBnn+Hnrn9DaegpiBSMfT6nmgb/VtjxNywZZ5J7XvWpcf9E+zSHt5C
- x0CnVz4McyH4FOKdbiy4FTLvKYT4kxc5WxgH+v39ep/CgxS8Inj+t3G+RZDzZTzp/VVR
- lybjfxedNuZpC2GKklCu2Yg4ha/KHGSL5d01mFBeLyE10n6LOTQkDp0Bw4YBdInka5Qw
- 50/QhYV5Tbo2wltFqo+kIsXtGuA2XPuxDpFYsNGzdvJQ9w2CtxGQER0y45VEKjKfzknG
- pdSqB5BCwUQAJRj9IQO5xVbRoA3vyGJocr1snhrSy4BYVNz++AWv6PVkvkNH0vmipNhI
- pAyw==
-X-Gm-Message-State: AOJu0YxYhQweJ+YcavGu8zrmI64R+FJfEqqViXOl/Y5r4mftXf2ClN0W
- LtcSpK7fR15WM47jYuo6pshdHmZoc0TswZJqVHM6LGengWdKjVdDeCri7eaJ7H1TrbbcrlHZOQ1
- q5trTfqg=
-X-Gm-Gg: ASbGncvfOparfel9IklIehgs/3TPSK8j0CX6XhLeMf/kLY28/U2P4x3RSZ8SOjH/aqe
- kKSNDtvECH+2uewJgWMeolLioetHlcfelw6c4fKWBcveRaj6eBuMpFva7UuFTnjxDyGEosX1B2v
- AEzBk9ZmQRfzUhX1+cyQpuuThYl+j/qtWscbTeLR28Bdg2ZIKfpRmT8SRILBFJgTsOCvDFXQh18
- yRIteK6/x/PL4NOibysWxOsPpvDp9Z8dybU7EzOReZYWAwgZBeHx6og2wPaI7yPRhnEdCUs/rZx
- /GPw3ew5iatI0fYjH1hkeJRq7lAjLrDn/zk7E0t/sdLtURNJPDFmKN1e8MSB7qLN3lap6Lpb9N3
- Uc8uMPgUU6yG5B3pD8b+41GrLiMj+yIAmWObo075JNSZ4tNuCfeM=
-X-Google-Smtp-Source: AGHT+IG4Ah4gy5wKMitK5iW2SSTbHpagruvAIT4wRNfwLga1PrLwjvwKFz5ieSlqrwRJdy30umq1GA==
-X-Received: by 2002:a05:600c:1f82:b0:456:207e:fd83 with SMTP id
- 5b1f17b1804b1-458aa31840emr17059865e9.4.1754044755941; 
- Fri, 01 Aug 2025 03:39:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754044754; x=1754649554;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LYzp0X/Lxkw/uBsGb2sxIi00jcrFv/9fFhZrhBGB2qo=;
+ b=sFSD6U/ReZ3v7nnoDnYgER2RfKR8tq4z0AH/n1gvpTDwzJIYt7D1EwuuXdtDidfzwF
+ zrx06LYubt/mpUSDP/5cbPRQH1eA2jbZdtLaRkCgrzdwOG1b3kM2F79J38q3T33h3Nb8
+ aLn0Vp+0StvUfd62lAqP2wwjKc1V2kKCcCfj9YXD5KjBnDesldXpFeM+72SIKsSu7Ekb
+ mYCo9KgLXpOure/HV8PfBM/Paq/Pk6+W8ZwGsyFJrh3vzVEs8eZG5SVqRI77GtH429CQ
+ xHQxcism28H4Yn9cGU/NEmRLjk71lH55j50rkNbzTqhjA/8Ini0WjCaTPk5H0646J2Mz
+ gVMQ==
+X-Gm-Message-State: AOJu0YxfUbav13HjAoMUCVs5EL2mL17K/rhiYwlxkWO3XnKl9HhKoR0l
+ UdvAZTRj+KnKkY+equ+Q3dYk9tMDnYhkKa3bd2RRGxSE8X5XtO5TKcTPMEBZy5LpRtqu5Wq6ZxC
+ 9zdG5gs4=
+X-Gm-Gg: ASbGnctmA70SfpS/eXQnpsWoW/HT1RYDvHtP7Yhy22OOgt21wvIV6/KL656tI5n7s1J
+ k9Cu3BXuiZLgPBK/H1buDSs5eEWaIeWh2fMQe0RriSCouPr5PYxogL7dBObQwf2UsTQMsAsYwc9
+ VMJAVgd+AD9yyC2JY0kk6uydm22smUisIIuU5n5QdCp1SUtkWYWOrCoYr2vHr8X4jrbPb8eVXjy
+ aDNgpW7YsldiQ7vXBF0vquCEUhd3lFXeeZ6aSPz2kCMe9fY8iFmjYwUm5sx8zl2wiOP5kQeWJqH
+ G9e+yMqE0M6sCR4hG7CLnCX8cTBwZBbBzWM77gsKPZJ4OoN/Ym2gqx3gLvvkZ8LmOSziV0Wjyte
+ kevYN/vMHjwp9DuEkACfXGnSyr9pnQ2qMSoSzC88bDSD3C8sZnulG5+witJJ4Rw==
+X-Google-Smtp-Source: AGHT+IFGbbU2o/kRtNbc0Vchg4h5/buxYfBKam2WXuRe3BLdk5OX4ieXzudL9gsgUaiTpHCA1U1PAA==
+X-Received: by 2002:a05:6000:2c09:b0:3b7:890f:64bf with SMTP id
+ ffacd0b85a97d-3b794ffdacfmr8507149f8f.51.1754044753731; 
+ Fri, 01 Aug 2025 03:39:13 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:cc6e:5422:ab75:92e8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4589edf5638sm59830275e9.4.2025.08.01.03.39.15
+ 5b1f17b1804b1-4589edf5638sm59830275e9.4.2025.08.01.03.39.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Aug 2025 03:39:15 -0700 (PDT)
+ Fri, 01 Aug 2025 03:39:13 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 01 Aug 2025 11:39:15 +0100
-Subject: [PATCH 3/3] mtd: nand: sunxi: Free allocated memory on errors
+Subject: [PATCH 0/3] mtd: rawnand: Fix some Smatch reports
+Date: Fri, 01 Aug 2025 11:39:12 +0100
+Message-Id: <20250801-mtd_nand_raw2-v1-0-bdabdeb35b46@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250801-mtd_nand_raw2-v1-3-bdabdeb35b46@linaro.org>
-References: <20250801-mtd_nand_raw2-v1-0-bdabdeb35b46@linaro.org>
-In-Reply-To: <20250801-mtd_nand_raw2-v1-0-bdabdeb35b46@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAFCZjGgC/x2NywrCQAwAf6Xk7MI+EFd/RaRku9Hm0ChJ0ULpv
+ 3frcRiGWcFImQxu3QpKXzZ+S4Nw6mAYUV7kuDaG6OPZZx/cNNdeUGqv+Ivukq7J55hTCRlaU9D
+ IFUUZxqOa0GbSQ3yUnrz8R/fHtu0QuikMeAAAAA==
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>, 
  Tom Rini <trini@konsulko.com>, 
@@ -104,110 +105,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add kfree calls on error paths for memory that was allocated. This will
-prevent memory leaks.
-
-This issue found by Smatch.
+Smatch reported some errors with memory being leaked on error paths and
+also error paths lacking an error code to be returned.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/mtd/nand/raw/sunxi_nand.c | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
+Andrew Goodbody (3):
+      mtd: nand: pxa3xx: Free memory on error
+      mtd: rawnand: stm32_fmc2: Ensure to return error code
+      mtd: nand: sunxi: Free allocated memory on errors
 
-diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-index 34197bb09a1..1ce09b56b80 100644
---- a/drivers/mtd/nand/raw/sunxi_nand.c
-+++ b/drivers/mtd/nand/raw/sunxi_nand.c
-@@ -1403,8 +1403,10 @@ static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
- 	if (!data)
- 		return -ENOMEM;
- 
--	if (ecc->size != 512 && ecc->size != 1024)
-+	if (ecc->size != 512 && ecc->size != 1024) {
-+		kfree(data);
- 		return -EINVAL;
-+	}
- 
- 	/* Prefer 1k ECC chunk over 512 ones */
- 	if (ecc->size == 512 && mtd->writesize > 512) {
-@@ -1641,17 +1643,20 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
- 		if (ret) {
- 			dev_err(dev, "could not retrieve reg property: %d\n",
- 				ret);
-+			kfree(chip);
- 			return ret;
- 		}
- 
- 		if (tmp > NFC_MAX_CS) {
- 			dev_err(dev,
- 				"invalid reg value: %u (max CS = 7)\n", tmp);
-+			kfree(chip);
- 			return -EINVAL;
- 		}
- 
- 		if (test_and_set_bit(tmp, &nfc->assigned_cs)) {
- 			dev_err(dev, "CS %d already assigned\n", tmp);
-+			kfree(chip);
- 			return -EINVAL;
- 		}
- 
-@@ -1678,12 +1683,14 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
- 		dev_err(dev,
- 			"could not retrieve timings for ONFI mode 0: %d\n",
- 			ret);
-+		kfree(chip);
- 		return ret;
- 	}
- 
- 	ret = sunxi_nand_chip_set_timings(nfc, chip, timings);
- 	if (ret) {
- 		dev_err(dev, "could not configure chip timings: %d\n", ret);
-+		kfree(chip);
- 		return ret;
- 	}
- 
-@@ -1705,8 +1712,10 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
- 
- 	mtd = nand_to_mtd(nand);
- 	ret = nand_scan_ident(mtd, nsels, NULL);
--	if (ret)
-+	if (ret) {
-+		kfree(chip);
- 		return ret;
-+	}
- 
- 	if (nand->bbt_options & NAND_BBT_USE_FLASH)
- 		nand->bbt_options |= NAND_BBT_NO_OOB;
-@@ -1719,24 +1728,28 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
- 	ret = sunxi_nand_chip_init_timings(nfc, chip);
- 	if (ret) {
- 		dev_err(dev, "could not configure chip timings: %d\n", ret);
-+		kfree(chip);
- 		return ret;
- 	}
- 
- 	ret = sunxi_nand_ecc_init(mtd, &nand->ecc);
- 	if (ret) {
- 		dev_err(dev, "ECC init failed: %d\n", ret);
-+		kfree(chip);
- 		return ret;
- 	}
- 
- 	ret = nand_scan_tail(mtd);
- 	if (ret) {
- 		dev_err(dev, "nand_scan_tail failed: %d\n", ret);
-+		kfree(chip);
- 		return ret;
- 	}
- 
- 	ret = nand_register(devnum, mtd);
- 	if (ret) {
- 		dev_err(dev, "failed to register mtd device: %d\n", ret);
-+		kfree(chip);
- 		return ret;
- 	}
- 
+ drivers/mtd/nand/raw/pxa3xx_nand.c     |  1 +
+ drivers/mtd/nand/raw/stm32_fmc2_nand.c |  6 +++---
+ drivers/mtd/nand/raw/sunxi_nand.c      | 17 +++++++++++++++--
+ 3 files changed, 19 insertions(+), 5 deletions(-)
+---
+base-commit: f5e968a28e7cdc2c4365f5a382e02f074ee03fac
+change-id: 20250801-mtd_nand_raw2-739308283b18
 
+Best regards,
 -- 
-2.39.5
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
