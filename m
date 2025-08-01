@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC75C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 09:54:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DB36C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 09:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B01F783A1C;
-	Fri,  1 Aug 2025 11:54:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0645A83A2B;
+	Fri,  1 Aug 2025 11:54:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DccotSVn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XzBLr711";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D5C283A05; Fri,  1 Aug 2025 11:54:13 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id F2C4683A26; Fri,  1 Aug 2025 11:54:14 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80ACC83A13
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 11:54:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D65FC83A07
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 11:54:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3b783ea5014so400432f8f.0
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 02:54:08 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3b785a69454so370110f8f.2
+ for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 02:54:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754042048; x=1754646848; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754042047; x=1754646847; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lTukS27oYCucSASAInpMBahtzHjguq7iNg2FVwjXyFM=;
- b=DccotSVnrVOUrZdpIG9c/vj4tlhHIEasqXYjU0QBv5Gr026GpyB9XVmSLvw+LvHtK0
- Qnp5JLBaPVP4WGYD2aggslIxgbcBRUgUG3ABlU5yagEpHx+q/GBoVaznA071vSMEYKtN
- xIHeIeUKnfkssY9Q6cTT/y4j4qHKtHZlifZ7+58/vAuzWsQsi3KSpMYtJSd8P0P0it7P
- 4BOZNX+d3JBb0w5i4jVCDivi/wHGfvaa5ix/05zQsV5uTgk2sw29ieCC60zWVxARIswS
- 3I2Q4DeZE1pXudjySSx2kpBxt0mbgFhMeFBXPXZce5CUuBGcTVtmpDb68a6I93fTzNd4
- YQug==
+ :reply-to; bh=Q4F8yv5pqp2tlhQBZyeq8OMBZjyTHRRw5FfZgRH4LVs=;
+ b=XzBLr711WTunVWmem2qNzfalyjJtVpCoD0xrg381ZK8EIKmo4P86V9rRyw+zdAiGO0
+ +ENsR7hJnx8dloeeHBPXmNf3Xs6BBsmajclAEJ6ruBYyqLp5iIFeg+cg9gqE8HFj63qs
+ DNElUCq4SDUDe5HHalyZqVpcYbyJZVqwrw1ZRqWXCNq/dmBoHHupy17QCOhlKIxvhTA9
+ nSY8nBZvbDwg5ysTZJGKjYYKjNqV8FtauAH9XL+sK/+P+jmz5+kP81pGPuNBIhzvSRPZ
+ mOb/RP6CTfBaIufMCui7gRA7PmbIsMTiSsJPQKKKb91WXT9E/W6kLorg2zrSlnb8Uvt+
+ Dv1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754042048; x=1754646848;
+ d=1e100.net; s=20230601; t=1754042047; x=1754646847;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lTukS27oYCucSASAInpMBahtzHjguq7iNg2FVwjXyFM=;
- b=tMaaKhwNksD2xuC5/ZgYL7FMCnHxpW5jJhWjggwpY9D4fCTy7JqNzAyXVARxcBLryf
- RhOGnpcT+SNeUBhNdhqzTcM8oewVEAjhyItGuidNo+NwF2kkX21HkrEMjaKZFS1B1BDu
- TCnuCGL0eeV8Z0MLowVfIia3dfiBNYfZPwDzSmXoaqMg/6ekK+IPfWRP3dOYwZ4BeKLN
- qznIyw3rQYB79If7Mqz+KsqlxbkohYpAcsFHCJhvNX/1IZbBpwShQ82nXq+YhwSnwazy
- VPl7RgK8TfEqrEdd9z1r+j6f3QV/glohPNZq4HodX2RgcGof666KM6oBPi3b37IZLo5F
- 945g==
-X-Gm-Message-State: AOJu0YwtOS129RKwDSVH4Mk1IENnICyy++YkG7yPDl/+kN0cjhc2XvI8
- Gtd3LFeP+fjpOVAOI3OSEknr+l0dzBx1ofFOny/O/1/VGkuSKPV8tSxIbCAjqTDbkN8=
-X-Gm-Gg: ASbGncvqODoLI7cKHBnZk8OGKDHb25YO++4VTB72eN/lPs7blxTshZdNUYB8wEnqmyy
- RyQmgxpmlj9O6an5/Q/c21jH98E8zcfVPy/m+vG10BnrNR8IM/s5tZpg4ULQrQzwHHqSIK9SnIB
- DZmks6HuHlnw60oUR6ddP/lHYu8Jv5UknfL6XTqKQmCkSm44UDjYyJ8X8+Ug8EeKo4RMQaV/Hjw
- nriNLBH9hEZI6I+fasw5pjfQK5dlmzB+iN/GzBnODqebdrzYrq++9TP2MM5eD/2zei49wdlSlaj
- /FPTkXlu8Ud6RN/Lnd3p/+WIwTVAwUhwZmiTI7FsM+BSlU29tk8s+R4E4YDU6t+iX4yOKyWU2ul
- HQBRy4XxckiZvbY52jzF3BBXTWSBjc072QOo/WZC84UCkT7cDg9oCq7a/chiQGQ==
-X-Google-Smtp-Source: AGHT+IEnvDPy9yRHp2u21vcKkv/p45dhMkTI7R15PqOOKGw/5LoFLBEYEixIlA7HzBzlgUFee2NptQ==
-X-Received: by 2002:a05:6000:2891:b0:3b7:b5c3:5dd9 with SMTP id
- ffacd0b85a97d-3b7b5c364e2mr4633104f8f.57.1754042047808; 
+ bh=Q4F8yv5pqp2tlhQBZyeq8OMBZjyTHRRw5FfZgRH4LVs=;
+ b=Xq7IlhIz1wASn7peJMwEGm8xy5yqDMk6yPFaB60vD+Gl3OBFVgi0OT9RQaAJRvps33
+ 7E1MBRylmyQWmWS79eQya4pBGizkzNHlLB+2STSurSn053FLLV8LrND9FqTwj5ALl3++
+ 7GJp1LdFNVfiaIeWiv/W0bbag0h5pbEoBd0vbt2XklXFIFKG4qa+UPWmuIqrxwat+6UM
+ 8nOADPVZ8wgRd/OlQMfgp8b58AUiYENTTa7TsEzKPfO8gYybVxLoBnUbvZVfHzG2E+Ut
+ PchuhiY9nNsPGnTy70EbwEt/ZNAGbTM/vR/0hvJkvI382r9KaJw7YIsKwRVk6zz9+Yzt
+ 6M6A==
+X-Gm-Message-State: AOJu0Yzz68RCn8GrHLkFhWgTsT+FsHNCKt8UbZPJONvkKsJUfskqQRKY
+ 59AmNPSiAtjquZyNdJg/b6eAnAmi1Jzs+aIs/1JaUZbpzouhlTPxm63zmfI96mNJd8E=
+X-Gm-Gg: ASbGncvv8vPVWoH4u6pId/iOV+53d5WHA0lERqYD3bb6T6pv1q6br0R1gXDSZPDiqOf
+ 4S1kdme2YnqTrB6VMbST59vfLQ6AtTDxKWVYa3f5a7pxhDPo6UVn5M2+SWFnUQOyHWbwc+36OBm
+ CIOeAOty+eR+SYGlOLJIyFl/dcCJOeTk9lb31dD8Hrbce2ivOm2NDVntTU5j//ryHWx74g32ae4
+ 3YXb6tz9Afqu7Y9RSLj1jeaTUi+ZnGnJP/IMTXbbX5OhyU+v+y37LNalG9nSuqnkyGYIeak9rWC
+ E5XrIxthfjDT2J34ooux71+xB6FOqSVxcgQRExbk1yA5UDbnk4ayXmrESbDWJh2GhqN5sUOodHp
+ Atlj41MwbN2DCcig3vdK9lYqt/eVxNAy6ufZ/jpDAHMDQQs7YvL0=
+X-Google-Smtp-Source: AGHT+IHcLzSKJsUnso6G7bMFn8rW/EHtB5ih1vZlBBT2bPyR1JOyPaxxpCZHeFoLDHpHv+pXmFjzng==
+X-Received: by 2002:a05:6000:2485:b0:3b7:895c:1562 with SMTP id
+ ffacd0b85a97d-3b794fc1a60mr8991578f8f.11.1754042047043; 
  Fri, 01 Aug 2025 02:54:07 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:cc6e:5422:ab75:92e8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458953eba17sm95280515e9.24.2025.08.01.02.54.07
+ 5b1f17b1804b1-458953eba17sm95280515e9.24.2025.08.01.02.54.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Aug 2025 02:54:07 -0700 (PDT)
+ Fri, 01 Aug 2025 02:54:06 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 01 Aug 2025 10:54:06 +0100
-Subject: [PATCH 3/3] mtd: rawnand: mxs_nand: Ensure err is set for error path
+Date: Fri, 01 Aug 2025 10:54:05 +0100
+Subject: [PATCH 2/3] mtd: rawnand: denali: Remove always true test
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250801-mtd_nand_raw-v1-3-80c316f5bb99@linaro.org>
+Message-Id: <20250801-mtd_nand_raw-v1-2-80c316f5bb99@linaro.org>
 References: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
 In-Reply-To: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
 To: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
@@ -101,38 +101,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In mxs_nand_init_ctrl there are a couple of error paths that do not set
-err which could lead to the errors being silently ignored despite the
-function not completing. Rather than just using if to detect these
-errors use err to collect the error return value from the called
-functions.
+In denali_wait_for_irq the code will either return from inside the while
+loop or exit with time_left being 0. The following test for time_left
+being 0 is guranteed to be true so remove the test and the following
+unreachable code.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/mtd/nand/raw/mxs_nand.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ drivers/mtd/nand/raw/denali.c | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/mtd/nand/raw/mxs_nand.c b/drivers/mtd/nand/raw/mxs_nand.c
-index ba67466069b..fecf1f5ba91 100644
---- a/drivers/mtd/nand/raw/mxs_nand.c
-+++ b/drivers/mtd/nand/raw/mxs_nand.c
-@@ -1640,10 +1640,12 @@ int mxs_nand_init_ctrl(struct mxs_nand_info *nand_info)
- 		nand->setup_data_interface = mxs_nand_setup_interface;
+diff --git a/drivers/mtd/nand/raw/denali.c b/drivers/mtd/nand/raw/denali.c
+index b2401116689..39cb641e0b3 100644
+--- a/drivers/mtd/nand/raw/denali.c
++++ b/drivers/mtd/nand/raw/denali.c
+@@ -173,13 +173,9 @@ static uint32_t denali_wait_for_irq(struct denali_nand_info *denali,
+ 		time_left--;
+ 	}
  
- 	/* first scan to find the device and get the page size */
--	if (nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL))
-+	err = nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL);
-+	if (err)
- 		goto err_free_buffers;
+-	if (!time_left) {
+-		dev_err(denali->dev, "timeout while waiting for irq 0x%x\n",
+-			irq_mask);
+-		return 0;
+-	}
+-
+-	return denali->irq_status;
++	dev_err(denali->dev, "timeout while waiting for irq 0x%x\n",
++		irq_mask);
++	return 0;
+ }
  
--	if (mxs_nand_setup_ecc(mtd))
-+	err = mxs_nand_setup_ecc(mtd);
-+	if (err)
- 		goto err_free_buffers;
- 
- 	nand->ecc.read_page	= mxs_nand_ecc_read_page;
+ static uint32_t denali_check_irq(struct denali_nand_info *denali)
 
 -- 
 2.39.5
