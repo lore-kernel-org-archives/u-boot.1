@@ -4,63 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87BCEC87FD2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Jul 2025 21:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C74BFC87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 06:29:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C8C38398B;
-	Thu, 31 Jul 2025 23:51:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=agorria.com
+	by phobos.denx.de (Postfix) with ESMTP id CE4278395B;
+	Fri,  1 Aug 2025 08:29:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=agorria.com header.i=@agorria.com header.b="NIcifw/O";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3ECBA8380F; Thu, 31 Jul 2025 21:47:45 +0200 (CEST)
-Received: from mout-y-209.mailbox.org (mout-y-209.mailbox.org [91.198.250.237])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6863D8396C; Fri,  1 Aug 2025 08:29:54 +0200 (CEST)
+Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 943EA83937
- for <u-boot@lists.denx.de>; Thu, 31 Jul 2025 21:47:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F201583959
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 08:29:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=agorria.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ion@agorria.com
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-y-209.mailbox.org (Postfix) with ESMTPS id 4btKP84VnDzB0Tp;
- Thu, 31 Jul 2025 21:47:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agorria.com; s=MBO0001;
- t=1753991260;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=KsDQytWBj47cRbqsk/jsjACkgIi/KwqM9L3zho41ENw=;
- b=NIcifw/OIdS4Zp13xPPeuaBnhRR2exJf6J509d06pau2Vm+uH+ZebWSHqLvJ7ByEfgTrCR
- qf4zjTJG/I0v3VBWs9hG2EjxYxcA8sB7d2JtdbaRjSRC68WBh9XT9LQX+G2Iclzs3GX/xj
- eHDWR3ti5DzErZlfjz2jTGTsLyQqzshGQZXbyDru/J3S+UC8Msbv+14pk7ANXX0Fky8k78
- 3QdUGXfxKT51Mv/WP4ntz4nYgQDeMEJ8uOThn1Q1q3ng9qqZjgJ3C1vLykPQ2aW43GZK+3
- SBC9Fknkwdp9POEEZrkb0HOZ4bDf5lkcbFQRrH569mlF3w35tVP6QDnm67WLjg==
-Authentication-Results: outgoing_mbo_mout; dkim=none;
- spf=pass (outgoing_mbo_mout: domain of ion@agorria.com designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=ion@agorria.com
-From: Ion Agorria <ion@agorria.com>
-To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>, Ion Agorria <ion@agorria.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] board: samsung: add Samsung Galaxy R (GT-I9103) and
- Captivate Glide (SGH-i927) support
-Date: Thu, 31 Jul 2025 21:47:31 +0200
-Message-ID: <20250731194731.287715-2-ion@agorria.com>
-In-Reply-To: <20250731194731.287715-1-ion@agorria.com>
-References: <20250731194731.287715-1-ion@agorria.com>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: zesmtpip4t1754029737t98c1a98d
+X-QQ-Originating-IP: IhoN7h/g1aydppZ6nt0eLyChwLBPY5jpKU8scMmziJc=
+Received: from [IPV6:240f:10b:7440:1:603f:d22c ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Fri, 01 Aug 2025 14:28:52 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 18216311920837531291
+Message-ID: <6541E7A84A511123+8bfb6b8b-e42a-475f-a145-8e09e54c9c49@radxa.com>
+Date: Fri, 1 Aug 2025 15:28:51 +0900
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4btKP84VnDzB0Tp
-X-Mailman-Approved-At: Thu, 31 Jul 2025 23:50:52 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] rockchip: rock5b-rk3588: Add support for ROCK 5B+
+To: Jonas Karlman <jonas@kwiboo.se>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250714223410.1836893-1-jonas@kwiboo.se>
+ <20250714223410.1836893-5-jonas@kwiboo.se>
+ <e46mypj2zn7ggff7ivef3k7ejqnc6swng6tfi2cymlipcak6fc@6n43szvkzzvf>
+ <7c172335-4ad6-4503-bc40-c56301970813@kwiboo.se>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <7c172335-4ad6-4503-bc40-c56301970813@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: NhdiEwnVOUqEMd7mi/Y2OQvuRBxOPRQ/dQERGISmZq/wyQq+28HqqzP4
+ EO9QMNsQnFwFe9KOJ6WOuvGaCDIuBIl4br3vam6memGtqlpsbqqUOTjkzTXW5Xli8gw1fkr
+ uFYCN6egiNqr0Yv6jyzy1CJNjstkmU3qFrU8prQG6QLBBPqYaxwwI5C3F0eWkm4sKyR1ZsZ
+ x0f4vPSxm450ckdVNTh5nIhCdWEFl02Nw+yffoiu6dkTGcwOUXnDq09pYjZ/XY9tg8SkUeO
+ VTyoXxvLLIGBu5UFNpag1vKxhf4tWs70aTOPlwUDJsN7OQ+a8zYn7yZwJtWf0cmSBfhXsar
+ UVSrFx0ncNxlhO4JW6R5DC3WSxlmsfSJtV5yZVR3fe5kGUuKX2utKX55XYZHmqxQURb9hcE
+ 5mN+J5o3lmSKFXXu3QR3ptY6GxXd7DvA34diBouP3fFKpp4CaDz7yUmDmXh9I1YbEkLCbPq
+ dzQqtCOUFVnNs6pF9MReVJ7aBF5hSqfydFPDQofw3raUtq7yfohVoSyPRyVAfgIYB6NaZIo
+ QJEtFLpxLGPZ/MXs6pI3+jMcohhRYKwGYj4gBK6rxmD+5AW1tPExtffPXr+FQDiCYAMF7Du
+ nVmpzMtZH5Ex9ICIC7f091DSy+g+eMywKYKe28BGR3i0pJmK2TTbjys4Uf99rfqhnaPKX0b
+ Ajax/jfG4aMW/hat0BaS2cHgdCQw7TGDNYvructDe2TVeMtcILuQ6U4QmdmZfd8CpcJnYSw
+ e72NQ7OFcA+01j3YDO8VDEOTjFGubhl+4J6MVgHaWphmgI+rJ5jN4wceHDxxZOsyvXx1KC7
+ UTh+PO2F9Y3D76dRurg6Uxfj3iyeSxgN+z7/dz33PGJBCLkqxDIUYOfpHjvXb6iOJj9WvwD
+ IHrSpYIb5+IjFs+qI76+mLpnb5zKPZyOSjnpQMPVgIfkGQ3O/Iv4pbs4g6ENypt6RwGYPv5
+ sgqTXYNnY40rDp6ZVlf1gfyOnq/mmVOpIOgA=
+X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,1054 +84,278 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Galaxy R (GT-I9103) and Captivate Glide (SGH-i927) are both Tegra 2
-based Samsung smartphones released in 2011. They both feature 1 GB of RAM
-and 8 GB of expandable flash memory. The key difference is that the
-Captivate Glide has an OLED panel (contrary to LCD in Galaxy R) and a
-QWERTY keyboard in form factor of a slider.
+Hi Jonas,
 
-Signed-off-by: Ion Agorria <ion@agorria.com>
----
- arch/arm/dts/Makefile                       |   2 +
- arch/arm/dts/tegra20-samsung-bose.dts       | 119 ++++++
- arch/arm/dts/tegra20-samsung-n1-common.dtsi | 428 ++++++++++++++++++++
- arch/arm/dts/tegra20-samsung-n1.dts         | 184 +++++++++
- arch/arm/mach-tegra/tegra20/Kconfig         |   5 +
- board/samsung/n1/Kconfig                    |  13 +
- board/samsung/n1/MAINTAINERS                |   9 +
- board/samsung/n1/bose.config                |   6 +
- board/samsung/n1/n1.env                     |  16 +
- configs/n1_defconfig                        |  92 +++++
- doc/board/samsung/index.rst                 |   1 +
- doc/board/samsung/n1.rst                    |  51 +++
- 12 files changed, 926 insertions(+)
- create mode 100644 arch/arm/dts/tegra20-samsung-bose.dts
- create mode 100644 arch/arm/dts/tegra20-samsung-n1-common.dtsi
- create mode 100644 arch/arm/dts/tegra20-samsung-n1.dts
- create mode 100644 board/samsung/n1/Kconfig
- create mode 100644 board/samsung/n1/MAINTAINERS
- create mode 100644 board/samsung/n1/bose.config
- create mode 100644 board/samsung/n1/n1.env
- create mode 100644 configs/n1_defconfig
- create mode 100644 doc/board/samsung/n1.rst
+On 7/16/25 03:26, Jonas Karlman wrote:
+> Hi Sebastian,
+> 
+> On 7/15/2025 6:48 PM, Sebastian Reichel wrote:
+>> Hello Jonas,
+>>
+>> On Mon, Jul 14, 2025 at 10:34:01PM +0000, Jonas Karlman wrote:
+>>> Include FDTs for both ROCK 5B and 5B+ in the FIT and add board
+>>> selection code to load the 5B+ FDT when the ADC channel 5 value is
+>>> close to 4095.
+>>
+>> The Rock 5B uses the same channel and starts with 0V for revision A
+>> and jumps in 0.3V steps for newer revisions. So technically a Rock
+>> 5B revision H would be detected as Rock 5B+ with this code. IDK if
+>> Radxa will ever release such a board. But I have an alternative
+>> implementation, which does the board detection via the DDR memory
+>> type (Rock 5B = LPDDR4, Rock 5B+ = LPDDR5):
+> 
+> Radxa's U-Boot has following table of SARADC values, something that seem
+> to match for the board model and revisions I have access to.
+> 
+> static struct variant_def variants[] = {
+> 	{"rockchip,rk3588", 300, 380, "rockchip/rk3588s-radxa-e54c.dtb"},
+> 	{"rockchip,rk3588", 980, 1060, "rockchip/rk3588-rock-5t.dtb"},
+> 	{"rockchip,rk3588", 1650, 1730, "rockchip/rk3588s-radxa-e52c.dtb"},
+> 	{"rockchip,rk3588", 2360, 2440, "rockchip/rk3588s-rock-5c.dtb"},
+> 	{"rockchip,rk3588", 3370, 3450, "rockchip/rk3588s-rock-5d.dtb"},
+> 	{"rockchip,rk3588", 4050, 4130, "rockchip/rk3588-rock-5b-plus.dtb"},
+> };
+> 
+> My Radxa rk358x boards report following for SARADC ch5:
+> - ROCK 5B+ (no emmc): 4073, 1790329 uV
+> - ROCK 5B+ (with emmc): 4075, 1791208 uV
+> - ROCK 5B v1.42:  854, 375384 uV
+> - ROCK 5B v1.42: 1100, 483516 uV
+> - ROCK 5B v1.45: 1211, 532307 uV
+> - ROCK 5B v1.46: 2109, 927032 uV
+> - ROCK 5A v1.1: 682, 299780 uV
+> - ROCK 5A v1.2: 685, 301098 uV
+> - ROCK 5C v1.1: 2402, 1055824 uV
+> - ROCK 5C Lite v1.1: 2402, 1055824 uV
+> - E52C v1.2: 1692, 743736 uV
+> - E54C v1.2: 340, 149450 uV
+> 
+> So Radxa's table seem to match values reported by my boards/models.
+> 
+> Maybe the ROCK 5B is a little bit more flaky in reading out the ADC
+> value and matching using some different way could improve board accuracy.
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 2efd866470f..ae05300bf34 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -92,6 +92,8 @@ dtb-$(CONFIG_ARCH_TEGRA) += \
- 	tegra20-motorola-olympus.dtb \
- 	tegra20-paz00.dtb \
- 	tegra20-plutux.dtb \
-+	tegra20-samsung-bose.dtb \
-+	tegra20-samsung-n1.dtb \
- 	tegra20-seaboard.dtb \
- 	tegra20-tec.dtb \
- 	tegra20-trimslice.dtb \
-diff --git a/arch/arm/dts/tegra20-samsung-bose.dts b/arch/arm/dts/tegra20-samsung-bose.dts
-new file mode 100644
-index 00000000000..5bb9a33adf2
---- /dev/null
-+++ b/arch/arm/dts/tegra20-samsung-bose.dts
-@@ -0,0 +1,119 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/dts-v1/;
-+
-+#include "tegra20-samsung-n1-common.dtsi"
-+
-+/ {
-+	model = "Samsung Captivate Glide (SGH-i927)";
-+	compatible = "samsung,bose", "nvidia,tegra20";
-+
-+	aliases {
-+		spi0 = &panel_spi;
-+	};
-+
-+	host1x@50000000 {
-+		dc@54200000 {
-+			rgb {
-+				status = "okay";
-+
-+				port {
-+					dpi_output: endpoint {
-+						remote-endpoint = <&panel_input>;
-+						bus-width = <24>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	pinmux@70000014 {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&state_default>;
-+
-+		state_default: pinmux {
-+			conf-dtf {
-+				nvidia,pins = "dtf", "spdi", "spib", "spih";
-+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			conf-gpv {
-+				nvidia,pins = "gpv";
-+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			conf-kbcd {
-+				nvidia,pins = "kbcd";
-+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			drive-dap {
-+				nvidia,pins = "drive_dap2", "drive_dap3";
-+				nvidia,high-speed-mode = <TEGRA_PIN_ENABLE>;
-+				nvidia,schmitt = <TEGRA_PIN_ENABLE>;
-+				nvidia,low-power-mode = <TEGRA_PIN_LP_DRIVE_DIV_1>;
-+				nvidia,pull-down-strength = <31>;
-+				nvidia,pull-up-strength = <31>;
-+				nvidia,slew-rate-rising = <TEGRA_PIN_SLEW_RATE_SLOWEST>;
-+				nvidia,slew-rate-falling = <TEGRA_PIN_SLEW_RATE_SLOWEST>;
-+			};
-+		};
-+	};
-+
-+	panel_spi: spi@7000d800 {
-+		status = "okay";
-+		spi-max-frequency = <1000000>;
-+
-+		panel: panel@2 {
-+			/* 480x800 AMOLED panel */
-+			compatible = "samsung,bose-panel", "samsung,s6e63m0";
-+			reg = <2>;
-+
-+			spi-max-frequency = <1000000>;
-+
-+			spi-cpol;
-+			spi-cpha;
-+
-+			reset-gpios = <&gpio TEGRA_GPIO(C, 1) GPIO_ACTIVE_LOW>;
-+
-+			vdd3-supply = <&vlcd_1v8_reg>;
-+			vci-supply = <&vlcd_3v0_reg>;
-+
-+			panel-width-mm = <52>;
-+			panel-height-mm = <87>;
-+
-+			port {
-+				panel_input: endpoint {
-+					remote-endpoint = <&dpi_output>;
-+				};
-+			};
-+		};
-+	};
-+
-+	sdhci@c8000400 {
-+		broken-cd;
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		switch-hall {
-+			label = "Keyboard Slide";
-+			gpios = <&gpio TEGRA_GPIO(W, 3) GPIO_ACTIVE_HIGH>;
-+			linux,input-type = <EV_SW>;
-+			linux,code = <SW_KEYPAD_SLIDE>;
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led-kbd {
-+			label = "Keyboard backlight";
-+			gpios = <&gpio TEGRA_GPIO(L, 5) GPIO_ACTIVE_HIGH>;
-+			default-state = "off";
-+		};
-+	};
-+};
-diff --git a/arch/arm/dts/tegra20-samsung-n1-common.dtsi b/arch/arm/dts/tegra20-samsung-n1-common.dtsi
-new file mode 100644
-index 00000000000..8223c5ece54
---- /dev/null
-+++ b/arch/arm/dts/tegra20-samsung-n1-common.dtsi
-@@ -0,0 +1,428 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+#include <dt-bindings/input/input.h>
-+#include "tegra20.dtsi"
-+
-+/ {
-+	chosen {
-+		stdout-path = &uartb;
-+	};
-+
-+	aliases {
-+		i2c0 = &pwr_i2c;
-+
-+		mmc0 = &sdmmc4; /* eMMC */
-+		mmc1 = &sdmmc3; /* uSD slot */
-+
-+		rtc0 = &pmic;
-+		rtc1 = "/rtc@7000e000";
-+
-+		usb0 = &micro_usb;
-+	};
-+
-+	memory {
-+		device_type = "memory";
-+		reg = <0x00000000 0x40000000>; /* 1 GB */
-+	};
-+
-+	pinmux@70000014 {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&state_default>;
-+
-+		state_default: pinmux {
-+			ata {
-+				nvidia,pins = "ata", "atc", "atd", "ate",
-+					      "gmb", "gmd", "irrx", "irtx",
-+					      "spid", "spie";
-+				nvidia,function = "gmi";
-+			};
-+
-+			atb {
-+				nvidia,pins = "atb", "gma", "gme";
-+				nvidia,function = "sdio4";
-+			};
-+
-+			cdev1 {
-+				nvidia,pins = "cdev1";
-+				nvidia,function = "plla_out";
-+			};
-+
-+			cdev2 {
-+				nvidia,pins = "cdev2";
-+				nvidia,function = "pllp_out4";
-+			};
-+
-+			crtp {
-+				nvidia,pins = "crtp";
-+				nvidia,function = "crt";
-+			};
-+
-+			csus {
-+				nvidia,pins = "csus";
-+				nvidia,function = "vi_sensor_clk";
-+			};
-+
-+			dap1 {
-+				nvidia,pins = "dap1";
-+				nvidia,function = "dap1";
-+			};
-+
-+			dap2 {
-+				nvidia,pins = "dap2";
-+				nvidia,function = "dap2";
-+			};
-+
-+			dap3 {
-+				nvidia,pins = "dap3";
-+				nvidia,function = "dap3";
-+			};
-+
-+			dap4 {
-+				nvidia,pins = "dap4";
-+				nvidia,function = "dap4";
-+			};
-+
-+			ddc {
-+				nvidia,pins = "ddc";
-+				nvidia,function = "rsvd4";
-+			};
-+
-+			pta {
-+				nvidia,pins = "pta";
-+				nvidia,function = "i2c2";
-+			};
-+
-+			spif {
-+				nvidia,pins = "spif", "uac";
-+				nvidia,function = "rsvd4";
-+			};
-+
-+			dta {
-+				nvidia,pins = "dta", "dtb", "dtc", "dtd", "dte";
-+				nvidia,function = "vi";
-+			};
-+
-+			dtf {
-+				nvidia,pins = "dtf";
-+				nvidia,function = "i2c3";
-+			};
-+
-+			gmc {
-+				nvidia,pins = "gmc";
-+				nvidia,function = "uartd";
-+			};
-+
-+			gpu {
-+				nvidia,pins = "gpu", "uaa", "uab";
-+				nvidia,function = "uarta";
-+			};
-+
-+			gpu7 {
-+				nvidia,pins = "gpu7";
-+				nvidia,function = "rtck";
-+			};
-+
-+			gpv {
-+				nvidia,pins = "gpv", "slxa", "slxk";
-+				nvidia,function = "pcie";
-+			};
-+
-+			hdint {
-+				nvidia,pins = "hdint", "spdi", "spdo";
-+				nvidia,function = "rsvd2";
-+			};
-+
-+			i2cp {
-+				nvidia,pins = "i2cp";
-+				nvidia,function = "i2cp";
-+			};
-+
-+			kbca {
-+				nvidia,pins = "kbca", "kbcb", "kbcc", "kbcd",
-+					      "kbce", "kbcf";
-+				nvidia,function = "kbc";
-+			};
-+
-+			lcsn {
-+				nvidia,pins = "lcsn", "lsck", "lsda", "lsdi";
-+				nvidia,function = "spi3";
-+			};
-+
-+			ld0 {
-+				nvidia,pins = "ld0", "ld1", "ld2", "ld3", "ld4",
-+					      "ld5", "ld6", "ld7", "ld8", "ld9",
-+					      "ld10", "ld11", "ld12", "ld13", "ld14",
-+					      "ld15", "ld16", "ld17", "ldc", "ldi",
-+					      "lhp0", "lhp1", "lhp2", "lhs", "lm0",
-+					      "lm1", "lpp", "lpw0", "lpw1", "lpw2",
-+					      "lsc0", "lsc1", "lspi", "lvp0", "lvp1",
-+					      "lvs";
-+				nvidia,function = "displaya";
-+			};
-+
-+			owc {
-+				nvidia,pins = "owc";
-+				nvidia,function = "owr";
-+			};
-+
-+			pmc {
-+				nvidia,pins = "pmc";
-+				nvidia,function = "pwr_on";
-+			};
-+
-+			rm {
-+				nvidia,pins = "rm";
-+				nvidia,function = "i2c1";
-+			};
-+
-+			sdb {
-+				nvidia,pins = "sdb", "sdc", "sdd";
-+				nvidia,function = "sdio3";
-+			};
-+
-+			sdio1 {
-+				nvidia,pins = "sdio1";
-+				nvidia,function = "sdio1";
-+			};
-+
-+			slxc {
-+				nvidia,pins = "slxc", "slxd";
-+				nvidia,function = "spi4";
-+			};
-+
-+			spig {
-+				nvidia,pins = "spig", "spih";
-+				nvidia,function = "spi2_alt";
-+			};
-+
-+			uad {
-+				nvidia,pins = "uad";
-+				nvidia,function = "irda";
-+			};
-+
-+			uca {
-+				nvidia,pins = "uca", "ucb";
-+				nvidia,function = "uartc";
-+			};
-+
-+			uda {
-+				nvidia,pins = "uda";
-+				nvidia,function = "spi1";
-+			};
-+
-+			spia {
-+				nvidia,pins = "spia", "spib", "spic";
-+				nvidia,function = "spi2";
-+			};
-+
-+			conf-cdev1 {
-+				nvidia,pins = "cdev1", "cdev2", "dap1", "dap2",
-+					      "dap3", "dap4", "ddc", "dte", "gma",
-+					      "gmc", "gmd", "gme", "gpu7", "hdint",
-+					      "i2cp", "lcsn", "lhs", "lm0", "lm1",
-+					      "lpw1", "lsc0", "lsck", "lsda", "lsdi",
-+					      "lspi", "lvs", "pmc", "pta", "rm",
-+					      "sdb", "sdio1", "uac", "uda", "ck32",
-+					      "ddrc", "pmca", "pmcb", "pmcc", "pmcd",
-+					      "xm2c", "xm2d";
-+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			conf-crtp {
-+				nvidia,pins = "crtp", "lvp0";
-+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
-+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
-+			};
-+
-+			conf-csus {
-+				nvidia,pins = "csus", "spid";
-+				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
-+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
-+			};
-+
-+			conf-ata {
-+				nvidia,pins = "ata", "atb", "atc", "ate",
-+					      "gmb", "gpu", "irrx", "irtx",
-+					      "kbca", "kbcc", "kbce", "kbcf",
-+					      "ldc", "lpw0", "lpw2", "lsc1", "sdc",
-+					      "sdd", "spig", "uaa", "uab",
-+					      "uad", "uca", "ucb", "pmce";
-+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			conf-owc {
-+				nvidia,pins = "owc";
-+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
-+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
-+			};
-+
-+			conf-atd {
-+				nvidia,pins = "atd", "dta", "dtb", "dtc", "dtd",
-+					      "kbcb", "ld0", "ld1", "ld10", "ld11",
-+					      "ld12", "ld13", "ld14", "ld15", "ld16",
-+					      "ld17", "ld2", "ld3", "ld4", "ld5",
-+					      "ld6", "ld7", "ld8", "ld9", "ldi",
-+					      "lhp0", "lhp1", "lhp2", "lpp", "lvp1",
-+					      "slxa", "slxc", "slxd", "slxk", "spdo",
-+					      "spia", "spic", "spie", "spif";
-+				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			drive-ao1 {
-+				nvidia,pins = "drive_ao1", "drive_at1", "drive_dbg",
-+					      "drive_vi1", "drive_vi2";
-+				nvidia,high-speed-mode = <TEGRA_PIN_DISABLE>;
-+				nvidia,schmitt = <TEGRA_PIN_ENABLE>;
-+				nvidia,low-power-mode = <TEGRA_PIN_LP_DRIVE_DIV_1>;
-+				nvidia,pull-down-strength = <31>;
-+				nvidia,pull-up-strength = <31>;
-+				nvidia,slew-rate-rising = <TEGRA_PIN_SLEW_RATE_SLOWEST>;
-+				nvidia,slew-rate-falling = <TEGRA_PIN_SLEW_RATE_SLOWEST>;
-+			};
-+
-+			drive-sdio1 {
-+				nvidia,pins = "drive_sdio1";
-+				nvidia,high-speed-mode = <TEGRA_PIN_DISABLE>;
-+				nvidia,schmitt = <TEGRA_PIN_ENABLE>;
-+				nvidia,low-power-mode = <TEGRA_PIN_LP_DRIVE_DIV_1>;
-+				nvidia,pull-down-strength = <31>;
-+				nvidia,pull-up-strength = <31>;
-+				nvidia,slew-rate-rising = <TEGRA_PIN_SLEW_RATE_SLOWEST>;
-+				nvidia,slew-rate-falling = <TEGRA_PIN_SLEW_RATE_SLOWEST>;
-+			};
-+
-+			drive-ddc {
-+				nvidia,pins = "drive_ddc";
-+				nvidia,high-speed-mode = <TEGRA_PIN_DISABLE>;
-+				nvidia,schmitt = <TEGRA_PIN_ENABLE>;
-+				nvidia,low-power-mode = <TEGRA_PIN_LP_DRIVE_DIV_1>;
-+				nvidia,pull-down-strength = <31>;
-+				nvidia,pull-up-strength = <31>;
-+				nvidia,slew-rate-rising = <TEGRA_PIN_SLEW_RATE_FASTEST>;
-+				nvidia,slew-rate-falling = <TEGRA_PIN_SLEW_RATE_FASTEST>;
-+			};
-+		};
-+	};
-+
-+	uartb: serial@70006040 {
-+		clocks = <&tegra_car 7>;
-+		status = "okay";
-+	};
-+
-+	pwr_i2c: i2c@7000d000 {
-+		status = "okay";
-+		clock-frequency = <400000>;
-+
-+		pmic: max8907@3c {
-+			compatible = "maxim,max8907";
-+			reg = <0x3c>;
-+
-+			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
-+			#interrupt-cells = <2>;
-+			interrupt-controller;
-+
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+
-+			maxim,system-power-controller;
-+
-+			regulators {
-+				vlcd_1v8_reg: ldo3 {
-+					regulator-name = "vlcd_1v8";
-+					regulator-min-microvolt = <1800000>;
-+					regulator-max-microvolt = <1800000>;
-+					regulator-always-on;
-+					regulator-boot-on;
-+				};
-+
-+				usb_phy_reg: ldo4 {
-+					regulator-name = "vap_usb_3v3";
-+					regulator-min-microvolt = <3300000>;
-+					regulator-max-microvolt = <3300000>;
-+					regulator-always-on;
-+					regulator-boot-on;
-+				};
-+
-+				vlcd_3v0_reg: ldo12 {
-+					regulator-name = "vlcd_3v0";
-+					regulator-min-microvolt = <3000000>;
-+					regulator-max-microvolt = <3000000>;
-+				};
-+
-+				vmmc_usd_reg: ldo16 {
-+					regulator-name = "vmmc_usd";
-+					regulator-min-microvolt = <3300000>;
-+					regulator-max-microvolt = <3300000>;
-+				};
-+			};
-+		};
-+	};
-+
-+	micro_usb: usb@c5000000 {
-+		status = "okay";
-+		dr_mode = "otg";
-+	};
-+
-+	usb-phy@c5000000 {
-+		status = "okay";
-+		vbus-supply = <&usb_phy_reg>;
-+	};
-+
-+	sdmmc3: sdhci@c8000400 {
-+		status = "okay";
-+		bus-width = <4>;
-+
-+		vmmc-supply = <&vmmc_usd_reg>;
-+		vqmmc-supply = <&vdd_3v3_sys>;
-+	};
-+
-+	sdmmc4: sdhci@c8000600 {
-+		status = "okay";
-+		bus-width = <8>;
-+		non-removable;
-+
-+		vmmc-supply = <&vdd_3v3_sys>;
-+		vqmmc-supply = <&vdd_3v3_sys>;
-+	};
-+
-+	/* 32KHz oscillator which is used by PMC */
-+	clk32k_in: clock-32k-in {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <32768>;
-+		clock-output-names = "ref-oscillator";
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		key-power {
-+			label = "Power";
-+			gpios = <&gpio TEGRA_GPIO(U, 5) GPIO_ACTIVE_HIGH>;
-+			linux,code = <KEY_ENTER>;
-+		};
-+
-+		key-volume-up {
-+			label = "Volume Up";
-+			gpios = <&gpio TEGRA_GPIO(Q, 1) GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_UP>;
-+		};
-+
-+		key-volume-down {
-+			label = "Volume Down";
-+			gpios = <&gpio TEGRA_GPIO(Q, 2) GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_DOWN>;
-+		};
-+	};
-+
-+	vdd_3v3_sys: regulator-3v3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_3v3_vs";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+};
-diff --git a/arch/arm/dts/tegra20-samsung-n1.dts b/arch/arm/dts/tegra20-samsung-n1.dts
-new file mode 100644
-index 00000000000..930a3195aa0
---- /dev/null
-+++ b/arch/arm/dts/tegra20-samsung-n1.dts
-@@ -0,0 +1,184 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/dts-v1/;
-+
-+#include "tegra20-samsung-n1-common.dtsi"
-+
-+/ {
-+	model = "Samsung Galaxy R (GT-I9103)";
-+	compatible = "samsung,n1", "nvidia,tegra20";
-+
-+	aliases {
-+		i2c10 = &cmc_i2c;
-+		spi0 = &panel_spi;
-+	};
-+
-+	host1x@50000000 {
-+		dc@54200000 {
-+			rgb {
-+				status = "okay";
-+
-+				port {
-+					dpi_output: endpoint {
-+						remote-endpoint = <&bridge_input>;
-+						bus-width = <24>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	pinmux@70000014 {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&state_default>;
-+
-+		state_default: pinmux {
-+			conf-dtf {
-+				nvidia,pins = "dtf", "spdi", "spih";
-+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			conf-gpv {
-+				nvidia,pins = "gpv", "spib";
-+				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+
-+			conf-kbcd {
-+				nvidia,pins = "kbcd";
-+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
-+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-+			};
-+		};
-+	};
-+
-+	i2c@7000d000 {
-+		max8907@3c {
-+			regulators {
-+				vcmc623_io_1v8: ldo15 {
-+					regulator-name = "vcmc623_io_1v8";
-+					regulator-min-microvolt = <1800000>;
-+					regulator-max-microvolt = <1800000>;
-+				};
-+			};
-+		};
-+	};
-+
-+	cmc_i2c: i2c-10 {
-+		compatible = "i2c-gpio";
-+
-+		sda-gpios = <&gpio TEGRA_GPIO(Z, 3) GPIO_ACTIVE_HIGH>;
-+		scl-gpios = <&gpio TEGRA_GPIO(C, 6) GPIO_ACTIVE_HIGH>;
-+
-+		i2c-gpio,scl-output-only;
-+		i2c-gpio,delay-us = <1>;
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		cmc623: bridge@38 {
-+			compatible = "samsung,cmc623";
-+			reg = <0x38>;
-+
-+			enable-gpios = <&gpio TEGRA_GPIO(Q, 4) GPIO_ACTIVE_HIGH>;
-+			reset-gpios = <&gpio TEGRA_GPIO(J, 6) GPIO_ACTIVE_HIGH>;
-+
-+			bypass-gpios = <&gpio TEGRA_GPIO(BB, 5) GPIO_ACTIVE_LOW>;
-+			sleep-gpios = <&gpio TEGRA_GPIO(W, 0) GPIO_ACTIVE_HIGH>;
-+
-+			vdd3v0-supply = <&vcmc623_3v0>;
-+			vdd1v2-supply = <&vcmc623_1v2>;
-+			vddio1v8-supply = <&vcmc623_io_1v8>;
-+
-+			cmc623_backlight: backlight {
-+				compatible = "samsung,cmc623-backlight";
-+
-+				enable-gpios = <&gpio TEGRA_GPIO(R, 3) GPIO_ACTIVE_HIGH>;
-+			};
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					bridge_input: endpoint {
-+						remote-endpoint = <&dpi_output>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					bridge_output: endpoint {
-+						remote-endpoint = <&panel_input>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	panel_spi: spi@7000d800 {
-+		status = "okay";
-+		spi-max-frequency = <1000000>;
-+
-+		panel: panel@2 {
-+			/* 480x800 TFT LCD panel */
-+			compatible = "sony,l4f00430t01";
-+			reg = <2>;
-+
-+			spi-max-frequency = <1000000>;
-+
-+			spi-cpol;
-+			spi-cpha;
-+
-+			reset-gpios = <&gpio TEGRA_GPIO(C, 1) GPIO_ACTIVE_LOW>;
-+
-+			vdd1v8-supply = <&vlcd_1v8_reg>;
-+			vdd3v0-supply = <&vlcd_3v0_reg>;
-+
-+			panel-width-mm = <55>;
-+			panel-height-mm = <91>;
-+
-+			backlight = <&cmc623_backlight>;
-+
-+			port {
-+				panel_input: endpoint {
-+					remote-endpoint = <&bridge_output>;
-+				};
-+			};
-+		};
-+	};
-+
-+	sdhci@c8000400 {
-+		/* battery blocks the sdcard slot and the device lacks CD pin */
-+		non-removable;
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		key-home {
-+			label = "Home";
-+			gpios = <&gpio TEGRA_GPIO(O, 5) GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_ENTER>;
-+		};
-+	};
-+
-+	vcmc623_3v0: regulator-cmc623-3v0 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcmc623_3v0";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+	};
-+
-+	vcmc623_1v2: regulator-cmc623-1v2 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcmc623_1v2";
-+		regulator-min-microvolt = <1200000>;
-+		regulator-max-microvolt = <1200000>;
-+		gpio = <&gpio TEGRA_GPIO(L, 5) GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+};
-diff --git a/arch/arm/mach-tegra/tegra20/Kconfig b/arch/arm/mach-tegra/tegra20/Kconfig
-index bedbedade7b..b07b5a15585 100644
---- a/arch/arm/mach-tegra/tegra20/Kconfig
-+++ b/arch/arm/mach-tegra/tegra20/Kconfig
-@@ -54,6 +54,10 @@ config TARGET_SEABOARD
- 	select TEGRA_LP0
- 	select TEGRA_PMU
- 
-+config TARGET_SAMSUNG_N1
-+	bool "Samsung Tegra20 N1 board"
-+	select BOARD_LATE_INIT
-+
- config TARGET_STAR
- 	bool "LG Tegra20 Star board"
- 	select BOARD_LATE_INIT
-@@ -92,6 +96,7 @@ source "board/compal/paz00/Kconfig"
- source "board/acer/picasso/Kconfig"
- source "board/avionic-design/plutux/Kconfig"
- source "board/nvidia/seaboard/Kconfig"
-+source "board/samsung/n1/Kconfig"
- source "board/lg/star/Kconfig"
- source "board/avionic-design/tec/Kconfig"
- source "board/asus/transformer-t20/Kconfig"
-diff --git a/board/samsung/n1/Kconfig b/board/samsung/n1/Kconfig
-new file mode 100644
-index 00000000000..a5e5edda9e2
---- /dev/null
-+++ b/board/samsung/n1/Kconfig
-@@ -0,0 +1,13 @@
-+if TARGET_SAMSUNG_N1
-+
-+config SYS_BOARD
-+	default "n1"
-+
-+config SYS_VENDOR
-+	default "samsung"
-+
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Samsung N1"
-+
-+endif
-diff --git a/board/samsung/n1/MAINTAINERS b/board/samsung/n1/MAINTAINERS
-new file mode 100644
-index 00000000000..798cb56cd37
---- /dev/null
-+++ b/board/samsung/n1/MAINTAINERS
-@@ -0,0 +1,9 @@
-+N1 BOARD
-+M:	Ion Agorria <ion@agorria.com>
-+M:	Svyatoslav Ryhel <clamor95@gmail.com>
-+S:	Maintained
-+F:	arch/arm/dts/tegra20-samsung-bose.dts
-+F:	arch/arm/dts/tegra20-samsung-n1.dts
-+F:	board/samsung/n1/
-+F:	configs/n1_defconfig
-+F:	doc/board/samsung/n1.rst
-diff --git a/board/samsung/n1/bose.config b/board/samsung/n1/bose.config
-new file mode 100644
-index 00000000000..6d6d9d3f2ce
---- /dev/null
-+++ b/board/samsung/n1/bose.config
-@@ -0,0 +1,6 @@
-+CONFIG_DEFAULT_DEVICE_TREE="tegra20-samsung-bose"
-+CONFIG_SYS_PROMPT="Tegra20 (Bose) # "
-+# CONFIG_VIDEO_BRIDGE_SAMSUNG_CMC623 is not set
-+# CONFIG_BACKLIGHT_SAMSUNG_CMC623 is not set
-+# CONFIG_VIDEO_LCD_SONY_L4F00430T01 is not set
-+CONFIG_VIDEO_LCD_SAMSUNG_S6E63M0=y
-diff --git a/board/samsung/n1/n1.env b/board/samsung/n1/n1.env
-new file mode 100644
-index 00000000000..e2b883dbc10
---- /dev/null
-+++ b/board/samsung/n1/n1.env
-@@ -0,0 +1,16 @@
-+#include <env/nvidia/prod_upd.env>
-+
-+button_cmd_0_name=Volume Down
-+button_cmd_0=bootmenu
-+
-+boot_block_size_r=0x80000
-+boot_block_size=0x400
-+boot_dev=1
-+
-+bootmenu_0=mount internal storage=usb start && ums 0 mmc 0; bootmenu
-+bootmenu_1=mount external storage=usb start && ums 0 mmc 1; bootmenu
-+bootmenu_2=fastboot=echo Starting Fastboot protocol ...; fastboot usb 0; bootmenu
-+bootmenu_3=reboot RCM=enterrcm
-+bootmenu_4=reboot=reset
-+bootmenu_5=power off=poweroff
-+bootmenu_delay=-1
-diff --git a/configs/n1_defconfig b/configs/n1_defconfig
-new file mode 100644
-index 00000000000..da76c59412d
---- /dev/null
-+++ b/configs/n1_defconfig
-@@ -0,0 +1,92 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_TEGRA=y
-+CONFIG_SUPPORT_PASSING_ATAGS=y
-+CONFIG_CMDLINE_TAG=y
-+CONFIG_INITRD_TAG=y
-+CONFIG_TEXT_BASE=0x00110000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_ENV_SOURCE_FILE="n1"
-+CONFIG_ENV_SIZE=0x3000
-+CONFIG_ENV_OFFSET=0xFFFFD000
-+CONFIG_DEFAULT_DEVICE_TREE="tegra20-samsung-n1"
-+CONFIG_SPL_STACK=0xffffc
-+CONFIG_SPL_TEXT_BASE=0x00108000
-+CONFIG_SYS_LOAD_ADDR=0x2000000
-+CONFIG_TEGRA20=y
-+CONFIG_TARGET_SAMSUNG_N1=y
-+CONFIG_TEGRA_ENABLE_UARTB=y
-+CONFIG_CMD_EBTUPDATE=y
-+CONFIG_BUTTON_CMD=y
-+CONFIG_BOOTDELAY=0
-+CONFIG_AUTOBOOT_KEYED=y
-+CONFIG_AUTOBOOT_KEYED_CTRLC=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_BOOTCOMMAND="bootflow scan; echo 'Boot configuration not found... Power off in 3 sec'; sleep 3; poweroff"
-+CONFIG_SYS_PBSIZE=2085
-+CONFIG_SPL_FOOTPRINT_LIMIT=y
-+CONFIG_SPL_MAX_FOOTPRINT=0x8000
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x90000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x10000
-+CONFIG_SYS_PROMPT="Tegra20 (N1) # "
-+# CONFIG_CMD_BOOTEFI_BOOTMGR is not set
-+CONFIG_CMD_BOOTMENU=y
-+# CONFIG_CMD_IMI is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_GPT_RENAME=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_POWEROFF=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_UMS_ABORT_KEYED=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PAUSE=y
-+CONFIG_CMD_EXT4_WRITE=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+# CONFIG_SPL_EFI_PARTITION is not set
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SYS_MMC_ENV_PART=2
-+CONFIG_BUTTON=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x11000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x5000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
-+CONFIG_DM_I2C_GPIO=y
-+CONFIG_SYS_I2C_TEGRA=y
-+CONFIG_BUTTON_KEYBOARD=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_MAX8907=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_MAX8907=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_TEGRA20_SLINK=y
-+CONFIG_SYSRESET_MAX8907=y
-+CONFIG_USB=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_TEGRA=y
-+CONFIG_USB_ULPI_VIEWPORT=y
-+CONFIG_USB_ULPI=y
-+CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Samsung"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x04e8
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x685F
-+CONFIG_CI_UDC=y
-+CONFIG_VIDEO=y
-+# CONFIG_VIDEO_LOGO is not set
-+# CONFIG_VIDEO_BPP8 is not set
-+CONFIG_VIDEO_BRIDGE=y
-+CONFIG_VIDEO_TEGRA=y
-+CONFIG_VIDEO_BRIDGE_SAMSUNG_CMC623=y
-+CONFIG_BACKLIGHT_SAMSUNG_CMC623=y
-+CONFIG_VIDEO_LCD_SONY_L4F00430T01=y
-diff --git a/doc/board/samsung/index.rst b/doc/board/samsung/index.rst
-index a1c9636b050..1b92c9518a5 100644
---- a/doc/board/samsung/index.rst
-+++ b/doc/board/samsung/index.rst
-@@ -8,3 +8,4 @@ Samsung
- 
-    axy17lte
-    e850-96
-+   n1
-diff --git a/doc/board/samsung/n1.rst b/doc/board/samsung/n1.rst
-new file mode 100644
-index 00000000000..4dbb3141774
---- /dev/null
-+++ b/doc/board/samsung/n1.rst
-@@ -0,0 +1,51 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+U-Boot for the Samsung N1 device family
-+=======================================
-+
-+``DISCLAMER!`` Moving your Samsung Galaxy R (GT-I9103) or Samsung Captivate Glide
-+(SGH-i927) to use U-Boot assumes replacement of the sboot. Vendor android firmwares
-+will no longer be able to run on the device. This replacement IS reversible.
-+
-+Quick Start
-+-----------
-+
-+- Build U-Boot
-+- Boot
-+
-+Build U-Boot
-+------------
-+
-+Device support is implemented by applying config fragment to a generic board
-+defconfig. Generic board defconfig is suitable for Samsung Galaxy R (GT-I9103)
-+while Samsung Captivate Glide (SGH-i927) support is provided by applying
-+``bose.config`` fragment.
-+
-+.. code-block:: bash
-+
-+    $ export CROSS_COMPILE=arm-none-eabi-
-+    $ make n1_defconfig bose.config # For Captivate Glide
-+    $ make
-+
-+After the build succeeds, you will obtain the final ``u-boot-dtb-tegra.bin``
-+image, ready for further processing.
-+
-+Boot
-+----
-+
-+Currently, U-Boot can be preloaded into RAM via the NvFlash. To enter
-+RCM protocol use ``home`` and ``volume up`` for Galaxy R and ``volume down``
-+and ``volume up`` Captivate Glide key combination plus plugging usb in.
-+The host PC should recognize an APX device.
-+
-+Built U-Boot ``u-boot-dtb-tegra.bin`` can be loaded from fusee-tools
-+directory with
-+
-+.. code-block:: bash
-+
-+    $ ./utils/nvflash_t20 --setbct --bct ./bct/i927.bct --configfile ./utils/flash.cfg --bl u-boot-dtb-tegra.bin --sbk (in form of 0xABCDABCD 4 times) --sync # For Captivate Glide
-+
-+To boot Linux, U-Boot will look for an ``extlinux.conf`` on MicroSD and then on
-+eMMC. Additionally, if the Volume Down button is pressed while loading, the
-+device will enter bootmenu. Bootmenu contains entries to mount MicroSD and eMMC
-+as mass storage, fastboot, reboot, reboot RCM and poweroff.
--- 
-2.50.0
+SARADC_IN5 is not connected on ROCK 5B, so do not use it to identify the 
+board.
+
+Best regards,
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+>>
+>> https://gitlab.collabora.com/hardware-enablement/rockchip-3588/u-boot/-/commit/9803234dbb014a8fa4b495aa8f95bdc710d88380
+> 
+> rockchip_sdram_size() and asm/arch-rockchip/sdram.h already contains
+> code and defines for these regs, so should probably be re-used instead
+> of re-inventing how the DRAM type is read from OS reg if we go with DRAM
+> type matching ;-)
+> 
+>>
+>> Considering that the different memory is something Radxa explicitly
+>> promotes as board difference between 5B and 5B+ it seems like a
+>> better approach to me.
+> 
+> My main concern with using DRAM type matching is that it may limit what
+> models can be supported by a single defconfig.
+> 
+>> Note I only haven't send this yet, since I
+>> was waiting for the Rock 5B+ DT to land in the upstream kernel. But
+> 
+> Sorry, I have not looked at your downstream tree for some time ;-)
+> 
+> Btw, you can probably drop my "HACK: mkimage: fit: Keep data that should
+> be loaded into SRAM embedded" from your tree, it should not be needed
+> since long time now that PIO mode typically is used instead of DMA for
+> TF-A loading.
+> 
+>> I'm totally happy for you to take care of this :)
+> 
+> I can probably extend the check to include DRAM type testing for a v2,
+> should probably make board model matching as safe as it can be.
+> 
+> Regards,
+> Jonas
+> 
+>>
+>> Greetings,
+>>
+>> -- Sebastian
+>>
+>>>
+>>>    U-Boot 2025.07 (Jul 14 2025 - 21:28:20 +0000)
+>>>
+>>>    Model: Radxa ROCK 5B+
+>>>    SoC:   RK3588
+>>>    DRAM:  8 GiB
+>>>
+>>> Features tested on a ROCK 5B+ v1.2:
+>>> - SD-card boot
+>>> - eMMC boot
+>>> - SPI flash boot
+>>> - PCIe/NVMe
+>>> - Ethernet
+>>> - USB/TCPM
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> ---
+>>>   arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi |  3 ++
+>>>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi      |  5 ++
+>>>   board/radxa/rock5b-rk3588/Kconfig            |  5 ++
+>>>   board/radxa/rock5b-rk3588/MAINTAINERS        |  3 +-
+>>>   board/radxa/rock5b-rk3588/rock5b-rk3588.c    | 55 ++++++++++++++++++++
+>>>   configs/rock5b-rk3588_defconfig              |  1 +
+>>>   doc/board/rockchip/rockchip.rst              |  2 +-
+>>>   7 files changed, 71 insertions(+), 3 deletions(-)
+>>>   create mode 100644 arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
+>>>
+>>> diff --git a/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
+>>> new file mode 100644
+>>> index 000000000000..c07696c83913
+>>> --- /dev/null
+>>> +++ b/arch/arm/dts/rk3588-rock-5b-plus-u-boot.dtsi
+>>> @@ -0,0 +1,3 @@
+>>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>>> +
+>>> +#include "rk3588-rock-5b-u-boot.dtsi"
+>>> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+>>> index d51fbf51cb88..e07b549c767f 100644
+>>> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+>>> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+>>> @@ -46,6 +46,11 @@
+>>>   	};
+>>>   };
+>>>   
+>>> +&saradc {
+>>> +	bootph-pre-ram;
+>>> +	vdd-microvolts = <1800000>;
+>>> +};
+>>> +
+>>>   &sdhci {
+>>>   	cap-mmc-highspeed;
+>>>   	mmc-hs200-1_8v;
+>>> diff --git a/board/radxa/rock5b-rk3588/Kconfig b/board/radxa/rock5b-rk3588/Kconfig
+>>> index 41dfe2402b12..98d630117836 100644
+>>> --- a/board/radxa/rock5b-rk3588/Kconfig
+>>> +++ b/board/radxa/rock5b-rk3588/Kconfig
+>>> @@ -9,4 +9,9 @@ config SYS_VENDOR
+>>>   config SYS_CONFIG_NAME
+>>>   	default "rock5b-rk3588"
+>>>   
+>>> +config BOARD_SPECIFIC_OPTIONS # dummy
+>>> +	def_bool y
+>>> +	select ADC
+>>> +	select SPL_ADC
+>>> +
+>>>   endif
+>>> diff --git a/board/radxa/rock5b-rk3588/MAINTAINERS b/board/radxa/rock5b-rk3588/MAINTAINERS
+>>> index 4460c9971a96..c8a43769105e 100644
+>>> --- a/board/radxa/rock5b-rk3588/MAINTAINERS
+>>> +++ b/board/radxa/rock5b-rk3588/MAINTAINERS
+>>> @@ -5,5 +5,4 @@ S:	Maintained
+>>>   F:	board/radxa/rock5b-rk3588
+>>>   F:	include/configs/rock5b-rk3588.h
+>>>   F:	configs/rock5b-rk3588_defconfig
+>>> -F:	arch/arm/dts/rk3588-rock-5b.dts
+>>> -F:	arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+>>> +F:	arch/arm/dts/rk3588-rock-5b*
+>>> diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+>>> index fc2f69db2241..1443c2c828a1 100644
+>>> --- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+>>> +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+>>> @@ -3,8 +3,63 @@
+>>>    * Copyright (c) 2023-2024 Collabora Ltd.
+>>>    */
+>>>   
+>>> +#include <adc.h>
+>>> +#include <env.h>
+>>>   #include <fdtdec.h>
+>>>   #include <fdt_support.h>
+>>> +#include <linux/errno.h>
+>>> +
+>>> +#define HW_ID_CHANNEL	5
+>>> +
+>>> +struct board_model {
+>>> +	unsigned int low;
+>>> +	unsigned int high;
+>>> +	const char *fdtfile;
+>>> +};
+>>> +
+>>> +static const struct board_model board_models[] = {
+>>> +	{ 4050, 4130, "rockchip/rk3588-rock-5b-plus.dtb" },
+>>> +};
+>>> +
+>>> +static const struct board_model *get_board_model(void)
+>>> +{
+>>> +	unsigned int val;
+>>> +	int i, ret;
+>>> +
+>>> +	ret = adc_channel_single_shot("adc@fec10000", HW_ID_CHANNEL, &val);
+>>> +	if (ret)
+>>> +		return NULL;
+>>> +
+>>> +	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
+>>> +		unsigned int min = board_models[i].low;
+>>> +		unsigned int max = board_models[i].high;
+>>> +
+>>> +		if (min <= val && val <= max)
+>>> +			return &board_models[i];
+>>> +	}
+>>> +
+>>> +	return NULL;
+>>> +}
+>>> +
+>>> +int rk_board_late_init(void)
+>>> +{
+>>> +	const struct board_model *model = get_board_model();
+>>> +
+>>> +	if (model)
+>>> +		env_set("fdtfile", model->fdtfile);
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +
+>>> +int board_fit_config_name_match(const char *name)
+>>> +{
+>>> +	const struct board_model *model = get_board_model();
+>>> +
+>>> +	if (model && !strcmp(name, model->fdtfile))
+>>> +		return 0;
+>>> +
+>>> +	return -EINVAL;
+>>> +}
+>>>   
+>>>   #ifdef CONFIG_OF_BOARD_SETUP
+>>>   int ft_board_setup(void *blob, struct bd_info *bd)
+>>> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+>>> index 6349e8791456..967cebc2054f 100644
+>>> --- a/configs/rock5b-rk3588_defconfig
+>>> +++ b/configs/rock5b-rk3588_defconfig
+>>> @@ -47,6 +47,7 @@ CONFIG_CMD_REGULATOR=y
+>>>   # CONFIG_SPL_DOS_PARTITION is not set
+>>>   CONFIG_SPL_OF_CONTROL=y
+>>>   CONFIG_OF_LIVE=y
+>>> +CONFIG_OF_LIST="rockchip/rk3588-rock-5b rockchip/rk3588-rock-5b-plus"
+>>>   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>>>   CONFIG_SPL_DM_SEQ_ALIAS=y
+>>>   CONFIG_SPL_REGMAP=y
+>>> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+>>> index b88299cbba23..7a1385789c20 100644
+>>> --- a/doc/board/rockchip/rockchip.rst
+>>> +++ b/doc/board/rockchip/rockchip.rst
+>>> @@ -152,7 +152,7 @@ List of mainline supported Rockchip boards:
+>>>        - Pine64 QuartzPro64 (quartzpro64-rk3588)
+>>>        - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
+>>>        - Radxa ROCK 5A (rock5a-rk3588s)
+>>> -     - Radxa ROCK 5B (rock5b-rk3588)
+>>> +     - Radxa ROCK 5B/5B+ (rock5b-rk3588)
+>>>        - Radxa ROCK 5C (rock-5c-rk3588s)
+>>>        - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
+>>>        - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
+>>> -- 
+>>> 2.49.0
+>>>
+> 
+> 
 
