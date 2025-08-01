@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDDFDC87FCA
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 09:54:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E7F4C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 09:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0E3B83A15;
-	Fri,  1 Aug 2025 11:54:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 60C5183A05;
+	Fri,  1 Aug 2025 11:54:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TiN2B9m3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ln13H0tK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEE0883A15; Fri,  1 Aug 2025 11:54:08 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 1E3C183A22; Fri,  1 Aug 2025 11:54:13 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DCDA839F1
+ by phobos.denx.de (Postfix) with ESMTPS id DB19E83A05
  for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 11:54:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3b783d851e6so805733f8f.0
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-45555e3317aso3523465e9.3
  for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 02:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754042045; x=1754646845; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=sRQoKJvjuN0GwEqkVMrSejIaXN4FAr6c7m6VgHUBCuA=;
- b=TiN2B9m3YDMsRdbp2sjLrJGq7ZIiLEKfJmbAlv63rwn5gi0yp0bfLzc91m1/CcOlev
- 6lG8oso+ClT7Y1eQuol005REiHWnqxhTFUhPTtXnglEe0p8RGJ3oHAzpcmlj8C+0xP6J
- AgNSIzAipF3Jyy0yyaLGMwgNhv2XUmYGNDJ7C2aWcM4HXPD7DucmL+oUy3tiqu1p5veR
- OC5k13vqD3JIIuUCwfPIG9oN/6RFluOKZ2bvZjjyxoC4TGLFQvuNTGvo0YXrvCVJx+Cd
- 4j8UCLOxJobTY4kEKIsZQqf+T+28x26MdV7ycXiZ17+bzwN0Z+XWsJb/TZQx0gKiRZvN
- vbgw==
+ d=linaro.org; s=google; t=1754042046; x=1754646846; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=MJUu7NeXkUSt7PVoZe1fVwIPkXbnkgWjZWnssAblxnc=;
+ b=ln13H0tKxuVUaK2iQzdbV+8dunDJ2Ge0F6D4YFa7DDnV5CleDKwVUaYJj4g95LgbNj
+ LiLa9k9dM2p04jShiWb9y33QWbW+/cfDESMYrwk1w+G2mW9pJxZtAla6iCJlbuByfJ6z
+ zfvOFK5NnX4b0ry8SW3xcjrGEguZWAKCJ+tU4P/MQVVC/0Wg07eG5aKynS4IbzUNU5yp
+ 1UIeaga/JXiBDTuNvegJXoAohg0mtQcJul1R+4NrJOs8rMpOycwDHqK7GHuKj/Ss6fqE
+ ZW1uGAI5NctcVJFx0aWxJN+7XjpKQfXkGruJKWGeF0E2COTZiV6pQGnPLeIDVjptTDbX
+ CxPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754042045; x=1754646845;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sRQoKJvjuN0GwEqkVMrSejIaXN4FAr6c7m6VgHUBCuA=;
- b=kEVsKUAnq7eo7CYzSFxwTPb3mKEseRJ1LLtJnaEiEUF2Eg1LBEAJpDOHqJ27wa8MO6
- IF3vvi2cEANZZEkur2XYSXJmQq3aKBSlRKt6ZUfIa1N2scSWtoNPQDVk0z6pzpnVcRUY
- wd/SMonN5EuZ0BXf3pufpNGA0dxwiJFeKloz+nh+B1WrTymECejmaRs5Wokta+CzHD3w
- pquKERlreyq0k2uaXpAJn4Ha4Eo2ghp90CMgxM6Gll/TezVwoEC9Fz0z7MI5yCkYRGuK
- NBQ1GJp1Zays82R3WMDewwopZ6ZkXa6ktmyd+ahr5kk58RXMuFmJcJVmz5IIZwt+kvKv
- 0vcA==
-X-Gm-Message-State: AOJu0Yw3UQ/OZQW1IrvYYEpMf3z2X+nOwChDct92ozGwWuVf2TGbuZ4V
- RJ/DyYFQ2GmQbvGwipkgp/13r3bQ245yQtoe70LYZe38e2xIpKtsB59we7o0nbfYY9Dl2+KAs39
- dowvs
-X-Gm-Gg: ASbGnctGT6SbiHzzOUCcqCAlpZxagVn7/31OyL3HOVOxQcvAhTY2AVS5RrpOpny9Etc
- dTMy4aRITYk1tvgtlsHEiMkLVhKzTlRHKGdtNbGZaOYS8HO52SWaNEJtwVNXNL6FO9P0CYEjuu1
- o5sVb0hKuuLsK5fqQ3XjM4jlOWsrzZzdb+k1+LHznD0ajMbEfTu94UuOJd7hyYDb3ZC4nXzq8LR
- 6YFq6WADDz5dk6nEXbjazkarHXwVE4OZqQ/mtpLL3HEQbr7OsWN+86H0vxrixakpK5B8mZfdx3E
- IPLTB0XVVWnrZz8pOSdGoI0vegUMG6Jmnk5vGEZT9KZDFcnZJqfCpTBGYJWmBQtU3zi2uLF9eRg
- qs9TL5COAzqzfoQZQ6NjLtqXYkbk/VAA3pQ8vhy3iQ0knDja7s+w=
-X-Google-Smtp-Source: AGHT+IGRBWYm/5c4NrIdaGb/CsTq13CaAda7rukLZBmA+KBKavXgLYlxfxvNliZM8ysRcav+W4BxVw==
-X-Received: by 2002:a05:6000:2889:b0:3b7:9d83:5104 with SMTP id
- ffacd0b85a97d-3b79d838459mr3840629f8f.51.1754042045399; 
- Fri, 01 Aug 2025 02:54:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754042046; x=1754646846;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MJUu7NeXkUSt7PVoZe1fVwIPkXbnkgWjZWnssAblxnc=;
+ b=VSpCdAGfNynsafPPVhAvLg5Juv9ZOgPmXpLX/cD9W4nO5IA5BinQgsUSsGO6A8EGsk
+ BNeG1WtCX3fc+4ZVk47B2yhF34lWNka7ZwIchYLcTQEbiYBXeJEAxcMVZ0BEG6DUFhbG
+ aA/dLyYf2/KOThXQc62r2dtf6V1zNuGEfVJtADnhiT615fHOkVIo9Zq6ouFXQIFk8cLS
+ AxakzHv3KC3m3Ru4gkLCYLrTUvZQSTewkLarzFMNkOPeHDQGLE+3ZCEqquwRjjvZbUvZ
+ /IEGY2c/iQz6Yuuw8ulLhtGuCZaxs5xe+xHJS9f137yUV3PTJr/IAgfnWa+zWmB8kOhl
+ xMQw==
+X-Gm-Message-State: AOJu0YycHhMI4wuD8mlQkywVcgAZ5SYIGK5zK30D00y4AeeaaMoRV6dt
+ E8SFQiDH9Bnl6SZgRzwjzqwUhZmqsIQdTGImmXhbB5Ls0mOJeTg+ozeYw8DZDyIGJuY45ehPFL5
+ y7s5c
+X-Gm-Gg: ASbGncvWSnfcBq6+VnQ1gGbqWf+ae5J/IkF7MCbWCpgQQxJ6YXhVFmEDl6g1LqRCBB1
+ +nGUnvY7dyUl86lDbuEDwKaNsBw659kwclrdxEdRaXuZMvyYfrDnJ7Se68d36bu2/Q2fyA4iv9n
+ 25n63N36o7f9OPCLGNsNQEP4I/z2VruubPZYDP6QHZo6BZ2bZ9QX2A4QthHEmMhr0fEaLsvtTgL
+ pJ/yLSbj+eTSIQS0vghI2nNTDyWlGukhyB/1FisPRCWWjQTyUkSLK/9vSdr5Ok1EfK/JsmpipI7
+ 3P3a1005rr3jeZLN/GpquOSPQgBF9A7Cvrej3gdFinNTh/ZvurUVrmTaN9a1cra4jsCqEhchCQ3
+ xIuLKb66vxbKbyIkiDrKlqt0rQZJ3HK8e/d1rZyuU4vcnTSPTziU=
+X-Google-Smtp-Source: AGHT+IHwHpmrM7sSn0OYJ/qcYalk/0Gz0dUqPcZiFS8Tl8myTPOnGIb4qE2cpPiJ/AX1yDBp6KdqTg==
+X-Received: by 2002:a05:600c:5027:b0:456:1204:e7e2 with SMTP id
+ 5b1f17b1804b1-45892b9f1e1mr102650215e9.12.1754042046230; 
+ Fri, 01 Aug 2025 02:54:06 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:cc6e:5422:ab75:92e8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458953eba17sm95280515e9.24.2025.08.01.02.54.04
+ 5b1f17b1804b1-458953eba17sm95280515e9.24.2025.08.01.02.54.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Aug 2025 02:54:04 -0700 (PDT)
+ Fri, 01 Aug 2025 02:54:05 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [PATCH 0/3] mtd: rawnand: Fix some Smatch reported issues
-Date: Fri, 01 Aug 2025 10:54:03 +0100
-Message-Id: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
+Date: Fri, 01 Aug 2025 10:54:04 +0100
+Subject: [PATCH 1/3] mtd: rawnand: cortina_nand: Fix -ENOMEM detection
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALuOjGgC/x2NQQqDQAwAvyI5d2FVtth+pRSJJltzMC2J2IL4d
- 9ceh2GYDZxN2OFebWC8istbC9SXCsYJ9cVBqDA0sUmxi3WYF+oVlXrDb+jomm45c6KWoCQDOof
- BUMfpjGb0he0UH+Msv//n8dz3Awk2LPV3AAAA
+Message-Id: <20250801-mtd_nand_raw-v1-1-80c316f5bb99@linaro.org>
+References: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
+In-Reply-To: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
 To: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>, 
@@ -103,28 +102,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reported some issues with rawnand code.
-Firstly detecting allocation failures for cortina.
-Secondly an always true test for denali.
-Lastly using goto an error path without setting the error code for
-return for mxs_nand.
+In init_nand_dma there was code to detect failure to allocate memory but
+it had two problems. Firstly the 2nd clause when info->tx_desc was NULL
+attempted to free info->tx_desc when it should be freeing info->rx_desc.
+Secondly there was no detection of both allocations failing, arguably
+the more likely scenario. Refactor the code to simplify it and just fail
+as soon as either allocation fails.
+
+This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-Andrew Goodbody (3):
-      mtd: rawnand: cortina_nand: Fix -ENOMEM detection
-      mtd: rawnand: denali: Remove always true test
-      mtd: rawnand: mxs_nand: Ensure err is set for error path
-
  drivers/mtd/nand/raw/cortina_nand.c | 11 +++++------
- drivers/mtd/nand/raw/denali.c       | 10 +++-------
- drivers/mtd/nand/raw/mxs_nand.c     |  6 ++++--
- 3 files changed, 12 insertions(+), 15 deletions(-)
----
-base-commit: 79f3e77133bd7248e4579827effc13f97a32a8a8
-change-id: 20250801-mtd_nand_raw-8d659ffe5d3d
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-Best regards,
+diff --git a/drivers/mtd/nand/raw/cortina_nand.c b/drivers/mtd/nand/raw/cortina_nand.c
+index 06918a46e93..a27a6994f56 100644
+--- a/drivers/mtd/nand/raw/cortina_nand.c
++++ b/drivers/mtd/nand/raw/cortina_nand.c
+@@ -186,14 +186,13 @@ int init_nand_dma(struct nand_chip *nand)
+ 
+ 	info->tx_desc = malloc_cache_aligned((sizeof(struct tx_descriptor_t) *
+ 					      CA_DMA_DESC_NUM));
+-	info->rx_desc = malloc_cache_aligned((sizeof(struct rx_descriptor_t) *
+-					      CA_DMA_DESC_NUM));
+-
+-	if (!info->rx_desc && info->tx_desc) {
++	if (!info->tx_desc) {
+ 		printf("Fail to alloc DMA descript!\n");
+-		kfree(info->tx_desc);
+ 		return -ENOMEM;
+-	} else if (info->rx_desc && !info->tx_desc) {
++	}
++	info->rx_desc = malloc_cache_aligned((sizeof(struct rx_descriptor_t) *
++					      CA_DMA_DESC_NUM));
++	if (!info->rx_desc) {
+ 		printf("Fail to alloc DMA descript!\n");
+ 		kfree(info->tx_desc);
+ 		return -ENOMEM;
+
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.39.5
 
