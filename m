@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA13C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 17:49:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20F45C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 19:32:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3498283ABE;
-	Fri,  1 Aug 2025 19:49:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ECD7B83A84;
+	Fri,  1 Aug 2025 21:32:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I+c38XjI";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kc+tIGyY";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qxRUmHi/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 780F083AD1; Fri,  1 Aug 2025 19:49:43 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D87C683A8D; Fri,  1 Aug 2025 21:32:05 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E6483AAD
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 19:49:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C3C483A1C
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 21:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-3323d8e0ac4so16879221fa.0
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 10:49:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754070580; x=1754675380; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ym6sghZJARvJYdd3BUg9ZmR6Uh7L+6M7GBYY1BeuUXg=;
- b=I+c38XjIq7He8/ac7povCXmVHZTOOmuhJxBOBQPi+uciTNnn7rDGm9VSOayKQruLP/
- wIxu1ldxg/v42ZE74NwiQryarasXmXiMJE15O3FKEeFDh3dvqw/IjfqYTKY1ZmVeD6SS
- I/hRoAy1QGlLQmOG21KvDGsFIquMRfylLti/gj+ZkgHSMVjFK3aBZOABSVH5qbu6HfyZ
- yM0/NG0eouFNDC8Qz97sZ7GdCwlTetKJD6VooytkQl1h8Ey4a3ghnykQD2epqGpcpd0K
- a54q/Bm46ipIymsGN1t74FmJm5aCzobfH5TRSMTOYCOsDEEFKANAGO1aqsYTPT4i/SR/
- p5nA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754070580; x=1754675380;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ym6sghZJARvJYdd3BUg9ZmR6Uh7L+6M7GBYY1BeuUXg=;
- b=M9NyjzUEpKDIz5P94WD0hMZLWMpLbH/B7PRPeZ0T4cyhK9KvSxtGpN9M+O5xQ/MKWD
- b5d5RPim9QqhB5q8GJ6O6gXROGsdv/lxOUcEnapl4xaG4yD3ub2WPdiMs5afRrmWpQnS
- i3WWNdcs2nuWayYtIX0HTt/w9AJ4rD0Ad17V4/mNmckS8L+w3nXUH38qnWm8f4sLzViq
- ehjdXZK8mQcMrhA6DZ3AcDQgFVojyjuYvI4O6iOAbli6xiyXeyZxtMhnsVdtjlPMi7AS
- riDmkGN5uaPN34EygS6hssjHnR7IBALTmoTVly+9bscwwAXrNX9FEwOy5qOC+OhHZzfC
- x2Xg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXP+HLtylJtHfbdUZ3OL7xvd0OWMnBVjCgx5u1UZE/HEMMPIDc0YUHRX47toH7KGYyy4C6QaX8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYWEsnj8eH91+nmAOSABMsopOy9WAJze8W2yGvqfT9xa2o93zz
- u8zu2f6J4Tq5DfjgYordmmW5jQgvMaEF2eQ6Dik5/I4uUbM9e/cWBNTLWrTAPlotwKis4sKD13h
- 6wP6JCVQZqOrih4kw8j37OfJOPu9vEcI=
-X-Gm-Gg: ASbGncu8f6svwaEd3XWLqCT49kVYTiWWrxuIGudxbdqj/NwCvuulefD0GGticpghn6u
- g1BQjncco1Sxz7JjoVkxiuHYXxoE0sQy89ONwyYqJjCu0q4uDdQIK15JPjI/286qJeeKdPEzQzD
- VFN3qRBDtG+RO+gufrvfM+bXYzqqJrAnYbGtWKmW/mXOlaWUHre66qD5AyeC2WK4xz8BSXIbK7j
- J+MW94UgcSgoHT3zLYV4IIjo8Fk1TqYtnmoJ6E=
-X-Google-Smtp-Source: AGHT+IHYIf1K8XolS9w8qc8q7V04//DxBmYpb8gg8H+kkbIN7bSeyfBDyPLIbQAicI8/QtoUmDAjtUHn8q/KzxHU3tg=
-X-Received: by 2002:a05:651c:31db:b0:32a:7826:4d42 with SMTP id
- 38308e7fff4ca-332567e7391mr773921fa.31.1754070580107; Fri, 01 Aug 2025
- 10:49:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4btx0g1k3wz9swD;
+ Fri,  1 Aug 2025 21:32:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754076723;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9u0Au1vqmAUK+flIjJqfFDbj5kxUTA6/fv84KUVIi/E=;
+ b=kc+tIGyYqyyjhAJ+XLDeuUK6JR+LwflpvgAGCGjVO6s82i8g5o/YS5YCbeWAi8TbUD0Ddf
+ YTLcCi3kCtNY7z3aIXe05oF9N9YLEPGVr0kbwj/bho9fUjM5sobNPQmOSBxJN5PB6SP0U6
+ Bk0TDPKAIAuoSqsPs5yEob6JC/JacVkgpBJkkEhoWEUImlUn2x1EJdXfHl2FCe9R0v/2vB
+ ZZHOn3vcqC0QzYWwmhR0oF2hc7jVec1qhUCGOLh3tW3NYbhPP+Z/O/fLM0avZsTo/BT5Mj
+ zXzLpxQQx1nL0QF3L6AZ/XQ9tGUirGgVJw6PKjx5TvJD9qZTGLyTX76ftY/s7Q==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="qxRUmHi/";
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <0aa5523b-d384-48c2-b156-e7a8a91da29c@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754076721;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9u0Au1vqmAUK+flIjJqfFDbj5kxUTA6/fv84KUVIi/E=;
+ b=qxRUmHi/5CTQFK4tPDCgvPHFCoP9wybJswv25K6htTY7qugtJyywof+vqpC0buoDi1/BTF
+ 8BB5sFcMFqCdx7u/fV63ElqG4m4SwdoaVPuRZnKeGPBPVgqvCxWjupxFh2MSD3dp8o/MXw
+ 0xG8uKSkDvvwX9BVa5HvyM2XH02WZRt49lUmjCFBsZWIKlAT7LlUxw2CVfaMU7MlPLBtvY
+ WhUlCUucuEH5gQrTpraVI5VcK1yjiV1B+j4jQR/XHiq+NkZ3ZoF3PuBK/K6xGtzFe90xcA
+ puM7aJ9aUSIGL/VJ7vhEmZf8UATetI+PjqiZkG0hrG0R9lttX0gQChUgaX26RQ==
+Date: Fri, 1 Aug 2025 21:31:57 +0200
 MIME-Version: 1.0
-References: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 1 Aug 2025 14:49:28 -0300
-X-Gm-Features: Ac12FXx4uOoDzGPSTGs7t2VQnGGRFbkEC4e0XSIFBYSfjFbxZFY6vHZbvKlT24Y
-Message-ID: <CAOMZO5A1q1vhDV7rR1i-qu7A8n7bcL9pXgCMdzGNnO6BY=dggw@mail.gmail.com>
 Subject: Re: [PATCH] imx95_evk: Restore support for i.MX95 A0 silicon
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: tharvey@gateworks.com, sbabic@nabladev.com, uboot-imx@nxp.com, 
- trini@konsulko.com, peng.fan@nxp.com, ye.li@nxp.com, alice.guo@nxp.com, 
- sumit.garg@oss.qualcomm.com, marek.vasut+renesas@mailbox.org, 
- aford173@gmail.com, sjg@chromium.org, Zhiqiang.Hou@nxp.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, tharvey@gateworks.com,
+ sbabic@nabladev.com, festevam@gmail.com, uboot-imx@nxp.com,
+ trini@konsulko.com, peng.fan@nxp.com, ye.li@nxp.com, alice.guo@nxp.com,
+ sumit.garg@oss.qualcomm.com, marek.vasut+renesas@mailbox.org,
+ aford173@gmail.com, sjg@chromium.org, Zhiqiang.Hou@nxp.com
+Cc: u-boot@lists.denx.de
+References: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250722204709.2075421-1-alice.guo@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: ee4b6a9af056477c9af
+X-MBO-RS-META: ort5cabyppgwab558sf6nt4t5znrz7f6
+X-Rspamd-Queue-Id: 4btx0g1k3wz9swD
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,81 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
-
-On Fri, Aug 1, 2025 at 6:52=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
-om> wrote:
-
+On 7/22/25 10:47 PM, Alice Guo (OSS) wrote:
+> From: Alice Guo <alice.guo@nxp.com>
+> 
+> This patch is used to restore support for i.MX95 A0 silicon. The usage
+> is updated in imx95_evk.rst.
+> 
+> Fixes: 9936724aa9b ("imx95_evk: Add i.MX95 B0 support")
+> 
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> ---
+>   arch/arm/mach-imx/imx9/Kconfig            |   5 +-
+>   arch/arm/mach-imx/imx9/scmi/container.cfg |   2 +
+>   arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  11 ++
+>   configs/imx95_a0_19x19_evk_defconfig      | 153 ++++++++++++++++++++++
+>   doc/board/nxp/imx95_evk.rst               |  41 +++++-
+>   5 files changed, 207 insertions(+), 5 deletions(-)
+>   create mode 100644 configs/imx95_a0_19x19_evk_defconfig
+> 
+> diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+> index 4e0e194690b..a306203b111 100644
+> --- a/arch/arm/mach-imx/imx9/Kconfig
+> +++ b/arch/arm/mach-imx/imx9/Kconfig
+> @@ -25,6 +25,9 @@ config IMX91
+>   	select ARCH_MISC_INIT
+>   	select ARMV8_SPL_EXCEPTION_VECTORS
+>   
 > +config IMX95_A0
-> +       bool "Choice i.MX95 A0"
-
-"Support for i.MX95 A0 silicon version"
-
-> diff --git a/configs/imx95_a0_19x19_evk_defconfig b/configs/imx95_a0_19x1=
-9_evk_defconfig
-> new file mode 100644
-> index 00000000000..e3b17152b50
-> --- /dev/null
-> +++ b/configs/imx95_a0_19x19_evk_defconfig
-
-Instead of duplicating the defconfigs, please create a common
-defconfig that can be shared between imx95_a0_19x19_evk_defconfig and
-imx95_19x19_evk_defconfig.
-
-Then include this common defconfig. This helps reduce the maintainance effo=
-rts.
-
-Check this idea in commit b2a39e4cb893 ("arm64: imx: Deduplicate DH
-i.MX8MP DHSOM defconfigs")
-
-> +i.MX95 A0:
-
-i.MX95 A0 silicon version
-
+> +	bool "Choice i.MX95 A0"
 > +
-> +.. code-block:: bash
-> +
-> +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-1.3=
-.0-17945fc.bin
-> +   $ sh firmware-ele-imx-1.3.0-17945fc.bin --auto-accept
-> +   $ cp firmware-ele-imx-1.3.0-17945fc/mx95a0-ahab-container.img $(srctr=
-ee)
-> +
-> +i.MX95 B0:
-
-i.MX95 B0 silicon version
-
-> +
->  .. code-block:: bash
->
->     $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-2.0=
-.2-89161a8.bin
-> @@ -53,12 +63,24 @@ branch: master
->     $ export TOOLS=3D$PWD
->     $ git clone -b master https://github.com/nxp-imx/imx-oei.git
->     $ cd imx-oei
-> -   $ make board=3Dmx95lp5 oei=3Dddr DEBUG=3D1
-> +
-> +i.MX95 A0:
-
-i.MX95 A0 silicon version
-
-> +i.MX95 B0:
-
-i.MX95 B0 silicon version
-
-
->  Build the Bootloader Image
->  --------------------------
->
-> +i.MX95 A0:
-
-i.MX95 A0 silicon version
-
-> +
-> +.. code-block:: bash
-> +
-> +   $ export CROSS_COMPILE=3Daarch64-poky-linux-
-> +   $ make imx95_a_19x19_evk_defconfig
-
-There is a typo here (should be a0 instead of a).
+>   config IMX95
+>   	bool
+>   	select ARCH_MISC_INIT
+> @@ -33,7 +36,7 @@ config IMX95
+>   	select DM_MAILBOX
+>   	select SCMI_FIRMWARE
+>   	select SPL_IMX_CONTAINER_USE_TRAMPOLINE
+> -	select IMX_PQC_SUPPORT
+> +	select IMX_PQC_SUPPORT if !IMX95_A0
+>   
+>   config SYS_SOC
+>   	default "imx9"
+> diff --git a/arch/arm/mach-imx/imx9/scmi/container.cfg b/arch/arm/mach-imx/imx9/scmi/container.cfg
+> index b25f3b726c5..bc10cdb227b 100644
+> --- a/arch/arm/mach-imx/imx9/scmi/container.cfg
+> +++ b/arch/arm/mach-imx/imx9/scmi/container.cfg
+> @@ -3,7 +3,9 @@
+>    * Copyright 2025 NXP
+>    */
+>   
+> +#ifndef CONFIG_IMX95_A0
+>   CNTR_VERSION 2
+> +#endif
+>   BOOT_FROM SD
+>   SOC_TYPE IMX9
+>   CONTAINER
+Generate this whole file using binman, and then specify the SoC variant 
+in control DT, as yet another binman image etype property .
