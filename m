@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A22DC87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 20:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE73EC87FCA
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 20:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A01F83B0E;
-	Fri,  1 Aug 2025 22:38:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 78A7883B7F;
+	Fri,  1 Aug 2025 22:44:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="W43SxNim";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="YVHcJ+k2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2F0583B0E; Fri,  1 Aug 2025 22:38:15 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 1B09283B7F; Fri,  1 Aug 2025 22:43:59 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7242483B07
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 22:33:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02E3F83B52
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 22:43:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=984e=2O=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1754080427; bh=lL6vhK0lDCWL75uO7s+BKGZAWgFWvwfSrEWtLUjQ/qI=;
- b=W43SxNimdzvrhOxuUl1CQYEfr65gCzARFpDUfx8RdrN/ko5f4ZRtKnefBqycClHT5vdHcLkyE
- h8lxhz5qMTp8oGXrryX2fCHiPA5zJ4ExAfw+E1naIbB8e5FNBhNo+5lnca1IoN9YiYmka50xq9c
- rMFkX66oevYklWZLS1WGn2K9jsb4bkwfwIrebLSbYUHJeXJPx6iRBbWCjB0cLTIyR1ohl4ziFlC
- rEW5saSSy5Ljzqshtc6UowO/TwF8x+6I9rkUq/edPJ11IShGEyY0noi+0Q0J92Zt8FlKvnibFZs
- xTQZLhIji2vf7k2n/IKATpqAzLBeJogkiZGoe+HhrLpQ==
-X-Forward-Email-ID: 688d249303c11ad401760963
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1754081034;
+ bh=HCREpVcO7RlftNpH4CT2Pjz0Dz50pnYLjfJrABARlD0=;
+ b=YVHcJ+k2j7I7M40rIX1uj67SgQmlQKrDcUH0SE+IlX7/H5IX4n+8EwVOaeVr18db76Ve9Sj40
+ D7Ds3z625EIRwtAUsIedXKfk3SOm9zGmJk5R8N102HQ/WrbZm9GNAyIW0gIk5oyCCdVpavcYNLf
+ rQEod4x2c7jTR0WfmUW7sT3Gk1+8nwmbi41kmH+sO/NX2OPhv6St1I1BVqHpfIdnBLQlKhvkLJf
+ +viUhfegnG0kH1AxyRnFKSOvnVfDtKqKFjf7g/T5gg5Zh7I86o3pXQ/hXKqU1RJ0W8N+wpkivSz
+ AuW7QxQATKj8r/6xvLMDi05HQ+igqieu1XOIWf5WGNPg==
+X-Forward-Email-ID: 688d2706f149f34f87aecb38
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 1.1.8
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -45,14 +45,12 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
- Frank Wang <frank.wang@rock-chips.com>
-Subject: [PATCH v3 7/8] phy: rockchip-inno-usb2: Add support for RK3576
-Date: Fri,  1 Aug 2025 20:32:43 +0000
-Message-ID: <20250801203255.2590535-8-jonas@kwiboo.se>
+Cc: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3 0/3] board: rockchip: Add ArmSoM Sige5
+Date: Fri,  1 Aug 2025 20:43:36 +0000
+Message-ID: <20250801204345.2603723-1-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250801203255.2590535-1-jonas@kwiboo.se>
-References: <20250801203255.2590535-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,64 +69,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Frank Wang <frank.wang@rock-chips.com>
+This series add support for the ArmSoM Sige5 board and is a split from
+the "rockchip: rk3576: Add rng, checkboard() and ArmSoM Sige5" v1 [1]
+series.
 
-Add support for the USB2.0 PHYs used in the RK3576 SoC.
+Changes in v3:
+- Ensure USB3OTG U3 port is enabled when USB3 PHY is used
+- Drop device tree patches merged with the v6.16-dts sync
 
-Config values are taken from vendor U-Boot linux-6.1-stan-rkr5 tag.
+Changes in v2:
+- Pick dts/upstream commits to add PCIe nodes
+- Add support for RK3576 to the naneng-combphy driver
+- Enable PCIe, NVMe and USB Kconfig options
 
-Signed-off-by: Frank Wang <frank.wang@rock-chips.com>
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-v3: New patch
----
- drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
+This series depends on the "rockchip: rk3576: Add rng, checkboard() and
+generic board" v3 [1] series for a clean apply.
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-index a3222138b9d0..4ea6600ce7f5 100644
---- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-+++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -465,6 +465,28 @@ static const struct rockchip_usb2phy_cfg rk3568_phy_cfgs[] = {
- 	{ /* sentinel */ }
- };
- 
-+static const struct rockchip_usb2phy_cfg rk3576_phy_cfgs[] = {
-+	{
-+		.reg		= 0x0000,
-+		.clkout_ctl	= { 0x0008, 0, 0, 1, 0 },
-+		.port_cfgs	= {
-+			[USB2PHY_PORT_OTG] = {
-+				.phy_sus	= { 0x0000, 1, 0, 2, 1 },
-+			}
-+		},
-+	},
-+	{
-+		.reg		= 0x2000,
-+		.clkout_ctl	= { 0x2008, 0, 0, 1, 0 },
-+		.port_cfgs	= {
-+			[USB2PHY_PORT_OTG] = {
-+				.phy_sus	= { 0x2000, 1, 0, 2, 1 },
-+			}
-+		},
-+	},
-+	{ /* sentinel */ }
-+};
-+
- static const struct rockchip_usb2phy_cfg rk3588_phy_cfgs[] = {
- 	{
- 		.reg		= 0x0000,
-@@ -526,6 +548,10 @@ static const struct udevice_id rockchip_usb2phy_ids[] = {
- 		.compatible = "rockchip,rk3568-usb2phy",
- 		.data = (ulong)&rk3568_phy_cfgs,
- 	},
-+	{
-+		.compatible = "rockchip,rk3576-usb2phy",
-+		.data = (ulong)&rk3576_phy_cfgs,
-+	},
- 	{
- 		.compatible = "rockchip,rk3588-usb2phy",
- 		.data = (ulong)&rk3588_phy_cfgs,
+[1] https://patchwork.ozlabs.org/cover/2118071/
+
+Jon Lin (1):
+  phy: rockchip: naneng-combphy: Add support for RK3576
+
+Jonas Karlman (2):
+  rockchip: clk: clk_rk3576: Add dummy CLK_REF_PCIEx_PHY support
+  board: rockchip: Add ArmSoM Sige5
+
+ arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi  |  18 +++
+ arch/arm/mach-rockchip/rk3576/MAINTAINERS     |   6 +
+ configs/sige5-rk3576_defconfig                |  66 ++++++++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ drivers/clk/rockchip/clk_rk3576.c             |   2 +
+ .../rockchip/phy-rockchip-naneng-combphy.c    | 147 ++++++++++++++++++
+ 6 files changed, 240 insertions(+)
+ create mode 100644 arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
+ create mode 100644 configs/sige5-rk3576_defconfig
+
 -- 
 2.50.1
 
