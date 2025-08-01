@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E7F4C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 09:54:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC75C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Aug 2025 09:54:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60C5183A05;
-	Fri,  1 Aug 2025 11:54:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B01F783A1C;
+	Fri,  1 Aug 2025 11:54:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ln13H0tK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DccotSVn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E3C183A22; Fri,  1 Aug 2025 11:54:13 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 9D5C283A05; Fri,  1 Aug 2025 11:54:13 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB19E83A05
- for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 11:54:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80ACC83A13
+ for <u-boot@lists.denx.de>; Fri,  1 Aug 2025 11:54:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-45555e3317aso3523465e9.3
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 02:54:06 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3b783ea5014so400432f8f.0
+ for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 02:54:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754042046; x=1754646846; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754042048; x=1754646848; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MJUu7NeXkUSt7PVoZe1fVwIPkXbnkgWjZWnssAblxnc=;
- b=ln13H0tKxuVUaK2iQzdbV+8dunDJ2Ge0F6D4YFa7DDnV5CleDKwVUaYJj4g95LgbNj
- LiLa9k9dM2p04jShiWb9y33QWbW+/cfDESMYrwk1w+G2mW9pJxZtAla6iCJlbuByfJ6z
- zfvOFK5NnX4b0ry8SW3xcjrGEguZWAKCJ+tU4P/MQVVC/0Wg07eG5aKynS4IbzUNU5yp
- 1UIeaga/JXiBDTuNvegJXoAohg0mtQcJul1R+4NrJOs8rMpOycwDHqK7GHuKj/Ss6fqE
- ZW1uGAI5NctcVJFx0aWxJN+7XjpKQfXkGruJKWGeF0E2COTZiV6pQGnPLeIDVjptTDbX
- CxPQ==
+ :reply-to; bh=lTukS27oYCucSASAInpMBahtzHjguq7iNg2FVwjXyFM=;
+ b=DccotSVnrVOUrZdpIG9c/vj4tlhHIEasqXYjU0QBv5Gr026GpyB9XVmSLvw+LvHtK0
+ Qnp5JLBaPVP4WGYD2aggslIxgbcBRUgUG3ABlU5yagEpHx+q/GBoVaznA071vSMEYKtN
+ xIHeIeUKnfkssY9Q6cTT/y4j4qHKtHZlifZ7+58/vAuzWsQsi3KSpMYtJSd8P0P0it7P
+ 4BOZNX+d3JBb0w5i4jVCDivi/wHGfvaa5ix/05zQsV5uTgk2sw29ieCC60zWVxARIswS
+ 3I2Q4DeZE1pXudjySSx2kpBxt0mbgFhMeFBXPXZce5CUuBGcTVtmpDb68a6I93fTzNd4
+ YQug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754042046; x=1754646846;
+ d=1e100.net; s=20230601; t=1754042048; x=1754646848;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MJUu7NeXkUSt7PVoZe1fVwIPkXbnkgWjZWnssAblxnc=;
- b=VSpCdAGfNynsafPPVhAvLg5Juv9ZOgPmXpLX/cD9W4nO5IA5BinQgsUSsGO6A8EGsk
- BNeG1WtCX3fc+4ZVk47B2yhF34lWNka7ZwIchYLcTQEbiYBXeJEAxcMVZ0BEG6DUFhbG
- aA/dLyYf2/KOThXQc62r2dtf6V1zNuGEfVJtADnhiT615fHOkVIo9Zq6ouFXQIFk8cLS
- AxakzHv3KC3m3Ru4gkLCYLrTUvZQSTewkLarzFMNkOPeHDQGLE+3ZCEqquwRjjvZbUvZ
- /IEGY2c/iQz6Yuuw8ulLhtGuCZaxs5xe+xHJS9f137yUV3PTJr/IAgfnWa+zWmB8kOhl
- xMQw==
-X-Gm-Message-State: AOJu0YycHhMI4wuD8mlQkywVcgAZ5SYIGK5zK30D00y4AeeaaMoRV6dt
- E8SFQiDH9Bnl6SZgRzwjzqwUhZmqsIQdTGImmXhbB5Ls0mOJeTg+ozeYw8DZDyIGJuY45ehPFL5
- y7s5c
-X-Gm-Gg: ASbGncvWSnfcBq6+VnQ1gGbqWf+ae5J/IkF7MCbWCpgQQxJ6YXhVFmEDl6g1LqRCBB1
- +nGUnvY7dyUl86lDbuEDwKaNsBw659kwclrdxEdRaXuZMvyYfrDnJ7Se68d36bu2/Q2fyA4iv9n
- 25n63N36o7f9OPCLGNsNQEP4I/z2VruubPZYDP6QHZo6BZ2bZ9QX2A4QthHEmMhr0fEaLsvtTgL
- pJ/yLSbj+eTSIQS0vghI2nNTDyWlGukhyB/1FisPRCWWjQTyUkSLK/9vSdr5Ok1EfK/JsmpipI7
- 3P3a1005rr3jeZLN/GpquOSPQgBF9A7Cvrej3gdFinNTh/ZvurUVrmTaN9a1cra4jsCqEhchCQ3
- xIuLKb66vxbKbyIkiDrKlqt0rQZJ3HK8e/d1rZyuU4vcnTSPTziU=
-X-Google-Smtp-Source: AGHT+IHwHpmrM7sSn0OYJ/qcYalk/0Gz0dUqPcZiFS8Tl8myTPOnGIb4qE2cpPiJ/AX1yDBp6KdqTg==
-X-Received: by 2002:a05:600c:5027:b0:456:1204:e7e2 with SMTP id
- 5b1f17b1804b1-45892b9f1e1mr102650215e9.12.1754042046230; 
- Fri, 01 Aug 2025 02:54:06 -0700 (PDT)
+ bh=lTukS27oYCucSASAInpMBahtzHjguq7iNg2FVwjXyFM=;
+ b=tMaaKhwNksD2xuC5/ZgYL7FMCnHxpW5jJhWjggwpY9D4fCTy7JqNzAyXVARxcBLryf
+ RhOGnpcT+SNeUBhNdhqzTcM8oewVEAjhyItGuidNo+NwF2kkX21HkrEMjaKZFS1B1BDu
+ TCnuCGL0eeV8Z0MLowVfIia3dfiBNYfZPwDzSmXoaqMg/6ekK+IPfWRP3dOYwZ4BeKLN
+ qznIyw3rQYB79If7Mqz+KsqlxbkohYpAcsFHCJhvNX/1IZbBpwShQ82nXq+YhwSnwazy
+ VPl7RgK8TfEqrEdd9z1r+j6f3QV/glohPNZq4HodX2RgcGof666KM6oBPi3b37IZLo5F
+ 945g==
+X-Gm-Message-State: AOJu0YwtOS129RKwDSVH4Mk1IENnICyy++YkG7yPDl/+kN0cjhc2XvI8
+ Gtd3LFeP+fjpOVAOI3OSEknr+l0dzBx1ofFOny/O/1/VGkuSKPV8tSxIbCAjqTDbkN8=
+X-Gm-Gg: ASbGncvqODoLI7cKHBnZk8OGKDHb25YO++4VTB72eN/lPs7blxTshZdNUYB8wEnqmyy
+ RyQmgxpmlj9O6an5/Q/c21jH98E8zcfVPy/m+vG10BnrNR8IM/s5tZpg4ULQrQzwHHqSIK9SnIB
+ DZmks6HuHlnw60oUR6ddP/lHYu8Jv5UknfL6XTqKQmCkSm44UDjYyJ8X8+Ug8EeKo4RMQaV/Hjw
+ nriNLBH9hEZI6I+fasw5pjfQK5dlmzB+iN/GzBnODqebdrzYrq++9TP2MM5eD/2zei49wdlSlaj
+ /FPTkXlu8Ud6RN/Lnd3p/+WIwTVAwUhwZmiTI7FsM+BSlU29tk8s+R4E4YDU6t+iX4yOKyWU2ul
+ HQBRy4XxckiZvbY52jzF3BBXTWSBjc072QOo/WZC84UCkT7cDg9oCq7a/chiQGQ==
+X-Google-Smtp-Source: AGHT+IEnvDPy9yRHp2u21vcKkv/p45dhMkTI7R15PqOOKGw/5LoFLBEYEixIlA7HzBzlgUFee2NptQ==
+X-Received: by 2002:a05:6000:2891:b0:3b7:b5c3:5dd9 with SMTP id
+ ffacd0b85a97d-3b7b5c364e2mr4633104f8f.57.1754042047808; 
+ Fri, 01 Aug 2025 02:54:07 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:cc6e:5422:ab75:92e8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458953eba17sm95280515e9.24.2025.08.01.02.54.05
+ 5b1f17b1804b1-458953eba17sm95280515e9.24.2025.08.01.02.54.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Aug 2025 02:54:05 -0700 (PDT)
+ Fri, 01 Aug 2025 02:54:07 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 01 Aug 2025 10:54:04 +0100
-Subject: [PATCH 1/3] mtd: rawnand: cortina_nand: Fix -ENOMEM detection
+Date: Fri, 01 Aug 2025 10:54:06 +0100
+Subject: [PATCH 3/3] mtd: rawnand: mxs_nand: Ensure err is set for error path
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250801-mtd_nand_raw-v1-1-80c316f5bb99@linaro.org>
+Message-Id: <20250801-mtd_nand_raw-v1-3-80c316f5bb99@linaro.org>
 References: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
 In-Reply-To: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
 To: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
@@ -102,44 +101,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In init_nand_dma there was code to detect failure to allocate memory but
-it had two problems. Firstly the 2nd clause when info->tx_desc was NULL
-attempted to free info->tx_desc when it should be freeing info->rx_desc.
-Secondly there was no detection of both allocations failing, arguably
-the more likely scenario. Refactor the code to simplify it and just fail
-as soon as either allocation fails.
+In mxs_nand_init_ctrl there are a couple of error paths that do not set
+err which could lead to the errors being silently ignored despite the
+function not completing. Rather than just using if to detect these
+errors use err to collect the error return value from the called
+functions.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/mtd/nand/raw/cortina_nand.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ drivers/mtd/nand/raw/mxs_nand.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mtd/nand/raw/cortina_nand.c b/drivers/mtd/nand/raw/cortina_nand.c
-index 06918a46e93..a27a6994f56 100644
---- a/drivers/mtd/nand/raw/cortina_nand.c
-+++ b/drivers/mtd/nand/raw/cortina_nand.c
-@@ -186,14 +186,13 @@ int init_nand_dma(struct nand_chip *nand)
+diff --git a/drivers/mtd/nand/raw/mxs_nand.c b/drivers/mtd/nand/raw/mxs_nand.c
+index ba67466069b..fecf1f5ba91 100644
+--- a/drivers/mtd/nand/raw/mxs_nand.c
++++ b/drivers/mtd/nand/raw/mxs_nand.c
+@@ -1640,10 +1640,12 @@ int mxs_nand_init_ctrl(struct mxs_nand_info *nand_info)
+ 		nand->setup_data_interface = mxs_nand_setup_interface;
  
- 	info->tx_desc = malloc_cache_aligned((sizeof(struct tx_descriptor_t) *
- 					      CA_DMA_DESC_NUM));
--	info->rx_desc = malloc_cache_aligned((sizeof(struct rx_descriptor_t) *
--					      CA_DMA_DESC_NUM));
--
--	if (!info->rx_desc && info->tx_desc) {
-+	if (!info->tx_desc) {
- 		printf("Fail to alloc DMA descript!\n");
--		kfree(info->tx_desc);
- 		return -ENOMEM;
--	} else if (info->rx_desc && !info->tx_desc) {
-+	}
-+	info->rx_desc = malloc_cache_aligned((sizeof(struct rx_descriptor_t) *
-+					      CA_DMA_DESC_NUM));
-+	if (!info->rx_desc) {
- 		printf("Fail to alloc DMA descript!\n");
- 		kfree(info->tx_desc);
- 		return -ENOMEM;
+ 	/* first scan to find the device and get the page size */
+-	if (nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL))
++	err = nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL);
++	if (err)
+ 		goto err_free_buffers;
+ 
+-	if (mxs_nand_setup_ecc(mtd))
++	err = mxs_nand_setup_ecc(mtd);
++	if (err)
+ 		goto err_free_buffers;
+ 
+ 	nand->ecc.read_page	= mxs_nand_ecc_read_page;
 
 -- 
 2.39.5
