@@ -4,59 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BBEC87FCB
-	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 00:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1ABEC87FD2
+	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 05:09:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E43383BCE;
-	Sat,  2 Aug 2025 02:14:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+	by phobos.denx.de (Postfix) with ESMTP id 0B93C83B6C;
+	Sat,  2 Aug 2025 07:09:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=ixit.cz header.i=@ixit.cz header.b="RygF6B6x";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="auwnfdex";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E89683C02; Sat,  2 Aug 2025 02:14:06 +0200 (CEST)
-Received: from ixit.cz (ip-94-112-25-9.bb.vodafone.cz [94.112.25.9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1163883B86; Sat,  2 Aug 2025 07:09:16 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F93383B86
- for <u-boot@lists.denx.de>; Sat,  2 Aug 2025 02:14:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB39A83B5F
+ for <u-boot@lists.denx.de>; Sat,  2 Aug 2025 07:09:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=david@ixit.cz
-Received: from newone.lan (unknown [10.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by ixit.cz (Postfix) with ESMTPSA id 11CAF160F0D;
- Sat,  2 Aug 2025 02:14:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
- t=1754093644;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6t8v2dOum9cQNMX42Vy39ml8VT3mW5jFIpmw7cXlv9U=;
- b=RygF6B6xUXqVhgfrv8xl3YXLQIB5JOaKZrxrOeLEGglcmsyFGzU+Plyif7t7+C/P36bfzm
- K2mWDpwIgvz+8DhToTMYiU0Gt3alNse2TauBSt2BABgj1wepWoB3M++ZZyJvtYdpcXV7Qg
- R8CYz9xY/ZonvlFkroQz5dDE5skvM7Q=
-From: David Heidelberg <david@ixit.cz>
-To: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- David Heidelberg <david@ixit.cz>
-Cc: u-boot-qcom@groups.io,
-	u-boot@lists.denx.de
-Subject: [RFC PATCH v2 2/2] configs: Add google-pixel3 fragment config for
- Pixel 3 / 3 XL
-Date: Sat,  2 Aug 2025 02:13:57 +0200
-Message-ID: <20250802001359.2122103-2-david@ixit.cz>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250802001359.2122103-1-david@ixit.cz>
-References: <20250802001359.2122103-1-david@ixit.cz>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-458aee6e86aso8409335e9.3
+ for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 22:09:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1754111353; x=1754716153; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zMUr+UII6ds2mW+tD8ivcGa2e7Qx5myGVxEopOa0LHc=;
+ b=auwnfdexSnyL82ACV8tIPl5JDOOWmgkm0dImurDOPTLrwxtIinxokCew5aqi2Zcjnb
+ f3oVbRuI1rYVlMnQw7nvwHrhPjKnccQhxXTwOUfmEpWJ4zSNjlZwTKnEkfZD2OeXMJcF
+ 4udbh96VKdzUzbCQuuzensgRFr2Wm1CCZXGHdPTreqHpaaTzhG6xe9SloqnI/7/urbzS
+ ZQl5T1vihRtIXCZn47+xn014bhtFZK8OYS8JLLO/177hTI664ax72I7atMcvbyM+fAZm
+ rVg6jPsGjASTYTc9G+fwCW62lKQxtJlz7GyX7CF3pUqhVozAeZB+xJnpATWOBGGoU+dG
+ +Zqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754111353; x=1754716153;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zMUr+UII6ds2mW+tD8ivcGa2e7Qx5myGVxEopOa0LHc=;
+ b=tZOSoSBoqCx2YrJZ9UsKQlvWN/gPZ6t9zVULMmRZ59rpcnbYIto4Kc/B58gHoyzeny
+ MUPL5mZnjbQt3b7Zxelg/m80l1yPn9WDQzC4rBtjpEreb0yoF9tUMzfcRODzqaXBHl6b
+ 0e5E9yx4NssZ7ad4oX9nPypFuB7I4C/YMsJkZrR1SufZYDlwiIcaGvATFShPRp9R30k8
+ PTvlHUHbepwRBkOuauh9sIMktUESSz4I45y53jzyYu//1+quJmFX80hapVgrGGpy6LVA
+ 9zh2AyPH2SetHiI6XRrrB7DnXDkfpLpEM6fES7ASVl1ENZilrR5sdPcvG5iXjqOaaW4q
+ hf5w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW1iiEG0Om6gEx/UmI23wMxb8gzDEvYWdCS3ANrkyd9+Qg0y0IkEjaiFbYTXjx2rZeadU7ojTw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFQoWhnJLL/W60FPb2GU12n0tYWj/tH3g13ymK972kPvPhQ5/t
+ 0qokpmCgSr1k9495ylfd2QF4p9RdLxrFdrBSBcSrnfqeEjwg+UbbCdayLsdXQRk913w48THn7ri
+ 0FqXfiI1ZDX9/YzILOniwaHMjLKYS64w=
+X-Gm-Gg: ASbGncsbVqjgmVUmjXr6bSMLalmWoNJqCzTIlCMbxPY3WGmhGXRfW2wx59icIEHYg9A
+ mLDw6UdU+PPq696VhQ/cOZespW1ySmJUWYNoKdzjH2mnC/9Z5AsRBsBE0XtdlWTJe/H2MZxg42M
+ T4bo5Elm8B6LTSU2inu0fA0rsG/CLOAKj0VGYNpcPJJXpLCD5wCvAsPSekfZ50lHCucrp5asved
+ ZkKbgj9
+X-Google-Smtp-Source: AGHT+IHqqtva6N4Nokjc2CIf+R7AfMvdMHYOAhdg07MSdjQwTKgTRNBcfK+lxVPmAoiPai8wO7kYi2rshj7ysxTzwyQ=
+X-Received: by 2002:a05:600c:1d0c:b0:456:1bae:5470 with SMTP id
+ 5b1f17b1804b1-458b69dddedmr11663705e9.8.1754111352938; Fri, 01 Aug 2025
+ 22:09:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250731194731.287715-1-ion@agorria.com>
+ <20250731194731.287715-2-ion@agorria.com>
+In-Reply-To: <20250731194731.287715-2-ion@agorria.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Sat, 2 Aug 2025 08:09:01 +0300
+X-Gm-Features: Ac12FXxBNMuE-0tGdYIzjpwT8kxPeoT0zkdpZXjTc4PVtHh6hFkTzs4Ecyj-4jA
+Message-ID: <CAPVz0n35dWLjNozRJRH17AHvGXGhxNqEf5=nSTDyMdT5GZUCnQ@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] board: samsung: add Samsung Galaxy R (GT-I9103)
+ and Captivate Glide (SGH-i927) support
+To: Ion Agorria <ion@agorria.com>
+Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,34 +97,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a fragment config for the Pixel 3 and Pixel 3 XL.
+=D1=87=D1=82, 31 =D0=BB=D0=B8=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 22:47 Ion =
+Agorria <ion@agorria.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> The Galaxy R (GT-I9103) and Captivate Glide (SGH-i927) are both Tegra 2
+> based Samsung smartphones released in 2011. They both feature 1 GB of RAM
+> and 8 GB of expandable flash memory. The key difference is that the
+> Captivate Glide has an OLED panel (contrary to LCD in Galaxy R) and a
+> QWERTY keyboard in form factor of a slider.
+>
+> Signed-off-by: Ion Agorria <ion@agorria.com>
+> ---
+>  arch/arm/dts/Makefile                       |   2 +
+>  arch/arm/dts/tegra20-samsung-bose.dts       | 119 ++++++
+>  arch/arm/dts/tegra20-samsung-n1-common.dtsi | 428 ++++++++++++++++++++
+>  arch/arm/dts/tegra20-samsung-n1.dts         | 184 +++++++++
+>  arch/arm/mach-tegra/tegra20/Kconfig         |   5 +
+>  board/samsung/n1/Kconfig                    |  13 +
+>  board/samsung/n1/MAINTAINERS                |   9 +
+>  board/samsung/n1/bose.config                |   6 +
+>  board/samsung/n1/n1.env                     |  16 +
+>  configs/n1_defconfig                        |  92 +++++
+>  doc/board/samsung/index.rst                 |   1 +
+>  doc/board/samsung/n1.rst                    |  51 +++
+>  12 files changed, 926 insertions(+)
+>  create mode 100644 arch/arm/dts/tegra20-samsung-bose.dts
+>  create mode 100644 arch/arm/dts/tegra20-samsung-n1-common.dtsi
+>  create mode 100644 arch/arm/dts/tegra20-samsung-n1.dts
+>  create mode 100644 board/samsung/n1/Kconfig
+>  create mode 100644 board/samsung/n1/MAINTAINERS
+>  create mode 100644 board/samsung/n1/bose.config
+>  create mode 100644 board/samsung/n1/n1.env
+>  create mode 100644 configs/n1_defconfig
+>  create mode 100644 doc/board/samsung/n1.rst
+>
 
-On these devices, U-Boot must be chainloaded via Fastboot. However, due to
-a Fastboot bug, U-Boot won’t start unless a specific condition is met.
+Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 
-To work around this, U-Boot must provide a TEXT_OFFSET of 0x00080000,
-which allows Fastboot to successfully launch U-Boot.
-
-Instead of:
-$ make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config
-do
-$ make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig google-pixel3.config qcom-phone.config
-
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- board/qualcomm/google-pixel3.config | 3 +++
- 1 file changed, 3 insertions(+)
- create mode 100644 board/qualcomm/google-pixel3.config
-
-diff --git a/board/qualcomm/google-pixel3.config b/board/qualcomm/google-pixel3.config
-new file mode 100644
-index 00000000000..2dc71c65d23
---- /dev/null
-+++ b/board/qualcomm/google-pixel3.config
-@@ -0,0 +1,3 @@
-+# Pixel 3 (blueline) and Pixel 3 XL (crosshatch) will fail to
-+# chainload u-boot on the Q or R bootloader if TEXT_BASE offset is missing.
-+CONFIG_TEXT_BASE=0x80080000
--- 
-2.50.1
-
+Applied to u-boot-tegra/staging, thank you!
