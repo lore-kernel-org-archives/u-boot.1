@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3628EC87FC9
-	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 05:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A7FC87FD2
+	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 05:11:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B690283B5F;
-	Sat,  2 Aug 2025 07:11:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 25DD583C2F;
+	Sat,  2 Aug 2025 07:11:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VtCwVO5a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F8gR09to";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D630F83C29; Sat,  2 Aug 2025 07:11:21 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 490C983C2F; Sat,  2 Aug 2025 07:11:44 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 005D083B05
- for <u-boot@lists.denx.de>; Sat,  2 Aug 2025 07:11:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB40183B05
+ for <u-boot@lists.denx.de>; Sat,  2 Aug 2025 07:11:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3b7825e2775so1964038f8f.2
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 22:11:19 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3b7862bd22bso2154118f8f.1
+ for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 22:11:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754111479; x=1754716279; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754111501; x=1754716301; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6UNzGLcIkoTlkU9A996SXI6HBCQDwAnyedYyGPJdkX8=;
- b=VtCwVO5ajpNdoIF0o/tBBkLYZj05ng2D8yUtCzdihW6HGcOTxXFkY+Z0TScL28PH8o
- /ogn+WOtNrPn7j5awbCiD4dtKpoej3rZ607Kt2A0JmoZJPn/iUnyojLtIeJfXaSNSSEc
- yW03qi3jNifTrn4UgX6RMt7FaR9FCXjCgJG/sNyLI5rQa1FOHUvziqISpBw3pgPF6Ial
- sgN23vAWcTL1gfyGYcsISBhHCDIjZgydno/NNgreq0qjxxu6D3WV8urURcU+rsT69Uo6
- wddnBpTvU/apAkY+sZoo6XeqyPbMa9Lffe9WgJPL6KUMccBfC3OxN6eo6IEIN4xa3bSZ
- NlKQ==
+ bh=qOyqwD023ey95Yu+XUHMQHhtiqWdsPg1X6R2yW4uKyY=;
+ b=F8gR09tofEl4sk5fO5s2/UY+SQW/8xrA8OuV5EcEyOfkihg8yEByDJrQjHbObHN7Xt
+ 3KWXc8CUtzok/U9AtPPVDIBEapZOyjBNrMHEvHz+1YzA5WR1a5OoJk3SxxGeRw9Li9Fr
+ 36+s9YeR4Rn0aBTzNHnwE54wLWiscY3fck0WUfoj/EEzFvthzNbl2YasVatj/n52ZgIk
+ 8MNRoNDi1PFv0iuAx1MedcJf380YgXr16HhMRT49QL/p786aXFM4LLMYu8BXxWEjpCMO
+ K4NyHPSNpfYbqNmcmIE1sSpRuzobWmhdyog8Dc+rFAAnhSA79eK7OwMSpFf4KDU7CFG8
+ KI+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754111479; x=1754716279;
+ d=1e100.net; s=20230601; t=1754111501; x=1754716301;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6UNzGLcIkoTlkU9A996SXI6HBCQDwAnyedYyGPJdkX8=;
- b=NZkny1qiJAZKtSrk+sAlhRKSjVcudMAllZ1II9HD2SqnT6TkLRHnw+EqiX6JLALhbb
- 14V6NVoxX4TjFw9bhHWLiGBeXYF1qWtgUH6eCV421+QjG3BQA2I1/6IiGlyeLlqblSZl
- XoxnRXNbofsgjjD4VlfkzEwlPpzMsiS/Whfa92Mf77/7HfjztMW8ODF2NPtcUxSPL+mL
- GXujXBPx3H2bQZw15Qk74AJ1Ad8V4EDaI9VrdIA52vcklPIXk1gUu6Jj3JyhUM7Q7hpy
- LkzkMeJONBP0MWwpYalAoxqNxa75b5d/jwV7Ytu+6rvPMeNpq282IlrjBgF3cdTiYjpF
- U32A==
+ bh=qOyqwD023ey95Yu+XUHMQHhtiqWdsPg1X6R2yW4uKyY=;
+ b=FwF17Du3BDMxqeSN9gDXA6r+dTk8Zxbg2gzkgUK3Wr3WKho8fqN+9+HOXN2XXzx56p
+ W3UU6mKv1zlW8veal3dmJCIAWcWTDsy6cNbkGCeKlsD/gPho4KK+mXd8OX4qG1AuqXDl
+ GK8J8x7HBS1+oYCXkq/FXJhFrmpbzuqY9Wa9D4ZPKMGWmFFq5sVWZobUc03XHRp6eNQH
+ YOqBiX2qtTfAinEfxgJhC0H6QZB/95fzaoIgG5x4rL1euSBQsBiDB4E5KBjEuOAndXhf
+ ljDzJOWL0r3xJ+xi+qI0qkVygc/O1y/mA+ZYCZm+PG6DjkMzv1E2jaLBFrTqzMaOVpgn
+ WVlg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2T5+zSNquUgETe/qN8TYpYcgaVDSvIj0kUHiU/KC2GohZbgxx2vRo3jskwfmHXUz11O3jy1M=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywp2OgI8DurDUZBSwgv8BBF9Wl6BI9POlxlgLTwV7pBOysqPZuq
- tBmKiv3No5U7FCUKIujMMOgAly4Pt0Pcc82og8iSPR+KwP3nxtj8NYzAIW5LF3gfmQcWg8pqfki
- DP2I66h0Xm12HNz4asBCMebPGJ/S7lvY=
-X-Gm-Gg: ASbGncuzhbqsTLO947lsRVwU/c0X4FgZ0I4/cbSVkaiIW1nVlJOLHmM/ankaUZ5sPDU
- qVAUzvjOk3icfqcJYVMAFQcfBDg9LYXiVVPw2yQU7BoItAPw+v62S7EolJIOypG12BJq2KMRlIk
- k0a6w/b9j7+OBW5t/qwQvHtIBwGUCV8w/drqyv8wZvJeB9YfvQgtL8BeBGCk9a6C1+rarry/Sjq
- +OFRQrD
-X-Google-Smtp-Source: AGHT+IFK14exIub+BxmIHPu0YhZq88G9gyvKUtLgiMUFWdz6xqGRQxyPXR+C0eYR31izce0PzJ++Q4MA08dQkGyAP5c=
-X-Received: by 2002:a5d:5f54:0:b0:3b7:9a01:e52f with SMTP id
- ffacd0b85a97d-3b8d94c4951mr1489286f8f.44.1754111479387; Fri, 01 Aug 2025
- 22:11:19 -0700 (PDT)
+ AJvYcCVNlg3lm4NYYn08xRkGSRDtM7/eApGufgKL8yIPjIKvxskQyBf8N1/HNEuXhzt7HrvMLwK/3yc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2fA9L7pbO1/4siZ91UYRMfoN5Pv7Z/PB9PnHDCBuvvLyxlZK1
+ y/c6iZlHBFYqW4c7W3Ddg3/2908RozcUiU8uRkqOynAJ4/xOaeafc3N8ZuLFzz0DWkLVvzPRhek
+ nBNkAkpY9NGOa6DFE0aoHHgY61BtYZS8=
+X-Gm-Gg: ASbGncuWl3s2ZEnAAGzJjx787+8SLzVQx91XFmExadL05IlLr0HQ71EydGd4kcAly86
+ Y9L9dNU5knq+lKoIaGY61uiq1/iRJKEEwnfHA9bg4XKrZExehL4nkKmPegIE07r6FOOsJ0o+bJg
+ F9vtJ4BGSw17bQsfDSCONcWGILi7frks39n3+ZoEMCSgGIZHhqDv+MITQv9ds13q4z3cme705cc
+ BBXEw5b
+X-Google-Smtp-Source: AGHT+IGt1enBNTSK3JSN0OLSbmalfFagQNtn3hiYiX/3sv0ACEdlLScYHPDlU/nUZRGGaF044dbi/Jwv+YJZO/2tgTE=
+X-Received: by 2002:a05:6000:2c03:b0:3b7:9703:d99f with SMTP id
+ ffacd0b85a97d-3b8d95ab6a8mr1433264f8f.27.1754111501116; Fri, 01 Aug 2025
+ 22:11:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250731193656.286806-1-ion@agorria.com>
- <20250731193656.286806-5-ion@agorria.com>
-In-Reply-To: <20250731193656.286806-5-ion@agorria.com>
+ <20250731193656.286806-6-ion@agorria.com>
+In-Reply-To: <20250731193656.286806-6-ion@agorria.com>
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sat, 2 Aug 2025 08:11:07 +0300
-X-Gm-Features: Ac12FXzE-e3oUAzQtxxWclvGyVZM8gDy9BiKJ0Y7J-kaV0clcSFp0b9BIT6chaM
-Message-ID: <CAPVz0n0zZ0JzU860s6CoOE=mQsagMnJ1JmS2VRFqMYwM1L6=FA@mail.gmail.com>
-Subject: Re: [PATCH v1 4/5] video: bridge: add Samsung CMC623 image converter
+Date: Sat, 2 Aug 2025 08:11:29 +0300
+X-Gm-Features: Ac12FXw8xTkEtE0ITfMjjQW_hHtAxd05V_zyv3Rqx43ep-Yww2BahgL7XuQMn70
+Message-ID: <CAPVz0n13XHQC3Jtd10kqG8Bz-zJDxjkETJU_VeHaAdkLxgwJRw@mail.gmail.com>
+Subject: Re: [PATCH v1 5/5] video: backlight: add Samsung CMC623 backlight PWM
  driver
 To: Ion Agorria <ion@agorria.com>
 Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>, 
@@ -102,17 +102,15 @@ X-Virus-Status: Clean
 =D1=87=D1=82, 31 =D0=BB=D0=B8=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 22:37 Ion =
 Agorria <ion@agorria.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> Add support for a Samsung CMC623 image converter chip found in several
-> Samsung devices such as Samsung Galaxy R (I9103) and Samsung Galaxy
-> Tab 10.1 (GT-P75xx).
+> Add support for PWM backlight found in Samsung CMC623 image converter.
 >
 > Signed-off-by: Ion Agorria <ion@agorria.com>
 > ---
->  drivers/video/bridge/Kconfig  |   8 ++
->  drivers/video/bridge/Makefile |   1 +
->  drivers/video/bridge/cmc623.c | 234 ++++++++++++++++++++++++++++++++++
->  3 files changed, 243 insertions(+)
->  create mode 100644 drivers/video/bridge/cmc623.c
+>  drivers/video/Kconfig            |   7 ++
+>  drivers/video/Makefile           |   1 +
+>  drivers/video/cmc623_backlight.c | 124 +++++++++++++++++++++++++++++++
+>  3 files changed, 132 insertions(+)
+>  create mode 100644 drivers/video/cmc623_backlight.c
 >
 
 Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
