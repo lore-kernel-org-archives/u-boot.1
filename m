@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E54C87FC9
-	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 22:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79649C87FD2
+	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 22:08:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92A2E83C67;
-	Sun,  3 Aug 2025 00:07:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E338F83C91;
+	Sun,  3 Aug 2025 00:08:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hI8W4/rD";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="I2C9rADy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 367E883C6D; Sun,  3 Aug 2025 00:07:55 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id B80C483C91; Sun,  3 Aug 2025 00:08:00 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AF7483C28
- for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 00:07:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DC9183C72
+ for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 00:07:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=7e69=2P=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1754172471;
- bh=XnYTLtcUu/zFvxrV8HgT0vWKCLs5YLsF5SlEqmN3fug=;
- b=hI8W4/rD2IFEGgydTfE8B3Qu4oaWf0zrW9xRP2RAYNSm52rrRrp2678NK9l7Pr4mgiLs2eq8a
- aw56HmVr61nefm31yXw5Ng17ONxOsGkKS7bp3I5B1MYIyBGIqj1eoQR+/ifWgRTmDcOb3EG9dnT
- jiMAA/nUEFO/j7XN3gbFAhqVeGZx7PyDlNUgBNLxhVu9kBkikLMUSO7JVBS0dVt9MSnZmCIkuAb
- lRKhbCXehstjf3XLRq6Gq/YDCVqTDqlwwzj3m63Txz+Hqgh56FsUueXVfRHt9fCtAf3IlUIaDZF
- z0NvHIUedyw7119lDh8kejW8xvzZV1MRbxtCvfMMmD9A==
-X-Forward-Email-ID: 688e8c34056e3a070faf354b
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1754172476; bh=iwhpemcsDGBzvaImDzPQbZp6I1Ye9YuYB7cBvmeOmrM=;
+ b=I2C9rADyM9NNsx4G/rV4RHRzCGuCcBBtZ6tl3CGtO3VUP49+d/R9A5bSS7ii7XLaN+7+3ftyj
+ oC4CltPJwyz6+MIKZIp0gThwLn16HZUwEN3ONBsj5EGOGZEckz7rB2gt9SNwpgrBlhsv8S8SgJC
+ OHd/lKnCD5XnAebtf76AxxJ3sxzxFd9Nqiwm+EBxi8kYPLiyKDrIdm6XepR/KO5/EVMHCKtbVuo
+ ArnqvRYaIw6FRPfgKn3bQxGOeXrCXNqj1sJuml1YDPQSJFWVi1J6pxOC1U/1iyGLFRulI74lnWC
+ lepHe8ECKWWtPRZT9W7bSA5/z2+GNOKvFYxRezfdAWvw==
+X-Forward-Email-ID: 688e8c39056e3a070faf3572
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 1.1.8
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -48,10 +48,13 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
 Cc: Arnaud Patard <arnaud.patard@collabora.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 0/4] rockchip: Add support for RAM boot from maskrom mode
-Date: Sat,  2 Aug 2025 22:07:21 +0000
-Message-ID: <20250802220738.3018910-1-jonas@kwiboo.se>
+Subject: [PATCH v3 1/4] rockchip: Move TEXT_BASE to 8 MiB offset from start of
+ DRAM
+Date: Sat,  2 Aug 2025 22:07:22 +0000
+Message-ID: <20250802220738.3018910-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250802220738.3018910-1-jonas@kwiboo.se>
+References: <20250802220738.3018910-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -70,112 +73,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The BootROM in Rockchip SoCs will enter maskrom mode when boot firmware
-cannot be found in nand/spi/mmc storage.
+Drop SoC specific TEXT_BASE and use a common TEXT_BASE for all SoCs.
 
-In maskrom mode the USB OTG port can accept one of two custom commands.
+Move the common TEXT_BASE to 8 MiB offset from start of DRAM to help
+support RAM boot from maskrom introduced in next patch.
 
-Initially a 0x471 command to load TPL into SRAM. After TPL has been
-executed and it has returned back-to-BROM, a 0x472 command to load SPL
-into start of DRAM.
+RAM boot from maskrom mode will expect the FIT payload to be located at
+2 MiB offset from start or DRAM.
 
-This series adds two binman images that can be used to RAM boot from
-maskrom mode:
-- u-boot-rockchip-usb471.bin that contains TPL to init DRAM.
-- u-boot-rockchip-usb472.bin that contains SPL and the normal FIT
-  payload with i.e. U-Boot proper, TF-A and FDT.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Tested-by: Arnaud Patard <arnaud.patard@collabora.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+---
+v3: Collect r-b tag
+v2: Collect t-b tag
+---
+ arch/arm/mach-rockchip/Kconfig        | 6 +++---
+ arch/arm/mach-rockchip/rk3308/Kconfig | 3 ---
+ arch/arm/mach-rockchip/rk3568/Kconfig | 3 ---
+ arch/arm/mach-rockchip/rk3588/Kconfig | 3 ---
+ 4 files changed, 3 insertions(+), 12 deletions(-)
 
-The config fragment rockchip-ramboot.config can be used to enable
-building of these two binman images, e.g.:
-
-  make generic-rk3588_defconfig rockchip-ramboot.config
-
-These binman images can be used with the proprietary rkbin boot_merger
-tool to create a special loader image that can be used with tools such
-as rkdeveloptool or rockusb tools to RAM boot from maskrom, e.g.:
-
-  Create loader image:
-    $ ../rkbin/tools/boot_merger ./RK3588MINIALL.ini
-
-  Boot from maskrom:
-    $ rkdeveloptool db u-boot-rockchip-rk3588-loader.bin
-   or
-    $ rockusb download-boot u-boot-rockchip-rk3588-loader.bin
-
-Another option that does not require use of proprietary tools is using
-open source tools such as rkflashtool or rkusbboot that can load the
-binman images directly without any need to first create a special loader
-image to RAM boot from maskrom, e.g.:
-
-  $ rkflashtool l < u-boot-rockchip-usb471.bin
-  $ rkflashtool L < u-boot-rockchip-usb472.bin
- or
-  $ rkusbboot u-boot-rockchip-usb471.bin u-boot-rockchip-usb472.bin
-
-I am setting up a new personal lab for rockchip boards that primarily
-will use this RAM boot method for testing new U-Boot and Linux builds.
-
-More detailed instructions on how RAM boot can be used will be added
-under doc/board/rockchip/ in a follow-up series, after this series has
-been accepted and my new lab is fully up and running.
-
-Changes in v3:
-- Use read_brom_bootsource_id() to support RAM boot on RK3576
-- Add a rockchip-ramboot.config fragment to explicitly enable instead of
-  imply the new Kconfig option on a few select SoCs
-- Update commit message to highlight that the binman images can be used
-  directly without use of the proprietary rkbin boot_merger tool
-- Include a special patch, not intended to be merged, to demonstrate use
-  of RAM boot with rk loader images
-
-Changes in v2:
-- Rebase on top of "rockchip: binman: Use a template for FIT and other
-  improvements" series
-- Add patch to fix booting into Linux on RK3588 board with 16+ GiB DRAM
-
-This series depends on the "rockchip: Add support for ROCK 5B+" [1] and
-"board: rockchip: Add Radxa ROCK 4D" [2] series for a clean apply.
-See [3] for a branch including both depends.
-
-[1] https://patchwork.ozlabs.org/cover/2118033/
-[2] https://patchwork.ozlabs.org/cover/2118088/
-[3] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ramboot-v3
-
-Jonas Karlman (4):
-  rockchip: Move TEXT_BASE to 8 MiB offset from start of DRAM
-  rockchip: Add support for RAM boot from maskrom mode
-  rockchip: sdram: Add fallback that fixup DRAM gaps on RK3588
-  HACK: rockchip: Add miniall.ini files to simplify test of RAM boot
-
- RK3308MINIALL.ini                       | 22 +++++++++++++++++
- RK3328MINIALL.ini                       | 20 +++++++++++++++
- RK3399MINIALL.ini                       | 20 +++++++++++++++
- RK3528MINIALL.ini                       | 25 +++++++++++++++++++
- RK3566MINIALL.ini                       | 25 +++++++++++++++++++
- RK3568MINIALL.ini                       | 25 +++++++++++++++++++
- RK3576MINIALL.ini                       | 27 ++++++++++++++++++++
- RK3588MINIALL.ini                       | 25 +++++++++++++++++++
- arch/arm/dts/rockchip-u-boot.dtsi       | 33 +++++++++++++++++++++++++
- arch/arm/mach-rockchip/Kconfig          | 14 ++++++++---
- arch/arm/mach-rockchip/rk3308/Kconfig   |  3 ---
- arch/arm/mach-rockchip/rk3568/Kconfig   |  3 ---
- arch/arm/mach-rockchip/rk3588/Kconfig   |  3 ---
- arch/arm/mach-rockchip/rk3588/rk3588.c  | 27 ++++++++++++++++++++
- arch/arm/mach-rockchip/sdram.c          |  7 +++++-
- arch/arm/mach-rockchip/spl-boot-order.c | 14 ++++++++---
- board/rockchip/rockchip-ramboot.config  |  1 +
- boot/Kconfig                            |  3 +++
- 18 files changed, 281 insertions(+), 16 deletions(-)
- create mode 100644 RK3308MINIALL.ini
- create mode 100644 RK3328MINIALL.ini
- create mode 100644 RK3399MINIALL.ini
- create mode 100644 RK3528MINIALL.ini
- create mode 100644 RK3566MINIALL.ini
- create mode 100644 RK3568MINIALL.ini
- create mode 100644 RK3576MINIALL.ini
- create mode 100644 RK3588MINIALL.ini
- create mode 100644 board/rockchip/rockchip-ramboot.config
-
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 342933ca5099..c9ce30760292 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -768,9 +768,9 @@ config TPL_SYS_MALLOC_F_LEN
+ 	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+ 
+ config TEXT_BASE
+-	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
+-	default 0x40200000 if SPL_TEXT_BASE = 0x40000000
+-	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
++	default 0x60800000 if SPL_TEXT_BASE = 0x60000000
++	default 0x40800000 if SPL_TEXT_BASE = 0x40000000
++	default 0x00800000 if SPL_TEXT_BASE = 0x00000000
+ 
+ config SPL_TEXT_BASE
+ 	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
+diff --git a/arch/arm/mach-rockchip/rk3308/Kconfig b/arch/arm/mach-rockchip/rk3308/Kconfig
+index 06572d545f6e..b8d25c525424 100644
+--- a/arch/arm/mach-rockchip/rk3308/Kconfig
++++ b/arch/arm/mach-rockchip/rk3308/Kconfig
+@@ -17,9 +17,6 @@ config ROCKCHIP_STIMER_BASE
+ config SYS_SOC
+ 	default "rk3308"
+ 
+-config TEXT_BASE
+-	default 0x00600000
+-
+ source "board/rockchip/evb_rk3308/Kconfig"
+ source "board/firefly/firefly-rk3308/Kconfig"
+ 
+diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+index 01b53a47ddbe..2730220a18e8 100644
+--- a/arch/arm/mach-rockchip/rk3568/Kconfig
++++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+@@ -70,9 +70,6 @@ config ROCKCHIP_STIMER_BASE
+ config SYS_SOC
+ 	default "rk3568"
+ 
+-config TEXT_BASE
+-	default 0x00a00000
+-
+ source "board/rockchip/evb_rk3568/Kconfig"
+ source "board/anbernic/rgxx3_rk3566/Kconfig"
+ source "board/hardkernel/odroid_m1/Kconfig"
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index 4e7942ada875..dfc19c4fc8fa 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -400,9 +400,6 @@ config ROCKCHIP_STIMER_BASE
+ config SYS_SOC
+ 	default "rk3588"
+ 
+-config TEXT_BASE
+-	default 0x00a00000
+-
+ source "board/armsom/sige7-rk3588/Kconfig"
+ source "board/coolpi/genbook_cm5_rk3588/Kconfig"
+ source "board/edgeble/neural-compute-module-6/Kconfig"
 -- 
 2.50.1
 
