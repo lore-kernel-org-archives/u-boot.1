@@ -4,83 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14021C87FC9
-	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 05:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 326F9C87FC9
+	for <u-boot@archiver.kernel.org>; Sat,  2 Aug 2025 09:22:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 657ED83C39;
-	Sat,  2 Aug 2025 07:14:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 589F283C19;
+	Sat,  2 Aug 2025 11:22:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mnyQZUTg";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="YZkd439i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 272EB83C4B; Sat,  2 Aug 2025 07:14:38 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C12783C13; Sat,  2 Aug 2025 11:22:15 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEB6283C30
- for <u-boot@lists.denx.de>; Sat,  2 Aug 2025 07:14:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ED4383B5F
+ for <u-boot@lists.denx.de>; Sat,  2 Aug 2025 11:22:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3b782cca9a0so1269509f8f.1
- for <u-boot@lists.denx.de>; Fri, 01 Aug 2025 22:14:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754111675; x=1754716475; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G5BtOxuf4rBU3KKnayic0oM0adQyrvdLfGwABid4s0E=;
- b=mnyQZUTgY8pdavlPDAh5Uv3TmdRa3AewyA+wFlZTDvTMgFAGOW2pxBODGnkFs9Un8I
- G2IYZDyJw+MsjMppOfY2Wiss0y/+QlBnv9L4XgBWffaqASRkNuU+9bRI4+8hf8z8yVph
- QO6oXHVNuOUHF8wEmizrysuJRSRV7GWXuc1Ih8VhMd8U8yw3du0iXLPSGvOxvwGBNI/1
- lsdXmBpIVt8M0d098lZrZhpSEH4rbalBzEiOjuaxPU1RbYQryLpgsmh4AkOon6Hy8ZEU
- N7yCEBppLdQ23KamGOEgu6QR0WznnU8G68oU/EOrHubv2/zXn92d+Y2wBjMuiG+xpe/b
- W3AQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754111675; x=1754716475;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G5BtOxuf4rBU3KKnayic0oM0adQyrvdLfGwABid4s0E=;
- b=QY+NHH/kpCcpvlebBQo2KaMRn3UUkx6qBS2XhyWyY0To4qSrLm5K3j0qG9RbmpGw41
- jVoU/Z2blq1m+jFVtWETIuG6q5VXuCR7cu0cPGxa9nt4ITGg+Ocuv56IBmTbYl2ceHmA
- zk7K+AoruT3ChveVNqMVQUhG6nj8m+4m4UmeqKgOSLXtNzE2Kwqq4dPjO5uTGQ9D0xhi
- 0n04yHVCkoDUOk2hEIiuFT53XR6BvpmMqlXXdrs6CD4ArSU1GlQQDDYjx5A3J5+IrZHs
- UevlR5zAPjB4lRSFvsNSkkVV5K7vx1ICCqDO/3GdwbS6nubtaPKNiKM6o/ESppc6xpfE
- C1iA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhJeQY6obbXCMtGGybdQYiFkA2HMNa6ycsbhqmCPsFmIbVwF75MU4tTBH3SJXJ5ed+WWBwsMI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyuER7Nf7nsx89XsKJXpPNREiaNkbTqi3AgTQN4qWKHv2Qulyyu
- QSwxQdTmOgW1a/bSyjrfaeRS3+2jHpUVRJwo/yTth9J9owudRAP6R0ziIuCxtlrjfip3zGaJs5t
- GHhaRGw954Kjs4c9W8b5oi5+CH0KGdb4=
-X-Gm-Gg: ASbGncvelHNS5ZV4ds/92tz700Ri0nyhbD/h1D9/sOCQzmzeBqfQb6XyjBuCkrySgOK
- 5h0MbcBq3WThOSW/9UpEqV3l9RYbWOWxtye0d0pkAudGuyJaEDBFXeVCjHEWDB/E7P6W8CdL2Xu
- LOba7HIBPDXeVUPFtSc4dpkuaPnkCtgbSd4+zhxBtRtaXQwJsRnC0T9O/AcNwXVKQTT/Ax+ZNYw
- 7BWxuIT
-X-Google-Smtp-Source: AGHT+IHZ0QNR0fOiLTn+gUuuoGOfY2gWCaGllK9Tdvvcn01k8oamdnEs+v0z3JDKt9QgL2WFGk4g55Cy2wLYSio0AtQ=
-X-Received: by 2002:a05:6000:1a86:b0:3b7:c703:ce4 with SMTP id
- ffacd0b85a97d-3b8d94c4d87mr1546504f8f.59.1754111675171; Fri, 01 Aug 2025
- 22:14:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 584CE25CBC;
+ Sat,  2 Aug 2025 11:22:12 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id n_i2vfKPanF0; Sat,  2 Aug 2025 11:22:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1754126531; bh=RMFbEcBDSST4MZ6iBBz3xLY1bjJmYaeBC4ah6Gtrl+w=;
+ h=From:To:Cc:Subject:Date;
+ b=YZkd439il31RfRvwlhFxi1U3lYxoSBN+o6oEBFtDo5+NDz1uKJer+M29TBDsV6jD3
+ iCtDwevPjFHMY4MIGZcPj25y04HstyTc4QOYmp8x5WwZB6OaKmCv1g33R6cQJEbSzq
+ knmlOZB9gK7IUY7x3XIB4iWZmj9pAg1K92nFxUd2oEEwoe+2Ii/vh7SLq3fZD498Ft
+ Om7qlOzpxvGxtdpbVt+CsUuiNsDkuyhzKdGQIY1o3fXSS7iOBf9dNdSIk+X5tS8KBb
+ jLcDUjysCjSMeWtZL60MBLWtPR8wA/DY41ocnA3yKzTI1V/Y0e+fXghg5xc3PAdpvT
+ ggtG1i26Sx1+g==
+From: Yao Zi <ziyao@disroot.org>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,
+	Yao Zi <ziyao@disroot.org>
+Subject: [PATCH 0/2] Support SMP on RISC-V cores with Zalrsc only
+Date: Sat,  2 Aug 2025 09:21:53 +0000
+Message-ID: <20250802092155.40915-1-ziyao@disroot.org>
 MIME-Version: 1.0
-References: <20250731193656.286806-1-ion@agorria.com>
-In-Reply-To: <20250731193656.286806-1-ion@agorria.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sat, 2 Aug 2025 08:14:23 +0300
-X-Gm-Features: Ac12FXy28iUNRunTBp21631p8jS__hu3hb7cr4rDRlWzTd08zaMkfz3eA0dyKzM
-Message-ID: <CAPVz0n3cimBtMeco0y_6aPT0x1Z25maKL27d1sm8kPDrscE9-Q@mail.gmail.com>
-Subject: Re: [PATCH v1 0/5] video: Add drivers for Samsung's Tegra phones
-To: Ion Agorria <ion@agorria.com>
-Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <agust@denx.de>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,39 +68,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 31 =D0=BB=D0=B8=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 22:37 Ion =
-Agorria <ion@agorria.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> This patchset adds support for panels and bridge used in
-> samsung-n1 and samsung-bose devices powered by Tegra 2.
->
-> Ion Agorria (4):
->   video: panel: add Sony L4F00430T01 panel driver
->   video: panel: add Samsung S6E63M0 panel driver
->   video: bridge: add Samsung CMC623 image converter driver
->   video: backlight: add Samsung CMC623 backlight PWM driver
->
-> Svyatoslav Ryhel (1):
->   video: tegra: parametrize PCLK and DE polarity
->
->  arch/arm/include/asm/arch-tegra/dc.h |   3 +
->  drivers/video/Kconfig                |  24 ++
->  drivers/video/Makefile               |   3 +
->  drivers/video/bridge/Kconfig         |   8 +
->  drivers/video/bridge/Makefile        |   1 +
->  drivers/video/bridge/cmc623.c        | 234 ++++++++++++++++
->  drivers/video/cmc623_backlight.c     | 124 +++++++++
->  drivers/video/samsung-s6e63m0.c      | 393 +++++++++++++++++++++++++++
->  drivers/video/sony-l4f00430t01.c     | 210 ++++++++++++++
->  drivers/video/tegra/dc.c             |  16 ++
->  10 files changed, 1016 insertions(+)
->  create mode 100644 drivers/video/bridge/cmc623.c
->  create mode 100644 drivers/video/cmc623_backlight.c
->  create mode 100644 drivers/video/samsung-s6e63m0.c
->  create mode 100644 drivers/video/sony-l4f00430t01.c
->
-> --
-> 2.50.0
->
+Previously, we use AMO instructions to synchronize cores at start when
+SMP is used, which requires Zaamo extension to present. This series
+implements an alternative implementation of synchronization with LR/SC
+instructions and add Kconfig options to use them, make it possible to
+enable SMP on cores without Zaamo extension.
 
-Applied to u-boot-tegra/staging, thank you!
+This is tested on both TH1520 Lichee Pi 4A board and QEMU. With QEMU,
+building and testing looks lile,
+
+	$ make qemu-riscv64_defconfig
+	$ ./scripts/config -d CONFIG_RISCV_ISA_ZAAMO
+	$ make
+	$ qemu-system-riscv64 -M virt \
+		-cpu rv64,a=off,zaamo=off,zawrs=off,zalrsc=on	\
+		-nographic -bios u-boot-nodtb.bin -smp 8
+	U-Boot 2025.10-rc1-00100-gc5bdc8820ee2-dirty (Aug 02 2025 - 09:16:21 +0000)
+
+	CPU:   riscv
+	Model: riscv-virtio,qemu
+	DRAM:  128 MiB
+	using memory 0x86eb5000-0x876d5000 for malloc()
+	Core:  34 devices, 13 uclasses, devicetree: board
+	Flash: 32 MiB
+	Loading Environment from nowhere... OK
+	In:    serial,usbkbd
+	Out:   serial,vidconsole
+	Err:   serial,vidconsole
+	No USB controllers found
+	Net:   No ethernet found.
+
+without this series, U-Boot won't run if Zaamo is disabled with
+-cpu rv64,zaamo=off.
+
+Yao Zi (2):
+  riscv: Add Kconfig options to distinguish Zaamo and Zalrsc
+  riscv: Add a Zalrsc-only alternative for synchronization in start.S
+
+ arch/riscv/Kconfig             | 17 +++++++++++++++++
+ arch/riscv/Makefile            |  7 ++++++-
+ arch/riscv/cpu/start.S         | 26 +++++++++++++++++++++++++-
+ configs/ibex-ast2700_defconfig |  3 ++-
+ 4 files changed, 50 insertions(+), 3 deletions(-)
+
+-- 
+2.50.1
+
