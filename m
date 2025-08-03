@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C62DEC87FCA
-	for <u-boot@archiver.kernel.org>; Sun,  3 Aug 2025 08:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22CAC87FCB
+	for <u-boot@archiver.kernel.org>; Sun,  3 Aug 2025 08:17:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B783D83CEE;
-	Sun,  3 Aug 2025 10:15:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FD0483D13;
+	Sun,  3 Aug 2025 10:17:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rhWbqZAP";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Z2HXP6Uv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24EAC83D0D; Sun,  3 Aug 2025 10:15:54 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 74E3B83D17; Sun,  3 Aug 2025 10:17:19 +0200 (CEST)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E23383B5F
- for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 10:15:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC6FB83B5F
+ for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 10:17:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-b4239091facso1446851a12.0
- for <u-boot@lists.denx.de>; Sun, 03 Aug 2025 01:15:51 -0700 (PDT)
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-b4235495646so1401750a12.2
+ for <u-boot@lists.denx.de>; Sun, 03 Aug 2025 01:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1754208950; x=1754813750;
+ d=amarulasolutions.com; s=google; t=1754209035; x=1754813835;
  darn=lists.denx.de; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vHGTVkxjmvSWMOJRq7CmZoC9a3k3XJxmtoUTe+1XzCk=;
- b=rhWbqZAPrltQuxFiKPjluQOmJ10pgJja4odRXl1stxELQJi6CZjHVVsbm+HmRQrpl6
- qhNMWoa21e70b4M5iSU39w4coVgkCNoJpB81RBR4NZOvy7PgLurvdLV9o4bougLR4eO1
- flhhkm/unq8PkvdGaw84ikoZDLirLrVu20Pmw=
+ bh=ihfrmAxGMMSRh6d+ZUr/KGZqmDJb5do4e6yen0D0gmU=;
+ b=Z2HXP6Uvb5Zza8A1IwAxatZIqMLWFgF2RQpyEvvrSmHrvenJXLMuB+WviHvUSJVqEe
+ IBEaI4xXEEg0s0KwAnCF/hWTTOhviCDG19Ae2rekuZHgeEN5aPDiuB0M4XldNXQVYd6D
+ R/A0a2Ep0VDsBSX0mUyzI+gDcqku2l3SLDHNQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754208950; x=1754813750;
+ d=1e100.net; s=20230601; t=1754209035; x=1754813835;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vHGTVkxjmvSWMOJRq7CmZoC9a3k3XJxmtoUTe+1XzCk=;
- b=kk/1boFQTmAwNKOlxurjf3TgZXtno9kv7kRzK9DnC68jDqUpAH8iO6rKjk74kmnqkr
- YM7A4gJl7hYdq17jUzV0o1kPvXzMI/BQzszsgtUtHb2RAEQbEFsZGEBxTNR/aSlAvx3M
- LfCnJuHygjFoZCLnNajmK9cZiwmYu1sSD5DkpoMBUKkHKM2pW6NdorZ18T+OfT6zZ6I0
- NqwIOMt4pL5kq5mdznTTzfW9ElPtrZLqX45OzQ8+SRGzEmiSVcMFBsOZ4whVujx5EAEY
- ArxrwOMktykOcPab6J3HvsKCEa2FSaBhTAME/JGX5qDERsEMMR7GDtUF1jAeIPfW5EAm
- ZOHA==
+ bh=ihfrmAxGMMSRh6d+ZUr/KGZqmDJb5do4e6yen0D0gmU=;
+ b=jLiAeNj2lI/beYjPEYjnB5//yDZ/pPjDpXmrpseHHhEltX6V8W69Tpf3Do99nKt0/7
+ MYL9ZNebdFrCnudfQJK8RrTCq8DuVM99c3cVIze4qiPYkDV8lnlIO2dkqVs08I4ZX9aU
+ mso130whgMe8eTqk5k9ulpZN2qgBTAD3Hwd7BLT3UZsU/AWEvPm6eVC3tHmW2YJS8kDr
+ MuFFVrRyBltqwhclkbYyAl4XDX7UPb0EJWm2y85WvocL5GgndoccywuRsZoLg8ODNr6o
+ JgmrIHfcAxyE/GoPcEeDgqueNVtpu/JfxqZdEni7OAWM1YMxdo3i4j7aeEEQ+7e72fdA
+ tOrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoTAC1tfVYGyTPLSNrpDWBnr/NbRyEJyGqLTWEltKWQAJ4/v5nupNH4LtQna7WWWKub1R2dPA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJGAQM2pnT/0mqmZrSPxrxxK11qHil3uIeWet4SYu9pCFtd1Lw
- suw4HJ8ziCBtJQnT67lD4hmLaaAZlxKaZaqbk6ByhTsRMPaTfYpSQBTcpfWbFU7t46z72aRcB/U
- A6kZNQND1rksz0t4p3qgZI1swTta+aDBYtB8Qm6A3pw==
-X-Gm-Gg: ASbGnct4jQ3APmy/WxrQlojd2ekflEIXucm60/yOWPbpCYPoExLEvJgS0EhHx4UMWsV
- XnM6WW2h0/l21OKRc3ebVUcJ0/DlRDUhFWBybnalf1pGKsUnPXZR9xZDD7qoe3LVuriiG7Ol/jr
- KCk8sdjVA0PtDNE8vXwR5WqndAHpmxIvvoZU24Gv6y14Pk2JA84ZkXpfITmdbhuTLPiPQaHKyaX
- WwyzQ==
-X-Google-Smtp-Source: AGHT+IEMIMOiP8ChYIaGUrw0PMkg50wT6QhYm8WNYv/JUP3CQ9UnD6sTEjzT/FaFIoFkPhNmYBzA5ky0AnJeUAvYPS8=
-X-Received: by 2002:a17:90b:5110:b0:31f:6ddd:ef3 with SMTP id
- 98e67ed59e1d1-32116330b8amr7552068a91.35.1754208949850; Sun, 03 Aug 2025
- 01:15:49 -0700 (PDT)
+ AJvYcCVHK8WETRF+AfUXCyrRZxRJWqw2N9g4Yd+nVJvqzYpqPTtRqYY0qqx3mgqW97eCiEDN6zMaNRs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx5iLgIor0Q8hMxAiILOBkrFysjp8w03HkGDoii8Zt3KAQCxUct
+ +7xyCI6/f+SDsILeK9IngJWZzWkWmyvVlOVMrj7UMDrkabrVyul89N46h5jbrnbhezY6tIzA3KQ
+ KuWbhRUekqdz40ewiI3YVHQcq453Bp4v/N/FtFsvQ2A==
+X-Gm-Gg: ASbGncvYcn8EEf5C59T8yWWMli4EkcItVRO4dJdbOECYR9IBXDJi4jy0VKt757PhBGY
+ OR8VKYyVnFrhQhHn2YoIAbpW4UbNyRlGdYqMi0MCsTFzSUq70sHp2pwvSzf9+Pispyr+qV7eEsE
+ 3nWttBMhnySgB0TwoJ/67E2l2FbPZC+FYM19zVgJidZYfuXi4mainA9tqMga3FYffHoVFZRkmuz
+ eetTg==
+X-Google-Smtp-Source: AGHT+IHv5bvuXKXY8oj8xwcohTTW/3Pnxc9Eoba0ZL1n8D6biBDMv4hfSryPCsh7i+0mT13xha0ef/l6thSIzVhu6XI=
+X-Received: by 2002:a17:90b:58c4:b0:31e:cb1a:3dc5 with SMTP id
+ 98e67ed59e1d1-3211620acdfmr8613818a91.11.1754209035108; Sun, 03 Aug 2025
+ 01:17:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
- <20250801-mtd_nand_raw-v1-2-80c316f5bb99@linaro.org>
-In-Reply-To: <20250801-mtd_nand_raw-v1-2-80c316f5bb99@linaro.org>
+ <20250801-mtd_nand_raw-v1-3-80c316f5bb99@linaro.org>
+In-Reply-To: <20250801-mtd_nand_raw-v1-3-80c316f5bb99@linaro.org>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 3 Aug 2025 10:15:34 +0200
-X-Gm-Features: Ac12FXyTvJe892lvi2KFsSW-L6hpUWSQPgq7lgwMNS8CPiSQEN2kRJ7th9nQUFY
-Message-ID: <CAOf5uwk07WtBVyBt5CyxaVcYF15zhsFipNKv9dU1LKNctY4ueg@mail.gmail.com>
-Subject: Re: [PATCH 2/3] mtd: rawnand: denali: Remove always true test
+Date: Sun, 3 Aug 2025 10:17:03 +0200
+X-Gm-Features: Ac12FXy74xYS8Y6XFZVtHHaQkJV3g4IFTrxXuc12-OSBP6w5XACq-h2_uq5kalg
+Message-ID: <CAOf5uwmc3F7Y3fbuyW=Qe7Ni79Vq0sh4MsuVsLGCDitUs1cdhg@mail.gmail.com>
+Subject: Re: [PATCH 3/3] mtd: rawnand: mxs_nand: Ensure err is set for error
+ path
 To: Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -101,47 +102,45 @@ On Fri, Aug 1, 2025 at 11:54=E2=80=AFAM Andrew Goodbody <andrew.goodbody@li=
 naro.org>
 wrote:
 
-> In denali_wait_for_irq the code will either return from inside the while
-> loop or exit with time_left being 0. The following test for time_left
-> being 0 is guranteed to be true so remove the test and the following
-> unreachable code.
+> In mxs_nand_init_ctrl there are a couple of error paths that do not set
+> err which could lead to the errors being silently ignored despite the
+> function not completing. Rather than just using if to detect these
+> errors use err to collect the error return value from the called
+> functions.
 >
 > This issue was found by Smatch.
 >
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->  drivers/mtd/nand/raw/denali.c | 10 +++-------
->  1 file changed, 3 insertions(+), 7 deletions(-)
+>  drivers/mtd/nand/raw/mxs_nand.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/mtd/nand/raw/denali.c b/drivers/mtd/nand/raw/denali.=
-c
-> index b2401116689..39cb641e0b3 100644
-> --- a/drivers/mtd/nand/raw/denali.c
-> +++ b/drivers/mtd/nand/raw/denali.c
-> @@ -173,13 +173,9 @@ static uint32_t denali_wait_for_irq(struct
-> denali_nand_info *denali,
->                 time_left--;
->         }
+> diff --git a/drivers/mtd/nand/raw/mxs_nand.c
+> b/drivers/mtd/nand/raw/mxs_nand.c
+> index ba67466069b..fecf1f5ba91 100644
+> --- a/drivers/mtd/nand/raw/mxs_nand.c
+> +++ b/drivers/mtd/nand/raw/mxs_nand.c
+> @@ -1640,10 +1640,12 @@ int mxs_nand_init_ctrl(struct mxs_nand_info
+> *nand_info)
+>                 nand->setup_data_interface =3D mxs_nand_setup_interface;
 >
-> -       if (!time_left) {
-> -               dev_err(denali->dev, "timeout while waiting for irq
-> 0x%x\n",
-> -                       irq_mask);
-> -               return 0;
-> -       }
-> -
-> -       return denali->irq_status;
-> +       dev_err(denali->dev, "timeout while waiting for irq 0x%x\n",
-> +               irq_mask);
-> +       return 0;
->  }
+>         /* first scan to find the device and get the page size */
+> -       if (nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL))
+> +       err =3D nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL);
+> +       if (err)
+>                 goto err_free_buffers;
+>
+> -       if (mxs_nand_setup_ecc(mtd))
+> +       err =3D mxs_nand_setup_ecc(mtd);
+> +       if (err)
+>                 goto err_free_buffers;
+>
+>         nand->ecc.read_page     =3D mxs_nand_ecc_read_page;
 >
 >
 Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
 
->  static uint32_t denali_check_irq(struct denali_nand_info *denali)
->
 > --
 > 2.39.5
 >
