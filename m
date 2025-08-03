@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65CC6C87FD3
-	for <u-boot@archiver.kernel.org>; Sun,  3 Aug 2025 03:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E788FC87FCB
+	for <u-boot@archiver.kernel.org>; Sun,  3 Aug 2025 03:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E2EF83B5A;
-	Sun,  3 Aug 2025 05:28:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E681483CEE;
+	Sun,  3 Aug 2025 05:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="PGVu1pt3";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="YV8JDvMi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6D4483B5A; Sun,  3 Aug 2025 05:28:40 +0200 (CEST)
+ id CFD6383CF5; Sun,  3 Aug 2025 05:53:56 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A2982AFC
- for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 05:28:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8D2783C91
+ for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 05:53:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 0351D20F8A;
- Sun,  3 Aug 2025 05:28:37 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id 0DC2D22DC9;
+ Sun,  3 Aug 2025 05:53:54 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZHvXd7Zbfp5H; Sun,  3 Aug 2025 05:28:36 +0200 (CEST)
+ id 5cT_hzjQijDM; Sun,  3 Aug 2025 05:53:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1754191716; bh=9qLKgRUbTYcuwozQ3mZKMg3DTabGVp6j3eUQKV6qtjE=;
+ t=1754193233; bh=H9vOs4y14MeTQcLei7e1piv4JwpStwTRrO67xmVhTC0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=PGVu1pt31NcSfWo+Q8GfdsXHh/8CYS7lHy+x4Gtr19rAcDxJluTBjt4x/xo9SCEAC
- JsPHR1lOMwy698J2kR3NXlbKW78ViGZoT9iRcIopKIfqGNNAzANpYFdv2lv42T6NjN
- 40TjB0EZykPropbGpKdesNi47udtjzecWhYqdVJKpKMWGkuf+P9Qt9x2dktP30waUt
- u3YUiUDR/NUtQ4AXpVwYM8i0z1PIGOZTPmwZhfAdFBBIRTNE5T+1VYkSXCpBN2uBXy
- 3lGBuZnUI+CerMR0F9hbVKqf0mm196SymL74HKb/c3npxfwMcS/GEBAj8M3DRkOvfO
- IIbxHbCG9R2JQ==
-Date: Sun, 3 Aug 2025 03:28:25 +0000
+ b=YV8JDvMi1Ozv6b8QnvQ24sk9n0yheHIuNLY2mxDfQSMFc8toYdAlcKrs+Ft4JmBdU
+ i6MrLXsJsGtL/mRNWkWcGUf3zj/Pd13sE+vQui4h2UKVZjxWiInaCmyhDY9nsM9W9v
+ vYsJoMI5R5YFzxHZOGnwzWXhBz2VvDexTp0NZcXtaSepSXjqKMn5RQEOF5yGzUS20+
+ y0skQZcXZ02+B1eE6kV7nD0tzZnkcs0GYc0B4k78EDVdc6Z9PFBnGaqwOMKuRxl0O8
+ hwrRhEUZ1BzkCUFJx1krhg6zO5kA1QtQU70AAes4WI2zyARnwGuWD3UTdiYTMbN26B
+ e0XZUqUqFZqFg==
+Date: Sun, 3 Aug 2025 03:53:46 +0000
 From: Yao Zi <ziyao@disroot.org>
 To: Yixun Lan <dlan@gentoo.org>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>,
  "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] riscv: Add Kconfig options to distinguish Zaamo and
- Zalrsc
-Message-ID: <aI7XWSh7H-WqzoEa@pie>
+Subject: Re: [PATCH 2/2] riscv: Add a Zalrsc-only alternative for
+ synchronization in start.S
+Message-ID: <aI7dSjjZttbcb8F-@pie>
 References: <20250802092155.40915-1-ziyao@disroot.org>
- <20250802092155.40915-2-ziyao@disroot.org>
- <20250803012422-GYA937575@gentoo>
+ <20250802092155.40915-3-ziyao@disroot.org>
+ <20250803012123-GYA937293@gentoo>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250803012422-GYA937575@gentoo>
+In-Reply-To: <20250803012123-GYA937293@gentoo>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,127 +73,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Aug 03, 2025 at 09:24:22AM +0800, Yixun Lan wrote:
+On Sun, Aug 03, 2025 at 09:21:23AM +0800, Yixun Lan wrote:
 > Hi Yao,
 > 
 > On 09:21 Sat 02 Aug     , Yao Zi wrote:
-> > Ratified on Apr. 2024, the original RISC-V "A" extension is now split
-> > into two separate extensions, "Zaamo" for atomic operations and "Zalrsc"
-> > for load-reserved/store-conditional instructions.
-> > 
-> > For now, we've already seen real-world designs implement the Zalrsc
-> > extension only[2]. As U-Boot mainly runs with only one HART, we could
-> > easily support these designs by not using AMO instructions in the
-> > hard-written assembly if necessary, for which this patch introduces two
-> > new Kconfig options to indicate the availability of "Zaamo" and "Zalrsc".
-> > 
-> > Note that even with this patch, "A" extension is specified in the ISA
-> > string passed to the compiler as long as one of "Zaamo" or "Zalrsc" is
-> > available, since they're only recognized with a quite recent version of
-> > GCC/Clang. The compiler usually doesn't automatically generate atomic
-> > instructions unless the source explicitly instructs it to do so, thus
-> > this should be safe.
-> > 
-> > Link: https://github.com/riscv/riscv-zaamo-zalrsc/commit/d94c64c63e9120d56bdeb540caf2e5dae60a8126 # [1]
-> > Link: https://lore.kernel.org/u-boot/20250729162035.209849-9-uros.stajic@htecgroup.com/ # [2]
-> > Signed-off-by: Yao Zi <ziyao@disroot.org>
-> > ---
-> >  arch/riscv/Kconfig             | 17 +++++++++++++++++
-> >  arch/riscv/Makefile            |  7 ++++++-
-> >  configs/ibex-ast2700_defconfig |  3 ++-
-> >  3 files changed, 25 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> > index 8c6feae5735..b1c2d657e99 100644
-> > --- a/arch/riscv/Kconfig
-> > +++ b/arch/riscv/Kconfig
-> > @@ -339,10 +339,27 @@ endmenu
-> >  
-> >  config RISCV_ISA_A
-> >  	bool "Standard extension for Atomic Instructions"
-> > +	depends on RISCV_ISA_ZAAMO && RISCV_ISA_ZALRSC
-> >  	default y
-> >  	help
-> >  	  Adds "A" to the ISA string passed to the compiler.
-> >  
-> > +config RISCV_ISA_ZAAMO
-> > +	bool "Standard extension for Atomic Memory Operations"
-> > +	default y
-> > +	help
-> > +	  Indicates the platform supports Zaamo extension for atomic memory
-> > +	  operations. Assembly routines won't use AMO instructions if set
-> > +	  to n.
-> > +
-> > +config RISCV_ISA_ZALRSC
-> > +	bool "Standard extension for LR/SC instructions"
-> > +	default y
-> > +	help
-> > +	  Indicates the platform supports Zalrsc extension for load-reserved
-> > +	  and store-conditional instructions. Assembly rutines won't use
-> > +	  LR/SC instructions if set to n.
-> > +
-> >  config RISCV_ISA_ZICBOM
-> >  	bool "Zicbom support"
-> >  	depends on !SYS_DISABLE_DCACHE_OPS
-> > diff --git a/arch/riscv/Makefile b/arch/riscv/Makefile
-> > index 6f80f4a7108..fdda6da1df3 100644
-> > --- a/arch/riscv/Makefile
-> > +++ b/arch/riscv/Makefile
-> > @@ -11,7 +11,12 @@ ifeq ($(CONFIG_ARCH_RV32I),y)
-> >  	ARCH_BASE = rv32im
-> >  	ABI_BASE = ilp32
-> >  endif
-> > -ifeq ($(CONFIG_RISCV_ISA_A),y)
-> > +# GCC starts to recognize "Zaamo" and "Zalrsc" from version 15, which is quite
-> > +# recent. We don't bother checking the exact compiler version, but pass "A"
-> > +# extension for -march as long as one of "Zaamo" or "Zalrsc" is available.
-> > +ifeq ($(findstring y,$(CONFIG_RISCV_ISA_A)	\
-> > +		     $(CONFIG_RISCV_ISA_ZAAMO)	\
-> > +		     $(CONFIG_RISCV_ISA_ZALRSC)),y)
-> >  	ARCH_A = a
-> >  endif
-> >  ifeq ($(CONFIG_RISCV_ISA_F),y)
-> > diff --git a/configs/ibex-ast2700_defconfig b/configs/ibex-ast2700_defconfig
-> > index f088aec8716..eb5cab43645 100644
-> > --- a/configs/ibex-ast2700_defconfig
-> > +++ b/configs/ibex-ast2700_defconfig
-> > @@ -23,7 +23,8 @@ CONFIG_SYS_MEM_TOP_HIDE=0x10000000
-> >  CONFIG_BUILD_TARGET=""
-> >  CONFIG_TARGET_ASPEED_AST2700_IBEX=y
-> >  # CONFIG_RISCV_ISA_F is not set
-> > -# CONFIG_RISCV_ISA_A is not set
-> > +# CONFIG_RISCV_ISA_ZAAMO is not set
-> > +# CONFIG_RISCV_ISA_ZALRSC is not set
+> > Add an alternative implementation that use Zalrsc extension only for
+> > HART lottery and SMP locking to support SMP on cores without "Zaamo"
+> > extension available. The Zaamo implementation is still used by default
+> > since since the Zalrsc one requires more instructions.
+> ~~~~~~~~~~~~~two 'since'
 > 
-> this is confusing, while in this patchset it actually equal to :
-> # CONFIG_RISCV_ISA_ZAAMO is not set
-> CONFIG_RISCV_ISA_ZALRSC=y
+> to slightly improve it..
+> .., The Zaamo implementation is prioritized selected if both extension available,
+> since the Zalrsc one requires more instructions.
 
-No, ibex-ast2700_defconfig enables XIP and SPL_XIP, thus isn't affected
-by the change of the second patch. This defconfig change is only for
-ensuring the march string passed to CC doesn't contain "A" extension
-just as what has been done previously, which may help find out possible
-breakages to the board as early as possible in the future, since it's
-the only existing board that doesn't support A extension.
+Thanks for catching the typo. This improvement also looks good to me.
 
-> also I believe changes for configs/ibex-ast2700_defconfig should go as
-> an independent patch, please separate it
+> while I can understand the logic, but if we interpret from the code below,
+> it's a little bit weird:
+>  if (RISCV_ISA_ZAAMO) not enabled:
+>  	use zalrsc implementation
+> 
+> instead of 
+>  if (RISCV_ISA_ZALRSC) is enabled:
+>  	use zalrsc implementation
+> 
+> I mean, to select Zalrsc implementation, enabling RISCV_ISA_ZALRSC is not enough,
+> but RISCV_ISA_ZAAMO should be explicitly disabled,
 
-At my very first glance, I was worried about behavior changes for the
-board: as you can see, what is passed as march affects the content of
-.riscv.attributes section in the result ELF file, and if we disable
-RISCV_ISA_ZA{AMO,LRSC} in a separate patch, "A" will be included in the
-ISA string before it gets applied.
+This is true, but I don't think it matters: the two implementations
+aren't two different features, but code details to the same feature. I
+couldn't come up with a reason to explicitly select the Zalrsc one when
+Zaamo is available, especially when the Zaamo one takes less code space.
 
-This seems to be somehow farsight and I'll separate the change into
-another patch.
+> in fact RISCV_ISA_ZALRSC is superfluous here
 
-Best regards,
+Yes, it's not used in this patch, but it has its place: without such an
+option, one couldn't distinguish whether Zalrsc is available, it would
+be hard to determine whether "A"/"Zalrsc" should be passed as part of
+the ISA string when CONFIG_RISCV_ISA_ZAAMO is set to n.
+
+> make it further, it would be great if we could do some Kconfig sanity check..
+> (I have one more comment for configs/ibex-ast2700_defconfig in patch 1/2)
+
+If I understand it correctly, these code is actually for SMP systems.
+Ideally we should group them inside "#if CONFIG_IS_ENABLED(SMP)" and
+make SMP depend on RISCV_RISA_ZAAMO || RISCV_ISA_ZALRSC, which I
+originally want to make a separate patch (it's not a must to make SMP
+possible on Zalrsc-only systems).
+
+Thanks,
 Yao Zi
 
-> >  # CONFIG_SPL_SMP is not set
-> >  CONFIG_XIP=y
-> >  CONFIG_SPL_XIP=y
+> > 
+> > Signed-off-by: Yao Zi <ziyao@disroot.org>
+> > ---
+> >  arch/riscv/cpu/start.S | 26 +++++++++++++++++++++++++-
+> >  1 file changed, 25 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
+> > index 7bafdfd390a..6324ff585d4 100644
+> > --- a/arch/riscv/cpu/start.S
+> > +++ b/arch/riscv/cpu/start.S
+> > @@ -151,8 +151,15 @@ call_harts_early_init:
+> >  	 */
+> >  	la	t0, hart_lottery
+> >  	li	t1, 1
+> > +#if CONFIG_IS_ENABLED
+> >  	amoswap.w s2, t1, 0(t0)
+> >  	bnez	s2, wait_for_gd_init
+> > +#else
+> > +	lr.w	s2, (t0)
+> > +	bnez	s2, wait_for_gd_init
+> > +	sc.w	s2, t1, (t0)
+> > +	bnez	s2, wait_for_gd_init
+> > +#endif
+> >  #else
+> >  	/*
+> >  	 * FIXME: gp is set before it is initialized. If an XIP U-Boot ever
+> > @@ -177,7 +184,12 @@ call_harts_early_init:
+> >  #if !CONFIG_IS_ENABLED(XIP)
+> >  #ifdef CONFIG_AVAILABLE_HARTS
+> >  	la	t0, available_harts_lock
+> > +#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> >  	amoswap.w.rl zero, zero, 0(t0)
+> > +#else
+> > +	fence	rw, w
+> > +	sw	zero, 0(t0)
+> > +#endif
+> >  #endif
+> >  
+> >  wait_for_gd_init:
+> > @@ -190,7 +202,14 @@ wait_for_gd_init:
+> >  #ifdef CONFIG_AVAILABLE_HARTS
+> >  	la	t0, available_harts_lock
+> >  	li	t1, 1
+> > -1:	amoswap.w.aq t1, t1, 0(t0)
+> > +1:
+> > +#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> > +	amoswap.w.aq t1, t1, 0(t0)
+> > +#else
+> > +	lr.w.aq	t1, 0(t0)
+> > +	bnez	t1, 1b
+> > +	sc.w.rl t1, t1, 0(t0)
+> > +#endif
+> >  	bnez	t1, 1b
+> >  
+> >  	/* register available harts in the available_harts mask */
+> > @@ -200,7 +219,12 @@ wait_for_gd_init:
+> >  	or	t2, t2, t1
+> >  	SREG	t2, GD_AVAILABLE_HARTS(gp)
+> >  
+> > +#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> >  	amoswap.w.rl zero, zero, 0(t0)
+> > +#else
+> > +	fence	rw, w
+> > +	sw	zero, 0(t0)
+> > +#endif
+> >  #endif
+> >  
+> >  	/*
 > > -- 
 > > 2.50.1
 > > 
