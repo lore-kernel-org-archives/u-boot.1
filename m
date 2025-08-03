@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22CAC87FCB
-	for <u-boot@archiver.kernel.org>; Sun,  3 Aug 2025 08:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 491EDC87FCA
+	for <u-boot@archiver.kernel.org>; Sun,  3 Aug 2025 08:18:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FD0483D13;
-	Sun,  3 Aug 2025 10:17:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A8B3C83D28;
+	Sun,  3 Aug 2025 10:18:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Z2HXP6Uv";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="hmOBuqON";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74E3B83D17; Sun,  3 Aug 2025 10:17:19 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 2EC0C83D28; Sun,  3 Aug 2025 10:18:03 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC6FB83B5F
- for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 10:17:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BAF283B5F
+ for <u-boot@lists.denx.de>; Sun,  3 Aug 2025 10:18:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-b4235495646so1401750a12.2
- for <u-boot@lists.denx.de>; Sun, 03 Aug 2025 01:17:16 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2403ca0313aso26288265ad.0
+ for <u-boot@lists.denx.de>; Sun, 03 Aug 2025 01:18:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1754209035; x=1754813835;
+ d=amarulasolutions.com; s=google; t=1754209079; x=1754813879;
  darn=lists.denx.de; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ihfrmAxGMMSRh6d+ZUr/KGZqmDJb5do4e6yen0D0gmU=;
- b=Z2HXP6Uvb5Zza8A1IwAxatZIqMLWFgF2RQpyEvvrSmHrvenJXLMuB+WviHvUSJVqEe
- IBEaI4xXEEg0s0KwAnCF/hWTTOhviCDG19Ae2rekuZHgeEN5aPDiuB0M4XldNXQVYd6D
- R/A0a2Ep0VDsBSX0mUyzI+gDcqku2l3SLDHNQ=
+ bh=nqZJm5/+xY6P/KZPKIj2Kg3f3UVIQ93aHheucjO0DyA=;
+ b=hmOBuqONR4UWeShz6j96Bahl3ORLIjmqRa67CzjQvd78Uu/UWmXomRh3Ts2Lo88cey
+ 2RWZclD17fA1A3+gSHBxhzGpaEdncstxYO6iozjZb7SBEprPoyT9QX097InhVNaghxzd
+ KWIgg2jNwhusGv7bo2GJFV4Oks2or1BvqrfOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754209035; x=1754813835;
+ d=1e100.net; s=20230601; t=1754209079; x=1754813879;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ihfrmAxGMMSRh6d+ZUr/KGZqmDJb5do4e6yen0D0gmU=;
- b=jLiAeNj2lI/beYjPEYjnB5//yDZ/pPjDpXmrpseHHhEltX6V8W69Tpf3Do99nKt0/7
- MYL9ZNebdFrCnudfQJK8RrTCq8DuVM99c3cVIze4qiPYkDV8lnlIO2dkqVs08I4ZX9aU
- mso130whgMe8eTqk5k9ulpZN2qgBTAD3Hwd7BLT3UZsU/AWEvPm6eVC3tHmW2YJS8kDr
- MuFFVrRyBltqwhclkbYyAl4XDX7UPb0EJWm2y85WvocL5GgndoccywuRsZoLg8ODNr6o
- JgmrIHfcAxyE/GoPcEeDgqueNVtpu/JfxqZdEni7OAWM1YMxdo3i4j7aeEEQ+7e72fdA
- tOrQ==
+ bh=nqZJm5/+xY6P/KZPKIj2Kg3f3UVIQ93aHheucjO0DyA=;
+ b=dZpux0qSf5LPpOukyARf1ERsPBQES2b1YMalHws0d6dTkm/AM8Az98JdKgf2r8lJTG
+ zMbiDlza43wWS/LMlIZmue7QvH57e6T63r845U2VT3Tdh1irVQoZfD8lS52M6eDrZlB1
+ D1JmfGMQGS1mDVsC9XbqiaYhKdOmoNUp94fozriFTIF0ypTR1R1Wtn3Hu07aQttjIw15
+ Qmnim+pK5RW5tyVBUAJ6SLClZQ31Qlz/4MGBaPVJZR2AEhlAPiac8BsdWww5sFAFCIWS
+ 12lPkT3hSinkuM1DWQ2L/Oc/5MpLmiZIU73FpDsDPY9jdV7kp4jgsTFxjfCN8yeVw5tg
+ sAGA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHK8WETRF+AfUXCyrRZxRJWqw2N9g4Yd+nVJvqzYpqPTtRqYY0qqx3mgqW97eCiEDN6zMaNRs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx5iLgIor0Q8hMxAiILOBkrFysjp8w03HkGDoii8Zt3KAQCxUct
- +7xyCI6/f+SDsILeK9IngJWZzWkWmyvVlOVMrj7UMDrkabrVyul89N46h5jbrnbhezY6tIzA3KQ
- KuWbhRUekqdz40ewiI3YVHQcq453Bp4v/N/FtFsvQ2A==
-X-Gm-Gg: ASbGncvYcn8EEf5C59T8yWWMli4EkcItVRO4dJdbOECYR9IBXDJi4jy0VKt757PhBGY
- OR8VKYyVnFrhQhHn2YoIAbpW4UbNyRlGdYqMi0MCsTFzSUq70sHp2pwvSzf9+Pispyr+qV7eEsE
- 3nWttBMhnySgB0TwoJ/67E2l2FbPZC+FYM19zVgJidZYfuXi4mainA9tqMga3FYffHoVFZRkmuz
- eetTg==
-X-Google-Smtp-Source: AGHT+IHv5bvuXKXY8oj8xwcohTTW/3Pnxc9Eoba0ZL1n8D6biBDMv4hfSryPCsh7i+0mT13xha0ef/l6thSIzVhu6XI=
-X-Received: by 2002:a17:90b:58c4:b0:31e:cb1a:3dc5 with SMTP id
- 98e67ed59e1d1-3211620acdfmr8613818a91.11.1754209035108; Sun, 03 Aug 2025
- 01:17:15 -0700 (PDT)
+ AJvYcCWqfNvGI35nnz0TRtioxDkO/whdQIXO3BGUKOQ0zYEYXKUD80xMNlt4uY/DGCoZf+WRCQ6HGcs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcIXvDVmKCOZw53QejFY2Rt03qTJ3LWzG9ModM9dTMj0FmCc4H
+ 2STbXizHPiowvMknySBSPVbvJCEdipObsuAUtNP9HOOqRUz7x5LcqYT5L19t0ySwoeH5er7G5BA
+ rPufvJfnMFC/MhXu2EMi8SrG8lve/AM3qY9wlVK5cFA==
+X-Gm-Gg: ASbGncvLq77ZV0LVKWr7BJrW8G6LJ1+0+M3DxEPXiD0HOb1AwTtGzTiZ1rZ0gho3CA7
+ cHAgK9gPogP9tirmtDuKZnnLGus/B1WpgqSsT7Ynsk67qPS7H5USZZT16+bXTnECdWLy3padbAA
+ N5OSSkaGTVItyCjoUOL8gBXdDvNlcJuc3iv8NdbuydVkJeBdoUSiw1Itk7ZQXleN7P9IRc44RKB
+ ernWJBKep96FbRt
+X-Google-Smtp-Source: AGHT+IG+STrTyhl92Vf2RLwaJqYusC+AP29TxV7ruyLXl9ORiMZyoYaLCqjcc4gOSW/kzfjY9+YjTU2GLepqsmewN9o=
+X-Received: by 2002:a17:902:c94c:b0:242:1b:7f05 with SMTP id
+ d9443c01a7336-24246ff1f80mr81605025ad.24.1754209078819; Sun, 03 Aug 2025
+ 01:17:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250801-mtd_nand_raw-v1-0-80c316f5bb99@linaro.org>
- <20250801-mtd_nand_raw-v1-3-80c316f5bb99@linaro.org>
-In-Reply-To: <20250801-mtd_nand_raw-v1-3-80c316f5bb99@linaro.org>
+References: <20250801-mtd_nand_raw2-v1-0-bdabdeb35b46@linaro.org>
+ <20250801-mtd_nand_raw2-v1-1-bdabdeb35b46@linaro.org>
+In-Reply-To: <20250801-mtd_nand_raw2-v1-1-bdabdeb35b46@linaro.org>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 3 Aug 2025 10:17:03 +0200
-X-Gm-Features: Ac12FXy74xYS8Y6XFZVtHHaQkJV3g4IFTrxXuc12-OSBP6w5XACq-h2_uq5kalg
-Message-ID: <CAOf5uwmc3F7Y3fbuyW=Qe7Ni79Vq0sh4MsuVsLGCDitUs1cdhg@mail.gmail.com>
-Subject: Re: [PATCH 3/3] mtd: rawnand: mxs_nand: Ensure err is set for error
- path
+Date: Sun, 3 Aug 2025 10:17:43 +0200
+X-Gm-Features: Ac12FXzRtoUi4QPJ7rC-HfKsiZoC8_JBTlZYa8lWlbkoPYgiItX-mDxPMcGcKb4
+Message-ID: <CAOf5uwmhNsXSZFaC_fqL2FFFHJ1CmEz4Xj0D4=7cu6nKPMaNfg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] mtd: nand: pxa3xx: Free memory on error
 To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de, 
+ uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -98,49 +99,42 @@ X-Virus-Status: Clean
 
 Hi
 
-On Fri, Aug 1, 2025 at 11:54=E2=80=AFAM Andrew Goodbody <andrew.goodbody@li=
+On Fri, Aug 1, 2025 at 12:39=E2=80=AFPM Andrew Goodbody <andrew.goodbody@li=
 naro.org>
 wrote:
 
-> In mxs_nand_init_ctrl there are a couple of error paths that do not set
-> err which could lead to the errors being silently ignored despite the
-> function not completing. Rather than just using if to detect these
-> errors use err to collect the error return value from the called
-> functions.
+> In pxa3xx_nand_probe_dt if the function detects an error after
+> allocating memory that memory is not freed before exit. Add the
+> appropriate free.
 >
 > This issue was found by Smatch.
 >
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->  drivers/mtd/nand/raw/mxs_nand.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+>  drivers/mtd/nand/raw/pxa3xx_nand.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/drivers/mtd/nand/raw/mxs_nand.c
-> b/drivers/mtd/nand/raw/mxs_nand.c
-> index ba67466069b..fecf1f5ba91 100644
-> --- a/drivers/mtd/nand/raw/mxs_nand.c
-> +++ b/drivers/mtd/nand/raw/mxs_nand.c
-> @@ -1640,10 +1640,12 @@ int mxs_nand_init_ctrl(struct mxs_nand_info
-> *nand_info)
->                 nand->setup_data_interface =3D mxs_nand_setup_interface;
+> diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> index b78b4e60238..7bf54fa4654 100644
+> --- a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> +++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> @@ -1765,6 +1765,7 @@ static int pxa3xx_nand_probe_dt(struct udevice *dev=
+,
+> struct pxa3xx_nand_info *in
+>         pdata->num_cs =3D dev_read_u32_default(dev, "num-cs", 1);
+>         if (pdata->num_cs !=3D 1) {
+>                 pr_err("pxa3xx driver supports single CS only\n");
+> +               kfree(pdata);
+>                 return -EINVAL;
+>         }
 >
->         /* first scan to find the device and get the page size */
-> -       if (nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL))
-> +       err =3D nand_scan_ident(mtd, CONFIG_SYS_MAX_NAND_DEVICE, NULL);
-> +       if (err)
->                 goto err_free_buffers;
->
-> -       if (mxs_nand_setup_ecc(mtd))
-> +       err =3D mxs_nand_setup_ecc(mtd);
-> +       if (err)
->                 goto err_free_buffers;
->
->         nand->ecc.read_page     =3D mxs_nand_ecc_read_page;
->
->
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+
+Reviewed-by: MIchael Trimarchi <michael@amarulasolutions.com>
 
 
+>
+>
 > --
 > 2.39.5
 >
