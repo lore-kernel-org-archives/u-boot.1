@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB315C87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 18:18:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC393C87FCF
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 18:18:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C36983045;
+	by phobos.denx.de (Postfix) with ESMTP id CC91383623;
 	Mon,  4 Aug 2025 20:17:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="MgvetBSc";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="DSQBhsab";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E98FD83537; Mon,  4 Aug 2025 20:17:47 +0200 (CEST)
+ id 343A382063; Mon,  4 Aug 2025 20:17:48 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD7F282063
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 20:17:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D17D8830A0
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 20:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1754331462; bh=csuVvtiH5o5MInHGHJpeEAtgVowjm3ErrDtqqQ7jy4Q=;
- b=MgvetBScHgaUG0tydGlC1WxS6wdzMBo44JIopmpmfa1wRRFDzvozp79iZ5dAH1wnHSNzuQJG3
- q5e5LAYimpGH/wRbL79GTNzFk+tEsLIAdv5NVY0+eOtdoRx87bYMsO3Wu14NXU+BNlYYoS70h6n
- tlo8O6UQ4eZ15a4VmBkLEVbyYuHYvewQXuU8347NV6QJxJTpZ4n4AxtfpYVhM00rUXVjYXK9hy8
- 02fYiKh2YhYnIvjYXh5ck+lKumoaNhDXfjy84GxXeEJy6fBVxDCGOIFt/8/h98mIhpDHmTd4b3X
- z4cUQOVtcUVxyUb8ocEa3Ybvu1yCjWlpN0yycXUubDJQ==
-X-Forward-Email-ID: 6890f9108f6d45d450a4a091
+ t=1754331464; bh=1/1Qcjm3Nu2f63WkHCaZnSDn1PPFQ916ujYAPrQ4bCU=;
+ b=DSQBhsabSn+FsjAVdLsxZ2Yyvs0WrnwAwq44lxV+9P6WuW6jciAVEoShF7c9zuIVS4aoB8GvJ
+ 37ihxuNX/xjR6egYCORvQtP9RmZ+sxpQMPoFmksgDtFW+GDwVh2lHYlZp5zRl5WcjUl2GytoU+3
+ yay85PrSnbLCSOSLo7eeHin0uNWw1KEutWyk3cFFmi8hJiqUPO4Fb8VymAb9QEkIZF5rshwWO30
+ 3OzdncA0FjFlGM9MzDdE+fuNjJrW97UCS8gRLkT6tjmxO3cxLz34hrX+43y5m4i8cMo2WMJNgym
+ u7d9FWt9Z/mEjsILD9AkTzw0FKVsT1xc2EkQvzLPH7/w==
+X-Forward-Email-ID: 6890f9148f6d45d450a4a0a6
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.1.8
@@ -44,12 +44,13 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>
 Cc: FUKAUMI Naoki <naoki@radxa.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 1/3] rockchip: Add initial RK3582 support
-Date: Mon,  4 Aug 2025 18:16:30 +0000
-Message-ID: <20250804181638.3855760-2-jonas@kwiboo.se>
+ u-boot@lists.denx.de
+Subject: [PATCH v2 2/3] rockchip: rk3588-generic: Enable support for RK3582
+Date: Mon,  4 Aug 2025 18:16:31 +0000
+Message-ID: <20250804181638.3855760-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250804181638.3855760-1-jonas@kwiboo.se>
 References: <20250804181638.3855760-1-jonas@kwiboo.se>
@@ -71,273 +72,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
-What blocks are disabled/non-working is indicated by ip-state in OTP.
+Add Kconfig option OF_SYSTEM_SETUP=y to support booting boards with a
+RK3582 SoC. CPU and GPU cores are failed based on ip-state and policy.
 
-This add initial support for RK3582 by using ft_system_setup() to mark
-any cpu and/or gpu node with status=fail as indicated by ip-state.
+Tested on a ROCK 5C Lite v1.1:
 
-This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
-cores and the gpu is always failed/disabled.
+  cpu-code: 35 82
+  ip-state: 10 00 00 (otp)
+  ip-state: 30 de 04 (policy)
+  remove cpu-map cluster1
+  rename cpu-map cluster2
+  fail gpu
+  fail rkvdec0
+  fail rkvdec1
+  fail rkvenc1
+  fail cpu cpu@400
+  fail cpu cpu@500
 
-Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
-the required DT fixups for RK3582 board variants.
+and on a Radxa E52C:
+
+  cpu-code: 35 82
+  ip-state: 00 04 00 (otp)
+  ip-state: c0 de 04 (policy)
+  remove cpu-map cluster2
+  fail gpu
+  fail rkvdec0
+  fail rkvdec1
+  fail rkvenc1
+  fail cpu cpu@600
+  fail cpu cpu@700
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-Changes in v2:
-- Refactor code to first apply policy to ip-state and then fail cores
-  based on the updated ip-state
-- Add support for failing rkvdec and rkvenc cores
-- Append soc compatible to board model
-- Not picking up t-b tag due to significant changes to patch
+v2: Mention RK3582 in generic board device tree and documentation
 ---
- arch/arm/mach-rockchip/rk3588/rk3588.c | 221 +++++++++++++++++++++++++
- 1 file changed, 221 insertions(+)
+ arch/arm/dts/rk3588-generic.dts  | 4 ++--
+ configs/generic-rk3588_defconfig | 1 +
+ doc/board/rockchip/rockchip.rst  | 2 +-
+ 3 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index c01a40020896..3ab0afe0979e 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -7,6 +7,7 @@
- #define LOG_CATEGORY LOGC_ARCH
+diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
+index 6740f9866f17..04144e2ad128 100644
+--- a/arch/arm/dts/rk3588-generic.dts
++++ b/arch/arm/dts/rk3588-generic.dts
+@@ -1,13 +1,13 @@
+ // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ /*
+- * Minimal generic DT for RK3588S/RK3588 with eMMC, SD-card and USB OTG enabled
++ * Minimal generic DT for RK3582/RK3588S/RK3588 with eMMC, SD-card and USB OTG enabled
+  */
  
- #include <dm.h>
-+#include <fdt_support.h>
- #include <misc.h>
- #include <spl.h>
- #include <asm/armv8/mmu.h>
-@@ -200,6 +201,16 @@ int arch_cpu_init(void)
+ /dts-v1/;
+ #include "rk3588s.dtsi"
  
- #define RK3588_OTP_CPU_CODE_OFFSET		0x02
- #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
-+#define RK3588_OTP_IP_STATE_OFFSET		0x1d
-+
-+#define FAIL_CPU_CLUSTER0		GENMASK(3, 0)
-+#define FAIL_CPU_CLUSTER1		GENMASK(5, 4)
-+#define FAIL_CPU_CLUSTER2		GENMASK(7, 6)
-+#define FAIL_GPU				GENMASK(4, 1)
-+#define FAIL_RKVDEC0			BIT(6)
-+#define FAIL_RKVDEC1			BIT(7)
-+#define FAIL_RKVENC0			BIT(0)
-+#define FAIL_RKVENC1			BIT(2)
+ / {
+-	model = "Generic RK3588S/RK3588";
++	model = "Generic RK3582/RK3588S/RK3588";
+ 	compatible = "rockchip,rk3588";
  
- int checkboard(void)
- {
-@@ -245,3 +256,213 @@ int checkboard(void)
- 
- 	return 0;
- }
-+
-+static int fdt_path_del_node(void *fdt, const char *path)
-+{
-+	int nodeoffset;
-+
-+	nodeoffset = fdt_path_offset(fdt, path);
-+	if (nodeoffset < 0)
-+		return nodeoffset;
-+
-+	return fdt_del_node(fdt, nodeoffset);
-+}
-+
-+static int fdt_path_set_name(void *fdt, const char *path, const char *name)
-+{
-+	int nodeoffset;
-+
-+	nodeoffset = fdt_path_offset(fdt, path);
-+	if (nodeoffset < 0)
-+		return nodeoffset;
-+
-+	return fdt_set_name(fdt, nodeoffset, name);
-+}
-+
-+/*
-+ * RK3582 is a variant of the RK3588S with some IP blocks disabled. What blocks
-+ * are disabled/non-working is indicated by ip-state in OTP. ft_system_setup()
-+ * is used to mark any cpu and/or gpu node with status=fail as indicated by
-+ * ip-state. Apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
-+ * cores and the gpu is always failed/disabled. Enable OF_SYSTEM_SETUP to make
-+ * use of the required DT fixups for RK3582 board variants.
-+ */
-+int ft_system_setup(void *blob, struct bd_info *bd)
-+{
-+	static const char * const cpu_node_names[] = {
-+		"cpu@0", "cpu@100", "cpu@200", "cpu@300",
-+		"cpu@400", "cpu@500", "cpu@600", "cpu@700",
-+	};
-+	int parent, node, i, comp_len, len, ret;
-+	bool cluster1_removed = false;
-+	u8 cpu_code[2], ip_state[3];
-+	struct udevice *dev;
-+	char soc_comp[16];
-+	const char *comp;
-+	void *data;
-+
-+	if (!IS_ENABLED(CONFIG_OF_SYSTEM_SETUP))
-+		return 0;
-+
-+	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
-+		return -ENOSYS;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(rockchip_otp), &dev);
-+	if (ret) {
-+		log_debug("Could not find otp device, ret=%d\n", ret);
-+		return ret;
-+	}
-+
-+	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
-+	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
-+	if (ret < 0) {
-+		log_debug("Could not read cpu-code, ret=%d\n", ret);
-+		return ret;
-+	}
-+
-+	log_debug("cpu-code: %02x %02x\n", cpu_code[0], cpu_code[1]);
-+
-+	/* only fail devices on rk3582/rk3583 */
-+	if (!(cpu_code[0] == 0x35 && cpu_code[1] == 0x82) &&
-+	    !(cpu_code[0] == 0x35 && cpu_code[1] == 0x83))
-+		return 0;
-+
-+	ret = misc_read(dev, RK3588_OTP_IP_STATE_OFFSET, &ip_state, 3);
-+	if (ret < 0) {
-+		log_err("Could not read ip-state, ret=%d\n", ret);
-+		return ret;
-+	}
-+
-+	log_debug("ip-state: %02x %02x %02x (otp)\n",
-+		  ip_state[0], ip_state[1], ip_state[2]);
-+
-+	/* policy: fail entire big core cluster when one or more core is bad */
-+	if (ip_state[0] & FAIL_CPU_CLUSTER1)
-+		ip_state[0] |= FAIL_CPU_CLUSTER1;
-+	if (ip_state[0] & FAIL_CPU_CLUSTER2)
-+		ip_state[0] |= FAIL_CPU_CLUSTER2;
-+
-+	/* policy: always fail one big core cluster on rk3582/rk3583 */
-+	if (!(ip_state[0] & (FAIL_CPU_CLUSTER1 | FAIL_CPU_CLUSTER2)))
-+		ip_state[0] |= FAIL_CPU_CLUSTER2;
-+
-+	if (cpu_code[0] == 0x35 && cpu_code[1] == 0x82) {
-+		/* policy: always fail gpu on rk3582 */
-+		ip_state[1] |= FAIL_GPU;
-+
-+		/* policy: always fail rkvdec on rk3582 */
-+		ip_state[1] |= FAIL_RKVDEC0 | FAIL_RKVDEC1;
-+	} else if (cpu_code[0] == 0x35 && cpu_code[1] == 0x83) {
-+		/* policy: always fail one rkvdec core on rk3583 */
-+		if (!(ip_state[1] & (FAIL_RKVDEC0 | FAIL_RKVDEC1)))
-+			ip_state[1] |= FAIL_RKVDEC1;
-+	}
-+
-+	/* policy: always fail one rkvenc core on rk3582/rk3583 */
-+	if (!(ip_state[2] & (FAIL_RKVENC0 | FAIL_RKVENC1)))
-+		ip_state[2] |= FAIL_RKVENC1;
-+
-+	log_debug("ip-state: %02x %02x %02x (policy)\n",
-+		  ip_state[0], ip_state[1], ip_state[2]);
-+
-+	/* cpu cluster1: ip_state[0]: bit4~5 */
-+	if ((ip_state[0] & FAIL_CPU_CLUSTER1) == FAIL_CPU_CLUSTER1) {
-+		log_debug("remove cpu-map cluster1\n");
-+		fdt_path_del_node(blob, "/cpus/cpu-map/cluster1");
-+		cluster1_removed = true;
-+	}
-+
-+	/* cpu cluster2: ip_state[0]: bit6~7 */
-+	if ((ip_state[0] & FAIL_CPU_CLUSTER2) == FAIL_CPU_CLUSTER2) {
-+		log_debug("remove cpu-map cluster2\n");
-+		fdt_path_del_node(blob, "/cpus/cpu-map/cluster2");
-+	} else if (cluster1_removed) {
-+		/* cluster nodes must be named in a continuous series */
-+		log_debug("rename cpu-map cluster2\n");
-+		fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
-+	}
-+
-+	/* gpu: ip_state[1]: bit1~4 */
-+	if (ip_state[1] & FAIL_GPU) {
-+		log_debug("fail gpu\n");
-+		fdt_status_fail_by_pathf(blob, "/gpu@fb000000");
-+	}
-+
-+	/* rkvdec: ip_state[1]: bit6,7 */
-+	if (ip_state[1] & FAIL_RKVDEC0) {
-+		log_debug("fail rkvdec0\n");
-+		fdt_status_fail_by_pathf(blob, "/video-codec@fdc38000");
-+		fdt_status_fail_by_pathf(blob, "/iommu@fdc38700");
-+	}
-+	if (ip_state[1] & FAIL_RKVDEC1) {
-+		log_debug("fail rkvdec1\n");
-+		fdt_status_fail_by_pathf(blob, "/video-codec@fdc40000");
-+		fdt_status_fail_by_pathf(blob, "/iommu@fdc40700");
-+	}
-+
-+	/* rkvenc: ip_state[2]: bit0,2 */
-+	if (ip_state[2] & FAIL_RKVENC0) {
-+		log_debug("fail rkvenc0\n");
-+		fdt_status_fail_by_pathf(blob, "/video-codec@fdbd0000");
-+		fdt_status_fail_by_pathf(blob, "/iommu@fdbdf000");
-+	}
-+	if (ip_state[2] & FAIL_RKVENC1) {
-+		log_debug("fail rkvenc1\n");
-+		fdt_status_fail_by_pathf(blob, "/video-codec@fdbe0000");
-+		fdt_status_fail_by_pathf(blob, "/iommu@fdbef000");
-+	}
-+
-+	parent = fdt_path_offset(blob, "/cpus");
-+	if (parent < 0) {
-+		log_err("Could not find /cpus, parent=%d\n", parent);
-+		return parent;
-+	}
-+
-+	/* cpu: ip_state[0]: bit0~7 */
-+	for (i = 0; i < 8; i++) {
-+		/* fail any bad cpu core */
-+		if (!(ip_state[0] & BIT(i)))
-+			continue;
-+
-+		node = fdt_subnode_offset(blob, parent, cpu_node_names[i]);
-+		if (node >= 0) {
-+			log_debug("fail cpu %s\n", cpu_node_names[i]);
-+			fdt_status_fail(blob, node);
-+		} else {
-+			log_err("Could not find %s, node=%d\n",
-+				cpu_node_names[i], node);
-+			return node;
-+		}
-+	}
-+
-+	node = fdt_path_offset(blob, "/");
-+	if (node < 0) {
-+		log_err("Could not find /, node=%d\n", node);
-+		return node;
-+	}
-+
-+	snprintf(soc_comp, sizeof(soc_comp), "rockchip,rk35%x", cpu_code[1]);
-+
-+	for (i = 0, comp_len = 0;
-+	     (comp = fdt_stringlist_get(blob, node, "compatible", i, &len));
-+	     i++) {
-+		/* stop at soc compatible */
-+		if (!strcmp(comp, soc_comp) ||
-+		    !strcmp(comp, "rockchip,rk3588s") ||
-+		    !strcmp(comp, "rockchip,rk3588"))
-+			break;
-+
-+		log_debug("compatible[%d]: %s\n", i, comp);
-+		comp_len += len + 1;
-+	}
-+
-+	/* truncate to only include board compatible */
-+	fdt_setprop_placeholder(blob, node, "compatible", comp_len, &data);
-+
-+	/* append soc compatible */
-+	fdt_appendprop_string(blob, node, "compatible", soc_comp);
-+	fdt_appendprop_string(blob, node, "compatible", "rockchip,rk3588s");
-+
-+	return 0;
-+}
+ 	aliases {
+diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
+index dfa8efabe6be..7a8c176912e1 100644
+--- a/configs/generic-rk3588_defconfig
++++ b/configs/generic-rk3588_defconfig
+@@ -16,6 +16,7 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ # CONFIG_BOOTMETH_VBE is not set
+ CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_SPL_MAX_SIZE=0x40000
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 7a1385789c20..726eed4ea45b 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -145,7 +145,7 @@ List of mainline supported Rockchip boards:
+      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
+      - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
+      - FriendlyElec NanoPi R6S (nanopi-r6s-rk3588s)
+-     - Generic RK3588S/RK3588 (generic-rk3588)
++     - Generic RK3582/RK3588S/RK3588 (generic-rk3588)
+      - Hardkernel ODROID-M2 (odroid-m2-rk3588s)
+      - Indiedroid Nova (nova-rk3588s)
+      - Khadas Edge2 (khadas-edge2-rk3588s)
 -- 
 2.50.1
 
