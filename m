@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC393C87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 18:18:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16689C87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 18:25:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC91383623;
-	Mon,  4 Aug 2025 20:17:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97916830F6;
+	Mon,  4 Aug 2025 20:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="DSQBhsab";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="T+UyTmah";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 343A382063; Mon,  4 Aug 2025 20:17:48 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 39EFF831A4; Mon,  4 Aug 2025 20:25:55 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D17D8830A0
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 20:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3CE581FEE
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 20:25:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=4ce3=2R=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1754331464; bh=1/1Qcjm3Nu2f63WkHCaZnSDn1PPFQ916ujYAPrQ4bCU=;
- b=DSQBhsabSn+FsjAVdLsxZ2Yyvs0WrnwAwq44lxV+9P6WuW6jciAVEoShF7c9zuIVS4aoB8GvJ
- 37ihxuNX/xjR6egYCORvQtP9RmZ+sxpQMPoFmksgDtFW+GDwVh2lHYlZp5zRl5WcjUl2GytoU+3
- yay85PrSnbLCSOSLo7eeHin0uNWw1KEutWyk3cFFmi8hJiqUPO4Fb8VymAb9QEkIZF5rshwWO30
- 3OzdncA0FjFlGM9MzDdE+fuNjJrW97UCS8gRLkT6tjmxO3cxLz34hrX+43y5m4i8cMo2WMJNgym
- u7d9FWt9Z/mEjsILD9AkTzw0FKVsT1xc2EkQvzLPH7/w==
-X-Forward-Email-ID: 6890f9148f6d45d450a4a0a6
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1754331951;
+ bh=DX3xHejouWKPe55vX9mz9oeC6H2TUWo6JH4bpm760go=;
+ b=T+UyTmahERTCq2xIn9oFip05MrUWKdWko30EwQDIh42G1T4qkoFclzOCkH8p9RfnGBF+pFTyH
+ ih1MAcbz/DxCCUk7LUSrmskJkyW/VnW9Z3wm01keK0x/kVxQLF40b+JLeWycwn6R5TwkwR9m2tP
+ kAoBLXJPKKPJO564+iiserSJkBHRv3i31gchL83SMtcBnl/SlXd0PqoydEnyRSlqj0VgCz/a78T
+ 0P1yCLnxzGC5eOsHQ7WrEvSj55I5ASVCLrwSzoKvKg4dG25wpZLSt3kucAFuiJy1woByS+8d90j
+ xHLF3fH8i6D3IsT010TfOIwr8ZwV+xX3JYJFbBp6ye3w==
+X-Forward-Email-ID: 6890fb2a010e4d2155812d12
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 1.1.8
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -44,16 +44,13 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: FUKAUMI Naoki <naoki@radxa.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 2/3] rockchip: rk3588-generic: Enable support for RK3582
-Date: Mon,  4 Aug 2025 18:16:31 +0000
-Message-ID: <20250804181638.3855760-3-jonas@kwiboo.se>
+Subject: [PATCH v2] rockchip: spl-boot-order: Defer probe of boot device
+Date: Mon,  4 Aug 2025 18:25:39 +0000
+Message-ID: <20250804182541.3858351-1-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250804181638.3855760-1-jonas@kwiboo.se>
-References: <20250804181638.3855760-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,90 +69,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Kconfig option OF_SYSTEM_SETUP=y to support booting boards with a
-RK3582 SoC. CPU and GPU cores are failed based on ip-state and policy.
+Boot devices are being probed when SPL boot order is determined, this
+may unnecessarily delay boot slightly.
 
-Tested on a ROCK 5C Lite v1.1:
-
-  cpu-code: 35 82
-  ip-state: 10 00 00 (otp)
-  ip-state: 30 de 04 (policy)
-  remove cpu-map cluster1
-  rename cpu-map cluster2
-  fail gpu
-  fail rkvdec0
-  fail rkvdec1
-  fail rkvenc1
-  fail cpu cpu@400
-  fail cpu cpu@500
-
-and on a Radxa E52C:
-
-  cpu-code: 35 82
-  ip-state: 00 04 00 (otp)
-  ip-state: c0 de 04 (policy)
-  remove cpu-map cluster2
-  fail gpu
-  fail rkvdec0
-  fail rkvdec1
-  fail rkvenc1
-  fail cpu cpu@600
-  fail cpu cpu@700
+Instead defer probe of the boot device until SPL try to load image from
+the boot device by using uclass_find_device_by_of_offset() instead of
+the get variant.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-v2: Mention RK3582 in generic board device tree and documentation
+v2: Update commit message
 ---
- arch/arm/dts/rk3588-generic.dts  | 4 ++--
- configs/generic-rk3588_defconfig | 1 +
- doc/board/rockchip/rockchip.rst  | 2 +-
- 3 files changed, 4 insertions(+), 3 deletions(-)
+ arch/arm/mach-rockchip/spl-boot-order.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
-index 6740f9866f17..04144e2ad128 100644
---- a/arch/arm/dts/rk3588-generic.dts
-+++ b/arch/arm/dts/rk3588-generic.dts
-@@ -1,13 +1,13 @@
- // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
- /*
-- * Minimal generic DT for RK3588S/RK3588 with eMMC, SD-card and USB OTG enabled
-+ * Minimal generic DT for RK3582/RK3588S/RK3588 with eMMC, SD-card and USB OTG enabled
-  */
+diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+index 3dce9b30898d..6b1b84dc86d1 100644
+--- a/arch/arm/mach-rockchip/spl-boot-order.c
++++ b/arch/arm/mach-rockchip/spl-boot-order.c
+@@ -40,7 +40,7 @@ static int spl_node_to_boot_device(int node)
+ 	 * aware of the block-device layer.  Until then (and to avoid unneeded
+ 	 * delays in getting this feature out), it lives at the board-level.
+ 	 */
+-	if (!uclass_get_device_by_of_offset(UCLASS_MMC, node, &parent)) {
++	if (!uclass_find_device_by_of_offset(UCLASS_MMC, node, &parent)) {
+ 		struct udevice *dev;
+ 		struct blk_desc *desc = NULL;
  
- /dts-v1/;
- #include "rk3588s.dtsi"
+@@ -72,7 +72,7 @@ static int spl_node_to_boot_device(int node)
+ 	 * extended with awareness of the BLK layer (and matching OF_CONTROL)
+ 	 * soon.
+ 	 */
+-	if (!uclass_get_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
++	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
+ 		return BOOT_DEVICE_SPI;
  
- / {
--	model = "Generic RK3588S/RK3588";
-+	model = "Generic RK3582/RK3588S/RK3588";
- 	compatible = "rockchip,rk3588";
- 
- 	aliases {
-diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-index dfa8efabe6be..7a8c176912e1 100644
---- a/configs/generic-rk3588_defconfig
-+++ b/configs/generic-rk3588_defconfig
-@@ -16,6 +16,7 @@ CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
- # CONFIG_BOOTMETH_VBE is not set
- CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_SPL_MAX_SIZE=0x40000
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 7a1385789c20..726eed4ea45b 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -145,7 +145,7 @@ List of mainline supported Rockchip boards:
-      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
-      - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
-      - FriendlyElec NanoPi R6S (nanopi-r6s-rk3588s)
--     - Generic RK3588S/RK3588 (generic-rk3588)
-+     - Generic RK3582/RK3588S/RK3588 (generic-rk3588)
-      - Hardkernel ODROID-M2 (odroid-m2-rk3588s)
-      - Indiedroid Nova (nova-rk3588s)
-      - Khadas Edge2 (khadas-edge2-rk3588s)
+ 	return -1;
 -- 
 2.50.1
 
