@@ -4,80 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABE37C87FDA
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 06:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC56C87FD3
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 06:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B4D83E18;
-	Mon,  4 Aug 2025 08:24:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A081083E18;
+	Mon,  4 Aug 2025 08:37:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OQr3R4ZO";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="BLWS5wK/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E8AB83E23; Mon,  4 Aug 2025 08:24:41 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4067383E57; Mon,  4 Aug 2025 08:37:25 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A44D83E04
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 08:24:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E20283E04
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 08:37:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-61580eb7995so8897516a12.0
- for <u-boot@lists.denx.de>; Sun, 03 Aug 2025 23:24:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754288678; x=1754893478; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kgk5lXFzkr8n4Ei0qOsFtZXiT/2uXGTNBmYU3RFKEIk=;
- b=OQr3R4ZOI1DkD6o2Bj6EH0ztO4P+qgQxeuqx+I4t7qqWdQrPKuq79iMSgnfTYWsQSc
- 8GisFzFzZQ8gMHMKshyWDu6o/Gu6XXZBOVNyc1CGqbKC4ol+NYQNhKTDMQ+ww7OIVfRi
- fMZcfJZ7saGDbzUmkC22wOjM7ARhRH2+MMxu1g+V1r5a7DXzqEGwLcANhD00c1ztpSJw
- pFjtneQ3lJLAkBVz9XmYtK09VGgYInjzhLEqfC6PGxmSr+UCVqXYOC57vLA8kqIR7dx9
- +umEOJXgI6WJsXE3jcL06ov49i0fWIxpmJH/+CfSwlJAA4+7pveJde4EePhaBXJ7iAWr
- cVWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754288678; x=1754893478;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kgk5lXFzkr8n4Ei0qOsFtZXiT/2uXGTNBmYU3RFKEIk=;
- b=KCzf1brYDXxKewSQg+ai7UZq3psywZPWNqda/7sC5woMEh9dnAVJG9SHG6icB3lHb5
- 08DsXyKdYs00+R/7eEZpqX6cSJG8/bcRHj7K4CS0nIfFpbJRGOUNRvFLlkt+RzjVi+VF
- ODfU/CnXnVRC/TrWfviUouacnbgevANuvl5ICwp5XaxXhYQpkgE35LejIx6wNWlm6H1Z
- F4MJPfPAr10R+tPHIezhisYlJJs/yLbn/QSuMFvoq07uuVzuMwecoahdyu+beerMoQPm
- 4XS54F3Dqkpb1+FjPvDKL2pzO8GDj1Jx2IVBsbn4P/0md0yM3x8KtVU6mGkVEvcVL0KP
- qY2g==
-X-Gm-Message-State: AOJu0YweOTcABddUSrkhnx9RjTeysBikHSjGJtf8IHgqRRyh/r5caiBw
- qUMQcYYGPu4D5AXB8R6Ohny7annVux1/RVwp/Whr0JyLkmtYkfdqmQJM
-X-Gm-Gg: ASbGnctA/7cfM96/jKXDmcMgpOQWpsuTi7H6HOl4lPlmKhPuV6umkfxGOJ2H2jfN3wt
- 5ii+tz3Ub+pG81wwdKeTVFqJxaTHPKYtfrHgcz0ltWAoonalc0aOCWbPs8XZYFLGisna5fZABdQ
- 2NrYnG8j70PbOmmtAD/e/1R/dQHSe8bF8nt/UWq3E0A6aDKHC4q3SmJRpqvWiKD69X9xnrdLFa4
- hAjJfDJJ1XamIG01JKDGEFvyQb6IW58qgSD5+luLvHKlixAGkMhoR5mlFS6q7MF3g9T7BaTwu8r
- O9bULehXfFatcd+47C937++lJ+ez9ELiDU1Hth6YmuTGYOE2Xf6PpKNT1mts3hJ30akBo1n+djB
- NHkx5Pe8b2OPVMbnHGvdL49Xu
-X-Google-Smtp-Source: AGHT+IHa3d1aUGW0coAIwKycIqOK0w1lU3vLczI1XqUHEiCOgifNvsQOTVUDhtva/Gg3qnDe7Ww6jA==
-X-Received: by 2002:a17:907:c13:b0:ad2:e08:e9e2 with SMTP id
- a640c23a62f3a-af940920db5mr745045766b.27.1754288678183; 
- Sun, 03 Aug 2025 23:24:38 -0700 (PDT)
-Received: from xeon.. ([188.163.112.70]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af91a23fec4sm682909466b.121.2025.08.03.23.24.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Aug 2025 23:24:37 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Please pull u-boot-tegra staging
-Date: Mon,  4 Aug 2025 09:24:17 +0300
-Message-ID: <20250804062417.7932-1-clamor95@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=l/zJnh/Zau0Y3pWc3Ep2vaoxLcpFUY1EOfbLAJT0Yd6DQYnNnAlpWkXVDFSKXfGZQ6Z9mHmZte+VGPDyvTNtLFOv9np8d9qdD+4iFry9e5HWk0AdeYzcHZS8w/Z9qQBl/zi029CL4x44En1N4wmUgT9lXF9kxuHWFars2U5lqqLZOAbogKwSkKlQS3waSS8s/xltipVzMMcPVZLMWbTcK8p2KccfIV7DW8jeziVFZnyUxrlxHOBgMapfd/Hai9yFh09wwKLauecW8c7CyU2hmocDNqhpehy3c++wceqfMTCaMSlJTZ06pRRH5ng3IgxdFI2C2eh+aQsLCpfhkACByw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=N3i7byuCt9KAzczXTyrpIHajsYyj0oW4ogUo1iMsEuo=;
+ b=Lz1zvhhO9wypoSoCwyF3znqzELyVKkd0icahrGaOcqx2iOCBcK7GWs52RlZlySRu0tNfVspOslCn8NpxrflqTYEZpgL7YvEJW42VBHJh5/8bU2mmaTq90nEt19vmtbBpgEfg/+Rkh8Huq1FSMm1JLVNhje7xAhLfTNLk+oRXqNmbpIUxshIS78E/oohuNXyfZGygOpjJrJskYO8tYdqns+s3SifrFb+ZmCF/Mz0nErHGtBwLT2rP+J9SFoL7EkdMgH7M0h6awTp/LvZnCPs8u9cY5Y9qQ/8YuGo8ehv8mJR9J53iuZT79MxLMSceRTOP6q4L7FatXztsN4PWp+hVXQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=N3i7byuCt9KAzczXTyrpIHajsYyj0oW4ogUo1iMsEuo=;
+ b=BLWS5wK/n2HNTEqhakZxmg8Hb4q7p1hIvEoQANSy9OLsmQxYEXoy7pUS7/4PEQP8GGrwCUkRUWhAZE/7iQWpF3+fI48+iRQoK4+YG6GfyJ0xjxbESE5SWIlRXGXVXtt4qLPPXJoU9WUNgzQFTLHCyUN+NIJkpKBR3T0qGqRcflCZyrMKOuGN7EtzcHaewcN8x89I48aE3e3NZrHIfUejoh8fPYuaoxsik/L/ey84u1m7Tp2PmyxyLvJ8RFG9PVFgZf+gX7oGz/M1JA/flQWwSFABZFKm54f7dkWtpsERLHkXdkva3xdHWq54bi2kA674bl0dnHj/yzcSiDUYOuD6YA==
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by PAXPR04MB8912.eurprd04.prod.outlook.com (2603:10a6:102:20f::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.20; Mon, 4 Aug
+ 2025 06:37:20 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.8989.020; Mon, 4 Aug 2025
+ 06:37:19 +0000
+From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+To: "tharvey@gateworks.com" <tharvey@gateworks.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>, "Alice Guo
+ (OSS)" <alice.guo@oss.nxp.com>, dl-uboot-imx <uboot-imx@nxp.com>, Peng Fan
+ <peng.fan@nxp.com>, Stefano Babic <sbabic@nabladev.com>, Ye Li
+ <ye.li@nxp.com>, Tom Rini <trini@konsulko.com>, "tharvey@gateworks.com"
+ <tharvey@gateworks.com>
+Subject: =?gb2312?B?u9i4tDogW1JFU0VORCBQQVRDSF0gcGh5OiBwaHktaW14OG1xLXVzYjogQWRk?=
+ =?gb2312?Q?_support_for_i.MX95_USB3_PHY?=
+Thread-Topic: [RESEND PATCH] phy: phy-imx8mq-usb: Add support for i.MX95 USB3
+ PHY
+Thread-Index: AQHb8OWImY5U8SjkTkeATMQrFG1L2rRSMWJQ
+Date: Mon, 4 Aug 2025 06:37:19 +0000
+Message-ID: <PAXPR04MB964459F9FC599677EAC9F08EE223A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+References: <20250709152408.3037701-1-tharvey@gateworks.com>
+In-Reply-To: <20250709152408.3037701-1-tharvey@gateworks.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB9644:EE_|PAXPR04MB8912:EE_
+x-ms-office365-filtering-correlation-id: 46fdfea6-7fd2-4f9e-2cfc-08ddd3215c9f
+x-ms-exchange-sharedmailbox-routingagent-processed: True
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|19092799006|366016|1800799024|7053199007|38070700018; 
+x-microsoft-antispam-message-info: =?gb2312?B?NGYyam1sNnNBWnhwRVBiZkxBMWIvZEhMMCtZZUtPZUpXNkRSQTN6U3V3emts?=
+ =?gb2312?B?VkhkUU1RT1ROMXd5NEZFWUNrYjFsSkorNUY1bUJkWFNXVlYwamFScWRSSWQ4?=
+ =?gb2312?B?cVp3cGF2K2pvZjlXUEJJaWhUc25kTjAwUEVzV2M1dTJYYnJybFVDRkNuZCs0?=
+ =?gb2312?B?dDh0MWpGV0c5L2RQQmFWUkxoRWkzTUUvby9JQkZZSCtZbVZLeHZmMHU1S1Zy?=
+ =?gb2312?B?blNRa0dKNmpOS2Izelk2cHVBeGppUHdDQ21PUE9UTHUyUGlWZjRvcUt5Wm10?=
+ =?gb2312?B?cjArZTdUdWc0QTd2L1NkVWhUSXF2MVhybDFpTXpmNHpseXlHNDB0V3Y1bHBZ?=
+ =?gb2312?B?WlJDbnEzcTFRb0tweWZxWDVwQlFzU2RhdVV4aTNIZ3BncVJJY0VhZWlnQ3NV?=
+ =?gb2312?B?NFpwaUdYNDZ2b0FWcms3SXplMHg5WUhneFJIS0NBaUtBVzNvenV3ZTdyYlEx?=
+ =?gb2312?B?R1Zpc043NnZlOHArU2F6bFpMYjV3aVVkdm5vUWxpQjNzMi9WYUxHOHhvN2po?=
+ =?gb2312?B?ZENHUXNNQ0VmbS9rNWc3d3FDM0xKNzJIZVNXclNoUThYcW4vb3Y5aWlIL3Qr?=
+ =?gb2312?B?azMxZWsxMWx6SnFGVkI0aUNqeE9sQ1ovMnlueDN6UWlKMFpKdmNGVzFCUlZa?=
+ =?gb2312?B?NjZybjIyOTJRd2pYTnRHMWVBZ2JCTmVvYTJYdEdVSGw0bHZuWnVrcUs0YVln?=
+ =?gb2312?B?dVJYY1FnMCs0dk8yODFTOCtGUWkwYmhOSDUwNWE2K3JOaDVRQWxVWTNyTHBY?=
+ =?gb2312?B?VTNmKzBwRGNEVk8vTDZyV0UwT0hOVmphclZZQXp5Zlp6UjRVZWNqcHBqY0dP?=
+ =?gb2312?B?NnA0NS8ybkt1SEpHRGdHTkc2Rk8vQkhrUHVHVUc4NGhxNTZBbUNobFNCVlFN?=
+ =?gb2312?B?N0o4ck4rYjdlenpPZHIyTHpIK0VFNENPeG1ycC90Y1B1bkRQd21IaEdiUUxU?=
+ =?gb2312?B?UnVidWV0dkdTQ2hjTW5CT243OWV0L2pLWi9mbnFQWHk5WlJ5RWVUMTJnN1Z2?=
+ =?gb2312?B?ZWRMdVhyL1RaZ0FPcEcwckU1NHRrcEE2RjNlYWFCS3lMZ290VzVvQ2ovelZG?=
+ =?gb2312?B?T3U2dm83ZndESUJtZ3RBR0t3ZGtOKzQzRUxkaU94bEJMNGtnVU5rVjRSd3dh?=
+ =?gb2312?B?Rms1NmxpbUpRMzV2NkE2RmNSSXJFdDlDTFZsOHVpeGwzWjFwVzJPbkg5bTdW?=
+ =?gb2312?B?OTd0dUE0YUlHelpVc3RlZUpCZVpKaGpIbXRudDN2S0NoTGVXbzl3MHFydUFu?=
+ =?gb2312?B?VC9yUkVXRGlrSVpBTHVsRkE0TFU2Z0RvRUNaLy9hTCsrV1c2RVhjTzA0RG5Z?=
+ =?gb2312?B?OU9BT0xMV1hzd3hwcVljVW02YjJnUzI4K0NHQmFFRVFhVmJqQUJpRGdHOGw0?=
+ =?gb2312?B?RzJ6U1I5dzVFRWVKU2RMbWZsWkNsTW8rSXArMWZ1OGNwZWYvbjliSzh5RGtT?=
+ =?gb2312?B?d1RYZTJ4ZitFUGNpTGtoYTY5RE94UC90VkxxMVJIRHE5eThqOTZDR0RsU3Bj?=
+ =?gb2312?B?cmIzME9wQWFuUFF0RHFpSWZoU1ZjZGxWa3h3ZFprREJCckg3U1R6SEg5dE5J?=
+ =?gb2312?B?Q2FqQkNHZjR3bGdqSE5rUGxxZ3lIUzJHQ25pRGJrdUVhbUNmQVB1NUJQK1Rq?=
+ =?gb2312?B?NjJxUi9lSk1iaFF2dHZLbytUVkNXWTdTeTlTS3VHalVjc0hTbzlUYlNwSW95?=
+ =?gb2312?B?Q1Y0REUrN1hCeUY2bXRzQWVHc3RGWWZ1N0cyY0JBVEE5VlY1RTVUVHJNZlBm?=
+ =?gb2312?B?VWRkaTUxUmJPZlZVUFhTWmtQMGFLcE9mVTdka2Fqckc4ZXkyKzJXYXIyUXFB?=
+ =?gb2312?B?Z3VMczRQanZLYzRzd2FTdU4xejRXTmc0T1gwK2FienBjOUtCWnZRWGRVazNZ?=
+ =?gb2312?B?RUt5bmpVOC96Sk0ySE5MRHd0V0ZBdjYxWmMwV2VuYXNackp5QzlGd3lLcVNx?=
+ =?gb2312?B?SGxaRGN5a3NZSmM2b0lXcEVia2I4aXROMitMaTRsRFRuM3RXc25pcDNrTDNj?=
+ =?gb2312?B?RXdGdVBsVTFnPT0=?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
+ SRV:; IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(376014)(19092799006)(366016)(1800799024)(7053199007)(38070700018);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?gb2312?B?Yy9GQnBLOVFhQXpsTVNZQTkremNnbDJyMmpIZHUrOWhjbTNxRXpFVmZ2U0FS?=
+ =?gb2312?B?NmNZK0xyZjBnbU1ueVN1T1ArSGoyMTIwS0JTVS92eDRydjllTFBNVC8veUtY?=
+ =?gb2312?B?WWVKSEZRS1ArQ2txV09TRmU1TzRKcmhrTWlyVkNzYkhkYXNTOHBpaytZajFm?=
+ =?gb2312?B?VlVNTDVkSzJLNnlLdUFweWRpM3IxQy9sVjR5Z1BRUVRidUhCclNLWFBlRzg5?=
+ =?gb2312?B?TUVlUUhXVW11VE5uVkJwSVNnUEpha1V5ME1LL3V5VWtlODIwYnJIN2hGTGlt?=
+ =?gb2312?B?eHR6dGcvN3NVbmFRZ1F5Yjh2YVNxK3hSUEc0SDNZYmJBbzllL1MvUG9SMGVu?=
+ =?gb2312?B?WUZJYkE0OUJtL0cvQVhYaFVjczFYakF3MnlPcXRkS2Q1aldNWjFmaU52eHI2?=
+ =?gb2312?B?TzZUYTBnVjR3amd3SmZrc0Qvc1dGSTlWM0l2YXNyZ0JpMkRFL0RwZnAzWlEy?=
+ =?gb2312?B?RVJqc0JKNHl2a3ovTHlqSGJPOGtxTk9teXhqNmNDYWVSdDBudG5OdVc4aE53?=
+ =?gb2312?B?TWxuWnkxbm8yRzI0MWE2WE5wTlBMdnNEWU8vdWFEYlQ0VHdJeUF6dHN1eWVD?=
+ =?gb2312?B?WVhkNkhhTFNmRmdLVmxYOGxPSWUyLzh6STl3UG8vbUZHcXhIa3VNd2poally?=
+ =?gb2312?B?VnBXVDFoam9FUEw3b3QwcjlyQ3p2N2ltSDE0dHJBTkpwaGU5RlNuMzVJb2xl?=
+ =?gb2312?B?RThSR2RuV2Jha0Fub2RONmZKdEFPaERrZlNvWnU2WUZSMGc5RFd6RTQyTWIx?=
+ =?gb2312?B?OFBzR0pmbElKeXlBKzkyaFhIN3VreVN3T294akNiMnZ4S050Qm1FRHRXblZJ?=
+ =?gb2312?B?MWFHc2R3aDZTVTFYVXY2NGFidVdhUmsvR0JnNXVOS1FUMXJobDg1a2grQis0?=
+ =?gb2312?B?YmdPU0g4Vzl2OGNtQ0ZaamExQUZodU9ZRFBRanFVS3hKV0pzTDBmQTJvc3RQ?=
+ =?gb2312?B?cmdDbDFZT2hPajBubTc4ZWJSMzhNdUNhZVl1YitoUXRVUVEzZ0huSE9QV3Vi?=
+ =?gb2312?B?NVdvTnVxc000YThsb3hmODJCaHhRSFpBK0oyUTJyOWI1Q0FCMitmY0UzWVpG?=
+ =?gb2312?B?YmpOekJWZXJ6MzRQV1ZZUzlnbzRVY2RuRHF2V29VWUhZeDkwcHROYWEvTzRx?=
+ =?gb2312?B?M1NrcTBHcWJwazB1YVpQK093U2l3WmVXK3VVSDhrenlteWVDbDM3OHdoV1po?=
+ =?gb2312?B?VndHMGVoK2lVNFY4Lzh5d1YvSEpFbGYzSTVuNUl1MkdqcksyQ04vMVI0M3Rs?=
+ =?gb2312?B?SHJuVW04Q29qSG1qTzBwd1VlWXQxejJ5MEJBajB3eklJMEJEcGtqUTJsZWZp?=
+ =?gb2312?B?c0VaY0M4SHZ2V0Z3WmQrMVlZcDRsSThlcTNaV05OM1haa3cvekxrVUU5bXdC?=
+ =?gb2312?B?ZmJMeWlSUXJ3Ty9zWkxuS3NlR2lOeFF4MGJGeEhjMTd6dlpNblhjc0p6MWlI?=
+ =?gb2312?B?ZDF0Tko0QWg0ZmY0WUhwSWZRUHQrYzVIR0JZY2FzMHUzWm82YkhLTmQ0akNY?=
+ =?gb2312?B?dmdXTXRtbTJVSUt5ZVFwZmNqeUVtY2tTdmVWRDdnMVMxeHY3cTUzWnZpRktL?=
+ =?gb2312?B?WENBdW80dTZZV2R1cTZBb0UxUzE1eWR0S0kwV1o5MFFqaXordlNqK3RVSEFu?=
+ =?gb2312?B?SDd5YUZ5T2gvNmtyZ3FCZ2hzTGdYVlh5QXY1Y2VmWU1pZVNhSUZNcWFwellj?=
+ =?gb2312?B?eUdINFZNNURiOHRrQWRoVkk5d2dIL0h5VmZrMTlaODZYZXBWelowSUtjcGZF?=
+ =?gb2312?B?M3hvb1oyTU9Valk4MG96emhtZEhoczgvQkxpRVJ6L3pnZWxISkNqamZaaDFn?=
+ =?gb2312?B?RlVtOUIweVFwamF5VytabGsxbVFhVTJheHZvcWJlWXpBOVN0eWQreWROZ1lo?=
+ =?gb2312?B?N0NybmFuRFJ5a3p6ZHcvcVNkbWcyZnF3dCtoNHF6UGlOaTBacHJiR25ueEJW?=
+ =?gb2312?B?RjlETjRMVXhRcTJ1NWxYWjZjVlZoTEIrR2dRbVVTMVFvKzE1VlR1OENnR1Vw?=
+ =?gb2312?B?dHZDcUZUU3UvRzZGK2N6NkIvcWYwd2ZXTzFtdlN6NW90TzZzcjB6R0VSK0NN?=
+ =?gb2312?B?RTVyeWQyUmQ0NkxLTVBzSU9oRnprQ0tLazlZUjk3R2h1eWV2VjdTaU82R1FP?=
+ =?gb2312?Q?gjBGGZpQIP+5WThlU/y9Tqb26?=
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46fdfea6-7fd2-4f9e-2cfc-08ddd3215c9f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Aug 2025 06:37:19.7572 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 2JTFD/ZiE2IhTN97oPx5iTbxuJPmCoAFUgD/bFnbHwGNrh/BtAVbFD+XvpaG0Su+k9nmNYHf+oGngEUGbeHf9g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8912
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,140 +189,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
-
-The following changes since commit f5e968a28e7cdc2c4365f5a382e02f074ee03fac:
-
-  Merge tag 'u-boot-stm32-20250731' of https://source.denx.de/u-boot/custodians/u-boot-stm (2025-07-31 10:04:32 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
-
-for you to fetch changes up to c55cbaf133b3d31a21b54507d74faeca109b8746:
-
-  board: samsung: add Samsung Galaxy R (GT-I9103) and Captivate Glide (SGH-i927) support (2025-08-01 08:46:53 +0300)
-
-----------------------------------------------------------------
-Ion Agorria (11):
-      ARM: tegra: Relocate fuse code from warmboot file
-      crypto: tegra: Add Tegra AES engine driver
-      ARM: tegra: Add LP0 support for ODM production
-      ARM: tegra: Add BSE bindings
-      ARM: tegra: Enable BSEV for devices that use CMD_EBTUPDATE
-      ARM: tegra: Use AES engine for crypto functions
-      video: panel: add Sony L4F00430T01 panel driver
-      video: panel: add Samsung S6E63M0 panel driver
-      video: bridge: add Samsung CMC623 image converter driver
-      video: backlight: add Samsung CMC623 backlight PWM driver
-      board: samsung: add Samsung Galaxy R (GT-I9103) and Captivate Glide (SGH-i927) support
-
-Svyatoslav Ryhel (2):
-      board: chagall: add Pegatron Chagall support
-      video: tegra: parametrize PCLK and DE polarity
-
- arch/arm/dts/Makefile                           |    3 +
- arch/arm/dts/tegra20-acer-a500-picasso.dts      |    4 +
- arch/arm/dts/tegra20-asus-transformer.dtsi      |    4 +
- arch/arm/dts/tegra20-lg-star.dts                |    4 +
- arch/arm/dts/tegra20-motorola-mot.dtsi          |    4 +
- arch/arm/dts/tegra20-samsung-bose.dts           |  119 ++++++
- arch/arm/dts/tegra20-samsung-n1-common.dtsi     |  428 ++++++++++++++++++++
- arch/arm/dts/tegra20-samsung-n1.dts             |  184 +++++++++
- arch/arm/dts/tegra20.dtsi                       |   29 ++
- arch/arm/dts/tegra30-asus-grouper-common.dtsi   |    4 +
- arch/arm/dts/tegra30-asus-p1801-t.dts           |    4 +
- arch/arm/dts/tegra30-asus-tf600t.dts            |    4 +
- arch/arm/dts/tegra30-asus-transformer.dtsi      |    4 +
- arch/arm/dts/tegra30-htc-endeavoru.dts          |    4 +
- arch/arm/dts/tegra30-lenovo-ideapad-yoga-11.dts |    4 +
- arch/arm/dts/tegra30-lg-x3.dtsi                 |    4 +
- arch/arm/dts/tegra30-ouya.dts                   |    4 +
- arch/arm/dts/tegra30-pegatron-chagall.dts       | 1291 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/tegra30-wexler-qc750.dts           |    4 +
- arch/arm/dts/tegra30.dtsi                       |   29 ++
- arch/arm/include/asm/arch-tegra/ap.h            |    7 +
- arch/arm/include/asm/arch-tegra/crypto.h        |   43 +-
- arch/arm/include/asm/arch-tegra/dc.h            |    3 +
- arch/arm/include/asm/arch-tegra/fuse.h          |   21 +
- arch/arm/include/asm/arch-tegra/warmboot.h      |    7 -
- arch/arm/mach-tegra/Kconfig                     |    2 +
- arch/arm/mach-tegra/ap.c                        |    8 +
- arch/arm/mach-tegra/cpu.h                       |    1 +
- arch/arm/mach-tegra/crypto.c                    |  184 +++------
- arch/arm/mach-tegra/fuse.c                      |   63 ++-
- arch/arm/mach-tegra/tegra124/bct.c              |   20 +-
- arch/arm/mach-tegra/tegra20/Kconfig             |    5 +
- arch/arm/mach-tegra/tegra20/bct.c               |   20 +-
- arch/arm/mach-tegra/tegra20/warmboot.c          |  117 ++----
- arch/arm/mach-tegra/tegra30/Kconfig             |    5 +
- arch/arm/mach-tegra/tegra30/bct.c               |   20 +-
- board/pegatron/chagall/Kconfig                  |   13 +
- board/pegatron/chagall/MAINTAINERS              |    7 +
- board/pegatron/chagall/Makefile                 |   11 +
- board/pegatron/chagall/chagall-spl.c            |   41 ++
- board/pegatron/chagall/chagall.c                |   23 ++
- board/pegatron/chagall/chagall.env              |    9 +
- board/samsung/n1/Kconfig                        |   13 +
- board/samsung/n1/MAINTAINERS                    |    9 +
- board/samsung/n1/bose.config                    |    6 +
- board/samsung/n1/n1.env                         |   16 +
- configs/chagall_defconfig                       |   80 ++++
- configs/n1_defconfig                            |   92 +++++
- doc/board/index.rst                             |    1 +
- doc/board/pegatron/chagall.rst                  |   41 ++
- doc/board/pegatron/index.rst                    |    9 +
- doc/board/samsung/index.rst                     |    1 +
- doc/board/samsung/n1.rst                        |   51 +++
- drivers/crypto/Kconfig                          |    2 +
- drivers/crypto/Makefile                         |    1 +
- drivers/crypto/tegra/Kconfig                    |    7 +
- drivers/crypto/tegra/Makefile                   |    3 +
- drivers/crypto/tegra/tegra_aes.c                |  591 ++++++++++++++++++++++++++++
- drivers/video/Kconfig                           |   24 ++
- drivers/video/Makefile                          |    3 +
- drivers/video/bridge/Kconfig                    |    8 +
- drivers/video/bridge/Makefile                   |    1 +
- drivers/video/bridge/cmc623.c                   |  234 +++++++++++
- drivers/video/cmc623_backlight.c                |  124 ++++++
- drivers/video/samsung-s6e63m0.c                 |  393 +++++++++++++++++++
- drivers/video/sony-l4f00430t01.c                |  210 ++++++++++
- drivers/video/tegra/dc.c                        |   16 +
- 67 files changed, 4397 insertions(+), 304 deletions(-)
- create mode 100644 arch/arm/dts/tegra20-samsung-bose.dts
- create mode 100644 arch/arm/dts/tegra20-samsung-n1-common.dtsi
- create mode 100644 arch/arm/dts/tegra20-samsung-n1.dts
- create mode 100644 arch/arm/dts/tegra30-pegatron-chagall.dts
- create mode 100644 board/pegatron/chagall/Kconfig
- create mode 100644 board/pegatron/chagall/MAINTAINERS
- create mode 100644 board/pegatron/chagall/Makefile
- create mode 100644 board/pegatron/chagall/chagall-spl.c
- create mode 100644 board/pegatron/chagall/chagall.c
- create mode 100644 board/pegatron/chagall/chagall.env
- create mode 100644 board/samsung/n1/Kconfig
- create mode 100644 board/samsung/n1/MAINTAINERS
- create mode 100644 board/samsung/n1/bose.config
- create mode 100644 board/samsung/n1/n1.env
- create mode 100644 configs/chagall_defconfig
- create mode 100644 configs/n1_defconfig
- create mode 100644 doc/board/pegatron/chagall.rst
- create mode 100644 doc/board/pegatron/index.rst
- create mode 100644 doc/board/samsung/n1.rst
- create mode 100644 drivers/crypto/tegra/Kconfig
- create mode 100644 drivers/crypto/tegra/Makefile
- create mode 100644 drivers/crypto/tegra/tegra_aes.c
- create mode 100644 drivers/video/bridge/cmc623.c
- create mode 100644 drivers/video/cmc623_backlight.c
- create mode 100644 drivers/video/samsung-s6e63m0.c
- create mode 100644 drivers/video/sony-l4f00430t01.c
-
-Branch contains Tegra AES engine implementation as a real world example for
-the recently added AES UCLASS along with conversion of all ebtupdate users
-to use it. Two new boards are introduced, Pegatron Chagall a Tegra 3 tablet
-and Samsung Tegra 2 N1 board which incudes Galaxy R and Captivate Glide
-smartphones. 
-
-All commits passed U-Boot CI.
-
-Thank you,
-Svyatoslav Ryhel.
+PiAtLS0tLdPKvP7Urbz+LS0tLS0NCj4gt6K8/sjLOiBUaW0gSGFydmV5IDx0aGFydmV5QGdhdGV3
+b3Jrcy5jb20+DQo+ILeiy83KsbzkOiAyMDI1xOo31MI5yNUgMjM6MjQNCj4gytW8/sjLOiB1LWJv
+b3RAbGlzdHMuZGVueC5kZQ0KPiCzrcvNOiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT47IEZh
+YmlvIEVzdGV2YW0gPGZlc3RldmFtQGRlbnguZGU+Ow0KPiBBbGljZSBHdW8gKE9TUykgPGFsaWNl
+Lmd1b0Bvc3MubnhwLmNvbT47IGRsLXVib290LWlteCA8dWJvb3QtaW14QG54cC5jb20+Ow0KPiBQ
+ZW5nIEZhbiA8cGVuZy5mYW5AbnhwLmNvbT47IFN0ZWZhbm8gQmFiaWMgPHNiYWJpY0BuYWJsYWRl
+di5jb20+OyBZZSBMaQ0KPiA8eWUubGlAbnhwLmNvbT47IFRvbSBSaW5pIDx0cmluaUBrb25zdWxr
+by5jb20+OyB0aGFydmV5QGdhdGV3b3Jrcy5jb20NCj4g1vfM4jogW1JFU0VORCBQQVRDSF0gcGh5
+OiBwaHktaW14OG1xLXVzYjogQWRkIHN1cHBvcnQgZm9yIGkuTVg5NSBVU0IzIFBIWQ0KPiANCj4g
+QWRkIGluaXRpYWwgc3VwcG9ydCBmb3IgaS5NWDk1IFVTQi4zMCBQSFksIHdoaWNoIGlzIHNpbWls
+YXIgdG8gdGhlIGkuTVg4TVEgYW5kDQo+IGkuTVg4TVAgVVNCIFBIWS4NCj4gDQo+IFRoZSBpLk1Y
+OTUgVVNCMyBQSFkgaGFzIGEgVHlwZS1DIEFzc2lzdCBibG9jayAoVENBKSBjb25zaXN0aW5nIG9m
+IHR3bw0KPiBmdW5jdGlvbmFsIGJsb2NrcyAoWEJhciBhc3Npc3QgYW5kIFZCdXMgYXNzaXN0KSBh
+bmQgaXMgZG9jdW1lbnRlZCBpbiB0aGUgaS5NWDk1DQo+IFJNIENoYXB0ZXIgMTYzLjMuOCBUeXBl
+LUMgYXNzaXN0IChUQ0EpIGJsb2NrLg0KPiANCj4gSW5zdGVhZCBvZiByZWx5aW5nIG9uIGFuIGV4
+dGVybmFsIE1VWCBmb3IgVHlwZS1DIHBsdWcgb3JpZW50YXRpb24gdGhlIFhCYXIgY2FuDQo+IGhh
+bmRsZSB0aGUgZmxpcCBpbnRlcm5hbGx5Lg0KPiANCj4gQWRkIGluaXRpYWwgc3VwcG9ydCBmb3Ig
+aS5NWDk1IGJ5Og0KPiAgLSBhbGxvd2luZyB0aGUgZHJpdmVyIHRvIGJlIGVuYWJsZWQgaS5NWDk1
+DQo+ICAtIHJlc2V0dGluZyB0aGUgWEJhcg0KPiAgLSBjb25maWd1cmluZyB0aGUgVENBIGluIFN5
+c3RlbSBDb25maWd1cmF0aW9uIG1vZGUgKHdoaWNoIHdhcyBkZXRlcm1pbmVkDQo+ICAgIHRvIGJl
+IG5lY2Vzc2FyeSB0byBlbmFibGUgdGhlIFBIWSBpbiBkZXZpY2UtbW9kZSkNCj4gDQo+IEZvbGxv
+dy1vbiBzdXBwb3J0IHdpbGwgbmVlZCB0byBiZSBhZGRlZCB0byBzdGVlciB0aGUgWEJhciBiYXNl
+ZCBvbiBlaXRoZXIgYm9hcmQNCj4gZGVzaWduIChpZiBvbmx5IG9uZSBwYWlyIGlzIGJyb3VnaHQg
+b3V0KSBvciBpZiB1c2VkIHdpdGggYSBUeXBlLUMgY29udHJvbGxlci4NCj4gDQo+IFNpZ25lZC1v
+ZmYtYnk6IFRpbSBIYXJ2ZXkgPHRoYXJ2ZXlAZ2F0ZXdvcmtzLmNvbT4NCg0KVGVzdGVkLWJ5OiBB
+bGljZSBHdW8gPGFsaWNlLmd1b0BueHAuY29tPg0KDQpCZXN0IFJlZ2FyZHMsDQpBbGljZSBHdW8N
+Cg==
