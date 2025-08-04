@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B0BC87FCB
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 16:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C22C87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 16:57:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E169683FAC;
-	Mon,  4 Aug 2025 18:04:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 711C083FA6;
+	Mon,  4 Aug 2025 18:57:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eZiHU+IL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ufcTX6Ki";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45AF183FB0; Mon,  4 Aug 2025 18:04:05 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 4E1A683FBC; Mon,  4 Aug 2025 18:57:00 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87D7783F9B
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 18:04:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBD8D83F9D
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 18:56:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-459ddf8acf1so5720995e9.0
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 09:04:01 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-45994a72356so13712115e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 09:56:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754323441; x=1754928241; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LP991muNl3sUVqvs1fubDd4ZFYCIOC3T3fhZ7J9unHU=;
- b=eZiHU+ILWFbowTMvD+diEXE1yF5fj+kseEXlZqpxE+qh1XqOMywPWFM4hF54hhAEWj
- H6CnEFeWccDapke/KaSZsYF2L1W88dvzQBOXl9ThIf5WZO9dmbybEcqoTgOPZhsuzmqz
- 99MD7M1SNMQ9vz4RgZFXUNx/zoWTHCSCOWo3zv1LUOiZSL5TbyLgRRCtEglQUF7Hu5AZ
- XHUc5puilDppIK54YhM13OYlUI1JiOfNJH5ru5aI1WsjL8MWDdHZWA34q6ApyZFFsp9V
- hwOp9Hfb5CTM9XWyHE88bM70XmF3sq+KZdj/W9FOlOgv9AxvA0Fg/ak9OY4cegPuuIz7
- rT9g==
+ d=linaro.org; s=google; t=1754326617; x=1754931417; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JtNyt0Ze94A0Jvgj+SuFY9sfRm6ch3WFoVHd1gVf3SU=;
+ b=ufcTX6Ki0po/RF2VZmn2pdTv5BUX4+4T9EieIPcGCEyu55CJCQJwnlrDhtKapZO3SP
+ yv5H4LVA3BzXIUIYLeJ2fkfXJ5H//n7yqgFBlcuH7llg+zAv5t6+vVMu+RcN+x+QhIxB
+ 0wUPR2Nj6jLuBxLKzSH62Gv2qpGbIPcdX17JDDUJvnR0sLNWS4BF198uz76RLYTyHPYT
+ SLInDLr6ZQttwEctPBDOckMl1JYvJxyvKD3AECt55H3tzIPjpoQgnQAA+eZin2s6zK7j
+ xag1en3MDV7kzTxaO6E/VK5IZAj7irNltT9PxqULxDj+XtWg5SqvazADNeEdjQnsPg9U
+ DFGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754323441; x=1754928241;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LP991muNl3sUVqvs1fubDd4ZFYCIOC3T3fhZ7J9unHU=;
- b=mKRN5h7lfJBYZNp2XLjsGEC7yoc0XT+pmCEJaMg57fqZeKKNKQTsPEgl+6MSnCEIfE
- HYiTIZoLOm7T81oLV1G5Dnb5h0Yo4TXc1EtwsvTzh0MU96YX6eVwMnUUgrp79S8YLm1B
- I7NVDkUfmwf8N9otYx9QNDffoITza5sRDL0V8NV7nADHNc5iqmKyx6fw80GestNtNlr5
- jpIz91gU2KUm1+OQg8g7dtH3fEtGUi2n56Sc9t1kvfAcz8jC4SWqGsCCuwXw/Ac41gdp
- uyeQ/Mwi6dqmQhT7+B/Ec5LVRuG14KEvDXW3kdnGpC6Ns76o0aaJp+dwRWyriCliEnaM
- BQZA==
-X-Gm-Message-State: AOJu0YyTFlkits4TOtea3lR57mnqv1czljrrAQT1f+Ef2bNhGEJ+RFdz
- sYGNW1qgUU5Cvbc5RZOq0i+7K/LurIMiRRQPVhLn+Hsop1A5jhGmA+ONWalovK5Gxr7Zaua8D+9
- xoTo4
-X-Gm-Gg: ASbGncu6xv5VH3AjFCQfN/qpGtTBUiakRhP1onK+Xbr1IHswU1lx2Vjy5MbIJmOvt1g
- aMjifqeTuSHPO6Fajy3aPKV/K5wTLnnjx5fwMDD9oFj7NXvpGoOEXfsLsyslzt3nla9Ccl4GG6Q
- o4TdcE/Rxu2uqKBHi0e6I9ALFN/REt4MYOlFEhk5m9KbV/ok3txYunqgODOoB4lcV22svPKwKaI
- EY7G98NiBQVr4TVE3Je2qyfkyziokKIiOwZvXWnX0+oshcrLgFrekw0xC6weJzv0V2Fl0+5LqM1
- Lkz29cJSjQj44MBit1U1Uyt6j61f8JQiRO0qEWBd7HxLraYcG4SKpDXJFlLPNVOLMtF4AoWPLh8
- 6VBBwPCv7BVdB45JlLoerVOixvBo8kYyWdQM0yZbC5yxdOxAYEu4=
-X-Google-Smtp-Source: AGHT+IEWKyCflWVVMIPsJvQniOTwqI8C2DpUWpSNL2GTzumktXFFJj4YOA3fkIcbPESFWC/rwyyiuA==
-X-Received: by 2002:a05:600c:4ec7:b0:456:1b8b:b8c6 with SMTP id
- 5b1f17b1804b1-458b69dbe47mr83823775e9.14.1754323440869; 
- Mon, 04 Aug 2025 09:04:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754326617; x=1754931417;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JtNyt0Ze94A0Jvgj+SuFY9sfRm6ch3WFoVHd1gVf3SU=;
+ b=eJL8ZVnyUQZxBvHc7FxOUIRuTU4zr4Kdy7Y4sFmehFp1wM4kTSQmNR2ChHs3IYnHgf
+ mQP5ASgwE0iqKQDj1JvuGHVKfx4GWSjjk0xnHtJ48RdY/yB4bkfE8wuHmxiNI5GmuV6K
+ B3obDxmKSS6ZfcQoyjOHgn9LjVcZqxC9QCL1A52hEZGdqzc3iCgW9lC/KDDg6zL+j+6p
+ CfIIGrdCo3xG4j6APzPqCAu7NhnSALS+3lBmfQDEzGIGPLuXK8rdIwUzYxkgZmoK05u0
+ bivCg3EzYU8KyAmg52HbNsIbrUA6SDz+xtK7DmPpsnCTIGvn+XTRdWTM5lDP6Hwg4nZc
+ UQkg==
+X-Gm-Message-State: AOJu0Yw4p+8SWl2GO0VqS26YPE+dJkBGjtU0XYCDJRiUoCWiSeo5PWJx
+ BX+W/HD6Wmi3/aQfgFNR7Bxnoix/RfCMhGQudQSffji/yaoOnPUYtHyMFhzXfZ+R3JDGWII81Aj
+ xxTzM
+X-Gm-Gg: ASbGncuIpX5rS6ry2jv7+N4wcUHdPWvQUcxDjp9SpJHr+lfS0tnKVivs0XoNKP2OASk
+ wysxt8ij1/jM/2dqh3p3iQ73kpo+L2pdebQm1mh3s6SC/kDfEKBiLO2N/5m1Uomlaw3refLNiHo
+ 6gIRmsUCTcxyPkx7L0/cXKHy7+hybXM2e5w8KaRNgPwiJ+4/tSTut31n1cIQ0zvCN/knYcRMlVf
+ p571i2DDhsGO4AWQyRWBU5S+K+PfwxEuEJJ5mOqrArRK8faJCOWQJys29IV2Hm6l1kLsWZZsFZS
+ ZNGMjHidBwdZu+wqDZySK8FZd0fAwXORj0mhooKfLa3invDKc5EZdPqag0hpOrztqvbP8AZ6q5v
+ Ttm83iCEJFsahM2jua90YYzPQnUUq2fa9vkZaNUxZDETQiPwHv+p2aTYD4ITlww==
+X-Google-Smtp-Source: AGHT+IFBCXCFG1MRr7kbs0orvuG/wrai+ITl12a9VhGMQn41nSbQ/mKXobL5EazV6PQDy11QDO/DZQ==
+X-Received: by 2002:a05:600d:a:b0:459:dd1d:2ee0 with SMTP id
+ 5b1f17b1804b1-459e0b1d154mr2439255e9.0.1754326617151; 
+ Mon, 04 Aug 2025 09:56:57 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:1ba5:34a9:feb8:a948])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c3ac036sm15901598f8f.15.2025.08.04.09.04.00
+ 5b1f17b1804b1-459c58ececdsm43054265e9.1.2025.08.04.09.56.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 09:04:00 -0700 (PDT)
+ Mon, 04 Aug 2025 09:56:56 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 04 Aug 2025 17:03:59 +0100
-Subject: [PATCH 3/3] net: fm: Correct test for timeout
+Subject: [PATCH 0/5] net: fsl: Fix some Smatch reports
+Date: Mon, 04 Aug 2025 17:56:54 +0100
+Message-Id: <20250804-fsl_enetc-v1-0-0708a826f9fb@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250804-net_fm_eth-v1-3-994a4652fe17@linaro.org>
-References: <20250804-net_fm_eth-v1-0-994a4652fe17@linaro.org>
-In-Reply-To: <20250804-net_fm_eth-v1-0-994a4652fe17@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAFbmkGgC/x2N2wqDMBAFf0X2uYF4JfRXSpEkPdEFTcuulIL47
+ 8Y+DmcOs5NCGEr3aifBl5XfuUB9qyjOPk8w/CpMjW1662xnki4jMrZoWhu63tUuuSFS8YNXmCA
+ +x/l6rF43yDV8BIl//8jjeRwn8mjhVnQAAAA=
 To: Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
@@ -100,41 +101,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In memac_wait_until_free and memac_wait_until_done the use of
-post-decrement on the test in the while loop for a timeout means that
-timeout will be equal to -1 on exit in that case. Adjust the test for
-this expected value.
-
-This issue was found by Smatch.
+Smatch reported some issues with this driver. Firstly a copy/paste error
+resulting in the wrong return value being attempted to be used. Secondly
+some variables being dereferenced before being NULL checked. Lastly
+another case of the wrong variable being returned on the error path.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/net/fm/memac_phy.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Andrew Goodbody (5):
+      net: fsl_enetc: Fix copy/paste error
+      net: fsl-mc: NULL check dflt_dpio before dereference
+      net: fsl-mc: NULL check dflt_dpbp before dereference
+      net: fsl-mc: NULL check dflt_dpni before dereference
+      net: fsl-mc: Incorrect variable used in error path
 
-diff --git a/drivers/net/fm/memac_phy.c b/drivers/net/fm/memac_phy.c
-index 26425d94ae5..1ad3c053593 100644
---- a/drivers/net/fm/memac_phy.c
-+++ b/drivers/net/fm/memac_phy.c
-@@ -46,7 +46,7 @@ static int memac_wait_until_free(struct memac_mdio_controller *regs)
- 	while ((memac_in_32(&regs->mdio_stat) & MDIO_STAT_BSY) && timeout--)
- 		;
- 
--	if (!timeout) {
-+	if (timeout == -1) {
- 		printf("timeout waiting for MDIO bus to be free\n");
- 		return -ETIMEDOUT;
- 	}
-@@ -64,7 +64,7 @@ static int memac_wait_until_done(struct memac_mdio_controller *regs)
- 	while ((memac_in_32(&regs->mdio_stat) & MDIO_STAT_BSY) && timeout--)
- 		;
- 
--	if (!timeout) {
-+	if (timeout == -1) {
- 		printf("timeout waiting for MDIO operation to complete\n");
- 		return -ETIMEDOUT;
- 	}
+ drivers/net/fsl-mc/mc.c               | 28 ++++++++++++++++++++--------
+ drivers/net/fsl_enetc_netc_blk_ctrl.c |  2 +-
+ 2 files changed, 21 insertions(+), 9 deletions(-)
+---
+base-commit: ae5711f881100f856ead1e76832c32b92dba93c7
+change-id: 20250804-fsl_enetc-30b45818f86c
 
+Best regards,
 -- 
-2.39.5
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
