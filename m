@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F86C87FCB
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 19:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD961C87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 19:07:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A23B283AEE;
-	Mon,  4 Aug 2025 21:06:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 300A583D77;
+	Mon,  4 Aug 2025 21:06:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Of4A96oU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HrlujuEJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB81983B24; Mon,  4 Aug 2025 21:06:51 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 29E2C83AAD; Mon,  4 Aug 2025 21:06:53 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4893C83AAD
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 21:06:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7699083B0D
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 21:06:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-8817b8d2d0eso32153039f.0
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 12:06:49 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-86cdb330b48so337163339f.0
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 12:06:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754334408; x=1754939208; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754334409; x=1754939209; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kZVswYLVbSL8iwHqu4BQfEREgeYqRxH9U5aKOpld4rg=;
- b=Of4A96oULbPdF/mic9el5wSo2k1qCqz9E3lE1Y3ZMcMWiW0TMriEPLxqLWpWeAcf5w
- 3yDnbQbCx45mZqMgDJTHob4lHqgu4AgMlQTGOfvbOpFvJ59qkGOuScngi4HQh0pq2oYz
- OGw4yZCr8C48R0k8XT28J4KLbv4UgSjaJFKWw=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=5xvyl9mIJy3Avgdv4x7jrctwpiy9YiSkLwMEGWz4vVE=;
+ b=HrlujuEJcEHkgjYCszkXWW48WfSsG3V8/tVp0TjfrrPW3jjX3cLneY0aJJaVLYSzb9
+ akRIVtca1V4X8SNUONLzqkymwsqsJaRiBOQhInnY4HHoU8VqnOflCJAgI/JopAPmkUxZ
+ P5QLjR/MSt4NJ9kelTGaE5XMRWBJH2w7ew1zI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754334408; x=1754939208;
+ d=1e100.net; s=20230601; t=1754334409; x=1754939209;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kZVswYLVbSL8iwHqu4BQfEREgeYqRxH9U5aKOpld4rg=;
- b=u2wxULz1NOIMY8o0WQ3srCtKsSRr20SZ9rVmk50Skh1nDGHhkHi6EqhE8sGa8EWu8W
- dGuHIZR9uCAwdwbk8MYQsKsK2Vf1IySu+OjMW/vc38gOOkdHF+qMpprBcVjIJ+WdPcKs
- uoc2KdJOkwbm0+GhJuK8OKt6Jzc8NR9QfpzqNLB7ZboIejPDrfYVgu+WlLMAahrOfsqy
- tjsYjULJ0zyMi2Rt1/bqCAjWsJV4cYKU0JENHOge60+chmSO97qWgFkNw1rTuHIhtsrE
- y50QrTCiINAf5B7T20Mlt6sa6YhzTaLrfABUR+vPBdjtvBcXeiqvgFQgSCy72YbLIl6E
- k3dg==
-X-Gm-Message-State: AOJu0YyYOhMRlLoN/xqpaDOqEvEb4b5RPjZ9iMtV0BlZU8GUmThmEvLU
- Uhn0hiHk1CJ94pchrgFZvQL20YvNQI+Fo70OGPz8LxPXDmSgP+KkXXVDyTNfHUf7KTVAUMx2kJq
- lg0KaiCc=
-X-Gm-Gg: ASbGncvRBW/aO8rdNjIX3o5Ka58OUnNUAGpJfVdGM55+mDWThNuXaDYTGV3dpVnR4UF
- gUc+6j0QQH2L+8xIidL3LPgXM5OOUrLcOiCa34ObYNMfb+lsaDxuaVsisGRdS8/MlSmFrw91/k6
- +ygQjv5v0FJgerNFVrJ0423aBbYXaY6LAnLKtf/zwQdD6Y8J6mJRoT5vw09cTCnAXND13tJKQfd
- B7pcX5ILyAmwyiexzxJPXoQHKcsXXhJNEa3IsQdajEsyFt9u5Sjw9eTAhFyCbwkuSSA7g8O9N5Y
- tcYuhoszg/XJOF0bPHa7a8deeetLTA+FGuvO6Hwu0TaWqIedr7NOtB4/NhYVj842VzbAbJLcGxH
- 9p1wyWWODboACtDhWwkK0WSo2pPHyWEqdkPOnLHB5o+aJYVAprxnq9PMtmRe1YJo1AQ==
-X-Google-Smtp-Source: AGHT+IEd8M2j2eZr6Zu7H9ZyVInkKHls/SX91Jbn/Ad5FUisPzNdgL+VuHuiPX/UWhPkM+P8lxIOYw==
-X-Received: by 2002:a5d:83d5:0:b0:87c:78b2:6ddb with SMTP id
- ca18e2360f4ac-881683b28aamr1692071739f.9.1754334407484; 
- Mon, 04 Aug 2025 12:06:47 -0700 (PDT)
+ bh=5xvyl9mIJy3Avgdv4x7jrctwpiy9YiSkLwMEGWz4vVE=;
+ b=fWTVaIqP4/Ide5gvd2VxK/YAjtJuxxrCi6aDeU/1xA615IWfo+MpEIASaU05n8UhH4
+ isVKIGLOWqJt7+TXiTOuMd5Od5VPdb3W/1Sm+M2G0MKYc1hRu3TErJvnnfEtjDftiQDG
+ KyHhQ7wEY+3hzSTt/wUQuw+7O71tJT1Xtx1gUbG02vx2D3M3a+2AIaPNJcWjH3N2QmeN
+ DZ8HE8SaW1RVCPpPyYqwb5j0dTSzwWw29twEBqe5DnUBCnfjooZRD+dTxgF9e7L4vhz6
+ DdVww6Nm4vsj3LK0Sf7en6TMBUTiImgJOkGUxMqlS6vi5JElTkqxsmt6PwGCjjrsrXJk
+ w64g==
+X-Gm-Message-State: AOJu0Yycfo3bb8O1HFAsNzApKuK4Vyh5hEdpJ+f+kag2NYM6hxqNO9yR
+ z03++SJG11RAnpZPu2xUIoFOhM1tlHCyhP6olzhmNzj4s7Fljnh8IMKlvL64H+TUkRw=
+X-Gm-Gg: ASbGncsrZDG1fvHP+JjLQLdIJbeX/WvrWwwmGeb5i0y45ny9Hda52kQph6yN34es2PR
+ z8bfq0fl/6iC19pjBCLwNkq4tKyJ1GMgRFck1sfYliN8O8OK2QuGrKvwn5Zk3GGhWUGlHPcqwJQ
+ 5A54Qm5kRoR5JZVP2o2XkpahOu4rjTDmGRxtxjdvtYiGmMRKed8getvS3ngw6m6fAgn81z2HYwH
+ 0sI2qyxCsF4Ew1KF/HBuTwfyRUIOqCeV6sAraMLlBVwBIZxSpV7QN4iq/yjYYH24bC5yDAO50bP
+ I8Elxek7sG65+nnQ1VS52voTUUWPKuVP5YS4DL+eWW9Bnl1+N25HS7u/MNF7SmRsQjtVCvcT/55
+ 0+h7I+GrkBJYZKkMk9vbuPUj6feIfIhMTzlddOMAKH34Y/xrcECeCJ74=
+X-Google-Smtp-Source: AGHT+IHusqhwGC2SPhRZNWt1o913hE9ou1BS2eNB8J3dJX7kQ/+h5knbDL0o6KRQo4zDp72WAvohWA==
+X-Received: by 2002:a05:6602:13d1:b0:881:7e0c:7a79 with SMTP id
+ ca18e2360f4ac-8817e0c7d65mr1084013239f.2.1754334409219; 
+ Mon, 04 Aug 2025 12:06:49 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-8814defb614sm344156639f.10.2025.08.04.12.06.45
+ ca18e2360f4ac-8814defb614sm344156639f.10.2025.08.04.12.06.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 12:06:46 -0700 (PDT)
+ Mon, 04 Aug 2025 12:06:48 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250804062417.7932-1-clamor95@gmail.com>
-References: <20250804062417.7932-1-clamor95@gmail.com>
-Subject: Re: Please pull u-boot-tegra staging
-Message-Id: <175433440587.248105.12176105840221835648.b4-ty@konsulko.com>
-Date: Mon, 04 Aug 2025 13:06:45 -0600
+To: U-Boot-Denx <u-boot@lists.denx.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+In-Reply-To: <CAOf5uwkN5cc79v8fcCva2tGie1vWi9Rkr=b=W-=n+efrKmesww@mail.gmail.com>
+References: <CAOf5uwkN5cc79v8fcCva2tGie1vWi9Rkr=b=W-=n+efrKmesww@mail.gmail.com>
+Subject: Re: Pull request for u-boot-nand-03082025
+Message-Id: <175433440775.248105.8579134640280178497.b4-ty@konsulko.com>
+Date: Mon, 04 Aug 2025 13:06:47 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,15 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 04 Aug 2025 09:24:17 +0300, Svyatoslav Ryhel wrote:
+On Mon, 04 Aug 2025 11:25:38 +0200, Michael Nazzareno Trimarchi wrote:
 
-> The following changes since commit f5e968a28e7cdc2c4365f5a382e02f074ee03fac:
+> The following changes since commit ae5711f881100f856ead1e76832c32b92dba93c7:
 > 
->   Merge tag 'u-boot-stm32-20250731' of https://source.denx.de/u-boot/custodians/u-boot-stm (2025-07-31 10:04:32 -0600)
+>   Merge patch series "env: mtd: add the missing put_mtd_device()"
+> (2025-08-01 17:59:07 -0600)
 > 
 > are available in the Git repository at:
 > 
->   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+>   https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
+> u-boot-nand-03082025
 > 
 > [...]
 
