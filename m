@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD961C87FCB
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 19:07:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6796FC87FCF
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 20:36:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 300A583D77;
-	Mon,  4 Aug 2025 21:06:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BDA4683D77;
+	Mon,  4 Aug 2025 22:36:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HrlujuEJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OW44OlVS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29E2C83AAD; Mon,  4 Aug 2025 21:06:53 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 00CB083DA6; Mon,  4 Aug 2025 22:36:50 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7699083B0D
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 21:06:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8888283D40
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 22:36:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-86cdb330b48so337163339f.0
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 12:06:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-55b8bf653dfso4783150e87.0
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 13:36:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754334409; x=1754939209; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5xvyl9mIJy3Avgdv4x7jrctwpiy9YiSkLwMEGWz4vVE=;
- b=HrlujuEJcEHkgjYCszkXWW48WfSsG3V8/tVp0TjfrrPW3jjX3cLneY0aJJaVLYSzb9
- akRIVtca1V4X8SNUONLzqkymwsqsJaRiBOQhInnY4HHoU8VqnOflCJAgI/JopAPmkUxZ
- P5QLjR/MSt4NJ9kelTGaE5XMRWBJH2w7ew1zI=
+ d=gmail.com; s=20230601; t=1754339807; x=1754944607; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eQbnhqv6K0IyjY8h3mJm/SsJrDWPg28Vtha8yK2OtVI=;
+ b=OW44OlVS5VMPSw5IO8TIr/W3ez3Jrib4zy31Eh4SXm0MxkeVGYaWp0oLfzISAEzXoQ
+ D6NlS3o3XkxW9KFi7LyOSG2iKykeKBASSZCMdII0uJqO/61XvlJdhXPnmsvxsb1T7zZI
+ 1Tiv3fv0Sc0wwJkew/bnCR+8Vmy7a3yeWUnXQwqn8aFaNPalnwTRTZ7RH4DRIWkhATqt
+ SpuBZ7yDleoYWMvs2fGV17GwKbh/TV+MU+pA86P9WFl7gYptxA5TW4Gqj7m9iKvpc856
+ Ag93bJi1PkUrPg7/LFIb2kHqKYmXFnUyo8xIlnokrQeUwEFzTCbDFu4K5kLjB5UJQKKw
+ 3AMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754334409; x=1754939209;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1754339807; x=1754944607;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5xvyl9mIJy3Avgdv4x7jrctwpiy9YiSkLwMEGWz4vVE=;
- b=fWTVaIqP4/Ide5gvd2VxK/YAjtJuxxrCi6aDeU/1xA615IWfo+MpEIASaU05n8UhH4
- isVKIGLOWqJt7+TXiTOuMd5Od5VPdb3W/1Sm+M2G0MKYc1hRu3TErJvnnfEtjDftiQDG
- KyHhQ7wEY+3hzSTt/wUQuw+7O71tJT1Xtx1gUbG02vx2D3M3a+2AIaPNJcWjH3N2QmeN
- DZ8HE8SaW1RVCPpPyYqwb5j0dTSzwWw29twEBqe5DnUBCnfjooZRD+dTxgF9e7L4vhz6
- DdVww6Nm4vsj3LK0Sf7en6TMBUTiImgJOkGUxMqlS6vi5JElTkqxsmt6PwGCjjrsrXJk
- w64g==
-X-Gm-Message-State: AOJu0Yycfo3bb8O1HFAsNzApKuK4Vyh5hEdpJ+f+kag2NYM6hxqNO9yR
- z03++SJG11RAnpZPu2xUIoFOhM1tlHCyhP6olzhmNzj4s7Fljnh8IMKlvL64H+TUkRw=
-X-Gm-Gg: ASbGncsrZDG1fvHP+JjLQLdIJbeX/WvrWwwmGeb5i0y45ny9Hda52kQph6yN34es2PR
- z8bfq0fl/6iC19pjBCLwNkq4tKyJ1GMgRFck1sfYliN8O8OK2QuGrKvwn5Zk3GGhWUGlHPcqwJQ
- 5A54Qm5kRoR5JZVP2o2XkpahOu4rjTDmGRxtxjdvtYiGmMRKed8getvS3ngw6m6fAgn81z2HYwH
- 0sI2qyxCsF4Ew1KF/HBuTwfyRUIOqCeV6sAraMLlBVwBIZxSpV7QN4iq/yjYYH24bC5yDAO50bP
- I8Elxek7sG65+nnQ1VS52voTUUWPKuVP5YS4DL+eWW9Bnl1+N25HS7u/MNF7SmRsQjtVCvcT/55
- 0+h7I+GrkBJYZKkMk9vbuPUj6feIfIhMTzlddOMAKH34Y/xrcECeCJ74=
-X-Google-Smtp-Source: AGHT+IHusqhwGC2SPhRZNWt1o913hE9ou1BS2eNB8J3dJX7kQ/+h5knbDL0o6KRQo4zDp72WAvohWA==
-X-Received: by 2002:a05:6602:13d1:b0:881:7e0c:7a79 with SMTP id
- ca18e2360f4ac-8817e0c7d65mr1084013239f.2.1754334409219; 
- Mon, 04 Aug 2025 12:06:49 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-8814defb614sm344156639f.10.2025.08.04.12.06.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 12:06:48 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot-Denx <u-boot@lists.denx.de>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-In-Reply-To: <CAOf5uwkN5cc79v8fcCva2tGie1vWi9Rkr=b=W-=n+efrKmesww@mail.gmail.com>
-References: <CAOf5uwkN5cc79v8fcCva2tGie1vWi9Rkr=b=W-=n+efrKmesww@mail.gmail.com>
-Subject: Re: Pull request for u-boot-nand-03082025
-Message-Id: <175433440775.248105.8579134640280178497.b4-ty@konsulko.com>
-Date: Mon, 04 Aug 2025 13:06:47 -0600
+ bh=eQbnhqv6K0IyjY8h3mJm/SsJrDWPg28Vtha8yK2OtVI=;
+ b=tt3nd7Wfy+VjN5bklSFxNUsmYR79g6ozHzXZmS8sJjD07lIJF8tfmP7O5Z6SpEqxu6
+ Trj+lIuzkzLPrHn7GXW0MBlCwHiXTdaHa00RKqUKNzppCPSRXODm4UiLXxXI8S4RgSJ9
+ kzDuiCptVDesQzSabM+Z4esUZpK3sVYFQoN+JP4yzlu8bH64y0Uop9s8BNnRTXB+KlEG
+ ZKfMz+6tnkriAELHAEZw88zftoDS+0RNEPmQQDitp2NKH6EZAY3BmIbDXtNiynXjy3vM
+ E6jhELoF72an1m07yLEcBb95ML5f5h6lTKxIjzKtIPJnF0YdSiguX6m64rbH0j4o7osM
+ AqQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU38D6zcv7Mprqo/ET3gIcmsMwkrf/WXNbiP7xR3ZUXr+ftvlDB9yHGN9c61YXlNWhzg47XIyw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJa34FMrjlQaQNkl10+FhvUbu95kkMQsPTPltRHxbvs39WgukT
+ dQzhJQE1apCrQ9qfAoKYfZL9CGRjkEXpEp9jr5cOFH/UwKLpzxGoDiOaw3rkKeWzFCNmbekD8rX
+ K0RFhWJJzOJO2znCEnuJgLrPIdaRhbcM=
+X-Gm-Gg: ASbGncvMLT0AaSuZ+BnnKD1hUTknJTJ+f8fMOobzfozlrQ6Fa5yfGJHzekWsJ3fJg3i
+ tvsXbbXYjL31+KQH50SBKkZcqsyPD3OV9TO9U0+8NXdYb0326Z4tH7yXQHCSaTcsVqXe2T1iJE7
+ tmGjuM0AUGyAROlFCP626z2TmVNgrZ3gI+C73Nk7qLkTWF9qc1CULgJYzVSeBjSmk4TfI8LI75l
+ QJPlPStTArs0FtI15XsnijaG77/ynVO+NBVjcQ=
+X-Google-Smtp-Source: AGHT+IE+/fNFGPX2mr2XT1r9LrgDcluSJnUZ/JvBH5jON4rQCwYEMhkiZTzd5td5pkZIVvJ1yrOMNRR0vD+FrrTgmX8=
+X-Received: by 2002:a05:6512:b26:b0:55b:9424:ddb9 with SMTP id
+ 2adb3069b0e04-55b97b6d40cmr3483538e87.44.1754339806368; Mon, 04 Aug 2025
+ 13:36:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250804-fec_mxc-v1-1-1ed9b5df2828@linaro.org>
+In-Reply-To: <20250804-fec_mxc-v1-1-1ed9b5df2828@linaro.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 4 Aug 2025 17:36:34 -0300
+X-Gm-Features: Ac12FXzuJLmnraYZKhlc6upcJOtTPuWSVkJ2slOYp-c8r4vx4y0KxmTFZqV-h58
+Message-ID: <CAOMZO5DdypLP+YMagDm5Xa6Jk2+a-8qb69QtGsgfgdtHc-m3MA@mail.gmail.com>
+Subject: Re: [PATCH] net: fec_mxc: Set error code on error exit
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,23 +96,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 04 Aug 2025 11:25:38 +0200, Michael Nazzareno Trimarchi wrote:
+On Mon, Aug 4, 2025 at 12:44=E2=80=AFPM Andrew Goodbody
+<andrew.goodbody@linaro.org> wrote:
+>
+> In fecmxc_probe if a timeout is detected when resetting the chip no
+> error code is set before taking the error exit. This could lead to a
+> silent failure. Instead set an error code.
+>
+> This issue was found by Smatch.
+>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  drivers/net/fec_mxc.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
+> index 54b08482b91..ccd5589318e 100644
+> --- a/drivers/net/fec_mxc.c
+> +++ b/drivers/net/fec_mxc.c
+> @@ -1344,6 +1344,7 @@ static int fecmxc_probe(struct udevice *dev)
+>         while (readl(&priv->eth->ecntrl) & FEC_ECNTRL_RESET) {
+>                 if (get_timer(start) > (CONFIG_SYS_HZ * 5)) {
+>                         printf("FEC MXC: Timeout resetting chip\n");
+> +                       ret =3D -ENODEV;
 
-> The following changes since commit ae5711f881100f856ead1e76832c32b92dba93c7:
-> 
->   Merge patch series "env: mtd: add the missing put_mtd_device()"
-> (2025-08-01 17:59:07 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
-> u-boot-nand-03082025
-> 
-> [...]
-
-Merged into u-boot/master, thanks!
-
--- 
-Tom
-
-
+'return -ETIMEDOUT;' would be a more appropriate error in the case of a tim=
+eout.
