@@ -4,61 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E16C87FDA
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 09:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBC8C87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 09:44:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C44E83E18;
-	Mon,  4 Aug 2025 11:43:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A5E6983E18;
+	Mon,  4 Aug 2025 11:44:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1754300622;
-	bh=tvTPohJY2XSuq5SSvEWYxadhdw3iE/XizwQxFwgIEW8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=wVXztJtpgDI2LQEJ2q5xxYCjw306BoruoYm3VLGxBpZsKvnVkKRykPcupvEM9zqSl
-	 DWxSlUa0ty2kYIkmvneLiIB4YXF/X7n2jYzTaBcjd/vtWZdrzlj51HbW1VCrAJYhKy
-	 wEiVctommX8h+p8sqZHcD4+hMiFApGzrYch95NoTmPWy/uQLaJGUJ/0PzI0Z0MGP+R
-	 wCAhLvgJhJoGBgGwOJgXlIZMlVQ1gcNQobq6WRU1QukLiCYrxlAEIVXC5KzmkwRSNH
-	 lUmnezqSal4TJehi0elabQEJ+bg2n5Igz8q35D6Obh36xnx/ojOUoUvxNJeSZuKAVO
-	 g1+phPCdo+Cbg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="ErX9Ohmo";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62B3183F1F; Mon,  4 Aug 2025 11:43:40 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 177B083F2D; Mon,  4 Aug 2025 11:44:38 +0200 (CEST)
+Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.37])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3329E83E04
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:43:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECE7883E04
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:44:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="YhNh1cCF"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 58E901038C126; 
- Mon,  4 Aug 2025 11:43:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1754300617; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=tvTPohJY2XSuq5SSvEWYxadhdw3iE/XizwQxFwgIEW8=;
- b=YhNh1cCFO3aGbYwRnClcsqwe1+1rCGubC3hPxT4c9obm2DsroucxKe6RfeRVgsiYa4RLLp
- 3fKTj3UovHoKGcFGetYppy5c/4C/PxT8xJeAco4HJWgW4yu9k2yv4yV8NjQxiPBo8fw7oL
- EQQL+VHn09Kkkf1TS2kD+qVqOTqD34tvz5hz9JKLKNV+eCZJzh48S9IaOpjYldvpzBLBHR
- 6oacJqN1i6dK+oFIVFPBXOKM/orhW1q3UdZZkpzIoNQ6uVok1mNZapHhfyIRTWg830swiB
- V7GnKS5MLjo18zntVNPGKdld1L7GH0IXqEgxJ5rz2eZkD3VQYjbFNQyyGKNoUw==
-From: Heiko Schocher <hs@denx.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: Heiko Schocher <hs@denx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH] cmd: i2c: fix coverity issue
-Date: Mon,  4 Aug 2025 11:43:29 +0200
-Message-Id: <20250804094330.118675-1-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
+ spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
+dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
+ c=relaxed/relaxed; q=dns/txt;
+ h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding; 
+ bh=9mYIGPQCrqQgDqWSlH1XauYVhzYO2DqKRrkxRSVhX2A=;
+ b=ErX9OhmochwYx80eJz5SQJmcnHe5RKIFJUXi+CtvDxy8g0qpHfBysPuJsTRLDaWgcXwh/yvDQ0s1sRruAWi2660k8RPUdVy7lwwNdX4JvU44SC+vKWrRJVTdv3utXwj9CHPfR0A79weRgR0/H4xI/BW+GtbkOpKMIWjKT5yz6+5jOW9i9DVCkbltn4thEiQbF5EqR+ikkCPMJELyIEmTs/HqnIlOoHhMxOreebg01A4rG6YGoWHtMj48Yi
+ ydX6dLitL1u0eQ/B38Mf40TB05pi0eLWIBB/nPvqmcVe6V1uykiCEpq/ZSnF7UCLkj94DWzD/zBShBCMIDoY/FglRwEA==
+Received: from TkB (188-24-194-92.rdsnet.ro [188.24.194.92])
+ by mx1.wiredblade.com with ESMTPSA
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
+ ; Mon, 4 Aug 2025 09:44:31 +0000
+From: Marius Dinu <m95d+git@psihoexpert.ro>
+To: u-boot@lists.denx.de
+Cc: Marius Dinu <m95d+git@psihoexpert.ro>
+Subject: [PATCH] USB OTG: make dwc2 otg driver dependent on Exynos platform
+Date: Mon,  4 Aug 2025 09:43:53 +0000
+Message-ID: <20250804094353.28658-1-m95d+git@psihoexpert.ro>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,36 +60,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-coverity scan reported issue:
-** CID 583415:       Integer handling issues  (INTEGER_OVERFLOW)
-/cmd/i2c.c: 369           in do_i2c_write()
+drivers/usb/gadget/dwc2_udc_otg_phy.c uses s5p_cpu_id,
+which is only defined for Exynos CPUs.
 
-change the length variable into type int.
-
-Signed-off-by: Heiko Schocher <hs@denx.de>
+Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
 ---
-azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=183&view=results
-
- cmd/i2c.c | 3 ++-
+ drivers/usb/gadget/Kconfig | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/cmd/i2c.c b/cmd/i2c.c
-index f0aae93073f..e021067e68a 100644
---- a/cmd/i2c.c
-+++ b/cmd/i2c.c
-@@ -299,7 +299,8 @@ static int do_i2c_write(struct cmd_tbl *cmdtp, int flag, int argc,
- 			char *const argv[])
- {
- 	uint	chip;
--	uint	devaddr, length;
-+	uint	devaddr;
-+	int length;
- 	int alen;
- 	u_char  *memaddr;
- 	int ret;
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 46a83141481..deabcb3e51f 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -108,10 +108,11 @@ config USB_GADGET_AT91
+ 
+ config USB_GADGET_DWC2_OTG
+ 	bool "DesignWare USB2.0 HS OTG controller (gadget mode)"
++	depends on ARCH_EXYNOS5
+ 	select USB_GADGET_DUALSPEED
+ 	help
+ 	  The Designware USB2.0 high-speed gadget controller
+-	  integrated into many SoCs. Select this option if you want the
++	  integrated into many Exynos SoCs. Select this option if you want the
+ 	  driver to operate in Peripheral mode. This option requires
+ 	  USB_GADGET to be enabled.
+ 
 -- 
-2.20.1
+2.49.0
 
-base-commit: ae5711f881100f856ead1e76832c32b92dba93c7
-branch: i2c-coverity-issue-v1
+
