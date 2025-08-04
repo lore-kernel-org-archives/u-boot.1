@@ -4,64 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77538C87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 13:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 653C2C87FCF
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 13:07:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8787D83F58;
+	by phobos.denx.de (Postfix) with ESMTP id E005083F60;
 	Mon,  4 Aug 2025 15:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="HqPJy/7K";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="RoxElgdU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D8BA83ED7; Mon,  4 Aug 2025 11:15:49 +0200 (CEST)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::223])
+ id 35B0183EC9; Mon,  4 Aug 2025 11:21:46 +0200 (CEST)
+Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
+ [217.70.183.199])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D8F483DF7
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:15:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D63983DC9
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:21:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 195C1205AF;
- Mon,  4 Aug 2025 09:15:45 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id BFB69431F1;
+ Mon,  4 Aug 2025 09:21:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1754298945;
+ t=1754299303;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dAdl+ossrQXx6X2gUss35K4IbBGmL6WgyXYDQr4lGeA=;
- b=HqPJy/7Ks9cHWRlvC6/nwWEDg8UMr4NyKVrx1qYdr+cysm00NGpmSipOIfNj+VX5KgE7VG
- ocaDVF1uLeaWo4cQG+HsceFHFBcYmy45Y5N9VNz/CKV6nayC8qfMPQgXv5w3iYpPgUEecv
- HTzFw9uK4/7jkOYDHIK4LlK8V6L1yGirXSQ9j7t85onUDEtLfMs4t+WkU2sHPoTtBvOj4d
- gfHzzJMuY4KlPxaKGbQr0EKJaHztNWO/k/mfaTpNMK2kxCGl9XjEkSTL0atLI6Q1kMlpA9
- LiK+4+N/p4R1CqpZuEOHLofMc0+4ZnVfuei9Q5ls5VYTLweUIMPjn2hnPfedjQ==
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=2n7LXScZVq2nxFhx1UJw1mXK+nL6LO5X8CKefMsuII4=;
+ b=RoxElgdU1xnvu5/5B/BVU7mr4/7WbzQ8T56YkzEfPfrLuRJBcjfKifo5HFB33EJC5aKyvq
+ D1nW0+tUlSj1uR+SBe6jMA2ncY6tD+3WJ11RWRmUQoTJv5CxQfs1SPH8H9+tErt8KAMBCV
+ pm6MZP/n4f7NJQDsKBXbpysgb1LWNh+D9FlJMJBwXJOe60AQIUXCpfNdWZNWxXbq7ciqje
+ FJ83ipmZoDvLG4MGcY6/Vhhme8jiCNE/ocx3dbi4xS7UO6qBEU/P4l2iKNB/JxS8fz5Y8y
+ UuohJD1rWfK3lXuazCRp639nAZd1dD3xU/KPGlAy6R3daedqSCyeJjfXlJWGgA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>,  Christian Marangi
- <ansuelsmth@gmail.com>,  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- u-boot@lists.denx.de,  Steam Lin <stlin2@winbond.com>,  Thomas Petazzoni
- <thomas.petazzoni@bootlin.com>
-Subject: Re: [PATCH] cmd: mtd: Enable speed benchmarking
-In-Reply-To: <CAOf5uwnju+Z4bY0Cx0fy05TOLtaQqikq3z51zqDf2nDgCzQyWw@mail.gmail.com>
- (Michael Nazzareno Trimarchi's message of "Thu, 3 Jul 2025 19:19:45
- +0200")
-References: <20250703165841.1230515-1-miquel.raynal@bootlin.com>
- <CAOf5uwnju+Z4bY0Cx0fy05TOLtaQqikq3z51zqDf2nDgCzQyWw@mail.gmail.com>
-User-Agent: mu4e 1.12.7; emacs 30.1
-Date: Mon, 04 Aug 2025 11:15:44 +0200
-Message-ID: <87wm7jjvlr.fsf@bootlin.com>
+To: Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
+ Steam Lin <stlin2@winbond.com>, Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH v2] cmd: mtd: Enable speed benchmarking
+Date: Mon,  4 Aug 2025 11:21:37 +0200
+Message-ID: <20250804092137.404647-1-miquel.raynal@bootlin.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-GND-State: clean
 X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdduudduledtucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgefhjedtfeeigeduudekudejkedtiefhleelueeiueevheekvdeludehiedvfeenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghloheplhhotggrlhhhohhsthdpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeejpdhrtghpthhtohepmhhitghhrggvlhesrghmrghruhhlrghsohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtoheprghnshhuvghlshhmthhhsehgmhgrihhlrdgtohhmpdhrtghpthhtohepgiihphhrohhnrdhglhhpkhesghhmgidruggvpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhto
- hepshhtlhhinhdvseifihhnsghonhgurdgtohhmpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhm
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdduudduledvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefoihhquhgvlhcutfgrhihnrghluceomhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepgeetfeduleefjeffheevleeggfdtvdduhfdugeeuieejveejiedvhfdugfettdehnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehffidpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeekpdhrtghpthhtohepmhhitghhrggvlhesrghmrghruhhlrghsohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepgiihphhrohhnrdhglhhpkhesghhmgidruggvpdhrtghpthhtoheprghnshhuvghlshhmthhhsehgmhgrihhlrdgtohhmpdhrtghpthhtohepu
+ hdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtohepshhtlhhinhdvseifihhnsghonhgurdgtohhmpdhrtghpthhtohepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomh
 X-GND-Sasl: miquel.raynal@bootlin.com
 X-Mailman-Approved-At: Mon, 04 Aug 2025 15:06:58 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -80,84 +74,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Michael,
+Linux features a flash_speed speed test from the mtd-utils suite, U-Boot
+does not. Benchmarks are useful for speed improvement developments as
+well as troubleshooting or regression testing sometimes.
 
->> MA35D1> mtd read nor0 0x81000000 0 0x10000
->> Reading 65536 byte(s) at offset 0x00000000
->> MA35D1> mtd read.benchmark nor0 0x81000000 0 0x10000
->> Reading 65536 byte(s) at offset 0x00000000
->> Read speed: 3752kiB/s
->>
->
-> I was using time and reading but this looked much nicer. I will give it a=
- try
-> and review.
+Enable a benchmark option to enable this feature.
 
-Thanks! It turned out very useful for development purposes :-)
+Example of output on a Nuvoton platform:
 
->> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
->> ---
+MA35D1> mtd read nor0 0x81000000 0 0x10000
+Reading 65536 byte(s) at offset 0x00000000
+MA35D1> mtd read.benchmark nor0 0x81000000 0 0x10000
+Reading 65536 byte(s) at offset 0x00000000
+Read speed: 3752kiB/s
 
-[...]
+Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+---
+Changes in v2:
+* Use an unsigned long as advised by Michael for accounting time.
+---
+ cmd/mtd.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
->> -       bool dump, read, raw, woob, write_empty_pages, has_pages =3D fal=
-se;
->> +       bool dump, read, raw, woob, benchmark, write_empty_pages, has_pa=
-ges =3D false;
->>         u64 start_off, off, len, remaining, default_len;
->>         struct mtd_oob_ops io_op =3D {};
->>         uint user_addr =3D 0, npages;
->> +       u32 bench_start, bench_end;
->
-> unsigned long
+diff --git a/cmd/mtd.c b/cmd/mtd.c
+index c25997cfb246..2520b89eed2c 100644
+--- a/cmd/mtd.c
++++ b/cmd/mtd.c
+@@ -17,6 +17,7 @@
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <mtd.h>
++#include <time.h>
+ #include <dm/devres.h>
+ #include <linux/err.h>
+ 
+@@ -466,8 +467,9 @@ static int mtd_special_write_oob(struct mtd_info *mtd, u64 off,
+ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		     char *const argv[])
+ {
+-	bool dump, read, raw, woob, write_empty_pages, has_pages = false;
++	bool dump, read, raw, woob, benchmark, write_empty_pages, has_pages = false;
+ 	u64 start_off, off, len, remaining, default_len;
++	unsigned long bench_start, bench_end;
+ 	struct mtd_oob_ops io_op = {};
+ 	uint user_addr = 0, npages;
+ 	const char *cmd = argv[0];
+@@ -490,6 +492,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	read = dump || !strncmp(cmd, "read", 4);
+ 	raw = strstr(cmd, ".raw");
+ 	woob = strstr(cmd, ".oob");
++	benchmark = strstr(cmd, ".benchmark");
+ 	write_empty_pages = !has_pages || strstr(cmd, ".dontskipff");
+ 
+ 	argc -= 2;
+@@ -559,6 +562,9 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	led_activity_blink();
+ 
++	if (benchmark)
++		bench_start = timer_get_us();
++
+ 	/* Loop over the pages to do the actual read/write */
+ 	while (remaining) {
+ 		/* Skip the block if it is bad */
+@@ -586,6 +592,13 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		io_op.oobbuf += io_op.oobretlen;
+ 	}
+ 
++	if (benchmark && bench_start) {
++		bench_end = timer_get_us();
++		printf("%s speed: %lukiB/s\n",
++		       read ? "Read" : "Write",
++		       ((io_op.len * 1000000) / (bench_end - bench_start)) / 1024);
++	}
++
+ 	led_activity_off();
+ 
+ 	if (!ret && dump)
+-- 
+2.50.1
 
-Okay.
-
->>         const char *cmd =3D argv[0];
->>         struct mtd_info *mtd;
->>         u32 oob_len;
->> @@ -490,6 +492,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
-, int argc,
->>         read =3D dump || !strncmp(cmd, "read", 4);
->>         raw =3D strstr(cmd, ".raw");
->>         woob =3D strstr(cmd, ".oob");
->> +       benchmark =3D strstr(cmd, ".benchmark");
->>         write_empty_pages =3D !has_pages || strstr(cmd, ".dontskipff");
->>
->>         argc -=3D 2;
->> @@ -559,6 +562,9 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
-, int argc,
->>
->>         led_activity_blink();
->>
->> +       if (benchmark)
->> +               bench_start =3D timer_get_us();
->> +
->>         /* Loop over the pages to do the actual read/write */
->>         while (remaining) {
->>                 /* Skip the block if it is bad */
->> @@ -586,6 +592,13 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int fla=
-g, int argc,
->>                 io_op.oobbuf +=3D io_op.oobretlen;
->>         }
->>
->> +       if (benchmark && bench_start) {
->> +               bench_end =3D timer_get_us();
->> +               printf("%s speed: %lukiB/s\n",
->> +                      read ? "Read" : "Write",
->> +                      ((io_op.len * 1000000) / (bench_end - bench_start=
-)) / 1024);
->
-> Did you check if it can not wrap?
-
-That is a good question, if my calculations are correct, time capture
-may wrap if one spends more than 1h12 in the Bootloader. So yes it is
-'doable' to make the time overlap.
-
-But is this relevant? It really is a development feature at the moment
-(developers comparing speeds would notice the overlap) and Bootloaders
-in general are not supposed to run for that long anyway. So I would
-argue that it is acceptable like that.
-
-Thanks,
-Miqu=C3=A8l
