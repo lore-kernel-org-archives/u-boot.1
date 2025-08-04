@@ -4,74 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7418FC87FCB
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 09:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E16C87FDA
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 09:43:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2A5583EF1;
-	Mon,  4 Aug 2025 11:25:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C44E83E18;
+	Mon,  4 Aug 2025 11:43:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="f2zaJ9ra";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1754300622;
+	bh=tvTPohJY2XSuq5SSvEWYxadhdw3iE/XizwQxFwgIEW8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=wVXztJtpgDI2LQEJ2q5xxYCjw306BoruoYm3VLGxBpZsKvnVkKRykPcupvEM9zqSl
+	 DWxSlUa0ty2kYIkmvneLiIB4YXF/X7n2jYzTaBcjd/vtWZdrzlj51HbW1VCrAJYhKy
+	 wEiVctommX8h+p8sqZHcD4+hMiFApGzrYch95NoTmPWy/uQLaJGUJ/0PzI0Z0MGP+R
+	 wCAhLvgJhJoGBgGwOJgXlIZMlVQ1gcNQobq6WRU1QukLiCYrxlAEIVXC5KzmkwRSNH
+	 lUmnezqSal4TJehi0elabQEJ+bg2n5Igz8q35D6Obh36xnx/ojOUoUvxNJeSZuKAVO
+	 g1+phPCdo+Cbg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C02383F00; Mon,  4 Aug 2025 11:25:55 +0200 (CEST)
-Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com
- [IPv6:2607:f8b0:4864:20::643])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 62B3183F1F; Mon,  4 Aug 2025 11:43:40 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32FE683E04
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:25:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3329E83E04
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:43:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x643.google.com with SMTP id
- d9443c01a7336-2400f746440so32190575ad.2
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 02:25:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1754299551; x=1754904351;
- darn=lists.denx.de; 
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=UgUkYN+BQ1x3ru4jaxiYKB52gftWWFUiK8EwQM0HyyY=;
- b=f2zaJ9ravIvrUGtVTTmX8DRBukGaGjzjAXJ69XVs+wk59VSzIRBRfcA1DgQJxAxTvW
- Xmvdw17hW+nWtizeZXGHXvzddzx0b469uLfWkA79zxUbUc4O1Hlnd09Pru02Q5D9z1fp
- 9MPtm54lW5bsbFHiwtSXIpjLz5X+PTQgEfchE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754299551; x=1754904351;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UgUkYN+BQ1x3ru4jaxiYKB52gftWWFUiK8EwQM0HyyY=;
- b=coVkqigw/Zxpsd65Mc7XhBWh1AUtk1nIgoMW66k+J4EEUWX8ViUkGRXAJ+HP+5Fz44
- RKBfl0QzX2bAJ8m/ko4YhoTwpzoupIM0Ky13yrlaj+XSJe5lQfOOrCXmfvX0pk7HF2FA
- B2R9Bo8mhYZIkc4MlcF5HHwNy0+03Puj/pv+ina1y/4MGVmwgKC4BfsvTJ20+Ablms2n
- nQe8qPToWEiasmuTwgPpcViHvu3IM/kcIgGapzobv9avbA5j0vbPL4r3X+81+4YYyvdc
- pqCA2rt8OnoAcqctTswMtYvjojRmPxsaosJCEsgE/CsxsAgvutIGAidn2P86LBpx8dsP
- a9Yw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUy3fYWy+va3gal3LK1J5pgEQGuf0W8FzjyvzeCqyS3dWN1q2U82VG8eOQSuEpnnBOear19v+E=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYNgU3FOzdlA5cPZqGYgYT+6CbT8Ot4cFtdDEIkqNQkyMWoPlX
- CyjDpYXeN9lLuSWNh4fAqR/KV2xbS7pHfGstHi4MAUVoQ+Byu3ZjBJW4R3r08VYzlaj7IqTFqJT
- CyoslTTM69iVk38V2Ca42uLQKb26kNZaNhDUazrVDmA8M2eWRJndVYa8nr6A5O9M=
-X-Gm-Gg: ASbGncu0TTZLi4Cau8BR1r24g1HtE/gw3o337H0ODjLAl+5FTS97H47KvNFowOhIpiW
- qlASUu2M51mDZ3/oSTCG7jtnVPlA2Kr+Cl7MbRqIoF6PZCUCvOajIZmzVrTgjDT2x0CgQ4kcRZM
- vWjExF2kqlcNNolYfp08Y2dXVwrIHWcNutcqMxewqfegxtvfW/Ltm5pD+W7Z4nIkYRbFYwr6BcU
- 61GhYfn
-X-Google-Smtp-Source: AGHT+IEN0xUwLr+hptlVtHNTb5w4g18/gTHRuE/Kj2V/oj2QJ0lFntD+bSn8BJBHB5ZQ6zAbYrxLdYasHsaZ+Ae40k8=
-X-Received: by 2002:a17:903:2b10:b0:240:1bca:54 with SMTP id
- d9443c01a7336-2424701a079mr118560575ad.35.1754299550481; Mon, 04 Aug 2025
- 02:25:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="YhNh1cCF"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 58E901038C126; 
+ Mon,  4 Aug 2025 11:43:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1754300617; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=tvTPohJY2XSuq5SSvEWYxadhdw3iE/XizwQxFwgIEW8=;
+ b=YhNh1cCFO3aGbYwRnClcsqwe1+1rCGubC3hPxT4c9obm2DsroucxKe6RfeRVgsiYa4RLLp
+ 3fKTj3UovHoKGcFGetYppy5c/4C/PxT8xJeAco4HJWgW4yu9k2yv4yV8NjQxiPBo8fw7oL
+ EQQL+VHn09Kkkf1TS2kD+qVqOTqD34tvz5hz9JKLKNV+eCZJzh48S9IaOpjYldvpzBLBHR
+ 6oacJqN1i6dK+oFIVFPBXOKM/orhW1q3UdZZkpzIoNQ6uVok1mNZapHhfyIRTWg830swiB
+ V7GnKS5MLjo18zntVNPGKdld1L7GH0IXqEgxJ5rz2eZkD3VQYjbFNQyyGKNoUw==
+From: Heiko Schocher <hs@denx.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: Heiko Schocher <hs@denx.de>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH] cmd: i2c: fix coverity issue
+Date: Mon,  4 Aug 2025 11:43:29 +0200
+Message-Id: <20250804094330.118675-1-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 4 Aug 2025 11:25:38 +0200
-X-Gm-Features: Ac12FXxZLx226cWd2L48HLk9ZsS0tuL1MqA3Z-oa-H1Wx7UiHKFDRN4j5dZKvBA
-Message-ID: <CAOf5uwkN5cc79v8fcCva2tGie1vWi9Rkr=b=W-=n+efrKmesww@mail.gmail.com>
-Subject: Pull request for u-boot-nand-03082025
-To: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,75 +75,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit ae5711f881100f856ead1e76832c32b92dba93c7:
+coverity scan reported issue:
+** CID 583415:       Integer handling issues  (INTEGER_OVERFLOW)
+/cmd/i2c.c: 369           in do_i2c_write()
 
-  Merge patch series "env: mtd: add the missing put_mtd_device()"
-(2025-08-01 17:59:07 -0600)
+change the length variable into type int.
 
-are available in the Git repository at:
+Signed-off-by: Heiko Schocher <hs@denx.de>
+---
+azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=183&view=results
 
-  https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
-u-boot-nand-03082025
+ cmd/i2c.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-for you to fetch changes up to 8877bbe67a9be64f2735a45479df196cd22949aa:
-
-  mtd: nand: raw: Remove unused octeontx_nand driver (2025-08-03 10:32:08
-+0200)
-
-This series address issues found by Andrew Goodbody and mostly drop driver
-that are not
-used by any board
-
-The patches pass the pipeline CI:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/27258
-
-----------------------------------------------------------------
-Andrew Goodbody (6):
-      mtd: nand: pxa3xx: Free memory on error
-      mtd: rawnand: stm32_fmc2: Ensure to return error code
-      mtd: nand: sunxi: Free allocated memory on errors
-      mtd: rawnand: cortina_nand: Fix -ENOMEM detection
-      mtd: rawnand: denali: Remove always true test
-      mtd: rawnand: mxs_nand: Ensure err is set for error path
-
-Tom Rini (3):
-      mtd: nand: raw: Remove unused lpc32xx_nand_slc driver
-      mtd: nand: raw: Remove unused mxic_nand driver
-      mtd: nand: raw: Remove unused octeontx_nand driver
-
- arch/arm/include/asm/arch-lpc32xx/config.h |   19 -
- drivers/mtd/nand/raw/Kconfig               |   31 +-
- drivers/mtd/nand/raw/Makefile              |    4 -
- drivers/mtd/nand/raw/cortina_nand.c        |   11 +-
- drivers/mtd/nand/raw/denali.c              |   10 +-
- drivers/mtd/nand/raw/lpc32xx_nand_slc.c    |  587 --------
- drivers/mtd/nand/raw/mxic_nand.c           |  602 --------
- drivers/mtd/nand/raw/mxs_nand.c            |    6 +-
- drivers/mtd/nand/raw/octeontx_bch.c        |  422 ------
- drivers/mtd/nand/raw/octeontx_bch.h        |  131 --
- drivers/mtd/nand/raw/octeontx_bch_regs.h   |  167 ---
- drivers/mtd/nand/raw/octeontx_nand.c       | 2254
-----------------------------
- drivers/mtd/nand/raw/pxa3xx_nand.c         |    1 +
- drivers/mtd/nand/raw/stm32_fmc2_nand.c     |    6 +-
- drivers/mtd/nand/raw/sunxi_nand.c          |   17 +-
- 15 files changed, 33 insertions(+), 4235 deletions(-)
- delete mode 100644 drivers/mtd/nand/raw/lpc32xx_nand_slc.c
- delete mode 100644 drivers/mtd/nand/raw/mxic_nand.c
- delete mode 100644 drivers/mtd/nand/raw/octeontx_bch.c
- delete mode 100644 drivers/mtd/nand/raw/octeontx_bch.h
- delete mode 100644 drivers/mtd/nand/raw/octeontx_bch_regs.h
- delete mode 100644 drivers/mtd/nand/raw/octeontx_nand.c
-
+diff --git a/cmd/i2c.c b/cmd/i2c.c
+index f0aae93073f..e021067e68a 100644
+--- a/cmd/i2c.c
++++ b/cmd/i2c.c
+@@ -299,7 +299,8 @@ static int do_i2c_write(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			char *const argv[])
+ {
+ 	uint	chip;
+-	uint	devaddr, length;
++	uint	devaddr;
++	int length;
+ 	int alen;
+ 	u_char  *memaddr;
+ 	int ret;
 -- 
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+2.20.1
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+base-commit: ae5711f881100f856ead1e76832c32b92dba93c7
+branch: i2c-coverity-issue-v1
