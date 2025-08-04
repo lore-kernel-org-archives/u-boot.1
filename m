@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1054CC87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 21:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D5FC87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 21:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E30E084011;
-	Mon,  4 Aug 2025 23:57:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71BF68401A;
+	Mon,  4 Aug 2025 23:57:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ML44+ZxC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ipcQUNNu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 511AB84006; Mon,  4 Aug 2025 23:57:29 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 5999584019; Mon,  4 Aug 2025 23:57:30 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDC5383B1B
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 23:57:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88ED183FFD
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 23:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3e3f0287842so40304485ab.3
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 14:57:26 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3e3d2ad9180so18665095ab.1
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 14:57:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1754344646; x=1754949446; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iQ3U3A+9MsZu+q7hOIBs2c/nunSQjmw8BIVnr4lD3cM=;
- b=ML44+ZxCeXD/8YXbm8YwBVNM9X6pkRbBMi22WLGfWf57YbqKSY/afh+MwbJCaHMRvI
- VxAGIz6rOP4hxZUd27r4p2KpR1JU1m7LfvvmGe4eVzyL4c8TogHM7MjXZKTjNgwe9QjV
- XizV/ytmlNm2FVNgWkDBqiAODMyfas2ftM4Wk=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=K0Pgv6mPfbU8UkjZrtlMnPyl9GATjDurJ7iY8Vc5xy4=;
+ b=ipcQUNNu9sZl9K2OS1U5PQcstF6mOfOOPmFA0aazoGdPSK3LRrXVPBWy3/8zEyXjpR
+ 1AstS1UU87j1HqaL+dXgrR5klW4nQXRaPq7NoHOo2FnPPZwKpQ8YvrFXrH3VDl8ck43f
+ +NnFZM1hAMT36V5tmKMqXDA05JD32dq+I8FwM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1754344646; x=1754949446;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iQ3U3A+9MsZu+q7hOIBs2c/nunSQjmw8BIVnr4lD3cM=;
- b=ibodebxzQVGFjkkqYX/9fdNA3q8gvkudwwIbK4cb+8w+vqyVgnC74lxAIJYv7rVPbF
- JJiPxfNyhXu78h+6EOHEXPCl6Rv1CvYK8pY0i0bIbzKscTIhLO/m9o1G25wR02wsam1b
- got2yH8tOxKSMKRTbhIAcMyosbRvR9Dl1Smu9zR1naFPxwCbzHwrQrv4Ggm1SdrFqulI
- mmj3P4zRxAl/Iyr1ZnSgKvHcFVS9DQvexsvGruubrFFZfs2ML7LQLu+ntOtFdVxUhQW3
- 9Tx8sTd27a8BEwxrKUPpiWKSTBe7ElexBjmwmIeWXRjTQdifaGfEPgJKKBs+KKsL/34B
- y6Xw==
-X-Gm-Message-State: AOJu0YzIzWpMMS2LX4yhKKhZ6bD4h9BLrOXLQ506FAvRt905wfBRr1H7
- QJtBIg4olY1zsMJc1vfCPK3LDg4FOvCtp/nWvHDy3/dBtoKEDtlaLF4bOclAYsC+mulDF3FNNwV
- zxFQDMRA=
-X-Gm-Gg: ASbGncsKFbf4FZuJKO/4h7UYU7Y0vfr1DGqeYFpIJVBxLl9x2CeiXiM3OXHso3fIjw8
- nMw1MK9ktqqlTKVC+bucb8TXmvQMUhnUb9JOmnSp/oWua3rQZZ3T3az9yDNGOGtigR+bvbsIf9f
- AXH8c7lNON8fHZgGDLACtE1xI0JeHEqUzSJUX1ppbLqtpeyttX/apfLfXB8gHwt5DlmKrnD4Gle
- ohFKlmd0pHyPRmZxvNaowQIHvz0g68UCtZ3pKQCspeWcUCxti9xA1z68VvGe4SeZdeQ+zQJbF0D
- DOAs+E/G44D/fMaaKJW9wrjQYckSXaKHKzh9ki5z8q2xtuF7BRsID053PRydvUVvrLbd+t9ejxH
- VaonmjZApNMgq9zIjrHXYyWbcBBEU86z2OEBWFJYmZmcJpOEMFpAa7BJJCICL57uRSDvd
-X-Google-Smtp-Source: AGHT+IHNXfyXPItXui8STdCq/Bg/FQGkoYzbsDOram2Gn+CI6XbWn6uC91TZZ37NgLUDD2Q6cleO5w==
-X-Received: by 2002:a92:c265:0:b0:3e3:cbd4:ca21 with SMTP id
- e9e14a558f8ab-3e4161dc23emr206606845ab.22.1754344645694; 
- Mon, 04 Aug 2025 14:57:25 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=K0Pgv6mPfbU8UkjZrtlMnPyl9GATjDurJ7iY8Vc5xy4=;
+ b=qKBqUVSjifng5MztHgp0stPWLVnFC8FWRUIj1NSZOFDe4ftnOCJvlX0qsGYfKYj9wL
+ HvIamzZ5POYSEEJIfJGC4lu2IVStnmIwZsSLUAYoTmrndAb1fDX6cS4bKNSwpY22lkJ7
+ xbbvExcajfw8b9jQtI6M0Cg7sLCeElgltI7Bodbq1DHjfeFhHaf59m/AB30+sTw8luwY
+ CKOym5DlgKvx6OBOZj6yCupMNbHHBKLu6Izs/oClQ/XI28FKQVso5ViLuGAZOW6AZpQ+
+ fFFJ69SVBJOGp5s/+Focu02FShUu544npR2JKGnkMHJsX/gcKjiANAZU4+rA2VqS0CmZ
+ n5jQ==
+X-Gm-Message-State: AOJu0Yz6GuIg6vquhrV/dTrLtk4LjyzjytTBEnRq/ag7kGSpPVJlSZd5
+ +2djpE1MtYPR/f/YUUl56nhHSFvAUi/noi8BFYXw0CT8dPCfqdXAYifVr0VtFadUMRUVQZCH0KE
+ YM5B4dUU=
+X-Gm-Gg: ASbGncuRy3JmLMprriKUtpuZ2iSDoi+Yc1eTqOAkFjypORvsWO3OpCtWI6wC86FCGwd
+ 3gMzzaj5Dp+zirvEcAkZfKJ1YBtF+jilBn+Q4l5sDISft+y7a8qFnx5Tlm7HsMNBOgRJRvbKynQ
+ Fz6V2r2v0QQ2XkYhL8vebO75QJykhNAM2nsz8qV/ICHB0x9A3dhXbR998UJCOuPxHic8rZHeUIy
+ CwRwc2EyYX8iyLZe6n98a/uxH0K+n4kwGNcC1fYsifAl8PYDLThs6mBTdcRO0/j+LfO7Q1dPxfz
+ LagY0p2h1pZRm0W4GzE+rISARCMkCV/A9hrFsqPkq4EnphDUKf9XkDN6ivM9Nw0RPpf6grTj/D0
+ HSQr4KXm8VXEz9DgnCGxh3IXkcMbVqyjE2UvE1yqlf4Mrg3cSvoRtulUi1y06/wD9o1V5unHB0R
+ 6GUX8=
+X-Google-Smtp-Source: AGHT+IHRaHPB0yEEnmzOt6EQTTSNoFNvc7zSUx/Rleivhr37F2ph+2wsTY5XR7td2ke2ikD3AapGbg==
+X-Received: by 2002:a05:6e02:1529:b0:3e3:e659:2d5f with SMTP id
+ e9e14a558f8ab-3e4161f3644mr206048725ab.0.1754344641181; 
+ Mon, 04 Aug 2025 14:57:21 -0700 (PDT)
 Received: from localhost.localdomain (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50a9f677f81sm1066177173.39.2025.08.04.14.57.24
+ 8926c6da1cb9f-50a9f677f81sm1066177173.39.2025.08.04.14.57.20
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 14:57:25 -0700 (PDT)
+ Mon, 04 Aug 2025 14:57:20 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH] soc: Tighten some soc driver dependencies
-Date: Mon,  4 Aug 2025 15:57:15 -0600
-Message-ID: <20250804215719.1413106-6-trini@konsulko.com>
+Subject: [PATCH 1/3] rtc: Tighten some rtc driver dependencies
+Date: Mon,  4 Aug 2025 15:57:10 -0600
+Message-ID: <20250804215719.1413106-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250804215719.1413106-1-trini@konsulko.com>
-References: <20250804215719.1413106-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,29 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Qualcomm Snapdragon "SoC" driver cannot build without access to some
-ARM64 specific functionality. Express that requirements in Kconfig as
+The Marvell RTC rtc driver cannot build without access to some
+platform specific header files. Express that requirements in Kconfig as
 well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Casey Connolly <casey.connolly@linaro.org>
----
- drivers/soc/qcom/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/rtc/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-index 4aa7833930c7..8243805e46a3 100644
---- a/drivers/soc/qcom/Kconfig
-+++ b/drivers/soc/qcom/Kconfig
-@@ -4,6 +4,7 @@
- #
- menuconfig SOC_QCOM
- 	bool "Qualcomm SOC drivers support"
-+	depends on ARM64
- 	help
- 	  Say Y here if you want to enable Qualcomm SOC drivers support.
+diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
+index 79b879d68d1b..ed903999f067 100644
+--- a/drivers/rtc/Kconfig
++++ b/drivers/rtc/Kconfig
+@@ -218,7 +218,7 @@ config RTC_PL031
  
+ config RTC_MV
+ 	bool "Enable Marvell RTC driver"
+-	depends on DM_RTC
++	depends on DM_RTC && ARCH_KIRKWOOD
+ 	help
+ 	  Enable Marvell RTC driver. This driver supports the rtc that is present
+ 	  on some Marvell SoCs.
 -- 
 2.43.0
 
