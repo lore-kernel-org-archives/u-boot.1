@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B684CC87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 22:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4951DC87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 22:11:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9DCC8404A;
-	Tue,  5 Aug 2025 00:11:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 699F38405B;
+	Tue,  5 Aug 2025 00:11:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="hPCNMtyQ";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="GzHKM7St";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4E388403E; Tue,  5 Aug 2025 00:11:42 +0200 (CEST)
+ id E0A5083FFF; Tue,  5 Aug 2025 00:11:43 +0200 (CEST)
 Received: from AM0PR02CU008.outbound.protection.outlook.com
  (mail-westeuropeazlp170130006.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E69A983FAD
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 00:11:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A349783FFF
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 00:11:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Yu2KvAN4h85mgs+HmsTsswiTC9ZgZyrE+5dB9XR9+0GMYd16KQSul27a+4d99apo0tA8dzTnntGm31KzLvmmPkvez9HsJ237rWdpLANY6dFyxzXys/sJOMIDCU9JzX10wVqYtuY2qiC6kuYzTWqsGROUhyGNeZA35uWCYeHzZJxhgRHW36bMf828fwhpWNEAcOgB6pqX58GTfU+cJYBcdjzcTnn4oeRYBXmdCQPwH16njp3QxM2/TpTGUpHY+TsM6JeJKzlKvpopAU7hheHmw1JyL9+AUbiMjh6gk3c8KTrW8RLxrSBswSQY8CtkPsOfH31UVCQxskmPU72+j3+45g==
+ b=KBWZ1KX+b1VPboU9K8eIMJ6UBISk8Ppwni1u06mMwQ6o4CSsb/J388uIzlO7i1+FPYAJjBmegFpmqM7enKRmyFG8MOVxDxVGMH424eXZ1PXCJ1CzgHkMd5V5hrR0O1VZDsHud/Kr+Eo3QHZwDw5dCqnJBcUQ2ErQeUpej1/vmQg7k2oKYne+e9etL47LopzH6WAbGyXshOg0UA5sOnXiANPGVziiA6g9JCgTMPqi+7KsrgOsuu3XOtBIufeoR2UdvXE1UDorOS8193j2iLmTGcIudzxJ1PnQZYsVbU9HNnGauCXQfbe7qy0yDeQzeHi4T36Fvgvqfews5qZ42CfNAg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yCVnnqecEyf0tV+hyWHeobdIFe1VF1Wq/nrZLk23tgc=;
- b=UAs0pMUlCWi0WOjAU9Kx+rpbFvgyw4nrIVfBLNTHHQfguGZWBm9hiO2RevhQ8DPW8B8cATGN5mckByji1p60GG+cNF0YS70ENGhrl/QxR0M/nNQQFRI4wAlcwLlNyDeA2hiSxT8iiM76zFgW2eaQ20g/jADHq8p6lLCSXGVQKYf/YdpV3jnOERIyDLgKnt4HXIYD6kf8Qs6GVgs2Srb0ANKtJM5zkAsCWzcuRwn8JQ/H6uSGEvX1/VRMpHyLIg41vLlf1Zb2Ol5r9D4ECPoOxZCrWkNX5m/qAX4I8VYl9V4Q2X8pDzyvRzgJcJfav161VGfWZAezXDMRCI/pRKAYQg==
+ bh=Aq5JdYrm2XjyfcEBI0ZFspAzwfYbofy8P46bClyQSJI=;
+ b=kONwTH5WvG2yoKGADEHKeYZFCYHjueMt2I+iycmX9e3bFwQsTKG2l9ghdEMlivLJs0ulWGz1fDWYcKiuDPjIxibT0fqRlhwGyAPQn5Kys7uPYea1NI2C/GaPg/4GstLECkXEKpS5k32PnOuR65guKkCqpe9DfAQhFvH1wFcS0Yk9KdgQKHPlC5r1p5Q72dppxVvi2tMT7CdGsULYyjrALkb5Y1PLLeobrT4JrOZudvcDudKW5igaPsnVk6QcO52CakTKT38rZPFD+CrqLqJlif9HQqSLndiaJdTFj1C8JIChcl/xNps9Qt1VgWB6Biy7XxZHW5wuEN2yJSdWPbVDnQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yCVnnqecEyf0tV+hyWHeobdIFe1VF1Wq/nrZLk23tgc=;
- b=hPCNMtyQWUWZLdsB+PZEtMminh/7gr+fTzCQCHcvhjal3RTaHZhhczo5d0h1yf3hA2M3B0MDyzbJEVpoobDy3DW34nEfUZCBitrqRVaPuuCxtc+vPBy2CmxLJyB3Tdjq/U7aQ7sBRX30ypCPbN4S5zWPC8WmCtPkdH7xtpCWady44ERKn8tIOcXbtuEBVUwI44f923/Bw8fdyYIiRKmVL32i6uuBqLT3OHLuXD99mifyevqGCan7/u6l+DxxNG/B7i4X07k3rOXlpoXqUgFasK4P5Jod1VLw3A8zSsuIofsbJT0MiBIVn1qFg4bKkbIAmSMI9LdG1nXCFejTyXTKkA==
+ bh=Aq5JdYrm2XjyfcEBI0ZFspAzwfYbofy8P46bClyQSJI=;
+ b=GzHKM7Stk/1+OpNM8IrnhvhFPDBJQReSDhYy9UldVPOec2VEZOEjnVAiOwN9mmGib8CFU63+zbj2KGIr54chJcet/wQD6UmMd8kJRdO7//YHe8fUQY0t7zdEqW1hqz4NwZ6pdt/s6QCKXkOCqoIGRd7yF5uLUJFc3rnPlK40fqKvGtWkG+pInxtTzOorFHd6VUG/qteISe8TyT6SV2ZBe7zaI4sTmLPvHMm0DJiJSmErCCqe3VzbUnjCK4VeO19cBnRvDmwVQt59B5Xkk7uL0MCzhLQY8e6yLChLTZyRpkyRGwNXKJ+arDJEgLNkZZj2foK8UuSxqikiradSkXzE1A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by DB9PR08MB7771.eurprd08.prod.outlook.com (2603:10a6:10:397::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.20; Mon, 4 Aug
- 2025 22:11:32 +0000
+ 2025 22:11:34 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.8989.018; Mon, 4 Aug 2025
- 22:11:32 +0000
+ 22:11:34 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -63,9 +63,9 @@ To: Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Alexander Dahl <ada@thorsis.com>,
  u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v2 01/22] drivers: spi-mem: sync a bit with linux-6.16-rc6
-Date: Tue,  5 Aug 2025 01:11:01 +0300
-Message-ID: <20250804221122.1420516-2-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v2 02/22] drivers: mtd: spi-nand: Use the spi-mem dirmap API
+Date: Tue,  5 Aug 2025 01:11:02 +0300
+Message-ID: <20250804221122.1420516-3-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250804221122.1420516-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20250804221122.1420516-1-mikhail.kshevetskiy@iopsys.eu>
@@ -77,79 +77,79 @@ X-ClientProxiedBy: HE1PR05CA0144.eurprd05.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DB9PR08MB7771:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4446189-dbd8-4043-19e9-08ddd3a3deab
+X-MS-Office365-Filtering-Correlation-Id: d27447f4-7760-404b-ff1c-08ddd3a3df64
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|52116014|376014|7416014|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?uRChs9B82y13lAOuButqcc29Ku9YEx3u1pmsZayACJhZKjIwSamCkoAQGbvn?=
- =?us-ascii?Q?Kv2yuXCZ9OZV7LBxL4JRa1exHMmaQi7fOHe9oEiArJq/Hhn6Dnhk0kg6uLg9?=
- =?us-ascii?Q?K/kmdoI22LnyHI2qQCYDKwwBkjjSRJRhiLrRMo2MzhuK7PnfuJyhy24dHaxM?=
- =?us-ascii?Q?A5t/6jUYFmCWyo9ciXKhak2JPiBH1l/KrYxEIcTVwvSiW3fJsdiDJoI+1ZDU?=
- =?us-ascii?Q?alAFzR9Ssf9EccBr33rq3Gi04lYmaTxxQg30ZtV3RYOsGOun7I6rBXT/jKCm?=
- =?us-ascii?Q?bhknBpT7uczPEnK1DSrtK1qG146axEqphRaA/7NNpoGDIdjC7rDEMlRXLKZl?=
- =?us-ascii?Q?1yIGdaBE9x3LYi3XG6Lu3h/YBLVb97sBiLaVZqVLusCGfcITgHlPXUI9am6i?=
- =?us-ascii?Q?BZH5QyQV9sz2QAit4UOcaxHBuaebJ398pgwXV9JldNHvtxY2n4aT9FvbfZwR?=
- =?us-ascii?Q?GRfOUbx17jqaURKtZLxUngTq0PafGaJ7lu7FSOF5BrpcKo/GLFX28AVEaMNS?=
- =?us-ascii?Q?q4NErLxRqFhM/zG/lIHtQsJI5gMrMJT2u3zR4d7kCG8jdH4AQOKHFDW+/3xD?=
- =?us-ascii?Q?UtfHZerHQ3hLFCAdmnlbbafsaJ39SS46Uz8ySaCYb0fYxp8MkGm1YdevyEMX?=
- =?us-ascii?Q?BnAtY11BHmSv9w701SQx6fYcabe/xmZxUD79tmnW8r/I31RJxQ02XxMa73Xe?=
- =?us-ascii?Q?zAbSq0q9Sbl4w/879hQRvQzRyZCnc8EQEdM2R0/aUEE1JSqZXqljRUMEiknt?=
- =?us-ascii?Q?tHmN/ZpjTaMeKRAeXHhjJPlKz7bsNWX5iPifGerW+xoLmC/RKyE2iNIZFkJY?=
- =?us-ascii?Q?N+/oVDuzBXHCKbdny0rLzQzSwJ4vSc3DumBw6g/yhL3k/YYeE8CR7Ih3OIEk?=
- =?us-ascii?Q?0GY8GXSuHZehTdeqb56VDBbPVGAHYzzm+Z2BKsu4+nWlEKnnv8XzpaCjBRZX?=
- =?us-ascii?Q?+OroOS+8rfir9TjTi8AyY1TkuEJTnaDm8yaE60gu5Z5EJgcB0Jsn2Q7shb/u?=
- =?us-ascii?Q?EOs14q9Icxghbuwqos8vjx+rTrHAq+GwbXOJlJw1ovbVM64lpcO7ev37+HSA?=
- =?us-ascii?Q?T3nlm1mnFeLFBguORGD9k9MyAtNFsSMv11YAzb2rXwS4ZnAKKOGzN8CascuO?=
- =?us-ascii?Q?C8ukGknSbMFovbtpmbBHER0uFxHroIEfuwKVVSERvr44lyTeDy8F0qntiBm4?=
- =?us-ascii?Q?Z2zkgzIcTwDiI7KGk9JnvNfd5U+gipJpUVnnUBw+VTmkcqyMIqYacFgELljd?=
- =?us-ascii?Q?AniyQeuH/YgtpGr7YP4cxlez7pmE+K2QWEFnXYyxDuhEnUiC/SWtH8mFZom9?=
- =?us-ascii?Q?0JlwygDaqjRw8QnxRUUHmdq4+2OEBK5fDoiYb/Qvqq3GNkBFM3uRSYWOu+qP?=
- =?us-ascii?Q?1Ec+6JEhrVt0xPmvPwUZKdDucOf1xTRlBfa3vIVT2w4cv+we0YYfZeghU/ra?=
- =?us-ascii?Q?3m7MXu8I9EBcUGN9KpP/A2MfjyjZUIumiRYTmVoMpmlvpjdacDOrLjK2yppa?=
- =?us-ascii?Q?aRb5DItCI9wgUY8=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bFzev+QJ5LgCl5zDc2o/pDGo4/VZFE8kVZccb3Y2MA4dbnubtWp8sU91Iy5c?=
+ =?us-ascii?Q?mJZSFiU5bFOAwiMbWk61wexjrqR7slmOKON+x/F1a9tiyfg+MbXEWzr2MdTH?=
+ =?us-ascii?Q?kY+yUDHvY9kR22mgE2D8IW3eNtaRogifNhrCyg951JChSoORKCvTgC7eYG3P?=
+ =?us-ascii?Q?BseiIDUFF6j1zg8Hm17/sFSmDHh7s41Xr2Y/IGiEiZdwsYYZNileK4xkCr4G?=
+ =?us-ascii?Q?kIbha9+mW6RwK50oLLNQObcgfKgR4E4Hv4DgW2QyAheCXKCgAx7EYYEZiozU?=
+ =?us-ascii?Q?HtVpBzO6Bhj82EY7EefaviBe3j2DrBaCsI7fwLxeQQgxJ2CflVqwfPYqyssf?=
+ =?us-ascii?Q?l8QKWKmrUDWEb49a+REq1gk0VTW/bticqtMlEnOWyUkkZryDn6Pc5l2dWhmg?=
+ =?us-ascii?Q?PW6n1AtSw9MReEiVPqzqJveRslx2YtSQPMYnGFJu/bXA9+oFnwhop6799aZr?=
+ =?us-ascii?Q?+viqZA+cbUVoOJU22yZwTJdkFzMoBnWw2szZriZJOpTwYfnS9yFDd2R+2Fr1?=
+ =?us-ascii?Q?Zo2JtP8InnkJPTET0lovnuwKTkzOvr+TRYegmJAsZ8g7pefrDtENvgTwRSrF?=
+ =?us-ascii?Q?r+uVejvUe7DgHLfW4in6mDnGFHDS1bfUOe4UWQfhP0lbd1nnoaiuSgXSJkQq?=
+ =?us-ascii?Q?BY+SYN6tPNrH7tvW3vHPFCC4DOhxZ5eaMiebFQSGk8WgTIdxXQVIeHU1/Kj0?=
+ =?us-ascii?Q?bys8XPJ0JWPasv6NdZYTadvo+uQHb1AM9pizx7MfhOcunVEF+aH0QzbJSbeF?=
+ =?us-ascii?Q?SIzVjQdoCblUmbm9QyaLRmrmkF1OkjWHTWnhHqokZ9//IsOU4RPgczYDhrbm?=
+ =?us-ascii?Q?9rOaQZe0T8wzq+t5ueXTbJ6a0q22S/NxVXx31Jo7c1aMMIszbDBbYIIQjBRz?=
+ =?us-ascii?Q?sR5OCjz/mU8oYYwea3w1MgElGkOj6q8HgI2xQlrxNCBgmvUJ+AQHKPnw/Ka6?=
+ =?us-ascii?Q?CfriFETu5bxSM+DTPLDrzsJhAeoF33u1vsnKSssbtuWi83bO5ZtO9VismjED?=
+ =?us-ascii?Q?ZuAOsKfn6x2wRizZYFmhlJUmMIkV7la7M1FHHDNhUXeL0ud4M18IKNzWUB6E?=
+ =?us-ascii?Q?wQ+8O6fWujdCr3etaIg5iUOMHTTGEbumGAaQgzpsx67MrDq2Ok9zPql3ROGF?=
+ =?us-ascii?Q?d8VABlycU3sEqiI4Q7v65toDH10aC7N7qHMT/ba2ALVdP+uqfdAHYFpcRjda?=
+ =?us-ascii?Q?hJHqM5/9hODzuOATgzqKiBpQRDf/SQG+MqVUU9TEFjETBQ4+X1Vxq6sJyY7z?=
+ =?us-ascii?Q?uSWSxIC3429llVJn6RCTmuHnGsM+/MryOMq0zRdniSwcfmen/jyylfFMgaUf?=
+ =?us-ascii?Q?MNuq66Rivc4YIogKjni+2YqZcl2IAQB7xA+CChEBaGwSxrT351WD6SVMjplE?=
+ =?us-ascii?Q?UYV1s6licfxI9QYgT5Fhl+KvEogOZXfQYEuHGhSdIZK9q1lY46TAjfzlfhMK?=
+ =?us-ascii?Q?8F3hTI+vi4YTXehnOcfxuBZc7ThIdXcmSjpmp7sfVH3PeyMaGR6qLUM6OjlF?=
+ =?us-ascii?Q?h1S9VFpRZBFSIqg=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(52116014)(376014)(7416014)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?YUGkbv0vp7P0OYUq8/njFpW2jT7AczTGAdm3sE+nC99e2jB/2vpdynVjP+ZG?=
- =?us-ascii?Q?GYe96zT1C90q7RZikzU6mdTiBSl7Hr1hiQOTmrSypCc7hihPQ3vyRWXhPTbZ?=
- =?us-ascii?Q?+Y6BWb4Ek6mUBwUehH6nhid12DfOEzarApp1vL4cItPwnGAYibxhy+K8l0zO?=
- =?us-ascii?Q?b5J0q0cIVwMmq1k/MfiQ9CmfRg3wpujBfn4VNhT/LPxbxOX1AM7DV7xkr3Sk?=
- =?us-ascii?Q?Cdjgz1okHgV9UvQf1+xJC1v9cRmYsFTTuagKtUJh8VlCYUPi4lCxBX52+0LJ?=
- =?us-ascii?Q?qspqmzwX9yTQVgvhyFefhAUBlYsfCu9Q6+iu0Tj6J3Iuxq59TVOjsghmE3xE?=
- =?us-ascii?Q?YC+rTXPTYw6Ke1wrgWuOQyIHBqh2vJpXF1da39weyeN3WyaXBzJAVNWa8Wnp?=
- =?us-ascii?Q?WdG5iWsDjehjDITTsyz3OU7xVgnnXICk3aUxcehkRHNzflXTAXvSn8dGwsTh?=
- =?us-ascii?Q?bvEM6wlsN4103y2igwIi2YgjQd11yrAeV/7HOWskfRTVQGmhqgC0HTYIiDSB?=
- =?us-ascii?Q?L+cVG1d2rChqie3548oBTvGIvj77shyVhZIDar+BulKTUi7eFPBHjcQiqx/N?=
- =?us-ascii?Q?8u4sIVNlq5JJvBy1r5NcshootxH8KxNS6F5qe+DxtOoSBYwEQ+YAWQWJXce2?=
- =?us-ascii?Q?gu3ejrFdPUm8Dsvo2INjLDTy2YRvrKLWMwu2uXPJlCHvJhYUZ0xBTDQnX9OQ?=
- =?us-ascii?Q?SKb1mUngjGJkxSryVapUYn7tcEy6qJuHyo2X6U5COASAwcfbGfjpxygtaAOw?=
- =?us-ascii?Q?vyHrGo2dKzLqj2Pbmp2gddr0zcmaF9QdB0kOGE6nzwVBX75DDeW3YRo00FQh?=
- =?us-ascii?Q?EmLGa92BiClUhEGiNBgQViRD2Q5nWWSsaJZBwWKri7VDdIeVtU8r6sAISRq8?=
- =?us-ascii?Q?ePI8cjmNY32Q8ck5diCT+Y1nbfK61RJV6MqZaTZNyK4MS+2cR7IobtijwpoR?=
- =?us-ascii?Q?pmPNHm9F6WGOlVina/TnENBiCl39zOBr5NAQ0tfxD8Xgl8PIy2F8S+wQav1p?=
- =?us-ascii?Q?Et4Ou7vRD40H7ir3Pk4LqNHOkayzKHdLJ4FDzD+v2DfK9acdO+A12mXMSjj6?=
- =?us-ascii?Q?CIcb0jn9zYLkknYRnb+BHFTJBHR5ur6+6yRH0Sw6p/T56L/YiqylV7bRFGN1?=
- =?us-ascii?Q?pO4kiq6i20EGtm57St+rgxtIm9yOzTb0xi5GO1/R77TURc6PErY5qF4phZeS?=
- =?us-ascii?Q?XgO5I43uVXsaAQ7lseK8YG39V06Lf1e4JrcqKeUxJB1cW4ZBq9XTg/d9u/2z?=
- =?us-ascii?Q?O5bVNpFjFoFMDM0/vB7l/9ULX9wCLC+0lQ6KDSPH0vLpJbNp2NzR4cS7NVAl?=
- =?us-ascii?Q?Y5BWIcuennCb7NBxUFMyYKTK5DUd+6P398WpFGP8fqIq4PBeDLJGGdq6OdQr?=
- =?us-ascii?Q?FlqizIr6gqrq4Xe/RiUt+zMx1pAjDGlZYfYzeIo0gnxDVpFIPlxtlv81vnKo?=
- =?us-ascii?Q?Ar2pZ0hOpmYYycTLt9ZIXDmKulAFJQmgOv+bj4WL0D8hx4lBBaWGHwYnZmyd?=
- =?us-ascii?Q?Qk72TDzs5aAV8qB2iCuUpHVhBVLXyZmb9IQuYHvFXbxqVrqrM65nGgP3rlCI?=
- =?us-ascii?Q?tL/q8UjFe5STZ7m7h3hw4VdwnTaiinSh7lpZGeefzONI/6vDazHC1ErojFXs?=
- =?us-ascii?Q?kg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?j4kvuqMtymfpHyVvQrag2bexPuzfQw5EiRGc4NM+b/2BrJofuctwchZBS6Fa?=
+ =?us-ascii?Q?pj0iZtqVOMWgFscElWxCMcYJvLi+VWnOZ95Gb6vdkPSXejIL4kImyQczbVNU?=
+ =?us-ascii?Q?IiyWo1d5tHuaKjDRSGxT4lakFzzG64YstHy8uAzowksvYch4UU7sifwYEfuc?=
+ =?us-ascii?Q?rwIj2awqqG3EkAVFhKkoMAwmo11xWZTA5vJbShyb12hAgGN8y5iEEYeRHvL4?=
+ =?us-ascii?Q?X2eTl/6/vEBbg5yBOEYBiDhWwp9sg0tL2OvdDcer1XCmtsT9xlbj4QdTq5Wr?=
+ =?us-ascii?Q?n38JT6uS7gI7TDjv+UsWD1nwN14fIdOzw8FKCvzxmwZKb2mbYPgnSALZe9vO?=
+ =?us-ascii?Q?BAH2Dj1zKioXw33EP+S7+YCI8TimV3Sv8pu5/EGPtueMXDp49Xgd++O8wNGf?=
+ =?us-ascii?Q?vWFvtk3q2Kp1ZW4234MOaxS6wQP2WF0ZbzFnFD5G06eZw0Wxi2CXAQSVwdDq?=
+ =?us-ascii?Q?BZC1klzJ+WDBurBPblLV81zVDc/HnR7v99q0nIV6VGZYf1HEdFEQXG5SnEH8?=
+ =?us-ascii?Q?D4PLX7DwQUfu0VYznRapDzyzk6MGLrfFFjCBFv931bDoqkeb3v1ZCTDz5iOK?=
+ =?us-ascii?Q?WPUhhMskG6DYWL5bhiTLYGS3fvw4hosA4gUlc69RqO795kXAkqwTlYoc485p?=
+ =?us-ascii?Q?jg4dh9X1V19tZslgPJPCJdXu86Smk2oE6o3Xua5EYAd20QF4PWTPc3lFeG99?=
+ =?us-ascii?Q?eqjMhIq6tPN64/uK1IBbFJW4rVY5a8hGZ/rFmjGsEYeoBP/u31aqo3VG4IxK?=
+ =?us-ascii?Q?FNpfim/EWAU+lQoQSTpIvH9t99R0N72A6z0Ok5NFt0s1HCQZUesAyS6ymgv6?=
+ =?us-ascii?Q?2goUJp3UM777MQjWOdi/J9UwCY8FuBbv9nKX5yIva3PfVIbYPwKWXE1koGRf?=
+ =?us-ascii?Q?JBdi/brn2UE8VwdLY3WTnDVHW/BN/PXrykBD18PKP1Ky4dFL4cbA+ONXRLnI?=
+ =?us-ascii?Q?kNfKw/54Xu8JSOQTsCz0Sr5LUE9VuJhVI19cZ3j0LPr4P/EVChG1AUylGJH6?=
+ =?us-ascii?Q?gS7ckqjO0tfSEIxhycR+tpnbc/+Km3R82yoxAWF8quC0KilJPBSp8a5d7Tmi?=
+ =?us-ascii?Q?5Aq1PErK7hHm2g2DSw2oWCLeN/+/sErkzSkPTmmDzG45wXF+Jj9UjbAbSIIH?=
+ =?us-ascii?Q?rDvbVil9cHVHa0vkXXw4y/OXlKrxdTZgX39LC0sioBE5QpOTt94+AX58hX+h?=
+ =?us-ascii?Q?MSdoxgaLDkMRed/tG9g3RCtcn9Y8FuhQB69xSjk3u+CCXTkK75sitm3hP64p?=
+ =?us-ascii?Q?VOpPK/zSyIORKyXRpIKdytbD5JDpvBodzDteXosATEtocDAI0Y63xWrsMsoU?=
+ =?us-ascii?Q?DkM+CiC9hWROa1O3RqDgKnW8s7FBWqq3Ux1BdwVFjtD0D/e1eGEg6c0nAiPA?=
+ =?us-ascii?Q?41m5xDfq+wIauUR90O92OpvFgxEfpCj7wvpRNe8UABc454Bj85OGJOIUBzby?=
+ =?us-ascii?Q?SYi4dpJ+o9M7Bgrus+fAuGUrpfJf+HvPSmVXG9aoirCIi1B2QnfwGTqrtTQz?=
+ =?us-ascii?Q?IXO8zFmQBlSctQdetBgSthp50YDaFphI99Gx0+NOMmgmHRJpwXQImdT6DnTS?=
+ =?us-ascii?Q?zPrZzJWN9kXSSr7VsLQ/vVpcBCxhcdiwdLRuqDRHh0/l3HR6ME6pznu/Xce7?=
+ =?us-ascii?Q?4g=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4446189-dbd8-4043-19e9-08ddd3a3deab
+X-MS-Exchange-CrossTenant-Network-Message-Id: d27447f4-7760-404b-ff1c-08ddd3a3df64
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 22:11:32.7278 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 22:11:33.9353 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qvrQzemynalBM1mxet5Ew6b4BYjPzb+Klcc6aJ76CL8rJjGME0l/MRBU5olvqE8zxJMVziabsUfh+68MaM/N65dvcm7cJ7lLEoS7jRSX7K8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: AWiVYbaUAwrkmvCNHqWRlWH/DU31+c1lsz3fVvVeD2OFYulOkOLr2+brFXNtmakCV1G8ZJof8V4a5uMP9WiuNQenJguQpqTl6ff8QhGwloQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB7771
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -167,305 +167,316 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This also fix 8-wire support a bit.
+Make use of the spi-mem direct mapping API to let advanced controllers
+optimize read/write operations when they support direct mapping.
+
+This is a port of linux patch 981d1aa0697ce1393e00933f154d181e965703d0
+created by Boris Brezillon <bbrezillon@kernel.org>.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/spi/spi-mem.c | 13 +++---
- include/spi-mem.h     | 92 ++++++++++++++++++++++++++++++++++++++-----
- 2 files changed, 90 insertions(+), 15 deletions(-)
+ drivers/mtd/nand/spi/core.c | 185 +++++++++++++++++-------------------
+ include/linux/mtd/spinand.h |   7 ++
+ 2 files changed, 95 insertions(+), 97 deletions(-)
 
-diff --git a/drivers/spi/spi-mem.c b/drivers/spi/spi-mem.c
-index 3579b7d7db5..6f06650384c 100644
---- a/drivers/spi/spi-mem.c
-+++ b/drivers/spi/spi-mem.c
-@@ -120,18 +120,21 @@ static int spi_check_buswidth_req(struct spi_slave *slave, u8 buswidth, bool tx)
- 		return 0;
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 3a1e7e18736..c1b8b9627f2 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -41,21 +41,6 @@ struct spinand_plat {
+ /* SPI NAND index visible in MTD names */
+ static int spi_nand_idx;
  
- 	case 2:
--		if ((tx && (mode & (SPI_TX_DUAL | SPI_TX_QUAD))) ||
--		    (!tx && (mode & (SPI_RX_DUAL | SPI_RX_QUAD))))
-+		if ((tx &&
-+		     (mode & (SPI_TX_DUAL | SPI_TX_QUAD | SPI_TX_OCTAL))) ||
-+		    (!tx &&
-+		     (mode & (SPI_RX_DUAL | SPI_RX_QUAD | SPI_RX_OCTAL))))
- 			return 0;
- 
- 		break;
- 
- 	case 4:
--		if ((tx && (mode & SPI_TX_QUAD)) ||
--		    (!tx && (mode & SPI_RX_QUAD)))
-+		if ((tx && (mode & (SPI_TX_QUAD | SPI_TX_OCTAL))) ||
-+		    (!tx && (mode & (SPI_RX_QUAD | SPI_RX_OCTAL))))
- 			return 0;
- 
- 		break;
-+
- 	case 8:
- 		if ((tx && (mode & SPI_TX_OCTAL)) ||
- 		    (!tx && (mode & SPI_RX_OCTAL)))
-@@ -300,7 +303,7 @@ int spi_mem_exec_op(struct spi_slave *slave, const struct spi_mem_op *op)
- 		 * read path) and expect the core to use the regular SPI
- 		 * interface in other cases.
- 		 */
--		if (!ret || ret != -ENOTSUPP) {
-+		if (!ret || (ret != -ENOTSUPP && ret != -EOPNOTSUPP)) {
- 			spi_release_bus(slave);
- 			return ret;
- 		}
-diff --git a/include/spi-mem.h b/include/spi-mem.h
-index 2eb05a2e5bc..e68e2b50e85 100644
---- a/include/spi-mem.h
-+++ b/include/spi-mem.h
-@@ -17,16 +17,32 @@ struct udevice;
- 
- #define SPI_MEM_OP_CMD(__opcode, __buswidth)			\
- 	{							\
-+		.nbytes = 1,					\
- 		.buswidth = __buswidth,				\
- 		.opcode = __opcode,				\
-+	}
-+
-+#define SPI_MEM_DTR_OP_CMD(__opcode, __buswidth)		\
-+	{							\
- 		.nbytes = 1,					\
-+		.opcode = __opcode,				\
-+		.buswidth = __buswidth,				\
-+		.dtr = true,					\
- 	}
- 
- #define SPI_MEM_OP_ADDR(__nbytes, __val, __buswidth)		\
-+	{							\
-+		.nbytes = __nbytes,				\
-+		.buswidth = __buswidth,				\
-+		.val = __val,					\
-+	}
-+
-+#define SPI_MEM_DTR_OP_ADDR(__nbytes, __val, __buswidth)	\
- 	{							\
- 		.nbytes = __nbytes,				\
- 		.val = __val,					\
- 		.buswidth = __buswidth,				\
-+		.dtr = true,					\
- 	}
- 
- #define SPI_MEM_OP_NO_ADDR	{ }
-@@ -37,22 +53,47 @@ struct udevice;
- 		.buswidth = __buswidth,				\
- 	}
- 
-+#define SPI_MEM_DTR_OP_DUMMY(__nbytes, __buswidth)		\
-+	{							\
-+		.nbytes = __nbytes,				\
-+		.buswidth = __buswidth,				\
-+		.dtr = true,					\
-+	}
-+
- #define SPI_MEM_OP_NO_DUMMY	{ }
- 
- #define SPI_MEM_OP_DATA_IN(__nbytes, __buf, __buswidth)		\
-+	{							\
-+		.buswidth = __buswidth,				\
-+		.dir = SPI_MEM_DATA_IN,				\
-+		.nbytes = __nbytes,				\
-+		.buf.in = __buf,				\
-+	}
-+
-+#define SPI_MEM_DTR_OP_DATA_IN(__nbytes, __buf, __buswidth)	\
- 	{							\
- 		.dir = SPI_MEM_DATA_IN,				\
- 		.nbytes = __nbytes,				\
- 		.buf.in = __buf,				\
- 		.buswidth = __buswidth,				\
-+		.dtr = true,					\
- 	}
- 
- #define SPI_MEM_OP_DATA_OUT(__nbytes, __buf, __buswidth)	\
-+	{							\
-+		.buswidth = __buswidth,				\
-+		.dir = SPI_MEM_DATA_OUT,			\
-+		.nbytes = __nbytes,				\
-+		.buf.out = __buf,				\
-+	}
-+
-+#define SPI_MEM_DTR_OP_DATA_OUT(__nbytes, __buf, __buswidth)	\
- 	{							\
- 		.dir = SPI_MEM_DATA_OUT,			\
- 		.nbytes = __nbytes,				\
- 		.buf.out = __buf,				\
- 		.buswidth = __buswidth,				\
-+		.dtr = true,					\
- 	}
- 
- #define SPI_MEM_OP_NO_DATA	{ }
-@@ -62,7 +103,7 @@ struct udevice;
-  *			   transfer from the controller perspective
-  * @SPI_MEM_NO_DATA: no data transferred
-  * @SPI_MEM_DATA_IN: data coming from the SPI memory
-- * @SPI_MEM_DATA_OUT: data sent the SPI memory
-+ * @SPI_MEM_DATA_OUT: data sent to the SPI memory
-  */
- enum spi_mem_data_dir {
- 	SPI_MEM_NO_DATA,
-@@ -70,6 +111,9 @@ enum spi_mem_data_dir {
- 	SPI_MEM_DATA_OUT,
- };
- 
-+#define SPI_MEM_OP_MAX_FREQ(__freq)				\
-+	.max_freq = __freq
-+
- /**
-  * struct spi_mem_op - describes a SPI memory operation
-  * @cmd.nbytes: number of opcode bytes (only 1 or 2 are valid). The opcode is
-@@ -80,26 +124,35 @@ enum spi_mem_data_dir {
-  * @addr.nbytes: number of address bytes to send. Can be zero if the operation
-  *		 does not need to send an address
-  * @addr.buswidth: number of IO lines used to transmit the address cycles
-+ * @addr.dtr: whether the address should be sent in DTR mode or not
-  * @addr.val: address value. This value is always sent MSB first on the bus.
-  *	      Note that only @addr.nbytes are taken into account in this
-  *	      address value, so users should make sure the value fits in the
-  *	      assigned number of bytes.
-- * @addr.dtr: whether the address should be sent in DTR mode or not
-  * @dummy.nbytes: number of dummy bytes to send after an opcode or address. Can
-  *		  be zero if the operation does not require dummy bytes
-  * @dummy.buswidth: number of IO lanes used to transmit the dummy bytes
-  * @dummy.dtr: whether the dummy bytes should be sent in DTR mode or not
-  * @data.buswidth: number of IO lanes used to send/receive the data
-  * @data.dtr: whether the data should be sent in DTR mode or not
-+ * @data.ecc: whether error correction is required or not
-+ * @data.swap16: whether the byte order of 16-bit words is swapped when read
-+ *		 or written in Octal DTR mode compared to STR mode.
-  * @data.dir: direction of the transfer
-- * @data.buf.in: input buffer
-- * @data.buf.out: output buffer
-+ * @data.nbytes: number of data bytes to send/receive. Can be zero if the
-+ *		 operation does not involve transferring data
-+ * @data.buf.in: input buffer (must be DMA-able)
-+ * @data.buf.out: output buffer (must be DMA-able)
-+ * @max_freq: frequency limitation wrt this operation. 0 means there is no
-+ *	      specific constraint and the highest achievable frequency can be
-+ *	      attempted.
-  */
- struct spi_mem_op {
- 	struct {
- 		u8 nbytes;
- 		u8 buswidth;
- 		u8 dtr : 1;
-+		u8 __pad : 7;
- 		u16 opcode;
- 	} cmd;
- 
-@@ -107,6 +160,7 @@ struct spi_mem_op {
- 		u8 nbytes;
- 		u8 buswidth;
- 		u8 dtr : 1;
-+		u8 __pad : 7;
- 		u64 val;
- 	} addr;
- 
-@@ -114,28 +168,35 @@ struct spi_mem_op {
- 		u8 nbytes;
- 		u8 buswidth;
- 		u8 dtr : 1;
-+		u8 __pad : 7;
- 	} dummy;
- 
- 	struct {
- 		u8 buswidth;
- 		u8 dtr : 1;
-+		u8 ecc : 1;
-+		u8 swap16 : 1;
-+		u8 __pad : 5;
- 		enum spi_mem_data_dir dir;
- 		unsigned int nbytes;
--		/* buf.{in,out} must be DMA-able. */
- 		union {
- 			void *in;
- 			const void *out;
- 		} buf;
- 	} data;
-+
-+	unsigned int max_freq;
- };
- 
--#define SPI_MEM_OP(__cmd, __addr, __dummy, __data)		\
-+#define SPI_MEM_OP(__cmd, __addr, __dummy, __data, ...)		\
- 	{							\
- 		.cmd = __cmd,					\
- 		.addr = __addr,					\
- 		.dummy = __dummy,				\
- 		.data = __data,					\
-+		__VA_ARGS__					\
- 	}
-+
- /**
-  * struct spi_mem_dirmap_info - Direct mapping information
-  * @op_tmpl: operation template that should be used by the direct mapping when
-@@ -143,7 +204,7 @@ struct spi_mem_op {
-  * @offset: absolute offset this direct mapping is pointing to
-  * @length: length in byte of this direct mapping
-  *
-- * This information is used by the controller specific implementation to know
-+ * These information are used by the controller specific implementation to know
-  * the portion of memory that is directly mapped and the spi_mem_op that should
-  * be used to access the device.
-  * A direct mapping is only valid for one direction (read or write) and this
-@@ -223,10 +284,12 @@ static inline void *spi_mem_get_drvdata(struct spi_mem *mem)
- /**
-  * struct spi_controller_mem_ops - SPI memory operations
-  * @adjust_op_size: shrink the data xfer of an operation to match controller's
-- *		    limitations (can be alignment of max RX/TX size
-+ *		    limitations (can be alignment or max RX/TX size
-  *		    limitations)
-  * @supports_op: check if an operation is supported by the controller
-  * @exec_op: execute a SPI memory operation
-+ *           not all driver provides supports_op(), so it can return -EOPNOTSUPP
-+ *           if the op is not supported by the driver/controller
-  * @dirmap_create: create a direct mapping descriptor that can later be used to
-  *		   access the memory device. This method is optional
-  * @dirmap_destroy: destroy a memory descriptor previous created by
-@@ -300,13 +363,16 @@ int spi_controller_dma_map_mem_op_data(struct spi_controller *ctlr,
- void spi_controller_dma_unmap_mem_op_data(struct spi_controller *ctlr,
- 					  const struct spi_mem_op *op,
- 					  struct sg_table *sg);
-+
-+bool spi_mem_default_supports_op(struct spi_mem *mem,
-+				 const struct spi_mem_op *op);
- #else
- static inline int
- spi_controller_dma_map_mem_op_data(struct spi_controller *ctlr,
- 				   const struct spi_mem_op *op,
- 				   struct sg_table *sg)
- {
--	return -ENOSYS;
-+	return -ENOTSUPP;
- }
- 
- static inline void
-@@ -315,6 +381,13 @@ spi_controller_dma_unmap_mem_op_data(struct spi_controller *ctlr,
- 				     struct sg_table *sg)
- {
- }
-+
-+static inline
-+bool spi_mem_default_supports_op(struct spi_mem *mem,
-+				 const struct spi_mem_op *op)
-+{
-+	return false;
-+}
- #endif /* CONFIG_SPI_MEM */
- #endif /* __UBOOT__ */
- 
-@@ -337,7 +410,6 @@ ssize_t spi_mem_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 			    u64 offs, size_t len, void *buf);
- ssize_t spi_mem_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 			     u64 offs, size_t len, const void *buf);
+-static void spinand_cache_op_adjust_colum(struct spinand_device *spinand,
+-					  const struct nand_page_io_req *req,
+-					  u16 *column)
+-{
+-	struct nand_device *nand = spinand_to_nand(spinand);
+-	unsigned int shift;
 -
- #ifndef __UBOOT__
- int spi_mem_driver_register_with_owner(struct spi_mem_driver *drv,
- 				       struct module *owner);
+-	if (nand->memorg.planes_per_lun < 2)
+-		return;
+-
+-	/* The plane number is passed in MSB just above the column address */
+-	shift = fls(nand->memorg.pagesize);
+-	*column |= req->pos.plane << shift;
+-}
+-
+ static int spinand_read_reg_op(struct spinand_device *spinand, u8 reg, u8 *val)
+ {
+ 	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(reg,
+@@ -249,27 +234,21 @@ static int spinand_load_page_op(struct spinand_device *spinand,
+ static int spinand_read_from_cache_op(struct spinand_device *spinand,
+ 				      const struct nand_page_io_req *req)
+ {
+-	struct spi_mem_op op = *spinand->op_templates.read_cache;
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	struct mtd_info *mtd = nanddev_to_mtd(nand);
+-	struct nand_page_io_req adjreq = *req;
++	struct spi_mem_dirmap_desc *rdesc;
+ 	unsigned int nbytes = 0;
+ 	void *buf = NULL;
+ 	u16 column = 0;
+-	int ret;
++	ssize_t ret;
+ 
+ 	if (req->datalen) {
+-		adjreq.datalen = nanddev_page_size(nand);
+-		adjreq.dataoffs = 0;
+-		adjreq.databuf.in = spinand->databuf;
+ 		buf = spinand->databuf;
+-		nbytes = adjreq.datalen;
++		nbytes = nanddev_page_size(nand);
++		column = 0;
+ 	}
+ 
+ 	if (req->ooblen) {
+-		adjreq.ooblen = nanddev_per_page_oobsize(nand);
+-		adjreq.ooboffs = 0;
+-		adjreq.oobbuf.in = spinand->oobbuf;
+ 		nbytes += nanddev_per_page_oobsize(nand);
+ 		if (!buf) {
+ 			buf = spinand->oobbuf;
+@@ -277,28 +256,19 @@ static int spinand_read_from_cache_op(struct spinand_device *spinand,
+ 		}
+ 	}
+ 
+-	spinand_cache_op_adjust_colum(spinand, &adjreq, &column);
+-	op.addr.val = column;
++	rdesc = spinand->dirmaps[req->pos.plane].rdesc;
+ 
+-	/*
+-	 * Some controllers are limited in term of max RX data size. In this
+-	 * case, just repeat the READ_CACHE operation after updating the
+-	 * column.
+-	 */
+ 	while (nbytes) {
+-		op.data.buf.in = buf;
+-		op.data.nbytes = nbytes;
+-		ret = spi_mem_adjust_op_size(spinand->slave, &op);
+-		if (ret)
++		ret = spi_mem_dirmap_read(rdesc, column, nbytes, buf);
++		if (ret < 0)
+ 			return ret;
+ 
+-		ret = spi_mem_exec_op(spinand->slave, &op);
+-		if (ret)
+-			return ret;
++		if (!ret || ret > nbytes)
++			return -EIO;
+ 
+-		buf += op.data.nbytes;
+-		nbytes -= op.data.nbytes;
+-		op.addr.val += op.data.nbytes;
++		nbytes -= ret;
++		column += ret;
++		buf += ret;
+ 	}
+ 
+ 	if (req->datalen)
+@@ -322,14 +292,12 @@ static int spinand_read_from_cache_op(struct spinand_device *spinand,
+ static int spinand_write_to_cache_op(struct spinand_device *spinand,
+ 				     const struct nand_page_io_req *req)
+ {
+-	struct spi_mem_op op = *spinand->op_templates.write_cache;
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	struct mtd_info *mtd = nanddev_to_mtd(nand);
+-	struct nand_page_io_req adjreq = *req;
+-	unsigned int nbytes = 0;
+-	void *buf = NULL;
+-	u16 column = 0;
+-	int ret;
++	struct spi_mem_dirmap_desc *wdesc;
++	unsigned int nbytes, column = 0;
++	void *buf = spinand->databuf;
++	ssize_t ret;
+ 
+ 	/*
+ 	 * Looks like PROGRAM LOAD (AKA write cache) does not necessarily reset
+@@ -338,19 +306,12 @@ static int spinand_write_to_cache_op(struct spinand_device *spinand,
+ 	 * the data portion of the page, otherwise we might corrupt the BBM or
+ 	 * user data previously programmed in OOB area.
+ 	 */
+-	memset(spinand->databuf, 0xff,
+-	       nanddev_page_size(nand) +
+-	       nanddev_per_page_oobsize(nand));
++	nbytes = nanddev_page_size(nand) + nanddev_per_page_oobsize(nand);
++	memset(spinand->databuf, 0xff, nbytes);
+ 
+-	if (req->datalen) {
++	if (req->datalen)
+ 		memcpy(spinand->databuf + req->dataoffs, req->databuf.out,
+ 		       req->datalen);
+-		adjreq.dataoffs = 0;
+-		adjreq.datalen = nanddev_page_size(nand);
+-		adjreq.databuf.out = spinand->databuf;
+-		nbytes = adjreq.datalen;
+-		buf = spinand->databuf;
+-	}
+ 
+ 	if (req->ooblen) {
+ 		if (req->mode == MTD_OPS_AUTO_OOB)
+@@ -361,52 +322,21 @@ static int spinand_write_to_cache_op(struct spinand_device *spinand,
+ 		else
+ 			memcpy(spinand->oobbuf + req->ooboffs, req->oobbuf.out,
+ 			       req->ooblen);
+-
+-		adjreq.ooblen = nanddev_per_page_oobsize(nand);
+-		adjreq.ooboffs = 0;
+-		nbytes += nanddev_per_page_oobsize(nand);
+-		if (!buf) {
+-			buf = spinand->oobbuf;
+-			column = nanddev_page_size(nand);
+-		}
+ 	}
+ 
+-	spinand_cache_op_adjust_colum(spinand, &adjreq, &column);
+-
+-	op = *spinand->op_templates.write_cache;
+-	op.addr.val = column;
++	wdesc = spinand->dirmaps[req->pos.plane].wdesc;
+ 
+-	/*
+-	 * Some controllers are limited in term of max TX data size. In this
+-	 * case, split the operation into one LOAD CACHE and one or more
+-	 * LOAD RANDOM CACHE.
+-	 */
+ 	while (nbytes) {
+-		op.data.buf.out = buf;
+-		op.data.nbytes = nbytes;
+-
+-		ret = spi_mem_adjust_op_size(spinand->slave, &op);
+-		if (ret)
+-			return ret;
+-
+-		ret = spi_mem_exec_op(spinand->slave, &op);
+-		if (ret)
++		ret = spi_mem_dirmap_write(wdesc, column, nbytes, buf);
++		if (ret < 0)
+ 			return ret;
+ 
+-		buf += op.data.nbytes;
+-		nbytes -= op.data.nbytes;
+-		op.addr.val += op.data.nbytes;
++		if (!ret || ret > nbytes)
++			return -EIO;
+ 
+-		/*
+-		 * We need to use the RANDOM LOAD CACHE operation if there's
+-		 * more than one iteration, because the LOAD operation resets
+-		 * the cache to 0xff.
+-		 */
+-		if (nbytes) {
+-			column = op.addr.val;
+-			op = *spinand->op_templates.update_cache;
+-			op.addr.val = column;
+-		}
++		nbytes -= ret;
++		column += ret;
++		buf += ret;
+ 	}
+ 
+ 	return 0;
+@@ -819,6 +749,59 @@ static int spinand_mtd_block_isreserved(struct mtd_info *mtd, loff_t offs)
+ 	return ret;
+ }
+ 
++static int spinand_create_dirmap(struct spinand_device *spinand,
++				 unsigned int plane)
++{
++	struct nand_device *nand = spinand_to_nand(spinand);
++	struct spi_mem_dirmap_info info = {
++		.length = nanddev_page_size(nand) +
++			  nanddev_per_page_oobsize(nand),
++	};
++	struct spi_mem_dirmap_desc *desc;
++
++	/* The plane number is passed in MSB just above the column address */
++	info.offset = plane << fls(nand->memorg.pagesize);
++
++	info.op_tmpl = *spinand->op_templates.update_cache;
++	desc = spi_mem_dirmap_create(spinand->slave, &info);
++	if (IS_ERR(desc))
++		return PTR_ERR(desc);
++
++	spinand->dirmaps[plane].wdesc = desc;
++
++	info.op_tmpl = *spinand->op_templates.read_cache;
++	desc = spi_mem_dirmap_create(spinand->slave, &info);
++	if (IS_ERR(desc)) {
++		spi_mem_dirmap_destroy(spinand->dirmaps[plane].wdesc);
++		return PTR_ERR(desc);
++	}
++
++	spinand->dirmaps[plane].rdesc = desc;
++
++	return 0;
++}
++
++static int spinand_create_dirmaps(struct spinand_device *spinand)
++{
++	struct nand_device *nand = spinand_to_nand(spinand);
++	int i, ret;
++
++	spinand->dirmaps = devm_kzalloc(spinand->slave->dev,
++					sizeof(*spinand->dirmaps) *
++					nand->memorg.planes_per_lun,
++					GFP_KERNEL);
++	if (!spinand->dirmaps)
++		return -ENOMEM;
++
++	for (i = 0; i < nand->memorg.planes_per_lun; i++) {
++		ret = spinand_create_dirmap(spinand, i);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
+ static const struct nand_ops spinand_ops = {
+ 	.erase = spinand_erase,
+ 	.markbad = spinand_markbad,
+@@ -1134,6 +1117,14 @@ static int spinand_init(struct spinand_device *spinand)
+ 		goto err_free_bufs;
+ 	}
+ 
++	ret = spinand_create_dirmaps(spinand);
++	if (ret) {
++		dev_err(spinand->slave->dev,
++			"Failed to create direct mappings for read/write operations (err = %d)\n",
++			ret);
++		goto err_manuf_cleanup;
++	}
++
+ 	/* After power up, all blocks are locked, so unlock them here. */
+ 	for (i = 0; i < nand->memorg.ntargets; i++) {
+ 		ret = spinand_select_target(spinand, i);
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index 6fe6fd520a4..163269313f6 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -363,6 +363,11 @@ struct spinand_info {
+ 		__VA_ARGS__						\
+ 	}
+ 
++struct spinand_dirmap {
++	struct spi_mem_dirmap_desc *wdesc;
++	struct spi_mem_dirmap_desc *rdesc;
++};
++
+ /**
+  * struct spinand_device - SPI NAND device instance
+  * @base: NAND device instance
+@@ -406,6 +411,8 @@ struct spinand_device {
+ 		const struct spi_mem_op *update_cache;
+ 	} op_templates;
+ 
++	struct spinand_dirmap *dirmaps;
++
+ 	int (*select_target)(struct spinand_device *spinand,
+ 			     unsigned int target);
+ 	unsigned int cur_target;
 -- 
 2.47.2
 
