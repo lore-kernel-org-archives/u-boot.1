@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7E6C87FCB
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 09:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7418FC87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 09:25:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F22EB83DF7;
-	Mon,  4 Aug 2025 11:22:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C2A5583EF1;
+	Mon,  4 Aug 2025 11:25:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rccJSZlE";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="f2zaJ9ra";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4035583EC9; Mon,  4 Aug 2025 11:22:44 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 3C02383F00; Mon,  4 Aug 2025 11:25:55 +0200 (CEST)
+Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com
+ [IPv6:2607:f8b0:4864:20::643])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DE8983DC9
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:22:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32FE683E04
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:25:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2400f746440so32171015ad.2
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 02:22:40 -0700 (PDT)
+Received: by mail-pl1-x643.google.com with SMTP id
+ d9443c01a7336-2400f746440so32190575ad.2
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 02:25:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1754299359; x=1754904159;
+ d=amarulasolutions.com; s=google; t=1754299551; x=1754904351;
  darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gAeCGr/5+2zQMZVY75EIxtGwTI0mpQK/E7flT6Hicrs=;
- b=rccJSZlEphcakBdkRbUdYMGbPT979CyU2C3L0g8JjEKALI5GP+kdVcK8wqQHPGJJYQ
- f+o1gb45qgZgvOCWRWcDO+DDkvO8s7Y3AVSiw2dqZKAst1jU1T3ImP8wtZxW6AwkQlTI
- lpRi8XpWVXoIz1UJomWitrPNdkWtJXFABDlFE=
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=UgUkYN+BQ1x3ru4jaxiYKB52gftWWFUiK8EwQM0HyyY=;
+ b=f2zaJ9ravIvrUGtVTTmX8DRBukGaGjzjAXJ69XVs+wk59VSzIRBRfcA1DgQJxAxTvW
+ Xmvdw17hW+nWtizeZXGHXvzddzx0b469uLfWkA79zxUbUc4O1Hlnd09Pru02Q5D9z1fp
+ 9MPtm54lW5bsbFHiwtSXIpjLz5X+PTQgEfchE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754299359; x=1754904159;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gAeCGr/5+2zQMZVY75EIxtGwTI0mpQK/E7flT6Hicrs=;
- b=sZui3/MfKYOlndg2l6FXHC4B6o0IHxPX7nTDIPprtb5mWD5bhxn1s5rQ4kEo1ysoTR
- J0gEB5d3yZm7ly1d3T0UM1pJRIwuZA2P1DreyjeuvkH7TmK/Piw9hnzqr2Wix5G4aKxW
- VvtoPUJswkoXH+QOfsHUYaMp4dOFidm2meAK8ctmZcQafjHYWJdEJkowh/GFQzTOKny2
- jwKkOTjBlGFcMybKiNxn+DL2ki5j+5zbX7hxtW08451pH+ySIbn5ZBdz0wXPA8ZVrARM
- cutoB0rafmoKuZUqGZbeNB597Xk/cSErRsH4SODu3A8dGEUbx4f2HhMlzk+tglCm1AFj
- Rh/A==
+ d=1e100.net; s=20230601; t=1754299551; x=1754904351;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=UgUkYN+BQ1x3ru4jaxiYKB52gftWWFUiK8EwQM0HyyY=;
+ b=coVkqigw/Zxpsd65Mc7XhBWh1AUtk1nIgoMW66k+J4EEUWX8ViUkGRXAJ+HP+5Fz44
+ RKBfl0QzX2bAJ8m/ko4YhoTwpzoupIM0Ky13yrlaj+XSJe5lQfOOrCXmfvX0pk7HF2FA
+ B2R9Bo8mhYZIkc4MlcF5HHwNy0+03Puj/pv+ina1y/4MGVmwgKC4BfsvTJ20+Ablms2n
+ nQe8qPToWEiasmuTwgPpcViHvu3IM/kcIgGapzobv9avbA5j0vbPL4r3X+81+4YYyvdc
+ pqCA2rt8OnoAcqctTswMtYvjojRmPxsaosJCEsgE/CsxsAgvutIGAidn2P86LBpx8dsP
+ a9Yw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWVUZQQEZ0JyWCU+B91MQ+wkphvcQKOUU9WHu+cB7fPGPILP9yAvhoCS11jP6vc2hNh3mlXmuc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyFPxVuaC5x3brFvy7FH+4IPHZr7/Agm4cV5azd4D/TIXtlfoHL
- xdmHBQAHcvV9+U73Q6dSNaZtpEsE1MHYv2bVT6/QA2dacjv5LAfhQrrtXYMS92k25AGJ5ZeBioR
- 779y/loZKRXvNDM0NWwPgBrvt+/xjyDK7YjNA4qAMAA==
-X-Gm-Gg: ASbGncs33ffDtS4746yQld0oE/piywALGsL7PsnPSEyL893gx5nSmcXKl1h+dzZC6/1
- 5ttw0ZcAE7PDsL/z7bZqf5PsqkGadwflrwIgfmSTo/ZOMied5Xun+6/BfpzAcYeAJj6S5/xQObH
- wJ81hSODvpIO0hnN7eNgEFZrs3oeT/WPl+bguN50RBy4ATy/NxHU4TgzMwS74Q4DaUJ5TbJ5GdT
- oLH3eeg
-X-Google-Smtp-Source: AGHT+IHyxkvKq9WNTsAH8Y8lZ8kYgns7WvzzHchIYnKDlKXOdcV0rzxhe/nkrF2Fmzh7M0ncM3eTZeoqawisrisHRik=
-X-Received: by 2002:a17:902:f693:b0:240:41a3:c18a with SMTP id
- d9443c01a7336-24246f562a2mr113565905ad.6.1754299359242; Mon, 04 Aug 2025
- 02:22:39 -0700 (PDT)
+ AJvYcCUy3fYWy+va3gal3LK1J5pgEQGuf0W8FzjyvzeCqyS3dWN1q2U82VG8eOQSuEpnnBOear19v+E=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYNgU3FOzdlA5cPZqGYgYT+6CbT8Ot4cFtdDEIkqNQkyMWoPlX
+ CyjDpYXeN9lLuSWNh4fAqR/KV2xbS7pHfGstHi4MAUVoQ+Byu3ZjBJW4R3r08VYzlaj7IqTFqJT
+ CyoslTTM69iVk38V2Ca42uLQKb26kNZaNhDUazrVDmA8M2eWRJndVYa8nr6A5O9M=
+X-Gm-Gg: ASbGncu0TTZLi4Cau8BR1r24g1HtE/gw3o337H0ODjLAl+5FTS97H47KvNFowOhIpiW
+ qlASUu2M51mDZ3/oSTCG7jtnVPlA2Kr+Cl7MbRqIoF6PZCUCvOajIZmzVrTgjDT2x0CgQ4kcRZM
+ vWjExF2kqlcNNolYfp08Y2dXVwrIHWcNutcqMxewqfegxtvfW/Ltm5pD+W7Z4nIkYRbFYwr6BcU
+ 61GhYfn
+X-Google-Smtp-Source: AGHT+IEN0xUwLr+hptlVtHNTb5w4g18/gTHRuE/Kj2V/oj2QJ0lFntD+bSn8BJBHB5ZQ6zAbYrxLdYasHsaZ+Ae40k8=
+X-Received: by 2002:a17:903:2b10:b0:240:1bca:54 with SMTP id
+ d9443c01a7336-2424701a079mr118560575ad.35.1754299550481; Mon, 04 Aug 2025
+ 02:25:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250804092137.404647-1-miquel.raynal@bootlin.com>
-In-Reply-To: <20250804092137.404647-1-miquel.raynal@bootlin.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 4 Aug 2025 11:22:27 +0200
-X-Gm-Features: Ac12FXxElRLYOBmR3Z3KW7_PmZ4utvXBCzmh6TQmK_CtNh5UMBptZ7oSZQxmvPI
-Message-ID: <CAOf5uw=DzXH1g4=hVzSbQrjy12zuNO1p9N+UUZYrOi2xkowRdg@mail.gmail.com>
-Subject: Re: [PATCH v2] cmd: mtd: Enable speed benchmarking
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de, 
- Steam Lin <stlin2@winbond.com>
+Date: Mon, 4 Aug 2025 11:25:38 +0200
+X-Gm-Features: Ac12FXxZLx226cWd2L48HLk9ZsS0tuL1MqA3Z-oa-H1Wx7UiHKFDRN4j5dZKvBA
+Message-ID: <CAOf5uwkN5cc79v8fcCva2tGie1vWi9Rkr=b=W-=n+efrKmesww@mail.gmail.com>
+Subject: Pull request for u-boot-nand-03082025
+To: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,110 +88,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+The following changes since commit ae5711f881100f856ead1e76832c32b92dba93c7:
 
-On Mon, Aug 4, 2025 at 11:21=E2=80=AFAM Miquel Raynal <miquel.raynal@bootli=
-n.com>
-wrote:
+  Merge patch series "env: mtd: add the missing put_mtd_device()"
+(2025-08-01 17:59:07 -0600)
 
-> Linux features a flash_speed speed test from the mtd-utils suite, U-Boot
-> does not. Benchmarks are useful for speed improvement developments as
-> well as troubleshooting or regression testing sometimes.
->
-> Enable a benchmark option to enable this feature.
->
-> Example of output on a Nuvoton platform:
->
-> MA35D1> mtd read nor0 0x81000000 0 0x10000
-> Reading 65536 byte(s) at offset 0x00000000
-> MA35D1> mtd read.benchmark nor0 0x81000000 0 0x10000
-> Reading 65536 byte(s) at offset 0x00000000
-> Read speed: 3752kiB/s
->
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> ---
-> Changes in v2:
-> * Use an unsigned long as advised by Michael for accounting time.
-> ---
->  cmd/mtd.c | 15 ++++++++++++++-
->  1 file changed, 14 insertions(+), 1 deletion(-)
->
-> diff --git a/cmd/mtd.c b/cmd/mtd.c
-> index c25997cfb246..2520b89eed2c 100644
-> --- a/cmd/mtd.c
-> +++ b/cmd/mtd.c
-> @@ -17,6 +17,7 @@
->  #include <malloc.h>
->  #include <mapmem.h>
->  #include <mtd.h>
-> +#include <time.h>
->  #include <dm/devres.h>
->  #include <linux/err.h>
->
-> @@ -466,8 +467,9 @@ static int mtd_special_write_oob(struct mtd_info *mtd=
-,
-> u64 off,
->  static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
->                      char *const argv[])
->  {
-> -       bool dump, read, raw, woob, write_empty_pages, has_pages =3D fals=
-e;
-> +       bool dump, read, raw, woob, benchmark, write_empty_pages,
-> has_pages =3D false;
->         u64 start_off, off, len, remaining, default_len;
-> +       unsigned long bench_start, bench_end;
->         struct mtd_oob_ops io_op =3D {};
->         uint user_addr =3D 0, npages;
->         const char *cmd =3D argv[0];
-> @@ -490,6 +492,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag,
-> int argc,
->         read =3D dump || !strncmp(cmd, "read", 4);
->         raw =3D strstr(cmd, ".raw");
->         woob =3D strstr(cmd, ".oob");
-> +       benchmark =3D strstr(cmd, ".benchmark");
->         write_empty_pages =3D !has_pages || strstr(cmd, ".dontskipff");
->
->         argc -=3D 2;
-> @@ -559,6 +562,9 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag,
-> int argc,
->
->         led_activity_blink();
->
-> +       if (benchmark)
-> +               bench_start =3D timer_get_us();
-> +
->         /* Loop over the pages to do the actual read/write */
->         while (remaining) {
->                 /* Skip the block if it is bad */
-> @@ -586,6 +592,13 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
-,
-> int argc,
->                 io_op.oobbuf +=3D io_op.oobretlen;
->         }
->
-> +       if (benchmark && bench_start) {
-> +               bench_end =3D timer_get_us();
-> +               printf("%s speed: %lukiB/s\n",
-> +                      read ? "Read" : "Write",
-> +                      ((io_op.len * 1000000) / (bench_end - bench_start)=
-)
-> / 1024);
-> +       }
-> +
->
+are available in the Git repository at:
 
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+  https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
+u-boot-nand-03082025
 
+for you to fetch changes up to 8877bbe67a9be64f2735a45479df196cd22949aa:
 
->         led_activity_off();
->
->         if (!ret && dump)
-> --
-> 2.50.1
->
->
+  mtd: nand: raw: Remove unused octeontx_nand driver (2025-08-03 10:32:08
++0200)
 
---=20
+This series address issues found by Andrew Goodbody and mostly drop driver
+that are not
+used by any board
+
+The patches pass the pipeline CI:
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/27258
+
+----------------------------------------------------------------
+Andrew Goodbody (6):
+      mtd: nand: pxa3xx: Free memory on error
+      mtd: rawnand: stm32_fmc2: Ensure to return error code
+      mtd: nand: sunxi: Free allocated memory on errors
+      mtd: rawnand: cortina_nand: Fix -ENOMEM detection
+      mtd: rawnand: denali: Remove always true test
+      mtd: rawnand: mxs_nand: Ensure err is set for error path
+
+Tom Rini (3):
+      mtd: nand: raw: Remove unused lpc32xx_nand_slc driver
+      mtd: nand: raw: Remove unused mxic_nand driver
+      mtd: nand: raw: Remove unused octeontx_nand driver
+
+ arch/arm/include/asm/arch-lpc32xx/config.h |   19 -
+ drivers/mtd/nand/raw/Kconfig               |   31 +-
+ drivers/mtd/nand/raw/Makefile              |    4 -
+ drivers/mtd/nand/raw/cortina_nand.c        |   11 +-
+ drivers/mtd/nand/raw/denali.c              |   10 +-
+ drivers/mtd/nand/raw/lpc32xx_nand_slc.c    |  587 --------
+ drivers/mtd/nand/raw/mxic_nand.c           |  602 --------
+ drivers/mtd/nand/raw/mxs_nand.c            |    6 +-
+ drivers/mtd/nand/raw/octeontx_bch.c        |  422 ------
+ drivers/mtd/nand/raw/octeontx_bch.h        |  131 --
+ drivers/mtd/nand/raw/octeontx_bch_regs.h   |  167 ---
+ drivers/mtd/nand/raw/octeontx_nand.c       | 2254
+----------------------------
+ drivers/mtd/nand/raw/pxa3xx_nand.c         |    1 +
+ drivers/mtd/nand/raw/stm32_fmc2_nand.c     |    6 +-
+ drivers/mtd/nand/raw/sunxi_nand.c          |   17 +-
+ 15 files changed, 33 insertions(+), 4235 deletions(-)
+ delete mode 100644 drivers/mtd/nand/raw/lpc32xx_nand_slc.c
+ delete mode 100644 drivers/mtd/nand/raw/mxic_nand.c
+ delete mode 100644 drivers/mtd/nand/raw/octeontx_bch.c
+ delete mode 100644 drivers/mtd/nand/raw/octeontx_bch.h
+ delete mode 100644 drivers/mtd/nand/raw/octeontx_bch_regs.h
+ delete mode 100644 drivers/mtd/nand/raw/octeontx_nand.c
+
+-- 
 Michael Nazzareno Trimarchi
 Co-Founder & Chief Executive Officer
 M. +39 347 913 2170
