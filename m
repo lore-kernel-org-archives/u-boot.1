@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 270E0C87FCA
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 01:25:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77633C87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 01:25:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ADE583DB8;
-	Mon,  4 Aug 2025 03:25:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C878883DDF;
+	Mon,  4 Aug 2025 03:25:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Frnu2R3D";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ciN0TAea";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A58CB83B5A; Mon,  4 Aug 2025 03:25:18 +0200 (CEST)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2061b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2407::61b])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6EC4B83DBD; Mon,  4 Aug 2025 03:25:21 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2062d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::62d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7811A83D5D
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 03:25:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5D2383BB5
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 03:25:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wZVbnDpkrsKSbpAmKezlIiIgxGmhFA9Eni4YOHsmfTPl8LMbtmiMv9bhggOltxR35fsoy6dHqXtsWQUw99bDxAj7AB6PXUaErPFy0h2OUvDbeYJ5teGFmafTffLPqEdwvpMgvFrhILlm5rYKRUjuxQ14TUzfW/Sgn/4w8KAxTlnY52EVUHDA+UWPLU/CmiyU9PrJwI6QwBxDPxn0N6wNEt8A+wNnQz0q3f9wYw6VCIlDjRtyWmgFUlO0yoXik8NoIeeSEbxMs+H0m6RtVbGw9KCBa90tIzHF7ZlDEUft66id3TqdUSILJbijUYwoQw0XTpl81u3iW1Jxyl2HKuzwoQ==
+ b=tI2KwMdtn8ffsMqD0WOShdYNzOoYudic6JsHr/szH+oghSJ27REl4dyka+6s4yUvGAa8vuN41o4pd6j7B6CTW10ldi9g4jCI1PMPxSsXDn2i9P+jzIUEEIfUP5OAeS4eh+IRgjI3EUXUoxVG+l8KW4+ulUs6gfbgWYfqeVP/2Ga3WzfWFf+O1ez0c3p4vmP8exsa+4EbZwV6P+sYvljX1u07iutAlGCq3z6IvlWnptJ3pUdTC68zAzCqIqqfMyfzhf1Q95hC7dUnyywlQkRa8M73PA79ABarSY+12yNWebdPDoneg/BEwt6/wm+NTruuRqLkhredcCCN+E6trVMwkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vvE4sp/RDYwsthA4NRWeEQI/tety6LG2HyzeO+KogwY=;
- b=q3PjGTm8/EYcHHlDQETXDvIrPeF/26nflxKRNP6cONinyjD1uuRZrfwHeyqilP9AjidgfkRS0xBXHAKSyUdu1OhI4/vpTd9bByJ4ZWWLvdPCOXQTmzmUYVqI2ijkIw4f9u6si/xjIldZSSytN8v6ovxcPKU1gJGZ7Yf3Bg4XvqtCCjYgcqZkS9iYWi2Obvpfv2CN3Y1Xyz0NB4tp2fijN1ttNAjAKECM37sw0ghvnj7DOxXn6SmPYxQpu0VYYJeN00XhWD48gY1ypM46HlumBGcWNasBBsqqGX3PcClTaYi+aNw2MNijc3jpT/drY2nXHmL3uT6jT43FtuOqSeKaQw==
+ bh=2XX5rYuSQqhUu6XPeLDIySPgFHl7W3BuSKnkrzbXrH8=;
+ b=jVOLaG/G+Z+kbD+BHxDYLnoKaxIhSlBm1/tdH044PE81ywF0YkKOZtmKy3gKBjT5j/dBqx7Db9lkVfbN/j9CaBsy/wRyFHR9ZI+DL5iUpOJkP3A49AsHe1jJ8ksepNL3u+sjoPGPqDTw7YeBFZjhqtNiBEJGUi00bk/upJQtTQ8ePrp2VpnEh7I6JjMf071l/ywuU4iwBYRpkPoB7srtSDE9jRIrxkzK5mU8aS+/QWI0jwpsxymFPUhkzNOARlWobHMfVwlnkCUevM6hHDB8TISbj4WchUGQv2uPLaJ1FgATOu/lZNyE3IcpRFuBjR1nuJP+40PJ2sD586dGtg2jrA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vvE4sp/RDYwsthA4NRWeEQI/tety6LG2HyzeO+KogwY=;
- b=Frnu2R3Dkkhff9QxLiFJ8P0g9fpOF+X7xFVL6qZQU1VMbNKqN76UXPE0svMM83sOCnRDET7+RnPiDT+F0mERQGgamBwLL/uG1Sli2+iDX0N76Uxom8NaA4yUhej8iRa3HApD6j1cSe/iQNXjJ495zhXmrt39rZ0jfBB8JP9bGs8TDThAufS0hRtxyv1NGrNqTg49p/DH7zmXE5+utEf0Sfvrguc+7ym/hIABObP/jZHBCgZnczL0jwqhAdLwFPniKxfFnT5eXg68c8wHFVRQ48nkDv8HKXTXcdRguGp0muMmzr81Q7tVVM99ViUJX73qa7j2d88lOPRzjDRHhUddfQ==
+ bh=2XX5rYuSQqhUu6XPeLDIySPgFHl7W3BuSKnkrzbXrH8=;
+ b=ciN0TAeaW/1pMltNEpP8zGhm33qKfpY/QOWnqtNsy6r7pBp1Jmv/IjKzLmeaJT5CK6Ia+bVrU9GmMEZPVUloR+wzYYARhESmPfAPbA6aPjtg0qBYpDQ1AwZCWkXt0aeL4GYgVFHGYfkUsph/B8qpA0XLtjwdGZYeLPekr6BuploA8Ree8oFlI3Kvyy8TQ4hM+EqXF9qVBFDaqUtNuAIP0yoJ36zTu3a2S11KuVoAiAsnuxt/+gtkAX9PY0vbSMzlKPWMRpTbnJyqaAMqHNNG7+qO8DIwqApY17uPGw1RwfeLM8bvVuwbkLu8NO/qvU6bQxKzvmdcw9Eg+lWznjlKzg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
  by MW4PR03MB6346.namprd03.prod.outlook.com (2603:10b6:303:11d::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.17; Mon, 4 Aug
- 2025 01:25:12 +0000
+ 2025 01:25:15 +0000
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::d020:3494:f031:fc29]) by PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::d020:3494:f031:fc29%3]) with mapi id 15.20.8989.018; Mon, 4 Aug 2025
- 01:25:12 +0000
+ 01:25:14 +0000
 From: alif.zakuan.yuslaimi@altera.com
 To: u-boot@lists.denx.de
 Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
@@ -62,9 +62,10 @@ Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Naresh Kumar Ravulapalli <naresh.kumar.ravulapalli@altera.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 01/34] drivers: clk: agilex: Use real clock source frequency
-Date: Sun,  3 Aug 2025 18:24:28 -0700
-Message-Id: <20250804012501.21811-2-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 02/34] configs: agilex: Combine defconfig for all boot
+ flashes
+Date: Sun,  3 Aug 2025 18:24:29 -0700
+Message-Id: <20250804012501.21811-3-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20250804012501.21811-1-alif.zakuan.yuslaimi@altera.com>
 References: <20250804012501.21811-1-alif.zakuan.yuslaimi@altera.com>
@@ -76,77 +77,76 @@ X-ClientProxiedBy: BY5PR20CA0035.namprd20.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|MW4PR03MB6346:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4a31515-f9f9-4a76-e86b-08ddd2f5c251
+X-MS-Office365-Filtering-Correlation-Id: 1c1337d5-3cbf-4cd5-1ba3-08ddd2f5c2e0
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Wwo/Y8HV+ea3XLzqgjJrJdXpbfVoZYfTlvxoaTgYwzszTPgV+GKqGESFrCnR?=
- =?us-ascii?Q?C4HDsOIK76Hr5E8cML3Hhf/tUki7VFwZYVUepgsqXjarkEz1D+4R2ihQaPPb?=
- =?us-ascii?Q?h1IA2XDXY+7HBUjQI8dId8cXuhuEPwb0UNO49osxpdnRDFOYWxO35rIF/UF+?=
- =?us-ascii?Q?U3Ka8Yms5Is47URH1uIjn1T6mg+U9MMlv0egn9qwBkpK7hNc7RofyLbLvyhs?=
- =?us-ascii?Q?b4VKS8vsA+29Y/hlmz5ngIkZxxwHbWGpcRduuvxbtwMjTLF0DJISo4oC6yOl?=
- =?us-ascii?Q?6hgvxuL0jETDdXOdxLX+Wb88tXe4wrPlYyiWG71Bs08PALFa6QmUI2BGovRT?=
- =?us-ascii?Q?EK0F95DTDK11xqbtpJPul8RJs00RiUUSxNu16ogod/CsDqzzDBVIK/PQyFMF?=
- =?us-ascii?Q?x2ZKKB37p3bsSK3dgw848GM5FWBoYWhKlcBYKoeIRjQ9LFqa0VY1CLyhMxI9?=
- =?us-ascii?Q?4dyj0MHIuyiilV/9ce6B2CFi15aqXlGhSE31MeXUItw38iwwGroZOWpYvFMp?=
- =?us-ascii?Q?3vQO4nVHYDIgKi3X0msWw6nSTFUGpGs0YTl6jTKkcLyEljUW0ovolDXXWC7J?=
- =?us-ascii?Q?p5BIEEkVC+goqzPElufKVsIF0M6E46udPREZxysJokrTYQ6nMbqzEy5chOnw?=
- =?us-ascii?Q?Mp8XC8n91QW5027EulCWBT8x3xAOclbY+7LVFm/8mo3HcPULtbvFWTi1PniF?=
- =?us-ascii?Q?oRxqJEltI3nGGmV6igQlNOtsKbZJViIH6RbR/Ef8hjkOAJBzAhbrk49/ka+w?=
- =?us-ascii?Q?uVsznaL6EY7shU1sqW9bbFm6DdYG9/K2Zp4CYeG/o6M4c7livXKZb32/Kj0w?=
- =?us-ascii?Q?9uG44xrSCdpJ3gFrLEMfc3AO7Ucjj4OMG3sI5ezfEs8fb5pYno6w8TudzMRk?=
- =?us-ascii?Q?WJov0/NLLWzqBHx9m87E3pzUnSeWLwELvF9IJRJz0pdr6e8CpFp/xaV4ZZlD?=
- =?us-ascii?Q?46gndSh6/CaToa8xtmEXYFgqmWc0rKaiVnID+A0GAkxncOZu4SsunD6yG3M7?=
- =?us-ascii?Q?oiuhAx/EjJ+06da3xv0pwF11PVEmuOeXmoRD91hCeMTfwZE3jRp2GNeSoeNu?=
- =?us-ascii?Q?S6LaGrOX1qVj+i9GZE+u7aDgXBV6ryh1K23FcBRUH72RewmBDFNwKJ7L1URB?=
- =?us-ascii?Q?8wqzWzHWKI7J53qa0QRIrTEP55mgOBGnn/cT8/NN99dY8bepzkIFzaCTZbPj?=
- =?us-ascii?Q?FIea5hpc7c5wpifAyQWmUYeDlTWaRfVUta7bNV4RwUqNUXbA18/Z1lnKEK15?=
- =?us-ascii?Q?K9hOtIn4HLjPQSCLarbpm57XiH1cA/oV0XF/27zlzzWW3coD16nMhY0qrS1l?=
- =?us-ascii?Q?pRtJmqYY98Rmci8jiDXWvN3D4k5G71vRgH55xwJ9V4evygCt6T6LcTPOzzzr?=
- =?us-ascii?Q?JTzBDPMFi+6EZSy+LCsnAbUNu4tFyi4+xy9uh4yDIJ+5y3vOdLB3p+3MBqpP?=
- =?us-ascii?Q?Zm2SaF/ebPA=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?mwSlAeNnkYbyOohC/OZRoGPajwOhMXgsNifLZ16wJNJfIhvFR34xemZn+seP?=
+ =?us-ascii?Q?Hoik7DB6zxHCGopCIbS7gxipLrCRskJGYd0XBnxnO5lmOx6OaaLQzfv4fMbB?=
+ =?us-ascii?Q?rZxfYLNacmMOAp/IrkJkQGjFRsgmnDgj0JSltU6CBxazFYXoF9IqxdMXwxpd?=
+ =?us-ascii?Q?KJQ4IcQLmzYNreyYkTmPDktfEUQ/CYLybaRlIduBa9vyFfk06gIZKQ9+HOHq?=
+ =?us-ascii?Q?GrSQagAoi8MV7qHPPcRTHRGHXSDv6s1x2M7TxPgZy+evJOaoT0VSe4rFLIhl?=
+ =?us-ascii?Q?hh3qgxVp6ROVYVkhHGDBXJSTZpVmSGmDwt9Wg+zRq7OfF7i6yhbpJAQhLlMN?=
+ =?us-ascii?Q?ysy2HIdaoj3b+z7dnPtuoCYvJqrWzjJmcGLZg6Opg/lK/bxzX0We4+w50k1E?=
+ =?us-ascii?Q?nr8IWNcpRsXDwvz/xwHD7EXcSlky84ugWQ4R8aMSz5t5OeZexZvE4QSm7L9Z?=
+ =?us-ascii?Q?IyayOgS8NQNBnxEzbESFJ3j16qCtYTm5yY7uZ4m3xF9fErcGOZz+Hw5kEK7N?=
+ =?us-ascii?Q?kJxTiEDdU1xq3xz6thCcNVmbt4UkcorypXeuVf/RhQk+yPSyfIzBHDMZJQCg?=
+ =?us-ascii?Q?XTy1W/nsWm6KPzJ8ggivfzm50e0VNsCaIX3ZampOYaO9f3WJjk7sQ5Hus7dk?=
+ =?us-ascii?Q?mJas8BLt3EIX22nv5tUGpdVynWV9tshmRzURiJdm4tDfiqPLItHEBLlfeAkf?=
+ =?us-ascii?Q?l/ZcQp9oK+Bv/BXb6Jwk9a+yTlFPHgYXbkMgcxMQ7tZf7fYjaCHaPUb8N86z?=
+ =?us-ascii?Q?fqh3H0DTjUhlHrvM00lQ1INigQEAY/vNI4aEib8u6RQiOXIcZoLb1Wfa16J3?=
+ =?us-ascii?Q?oqcKj9qegb29kKyhbXG+9VN+lVN34IuZyUTOZEu9pt7YajO/UsOcqHZeph+q?=
+ =?us-ascii?Q?e2Sdm6VIckmVBVxT15kES+CSvxl9TJqkBVprVXdUzLmOeGRbOCT4X90U96z6?=
+ =?us-ascii?Q?6BqZAh/7uq4QfoTYT6P5d3ja1itwu7WlfxI6uOWv7Z/hSxvTm2EZXLDw58IQ?=
+ =?us-ascii?Q?BE5Zzdz5E3iVFe0GhjDKcr9bEcFOzkyLrn/A3MKFfX/p7vWpwdTzbRwUwKLB?=
+ =?us-ascii?Q?RtA6f+ky5PhZ7/2XPhHYUy5dMnnesUuW89wdcUFgr5quP0Xi6KYmdam0ul/H?=
+ =?us-ascii?Q?IY/V3jRrwvvIbhDIZNq2AsOgOFC0Y7kbLfoETlhzEFUn91a2btbxw64bMwtP?=
+ =?us-ascii?Q?LM8in2Zmud7L0N5ACdHSi2lvi26e1679tF52iDw+tn2xMsHE3W3bQTbWEVKL?=
+ =?us-ascii?Q?Vdx/IUY7QcsQOCtePD3LWwNevOjdTUaXANWBSaExxwnkzmiIm6wGklSx/zIn?=
+ =?us-ascii?Q?Uu+osL/ANPj+5Cxr3rfqF7HrAuLLh7Zzk5SamJm2zZsuTS9+/MEn4GUrRnGU?=
+ =?us-ascii?Q?ZhDp6I8=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5zFqbild4FPrrUL44HGZGHKoHWfveugD3k342facaRsmDVNIWbjXtRiGlDpf?=
- =?us-ascii?Q?xu9gDL/fza898brYEkKZO3qsCct2hJUa5XNK8DacwvUuTQj+28PultXEaW+W?=
- =?us-ascii?Q?p6M9zLmMD1g3SUSqJRx+kjEIi42RhjQcML+nIszUrdM9PyJGt1UtehdeiyF3?=
- =?us-ascii?Q?WBFT6X0QG9JZUFJadFFPh/nIWKxmwZTH2WRn0UoZkGA9OWKgVLQYJARJwH17?=
- =?us-ascii?Q?uBIOq2FwRpnKHoGAOYbsxbxj+c2s515VQsMP/3WjNNdCNCUVRT17wdUVLWsK?=
- =?us-ascii?Q?zGw2D5IN+Wz+xAN6GGQOcLfZRsSrSs22DqenHdxqrtkjG/k/d5rCjlbM/mmd?=
- =?us-ascii?Q?czS2ngv5tZHIl+gwyAoUhl58TvowDUG6dA59aeyNCMyd7+p7HDrkH0C3oAJ2?=
- =?us-ascii?Q?HlIzsIam3t2YtrgUUSBat4SlkmNK3L6UcntuiBmE1NZLEEu/LTXrX76ed2FK?=
- =?us-ascii?Q?4qcmhGcRa8QZOPtD/LrgJiyBC3PmX+eVrQ8bNdRnjYndZygr1tz3tatacMd+?=
- =?us-ascii?Q?TYLsIE/CjH/7V7WpShBN2hJpJJUOEIT8SrGHNfYHVUolcha8rhH7dAFJCyYD?=
- =?us-ascii?Q?hThr+advDWiAVS+xaVoJT1HrvHcfDsbxyXPSs6BMIHpd5wHUyJrkIah/AnUz?=
- =?us-ascii?Q?Os4ypGZujTNVs9FqRSK05j3licZutVkfOMpkEqJVaDOTKKCBq7+Ij0nQq4on?=
- =?us-ascii?Q?EUtD8i2joHjGBRZdML7/xz7U9x9pjDKD8I2F2U8XG7f0EC6JgpxJqjGRv6QY?=
- =?us-ascii?Q?w+c8MCFg02mBCVDdzfC2xSNuA19uAAKO77aAtfXxxv+eLX2vq5IBaCfB0YkC?=
- =?us-ascii?Q?WjtsstuFW8I1hWA6bS9/a20jIqLCGFrzzmDrv+TM7X4+iC2MbB9Xc5qu5QES?=
- =?us-ascii?Q?Iu3OLMyj8FmSUyFQ1cyoYYm3iL/VeLeH54LISyhnmL4E9BUqv0x0FV/bxqO8?=
- =?us-ascii?Q?NpxbPrjekTTUk0BKnd8ou+QWB1ZrqNNzrPyciYoYd16PqBO6WmAvtIQoCaPr?=
- =?us-ascii?Q?DxzoaO5y3wbUDc37/SCS+AxXA6sVkXhFzI0wmIK4TMfV1qHfpRPLvcNISMsX?=
- =?us-ascii?Q?8F8NWJyeZ2i8GcMamVZTJPCadKJOZ7WMaRBDnvw4u8sFkace7ogCe0292RB6?=
- =?us-ascii?Q?hwU47cTqIQQkfQf1lxTtWgybiYKHibvUGw+wxWjsiyjOvsOPnuZq3h8eGkMu?=
- =?us-ascii?Q?WRkuf6cFLXM8uJC2CLBSXV4zVoKVhovGDYbaV41Xtd0jmkc8o05HlpW8n8gZ?=
- =?us-ascii?Q?C+pxtoBgT3a/8m9Y+51p1Wxe6xdveFXDj33MIX5arTiurdfK4/fzxVTAGQGZ?=
- =?us-ascii?Q?VziFyB79iGoJQWa7jo+K9RxtzKYLfL+RUW3L8gcIccprdwg61m9EiCh5IVpM?=
- =?us-ascii?Q?Z7qbjWOo5KgIFEN+OWZYXeq2WSXj0hTvYOiEqp2Ao7redKtFvwHeDcb2r/ya?=
- =?us-ascii?Q?HFvDF55EskInMPDpfyUs2IZtRK1hAxEn87TupwuZC8MV6udYpUCtt0cTMruj?=
- =?us-ascii?Q?w/fre0foKt+no/TpCoM/4fuRXsjS9CrNDpMBLLa4yqvQxzd3H+Hznm7ipo0c?=
- =?us-ascii?Q?QgoASrxO+i8obhhXAEKj1CK4dKZI7ZfwUQ47y4tILUzC1Uz3yCojBfBsNL4+?=
- =?us-ascii?Q?7g=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?SW6fVha4YZxGQLdQv/c+q7Dj4y+0skMYcq951CeCvlxN1BQIPKThrWgU9nO6?=
+ =?us-ascii?Q?q+eKRRQjMQhCyLDcDu7qL6ccpV4vgRBICk4hBHvOSxm5t/VNbnkGuKnRNRZ9?=
+ =?us-ascii?Q?YkLiaromSNVpGrLk+C4N4thCXQ0RcOx9QSLcjEYlZ5dz6+n+XD729zUulIw1?=
+ =?us-ascii?Q?jzmJ20QkUNk9cEvb/aYqHb5OVG+F9gua5s2aCYa5QAxAgCR/zzvLC+hcF1Gp?=
+ =?us-ascii?Q?gHB/Devdd6Yjl3jkc5w0jareavi9dTPxNeMuPI/TLiKMJQzbcyXGbxeBqiiO?=
+ =?us-ascii?Q?GLC6EfewdTQH12owPIxMkwzTiuLgeO4FDcVBDeQfHkndN9edlyt/SO8/AoEv?=
+ =?us-ascii?Q?0IePFLy9mvh3SwH/hjIrUTtOqIdvvODYwsve6zZoaXe+6ds0AYEcoxsuCFKA?=
+ =?us-ascii?Q?Mkgi4/FaQeMZLC3nPuAnkMJUQ28eSQ9szQ8LYblNGP7hr/czM4jCs1NE5Ypb?=
+ =?us-ascii?Q?XaGpv/ueYT4rDfsNgTj0Bg3oxQxqAWPZNC9wcKo0MyRsWgAYzRrJ2DeG8nBX?=
+ =?us-ascii?Q?FTk4dpegQvhPbRr945lxIITIyR2QiyFHqgSINFEkC2tfNZiE8qq7jrfgNXxI?=
+ =?us-ascii?Q?C4gG7kQ7S4rQ2TxLjyPRwEfJv2JuQUoskQirMr4AusFfg9x6YeFoMxhyIvPB?=
+ =?us-ascii?Q?jl0ugs88gOeXAcCQrtHi8fS/j1coZno0KHUARS0E0wYCa9U7macMnLrX4yhc?=
+ =?us-ascii?Q?7q0ydLrDAaAP5mxm8JcWjZHt+Qy1/OpSUmgyHhDJD7rmg+0nWxTfAAsnSfeX?=
+ =?us-ascii?Q?uU/m0rRNjgYweAtbNUL6HYMOYTB9oaOlukFnL4+qMnnTqYX2HpmEPRv+bwZV?=
+ =?us-ascii?Q?nGb4pw7aCMDJUPByjptXr8jGcIZKZ4gCl/u4q+b5WAWfgMI2eiAGt74eg6iK?=
+ =?us-ascii?Q?ek250CD//8xnjlKs9s8HaEEnG+nzuPwN3oGMzWFkN8I6ZVMjDiVQ+OBjBwHd?=
+ =?us-ascii?Q?D8mUh4Q2dLMA0OswWHf78PQw53ed6nglt1X8cPYPTSW8g5N1J273GUPI1MKZ?=
+ =?us-ascii?Q?ikIFDbJGSKPxXIEXW1OeRWu1/5a2uBmUmuBK40YMvhLPwFAmwBENOP5qG8DL?=
+ =?us-ascii?Q?U31yJZFLHJvbiuaXp9fnKO/0gqwoH/Xb+7EhMWz7CBesG0608XrNK2lT/FdA?=
+ =?us-ascii?Q?r/CM4sKaacs5tCHi5l0N9c/8GW5OanTsk+sXkyDcF3OLZqM5jtpu9yWdBO+Y?=
+ =?us-ascii?Q?eOqgWjK6yzABuCC7aLgc5kPs1xzECxwfA8kUp13hzR3ZFry8dCaHF2uznZmn?=
+ =?us-ascii?Q?EyQh1heodG4l3X0IwB6OXNaX+06DDqqCIelFVzwZXfnOcCnWWqF7kQN7ENZc?=
+ =?us-ascii?Q?t+jPWbIGXvElOURf0KSfOaTIDC4rkwQp4zBLgvUX/MytE1JTGqodpcnXZTiq?=
+ =?us-ascii?Q?7UyN0m9qaBglb5eBV/HDakl++QfQK+2VizMSEvaa0imPLAkxqHHG3qfE0zz0?=
+ =?us-ascii?Q?lVDuDWBn+GE3w2a8P9TpHzurEwgRYbTjfDQHyHGxm+FoLrjhIzK96tRfwlbl?=
+ =?us-ascii?Q?jJs3TtKdHjJdFrzlmOSgHTBS+xTis9CClN9ueQ+nMm0RMAvgZ4vvdqj1kK5k?=
+ =?us-ascii?Q?sGy/jDZiifwv5lO7Xc831A+9QsivD5b2iTweYbUJ6MMqtDnwKKRgsJvegb6y?=
+ =?us-ascii?Q?/w=3D=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4a31515-f9f9-4a76-e86b-08ddd2f5c251
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1c1337d5-3cbf-4cd5-1ba3-08ddd2f5c2e0
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 01:25:12.7193 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 01:25:14.4753 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vpuegLHZX1TJb6OZIDjgwM5IzP8r94TpsiPb8Y1Z7BvbBeUZJyeZrENnx34UwRfFGwh31DAKNe3GINCuHXYIERQNXu+dvcqDuYsrYL4et3g=
+X-MS-Exchange-CrossTenant-UserPrincipalName: KfTi+mKgV+lg7QLkA6Rib8ChLDKA75ZQCzL+M/dm2UIWGCrZ9rGaeg3i/1LqTg5XuONFiBYyVRjpisolmYcak7EWixr4otnfiFn3OvjGJEg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6346
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -166,66 +166,261 @@ X-Virus-Status: Clean
 
 From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Update the ARMv8 generic timer frequency register (cntfrq_el0)
-with the actual hardware timer frequency (COUNTER_FREQUENCY_REAL).
-
-The generic timer frequency was set to 0x200000000 during boot clk
-which needs to be set to 0x400000000 when transition from boot clk
-to PLL clk.
-
-This will ensure that subsequent timer operations are based on the
-correct frequency, ensuring accurate timekeeping.
+Combine all MMC, NAND and QSPI configs into single defconfig which is named
+as "socfpga_agilex_defconfig". This will be the default defconfig to use.
+It supports booting from all three flashes using ARM Trusted Firmware (ATF)
+as the secure runtime monitor.
 
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- drivers/clk/altera/clk-agilex.c | 13 +++++++++++++
- drivers/clk/altera/clk-agilex.h |  2 ++
- 2 files changed, 15 insertions(+)
+ MAINTAINERS                          |  2 +-
+ configs/socfpga_agilex_atf_defconfig | 93 ----------------------------
+ configs/socfpga_agilex_defconfig     | 65 +++++++++++--------
+ 3 files changed, 39 insertions(+), 121 deletions(-)
+ delete mode 100644 configs/socfpga_agilex_atf_defconfig
 
-diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agilex.c
-index e1ddd02f356..b922723d8da 100644
---- a/drivers/clk/altera/clk-agilex.c
-+++ b/drivers/clk/altera/clk-agilex.c
-@@ -6,6 +6,7 @@
- #include <log.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-+#include <asm/system.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dm/lists.h>
-@@ -337,6 +338,18 @@ static void clk_basic_init(struct udevice *dev,
- 	CM_REG_CLRBITS(plat, CLKMGR_ALTR_EXTCNTRST,
- 		       CLKMGR_ALT_EXTCNTRST_ALLCNTRST);
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f914fc54f54..2e730f94481 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -155,9 +155,9 @@ M:	Tien Fong Chee <tien.fong.chee@altera.com>
+ M:	Tingting Meng <tingting.meng@altera.com>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-socfpga.git
++F:	configs/socfpga_*
+ F:	drivers/ddr/altera/
+ F:	arch/arm/mach-socfpga/
+-F:	configs/socfpga_agilex5_vab_defconfig
+ F:	drivers/sysreset/sysreset_socfpga*
  
-+#ifdef COUNTER_FREQUENCY_REAL
-+	u32 cntfrq = COUNTER_FREQUENCY_REAL;
-+	u32 counter_freq = 0;
-+
-+	/* Update with accurate clock frequency */
-+	if (current_el() == 3) {
-+		asm volatile("msr cntfrq_el0, %0" : : "r" (cntfrq) : "memory");
-+		asm volatile("mrs %0, cntfrq_el0" : "=r" (counter_freq));
-+		debug("Counter freq = 0x%x\n", counter_freq);
-+	}
-+#endif
-+
- 	/* Out of boot mode */
- 	clk_write_ctrl(plat,
- 		       CM_REG_READL(plat, CLKMGR_CTRL) & ~CLKMGR_CTRL_BOOTMODE);
-diff --git a/drivers/clk/altera/clk-agilex.h b/drivers/clk/altera/clk-agilex.h
-index cd68ebc4387..b3e8841a512 100644
---- a/drivers/clk/altera/clk-agilex.h
-+++ b/drivers/clk/altera/clk-agilex.h
-@@ -10,6 +10,8 @@
- #include <linux/bitops.h>
- #endif
- 
-+#define COUNTER_FREQUENCY_REAL	400000000
-+
- #define CM_REG_READL(plat, reg)				\
- 	readl((plat)->regs + (reg))
- 
+ ARM AMLOGIC SOC SUPPORT
+diff --git a/configs/socfpga_agilex_atf_defconfig b/configs/socfpga_agilex_atf_defconfig
+deleted file mode 100644
+index a2bd40d5dbd..00000000000
+--- a/configs/socfpga_agilex_atf_defconfig
++++ /dev/null
+@@ -1,93 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=400000000
+-CONFIG_ARCH_SOCFPGA=y
+-CONFIG_TEXT_BASE=0x200000
+-CONFIG_SYS_MALLOC_LEN=0x500000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+-CONFIG_SF_DEFAULT_MODE=0x2003
+-CONFIG_ENV_SIZE=0x1000
+-CONFIG_ENV_OFFSET=0x200
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex_socdk"
+-CONFIG_DM_RESET=y
+-CONFIG_SPL_STACK=0xffe3f000
+-CONFIG_SPL_TEXT_BASE=0xFFE00000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_SYS_LOAD_ADDR=0x02000000
+-CONFIG_TARGET_SOCFPGA_AGILEX_SOCDK=y
+-CONFIG_IDENT_STRING="socfpga_agilex"
+-CONFIG_SPL_FS_FAT=y
+-CONFIG_REMAKE_ELF=y
+-CONFIG_FIT=y
+-CONFIG_SPL_FIT_SIGNATURE=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
+-CONFIG_BOOTDELAY=5
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="earlycon"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
+-CONFIG_SYS_PBSIZE=2082
+-CONFIG_SPL_MAX_SIZE=0x40000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+-CONFIG_SPL_CACHE=y
+-CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
+-CONFIG_SPL_ATF=y
+-CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+-CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="SOCFPGA_AGILEX # "
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="kernel.itb"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_SPL_ALTERA_SDRAM=y
+-CONFIG_DWAPB_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_DW=y
+-CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+-CONFIG_MMC_DW=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_PHY_MICREL=y
+-CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_ETH_DESIGNWARE=y
+-CONFIG_MII=y
+-CONFIG_SYS_NS16550_MEM32=y
+-CONFIG_SPI=y
+-CONFIG_CADENCE_QSPI=y
+-CONFIG_DESIGNWARE_SPI=y
+-CONFIG_USB=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_DESIGNWARE_WATCHDOG=y
+-CONFIG_WDT=y
+-# CONFIG_SPL_USE_TINY_PRINTF is not set
+-CONFIG_PANIC_HANG=y
+-CONFIG_SPL_CRC32=y
+diff --git a/configs/socfpga_agilex_defconfig b/configs/socfpga_agilex_defconfig
+index 0b6194c1f27..f5e73000561 100644
+--- a/configs/socfpga_agilex_defconfig
++++ b/configs/socfpga_agilex_defconfig
+@@ -1,14 +1,12 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=400000000
+ CONFIG_ARCH_SOCFPGA=y
+-CONFIG_TEXT_BASE=0x1000
+-CONFIG_SYS_MALLOC_LEN=0x500000
++CONFIG_TEXT_BASE=0x200000
+ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x101000
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SF_DEFAULT_MODE=0x2003
+-CONFIG_ENV_SIZE=0x1000
+-CONFIG_ENV_OFFSET=0x200
++CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex_socdk"
+ CONFIG_DM_RESET=y
+@@ -17,22 +15,23 @@ CONFIG_SPL_TEXT_BASE=0xFFE00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+ CONFIG_SYS_LOAD_ADDR=0x02000000
+ CONFIG_TARGET_SOCFPGA_AGILEX_SOCDK=y
+ CONFIG_IDENT_STRING="socfpga_agilex"
+ CONFIG_SPL_FS_FAT=y
+-# CONFIG_PSCI_RESET is not set
+-CONFIG_SYS_MEMTEST_START=0x00000000
+-CONFIG_SYS_MEMTEST_END=0x3fe00000
+-CONFIG_REMAKE_ELF=y
++CONFIG_SPL_RECOVER_DATA_SECTION=y
++CONFIG_FIT=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_QSPI_BOOT=y
+ CONFIG_BOOTDELAY=5
+ CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="earlycon"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run fatscript; run mmcload; run linux_qspi_enable; run mmcboot"
+-CONFIG_SYS_PBSIZE=2082
++CONFIG_BOOTARGS="earlycon panic=-1"
++CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_HAVE_INIT_STACK=y
+ CONFIG_SPL_SYS_MALLOC=y
+@@ -40,38 +39,49 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+ CONFIG_SPL_CACHE=y
++CONFIG_SPL_MTD=y
++CONFIG_SPL_SPI_FLASH_MTD=y
+ CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x3c00000
+-CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+-CONFIG_HUSH_PARSER=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x04000000
++CONFIG_SPL_ATF=y
++CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_SYS_PROMPT="SOCFPGA_AGILEX # "
++CONFIG_CMD_NVEDIT_SELECT=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+ CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+-# CONFIG_CMD_MTDPARTS is not set
+-CONFIG_ENV_IS_IN_MMC=y
++CONFIG_CMD_SMC=y
++CONFIG_CMD_UBI=y
++# CONFIG_ISO_PARTITION is not set
++# CONFIG_EFI_PARTITION is not set
++CONFIG_OF_LIST=""
++CONFIG_ENV_IS_IN_FAT=y
++CONFIG_ENV_IS_IN_UBI=y
++CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
++CONFIG_ENV_UBI_PART="root"
++CONFIG_ENV_UBI_VOLUME="env"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="Image"
++CONFIG_BOOTFILE="kernel.itb"
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_ALTERA_SDRAM=y
+ CONFIG_DWAPB_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_DW=y
++CONFIG_MISC=y
+ CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+ CONFIG_MMC_DW=y
++CONFIG_DM_MTD=y
+ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_STMICRO=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_SPI_FLASH_MTD=y
+ CONFIG_PHY_MICREL=y
+ CONFIG_PHY_MICREL_KSZ90X1=y
+ CONFIG_ETH_DESIGNWARE=y
+@@ -82,8 +92,9 @@ CONFIG_CADENCE_QSPI=y
+ CONFIG_DESIGNWARE_SPI=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_USB_STORAGE=y
+ CONFIG_DESIGNWARE_WATCHDOG=y
+ CONFIG_WDT=y
+ # CONFIG_SPL_USE_TINY_PRINTF is not set
+ CONFIG_PANIC_HANG=y
++CONFIG_SPL_CRC32=y
++# CONFIG_TOOLS_MKEFICAPSULE is not set
 -- 
 2.35.3
 
