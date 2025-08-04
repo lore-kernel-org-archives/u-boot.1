@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D6E9C87FCA
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 01:28:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED39C87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 01:28:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A37E83E92;
+	by phobos.denx.de (Postfix) with ESMTP id 8E2E283E9F;
 	Mon,  4 Aug 2025 03:25:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="X+8XdOTs";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="mp3ZLPsk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF05183E46; Mon,  4 Aug 2025 03:25:31 +0200 (CEST)
+ id 36DC783E46; Mon,  4 Aug 2025 03:25:32 +0200 (CEST)
 Received: from CY4PR02CU008.outbound.protection.outlook.com
  (mail-westcentralusazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c112::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5090983E19
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 03:25:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AFCD83E57
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 03:25:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SE383LYKiwetDi/gElc/37C+P6a+4+3RwOkdUy1dpOcYN7mxHCf2aRtlmmokBPGbuh973rqWGimmjmOopKl+k/XyVtbIVrZ+HViPPiEVjTlcXWjt0A/WnhpMfKIIBf++7vpt14UuLIRJtTXnzZxUTslTM9RYOtvTdVBGv2LjIVMXqSHpoFbL3RjVFP/BwyXGt4AOjHYLhzX04l+xcUMH9xLtCtD0ryQ1clc2jIMH3xRNHt3TxufNO1hsaoxNc34/ezZk9C9PCFwiNCmxWorCJFYvfJKm/ZtgHw4DGXGlSLoQZ9EcfrbAd4hX7qXeCuIki8P3DyaXNnZEaPYv0Qp4SQ==
+ b=Hk0+OmCZlewVOxI/5gWxkJ0y1HWusB8PUa8aEZkgxMy0ZW5KRaeCQOVjfH+Wy8D8wgxOtwqPcfMBHnDS52u3z2LeZfQ2sOIF768m6Mvh91VOig2UheRazPfQOX4n6BPSrm1lQLAXhM9MEeHYnye9QQMHoObzdcLFrirJZ2inlCWHYvWHZSTfYqgL3O6i/oieQknn4dlRbbq8+7zXpPW5tjD58/WfPD1+YReUecIzl0/4+kVCptddwoB50gov7lV5M6A1jrBpoj6uFIroiag0RqyAicUsVHUwBmDLOSMtr+h5kg3btkelNtxxAGKKJE+JE5chww2Bx0QBQKOWrY9ZNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yKEVwovd3jqkyLSzKZ0rcM18yYTZkcLfA/w7vRa2WOk=;
- b=vk2qz53OftrzgZnMpWCbS+JTpdhkzbpdXgleG3WU6WJlh0VLY3HHsGSNslw17oBqmAF7InanmP31jJmwmID2/U0OWBBkS83KcF6QUG1ad/ySZGdkRxxz6SXhjvA24NKEvvIybqIB4D744dm1oPw7cRxHJJr+4xSAonpLi7liYBl2VVUP4SAe0tUPlbeSuFjcWPjbu7O6HBDViZqh0q/3+TP/QlJoKdZIHfW8nM1RF/Byeof/2zqFUS5QXKv+IStn9Lk2QKifSp/WVF9psjR7S1HicHS8SmRxyiAJCCmxrTcoyHij97D9kser1hNgSdJMffCrETiH1ug1A3SRTbLGrQ==
+ bh=Ts3rQBGcahmNibrCtfWp3ML5E5LAYKr9c6RhrdCLYNs=;
+ b=jyRDQdN5MCxDxC80oqbnsy8FYhs4VNVnstCLQvqVEkU5efHHXw6GysunVWyqPQDvUD7qxzYggoDX8Lnsf6YdTYnjr4E3wY3zboLlPetf+eljT3uERGyhoiA3I9ts0UKLRCfp+P6P4eRH4MoIYmc13UU4F/Yr7teeXzJwPegwNBhD1uVZ2IJN19qBsePijywcyZjd0ksTbRucZIAcqK32l+iPzU7L4IvrsmmcmELAqcdwZzO0a4Qq3iCn5tHsW9TV8xwbMrrliziDZD6M0usS9fhKQL7Kt75zcK0MmgU2k+rTQxZMG+x82ZhACeOffN9B3ZXBEW8h32aO9+O7lzU6Xg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yKEVwovd3jqkyLSzKZ0rcM18yYTZkcLfA/w7vRa2WOk=;
- b=X+8XdOTsSqwZsDnw56v2HD87pyQNGxNoqWaSO76jqxFB3LgQ++3TGYZNV/g6C/TFW6Jz80PKqsZwEXzHZkBF1mO99/MGsTyyVxZJ2DvVhq1RxVAGDXT2GqQIrtQYNnev+eMQBHjRv99F6b9deYQLbrM0n2jDOU+aMQOIdqZfx5HYljDqU5V2ZkTyg6u3gHT/oToIHOowZufvaj3OJWF54nTU3fGvHwNDw0Vxsyuc+BDUFRUCaAMZf5DB42zN31zd1q/33xPTPfOwTAornIsyzidbxAmvLWOzSIFn37OaKD8D0U42msnUa0SPMisQ5Y7v83WHo1i1iDglI76br6bOgg==
+ bh=Ts3rQBGcahmNibrCtfWp3ML5E5LAYKr9c6RhrdCLYNs=;
+ b=mp3ZLPskeBgcIC8ZraFiLYfxGhIHYLUme9swGoyJvAm5eik/swM9RdIKnVQHP4Tc7HP/hypXh+P5d1wV6Ty0m7MvhlVXWwVct2SBh3wOHHuVgYBDdGDjOYhMPL45wjbuMMMEClI0MRu7oYMyYK2WfD9tohFLrVsA6GukekqAvLr90Yom6UHShL46z4nY+dT+/0LFF2ZMJBG3MiqpWsDgzX7d5W9CBXImrreDFQODVlRy3cfAQOCKlpFwoKBtnHf5yQZo9yYR23qVQuo0dUvyr6JZsrWRqjUkrENL1xsQJnl1bckNzGYPB2XqiO2Y41ONo16wJ9bwMLCZk2czg4T2Tg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
@@ -61,110 +61,94 @@ Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Naresh Kumar Ravulapalli <naresh.kumar.ravulapalli@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 18/34] arm: socfpga: soc64: Perform warm reset after L2
- reset in SPL
-Date: Sun,  3 Aug 2025 18:24:45 -0700
-Message-Id: <20250804012501.21811-19-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 19/34] arch: arm: agilex: Clean up DT settings in U-Boot
+ dtsi files
+Date: Sun,  3 Aug 2025 18:24:46 -0700
+Message-Id: <20250804012501.21811-20-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20250804012501.21811-1-alif.zakuan.yuslaimi@altera.com>
 References: <20250804012501.21811-1-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-ClientProxiedBy: BY5PR20CA0035.namprd20.prod.outlook.com
  (2603:10b6:a03:1f4::48) To PH7PR03MB7063.namprd03.prod.outlook.com
  (2603:10b6:510:2a4::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|SA6PR03MB7973:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92195c54-9c8f-4fae-5235-08ddd2f5cac9
+X-MS-Office365-Filtering-Correlation-Id: 54a817b7-bce7-4e57-69df-08ddd2f5cb43
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VDBPajVHckVxRjEra2VPRnhyWklGd2tDUm5BN05mRk1MUWFtV01CakJBc3Y0?=
- =?utf-8?B?NEVIcjNYZGFZS204VUpjN2NmWSsxaTFqZE9SZ01tWUEwS1dmUUhySTJPMDJB?=
- =?utf-8?B?RzMweHIza29wWURNUHZWVmxzWXR5L0sySWVmb1B5amxFYmQxK2s5Yk5EWmZJ?=
- =?utf-8?B?ZHN0K3VWTWMzblBFcVE0SFZzUnV6VHY4QVhHdk5iYzdRTlFKaGk1UzlISWRJ?=
- =?utf-8?B?eTJJNEk1dXpabUdHU1ZNWXV5WXdMNUNnMjRyYnBvcUFrKy9YcitVdk5sUm11?=
- =?utf-8?B?MkpGeWwyMUVQSnVwZGpuemJxWVBHS0p4U2dOSW42c3o4MVFBK2FKYk1TaWtB?=
- =?utf-8?B?RXRUMTNOS0xxQUJXTWlLbkFCdUtnOXhuTUwzMUtwc3VKU2hVK2RHUVZJdkVS?=
- =?utf-8?B?SXAycXI5R3FsdjY1T2JNQTBCZExCNU5nWDFFM08zYWVqcFlrT1k4bTRJQXJB?=
- =?utf-8?B?SllWa3RZZ3g3VDFsRVNra1pWSFBHUUhnYUU4VVlya3hWNXovNDRZajRia1Np?=
- =?utf-8?B?TURVdHp2QWpVZ2VVY1p3TlFVUlVUU1hGRFJXbFM3WnFUaDZTZ3lRT0NldmU2?=
- =?utf-8?B?ekN2OERqVWFtSjQ2SSsvWGlOSVVzdnV2YlNGdWJ5Z1JxSHhqb0ljeVNDM25D?=
- =?utf-8?B?UVJWcUVxazVud1FMOXhtbDdFTS8xSUFwbmMyanhScHdEYWdoc1lITDdkZXpX?=
- =?utf-8?B?bGhMMTJqLzFrVk1rUFB1YWZaL2xHbXZMUElDZ0hiRTA2N0RTZmt1elJwUTRv?=
- =?utf-8?B?Qy9yMDhnMlpKdUxhOHlQK3laRkV1UUx6UDlqdzUwVzVpMTJ4c3pLOEpOMFlY?=
- =?utf-8?B?TmM0dVRxTlJjS0N5WlZmK0xpUU9XWDhwYTRpUnJaTDJrNzFZY3F5RFR3a255?=
- =?utf-8?B?U3dCTFd6SmFCL3RaM1dyWmNDeDdrSDN1TUViUFdzUVpPTEhEWnlHcVJlV21W?=
- =?utf-8?B?VnVvaWM3bGFoZCtxSVI0TFRJWDhvbVd6LzMrRHhlMTZLbW5aajlYeEc3TmZn?=
- =?utf-8?B?UE5hQk9ZOTFzYTk1QjJEUnpuV2hNYXFrdnEwTUdIcXBWVnJyYWpBL3duQWFq?=
- =?utf-8?B?UnFVZW1SUEQ2Z0dQQmJrSUlzaHNMOW15MHRiN1N4cWlSZWM4YndKVjZ3M2Zh?=
- =?utf-8?B?dUMzb3B1aDBjckN1QzlpbDZVRzRBN1pXcDB4VUhKcEd4aHRWb3NiZEpvK1Fu?=
- =?utf-8?B?bGFHQTVjOTZxYi9FaVRuREFQMERkL3pqZkxmL3Zrb1laNFpVcTBYeW5lL0V6?=
- =?utf-8?B?dFNTU3hvYmkydVJMV1F3QkZqQ1ViUVR2amxMS1JYZ2ZUSlF3RC9VSDZmRmow?=
- =?utf-8?B?eFh5bmFTWXN3MDNKb3h2QVVVMCs5NUloSUhiUU94YkhVZmlRNXNTMUJzUWs5?=
- =?utf-8?B?Y1VTYXJhayt0eitpaFBWSmlNMm0vUi9Pa1paeTFvR1VBTlcxNDBqQXBqYy9F?=
- =?utf-8?B?ZWs3SG0wd2tyQ0FnL3BneWhzVnp5bTdPQU9ZRHNnV3hXWlgyalVsam5SNE9N?=
- =?utf-8?B?eFB3eVJDZzJDRkIwejBoT1M5WG44QzY5Vkx0cWQwT0w1ZURnS2RwUU9SSHRp?=
- =?utf-8?B?dVV5UHJBMEVqRFROOGZCdVlOajJDYUkrWi81S3hQbkVUT05waVlXV2MvSGdX?=
- =?utf-8?B?ZXNEZWt0bzJvNWd3d1lVV0FsRmFyUmVDWTcxZHV1M0JoUmkvRFJ3eTd6cm52?=
- =?utf-8?B?MzhKdlRwSDhzQzBEcVluZnMvRitvZXNrV1lLSk12Rkk3Mm5oMEtDenBXRSs5?=
- =?utf-8?B?c1RIanN3b2g0ZWhlQTAvU3RjSWVsMFJPd0owZlJBTWdTWWNGY24wZ1NwSG9h?=
- =?utf-8?B?Q3MxcDQ5cmRpZzRPakN6ZUJEZHRPQUlvV3VOdUtjQWRPWjJMSC9WNm92ckpF?=
- =?utf-8?B?cGNScWc0cG5UeWdNWlV2YU5XS1RRcHI5amcxTU9ZQWttTEtjNEJZZE1XSVIr?=
- =?utf-8?Q?ydpP+TQ5yxU=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2wGwhbRHsjvExM36fTltX9hFwYmkfdSSYs+SOktfkUyLsKKpXLe50lQbOJJu?=
+ =?us-ascii?Q?OSWqY6zDrXOVTLa+v+27PN+o9JQ8rB3aX4Q7B3iGFdbMwTw+i5xZ1k1xsY3z?=
+ =?us-ascii?Q?gaLvTg47hXBdvhmwPtt2HclcAhW404kgAWGvj4K2fx0SFdR0Dk+QVWf6Gt7W?=
+ =?us-ascii?Q?ikwYmSeMVke2BeVpgxhbsyLZ3kMtU6xwCF4QriihsTwORq/PRXFkGlUAM0ti?=
+ =?us-ascii?Q?VqMEG1qmDjjz/tLmWSqGzny2bjH8I9vDTJhZZiqU5oNat7EeI2Q2CIXOZtHy?=
+ =?us-ascii?Q?zHmXO2kSQ4J0k+3ox6Ttd7rEfoGBqnKD6EigbdJHYkzSgVgkJo6vMf5CwmtR?=
+ =?us-ascii?Q?FWR3293wCvr8sMaSuoIArroUajMdo+CDPkQ3BljTWVgFnH0pXX2LRUipB+dO?=
+ =?us-ascii?Q?T6hWtful9bLdYTjqpf0aj9IqG8iJwhm72DC9lc9JINRqlyaewai2+i/CKB8Z?=
+ =?us-ascii?Q?H7+KPjrDnIIwCaPH8klP11JlDDZ0BeJjldiZPcBfkxcZEtKGRs/8z+PwCJM9?=
+ =?us-ascii?Q?ypsfGo9tDrLCxVbcoxKVWubhnJPWHuAgDsT12tG/cqqmgmgJcNa3NSmq3Nvk?=
+ =?us-ascii?Q?BiAku3LRa/6NEOS9Qu9p8ET87tiaI/FrV4mu8Cf0oSaR8CoZNd398ZLbAB1i?=
+ =?us-ascii?Q?FNFQVB2MvVh18s++LUrAjbX7lWMT2QAlEg9XKidT78qShC3AmllNVv9e07Jh?=
+ =?us-ascii?Q?KqPZs82OnR+GodDLayWR3TFn4R3v6G+t8HRswl/yND2tEdPJVcmd6AYemNGW?=
+ =?us-ascii?Q?jaFyjTAy7IUiR6eUGPfkKAzdHEv4hAb8kI+IYXb3csKgH4WD2m5iJFXOUzY4?=
+ =?us-ascii?Q?LA2ynPk+GntxBUjfg9qGMWVaRiKouSxTIFSb8RvQQfCxsIFS+OKPFATA1Mep?=
+ =?us-ascii?Q?Vy739aO+BK7bc0Z5ovQDb3A5cZR227b7NOGoIBLuzqMbi62o0RrjuP/dh7zf?=
+ =?us-ascii?Q?RxLZKcSxMtxVlfheBTpXy63R0a1TrBW1HSbKX8oRNizyFkVqGN/G6QnfGOSN?=
+ =?us-ascii?Q?2/fcNQg1cwiBQENveQAciDYPmEArVy9Tj+1AzmQTPM4thOcn2y+QFcJYDEu+?=
+ =?us-ascii?Q?USXk4uPQ1bS2PqXB9cOOom4VG7lb0+CdXDurZ+FhWHS+KJefVzL8DpEDzjF2?=
+ =?us-ascii?Q?7/HK1z159pEcXQdAbo7Pl2QFZIoN14jHUfBcY18At7O2nm6xAaGufzErjpxt?=
+ =?us-ascii?Q?LfAThgqUqv2Nu5805KnZGa9EifGxB3S7IO8yIfgrrz45alhk+EVsXPODDxG+?=
+ =?us-ascii?Q?b3In75kdNOSKnRi/3qyUk1BBEWV1t1YtpLWTxcm0mqdpFqi4jhcvvuZqHnwk?=
+ =?us-ascii?Q?0FN0FgtWPgHGLslsR1ACXJNnHaL9USempRAHEYj8vV7j2GbH+OkS6mHiwvBL?=
+ =?us-ascii?Q?29uvWXTZt0LQOSANXJ2GOgetaD1UCrPL8sz7PVM7vXl+rG0lbOj7c/Mg7tHL?=
+ =?us-ascii?Q?frVppFUr6x4=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmlpQWh4Sk1UUllFaGNpWkdiZE1mQnBZbVVEL3o0VjhuMzYzV1lyUjNtTmNy?=
- =?utf-8?B?SXBuV0VpL3dOWVhhYitDdURQNHAzYzMwa1BTbGw1b05GMmx5Ym43Lzd1VG5I?=
- =?utf-8?B?T1RrL0dBUkQxaDVUL1JxOXFPdnlLaGd0UzJVNEZwWXltOUQvVDhINTBCU1JM?=
- =?utf-8?B?dFBkSy9oaVJTaDRDZkMzdDJkMGpUUFpCRmR4MUlVdlNmNTBFQnM3dW5GNnd2?=
- =?utf-8?B?TnJrV0ZNQlI1VmM2KzlVWHJxeDJIc3Z2NzZIb0ZMR2ZUMW9lVG9ZK3hjWEk4?=
- =?utf-8?B?disxUmQyOXVZRWNSVThpVTd6c3hGMHZrVFJZbzJJRmxVT0FDQTF1Y0grMmVZ?=
- =?utf-8?B?RVltdWl2ZnpLRWx5NWIwdlVCWldITjdnVHlZbXhuLzFJWWJUMGhtZmhNbXJj?=
- =?utf-8?B?RUR0SmUvYXNCVjJORUF5ei9TeWRMT2dOQlFILzE5cURpQ3ZQbDFBN1R0N3Fy?=
- =?utf-8?B?QkhzenRhd3ZoVnlyYXlHTGJhM01ORGZoTXgvQTg2aFNrWjZJVi8vVHlDMGRt?=
- =?utf-8?B?NTlueGEwV0c1U3VmaUN4R2t4SVB5ejFsUGpKaTRPNXlpSWRrbUJTK3JaR0N6?=
- =?utf-8?B?ckl4dElaY1Nydldtd2VDaFA1OWJkMVNBR3Z1b1RRMSs3akxQckFjRFF6RERw?=
- =?utf-8?B?TjFhSlZQbDlvOWJncHRENTlaN0FBNEpZU0Y2NmVuYWM5Qm5TdW9VTDIrWTVm?=
- =?utf-8?B?MWltNWdSdnNPRDB4b3RtWUNnYkozUUprWGNNR0RVZkJVckd0NVhvM1VkQ0t3?=
- =?utf-8?B?ZmlHTElMWGZwVVE1ejBLWkRZRXNIeXN0cGlZMHBZVlpTVUZNVHI1cXlySVFo?=
- =?utf-8?B?ZG4yeHVtazAyOVlpRkhkUzBjOFRCTEViSWt2SjVXTXRWV3JQM3hkVVpraEQ1?=
- =?utf-8?B?eDhrN0VWZStXb3JCenlBYkxhVUg3cWVqSzZSWjl3N0Z4dUVjZnBHYjNxNzND?=
- =?utf-8?B?MTVqajV1bVZmWHRiQVh0bVFpVTlXOFE1bWdIRXZ6bm9Ea1BGQVpSRTB2RDNT?=
- =?utf-8?B?T3ZOT2ZyMGt6UTNBYWpKRnZRbHNtaGt4ckNTWU5ZV3VBTXk3bDVUSE9GRTJK?=
- =?utf-8?B?WVkyYk5pWUdkcGRkd1hLTGlNd2YrVjFvcnhKOXN5TGJyNmlWd2gyY1J2OWxC?=
- =?utf-8?B?VlpQR3RUZGk1Q2VCTVBScjRKaERiWXpkRU9VVWpwdEZjZXVPSnVwdzE2M3R6?=
- =?utf-8?B?UDRYVUF4M0twTzFQY0JmUzdFemZEZVYrWW1GU1pqR2NoS0tnWDFyM2JTV0gz?=
- =?utf-8?B?dmNhaUJoVGcyb2xJQitqZmFLckZzWlNQa1ArQWM2REVTQmo1K3FETlcwR3dL?=
- =?utf-8?B?Q2JHNDdkamNSRWxCL1IvUy9hZ3dJRnlVY1BjZGdqU2Nqdm1aTXlVWTFrVWRG?=
- =?utf-8?B?dmxwYnFxYlNwRjczVWRuMURadzFaWlFvMHV0WWNkOGZTczBiM3krUVpGQVdj?=
- =?utf-8?B?T1FpLzVHSjM0ZkZIUWkrOXhQTEUzVHNYd1haYjZCZFlGQUJFYnRVQmRIcmM0?=
- =?utf-8?B?T2d2ajl6U2M5T09oQU1nd3NLU3NLUEx1WkZLWUkrSmd2TTZkcmJoU0k0ZjdW?=
- =?utf-8?B?cWlvTC9zbUJKblZhS1lEeVpZcVgxKzN3djUrR0szUGw2TDhMMXNNek56N1Y1?=
- =?utf-8?B?VmV2ZVFYaERiUkF3UU9GSHNmUFFRVk52dkVwZ2xHT3J1Vm9GNUJpNjhRRXVl?=
- =?utf-8?B?UkwzRTI4dGgrbUs2TVRTRTVBV2ZHY0k1MWJhSzQ4a3hmMW1IOFpOSnVRTWZF?=
- =?utf-8?B?VWZDZFF3T3VQdDdFMU1sanNNTjUrME41VlVUZTlUQ3BXekU3WFUzRTByMkNi?=
- =?utf-8?B?M09hWHRGNHhxSUorMTNhd1djQTVVbXRIMHVBWkUvUmNlamFENHFUa2dlNGZW?=
- =?utf-8?B?UGEzNGlmQTN5b1poU2JaOFRUWmN2T1pwL2pkVEt1UFdwZEhzMUZJdEFXUThu?=
- =?utf-8?B?S0tCQ2NaV1poL1Q5OWw4R1E5Z2RVcmN2Snp1eVI0LzZjRElDZ0N4V1NqYklP?=
- =?utf-8?B?K2tKMU5oYVkyWGpaaVJrRHVjVWRVVjRIR1MxdWFlSnBidTNxRE1Idjl3OUZY?=
- =?utf-8?B?TmdLcmhIVC80YWRSb1UvMCtKeTdSY1F1cVlBdjF3RWlzZ0dEZEozczZpTngy?=
- =?utf-8?B?aHBEOUFQcFI2RU1wNVN3WXlBN2RyMjVWa0t3cGoyK1lodkYzemNFcE1VUXJR?=
- =?utf-8?Q?VXJ2Fs5GOpZ2cKTxW4LEJvI=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3/qFXHE26UIvq2jMYuXXZJgbZ6LvdAZY9RN/i5DkzQ+yTg8LRcGFLOGeXyHE?=
+ =?us-ascii?Q?gJFp3XF7lMuWGvy4I6z9c+VRNJ6yWU1QEpcmcvU2LMK5rTVcWNARIdM/K2nl?=
+ =?us-ascii?Q?4rZHJpXtNQ6/nxx/HNEObetDubcAJlCySJ0bhe7BwK1IoGJ5Z9uB4CgeT9wa?=
+ =?us-ascii?Q?wOaYZ7/TTu9748Zr52xXc5ugk/L24uAXVTF/wr/7u4bQXdJvnrdAJQLzj/bn?=
+ =?us-ascii?Q?FsvHhiZR3hc243ZOdHukm+iwwDZBBPt0UOVZqv0yAoZ2psVLqca4GJBrLBkf?=
+ =?us-ascii?Q?C/5/r+WFV3SJINWhEW/A44sgTDvZV/6xGhbEmLjhJQ0REGS83iBI4WIjaOeP?=
+ =?us-ascii?Q?uGqMkNKrgfdbB0xGvnqpaFalHhma4TDLmhMV+RIe7WchKqjjNRijtii8WkKF?=
+ =?us-ascii?Q?DhkCbsgfkIwkRYrOLAHqtZniVbPcl8e9iuIrBFcbj6tQSBMiVKPT0PL13Kj7?=
+ =?us-ascii?Q?g6HkZPN28hbjETiaMSaPsPeCTGELJEmxiZr6yn4OiyhOKKQRljn0LzOX+pAy?=
+ =?us-ascii?Q?Cr0U2H7pJO8xoBtS1Vm6JC9t5Q5SzDEs08ff5okRiGLeXloWG6K1+nHyn42j?=
+ =?us-ascii?Q?vQaaZteZYgaGpzdl/+8fED/rL8CaT+7bQ2kl8whPpfagfbl0VBZYTUoMnMbq?=
+ =?us-ascii?Q?lW3Q+ua3/MnBwG2d7Zbx18/eM+eWnmvE6IJviNqqVOL7bPj1F3EfZpBwNqs1?=
+ =?us-ascii?Q?AQjVrUR+um8qLZLATxaseM4KZUOGxkpsv3yNTZwuUX9sMXaqRMhPLxoXHADR?=
+ =?us-ascii?Q?pMhgxOse2b4JX+wL7sJUIqf6VF8vGlFl8l9/XjtsZGXL+QGd8sYu0KO+JJS9?=
+ =?us-ascii?Q?fYwfui9cyYUBpy9SPeUCBcm7jVb06xwJjbCPg4wdZDnAgF6vijk732KvYk6Y?=
+ =?us-ascii?Q?sQ8dB/4lDXFcNqgDEbkEE5isqDLSupaQe9SFcQHOeErQo+shpr+B5dhi0UPa?=
+ =?us-ascii?Q?kLPNXquxMra2+HNgzTLbQ8AV6fVmJVD0niJte5ASTk0xRzWtQnyHdsBplMUN?=
+ =?us-ascii?Q?3DONboKlKFi55BPZzOOUrYk06wArLctiR7P56hxjhLwXepdBQIEk/Jzc+m6D?=
+ =?us-ascii?Q?YquEQR21PCOZZnvPWPEYdLp3Wq1zk6d0GGjD5F+jMZaA7ts409iNHjicN9i3?=
+ =?us-ascii?Q?hMzqD+3l+AA9ETa7nzhOKsC6EJvujhZr0r/P78h1mfAyeMD4H8Zetyep9A7L?=
+ =?us-ascii?Q?+f8jhbbBDpdbmx6jOgD9KDPKFuQj2v/CeYcoxJR7B9922pJaGno/PubYs9Eq?=
+ =?us-ascii?Q?KS3lmEoifUX4gJ+UgxU3t4/3fXQ7J8Zmubh34DU9Oa3llKjE+vYKLJbTbtor?=
+ =?us-ascii?Q?uArO3P4bx5NHuiq5qBh7HoZ67HeR6xBj2emI2Apm2GRn8f7t/KDsKl1Uxap3?=
+ =?us-ascii?Q?QhZP5jJVEpadVVz1aDDg7OjqR9+o1VXZkU3iLsf3s9N9G19CZ4+g6Xab37Zw?=
+ =?us-ascii?Q?AeKZSEcFDiV0yEE8nc+rOzUq/CHxiuj4/xJVvhG+nYJZM5tYghZg9XOc8Lty?=
+ =?us-ascii?Q?QebWfFWESnBk5HYXdrYaLb5mUbOgJMHbBkcwFLIgq9XWvporILEGQAu9i1Ag?=
+ =?us-ascii?Q?wrIlFTI9EdSz/p6oFLZLr/FmKDWPuwQlRRvLa9CKwavW4yIouJGOPu5HT+SZ?=
+ =?us-ascii?Q?PJug549uPJ0wWN6aJiT8QjA=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92195c54-9c8f-4fae-5235-08ddd2f5cac9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 54a817b7-bce7-4e57-69df-08ddd2f5cb43
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 01:25:27.0873 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 01:25:27.7350 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uxO/0CxF2QtMEYLJYPLuKPgmAczIcVgMhu9AfieqqJsqUNm/RN2abRPXTiTcac81NhdbxZdxf1ScTXGHa38iIEQVVQdGb8t2xQTUvtZcPpc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: bSoYpebqNf4Mu1dYJMM7JXwcBNG27iv+beHbZUCwPq1pN4f+eS5LkUMYM5z9RlNcXOyaAhKxlKAxTAzr7l6C0m+eno1eLcPlTlkC83kB+sg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR03MB7973
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -182,170 +166,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+From: Tingting Meng <tingting.meng@altera.com>
 
-SPL checks for a magic word in the system manager's scratch
-register to determine if an L2 reset has occurred. If detected,
-SPL places all slave CPUs (CPU1–3) into WFI mode. The master
-CPU (CPU0) then initiates a warm reset by writing to the RMR_EL3
-system register and also enters WFI mode.
+Reorganize misplaced properties by moving board-common settings from
+socfpga_agilex_socdk-u-boot.dtsi to socfpga_agilex-u-boot.dtsi to maintain
+proper separation between common and board-level configurations.
 
-This warm reset flow is handled entirely within the HPS. The
-function `socfpga_sysreset_request()` triggers the warm
-reset, and upon SPL re-entry, the updated `lowlevel_init_soc64.S`
-handles the necessary initialization.
-
+Signed-off-by: Tingting Meng <tingting.meng@altera.com>
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- .../include/mach/system_manager_soc64.h       |  2 +
- arch/arm/mach-socfpga/lowlevel_init_soc64.S   | 95 +++++++++++++++++++
- include/configs/socfpga_soc64_common.h        |  5 +
- 3 files changed, 102 insertions(+)
+ arch/arm/dts/socfpga_agilex-u-boot.dtsi       | 20 +++++++++++++
+ arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi | 28 -------------------
+ 2 files changed, 20 insertions(+), 28 deletions(-)
 
-diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-index 0871cf949e5..713fa2c517b 100644
---- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-@@ -148,6 +148,8 @@ void populate_sysmgr_pinmux(void);
-  * Bit[30] reserved for FSBL to update the DDR init progress
-  * 1 - means in progress, 0 - haven't started / DDR is up running.
-  *
-+ * Bit[19] store ATF CPU0 ON OFF value.
-+ *
-  * Bit[18] reserved for SDM to configure ACF
-  * Bit[17:1] - Setting by Linux EDAC.
-  * Bit[1](ECC_OCRAM), Bit[16](ECC_DDR0), Bit[17](ECC_DDR1)
-diff --git a/arch/arm/mach-socfpga/lowlevel_init_soc64.S b/arch/arm/mach-socfpga/lowlevel_init_soc64.S
-index 8926c2d1d9c..b39565f591d 100644
---- a/arch/arm/mach-socfpga/lowlevel_init_soc64.S
-+++ b/arch/arm/mach-socfpga/lowlevel_init_soc64.S
-@@ -12,15 +12,110 @@
- ENTRY(lowlevel_init)
- 	mov	x29, lr			/* Save LR */
+diff --git a/arch/arm/dts/socfpga_agilex-u-boot.dtsi b/arch/arm/dts/socfpga_agilex-u-boot.dtsi
+index 890ffc5f7c9..91674669886 100644
+--- a/arch/arm/dts/socfpga_agilex-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_agilex-u-boot.dtsi
+@@ -10,6 +10,13 @@
+ #include "socfpga_soc64_fit-u-boot.dtsi"
  
-+#ifdef CONFIG_XPL_BUILD
-+	/* Check for L2 reset magic word */
-+	ldr	x4, =L2_RESET_DONE_REG
-+	ldr	x5, [x4]
-+	ldr	x1, =L2_RESET_DONE_STATUS
-+	cmp	x1, x5
-+	/* No L2 reset, skip warm reset */
-+	b.ne	skipwarmreset
-+	/* Put all slaves CPUs into WFI mode */
-+	branch_if_slave x0, put_cpu_in_wfi
-+	/* L2 reset completed */
-+	str	xzr, [x4]
-+	/* Clear previous CPU release address */
-+	ldr	x4, =CPU_RELEASE_ADDR
-+	str	wzr, [x4]
-+	/* Master CPU (CPU0) request for warm reset */
-+	mrs	x1, rmr_el3
-+	orr	x1, x1, #0x02
-+	msr	rmr_el3, x1
-+	isb
-+	dsb	sy
-+put_cpu_in_wfi:
-+	wfi
-+	b	put_cpu_in_wfi
-+skipwarmreset:
+ /{
++	aliases {
++		spi0 = &qspi;
++		i2c0 = &i2c1;
++		sysmgr = &sysmgr;
++		freeze_br0 = &freeze_controller;
++	};
++
+ 	memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+@@ -19,6 +26,12 @@
+ 	soc {
+ 		bootph-all;
+ 
++		freeze_controller: freeze_controller@f9000450 {
++			compatible = "altr,freeze-bridge-controller";
++			reg = <0xf9000450 0x00000010>;
++			status = "disabled";
++		};
++
+ 		ccu: cache-controller@f7000000 {
+ 			compatible = "arteris,ncore-ccu";
+ 			reg = <0xf7000000 0x100900>;
+@@ -45,6 +58,7 @@
+ 
+ &i2c1 {
+ 	reset-names = "i2c";
++	status = "okay";
+ };
+ 
+ &i2c2 {
+@@ -171,3 +185,9 @@
+ &watchdog0 {
+ 	bootph-all;
+ };
++
++#if !defined(CONFIG_SOCFPGA_SECURE_VAB_AUTH)
++&binman {
++	/delete-node/ kernel;
++};
 +#endif
-+
- #if defined(CONFIG_GICV2) || defined(CONFIG_GICV3)
- #if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_ATF)
-+
-+	/*
-+	 * In ATF flow, need to clear the old CPU address when cold reset
-+	 * being triggered, but shouldn't clear CPU address if it is reset
-+	 * by CPU-ON, so that the core can correctly jump to ATF code after
-+	 * reset by CPU-ON. CPU-ON trigger the reset via mpumodrst.
-+	 *
-+	 * Hardware will set 1 to core*_irq in mpurststat register in
-+	 * reset manager if the core is reset by mpumodrst.
-+	 *
-+	 * The following code will check the mpurststat to identify if the
-+	 * core is reset by mpumodrst, and it will skip CPU address clearing
-+	 * if the core is reset by mpumodrst. At last, the code need to clear
-+	 * the core*_irq by set it to 1. So that it can reflect the correct
-+	 * and latest status in next reset.
-+	 */
-+
-+	/* Check if it is a master core off/on from kernel using boot scratch
-+	 * cold register 8 bit 19. This bit is set by ATF.
-+	 */
-+	ldr	x4, =BOOT_SCRATCH_COLD8
-+	ldr	x5, [x4]
-+	and	x6, x5, #0x80000
-+	cbnz	x6, wait_for_atf_master
-+
-+	/* Retrieve mpurststat register in reset manager */
-+	ldr	x4, =SOCFPGA_RSTMGR_ADDRESS
-+	ldr	w5, [x4, #0x04]
-+
-+	/* Set mask based on current core id */
-+	mrs	x0, mpidr_el1
-+	and	x1, x0, #0xF
-+	ldr	x2, =0x00000100
-+	lsl	x2, x2, x1
-+
-+	/* Skip if core*_irq register is set */
-+	and	x6, x5, x2
-+	cbnz	x6, skip_clear_cpu_address
-+
-+	/*
-+	 * Reach here means core*_irq is 0, means the core is
-+	 * reset by cold, warm or watchdog reset.
-+	 * Clear previous CPU release address
-+	 */
-+	ldr	x4, =CPU_RELEASE_ADDR
-+	str	wzr, [x4]
-+	b	skip_clear_core_irq
-+
-+skip_clear_cpu_address:
-+	/* Clear core*_irq register by writing 1 */
-+	ldr	x4, =SOCFPGA_RSTMGR_ADDRESS
-+	str	w2, [x4, #0x04]
-+
-+skip_clear_core_irq:
-+	/* Master CPU (CPU0) does not need to wait for atf */
-+	branch_if_master x0, master_cpu
-+
- wait_for_atf:
- 	ldr	x4, =CPU_RELEASE_ADDR
- 	ldr	x5, [x4]
- 	cbz	x5, slave_wait_atf
- 	br	x5
-+
- slave_wait_atf:
- 	branch_if_slave x0, wait_for_atf
-+
-+wait_for_atf_master:
-+	ldr	x4, =CPU_RELEASE_ADDR
-+	ldr	x5, [x4]
-+	cbz	x5, master_wait_atf
-+	br	x5
-+master_wait_atf:
-+	branch_if_master x0, wait_for_atf_master
-+
-+master_cpu:
- #else
- 	branch_if_slave x0, 1f
- #endif
-diff --git a/include/configs/socfpga_soc64_common.h b/include/configs/socfpga_soc64_common.h
-index b8448ba6636..312c6fafc6c 100644
---- a/include/configs/socfpga_soc64_common.h
-+++ b/include/configs/socfpga_soc64_common.h
-@@ -24,6 +24,11 @@
-  */
- #define L2_RESET_DONE_REG		0xFFD12218
+diff --git a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
+index f9491d57068..c2770424d9c 100644
+--- a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
+@@ -14,20 +14,6 @@
+ 		u-boot,spl-boot-order = &mmc,&flash0,&nand;
+ 	};
  
-+/* sysmgr.boot_scratch_cold8 bit 17 (1bit) will be used to check whether CPU0
-+ * is being powered off/on from kernel
-+ */
-+#define BOOT_SCRATCH_COLD8		0xFFD12220
-+
- /* Magic word to indicate L2 reset is completed */
- #define L2_RESET_DONE_STATUS		0x1228E5E7
+-	aliases {
+-		spi0 = &qspi;
+-		i2c0 = &i2c1;
+-		freeze_br0 = &freeze_controller;
+-	};
+-
+-	soc {
+-		freeze_controller: freeze_controller@f9000450 {
+-			compatible = "altr,freeze-bridge-controller";
+-			reg = <0xf9000450 0x00000010>;
+-			status = "disabled";
+-		};
+-	};
+-
+ 	memory {
+ 		/* 8GB */
+ 		reg = <0 0x00000000 0 0x80000000>,
+@@ -43,10 +29,6 @@
+ 	/delete-property/ cdns,read-delay;
+ };
  
+-&i2c1 {
+-	status = "okay";
+-};
+-
+ &nand {
+ 	status = "okay";
+ 	nand-bus-width = <16>;
+@@ -62,13 +44,3 @@
+ &qspi {
+ 	status = "okay";
+ };
+-
+-&watchdog0 {
+-	bootph-all;
+-};
+-
+-#if !defined(CONFIG_SOCFPGA_SECURE_VAB_AUTH)
+-&binman {
+-	/delete-node/ kernel;
+-};
+-#endif
 -- 
 2.35.3
 
