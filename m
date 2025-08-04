@@ -4,48 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1825AC87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 13:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FEE9C87FCF
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 13:34:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A6B483F66;
-	Mon,  4 Aug 2025 15:07:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id 8DA8B83F58;
+	Mon,  4 Aug 2025 15:33:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="X8YfBXPq";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="yNvMA7IC";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="udN+/Kkd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B587783F36; Mon,  4 Aug 2025 11:56:39 +0200 (CEST)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.37])
+ id A934783F60; Mon,  4 Aug 2025 15:33:57 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 073F783E18
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 11:56:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id B048083F56
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 15:33:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marius@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:In-Reply-To:References;
- bh=GF0Z9MSihw8iWBxpDua5/E+78OhnZVISG8P5ZZKesQA=;
- b=X8YfBXPqvCieGbNOXGitNB2tVNaUHoWU3VOIsiilHhRy2Ut5qyeh12JaB8uAzW2gHERsFVZRcoKl2EkiXY4GcsTcAAbsNuRTNz6zO7bvD3PDQykSs4gQ00tFbt2UCsYYdrHNDAthQLrUpGxh08ZqRFhawbPMzoaU0uh5MfrsWDMuS8wb9aIhDPMDQSsuCn2g1HmNruhttW6deelxW/D1BXDj7uSM3+w+0nx8i854alStaibwSLHhCpVV4k
- ZCTVU1mbM+EdTHoGEC2/vplvVIGGtPhLCOtRNL6ZiL9YyhfPpPCsw+Z7Ydnf74z7C5u7eSpSl17fsPTS1cNS2KzJoJNA==
-Received: from GRAPHRT (188-24-194-92.rdsnet.ro [188.24.194.92])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Mon, 4 Aug 2025 09:56:33 +0000
-Date: Mon, 4 Aug 2025 12:56:31 +0300
-From: Marius Dinu <marius@psihoexpert.ro>
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=b.spranger@linutronix.de
+From: Benedikt Spranger <b.spranger@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1754314435;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+hhyQrV+tJCocvWPCA0CdQjSq9hPVZaxyvWy/1xEy8A=;
+ b=yNvMA7ICpYahoU9Trp6SBWlp8CJdOWd3EDLDLfxC3pVUW7Un/j+Ry9mNq2mTAkcUB9hLmX
+ e3DtycYrv+NFofwKdRdEQCLiZ8AGMSn5/j1WKzgOrSwUfIt2AMkBsXquqls6tAoF9cahVs
+ k2B4o1Y+b2shqBW8vpP8piq8GnvUYPAWQji6/wUQ42vAxdNBthMfNrmMPWpsViIt2F+DM+
+ pheYSyYBB9Gm5YlGmeORa5R7mFk/4WKrcIGG/oj9AgMzA0XrbSzK6rHvKEdDzyjhm9GLWA
+ cx+K3jMe3bA1SVXBNgw9urr7mKCkg43Du9wt5OQvBpBBAvKRPmJdKzTWTm9WNQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1754314435;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+hhyQrV+tJCocvWPCA0CdQjSq9hPVZaxyvWy/1xEy8A=;
+ b=udN+/Kkd1P8IBIfdurRk/RrjkhAOtD2mry5M09joHc/V8/iWFgUKoeMkxEwIimWNaAQSmC
+ OPHpZJB1KJYQv+DA==
 To: u-boot@lists.denx.de
-Subject: Re: [PATCH] USB OTG: make dwc2 otg driver dependent on Exynos platform
-Message-ID: <aJCDz1uqfUaUkcbD@GRAPHRT>
-References: <20250804094353.28658-1-m95d+git@psihoexpert.ro>
+Cc: Tom Rini <trini@konsulko.com>,
+	John Ogness <john.ogness@linutronix.de>
+Subject: [PATCH] drivers/mtd/ubispl/ubispl.c: limit copy size
+Date: Mon,  4 Aug 2025 15:37:36 +0200
+Message-ID: <20250804133736.21846-1-b.spranger@linutronix.de>
+In-Reply-To: <d34b63c9-4fd1-46fd-a984-a22cc0dd3e0c@linaro.org>
+References: <d34b63c9-4fd1-46fd-a984-a22cc0dd3e0c@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250804094353.28658-1-m95d+git@psihoexpert.ro>
-X-Mailman-Approved-At: Mon, 04 Aug 2025 15:06:58 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,38 +74,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2025-08-04 09.43.53 ++0000, Marius Dinu wrote:
-> drivers/usb/gadget/dwc2_udc_otg_phy.c uses s5p_cpu_id,
-> which is only defined for Exynos CPUs.
-> 
-> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
-> ---
->  drivers/usb/gadget/Kconfig | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index 46a83141481..deabcb3e51f 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -108,10 +108,11 @@ config USB_GADGET_AT91
->  
->  config USB_GADGET_DWC2_OTG
->  	bool "DesignWare USB2.0 HS OTG controller (gadget mode)"
-> +	depends on ARCH_EXYNOS5
->  	select USB_GADGET_DUALSPEED
->  	help
->  	  The Designware USB2.0 high-speed gadget controller
-> -	  integrated into many SoCs. Select this option if you want the
-> +	  integrated into many Exynos SoCs. Select this option if you want the
->  	  driver to operate in Peripheral mode. This option requires
->  	  USB_GADGET to be enabled.
->  
-> -- 
-> 2.49.0
-> 
+The fastmap VID header is embedded in struct ubi_scan_info. During fastmap
+scan, the header is copied into struct ubi_scan_info, if valid. The former
+code mixed up the amount of copied bytes and copied more bytes than
+nessesary. This had no side effect, since the affected struct members are
+uninitialized at that point and overwritten later.
 
-PS:
-This might be a bug; I can't tell.
-Even so, it should be merged to avoid build errors until someone can take
-a better look at the driver.
+Limit the copied bytes to the VID header size.
+
+Signed-off-by: Benedikt Spranger <b.spranger@linutronix.de>
+Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/mtd/ubispl/ubispl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/mtd/ubispl/ubispl.c b/drivers/mtd/ubispl/ubispl.c
+index 9face5fae15..0143caa051d 100644
+--- a/drivers/mtd/ubispl/ubispl.c
++++ b/drivers/mtd/ubispl/ubispl.c
+@@ -779,7 +779,7 @@ static int ubi_scan_fastmap(struct ubi_scan_info *ubi,
+ 		 * that already so we merily copy it over.
+ 		 */
+ 		if (pnum == fm_anchor)
+-			memcpy(vh, ubi->blockinfo + pnum, sizeof(*fm));
++			memcpy(vh, ubi->blockinfo + pnum, sizeof(*vh));
+ 
+ 		if (i == 0) {
+ 			if (be32_to_cpu(vh->vol_id) != UBI_FM_SB_VOLUME_ID) {
+-- 
+2.50.0
 
