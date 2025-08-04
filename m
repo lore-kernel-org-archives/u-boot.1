@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392C5C87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 21:54:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E14C87FCF
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 21:57:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBB8A83FF9;
-	Mon,  4 Aug 2025 23:54:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A81983FEC;
+	Mon,  4 Aug 2025 23:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ohR23zlH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fK+btbGu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0895583FED; Mon,  4 Aug 2025 23:54:32 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 75B7583FEC; Mon,  4 Aug 2025 23:57:26 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA96883FE9
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 23:54:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59E0483B1B
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 23:57:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3e3e4c564ffso32184525ab.2
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 14:54:29 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-8818a5ba63fso37360939f.2
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 14:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754344468; x=1754949268; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754344643; x=1754949443; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=oj00U459fv75J5wso52WEca0eopORwbgTxfzvXiT7RE=;
- b=ohR23zlHBp8WhZFod1Iyh2Liw/t/Mv47CZzAw+hKTw3N9UFeH8mT/q0h2P/F8D6k20
- XtP2vWUp0uriVZENJvr+zHUgq0tuDbINRZtPrjkD9UZBYPykgwSca02gMiJcyz3mBjKC
- 90EDC/HkS8+qZpZ7YH3LYt7yZXloAJILDpCOI=
+ :reply-to; bh=VTMZU7mvqq0WS+Us128MkpQ8XXoHprAqMn6peWAOHQQ=;
+ b=fK+btbGuCYJvLHUgAbOwCHxVYFD7gKHsE5+Pv9sQantkbgXn+ZfzAgWRDvvtqb3kaa
+ X8kXCGyOUyiUcT5XM88NZEw9W5P8NLD+ewELNPTSYa+hyQsnY2X70O5V6+d1/PtN87Vw
+ AE+ZeH4Bvoap6PYX6xlPXvNfVZTk5/6JnKjHY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754344468; x=1754949268;
+ d=1e100.net; s=20230601; t=1754344643; x=1754949443;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oj00U459fv75J5wso52WEca0eopORwbgTxfzvXiT7RE=;
- b=eWaUDgbFPrOaUkC5DvZmdRAKwi1sz7UCycb2IX9Nfhnz98rLdsFLkYCA6ZhISW3oVZ
- TuvOJoaEFfVcpJ9Bpsvi6aMMbFIVOZWcX8QSuUJTWKmVNGANH9gU+2UFOauERBQUUK06
- 310FBpDzoQnMlXbbpyvPK0u6AhBiLr7XyI2W9S7OhfdKG/tuBi6lrBhlsRMuWICkL+eB
- Qq6DCOmZNxiweW0PZU8Bthws1RkBxSNSes285EhbYdkENBjfZVeI2bxRnNe6E+2QjWTr
- UgsvsZEpBD053NOHCZxVLhJJtweg7v4hwLBkd4b35B1ikYMnSiuqJ8RIQ4Wv45T0uzIv
- XL8w==
-X-Gm-Message-State: AOJu0YwZmUTgHxEecoZGr/Jbm5e1TXeD16slhdPnUqJ3FhsKjUAH26EF
- AjRHCriutrUNateLytFlYEEpq4/tpjgyRgo3XdzrzPRxu8c2qIxKTxffCRt4Q4gM0RmymTc4hxL
- qfYFXszs=
-X-Gm-Gg: ASbGncu+DulNayTqm/5SBRvKXToGD3GvWW2dO6Ii+Rp1qlZhi8fdn4s7E4/4zRUguWy
- c8aDlP/JAHdK0Ht+1cXYImetu82OURONbUULsbx/c4VEazB0lyaCXCE/IPYkoMDbd7l7jboB3rt
- X6sjpugSlJNcq3/d7ADKAhYnaOYWr1W7veCfy/Ej2DZbdRIkYCeG1pilrmZ/FcGbQbQftwWKpod
- oq7r/VEM9XArg72eaC5fIO1esU1VwwUassLY1INU6vRtxXr2WCTS+kK0c6VihQAPl65gexJ8NBs
- YuaMocbo0pQTARdEfUPGpDAS3k8PZ9Mi7RVjvkgYd7LykWoyo12mmwlN/WMJXmmpxzGPgbIgals
- QoNjiqh6a7ZWJ108JGyLIIURcuHJJcLwQtPjJKAlOosK8mbJsuFvNthcSD2ATJYfKBY8P
-X-Google-Smtp-Source: AGHT+IFDw4C+izul8hG/6DOgIczt22ytqX/BoRz+l9ptt7gd9Y9Y5bpZYwsEMu86jnYycK96oqCTIw==
-X-Received: by 2002:a05:6e02:2683:b0:3e3:d515:cf98 with SMTP id
- e9e14a558f8ab-3e4161cc26amr200756105ab.20.1754344468487; 
- Mon, 04 Aug 2025 14:54:28 -0700 (PDT)
+ bh=VTMZU7mvqq0WS+Us128MkpQ8XXoHprAqMn6peWAOHQQ=;
+ b=O0pLBM2vt5wfa+F0jhthsKxHFeRWAuvrAx43SHouMXYT4J6/OuyDU47TK/mzc9od5E
+ GuASUmimY3SWNLTwF3iUE0PB+tkuseicEXMccqOTLYoPnIXa26uISLdZw7qcDq3zA6LM
+ 6wLyPWKZe7QzJgRux562bein3eFpas1MhikIAFhqW2mpzdhSidki7UXpQXlz/7tyTmBy
+ y5Ki15OscOgxzrFUoFo2PBP9D74CuQnhmNnLiQVVKy5Dx4dMy6j7jDJBN1Hx/4DuvUjl
+ lo00nhbNyWvSYKH3vB8u2ae1adxTSoDUKO90s3AIm1GtWKP4NZfwxaoGyOG6jb9E4+3+
+ /Bkw==
+X-Gm-Message-State: AOJu0YzpzpyKXQSPxTYQAFUEtTEYq5rQZpjffCOgJ8t6iGkTwWmX8eeW
+ Cu5Y4xV6F+/LzkU1SjA3V6TwbHouhgoiwirWcpJ8gXngLT6XXpclJr7rwTY9vXbIiAV0wx7m3Ot
+ 6NkC5g4c=
+X-Gm-Gg: ASbGncuIPvKR/OegKl2cOWysLERg8nfdDGxbsuLfSdTCSw5AHA2HyhYoGQDfqWBW5u/
+ Bde9vAFVhSPGCdZNgpJh3E72aPWeHui9B6c6/tXExDrBDVZHJ8I00iKBicPFoGv3hGKOyK7XSgr
+ xE8Kd09z/Ojpe5zVCuhRHUt5ggPvygcY5Fb8R8M7JOVogHyycn+GfSXLah0lv1mTbRMx49zwaFX
+ e16KVI5XFFZSNksKcMdZxAv3oQtwsyur0U66DBOjWa1MU2mgNT7mcTyDbqxCU615cEXRURQaWtL
+ V5yZVu4b8bSGVGA4mI/c5BTQMTjEMszx0ltXPYGthLWWpm6/ZjbyAKhhXYDii/x1zenugRN1sr3
+ 8Pp/bV/Nq2rqy9lo7NSP6eXeoWsEPKLbYm3tNFLSlmCAY2N3zWULsNSeiI7wUU1Bu0Ycu
+X-Google-Smtp-Source: AGHT+IHteBrAZfsayDmpGBCeepz4d6WSKpYGGUBSRSmuoNzj+LMeJA+44dRZ1AFdBeMjvQxtzUQetQ==
+X-Received: by 2002:a05:6602:d:b0:85b:476e:ede2 with SMTP id
+ ca18e2360f4ac-881683d6f4amr1632553039f.13.1754344642947; 
+ Mon, 04 Aug 2025 14:57:22 -0700 (PDT)
 Received: from localhost.localdomain (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50a7ff89f02sm1996337173.31.2025.08.04.14.54.27
+ 8926c6da1cb9f-50a9f677f81sm1066177173.39.2025.08.04.14.57.22
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 14:54:28 -0700 (PDT)
+ Mon, 04 Aug 2025 14:57:22 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] reset: Tighten some reset driver dependencies
-Date: Mon,  4 Aug 2025 15:54:25 -0600
-Message-ID: <20250804215425.1412704-3-trini@konsulko.com>
+Subject: [PATCH 3/3] rtc: pl031: Correct function type of pl031_write_reg
+Date: Mon,  4 Aug 2025 15:57:12 -0600
+Message-ID: <20250804215719.1413106-3-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250804215425.1412704-1-trini@konsulko.com>
-References: <20250804215425.1412704-1-trini@konsulko.com>
+In-Reply-To: <20250804215719.1413106-1-trini@konsulko.com>
+References: <20250804215719.1413106-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,49 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few reset drivers cannot build without access to some platform
-specific header files. Express those requirements in Kconfig as well.
+When calling writel we do not have a return value to check or pass
+along. This function should therefore be void and not return what writel
+gives us.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/reset/Kconfig | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/rtc/pl031.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index e92bb8a7c39d..74c267dfc4e5 100644
---- a/drivers/reset/Kconfig
-+++ b/drivers/reset/Kconfig
-@@ -74,8 +74,8 @@ config RESET_UNIPHIER
+diff --git a/drivers/rtc/pl031.c b/drivers/rtc/pl031.c
+index 855ee9134168..6f189bc503ef 100644
+--- a/drivers/rtc/pl031.c
++++ b/drivers/rtc/pl031.c
+@@ -39,11 +39,11 @@ static inline u32 pl031_read_reg(struct udevice *dev, int reg)
+ 	return readl(pdata->base + reg);
+ }
  
- config RESET_AST2500
- 	bool "Reset controller driver for AST2500 SoCs"
--	depends on DM_RESET
--	default y if ASPEED_AST2500
-+	depends on DM_RESET && ASPEED_AST2500
-+	default y
- 	help
- 	  Support for reset controller on AST2500 SoC.
- 	  Say Y if you want to control reset signals of different peripherals
-@@ -83,8 +83,8 @@ config RESET_AST2500
+-static inline u32 pl031_write_reg(struct udevice *dev, int reg, u32 value)
++static inline void pl031_write_reg(struct udevice *dev, int reg, u32 value)
+ {
+ 	struct pl031_plat *pdata = dev_get_plat(dev);
  
- config RESET_AST2600
- 	bool "Reset controller driver for AST2600 SoCs"
--	depends on DM_RESET
--	default y if ASPEED_AST2600
-+	depends on DM_RESET && ASPEED_AST2600
-+	default y
- 	help
- 	  Support for reset controller on AST2600 SoC.
- 	  Say Y if you want to control reset signals of different peripherals
-@@ -223,7 +223,7 @@ config RESET_ZYNQMP
+-	return writel(value, pdata->base + reg);
++	writel(value, pdata->base + reg);
+ }
  
- config RESET_DRA7
- 	bool "Support for TI's DRA7 Reset driver"
--	depends on DM_RESET
-+	depends on DM_RESET && ARCH_OMAP2PLUS
- 	help
- 	  Support for TI DRA7-RESET subsystem. Basic Assert/Deassert
- 	  is supported.
+ /*
 -- 
 2.43.0
 
