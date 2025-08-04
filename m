@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 532D8C87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 21:53:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A89C87FCF
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 21:54:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D881583D40;
-	Mon,  4 Aug 2025 23:53:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D35383D40;
+	Mon,  4 Aug 2025 23:54:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lty3oRo0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jj4zLY2j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55D9883F56; Mon,  4 Aug 2025 23:52:59 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id D35E083FC4; Mon,  4 Aug 2025 23:53:59 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3667583B1B
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 23:52:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8343483B1B
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 23:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3e3e926fdeaso19827825ab.1
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 14:52:57 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-3e3d7b135c2so62038145ab.1
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 14:53:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754344376; x=1754949176; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754344436; x=1754949236; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=2Rhr07X4/Juf99f8Vp6zurj3LfMSrihS0nxCw0Qtr2E=;
- b=Lty3oRo0JS5Ck6Tx/naELXGTMrjnQ27ggjwJX+UkwrlcREALYh6m8YFREpJQ4fybbT
- g9hRo5xx/HxD2O8HLfwVqFgq1FyE5WIkduUX4RBYW2DjcWK1YpVRppfT8VOfPglyKSM+
- cKG52Ro46SDE4Iz2xy1PLzb48unBDxA4ATsOs=
+ bh=LJ1CIpEJp8jG54CAYayWthmjr+ep9+tSUEIirgtyhc8=;
+ b=Jj4zLY2jS3fBgDMhNpbH/oiPTZ/PU5+3zzjucxYlMy5jDyPtLfRFmiWkPIWlJjzpLk
+ Ike/EL/f2IcWyf4BnIsUqgFaVbD7jvLmmyMXJ+REr99YMqWISdfXeUL0To+uOS9q4asL
+ ytWWjBDLTFkmBF3fdv+OAXDhijTyoLakDe2XU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754344376; x=1754949176;
+ d=1e100.net; s=20230601; t=1754344436; x=1754949236;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2Rhr07X4/Juf99f8Vp6zurj3LfMSrihS0nxCw0Qtr2E=;
- b=P5V60vauFObNLhDZgecrpt+DhnOqrxYZRGN5zVDdDsI5jzTlVACFUucyrrbOr7V8SF
- MP83U48RaQn7pRpofhoXai6eYEw2KfAvrFON/qbcaA6HqKmOjxmy9jkq5kaAq3uLIGLn
- L9k+kkl/6pioaubD4iNuKekeTAFyR2Yshm7PpuuIggO01d15lhxCp9fA9/lA8Kvy10Wr
- cVADwU/ayPCc7aGLCLLG4W5EEMnNdF7MnBqv0E7G2b42m3SixBnsvyMp5eSyyajhtyYr
- Dqt6XPnhLIAR2LePOkkmkgQpQFdPmuPRdIODCdpdKrcHiLdVjOYM+iltBcbIGC4153JI
- HQrw==
-X-Gm-Message-State: AOJu0YzYiaAetktUnTWRy+hTm6mA9BWIRMJIE8ZcaxX4DqVj7rxp2mcU
- C/4Ak4sK78nl+H1TSEL8zhjFunPeuRV2nDFhNZiuoA9VVWqWLdf8R6ynWBLDfc4iJj+pAtLWi7s
- PbNjG2GI=
-X-Gm-Gg: ASbGncu7zk8tm5koKdtOZXBxXDc3I5lMZmJWEGWf7g7Wmmt0A2Nclc54kalcTDFQ5fd
- sJ+hZnoj4pN0JBPnnLyYDJa6kzQEnHx5yBT7mxSmlwwSiiE9YaZFkK14cruzXgd7vyfW4KjIb3t
- xH+uQ1o3Vvvon5vuZRt9aYvaQhGGffyQyj88tXL/qap40si9dTkbuP1A702N/tuF0aeXiNtRQc0
- 7/3QTtPooMNJP3pFnkIsyO3bmEo1h3efcNs5z+XFuYjRtOW0TLFOPLAu23QQ+CIvLoiQWMm79cU
- 8stsBOZbi9ZNN33gjpoctHdOBJ7XbRXZevj/yF3HjnYPlBu/Uedgkxq+3e0/gcW+o3YseibXkBo
- 5qwPfRoQjVW4y6gjb1nVSQ3zyDevq+iRpGhQO9llelL+HKJQXyP8l3qzTPmuQ4udRaWEv
-X-Google-Smtp-Source: AGHT+IHFKw/cvcpAuipXCLgzY+lQzQQakNWLnBsKHlSazUJq4UmY9iaKeM4zE63WFueQMVvViTwM/w==
-X-Received: by 2002:a05:6e02:1f85:b0:3e3:e78e:4e0a with SMTP id
- e9e14a558f8ab-3e41610d65cmr223392975ab.1.1754344375892; 
- Mon, 04 Aug 2025 14:52:55 -0700 (PDT)
+ bh=LJ1CIpEJp8jG54CAYayWthmjr+ep9+tSUEIirgtyhc8=;
+ b=lDU3eHJfRMfkwk7GuFu8ULjnGDClVDxCkjuZIEs8zcvBmiBDuAqnvA6za7qer2c8qj
+ 4mXnKAXKGtqcXyvDx8JtO0BjSqxmzoTDXQ18CS8zIlnhNKbwofDvSaOJE0EGxxHQw3/G
+ XcItQuLTlO7tRF/gjRj2s6oAwyd0zKwYWVa70qHRF44+COhTX6FABph3P5wwKXsrfcdy
+ /9acTyStBqjMZyGe7Z4nyVYtG83RsI8Q6byQHMjUaDgRFOYw6/7cWoitiPWB89Nxvp1o
+ yBOFZP0L+NZ9mCiMkXOx1Z7MiWfNw+pmG6w3PU9+YreKTqce45iRkD3TbCz6CNTg7rrz
+ nwOg==
+X-Gm-Message-State: AOJu0YxlVZhzwPMHny5sNw/qSzaOfmQL/zx8468XutzbjB26/ss35rI9
+ GXh2MqBI1mxsYK8rdQopQ1GTrgcW1oFxIupfnXs4v1io1+XwIQk82fzvdvxZTUxgpSn3huwzrHN
+ 2ka6duUM=
+X-Gm-Gg: ASbGncsIo1j32tQbfPYVk+ox3NFuQdvH7GpkcqMQ0FCNwWcbB//ZNJj/nc5crgdwTSO
+ 1sfEFI2irbjI3+GrZhHeIZYj9BDifJGCTVBUhSsEjr1kmMZWJNUbFbpZJ5Cs0uQ7occqZL5Um9y
+ L9YcE5KrivqqHjOh3HYwl/05Q9HXJTMm6/o2KBUSQaQuiCvaZfdNRx94D/6aqsZA78zQ3ooVkLc
+ xJBCQCqbBOKNwv41POEKfApc5Snyjik35CHpkNxal56/vwkn3DMQKlo8/1HsX91ndjQ9D91B/6I
+ ZQE6DIL2DA68glHeo+uCwOZomIck6JGxSisTbHW042p3xmPMhZgh8wkYKm388+LOl8WhXNuUX4y
+ oB2nAsoDa1rYKBtOeHal0ahuPpqiX8NJ/9sV04EEQi0ay6SXR2yQz3O4JzAcaZsw8J7Bp
+X-Google-Smtp-Source: AGHT+IGQwQz8XnjWSku3wfDABEdN0TbPzfZqY8abF6gkW8R50fZ1KWoaxihz7pZdqIsoJ/hGzB4V3Q==
+X-Received: by 2002:a05:6e02:2220:b0:3e4:1162:6761 with SMTP id
+ e9e14a558f8ab-3e416128e06mr216270275ab.9.1754344436190; 
+ Mon, 04 Aug 2025 14:53:56 -0700 (PDT)
 Received: from localhost.localdomain (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50a87e70c37sm1724279173.35.2025.08.04.14.52.54
+ e9e14a558f8ab-3e40297c3d3sm45998025ab.6.2025.08.04.14.53.55
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 14:52:54 -0700 (PDT)
+ Mon, 04 Aug 2025 14:53:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] pinctrl: Tighten some pinctrl driver dependencies
-Date: Mon,  4 Aug 2025 15:52:53 -0600
-Message-ID: <20250804215253.1412420-1-trini@konsulko.com>
+Subject: [PATCH 1/2] pwm: Tighten some pwm driver dependencies
+Date: Mon,  4 Aug 2025 15:53:53 -0600
+Message-ID: <20250804215354.1412604-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,75 +91,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few pinctrl drivers cannot build without access to some platform
+A few pwm drivers cannot build without access to some platform
 specific header files. Express those requirements in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/pinctrl/Kconfig       | 7 ++++---
- drivers/pinctrl/tegra/Kconfig | 4 ++--
- 2 files changed, 6 insertions(+), 5 deletions(-)
+ drivers/pwm/Kconfig | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-index 5e2808abc8a9..48119694031d 100644
---- a/drivers/pinctrl/Kconfig
-+++ b/drivers/pinctrl/Kconfig
-@@ -197,7 +197,7 @@ config PINCTRL_AR933X
+diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
+index e4c676d75c2b..06f42f699dec 100644
+--- a/drivers/pwm/Kconfig
++++ b/drivers/pwm/Kconfig
+@@ -42,7 +42,7 @@ config PWM_CROS_EC
  
- config PINCTRL_AT91
- 	bool "AT91 pinctrl driver"
--	depends on DM
-+	depends on DM && ARCH_AT91
+ config PWM_EXYNOS
+ 	bool "Enable support for the Exynos PWM"
+-	depends on DM_PWM
++	depends on DM_PWM && ARCH_EXYNOS
  	help
- 	  This option is to enable the AT91 pinctrl driver for AT91 PIO
- 	  controller.
-@@ -213,13 +213,14 @@ config PINCTRL_AT91
+ 	  This PWM is found on Samsung Exynos 5250 and other Samsung SoCs. It
+ 	  supports a programmable period and duty cycle. A 32-bit counter is
+@@ -51,6 +51,7 @@ config PWM_EXYNOS
  
- config PINCTRL_AT91PIO4
- 	bool "AT91 PIO4 pinctrl driver"
--	depends on DM
-+	depends on DM && ARCH_AT91
+ config PWM_IMX
+ 	bool "Enable support for i.MX27 and later PWM"
++	depends on MACH_IMX
  	help
- 	  This option is to enable the AT91 pinctrl driver for AT91 PIO4
- 	  controller which is available on SAMA5D2 SoC.
+ 	  This PWM is found i.MX27 and later i.MX SoCs.
  
- config PINCTRL_INTEL
- 	bool "Standard Intel pin-control and pin-mux driver"
-+	depends on X86
- 	help
- 	  Recent Intel chips such as Apollo Lake (APL) use a common pin control
- 	  and GPIO scheme. The settings for this come from an SoC-specific
-@@ -248,7 +249,7 @@ config PINCTRL_QCA953X
+@@ -70,7 +71,7 @@ config PWM_MTK
  
- config PINCTRL_QE
- 	bool "QE based pinctrl driver, like on mpc83xx"
--	depends on DM
-+	depends on DM && MPC83xx
+ config PWM_ROCKCHIP
+ 	bool "Enable support for the Rockchip PWM"
+-	depends on DM_PWM
++	depends on DM_PWM && ARCH_ROCKCHIP
  	help
- 	  This option is to enable the QE pinctrl driver for QE based io
- 	  controller.
-diff --git a/drivers/pinctrl/tegra/Kconfig b/drivers/pinctrl/tegra/Kconfig
-index 669d8e258e43..d2630289d750 100644
---- a/drivers/pinctrl/tegra/Kconfig
-+++ b/drivers/pinctrl/tegra/Kconfig
-@@ -2,7 +2,7 @@
+ 	  This PWM is found on RK3288 and other Rockchip SoCs. It supports a
+ 	  programmable period and duty cycle. A 32-bit counter is used.
+@@ -98,7 +99,7 @@ config PWM_SIFIVE
  
- config PINCTRL_TEGRA
- 	bool "Nvidia Tegra pinctrl driver"
--	depends on DM
-+	depends on DM && ARCH_TEGRA
+ config PWM_TEGRA
+ 	bool "Enable support for the Tegra PWM"
+-	depends on DM_PWM
++	depends on DM_PWM && ARCH_TEGRA
  	help
- 	  Support pin multiplexing control on Nvidia Tegra SoCs.
- 	  The driver is an overlay to existing driver and allows
-@@ -11,7 +11,7 @@ config PINCTRL_TEGRA
+ 	  This PWM is found on Tegra 20 and other Nvidia SoCs. It supports
+ 	  four channels with a programmable period and duty cycle. Only a
+@@ -115,7 +116,7 @@ config PWM_STM32
  
- config SPL_PINCTRL_TEGRA
- 	bool "Nvidia Tegra SPL pinctrl driver"
--	depends on SPL_PINCTRL
-+	depends on SPL_PINCTRL && ARCH_TEGRA
+ config PWM_SUNXI
+ 	bool "Enable support for the Allwinner Sunxi PWM"
+-	depends on DM_PWM
++	depends on DM_PWM && ARCH_SUNXI
  	help
- 	  Enables support of pre-DM version of pin multiplexing
- 	  control driver used on SPL stage for board setup and
+ 	  This PWM is found on H3, A64 and other Allwinner SoCs. It supports a
+ 	  programmable period and duty cycle. A 16-bit counter is used.
 -- 
 2.43.0
 
