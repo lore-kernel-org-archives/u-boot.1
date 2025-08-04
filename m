@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71837C87FCB
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 16:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B0BC87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 16:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9446783F9D;
-	Mon,  4 Aug 2025 18:04:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E169683FAC;
+	Mon,  4 Aug 2025 18:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qb9yZpt4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eZiHU+IL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7133B83FB0; Mon,  4 Aug 2025 18:04:04 +0200 (CEST)
+ id 45AF183FB0; Mon,  4 Aug 2025 18:04:05 +0200 (CEST)
 Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
  [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B611383FA5
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 18:04:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87D7783F9B
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 18:04:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
 Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-458b49c98a7so18432505e9.1
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 09:04:00 -0700 (PDT)
+ 5b1f17b1804b1-459ddf8acf1so5720995e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 09:04:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754323440; x=1754928240; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754323441; x=1754928241; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4qGV1ZSTuQgR3+GHiJIy4FQrdLh0X3hvp+ApzsuMSwI=;
- b=Qb9yZpt4ZJ0aJn1B/pZUTOkS+5/B7vBAp1hssN02CwvC8sTO5HlJAFd7kaiL8ZAMWG
- PcbMFTIUnDokOqXmGbrEvKS9+eF3Ilney6jcRVGN0eWsQ0H7AePnxecRFl5RAtiZfflp
- OwFP6hx90GDPBv4rL+r8j0QDzaVyMRaR1paSU53rYKcQPu/zC5z/joXGnxi+vKc4f1zu
- QS+XT9zgk8LAFL8YGw/oEt0azvyrApy0TAuJpl+1w3D9JKGCYGT37h1z49lWTT1IwN7b
- LqaV7gHJlL9vLoUZ679k6OwQtiOIEazhS9DIBpk9g+Y/xhkrAdzGxnDk545hzFD9Nsd8
- +i/g==
+ :reply-to; bh=LP991muNl3sUVqvs1fubDd4ZFYCIOC3T3fhZ7J9unHU=;
+ b=eZiHU+ILWFbowTMvD+diEXE1yF5fj+kseEXlZqpxE+qh1XqOMywPWFM4hF54hhAEWj
+ H6CnEFeWccDapke/KaSZsYF2L1W88dvzQBOXl9ThIf5WZO9dmbybEcqoTgOPZhsuzmqz
+ 99MD7M1SNMQ9vz4RgZFXUNx/zoWTHCSCOWo3zv1LUOiZSL5TbyLgRRCtEglQUF7Hu5AZ
+ XHUc5puilDppIK54YhM13OYlUI1JiOfNJH5ru5aI1WsjL8MWDdHZWA34q6ApyZFFsp9V
+ hwOp9Hfb5CTM9XWyHE88bM70XmF3sq+KZdj/W9FOlOgv9AxvA0Fg/ak9OY4cegPuuIz7
+ rT9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754323440; x=1754928240;
+ d=1e100.net; s=20230601; t=1754323441; x=1754928241;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4qGV1ZSTuQgR3+GHiJIy4FQrdLh0X3hvp+ApzsuMSwI=;
- b=DcWKWVIk2ftAwe8WQIppwS+xHDXcu9CORKCQ7wMKZ2LNS2QZVzR2iJuRSQLOcdhFz6
- tvdyikX3A4rBNXMbo7klVxII4FtG9zLjIxmDt3jaOv/ngbhPtjpu4azzzm/6hnjMANIP
- 2L2Ph0lGWqOa5IiO6538h7LJjYZeu5uX+GdUACBjo+4TpM5frBhJ9peacF1vFUI/CXgr
- pJOTpxlkodwUdpOVidNh/AXLlIVjmsPVUJLxnKCUKS9OxCJYJ8LCQqUzkEeyANLv4OOg
- ggm0iz5XsxpzlcSuOuEikNNDefQZLZTwjiMBICfEw82XTU4IJN/lEcZeMpgHQa5qFN+V
- RIEQ==
-X-Gm-Message-State: AOJu0Yz/k/wd5QHc0/Ga9bEYtzd4bsqmk7PQjzGgSxpLowuiW3GZ6Tzg
- QwFLUbTcmYIgydkEIgSnqz5X5/1IwDyUNp0OaX2GuRXwg3jdSiXzDosoW8zQqVltAdk=
-X-Gm-Gg: ASbGnctJ78v8u6fBOBKTVhTBwj5qvQz+H9t6QZfLLqSSAh4S8NYHj7KOLN3S1fQ226B
- y5KmSXyiR0n1pMjC5YmHdJsJzH20Wdszsimm2+D6oxfhgYYs5U3ys+x3C4zrty0sKxWwhRkzqHR
- W4XECFxLaiDYROC3Qlx0AyvPf0MBo8Isg99V4ZfGLa6AQavblev5mDMEhuEqR/GinhD7zr3/oTJ
- Qa2MnLzxmTbpzt2f//HN8i8GsmKtgddQco2hnPIaAKXxHpcJXBlgRQ49SwgpzM9dlyb8fUctoxk
- nsPI8C6v/s7cfX01q0/7twNsUq7N2DpXQGsyKgM5/yaRor09Gp7lw3rnbQjWT/hWosmo7kI+PAi
- EVnHzh8+5sZdpCIYIj5BhqeCe16PISJ54tUU3du4fahe4L1R/GZdRYA5Ueunw6w==
-X-Google-Smtp-Source: AGHT+IFNKUX0SfE4QV9nnWo2qi9doqVeP5hDyQLdI8lqFmVCfJiuxHNGH1X4mlGAQo1tlTWAAkf7EA==
-X-Received: by 2002:a05:600c:3556:b0:456:201a:99f with SMTP id
- 5b1f17b1804b1-458b71aa392mr83569925e9.18.1754323440084; 
+ bh=LP991muNl3sUVqvs1fubDd4ZFYCIOC3T3fhZ7J9unHU=;
+ b=mKRN5h7lfJBYZNp2XLjsGEC7yoc0XT+pmCEJaMg57fqZeKKNKQTsPEgl+6MSnCEIfE
+ HYiTIZoLOm7T81oLV1G5Dnb5h0Yo4TXc1EtwsvTzh0MU96YX6eVwMnUUgrp79S8YLm1B
+ I7NVDkUfmwf8N9otYx9QNDffoITza5sRDL0V8NV7nADHNc5iqmKyx6fw80GestNtNlr5
+ jpIz91gU2KUm1+OQg8g7dtH3fEtGUi2n56Sc9t1kvfAcz8jC4SWqGsCCuwXw/Ac41gdp
+ uyeQ/Mwi6dqmQhT7+B/Ec5LVRuG14KEvDXW3kdnGpC6Ns76o0aaJp+dwRWyriCliEnaM
+ BQZA==
+X-Gm-Message-State: AOJu0YyTFlkits4TOtea3lR57mnqv1czljrrAQT1f+Ef2bNhGEJ+RFdz
+ sYGNW1qgUU5Cvbc5RZOq0i+7K/LurIMiRRQPVhLn+Hsop1A5jhGmA+ONWalovK5Gxr7Zaua8D+9
+ xoTo4
+X-Gm-Gg: ASbGncu6xv5VH3AjFCQfN/qpGtTBUiakRhP1onK+Xbr1IHswU1lx2Vjy5MbIJmOvt1g
+ aMjifqeTuSHPO6Fajy3aPKV/K5wTLnnjx5fwMDD9oFj7NXvpGoOEXfsLsyslzt3nla9Ccl4GG6Q
+ o4TdcE/Rxu2uqKBHi0e6I9ALFN/REt4MYOlFEhk5m9KbV/ok3txYunqgODOoB4lcV22svPKwKaI
+ EY7G98NiBQVr4TVE3Je2qyfkyziokKIiOwZvXWnX0+oshcrLgFrekw0xC6weJzv0V2Fl0+5LqM1
+ Lkz29cJSjQj44MBit1U1Uyt6j61f8JQiRO0qEWBd7HxLraYcG4SKpDXJFlLPNVOLMtF4AoWPLh8
+ 6VBBwPCv7BVdB45JlLoerVOixvBo8kYyWdQM0yZbC5yxdOxAYEu4=
+X-Google-Smtp-Source: AGHT+IEWKyCflWVVMIPsJvQniOTwqI8C2DpUWpSNL2GTzumktXFFJj4YOA3fkIcbPESFWC/rwyyiuA==
+X-Received: by 2002:a05:600c:4ec7:b0:456:1b8b:b8c6 with SMTP id
+ 5b1f17b1804b1-458b69dbe47mr83823775e9.14.1754323440869; 
  Mon, 04 Aug 2025 09:04:00 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:1ba5:34a9:feb8:a948])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c3ac036sm15901598f8f.15.2025.08.04.09.03.59
+ ffacd0b85a97d-3b79c3ac036sm15901598f8f.15.2025.08.04.09.04.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 09:03:59 -0700 (PDT)
+ Mon, 04 Aug 2025 09:04:00 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 04 Aug 2025 17:03:58 +0100
-Subject: [PATCH 2/3] net: fm: NULL check dev before dereference
+Date: Mon, 04 Aug 2025 17:03:59 +0100
+Subject: [PATCH 3/3] net: fm: Correct test for timeout
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250804-net_fm_eth-v1-2-994a4652fe17@linaro.org>
+Message-Id: <20250804-net_fm_eth-v1-3-994a4652fe17@linaro.org>
 References: <20250804-net_fm_eth-v1-0-994a4652fe17@linaro.org>
 In-Reply-To: <20250804-net_fm_eth-v1-0-994a4652fe17@linaro.org>
 To: Joe Hershberger <joe.hershberger@ni.com>, 
@@ -99,37 +100,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In fm_eth_bind there is a dereference of dev before it is NULL checked.
-Add a NULL check before the first dereference and remove a later NULL
-check that is now redundant.
+In memac_wait_until_free and memac_wait_until_done the use of
+post-decrement on the test in the while loop for a timeout means that
+timeout will be equal to -1 on exit in that case. Adjust the test for
+this expected value.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/net/fm/eth.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/net/fm/memac_phy.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
-index c83b789693a..f0e7c0eca42 100644
---- a/drivers/net/fm/eth.c
-+++ b/drivers/net/fm/eth.c
-@@ -727,12 +727,15 @@ static int fm_eth_bind(struct udevice *dev)
- 	char mac_name[11];
- 	u32 fm, num;
+diff --git a/drivers/net/fm/memac_phy.c b/drivers/net/fm/memac_phy.c
+index 26425d94ae5..1ad3c053593 100644
+--- a/drivers/net/fm/memac_phy.c
++++ b/drivers/net/fm/memac_phy.c
+@@ -46,7 +46,7 @@ static int memac_wait_until_free(struct memac_mdio_controller *regs)
+ 	while ((memac_in_32(&regs->mdio_stat) & MDIO_STAT_BSY) && timeout--)
+ 		;
  
-+	if (!dev)
-+		return -EINVAL;
-+
- 	if (ofnode_read_u32(ofnode_get_parent(dev_ofnode(dev)), "cell-index", &fm)) {
- 		printf("FMan node property cell-index missing\n");
- 		return -EINVAL;
+-	if (!timeout) {
++	if (timeout == -1) {
+ 		printf("timeout waiting for MDIO bus to be free\n");
+ 		return -ETIMEDOUT;
  	}
+@@ -64,7 +64,7 @@ static int memac_wait_until_done(struct memac_mdio_controller *regs)
+ 	while ((memac_in_32(&regs->mdio_stat) & MDIO_STAT_BSY) && timeout--)
+ 		;
  
--	if (dev && dev_read_u32(dev, "cell-index", &num)) {
-+	if (dev_read_u32(dev, "cell-index", &num)) {
- 		printf("FMan MAC node property cell-index missing\n");
- 		return -EINVAL;
+-	if (!timeout) {
++	if (timeout == -1) {
+ 		printf("timeout waiting for MDIO operation to complete\n");
+ 		return -ETIMEDOUT;
  	}
 
 -- 
