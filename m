@@ -4,91 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B45C87FCF
-	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 13:46:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7EDC87FCB
+	for <u-boot@archiver.kernel.org>; Mon,  4 Aug 2025 14:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A9C583F70;
-	Mon,  4 Aug 2025 15:46:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0EECC83F7D;
+	Mon,  4 Aug 2025 16:15:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sfCsSYVe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dpyBgJym";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D547883F72; Mon,  4 Aug 2025 15:46:48 +0200 (CEST)
+ id 13A3B83F7E; Mon,  4 Aug 2025 16:15:57 +0200 (CEST)
 Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
  [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBA6983F56
- for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 15:46:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAC9983F7B
+ for <u-boot@lists.denx.de>; Mon,  4 Aug 2025 16:15:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
 Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-459d7726ee6so7797455e9.2
- for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 06:46:46 -0700 (PDT)
+ 5b1f17b1804b1-459d44d286eso5080295e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 Aug 2025 07:15:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754315206; x=1754920006; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754316954; x=1754921754; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=XkcL2iDYXjiPwX7CEmZUqOYj/vKKn3BrHxMg72NJhEs=;
- b=sfCsSYVeOSIPHp4Qoi970pHzzovVnSBYxew6+MYks6VkOuVLtw+mwBAa8tbgPVtuh8
- Z8PAAlPC79btMFz0fFa/1joxlVUf58SXVxahPPXdKgzvfSmMR4ZmA02HxJqNLbQNmWjP
- 8EgaapG/s/PTjI6BFPtLtOiSXe0rtg/7hTsD+I/43+KOIPIXjuwVKbBy+HliNoyP0T/7
- eNMBdu1O/ivGUGmDP0lriyrFPVItK7Xdetu2pS4Dk0MLR1PyuSsRt/wpxP7sYFUBEIy5
- uCFkZ2bnIYEzBOIdKw+6uJKQgw2/epFshAE8Zit5oO9cS76f4wTzKA2hfJzfJQ6FGMiw
- /Zig==
+ bh=0er6ACDfQmR/FgIgcm0Ne3oncNIr54fc4FXT1qwdDAg=;
+ b=dpyBgJymKR6TAraCVunMEQpXfrtIpramb16jVBGMLNvUBAmAzhCIODikc8oOqFKnyY
+ k5xkYvOzUi13Wxct2JqiwkvN16x3Q4OWDSHlb+RlSMEwI4ytGb8ftLdBsWMldQj0Kl6d
+ k7oC2JdT74Y+8ThKzXDk7OBMn4lH3K4CfqYqQFjCyy9bb27gaCYDEuwIRNSbPKyjJRmm
+ 8zrFZcL+1nYkwWHMYaS2vyQxd02RXN8m7GoPkPXSQ+ZVyfWASmDiuOT12u0rBqi+3UC/
+ j+vL5QlpWAzI+Vt6umT4/dfH2KmknHN6C7KYka5hZ31TAfg8UI7rLxg4LHarcxWOSPm6
+ /ObA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754315206; x=1754920006;
+ d=1e100.net; s=20230601; t=1754316954; x=1754921754;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XkcL2iDYXjiPwX7CEmZUqOYj/vKKn3BrHxMg72NJhEs=;
- b=Vx7SGv9kxiiEkSx7YoXJmmHu1KCngjq58yonmhjh59nHujoZC5mVhWC0Z/U41dgcCN
- zSVGFTXWoX5UPc9xH7eDDo1p8oCg06czo1/FNq4AkBLfD4xdpvBSP3oUYNHsEvWEvDUU
- vJkJTUSBeT3/XeJPSRSPGzvyBI6H05DEg4HuOtBVRmGCdjfGfVjNLx3Qp/0HDSdnpB8P
- F6/yy4ZyiJO20XlnKBuMcBRgCn+zvTuWlo4o1TmigchBECfTZ2xJaFBize2CDTkjWYSE
- /SRNakQzfJfgC9xKoXPWaIMSRPpUlOOfqRmAT8DBrIKGWEXQDzb+GfaR3PBTfWHJ5p6n
- kgww==
+ bh=0er6ACDfQmR/FgIgcm0Ne3oncNIr54fc4FXT1qwdDAg=;
+ b=DyUhU98RajI8JspBgmXuUwlUcTzzDYDQx+1LL8EDq9gQ6f0Y6F8uWahfFPxzIHEA3/
+ 8rM3/VfdDsTGP2mxINt+LY+UcG0D11PQ4Q/VbZfM4Lhy2xYSrbRdmXABGQZ6OqXpC7u/
+ uGs3H/LjYioDMlmYn089LgM1bq5vLbkXrzqv3HZBVdayAcUuYfW0WhySA3AqWdyU5po7
+ r3KO71JAADA+Qt7dTuo/f4dQCcQVVlhxfDb++pz2tZk5GzNPcp6nAofFmITARQ3hpogH
+ wuYXqe1bnWFRJMiHMI/212GC3HwG89bcg8ySu+w5A1YVnhoRzzt/gQ2LOpTEbeA2CQnc
+ SsnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhYTuSXje36Eeatsfc2l73K6v3ohY8VSfYBpuR45C0J0bb0a4lKMPbGzz2nVvvWW9qMAveHZg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDOP4henGRlCUbuDJhc6JIHNlp8SMXNt3KadaR8ckK+nndMvDV
- 6lru+mC973iB5mgJXfFxScLJAv8jMc+pt5vV9oq59kC6CJVy+Qq3cxgmKb/GBxfu5fg=
-X-Gm-Gg: ASbGncsDci71OKMz1ohxHbS04n9mMHDGDBNyT+3D6wipM4i/SQ0oRf2DC2SZXl20OI9
- F6kvKY04Z82ei4InVyMSr52996uMdVNAwSsyOYsuwKZ7Lcf8djmBJFOoaz3sXc5QrsSRw6HhsBy
- dgM6z7MpvuUVSWE26jWEGkzN/hwaUTsTTRR3CauRuk4As3Ip+pk8KlZld5GBRc57V7pI8SZ6zMK
- Q/N196H57WrAge2kbfaWEts5lqIeSeqk632qTmsMVOxyp7Yht+WCQmhLaOi+8FT9DoUYUZ4shBj
- 1Sb9KZusCW3GnjIptAqyEpoRHxO2BXlljgZANqhW6vzphB1FYCqWiZUtydaqm/ndgqKgPyz1i+Z
- TPnv0J0AG8nzoUmy/Qy4oXqaz9OOhahpamrli0dst5O7flFoCXtNcdNa/0C06xwVrXu0=
-X-Google-Smtp-Source: AGHT+IGqah9GJoiGgz0X3PbiLgN5W4dIKATk1JknySVRfWbtZ9YRr7uqITBXtc5S5mmYW+D9WCmdcA==
-X-Received: by 2002:a05:600c:3b03:b0:458:c094:8ba5 with SMTP id
- 5b1f17b1804b1-458c0948d16mr49358275e9.12.1754315206190; 
- Mon, 04 Aug 2025 06:46:46 -0700 (PDT)
-Received: from [192.168.1.159] (p4fc3de8e.dip0.t-ipconnect.de.
- [79.195.222.142]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459de0d4cf1sm21954635e9.13.2025.08.04.06.46.44
+ AJvYcCWmwD6QCu/1DgAFRkZ07FD+CgkxroTfG2KFjahxmgsbt6mdz0sp9LTewlmZBUVvD12QWHsTGys=@lists.denx.de
+X-Gm-Message-State: AOJu0YzAHLqmIfDBSXhi0bikBtu68sehUP4nC2reJ6luLyCExIE7lKCu
+ bvouryg1Dj5GQrITGhL8gtjpnNxX5Ku6owtw2sMyVSKtHnSFVMeFoTYW6Vq+VpsXlOE=
+X-Gm-Gg: ASbGnctJd+NssL5t4RIvbhDGxQzw+C+UY8o48DfEkV/vZ/WWV0hPvP5M66uFCYsppOI
+ OENDmNbpHuzLjuqd81kFpqYwp+P2CMvW5G/jMhhjFCZPjARdQD/2PhidnMejiWjkUKKt/Y9H2Lf
+ Cv2B/C31GkUcpzFjZwp7TrsAJ4eZaelZDc13nD7kD8Fw0M1oY/F+Fhg+ZqPzU0b6Ilx8RGmosSv
+ YDKzNYISDWupcdxBD3Q1xLxLERjcD7/LNmGdYkAS/b7G4d6sCYbJQTQwT4pprrGudqKQIP6C8Ml
+ aGLrJc3q9NkJbuWa552X6V3XRV7lvN1hpPRpxT977Ri65T/bIDOjaIEfh8VhDdCzR6KyrrG8RLg
+ d37iFZdcjlRbjyMpZHkFv6NdenM+L8dlKavR/B1TwXLismBNhATRpP72XTmbaAxvS07RmKWSYY3
+ OrwlkcYmiWzzrp
+X-Google-Smtp-Source: AGHT+IGLlwdRiXQwLjzplYB8HBlXNgddPN9WBB6tGVod6QsjYpqaasRe1GItcyJjlF5Th5Y9d0pN+w==
+X-Received: by 2002:a05:600c:a30c:b0:43c:ed33:a500 with SMTP id
+ 5b1f17b1804b1-458a222c260mr108925385e9.10.1754316953978; 
+ Mon, 04 Aug 2025 07:15:53 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:1ba5:34a9:feb8:a948?
+ ([2a0a:ef40:f9e:3c01:1ba5:34a9:feb8:a948])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4589536acc9sm215884905e9.6.2025.08.04.07.15.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Aug 2025 06:46:45 -0700 (PDT)
-Message-ID: <cadf1502-9d85-4fdd-a70a-e8318ca1282d@linaro.org>
-Date: Mon, 4 Aug 2025 15:46:44 +0200
+ Mon, 04 Aug 2025 07:15:53 -0700 (PDT)
+Message-ID: <2cd6f80f-310a-4f8c-8089-4e9abd1bd04b@linaro.org>
+Date: Mon, 4 Aug 2025 15:15:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 2/2] configs: Add google-pixel3 fragment config for
- Pixel 3 / 3 XL
-To: David Heidelberg <david@ixit.cz>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250802001359.2122103-1-david@ixit.cz>
- <20250802001359.2122103-2-david@ixit.cz>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250802001359.2122103-2-david@ixit.cz>
+Subject: Re: [PATCH] drivers/mtd/ubispl/ubispl.c: limit copy size
+To: Benedikt Spranger <b.spranger@linutronix.de>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, John Ogness <john.ogness@linutronix.de>
+References: <d34b63c9-4fd1-46fd-a984-a22cc0dd3e0c@linaro.org>
+ <20250804133736.21846-1-b.spranger@linutronix.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250804133736.21846-1-b.spranger@linutronix.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,46 +104,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 8/2/25 02:13, David Heidelberg wrote:
-> Introduce a fragment config for the Pixel 3 and Pixel 3 XL.
+On 04/08/2025 14:37, Benedikt Spranger wrote:
+> The fastmap VID header is embedded in struct ubi_scan_info. During fastmap
+> scan, the header is copied into struct ubi_scan_info, if valid. The former
+> code mixed up the amount of copied bytes and copied more bytes than
+> nessesary. This had no side effect, since the affected struct members are
+> uninitialized at that point and overwritten later.
 > 
-> On these devices, U-Boot must be chainloaded via Fastboot. However, due to
-
-s/must be/is/g (be descriptive rather than prescriptive).
-
-> a Fastboot bug, U-Boot won’t start unless a specific condition is met.
-
-additional requirements added by google, the image header must have a 
-specific value for the text offset.>
-> To work around this, U-Boot must provide a TEXT_OFFSET of 0x00080000,
-
-this is solved by setting CONFIG_TEXT_OFFSET in U-Boot.
-
-Kind regards,
-// Casey (she/they)
-
-> which allows Fastboot to successfully launch U-Boot.
+> Limit the copied bytes to the VID header size.
 > 
-> Instead of:
-> $ make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config
-> do
-> $ make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig google-pixel3.config qcom-phone.config
-> 
-> Signed-off-by: David Heidelberg <david@ixit.cz>
+> Signed-off-by: Benedikt Spranger <b.spranger@linutronix.de>
+> Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->   board/qualcomm/google-pixel3.config | 3 +++
->   1 file changed, 3 insertions(+)
->   create mode 100644 board/qualcomm/google-pixel3.config
+>   drivers/mtd/ubispl/ubispl.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/board/qualcomm/google-pixel3.config b/board/qualcomm/google-pixel3.config
-> new file mode 100644
-> index 00000000000..2dc71c65d23
-> --- /dev/null
-> +++ b/board/qualcomm/google-pixel3.config
-> @@ -0,0 +1,3 @@
-> +# Pixel 3 (blueline) and Pixel 3 XL (crosshatch) will fail to
-> +# chainload u-boot on the Q or R bootloader if TEXT_BASE offset is missing.
-> +CONFIG_TEXT_BASE=0x80080000
+> diff --git a/drivers/mtd/ubispl/ubispl.c b/drivers/mtd/ubispl/ubispl.c
+> index 9face5fae15..0143caa051d 100644
+> --- a/drivers/mtd/ubispl/ubispl.c
+> +++ b/drivers/mtd/ubispl/ubispl.c
+> @@ -779,7 +779,7 @@ static int ubi_scan_fastmap(struct ubi_scan_info *ubi,
+>   		 * that already so we merily copy it over.
+>   		 */
+>   		if (pnum == fm_anchor)
+> -			memcpy(vh, ubi->blockinfo + pnum, sizeof(*fm));
+> +			memcpy(vh, ubi->blockinfo + pnum, sizeof(*vh));
+>   
+>   		if (i == 0) {
+>   			if (be32_to_cpu(vh->vol_id) != UBI_FM_SB_VOLUME_ID) {
 
+Reviewed-by: Andrew Goodbody <andrew.goodbody@linaro.org>
