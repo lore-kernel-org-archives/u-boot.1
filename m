@@ -4,101 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD0BC87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 07:33:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 480A1C87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 07:34:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61BF5832DA;
-	Tue,  5 Aug 2025 09:33:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CBB498340C;
+	Tue,  5 Aug 2025 09:34:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="klYTAdvU";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="tVRJN2Zb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1811A832DD; Tue,  5 Aug 2025 09:33:49 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 9D96383420; Tue,  5 Aug 2025 09:34:32 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20622.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::622])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C51F183211
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 09:33:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41C48832DA
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 09:34:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6F4B83F5D1
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 07:33:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1754379226;
- bh=YLuSMoIHe8yt+X7zF3wEYI41hrPoON1UTsSaTw1ZU8o=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=klYTAdvU8GC+GlWQLcKwoYiEhINfC5/t9mCt3iU5RnmAYhmXy9dAAwydS9OB6DgkC
- w9ZpvwiXcPOwjfNtzUgIPLb22TlorJ/3Y9IAwMlcy4lA9k5TbIcNy4k0HN+iXyHOBH
- etEdauzxydv5uGrX1+NRWBpsKUEERmuU6AnDUmCDqAyIArT8nrKBFmEawE8DkYu14f
- 6VRo26R8eisPMV8/nIV/aKSxQSizKbXyb8ToYz9k8OFCWSkFKfmmohifEYuVFR/0Zv
- 59SxlwLPlFHELXq4vFcox7Bje/tKNQNxSlW5eh73LwqK9zd2WWQiQOGIhZLlNxUBVR
- CgFrUeO1QEOYg==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-3b7882c0992so1774561f8f.0
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 00:33:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754379226; x=1754984026;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YLuSMoIHe8yt+X7zF3wEYI41hrPoON1UTsSaTw1ZU8o=;
- b=ELbEgQbj/HGzozecuDFNxb2Z6OB5uFodKjAfKeXt7nhnfDgDrrdDAZAlG2MCq+Mazv
- Xt6BRNopQXn1BMCapCwWztdMnkSMXijgRQYFZDuIg9eLK0pgZTIOEjSAJ1EnMjmosC9F
- 7k4M15yWlqU/c3jS/DAmstp0OVn88AgjAaLO14VhJij+LM6ld/hrgarpARW+FAsxOARi
- E3AwxSEjeMuEP6OIS3Gg2DXfGWPA0EqZauMrmrE3RQ/dgqEKk3YAK9VryoRrnLXOuaj0
- 6hEr2Z+T15scIH/24VbupD7zC+mWMv7djDYy3r1sTaDLZSgJGtZi5rkHztQeTQKHnz8E
- 5sqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX5MEfe/4FzqBu3XTbERdtG6ODMO180G/NW2ej31kRYgHSVzy7v5OBeW4Q9hTl6e0QOR+cAeJs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxwEu2IigzHKw9IFjOcA3oQHSwbzdhrFiPHZtCuW3gjhjjaJETQ
- 12HKYnYcSdlLLkMVTNvZBNBNf9n3M04qIlTSXU00ESNqHjz4vGItcbDgmateC/9zapGwzg5xmfK
- stSPOznvjo4rR1+P5Vvj+y/PgqSJnOY3TEuA1gXLqM6o4dL0cuCtumvX27j+r1U7kbU2fo20=
-X-Gm-Gg: ASbGncuPK8RptafMWhKz+pHxVglq72LWGKrKHD7jzSnTR8Pf6BbBqAXlwxACEMwgmDH
- WbjkmI8tpgFqNJed9KpaHw32EB3YZtQonIEMKJqzMANcPIfbZcJRGyBuyEFtR9ZTGzRiLnIGts5
- /JvfuO8mCZMWcZSOuSssD4Ar/DW+AoXClKU7u+0cEsf0QwilZMHzmvNGEN7VsF6fnbnPVYYbNCS
- hP+dMkIGGqRHPA6YWrSVK3GSlg8aS2O22RGlvPvrMmPEE4LEXwPuQEobAih4b0ooPYKMftrWpMR
- jR+FqVJrRrYD+rmRrP3dLrAoToqYIzbZh0gBQ4FZ71T5TblYloZ+2BUXtzWl/tKWpUMueNeZ7G0
- uBZKNj1K4L3iptheZ2nNVGXi+rqve
-X-Received: by 2002:a05:6000:146:b0:3b7:9c28:f84b with SMTP id
- ffacd0b85a97d-3b8d94aadb2mr7492294f8f.36.1754379225919; 
- Tue, 05 Aug 2025 00:33:45 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEA39ud59vaEzO7qiXMjk1ygxYw8LuuiB4ZL+odjLIjReTDvxnaWzyODTROXYsQkUtF81oaCw==
-X-Received: by 2002:a05:6000:146:b0:3b7:9c28:f84b with SMTP id
- ffacd0b85a97d-3b8d94aadb2mr7492270f8f.36.1754379225408; 
- Tue, 05 Aug 2025 00:33:45 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:32ac:980:4ddc:c784:159f?
- ([2a02:3035:6e0:32ac:980:4ddc:c784:159f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c3ac036sm17981820f8f.15.2025.08.05.00.33.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Aug 2025 00:33:44 -0700 (PDT)
-Message-ID: <60613f0f-d696-4f63-9dcf-afb709618a2e@canonical.com>
-Date: Tue, 5 Aug 2025 09:33:43 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] efi_loader: Support loading a ramdisk with bootefi
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Adriano Cordova <adrianox@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
-References: <20250805054614.5555-1-heinrich.schuchardt@canonical.com>
- <CAC_iWj+1siVWvxnVGAEksTq2AKWtu=1KE-a+kns3iH66J4Uquw@mail.gmail.com>
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RzpfYjPdb6ae5VFo8FHOUuSlWk7Z+CzItVz68Xie22j886NUH/2VFuRlr49wtYfQlsl7qDEYXoOfmfiQVOm6sHF5+tsAC3UZa+dovDnr0f270u5UnjgxLxfN89EhUMKuHcNCnuoV9pHDzt/c4thouVdNIV565RZIU9MM3nvRN3zOvOSQMQOcdx7Tj17+ExZSE7JsJqJ479JCWnKdJ9Qf0mdRGn+yjfWdrya/2UdyrDBpUs6jWrODzUrvf7a3L04moBb6RzDXQwX2WZNxGKQ/R0A3L6mZ6PulZ8z8ZbUNmq+elB9g4pRSaekxLMti8rjMB+u8i4jajXSJSK0mgH/0+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=czjasAeD4rKe/F40qa+ez7jbCJbV/bAvJUcJtndx3O8=;
+ b=L7wnmdgfHEiaIS94JJa5ne8ub6TtrZsQMVGvPeWdZkIpUe9+Hh9pdPcCEkVfC77Adlsv17HlNhecWt6vS2Ruo1vyrRkVFX/clL689v4nXOzwVOetl7AmNuewpFokYlp1FVhIL+Tbph/MPruKjapqIek0bPq9GKuh5NR/fzaPZckogS4k5w83pAXaCCScLZsYdxCOuZztYVDZVv9uVeRUK9mG0klBud0WQpa4yy19Yn3vhirpLkF+wl0oc3lBrTM6LtF2rKe0S5zjeBiuFBxH9jUwi8X6qnJ89pEvEfF+zvavLixLVZTaKO35jRohhqGAwOx8aFVs0iAeArjDsvOUJA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=czjasAeD4rKe/F40qa+ez7jbCJbV/bAvJUcJtndx3O8=;
+ b=tVRJN2ZbjTUsSHyNU/A59YOdIT8C86uGAyJsHsekVp1on5MEH9y5xe5olOTrttqXyQcz8Xj7CQbOBn0WHs4mFzdGo53e258eKdSofyOCIDX6lOPU6rtZnraISNfbi/Q7ro/JkCIdFV9H89mnbdhj72ulU4+CHlAJmjq6B4/m6ZVwm42cTnUfuBY1Uxv+oNnAtfFv+yGYzqayMdRqVlMbG6R7Hbj+7WJdh/h/0HKW1zxi3zoyfKxVDBaMu3Vloqr19R+YMEOZIfkK/FPLt27qJsP9lxXw5+HCYF4ou6TbGwKxnSVU+5yLF0y9p/qC4C9o9zQvHPn/LOv7yZwtoPXidg==
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by PH0PR03MB7020.namprd03.prod.outlook.com (2603:10b6:510:160::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.13; Tue, 5 Aug
+ 2025 07:34:26 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.8989.020; Tue, 5 Aug 2025
+ 07:34:26 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>, Peng Fan
+ <peng.fan@oss.nxp.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
+ <trini@konsulko.com>, Marek Vasut <marex@denx.de>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>
+Subject: RE: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager address
+ via clocks phandle
+Thread-Topic: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager address
+ via clocks phandle
+Thread-Index: AQHcBNld5DNAfhKpBU6aFVejvpteDrRTc1EAgAAgNoCAABgzsA==
+Date: Tue, 5 Aug 2025 07:34:26 +0000
+Message-ID: <LV8PR03MB8137179BAE53AD6A8DEDE13AA722A@LV8PR03MB8137.namprd03.prod.outlook.com>
+References: <20250804004710.10222-1-alif.zakuan.yuslaimi@altera.com>
+ <20250805040750.GF29103@nxa18884-linux.ap.freescale.net>
+ <PH7PR03MB7063F3EAF4F0BEC770E333D3AD22A@PH7PR03MB7063.namprd03.prod.outlook.com>
+In-Reply-To: <PH7PR03MB7063F3EAF4F0BEC770E333D3AD22A@PH7PR03MB7063.namprd03.prod.outlook.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAC_iWj+1siVWvxnVGAEksTq2AKWtu=1KE-a+kns3iH66J4Uquw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|PH0PR03MB7020:EE_
+x-ms-office365-filtering-correlation-id: ed32757b-8d3c-49e0-d95d-08ddd3f2814f
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?0FL3d3WjI1YjAiMkFStEmevlV2SVFYJq3G9sa1R28sgOqHJaiUdswSjwVDRF?=
+ =?us-ascii?Q?uPO9L5UXNev/V4fLnHnrWwz5h6Mhg6Gyue7IP0UgwCCMKhNGw/l0LwiK+ppX?=
+ =?us-ascii?Q?gl8UwSUfFxL4Zl0faO2Iw/z7HmQZ1ErBaf8QvzR6vWoStCtZ7QFMLWAPqrL6?=
+ =?us-ascii?Q?kX6xDaPA438d3W7GdpZ4cMj7pX+4xJJUvy/Lt2O0GD14S0oVp4uqbfMWvQ8T?=
+ =?us-ascii?Q?gmuTSr+fOzoRixV4zZFMIHybUzYIHGALoTbC0PM1SEz/4vaplWiH7kLb07vx?=
+ =?us-ascii?Q?7Y7CHsb8SAMAw7KuTEz6KlygycKeGW0obB3vRJqOzgwCasBk/ad1dmz1dxVU?=
+ =?us-ascii?Q?Jyadhz1jlEgxrULEaQ+MW1rPih/s1DFI2hZmPV80KhjC6l09XqHT4wp4fu7m?=
+ =?us-ascii?Q?fa8341f1W7IMix4jP+Pd/ziCqXP1v+/NZun/oagy1Aw3f8RYtSMpOEDmZ26B?=
+ =?us-ascii?Q?yapZf1cJ2SUvJt/Qey43HAS0hJA5jtAJv90UMAifh+jmgiBTIdkIb11CUZ7U?=
+ =?us-ascii?Q?PTi03uJuT0lauNm/qoSC2Uk4qlrI0aJKuy9Pi1fgZa910+2khivFHn0Qb189?=
+ =?us-ascii?Q?vXLq1MzUf4cOL1HEszR/IsU5lCVLac6aTlKt0zNRMNGGufSt9sNqG93g1AG8?=
+ =?us-ascii?Q?yXOv6KNakedYcQk7mbbkdTFxjEHlleHKZXBJMMdeDP+g7yIXF33PZlAAvHGv?=
+ =?us-ascii?Q?7dMUEAiKxgSdExsDM0XSeUm1QoKHntVoQ64BeRpflLvhGrIEJzKnXLMEgT2B?=
+ =?us-ascii?Q?cl/R0hKZTpyxugTF0NWk3LdFqI7+pXwMGgswPnvb+HaC+ihm9At972g1sUQS?=
+ =?us-ascii?Q?CPE9R4Obwi0WpwmBkReqL5H05XerveY5+KaUDxhrg7Il+9QMgOsuuXBLIuu2?=
+ =?us-ascii?Q?i+tpgbPXaRk8MyRlXHrhq9o+I+QGaRPaBKnKA1OuUs5Qy9GpJTR2K3wC5Y6v?=
+ =?us-ascii?Q?mWsoB/MolCAeuPMlDBDUP6Ro2LiT+ROZ3miklQRkbKSCPR70zUYmVL1EQ89L?=
+ =?us-ascii?Q?FKWHYPxjTqVPoZF4b9FzS99+HyGXJUl3YFY2jq0QE2Q7biUyXBIRJdgpDhOg?=
+ =?us-ascii?Q?8Yutu35ChZAeFXied8PSQUQVYgK/I+eG7BA37KYp0BqhcDlr6UaPXdo08TrB?=
+ =?us-ascii?Q?DWSwwfneh8WnMZxHBJE9FdWB9/k9MOFpaq6KjtFWmcNfZb2sOG9TcJCiuV4P?=
+ =?us-ascii?Q?SHkzxnCy5YqkvrFekNO1utzwx/p1ndid124uXDbmcnbgDNilLRJWkk9dAfte?=
+ =?us-ascii?Q?9CqngR+Q3lDrCRv+cOtmuRI2DQWNmk2Dnb4VeXfITg8i8cpUvf/PHAd4uZmZ?=
+ =?us-ascii?Q?vxzBX+SBHjQqUDahHyEhsr70SWlL4SlfTqcua25pushgYh7lSa23NlLzgAgt?=
+ =?us-ascii?Q?ObNw7MIGvPSyOb8lcHRLYd8amqAWGUpbdheyuU1UMW4ucJWGkVLY9FIs1EhY?=
+ =?us-ascii?Q?bNt5mGXR96b2q8zIVjPu68Jt1T8vPagDK0+TIVCUR6Ctv8v94ILWaw=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?eUQ00EQC7RgS2I1dRzIeUln/GL8cgBcm8tJNPcv7pBSDctQnLhAeJkAkVF0O?=
+ =?us-ascii?Q?twORTw+ZSzCpLTb5TwG+1R+JPoMVBUhGK0W5N/G3mUM9i4DG4xiERPVc0P9S?=
+ =?us-ascii?Q?5lINXO2VfkPZfPQxlwSuqYuDI8jHAvEPVoyFft6a07jRzcdoQNMKE5iHpiaP?=
+ =?us-ascii?Q?E38/NvkNfW+IehsdgculUSp7PrKpCRh0nxff5SVGAWcJdamkEIe4375LHGBM?=
+ =?us-ascii?Q?/eDfwe3vhZra+y3tiib2zFqJknF0jVmRA2sZtlgKkIQNlV4qz5pnAWzeVcW0?=
+ =?us-ascii?Q?kw/VdMiwuaL/MGizqEeohBmBvhHnddjd0EyVX6y6vHzuUcRQhSeh1b/0wvuH?=
+ =?us-ascii?Q?qekRn2bEM6lduVl9pFSYGXNjPB+Sw+92YHE20liUOgUTSYMAE73jGYY2hAFM?=
+ =?us-ascii?Q?nt8SlOLKw1RBq0/qO3LlkjXc4nvEepGzrsqdwAuTCVP115t8TFgbtDq0Yk2F?=
+ =?us-ascii?Q?pyqsRbX2m9lVKENWQu01OoxUwkf4ryxI3GPn3Y2RaGPpbag/yW5aFJ6rYthX?=
+ =?us-ascii?Q?rMl2Vz4Ab30Xk+0yicwgi5YVW+ugpkK6N4alPNNxHIzASGkM+TS4my99H18S?=
+ =?us-ascii?Q?UBJUC6GXmZBMz487TWY7P0ha0y8zK61ruO2zkVwk/AHFJRWWThuQjEuTG8Gl?=
+ =?us-ascii?Q?WX3Xe4rWz/MmTy39coYenqkOtz6gAPedT+V7Ztr3NIAAa90cLwOTA/LnGs+A?=
+ =?us-ascii?Q?m+ia+fYJnk0XGPCkIxOe852eNpZwm34S+4/AP3P9pqu/RyNtjkaATqw/8kqG?=
+ =?us-ascii?Q?izF8DJN95uJd1AV3QgPvh/CLjEWC0L3iWqHnsYEcM+QhKn5aA+t/Rptkz23X?=
+ =?us-ascii?Q?g8a3Rm+yVkrczqPW7WTfZfwkyusAXgpBgwkodcrISLSWXRZrzAElekP/pO4N?=
+ =?us-ascii?Q?ldl85yCgICYanYrrhhNLoMx9w4UyMlYHB3rD1o89QKINv1SRszEO4p9sGNaJ?=
+ =?us-ascii?Q?IoYTGCOLGNfEp+LRXJrPhToH3EtEwopMfm2ZfpasWCpLKr0Y8NWXkcCKmZa5?=
+ =?us-ascii?Q?RpyMJTAj3Ova2MugqnKUs/ulCZ4F8Yz1/t0R6RTbSRgSlhrbage5q7UH2Yes?=
+ =?us-ascii?Q?59MxUzbhNaNyKMhkEdBc8uIvBYLAuWGq/Snc3Zf2CvXDLk3kCazDTQ6HcJfa?=
+ =?us-ascii?Q?K2b88QT1ki7ae6Sj82PRsxJ/xHvUbNtUKeeUISKJWDqTucKcxW3ShpewXpKt?=
+ =?us-ascii?Q?7FIccPU97+93anMoPr13gNUi3rL2n4udEnd9tCwWUK6OGOfNRoDQMACPG2c+?=
+ =?us-ascii?Q?oeodD14D2467D4vVtf8Vac6D8TMBfMr+ntdHa+vER7VHkJenslu0rhH8sumQ?=
+ =?us-ascii?Q?sVQadKipV15NC2Qk/dfqpaRltDI9/TJG9DS/4GANvpJTXW/vUu1/P1PU0Ku9?=
+ =?us-ascii?Q?UFkm3ZvhwBd2+65oFUbOuvztf6ENYHEQw8GCMPIvP8LJlgdID/7lQcHVGACB?=
+ =?us-ascii?Q?aSOopT5dbXm/8saFePjIL2eIPlz/dtbcD2U+rSB1Yw3HNtERWm2kZCdcytOj?=
+ =?us-ascii?Q?WbGFMtp+Mpx6RpzAcjB1wa8GzxNHr8QTkwrDbAiv7sc6WLyXzhbFvIrSPPIS?=
+ =?us-ascii?Q?Of7kJbUEiEyVaNmI3Tc7OKrjpFZup5rVJ8Fj7kXY?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed32757b-8d3c-49e0-d95d-08ddd3f2814f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Aug 2025 07:34:26.1234 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ZuIxKX/aADEdL0J1dS+1OdVb9Vpu8myPWyiMQot7ZCoQwkOHlySrPuSQyizE2B88886PXqM3VIc2vUG+5QeYhIPd1Au5rxI1JU/Wx+mwiHo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB7020
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,228 +167,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05.08.25 08:56, Ilias Apalodimas wrote:
-> Hi Heinrich,
-> 
-> 
-> On Tue, 5 Aug 2025 at 08:46, Heinrich Schuchardt 
-> <heinrich.schuchardt@canonical.com 
-> <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> 
->     From: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
-> 
->     It is sometimes useful to be able to boot via EFI using a Linux initrd.
->     Add support for this.
-> 
-> 
-> Overall I don't mind adding this to bootefi.
-> 
->     Fix a 'specifiy' typo while here.
-> 
->     Signed-off-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
->     Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com
->     <mailto:heinrich.schuchardt@canonical.com>>
->     ---
->     v2:
->              consistently refer to Linux initrd instead of RAM disk
->     ---
->       cmd/bootefi.c             | 33 +++++++++++++++++++++++++--------
->       doc/usage/cmd/bootefi.rst | 37 ++++++++++++++++++++++++++++++-------
->       2 files changed, 55 insertions(+), 15 deletions(-)
-> 
->     diff --git a/cmd/bootefi.c b/cmd/bootefi.c
->     index 8e8752127ed..b8f5bb35950 100644
->     --- a/cmd/bootefi.c
->     +++ b/cmd/bootefi.c
->     @@ -136,22 +136,39 @@ static int do_bootefi(struct cmd_tbl *cmdtp,
->     int flag, int argc,
->       {
->              efi_status_t ret;
->              char *p;
->     -       void *fdt, *image_buf;
->     -       unsigned long addr, size;
->     +       void *fdt, *initrd = NULL, *image_buf;
->     +       unsigned long addr, size, rd_len = 0, fdt_addr = 0;
->              void *image_addr;
->              size_t image_size;
->     +       int fdt_arg = 2;
-> 
->              if (argc < 2)
->                      return CMD_RET_USAGE;
-> 
->              if (argc > 2) {
->     -               uintptr_t fdt_addr;
->     +               ulong rd_addr = 0;
->     +               char *end = strchr(argv[2], ':');
-> 
->     -               fdt_addr = hextoul(argv[2], NULL);
->     +               if (end) {
->     +                       rd_addr = hextoul(argv[2], NULL);
->     +                       if (!rd_addr)
->     +                               return CMD_RET_USAGE;
->     +
->     +                       rd_len = hextoul(++end, NULL);
->     +                       initrd = map_sysmem(rd_addr, rd_len);
->     +                       ++fdt_arg;
->     +               }
->     +       }
-> 
-> 
-> Shouldn't we keep the order unchanged? I dont know if scripts are using 
-> bootefi in the wild and although they shouldn't changing the order is an 
-> ABI breakage
+Hi Alif,
 
-You can still use the existing forms:
+> -----Original Message-----
+> From: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>
+> Sent: Tuesday, August 5, 2025 2:03 PM
+> To: Peng Fan <peng.fan@oss.nxp.com>
+> Cc: u-boot@lists.denx.de; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung
+> <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>; Chee, Tien
+> Fong <tien.fong.chee@altera.com>; Marek Vasut <marex@denx.de>; Simon
+> Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+> Subject: RE: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager
+> address via clocks phandle
+>=20
+> > -----Original Message-----
+> > From: Peng Fan <peng.fan@oss.nxp.com>
+> > Sent: Tuesday, August 5, 2025 12:08 PM
+> > To: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>
+> > Cc: u-boot@lists.denx.de; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung
+> > <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>; Chee, Tien
+> > Fong <tien.fong.chee@altera.com>; Marek Vasut <marex@denx.de>;
+> Simon
+> > Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+> > Subject: Re: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager
+> > address via clocks phandle
+> >
+> > [CAUTION: This email is from outside your organization. Unless you
+> > trust the sender, do not click on links or open attachments as it may
+> > be a fraudulent email attempting to steal your information and/or
+> > compromise your computer.]
+> >
+> > On Sun, Aug 03, 2025 at 05:47:10PM -0700,
+> > alif.zakuan.yuslaimi@altera.com
+> > wrote:
+> > >From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> > >
+> > >Improve the current clock manager base address retrieval by probing
+> > >the clocks phandle under the mmc node in the device tree instead of
+> > >probing the clock manager node name in the device tree.
+> > >
+> > >This will help to make the driver more scalable for more families as
+> > >we no longer need to rely on the exact node name in the device tree
+> > >to probe the clock manager driver for its base address.
+> > >
+> > >Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> > >---
+> > > drivers/mmc/socfpga_dw_mmc.c | 19 +++++++++++++++----
+> > > 1 file changed, 15 insertions(+), 4 deletions(-)
+> > >
+> > >diff --git a/drivers/mmc/socfpga_dw_mmc.c
+> > >b/drivers/mmc/socfpga_dw_mmc.c index 3b86bc9b18c..ff1dd0055f8
+> 100644
+> > >--- a/drivers/mmc/socfpga_dw_mmc.c
+> > >+++ b/drivers/mmc/socfpga_dw_mmc.c
+> > >@@ -54,17 +54,28 @@ static int socfpga_dwmci_clksel(struct dwmci_host
+> > *host)
+> > >       u32 sdmmc_mask =3D ((priv->smplsel & 0x7) <<
+> > SYSMGR_SDMMC_SMPLSEL_SHIFT) |
+> > >                        ((priv->drvsel & 0x7) <<
+> > >SYSMGR_SDMMC_DRVSEL_SHIFT);
+> > >
+> > >-      /* Get clock manager base address */
+> > >+      struct udevice *mmc_dev =3D host->mmc->dev;
+> > >+      struct ofnode_phandle_args clkmgr_args;
+> > >       struct udevice *clkmgr_dev;
+> > >-      int ret =3D uclass_get_device_by_name(UCLASS_CLK, "clock-
+> > controller@ffd10000", &clkmgr_dev);
+> > >+      fdt_addr_t clkmgr_base;
+> > >+      int ret;
+> > >
+> > >+      /*
+> > >+       * Get the clkmgr device from the first phandle in the "clocks"
+> property.
+> > >+       */
+> > >+      ret =3D dev_read_phandle_with_args(mmc_dev, "clocks",
+> > >+ "#clock-cells", 0, 0, &clkmgr_args);
+> > >       if (ret) {
+> > >-              printf("Failed to get clkmgr device: %d\n", ret);
+> > >+              printf("Failed to parse clocks property: %d\n", ret);
+> > >               return ret;
+> > >       }
+> > >
+> > >-      fdt_addr_t clkmgr_base =3D dev_read_addr(clkmgr_dev);
+> > >+      ret =3D uclass_get_device_by_ofnode(UCLASS_CLK,
+> > >+ clkmgr_args.node,
+> > &clkmgr_dev);
+> > >+      if (ret) {
+> > >+              printf("Failed to get clkmgr device: %d\n", ret);
+> > >+              return ret;
+> > >+      }
+> > >
+> > >+      clkmgr_base =3D dev_read_addr(clkmgr_dev);
+> >
+> > I see this driver use clk api, so why still directly map the clk
+> > manager base and configure it. Shouldn't clk api be used or assigned-cl=
+ock-
+> parents be used?
+> >
+> > Thanks,
+> > Peng
+>=20
+> Hi Peng,
+>=20
+> The direct access to the clock manager base and offset in this driver was
+> inherited from the legacy implementation before we had full driver model
+> clock support. Currently, both Agilex and Agilex5 have their own clock dr=
+ivers
+> under the driver model, but the `clk_enable()` and `clk_disable()` operat=
+ions
+> are still not implemented.
+>=20
+> Because of that, we retained the base + offset logic for disabling a part=
+icular
+> clock in the SDMMC driver to preserve existing functionality. Once proper
+> enable/disable API support is added to the clock drivers, we can clean th=
+is up
+> to fully rely on the clock API or use `assigned-clock-parents` in device =
+tree
+> where applicable.
+>=20
 
-bootefi <image_addr>
-bootefi <image_addr> <fdt_addr>
+I think SSBL has no privilege to direct access clk mgr register, so ATF-med=
+iated access is required. I agreed with Peng, these issues can be solved in=
+ clk disable / enable API by having the right API access at both SPL and SS=
+BL boot phases.
 
-The patch adds two new forms:
+Thanks.
+TF
 
-bootefi <image_addr> <initrd_addr:size>
-bootefi <image_addr> <initrd_addr:size> <fdt_addr>
-
-Existing scripts should not be impacted.
-
-> 
->     +
->     +       if (argc > fdt_arg + 1)
->     +               return CMD_RET_USAGE;
->     +       if (argc == fdt_arg + 1)
->     +               fdt_addr = hextoul(argv[fdt_arg], NULL);
->     +
->     +       if (fdt_addr)
->                      fdt = map_sysmem(fdt_addr, 0);
->     -       } else {
->     +       else
->                      fdt = EFI_FDT_USE_INTERNAL;
->     -       }
-> 
->              if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
->                  !strcmp(argv[1], "bootmgr")) {
->     @@ -215,7 +232,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int
->     flag, int argc,
->                      }
->              }
-> 
->     -       ret = efi_binary_run(image_buf, size, fdt, NULL, 0);
->     +       ret = efi_binary_run(image_buf, size, fdt, initrd, rd_len);
-> 
-> 
-> The loadfile2 protocol that gets installed is later removed by a bootmgr 
-> event in case of a failure. Is the event still called for bootefi ?
-
-do_bootefi_exec() signals the event group 
-efi_guid_event_group_return_to_efibootmgr after returning from the payload.
-
-Best regards
-
-Heinrich
-
-
-> 
-> Thanks
-> /Ilias
-> 
-> 
->              if (ret != EFI_SUCCESS)
->                      return CMD_RET_FAILURE;
->     @@ -224,7 +241,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int
->     flag, int argc,
->       }
-> 
->       U_BOOT_LONGHELP(bootefi,
->     -       "<image address>[:<image size>] [<fdt address>]\n"
->     +       "<image address>[:<size>] [<initrd address>:<size>] [<fdt
->     address>]\n"
->              "  - boot EFI payload\n"
->       #ifdef CONFIG_CMD_BOOTEFI_HELLO
->              "bootefi hello\n"
->     diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
->     index d6e4e62e383..7c5448586b7 100644
->     --- a/doc/usage/cmd/bootefi.rst
->     +++ b/doc/usage/cmd/bootefi.rst
->     @@ -12,7 +12,7 @@ Synopsis
-> 
->       ::
-> 
->     -    bootefi <image_addr>[:<image_size>] [<fdt_addr>]
->     +    bootefi <image_addr>[:<image_size>]
->     [<initrd_addr>:<initrd_size>] [<fdt_address>]
->           bootefi bootmgr [<fdt_addr>]
->           bootefi hello [<fdt_addr>]
->           bootefi selftest [<fdt_addr>]
->     @@ -44,6 +44,16 @@ command sequence to run a UEFI application might
->     look like
->           load mmc 0:1 $kernel_addr_r /EFI/grub/grubaa64.efi
->           bootefi $kernel_addr_r $fdt_addr_r
-> 
->     +or
->     +
->     +::
->     +
->     +    setenv bootargs root=/dev/vda1
->     +    load mmc 0:1 $fdt_addr_r dtb
->     +    load mmc 0:1 $kernel_addr_r vmlinux
->     +    load mmc 0:1 $initrd_addr_r intird
->     +    bootefi $kernel_addr_r $initrd_addr_r:$filesize $fdt_addr_r
->     +
->       The last UEFI binary loaded defines the image file path in the
->     loaded image
->       protocol.
-> 
->     @@ -51,21 +61,34 @@ The value of the environment variable *bootargs*
->     is converted from UTF-8 to
->       UTF-16 and passed as load options in the loaded image protocol to
->     the UEFI
->       binary.
-> 
->     +.. note::
->     +
->     +    The bootefi command accepts one to three arguments.
->     +    If the second argument contains a colon ':', it is assumed to
->     specify the
->     +    initial RAM disk.
->     +
->       image_addr
->           Address of the UEFI binary.
-> 
->     -fdt_addr
->     -    Address of the device-tree or '-'. If no address is specifiy, the
->     -    environment variable $fdt_addr is used as first fallback, the
->     address of
->     -    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
->     -    When using ACPI no device-tree shall be specified.
->     -
->       image_size
->           Size of the UEFI binary file. This argument is only needed if
->     *image_addr*
->           does not match the address of the last loaded UEFI binary. In
->     this case
->           a memory device path will be used as image file path in the
->     loaded image
->           protocol.
-> 
->     +initrd_addr
->     +    Address of the Linux initial RAM disk or '-'. If no address is
->     specified,
->     +    no RAM disk is used when booting.
->     +
->     +initrd_size
->     +    Size of the Linux initial RAM disk.
->     +
->     +fdt_addr
->     +    Address of the device-tree or '-'. If no address is specified, the
->     +    environment variable $fdt_addr is used as first fallback, the
->     address of
->     +    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
->     +    When using ACPI no device-tree shall be specified.
->     +
->       Note
->           UEFI binaries that are contained in FIT images are launched
->     via the
->           *bootm* command.
->     -- 
->     2.50.0
-> 
+[...]
 
