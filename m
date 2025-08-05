@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8268C87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 09:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ABF8C87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 09:20:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 451A883438;
-	Tue,  5 Aug 2025 11:19:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9434C83531;
+	Tue,  5 Aug 2025 11:20:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gRQbuU38";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eYYDWQiL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98E88801DD; Tue,  5 Aug 2025 11:19:58 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id 3394B801DD; Tue,  5 Aug 2025 11:20:04 +0200 (CEST)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47CEA83438
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 11:19:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84BEC834A3
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 11:20:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-7698e914cd2so5524194b3a.3
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 02:19:56 -0700 (PDT)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-76bc68cc9e4so4516902b3a.2
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 02:20:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754385595; x=1754990395; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754385599; x=1754990399; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AmdZWhBvisZ710e7zyHQ48HiVJfUbw1Ibbvradh1ZMk=;
- b=gRQbuU38agIpLRH46hpPl8XIKMSfnMImvxnEia4Fz6kXW25EP52TmUEmV40LDxYnBg
- nAZnBf+CXzOIHcWlpSAbyyWut3WzV/hfTGpg5ZPzjRxjt370wLAZPMFxNZqCYH9CGzq4
- ll51nFdyEKr7GmSp5TBYwKWBRcdcjYhx2tVljxemb6dnHUVJXZ3miq8f79AWauF++2Aw
- wiJAczuoWi4hh7d2cmjKHA3VHGNnlrGb7L8RAcwqVvoTP3aBieSNsed8pSRie07a1GqM
- WXl9ZyP6slpjgXcbq9X4IiWio88lcLGwO6Vft2nR8GycfLmCOgnmlHDNYu0rGQgVNe5V
- 5aJw==
+ bh=VTzRIp+WTnxoJqCbaSaitImJg+O5rgF+dfjjB5GrBTQ=;
+ b=eYYDWQiLPfLEybTY2vvT3t0f4Ol3oT11EnvWsSeEKu6oMfrs3DuBwB3K4SUZ/SOilN
+ duf2HSBfF20h397t6/Y+bno4XJMhyCC+JU6lfWDGEbCaPbTZJnCKmZXcJWOzs5WBP3j5
+ Rwe30xPpI5nsBJ5vLML/K9IQDlK53g51eRAs6UbqPKn42igIrIExcYiEiv7P6E27U5Yc
+ wrjLwqj8wWQNxDNWHQ0XrzzlKOfO4jHImxZxI20LvIoK2cxPSjBbBda+StbALBgxSgqh
+ 8o0nX76oOF/a3IKFt5b9RePn3cHx8Q5cm9SMVJDu3OLwTee8qhHlLfV+V7BQ64uCxypB
+ txUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754385595; x=1754990395;
+ d=1e100.net; s=20230601; t=1754385599; x=1754990399;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AmdZWhBvisZ710e7zyHQ48HiVJfUbw1Ibbvradh1ZMk=;
- b=hLxbR6rHvHsCOpFx/OhBD/5HQmvydSnJYkSt/5GQpaR/ujHZWZPtDGT8m1x+MJSSJH
- YSgiXjLQWChK41sdRLuB2B0Klu3jCHa0PnIFSvXNdXe+VPbk+Vj93ekHtRHXKA69T8Sx
- L46LXyAxTFOsiota6CaGLhVwq69mqWyYQz7VMwN49DEJoYpYCYCHkcZ0Jnq/DResqBVA
- NxGpHgh547OGico8Rdnn/Knw2OwJO6V0MR2mlYicCh1fSdaa07DGGAkhjbSDAr0GD93R
- QYN5W8xG6Hj+pUvW4MqpCGfSPwjrHw9tMYhdnsfu8BJgMFZM3ReThz8ZDBnK2FhDL/o+
- a68g==
-X-Gm-Message-State: AOJu0YwrMK3xAQrszgDs9/wwBKishmCanXgEzLhO+bIOrvLTjKwhmZTB
- wXeSjmQ/m8b5I1DPyjTRwblu/1Vnghsu8s4CCZth01UIqbGzVNUZa5FK
-X-Gm-Gg: ASbGncs9JoiccO56pPc0UChmD4kWKKAWOz45KXMFTWkLP/NUOrUmaL7VB+I4rjlnWJN
- f5iFk6Cj1NzG/UDpsqPeCxHId1FrcYxOGUkpz+1IojFCLuGObLizg5RbSlV/ApHhQUsSwnEssqU
- oCrm6T76BoIEcuis22j39uHc4tbBhb/btQ/61325Gst9iEgkXJrdUwnQ+CI0d+df9+opccf+72A
- jV6ri8Co2Vx5VbwJEiaBbNftJ7nj4uBR4BU1yC8tF2xXrRqdvWPS1JBwSL9N67xhmsE9RfuBoH3
- PbkdJ9KSvfyJNzJkUxPLRcoRfnNGB4VzF3cEWDxYu/5nS7RQ1oq7NVmUuLmY5ZeakqOvw3giXyl
- x/ZJvSS0SqjHaEqhuYikNM2b31NYzr83YvA==
-X-Google-Smtp-Source: AGHT+IHZdc6hT7CilmShCcgwqyxo9uJcwfisoLuaz9XuQMw5HFF5AUdoFh5+dOQZpvowNbYR4dLuzA==
-X-Received: by 2002:a05:6a00:10cb:b0:746:24c9:c92e with SMTP id
- d2e1a72fcca58-76bec3322famr16477878b3a.8.1754385594762; 
- Tue, 05 Aug 2025 02:19:54 -0700 (PDT)
+ bh=VTzRIp+WTnxoJqCbaSaitImJg+O5rgF+dfjjB5GrBTQ=;
+ b=g+iaLp4aE8WiBIvE5QLFkdGdhnA7AT2h2wXcPyAC7/x9EQGHag/ggZYlu8z9qPjDxO
+ +XnDR72AMSBi72evqPv0/8S/dZftOTyHYnLCLSSLkB3gmnJaBaBl5Sv+n3GQlzcuPu5x
+ or2mj1RV18UYjtEZygB/C9sh0712Ve7w+9LddJ2hEB/aaLxp/Lt2Ok6RB6Y4z/nZ3SfJ
+ sTMtKnysdLCWgWiDnPvPKlOtUUthx4gmDuhvEroS267Hm3rciNjQtyHk3CA1a7B4iY+e
+ VfTy8ST2FGvJ7kL77UYHaPKWtJrEn2GVNlRNt6uHv+2E9QUn4cmgjOC5rNcR0LYycUpf
+ HHjQ==
+X-Gm-Message-State: AOJu0YwHI5OkI42ZJYGtAToVCRaPY+NdEhVelA6GJbyQO6sZ7KvsLjY4
+ Ufp572TRYizb/zxIBjymkUeo4gkAesH4ds38pJYj54fvIgZ4RRgznf5SDo4FzlJy
+X-Gm-Gg: ASbGncv+XJrxCnFIFUdH2wndMS52VoO5U3GbtJsz0rU+wdUaNdzPnqmy9wif5ma5IiX
+ s0ZRC0UQtvjP1AedDBm1M5og5wIuVrrk999anRyiasi9dnNzBj7yc+ENXWalu155IaaYezUI//z
+ 9IwWdb9mOXLJYB5ycmXVF4mH0vP6sdWk4CUrdT2ss+HTgqn7Dkfv74mxh6IizSxdc6p7A3hEMWx
+ 5Jx4HpQKn8THK+wT/Ad4cT4jcJpdFTFdgiCl5+Rj1QEYx0Ct2Wqponxdh+adPOv75d14d4VeoHd
+ 8QYlnK+wbGbfHko7jFtxkssjCM1oqrvuaO8Oi7hAtTPQg2A28u8qjQl7/FDagEVHSLtG1oE7ZdC
+ VM8pVVqr+8hQpj9b25dYsz6yr9vSOnLfr7Q==
+X-Google-Smtp-Source: AGHT+IGZC6WYMyL+Km58IEZylHZxIgzp34wNIscvqETleoiut4kWbWcb5wX14sxK7wmZ7Aixag0TNA==
+X-Received: by 2002:a05:6a20:939e:b0:240:50d:4285 with SMTP id
+ adf61e73a8af0-240050d4b8cmr12490952637.38.1754385599037; 
+ Tue, 05 Aug 2025 02:19:59 -0700 (PDT)
 Received: from cs20-buildserver.lan ([2402:7500:400:60db:2e0:4cff:fe68:863])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bcce89125sm12495185b3a.33.2025.08.05.02.19.52
+ d2e1a72fcca58-76bcce89125sm12495185b3a.33.2025.08.05.02.19.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 02:19:54 -0700 (PDT)
+ Tue, 05 Aug 2025 02:19:58 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, YSCHU@nuvoton.com,
  trini@konsulko.com
-Cc: u-boot@lists.denx.de,
-	Stanley Chu <yschu@nuvoton.com>
-Subject: [PATCH v1 3/9] i2c: npcm: fix consecutive dm_i2c_read/write error
-Date: Tue,  5 Aug 2025 17:18:44 +0800
-Message-Id: <20250805091850.2051096-4-JJLIU0@nuvoton.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 4/9] net: phy: broadcom: add support for BCM54612E
+Date: Tue,  5 Aug 2025 17:18:45 +0800
+Message-Id: <20250805091850.2051096-5-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250805091850.2051096-1-JJLIU0@nuvoton.com>
 References: <20250805091850.2051096-1-JJLIU0@nuvoton.com>
@@ -100,50 +99,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Stanley Chu <yschu@nuvoton.com>
+It's Broadcom PHY simply described as single-port
+RGMII 10/100/1000BASE-T PHY.
 
-When doing a dm_i2c_read followed by a dm_i2c_write, the subsequent
-transaction may get npcm_i2c_check_sda error because the module is
-still busy in STOP condition in previous dm_i2c_read.
-Always check and wait for module to be out of busy before starting
-an i2c transaction.
-
-Signed-off-by: Stanley Chu <yschu@nuvoton.com>
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 ---
- drivers/i2c/npcm_i2c.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/net/phy/broadcom.c | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
-diff --git a/drivers/i2c/npcm_i2c.c b/drivers/i2c/npcm_i2c.c
-index c64752e1467..bff0d04f1a5 100644
---- a/drivers/i2c/npcm_i2c.c
-+++ b/drivers/i2c/npcm_i2c.c
-@@ -34,6 +34,7 @@
- #define SMBCTL3_SDA_LVL		BIT(6)
+diff --git a/drivers/net/phy/broadcom.c b/drivers/net/phy/broadcom.c
+index 0a49015eb89..1c02e3efedc 100644
+--- a/drivers/net/phy/broadcom.c
++++ b/drivers/net/phy/broadcom.c
+@@ -134,6 +134,33 @@ static void bcm_phy_write_misc(struct phy_device *phydev,
+ 	phy_write(phydev, MDIO_DEVAD_NONE, MIIM_BCM54XX_EXP_DATA, value);
+ }
  
- /* SMBCST */
-+#define SMBCST_BUSY		BIT(0)
- #define SMBCST_BB		BIT(1)
- #define SMBCST_TGSCL		BIT(5)
- 
-@@ -479,11 +480,17 @@ static int npcm_i2c_xfer(struct udevice *dev,
- 	struct npcm_i2c_bus *bus = dev_get_priv(dev);
- 	struct npcm_i2c_regs *reg = bus->reg;
- 	int ret = 0, err = 0;
-+	u8 val;
- 
- 	if (nmsgs < 1 || nmsgs > 2) {
- 		printf("%s: commands not support\n", __func__);
- 		return -EREMOTEIO;
- 	}
++/* Broadcom BCM54612E */
++static int bcm54612e_config(struct phy_device *phydev)
++{
++	u32 reg = 0;
 +
-+	/* Wait for module out of busy */
-+	if (readb_poll_timeout(&reg->cst, val, !(val & SMBCST_BUSY), 1000))
-+		return -EBUSY;
++	genphy_config_aneg(phydev);
 +
- 	/* clear ST register */
- 	writeb(0xFF, &reg->st);
++	phy_reset(phydev);
++
++	/* 125Mhz Clock Output Enable */
++	reg = phy_read(phydev, MDIO_DEVAD_NONE, MIIM_BCM54XX_EXP_SEL);
++	reg |= 0xD34;
++	phy_write(phydev, MDIO_DEVAD_NONE, MIIM_BCM54XX_EXP_SEL, reg);
++
++	reg = phy_read(phydev, MDIO_DEVAD_NONE, MIIM_BCM54XX_EXP_DATA);
++	reg |= (1 << 1);
++	phy_write(phydev, MDIO_DEVAD_NONE, MIIM_BCM54XX_EXP_DATA, reg);
++
++	reg = phy_read(phydev, MDIO_DEVAD_NONE, MIIM_BCM54XX_EXP_SEL);
++	reg &= 0xfffff000;
++	phy_write(phydev, MDIO_DEVAD_NONE, MIIM_BCM54XX_EXP_SEL, reg);
++
++	genphy_restart_aneg(phydev);
++
++	return 0;
++}
++
+ /* Broadcom BCM5461S */
+ static int bcm5461_config(struct phy_device *phydev)
+ {
+@@ -434,6 +461,16 @@ U_BOOT_PHY_DRIVER(bcm5461s) = {
+ 	.shutdown = &genphy_shutdown,
+ };
  
++U_BOOT_PHY_DRIVER(bcm54612e) = {
++	.name = "Broadcom BCM54612E",
++	.uid = 0x03625e6a,
++	.mask = 0xfffff0,
++	.features = PHY_GBIT_FEATURES,
++	.config = &bcm54612e_config,
++	.startup = &bcm54xx_startup,
++	.shutdown = &genphy_shutdown,
++};
++
+ U_BOOT_PHY_DRIVER(bcm5464s) = {
+ 	.name = "Broadcom BCM5464S",
+ 	.uid = 0x2060b0,
 -- 
 2.34.1
 
