@@ -4,57 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE2AC87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF191C87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2577D8331C;
-	Tue,  5 Aug 2025 13:16:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D0A28331C;
+	Tue,  5 Aug 2025 13:17:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1754392600;
-	bh=3nOU90QQ0AEtT/UJGaoe7Ma+NsmB1/v7ahxwfteWgfs=;
+	s=phobos-20191101; t=1754392624;
+	bh=AQixj4neOWzYy28rO9bRi+xloePWj/yKc1BrlxPxW48=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=nHiNukPEYTW89QvkM2vaSrPog9IrZOwCSKrA0JmfaivtHxNGLNa+UNlhlLhFzjLjb
-	 ifAG0kOkMdIPP78uOicbMOG5UgL6liFkopW+pDEn1/u2zn3lSnVrhXhMKOd35g7P27
-	 egjlcXlDHsbELimIlhOSziHIO6B1Lh7P57YO1TQDdnkxgSpZ9IWPDXJT/uFkxcwRjg
-	 2u1xezOGMX2CZPHg/6aN4yScyvSWEBflhTceg4eCHru8OvzoW/RwAIw2i7gQ7kJ2O5
-	 kGTVA67JI1+uDiviqPC+OmN7eRR+ppKSVG8W192pzKbG9/J+kh1QY7/k968PJLvhL4
-	 TBbGm6jZnX/Tg==
+	b=puAYW1uqwhkhwKCSKHzvpB5hc5DS3LP/j1MVt6QT7hLUuO7R0DpcWAbiXAC1vcDcB
+	 H0xRZgGkiTsuCcl9Bc16S8uG4VT3q+dUv74MFu1biqT2Hu0XFGd9bRqUDarA2tje13
+	 JXr/ZYqDQ6uYxL/VCAM3CP7pRhaVsV6p1pglSPgOhBcfQkjCfl0BHg7XvnG3e0xlxk
+	 Wa8WmIacv4WSGiZGQymMlbDpzCs55FLUlTM4S8t98R5xKQkMv55c58u2VtpGgZm3Bz
+	 Ml6IcxJsluRr1NwGZ4gb5QsGGlf/4k5o9UXyOJJ2Ksq/YkR9FzjWeLfSoXvInXg3fl
+	 6SXfk9g+JjMzw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02EFA83390; Tue,  5 Aug 2025 13:16:39 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 1CBD383642; Tue,  5 Aug 2025 13:17:03 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A97288327A
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:16:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03FA18327A
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:16:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Mkwsgyph"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Tf6tMm3O"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D45ED1038C126; 
- Tue,  5 Aug 2025 13:16:24 +0200 (CEST)
+ with ESMTPSA id 86CDD1038C126; 
+ Tue,  5 Aug 2025 13:16:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1754392590;
+ t=1754392617;
  h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=3nOU90QQ0AEtT/UJGaoe7Ma+NsmB1/v7ahxwfteWgfs=;
- b=MkwsgyphbfNbiK8LxJbXmsPvJRxV0Vv+I796Rfhdy1wWJlfePmrwZPSYiIGRBTdWsyoQ43
- V9kA+LjykIVb7sjPEZjgAAu1U0TdKoar2KbLjkfRLYqBsj9OLCPrnnLad7la6cXak0adjd
- qdqU6OxwWXp59qD8P1Hd2n5Mcxpcz27egwFnVOBUzJoObOTLxN7FltXm32XkpLxfka4ME2
- KXoUGshG8ZjzNlLRqxaJpeMsg4a1VGUqy4c3P04yW+mElgDxnr4BgAvYl5evbyUTrLbDsg
- v9lDCf91Tl2RQHY3C6w8wHogaeKKe9iIlEH4lUZni7M6hVDaNhhFF4E5flMNoA==
-Message-ID: <1adcfec3-2601-7016-92ac-c6f256151263@denx.de>
-Date: Tue, 5 Aug 2025 13:16:53 +0200
+ bh=AQixj4neOWzYy28rO9bRi+xloePWj/yKc1BrlxPxW48=;
+ b=Tf6tMm3OoAlXOyZWfe3b1YX/AWCXsgaM8Rs+pWWhxn/Otaj5LjTGXN2xdPx9xN/jnuDq8/
+ w/On8wBwW62o0rIJdfMe478jicUwKbeY32TOaSUmet8KvvNZtAGtIBTx/D3XxntfnGCsTC
+ sjcD4KBF/AKzHmbAYqUhIOWZ1fQ9PtGGEUq6e0UzLIoYISQqqgb2D4MayJl2ywN4/mI579
+ 9AvJhBBklSp7GxMvdN49xLI0KsWOX34MDxnRDRu8+4hMW6P2GbLj4sg8GYKOCNLkp1K43Y
+ xTyg7JHX8AtX1x55DWJmXHJqgPysRHZkBEldddaUXawhrAxP8P/1ylBLPUeObg==
+Message-ID: <a36f4c0a-9f3d-94b6-21ce-1454a6284406@denx.de>
+Date: Tue, 5 Aug 2025 13:17:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v7 06/12] drivers: i3c: Add i3c sandbox simple test.
+Subject: Re: [PATCH v7 07/12] drivers: i3c: master: Enable probe i3c without
+ slave device
 Content-Language: en-US
 To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -72,9 +74,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>
 References: <20250728065612.6039-1-dinesh.maniyam@altera.com>
- <20250728065612.6039-7-dinesh.maniyam@altera.com>
+ <20250728065612.6039-8-dinesh.maniyam@altera.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250728065612.6039-7-dinesh.maniyam@altera.com>
+In-Reply-To: <20250728065612.6039-8-dinesh.maniyam@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -100,19 +102,15 @@ Hello Dinesh,
 On 28.07.25 08:56, dinesh.maniyam@altera.com wrote:
 > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > 
-> Add s simple test for the I3C uclass in sandbox.
+> Picked linux i3c driver upstraming patch to fix the issue to
+> probe for i3c controller without slave device attached.
+> With this fix, the ret check will be on command error and will success
+> without slave device attached.
 > 
 > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > ---
->   arch/sandbox/dts/test.dts |  8 ++++++
->   drivers/i3c/Kconfig       |  6 +++++
->   drivers/i3c/Makefile      |  1 +
->   drivers/i3c/sandbox_i3c.c | 56 +++++++++++++++++++++++++++++++++++++++
->   test/dm/Makefile          |  1 +
->   test/dm/i3c.c             | 34 ++++++++++++++++++++++++
->   6 files changed, 106 insertions(+)
->   create mode 100644 drivers/i3c/sandbox_i3c.c
->   create mode 100644 test/dm/i3c.c
+>   drivers/i3c/master.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 
 Reviewed-by: Heiko Schocher <hs@denx.de>
 
