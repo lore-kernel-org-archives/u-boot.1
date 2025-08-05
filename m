@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C01C87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DCB1C87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:51:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5300E83692;
-	Tue,  5 Aug 2025 13:49:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03C1582BCD;
+	Tue,  5 Aug 2025 13:51:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1754394599;
-	bh=in7OCyFGk+QGPs0laO2KEqEjjgg/Wj/zAAOHXyZAzSo=;
+	s=phobos-20191101; t=1754394703;
+	bh=YsFpYdD3YCgC71EXW9TDuwe8nyHsbB7E0W4D8pjJ3Ls=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=bukF39BAPRC8gduXn7pIqK12uLhSbOjIs+50lcV9rmy9lZOLEyJjKJHYluSfXEmrh
-	 hO7SH7sjQ1GIMiT6K3ejWRdUNDMH4tkWLOVyKRohqFU+KmGkUinRrFzn6UO3EjH5g3
-	 tFFS+Ffp4qnqQITOnPsw9bCsHNU8TaZsYsUQKiwcD2HUW8tMxJEOC+XerL0LMpAXGb
-	 YYvtLaADjAXWwaql/UR1kt2fZqtG6JaWmRKrZM4XN+Rx3T2KE1ZvfGXSDhXWTHzIpa
-	 7mHm0GRzrxLfjmnF8kH2jEuZwbpH45G/QIWUhczx/kOKt03pE86fa2ks8lzSBFW4O/
-	 QdIiIO3HU7rHQ==
+	b=n8N00hJxjz+KEW7BQBoKsH0FVqgVd8A4qoULXuyotH4lt1S3Slf0nWIJA1qSn02Ny
+	 zFr/xAWnTKMYxSK05qoWbwWwJG202jMrVp0ylOh/Q0IPFuhilD/NxPjsW0NNMs6cUZ
+	 NYd4j2aRfFsIEeKuxanMInYSesSuD+hmfDXsXl++LrVmIccqG7RZnDtH5w2kA//rae
+	 ejfwpP1N7a3+m2NNhWIiv5tM+cWhdnvh6hAG7GrQEFvAOnyhL90Gp3ew0fYA4oFt10
+	 Qg0f2tQ0WAvg19AO0VHr2oOLO95udqiHK3prNgg1Tsdg/EJjDgX83iu5RdaAyyXD8b
+	 hyPg7Q+cjj2oQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECE1C836A6; Tue,  5 Aug 2025 13:49:57 +0200 (CEST)
+ id 82313835D4; Tue,  5 Aug 2025 13:51:42 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B80C6834BC
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:49:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24D29801DD
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:51:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="hk9rUIUt"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="O6G3dmpE"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8A7591038C126; 
- Tue,  5 Aug 2025 13:49:49 +0200 (CEST)
+ with ESMTPSA id 0A76E1038C126; 
+ Tue,  5 Aug 2025 13:51:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1754394593;
+ t=1754394696;
  h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=in7OCyFGk+QGPs0laO2KEqEjjgg/Wj/zAAOHXyZAzSo=;
- b=hk9rUIUt5lGwCw7A7XOw6k0lGaQQe/wvW5DnRMNqa2GRSAEXeptkpKjP093D2nF39A+uYd
- mrvyev688yWUCjLhclOZ9aVc+7LyzvHJ0gzYN2dotf6hh+XDVsUe5ZEbAjqZO4PjCZf2JX
- Ig36rWo1nOaAWkHDWsK0gR5QzEG0CAKjN6f7cTJ0zBOCq3Xju4L/P/Xz8QVkO7sNNwtQK4
- +4N3WE2CNQxOb8PstveXpwxEm2E0TaohnaV6eX78ynHIL1bLIuJBR/3aipOMZG24MeTxzV
- uFceg5HTnMJ6Vl+A1qqdfp9cJ5iO3jXZNRqITawG75utWkTeZgbhQKQivz16BA==
-Message-ID: <ab1ee19d-4fcd-7247-9901-759db0ef8b08@denx.de>
-Date: Tue, 5 Aug 2025 13:50:18 +0200
+ bh=YsFpYdD3YCgC71EXW9TDuwe8nyHsbB7E0W4D8pjJ3Ls=;
+ b=O6G3dmpEaY9kKoWdeBm4nXbDB01P4pg2+xDGT7Y7xsi4+GCG1S7Q3/BrmsJNOUxJJ9yRY5
+ tNdSysOsNR87jLxoVC9sdlhJoUcVM11wNLQhwmybgsm930h1DHwOvI+tkrIziarr5p9WTm
+ QZhxVQL2GEJmBj3bWEC3vOgCHBA22Cok2Nmgjgf/bpsKrgQSMh6MafrfZX/GAfNpuy52yN
+ ayFg2bZl44qTClYW/ricTzppVhJkuh19wBvLjgJA96Px2c4F6Hz1VeiXegQIeVFSqYWRIb
+ RpzvM1LP/eSnWqTrhf53RWJLcrSKJ9j57J+KbiO+jHsPhTvUUNr2I0vbxwGWEQ==
+Message-ID: <c067ed87-5500-f16d-2c74-5ecae37470de@denx.de>
+Date: Tue, 5 Aug 2025 13:52:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v7 09/12] cmd: Add i3c command support.
+Subject: Re: [PATCH v7 10/12] test: cmd: Add simple test for i3c
 Content-Language: en-US
 To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -72,9 +72,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>
 References: <20250728065612.6039-1-dinesh.maniyam@altera.com>
- <20250728065612.6039-10-dinesh.maniyam@altera.com>
+ <20250728065612.6039-11-dinesh.maniyam@altera.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250728065612.6039-10-dinesh.maniyam@altera.com>
+In-Reply-To: <20250728065612.6039-11-dinesh.maniyam@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -100,24 +100,94 @@ Hello Dinesh,
 On 28.07.25 08:56, dinesh.maniyam@altera.com wrote:
 > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > 
-> Add i3c command file to support select, get i3c device
-> target list, read and write operation.
+> Add simple test to check i3c controller defined in sandbox test DT.
+> Basically, this test case will check validity of the i3c controller
+> by probing it and perform basic commands of cmd/i3c.c
 > 
 > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > ---
->   cmd/Kconfig                        |   6 +
->   cmd/Makefile                       |   1 +
->   cmd/i3c.c                          | 271 +++++++++++++++++++++++++++++
->   doc/usage/cmd/i3c.rst              | 146 ++++++++++++++++
->   doc/usage/index.rst                |   1 +
->   drivers/i3c/master/dw-i3c-master.c |  35 +++-
->   include/dw-i3c.h                   |   2 +
->   include/i3c.h                      |  28 ++-
->   8 files changed, 488 insertions(+), 2 deletions(-)
->   create mode 100644 cmd/i3c.c
->   create mode 100644 doc/usage/cmd/i3c.rst
+>   test/cmd/Makefile |  1 +
+>   test/cmd/i3c.c    | 50 +++++++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 51 insertions(+)
+>   create mode 100644 test/cmd/i3c.c
 
 Reviewed-by: Heiko Schocher <hs@denx.de>
+
+some nitpick below:
+
+> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+> index d8a5e77402d..d1c49e2c97a 100644
+> --- a/test/cmd/Makefile
+> +++ b/test/cmd/Makefile
+> @@ -34,6 +34,7 @@ obj-$(CONFIG_CMD_PWM) += pwm.o
+>   obj-$(CONFIG_CMD_READ) += rw.o
+>   obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
+>   obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
+> +obj-$(CONFIG_CMD_I3C) += i3c.o
+
+Nitpick: please sort alphabetical, thanks!
+
+>   ifdef CONFIG_NET
+>   obj-$(CONFIG_CMD_WGET) += wget.o
+>   endif
+> diff --git a/test/cmd/i3c.c b/test/cmd/i3c.c
+> new file mode 100644
+> index 00000000000..04baad2a4b2
+> --- /dev/null
+> +++ b/test/cmd/i3c.c
+> @@ -0,0 +1,50 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+> + */
+> +
+> +#include <dm.h>
+> +#include <dm/test.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
+> +
+> +/* Basic test for probing i3c controller with invalid name */
+> +static int dm_test_i3c_cmd_probe_invalid_master(struct unit_test_state *uts)
+> +{
+> +	ut_asserteq(1, run_command("i3c any", 0));
+> +	ut_assert_nextline("i3c0 (i3c_sandbox)");
+> +	ut_assert_nextline("i3c1 (i3c_sandbox)");
+> +	ut_assert_nextline("i3c: Host controller not initialized: any");
+> +	ut_assert_console_end();
+> +
+> +	return 0;
+> +}
+> +DM_TEST(dm_test_i3c_cmd_probe_invalid_master, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_DM);
+> +
+> +/* Basic test of the i3c controller for valid name as per test DT */
+> +static int dm_test_i3c_cmd_probe_valid_master(struct unit_test_state *uts)
+> +{
+> +	ut_asserteq(0, run_command("i3c i3c0", 0));
+> +	ut_assert_nextline("i3c: Current controller: i3c0");
+> +	ut_assert_console_end();
+> +
+> +	ut_asserteq(0, run_command("i3c current", 0));
+> +	ut_assert_nextline("i3c: Current controller: i3c0");
+> +	ut_assert_console_end();
+> +
+> +	ut_asserteq(0, run_command("i3c i3c1", 0));
+> +	ut_assert_nextline("i3c: Current controller: i3c1");
+> +	ut_assert_console_end();
+> +
+> +	ut_asserteq(0, run_command("i3c current", 0));
+> +	ut_assert_nextline("i3c: Current controller: i3c1");
+> +	ut_assert_console_end();
+> +
+> +	ut_asserteq(0, run_command("i3c list", 0));
+> +	ut_assert_nextline("i3c0 (i3c_sandbox)");
+> +	ut_assert_nextline("i3c1 (i3c_sandbox)");
+> +	ut_assert_console_end();
+> +
+> +	return 0;
+> +}
+> +DM_TEST(dm_test_i3c_cmd_probe_valid_master, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_DM);
+> \ No newline at end of file
+> 
 
 bye,
 Heiko
