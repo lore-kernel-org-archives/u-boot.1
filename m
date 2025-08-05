@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DB6FC87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 06:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB8FC87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 06:20:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AF5A83253;
-	Tue,  5 Aug 2025 08:19:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49F878346A;
+	Tue,  5 Aug 2025 08:20:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1754374778;
-	bh=iV/3/Wpc1eaFtFQVxykCbzc8SbZhbx/WT1z2NJvILsg=;
+	s=phobos-20191101; t=1754374839;
+	bh=a4ZxLorGgUzXcJvirMdBgTnAqdqLSbRH14hy+EAOxpg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=yqKsCJWkKK8VebCaTeDGjoaVAlvlEwr0MDpKs5f1rFOm9Zj7h4/e2DNIDc09Km+50
-	 crJpK6monwDqF2YljK5/kzGSqztsE/r5GGzC7AUFbdkM18pVO5ZM/+biQkD7R5ieuK
-	 BYTDIDEG7kXF858srLJtUGOP7VvWkNAQPuufx5e93ZifRV2niZ7mwh1cSJTPMP2ypk
-	 zQVoKAaU+U/3BsGY5g+Irxs03GFvRFMlbZ0+Zr5hgezbgRDRpMt9H+GGJjhwdlXJSU
-	 KaOlwme+vCntXVRKUhzOtXwwlO49dm01Zv2r08SXnVxQ+GD8W6716OhioZGR7WOkVO
-	 aJsXg4ybVKUTA==
+	b=Ji2scUJDWU1LIwIz7rnBPp0t0UujbBocCipe7XRHsCWe/8kVF5kIZn5DzuLLSV9kY
+	 Rm/8zpTDo+utqjdY6dh9ZkC/oXr/Q+puU+/W8hPmNR868lgO1+d6g64s/0O6ls7ug+
+	 jiZJRIli4Y+b54pFa0LZDiXGGxKN/O0GvEq8gs4Y8bVXn9GePscAeL2iFsdBCI4dcL
+	 6ywrDRlin9mjPvCOZ0VKS3NcUcvYORx0HxhKdT6gzd1RVE550KyBvj2ZNliMEHtfH8
+	 lP3yv5qMx42M03S8pRCTXj5tGAfQaVe1GmOBF8Jjkq93B8HMVwABbnaXTOgdI288oF
+	 wkLyrls0c6SlQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F038684114; Tue,  5 Aug 2025 08:19:35 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 32D2F84127; Tue,  5 Aug 2025 08:20:38 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E35883106
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 08:19:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A96E83314
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 08:20:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="dslzJEbv"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="iSMKp2JU"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0E0001038C126; 
- Tue,  5 Aug 2025 08:19:28 +0200 (CEST)
+ with ESMTPSA id 9E9AE1038C126; 
+ Tue,  5 Aug 2025 08:20:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1754374772;
+ t=1754374834;
  h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=iV/3/Wpc1eaFtFQVxykCbzc8SbZhbx/WT1z2NJvILsg=;
- b=dslzJEbvugbukCH10WyYGwLnlAovLoTpCDvXNyHwieA0ymh1HuWyVV9xOf24Izkq3/k0pF
- fktHBK/TY3l2tP8T/oKxOtFosyQyOiZTyCU+JexX5d3PUldM2L4K0QwaBlN2Qi4V/MAD2w
- 2Ixb2sGrGhWxKkmtq5T+oKaroPOQKexvEeduwRlA4YSoPcgftlrURUr63Ht4QWdLBpojoi
- t1NDdxXrCD0Vm2Da0alZSk/qI+mnOq/OljmZr1sflPzXneyYSatqvUVrNRqoKWqprIsH70
- vfEu1bX8yxy3xyrMeHwdnYstGm9EFo9TA9dQ2IHnqQ5JTDVgYv6oWdSgtTFm8A==
-Message-ID: <971c099e-1561-a34e-4f6b-01b18eb1727e@denx.de>
-Date: Tue, 5 Aug 2025 08:19:59 +0200
+ bh=a4ZxLorGgUzXcJvirMdBgTnAqdqLSbRH14hy+EAOxpg=;
+ b=iSMKp2JUgRA7MwG6vbJvirspPc4to/aRvZYU4Dly2hRxzWslobOBmHP1CkhrXQ1xnYNZpu
+ NlcnmqgFdfL/APYOfMRMZdxYbLDqeJkwWxZ2/neaZvm+nt6KEq13444pfCkr1/PYgPkHZA
+ YloXi2w93cr2iPiwuU1UT6ecfScRTzoe+ph3zZByIAJN2IIyiulYotDFWN+BE7lt3PbRxi
+ RIGi8RPk7CIZ/WxYnCkwXoghq0kYZD8+h6iNby0udbkPVeoW2Op2lCVztbXROQJrP9Db9V
+ r3Sa73bSeRRpe3YU3NlqgxS+ODqzBkR9bDIHlM2SB/YMpsFsstT+njRx97S0wA==
+Message-ID: <ce42a275-cf9c-faa6-ee6b-0ccf82ef36c5@denx.de>
+Date: Tue, 5 Aug 2025 08:21:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v7 04/12] drivers: Enabled Kconfig and Makefile for i3c
- support
+Subject: Re: [PATCH v7 05/12] drivers: i3c: Enabled Kconfig and Makefile for
+ DWI3C
 Content-Language: en-US
 To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -74,9 +73,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>
 References: <20250728065612.6039-1-dinesh.maniyam@altera.com>
- <20250728065612.6039-5-dinesh.maniyam@altera.com>
+ <20250728065612.6039-6-dinesh.maniyam@altera.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250728065612.6039-5-dinesh.maniyam@altera.com>
+In-Reply-To: <20250728065612.6039-6-dinesh.maniyam@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -97,28 +96,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Dinesh,
+Hello Dniesh,
 
 On 28.07.25 08:56, dinesh.maniyam@altera.com wrote:
 > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > 
-> Add new i3c driver to U-Boot drivers.
+> Enable the Kconfig and Makefile for the MIPI DWI3C driver.
 > 
 > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > ---
->   MAINTAINERS          |  7 +++++++
->   drivers/Kconfig      |  2 ++
->   drivers/Makefile     |  1 +
->   drivers/i3c/Kconfig  | 16 ++++++++++++++++
->   drivers/i3c/Makefile |  3 +++
->   5 files changed, 29 insertions(+)
->   create mode 100644 drivers/i3c/Kconfig
->   create mode 100644 drivers/i3c/Makefile
+>   drivers/i3c/Kconfig         |  5 +++++
+>   drivers/i3c/Makefile        |  1 +
+>   drivers/i3c/master/Kconfig  | 11 +++++++++++
+>   drivers/i3c/master/Makefile |  3 +++
+>   4 files changed, 20 insertions(+)
+>   create mode 100644 drivers/i3c/master/Kconfig
+>   create mode 100644 drivers/i3c/master/Makefile
+
+beside the typo Askar mentioned:
 
 Reviewed-by: Heiko Schocher <hs@denx.de>
 
 bye,
 Heiko
+> 
+> diff --git a/drivers/i3c/Kconfig b/drivers/i3c/Kconfig
+> index fa68612787b..d4451057de0 100644
+> --- a/drivers/i3c/Kconfig
+> +++ b/drivers/i3c/Kconfig
+> @@ -14,3 +14,8 @@ menuconfig I3C
+>   	  If you want I3C support, you should say Y here and also to the
+>   	  specific driver for your bus adapter(s) below.
+>   
+> +if I3C
+> +
+> +source "drivers/i3c/master/Kconfig"
+> +
+> +endif # I3C
+> diff --git a/drivers/i3c/Makefile b/drivers/i3c/Makefile
+> index 5bb44a8d64f..5ddc4743c86 100644
+> --- a/drivers/i3c/Makefile
+> +++ b/drivers/i3c/Makefile
+> @@ -1,3 +1,4 @@
+>   # SPDX-License-Identifier: GPL-2.0
+>   
+>   obj-y				:= i3c-uclass.o device.o master.o
+> +obj-y				+= master/
+> diff --git a/drivers/i3c/master/Kconfig b/drivers/i3c/master/Kconfig
+> new file mode 100644
+> index 00000000000..22bb7c21ea1
+> --- /dev/null
+> +++ b/drivers/i3c/master/Kconfig
+> @@ -0,0 +1,11 @@
+> +config DW_I3C_MASTER
+> +	tristate "Synospsys DesignWare I3C master driver"
+> +	depends on I3C
+> +	help
+> +	  Support for Synopsys DesignWare MIPI I3C Controller.
+> +
+> +	  For details please see
+> +	  https://www.synopsys.com/dw/ipdir.php?ds=mipi_i3c
+> +
+> +	  This driver can also be built as a module.  If so, the module
+> +	  will be called dw-i3c-master.
+> diff --git a/drivers/i3c/master/Makefile b/drivers/i3c/master/Makefile
+> new file mode 100644
+> index 00000000000..c7562f1aa33
+> --- /dev/null
+> +++ b/drivers/i3c/master/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +
+> +obj-$(CONFIG_DW_I3C_MASTER) += dw-i3c-master.o
+> 
+
 -- 
 DENX Software Engineering GmbH, Managing Director: Johanna Denk, Tabea Lutz
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
