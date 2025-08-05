@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F587C87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 10:51:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BFC7C87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 10:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39E3D835B0;
-	Tue,  5 Aug 2025 12:51:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8CA93835C7;
+	Tue,  5 Aug 2025 12:52:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O8f1NiOs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qoPFHztD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85EAC835B2; Tue,  5 Aug 2025 12:51:45 +0200 (CEST)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 424C6835EA; Tue,  5 Aug 2025 12:52:05 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49E80835AA
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 12:51:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5941C835AA
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 12:52:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7e806613af8so165827085a.2
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 03:51:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-459e210bd2dso1981655e9.1
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 03:52:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754391102; x=1754995902; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CMiF/iWsFZ90JX8NsaZgVOBCvWpmag7dWYlk/uSEXuo=;
- b=O8f1NiOsZIadwJjZvRrlQrQjKwPmuPWAveJTS5+7E4j7WCD03JBTY5QXCTFe0DaJHm
- LidhjEtGxcg4PifEUJEidAE1lw5JVq8qJ70fVH/AfedrSzvZLDwk8WcG8Jablva7gRFn
- WG5m7+vSlOnqEny9oLTkcQdlfIcGTDNzrgq/IqbG2rQN0w462kY7RoNM5YtkOaaR5ryJ
- Kju+qnRkgKWo6Uleb5C7IO4ZabCY6Mj33ORaiYcinFxs8ngE8qoUtyaLn5oaG48UTLJq
- QSIDuPJRsDPfX/z5iwvYr5lgQ8UWXLFW9wa6BQUdcEblSIxcsZVJpN0USpm04sJem82j
- T8ew==
+ d=linaro.org; s=google; t=1754391122; x=1754995922; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=y0O5D+coKNAIZaHWowBvFGyxvBU/CbD9hrIJNYXQ+0w=;
+ b=qoPFHztDlyD3i3rcxbIaPEm5SUuAO5VrCZWZxU1d9J/jHoCdUOOXPA9XrwZn5RxHuy
+ DG5HKzzXH0xe9PjuNcUI3G0o54Vu9ae8S+Jh8BBo7+T8fwj86Ti9pfg6gOS7/CQnHDcd
+ 04KVHMp3v8ED5MWHyNVMLmf09Kl9014Tin9/0B3MVf70xFy68/Ee+dY+tpqrpthk27K+
+ LrEBjw9WMWqJ6xugOum1JYSX9CNeHFGHOotUXSV0yfXOFiNGnJexgEutHHJlbKZeIXJJ
+ aHr25kd5u4O0RJD+9+I+bI+aOm2nORgkcXK7U3rxOqxSelw01sqViPKTyMC+2N1sRCRH
+ ebAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754391102; x=1754995902;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1754391122; x=1754995922;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CMiF/iWsFZ90JX8NsaZgVOBCvWpmag7dWYlk/uSEXuo=;
- b=UfPZofL7eI/6BZlj873W9WCmE6VJo5GKJwsz3J1YgyV2nrlwuihxwOQrSHRfkyosLT
- nGXktEXK0PXrD79lucBidvlIifTEUbgf7o1EulE8cSxuoXmFQSDd50dotktrMA5WE2so
- +zbdF/y+D/WSABpFDwxjd9anDN60vP2CWmbwCizf1ndC33LWRCqxn08OOEYKKvGKN/xs
- b6zCHSZLUJm45nsiKdVeEf5oBWb2vcNKzV0bXD/8rcYVDvs1eMJJZjTu4vnpW9D/AAZp
- rA7fiDGCFitCP4/uvd2TrJpjpKiDk6vcuVnk7nfbibFiSzhU2V9GLuBizst9l7rNacwu
- QGrA==
-X-Gm-Message-State: AOJu0YyJt8X2kk1KU66X0Ua4OjxUntwJATGhYtBcBW2dNze8h8mlRbSd
- mLWFq7NJQGsAc7b2YKoI7nHRINABwrBXbd9cVVlcJZtk1xuQeWUOq6nPbswJC5hZO+9LYS7A3FU
- w/K2WtryHNhy853+7HSOJNnfPT9HFS8PO7ug48RSSAw==
-X-Gm-Gg: ASbGncumPRAhljmzNrzkRQhwyE/TiF1KB8tVXCtrGQATcfW1v5aZ4Q3gjkFQBYKy16E
- srKsJG43NppQhbhBDnVaat64LeuPVINKVyEFxneFI3LZn7Po5Dq1R/nnjQL0EyOiLUG0QhpeJgY
- rVZe32UEIQh0ngcOvVe/TOm15WFl3ZX4HUfC24SzSq9fMkQoyK2H7qwVTgUWx42TvCoAAx4hGcy
- k9hfgrI6Enaml7vafI=
-X-Google-Smtp-Source: AGHT+IGgxmreapNHE/qLn40Ohfi+Eojo0iWX8FL2bos8w/L/HyYyZPrMGBPQWO+kUX0WRudI8N0eoqT+cTXUc1tACJ0=
-X-Received: by 2002:a05:620a:1990:b0:7e8:74d:fdf5 with SMTP id
- af79cd13be357-7e8074e02cemr684434885a.4.1754391101600; Tue, 05 Aug 2025
- 03:51:41 -0700 (PDT)
+ bh=y0O5D+coKNAIZaHWowBvFGyxvBU/CbD9hrIJNYXQ+0w=;
+ b=PLKQcDWjvnMjUPxoZi1bFcYSWWmDk5W91QBAiVhEij8sMWyw/bODKrE2wBcwB1nahp
+ j3M+aweMDIW2rusnInYV+uTjc3uJOAP3wH5NGd8FHktHcwEp6iPzicr9J2P8hVosQrG6
+ U2UlF4dzMoQtrzcsYvvtzMdt8Wp9uK/xBe4a1pRY7K3i3bsipobstBbeW1JDFtpPtl7o
+ YkH7lxHyc3Gl4Ovrs0F9VE7gQJo4eUiuic/fooxLhe14vWHJUfKZLOKrbIUFb00+5tUt
+ gaa8oTOEqKt4lnUXgN7yormmJJ/wSwNucdQo5V5BNKuMd09sKhlC65sZXrdqJ5mN169Y
+ J+nw==
+X-Gm-Message-State: AOJu0YyGIIYTnSS4k7gUuTb+l9gr+SuzpoYMx8RRTJRsQzVp132WZqQy
+ +donWLRU9ivj8M7Bd1HaDwBXOcxcPmqAkaPUBYAxXATnaOmxL8J6ilOqHSvtJ7ppI8wTm4sJn3K
+ o+iXn
+X-Gm-Gg: ASbGnctLyLkIhy9VpfNutyyZ7RMbawI4eY3Fc3Z1+S6W5Tsqnaeu3kRw6lO6L5Quc2t
+ lyreCJxU0lMqzuQytPg23i0Cxa9Pmr+CX4mi2rig7q8Q7FDvl+sibMwKJoGNjBdA+8EnV3ekMRU
+ QZWYqeUdReJ4iCNZbCBNIvQwn1FuuhJj+Ym4YrFSkZHqDYttKIE3l1fPQpOtsqMOyXabUQAuVGJ
+ CB0B90jEaI4EYLcFJu7UL9vPARIEzzoNP7Uo2P9Byf8HHngvOG38d/wOA1dRnic1W+YWYSLh342
+ 3h3/to/QebcrkySNuTBncTEVBm5Tz144T/qMnfSYGu8yT3SJ0oUKRhlxlEXHqBHY+rWWQ2iIQFM
+ datPI68rr4CJ3569nXeCBLyYIQ5gU8lsUdHgq75RZXxx7uqIwkH0=
+X-Google-Smtp-Source: AGHT+IFCW/pPrD8h2HH/BIX+LgnQnZwr5uvE0Zz4T6YCriGIQzqIUPC3uqJ7UM56seG8r9t0pU4ZDA==
+X-Received: by 2002:a05:600c:5009:b0:458:bf15:689c with SMTP id
+ 5b1f17b1804b1-459e0cbf62bmr27120075e9.2.1754391122449; 
+ Tue, 05 Aug 2025 03:52:02 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459dfa64da0sm49988875e9.3.2025.08.05.03.52.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Aug 2025 03:52:01 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Tue, 05 Aug 2025 11:52:00 +0100
+Subject: [PATCH] net: ldpaa_eth: Fix buffer overflow in memset
 MIME-Version: 1.0
-References: <20250805094012.2268436-1-tomas.alvarez-vanoli@hitachienergy.com>
-In-Reply-To: <20250805094012.2268436-1-tomas.alvarez-vanoli@hitachienergy.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 5 Aug 2025 16:21:30 +0530
-X-Gm-Features: Ac12FXwKZI8rpvZY_JcjbVibYJLfryURdkrFGEsOuNY3yUCEtUn7NnCdgkP1HqA
-Message-ID: <CADg8p966M2Ym3L0ZPLMiuMMQq6=D2MrvFd0WdrZkTzUJVvUnRQ@mail.gmail.com>
-Subject: Re: [RFC 0/1] use lmb to calculate ram left for the kernel
-To: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250805-ldpaa_eth-v1-1-7b5708536351@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAE/ikWgC/x2N0QqDMAxFf0XyvEItKM5fkTGSGteAdpLIGIj/b
+ vXxcM/l7GCswgZ9tYPyT0y+uUD9qCAmzB92MhaG4EPjO9+4eVwR37wlFyMRhe5Zt+ih+ITGjhR
+ zTNdjQdtYr2FVnuR/R4bXcZxoDE6sdAAAAA==
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,74 +101,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 5 Aug 2025 at 15:11, Tomas Alvarez Vanoli
-<tomas.alvarez-vanoli@hitachienergy.com> wrote:
->
-> Hi all,
->
-> We recently updated from 2024.01 to 2025.07 and the changes in the lmb lib
-> required us to add some custom code to it.
->
-> I would like to ask for your opinion on if we are overcomplicating this or if
-> it would make sense to add this functionality to it.
->
-> We have a booting mode in which we load a root filesystem in the memory and use
-> it to emulate an mtd device.
->
-> For this, we were using the lmb library to calculate how much ram was left for
-> the kernel, based on the size of the rootfs and other reserved regions.
->
-> In the 2024 version the lmb library was working with user lmb tables, so we
-> were able to create it, initialize it and then do the calculations there
-> without any of the tftp allocs bothering us.
->
-> We were just allocating a part of the memory for the rootfs and then using
-> `lmb_get_free_size` at the start of the memory to get the kernel memory.
->
-> After the update, the table is globally shared, so now there's regions of
-> memory allocated by tftpboot (but with no flags).
->
-> To work around this, we copied the `lmb_get_free_size` and created
-> `lmb_get_reservable_size`, which is the same except it counts as free any
-> contiguous memory regions with no flags (see patch).
->
-> The functionality could also be extracted to be in a generic function that
-> takes 'allowed' flags as an argument.
+In ldpaa_eth_open a memset is used to initialise a struct to 0 but the
+size passed is that of a different struct. Correct to pass the sizeof
+the struct that is being initialised.
 
-Do you know what would be the size of memory that the kernel would be
-occupying? If you do, the memory allocation API, lmb_alloc_mem() can
-be used instead. This function will ensure that the memory returned
-will not be overlapping with any other memory in use.
+This issue was found by Smatch.
 
--sughosh
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/net/ldpaa_eth/ldpaa_eth.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->
-> Our platform is armv8, our lmb table looks like this at boot time:
->
-> ```
-> reserved[0]       [0x83000000-0x83a9afff], 0xa9b000 bytes, flags: none
-> reserved[1]       [0x90000000-0x9077e417], 0x77e418 bytes, flags: none
-> reserved[2]       [0x93000000-0x930089d3], 0x89d4 bytes, flags: none
-> reserved[3]       [0xf3113180-0xf51fffff], 0x20ece80 bytes, flags: no-overwrite
-> reserved[4]       [0xf54fc000-0xf7dfbfff], 0x2900000 bytes, flags: none
-> reserved[5]       [0xf7dfe000-0xfbdfffff], 0x4002000 bytes, flags: no-notify, no-overwrite
-> ```
-> Where  0 to 2 are allocated by tftp, 4 is where the root file system is loaded,
-> and 3 and 5 are added during the init of the lmb.
->
-> Is there a better way to calculate the available memory for the kernel that we
-> might be missing?
->
-> Would it otherwise make sense to update the lmb library to cover this usecase?
->
-> Tomas Alvarez Vanoli (1):
->   lib: lmb: add lmb_get_reservable_size, fix ramfs
->
->  board/keymile/common/common.c | 10 ++++++++--
->  include/lmb.h                 |  1 +
->  lib/lmb.c                     | 31 +++++++++++++++++++++++++++++++
->  3 files changed, 40 insertions(+), 2 deletions(-)
->
-> --
-> 2.43.0
->
+diff --git a/drivers/net/ldpaa_eth/ldpaa_eth.c b/drivers/net/ldpaa_eth/ldpaa_eth.c
+index b72198ca530..94e62748239 100644
+--- a/drivers/net/ldpaa_eth/ldpaa_eth.c
++++ b/drivers/net/ldpaa_eth/ldpaa_eth.c
+@@ -458,7 +458,7 @@ static int ldpaa_eth_open(struct udevice *dev)
+ 	link_state.up == 1 ? printf("up\n") : printf("error state\n");
+ #endif
+ 
+-	memset(&d_queue, 0, sizeof(struct dpni_queue));
++	memset(&d_queue, 0, sizeof(struct dpni_queue_id));
+ 	err = dpni_get_queue(dflt_mc_io, MC_CMD_NO_FLAGS,
+ 			     dflt_dpni->dpni_handle, DPNI_QUEUE_RX,
+ 			     0, 0, &d_queue_cfg, &d_queue);
+
+---
+base-commit: 007610da2cca405ea7739fc120d90085be4b6ac2
+change-id: 20250805-ldpaa_eth-ccbbb28916a0
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
