@@ -4,79 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79130C87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:17:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BACCAC87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:26:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C93E68363D;
-	Tue,  5 Aug 2025 13:17:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C9A683403;
+	Tue,  5 Aug 2025 13:25:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ys3T7ObZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HzDteR9F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24AF68365E; Tue,  5 Aug 2025 13:17:21 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id C9D4583321; Tue,  5 Aug 2025 13:24:52 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B958327A
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:17:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36DF083403
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:24:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7e806613af8so167893685a.2
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 04:17:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-451d3f72391so47396205e9.3
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 04:24:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754392636; x=1754997436; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HEq3Kp6Ryq2GRcHwBVSFd21AXbjLrli3a46Ls6IVVQ8=;
- b=ys3T7ObZ18tgG5EU7UJbADfFVAjUBxcP3vJB02DBv0j3UdrwFyi+IBKmg+iq44jLjr
- jZNjR6P9ZH4arZFzNhPM09OvA3lDy/p7voo7kBuJRl4FOe8AXbRSQDOfV28mzTQj3qN0
- 9X6ImMCzbJdjPPSg3u0k12atiunS5BgtrSgbDi/vkJ1vfbHcY2eS3sxRV67SqIuXuWgE
- 9UErxTjffTv9mM99Wx6cug6jjBPCDrzyaQT1ULzQPPfCxAoUmoixBXtN9JROZk0dxAGT
- ODtksCY1yoT+y2bSWdhP3IBOpwwkRcApn1glU/A4im5G7T3Q+oxrKAv64tHZks9Ekuhc
- iozQ==
+ d=linaro.org; s=google; t=1754393071; x=1754997871; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Lo9bIupYWPAxmkVEta2YeYfOk+MRjnFOlUTbuMn/y54=;
+ b=HzDteR9Fs/+cPyqf9q5U0EE9cUzwaVBVXjRjL3qAXnNgcZUi7G/Xw9AoAVt81DYItJ
+ 607mVRbboG+gSx1LxCWvs9aOdnHjgK++byn84S+vV75/zaGPwqTqKGktLk8peutHbwT/
+ fD6nw8cacg3OYESE1cuQaE2YJA5bjknKIMcmetEHpP099Di9V7gnlVN1PY5MeT7AuwOj
+ PVaQuMnom3Y0d05GX4A84wRirlLhfZ3vnXQA7vzlWEWQGcE7oz9FyxEp825Jzm6EvymD
+ 4xzxvB9yZuE/CLJKJzqdEKlsWr2VFoXBlep3oWaM+z1OSSXoKqmHheNv9ZLe9KghGMqR
+ 27dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754392636; x=1754997436;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HEq3Kp6Ryq2GRcHwBVSFd21AXbjLrli3a46Ls6IVVQ8=;
- b=XW2bdU7pSEVMhxR5Xs8g5MWym7jXNA1yabYEu90mMVkMiXmzRCNYhsbB8JHzfEpI3t
- U9pAcFjv1LSESXA1M6EKEW3CwDqIOo84Z8dX/SQ47YF/ZxFaRFihvXbG3hUyQBJ8bIVC
- auznAZt4UWhXgZAhc2hJl+/riRTesde3GLdQOFIclwlSJoMEK94MRTzC0dNomqR62ByG
- OqVZeFJMiArrNjo4Q8AXRFGE5ltvR4KBlVGr6AQ89V26fl9wI7KZ6JLK4hX71A3C5tJn
- foD2t3nQUFj241+/nSDOxPSbi7BuYtxXafecFkSpHe9hi5odVUlDA6+UUdtc7Judi3Qt
- lxmg==
-X-Gm-Message-State: AOJu0YxoRWtgM9UOSU593XysUGAg2e604ti5IRXomcFbW3zGBll4SWHT
- 82z2hAn6p2mxoCV7fVfypcirTSgq/CA8O3bP3b/T8Et6TayTxs3lgDHwRpXsi2oM3FSht8NJD+a
- 3SxotGAXf7wDroxyqzWePoP+WzuXL2YZXV5QvVZezEUIQ6WMExWKW
-X-Gm-Gg: ASbGncvoLj6582699zK5YzZfwZs8uKj0oCLcGbfL7ATkLuV1ymr02or4r82XcPgnXmb
- PB9QqjYy0nWWJ8qfwSZJv8bZGQ/X+SR2zLaif9zOxXbaKTF4yog6h5whc0Syxrv85VvPiCNTtdC
- ZH27Unu6N3bb4g95ZfxnBgweKIJqUXcn8Dip+jyFhetISsmr3PEZSbxkdnuXR58shlGUCinv1yg
- sUBoNVs
-X-Google-Smtp-Source: AGHT+IEEcyQpTVS4hq+J6KN6wUDkgtkO2LSik1aTBoM7xXXlJes+qkJGeOExoupGUpuXpNxFwuDaXWJi76EZvJhkmS4=
-X-Received: by 2002:a05:620a:4151:b0:7e7:fe10:60ac with SMTP id
- af79cd13be357-7e7fe10610cmr976323285a.33.1754392635965; Tue, 05 Aug 2025
- 04:17:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754393071; x=1754997871;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lo9bIupYWPAxmkVEta2YeYfOk+MRjnFOlUTbuMn/y54=;
+ b=MiuC8NGsrcOpFhhmXxieySmXAagG3CkvHk1c7Anc7KHgAyrNmBqo+EBZTTborq/Rh8
+ I874WgDqNLzQJhJwe+arn3/O6LtnQzZa3BpIO6krHAtAeaZO9EppR8OEHG0wJJ7Vjjv5
+ cuEt5rdneWiHq34FpElfMCTo+KDge3b9NfCq9qXqYHbEC1nOxntMzRe3k21wx5x0J1uJ
+ e3X/GZU0rctrU8MmIpYs+4Da1AEFF4xwrimn3c8ucgN3YcjBpSHcX9eaWQjm/+7aECi7
+ wJ/lpXLvJoRxwahu26/bKTFcYRqvgwcklaoDEzNQXq2OTAVIrWjSK90YA0yZrU05msfj
+ wBgQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVB3Et0+ginl6SSJeqpOaQiaX0tfOQOcQroeu7Kg5QjQ7tm6+z4RWv2m/0RF1SDyIFbDeR2FjU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGLjHjnliWc3O12MEUY+Z6XfoZkzG9cYSZYZd6t5xptLY6nU0X
+ 7AHX//R8LJkPaTzCvTEvPdzP01khRg/ZUvL6dv8nui3W/A5KkAJ7Nc/HGp18M0zeF30=
+X-Gm-Gg: ASbGncsaXPf7p1FtYrDSqWpSsxfGRRUy3PuTxRC1Wr2F7cvFr2hXEdvtkYBZUmmAoCz
+ +Q92mV3yGcwGRj4QHXyCSzoHfaYFiiRu5cG+7DdGu8T/w1zGEBo6uG6Q7i1GlxQZHMcqYD3O8oN
+ /RfXK0OdNs1v7UNf92TFeh0mi2aP7jLNaRPkvJrJ0DSjrrD+O/GvWSmXXR+ad+YAwbbuKM/LoY5
+ TUw5XO/UFfvRWkZvvJep6UfEZZdUFnl5NMeBq77oSEgUoqtpbt2UXci/PXmxzCFbstBU3AqfqGs
+ k4yfIxzFueHtwfB66wpxVlhbupLLu0q0QqlIzs6VDuOu7BG0Ctv9WnR3WXymRZIxZ+Y3FT0znpR
+ Tfq9CdW3glgSjCEtHrPVJu+BYq7L6ePJ5aBVxTBLJ6rI7EeRJwH5GGXhzmDzIjuj6hXwSCZK7Lh
+ lQVARD3yyGH+j/
+X-Google-Smtp-Source: AGHT+IErTBwcK3/9nG2g3qNCc30y7sRz+z39fGETtRWUqTIDv5EO7nHMqvxmT/lTxrTnozAOlGrx/w==
+X-Received: by 2002:a05:6000:2011:b0:3b7:8da6:1bb4 with SMTP id
+ ffacd0b85a97d-3b8d94d07c6mr8588755f8f.58.1754393070561; 
+ Tue, 05 Aug 2025 04:24:30 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35?
+ ([2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c469093sm19005224f8f.51.2025.08.05.04.24.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Aug 2025 04:24:30 -0700 (PDT)
+Message-ID: <b08feb33-3667-4810-a384-3d5451f09b07@linaro.org>
+Date: Tue, 5 Aug 2025 12:24:27 +0100
 MIME-Version: 1.0
-References: <20250805094012.2268436-1-tomas.alvarez-vanoli@hitachienergy.com>
- <CADg8p966M2Ym3L0ZPLMiuMMQq6=D2MrvFd0WdrZkTzUJVvUnRQ@mail.gmail.com>
- <DB9PR06MB7849F1DFD6B6D9956A8FD66FC222A@DB9PR06MB7849.eurprd06.prod.outlook.com>
-In-Reply-To: <DB9PR06MB7849F1DFD6B6D9956A8FD66FC222A@DB9PR06MB7849.eurprd06.prod.outlook.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 5 Aug 2025 16:47:05 +0530
-X-Gm-Features: Ac12FXwPvJG3vpPtP5EnyttRdnCGAfr5GNcWPjdXykOvqV95kS8ji2gN4rtIXhQ
-Message-ID: <CADg8p940FJoAOWQ3L5nRCZDhaSp_C-PdQbuh1XoT9RjfrizyWw@mail.gmail.com>
-Subject: Re: [RFC 0/1] use lmb to calculate ram left for the kernel
-To: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "trini@konsulko.com" <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: fec_mxc: Set error code on error exit
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250804-fec_mxc-v1-1-1ed9b5df2828@linaro.org>
+ <CAOMZO5DdypLP+YMagDm5Xa6Jk2+a-8qb69QtGsgfgdtHc-m3MA@mail.gmail.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <CAOMZO5DdypLP+YMagDm5Xa6Jk2+a-8qb69QtGsgfgdtHc-m3MA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,26 +106,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 5 Aug 2025 at 16:34, Tomas Alvarez Vanoli
-<tomas.alvarez-vanoli@hitachienergy.com> wrote:
->
-> > Do you know what would be the size of memory that the kernel would be occupying?
->
-> No, we don't.
->
-> This code is common to many of our architectures and boards, and the root filesystem size depends on a lot of variables.
-> The idea behind the mechanism is to assign as much memory as possible after the space for the rootfs is assigned.
-> In other words, it calculates the address of where to load the rootfs depending on its size and then calculates how much ram is left over for the kernel.
+On 04/08/2025 21:36, Fabio Estevam wrote:
+> On Mon, Aug 4, 2025 at 12:44 PM Andrew Goodbody
+> <andrew.goodbody@linaro.org> wrote:
+>>
+>> In fecmxc_probe if a timeout is detected when resetting the chip no
+>> error code is set before taking the error exit. This could lead to a
+>> silent failure. Instead set an error code.
+>>
+>> This issue was found by Smatch.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   drivers/net/fec_mxc.c | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
+>> index 54b08482b91..ccd5589318e 100644
+>> --- a/drivers/net/fec_mxc.c
+>> +++ b/drivers/net/fec_mxc.c
+>> @@ -1344,6 +1344,7 @@ static int fecmxc_probe(struct udevice *dev)
+>>          while (readl(&priv->eth->ecntrl) & FEC_ECNTRL_RESET) {
+>>                  if (get_timer(start) > (CONFIG_SYS_HZ * 5)) {
+>>                          printf("FEC MXC: Timeout resetting chip\n");
+>> +                       ret = -ENODEV;
+> 
+> 'return -ETIMEDOUT;' would be a more appropriate error in the case of a timeout.
 
-I am confused here. You mention above that the address of the rootfs
-is determined based on its size. So you do know the memory that would
-be needed for the rootfs? Also, how does calculating the amount of RAM
-left over for the kernel help. I mean, what if the kernel is bigger
-than the amount of left over memory? Can that not happen if you don't
-know the amount of memory that would be needed for the kernel as you
-mention above.
+Thanks. V2 sent.
 
--sughosh
-
->
-> Tomas Alvarez Vanoli
+Andrew
