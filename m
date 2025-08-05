@@ -4,82 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B5DC87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C770C87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:15:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EE6E833D0;
-	Tue,  5 Aug 2025 10:14:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D63D3830B4;
+	Tue,  5 Aug 2025 10:15:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ntaCGYVN";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="qmEKuFVD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94F45839D6; Tue,  5 Aug 2025 10:14:11 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 15C51833D0; Tue,  5 Aug 2025 10:15:27 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B00BB833C7
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 10:14:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57F7882D32
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 10:15:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-712be7e034cso48626777b3.0
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 01:14:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754381647; x=1754986447; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/b5KKlI7GHsZEDe42NpbfwLZXKYeVqmQ6Bl4j96ElbY=;
- b=ntaCGYVNbwmzluBnTOSbWYVQdXlx0sYVXsg5ZO/XysUZ3fUT8VTQ/B5+SEMQ2tuUEq
- 8TAq7wJht9rPYmYaVi3nxwDBXPM+eTJKrNisdGIcfR1Y7cU/oRhLGzQX7NEA5cUkHnMm
- jRx5WxPqZU0o3DElb/wFuaYdDe0/ncMFjUxBtJbuvRv1eU0G+BwpYgVfJNkahrZlapdD
- gforh5Z9n1XS1lBSn8URhaI5hsS1+XHc3Aq6sjvkZwqFHXu0CxPPkmQb7bBysq25Y4d+
- gj1QxYU7dQhsJK2+FriSBjs58+OJ3SyjWAaOsRpTma11P//7s0Nfj3eATqFcviQbruCc
- 6HXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754381647; x=1754986447;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/b5KKlI7GHsZEDe42NpbfwLZXKYeVqmQ6Bl4j96ElbY=;
- b=JP4TFztbTvLkg+2/0BmipBfG1lvWaG2gjNswDtk7b6yK/GjL8KYG3zGnkeCh7vfRen
- VY7rikMvcbbfr3FJxykXaLnbQ1zH2ydrsPE+T8rkNtdw/56Ai78QegJdsnc5dSlKoDKV
- /eFBG/71RePWl832uRs9bD/fqpjRviSX5wOayvk04HG6xrYI08a0oA/KlKvDqYXTMxA3
- qRfwy8PzfMyw5QmfcCNTJfvNJY0HNPCBXG0YFQhVUabDYnlavB65edUeRxyHP2KrQZjE
- ADdWzoahawWQ41d85qWK9bSij4QcPu/ivrYAQ0ISApMqT1M1t1B24eUAGnSjh+uy5R6Y
- 30xw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVN+W772HYwnN5cc3hDsVSfyay7J0F1PIEVhRU97bozrGteKtTzvF38daDOz9Yt/4POM8/xKUg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSM+OxTrTdTvuM9k4QHlNZ3Gh2+SjzG4luwqtE4XGkIZMRoz6z
- bd3hsqMx/R5mdFtSubiLQDEarPO4CK1a62rpyD+kLwSqUEaGibQQsKIpLuMOq7Ht1IPk4/PQSnp
- OUgydBJ6TsmDpq9ec6IB4m5QI3EmBq2L1rQT6nBbAEg==
-X-Gm-Gg: ASbGnct7BXw4tatbawUGSamOpXBSAPP4S3FyNDxtJKHULY+PSASyvYVxcDQUS1UUZYj
- m5cs16QtJtNYTWhJ70Ut9E3Q3y/KuFSIn5HNEJmoTYobFTEcrTaP1rUKsj9Yr+ulmzpEfmbx787
- PfCM8zP0DXrO40qlBDHSsj2ZFMYXHMx5pj9WZFG8kRJtUgasBPxp1/9tYAzjoNVUPRDRl8mclKf
- T/u/PBd
-X-Google-Smtp-Source: AGHT+IEmifstt+uC0n09bFECWsqmHzZfOoHofRqrLvQt0r5EzFwPq6/Oy/k8dtP3uAd5lcJjLWh/Ti49U595sFWAzPQ=
-X-Received: by 2002:a05:690c:110:b0:708:21e9:a20d with SMTP id
- 00721157ae682-71b7f6355damr158897347b3.16.1754381647293; Tue, 05 Aug 2025
- 01:14:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250805054614.5555-1-heinrich.schuchardt@canonical.com>
- <CAC_iWj+1siVWvxnVGAEksTq2AKWtu=1KE-a+kns3iH66J4Uquw@mail.gmail.com>
- <60613f0f-d696-4f63-9dcf-afb709618a2e@canonical.com>
-In-Reply-To: <60613f0f-d696-4f63-9dcf-afb709618a2e@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 5 Aug 2025 11:13:30 +0300
-X-Gm-Features: Ac12FXwXvtztf6Itig_UEaaii0YrOKPfEjGK2WuoDX44298iMVXKqUhEJqG-Qnc
-Message-ID: <CAC_iWjJ1OrV7rnxJoPgCYcnT6mRsT34iDkc5k30R-FdmajJxbQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] efi_loader: Support loading a ramdisk with bootefi
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Adriano Cordova <adrianox@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Izb2+B+F8q1+LHpHRucd/8GgRrxNBA1Ox2m4BjdMNq4PXalznRfPgofm+h2VT5kMp+wx5/DYS6V7bHMf1ZQKPA8Uz2aHK1Ko48ho3Flyfntb7kYQQrvhyWY6tsJ26K89LB5VlNw6eXglnIcKwKuwwG7eoNwAzvnYxrVa09oJB/z7gpbHhbk+6DiCFZGGTcYonPpdR+8zd9Pw8k18WYVYOG0fX6ruvT74NjTRNg6J9KellMhcQZRkIzH00riKrguqwfROygT47mPG4WROmUyQillOkJWvOntMIQXYfOuUrFW6wZ/uGj2yD4SQSBM5j1wlfMD/LHxqIQV4nxk6CajLbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wWnXAaCc7oNAOdo4769RwHIZe2CwSbQ15+t4pVu2xQM=;
+ b=NBk0AaoWSY2hWyH+sTqAfSGpcJOk+bpDC04P/TAtnCG6BALiXVNFoqwOdaVysQBYr6Hlf5KbKtoWWrYf4pF8DLOIJct5Fad6aVkojL+Q+3b1B/6zk8J3GVsx+/bm3KDhGsK7CXiwMDCA1eufMyEiU7zRQvUZtPkakVva3Z6PHvRuqTsgvUh33zxhOAnG0Ns2fj40X4DyPwQduUuIybcfLorIj+9wDNt5YhzuuIGj3IQVfn83QjzQj3tAmTtntIrYXLwLUtqxKJ2IqTF7YLLZq0bcq65pnegnU0GpGHYyTtSe3gGdBnkwLVFXNsSD4cyW8X18GZjjyp1QANZjajiE0Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wWnXAaCc7oNAOdo4769RwHIZe2CwSbQ15+t4pVu2xQM=;
+ b=qmEKuFVDa8Dr9wkU7iis/BfgbjVVMFIUZ1J10fsZNbly0J3EK0o6Emb50FIpI36XN24WV+rQaGHSrs0r/VL2I5xHrrPzQiZuKEIIh2nOzBTzeHP7OqFI3oSg6I7eyIkqK7iNS8DROZjCGdeW4DS6Afc9MQqxLfH69DqXXGBABzzYeAxE7buX1UJmoRUm+S7g9kxvxjybOULQ6eTlIfvnigoC+e68zy+eLky7O6VfcNZ1nvXgM0Ipn1g+msjH1ZWu/AO85xxuD9YzguD8eIyO8AG3japdABYwx6+z5HmuX0lsDRVNVObc6OtMVodfU3lKQ5EJcipVJDWnPEmtHMFSQw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by GV1PR08MB11074.eurprd08.prod.outlook.com (2603:10a6:150:1ed::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.20; Tue, 5 Aug
+ 2025 08:15:19 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.8989.018; Tue, 5 Aug 2025
+ 08:15:19 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Chuanhong Guo <gch981213@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Alexander Dahl <ada@thorsis.com>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v3 00/22] mtd: spi-nand: driver improvements
+Date: Tue,  5 Aug 2025 11:14:49 +0300
+Message-ID: <20250805081511.1482964-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <11f6f79e-0622-42e2-901e-16335ad73409@kontron.de>
+References: <11f6f79e-0622-42e2-901e-16335ad73409@kontron.de>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: HE1PR0902CA0059.eurprd09.prod.outlook.com
+ (2603:10a6:7:15::48) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GV1PR08MB11074:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7313742c-c5fd-4206-7ecf-08ddd3f83766
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|52116014|366016|1800799024|38350700014|921020; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?yvqcMQYHvhK6zJBHHwLwCNcxcwtQmE3bbsbxpcHk0AbdUQusaVfXI3CClKTy?=
+ =?us-ascii?Q?GNAz5FOfrX98um80P3LfgD7d+BOIZYSAzD9D2qiAAfiP8jFqJg667uufe5Jx?=
+ =?us-ascii?Q?WSMBeyKrxBm0OwW31kLy7uPXvIYb8qDbnTP28deu43ayYr1cbmMuOjPsloFC?=
+ =?us-ascii?Q?wCElE/lXn8MMpOdQoM55Fpec+Vc8/BNT9WewJzMrlXY4NgMIogNFZodj9Rxq?=
+ =?us-ascii?Q?fLMzfwdd6yPZ9oY1MQapr50bDE0Yx/09Iih8YhXDwVUKijBKVEg9U0oE/8lF?=
+ =?us-ascii?Q?4khTCPASDrXzi0xWFuggh21PBpty5cLywfpCsC4G9cUyxva8r7Zq5MZ12jL4?=
+ =?us-ascii?Q?XPZu8NVoCIKHFOmRo1Lcw9Y7YzKbKr8fHUcO86cpPN55hd+Jpu/IUGG8Hnai?=
+ =?us-ascii?Q?AJJ+5iNGKUITA9Bu4SZkiedm+sBBOn71GId/uBRXdzdfnCnaR1+wnQEoHvkr?=
+ =?us-ascii?Q?YZb2I0jclTyyx9VrzeVBdPTsIy69jnA69xEElxB8sqVvkdQg1Zo+z97yKIDA?=
+ =?us-ascii?Q?94RjiIpI7H5J1v1qc7jUn+RqFCpao3TAAxXHwC2ZTglNNCE5lvWYLBXNMkJE?=
+ =?us-ascii?Q?COEb89IacosC0+rJNsUljEZNArLh5MeypnO5j7o02mzn0YBVVt70RYQ47FR5?=
+ =?us-ascii?Q?BF6Y3RSVcLFn+3f2bbaYYI6EkG2GcSLcSr2MiXpfJKqGjnRbtuG1QuY5gSYi?=
+ =?us-ascii?Q?TLtAaocax3olM7/tKgcl3n9/OyGLjhsaWoW+VUmynGDP/RN5ajp4F86IIKKU?=
+ =?us-ascii?Q?ZrJzGTgQh/0EBoDu7Ja2hx+m2wP0SJ4TAblbEp9BL6bf2idU7K+c9Iu/p/HZ?=
+ =?us-ascii?Q?GpnVLl9gD8XwZxr99bul6fVfB/OBvB0r+YNJ5BejbHwbaOv4b9egeSCMaTjC?=
+ =?us-ascii?Q?t8+jhHSATJhyNsNIZEjDqShELRSrZLgOzGc9zdettXHdTl1N+HVGLTHGdvk+?=
+ =?us-ascii?Q?xZ7JZ2LgpFbi/ZV7uYwzVi5rmLvbEGHmeLOvP0y/v/9tedKzSCy55qXC5Ksi?=
+ =?us-ascii?Q?WJrBg/rUqgx0zGMdKCvgGUav1X5p15W/RRxVDV40+YmuMvIbYF8nGNQkbEbE?=
+ =?us-ascii?Q?EfWg1Ia0IjB6kDBuD2e3hcnyU68mb5cbF+mhmb/jfTIvQhN0HXroKwZ22iGG?=
+ =?us-ascii?Q?3qtkAKyUukrfnj27HrUBSYPQgoSQJK23rGpc/TvLoDZSqMTlu+aW0zL0yRRS?=
+ =?us-ascii?Q?0KRR4T/b0XQO59NxqvVtDhoimHmHbOS6f3N4tB2oZ+zrp4+uPWWbfHxpf3PD?=
+ =?us-ascii?Q?EDQ/cYWRzkl5gOGfACAriT5+eB8qDOpPYNiV5zlGb8z22omwgZm/6elGCrJo?=
+ =?us-ascii?Q?+w1KaNBgNRqLxwqIT2u+YRU+FmzFEKn0OLPNmUsA1tCeldT8bizv1YrnK4r9?=
+ =?us-ascii?Q?SYDnIAjtJPdeuHTtlG/taU/FcFo0cgeRH1YNq3UtXXn+MwCEbnwqjV8YBywp?=
+ =?us-ascii?Q?Lnr9obSZs4W6Sbi487t3vpjdwV6h+nl3i6X08/cTdWXcmlKyWr/0BJvZlZNh?=
+ =?us-ascii?Q?Eov59ZBl5sRzUug=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(52116014)(366016)(1800799024)(38350700014)(921020);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LgyJmqyMse9Et0QPH6QDEfnb8tnv7k0yGvshjQVXupPAgDIdkFCFYMMuRNYy?=
+ =?us-ascii?Q?GbW8evQm9q2yPJPl7gZx7GXXnncBO79Jv9br5WOmUWHGt1MWyoakuw1KwTrl?=
+ =?us-ascii?Q?dEVc1bQtxSyTk7YARc56j8P9s3w45KB4F4XaQeoGXi7BvX96BLxyi7lR2vjc?=
+ =?us-ascii?Q?nBvGtAqfQsjNTYoRH5dtgPT+1lrFl8MHV/oTvFV8c66+soQTK1PjXODaKaNM?=
+ =?us-ascii?Q?CesiOJBclES4zATTGaFBQe2rqVvTx3bWc5fm3T/YU4wTZKYtC0xfWbRwVlC4?=
+ =?us-ascii?Q?zctHeYkRniRWm3sm8lB9tQYpryvidti0WPFa9S1bnF1MRHO6nU4DHkEaFjM2?=
+ =?us-ascii?Q?oZpLUVm5Zeq8ccIxZJGhdq0rergqtpBKeq3FP2n1QILSSRb2txQwRxOFW7dP?=
+ =?us-ascii?Q?/TstLIcy9wi02XRe3WyRZGDvZPrZcOeRWhD5m5MuYnzrAVrxY4lbegqwnwo+?=
+ =?us-ascii?Q?yylxx5yKhp4m1CjMibIZ/QZ3XFuZy0KY2ASPYYDPH11uPL4ZZ03Zcq3cnbTL?=
+ =?us-ascii?Q?P+1q4Adz+WNvKqUNzjq0JjsT5cjW6UUxCx+Yd2LTweGiR8ir2jqfUcMW2CHP?=
+ =?us-ascii?Q?/eYdjZOT3jKWquNJP1uIoHnPAuID5oFfu3gg5LnU01nWkTxPThWai1Lv5jFC?=
+ =?us-ascii?Q?RFvC277FAgqTBQg8s12cR7BXzdrVUK9uDnk3vBv52tLe960l7DTAz114c8XX?=
+ =?us-ascii?Q?8WvXKCyN9DtnZowlXlDuzvczKNliZndTckWe3MEoTRS47t+DtUuBL3aE5aUX?=
+ =?us-ascii?Q?v5A/VhHArGBrm6uUx2SZ6MG4D+ftMTnSSfv11H7+okS//OxkBKOFQyOUcfca?=
+ =?us-ascii?Q?cg7alqsB/WYPEDYUQwrNavbiYOnH1FpgAsrTtVQtuCPAgv8JqNa7IHETIO5T?=
+ =?us-ascii?Q?aMEhUz7oopdYHo9/Of2vsytR6htmS19nWmS3j0LwpSIVQuhaH4MkEk6BvdLz?=
+ =?us-ascii?Q?uh9sh6WppNqU/iK4xglitrOrch3WFeSPUaeg81WEM9gazzQPVzTFOscHRbqM?=
+ =?us-ascii?Q?T1oD4n16ChAOTBRSSAGyyQ0sOJ7P9y+o4kUfg3ucqWROKHDla8SI+vNe5Rpr?=
+ =?us-ascii?Q?xxUj4ZGvRAoUr/nYiOA29fqsEuPnpbXt3654QdOdPNflZiY+QT6/eBA3foHb?=
+ =?us-ascii?Q?AtKXjkvkwFQfdKeAXYyi193dEoOxYNYFOT7/lwPJfB53lqFL+WGiSMkgXgmJ?=
+ =?us-ascii?Q?w0vQrMvc+49t2ZE84seH51CuTEu+CME/gGol59e3d0cGnRug5nO5sZBj50cL?=
+ =?us-ascii?Q?GrNjviImOW95bjAOC47dVYTBR3iCh5veY+DIO+/FFrost2CN+ODvjRI3RJax?=
+ =?us-ascii?Q?LIvhXHG6ylbAjb+cbcA1IeDEzkSCmwg+bKi+DIEyAfE2Cp0rgGG97dag+I1C?=
+ =?us-ascii?Q?IJkn/+/cxWRHBexp3UmBajksgU3JaSXMzI5d3WPilf548qUoHOpbFN7JaU6W?=
+ =?us-ascii?Q?+iiGfK3pYGKiH+YqFvWKMvCWoeJiFhcI0MR6ovtB5mehGvLBD2ozoaJgrV/p?=
+ =?us-ascii?Q?rRQ/STNIMJl/Vj/VqjDFLPCk13Y3yh/RBHdjsD5K0l/EaJqv8/4RaWm6N0tI?=
+ =?us-ascii?Q?Cck8ktXlew6u6t/ePPsyUkBvtBZEOV9eTji5TZlmKV5vGmgmgHGFYTTde2RE?=
+ =?us-ascii?Q?7Q=3D=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7313742c-c5fd-4206-7ecf-08ddd3f83766
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2025 08:15:19.5038 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lOjAD3JW433gzjrDh6VqcdsHjtKVKYgO4TlGVloEY8hBjPbGhviG+L7xKSnVewGEMKtjUyCH1Cg6fWT/KZ3lbEToJOuqpBQiiRt1LZWFjfg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB11074
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,235 +167,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 5 Aug 2025 at 10:33, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 05.08.25 08:56, Ilias Apalodimas wrote:
-> > Hi Heinrich,
-> >
-> >
-> > On Tue, 5 Aug 2025 at 08:46, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com
-> > <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> >
-> >     From: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
-> >
-> >     It is sometimes useful to be able to boot via EFI using a Linux initrd.
-> >     Add support for this.
-> >
-> >
-> > Overall I don't mind adding this to bootefi.
-> >
-> >     Fix a 'specifiy' typo while here.
-> >
-> >     Signed-off-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
-> >     Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com
-> >     <mailto:heinrich.schuchardt@canonical.com>>
-> >     ---
-> >     v2:
-> >              consistently refer to Linux initrd instead of RAM disk
-> >     ---
-> >       cmd/bootefi.c             | 33 +++++++++++++++++++++++++--------
-> >       doc/usage/cmd/bootefi.rst | 37 ++++++++++++++++++++++++++++++-------
-> >       2 files changed, 55 insertions(+), 15 deletions(-)
-> >
-> >     diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> >     index 8e8752127ed..b8f5bb35950 100644
-> >     --- a/cmd/bootefi.c
-> >     +++ b/cmd/bootefi.c
-> >     @@ -136,22 +136,39 @@ static int do_bootefi(struct cmd_tbl *cmdtp,
-> >     int flag, int argc,
-> >       {
-> >              efi_status_t ret;
-> >              char *p;
-> >     -       void *fdt, *image_buf;
-> >     -       unsigned long addr, size;
-> >     +       void *fdt, *initrd = NULL, *image_buf;
-> >     +       unsigned long addr, size, rd_len = 0, fdt_addr = 0;
-> >              void *image_addr;
-> >              size_t image_size;
-> >     +       int fdt_arg = 2;
-> >
-> >              if (argc < 2)
-> >                      return CMD_RET_USAGE;
-> >
-> >              if (argc > 2) {
-> >     -               uintptr_t fdt_addr;
-> >     +               ulong rd_addr = 0;
-> >     +               char *end = strchr(argv[2], ':');
-> >
-> >     -               fdt_addr = hextoul(argv[2], NULL);
-> >     +               if (end) {
-> >     +                       rd_addr = hextoul(argv[2], NULL);
-> >     +                       if (!rd_addr)
-> >     +                               return CMD_RET_USAGE;
-> >     +
-> >     +                       rd_len = hextoul(++end, NULL);
-> >     +                       initrd = map_sysmem(rd_addr, rd_len);
-> >     +                       ++fdt_arg;
-> >     +               }
-> >     +       }
-> >
-> >
-> > Shouldn't we keep the order unchanged? I dont know if scripts are using
-> > bootefi in the wild and although they shouldn't changing the order is an
-> > ABI breakage
->
-> You can still use the existing forms:
->
-> bootefi <image_addr>
-> bootefi <image_addr> <fdt_addr>
->
-> The patch adds two new forms:
->
-> bootefi <image_addr> <initrd_addr:size>
-> bootefi <image_addr> <initrd_addr:size> <fdt_addr>
->
-> Existing scripts should not be impacted.
->
-> >
-> >     +
-> >     +       if (argc > fdt_arg + 1)
-> >     +               return CMD_RET_USAGE;
-> >     +       if (argc == fdt_arg + 1)
-> >     +               fdt_addr = hextoul(argv[fdt_arg], NULL);
-> >     +
-> >     +       if (fdt_addr)
-> >                      fdt = map_sysmem(fdt_addr, 0);
-> >     -       } else {
-> >     +       else
-> >                      fdt = EFI_FDT_USE_INTERNAL;
-> >     -       }
-> >
-> >              if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
-> >                  !strcmp(argv[1], "bootmgr")) {
-> >     @@ -215,7 +232,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int
-> >     flag, int argc,
-> >                      }
-> >              }
-> >
-> >     -       ret = efi_binary_run(image_buf, size, fdt, NULL, 0);
-> >     +       ret = efi_binary_run(image_buf, size, fdt, initrd, rd_len);
-> >
-> >
-> > The loadfile2 protocol that gets installed is later removed by a bootmgr
-> > event in case of a failure. Is the event still called for bootefi ?
->
-> do_bootefi_exec() signals the event group
-> efi_guid_event_group_return_to_efibootmgr after returning from the payload.
+This patch series makes u-boot spinand driver almost the same as spinand
+driver from linux-6.16-rc6. This provides the following improvements:
 
-Okay then looks good
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+* it becomes easy to port changes from linux kernel
+* more flash is supported
+* spi drivers can accelerate flash reading/writing using spi-mem dirmap API
+* continuous reading mode was supported
+* OTP support was added
+* add support of special data recovery reading (for some flashes)
+* bugfixes
+* other minor improvements
 
->
-> Best regards
->
-> Heinrich
->
->
-> >
-> > Thanks
-> > /Ilias
-> >
-> >
-> >              if (ret != EFI_SUCCESS)
-> >                      return CMD_RET_FAILURE;
-> >     @@ -224,7 +241,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int
-> >     flag, int argc,
-> >       }
-> >
-> >       U_BOOT_LONGHELP(bootefi,
-> >     -       "<image address>[:<image size>] [<fdt address>]\n"
-> >     +       "<image address>[:<size>] [<initrd address>:<size>] [<fdt
-> >     address>]\n"
-> >              "  - boot EFI payload\n"
-> >       #ifdef CONFIG_CMD_BOOTEFI_HELLO
-> >              "bootefi hello\n"
-> >     diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-> >     index d6e4e62e383..7c5448586b7 100644
-> >     --- a/doc/usage/cmd/bootefi.rst
-> >     +++ b/doc/usage/cmd/bootefi.rst
-> >     @@ -12,7 +12,7 @@ Synopsis
-> >
-> >       ::
-> >
-> >     -    bootefi <image_addr>[:<image_size>] [<fdt_addr>]
-> >     +    bootefi <image_addr>[:<image_size>]
-> >     [<initrd_addr>:<initrd_size>] [<fdt_address>]
-> >           bootefi bootmgr [<fdt_addr>]
-> >           bootefi hello [<fdt_addr>]
-> >           bootefi selftest [<fdt_addr>]
-> >     @@ -44,6 +44,16 @@ command sequence to run a UEFI application might
-> >     look like
-> >           load mmc 0:1 $kernel_addr_r /EFI/grub/grubaa64.efi
-> >           bootefi $kernel_addr_r $fdt_addr_r
-> >
-> >     +or
-> >     +
-> >     +::
-> >     +
-> >     +    setenv bootargs root=/dev/vda1
-> >     +    load mmc 0:1 $fdt_addr_r dtb
-> >     +    load mmc 0:1 $kernel_addr_r vmlinux
-> >     +    load mmc 0:1 $initrd_addr_r intird
-> >     +    bootefi $kernel_addr_r $initrd_addr_r:$filesize $fdt_addr_r
-> >     +
-> >       The last UEFI binary loaded defines the image file path in the
-> >     loaded image
-> >       protocol.
-> >
-> >     @@ -51,21 +61,34 @@ The value of the environment variable *bootargs*
-> >     is converted from UTF-8 to
-> >       UTF-16 and passed as load options in the loaded image protocol to
-> >     the UEFI
-> >       binary.
-> >
-> >     +.. note::
-> >     +
-> >     +    The bootefi command accepts one to three arguments.
-> >     +    If the second argument contains a colon ':', it is assumed to
-> >     specify the
-> >     +    initial RAM disk.
-> >     +
-> >       image_addr
-> >           Address of the UEFI binary.
-> >
-> >     -fdt_addr
-> >     -    Address of the device-tree or '-'. If no address is specifiy, the
-> >     -    environment variable $fdt_addr is used as first fallback, the
-> >     address of
-> >     -    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
-> >     -    When using ACPI no device-tree shall be specified.
-> >     -
-> >       image_size
-> >           Size of the UEFI binary file. This argument is only needed if
-> >     *image_addr*
-> >           does not match the address of the last loaded UEFI binary. In
-> >     this case
-> >           a memory device path will be used as image file path in the
-> >     loaded image
-> >           protocol.
-> >
-> >     +initrd_addr
-> >     +    Address of the Linux initial RAM disk or '-'. If no address is
-> >     specified,
-> >     +    no RAM disk is used when booting.
-> >     +
-> >     +initrd_size
-> >     +    Size of the Linux initial RAM disk.
-> >     +
-> >     +fdt_addr
-> >     +    Address of the device-tree or '-'. If no address is specified, the
-> >     +    environment variable $fdt_addr is used as first fallback, the
-> >     address of
-> >     +    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
-> >     +    When using ACPI no device-tree shall be specified.
-> >     +
-> >       Note
-> >           UEFI binaries that are contained in FIT images are launched
-> >     via the
-> >           *bootm* command.
-> >     --
-> >     2.50.0
-> >
->
+The following linux kernel driver features was not implemented
+
+* support of different ECC engines
+* per operation spi bus frequency
+
+The patchset also includes fixes for continuous reading mode.
+The similar patches were sent to upstream linux kernel.
+
+Changes v2:
+ * update patch description
+ * add fixes for continuous reading mode
+
+Changes v3:
+ * fix duplication in patch description
+ * add more information about commits ported from linux kernel
+
+Mikhail Kshevetskiy (22):
+  spi-mem: sync a bit with linux-6.16-rc6
+  mtd: spinand: Use the spi-mem dirmap API
+  mtd: spinand: Add a NAND page I/O request type
+  mtd: spinand: add missing MODULE_DEVICE_TABLE()
+  mtd: spinand: simulate behavior of linux's function spinand_wait()
+  mtd: spinand: more use of spinand_to_{something} helpers
+  mtd: spinand: replace enable_ecc variable with disable_ecc and update
+    corresponding logic
+  mtd: spinand: minor refactoring
+  mtd: spinand: more refactoring
+  mtd: spinand: sync code with linux-6.10
+  mtd: spinand: set bitflip_threshold to 75% of ECC strength
+  mtd: spinand: Add support for setting plane select bits
+  mtd: spinand: Remove write_enable_op() in markbad()
+  mtd: spinand: Introduce a way to avoid raw access
+  mtd: spinand: add support of continuous reading mode
+  mtd: spinand: Add read retry support
+  mtd: spinand: add OTP support
+  mtd: spinand: Enhance the logic when picking a variant
+  mtd: spinand: sync with linux-6.16-rc6
+  mtd: spinand: fix direct mapping creation sizes.
+  mtd: spinand: try a regular dirmap if creating a dirmap for continuous
+    reading fails
+  mtd: spinand: repeat reading in regular mode if continuous reading
+    fails
+
+ drivers/mtd/nand/spi/Makefile         |   5 +-
+ drivers/mtd/nand/spi/alliancememory.c | 155 +++++
+ drivers/mtd/nand/spi/ato.c            |  84 +++
+ drivers/mtd/nand/spi/core.c           | 937 +++++++++++++++++++-------
+ drivers/mtd/nand/spi/esmt.c           | 123 +++-
+ drivers/mtd/nand/spi/foresee.c        | 107 +++
+ drivers/mtd/nand/spi/gigadevice.c     |  66 +-
+ drivers/mtd/nand/spi/macronix.c       | 289 ++++++--
+ drivers/mtd/nand/spi/micron.c         | 180 ++++-
+ drivers/mtd/nand/spi/otp.c            | 369 ++++++++++
+ drivers/mtd/nand/spi/paragon.c        |  20 +-
+ drivers/mtd/nand/spi/skyhigh.c        | 149 ++++
+ drivers/mtd/nand/spi/toshiba.c        |  63 +-
+ drivers/mtd/nand/spi/winbond.c        | 228 ++++++-
+ drivers/mtd/nand/spi/xtx.c            |  20 +-
+ drivers/spi/spi-mem.c                 |  45 +-
+ include/linux/mtd/nand.h              | 157 ++++-
+ include/linux/mtd/spinand.h           | 342 +++++++++-
+ include/spi-mem.h                     |  93 ++-
+ 19 files changed, 2936 insertions(+), 496 deletions(-)
+ create mode 100644 drivers/mtd/nand/spi/alliancememory.c
+ create mode 100644 drivers/mtd/nand/spi/ato.c
+ create mode 100644 drivers/mtd/nand/spi/foresee.c
+ create mode 100644 drivers/mtd/nand/spi/otp.c
+ create mode 100644 drivers/mtd/nand/spi/skyhigh.c
+
+-- 
+2.47.2
+
