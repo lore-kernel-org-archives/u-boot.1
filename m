@@ -4,81 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC63AC87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 23:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B3FC87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 23:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5D0E83933;
-	Wed,  6 Aug 2025 01:06:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 60DCE831E4;
+	Wed,  6 Aug 2025 01:07:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dKUr0eUR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NZyRcDvz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2835F831E4; Wed,  6 Aug 2025 01:05:59 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 790CE83276; Wed,  6 Aug 2025 01:07:42 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C92638334D
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 01:05:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80B0683102
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 01:07:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-33253a73769so29660531fa.3
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 16:05:53 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-55b9855f671so348758e87.0
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 16:07:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754435153; x=1755039953; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754435256; x=1755040056; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WgTWdcWkL5upKRM6IOvoP3ixHNxCTLZVRIqne4+2Iq8=;
- b=dKUr0eURQif1k82m6Ob3ZnfP+3YgHRjBTAFYiwhkZUnD4VNW4xLjVzYuwU3cLLNGA5
- aCO8WQf/V4l0US7Dy3KvmzVX0Cy+ebsxcsgTk2gOGVYs4lrON3n7fNucHJXJC2tsAPNb
- 9+E5ZpxHWXSRn1VKk20WYgensmlizLrCm/IfriumBUYAelx2SrNZjNDnDpdi9zTtV5R8
- vI7U+dgmQkF4cc0ZKa6k9YbjIFRSEkHeRvcOn5UWZcSX0A/EhlILnc9FE0ABh/A4ZbLs
- 60YiCKaiy9MmzMUTxkrHyZo9HcF633/ipJDnVXC96uODzh99jOQD+ijR+aE5FNfeHqqC
- 4r8Q==
+ bh=rAdOngdloedR2NX+ImOvAsZTM4VxWzGx56vsPQxyuPc=;
+ b=NZyRcDvzi2qhEwVROhWrFNKkR8eLbeiOFxUl/8U8pnWWq8rw2naAgLphjGbw415qZW
+ dGAQEYWpLUrT4Mg21Ptp0eTiADc9UuYDLyIkW/sR2wLP6Nyn2WO4cMBHU3a0Hf/foUH5
+ 1bvmQ6TkHqjTfkG+hD9sNhiiD/pLwXj7cjRuGJRG/rjoPPSyxJBQpIzD4BIJzVRtH/cB
+ RWSC0R52uHN9E9txhIFYSwzQKsQ4b/pt3Ci7AH7moCH7gBNHH442PgULeN/mJfcCv9F9
+ hxyWT05d94SOWba4mch/krpcXHZ8j68+1pI7+4TCZvmVIB9plAsopZwn8DV+y/0mSpK3
+ lN0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754435153; x=1755039953;
+ d=1e100.net; s=20230601; t=1754435256; x=1755040056;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WgTWdcWkL5upKRM6IOvoP3ixHNxCTLZVRIqne4+2Iq8=;
- b=VRyoUZLSwJfQZrBLW4/qo5uXoVbf25Qm/DC3HBMZnkcuyu5BzbXI1QsW1B7e6vs+Ns
- xnG0w61MegguuSz9V+s54pTdmjpgvnzkxWY8DgF+asd24C+bJAY95+A4KoRshTJUt37k
- M1ZWSQXGhD6qcJyAI6TaqEXKE1A/cjQFVtF90X3KqQ7CEJB46+uIw4w2iXobiKsAhbk6
- 8lQKsB6PjNQvAt7azA0xGDNtwsPEfMXKBnaR9teHuLM5jlqNXnSU5I5LE9waqw6kqEGP
- K4dDl+K/WDps6Qr11/8dH0Vv6MoHIyNuqxV8s/BSI55+WpnF1WHUy6Ei88QGnWLb0HvF
- /AoA==
+ bh=rAdOngdloedR2NX+ImOvAsZTM4VxWzGx56vsPQxyuPc=;
+ b=pNFl+ZWHf7Bm7IdZz00+bJzox0675c1n6Yh+vCmK/qpiz73UL+FnEs4NjhHB4E3AKD
+ IljSkPFn42ffZ3GOnVxbu2uNdUE/8+gZIBGnd/Wzs5aDYcPsoDQCFOeFzSTrCzwLWce/
+ iO1lXZQmwqVQpMzNfmaE5m3sGWtWALp17sNzNc4jxebPMafwvBLIKSZAAsGgTUd1mGgz
+ sLFSIk+nfGnn3Vv0PJ3DR80OYQeO1027vOZuMhQApUtU9oTo/O5qjLvJkLxIebV6jheS
+ dHA4NpAOXyNsOyUJiVVaZlHdfadl0KGCvLPLK+7ioeGcqJyb1Q8q5ZA1vShYZE+LkQf6
+ zliw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVhI/kWFy/F8QXTt6s1uMIkmH41JiLpTCZwhMDVZllG7lP6W2oWMfUtGC3BrUwMqx0phoMJN/E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz4wyKqjAfejzZy7g0dvy8je78hB9DxNuWi27Gsj8Bd3yRqpNLH
- a0URRnPgmtYwqHL8OfIuinJvrxBgbeujrnD7Ii+QCibDY9XNMUg4yY5Fxz6cky8+9qSzxddLgb9
- gRH4j2eGIdsT3rcD5tH1m+6uUwh1rsuU=
-X-Gm-Gg: ASbGncvZmnNn+mwEb8KsDfwdLXfKnAD0KQyEGbGsQQQgr2GxN6Z3rIB2vpoUOX90raV
- 1Bu/N35st9lWp46dllo8aaN7o5kpyKbeDFuV8riI+zD1i54+C8NSg3lW5g+2Af11DEOlYV5K3o4
- 0/PzV7XKnD1G+op+bOPsaH40H1SYja5NGcHcflp0djVCAcin4BIx+rSutEeiB/kGu//FnQCq1O4
- 6DutvkkRhSkLM3fAp+mw/dHVkMjU/2Mm717+oY=
-X-Google-Smtp-Source: AGHT+IGmdkJFc/RfDNgSGvyEk1dDgGc8f1RAwjFBm9fw4Pyksa7JMSVSIqIEme62x4721BATzYObuAi4XQn5946aqBc=
-X-Received: by 2002:a05:651c:211d:b0:32b:720d:56f8 with SMTP id
- 38308e7fff4ca-3338146ab9fmr1123641fa.40.1754435152625; Tue, 05 Aug 2025
- 16:05:52 -0700 (PDT)
+ AJvYcCVwZFSCeHDCll8wrfoMgkSr/t2yrm+4m6ZtMCkqPBpZ/3p44A9Qx8/odUXqHZg1nf9lqK+H9WI=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywap73oaMuhXYChFlz9c5osA+Q5Y2wygaxevrzK/3aiwuZe3vXY
+ 7u2pEFrlh3dcPG6twAKTEInRHc+/Fp28/4pFCo/cdaMhdfZy4pa1k6NXJTIRkSHDdNogkHIqegk
+ MrFhBR9z6kiNT+4EANB2q7/9iYinDi2Q=
+X-Gm-Gg: ASbGnct3jH8j0u8z5mMjzhQpFYYKK5dAB6brPMYe44nx3RhFiiAFGl7Dj0nE1wJfj7U
+ GV2FMo6msxwEo81cNFANGOMxcU35DDzQ9DzegGBJ5xI5GsMS0jFngw71xo2lcwrCdjXnYTRFJd9
+ ZbN8xox59LnEXbcOgdpkKiwHX+lST1PsVmkZ1gwy/07B9FNXgWFl1Ap+XeLNSSwvQSh/cgHnUaM
+ lTBxq5nMbYWCZax2mnNjpA6/kn3LUm/58K3tp1ysnt/Wu5ocg==
+X-Google-Smtp-Source: AGHT+IGqR1S5yYPTfOFBPgNun7An+0MzBJ/zSFjnQI+lFdMG+P0aA5VzyDG4O8VAlBIVnXvvec723WVuJWLbPUY+G+c=
+X-Received: by 2002:ac2:51c9:0:b0:557:e3be:c7c5 with SMTP id
+ 2adb3069b0e04-55caf30ec2emr212446e87.28.1754435255478; Tue, 05 Aug 2025
+ 16:07:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250731-imx8m-optional-optee-v1-1-5b5ea143468f@phytec.de>
-In-Reply-To: <20250731-imx8m-optional-optee-v1-1-5b5ea143468f@phytec.de>
+References: <CAOMZO5DT=ua+vCX5OQq6sx1nfcFjFY0S1hJ8OmNE1RWCQAmxJg@mail.gmail.com>
+ <e5c64596-b118-4394-87b6-1b121c801af2@kontron.de>
+ <pqr4l75nuc57vmrp4r3hjwjxi4p5dgwxlz7h5nrn77rfxwpfmr@dto7364jv2ei>
+In-Reply-To: <pqr4l75nuc57vmrp4r3hjwjxi4p5dgwxlz7h5nrn77rfxwpfmr@dto7364jv2ei>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 5 Aug 2025 20:05:41 -0300
-X-Gm-Features: Ac12FXzFoBaQ17JjGGrADgw0GC9D6yL131cnVlmTcSQtdDo_zE_5XZ7urtj5cSw
-Message-ID: <CAOMZO5DXGve7=-+x3y9aV4N=1ztwObn2LKyPomSmFFi1JLkHyw@mail.gmail.com>
-Subject: Re: [PATCH RFC] dts: imx8m{m,n,p,q}: Make optee packaging optional
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>,
- u-boot@lists.denx.de, upstream@lists.phytec.de
+Date: Tue, 5 Aug 2025 20:07:24 -0300
+X-Gm-Features: Ac12FXzTYIYTPY1umki_DirNjhh0kpfX_ayYKJLl_5g2CMIdrwQopuxGPZbXvhA
+Message-ID: <CAOMZO5C7-mYM2fOR8z_2xzOZ6cSMmG32PKvbjdP+bEhqv1cwcA@mail.gmail.com>
+Subject: Re: [PATCH] arm: imx: imx9: scmi: Fix booting from USB
+To: =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
+ <jpaulo.silvagoncalves@gmail.com>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>, Peng Fan <peng.fan@nxp.com>,
+ Francesco Dolcini <francesco@dolcini.it>, Tim Harvey <tharvey@gateworks.com>, 
+ Peng Fan <peng.fan@oss.nxp.com>, Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, 
+ Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,45 +103,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yannic,
+Hi Jo=C3=A3o,
 
-On Thu, Jul 31, 2025 at 9:34=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrot=
-e:
->
-> binman can omit packaging an optional blob when it is missing.
-> This allows us to not bother with config options.
-> The core challenge is the interaction between tf-a and OP-TEE where
-> U-Boot/binman does not know whether tf-a was built with SPD=3Dopteed or
-> without. This is important because tf-a might jump into the void when no
-> optee_os is present, leading to boot failure. Thus by marking it
-> optional, user is prompted to recheck (due to the warning message)
-> whether they really have the right combination of tf-a and optee.
->
-> Note that after this commit a warning will be printed when optee is not
-> present for a binman build.
->
-> Image 'image' is missing optional external blobs but is still functional:=
- tee-os
->
-> /binman/section/fit/images/tee/tee-os (tee.bin):
->    See the documentation for your board. You may need to build Open Porta=
-ble
->    Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to/t=
-ee.bin
->
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
-> ---
-> Due to a bug in binman, we had to guard binman tee.bin with OPTEE config
-> as builds would error when tee.bin was not present in path; Even though
-> optee_os was marked as optional in the binman tree.
-> Since the bug has been resolved in
-> d4f61eae2ab7 ('Merge patch series "Fix handling of optional blobs in binm=
-an"'),
-> we can mark it optional again without getting build errors.
->
-> I remember Fabio disliking that a warning would be emitted in builds, so
-> I marked this as RFC.
->
-> @Fabio what is your opinion now?
+On Thu, Jul 31, 2025 at 3:47=E2=80=AFPM Jo=C3=A3o Paulo Gon=C3=A7alves
+<jpaulo.silvagoncalves@gmail.com> wrote:
 
-It looks good to me. Thanks
+> With this patch, I believe Peng's concerns are addressed, and it also
+> works for our use case.
+>
+> What do you think?
+
+It looks good. Please send a formal patch.
+
+Thanks
