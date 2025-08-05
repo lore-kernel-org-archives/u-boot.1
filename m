@@ -4,68 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88C6EC87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 16:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 205E0C87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 16:10:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3AC683890;
-	Tue,  5 Aug 2025 18:05:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 874CE83890;
+	Tue,  5 Aug 2025 18:10:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="udG1lHwd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xVcUC3l5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E79CD83893; Tue,  5 Aug 2025 18:05:43 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 775DA8388B
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 18:05:40 +0200 (CEST)
+ id 0E432838D2; Tue,  5 Aug 2025 18:10:31 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 659668388B
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 18:10:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 575G5c0w320348;
- Tue, 5 Aug 2025 11:05:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1754409938;
- bh=Ghw+Ta156nylZYyK/zKU9swg5v4hzuUBnmY3IuuRXmU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=udG1lHwdL+HkZSuOs+kxLUVoUof+0heo34YTThgrgY9m6xH1/KVi4d5Q2HMVUWdP4
- FgKbqLq7f/Bvrbf8fsJehOe4Q+57ZW/cffwXkZRtLDY++kUGty79eOq0mt8fggBjgN
- Nsc7eMiBz7gvAebQRdifzK6Kl75DREfg3VQUnveU=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 575G5cx53563429
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 5 Aug 2025 11:05:38 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 5
- Aug 2025 11:05:37 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 5 Aug 2025 11:05:38 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 575G5cv12397356;
- Tue, 5 Aug 2025 11:05:38 -0500
-Message-ID: <20abb931-125c-4769-b1a5-4cc770ccc303@ti.com>
-Date: Tue, 5 Aug 2025 11:05:38 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4589968e001so36845775e9.0
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 09:10:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754410228; x=1755015028; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sM7of9fLqaaBIzUQe7dxizPxrN7YWtY+qJqZHsjBjbM=;
+ b=xVcUC3l5dwmRBJ3k7Cl9nVjDqx5TOQBUFA3lNH6VWr2b2+RpOtFwIw37BEQHboMLUH
+ pv/rMojTDaNvGDMm+uU8fFq3edEPlLd7oTJr9qhAJrrHPx4PFnh6VXyS7/ES8NBuwI0r
+ HoM64psSEXmKJFF8cIXmqf2I4AHJDzqVF1Al/Xp7EnHxjLGnCUzrEeDAc5zgHhsJGKFd
+ 3YjZ81Jukt9LSkLvRxNv9KF+ROHTXLszqWeM72OkG9yiaumxtQZIT6YGc9X0dbnCISWk
+ LFxM5P8V/8ftgeahfDndI7ZRQWakksRSLRCYcpJMPqEAdqKGIFPHmKC0wPWSstgIQsn5
+ euww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754410228; x=1755015028;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sM7of9fLqaaBIzUQe7dxizPxrN7YWtY+qJqZHsjBjbM=;
+ b=MrJKYNWHoAXi8O+X7JoKn36ttYGRSq7r/zYoOLLgwhQHfPX5AWuajSVrC5lofNkbTW
+ 6UEcCHkFad1rEk/5ZcSmwzliFike0N9CM1tLJhY83WhFAF6HU0r9GKc14yzBKxTcOA14
+ QYAakwhwdrS4fNWY72M//Jsjcav3xCDE8ByCxM1Sbd+B/nV3PHHkbotauBiMdafrYOU/
+ YMZ9K1tYCF/tkSGaVwsm+kLcbI16DL+3ciCV+w1hJQc49J/Es6SGHo4+7XqihZB0heyM
+ qKSlFBDYJl7Yp/8DKaqnLEQa3EgRTrgBt/bY8ZTgZCoaNN2ikggesTVjaghykst0QYMU
+ g9tw==
+X-Gm-Message-State: AOJu0Yxq1Vw0rrp3+3hgEq8RjA77cFfT2hLzUDijU5fP0tAt7+VGbyqa
+ ZIAmCgvwmtHRpnYV8vn9jlKD+ziIKnWfIPDajtRVw1fOs499oLh9YI3loZFzFpBL8i5nd56uJ1/
+ Kmj2E
+X-Gm-Gg: ASbGncuYckafCBSIJ75rK+IaocIQHMb7yb5BZWeRNfO5q31nTouYjuxpIrcXAGGK2Xw
+ Huy4gcIQziHUfB9Ry6ZRIE0UJ8ECKGoDAI7nWIcO9ECcXgVNjXP91Uypb9a/oQ/ydqDniA4s3R3
+ YNVaFGUnvLAgQ99wswnHOIZEb2xzBSZIpWqYTR0Rr4vPKegL3tKVnhJA1I3zWx2XVVD7vbHNrik
+ KOl4qnJG5jzwgVXeNe8Op2W79T0pYDe7cN9vSenpCYDt8ZiS342JQuvgpxvrnMtoUCTELLYQLz/
+ 2KPfD7k5UquhxSimtaOSUidB4R8ALgd9zbICTr/a2r4rINsNEX46hlbVfygb9SJUzuZR/7d3j0q
+ sCQTCpiDutM4Vee6703ghHFt4cxxq0msLwDUyYB4gNEjyTeW0Ao4=
+X-Google-Smtp-Source: AGHT+IE5RA7mw/lc+IbhkoMc2XocY/hv85a0H9oXOdWOu8dC3ZbdUGsYcK/tUDZQrEFBVGnYAvHIrg==
+X-Received: by 2002:a05:6000:2289:b0:3b7:8d80:e382 with SMTP id
+ ffacd0b85a97d-3b8d94698f1mr9853982f8f.4.1754410227757; 
+ Tue, 05 Aug 2025 09:10:27 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c469582sm19439472f8f.52.2025.08.05.09.10.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Aug 2025 09:10:27 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Tue, 05 Aug 2025 17:10:26 +0100
+Subject: [PATCH] net: phy: cortina: Ensure memory allocated is freed
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] soc: soc_ti_k3: Add support for AM62P variants
-To: Tom Rini <trini@konsulko.com>
-CC: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Bryan
- Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- <u-boot@lists.denx.de>
-References: <20250804233718.1471877-1-jm@ti.com>
- <20250804233718.1471877-2-jm@ti.com> <20250805015005.GG124814@bill-the-cat>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <20250805015005.GG124814@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Message-Id: <20250805-net_cortina-v1-1-5a3faca0ad2a@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAPEskmgC/x2N0QqDMAwAf0XyvELtVGS/ImOkbaZ5WJSkjIH47
+ 9Y9HsdxOxgpk8Gj2UHpy8arVGhvDaQFZSbHuTIEH3o/+t4JlVdatbCgG6jNd5/jEHIHtYho5KK
+ ipOVqPmiF9BKb0pt//830PI4Tf3ionXYAAAA=
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,27 +101,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+In cs4340_upload_firmware a buffer is allocated with malloc but this is
+never freed. The pointer to this buffer, addr, is not even kept
+unchanged. But in some cases addr is not a buffer allocated by malloc.
+Introduce the use of another pointer to keep track of the buffer and to
+know if it needs to be freed.
 
-On 8/4/25 8:50 PM, Tom Rini wrote:
-> On Mon, Aug 04, 2025 at 06:37:17PM -0500, Judith Mendez wrote:
->> This adds a support for detecting AM62P SR1.0, SR1.1, SR1.2.
->>
->> On AM62P, silicon revision is discovered with GP_SW1 register instead
->> of JTAGID register, so introduce GP_SW register range to determine SoC
->> revision.
->>
->> Signed-off-by: Judith Mendez <jm@ti.com>
->> ---
->>   drivers/soc/soc_ti_k3.c | 66 +++++++++++++++++++++++++++++++++++++----
->>   1 file changed, 61 insertions(+), 5 deletions(-)
-> 
-> This is fine for what it is. But is there any clean way to guard some of
-> this data / tests with IS_ENABLED() checks so we don't grow every K3
-> platform?
-> 
+This issue was found by Smatch.
 
-Sure, I can wrap the functions with IS_ENABLED() and respin, thanks (:
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/net/phy/cortina.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-~ Judith
+diff --git a/drivers/net/phy/cortina.c b/drivers/net/phy/cortina.c
+index be480ecef6c..dec024844b5 100644
+--- a/drivers/net/phy/cortina.c
++++ b/drivers/net/phy/cortina.c
+@@ -135,6 +135,7 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 	int i, line_cnt = 0, column_cnt = 0;
+ 	struct cortina_reg_config fw_temp;
+ 	char *addr = NULL;
++	char *to_be_freed = NULL;
+ 	ulong cortina_fw_addr = (ulong)cs4340_get_fw_addr();
+ 
+ #ifdef CONFIG_TFABOOT
+@@ -147,6 +148,7 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 		size_t fw_length = CONFIG_CORTINA_FW_LENGTH;
+ 
+ 		addr = malloc(CONFIG_CORTINA_FW_LENGTH);
++		to_be_freed = addr;
+ 		ret = nand_read(get_nand_dev_by_index(0),
+ 					   (loff_t)cortina_fw_addr,	&fw_length, (u_char *)addr);
+ 		if (ret == -EUCLEAN) {
+@@ -158,6 +160,7 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 		struct spi_flash *ucode_flash;
+ 
+ 		addr = malloc(CONFIG_CORTINA_FW_LENGTH);
++		to_be_freed = addr;
+ 		ucode_flash = spi_flash_probe(CONFIG_SF_DEFAULT_BUS, CONFIG_SF_DEFAULT_CS,
+ 									 CONFIG_SF_DEFAULT_SPEED, CONFIG_SF_DEFAULT_MODE);
+ 		if (!ucode_flash) {
+@@ -179,6 +182,7 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 			puts("Failed to find MMC device for Cortina ucode\n");
+ 		} else {
+ 			addr = malloc(CONFIG_CORTINA_FW_LENGTH);
++			to_be_freed = addr;
+ 			printf("MMC read: dev # %u, block # %u, count %u ...\n",
+ 				  dev, blk, cnt);
+ 			mmc_init(mmc);
+@@ -199,6 +203,7 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 	size_t fw_length = CONFIG_CORTINA_FW_LENGTH;
+ 
+ 	addr = malloc(CONFIG_CORTINA_FW_LENGTH);
++	to_be_freed = addr;
+ 	ret = nand_read(get_nand_dev_by_index(0),
+ 			(loff_t)cortina_fw_addr,
+ 			&fw_length, (u_char *)addr);
+@@ -211,6 +216,7 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 	struct spi_flash *ucode_flash;
+ 
+ 	addr = malloc(CONFIG_CORTINA_FW_LENGTH);
++	to_be_freed = addr;
+ 	ucode_flash = spi_flash_probe(CONFIG_SF_DEFAULT_BUS, CONFIG_SF_DEFAULT_CS,
+ 				CONFIG_SF_DEFAULT_SPEED, CONFIG_SF_DEFAULT_MODE);
+ 	if (!ucode_flash) {
+@@ -232,6 +238,7 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 		puts("Failed to find MMC device for Cortina ucode\n");
+ 	} else {
+ 		addr = malloc(CONFIG_CORTINA_FW_LENGTH);
++		to_be_freed = addr;
+ 		printf("MMC read: dev # %u, block # %u, count %u ...\n",
+ 		       dev, blk, cnt);
+ 		mmc_init(mmc);
+@@ -280,6 +287,8 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 				     0xffff;
+ 		phy_write(phydev, 0x00, fw_temp.reg_addr, fw_temp.reg_value);
+ 	}
++	if (to_be_freed)
++		free(to_be_freed);
+ }
+ #endif
+ 
+
+---
+base-commit: 007610da2cca405ea7739fc120d90085be4b6ac2
+change-id: 20250805-net_cortina-6e1d30db62d4
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
