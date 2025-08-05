@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D3ABC87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 15:46:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E051C87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 15:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85B23838D5;
+	by phobos.denx.de (Postfix) with ESMTP id D3E4D838E3;
 	Tue,  5 Aug 2025 17:45:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xIRYkOgU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="es28/GlR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7FAC838BB; Tue,  5 Aug 2025 17:45:53 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 7DB72838BB; Tue,  5 Aug 2025 17:45:54 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D80F3838C5
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 17:45:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9095B83890
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 17:45:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-458bdde7dedso23543225e9.0
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 08:45:51 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-458bc3ce3beso20625285e9.1
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 08:45:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754408751; x=1755013551; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754408752; x=1755013552; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=IK3BEPYH5OOu4Mxmw1dUh9/vd9j0VXhDt2Ge91sl5qM=;
- b=xIRYkOgUtTSjL2iMoS+wA2JrvQcebjZjCn3NOxn52RpbpA2fu2plJgtZt7jJ0uFV9y
- AO+RVzCuuJS2JI18i/og7ZlPEmq3Yk9T1EFYZ1EoAtNIIlZj53+AqnS4808j9XwBWyiT
- lol4WWtffXuIYQPWAHahOpcrtfiKPec1QdXnVUuKIrgiThGbgGEWV7Mo9KumE5r3GzdR
- l1vyvjXPvKSmtqBF+7S4H/jCXT6/uA25gZmgdmcFRGDLNmDQzSKusWfG4qBPnTADKdz/
- EJ14TrnhwBQkcjUZEkkJjTXza/UjERXZBAo9asZR2Nf0edzZhJMw1HqICR6bbq2ewttS
- bEaA==
+ :reply-to; bh=rTDtydKcFfxkI3Uby9QQTHXJD+LfMkwpBnwxc9BxGC8=;
+ b=es28/GlRKn92CcpZTUIxMw3A+dA9jPEuWRL+CploybVEXrWaUxSa9yIkEwKWVEfT0x
+ ijhGdPbV7jXuAhlry+ZEjsGfDauzjeF7Y/LpsnVlpVDsFkyxsfG9StLTAmkXFS6vDRe1
+ 4tntxKyXfOlB18O/AD92LPQxHobKj3MRr3o275yJp/nngkNtCNwzffBN+AbKEyrhZXW0
+ 6MOjqRzgobV1znfyFH8DgFZ3z5W61uIAaLac7Q9BeaFzXuyI18uXpqyxxFRVkcbTJEjD
+ H7M84pZlkRaCid5QnQHAECTry2Mh6QOWMfuLQAa42xIcfI7PV3ma/lKiIYaEjxVE06Q7
+ bckA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754408751; x=1755013551;
+ d=1e100.net; s=20230601; t=1754408752; x=1755013552;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IK3BEPYH5OOu4Mxmw1dUh9/vd9j0VXhDt2Ge91sl5qM=;
- b=OH2tari3sR4pnNhu0PwD09n4CguEvSkkikL48AvmazmmhpdZme6HqFLI8PdTk3c91u
- lihMKBgAsTq2YK2DeEsAkaAFnM6/1H45mgxPVdO16MRWZcnFS+Wl9ijlIrpReKMbdAsj
- HswHkVBYA74uk30/rE2dDUcpzB6utnVMW3Bx9kIUdokYBdcJmv9/Rlqg3ygFzcumDw2Q
- TS1JE3OI4xCL/VcTHaX9vQWr19b8Cqe0iOZIQ+T9Cw6dhOKgHH50HM+JMvfQc5b/GVtm
- DVIo2Lhdz8xlorQgK3a24fPDcqB7mwDam6BLjm+b8RazTv4E2r2HcyKs9efmLeyElNwD
- lXmg==
-X-Gm-Message-State: AOJu0Yy41oNBv0ufL4OiY92kfoWRZKPFfGnvE5ga4Eutm73bRfPBhMjm
- teQ0FGVvyWvUN+hNneqJ4fJdWwwm3pTaYWhUkyaR7QgP5PzitCMj7Yfzm+0w0+ZH97c=
-X-Gm-Gg: ASbGncuy4IguyHUtb8VrPHYv2Wslfbo/XbS959w1WGEUpyfsod4/ihnShyTP7yntnxw
- LwPo6ZYOcuYQyZ9IvvXEcSjavwwhpRUZXH7DSY4zG1jQ8YCYHVjcKARH3/AjV8fcEmiATZ8Pp0+
- ZlRt2nbyWapkEoIKnwmtIKJuEj6uisrECK9ELTuGSAupdGyylYLfZt9bazw5pGCocrEdpu+9FJB
- L3asCP63S8AgZ+3mYmdF6voxnh5YwqCRD+rbj3ee2bvrQT9gv7aZ3qEFUZ0ZuhGfMTMHDcwmFor
- oXI17gCEQS3+Dmklzj1FPUXQ992KjfbROCsUmkDOoUyPNw+3jwCVaApoGcpKmswLhB2nmd+L6GT
- 1cWQNRonBcPnciQdDvxe0MpYqP2qR/+UuLK5zJ0W8RWjLnG87bDo=
-X-Google-Smtp-Source: AGHT+IFmHZr6z96xKRDY5E7aIaiKTPKP5Tld1aBuDemo6VdoknxhxSQAtOK2+e1YfyCB4irM17dJrQ==
-X-Received: by 2002:a05:600c:3591:b0:456:161c:3d6f with SMTP id
- 5b1f17b1804b1-458b95b7ca2mr104063925e9.11.1754408751173; 
+ bh=rTDtydKcFfxkI3Uby9QQTHXJD+LfMkwpBnwxc9BxGC8=;
+ b=HYlHkEPrj74Mfl64G4Pwf/6o67E7WhiTAYWfOro4lfoXjpgseF5mkLdjzMi+jpulta
+ aScwVyfEyjrvWtgSB47fmODjCa9V8SE4+3o4/aw6XOYo5/rKUSYV/+BH9JspLEiHaEtL
+ w06CZ0WbhnCsYD1xe1en6/HkJCgZb7w+ZecZPuiRCG/36jTt5u1iKuPr8AX4UiWzATU1
+ Dyuy12iuogK8ifGfMX6o1s/lA0aeU0ebMm4ehtuw54/mqyUYk+LWdTXJbS8qkrw8QQ55
+ EmNTVGIY7mogJCoKDJdXFJCi+YccYVWb0XYFF9skPP1weZbsomTHc5XoeMMmN4khBG6B
+ zgdg==
+X-Gm-Message-State: AOJu0Yy1u9dT7yIW281RtyKbv1mgUx/jyRcJbhZABUSuCVJlw5USZptW
+ Z+4n5rVRlWJdmCkSulYftJMNhA8A0mLrIklQ2adh2gS6uNtIjUT8UIjac04pc/PDsQs=
+X-Gm-Gg: ASbGncu2p1xhdLOXrdHQgwC7eWfy8RBdh7hXvJ3XJadzrKXZC8LskY2wrby8KciQxxi
+ cVR4kgaVGGhUO4jRhbIL+eMEXzyo8XPF51tr2NoYq+AxkVwHRu5F7lNXQxndqKTgezmSfP3f2hc
+ 26XcKZ29tbVOnUgqaIVNjxioNq7C+UqBNIBFkvP1uiTPJCDqmxrL/c6Pm5nZ7De2gxyX6nABQGP
+ 9j7e63ta0brdW4MtT01WkXDa69JJpT90IRtXkrQYPXPbUHglyi2ksL1oEL8yBoQyPlDXBzAVJEN
+ 6d+0LwXoketLFciJ/nuGavsbCuSrjrSseNLpUROd4uX72HU8EWC2Rw0XCI98gNREVUNM+G8vAGh
+ u0rjF112cbhVPlbNOlycOSoJw2+rD9jfYoMfQ+Tv41XlCwIVAFjA=
+X-Google-Smtp-Source: AGHT+IGEz2LhLM7nGhpTY30X1zxqL0zjghKDKE1F3bWStGfMILyuNymaIRTcIAmJXOlYMqh8HVmR3A==
+X-Received: by 2002:a05:600c:1f16:b0:456:1e5a:885e with SMTP id
+ 5b1f17b1804b1-458b69cbde5mr120960575e9.3.1754408751994; 
  Tue, 05 Aug 2025 08:45:51 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e5852e28sm9007255e9.9.2025.08.05.08.45.50
+ 5b1f17b1804b1-459e5852e28sm9007255e9.9.2025.08.05.08.45.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 08:45:50 -0700 (PDT)
+ Tue, 05 Aug 2025 08:45:51 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 05 Aug 2025 16:45:48 +0100
-Subject: [PATCH 2/3] net: octeontx: Remove unneeded test
+Date: Tue, 05 Aug 2025 16:45:49 +0100
+Subject: [PATCH 3/3] net: octeontx: Free allocated memory on error
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250805-net_octeontx-v1-2-637095d82265@linaro.org>
+Message-Id: <20250805-net_octeontx-v1-3-637095d82265@linaro.org>
 References: <20250805-net_octeontx-v1-0-637095d82265@linaro.org>
 In-Reply-To: <20250805-net_octeontx-v1-0-637095d82265@linaro.org>
 To: Joe Hershberger <joe.hershberger@ni.com>, 
@@ -99,75 +99,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In nicvf_cq_handler there is a test for !cqe_count which will return if
-true so it is guaranteed that cqe_count will true after that point. This
-makes the later test for cqe_count redundant so it can be removed.
+In octeontx_smi_probe if an error is detected then memory that was
+allocated is not freed. Small refactor of the code to use a common
+return and free memory. Also return -ENOMEM for an allocation failure.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/net/octeontx/nicvf_main.c | 46 +++++++++++++++++++--------------------
- 1 file changed, 22 insertions(+), 24 deletions(-)
+ drivers/net/octeontx/smi.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/octeontx/nicvf_main.c b/drivers/net/octeontx/nicvf_main.c
-index 8021cd752b5..94e5d827614 100644
---- a/drivers/net/octeontx/nicvf_main.c
-+++ b/drivers/net/octeontx/nicvf_main.c
-@@ -273,31 +273,29 @@ int nicvf_cq_handler(struct nicvf *nic, void **ppkt, int *pkt_len)
- 	cqe_head >>= 9;
- 	cqe_head &= 0xFFFF;
+diff --git a/drivers/net/octeontx/smi.c b/drivers/net/octeontx/smi.c
+index 233c26f7319..217bcac2ce2 100644
+--- a/drivers/net/octeontx/smi.c
++++ b/drivers/net/octeontx/smi.c
+@@ -338,7 +338,8 @@ int octeontx_smi_probe(struct udevice *dev)
+ 		if (!bus || !priv) {
+ 			printf("Failed to allocate OcteonTX MDIO bus # %u\n",
+ 			       dev_seq(dev));
+-			return -1;
++			ret = -ENOMEM;
++			goto error_ret;
+ 		}
  
--	if (cqe_count) {
--		/* Get the CQ descriptor */
--		cq_desc = (struct cqe_rx_t *)GET_CQ_DESC(cq, cqe_head);
--		cqe_head++;
--		cqe_head &= (cq->dmem.q_len - 1);
--
--		switch (cq_desc->cqe_type) {
--		case CQE_TYPE_RX:
--			debug("%s: Got Rx CQE\n", nic->dev->name);
--			*pkt_len = nicvf_rcv_pkt_handler(nic, cq, cq_desc,
--							 ppkt, CQE_TYPE_RX);
--			processed_rq_cqe++;
--			break;
--		case CQE_TYPE_SEND:
--			debug("%s: Got Tx CQE\n", nic->dev->name);
--			nicvf_snd_pkt_handler(nic, cq, cq_desc, CQE_TYPE_SEND);
--			processed_sq_cqe++;
--			break;
--		default:
--			debug("%s: Got CQ type %u\n", nic->dev->name,
--			      cq_desc->cqe_type);
--			break;
--		}
--		processed_cqe++;
-+	/* Get the CQ descriptor */
-+	cq_desc = (struct cqe_rx_t *)GET_CQ_DESC(cq, cqe_head);
-+	cqe_head++;
-+	cqe_head &= (cq->dmem.q_len - 1);
-+
-+	switch (cq_desc->cqe_type) {
-+	case CQE_TYPE_RX:
-+		debug("%s: Got Rx CQE\n", nic->dev->name);
-+		*pkt_len = nicvf_rcv_pkt_handler(nic, cq, cq_desc,
-+						 ppkt, CQE_TYPE_RX);
-+		processed_rq_cqe++;
-+		break;
-+	case CQE_TYPE_SEND:
-+		debug("%s: Got Tx CQE\n", nic->dev->name);
-+		nicvf_snd_pkt_handler(nic, cq, cq_desc, CQE_TYPE_SEND);
-+		processed_sq_cqe++;
-+		break;
-+	default:
-+		debug("%s: Got CQ type %u\n", nic->dev->name,
-+		      cq_desc->cqe_type);
-+		break;
+ 		bus->read = octeontx_phy_read;
+@@ -355,9 +356,16 @@ int octeontx_smi_probe(struct udevice *dev)
+ 
+ 		ret = mdio_register(bus);
+ 		if (ret)
+-			return ret;
++			goto error_ret;
  	}
-+	processed_cqe++;
+ 	return 0;
++
++error_ret:
++	if (bus)
++		free(bus);
++	if (priv)
++		free(priv);
++	return ret;
+ }
  
- 	/* Dequeue CQE */
- 	nicvf_queue_reg_write(nic, NIC_QSET_CQ_0_7_DOOR,
+ static const struct udevice_id octeontx_smi_ids[] = {
 
 -- 
 2.39.5
