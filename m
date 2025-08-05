@@ -4,85 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28526C87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 09:21:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1241EC87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 09:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D9C8835B0;
-	Tue,  5 Aug 2025 11:20:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 97F59831D7;
+	Tue,  5 Aug 2025 11:22:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mX5oZHNp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mWr8vLve";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5021C835B0; Tue,  5 Aug 2025 11:20:22 +0200 (CEST)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id ED5FF832F9; Tue,  5 Aug 2025 11:22:15 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79B3681D5D
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 11:20:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 694B181D5D
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 11:22:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-b34a6d0c9a3so5232424a12.3
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 02:20:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-459e0a249d6so4675065e9.2
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 02:22:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754385618; x=1754990418; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ysc9J/9W6bMz5yxZFL4EJhN8oGA2qvyjIngraV8nM54=;
- b=mX5oZHNpRu96qSO3lJRYKyfHlEGVgvwiRGiCKkOdp5fyaHirWhIRMcKwqemNC1PVgh
- Y3pLIcghsm4xLyCPnbawywb88iVGJgMorHM9a8I/8kCb+HODEvgrQK5KI8n1yJpwb/4N
- a3O86etViIzDdhiBgFHR6GpatFMrJTnT1d5xy9YGOoG6kZHc0ZzrVuHbt7zMOwY49ePL
- 5T+VwYp23DfH09MxT+KH1CTZ5YtBAp+M10HB5G2dhUfWEEcbwpzk7Yr1ekfuuPgjs0bt
- a3dyozMVcVpT69RJN+nJdKNU3vRo485SpVLpMQwofmqiIl6ftVhPGhUT2X7dqeyN5CVH
- gkEw==
+ d=linaro.org; s=google; t=1754385733; x=1754990533; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mSdH22DrQdAfwljSXTN10oSn+kmm8UewKroXzRurAaQ=;
+ b=mWr8vLverq4mMKzHLuH/KTkaiexnc+Cq/YCCQTg/LYuqhMQ/mXfIxIlUWipailTqUH
+ ZnLfdsA1+dhwoGeOk0scgB3yzpcYCNZol2MneQjFsDYlJO7umDiZwTYEkUskc/yeySM9
+ wOUWlTaDvpgC+ClYjSY/UmipO2C4JmtFDQvmA526TLyQoFl7xMkHdv35DyjWvSXCnut/
+ nggQ5sdcVHr4arbC+F/u5VxHJbezRdvKMPai464/OS4fGmzanPpVz9FlHHS5G7uEBXDi
+ 41arDHg3VIvpPghyNhlg1bIlvzg63k56gN4iCK2d+/PEcuhi/eTB3HIcK4Olm8zxx4ju
+ Gg2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754385618; x=1754990418;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ysc9J/9W6bMz5yxZFL4EJhN8oGA2qvyjIngraV8nM54=;
- b=KeDna6sKr1Oqe3yg+hrO1YxpdfSo49zyapGv/JFRISzBS00TLaKM6/ChkFa2X0jNcc
- WRlEkbeuy1gD1UkeD2pp0T0W5+6lENEWqMn6SpDs4Kl8Rby47iMRlfAng01neB/c3MTm
- bxC3+BzYlmRfHbnJQo72E4RHwOuF34OgOOu0KpJCbl+mmbR2FyPaC9TdJRNRG7Zk/Nxs
- arBrUNM5EvZsnGuby4/OAa7BDlJ4cOPt7dcjyd5ER39/TtTUXoW8lyIeT3S22jmO3TMr
- X4gNgmY3T76waVd2DeuhxwJtBFn2LjNzrUf0Vq9mOht/O2C7RTxv/Xd0x3o6VQt96Kar
- 5QvQ==
-X-Gm-Message-State: AOJu0Yzgc/ODtWsPRXzpAhBcUwVw87/UWZYmWXzI7lSEkN4Dlxnwi6ga
- dLmhZLBkRRPgtMWYblEJYqKDYxooHQqj7sJGXlj7qWauVoVNo0jRxCGk
-X-Gm-Gg: ASbGncukHjj2Pn8pHt/iJEapJk8cTDQFNbBUQ6F188ni0dXp1rSuQ9Qom82rivQAbA7
- JMaFlLhT6I1OQd5Ops2SMXsafmnH0RZp//4eJajxMVX4jgrWzI1rm4F4PQyzrSoG5Gnog65vDeN
- JyczAZG6M6PQa+4AtKUfQNkW8bq1/dCsqvFUguvEYACiAlL+5cWfTIjO9Eq+0p3GGxzZORtaETq
- KapQhUMpAG06QwyB8I0wr/tqYgQyE9sxAiDZQCLFENJrnQuH8dN7LFx6/7r+rlX4jv3odz6TZx3
- t5OGCUm7mpWpEAF4u6HTLn7JshceAMJCn2VQsSA0ECFqZGH+EsuaUfHSO7HHr84pqKoxyq6YfxE
- bkcmc69FdjnKbQZ4A3f9W+ckEyK3vyimVeA==
-X-Google-Smtp-Source: AGHT+IEP3bNHXTnhFa2oooHsEsgqFplAmlEP3LeSlrNmVzjOgjOQILXM1w+Udl2nt5467uodpMrjNA==
-X-Received: by 2002:a05:6a21:32a9:b0:23d:d9dd:8e4f with SMTP id
- adf61e73a8af0-23df980547bmr17110119637.28.1754385617947; 
- Tue, 05 Aug 2025 02:20:17 -0700 (PDT)
-Received: from cs20-buildserver.lan ([2402:7500:400:60db:2e0:4cff:fe68:863])
+ d=1e100.net; s=20230601; t=1754385733; x=1754990533;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mSdH22DrQdAfwljSXTN10oSn+kmm8UewKroXzRurAaQ=;
+ b=QIuy9OOBcRrZzKA0NAYPUfx/osf5BFDTeo3vEp7EA6QhSPgxK+1lmhGFq87HsNQEu3
+ JB82ngTVizWdpjgMpI+QhT9u7XAqnAacO0CToqUMyXz8Xilq9aA+a8L1ZUGy0YdjyYvM
+ 5n/qs6IKnDAQ05G+KnZZuaxLzvgY94XD+zfnvHbRn3ZyeDl6ZyP6HZpJirO0SukJqEHk
+ YwmUFRpxrjzxn0MFlewItLACMdIBmpsOn+ol4swVg31nOBUjmn3ZzA4eaiYwzVxx8I/C
+ a3m8XmFTxBT++y+l6kYz0sf/U1VwJYovtlXXxsp0N7VN2HFU3e856FfuPOiAUc8V+QK6
+ Uk1A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWvrOF3t+vx9RokJL+zAMB50gZ2jeXMCfqZpmKnhstn+ZKzN5QUzUFAm/p5LynWYTPU3cW0sYY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzy8eidZCkIXden5dXSI4ZCHJxAigxzF4qdr/QIsZHVpOBfXKG3
+ XSs9+Ea2Tjtp/NeqCcdIuf/B6WOb/goVzR2N9lpHV+avK4c/pMiLevMO38sjg8U4wB8=
+X-Gm-Gg: ASbGncs4S+nlLJvVXoViRpYeLjjOWn6ONW/hPj6dHNspxrwUiqSpqvj3bPgmju0YYwd
+ TjZM1+9/KijjWWt/x6RfdQN0WYH4SayUkYssBAegnlyHioz/MrzlmG+pk9avozfsPiU+IMv6ra9
+ EMyM3/QuuoVXu58c/hroppnc9za93ohJ/TrPJ2SgplyLscYiTkfXhlcDTZ/QsWf9oAFnP09T1Te
+ 1f+nL8AZlhxRznNxalur+IeVDsnmDC7tCAuEotXWzOogeh/tgEgGu4/7aNVZO3eUS2BwiW8rhEy
+ YICLcRJof0D+29aTMk/UjH6jwERCiSMm3W3JQatU2tBeUjYQy5g1OlccwhVIbw3QeJJ8WIchBUO
+ mf3/tdQMq5wAspSsMKqAoJySx5Ehza1EiQ1L1Mk4qYAnNNS9Df1dY2Lqvst412NhBSK+wFmOKg9
+ tx/8Ggr32xFg/b
+X-Google-Smtp-Source: AGHT+IFWsuz9JWJ+ORlH1bXhHF69BQ+ZZGLoBNUo28WDVeMBt9sW91NXYp3lrkl5TZbgI5R8TVwvoA==
+X-Received: by 2002:a05:6000:381:b0:3b7:9c79:32ac with SMTP id
+ ffacd0b85a97d-3b8d94d3665mr8520643f8f.52.1754385732715; 
+ Tue, 05 Aug 2025 02:22:12 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35?
+ ([2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bcce89125sm12495185b3a.33.2025.08.05.02.20.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 02:20:17 -0700 (PDT)
-From: Jim Liu <jim.t90615@gmail.com>
-X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
-To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, YSCHU@nuvoton.com,
- trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 9/9] configs: npcm: remove CONFIG_SYS_SKIP_UART_INIT
-Date: Tue,  5 Aug 2025 17:18:50 +0800
-Message-Id: <20250805091850.2051096-10-JJLIU0@nuvoton.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250805091850.2051096-1-JJLIU0@nuvoton.com>
-References: <20250805091850.2051096-1-JJLIU0@nuvoton.com>
+ ffacd0b85a97d-3b79c3abf33sm18560504f8f.7.2025.08.05.02.22.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Aug 2025 02:22:12 -0700 (PDT)
+Message-ID: <ea192ec8-8477-4de7-99cc-2093dbc62273@linaro.org>
+Date: Tue, 5 Aug 2025 10:22:10 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: owl_mmc: Do not dereference data before NULL check
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250731-owl_mmc-v1-1-8493be6755e6@linaro.org>
+ <20250805040014.GD29103@nxa18884-linux.ap.freescale.net>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250805040014.GD29103@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,74 +105,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the uart clock frequency according to dts by default.
-If CONFIG_SYS_SKIP_UART_INIT is not enabled, no need to
-do board_set_console to change the console bootarg.
+On 05/08/2025 05:00, Peng Fan wrote:
+> On Thu, Jul 31, 2025 at 12:11:47PM +0100, Andrew Goodbody wrote:
+>> In owl_mmc_prepare_data there is a NULL check for the pointer data but
+>> it happens after data has already been dereferenced. Refactor the code
+>> so that the NULL check happens before any code dereferences data.
+>>
+>> This issue was found by Smatch.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>> drivers/mmc/owl_mmc.c | 18 +++++++++---------
+>> 1 file changed, 9 insertions(+), 9 deletions(-)
+>>
+>> diff --git a/drivers/mmc/owl_mmc.c b/drivers/mmc/owl_mmc.c
+>> index bd4906f58e7..c18807b1f49 100644
+>> --- a/drivers/mmc/owl_mmc.c
+>> +++ b/drivers/mmc/owl_mmc.c
+>> @@ -135,19 +135,19 @@ static void owl_mmc_prepare_data(struct owl_mmc_priv *priv,
+>>
+>> 	setbits_le32(priv->reg_base + OWL_REG_SD_EN, OWL_SD_EN_BSEL);
+>>
+>> -	writel(data->blocks, priv->reg_base + OWL_REG_SD_BLK_NUM);
+>> -	writel(data->blocksize, priv->reg_base + OWL_REG_SD_BLK_SIZE);
+>> -	total = data->blocksize * data->blocks;
+>> -
+>> -	if (total < 512)
+>> -		writel(total, priv->reg_base + OWL_REG_SD_BUF_SIZE);
+>> -	else
+>> -		writel(512, priv->reg_base + OWL_REG_SD_BUF_SIZE);
+>> -
+>> 	/* DMA STOP */
+>> 	writel(0x0, SD_DMA_CHANNEL(priv->dma_channel, 0) + DMA_START);
+>>
+>> 	if (data) {
+>> +		writel(data->blocks, priv->reg_base + OWL_REG_SD_BLK_NUM);
+>> +		writel(data->blocksize, priv->reg_base + OWL_REG_SD_BLK_SIZE);
+>> +		total = data->blocksize * data->blocks;
+>> +
+>> +		if (total < 512)
+>> +			writel(total, priv->reg_base + OWL_REG_SD_BUF_SIZE);
+>> +		else
+>> +			writel(512, priv->reg_base + OWL_REG_SD_BUF_SIZE);
+>> +
+> 
+> This piece code is moved to after 'DMA STOP', so code logic is changed.
+> This may not be expected.
 
-Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
----
- board/nuvoton/arbel_evb/arbel_evb.c | 9 ++++++++-
- board/nuvoton/poleg_evb/poleg_evb.c | 2 ++
- configs/arbel_evb_defconfig         | 1 -
- configs/poleg_evb_defconfig         | 1 -
- 4 files changed, 10 insertions(+), 3 deletions(-)
+Are you familiar with this hardware or is there anyone on the list who 
+is that could comment on the preferred order of actions here?
 
-diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_evb/arbel_evb.c
-index 16dbaa96e8c..0fba4a8b709 100644
---- a/board/nuvoton/arbel_evb/arbel_evb.c
-+++ b/board/nuvoton/arbel_evb/arbel_evb.c
-@@ -94,5 +94,12 @@ int dram_init_banksize(void)
- 	return 0;
- }
- 
--EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, board_set_console);
-+static int last_stage_init(void)
-+{
-+#ifdef CONFIG_SYS_SKIP_UART_INIT
-+	board_set_console();
-+#endif
-+	return 0;
-+}
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
- 
-diff --git a/board/nuvoton/poleg_evb/poleg_evb.c b/board/nuvoton/poleg_evb/poleg_evb.c
-index 0a3c052a019..9dfe9744363 100644
---- a/board/nuvoton/poleg_evb/poleg_evb.c
-+++ b/board/nuvoton/poleg_evb/poleg_evb.c
-@@ -64,7 +64,9 @@ static int last_stage_init(void)
- 		}
- 		sprintf(value, "ttyS%d,115200n8", dev->seq_);
- 		env_set("console", value);
-+#ifdef CONFIG_SYS_SKIP_UART_INIT
- 		return board_set_console();
-+#endif
- 	}
- 
- 	return 0;
-diff --git a/configs/arbel_evb_defconfig b/configs/arbel_evb_defconfig
-index 8572ad204d8..11ad19f56db 100644
---- a/configs/arbel_evb_defconfig
-+++ b/configs/arbel_evb_defconfig
-@@ -17,7 +17,6 @@ CONFIG_SYS_LOAD_ADDR=0x06208000
- CONFIG_WATCHDOG_TIMEOUT_MSECS=120000
- # CONFIG_PSCI_RESET is not set
- CONFIG_ARCH_NPCM8XX=y
--CONFIG_SYS_SKIP_UART_INIT=y
- CONFIG_TARGET_ARBEL_EVB=y
- CONFIG_ENV_ADDR=0x807C0000
- # CONFIG_EFI_LOADER is not set
-diff --git a/configs/poleg_evb_defconfig b/configs/poleg_evb_defconfig
-index a87e918117c..0803fb1a857 100644
---- a/configs/poleg_evb_defconfig
-+++ b/configs/poleg_evb_defconfig
-@@ -16,7 +16,6 @@ CONFIG_DEFAULT_DEVICE_TREE="nuvoton-npcm750-evb"
- CONFIG_DM_RESET=y
- CONFIG_SYS_LOAD_ADDR=0x10000000
- CONFIG_TARGET_POLEG=y
--CONFIG_SYS_SKIP_UART_INIT=y
- CONFIG_ENV_ADDR=0x80100000
- CONFIG_FIT=y
- CONFIG_USE_BOOTCOMMAND=y
--- 
-2.34.1
+This was changed for two reasons. Firstly and of least importance, it 
+makes the code tidier by needing just a single NULL check for 'data'. 
+Secondly I wonder about the correctness of the original code. It seems a 
+little strange to me to be writing to the device registers while the DMA 
+is possibly active. This could potentially lead to undesired effects. I 
+would expect that stopping the DMA before changing the registers would 
+be a safer order to perform these actions. However I do admit that this 
+is just speculation on my part and that this order could be fine or even 
+necessary for some reason, but that would be.
+Also, of course, in the case that 'data' is NULL, the writes that were 
+before the call to stop the DMA cannot be executed as they dereference 
+'data'.
+
+So yes this is a bit of a speculative change but I think it would be OK.
+But if you would rather I rework it to keep the ordering as before then 
+I will do that. Please let me know.
+
+Andrew
+
+> Thanks,
+> Peng
+> 
+>> 		if (data->flags == MMC_DATA_READ) {
+>> 			buf = (ulong) (data->dest);
+>> 			owl_dma_config(priv, (ulong) priv->reg_base +
+>>
+>> ---
+>> base-commit: 79f3e77133bd7248e4579827effc13f97a32a8a8
+>> change-id: 20250731-owl_mmc-ef16e32b68fd
+>>
+>> Best regards,
+>> -- 
+>> Andrew Goodbody <andrew.goodbody@linaro.org>
+>>
 
