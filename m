@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A18FC87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 17:53:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0832CC87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 17:53:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDF9C841D2;
-	Tue,  5 Aug 2025 19:52:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20E3383923;
+	Tue,  5 Aug 2025 19:53:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F30C9841D6; Tue,  5 Aug 2025 19:52:56 +0200 (CEST)
+ id 76C91841FA; Tue,  5 Aug 2025 19:53:18 +0200 (CEST)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8A8883885
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 19:52:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB9E883885
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 19:53:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 0DDC71F0003D
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 17:52:53 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 195EA1F0004B
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 17:53:15 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 667B4B011EE; Tue,  5 Aug 2025 17:52:52 +0000 (UTC)
+ id 80522B011F4; Tue,  5 Aug 2025 17:53:14 +0000 (UTC)
 Received: from localhost.localdomain (unknown [192.168.1.64])
- by laika.paulk.fr (Postfix) with ESMTP id 61243B011EF;
+ by laika.paulk.fr (Postfix) with ESMTP id 974CDB011F0;
  Tue,  5 Aug 2025 17:48:30 +0000 (UTC)
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@csie.org>,
  Icenowy Zheng <icenowy@aosc.xyz>, Paul Kocialkowski <contact@paulk.fr>
-Subject: [PATCH v2 09/11] sunxi: Add support for the Lichee Pi Zero with Dock
-Date: Tue,  5 Aug 2025 19:48:25 +0200
-Message-ID: <20250805174827.3696191-10-paulk@sys-base.io>
+Subject: [PATCH v2 10/11] net: sun8i-emac: Remove internal PHY config default
+ value
+Date: Tue,  5 Aug 2025 19:48:26 +0200
+Message-ID: <20250805174827.3696191-11-paulk@sys-base.io>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250805174827.3696191-1-paulk@sys-base.io>
 References: <20250805174827.3696191-1-paulk@sys-base.io>
@@ -61,28 +62,76 @@ X-Virus-Status: Clean
 
 From: Paul Kocialkowski <contact@paulk.fr>
 
-This adds a U-Boot config and device-tree build for the Lichee Pi Zero
-with Dock. Compared to the Lichee Pi Zero, it has an ethernet port
-(with internal PHY) so the EMAC driver and network support are enabled.
+We know about all the relevant fields in the syscon register so there
+is no reason to read it first and modify it.
+
+Build the register from scratch instead, with all relevant fields set.
 
 Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
 ---
- configs/LicheePi_Zero_Dock_defconfig | 6 ++++++
- 1 file changed, 6 insertions(+)
- create mode 100644 configs/LicheePi_Zero_Dock_defconfig
+ drivers/net/sun8i_emac.c | 32 +++++++++-----------------------
+ 1 file changed, 9 insertions(+), 23 deletions(-)
 
-diff --git a/configs/LicheePi_Zero_Dock_defconfig b/configs/LicheePi_Zero_Dock_defconfig
-new file mode 100644
-index 000000000000..0ae53c0c067f
---- /dev/null
-+++ b/configs/LicheePi_Zero_Dock_defconfig
-@@ -0,0 +1,6 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-v3s-licheepi-zero-dock"
-+CONFIG_SPL=y
-+CONFIG_MACH_SUN8I_V3S=y
-+CONFIG_SUN8I_EMAC=y
+diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+index 8433e7db2654..6e95392b379b 100644
+--- a/drivers/net/sun8i_emac.c
++++ b/drivers/net/sun8i_emac.c
+@@ -57,10 +57,9 @@
+ #define TX_TOTAL_BUFSIZE	(CFG_ETH_BUFSIZE * CFG_TX_DESCR_NUM)
+ #define RX_TOTAL_BUFSIZE	(CFG_ETH_BUFSIZE * CFG_RX_DESCR_NUM)
+ 
+-#define H3_EPHY_DEFAULT_VALUE	0x58000
+-#define H3_EPHY_DEFAULT_MASK	GENMASK(31, 15)
+ #define H3_EPHY_ADDR_SHIFT	20
+ #define REG_PHY_ADDR_MASK	GENMASK(4, 0)
++#define H3_EPHY_CLK_SEL		BIT(18) /* 1: 24MHz, 0: 25MHz */
+ #define H3_EPHY_LED_POL		BIT(17)	/* 1: active low, 0: active high */
+ #define H3_EPHY_SHUTDOWN	BIT(16)	/* 1: shutdown, 0: power up */
+ #define H3_EPHY_SELECT		BIT(15) /* 1: internal PHY, 0: external PHY */
+@@ -287,35 +286,22 @@ static void sun8i_adjust_link(struct emac_eth_dev *priv,
+ 	writel(v, priv->mac_reg + EMAC_CTL0);
+ }
+ 
+-static u32 sun8i_emac_set_syscon_ephy(struct emac_eth_dev *priv, u32 reg)
++static int sun8i_emac_set_syscon(struct sun8i_eth_pdata *pdata,
++				 struct emac_eth_dev *priv)
+ {
++	u32 reg = 0;
++
+ 	if (priv->use_internal_phy) {
+ 		/* H3 based SoC's that has an Internal 100MBit PHY
+ 		 * needs to be configured and powered up before use
+ 		*/
+-		reg &= ~H3_EPHY_DEFAULT_MASK;
+-		reg |=  H3_EPHY_DEFAULT_VALUE;
+ 		reg |= priv->phyaddr << H3_EPHY_ADDR_SHIFT;
+-		reg &= ~H3_EPHY_SHUTDOWN;
+-		return reg | H3_EPHY_SELECT;
++		reg |= H3_EPHY_CLK_SEL;
++		reg |= H3_EPHY_SELECT;
++	} else {
++		reg |= H3_EPHY_SHUTDOWN;
+ 	}
+ 
+-	/* This is to select External Gigabit PHY on those boards with
+-	 * an internal PHY. Does not hurt on other SoCs. Linux does
+-	 * it as well.
+-	 */
+-	return reg & ~H3_EPHY_SELECT;
+-}
+-
+-static int sun8i_emac_set_syscon(struct sun8i_eth_pdata *pdata,
+-				 struct emac_eth_dev *priv)
+-{
+-	u32 reg;
+-
+-	reg = readl(priv->sysctl_reg);
+-
+-	reg = sun8i_emac_set_syscon_ephy(priv, reg);
+-
+ 	reg &= ~(SC_ETCS_MASK | SC_EPIT);
+ 	if (priv->variant->support_rmii)
+ 		reg &= ~SC_RMII_EN;
 -- 
 2.49.0
 
