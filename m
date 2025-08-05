@@ -4,155 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F302C87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE514C87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:19:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA8B88421F;
-	Tue,  5 Aug 2025 10:15:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 90F2C84183;
+	Tue,  5 Aug 2025 10:17:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="B2oGirlo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VqDBsnff";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83A018419D; Tue,  5 Aug 2025 10:15:57 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F2CCD84179; Tue,  5 Aug 2025 10:17:10 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C2BD841B8
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 10:15:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45CE1831E0
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 10:17:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AsAVk5CNVFY4BqULQ9L51myE4RRlGE+YZTSBtWeQRdCs5VQ1XaMvVlg/7Q2WRTOo29fQd3DVCy7TQl+UbMdY5hbSui04IuK6t9tzdW2xpCyI1BPpfij7FgJf5UNSn1ckOIM7AVqfGCmI7227OBEArB98DUN4OrVw3rVYyVVr3xk9A2nVTdNf0EGhmBjZg2FoJW9vf94ZNww1pEuocM4lCc2JNzGj0ZDZmR2tt/HtbeSpa+fdY5ocOaU4C9rdq91j6HDyhuBBbcGXafDOBo8ZEGPtFNHqfEHo5G9+QlfnYMI0BMFZjv2+YN8ohM64X45P7LDdeN1ZKa2VLVkmP9UVGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t/fI6bGy4YeMo/8fwMRpD9DJXc8Id538oOnYwsFgeaI=;
- b=J7s+osBOaRIh7HJlhBHVhCZNqPQSelqDvbYfrHCRh/Bqm+ODubMM4KX0ixQU8KJm/8WmnYYRgkj3knd3I+GPE+ECLmmPzB4wftadDWUCaTokt1XlfwPNcirWhj0sCuqTd6FlE2addgPto1SKs/+DIrcEzhZdmt5GgloyugDZ+jy2LvFfwV4axqbdbqcjoNINVbvVH6/uAIa5UJa9PSixwhMe4RqXpu16fjmgpWga0aoNy+K2BkmqofEcjb2jLT6K1lPKCr5xuvk3b3BKKjHtnmu2HpHLfaMG+TyEXhi/gje51vklpLpaUZkWzfjIQtub3XaJFRUO7xXe329UIH2/NA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t/fI6bGy4YeMo/8fwMRpD9DJXc8Id538oOnYwsFgeaI=;
- b=B2oGirloXKa/Dfj0KZoLKZBmPSUy3JI+O6//kbSjWC3JSzWVPkF1O3tBtL0lHJK/GCEj1Nh2FxppvVWapBSqki3waYpSkLaRBHkZpYf6Oa+kZBnP+i/F0piX3FPR7ygrZOn7EHyYnN+qh8jOWR1uUKlhtPnNV+DqjmAOxR/RYt7C1KNj/Id307mI7MbTB58UKUaM6AbV4cR9SAf9TQ34QdWsVf7Y7o+cunx2oZvx1HkC2zx450wE9MVBlqeNQZLcJMN6kmGQBQi+f4h9QwAUk/HsfjUR9OgF2SGEOiyL27e8hmQLhEBZQ7MOMb5y8AfSaOx+n+PmFyaMcuGq0MQ49g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by FRZPR08MB11069.eurprd08.prod.outlook.com (2603:10a6:d10:139::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.13; Tue, 5 Aug
- 2025 08:15:46 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.8989.018; Tue, 5 Aug 2025
- 08:15:46 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Chuanhong Guo <gch981213@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Alexander Dahl <ada@thorsis.com>,
- u-boot@lists.denx.de
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v3 21/22] mtd: spinand: try a regular dirmap if creating a
- dirmap for continuous reading fails
-Date: Tue,  5 Aug 2025 11:15:10 +0300
-Message-ID: <20250805081511.1482964-22-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250805081511.1482964-1-mikhail.kshevetskiy@iopsys.eu>
-References: <11f6f79e-0622-42e2-901e-16335ad73409@kontron.de>
- <20250805081511.1482964-1-mikhail.kshevetskiy@iopsys.eu>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: HE1PR0902CA0059.eurprd09.prod.outlook.com
- (2603:10a6:7:15::48) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e8fd59485d8so3290537276.3
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 01:17:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754381827; x=1754986627; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DDAzoHDZDv0OvSQui9Rkf/9pJSSW2JX7bQe2F6HeDo8=;
+ b=VqDBsnff2jUWTMvL8c9nJYuhJOflYgWUEV9UqdxPFuS6fcwtflyVqNHX984OMJQLC9
+ XTaxJWpmGJc8uYi9OY8nEwnEsyYHB9gMsk9QM/wv64Ukn6VIMYq2AiX0Fm1gYV+wHDKc
+ oGd4RVfuFXgYU5D2/B2G/Dk2g64vPQVLfjS3V1xPnvUkLBR/9/xt837/14TD47WprJOw
+ USrD3kqq4ug/nPU1ehsEZ+XfRFGMaYZZRIXz9Y2m/EmHFX34UFFNcWKnF4G9IHEqGFzr
+ inwrw/4wMY2N4R4cJMK9Ka3rdElYraKEOWEB5SCE6r4+usHvykjk3PMV/W66jUsitAhB
+ euiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754381827; x=1754986627;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DDAzoHDZDv0OvSQui9Rkf/9pJSSW2JX7bQe2F6HeDo8=;
+ b=Gw2eBNtWJ75d40UkEtu6mTJmuGwGKImcyP9/lt/z0xSDqavHmMFEVAmLx1qb6Sy13a
+ b/EpDFRVGoiSNdGaWlR9dO/aC77P8tz5AMqFvsmnPWVLm+N/OkUXWU58ulvaImDYK2wT
+ 7CZHXJU2y27slKEroeyVwTzMzbxHNg+Of2eRFC+21bgqYmJvpvaUD7CqmGO7coDa3H+2
+ 73tUNCniND1cZB8aDNzppYudWLJdyYr+aZJwd6AvsQCnGXQ9eKCY5GhlKJCfsTRZ1X8W
+ /yyDvEoKxks9wzWU9Im2vVxNI2uFV3HDAS4PxYosCXp0ssIxoJH6wwu4gTsapgkh2b6G
+ sU0w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUfR/EEyhB4KpqkVyjjU7uPg5unBqGDH3cloWyxGihAPFr7ACEe79HGhtFOqOoIvrGswbgpu50=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFAcyRRntlJUhK+9Z0aKxTenQPUL4Vklof5ecXyozobKjxGBpP
+ sJGiZrVWowLuMN1w3yUovsHY1S4kYlx0GEqKB/J1xKoSw7z3BTHfT7nIH+8OdaB1QSdtbYDs25y
+ GmyF+andTbIDQ7cnNMfORgkUgLCSt2TiMTx4XpmVMhw==
+X-Gm-Gg: ASbGnctBwpT26mBJFm1fw3u4XoUrlv03oBWBmO2+J0hpkrHXJOiRF6TCEOby41z0C6T
+ qpmESwKtb+J7c0wfcpr/LkUlZ6q5SK9PDzxFojmYMv1ov3ZtaGaOviMKdj320rlyrxnIvOAktAf
+ pLz/3+P6XN7bNacBmKwRgL3Qu+arjQuQPREij1rbJuiOciOjPLB7zZNfLUB0WBaSLXxLxZ3IKCT
+ kAcoj42
+X-Google-Smtp-Source: AGHT+IGkZouZpF6OUIY4Jf+bHleRQny+1m8Z52PoCjexla099fq6guaNqL8kdT9Uf/LS4H2xBGqTp3C9+FnaOeeeuEg=
+X-Received: by 2002:a05:690c:c92:b0:71a:3484:abe8 with SMTP id
+ 00721157ae682-71b7f085304mr156552007b3.34.1754381826822; Tue, 05 Aug 2025
+ 01:17:06 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|FRZPR08MB11069:EE_
-X-MS-Office365-Filtering-Correlation-Id: 648ef2a9-55e9-4f35-b560-08ddd3f847a8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|7416014|376014|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?mG1PgBmTeWk+ikqOiWNf8RNE+WM2ZrwQOPx0Cbyv9vIneeM/xV/9W/fNwtar?=
- =?us-ascii?Q?QuB2+3204koXylXNdJufMbwAxvACd1zlM1JlWcJIkacCX0TBIkmQG6VdEzeH?=
- =?us-ascii?Q?x1Rl9WiCJ9mx6oAmG32peNeuJUCVIPgfF6TANFS36tvJ4+5bl2T7RZapnACX?=
- =?us-ascii?Q?MBtKKlOlnep/h3pvPopNWMbvZeFzUyMOv/X/Zfujoocf517g6com9JcwXg08?=
- =?us-ascii?Q?HDTMUBNVCjAsBQKTBPPzOIUftXZIM5uIfsiX7gHXH/IxcZSMR95uF3aCbdvp?=
- =?us-ascii?Q?ZDqo7V8perVkfsAsVK3m1mfi943IW6APBHq0q9WFxpAk8rb01E6F+pjglLJD?=
- =?us-ascii?Q?FntyQCTEG2aU1TO0T577fwLobhj/j1zZPVcbzQ/2hGW37UP2yfzO/ZZzyf7w?=
- =?us-ascii?Q?HBJXINytN0kNVfv9sOrVc1oMj9f7rd1ZjhmjpljIhIjoyEMwFiT4EDoSyelF?=
- =?us-ascii?Q?Y2KrFntfqjxQOEMX/Q3ifTz3yQzeJLZPak0lnyRdAX/n2vn5y9hdLZLFJ3hL?=
- =?us-ascii?Q?FVX3Wx6yRa53K8mtgduYaFO8OEV4jHIw7jzGvd0hWgitfeY52aGJTrln9US7?=
- =?us-ascii?Q?GoWg2UFPfJRO9LvUi1V7/RClACVQQiB3cvaYda3/35/86unpAHMzhwx+GIrP?=
- =?us-ascii?Q?Q/JLMZFuRzu+tMJHtn/niRfyxjxDHe9urqD3hP2bsLFaCIpNgyKgNnYk2E+u?=
- =?us-ascii?Q?oZGdpENp2z45PvcLg9hofXgTbwD8M2n1Sl87/6hGAvkKejskZb8Awz3vjJAG?=
- =?us-ascii?Q?lTwp3oJzleK+Ua1pNFwllCATNTqYbZBfuAS219LKxh9IS6pkjBPFkiiXUsXn?=
- =?us-ascii?Q?ILA+FomXxf2OW2EOdT9PUwnHbqVywrs4WmCLps1Pad5tDfbL678FvSqFVnP3?=
- =?us-ascii?Q?SUqvIvYPzbOjVtiDkgAdlYPAmDEXLmuAXJj/Vw3YqoX9uZUhmgkT9O19H+5N?=
- =?us-ascii?Q?v/qI6TYbpb0x7rcv5XXrRk/btOL9iMBFrrCEncf1ruXoTkicVJNT7Uz7kB/C?=
- =?us-ascii?Q?OhMZ7ADffnf1qqF1QBTBPFHaXFd5xJ4+H0UZaJriu/ILcEjp6K5U6LNYxzIT?=
- =?us-ascii?Q?JnZCvFDbt/F0Zs38aNBKvtH6/FMulUZgctoB3i3mP6xDNM+z4cMNgawDObT6?=
- =?us-ascii?Q?nJIFgtv6QBkdDCL5+khoh6LB2ifpS/AViSOefQhUOAi/2AVNkVXRxcEkBZ1f?=
- =?us-ascii?Q?p4WPCc55piCDYrkYtdgtNDijmrneJVJCEMSrS2KTZIPSYZM3pGdQQ1rDuCwq?=
- =?us-ascii?Q?qse+z9Da5XYYBkc08qu9Q49sh4hKK2jxm3SBH+NgTin2umGIpkcWUIOIfVXI?=
- =?us-ascii?Q?l+QpJtdy2eyrlbz2PpJ39qsi/+7N4Azgh2CfIh2m13z5Fla4aj5cpMBkk3pN?=
- =?us-ascii?Q?Guy0UGPbEDuXjroYGtlODKcBKC5Z75TYcKrJEwDR2sXduRFsSKL4sIHoGEpI?=
- =?us-ascii?Q?/+XMwgBRciueUKdcNERxz17I80ubALpSXx1Euomc55rS0PeYxYehTzvr9WnW?=
- =?us-ascii?Q?tJt5HvyEmPOLW5Q=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(38350700014)(921020);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?a7XA3JpkUoqv6VNhGbkJs8D0b50nwWXqo/Oq/FScUcB/RrHMdRPvk89BYikY?=
- =?us-ascii?Q?no0VQylIgrWsMv/eRgw5W/p2/GuXZfIAXYwUyQkZr44iDc1Ad/P8+qxoWfFN?=
- =?us-ascii?Q?UK/e7ZPpRPpyZJ6ZVtmlxdEC9WMMLL5nUgYH7wCwDSQqHiFxVdGnj/OZij5q?=
- =?us-ascii?Q?fMltLCi2rdNIKaFEnkUSNSFgU3cSC1/Uit0jHGVviod0zZC0QcHxNF1wZ0+F?=
- =?us-ascii?Q?ofYpNnQ/F2NIr5Yg5wFQ7BYSyqPvPspy1H9WjukF4DTW4hAKE0ZnlLC+yfW/?=
- =?us-ascii?Q?j7mlL7Np+rt73FEpCvWWIEtNHN8GG1dfbzxYjkC0HqJHifd9lzAx8TKJN1VL?=
- =?us-ascii?Q?52KG3DRZmrGzBldlhdXQpvBrZx/TA+R3GH3Q+UzQThc3mcz2Pv8Lbr7ct0Xm?=
- =?us-ascii?Q?vx9XmPJfqj1RMgvkvlPaXu9OR4/8E/XNlXMYrcRoxZ0bDlbVa6p2HrrP2iGQ?=
- =?us-ascii?Q?OFyV9O6Hbyll/bFsYmXT0Oo69VKlLYz7w+/AH+NSuelyzvj8SZDYnWh1V7hV?=
- =?us-ascii?Q?apu8K+3qzl8G6ty0trGIiHD2/6glTK4zz9eGKHWA2ll1yS8QaEq5JlJplvtz?=
- =?us-ascii?Q?pgj+RnfAG2SUTY7mN31w0kIGVFoYU1XEI2gcHoEFuTVMpX06Y7hoEbHViiui?=
- =?us-ascii?Q?yeIJzGgbaTgssRqsvTK1G2GSZBeDs1xHa+g33kw8mDtVbQjIXdEiChkGrT1W?=
- =?us-ascii?Q?ZauG7vuTZkppOn3jtVNLpWhiEKuwG2XubOQwVZ6LQgs5SOSPSiIRKofDpK+4?=
- =?us-ascii?Q?l49KySU6ehF4YGwcfcegf1Giu0lMK01t2t4H3EG4D7d4Df59kWcBPWLkliKM?=
- =?us-ascii?Q?PocP4qvHxdIKSqEdegMUOvXGn1HKEBYf6j+UM9ILz+4GmtyQckm/BFi1lpnN?=
- =?us-ascii?Q?xvx4XIO5hYat9SiAheDo8IFyFYi64CulFG8ALU8tSQSThoB3UkcpgVG/d91S?=
- =?us-ascii?Q?KpS/JiQciClLKY0fuvwiH/y+yxqYOEoNVD8glgj4iWUdpV0PCAIuMdsHKv7u?=
- =?us-ascii?Q?ZPHFa7e5r1JhjDBrz2H7nj+EppzgxZuru86jwSTtrr2JZo09XwCVmaiGmvow?=
- =?us-ascii?Q?AhBm5cad0xCIjLbCIGJboS2H61Z2bwwKAY/t16xriL7rmfYVW5AiBKkswx3d?=
- =?us-ascii?Q?R7ycv7pNjEb2SahG43rVIL+f19u86wxMhWkK2s9GZDIqUpS6VWYixCP84Gdw?=
- =?us-ascii?Q?VUaGpMQhIkPlVEOfyA1pvNYE4yGgWWblRihZuEwuRiu/FTfqfdidH+PBPfnr?=
- =?us-ascii?Q?QolRI3219nxEgl2M7Yh+tycn048bYPXgz3Fz9ovJAZXRa8fpJLd2jYqotE/z?=
- =?us-ascii?Q?h/MHcgG+K5+Qy7h8QwIMO3vreRkQkZKcqa76pDOblkzO3LLtqFvqyVvjW5wi?=
- =?us-ascii?Q?fXTuBRjd4VXe1lUVwrnvxQIQ7ULXSbh8p5Oq4KIArJvqCBmjUT02NPefkLPZ?=
- =?us-ascii?Q?h1D2OowzKIcyr+0w+0sy2doIVKv77sMq/GKG5fv2kmb62sMn84VL5WOikN19?=
- =?us-ascii?Q?Wj8QAWQe6z7pBYcFUinf/A/bA78J5bKnMHBbF0ZyFjIrpp4b6csXvZPEg1Jn?=
- =?us-ascii?Q?qlIuaF7AOw9kkMef9G2vVGZTiRNOHh6qjHljhupFst1MyPJQ9k5scv9us+P+?=
- =?us-ascii?Q?qg=3D=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 648ef2a9-55e9-4f35-b560-08ddd3f847a8
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2025 08:15:46.5916 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ey6BaevvlTgiuS7quisBvXTXEx709mTej0CaDgXcLjZdtHrqYl/uiapnwyH/YiUOOObu7w9PK6fU8YZq9ldd/57Np0zRbJ1i6H/jt0DiOig=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRZPR08MB11069
+References: <145501C2-B034-44EC-A16D-4F1A150347FB@wolfssl.com>
+ <CAFLszTjgsSj47P6u2JohHv3vV1=sOWQxQ7qS3RDuBYBQsejKWA@mail.gmail.com>
+ <CANqXHyEShK3bCA-5K4K=zH_b19i9+o9DRPYW8LHo-gFpMB2Hkg@mail.gmail.com>
+ <CANqXHyH3OwPEpo=rv6E+uSP01quOQisEJ3_aD2-r=DkNDK4_+g@mail.gmail.com>
+In-Reply-To: <CANqXHyH3OwPEpo=rv6E+uSP01quOQisEJ3_aD2-r=DkNDK4_+g@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 5 Aug 2025 11:16:31 +0300
+X-Gm-Features: Ac12FXzdUQ3BXLSc-TlYUOs-x3yizE_PWhqkBw_Nq3Gtw3kuRIgU7LaqrwhfCg4
+Message-ID: <CAC_iWjLKotX4X9mD1qnJbnkbh9xBHfnyF+b=b--XvMjjbCrU-g@mail.gmail.com>
+Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
+To: Aidan Garske <aidan@wolfssl.com>
+Cc: Simon Glass <sjg@chromium.org>, David Garske <david@wolfssl.com>,
+ u-boot@lists.denx.de, 
+ Todd Ouska <todd@wolfssl.com>, Larry Stefonic <larry@wolfssl.com>, 
+ Wolfram Kusterer <wolfram@wolfssl.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,65 +100,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Continuous reading may result in multiple flash pages reading in one
-operation. Typically only one flash page has read/written (a little bit
-more than 2-4 Kb), but continuous reading requires the spi-controller
-to read up to 512 Kb in one operation without togling CS in beetween.
+Hi Aidan,
 
-Roughly speaking spi-controllers can be divided on 2 categories:
- * spi-controllers without dirmap acceleration support
- * spi-controllers with dirmap acceleration support
 
-Usually, first of them have no issues with large reading support.
-Second group often supports acceleration of single page only reading.
-Thus enabling of continuous reading can break flash reading.
+On Sat, 2 Aug 2025 at 01:59, Aidan Garske <aidan@wolfssl.com> wrote:
+>
+> Hi Simon and Ilias,
+>
+> Thank you for the great feedback. Currently I am working in the refactor =
+you suggested and I wanted to ask a question about some of your comments.
+>
+> 1. What exactly is the "driver code" you are referring to in this case?
+> 2. Do you want me to separate out our helper functions into a `cmd/wolftp=
+m-common.c` or should I keep them in `cmd/wolftpm.c`?
+>
+> Looking forward to your response,
+> Aidan
+> -------------------------------------
+> Aidan Garske
+> Engineering Intern, wolfSSL
+> +1 (916) 337-1246
+> -------------------------------------
+>
+>
+> On Wed, Jul 30, 2025 at 8:40=E2=80=AFAM Aidan Garske <aidan@wolfssl.com> =
+wrote:
+>>
+>> Hi Simon,
+>>
+>> Thank you for the great feedback. Currently I am working in the refactor=
+ you suggested and I wanted to ask a question about some of your comments.
+>>
+>> 1. What exactly is the "driver code" you are referring to in this case?
 
-This patch tries to create dirmap for continuous reading first and
-fallback to regular reading if spi-controller refuses to create it.
+It's been a while and I am not sure I am following on that
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
----
- drivers/mtd/nand/spi/core.c | 26 +++++++++++++++++++++++---
- 1 file changed, 23 insertions(+), 3 deletions(-)
+>> 2. Do you want me to separate out our helper functions into a `cmd/wolft=
+pm-common.c` or should I keep them in `cmd/wolftpm.c`?
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 07ea66825d5..e9ca2b3c391 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -1131,10 +1131,30 @@ static int spinand_create_dirmap(struct spinand_device *spinand,
- 
- 	spinand->dirmaps[plane].wdesc = desc;
- 
--	if (spinand->cont_read_possible)
-+	desc = NULL;
-+	if (spinand->cont_read_possible) {
-+		/*
-+		 * spi-controllers may return an error if info.length is
-+		 * too large
-+		 */
- 		info.length = nanddev_eraseblock_size(nand);
--	info.op_tmpl = *spinand->op_templates.read_cache;
--	desc = spi_mem_dirmap_create(spinand->slave, &info);
-+		info.op_tmpl = *spinand->op_templates.read_cache;
-+		desc = spi_mem_dirmap_create(spinand->slave, &info);
-+	}
-+
-+	if (IS_ERR_OR_NULL(desc)) {
-+		/*
-+		 * continuous reading is not supported by flash or
-+		 * its spi-controller, try regular reading
-+		 */
-+		spinand->cont_read_possible = false;
-+
-+		info.length = nanddev_page_size(nand) +
-+			      nanddev_per_page_oobsize(nand);
-+		info.op_tmpl = *spinand->op_templates.read_cache;
-+		desc = spi_mem_dirmap_create(spinand->slave, &info);
-+	}
-+
- 	if (IS_ERR(desc)) {
- 		spi_mem_dirmap_destroy(spinand->dirmaps[plane].wdesc);
- 		return PTR_ERR(desc);
--- 
-2.47.2
+Are you expecting it to be reusable by something else? If not just
+keep it to cmd/wolftpm.c
 
+Thanks
+/Ilias
+
+>>
+>> Looking forward to your response,
+>> Aidan
+>> -------------------------------------
+>> Aidan Garske
+>> Engineering Intern, wolfSSL
+>> +1 (916) 337-1246
+>> -------------------------------------
+>>
+>>
+>>
+>> On Sat, May 10, 2025 at 4:25=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
+rote:
+>>>
+>>> Hi David,
+>>>
+>>> On Thu, 8 May 2025 at 00:41, David Garske <david@wolfssl.com> wrote:
+>>> >
+>>> > Hi Denx,
+>>> >
+>>> > We at wolfSSL have developed a port for wolfTPM in U-Boot. The patch =
+allows using the current built-in TPM 2.0 support or switching to wolfTPM v=
+ia CONFIG_TPM_WOLF=3Dy. It also supports TPM 2.0 firmware update for the In=
+fineon SLB9672 and SLB9673.
+>>> >
+>>> > I think there is probably some more cleanup and testing needed, but I=
+ wanted to submit this to start the discussion and see your thoughts.
+>>> >
+>>> > The wolfTPM library is GPLv2 and added as a submodule. If the license=
+ or submodule is an issue let=E2=80=99s discuss! I=E2=80=99m positive we ca=
+n resolve anything.
+>>> >
+>>> > Attached is the patch based on latest master 3b6760ddeb4 to review.
+>>>
+>>> Thank you for doing this!
+>>>
+>>> Here are a few thoughts:
+>>>
+>>> - Use lower case for function names
+>>> - Avoid camel case
+>>> - What is XMEMSET()? - Can you use memset() ?
+>>> - Convert most prinf() functions to log_debug()
+>>> - Can you use subcommands (from command.h) instead of parsing the
+>>> subcommand yourself?
+>>> - put the FIRMWARE_UPGRADE thing into Kconfig, as well as WOLFTPM_SLB96=
+72/3
+>>> - put the driver code into drivers/ with just the command code in cmd/
+>>> - add config WOLFTPM, separate from CMD_WOLFTPM
+>>> - can you add a test in test/ and docs in doc/usage/cmd/  ?
+>>>
+>>> Regards,
+>>> Simon
+>>>
+>>>
+>>> >
+>>> > =EF=BF=BC
+>>> >
+>>> > Thanks,
+>>> > David Garske
+>>> > Software Engineer, wolfSSL
+>>> > +1 (530) 409-2990
+>>> > https://www.wolfssl.com <https://www.wolfssl.com/>
+>>> > https://github.com/wolfssl
+>>> >
