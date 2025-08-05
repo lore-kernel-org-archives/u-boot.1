@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FAEBC87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:17:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44178C87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:17:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54A65841DF;
+	by phobos.denx.de (Postfix) with ESMTP id D8E6E8419C;
 	Tue,  5 Aug 2025 10:15:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="gfUBgydo";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="Ai6i9hxK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87F7D84181; Tue,  5 Aug 2025 10:15:48 +0200 (CEST)
+ id DBF45841BC; Tue,  5 Aug 2025 10:15:50 +0200 (CEST)
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5995984191
+ by phobos.denx.de (Postfix) with ESMTPS id 7893B84198
  for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 10:15:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZD6h7oULYQKrjLEpqXRFGk4Cn3QHIYYN2aL1QDcXV5XQglDNfFz0p0eDY6iPMXwO4ZYp20KpMWM5NaL4aoU/usmw9v4/WnzWIH7kFq4/MP/9Ks6AtjGp31rDliNlvXpXuWix13JO4eUto2NoS5XUCNKuARSOwgFPmSMLC/93a9MeSGAMJu3Zv6OLLPlbmrlbwwXmQW5GUmsQfuMpT/I2NWT15fdO7OmLV7cui8PNIPnemPtzuczyfDl5psSM6z0HeJjyxEA2C4Do3EThjI3ROVYnIy4rnseoGnj9i8q55kpdPN2erGQCvfO5S6a4YMlC8gvUVIvtbCIsZE6fJh/clw==
+ b=Q7bzEXapYiG0Bc9r5N5DFzhNtrrDo1+BQHZ85lhP/ZohfY1y7kbfOiCBvW6A6mMkGBjKMCHguKajWFtbYikZy7eUTeOmu1dmvOXHwnRCPvIcaHmjBD1pKpqWErY4hvZPYSTr6s6udjPZgt88ZHVLZnvt4g1eDqfjLPWcFPXd/HhPxTMSkKMcMyT2diEci9RnIByI+CrW1XJpCZPgnyRSeqlA4A6rLxR19QW6iSQtuPap8XmylzIihVntgp3B3oxC5V6i3xR9IHLO5UrqyFk5p64mtUFRAXotfEwxBvqmgX53dsOsKuatVIIK2trvJkYWzdrGd6m9K8O2NZSXl9zjJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VBwmidDiCw3hl6wlxUCTn5dHyz0IZTdivXW9wk57W+g=;
- b=xz0WuLST+P64ccBr5F2/xYan2Cj9oqk889Js5hAkMcay1EfNOnqFnzMBlhJXQuSpRM3YmQrgtozUlZIoMiat7INCyi+8Pz3A7aV1+FFYaMHC73DFikINiFw8Chge3H4sajFC3T1PWWl/xYaeOIpVpQp3YOqPytQMVN4GGmfoPkW/56avW18KA/R5/ilmCRXb8QWLAtQRg2hP/tRa7sohjE540PUOp4J9lcUgHJiELgJXTLFSdPVaFZK1Z9vx5YhJtN6QrIh+rtqqNTa/t72hBRD4Ljqk6ubsdHGOIwe/nhTpSedGj/oEyT7r/n2fkRg2q94Fgm5ZPbFo9DehK05Avw==
+ bh=aCfvaMzx3zIOwEb7GX5TP3CtSv0tV7JaTo+byPksC6c=;
+ b=YmGs6UbYWk2HSQCOkaDZJ0KDEhGO3ogrV5xfKx3jwfCyTBwhlc2cK/mXcZrQ9W32EaMgBEMWulB8ge6H78lGCeUKDOX3ZAdZ61DMa4gErWsqIlkpcCyIC9Ev9f6eJ1p8DPPKBK2O7aB58EkcK5w33rkxSJHK9Jy8YhREB4JtMA7f8aICSTl7LnhIwchnEFJKydCOB+aDZTZzdS4FKd2/0nvlb65IQB8cMdT3EThB7jf7j2D3MrpeJH4VIVl8szDWf+cTJSezGnlV1c+eto8NMOWf1GnhRidjLE1YIVmKubhThtK7dqirpckQwO0UPTu9Kc9iWjG4LmjNUmiY64Mqrw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VBwmidDiCw3hl6wlxUCTn5dHyz0IZTdivXW9wk57W+g=;
- b=gfUBgydoG/gFuYvP0pCR5CrPMUIT4bilwj6lvfwWKi3DEvYnrdgBz+QeX9jx+kSx4V1RqL2ul4dtOwAmP3Rfrp5bAmywDz/TauGfwxfE0QCuU1C+6C9EzV3Z1jkuv41F1+KImEnr169GhBcVoPKSn8OQuIve63p1xRu5if/ReXwXEJ6wO0hOYx1i1IOIyeziQrccY2637LhP7bPXx0/EG6Mdffu/RiCHJ8VEdMfbVbh3tzjho6e3tHQA08TQ8VXU1RdwcgnWveq8SgycbFVz+w3Xti8L7ecnWSa+oSBI+hSiGi0G+v+0tH8uyo4ck4HRvCzUJIXfRjI57ItTX9kDdw==
+ bh=aCfvaMzx3zIOwEb7GX5TP3CtSv0tV7JaTo+byPksC6c=;
+ b=Ai6i9hxKmx/Rzw9BXeRRlnKMF38rCO6NW8snSmGalVCFJaFCmZpvmztNwpdr+NRC2Lcm7Dk+zvuL0/DwBw+CfHzjoa6eTo5R/95mFNrR4be75uj4a4BvHKFBKR4IuMiCMBdItBqNVcOR7W9/oJm2My+YHegY1cHO/IW0hFIDBOrDbBKlxHpblr/iSgsGMA4qJBqle1QZYvpYdAT1JQOHnpCXSpJOfAl/GlTetNV+8VI7h9BGjCjs2iC3Lmx6LlHa3hkB2LxJybv42mx0WMeric7XJTqBxADusEyaItXO6OvK32i8N/LQ+hC4S4E9YSVzF1eTWJlCuUgph+6ufLVYZA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by FRZPR08MB11069.eurprd08.prod.outlook.com (2603:10a6:d10:139::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.13; Tue, 5 Aug
- 2025 08:15:43 +0000
+ 2025 08:15:41 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.8989.018; Tue, 5 Aug 2025
- 08:15:43 +0000
+ 08:15:41 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -63,10 +63,9 @@ To: Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Alexander Dahl <ada@thorsis.com>,
  u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v3 18/22] mtd: spinand: Enhance the logic when picking a
- variant
-Date: Tue,  5 Aug 2025 11:15:07 +0300
-Message-ID: <20250805081511.1482964-19-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v3 17/22] mtd: spinand: add OTP support
+Date: Tue,  5 Aug 2025 11:15:06 +0300
+Message-ID: <20250805081511.1482964-18-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250805081511.1482964-1-mikhail.kshevetskiy@iopsys.eu>
 References: <11f6f79e-0622-42e2-901e-16335ad73409@kontron.de>
@@ -79,79 +78,79 @@ X-ClientProxiedBy: HE1PR0902CA0059.eurprd09.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|FRZPR08MB11069:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1ec00a5d-d49b-450f-297b-08ddd3f8454b
+X-MS-Office365-Filtering-Correlation-Id: 172191a1-5d9b-4f77-e438-08ddd3f84478
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|52116014|7416014|376014|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ENWm1l5p5xGHyC5oWMTmLN4SnPCTOEfV6FVgrMSgHKMg7MyqcFkUjE4YS40E?=
- =?us-ascii?Q?IeNrWtKP3MiTV0B6x0KzG5ordMgdIFukW7ef6kIp+f3HSLegOPbDy4LoZz2b?=
- =?us-ascii?Q?SgxNy1nweXeZvm+rf18+Xu63SZavbc4XRBuRU1GsOHBeKkL9K07kTph0JEoX?=
- =?us-ascii?Q?lec9ilpYwHyyUFi9ehQr2pwz6u+OxrIk5VuHI2bn1sjiynstgaz2kIzQUfTP?=
- =?us-ascii?Q?zLD5a1ENXgGlSeq1xlmo2PcQxxPZLLWx3AhG/Ds8uE0rqecyksQHyTRTsIwn?=
- =?us-ascii?Q?VhQVbUi1mE/yLKuhhc81cdS6pHtMiFyJvI1lABOmtNDnK/HAXWAO0JqTSJqo?=
- =?us-ascii?Q?Se5qeCstsKSxqCTTakeoz5y/y1SXVCkzpYpdhl3NFJgLfmCSvlXFqq+CLMD0?=
- =?us-ascii?Q?bmIxm+Jc47FWB0w1ihf8/LM0uoKGuru3ZTLtWFuY6n0SNvDUn6Wz9hVIkTAk?=
- =?us-ascii?Q?il7qPLsT5LVb/scWTikxRTsw16ylBASd7uyMbPq6GJleUwn/FWg5nVa9N1nY?=
- =?us-ascii?Q?gMrtNXuIPtg/Zh44S/qSyRi2CC1BrzGAlUIZ3soJimiF7Ct7+XIVjscclDw0?=
- =?us-ascii?Q?Qy7FQhOg9VRnb7fQmLYRrG9E/FOthwIlAyY9KGkKaBO/17t8APu+BOAFPbiA?=
- =?us-ascii?Q?3FwQGq0HS9aT+XmL8zvhLErHUzc1q1WHK9mY+qBT3jKf9ysLvV5EK9QiDZTr?=
- =?us-ascii?Q?CHnuTWZ8qjJQcU2OQc7wh6g5qYpLlfn9y8BK6vwCzetlQuMBOyeeW54dduvp?=
- =?us-ascii?Q?ixbmYrfB3ayNXySDC1xjwGutbCqqGlAMXmMfXS7/7Muy2YBp7Fb+tPUhHvSx?=
- =?us-ascii?Q?TO5OEQ+Vav4bQ5PV40+PZ0ff2dYUfiC0gMGMd55lGwTAVTdEWl0R4U07AVnH?=
- =?us-ascii?Q?ZNcoYYKIXU7n8WBMMclYQbw9wkyVE1PhPia0u8wlKLOPxXY1+sNVdftwYwLM?=
- =?us-ascii?Q?qWOMxroEkeJPSBO5yrIGkvSjSb3GFOpksnQJAYMAXRlgNqql33dke28frxbd?=
- =?us-ascii?Q?AGzehilAMcJuzc9aBiOAJ8cZuUU+BbfhqTXgDgAhgiEM0QYa8m5wr6VUn590?=
- =?us-ascii?Q?b7Pf8pyaYjsUOKRspQq/+9NlaUtW9QciXAE7W2NCSgqA2FvwUZrOAtsniR8L?=
- =?us-ascii?Q?5iuj5oMIqytXzkbbqqoGU+rCK1QYlwzjGkQSUbOEi/5f8fyTc6F6oVdmNZam?=
- =?us-ascii?Q?Lk5C/HZH74FRxgEIrpjwJCk/uLJDR6TuwnN7eDAIa2lRsFxLeBItNpTac3mi?=
- =?us-ascii?Q?CIptYlIkJW8X8jR+ppdRnin0GGwj2Zc+FnHttKoTR9Fm2BtUSCJMa7v5frYq?=
- =?us-ascii?Q?dRyMOVQUvQJArlM+tnrgacb8py6RdqecWfRixkor3bEUC0+dZ5McmnjG7TcG?=
- =?us-ascii?Q?xw1b6JNWWJjuTxSdIj6uRofdmrTjlKH+xh9LqL3mkF2wKAgSrcHheaSNwvRK?=
- =?us-ascii?Q?kjfXcE5thTF/p3TdSiffQttUl+1HMd0WWSwqLEiuHnN5qQU/l4LTURJq/zj2?=
- =?us-ascii?Q?6r4WjRUy2pSDWw8=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GNuFhf5XKr4R8PmwXeUK25tU9do/d5/MalZA+jxBP+pQjTe4P31304/M3su4?=
+ =?us-ascii?Q?DQWZtbIGq5uB3oY09PKhoFqF+J/JGLM0TKNUt9lFPlZpx3mSFoEnZYTuN1lj?=
+ =?us-ascii?Q?T4Tj5mDBYaph+k4robUOX0JIl5zkbU9tXGpYfEMXzuydcOp78DFUXrxu2uuC?=
+ =?us-ascii?Q?dNVrz/MGeNjrIZ2R0oj5TC3Wp5HjtqmA2yirwX1z+zAO6VJQ3G7vUCReSQ0/?=
+ =?us-ascii?Q?vGtQ6bUZOK1WpVLaEumqEtFIiWw+ki+N5lLyEIXabZYQICHjEQ3K7YsMwPWG?=
+ =?us-ascii?Q?FF1417iZb3DEFrYRLdKoqMtJz6RpTtCBQtk9Y0A7x57sakMci6SKwSy4ADvf?=
+ =?us-ascii?Q?rO9L5raH3qKBRKB366nOG8Q3OjqM1lHsQLOeeN9vsrCHCwBpvbEGsriRe30E?=
+ =?us-ascii?Q?wzHn3DfIgJjMJSjyvNTWRGSMWwjRHdvTi8vDugg9eJdtuJqcaKecXjNsxUOS?=
+ =?us-ascii?Q?pk1XVUyYoe4Bv6n7UvvJoA2k6CtOGOuQThYgpmICCcBNp/NMyS88cpkqlfam?=
+ =?us-ascii?Q?5yb+EAuQ/5ZLz6QLbUr2Q0EVZ+AutZGu6oe0TQrTMQ66rc9Ey07dWJX3sKua?=
+ =?us-ascii?Q?7ZRJJt0tjPCszK1NkXbzMRafk3Ewn6U/UFLvegnZclZgMBGTe0/7agW8bWPC?=
+ =?us-ascii?Q?/79K+lDYNWlcaRjSUTWyCPsD+95FZi/zDwug4Ii6MeDartJePlCyIZ7wAET+?=
+ =?us-ascii?Q?sN/KI4PHKxG0FTEJi/lVwcDEuwZ3hPRw9TsaL2uvE4hJxesBon2PIPhCUiyN?=
+ =?us-ascii?Q?g8NZAYUEqA0sMyt8a5hF5sM5EoZ1hkcHkQsnuc+yUNqb1JVvH2ikXKEtyGz9?=
+ =?us-ascii?Q?GmfnSaAVN0wBluEt8BfYBBe+zPfxiHqn7wYtftdFgdEyMY7ktD8dCUXR5eRv?=
+ =?us-ascii?Q?OwIYrOY+d1AcbNbJ/oSESBj0Dun4ROtoa8EXkcMGTaG4M1E9V6XWO0MHYGh+?=
+ =?us-ascii?Q?2Fkt5zgdAKtId9rbY6Ee1f6ZmcBSHaTLuAeFdej6iXx6miVkZb+nXeK+DSnS?=
+ =?us-ascii?Q?JZQLC/MNZCinsC6kO7GUVcmsUdWUSlPEykMi8xxKWj01cGunXOjGpEqPjg+X?=
+ =?us-ascii?Q?9HVeOfuLx64PbLSvVaX+fLvPkt8eoV9U/DIYEVG3lRqcNRmjGbp8THuDCAr4?=
+ =?us-ascii?Q?fz1l/q88T8BozQnKhIeUqpMnzLyjNi+gyZvFpaYPM7573BJ/hgqI2vCoeQZf?=
+ =?us-ascii?Q?HK/miOabHyWcTEnRa9U53YLSg3RpILLFSKyn7l5QLRNTAbiFYix9oPc8ursp?=
+ =?us-ascii?Q?LF/VFl76wfNgb/gv+e5MtxEyJy/e+O/ohCBlSFegeyCiWoAdJe5ev5WFkzLy?=
+ =?us-ascii?Q?LeIeY3t3GC8Ow++Uh/MQ9lZ6dvS+lCAbQDqTwypO7ECDSBlxll/px30VJP6y?=
+ =?us-ascii?Q?I31SZqX9FfKTmiyXEJN5qConN/QxkpyNUzC1YUPfT7XPKG9eHtKrJgZQsmkX?=
+ =?us-ascii?Q?aOwUDfW/Yh/z8XARPpMQJdoYNZXRNezUlqO+owrNrFf0Koif1Djww7AEzh3d?=
+ =?us-ascii?Q?OsRCXCuHy+eWHP0=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?BLPcq3v9AIMA+7+x/i/qmgiEAPBspk78odUOr3RbqwslrjiHcFbXLOes3sI/?=
- =?us-ascii?Q?HSDbXkDIfMI0UbHCCCzqye2DLJo3GBS5S2V72UWR0naoqKtkpU+9qdA2t3cG?=
- =?us-ascii?Q?MI++73tJT9EdtxB+R/jsyh9EqziRxvlGGc/LDcr3BP8BkoBLlo/42btPY+hA?=
- =?us-ascii?Q?byEI66oGKdhVJ9bF4uJUaMAWaYY0Cysr1P7zvgyE+33rvZ53781DmRYZUDBk?=
- =?us-ascii?Q?necQ8kJjolKtJTsKmCKbdPk4t5W+18LBxtuLNeaYYySoXQeOAQR98L38O4lA?=
- =?us-ascii?Q?UGOHulGtiHi/woKXGIxWQUB6TmQvxhQsYNyB+PRJ5qot+MXYKFBuu622R6Np?=
- =?us-ascii?Q?H+vV03CwfgsRG50CZ+s1X6MdlZTBpxWzKy0ZnkYJ25L0p6qx9tV3eUXwH9B5?=
- =?us-ascii?Q?NPB2i/CdG7RneagTBLJ6sn96FMfuv119t/n69XbQVvM1XYqFTXVyoJTFaGNb?=
- =?us-ascii?Q?/nyxAuDWvy7HbX/2c4F8J1pVNC7uaANPMY6cUynh0Wg8BUsEo36Y+R8NVhVB?=
- =?us-ascii?Q?LzMbxbIJq1AKPD0w6knYOFdtU6MPBzKLYgww7KUtpi/fJWAvhdCxeaDcSijO?=
- =?us-ascii?Q?2NKThZPnTQl8w2CzZByCntz3+jgkzPCNhlJxG5wowaH0zH4Ga7RbXS6ycrKP?=
- =?us-ascii?Q?QVXlJ+dQG07naxbj3eovg77813u4I85BgqKlbDG6px1X0BhjXju+Ojpxx6bh?=
- =?us-ascii?Q?cONyDZo6LrqY3o1tnwr0xNmNbMyMb7jSJDse3EMx5J/o3A8uV2hGv97Utu8l?=
- =?us-ascii?Q?CBx6lr61DB8ogo887+rHv0JK0Dondaab9D084NTmfYWbM0PF6d8e+K9ZUa06?=
- =?us-ascii?Q?wxyziVxsGIRMIr0EajVMOVvc+wJ/+aJARmBSUMmVC1vhHOxuzQscjwlSl7bN?=
- =?us-ascii?Q?ybtggFrJd/2dDwhd97tRN/XUoiQltgaBQmaVc4diaWl380/+4sUPS3rYF5qy?=
- =?us-ascii?Q?BAyBmnrlDHtOAgNV1OEtkqV/TlLHVb9YMvYelNrhcCTDP2FGnYWV0y93yRDW?=
- =?us-ascii?Q?hM7J9FM+EqxMMQvLWh2GhUvA1ChIdSr8B5MHzFC3E6+dxET2G7REgus51ExG?=
- =?us-ascii?Q?iknaPd8kKaWaLzZjFzRuRPjkQ0ST+uxnNWa5+Y9BDyZjrgNsn3U3dZ3cWR43?=
- =?us-ascii?Q?HkwwAbOpthh6PL3Pwfmuztnb5oj99bgO6FS35z84Vj/JQY2CGOQBzdyWmtdc?=
- =?us-ascii?Q?OJkYhYxcFmP9O0/XcFy79dwiD8MIypxwdJP1WKKA3PZFGzT09sqUsHN/T0CB?=
- =?us-ascii?Q?WYj9Pdz9zOXrKcF2bm1J9GUOXunwsCfoiMM+8Qw/xwVO8w1ohiIqqY5JAiYs?=
- =?us-ascii?Q?9/IIJ4Z+2cWUiHN8/9g4QwfQD1mt2TRa6IRSK/VU81ckzfFJvwLH3KZ6iuGV?=
- =?us-ascii?Q?OcnTkJhy5wE9JVZ/CB8WmL8/0/WMltA0XAjVMJ6dQYKOjgsqq4hHZRLIFaaZ?=
- =?us-ascii?Q?wCPR6xJ724jgg00eT7O7nadArtPgW+oQyQICNdqGpnwv0dNRghDd4zcpMyHn?=
- =?us-ascii?Q?dQlulAVpSSQnJNTE+zTNutDKVPFIZUdfHJALhw0xo5m6h+jfjH0PPalRBexA?=
- =?us-ascii?Q?nne55SnqItACt/u/hy1aaURvtmgjAPrQJ8MskxxNtN0zPa5el4B5ZzemFVIl?=
- =?us-ascii?Q?XQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?rqNzk7SmwWCO4BdRcAGUJG8n3LleuCFwGFUn8ixYsReOWeydIzhLDDyNuMDQ?=
+ =?us-ascii?Q?RwIxJ8nyEhDabqbRgL4Ll/VDvYkQDYVPcKffsfiUcv9+0B3ZVnLplRlL78/6?=
+ =?us-ascii?Q?/CzJq0LfPH1LbIu6kNHk+VdrxFQbNxKGzdKjTQT/EY+XnYV8oKsVXY5NWDdD?=
+ =?us-ascii?Q?wqykPUD28DBFOCCdloooe51n+RQJCkXHfDyDLFvfa1hzyh3TX+s5VLHdU7x9?=
+ =?us-ascii?Q?OwpbVmG4EJT3S5SGeViEo7twjT5YdlsH6NkvvStfKLJBgAhWMEwnARzY75h9?=
+ =?us-ascii?Q?U4Eag4d6H5bLDzrmxch85p49J8UkAkJLPewbYw8m1/ec93SK51Ug9fWY9aF8?=
+ =?us-ascii?Q?q0p1tvA3hIOUZzbCsHNQuD61YXdvYxC9yo4U5te7CjR9Fwp5gFNXZ8BunNml?=
+ =?us-ascii?Q?JYsc62arLGUwtoGTEt3UesYRVjFk9mn6RWTTbEI0XYBWe1PKvCZ9z4//CeKT?=
+ =?us-ascii?Q?roUNIjxwTn0+oxXJVm9+NOCw+wziUpxn131qSZsW4uXujiMpyof1ZfPlnyVP?=
+ =?us-ascii?Q?5FnH7E6BNflRhQRK4RF1O5Gpz5levrnYW2mOgHYhKodNBgD8HISPIDSqco1O?=
+ =?us-ascii?Q?riUncjRutVkg27qYZ3OVjA914sO2x7Q3+kyf9KT8oLgsebukF8UQCK6N463R?=
+ =?us-ascii?Q?RE3afquhoeGCSPb+xR9ZM0UQ2794P20XnNUUXPa7nt+T7vW1AQObpB62e4SU?=
+ =?us-ascii?Q?6eallTiBzAHQaX4zx7WzBGma9QuzOet5LlFXrCPjSjg7OR9qgtQddRlLKI//?=
+ =?us-ascii?Q?oguIkYy6R4w4deIomBgdA4+VdkQWfVkZx3lofdKlgtnVKKscBkYszKIut4L4?=
+ =?us-ascii?Q?jlAdk7NgsyviSpBFjDMZ2SrO1tzArbkDUMiM7c9VOjkhL5C14Ne+kPYbyqKC?=
+ =?us-ascii?Q?Wm/H+Dprjel0nvzvzQMsvLeqiMSSAkWpKeOGMH456zMUZww6pfZ+sRBQXgk/?=
+ =?us-ascii?Q?33I2q38wOy2Sgkkr30mHR85EBXS59UV7p1v84TUJCkCm0lGC84Jr9XXznsVS?=
+ =?us-ascii?Q?8ssPNQNzxNMfiF2bi5zmuuS/stzhAOr5FGV+WaaNVsBcvriMjr3GvKBZ8BYU?=
+ =?us-ascii?Q?uaBykEuKtTr5q0ul36TheaW0HzSFInYSzMDVbYcyRuq+KdL+lDvzZcJhWYRo?=
+ =?us-ascii?Q?lwuOI5GL7q0+Dnpq/6GZBOYyk3x1ngRM7ir6poxBvtdT7cz40knPTjew/26m?=
+ =?us-ascii?Q?DIak4LTUUJle3TDixU2Nzd5NtbOvWoroaElYonmqbI/p90t1r2MpZr0HiUHl?=
+ =?us-ascii?Q?z9n5B9tcVAzTXirCjhD9XABm31kq6+MfsNOBnN51AyNrMLoXmQjmD66HmhTN?=
+ =?us-ascii?Q?u+gD3q6WuPpl6oSul3eX9wrKKfxfa8KlSchVeMpgtVXsG5T0mu2J9dY5ln+9?=
+ =?us-ascii?Q?gRUHG0usmjF3Mp2inn41bn55ofyAkjJKuQNeurqjSK/g1VYwdGfR+fhRNL0M?=
+ =?us-ascii?Q?RVuZGQs09lB3s8CKNNieAcvRz1w86wYwmGIoN+9JFPPcq/ZJxvp1P7yIK6qT?=
+ =?us-ascii?Q?IckF9IO+syo9XDEIdjIENPeEtsBt7a5ST3Q1H3zULyElXt0DIxeSczEBJt/H?=
+ =?us-ascii?Q?0daY3P2aTajlJwqDlyfg7yLH9uQvgLNr9usyWWt87KrQldrWsecfj41RKwf2?=
+ =?us-ascii?Q?vw=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ec00a5d-d49b-450f-297b-08ddd3f8454b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 172191a1-5d9b-4f77-e438-08ddd3f84478
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2025 08:15:42.6631 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2025 08:15:41.3397 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oILrIB3zacBdN66xTmMJtGsnNM1x1JCjGiuA0oZu44FlPZBZE3x3qDMmkagP2lf84Pybd/I+LoRy//zBT7z4Vh3nmdyQ+g7h8IZgykWCEGw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: lE/QKe/dkVnlDqUKct3ErsflKK800FHMwOO2M1dG+ytKGoUzxsrioFWozUczAP4B5mXO7LkUrs9AHs26ruFO4J/Ex29WeXEW7ok1gXamyj4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRZPR08MB11069
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -169,122 +168,673 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the best variant picked in the first one in the list provided
-in the manufacturer driver. This worked well while all operations where
-performed at the same speed, but with the introduction of DTR transfers
-this no longer works correctly.
+The code was ported from linux-6.15
 
-Let's continue iterating over all the alternatives, even if we find a
-match, keeping a reference over the theoretically fastest
-operation. Only at the end we can tell which variant is the best.
-
-This logic happening only once at boot.
-
-The patch is based on linux commit 666c299be696f02c3354da104295fb94b8f65d25
-(mtd: spinand: Enhance the logic when picking a variant)
-created by Miquel Raynal <miquel.raynal@bootlin.com>
+based on a linux patch c06b1f753bea40a282f29a9383fcf36b12323108
+(mtd: spinand: add OTP support)
+created by Martin Kurbanov <mmkurbanov@salutedevices.com>
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/mtd/nand/spi/core.c | 13 ++++++++++---
- drivers/spi/spi-mem.c       | 32 ++++++++++++++++++++++++++++++++
- include/spi-mem.h           |  1 +
- 3 files changed, 43 insertions(+), 3 deletions(-)
+ drivers/mtd/nand/spi/Makefile |   3 +-
+ drivers/mtd/nand/spi/core.c   |  54 ++++-
+ drivers/mtd/nand/spi/otp.c    | 369 ++++++++++++++++++++++++++++++++++
+ include/linux/mtd/spinand.h   | 112 +++++++++++
+ 4 files changed, 528 insertions(+), 10 deletions(-)
+ create mode 100644 drivers/mtd/nand/spi/otp.c
 
+diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
+index d438747cf37..831760da1c9 100644
+--- a/drivers/mtd/nand/spi/Makefile
++++ b/drivers/mtd/nand/spi/Makefile
+@@ -1,5 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
+-spinand-objs := core.o alliancememory.o ato.o esmt.o foresee.o gigadevice.o macronix.o
++spinand-objs := core.o otp.o
++spinand-objs += alliancememory.o ato.o esmt.o foresee.o gigadevice.o macronix.o
+ spinand-objs += micron.o paragon.o toshiba.o winbond.o xtx.o
+ obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
 diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index f16d3b0335f..daf6efb87d8 100644
+index b3418624e3e..f16d3b0335f 100644
 --- a/drivers/mtd/nand/spi/core.c
 +++ b/drivers/mtd/nand/spi/core.c
-@@ -1266,10 +1266,13 @@ spinand_select_op_variant(struct spinand_device *spinand,
- 			  const struct spinand_op_variants *variants)
+@@ -56,7 +56,7 @@ static int spinand_read_reg_op(struct spinand_device *spinand, u8 reg, u8 *val)
+ 	return 0;
+ }
+ 
+-static int spinand_write_reg_op(struct spinand_device *spinand, u8 reg, u8 val)
++int spinand_write_reg_op(struct spinand_device *spinand, u8 reg, u8 val)
+ {
+ 	struct spi_mem_op op = SPINAND_SET_FEATURE_OP(reg,
+ 						      spinand->scratchbuf);
+@@ -531,10 +531,22 @@ static int spinand_erase_op(struct spinand_device *spinand,
+ 	return spi_mem_exec_op(spinand->slave, &op);
+ }
+ 
+-static int spinand_wait(struct spinand_device *spinand,
+-			unsigned long initial_delay_us,
+-			unsigned long poll_delay_us,
+-			u8 *s)
++/**
++ * spinand_wait() - Poll memory device status
++ * @spinand: the spinand device
++ * @initial_delay_us: delay in us before starting to poll
++ * @poll_delay_us: time to sleep between reads in us
++ * @s: the pointer to variable to store the value of REG_STATUS
++ *
++ * This function polls a status register (REG_STATUS) and returns when
++ * the STATUS_READY bit is 0 or when the timeout has expired.
++ *
++ * Return: 0 on success, a negative error code otherwise.
++ */
++int spinand_wait(struct spinand_device *spinand,
++		 unsigned long initial_delay_us,
++		 unsigned long poll_delay_us,
++		 u8 *s)
+ {
+ 	unsigned long start, stop;
+ 	u8 status;
+@@ -605,8 +617,16 @@ static int spinand_lock_block(struct spinand_device *spinand, u8 lock)
+ 	return spinand_write_reg_op(spinand, REG_BLOCK_LOCK, lock);
+ }
+ 
+-static int spinand_read_page(struct spinand_device *spinand,
+-			     const struct nand_page_io_req *req)
++/**
++ * spinand_read_page() - Read a page
++ * @spinand: the spinand device
++ * @req: the I/O request
++ *
++ * Return: 0 or a positive number of bitflips corrected on success.
++ * A negative error code otherwise.
++ */
++int spinand_read_page(struct spinand_device *spinand,
++		      const struct nand_page_io_req *req)
  {
  	struct nand_device *nand = spinand_to_nand(spinand);
-+	const struct spi_mem_op *best_variant = NULL;
-+	u64 best_op_duration_ns = ULLONG_MAX;
- 	unsigned int i;
+ 	u8 status;
+@@ -636,8 +656,16 @@ static int spinand_read_page(struct spinand_device *spinand,
+ 	return spinand_ondie_ecc_finish_io_req(nand, (struct nand_page_io_req *)req);
+ }
  
- 	for (i = 0; i < variants->nops; i++) {
- 		struct spi_mem_op op = variants->ops[i];
-+		u64 op_duration_ns = 0;
- 		unsigned int nbytes;
- 		int ret;
+-static int spinand_write_page(struct spinand_device *spinand,
+-			      const struct nand_page_io_req *req)
++/**
++ * spinand_write_page() - Write a page
++ * @spinand: the spinand device
++ * @req: the I/O request
++ *
++ * Return: 0 or a positive number of bitflips corrected on success.
++ * A negative error code otherwise.
++ */
++int spinand_write_page(struct spinand_device *spinand,
++		       const struct nand_page_io_req *req)
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 status;
+@@ -1326,6 +1354,8 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 		spinand->id.len = 1 + table[i].devid.len;
+ 		spinand->select_target = table[i].select_target;
+ 		spinand->set_cont_read = table[i].set_cont_read;
++		spinand->fact_otp = &table[i].fact_otp;
++		spinand->user_otp = &table[i].user_otp;
+ 		spinand->read_retries = table[i].read_retries;
+ 		spinand->set_read_retry = table[i].set_read_retry;
  
-@@ -1286,13 +1289,17 @@ spinand_select_op_variant(struct spinand_device *spinand,
- 				break;
+@@ -1492,6 +1522,12 @@ static int spinand_init(struct spinand_device *spinand)
+ 	mtd->_block_isreserved = spinand_mtd_block_isreserved;
+ 	mtd->_erase = spinand_mtd_erase;
  
- 			nbytes -= op.data.nbytes;
++	if (spinand_user_otp_size(spinand) || spinand_fact_otp_size(spinand)) {
++		ret = spinand_set_mtd_otp_ops(spinand);
++		if (ret)
++			goto err_cleanup_ecc_engine;
++	}
 +
-+			op_duration_ns += spi_mem_calc_op_duration(&op);
- 		}
- 
--		if (!nbytes)
--			return &variants->ops[i];
-+		if (!nbytes && op_duration_ns < best_op_duration_ns) {
-+			best_op_duration_ns = op_duration_ns;
-+			best_variant = &variants->ops[i];
-+		}
- 	}
- 
--	return NULL;
-+	return best_variant;
- }
- 
- static int spinand_setup_slave(struct spinand_device *spinand,
-diff --git a/drivers/spi/spi-mem.c b/drivers/spi/spi-mem.c
-index 6f06650384c..db44a7b26eb 100644
---- a/drivers/spi/spi-mem.c
-+++ b/drivers/spi/spi-mem.c
-@@ -499,6 +499,38 @@ int spi_mem_adjust_op_size(struct spi_slave *slave, struct spi_mem_op *op)
- }
- EXPORT_SYMBOL_GPL(spi_mem_adjust_op_size);
+ 	ret = mtd_ooblayout_count_freebytes(mtd);
+ 	if (ret < 0)
+ 		goto err_cleanup_ecc_engine;
+diff --git a/drivers/mtd/nand/spi/otp.c b/drivers/mtd/nand/spi/otp.c
+new file mode 100644
+index 00000000000..e6ef78d9464
+--- /dev/null
++++ b/drivers/mtd/nand/spi/otp.c
+@@ -0,0 +1,369 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2025, SaluteDevices. All Rights Reserved.
++ *
++ * Author: Martin Kurbanov <mmkurbanov@salutedevices.com>
++ */
++
++#include <linux/mtd/mtd.h>
++#include <linux/mtd/spinand.h>
++#ifdef __UBOOT__
++#include <spi.h>
++#include <dm/device_compat.h>
++#endif
++
++/**
++ * spinand_otp_page_size() - Get SPI-NAND OTP page size
++ * @spinand: the spinand device
++ *
++ * Return: the OTP page size.
++ */
++size_t spinand_otp_page_size(struct spinand_device *spinand)
++{
++	struct nand_device *nand = spinand_to_nand(spinand);
++
++	return nanddev_page_size(nand) + nanddev_per_page_oobsize(nand);
++}
++
++static size_t spinand_otp_size(struct spinand_device *spinand,
++			       const struct spinand_otp_layout *layout)
++{
++	return layout->npages * spinand_otp_page_size(spinand);
++}
++
++/**
++ * spinand_fact_otp_size() - Get SPI-NAND factory OTP area size
++ * @spinand: the spinand device
++ *
++ * Return: the OTP size.
++ */
++size_t spinand_fact_otp_size(struct spinand_device *spinand)
++{
++	return spinand_otp_size(spinand, &spinand->fact_otp->layout);
++}
++
++/**
++ * spinand_user_otp_size() - Get SPI-NAND user OTP area size
++ * @spinand: the spinand device
++ *
++ * Return: the OTP size.
++ */
++size_t spinand_user_otp_size(struct spinand_device *spinand)
++{
++	return spinand_otp_size(spinand, &spinand->user_otp->layout);
++}
++
++static int spinand_otp_check_bounds(struct spinand_device *spinand, loff_t ofs,
++				    size_t len,
++				    const struct spinand_otp_layout *layout)
++{
++	if (ofs < 0 || ofs + len > spinand_otp_size(spinand, layout))
++		return -EINVAL;
++
++	return 0;
++}
++
++static int spinand_user_otp_check_bounds(struct spinand_device *spinand,
++					 loff_t ofs, size_t len)
++{
++	return spinand_otp_check_bounds(spinand, ofs, len,
++					&spinand->user_otp->layout);
++}
++
++static int spinand_otp_rw(struct spinand_device *spinand, loff_t ofs,
++			  size_t len, size_t *retlen, u8 *buf, bool is_write,
++			  const struct spinand_otp_layout *layout)
++{
++	struct nand_page_io_req req = {};
++	unsigned long long page;
++	size_t copied = 0;
++	size_t otp_pagesize = spinand_otp_page_size(spinand);
++	int ret;
++
++	if (!len)
++		return 0;
++
++	ret = spinand_otp_check_bounds(spinand, ofs, len, layout);
++	if (ret)
++		return ret;
++
++	ret = spinand_upd_cfg(spinand, CFG_OTP_ENABLE, CFG_OTP_ENABLE);
++	if (ret)
++		return ret;
++
++	page = ofs;
++	req.dataoffs = do_div(page, otp_pagesize);
++	req.pos.page = page + layout->start_page;
++	req.type = is_write ? NAND_PAGE_WRITE : NAND_PAGE_READ;
++	req.mode = MTD_OPS_RAW;
++	req.databuf.in = buf;
++
++	while (copied < len) {
++		req.datalen = min_t(unsigned int,
++				    otp_pagesize - req.dataoffs,
++				    len - copied);
++
++		if (is_write)
++			ret = spinand_write_page(spinand, &req);
++		else
++			ret = spinand_read_page(spinand, &req);
++
++		if (ret < 0)
++			break;
++
++		req.databuf.in += req.datalen;
++		req.pos.page++;
++		req.dataoffs = 0;
++		copied += req.datalen;
++	}
++
++	*retlen = copied;
++
++	if (spinand_upd_cfg(spinand, CFG_OTP_ENABLE, 0)) {
++		dev_warn(spinand->slave->dev,
++			 "Can not disable OTP mode\n");
++		ret = -EIO;
++	}
++
++	return ret;
++}
++
++/**
++ * spinand_fact_otp_read() - Read from OTP area
++ * @spinand: the spinand device
++ * @ofs: the offset to read
++ * @len: the number of data bytes to read
++ * @retlen: the pointer to variable to store the number of read bytes
++ * @buf: the buffer to store the read data
++ *
++ * Return: 0 on success, an error code otherwise.
++ */
++int spinand_fact_otp_read(struct spinand_device *spinand, loff_t ofs,
++			  size_t len, size_t *retlen, u8 *buf)
++{
++	return spinand_otp_rw(spinand, ofs, len, retlen, buf, false,
++			      &spinand->fact_otp->layout);
++}
++
++/**
++ * spinand_user_otp_read() - Read from OTP area
++ * @spinand: the spinand device
++ * @ofs: the offset to read
++ * @len: the number of data bytes to read
++ * @retlen: the pointer to variable to store the number of read bytes
++ * @buf: the buffer to store the read data
++ *
++ * Return: 0 on success, an error code otherwise.
++ */
++int spinand_user_otp_read(struct spinand_device *spinand, loff_t ofs,
++			  size_t len, size_t *retlen, u8 *buf)
++{
++	return spinand_otp_rw(spinand, ofs, len, retlen, buf, false,
++			      &spinand->user_otp->layout);
++}
++
++/**
++ * spinand_user_otp_write() - Write to OTP area
++ * @spinand:  the spinand device
++ * @ofs: the offset to write to
++ * @len: the number of bytes to write
++ * @retlen: the pointer to variable to store the number of written bytes
++ * @buf: the buffer with data to write
++ *
++ * Return: 0 on success, an error code otherwise.
++ */
++int spinand_user_otp_write(struct spinand_device *spinand, loff_t ofs,
++			   size_t len, size_t *retlen, const u8 *buf)
++{
++	return spinand_otp_rw(spinand, ofs, len, retlen, (u8 *)buf, true,
++			      &spinand->user_otp->layout);
++}
++
++static int spinand_mtd_otp_info(struct mtd_info *mtd, size_t len,
++				size_t *retlen, struct otp_info *buf,
++				bool is_fact)
++{
++	struct spinand_device *spinand = mtd_to_spinand(mtd);
++	int ret;
++
++	*retlen = 0;
++
++	mutex_lock(&spinand->lock);
++
++	if (is_fact)
++		ret = spinand->fact_otp->ops->info(spinand, len, buf, retlen);
++	else
++		ret = spinand->user_otp->ops->info(spinand, len, buf, retlen);
++
++	mutex_unlock(&spinand->lock);
++
++	return ret;
++}
++
++static int spinand_mtd_fact_otp_info(struct mtd_info *mtd, size_t len,
++				     size_t *retlen, struct otp_info *buf)
++{
++	return spinand_mtd_otp_info(mtd, len, retlen, buf, true);
++}
++
++static int spinand_mtd_user_otp_info(struct mtd_info *mtd, size_t len,
++				     size_t *retlen, struct otp_info *buf)
++{
++	return spinand_mtd_otp_info(mtd, len, retlen, buf, false);
++}
++
++static int spinand_mtd_otp_read(struct mtd_info *mtd, loff_t ofs, size_t len,
++				size_t *retlen, u8 *buf, bool is_fact)
++{
++	struct spinand_device *spinand = mtd_to_spinand(mtd);
++	int ret;
++
++	*retlen = 0;
++
++	if (!len)
++		return 0;
++
++	ret = spinand_otp_check_bounds(spinand, ofs, len,
++				       is_fact ? &spinand->fact_otp->layout :
++						 &spinand->user_otp->layout);
++	if (ret)
++		return ret;
++
++	mutex_lock(&spinand->lock);
++
++	if (is_fact)
++		ret = spinand->fact_otp->ops->read(spinand, ofs, len, retlen,
++						   buf);
++	else
++		ret = spinand->user_otp->ops->read(spinand, ofs, len, retlen,
++						   buf);
++
++	mutex_unlock(&spinand->lock);
++
++	return ret;
++}
++
++static int spinand_mtd_fact_otp_read(struct mtd_info *mtd, loff_t ofs,
++				     size_t len, size_t *retlen, u8 *buf)
++{
++	return spinand_mtd_otp_read(mtd, ofs, len, retlen, buf, true);
++}
++
++static int spinand_mtd_user_otp_read(struct mtd_info *mtd, loff_t ofs,
++				     size_t len, size_t *retlen, u8 *buf)
++{
++	return spinand_mtd_otp_read(mtd, ofs, len, retlen, buf, false);
++}
++
++static int spinand_mtd_user_otp_write(struct mtd_info *mtd, loff_t ofs,
++				      size_t len, size_t *retlen, u_char *buf)
++{
++	struct spinand_device *spinand = mtd_to_spinand(mtd);
++	const struct spinand_user_otp_ops *ops = spinand->user_otp->ops;
++	int ret;
++
++	*retlen = 0;
++
++	if (!len)
++		return 0;
++
++	ret = spinand_user_otp_check_bounds(spinand, ofs, len);
++	if (ret)
++		return ret;
++
++	mutex_lock(&spinand->lock);
++	ret = ops->write(spinand, ofs, len, retlen, buf);
++	mutex_unlock(&spinand->lock);
++
++	return ret;
++}
++
++#ifndef __UBOOT__
++static int spinand_mtd_user_otp_erase(struct mtd_info *mtd, loff_t ofs,
++				      size_t len)
++{
++	struct spinand_device *spinand = mtd_to_spinand(mtd);
++	const struct spinand_user_otp_ops *ops = spinand->user_otp->ops;
++	int ret;
++
++	if (!len)
++		return 0;
++
++	ret = spinand_user_otp_check_bounds(spinand, ofs, len);
++	if (ret)
++		return ret;
++
++	mutex_lock(&spinand->lock);
++	ret = ops->erase(spinand, ofs, len);
++	mutex_unlock(&spinand->lock);
++
++	return ret;
++}
++#endif
++
++static int spinand_mtd_user_otp_lock(struct mtd_info *mtd, loff_t ofs,
++				     size_t len)
++{
++	struct spinand_device *spinand = mtd_to_spinand(mtd);
++	const struct spinand_user_otp_ops *ops = spinand->user_otp->ops;
++	int ret;
++
++	if (!len)
++		return 0;
++
++	ret = spinand_user_otp_check_bounds(spinand, ofs, len);
++	if (ret)
++		return ret;
++
++	mutex_lock(&spinand->lock);
++	ret = ops->lock(spinand, ofs, len);
++	mutex_unlock(&spinand->lock);
++
++	return ret;
++}
++
++/**
++ * spinand_set_mtd_otp_ops() - Setup OTP methods
++ * @spinand: the spinand device
++ *
++ * Setup OTP methods.
++ *
++ * Return: 0 on success, a negative error code otherwise.
++ */
++int spinand_set_mtd_otp_ops(struct spinand_device *spinand)
++{
++	struct mtd_info *mtd = spinand_to_mtd(spinand);
++	const struct spinand_fact_otp_ops *fact_ops = spinand->fact_otp->ops;
++	const struct spinand_user_otp_ops *user_ops = spinand->user_otp->ops;
++
++	if (!user_ops && !fact_ops)
++		return -EINVAL;
++
++	if (user_ops) {
++		if (user_ops->info)
++			mtd->_get_user_prot_info = spinand_mtd_user_otp_info;
++
++		if (user_ops->read)
++			mtd->_read_user_prot_reg = spinand_mtd_user_otp_read;
++
++		if (user_ops->write)
++			mtd->_write_user_prot_reg = spinand_mtd_user_otp_write;
++
++		if (user_ops->lock)
++			mtd->_lock_user_prot_reg = spinand_mtd_user_otp_lock;
++#ifndef __UBOOT__
++		if (user_ops->erase)
++			mtd->_erase_user_prot_reg = spinand_mtd_user_otp_erase;
++#endif
++	}
++
++	if (fact_ops) {
++		if (fact_ops->info)
++			mtd->_get_fact_prot_info = spinand_mtd_fact_otp_info;
++
++		if (fact_ops->read)
++			mtd->_read_fact_prot_reg = spinand_mtd_fact_otp_read;
++	}
++
++	return 0;
++}
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index 44c616a4acf..adfb5f3ffbc 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -322,6 +322,68 @@ struct spinand_ecc_info {
+ #define SPINAND_HAS_READ_PLANE_SELECT_BIT	BIT(3)
+ #define SPINAND_NO_RAW_ACCESS			BIT(4)
  
 +/**
-+ * spi_mem_calc_op_duration() - Derives the theoretical length (in cpu cycles)
-+ *				of an operation. This helps finding the best
-+ *				variant among a list of possible choices.
-+ * @op: the operation to benchmark
-+ *
-+ * Some chips have per-op frequency limitations, PCBs usually have their own
-+ * limitations as well, and controllers can support dual, quad or even octal
-+ * modes, sometimes in DTR. All these combinations make it impossible to
-+ * statically list the best combination for all situations. If we want something
-+ * accurate, all these combinations should be rated (eg. with a time estimate)
-+ * and the best pick should be taken based on these calculations.
-+ *
-+ * Returns a estimate for the time this op would take.
++ * struct spinand_otp_layout - structure to describe the SPI NAND OTP area
++ * @npages: number of pages in the OTP
++ * @start_page: start page of the user/factory OTP area.
 + */
-+u64 spi_mem_calc_op_duration(struct spi_mem_op *op)
-+{
-+	u64 ncycles = 0;
++struct spinand_otp_layout {
++	unsigned int npages;
++	unsigned int start_page;
++};
 +
-+	ncycles += ((op->cmd.nbytes * 8) / op->cmd.buswidth) / (op->cmd.dtr ? 2 : 1);
-+	ncycles += ((op->addr.nbytes * 8) / op->addr.buswidth) / (op->addr.dtr ? 2 : 1);
++/**
++ * struct spinand_fact_otp_ops - SPI NAND OTP methods for factory area
++ * @info: get the OTP area information
++ * @read: read from the SPI NAND OTP area
++ */
++struct spinand_fact_otp_ops {
++	int (*info)(struct spinand_device *spinand, size_t len,
++		    struct otp_info *buf, size_t *retlen);
++	int (*read)(struct spinand_device *spinand, loff_t from, size_t len,
++		    size_t *retlen, u8 *buf);
++};
 +
-+	/* Dummy bytes are optional for some SPI flash memory operations */
-+	if (op->dummy.nbytes)
-+		ncycles += ((op->dummy.nbytes * 8) / op->dummy.buswidth) / (op->dummy.dtr ? 2 : 1);
++/**
++ * struct spinand_user_otp_ops - SPI NAND OTP methods for user area
++ * @info: get the OTP area information
++ * @lock: lock an OTP region
++ * @erase: erase an OTP region
++ * @read: read from the SPI NAND OTP area
++ * @write: write to the SPI NAND OTP area
++ */
++struct spinand_user_otp_ops {
++	int (*info)(struct spinand_device *spinand, size_t len,
++		    struct otp_info *buf, size_t *retlen);
++	int (*lock)(struct spinand_device *spinand, loff_t from, size_t len);
++	int (*erase)(struct spinand_device *spinand, loff_t from, size_t len);
++	int (*read)(struct spinand_device *spinand, loff_t from, size_t len,
++		    size_t *retlen, u8 *buf);
++	int (*write)(struct spinand_device *spinand, loff_t from, size_t len,
++		     size_t *retlen, const u8 *buf);
++};
 +
-+	ncycles += ((op->data.nbytes * 8) / op->data.buswidth) / (op->data.dtr ? 2 : 1);
++/**
++ * struct spinand_fact_otp - SPI NAND OTP grouping structure for factory area
++ * @layout: OTP region layout
++ * @ops: OTP access ops
++ */
++struct spinand_fact_otp {
++	const struct spinand_otp_layout layout;
++	const struct spinand_fact_otp_ops *ops;
++};
 +
-+	return ncycles;
-+}
-+EXPORT_SYMBOL_GPL(spi_mem_calc_op_duration);
++/**
++ * struct spinand_user_otp - SPI NAND OTP grouping structure for user area
++ * @layout: OTP region layout
++ * @ops: OTP access ops
++ */
++struct spinand_user_otp {
++	const struct spinand_otp_layout layout;
++	const struct spinand_user_otp_ops *ops;
++};
 +
- static ssize_t spi_mem_no_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 				      u64 offs, size_t len, void *buf)
- {
-diff --git a/include/spi-mem.h b/include/spi-mem.h
-index e68e2b50e85..36281a62f77 100644
---- a/include/spi-mem.h
-+++ b/include/spi-mem.h
-@@ -392,6 +392,7 @@ bool spi_mem_default_supports_op(struct spi_mem *mem,
- #endif /* __UBOOT__ */
++
+ /**
+  * struct spinand_info - Structure used to describe SPI NAND chips
+  * @model: model name
+@@ -337,6 +399,8 @@ struct spinand_ecc_info {
+  * @select_target: function used to select a target/die. Required only for
+  *		   multi-die chips
+  * @set_cont_read: enable/disable continuous cached reads
++ * @fact_otp: SPI NAND factory OTP info.
++ * @user_otp: SPI NAND user OTP info.
+  * @read_retries: the number of read retry modes supported
+  * @set_read_retry: enable/disable read retry for data recovery
+  *
+@@ -359,6 +423,8 @@ struct spinand_info {
+ 			     unsigned int target);
+ 	int (*set_cont_read)(struct spinand_device *spinand,
+ 			     bool enable);
++	struct spinand_fact_otp fact_otp;
++	struct spinand_user_otp user_otp;
+ 	unsigned int read_retries;
+ 	int (*set_read_retry)(struct spinand_device *spinand,
+ 			     unsigned int read_retry);
+@@ -390,6 +456,24 @@ struct spinand_info {
+ #define SPINAND_CONT_READ(__set_cont_read)				\
+ 	.set_cont_read = __set_cont_read,
  
- int spi_mem_adjust_op_size(struct spi_slave *slave, struct spi_mem_op *op);
-+u64 spi_mem_calc_op_duration(struct spi_mem_op *op);
++#define SPINAND_FACT_OTP_INFO(__npages, __start_page, __ops)		\
++	.fact_otp = {							\
++		.layout = {						\
++			.npages = __npages,				\
++			.start_page = __start_page,			\
++		},							\
++		.ops = __ops,						\
++	}
++
++#define SPINAND_USER_OTP_INFO(__npages, __start_page, __ops)		\
++	.user_otp = {							\
++		.layout = {						\
++			.npages = __npages,				\
++			.start_page = __start_page,			\
++		},							\
++		.ops = __ops,						\
++	}
++
+ #define SPINAND_READ_RETRY(__read_retries, __set_read_retry)		\
+ 	.read_retries = __read_retries,					\
+ 	.set_read_retry = __set_read_retry
+@@ -444,6 +528,8 @@ struct spinand_dirmap {
+  *		actually relevant to enable this feature.
+  * @set_cont_read: Enable/disable the continuous read feature
+  * @priv: manufacturer private data
++ * @fact_otp: SPI NAND factory OTP info.
++ * @user_otp: SPI NAND user OTP info.
+  * @read_retries: the number of read retry modes supported
+  * @set_read_retry: Enable/disable the read retry feature
+  * @last_wait_status: status of the last wait operation that will be used in case
+@@ -487,6 +573,9 @@ struct spinand_device {
+ 	int (*set_cont_read)(struct spinand_device *spinand,
+ 			     bool enable);
  
- bool spi_mem_supports_op(struct spi_slave *slave, const struct spi_mem_op *op);
- bool spi_mem_dtr_supports_op(struct spi_slave *slave,
++	const struct spinand_fact_otp *fact_otp;
++	const struct spinand_user_otp *user_otp;
++
+ 	unsigned int read_retries;
+ 	int (*set_read_retry)(struct spinand_device *spinand,
+ 			     unsigned int retry_mode);
+@@ -571,6 +660,29 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 			   enum spinand_readid_method rdid_method);
+ 
+ int spinand_upd_cfg(struct spinand_device *spinand, u8 mask, u8 val);
++int spinand_write_reg_op(struct spinand_device *spinand, u8 reg, u8 val);
+ int spinand_select_target(struct spinand_device *spinand, unsigned int target);
+ 
++int spinand_wait(struct spinand_device *spinand, unsigned long initial_delay_us,
++		 unsigned long poll_delay_us, u8 *s);
++
++int spinand_read_page(struct spinand_device *spinand,
++		      const struct nand_page_io_req *req);
++
++int spinand_write_page(struct spinand_device *spinand,
++		       const struct nand_page_io_req *req);
++
++size_t spinand_otp_page_size(struct spinand_device *spinand);
++size_t spinand_fact_otp_size(struct spinand_device *spinand);
++size_t spinand_user_otp_size(struct spinand_device *spinand);
++
++int spinand_fact_otp_read(struct spinand_device *spinand, loff_t ofs,
++			  size_t len, size_t *retlen, u8 *buf);
++int spinand_user_otp_read(struct spinand_device *spinand, loff_t ofs,
++			  size_t len, size_t *retlen, u8 *buf);
++int spinand_user_otp_write(struct spinand_device *spinand, loff_t ofs,
++			   size_t len, size_t *retlen, const u8 *buf);
++
++int spinand_set_mtd_otp_ops(struct spinand_device *spinand);
++
+ #endif /* __LINUX_MTD_SPINAND_H */
 -- 
 2.47.2
 
