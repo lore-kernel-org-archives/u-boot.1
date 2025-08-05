@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B0AEC87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 09:20:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C087EC87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 09:21:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84E51835FE;
-	Tue,  5 Aug 2025 11:20:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D054A83642;
+	Tue,  5 Aug 2025 11:20:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tp7DddGC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bbD4L9Ju";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED91D835CD; Tue,  5 Aug 2025 11:20:14 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id 3A16883642; Tue,  5 Aug 2025 11:20:18 +0200 (CEST)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20B03835B0
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 11:20:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DFB5F81D5D
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 11:20:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-76bd9d723bfso3334262b3a.1
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 02:20:12 -0700 (PDT)
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-76bddb92dc1so4866459b3a.0
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 02:20:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754385610; x=1754990410; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754385614; x=1754990414; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ExyaCLbCO/QKYLdCwquBrl2RvysdKhk4M+4+jYNP32M=;
- b=Tp7DddGCItCk6W7kX8mTkep2IIt+RNQ9cZAlb75XTJZys6q1vsnmfGt/BgdKzKuEDn
- dq4QYPjpsJ5/3Bjv3x9vQvq1UFhX4XVXICR9UM3Gbw4Vsg1G6GaDk5VpqcZQqICNhP0i
- 1f6vhqyn1CkoSW0aYCV91hX+CTR7f3ILJuLJTYIOoQiF8QrRS1c+8lqmLSf1HvJIz8+5
- 2Ho0WXT2HaHwyd87DFhYmpZCaeuhf0GyEXm1Ihab1syTN+tbTK2g74Rh19DkgMEG9lRe
- 7vtvhMFck8EWnGKoIYJ9sCQ3MJ4+y13XfduLtdSr7601rUQU4op1LP9TaZqlCtAbFNt6
- 89uw==
+ bh=pYaNIgFjhqLUR08t4P6UZWbqIfNOJVFw0/T0NjKlFWk=;
+ b=bbD4L9JuiuEloRyaNPs6szn4s3C9EPK9diYWyIs9rrB6Xc5rLGpb8dK0RnMYD9vRlp
+ RB9TOV3Hhkbmq6tMZHT1+0IBrobMQdImhXjA+VAp6ZcMl9Ep/92ID7zB3QvEgpNWYeHi
+ c6uQ5OaBY7hbeOyU48HWJzvfFfg9WtevRq8wTqBk6zGZfK1h3D7tFHYRk9vnzNVgnlLs
+ mfCFaVMniVAqEtDTTZtLa1ycGiax2AMdtioGkNGet+4d3MQtHtQSnzseUdPZkOkIK1gD
+ QNjGlRDjF5KFKwAPcNQCe5i3D15+/tPXxcmSJcETtaj5hgb05mzdKXXEBm62KbNmORcg
+ Bunw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754385610; x=1754990410;
+ d=1e100.net; s=20230601; t=1754385614; x=1754990414;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ExyaCLbCO/QKYLdCwquBrl2RvysdKhk4M+4+jYNP32M=;
- b=VB9c3SgfOUGXDbsYXjNAzlinYUOYNgStJJDHs2Ugsh5K51GKGvW45kgx+rAZFUMbWs
- 86ZGulhLEP2FZruyQc4qCD/ybjrpLa2E4Npsk0lU872FhXpcqW5DbdIMNIAsh0p1Cl+m
- VeWI6TS8JMy4nd5Q/pLZQd2klBNYB1vnxAbA1JXBI/5/Xc79rE+iPDXy1QjW0GnHMlmZ
- CSshoRF60Li9UzQKZVB1/Q0/OaaxjSR4Mz2kL4uhGrOk+yFcB6d6g3yeSozKOZjbGg8e
- NHeHs3aJuMKvVt+bYKPsFmt+kgi3wldUs09oSHHnu/beneFc/fLZVsTvwhs8rausDX5o
- Bhtw==
-X-Gm-Message-State: AOJu0Ywnqm7cHetd4r+3rbwLM+PngQ5KK1FJ1PGA73dkzE26c51ACCs+
- 25Y7DFneaPZ+faPDNmU5majM8YWIZVOYjZw8AEKWvscdjtF/n52f6rlT
-X-Gm-Gg: ASbGncuIcmP6gjfsNreupXrGhs3/Cc5AqM0+tiGkQKtaUpeCljR1/N0084cjzOYzOIp
- BKxVcmqzqLD9lB6PqIRrVDEIYw3f0DM24JCIz95XljC8vbXKWIq/JaSxs28QUtztesbQN6Kw/nD
- PhC5umA97YkZH+ge9Z/xmi+7aCQJytr4UZUnrvCC0nueJ3Rvv7dAIhtw0TbBxAbwLrtSf/8g67h
- 9ifByu4HtlP9vMlH2EHls2LkariL0DG0gDQlPpJNpXiuC7s2Pl7gsfGBdqx4z/M4iZ4vUTuXrsV
- WCjaV50S1ZqjYvXViwN7id2LZiCymgZ8JgxWLKgpYid69e/ZfPwrS4ltmHO8dChpqMtUflYuDKT
- fkiODkxI6Y0u0Jv2ONoD7lnchmNm7S4oEZQ==
-X-Google-Smtp-Source: AGHT+IHVwYadJBnDXFPIYzk2upwU2jm2aNw9yJmNhUuW30TZQ1DY6CrM0G6A0x/quKqYS68oer1+JQ==
-X-Received: by 2002:a05:6a00:1907:b0:76b:c5bd:aec7 with SMTP id
- d2e1a72fcca58-76bec30aa51mr16053113b3a.8.1754385610539; 
- Tue, 05 Aug 2025 02:20:10 -0700 (PDT)
+ bh=pYaNIgFjhqLUR08t4P6UZWbqIfNOJVFw0/T0NjKlFWk=;
+ b=kSLSJjDlpskbIxnT3Iq9UTMTJdsC/aHIbwmLTYjD70Sd32BUAutSL9ODZ76Qe+OgYc
+ kFWsCOUfHbuakfKXeglp6ozW0TOsN1xGky7+/e8DIvtkrAH9gfgdSg2bfZRddotBY6XB
+ iTViaYUc/dQ3fhQsVzy2hRZ7cPI1x6fFQzK3UzO0WFJX/BBF8yqY0Dn2Le/AAXYY1z7i
+ 12vX2VL3q1kjZmE2vd6EzFLhfHilssLp73kv412iwVPsfKF65JiWs/PN0LkoiewFwfqF
+ G/JX7ola1o9XCHpj4C+IdIeK8iKu31pXx7FDC3QFIgbI1OnH30E74Z3zrJNatO6XHXOc
+ 4ytA==
+X-Gm-Message-State: AOJu0YyDD/7Pio7sqXB6GGwWCWogTTmEpFnX/GBsMK3WfnnaCKjs9ncp
+ X7xa3pYv3Pa0+MtwK+3q/vn2iViFJrSMYExy2AbZqvWNJEAT/lwgS73B
+X-Gm-Gg: ASbGncsFQ3jiEv1XBooNEdN9WJ+He8jkGF6MvaOz8PMMrfKkRhX38x4OKj5CYot/nNo
+ fcE/qDXsZco0MmMDPTlVLxx+mIZZv862T5hsJDfJxFMbX4aQRMA28Y0W04PWv/J08ToevNu6+Tl
+ 273SPCuRURRoWjNCtEbw2FU+154N7f0BdNQHLwhUA+kQVTketF/BGBhRVs+L7pwLh7yqgEGSGRc
+ I6DqE973All5C+Qp2XhKavBrjFef7nr0JIJWWU1eGVYtYguRL+JZ8hsvT7vQLSuxO0CYfya+5Fr
+ Zd1KRBqdYQ2hmOj5bPbBKTvgY6jtAZymI/Phoefacov/SIHOk155mpov8MaH4Hrt1tqVrBz6vx9
+ gH4zkLa5f1YO4ZTtyMALy6B2IuUz/OVXvEw==
+X-Google-Smtp-Source: AGHT+IEokeDCQy1am4iNwTXNqI1LesniFECiuea40ETY5jj1JSO+wMzm8muTaf+SXLqSM/HXeeticw==
+X-Received: by 2002:a05:6a20:7d86:b0:23d:45b2:8e21 with SMTP id
+ adf61e73a8af0-23df91328b9mr17864322637.37.1754385614421; 
+ Tue, 05 Aug 2025 02:20:14 -0700 (PDT)
 Received: from cs20-buildserver.lan ([2402:7500:400:60db:2e0:4cff:fe68:863])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bcce89125sm12495185b3a.33.2025.08.05.02.20.08
+ d2e1a72fcca58-76bcce89125sm12495185b3a.33.2025.08.05.02.20.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 02:20:10 -0700 (PDT)
+ Tue, 05 Aug 2025 02:20:13 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, YSCHU@nuvoton.com,
  trini@konsulko.com
 Cc: u-boot@lists.denx.de,
 	Stanley Chu <yschu@nuvoton.com>
-Subject: [PATCH v1 7/9] misc: npcm_host_intf: Add Arbel eSPI workaround
-Date: Tue,  5 Aug 2025 17:18:48 +0800
-Message-Id: <20250805091850.2051096-8-JJLIU0@nuvoton.com>
+Subject: [PATCH v1 8/9] misc: npcm_host_intf: Disable pending KCS/BPC
+ interrupts
+Date: Tue,  5 Aug 2025 17:18:49 +0800
+Message-Id: <20250805091850.2051096-9-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250805091850.2051096-1-JJLIU0@nuvoton.com>
 References: <20250805091850.2051096-1-JJLIU0@nuvoton.com>
@@ -100,56 +101,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enabling an eSPI channel(e.g. Peripheral Channel) during
-an eSPI transaction might cause the BMC eSPI module to
-transition to a wrong state and therefore respond with
-FATAL_ERROR on incoming transaction.
-Add workaround to avoid the module getting into the wrong
-state.
+If there is an unhandled KCS/BPC pending interrupt after reboot,
+the KCS/BPC Linux driver may trigger interrupts immediately upon
+registering the irq. However, since the driver is not yet initialized
+to handle them, this can lead to unexpected behavior.
+
+To prevent this, disable KCS/BPC interrupts in u-boot to avoid pending
+interrupts from being raised before the Linux driver is fully initialized.
 
 Signed-off-by: Stanley Chu <yschu@nuvoton.com>
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 ---
- drivers/misc/npcm_host_intf.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ arch/arm/dts/nuvoton-common-npcm8xx.dtsi |  2 +-
+ drivers/misc/npcm_host_intf.c            | 21 ++++++++++++++++++++-
+ 2 files changed, 21 insertions(+), 2 deletions(-)
 
+diff --git a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi b/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
+index be06b2a0cae..6866005336f 100644
+--- a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
++++ b/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
+@@ -141,7 +141,7 @@
+ 
+ 			host_intf: host_intf@9f000 {
+ 				compatible = "nuvoton,npcm845-host-intf";
+-				reg = <0x9f000 0x1000>;
++				reg = <0x9f000 0x1000>, <0x7000 0x40>;
+ 				type = "espi";
+ 				ioaddr = <0x4e>;
+ 				channel-support = <0xf>;
 diff --git a/drivers/misc/npcm_host_intf.c b/drivers/misc/npcm_host_intf.c
-index 58bab888c3c..2c89bd7a167 100644
+index 2c89bd7a167..e3b0663625b 100644
 --- a/drivers/misc/npcm_host_intf.c
 +++ b/drivers/misc/npcm_host_intf.c
-@@ -22,6 +22,8 @@
- /* ESPI Register offsets */
- #define ESPICFG			0x4
- #define ESPIHINDP		0x80
-+#define ESPI_TEN		0xF0
-+#define ESPI_ENG		0xF1
+@@ -45,10 +45,20 @@
+ #define ESPI_TEN_ENABLE		0x55
+ #define ESPI_TEN_DISABLE	0
  
- /* MFSEL bit fileds */
- #define MFSEL1_LPCSEL		BIT(26)
-@@ -40,6 +42,9 @@
- #define AUTO_HS2		BIT(12)
- #define AUTO_HS3		BIT(16)
- 
-+#define ESPI_TEN_ENABLE		0x55
-+#define ESPI_TEN_DISABLE	0
++/* KCS/BPC interrupt control */
++#define BPCFEN			0x46
++#define FRIE			BIT(3)
++#define HRIE			BIT(4)
++#define KCS1CTL			0x18
++#define KCS2CTL			0x2a
++#define KCS3CTL			0x3c
++#define IBFIE			BIT(0)
++#define OBEIE			BIT(1)
 +
  static int npcm_host_intf_bind(struct udevice *dev)
  {
  	struct regmap *syscon;
-@@ -83,6 +88,13 @@ static int npcm_host_intf_bind(struct udevice *dev)
- 		val &= ~(CHSUPP_MASK | IOMODE_MASK | MAXFREQ_MASK);
- 		val |= IOMODE_SDQ | MAXFREQ_33MHZ | FIELD_PREP(CHSUPP_MASK, ch_supp);
- 		writel(val, base + ESPICFG);
+-	void __iomem *base;
++	void __iomem *base, *kcs_base;
+ 	u32 ch_supp, val;
+ 	u32 ioaddr;
+ 	const char *type;
+@@ -104,6 +114,15 @@ static int npcm_host_intf_bind(struct udevice *dev)
+ 	/* Release host wait */
+ 	setbits_8(SMC_CTL_REG_ADDR, SMC_CTL_HOSTWAIT);
+ 
++	kcs_base = dev_read_addr_index_ptr(dev, 1);
++	if (kcs_base) {
++		/* Disable KCS/BPC interrupts */
++		clrbits_8(kcs_base + BPCFEN, FRIE | HRIE);
++		clrbits_8(kcs_base + KCS1CTL, IBFIE | OBEIE);
++		clrbits_8(kcs_base + KCS2CTL, IBFIE | OBEIE);
++		clrbits_8(kcs_base + KCS3CTL, IBFIE | OBEIE);
++	}
 +
-+		if (device_is_compatible(dev, "nuvoton,npcm845-host-intf")) {
-+			/* Workaround: avoid eSPI module getting into wrong state */
-+			writeb(ESPI_TEN_ENABLE, base + ESPI_TEN);
-+			writeb(BIT(6), base + ESPI_ENG);
-+			writeb(ESPI_TEN_DISABLE, base + ESPI_TEN);
-+		}
- 	} else if (!strcmp(type, "lpc")) {
- 		/* Select LPC pin function */
- 		regmap_update_bits(syscon, MFSEL4, MFSEL4_ESPISEL, 0);
+ 	return 0;
+ }
+ 
 -- 
 2.34.1
 
