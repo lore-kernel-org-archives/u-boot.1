@@ -4,77 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31294C87FD2
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 07:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 923FCC87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 07:50:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B29F833D7;
-	Tue,  5 Aug 2025 09:49:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D21F4833D7;
+	Tue,  5 Aug 2025 09:50:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mwYQjq0d";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="d484D9Qp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A50D839D6; Tue,  5 Aug 2025 09:49:10 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E483E84137; Tue,  5 Aug 2025 09:50:13 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6ED44833D1
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 09:49:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93723833D1
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 09:50:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-615d1865b2dso6324623a12.0
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 00:49:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754380148; x=1754984948; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JVWzo2daREW3rJPUCK8vH44L/64kdE6s42Aed6nB/I0=;
- b=mwYQjq0dykobmV1THAhQunQw2dpnFl0Y6Xp37VckuObykHWhYYPDNQG20S6SViBkXU
- DC53vikCaPQKvBqrpi6g1zEwPjKXd9zX8qoiMjyXbuTWXlmrp/TGgDEqM4xaEFnhuMG2
- 4pZXUPmXkGf4LBHYeqljMsugQkhroLmSBo7mKKH3wqA8iejMW501a5C/h2KTX0KXzSnh
- 5ns+7nLdmZ6ib3JKO5FUhpnoToHXFj5aH/akwuacFDf4Af1dTL9yxuz3ZLZv4zO8dCIW
- tesj7lm03bX2A2ZS6jVHJlN+mvGvWrCAyKsAAXyF8JWA7ha3PYbS+8RWgM1ww+xEmvFe
- JRsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754380148; x=1754984948;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JVWzo2daREW3rJPUCK8vH44L/64kdE6s42Aed6nB/I0=;
- b=JY/oKRI95RsW3R2/ajmKiLMSCcrJ2nua+IF+ovkl15jodj1tJ4TxPdj7XI47pchIbI
- JSTtoA22dy117aqr4SI+jOZJjHfjDr3Ozs5p1uhEezGl45YFj9KJmWq951YDsDB4hoLu
- qALKvawWVwqus9V9q7GUbedk96kzUg1ENuvEy2hY65uIfO34IRZD3TPDXABHvpnvYNEI
- s0r20OyziU4aO4ENRxcnQ1Bn/vnN17xMZf8/LyaF4xBmAvECd/NXxKcv7AAUSXOF5nvz
- X4fDKiFaLcoNCg/LR3F34V3p7t9EJBVpXKYmhUm9S2SOHVMKVqbqREJ0T8t51AJqRFtj
- Rxag==
-X-Gm-Message-State: AOJu0Yw8YziXj3E8hlSXm5AJzso2QtdMWpOmfOAeo5Gsa8OfusFapZx6
- bJrVwC1n+PjmIhAvOYV1ZHCa0AJFXC/Ft8Or3oD0toSNs/qtIrIo/Yq9JrZM1rlCEd8NOCN60XZ
- 4gQ/AyPXrzz6z4Ex1yoGuH/qQolnAIT4=
-X-Gm-Gg: ASbGncun9CfChYhEn5lfDXt4yL7wNwOdaE/sIsnOuJ9luie3W3akmpqM3w5uJIsZ6Yu
- gYJfNYAlg/3U3EqNSG+KfE6kzMjlcFHB+wcpt2jJiVxjHXwE39XQFupg4VO/3paVtvLBOn8xk6p
- NjgAl6Jif8XIO1wg7FadGw7NF79hsKeYQHtaOrhfTtt0Ha4uooyXUiEWMvOerH8DpG8CLGp1ddS
- zbGt/wR/cFR2DKbaCQWFhOtaoQshgUauAk=
-X-Google-Smtp-Source: AGHT+IH+4W/qZbjfto7ui6qMSJCysQsOW0UsikND4oILsy1N6WB6yrMv/HUIJGJuhXRbGlWTLdHVIX851oGqiisjXOg=
-X-Received: by 2002:aa7:c858:0:b0:615:a3f9:7be2 with SMTP id
- 4fb4d7f45d1cf-615e71451cfmr9103426a12.19.1754380147636; Tue, 05 Aug 2025
- 00:49:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250804215719.1413106-1-trini@konsulko.com>
- <20250804215719.1413106-10-trini@konsulko.com>
-In-Reply-To: <20250804215719.1413106-10-trini@konsulko.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 5 Aug 2025 08:48:55 +0100
-X-Gm-Features: Ac12FXzhsEFblEzJYOoM6ZQhrNQarDLeA7VEFJPBdEcApLJW9X6-ugRkXYvq2H0
-Message-ID: <CALeDE9OsF1ybUUGY4Fm-Uz2B3LxCce-KHymh9B6yHArK9J2kvA@mail.gmail.com>
-Subject: Re: [PATCH] sysreset: Tighten some sysreset driver dependencies
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 0016e4c0-71d1-11f0-9a8c-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 0016e4c0-71d1-11f0-9a8c-005056994fde;
+ Tue, 05 Aug 2025 09:51:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=trjcBJ0kPi2+hvLo8Qa8kKD+j7nE3OQfqPhADqAac4g=;
+ b=d484D9Qp/WQVQ5WVn5njSL4sIpzDUfGuAM9E/ZOrrea4Zvudmqx7csNhXNgQ5Y5ge3QGGdKWn0jS2
+ GeCMfvBUUNQ7B7AREU8ymIQgtpdz7Ss9LzLNIk4lNl7EyRpusUMkDzVJdpPieX/+FzDQmxVt2q2e0d
+ BFXnEz3lKb3+WNQr93MRCLoM8NYEYG8FuoGietSfhNXgXtHw1PhK+fKqM4GdBMo3lb3WAssBS7/1OM
+ IC7eVSnss/414OyaoKOzilPuxNmowVvonNpoJb1C7/OzShloa+f3PoE0gdboQ7bG3UFRNW5h9Bidxl
+ atN8WYp8MB1ysvE0sad/GYKu7p3tG0w==
+X-KPN-MID: 33|tIpXSuxV8ARewWPYWk78OYfuJfU2q2AgW1+HT7TjiZngEOJG8wAKge3z0U7hKzU
+ jgOKNGD6ml7ytSvaaTz51yh4KGCTTLoN5SiNSZMYTKII=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|U+MjddextgevJG3VCHrNpGxvrqTBP2Nj8VQ/1Hqpz+RH6ba2rHQFP5mD6BGdOVW
+ CPrxeSs+y5so2P/MD/UDSGw==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id cc572b65-71d0-11f0-8d53-00505699b758;
+ Tue, 05 Aug 2025 09:50:05 +0200 (CEST)
+Date: Tue, 05 Aug 2025 09:50:04 +0200
+Message-Id: <87qzxqmclv.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: ilias.apalodimas@linaro.org, trini@konsulko.com, sjg@chromium.org,
+ adrianox@gmail.com, kettenis@openbsd.org,
+ u-boot@lists.denx.de, heinrich.schuchardt@canonical.com
+In-Reply-To: <20250805054614.5555-1-heinrich.schuchardt@canonical.com>
+ (message from Heinrich Schuchardt on Tue, 5 Aug 2025 07:46:14 +0200)
+Subject: Re: [PATCH v2 1/1] efi_loader: Support loading a ramdisk with bootefi
+References: <20250805054614.5555-1-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,30 +75,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 4 Aug 2025 at 23:05, Tom Rini <trini@konsulko.com> wrote:
->
-> The MPC83xx sysreset driver cannot build without access to some
-> architecture specific header files. Express that requirements in Kconfig
-> as well.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Date: Tue,  5 Aug 2025 07:46:14 +0200
+> 
+> From: Simon Glass <sjg@chromium.org>
+> 
+> It is sometimes useful to be able to boot via EFI using a Linux initrd.
+> Add support for this.
+> 
+> Fix a 'specifiy' typo while here.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/sysreset/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-> index 67edf004205c..0181f6cd5819 100644
-> --- a/drivers/sysreset/Kconfig
-> +++ b/drivers/sysreset/Kconfig
-> @@ -283,6 +283,7 @@ config SYSRESET_TPL_X86
->
->  config SYSRESET_MPC83XX
->         bool "Enable support MPC83xx SoC family reboot driver"
-> +       depends on PPC
->         help
->           Reboot support for NXP MPC83xx SoCs.
->
-> --
-> 2.43.0
->
+> v2:
+> 	consistently refer to Linux initrd instead of RAM disk
+
+Thanks!
+
+Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+
+> ---
+>  cmd/bootefi.c             | 33 +++++++++++++++++++++++++--------
+>  doc/usage/cmd/bootefi.rst | 37 ++++++++++++++++++++++++++++++-------
+>  2 files changed, 55 insertions(+), 15 deletions(-)
+> 
+> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> index 8e8752127ed..b8f5bb35950 100644
+> --- a/cmd/bootefi.c
+> +++ b/cmd/bootefi.c
+> @@ -136,22 +136,39 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
+>  {
+>  	efi_status_t ret;
+>  	char *p;
+> -	void *fdt, *image_buf;
+> -	unsigned long addr, size;
+> +	void *fdt, *initrd = NULL, *image_buf;
+> +	unsigned long addr, size, rd_len = 0, fdt_addr = 0;
+>  	void *image_addr;
+>  	size_t image_size;
+> +	int fdt_arg = 2;
+>  
+>  	if (argc < 2)
+>  		return CMD_RET_USAGE;
+>  
+>  	if (argc > 2) {
+> -		uintptr_t fdt_addr;
+> +		ulong rd_addr = 0;
+> +		char *end = strchr(argv[2], ':');
+>  
+> -		fdt_addr = hextoul(argv[2], NULL);
+> +		if (end) {
+> +			rd_addr = hextoul(argv[2], NULL);
+> +			if (!rd_addr)
+> +				return CMD_RET_USAGE;
+> +
+> +			rd_len = hextoul(++end, NULL);
+> +			initrd = map_sysmem(rd_addr, rd_len);
+> +			++fdt_arg;
+> +		}
+> +	}
+> +
+> +	if (argc > fdt_arg + 1)
+> +		return CMD_RET_USAGE;
+> +	if (argc == fdt_arg + 1)
+> +		fdt_addr = hextoul(argv[fdt_arg], NULL);
+> +
+> +	if (fdt_addr)
+>  		fdt = map_sysmem(fdt_addr, 0);
+> -	} else {
+> +	else
+>  		fdt = EFI_FDT_USE_INTERNAL;
+> -	}
+>  
+>  	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
+>  	    !strcmp(argv[1], "bootmgr")) {
+> @@ -215,7 +232,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
+>  		}
+>  	}
+>  
+> -	ret = efi_binary_run(image_buf, size, fdt, NULL, 0);
+> +	ret = efi_binary_run(image_buf, size, fdt, initrd, rd_len);
+>  
+>  	if (ret != EFI_SUCCESS)
+>  		return CMD_RET_FAILURE;
+> @@ -224,7 +241,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
+>  }
+>  
+>  U_BOOT_LONGHELP(bootefi,
+> -	"<image address>[:<image size>] [<fdt address>]\n"
+> +	"<image address>[:<size>] [<initrd address>:<size>] [<fdt address>]\n"
+>  	"  - boot EFI payload\n"
+>  #ifdef CONFIG_CMD_BOOTEFI_HELLO
+>  	"bootefi hello\n"
+> diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
+> index d6e4e62e383..7c5448586b7 100644
+> --- a/doc/usage/cmd/bootefi.rst
+> +++ b/doc/usage/cmd/bootefi.rst
+> @@ -12,7 +12,7 @@ Synopsis
+>  
+>  ::
+>  
+> -    bootefi <image_addr>[:<image_size>] [<fdt_addr>]
+> +    bootefi <image_addr>[:<image_size>] [<initrd_addr>:<initrd_size>] [<fdt_address>]
+>      bootefi bootmgr [<fdt_addr>]
+>      bootefi hello [<fdt_addr>]
+>      bootefi selftest [<fdt_addr>]
+> @@ -44,6 +44,16 @@ command sequence to run a UEFI application might look like
+>      load mmc 0:1 $kernel_addr_r /EFI/grub/grubaa64.efi
+>      bootefi $kernel_addr_r $fdt_addr_r
+>  
+> +or
+> +
+> +::
+> +
+> +    setenv bootargs root=/dev/vda1
+> +    load mmc 0:1 $fdt_addr_r dtb
+> +    load mmc 0:1 $kernel_addr_r vmlinux
+> +    load mmc 0:1 $initrd_addr_r intird
+> +    bootefi $kernel_addr_r $initrd_addr_r:$filesize $fdt_addr_r
+> +
+>  The last UEFI binary loaded defines the image file path in the loaded image
+>  protocol.
+>  
+> @@ -51,21 +61,34 @@ The value of the environment variable *bootargs* is converted from UTF-8 to
+>  UTF-16 and passed as load options in the loaded image protocol to the UEFI
+>  binary.
+>  
+> +.. note::
+> +
+> +    The bootefi command accepts one to three arguments.
+> +    If the second argument contains a colon ':', it is assumed to specify the
+> +    initial RAM disk.
+> +
+>  image_addr
+>      Address of the UEFI binary.
+>  
+> -fdt_addr
+> -    Address of the device-tree or '-'. If no address is specifiy, the
+> -    environment variable $fdt_addr is used as first fallback, the address of
+> -    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
+> -    When using ACPI no device-tree shall be specified.
+> -
+>  image_size
+>      Size of the UEFI binary file. This argument is only needed if *image_addr*
+>      does not match the address of the last loaded UEFI binary. In this case
+>      a memory device path will be used as image file path in the loaded image
+>      protocol.
+>  
+> +initrd_addr
+> +    Address of the Linux initial RAM disk or '-'. If no address is specified,
+> +    no RAM disk is used when booting.
+> +
+> +initrd_size
+> +    Size of the Linux initial RAM disk.
+> +
+> +fdt_addr
+> +    Address of the device-tree or '-'. If no address is specified, the
+> +    environment variable $fdt_addr is used as first fallback, the address of
+> +    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
+> +    When using ACPI no device-tree shall be specified.
+> +
+>  Note
+>      UEFI binaries that are contained in FIT images are launched via the
+>      *bootm* command.
+> -- 
+> 2.50.0
+> 
+> 
