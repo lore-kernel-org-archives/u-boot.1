@@ -4,158 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8643C87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57363C87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 08:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E11C84199;
-	Tue,  5 Aug 2025 10:19:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 1292184171;
+	Tue,  5 Aug 2025 10:26:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="QZDjCWk5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NTjB/ZBo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A45B88414E; Tue,  5 Aug 2025 10:19:16 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::614])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 75AC784177; Tue,  5 Aug 2025 10:26:02 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FBE88419C
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 10:19:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE5188416E
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 10:25:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BE75dix8TczTp09BnkWaIXtAAwntC9qrZwz2LSklmiPh78Dxr1j/PSuI9zGcmvWCoaxSkQjznkTzzGiseIaegmzunv1ewA4TWf8MMCiHTNGm4u6OXt0c/4LapZ4B8TbX7z/CNAjcQxJ1e/9EKvMukQP/J2CDEXz0zLjSlSMvO5LU9h0kmep2DvbhJynhE08DN2Pc1tkzAE4KulYroiV73AWytuj6H18tYK46VwKgpda4n0zSEx5X0V21wUiN6a22WnXvUX4LF2ErKdqG416djAjspzQFAVSb9qk8Q/3Z4g6x5l+bWlT7SFh24kyLRxH2JP11IXtKxM1uoWDEuSEecQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lYDDdbIgVzb6ApTvdv/bsB+1bDt4Z1RNijsMx2/ZX6I=;
- b=IGNyyMt8zV6B6BWAv73He48cVzIHgkAxlRjSOoztPIFUCoNCtywkjBBSsdlUGOkurOs/pWgGj0XXBX2TEMvbD7WZ/dPwUw6G4lZ+mQO39CJLmwaNHmYoFk45p7vfncT5Ux6Iz+lO2sq/lgNVn4TWiyJr07g1zRkwcPpRbT0nzLTgMXwh0Z3/ahRIRs1iUH070cfPnWfO7SZEJB9WmrIgqolwKuM+3MdQkQSpLOsjZzr76VInewMruN7vvSTg7wuP34oCSOzT4yY5CK203tAGs8yRSGYWH1NAKeREwxZPhXAvRtl0ak+dgvN4G4/gVbkIycAW4ZTGiDzm+6wrI4yPug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lYDDdbIgVzb6ApTvdv/bsB+1bDt4Z1RNijsMx2/ZX6I=;
- b=QZDjCWk5/Z72x3hwuD+TMn8MIreeplhPqGzXatXIDev8ytCV5GASQzWdxK1PviEJwq0z+5Y0jhaGJQl4L7QZw5RJDhMqhRCSxZru18HnCPosUyR06td5Nr1pamIwyXf0BfXGtD11FBxANX8z9xWFurge4T+4qFNKwsbxdd5EXzdCiKDomVa97NQdtpeE/pdaBJu7oLLEWvntRyEJXD4sl7VdwnvuS5e4rM+vZ0MXfCTSTnddQzRxdbmGLOEQOAIVZhlY2uziUNncGMMak/Rtm1sdFazghDbuyrUE6ZZMvGM5BoP0IrP6i0+ga2NgSyec4VDAyHpiZlZeb1eADoPe5w==
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by CH4PR03MB7601.namprd03.prod.outlook.com (2603:10b6:610:23d::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.21; Tue, 5 Aug
- 2025 08:19:09 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::d020:3494:f031:fc29]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::d020:3494:f031:fc29%3]) with mapi id 15.20.8989.020; Tue, 5 Aug 2025
- 08:19:09 +0000
-From: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>, Peng Fan
- <peng.fan@oss.nxp.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan
- <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
- <trini@konsulko.com>, Marek Vasut <marex@denx.de>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>
-Subject: RE: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager address
- via clocks phandle
-Thread-Topic: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager address
- via clocks phandle
-Thread-Index: AQHcBNlbuv8x1LOuUUKxpoyYzAEHfbRTc1EAgAAeuLCAABsBAIAAC6KQ
-Date: Tue, 5 Aug 2025 08:19:09 +0000
-Message-ID: <PH7PR03MB706329E728D62259EB67B396AD22A@PH7PR03MB7063.namprd03.prod.outlook.com>
-References: <20250804004710.10222-1-alif.zakuan.yuslaimi@altera.com>
- <20250805040750.GF29103@nxa18884-linux.ap.freescale.net>
- <PH7PR03MB7063F3EAF4F0BEC770E333D3AD22A@PH7PR03MB7063.namprd03.prod.outlook.com>
- <LV8PR03MB8137179BAE53AD6A8DEDE13AA722A@LV8PR03MB8137.namprd03.prod.outlook.com>
-In-Reply-To: <LV8PR03MB8137179BAE53AD6A8DEDE13AA722A@LV8PR03MB8137.namprd03.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH7PR03MB7063:EE_|CH4PR03MB7601:EE_
-x-ms-office365-filtering-correlation-id: ab94ece9-7bb8-45bf-4d4d-08ddd3f8c0ba
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|376014|10070799003|366016|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?vcn3FGorNLkAfgGw1TO1rSVi2ccWUvYFmUavFavDHYNCAGozIz0K2CA7gPua?=
- =?us-ascii?Q?EgslFU99jhdn2G3r1n3r2BEETgxdrWFLLulP65+sRM5h/GPoUfswKHuwrjhD?=
- =?us-ascii?Q?e5Q40TVCSWHlGbgjECAWIJwDqazI+Up0Wogi64thwrP33NfFYvfm3G1iH3rG?=
- =?us-ascii?Q?BQBSfTFydX7htrMzuLUIGbUBj+j5h4ST+rTU2TmJDMbuK2QFvJHcEeWDT4VY?=
- =?us-ascii?Q?eLmfWG+FP6zu35zToJMeAZ7DEWvJqD0GqK5veKHb9zwzp1zjPCGeqdLCNu2N?=
- =?us-ascii?Q?Egnigv369Yzr3jW5L/JVggua0q1d6cBGypO6xIn4/fVld7oY77bRWIK1PSsQ?=
- =?us-ascii?Q?5AE2DZu2efyoX1XUVng5TOq/9sg2oPMyEaEVc5rOGff0LCmmPI4NUsiPiJUW?=
- =?us-ascii?Q?b3eXwsHSf1UicNFc7q/H3c1FW5Yd5w+2b9EFNRu6g996bh/NR3mYMnay43Py?=
- =?us-ascii?Q?fJQihhc+E2w32m6WvCNrN0CWYTtgIGZLuUxKu2QqNJBhAgZzZ86Ozjfxv7ia?=
- =?us-ascii?Q?yCDu02Ez8kcGO2yNfc4bTck0Rt/HAj2xe/6SmO5FtI7BTAx3I8eFsUzcZxLp?=
- =?us-ascii?Q?Dn1ZYVNvvf6l+082zSfw6QGVF894+w0DNJHzpSnHaWAY1xxxRZh/PUr7wO6t?=
- =?us-ascii?Q?XUtniyhy4S6nIbB3iFnMOISXKI4ZXnkZjV3XDXrpq03mTlou/qx6610WWGN0?=
- =?us-ascii?Q?qKu2fqht9gmKBp1BCWfw52OfGFGJXb9Sd3wW+QkzfHe12otCYTy68ZEMmQib?=
- =?us-ascii?Q?Dn610S6bim65kEKzc72R9ObEe6CyChnfgKiOb1xdjkqVjmtnixQYnK8hLusG?=
- =?us-ascii?Q?X6wjJWumFw3ZVnX5sfMjYenzdydqzCAf0zGmCLdLQViNzOfLRIkxU7RiZm+7?=
- =?us-ascii?Q?4gkz4UgtUsu9dBHwoOubsvxxjX2dFApsusYP8qdw3kKmlpJ/0Lg5JdsKIP9F?=
- =?us-ascii?Q?rQ8mO9jiXoGuvTtd1EcGL/ra4McU1CahgdtYiL+x8eev21qfBPp3iit5vPEH?=
- =?us-ascii?Q?5qomxJQzT3W295VBm1FrREfZUut1EkYu6/SnEA0WK1tWSQEwKRUiRXyLFIZ1?=
- =?us-ascii?Q?upjFnI94e/FDaQdC4dTAI7xlJMD8oTJKLJarRDziCFSn6E0sT4d1fqOz3gha?=
- =?us-ascii?Q?lEvoANNvETR1apmfGtxxYpj95JpFWt29XFqRlsygCm1ixzEx1EJ0cc8X2bSo?=
- =?us-ascii?Q?y+DnEIu5mCEov0IXH8pTSjU2DEbjPugNBa3ctcMyWt2ZkrnGwWvqck5XBu8t?=
- =?us-ascii?Q?mx1U3nfyd+MQZBVRSQBpF/ZWz8PI9T2mVgIdIf0DotawlKTliqqMEu3aBnV4?=
- =?us-ascii?Q?BZ4IvWgNayrvZcjnP4/h5sTuIP4OT3t1ktcQdFbZ0kKs57kVz2PtmuMLdOGb?=
- =?us-ascii?Q?0wNhtwkebyYjC0T94Fctfv8/+emJyH7suQrSxlOhc2u7BMgOu4Z4tYZXu+uI?=
- =?us-ascii?Q?Oua9p9j+psZZyxrAKYqtaxNYkkTHAaTid9UKCzfwItsTCfQrynn7eQ=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(10070799003)(366016)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?By7RJ+DTUCQTPlHQYC/95hkQ1FEo6wKvF16EwfHw+O9V5AN4rMJ4kxrrH8KC?=
- =?us-ascii?Q?E6nHhhC/pBg24tOTuSQ/BRjA2hI1pluDw4Oyj9xgQdnatR/N3uOfSezzsN0J?=
- =?us-ascii?Q?duNlyOyYwaiB6PXbA/a3RK+UESUizgrYPmYwFOWBC0s2PDY65bt6d9muZT00?=
- =?us-ascii?Q?UKHSbnHtUhrPqiyUd7lMnUYOK6VuaF6UEXlEilx522AKmKywjwEwutd3Yt1C?=
- =?us-ascii?Q?EpFAjwXuEnm4Jrij2+cyM1b75qVraTMqhLd1GCjS81hSU3NVCRDAmCfZ/Y8p?=
- =?us-ascii?Q?NGS5qW1ndocrUlgULE1W3xRhp04zSlauGR1qFhq+daHVuO6x33yluWYpqERI?=
- =?us-ascii?Q?HijGvMuiHlQUEhnAcMulh7uAkZhXdZwpTxeUB7wIHIGM+oxMKd8e9lGbBuLK?=
- =?us-ascii?Q?+i7nO1EZTE6livvdYCIgSWw5NY5kh/iLpO4EGA+o6knRK7/y06YIS+0RgY7a?=
- =?us-ascii?Q?+NR96+b2sir7uz8sixOPF4Uo0O9Qd0/kOu8OxyUyTDnHobKPVB87ioK3UO26?=
- =?us-ascii?Q?pzljCbVj0GqvVpfFmdLeek3K+/WqiZZCv1Ru7Rs6jlaCauriTvVflH1WJ2Jc?=
- =?us-ascii?Q?ENrI3hwBpSFE/8oAIyOP0siVTRLpNmOsx5Zni+itgW9GncVftNJhRBsf6Irl?=
- =?us-ascii?Q?tPfrwhOjwBic5gw1PsqMB0kbCZwdGN7fPD9ge2eGIY56k0DQjCRCRyTx/rw0?=
- =?us-ascii?Q?QO4/5MBBH8M1oK98rolE1s1z164tAF8diPLLNJaIJa4Rn5RKMEurx7eSwZ7V?=
- =?us-ascii?Q?8JE6ipD8SImsLMw0Hz/8hJm9W/yMZlijlHFoISGJ32yDIX/sB+CpqsSRmKOU?=
- =?us-ascii?Q?WhFCv50elDVos8VlOVkoHjMAbJZGzQw/HT0tqjFrYO/WxYn0HVNG4rV0FbZm?=
- =?us-ascii?Q?yP9jz0tfLHKXRdK5vrfEsdHq+KUE1niTYrBiwRTTePZ+sGhFbzeaVRlJTPkr?=
- =?us-ascii?Q?sZj5GwD/I8+HSuPqvpvEYBiaJ4TtzHsZZjId6VS4USINBIcJDpgw56eHHWr4?=
- =?us-ascii?Q?nQwcPD+gxe30eXELJpkfbPWLExolvR+4bpUsN+Sr6cRxjVlOkprsxUrwOpYX?=
- =?us-ascii?Q?XlPkz0RJGOKF/8fmvKFyMQhKLTW4iCUFTm00Pfuv+XaDSDKaQ0D9IzR+N2SD?=
- =?us-ascii?Q?7FDwU9c/QAOnvVGCL/DZQhJc9/I0eCmwPr+ZvHfQaExGOG/o7RuDmhxFyYz/?=
- =?us-ascii?Q?WHw76Wz1ti4+6lt7mG5yGUS1RRxpXcl70z9CraVMQvjI7HiEVbZaHkbpuegb?=
- =?us-ascii?Q?JFyaDAxmq/oqN+TVnz7oWd+TZWgS8CJ+0aKZEGIW0GUYrSKrtx1B7aeuXUau?=
- =?us-ascii?Q?J7gNG1PJljZHPQ9eJ7DLWSYpvcvJp0AaholUU3TcZB4to51BGaVZxGFvPzkS?=
- =?us-ascii?Q?HM2qEUNz81uFeK6R6X5+ADeHdnJa9hgDT7bq3gWj7+MfxyV262U5Z2me55a3?=
- =?us-ascii?Q?kctsxgYZhv9ns6YK4ttG2bmm3waKTLWh7tJKPEYyy/aoX/mvlNzNq8AgVAVq?=
- =?us-ascii?Q?vg4mHt8055nNf8pzM9RpUlgfaoV0TtVZLVQGhVXLR1wzhrtTaQKP2E5M5YPL?=
- =?us-ascii?Q?DPA6j8JZZ2K1Jw11xXmnGocHnwIVDmgsieta6kb4M0alJXlAf4V7WYnBPF+U?=
- =?us-ascii?Q?TBEVaitby0hSGQ/T09+ZRr6MJfOphDRl1p7teMW6yTv8Ia2RcXdyKbItE+Ei?=
- =?us-ascii?Q?TYaR9Q=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-71b6ab52e8cso41575607b3.0
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 01:25:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754382359; x=1754987159; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+JojN+pnkOJ0RRgqhS3ygyV5aS+IgzDQIXHNTtrZTNk=;
+ b=NTjB/ZBoHGsCKQlBhBU9Nl1fYCdheLAFAPpHY3NsWtkxtmPQdB9TX4ij5DsxpDbgvA
+ D7fIRahOAEzau/8h1xxsKdNBxm3qJH+aMo+Rc8BSC/FNyEGquV9klSsib7lmdp7YJgBj
+ fMi8AK5qECPhLxEalX+WD2Zeoo5BIL+Qyf0wBmLh0cIjvJ4plXJ5cwcplZZ8h+zECSgm
+ m8V99eTqvOLkeT81EdvJF30YBRlJd+TfkkXsGkjXgZg33wQbkC1eJUiNEKnNz5nD5KDa
+ gru6nOT+NtCzqfoBaz3R9yvo8fOYgKAp/po2LYojVN62TpDzW6P/XqY9CvKFscOvPl9Y
+ e9CQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754382359; x=1754987159;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+JojN+pnkOJ0RRgqhS3ygyV5aS+IgzDQIXHNTtrZTNk=;
+ b=FINqlwNRrabE+ryIoNItPdvvZp9xXVtoA7K5cFb5HdjrlItWWqg3UTFY8Sk/PISE59
+ aQ8U0WIPBPxnWGlvbTB5uJTy//3YaFc45+fGqTbYNjpmxo/x9FoY8N43sd/NNrURVoll
+ hC7cLvaGsXzoxPmCTpx6eciLxqwKkr+cyXBPzpj7NVPm2FBENP33U5K1Q5lF7Z3Pfjhx
+ zrZU9cOVDBRk83z3VxifJ7ct2jD/+l7awNcHxXzADjjQUt+uX5/SLwoGHtgZ4HSaA78Z
+ YvowRy1VB4H/krQ91COTd4vzXiKNxFKypNqFq5DUXXyeIUsCw39FTg3L6l2PAA2OSE1a
+ JV8g==
+X-Gm-Message-State: AOJu0Yz9Tp/piNqXv6ziFltjaR80IWJohoQsIATwxSZUU2jsNNxBJIRe
+ dtBI+GIhOipyBQNuPh7SwAooOZDTffypzW9i0oYfgdWH2CbGTqYrGLnq+/s24e2KAVOpdUWJFyQ
+ hOeHBpG4k7cH6UrQoCeMkezYSEwWO8uiasAK/YKQTYQ==
+X-Gm-Gg: ASbGncsSbo4fbgIeRheaBqMa1T4hA5m3oEOiCedYmkTOwx5cDZhL04YGMHKRwvqb06f
+ 3t9gF1GF7TxKn4PupeE+7vlmggDl6ajnW4V13ks+zaS766Mbyf3bDSBJdCkTvcJAMbmdWXlcUZe
+ 2lg3zsSJ1hpu05z+27J9X3EDAxsqXHAMXUB+hJZQqi0ibRC6xmHpLZ6XVbLwQDbQYu/h9AR7qj5
+ WhkS4b2
+X-Google-Smtp-Source: AGHT+IEjVA8movU7R1JUFrQIvDgSIqkNe/H8pCByNr4nOXYdbct35tI5gFLGDzAIIfSG4V6xjX4BoakMr5F9462iDTE=
+X-Received: by 2002:a05:690c:9d:b0:719:b6a8:de30 with SMTP id
+ 00721157ae682-71b7ed170b1mr138145997b3.4.1754382358606; Tue, 05 Aug 2025
+ 01:25:58 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab94ece9-7bb8-45bf-4d4d-08ddd3f8c0ba
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Aug 2025 08:19:09.4716 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 1W5D1EwtbAg7/ZBQQ/GH+9QAbxQYBEiP4bk7k4L53w+GPUSEjpnZWJ81ZS2dRGeN8G5cBvPyti3d2p4/VVJBmu4WCWjgfX/GRO5urffJr+Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH4PR03MB7601
+References: <20250731213547.654823-1-javier.tia@linaro.org>
+In-Reply-To: <20250731213547.654823-1-javier.tia@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 5 Aug 2025 11:25:22 +0300
+X-Gm-Features: Ac12FXxEiV5ho_5cKq1jARfWebq8EI2Ob32bDCnhndV34HH8WB_akcID0JSlqxE
+Message-ID: <CAC_iWj+YzzLnw5eHQaVQaS6+rAo2YjhARQDzYspwW2VtjvXWrQ@mail.gmail.com>
+Subject: Re: [PATCH] disk: Use part_driver_lookup_type() to valid downloaded
+ image
+To: Javier Tia <javier.tia@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,154 +92,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Javier
 
-> -----Original Message-----
-> From: Chee, Tien Fong <tien.fong.chee@altera.com>
-> Sent: Tuesday, August 5, 2025 3:34 PM
-> To: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; Peng Fan
-> <peng.fan@oss.nxp.com>
-> Cc: u-boot@lists.denx.de; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung
-> <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>; Marek Vasut
-> <marex@denx.de>; Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-> Subject: RE: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager
-> address via clocks phandle
->=20
-> Hi Alif,
->=20
-> > -----Original Message-----
-> > From: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>
-> > Sent: Tuesday, August 5, 2025 2:03 PM
-> > To: Peng Fan <peng.fan@oss.nxp.com>
-> > Cc: u-boot@lists.denx.de; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung
-> > <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>; Chee, Tien
-> > Fong <tien.fong.chee@altera.com>; Marek Vasut <marex@denx.de>; Simon
-> > Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-> > Subject: RE: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager
-> > address via clocks phandle
-> >
-> > > -----Original Message-----
-> > > From: Peng Fan <peng.fan@oss.nxp.com>
-> > > Sent: Tuesday, August 5, 2025 12:08 PM
-> > > To: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>
-> > > Cc: u-boot@lists.denx.de; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung
-> > > <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>; Chee, Tien
-> > > Fong <tien.fong.chee@altera.com>; Marek Vasut <marex@denx.de>;
-> > Simon
-> > > Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-> > > Subject: Re: [PATCH v1] mmc: socfpga_dw_mmc: Retrieve clock manager
-> > > address via clocks phandle
-> > >
-> > > [CAUTION: This email is from outside your organization. Unless you
-> > > trust the sender, do not click on links or open attachments as it
-> > > may be a fraudulent email attempting to steal your information
-> > > and/or compromise your computer.]
-> > >
-> > > On Sun, Aug 03, 2025 at 05:47:10PM -0700,
-> > > alif.zakuan.yuslaimi@altera.com
-> > > wrote:
-> > > >From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> > > >
-> > > >Improve the current clock manager base address retrieval by probing
-> > > >the clocks phandle under the mmc node in the device tree instead of
-> > > >probing the clock manager node name in the device tree.
-> > > >
-> > > >This will help to make the driver more scalable for more families
-> > > >as we no longer need to rely on the exact node name in the device
-> > > >tree to probe the clock manager driver for its base address.
-> > > >
-> > > >Signed-off-by: Alif Zakuan Yuslaimi
-> > > ><alif.zakuan.yuslaimi@altera.com>
-> > > >---
-> > > > drivers/mmc/socfpga_dw_mmc.c | 19 +++++++++++++++----
-> > > > 1 file changed, 15 insertions(+), 4 deletions(-)
-> > > >
-> > > >diff --git a/drivers/mmc/socfpga_dw_mmc.c
-> > > >b/drivers/mmc/socfpga_dw_mmc.c index 3b86bc9b18c..ff1dd0055f8
-> > 100644
-> > > >--- a/drivers/mmc/socfpga_dw_mmc.c
-> > > >+++ b/drivers/mmc/socfpga_dw_mmc.c
-> > > >@@ -54,17 +54,28 @@ static int socfpga_dwmci_clksel(struct
-> > > >dwmci_host
-> > > *host)
-> > > >       u32 sdmmc_mask =3D ((priv->smplsel & 0x7) <<
-> > > SYSMGR_SDMMC_SMPLSEL_SHIFT) |
-> > > >                        ((priv->drvsel & 0x7) <<
-> > > >SYSMGR_SDMMC_DRVSEL_SHIFT);
-> > > >
-> > > >-      /* Get clock manager base address */
-> > > >+      struct udevice *mmc_dev =3D host->mmc->dev;
-> > > >+      struct ofnode_phandle_args clkmgr_args;
-> > > >       struct udevice *clkmgr_dev;
-> > > >-      int ret =3D uclass_get_device_by_name(UCLASS_CLK, "clock-
-> > > controller@ffd10000", &clkmgr_dev);
-> > > >+      fdt_addr_t clkmgr_base;
-> > > >+      int ret;
-> > > >
-> > > >+      /*
-> > > >+       * Get the clkmgr device from the first phandle in the "clock=
-s"
-> > property.
-> > > >+       */
-> > > >+      ret =3D dev_read_phandle_with_args(mmc_dev, "clocks",
-> > > >+ "#clock-cells", 0, 0, &clkmgr_args);
-> > > >       if (ret) {
-> > > >-              printf("Failed to get clkmgr device: %d\n", ret);
-> > > >+              printf("Failed to parse clocks property: %d\n",
-> > > >+ ret);
-> > > >               return ret;
-> > > >       }
-> > > >
-> > > >-      fdt_addr_t clkmgr_base =3D dev_read_addr(clkmgr_dev);
-> > > >+      ret =3D uclass_get_device_by_ofnode(UCLASS_CLK,
-> > > >+ clkmgr_args.node,
-> > > &clkmgr_dev);
-> > > >+      if (ret) {
-> > > >+              printf("Failed to get clkmgr device: %d\n", ret);
-> > > >+              return ret;
-> > > >+      }
-> > > >
-> > > >+      clkmgr_base =3D dev_read_addr(clkmgr_dev);
-> > >
-> > > I see this driver use clk api, so why still directly map the clk
-> > > manager base and configure it. Shouldn't clk api be used or
-> > > assigned-clock-
-> > parents be used?
-> > >
-> > > Thanks,
-> > > Peng
-> >
-> > Hi Peng,
-> >
-> > The direct access to the clock manager base and offset in this driver
-> > was inherited from the legacy implementation before we had full driver
-> > model clock support. Currently, both Agilex and Agilex5 have their own
-> > clock drivers under the driver model, but the `clk_enable()` and
-> > `clk_disable()` operations are still not implemented.
-> >
-> > Because of that, we retained the base + offset logic for disabling a
-> > particular clock in the SDMMC driver to preserve existing
-> > functionality. Once proper enable/disable API support is added to the
-> > clock drivers, we can clean this up to fully rely on the clock API or
-> > use `assigned-clock-parents` in device tree where applicable.
-> >
->=20
-> I think SSBL has no privilege to direct access clk mgr register, so ATF-m=
-ediated
-> access is required. I agreed with Peng, these issues can be solved in clk=
- disable /
-> enable API by having the right API access at both SPL and SSBL boot phase=
-s.
->=20
-> Thanks.
-> TF
->=20
+On Fri, 1 Aug 2025 at 00:35, Javier Tia <javier.tia@linaro.org> wrote:
+>
+> The part_driver_lookup_type() function was made public to be used in the
+> EFI loader. This function is used to look up the partition type for a
+> block device.
+>
+> This change allows the EFI loader to detect disk images by using the
+> partition driver lookup. This replaces the previous method of checking
+> the file extension, which was less optimal.
+>
+> The EFI loader generates a temporary block device from the downloaded
+> image, employs the part_driver_lookup_type() function to verify the
+> partition type, and checks if it corresponds to a valid ISO 9660, DOS
+> MBR, or GPT EFI disk image, subsequently performing cleanup of the
+> temporary device. If the downloaded file does not constitute a valid
+> disk image, an error message will be logged, and the function will
+> return EFI_UNSUPPORTED.
+>
+> Signed-off-by: Javier Tia <javier.tia@linaro.org>
+> ---
+>  disk/part.c                  |  3 +-
+>  include/part.h               | 18 +++++++++
+>  lib/efi_loader/efi_bootmgr.c | 76 +++++++++++++++++++++++++++++++-----
+>  3 files changed, 87 insertions(+), 10 deletions(-)
+>
+> diff --git a/disk/part.c b/disk/part.c
+> index 66e2b3a7219..adc24976624 100644
+> --- a/disk/part.c
+> +++ b/disk/part.c
+> @@ -63,7 +63,7 @@ static struct part_driver *part_driver_get_type(int part_type)
+>   * @dev_desc: Device descriptor
+>   * Return: Driver found, or NULL if none
+>   */
+> -static struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
+> +struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
+>  {
+>         struct part_driver *drv =
+>                 ll_entry_start(struct part_driver, part_driver);
+> @@ -855,3 +855,4 @@ int part_get_bootable(struct blk_desc *desc)
+>
+>         return 0;
+>  }
+> +
+> diff --git a/include/part.h b/include/part.h
+> index b772fb34c8a..3fc3186f4c4 100644
+> --- a/include/part.h
+> +++ b/include/part.h
+> @@ -727,6 +727,24 @@ int part_get_type_by_name(const char *name);
+>   */
+>  int part_get_bootable(struct blk_desc *desc);
+>
+> +/**
+> + * part_driver_lookup_type() - Look up the partition driver for a blk device
+> + *
+> + * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each partition driver
+> + * against the blk device to see if there is a valid partition table acceptable
+> + * to that driver.
+> + *
+> + * If @desc->part_type is already set, it just returns the driver for that
+> + * type, without testing if the driver can find a valid partition on the
+> + * descriptor.
+> + *
+> + * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
+> + *
+> + * @desc: Device descriptor
+> + * Return: Driver found, or NULL if none
+> + */
+> +struct part_driver *part_driver_lookup_type(struct blk_desc *desc);
+> +
+>  #else
+>  static inline int part_driver_get_count(void)
+>  { return 0; }
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index 662993fb809..f6729a40462 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -17,6 +17,7 @@
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <net.h>
+> +#include <part.h>
+>  #include <efi_loader.h>
+>  #include <efi_variable.h>
+>  #include <asm/unaligned.h>
+> @@ -407,7 +408,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+>         if (!ctx)
+>                 return ret;
+>
+> -       /* cleanup for iso or img image */
+> +       /* cleanup for disk image */
+>         if (ctx->ramdisk_blk_dev) {
+>                 ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
+>                                          EFI_CONVENTIONAL_MEMORY);
+> @@ -452,6 +453,17 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
+>         EFI_EXIT(ret);
+>  }
+>
+> +/**
+> + * cleanup_temp_blkdev() - Clean up temporary block device
+> + *
+> + * @temp_bdev: temporary block device to clean up
+> + */
+> +static void cleanup_temp_blkdev(struct udevice *temp_bdev)
+> +{
+> +       if (blkmap_destroy(temp_bdev->parent))
+> +               log_err("Destroying temporary blkmap failed\n");
+> +}
 
-Thanks for the comments, I will update the clock driver to support enable/d=
-isable APIs
-and call those APIs in this MMC driver as recommended in v2.
+No need to add a new function for a call, just call blkmap_destroy() directly.
+If you want to keep it as a separate function, just move the if
+(temp_bdev) in here.
 
-Alif
+> +
+>  /**
+>   * try_load_from_uri_path() - Handle the URI device path
+>   *
+> @@ -466,7 +478,6 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+>  {
+>         char *s;
+>         int err;
+> -       int uri_len;
+>         efi_status_t ret;
+>         void *source_buffer;
+>         efi_uintn_t source_size;
+> @@ -516,13 +527,55 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+>         image_size = ALIGN(image_size, SZ_2M);
+>
+>         /*
+> -        * If the file extension is ".iso" or ".img", mount it and try to load
+> -        * the default file.
+> -        * If the file is PE-COFF image, load the downloaded file.
+> +        * Check if the downloaded file is a disk image or PE-COFF image.
+> +        * Use partition driver lookup for disk image detection.
+>          */
+> -       uri_len = strlen(uridp->uri);
+> -       if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+> -           !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+> +       struct udevice *temp_bdev;
+> +       struct part_driver *part_drv = NULL;
+> +
+> +       /* Create temporary block device from the downloaded image for testing */
+> +       temp_bdev = mount_image(lo_label, image_addr, image_size);
+> +       if (!temp_bdev) {
+> +               log_debug("mount_image() failed, will attempt PE-COFF detection\n");
+> +       }
 
-> [...]
+It's a single line in the if, drop the {}
 
+> +       if (temp_bdev) {
+> +               struct blk_desc *desc = dev_get_uclass_plat(temp_bdev);
+> +               if (!desc) {
+> +                       /* Clean up temporary device when dev_get_uclass_plat() returns NULL */
+> +                       cleanup_temp_blkdev(temp_bdev);
+> +               } else {
+> +                       /* Use part_driver_lookup_type for comprehensive partition detection */
+> +                       part_drv = part_driver_lookup_type(desc);
+> +
+> +                       /* Validate partition type */
+> +                       if (part_drv) {
+> +                               if (part_drv->part_type != PART_TYPE_DOS &&
+> +                                   part_drv->part_type != PART_TYPE_ISO &&
+> +                                   part_drv->part_type != PART_TYPE_EFI) {
+
+Why does it have to be one of those partition types? The EFI spec does
+not require the ESP to be a FAT.
+
+> +                                       log_err("Unsupported partition type 0x%02x for EFI boot. "
+> +                                                       "Only MBR DOS, ISO, and EFI partition types are supported.\n",
+> +                                                       part_drv->part_type);
+> +
+> +                                       /* Clean up temporary device */
+> +                                       cleanup_temp_blkdev(temp_bdev);
+> +
+> +                                       /* Set part_drv to NULL to fall through to PE-COFF detection */
+> +                                       part_drv = NULL;
+> +                               }
+> +                       }
+> +
+> +                       /*
+> +                        * If it's a disk image with supported partition type,
+> +                        * prepare_loaded_image will create the final block device
+> +                        */
+> +                       if (part_drv) {
+> +                               /* Clean up temporary device, prepare_loaded_image will create a new one */
+> +                               cleanup_temp_blkdev(temp_bdev);
+> +                       }
+> +               }
+> +       }
+> +
+> +       if (part_drv) {
+>                 ret = prepare_loaded_image(lo_label, image_addr, image_size,
+>                                            &loaded_dp, &blk);
+>                 if (ret != EFI_SUCCESS)
+> @@ -545,7 +598,12 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+>                 source_buffer = (void *)image_addr;
+>                 source_size = image_size;
+>         } else {
+> -               log_err("Error: file type is not supported\n");
+> +               /* Clean up temporary device if it was created but not a valid disk image */
+> +               if (temp_bdev) {
+> +                       cleanup_temp_blkdev(temp_bdev);
+> +               }
+> +
+> +               log_err("Error: disk image is not supported\n");
+>                 ret = EFI_UNSUPPORTED;
+>                 goto err;
+>         }
+> --
+> 2.50.1
+>
+
+Thanks
+/Ilias
