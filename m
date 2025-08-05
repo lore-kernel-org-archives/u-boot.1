@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BACCAC87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:26:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CB48C87FCB
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 11:30:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C9A683403;
-	Tue,  5 Aug 2025 13:25:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F155682F00;
+	Tue,  5 Aug 2025 13:30:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HzDteR9F";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1754393434;
+	bh=acUZ5uok5nFcgWUBQSCJeqPR9dnFEgUMXXOReMv/duA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=nHU/5dV61VdCoy7XzyAX+m0V5SNQDkIVSd9Ir4XxOmyOXJVf4C6SpVPdmtI7cWXz1
+	 7Kgvjkxd5skGbL7DUHLyHaj3CBWCA/blzgLOHVGEriDLNmNzTScdmw77Vh9VV5Tmi8
+	 SdCTiWMUYmfjXL3Rg1C/QBWLoZRnm9iAGZwxEBPH/dBp+I6bDK+0WO3+ii+p1z25x/
+	 GZ8C43dDmauoKg45VgLblbiumBi/EfFc8/fr47ItxJGE7U/i2SL++2wrI8DI2WZeuM
+	 wicbV8AWXNU+ofTkyFnZpxhO3k25LhZHdTt115a4jC3m1Hx2jK432Bb9OCL1g7ZsJc
+	 rveBSgdegNqvg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9D4583321; Tue,  5 Aug 2025 13:24:52 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C061E82F00; Tue,  5 Aug 2025 13:30:32 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36DF083403
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:24:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAAA682E26
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 13:30:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-451d3f72391so47396205e9.3
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 04:24:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754393071; x=1754997871; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Lo9bIupYWPAxmkVEta2YeYfOk+MRjnFOlUTbuMn/y54=;
- b=HzDteR9Fs/+cPyqf9q5U0EE9cUzwaVBVXjRjL3qAXnNgcZUi7G/Xw9AoAVt81DYItJ
- 607mVRbboG+gSx1LxCWvs9aOdnHjgK++byn84S+vV75/zaGPwqTqKGktLk8peutHbwT/
- fD6nw8cacg3OYESE1cuQaE2YJA5bjknKIMcmetEHpP099Di9V7gnlVN1PY5MeT7AuwOj
- PVaQuMnom3Y0d05GX4A84wRirlLhfZ3vnXQA7vzlWEWQGcE7oz9FyxEp825Jzm6EvymD
- 4xzxvB9yZuE/CLJKJzqdEKlsWr2VFoXBlep3oWaM+z1OSSXoKqmHheNv9ZLe9KghGMqR
- 27dA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754393071; x=1754997871;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Lo9bIupYWPAxmkVEta2YeYfOk+MRjnFOlUTbuMn/y54=;
- b=MiuC8NGsrcOpFhhmXxieySmXAagG3CkvHk1c7Anc7KHgAyrNmBqo+EBZTTborq/Rh8
- I874WgDqNLzQJhJwe+arn3/O6LtnQzZa3BpIO6krHAtAeaZO9EppR8OEHG0wJJ7Vjjv5
- cuEt5rdneWiHq34FpElfMCTo+KDge3b9NfCq9qXqYHbEC1nOxntMzRe3k21wx5x0J1uJ
- e3X/GZU0rctrU8MmIpYs+4Da1AEFF4xwrimn3c8ucgN3YcjBpSHcX9eaWQjm/+7aECi7
- wJ/lpXLvJoRxwahu26/bKTFcYRqvgwcklaoDEzNQXq2OTAVIrWjSK90YA0yZrU05msfj
- wBgQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVB3Et0+ginl6SSJeqpOaQiaX0tfOQOcQroeu7Kg5QjQ7tm6+z4RWv2m/0RF1SDyIFbDeR2FjU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGLjHjnliWc3O12MEUY+Z6XfoZkzG9cYSZYZd6t5xptLY6nU0X
- 7AHX//R8LJkPaTzCvTEvPdzP01khRg/ZUvL6dv8nui3W/A5KkAJ7Nc/HGp18M0zeF30=
-X-Gm-Gg: ASbGncsaXPf7p1FtYrDSqWpSsxfGRRUy3PuTxRC1Wr2F7cvFr2hXEdvtkYBZUmmAoCz
- +Q92mV3yGcwGRj4QHXyCSzoHfaYFiiRu5cG+7DdGu8T/w1zGEBo6uG6Q7i1GlxQZHMcqYD3O8oN
- /RfXK0OdNs1v7UNf92TFeh0mi2aP7jLNaRPkvJrJ0DSjrrD+O/GvWSmXXR+ad+YAwbbuKM/LoY5
- TUw5XO/UFfvRWkZvvJep6UfEZZdUFnl5NMeBq77oSEgUoqtpbt2UXci/PXmxzCFbstBU3AqfqGs
- k4yfIxzFueHtwfB66wpxVlhbupLLu0q0QqlIzs6VDuOu7BG0Ctv9WnR3WXymRZIxZ+Y3FT0znpR
- Tfq9CdW3glgSjCEtHrPVJu+BYq7L6ePJ5aBVxTBLJ6rI7EeRJwH5GGXhzmDzIjuj6hXwSCZK7Lh
- lQVARD3yyGH+j/
-X-Google-Smtp-Source: AGHT+IErTBwcK3/9nG2g3qNCc30y7sRz+z39fGETtRWUqTIDv5EO7nHMqvxmT/lTxrTnozAOlGrx/w==
-X-Received: by 2002:a05:6000:2011:b0:3b7:8da6:1bb4 with SMTP id
- ffacd0b85a97d-3b8d94d07c6mr8588755f8f.58.1754393070561; 
- Tue, 05 Aug 2025 04:24:30 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35?
- ([2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c469093sm19005224f8f.51.2025.08.05.04.24.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Aug 2025 04:24:30 -0700 (PDT)
-Message-ID: <b08feb33-3667-4810-a384-3d5451f09b07@linaro.org>
-Date: Tue, 5 Aug 2025 12:24:27 +0100
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="byWfQtGU"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 4FE471038C126; 
+ Tue,  5 Aug 2025 13:30:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1754393424;
+ h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=acUZ5uok5nFcgWUBQSCJeqPR9dnFEgUMXXOReMv/duA=;
+ b=byWfQtGUGsxEFuUoGRvGkhyYIuD13I4kFOPaxDeyOL8MLayWBoiVEgSXrp9RFaAKEmVW1P
+ Xi6WDkr8cW/mLSDEZ6BkUL4cT55BScMq4GXoshx6aCcw6qTahCGyDXsFjyddok6tpMsg5F
+ LCp4VjNy0kXUfzZhmDkIK8EAy/cTTa+YCOSjczpssxSnw7rB4llRlr+6RREyiKasxrMucx
+ lCwN5mvMuFGs+DtnEFqWLUGME0OrW9q1HoF4st3vm7MKQ0E9XQwDwn/C7tTDso/HaAEIQ/
+ upKXjrm9WsIaRxXP4WmuuCnm/ko5GiC2OXZLVC8NHFokMAQ7sCocEMeEI5gbpg==
+Message-ID: <5549919a-a66d-1f32-a184-8d6687d860c3@denx.de>
+Date: Tue, 5 Aug 2025 13:30:48 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: fec_mxc: Set error code on error exit
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20250804-fec_mxc-v1-1-1ed9b5df2828@linaro.org>
- <CAOMZO5DdypLP+YMagDm5Xa6Jk2+a-8qb69QtGsgfgdtHc-m3MA@mail.gmail.com>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <CAOMZO5DdypLP+YMagDm5Xa6Jk2+a-8qb69QtGsgfgdtHc-m3MA@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v7 08/12] i3c: master: dw-i3c-master: Fix OD_TIMING for
+ spike filter
+Content-Language: en-US
+To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
+Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Tien Fong <tien.fong.chee@altera.com>, Kok Kiang <kok.kiang.hea@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>,
+ Jit Loon Lim <jit.loon.lim@altera.com>
+References: <20250728065612.6039-1-dinesh.maniyam@altera.com>
+ <20250728065612.6039-9-dinesh.maniyam@altera.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20250728065612.6039-9-dinesh.maniyam@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,38 +91,34 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 04/08/2025 21:36, Fabio Estevam wrote:
-> On Mon, Aug 4, 2025 at 12:44 PM Andrew Goodbody
-> <andrew.goodbody@linaro.org> wrote:
->>
->> In fecmxc_probe if a timeout is detected when resetting the chip no
->> error code is set before taking the error exit. This could lead to a
->> silent failure. Instead set an error code.
->>
->> This issue was found by Smatch.
->>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>   drivers/net/fec_mxc.c | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
->> index 54b08482b91..ccd5589318e 100644
->> --- a/drivers/net/fec_mxc.c
->> +++ b/drivers/net/fec_mxc.c
->> @@ -1344,6 +1344,7 @@ static int fecmxc_probe(struct udevice *dev)
->>          while (readl(&priv->eth->ecntrl) & FEC_ECNTRL_RESET) {
->>                  if (get_timer(start) > (CONFIG_SYS_HZ * 5)) {
->>                          printf("FEC MXC: Timeout resetting chip\n");
->> +                       ret = -ENODEV;
+Hello Dinesh,
+
+On 28.07.25 08:56, dinesh.maniyam@altera.com wrote:
+> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > 
-> 'return -ETIMEDOUT;' would be a more appropriate error in the case of a timeout.
+> Fix the I3C device with spike filter unable to detect issue by setting
+> tHIGH_INIT to 200ns for first broadcast address.
+> This is according to MIPI SPEC 1.1.1 for first broadcast address
+> which is already part of linux upstreamed patch.
+> 
+> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> ---
+>   drivers/i3c/master/dw-i3c-master.c | 23 +++++++++++++++++++++++
+>   include/dw-i3c.h                   |  1 +
+>   include/linux/i3c/master.h         |  1 +
+>   3 files changed, 25 insertions(+)
 
-Thanks. V2 sent.
+Reviewed-by: Heiko Schocher <hs@denx.de>
 
-Andrew
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH, Managing Director: Johanna Denk, Tabea Lutz
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
