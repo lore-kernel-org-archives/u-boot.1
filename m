@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11E98C87FD1
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 14:46:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2960C87FD1
+	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 14:53:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C0BE8383F;
-	Tue,  5 Aug 2025 16:46:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 140A683873;
+	Tue,  5 Aug 2025 16:53:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dW+ZgTwT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uT0HHIHV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CABA83870; Tue,  5 Aug 2025 16:46:12 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 4023A8388D; Tue,  5 Aug 2025 16:53:39 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D26D883835
- for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 16:46:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E709D8386F
+ for <u-boot@lists.denx.de>; Tue,  5 Aug 2025 16:53:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-42ce1441042so2373785b6e.3
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 07:46:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3b78310b296so3449565f8f.2
+ for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 07:53:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754405166; x=1755009966; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nY67zIcCSrKKIzteIJX9z7ocENiTR/7gJVsmoc3gsDc=;
- b=dW+ZgTwTkbsBmTuI0dG5ITGB2Bg2gqev34x1PGyH24ofUNnc/x8siM8Zimh3glFbCL
- cilhlegBbgdeMWKLwgD9YIjBvh8iDBOc64dvga/6t5gtFoH31WAXvgXJq7C/HpqW5YSF
- QlMuHFn2kZnktSDZ4kAAS6UhdA39weFda4ASERj5EgRvK2VEcTAZMJAnafZkJeSmg6oS
- k+FBed/KJyN7F1iBF5J+IwTj5pNdgbv4RkvNOUz2MEFiYwdQ7OC1+sSoLfhGkmBWinZr
- DlLSgbajBHJWwjeJ5/qrgvggHKcDd0Cg+2BCakY0cloW37vD0CrLzsncPmW+m/pSytj/
- msXA==
+ d=linaro.org; s=google; t=1754405616; x=1755010416; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GsxpE6d0QVIeN/61m5J0GJmZd5ox9nHmgqwU/Z7tXg4=;
+ b=uT0HHIHVWV25JlqJk2j0YcRE47k9PEYOq0/mOxes9Ss+cw8JBVCU2C2nP8N6y1E8Jo
+ mUtkHOoXgd0eb+seIL7UAzuOvl2LSseU9yfOlReMn8eMe2DZOLkCn5xDP4zEeB8C+M6K
+ 8Coc+eY5Isj8qq5GvD04vBKFC0PiGPwYEJ8PSJfJ1VpUx+9Oopv72VvnZn/rqXvblcIh
+ 9F3R4SB1FYmFi6Yd8brCp4e9kQMOauUWabtVFwj/rQMqLQGASx6bYNkKFPLi1VG3PclX
+ OrSMJDms5Nvwtq90XgEuUoI8jtd8WsTLH3rlXdYgMzuWI8hixfD72t0qzEjo2Hz5rrZV
+ gElQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754405166; x=1755009966;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nY67zIcCSrKKIzteIJX9z7ocENiTR/7gJVsmoc3gsDc=;
- b=cb057GHy5DRUF8bkihS2egG61RtiYozv/YMe/prU5PXMNTMgEs1/zjYytb1q58RWVF
- soT51r7nAJnDaH0o7bfMiWVeIcy86BP8mcQU19AnBN1sM3yOtmmJOaql7xdHsoDw3/Y1
- jMBeySnBdJwDb2k2+cYk4eZyzoWAQelwF1vb/L9tt4vf8c8JEKbvW1L7Fg5ytdi2Hb2y
- qU7ZSGBw4gpRJXsEc1DcV5sArh5PKcWOiYZkubp/Y8ElTIEda+EVeKU4KqEcGUi7KFKw
- gM6AXUempK4qzNsFOLj9qGVk2ktVLjTl5eMzNhIl80Dxi2EAF/wW5qp7Z/6DNISZvMmt
- l9VQ==
-X-Gm-Message-State: AOJu0YweZYbaP0/QpVSE6BAYsq+wTCQSxS4WVQZtvOL34jg4Zytd8JWB
- jZp1thqmTdoVrfExgJgzHoPQWRKEzfipDIYOWO9SpfEISRnWlYEnMKzTg+FUNeGzPsZ3VB5YEwW
- 8/T1oJLoZeBjI5SmxLGfIO98jkD/xfbAAUWveisGIriRNX/my8J30LQ8=
-X-Gm-Gg: ASbGnctWX51y2SifqvHVZqPQcQUmEn+o6Z9FdI8B2NLdvwL7BtMKs4Z8txPy3NArxl/
- eJCbkVTB1vVU4Nm2yDI++L5yFkQ634sQX9MXam4zQ8xedlvSoZdFnvwmPBY/c+YlDZtsaOCfeFl
- /XoA3frioKqiqE6UafRzgfeuk37csVp86OMw3GaoKffAUzoUtp4wEX4UVGxS4aoaF+RsdWUit0M
- W1ULwaRvTj3Jadl8Rc=
-X-Google-Smtp-Source: AGHT+IGbLtaMt0s9QZhhYzK8sQUKmmXecxp8hPf6U0CfvONNtkZ96Ky+tZtGzJ0RA4P6r8BnjsTUsGZPtY88OYFqXEM=
-X-Received: by 2002:a05:620a:12c6:b0:7e6:8f41:2055 with SMTP id
- af79cd13be357-7e6962e0c1bmr1652796085a.21.1754399359825; Tue, 05 Aug 2025
- 06:09:19 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754405616; x=1755010416;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GsxpE6d0QVIeN/61m5J0GJmZd5ox9nHmgqwU/Z7tXg4=;
+ b=WnBh9Uyj3jM9S3hbm+du/ZyKWq/2Kmm6hARBrOiSk2z6DQBiBBzLyciwvYpMownQos
+ kN8DUh9MWf07AjvYcfZ1woPI2VfIwRMMrZMEMrWt+5nJaSgsH0BsB7OfzfyMonXwEUVv
+ sugUSSPTKKiOrr28M6MvFDLZRvNVG9yqwXxYr1jZElHLLibS3HI4mblp0xKzOZK14Vhs
+ 9Ed6jxmbkSk76Mv/E7nwMYR4mip7kjAzGics341flYbv0qLkDIckClYtBCQ4xdEGELaN
+ +4knNcGhbNZs8XPYeRZzrw0MkNhtd4aY7WJR2NHYHDd8aYkduoucsN0eeOmGER6LfWA1
+ IXcA==
+X-Gm-Message-State: AOJu0Yx458OVWcgUpz6uYHRY5K1Z3JMg7+6QkcsBakAl39Xn4xlsFgFN
+ s2QmXuEMhjJm9HXmN19BGX7lsmMKyAcCEmO38qufo0lazdpGpjvxUEo80+81127Moi8=
+X-Gm-Gg: ASbGncvTjlHvcokcCjBRPRyP7e6pX2MT44DnoquiS4DtOLFKQ56fC+OmyUeZJrQNWlp
+ pnFMYDohmHZ48jj2FycnddAcmv8TzLrOt0b7DXuTuFvYZq+mIKduCdTjQRH97VGozYtGzNjXdmk
+ GaYKsom7pz3QsVYxCYLJtFXVXqhS6cpy0Taz49tdI65I7LrWMn9EVUvT4c2KblDmWdUrsSTKj6F
+ CDQStJcTenW06+0QSzdXp84PR2mDW2F79YLvPT9I1CxtBphUUtziFFoSg2arMz2sYOfvPXsN/+c
+ KGHfvZNWtXQ/bP0TvMewZp/h16y3TVHgLMK+N8g0yc5oxY/mdlBmwLVqpvoVkxWNABvfZOFR9uT
+ GZVaG3fF+dcv3yuBkZIID/V48cYP3Jt8wh/0/QHcY47KjApiX3Uw=
+X-Google-Smtp-Source: AGHT+IHPJtXoyC0hcDQG9kJrJKe+58suYy+o5IsTkcf/Ed9ZWFo1JdfTkh00g1/i9nqnENAxTfO3MQ==
+X-Received: by 2002:a05:6000:2484:b0:3b8:d7fe:314d with SMTP id
+ ffacd0b85a97d-3b8d94c13a6mr9883522f8f.36.1754405616328; 
+ Tue, 05 Aug 2025 07:53:36 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:60bc:24e3:6dcd:9f35])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459de0d4cf1sm66075875e9.13.2025.08.05.07.53.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Aug 2025 07:53:35 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/2] net: octeontx2: Fix two Smatch reports
+Date: Tue, 05 Aug 2025 15:53:33 +0100
+Message-Id: <20250805-octeontx2-v1-0-8b804a3760fb@linaro.org>
 MIME-Version: 1.0
-References: <20250805094012.2268436-1-tomas.alvarez-vanoli@hitachienergy.com>
- <CADg8p966M2Ym3L0ZPLMiuMMQq6=D2MrvFd0WdrZkTzUJVvUnRQ@mail.gmail.com>
- <DB9PR06MB7849F1DFD6B6D9956A8FD66FC222A@DB9PR06MB7849.eurprd06.prod.outlook.com>
- <CADg8p940FJoAOWQ3L5nRCZDhaSp_C-PdQbuh1XoT9RjfrizyWw@mail.gmail.com>
- <DB9PR06MB78496FE3E20E12819419D195C222A@DB9PR06MB7849.eurprd06.prod.outlook.com>
- <CADg8p97w3vAkvOPp2=OCXrZ5qS8iDDtT0EJ-0iNO-k3LEXMrCQ@mail.gmail.com>
- <DB9PR06MB78490807DEBB894CC3EDE4ACC222A@DB9PR06MB7849.eurprd06.prod.outlook.com>
- <CADg8p94jcSeOPP9dmPLM=-=Mdd8wd6NRFBvTi2Wn60O=38unMA@mail.gmail.com>
- <DB9PR06MB7849C9363027FCAA3A35085FC222A@DB9PR06MB7849.eurprd06.prod.outlook.com>
-In-Reply-To: <DB9PR06MB7849C9363027FCAA3A35085FC222A@DB9PR06MB7849.eurprd06.prod.outlook.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 5 Aug 2025 18:39:08 +0530
-X-Gm-Features: Ac12FXxZga_mQkMhUap9cuR8fQojaHM61lJ5qsqmaWfEvKMC8CP-PUHAobEKEZE
-Message-ID: <CADg8p95gBP3UdeJrMvrR-ZeLU3vf1CixfFhu6z5__vj1rxyrJQ@mail.gmail.com>
-Subject: Re: [RFC 0/1] use lmb to calculate ram left for the kernel
-To: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "trini@konsulko.com" <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAO0akmgC/x2NQQqEMAxFryJZW6iVDs5cRVyknahZ2EpSRBDvP
+ nWWj/8+7wIlYVL4NBcIHaycU4WubSCumBYy/K0MzjpvB+tNjoVyKqcz9B76LvTuhX6G6gdUMkE
+ wxfV5bKiF5Bl2oZnPf2Sc7vsH+FQAnXQAAAA=
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,48 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 5 Aug 2025 at 18:28, Tomas Alvarez Vanoli
-<tomas.alvarez-vanoli@hitachienergy.com> wrote:
->
-> >> I am not sure I understand what you mean with "there is no guarantee a=
-s to where the first chunk of used memory lie above your rootfs memory".
-> >> How is it different to when it was local?
->
-> >Earlier, with a local lmb map, one could define a map inside a function,=
- with available memory and used memory which could be controlled inside som=
-e function. This is no longer possible. There could be an allocation that c=
-ould have happened above the rootfs memory, which would mean that the free =
-memory computation would be non-deterministic. So with a global and persist=
-ent lmb memory map, this is no longer a robust way to compute memory availa=
-ble for the kernel.
->
-> Thanks, now I get it. I think for the moment we will keep it like this, s=
-ince we are running this code as one of the last steps in the boot command =
-(after this, we only tftp the rootfs itself and then boot) and it's not cri=
-tical functionality.
->
-> >As an aside, I am not sure if you have considered using the UEFI interfa=
-ces for booting the kernel. The EFI firmware (U-Boot in this
-> case) passes a memory map to the kernel which specifies which memory the =
-kernel can use, and which is reserved. Booting the kernel with EFI interfac=
-es, the memory occupied by the ramfs can then be marked as EfiReservedMemor=
-yType, and this would not be used by the kernel. This definitely can be don=
-e on armv8 platforms -- I have not booted a kernel with EFI interfaces on a=
-rmv7 boards though. Something to consider for your solution.
->
-> This sounds like a better solution, absolutely, I'll look into it eventua=
-lly.
->
-> Thanks for your time and patience, this was helpful.
->
-> Regarding the initial question, I think then that there isn't a case wher=
-e you want to greedily check how much memory you can reserve starting at a =
-particular address?
+Smatch reported two issues with this driver, firstly an error code not
+being set and secondly dereferencing a variable that could be NULL.
 
-Yes, this won't be helpful in upstream code, as the memory map is not
-static and can change at any point in time. Moreover, if any memory is
-needed, it can simply be requested from the lmb module, and it will
-ensure that non-overlapping, free memory is made available to the
-caller.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Andrew Goodbody (2):
+      net: octeontx2: Restore default value for err
+      net: octeontx2: NULL check before dereference
 
--sughosh
+ drivers/net/octeontx2/nix.c    | 2 ++
+ drivers/net/octeontx2/rvu_af.c | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+---
+base-commit: 007610da2cca405ea7739fc120d90085be4b6ac2
+change-id: 20250805-octeontx2-e9831b326a5f
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
