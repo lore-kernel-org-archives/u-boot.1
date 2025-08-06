@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD72C87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 18:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0158C87FD3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 19:21:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6F9B843D0;
-	Wed,  6 Aug 2025 20:44:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
+	by phobos.denx.de (Postfix) with ESMTP id B40D38433B;
+	Wed,  6 Aug 2025 21:21:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="ZuOlQAy4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UYW5GKrH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0216580C83; Wed,  6 Aug 2025 20:15:18 +0200 (CEST)
-Received: from mail-io1-xd64.google.com (mail-io1-xd64.google.com
- [IPv6:2607:f8b0:4864:20::d64])
+ id 1E98384371; Wed,  6 Aug 2025 21:21:14 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B663843B7
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 20:15:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=broadcom.com
+ by phobos.denx.de (Postfix) with ESMTPS id F09C7842C7
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 21:21:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=dregan@broadcom.com
-Received: by mail-io1-xd64.google.com with SMTP id
- ca18e2360f4ac-881a13ac0b8so1329439f.3
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 11:15:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-879c737bc03so7543439f.0
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 12:21:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1754504107; x=1755108907; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CMh8WlbFtok6hW6wfV/ysHFTZX6BHP1W6XJaCbU2sf4=;
- b=ZuOlQAy442U2ymlxmvAdWecdDTimIM3ha7+biN/i9Ijv29xA+16vBjlagM0R92EZsJ
- /z6rUzAN/02Dk6TmKa9MQCNY7Dl60ThLAccVQ338aWHKvVSa6XAWIEOhcKgSQfgYSt8O
- UjQUGx5QGvLV/TPlw83B0hkWBC8ixdWyHnsDs=
+ d=konsulko.com; s=google; t=1754508067; x=1755112867; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wXA6WF4xxMyW4LQ9M2EhNDpkkqDOAt+2Ldy0auEctBA=;
+ b=UYW5GKrH4JQunqJC7o2UCGm5DBY4nASc7DjJEfpuZIyctjaLU1gOL9kdyqifYD8lX3
+ 58VOTepC6XCFuRLIemjJfNsFEKCVPZGF40ee3K3/keSmR2aN+SnVt0uByIr/9YTNu6/+
+ jdWKzSlaK8WXkIOTotz8jq8w/me1npI1+hCBY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754504107; x=1755108907;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CMh8WlbFtok6hW6wfV/ysHFTZX6BHP1W6XJaCbU2sf4=;
- b=EjOKRVTTV5xXRZ3WBGvB5c21kn4qa2pdyHCXqwmSfrEEsvZ3UXCvq89jJW6Fgtgk3a
- OXLUf5ikzmq0g1U4yXMngoNFomJiXzeSjUnL9d/KRIIMm/ZwfZA1SIMbqqW01YcngIa4
- MMfDTTt7mTopQZBoSsvdJ/JeBr99TyrWFala0lpR79/dHUUY/hypX9QlAiSncC8Gj7MA
- GxHQotWPYvlqr5Gaq+alKdJC/RscgenCrGKyJPT7o4lr0sG557vCGFJuCu63tAhh9ow+
- 9vLr9acrFsM5f3rhknq+bovluORlniakUhO+R6UFwD/0NXNR/9+rWCVYXWMxhFkUsZss
- za5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXRhcrgeMmiWVOcwVVcRqy/L6gt2mYyhL4dPUGsHRWH2DZDBuvFZjxTiRBeOqPnzSz1bT9pBYo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBS4z1fQMhtfj8GgYl214pV38u28SmZ38mf9MHaN918h0MNQPU
- 1Erjjzdr6VU25KcMkCmNuEP0BQ5h3eKl+bMrWmSDG3txVSBBFt51Bfy3KKJxn4tn1pZfMfyUOby
- pFS0bFfuFNCatu2MIj+jlVkOPt5x2vob+Sw==
-X-Gm-Gg: ASbGnctjUcLn9PEO/Y2jPyebsp6fbhp3XZuHJU8WWBb6Nb1BKq+eD4h8uHBqtg+KVNj
- 41ItRsW2IL06Iw/NjxLG4kEs+/77GgJlTmhYkxPPOJGJJ4NUvqidm6hHp5bL+TYG1aw4ubvksw9
- my7PEi7fAfTuQVhBF1Vs7Z2Hsz3ibhVcbUKtpmYLDnkXNlTgppPL5hCDzjidHqmNgdWP+LGOnhc
- ov0J8pIl6s2wMG89tVwtyXEQ4h8pjhISww81dka58xg7pb2k1/Hi8lahX1PaCcrHjKyphdQTjVO
- bteYR7Tm0sa0zeK/WXv8JxLDWaETPzeCQXLuqbCiH6mEjmj+zPNBMpZUyodDeVvnDhFt2T6j/Eb
- jEnYD//nTZ4POjg==
-X-Google-Smtp-Source: AGHT+IEBMGCEi8xuA1xIshhCYI708mN3rLoyr1EyB47SE2rfCDgfSy6GTql2hFpoib2b7WemMZ4qjOdY2ud2
-X-Received: by 2002:a05:6e02:3a07:b0:3e2:9030:47f7 with SMTP id
- e9e14a558f8ab-3e51b92f587mr17216885ab.6.1754504106718; 
- Wed, 06 Aug 2025 11:15:06 -0700 (PDT)
-Received: from bcacpedev-irv-2.lvn.broadcom.net ([192.19.161.250])
- by smtp-relay.gmail.com with ESMTPS id
- 8926c6da1cb9f-50a7e17fbfasm434156173.50.2025.08.06.11.15.05
+ d=1e100.net; s=20230601; t=1754508067; x=1755112867;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wXA6WF4xxMyW4LQ9M2EhNDpkkqDOAt+2Ldy0auEctBA=;
+ b=TwZLQNj1DFhJRfTzCeWmKFBC3HO20m5xUc3HgKbXAWfplGy1XKRBNx5hZyM4gHalVH
+ DNmWlOvdj8GR4MpDhrPDQ41ooBreGW0s1bEn0o2vP7K+ORlcOs3FIixqL27DPUNQF2//
+ kCw5Vpyv8lXyflrCq95jX93QXewrZx/iyAuEzUT/ABj1RB30AO04VsSYnLXv3p2CGWbK
+ 7pE+oah+TgQcKM/1O0UabQbPAxy0Fathjx1bsS51/XdLgwQ1Cc2+KVFYkrMUl4uufvd+
+ 5nAA6WaStQcouhE6KlO6xG4/uD5A0PpbQBbwZAxgws9BwMPvLvysmpOQc5TL5BapERXG
+ DG/A==
+X-Gm-Message-State: AOJu0Ywhhp9/Ng2ZhFmfWPREqYind3PxAtrAnuC/6bdBXZ9Jduiy/Ajq
+ +FLksPuT+TB+rmbUCAcH0A9UD9asY0+lh56ph1IiaGWG54Q5tamGxEqi/QBzf8ViswQ=
+X-Gm-Gg: ASbGncvS7r3qpx/aMIcXaSjkYjRw0PuYE4pIvrZOsS7itW+irApphS7CteYI30F3pCM
+ oKG3ZBQfFOLyXUbwdTM2ldKNfPUjNe6HNI73cKwLV2Ft+1uP6w7oUAjBvW4yfrYdfcT4YLBWn9J
+ zAy4dUQyxJr1xk5LSuhbvkZDKaAVBC8oqw898WqwjSflfSR5hR4iXmek8zQ7PGnhetBLUEw2QT2
+ hV+m7I0IF1A2mFyw741RRv6j40bBgZ2ZLP3aKvhv3d6phPir5kOGR9uaxOmr93d0uC7ELzUu9Bw
+ uFvCqruP5DjYlw9UhbAunN6qbsTnXnRsN4AYDsOm6Zu+OymmWSWTI8MQPy44hzSGSBGNEVCBJSQ
+ Y7p2eX+MMNdEu9Nc0YjtA2d4bEd+/2V+z6b7I9icXC2y3G7achPSvV/ky
+X-Google-Smtp-Source: AGHT+IEZPSNMW/Ru8LAmW74+cP7PVHDuGrsi+/GrVkXPWTAotqk3/0M1qHDvT9QT+R7lsBGXX47Kjg==
+X-Received: by 2002:a05:6602:26d5:b0:87c:5142:3950 with SMTP id
+ ca18e2360f4ac-8819f2fbd1amr710678439f.5.1754508067441; 
+ Wed, 06 Aug 2025 12:21:07 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-88176d6d8a6sm304828939f.12.2025.08.06.12.21.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 11:15:06 -0700 (PDT)
-X-Relaying-Domain: broadcom.com
-From: david regan <dregan@broadcom.com>
-To: dregan@broadcom.com, dregan@mail.com,
- William Zhang <william.zhang@broadcom.com>,
- Anand Gore <anand.gore@broadcom.com>, Tom Rini <trini@konsulko.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-Subject: [PATCH 4/4] cmd: nand: nand dump with ecc option
-Date: Wed,  6 Aug 2025 11:14:03 -0700
-Message-ID: <20250806181450.2324488-5-dregan@broadcom.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250806181450.2324488-1-dregan@broadcom.com>
-References: <20250806181450.2324488-1-dregan@broadcom.com>
+ Wed, 06 Aug 2025 12:21:06 -0700 (PDT)
+Date: Wed, 6 Aug 2025 13:21:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: rama <ramatrinanda@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Request for Clarification Regarding CVE-2025-45512 Affecting
+ U-Boot v1.1.3
+Message-ID: <20250806192103.GT124814@bill-the-cat>
+References: <CALvkNmjby-kU5Ee=ZmP0FAUxYeUkHKbeXYo=6b3_9oC7Loft6w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 06 Aug 2025 20:44:29 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LSOeitLVCIw2NKwI"
+Content-Disposition: inline
+In-Reply-To: <CALvkNmjby-kU5Ee=ZmP0FAUxYeUkHKbeXYo=6b3_9oC7Loft6w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,84 +96,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-option to show nand dump data ecc corrected as opposed to just raw
 
-Signed-off-by: david regan <dregan@broadcom.com>
----
- cmd/nand.c | 25 ++++++++++++++++++-------
- 1 file changed, 18 insertions(+), 7 deletions(-)
+--LSOeitLVCIw2NKwI
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/cmd/nand.c b/cmd/nand.c
-index 832e990108c5..b5678b0a0085 100644
---- a/cmd/nand.c
-+++ b/cmd/nand.c
-@@ -160,7 +160,7 @@ free_memory:
- }
- 
- static int nand_dump(struct mtd_info *mtd, ulong off, int only_oob,
--		     int repeat)
-+		     int ecc, int repeat)
- {
- 	int i;
- 	u_char *datbuf, *oobbuf, *p;
-@@ -192,12 +192,16 @@ static int nand_dump(struct mtd_info *mtd, ulong off, int only_oob,
- 	ops.oobbuf = oobbuf;
- 	ops.len = mtd->writesize;
- 	ops.ooblen = mtd->oobsize;
--	ops.mode = MTD_OPS_RAW;
-+	if (ecc)
-+		ops.mode = MTD_OPS_PLACE_OOB;
-+	else
-+		ops.mode = MTD_OPS_RAW;
- 	i = mtd_read_oob(mtd, addr, &ops);
- 	if (i < 0) {
--		printf("Error (%d) reading page %08lx\n", i, off);
-+		printf("Error reading page at offset %08lx, %d %s\n",
-+		       off, i, i == -EUCLEAN ? "correctable" :
-+		       "uncorrectable, dumping raw data");
- 		ret = 1;
--		goto free_all;
- 	}
- 	printf("\nPage at offset %08lx dump:\n", off);
- 
-@@ -212,7 +216,6 @@ static int nand_dump(struct mtd_info *mtd, ulong off, int only_oob,
- 	p = oobbuf;
- 	print_buffer(0, p, 1, i, 8);
- 
--free_all:
- 	free(oobbuf);
- free_dat:
- 	free(datbuf);
-@@ -697,11 +700,19 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	if (strncmp(cmd, "dump", 4) == 0) {
-+		int only_oob, ecc;
-+
- 		if (argc < 3)
- 			goto usage;
- 
-+		only_oob = !strcmp(&cmd[4], ".oob") || !strcmp(&cmd[4], ".ecc.oob") ||
-+			!strcmp(&cmd[4], ".oob.ecc");
-+
-+		ecc = !strcmp(&cmd[4], ".ecc") || !strcmp(&cmd[4], ".ecc.oob") ||
-+			!strcmp(&cmd[4], ".oob.ecc");
-+
- 		off = (int)hextoul(argv[2], NULL);
--		ret = nand_dump(mtd, off, !strcmp(&cmd[4], ".oob"), repeat);
-+		ret = nand_dump(mtd, off, only_oob, ecc, repeat);
- 
- 		return ret == 0 ? 1 : 0;
- 	}
-@@ -1031,7 +1042,7 @@ U_BOOT_LONGHELP(nand,
- 	"nand erase.part [clean] partition - erase entire mtd partition'\n"
- 	"nand erase.chip [clean] - erase entire chip'\n"
- 	"nand bad - show bad blocks\n"
--	"nand dump[.oob] off - dump page\n"
-+	"nand dump[.oob][.ecc] off - dump raw (default) or ecc corrected page at offset\n"
- #ifdef CONFIG_CMD_NAND_WATCH
- 	"nand watch <off> <size> - check an area for bitflips\n"
- 	"nand watch.part <part> - check a partition for bitflips\n"
--- 
-2.43.5
+On Wed, Aug 06, 2025 at 07:35:40AM +0700, rama wrote:
+> Dear DENX Team,
+>=20
+> I hope this message finds you well.
+>=20
+> I am writing to seek clarification regarding a recent CVE entry =E2=80=94
+> **CVE-2025-45512** =E2=80=94 which claims a security issue in U-Boot vers=
+ion
+> v1.1.3, stating that it allows loading and executing arbitrary firmware
+> images without verifying cryptographic signatures.
+>=20
+> As far as I understand, U-Boot (especially older versions like v1.1.3) do=
+es
+> not perform any image signature verification by design unless specifically
+> configured to do so with FIT signatures or integrated into a secure boot
+> chain.
+>=20
+> Given this, I would like to ask:
+>=20
+> 1. Is CVE-2025-45512 (https://www.cve.org/CVERecord?id=3DCVE-2025-45512) =
+an
+> officially acknowledged vulnerability by DENX or the U-Boot project?
 
+No, it is not known or acknowledged and as far as I know was never
+reported.
+
+> 2. Do you consider the described behavior to be a vulnerability, or rather
+> a default characteristic of early U-Boot versions?
+> 3. Has this issue been addressed or mitigated in later U-Boot versions
+> (e.g., with FIT signature and RSA verification support)?
+> 4. Are there any recommended mitigations for users still using legacy
+> versions like v1.1.3?
+>=20
+> Understanding your stance would greatly help clarify the scope and risk
+> associated with this CVE.
+>=20
+> Thank you for your time and for your continued work on U-Boot.
+
+U-Boot v1.1.3 was released in 2005. I feel like that in and of itself
+should be enough of a "Don't do that for production".
+
+--=20
+Tom
+
+--LSOeitLVCIw2NKwI
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJOrHAAKCRAr4qD1Cr/k
+CryCAQDvgsT47N9zzGsOFbdLAy8N/QpQ5iDvyvOEuTZLwvkTmwEA30HU/nQ5qHO0
+xzdVmQXaANEI4j2LZPoWcnhI+coNjwo=
+=5Ngu
+-----END PGP SIGNATURE-----
+
+--LSOeitLVCIw2NKwI--
