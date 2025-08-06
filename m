@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 901A6C87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C04C87FD3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:56:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 067D18425A;
+	by phobos.denx.de (Postfix) with ESMTP id 542F484285;
 	Wed,  6 Aug 2025 16:56:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t8ntAKnQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UMA56Jb8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BB3083A62; Wed,  6 Aug 2025 16:56:16 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id A54BF83A71; Wed,  6 Aug 2025 16:56:17 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2424083AAF
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65D2183A9F
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-619a8bfef4dso2016871eaf.0
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:11 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-30babf43ddaso8840fac.3
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754492170; x=1755096970; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754492169; x=1755096969; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CNbhxCzi1MkaIc2zt6W4LIdFmsE18Kj+n70CqQD1oBQ=;
- b=t8ntAKnQsMSJNYnVLKZoMunbtBeW+II7c6uQdUtasxSSaKNwt1qohqCHTJ9+Ho5ojO
- HkgtojXw7GO8TkkcKcXX0myVpA6KmKKCwrz45i1Ys3t/LlIyuLPu1OIhnfU+kSWg3+Yy
- vYhHAoi2H40GOIYcpv11XAMqdCbUk1a6GOjqQ=
+ bh=HewG/pv+UduyB9oKR/041t32m0BxN+FHNYuWozPumSI=;
+ b=UMA56Jb8YO859I80MXvaTeJ8deCXEMLS8D3ZL1TFQj7oyuMJco39Ce7wGXk3rhiy0U
+ rfF+vzje74n/PWYiavgWVJfTpe8SnpQEKkz141MUDz9wSl9yNo0bfZEZafDeS1WfJbLE
+ NPKixqQVKS7YK0VEWbQewCtGAgIymTNMwsVWo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754492170; x=1755096970;
+ d=1e100.net; s=20230601; t=1754492169; x=1755096969;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CNbhxCzi1MkaIc2zt6W4LIdFmsE18Kj+n70CqQD1oBQ=;
- b=ZoDsYc3MMDeeGEmJWHBnxGxS4hOfgnDvPllGYL1/ROiqxvM6NmEMD3ZySb5DjaHmO5
- xGsedCH1XVFj2M1bNTs3gfhmpuexpbg6ZwTRp9i11CqzuMB+3xg8VFq2LkIJUd6r8HAj
- 9XIJ+rmbxazRgE9Ku6IxeffuRMBEtqHLIX9kRuszk/7PCbJ6JGOh60lOIiCLo+8yl8Oe
- dxk6ATpRmv0j67g76wob2H/YAc8yt/v5aFem1rW0QTNxSXxB3vJUL4PFAyfzm6NSMQ5+
- 5wB5k81ZB9WqYDq+gmHLe5CCngjdZ56EiUo+dSAilU4NPFV+BXRrGai0/4GAF0iMQQKb
- 0lPg==
-X-Gm-Message-State: AOJu0Yyv/X/gxLj87rrGvM8iHxtxztMiMY21cMRpQKXUPC81lr0g4QdS
- 1iK628gRFoQDvvSYMal4k2TVIBvUDYCxKUOi6/YNreWFKTKxAWfxZ6soXGAO0+TmfTAed/C5LvA
- IUgKDUOg=
-X-Gm-Gg: ASbGncvkacVVVTL9AlaJnQ/K56DqhBvUoGj3l50zU7TXrHt9WvW9fcDLr2yQH58LNTx
- igR00Kib0RTr9D/TDqGGcJJi5CK6kI0dsZudvTjew6r4PrHzHBr6bqPBggpnC5eH2xsMZz+7AHo
- unyJeSNard4mJCX6BsGBBALSCMzOvdfp6xA77mukFjPmRtYDYe5uQ1WjJ3TdSujE+xrtlzSVOJI
- uDLhFZAKZkn2QYhZtL/zeXjrqDXDjrdvhXd9PuW4jRNmykHKF7LYvpudh5S5jQtc5LFYzPD70+k
- +z4mLM+RZm+8t5XM98GWRaDxpse8hv4pcIiZGZ4owwBUlSdsiKVVAquPp4Bd7r/Yzk/jXrswS9A
- Nk7EovEMCTSZigkDpzzT6o3yTahyhSMOM9cXbp6iVUFljx4pADtJQWUf+B6MxtFbuU+G+SA==
-X-Google-Smtp-Source: AGHT+IGhx1dk5c82wJX/1KCMYheHuvhtcs3gi4bun9p/734IqvnKFKxmbpACnKXdBlvcknEw+3LF+A==
-X-Received: by 2002:a05:6871:5a07:b0:308:fc2b:b7d with SMTP id
- 586e51a60fabf-30be607ae36mr1677946fac.46.1754492169887; 
+ bh=HewG/pv+UduyB9oKR/041t32m0BxN+FHNYuWozPumSI=;
+ b=J0pxaKysVTNk2cYBGn/nwB4KlzjvS4TDOcSzqy6L9Bndgq2XRIc+HykLNf07jLHLSM
+ J5mo9/Y6QCizxgvFaJ2JbPO9kUP2oSW4bj+3E7DBgc+pwjlOUFPUUn4lWKHfdUcEIBvI
+ yY9d1/klJRXkHC7nlH4Vsz8If9YBbscaESBcCvNqToC1+Qm+QLvZi0gqe3+D0IL8/F3N
+ 4t0t1Mw38XhAqyO5Pkry/0c29A5WBHOOgXe0Hrw/SZI7Mesjqi2XvP+dtXjBYP8r8Gzo
+ DbD7kbS6+Esh1ZcsDP/zmp1SAmU4tSfXmcg44Xd72uEJnvLiTJa1qDlIBkfMxJ9H0kiM
+ iVig==
+X-Gm-Message-State: AOJu0Yxek1JUn+G5gM3RTYlhlskAflCI4o/LXUmES1DyDu73+CEBVugv
+ gkkaSiLwsf8gcbPHCRvVwrHMnlFulxD9HKvBXKPNKA1k2wgrTZNDJXKOVbEqOsxdqNi67tNy20r
+ 2uObqufM=
+X-Gm-Gg: ASbGncvKbXVxZMe5RS9GzvcFSspgk0r/7YL5rRHX84NebKKm5laJ2XYuzYONWH85h47
+ JXR9q2SNBxzXv+BXjlLcz7rWAS9A1/E7ESl1egH+pwB36b1Xm6E46NOiSgQnh7+N5lqTsvTdKPN
+ bMzHgy8TAuNandmcn9lNUYEP8ZzydywLa3r7sYTkdy0o5fgH1sOEGNJoqBozfS/jr4LFoR/IkmP
+ o9biilqclClJtkFWxi21zN5Pdbzc5aYCFjd8AXdP80QOP15WjMMh8MzmbTb4Yra0jLe9sRIRoEe
+ 7lKqmrbkBdCxIIs9laRqiZqiZYUs/GQeylZbGJVcpWPa8TPiadDUT8UAlPr/2dS6YSt+r4oL5r4
+ Wg3tljI4E4qBZCy2i2QQQjxqFtP0Av52xpxeQGismf0gISZF1NGUm0Oc9TiIJp50IEBVQDg==
+X-Google-Smtp-Source: AGHT+IGR1DtvqFwzji7C9b+TwgMEKkM0pAE1XDf8WOKdEp/U87c2P7TNj1mXm2F6Jb9ESuUaZVaIog==
+X-Received: by 2002:a05:6870:c0ce:b0:2d6:af0:8d8e with SMTP id
+ 586e51a60fabf-30be28e2272mr1825685fac.2.1754492169073; 
  Wed, 06 Aug 2025 07:56:09 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30ba8228a79sm1925391fac.35.2025.08.06.07.56.09
+ 586e51a60fabf-30ba8228a79sm1925391fac.35.2025.08.06.07.56.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 07:56:09 -0700 (PDT)
+ Wed, 06 Aug 2025 07:56:08 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>
-Subject: [PATCH 6/7] usb: host: Tighten USB musb-new host glue driver
- dependencies
-Date: Wed,  6 Aug 2025 08:56:00 -0600
-Message-ID: <20250806145601.1664563-6-trini@konsulko.com>
+Subject: [PATCH 5/7] usb: host: Tighten USB host driver dependencies
+Date: Wed,  6 Aug 2025 08:55:59 -0600
+Message-ID: <20250806145601.1664563-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250806145601.1664563-1-trini@konsulko.com>
 References: <20250806145601.1664563-1-trini@konsulko.com>
@@ -96,33 +95,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few of the USB musb-new host glue drivers cannot build without access
-to some platform specific header files. Express those requirements in
-Kconfig as well.
+A few of the USB host drivers cannot build without access to some
+platform specific header files. Express those requirements in Kconfig as
+well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Marek Vasut <marek.vasut@mailbox.org>
 ---
- drivers/usb/musb-new/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/usb/host/Kconfig | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/musb-new/Kconfig b/drivers/usb/musb-new/Kconfig
-index ad9072a53276..0e2b2b5fb857 100644
---- a/drivers/usb/musb-new/Kconfig
-+++ b/drivers/usb/musb-new/Kconfig
-@@ -52,9 +52,11 @@ config USB_MUSB_OMAP2PLUS
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index 5c9e8fc9d15e..2cf687fc4f3b 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -121,8 +121,9 @@ config USB_XHCI_DRA7XX_INDEX
  
- config USB_MUSB_AM35X
- 	bool "AM35x"
-+	depends on ARCH_OMAP2PLUS
+ config USB_XHCI_FSL
+ 	bool "Support for NXP Layerscape on-chip xHCI USB controller"
+-	default y if ARCH_LS1021A || FSL_LSCH3 || FSL_LSCH2
++	depends on ARCH_LS1021A || FSL_LSCH3 || FSL_LSCH2
+ 	depends on !SPL_NO_USB
++	default y
+ 	help
+ 	  Enables support for the on-chip xHCI controller on NXP Layerscape SoCs.
  
- config USB_MUSB_DSPS
- 	bool "TI DSPS platforms"
-+	depends on ARCH_OMAP2PLUS
+@@ -286,7 +287,8 @@ config USB_EHCI_TEGRA
  
- config USB_MUSB_MT85XX
- 	bool "Enable Mediatek MT85XX DRC USB controller"
+ config USB_EHCI_ZYNQ
+ 	bool "Support for Xilinx Zynq on-chip EHCI USB controller"
+-	default y if ARCH_ZYNQ
++	depends on ARCH_ZYNQ
++	default y
+ 	select USB_EHCI_IS_TDI
+ 	---help---
+ 	  Enable support for Zynq on-chip EHCI USB controller
+@@ -303,6 +305,7 @@ config EHCI_HCD_INIT_AFTER_RESET
+ 
+ config USB_EHCI_FSL
+ 	bool  "Support for FSL on-chip EHCI USB controller"
++	depends on PPC
+ 	select EHCI_HCD_INIT_AFTER_RESET
+ 	select SYS_FSL_USB_INTERNAL_UTMI_PHY if MPC85xx && \
+ 		!(ARCH_B4860 || ARCH_B4420 || ARCH_P4080 || ARCH_P1020 || ARCH_P2020)
+@@ -362,6 +365,7 @@ config USB_OHCI_GENERIC
+ 
+ config USB_OHCI_DA8XX
+ 	bool "Support for da850 OHCI USB controller"
++	depends on ARCH_DAVINCI
+ 	help
+ 	  Enable support for the da850 USB controller.
+ 
 -- 
 2.43.0
 
