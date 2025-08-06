@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9FD3C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:57:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E918C87FD3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1641C84308;
+	by phobos.denx.de (Postfix) with ESMTP id 6060284312;
 	Wed,  6 Aug 2025 16:56:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U//HOk2t";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YRsYbaTz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F320A842FD; Wed,  6 Aug 2025 16:56:56 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 4BB92842F3; Wed,  6 Aug 2025 16:56:57 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05AA3842F3
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05E4483A9A
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-619b164c0b9so5714eaf.0
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:53 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-742f798bb20so8191a34.1
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754492213; x=1755097013; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754492214; x=1755097014; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=peSePiIQQs/qw3ZsqJ72OJt+e0eLS8kvHixld93w3g0=;
- b=U//HOk2tK8uWVNaRwgEdFTMwCA/tDgNA2yb1IeEPAondPtYaZcdneYVk8vllyoFa1p
- /2ihbVQbMynDJZ0YoHwi3YfNUIENKOD15Qi6ZtS8VjMAWQ1XGGcRYqR4aQbB7yUcW/oj
- r/173C5Xe8rcXGdJpH6bKxZ9FHrYEG5N6G/ZY=
+ bh=Rd3Sl9aIlBKxHTyYFdKdFKvrO/1I3lFd19CiwnTwZnk=;
+ b=YRsYbaTzo97mr0/LRF3VhzTSQRRxJLa2T6facYg+AoqA7LlTwRmAlJRAClMSIcsXu/
+ ZE/uHBW8exzzgn3HPHxkt8COlstxNEpDq35nZzv32zVrtKYnBDSlxO6S0gqxvYhfOqpp
+ MiGyBfoEN6IKqf5rIp8i9yf99IVtkVkZDzzlQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754492213; x=1755097013;
+ d=1e100.net; s=20230601; t=1754492214; x=1755097014;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=peSePiIQQs/qw3ZsqJ72OJt+e0eLS8kvHixld93w3g0=;
- b=lrMvpKYRj3v8H6OxmAsnfUlgufEsjyqSIHQkxJJiZ87pSGy/0/I7qzQjz96p5r+zAS
- +dlXAbuU/QjB7cQ/Tf9LTi0axkLogIWa/lJ6e+8CQKbQaoAx2cPHQBJu8mGsmAr8negv
- Iti2wZgVZmAZV3grIXqW4GQ4W4v6TkLPIubd5mcxC9BPa/IR+r5Y4W+JJpbv/zM2OGB5
- qWlAPCvk8r2gciDvVNbpkjfNxuEcAaM78Yi6y5SETZ94e32OhqIPVFTQZJyEf3/J5FZT
- 0fubgtaFd0FGjLgkBEQ7D4kHZmSSEg1VN2eIHnRTmZxWWlzq4UTGOTBAo5fdf2yg+Ode
- l7ow==
-X-Gm-Message-State: AOJu0Yzv4WEXYconBNPSxvLdtKVvH5JB98R3/vnabqdBi61vpXpcCdGy
- 5SBwiyh2o2GhLQys1XqoSj25aCicCOGyyCjFTNtO95YKbYxPbYI5yh/L9ggA1Lgo1H3i/atjkl2
- GHRIrgo8=
-X-Gm-Gg: ASbGncuCJb6H+DawcO1ofU+VQckb1QGVu0UH6CaX+y9YNByGp9XcCYuTqSd8ciuYC04
- 1FOVzddeL/lJY5+J4Mr543nEs6zSVhw8pCXgseRvAAg/p9TS7koTuZWxZ9d8FLU45RtvtdV3LgX
- WM3j3JH+GaaPBeIkM8WaJ4KYDROByOgs9A2i5EWWOO5yJOJL+mMI0eKZl3WmyMmgcYJ84rAmJ55
- fZVv+2wgaCW8/4GS/82pNktroEsKN24tQvsuKXWd+lvzMdgi6oIKnSp5r074lH5Gb4YVKCuue1b
- wMqP04H3QE4zSKzln7yijAf+LjbhvVkkmGBMUFWzt+76Pop2lLeYtBw5HxIm8wQuHPLYixHnkBz
- PhRAHOI9BGVTLmvEqDorVLj4SaUi7ugSU8xDkpw5Je4QnB5QD3w8arF25E+8=
-X-Google-Smtp-Source: AGHT+IHIAnm81d6t5rR5cpkJur3DnNtHHapoXyD19wivaSEXtnzCfFUH8hW0mYUbyJKlrbmxZVlJoA==
-X-Received: by 2002:a05:6820:1523:b0:613:90e1:729a with SMTP id
- 006d021491bc7-61b5f80f9c8mr2049830eaf.4.1754492212670; 
- Wed, 06 Aug 2025 07:56:52 -0700 (PDT)
+ bh=Rd3Sl9aIlBKxHTyYFdKdFKvrO/1I3lFd19CiwnTwZnk=;
+ b=WTWAnq0TIcuyRsnIfnKddR59Zi2kF8pmYhwKaGEAJFCk22KWPxtyNotk0yiMSl4Kpf
+ hDoR9NeuPhEHBzww8GomeTEYyyNdwcRhAUGraJz3Cy9LrwrBfxB+k3KchblaiMeFPzrp
+ GWH7YuagSrXPheiPVRBn48J87/JJgqIqDgTzQkQ6eoDHgRs/kR/ok1jG1A+ku7T/pN7z
+ aQHi+pD9nF5mEOy7oZdT17ovpJz9k6xZEj3X5IOLhxoEBrW//8SWoxgCCYzKLieAVeCN
+ ggAi27Y2xXgQ/O/m4MHkGyioJPWi9kYRqR+AgnG6lBmrLVCOPYCJSKvd9AYv5mrhdhmG
+ C4/w==
+X-Gm-Message-State: AOJu0YwMaKVJro5VFZCwy3E9I0qnh0F3JJAtRoYlFkZpdkDS1UZsbtIV
+ IR7T4NbcjRlOMMHDvN/34uDbewZZwhAZ98hO99AHpd+0tzCrPh0gmrwElNWVmfUwyjxe4jdDflZ
+ jNHk153E=
+X-Gm-Gg: ASbGncvXyc1QFL8qJBE3sn3UUbwzp2eR36ZLc13qfjRF4DRpunC1zp3xLEqPIlg7BJQ
+ KPkYPMjPr0F7fgUYbfwQnbOXVWNnWJ8TBlKwIy4THc2UvKewJw3I0k/o1lrVb2MhHbF1VR4M/DC
+ BxhW0TkuYlg3KwA6BSm8M+7pfiWXqsJ01iifbLy4iXi98Lb3S1cTUxVsQ0o9LXBYnA0vu8OzEbU
+ c0tlOpyFb2qpDscRgRIJDPJhkwUGWeG3wXJfthDa3nK9EUY5rQyd+5AjP+MIjBHQcOmkyVPI/Gq
+ 9BHUtsWOsZqsvz9wVfuZF+wPwFePm06ptLdBmUzDt4z0joiZOTyrDL55H+vC79ot1w8Qp7xAeL6
+ OUz/41Ng0yorDfrc3sp2Z/9R9M6kDpmRs1M8w6F0A7kXlepld3GsvIoRtajA=
+X-Google-Smtp-Source: AGHT+IF1fTAZl7BhDq0triZnowMbfVke7zwT4L2EbRvI2FBCzhMQNi2RjjAFugFFtfG1Gl7H2KpNBg==
+X-Received: by 2002:a05:6830:719c:b0:741:908a:e968 with SMTP id
+ 46e09a7af769-74308cf70bdmr2107945a34.4.1754492213650; 
+ Wed, 06 Aug 2025 07:56:53 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
  006d021491bc7-6199c99b222sm1644790eaf.28.2025.08.06.07.56.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 07:56:52 -0700 (PDT)
+ Wed, 06 Aug 2025 07:56:53 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 3/8] video: tegra: Rework some of the driver dependencies
-Date: Wed,  6 Aug 2025 08:56:44 -0600
-Message-ID: <20250806145649.1664724-3-trini@konsulko.com>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
+Subject: [PATCH 4/8] video: Tighten some video driver dependencies
+Date: Wed,  6 Aug 2025 08:56:45 -0600
+Message-ID: <20250806145649.1664724-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250806145649.1664724-1-trini@konsulko.com>
 References: <20250806145649.1664724-1-trini@konsulko.com>
@@ -95,95 +95,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Looking these drivers over, all of them cannot build without access to
-some platform specific header files. Express those requirements in
-Kconfig as well. Furthermore, update the logic a bit more to reflect
-which parts are optional when other drivers are enabled and which parts
-cannot be enabled (meaningfully) by themselves.
+A few video drivers cannot build without access to some platform
+specific header files. Express those requirements in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
 ---
- configs/star_defconfig      |  1 +
- drivers/video/tegra/Kconfig | 19 ++++++++++---------
- 2 files changed, 11 insertions(+), 9 deletions(-)
+ drivers/video/Kconfig          | 4 ++++
+ drivers/video/bridge/Kconfig   | 2 +-
+ drivers/video/exynos/Kconfig   | 2 +-
+ drivers/video/imx/Kconfig      | 1 +
+ drivers/video/meson/Kconfig    | 2 +-
+ drivers/video/rockchip/Kconfig | 2 +-
+ drivers/video/stm32/Kconfig    | 1 -
+ drivers/video/ti/Kconfig       | 1 +
+ 8 files changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/configs/star_defconfig b/configs/star_defconfig
-index 38cbdec1c3a0..1547f724f062 100644
---- a/configs/star_defconfig
-+++ b/configs/star_defconfig
-@@ -89,4 +89,5 @@ CONFIG_VIDEO_LCD_LG_LH400WV3=y
- CONFIG_VIDEO_LCD_HITACHI_TX10D07VM0BAA=y
- CONFIG_BACKLIGHT_AAT2870=y
- CONFIG_VIDEO_BRIDGE=y
-+CONFIG_VIDEO_TEGRA=y
- CONFIG_TEGRA_8BIT_CPU_BRIDGE=y
-diff --git a/drivers/video/tegra/Kconfig b/drivers/video/tegra/Kconfig
-index f32972d937e5..8bc29f2838bd 100644
---- a/drivers/video/tegra/Kconfig
-+++ b/drivers/video/tegra/Kconfig
-@@ -1,10 +1,12 @@
- config HOST1X_TEGRA
--	bool "NVIDIA Tegra host1x BUS support"
--	depends on SIMPLE_BUS
-+	bool
-+	select SIMPLE_BUS
-+	help
-+	  NVIDIA Tegra host1x BUS support
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index 95da1b123e60..4ceb30d2a3af 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -523,6 +523,7 @@ config ATMEL_LCD_BGR555
  
- config VIDEO_TEGRA
- 	bool "Enable Display Controller support on Tegra devices"
--	depends on OF_CONTROL
-+	depends on OF_CONTROL && ARCH_TEGRA
- 	select HOST1X_TEGRA
- 	help
- 	   Enable support for Display Controller found in Tegra SoC. The
-@@ -17,7 +19,7 @@ config VIDEO_TEGRA
- 
- config VIDEO_DSI_TEGRA
- 	bool "Enable DSI controller support on Tegra devices"
--	depends on VIDEO_BRIDGE && PANEL && DM_GPIO
-+	depends on VIDEO_BRIDGE && PANEL && DM_GPIO && ARCH_TEGRA
- 	select VIDEO_TEGRA
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -27,7 +29,7 @@ config VIDEO_DSI_TEGRA
- 
- config VIDEO_HDMI_TEGRA
- 	bool "Enable HDMI support on Tegra devices"
--	depends on VIDEO_BRIDGE && DM_I2C
-+	depends on VIDEO_BRIDGE && DM_I2C && ARCH_TEGRA
- 	select I2C_EDID
- 	select VIDEO_TEGRA
- 	help
-@@ -36,16 +38,14 @@ config VIDEO_HDMI_TEGRA
- 
- config TEGRA_BACKLIGHT_PWM
- 	bool "Enable Tegra DC PWM backlight support"
--	depends on BACKLIGHT
--	select VIDEO_TEGRA
-+	depends on BACKLIGHT && VIDEO_TEGRA
- 	help
- 	   Enable support for the Display Controller dependent PWM backlight
- 	   found in the Tegra SoC and usually used with DSI panels.
- 
- config TEGRA_8BIT_CPU_BRIDGE
- 	bool "Enable 8 bit panel communication protocol for Tegra 20/30"
--	depends on VIDEO_BRIDGE && DM_GPIO
--	select VIDEO_TEGRA
-+	depends on VIDEO_BRIDGE && DM_GPIO && VIDEO_TEGRA
- 	select VIDEO_MIPI_DSI
- 	help
- 	   Tegra 20 and Tegra 30 feature 8 bit CPU driver panel control
-@@ -54,6 +54,7 @@ config TEGRA_8BIT_CPU_BRIDGE
- 
- config VIDEO_TEGRA124
- 	bool "Enable video support on Tegra124"
-+	depends on ARCH_TEGRA
+ config VIDEO_BCM2835
+ 	bool "Display support for BCM2835"
++	depends on ARCH_BCM283X
  	imply VIDEO_DAMAGE
  	help
- 	   Tegra124 supports many video output options including eDP and
+ 	  The graphics processor already sets up the display so this driver
+@@ -738,6 +739,7 @@ source "drivers/video/meson/Kconfig"
+ 
+ config VIDEO_MVEBU
+ 	bool "Armada XP LCD controller"
++	depends on ARCH_MVEBU
+ 	imply VIDEO_DAMAGE
+ 	---help---
+ 	Support for the LCD controller integrated in the Marvell
+@@ -779,6 +781,7 @@ config NXP_TDA19988
+ 
+ config ATMEL_HLCD
+ 	bool "Enable ATMEL video support using HLCDC"
++	depends on ARCH_AT91
+ 	imply VIDEO_DAMAGE
+ 	help
+ 	   HLCDC supports video output to an attached LCD panel.
+@@ -881,6 +884,7 @@ source "drivers/video/imx/Kconfig"
+ 
+ config VIDEO_MXS
+ 	bool "Enable video support on i.MX28/i.MX6UL/i.MX7 SoCs"
++	depends on MACH_IMX
+ 	imply VIDEO_DAMAGE
+ 	help
+ 	  Enable framebuffer driver for i.MX28/i.MX6UL/i.MX7 processors
+diff --git a/drivers/video/bridge/Kconfig b/drivers/video/bridge/Kconfig
+index be53034bd3d4..bc91fe837d51 100644
+--- a/drivers/video/bridge/Kconfig
++++ b/drivers/video/bridge/Kconfig
+@@ -53,7 +53,7 @@ config VIDEO_BRIDGE_SOLOMON_SSD2825
+ 
+ config VIDEO_BRIDGE_TOSHIBA_TC358768
+ 	bool "Support Toshiba TC358768 MIPI DSI bridge"
+-	depends on VIDEO_BRIDGE && PANEL && DM_GPIO
++	depends on VIDEO_BRIDGE && PANEL && DM_GPIO && !64BIT
+ 	select VIDEO_MIPI_DSI
+ 	select DM_I2C
+ 	help
+diff --git a/drivers/video/exynos/Kconfig b/drivers/video/exynos/Kconfig
+index a2cf752aac03..1fffec5c9c5e 100644
+--- a/drivers/video/exynos/Kconfig
++++ b/drivers/video/exynos/Kconfig
+@@ -1,7 +1,7 @@
+ 
+ menuconfig VIDEO_EXYNOS
+ 	bool "Enable Exynos video support"
+-	depends on VIDEO
++	depends on VIDEO && ARCH_EXYNOS
+ 	help
+ 	  Enable support for various video output options on Exynos SoCs.
+ 
+diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
+index 4a1927c66d7d..b35ba965efc3 100644
+--- a/drivers/video/imx/Kconfig
++++ b/drivers/video/imx/Kconfig
+@@ -23,3 +23,4 @@ config IMX_LDB
+ 
+ config IMX_LCDIF
+ 	bool "i.MX LCDIFv3 LCD controller"
++	depends on MACH_IMX
+diff --git a/drivers/video/meson/Kconfig b/drivers/video/meson/Kconfig
+index fcf486ca0a3a..77c3017382eb 100644
+--- a/drivers/video/meson/Kconfig
++++ b/drivers/video/meson/Kconfig
+@@ -6,7 +6,7 @@
+ 
+ config VIDEO_MESON
+ 	bool "Enable Amlogic Meson video support"
+-	depends on VIDEO
++	depends on VIDEO && ARCH_MESON
+ 	select DISPLAY
+ 	imply VIDEO_DAMAGE
+ 	help
+diff --git a/drivers/video/rockchip/Kconfig b/drivers/video/rockchip/Kconfig
+index 0f4550a29e38..96af6d28ef0b 100644
+--- a/drivers/video/rockchip/Kconfig
++++ b/drivers/video/rockchip/Kconfig
+@@ -10,7 +10,7 @@
+ 
+ menuconfig VIDEO_ROCKCHIP
+ 	bool "Enable Rockchip Video Support"
+-	depends on VIDEO
++	depends on VIDEO && ARCH_ROCKCHIP
+ 	imply VIDEO_DAMAGE
+ 	help
+ 	  Rockchip SoCs provide video output capabilities for High-Definition
+diff --git a/drivers/video/stm32/Kconfig b/drivers/video/stm32/Kconfig
+index c354c402c288..ea4ce6799fda 100644
+--- a/drivers/video/stm32/Kconfig
++++ b/drivers/video/stm32/Kconfig
+@@ -7,7 +7,6 @@
+ 
+ menuconfig VIDEO_STM32
+ 	bool "Enable STM32 video support"
+-	depends on VIDEO
+ 	imply VIDEO_DAMAGE
+ 	help
+ 	  STM32 supports many video output options including RGB and
+diff --git a/drivers/video/ti/Kconfig b/drivers/video/ti/Kconfig
+index 3081e9e8c09b..0483f760ea19 100644
+--- a/drivers/video/ti/Kconfig
++++ b/drivers/video/ti/Kconfig
+@@ -4,5 +4,6 @@
+ #
+ config AM335X_LCD
+ 	bool "Enable AM335x video support"
++	depends on ARCH_OMAP2PLUS
+ 	help
+ 	   Supports video output to an attached LCD panel.
 -- 
 2.43.0
 
