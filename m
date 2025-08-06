@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A96CC87FD1
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 09:37:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B003EC87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 10:19:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FE738398B;
-	Wed,  6 Aug 2025 11:37:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D79A18394E;
+	Wed,  6 Aug 2025 12:19:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L7OQZP1j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tc5+xSPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B08978399A; Wed,  6 Aug 2025 11:37:35 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id C1E1D8395B; Wed,  6 Aug 2025 12:19:20 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6058683981
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 11:37:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DA0083314
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 12:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3b786421e36so3663239f8f.3
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 02:37:30 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3b79bd3b1f7so3596835f8f.1
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 03:19:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754473049; x=1755077849; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754475554; x=1755080354; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Xnau7gjRKcNqd0UtmZZrVxR5/pbtLHStEN7gL2VzPws=;
- b=L7OQZP1jP6KsB8u41fXrtxXP5Dp1djsOr/UXL0t/hMAPbjtiRLTa4+fLo++FIqD0ei
- 3UOM9sxm2kGRSgULSAHoFdBrl0Q6/pEvqUr6PILz3hirvCCcDxVowdPFy+IbfkzqaprD
- zHTiRuMihVSkPiFbvnsl4GN2dkLDNOsH7FNnbtnu8FLO6lpYym6KEtwfeIzw1iniloGt
- zTPD3weydQJJG/grCX8cuSmHb4DEj0Fog3W5mZIpQgXJNSZ5RKF/fUig92w4La4ayaAQ
- GKvj1HeHTMok4n50Ixl/yFieBsZuQd5tBMr7Sp4VmXRp68MG6UBWqY0ksoo3w7SC+3yC
- YK5A==
+ bh=S8sP30FK9x0Zb7i50H78wGNNFouNuAbfd9Kn3q9WMk4=;
+ b=tc5+xSPmD7oB1o++evTPacalXVlxFOkSrqxE/dxlvjRfKLhWD+MenAZV1ZRNkTEsvd
+ 0l5QPkcY7sYwaJ3YKexVipa2P4BcXhKlxdCMzXxCa9/dXmEgxQhp5232gmdpQt9a4H77
+ 2d/O9fPk/O1sW/1u3xuFyxguDhhOjVc8FPeLceD3eHZVtDJLGKafuwkp5u2dW+hRtcbc
+ VCnMqdqxJLRid2mi7fDfLaSwLsDg2KOHJJHFOk1wZNJ8OcLnebAbWFTzbNScLi12Uzix
+ zyQZKOP8QLBFPhbHG+2A7Iu7NEcJBTGOk1mh1rov8R335wqwStwUsBaKgntzdMbjSPZ4
+ OCsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754473049; x=1755077849;
+ d=1e100.net; s=20230601; t=1754475554; x=1755080354;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Xnau7gjRKcNqd0UtmZZrVxR5/pbtLHStEN7gL2VzPws=;
- b=suQn6GhqcuRCe6bNCgwkrWMgKeDXN9/uAmJyDbv3LH2YNGzVrCePzxA5fq5+birzyD
- jn2PV306sn5jta888q6X2LYz+0HNTHj2HP7IglaioGliZEeMUo1DKxK7av89fZidth2y
- HCqghJADDgnXulxKMBAMFtT9YnwI9+teQDOWl7T8Mgk75/IqVz2xPuswM8x/Z1y7X8dX
- jAXUebqUqLobSJn160shG4WPmZLQWrEevzb7vd64trSmghefJDM69wE6bubG+pStmoqq
- lJAfExZdHRyfuJeS+FeG23Xhv9LIKmdXIRtVaBqDvopi04k6kl9WCe/ApUzEtxsyuNVK
- KY1g==
-X-Gm-Message-State: AOJu0YwoQb6lDCfJyYYosCpCY/kgttm4xgGJCYMCfL9QttsvvJwC5F+9
- FBo/dz/c28hE6AyCL7AXLC3Q7HCwMMAxkMhPBOD8bcwqp1ZXBpz+bCbPO0DkyNiqWbI=
-X-Gm-Gg: ASbGncuvpdiXpGjZgHLOiJTtrarxW8xL8QlpZa9GInlPxt72TqIuV1LxKVrkr92OK+n
- NC3dSJWzIJOJSMNx08yRxucZybNk3orC7L4taA6sQJ8MVoFhizenWGVqrYSLQhQCwf4FLERNZNj
- GTqLjajuOBVaSgK3osINMHl7j18biEbSGAxZzK5kSG7/XgUhL2Y4aMA5GRlLJvQ6lPT+TY7G0wL
- 7RgwZz0PudHfPwhEjWFeX4h2/skGhq4WhLUrZ6qIRB/Jnin1pkcgZ87cJaU07qIX0qFZZ/iAZXo
- wxmVa86EHuEcKX0HadTt0Fx89sykU3FZvrp2hh8O4wyWYXnG/7gEfx0JpzD6IhKiBWMQUOVQ1fn
- X2aGJh6lwvzmhVLzvqEXZKvKzNMZIw3KKPOmwmt2V6ihBADBp54M=
-X-Google-Smtp-Source: AGHT+IFekwl2gpD5zw/Mlk2+3n6fw3iYz0yJjMQbFAI7HA6n/pUrWJpJTDcaQoLhhl81sL3TloMIjw==
-X-Received: by 2002:a05:6000:1ac8:b0:3b8:d893:5230 with SMTP id
- ffacd0b85a97d-3b8f421058amr1796911f8f.47.1754473049340; 
- Wed, 06 Aug 2025 02:37:29 -0700 (PDT)
+ bh=S8sP30FK9x0Zb7i50H78wGNNFouNuAbfd9Kn3q9WMk4=;
+ b=P7DGj4OQOy6B0AegboOBOkjZ6LLEE0GTmNWaiydAe7msGHHpBe7J0wu/EuCMepNdwM
+ 8qKim/dG1d8M8QnA7N3NiYza6yUC0wM2FpHuj8Jenjp8Mq8HDlHhksD7V4Iw+VIFMJ1z
+ zVHPjTvg4WEmoAuAq58TGnoNJFKqMoWy6DntxV0LFM+Qa5QkJGZen7XM0pauyPOFNRhp
+ 2aOk7eyGX3dLDJHUCc/7JtZ/D2ajXo5h+jq4a7BSbMjbAyuctaII12aDM9V0xuu0hrDx
+ +K9rv4ae7l9Bk2BLvciMpWHaHAxDFLnwRZD4eCVLgwHHURzj01jv9dn4F91S7uVaYSX8
+ Js3g==
+X-Gm-Message-State: AOJu0YyChx3JmzuLLtxPH9xV3N8q/Bu8+5xX/FBg/QKucNP0wcSbz12Q
+ RExm59jhPpKCHX27x35mK8TuOMXcu/IM+aCEDwkwDXb9NdW7hK7kSUbMdgTz8Kkb4pQ=
+X-Gm-Gg: ASbGnct9r+wpf32qXEwmbnjognaQN/uLjZajGCp+0qIp/bRMA2y6hymLiKjDJjjR2tF
+ dWYGS33aber/Gpgd1w04wYN4JPxXQq2dRSx+Vz28nr27oXKRZ60oy/WAZt8r9uoHuXDDi32QdFC
+ IKFt6/6E6WH9rZElouhvQGDIk/2dDApeBvVVnqQydgqKRD7XQcL+cBx13r9bl+6bytnCnoTFWyj
+ twyavK6juxUlglmdGmbZ30cVpslTKM//lHL0vOziN6CTufk48/DnY2bVg2M8gXNt46jS6EB05k+
+ lsu/ITm1LCfXnCvNzn6LVrwmoqn1czuQYGBNMYQDhN0n7P6EOEz0VOv7t2zKcCWQoNkfoytAZos
+ 6segOnauzxc4r+6QCUml+v9Ttqze0ryZGsCrkctT4BMZ2zZzHhyGF1OV++iNr0w==
+X-Google-Smtp-Source: AGHT+IHlowKateOuZkLxNJNah04wLeS7AukBLcGAUZMO/o4SNM5eQqrOI97ARoXIeFyWZa/qx2k/Ig==
+X-Received: by 2002:a05:6000:22c2:b0:3b8:dabe:bd78 with SMTP id
+ ffacd0b85a97d-3b8f41d5335mr1856114f8f.54.1754475553511; 
+ Wed, 06 Aug 2025 03:19:13 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:6501:9a0d:7129:a02b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458be70c5f7sm162055445e9.26.2025.08.06.02.37.28
+ 5b1f17b1804b1-459dc900606sm106397305e9.15.2025.08.06.03.19.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 02:37:28 -0700 (PDT)
+ Wed, 06 Aug 2025 03:19:13 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 06 Aug 2025 10:37:26 +0100
-Subject: [PATCH] net: phy: vitesse: Fix incorrect test for timeout
+Date: Wed, 06 Aug 2025 11:19:11 +0100
+Subject: [PATCH] net: rswitch: Fix error detection
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250806-net_vitesse-v1-1-47f5a923d586@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAFUik2gC/x2N0QqDMBAEf0XuuYEomBZ/pUi56FrvwVTughTEf
- 2/Sx5ll2JMMKjAampMUh5h8UoH21tC0cnrDyVyYOt/1/uGDS8ivQzLM4GIbQrjH2S/cUykiV6m
- cprU2G1uG1mFXLPL93zzH6/oBoioalnYAAAA=
-To: Joe Hershberger <joe.hershberger@ni.com>, 
+Message-Id: <20250806-net_rswitch-v1-1-5fb64805803d@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAB4sk2gC/x2NywqDMBAAf0X2bCA+quKvSClrXM0ejLIbWkH8d
+ 2OPwzDMCUrCpNBnJwh9WXkLCYo8A+cxLGR4SgylLV+2s40JFD+iP47Omw5xaorK1q2bIRUjKpl
+ RMDj/NCtqJHnELjTz8d8M7+u6Ae7lbXF2AAAA
+To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
@@ -100,35 +102,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In vsc8514_config there is a while loop for detecting a config failure
-using a timeout counter with a post-decrement. In the case of a timeout
-this will result in the loop exiting with timeout == -1 so use that as
-the test below the loop to detect that the timeout occurred.
+In rswitch_probe the error detection after the call to devm_clk_get is
+very wrong. It checks the value of ret which is uninitialised at that
+point. Instead it should be using the macros for including errors into
+pointers.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/net/phy/vitesse.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/net/rswitch.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/phy/vitesse.c b/drivers/net/phy/vitesse.c
-index 4867d1931b4..821d3878236 100644
---- a/drivers/net/phy/vitesse.c
-+++ b/drivers/net/phy/vitesse.c
-@@ -239,7 +239,7 @@ static int vsc8514_config(struct phy_device *phydev)
- 	while ((val & MIIM_VSC8514_18G_CMDSTAT) && timeout--)
- 		val = phy_read(phydev, MDIO_DEVAD_NONE, MIIM_VSC8514_GENERAL18);
+diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
+index 62d3f39f071..f27587ac8bd 100644
+--- a/drivers/net/rswitch.c
++++ b/drivers/net/rswitch.c
+@@ -1110,8 +1110,10 @@ static int rswitch_probe(struct udevice *dev)
+ 		return -EINVAL;
  
--	if (0 == timeout) {
-+	if (timeout == -1) {
- 		printf("PHY 8514 config failed\n");
- 		return -1;
- 	}
+ 	priv->rsw_clk = devm_clk_get(dev, NULL);
+-	if (ret)
++	if (IS_ERR(priv->rsw_clk)) {
++		ret = PTR_ERR(priv->rsw_clk);
+ 		goto err_map;
++	}
+ 
+ 	ret = clk_prepare_enable(priv->rsw_clk);
+ 	if (ret)
 
 ---
 base-commit: 007610da2cca405ea7739fc120d90085be4b6ac2
-change-id: 20250806-net_vitesse-b16667bd0fa5
+change-id: 20250806-net_rswitch-8aad613047cf
 
 Best regards,
 -- 
