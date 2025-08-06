@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63CFDC87FCB
-	for <u-boot@archiver.kernel.org>; Tue,  5 Aug 2025 23:10:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB0DCC87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 00:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 696C3831E4;
-	Wed,  6 Aug 2025 01:10:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AF33883938;
+	Wed,  6 Aug 2025 02:57:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LgxuGZSO";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wjkHcWzu";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SFeoOQ73";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 214EF834AD; Wed,  6 Aug 2025 01:10:03 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D86383933; Wed,  6 Aug 2025 02:57:05 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC0CF83102
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 01:09:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1528E83933
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 02:56:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-55b9c2482e9so3742352e87.1
- for <u-boot@lists.denx.de>; Tue, 05 Aug 2025 16:09:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754435396; x=1755040196; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0M8pGidDHWg65BOBaqJAGajmHvfqqNxWeqNFk6fB9EA=;
- b=LgxuGZSOqv9NJHRbWddleUkuLvtp/0F0cZdKNkLp/9QzpHGep8NjmWM6ANyBkn/c/T
- KZAtwWuva2gsAgLoG1NSV4UG41uK9LYFyTuyZs3s3PMV4xHfezdjrZ3I4z8qastt+mQR
- oxUg/N8aAvYxaSSSlxXxBPvmRGWdHlCNlClYX4/xH6wRz5ajwmXXzAtERgB3mwsA7UmH
- ibjW3P3xgjeHSBgZQpSZQsiDrvZmfDX1c7EuZSfiQFIVySRpzi46zDOIfdViBTf+s4wh
- ixmZ+NzzD8lj7WSWnNtqluNoW1Z0z0KUmYcRlfv66g78nrI5JmO0GHkukX8shmc2afCz
- ajvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754435396; x=1755040196;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0M8pGidDHWg65BOBaqJAGajmHvfqqNxWeqNFk6fB9EA=;
- b=BhQkmTDw1i3QOVTn+0/Hc0edDo7PWfabsBtg2IIgP+ktkEtLu26lXZgP3wmdKcw7Lp
- 92g0std8qjHYgjTS6tA5zpXh93FavRaQwDXC93ZAVD9FEjzu+fQ9S40/DB79ybJ1RSM7
- flrl6ZpiwEEP/DB7wjPQj3ctI4K03uaFPZQjZng0rRRiGjj3byZMsDWO3EM5k9Ze7eRB
- AwX2VV7YxwP1iGbfw/ukYOymSNuAF8gx2OSSSPAbdt32FmBzNSJRzxpjSlavU8AoK5cS
- jH00BLBkei7X2LW+JWYACb5xXCkpcTof+yymhoAuGRZzMPtuTev6ellfRYhxtEHSucSr
- Ze5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVHMkcS7o3bBJISHXC4BAWs8yj0R1XwJx2rrAZiUjpJB8La/+AA3IfJQi2ilBopuAcUCc91+eE=@lists.denx.de
-X-Gm-Message-State: AOJu0YytFCCKD+b84Eqe6BX5GrjDAD+zdX/FYXk/KEKOfa2EnrKlfGoc
- 56yl3yx1SJ+4cFulMm7HMdY8RfvrRa1ohiSh1r8SPcBmDXx4IFhMJp4a+oJnayz5a27i+wPPWXo
- VAlmVwJ5nXc+ORWT/on/n2y8vQngNwkw=
-X-Gm-Gg: ASbGncu0nL+20hwif+ELLFOZT5JQzXNV5QkSwgUOXoux1Qeh24Ms5dbDuYuP7nFMo47
- 2skxhoC19uQe+iy/S8Xy2uPs+DA3PC7mLdnsL5O7F4cmy8kueTTiTD8VHDcYzZHpYPvuD4xWO8g
- wQb4uzPBKSI93J2dXWvJqXxKWwuKRvY8rdyj3g+cq/MNFuIKgcJ/0Sp3u483yVMSnM5qlvsXga8
- n3b2pyOOlumgcmbRwlOALMgEPWbGbxkHmIhMykCi1ixRdOcTQ==
-X-Google-Smtp-Source: AGHT+IFsKOgTaX5sVxZeUAD/b06nIQxthccQwX4mfRQSCkTGaJtbmxysMIr7r+8KX72OcaKlqyT5UVhE0sAhmjnpa0Y=
-X-Received: by 2002:a05:6512:3d27:b0:54f:bdfe:ece5 with SMTP id
- 2adb3069b0e04-55caf2fba1bmr160344e87.14.1754435396017; Tue, 05 Aug 2025
- 16:09:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bxX1Y5sggz9skQ;
+ Wed,  6 Aug 2025 02:56:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754441809;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LnxYKoTq8yhTtClB//gPn5auL6SBRNgaeenQc6a2k8s=;
+ b=wjkHcWzu2ZWAT0/6VwwJ7J0N+xYwFRQnK6Z/kt4ITCbGsujJOS0HgCm4f1JcZtmKsnAymg
+ i1N0k0K2yI/jI8FQM268sRqswcVC4e8mDVEJWdjgR9caxVqggKr0Y4v76TID5sAzWhaJ4t
+ yivS2vWSnlE1ffztGjaOuNJn7aaY5XxBbmwvgx7U/s/MdPGrxXTR1fZn1I/cKcUXiSQ2sd
+ OEuogTKeOMkK97/5dAHVjnR0MGqLXhF7peI0bzQeZc5kl2qfdRNvnJKafaoWfYQ9uYyxJp
+ I8V2PQE+VHQLeDju/Qv2b0Pbe9O/pFzV/8gEGOBxwhyg7Lm0yp+0CGrXr1nmLQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=SFeoOQ73;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754441808;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LnxYKoTq8yhTtClB//gPn5auL6SBRNgaeenQc6a2k8s=;
+ b=SFeoOQ73vMZ8lXKjbPCzgFkdiveu7cQOXMyTUdq7voB8OumUq5PO+hgSfh5JZYhyx0QoQz
+ JvAMfMxSuV/DNL7CV8Y5uq50URaNRGeVQH8pnOgooZ4EtIykWetamZxwX9h1Vj/Nh1HNjH
+ cnDcvMrt6u/wlw14fyhihISDtaG44crPXXfJ0m68h79FM7IIxAWDXw0Xwa2FIlm7jrOGrw
+ 7nihhEQ5Bb2b6F9tTC65sZtlOhPQ/WOFNXFyEOJL+LZo+hVV/ODcsTYSZiQDhmkkn46um/
+ 6g+b8ZLD8CnS00Twi0Mk+iNpX/9kP+P0BzcI3LsPK0Wr3kM/ne/KUmNj2sDzOA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: renesas: r8a779g3: Disable MicroSD UHS modes on
+ Retronix R-Car V4H Sparrow Hawk EVTA1
+Date: Wed,  6 Aug 2025 02:56:15 +0200
+Message-ID: <20250806005630.284041-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20250731-imx8m-optional-optee-v1-1-5b5ea143468f@phytec.de>
-In-Reply-To: <20250731-imx8m-optional-optee-v1-1-5b5ea143468f@phytec.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 5 Aug 2025 20:09:44 -0300
-X-Gm-Features: Ac12FXzrRJ4R9MTiqtcLEWSm7tYmY4Canrxjz3o_PwMTMTEqeFwe26pV6GboPlc
-Message-ID: <CAOMZO5BFYcXNmERqyUSOoHQ-cEaqYaMgYMub-ZGT5OLFJEMaTw@mail.gmail.com>
-Subject: Re: [PATCH RFC] dts: imx8m{m,n,p,q}: Make optee packaging optional
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>,
- u-boot@lists.denx.de, upstream@lists.phytec.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: fec54dd2f70851bc48a
+X-MBO-RS-META: ui3n84kd9a3t4qydn1iqdt5ugmd68w7m
+X-Rspamd-Queue-Id: 4bxX1Y5sggz9skQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,39 +90,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 31, 2025 at 9:34=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrot=
-e:
->
-> binman can omit packaging an optional blob when it is missing.
-> This allows us to not bother with config options.
-> The core challenge is the interaction between tf-a and OP-TEE where
-> U-Boot/binman does not know whether tf-a was built with SPD=3Dopteed or
-> without. This is important because tf-a might jump into the void when no
-> optee_os is present, leading to boot failure. Thus by marking it
-> optional, user is prompted to recheck (due to the warning message)
-> whether they really have the right combination of tf-a and optee.
->
-> Note that after this commit a warning will be printed when optee is not
-> present for a binman build.
->
-> Image 'image' is missing optional external blobs but is still functional:=
- tee-os
->
-> /binman/section/fit/images/tee/tee-os (tee.bin):
->    See the documentation for your board. You may need to build Open Porta=
-ble
->    Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to/t=
-ee.bin
->
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
-> ---
-> Due to a bug in binman, we had to guard binman tee.bin with OPTEE config
-> as builds would error when tee.bin was not present in path; Even though
-> optee_os was marked as optional in the binman tree.
-> Since the bug has been resolved in
-> d4f61eae2ab7 ('Merge patch series "Fix handling of optional blobs in binm=
-an"'),
-> we can mark it optional again without getting build errors.
+The Retronix R-Car V4H Sparrow Hawk old revision EVTA1 does not have MicroSD
+voltage switch populated on the board, therefore the board supports only 3V3
+and non-UHS MicroSD cards. While the EVTB1 board is populated with Winbond
+W77Q51NW SPI NOR, the EVTA1 board is populated with Spansion S25FS512S SPI
+NOR, those those SPI NOR IDs to discern the two board revisions and apply
+the MicroSD related DT changes.
 
-Please include the paragraph above in the commit log and resubmit it
-without the RFC tag.
+The MicroSD related DT changes modify the regulator node, which is now a
+regulator-fixed and supplies only 3V3, and remove sd-uhs-sdr50 and
+sd-uhs-sdr104 properties from the MicroSD slot controller node.
+
+The MicroSD related DT changes cannot be applied as DTO, because the base
+DT contains nodes which have to be removed in case of EVTA1, but have to
+be present in case of EVTB1 and newer revisions of the board. Because the
+EVTA1 is an old revision of the board that is not generally available, it
+is better to special case it and keep the base DT compatible with EVTB1
+and newer revisions of the board which are actually available.
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ board/renesas/sparrowhawk/sparrowhawk.c | 114 ++++++++++++++++++++++++
+ 1 file changed, 114 insertions(+)
+
+diff --git a/board/renesas/sparrowhawk/sparrowhawk.c b/board/renesas/sparrowhawk/sparrowhawk.c
+index 8e72b5424d1..871dad8172a 100644
+--- a/board/renesas/sparrowhawk/sparrowhawk.c
++++ b/board/renesas/sparrowhawk/sparrowhawk.c
+@@ -6,8 +6,12 @@
+ #include <asm/io.h>
+ #include <compiler.h>
+ #include <dbsc5.h>
++#include <spi.h>
++#include <spi_flash.h>
+ #include <spl.h>
+ 
++#include "../../../drivers/mtd/spi/sf_internal.h"
++
+ #if defined(CONFIG_XPL_BUILD)
+ 
+ static const struct renesas_dbsc5_board_config
+@@ -118,6 +122,116 @@ dbsc5_get_board_data(struct udevice *dev, const u32 modemr0)
+ 		return &renesas_v4h_sparrowhawk_8g_6400_dbsc5_board_config;
+ }
+ 
++static bool renesas_v4h_sparrowhawk_is_evta1 = false;
++
++unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
++{
++	const u8 sf_ids_evta1[6] = { 0x01, 0x02, 0x20, 0x4d, 0x00, 0x81 };
++
++	renesas_v4h_sparrowhawk_is_evta1 = !memcmp(sf_ids_evta1, flash->info->id,
++						   sizeof(sf_ids_evta1));
++
++	return CONFIG_SYS_SPI_U_BOOT_OFFS;
++}
++
++void spl_perform_fixups(struct spl_image_info *spl_image)
++{
++	void *blob = spl_image_fdt_addr(spl_image);
++	int err, offs;
++	u32 size;
++
++	if (!renesas_v4h_sparrowhawk_is_evta1)
++		return;
++
++	printf("EVTA1 board detected\n");
++
++	/*
++	 * MicroSD voltage switch is not populated on Sparrow Hawk EVTA1,
++	 * rewrite MicroSD slot regulator to only support 3V3 and disable
++	 * UHS modes in MicroSD slot node.
++	 */
++	if (!blob)
++		return;
++
++	err = fdt_check_header(blob);
++	if (err < 0) {
++		printf("Invalid FDT header: %s\n", fdt_strerror(err));
++		return;
++	}
++
++	size = fdt_totalsize(blob);
++	err = fdt_open_into(blob, blob, size + 64);
++	if (err < 0) {
++		printf("Failed to expand DT\n");
++		return;
++	}
++
++	offs = fdt_path_offset(blob, "/regulator-vcc-sdhi");
++	if (offs < 0) {
++		printf("Failed to locate MicroSD regulator node: %d\n", offs);
++		return;
++	}
++
++	err = fdt_setprop_string(blob, offs, "compatible", "regulator-fixed");
++	if (err < 0) {
++		printf("Failed to set fixed MicroSD regulator: %d\n", err);
++		return;
++	}
++
++	err = fdt_setprop_u32(blob, offs, "regulator-min-microvolt", 3300000);
++	if (err < 0) {
++		printf("Failed to set MicroSD regulator minimum voltage: %d\n", err);
++		return;
++	}
++
++	err = fdt_nop_property(blob, offs, "gpios");
++	if (err < 0) {
++		printf("Failed to remove MicroSD regulator gpios: %d\n", err);
++		return;
++	}
++
++	err = fdt_nop_property(blob, offs, "gpios-states");
++	if (err < 0) {
++		printf("Failed to remove MicroSD regulator gpio states: %d\n", err);
++		return;
++	}
++
++	err = fdt_nop_property(blob, offs, "states");
++	if (err < 0) {
++		printf("Failed to remove MicroSD regulator states: %d\n", err);
++		return;
++	}
++
++	offs = fdt_path_offset(blob, "/soc/mmc@ee140000");
++	if (offs < 0) {
++		printf("Failed to locate MicroSD device node: %d\n", offs);
++		return;
++	}
++
++	err = fdt_nop_property(blob, offs, "sd-uhs-sdr50");
++	if (err < 0) {
++		printf("Failed to disable SDR50 mode in MicroSD node: %d\n", err);
++		return;
++	}
++
++	err = fdt_nop_property(blob, offs, "sd-uhs-sdr104");
++	if (err < 0) {
++		printf("Failed to disable SDR104 mode in MicroSD node: %d\n", err);
++		return;
++	}
++
++	err = fdt_setprop_string(blob, offs, "pinctrl-names", "default");
++	if (err < 0) {
++		printf("Failed to set fixed MicroSD pin names: %d\n", err);
++		return;
++	}
++
++	err = fdt_nop_property(blob, offs, "pinctrl-1");
++	if (err < 0) {
++		printf("Failed to disable UHS pins in MicroSD node: %d\n", err);
++		return;
++	}
++}
+ #endif
+ 
+ #define RST_MODEMR0			0xe6160000
+-- 
+2.47.2
+
