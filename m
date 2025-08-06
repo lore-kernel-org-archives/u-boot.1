@@ -4,84 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD4D0C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB2ABC87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:47:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1203083721;
-	Wed,  6 Aug 2025 16:37:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D74183A71;
+	Wed,  6 Aug 2025 16:47:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="g3tZ0cHM";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="P+CHjQIK";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JsFjeBuP";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="yXQImoZL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99E4683A37; Wed,  6 Aug 2025 16:37:21 +0200 (CEST)
+ id BF76183A79; Wed,  6 Aug 2025 16:47:51 +0200 (CEST)
 Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
  [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1444A836D3
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:37:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD11383A36
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:47:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bxtDG6Rj6z9tFV;
- Wed,  6 Aug 2025 16:37:18 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bxtSM1zHsz9sqF;
+ Wed,  6 Aug 2025 16:47:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754491038;
+ s=mail20150812; t=1754491667;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b6cCtoDqglqeAEnWeLI5D3N11sJ+P1vG9DWw5k1EaTE=;
- b=g3tZ0cHMaO0uWvJIUR+9VfadCA7meSINHqhDYJlgMVfU/5ramkxN1dBHQKuQz0Pgz7rW7P
- HJruy74zOVKTTNgXDFLXhhW9AgRwVm/xUuAdy7EkuywU6UEBAP+AdeWE+jDeV7o3JiwuKv
- nSW26P4BM/stZ9exoAm0ZkGh507JjDs1dv1Txchl2Haz57Q8JcbAYTDvYcQS9MKwSkcWBo
- 9TugnHf48zHx76mdz/O7BHwKfapdfp2VwWoBYbAAF2vzV+vmsPxaS9Xyzne5mm3010GOh8
- 2PpWXkkDCFe0IqUgDL7ocywYwmAS07xHPzrSZbOTNEIvr55Dvb5QteOLYKljDA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=P+CHjQIK;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <f4600cde-0385-47d8-af6b-1899bdd6208e@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=xrxcCyzrMottNlkmkADJ9WrojOJQkW0ST6N8F2rtXFs=;
+ b=JsFjeBuPrpLGSyI3mwmadEVS9yidabqkbtPzWiLQQ20g2WV/a/W7zTl8bWMm9C+xoaNt0J
+ kHucbVhSfcEgwtXXU8YXQ0ZSh/DumPmXxXcDfiLIAVOW4ylVsBe+TDZqWcULb01+mDJTRC
+ w+2O2eUcXAeDOM/khhLSrZGI1TvehX6A5WMNvZ2RWh9rq8vlae9w0TuM8zsuDRyvFursCF
+ KfkLwmsssYD3JcgSZrHPhrULNPdw4XN7/RsjvEhSwYvlK3gnR0dJZ3uw+3ENPHUzI3TqNe
+ ZjTLfggqETvHzw01PML7r5vxwXRVvPrbyM7dJlfZPcEKWefwDIjE3+ZYhnZPXw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754491037;
+ s=mail20150812; t=1754491665;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b6cCtoDqglqeAEnWeLI5D3N11sJ+P1vG9DWw5k1EaTE=;
- b=P+CHjQIKqmQfmeKvaXcdd3cvroj7sxWYyUsgaDA00HMVCbdFR0szcpTIzzuerlU7djVj88
- KL28Dy3lykb8oKDGMAfqGDApU/e2Lza35zH8utkZPuMwqzqBpjqeYSOJl/92dHqZ3/TuOX
- 6eYcATcZjeEIaDp2FXSxqgz6wAxAmtktXm+jtE12ekikyQfydeY1jJO/VdkTd3eZDw9Hea
- EmLQuuu2MEU3uleWr6PjVMFR2jZnFryizDLf8uq/BU1VlzLC8ca7hlkzgGfJce3EAkt7Dt
- glr+RR76d2yE2pdCh2/sV169wfP4JuGqkmNc+1eDctEtdks6bLDEDJ/YmV6j4w==
-Date: Wed, 6 Aug 2025 16:37:15 +0200
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=xrxcCyzrMottNlkmkADJ9WrojOJQkW0ST6N8F2rtXFs=;
+ b=yXQImoZLR6oahXXjicr8OraSBQZIBjmYdr65m+MffbCnANyUwmDvVMI//hK1Lmv6Y7M3Lq
+ wEcYsLcpsrHzEglA8HL0bw+tLXcBYY20WBo153S/PFaxdiTukfWN3gpX0cKOkG+Iw4En8c
+ NFPtD91gNVDqt5uD2i89JTkCu6fpiZJ9wy/b7UnQfejymDBlwVnHLhsxD/QEssHr1ifwzp
+ VZ5ra0QhJfU0P81rd3fiX1eKj+gG5da1N+guBM+vTbxIZlM4I7F4SyMZkamKga0Tbmrc9w
+ PjzLVl4L3cDkdQjcwPp88HIXVEV6bJwbzvArwGRkfJerzvwXdMU2Ljl8rHDoLg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/2] arm64: dts: renesas: r8a779g3: Describe generic SPI
+ NOR support on Retronix R-Car V4H Sparrow Hawk board
+Date: Wed,  6 Aug 2025 16:47:13 +0200
+Message-ID: <20250806144727.7006-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] net: rswitch: Fix error detection
-To: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250806-net_rswitch-v1-1-5fb64805803d@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250806-net_rswitch-v1-1-5fb64805803d@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: pyq69hc1cejx5qc4y7o5s5dsdoek9zju
-X-MBO-RS-ID: d44620360bc3d85a661
-X-Rspamd-Queue-Id: 4bxtDG6Rj6z9tFV
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 9ee125cdffe1d17d319
+X-MBO-RS-META: f8j4wnnaexo1ejosxhtbai43na3bdt9f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,16 +83,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/6/25 12:19 PM, Andrew Goodbody wrote:
-> In rswitch_probe the error detection after the call to devm_clk_get is
-> very wrong. It checks the value of ret which is uninitialised at that
-> point. Instead it should be using the macros for including errors into
-> pointers.
-> 
-> This issue was found by Smatch.
-> 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Retronix R-Car V4H Sparrow Hawk EVTA1 is populated with Spansion S25FS512S,
+EVTB1 is populated with Winbond W77Q51NW. Describe the SPI NOR using generic
+"jedec,spi-nor" compatible, because both flashes can be auto-detected based
+on their built-in IDs.
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Update commit message, s@spi-flash@jedec,spi-nor@
+---
+ dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Thanks !
+diff --git a/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
+index 6955eafd8d6..58a146466e5 100644
+--- a/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
++++ b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
+@@ -729,7 +729,11 @@
+ 	status = "okay";
+ 
+ 	flash@0 {
+-		compatible = "spansion,s25fs512s", "jedec,spi-nor";
++		/*
++		 * EVTA1 is populated with Spansion S25fS512S
++		 * EVTB1 is populated with Winbond W77Q51NW
++		 */
++		compatible = "jedec,spi-nor";
+ 		reg = <0>;
+ 		spi-max-frequency = <40000000>;
+ 		spi-rx-bus-width = <4>;
+-- 
+2.47.2
+
