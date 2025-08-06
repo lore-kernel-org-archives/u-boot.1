@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B03C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 22:13:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E100BC87FD3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 22:27:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2DDB83236;
-	Thu,  7 Aug 2025 00:13:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B98583B2C;
+	Thu,  7 Aug 2025 00:27:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bbNJcifP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pWzvCSjX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0B628331C; Thu,  7 Aug 2025 00:13:26 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 815AC83AEA; Thu,  7 Aug 2025 00:27:21 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2A20831C6
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 00:13:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC41A82D21
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 00:27:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3e406ca2d22so1889605ab.1
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 15:13:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-61b43c84905so235728eaf.3
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 15:27:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754518402; x=1755123202; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=I6CjgHo1RCAdq7JjT+J0TJ2t/SFCHl8beA8kkVt8MdU=;
- b=bbNJcifPu6FtGCW6T/9dv7djGHx8S1QgAUvjkDBaujGFbHcptOJYifbWk5m/JV4QrP
- LJUCg5LOgrdXnUDFtpG2eodiTfHUaMwFu82hSxqBwGweMUxCx6bL8LCUF9nNub1h7L3Y
- WswHkGr0KlWK2r2oo0lfeU5+6bA8+Ahp87DRg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754518402; x=1755123202;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1754519232; x=1755124032; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I6CjgHo1RCAdq7JjT+J0TJ2t/SFCHl8beA8kkVt8MdU=;
- b=CDP7xhwfxkt/RJduCxLvw2FAqLM9Ry6qSpjZ8TKFfmAqXKj7tp3/ypxN0+GTtyRq64
- JLhTGOqLD3M+pWQZiHNtXjtqqI4Th6WmsncfRkpFSBE1E/NWgx3zXpa8aiSCVR6TX5lU
- sq/7zzM6HA11waIO7vjMm0re2aFGq/r/FWwIkubalBD5l3iW7najEBQczbHZ3opZtsRv
- IvFip1ggZj8Pz/mdlbvHD1EphJD37Yilb5WbxawOHOBPCDimPXJcgxRE315rmfql8tan
- 66jSNICsB/KUdfrHhHJIx3/nl98CveNfEMED82OmQ14uaK4q84quSwbAX+Pg/vj3w5Wh
- ZBkA==
-X-Gm-Message-State: AOJu0Yw6w8bxDg7WRCTPNF/tuMnfC6VfJ+eJ2IVfgU8q8ytN8bwr2e8U
- m0qFS8KA6ynHvb9OH6atnXiPniAQRF+21yuiNXzEnRsBlzMqv/Uo5JzYjqRiYawS94I=
-X-Gm-Gg: ASbGncsAHVP5I0FXWeGU2y9wrywTlcVC164zuFC7hbXISy3iLHCeba0TA+DgNIJvCRa
- W0qy/Wkti2Rr89N6YASz/BfaP10iay+g2Dzes55xJek6EcmQ3JyF8GtfVlQFiKVdML/EHMvZi8/
- Zx79t2tEDRnaOhBzo0y60k4kYq63NwqSey3x1bEAXnE4C2hwB3VnlspN0Dt17Ed568wLV3BGkmC
- BeSTB7QGZXSy1/UkKUmSWPvxMx26rAIDjfMJYC8XAijtrrsv0iTdVf/PTVIvIEmnyQNmO1SiJLs
- BWMrGFLjmvDZPNA4k1E7hBGWXqtQyvw7GK0J44KfUhCuk8OAFLJX2q1oODDqBPp02DN1tpB9JBO
- KIJdZNJvATKjnicvXXt5t5JViyT0G112qRAJ61H7FKGT3LrWXPxQged9r21SgI+Fa/VU=
-X-Google-Smtp-Source: AGHT+IE2pXS2+iDGjn4jDdoswCQjlwMrp2jBIVwiDOpZ5haPwrH54BMR5IXx8xvbFFyx4f8N7VRS3w==
-X-Received: by 2002:a05:6e02:2686:b0:3e5:176d:768a with SMTP id
- e9e14a558f8ab-3e51b8f65a2mr66382775ab.10.1754518402450; 
- Wed, 06 Aug 2025 15:13:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3e402b12e8asm65977375ab.48.2025.08.06.15.13.21
+ bh=0mHEsdLNYWJgjkomg0AFQzNpEGKdn+SV5lmhAbXpKE8=;
+ b=pWzvCSjXePC5g62wdu3VRGEqa4hZPBHS4FZ8DuOtAkeFH9Iiuj6Abv2LP2Ep6sOu6b
+ JE2dWm4BhaZ43hR2+B8XpQEdWkwHdgggUAA4gEGPEeheow8JQMSGHaQfmysabLYN3rmE
+ PJr3/c2Tc2g6xWzee7Btyou1vzpw4sYV1BvmmrGFiTyJfAYoAik2Nzx6DbXn9dxZdDLf
+ by+S5XCumeYY4Wkl1hj4KmW/15WrhKdGMC/WzdWv0t6bplFAQlA2+LS7hWIgLbM+Y4Ak
+ JUjfrdEcujKHsMNhu9l8bG5krA931Q9XHPkdYo4kemfXtVSIi6C53hETXDBC9pZbdMnH
+ UVLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754519232; x=1755124032;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0mHEsdLNYWJgjkomg0AFQzNpEGKdn+SV5lmhAbXpKE8=;
+ b=dSvf0/jcP2mwkte6k6kh+TcPto6sXJZMM4kJTEVz5/FezZ5apIZ0hD2D9ruSPA9kj3
+ w5cNI3UAKwUfzvmyClxU8Q1zi5NtW7jLFCEMdL0L98m7R4RMJSLk9IJJll7hw6ML/1ec
+ mCMGt2T/mhibhfI4kgcO57UV5CncPeKcsO1VaacYv17IqrMm+S67z0YcBvRHn937Cy35
+ vUAKh4WmydkBJM8R7DNxzDTCid3nCBhhXWSI7ojYs0fizLF2d8XtlTGOFDIa/F48ZTmZ
+ zvx/CbujbKzXM1A7t+Z8qILFBL88bHhH/N2ecbJJUbkvFgroz7RwGVeaSu7deb4ZRe2T
+ iMnw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXg/T1EbRGA2+Lku7T6VegB/QIFaM7eyrQuP2lVapaxyus/GSCbAzbwvBjdRZ1zYiWuuIlyf94=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzQREnlWGAcEMNeYlFCgG3WTFw04gLWOygyVlaH54LwSS4wcnJ
+ RS/tAFhOIIOEIdUazbTEkeY6a6UcBIlTpCmRn9a8qOUl1wGi6mHfwAvmqgPz7cLfMTA=
+X-Gm-Gg: ASbGnctpV3hJrjh1DAfxoOJhPH4Qgq8YdwK76hHomwIcFNd5J/TJWGz7JHN4VsMoud7
+ rPmrIWdlSQ1KuDd8YxGBDM5zFGKI41dZa1jVCTRJjCBnzbFS7Rnc2TzPlfclrZ/JWezIEkjh8DL
+ z9vLMBAVrBSPCb0jsW5LwZTGvE9wA0J2dEsmAM64g+GSMLxbQOzAidSFQlhTqXxe15E4nCAMU+u
+ 9Kf+O4ta+IDwQ27T23yeDM3eJeqFtwE2cd4JYHIbiIjri7HuyygZVfpqIgl+JvhfarSyWxZC2Aa
+ 16A0P464KzOaeKGSD5n8c9JAKv/Mv+IPrxdSr0E29SeTojZsy9IyLXopC3jry2ywxVyJqx7ZIva
+ mEQZ0/qlTmOBDKdjse2jJ21AtrA==
+X-Google-Smtp-Source: AGHT+IHEBF2KZm/uR4Xrriz5NOx2ugHTR3d89ke1NFfF+yte3Qt1hDovnXQVpaDVjaoAP2QdFRjuTQ==
+X-Received: by 2002:a05:6820:f01:b0:619:a34b:3e25 with SMTP id
+ 006d021491bc7-61b5f3b30eamr3479857eaf.6.1754519232394; 
+ Wed, 06 Aug 2025 15:27:12 -0700 (PDT)
+Received: from localhost ([136.49.61.16]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-61970693ecesm2529049eaf.17.2025.08.06.15.27.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 15:13:21 -0700 (PDT)
-Date: Wed, 6 Aug 2025 16:13:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heiko Schocher <hs@denx.de>
-Subject: Re: [PULL] u-boot-sh/master
-Message-ID: <20250806221319.GU124814@bill-the-cat>
-References: <20250806193230.133482-1-marek.vasut+renesas@mailbox.org>
+ Wed, 06 Aug 2025 15:27:11 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Minkyu Kang <mk7.kang@samsung.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH 01/10] usb: host: dwc3-of-simple: Add exynos850 compatible
+Date: Wed,  6 Aug 2025 17:27:01 -0500
+Message-Id: <20250806222710.23773-2-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250806222710.23773-1-semen.protsenko@linaro.org>
+References: <20250806222710.23773-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JODKmzKjntllxDQJ"
-Content-Disposition: inline
-In-Reply-To: <20250806193230.133482-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,58 +101,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable support for Exynos850 SoC in DWC3 host glue layer driver.
 
---JODKmzKjntllxDQJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+---
+ drivers/usb/host/dwc3-of-simple.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Wed, Aug 06, 2025 at 09:30:21PM +0200, Marek Vasut wrote:
+diff --git a/drivers/usb/host/dwc3-of-simple.c b/drivers/usb/host/dwc3-of-simple.c
+index d52e7d22d1a7..362178b79004 100644
+--- a/drivers/usb/host/dwc3-of-simple.c
++++ b/drivers/usb/host/dwc3-of-simple.c
+@@ -91,6 +91,7 @@ static int dwc3_of_simple_remove(struct udevice *dev)
+ static const struct udevice_id dwc3_of_simple_ids[] = {
+ 	{ .compatible = "amlogic,meson-gxl-dwc3" },
+ 	{ .compatible = "rockchip,rk3399-dwc3" },
++	{ .compatible = "samsung,exynos850-dwusb3" },
+ 	{ .compatible = "ti,dwc3" },
+ 	{ }
+ };
+-- 
+2.39.5
 
-> Various fixes for smatch warnings, the i2c one might be also coming in via
-> Heiko / I2C tree, let me know if there is conflict.
->=20
-> There is also W77Q51NW SPI NOR ID support and matching update for the SH =
-DTs.
-> The SH DT changes are also landing in mainline Linux, so they will disapp=
-ear
-> the next time OF_UPSTREAM DTs get synced in, without any expected rebase =
-noise.
->=20
-> The following changes since commit 007610da2cca405ea7739fc120d90085be4b6a=
-c2:
->=20
->   Makefile: Remove expansion of undefined variable (2025-08-04 18:23:16 -=
-0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
->=20
-> for you to fetch changes up to 52a4e9079f680cb3d455d2740f5887ee9089b327:
->=20
->   arm64: renesas: r8a779g3: Enable Winbond SPI NOR support on Retronix R-=
-Car V4H Sparrow Hawk board (2025-08-06 17:08:44 +0200)
->=20
-
-After talking with Marek on IRC, I've dropped the DTS portion here as
-the changes are not yet in Linus' tree and so dts/upstream is not the
-appropriate location. With that, and a slight rewording of the merge
-commit message to reflect the lack of DT changes, this is now applied to
-u-boot/master, thanks!
-
---=20
-Tom
-
---JODKmzKjntllxDQJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJPTewAKCRAr4qD1Cr/k
-CgU+AP4ij9btN7QITiztuyXOMmmxf2XH68fdiioN1rs3MdESjAEA1virJ3ZTRm6f
-H8owpWv7ekrHD4SQmlF264B6mker8ws=
-=4BQr
------END PGP SIGNATURE-----
-
---JODKmzKjntllxDQJ--
