@@ -4,84 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9BE4C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 15:25:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 759C8C87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 15:36:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03F288432F;
-	Wed,  6 Aug 2025 17:24:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B0E46842F7;
+	Wed,  6 Aug 2025 17:36:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G3FltEVO";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fnv6iUu5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB0E2842EE; Wed,  6 Aug 2025 17:24:41 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1D9D48431C; Wed,  6 Aug 2025 17:36:38 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00E3384312
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 17:24:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88227842EE
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 17:36:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3b8d0f1fb49so3571038f8f.2
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 08:24:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754493877; x=1755098677; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MYkTfxUaNShseXoYhFDZefL1wRCTEwkg8adkAlfhu/4=;
- b=G3FltEVOea5NnWWvUhHPi2c1PsrcuO6uxatM63fA0WsOwVmM37LlmOPQJvwPoE+BMV
- ODgbp2EfUlOaeStrtR6bHISs6yoUd/v/LQu24hBLdpuB5O/bxMpwhrYg2FDMZKGPLQ3n
- 4zI+YWBtLQNNQfE9mogCExYGQTnaeQ6tl+cGCFiaaTaXqNSBDk30/mLpWqnu8Ec1WYlC
- KXpXxkVY6dWcm7UpDXBPCcgdMRqQBMHlHvBVeJFsNNnuI/1OMkThSa2xQOCJBEwdOFGe
- BNwYtp9V08oWHLa+Vj1YAvYBRu79kRQkwYvcgWYnjflBRCpwJ8WzHwfzbJrLnI6Kf4Tb
- RhQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754493877; x=1755098677;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MYkTfxUaNShseXoYhFDZefL1wRCTEwkg8adkAlfhu/4=;
- b=q6c03tU3GAlpXMt5pjbx/dKefxhuNhk+q8Woju0czZ8m9bEq2n/Kt+Ocl+c+Lh2W5p
- eXe7/JqrGBgH0kow8jeABf+xtBKxpXq/m3wVAvAhSY7Vss54L50f+F3Rao4iuFi0OJtr
- ffwiNK5HUtVt/vUWpeQNeB3xxwMGN/a1qwJtPtCup3DIC4cF7bX8JWSP/bAl7x/i1Yts
- E1F6+wNOD1qarcYU54/7o4oyHKjA7pjbm67OsVO6fT4b+vp97vUN31kAdMCxIMXaqWI9
- CecuGpoIwnA5t7yxE67AVtKbCEFvh9tie8TPxoCZRYaX3HqGmdmg7rbNSfNirOkztZ8x
- l8aQ==
-X-Gm-Message-State: AOJu0YxeZF6q+NLiWmB64lZs1ZR7+BQXrdRDRV/9goAfGqNc3A48PBsK
- bMmgFTOUcxypXKe9W2diq8tA2T2hfCcH2tn2bbQ49ABS9aGz7dBCFzCzhsBl6u0nnyk=
-X-Gm-Gg: ASbGncteRgMbOfp97CcJEAWxxuqOJZRvfFXIwmfFg4RX4edf98hsh0ilIjCbzXEcV06
- kYsR4ri+iKEKFS4MegnGQqxMLyjfH6k0m5Pl8hhkZgfrcLANB68s8/ZApc31IJiI8yqC4Dx16HX
- 1g9ORdi9sYVg8GvQWec5Lw+2Dc2Muc1B2NJQZ3YUZBzLQkxScAmD+kb1PoBIJdEtxgdSiHxGJl/
- aRPQNsxRbg9pVdsT83LIjBQn7K5NR22AyULc5qb8SBd8dJONLuq+45OYSIDe1XyY9PeN+bEVS9J
- lSIiAFFhCQ82uNs8kPBigmqSpi1SZkxTFcJ+UoxGQAj8lRv7j5Fw8bX2LjZlDLaMoo1QnqUUe9v
- oNdM2jVssoLK/Oh8iPyR34K/vGS5o1JAmjjukmb6bonBnF8CETZs=
-X-Google-Smtp-Source: AGHT+IEOdWz+E09o7T88ZuWIgg8KJjktE+IuyMsHB6sAKXQWck8ZOlP8EULPedoq+KFwn+gPtSQYng==
-X-Received: by 2002:a05:6000:22c7:b0:3b7:8984:5134 with SMTP id
- ffacd0b85a97d-3b8f41b2be7mr2454241f8f.16.1754493877396; 
- Wed, 06 Aug 2025 08:24:37 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:6501:9a0d:7129:a02b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4595cfea56fsm98132075e9.1.2025.08.06.08.24.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 08:24:36 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 06 Aug 2025 16:24:34 +0100
-Subject: [PATCH 2/2] phy: cadence: torrent: Set an error code for return
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bxvXX49qhz9scJ;
+ Wed,  6 Aug 2025 17:36:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754494588;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TfIkUhwtClXl1amud2j4i7H81Hg3qKxguJq56/FETt4=;
+ b=fnv6iUu5HhsJpUhYtJyR1WezZ+7u+63lzrWuF0kCuNBt05zXKXpJhkalem16NA0DKiRyP2
+ kPqarN+Ti4B2PJ5yLmvcaLjIqqZGeRs/wMCCsgGjet8ZCJyrLQgbWNeiMXMoOq8DV/tW/N
+ Jz8TWNnHXJKclhpJUs/Mlv8HEcC5XMeYjDR15tv/b+TCPg3Zjj6nYb1KLng+U8foxLt0Yv
+ y9s8TAsymtvkushhcR3YAsaL11ot8fDquJtTMVqqh0sJTOfbS4FmKMYxTVa4lJNtoDDu/n
+ XnUXeeufU1gbrtpJWxwQ+E4vL+0SN79KWwwl1oFPZx1PoVGkB49EyWJkgLInyg==
+Message-ID: <8a05c8a6-a0eb-4f84-aa48-0d0e0f532fa4@mailbox.org>
+Date: Wed, 6 Aug 2025 17:36:27 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: Smatch report for drivers/net/phy/marvell10g.c
+To: Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <623c39a5-2438-42d5-aafe-bb80dfd12b82@linaro.org>
+ <20250806145315.GO124814@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250806145315.GO124814@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250806-phy-cadence-sierra-v1-2-2f0830caaacb@linaro.org>
-References: <20250806-phy-cadence-sierra-v1-0-2f0830caaacb@linaro.org>
-In-Reply-To: <20250806-phy-cadence-sierra-v1-0-2f0830caaacb@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+X-MBO-RS-ID: c2b96c76d98522d3728
+X-MBO-RS-META: q7ahzcofg3erbschodb6zgih6cp3ja4h
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,31 +77,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In cdns_torrent_phy_probe the test for too many lanes configured does
-not set an error code before taking the error path. This could lead to a
-silent failure if the calling code does not detect the error. Add the
-code to return -EINVAL in this case.
-
-This issue was found by Smatch.
-
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/phy/cadence/phy-cadence-torrent.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/phy/cadence/phy-cadence-torrent.c b/drivers/phy/cadence/phy-cadence-torrent.c
-index 1f566d082f9..28fe026223c 100644
---- a/drivers/phy/cadence/phy-cadence-torrent.c
-+++ b/drivers/phy/cadence/phy-cadence-torrent.c
-@@ -719,6 +719,7 @@ static int cdns_torrent_phy_probe(struct udevice *dev)
- 
- 	if (total_num_lanes > MAX_NUM_LANES) {
- 		dev_err(dev, "Invalid lane configuration\n");
-+		ret = -EINVAL;
- 		goto put_lnk_rst;
- 	}
- 
-
--- 
-2.39.5
-
+On 8/6/25 4:53 PM, Tom Rini wrote:
+> On Tue, Aug 05, 2025 at 05:30:49PM +0100, Andrew Goodbody wrote:
+> 
+>> I have these Smatch reports.
+>>
+>> drivers/net/phy/marvell10g.c:384 mv3310_select_mactype() warn: was ||
+>> intended here instead of &&?
+>> drivers/net/phy/marvell10g.c:387 mv3310_select_mactype() warn: was ||
+>> intended here instead of &&?
+>> drivers/net/phy/marvell10g.c:390 mv3310_select_mactype() warn: was ||
+>> intended here instead of &&?
+>>
+>> Now there is obviously incorrect code there as it cannot work correctly as
+>> is, phydev->interface cannot equal two different enums at the same time, but
+>> simply swapping the && for || is not going to work either. Could anyone
+>> please point me in the direction of a fix?
+> 
+> Adding Marek as r8a779f0_spider and r8a779f4_s4sk are the only two
+> boards which enable CONFIG_PHY_MARVELL_10G (aside, ./tools/qconfig.py -b
+> and then ./tools/qconfig.py -f CONFIG_FOO is handy to see what boards
+> enable a given option and helpful when get_maintainer.pl has nothing
+> specific).
+They use the 2xxx series PHY, so this code is avoided. However, it seems 
+even linux-next has the same behavior in .select_mactype() callback . 
+They use test_bit() in there, but otherwise also use && instead of || 
+which looks odd. Maybe that is a genuine bug which got ported over from 
+Linux and needs to be fixed both there and here ?
