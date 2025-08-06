@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C9ABC87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 16:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E5EC87FDA
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 16:55:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AC86842C7;
-	Wed,  6 Aug 2025 18:43:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F9B384375;
+	Wed,  6 Aug 2025 18:55:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tSU08Qcm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wtGaV5T8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DC28842C7; Wed,  6 Aug 2025 18:43:36 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 9611184376; Wed,  6 Aug 2025 18:55:21 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDF2D84370
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 18:43:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1106684371
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 18:55:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-458ba079338so1002215e9.1
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 09:43:28 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3b78d13bf10so24636f8f.1
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 09:55:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754498608; x=1755103408; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=k3P61qDEuwnqRZZrLjZ9m7z2BgW5uq3c4fG1F0Uce1c=;
- b=tSU08Qcma/dHdQxuBz/C3fs1YDRXkNxnzUQM3cRdXeNmO6MBbSmDneXdo/Auw+163A
- 0lOqujasgeCA1In15zAjDzmJNB7EBdxjOlOxF4ZbkLiX1qsRVi1+f3+XREhIt2MURbKG
- XiLfgTgjvCZN8B9/jfmf19h8KLF6wwAJGXTx4vvqJR0fVJ6SUblL+fnjInVwRIGQX4h+
- Jxfx7v7PdENQLolPDO68ka1rvcJ2vCu1VVdavjHOQxKFLbZ+XZr6I9PzwVKXS1t7iq1p
- Lx+ZZng6k6nKmZMEQ3XvAcqgI0qLqxc79KJNnd3x1a7RBq40D5URPstTkXcRGt15TPHY
- G6EQ==
+ d=linaro.org; s=google; t=1754499307; x=1755104107; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3cQPCP3VfSJE7qDMCeQoegngcIRNScdLaCp7Xtn1GmA=;
+ b=wtGaV5T8CZjouaYZRGRhurhun02HzfF/T3UvHJbQYSqGE2pXSWINrGmSPmsjNRr6KY
+ 5Wo0VVAjYETcLEOjOPsa2ZHksMDiasczdmlNAxbZcLzwz0oxYrlmLrcVJ5q3OFXPm9KE
+ 5DEEgL7iI9lqXL8tX9pz3kf9E2ldtbedrlom7++AFIPHZbLTysp90rhgYNlWX368zJmO
+ KnVVKNvG+sIvVw89Fg18LmA4CdIynGVkBEPy6HwBwnkmX14NaPYcYDx+ewzTtA5ASpk5
+ vGjhFgwJ+RQTYsY3FE3ZdkU6+kDyKkEVHgkGR338/GuWkiwZF/hQ2hN4X61VXcHQZqUx
+ anGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754498608; x=1755103408;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k3P61qDEuwnqRZZrLjZ9m7z2BgW5uq3c4fG1F0Uce1c=;
- b=ZZLnlYtOKn03b4AFV0fnxYIFPMN6nqtojTAhOV4UhNb1RU/9V2EArUBI4QVMmVrT1h
- xCFD5KfFAmrO+g3jxj4af0wkpJxoEbiwuD0RSBpP+zGUZN3MOihsYe9opkvUefTnVbzb
- VJoXUrBfxw/k6L9xAFeWSvEH8dxHS+MAj3IExGp19CcQcZYq0yyMFVJOX7E3CehYslp0
- RwTniA4VIc9K5ydc3G+J2kWA1bW+qk9JgK/CSlZeKs0aHz/8farVMnAiBrq+rDUCd5k5
- BBiKPyqogbNYfV7Yvo3DftQwvkxQ/GuTp0IsD+USLLUJLadchd7ppoZ2FcP7do1ugd8V
- XsRA==
-X-Gm-Message-State: AOJu0YyYw9sGcwFTlUjDDf9QEnMBb+0Px/y7SJJkVs55bKoOIPxuWomw
- CwZOSUrHoM43hAhZmBlRBrjsp884O8v6qvyHsO6TFSjcRL9dl7VnFwLus/16D2onrUUz2ZOZtu+
- Hmkcv
-X-Gm-Gg: ASbGnctdQ7sZjXXtq814+KhNBV+9N1RjlzLjS1DPriDyvVDjHGxMF9odbQajfUwd00M
- RWBrsd6zO463mbix5pQdk8Vq9NB0ZD754bv2EnO5f3RKXkXBYTgo7E9vAlVdNyWYiuXcEpl6gIL
- imAm1vqShg0aNUJSzHuSFmhFzhf9mw6VmuBzaknWnTxZmgV68BFoq+hHfJA+igUJXcXdg/MUsN9
- 7YXvN5v3Wf3nZY6n2byaCoGvDNKfeObNMEtqnQagq84Unoz2aEW3DI12PgDUG7tgY2Abvwrnc00
- khp/1SaKG89tzQ+FZ7Em60HC7RFvX7LYTl9Wn7ivrvnlIr+Tcz5hwjSo4uSbygIYWxxWJf+rcmx
- 3SV5cXOS+xdyF85wDmXK+MbDh3msr4sZbyYRufQ5HygbLl2YjhTE=
-X-Google-Smtp-Source: AGHT+IHCLjOxwsf0dY34DXiWSxKU9cjHC2uhgqP89UOYe1RsTRYTCRz3pg+iFR+xX3EksFIntcUSsQ==
-X-Received: by 2002:a05:600c:358b:b0:459:dd1d:2ee0 with SMTP id
- 5b1f17b1804b1-459ede03686mr2685875e9.0.1754498608257; 
- Wed, 06 Aug 2025 09:43:28 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754499307; x=1755104107;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3cQPCP3VfSJE7qDMCeQoegngcIRNScdLaCp7Xtn1GmA=;
+ b=v8ZLSB/egyaG6vO8qwWvksRYzyQ8AlzNTPgOOZEaYeNoeSXntqsHBJ8LF9mfN+Ryj4
+ 8h+16jS0ZIPBKD4yH2Laaqo+oRwKvaEooQBV7gQgXiHI+63uxD5vEAB+eds1DuHEUN9L
+ +KAxFBr32WcYiiKtS9eCnoN+sPawNLPmJc3KvsYkvFx3amBI/kWnbVrs7te8gLvOuk3W
+ p7xaR/Xvi2NDfbO4ho86bjzECiJwkXYX4F1R4MrxIpQuDrkQKZpwzgWV+BVvwo+nPR7w
+ 7fTh1DMF+U5+3xTvU2eEk9md8nBcZT9JMj4KYOWD9kanQ/xnwktwfUHpS/XXyWbHTNAN
+ y6Pg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWGbB2glFE4QYW82GZIgV7sL6Zi3OnTJQAQ9IKLi9JSDStqBa+qHViprfFMJzpitbshqpR4m4c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzg8oo6b92atVjtCVt7NjAYUxJclsXK8y90WsfaQdwjO3d4YP91
+ jWRRTau9bKTl+8nQ3DI/2fvY77HjAhSQin4HeEDM/RlgYPeuk0pP+lHIXBZE6uDUl1I=
+X-Gm-Gg: ASbGncsTwEw7xxcl1SMhI456P9qDeipWkk4plNPpm8TZyDZx2KpBTMToVA2jGrQdtar
+ uaD7jBVe8UNqt4ZlTyYOQzOXzkWNqLfvFf2yPqWpSsnCsg4jFTMjD3XWsuOsz4qvlS0xhzeaXoU
+ 7kcAr66FA86YYGUoVIrgFiOZDvI0Da06A9uxwgWg0n40ZVrtWw730UgweD0G2EQZgXcBkCuj8Ev
+ 13xBR4iq9orQMzuBNxZuNoLJbMRSmX+/gTMSpO7j+84cin3CVMH0L93wGLURQF3j6tnrd8EDA0F
+ UTbYIzF+KG1p9PoS/9BCiv0ir5I8h9Rg/o9zD4KF4eav/SvQzGgue0RXWkx2VfkfhdtLyhNqzbx
+ f5jw3xI/45zxRIsZHuh0SB+NMP+C3+yW9X2ih5YYcKoYct+y4F5o=
+X-Google-Smtp-Source: AGHT+IGjU/LfwjRhYZExdwe8+JreOEDnIcYu4xva3mEEdWnHCuGmo5er9gSj0J+2B8HQrYUKSpcTRA==
+X-Received: by 2002:a05:6000:1acf:b0:3b8:d082:41e with SMTP id
+ ffacd0b85a97d-3b8f41b96dfmr2948906f8f.57.1754499307043; 
+ Wed, 06 Aug 2025 09:55:07 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:6501:9a0d:7129:a02b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e5868fd7sm61287685e9.18.2025.08.06.09.43.27
+ ffacd0b85a97d-3b79c3abf0csm23137476f8f.14.2025.08.06.09.55.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 09:43:27 -0700 (PDT)
+ Wed, 06 Aug 2025 09:55:06 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 06 Aug 2025 17:43:25 +0100
-Subject: [PATCH 2/2] phy: marvell: Cannot test unsigned field to be
- negative
+Date: Wed, 06 Aug 2025 17:55:04 +0100
+Subject: [PATCH] phy: qcom: Fix ret is uninitialised
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250806-phy_marvell_comphy-v1-2-ad9f4e789d5b@linaro.org>
-References: <20250806-phy_marvell_comphy-v1-0-ad9f4e789d5b@linaro.org>
-In-Reply-To: <20250806-phy_marvell_comphy-v1-0-ad9f4e789d5b@linaro.org>
-To: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+Message-Id: <20250806-phy_qcom_snps-v1-1-5cda830026c7@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAOeIk2gC/x2NywqDMBAAf0X2bCDGV+uvSJGYrmYPxrgrpUX8d
+ 2OPwzDMAYJMKNBlBzB+SGgNCYo8A+dtmFHROzEYbWr90I2K/jdsbl0GCVFUWZTVZNyzNm0DqRm
+ toBrZBufvarGyI98iMk70/Y/613leBZfgAXgAAAA=
+To: Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,37 +104,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In comphy_cp110_init_serdes_map in comphy_cp110.c there are two fields
-in cfg, comphy_lanes_count and comphy_mux_bitcount, which are fetched
-from the FDT blob with fdtdec_get_int which returns an int. These two
-fields are then tested for being negative. However the fields are
-declared as unsigned so those tests must always fail. Change the
-declaration of those fields to be int instead of u32 and the code will
-work as expected.
+In qcom_snps_eusb2_phy_probe after the call to devm_clk_get if an error
+is found then ret is printed but has not been assigned to by the code.
+Decode the error from the pointer and assign it to ret.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/phy/marvell/comphy_core.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/phy/qcom/phy-qcom-snps-eusb2.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/phy/marvell/comphy_core.h b/drivers/phy/marvell/comphy_core.h
-index f3d04939387..086a4d82f26 100644
---- a/drivers/phy/marvell/comphy_core.h
-+++ b/drivers/phy/marvell/comphy_core.h
-@@ -47,8 +47,8 @@ struct chip_serdes_phy_config {
- 	int (*rx_training)(struct chip_serdes_phy_config *, u32);
- 	void __iomem *comphy_base_addr;
- 	void __iomem *hpipe3_base_addr;
--	u32 comphy_lanes_count;
--	u32 comphy_mux_bitcount;
-+	int comphy_lanes_count;
-+	int comphy_mux_bitcount;
- 	const fdt32_t *comphy_mux_lane_order;
- 	u32 cp_index;
- 	struct comphy_map comphy_map_data[MAX_LANE_OPTIONS];
+diff --git a/drivers/phy/qcom/phy-qcom-snps-eusb2.c b/drivers/phy/qcom/phy-qcom-snps-eusb2.c
+index b2655ac007c..28502c46f67 100644
+--- a/drivers/phy/qcom/phy-qcom-snps-eusb2.c
++++ b/drivers/phy/qcom/phy-qcom-snps-eusb2.c
+@@ -331,8 +331,9 @@ static int qcom_snps_eusb2_phy_probe(struct udevice *dev)
+ 
+ 	qcom_snps_eusb2->ref_clk = devm_clk_get(dev, "ref");
+ 	if (IS_ERR(qcom_snps_eusb2->ref_clk)) {
++		ret = PTR_ERR(qcom_snps_eusb2->ref_clk);
+ 		printf("%s: failed to get ref clk %d\n", __func__, ret);
+-		return PTR_ERR(qcom_snps_eusb2->ref_clk);
++		return ret;
+ 	}
+ 
+ 	ret = reset_get_bulk(dev, &qcom_snps_eusb2->resets);
 
+---
+base-commit: 007610da2cca405ea7739fc120d90085be4b6ac2
+change-id: 20250806-phy_qcom_snps-3134f2c95276
+
+Best regards,
 -- 
-2.39.5
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
