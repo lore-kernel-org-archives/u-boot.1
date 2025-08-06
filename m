@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE291C87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 22:28:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DBBC87FDA
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 22:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B808C83AFD;
-	Thu,  7 Aug 2025 00:27:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D45483B27;
+	Thu,  7 Aug 2025 00:27:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cbbzcoi3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fq/Hb8KW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90D8483457; Thu,  7 Aug 2025 00:27:38 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 35D4A83B03; Thu,  7 Aug 2025 00:27:39 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0BEF83B0E
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 00:27:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8193482D21
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 00:27:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-306db05b292so161923fac.1
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 15:27:18 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-61b43c84905so235782eaf.3
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 15:27:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754519238; x=1755124038; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754519240; x=1755124040; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=127HV3DeMcQt3edH3LDO8ncD+TXb10BATZDQwm/W/Hs=;
- b=cbbzcoi3A8NvNl0Z8jwx+3n6Gz4pYMMMkioeDb1VWHbvO0C9RC+FdXtx7A6b9er2nw
- EEVavpnVvCGJ19OtjScs4oJK+gfaQgoD2Bqtu/+TezQygLuqdGjd+AuGNZAiRKiNmMZ7
- iyEo3SD1jjHrqMfP5SQgR1IOrGFvx+cmKPbA14ukUnFg3UbPdFuJM8wrT9/06jCJDG2P
- 8qta08T0l+ozHAJe/Kq2ubCI5S/JopQm/uAB5tsqzO9EAKJpcN/C8qbaRvT7UYi0ZhXg
- u9C8rrgrktpEErv/8o1XzALCIzXk/4OPUk0SPDa8KYU/Yqj6SLbBggncb6j9UJ3eeUEF
- V/Ig==
+ bh=JzvnkD57qhHojNreheOmv93X7Qc1wkoafeNTmJhjQT8=;
+ b=Fq/Hb8KWb+1UBG7AsXaXCGlvALDEiR+UfLbcsynmdmT5ELPvLCNc0u+lz+UabEAJwa
+ uuhFXfIZ8qqho8qNMGg/3k8Ktk0XT7eaxq62M1/xDjg1g4/yUdO2vqe3zMbpv4V8+Kd2
+ MdguA+IPHWzUoA5URCg4+UpglcLdnAm+RZcAa6D7T0Vfjc+IRWWCzNeim7Se5crb+j9l
+ 1YLrAepsbWArRuTDC8m0of0YFETpJw/iYhu36gnAk4u9COSh9jWlx465j8hdrs28GN6k
+ W4yiMH0+x62HCGVeeptvsuSuaTEfQp3X/C8bPapABjPILfbQoKkyCgMAchqptAHEfdpB
+ uX1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754519238; x=1755124038;
+ d=1e100.net; s=20230601; t=1754519240; x=1755124040;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=127HV3DeMcQt3edH3LDO8ncD+TXb10BATZDQwm/W/Hs=;
- b=CETVpyQ9e3q01Oyz4AEhTs1KotV5CDOg6nMPWeZ0Ue6J5AwqAeYdl7iFK1wfKQaMP4
- 7KD91qDo+e82MUtvVRT6VHr6LfsgG8IwjPdvlx62J7oucfAYzECK+rF7kasRlp8SeGWP
- RebHSUp+KlnEtISabZxQM0Anpf4SA5yqKdealGZhmCjYjWcPafMBtAW6ZAc+DtTt6abK
- pJ+KoDipQDmx5+Mj0mwXkucj/z5ygnZv9cWZVxCU2JvM23yZv+zwxY3lM7bn3cLMHiKa
- 7m0YSBBqVpJP9wAk3AUOjhymlR4nxvmdhnqsAovT6zjsmY8Y45Rc+ZBesZf3dREY4hlE
- unSg==
+ bh=JzvnkD57qhHojNreheOmv93X7Qc1wkoafeNTmJhjQT8=;
+ b=p1hs9O4LWfO+8/bi8d0gYyhiqIAUNYiXw2orfHSm4SiTVB0rsb9wors3e0Kn9wytgl
+ eyqtPBFN18Mkd09Y9/yI6Dmwl076UJdGbhAFb6g6xe80KHs7KlpD5zjCgGOU9jD5DhBS
+ NDFALm1ivu+5cFRRucs5Ew9Waup62zBN1Lzxmf0Cf3GBIQQkFg5xnmayF/fdVkoH9c66
+ FGJ38ixp4laKI0hwnWpB6E7pMhIvT2SvyJJNmNk6YxxBNwitKYCGIjPRQGo8FwX7YfOT
+ HLseXp98DdLSaPrx+loCz6zrI1jKjN5UBj5KR3uTnmC9gsepWMwH49Dk3Nkro5SVcnsM
+ 8AjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUELpFSlYwUsL85cfzqc39PuPwBMQQA4lay09szsNMIVcduVfiZ8ijbeqFZffcMQ5rIfI3HqkU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbPzItYTA5jEzhd+41lKGUtzP870+Olim+CEeVofOFze18kgRm
- NT449wLQOFcKutOPP6K64nyD2QZwpfJkNyT9J4qlq2vEI0bA6RvKlowQj6iFz89cu/c=
-X-Gm-Gg: ASbGncvpunqLEip0n92VHQmbGxs5OuDck+J2QIRvzqEBgwDj+jrj2Y0ip4/s3dpvtMK
- I7dI8nW9RH9KO9ggJjAHb7mAqkcPQKJfZ5p+Em7nOV0+iB3vsFkiFbXGH+q1ZtCNGMC4SZEfLG4
- G317OygB1q4Cf3HyVY1l/Jftwbg6JkFT6G3tM5EtimXrI6grfZqLT082bvnS+/wwxzcrzVVZXhd
- EApiEofPhf6Fmgy/mDvnxi0ZEEcRiLEVCAciKpuAtZ/MBV9u0DkDjcNkHD60Il0Fd+/h28AvV4x
- dvRmcewyj6v2TiGA2F2sE94eVE19O4du26S21fGuQZVz/G31sh3A48tHQIROT1CX8yGQep8tHuN
- Da4LW0BQqUi2T0tDpyqhZn5M1qQ==
-X-Google-Smtp-Source: AGHT+IGcfT5xnE4ZgnPg3D6+vhrXzcpEsINZNC5OPfmIC/bEC52HmPXuQV0mwjSoNHfFe9U/eNZzKA==
-X-Received: by 2002:a05:6871:d40f:b0:2ff:a4c2:b52c with SMTP id
- 586e51a60fabf-30be2cd7b2dmr3305912fac.34.1754519237599; 
- Wed, 06 Aug 2025 15:27:17 -0700 (PDT)
+ AJvYcCVvwMvQHeubQbA+kyFpCcALuCRvC7DLL6CGNa8e+F6tLn1iSfDBErZnDY9BFIJ9+4iI8ViFQak=@lists.denx.de
+X-Gm-Message-State: AOJu0YxUxfQEApBkeHhptJzw3FBH0e0RPidOWKab0CScZVq3isHrxll3
+ 3xkwOoEuoVXvr4XYSEv1UZtG8iJwSfl8MottHauM5q9neCrvx8KNG3jpSsgDLXetBeA=
+X-Gm-Gg: ASbGncvt3/kB6FAmZPmiSWVoL0SObMi2hhj3zUuN5o9QiFRGRQ2xPH+xzKhZNSKyOXo
+ MX05gxqBRcxXnpuNlMWh3Iw31yFz0UkKi5g3y531fUGfBZ2z04PI8ns3FUQ2S4ilrbgYRRoE/rI
+ gWZDqRhGnEgPQooOjwUDgSZ7lTjMtm9OoBcLf6f5NTRsy8OZhemULYwm8rOLzAtZLJ3BP7PXWzF
+ 3rPV40vZ2h+NF4HjIYnP7WlDsZ+HQLgBnFDdW+RlFG4ZXa6BPLNrHoH4yDLELjGsDBqj3zRMmZK
+ jXPFMnnRyjP+7l9gmdozD6Hj6USqqsRH/KnInoMb+NKocIOf+016TMu4Kb4ZxHoFCSTW8Y+A3JJ
+ oqeTUgBcNgceMR9wL2MjnfrKDm6dQ+D3Uprdn
+X-Google-Smtp-Source: AGHT+IF85C983DyDkWLOr+GYklGfIhdEa+4fdK6tNwftN6RT9p9fPpuusk9pmajDZbMGe2l0tERY4g==
+X-Received: by 2002:a05:6808:66c4:b0:435:8501:4cbd with SMTP id
+ 5614622812f47-4358501577fmr1316258b6e.5.1754519240138; 
+ Wed, 06 Aug 2025 15:27:20 -0700 (PDT)
 Received: from localhost ([136.49.61.16]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-74186caaa8asm3644702a34.2.2025.08.06.15.27.17
+ 5614622812f47-434e9a77e2dsm1182481b6e.24.2025.08.06.15.27.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 15:27:17 -0700 (PDT)
+ Wed, 06 Aug 2025 15:27:19 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>, Marek Vasut <marex@denx.de>,
  Tom Rini <trini@konsulko.com>
 Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH 07/10] board: samsung: e850-96: Add bootdev var to choose boot
- device
-Date: Wed,  6 Aug 2025 17:27:07 -0500
-Message-Id: <20250806222710.23773-8-semen.protsenko@linaro.org>
+Subject: [PATCH 10/10] configs: e850-96: Enable Ethernet
+Date: Wed,  6 Aug 2025 17:27:10 -0500
+Message-Id: <20250806222710.23773-11-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250806222710.23773-1-semen.protsenko@linaro.org>
 References: <20250806222710.23773-1-semen.protsenko@linaro.org>
@@ -102,90 +101,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a way for the user to select which storage to load the LDFW
-firmware from, by setting the corresponding environment variables:
-  - bootdev: block device interface name
-  - bootdevnum: block device number
-  - bootdevpart: partition number
+LAN9514 is a chip on E850-96 board which acts as a USB host hub and
+Ethernet controller. It's controlled via USB lines when DWC3 is
+configured to be in USB host role (by setting the "dr_mode" property to
+"host" value in e850-96 dts file).
 
-This might be useful when the OS is flashed and booted from a different
-storage device than eMMC (e.g. USB flash drive). In this case it should
-be sufficient to just set:
-
-    => setenv bootdev usb
-    => env save
-
-assuming that the USB drive layout follows the same partitioning scheme
-as defined in $partitions.
+Enable network support and LAN9514 chip support. This makes Ethernet
+functional on E850-96 board.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- board/samsung/e850-96/e850-96.c | 40 ++++++++++++++++++++++++---------
- 1 file changed, 30 insertions(+), 10 deletions(-)
+ configs/e850-96_defconfig | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
-index b5f6ba23432e..3df241edde2a 100644
---- a/board/samsung/e850-96/e850-96.c
-+++ b/board/samsung/e850-96/e850-96.c
-@@ -9,6 +9,7 @@
- #include <init.h>
- #include <mapmem.h>
- #include <net.h>
-+#include <usb.h>
- #include <asm/io.h>
- #include "fw.h"
- #include "pmic.h"
-@@ -136,21 +137,40 @@ static void setup_ethaddr(void)
- 		eth_env_set_enetaddr("ethaddr", mac_addr);
- }
- 
--int board_late_init(void)
-+/*
-+ * Call this in board_late_init() to avoid probing block devices before
-+ * efi_init_early().
-+ */
-+void load_firmware(void)
- {
-+	const char *ifname;
-+	ulong dev, part;
- 	int err;
- 
--	setup_serial();
--	setup_ethaddr();
--
--	/*
--	 * Do this in board_late_init() to make sure MMC is not probed before
--	 * efi_init_early().
--	 */
--	err = load_ldfw(EMMC_IFNAME, EMMC_DEV_NUM, EMMC_ESP_PART,
--			LDFW_NWD_ADDR);
-+	ifname = env_get("bootdev");
-+	if (!ifname)
-+		ifname = EMMC_IFNAME;
-+	dev = env_get_ulong("bootdevnum", 10, EMMC_DEV_NUM);
-+	part = env_get_ulong("bootdevpart", 10, EMMC_ESP_PART);
-+
-+	if (!strcmp(ifname, "usb")) {
-+		printf("Starting USB (bootdev=usb)...\n");
-+		err = usb_init();
-+		if (err)
-+			return;
-+	}
-+
-+	printf("Loading LDFW firmware (from %s %ld)...\n", ifname, dev);
-+	err = load_ldfw(ifname, dev, part, LDFW_NWD_ADDR);
- 	if (err)
- 		printf("ERROR: LDFW loading failed (%d)\n", err);
-+}
-+
-+int board_late_init(void)
-+{
-+	setup_serial();
-+	setup_ethaddr();
-+	load_firmware();
- 
- 	return 0;
- }
+diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+index d7cd1b4b8ba5..8f9659ce050c 100644
+--- a/configs/e850-96_defconfig
++++ b/configs/e850-96_defconfig
+@@ -42,7 +42,7 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_MMC_EMMC_HW_PARTITION=2
+-CONFIG_NO_NET=y
++CONFIG_NET_LWIP=y
+ CONFIG_CLK_EXYNOS850=y
+ CONFIG_DFU_MMC=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+@@ -70,6 +70,8 @@ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_SMSC95XX=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="Samsung"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
 -- 
 2.39.5
 
