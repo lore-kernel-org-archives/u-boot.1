@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BFD6C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 22:28:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFAB2C87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 22:28:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90C8683B21;
+	by phobos.denx.de (Postfix) with ESMTP id E496B83B22;
 	Thu,  7 Aug 2025 00:27:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eyuY/40J";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X5A2AJJ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A7BB83AEA; Thu,  7 Aug 2025 00:27:31 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 0782B83457; Thu,  7 Aug 2025 00:27:36 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACE7883457
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 00:27:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B76883AF6
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 00:27:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-741b8c26fc3so324738a34.1
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 15:27:14 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-30b6bd0a352so358069fac.1
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 15:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754519233; x=1755124033; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754519235; x=1755124035; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UEQBl7lzEjLrwB86nYWA/KAA0DTeOE1P9Fl1knBIQZ0=;
- b=eyuY/40JpIB86DX6H97Q01WXPhaKPvoi5cNgxwUX1nKLVNTJj5O2DDdzCoWNSPqCog
- OXD3Sr2aQu8txcYBP/Yx/KEMqE4mrK3T8Wji1KAHvJhWMEJiZ0aJPTvBbeCoaru0PYqd
- mW9/ag5In3/6aPZmI5Ep40XYL4heWGb85rQ/ZVzcUVoXU5UaeXv3cQqIvwmoQzYtqFLo
- ZEP9pEWrSSOKj1HFHSsmc7Ordexzl1a8vm6SKWykUEQ9ZIaYCJkRNQA6xk1PodeHiIId
- b+Yr5emQ0mMAToDKaccaRPatyFfhyUfhhld30T/kOM2+9M+fQFEcBInxKdtutkb9iS2v
- lHrg==
+ bh=OcGFEdiY5kHNfMXPa5mJXB4ejgcsS2ALH23sQLOlC2Q=;
+ b=X5A2AJJ/0GkW7LFqlwEahyAHzhBJXDyqRRPpgk6mMj2uaQzrv7MqlyZ8vYuyPx3x58
+ LiU87l+03GYOy400s18PXqGP68+FoLH0YDpNihD6Rek6QXIBY++j5KSyRIIC8fj9Tz4+
+ D5fDasFG1tQ1IsnqUhmAP5jXbF5ZgRcJ/Y3CbnwJHrbUUt+71x5Ir+NjR0cuEoTj3dUt
+ xiVKheBSTN2pwK0iJjz0Gy8cmGsjpwhwY41sCo8VcLOfMa0gCzmL2URVppyRj+gCdp0f
+ wPS7j4j6llXVoNUqKtqQZCyiCif5+QHzbNhUuc3OBaEr+tTYzXPc53UkYjcIeG9O8M5z
+ H3zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754519233; x=1755124033;
+ d=1e100.net; s=20230601; t=1754519235; x=1755124035;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UEQBl7lzEjLrwB86nYWA/KAA0DTeOE1P9Fl1knBIQZ0=;
- b=hVHdRpgn4u+0guBBVKEBWrp4foh4ZSsteZF8DVbOV8rxgho/6wq9cbzneNeXx6SYTj
- tTtlSvWWu9cVtpgXSI2fOQLXiOtdOckyuABH/WvSTLHuiZZcydp7qtJ6QT4WC8JScqjG
- 738Y6XbU6U7h7PR7zfvzvNuEFKwwlDKGn8R0by8eYwut0imOUBJkhCqDFZOG7+0v8ICS
- qLsJ764KiecAniAkQukJOePK1zKXrO/WJrMzJQ98+DtQzdkMU57nNUvuz85Deo9Eh2hw
- l1XF1g1fCilzSGqr32HdaWz0SrTMEmv3abdMXRj8A8yML6/IvVpL/QAsH/Dr6gRx2Ml6
- 4lyg==
+ bh=OcGFEdiY5kHNfMXPa5mJXB4ejgcsS2ALH23sQLOlC2Q=;
+ b=qAN2JiwcCQ7sB0ricHfRBZFQB7+DuEPMNoACGPfeoRGPGljqTFskI4pw5zr7l+1qzp
+ fANVIQmefLGc5URG7Cr2Okx1gDtSf3h2Hc5HW0/62iUch8FXMP8TUpMZYEv+69f6pj9G
+ cG5VaR7UhvdlAr+gXm34CqC//M22yMYeP384NlelpP4YZFOIVuutOXl6qXdBOlfqjoyd
+ B2tkpPFKZ0bdD24gmnyXCwnujBXuKtnxm+bb8HbhomYa17QKCmBgFLnNsFCgnU67hE0F
+ 1aiiEFQkRVady0BHNiLLLi9eI0sYzwz9F0A/mont7HiR3FxOowcf2N1ce9XNibwM/NaQ
+ qgVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWA2y9iVsZxqn+/nsrk6bIZuabd12Apu0UT1Ghq9/ReqUgKHMf6pnXrm2le49d5+QNKldrCz8g=@lists.denx.de
-X-Gm-Message-State: AOJu0YybYnaR0wXMjamESgqfNcFjXy5PcRKnHc1x3gC69HZOIxIp5EYi
- xE15vfa8F+T38LdfVCSIALyexyJ3fQ0WcnKcG1ehyyqYtXl0j70Dsi9HsOkp4oDeP/Q=
-X-Gm-Gg: ASbGnctOUxX79KWsILtrsLDFMsHHQU+PlZO4WLzOihyki6uVY1u0qCOqCH4n26wZl+o
- CpE03zeZpY9HYsSjPycSyHg6Tbn5+YjkBZdNedie2ctEbojoDHImOmiIN5zIKio3pf+tAUdbBW6
- mjxlGu1pNV01zpUfLHwlRxVuMoQIUeOTDplCgJIO7HgVDCyNK7wnbYzQQ2WruI6ACcNWtxMsNOb
- /LyGPtfi1FAlcQY0SmS+2x7nQKl5xlvF9reQPUroo3x70UaS0sDg933GxWDJacEuL5JbsX4f3wE
- PDLAXvn6RWhx5jqeYy6liETyNKb9wAuIrwlt2wSx2v/Xani6GIHSkJPIXz4OM2onwsibzYCV2nL
- IjocyepwkNVLqgXew7y4qQ2cljQ==
-X-Google-Smtp-Source: AGHT+IFxRGGkz9ocs0++YcvmCRs7yzqHZ0tHF93Y8JozjArBIC2siOYzlNGGY3wPHI19HBtkR4qsww==
-X-Received: by 2002:a05:6808:81d6:10b0:435:80b6:d27e with SMTP id
- 5614622812f47-43580b6e8d6mr1820807b6e.10.1754519233384; 
- Wed, 06 Aug 2025 15:27:13 -0700 (PDT)
+ AJvYcCUK30nJZNLaij6g5IL6ECK788ACFQb7c+qTSM0jParbFBXM42FimZ8v1iS2iCP2fT0UXe02/xA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkXQV8VnpHIIBSzSOWbCTM7re6cgY2q7oG3BOFrQFiA6y7CEY9
+ Vr2BXK4Cm7RYWlnFvoWxdWZIR3L7LGaGssifs9FpRbNUIfFFMKagigOllkTedtz7v1o=
+X-Gm-Gg: ASbGncs19ykom75rMSo+lgXRtia/Z721d7ScLmqE/TqkLhKpF5k/8nTIEry+u7GwJB5
+ ifaPOBE1z/bCz8C8/otQ84gl18/woL5NEux5/03tZHfZSusGf+roKLXdch6oGNCdRV7Or4+9C4n
+ zsZcc1Jz4Rdm64mQ6E4pRY/bnyTFUZUsdOdfnt2j/270ZSQLHu25NKgKet0+/+dxCdz+4qf25/2
+ RA3CwrgWb6v7jyIT0tII4RJrG5BSoI8XaZlsqhEGDnR38e7SQI1GrVAt8Kk3FB/PkU1DgW0hV8F
+ ihmCJF5zg9IgdlqKEYNfT9za3VaJruk5BP/TPxEmHdcKbQJR9V6B0GTlv7n3t42tG3yCxHQiMGg
+ g1ZRDXNAcuxYJbDWBY0/H4v5/ng==
+X-Google-Smtp-Source: AGHT+IFaPpE6nU5L/SCzgqVwso+Bo/7/OwpaiznS5yS9ulobNzzB4AEyDd19EQ/IfvHa5/Wocfsf5g==
+X-Received: by 2002:a05:6870:9d88:b0:301:2bc7:61e7 with SMTP id
+ 586e51a60fabf-30be2bf8b48mr3439977fac.26.1754519235088; 
+ Wed, 06 Aug 2025 15:27:15 -0700 (PDT)
 Received: from localhost ([136.49.61.16]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4356f21ff44sm971652b6e.12.2025.08.06.15.27.12
+ 46e09a7af769-7418bee2201sm3449108a34.18.2025.08.06.15.27.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 15:27:13 -0700 (PDT)
+ Wed, 06 Aug 2025 15:27:14 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>, Marek Vasut <marex@denx.de>,
  Tom Rini <trini@konsulko.com>
 Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH 02/10] board: samsung: e850-96: Set ethaddr
-Date: Wed,  6 Aug 2025 17:27:02 -0500
-Message-Id: <20250806222710.23773-3-semen.protsenko@linaro.org>
+Subject: [PATCH 04/10] board: samsung: e850-96: Add PMIC code
+Date: Wed,  6 Aug 2025 17:27:04 -0500
+Message-Id: <20250806222710.23773-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250806222710.23773-1-semen.protsenko@linaro.org>
 References: <20250806222710.23773-1-semen.protsenko@linaro.org>
@@ -101,82 +101,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the environment variable for Ethernet MAC address (ethaddr). Use the
-SoC ID to make sure it's unique. It'll be formatted in a way that
-follows the consecutive style of the serial number ("serial#" variable),
-i.e.:
+Add functions for configuring voltage regulators on S2MPU12 PMIC chip
+for E850-96 board. The chip is accessed by commanding APM core (via
+ACPM IPC protocol) to perform corresponding transfers over I3C bus.
 
-    OTP_CHIPID0   = 0xf51c8113
-    OTP_CHIPID1   = 0x236
-    get_chip_id() = 0x236f51c8113
-    serial#       = 00000236f51c8113
-    ethaddr       = 02:36:f5:1c:81:13
-
-where corresponding bytes of the MAC address are:
-
-    mac_addr[0]   = 0x02   // OTP_CHIPID1[15:8]
-    mac_addr[1]   = 0x36   // OTP_CHIPID1[7:0]
-    mac_addr[2]   = 0xf5   // OTP_CHIPID0[31:24]
-    mac_addr[3]   = 0x1c   // OTP_CHIPID0[23:16]
-    mac_addr[4]   = 0x81   // OTP_CHIPID0[15:8]
-    mac_addr[5]   = 0x13   // OTP_CHIPID0[7:0]
-
-because OTP_CHIPID1 has only 16 significant bits (with actual ID
-values), and all 32 bits of OTP_CHIPID0 are significant.
+The most important regulator being set up is LDO24 used for LAN9514 chip
+power. As LAN9514 implements USB hub and Ethernet controller
+functionality, it's crucial to enable and configure LDO24 to be able to
+use it further. While at it, configure the rest of regulators that might
+be needed later, both in the bootloader and in kernel.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- board/samsung/e850-96/e850-96.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ board/samsung/e850-96/Makefile |   2 +-
+ board/samsung/e850-96/pmic.c   | 144 +++++++++++++++++++++++++++++++++
+ board/samsung/e850-96/pmic.h   |  14 ++++
+ 3 files changed, 159 insertions(+), 1 deletion(-)
+ create mode 100644 board/samsung/e850-96/pmic.c
+ create mode 100644 board/samsung/e850-96/pmic.h
 
-diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
-index a6c264d12481..d489716bfdf2 100644
---- a/board/samsung/e850-96/e850-96.c
-+++ b/board/samsung/e850-96/e850-96.c
-@@ -8,6 +8,7 @@
- #include <env.h>
- #include <init.h>
- #include <mapmem.h>
-+#include <net.h>
- #include <asm/io.h>
- #include "fw.h"
+diff --git a/board/samsung/e850-96/Makefile b/board/samsung/e850-96/Makefile
+index 08eb8dca5bf7..76b8d47994e8 100644
+--- a/board/samsung/e850-96/Makefile
++++ b/board/samsung/e850-96/Makefile
+@@ -3,4 +3,4 @@
+ # Copyright (C) 2024, Linaro Limited
+ # Sam Protsenko <semen.protsenko@linaro.org>
  
-@@ -92,11 +93,35 @@ static void setup_serial(void)
- 	env_set("serial#", serial_str);
- }
- 
-+static void setup_ethaddr(void)
+-obj-y := e850-96.o fw.o acpm.o
++obj-y := e850-96.o fw.o acpm.o pmic.o
+diff --git a/board/samsung/e850-96/pmic.c b/board/samsung/e850-96/pmic.c
+new file mode 100644
+index 000000000000..037fd4844c54
+--- /dev/null
++++ b/board/samsung/e850-96/pmic.c
+@@ -0,0 +1,144 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2025 Linaro Ltd.
++ * Author: Sam Protsenko <semen.protsenko@linaro.org>
++ *
++ * This file contains functions for S2MPU12 PMIC regulators configuration.
++ *
++ * Example of voltage calculation for LDO24 and LDO32:
++ *   - V_min = 1800 mV
++ *   - V_step = 25 mV
++ *   - V_wanted = 3300 mV
++ *   - register value: (V_wanted - V_min) / V_step = 60 = 0x3c
++ *
++ * NOTE: 0x3c value might mean different voltage for other LDOs.
++ */
++
++#include <linux/errno.h>
++#include <linux/kernel.h>
++#include "pmic.h"
++
++/* PMIC definitions */
++#define S2MPU12_CHANNEL			0	/* I3C bus number of PMIC */
++#define S2MPU12_PM_ADDR			0x1	/* I3C slave addr of PM part */
++
++/* PMIC I3C registers */
++#define S2MPU12_PM_LDO1_CTRL		0x2b
++#define S2MPU12_PM_LDO_CTRL(n)		(S2MPU12_PM_LDO1_CTRL + (n) - 1)
++
++/* LDOx_CTRL values */
++#define S2MPU12_LDO_CTRL_OUT_MASK	(0x3 << 6)
++#define S2MPU12_LDO_CTRL_OUT_ALWAYS_ON	(0x3 << 6)
++
++struct pmic_ldo {
++	u8 num;	/* LDO number */
++	u8 en;	/* "enable" bits value in LDOx_CTRL register */
++	u8 out;	/* "output voltage" bits value in LDOx_CTRL register */
++};
++
++/* List of LDOs to enable only */
++static u8 pmic_ldos_en[] = {
++	2,	/* 1.8V/450mA:	multiple lines */
++	11,	/* 3.0V/150mA:	AVDD33_USB20 */
++	23,	/* 2.85V/800mA:	VDD_EMMC_2P85 */
++	27,	/* 3.0V/150mA:	MIPI_SWITCH_3V3 */
++	28,	/* 1.8V/150mA:	HDMI_CONV_1V8 */
++	30,	/* 1.8V/150mA:	NPU_VDD18 */
++};
++
++/* List of LDOs to enable and set output voltage */
++static struct pmic_ldo pmic_ldos_en_out[] = {
++	{
++		.num	= 24, /* 3.0V/800mA:	VDD_LAN (LAN9514) */
++		.en	= S2MPU12_LDO_CTRL_OUT_ALWAYS_ON,
++		.out	= 0x3c, /* means 3.3V for LDO24 */
++	}, {
++		.num	= 32, /* 3.3V/300mA:	CAM_VDD (RPi camera module) */
++		.en	= S2MPU12_LDO_CTRL_OUT_ALWAYS_ON,
++		.out	= 0x3c, /* means 3.3V for LDO32 */
++	},
++};
++
++/* Enable specified LDO */
++static int pmic_ldo_set_en(struct acpm *acpm, u8 ldo)
 +{
-+	u64 serial_num;
-+	u32 mac_hi, mac_lo;
-+	u8 mac_addr[6];
++	const u8 reg = S2MPU12_PM_LDO_CTRL(ldo);
++	u8 val;
++	int err;
 +
-+	if (env_get("ethaddr"))
-+		return;
++	err = acpm_i3c_read(acpm, S2MPU12_CHANNEL, S2MPU12_PM_ADDR, reg, &val);
++	if (err)
++		return err;
 +
-+	serial_num = get_chip_id();
-+	mac_lo = (u32)serial_num;		/* OTP_CHIPID0 */
-+	mac_hi = (u32)(serial_num >> 32UL);	/* OTP_CHIPID1 */
-+	mac_addr[0] = (mac_hi >> 8) & 0xff;
-+	mac_addr[1] = mac_hi & 0xff;
-+	mac_addr[2] = (mac_lo >> 24) & 0xff;
-+	mac_addr[3] = (mac_lo >> 16) & 0xff;
-+	mac_addr[4] = (mac_lo >> 8) & 0xff;
-+	mac_addr[5] = mac_lo & 0xff;
-+	mac_addr[0] &= ~0x1; /* make sure it's not a multicast address */
-+	if (is_valid_ethaddr(mac_addr))
-+		eth_env_set_enetaddr("ethaddr", mac_addr);
++	val &= ~S2MPU12_LDO_CTRL_OUT_MASK;
++	val |= S2MPU12_LDO_CTRL_OUT_ALWAYS_ON;
++
++	return acpm_i3c_write(acpm, S2MPU12_CHANNEL, S2MPU12_PM_ADDR, reg, val);
 +}
 +
- int board_late_init(void)
- {
- 	int err;
- 
- 	setup_serial();
-+	setup_ethaddr();
- 
- 	/*
- 	 * Do this in board_late_init() to make sure MMC is not probed before
++/* Enable specified LDO and set its voltage to 0xc0 value */
++static int pmic_ldo_set_en_out(struct acpm *acpm, struct pmic_ldo *ldo)
++{
++	const u8 reg = S2MPU12_PM_LDO_CTRL(ldo->num);
++	const u8 val = ldo->en | ldo->out;
++
++	return acpm_i3c_write(acpm, S2MPU12_CHANNEL, S2MPU12_PM_ADDR, reg, val);
++}
++
++#ifdef DEBUG
++static void pmic_trace_ldo(struct acpm *acpm, u8 ldo)
++{
++	const u8 reg = S2MPU12_PM_LDO_CTRL(ldo);
++	u8 val;
++	int err;
++
++	err = acpm_i3c_read(acpm, S2MPU12_CHANNEL, S2MPU12_PM_ADDR, reg, &val);
++	if (err)
++		printf("  S2MPU12_PM_LDO%u_CTRL: Read error!\n", ldo);
++	else
++		printf("  S2MPU12_PM_LDO%u_CTRL: 0x%x\n", ldo, val);
++}
++
++static void pmic_trace_ldos(struct acpm *acpm)
++{
++	size_t i;
++
++	printf("Tracing LDOs...\n");
++	for (i = 0; i < ARRAY_SIZE(pmic_ldos_en); ++i)
++		pmic_trace_ldo(acpm, pmic_ldos_en[i]);
++	for (i = 0; i < ARRAY_SIZE(pmic_ldos_en_out); ++i)
++		pmic_trace_ldo(acpm, pmic_ldos_en_out[i].num);
++}
++#endif
++
++/**
++ * pmic_init() - Enable power regulators in S2MPU12 PMIC.
++ * @acpm: Data for I3C communication with PMIC over ACPM protocol
++ *
++ * Enable LDOs needed for devices used in the bootloader and kernel.
++ *
++ * Return: 0 on success or non-zero code on error.
++ */
++int pmic_init(struct acpm *acpm)
++{
++	size_t i;
++	int err;
++
++	for (i = 0; i < ARRAY_SIZE(pmic_ldos_en); ++i) {
++		err = pmic_ldo_set_en(acpm, pmic_ldos_en[i]);
++		if (err)
++			return -EIO;
++	}
++
++	for (i = 0; i < ARRAY_SIZE(pmic_ldos_en_out); ++i) {
++		err = pmic_ldo_set_en_out(acpm, &pmic_ldos_en_out[i]);
++		if (err)
++			return -EIO;
++	}
++
++#ifdef DEBUG
++	pmic_trace_ldos(acpm);
++#endif
++
++	return 0;
++}
+diff --git a/board/samsung/e850-96/pmic.h b/board/samsung/e850-96/pmic.h
+new file mode 100644
+index 000000000000..46624c2ebd46
+--- /dev/null
++++ b/board/samsung/e850-96/pmic.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2025 Linaro Ltd.
++ * Sam Protsenko <semen.protsenko@linaro.org>
++ */
++
++#ifndef __E850_96_PMIC_H
++#define __E850_96_PMIC_H
++
++#include "acpm.h"
++
++int pmic_init(struct acpm *acpm);
++
++#endif /* __E850_96_PMIC_H */
 -- 
 2.39.5
 
