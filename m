@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29477C87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 00:58:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED310C87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 00:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F5118144A;
-	Wed,  6 Aug 2025 02:58:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C5218144A;
+	Wed,  6 Aug 2025 02:59:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="s3POp37a";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="I3zEWLP7";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qPgX791C";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gQHsUhFZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D32708144A; Wed,  6 Aug 2025 02:58:22 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id B618483957; Wed,  6 Aug 2025 02:59:15 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B2E83933
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 02:57:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE52283971
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 02:58:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,48 +31,48 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bxX2c5ypqz9sQb;
- Wed,  6 Aug 2025 02:57:44 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bxX3w2WLwz9t7d;
+ Wed,  6 Aug 2025 02:58:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754441864;
+ s=mail20150812; t=1754441932;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=wURCgJ2zI8dbSXsv+b6bDPEVi57kDonnbhOFLrmfi3E=;
- b=s3POp37auzB3xk1yqiOins6aFb15pBewsKq9XsPqqyft+5JmBH1Mzx3MtFE5CCcFtJc/r4
- lgUwk/m5MnmVkLCdXH/dMDtN49oDc0QZf8vUqwSBbAtaZijFUOJwlDjEX6z1hjR3Swsu23
- h4DYauSTeQlsk3cS1go7/Zz/VONMgxozq7sm9IQlH/wEVZsLFY5Mcv+8gPxU3YYq1INB4/
- 941hB0bP69p5AAxmn9NnBE3qVA7xxFcMsNYN6vEQMeVxdUwlGHA9QLjVehwHqd4/4GGWaZ
- ubs+LzI6MFB3+Wkcv02/eZjWjIb2nbOn4feprl9yZLhfQN25sEsx1pH7woTjGQ==
+ bh=cM38luGqsep5R3P84KfyfTGcv6ZoD957lwO6e2J+NDQ=;
+ b=qPgX791CcdAeqXGppKLlkxvQPxms/V5klquJ61fSdLRGfE83mOzLcyu+2kPxEc89QD7ywF
+ LisfQ0bbaHPSivf371Ydef3RtKEwZJOHc2VY7flQonux+G4RNGGKM+A7XO0wNMgEmH8ly/
+ Efg6GmbDEzAs9NA/HsI/dCOlAKd8P3T/f5Bq4198ua+7QRMxWcZurT6JDbBN/USWZVkVBG
+ E2nbA2n66Nd5x3pk5cR8lqQkJwq0awOUrnJEqVGODzsk0Pfzd7jX5G29Q0rwXjKNyQG6J4
+ pPjacUNUKIuXFkKCt6CUtffjSp+t0BwJ3r1r+m8Q0gpN/IOiQv6OUJtTHIKlqA==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=I3zEWLP7;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=gQHsUhFZ;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
  designates 2001:67c:2050:b231:465::202 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754441863;
+ s=mail20150812; t=1754441930;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=wURCgJ2zI8dbSXsv+b6bDPEVi57kDonnbhOFLrmfi3E=;
- b=I3zEWLP7HRWCQvsFeVy9nEXTWV6x2k+DVfKHGxB8lV5LKOdXJhpVAKtYGEVvaJgeQcbbVu
- 73GpQ7/Ya7EnlJjNWWPjFY1XJoxW4FRilwmKEg+0TObxaNk+oQMkcOKgUNCLdHvakzZUz0
- 973c81OoEZkCf97AeeREUcDjj8zdptT4P9GbIUULx6N2WNnsarOuacldNmBNzttnMBJXVL
- eFmYEPaQNPIRKIjL3InJhLQyig2G1XxR1uSsTVHhuVLlJYn0ZjYgAQ1AhloSetLmPABg5v
- 9Oz7aMqECqD5pxsvJ4wj6n9httLt23DXn3nupRcgcBfm1XgPDg9M5ANTw1XyAg==
+ bh=cM38luGqsep5R3P84KfyfTGcv6ZoD957lwO6e2J+NDQ=;
+ b=gQHsUhFZYC6WJ//1IjwNLYSrpwZVGPqCpqXds0pqwGIdmw24zncsd9CDJ3X9drLmPmRmfO
+ WMpqSp9mKpJme89ZgAEUEhmCvt6TQkJvGIaXxxDaQ1d0ezPUjKATGGIt0sybQoM7G/jZR5
+ e79CvVeBuc30I0aHv8caSDUBX1cw2EeMkbt0FlqK0sc8rAveZp8wr63HYRhmxjCxx4j7x7
+ a87Xe5zdqntEwqerGcIPjsh2lPyonVMqCr0FM2cf/CW+fbDaYpRvdjd3sR+47IPZUqAu/T
+ gRmaycVvqpjSbAgreBYTUEkgRMOgIlwgNAH2w3r7x9cVUUg/ECR7ubpHpsrH8w==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: r8a779g3: Disable dual-rank DRAM on Retronix
- R-Car V4H ES2 Sparrow Hawk
-Date: Wed,  6 Aug 2025 02:57:14 +0200
-Message-ID: <20250806005729.284162-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] arm64: renesas: r8a779g3: Enable xHCI USB on Retronix R-Car
+ V4H Sparrow Hawk board
+Date: Wed,  6 Aug 2025 02:58:30 +0200
+Message-ID: <20250806005838.284304-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b6aed124f2bb5c83094
-X-MBO-RS-META: hbp8m4rsfb5ifm34w1myczw7ik7a46ok
-X-Rspamd-Queue-Id: 4bxX2c5ypqz9sQb
+X-MBO-RS-ID: 9530ce1f138ecd077cb
+X-MBO-RS-META: n73a77z7x8jadffut9dyyh4ensiphune
+X-Rspamd-Queue-Id: 4bxX3w2WLwz9t7d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,42 +89,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The R-Car V4H SoC before rev.3.0 can not support dual-rank LPDDR5 DRAM.
-This affects 16 GiB dual-rank DRAM configuration of Retronix R-Car V4H
-Sparrow Hawk board. Fall back to 8 GiB single-rank DRAM configuration
-on such systems instead.
+Enable support for PCIe based xHCI USB 3.0 driver and USB mass
+storage support on Retronix R-Car V4H Sparrow Hawk board .
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
 ---
- board/renesas/sparrowhawk/sparrowhawk.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ configs/r8a779g3_sparrowhawk_defconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/board/renesas/sparrowhawk/sparrowhawk.c b/board/renesas/sparrowhawk/sparrowhawk.c
-index 871dad8172a..1fd7a63d2fa 100644
---- a/board/renesas/sparrowhawk/sparrowhawk.c
-+++ b/board/renesas/sparrowhawk/sparrowhawk.c
-@@ -116,7 +116,7 @@ dbsc5_get_board_data(struct udevice *dev, const u32 modemr0)
- 	 * Use MD[19] setting to discern 8 GiB and 16 GiB DRAM Sparrow Hawk
- 	 * board variants from each other automatically.
- 	 */
--	if (modemr0 & BIT(19))
-+	if ((renesas_get_cpu_rev_integer() >= 3) && (modemr0 & BIT(19)))
- 		return &renesas_v4h_sparrowhawk_16g_5500_dbsc5_board_config;
- 	else
- 		return &renesas_v4h_sparrowhawk_8g_6400_dbsc5_board_config;
-@@ -244,7 +244,7 @@ void renesas_dram_init_banksize(void)
- 	int bank;
+diff --git a/configs/r8a779g3_sparrowhawk_defconfig b/configs/r8a779g3_sparrowhawk_defconfig
+index bb8d110dc0d..9cee4d287ef 100644
+--- a/configs/r8a779g3_sparrowhawk_defconfig
++++ b/configs/r8a779g3_sparrowhawk_defconfig
+@@ -25,6 +25,7 @@ CONFIG_GPIO_HOG=y
+ CONFIG_REMOTEPROC_RENESAS_APMU=y
+ CONFIG_BITBANGMII=y
+ CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NVME_PCI=y
+ CONFIG_PCI=y
+@@ -34,6 +35,14 @@ CONFIG_PHY_MICREL=y
+ CONFIG_PHY_MICREL_KSZ90X1=y
+ CONFIG_RENESAS_RAVB=y
+ CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_USB=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_STORAGE=y
++CONFIG_USB_XHCI_GENERIC=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_PCI=y
++# CONFIG_USB_XHCI_RCAR is not set
  
- 	/* 8 GiB device, do nothing. */
--	if (!(modemr0 & BIT(19)))
-+	if (!((renesas_get_cpu_rev_integer() >= 3) && (modemr0 & BIT(19))))
- 		return;
- 
- 	/* 16 GiB device, adjust memory map. */
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_HAVE_INIT_STACK=y
 -- 
 2.47.2
 
