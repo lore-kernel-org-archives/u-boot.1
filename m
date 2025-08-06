@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA9A4C87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB1AC87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D244883A5E;
-	Wed,  6 Aug 2025 16:57:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8458B83A5A;
+	Wed,  6 Aug 2025 16:59:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FNw+DJiI";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="VYaZHzW+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="I+dOFZKT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8524D83AB0; Wed,  6 Aug 2025 16:57:04 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AE61E83A9A; Wed,  6 Aug 2025 16:59:20 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CE3D842F7
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58F6A83721
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-61b406bfa66so1093582eaf.0
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754492214; x=1755097014; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sCyJfkGb31HFufMgWyy/oEdUsGGaGcw1y/kenmPvo1o=;
- b=FNw+DJiIgkiBVht4LorOX2n7JkKiWpwBw4tIf4NKeECwZLfmbp2t9XVNimIPeub5ty
- wtj0/ujEzgN/BlyTC/eTE/Vw32EHQAbZGNPXHkRyI/AFIcJVESOW34jnxtIcB0nKp1iM
- bQQObv+k2zt4BOX/pqy42U5f5dgpMesI2uu1k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754492214; x=1755097014;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sCyJfkGb31HFufMgWyy/oEdUsGGaGcw1y/kenmPvo1o=;
- b=EOwYyEmWll4oSQh6A93a7EqxThyao0v1nwT+RryuqmsBXynkRyNOhdbU5+jH2rqfRr
- /PuGgjNxfxXHxe/3RZNd4eMTMHGitIaaEWiIYeYWtxu/1DYLgX63P1BMMlNdEaoav2NI
- I0FI/XQOG2FL+KxPcLXHp8DFPsFDrp9blgDdm5sqpVV6822i3Mj3k/NAVNwjF2lidIIc
- jm2+Y/5UB0Z+YS45aOi6a6X2iKPtrp/coM1IpXAm8sGJMM79nLey8OSZ49MA+x9O3u/y
- YKaqseYRwuJ5ZPs9qDvYMlH4RzQ/ZmtVnpeTqXdQI5qUTihmgZi5jReR09XqGsiAWavf
- Sn9Q==
-X-Gm-Message-State: AOJu0YwujagZBAIIwdyF81l8G8wyuoHdTxeAEsBhlXvBya2MSxaUDZ7L
- M+sGSqpodPdZKxXcIp0SsmJYuP0iii8hkX/oKns4milEnCQ2h6I//phtLN9SvP9R3dR33xEWgop
- 8/3v68Ks=
-X-Gm-Gg: ASbGnculmVV3KO+mVF5qajZwX3/N7TeiieS5dnm8JU729tZlB2iRisyAtoYYFjdrFeo
- 40ks7e0MNJz1OpCawOGfTc7jJCNBNjB4ePFQ1eY3bEpSMEslBIRJ+ln0BfyFQdBZRT6e+5p3vI8
- j/jqgv33U4jEW5moVBfIjgFcklOCLXVwrv8fNcvoBENvcqzN97c+neolVSECHtpOHp9g2w6S2va
- pCB8HLRdgjb8Y8Zhme6aJRMpjDSuT44Gq79BceaIddMcic+HIymbYZILpfMuOrZ7aHGeR5zhGNE
- xbAm236yIHMNzJd6Cj20E4pjndYOfCfVxDIYd8S/xQdzxSkzcnLMYpdwQIrt0LxIk60fQI+8xZV
- XOc6q1Q9b0nN4Gn6tdW+S0IAtYrA6ZnKlOK7wWKIu4rSPFmBui1QZ0iA/o0g=
-X-Google-Smtp-Source: AGHT+IGoop8HsnkkeD6FpAPsCoUq1im6pDeKASCHqiwbbxxHp9GDXjJwjayo27+yj0CMKYIUZRhYEw==
-X-Received: by 2002:a05:6820:1785:b0:613:cafd:610 with SMTP id
- 006d021491bc7-61b5f38b212mr2691239eaf.7.1754492214333; 
- Wed, 06 Aug 2025 07:56:54 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6199c99b222sm1644790eaf.28.2025.08.06.07.56.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 07:56:54 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bxtjf1H1Kz9tKs;
+ Wed,  6 Aug 2025 16:59:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754492358;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=imj1ou1iirbylkObgzoj4x67yvrz+sEe408JIooNCl4=;
+ b=VYaZHzW+HMUiqQ6ryb81q+Znn2i3tKXJY//thV3zyIxtGEJFp140aqHN3a9EwoOz1WsodG
+ i7G6jMQ6aYlRX9ZIDtmJ0HJhbgQ2D9R5u7dpusRy/iHa2AHA+I91519nKA0yURCxhBuc7U
+ ob6f3dMK5KFauENdVBOnCuLQrEKxkJOmvHdXb5r4WxLeds6j/WBUDoclgP6VfDqbvrlCEw
+ d8dEYrS/KBT9//k1v5hZGuTYHb/55Rj3lPyYj0bPcVTT+XD8TMRMIRC4xQaXhLUwoAA3Mj
+ nL9sDd0DHrVrZSHCJANZPO3SbtcKovQP/mNR6nMqJwHagBaWaJ+ZFG9Qa2qbfQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=I+dOFZKT;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754492356;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=imj1ou1iirbylkObgzoj4x67yvrz+sEe408JIooNCl4=;
+ b=I+dOFZKTxQMeKgjqF2xPH9CZPnPoU3mXzf0Ea8ra+ftfQp2LljCMgdi6YZv6AXuMSsZsSM
+ pHrmkRZer1Ww5f9jfeT/99mqlQ1n3mVnFHZDRXLeDj/8TlUAFCXMvu+en6oHI/4aZcTfnt
+ NAaPdnBU2INAGZghSM6f1rrsTxsqok7JaWqf3BWn6fQTcV6QXNg5mCbytd4M8453kQdebk
+ 2zPgJJ3Wu4F8qgWWVcSRQmUpDjVgk5Jm66sXI5nXpA4TnbG8huOAlt6mWnULR98ItUzYJ9
+ c+fONohn1XII0zfIJOu9jilcoaAbBfLrQNN8IkHlI9vCosq1ipLKcN/ErcwNqQ==
 To: u-boot@lists.denx.de
-Cc: Andre Przywara <andre.przywara@arm.com>
-Subject: [PATCH 5/8] video: anx9804: Only build when needed
-Date: Wed,  6 Aug 2025 08:56:46 -0600
-Message-ID: <20250806145649.1664724-5-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250806145649.1664724-1-trini@konsulko.com>
-References: <20250806145649.1664724-1-trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 1/2] arm64: dts: renesas: r8a779g3: Describe generic SPI
+ NOR support on Retronix R-Car V4H Sparrow Hawk board
+Date: Wed,  6 Aug 2025 16:58:53 +0200
+Message-ID: <20250806145903.8996-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: nso5z4m3atuj3mrsbwdrsphqujjrqng9
+X-MBO-RS-ID: 843b3ad99a29e4f8f10
+X-Rspamd-Queue-Id: 4bxtjf1H1Kz9tKs
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,32 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The logic for how to handle this video driver is slightly odd. Only in
-the case of when CONFIG_VIDEO_LCD_PANEL_EDP_4_LANE_1620M_VIA_ANX9804 is
-enabled do we need to have this file built, and otherwise we have a
-dummy function in use. Correct the logic by only building this file when
-needed.
+Retronix R-Car V4H Sparrow Hawk EVTA1 is populated with Spansion S25FS512S,
+EVTB1 is populated with Winbond W77Q51NW. Describe the SPI NOR using generic
+"jedec,spi-nor" compatible, because both flashes can be auto-detected based
+on their built-in IDs.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 ---
- drivers/video/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+V2: Update commit message, s@spi-flash@jedec,spi-nor@
+V3: Use capital F in the comment, s@fS@FS@
+---
+ dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index 03a52d1b30e6..5f9484ee8899 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -54,7 +54,7 @@ obj-$(CONFIG_VIDEO_DW_MIPI_DSI) += dw_mipi_dsi.o
- obj-$(CONFIG_VIDEO_EFI) += efi.o
- obj-y += imx/
- obj-$(CONFIG_VIDEO_IVYBRIDGE_IGD) += ivybridge_igd.o
--obj-$(CONFIG_VIDEO_LCD_ANX9804) += anx9804.o
-+obj-$(CONFIG_VIDEO_LCD_PANEL_EDP_4_LANE_1620M_VIA_ANX9804) += anx9804.o
- obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
- obj-$(CONFIG_VIDEO_LCD_HIMAX_HX8394) += himax-hx8394.o
- obj-$(CONFIG_VIDEO_LCD_HITACHI_TX10D07VM0BAA) += hitachi-tx10d07vm0baa.o
+diff --git a/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
+index 6955eafd8d6..a9ecef67d5d 100644
+--- a/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
++++ b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
+@@ -729,7 +729,11 @@
+ 	status = "okay";
+ 
+ 	flash@0 {
+-		compatible = "spansion,s25fs512s", "jedec,spi-nor";
++		/*
++		 * EVTA1 is populated with Spansion S25FS512S
++		 * EVTB1 is populated with Winbond W77Q51NW
++		 */
++		compatible = "jedec,spi-nor";
+ 		reg = <0>;
+ 		spi-max-frequency = <40000000>;
+ 		spi-rx-bus-width = <4>;
 -- 
-2.43.0
+2.47.2
 
