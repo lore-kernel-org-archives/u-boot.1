@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646D0C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:53:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBB3C87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E381B8383F;
-	Wed,  6 Aug 2025 16:53:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE0638383F;
+	Wed,  6 Aug 2025 16:55:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LFmHifsW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lciqtsq2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9904783919; Wed,  6 Aug 2025 16:53:22 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id D9B9A83A56; Wed,  6 Aug 2025 16:55:15 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05EB283721
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:53:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B67283721
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:55:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-741b1fe0dc7so5832a34.1
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:53:19 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-619b164c0b9so4756eaf.0
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:55:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754491998; x=1755096798; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NhMT6AuU/c9hKWcH/tvyj+xz+dXizFazf9URsR5LuBM=;
- b=LFmHifsWJz9MGZ+arcTLQesmS0BjEciU/PoJXkYMOsaAU2jQZbZ/vUyncc+wFzfnQB
- rMX2O0GdXOsDUEZ6UH0o5iNvo6oK/iYcxvLX68toxAm5goo4NB7TYtlDVcGToTvNGC4p
- Vf5ucLZgRgvbGAEqS4d+Lbko4Tzsihfggf88A=
+ d=konsulko.com; s=google; t=1754492106; x=1755096906; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mweGu9kbTsUu/HWNx2QXm8mUaLQQuObJ6y7GY39kCDA=;
+ b=lciqtsq2Y+ulvSCY7GhHcKAK+2kT2NXWnOlHjsL/LbF9gC5ZZm3JdqMqMAVbeWizHh
+ 1aaPEF1ITiiNiC4eHBhA0suSl6yv9ggcWnQ3wp+J9YS54pNHuLO9NKwUTu/CdvGlYKkn
+ 77qs2kzb80QU2dBPFnnr/oxs/iqq7mzXL/Rfo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754491998; x=1755096798;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NhMT6AuU/c9hKWcH/tvyj+xz+dXizFazf9URsR5LuBM=;
- b=FXQYhs1OV/VrLcOQHooO2GMXoYSTk2caJwJcbuxXVEMYRK8N5sttEpr8KK/rualhlQ
- NuNGgoppQFC5bIJErsUsUHO+NLHPmWyOskYBvDLJi/NOWqjHoxjj/hUQQz2XmgjrNiDR
- wXnQ/xhmsUXkFpSYzoS1PldcHrKdjgcHIjkk/JlTMuxOvXVPRY9TyfJs/iqqDG+8uIaG
- fqigaOK1QEy04SRolJQMcd7fD+37Det5A2YldF6L0HPCkjTqmmSY/C4Y8tbXG9JSzo/+
- heU19QRN8JTbo3JfoWaf/68KC15VERkTM8onF4AYgANcNOuKbIXm+AvYLltVgiILhW33
- BCVA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVl3nxEfjZEVJYF50AunevSJuHAQorKWH2lQqL/Yrt0xuRh1jhth5gYDa7ehHWpwVKvMm1wWNs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJgWl/wiLibP1+R0kYMgOB6GBHLwUEnYPP4VLIRdDwbEtjOvrg
- bDZsjmYM4DwK7ADos1ErVo6YY0DNisLou3ECZkav/xFiVGDJd8kWQ+Ku3STd1NAmT30=
-X-Gm-Gg: ASbGncs0eHvoE3vD7hGkXHB9caEu3wOCTT4NxiQsFJQCPaMA54dPREQLGSTOF1aHyTg
- JKJQ3QjeiG9lPJ4dL4YppR2QBLBdfwdYyJ9tGMhEiemw2K+CQNj2CPD5CeFAsOUYI9Rc7mO82E4
- R8cgULdIU+pYbARsznKTxTsvrg+NFdwme1htuasMMEShyL1dybUuQuRJwgMeGiusr/hH2Jh4qN5
- jtr1XZUKyO9W+9KyZuz8Lt93SqecQNmnBX4l713vYCp30Ju4P6HonZLARzx5rpe8jp9dvSl9dVJ
- yvpw65XDRx8m0YX+ARsDtmcmN0rMp1IQN4HWsfs61cPmmiBjAR0sFFRZfCGdZv9gu2yoA5ZFVve
- AnRym47gaT6F3dzUmdyzoH1ClATr2tx5EwOfWGufuLcDwutg0hacYmV1Ly0Srgeo/r/U=
-X-Google-Smtp-Source: AGHT+IHnk442mnde30eS3XKhRDaD9qQF1LqmcxixMbpNIfoJ83KXm+NN2Wk8t5qte95+kpTLR2aAnw==
-X-Received: by 2002:a05:6830:210b:b0:73b:2617:87f1 with SMTP id
- 46e09a7af769-7430b46317emr2157527a34.28.1754491998028; 
- Wed, 06 Aug 2025 07:53:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1754492106; x=1755096906;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mweGu9kbTsUu/HWNx2QXm8mUaLQQuObJ6y7GY39kCDA=;
+ b=FukAp9iy1DJ5q5hRjik/ChhuIN1onfpWAYXNZ7wOKEYnvxOBjN5xAr5bi7d/bvNLLn
+ mrrW7Bx0dMDVM8L/iwRZVnlUABMSlEAbGROSVnTKveNiUzbXK3K9ZTrANRqYSDaDxYOx
+ j9tp7JloAZBp5As87hT1jMIgj2M2NVdv0dLHxtmbR/Ldd3xwON23PXrvWQeZFn0Rxivq
+ N8NLYeaCqIT7JJ0+3O8n2qei6GEVLmBcagTQFl+i7C/k7a5c0BI4VZ1Dy6g6mOUSK9+w
+ qnTkytYe4v9T5i1V5EcCsgCLqYoVAzz9J1O/1Blpql7k2SYJFRwXX1BlAEPZOe//SCtI
+ 41nA==
+X-Gm-Message-State: AOJu0YwZrq15sBV1exdZCEjfHO9N1T3zaaPBe94nqaNEgvhM7tomFaNi
+ McjU+Nay5BPUAV0lxUREpKIu+zk6u+TL8YFdMJny/fpBG/2bWkUhPQKyzfWXhvBMXz+A0YJopYT
+ /0lYGIPc=
+X-Gm-Gg: ASbGncvueWVNbgwliNXAKXY1cR3DmlDnRXoQsW390TuYRepDyL9/X/VY48VyHFc6Nc0
+ +0/MWcKOj2FFrduXWJGGl7559YxZGScchqBixzBlkfhdgztBJI2ShcktzAL/EeEOxLe2w5Dauiu
+ tmMfgiLPZP24jfmSU0qo/PMKBtpCHi2nR3wNmXQEZblWbDtT2oeSPOUX9QVr7x6hkx/+7MdBBfS
+ qtIqOPgtzBScYEkJkfVbmybzAdEl7MIXQSAaUS8Fx+VPdQ2ZtPQKiE7IPQgZYTje5ni/Pl9jIGn
+ Lu9i7A0shHTZTgDHcTogcl5TD1Ad8KMOheLhYtCISguiXjBD2hye7Gx6xCWNypPfqEFcXqlJwBQ
+ e0NiphBlDoMZSdBWNr3pQRaIq0I8yqaYVfkZxltqqaWmozzJO8SssX8q+vfw=
+X-Google-Smtp-Source: AGHT+IERvsd3cywOXZGMkICq/n7Moz5Zz45l88OFlhbgtgs/8MwfeilLaNYBBtmzKu0tyw9v5+Su+A==
+X-Received: by 2002:a05:6820:1991:b0:619:2ee:6378 with SMTP id
+ 006d021491bc7-61b5f7e1c6dmr2071727eaf.3.1754492105675; 
+ Wed, 06 Aug 2025 07:55:05 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-742fd50d6cdsm846032a34.53.2025.08.06.07.53.17
+ 006d021491bc7-61970528732sm2491311eaf.13.2025.08.06.07.55.04
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 07:53:17 -0700 (PDT)
-Date: Wed, 6 Aug 2025 08:53:15 -0600
+ Wed, 06 Aug 2025 07:55:04 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Smatch report for drivers/net/phy/marvell10g.c
-Message-ID: <20250806145315.GO124814@bill-the-cat>
-References: <623c39a5-2438-42d5-aafe-bb80dfd12b82@linaro.org>
+To: u-boot@lists.denx.de
+Subject: [PATCH 1/2] timer: fttmr010_timer: Remove unused driver
+Date: Wed,  6 Aug 2025 08:55:02 -0600
+Message-ID: <20250806145503.1664386-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+LqF2wfWrs1ZmZl8"
-Content-Disposition: inline
-In-Reply-To: <623c39a5-2438-42d5-aafe-bb80dfd12b82@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,47 +91,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This driver is unused. Remove it.
 
---+LqF2wfWrs1ZmZl8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ drivers/timer/Kconfig          |  7 ---
+ drivers/timer/Makefile         |  1 -
+ drivers/timer/fttmr010_timer.c | 91 ----------------------------------
+ include/faraday/fttmr010.h     | 61 -----------------------
+ 4 files changed, 160 deletions(-)
+ delete mode 100644 drivers/timer/fttmr010_timer.c
+ delete mode 100644 include/faraday/fttmr010.h
 
-On Tue, Aug 05, 2025 at 05:30:49PM +0100, Andrew Goodbody wrote:
+diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
+index cb6fc0e7fda8..d3231441b13e 100644
+--- a/drivers/timer/Kconfig
++++ b/drivers/timer/Kconfig
+@@ -166,13 +166,6 @@ config DESIGNWARE_APB_TIMER
+ 	  Enables support for the Designware APB Timer driver. This timer is
+ 	  present on Altera SoCFPGA SoCs.
+ 
+-config FTTMR010_TIMER
+-	bool "Faraday Technology timer support"
+-	depends on TIMER
+-	help
+-	  Select this to enable support for the timer found on
+-	  devices using Faraday Technology's IP.
+-
+ config GXP_TIMER
+ 	bool "HPE GXP Timer"
+ 	depends on TIMER
+diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
+index 21db0d317fed..a72e411fb2ff 100644
+--- a/drivers/timer/Makefile
++++ b/drivers/timer/Makefile
+@@ -15,7 +15,6 @@ obj-$(CONFIG_$(PHASE_)ATMEL_PIT_TIMER) += atmel_pit_timer.o
+ obj-$(CONFIG_$(PHASE_)ATMEL_TCB_TIMER) += atmel_tcb_timer.o
+ obj-$(CONFIG_CADENCE_TTC_TIMER)	+= cadence-ttc.o
+ obj-$(CONFIG_DESIGNWARE_APB_TIMER)	+= dw-apb-timer.o
+-obj-$(CONFIG_FTTMR010_TIMER)	+= fttmr010_timer.o
+ obj-$(CONFIG_GXP_TIMER)		+= gxp-timer.o
+ obj-$(CONFIG_MPC83XX_TIMER) += mpc83xx_timer.o
+ obj-$(CONFIG_NOMADIK_MTU_TIMER)	+= nomadik-mtu-timer.o
+diff --git a/drivers/timer/fttmr010_timer.c b/drivers/timer/fttmr010_timer.c
+deleted file mode 100644
+index c41bbfc1d576..000000000000
+--- a/drivers/timer/fttmr010_timer.c
++++ /dev/null
+@@ -1,91 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2009 Faraday Technology
+- * Po-Yu Chuang <ratbert@faraday-tech.com>
+- *
+- * 23/08/2022 Port to DM
+- */
+-#include <dm.h>
+-#include <log.h>
+-#include <timer.h>
+-#include <asm/io.h>
+-#include <dm/ofnode.h>
+-#include <faraday/fttmr010.h>
+-#include <asm/global_data.h>
+-
+-#define TIMER_LOAD_VAL	0xffffffff
+-
+-struct fttmr010_timer_priv {
+-	struct fttmr010 __iomem *regs;
+-};
+-
+-static u64 fttmr010_timer_get_count(struct udevice *dev)
+-{
+-	struct fttmr010_timer_priv *priv = dev_get_priv(dev);
+-	struct fttmr010 *tmr = priv->regs;
+-	u32 now = TIMER_LOAD_VAL - readl(&tmr->timer3_counter);
+-
+-	/* increment tbu if tbl has rolled over */
+-	if (now < gd->arch.tbl)
+-		gd->arch.tbu++;
+-	gd->arch.tbl = now;
+-
+-	return ((u64)gd->arch.tbu << 32) | gd->arch.tbl;
+-}
+-
+-static int fttmr010_timer_probe(struct udevice *dev)
+-{
+-	struct fttmr010_timer_priv *priv = dev_get_priv(dev);
+-	struct fttmr010 *tmr;
+-	unsigned int cr;
+-
+-	priv->regs = dev_read_addr_ptr(dev);
+-	if (!priv->regs)
+-		return -EINVAL;
+-	tmr = priv->regs;
+-
+-	debug("Faraday FTTMR010 timer revision 0x%08X\n", readl(&tmr->revision));
+-
+-	/* disable timers */
+-	writel(0, &tmr->cr);
+-
+-	/* setup timer */
+-	writel(TIMER_LOAD_VAL, &tmr->timer3_load);
+-	writel(TIMER_LOAD_VAL, &tmr->timer3_counter);
+-	writel(0, &tmr->timer3_match1);
+-	writel(0, &tmr->timer3_match2);
+-
+-	/* we don't want timer to issue interrupts */
+-	writel(FTTMR010_TM3_MATCH1 |
+-	       FTTMR010_TM3_MATCH2 |
+-	       FTTMR010_TM3_OVERFLOW,
+-	       &tmr->interrupt_mask);
+-
+-	cr = readl(&tmr->cr);
+-	cr |= FTTMR010_TM3_CLOCK;	/* use external clock */
+-	cr |= FTTMR010_TM3_ENABLE;
+-	writel(cr, &tmr->cr);
+-
+-	gd->arch.tbl = 0;
+-	gd->arch.tbu = 0;
+-
+-	return 0;
+-}
+-
+-static const struct timer_ops fttmr010_timer_ops = {
+-	.get_count = fttmr010_timer_get_count,
+-};
+-
+-static const struct udevice_id fttmr010_timer_ids[] = {
+-	{ .compatible = "faraday,fttmr010-timer" },
+-	{}
+-};
+-
+-U_BOOT_DRIVER(fttmr010_timer) = {
+-	.name = "fttmr010_timer",
+-	.id = UCLASS_TIMER,
+-	.of_match = fttmr010_timer_ids,
+-	.priv_auto = sizeof(struct fttmr010_timer_priv),
+-	.probe = fttmr010_timer_probe,
+-	.ops = &fttmr010_timer_ops,
+-};
+diff --git a/include/faraday/fttmr010.h b/include/faraday/fttmr010.h
+deleted file mode 100644
+index 5b1bef38c77d..000000000000
+--- a/include/faraday/fttmr010.h
++++ /dev/null
+@@ -1,61 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2009 Faraday Technology
+- * Po-Yu Chuang <ratbert@faraday-tech.com>
+- */
+-
+-/*
+- * Timer
+- */
+-#ifndef __FTTMR010_H
+-#define __FTTMR010_H
+-
+-struct fttmr010 {
+-	unsigned int	timer1_counter;		/* 0x00 */
+-	unsigned int	timer1_load;		/* 0x04 */
+-	unsigned int	timer1_match1;		/* 0x08 */
+-	unsigned int	timer1_match2;		/* 0x0c */
+-	unsigned int	timer2_counter;		/* 0x10 */
+-	unsigned int	timer2_load;		/* 0x14 */
+-	unsigned int	timer2_match1;		/* 0x18 */
+-	unsigned int	timer2_match2;		/* 0x1c */
+-	unsigned int	timer3_counter;		/* 0x20 */
+-	unsigned int	timer3_load;		/* 0x24 */
+-	unsigned int	timer3_match1;		/* 0x28 */
+-	unsigned int	timer3_match2;		/* 0x2c */
+-	unsigned int	cr;			/* 0x30 */
+-	unsigned int	interrupt_state;	/* 0x34 */
+-	unsigned int	interrupt_mask;		/* 0x38 */
+-	unsigned int	revision;		/* 0x3c */
+-};
+-
+-/*
+- * Timer Control Register
+- */
+-#define FTTMR010_TM3_UPDOWN	(1 << 11)
+-#define FTTMR010_TM2_UPDOWN	(1 << 10)
+-#define FTTMR010_TM1_UPDOWN	(1 << 9)
+-#define FTTMR010_TM3_OFENABLE	(1 << 8)
+-#define FTTMR010_TM3_CLOCK	(1 << 7)
+-#define FTTMR010_TM3_ENABLE	(1 << 6)
+-#define FTTMR010_TM2_OFENABLE	(1 << 5)
+-#define FTTMR010_TM2_CLOCK	(1 << 4)
+-#define FTTMR010_TM2_ENABLE	(1 << 3)
+-#define FTTMR010_TM1_OFENABLE	(1 << 2)
+-#define FTTMR010_TM1_CLOCK	(1 << 1)
+-#define FTTMR010_TM1_ENABLE	(1 << 0)
+-
+-/*
+- * Timer Interrupt State & Mask Registers
+- */
+-#define FTTMR010_TM3_OVERFLOW	(1 << 8)
+-#define FTTMR010_TM3_MATCH2	(1 << 7)
+-#define FTTMR010_TM3_MATCH1	(1 << 6)
+-#define FTTMR010_TM2_OVERFLOW	(1 << 5)
+-#define FTTMR010_TM2_MATCH2	(1 << 4)
+-#define FTTMR010_TM2_MATCH1	(1 << 3)
+-#define FTTMR010_TM1_OVERFLOW	(1 << 2)
+-#define FTTMR010_TM1_MATCH2	(1 << 1)
+-#define FTTMR010_TM1_MATCH1	(1 << 0)
+-
+-#endif	/* __FTTMR010_H */
+-- 
+2.43.0
 
-> I have these Smatch reports.
->=20
-> drivers/net/phy/marvell10g.c:384 mv3310_select_mactype() warn: was ||
-> intended here instead of &&?
-> drivers/net/phy/marvell10g.c:387 mv3310_select_mactype() warn: was ||
-> intended here instead of &&?
-> drivers/net/phy/marvell10g.c:390 mv3310_select_mactype() warn: was ||
-> intended here instead of &&?
->=20
-> Now there is obviously incorrect code there as it cannot work correctly as
-> is, phydev->interface cannot equal two different enums at the same time, =
-but
-> simply swapping the && for || is not going to work either. Could anyone
-> please point me in the direction of a fix?
-
-Adding Marek as r8a779f0_spider and r8a779f4_s4sk are the only two
-boards which enable CONFIG_PHY_MARVELL_10G (aside, ./tools/qconfig.py -b
-and then ./tools/qconfig.py -f CONFIG_FOO is handy to see what boards
-enable a given option and helpful when get_maintainer.pl has nothing
-specific).
-
---=20
-Tom
-
---+LqF2wfWrs1ZmZl8
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJNsVwAKCRAr4qD1Cr/k
-CkWvAQCcHHc6fEmogPPQiAy25FvixoMJhzkuIfQnLr9iaEKxMAD/TGnZVYs3Y3NT
-CWFueMiFnjYk+zy5qA9lSFRZqhEInQM=
-=GNkH
------END PGP SIGNATURE-----
-
---+LqF2wfWrs1ZmZl8--
