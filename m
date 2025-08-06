@@ -4,54 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8D74C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 13:12:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3771FC87FD3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 13:54:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9FDD83A26;
-	Wed,  6 Aug 2025 15:12:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 57FA8832E6;
+	Wed,  6 Aug 2025 15:54:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="N0QOukf9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RSaLhQvq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 285AE83A28; Wed,  6 Aug 2025 15:12:49 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0318783303; Wed,  6 Aug 2025 15:54:20 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CC14836D3
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 15:12:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C39B5101C05; Wed,  6 Aug 2025 15:12:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1754485965;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language;
- bh=jXWa5dyzxShi7ieHJc/Xs4sbfj9iVmoaY7wlqQ5xZeY=;
- b=N0QOukf9dhEoz/Gmfhf1Lv5JjNzdqDGhwyY9aVbqOUtzvZm6lD889rdwoprEeWiLRhYZgs
- LnPdjvj7abdZJc3J7f/IhtuOgSFlqrs7Uq1pq7GyhvElnp0YFkBh9gvwI+S0pfaWkKzQ1A
- DvNmzgRxIx1LzYicHx5fuPJ3k0wJKK9nTfjPOu9VyPUFNOzJJB6iFjEIQ7XK10ktFBjYsc
- qTaNQh45N1AWty5mpjI+JRY0Ui7CeGNWuXSP985rxETYw/5xASOTur/CIvqhVpEc6UMcwg
- vEuzuUqqTPogN+ZSM4XXyBhrrN84k1LwWVIFbFHoEiPPiCkLVN0+7Mt3XJgKRQ==
-Message-ID: <17b268fe-0b0c-e8e2-d66f-a7ec0326bc9c@nabladev.com>
-Date: Wed, 6 Aug 2025 15:13:12 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id C36C08327A
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 15:54:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2eb6c422828so752779fac.1
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 06:54:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1754488456; x=1755093256; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZdD6v05S7bv3s2D9KvLeuMufnqKER5FQommPADVX72E=;
+ b=RSaLhQvqVXgERDiB5NOj2Rk1bQGkfIwFy208YcYJDk+y5xbr1TG729kKMlrCd0WIgA
+ 5qJDOQ6C9rn0/GeiOdz/moocQymcN2fVLBVmozY+gXEMmB+3UhhsqWP5sUkTRCLMhtkK
+ Vy5nXEuAVVA+4j3ElgUKUTgiZ+o+qmwP0wE94=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754488456; x=1755093256;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZdD6v05S7bv3s2D9KvLeuMufnqKER5FQommPADVX72E=;
+ b=FQuI/FcpOezeX7qTY2X6rrO/O//RgHGVTI5vl/Xya8D8BOVetTOImEUf66UMXIew3r
+ cOAcUZ4ZiaCEzlsICKKC2/7iejA/t36qXD0m6x+nwF1tlVc6hzby21YrTDSEhu4asUKH
+ NQFEXaeJgdSxEd8nEbj1mAFVo6608LeOIG1r0T//6ZXHNibpMj192DIADUKdtgzguTwQ
+ 7P5q7dKZpO8c+YeHwANkuJKHvefWfU8SUVmZP5Vd8lP5c2CgS52BYY11d6B4jugdRIKs
+ 53Gb+RdHcpZl+xjrMUMiriITHX3W0Sfxm8AhJe57DEKN3VVUZNtC0uUimnQxb2Ot9qsD
+ r+iw==
+X-Gm-Message-State: AOJu0Ywq0gjcQaDCWlvmN/0Cl9YDVBjc/fIxhFK/0YbHkcVmBLZPZF8C
+ jGF+PmcVKjZcTtwRNQcMhiywsAQk7OlEDmR5ApERBgG7FwTHh6hns2I0cqvU5poSeVE=
+X-Gm-Gg: ASbGnct5K6oF0DXPpjR+OsoeCtbKubWF8vUxRBVhQEHa4te+9MUilYyMRBaI9c+8oP8
+ cpseR62PKbRx0hUxMdd28K5RRDd6ENPJu31kWqfP21ONOymR8sxfWInCl/p3pWUcstfmVZAWvho
+ A23UYgS+umqD+7Q82BAn/5O4hFcA297By7SAmW0jVmjux/to/TQ/MOFE7y9ZJ3UtbXiRmN67IsC
+ 4IKq9nFzvJ9zsgYk3glwS4PcIcfkiHDm9qsU/trgIQ5KqAXwBj0IEKhDXNUssI6AoiFFJa0kRB1
+ Bndf6bIEpuJUjmq9ss6vFuRxgepcHNdNTrS/sJBkkEYHVXxxz9reSj58dLviqRKUjMvwHlaSo9Q
+ tt1JCrC899gTvBgXyu/sbMguCLyCcRKknLSUQ3WLGdLvaAknmQMv9FB0H
+X-Google-Smtp-Source: AGHT+IH985nxGOyZVNCwUjy7QC6Mwo/Gp3z8E0fCg/pgVyKqcvaUeUmAF7RN7qCrPu6d9PbJ4CrrLQ==
+X-Received: by 2002:a05:6870:1c6:b0:30b:70d9:b957 with SMTP id
+ 586e51a60fabf-30be2c6ccacmr1882642fac.17.1754488456373; 
+ Wed, 06 Aug 2025 06:54:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-307a7120beesm4201321fac.6.2025.08.06.06.54.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Aug 2025 06:54:15 -0700 (PDT)
+Date: Wed, 6 Aug 2025 07:54:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Boon Khai Ng <boon.khai.ng@altera.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan <alif.zakuan.yuslaimi@altera.com>,
+ Jit Loon Lim <jit.loon.lim@altera.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mahesh Rao <mahesh.rao@altera.com>
+Subject: Re: [PATCH v1 2/3] arch: arm: lib: cache_v8: agilex5: Add weak
+ function in cache_v8
+Message-ID: <20250806135412.GM124814@bill-the-cat>
+References: <20250806032206.16688-1-boon.khai.ng@altera.com>
+ <20250806032206.16688-3-boon.khai.ng@altera.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "Maniyam, Dinesh" <dinesh.maniyam@altera.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>
-From: Heiko Schocher <hs@nabladev.com>
-Subject: Please pull u-boot-i2c master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fXsOcGy6RjWAVHnJ"
+Content-Disposition: inline
+In-Reply-To: <20250806032206.16688-3-boon.khai.ng@altera.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,129 +107,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
 
-The following changes since commit 007610da2cca405ea7739fc120d90085be4b6ac2:
+--fXsOcGy6RjWAVHnJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-   Makefile: Remove expansion of undefined variable (2025-08-04 18:23:16 -0600)
+On Wed, Aug 06, 2025 at 11:22:05AM +0800, Boon Khai Ng wrote:
 
-are available in the Git repository at:
+> Add weak function dcache_disable for undefined symbol error
+> when dcache for SPL is not enabled. The dcache_disable function
+> is being called from spl_atf.c file
+>=20
+> Add weak function dcache_status for undefined symbol error
+> when dcache for SPL is not enabled. The dcache_status function
+> is being called from common/memsize.c file "get_ram_size"
+> function, which in-turn was called from "sdram_size_check"
+> function defined in sdram_soc64.c file
+>=20
+> Add weak function mmu_status for undefined symbol error
+> when dcache for SPL is not enabled. The mmu_status function
+> is being called from arch/arm/include/asm/io.h file "__memcpy_fromio"
+> and "__memcpy_toio "functions, which in-turn was called from
+> "cadence_qspi_apb_write_execute" and "cadence_qspi_apb_read_execute"
+> functions defined in cadence_qspi_apb.c file
+>=20
+> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
 
-   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2c-updates-for-2025-10-rc2
+The callers of dcache_disable/etc should be doing:
+if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+ ...
 
-for you to fetch changes up to d35589f7d4ec5251eb3093dafc90887ff5f41702:
+--=20
+Tom
 
-   configs: agilex5_defconfig: Enable i3c configs for agilex5 (2025-08-06 08:42:22 +0200)
+--fXsOcGy6RjWAVHnJ
+Content-Type: application/pgp-signature; name="signature.asc"
 
-----------------------------------------------------------------
-i2c updates for v2025.10-rc2
+-----BEGIN PGP SIGNATURE-----
 
-bugfixes:
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJNegAAKCRAr4qD1Cr/k
+CiMVAQCylH+AvD/MZAd1PuRSdoI0xqinoGt29/NRb5GVtc8b3AD/Yt0EAXebet0r
+3HXmKiPSp07l6Gm6yhlsWRRYmWwqRg8=
+=Zv0U
+-----END PGP SIGNATURE-----
 
-- rcar_iic: do not use unitialised variable
-   from Andrew
-
-- fix coverity issue in cmd/i2c.c
-   from Heiko
-
-new driver:
-
-late, but hopefully okay for rc2, as already picked up when
-merge window was open, but there was a problem in common code,
-which is now fixed
-
-- new i3c driver support from Dinesh
-
-----------------------------------------------------------------
-Andrew Goodbody (1):
-       i2c: rcar_iic: Do not use unitialised variable
-
-Dinesh Maniyam (12):
-       drivers: i3c: Add new i3c uclass id
-       drivers: i3c: Add driver for MIPI DWI3C
-       drivers: i3c: Add i3c uclass driver.
-       drivers: Enabled Kconfig and Makefile for i3c support
-       drivers: i3c: Enabled Kconfig and Makefile for DWI3C
-       drivers: i3c: Add i3c sandbox simple test.
-       drivers: i3c: master: Enable probe i3c without slave device
-       i3c: master: dw-i3c-master: Fix OD_TIMING for spike filter
-       cmd: Add i3c command support.
-       test: cmd: Add simple test for i3c
-       configs: sandbox_defconfig: Enable configs for sandbox i3c
-       configs: agilex5_defconfig: Enable i3c configs for agilex5
-
-Heiko Schocher (1):
-       cmd: i2c: fix coverity issue
-
-  MAINTAINERS                        |    7 +
-  arch/sandbox/dts/test.dts          |    8 +
-  cmd/Kconfig                        |    7 +
-  cmd/Makefile                       |    1 +
-  cmd/i2c.c                          |    3 +-
-  cmd/i3c.c                          |  271 ++++++++++++++++++++
-  configs/sandbox_defconfig          |    4 +
-  configs/socfpga_agilex5_defconfig  |    3 +
-  doc/api/i3c.rst                    |    8 +
-  doc/api/index.rst                  |    1 +
-  doc/usage/cmd/i3c.rst              |  146 +++++++++++
-  doc/usage/index.rst                |    1 +
-  drivers/Kconfig                    |    2 +
-  drivers/Makefile                   |    1 +
-  drivers/i2c/rcar_iic.c             |    2 +-
-  drivers/i3c/Kconfig                |   27 ++
-  drivers/i3c/Makefile               |    5 +
-  drivers/i3c/device.c               |  262 +++++++++++++++++++
-  drivers/i3c/i3c-uclass.c           |   38 +++
-  drivers/i3c/internals.h            |   26 ++
-  drivers/i3c/master.c               | 2066 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  drivers/i3c/master/Kconfig         |   11 +
-  drivers/i3c/master/Makefile        |    3 +
-  drivers/i3c/master/dw-i3c-master.c | 1062 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  drivers/i3c/sandbox_i3c.c          |   56 ++++
-  include/dm/uclass-id.h             |    1 +
-  include/dw-i3c.h                   |  252 ++++++++++++++++++
-  include/i3c.h                      |   93 +++++++
-  include/linux/i3c/ccc.h            |  385 ++++++++++++++++++++++++++++
-  include/linux/i3c/device.h         |  286 +++++++++++++++++++++
-  include/linux/i3c/master.h         |  698 +++++++++++++++++++++++++++++++++++++++++++++++++
-  test/cmd/Makefile                  |    1 +
-  test/cmd/i3c.c                     |   50 ++++
-  test/dm/Makefile                   |    1 +
-  test/dm/i3c.c                      |   34 +++
-  35 files changed, 5820 insertions(+), 2 deletions(-)
-  create mode 100644 cmd/i3c.c
-  create mode 100644 doc/api/i3c.rst
-  create mode 100644 doc/usage/cmd/i3c.rst
-  create mode 100644 drivers/i3c/Kconfig
-  create mode 100644 drivers/i3c/Makefile
-  create mode 100644 drivers/i3c/device.c
-  create mode 100644 drivers/i3c/i3c-uclass.c
-  create mode 100644 drivers/i3c/internals.h
-  create mode 100644 drivers/i3c/master.c
-  create mode 100644 drivers/i3c/master/Kconfig
-  create mode 100644 drivers/i3c/master/Makefile
-  create mode 100644 drivers/i3c/master/dw-i3c-master.c
-  create mode 100644 drivers/i3c/sandbox_i3c.c
-  create mode 100644 include/dw-i3c.h
-  create mode 100644 include/i3c.h
-  create mode 100644 include/linux/i3c/ccc.h
-  create mode 100644 include/linux/i3c/device.h
-  create mode 100644 include/linux/i3c/master.h
-  create mode 100644 test/cmd/i3c.c
-  create mode 100644 test/dm/i3c.c
-
-azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=184&view=results
-
-Thanks!
-
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+--fXsOcGy6RjWAVHnJ--
