@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C04C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:56:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2397DC87FD3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:56:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 542F484285;
+	by phobos.denx.de (Postfix) with ESMTP id C103D842D2;
 	Wed,  6 Aug 2025 16:56:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UMA56Jb8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hf5mVszj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A54BF83A71; Wed,  6 Aug 2025 16:56:17 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id CC65583A71; Wed,  6 Aug 2025 16:56:17 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65D2183A9F
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA25A83A5B
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-30babf43ddaso8840fac.3
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:10 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-433f1f97176so3749b6e.3
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754492169; x=1755096969; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754492168; x=1755096968; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HewG/pv+UduyB9oKR/041t32m0BxN+FHNYuWozPumSI=;
- b=UMA56Jb8YO859I80MXvaTeJ8deCXEMLS8D3ZL1TFQj7oyuMJco39Ce7wGXk3rhiy0U
- rfF+vzje74n/PWYiavgWVJfTpe8SnpQEKkz141MUDz9wSl9yNo0bfZEZafDeS1WfJbLE
- NPKixqQVKS7YK0VEWbQewCtGAgIymTNMwsVWo=
+ bh=CxedUUyWSJJXDc+8oXm1PtEiiiqwR2R5AToyHeTDPac=;
+ b=hf5mVszjaGQeI0ABlWsbbbXfOmFpTdyFicoBFwGju9l+EAbgB5lp+pjBGPvU/vqKYM
+ VUkP+4N1ZB3I2n8tv6044klnM8t1iqooWTw0+wmbS+ZIGx3xvBMtJSPrJFzLlMb6fCPP
+ X56PmQOtUShnALfKYRqOefPjAiRHFTUIj8gD0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754492169; x=1755096969;
+ d=1e100.net; s=20230601; t=1754492168; x=1755096968;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HewG/pv+UduyB9oKR/041t32m0BxN+FHNYuWozPumSI=;
- b=J0pxaKysVTNk2cYBGn/nwB4KlzjvS4TDOcSzqy6L9Bndgq2XRIc+HykLNf07jLHLSM
- J5mo9/Y6QCizxgvFaJ2JbPO9kUP2oSW4bj+3E7DBgc+pwjlOUFPUUn4lWKHfdUcEIBvI
- yY9d1/klJRXkHC7nlH4Vsz8If9YBbscaESBcCvNqToC1+Qm+QLvZi0gqe3+D0IL8/F3N
- 4t0t1Mw38XhAqyO5Pkry/0c29A5WBHOOgXe0Hrw/SZI7Mesjqi2XvP+dtXjBYP8r8Gzo
- DbD7kbS6+Esh1ZcsDP/zmp1SAmU4tSfXmcg44Xd72uEJnvLiTJa1qDlIBkfMxJ9H0kiM
- iVig==
-X-Gm-Message-State: AOJu0Yxek1JUn+G5gM3RTYlhlskAflCI4o/LXUmES1DyDu73+CEBVugv
- gkkaSiLwsf8gcbPHCRvVwrHMnlFulxD9HKvBXKPNKA1k2wgrTZNDJXKOVbEqOsxdqNi67tNy20r
- 2uObqufM=
-X-Gm-Gg: ASbGncvKbXVxZMe5RS9GzvcFSspgk0r/7YL5rRHX84NebKKm5laJ2XYuzYONWH85h47
- JXR9q2SNBxzXv+BXjlLcz7rWAS9A1/E7ESl1egH+pwB36b1Xm6E46NOiSgQnh7+N5lqTsvTdKPN
- bMzHgy8TAuNandmcn9lNUYEP8ZzydywLa3r7sYTkdy0o5fgH1sOEGNJoqBozfS/jr4LFoR/IkmP
- o9biilqclClJtkFWxi21zN5Pdbzc5aYCFjd8AXdP80QOP15WjMMh8MzmbTb4Yra0jLe9sRIRoEe
- 7lKqmrbkBdCxIIs9laRqiZqiZYUs/GQeylZbGJVcpWPa8TPiadDUT8UAlPr/2dS6YSt+r4oL5r4
- Wg3tljI4E4qBZCy2i2QQQjxqFtP0Av52xpxeQGismf0gISZF1NGUm0Oc9TiIJp50IEBVQDg==
-X-Google-Smtp-Source: AGHT+IGR1DtvqFwzji7C9b+TwgMEKkM0pAE1XDf8WOKdEp/U87c2P7TNj1mXm2F6Jb9ESuUaZVaIog==
-X-Received: by 2002:a05:6870:c0ce:b0:2d6:af0:8d8e with SMTP id
- 586e51a60fabf-30be28e2272mr1825685fac.2.1754492169073; 
- Wed, 06 Aug 2025 07:56:09 -0700 (PDT)
+ bh=CxedUUyWSJJXDc+8oXm1PtEiiiqwR2R5AToyHeTDPac=;
+ b=G221N8SkW5LM7iP+vX90kio/26qOsu1NC0WUPHNrZPPY+DTXQQaPQ1Ke+QfKVmjyGt
+ U9WyoLgUu1shIXErul5u5bjPlRbxJXqK+V16dkn6UX/4rAxp/oMoZOb1hpeFs8CNHLNe
+ Hazps+UIKiT5X2F8fbTf+9SSXvU5QmH9pFLGwzr6kj4rswlOrE0YCyLL2RqVYDpMRQeb
+ MenyeHqFrrnxRqi1U6xxMUzSqmqlWjrPGHOroC2mfZSskkv+8+UjqrPbsGXWiibgWgwy
+ BIBeiwRVSi5iR5HTPbDyo+LJJYroq9L5tLYplSPtkUoYz92Zm36/q7dYt369Sw9EaEYb
+ udew==
+X-Gm-Message-State: AOJu0Ywa1OniK2XFT3FHth9i863bHFCpdkBUxlgY9S8KFv9zlMTGs+7x
+ uiRO7Xf+rXk1NoelbkGlcybMSa72Gdq/7ZKKMLqm3BHDlhIeIMWEubdxOq3/zD/2DUmCU3TwlOX
+ lTWpgIiw=
+X-Gm-Gg: ASbGncueZEN3njC5Ro3wl5UW2CtYnjHQHTB3a6Kx8BHXWMWgECfcC7KmiyVR0B08xZ7
+ 3J/y7NpFgUyfNEDCUNbzANpOdvNdFzV8bqqVsVMkf3dnhasSfrQ0MnFYstbU08EFqfuQG2QvxWl
+ fI0jSrbTn8wK07Q6wGNOQ4kt/kfzalHVt5QujqQNzIC/wcybedUBuGzG8quKkhER49cHu3KjxRo
+ SLBEV42bxwVwtnxWZVCynqujOkhM0NYWdyCIdBCSDgiIqCj341D7MXjt+Q35Di8Qu8BsRS4LG1r
+ 6ioW4Cln7xLxNXc7px509DMjAfNEzZijuC90FDXW6BNyLvaGBNAy91Sen7uSlLyevf+pazjYAln
+ lYXe2G3d8zTasWFfRKog6USVSSuz6z/IEw6eFUyxXMdYw4CmcaNWwW9fQEuo=
+X-Google-Smtp-Source: AGHT+IF2XdgPB1Vv6kBhjmHEh3UDtUf8Xssg3+rqSDDVQdzGpcrVetVA2AZHQESc+D3bSVRKKYFpVg==
+X-Received: by 2002:a05:6808:66c4:b0:435:8501:4cbd with SMTP id
+ 5614622812f47-4358501577fmr404544b6e.5.1754492168293; 
+ Wed, 06 Aug 2025 07:56:08 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30ba8228a79sm1925391fac.35.2025.08.06.07.56.08
+ 586e51a60fabf-30ba8228a79sm1925391fac.35.2025.08.06.07.56.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 07:56:08 -0700 (PDT)
+ Wed, 06 Aug 2025 07:56:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut@mailbox.org>
-Subject: [PATCH 5/7] usb: host: Tighten USB host driver dependencies
-Date: Wed,  6 Aug 2025 08:55:59 -0600
-Message-ID: <20250806145601.1664563-5-trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: [PATCH 4/7] usb: gadget: max3420_udc: Remove unused driver
+Date: Wed,  6 Aug 2025 08:55:58 -0600
+Message-ID: <20250806145601.1664563-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250806145601.1664563-1-trini@konsulko.com>
 References: <20250806145601.1664563-1-trini@konsulko.com>
@@ -95,58 +96,934 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few of the USB host drivers cannot build without access to some
-platform specific header files. Express those requirements in Kconfig as
-well.
+This driver is unused. Remove it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/usb/host/Kconfig | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ drivers/usb/gadget/Kconfig       |   6 -
+ drivers/usb/gadget/Makefile      |   1 -
+ drivers/usb/gadget/max3420_udc.c | 879 -------------------------------
+ 3 files changed, 886 deletions(-)
+ delete mode 100644 drivers/usb/gadget/max3420_udc.c
 
-diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-index 5c9e8fc9d15e..2cf687fc4f3b 100644
---- a/drivers/usb/host/Kconfig
-+++ b/drivers/usb/host/Kconfig
-@@ -121,8 +121,9 @@ config USB_XHCI_DRA7XX_INDEX
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 37c516abcd5a..608871275c35 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -151,12 +151,6 @@ config CI_UDC
+ 	  Say Y here to enable device controller functionality of the
+ 	  ChipIdea driver.
  
- config USB_XHCI_FSL
- 	bool "Support for NXP Layerscape on-chip xHCI USB controller"
--	default y if ARCH_LS1021A || FSL_LSCH3 || FSL_LSCH2
-+	depends on ARCH_LS1021A || FSL_LSCH3 || FSL_LSCH2
- 	depends on !SPL_NO_USB
-+	default y
- 	help
- 	  Enables support for the on-chip xHCI controller on NXP Layerscape SoCs.
- 
-@@ -286,7 +287,8 @@ config USB_EHCI_TEGRA
- 
- config USB_EHCI_ZYNQ
- 	bool "Support for Xilinx Zynq on-chip EHCI USB controller"
--	default y if ARCH_ZYNQ
-+	depends on ARCH_ZYNQ
-+	default y
- 	select USB_EHCI_IS_TDI
- 	---help---
- 	  Enable support for Zynq on-chip EHCI USB controller
-@@ -303,6 +305,7 @@ config EHCI_HCD_INIT_AFTER_RESET
- 
- config USB_EHCI_FSL
- 	bool  "Support for FSL on-chip EHCI USB controller"
-+	depends on PPC
- 	select EHCI_HCD_INIT_AFTER_RESET
- 	select SYS_FSL_USB_INTERNAL_UTMI_PHY if MPC85xx && \
- 		!(ARCH_B4860 || ARCH_B4420 || ARCH_P4080 || ARCH_P1020 || ARCH_P2020)
-@@ -362,6 +365,7 @@ config USB_OHCI_GENERIC
- 
- config USB_OHCI_DA8XX
- 	bool "Support for da850 OHCI USB controller"
-+	depends on ARCH_DAVINCI
- 	help
- 	  Enable support for the da850 USB controller.
- 
+-config USB_GADGET_MAX3420
+-	bool "MAX3420 USB Over SPI"
+-	depends on DM_SPI
+-	help
+-	  MAX3420, from MAXIM, implements USB-over-SPI Full-Speed device controller.
+-
+ config USB_GADGET_VBUS_DRAW
+ 	int "Maximum VBUS Power usage (2-500 mA)"
+ 	range 2 500
+diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
+index 7af5f6e6d634..f2aebf4e4806 100644
+--- a/drivers/usb/gadget/Makefile
++++ b/drivers/usb/gadget/Makefile
+@@ -19,7 +19,6 @@ obj-$(CONFIG_USB_GADGET_AT91) += at91_udc.o
+ obj-$(CONFIG_USB_GADGET_ATMEL_USBA) += atmel_usba_udc.o
+ obj-$(CONFIG_USB_GADGET_DWC2_OTG) += dwc2_udc_otg.o
+ obj-$(CONFIG_USB_GADGET_DWC2_OTG_PHY) += dwc2_udc_otg_phy.o
+-obj-$(CONFIG_USB_GADGET_MAX3420) += max3420_udc.o
+ obj-$(CONFIG_USB_RENESAS_USBHS) += rcar/
+ ifndef CONFIG_XPL_BUILD
+ obj-$(CONFIG_USB_GADGET_DOWNLOAD) += g_dnl.o
+diff --git a/drivers/usb/gadget/max3420_udc.c b/drivers/usb/gadget/max3420_udc.c
+deleted file mode 100644
+index 557a1f0644e9..000000000000
+--- a/drivers/usb/gadget/max3420_udc.c
++++ /dev/null
+@@ -1,879 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-
+-#include <linux/errno.h>
+-#include <linux/delay.h>
+-#include <asm/gpio.h>
+-#include <linux/list.h>
+-#include <linux/bitfield.h>
+-#include <linux/usb/ch9.h>
+-#include <linux/usb/gadget.h>
+-#include <malloc.h>
+-#include <spi.h>
+-#include <dm.h>
+-#include <g_dnl.h>
+-
+-#define MAX3420_MAX_EPS		4
+-#define EP_MAX_PACKET		64  /* Same for all Endpoints */
+-#define EPNAME_SIZE		16  /* Buffer size for endpoint name */
+-
+-#define MAX3420_SPI_DIR_RD	0	/* read register from MAX3420 */
+-#define MAX3420_SPI_DIR_WR	1	/* write register to MAX3420 */
+-
+-/* SPI commands: */
+-#define MAX3420_SPI_ACK_MASK BIT(0)
+-#define MAX3420_SPI_DIR_MASK BIT(1)
+-#define MAX3420_SPI_REG_MASK GENMASK(7, 3)
+-
+-#define MAX3420_REG_EP0FIFO	0
+-#define MAX3420_REG_EP1FIFO	1
+-#define MAX3420_REG_EP2FIFO	2
+-#define MAX3420_REG_EP3FIFO	3
+-#define MAX3420_REG_SUDFIFO	4
+-#define MAX3420_REG_EP0BC	5
+-#define MAX3420_REG_EP1BC	6
+-#define MAX3420_REG_EP2BC	7
+-#define MAX3420_REG_EP3BC	8
+-
+-#define MAX3420_REG_EPSTALLS	9
+-	#define bACKSTAT	BIT(6)
+-	#define bSTLSTAT	BIT(5)
+-	#define bSTLEP3IN	BIT(4)
+-	#define bSTLEP2IN	BIT(3)
+-	#define bSTLEP1OUT	BIT(2)
+-	#define bSTLEP0OUT	BIT(1)
+-	#define bSTLEP0IN	BIT(0)
+-
+-#define MAX3420_REG_CLRTOGS	10
+-	#define bEP3DISAB	BIT(7)
+-	#define bEP2DISAB	BIT(6)
+-	#define bEP1DISAB	BIT(5)
+-	#define bCTGEP3IN	BIT(4)
+-	#define bCTGEP2IN	BIT(3)
+-	#define bCTGEP1OUT	BIT(2)
+-
+-#define MAX3420_REG_EPIRQ	11
+-#define MAX3420_REG_EPIEN	12
+-	#define bSUDAVIRQ	BIT(5)
+-	#define bIN3BAVIRQ	BIT(4)
+-	#define bIN2BAVIRQ	BIT(3)
+-	#define bOUT1DAVIRQ	BIT(2)
+-	#define bOUT0DAVIRQ	BIT(1)
+-	#define bIN0BAVIRQ	BIT(0)
+-
+-#define MAX3420_REG_USBIRQ	13
+-#define MAX3420_REG_USBIEN	14
+-	#define bOSCOKIRQ	BIT(0)
+-	#define bRWUDNIRQ	BIT(1)
+-	#define bBUSACTIRQ	BIT(2)
+-	#define bURESIRQ	BIT(3)
+-	#define bSUSPIRQ	BIT(4)
+-	#define bNOVBUSIRQ	BIT(5)
+-	#define bVBUSIRQ	BIT(6)
+-	#define bURESDNIRQ	BIT(7)
+-
+-#define MAX3420_REG_USBCTL	15
+-	#define bHOSCSTEN	BIT(7)
+-	#define bVBGATE		BIT(6)
+-	#define bCHIPRES	BIT(5)
+-	#define bPWRDOWN	BIT(4)
+-	#define bCONNECT	BIT(3)
+-	#define bSIGRWU		BIT(2)
+-
+-#define MAX3420_REG_CPUCTL	16
+-	#define bIE		BIT(0)
+-
+-#define MAX3420_REG_PINCTL	17
+-	#define bEP3INAK	BIT(7)
+-	#define bEP2INAK	BIT(6)
+-	#define bEP0INAK	BIT(5)
+-	#define bFDUPSPI	BIT(4)
+-	#define bINTLEVEL	BIT(3)
+-	#define bPOSINT		BIT(2)
+-	#define bGPXB		BIT(1)
+-	#define bGPXA		BIT(0)
+-
+-#define MAX3420_REG_REVISION	18
+-
+-#define MAX3420_REG_FNADDR	19
+-	#define FNADDR_MASK	0x7f
+-
+-#define MAX3420_REG_IOPINS	20
+-#define MAX3420_REG_IOPINS2	21
+-#define MAX3420_REG_GPINIRQ	22
+-#define MAX3420_REG_GPINIEN	23
+-#define MAX3420_REG_GPINPOL	24
+-#define MAX3420_REG_HIRQ	25
+-#define MAX3420_REG_HIEN	26
+-#define MAX3420_REG_MODE	27
+-#define MAX3420_REG_PERADDR	28
+-#define MAX3420_REG_HCTL	29
+-#define MAX3420_REG_HXFR	30
+-#define MAX3420_REG_HRSL	31
+-
+-struct max3420_req {
+-	struct usb_request usb_req;
+-	struct list_head queue;
+-	struct max3420_ep *ep;
+-};
+-
+-struct max3420_ep {
+-	struct max3420_udc *udc;
+-	struct list_head queue;
+-	char name[EPNAME_SIZE];
+-	unsigned int maxpacket;
+-	struct usb_ep ep_usb;
+-	int halted;
+-	int id;
+-};
+-
+-struct max3420_udc {
+-	struct max3420_ep ep[MAX3420_MAX_EPS];
+-	struct usb_gadget_driver *driver;
+-	bool softconnect;
+-	struct usb_ctrlrequest setup;
+-	struct max3420_req ep0req;
+-	struct usb_gadget gadget;
+-	struct spi_slave *slave;
+-	struct udevice *dev;
+-	u8 ep0buf[64];
+-	int remote_wkp;
+-	bool suspended;
+-};
+-
+-#define to_max3420_req(r)	container_of((r), struct max3420_req, usb_req)
+-#define to_max3420_ep(e)	container_of((e), struct max3420_ep, ep_usb)
+-#define to_udc(g)		container_of((g), struct max3420_udc, gadget)
+-
+-static void spi_ack_ctrl(struct max3420_udc *udc)
+-{
+-	struct spi_slave *slave = udc->slave;
+-	u8 txdata[1];
+-
+-	txdata[0] = FIELD_PREP(MAX3420_SPI_ACK_MASK, 1);
+-	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_ONCE);
+-}
+-
+-static u8 spi_rd8_ack(struct max3420_udc *udc, u8 reg, int ackstat)
+-{
+-	struct spi_slave *slave = udc->slave;
+-	u8 txdata[2], rxdata[2];
+-
+-	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
+-			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_RD) |
+-			FIELD_PREP(MAX3420_SPI_ACK_MASK, ackstat ? 1 : 0);
+-
+-	rxdata[0] = 0;
+-	rxdata[1] = 0;
+-	spi_xfer(slave, sizeof(txdata), txdata, rxdata, SPI_XFER_ONCE);
+-
+-	return rxdata[1];
+-}
+-
+-static u8 spi_rd8(struct max3420_udc *udc, u8 reg)
+-{
+-	return spi_rd8_ack(udc, reg, 0);
+-}
+-
+-static void spi_wr8_ack(struct max3420_udc *udc, u8 reg, u8 val, int ackstat)
+-{
+-	struct spi_slave *slave = udc->slave;
+-	u8 txdata[2];
+-
+-	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
+-			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_WR) |
+-			FIELD_PREP(MAX3420_SPI_ACK_MASK, ackstat ? 1 : 0);
+-	txdata[1] = val;
+-
+-	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_ONCE);
+-}
+-
+-static void spi_wr8(struct max3420_udc *udc, u8 reg, u8 val)
+-{
+-	spi_wr8_ack(udc, reg, val, 0);
+-}
+-
+-static void spi_rd_buf(struct max3420_udc *udc, u8 reg, void *buf, u8 len)
+-{
+-	struct spi_slave *slave = udc->slave;
+-	u8 txdata[1];
+-
+-	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
+-			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_RD);
+-
+-	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_BEGIN);
+-	spi_xfer(slave, len * 8, NULL, buf, SPI_XFER_END);
+-}
+-
+-static void spi_wr_buf(struct max3420_udc *udc, u8 reg, void *buf, u8 len)
+-{
+-	struct spi_slave *slave = udc->slave;
+-	u8 txdata[1];
+-
+-	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
+-			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_WR);
+-
+-	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_BEGIN);
+-	spi_xfer(slave, len * 8, buf, NULL, SPI_XFER_END);
+-}
+-
+-/* 0 if not-connected */
+-int g_dnl_board_usb_cable_connected(void)
+-{
+-	return 1;
+-}
+-
+-static void spi_max3420_enable(struct max3420_ep *ep, int enable)
+-{
+-	struct max3420_udc *udc = ep->udc;
+-	u8 epdis, epien;
+-
+-	if (ep->id == 0)
+-		return;
+-
+-	epien = spi_rd8(udc, MAX3420_REG_EPIEN);
+-	epdis = spi_rd8(udc, MAX3420_REG_CLRTOGS);
+-
+-	if (enable) {
+-		epdis &= ~BIT(ep->id + 4);
+-		epien |= BIT(ep->id + 1);
+-	} else {
+-		epdis |= BIT(ep->id + 4);
+-		epien &= ~BIT(ep->id + 1);
+-	}
+-
+-	spi_wr8(udc, MAX3420_REG_CLRTOGS, epdis);
+-	spi_wr8(udc, MAX3420_REG_EPIEN, epien);
+-}
+-
+-static int
+-max3420_ep_enable(struct usb_ep *_ep,
+-		  const struct usb_endpoint_descriptor *desc)
+-{
+-	struct max3420_ep *ep = to_max3420_ep(_ep);
+-
+-	_ep->desc = desc;
+-	_ep->maxpacket = usb_endpoint_maxp(desc) & 0x7ff;
+-
+-	spi_max3420_enable(ep, 1);
+-
+-	return 0;
+-}
+-
+-static void max3420_req_done(struct max3420_req *req, int status)
+-{
+-	struct max3420_ep *ep = req->ep;
+-
+-	if (req->usb_req.status == -EINPROGRESS)
+-		req->usb_req.status = status;
+-	else
+-		status = req->usb_req.status;
+-
+-	if (status && status != -ESHUTDOWN)
+-		dev_err(ep->udc->dev, "%s done %p, status %d\n",
+-			ep->ep_usb.name, req, status);
+-
+-	if (req->usb_req.complete)
+-		req->usb_req.complete(&ep->ep_usb, &req->usb_req);
+-}
+-
+-static void max3420_ep_nuke(struct max3420_ep *ep, int status)
+-{
+-	struct max3420_req *req, *r;
+-
+-	list_for_each_entry_safe(req, r, &ep->queue, queue) {
+-		list_del_init(&req->queue);
+-		max3420_req_done(req, status);
+-	}
+-}
+-
+-static int max3420_ep_disable(struct usb_ep *_ep)
+-{
+-	struct max3420_ep *ep = to_max3420_ep(_ep);
+-
+-	_ep->desc = NULL;
+-	max3420_ep_nuke(ep, -ESHUTDOWN);
+-	spi_max3420_enable(ep, 0);
+-
+-	return 0;
+-}
+-
+-static struct usb_request *
+-max3420_ep_alloc_request(struct usb_ep *_ep, gfp_t gfp_flags)
+-{
+-	struct max3420_ep *ep = to_max3420_ep(_ep);
+-	struct max3420_req *req = kzalloc(sizeof(*req), gfp_flags);
+-
+-	if (!req)
+-		return NULL;
+-
+-	req->ep = ep;
+-	INIT_LIST_HEAD(&req->queue);
+-
+-	return &req->usb_req;
+-}
+-
+-static void
+-max3420_ep_free_request(struct usb_ep *_ep, struct usb_request *_req)
+-{
+-	kfree(to_max3420_req(_req));
+-}
+-
+-static int
+-max3420_ep_queue(struct usb_ep *_ep, struct usb_request *_req, gfp_t gfp_flags)
+-{
+-	struct max3420_req *req = to_max3420_req(_req);
+-	struct max3420_ep *ep = to_max3420_ep(_ep);
+-
+-	_req->status = -EINPROGRESS;
+-	_req->actual = 0;
+-	list_add_tail(&req->queue, &ep->queue);
+-
+-	return 0;
+-}
+-
+-static int max3420_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+-{
+-	struct max3420_req *req = to_max3420_req(_req);
+-
+-	list_del_init(&req->queue);
+-	max3420_req_done(req, -ECONNRESET);
+-
+-	return 0;
+-}
+-
+-static int max3420_ep_set_halt(struct usb_ep *_ep, int halt)
+-{
+-	struct max3420_ep *ep = to_max3420_ep(_ep);
+-	struct max3420_udc *udc = ep->udc;
+-	u8 epstalls;
+-
+-	if (ep->id == 0) /* can't stall EP0 */
+-		return 0;
+-
+-	epstalls = spi_rd8(udc, MAX3420_REG_EPSTALLS);
+-	if (halt) {
+-		ep->halted = 1;
+-		epstalls |= BIT(ep->id + 1);
+-	} else {
+-		u8 clrtogs;
+-
+-		ep->halted = 0;
+-		epstalls &= ~BIT(ep->id + 1);
+-		clrtogs = spi_rd8(udc, MAX3420_REG_CLRTOGS);
+-		clrtogs |= BIT(ep->id + 1);
+-		spi_wr8(udc, MAX3420_REG_CLRTOGS, clrtogs);
+-	}
+-	spi_wr8(udc, MAX3420_REG_EPSTALLS, epstalls | bACKSTAT);
+-
+-	return 0;
+-}
+-
+-static const struct usb_ep_ops max3420_ep_ops = {
+-	.enable		= max3420_ep_enable,
+-	.disable	= max3420_ep_disable,
+-	.alloc_request	= max3420_ep_alloc_request,
+-	.free_request	= max3420_ep_free_request,
+-	.queue		= max3420_ep_queue,
+-	.dequeue	= max3420_ep_dequeue,
+-	.set_halt	= max3420_ep_set_halt,
+-};
+-
+-static void __max3420_stop(struct max3420_udc *udc)
+-{
+-	u8 val;
+-
+-	/* Disable IRQ to CPU */
+-	spi_wr8(udc, MAX3420_REG_CPUCTL, 0);
+-
+-	val = spi_rd8(udc, MAX3420_REG_USBCTL);
+-	val |= bPWRDOWN;
+-	val |= bHOSCSTEN;
+-	spi_wr8(udc, MAX3420_REG_USBCTL, val);
+-}
+-
+-static void __max3420_start(struct max3420_udc *udc)
+-{
+-	u8 val;
+-
+-	/* configure SPI */
+-	spi_wr8(udc, MAX3420_REG_PINCTL, bFDUPSPI);
+-
+-	/* Chip Reset */
+-	spi_wr8(udc, MAX3420_REG_USBCTL, bCHIPRES);
+-	mdelay(5);
+-	spi_wr8(udc, MAX3420_REG_USBCTL, 0);
+-
+-	/* Poll for OSC to stabilize */
+-	while (1) {
+-		val = spi_rd8(udc, MAX3420_REG_USBIRQ);
+-		if (val & bOSCOKIRQ)
+-			break;
+-		cond_resched();
+-	}
+-
+-	/* Enable PULL-UP only when Vbus detected */
+-	val = spi_rd8(udc, MAX3420_REG_USBCTL);
+-	val |= bVBGATE | bCONNECT;
+-	spi_wr8(udc, MAX3420_REG_USBCTL, val);
+-
+-	val = bURESDNIRQ | bURESIRQ;
+-	spi_wr8(udc, MAX3420_REG_USBIEN, val);
+-
+-	/* Enable only EP0 interrupts */
+-	val = bIN0BAVIRQ | bOUT0DAVIRQ | bSUDAVIRQ;
+-	spi_wr8(udc, MAX3420_REG_EPIEN, val);
+-
+-	/* Enable IRQ to CPU */
+-	spi_wr8(udc, MAX3420_REG_CPUCTL, bIE);
+-}
+-
+-static int max3420_udc_start(struct usb_gadget *gadget,
+-			     struct usb_gadget_driver *driver)
+-{
+-	struct max3420_udc *udc = to_udc(gadget);
+-
+-	udc->driver = driver;
+-	udc->remote_wkp = 0;
+-	udc->softconnect = true;
+-
+-	__max3420_start(udc);
+-
+-	return 0;
+-}
+-
+-static int max3420_udc_stop(struct usb_gadget *gadget)
+-{
+-	struct max3420_udc *udc = to_udc(gadget);
+-
+-	udc->driver = NULL;
+-	udc->softconnect = false;
+-
+-	__max3420_stop(udc);
+-
+-	return 0;
+-}
+-
+-static int max3420_wakeup(struct usb_gadget *gadget)
+-{
+-	struct max3420_udc *udc = to_udc(gadget);
+-	u8 usbctl;
+-
+-	/* Only if wakeup allowed by host */
+-	if (!udc->remote_wkp || !udc->suspended)
+-		return 0;
+-
+-	/* Set Remote-Wakeup Signal*/
+-	usbctl = spi_rd8(udc, MAX3420_REG_USBCTL);
+-	usbctl |= bSIGRWU;
+-	spi_wr8(udc, MAX3420_REG_USBCTL, usbctl);
+-
+-	mdelay(5);
+-
+-	/* Clear Remote-WkUp Signal*/
+-	usbctl = spi_rd8(udc, MAX3420_REG_USBCTL);
+-	usbctl &= ~bSIGRWU;
+-	spi_wr8(udc, MAX3420_REG_USBCTL, usbctl);
+-
+-	udc->suspended = false;
+-
+-	return 0;
+-}
+-
+-static const struct usb_gadget_ops max3420_udc_ops = {
+-	.udc_start	= max3420_udc_start,
+-	.udc_stop	= max3420_udc_stop,
+-	.wakeup		= max3420_wakeup,
+-};
+-
+-static struct usb_endpoint_descriptor ep0_desc = {
+-	.bLength = USB_DT_ENDPOINT_SIZE,
+-	.bDescriptorType = USB_DT_ENDPOINT,
+-	.bEndpointAddress = USB_DIR_OUT,
+-	.bmAttributes = USB_ENDPOINT_XFER_CONTROL,
+-	.wMaxPacketSize = cpu_to_le16(EP_MAX_PACKET),
+-};
+-
+-static void max3420_getstatus(struct max3420_udc *udc)
+-{
+-	struct max3420_ep *ep;
+-	u16 status = 0;
+-
+-	switch (udc->setup.bRequestType & USB_RECIP_MASK) {
+-	case USB_RECIP_DEVICE:
+-		/* Get device status */
+-		status = 0 << USB_DEVICE_SELF_POWERED;
+-		status |= (udc->remote_wkp << USB_DEVICE_REMOTE_WAKEUP);
+-		break;
+-	case USB_RECIP_INTERFACE:
+-		if (udc->driver->setup(&udc->gadget, &udc->setup) < 0)
+-			goto stall;
+-		break;
+-	case USB_RECIP_ENDPOINT:
+-		ep = &udc->ep[udc->setup.wIndex & USB_ENDPOINT_NUMBER_MASK];
+-		if (ep->halted)
+-			status = 1 << USB_ENDPOINT_HALT;
+-		break;
+-	default:
+-		goto stall;
+-	}
+-
+-	status = cpu_to_le16(status);
+-	spi_wr_buf(udc, MAX3420_REG_EP0FIFO, &status, 2);
+-	spi_wr8_ack(udc, MAX3420_REG_EP0BC, 2, 1);
+-	return;
+-stall:
+-	dev_err(udc->dev, "Can't respond to getstatus request\n");
+-	spi_wr8(udc, MAX3420_REG_EPSTALLS, bSTLEP0IN | bSTLEP0OUT | bSTLSTAT);
+-}
+-
+-static void max3420_set_clear_feature(struct max3420_udc *udc)
+-{
+-	int set = udc->setup.bRequest == USB_REQ_SET_FEATURE;
+-	struct max3420_ep *ep;
+-	int id;
+-
+-	switch (udc->setup.bRequestType) {
+-	case USB_RECIP_DEVICE:
+-		if (udc->setup.wValue != USB_DEVICE_REMOTE_WAKEUP)
+-			break;
+-
+-		if (udc->setup.bRequest == USB_REQ_SET_FEATURE)
+-			udc->remote_wkp = 1;
+-		else
+-			udc->remote_wkp = 0;
+-
+-		return spi_ack_ctrl(udc);
+-
+-	case USB_RECIP_ENDPOINT:
+-		if (udc->setup.wValue != USB_ENDPOINT_HALT)
+-			break;
+-
+-		id = udc->setup.wIndex & USB_ENDPOINT_NUMBER_MASK;
+-		ep = &udc->ep[id];
+-
+-		max3420_ep_set_halt(&ep->ep_usb, set);
+-		return;
+-	default:
+-		break;
+-	}
+-
+-	dev_err(udc->dev, "Can't respond to SET/CLEAR FEATURE\n");
+-	spi_wr8(udc, MAX3420_REG_EPSTALLS, bSTLEP0IN | bSTLEP0OUT | bSTLSTAT);
+-}
+-
+-static void max3420_handle_setup(struct max3420_udc *udc)
+-{
+-	struct usb_ctrlrequest setup;
+-	u8 addr;
+-
+-	spi_rd_buf(udc, MAX3420_REG_SUDFIFO, (void *)&setup, 8);
+-
+-	udc->setup = setup;
+-	udc->setup.wValue = cpu_to_le16(setup.wValue);
+-	udc->setup.wIndex = cpu_to_le16(setup.wIndex);
+-	udc->setup.wLength = cpu_to_le16(setup.wLength);
+-
+-	switch (udc->setup.bRequest) {
+-	case USB_REQ_GET_STATUS:
+-		/* Data+Status phase form udc */
+-		if ((udc->setup.bRequestType &
+-				(USB_DIR_IN | USB_TYPE_MASK)) !=
+-				(USB_DIR_IN | USB_TYPE_STANDARD)) {
+-			break;
+-		}
+-		return max3420_getstatus(udc);
+-	case USB_REQ_SET_ADDRESS:
+-		/* Status phase from udc */
+-		if (udc->setup.bRequestType != (USB_DIR_OUT |
+-				USB_TYPE_STANDARD | USB_RECIP_DEVICE))
+-			break;
+-		addr = spi_rd8_ack(udc, MAX3420_REG_FNADDR, 1);
+-		dev_dbg(udc->dev, "Assigned Address=%d/%d\n",
+-			udc->setup.wValue, addr);
+-		return;
+-	case USB_REQ_CLEAR_FEATURE:
+-	case USB_REQ_SET_FEATURE:
+-		/* Requests with no data phase, status phase from udc */
+-		if ((udc->setup.bRequestType & USB_TYPE_MASK)
+-				!= USB_TYPE_STANDARD)
+-			break;
+-		return max3420_set_clear_feature(udc);
+-	default:
+-		break;
+-	}
+-
+-	if (udc->driver->setup(&udc->gadget, &setup) < 0) {
+-		/* Stall EP0 */
+-		spi_wr8(udc, MAX3420_REG_EPSTALLS,
+-			bSTLEP0IN | bSTLEP0OUT | bSTLSTAT);
+-	}
+-}
+-
+-static int do_data(struct max3420_udc *udc, int ep_id, int in)
+-{
+-	struct max3420_ep *ep = &udc->ep[ep_id];
+-	struct max3420_req *req;
+-	int done, length, psz;
+-	void *buf;
+-
+-	if (list_empty(&ep->queue))
+-		return 0;
+-
+-	req = list_first_entry(&ep->queue, struct max3420_req, queue);
+-	buf = req->usb_req.buf + req->usb_req.actual;
+-
+-	psz = ep->ep_usb.maxpacket;
+-	length = req->usb_req.length - req->usb_req.actual;
+-	length = min(length, psz);
+-
+-	if (length == 0) {
+-		done = 1;
+-		goto xfer_done;
+-	}
+-
+-	done = 0;
+-	if (in) {
+-		spi_wr_buf(udc, MAX3420_REG_EP0FIFO + ep_id, buf, length);
+-		spi_wr8(udc, MAX3420_REG_EP0BC + ep_id, length);
+-		if (length < psz)
+-			done = 1;
+-	} else {
+-		psz = spi_rd8(udc, MAX3420_REG_EP0BC + ep_id);
+-		length = min(length, psz);
+-		spi_rd_buf(udc, MAX3420_REG_EP0FIFO + ep_id, buf, length);
+-		if (length < ep->ep_usb.maxpacket)
+-			done = 1;
+-	}
+-
+-	req->usb_req.actual += length;
+-
+-	if (req->usb_req.actual == req->usb_req.length)
+-		done = 1;
+-
+-xfer_done:
+-	if (done) {
+-		list_del_init(&req->queue);
+-
+-		if (ep_id == 0)
+-			spi_ack_ctrl(udc);
+-
+-		max3420_req_done(req, 0);
+-	}
+-
+-	return 1;
+-}
+-
+-static int max3420_handle_irqs(struct max3420_udc *udc)
+-{
+-	u8 epien, epirq, usbirq, usbien, reg[4];
+-	int ret = 0;
+-
+-	spi_rd_buf(udc, MAX3420_REG_EPIRQ, reg, 4);
+-	epirq = reg[0];
+-	epien = reg[1];
+-	usbirq = reg[2];
+-	usbien = reg[3];
+-
+-	usbirq &= usbien;
+-	epirq &= epien;
+-
+-	if (epirq & bSUDAVIRQ) {
+-		spi_wr8(udc, MAX3420_REG_EPIRQ, bSUDAVIRQ);
+-		max3420_handle_setup(udc);
+-		return 1;
+-	}
+-
+-	if (usbirq & bVBUSIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bVBUSIRQ);
+-		dev_dbg(udc->dev, "Cable plugged in\n");
+-		g_dnl_clear_detach();
+-		return 1;
+-	}
+-
+-	if (usbirq & bNOVBUSIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bNOVBUSIRQ);
+-		dev_dbg(udc->dev, "Cable pulled out\n");
+-		g_dnl_trigger_detach();
+-		return 1;
+-	}
+-
+-	if (usbirq & bURESIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bURESIRQ);
+-		return 1;
+-	}
+-
+-	if (usbirq & bURESDNIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bURESDNIRQ);
+-		spi_wr8(udc, MAX3420_REG_USBIEN, bURESDNIRQ | bURESIRQ);
+-		spi_wr8(udc, MAX3420_REG_EPIEN, bSUDAVIRQ
+-			| bIN0BAVIRQ | bOUT0DAVIRQ);
+-		return 1;
+-	}
+-
+-	if (usbirq & bSUSPIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bSUSPIRQ);
+-		dev_dbg(udc->dev, "USB Suspend - Enter\n");
+-		udc->suspended = true;
+-		return 1;
+-	}
+-
+-	if (usbirq & bBUSACTIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bBUSACTIRQ);
+-		dev_dbg(udc->dev, "USB Suspend - Exit\n");
+-		udc->suspended = false;
+-		return 1;
+-	}
+-
+-	if (usbirq & bRWUDNIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bRWUDNIRQ);
+-		dev_dbg(udc->dev, "Asked Host to wakeup\n");
+-		return 1;
+-	}
+-
+-	if (usbirq & bOSCOKIRQ) {
+-		spi_wr8(udc, MAX3420_REG_USBIRQ, bOSCOKIRQ);
+-		dev_dbg(udc->dev, "Osc stabilized, start work\n");
+-		return 1;
+-	}
+-
+-	if (epirq & bOUT0DAVIRQ && do_data(udc, 0, 0)) {
+-		spi_wr8_ack(udc, MAX3420_REG_EPIRQ, bOUT0DAVIRQ, 1);
+-		ret = 1;
+-	}
+-
+-	if (epirq & bIN0BAVIRQ && do_data(udc, 0, 1))
+-		ret = 1;
+-
+-	if (epirq & bOUT1DAVIRQ && do_data(udc, 1, 0)) {
+-		spi_wr8_ack(udc, MAX3420_REG_EPIRQ, bOUT1DAVIRQ, 1);
+-		ret = 1;
+-	}
+-
+-	if (epirq & bIN2BAVIRQ && do_data(udc, 2, 1))
+-		ret = 1;
+-
+-	if (epirq & bIN3BAVIRQ && do_data(udc, 3, 1))
+-		ret = 1;
+-
+-	return ret;
+-}
+-
+-static int max3420_irq(struct max3420_udc *udc)
+-{
+-	do_data(udc, 0, 1); /* get done with the EP0 ZLP */
+-
+-	return max3420_handle_irqs(udc);
+-}
+-
+-static void max3420_setup_eps(struct max3420_udc *udc)
+-{
+-	int i;
+-
+-	INIT_LIST_HEAD(&udc->gadget.ep_list);
+-	INIT_LIST_HEAD(&udc->ep[0].ep_usb.ep_list);
+-
+-	for (i = 0; i < MAX3420_MAX_EPS; i++) {
+-		struct max3420_ep *ep = &udc->ep[i];
+-
+-		INIT_LIST_HEAD(&ep->queue);
+-
+-		ep->id = i;
+-		ep->udc = udc;
+-		ep->ep_usb.ops = &max3420_ep_ops;
+-		ep->ep_usb.name = ep->name;
+-		ep->ep_usb.maxpacket = EP_MAX_PACKET;
+-
+-		if (i == 0) {
+-			ep->ep_usb.desc = &ep0_desc;
+-			snprintf(ep->name, EPNAME_SIZE, "ep0");
+-			continue;
+-		}
+-
+-		list_add_tail(&ep->ep_usb.ep_list, &udc->gadget.ep_list);
+-
+-		if (i == 1)
+-			snprintf(ep->name, EPNAME_SIZE, "ep1out-bulk");
+-		else
+-			snprintf(ep->name, EPNAME_SIZE, "ep%din-bulk", i);
+-	};
+-}
+-
+-static void max3420_setup_spi(struct max3420_udc *udc)
+-{
+-	u8 reg[8];
+-
+-	spi_claim_bus(udc->slave);
+-	spi_rd_buf(udc, MAX3420_REG_EPIRQ, reg, 8);
+-	/* configure SPI */
+-	spi_wr8(udc, MAX3420_REG_PINCTL, bFDUPSPI);
+-}
+-
+-static int max3420_udc_probe(struct udevice *dev)
+-{
+-	struct max3420_udc *udc = dev_get_priv(dev);
+-	struct dm_spi_slave_plat *slave_pdata;
+-	struct udevice *bus = dev->parent;
+-	int busnum = dev_seq(bus);
+-	unsigned int cs;
+-	uint speed, mode;
+-	struct udevice *spid;
+-
+-	slave_pdata = dev_get_parent_plat(dev);
+-	cs = slave_pdata->cs;
+-	speed = slave_pdata->max_hz;
+-	mode = slave_pdata->mode;
+-	_spi_get_bus_and_cs(busnum, cs, speed, mode, false, "spi_generic_drv",
+-			    NULL, &spid, &udc->slave);
+-
+-	udc->dev = dev;
+-	udc->gadget.ep0 = &udc->ep[0].ep_usb;
+-	udc->gadget.max_speed = USB_SPEED_FULL;
+-	udc->gadget.speed = USB_SPEED_FULL;
+-	udc->gadget.is_dualspeed = 0;
+-	udc->gadget.ops = &max3420_udc_ops;
+-	udc->gadget.name = "max3420-udc";
+-
+-	max3420_setup_eps(udc);
+-	max3420_setup_spi(udc);
+-
+-	usb_add_gadget_udc((struct device *)dev, &udc->gadget);
+-
+-	return 0;
+-}
+-
+-static int max3420_udc_remove(struct udevice *dev)
+-{
+-	struct max3420_udc *udc = dev_get_priv(dev);
+-
+-	usb_del_gadget_udc(&udc->gadget);
+-
+-	spi_release_bus(udc->slave);
+-
+-	return 0;
+-}
+-
+-static int max3420_gadget_handle_interrupts(struct udevice *dev)
+-{
+-	struct max3420_udc *udc = dev_get_priv(dev);
+-
+-	return max3420_irq(udc);
+-}
+-
+-static const struct usb_gadget_generic_ops max3420_gadget_ops = {
+-	.handle_interrupts	= max3420_gadget_handle_interrupts,
+-};
+-
+-static const struct udevice_id max3420_ids[] = {
+-	{ .compatible = "maxim,max3421-udc" },
+-	{ }
+-};
+-
+-U_BOOT_DRIVER(max3420_generic_udc) = {
+-	.name = "max3420-udc",
+-	.id = UCLASS_USB_GADGET_GENERIC,
+-	.of_match = max3420_ids,
+-	.ops = &max3420_gadget_ops,
+-	.probe = max3420_udc_probe,
+-	.remove = max3420_udc_remove,
+-	.priv_auto	= sizeof(struct max3420_udc),
+-};
 -- 
 2.43.0
 
