@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2397DC87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A408BC87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 14:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C103D842D2;
-	Wed,  6 Aug 2025 16:56:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F9EE83A5A;
+	Wed,  6 Aug 2025 16:56:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hf5mVszj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fjY9xGrf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC65583A71; Wed,  6 Aug 2025 16:56:17 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id BC74B83A5E; Wed,  6 Aug 2025 16:56:23 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA25A83A5B
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1CDE83A5A
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 16:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-433f1f97176so3749b6e.3
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:09 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-30799a41109so7530fac.2
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 07:56:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754492168; x=1755096968; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754492173; x=1755096973; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CxedUUyWSJJXDc+8oXm1PtEiiiqwR2R5AToyHeTDPac=;
- b=hf5mVszjaGQeI0ABlWsbbbXfOmFpTdyFicoBFwGju9l+EAbgB5lp+pjBGPvU/vqKYM
- VUkP+4N1ZB3I2n8tv6044klnM8t1iqooWTw0+wmbS+ZIGx3xvBMtJSPrJFzLlMb6fCPP
- X56PmQOtUShnALfKYRqOefPjAiRHFTUIj8gD0=
+ bh=p1rUiShiMCwNS5pEbvStob3F2kiCtfjBgeX0jfWfhUQ=;
+ b=fjY9xGrf/0vEyt1tPxHookS9q8WqRWEBREGXSzNoAp6JUpc8ew4/6QXFzwehV1r9AD
+ lfiojBU6XTe4Ha/t13Tx9KvZ/bPOt/8Ay5Il3T6f+rydMySO4Af54vQKwOs51ClO4B3S
+ ZfvZHfKC6TqEGWyToaa7M5sYhYQfX0Dmrg3lc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754492168; x=1755096968;
+ d=1e100.net; s=20230601; t=1754492173; x=1755096973;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CxedUUyWSJJXDc+8oXm1PtEiiiqwR2R5AToyHeTDPac=;
- b=G221N8SkW5LM7iP+vX90kio/26qOsu1NC0WUPHNrZPPY+DTXQQaPQ1Ke+QfKVmjyGt
- U9WyoLgUu1shIXErul5u5bjPlRbxJXqK+V16dkn6UX/4rAxp/oMoZOb1hpeFs8CNHLNe
- Hazps+UIKiT5X2F8fbTf+9SSXvU5QmH9pFLGwzr6kj4rswlOrE0YCyLL2RqVYDpMRQeb
- MenyeHqFrrnxRqi1U6xxMUzSqmqlWjrPGHOroC2mfZSskkv+8+UjqrPbsGXWiibgWgwy
- BIBeiwRVSi5iR5HTPbDyo+LJJYroq9L5tLYplSPtkUoYz92Zm36/q7dYt369Sw9EaEYb
- udew==
-X-Gm-Message-State: AOJu0Ywa1OniK2XFT3FHth9i863bHFCpdkBUxlgY9S8KFv9zlMTGs+7x
- uiRO7Xf+rXk1NoelbkGlcybMSa72Gdq/7ZKKMLqm3BHDlhIeIMWEubdxOq3/zD/2DUmCU3TwlOX
- lTWpgIiw=
-X-Gm-Gg: ASbGncueZEN3njC5Ro3wl5UW2CtYnjHQHTB3a6Kx8BHXWMWgECfcC7KmiyVR0B08xZ7
- 3J/y7NpFgUyfNEDCUNbzANpOdvNdFzV8bqqVsVMkf3dnhasSfrQ0MnFYstbU08EFqfuQG2QvxWl
- fI0jSrbTn8wK07Q6wGNOQ4kt/kfzalHVt5QujqQNzIC/wcybedUBuGzG8quKkhER49cHu3KjxRo
- SLBEV42bxwVwtnxWZVCynqujOkhM0NYWdyCIdBCSDgiIqCj341D7MXjt+Q35Di8Qu8BsRS4LG1r
- 6ioW4Cln7xLxNXc7px509DMjAfNEzZijuC90FDXW6BNyLvaGBNAy91Sen7uSlLyevf+pazjYAln
- lYXe2G3d8zTasWFfRKog6USVSSuz6z/IEw6eFUyxXMdYw4CmcaNWwW9fQEuo=
-X-Google-Smtp-Source: AGHT+IF2XdgPB1Vv6kBhjmHEh3UDtUf8Xssg3+rqSDDVQdzGpcrVetVA2AZHQESc+D3bSVRKKYFpVg==
-X-Received: by 2002:a05:6808:66c4:b0:435:8501:4cbd with SMTP id
- 5614622812f47-4358501577fmr404544b6e.5.1754492168293; 
- Wed, 06 Aug 2025 07:56:08 -0700 (PDT)
+ bh=p1rUiShiMCwNS5pEbvStob3F2kiCtfjBgeX0jfWfhUQ=;
+ b=WbDcxQwQdEWQRRwgJE5oal/inhWsefBstRNdcihOP7zeOhkZDQeJsqzYZP5l3IyQc7
+ tCYhVK6lhDn5R89y1smTi6+ZIzuE1CLDxh8FnVIESeiXUnQ3rvsFWbTqMOITlrGmP58m
+ NDOEL5J3AWLfBQyjbz04NYIPNLWwIEl0CaYpEB1k+QaztxbPGpiJjEou/CUE8Os1ylAa
+ BHhpdPRsRj6NjIUeBjMwaOk7bnYOaDq4hbANlsoPGa3/kdm3NYbGOA5k2eRPrlryhf8R
+ +GeKoJqXCvuYgIBRsfG34V0R/WlfbIB5W9zUGroY4WWoAaAKpdh8cK33i/0Emx9Rl2Ma
+ FZ4Q==
+X-Gm-Message-State: AOJu0YxEGLRq5qyO3NQoPH18LAut2S/VkV11VDFqAD+BO16Kl/QgI3iQ
+ 8E62DIpj67lFwyUesiE7MxekF2rvMXSjVXhPD0piTh+xLWHqzDBJFxdlis4ZOODk/C139ut0syN
+ gbdw9YBg=
+X-Gm-Gg: ASbGncu25XUbm9mj3eM/vz7OA9CyDwoyF3yh99em52PZKqeW5endDrQ7poOO6UWXbFY
+ OQEJF8O8rZw415zzTpdJwa7brwT2z3NoyOpNH1/+f+6LySKS8Rc1+EJp0TFsZ9KsTymVVrSMy/k
+ FaFjaKzYIcM1hqYn+AkzffbrepgT9fplBFw+ii9vmPJcTkGvXfG61Nv2eEkbKf3Mr1OyGKkayNV
+ i8yA934zfrlFAQaOlC1H2rI3Z8LsRJcYDolomRRGrau2ZEcaGgpzxzir65g2apgP9hYmsCGxf9E
+ 21SJVOQNKtxTMZXayVR0g04eQwoVLs4DFNheRRAZJb9eM6ja3KsItxaagJtaFpIndQeLJnz1Yh/
+ XtiY/gMFBICMx+TG0Im+QZxhlNG3t9Z6abK3AeX2m+vbKTsKZUNSYhLe1CK4=
+X-Google-Smtp-Source: AGHT+IHdjqnzsAjNpzZ9B4r6kDqiH4xl3mJ/QTM3q01LSr2qb4eifxO/UAjAtO0Zh0RSMcEf6rdYbA==
+X-Received: by 2002:a05:6871:738f:b0:30b:b045:18df with SMTP id
+ 586e51a60fabf-30be2ce103bmr2028823fac.35.1754492171220; 
+ Wed, 06 Aug 2025 07:56:11 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30ba8228a79sm1925391fac.35.2025.08.06.07.56.07
+ 586e51a60fabf-30ba8228a79sm1925391fac.35.2025.08.06.07.56.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 07:56:07 -0700 (PDT)
+ Wed, 06 Aug 2025 07:56:10 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut@mailbox.org>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH 4/7] usb: gadget: max3420_udc: Remove unused driver
-Date: Wed,  6 Aug 2025 08:55:58 -0600
-Message-ID: <20250806145601.1664563-4-trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Subject: [PATCH 7/7] usb: musb: Remove most of the legacy MUSB code
+Date: Wed,  6 Aug 2025 08:56:01 -0600
+Message-ID: <20250806145601.1664563-7-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250806145601.1664563-1-trini@konsulko.com>
 References: <20250806145601.1664563-1-trini@konsulko.com>
@@ -96,934 +95,2872 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This driver is unused. Remove it.
+With one exception, the legacy MUSB code is now unused. Remove it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/usb/gadget/Kconfig       |   6 -
- drivers/usb/gadget/Makefile      |   1 -
- drivers/usb/gadget/max3420_udc.c | 879 -------------------------------
- 3 files changed, 886 deletions(-)
- delete mode 100644 drivers/usb/gadget/max3420_udc.c
+ drivers/usb/musb/Kconfig      |   10 -
+ drivers/usb/musb/Makefile     |    3 -
+ drivers/usb/musb/am35x.c      |  138 ----
+ drivers/usb/musb/am35x.h      |   81 ---
+ drivers/usb/musb/musb_core.c  |  150 -----
+ drivers/usb/musb/musb_debug.h |  191 ------
+ drivers/usb/musb/musb_hcd.c   | 1161 ---------------------------------
+ drivers/usb/musb/musb_hcd.h   |   93 ---
+ drivers/usb/musb/musb_udc.c   |  953 ---------------------------
+ 9 files changed, 2780 deletions(-)
+ delete mode 100644 drivers/usb/musb/am35x.c
+ delete mode 100644 drivers/usb/musb/am35x.h
+ delete mode 100644 drivers/usb/musb/musb_core.c
+ delete mode 100644 drivers/usb/musb/musb_debug.h
+ delete mode 100644 drivers/usb/musb/musb_hcd.c
+ delete mode 100644 drivers/usb/musb/musb_hcd.h
+ delete mode 100644 drivers/usb/musb/musb_udc.c
 
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index 37c516abcd5a..608871275c35 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -151,12 +151,6 @@ config CI_UDC
- 	  Say Y here to enable device controller functionality of the
- 	  ChipIdea driver.
+diff --git a/drivers/usb/musb/Kconfig b/drivers/usb/musb/Kconfig
+index 2508b6ed0d13..e0508a1bc5cb 100644
+--- a/drivers/usb/musb/Kconfig
++++ b/drivers/usb/musb/Kconfig
+@@ -5,16 +5,6 @@
  
--config USB_GADGET_MAX3420
--	bool "MAX3420 USB Over SPI"
--	depends on DM_SPI
--	help
--	  MAX3420, from MAXIM, implements USB-over-SPI Full-Speed device controller.
+ comment "Legacy MUSB Support"
+ 
+-config USB_MUSB_HCD
+-	bool "Legacy MUSB Host Controller"
 -
- config USB_GADGET_VBUS_DRAW
- 	int "Maximum VBUS Power usage (2-500 mA)"
- 	range 2 500
-diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
-index 7af5f6e6d634..f2aebf4e4806 100644
---- a/drivers/usb/gadget/Makefile
-+++ b/drivers/usb/gadget/Makefile
-@@ -19,7 +19,6 @@ obj-$(CONFIG_USB_GADGET_AT91) += at91_udc.o
- obj-$(CONFIG_USB_GADGET_ATMEL_USBA) += atmel_usba_udc.o
- obj-$(CONFIG_USB_GADGET_DWC2_OTG) += dwc2_udc_otg.o
- obj-$(CONFIG_USB_GADGET_DWC2_OTG_PHY) += dwc2_udc_otg_phy.o
--obj-$(CONFIG_USB_GADGET_MAX3420) += max3420_udc.o
- obj-$(CONFIG_USB_RENESAS_USBHS) += rcar/
- ifndef CONFIG_XPL_BUILD
- obj-$(CONFIG_USB_GADGET_DOWNLOAD) += g_dnl.o
-diff --git a/drivers/usb/gadget/max3420_udc.c b/drivers/usb/gadget/max3420_udc.c
+-config USB_MUSB_UDC
+-	bool "Legacy USB Device Controller"
+-
+ config USB_OMAP3
+ 	bool "Legacy MUSB OMAP3 / OMAP4"
+ 	depends on ARCH_OMAP2PLUS
+-
+-config USB_AM35X
+-	bool"Legacy MUSB AM35x"
+-	depends on ARCH_OMAP2PLUS && !USB_OMAP3
+diff --git a/drivers/usb/musb/Makefile b/drivers/usb/musb/Makefile
+index 744f2cfaa294..3fcf5c3bdbf0 100644
+--- a/drivers/usb/musb/Makefile
++++ b/drivers/usb/musb/Makefile
+@@ -3,7 +3,4 @@
+ # (C) Copyright 2000-2007
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_USB_MUSB_HCD) += musb_hcd.o musb_core.o
+-obj-$(CONFIG_USB_MUSB_UDC) += musb_udc.o musb_core.o
+ obj-$(CONFIG_USB_OMAP3) += omap3.o
+-obj-$(CONFIG_USB_AM35X) += am35x.o
+diff --git a/drivers/usb/musb/am35x.c b/drivers/usb/musb/am35x.c
 deleted file mode 100644
-index 557a1f0644e9..000000000000
---- a/drivers/usb/gadget/max3420_udc.c
+index 2c23043d40e9..000000000000
+--- a/drivers/usb/musb/am35x.c
 +++ /dev/null
-@@ -1,879 +0,0 @@
+@@ -1,138 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * am35x.c - TI's AM35x platform specific usb wrapper functions.
+- *
+- * Author: Ajay Kumar Gupta <ajay.gupta@ti.com>
+- *
+- * Based on drivers/usb/musb/da8xx.c
+- *
+- * Copyright (c) 2010 Texas Instruments Incorporated
+- */
 -
--#include <linux/errno.h>
 -#include <linux/delay.h>
--#include <asm/gpio.h>
--#include <linux/list.h>
--#include <linux/bitfield.h>
--#include <linux/usb/ch9.h>
--#include <linux/usb/gadget.h>
--#include <malloc.h>
--#include <spi.h>
--#include <dm.h>
--#include <g_dnl.h>
 -
--#define MAX3420_MAX_EPS		4
--#define EP_MAX_PACKET		64  /* Same for all Endpoints */
--#define EPNAME_SIZE		16  /* Buffer size for endpoint name */
+-#include "am35x.h"
 -
--#define MAX3420_SPI_DIR_RD	0	/* read register from MAX3420 */
--#define MAX3420_SPI_DIR_WR	1	/* write register to MAX3420 */
--
--/* SPI commands: */
--#define MAX3420_SPI_ACK_MASK BIT(0)
--#define MAX3420_SPI_DIR_MASK BIT(1)
--#define MAX3420_SPI_REG_MASK GENMASK(7, 3)
--
--#define MAX3420_REG_EP0FIFO	0
--#define MAX3420_REG_EP1FIFO	1
--#define MAX3420_REG_EP2FIFO	2
--#define MAX3420_REG_EP3FIFO	3
--#define MAX3420_REG_SUDFIFO	4
--#define MAX3420_REG_EP0BC	5
--#define MAX3420_REG_EP1BC	6
--#define MAX3420_REG_EP2BC	7
--#define MAX3420_REG_EP3BC	8
--
--#define MAX3420_REG_EPSTALLS	9
--	#define bACKSTAT	BIT(6)
--	#define bSTLSTAT	BIT(5)
--	#define bSTLEP3IN	BIT(4)
--	#define bSTLEP2IN	BIT(3)
--	#define bSTLEP1OUT	BIT(2)
--	#define bSTLEP0OUT	BIT(1)
--	#define bSTLEP0IN	BIT(0)
--
--#define MAX3420_REG_CLRTOGS	10
--	#define bEP3DISAB	BIT(7)
--	#define bEP2DISAB	BIT(6)
--	#define bEP1DISAB	BIT(5)
--	#define bCTGEP3IN	BIT(4)
--	#define bCTGEP2IN	BIT(3)
--	#define bCTGEP1OUT	BIT(2)
--
--#define MAX3420_REG_EPIRQ	11
--#define MAX3420_REG_EPIEN	12
--	#define bSUDAVIRQ	BIT(5)
--	#define bIN3BAVIRQ	BIT(4)
--	#define bIN2BAVIRQ	BIT(3)
--	#define bOUT1DAVIRQ	BIT(2)
--	#define bOUT0DAVIRQ	BIT(1)
--	#define bIN0BAVIRQ	BIT(0)
--
--#define MAX3420_REG_USBIRQ	13
--#define MAX3420_REG_USBIEN	14
--	#define bOSCOKIRQ	BIT(0)
--	#define bRWUDNIRQ	BIT(1)
--	#define bBUSACTIRQ	BIT(2)
--	#define bURESIRQ	BIT(3)
--	#define bSUSPIRQ	BIT(4)
--	#define bNOVBUSIRQ	BIT(5)
--	#define bVBUSIRQ	BIT(6)
--	#define bURESDNIRQ	BIT(7)
--
--#define MAX3420_REG_USBCTL	15
--	#define bHOSCSTEN	BIT(7)
--	#define bVBGATE		BIT(6)
--	#define bCHIPRES	BIT(5)
--	#define bPWRDOWN	BIT(4)
--	#define bCONNECT	BIT(3)
--	#define bSIGRWU		BIT(2)
--
--#define MAX3420_REG_CPUCTL	16
--	#define bIE		BIT(0)
--
--#define MAX3420_REG_PINCTL	17
--	#define bEP3INAK	BIT(7)
--	#define bEP2INAK	BIT(6)
--	#define bEP0INAK	BIT(5)
--	#define bFDUPSPI	BIT(4)
--	#define bINTLEVEL	BIT(3)
--	#define bPOSINT		BIT(2)
--	#define bGPXB		BIT(1)
--	#define bGPXA		BIT(0)
--
--#define MAX3420_REG_REVISION	18
--
--#define MAX3420_REG_FNADDR	19
--	#define FNADDR_MASK	0x7f
--
--#define MAX3420_REG_IOPINS	20
--#define MAX3420_REG_IOPINS2	21
--#define MAX3420_REG_GPINIRQ	22
--#define MAX3420_REG_GPINIEN	23
--#define MAX3420_REG_GPINPOL	24
--#define MAX3420_REG_HIRQ	25
--#define MAX3420_REG_HIEN	26
--#define MAX3420_REG_MODE	27
--#define MAX3420_REG_PERADDR	28
--#define MAX3420_REG_HCTL	29
--#define MAX3420_REG_HXFR	30
--#define MAX3420_REG_HRSL	31
--
--struct max3420_req {
--	struct usb_request usb_req;
--	struct list_head queue;
--	struct max3420_ep *ep;
+-/* MUSB platform configuration */
+-struct musb_config musb_cfg = {
+-	.regs		= (struct musb_regs *)AM35X_USB_OTG_CORE_BASE,
+-	.timeout	= AM35X_USB_OTG_TIMEOUT,
+-	.musb_speed	= 0,
 -};
 -
--struct max3420_ep {
--	struct max3420_udc *udc;
--	struct list_head queue;
--	char name[EPNAME_SIZE];
--	unsigned int maxpacket;
--	struct usb_ep ep_usb;
--	int halted;
--	int id;
--};
--
--struct max3420_udc {
--	struct max3420_ep ep[MAX3420_MAX_EPS];
--	struct usb_gadget_driver *driver;
--	bool softconnect;
--	struct usb_ctrlrequest setup;
--	struct max3420_req ep0req;
--	struct usb_gadget gadget;
--	struct spi_slave *slave;
--	struct udevice *dev;
--	u8 ep0buf[64];
--	int remote_wkp;
--	bool suspended;
--};
--
--#define to_max3420_req(r)	container_of((r), struct max3420_req, usb_req)
--#define to_max3420_ep(e)	container_of((e), struct max3420_ep, ep_usb)
--#define to_udc(g)		container_of((g), struct max3420_udc, gadget)
--
--static void spi_ack_ctrl(struct max3420_udc *udc)
+-/*
+- * Enable the USB phy
+- */
+-static u8 phy_on(void)
 -{
--	struct spi_slave *slave = udc->slave;
--	u8 txdata[1];
+-	u32 devconf2;
+-	u32 timeout;
 -
--	txdata[0] = FIELD_PREP(MAX3420_SPI_ACK_MASK, 1);
--	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_ONCE);
+-	devconf2 = readl(&am35x_scm_general_regs->devconf2);
+-
+-	devconf2 &= ~(DEVCONF2_RESET | DEVCONF2_PHYPWRDN | DEVCONF2_OTGPWRDN |
+-		      DEVCONF2_OTGMODE | DEVCONF2_REFFREQ |
+-		      DEVCONF2_PHY_GPIOMODE);
+-	devconf2 |= DEVCONF2_SESENDEN | DEVCONF2_VBDTCTEN | DEVCONF2_PHY_PLLON |
+-		    DEVCONF2_REFFREQ_13MHZ | DEVCONF2_DATPOL;
+-
+-	writel(devconf2, &am35x_scm_general_regs->devconf2);
+-
+-	/* wait until the USB phy is turned on */
+-	timeout = musb_cfg.timeout;
+-	while (timeout--)
+-		if (readl(&am35x_scm_general_regs->devconf2) & DEVCONF2_PHYCKGD)
+-			return 1;
+-
+-	/* USB phy was not turned on */
+-	return 0;
 -}
 -
--static u8 spi_rd8_ack(struct max3420_udc *udc, u8 reg, int ackstat)
+-/*
+- * Disable the USB phy
+- */
+-static void phy_off(void)
 -{
--	struct spi_slave *slave = udc->slave;
--	u8 txdata[2], rxdata[2];
+-	u32 devconf2;
 -
--	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
--			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_RD) |
--			FIELD_PREP(MAX3420_SPI_ACK_MASK, ackstat ? 1 : 0);
+-	/*
+-	 * Power down the on-chip PHY.
+-	 */
+-	devconf2 = readl(&am35x_scm_general_regs->devconf2);
 -
--	rxdata[0] = 0;
--	rxdata[1] = 0;
--	spi_xfer(slave, sizeof(txdata), txdata, rxdata, SPI_XFER_ONCE);
--
--	return rxdata[1];
+-	devconf2 &= ~DEVCONF2_PHY_PLLON;
+-	devconf2 |= DEVCONF2_PHYPWRDN | DEVCONF2_OTGPWRDN;
+-	writel(devconf2, &am35x_scm_general_regs->devconf2);
 -}
 -
--static u8 spi_rd8(struct max3420_udc *udc, u8 reg)
+-/*
+- * This function performs platform specific initialization for usb0.
+- */
+-int musb_platform_init(void)
 -{
--	return spi_rd8_ack(udc, reg, 0);
--}
+-	u32 revision;
+-	u32 sw_reset;
 -
--static void spi_wr8_ack(struct max3420_udc *udc, u8 reg, u8 val, int ackstat)
--{
--	struct spi_slave *slave = udc->slave;
--	u8 txdata[2];
+-	/* global usb reset */
+-	sw_reset = readl(&am35x_scm_general_regs->ip_sw_reset);
+-	sw_reset |= (1 << 0);
+-	writel(sw_reset, &am35x_scm_general_regs->ip_sw_reset);
+-	sw_reset &= ~(1 << 0);
+-	writel(sw_reset, &am35x_scm_general_regs->ip_sw_reset);
 -
--	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
--			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_WR) |
--			FIELD_PREP(MAX3420_SPI_ACK_MASK, ackstat ? 1 : 0);
--	txdata[1] = val;
+-	/* reset the controller */
+-	writel(0x1, &am35x_usb_regs->control);
+-	udelay(5000);
 -
--	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_ONCE);
--}
+-	/* start the on-chip usb phy and its pll */
+-	if (phy_on() == 0)
+-		return -1;
 -
--static void spi_wr8(struct max3420_udc *udc, u8 reg, u8 val)
--{
--	spi_wr8_ack(udc, reg, val, 0);
--}
--
--static void spi_rd_buf(struct max3420_udc *udc, u8 reg, void *buf, u8 len)
--{
--	struct spi_slave *slave = udc->slave;
--	u8 txdata[1];
--
--	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
--			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_RD);
--
--	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_BEGIN);
--	spi_xfer(slave, len * 8, NULL, buf, SPI_XFER_END);
--}
--
--static void spi_wr_buf(struct max3420_udc *udc, u8 reg, void *buf, u8 len)
--{
--	struct spi_slave *slave = udc->slave;
--	u8 txdata[1];
--
--	txdata[0] = FIELD_PREP(MAX3420_SPI_REG_MASK, reg) |
--			FIELD_PREP(MAX3420_SPI_DIR_MASK, MAX3420_SPI_DIR_WR);
--
--	spi_xfer(slave, sizeof(txdata), txdata, NULL, SPI_XFER_BEGIN);
--	spi_xfer(slave, len * 8, buf, NULL, SPI_XFER_END);
--}
--
--/* 0 if not-connected */
--int g_dnl_board_usb_cable_connected(void)
--{
--	return 1;
--}
--
--static void spi_max3420_enable(struct max3420_ep *ep, int enable)
--{
--	struct max3420_udc *udc = ep->udc;
--	u8 epdis, epien;
--
--	if (ep->id == 0)
--		return;
--
--	epien = spi_rd8(udc, MAX3420_REG_EPIEN);
--	epdis = spi_rd8(udc, MAX3420_REG_CLRTOGS);
--
--	if (enable) {
--		epdis &= ~BIT(ep->id + 4);
--		epien |= BIT(ep->id + 1);
--	} else {
--		epdis |= BIT(ep->id + 4);
--		epien &= ~BIT(ep->id + 1);
--	}
--
--	spi_wr8(udc, MAX3420_REG_CLRTOGS, epdis);
--	spi_wr8(udc, MAX3420_REG_EPIEN, epien);
--}
--
--static int
--max3420_ep_enable(struct usb_ep *_ep,
--		  const struct usb_endpoint_descriptor *desc)
--{
--	struct max3420_ep *ep = to_max3420_ep(_ep);
--
--	_ep->desc = desc;
--	_ep->maxpacket = usb_endpoint_maxp(desc) & 0x7ff;
--
--	spi_max3420_enable(ep, 1);
+-	/* Returns zero if e.g. not clocked */
+-	revision = readl(&am35x_usb_regs->revision);
+-	if (revision == 0)
+-		return -1;
 -
 -	return 0;
 -}
 -
--static void max3420_req_done(struct max3420_req *req, int status)
+-/*
+- * This function performs platform specific deinitialization for usb0.
+- */
+-void musb_platform_deinit(void)
 -{
--	struct max3420_ep *ep = req->ep;
+-	/* Turn off the phy */
+-	phy_off();
+-}
 -
--	if (req->usb_req.status == -EINPROGRESS)
--		req->usb_req.status = status;
+-/*
+- * This function reads data from endpoint fifo for AM35x
+- * which supports only 32bit read operation.
+- *
+- * ep           - endpoint number
+- * length       - number of bytes to read from FIFO
+- * fifo_data    - pointer to data buffer into which data is read
+- */
+-__attribute__((weak))
+-void read_fifo(u8 ep, u32 length, void *fifo_data)
+-{
+-	u8  *data = (u8 *)fifo_data;
+-	u32 val;
+-	int i;
+-
+-	/* select the endpoint index */
+-	writeb(ep, &musbr->index);
+-
+-	if (length > 4) {
+-		for (i = 0; i < (length >> 2); i++) {
+-			val = readl(&musbr->fifox[ep]);
+-			memcpy(data, &val, 4);
+-			data += 4;
+-		}
+-		length %= 4;
+-	}
+-	if (length > 0) {
+-		val = readl(&musbr->fifox[ep]);
+-		memcpy(data, &val, length);
+-	}
+-}
+diff --git a/drivers/usb/musb/am35x.h b/drivers/usb/musb/am35x.h
+deleted file mode 100644
+index 82ad94329cb7..000000000000
+--- a/drivers/usb/musb/am35x.h
++++ /dev/null
+@@ -1,81 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * am35x.h - TI's AM35x platform specific usb wrapper definitions.
+- *
+- * Author: Ajay Kumar Gupta <ajay.gupta@ti.com>
+- *
+- * Based on drivers/usb/musb/da8xx.h
+- *
+- * Copyright (c) 2010 Texas Instruments Incorporated
+- */
+-
+-#ifndef __AM35X_USB_H__
+-#define __AM35X_USB_H__
+-
+-#include <asm/arch/am35x_def.h>
+-#include "musb_core.h"
+-
+-/* Base address of musb wrapper */
+-#define AM35X_USB_OTG_BASE	0x5C040000
+-
+-/* Base address of musb core */
+-#define AM35X_USB_OTG_CORE_BASE	(AM35X_USB_OTG_BASE + 0x400)
+-
+-/* Timeout for AM35x usb module */
+-#define AM35X_USB_OTG_TIMEOUT	0x3FFFFFF
+-
+-/*
+- * AM35x platform USB wrapper register overlay.
+- */
+-struct am35x_usb_regs {
+-	u32	revision;
+-	u32	control;
+-	u32	status;
+-	u32	emulation;
+-	u32	reserved0[1];
+-	u32	autoreq;
+-	u32	srpfixtime;
+-	u32	ep_intsrc;
+-	u32	ep_intsrcset;
+-	u32	ep_intsrcclr;
+-	u32	ep_intmsk;
+-	u32	ep_intmskset;
+-	u32	ep_intmskclr;
+-	u32	ep_intsrcmsked;
+-	u32	reserved1[1];
+-	u32	core_intsrc;
+-	u32	core_intsrcset;
+-	u32	core_intsrcclr;
+-	u32	core_intmsk;
+-	u32	core_intmskset;
+-	u32	core_intmskclr;
+-	u32	core_intsrcmsked;
+-	u32	reserved2[1];
+-	u32	eoi;
+-	u32	mop_sop_en;
+-	u32	reserved3[2];
+-	u32	txmode;
+-	u32	rxmode;
+-	u32	epcount_mode;
+-};
+-
+-#define am35x_usb_regs ((struct am35x_usb_regs *)AM35X_USB_OTG_BASE)
+-
+-/* USB 2.0 PHY Control */
+-#define DEVCONF2_PHY_GPIOMODE	(1 << 23)
+-#define DEVCONF2_OTGMODE	(3 << 14)
+-#define DEVCONF2_SESENDEN	(1 << 13)       /* Vsess_end comparator */
+-#define DEVCONF2_VBDTCTEN	(1 << 12)       /* Vbus comparator */
+-#define DEVCONF2_REFFREQ_24MHZ	(2 << 8)
+-#define DEVCONF2_REFFREQ_26MHZ	(7 << 8)
+-#define DEVCONF2_REFFREQ_13MHZ	(6 << 8)
+-#define DEVCONF2_REFFREQ	(0xf << 8)
+-#define DEVCONF2_PHYCKGD	(1 << 7)
+-#define DEVCONF2_VBUSSENSE	(1 << 6)
+-#define DEVCONF2_PHY_PLLON	(1 << 5)        /* override PLL suspend */
+-#define DEVCONF2_RESET		(1 << 4)
+-#define DEVCONF2_PHYPWRDN	(1 << 3)
+-#define DEVCONF2_OTGPWRDN	(1 << 2)
+-#define DEVCONF2_DATPOL		(1 << 1)
+-
+-#endif	/* __AM35X_USB_H__ */
+diff --git a/drivers/usb/musb/musb_core.c b/drivers/usb/musb/musb_core.c
+deleted file mode 100644
+index 260552e4dbd4..000000000000
+--- a/drivers/usb/musb/musb_core.c
++++ /dev/null
+@@ -1,150 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Mentor USB OTG Core functionality common for both Host and Device
+- * functionality.
+- *
+- * Copyright (c) 2008 Texas Instruments
+- *
+- * Author: Thomas Abraham t-abraham@ti.com, Texas Instruments
+- */
+-
+-#include <linux/bitops.h>
+-
+-#include "musb_core.h"
+-struct musb_regs *musbr;
+-
+-/*
+- * program the mentor core to start (enable interrupts, dma, etc.)
+- */
+-void musb_start(void)
+-{
+-#if defined(CONFIG_USB_MUSB_HCD)
+-	u8 devctl;
+-	u8 busctl;
+-#endif
+-
+-	/* disable all interrupts */
+-	writew(0, &musbr->intrtxe);
+-	writew(0, &musbr->intrrxe);
+-	writeb(0, &musbr->intrusbe);
+-	writeb(0, &musbr->testmode);
+-
+-	/* put into basic highspeed mode and start session */
+-	writeb(MUSB_POWER_HSENAB, &musbr->power);
+-#if defined(CONFIG_USB_MUSB_HCD)
+-	/* Program PHY to use EXT VBUS if required */
+-	if (musb_cfg.extvbus == 1) {
+-		busctl = musb_read_ulpi_buscontrol(musbr);
+-		musb_write_ulpi_buscontrol(musbr, busctl | ULPI_USE_EXTVBUS);
+-	}
+-
+-	devctl = readb(&musbr->devctl);
+-	writeb(devctl | MUSB_DEVCTL_SESSION, &musbr->devctl);
+-#endif
+-}
+-
+-#ifdef MUSB_NO_DYNAMIC_FIFO
+-# define config_fifo(dir, idx, addr)
+-#else
+-# define config_fifo(dir, idx, addr) \
+-	do { \
+-		writeb(idx, &musbr->dir##fifosz); \
+-		writew(addr, &musbr->dir##fifoadd); \
+-	} while (0)
+-#endif
+-
+-/*
+- * This function configures the endpoint configuration. The musb hcd or musb
+- * device implementation can use this function to configure the endpoints
+- * and set the FIFO sizes. Note: The summation of FIFO sizes of all endpoints
+- * should not be more than the available FIFO size.
+- *
+- * epinfo	- Pointer to EP configuration table
+- * cnt		- Number of entries in the EP conf table.
+- */
+-void musb_configure_ep(const struct musb_epinfo *epinfo, u8 cnt)
+-{
+-	u16 csr;
+-	u16 fifoaddr = 64 >> 3; /* First 64 bytes of FIFO reserved for EP0 */
+-	u32 fifosize;
+-	u8  idx;
+-
+-	while (cnt--) {
+-		/* prepare fifosize to write to register */
+-		fifosize = epinfo->epsize >> 3;
+-		idx = fifosize ? ((ffs(fifosize) - 1) & 0xF) : 0;
+-
+-		writeb(epinfo->epnum, &musbr->index);
+-		if (epinfo->epdir) {
+-			/* Configure fifo size and fifo base address */
+-			config_fifo(tx, idx, fifoaddr);
+-
+-			csr = readw(&musbr->txcsr);
+-			/* clear the data toggle bit */
+-			writew(csr | MUSB_TXCSR_CLRDATATOG, &musbr->txcsr);
+-			/* Flush fifo if required */
+-			if (csr & MUSB_TXCSR_TXPKTRDY)
+-				writew(csr | MUSB_TXCSR_FLUSHFIFO,
+-					&musbr->txcsr);
+-		} else {
+-			/* Configure fifo size and fifo base address */
+-			config_fifo(rx, idx, fifoaddr);
+-
+-			csr = readw(&musbr->rxcsr);
+-			/* clear the data toggle bit */
+-			writew(csr | MUSB_RXCSR_CLRDATATOG, &musbr->rxcsr);
+-			/* Flush fifo if required */
+-			if (csr & MUSB_RXCSR_RXPKTRDY)
+-				writew(csr | MUSB_RXCSR_FLUSHFIFO,
+-					&musbr->rxcsr);
+-		}
+-		fifoaddr += 1 << idx;
+-		epinfo++;
+-	}
+-}
+-
+-/*
+- * This function writes data to endpoint fifo
+- *
+- * ep		- endpoint number
+- * length	- number of bytes to write to FIFO
+- * fifo_data	- Pointer to data buffer that contains the data to write
+- */
+-__attribute__((weak))
+-void write_fifo(u8 ep, u32 length, void *fifo_data)
+-{
+-	u8  *data = (u8 *)fifo_data;
+-
+-	/* select the endpoint index */
+-	writeb(ep, &musbr->index);
+-
+-	/* write the data to the fifo */
+-	while (length--)
+-		writeb(*data++, &musbr->fifox[ep]);
+-}
+-
+-/*
+- * AM35x supports only 32bit read operations so
+- * use seperate read_fifo() function for it.
+- */
+-#ifndef CONFIG_USB_AM35X
+-/*
+- * This function reads data from endpoint fifo
+- *
+- * ep           - endpoint number
+- * length       - number of bytes to read from FIFO
+- * fifo_data    - pointer to data buffer into which data is read
+- */
+-__attribute__((weak))
+-void read_fifo(u8 ep, u32 length, void *fifo_data)
+-{
+-	u8  *data = (u8 *)fifo_data;
+-
+-	/* select the endpoint index */
+-	writeb(ep, &musbr->index);
+-
+-	/* read the data to the fifo */
+-	while (length--)
+-		*data++ = readb(&musbr->fifox[ep]);
+-}
+-#endif /* CONFIG_USB_AM35X */
+diff --git a/drivers/usb/musb/musb_debug.h b/drivers/usb/musb/musb_debug.h
+deleted file mode 100644
+index 2c5e192ab217..000000000000
+--- a/drivers/usb/musb/musb_debug.h
++++ /dev/null
+@@ -1,191 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (c) 2009 Wind River Systems, Inc.
+- * Tom Rix <Tom.Rix@windriver.com>
+- */
+-
+-/* Define MUSB_DEBUG before including this file to get debug macros */
+-#ifdef MUSB_DEBUG
+-
+-#define MUSB_FLAGS_PRINT(v, x, y)		\
+-  if (((v) & MUSB_##x##_##y))			\
+-		serial_printf("\t\t"#y"\n")
+-
+-static inline void musb_print_pwr(u8 b)
+-{
+-	serial_printf("\tpower   0x%2.2x\n", b);
+-	MUSB_FLAGS_PRINT(b, POWER, ISOUPDATE);
+-	MUSB_FLAGS_PRINT(b, POWER, SOFTCONN);
+-	MUSB_FLAGS_PRINT(b, POWER, HSENAB);
+-	MUSB_FLAGS_PRINT(b, POWER, HSMODE);
+-	MUSB_FLAGS_PRINT(b, POWER, RESET);
+-	MUSB_FLAGS_PRINT(b, POWER, RESUME);
+-	MUSB_FLAGS_PRINT(b, POWER, SUSPENDM);
+-	MUSB_FLAGS_PRINT(b, POWER, ENSUSPEND);
+-}
+-
+-static inline void musb_print_csr0(u16 w)
+-{
+-	serial_printf("\tcsr0    0x%4.4x\n", w);
+-	MUSB_FLAGS_PRINT(w, CSR0, FLUSHFIFO);
+-	MUSB_FLAGS_PRINT(w, CSR0_P, SVDSETUPEND);
+-	MUSB_FLAGS_PRINT(w, CSR0_P, SVDRXPKTRDY);
+-	MUSB_FLAGS_PRINT(w, CSR0_P, SENDSTALL);
+-	MUSB_FLAGS_PRINT(w, CSR0_P, SETUPEND);
+-	MUSB_FLAGS_PRINT(w, CSR0_P, DATAEND);
+-	MUSB_FLAGS_PRINT(w, CSR0_P, SENTSTALL);
+-	MUSB_FLAGS_PRINT(w, CSR0, TXPKTRDY);
+-	MUSB_FLAGS_PRINT(w, CSR0, RXPKTRDY);
+-}
+-
+-static inline void musb_print_intrusb(u8 b)
+-{
+-	serial_printf("\tintrusb 0x%2.2x\n", b);
+-	MUSB_FLAGS_PRINT(b, INTR, VBUSERROR);
+-	MUSB_FLAGS_PRINT(b, INTR, SESSREQ);
+-	MUSB_FLAGS_PRINT(b, INTR, DISCONNECT);
+-	MUSB_FLAGS_PRINT(b, INTR, CONNECT);
+-	MUSB_FLAGS_PRINT(b, INTR, SOF);
+-	MUSB_FLAGS_PRINT(b, INTR, RESUME);
+-	MUSB_FLAGS_PRINT(b, INTR, SUSPEND);
+-
+-	if (b & MUSB_INTR_BABBLE)
+-		serial_printf("\t\tMUSB_INTR_RESET or MUSB_INTR_BABBLE\n");
+-
+-}
+-
+-static inline void musb_print_intrtx(u16 w)
+-{
+-	serial_printf("\tintrtx 0x%4.4x\n", w);
+-}
+-
+-static inline void musb_print_intrrx(u16 w)
+-{
+-	serial_printf("\tintrx 0x%4.4x\n", w);
+-}
+-
+-static inline void musb_print_devctl(u8 b)
+-{
+-	serial_printf("\tdevctl  0x%2.2x\n", b);
+-	if (b & MUSB_DEVCTL_BDEVICE)
+-		serial_printf("\t\tB device\n");
 -	else
--		status = req->usb_req.status;
--
--	if (status && status != -ESHUTDOWN)
--		dev_err(ep->udc->dev, "%s done %p, status %d\n",
--			ep->ep_usb.name, req, status);
--
--	if (req->usb_req.complete)
--		req->usb_req.complete(&ep->ep_usb, &req->usb_req);
--}
--
--static void max3420_ep_nuke(struct max3420_ep *ep, int status)
--{
--	struct max3420_req *req, *r;
--
--	list_for_each_entry_safe(req, r, &ep->queue, queue) {
--		list_del_init(&req->queue);
--		max3420_req_done(req, status);
--	}
--}
--
--static int max3420_ep_disable(struct usb_ep *_ep)
--{
--	struct max3420_ep *ep = to_max3420_ep(_ep);
--
--	_ep->desc = NULL;
--	max3420_ep_nuke(ep, -ESHUTDOWN);
--	spi_max3420_enable(ep, 0);
--
--	return 0;
--}
--
--static struct usb_request *
--max3420_ep_alloc_request(struct usb_ep *_ep, gfp_t gfp_flags)
--{
--	struct max3420_ep *ep = to_max3420_ep(_ep);
--	struct max3420_req *req = kzalloc(sizeof(*req), gfp_flags);
--
--	if (!req)
--		return NULL;
--
--	req->ep = ep;
--	INIT_LIST_HEAD(&req->queue);
--
--	return &req->usb_req;
--}
--
--static void
--max3420_ep_free_request(struct usb_ep *_ep, struct usb_request *_req)
--{
--	kfree(to_max3420_req(_req));
--}
--
--static int
--max3420_ep_queue(struct usb_ep *_ep, struct usb_request *_req, gfp_t gfp_flags)
--{
--	struct max3420_req *req = to_max3420_req(_req);
--	struct max3420_ep *ep = to_max3420_ep(_ep);
--
--	_req->status = -EINPROGRESS;
--	_req->actual = 0;
--	list_add_tail(&req->queue, &ep->queue);
--
--	return 0;
--}
--
--static int max3420_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
--{
--	struct max3420_req *req = to_max3420_req(_req);
--
--	list_del_init(&req->queue);
--	max3420_req_done(req, -ECONNRESET);
--
--	return 0;
--}
--
--static int max3420_ep_set_halt(struct usb_ep *_ep, int halt)
--{
--	struct max3420_ep *ep = to_max3420_ep(_ep);
--	struct max3420_udc *udc = ep->udc;
--	u8 epstalls;
--
--	if (ep->id == 0) /* can't stall EP0 */
--		return 0;
--
--	epstalls = spi_rd8(udc, MAX3420_REG_EPSTALLS);
--	if (halt) {
--		ep->halted = 1;
--		epstalls |= BIT(ep->id + 1);
--	} else {
--		u8 clrtogs;
--
--		ep->halted = 0;
--		epstalls &= ~BIT(ep->id + 1);
--		clrtogs = spi_rd8(udc, MAX3420_REG_CLRTOGS);
--		clrtogs |= BIT(ep->id + 1);
--		spi_wr8(udc, MAX3420_REG_CLRTOGS, clrtogs);
--	}
--	spi_wr8(udc, MAX3420_REG_EPSTALLS, epstalls | bACKSTAT);
--
--	return 0;
--}
--
--static const struct usb_ep_ops max3420_ep_ops = {
--	.enable		= max3420_ep_enable,
--	.disable	= max3420_ep_disable,
--	.alloc_request	= max3420_ep_alloc_request,
--	.free_request	= max3420_ep_free_request,
--	.queue		= max3420_ep_queue,
--	.dequeue	= max3420_ep_dequeue,
--	.set_halt	= max3420_ep_set_halt,
--};
--
--static void __max3420_stop(struct max3420_udc *udc)
--{
--	u8 val;
--
--	/* Disable IRQ to CPU */
--	spi_wr8(udc, MAX3420_REG_CPUCTL, 0);
--
--	val = spi_rd8(udc, MAX3420_REG_USBCTL);
--	val |= bPWRDOWN;
--	val |= bHOSCSTEN;
--	spi_wr8(udc, MAX3420_REG_USBCTL, val);
--}
--
--static void __max3420_start(struct max3420_udc *udc)
--{
--	u8 val;
--
--	/* configure SPI */
--	spi_wr8(udc, MAX3420_REG_PINCTL, bFDUPSPI);
--
--	/* Chip Reset */
--	spi_wr8(udc, MAX3420_REG_USBCTL, bCHIPRES);
--	mdelay(5);
--	spi_wr8(udc, MAX3420_REG_USBCTL, 0);
--
--	/* Poll for OSC to stabilize */
--	while (1) {
--		val = spi_rd8(udc, MAX3420_REG_USBIRQ);
--		if (val & bOSCOKIRQ)
--			break;
--		cond_resched();
--	}
--
--	/* Enable PULL-UP only when Vbus detected */
--	val = spi_rd8(udc, MAX3420_REG_USBCTL);
--	val |= bVBGATE | bCONNECT;
--	spi_wr8(udc, MAX3420_REG_USBCTL, val);
--
--	val = bURESDNIRQ | bURESIRQ;
--	spi_wr8(udc, MAX3420_REG_USBIEN, val);
--
--	/* Enable only EP0 interrupts */
--	val = bIN0BAVIRQ | bOUT0DAVIRQ | bSUDAVIRQ;
--	spi_wr8(udc, MAX3420_REG_EPIEN, val);
--
--	/* Enable IRQ to CPU */
--	spi_wr8(udc, MAX3420_REG_CPUCTL, bIE);
--}
--
--static int max3420_udc_start(struct usb_gadget *gadget,
--			     struct usb_gadget_driver *driver)
--{
--	struct max3420_udc *udc = to_udc(gadget);
--
--	udc->driver = driver;
--	udc->remote_wkp = 0;
--	udc->softconnect = true;
--
--	__max3420_start(udc);
--
--	return 0;
--}
--
--static int max3420_udc_stop(struct usb_gadget *gadget)
--{
--	struct max3420_udc *udc = to_udc(gadget);
--
--	udc->driver = NULL;
--	udc->softconnect = false;
--
--	__max3420_stop(udc);
--
--	return 0;
--}
--
--static int max3420_wakeup(struct usb_gadget *gadget)
--{
--	struct max3420_udc *udc = to_udc(gadget);
--	u8 usbctl;
--
--	/* Only if wakeup allowed by host */
--	if (!udc->remote_wkp || !udc->suspended)
--		return 0;
--
--	/* Set Remote-Wakeup Signal*/
--	usbctl = spi_rd8(udc, MAX3420_REG_USBCTL);
--	usbctl |= bSIGRWU;
--	spi_wr8(udc, MAX3420_REG_USBCTL, usbctl);
--
--	mdelay(5);
--
--	/* Clear Remote-WkUp Signal*/
--	usbctl = spi_rd8(udc, MAX3420_REG_USBCTL);
--	usbctl &= ~bSIGRWU;
--	spi_wr8(udc, MAX3420_REG_USBCTL, usbctl);
--
--	udc->suspended = false;
--
--	return 0;
--}
--
--static const struct usb_gadget_ops max3420_udc_ops = {
--	.udc_start	= max3420_udc_start,
--	.udc_stop	= max3420_udc_stop,
--	.wakeup		= max3420_wakeup,
--};
--
--static struct usb_endpoint_descriptor ep0_desc = {
--	.bLength = USB_DT_ENDPOINT_SIZE,
--	.bDescriptorType = USB_DT_ENDPOINT,
--	.bEndpointAddress = USB_DIR_OUT,
--	.bmAttributes = USB_ENDPOINT_XFER_CONTROL,
--	.wMaxPacketSize = cpu_to_le16(EP_MAX_PACKET),
--};
--
--static void max3420_getstatus(struct max3420_udc *udc)
--{
--	struct max3420_ep *ep;
--	u16 status = 0;
--
--	switch (udc->setup.bRequestType & USB_RECIP_MASK) {
--	case USB_RECIP_DEVICE:
--		/* Get device status */
--		status = 0 << USB_DEVICE_SELF_POWERED;
--		status |= (udc->remote_wkp << USB_DEVICE_REMOTE_WAKEUP);
--		break;
--	case USB_RECIP_INTERFACE:
--		if (udc->driver->setup(&udc->gadget, &udc->setup) < 0)
--			goto stall;
--		break;
--	case USB_RECIP_ENDPOINT:
--		ep = &udc->ep[udc->setup.wIndex & USB_ENDPOINT_NUMBER_MASK];
--		if (ep->halted)
--			status = 1 << USB_ENDPOINT_HALT;
--		break;
--	default:
--		goto stall;
--	}
--
--	status = cpu_to_le16(status);
--	spi_wr_buf(udc, MAX3420_REG_EP0FIFO, &status, 2);
--	spi_wr8_ack(udc, MAX3420_REG_EP0BC, 2, 1);
--	return;
--stall:
--	dev_err(udc->dev, "Can't respond to getstatus request\n");
--	spi_wr8(udc, MAX3420_REG_EPSTALLS, bSTLEP0IN | bSTLEP0OUT | bSTLSTAT);
--}
--
--static void max3420_set_clear_feature(struct max3420_udc *udc)
--{
--	int set = udc->setup.bRequest == USB_REQ_SET_FEATURE;
--	struct max3420_ep *ep;
--	int id;
--
--	switch (udc->setup.bRequestType) {
--	case USB_RECIP_DEVICE:
--		if (udc->setup.wValue != USB_DEVICE_REMOTE_WAKEUP)
--			break;
--
--		if (udc->setup.bRequest == USB_REQ_SET_FEATURE)
--			udc->remote_wkp = 1;
+-		serial_printf("\t\tA device\n");
+-	if (b & MUSB_DEVCTL_FSDEV)
+-		serial_printf("\t\tFast Device -(host mode)\n");
+-	if (b & MUSB_DEVCTL_LSDEV)
+-		serial_printf("\t\tSlow Device -(host mode)\n");
+-	if (b & MUSB_DEVCTL_HM)
+-		serial_printf("\t\tHost mode\n");
+-	else
+-		serial_printf("\t\tPeripherial mode\n");
+-	if (b & MUSB_DEVCTL_HR)
+-		serial_printf("\t\tHost request started(B device)\n");
+-	else
+-		serial_printf("\t\tHost request finished(B device)\n");
+-	if (b & MUSB_DEVCTL_BDEVICE) {
+-		if (b & MUSB_DEVCTL_SESSION)
+-			serial_printf("\t\tStart of session(B device)\n");
 -		else
--			udc->remote_wkp = 0;
--
--		return spi_ack_ctrl(udc);
--
--	case USB_RECIP_ENDPOINT:
--		if (udc->setup.wValue != USB_ENDPOINT_HALT)
--			break;
--
--		id = udc->setup.wIndex & USB_ENDPOINT_NUMBER_MASK;
--		ep = &udc->ep[id];
--
--		max3420_ep_set_halt(&ep->ep_usb, set);
--		return;
--	default:
--		break;
+-			serial_printf("\t\tEnd of session(B device)\n");
+-	} else {
+-		if (b & MUSB_DEVCTL_SESSION)
+-			serial_printf("\t\tStart of session(A device)\n");
+-		else
+-			serial_printf("\t\tEnd of session(A device)\n");
 -	}
--
--	dev_err(udc->dev, "Can't respond to SET/CLEAR FEATURE\n");
--	spi_wr8(udc, MAX3420_REG_EPSTALLS, bSTLEP0IN | bSTLEP0OUT | bSTLSTAT);
 -}
 -
--static void max3420_handle_setup(struct max3420_udc *udc)
+-static inline void musb_print_config(u8 b)
 -{
--	struct usb_ctrlrequest setup;
--	u8 addr;
+-	serial_printf("\tconfig 0x%2.2x\n", b);
+-	if (b & MUSB_CONFIGDATA_MPRXE)
+-		serial_printf("\t\tAuto combine rx bulk packets\n");
+-	if (b & MUSB_CONFIGDATA_MPTXE)
+-		serial_printf("\t\tAuto split tx bulk packets\n");
+-	if (b & MUSB_CONFIGDATA_BIGENDIAN)
+-		serial_printf("\t\tBig Endian ordering\n");
+-	else
+-		serial_printf("\t\tLittle Endian ordering\n");
+-	if (b & MUSB_CONFIGDATA_HBRXE)
+-		serial_printf("\t\tHigh speed rx iso endpoint\n");
+-	if (b & MUSB_CONFIGDATA_HBTXE)
+-		serial_printf("\t\tHigh speed tx iso endpoint\n");
+-	if (b & MUSB_CONFIGDATA_DYNFIFO)
+-		serial_printf("\t\tDynamic fifo sizing\n");
+-	if (b & MUSB_CONFIGDATA_SOFTCONE)
+-		serial_printf("\t\tSoft Connect\n");
+-	if (b & MUSB_CONFIGDATA_UTMIDW)
+-		serial_printf("\t\t16 bit data width\n");
+-	else
+-		serial_printf("\t\t8 bit data width\n");
+-}
 -
--	spi_rd_buf(udc, MAX3420_REG_SUDFIFO, (void *)&setup, 8);
+-static inline void musb_print_rxmaxp(u16 w)
+-{
+-	serial_printf("\trxmaxp  0x%4.4x\n", w);
+-}
 -
--	udc->setup = setup;
--	udc->setup.wValue = cpu_to_le16(setup.wValue);
--	udc->setup.wIndex = cpu_to_le16(setup.wIndex);
--	udc->setup.wLength = cpu_to_le16(setup.wLength);
+-static inline void musb_print_rxcsr(u16 w)
+-{
+-	serial_printf("\trxcsr   0x%4.4x\n", w);
+-	MUSB_FLAGS_PRINT(w, RXCSR, AUTOCLEAR);
+-	MUSB_FLAGS_PRINT(w, RXCSR, DMAENAB);
+-	MUSB_FLAGS_PRINT(w, RXCSR, DISNYET);
+-	MUSB_FLAGS_PRINT(w, RXCSR, PID_ERR);
+-	MUSB_FLAGS_PRINT(w, RXCSR, DMAMODE);
+-	MUSB_FLAGS_PRINT(w, RXCSR, CLRDATATOG);
+-	MUSB_FLAGS_PRINT(w, RXCSR, FLUSHFIFO);
+-	MUSB_FLAGS_PRINT(w, RXCSR, DATAERROR);
+-	MUSB_FLAGS_PRINT(w, RXCSR, FIFOFULL);
+-	MUSB_FLAGS_PRINT(w, RXCSR, RXPKTRDY);
+-	MUSB_FLAGS_PRINT(w, RXCSR_P, SENTSTALL);
+-	MUSB_FLAGS_PRINT(w, RXCSR_P, SENDSTALL);
+-	MUSB_FLAGS_PRINT(w, RXCSR_P, OVERRUN);
 -
--	switch (udc->setup.bRequest) {
--	case USB_REQ_GET_STATUS:
--		/* Data+Status phase form udc */
--		if ((udc->setup.bRequestType &
--				(USB_DIR_IN | USB_TYPE_MASK)) !=
--				(USB_DIR_IN | USB_TYPE_STANDARD)) {
+-	if (w & MUSB_RXCSR_P_ISO)
+-		serial_printf("\t\tiso mode\n");
+-	else
+-		serial_printf("\t\tbulk mode\n");
+-
+-}
+-
+-static inline void musb_print_txmaxp(u16 w)
+-{
+-	serial_printf("\ttxmaxp  0x%4.4x\n", w);
+-}
+-
+-static inline void musb_print_txcsr(u16 w)
+-{
+-	serial_printf("\ttxcsr   0x%4.4x\n", w);
+-	MUSB_FLAGS_PRINT(w, TXCSR, TXPKTRDY);
+-	MUSB_FLAGS_PRINT(w, TXCSR, FIFONOTEMPTY);
+-	MUSB_FLAGS_PRINT(w, TXCSR, FLUSHFIFO);
+-	MUSB_FLAGS_PRINT(w, TXCSR, CLRDATATOG);
+-	MUSB_FLAGS_PRINT(w, TXCSR_P, UNDERRUN);
+-	MUSB_FLAGS_PRINT(w, TXCSR_P, SENTSTALL);
+-	MUSB_FLAGS_PRINT(w, TXCSR_P, SENDSTALL);
+-
+-	if (w & MUSB_TXCSR_MODE)
+-		serial_printf("\t\tTX mode\n");
+-	else
+-		serial_printf("\t\tRX mode\n");
+-}
+-
+-#else
+-
+-/* stubs */
+-
+-#define musb_print_pwr(b)
+-#define musb_print_csr0(w)
+-#define musb_print_intrusb(b)
+-#define musb_print_intrtx(w)
+-#define musb_print_intrrx(w)
+-#define musb_print_devctl(b)
+-#define musb_print_config(b)
+-#define musb_print_rxmaxp(w)
+-#define musb_print_rxcsr(w)
+-#define musb_print_txmaxp(w)
+-#define musb_print_txcsr(w)
+-
+-#endif /* MUSB_DEBUG */
+diff --git a/drivers/usb/musb/musb_hcd.c b/drivers/usb/musb/musb_hcd.c
+deleted file mode 100644
+index c95c6a482812..000000000000
+--- a/drivers/usb/musb/musb_hcd.c
++++ /dev/null
+@@ -1,1161 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Mentor USB OTG Core host controller driver.
+- *
+- * Copyright (c) 2008 Texas Instruments
+- *
+- * Author: Thomas Abraham t-abraham@ti.com, Texas Instruments
+- */
+-
+-#include <log.h>
+-#include <usb.h>
+-#include <linux/delay.h>
+-#include "musb_hcd.h"
+-
+-/* MSC control transfers */
+-#define USB_MSC_BBB_RESET	0xFF
+-#define USB_MSC_BBB_GET_MAX_LUN	0xFE
+-
+-/* Endpoint configuration information */
+-static const struct musb_epinfo epinfo[3] = {
+-	{MUSB_BULK_EP, 1, 512}, /* EP1 - Bluk Out - 512 Bytes */
+-	{MUSB_BULK_EP, 0, 512}, /* EP1 - Bluk In  - 512 Bytes */
+-	{MUSB_INTR_EP, 0, 64}   /* EP2 - Interrupt IN - 64 Bytes */
+-};
+-
+-/* --- Virtual Root Hub ---------------------------------------------------- */
+-#ifdef MUSB_NO_MULTIPOINT
+-static int rh_devnum;
+-static u32 port_status;
+-
+-#include <usbroothubdes.h>
+-
+-#endif
+-
+-/*
+- * This function writes the data toggle value.
+- */
+-static void write_toggle(struct usb_device *dev, u8 ep, u8 dir_out)
+-{
+-	u16 toggle = usb_gettoggle(dev, ep, dir_out);
+-	u16 csr;
+-
+-	if (dir_out) {
+-		csr = readw(&musbr->txcsr);
+-		if (!toggle) {
+-			if (csr & MUSB_TXCSR_MODE)
+-				csr = MUSB_TXCSR_CLRDATATOG;
+-			else
+-				csr = 0;
+-			writew(csr, &musbr->txcsr);
+-		} else {
+-			csr |= MUSB_TXCSR_H_WR_DATATOGGLE;
+-			writew(csr, &musbr->txcsr);
+-			csr |= (toggle << MUSB_TXCSR_H_DATATOGGLE_SHIFT);
+-			writew(csr, &musbr->txcsr);
+-		}
+-	} else {
+-		if (!toggle) {
+-			csr = readw(&musbr->txcsr);
+-			if (csr & MUSB_TXCSR_MODE)
+-				csr = MUSB_RXCSR_CLRDATATOG;
+-			else
+-				csr = 0;
+-			writew(csr, &musbr->rxcsr);
+-		} else {
+-			csr = readw(&musbr->rxcsr);
+-			csr |= MUSB_RXCSR_H_WR_DATATOGGLE;
+-			writew(csr, &musbr->rxcsr);
+-			csr |= (toggle << MUSB_S_RXCSR_H_DATATOGGLE);
+-			writew(csr, &musbr->rxcsr);
+-		}
+-	}
+-}
+-
+-/*
+- * This function checks if RxStall has occurred on the endpoint. If a RxStall
+- * has occurred, the RxStall is cleared and 1 is returned. If RxStall has
+- * not occurred, 0 is returned.
+- */
+-static u8 check_stall(u8 ep, u8 dir_out)
+-{
+-	u16 csr;
+-
+-	/* For endpoint 0 */
+-	if (!ep) {
+-		csr = readw(&musbr->txcsr);
+-		if (csr & MUSB_CSR0_H_RXSTALL) {
+-			csr &= ~MUSB_CSR0_H_RXSTALL;
+-			writew(csr, &musbr->txcsr);
+-			return 1;
+-		}
+-	} else { /* For non-ep0 */
+-		if (dir_out) { /* is it tx ep */
+-			csr = readw(&musbr->txcsr);
+-			if (csr & MUSB_TXCSR_H_RXSTALL) {
+-				csr &= ~MUSB_TXCSR_H_RXSTALL;
+-				writew(csr, &musbr->txcsr);
+-				return 1;
+-			}
+-		} else { /* is it rx ep */
+-			csr = readw(&musbr->rxcsr);
+-			if (csr & MUSB_RXCSR_H_RXSTALL) {
+-				csr &= ~MUSB_RXCSR_H_RXSTALL;
+-				writew(csr, &musbr->rxcsr);
+-				return 1;
+-			}
+-		}
+-	}
+-	return 0;
+-}
+-
+-/*
+- * waits until ep0 is ready. Returns 0 if ep is ready, -1 for timeout
+- * error and -2 for stall.
+- */
+-static int wait_until_ep0_ready(struct usb_device *dev, u32 bit_mask)
+-{
+-	u16 csr;
+-	int result = 1;
+-	int timeout = MUSB_TIMEOUT;
+-
+-	while (result > 0) {
+-		csr = readw(&musbr->txcsr);
+-		if (csr & MUSB_CSR0_H_ERROR) {
+-			csr &= ~MUSB_CSR0_H_ERROR;
+-			writew(csr, &musbr->txcsr);
+-			dev->status = USB_ST_CRC_ERR;
+-			result = -1;
 -			break;
 -		}
--		return max3420_getstatus(udc);
--	case USB_REQ_SET_ADDRESS:
--		/* Status phase from udc */
--		if (udc->setup.bRequestType != (USB_DIR_OUT |
--				USB_TYPE_STANDARD | USB_RECIP_DEVICE))
+-
+-		switch (bit_mask) {
+-		case MUSB_CSR0_TXPKTRDY:
+-			if (!(csr & MUSB_CSR0_TXPKTRDY)) {
+-				if (check_stall(MUSB_CONTROL_EP, 0)) {
+-					dev->status = USB_ST_STALLED;
+-					result = -2;
+-				} else
+-					result = 0;
+-			}
 -			break;
--		addr = spi_rd8_ack(udc, MAX3420_REG_FNADDR, 1);
--		dev_dbg(udc->dev, "Assigned Address=%d/%d\n",
--			udc->setup.wValue, addr);
--		return;
--	case USB_REQ_CLEAR_FEATURE:
--	case USB_REQ_SET_FEATURE:
--		/* Requests with no data phase, status phase from udc */
--		if ((udc->setup.bRequestType & USB_TYPE_MASK)
--				!= USB_TYPE_STANDARD)
+-
+-		case MUSB_CSR0_RXPKTRDY:
+-			if (check_stall(MUSB_CONTROL_EP, 0)) {
+-				dev->status = USB_ST_STALLED;
+-				result = -2;
+-			} else
+-				if (csr & MUSB_CSR0_RXPKTRDY)
+-					result = 0;
 -			break;
--		return max3420_set_clear_feature(udc);
--	default:
--		break;
+-
+-		case MUSB_CSR0_H_REQPKT:
+-			if (!(csr & MUSB_CSR0_H_REQPKT)) {
+-				if (check_stall(MUSB_CONTROL_EP, 0)) {
+-					dev->status = USB_ST_STALLED;
+-					result = -2;
+-				} else
+-					result = 0;
+-			}
+-			break;
+-		}
+-
+-		/* Check the timeout */
+-		if (--timeout)
+-			udelay(1);
+-		else {
+-			dev->status = USB_ST_CRC_ERR;
+-			result = -1;
+-			break;
+-		}
 -	}
 -
--	if (udc->driver->setup(&udc->gadget, &setup) < 0) {
--		/* Stall EP0 */
--		spi_wr8(udc, MAX3420_REG_EPSTALLS,
--			bSTLEP0IN | bSTLEP0OUT | bSTLSTAT);
--	}
+-	return result;
 -}
 -
--static int do_data(struct max3420_udc *udc, int ep_id, int in)
+-/*
+- * waits until tx ep is ready. Returns 1 when ep is ready and 0 on error.
+- */
+-static int wait_until_txep_ready(struct usb_device *dev, u8 ep)
 -{
--	struct max3420_ep *ep = &udc->ep[ep_id];
--	struct max3420_req *req;
--	int done, length, psz;
--	void *buf;
+-	u16 csr;
+-	int timeout = MUSB_TIMEOUT;
 -
--	if (list_empty(&ep->queue))
--		return 0;
+-	do {
+-		if (check_stall(ep, 1)) {
+-			dev->status = USB_ST_STALLED;
+-			return 0;
+-		}
 -
--	req = list_first_entry(&ep->queue, struct max3420_req, queue);
--	buf = req->usb_req.buf + req->usb_req.actual;
+-		csr = readw(&musbr->txcsr);
+-		if (csr & MUSB_TXCSR_H_ERROR) {
+-			dev->status = USB_ST_CRC_ERR;
+-			return 0;
+-		}
 -
--	psz = ep->ep_usb.maxpacket;
--	length = req->usb_req.length - req->usb_req.actual;
--	length = min(length, psz);
+-		/* Check the timeout */
+-		if (--timeout)
+-			udelay(1);
+-		else {
+-			dev->status = USB_ST_CRC_ERR;
+-			return -1;
+-		}
 -
--	if (length == 0) {
--		done = 1;
--		goto xfer_done;
--	}
--
--	done = 0;
--	if (in) {
--		spi_wr_buf(udc, MAX3420_REG_EP0FIFO + ep_id, buf, length);
--		spi_wr8(udc, MAX3420_REG_EP0BC + ep_id, length);
--		if (length < psz)
--			done = 1;
--	} else {
--		psz = spi_rd8(udc, MAX3420_REG_EP0BC + ep_id);
--		length = min(length, psz);
--		spi_rd_buf(udc, MAX3420_REG_EP0FIFO + ep_id, buf, length);
--		if (length < ep->ep_usb.maxpacket)
--			done = 1;
--	}
--
--	req->usb_req.actual += length;
--
--	if (req->usb_req.actual == req->usb_req.length)
--		done = 1;
--
--xfer_done:
--	if (done) {
--		list_del_init(&req->queue);
--
--		if (ep_id == 0)
--			spi_ack_ctrl(udc);
--
--		max3420_req_done(req, 0);
--	}
--
+-	} while (csr & MUSB_TXCSR_TXPKTRDY);
 -	return 1;
 -}
 -
--static int max3420_handle_irqs(struct max3420_udc *udc)
+-/*
+- * waits until rx ep is ready. Returns 1 when ep is ready and 0 on error.
+- */
+-static int wait_until_rxep_ready(struct usb_device *dev, u8 ep)
 -{
--	u8 epien, epirq, usbirq, usbien, reg[4];
+-	u16 csr;
+-	int timeout = MUSB_TIMEOUT;
+-
+-	do {
+-		if (check_stall(ep, 0)) {
+-			dev->status = USB_ST_STALLED;
+-			return 0;
+-		}
+-
+-		csr = readw(&musbr->rxcsr);
+-		if (csr & MUSB_RXCSR_H_ERROR) {
+-			dev->status = USB_ST_CRC_ERR;
+-			return 0;
+-		}
+-
+-		/* Check the timeout */
+-		if (--timeout)
+-			udelay(1);
+-		else {
+-			dev->status = USB_ST_CRC_ERR;
+-			return -1;
+-		}
+-
+-	} while (!(csr & MUSB_RXCSR_RXPKTRDY));
+-	return 1;
+-}
+-
+-/*
+- * This function performs the setup phase of the control transfer
+- */
+-static int ctrlreq_setup_phase(struct usb_device *dev, struct devrequest *setup)
+-{
+-	int result;
+-	u16 csr;
+-
+-	/* write the control request to ep0 fifo */
+-	write_fifo(MUSB_CONTROL_EP, sizeof(struct devrequest), (void *)setup);
+-
+-	/* enable transfer of setup packet */
+-	csr = readw(&musbr->txcsr);
+-	csr |= (MUSB_CSR0_TXPKTRDY|MUSB_CSR0_H_SETUPPKT);
+-	writew(csr, &musbr->txcsr);
+-
+-	/* wait until the setup packet is transmitted */
+-	result = wait_until_ep0_ready(dev, MUSB_CSR0_TXPKTRDY);
+-	dev->act_len = 0;
+-	return result;
+-}
+-
+-/*
+- * This function handles the control transfer in data phase
+- */
+-static int ctrlreq_in_data_phase(struct usb_device *dev, u32 len, void *buffer)
+-{
+-	u16 csr;
+-	u32 rxlen = 0;
+-	u32 nextlen = 0;
+-	u8  maxpktsize = (1 << dev->maxpacketsize) * 8;
+-	u8  *rxbuff = (u8 *)buffer;
+-	u8  rxedlength;
+-	int result;
+-
+-	while (rxlen < len) {
+-		/* Determine the next read length */
+-		nextlen = ((len-rxlen) > maxpktsize) ? maxpktsize : (len-rxlen);
+-
+-		/* Set the ReqPkt bit */
+-		csr = readw(&musbr->txcsr);
+-		writew(csr | MUSB_CSR0_H_REQPKT, &musbr->txcsr);
+-		result = wait_until_ep0_ready(dev, MUSB_CSR0_RXPKTRDY);
+-		if (result < 0)
+-			return result;
+-
+-		/* Actual number of bytes received by usb */
+-		rxedlength = readb(&musbr->rxcount);
+-
+-		/* Read the data from the RxFIFO */
+-		read_fifo(MUSB_CONTROL_EP, rxedlength, &rxbuff[rxlen]);
+-
+-		/* Clear the RxPktRdy Bit */
+-		csr = readw(&musbr->txcsr);
+-		csr &= ~MUSB_CSR0_RXPKTRDY;
+-		writew(csr, &musbr->txcsr);
+-
+-		/* short packet? */
+-		if (rxedlength != nextlen) {
+-			dev->act_len += rxedlength;
+-			break;
+-		}
+-		rxlen += nextlen;
+-		dev->act_len = rxlen;
+-	}
+-	return 0;
+-}
+-
+-/*
+- * This function handles the control transfer out data phase
+- */
+-static int ctrlreq_out_data_phase(struct usb_device *dev, u32 len, void *buffer)
+-{
+-	u16 csr;
+-	u32 txlen = 0;
+-	u32 nextlen = 0;
+-	u8  maxpktsize = (1 << dev->maxpacketsize) * 8;
+-	u8  *txbuff = (u8 *)buffer;
+-	int result = 0;
+-
+-	while (txlen < len) {
+-		/* Determine the next write length */
+-		nextlen = ((len-txlen) > maxpktsize) ? maxpktsize : (len-txlen);
+-
+-		/* Load the data to send in FIFO */
+-		write_fifo(MUSB_CONTROL_EP, txlen, &txbuff[txlen]);
+-
+-		/* Set TXPKTRDY bit */
+-		csr = readw(&musbr->txcsr);
+-
+-		csr |= MUSB_CSR0_TXPKTRDY;
+-		csr |= MUSB_CSR0_H_DIS_PING;
+-		writew(csr, &musbr->txcsr);
+-		result = wait_until_ep0_ready(dev, MUSB_CSR0_TXPKTRDY);
+-		if (result < 0)
+-			break;
+-
+-		txlen += nextlen;
+-		dev->act_len = txlen;
+-	}
+-	return result;
+-}
+-
+-/*
+- * This function handles the control transfer out status phase
+- */
+-static int ctrlreq_out_status_phase(struct usb_device *dev)
+-{
+-	u16 csr;
+-	int result;
+-
+-	/* Set the StatusPkt bit */
+-	csr = readw(&musbr->txcsr);
+-	csr |= (MUSB_CSR0_TXPKTRDY | MUSB_CSR0_H_STATUSPKT);
+-	csr |= MUSB_CSR0_H_DIS_PING;
+-	writew(csr, &musbr->txcsr);
+-
+-	/* Wait until TXPKTRDY bit is cleared */
+-	result = wait_until_ep0_ready(dev, MUSB_CSR0_TXPKTRDY);
+-	return result;
+-}
+-
+-/*
+- * This function handles the control transfer in status phase
+- */
+-static int ctrlreq_in_status_phase(struct usb_device *dev)
+-{
+-	u16 csr;
+-	int result;
+-
+-	/* Set the StatusPkt bit and ReqPkt bit */
+-	csr = MUSB_CSR0_H_REQPKT | MUSB_CSR0_H_STATUSPKT;
+-	csr |= MUSB_CSR0_H_DIS_PING;
+-	writew(csr, &musbr->txcsr);
+-	result = wait_until_ep0_ready(dev, MUSB_CSR0_H_REQPKT);
+-
+-	/* clear StatusPkt bit and RxPktRdy bit */
+-	csr = readw(&musbr->txcsr);
+-	csr &= ~(MUSB_CSR0_RXPKTRDY | MUSB_CSR0_H_STATUSPKT);
+-	writew(csr, &musbr->txcsr);
+-	return result;
+-}
+-
+-/*
+- * determines the speed of the device (High/Full/Slow)
+- */
+-static u8 get_dev_speed(struct usb_device *dev)
+-{
+-	return (dev->speed == USB_SPEED_HIGH) ? MUSB_TYPE_SPEED_HIGH :
+-		((dev->speed == USB_SPEED_LOW) ? MUSB_TYPE_SPEED_LOW :
+-						MUSB_TYPE_SPEED_FULL);
+-}
+-
+-/*
+- * configure the hub address and the port address.
+- */
+-static void config_hub_port(struct usb_device *dev, u8 ep)
+-{
+-	u8 chid;
+-	u8 hub;
+-
+-	/* Find out the nearest parent which is high speed */
+-	while (dev->parent->parent != NULL)
+-		if (get_dev_speed(dev->parent) !=  MUSB_TYPE_SPEED_HIGH)
+-			dev = dev->parent;
+-		else
+-			break;
+-
+-	/* determine the port address at that hub */
+-	hub = dev->parent->devnum;
+-	for (chid = 0; chid < USB_MAXCHILDREN; chid++)
+-		if (dev->parent->children[chid] == dev)
+-			break;
+-
+-#ifndef MUSB_NO_MULTIPOINT
+-	/* configure the hub address and the port address */
+-	writeb(hub, &musbr->tar[ep].txhubaddr);
+-	writeb((chid + 1), &musbr->tar[ep].txhubport);
+-	writeb(hub, &musbr->tar[ep].rxhubaddr);
+-	writeb((chid + 1), &musbr->tar[ep].rxhubport);
+-#endif
+-}
+-
+-#ifdef MUSB_NO_MULTIPOINT
+-
+-static void musb_port_reset(int do_reset)
+-{
+-	u8 power = readb(&musbr->power);
+-
+-	if (do_reset) {
+-		power &= 0xf0;
+-		writeb(power | MUSB_POWER_RESET, &musbr->power);
+-		port_status |= USB_PORT_STAT_RESET;
+-		port_status &= ~USB_PORT_STAT_ENABLE;
+-		udelay(30000);
+-	} else {
+-		writeb(power & ~MUSB_POWER_RESET, &musbr->power);
+-
+-		power = readb(&musbr->power);
+-		if (power & MUSB_POWER_HSMODE)
+-			port_status |= USB_PORT_STAT_HIGH_SPEED;
+-
+-		port_status &= ~(USB_PORT_STAT_RESET | (USB_PORT_STAT_C_CONNECTION << 16));
+-		port_status |= USB_PORT_STAT_ENABLE
+-			| (USB_PORT_STAT_C_RESET << 16)
+-			| (USB_PORT_STAT_C_ENABLE << 16);
+-	}
+-}
+-
+-/*
+- * root hub control
+- */
+-static int musb_submit_rh_msg(struct usb_device *dev, unsigned long pipe,
+-			      void *buffer, int transfer_len,
+-			      struct devrequest *cmd)
+-{
+-	int leni = transfer_len;
+-	int len = 0;
+-	int stat = 0;
+-	u32 datab[4];
+-	const u8 *data_buf = (u8 *) datab;
+-	u16 bmRType_bReq;
+-	u16 wValue;
+-	u16 wIndex;
+-	u16 wLength;
+-	u16 int_usb;
+-
+-	if ((pipe & PIPE_INTERRUPT) == PIPE_INTERRUPT) {
+-		debug("Root-Hub submit IRQ: NOT implemented\n");
+-		return 0;
+-	}
+-
+-	bmRType_bReq = cmd->requesttype | (cmd->request << 8);
+-	wValue = swap_16(cmd->value);
+-	wIndex = swap_16(cmd->index);
+-	wLength = swap_16(cmd->length);
+-
+-	debug("--- HUB ----------------------------------------\n");
+-	debug("submit rh urb, req=%x val=%#x index=%#x len=%d\n",
+-	    bmRType_bReq, wValue, wIndex, wLength);
+-	debug("------------------------------------------------\n");
+-
+-	switch (bmRType_bReq) {
+-	case RH_GET_STATUS:
+-		debug("RH_GET_STATUS\n");
+-
+-		*(__u16 *) data_buf = swap_16(1);
+-		len = 2;
+-		break;
+-
+-	case RH_GET_STATUS | RH_INTERFACE:
+-		debug("RH_GET_STATUS | RH_INTERFACE\n");
+-
+-		*(__u16 *) data_buf = swap_16(0);
+-		len = 2;
+-		break;
+-
+-	case RH_GET_STATUS | RH_ENDPOINT:
+-		debug("RH_GET_STATUS | RH_ENDPOINT\n");
+-
+-		*(__u16 *) data_buf = swap_16(0);
+-		len = 2;
+-		break;
+-
+-	case RH_GET_STATUS | RH_CLASS:
+-		debug("RH_GET_STATUS | RH_CLASS\n");
+-
+-		*(__u32 *) data_buf = swap_32(0);
+-		len = 4;
+-		break;
+-
+-	case RH_GET_STATUS | RH_OTHER | RH_CLASS:
+-		debug("RH_GET_STATUS | RH_OTHER | RH_CLASS\n");
+-
+-		int_usb = readw(&musbr->intrusb);
+-		if (int_usb & MUSB_INTR_CONNECT) {
+-			port_status |= USB_PORT_STAT_CONNECTION
+-				| (USB_PORT_STAT_C_CONNECTION << 16);
+-			port_status |= USB_PORT_STAT_HIGH_SPEED
+-				| USB_PORT_STAT_ENABLE;
+-		}
+-
+-		if (port_status & USB_PORT_STAT_RESET)
+-			musb_port_reset(0);
+-
+-		*(__u32 *) data_buf = swap_32(port_status);
+-		len = 4;
+-		break;
+-
+-	case RH_CLEAR_FEATURE | RH_ENDPOINT:
+-		debug("RH_CLEAR_FEATURE | RH_ENDPOINT\n");
+-
+-		switch (wValue) {
+-		case RH_ENDPOINT_STALL:
+-			debug("C_HUB_ENDPOINT_STALL\n");
+-			len = 0;
+-			break;
+-		}
+-		port_status &= ~(1 << wValue);
+-		break;
+-
+-	case RH_CLEAR_FEATURE | RH_CLASS:
+-		debug("RH_CLEAR_FEATURE | RH_CLASS\n");
+-
+-		switch (wValue) {
+-		case RH_C_HUB_LOCAL_POWER:
+-			debug("C_HUB_LOCAL_POWER\n");
+-			len = 0;
+-			break;
+-
+-		case RH_C_HUB_OVER_CURRENT:
+-			debug("C_HUB_OVER_CURRENT\n");
+-			len = 0;
+-			break;
+-		}
+-		port_status &= ~(1 << wValue);
+-		break;
+-
+-	case RH_CLEAR_FEATURE | RH_OTHER | RH_CLASS:
+-		debug("RH_CLEAR_FEATURE | RH_OTHER | RH_CLASS\n");
+-
+-		switch (wValue) {
+-		case RH_PORT_ENABLE:
+-			len = 0;
+-			break;
+-
+-		case RH_PORT_SUSPEND:
+-			len = 0;
+-			break;
+-
+-		case RH_PORT_POWER:
+-			len = 0;
+-			break;
+-
+-		case RH_C_PORT_CONNECTION:
+-			len = 0;
+-			break;
+-
+-		case RH_C_PORT_ENABLE:
+-			len = 0;
+-			break;
+-
+-		case RH_C_PORT_SUSPEND:
+-			len = 0;
+-			break;
+-
+-		case RH_C_PORT_OVER_CURRENT:
+-			len = 0;
+-			break;
+-
+-		case RH_C_PORT_RESET:
+-			len = 0;
+-			break;
+-
+-		default:
+-			debug("invalid wValue\n");
+-			stat = USB_ST_STALLED;
+-		}
+-
+-		port_status &= ~(1 << wValue);
+-		break;
+-
+-	case RH_SET_FEATURE | RH_OTHER | RH_CLASS:
+-		debug("RH_SET_FEATURE | RH_OTHER | RH_CLASS\n");
+-
+-		switch (wValue) {
+-		case RH_PORT_SUSPEND:
+-			len = 0;
+-			break;
+-
+-		case RH_PORT_RESET:
+-			musb_port_reset(1);
+-			len = 0;
+-			break;
+-
+-		case RH_PORT_POWER:
+-			len = 0;
+-			break;
+-
+-		case RH_PORT_ENABLE:
+-			len = 0;
+-			break;
+-
+-		default:
+-			debug("invalid wValue\n");
+-			stat = USB_ST_STALLED;
+-		}
+-
+-		port_status |= 1 << wValue;
+-		break;
+-
+-	case RH_SET_ADDRESS:
+-		debug("RH_SET_ADDRESS\n");
+-
+-		rh_devnum = wValue;
+-		len = 0;
+-		break;
+-
+-	case RH_GET_DESCRIPTOR:
+-		debug("RH_GET_DESCRIPTOR: %x, %d\n", wValue, wLength);
+-
+-		switch (wValue) {
+-		case (USB_DT_DEVICE << 8):	/* device descriptor */
+-			len = min_t(unsigned int,
+-				    leni, min_t(unsigned int,
+-						sizeof(root_hub_dev_des),
+-						wLength));
+-			data_buf = root_hub_dev_des;
+-			break;
+-
+-		case (USB_DT_CONFIG << 8):	/* configuration descriptor */
+-			len = min_t(unsigned int,
+-				    leni, min_t(unsigned int,
+-						sizeof(root_hub_config_des),
+-						wLength));
+-			data_buf = root_hub_config_des;
+-			break;
+-
+-		case ((USB_DT_STRING << 8) | 0x00):	/* string 0 descriptors */
+-			len = min_t(unsigned int,
+-				    leni, min_t(unsigned int,
+-						sizeof(root_hub_str_index0),
+-						wLength));
+-			data_buf = root_hub_str_index0;
+-			break;
+-
+-		case ((USB_DT_STRING << 8) | 0x01):	/* string 1 descriptors */
+-			len = min_t(unsigned int,
+-				    leni, min_t(unsigned int,
+-						sizeof(root_hub_str_index1),
+-						wLength));
+-			data_buf = root_hub_str_index1;
+-			break;
+-
+-		default:
+-			debug("invalid wValue\n");
+-			stat = USB_ST_STALLED;
+-		}
+-
+-		break;
+-
+-	case RH_GET_DESCRIPTOR | RH_CLASS: {
+-		u8 *_data_buf = (u8 *) datab;
+-		debug("RH_GET_DESCRIPTOR | RH_CLASS\n");
+-
+-		_data_buf[0] = 0x09;	/* min length; */
+-		_data_buf[1] = 0x29;
+-		_data_buf[2] = 0x1;	/* 1 port */
+-		_data_buf[3] = 0x01;	/* per-port power switching */
+-		_data_buf[3] |= 0x10;	/* no overcurrent reporting */
+-
+-		/* Corresponds to data_buf[4-7] */
+-		_data_buf[4] = 0;
+-		_data_buf[5] = 5;
+-		_data_buf[6] = 0;
+-		_data_buf[7] = 0x02;
+-		_data_buf[8] = 0xff;
+-
+-		len = min_t(unsigned int, leni,
+-			    min_t(unsigned int, data_buf[0], wLength));
+-		break;
+-	}
+-
+-	case RH_GET_CONFIGURATION:
+-		debug("RH_GET_CONFIGURATION\n");
+-
+-		*(__u8 *) data_buf = 0x01;
+-		len = 1;
+-		break;
+-
+-	case RH_SET_CONFIGURATION:
+-		debug("RH_SET_CONFIGURATION\n");
+-
+-		len = 0;
+-		break;
+-
+-	default:
+-		debug("*** *** *** unsupported root hub command *** *** ***\n");
+-		stat = USB_ST_STALLED;
+-	}
+-
+-	len = min_t(int, len, leni);
+-	if (buffer != data_buf)
+-		memcpy(buffer, data_buf, len);
+-
+-	dev->act_len = len;
+-	dev->status = stat;
+-	debug("dev act_len %d, status %lu\n", dev->act_len, dev->status);
+-
+-	return stat;
+-}
+-
+-static void musb_rh_init(void)
+-{
+-	rh_devnum = 0;
+-	port_status = 0;
+-}
+-
+-#else
+-
+-static void musb_rh_init(void) {}
+-
+-#endif
+-
+-/*
+- * do a control transfer
+- */
+-int submit_control_msg(struct usb_device *dev, unsigned long pipe, void *buffer,
+-			int len, struct devrequest *setup)
+-{
+-	int devnum = usb_pipedevice(pipe);
+-	u8  devspeed;
+-
+-#ifdef MUSB_NO_MULTIPOINT
+-	/* Control message is for the HUB? */
+-	if (devnum == rh_devnum) {
+-		int stat = musb_submit_rh_msg(dev, pipe, buffer, len, setup);
+-		if (stat)
+-			return stat;
+-	}
+-#endif
+-
+-	/* select control endpoint */
+-	writeb(MUSB_CONTROL_EP, &musbr->index);
+-	readw(&musbr->txcsr);
+-
+-#ifndef MUSB_NO_MULTIPOINT
+-	/* target addr and (for multipoint) hub addr/port */
+-	writeb(devnum, &musbr->tar[MUSB_CONTROL_EP].txfuncaddr);
+-	writeb(devnum, &musbr->tar[MUSB_CONTROL_EP].rxfuncaddr);
+-#endif
+-
+-	/* configure the hub address and the port number as required */
+-	devspeed = get_dev_speed(dev);
+-	if ((musb_ishighspeed()) && (dev->parent != NULL) &&
+-		(devspeed != MUSB_TYPE_SPEED_HIGH)) {
+-		config_hub_port(dev, MUSB_CONTROL_EP);
+-		writeb(devspeed << 6, &musbr->txtype);
+-	} else {
+-		writeb(musb_cfg.musb_speed << 6, &musbr->txtype);
+-#ifndef MUSB_NO_MULTIPOINT
+-		writeb(0, &musbr->tar[MUSB_CONTROL_EP].txhubaddr);
+-		writeb(0, &musbr->tar[MUSB_CONTROL_EP].txhubport);
+-		writeb(0, &musbr->tar[MUSB_CONTROL_EP].rxhubaddr);
+-		writeb(0, &musbr->tar[MUSB_CONTROL_EP].rxhubport);
+-#endif
+-	}
+-
+-	/* Control transfer setup phase */
+-	if (ctrlreq_setup_phase(dev, setup) < 0)
+-		return 0;
+-
+-	switch (setup->request) {
+-	case USB_REQ_GET_DESCRIPTOR:
+-	case USB_REQ_GET_CONFIGURATION:
+-	case USB_REQ_GET_INTERFACE:
+-	case USB_REQ_GET_STATUS:
+-	case USB_MSC_BBB_GET_MAX_LUN:
+-		/* control transfer in-data-phase */
+-		if (ctrlreq_in_data_phase(dev, len, buffer) < 0)
+-			return 0;
+-		/* control transfer out-status-phase */
+-		if (ctrlreq_out_status_phase(dev) < 0)
+-			return 0;
+-		break;
+-
+-	case USB_REQ_SET_ADDRESS:
+-	case USB_REQ_SET_CONFIGURATION:
+-	case USB_REQ_SET_FEATURE:
+-	case USB_REQ_SET_INTERFACE:
+-	case USB_REQ_CLEAR_FEATURE:
+-	case USB_MSC_BBB_RESET:
+-		/* control transfer in status phase */
+-		if (ctrlreq_in_status_phase(dev) < 0)
+-			return 0;
+-		break;
+-
+-	case USB_REQ_SET_DESCRIPTOR:
+-		/* control transfer out data phase */
+-		if (ctrlreq_out_data_phase(dev, len, buffer) < 0)
+-			return 0;
+-		/* control transfer in status phase */
+-		if (ctrlreq_in_status_phase(dev) < 0)
+-			return 0;
+-		break;
+-
+-	default:
+-		/* unhandled control transfer */
+-		return -1;
+-	}
+-
+-	dev->status = 0;
+-	dev->act_len = len;
+-
+-#ifdef MUSB_NO_MULTIPOINT
+-	/* Set device address to USB_FADDR register */
+-	if (setup->request == USB_REQ_SET_ADDRESS)
+-		writeb(dev->devnum, &musbr->faddr);
+-#endif
+-
+-	return len;
+-}
+-
+-/*
+- * do a bulk transfer
+- */
+-int submit_bulk_msg(struct usb_device *dev, unsigned long pipe,
+-					void *buffer, int len)
+-{
+-	int dir_out = usb_pipeout(pipe);
+-	int ep = usb_pipeendpoint(pipe);
+-#ifndef MUSB_NO_MULTIPOINT
+-	int devnum = usb_pipedevice(pipe);
+-#endif
+-	u8  type;
+-	u16 csr;
+-	u32 txlen = 0;
+-	u32 nextlen = 0;
+-	u8  devspeed;
+-
+-	/* select bulk endpoint */
+-	writeb(MUSB_BULK_EP, &musbr->index);
+-
+-#ifndef MUSB_NO_MULTIPOINT
+-	/* write the address of the device */
+-	if (dir_out)
+-		writeb(devnum, &musbr->tar[MUSB_BULK_EP].txfuncaddr);
+-	else
+-		writeb(devnum, &musbr->tar[MUSB_BULK_EP].rxfuncaddr);
+-#endif
+-
+-	/* configure the hub address and the port number as required */
+-	devspeed = get_dev_speed(dev);
+-	if ((musb_ishighspeed()) && (dev->parent != NULL) &&
+-		(devspeed != MUSB_TYPE_SPEED_HIGH)) {
+-		/*
+-		 * MUSB is in high speed and the destination device is full
+-		 * speed device. So configure the hub address and port
+-		 * address registers.
+-		 */
+-		config_hub_port(dev, MUSB_BULK_EP);
+-	} else {
+-#ifndef MUSB_NO_MULTIPOINT
+-		if (dir_out) {
+-			writeb(0, &musbr->tar[MUSB_BULK_EP].txhubaddr);
+-			writeb(0, &musbr->tar[MUSB_BULK_EP].txhubport);
+-		} else {
+-			writeb(0, &musbr->tar[MUSB_BULK_EP].rxhubaddr);
+-			writeb(0, &musbr->tar[MUSB_BULK_EP].rxhubport);
+-		}
+-#endif
+-		devspeed = musb_cfg.musb_speed;
+-	}
+-
+-	/* Write the saved toggle bit value */
+-	write_toggle(dev, ep, dir_out);
+-
+-	if (dir_out) { /* bulk-out transfer */
+-		/* Program the TxType register */
+-		type = (devspeed << MUSB_TYPE_SPEED_SHIFT) |
+-			   (MUSB_TYPE_PROTO_BULK << MUSB_TYPE_PROTO_SHIFT) |
+-			   (ep & MUSB_TYPE_REMOTE_END);
+-		writeb(type, &musbr->txtype);
+-
+-		/* Write maximum packet size to the TxMaxp register */
+-		writew(dev->epmaxpacketout[ep], &musbr->txmaxp);
+-		while (txlen < len) {
+-			nextlen = ((len-txlen) < dev->epmaxpacketout[ep]) ?
+-					(len-txlen) : dev->epmaxpacketout[ep];
+-
+-			/* Write the data to the FIFO */
+-			write_fifo(MUSB_BULK_EP, nextlen,
+-					(void *)(((u8 *)buffer) + txlen));
+-
+-			/* Set the TxPktRdy bit */
+-			csr = readw(&musbr->txcsr);
+-			writew(csr | MUSB_TXCSR_TXPKTRDY, &musbr->txcsr);
+-
+-			/* Wait until the TxPktRdy bit is cleared */
+-			if (wait_until_txep_ready(dev, MUSB_BULK_EP) != 1) {
+-				readw(&musbr->txcsr);
+-				usb_settoggle(dev, ep, dir_out,
+-				(csr >> MUSB_TXCSR_H_DATATOGGLE_SHIFT) & 1);
+-				dev->act_len = txlen;
+-				return 0;
+-			}
+-			txlen += nextlen;
+-		}
+-
+-		/* Keep a copy of the data toggle bit */
+-		csr = readw(&musbr->txcsr);
+-		usb_settoggle(dev, ep, dir_out,
+-				(csr >> MUSB_TXCSR_H_DATATOGGLE_SHIFT) & 1);
+-	} else { /* bulk-in transfer */
+-		/* Write the saved toggle bit value */
+-		write_toggle(dev, ep, dir_out);
+-
+-		/* Program the RxType register */
+-		type = (devspeed << MUSB_TYPE_SPEED_SHIFT) |
+-			   (MUSB_TYPE_PROTO_BULK << MUSB_TYPE_PROTO_SHIFT) |
+-			   (ep & MUSB_TYPE_REMOTE_END);
+-		writeb(type, &musbr->rxtype);
+-
+-		/* Write the maximum packet size to the RxMaxp register */
+-		writew(dev->epmaxpacketin[ep], &musbr->rxmaxp);
+-		while (txlen < len) {
+-			nextlen = ((len-txlen) < dev->epmaxpacketin[ep]) ?
+-					(len-txlen) : dev->epmaxpacketin[ep];
+-
+-			/* Set the ReqPkt bit */
+-			csr = readw(&musbr->rxcsr);
+-			writew(csr | MUSB_RXCSR_H_REQPKT, &musbr->rxcsr);
+-
+-			/* Wait until the RxPktRdy bit is set */
+-			if (wait_until_rxep_ready(dev, MUSB_BULK_EP) != 1) {
+-				csr = readw(&musbr->rxcsr);
+-				usb_settoggle(dev, ep, dir_out,
+-				(csr >> MUSB_S_RXCSR_H_DATATOGGLE) & 1);
+-				csr &= ~MUSB_RXCSR_RXPKTRDY;
+-				writew(csr, &musbr->rxcsr);
+-				dev->act_len = txlen;
+-				return 0;
+-			}
+-
+-			/* Read the data from the FIFO */
+-			read_fifo(MUSB_BULK_EP, nextlen,
+-					(void *)(((u8 *)buffer) + txlen));
+-
+-			/* Clear the RxPktRdy bit */
+-			csr =  readw(&musbr->rxcsr);
+-			csr &= ~MUSB_RXCSR_RXPKTRDY;
+-			writew(csr, &musbr->rxcsr);
+-			txlen += nextlen;
+-		}
+-
+-		/* Keep a copy of the data toggle bit */
+-		csr = readw(&musbr->rxcsr);
+-		usb_settoggle(dev, ep, dir_out,
+-				(csr >> MUSB_S_RXCSR_H_DATATOGGLE) & 1);
+-	}
+-
+-	/* bulk transfer is complete */
+-	dev->status = 0;
+-	dev->act_len = len;
+-	return 0;
+-}
+-
+-/*
+- * This function initializes the usb controller module.
+- */
+-int usb_lowlevel_init(int index, enum usb_init_type init, void **controller)
+-{
+-	u8  power;
+-	u32 timeout;
+-
+-	musb_rh_init();
+-
+-	if (musb_platform_init() == -1)
+-		return -1;
+-
+-	/* Configure all the endpoint FIFO's and start usb controller */
+-	musbr = musb_cfg.regs;
+-	musb_configure_ep(&epinfo[0], ARRAY_SIZE(epinfo));
+-	musb_start();
+-
+-	/*
+-	 * Wait until musb is enabled in host mode with a timeout. There
+-	 * should be a usb device connected.
+-	 */
+-	timeout = musb_cfg.timeout;
+-	while (--timeout)
+-		if (readb(&musbr->devctl) & MUSB_DEVCTL_HM)
+-			break;
+-
+-	/* if musb core is not in host mode, then return */
+-	if (!timeout)
+-		return -1;
+-
+-	/* start usb bus reset */
+-	power = readb(&musbr->power);
+-	writeb(power | MUSB_POWER_RESET, &musbr->power);
+-
+-	/* After initiating a usb reset, wait for about 20ms to 30ms */
+-	udelay(30000);
+-
+-	/* stop usb bus reset */
+-	power = readb(&musbr->power);
+-	power &= ~MUSB_POWER_RESET;
+-	writeb(power, &musbr->power);
+-
+-	/* Determine if the connected device is a high/full/low speed device */
+-	musb_cfg.musb_speed = (readb(&musbr->power) & MUSB_POWER_HSMODE) ?
+-			MUSB_TYPE_SPEED_HIGH :
+-			((readb(&musbr->devctl) & MUSB_DEVCTL_FSDEV) ?
+-			MUSB_TYPE_SPEED_FULL : MUSB_TYPE_SPEED_LOW);
+-	return 0;
+-}
+-
+-/*
+- * This function stops the operation of the davinci usb module.
+- */
+-int usb_lowlevel_stop(int index)
+-{
+-	/* Reset the USB module */
+-	musb_platform_deinit();
+-	writeb(0, &musbr->devctl);
+-	return 0;
+-}
+-
+-/*
+- * This function supports usb interrupt transfers. Currently, usb interrupt
+- * transfers are not supported.
+- */
+-int submit_int_msg(struct usb_device *dev, unsigned long pipe, void *buffer,
+-		   int len, int interval, bool nonblock)
+-{
+-	int dir_out = usb_pipeout(pipe);
+-	int ep = usb_pipeendpoint(pipe);
+-#ifndef MUSB_NO_MULTIPOINT
+-	int devnum = usb_pipedevice(pipe);
+-#endif
+-	u8  type;
+-	u16 csr;
+-	u32 txlen = 0;
+-	u32 nextlen = 0;
+-	u8  devspeed;
+-
+-	/* select interrupt endpoint */
+-	writeb(MUSB_INTR_EP, &musbr->index);
+-
+-#ifndef MUSB_NO_MULTIPOINT
+-	/* write the address of the device */
+-	if (dir_out)
+-		writeb(devnum, &musbr->tar[MUSB_INTR_EP].txfuncaddr);
+-	else
+-		writeb(devnum, &musbr->tar[MUSB_INTR_EP].rxfuncaddr);
+-#endif
+-
+-	/* configure the hub address and the port number as required */
+-	devspeed = get_dev_speed(dev);
+-	if ((musb_ishighspeed()) && (dev->parent != NULL) &&
+-		(devspeed != MUSB_TYPE_SPEED_HIGH)) {
+-		/*
+-		 * MUSB is in high speed and the destination device is full
+-		 * speed device. So configure the hub address and port
+-		 * address registers.
+-		 */
+-		config_hub_port(dev, MUSB_INTR_EP);
+-	} else {
+-#ifndef MUSB_NO_MULTIPOINT
+-		if (dir_out) {
+-			writeb(0, &musbr->tar[MUSB_INTR_EP].txhubaddr);
+-			writeb(0, &musbr->tar[MUSB_INTR_EP].txhubport);
+-		} else {
+-			writeb(0, &musbr->tar[MUSB_INTR_EP].rxhubaddr);
+-			writeb(0, &musbr->tar[MUSB_INTR_EP].rxhubport);
+-		}
+-#endif
+-		devspeed = musb_cfg.musb_speed;
+-	}
+-
+-	/* Write the saved toggle bit value */
+-	write_toggle(dev, ep, dir_out);
+-
+-	if (!dir_out) { /* intrrupt-in transfer */
+-		/* Write the saved toggle bit value */
+-		write_toggle(dev, ep, dir_out);
+-		writeb(interval, &musbr->rxinterval);
+-
+-		/* Program the RxType register */
+-		type = (devspeed << MUSB_TYPE_SPEED_SHIFT) |
+-			   (MUSB_TYPE_PROTO_INTR << MUSB_TYPE_PROTO_SHIFT) |
+-			   (ep & MUSB_TYPE_REMOTE_END);
+-		writeb(type, &musbr->rxtype);
+-
+-		/* Write the maximum packet size to the RxMaxp register */
+-		writew(dev->epmaxpacketin[ep], &musbr->rxmaxp);
+-
+-		while (txlen < len) {
+-			nextlen = ((len-txlen) < dev->epmaxpacketin[ep]) ?
+-					(len-txlen) : dev->epmaxpacketin[ep];
+-
+-			/* Set the ReqPkt bit */
+-			csr = readw(&musbr->rxcsr);
+-			writew(csr | MUSB_RXCSR_H_REQPKT, &musbr->rxcsr);
+-
+-			/* Wait until the RxPktRdy bit is set */
+-			if (wait_until_rxep_ready(dev, MUSB_INTR_EP) != 1) {
+-				csr = readw(&musbr->rxcsr);
+-				usb_settoggle(dev, ep, dir_out,
+-				(csr >> MUSB_S_RXCSR_H_DATATOGGLE) & 1);
+-				csr &= ~MUSB_RXCSR_RXPKTRDY;
+-				writew(csr, &musbr->rxcsr);
+-				dev->act_len = txlen;
+-				return 0;
+-			}
+-
+-			/* Read the data from the FIFO */
+-			read_fifo(MUSB_INTR_EP, nextlen,
+-					(void *)(((u8 *)buffer) + txlen));
+-
+-			/* Clear the RxPktRdy bit */
+-			csr =  readw(&musbr->rxcsr);
+-			csr &= ~MUSB_RXCSR_RXPKTRDY;
+-			writew(csr, &musbr->rxcsr);
+-			txlen += nextlen;
+-		}
+-
+-		/* Keep a copy of the data toggle bit */
+-		csr = readw(&musbr->rxcsr);
+-		usb_settoggle(dev, ep, dir_out,
+-				(csr >> MUSB_S_RXCSR_H_DATATOGGLE) & 1);
+-	}
+-
+-	/* interrupt transfer is complete */
+-	dev->irq_status = 0;
+-	dev->irq_act_len = len;
+-	dev->irq_handle(dev);
+-	dev->status = 0;
+-	dev->act_len = len;
+-	return 0;
+-}
+diff --git a/drivers/usb/musb/musb_hcd.h b/drivers/usb/musb/musb_hcd.h
+deleted file mode 100644
+index a492e99ef9d1..000000000000
+--- a/drivers/usb/musb/musb_hcd.h
++++ /dev/null
+@@ -1,93 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Mentor USB OTG Core host controller driver.
+- *
+- * Copyright (c) 2008 Texas Instruments
+- *
+- * Author: Thomas Abraham t-abraham@ti.com, Texas Instruments
+- */
+-
+-#ifndef __MUSB_HCD_H__
+-#define __MUSB_HCD_H__
+-
+-#include "musb_core.h"
+-#ifdef CONFIG_USB_KEYBOARD
+-#include <stdio_dev.h>
+-extern unsigned char new[];
+-#endif
+-
+-#define MUSB_TIMEOUT 100000
+-
+-/* This defines the endpoint number used for control transfers */
+-#define MUSB_CONTROL_EP 0
+-
+-/* This defines the endpoint number used for bulk transfer */
+-#ifndef MUSB_BULK_EP
+-# define MUSB_BULK_EP 1
+-#endif
+-
+-/* This defines the endpoint number used for interrupt transfer */
+-#define MUSB_INTR_EP 2
+-
+-/* Determine the operating speed of MUSB core */
+-#define musb_ishighspeed() \
+-	((readb(&musbr->power) & MUSB_POWER_HSMODE) \
+-		>> MUSB_POWER_HSMODE_SHIFT)
+-
+-/* USB HUB CONSTANTS (not OHCI-specific; see hub.h) */
+-
+-/* destination of request */
+-#define RH_INTERFACE		   0x01
+-#define RH_ENDPOINT		   0x02
+-#define RH_OTHER		   0x03
+-
+-#define RH_CLASS		   0x20
+-#define RH_VENDOR		   0x40
+-
+-/* Requests: bRequest << 8 | bmRequestType */
+-#define RH_GET_STATUS		0x0080
+-#define RH_CLEAR_FEATURE	0x0100
+-#define RH_SET_FEATURE		0x0300
+-#define RH_SET_ADDRESS		0x0500
+-#define RH_GET_DESCRIPTOR	0x0680
+-#define RH_SET_DESCRIPTOR	0x0700
+-#define RH_GET_CONFIGURATION	0x0880
+-#define RH_SET_CONFIGURATION	0x0900
+-#define RH_GET_STATE		0x0280
+-#define RH_GET_INTERFACE	0x0A80
+-#define RH_SET_INTERFACE	0x0B00
+-#define RH_SYNC_FRAME		0x0C80
+-/* Our Vendor Specific Request */
+-#define RH_SET_EP		0x2000
+-
+-/* Hub port features */
+-#define RH_PORT_CONNECTION	   0x00
+-#define RH_PORT_ENABLE		   0x01
+-#define RH_PORT_SUSPEND		   0x02
+-#define RH_PORT_OVER_CURRENT	   0x03
+-#define RH_PORT_RESET		   0x04
+-#define RH_PORT_POWER		   0x08
+-#define RH_PORT_LOW_SPEED	   0x09
+-
+-#define RH_C_PORT_CONNECTION	   0x10
+-#define RH_C_PORT_ENABLE	   0x11
+-#define RH_C_PORT_SUSPEND	   0x12
+-#define RH_C_PORT_OVER_CURRENT	   0x13
+-#define RH_C_PORT_RESET		   0x14
+-
+-/* Hub features */
+-#define RH_C_HUB_LOCAL_POWER	   0x00
+-#define RH_C_HUB_OVER_CURRENT	   0x01
+-
+-#define RH_DEVICE_REMOTE_WAKEUP	   0x00
+-#define RH_ENDPOINT_STALL	   0x01
+-
+-#define RH_ACK			   0x01
+-#define RH_REQ_ERR		   -1
+-#define RH_NACK			   0x00
+-
+-/* extern functions */
+-extern int musb_platform_init(void);
+-extern void musb_platform_deinit(void);
+-
+-#endif	/* __MUSB_HCD_H__ */
+diff --git a/drivers/usb/musb/musb_udc.c b/drivers/usb/musb/musb_udc.c
+deleted file mode 100644
+index 696855ee3a61..000000000000
+--- a/drivers/usb/musb/musb_udc.c
++++ /dev/null
+@@ -1,953 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright (c) 2009 Wind River Systems, Inc.
+- * Tom Rix <Tom.Rix@windriver.com>
+- *
+- * This file is a rewrite of the usb device part of
+- * repository git.omapzoom.org/repo/u-boot.git, branch master,
+- * file cpu/omap3/fastboot.c
+- *
+- * This is the unique part of its copyright :
+- *
+- * -------------------------------------------------------------------------
+- *
+- * (C) Copyright 2008 - 2009
+- * Windriver, <www.windriver.com>
+- * Tom Rix <Tom.Rix@windriver.com>
+- *
+- * -------------------------------------------------------------------------
+- *
+- * The details of connecting the device to the uboot usb device subsystem
+- * came from the old omap3 repository www.sakoman.net/u-boot-omap3.git,
+- * branch omap3-dev-usb, file drivers/usb/usbdcore_musb.c
+- *
+- * This is the unique part of its copyright :
+- *
+- * -------------------------------------------------------------------------
+- *
+- * (C) Copyright 2008 Texas Instruments Incorporated.
+- *
+- * Based on
+- * u-boot OMAP1510 USB drivers (drivers/usbdcore_omap1510.c)
+- * twl4030 init based on linux (drivers/i2c/chips/twl4030_usb.c)
+- *
+- * Author: Diego Dompe (diego.dompe@ridgerun.com)
+- *         Atin Malaviya (atin.malaviya@gmail.com)
+- *
+- * -------------------------------------------------------------------------
+- */
+-
+-#include <hang.h>
+-#include <serial.h>
+-#include <usbdevice.h>
+-#include <linux/delay.h>
+-#include <usb/udc.h>
+-#include "../gadget/ep0.h"
+-#include "musb_core.h"
+-#if defined(CONFIG_USB_OMAP3)
+-#include "omap3.h"
+-#elif defined(CONFIG_USB_AM35X)
+-#include "am35x.h"
+-#endif
+-
+-/* Define MUSB_DEBUG for debugging */
+-/* #define MUSB_DEBUG */
+-#include "musb_debug.h"
+-
+-#define MAX_ENDPOINT 15
+-
+-#define GET_ENDPOINT(dev,ep)						\
+-(((struct usb_device_instance *)(dev))->bus->endpoint_array + ep)
+-
+-#define SET_EP0_STATE(s)						\
+-do {									\
+-	if ((0 <= (s)) && (SET_ADDRESS >= (s))) {			\
+-		if ((s) != ep0_state) {					\
+-			if ((debug_setup) && (debug_level > 1))		\
+-				serial_printf("INFO : Changing state "  \
+-					      "from %s to %s in %s at " \
+-					      "line %d\n",		\
+-					      ep0_state_strings[ep0_state],\
+-					      ep0_state_strings[s],	\
+-					      __PRETTY_FUNCTION__,	\
+-					      __LINE__);		\
+-			ep0_state = s;					\
+-		}							\
+-	} else {							\
+-		if (debug_level > 0)					\
+-			serial_printf("Error at %s %d with setting "	\
+-				      "state %d is invalid\n",		\
+-				      __PRETTY_FUNCTION__, __LINE__, s); \
+-	}								\
+-} while (0)
+-
+-/* static implies these initialized to 0 or NULL */
+-static int debug_setup;
+-static int debug_level;
+-static struct musb_epinfo epinfo[MAX_ENDPOINT * 2 + 2];
+-static enum ep0_state_enum {
+-	IDLE = 0,
+-	TX,
+-	RX,
+-	SET_ADDRESS
+-} ep0_state = IDLE;
+-static char *ep0_state_strings[4] = {
+-	"IDLE",
+-	"TX",
+-	"RX",
+-	"SET_ADDRESS",
+-};
+-
+-static struct urb *ep0_urb;
+-struct usb_endpoint_instance *ep0_endpoint;
+-static struct usb_device_instance *udc_device;
+-static int enabled;
+-
+-static u16 pending_intrrx;
+-
+-#ifdef MUSB_DEBUG
+-static void musb_db_regs(void)
+-{
+-	u8 b;
+-	u16 w;
+-
+-	b = readb(&musbr->faddr);
+-	serial_printf("\tfaddr   0x%2.2x\n", b);
+-
+-	b = readb(&musbr->power);
+-	musb_print_pwr(b);
+-
+-	w = readw(&musbr->ep[0].ep0.csr0);
+-	musb_print_csr0(w);
+-
+-	b = readb(&musbr->devctl);
+-	musb_print_devctl(b);
+-
+-	b = readb(&musbr->ep[0].ep0.configdata);
+-	musb_print_config(b);
+-
+-	w = readw(&musbr->frame);
+-	serial_printf("\tframe   0x%4.4x\n", w);
+-
+-	b = readb(&musbr->index);
+-	serial_printf("\tindex   0x%2.2x\n", b);
+-
+-	w = readw(&musbr->ep[1].epN.rxmaxp);
+-	musb_print_rxmaxp(w);
+-
+-	w = readw(&musbr->ep[1].epN.rxcsr);
+-	musb_print_rxcsr(w);
+-
+-	w = readw(&musbr->ep[1].epN.txmaxp);
+-	musb_print_txmaxp(w);
+-
+-	w = readw(&musbr->ep[1].epN.txcsr);
+-	musb_print_txcsr(w);
+-}
+-#else
+-#define musb_db_regs()
+-#endif /* DEBUG_MUSB */
+-
+-static void musb_peri_softconnect(void)
+-{
+-	u8 power, devctl;
+-
+-	/* Power off MUSB */
+-	power = readb(&musbr->power);
+-	power &= ~MUSB_POWER_SOFTCONN;
+-	writeb(power, &musbr->power);
+-
+-	/* Read intr to clear */
+-	readb(&musbr->intrusb);
+-	readw(&musbr->intrrx);
+-	readw(&musbr->intrtx);
+-
+-	udelay(1000 * 1000); /* 1 sec */
+-
+-	/* Power on MUSB */
+-	power = readb(&musbr->power);
+-	power |= MUSB_POWER_SOFTCONN;
+-	/*
+-	 * The usb device interface is usb 1.1
+-	 * Disable 2.0 high speed by clearring the hsenable bit.
+-	 */
+-	power &= ~MUSB_POWER_HSENAB;
+-	writeb(power, &musbr->power);
+-
+-	/* Check if device is in b-peripheral mode */
+-	devctl = readb(&musbr->devctl);
+-	if (!(devctl & MUSB_DEVCTL_BDEVICE) ||
+-	    (devctl & MUSB_DEVCTL_HM)) {
+-		serial_printf("ERROR : Unsupport USB mode\n");
+-		serial_printf("Check that mini-B USB cable is attached "
+-			      "to the device\n");
+-	}
+-
+-	if (debug_setup && (debug_level > 1))
+-		musb_db_regs();
+-}
+-
+-static void musb_peri_reset(void)
+-{
+-	if ((debug_setup) && (debug_level > 1))
+-		serial_printf("INFO : %s reset\n", __PRETTY_FUNCTION__);
+-
+-	if (ep0_endpoint)
+-		ep0_endpoint->endpoint_address = 0xff;
+-
+-	/* Sync sw and hw addresses */
+-	writeb(udc_device->address, &musbr->faddr);
+-
+-	SET_EP0_STATE(IDLE);
+-}
+-
+-static void musb_peri_resume(void)
+-{
+-	/* noop */
+-}
+-
+-static void musb_peri_ep0_stall(void)
+-{
+-	u16 csr0;
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-	csr0 |= MUSB_CSR0_P_SENDSTALL;
+-	writew(csr0, &musbr->ep[0].ep0.csr0);
+-	if ((debug_setup) && (debug_level > 1))
+-		serial_printf("INFO : %s stall\n", __PRETTY_FUNCTION__);
+-}
+-
+-static void musb_peri_ep0_ack_req(void)
+-{
+-	u16 csr0;
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-	csr0 |= MUSB_CSR0_P_SVDRXPKTRDY;
+-	writew(csr0, &musbr->ep[0].ep0.csr0);
+-}
+-
+-static void musb_ep0_tx_ready(void)
+-{
+-	u16 csr0;
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-	csr0 |= MUSB_CSR0_TXPKTRDY;
+-	writew(csr0, &musbr->ep[0].ep0.csr0);
+-}
+-
+-static void musb_ep0_tx_ready_and_last(void)
+-{
+-	u16 csr0;
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-	csr0 |= (MUSB_CSR0_TXPKTRDY | MUSB_CSR0_P_DATAEND);
+-	writew(csr0, &musbr->ep[0].ep0.csr0);
+-}
+-
+-static void musb_peri_ep0_last(void)
+-{
+-	u16 csr0;
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-	csr0 |= MUSB_CSR0_P_DATAEND;
+-	writew(csr0, &musbr->ep[0].ep0.csr0);
+-}
+-
+-static void musb_peri_ep0_set_address(void)
+-{
+-	u8 faddr;
+-	writeb(udc_device->address, &musbr->faddr);
+-
+-	/* Verify */
+-	faddr = readb(&musbr->faddr);
+-	if (udc_device->address == faddr) {
+-		SET_EP0_STATE(IDLE);
+-		usbd_device_event_irq(udc_device, DEVICE_ADDRESS_ASSIGNED, 0);
+-		if ((debug_setup) && (debug_level > 1))
+-			serial_printf("INFO : %s Address set to %d\n",
+-				      __PRETTY_FUNCTION__, udc_device->address);
+-	} else {
+-		if (debug_level > 0)
+-			serial_printf("ERROR : %s Address mismatch "
+-				      "sw %d vs hw %d\n",
+-				      __PRETTY_FUNCTION__,
+-				      udc_device->address, faddr);
+-	}
+-}
+-
+-static void musb_peri_rx_ack(unsigned int ep)
+-{
+-	u16 peri_rxcsr;
+-
+-	peri_rxcsr = readw(&musbr->ep[ep].epN.rxcsr);
+-	peri_rxcsr &= ~MUSB_RXCSR_RXPKTRDY;
+-	writew(peri_rxcsr, &musbr->ep[ep].epN.rxcsr);
+-}
+-
+-static void musb_peri_tx_ready(unsigned int ep)
+-{
+-	u16 peri_txcsr;
+-
+-	peri_txcsr = readw(&musbr->ep[ep].epN.txcsr);
+-	peri_txcsr |= MUSB_TXCSR_TXPKTRDY;
+-	writew(peri_txcsr, &musbr->ep[ep].epN.txcsr);
+-}
+-
+-static void musb_peri_ep0_zero_data_request(int err)
+-{
+-	musb_peri_ep0_ack_req();
+-
+-	if (err) {
+-		musb_peri_ep0_stall();
+-		SET_EP0_STATE(IDLE);
+-	} else {
+-
+-		musb_peri_ep0_last();
+-
+-		/* USBD state */
+-		switch (ep0_urb->device_request.bRequest) {
+-		case USB_REQ_SET_ADDRESS:
+-			if ((debug_setup) && (debug_level > 1))
+-				serial_printf("INFO : %s received set "
+-					      "address\n", __PRETTY_FUNCTION__);
+-			break;
+-
+-		case USB_REQ_SET_CONFIGURATION:
+-			if ((debug_setup) && (debug_level > 1))
+-				serial_printf("INFO : %s Configured\n",
+-					      __PRETTY_FUNCTION__);
+-			usbd_device_event_irq(udc_device, DEVICE_CONFIGURED, 0);
+-			break;
+-		}
+-
+-		/* EP0 state */
+-		if (USB_REQ_SET_ADDRESS == ep0_urb->device_request.bRequest) {
+-			SET_EP0_STATE(SET_ADDRESS);
+-		} else {
+-			SET_EP0_STATE(IDLE);
+-		}
+-	}
+-}
+-
+-static void musb_peri_ep0_rx_data_request(void)
+-{
+-	/*
+-	 * This is the completion of the data OUT / RX
+-	 *
+-	 * Host is sending data to ep0 that is not
+-	 * part of setup.  This comes from the cdc_recv_setup
+-	 * op that is device specific.
+-	 *
+-	 */
+-	musb_peri_ep0_ack_req();
+-
+-	ep0_endpoint->rcv_urb = ep0_urb;
+-	ep0_urb->actual_length = 0;
+-	SET_EP0_STATE(RX);
+-}
+-
+-static void musb_peri_ep0_tx_data_request(int err)
+-{
+-	if (err) {
+-		musb_peri_ep0_stall();
+-		SET_EP0_STATE(IDLE);
+-	} else {
+-		musb_peri_ep0_ack_req();
+-
+-		ep0_endpoint->tx_urb = ep0_urb;
+-		ep0_endpoint->sent = 0;
+-		SET_EP0_STATE(TX);
+-	}
+-}
+-
+-static void musb_peri_ep0_idle(void)
+-{
+-	u16 count0;
+-	int err;
+-	u16 csr0;
+-
+-	/*
+-	 * Verify addresses
+-	 * A lot of confusion can be caused if the address
+-	 * in software, udc layer, does not agree with the
+-	 * hardware.  Since the setting of the hardware address
+-	 * must be set after the set address request, the
+-	 * usb state machine is out of sync for a few frame.
+-	 * It is a good idea to run this check when changes
+-	 * are made to the state machine.
+-	 */
+-	if ((debug_level > 0) &&
+-	    (ep0_state != SET_ADDRESS)) {
+-		u8 faddr;
+-
+-		faddr = readb(&musbr->faddr);
+-		if (udc_device->address != faddr) {
+-			serial_printf("ERROR : %s addresses do not"
+-				      "match sw %d vs hw %d\n",
+-				      __PRETTY_FUNCTION__,
+-				      udc_device->address, faddr);
+-			udelay(1000 * 1000);
+-			hang();
+-		}
+-	}
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-
+-	if (!(MUSB_CSR0_RXPKTRDY & csr0))
+-		goto end;
+-
+-	count0 = readw(&musbr->ep[0].ep0.count0);
+-	if (count0 == 0)
+-		goto end;
+-
+-	if (count0 != 8) {
+-		if ((debug_setup) && (debug_level > 1))
+-			serial_printf("WARN : %s SETUP incorrect size %d\n",
+-				      __PRETTY_FUNCTION__, count0);
+-		musb_peri_ep0_stall();
+-		goto end;
+-	}
+-
+-	read_fifo(0, count0, &ep0_urb->device_request);
+-
+-	if (debug_level > 2)
+-		print_usb_device_request(&ep0_urb->device_request);
+-
+-	if (ep0_urb->device_request.wLength == 0) {
+-		err = ep0_recv_setup(ep0_urb);
+-
+-		/* Zero data request */
+-		musb_peri_ep0_zero_data_request(err);
+-	} else {
+-		/* Is data coming or going ? */
+-		u8 reqType = ep0_urb->device_request.bmRequestType;
+-
+-		if (USB_REQ_DEVICE2HOST == (reqType & USB_REQ_DIRECTION_MASK)) {
+-			err = ep0_recv_setup(ep0_urb);
+-			/* Device to host */
+-			musb_peri_ep0_tx_data_request(err);
+-		} else {
+-			/*
+-			 * Host to device
+-			 *
+-			 * The RX routine will call ep0_recv_setup
+-			 * when the data packet has arrived.
+-			 */
+-			musb_peri_ep0_rx_data_request();
+-		}
+-	}
+-
+-end:
+-	return;
+-}
+-
+-static void musb_peri_ep0_rx(void)
+-{
+-	/*
+-	 * This is the completion of the data OUT / RX
+-	 *
+-	 * Host is sending data to ep0 that is not
+-	 * part of setup.  This comes from the cdc_recv_setup
+-	 * op that is device specific.
+-	 *
+-	 * Pass the data back to driver ep0_recv_setup which
+-	 * should give the cdc_recv_setup the chance to handle
+-	 * the rx
+-	 */
+-	u16 csr0;
+-	u16 count0;
+-
+-	if (debug_level > 3) {
+-		if (0 != ep0_urb->actual_length) {
+-			serial_printf("%s finished ? %d of %d\n",
+-				      __PRETTY_FUNCTION__,
+-				      ep0_urb->actual_length,
+-				      ep0_urb->device_request.wLength);
+-		}
+-	}
+-
+-	if (ep0_urb->device_request.wLength == ep0_urb->actual_length) {
+-		musb_peri_ep0_last();
+-		SET_EP0_STATE(IDLE);
+-		ep0_recv_setup(ep0_urb);
+-		return;
+-	}
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-	if (!(MUSB_CSR0_RXPKTRDY & csr0))
+-		return;
+-
+-	count0 = readw(&musbr->ep[0].ep0.count0);
+-
+-	if (count0) {
+-		struct usb_endpoint_instance *endpoint;
+-		u32 length;
+-		u8 *data;
+-
+-		endpoint = ep0_endpoint;
+-		if (endpoint && endpoint->rcv_urb) {
+-			struct urb *urb = endpoint->rcv_urb;
+-			unsigned int remaining_space = urb->buffer_length -
+-				urb->actual_length;
+-
+-			if (remaining_space) {
+-				int urb_bad = 0; /* urb is good */
+-
+-				if (count0 > remaining_space)
+-					length = remaining_space;
+-				else
+-					length = count0;
+-
+-				data = (u8 *) urb->buffer_data;
+-				data += urb->actual_length;
+-
+-				/* The common musb fifo reader */
+-				read_fifo(0, length, data);
+-
+-				musb_peri_ep0_ack_req();
+-
+-				/*
+-				 * urb's actual_length is updated in
+-				 * usbd_rcv_complete
+-				 */
+-				usbd_rcv_complete(endpoint, length, urb_bad);
+-
+-			} else {
+-				if (debug_level > 0)
+-					serial_printf("ERROR : %s no space in "
+-						      "rcv buffer\n",
+-						      __PRETTY_FUNCTION__);
+-			}
+-		} else {
+-			if (debug_level > 0)
+-				serial_printf("ERROR : %s problem with "
+-					      "endpoint\n",
+-					      __PRETTY_FUNCTION__);
+-		}
+-	} else {
+-		if (debug_level > 0)
+-			serial_printf("ERROR : %s with nothing to do\n",
+-				      __PRETTY_FUNCTION__);
+-	}
+-}
+-
+-static void musb_peri_ep0_tx(void)
+-{
+-	u16 csr0;
+-	int transfer_size = 0;
+-	unsigned int p, pm;
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-
+-	/* Check for pending tx */
+-	if (csr0 & MUSB_CSR0_TXPKTRDY)
+-		goto end;
+-
+-	/* Check if this is the last packet sent */
+-	if (ep0_endpoint->sent >= ep0_urb->actual_length) {
+-		SET_EP0_STATE(IDLE);
+-		goto end;
+-	}
+-
+-	transfer_size = ep0_urb->actual_length - ep0_endpoint->sent;
+-	/* Is the transfer size negative ? */
+-	if (transfer_size <= 0) {
+-		if (debug_level > 0)
+-			serial_printf("ERROR : %s problem with the"
+-				      " transfer size %d\n",
+-				      __PRETTY_FUNCTION__,
+-				      transfer_size);
+-		SET_EP0_STATE(IDLE);
+-		goto end;
+-	}
+-
+-	/* Truncate large transfers to the fifo size */
+-	if (transfer_size > ep0_endpoint->tx_packetSize)
+-		transfer_size = ep0_endpoint->tx_packetSize;
+-
+-	write_fifo(0, transfer_size, &ep0_urb->buffer[ep0_endpoint->sent]);
+-	ep0_endpoint->sent += transfer_size;
+-
+-	/* Done or more to send ? */
+-	if (ep0_endpoint->sent >= ep0_urb->actual_length)
+-		musb_ep0_tx_ready_and_last();
+-	else
+-		musb_ep0_tx_ready();
+-
+-	/* Wait a bit */
+-	pm = 10;
+-	for (p = 0; p < pm; p++) {
+-		csr0 = readw(&musbr->ep[0].ep0.csr0);
+-		if (!(csr0 & MUSB_CSR0_TXPKTRDY))
+-			break;
+-
+-		/* Double the delay. */
+-		udelay(1 << pm);
+-	}
+-
+-	if ((ep0_endpoint->sent >= ep0_urb->actual_length) && (p < pm))
+-		SET_EP0_STATE(IDLE);
+-
+-end:
+-	return;
+-}
+-
+-static void musb_peri_ep0(void)
+-{
+-	u16 csr0;
+-
+-	if (SET_ADDRESS == ep0_state)
+-		return;
+-
+-	csr0 = readw(&musbr->ep[0].ep0.csr0);
+-
+-	/* Error conditions */
+-	if (MUSB_CSR0_P_SENTSTALL & csr0) {
+-		csr0 &= ~MUSB_CSR0_P_SENTSTALL;
+-		writew(csr0, &musbr->ep[0].ep0.csr0);
+-		SET_EP0_STATE(IDLE);
+-	}
+-	if (MUSB_CSR0_P_SETUPEND & csr0) {
+-		csr0 |= MUSB_CSR0_P_SVDSETUPEND;
+-		writew(csr0, &musbr->ep[0].ep0.csr0);
+-		SET_EP0_STATE(IDLE);
+-		if ((debug_setup) && (debug_level > 1))
+-			serial_printf("WARN: %s SETUPEND\n",
+-				      __PRETTY_FUNCTION__);
+-	}
+-
+-	/* Normal states */
+-	if (IDLE == ep0_state)
+-		musb_peri_ep0_idle();
+-
+-	if (TX == ep0_state)
+-		musb_peri_ep0_tx();
+-
+-	if (RX == ep0_state)
+-		musb_peri_ep0_rx();
+-}
+-
+-static void musb_peri_rx_ep(unsigned int ep)
+-{
+-	u16 peri_rxcount;
+-	u16 peri_rxcsr = readw(&musbr->ep[ep].epN.rxcsr);
+-
+-	if (!(peri_rxcsr & MUSB_RXCSR_RXPKTRDY)) {
+-		if (debug_level > 0)
+-			serial_printf("ERROR : %s %d without MUSB_RXCSR_RXPKTRDY set\n",
+-				      __PRETTY_FUNCTION__, ep);
+-		return;
+-	}
+-
+-	peri_rxcount = readw(&musbr->ep[ep].epN.rxcount);
+-	if (peri_rxcount) {
+-		struct usb_endpoint_instance *endpoint;
+-		u32 length;
+-		u8 *data;
+-
+-		endpoint = GET_ENDPOINT(udc_device, ep);
+-		if (endpoint && endpoint->rcv_urb) {
+-			struct urb *urb = endpoint->rcv_urb;
+-			unsigned int remaining_space = urb->buffer_length -
+-				urb->actual_length;
+-
+-			if (remaining_space) {
+-				int urb_bad = 0; /* urb is good */
+-
+-				if (peri_rxcount > remaining_space)
+-					length = remaining_space;
+-				else
+-					length = peri_rxcount;
+-
+-				data = (u8 *) urb->buffer_data;
+-				data += urb->actual_length;
+-
+-				/* The common musb fifo reader */
+-				read_fifo(ep, length, data);
+-
+-				if (length == peri_rxcount)
+-					musb_peri_rx_ack(ep);
+-				else
+-					pending_intrrx |= (1 << ep);
+-
+-				/*
+-				 * urb's actual_length is updated in
+-				 * usbd_rcv_complete
+-				 */
+-				usbd_rcv_complete(endpoint, length, urb_bad);
+-
+-			} else {
+-				if (debug_level > 0)
+-					serial_printf("ERROR : %s %d no space "
+-						      "in rcv buffer\n",
+-						      __PRETTY_FUNCTION__, ep);
+-
+-				pending_intrrx |= (1 << ep);
+-			}
+-		} else {
+-			if (debug_level > 0)
+-				serial_printf("ERROR : %s %d problem with "
+-					      "endpoint\n",
+-					      __PRETTY_FUNCTION__, ep);
+-
+-			pending_intrrx |= (1 << ep);
+-		}
+-
+-	} else {
+-		if (debug_level > 0)
+-			serial_printf("ERROR : %s %d with nothing to do\n",
+-				      __PRETTY_FUNCTION__, ep);
+-
+-		musb_peri_rx_ack(ep);
+-	}
+-}
+-
+-static void musb_peri_rx(u16 intr)
+-{
+-	unsigned int ep;
+-
+-	/* First bit is reserved and does not indicate interrupt for EP0 */
+-
+-	for (ep = 1; ep < 16; ep++) {
+-		if ((1 << ep) & intr)
+-			musb_peri_rx_ep(ep);
+-	}
+-}
+-
+-static void musb_peri_tx(u16 intr)
+-{
+-	unsigned int ep;
+-
+-	/* Check for EP0: first bit indicates interrupt for both RX and TX */
+-	if (0x01 & intr)
+-		musb_peri_ep0();
+-
+-	for (ep = 1; ep < 16; ep++) {
+-		if ((1 << ep) & intr)
+-			udc_endpoint_write(GET_ENDPOINT(udc_device, ep));
+-	}
+-}
+-
+-void udc_irq(void)
+-{
+-	/* This is a high freq called function */
+-	if (enabled) {
+-		u8 intrusb;
+-
+-		intrusb = readb(&musbr->intrusb);
+-
+-		/*
+-		 * See drivers/usb/gadget/mpc8xx_udc.c for
+-		 * state diagram going from detached through
+-		 * configuration.
+-		 */
+-		if (MUSB_INTR_RESUME & intrusb) {
+-			usbd_device_event_irq(udc_device,
+-					      DEVICE_BUS_ACTIVITY, 0);
+-			musb_peri_resume();
+-		}
+-
+-		if (MUSB_INTR_RESET & intrusb) {
+-			usbd_device_event_irq(udc_device, DEVICE_RESET, 0);
+-			musb_peri_reset();
+-		}
+-
+-		if (MUSB_INTR_DISCONNECT & intrusb) {
+-			/* cable unplugged from hub/host */
+-			usbd_device_event_irq(udc_device, DEVICE_RESET, 0);
+-			musb_peri_reset();
+-			usbd_device_event_irq(udc_device, DEVICE_HUB_RESET, 0);
+-		}
+-
+-		if (MUSB_INTR_SOF & intrusb) {
+-			usbd_device_event_irq(udc_device,
+-					      DEVICE_BUS_ACTIVITY, 0);
+-			musb_peri_resume();
+-		}
+-
+-		if (MUSB_INTR_SUSPEND & intrusb) {
+-			usbd_device_event_irq(udc_device,
+-					      DEVICE_BUS_INACTIVE, 0);
+-		}
+-
+-		if (ep0_state != SET_ADDRESS) {
+-			u16 intrrx, intrtx;
+-
+-			intrrx = readw(&musbr->intrrx);
+-			intrtx = readw(&musbr->intrtx);
+-
+-			intrrx |= pending_intrrx;
+-			pending_intrrx = 0;
+-
+-			if (intrrx)
+-				musb_peri_rx(intrrx);
+-
+-			if (intrtx)
+-				musb_peri_tx(intrtx);
+-		} else {
+-			if (readw(&musbr->intrtx) & 0x1) {
+-				u8 faddr;
+-				faddr = readb(&musbr->faddr);
+-				/*
+-				 * Setting of the address can fail.
+-				 * Normally it succeeds the second time.
+-				 */
+-				if (udc_device->address != faddr)
+-					musb_peri_ep0_set_address();
+-			}
+-		}
+-	}
+-}
+-
+-void udc_set_nak(int ep_num)
+-{
+-	/* noop */
+-}
+-
+-void udc_unset_nak(int ep_num)
+-{
+-	/* noop */
+-}
+-
+-int udc_endpoint_write(struct usb_endpoint_instance *endpoint)
+-{
 -	int ret = 0;
 -
--	spi_rd_buf(udc, MAX3420_REG_EPIRQ, reg, 4);
--	epirq = reg[0];
--	epien = reg[1];
--	usbirq = reg[2];
--	usbien = reg[3];
+-	/* Transmit only if the hardware is available */
+-	if (endpoint->tx_urb && endpoint->state == 0) {
+-		unsigned int ep = endpoint->endpoint_address &
+-			USB_ENDPOINT_NUMBER_MASK;
 -
--	usbirq &= usbien;
--	epirq &= epien;
+-		u16 peri_txcsr = readw(&musbr->ep[ep].epN.txcsr);
 -
--	if (epirq & bSUDAVIRQ) {
--		spi_wr8(udc, MAX3420_REG_EPIRQ, bSUDAVIRQ);
--		max3420_handle_setup(udc);
--		return 1;
+-		/* Error conditions */
+-		if (peri_txcsr & MUSB_TXCSR_P_UNDERRUN) {
+-			peri_txcsr &= ~MUSB_TXCSR_P_UNDERRUN;
+-			writew(peri_txcsr, &musbr->ep[ep].epN.txcsr);
+-		}
+-
+-		if (debug_level > 1)
+-			musb_print_txcsr(peri_txcsr);
+-
+-		/* Check if a packet is waiting to be sent */
+-		if (!(peri_txcsr & MUSB_TXCSR_TXPKTRDY)) {
+-			u32 length;
+-			u8 *data;
+-			struct urb *urb = endpoint->tx_urb;
+-			unsigned int remaining_packet = urb->actual_length -
+-				endpoint->sent;
+-
+-			if (endpoint->tx_packetSize < remaining_packet)
+-				length = endpoint->tx_packetSize;
+-			else
+-				length = remaining_packet;
+-
+-			data = (u8 *) urb->buffer;
+-			data += endpoint->sent;
+-
+-			/* common musb fifo function */
+-			write_fifo(ep, length, data);
+-
+-			musb_peri_tx_ready(ep);
+-
+-			endpoint->last = length;
+-			/* usbd_tx_complete will take care of updating 'sent' */
+-			usbd_tx_complete(endpoint);
+-		}
+-	} else {
+-		if (debug_level > 0)
+-			serial_printf("ERROR : %s Problem with urb %p "
+-				      "or ep state %d\n",
+-				      __PRETTY_FUNCTION__,
+-				      endpoint->tx_urb, endpoint->state);
 -	}
--
--	if (usbirq & bVBUSIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bVBUSIRQ);
--		dev_dbg(udc->dev, "Cable plugged in\n");
--		g_dnl_clear_detach();
--		return 1;
--	}
--
--	if (usbirq & bNOVBUSIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bNOVBUSIRQ);
--		dev_dbg(udc->dev, "Cable pulled out\n");
--		g_dnl_trigger_detach();
--		return 1;
--	}
--
--	if (usbirq & bURESIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bURESIRQ);
--		return 1;
--	}
--
--	if (usbirq & bURESDNIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bURESDNIRQ);
--		spi_wr8(udc, MAX3420_REG_USBIEN, bURESDNIRQ | bURESIRQ);
--		spi_wr8(udc, MAX3420_REG_EPIEN, bSUDAVIRQ
--			| bIN0BAVIRQ | bOUT0DAVIRQ);
--		return 1;
--	}
--
--	if (usbirq & bSUSPIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bSUSPIRQ);
--		dev_dbg(udc->dev, "USB Suspend - Enter\n");
--		udc->suspended = true;
--		return 1;
--	}
--
--	if (usbirq & bBUSACTIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bBUSACTIRQ);
--		dev_dbg(udc->dev, "USB Suspend - Exit\n");
--		udc->suspended = false;
--		return 1;
--	}
--
--	if (usbirq & bRWUDNIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bRWUDNIRQ);
--		dev_dbg(udc->dev, "Asked Host to wakeup\n");
--		return 1;
--	}
--
--	if (usbirq & bOSCOKIRQ) {
--		spi_wr8(udc, MAX3420_REG_USBIRQ, bOSCOKIRQ);
--		dev_dbg(udc->dev, "Osc stabilized, start work\n");
--		return 1;
--	}
--
--	if (epirq & bOUT0DAVIRQ && do_data(udc, 0, 0)) {
--		spi_wr8_ack(udc, MAX3420_REG_EPIRQ, bOUT0DAVIRQ, 1);
--		ret = 1;
--	}
--
--	if (epirq & bIN0BAVIRQ && do_data(udc, 0, 1))
--		ret = 1;
--
--	if (epirq & bOUT1DAVIRQ && do_data(udc, 1, 0)) {
--		spi_wr8_ack(udc, MAX3420_REG_EPIRQ, bOUT1DAVIRQ, 1);
--		ret = 1;
--	}
--
--	if (epirq & bIN2BAVIRQ && do_data(udc, 2, 1))
--		ret = 1;
--
--	if (epirq & bIN3BAVIRQ && do_data(udc, 3, 1))
--		ret = 1;
 -
 -	return ret;
 -}
 -
--static int max3420_irq(struct max3420_udc *udc)
+-void udc_setup_ep(struct usb_device_instance *device, unsigned int id,
+-		  struct usb_endpoint_instance *endpoint)
 -{
--	do_data(udc, 0, 1); /* get done with the EP0 ZLP */
--
--	return max3420_handle_irqs(udc);
+-	if (0 == id) {
+-		/* EP0 */
+-		ep0_endpoint = endpoint;
+-		ep0_endpoint->endpoint_address = 0xff;
+-		ep0_urb = usbd_alloc_urb(device, endpoint);
+-	} else if (MAX_ENDPOINT >= id) {
+-		epinfo[(id * 2) + 0].epsize = endpoint->rcv_packetSize;
+-		epinfo[(id * 2) + 1].epsize = endpoint->tx_packetSize;
+-		musb_configure_ep(&epinfo[0], ARRAY_SIZE(epinfo));
+-	} else {
+-		if (debug_level > 0)
+-			serial_printf("ERROR : %s endpoint request %d "
+-				      "exceeds maximum %d\n",
+-				      __PRETTY_FUNCTION__, id, MAX_ENDPOINT);
+-	}
 -}
 -
--static void max3420_setup_eps(struct max3420_udc *udc)
+-void udc_connect(void)
 -{
--	int i;
--
--	INIT_LIST_HEAD(&udc->gadget.ep_list);
--	INIT_LIST_HEAD(&udc->ep[0].ep_usb.ep_list);
--
--	for (i = 0; i < MAX3420_MAX_EPS; i++) {
--		struct max3420_ep *ep = &udc->ep[i];
--
--		INIT_LIST_HEAD(&ep->queue);
--
--		ep->id = i;
--		ep->udc = udc;
--		ep->ep_usb.ops = &max3420_ep_ops;
--		ep->ep_usb.name = ep->name;
--		ep->ep_usb.maxpacket = EP_MAX_PACKET;
--
--		if (i == 0) {
--			ep->ep_usb.desc = &ep0_desc;
--			snprintf(ep->name, EPNAME_SIZE, "ep0");
--			continue;
--		}
--
--		list_add_tail(&ep->ep_usb.ep_list, &udc->gadget.ep_list);
--
--		if (i == 1)
--			snprintf(ep->name, EPNAME_SIZE, "ep1out-bulk");
--		else
--			snprintf(ep->name, EPNAME_SIZE, "ep%din-bulk", i);
--	};
+-	/* noop */
 -}
 -
--static void max3420_setup_spi(struct max3420_udc *udc)
+-void udc_disconnect(void)
 -{
--	u8 reg[8];
--
--	spi_claim_bus(udc->slave);
--	spi_rd_buf(udc, MAX3420_REG_EPIRQ, reg, 8);
--	/* configure SPI */
--	spi_wr8(udc, MAX3420_REG_PINCTL, bFDUPSPI);
+-	/* noop */
 -}
 -
--static int max3420_udc_probe(struct udevice *dev)
+-void udc_enable(struct usb_device_instance *device)
 -{
--	struct max3420_udc *udc = dev_get_priv(dev);
--	struct dm_spi_slave_plat *slave_pdata;
--	struct udevice *bus = dev->parent;
--	int busnum = dev_seq(bus);
--	unsigned int cs;
--	uint speed, mode;
--	struct udevice *spid;
+-	/* Save the device structure pointer */
+-	udc_device = device;
 -
--	slave_pdata = dev_get_parent_plat(dev);
--	cs = slave_pdata->cs;
--	speed = slave_pdata->max_hz;
--	mode = slave_pdata->mode;
--	_spi_get_bus_and_cs(busnum, cs, speed, mode, false, "spi_generic_drv",
--			    NULL, &spid, &udc->slave);
--
--	udc->dev = dev;
--	udc->gadget.ep0 = &udc->ep[0].ep_usb;
--	udc->gadget.max_speed = USB_SPEED_FULL;
--	udc->gadget.speed = USB_SPEED_FULL;
--	udc->gadget.is_dualspeed = 0;
--	udc->gadget.ops = &max3420_udc_ops;
--	udc->gadget.name = "max3420-udc";
--
--	max3420_setup_eps(udc);
--	max3420_setup_spi(udc);
--
--	usb_add_gadget_udc((struct device *)dev, &udc->gadget);
--
--	return 0;
+-	enabled = 1;
 -}
 -
--static int max3420_udc_remove(struct udevice *dev)
+-void udc_disable(void)
 -{
--	struct max3420_udc *udc = dev_get_priv(dev);
--
--	usb_del_gadget_udc(&udc->gadget);
--
--	spi_release_bus(udc->slave);
--
--	return 0;
+-	enabled = 0;
 -}
 -
--static int max3420_gadget_handle_interrupts(struct udevice *dev)
+-void udc_startup_events(struct usb_device_instance *device)
 -{
--	struct max3420_udc *udc = dev_get_priv(dev);
+-	/* The DEVICE_INIT event puts the USB device in the state STATE_INIT. */
+-	usbd_device_event_irq(device, DEVICE_INIT, 0);
 -
--	return max3420_irq(udc);
+-	/*
+-	 * The DEVICE_CREATE event puts the USB device in the state
+-	 * STATE_ATTACHED.
+-	 */
+-	usbd_device_event_irq(device, DEVICE_CREATE, 0);
+-
+-	/* Resets the address to 0 */
+-	usbd_device_event_irq(device, DEVICE_RESET, 0);
+-
+-	udc_enable(device);
 -}
 -
--static const struct usb_gadget_generic_ops max3420_gadget_ops = {
--	.handle_interrupts	= max3420_gadget_handle_interrupts,
--};
+-int udc_init(void)
+-{
+-	int ret;
+-	int ep_loop;
 -
--static const struct udevice_id max3420_ids[] = {
--	{ .compatible = "maxim,max3421-udc" },
--	{ }
--};
+-	ret = musb_platform_init();
+-	if (ret < 0)
+-		goto end;
 -
--U_BOOT_DRIVER(max3420_generic_udc) = {
--	.name = "max3420-udc",
--	.id = UCLASS_USB_GADGET_GENERIC,
--	.of_match = max3420_ids,
--	.ops = &max3420_gadget_ops,
--	.probe = max3420_udc_probe,
--	.remove = max3420_udc_remove,
--	.priv_auto	= sizeof(struct max3420_udc),
--};
+-	/* Configure all the endpoint FIFO's and start usb controller */
+-	musbr = musb_cfg.regs;
+-
+-	/* Initialize the endpoints */
+-	for (ep_loop = 0; ep_loop <= MAX_ENDPOINT * 2; ep_loop++) {
+-		epinfo[ep_loop].epnum = (ep_loop / 2) + 1;
+-		epinfo[ep_loop].epdir = ep_loop % 2; /* OUT, IN */
+-		epinfo[ep_loop].epsize = 0;
+-	}
+-
+-	musb_peri_softconnect();
+-
+-	ret = 0;
+-end:
+-
+-	return ret;
+-}
 -- 
 2.43.0
 
