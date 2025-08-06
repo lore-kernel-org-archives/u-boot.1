@@ -4,63 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 759C8C87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 15:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAAB7C87FCB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 15:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0E46842F7;
-	Wed,  6 Aug 2025 17:36:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 2FAA8842F7;
+	Wed,  6 Aug 2025 17:45:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fnv6iUu5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NBBmr3aS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D9D48431C; Wed,  6 Aug 2025 17:36:38 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88227842EE
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 17:36:33 +0200 (CEST)
+ id F2A668432F; Wed,  6 Aug 2025 17:45:34 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C9DC842EE
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 17:45:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bxvXX49qhz9scJ;
- Wed,  6 Aug 2025 17:36:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754494588;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TfIkUhwtClXl1amud2j4i7H81Hg3qKxguJq56/FETt4=;
- b=fnv6iUu5HhsJpUhYtJyR1WezZ+7u+63lzrWuF0kCuNBt05zXKXpJhkalem16NA0DKiRyP2
- kPqarN+Ti4B2PJ5yLmvcaLjIqqZGeRs/wMCCsgGjet8ZCJyrLQgbWNeiMXMoOq8DV/tW/N
- Jz8TWNnHXJKclhpJUs/Mlv8HEcC5XMeYjDR15tv/b+TCPg3Zjj6nYb1KLng+U8foxLt0Yv
- y9s8TAsymtvkushhcR3YAsaL11ot8fDquJtTMVqqh0sJTOfbS4FmKMYxTVa4lJNtoDDu/n
- XnUXeeufU1gbrtpJWxwQ+E4vL+0SN79KWwwl1oFPZx1PoVGkB49EyWJkgLInyg==
-Message-ID: <8a05c8a6-a0eb-4f84-aa48-0d0e0f532fa4@mailbox.org>
-Date: Wed, 6 Aug 2025 17:36:27 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 576FjUC3155768;
+ Wed, 6 Aug 2025 10:45:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1754495130;
+ bh=fIIVj/fhdF4sjN0WZkefWIeG5Gt3GnAUo2Y1+b/AU04=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=NBBmr3aSUC1v9yKjmgCW9NClBJRJpDS8UnSuSd+UJqz+s9uaMRxdw7nTMjSunjDVH
+ mqRUkT68WqPmcclV//ESeGVo8TgiSNfn78BLLG4gCbPyQ2fasSfwVtaxQCEsX1Z42Q
+ /Ln4uBNGZopi/qhwja6SMEFUv+2pfbtZnegECdTk=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 576FjUZ5133725
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 6 Aug 2025 10:45:30 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 6
+ Aug 2025 10:45:29 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 6 Aug 2025 10:45:29 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 576FjTSB3767977;
+ Wed, 6 Aug 2025 10:45:29 -0500
+Message-ID: <bd800d84-9a3e-45bd-ab5f-788110181dc6@ti.com>
+Date: Wed, 6 Aug 2025 10:45:29 -0500
 MIME-Version: 1.0
-Subject: Re: Smatch report for drivers/net/phy/marvell10g.c
-To: Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <623c39a5-2438-42d5-aafe-bb80dfd12b82@linaro.org>
- <20250806145315.GO124814@bill-the-cat>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] soc: soc_ti_k3: Add support for AM62P variants
+To: Tom Rini <trini@konsulko.com>
+CC: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Bryan
+ Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20250805161419.1781935-1-jm@ti.com>
+ <20250805161419.1781935-2-jm@ti.com> <20250805223947.GL124814@bill-the-cat>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250806145315.GO124814@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <20250805223947.GL124814@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: c2b96c76d98522d3728
-X-MBO-RS-META: q7ahzcofg3erbschodb6zgih6cp3ja4h
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,30 +82,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/6/25 4:53 PM, Tom Rini wrote:
-> On Tue, Aug 05, 2025 at 05:30:49PM +0100, Andrew Goodbody wrote:
-> 
->> I have these Smatch reports.
+Hi Tom,
+
+On 8/5/25 5:39 PM, Tom Rini wrote:
+> On Tue, Aug 05, 2025 at 11:14:18AM -0500, Judith Mendez wrote:
+>> This adds a support for detecting AM62P SR1.0, SR1.1, SR1.2.
 >>
->> drivers/net/phy/marvell10g.c:384 mv3310_select_mactype() warn: was ||
->> intended here instead of &&?
->> drivers/net/phy/marvell10g.c:387 mv3310_select_mactype() warn: was ||
->> intended here instead of &&?
->> drivers/net/phy/marvell10g.c:390 mv3310_select_mactype() warn: was ||
->> intended here instead of &&?
+>> On AM62P, silicon revision is discovered with GP_SW1 register instead
+>> of JTAGID register, so introduce GP_SW register range to determine SoC
+>> revision for AM62P.
 >>
->> Now there is obviously incorrect code there as it cannot work correctly as
->> is, phydev->interface cannot equal two different enums at the same time, but
->> simply swapping the && for || is not going to work either. Could anyone
->> please point me in the direction of a fix?
+>> Signed-off-by: Judith Mendez <jm@ti.com>
+>> ---
+>>   drivers/soc/soc_ti_k3.c | 70 ++++++++++++++++++++++++++++++++++++++---
+>>   1 file changed, 65 insertions(+), 5 deletions(-)
+> [snip]
+>> @@ -130,17 +184,23 @@ static const struct soc_ops soc_ti_k3_ops = {
+>>   int soc_ti_k3_probe(struct udevice *dev)
+>>   {
+>>   	struct soc_ti_k3_plat *plat = dev_get_plat(dev);
+>> -	u32 idreg;
+>> +	u32 gp_sw1_val = 0;
+>>   	void *idreg_addr;
+>> +	u32 idreg;
+>>   
+>> -	idreg_addr = dev_read_addr_ptr(dev);
+>> +	idreg_addr = dev_read_addr_index_ptr(dev, 0);
+>>   	if (!idreg_addr)
+>>   		return -EINVAL;
+>>   
+>>   	idreg = readl(idreg_addr);
+>>   
+>> +#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
+>> +	if (soc_ti_k3_variant_in_gp_sw(idreg))
+>> +		gp_sw1_val = soc_ti_k3_get_variant_alternate(dev, idreg);
+>> +#endif /* CONFIG_SOC_K3_AM62P5 */
 > 
-> Adding Marek as r8a779f0_spider and r8a779f4_s4sk are the only two
-> boards which enable CONFIG_PHY_MARVELL_10G (aside, ./tools/qconfig.py -b
-> and then ./tools/qconfig.py -f CONFIG_FOO is handy to see what boards
-> enable a given option and helpful when get_maintainer.pl has nothing
-> specific).
-They use the 2xxx series PHY, so this code is avoided. However, it seems 
-even linux-next has the same behavior in .select_mactype() callback . 
-They use test_bit() in there, but otherwise also use && instead of || 
-which looks odd. Maybe that is a genuine bug which got ported over from 
-Linux and needs to be fixed both there and here ?
+> This isn't quite what I meant, as it will generate warnings about unused
+> variables for the tables, on other platforms, yes? What I was thinking
+> was:
+> if (IS_ENABLED(CONFIG_SOC_K3_AM62P5) && soc_ti_k3_variant_in_gp_sw(idreg))
+> 	gp_sw1_val = soc_ti_k3_get_variant_alternate(dev, idreg);
+> which shouldn't. And then can we check the other platforms similarly to
+> save space or no? Or am I unclear with what I'm thinking (or it's not
+> possible, I didn't dig at the rest of the code much)? Thanks.
+> 
+
+It is not very clear, but let me clarify:soc_ti_k3_get_variant_alternate
+should only get called for AM62P and get_rev_string should get called
+for all SoCs.
+
+So it only makes sense to do this then:
+
+if (IS_ENABLED(CONFIG_SOC_K3_AM62P5) && soc_ti_k3_variant_in_gp_sw(idreg))
+	gp_sw1_val = soc_ti_k3_get_variant_alternate(dev, idreg);
+
+plat->revision = get_rev_string(idreg, gp_sw1_val);
+
+
+
+~ Judith
+
+
+
+
+
+
+
+
+
+
