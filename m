@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B003EC87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 10:19:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78DAFC87FD1
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 10:43:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D79A18394E;
-	Wed,  6 Aug 2025 12:19:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 99ED48397A;
+	Wed,  6 Aug 2025 12:43:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tc5+xSPm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uycB0Sod";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E1D8395B; Wed,  6 Aug 2025 12:19:20 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 17372839B5; Wed,  6 Aug 2025 12:43:52 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DA0083314
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 12:19:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D704A8396C
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 12:43:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3b79bd3b1f7so3596835f8f.1
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 03:19:14 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3b782cca9a0so3835110f8f.1
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 03:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754475554; x=1755080354; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754477029; x=1755081829; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=S8sP30FK9x0Zb7i50H78wGNNFouNuAbfd9Kn3q9WMk4=;
- b=tc5+xSPmD7oB1o++evTPacalXVlxFOkSrqxE/dxlvjRfKLhWD+MenAZV1ZRNkTEsvd
- 0l5QPkcY7sYwaJ3YKexVipa2P4BcXhKlxdCMzXxCa9/dXmEgxQhp5232gmdpQt9a4H77
- 2d/O9fPk/O1sW/1u3xuFyxguDhhOjVc8FPeLceD3eHZVtDJLGKafuwkp5u2dW+hRtcbc
- VCnMqdqxJLRid2mi7fDfLaSwLsDg2KOHJJHFOk1wZNJ8OcLnebAbWFTzbNScLi12Uzix
- zyQZKOP8QLBFPhbHG+2A7Iu7NEcJBTGOk1mh1rov8R335wqwStwUsBaKgntzdMbjSPZ4
- OCsA==
+ bh=xIhPL8TYVr6FeGIgm6WW3E+Ceig2BEpD7cqkpA+Tj9M=;
+ b=uycB0Sod7PCEXX9UKILAMld02+hdWqNWDd56ZCCbMw8EtNM/i3kAE4A0hPYG8AE5Wp
+ PyK4K1CTlbVtH1X2XKW69Qfw9ZowXRwCogD0SCKuLCksWdSFwjXrECXCZt6+Q5DxJu3g
+ ImoHMHLA1OdMY1wbVBbSq5/jzmaHvY0CSJnU7zPqCNfWI1q8ABAwuyPn8eSy/JdUsQQh
+ yr92muPNDikF7AS0eH2z4yZBKetJsEhlsomGBxzM4wqNmrRiCTauPujL8B/mJEYoOxFe
+ /YPlQkhpJjhBL24hdGYJUJsYEShcYe3EVVb5IBvGuU/ORDtBk/9sMOyPWyuWhZRzHD2d
+ DmSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754475554; x=1755080354;
+ d=1e100.net; s=20230601; t=1754477029; x=1755081829;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=S8sP30FK9x0Zb7i50H78wGNNFouNuAbfd9Kn3q9WMk4=;
- b=P7DGj4OQOy6B0AegboOBOkjZ6LLEE0GTmNWaiydAe7msGHHpBe7J0wu/EuCMepNdwM
- 8qKim/dG1d8M8QnA7N3NiYza6yUC0wM2FpHuj8Jenjp8Mq8HDlHhksD7V4Iw+VIFMJ1z
- zVHPjTvg4WEmoAuAq58TGnoNJFKqMoWy6DntxV0LFM+Qa5QkJGZen7XM0pauyPOFNRhp
- 2aOk7eyGX3dLDJHUCc/7JtZ/D2ajXo5h+jq4a7BSbMjbAyuctaII12aDM9V0xuu0hrDx
- +K9rv4ae7l9Bk2BLvciMpWHaHAxDFLnwRZD4eCVLgwHHURzj01jv9dn4F91S7uVaYSX8
- Js3g==
-X-Gm-Message-State: AOJu0YyChx3JmzuLLtxPH9xV3N8q/Bu8+5xX/FBg/QKucNP0wcSbz12Q
- RExm59jhPpKCHX27x35mK8TuOMXcu/IM+aCEDwkwDXb9NdW7hK7kSUbMdgTz8Kkb4pQ=
-X-Gm-Gg: ASbGnct9r+wpf32qXEwmbnjognaQN/uLjZajGCp+0qIp/bRMA2y6hymLiKjDJjjR2tF
- dWYGS33aber/Gpgd1w04wYN4JPxXQq2dRSx+Vz28nr27oXKRZ60oy/WAZt8r9uoHuXDDi32QdFC
- IKFt6/6E6WH9rZElouhvQGDIk/2dDApeBvVVnqQydgqKRD7XQcL+cBx13r9bl+6bytnCnoTFWyj
- twyavK6juxUlglmdGmbZ30cVpslTKM//lHL0vOziN6CTufk48/DnY2bVg2M8gXNt46jS6EB05k+
- lsu/ITm1LCfXnCvNzn6LVrwmoqn1czuQYGBNMYQDhN0n7P6EOEz0VOv7t2zKcCWQoNkfoytAZos
- 6segOnauzxc4r+6QCUml+v9Ttqze0ryZGsCrkctT4BMZ2zZzHhyGF1OV++iNr0w==
-X-Google-Smtp-Source: AGHT+IHlowKateOuZkLxNJNah04wLeS7AukBLcGAUZMO/o4SNM5eQqrOI97ARoXIeFyWZa/qx2k/Ig==
-X-Received: by 2002:a05:6000:22c2:b0:3b8:dabe:bd78 with SMTP id
- ffacd0b85a97d-3b8f41d5335mr1856114f8f.54.1754475553511; 
- Wed, 06 Aug 2025 03:19:13 -0700 (PDT)
+ bh=xIhPL8TYVr6FeGIgm6WW3E+Ceig2BEpD7cqkpA+Tj9M=;
+ b=nJOXzxKiZzZd7WqQcbjcNvjfCNO5GLdOG1rjY/1H2ZSYDmtYyPpiSFWZHV59uVGklE
+ I65GJbE5Suq9TTf+5calynXUvwvPyAmrU+T4vPgf8QWg4CglBBe3dtIIUER4CVAz1dbL
+ rHm88JmF1aXeCfT+TS7LMAHrG+D9iT3/AzuWAV+Jil9Sv27XOHsAk91TVInG9GKR5LHN
+ c/PDw9Eu0VfQXygd/Dh4Q1VuyXmj02OmQTFunb6jE3pCd01mSaa9oATSPwy0bIznu4+i
+ GCoEJ3t//BcM/R3kg7/JeTt3jOUNj4S9JCmf3VbvPSab6BZgPVIJ5uMNVe9B8/gTkmnf
+ uwIg==
+X-Gm-Message-State: AOJu0YwFYCVKKoSg4h+NsD31FR1/nF9RmhskPp3DAlQ7HQI49NxznUln
+ cCMKDXxd2VvNZyz2dyudJa93jlEPxAzz73vjzbu+3GJXepB5ABfNLcIzCOS3K4K9GGQ=
+X-Gm-Gg: ASbGncuU+HxoPvj3v2AKHp4U0vlUs+flAgsx9d3LhvMHjr9/YMGlutQAPithTuTBK4x
+ 9AkKtTdTBzQRbA08OOou1OqS0tGNLMBdyzI0JC5vNLnvkqCU4U4z+PNEJpTG3LVyLW7M/Jim8yU
+ +KY1424Zq6JIcfNhqBOzAQUJ0+FP6LUqE8sJzjdW1XK03RhQmDHFNHwelTdWVrvXcvbGWA5RXaZ
+ MZSow8bhMfL2jewPYcPMh0dxoiCH4HPn6BjJ1Blago5fzxePTHx+HFRKYiv0SNp6JIVTwnZrc6K
+ VsF/a+pUwZOS4EIVia49PJ500IK0cIMX8wd49YglbrpXPdbMS3x6Oi5eLPZe39q0JBFpugEVPqq
+ GavCj8lSsYjEgUZyDl5mPUoF8eaK0wuf8wGH2UxIbDLGadNHcHNs=
+X-Google-Smtp-Source: AGHT+IGQLYH3ytdQif6HdFAv0NGwL/RQZi8CyDvTVqpOFzKbQIxBXDniM684V5JM3N2V3scPxhhZ8w==
+X-Received: by 2002:a05:6000:26c9:b0:3b7:837c:5679 with SMTP id
+ ffacd0b85a97d-3b8f4923dc2mr1585707f8f.40.1754477029148; 
+ Wed, 06 Aug 2025 03:43:49 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:6501:9a0d:7129:a02b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459dc900606sm106397305e9.15.2025.08.06.03.19.12
+ ffacd0b85a97d-3b79c3abec8sm23434500f8f.8.2025.08.06.03.43.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 03:19:13 -0700 (PDT)
+ Wed, 06 Aug 2025 03:43:48 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 06 Aug 2025 11:19:11 +0100
-Subject: [PATCH] net: rswitch: Fix error detection
+Date: Wed, 06 Aug 2025 11:43:47 +0100
+Subject: [PATCH] net: ti: am65-cpsw-nuss: Initialise ret
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250806-net_rswitch-v1-1-5fb64805803d@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAB4sk2gC/x2NywqDMBAAf0X2bCA+quKvSClrXM0ejLIbWkH8d
- 2OPwzDMCUrCpNBnJwh9WXkLCYo8A+cxLGR4SgylLV+2s40JFD+iP47Omw5xaorK1q2bIRUjKpl
- RMDj/NCtqJHnELjTz8d8M7+u6Ae7lbXF2AAAA
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
+Message-Id: <20250806-net_ti_am65-v1-1-aa819f488ab6@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAOIxk2gC/x2NywqDMBAAf0X23EB8JEh/pRRZk7XuwVh2gxQk/
+ 97ocRiGOUFJmBSezQlCByvvqUL7aCCsmD5kOFaGznbOjtabRHnKPOHmnXHUx+BjH5dhhFrMqGR
+ mwRTWq9lQM8klvkIL/+7N613KH0VBUfR2AAAA
+To: Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
@@ -102,38 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In rswitch_probe the error detection after the call to devm_clk_get is
-very wrong. It checks the value of ret which is uninitialised at that
-point. Instead it should be using the macros for including errors into
-pointers.
+In am65_cpsw_phy_init it is not certain that ret will be assigned to
+before it reaches the 'return ret' statement. Initialise ret to ensure
+that ret is valid.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/net/rswitch.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/net/ti/am65-cpsw-nuss.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
-index 62d3f39f071..f27587ac8bd 100644
---- a/drivers/net/rswitch.c
-+++ b/drivers/net/rswitch.c
-@@ -1110,8 +1110,10 @@ static int rswitch_probe(struct udevice *dev)
- 		return -EINVAL;
+diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+index 9b69f36d04d..723dde284fb 100644
+--- a/drivers/net/ti/am65-cpsw-nuss.c
++++ b/drivers/net/ti/am65-cpsw-nuss.c
+@@ -628,7 +628,7 @@ static int am65_cpsw_phy_init(struct udevice *dev)
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct phy_device *phydev;
+ 	u32 supported = PHY_GBIT_FEATURES;
+-	int ret;
++	int ret = 0;
  
- 	priv->rsw_clk = devm_clk_get(dev, NULL);
--	if (ret)
-+	if (IS_ERR(priv->rsw_clk)) {
-+		ret = PTR_ERR(priv->rsw_clk);
- 		goto err_map;
-+	}
- 
- 	ret = clk_prepare_enable(priv->rsw_clk);
- 	if (ret)
+ 	phydev = dm_eth_phy_connect(dev);
+ 	if (!phydev) {
 
 ---
 base-commit: 007610da2cca405ea7739fc120d90085be4b6ac2
-change-id: 20250806-net_rswitch-8aad613047cf
+change-id: 20250806-net_ti_am65-5e3dc6d3df48
 
 Best regards,
 -- 
