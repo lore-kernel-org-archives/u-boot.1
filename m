@@ -4,84 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A4B1C87FCB
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 16:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 217DFC87FD3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 16:14:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC86E83AA7;
-	Wed,  6 Aug 2025 18:10:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ED76842C7;
+	Wed,  6 Aug 2025 18:13:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IH/e7Fu6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UZ6lA63D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3007D83981; Wed,  6 Aug 2025 18:10:30 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F1A183AB7
- for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 18:10:26 +0200 (CEST)
+ id 3EBA68435B; Wed,  6 Aug 2025 18:13:57 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1469B83AA9
+ for <u-boot@lists.denx.de>; Wed,  6 Aug 2025 18:13:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-2e95ab2704fso101130fac.3
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 09:10:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754496625; x=1755101425; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LydKTgDa9RQvCXLegcSnNM+HvE24IhRRxb6f4qcX82o=;
- b=IH/e7Fu6sbRYunZZ+9IdzPSr2asBXID9uXsqMByo1cj4fSv7ic/28I0uLALQWUNe0Z
- FpkdlpKhPrmAj7pgm64oaUzEj7scs5/cJhiOIBl1n80RODUIlR29SL6YorYV08s+i7Qx
- 2mETOxEqDb6dXnbciAC3KVv+mCQI+tJRVWY0I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754496625; x=1755101425;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LydKTgDa9RQvCXLegcSnNM+HvE24IhRRxb6f4qcX82o=;
- b=G9csrBUYTeu/kchshlrY2EsUm8G1KM3y22oV8TaY6MjDP+0TTnHrGcpDr7xiggDk/j
- Kr4q1V0tJmppo6/+hpsUWVkytEUIl8jnEhjWfsQxCNhxFZGi9zMBbvqhFBbs4tufnNhM
- QkJUAcUyQe/uzgiuB67lP3MUXdjHJFJOi0ouupToq9m0TeLTXy5TvNl2R8IyCxA3HeME
- H6nVTKs51m1G8NMGC44CFMY/ePoxnborS1IBz7TFpEwS/qI1lpJO2uI4dCiJVGd6qxTj
- BrCL7/uLj25elM2e7uZSBpSsilISBweUVbv0p11SskxuEonBAO2gtFkqZT4ogHVb2kHf
- gn6g==
-X-Gm-Message-State: AOJu0YzvRzm06rm8ekunrl2PFcFcfYEdQTOszX8SJ4phAVQAD3IXyQ5f
- tp1CabgxYZWSybdkH7Mqcm29wIbWsWASQ3p9ECFFJ9ZE8Pu/bnhnGrQ94beJqaKWwsrzVdvIi/c
- XknvAAuA=
-X-Gm-Gg: ASbGncuLSWDDHw8ErOdfRv/kEiUNeJJglkljGVgLrKBVG8HzSjlBIREazbcaFLpBiFP
- 8jUcYN7uo4KeodRAdtYtozP4mSz0VkEQoBRkAm61Y6svpXKj2POQ29L84vyb0oRlYek2maGlK8Q
- L2JIONIA3yUf9cnYOSwD6GjmFJnJiWg6kpr+coEXal3zsFPHj8uaxv1VMeosD1D1zqLau9SXf+H
- 6laa7gQN2lC3GLUQtpJGVNM8EtephMAw9eyAo0Y9yds+jK4q/XkoBjbu/1xm/5jD7ckFaYP8teo
- q6uUPEaV10iliQfdKPcFRStTVlpgoXLmKJvbHElkvVAbrzTmPXqAMGdPT1NDMxnViyEoJH1DcAz
- 0CV6qyq+IWZ+t0/57iyFnBA2UokRJMt3Ox1Tr1dALI23I5HkGthTFTBkv
-X-Google-Smtp-Source: AGHT+IFz9Onh2tPUypo5fhAw8aBLLUERy1AWO3HdjgbnbugV/Z5X16dafHBuAKyYRWHqBLbiwNOymQ==
-X-Received: by 2002:a05:6871:5b13:b0:2ff:8e6c:f606 with SMTP id
- 586e51a60fabf-30be287b1c0mr2246489fac.3.1754496625172; 
- Wed, 06 Aug 2025 09:10:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-74186ca9887sm3430763a34.4.2025.08.06.09.10.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 09:10:24 -0700 (PDT)
-Date: Wed, 6 Aug 2025 10:10:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [PATCH 7/7] usb: musb: Remove most of the legacy MUSB code
-Message-ID: <20250806161022.GQ124814@bill-the-cat>
-References: <20250806145601.1664563-1-trini@konsulko.com>
- <20250806145601.1664563-7-trini@konsulko.com>
- <CALeDE9MbeQFy3sgoOto7KGNJhEdHQWwRG5+o7K1FuCYm4YMsAQ@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 576GDpmP612255;
+ Wed, 6 Aug 2025 11:13:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1754496831;
+ bh=8oPvk4KlE27BVFeKCsnLJl9HBT/Hi7Jb6P6SavmyzSM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=UZ6lA63DIA/+Yo5ZLBOCzVhVZRiNZgvNFflyFeeH8n/+ol8uzGP8lHScLtT8m/dUE
+ dnuuFuAnfn4hSrVLDqEVgYc4szb8v60j8uJ5BofPwneXq/AHJQ0gRISxWOjCBezoGJ
+ XiRmST7zGau8RCrP5Ki0lFrd3Nbo9zHKNKn3zdBg=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 576GDprS3689317
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 6 Aug 2025 11:13:51 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 6
+ Aug 2025 11:13:50 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 6 Aug 2025 11:13:50 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 576GDotL4099661;
+ Wed, 6 Aug 2025 11:13:50 -0500
+Message-ID: <d075fa39-8d99-45fa-b0d2-403f7dac371c@ti.com>
+Date: Wed, 6 Aug 2025 11:13:50 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HhFrl76YwZ5hA+8j"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9MbeQFy3sgoOto7KGNJhEdHQWwRG5+o7K1FuCYm4YMsAQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] soc: soc_ti_k3: Add support for AM62P variants
+To: Tom Rini <trini@konsulko.com>
+CC: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Bryan
+ Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20250805161419.1781935-1-jm@ti.com>
+ <20250805161419.1781935-2-jm@ti.com> <20250805223947.GL124814@bill-the-cat>
+ <bd800d84-9a3e-45bd-ab5f-788110181dc6@ti.com>
+ <20250806154915.GP124814@bill-the-cat>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <20250806154915.GP124814@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,34 +84,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---HhFrl76YwZ5hA+8j
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 8/6/25 10:49 AM, Tom Rini wrote:
+> On Wed, Aug 06, 2025 at 10:45:29AM -0500, Judith Mendez wrote:
+>> Hi Tom,
+>>
+>> On 8/5/25 5:39 PM, Tom Rini wrote:
+>>> On Tue, Aug 05, 2025 at 11:14:18AM -0500, Judith Mendez wrote:
+>>>> This adds a support for detecting AM62P SR1.0, SR1.1, SR1.2.
+>>>>
+>>>> On AM62P, silicon revision is discovered with GP_SW1 register instead
+>>>> of JTAGID register, so introduce GP_SW register range to determine SoC
+>>>> revision for AM62P.
+>>>>
+>>>> Signed-off-by: Judith Mendez <jm@ti.com>
+>>>> ---
+>>>>    drivers/soc/soc_ti_k3.c | 70 ++++++++++++++++++++++++++++++++++++++---
+>>>>    1 file changed, 65 insertions(+), 5 deletions(-)
+>>> [snip]
+>>>> @@ -130,17 +184,23 @@ static const struct soc_ops soc_ti_k3_ops = {
+>>>>    int soc_ti_k3_probe(struct udevice *dev)
+>>>>    {
+>>>>    	struct soc_ti_k3_plat *plat = dev_get_plat(dev);
+>>>> -	u32 idreg;
+>>>> +	u32 gp_sw1_val = 0;
+>>>>    	void *idreg_addr;
+>>>> +	u32 idreg;
+>>>> -	idreg_addr = dev_read_addr_ptr(dev);
+>>>> +	idreg_addr = dev_read_addr_index_ptr(dev, 0);
+>>>>    	if (!idreg_addr)
+>>>>    		return -EINVAL;
+>>>>    	idreg = readl(idreg_addr);
+>>>> +#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
+>>>> +	if (soc_ti_k3_variant_in_gp_sw(idreg))
+>>>> +		gp_sw1_val = soc_ti_k3_get_variant_alternate(dev, idreg);
+>>>> +#endif /* CONFIG_SOC_K3_AM62P5 */
+>>>
+>>> This isn't quite what I meant, as it will generate warnings about unused
+>>> variables for the tables, on other platforms, yes? What I was thinking
+>>> was:
+>>> if (IS_ENABLED(CONFIG_SOC_K3_AM62P5) && soc_ti_k3_variant_in_gp_sw(idreg))
+>>> 	gp_sw1_val = soc_ti_k3_get_variant_alternate(dev, idreg);
+>>> which shouldn't. And then can we check the other platforms similarly to
+>>> save space or no? Or am I unclear with what I'm thinking (or it's not
+>>> possible, I didn't dig at the rest of the code much)? Thanks.
+>>>
+>>
+>> It is not very clear, but let me clarify:soc_ti_k3_get_variant_alternate
+>> should only get called for AM62P and get_rev_string should get called
+>> for all SoCs.
+>>
+>> So it only makes sense to do this then:
+>>
+>> if (IS_ENABLED(CONFIG_SOC_K3_AM62P5) && soc_ti_k3_variant_in_gp_sw(idreg))
+>> 	gp_sw1_val = soc_ti_k3_get_variant_alternate(dev, idreg);
+>>
+>> plat->revision = get_rev_string(idreg, gp_sw1_val);
+> 
+> Right, then the linker should normally be able to discard all of the
+> am62p5 stuff on non-am62p5 platforms. Looking at the driver more now,
+> OK, there's not anything we can save on the other cases that I was
+> thinking about.
+>
 
-On Wed, Aug 06, 2025 at 05:05:47PM +0100, Peter Robinson wrote:
+Understood, then will respin with the following change:
 
-> I sent a series back in June that does this as well:
->=20
-> https://lists.denx.de/pipermail/u-boot/2025-June/593211.html
+if (IS_ENABLED(CONFIG_SOC_K3_AM62P5) && soc_ti_k3_variant_in_gp_sw(idreg))
+	gp_sw1_val = soc_ti_k3_get_variant_alternate(dev, idreg);
 
-Ah thanks, I was just heads down kicking things until they worked on
-"allyesconfig" :) Your series is better for that part, please disregard
-this part Marek.
+	plat->revision = get_rev_string(idreg, gp_sw1_val);
 
---=20
-Tom
+Thanks for reviewing (:
 
---HhFrl76YwZ5hA+8j
-Content-Type: application/pgp-signature; name="signature.asc"
+~ Judith
 
------BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJN+agAKCRAr4qD1Cr/k
-CuMuAQCrVCsLuPG7ylwmxrZujUC3ecea6q9UU8lcG+xtU6fGqQD+O/CfJPHHnugS
-G4uUp2LgdPkkp0gVUSM+ZhE818j4bQ0=
-=izuo
------END PGP SIGNATURE-----
-
---HhFrl76YwZ5hA+8j--
