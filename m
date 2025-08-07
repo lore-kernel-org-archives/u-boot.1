@@ -4,63 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37EAC87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 16:49:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73502C87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 19:42:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 356A884659;
-	Thu,  7 Aug 2025 18:49:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
+	by phobos.denx.de (Postfix) with ESMTP id 78C3E845F3;
+	Thu,  7 Aug 2025 21:42:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="FN1iuE8T";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pwaTyzmf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5947284660; Thu,  7 Aug 2025 18:49:41 +0200 (CEST)
-Received: from imap5.colo.codethink.co.uk (imap5.colo.codethink.co.uk
- [78.40.148.171])
+ id 7007484609; Thu,  7 Aug 2025 21:42:10 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E8F0845EC
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:49:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=codethink.co.uk
+ by phobos.denx.de (Postfix) with ESMTPS id AF3FB83C30
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 21:41:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=srv_ts003@codethink.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EGN/S7QoL4fVrTZs360CD8nr/Wzh5x8tZrAFAe6BRbs=; b=FN1iuE8TLdiKGairfFgc3loooS
- fvJOT5LuHscrcfahhHcLVTvKNtnwQ6vRBtGPZLNSDj4MTfMRQEFVM+rFgOzQQe+1AdmO1BgSlZpNj
- no/nzj79idPZ+nsRFf8A+HzsOK8ZNZsM0SQwrgy293g/JiMmQlTx//8SQYjQGCihOfJbph9hvBc5F
- VINsvkbaX/VyCaxAn/doc9GluvvKgbFy8m3V/uJplICgulNZ5Hxe1Vkr/jMxj7k+qTHTXCJogfki3
- 5i7BEGxHSiRsAi7KWRFO1O7pVRCahNQKJd8mcvDaSfxJnbkAVSeAQyEETvJSQkATnmVgs9qyH7ZUL
- idMgCzBQ==;
-Received: from [167.98.27.226] (helo=rainbowdash)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1uk3o6-00HCkx-Te; Thu, 07 Aug 2025 17:49:34 +0100
-Received: from ben by rainbowdash with local (Exim 4.98.2)
- (envelope-from <ben@rainbowdash>) id 1uk3o6-00000000AYU-2vnl;
- Thu, 07 Aug 2025 17:49:34 +0100
-From: Ben Dooks <ben.dooks@codethink.co.uk>
-To: rick@andestech.com,
-	ycliang@andestech.com,
-	u-boot@lists.denx.de
-Cc: Sam Grove <sgrove@mips.com>, Chao-ying Fu <cfu@mips.com>,
- Mukunda Aprameya <maprameya@mips.com>, Umesh Kalappa <ukalappa@mips.com>,
- Djordje Todorovic <djordje.todorovic@htecgroup.com>,
- Mallikarjuna Gouda <mgouda@mips.com>,
- Vaibhav Chauthmal <vchauthmal@mips.com>,
- Swapnil Agrawal <sagrawal@mips.com>, felix.chong@codethink.co.uk,
- Ben Dooks <ben.dooks@codethink.co.uk>
-Subject: [PATCH] arch/riscv/lib: update memmove and memcpy for big-endian
-Date: Thu,  7 Aug 2025 17:49:33 +0100
-Message-Id: <20250807164933.40564-1-ben.dooks@codethink.co.uk>
-X-Mailer: git-send-email 2.37.2.352.g3c44437643
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bycww5GYHz9ssk;
+ Thu,  7 Aug 2025 21:41:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754595696;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=e1GWd+ej3+gIni2OvRwLuSnWo/ZWASTJMaQeIzFSKyo=;
+ b=pwaTyzmfHqs9ZTJz6fXIbNbK7aW2K/aM2VHl0k6yAXOdeink8t+HMQ91pJplVz6ZTlbB0F
+ 5Hvo+LA0oAb8xJuAoFBziNgJJyM/JoIB1UWVgvoRjh4FgC69v8iqwSFpmYaB74tXoHVS38
+ s+8EcXIUVBimwv3ZSk0W75bLRBgOCR2JPYUtB+9touKQwOlkyzDTxlpG8CV3t+XcHvwvwk
+ 58vqkK4/auzwMmFZtWgTj0EHnxQ2dEluwAwnBsNrCnQ2+0VTL5U2KwVeHRNROmOibQGrnC
+ OImz4S/hRHkZFlZjWyiPuN1CoPP2SY8+LQhZ054RreTg7Sq9zFNwwQJyGOm5lw==
+Message-ID: <06dd9037-af3d-48a3-974e-80db481c7121@mailbox.org>
+Date: Thu, 7 Aug 2025 21:41:34 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 1/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
+To: Tom Rini <trini@konsulko.com>
+Cc: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <michael@walle.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+References: <20250807102436.452691-1-pro@denx.de>
+ <20250807102436.452691-2-pro@denx.de>
+ <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
+ <20250807162115.GZ124814@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250807162115.GZ124814@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: e468fd7f59c932ad274
+X-MBO-RS-META: 95ryoe4rmm34au48u1d8gq4ct6q1yccn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,80 +80,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change the shift patterns for the unaligned memory move and copy code
-to deal with big-endian by definign macros to change the shfit left and
-right to go the opposite way.
+On 8/7/25 6:21 PM, Tom Rini wrote:
+> On Thu, Aug 07, 2025 at 03:41:38PM +0200, Marek Vasut wrote:
+>> On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
+>>> CONFIG_HAS_BOARD_SIZE_LIMIT is obsolete, if we interpret the value
+>>> "zero" as "unlimited".
+>>
+>> This sentence makes no sense. Is the variable not obsolete if its value is
+>> non-zero ?
+> 
+> This is phrased oddly, yes. How about:
+> By making the code treat a size limit of 0 as unlimited we no longer
+> need to guard asking about having a size limit on the platform.
 
-Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
----
- arch/riscv/lib/memcpy.S  | 12 ++++++++++--
- arch/riscv/lib/memmove.S | 12 ++++++++++--
- 2 files changed, 20 insertions(+), 4 deletions(-)
+0 shouldn't mean unlimited, that is just fragile ...
 
-diff --git a/arch/riscv/lib/memcpy.S b/arch/riscv/lib/memcpy.S
-index 9884077c933..e5479bbe84e 100644
---- a/arch/riscv/lib/memcpy.S
-+++ b/arch/riscv/lib/memcpy.S
-@@ -125,6 +125,14 @@ WEAK(memcpy)
- .copy_end:
- 	ret
- 
-+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-+#define M_SLL sll
-+#define M_SRL srl
-+#else
-+#define M_SLL srl
-+#define M_SRL sll
-+#endif
-+
- .Lmisaligned_word_copy:
- 	/*
- 	 * Misaligned word-wise copy.
-@@ -144,10 +152,10 @@ WEAK(memcpy)
- 	addi	t0, t0, -(SZREG-1)
- 	/* At least one iteration will be executed here, no check */
- 1:
--	srl	a4, a5, t3
-+	M_SRL	a4, a5, t3
- 	REG_L	a5, SZREG(a1)
- 	addi	a1, a1, SZREG
--	sll	a2, a5, t4
-+	M_SLL	a2, a5, t4
- 	or	a2, a2, a4
- 	REG_S	a2, 0(a0)
- 	addi	a0, a0, SZREG
-diff --git a/arch/riscv/lib/memmove.S b/arch/riscv/lib/memmove.S
-index fbe6701dbe4..b2c1c736713 100644
---- a/arch/riscv/lib/memmove.S
-+++ b/arch/riscv/lib/memmove.S
-@@ -91,6 +91,14 @@ WEAK(memmove)
- 	mv	a0, t0
- 	ret
- 
-+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-+#define M_SLL sll
-+#define M_SRL srl
-+#else
-+#define M_SLL srl
-+#define M_SRL sll
-+#endif
-+
- .Lmisaligned_word_copy:
- 	/*
- 	 * Misaligned word-wise copy.
-@@ -110,10 +118,10 @@ WEAK(memmove)
- 	addi	t0, t0, SZREG-1
- 	/* At least one iteration will be executed here, no check */
- 1:
--	sll	a4, a5, t4
-+	M_SLL	a4, a5, t4
- 	addi	a1, a1, -SZREG
- 	REG_L	a5, 0(a1)
--	srl	a2, a5, t3
-+	M_SRL	a2, a5, t3
- 	or	a2, a2, a4
- 	addi	a0, a0, -SZREG
- 	REG_S	a2, 0(a0)
--- 
-2.37.2.352.g3c44437643
-
+>> [...]
+>>
+>>> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>>> index c2aa88f59fb..36eed766d31 100644
+>>> --- a/lib/efi_loader/Kconfig
+>>> +++ b/lib/efi_loader/Kconfig
+>>> @@ -74,7 +74,7 @@ config EFI_SIGNATURE_SUPPORT
+>>>    config EFI_DEBUG_SUPPORT
+>>>    	bool "EFI Debug Support"
+>>> -	default y if !HAS_BOARD_SIZE_LIMIT
+>>> +	default y if BOARD_SIZE_LIMIT = 0
+>> This looks wrong, no board size limit does not imply EFI anything.
+> 
+> This is however preserving the existing functionality. Saying that no,
+> we shouldn't enable EFI debug support by default in any cases would be a
+> stand alone patch.
+... fragile and confusing. HAS_BOARD_SIZE_LIMIT is at least clear about 
+what it does.
