@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3BE0C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 23:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD1AC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 23:16:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1364784673;
-	Fri,  8 Aug 2025 01:15:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 637C1845F3;
+	Fri,  8 Aug 2025 01:16:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pgDYaW0R";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kajH9AKl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B31CF84673; Fri,  8 Aug 2025 01:15:52 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACD5C845EC
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 01:14:41 +0200 (CEST)
+ id 70888845EC; Fri,  8 Aug 2025 01:15:56 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 73F9A845F3
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 01:15:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 577NEcj1848536;
- Thu, 7 Aug 2025 18:14:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1754608478;
- bh=jUVy+Ahepw0eeikRESXusTD6i2JZByBcvGbdZHk3vTA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pgDYaW0R22BS5k9v6gHf6/IVVNbhA8ZHnCnGtfBmLvfpDBqFPs4/ZTuDGymNCqmlh
- AUpNMnV2ZT5yxiNKuxcWHNphcxhniI3qpaR22D+oTo/ZNZmp8AqfnnXR8TQwX/Lr8V
- J99svalOOte97jLn9zu3TdstFfwWNvdbFXd44bRg=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 577NEckL487670
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 7 Aug 2025 18:14:38 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 7
- Aug 2025 18:14:38 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 7 Aug 2025 18:14:38 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 577NEcmC2110357;
- Thu, 7 Aug 2025 18:14:38 -0500
-Message-ID: <18f1e05c-2be9-4a6f-af50-904d4a2ed1c2@ti.com>
-Date: Thu, 7 Aug 2025 18:14:38 -0500
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4byjh33W2Yz9ssH;
+ Fri,  8 Aug 2025 01:15:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1754608547;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=09dXbWi98V16NhtOO+4cu9cGqZuGScbz1PH9StTzIWQ=;
+ b=kajH9AKlqtH65eF7H7iVA9nlHZx8rPbBxg9TYZDEpKts4ibmUxMR1VjfQGVRzei10h/Bub
+ z3bv/26NvSPfso+XOfxgcrfC50r6/gdN/OeyhJTP51VsJJxVFtThvCFoZBEWQa02hBk/zu
+ Krf2P5TTJQ656f+iyiSQ0tXkvAyqSgiwWcz99p9M/mfQJHtkUN4PEC3+LyGgzvl9bcnEVt
+ nGqkBcKJj3kCvtpdTouc+WJvk55/BSpGw+BOE7gRFalZUBXzS/GD7TzAnGseAHdMCPO+HZ
+ q5xv8tzmDqf2NM//Yy1JYC7fuPARLs1Mp9Ax8016r2p0QH0g4kzeZWwDhDqxGA==
+Message-ID: <4813ce12-ad82-4170-999c-e5f816a42708@mailbox.org>
+Date: Fri, 8 Aug 2025 01:15:45 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] Add support for AM62P SR1.2
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
- Rini <trini@konsulko.com>
-CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- <u-boot@lists.denx.de>
-References: <20250805161419.1781935-1-jm@ti.com>
+Subject: Re: [PATCH v2 1/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
+To: Tom Rini <trini@konsulko.com>
+Cc: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <michael@walle.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+References: <20250807102436.452691-1-pro@denx.de>
+ <20250807102436.452691-2-pro@denx.de>
+ <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
+ <20250807162115.GZ124814@bill-the-cat>
+ <06dd9037-af3d-48a3-974e-80db481c7121@mailbox.org>
+ <20250807201142.GC124814@bill-the-cat>
 Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <20250805161419.1781935-1-jm@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250807201142.GC124814@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MBO-RS-ID: ab1d5bd35d4eeec978b
+X-MBO-RS-META: 1sxkwp9ja873kcqqqwbuwusyu6fhd75x
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,23 +83,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng, Tom,
-
-On 8/5/25 11:14 AM, Judith Mendez wrote:
-> This patch series adds support for the AM62P SR1.2 silicon revision by
-> adding support in soc_ti_k3 to detect AM62P variants.
+On 8/7/25 10:11 PM, Tom Rini wrote:
+> On Thu, Aug 07, 2025 at 09:41:34PM +0200, Marek Vasut wrote:
+>> On 8/7/25 6:21 PM, Tom Rini wrote:
+>>> On Thu, Aug 07, 2025 at 03:41:38PM +0200, Marek Vasut wrote:
+>>>> On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
+>>>>> CONFIG_HAS_BOARD_SIZE_LIMIT is obsolete, if we interpret the value
+>>>>> "zero" as "unlimited".
+>>>>
+>>>> This sentence makes no sense. Is the variable not obsolete if its value is
+>>>> non-zero ?
+>>>
+>>> This is phrased oddly, yes. How about:
+>>> By making the code treat a size limit of 0 as unlimited we no longer
+>>> need to guard asking about having a size limit on the platform.
+>>
+>> 0 shouldn't mean unlimited, that is just fragile ...
 > 
-> Also disable HS400 support for AM62P SR1.0 and SR1.1 in sdhci host driver.
-> For AM62P SR1.2, eMMC HS400 should be enabled by default.
+> That's a standard unix thing? ulimit -c 0 is unlimited.
 
-I will have to change these patches due to mirror version of these
-patches changed in Linux drastically, mainly, DT patch was dropped which
-affects u-boot implementation.
+This is a really bad argument, because then the counter-argument is, 
+that size = 0 is also a valid size and it shouldn't be conflated with 
+SIZE_LIMIT validity.
 
-Sorry for jumping the gun with u-boot. I will respin u-boot patches
-once linux side is stable [0].
-
-[0] https://lore.kernel.org/linux-mmc/20250805234950.3781367-1-jm@ti.com
-
-~ Judith
-
+My take on this is, don't conflate size-limit "enabled/disabled" with 
+size-limit "value" , these are two separate config options. Mixing them 
+is not helping.
