@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C486CC87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 14:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF40CC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 14:29:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B7E98458C;
+	by phobos.denx.de (Postfix) with ESMTP id 9B7C28459A;
 	Thu,  7 Aug 2025 16:29:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wo9mZ/i/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NrHm6uqc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3432083C64; Thu,  7 Aug 2025 16:29:07 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 0A9368458C; Thu,  7 Aug 2025 16:29:09 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2093D84514
+ by phobos.denx.de (Postfix) with ESMTPS id CE06C8457D
  for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 16:29:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3b7823559a5so515674f8f.0
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3b78a034f17so927743f8f.2
  for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 07:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754576943; x=1755181743; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754576944; x=1755181744; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=uc+pqrlQ3WUd9lx+X1xHKMkIAq/slOGr+ezxwCzMvJc=;
- b=wo9mZ/i/7tc/I2gD25x1cX0gDsVoHsMZPGu55vF1hD9jRHb1iBzAiW+3fUXUsm8F9W
- j8eQ8K1zewPL2T28MpnNoJmdowswbwovrlTLKW4FTK0KzD4JxvB8SLoKEb3cDnOyKRX7
- uGqgU8TisIkohu+cf+GqJUZl8oCHg125nj9UfOm2++3T74etkZ5VcrtQQNqQ0k7LlgOH
- lRWnqnPi89mf3hcffTApb3dm0RSzmIrrRy3cqSXOdPdZMjj8Y4RyMv/RLoOf24ewfc53
- sKR2CKFtX7nVgKEtJIEDihX3mOv1UqyqraM+TOkgXHZ+vSg4r9snWWWtobqA2HjKvnc+
- IqSQ==
+ :reply-to; bh=SpHruOmtOIU0vU/XwbF7ciM7WeouPuaq8g5dF2b3Ajg=;
+ b=NrHm6uqcFbb9oIqteKM6evBxYM1wrm7ATX5QPOD3vysKMVpbvKwAmcjLOXo+QAwoJf
+ 90voRyLn+m7cNpvNDCJ6guaJQZdNeUwfh/OwUwG2dn9qn4fwLV8T64DnNAYnj7e0PHHg
+ 41Yx89NY4jBk74gjz1svpFck8JmyQ+w2R7R4njAAE02Z4DdehCJZjQ8bOTT9EGGCZDpU
+ s/DQFB23qUrsEs5N5cpEMTPhNru4d6p3+99TUAzNEpYQvJv5QGLvox2nWSoQnvJykksy
+ HYxhaURYUA57tPMIoRhzyOOWwGbD/euw7V6e0pXzGzOtLiA+G3MLinUQ2GACEArx9EX9
+ CM6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754576943; x=1755181743;
+ d=1e100.net; s=20230601; t=1754576944; x=1755181744;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uc+pqrlQ3WUd9lx+X1xHKMkIAq/slOGr+ezxwCzMvJc=;
- b=P6r8u8YLS7fUg7pZT5cJiLQ9/iGnHWv/hiIjiNV5wubgiHJ3s6vIKkgelsR439CuoY
- xhoZPenD0bQxc7+9I1VF94etrtPZzN9wS/VA8r51PUzeOu0QhMb0d3UlS5Fz3ne1H3Gi
- B5R+BQr1j7xnTA6oJCD0bAJFKh1GULpBMFu0s6jQTVtmxuNdUMFTSZlBCu8XmoUX+TCM
- PMJeSCR6rGDaQ+4iz5ApprlQ+Nf9q01McnoZTXWx+5PlPtCGMNAQReAYGtoCjJ/KFqfW
- PhBtecVFa8UtVcabRzUbqmn0oijxngWMTSa+haMTgcOqG50ibJBJcSTQomLDJEe1s9vD
- s3dQ==
-X-Gm-Message-State: AOJu0YwGMCfOj+EXtgRADcRFKMCF3gZaTM6kfUcjvSCSvB4UntljjTSg
- 5emGVJD/V5Xkte4pNNMI0m3eNyo3pxXvlgVidqF9vTfkp3cauhSrSDcEPfH2xkC0b3A=
-X-Gm-Gg: ASbGnctbplNyldT5o1R8ZTAIHq3Lz/+RGZOCrwd3AXTMh+63U3d4K8JZNfuYEWiwvYN
- UrLXz13o27mCvrNfT3Va4Eo/cwlh7T/9vFRNtkCKHID+oFtSu+FtjHGRp/6+xVzx38hEGKZ2Su6
- /RfJfZyHQGUy3PGF008oQzA66FbadanoXWaMFT+FtDuCFLz0CaB+0r5yjqxdgreVN9+wW/FfGxi
- wFMhGhiivCq82x/WfhhpNCcvMk2v2ZRmA07Zx8mkYVl85xkOvaoRT16E7GPxZI5AbJcQIu3cQpY
- MaZYYJvuoEcpKgEkNpZA00a9A34ggfX/Ojt0FEHqfj/VELoVCEH7/afoiiP7ynyHEtnEyzVJ0g3
- PNnQRq25eBmgcfVmMvq7G3pyh6jflaw4AJTEKH5d34bQjC7TmKAo=
-X-Google-Smtp-Source: AGHT+IF2X32o/6yagxpcXpJW0Iz9dssEiKHKFyfNszUwlPh7/xU8G4lRiSF9XLWWZuYopnEQcoSdew==
-X-Received: by 2002:a05:6000:18a9:b0:3aa:34f4:d437 with SMTP id
- ffacd0b85a97d-3b8f9f6734emr1437601f8f.37.1754576943406; 
- Thu, 07 Aug 2025 07:29:03 -0700 (PDT)
+ bh=SpHruOmtOIU0vU/XwbF7ciM7WeouPuaq8g5dF2b3Ajg=;
+ b=GO4LSB4719yjt7UJjKPyK7ApmRk3FWpozpWojWhpMk1zCojhSG/gTUA//A+dDe7sq+
+ JyiCDR6DXAHh1dTDYwcmg86YI9eadv7UDG5v1UQ0rjPCkR09pMxBUPBDwakYU8DoqC1y
+ jbgFchI4s/Uliygu2JlIymUzMGmwNmyHXnMAd4BwPq3+dzZ7o9HADgVJB37BFnu3F41C
+ +u44imureuPJp2j97776Qfvs55vA7nm4n0AaDcA2hL2dVgsocdZDMkiPfeZ/aH5381XA
+ KQ0MMJWh8iCh0PtOUOAv2W2PdfWmZkxPH4JrGP/vWKbu8nd7PT53ZFdxXruLdpFA/l55
+ 83vA==
+X-Gm-Message-State: AOJu0YyHEdvUaHesN8uCWa0WP7dIITtxpjc3xntLDZ4t1bpTVeUt3ia7
+ T16xhnL8ozbVKa6FjNFzFyttE/+XIMzgUQG9YlMui/1AcbtWGqXtYZ85gNskJtukMWI=
+X-Gm-Gg: ASbGnctVVv26h71v1ks5RRyQ76P7pTXac66vZSIDw8SSFYlCHxKPF/GDLhVS5JckRfi
+ R7w+XU3ZPgCVmwNSxMR8ToCTjm9lcnNsQzS3q4NByHRQXB6Th4J6ljjQa52T/5AXN8SmjHIAX9/
+ OnHs/5PAsj5+UJ51833vJ7Q66mLSa+T7JVFEedKYvsi6GMOqKT/wXVY+tyy2JPg4ZOcIm9RDe12
+ dlLGE78vNd53lU2hBSVopTAGT2gcrVkBBezoNuv21ZhyMunNAOwliJnYP0q3egWIkF6Hh2eb9rM
+ 7VBr4950HIaY8xDLb8kI7Yus1/VM1e0tastYbfOOzUmKEZd2TBvFXGxR7U/FHkK8ou413+b7DvG
+ rdhBYNvrWvP83mQOAtvr+O1oRhsWKB+EVHmJNcxDIPIpbxpmvSxsT1kqiWGZVHQ==
+X-Google-Smtp-Source: AGHT+IFF7yqA18um4UqN6779u+RSiOF0Xm1ss06HjGG7CsQ4s76mrvxqas3ELE42v1Db89rvmWB4YA==
+X-Received: by 2002:a05:6000:2081:b0:3b8:d893:5234 with SMTP id
+ ffacd0b85a97d-3b8f4923cf8mr6270972f8f.47.1754576944225; 
+ Thu, 07 Aug 2025 07:29:04 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c453ab0sm27349027f8f.44.2025.08.07.07.29.02
+ ffacd0b85a97d-3b79c453ab0sm27349027f8f.44.2025.08.07.07.29.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 07:29:02 -0700 (PDT)
+ Thu, 07 Aug 2025 07:29:03 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 07 Aug 2025 15:28:57 +0100
-Subject: [PATCH 1/2] power: axp: Remove redundant code
+Date: Thu, 07 Aug 2025 15:28:58 +0100
+Subject: [PATCH 2/2] power: power_i2c: ret is uninitialised if not DM_I2C
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250807-power_misc-v1-1-2ac672f15461@linaro.org>
+Message-Id: <20250807-power_misc-v1-2-2ac672f15461@linaro.org>
 References: <20250807-power_misc-v1-0-2ac672f15461@linaro.org>
 In-Reply-To: <20250807-power_misc-v1-0-2ac672f15461@linaro.org>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
@@ -98,31 +98,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In axp_init after checking the chip ID there is an else clause that
-returns ret. ret is guaranteed to be 0 at this point as the code would
-have returned above if not. The next statement is a return 0 so the
-return ret is redundant, remove it.
+In pmic_reg_read ret is only assigned to inside #if
+CONFIG_IS_ENABLED(DM_I2C) so move the test and return ret inside as well
+and also guard the declaration of ret with CONFIG_IS_ENABLED(DM_I2C) to
+prevent a warning about an unused variable.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/power/axp818.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/power/power_i2c.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/power/axp818.c b/drivers/power/axp818.c
-index 83ae6ecc138..01f9a209dc6 100644
---- a/drivers/power/axp818.c
-+++ b/drivers/power/axp818.c
-@@ -248,8 +248,6 @@ int axp_init(void)
+diff --git a/drivers/power/power_i2c.c b/drivers/power/power_i2c.c
+index c2fc1c6b42f..58289ecce67 100644
+--- a/drivers/power/power_i2c.c
++++ b/drivers/power/power_i2c.c
+@@ -75,7 +75,7 @@ int pmic_reg_read(struct pmic *p, u32 reg, u32 *val)
+ {
+ 	unsigned char buf[4] = { 0 };
+ 	u32 ret_val = 0;
+-	int ret;
++	int __maybe_unused ret;
  
- 	if (!(axp_chip_id == 0x51))
- 		return -ENODEV;
--	else
--		return ret;
+ 	if (check_reg(p, reg))
+ 		return -EINVAL;
+@@ -91,9 +91,9 @@ int pmic_reg_read(struct pmic *p, u32 reg, u32 *val)
+ 		return -ENXIO;
+ 	}
+ 	ret = dm_i2c_read(dev, reg, buf, pmic_i2c_tx_num);
+-#endif
+ 	if (ret)
+ 		return ret;
++#endif
  
- 	return 0;
- }
+ 	switch (pmic_i2c_tx_num) {
+ 	case 3:
 
 -- 
 2.39.5
