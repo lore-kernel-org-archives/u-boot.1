@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D78C87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 08:08:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E218C87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 08:09:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E30884440;
-	Thu,  7 Aug 2025 10:08:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A8BFE843E3;
+	Thu,  7 Aug 2025 10:08:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RFbKgdJ/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qekfQoTw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FFB78440E; Thu,  7 Aug 2025 10:08:30 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 5A57D8444D; Thu,  7 Aug 2025 10:08:32 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39CC68440A
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 10:08:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 910FD843E3
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 10:08:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-458aee6e86aso4018285e9.3
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 01:08:27 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-451d3f72391so6101335e9.3
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 01:08:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754554107; x=1755158907; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754554109; x=1755158909; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WABALEPv4gaEl26WXMvsoTwnlwEpSzyjN9OPL3WMXZY=;
- b=RFbKgdJ/rQy5/UfGZLTyCt1izMM3FAYE2GbbID1AGYlMapWGzV/LVC0aIpLbYPoMcP
- K1Hal+wYxyo6+5FY2jpfG0YB6pdyCrsIBq593J/6CIP5d/+6w8eiQ3UWz5pmKiAbtqw8
- NIyTpwVEaZVeEz3KliM5PcHz3f+yTvIAoDEIJT5x/9tgjzoj0Y+tXnM+Zo7KNIUwnPVw
- j/jOZOuNZkUIiONdwge2ZiS0py1YzPdvXkzCZLQ0EltK2r9nS0gXod7cF/Y9q89F8T1x
- p/clHr1V/9vP7bRVQru2te/YA/mKA9jZsEMS1t2Aka3lrT1qDddFQV7BbMtssBdmwNoT
- zk6g==
+ bh=BhSjQjTSY3mNXEpvt5cMv9wpWeQjTJ3j6BBlIDQwnYU=;
+ b=qekfQoTwiTcYwSUtbev7ofASFY1K23CArykk/tvK84z9U6AN/YxEkoa4VDfbETLgC/
+ gaONKSM7APQP14mBJiZrzhOFuwzBtHyR8yoCnCryVeykSqltRzOD8xIK3sen8s4VBzJ2
+ VEFML/Llkx27rKVtisN8g4IrDUnfqPHiRVWMdZeb2qAFO7e+pnFuzfQVAHE6ouVqJxGq
+ /qdPk7r4fJFDkpz8bsAYkuWXh9vcS94nhO76+x1gxey8Op2xzrKADvuxz5ZzoKigGNDd
+ 2rhGqw/Iv8PrCHnZalOHjMCLVpepVUvrOfmqivw4O2EH69IzON7WYyC5TJZwPnhokg3/
+ DYIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754554107; x=1755158907;
+ d=1e100.net; s=20230601; t=1754554109; x=1755158909;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WABALEPv4gaEl26WXMvsoTwnlwEpSzyjN9OPL3WMXZY=;
- b=QajxNI9NDkev/rV1q5xon5XKIHvfpFDbdTPyuEjRsgOYFmxmXdzpulOjwLFwzjTrHb
- 6JjC3qYZ43Bqc985x/4kdOJ15aYuOAvGDNwzK5kAhdEC0ZhRQjATk0nT4mXzlXeL0BfW
- OlYQkK3QWrn263YAW3PwwERItSyC62MR17Sg82H0BXyo2i2g9VQlNPFN7rHXjr6BqOfP
- 83PYP3t8dmrKz37kP9kqf7+womzEi650S7aPDfmY5dp+MQ8/C1NsHBOgS6ac6SHkGktX
- 8oiDvniOgJo0TkNnK13vPSTRDOuhCyYZEgO+mu+CTuxVjEPKu24QKwYCG5QwBTMACZeJ
- 5Tmg==
+ bh=BhSjQjTSY3mNXEpvt5cMv9wpWeQjTJ3j6BBlIDQwnYU=;
+ b=QWuX9K52XDrh0Ck0ToVxiAdWNnt+ItD4HvjXLfbGPzD9WwbCNF5oozNWdzU5eIjb1J
+ aA2S33vlr5fwDZyJ4piX4cp+LqP9bVsnUlQkuF/Kl/g9R9rHLUvcc3TiVB1k+YjnDJUo
+ jHPXPTkbHM7AQc/RGyikBEPmQ3VZHig0s+AaQq7G0aPPxPqoLVxrv5YpyPnkmbJcDQS3
+ Lf21hRXMhjDIbCDflMmfXnUaSFmeoXpTqBBBZxsEBj9hfozTueqOwPM0aMCDjAqlMGiD
+ /YYYYtEMyj+4yw8uG353BCd/NgbaWPX6Re1XTLFxeEo1275DSF2RIppisiUHBLBad6gp
+ BqVw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVw08ChQ8udDUkKe6MgwjV/AOS6gLXRAt8I1kHCRHVJH0dtz9SGMmWXYz2u2dPIWN/HmEnYWtA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxth6GH4GcPP92ILmsHptUPmnSPx8Ys+bQN09SnGzYchqg0ujgt
- /5JTqegPuLqfiVOHGurTNKxEYiXwBac3mUyk9XZqHrIu6ku8gNf/LGEpkVqqSBl1Rc0=
-X-Gm-Gg: ASbGncv63AdP0BqKGh9FtetXuSnUlPPrJdM/3H3iiO0d9AKEYtGbU13xZSCBr6P3Z1V
- fVNR8wNQ/CGG2R/MUkLlD6wZbQu8V6iRUb97wizKloHoBy7cLp9VsH8ckF7m0lBKqtF4CD2heKW
- Qyr98yVD6Jpxss98CB/EKXY8556QxUgVXrU8i4RxVuOR9uLi8mv1qpUpmgnTPSLM6b2NMEhTfFB
- OlHWJsx+Z7SJqTpJLsIW5xOiokjXnyTDp24ZOnKLioBl1LZ/XleToan5p1Hvok29iyeKaLjTIWD
- Gs7LVVic91tqikrCN3wR7VwEhN0k0Bgb4mmlTmW4cRhnDxKsg15pwNYvw2nD5CICqbxBchCedGF
- 38DV3aKfv70ClL+tzgVAMdLXGzQ5L4yla0wGQ1p4jT1iOgZRJ/rWgpDc=
-X-Google-Smtp-Source: AGHT+IE+L3F+iEABERJuEHT5d40/tfqSpSA3EpyAaUIlXaGO1x5BVnRLNKhsAaHPNF6kK1dFMvpqAw==
-X-Received: by 2002:a05:600c:4e87:b0:459:e06b:afb4 with SMTP id
- 5b1f17b1804b1-459e7080202mr54653755e9.4.1754554106641; 
- Thu, 07 Aug 2025 01:08:26 -0700 (PDT)
+ AJvYcCVCRS6XDq8+AA6RyFVJ3CaFwcrTyvoHgl7403dB3pu7OozYR3eb1wo16j1YGSD/syimcwXssm4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy5YHCEyatODVMLtiPQCqlWFyAsAk4e7vHXsUv8P/mRUWKGwvnm
+ nz96p5KEfzpCrEONWU1vtRqmB2IOW0dnafLnhry/dMDIQ7ESASQyZ1GDEdrkkgzKuXA=
+X-Gm-Gg: ASbGncsQU1Da24OAiMBHw0eVBV1OWX6XfbtdUIWaIaPe+HI0Y4LGKJxsZ2ryNR/nUBa
+ PzxM3c3lQwf8A0IsQJrYg38IAF0yF6xAeuCRqK6W5n+wknmR0jDxZL+f8DfNy9UlbuPp9n8JbSS
+ 4og+7ExyJPV8q8SNj+GlNJ6lP9gwS82fDKH/q1B2MGSaX0oBYyliVxdhcg0eGtaILEImDVPUoGb
+ YNmhwdT1PZA+Z+IZoB2Q2zv1NzwZDKPXnOx8ZlTr66ylGzPq0k/uSTXT7qB5cQfrmqnX40yoSli
+ rrEILrWEjh8r+Tcqhd6UwBJcMnWXKbMcuHOa4pV0Jdxd61uknuMyjtZJXvAd6a3E+T0V0gekTuQ
+ 2h6Ojcf1GL9178tFhC/etVmL3G3bRxo6VBSPftukZ/1YHMVfb3jRLMr4XP8pOe9RsOQ==
+X-Google-Smtp-Source: AGHT+IFQCzKT0iNfGavHFAaxhGfyVpa6obHtwPKo8Dou3jCjc2vZ3kdGeE2DmkH/e5nts8O8r/oDFQ==
+X-Received: by 2002:a05:600c:1994:b0:456:214f:f78d with SMTP id
+ 5b1f17b1804b1-459e70d8115mr46751235e9.22.1754554108220; 
+ Thu, 07 Aug 2025 01:08:28 -0700 (PDT)
 Received: from hera.. (ppp089210243039.access.hol.gr. [89.210.243.39])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459eff7918csm13639665e9.25.2025.08.07.01.08.25
+ 5b1f17b1804b1-459eff7918csm13639665e9.25.2025.08.07.01.08.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 01:08:26 -0700 (PDT)
+ Thu, 07 Aug 2025 01:08:27 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jonathan Humphreys <j-humphreys@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH 3/4] test/py: Fix race conditions on EFI capsule tests
-Date: Thu,  7 Aug 2025 11:08:16 +0300
-Message-ID: <20250807080819.1058411-3-ilias.apalodimas@linaro.org>
+Subject: [PATCH 4/4] test/py: Fix capsule update tests
+Date: Thu,  7 Aug 2025 11:08:17 +0300
+Message-ID: <20250807080819.1058411-4-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250807080819.1058411-1-ilias.apalodimas@linaro.org>
 References: <20250807080819.1058411-1-ilias.apalodimas@linaro.org>
@@ -101,32 +101,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-efi_capsule_data() is called in each of the EFI tests to create and
-setup the files we need. However, it also recreates the spi.bin file
-that holds the SPI flash contents we rely on for the test validation.
+Capsule updates tests have been skipped since
+commit 659f97eb1fc3 ("scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file")
 
-This leads to weird errors since reading from the flash returns 0,
-instead of the expected value if the file has been recreated.
+Remove that check since it's not needed anymore and re-enable the tests.
 
-Always restart our sandbox instance if the files are recreated.
-
+Fixes: 659f97eb1fc3 ("scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file")
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- test/py/tests/test_efi_capsule/conftest.py | 1 +
- 1 file changed, 1 insertion(+)
+ test/py/tests/test_efi_capsule/conftest.py | 2 --
+ 1 file changed, 2 deletions(-)
 
 diff --git a/test/py/tests/test_efi_capsule/conftest.py b/test/py/tests/test_efi_capsule/conftest.py
-index 961d2e0b3c19..45c06c42fd2e 100644
+index 45c06c42fd2e..ad0cda59ebf4 100644
 --- a/test/py/tests/test_efi_capsule/conftest.py
 +++ b/test/py/tests/test_efi_capsule/conftest.py
-@@ -103,6 +103,7 @@ def efi_capsule_data(request, ubman):
-         pytest.skip('Setup failed: %s' % exception.cmd)
-         return
-     else:
-+        ubman.restart_uboot()
-         yield image_path
-     finally:
-         call('rm -rf %s' % mnt_point, shell=True)
--- 
+@@ -44,8 +44,6 @@ def efi_capsule_data(request, ubman):
+                        % (key_dir, data_dir), shell=True)
+             check_call('cp %s/capsule_pub_key_good.crt %s/SIGNER.crt'
+                        % (key_dir, data_dir), shell=True)
+-            check_call('cp %s/capsule_pub_esl_good.esl %s/SIGNER.esl'
+-                       % (key_dir, data_dir), shell=True)
+
+             check_call('cp %s/capsule_priv_key_bad.key %s/SIGNER2.key'
+                        % (key_dir, data_dir), shell=True)
+--
 2.49.0
 
