@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF62C87FD3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Aug 2025 22:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0FE4C87FCB
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 00:50:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F3F383B8B;
-	Thu,  7 Aug 2025 00:27:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9333A83B1A;
+	Thu,  7 Aug 2025 02:50:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sadynvN+";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="W9X7iPnh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3F2983AFD; Thu,  7 Aug 2025 00:27:43 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id E417A83B1A; Thu,  7 Aug 2025 02:49:57 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E735883B1A
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 00:27:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9581283AE9
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 02:49:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-30b6bd0a352so358105fac.1
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 15:27:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-30bbb2d332eso173077fac.0
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 17:49:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754519239; x=1755124039; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1754527793; x=1755132593; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wx+9aCSmaQfmM9h0xYg9mw3T+cdonPb1GnX6RT5ggVk=;
- b=sadynvN+u5F83+10TO6Lw5zwmWBNaZt77k/DEj7Ls+DGdwAQNRsaxNV6gR6+3WDumh
- Iwe9khe6O7MQhHuUjIbrjQfjK7uK517+35G4N4wyxOqWWQ4DFGYegsyjWnwCcDZ04lBC
- OCKyAbzCbZ6LkUdk/Gj8i2klw4KobbXU1P6L0VaejeKUVkp5/UT6/wJm8mP0tsZmX2aV
- p1eTsExtV3X34IBRnEggptXHYnLpu3PDzwvvUwgtDhw+5mfaKyxE76gDYZTVXceKrBcX
- aEifhP0Y/ogLYUPBAiOrNlgGKubf4bqs6UNa0039duxaVJnTjwJzh5fXXuh1s0qVjCI/
- /S1A==
+ bh=gQxwcqiH5NJ1iWTqqk8Crn0eQOoROOlNu1pWwWUPKLE=;
+ b=W9X7iPnhoc4TePnqwwzHUWyxRadryiDTxxMC3b+SHuNXBIqnofLSdVUanOvs6E3T/r
+ 7LfR2GlW/3+8TSwMa9AAClreUD4/e0DPScqR3sSPczkgemLzLk6bCcIvESOeqvPOetnI
+ cRg1OqpPGAOJ+ZO6z58QtOL8xvU5cxjlqNz56WxE/mhp3Yyw0mM4pNSIsXXMuOCLusxz
+ p+aPoSBnnJd9XsX0abCqv9qTPRZjUzuDCDNDj3cddd5gjoUzPTD7VocvQeejt5MuTncG
+ eEW9w9SPqDz9abYF9mo7h1ykWtnfDhwBKwpwnGIcqkrrurpf8SOvJ4Zzqs5AsSThZGqC
+ LnaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754519239; x=1755124039;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1754527793; x=1755132593;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wx+9aCSmaQfmM9h0xYg9mw3T+cdonPb1GnX6RT5ggVk=;
- b=ETGNkP6Qgw5jgMeAlsbgHRv+Oxs1BBNAIpdn/qLTP4hLCt4hfgKw2uJlxdqVzVfrHs
- /hfRwjNN8P553sT6fORLScnFSwZ4RA/e9YdvJDZPqvF2yDsWPHyL3ULaCoLt8qOVmFb6
- ZWPcNKka3SKn3fxph85AuFNk7ab676IgWWHkQgPzKxxHpIIV1helHHeQTQAhawV0yU1K
- UCvPmgFlOCEVL60+HQxfYGD/cYGIS/tYgEt93lJfs9bQlmrK/6NXCxEQaTbC8UXwDp3C
- a7UP6zjNGXxK5kSwa7WXBz2u6DTk/OFQEf4KF1wiHc4dxTV3IA4K7ErJiWz4cApBOx2W
- naaQ==
+ bh=gQxwcqiH5NJ1iWTqqk8Crn0eQOoROOlNu1pWwWUPKLE=;
+ b=KSvClLqPBs9uFTIvWizR3X7x0dTbeFzS/HLyrPI+hJ024XfFY/vUNMjQlUX/O+vNKI
+ UkeX5RJ8KT7CaHUKMSXJoZbXprJkYXth18kDsd6HQsXYURc1A7u0t+AcU+vLclJUHhC2
+ H504mi/MrhlPIVViQXA9yW+a0ARoTDoJC14Ctp5sEe13PQ+zm8D/5xwD5g2VTIzfMTPy
+ jYzdXvABZmFvjhIaWHIaeqCnnJVFgIk3Z2fMfBneF00OyjPGyRLQDJXZ4OiUqvo85I7x
+ 9zm/QrZVdDRDb41y1TlyXA1WdboYkLgcydFB31Cs0qKsqpaxXBBfhA9ZgGI4bjfVlXLr
+ 5YZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+lB0U0eCIVoYXqbbBIOJhSWrprxZlvw7HBStw5hKkhYpnACLOk/ftx58GC220l3A3Frbxrh8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTyGwX48S2czQVSQhpCOHB5qn5K307R2tM5k8KKt7DKmSqPv0/
- lj9vwRUDBGwgdnBVfmGWX89sCdQb2HOPh6f7BaXCaUxgALhZNqC9AGiLUBpqQwqaK8U=
-X-Gm-Gg: ASbGncvNwNVMA2HG3sCLciStPd8AFVHJ9h1+TWFezbTHuchGhNfViYCwnbAyPjhEuI9
- tHXjYPFgMk80X65Ie/CH76azDc1a1dKMdVY/VD+olQes1VT4nFZibzltLyLuIW/3FdmnieJbikg
- U9pQlCoeGr3oz3/qgz9MrK2gyyEsilzDoFckgHXi0Io0dKW80/uSvKEceTjw5sGqjtxb7IwsSPq
- kr+ydRhcD/dI1882l04ZEnWORK7IKJRpb8ERYsg6r96uh0DwLBawTpS1w6piULbeHJ3ozQGyY9O
- nYGd/l0bXKBFevzm+vvfHCyA7uRfvo9N2sG8i1dWk5wSstIFlhC7pYzmAsB3MxhWFYRc1TvfCwi
- d0wDz3RCB9q+OBG+rxUMq0g0WlQ==
-X-Google-Smtp-Source: AGHT+IGebWxsoPjYOkJlWnGeMTyIsRWI4Nxp40AhQP9qgKdi9yK4NvuiJ2ijV7Gnb91v0T4qm7tO+Q==
-X-Received: by 2002:a05:6871:408c:b0:2ff:94d7:b006 with SMTP id
- 586e51a60fabf-30be2911cbbmr3119644fac.13.1754519238579; 
- Wed, 06 Aug 2025 15:27:18 -0700 (PDT)
-Received: from localhost ([136.49.61.16]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-307a717f93fsm4451265fac.14.2025.08.06.15.27.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 15:27:18 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Minkyu Kang <mk7.kang@samsung.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH 08/10] configs: e850-96: Disable CONFIG_DEFAULT_FDT_FILE
-Date: Wed,  6 Aug 2025 17:27:08 -0500
-Message-Id: <20250806222710.23773-9-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250806222710.23773-1-semen.protsenko@linaro.org>
-References: <20250806222710.23773-1-semen.protsenko@linaro.org>
+ AJvYcCVuGpyu+vaCnTNXZ6zsQXgJGytQamK5wGAPYszl0OWk1xgu8uypgfTi3eJZqD+ig/iYFhYk/mE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOIie/p3jCPi1n/dsgM2JaKCSXwUFsaYVHgWxSJ7/UcWjzEu/c
+ VO7jJ0gdxE/4cjVOi4fGlHc1hHMp35qadeg61dvSYCAzgpz4AhzF7IF71D+YiVZ6F7IBA13Fml/
+ 2polA1ZYyOWL6MdY7PE1X8YFkick7IvZIS5IK4BeiRA==
+X-Gm-Gg: ASbGncsGTuR/yPhLFIo9P6V2yqyYzzcELuyeZsUs5AwfHIelWZIIH9GmSDZ3qTMkmqS
+ nQP/nnRlnSfliRdNdgs4d6vXgu9o/FNtzbkI3XXzuZHJ4wksc3AfRylqMB2NTvBR3qQZc6digVY
+ uDXxXWesLEf49zO2Q2dmNyO/eMM1pbo5Qi+Ry6P9KNrMm3wedgofITEgJQXXSgMi18U44TfgksF
+ iWv1ZE=
+X-Google-Smtp-Source: AGHT+IF8mKeCAkfZRafi4+LctlRKb/e/1wZ9OXSkjPWbo658wx0PwrA4gvgq1zyMrCK1a8ANmi8+8IDsZyq7RbkT/4Q=
+X-Received: by 2002:a05:6870:ac06:b0:301:a823:9cd1 with SMTP id
+ 586e51a60fabf-30be2bd6048mr2937929fac.22.1754527793098; Wed, 06 Aug 2025
+ 17:49:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250728-imx95b0-v1-0-5cdae3764d21@oss.nxp.com>
+ <20250728-imx95b0-v1-2-5cdae3764d21@oss.nxp.com>
+In-Reply-To: <20250728-imx95b0-v1-2-5cdae3764d21@oss.nxp.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Wed, 6 Aug 2025 17:49:42 -0700
+X-Gm-Features: Ac12FXzY_tRdkwTPD5-RC8PYtWnDGzfeuX98NIpUn5tpUfhOlPVUJ2IEkUNDh1Q
+Message-ID: <CAJ+vNU2GGaXhqmoJQwh=NPA9QwjdXBqGuRA96CmaZt4iybhucw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] imx95_evk: Restore support for i.MX95 A0 silicon
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,52 +99,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Linux kernel should use some separate device tree obtained from another
-source anyway. For example the dtb file can be read from /boot directory
-in eMMC rootfs partition, either by GRUB or U-Boot. Using U-Boot's
-device tree blob to provide it to the kernel (when
-CONFIG_DEFAULT_FDT_FILE is set and nobody else overrides this choice)
-might lead to undesired effects when booting the OS. For example, if a
-user sets "dr_mode" property to "host" value in U-Boot's dts to enable
-USB host capabilities in U-Boot, it might confuse usb-conn-gpio driver
-in Linux kernel later like this:
+On Wed, Aug 6, 2025 at 5:40=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
+om> wrote:
+>
+> From: Alice Guo <alice.guo@nxp.com>
+>
+> This patch is used to restore support for i.MX95 A0 silicon. To avoid
+> duplicating defconfig, imx95.config is added and can be shared between
+> imx95_a0_19x19_evk_defconfig and imx95_19x19_evk_defconfig.
+>
+> container.cfg and imximage.cfg are used to created .cfgout files that
+> are be passed to mkimage with -n to build flash.bin. Now they have been
+> deleted and replaced by adding their content to the property cfg-content
+> of node which type is nxp-config under binman node.
+>
+> Fixes: 9936724aa9b ("imx95_evk: Add i.MX95 B0 support")
+>
 
-    platform connector: deferred probe pending: usb-conn-gpio:
-    failed to get role switch
+Hi Alice,
 
-Disable CONFIG_DEFAULT_FDT_FILE option to avoid any possible confusion.
+Thanks for addressing this!
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- board/samsung/e850-96/e850-96.env | 2 +-
- configs/e850-96_defconfig         | 1 -
- 2 files changed, 1 insertion(+), 2 deletions(-)
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> ---
+>  arch/arm/dts/imx95-u-boot.dtsi            |  48 ++++++++++
+>  arch/arm/mach-imx/Makefile                |   5 +
+>  arch/arm/mach-imx/imx9/Kconfig            |   5 +-
+>  arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
+>  arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
+>  configs/imx95.config                      | 150 ++++++++++++++++++++++++=
++++++
+>  configs/imx95_19x19_evk_defconfig         | 153 +-----------------------=
+------
+>  configs/imx95_a0_19x19_evk_defconfig      |   2 +
+>  doc/board/nxp/imx95_evk.rst               |  41 +++++++-
+>  9 files changed, 247 insertions(+), 184 deletions(-)
+>
+> diff --git a/arch/arm/dts/imx95-u-boot.dtsi b/arch/arm/dts/imx95-u-boot.d=
+tsi
+> index 9bf8f9834c9..227e220cd65 100644
+> --- a/arch/arm/dts/imx95-u-boot.dtsi
+> +++ b/arch/arm/dts/imx95-u-boot.dtsi
+> @@ -51,6 +51,54 @@
+>                         filename =3D "flash.bin";
+>                         pad-byte =3D <0x00>;
+>
+> +                       imximage-cfg {
+> +                               type =3D "nxp-config";
+> +                               cfg-path =3D "spl/u-boot-spl.cfgout";
+> +#ifdef CONFIG_IMX95_A0
+> +                               cfg-content =3D "BOOT_FROM SD",
+> +                                             "SOC_TYPE IMX9",
+> +                                             "APPEND mx95a0-ahab-contain=
+er.img",
+> +                                             "CONTAINER",
+> +                                             "IMAGE OEI m33-oei-ddrfw.bi=
+n 0x1ffc0000",
+> +                                             "HOLD 0x10000",
+> +                                             "IMAGE OEI oei-m33-tcm.bin =
+0x1ffc0000",
+> +                                             "IMAGE M33 m33_image.bin 0x=
+1ffc0000",
+> +                                             "IMAGE A55 spl/u-boot-spl.b=
+in 0x20480000",
+> +                                             "DUMMY_V2X 0x8b000000";
+> +#else
+> +                               cfg-content =3D "CNTR_VERSION 2",
+> +                                             "BOOT_FROM SD",
+> +                                             "SOC_TYPE IMX9",
+> +                                             "APPEND mx95b0-ahab-contain=
+er.img",
+> +                                             "CONTAINER",
+> +                                             "DUMMY_DDR",
+> +                                             "IMAGE OEI m33-oei-ddrfw.bi=
+n 0x1ffc0000",
+> +                                             "HOLD 0x10000",
+> +                                             "IMAGE M33 m33_image.bin 0x=
+1ffc0000",
+> +                                             "IMAGE A55 spl/u-boot-spl.b=
+in 0x20480000",
+> +                                             "DUMMY_V2X 0x8b000000";
+> +#endif
+> +                       };
+> +
+> +                       container-cfg {
+> +                               type =3D "nxp-config";
+> +                               cfg-path =3D "u-boot-container.cfgout";
+> +#ifdef CONFIG_IMX95_A0
+> +                               cfg-content =3D "BOOT_FROM SD",
+> +                                             "SOC_TYPE IMX9",
+> +                                             "CONTAINER",
+> +                                             "IMAGE A55 bl31.bin 0x8a200=
+000",
+> +                                             "IMAGE A55 u-boot.bin 0x902=
+00000";
+> +#else
+> +                               cfg-content =3D "CNTR_VERSION 2",
+> +                                             "BOOT_FROM SD",
+> +                                             "SOC_TYPE IMX9",
+> +                                             "CONTAINER",
+> +                                             "IMAGE A55 bl31.bin 0x8a200=
+000",
+> +                                             "IMAGE A55 u-boot.bin 0x902=
+00000";
+> +#endif
+> +                       };
+> +
+>                         spl {
+>                                 align =3D <0x400>;
+>                                 align-size =3D <0x400>;
+> diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
+> index 8bd85e889ab..fa2cdaba144 100644
+> --- a/arch/arm/mach-imx/Makefile
+> +++ b/arch/arm/mach-imx/Makefile
+> @@ -223,6 +223,10 @@ endif
+>
+>  ifeq ($(CONFIG_ARCH_IMX9)$(CONFIG_ARCH_IMX8ULP), y)
+>
+> +ifneq ($(and $(CONFIG_IMX95),$(CONFIG_BINMAN)),)
+> +SPL: spl/u-boot-spl.bin FORCE
+> +       $(call if_changed,mkimage)
+> +else
+>  quiet_cmd_cpp_cfg_imx9_check =3D CHECK    $@
+>  cmd_cpp_cfg_imx9_check =3D $(CPP) $(cpp_flags) -D__ASSEMBLY__ -x c -o $@=
+ $< && $(srctree)/tools/imx9_image.sh $@
+>
+> @@ -244,6 +248,7 @@ u-boot-container.cfgout: $(IMX_CONTAINER_CFG) FORCE
+>  flash.bin: spl/u-boot-spl-ddr.bin container.cfgout FORCE
+>         $(call if_changed,mkimage)
+>  endif
+> +endif
+>
+>  else
+>  MKIMAGEFLAGS_SPL =3D -n $(filter-out $(PLUGIN).bin $< $(PHONY),$^) \
 
-diff --git a/board/samsung/e850-96/e850-96.env b/board/samsung/e850-96/e850-96.env
-index aed7a71046d0..992318b0ab26 100644
---- a/board/samsung/e850-96/e850-96.env
-+++ b/board/samsung/e850-96/e850-96.env
-@@ -5,7 +5,7 @@ fdt_addr_r=0x8c000000
- scriptaddr=0x8c100000
- pxefile_addr_r=0x8c200000
- ramdisk_addr_r=0x8c300000
--fdtfile=CONFIG_DEFAULT_FDT_FILE
-+fdtfile=exynos/exynos850-e850-96.dtb
- 
- dfu_alt_info=
- 	rawemmc raw 0 0x747c000 mmcpart 1;
-diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
-index b4066d874602..412c99468f29 100644
---- a/configs/e850-96_defconfig
-+++ b/configs/e850-96_defconfig
-@@ -19,7 +19,6 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_BOOTSTD_FULL=y
--CONFIG_DEFAULT_FDT_FILE="exynos850-e850-96.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_BOARD_INIT is not set
- CONFIG_BOARD_LATE_INIT=y
--- 
-2.39.5
+excellent cleanup - nice to see those cfg files go away
 
+<snip>
+> diff --git a/doc/board/nxp/imx95_evk.rst b/doc/board/nxp/imx95_evk.rst
+> index 27cd15eb7c9..83ec628f989 100644
+> --- a/doc/board/nxp/imx95_evk.rst
+> +++ b/doc/board/nxp/imx95_evk.rst
+> @@ -21,6 +21,16 @@ Get ahab-container.img
+>
+>  Note: srctree is U-Boot source directory
+>
+> +i.MX95 A0 silicon version
+> +
+> +.. code-block:: bash
+> +
+> +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-1.3=
+.0-17945fc.bin
+> +   $ sh firmware-ele-imx-1.3.0-17945fc.bin --auto-accept
+> +   $ cp firmware-ele-imx-1.3.0-17945fc/mx95a0-ahab-container.img $(srctr=
+ee)
+> +
+
+Is there a reason you are using a different version of the container
+here? I find the mx95a0-ahab-container.img from
+firmware-ele-imx-2.0.2-89161a8.bin appears to work fine. Either way:
+
+Tested-By: Tim Harvey <tharvey@gateworks.com> # imx95-19x19-evk (rA0)
+
+Best Regards,
+
+Tim
