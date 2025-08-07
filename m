@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74560C87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 15:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19AACC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 15:19:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1CD9845C8;
-	Thu,  7 Aug 2025 17:16:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 96400845C8;
+	Thu,  7 Aug 2025 17:19:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="abYqV4+g";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lNowUzO2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93EF2845D8; Thu,  7 Aug 2025 17:16:27 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 01FAE845E4; Thu,  7 Aug 2025 17:19:34 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EF4E845C5
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 17:16:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79A8B845C5
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 17:19:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4538bc52a8dso7836275e9.2
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 08:16:25 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3b782cca9a0so635076f8f.1
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 08:19:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754579785; x=1755184585; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754579971; x=1755184771; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=UOatucA2G4ZeXao7dtkMoBoejbNoz7Ytwl6g+1i530o=;
- b=abYqV4+gTbJKSKM6kR40p+sWxpwu0SC24cnmfXsU3M6JAARqbpGz8CNInOMvqgyP1h
- i/Yi8WdfDmpcRYub/C5FlRspZx5vypULNUleU0DTucZHwJR1JddPWpk/K3q4/iJi1ntP
- hmTnCtYALUPXXiboABF9K0uUWur0e82HNT8WucSQa36v/wMOcvaNmpmuOOrWtJ0LXvsY
- SiSKDb1j9ZQuva74CvIBuEn16NslhPxwA4gQuEY3ZOkGQqsuHGgaEBioDLzCFd9sehRZ
- LcQp2KtcwJ96IhU/iGWtlv7Xm3m1MAlwBcBiJPcCiTyjeGeteDefXBKrW+6XD+XNo4xe
- fjPg==
+ bh=9OKXawvUtVueYSS2cWgqtGSKYcOtKTzzyUMtkt43NiA=;
+ b=lNowUzO2IbUOslSP2fEl9yfGh07J/SONWkSyIkuAS52AkRByNyKdly1Y1BIabRO8un
+ SjJWzr7LpnbUWN9n0nlMdjM+ncuMzrEIWtOZZJCMF4tSj1rcGXnQZbt5Tdn29PkKKxVa
+ IFnGfWLU1NiQUws1lNiUVy/681eZUV7XuKYw5pwVGQFKluzYeWhc1b1yeBH1fAtrlBJc
+ +gjSGaWlug+vkY+QfdfDfmVnXPhzRh2ap6uBOjeX71pjX8hNmoBZpnX/siy5qNszz10T
+ ZXltkQXVY1EFbUzsENjMsMdx/eA68GZZMc7U8trHRljjGuJAyp35VJtQWgBdZWrvPqos
+ yceg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754579785; x=1755184585;
+ d=1e100.net; s=20230601; t=1754579971; x=1755184771;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UOatucA2G4ZeXao7dtkMoBoejbNoz7Ytwl6g+1i530o=;
- b=bwhp9Xe0zoxqENQLLFpc5f9wCGQpW+p9HInlqjnRiDayLLkcZgQQup1TXkIstCgyUl
- gjVnylLG8q18Yop7wB0Wn4pQ6Df42oA8+06oeCZeCy25fNmTOLk2ZPRT1FEP9udPVu8k
- 5jrZza1X0b86jtCfMSw6ShK3GPYgEk/nNV9KUQPkIMIOTCcCs1zWcXdxpE4msvekmE+e
- eXFnKAUd3DrsAxblfLK8wIMWx6hlmKRBNlIvN3G/8oKf7zg0UPnHCEvhMJlq/qIa3neN
- JA8pYy9UrUhJOi3Jf45USMEcXogKWhG3mYWoTIMUyl1nmn0Z9KNp+iBSdegg69U/8kOW
- Wq8Q==
-X-Gm-Message-State: AOJu0Yyw2HTUtDRcFiZis1ryVscwZm8aUl7zXhU7bkpsvJWGUk7sXPuh
- 1Dzf587z2BknmKFN364xf4NuWwJ8fhVlwofB+FMVkHILUa0sL4B7GEkYZSwE4G2raek=
-X-Gm-Gg: ASbGncsSLKTvRGgROuzn00nUGqfhaPlYk+gYjjtXb4/P5qfcBTv1Xl9dD+SYTnvaP/p
- Xtv5l/1bSpYH8hSJNKLUZ8ZROFjyD9RNveSYNFPdgKB9dpUtdUkI22/OM+JKGsUHobrMAR3Lqez
- FANylX+LvUV+fZef3KizRb4/6XrXpG1Bi35MvkxHfYgf5MAUSTjxtgI3rJgu4xBFXZxR8R0rsD4
- 7ScMCEAC4k3/rv4OE9QXKXzPiF4gVBZnok1J15FgpTV1CrNkUhiOYKxaVIvkdQr8gU2R5WTUmdM
- axFZs1klE0sgbrrU7ZWfNJJMQ6ToaLzC2jAWJeJrvQs7uavMs7920U7vxEc7xNWotrhn5Az9Ol3
- lvsFOxAx6NFJz9xH7cj1uzRSLXytl9PWyI2NQYwn0shL7L0eKnvE6oZktZ5hSgVdRVsPUTaQxhn
- crtg==
-X-Google-Smtp-Source: AGHT+IGs2B2vPDIGAfIWcwkxAUoBZNfeoNmtZtzQQJzgz1XcOCWt5aua/kWZzV/ZSCY9yl8WkLovJg==
-X-Received: by 2002:a05:600c:4e87:b0:459:e06b:afb4 with SMTP id
- 5b1f17b1804b1-459e7080202mr70833915e9.4.1754579784906; 
- Thu, 07 Aug 2025 08:16:24 -0700 (PDT)
+ bh=9OKXawvUtVueYSS2cWgqtGSKYcOtKTzzyUMtkt43NiA=;
+ b=AgI5YcBJ2pcIlZXvRSDZboR4JjxNrWsfiYWdufCKvRA5XTcg63NMuvZBMnBHAdb1uj
+ pK7/I1/gi3KjL7vl+CJHQpe1pz63I8soxsSfR5aUF0LNK5YEyjqExxueuBbnQVPSrTe9
+ rdN9+fvTdrQxJKkl091oXVnYJcgVUp/+Mii7YBAKadDvOdVDNPeLofBh8aR+Ci8PJqEd
+ FuNVU2iQoM5u61L2HTxzNPC7gmohRNhvsY2uBKlAZMmyEypX9FTgutyUYQf5sNqxFgZE
+ NPJNc+7kSR64o6slVXPcPcRM/5ey0QPUrskMrmPgTe/as+wrwBz9FXoCHESxuDtxRdix
+ plhg==
+X-Gm-Message-State: AOJu0YydIp+UcLRXXVpbRs03J5tVvfo+WSIMC9C6zRX49v1GFPb5dtl3
+ Z01itcCruuRyE7KUEU8186qojKIMCYWkRLWVs5n9LJgs6GQnhhvAs3NUskx+bjftqag=
+X-Gm-Gg: ASbGnctntzaz/gStkyGg3dYjVLzOyxkFQJGjr5u0aSsArUaIPiU0agxffr05rxCVJEv
+ eov86E8hwZJG2Wqb2YJ2NSR9jQ9BGlo1S/r/HaVv43GwN6SdGVcGzQ3F+5GPGXHNLZ9ZKy/Z7l0
+ mb3ZozkxBIi52v3MW1Laf7ILWUaz4tDLZ9Wcm1ZxT/4DSa8OtRt3zK3IY7i/cw3UQ9KoOhCOvLQ
+ teGTG4Io2kRHG4O/F0iInaTYPUKvedJ1DkgF4tYMV0F4I9dcNCp8D6bKlSYwzEXpAEU0WHeqn/5
+ OZaVh09GpwUWw+IhJSJJYufDP6mU5dXYivE6ZDHlrmQpZGn/RTiDFfwg64pe0bRtwAze2qchYLn
+ FlyZ+F/YGFxGUsWB1AL7tWytqrbOjAIpoO5TAH68f3CG1hTyHks4ivIF7I4Mpn0PB9SefGHdc6K
+ 1CLg==
+X-Google-Smtp-Source: AGHT+IECVWVmzn3OYpbBcb7BMm3NvXgXc/7ynTec86UZ2TOKHh+zTxrz953JbHDCiAvAO7+oM9pnjg==
+X-Received: by 2002:a05:6000:4011:b0:3a4:f975:30f7 with SMTP id
+ ffacd0b85a97d-3b8f49402cfmr6015597f8f.56.1754579970894; 
+ Thu, 07 Aug 2025 08:19:30 -0700 (PDT)
 Received: from ?IPV6:2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf?
  ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458b55b4b4bsm123862965e9.1.2025.08.07.08.16.24
+ 5b1f17b1804b1-459e5887b7fsm96366915e9.30.2025.08.07.08.19.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Aug 2025 08:16:24 -0700 (PDT)
-Message-ID: <3de60992-4ed2-4aab-886a-f66138c2fada@linaro.org>
-Date: Thu, 7 Aug 2025 16:16:21 +0100
+ Thu, 07 Aug 2025 08:19:30 -0700 (PDT)
+Message-ID: <5ed657aa-476f-440d-8d9c-f5dd5ca354e9@linaro.org>
+Date: Thu, 7 Aug 2025 16:19:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] clk: at91: Fix issues found by Smatch
+Subject: Re: [PATCH 0/2] clk: versaclock: Fix two issues found by Smatch
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Eugen Hristev <eugen.hristev@linaro.org>
+ Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-References: <20250723-at91_clk-v1-0-3b28da9bf12d@linaro.org>
+References: <20250723-clk_versaclock-v1-0-9d70f2530871@linaro.org>
 Content-Language: en-GB
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20250723-at91_clk-v1-0-3b28da9bf12d@linaro.org>
+In-Reply-To: <20250723-clk_versaclock-v1-0-9d70f2530871@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,23 +102,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23/07/2025 15:13, Andrew Goodbody wrote:
-> Unsigned variables will always fail tests that check for being negative.
-> Use signed variables instead.
+On 23/07/2025 16:54, Andrew Goodbody wrote:
+> Should return value calculated by ERR_PTR as calling code attempts to
+> check for it.
+> Also do not dereference a pointer that could be an error pointer before
+> checking it with IS_ERR.
 > 
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
 > Andrew Goodbody (2):
->        clk: at91: Fix testing of unsigned variable to be negative
->        clk: at91: Fix use of unsigned loop index
+>        clk: versaclock: return value calculated by ERR_PTR
+>        clk: versaclock: Use IS_ERR check before dereference
 > 
->   drivers/clk/at91/clk-main.c   | 3 ++-
->   drivers/clk/at91/clk-master.c | 4 ++--
->   drivers/clk/at91/sckc.c       | 8 +++++---
->   3 files changed, 9 insertions(+), 6 deletions(-)
+>   drivers/clk/clk_versaclock.c | 10 +++++-----
+>   1 file changed, 5 insertions(+), 5 deletions(-)
 > ---
 > base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
-> change-id: 20250723-at91_clk-e71864ac6e7e
+> change-id: 20250723-clk_versaclock-77e9ddbd4a51
 > 
 > Best regards,
 
