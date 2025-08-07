@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99DA8C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 22:34:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3150AC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 22:35:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA2C483CCF;
-	Fri,  8 Aug 2025 00:34:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C5AE84694;
+	Fri,  8 Aug 2025 00:34:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oxECZ83o";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jA5Lpcpx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C648483C93; Fri,  8 Aug 2025 00:34:35 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id D275C83C93; Fri,  8 Aug 2025 00:34:37 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCBF383CCA
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 00:34:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9BA883CD2
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 00:34:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-610cbca60cdso738840eaf.0
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 15:34:23 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7416d362e7aso1190797a34.1
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 15:34:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754606062; x=1755210862; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754606064; x=1755210864; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5oxoKB96RqYQlBSH7W7Dh/e2anWugV5TN/GwGvbXMCQ=;
- b=oxECZ83oToKaVSNz3b1b/5HMC+YJb28X8oxzoQcf4zQ15ru2UC9hqCr8/VQiyf37Mi
- OcJfvoixcvL1yaLveMFq8Gut58z8SOG8t/Buf2JSlPGCMreY7mtqQl09uZlY3AmkATUn
- jZs2Zu0WnstP1awVTwUySJfw6ljm98DOI2r0Q=
+ bh=eVycdekezdeUClznHQ670TwNNA8AmgqXjIRzaChUsGs=;
+ b=jA5LpcpxGjd3PMgRXeGNLJWF/4HO6v3vwcOm1x6RGAkqGVi+m1nFxSDMPEHG/zKRHw
+ jybe2TCW3U1PGnfV3fkNnLfjuSby/tStODKHlzLJScFppa88fqXUXhK+e3G3eHmVySjr
+ F8QYACn/fiAghruq3dHhdG+xwcsp7QgpqnsSY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754606062; x=1755210862;
+ d=1e100.net; s=20230601; t=1754606064; x=1755210864;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5oxoKB96RqYQlBSH7W7Dh/e2anWugV5TN/GwGvbXMCQ=;
- b=ufu+P5Ts+uHL8iOnxTzHo8Fon1YkWpeYRkBCg6keDkoF2xlcK2psYIolTWsHo+8yy2
- RlrVLLl/9Q/74VPtITn/NN1Gc1Zw3HcwN/esDIG8e2mloY4vkEEkzht9j5HByzezq93U
- qTWiHSUHr57T/oAuIZ5Y66HoDY+SOkfJbqtDZ2wSZ+qOxDt/q8tBAaCq/NRoE5fMJnC+
- 9RRJH0XcWCfzU11cz9MGq//TNRcW3WAh3OGeqPG8Lz9jZF2Omi/Nz+Vz709PMl3DO9Nq
- 1OPljCRfmT3nl8ZjvXSSPiZSQDolaDycOUnMRCcTv1R4rba1hzIDOurwROEZD6Rdsul6
- Wnkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUtyH253xF6RLp/0Cr7Em1Z8/E929/LbsnKJNu/26qtvEE3VEp5YCfh10910ZKtovWjmJoRWQo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpKwnV99KTDTYm7Dc5KS6hteMOTG/SKb+oMO8sABC5MemOOAqE
- 9zEWuN9ObSK/RhwcB7pwyK88xgxvoQldRMhlIgfDSVptLfb3A6nU0DDdr3GH1Pws9JwJLdjVJTy
- tywvRIR0=
-X-Gm-Gg: ASbGnctL1n67QlS71RIprt+mvRGiosQMAqi8i/8q65bQGKarHO/LgNOxW9i7BUIn1tB
- UUwfma5cGmYvvr0mQxDfQ2ELyEBJYSf7rc7XwvzX3Kbh4hynnHTWUca6NMqu1omL8syvxsV4PIy
- wucu6Gnuvll3aAZvMYybrYZOIWAn9/zaV5t619fGyf0iX8rvMKFqiyoHyF5dxxKqFHkYqegdRRv
- n489SDwm9XbCsJnTZ84Vs2aRqNV8PQIoY7KdePAUIryzuVT5XtvZesbbAG9LXCzmXBO4tEJI6Sd
- 1T1SSQZNDehUjOjX42ePwZI38tz6LcBlJCALlK9zcta9q1ZLZE8QbqBZLBbo32dqsNPiToeZcm0
- IWaUFG8YNHOVHrei2FYVuXcFv+rRrE6SfskvGXjo63HtrUhAAU9BvEIg=
-X-Google-Smtp-Source: AGHT+IGg7N5WSPO+48s1L4NSxdTZt3yK24LaDA9JhWPT05Z38ucV4qXJfxI/VRlAJYTUEsiqGCRu5A==
-X-Received: by 2002:a05:6820:151a:b0:619:7d9b:3f0b with SMTP id
- 006d021491bc7-61b7c42cd30mr354823eaf.5.1754606062651; 
- Thu, 07 Aug 2025 15:34:22 -0700 (PDT)
+ bh=eVycdekezdeUClznHQ670TwNNA8AmgqXjIRzaChUsGs=;
+ b=l3z2dKCrPgbXQhj/AIVf2l7qYrUcq393lNwqvBGlhzOxtu/a4iESY+B1YeNRW70DHo
+ yPmBV7aVz0/45B7djmhXpKxieQPz1D7BWJ9xtsWm3JyZsWe5C6T2TgX7zLzGKoOR7x7f
+ 91s7QU64gQkjYPIZK0a9BR6cIuERK4DdVgmJohJ+Vn6PtJOjGg2uPNlEevAvmK+UkMtq
+ vV6DPfqYsTRQMr2ls7gKMYCLyodiSiRxNpL8osVT0ryEResnVoJctFIYH3I4QzDNqtt9
+ AV+rLctseYVmG903TlzGsAvK0hoS+zLb2DccVb7L01dW0bSSfS4vH3J3ERzDwAh/NptH
+ FbOg==
+X-Gm-Message-State: AOJu0Yxv3E7VvGtca4qKYBdpA0rXGcWXpFcCZ1DE38CH7IG62Oge0Jof
+ o8IgGzi/bVKN6jc6/oZ9Awptg4ivhUc5PYorsPyzTWvqcG3AnjApoz7Skp/fiG2YHUFgP63KORn
+ EqCZ86dc=
+X-Gm-Gg: ASbGncuK2NhX+puRFWJQU7aJPTfbJY+ydkBLDwgUd2NzK21PIPkPGY8kV+jJ1BFotYk
+ DDUHs7K+AHR2GpUwvuWoLfZmGfM0dJe3PqFUJ+5KIXC50ZhkSI5CMDzAQfqaw7CGMQh/Ogo9f0M
+ yiCxw+Nj0DZblLppo95MAZdVhKoEGz29ywGCtjNDmDkOgiWK3du/YIi4F+x50brK7gDVakSnjtp
+ zgArcaAWnpfmnnSvdVtOMw7iF56Pv+KZBlKARgO+Nshf37pUpUDxuii6kJ3i3XvPVEI6Mx/ID6k
+ 855kagOqM1e65/3wmBvtfUgf52zpDW3JCcLiJzTW7NOSLQEQVBgELjGXWcSPD4bliKfazwbxQt4
+ 6lizkTHpP6+AQaNBWp1p80cae7XlPgEDKiaOFOo33BYliPfKac8yDhCv+4GcIQaw+nQ==
+X-Google-Smtp-Source: AGHT+IEgsaRQSUNtiP9Uq1JE94d2ETHVBq7Pqn3/6eRzm6kW28GNbfe3NolKaIaNKr2VAbt0vHUaBg==
+X-Received: by 2002:a05:6830:4392:b0:742:6d79:ed03 with SMTP id
+ 46e09a7af769-7432c990966mr438416a34.24.1754606063678; 
+ Thu, 07 Aug 2025 15:34:23 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61b7c6eaf6csm73309eaf.0.2025.08.07.15.34.21
+ 006d021491bc7-61b7c6eaf6csm73309eaf.0.2025.08.07.15.34.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 15:34:22 -0700 (PDT)
+ Thu, 07 Aug 2025 15:34:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ying-Chun Liu <paul.liu@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Will Deacon <willdeacon@google.com>, u-boot@lists.denx.de
-In-Reply-To: <20250726061758.96768-1-heinrich.schuchardt@canonical.com>
-References: <20250726061758.96768-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] virtio: fix freeing of virtio ring buffer
-Message-Id: <175460606172.3039738.4796485286744205199.b4-ty@konsulko.com>
-Date: Thu, 07 Aug 2025 16:34:21 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>
+In-Reply-To: <20250725151821.2067853-1-trini@konsulko.com>
+References: <20250725151821.2067853-1-trini@konsulko.com>
+Subject: Re: [PATCH] pylibfdt: setup.py: Drop license_files
+Message-Id: <175460606278.3039738.13955347194843336068.b4-ty@konsulko.com>
+Date: Thu, 07 Aug 2025 16:34:22 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,19 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 26 Jul 2025 08:17:58 +0200, Heinrich Schuchardt wrote:
+On Fri, 25 Jul 2025 09:18:21 -0600, Tom Rini wrote:
 
-> If the allocation if the bounce buffer fails, virtio_free_pages is called
-> with a random value from the stack.
+> On more recent versions of setuptools the warning about not being able
+> to find the files specified in license_files has re-appeared. This is
+> because as best I can tell, it can't and won't look in $(srctree) but
+> rather only subdirectories of scripts/dtc/pylibfdt. Since we already
+> provide both SPDX tags and a license field with the SPDX contents, let
+> us just drop license_files as it's not mandatory.
 > 
-> Ensure that vring.size is initialized.
-> 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] virtio: fix freeing of virtio ring buffer
-      commit: 4b97de0e28fc215d3f41bb01f3410baa5e9243d8
+[1/1] pylibfdt: setup.py: Drop license_files
+      commit: 123cd77122a13288e1552b5d9b7c22a6f19e2e02
 -- 
 Tom
 
