@@ -4,85 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0FE4C87FCB
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 00:50:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDF0C87FD2
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 04:22:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9333A83B1A;
-	Thu,  7 Aug 2025 02:50:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id BD27883B1A;
+	Thu,  7 Aug 2025 06:22:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="W9X7iPnh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iqwamw2D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E417A83B1A; Thu,  7 Aug 2025 02:49:57 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9581283AE9
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 02:49:54 +0200 (CEST)
+ id 5942B83B27; Thu,  7 Aug 2025 06:22:01 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E192B83AFD
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 06:21:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-30bbb2d332eso173077fac.0
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 17:49:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1754527793; x=1755132593; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gQxwcqiH5NJ1iWTqqk8Crn0eQOoROOlNu1pWwWUPKLE=;
- b=W9X7iPnhoc4TePnqwwzHUWyxRadryiDTxxMC3b+SHuNXBIqnofLSdVUanOvs6E3T/r
- 7LfR2GlW/3+8TSwMa9AAClreUD4/e0DPScqR3sSPczkgemLzLk6bCcIvESOeqvPOetnI
- cRg1OqpPGAOJ+ZO6z58QtOL8xvU5cxjlqNz56WxE/mhp3Yyw0mM4pNSIsXXMuOCLusxz
- p+aPoSBnnJd9XsX0abCqv9qTPRZjUzuDCDNDj3cddd5gjoUzPTD7VocvQeejt5MuTncG
- eEW9w9SPqDz9abYF9mo7h1ykWtnfDhwBKwpwnGIcqkrrurpf8SOvJ4Zzqs5AsSThZGqC
- LnaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754527793; x=1755132593;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gQxwcqiH5NJ1iWTqqk8Crn0eQOoROOlNu1pWwWUPKLE=;
- b=KSvClLqPBs9uFTIvWizR3X7x0dTbeFzS/HLyrPI+hJ024XfFY/vUNMjQlUX/O+vNKI
- UkeX5RJ8KT7CaHUKMSXJoZbXprJkYXth18kDsd6HQsXYURc1A7u0t+AcU+vLclJUHhC2
- H504mi/MrhlPIVViQXA9yW+a0ARoTDoJC14Ctp5sEe13PQ+zm8D/5xwD5g2VTIzfMTPy
- jYzdXvABZmFvjhIaWHIaeqCnnJVFgIk3Z2fMfBneF00OyjPGyRLQDJXZ4OiUqvo85I7x
- 9zm/QrZVdDRDb41y1TlyXA1WdboYkLgcydFB31Cs0qKsqpaxXBBfhA9ZgGI4bjfVlXLr
- 5YZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVuGpyu+vaCnTNXZ6zsQXgJGytQamK5wGAPYszl0OWk1xgu8uypgfTi3eJZqD+ig/iYFhYk/mE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOIie/p3jCPi1n/dsgM2JaKCSXwUFsaYVHgWxSJ7/UcWjzEu/c
- VO7jJ0gdxE/4cjVOi4fGlHc1hHMp35qadeg61dvSYCAzgpz4AhzF7IF71D+YiVZ6F7IBA13Fml/
- 2polA1ZYyOWL6MdY7PE1X8YFkick7IvZIS5IK4BeiRA==
-X-Gm-Gg: ASbGncsGTuR/yPhLFIo9P6V2yqyYzzcELuyeZsUs5AwfHIelWZIIH9GmSDZ3qTMkmqS
- nQP/nnRlnSfliRdNdgs4d6vXgu9o/FNtzbkI3XXzuZHJ4wksc3AfRylqMB2NTvBR3qQZc6digVY
- uDXxXWesLEf49zO2Q2dmNyO/eMM1pbo5Qi+Ry6P9KNrMm3wedgofITEgJQXXSgMi18U44TfgksF
- iWv1ZE=
-X-Google-Smtp-Source: AGHT+IF8mKeCAkfZRafi4+LctlRKb/e/1wZ9OXSkjPWbo658wx0PwrA4gvgq1zyMrCK1a8ANmi8+8IDsZyq7RbkT/4Q=
-X-Received: by 2002:a05:6870:ac06:b0:301:a823:9cd1 with SMTP id
- 586e51a60fabf-30be2bd6048mr2937929fac.22.1754527793098; Wed, 06 Aug 2025
- 17:49:53 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5774Lu7u667460;
+ Wed, 6 Aug 2025 23:21:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1754540516;
+ bh=Qxa//e5t6+h/kypndl1nFFv7fIFiSiyH2OUQbwzFq9Q=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=iqwamw2Dkr1kEMYorDERugzArmBGbwfqWevtEIFSuN52DD3K3drbtiePl1MZzm9ii
+ gaYgMqs/ek5l6UW9pC816kNYYND2EVdzKENldsa8Ov7IUO6LB3zBGVIDd3rHNJhclb
+ UeQ0YTVPjvxJuK4W2o9Qw5mLt62maWMbRGQbguyY=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5774Luh3529025
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 6 Aug 2025 23:21:56 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 6
+ Aug 2025 23:21:55 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 6 Aug 2025 23:21:55 -0500
+Received: from [172.24.20.139] (lt5cd2489kgj.dhcp.ti.com [172.24.20.139])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5774LqBk424314;
+ Wed, 6 Aug 2025 23:21:53 -0500
+Message-ID: <da36b723-14d4-4f82-a8d4-43abd4683d4f@ti.com>
+Date: Thu, 7 Aug 2025 09:51:51 +0530
 MIME-Version: 1.0
-References: <20250728-imx95b0-v1-0-5cdae3764d21@oss.nxp.com>
- <20250728-imx95b0-v1-2-5cdae3764d21@oss.nxp.com>
-In-Reply-To: <20250728-imx95b0-v1-2-5cdae3764d21@oss.nxp.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 6 Aug 2025 17:49:42 -0700
-X-Gm-Features: Ac12FXzY_tRdkwTPD5-RC8PYtWnDGzfeuX98NIpUn5tpUfhOlPVUJ2IEkUNDh1Q
-Message-ID: <CAJ+vNU2GGaXhqmoJQwh=NPA9QwjdXBqGuRA96CmaZt4iybhucw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] imx95_evk: Restore support for i.MX95 A0 silicon
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/9] ram: k3-ddrss: Use DDR address instead of system
+ address for ecc_regions
+To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>, <bb@ti.com>, 
+ <w.egorov@phytec.de>, <s-k6@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <sabiya.d@ti.com>
+CC: <u-boot@lists.denx.de>, <u-kumar1@ti.com>
+References: <20250730133720.3315478-1-n-francis@ti.com>
+ <20250730133720.3315478-2-n-francis@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20250730133720.3315478-2-n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,168 +83,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 6, 2025 at 5:40=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
-om> wrote:
->
-> From: Alice Guo <alice.guo@nxp.com>
->
-> This patch is used to restore support for i.MX95 A0 silicon. To avoid
-> duplicating defconfig, imx95.config is added and can be shared between
-> imx95_a0_19x19_evk_defconfig and imx95_19x19_evk_defconfig.
->
-> container.cfg and imximage.cfg are used to created .cfgout files that
-> are be passed to mkimage with -n to build flash.bin. Now they have been
-> deleted and replaced by adding their content to the property cfg-content
-> of node which type is nxp-config under binman node.
->
-> Fixes: 9936724aa9b ("imx95_evk: Add i.MX95 B0 support")
->
+Hello Neha
 
-Hi Alice,
+On 7/30/2025 7:07 PM, Neha Malcom Francis wrote:
+> Let ecc_regions[x].start reflect the start of the ECC region in terms of
+> DDR addressing rather than system addressing. This will make it easier
+> to extend the usage of the same ecc_regions structure for multi-DDR
+> systems as well.
 
-Thanks for addressing this!
+comments are not inline with patch contents ,
 
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+LTM, you are doing clean up how ecc_regions[0].start is being used.
+
+Originally ddrss->ecc_regions[0].start = ddrss->ddr_bank_base[0];
+
+and while using it  we did (ecc_region_start - ddrss->ddr_bank_base[0])
+
+other then that I don't see we are using ecc_region_start anywhere.
+
+With update in commit message , Please use
+
+
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+
+
+
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  arch/arm/dts/imx95-u-boot.dtsi            |  48 ++++++++++
->  arch/arm/mach-imx/Makefile                |   5 +
->  arch/arm/mach-imx/imx9/Kconfig            |   5 +-
->  arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
->  arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
->  configs/imx95.config                      | 150 ++++++++++++++++++++++++=
-+++++
->  configs/imx95_19x19_evk_defconfig         | 153 +-----------------------=
-------
->  configs/imx95_a0_19x19_evk_defconfig      |   2 +
->  doc/board/nxp/imx95_evk.rst               |  41 +++++++-
->  9 files changed, 247 insertions(+), 184 deletions(-)
+>   drivers/ram/k3-ddrss/k3-ddrss.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/arch/arm/dts/imx95-u-boot.dtsi b/arch/arm/dts/imx95-u-boot.d=
-tsi
-> index 9bf8f9834c9..227e220cd65 100644
-> --- a/arch/arm/dts/imx95-u-boot.dtsi
-> +++ b/arch/arm/dts/imx95-u-boot.dtsi
-> @@ -51,6 +51,54 @@
->                         filename =3D "flash.bin";
->                         pad-byte =3D <0x00>;
->
-> +                       imximage-cfg {
-> +                               type =3D "nxp-config";
-> +                               cfg-path =3D "spl/u-boot-spl.cfgout";
-> +#ifdef CONFIG_IMX95_A0
-> +                               cfg-content =3D "BOOT_FROM SD",
-> +                                             "SOC_TYPE IMX9",
-> +                                             "APPEND mx95a0-ahab-contain=
-er.img",
-> +                                             "CONTAINER",
-> +                                             "IMAGE OEI m33-oei-ddrfw.bi=
-n 0x1ffc0000",
-> +                                             "HOLD 0x10000",
-> +                                             "IMAGE OEI oei-m33-tcm.bin =
-0x1ffc0000",
-> +                                             "IMAGE M33 m33_image.bin 0x=
-1ffc0000",
-> +                                             "IMAGE A55 spl/u-boot-spl.b=
-in 0x20480000",
-> +                                             "DUMMY_V2X 0x8b000000";
-> +#else
-> +                               cfg-content =3D "CNTR_VERSION 2",
-> +                                             "BOOT_FROM SD",
-> +                                             "SOC_TYPE IMX9",
-> +                                             "APPEND mx95b0-ahab-contain=
-er.img",
-> +                                             "CONTAINER",
-> +                                             "DUMMY_DDR",
-> +                                             "IMAGE OEI m33-oei-ddrfw.bi=
-n 0x1ffc0000",
-> +                                             "HOLD 0x10000",
-> +                                             "IMAGE M33 m33_image.bin 0x=
-1ffc0000",
-> +                                             "IMAGE A55 spl/u-boot-spl.b=
-in 0x20480000",
-> +                                             "DUMMY_V2X 0x8b000000";
-> +#endif
-> +                       };
-> +
-> +                       container-cfg {
-> +                               type =3D "nxp-config";
-> +                               cfg-path =3D "u-boot-container.cfgout";
-> +#ifdef CONFIG_IMX95_A0
-> +                               cfg-content =3D "BOOT_FROM SD",
-> +                                             "SOC_TYPE IMX9",
-> +                                             "CONTAINER",
-> +                                             "IMAGE A55 bl31.bin 0x8a200=
-000",
-> +                                             "IMAGE A55 u-boot.bin 0x902=
-00000";
-> +#else
-> +                               cfg-content =3D "CNTR_VERSION 2",
-> +                                             "BOOT_FROM SD",
-> +                                             "SOC_TYPE IMX9",
-> +                                             "CONTAINER",
-> +                                             "IMAGE A55 bl31.bin 0x8a200=
-000",
-> +                                             "IMAGE A55 u-boot.bin 0x902=
-00000";
-> +#endif
-> +                       };
-> +
->                         spl {
->                                 align =3D <0x400>;
->                                 align-size =3D <0x400>;
-> diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
-> index 8bd85e889ab..fa2cdaba144 100644
-> --- a/arch/arm/mach-imx/Makefile
-> +++ b/arch/arm/mach-imx/Makefile
-> @@ -223,6 +223,10 @@ endif
->
->  ifeq ($(CONFIG_ARCH_IMX9)$(CONFIG_ARCH_IMX8ULP), y)
->
-> +ifneq ($(and $(CONFIG_IMX95),$(CONFIG_BINMAN)),)
-> +SPL: spl/u-boot-spl.bin FORCE
-> +       $(call if_changed,mkimage)
-> +else
->  quiet_cmd_cpp_cfg_imx9_check =3D CHECK    $@
->  cmd_cpp_cfg_imx9_check =3D $(CPP) $(cpp_flags) -D__ASSEMBLY__ -x c -o $@=
- $< && $(srctree)/tools/imx9_image.sh $@
->
-> @@ -244,6 +248,7 @@ u-boot-container.cfgout: $(IMX_CONTAINER_CFG) FORCE
->  flash.bin: spl/u-boot-spl-ddr.bin container.cfgout FORCE
->         $(call if_changed,mkimage)
->  endif
-> +endif
->
->  else
->  MKIMAGEFLAGS_SPL =3D -n $(filter-out $(PLUGIN).bin $< $(PHONY),$^) \
-
-excellent cleanup - nice to see those cfg files go away
-
-<snip>
-> diff --git a/doc/board/nxp/imx95_evk.rst b/doc/board/nxp/imx95_evk.rst
-> index 27cd15eb7c9..83ec628f989 100644
-> --- a/doc/board/nxp/imx95_evk.rst
-> +++ b/doc/board/nxp/imx95_evk.rst
-> @@ -21,6 +21,16 @@ Get ahab-container.img
->
->  Note: srctree is U-Boot source directory
->
-> +i.MX95 A0 silicon version
-> +
-> +.. code-block:: bash
-> +
-> +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-1.3=
-.0-17945fc.bin
-> +   $ sh firmware-ele-imx-1.3.0-17945fc.bin --auto-accept
-> +   $ cp firmware-ele-imx-1.3.0-17945fc/mx95a0-ahab-container.img $(srctr=
-ee)
-> +
-
-Is there a reason you are using a different version of the container
-here? I find the mx95a0-ahab-container.img from
-firmware-ele-imx-2.0.2-89161a8.bin appears to work fine. Either way:
-
-Tested-By: Tim Harvey <tharvey@gateworks.com> # imx95-19x19-evk (rA0)
-
-Best Regards,
-
-Tim
+> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
+> index 6590d57ad84..7389fd8b82f 100644
+> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
+> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+> @@ -752,7 +752,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
+>   	u32 val;
+>   
+>   	/* Only Program region 0 which covers full ddr space */
+> -	k3_ddrss_set_ecc_range_r0(base, ecc_region_start - ddrss->ddr_bank_base[0], ecc_range);
+> +	k3_ddrss_set_ecc_range_r0(base, ecc_region_start, ecc_range);
+>   
+>   	/* Enable ECC, RMW, WR_ALLOC */
+>   	writel(DDRSS_ECC_CTRL_REG_ECC_EN | DDRSS_ECC_CTRL_REG_RMW_EN |
+> @@ -817,7 +817,7 @@ static int k3_ddrss_probe(struct udevice *dev)
+>   		k3_ddrss_lpddr4_ecc_calc_reserved_mem(ddrss);
+>   
+>   		/* Always configure one region that covers full DDR space */
+> -		ddrss->ecc_regions[0].start = ddrss->ddr_bank_base[0];
+> +		ddrss->ecc_regions[0].start = 0;
+>   		ddrss->ecc_regions[0].range = ddrss->ddr_ram_size - ddrss->ecc_reserved_space;
+>   		k3_ddrss_lpddr4_ecc_init(ddrss);
+>   	}
