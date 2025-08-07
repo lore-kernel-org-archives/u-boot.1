@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35EF7C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 08:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01B2FC87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 08:08:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A509E843E2;
-	Thu,  7 Aug 2025 10:08:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 191D68442C;
+	Thu,  7 Aug 2025 10:08:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VBcZ9ut9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="egaKucDj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2447F8440E; Thu,  7 Aug 2025 10:08:28 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 30AAD83AFD; Thu,  7 Aug 2025 10:08:28 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14E8B83AFD
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 10:08:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFE5A83C53
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 10:08:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-455fdfb5d04so3547525e9.2
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 01:08:24 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-459e20ec1d9so6262495e9.3
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 01:08:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754554103; x=1755158903; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=sdrXNz6gP5UZckQ8VhCckCyZmyIVd9u1PeDllxczDZo=;
- b=VBcZ9ut9R8aK6XYVTmrr+gSmRI+4lW5ZoOkj+inJUVJsyJPNjDcbbsG1xAUlVLmO5n
- XjAy5JsfgdlOl+7Lf9WNADEfOie4HHp7enwYG78npMBDQrgofOTx3d+L/skZoPZvbP7u
- cxHOZQxK0Q+2ox31CIw+H24XdwFEzP+4xDSaXnZjpG7Ki02WD6/K2I1m6t+M718kbjrH
- +E6aDMw/UaJNc0nmD44T0fpF47hXfZkUyNiQYNhW20j1bt5wvplX0IRx5gYUgx7czlTi
- XCFc7m99Ptg1cSih6v2p2Ald955/7wqD9V8+iVG4CdbwIKAECR/oSpSNImMO5vSYQn/y
- W/2A==
+ d=linaro.org; s=google; t=1754554105; x=1755158905; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NQtaBUaQYTU3Urv2X6hdNjnEG4YDAXSyqMVodoJoSWA=;
+ b=egaKucDj8EL14toSRK8+VornEys5RROYYG1PN7xG9Znc0M/ovwrfjyl5GmdvrCoJ9k
+ Wsdo1bNlB02v9vbrFPTUOvlOC8jNjYa4nRHx6HkD1KMkFuahH0rIIQqgAz10HatwBqEd
+ d3o5N1cmAeVjyVrsM5ImMz+ennLELMnWNUnWzH3rLsv7CgOmQVfU4u4ehLuahv2o4Bks
+ pZ3A9448BfRgosr21eA+iY5VaGo6OzWLoqm9tjo/lvOTwG8XhYEULGlrgfvpX6uS/zXu
+ KHAemOle0DKpwrnkLa/xLxlK4P/L/CxZY1ORaF3icwQZYaPhQ1/N6yRLxP3SX6WftjGD
+ ZYsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754554103; x=1755158903;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sdrXNz6gP5UZckQ8VhCckCyZmyIVd9u1PeDllxczDZo=;
- b=LihOwRpu/kbpYZUpKqVW+s3ey9j2rJyEWDQLH88YkSHb8kkIfqUa1bNQ5G4ZP9UABY
- Uato057yrNLaymx3aVIlD45mrD2iBNaqQn8OaXUSsHqIzW8euyig6q3MO5Fa/xv6x4Fb
- S5kKiUMgayFSdVfN5+S4B8qbEoaIQQ8PQJzUqMi75hp/Uv8pfb+T9kt4XJKQKTN23RAv
- An7U2aasvM4GIVRaaNvvxgU3bgzZIwluX/xtxl3MC4WxiNiQvK79fAHvHz8NMAqwsrxx
- +JMyMXFbC7Ve/73ZPqujbgkxBFiLSD97lgjmAeVA8n8yUyqihraTtb+TfX743bmm2a0V
- ajyQ==
+ d=1e100.net; s=20230601; t=1754554105; x=1755158905;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NQtaBUaQYTU3Urv2X6hdNjnEG4YDAXSyqMVodoJoSWA=;
+ b=UcqzMWNf8QqwJ3/5/XiWka3PPZAR4+UP6CZsD1DAWccSDwGZJpdm2+Z0HcjXo2dbmz
+ 77GSYWdyjAlKUvXr1XfHFLR68iu2dWDFKsk3n83GOj+YkvOxTpT9sgMdor1VgVOJK5SM
+ AcFXDEp1cgupe3bg8vHoHUKMUVAONsx0S7Qt0F/Y2oEqWQAM7miHMJwcqrgvH/j0s4wF
+ DhmmBA6AICTJCL79hxzFTvY9b3PYWUNW4bC89KY2QWJQdzTuroECk1LhXOaHKsusPvGR
+ 3PuRh1TtF9J7f5xnCG66vJQ1qcvgH5HYT4hVW07/puTyVKSTyPvaqQ4GGh9JQf93y1ur
+ mDmA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVw9QUoBG+OzYtRDGyTE4HKYHL9LVwj/KFeiTUVjkYunXnEJ3s+eoWkXCfT6KrBmxJGcPo3PUg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFBy0XU/9vSYw3Iu3kEJBN7DWqshJOWloKQmr3P3e5dWEBAmHV
- wFv0vymgEXPyI6aupBWSiM9iPW4Hpl6zLCHCTP7xi2RsRY7Lm6xrrzCLo2hoTjCEw4s=
-X-Gm-Gg: ASbGncuCNCYWW+MJZpJ2u6embTOmrW8eede9/r0tAJMWS/nL+KU0kvxuut12fg5b+VP
- bAPmGTBY7wY95Va1NE8O7AhVnaADWiuYFZRa+rooeBN6TawQgplTbMeoKIxeawDYO5qde/0TGyt
- 7BTf1LJZEJxBc2XabddPhFQIlFloE3xsUA/QFDl6ranUERKwxnDiwGgDseUwIASLiwXxos7/jZu
- aOyGNUtUsF0kVj/YVnHCVXewVpy15U2K6Fib5IPH1TNYJrXJIsBv2oKZiBYZ8WX/NT3Jkvm96ae
- i8Uv7erUH2DKw588hezF+YX715XC6sg60wBD0S3AL7qVam54IaqQi0+sGQMTSwOjabWb1D77Cy/
- 3GthmYi15SGAeTb/2q4Hbx+BNAHw5JFr1BpzbgBCdfZXcprEX56hHQjQ=
-X-Google-Smtp-Source: AGHT+IGj0iNCSfxP4vcvGrnAXPVN8rIGqDHyoAVNcX97HG4hS52t2jMGqwHldSqcs1K/zVA2HmHRkg==
-X-Received: by 2002:a05:600c:1e03:b0:43c:f0ae:da7 with SMTP id
- 5b1f17b1804b1-459e7a8ea40mr50486865e9.7.1754554103370; 
- Thu, 07 Aug 2025 01:08:23 -0700 (PDT)
+ AJvYcCWjVctvnSa9BXw2Xyhsf++HVyL4tfLE8GaAhQX3e1Og7B61wetFlUkrnxobiFdOzV5Hv6EogYA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzH0jyFsJjR8z9cJSUSWtaaV12+6zZUM/yC6Cwb4P75X7YAdUM3
+ uAVX1cKSRp/owqIKo1+OHjsrd93fDlRAi/Jj89XjfsNYFpsgFzuEzhguuO40KaplB5o=
+X-Gm-Gg: ASbGncuHYpPMJ09QP9kpX9YURf/bql95jtBDdzbmHhEAiCysDozWnlGuUgip2AdREE4
+ vXAK4QRiwsh5HOdA71nr5f/zamJvy+BbK2cCjf8MMThbOoZZXMbF9nxagHRFLc26fFfyoWWlX9+
+ x9s5U6XZfi7gzlIrghl5bincNs5XY+OU7szhiiY5XiGCyZn/Jvl+f6pzmsK6kcLhaPbpi+H4XoA
+ VXjKrCtn40dSZvpRwKrDukh/C67TEJjlsEUKmTg2ddVd1Iu7/IwfSoujAX20xa3wjg9kS9te9js
+ 3PfsgRgZunC0nEwHwNQWb6zVorLI/SlMtLXuq4G+G0XDPw41Ps2zLd10FXuSdVr70S2V+MaeRW+
+ nk9ehRaIPXEnhgMjiQ/H+kXyFReTVFGiu90OAMxiBY+d4T0aj5aF2ZZM=
+X-Google-Smtp-Source: AGHT+IFh8NISBZvoHIUCB2bwa3+R/NHZ6qPEGle89T7e5htezR75yiLMhsCmTwFA97FemiJJIUQ9jQ==
+X-Received: by 2002:a05:600c:1ca0:b0:459:d8c2:80b2 with SMTP id
+ 5b1f17b1804b1-459e7415e9cmr51666555e9.7.1754554105014; 
+ Thu, 07 Aug 2025 01:08:25 -0700 (PDT)
 Received: from hera.. (ppp089210243039.access.hol.gr. [89.210.243.39])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459eff7918csm13639665e9.25.2025.08.07.01.08.22
+ 5b1f17b1804b1-459eff7918csm13639665e9.25.2025.08.07.01.08.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 01:08:22 -0700 (PDT)
+ Thu, 07 Aug 2025 01:08:24 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jonathan Humphreys <j-humphreys@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/4] test/py: Correctly restore the DT after capsule tests
-Date: Thu,  7 Aug 2025 11:08:14 +0300
-Message-ID: <20250807080819.1058411-1-ilias.apalodimas@linaro.org>
+Subject: [PATCH 2/4] test/py: Read from the correct offset when initializing
+ capsules
+Date: Thu,  7 Aug 2025 11:08:15 +0300
+Message-ID: <20250807080819.1058411-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250807080819.1058411-1-ilias.apalodimas@linaro.org>
+References: <20250807080819.1058411-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,37 +102,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some capsule tests are changing the sandbox DT to test various features,
-e.g authenticated capsule updates, versioning support etc. However, no one
-restores the original DT and the CI pops errors looking like
-
-/u-boot
-Bloblist at 100 not found (err=-2)
-Failed to find FDT file '/tmp/sandbox/persistent-data/scratch/EFI/CapsuleTestData/test_ver.dtb'
-initcall_run_f(): initcall fdtdec_setup() failed
-
-if sandbox is restarted.
-
-So let's restore the proper DT after done with the capsule testing.
+The current code writes values to a flash offset defined by a function
+argument. However, when reading it back we always read from a static
+offset. Adjust the reads to use the correct offset.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- test/py/tests/test_efi_capsule/capsule_common.py | 2 ++
- 1 file changed, 2 insertions(+)
+ test/py/tests/test_efi_capsule/capsule_common.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/test/py/tests/test_efi_capsule/capsule_common.py b/test/py/tests/test_efi_capsule/capsule_common.py
-index 04dabc176c4d..8c66411929e8 100644
+index 8c66411929e8..8aaddfc19d6b 100644
 --- a/test/py/tests/test_efi_capsule/capsule_common.py
 +++ b/test/py/tests/test_efi_capsule/capsule_common.py
-@@ -137,6 +137,8 @@ def do_reboot_dtb_specified(u_boot_config, ubman, dtb_filename):
-         dtb_filename -- DTB file name.
-     """
-     mnt_point = u_boot_config.persistent_data_dir + '/scratch'
-+    old_dtb = ubman.config.dtb
-     ubman.config.dtb = mnt_point + CAPSULE_DATA_DIR \
-                                 + f'/{dtb_filename}'
-     ubman.restart_uboot()
-+    ubman.config.dtb = old_dtb
+@@ -42,7 +42,7 @@ def init_content(ubman, target, filename, expected):
+         'sf probe 0:0',
+         f'fatload host 0:1 4000000 {CAPSULE_DATA_DIR}/{filename}',
+         f'sf write 4000000 {target} 10',
+-        'sf read 5000000 100000 10',
++        f'sf read 5000000 {target} 10',
+         'md.b 5000000 10'])
+     assert expected in ''.join(output)
+ 
 -- 
 2.49.0
 
