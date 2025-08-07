@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD3DC87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 16:21:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DD32C87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 16:35:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 042C684612;
-	Thu,  7 Aug 2025 18:21:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E51FB84661;
+	Thu,  7 Aug 2025 18:35:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AsYesj3+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JxbJUXds";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 512AD8464E; Thu,  7 Aug 2025 18:21:22 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 23D3184659; Thu,  7 Aug 2025 18:35:24 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 193658460E
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:21:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCEAF83B4E
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:35:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-401c43671ecso656460b6e.0
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 09:21:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-459d7726ee6so6636735e9.2
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 09:35:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754583679; x=1755188479; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=o5JWnjBLfWlx9ZXVj7EQuRFVeXjafAXsvhoH+nLeoQM=;
- b=AsYesj3+ZCmB4BI0Cjm/d/DYPVlPtsf7dMTLjms6Arjb8aYUKYF/JFk49UCPb3lMbQ
- laUS8sOrU0yuJKyxwPqDAXQmQk3V3Ovj3X86YH3URHCHxnQgbgJdQvyru4nacMx0AUrT
- ys88U7eVAFbVkY52n2HaCEuBD/fOtBSn58DJg=
+ d=linaro.org; s=google; t=1754584521; x=1755189321; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GOw6CKYdYW8kG/M0225OwYnz6AEeByQLA8KY9A1+xbs=;
+ b=JxbJUXds4LFs/qnFRqIXcyOHyWGyIxRav75MLjPvDBi3XnQdKQTVSrig73BVzVlwZc
+ jMJVmlmRsMYg753hcIjkYEE9jUwUwCSMtTeWq+O9JrcQnnskn0KjFADmtYzFJvKmAf5t
+ q5V0wrzdt0TDhzycUCvAPeFbAra2QU0PmcRtXwSPUL+uJZMv7ARlf0chXWthSePrhusI
+ OxRBr1UPvLbNkMGTtIpo1Xyx4Pu9LtBZSyfcGyo9xqO2wnaweooYDZF+6xQtt7Zyzk03
+ +bEdp45zUReSlLoTnoPHBZ3HSoduIHoIMVk6nhDnafb4P7PfsOZlM7TKh7VybB2Jj1WG
+ Rpdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754583679; x=1755188479;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=o5JWnjBLfWlx9ZXVj7EQuRFVeXjafAXsvhoH+nLeoQM=;
- b=HQiXZ29sbrfuGAW9nmfeXy95mQvdD7oayIuBfhDFNnUzYA33o2ja3ivRNzE9Qovpyf
- b5xCIAHBFXPl/0Ffz42yzCgN9Ty3FN2YEDSatalJXSNuyLzO9+p0jTf8C2H9HS+dvoyu
- j3bcNt8AArCGAgaH3Bh9Z7GYuVSPHxDkqWFtAUebVKEoNksxmkGoiT4oHbFzrxVwEMAd
- ZWLoyLypJPMriRE4/3FA4sfEBfCcfCtQmNU4Qw/OxFVPFgkxmX/+87Tr/qzJvayWPagP
- WGjy12Ej5+pLrLC6n1HEl8y6+Sehcg6oIlfhIczJqrzfXn1RSo2X6Ro1Pothz3HdhKQ8
- QQcg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUu8Ry34cbgq1h6YqA8GPDnJe8hKiReUhjKU42wW6b4+/ttUJ/xHAQLuKy/h1tve6xU3AzdM+0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyVCWgS5yvEzn8mqbfji6TUAZR7Q5D/pf6TkEG6/aY8Kcm5QKD7
- dUQxuZjJaNvGW04uHH4wifLrRTKEgGkGPgIdjL2MchKIpOBuKij2uwYEYfFbFaMuaDX3JFE27T3
- F+aVS3ms=
-X-Gm-Gg: ASbGncsa2OPWtdHDoqTnq9zDjAVHqhio3otN2aAl6PRtu7v/+pQ2BqrCfspZqnuSI6k
- JWH6g0yalbK4/aeS84iAX70GXNb51ucBKAljwAFay6nmeZM6AgIZzdJNO5iuhVhYBqK71Q2WUoY
- clU2UBNS++2EBEe5GPMrK+2REiTAyxA/0SPb+TIzSj5/gzEtHguaOM8VnWRHW27M4PKP1X3r4yh
- NFOTvNiYYnwMWruU6NAf8W2rVfkNP1PRiIyk7b347Ers9Pw7UHokOHJZsn24RuwEJ25F+YbVimK
- SsSVBl4V95rJE0Yq/lGuqR9NHqgufjnEjuL3YvbqoHB/iDcmim8Y60ueas5uw826bg/cwMYPd24
- 9iNdAJHRyOhR+LPrPBJy9ZqVpu1zUs0lafZzi1z00dvthxHwbE6MtAPuA
-X-Google-Smtp-Source: AGHT+IETWzFMR7efVMNUoEU7JIppHsd0pjgCaDG8QdfMNeLXOTgIWwmxxFFMpRGob6jI8llZJlmdoA==
-X-Received: by 2002:a05:6808:2386:b0:433:ff4c:2644 with SMTP id
- 5614622812f47-43587cd86f4mr2299269b6e.5.1754583678624; 
- Thu, 07 Aug 2025 09:21:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-434e9a5bf00sm1543453b6e.10.2025.08.07.09.21.17
+ d=1e100.net; s=20230601; t=1754584521; x=1755189321;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GOw6CKYdYW8kG/M0225OwYnz6AEeByQLA8KY9A1+xbs=;
+ b=reH1JRFqBpxxS4PGiGPFRQqmSlP7aOF9cpkysNOc5jYx2RSgIbqtOic5UFP5z0VH4m
+ bD+xTUKD3SDvLsIQGZ5C+goXVu9MSRSjgx+Y1CbDsYVGSSbyIH8/sJcBqtD8WgnHJ+DQ
+ JQ/4AC+mRAEK6MTGFMAggSKbAXQkoYnAbpqyIyxTbBQaM7Mt7yXjl3+F3rAI2dSKU3IR
+ 4U0lWO5raNVSPKMRiD8EJPzkVU70KzodifTqasUK0KxpE8pbLih5o58mgcrgRkLs/zAN
+ g371n4WVAbdmMmZMfNfIQ0yLXbe0uvlyF2LLWsAZeH3gK+YvVZcpRWNGUH0RyimgjDU5
+ Re9w==
+X-Gm-Message-State: AOJu0YyUQJgwWo52ZGvCi1TixOiwS273BoNstme9+ZDvCiUYilaqqe5F
+ 2CqyFO6MzxkEdL24zJu/50y96/JWMmaAVNeqdsqjPyb2cn1n0aWpMCj3m+852hMfGzo=
+X-Gm-Gg: ASbGncsgdNTn/KsjyfwRA4uIO0l4etXrThrJlttGATdMYZzKkJ/UFmGOFsvgTE1ltZM
+ h4KZOC2HJsaz3HnH+5KFhhZO6Qfaa3yXuzg4Ii+7xj0TBaVQvJre5HNQIkNM4kV2DrkViZ/pYM1
+ iUU6OF4E3rZPOpdh7jDt+XPPvCCv0XT+3RhwcK9Blcy/3CHZcAVX2fv4Sq/xYlmaMeCd6bjm7VC
+ sX+EbrbEO/lWXAfpsg+zDouukpFKHnJmZbcC+7KnHn6js3WuMAcZDaMBpFzncDoa0K+FvXojPbI
+ 777bw2jgRv1J1fm8WnEKikp7W4ycHjMLP9Qia40HNoLsJMIqbIoB2T+u5cokxWt1+npqPn70OTj
+ Gx1Wa4m+TQ8nvWQLBSAOG/iloY1JXMeRLHAeijyudr8WoSXV2KNT9rtqUbVY1XA==
+X-Google-Smtp-Source: AGHT+IGMnKMmlbuYKdJ9Czx//REi3FrzeC1UYNenDdi5/tQDbWzDvskokhyvx5RDnQADmq2Eb0mwFw==
+X-Received: by 2002:a05:6000:250a:b0:3b7:9af4:9c75 with SMTP id
+ ffacd0b85a97d-3b8f41d483emr5495314f8f.30.1754584521290; 
+ Thu, 07 Aug 2025 09:35:21 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e5b84674sm108141375e9.30.2025.08.07.09.35.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 09:21:17 -0700 (PDT)
-Date: Thu, 7 Aug 2025 10:21:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Walle <michael@walle.cc>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
-Message-ID: <20250807162115.GZ124814@bill-the-cat>
-References: <20250807102436.452691-1-pro@denx.de>
- <20250807102436.452691-2-pro@denx.de>
- <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
+ Thu, 07 Aug 2025 09:35:20 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/6] power: regulator: Fix some Smatch reported issues
+Date: Thu, 07 Aug 2025 17:35:17 +0100
+Message-Id: <20250807-pwr_regulator-v1-0-42a4105336ec@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kRfI7Lpse0NpErJg"
-Content-Disposition: inline
-In-Reply-To: <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAMXVlGgC/x2N4QqCQBAGX0X2dweXFUmvEhF753e6UKfsWgriu
+ 3f2cxiGWcmgAqNbtZLiKyZDLnA8VBR7zh2ctIWp9vXFN/7qxlmfiu7z4mlQl7gJyePM8dRSaQI
+ bXFDOsd+rN9sE3cWoSLL8R/fHtv0A7p2sUngAAAA=
+To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Paul Barker <paul@pbarker.dev>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,53 +101,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Smatch reported some issues in the regulator drivers, mostly repeated
+instances of testing an unsigned variable for being negative but also an
+expression needing parenthesis to be interpreted as expected.
 
---kRfI7Lpse0NpErJg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Andrew Goodbody (6):
+      power: regulator: lp873x: Cannot test unsigned for being negative
+      power: regulator: lp87565: Cannot test unsigned for being negative
+      power: regulator: palmas: Cannot test unsigned for being negative
+      power: regulator: rzg2l-usbphy: Add parenthesis to return expression
+      power: regulator: tps65910: Cannot test unsigned for being negative
+      power: regulator: tps65941: Cannot test unsigned for being negative
 
-On Thu, Aug 07, 2025 at 03:41:38PM +0200, Marek Vasut wrote:
-> On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
-> > CONFIG_HAS_BOARD_SIZE_LIMIT is obsolete, if we interpret the value
-> > "zero" as "unlimited".
->=20
-> This sentence makes no sense. Is the variable not obsolete if its value is
-> non-zero ?
+ drivers/power/regulator/lp873x_regulator.c       | 8 ++++----
+ drivers/power/regulator/lp87565_regulator.c      | 4 ++--
+ drivers/power/regulator/palmas_regulator.c       | 8 ++++----
+ drivers/power/regulator/rzg2l-usbphy-regulator.c | 2 +-
+ drivers/power/regulator/tps65941_regulator.c     | 8 ++++----
+ include/power/tps65910_pmic.h                    | 2 +-
+ 6 files changed, 16 insertions(+), 16 deletions(-)
+---
+base-commit: 3526f990b77fca1c933f1d8b24eb9385010a05bf
+change-id: 20250807-pwr_regulator-fa8bf0e4ac3d
 
-This is phrased oddly, yes. How about:
-By making the code treat a size limit of 0 as unlimited we no longer
-need to guard asking about having a size limit on the platform.
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
-> [...]
->=20
-> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > index c2aa88f59fb..36eed766d31 100644
-> > --- a/lib/efi_loader/Kconfig
-> > +++ b/lib/efi_loader/Kconfig
-> > @@ -74,7 +74,7 @@ config EFI_SIGNATURE_SUPPORT
-> >   config EFI_DEBUG_SUPPORT
-> >   	bool "EFI Debug Support"
-> > -	default y if !HAS_BOARD_SIZE_LIMIT
-> > +	default y if BOARD_SIZE_LIMIT =3D 0
-> This looks wrong, no board size limit does not imply EFI anything.
-
-This is however preserving the existing functionality. Saying that no,
-we shouldn't enable EFI debug support by default in any cases would be a
-stand alone patch.
-
---=20
-Tom
-
---kRfI7Lpse0NpErJg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJTSdwAKCRAr4qD1Cr/k
-CoEEAP9QSQ2gICzBXI2KUMWQBhr3fJPPzWUUSC4+TgbMVmKsjwEAvapY19mhAkPn
-we08hKA3Ul0FKBRh57/wCBqjs3datw4=
-=ubKz
------END PGP SIGNATURE-----
-
---kRfI7Lpse0NpErJg--
