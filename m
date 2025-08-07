@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D1BC87FD2
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 04:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06605C87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 04:58:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB47A83AFD;
-	Thu,  7 Aug 2025 06:55:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 61D8583AFD;
+	Thu,  7 Aug 2025 06:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lX6aGSa3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zI97SEmk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7613C83B99; Thu,  7 Aug 2025 06:55:57 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 3335683BB1; Thu,  7 Aug 2025 06:58:16 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEE0383AEA
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 06:55:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02EAE83AEA
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 06:58:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5774trWv236030;
- Wed, 6 Aug 2025 23:55:53 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5774wBGk671925;
+ Wed, 6 Aug 2025 23:58:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1754542553;
- bh=5wA4tjIximSIkio+ZlT6m6vIsejixjUpBOK7P2/fr5w=;
+ s=ti-com-17Q1; t=1754542691;
+ bh=nCB4W0ZnlXy2hdTgJlQXaHYcH6jkb9jci1Ba57FFUOM=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=lX6aGSa3BWx0uS/Tn0MbVbmb4RSL1loNB7EJ3ezAUsD8XcbQyaMtp57/C58gvNP+F
- dTwL2O98uU1ZjnPSJ8UoYZp/k/xjOrgJqXIprycFkg4YAb7B8mDDrdn9Lg3a4GWxGa
- QWu3+j9SVkViC0dkF6kMGKQgCCkEc2/t+Z0hjkcU=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5774trWN3618274
+ b=zI97SEmkxBJjVqyvIhyF0Jp+Fu1g62EG2JaUOQI+6dG5UeS0KBAq468GS1cSRvWkZ
+ z/VsN7shpUSYmZ3Y1yZn3yH5CasfBof5MjhZqyU+7WkYbGZSIUaWgOe1kzOIp8vZt6
+ eD21D8JNo9YCYimZ5vF30jzSs8NOR4FXwU2zybvQ=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5774wBGp547630
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 6 Aug 2025 23:55:53 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 6 Aug 2025 23:58:11 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 6
- Aug 2025 23:55:52 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2025 23:58:11 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 6 Aug 2025 23:55:52 -0500
+ Frontend Transport; Wed, 6 Aug 2025 23:58:11 -0500
 Received: from [172.24.20.139] (lt5cd2489kgj.dhcp.ti.com [172.24.20.139])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5774tnQO461400;
- Wed, 6 Aug 2025 23:55:50 -0500
-Message-ID: <943a1f05-b6f3-49f1-bce9-6fee75f25aa1@ti.com>
-Date: Thu, 7 Aug 2025 10:25:49 +0530
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5774w8OH761926;
+ Wed, 6 Aug 2025 23:58:09 -0500
+Message-ID: <3c42e330-ae1c-44dc-a933-46260db5421d@ti.com>
+Date: Thu, 7 Aug 2025 10:28:08 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/9] ram: k3-ddrss: Add support for MSMC calculation of
- DDR inline ECC regions
+Subject: Re: [PATCH v2 8/9] ram: k3-ddrss: Add support for partial inline ECC
+ in multi-DDR systems
 To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>, <bb@ti.com>, 
  <w.egorov@phytec.de>, <s-k6@ti.com>, <marek.vasut+renesas@mailbox.org>
 CC: <u-boot@lists.denx.de>
 References: <20250730133720.3315478-1-n-francis@ti.com>
- <20250730133720.3315478-8-n-francis@ti.com>
+ <20250730133720.3315478-9-n-francis@ti.com>
 Content-Language: en-US
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20250730133720.3315478-8-n-francis@ti.com>
+In-Reply-To: <20250730133720.3315478-9-n-francis@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -84,183 +84,110 @@ X-Virus-Status: Clean
 
 
 On 7/30/2025 7:07 PM, Neha Malcom Francis wrote:
-> Add support for calculation of the protected regions for each DDR in
-> multi-DDR systems. Since MSMC is the parent node of the individual DDRs
-> as well as responsible for their interleaving, it only makes sense for
-> MSMC to contain the logic for dividing the regions.
+> The existing approach does not account for interleaving in the DDRs when
+> setting up regions. There is support for MSMC to calculate the regions
+> for each DDR, so modify k3_ddrss_probe to set the regions accordingly
+> for multi-DDR systems.
 >
 > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->   drivers/ram/k3-ddrss/k3-ddrss.c | 120 ++++++++++++++++++++++++++++++--
->   1 file changed, 113 insertions(+), 7 deletions(-)
+>   drivers/ram/k3-ddrss/k3-ddrss.c | 58 ++++++++++++++++++++++++++++-----
+>   1 file changed, 50 insertions(+), 8 deletions(-)
 >
 > diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-> index 2d2558eaa9e..1c2e5e1835b 100644
+> index 1c2e5e1835b..e00711a2235 100644
 > --- a/drivers/ram/k3-ddrss/k3-ddrss.c
 > +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-> @@ -59,6 +59,7 @@
+> @@ -828,11 +828,12 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
 >   
->   #define SINGLE_DDR_SUBSYSTEM	0x1
->   #define MULTI_DDR_SUBSYSTEM	0x2
-> +#define MAX_MULTI_DDR 4
->   
->   #define MULTI_DDR_CFG0  0x00114100
->   #define MULTI_DDR_CFG1  0x00114104
-> @@ -82,6 +83,24 @@ enum intrlv_gran {
->   	GRAN_16GB
->   };
->   
-> +u64 gran_bytes[] = {
-> +	0x80,
-> +	0x200,
-> +	0x800,
-> +	0x1000,
-> +	0x4000,
-> +	0x8000,
-> +	0x80000,
-> +	0x40000000,
-> +	0x60000000,
-> +	0x80000000,
-> +	0xC0000000,
-> +	0x100000000,
-> +	0x180000000,
-> +	0x200000000,
-> +	0x400000000
-> +};
-> +
->   enum intrlv_size {
->   	SIZE_0,
->   	SIZE_128MB,
-> @@ -121,6 +140,13 @@ enum emif_active {
->   	EMIF_ALL
->   };
->   
-> +#define K3_DDRSS_MAX_ECC_REG		3
-
-Please see, adding in patch 2/8 and add/remove in this patch can be avoided
-
-
-> +
-> +struct k3_ddrss_ecc_region {
-> +	u64 start;
-> +	u64 range;
-> +};
-> +
->   struct k3_msmc {
->   	enum intrlv_gran gran;
->   	enum intrlv_size size;
-> @@ -128,13 +154,7 @@ struct k3_msmc {
->   	enum emif_config config;
->   	enum emif_active active;
->   	u32 num_ddr;
-> -};
-> -
-> -#define K3_DDRSS_MAX_ECC_REG		3
-> -
-> -struct k3_ddrss_ecc_region {
-> -	u64 start;
-> -	u64 range;
-> +	struct k3_ddrss_ecc_region R0[MAX_MULTI_DDR];
->   };
->   
->   struct k3_ddrss_desc {
-> @@ -936,6 +956,80 @@ U_BOOT_DRIVER(k3_ddrss) = {
->   	.priv_auto		= sizeof(struct k3_ddrss_desc),
->   };
->   
-> +__maybe_unused static int k3_msmc_calculate_r0_regions(struct k3_msmc *msmc)
-> +{
-> +	u32 n1;
-> +	u32 size, ret = 0;
-> +	u32 gran = gran_bytes[msmc->gran];
-> +	u32 num_ddr = msmc->num_ddr;
-> +	struct k3_ddrss_ecc_region *range = NULL;
-> +	struct k3_ddrss_ecc_region R[num_ddr];
-> +
-> +	range = kzalloc(sizeof(range), GFP_KERNEL);
-> +	if (!range) {
-> +		ret = -ENOMEM;
-> +		return ret;
-> +	}
-> +
-> +	k3_ddrss_ddr_inline_ecc_base_size_calc(range);
-> +
-> +	if (!range->range) {
-> +		ret = -EINVAL;
-> +		goto range_err;
-> +	}
-> +
-> +	memset(R, 0, num_ddr);
-> +
-> +	/* Find the first controller in the range */
-> +	n1 = ((range->start / gran) % num_ddr);
-> +	size = range->range;
-> +
-> +	if (size < gran) {
-> +		R[n1].start = range->start - 0x80000000;
-> +		R[n1].range = range->start + range->range - 0x80000000;
-> +	} else {
-> +		u32 chunk_start_addr = range->start;
-> +		u32 chunk_size = range->range;
-> +
-> +		while (chunk_size > 0) {
-> +			u32 edge;
-> +			u32 end = range->start + range->range;
-> +
-> +			if ((chunk_start_addr % gran) == 0)
-> +				edge = chunk_start_addr + gran;
-> +			else
-> +				edge = ((chunk_start_addr + (gran - 1)) & (-gran));
-> +
-> +			if (edge > end)
-> +				break;
-> +
-> +			if (R[n1].start == 0)
-> +				R[n1].start = chunk_start_addr;
-> +
-> +			R[n1].range = edge - R[n1].start;
-> +			chunk_size = end - edge;
-> +			chunk_start_addr = edge;
-> +
-> +			if (n1 == (num_ddr - 1))
-> +				n1 = 0;
-> +			else
-> +				n1++;
-> +		}
-> +
-> +		for (int i = 0; i < num_ddr; i++)
-> +			R[i].start = (R[i].start - 0x80000000 - (gran * i)) / num_ddr;
-> +	}
-> +
-> +	for (int i = 0; i < num_ddr; i++) {
-> +		msmc->R0[i].start = R[i].start;
-> +		msmc->R0[i].range = R[i].range;
-> +	}
-> +
-> +range_err:
-> +	free(range);
-> +	return ret;
-> +}
-> +
->   static int k3_msmc_set_config(struct k3_msmc *msmc)
+>   static int k3_ddrss_probe(struct udevice *dev)
 >   {
->   	u32 ddr_cfg0 = 0;
-> @@ -1015,6 +1109,18 @@ static int k3_msmc_probe(struct udevice *dev)
->   	}
->   	msmc->num_ddr = ret;
+> -	u64 end;
+> +	u64 end, bank0, bank1;
+>   	int ret;
+>   	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
+> -	__maybe_unused u32 ddr_ram_size, ecc_res;
+> +	__maybe_unused u32 inst, ddr_ram_size, ecc_res, st;
+
+size of ddr may go above 4G
+
+
+>   	__maybe_unused struct k3_ddrss_ecc_region *range = &ddrss->ecc_range;
+> +	__maybe_unused struct k3_msmc *msmc_parent = NULL;
 >   
-> +	if (IS_ENABLED(CONFIG_K3_MULTI_DDR) && IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
-> +		ret = k3_msmc_calculate_r0_regions(msmc);
-> +		if (ret) {
-> +			/* Default to enabling inline ECC for entire DDR region */
-> +			debug("%s: calculation of inline ECC regions failed, defaulting to entire region\n",
-> +			      __func__);
+>   	debug("%s(dev=%p)\n", __func__, dev);
+>   
+> @@ -873,26 +874,67 @@ static int k3_ddrss_probe(struct udevice *dev)
+>   		k3_ddrss_ddr_inline_ecc_base_size_calc(range);
+>   
+>   		end = ddrss->ecc_range.start + ddrss->ecc_range.range;
+> +		inst = ddrss->instance;
+>   		ddr_ram_size = ddrss->ddr_ram_size;
+>   		ecc_res = ddrss->ecc_reserved_space;
+> +		bank0 = ddrss->ddr_bank_base[0];
+> +		bank1 = ddrss->ddr_bank_base[1];
+>   
+>   		if (!range->range) {
+>   			/* Configure entire DDR space by default */
+>   			debug("%s: Defaulting to protecting entire DDR space using inline ECC\n",
+>   			      __func__);
+> -			ddrss->ecc_range.start = ddrss->ddr_bank_base[0];
+> +			ddrss->ecc_range.start = bank0;
+>   			ddrss->ecc_range.range = ddr_ram_size - ecc_res;
+>   		} else {
+>   			ddrss->ecc_range.start = range->start;
+>   			ddrss->ecc_range.range = range->range;
+>   		}
+>   
+> -		if (end > (ddr_ram_size - ecc_res))
+> -			ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
+> -		else
+> -			ddrss->ecc_regions[0].range = ddrss->ecc_range.range;
+> +		st = ddrss->ecc_range.start;
 > +
-> +			/* Use first R0 entry as a flag to denote MSMC calculation failure */
-> +			msmc->R0[0].start = -1;
+> +		if (!CONFIG_IS_ENABLED(K3_MULTI_DDR)) {
+> +			if (end > (ddr_ram_size - ecc_res))
+> +				ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
+> +			else
+> +				ddrss->ecc_regions[0].range = ddrss->ecc_range.range;
+>   
+> -		ddrss->ecc_regions[0].start = ddrss->ecc_range.start - ddrss->ddr_bank_base[0];
+> +			/* Check in which bank we are */
+> +			if (st > bank1)
+> +				ddrss->ecc_regions[0].start = st - bank1 + ddrss->ddr_bank_size[0];
+> +			else
+> +				ddrss->ecc_regions[0].start = st - bank0;
+> +		} else {
+> +			/* For multi-DDR, we rely on MSMC's calculation of regions for each DDR */
+> +			msmc_parent = kzalloc(sizeof(msmc_parent), GFP_KERNEL);
+> +			if (!msmc_parent)
+> +				return -ENOMEM;
+> +
+> +			msmc_parent = dev_get_priv(dev->parent);
+> +			if (!msmc_parent) {
+> +				printf("%s: could not get MSMC parent to set up inline ECC regions\n",
+> +				       __func__);
+> +				kfree(msmc_parent);
+> +				return -EINVAL;
+> +			}
+> +
+> +			if (msmc_parent->R0[0].start < 0) {
+> +				/* Configure entire DDR space by default */
+> +				ddrss->ecc_regions[0].start = ddrss->ddr_bank_base[0];
+> +				ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
+> +			} else {
+> +				end = msmc_parent->R0[inst].start + msmc_parent->R0[inst].range;
+> +
+> +				if (end > (ddr_ram_size - ecc_res))
+> +					ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
+> +				else
+> +					ddrss->ecc_regions[0].range = msmc_parent->R0[inst].range;
+> +
+> +				ddrss->ecc_regions[0].start =  msmc_parent->R0[inst].start;
+> +			}
+> +
+> +			kfree(msmc_parent);
 > +		}
-> +	}
-> +
->   	return 0;
->   }
 >   
+>   		k3_ddrss_lpddr4_ecc_init(ddrss);
+>   	}
