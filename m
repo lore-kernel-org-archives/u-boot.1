@@ -4,58 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C72C87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 16:47:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37EAC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 16:49:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFB2584660;
-	Thu,  7 Aug 2025 18:47:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=posteo.net
+	by phobos.denx.de (Postfix) with ESMTP id 356A884659;
+	Thu,  7 Aug 2025 18:49:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (3072-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="d0Q0d2kp";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="FN1iuE8T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F16CD84661; Thu,  7 Aug 2025 18:47:15 +0200 (CEST)
-Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
+ id 5947284660; Thu,  7 Aug 2025 18:49:41 +0200 (CEST)
+Received: from imap5.colo.codethink.co.uk (imap5.colo.codethink.co.uk
+ [78.40.148.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 617F8845EC
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:47:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E8F0845EC
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:49:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=posteo.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan_b@posteo.net
-Received: from submission (posteo.de [185.67.36.169]) 
- by mout01.posteo.de (Postfix) with ESMTPS id 21A5D240027
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:47:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=posteo.net;
- s=1984.ea087b; t=1754585233;
- bh=V9gFpJGA0KBM8MiH+eNruAL4zNP5eteEv2Aclqv0UbI=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:Content-Type:
- Content-Transfer-Encoding:From;
- b=d0Q0d2kpYjsHj2Cs8zY1udyayKJDfiIoGIOAv0a69t4LXeFvEfNuceAe2HqcQ06tA
- tN+nGsIGnUpRHjlKfJwrzr38k2w2wOm66149CfVdsy8ruLtZle07N6Hjiz6W5cnT6t
- qioJI4+XN8LYmyrwcmP7VydjogBdjIdFuzGVpJ0DmK4hYiuWAHkh3VAszLoB3pX1hI
- GvS7B+awefvn+iWbtBcQzhOB1vId5SPWpDrW6IbpLdv33wY6zNieC/GQjj/uw5CPZi
- guUF9L0oLWJG2+IVE9hMZx71GBRidQbY66QM5UI3eH8/zQ0KCJBmV+ZPqshvBfZ4Sb
- Xg06ffoczXSPWH6c3x7zHYHAmo8mrZszylBr6a0xGPir3JKwQrPPUdg+0uaWNI8N55
- Vwfc7GzrBdVj70BgorB8Pwyt44Nf5jzzU3Ax3EbSACWvfPwo0+NB+cogVHytpXzgRj
- artrXgxkV8IRpjgKdK8Kabe8KFN2rXhmFvUrDcKJTq4CeaSldN8
-Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4byY3h3Nfjz9rxV;
- Thu,  7 Aug 2025 18:47:12 +0200 (CEST)
-Message-ID: <3f5e1587-0f18-afa1-67ed-b260feffdf2d@posteo.net>
-Date: Thu, 07 Aug 2025 16:47:12 +0000
+ spf=pass smtp.mailfrom=srv_ts003@codethink.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=EGN/S7QoL4fVrTZs360CD8nr/Wzh5x8tZrAFAe6BRbs=; b=FN1iuE8TLdiKGairfFgc3loooS
+ fvJOT5LuHscrcfahhHcLVTvKNtnwQ6vRBtGPZLNSDj4MTfMRQEFVM+rFgOzQQe+1AdmO1BgSlZpNj
+ no/nzj79idPZ+nsRFf8A+HzsOK8ZNZsM0SQwrgy293g/JiMmQlTx//8SQYjQGCihOfJbph9hvBc5F
+ VINsvkbaX/VyCaxAn/doc9GluvvKgbFy8m3V/uJplICgulNZ5Hxe1Vkr/jMxj7k+qTHTXCJogfki3
+ 5i7BEGxHSiRsAi7KWRFO1O7pVRCahNQKJd8mcvDaSfxJnbkAVSeAQyEETvJSQkATnmVgs9qyH7ZUL
+ idMgCzBQ==;
+Received: from [167.98.27.226] (helo=rainbowdash)
+ by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uk3o6-00HCkx-Te; Thu, 07 Aug 2025 17:49:34 +0100
+Received: from ben by rainbowdash with local (Exim 4.98.2)
+ (envelope-from <ben@rainbowdash>) id 1uk3o6-00000000AYU-2vnl;
+ Thu, 07 Aug 2025 17:49:34 +0100
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+To: rick@andestech.com,
+	ycliang@andestech.com,
+	u-boot@lists.denx.de
+Cc: Sam Grove <sgrove@mips.com>, Chao-ying Fu <cfu@mips.com>,
+ Mukunda Aprameya <maprameya@mips.com>, Umesh Kalappa <ukalappa@mips.com>,
+ Djordje Todorovic <djordje.todorovic@htecgroup.com>,
+ Mallikarjuna Gouda <mgouda@mips.com>,
+ Vaibhav Chauthmal <vchauthmal@mips.com>,
+ Swapnil Agrawal <sagrawal@mips.com>, felix.chong@codethink.co.uk,
+ Ben Dooks <ben.dooks@codethink.co.uk>
+Subject: [PATCH] arch/riscv/lib: update memmove and memcpy for big-endian
+Date: Thu,  7 Aug 2025 17:49:33 +0100
+Message-Id: <20250807164933.40564-1-ben.dooks@codethink.co.uk>
+X-Mailer: git-send-email 2.37.2.352.g3c44437643
 MIME-Version: 1.0
-Subject: Re: [PATCH] pinctrl: nexell: Cannot test unsigned to be negative
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250807-pinctrl_nexell-v1-1-6f49a0656510@linaro.org>
-Content-Language: en-US, de-DE
-From: Stefan Bosch <stefan_b@posteo.net>
-In-Reply-To: <20250807-pinctrl_nexell-v1-1-6f49a0656510@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,45 +77,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Change the shift patterns for the unaligned memory move and copy code
+to deal with big-endian by definign macros to change the shfit left and
+right to go the opposite way.
 
-thanks a lot for fixing this Bug :-)
+Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+---
+ arch/riscv/lib/memcpy.S  | 12 ++++++++++--
+ arch/riscv/lib/memmove.S | 12 ++++++++++--
+ 2 files changed, 20 insertions(+), 4 deletions(-)
 
-Regards
-Stefan
+diff --git a/arch/riscv/lib/memcpy.S b/arch/riscv/lib/memcpy.S
+index 9884077c933..e5479bbe84e 100644
+--- a/arch/riscv/lib/memcpy.S
++++ b/arch/riscv/lib/memcpy.S
+@@ -125,6 +125,14 @@ WEAK(memcpy)
+ .copy_end:
+ 	ret
+ 
++#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
++#define M_SLL sll
++#define M_SRL srl
++#else
++#define M_SLL srl
++#define M_SRL sll
++#endif
++
+ .Lmisaligned_word_copy:
+ 	/*
+ 	 * Misaligned word-wise copy.
+@@ -144,10 +152,10 @@ WEAK(memcpy)
+ 	addi	t0, t0, -(SZREG-1)
+ 	/* At least one iteration will be executed here, no check */
+ 1:
+-	srl	a4, a5, t3
++	M_SRL	a4, a5, t3
+ 	REG_L	a5, SZREG(a1)
+ 	addi	a1, a1, SZREG
+-	sll	a2, a5, t4
++	M_SLL	a2, a5, t4
+ 	or	a2, a2, a4
+ 	REG_S	a2, 0(a0)
+ 	addi	a0, a0, SZREG
+diff --git a/arch/riscv/lib/memmove.S b/arch/riscv/lib/memmove.S
+index fbe6701dbe4..b2c1c736713 100644
+--- a/arch/riscv/lib/memmove.S
++++ b/arch/riscv/lib/memmove.S
+@@ -91,6 +91,14 @@ WEAK(memmove)
+ 	mv	a0, t0
+ 	ret
+ 
++#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
++#define M_SLL sll
++#define M_SRL srl
++#else
++#define M_SLL srl
++#define M_SRL sll
++#endif
++
+ .Lmisaligned_word_copy:
+ 	/*
+ 	 * Misaligned word-wise copy.
+@@ -110,10 +118,10 @@ WEAK(memmove)
+ 	addi	t0, t0, SZREG-1
+ 	/* At least one iteration will be executed here, no check */
+ 1:
+-	sll	a4, a5, t4
++	M_SLL	a4, a5, t4
+ 	addi	a1, a1, -SZREG
+ 	REG_L	a5, 0(a1)
+-	srl	a2, a5, t3
++	M_SRL	a2, a5, t3
+ 	or	a2, a2, a4
+ 	addi	a0, a0, -SZREG
+ 	REG_S	a2, 0(a0)
+-- 
+2.37.2.352.g3c44437643
 
-On 07.08.25 11:16, Andrew Goodbody wrote:
-> In s5pxx18_pinctrl_set_state testing count to be negative will always
-> fail as count is unsigned despite receiving the return value of a
-> function that returns an int. Change count and idx to be of type int to
-> allow the test to work as expected and remove the need for any implicit
-> casts. Also change pin to be u32 which is what all called functions
-> expect.
-> 
-> This issue was found by Smatch.
-> 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   drivers/pinctrl/nexell/pinctrl-s5pxx18.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/pinctrl/nexell/pinctrl-s5pxx18.c b/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
-> index e7d0994f29e..a6ae5764fbc 100644
-> --- a/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
-> +++ b/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
-> @@ -130,7 +130,8 @@ static int is_pin_alive(const char *name)
->   static int s5pxx18_pinctrl_set_state(struct udevice *dev,
->   				     struct udevice *config)
->   {
-> -	unsigned int count, idx, pin;
-> +	u32 pin;
-> +	int count, idx;
->   	unsigned int pinfunc, pinpud, pindrv;
->   	unsigned long reg;
->   	const char *name;
-> 
-> ---
-> base-commit: 3526f990b77fca1c933f1d8b24eb9385010a05bf
-> change-id: 20250807-pinctrl_nexell-bc6669ff52e9
-> 
-> Best regards,
