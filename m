@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73406C87FD2
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 05:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0C0CC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 05:33:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 468DE84401;
-	Thu,  7 Aug 2025 07:32:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 75134843F6;
+	Thu,  7 Aug 2025 07:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TwEOx9iS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P8xGpcwL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94910843F2; Thu,  7 Aug 2025 07:32:52 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 9FF2D843FF; Thu,  7 Aug 2025 07:32:58 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67D3F83BD2
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 07:32:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7996B843BC
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 07:32:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-31ef50d8d57so488869a91.0
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 22:32:50 -0700 (PDT)
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-b427094abdeso514060a12.3
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 22:32:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754544769; x=1755149569; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754544773; x=1755149573; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AmdZWhBvisZ710e7zyHQ48HiVJfUbw1Ibbvradh1ZMk=;
- b=TwEOx9iSUUGaYdQ8YH09303izvTFHHiDUOeGFoTSn4RAU9zOoU3L0oqa7VcWp2OFwf
- OdlisgH7KlaAAu6iIJeyBYb3Q7PNVA+0SpSt+jw3gq60nKcSsAUHalKp4J3gSga9WbBy
- rEOqTzegoJ+IlZ2rOzcFpKYWCT/yoI8WziTkFIOJ7ut9sK51N7zT6aRhyWERBoLMnQzm
- KBPVaNrj0Hw+xZQcXuH58ycH6hNTTGfdpyiV2vvmq5E4JBzX/qrw4dzp7qVbSwHFEV32
- B9ZhGAB156TsG71FY4E1gdf9ZXPX+oqBb7Zqi5iIj40UhjlE7JG5Hc4k0wgJHYfHe4n5
- ERFw==
+ bh=wmF6iGZhnjs8vss7cDQ3NhBf80J54pA7zzh91i/TK/Q=;
+ b=P8xGpcwLB0kQyzn3HivuA5CoyrEElMAbnlLU7W6ERomY7So2ht3DQqU04RVmRCFmU3
+ w8qYPP7p25OWr+AAJItWoYa/BKnoKWm5xi61qjYjuqSIV4Lxb0gR/yC2GWVy3CnJV2AT
+ k9BIEvaODmPPNoqgQVBlAitpwjKGyMG6xZMT0MaNcaNPkr7xh3zmxkcesK6dcDgSqFeE
+ k3xpK1cRMXGKXqUajYIBdew6rXsa7xXImSlj1XkOpssPTOp6epQkgU9Gbt96UtLnv1+c
+ umQ37c7GH4PLz+ITD2teJGOxYsfjVHSQUaIrVIcoyNSF0JpXDN4eAAQsN5EDUhcVJjgE
+ ixDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754544769; x=1755149569;
+ d=1e100.net; s=20230601; t=1754544773; x=1755149573;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AmdZWhBvisZ710e7zyHQ48HiVJfUbw1Ibbvradh1ZMk=;
- b=gxW8PqDUbbC1fdy+eyxIx1/a3YOWCiFrEfhtMEMl+YccFtcZagHakVUn+ehX/cO28j
- L2DL0l5Y+Op/mYQfkaGwqGUKkuMbcCuJN8u43k0GW+zSY4iZNAO6Qrzs2yfBE9MRatfG
- 061Wv7hWBVJ20DN2ynyunnI/UIcPida92yLLunEo4Ahj091cj6b+Nv1Zgb8hXRSR4ZCQ
- u+6Zoqr0ZHJC5nHH1NW72rPwAdxf+oDKghszkD4b8Xcdue2HEEY2bdIpdF7wJRhAkqGX
- fnynEGot94NL8nYZXx81zEJNOOJxfANYKhK6HRjq4cJ7oAOlDzYLfR5VSxCwywPdZskc
- LxOg==
-X-Gm-Message-State: AOJu0YzXCIbbqM0Tzht2xLLGGXdnC2NceaND5PEhJJUA4T/SEN9JC+1n
- gec+hfR23YxCTbwu4JxOSfKwPs2eiefOXQCanzXN8nV/4OZZKXuEXQz1
-X-Gm-Gg: ASbGncv/B89Y+mC1xXSKWCEWESK7pJnTH8qEby+rkhBzk0bteOqHs39v7oENY+n7Zi3
- hye5RxSctI4d88jZ2GJVaaTnKalrF3fQY6Fz7dmtWgtPbHifE/3IoVBDT91SGCVIJ+vIjS7pmvb
- d5DaxD0XmY3Un9L+UevAw8hhQf4hiefTJlu3fli7yspxYSmvpcM4iBGe6BUUwtEoHHS9S/xcvJV
- +VZif6HkkwUQEJKSIW+MOW7hdJO+8Ve5JGxURFupSg4rqIYh6AzDy6QrkCoMg/Qadem+DwJbrvs
- /pXoXAd6B4crcG/SqGmmPiEODTsHI9S53EuKo0Pjx0zSl+NMDrwaAOz6fhEUEfThgFtklvCkkqy
- MlSSU3+DS50JamYnWjdeIpkLfT6KPUokDRQ==
-X-Google-Smtp-Source: AGHT+IHNn57+kH35sc/kvzctyax2AAJJvmR92/FLxdn3nvMFJ8bBF10VAFmSVR9j4k3SBGW4hBwMhA==
-X-Received: by 2002:a17:90b:314e:b0:320:fda8:fabe with SMTP id
- 98e67ed59e1d1-3216756c600mr5580550a91.22.1754544768795; 
- Wed, 06 Aug 2025 22:32:48 -0700 (PDT)
+ bh=wmF6iGZhnjs8vss7cDQ3NhBf80J54pA7zzh91i/TK/Q=;
+ b=AzAZzoQmA6MAFd8jYXhGOuoSvSc93FKuzN+37u3YTQNEH93ITyaPU5WPyKur6Z212m
+ YcOmvR7O3GOyJNkk0rVRY2ow+5Xums0vYdT/Wv+jY+mAZnbQDno2sx+9QqmID2D2g3lJ
+ 1ltmgbTkOEfW/74LWy7ocknQJYRVnufhaydZ9vNdE6DVtTfTtlpVE46YagSN6pDkpkEb
+ f2hJvKfzZeHQwkk6CxHW5/VlNl8fls0uCIeMDRv/80Z5oKE7Kip7Yr0uz6r25MRrlv/U
+ xXwsipXrTsMvth4WdnERgxodeRVxpcuPKR2bH201+p3M/O75a8/fgX2DnIjP0ImN15wB
+ Sx6Q==
+X-Gm-Message-State: AOJu0Yyi8iyhgVJIP7SSBB+eQ1Pw+ianBJ45N/SdtLjN9WGd4uyMgSF2
+ bIM7IjBx5zQ1o6jhGNsJ6nDCH3fb3J7SgkZ/NNe3uXC2Bl96ZErXrhbk
+X-Gm-Gg: ASbGncuBnjMxkvgxT7LMVhNSyA3eMJJL3I6nljiBwj5dcNuW/K7KrM1baL//ry1SQLP
+ o4Z65xYtEGNbpF+QufZG5gJ+tweME7wSy7v4g8n+BKeKm0sN5KAefhbiTqpPKIQ1Ynm6r6sRD2J
+ sQUo7i0cfF92PZ5cPZx//1RAIXEEGkOhmpzECtCLVF90/J/1hNFWbvTvMzt01efOUFlxH/bjEO6
+ QDal8rg1ONixy1v8zEjrzAztDgKOcsiCXzjBJrdD0uCliPoC9sw72gnIAqE46QNz678l4vs1DNH
+ Pi/KJ4d3CeIoIzsnlrd2360AGX9AOF2QLke6WM/4IvpPvCw+VkPnrwdmdi6w5caYFtvk56RhZIa
+ 1YDKQcQOWpr40tFIGtYhDiTbk8UpxKWu3c2qZrWI9Sn4K
+X-Google-Smtp-Source: AGHT+IFlusoBz8dWfcjkksEm5jVT331qK7a7ZQAKZ5VRRumkkfOGluNDOuEQ9vdPsK9hNgNjnfsc3A==
+X-Received: by 2002:a17:902:ef0a:b0:240:9f9:46b1 with SMTP id
+ d9443c01a7336-2429f5489afmr79749225ad.37.1754544772947; 
+ Wed, 06 Aug 2025 22:32:52 -0700 (PDT)
 Received: from cs20-buildserver.lan ([2402:7500:400:60db:2e0:4cff:fe68:863])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3216126c98fsm4384084a91.21.2025.08.06.22.32.46
+ 98e67ed59e1d1-3216126c98fsm4384084a91.21.2025.08.06.22.32.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 22:32:48 -0700 (PDT)
+ Wed, 06 Aug 2025 22:32:52 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, trini@konsulko.com,
  YSCHU@nuvoton.com
-Cc: u-boot@lists.denx.de,
-	Stanley Chu <yschu@nuvoton.com>
-Subject: [PATCH v2 3/7] i2c: npcm: fix consecutive dm_i2c_read/write error
-Date: Thu,  7 Aug 2025 13:32:20 +0800
-Message-Id: <20250807053224.2169557-4-JJLIU0@nuvoton.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2 4/7] arm: dts: nuvoton: Change timer node
+Date: Thu,  7 Aug 2025 13:32:21 +0800
+Message-Id: <20250807053224.2169557-5-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250807053224.2169557-1-JJLIU0@nuvoton.com>
 References: <20250807053224.2169557-1-JJLIU0@nuvoton.com>
@@ -100,50 +99,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Stanley Chu <yschu@nuvoton.com>
+npcm_timer driver is changed to use SECCNT counter.
 
-When doing a dm_i2c_read followed by a dm_i2c_write, the subsequent
-transaction may get npcm_i2c_check_sda error because the module is
-still busy in STOP condition in previous dm_i2c_read.
-Always check and wait for module to be out of busy before starting
-an i2c transaction.
-
-Signed-off-by: Stanley Chu <yschu@nuvoton.com>
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 ---
- drivers/i2c/npcm_i2c.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm/dts/nuvoton-common-npcm8xx.dtsi | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/i2c/npcm_i2c.c b/drivers/i2c/npcm_i2c.c
-index c64752e1467..bff0d04f1a5 100644
---- a/drivers/i2c/npcm_i2c.c
-+++ b/drivers/i2c/npcm_i2c.c
-@@ -34,6 +34,7 @@
- #define SMBCTL3_SDA_LVL		BIT(6)
+diff --git a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi b/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
+index db7517cc9ba..be06b2a0cae 100644
+--- a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
++++ b/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
+@@ -62,6 +62,11 @@
+ 			reg = <0x0 0xf0801000 0x0 0x1000>;
+ 		};
  
- /* SMBCST */
-+#define SMBCST_BUSY		BIT(0)
- #define SMBCST_BB		BIT(1)
- #define SMBCST_TGSCL		BIT(5)
- 
-@@ -479,11 +480,17 @@ static int npcm_i2c_xfer(struct udevice *dev,
- 	struct npcm_i2c_bus *bus = dev_get_priv(dev);
- 	struct npcm_i2c_regs *reg = bus->reg;
- 	int ret = 0, err = 0;
-+	u8 val;
- 
- 	if (nmsgs < 1 || nmsgs > 2) {
- 		printf("%s: commands not support\n", __func__);
- 		return -EREMOTEIO;
- 	}
++		timer0: timer@f0801068 {
++			compatible = "nuvoton,npcm845-timer";
++			reg = <0x0 0xf0801068 0x0 0x8>;
++		};
 +
-+	/* Wait for module out of busy */
-+	if (readb_poll_timeout(&reg->cst, val, !(val & SMBCST_BUSY), 1000))
-+		return -EBUSY;
-+
- 	/* clear ST register */
- 	writeb(0xFF, &reg->st);
+ 		sdhci0: sdhci@f0842000 {
+ 			compatible = "nuvoton,npcm845-sdhci";
+ 			reg = <0x0 0xf0842000 0x0 0x100>;
+@@ -157,14 +162,6 @@
+ 				status = "disabled";
+ 			};
  
+-			timer0: timer@8000 {
+-				compatible = "nuvoton,npcm845-timer";
+-				interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
+-				reg = <0x8000 0x1C>;
+-				clocks = <&clk NPCM8XX_CLK_REFCLK>;
+-				clock-names = "refclk";
+-			};
+-
+ 			serial0: serial@0 {
+ 				compatible = "nuvoton,npcm845-uart", "nuvoton,npcm750-uart";
+ 				reg = <0x0 0x1000>;
 -- 
 2.34.1
 
