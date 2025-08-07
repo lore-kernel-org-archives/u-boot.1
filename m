@@ -4,49 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94F84C87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 08:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1901C87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 08:37:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E227A843E3;
-	Thu,  7 Aug 2025 10:33:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id 4A2B9843E3;
+	Thu,  7 Aug 2025 10:37:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cFlaDPUs";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DF8B83C53; Thu,  7 Aug 2025 10:33:05 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ id 7FAAB84474; Thu,  7 Aug 2025 10:37:08 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0E99843E3
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 10:33:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id E43011F00050
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 08:32:58 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 585EDB01279; Thu,  7 Aug 2025 08:32:57 +0000 (UTC)
-Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id CB356B01279;
- Thu,  7 Aug 2025 08:32:55 +0000 (UTC)
-Date: Thu, 7 Aug 2025 10:32:53 +0200
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Chen-Yu Tsai <wens@csie.org>, Icenowy Zheng <icenowy@aosc.xyz>,
- Paul Kocialkowski <contact@paulk.fr>
-Subject: Re: [PATCH v2 06/11] sunxi: Add support for I2C1 on PB pins for the
- V3/V3s
-Message-ID: <aJRktaxWjmVDEHpF@collins>
-References: <20250805174827.3696191-1-paulk@sys-base.io>
- <20250805174827.3696191-7-paulk@sys-base.io>
+ by phobos.denx.de (Postfix) with ESMTPS id F012A843E2
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 10:37:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 5571B61416;
+ Thu,  7 Aug 2025 08:37:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83BB2C4CEEB;
+ Thu,  7 Aug 2025 08:37:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754555824;
+ bh=XEILugtF3OTgFelE8OxzFaApAQhXviuEN7AOeKpCL+Y=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=cFlaDPUsHVauZdXhvCK6uWmKUcYH00gcSRJgRBrYic09ongvfd8V3wZyqNGwvB2XD
+ FTOzvcH6vqpITxNrsf7Tw0t7cw4k2fxY/Ypv54kRdIib81E1wJztFiDjVTKAMSySny
+ 2j5sFnjhW2OFYau0btOP7rNiNPxuolD/eh/bHaMXoekg29BhYAHZclfirbJofXUcvU
+ /+ax4RP/NHEFzwhsDdn8+PoyBF5LloFyJYnl843bVtqQFfCp5QMFU0cGSTSmrMd5SF
+ kTJoSld8j8Lv6ydBUgg36I9OSRkEr0iZeIBs6SGd0NW1lxmyfv5+Pbpo+R08NxJUSk
+ izUcxEDqbHGhQ==
+Date: Thu, 7 Aug 2025 10:36:59 +0200
+From: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: Smatch report for drivers/net/phy/marvell10g.c
+Message-ID: <bxuuwcj7jm33go7yj4jnafoowrttu2qvbxej7nvdn3pm5az4sj@6xpf3ym2s2ek>
+References: <623c39a5-2438-42d5-aafe-bb80dfd12b82@linaro.org>
+ <20250806145315.GO124814@bill-the-cat>
+ <8a05c8a6-a0eb-4f84-aa48-0d0e0f532fa4@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Vz/rhglIVHJ4i9+W"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250805174827.3696191-7-paulk@sys-base.io>
+In-Reply-To: <8a05c8a6-a0eb-4f84-aa48-0d0e0f532fa4@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,94 +73,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Aug 06, 2025 at 05:36:27PM +0200, Marek Vasut wrote:
+> On 8/6/25 4:53 PM, Tom Rini wrote:
+> > On Tue, Aug 05, 2025 at 05:30:49PM +0100, Andrew Goodbody wrote:
+> > 
+> > > I have these Smatch reports.
+> > > 
+> > > drivers/net/phy/marvell10g.c:384 mv3310_select_mactype() warn: was ||
+> > > intended here instead of &&?
+> > > drivers/net/phy/marvell10g.c:387 mv3310_select_mactype() warn: was ||
+> > > intended here instead of &&?
+> > > drivers/net/phy/marvell10g.c:390 mv3310_select_mactype() warn: was ||
+> > > intended here instead of &&?
+> > > 
+> > > Now there is obviously incorrect code there as it cannot work correctly as
+> > > is, phydev->interface cannot equal two different enums at the same time, but
+> > > simply swapping the && for || is not going to work either. Could anyone
+> > > please point me in the direction of a fix?
+> > 
+> > Adding Marek as r8a779f0_spider and r8a779f4_s4sk are the only two
+> > boards which enable CONFIG_PHY_MARVELL_10G (aside, ./tools/qconfig.py -b
+> > and then ./tools/qconfig.py -f CONFIG_FOO is handy to see what boards
+> > enable a given option and helpful when get_maintainer.pl has nothing
+> > specific).
+> They use the 2xxx series PHY, so this code is avoided. However, it seems
+> even linux-next has the same behavior in .select_mactype() callback . They
+> use test_bit() in there, but otherwise also use && instead of || which looks
+> odd. Maybe that is a genuine bug which got ported over from Linux and needs
+> to be fixed both there and here ?
 
---Vz/rhglIVHJ4i9+W
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In linux there is a bitmap of supported interface modes given to the
+function. Then for example we test whether 10gbase-r and sgmii are both
+supported by the host (SoC):
 
-Hi,
+  ...
+  else if (test_bit(PHY_INTERFACE_MODE_SGMII, interfaces) &&
+           test_bit(PHY_INTERFACE_MODE_10GBASER, interfaces))
+          return MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER;
+  ...
 
-Le Tue 05 Aug 25, 19:48, Paul Kocialkowski a =C3=A9crit :
-> From: Paul Kocialkowski <contact@paulk.fr>
->=20
-> Both the V3 and V3s support I2C1 on PB pins, which is often used to
-> connect an AXP209 PMIC on V3 boards.
+If both 10gbase-r and sgmii are supported by the SoC, we tell the PHY to
+use mactype 4 (MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER).
 
-Actually this appears to be wrong. I had this patch around for a while but
-I was mistaken about the AXP209, which is typically connected to I2C0, not
-I2C1.
+Obiously this does not work in U-Boot it we translate it to
+  interface == MODE_SGMII && interface == MODE_10GBASER
+since the interface variable is not a bitmap of supported interfaces,
+but rather the current interface mode (maybe from device-tree).
 
-So I think this patch could be dropped, it won't be directly useful for our
-supported boards anyway.
+Looking at U-Boot's marvell10g code, I also see mv_test_bit macro
+and how it is being used:
 
-All the best,
+  #define mv_test_bit(iface, phydev) \
+    ({ if ((phydev)->interface & (iface)) return 0; })
 
-Paul
+  mv_test_bit(PHY_INTERFACE_MODE_SGMII, phydev);
 
-> Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
-> ---
->  board/sunxi/board.c  | 4 ++++
->  include/sunxi_gpio.h | 1 +
->  2 files changed, 5 insertions(+)
->=20
-> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> index 6520636ffab5..72aa86cd752d 100644
-> --- a/board/sunxi/board.c
-> +++ b/board/sunxi/board.c
-> @@ -98,6 +98,10 @@ void i2c_init_board(void)
->  	sunxi_gpio_set_cfgpin(SUNXI_GPH(16), SUN6I_GPH_TWI1);
->  	sunxi_gpio_set_cfgpin(SUNXI_GPH(17), SUN6I_GPH_TWI1);
->  	clock_twi_onoff(1, 1);
-> +#elif defined(CONFIG_MACH_SUN8I_V3_V3S)
-> +	sunxi_gpio_set_cfgpin(SUNXI_GPB(8), SUN8I_V3S_GPB_TWI1);
-> +	sunxi_gpio_set_cfgpin(SUNXI_GPB(9), SUN8I_V3S_GPB_TWI1);
-> +	clock_twi_onoff(1, 1);
->  #elif defined(CONFIG_MACH_SUN8I)
->  	sunxi_gpio_set_cfgpin(SUNXI_GPH(4), SUN8I_GPH_TWI1);
->  	sunxi_gpio_set_cfgpin(SUNXI_GPH(5), SUN8I_GPH_TWI1);
-> diff --git a/include/sunxi_gpio.h b/include/sunxi_gpio.h
-> index 12b54c8dda4d..e166b9758f44 100644
-> --- a/include/sunxi_gpio.h
-> +++ b/include/sunxi_gpio.h
-> @@ -110,6 +110,7 @@ enum sunxi_gpio_number {
->  #define SUN4I_GPB_TWI1		2
->  #define SUN5I_GPB_TWI1		2
->  #define SUN8I_V3S_GPB_TWI0	2
-> +#define SUN8I_V3S_GPB_TWI1	2
->  #define SUN4I_GPB_UART0		2
->  #define SUN5I_GPB_UART0		2
->  #define SUN8I_GPB_UART2		2
-> --=20
-> 2.49.0
->=20
+This is completely wrong, since the ->interface member is not a bitmap
+(rather the currnet selected interface) nor are the PHY_INTERFACE_MODE_*
+values one-bit values.
 
---=20
-Paul Kocialkowski,
+So this code will not work correctly at all in U-Boot.
 
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
 
-Expert in multimedia, graphics and embedded hardware support with Linux.
+Now as to why Linux also has interfaces bitmap in addition to the current
+selected interface.
 
---Vz/rhglIVHJ4i9+W
-Content-Type: application/pgp-signature; name=signature.asc
+The reason why in Linux we use bitmap of supported interface modes is so
+that we can select the best serdes mode switching behavior for the PHY.
 
------BEGIN PGP SIGNATURE-----
+For example if the host only supports 10gbase-r serdes mode, then the PHY
+must always talk to the host in 10gbase-r mode, even if the RJ-45 copper
+speed was autonegotiated to lower speed (i.e. 1gbps). (There is another
+complication called rate matching that needs to be done in that case,
+but this is not important now.)
 
-iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmiUZLUACgkQhP3B6o/u
-lQxZtw//QHmK8dvNHp3ESMuplB2FyQcsxxJIkkgqB8YeUwaydqCM4+N5TEYrrcwE
-QfVr/E1RMGD44H7iT0VYR4zFNXe+m2LqWMdfX6fA7dfyIQ//1tbzkLO0YGfCG+vR
-I2hwX86oSMObYWXBuX1GsN+cBjEBs9TN0qmke8B8VXG3eRchU+9EjpN1fIR915Wp
-fYSjPRs8iMGFE+/ZldKx/UT43wl2GHlYBz+eOe/fNxbYtlo4Q82oR2KVvAnP9ucH
-/EuAjNtUvKCv7CKEoLvYjKvmUIwILLEGHxsJQ7YfhAAOSeFY2iHz0vW+9jft0dn8
-uv35MuC32NcV5TXCwfykO/BDB4S8BfzMOOGOGoCentYgdOmXCRtDIBlEICNELa1V
-mEAz7cbPy400cfcITOoM01LQEk3XJLsTc6xTH9+ct0DkfpIRaZiEzl9Qzmn3YuQV
-jvIH0+gdtPGwEc6kg8uFp9pNLcEqtwNdbn2bhfd8AnGAa+kfm8IhfTBprsjBwc+6
-PoBFP/x9zWm8QPHAObjoI3beWt4Eo3V8TW0sO7/oxrUiRJJOH+SKgGivWVt09zYc
-SSzGMIzS2lRqkQRN20ly0qdiCo/3newQxGcUZvsWY5p0nqLCUDdyNaBVK79EbJWm
-6pmHD/lQivsdelnJRBFek+uCEUxa8+JWeyOPoEKfwyZhyEf34B8=
-=i493
------END PGP SIGNATURE-----
+If the host supports both 10gbase-r and sgmii serdes modes, we want the
+PHY to switch to sgmii if the RJ-45 speed is 1000/100/10, and to switch
+to 10gbase-r if the RJ-45 speed is 10000.
 
---Vz/rhglIVHJ4i9+W--
+The register configuring this behavior is called MACTYPE in the Marvell
+PHY.
+
+The following table shows how the PHY will change serdes mode depedning
+on the RJ-45 speed for some of the MACTYPE settings:
+
+               mactype=4   mactype=6  mactype=7  mactype=0
+  RJ-45 speed  sds mode    sds mode   sds mode   sds mode
+  ---------------------------------------------------------
+  10/100/1000  sgmii       10gbase-r  usxgmii    sgmii
+  2500         2500base-x  10gbase-r  usxgmii    2500base-x
+  5000         5gbase-r    10gbase-r  usxgmii    5gbase-r
+  10000        10gbase-r   10gbase-r  usxgmii    rxaui
+
+Marek
