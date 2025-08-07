@@ -4,59 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1901C87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 08:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA42AC87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 09:16:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A2B9843E3;
-	Thu,  7 Aug 2025 10:37:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EFF67843E3;
+	Thu,  7 Aug 2025 11:16:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cFlaDPUs";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Mgp/o/fF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FAAB84474; Thu,  7 Aug 2025 10:37:08 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 3969F84480; Thu,  7 Aug 2025 11:16:55 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F012A843E2
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 10:37:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 5571B61416;
- Thu,  7 Aug 2025 08:37:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83BB2C4CEEB;
- Thu,  7 Aug 2025 08:37:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754555824;
- bh=XEILugtF3OTgFelE8OxzFaApAQhXviuEN7AOeKpCL+Y=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cFlaDPUsHVauZdXhvCK6uWmKUcYH00gcSRJgRBrYic09ongvfd8V3wZyqNGwvB2XD
- FTOzvcH6vqpITxNrsf7Tw0t7cw4k2fxY/Ypv54kRdIib81E1wJztFiDjVTKAMSySny
- 2j5sFnjhW2OFYau0btOP7rNiNPxuolD/eh/bHaMXoekg29BhYAHZclfirbJofXUcvU
- /+ax4RP/NHEFzwhsDdn8+PoyBF5LloFyJYnl843bVtqQFfCp5QMFU0cGSTSmrMd5SF
- kTJoSld8j8Lv6ydBUgg36I9OSRkEr0iZeIBs6SGd0NW1lxmyfv5+Pbpo+R08NxJUSk
- izUcxEDqbHGhQ==
-Date: Thu, 7 Aug 2025 10:36:59 +0200
-From: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Tom Rini <trini@konsulko.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Smatch report for drivers/net/phy/marvell10g.c
-Message-ID: <bxuuwcj7jm33go7yj4jnafoowrttu2qvbxej7nvdn3pm5az4sj@6xpf3ym2s2ek>
-References: <623c39a5-2438-42d5-aafe-bb80dfd12b82@linaro.org>
- <20250806145315.GO124814@bill-the-cat>
- <8a05c8a6-a0eb-4f84-aa48-0d0e0f532fa4@mailbox.org>
+ by phobos.denx.de (Postfix) with ESMTPS id D9495843E2
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 11:16:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6E5BA103F2D; Thu,  7 Aug 2025 11:16:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1754558210;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=dgh7ppvvv3Qyo4PrT2THVzOCRUaLvcthtIDY2i/4o/U=;
+ b=Mgp/o/fFh7h5TL0ZRfFLjrHwyS6Y4l32SuF49lUWrE507D/ge+OCUigvihx5uPiKhsLNd/
+ V4hn88jwuIYRZ9a6M2wPU/7DhhMfNJU0RFojYhoKkx1Pj5pbOmlt2GJ24zp3EVO1rmMofU
+ dZhenOZ8ZUBfYvVwEw2OJcnGteCgvfU/rFCsPxcf/gwsT5j1HIRNG46EeWoTzuTfslyslG
+ jQz3rkcYe18APSyPrLxj7R/9eutk1PZ4XWVR7geWjTpjk/7FG3F31gWbhnmEmohC3BX1RR
+ Ykfq52UoI8/cOGTk8a0R6xbQYHhV8uGybdnolk+LN3J8uUnBZ78QejKK/3RfPA==
+Message-ID: <3e98b2c9-7e14-5bee-a03d-352a51eaab93@nabladev.com>
+Date: Thu, 7 Aug 2025 11:17:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8a05c8a6-a0eb-4f84-aa48-0d0e0f532fa4@mailbox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Content-Language: en-US
+To: u-boot@lists.denx.de, Dinesh Maniyam <dinesh.maniyam@altera.com>
+References: <20250806183543.GR124814@bill-the-cat>
+Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20250806183543.GR124814@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,96 +67,311 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 06, 2025 at 05:36:27PM +0200, Marek Vasut wrote:
-> On 8/6/25 4:53 PM, Tom Rini wrote:
-> > On Tue, Aug 05, 2025 at 05:30:49PM +0100, Andrew Goodbody wrote:
-> > 
-> > > I have these Smatch reports.
-> > > 
-> > > drivers/net/phy/marvell10g.c:384 mv3310_select_mactype() warn: was ||
-> > > intended here instead of &&?
-> > > drivers/net/phy/marvell10g.c:387 mv3310_select_mactype() warn: was ||
-> > > intended here instead of &&?
-> > > drivers/net/phy/marvell10g.c:390 mv3310_select_mactype() warn: was ||
-> > > intended here instead of &&?
-> > > 
-> > > Now there is obviously incorrect code there as it cannot work correctly as
-> > > is, phydev->interface cannot equal two different enums at the same time, but
-> > > simply swapping the && for || is not going to work either. Could anyone
-> > > please point me in the direction of a fix?
-> > 
-> > Adding Marek as r8a779f0_spider and r8a779f4_s4sk are the only two
-> > boards which enable CONFIG_PHY_MARVELL_10G (aside, ./tools/qconfig.py -b
-> > and then ./tools/qconfig.py -f CONFIG_FOO is handy to see what boards
-> > enable a given option and helpful when get_maintainer.pl has nothing
-> > specific).
-> They use the 2xxx series PHY, so this code is avoided. However, it seems
-> even linux-next has the same behavior in .select_mactype() callback . They
-> use test_bit() in there, but otherwise also use && instead of || which looks
-> odd. Maybe that is a genuine bug which got ported over from Linux and needs
-> to be fixed both there and here ?
+Hello Dinesh,
 
-In linux there is a bitmap of supported interface modes given to the
-function. Then for example we test whether 10gbase-r and sgmii are both
-supported by the host (SoC):
+On 06.08.25 20:35, Tom Rini wrote:
+> Here's the latest report. Lets get these new issues addressed ASAP
+> please, thanks.
+> 
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Wed, Aug 6, 2025 at 12:23 PM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+> 
+> 
+> Hi,
+> 
+> Please find the latest report on new defect(s) introduced to *Das U-Boot*
+> found with Coverity Scan.
+> 
+>     - *New Defects Found:* 8
+>     - 4 defect(s), reported by Coverity Scan earlier, were marked fixed in
+>     the recent build analyzed by Coverity Scan.
+>     - *Defects Shown:* Showing 8 of 8 defect(s)
+> 
+> Defect Details
+> 
+> ** CID 583812:       Integer handling issues  (BAD_SHIFT)
+> /drivers/i3c/master/dw-i3c-master.c: 1001           in dw_i3c_probe()
 
-  ...
-  else if (test_bit(PHY_INTERFACE_MODE_SGMII, interfaces) &&
-           test_bit(PHY_INTERFACE_MODE_10GBASER, interfaces))
-          return MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER;
-  ...
+Could you please look at the issues on i3c parts, as I go on
+vacation, thanks!
 
-If both 10gbase-r and sgmii are supported by the SoC, we tell the PHY to
-use mactype 4 (MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER).
+@Tom: Feel free to pick up fixes, thanks!
 
-Obiously this does not work in U-Boot it we translate it to
-  interface == MODE_SGMII && interface == MODE_10GBASER
-since the interface variable is not a bitmap of supported interfaces,
-but rather the current interface mode (maybe from device-tree).
+bye,
+Heiko
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 583812:         Integer handling issues  (BAD_SHIFT)
+> /drivers/i3c/master/dw-i3c-master.c: 1001             in dw_i3c_probe()
+> 995     	ret = readl(master->regs + DATA_BUFFER_STATUS_LEVEL);
+> 996     	master->caps.datafifodepth = DATA_BUFFER_STATUS_LEVEL_TX(ret);
+> 997
+> 998     	ret = readl(master->regs + DEVICE_ADDR_TABLE_POINTER);
+> 999     	master->datstartaddr = ret;
+> 1000     	master->maxdevs = ret >> 16;
+>>>>      CID 583812:         Integer handling issues  (BAD_SHIFT)
+>>>>      In expression "0xffffffffffffffffUL >> 63 - (master->maxdevs - 1)", right shifting by more than 63 bits has undefined behavior.  The shift amount, "63 - (master->maxdevs - 1)", is 64.
+> 1001     	master->free_pos = GENMASK(master->maxdevs - 1, 0);
+> 1002
+> 1003     	ret = i3c_master_register(&master->base, dev,
+> 1004     				  &dw_mipi_i3c_ops, false);
+> 1005     	if (ret)
+> 1006     		goto err_assert_rst;
+> 
+> ** CID 583811:         (RESOURCE_LEAK)
+> /drivers/i3c/master.c: 1610           in of_i3c_master_add_i3c_boardinfo()
+> /drivers/i3c/master.c: 1586           in of_i3c_master_add_i3c_boardinfo()
+> /drivers/i3c/master.c: 1591           in of_i3c_master_add_i3c_boardinfo()
+> /drivers/i3c/master.c: 1598           in of_i3c_master_add_i3c_boardinfo()
+> /drivers/i3c/master.c: 1603           in of_i3c_master_add_i3c_boardinfo()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 583811:           (RESOURCE_LEAK)
+> /drivers/i3c/master.c: 1610             in of_i3c_master_add_i3c_boardinfo()
+> 1604     	}
+> 1605
+> 1606     	boardinfo->pid = ((u64)reg[1] << 32) | reg[2];
+> 1607
+> 1608     	if ((boardinfo->pid & GENMASK_ULL(63, 48)) ||
+> 1609     	    I3C_PID_RND_LOWER_32BITS(boardinfo->pid))
+>>>>      CID 583811:           (RESOURCE_LEAK)
+>>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
+> 1610     		return -EINVAL;
+> 1611
+> 1612     	boardinfo->init_dyn_addr = init_dyn_addr;
+> 1613     	boardinfo->of_node = node;
+> 1614     	list_add_tail(&boardinfo->node, &master->boardinfo.i3c);
+> 1615
+> /drivers/i3c/master.c: 1586             in of_i3c_master_add_i3c_boardinfo()
+> 1580     	boardinfo = devm_kzalloc(dev, sizeof(*boardinfo), GFP_KERNEL);
+> 1581     	if (!boardinfo)
+> 1582     		return -ENOMEM;
+> 1583
+> 1584     	if (reg[0]) {
+> 1585     		if (reg[0] > I3C_MAX_ADDR)
+>>>>      CID 583811:           (RESOURCE_LEAK)
+>>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
+> 1586     			return -EINVAL;
+> 1587
+> 1588     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
+> 1589     							  reg[0]);
+> 1590     		if (addrstatus != I3C_ADDR_SLOT_FREE)
+> 1591     			return -EINVAL;
+> /drivers/i3c/master.c: 1591             in of_i3c_master_add_i3c_boardinfo()
+> 1585     		if (reg[0] > I3C_MAX_ADDR)
+> 1586     			return -EINVAL;
+> 1587
+> 1588     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
+> 1589     							  reg[0]);
+> 1590     		if (addrstatus != I3C_ADDR_SLOT_FREE)
+>>>>      CID 583811:           (RESOURCE_LEAK)
+>>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
+> 1591     			return -EINVAL;
+> 1592     	}
+> 1593
+> 1594     	boardinfo->static_addr = reg[0];
+> 1595
+> 1596     	if (!dev_read_u32(dev, "assigned-address", &init_dyn_addr)) {
+> /drivers/i3c/master.c: 1598             in of_i3c_master_add_i3c_boardinfo()
+> 1592     	}
+> 1593
+> 1594     	boardinfo->static_addr = reg[0];
+> 1595
+> 1596     	if (!dev_read_u32(dev, "assigned-address", &init_dyn_addr)) {
+> 1597     		if (init_dyn_addr > I3C_MAX_ADDR)
+>>>>      CID 583811:           (RESOURCE_LEAK)
+>>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
+> 1598     			return -EINVAL;
+> 1599
+> 1600     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
+> 1601     							  init_dyn_addr);
+> 1602     		if (addrstatus != I3C_ADDR_SLOT_FREE)
+> 1603     			return -EINVAL;
+> /drivers/i3c/master.c: 1603             in of_i3c_master_add_i3c_boardinfo()
+> 1597     		if (init_dyn_addr > I3C_MAX_ADDR)
+> 1598     			return -EINVAL;
+> 1599
+> 1600     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
+> 1601     							  init_dyn_addr);
+> 1602     		if (addrstatus != I3C_ADDR_SLOT_FREE)
+>>>>      CID 583811:           (RESOURCE_LEAK)
+>>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
+> 1603     			return -EINVAL;
+> 1604     	}
+> 1605
+> 1606     	boardinfo->pid = ((u64)reg[1] << 32) | reg[2];
+> 1607
+> 1608     	if ((boardinfo->pid & GENMASK_ULL(63, 48)) ||
+> 
+> ** CID 298388:       Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 579           in dw_i3c_ccc_get()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 298388:         Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 579             in dw_i3c_ccc_get()
+> 573     		return -ENOMEM;
+> 574
+> 575     	cmd = xfer->cmds;
+> 576     	cmd->rx_buf = ccc->dests[0].payload.data;
+> 577     	cmd->rx_len = ccc->dests[0].payload.len;
+> 578
+>>>>      CID 298388:         Integer handling issues  (SIGN_EXTENSION)
+>>>>      Suspicious implicit sign extension: "ccc->dests[0].payload.len" with type "u16" (16 bits, unsigned) is promoted in "ccc->dests[0].payload.len << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "ccc->dests[0].payload.len << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
+> 579     	cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(ccc->dests[0].payload.len) |
+> 580     		      COMMAND_PORT_TRANSFER_ARG;
+> 581
+> 582     	cmd->cmd_lo = COMMAND_PORT_READ_TRANSFER |
+> 583     		      COMMAND_PORT_CP |
+> 584     		      COMMAND_PORT_DEV_INDEX(pos) |
+> 
+> ** CID 298037:       Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 375           in dw_i3c_clk_cfg()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 298037:         Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 375             in dw_i3c_clk_cfg()
+> 369     	scl_timing = SCL_EXT_LCNT_1(lcnt);
+> 370     	lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR2_SCL_RATE) - hcnt;
+> 371     	scl_timing |= SCL_EXT_LCNT_2(lcnt);
+> 372     	lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR3_SCL_RATE) - hcnt;
+> 373     	scl_timing |= SCL_EXT_LCNT_3(lcnt);
+> 374     	lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR4_SCL_RATE) - hcnt;
+>>>>      CID 298037:         Integer handling issues  (SIGN_EXTENSION)
+>>>>      Suspicious implicit sign extension: "lcnt" with type "u8" (8 bits, unsigned) is promoted in "lcnt << 24" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "lcnt << 24" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
+> 375     	scl_timing |= SCL_EXT_LCNT_4(lcnt);
+> 376     	writel(scl_timing, master->regs + SCL_EXT_LCNT_TIMING);
+> 377
+> 378     	return 0;
+> 379     }
+> 380
+> 
+> ** CID 296053:       Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 535           in dw_i3c_ccc_set()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 296053:         Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 535             in dw_i3c_ccc_set()
+> 529     		return -ENOMEM;
+> 530
+> 531     	cmd = xfer->cmds;
+> 532     	cmd->tx_buf = ccc->dests[0].payload.data;
+> 533     	cmd->tx_len = ccc->dests[0].payload.len;
+> 534
+>>>>      CID 296053:         Integer handling issues  (SIGN_EXTENSION)
+>>>>      Suspicious implicit sign extension: "ccc->dests[0].payload.len" with type "u16" (16 bits, unsigned) is promoted in "ccc->dests[0].payload.len << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "ccc->dests[0].payload.len << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
+> 535     	cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(ccc->dests[0].payload.len) |
+> 536     		      COMMAND_PORT_TRANSFER_ARG;
+> 537
+> 538     	cmd->cmd_lo = COMMAND_PORT_CP |
+> 539     		      COMMAND_PORT_DEV_INDEX(pos) |
+> 540     		      COMMAND_PORT_CMD(ccc->id) |
+> 
+> ** CID 295976:         (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 395           in dw_i2c_clk_cfg()
+> /drivers/i3c/master/dw-i3c-master.c: 401           in dw_i2c_clk_cfg()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 295976:           (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 395             in dw_i2c_clk_cfg()
+> 389     		return -EINVAL;
+> 390
+> 391     	core_period = DIV_ROUND_UP(1000000000, core_rate);
+> 392
+> 393     	lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FMP_TLOW_MIN_NS, core_period);
+> 394     	hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_PLUS_SCL_RATE) - lcnt;
+>>>>      CID 295976:           (SIGN_EXTENSION)
+>>>>      Suspicious implicit sign extension: "hcnt" with type "u16" (16 bits, unsigned) is promoted in "hcnt << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "hcnt << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
+> 395     	scl_timing = SCL_I2C_FMP_TIMING_HCNT(hcnt) |
+> 396     		     SCL_I2C_FMP_TIMING_LCNT(lcnt);
+> 397     	writel(scl_timing, master->regs + SCL_I2C_FMP_TIMING);
+> 398
+> 399     	lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FM_TLOW_MIN_NS, core_period);
+> 400     	hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_SCL_RATE) - lcnt;
+> /drivers/i3c/master/dw-i3c-master.c: 401             in dw_i2c_clk_cfg()
+> 395     	scl_timing = SCL_I2C_FMP_TIMING_HCNT(hcnt) |
+> 396     		     SCL_I2C_FMP_TIMING_LCNT(lcnt);
+> 397     	writel(scl_timing, master->regs + SCL_I2C_FMP_TIMING);
+> 398
+> 399     	lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FM_TLOW_MIN_NS, core_period);
+> 400     	hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_SCL_RATE) - lcnt;
+>>>>      CID 295976:           (SIGN_EXTENSION)
+>>>>      Suspicious implicit sign extension: "hcnt" with type "u16" (16 bits, unsigned) is promoted in "hcnt << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "hcnt << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
+> 401     	scl_timing = SCL_I2C_FM_TIMING_HCNT(hcnt) |
+> 402     		     SCL_I2C_FM_TIMING_LCNT(lcnt);
+> 403     	writel(scl_timing, master->regs + SCL_I2C_FM_TIMING);
+> 404
+> 405     	writel(BUS_I3C_MST_FREE(lcnt), master->regs + BUS_FREE_TIMING);
+> 406     	writel(readl(master->regs + DEVICE_CTRL) | DEV_CTRL_I2C_SLAVE_PRESENT,
+> 
+> ** CID 294913:       Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 724           in dw_i3c_master_priv_xfers()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 294913:         Integer handling issues  (SIGN_EXTENSION)
+> /drivers/i3c/master/dw-i3c-master.c: 724             in
+> dw_i3c_master_priv_xfers()
+> 718     	if (!xfer)
+> 719     		return -ENOMEM;
+> 720
+> 721     	for (i = 0; i < i3c_nxfers; i++) {
+> 722     		struct dw_i3c_cmd *cmd = &xfer->cmds[i];
+> 723
+>>>>      CID 294913:         Integer handling issues  (SIGN_EXTENSION)
+>>>>      Suspicious implicit sign extension: "i3c_xfers[i].len" with type "u16" (16 bits, unsigned) is promoted in "i3c_xfers[i].len << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "i3c_xfers[i].len << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
+> 724     		cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(i3c_xfers[i].len) |
+> 725     			COMMAND_PORT_TRANSFER_ARG;
+> 726
+> 727     		if (i3c_xfers[i].rnw) {
+> 728     			cmd->rx_buf = i3c_xfers[i].data.in;
+> 729     			cmd->rx_len = i3c_xfers[i].len;
+> 
+> ** CID 294627:       Integer handling issues  (BAD_SHIFT)
+> /drivers/i3c/master.c: 181           in i3c_bus_get_addr_slot_status()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 294627:         Integer handling issues  (BAD_SHIFT)
+> /drivers/i3c/master.c: 181             in i3c_bus_get_addr_slot_status()
+> 175     	int status, bitpos = addr * 2;
+> 176
+> 177     	if (addr > I2C_MAX_ADDR)
+> 178     		return I3C_ADDR_SLOT_RSVD;
+> 179
+> 180     	status = bus->addrslots[bitpos / BITS_PER_LONG];
+>>>>      CID 294627:         Integer handling issues  (BAD_SHIFT)
+>>>>      In expression "status >>= bitpos % 64", right shifting by more than 31 bits has undefined behavior.  The shift amount, "bitpos % 64", is as much as 63.
+> 181     	status >>= bitpos % BITS_PER_LONG;
+> 182
+> 183     	return status & I3C_ADDR_SLOT_STATUS_MASK;
+> 184     }
+> 185
+> 186     static void i3c_bus_set_addr_slot_status(struct i3c_bus *bus, u16 addr,
+> 
+> 
+> 
+> View Defects in Coverity Scan
+> <https://scan.coverity.com/projects/das-u-boot?tab=overview>
+> 
+> Best regards,
+> 
+> The Coverity Scan Admin Team
+> 
+> ----- End forwarded message -----
+> 
 
-Looking at U-Boot's marvell10g code, I also see mv_test_bit macro
-and how it is being used:
-
-  #define mv_test_bit(iface, phydev) \
-    ({ if ((phydev)->interface & (iface)) return 0; })
-
-  mv_test_bit(PHY_INTERFACE_MODE_SGMII, phydev);
-
-This is completely wrong, since the ->interface member is not a bitmap
-(rather the currnet selected interface) nor are the PHY_INTERFACE_MODE_*
-values one-bit values.
-
-So this code will not work correctly at all in U-Boot.
-
-
-Now as to why Linux also has interfaces bitmap in addition to the current
-selected interface.
-
-The reason why in Linux we use bitmap of supported interface modes is so
-that we can select the best serdes mode switching behavior for the PHY.
-
-For example if the host only supports 10gbase-r serdes mode, then the PHY
-must always talk to the host in 10gbase-r mode, even if the RJ-45 copper
-speed was autonegotiated to lower speed (i.e. 1gbps). (There is another
-complication called rate matching that needs to be done in that case,
-but this is not important now.)
-
-If the host supports both 10gbase-r and sgmii serdes modes, we want the
-PHY to switch to sgmii if the RJ-45 speed is 1000/100/10, and to switch
-to 10gbase-r if the RJ-45 speed is 10000.
-
-The register configuring this behavior is called MACTYPE in the Marvell
-PHY.
-
-The following table shows how the PHY will change serdes mode depedning
-on the RJ-45 speed for some of the MACTYPE settings:
-
-               mactype=4   mactype=6  mactype=7  mactype=0
-  RJ-45 speed  sds mode    sds mode   sds mode   sds mode
-  ---------------------------------------------------------
-  10/100/1000  sgmii       10gbase-r  usxgmii    sgmii
-  2500         2500base-x  10gbase-r  usxgmii    2500base-x
-  5000         5gbase-r    10gbase-r  usxgmii    5gbase-r
-  10000        10gbase-r   10gbase-r  usxgmii    rxaui
-
-Marek
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
