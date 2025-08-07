@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E368C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 15:19:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D3B1C87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 15:20:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A08B845ED;
-	Thu,  7 Aug 2025 17:19:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 9E5A5845C8;
+	Thu,  7 Aug 2025 17:20:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="SKwTrnzm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rh3X/jIx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D328845EF; Thu,  7 Aug 2025 17:19:50 +0200 (CEST)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id A64AB845C8; Thu,  7 Aug 2025 17:20:49 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF214845C5
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 17:19:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1E4D9845C5
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 17:20:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-31f02b6cd37so1291017a91.1
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 08:19:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-458bf6d69e4so10834595e9.2
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 08:20:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1754579986; x=1755184786;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z+cNLWQ931a1pVKN6P4o2iu2Up1YChnklEZpd/hIm84=;
- b=SKwTrnzmvibJBPxms8KR++up2xuWlMkDePWgNhIRAMKm5QvsDIqNZclIY6FrdxUMXe
- hrK7MIfKdDg3v8QmgvypO9OGTp3esQdM8Su90hWEH0jjQoF1s4LuR3gj1WpQ1mm52J4H
- 9GeEHze+FIhB5D4+Mpngw8ISN3uVUbamQag6M=
+ d=linaro.org; s=google; t=1754580045; x=1755184845; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=eVbhaCH4FKGpFN9dhwKq8d0wYmG/EYnsD9Q17932vRM=;
+ b=rh3X/jIxfpltKFg4QA+S7BWGNXWbA2wLgvj2K7adxE9Krh3SJR9EUaeAcwTCl/2Xz1
+ p9TKXKhlthqfOQ8pBmIy3+fgQf2rlT/43lTxgYCCWo7Ndls8lHaR1Xa/POBVoEe6/UPZ
+ MqKFMinjb+1/yYFeH47oCuGOEmJBuBB5PIacyeK9Xzal5J+ZT2adZ0Ro/tUTX2izIYBs
+ gxXvVd3sc2LoHltbqFw1gZhUyVNXT6eQ4cZDzRFtDouIYOdrbQHkmOsjMag2qk6Gipbd
+ rLfff67+dRBsXvvmCYlXPELRQJV8alRNMcoV3ueNbGlYsw8AznwLC/tSlzUIpX+wkLIP
+ usug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754579986; x=1755184786;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z+cNLWQ931a1pVKN6P4o2iu2Up1YChnklEZpd/hIm84=;
- b=FMtc78RY5TsJEUizVfuWPRfqrpP8L88emQ4jFyWrisfsFPQQPV0KNCBtnumTIN0NDi
- k2Vuf6Slhq4cxSb6PzGZe2tF0o2wvAgDK01MFllpjT1KPOSJs12Oag3lKaMPSK48qE/4
- /MOOAoTjk+Gv6nc9aVnfBNHg1oVAL5hxe+yt5epuwIfrQcbR+8wq/H5lsQn/pExhOM5E
- Ry5KvUFFFr/d+SFkWmHQpjcx/eyQYJSuKMQ6Qr9xUgxYLMdkwvPDPiHdG7m7GJuQ1vJo
- esUZ+DrJtyzjRecRLIEKWqDDXA5Cu1xkTceUGglq1VD5HH+RlrJNfKbnSO3HmIHOHfVN
- xX4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVJNhAra4WZgFQhKqa7J3GAdUFKNJcKLMMHGVRBokO1Dn+ZTPop4XoVfk75MvatMiANNdjItDk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxiL7u0icxxjuYnJgn6I/rxPa0PJyZUkt40DTmmwSz4QzG5zC32
- iZA6ayIKQm6+4cPfgN+fW8Zn6RhUq5CJZraiXpVdoru7TmlcjyTyO+3bE6lh9ZsnZg2+vCUHRiM
- B2qpBtcsK5KrqgQvjn9Akn9pbstGCL2HXIrfd/nCyNw==
-X-Gm-Gg: ASbGnctsMF8+80W5EnEQ3ulQdfTuikcABSm2eO6ts11rQw6TvyXnondKSGxio0GJzAn
- +2H3Fa1hPflQS1oDRvVWYOngy2yPp6z/187S1FgoY1ihlDBlxIcrsec/eqnjqLh8bzOt7N98KTD
- J2MG/z4oK2F38ero5GZZH5/Xui2rELlXTEK38BO2kjYnAfnqFon7kUsxJzwsJckdyAQnqnBw15G
- Za7cGwI
-X-Google-Smtp-Source: AGHT+IGNfl7icc3RvJ7Vp45aMD0JvB8NLBMnSy1QEdzQQ/Qso72lMsniurkR1OTyhkAeEV09jZFxKGhEGOSHhSiOrD4=
-X-Received: by 2002:a17:90b:1d4e:b0:321:3b47:cdc7 with SMTP id
- 98e67ed59e1d1-321675924e5mr8890864a91.31.1754579985665; Thu, 07 Aug 2025
- 08:19:45 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754580045; x=1755184845;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=eVbhaCH4FKGpFN9dhwKq8d0wYmG/EYnsD9Q17932vRM=;
+ b=KthXg9CRdgCqGaSPx732MCcC4xl4zIs+6E/eDZp5j8VkeN472h0w38+wSFLIVhwY9D
+ s761vSrsg/X79MqLZAnxRf3+KgP1Dw0fVlrrEMXg5trllVodY3ppG/iHZ2BVSfNIfrqT
+ h8LYc5V4IdZF2CaEjnM9jcIHpPtZl9q7Vnma1SA69enGFAs17m+v2oTKsAIrlgVmFPtY
+ BvNCcjyVgnz3q6yD3UhEC3SEn9aPgec9f5FvHcukv4frcYIshqJ7ba1+tCrnsZ3YkcNQ
+ YgBxc1ijzox7ViS96EUnxTH+FnP94u446HvJT+U6ZIUsH9izvOgvwIwMfPo+dYb+s73N
+ og0A==
+X-Gm-Message-State: AOJu0YxYGEUjQTJ7mDknecaezM00FoeetVIcL/f2SEsFAMg4beeOFiPP
+ ZQ00N93wyZ6m2VBMS40jlKcYCT8QPE0f5aOZfLWU630XhoGxLqhy64xsC6Q8z+f4f0M=
+X-Gm-Gg: ASbGncvhPwUB/oteuh0JcTMorDafKchS2T4XytUXnRMjKFJvqyf/vd8QKILglKIUBVy
+ EF4l+YAQSXlMX8r1hsSXkTOEkKyXMRWAGSD+g0wWFHBOg5pZlBpTFrKbzO306+/V372TXPhefAM
+ mtnsGOD5m+AmaCNCZL++xB0WqWOJVXCkoL3ichcIz5vqkrwNb98/fpu31lOohCKPCnN5Lp9SIhw
+ dJMm4bqe4dzBqgd6CwLkomKbjJo0wFf4Bs/PpYkDUM09y47ICfWY7eBDet1EfXTfzOYyWpAjBMI
+ XD4vPQgrrDFKP1IKJSRkfQT64kvkzH0dI2sxN6WgLwC9Y51gkY7DlrVrKTK6v5+9kHOE6hsLoWV
+ NcONRzCi0LbM5liWUJLBnmm91oBDYrmlDt5EMQwRjPFyLhV9Wy2lJZPcxlMpUKdAYe2lNZ+QSqE
+ j5OQ==
+X-Google-Smtp-Source: AGHT+IE7Zu7kdJCWHPeJ5RpCFPEFv6qMcsPiSIs7mDoMFWMF9n52R6ALe69ow/y+TnsaVlCKU0PbJg==
+X-Received: by 2002:a05:600c:3b8a:b0:456:f9f:657 with SMTP id
+ 5b1f17b1804b1-459f0261f59mr23858835e9.27.1754580045517; 
+ Thu, 07 Aug 2025 08:20:45 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf?
+ ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c3ac51asm27744643f8f.1.2025.08.07.08.20.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Aug 2025 08:20:45 -0700 (PDT)
+Message-ID: <da609352-e4de-4958-a257-66eb76d801ee@linaro.org>
+Date: Thu, 7 Aug 2025 16:20:42 +0100
 MIME-Version: 1.0
-References: <20250701-mtd_nand_fixes-v1-1-f31517bdce2e@linaro.org>
- <0877def1-3ba3-4b97-a862-86c6db3f6b6c@linaro.org>
-In-Reply-To: <0877def1-3ba3-4b97-a862-86c6db3f6b6c@linaro.org>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 7 Aug 2025 17:19:34 +0200
-X-Gm-Features: Ac12FXzl0M05EmWD9RIHKi7eOcehKBMSPkX-Q1ZBD2WX-_3YsacKQCwEkeQwJiw
-Message-ID: <CAOf5uwnz0Cj8rdFxs+o-YQE67b_h29YhGiAmjvLWn8V9Nrk-kQ@mail.gmail.com>
-Subject: Re: [PATCH] mtd: nand: Prevent dereference of NULL pointer
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: exynos: Fix always true test
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250723-clk_exynos-v1-1-fcedf6be444b@linaro.org>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250723-clk_exynos-v1-1-fcedf6be444b@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,70 +102,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+On 23/07/2025 17:04, Andrew Goodbody wrote:
+> In exynos7420_peric1_get_rate the variable ret is declared as an
+> 'unsigned int' but is then used to receive the return value of
+> clk_get_by_index which returns an int. The value of ret is then tested
+> for being less than 0 which will always fail for an unsigned variable.
+> Fix this by declaring ret as an 'int' so that the test for the error
+> condition is valid.
+> 
+> This issue was found by Smatch.
+> 
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>   drivers/clk/exynos/clk-exynos7420.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/clk/exynos/clk-exynos7420.c b/drivers/clk/exynos/clk-exynos7420.c
+> index 3aa751bf4e4..7de4e688f03 100644
+> --- a/drivers/clk/exynos/clk-exynos7420.c
+> +++ b/drivers/clk/exynos/clk-exynos7420.c
+> @@ -192,7 +192,7 @@ static int exynos7420_clk_top0_probe(struct udevice *dev)
+>   static ulong exynos7420_peric1_get_rate(struct clk *clk)
+>   {
+>   	struct clk in_clk;
+> -	unsigned int ret;
+> +	int ret;
+>   	unsigned long freq = 0;
+>   
+>   	switch (clk->id) {
+> 
+> ---
+> base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+> change-id: 20250723-clk_exynos-b8ac6765f510
+> 
+> Best regards,
 
-On Thu, Aug 7, 2025 at 5:01=E2=80=AFPM Andrew Goodbody <andrew.goodbody@lin=
-aro.org>
-wrote:
+Are there any comments on this patch please?
 
-> On 01/07/2025 17:12, Andrew Goodbody wrote:
-> > In nand_wait_ready there is a loop that includes a NULL check for
-> > chip->dev_ready before it is dereferenced. Use a NULL check once the
-> > loop is exited as well to cover the case where it exits due to a timeou=
-t
-> > and it is therefore not known if chip->dev_ready is NULL or not.
-> >
-> > This issue found by Smatch.
-> >
-> > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> > ---
-> >   drivers/mtd/nand/raw/nand_base.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/mtd/nand/raw/nand_base.c
-> b/drivers/mtd/nand/raw/nand_base.c
-> > index d3d1b93947b..48e3685d995 100644
-> > --- a/drivers/mtd/nand/raw/nand_base.c
-> > +++ b/drivers/mtd/nand/raw/nand_base.c
-> > @@ -566,7 +566,7 @@ void nand_wait_ready(struct mtd_info *mtd)
-> >                               break;
-> >       }
-> >
-> > -     if (!chip->dev_ready(mtd))
-> > +     if (!chip->dev_ready || !chip->dev_ready(mtd))
-> >               pr_warn("timeout while waiting for chip to become
-> ready\n");
-> >   }
-> >   EXPORT_SYMBOL_GPL(nand_wait_ready);
-> >
-> > ---
-> > base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
-> > change-id: 20250701-mtd_nand_fixes-191e5a19932d
->
-> Are there any comments about this patch please?
->
->
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
-
-I will queue end of the week
-
-Michael
-
-
-> Thanks,
-> Andrew
->
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Thanks,
+Andrew
