@@ -4,50 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC283C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 14:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7667BC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 14:53:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49D85845A3;
-	Thu,  7 Aug 2025 16:42:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=prodrive-technologies.com
+	by phobos.denx.de (Postfix) with ESMTP id 9E5CB8459D;
+	Thu,  7 Aug 2025 16:53:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ri35m9QC";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D164C84514; Thu,  7 Aug 2025 16:12:59 +0200 (CEST)
-Received: from mail.prodrive-technologies.com (mail.prodrive-technologies.com
- [212.61.153.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 519FE845A2; Thu,  7 Aug 2025 16:53:27 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 028F183C62
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 16:11:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=prodrive-technologies.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=paul.geurts@prodrive-technologies.com
-Received: from EXCOP01.bk.prodrive.nl (10.1.0.22) by EXCOP01.bk.prodrive.nl
- (10.1.0.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Thu, 7 Aug 2025
- 16:11:14 +0200
-Received: from lnxdevrm02.bk.prodrive.nl (10.1.1.121) by
- EXCOP01.bk.prodrive.nl (10.1.0.22) with Microsoft SMTP Server id 15.2.1544.4
- via Frontend Transport; Thu, 7 Aug 2025 16:11:14 +0200
-Received: from paugeu by lnxdevrm02.bk.prodrive.nl with local (Exim 4.96)
- (envelope-from <paul.geurts@prodrive-technologies.com>)
- id 1uk1Ks-001JqM-1C; Thu, 07 Aug 2025 16:11:14 +0200
-From: Paul Geurts <paul.geurts@prodrive-technologies.com>
-To: <primoz.fiser@norik.com>
-CC: <jh80.chung@samsung.com>, <trini@konsulko.com>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>
-Subject: Re: [PATCH] power: pmic: pca9450: Add support for system reset
-Date: Thu, 7 Aug 2025 16:11:12 +0200
-Message-ID: <20250807141112.310426-1-paul.geurts@prodrive-technologies.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <81e88a5b-a033-4ee0-a895-35465955edce@norik.com>
-References: <81e88a5b-a033-4ee0-a895-35465955edce@norik.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 2A6ED8457E
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 16:53:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3b783d851e6so931465f8f.0
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 07:53:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754578404; x=1755183204; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6TTP/1gEj0uOlo2SdrbVobqenR9WuH4XQaWnnRRFuMk=;
+ b=Ri35m9QCnF+I437fF9tZFt4gf+wiN3FjtBrwgexnajKnAbUc06S27bbj5L7FQWgxWt
+ 3HjhcJoX+hldSUxjeBvicnFr1OwdDgz3T9AU9Owm9D5qWLH4M8LJdX7z8lX+R2lzCcPK
+ JkiOfysPnHjy5IWaQy8V6VMYEcol+mlMh5ky4w5ye2SpJDF5/3IMdXKggIk+jy93JcQx
+ lTZng0m1Em35JnXGr0Ljn4mnbPxkUbtmWRScFvFLYSSBzA5QQl9bqBZzh75p2nGCdU4M
+ cLilijR40miPUaqhmsrFJtq7obHk9T+qnNl8yPfuS0B5wQlrutZVD0Eum9RuBAIJnrIh
+ Ht7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754578404; x=1755183204;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6TTP/1gEj0uOlo2SdrbVobqenR9WuH4XQaWnnRRFuMk=;
+ b=h+l3d1c6/UgJsgLFmct/9+VTilzwYzfh546N7L8mgGFxaBmCXZB7gr0W6UVGdqirqd
+ 7R3Vl3PsKTEYftQbCNMkJPDLx19/Ktz/U9yQyTY12oPdRoG5s/hKnnvXWZxzgiXOnboA
+ htdPwSnsJRpsat6mzKU5ymlxeWti0Devbjcz9MuCPmpTsNJ2a5Mh3tfnvoiim3/v6jjo
+ 81l7X7+4lR/7Q/BiX12m3ZbFO/lfUis3bE5xL31zqdwsQKMA97PtSDlMDMuPppmzsN8O
+ w/IDIVOK6tV9LLob61018bcakjFzDCGCnMeRNCxbxokpaUAppXwPM96RfOUS3dp2TFe4
+ odDQ==
+X-Gm-Message-State: AOJu0YwTPOxr0l6htv/F7FBoZhTTxxccKxWTDeCAWe7BJ0/mSu2o6E73
+ fpZF4CWYvqNTqnpECJ7VhSnu50g4GCDyRDtlcz+aQA76JgvRPE+l2GRkYDOVfob5/UnAwebJERl
+ g/UHQm0k=
+X-Gm-Gg: ASbGncsq150pnAPddNtRYs/RhiBANZrT6knu42BPrR3m/WbdevE1YvKXKOIULKVxtJ+
+ eWH2Z5MGpKeMoD3s+3R8dHdJdpalb0rg4hP2HvOsi+ZnJSk+/XSkV8J5R4D5yX2rHoaEPLeEYmX
+ mksW1WZFHNFYnS4wVbm5x1JGHm/bQRlfiHIyoIZnvoAPu2aFRl+wSPOiGFWb6jN7sj82TrkFZ3q
+ bgAMxI/wXQUgpvoJAgl9MftNVJUAF4myD0avFAAiIpk3vUUsN0T28oh/r+mWO9HzYXHYXeXQ6ZN
+ MDTesoodiOdan3J4iLmSZmfhfMjSzSInFFnPCoMb5qaLscyAokY1kTYQsTAeUFkKDq4H25MAoss
+ ah3SbQBY0BP/CFOvjQRKUmiqd+Fqpoc/chV5xcWQ0NsJmbu00dHjIQ43kbXWfE+guCGpeRPAzVo
+ b5pg==
+X-Google-Smtp-Source: AGHT+IEabaY/J66YGzOZTyddiAU1BenHUEqraD14XgATB6a6wbyS7n5u5rrgV4l+cUTPB8rWYoDUzQ==
+X-Received: by 2002:a05:6000:24c1:b0:3b7:8832:fdcc with SMTP id
+ ffacd0b85a97d-3b8f4917bb0mr5312483f8f.38.1754578404492; 
+ Thu, 07 Aug 2025 07:53:24 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf?
+ ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e5868fd7sm105212345e9.18.2025.08.07.07.53.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Aug 2025 07:53:23 -0700 (PDT)
+Message-ID: <47d88897-b299-4389-b42f-475f10134f2b@linaro.org>
+Date: Thu, 7 Aug 2025 15:53:20 +0100
 MIME-Version: 1.0
-Reviewed-by: Paul Geurts <paul.geurts@prodrive-technologies.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Mailman-Approved-At: Thu, 07 Aug 2025 16:42:48 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: Return value calculated by ERR_PTR
+To: Quentin Schulz <quentin.schulz@cherry.de>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250703-clk_uclass_fix-v1-1-9b6cc81c9490@linaro.org>
+ <2f38e9d5-f030-4b66-ab90-9111a02657ec@cherry.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <2f38e9d5-f030-4b66-ab90-9111a02657ec@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,181 +105,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Primoz,
+On 14/07/2025 13:37, Quentin Schulz wrote:
+> Hi Andrew,
+> 
+> On 7/3/25 4:40 PM, Andrew Goodbody wrote:
+>> In clk_set_default_get_by_id ret is passed to ERR_PTR but nothing is
+>> done with the value that this calculates which is obviously not the
+>> intention of the code. This is confirmed by the code around where this
+>> function is called.
+> 
+> Indeed, they do check the return code with IS_ERR() which indicates 
+> there should be something returning an error pointer somewhere, which 
+> doesn't happen right now?
+> 
+> So this seems like a valid change to do.
+> 
+> Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> Thanks!
+> Quentin
 
-Primoz Fiser wrote:
->Hi Paul,
->
->On 4. 08. 25 19:30, Paul Geurts wrote:
->>> The family of PCA9450 PMICs have the ability to perform system resets.
->>> Restarting via PMIC is preferred method of restarting the system as all
->>> the peripherals are brought to a know state after a power-cycle. The
->>> PCA9450 features a cold restart procedure which is initiated by an I2C
->>> command 0x14 to the SW_RST register.
->>>
->>> Support in Linux for restarting via PCA9450 PMIC has been added by
->>> Linux commit 6157e62b07d9 ("regulator: pca9450: Add restart handler").
->>>
->>> Now add support for it also in the U-Boot via sysreset framework.
->>>
->>> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
->>> ---
->>>  drivers/power/pmic/pca9450.c | 42 ++++++++++++++++++++++++++++++++++++
->>>  include/power/pca9450.h      |  2 ++
->>>  2 files changed, 44 insertions(+)
->>>
->>> diff --git a/drivers/power/pmic/pca9450.c b/drivers/power/pmic/pca9450.c
->>> index 9d875f8bdbe8..abc39d0a1946 100644
->>> --- a/drivers/power/pmic/pca9450.c
->>> +++ b/drivers/power/pmic/pca9450.c
->>> @@ -7,15 +7,18 @@
->>>  #include <errno.h>
->>>  #include <dm.h>
->>>  #include <dm/device_compat.h>
->>> +#include <dm/lists.h>
->>>  #include <i2c.h>
->>>  #include <linux/err.h>
->>>  #include <log.h>
->>>  #include <asm/global_data.h>
->>>  #include <asm-generic/gpio.h>
->>> +#include <linux/delay.h>
->>>  #include <linux/printk.h>
->>>  #include <power/pmic.h>
->>>  #include <power/regulator.h>
->>>  #include <power/pca9450.h>
->>> +#include <sysreset.h>
->>>  
->>>  DECLARE_GLOBAL_DATA_PTR;
->>>  
->>> @@ -101,6 +104,14 @@ static int pca9450_probe(struct udevice *dev)
->>>  		}
->>>  	}
->>>  
->>> +	if (CONFIG_IS_ENABLED(SYSRESET)) {
->>> +		ret = device_bind_driver_to_node(dev, "pca9450_sysreset",
->>> +						 "pca9450_sysreset",
->>> +						 dev_ofnode(dev), NULL);
->>> +		if (ret)
->>> +			return ret;
->>> +	}
->>> +
->>>  	if (ofnode_read_bool(dev_ofnode(dev), "nxp,wdog_b-warm-reset"))
->>>  		reset_ctrl = PCA9450_PMIC_RESET_WDOG_B_CFG_WARM;
->>>  	else
->>> @@ -134,3 +145,34 @@ U_BOOT_DRIVER(pmic_pca9450) = {
->>>  	.ops = &pca9450_ops,
->>>  	.priv_auto = sizeof(struct pca9450_priv),
->>>  };
->>> +
->>> +#ifdef CONFIG_SYSRESET
->>> +static int pca9450_sysreset_request(struct udevice *dev, enum sysreset_t type)
->>> +{
->>> +	u8 cmd = PCA9450_SW_RST_COLD_RST;
->>> +
->>> +	if (type != SYSRESET_COLD)
->> 
->> The PCA9450 calls it "cold reset", but it is technically SYSRESET_POWER.
->> There is no option for it in the sysreset do_reset, but maybe there should be.
->
->Yeah, the default is SYSRESET_COLD.
->
->Additionally, there is only support for warm rst type (SYSRESET_WARM) in
->do_reset for now.
->
->I decided not to implement it to keep it as simple as possible and in
->sync with your Linux support.
+Is there anything else needed to happen before this can be merged please?
 
-Understandable. I think it's fine like this too.
-
->
->> 
->>> +		return -EPROTONOSUPPORT;
->>> +
->>> +	if (pmic_write(dev->parent, PCA9450_SW_RST, &cmd, 1)) {
->>> +		dev_err(dev, "reset command failed\n");
->>> +	} else {
->>> +		/* tRESTART is 250ms, delay 300ms just to be sure */
->>> +		mdelay(300);
->>> +		/* Should not get here, warn if we do */
->>> +		dev_warn(dev, "didn't respond to reset command\n");
->>> +	}
->>> +
->>> +	return -EINPROGRESS;
->>> +}
->>> +
->>> +static struct sysreset_ops pca9450_sysreset_ops = {
->>> +	.request	= pca9450_sysreset_request,
->> 
->> When using the PCA9450 to perform a cold reset, the CPU boot status shall
->> _always_ be POR, as that is what the CPU detects. This means the boot status
->> should also come from the PCA9450 when enabling CONFIG_SYSRESET option.
->> 
->> I think implementing pca9450_sysreset_ops.get_status() to read the
->> PWRON_STAT register should do the trick, but I am not that familiar with the
->> sysreset in U-Boot.
->
->You read my mind :)
->
->I have support for get_status() already prepared but I am waiting for
->this patch to get applied first.
-
-I you get this patch applied, you will effectively break the boot status,
-which would be regression in U-Boot. If you have the commit ready, I think
-it should be a patch series.
-
->
->Your Reviewed-by tag would help here if possible?
-
-Yeah will do.
-
->
->> 
->>> +};
->>> +
->>> +U_BOOT_DRIVER(pca9450_sysreset) = {
->>> +	.name		= "pca9450_sysreset",
->>> +	.id		= UCLASS_SYSRESET,
->>> +	.ops		= &pca9450_sysreset_ops,
->>> +};
->>> +#endif /* CONFIG_SYSRESET */
->>> diff --git a/include/power/pca9450.h b/include/power/pca9450.h
->>> index e5ab09fb8c83..9119ef793b1f 100644
->>> --- a/include/power/pca9450.h
->>> +++ b/include/power/pca9450.h
->>> @@ -75,4 +75,6 @@ enum {
->>>  #define PCA9450_PMIC_RESET_WDOG_B_CFG_WARM		0x40
->>>  #define PCA9450_PMIC_RESET_WDOG_B_CFG_COLD_LDO12	0x80
->>>  
->>> +#define PCA9450_SW_RST_COLD_RST		0x14
->>> +
->>>  #endif
->>>
->> 
->> Thanks for porting it to U-Boot :-)
->
->You're welcome.
->
->Thanks for adding support in Linux.
->
->BR,
->Primoz
->
->> 
->> br,
->> Paul
->
->-- 
->Primoz Fiser
->phone: +386-41-390-545
->email: primoz.fiser@norik.com
->--
->Norik systems d.o.o.
->Your embedded software partner
->Slovenia, EU
->phone: +386-41-540-545
->email: info@norik.com
->
-
-br,
-Paul
-
+Thanks,
+Andrew
