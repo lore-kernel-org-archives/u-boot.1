@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 841C6C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 16:35:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C043FC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 16:36:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68FED84669;
+	by phobos.denx.de (Postfix) with ESMTP id B184C84673;
 	Thu,  7 Aug 2025 18:35:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SuYP0GP8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G0tZ53zy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2654884658; Thu,  7 Aug 2025 18:35:26 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 7D74F84669; Thu,  7 Aug 2025 18:35:27 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E34D83B4E
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:35:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A63083C2F
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 18:35:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-459e20ec1d9so12107665e9.3
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 09:35:24 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3b7848df30cso1245783f8f.0
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 09:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1754584524; x=1755189324; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GHuAyfa+moeCbV6o05+Cmi2axPtL2sEGw4pdbmdJnjA=;
- b=SuYP0GP8NGu+x8hmF+4+w4Jl1qwrrt8oFXO3F977fgSiRCU/jWtrl+aB0A7n1LEKrj
- m2ttvl7gQd9vVUHtZUJGgM0QgQhHFOwbtdnXYQtgPxvscna0vNsMB2KviDWim1epZFTo
- 9Yp5s7EDlXX+yw6J2ny5mbnpytS0RX3w51F1Qg+/x3hQp0G/6lnJanPdqRKohBU0EErj
- Ai1DUI3hFPP3fLp6Tp+Wzgn5/hOTnaleypdFg6o5Kv3OmcLMmb14VIdaBxHZI3mPYckh
- PGeRvOwvlduyB5bOsgUFq1lCICCZE+f0VkERoAKlBnEHiWuApmIBXjB+F0pYncBAN74Q
- nabw==
+ :reply-to; bh=3qorVhdnewt6HPBp1f+HiNakVbRMPMXF7DytVZBZFAI=;
+ b=G0tZ53zyCoaHTSARA/0dqqUVMSukGh5KhCDkymLMHJTZJ6SX/xZw6dL7Af4IglyY9N
+ B8RrYw0YIy5DD/3Z23hkSSqnelLsNIhDQO3A7xadkX2FbYa9CLlt53ZC/4Efbl632aau
+ sryl9I5y/fMcjjOJgz5ZIn8ulWPoH3ouA1CkIcwMlOrZp5/81Y93cTfJ0ruSUIsDk+gm
+ q8e0+YnTcgsKwCnfFv0dmt+T8Xz5VKrWY1WVmnWvOzRo86UcT59kYqWPZzoptF7C3u4Y
+ cUqJu4rtGIXnn/Pr0EOql/ZPjzf75TvdaaX+Lqa7oUM8nG7xroDoQgWlUiaPtldVOUAN
+ OAsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1754584524; x=1755189324;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GHuAyfa+moeCbV6o05+Cmi2axPtL2sEGw4pdbmdJnjA=;
- b=jbi6wENgQLPH+pvo4i7uyKxXp9szK0YT8BOFCISHN+C81BTYU5mcsQCNwLHci40KVJ
- BXzVIvztKxRysg+jxTP/zrN4tgot9isS+/10XJoim6lwDgBjQZSBomu0P098lBfILI8I
- S2eJDn3JG/FM8V+VVeldV+QuiLqfVgCj75GVraWZMCDiwv3r7hPdx6DxREaRKiRASZ3S
- bL0jRRP1OVKYaZ/4u/wAVwo8cvK6ty3GGq2W/PgP6rbRD9HAMDQKRGY0JzYT2HifNimE
- FZdDKrqHAiH8kmMoLOekSVbUBwD6mt16ZcUXbvQajLaXzwc6x2/ZgD6U5thwCYTtZbLA
- aolQ==
-X-Gm-Message-State: AOJu0YzJq+kbjWrC1DYZljeKOL2huIyXgUxxD+33Z4lC2ygwRFjzLWd5
- Br1vMXc/D+Y4lcKy5j76dBcHJ6LgZfZm0sLtgwWzj7Ey273f+CyFe0p2Znl5uplN7hjuiFsoOJS
- YC5YStI4=
-X-Gm-Gg: ASbGncv7DR+y1kuJKcZtYM/NWI16f8asvXWLHqkilifHY7GcF+A3oGm6p0sfpouauOx
- 9lr9EkRvHzM1AtT+4DirCruK3B00umfM43Wj8fm8KoqjzovrCM1bjh72bgeVbQleg4K7BWljs4t
- NYdHem+hyl9IyZxfVcJYU+NQRUh1kjv4iKziQUvWtb4dcQ/gm7SbkmiOUVylBG6pgK0e6+kUr+1
- TnnUvD4VlAAWxAOx27XPPH2zaeaDdtYV7qxh+AyTYYOklFkzA7NbJwARxl1pWnHbWNywkgNwy07
- go4SEQWSDkhaaO6zX5dEwsiEZA32qof32+QQ+GvegUZ2MdpLXeY41QSh4CE0kBx2dPpC/Uo4PwL
- qvp1eLi2Iuwq5T4ewdq6A4A9M1AG4AZE7xTbLEbRK0mAq64pYFkM=
-X-Google-Smtp-Source: AGHT+IELZG5wFRZFJXu8KCWRjyIV/DIdRk3/3EacIwMWHRycRAVZSWVVekv6KSBRFfCdN9nvo2eJGw==
-X-Received: by 2002:a05:600c:4447:b0:459:dfde:3359 with SMTP id
- 5b1f17b1804b1-459e7479468mr64978855e9.32.1754584523601; 
- Thu, 07 Aug 2025 09:35:23 -0700 (PDT)
+ bh=3qorVhdnewt6HPBp1f+HiNakVbRMPMXF7DytVZBZFAI=;
+ b=RA+j1Ei6B6dzf/aVtOSYZMuRu/G4+HzcDCmAbQ004gb+dFG5KL3+iW3ZdUWQWw7ali
+ FP3qJ3S4MVP6BJUmg7GIhl3S7yAC0kKqouH830wk+BbVmWpa1dYYt1N5nK+6Ms6vgdNX
+ Yr6xycg5E5EmOnMxReDn75TCOr/KpGHsQCLD4tjR0HINxQdztTBUKvSI7q72Cw2afSKq
+ duGxtgMpogvewV3QzA0RCvxf2iHtnP6n4GRh1k6em1qkHq4YU4OKQn17oDDc/k4eIaDM
+ bs5I+ljFnYXcO7OOdpXV+h0EBfNssgIapVFe4LSKIfcPxIWazU3hgCR8D5iuKLEyRfFQ
+ 8eOA==
+X-Gm-Message-State: AOJu0YxP0fEAhnOy4pglaXc3/F43l3J4zCPRdGGiJpNbtByPes0F/hTO
+ jYsJ1zZNYT7/3TypssopCGOnnTruJSJcitreQmEPUPC1jH6BvdK3I9BUem0biCKvt6U=
+X-Gm-Gg: ASbGncs0mqxwEvfHeMmJbuNZF8y5JmFgH3RPopb3qx4pkjt95c98T77+HORNfTn0Yln
+ BanG4WlwJ6BuyU3YfoNml/c1KHCLaJOm0haY7c48uG41K5enroC+i3qb7phrNszLbxhRAqOK4q8
+ MW0a0xUDWQ3t8dQPqZrmZusCDVJcf3zZhjKjkkeniFP8bIA4YeJ2iURfuK0QZveFpGMUaPliTtH
+ LdM4FcjzVVxkZE22Z35fUE+2VL+0qOuFWm009GJzKom/dqYauZ5YypamWWDK0gc94QOzTR1qPEV
+ XXVxdDJffRLZVoI7Za4e6gR6iAU/3XG7M8Vcb+Thp/B1fL6Vl4az6CTeLW+oApAwI5yOCbmnoBc
+ +z8Dlarh5AbnTLWhGQpWIEJe5pwCDe+9iR5vaZNkH+WDhTqA3AO4=
+X-Google-Smtp-Source: AGHT+IFPrBXfvn5p9BTt6xBl8mRHNnx/RVD841l8FcXBJJeUNVlKOgzabgW3/M2Z9deNPop5/MAlbA==
+X-Received: by 2002:a05:6000:2c01:b0:3a5:8991:64b7 with SMTP id
+ ffacd0b85a97d-3b8f97f50c7mr4309013f8f.26.1754584524448; 
+ Thu, 07 Aug 2025 09:35:24 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e5b84674sm108141375e9.30.2025.08.07.09.35.22
+ 5b1f17b1804b1-459e5b84674sm108141375e9.30.2025.08.07.09.35.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 07 Aug 2025 09:35:23 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 07 Aug 2025 17:35:20 +0100
-Subject: [PATCH 3/6] power: regulator: palmas: Cannot test unsigned for
- being negative
+Date: Thu, 07 Aug 2025 17:35:21 +0100
+Subject: [PATCH 4/6] power: regulator: rzg2l-usbphy: Add parenthesis to
+ return expression
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250807-pwr_regulator-v1-3-42a4105336ec@linaro.org>
+Message-Id: <20250807-pwr_regulator-v1-4-42a4105336ec@linaro.org>
 References: <20250807-pwr_regulator-v1-0-42a4105336ec@linaro.org>
 In-Reply-To: <20250807-pwr_regulator-v1-0-42a4105336ec@linaro.org>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
@@ -102,44 +101,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In palmas_smps_val and palmas_ldo_val hex is an unsigned variable being
-assigned the return value from a function that returns int. Change hex
-to be an int so that the following test for an error as a negative value
-will work as expected.
+In order to get the expected result from
+rzg2l_usbphy_regulator_get_enable the return expression needs
+parenthesis so that the binary and is performed before the double
+logical not.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/power/regulator/palmas_regulator.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/power/regulator/rzg2l-usbphy-regulator.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/power/regulator/palmas_regulator.c b/drivers/power/regulator/palmas_regulator.c
-index 2286eac93fb..7212062c8c8 100644
---- a/drivers/power/regulator/palmas_regulator.c
-+++ b/drivers/power/regulator/palmas_regulator.c
-@@ -115,8 +115,8 @@ static int palmas_smps_hex2volt(int hex, bool range)
- 
- static int palmas_smps_val(struct udevice *dev, int op, int *uV)
+diff --git a/drivers/power/regulator/rzg2l-usbphy-regulator.c b/drivers/power/regulator/rzg2l-usbphy-regulator.c
+index 451f04c140e..0354555d0b5 100644
+--- a/drivers/power/regulator/rzg2l-usbphy-regulator.c
++++ b/drivers/power/regulator/rzg2l-usbphy-regulator.c
+@@ -27,7 +27,7 @@ static int rzg2l_usbphy_regulator_get_enable(struct udevice *dev)
  {
--	unsigned int hex, adr;
--	int ret;
-+	unsigned int adr;
-+	int hex, ret;
- 	bool range;
- 	struct dm_regulator_uclass_plat *uc_pdata;
+ 	struct rzg2l_usbphy_ctrl_priv *priv = dev_get_priv(dev->parent);
  
-@@ -251,8 +251,8 @@ static int palmas_ldo_hex2volt(int hex)
+-	return !!readl(priv->regs + VBENCTL) & VBENCTL_VBUS_SEL;
++	return !!(readl(priv->regs + VBENCTL) & VBENCTL_VBUS_SEL);
+ }
  
- static int palmas_ldo_val(struct udevice *dev, int op, int *uV)
- {
--	unsigned int hex, adr;
--	int ret;
-+	unsigned int adr;
-+	int hex, ret;
- 
- 	struct dm_regulator_uclass_plat *uc_pdata;
- 
+ static const struct dm_regulator_ops rzg2l_usbphy_regulator_ops = {
 
 -- 
 2.39.5
