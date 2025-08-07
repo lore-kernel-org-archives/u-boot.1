@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF9C0C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 10:04:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF59EC87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 10:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8CEF843E2;
-	Thu,  7 Aug 2025 12:04:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AB0B4844D3;
+	Thu,  7 Aug 2025 12:04:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FZ3DpqK3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ciKZDQzS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 938AC844D3; Thu,  7 Aug 2025 12:04:17 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id D55EB83C39; Thu,  7 Aug 2025 12:04:20 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 605C5843E2
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 12:04:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A6D783C53
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 12:04:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-459e1338565so7598855e9.2
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 03:04:09 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-459ebb6bbdfso5518415e9.0
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 03:04:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754561049; x=1755165849; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754561048; x=1755165848; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NWmcgE1aBA51xD637InwQt/TNC6PnCEa7tdsryQhb90=;
- b=FZ3DpqK3Dm1a/DvDVzrPPKC74B42tN8yD8x6Ns1xtEUJyEaYYpSf/Onvu+iZUhX2rR
- 4/nroDV7bi/eV01cpjZ+VvrShywd/dBStG5JhLCNirngWhEuVfzHfjwoPzsStD6f6i+E
- dOdUqLaiS0cy7I2MAb/JJDeivl3f/sYYoZ/lpgeEN2ikbBFXQiu5ZxKHdVPQgkYclAOA
- /FwsWXyIV4kH0xuNnYLqU59bLzzX3u62pmpkT1AffQl3lnyeMkt07a5l2cJHGwvvlb2b
- wn0HEGxLQVq+c4cUZ7/gDcNCIYFke0MiqD8byURMjZxLGZ2lOdUrMH7VXTz65WCYca6U
- d4fw==
+ :reply-to; bh=MH3TF5/YN4Hlu7k7zMMLjhGJygDR5pgvQMYQq30nvJI=;
+ b=ciKZDQzS/HNsZMhZqNWppxuYePnZfmMTxFZbbCJjDYngbgjWVSjtrGPHchztzkUZ51
+ +TWuoO0eeiZtVvzlPzyBUAwM8SH/mEoPGoo9/WS82wTlUmzpj6IdtgCws8pdnMJaOGOR
+ +BAsV0jKicGdudvvovcNhvdQaJ7DM6pEmHOJStuUm0sY+espkocByRCgvYsUCgESVMWz
+ cGIPzcIvfPKC6y8KZdGE1bIgIQT1jb1/om/wkuIAGUQYAi4WayNzT7BSHq/fIAINJHJM
+ yU3zuPlNUOr4LVrMPRNWD14m4/GY1JjAtcF+uRrPi7Ok6wz09tE+nb/OAlRRgLoUOv/X
+ MSIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754561049; x=1755165849;
+ d=1e100.net; s=20230601; t=1754561048; x=1755165848;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NWmcgE1aBA51xD637InwQt/TNC6PnCEa7tdsryQhb90=;
- b=rPAzn2Iwg58O89gAeqs6Z7+OBkq008nZyOyEI74/7lVOZp5/0CVfEHpxs3lv8/pF/o
- 4HTsRKsvex3L+wc+3IOSRb0Mjo8RsUXZgucNWdgFyBJ3FAiO/hWGvwjwloM+9Mfqn/xA
- y13T3N9+ouU2wOfomwPfnNYG65E9m444hFOOGrrXvAmrRfsxVXQbsV5J3ZnTgAglvwip
- tsjUXduIBT2F1Q5KSJ6vVR3WG6szChQ8yPdVpQIUWqS5T8E+NS/Fjdp4Vmn5igVoM+1m
- Xn+qJPKZEHvgjFNwXHdmYVqSf3uiAfVpRtCxROx4deymjRacbGnQYnD72Ce3ljrC94my
- aSXA==
-X-Gm-Message-State: AOJu0Ywt33J0NwTtiDDnkzdOfvNm4UvNAnDsdQKLdsxVVg2D9IkBsfL3
- kmJrBrVgW7vwAtny+S4IGcoDpMa75U7qR7StGwZtRqjbnVxgjJFdasbRcIlopGnCvpZ/Ll7wSp8
- Qn4e5dgQ=
-X-Gm-Gg: ASbGncuzKj7Nm0YrnBjeHN4bMBDDWEbP06koXx+YpBnN2uNZj1O506yoyFYaVB1WKfw
- YHNT4IkOVbMtdgIy0KoO8WEJztt4pEJWt7EIwZbwxUfM0SSD9BFsAx7bXGHsyDIa/Q38EUQy3Qj
- IWM98fQstDN2aM9Xf7O3/FTDGg5qmQaS0s8d032Q9O2mLex79RJLnAVFO70IBCWYOKAzfwvxZTD
- hMG6r5blgtgS8cMWLiUmdmK6YhekZDPDD//Y+UI0aME2FVfQeYzV10/fKbTtMm6QEt3Qg5gBFL0
- nr0MNSGMpzwTDqip9Pw4liBudyLj+WkAc7v21hf5vlARSDugAWcvzp5jkaQWOiLUxlT7UJVRIfv
- aH5k1A5P1ZeE5CfM6fiaqtAnWCHF/RDagOfxhLvbQnb4VKc+RTYU=
-X-Google-Smtp-Source: AGHT+IHI614TRbGBYy+TwQEwQrP0yM0OIFYIfT1xbyW3DGNjHAnLriRO+ufs5t3DK8/eQLnM1jn/CQ==
-X-Received: by 2002:a5d:5d85:0:b0:3b7:76e8:b9f7 with SMTP id
- ffacd0b85a97d-3b8f48de5demr4783729f8f.10.1754561048694; 
- Thu, 07 Aug 2025 03:04:08 -0700 (PDT)
+ bh=MH3TF5/YN4Hlu7k7zMMLjhGJygDR5pgvQMYQq30nvJI=;
+ b=AP7zmGqTshp+1qyYRXGugqwD4ES8algwQui9nTIB8F4olqkRtZJ0Ot9LcElJnSI48g
+ vz4c4zGGAFmwr/v+1SV9Yjeo6kF6XBoPNHk1IET4gdnkKnwKjPOnVidcax82mMvRa+/E
+ PzvVk+AgA+dh+sxpt/WxNRubm4eD75ayKfoJ5qnbxV7Y2CuvJN6v0gxkEWqY+ExKuE4r
+ 9pm837iKKOgSicLCqo/qQHxDPWP5lYCfH8Ov1o4c9nJli6zOpZFfjrZOWdBWttX+gxvZ
+ P3Z4OZXxCrFgK1CI0OsriwpIaQ0s4IvgYgAgzHO/UNFChKqKACdzVDELmNlYHxcfRhk6
+ JbFg==
+X-Gm-Message-State: AOJu0YwkW9+oNcTufAJiS3cvjGga70q972E6yaOnrXXsg2OCqBJbn5rg
+ CUCGRkYdZn22f8Jt2kC9g7ANavihYdumjdQBrogaUYaJwUzjrKHLFxC3LqQXb33fwkIdF34mUBV
+ c54Zi6xI=
+X-Gm-Gg: ASbGncsrCtvecU8c9IrsT2NltGFLlY+f7NooDWWLVxIaV6W/fY7hAuybuaN+wq1hpnZ
+ pKpcQM1L0Hb4o58Uz5Ix4zeEOv2Eqsi9MhCjdKuXuVMHFtMXI8GZcK60PP2pEY+HkW/79iwSo/s
+ WDPm436Hay2Xr0BLN5E9lTrAimkcQa0SzInAmS2/NH7WP4ODFckSwLXc2jHF3Lu8nNrT2j2eeIT
+ izMlqChJ5uRdDHW1bHAOxiDZyjkZaauUFNgW8mV9Xwoh8gP0u47W4A/gow1dwP3cYANKU3oZgO+
+ LF14NwWBud1UOpQ/Wk5Ms1f4HY9hOVKwsvh0u/kpkiOH+In9p3Mk3yE3HQRSGzAhiiz37WZpbe9
+ EaeDAx9LE8XNubFyz8kQc/fwxeUElfcLVYk1e5L0vR4bvRWO7FOik3SxLFdR+Nw==
+X-Google-Smtp-Source: AGHT+IExm+su1cnyCFtPZpieI0b+diInV7z0DG6JrkXUwhKyIIwdmRm3Rbp5AzaM60RP8X4UGU5Owg==
+X-Received: by 2002:a05:600c:1d25:b0:456:1904:27f3 with SMTP id
+ 5b1f17b1804b1-459ee85db8bmr22084485e9.18.1754561047925; 
+ Thu, 07 Aug 2025 03:04:07 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458953eaeeesm358481575e9.25.2025.08.07.03.04.08
+ 5b1f17b1804b1-458953eaeeesm358481575e9.25.2025.08.07.03.04.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 03:04:08 -0700 (PDT)
+ Thu, 07 Aug 2025 03:04:07 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 07 Aug 2025 11:04:04 +0100
-Subject: [PATCH 3/4] pinctrl: zynqmp: Ensure ret is initialised
+Date: Thu, 07 Aug 2025 11:04:03 +0100
+Subject: [PATCH 2/4] pinctrl: stmfx: Remove duplicated code
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250807-pinctrl_misc-v1-3-eeb564a1b032@linaro.org>
+Message-Id: <20250807-pinctrl_misc-v1-2-eeb564a1b032@linaro.org>
 References: <20250807-pinctrl_misc-v1-0-eeb564a1b032@linaro.org>
 In-Reply-To: <20250807-pinctrl_misc-v1-0-eeb564a1b032@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -103,30 +103,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In zynqmp_pinctrl_prepare_func_groups if called with func->ngroups == 0
-then ret will not be assigned to before its value is returned on exit.
-Initialise ret to ensure it is always valid.
+In stmfx_read_reg there is duplicated code to detect ret < 0 and return
+ret if so. Remove one version of it.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/pinctrl/pinctrl-zynqmp.c | 2 +-
+ drivers/pinctrl/pinctrl-stmfx.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/pinctrl-zynqmp.c b/drivers/pinctrl/pinctrl-zynqmp.c
-index 6fa203a3b86..27dadbff8ca 100644
---- a/drivers/pinctrl/pinctrl-zynqmp.c
-+++ b/drivers/pinctrl/pinctrl-zynqmp.c
-@@ -204,7 +204,7 @@ static int zynqmp_pinctrl_prepare_func_groups(u32 fid,
- 	const char **fgroups;
- 	char name[MAX_GROUP_NAME_LEN];
- 	u16 resp[NUM_GROUPS_PER_RESP] = {0};
--	int ret, index, i;
-+	int ret = 0, index, i;
+diff --git a/drivers/pinctrl/pinctrl-stmfx.c b/drivers/pinctrl/pinctrl-stmfx.c
+index 61f335c4eb1..0d5778faef9 100644
+--- a/drivers/pinctrl/pinctrl-stmfx.c
++++ b/drivers/pinctrl/pinctrl-stmfx.c
+@@ -87,7 +87,7 @@ static int stmfx_read_reg(struct udevice *dev, u8 reg_base, uint offset)
+ 	if (ret < 0)
+ 		return ret;
  
- 	fgroups = kcalloc(func->ngroups, sizeof(*fgroups), GFP_KERNEL);
- 	if (!fgroups)
+-	return ret < 0 ? ret : !!(ret & mask);
++	return !!(ret & mask);
+ }
+ 
+ static int stmfx_write_reg(struct udevice *dev, u8 reg_base, uint offset,
 
 -- 
 2.39.5
