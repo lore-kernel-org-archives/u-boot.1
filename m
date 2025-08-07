@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF40CC87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 14:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4084C87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 14:41:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B7C28459A;
-	Thu,  7 Aug 2025 16:29:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4790E8457E;
+	Thu,  7 Aug 2025 16:41:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NrHm6uqc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EEqn2M7M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A9368458C; Thu,  7 Aug 2025 16:29:09 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 7CC3B8458C; Thu,  7 Aug 2025 16:41:24 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE06C8457D
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 16:29:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B7F18457D
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 16:41:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3b78a034f17so927743f8f.2
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 07:29:04 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3b7834f2e72so522542f8f.2
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 07:41:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754576944; x=1755181744; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=SpHruOmtOIU0vU/XwbF7ciM7WeouPuaq8g5dF2b3Ajg=;
- b=NrHm6uqcFbb9oIqteKM6evBxYM1wrm7ATX5QPOD3vysKMVpbvKwAmcjLOXo+QAwoJf
- 90voRyLn+m7cNpvNDCJ6guaJQZdNeUwfh/OwUwG2dn9qn4fwLV8T64DnNAYnj7e0PHHg
- 41Yx89NY4jBk74gjz1svpFck8JmyQ+w2R7R4njAAE02Z4DdehCJZjQ8bOTT9EGGCZDpU
- s/DQFB23qUrsEs5N5cpEMTPhNru4d6p3+99TUAzNEpYQvJv5QGLvox2nWSoQnvJykksy
- HYxhaURYUA57tPMIoRhzyOOWwGbD/euw7V6e0pXzGzOtLiA+G3MLinUQ2GACEArx9EX9
- CM6g==
+ d=linaro.org; s=google; t=1754577681; x=1755182481; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a1CKmRU2bBq+tmZJOdiDw3WLmjqPy4c4Crn8YWSzKmE=;
+ b=EEqn2M7MJl9RIbQr0WlfpRCAUJgJPqft71vW34AS3K5YZEO8/3c++24tbv+9k2lckb
+ ukbwn3yT2JlsEfHr9s3tl4PQY9nVRegvXr9vWRZf9dQYFGRlZ+xBYZb/dU9k1nr5yN5P
+ /n5eF8NZo1opC70vp23ZXBFKHaVGvQRhfYUhBeEeq22MFVs3XH2BsQfEAEYdnp6yN8hY
+ hWt70qFkYGw6UN/czSN5Pqbrq8g8IIb114TXs+MJNbqNmp6KC3OwYQKODvvs6fk9EneR
+ 3M4viFajvLxImAZCPQL7tp9990gI0tmPtt+cQMYF5/TfOqdLu0gg51RMVZim4lWXFtPF
+ 8R2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754576944; x=1755181744;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SpHruOmtOIU0vU/XwbF7ciM7WeouPuaq8g5dF2b3Ajg=;
- b=GO4LSB4719yjt7UJjKPyK7ApmRk3FWpozpWojWhpMk1zCojhSG/gTUA//A+dDe7sq+
- JyiCDR6DXAHh1dTDYwcmg86YI9eadv7UDG5v1UQ0rjPCkR09pMxBUPBDwakYU8DoqC1y
- jbgFchI4s/Uliygu2JlIymUzMGmwNmyHXnMAd4BwPq3+dzZ7o9HADgVJB37BFnu3F41C
- +u44imureuPJp2j97776Qfvs55vA7nm4n0AaDcA2hL2dVgsocdZDMkiPfeZ/aH5381XA
- KQ0MMJWh8iCh0PtOUOAv2W2PdfWmZkxPH4JrGP/vWKbu8nd7PT53ZFdxXruLdpFA/l55
- 83vA==
-X-Gm-Message-State: AOJu0YyHEdvUaHesN8uCWa0WP7dIITtxpjc3xntLDZ4t1bpTVeUt3ia7
- T16xhnL8ozbVKa6FjNFzFyttE/+XIMzgUQG9YlMui/1AcbtWGqXtYZ85gNskJtukMWI=
-X-Gm-Gg: ASbGnctVVv26h71v1ks5RRyQ76P7pTXac66vZSIDw8SSFYlCHxKPF/GDLhVS5JckRfi
- R7w+XU3ZPgCVmwNSxMR8ToCTjm9lcnNsQzS3q4NByHRQXB6Th4J6ljjQa52T/5AXN8SmjHIAX9/
- OnHs/5PAsj5+UJ51833vJ7Q66mLSa+T7JVFEedKYvsi6GMOqKT/wXVY+tyy2JPg4ZOcIm9RDe12
- dlLGE78vNd53lU2hBSVopTAGT2gcrVkBBezoNuv21ZhyMunNAOwliJnYP0q3egWIkF6Hh2eb9rM
- 7VBr4950HIaY8xDLb8kI7Yus1/VM1e0tastYbfOOzUmKEZd2TBvFXGxR7U/FHkK8ou413+b7DvG
- rdhBYNvrWvP83mQOAtvr+O1oRhsWKB+EVHmJNcxDIPIpbxpmvSxsT1kqiWGZVHQ==
-X-Google-Smtp-Source: AGHT+IFF7yqA18um4UqN6779u+RSiOF0Xm1ss06HjGG7CsQ4s76mrvxqas3ELE42v1Db89rvmWB4YA==
-X-Received: by 2002:a05:6000:2081:b0:3b8:d893:5234 with SMTP id
- ffacd0b85a97d-3b8f4923cf8mr6270972f8f.47.1754576944225; 
- Thu, 07 Aug 2025 07:29:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754577681; x=1755182481;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a1CKmRU2bBq+tmZJOdiDw3WLmjqPy4c4Crn8YWSzKmE=;
+ b=WFZP8L4yfRzCULr4BsGKU8y0y+WyF3GjNv48lgzK0FlFygp0z3x4bOuP3mH8aMmiRG
+ LiTMUWr9XNJPn+O0Mn107komLVsvGloC3GjUWZ2GeB597NJat22dQsulb4Qrlntyyw07
+ LvBAb1ixt05qSzhJN7v5N6DogTlzxYx759NS1lE+11q1RW8OIJbMF9VcnJCtwh+3Jqwx
+ Dxi+zbZN1PRo1146x30yh7Xh0dUsdf9d8fbBLxUQXz7QPkOIbZPjNWvtrnMs3THtqm7X
+ GouoFszARO30P950ofbOC+KxeIlCXyRGdmdrMDrmhfY7+WT3lZjtgcQzXcDrFgKADjoB
+ rzag==
+X-Gm-Message-State: AOJu0YzYyPazJRUq5Bjb4np9mp0lScoDTC5iXd9sD0C0HKWEfPcM0Hff
+ 6ooRRr8xOLurGkTDVIkZv89PB8/WlSPwClATvc/wv/kxJrjbd7yt98lG0egtfItfEN/aQvzoo5V
+ j20fw
+X-Gm-Gg: ASbGnctf9dIXgalAS74hRY961J+0ch9nXFv/DsfyY4R2FRMya6MNlOSA0UkBs0yLJcD
+ PPu+xkrxL+F0RV7AQva2fdcfL9hdWZBJUXwTMw1CM7A/tpmI7gq5H+8A+iN2Q092jFWExUNMqpt
+ kuGnsoW+Q1ikHcnx1zDPm2e3NMOCIs/ZGXtRWhruy6uWqDX/RaRbrFipR03ue48Iy/huIANa6KA
+ Olc0QfR6mP9UBqrMJC2t6zJy74itjSeiTuoA4MAx5uHt36CA5xLHEdEeSX2V8QYNC8xZFoha/4A
+ Xd4Tch0Fc/I8h16DaIdwhinJj/XLAKZboRxFYS8biHmJvwT+/z8XzN8GNQP7EbibULZLuMofXj9
+ CZ5p1PNNm0jhs7UvUaLbmDxRo09KotoRdul6+CgP1htRk8ZMrkMw=
+X-Google-Smtp-Source: AGHT+IGsKDInK2ccFTfoie5D51Tv1FZhwIpS44Lbkia1zv9a84WOfQ1nKLmpMMVxKbwU55YDpTBVJQ==
+X-Received: by 2002:a05:6000:2584:b0:3b7:9477:f4ad with SMTP id
+ ffacd0b85a97d-3b8f41ab697mr6198076f8f.36.1754577681369; 
+ Thu, 07 Aug 2025 07:41:21 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c453ab0sm27349027f8f.44.2025.08.07.07.29.03
+ ffacd0b85a97d-3b79c3c4d02sm26313399f8f.33.2025.08.07.07.41.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 07:29:03 -0700 (PDT)
+ Thu, 07 Aug 2025 07:41:20 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 07 Aug 2025 15:28:58 +0100
-Subject: [PATCH 2/2] power: power_i2c: ret is uninitialised if not DM_I2C
+Date: Thu, 07 Aug 2025 15:41:18 +0100
+Subject: [PATCH v2] pinctrl: rzg2l: Variable may not have been assigned to
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250807-power_misc-v1-2-2ac672f15461@linaro.org>
-References: <20250807-power_misc-v1-0-2ac672f15461@linaro.org>
-In-Reply-To: <20250807-power_misc-v1-0-2ac672f15461@linaro.org>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Message-Id: <20250807-pinctrl_renesas-v2-1-5453d989573e@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAA27lGgC/3WNQQrCMBBFryKzNpJEq8GV95AiSTptB2pSZkpRS
+ u9u2r3L9z+Pt4AgEwrcDwswziSUUwF7PEDsfepQUVMYrLaVdvqmRkpx4uHFmFC8qHBxzjhstQl
+ nKFbwgiqwT7HfvLeXCXk7RsaWPnvqWRfuSabM3708m239H5mNMkpXlY94tdE08TFQ8pxPmTuo1
+ 3X9Ado0hePIAAAA
+To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Paul Barker <paul@pbarker.dev>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
@@ -98,43 +103,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In pmic_reg_read ret is only assigned to inside #if
-CONFIG_IS_ENABLED(DM_I2C) so move the test and return ret inside as well
-and also guard the declaration of ret with CONFIG_IS_ENABLED(DM_I2C) to
-prevent a warning about an unused variable.
+In rzg2l_pinconf_set and rzg2l_get_pin_muxing if the call to
+rzg2l_selector_decode fails then the variable pin may not have been
+assigned to. Remove the use of pin from the error message. Also update
+the error message to show the invalid selector used instead of port
+which will be the error code returned.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/power/power_i2c.c | 4 ++--
+Changes in v2:
+- Replace port in the error message with the selector used that is wrong
+- Link to v1: https://lore.kernel.org/r/20250807-pinctrl_renesas-v1-1-055ace62c1dc@linaro.org
+---
+ drivers/pinctrl/renesas/rzg2l-pfc.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/power/power_i2c.c b/drivers/power/power_i2c.c
-index c2fc1c6b42f..58289ecce67 100644
---- a/drivers/power/power_i2c.c
-+++ b/drivers/power/power_i2c.c
-@@ -75,7 +75,7 @@ int pmic_reg_read(struct pmic *p, u32 reg, u32 *val)
- {
- 	unsigned char buf[4] = { 0 };
- 	u32 ret_val = 0;
--	int ret;
-+	int __maybe_unused ret;
+diff --git a/drivers/pinctrl/renesas/rzg2l-pfc.c b/drivers/pinctrl/renesas/rzg2l-pfc.c
+index 3c751e9473a..4a75e0b2372 100644
+--- a/drivers/pinctrl/renesas/rzg2l-pfc.c
++++ b/drivers/pinctrl/renesas/rzg2l-pfc.c
+@@ -353,7 +353,7 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 		/* The pin selector refers to a multiplexed pin */
+ 		int port = rzg2l_selector_decode(data, pin_selector, &pin);
+ 		if (port < 0) {
+-			dev_err(dev, "Invalid pin selector %u:%u\n", port, pin);
++			dev_err(dev, "Invalid pin selector %u\n", pin_selector);
+ 			return port;
+ 		}
  
- 	if (check_reg(p, reg))
- 		return -EINVAL;
-@@ -91,9 +91,9 @@ int pmic_reg_read(struct pmic *p, u32 reg, u32 *val)
- 		return -ENXIO;
+@@ -550,7 +550,7 @@ static int rzg2l_get_pin_muxing(struct udevice *dev, unsigned int selector,
+ 
+ 	port = rzg2l_selector_decode(data, selector, &pin);
+ 	if (port < 0) {
+-		dev_err(dev, "Invalid pin selector %u:%u\n", port, pin);
++		dev_err(dev, "Invalid pin selector %u\n", selector);
+ 		return port;
  	}
- 	ret = dm_i2c_read(dev, reg, buf, pmic_i2c_tx_num);
--#endif
- 	if (ret)
- 		return ret;
-+#endif
  
- 	switch (pmic_i2c_tx_num) {
- 	case 3:
 
+---
+base-commit: 3526f990b77fca1c933f1d8b24eb9385010a05bf
+change-id: 20250807-pinctrl_renesas-b48818ef01b3
+
+Best regards,
 -- 
-2.39.5
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
