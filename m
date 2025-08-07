@@ -4,53 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA42AC87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 09:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1952BC87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 09:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFF67843E3;
-	Thu,  7 Aug 2025 11:16:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 7AFAF8449D;
+	Thu,  7 Aug 2025 11:17:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Mgp/o/fF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zAO7fuE0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3969F84480; Thu,  7 Aug 2025 11:16:55 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5FCC18449D; Thu,  7 Aug 2025 11:17:03 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9495843E2
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 11:16:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 6E5BA103F2D; Thu,  7 Aug 2025 11:16:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1754558210;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=dgh7ppvvv3Qyo4PrT2THVzOCRUaLvcthtIDY2i/4o/U=;
- b=Mgp/o/fFh7h5TL0ZRfFLjrHwyS6Y4l32SuF49lUWrE507D/ge+OCUigvihx5uPiKhsLNd/
- V4hn88jwuIYRZ9a6M2wPU/7DhhMfNJU0RFojYhoKkx1Pj5pbOmlt2GJ24zp3EVO1rmMofU
- dZhenOZ8ZUBfYvVwEw2OJcnGteCgvfU/rFCsPxcf/gwsT5j1HIRNG46EeWoTzuTfslyslG
- jQz3rkcYe18APSyPrLxj7R/9eutk1PZ4XWVR7geWjTpjk/7FG3F31gWbhnmEmohC3BX1RR
- Ykfq52UoI8/cOGTk8a0R6xbQYHhV8uGybdnolk+LN3J8uUnBZ78QejKK/3RfPA==
-Message-ID: <3e98b2c9-7e14-5bee-a03d-352a51eaab93@nabladev.com>
-Date: Thu, 7 Aug 2025 11:17:08 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 36CC58449C
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 11:16:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3b7910123a0so634691f8f.1
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 02:16:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754558219; x=1755163019; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5VIj3QtQ+AEenwlDLcz+MJAfM9HjT0ZrF34bSzCkYHc=;
+ b=zAO7fuE0eyHDIpVSHSyYOE4S5aU5SgIggRQd8VHmruXd2O9ePf0qdWyuIAyTsn+Bre
+ A8tJZDpgXOR1UYcFx6DXAfsN2cxwcgkcA67UP3krcNCRD+ErrgxkSDsvK2bWJ4ErMwZt
+ Po3/QaohwVI0+v4XfMaLeKIO6yKXPSOYADHZoppgny3Itl5j0PH5VFOgAOXVwzLEU3Q4
+ Ug6b/lHDkpTBvLZCaNCZgowHYnzO0ItUSRCuU021oprRIhiL+reRmf2WGNzwbcfhS6o1
+ 2bn2wdpv2W3ezWMN9TX/NVnlUjCnxh23VR08h3vQxEbIyYVsz6RASta/lLosBWIfel2l
+ vX8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754558219; x=1755163019;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5VIj3QtQ+AEenwlDLcz+MJAfM9HjT0ZrF34bSzCkYHc=;
+ b=c4Rd1Zcl1kwV70SAz2lIwZN++My03W56980YGl351/Y77RdmmiMWEi5F0UDZdnOWRW
+ 5ADNjSi62axaoLM55zy9pRPpvUDN+GNttW2EaxKFaPRg4i1nFv1k9vwr3bcR21IFqjKo
+ KRB2UlWiQmhLlhY66K5Qs8d/R/djavLLq2Wdlz7yOxKy44aztBMjjpJJ+P8ae75Nhqoy
+ VCJljjsJgDc6xxTPAuKXBgsCHcGzLhKJebM+GZNqPI0AxDCC5M1iX9XJayMy/WO9UGPf
+ 3n2j5nHbwJQ2BReyhizauUUhJ5Wpxv18MqbszaigJXNcr1/mSYfT9F4DngB6rpDwxY5f
+ u+Kg==
+X-Gm-Message-State: AOJu0YyOx/nxtQNnTNwhRcWocfERVV/KD7DgiSbV1MK+4mjm+4Xb6iuU
+ 5eeMckyjDjTC5DmTuOSyzUvWrCaPCUO6C5YbUuzeTPOb2RO+sWFT/LRJU1oeehruMNo=
+X-Gm-Gg: ASbGncsuuyYK0i2Gwg+c9mWcyMD/kXPQNm1444drvsA1Ll7XC6eQFrazmAVE7yELQ3Y
+ +fdTdAKKb/2VbjxNbqrthio8lhFg8klAuWj6Jl5XKEXzE9ebhU826IeLjzFNklsvprd4ijAhUhI
+ 1z66tIMGelcWbG9qCLNcLwyzuYsQMjThNllm2u9pbNYshuw0KpklXie153FSkDWkqaYxcTVVwG1
+ 9lMjQakJnPRux5bsK8100MseuAmJvVsm4YiLVKyByJL5jywbxr5khpKrZ++0zNWdxY5cgOreIN6
+ zIzOGn/h3qbP3aFIbZvAkrEhpZAHv5HTy83GlUqIYf2Je2xcV3RsR9PVbjMmtpzIfAQiy8Yn+fj
+ drKnaMHC5fSd9736Y6mraDdSaYVggphNTkxKF/n+RkHt41anPkJQ=
+X-Google-Smtp-Source: AGHT+IHrnrOo+cW5KaAgr6VyONFnB+n6MQxoiDmeNJ5vT4LZoqBJQpbmYn9D9jE6XZLrZZhTa9NJQw==
+X-Received: by 2002:a05:6000:2410:b0:3b7:994b:840f with SMTP id
+ ffacd0b85a97d-3b8f41bf9b0mr4663825f8f.57.1754558218523; 
+ Thu, 07 Aug 2025 02:16:58 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c3ac158sm26501633f8f.4.2025.08.07.02.16.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Aug 2025 02:16:58 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 07 Aug 2025 10:16:55 +0100
+Subject: [PATCH] pinctrl: nexell: Cannot test unsigned to be negative
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Content-Language: en-US
-To: u-boot@lists.denx.de, Dinesh Maniyam <dinesh.maniyam@altera.com>
-References: <20250806183543.GR124814@bill-the-cat>
-Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20250806183543.GR124814@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250807-pinctrl_nexell-v1-1-6f49a0656510@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAAZvlGgC/x2NUQrCMBAFr1L220AMNFqvIlKS+GIXYiy7RQqld
+ zf1cxiG2UghDKVbt5Hgy8qf2uB86ihNob5g+NmYnHW9vdqLmbmmRcpYsaIUE5P3fsi5dxioRTE
+ oTJRQ03Rk76AL5BCzIPP6P90f+/4D1kXLqnkAAAA=
+To: Stefan Bosch <stefan_b@posteo.net>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,311 +99,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Dinesh,
+In s5pxx18_pinctrl_set_state testing count to be negative will always
+fail as count is unsigned despite receiving the return value of a
+function that returns an int. Change count and idx to be of type int to
+allow the test to work as expected and remove the need for any implicit
+casts. Also change pin to be u32 which is what all called functions
+expect.
 
-On 06.08.25 20:35, Tom Rini wrote:
-> Here's the latest report. Lets get these new issues addressed ASAP
-> please, thanks.
-> 
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Wed, Aug 6, 2025 at 12:23 PM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
-> 
-> 
-> Hi,
-> 
-> Please find the latest report on new defect(s) introduced to *Das U-Boot*
-> found with Coverity Scan.
-> 
->     - *New Defects Found:* 8
->     - 4 defect(s), reported by Coverity Scan earlier, were marked fixed in
->     the recent build analyzed by Coverity Scan.
->     - *Defects Shown:* Showing 8 of 8 defect(s)
-> 
-> Defect Details
-> 
-> ** CID 583812:       Integer handling issues  (BAD_SHIFT)
-> /drivers/i3c/master/dw-i3c-master.c: 1001           in dw_i3c_probe()
+This issue was found by Smatch.
 
-Could you please look at the issues on i3c parts, as I go on
-vacation, thanks!
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/pinctrl/nexell/pinctrl-s5pxx18.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-@Tom: Feel free to pick up fixes, thanks!
+diff --git a/drivers/pinctrl/nexell/pinctrl-s5pxx18.c b/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
+index e7d0994f29e..a6ae5764fbc 100644
+--- a/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
++++ b/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
+@@ -130,7 +130,8 @@ static int is_pin_alive(const char *name)
+ static int s5pxx18_pinctrl_set_state(struct udevice *dev,
+ 				     struct udevice *config)
+ {
+-	unsigned int count, idx, pin;
++	u32 pin;
++	int count, idx;
+ 	unsigned int pinfunc, pinpud, pindrv;
+ 	unsigned long reg;
+ 	const char *name;
 
-bye,
-Heiko
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 583812:         Integer handling issues  (BAD_SHIFT)
-> /drivers/i3c/master/dw-i3c-master.c: 1001             in dw_i3c_probe()
-> 995     	ret = readl(master->regs + DATA_BUFFER_STATUS_LEVEL);
-> 996     	master->caps.datafifodepth = DATA_BUFFER_STATUS_LEVEL_TX(ret);
-> 997
-> 998     	ret = readl(master->regs + DEVICE_ADDR_TABLE_POINTER);
-> 999     	master->datstartaddr = ret;
-> 1000     	master->maxdevs = ret >> 16;
->>>>      CID 583812:         Integer handling issues  (BAD_SHIFT)
->>>>      In expression "0xffffffffffffffffUL >> 63 - (master->maxdevs - 1)", right shifting by more than 63 bits has undefined behavior.  The shift amount, "63 - (master->maxdevs - 1)", is 64.
-> 1001     	master->free_pos = GENMASK(master->maxdevs - 1, 0);
-> 1002
-> 1003     	ret = i3c_master_register(&master->base, dev,
-> 1004     				  &dw_mipi_i3c_ops, false);
-> 1005     	if (ret)
-> 1006     		goto err_assert_rst;
-> 
-> ** CID 583811:         (RESOURCE_LEAK)
-> /drivers/i3c/master.c: 1610           in of_i3c_master_add_i3c_boardinfo()
-> /drivers/i3c/master.c: 1586           in of_i3c_master_add_i3c_boardinfo()
-> /drivers/i3c/master.c: 1591           in of_i3c_master_add_i3c_boardinfo()
-> /drivers/i3c/master.c: 1598           in of_i3c_master_add_i3c_boardinfo()
-> /drivers/i3c/master.c: 1603           in of_i3c_master_add_i3c_boardinfo()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 583811:           (RESOURCE_LEAK)
-> /drivers/i3c/master.c: 1610             in of_i3c_master_add_i3c_boardinfo()
-> 1604     	}
-> 1605
-> 1606     	boardinfo->pid = ((u64)reg[1] << 32) | reg[2];
-> 1607
-> 1608     	if ((boardinfo->pid & GENMASK_ULL(63, 48)) ||
-> 1609     	    I3C_PID_RND_LOWER_32BITS(boardinfo->pid))
->>>>      CID 583811:           (RESOURCE_LEAK)
->>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
-> 1610     		return -EINVAL;
-> 1611
-> 1612     	boardinfo->init_dyn_addr = init_dyn_addr;
-> 1613     	boardinfo->of_node = node;
-> 1614     	list_add_tail(&boardinfo->node, &master->boardinfo.i3c);
-> 1615
-> /drivers/i3c/master.c: 1586             in of_i3c_master_add_i3c_boardinfo()
-> 1580     	boardinfo = devm_kzalloc(dev, sizeof(*boardinfo), GFP_KERNEL);
-> 1581     	if (!boardinfo)
-> 1582     		return -ENOMEM;
-> 1583
-> 1584     	if (reg[0]) {
-> 1585     		if (reg[0] > I3C_MAX_ADDR)
->>>>      CID 583811:           (RESOURCE_LEAK)
->>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
-> 1586     			return -EINVAL;
-> 1587
-> 1588     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
-> 1589     							  reg[0]);
-> 1590     		if (addrstatus != I3C_ADDR_SLOT_FREE)
-> 1591     			return -EINVAL;
-> /drivers/i3c/master.c: 1591             in of_i3c_master_add_i3c_boardinfo()
-> 1585     		if (reg[0] > I3C_MAX_ADDR)
-> 1586     			return -EINVAL;
-> 1587
-> 1588     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
-> 1589     							  reg[0]);
-> 1590     		if (addrstatus != I3C_ADDR_SLOT_FREE)
->>>>      CID 583811:           (RESOURCE_LEAK)
->>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
-> 1591     			return -EINVAL;
-> 1592     	}
-> 1593
-> 1594     	boardinfo->static_addr = reg[0];
-> 1595
-> 1596     	if (!dev_read_u32(dev, "assigned-address", &init_dyn_addr)) {
-> /drivers/i3c/master.c: 1598             in of_i3c_master_add_i3c_boardinfo()
-> 1592     	}
-> 1593
-> 1594     	boardinfo->static_addr = reg[0];
-> 1595
-> 1596     	if (!dev_read_u32(dev, "assigned-address", &init_dyn_addr)) {
-> 1597     		if (init_dyn_addr > I3C_MAX_ADDR)
->>>>      CID 583811:           (RESOURCE_LEAK)
->>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
-> 1598     			return -EINVAL;
-> 1599
-> 1600     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
-> 1601     							  init_dyn_addr);
-> 1602     		if (addrstatus != I3C_ADDR_SLOT_FREE)
-> 1603     			return -EINVAL;
-> /drivers/i3c/master.c: 1603             in of_i3c_master_add_i3c_boardinfo()
-> 1597     		if (init_dyn_addr > I3C_MAX_ADDR)
-> 1598     			return -EINVAL;
-> 1599
-> 1600     		addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
-> 1601     							  init_dyn_addr);
-> 1602     		if (addrstatus != I3C_ADDR_SLOT_FREE)
->>>>      CID 583811:           (RESOURCE_LEAK)
->>>>      Variable "boardinfo" going out of scope leaks the storage it points to.
-> 1603     			return -EINVAL;
-> 1604     	}
-> 1605
-> 1606     	boardinfo->pid = ((u64)reg[1] << 32) | reg[2];
-> 1607
-> 1608     	if ((boardinfo->pid & GENMASK_ULL(63, 48)) ||
-> 
-> ** CID 298388:       Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 579           in dw_i3c_ccc_get()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 298388:         Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 579             in dw_i3c_ccc_get()
-> 573     		return -ENOMEM;
-> 574
-> 575     	cmd = xfer->cmds;
-> 576     	cmd->rx_buf = ccc->dests[0].payload.data;
-> 577     	cmd->rx_len = ccc->dests[0].payload.len;
-> 578
->>>>      CID 298388:         Integer handling issues  (SIGN_EXTENSION)
->>>>      Suspicious implicit sign extension: "ccc->dests[0].payload.len" with type "u16" (16 bits, unsigned) is promoted in "ccc->dests[0].payload.len << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "ccc->dests[0].payload.len << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
-> 579     	cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(ccc->dests[0].payload.len) |
-> 580     		      COMMAND_PORT_TRANSFER_ARG;
-> 581
-> 582     	cmd->cmd_lo = COMMAND_PORT_READ_TRANSFER |
-> 583     		      COMMAND_PORT_CP |
-> 584     		      COMMAND_PORT_DEV_INDEX(pos) |
-> 
-> ** CID 298037:       Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 375           in dw_i3c_clk_cfg()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 298037:         Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 375             in dw_i3c_clk_cfg()
-> 369     	scl_timing = SCL_EXT_LCNT_1(lcnt);
-> 370     	lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR2_SCL_RATE) - hcnt;
-> 371     	scl_timing |= SCL_EXT_LCNT_2(lcnt);
-> 372     	lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR3_SCL_RATE) - hcnt;
-> 373     	scl_timing |= SCL_EXT_LCNT_3(lcnt);
-> 374     	lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR4_SCL_RATE) - hcnt;
->>>>      CID 298037:         Integer handling issues  (SIGN_EXTENSION)
->>>>      Suspicious implicit sign extension: "lcnt" with type "u8" (8 bits, unsigned) is promoted in "lcnt << 24" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "lcnt << 24" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
-> 375     	scl_timing |= SCL_EXT_LCNT_4(lcnt);
-> 376     	writel(scl_timing, master->regs + SCL_EXT_LCNT_TIMING);
-> 377
-> 378     	return 0;
-> 379     }
-> 380
-> 
-> ** CID 296053:       Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 535           in dw_i3c_ccc_set()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 296053:         Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 535             in dw_i3c_ccc_set()
-> 529     		return -ENOMEM;
-> 530
-> 531     	cmd = xfer->cmds;
-> 532     	cmd->tx_buf = ccc->dests[0].payload.data;
-> 533     	cmd->tx_len = ccc->dests[0].payload.len;
-> 534
->>>>      CID 296053:         Integer handling issues  (SIGN_EXTENSION)
->>>>      Suspicious implicit sign extension: "ccc->dests[0].payload.len" with type "u16" (16 bits, unsigned) is promoted in "ccc->dests[0].payload.len << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "ccc->dests[0].payload.len << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
-> 535     	cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(ccc->dests[0].payload.len) |
-> 536     		      COMMAND_PORT_TRANSFER_ARG;
-> 537
-> 538     	cmd->cmd_lo = COMMAND_PORT_CP |
-> 539     		      COMMAND_PORT_DEV_INDEX(pos) |
-> 540     		      COMMAND_PORT_CMD(ccc->id) |
-> 
-> ** CID 295976:         (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 395           in dw_i2c_clk_cfg()
-> /drivers/i3c/master/dw-i3c-master.c: 401           in dw_i2c_clk_cfg()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 295976:           (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 395             in dw_i2c_clk_cfg()
-> 389     		return -EINVAL;
-> 390
-> 391     	core_period = DIV_ROUND_UP(1000000000, core_rate);
-> 392
-> 393     	lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FMP_TLOW_MIN_NS, core_period);
-> 394     	hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_PLUS_SCL_RATE) - lcnt;
->>>>      CID 295976:           (SIGN_EXTENSION)
->>>>      Suspicious implicit sign extension: "hcnt" with type "u16" (16 bits, unsigned) is promoted in "hcnt << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "hcnt << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
-> 395     	scl_timing = SCL_I2C_FMP_TIMING_HCNT(hcnt) |
-> 396     		     SCL_I2C_FMP_TIMING_LCNT(lcnt);
-> 397     	writel(scl_timing, master->regs + SCL_I2C_FMP_TIMING);
-> 398
-> 399     	lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FM_TLOW_MIN_NS, core_period);
-> 400     	hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_SCL_RATE) - lcnt;
-> /drivers/i3c/master/dw-i3c-master.c: 401             in dw_i2c_clk_cfg()
-> 395     	scl_timing = SCL_I2C_FMP_TIMING_HCNT(hcnt) |
-> 396     		     SCL_I2C_FMP_TIMING_LCNT(lcnt);
-> 397     	writel(scl_timing, master->regs + SCL_I2C_FMP_TIMING);
-> 398
-> 399     	lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FM_TLOW_MIN_NS, core_period);
-> 400     	hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_SCL_RATE) - lcnt;
->>>>      CID 295976:           (SIGN_EXTENSION)
->>>>      Suspicious implicit sign extension: "hcnt" with type "u16" (16 bits, unsigned) is promoted in "hcnt << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "hcnt << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
-> 401     	scl_timing = SCL_I2C_FM_TIMING_HCNT(hcnt) |
-> 402     		     SCL_I2C_FM_TIMING_LCNT(lcnt);
-> 403     	writel(scl_timing, master->regs + SCL_I2C_FM_TIMING);
-> 404
-> 405     	writel(BUS_I3C_MST_FREE(lcnt), master->regs + BUS_FREE_TIMING);
-> 406     	writel(readl(master->regs + DEVICE_CTRL) | DEV_CTRL_I2C_SLAVE_PRESENT,
-> 
-> ** CID 294913:       Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 724           in dw_i3c_master_priv_xfers()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 294913:         Integer handling issues  (SIGN_EXTENSION)
-> /drivers/i3c/master/dw-i3c-master.c: 724             in
-> dw_i3c_master_priv_xfers()
-> 718     	if (!xfer)
-> 719     		return -ENOMEM;
-> 720
-> 721     	for (i = 0; i < i3c_nxfers; i++) {
-> 722     		struct dw_i3c_cmd *cmd = &xfer->cmds[i];
-> 723
->>>>      CID 294913:         Integer handling issues  (SIGN_EXTENSION)
->>>>      Suspicious implicit sign extension: "i3c_xfers[i].len" with type "u16" (16 bits, unsigned) is promoted in "i3c_xfers[i].len << 16" to type "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If "i3c_xfers[i].len << 16" is greater than 0x7FFFFFFF, the upper bits of the result will all be 1.
-> 724     		cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(i3c_xfers[i].len) |
-> 725     			COMMAND_PORT_TRANSFER_ARG;
-> 726
-> 727     		if (i3c_xfers[i].rnw) {
-> 728     			cmd->rx_buf = i3c_xfers[i].data.in;
-> 729     			cmd->rx_len = i3c_xfers[i].len;
-> 
-> ** CID 294627:       Integer handling issues  (BAD_SHIFT)
-> /drivers/i3c/master.c: 181           in i3c_bus_get_addr_slot_status()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 294627:         Integer handling issues  (BAD_SHIFT)
-> /drivers/i3c/master.c: 181             in i3c_bus_get_addr_slot_status()
-> 175     	int status, bitpos = addr * 2;
-> 176
-> 177     	if (addr > I2C_MAX_ADDR)
-> 178     		return I3C_ADDR_SLOT_RSVD;
-> 179
-> 180     	status = bus->addrslots[bitpos / BITS_PER_LONG];
->>>>      CID 294627:         Integer handling issues  (BAD_SHIFT)
->>>>      In expression "status >>= bitpos % 64", right shifting by more than 31 bits has undefined behavior.  The shift amount, "bitpos % 64", is as much as 63.
-> 181     	status >>= bitpos % BITS_PER_LONG;
-> 182
-> 183     	return status & I3C_ADDR_SLOT_STATUS_MASK;
-> 184     }
-> 185
-> 186     static void i3c_bus_set_addr_slot_status(struct i3c_bus *bus, u16 addr,
-> 
-> 
-> 
-> View Defects in Coverity Scan
-> <https://scan.coverity.com/projects/das-u-boot?tab=overview>
-> 
-> Best regards,
-> 
-> The Coverity Scan Admin Team
-> 
-> ----- End forwarded message -----
-> 
+---
+base-commit: 3526f990b77fca1c933f1d8b24eb9385010a05bf
+change-id: 20250807-pinctrl_nexell-bc6669ff52e9
 
+Best regards,
 -- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
