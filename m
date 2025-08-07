@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27094C87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 11:30:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971CDC87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 11:32:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90B02844E8;
-	Thu,  7 Aug 2025 13:30:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 03422844E8;
+	Thu,  7 Aug 2025 13:32:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aXIFMr8e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SLZwTZZp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE684844EB; Thu,  7 Aug 2025 13:30:27 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id E9145844FF; Thu,  7 Aug 2025 13:31:59 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5D1083C46
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 13:30:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFA3983C46
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 13:31:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3b7825e2775so774841f8f.2
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 04:30:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-55b7e35a452so969968e87.2
+ for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 04:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754566224; x=1755171024; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QdDkzHzKGLlfW9jDi9txv2DbbV+Ewkced8s3UvOL3Ss=;
- b=aXIFMr8er+BT6kzWA94h05F8rg9ouLbVARxrAkZloKPh6hyaulayJduAZrCiZv7Div
- Rw+BmAfiyCx82GZGnKg/wqnog2cCClIbeMtED5HIW1Z+ZeupZ+roGwaZcVirLDt1qtLH
- ddINv66Bcr9jZw2njimlO4CB8i6HEX9zAsVrf13mIkF23qhUbK3oZeXnfDDDG8tbQuQ6
- mEggvNvkUvytmU8onMgu+xYX7Nt3rLgQ4tmAkVbS02j9EPsZ3Os0lmJEQ8Czc2Jke9ZU
- MPnqHzWFp/+tABTrnuxngO0cPn/EyJ5ce1JJBgfBajAD30nZP5k20Q08/uxgi8y+aRp6
- TG0A==
+ d=gmail.com; s=20230601; t=1754566317; x=1755171117; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9aubrj+zyO1LArpyRhnsYyyW32aiT1C76cm8lTrX6w8=;
+ b=SLZwTZZpmbtAOy63ZV5aLX3eyDv17nOT/8cJsh30F3LK/NskSL8sYB9VGbWnoa8Mzh
+ TxmSd7GoxRUyox6+Dx+baX7AOgiuKWLSKCaUZkJrNdVRJDBQuC5SezEcQc+Knk46K3Kw
+ AJQZt3l+13uQJ74MKASG3YwgGWOZV5DGTlmY64oa3XG0n1ni+Bi8RzmHU2HqhjzPeCdQ
+ PD7Pvy/n5B7UcbS82oEKtlGyXNk/vp8TgCX7wBjai35Qo6hS8gZjWB0RSF5VH7r00n6+
+ gZqfWN7q2fsrhzIWuSgJ39asVZ8vqCUGxVu8epyIzdpvPESx5vDneadDSo7A7eKAEod1
+ IEKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754566224; x=1755171024;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QdDkzHzKGLlfW9jDi9txv2DbbV+Ewkced8s3UvOL3Ss=;
- b=cd3r46VkGXlAoDZum/IAJxTYz+fVHwyGp2a+sMr0HMtEiccCOr0K03buc+K3d3DZZL
- ZXg3N6MsTQt5XjzRJ6lgMYGWrs5ar5TYHteSZOhZJswL6xUCHsY/a8+ZtDqa4JZ/xxmg
- IW5It5/ZLveivXcJXhMmXlx+XxK9ZCessJgbjUmg4KZLYlPZdM5oY6f6pb50b6ZsnDkZ
- mEXEMoN2T3YSbKBuE2pp70hIelNjYZb/Nd6E32Z9VEMHFNKoLV6Y0/kc/a6KyZo0PVQu
- he8XbreTCTPQGtU5vBslr9Tp49yB/LtEuuLPdzd9nFOWYaHb4V/CyzbZisrLteo9f0NX
- WOeA==
-X-Gm-Message-State: AOJu0Yz/uZ3mPYekaTTSRtfMXwYpeVLsymoQ2Fj30RhRtgfgHPcqs7e/
- i7/YZD42ywHY37CD720jk0QAi02Sk8F4Npy1Zxakj2w3jSmMOtHVb/M+rZhQ51vPaIc=
-X-Gm-Gg: ASbGncsgtQfI4bkfl2ol7rKpRI6cFrWwouRGtN5ZqCqzexA4ebfZukShS3KXQ7C7x7E
- 3Swyv5btlzg1jffGRmdBsFSn5AAWWlp/YRrLhyk/zXle9IRIkwkT8hTlDYiHTIUogFlM8E8N2PB
- vV0oD4hgTyNDirZnz/fjMECY1P7+Ot8DMLHq04HDQsJxeFHJXpXtM3r0LOA8hheS+aKrpVBNL+P
- 5pet6qQ6JPzYtl2EDL6W/uHWa60eOxN9zS9963tSrKgwEb8vqUa+VJGN1zX16oZ2K95ymMkTXHy
- LaG4Wym/OvewsiDYLIf8E670vuf9tFAWjnKAOvC4oVlDKKn7rHZ7s79jyLquRwRWlox46YPTRkN
- GJx7FmRUTR8y9+M7ZPNjTJ3aVXWNotCHJWedTRhtyn+gevbr5mEk=
-X-Google-Smtp-Source: AGHT+IGrmWFgifO+FjIjJ/Afsy1CsWSCwx+B9TyNezP6DpyoporHsz6b5p1iLR/FBiECki2qVZ9p6g==
-X-Received: by 2002:a5d:5d87:0:b0:3b7:89c2:464b with SMTP id
- ffacd0b85a97d-3b8f41595b5mr4893698f8f.5.1754566224108; 
- Thu, 07 Aug 2025 04:30:24 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b8e9464f46sm12240027f8f.19.2025.08.07.04.30.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 04:30:23 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 07 Aug 2025 12:30:20 +0100
-Subject: [PATCH] pinctrl: rzg2l: Variable may not have been assigned to
+ d=1e100.net; s=20230601; t=1754566317; x=1755171117;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9aubrj+zyO1LArpyRhnsYyyW32aiT1C76cm8lTrX6w8=;
+ b=lV7iB/ucWyGckgYLiCcCVrDl5+lj/xfS9O+PGvNThBuoxw2+4RTFvOhLkp9NL5+vvk
+ RS4sc0EaAVxOWGH0CKv5XabNVSwBYmYjvnit4AsTJDhMa2MwpnFn5NPEhVQkPON3WQyu
+ 44bqLQL6/cA6B21QXoC+1HcwuWutNlRayasICNKVwwR9z497nDo4lSLG4p++4g8JxdzA
+ j3e8ZUyQn0XgxVR21Pl9uzwGH2zQoHJEquQ+HhaqCEcTgxvRaPQqYJ49dKGSPRxciP+q
+ oAJQHx8WX5XwxtJtfd5fz/gwtlmCoaIlJ9M07COnfnsxf0dHUx2x/7lixSn/Jo2zY1JE
+ Op3A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOzYRr4G9XTBROKqmVLR0jwY25OUNdA5r66fhSw5oXEHIT8dfcVcCuG+pAD1VjUqLLNqUl6EI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPEiEJd/xJtmjI2RBR9Y4jOv3S6zLT/5Av2nFIbQ31YfDzWYxO
+ ukLh4m99YCaYBnqGVTPZPkdS9cRKhqhJ48/44QC7e8+e08KqUvvrO8VWH8uf/2DAP/w/Wmj75My
+ sUnEiVPXPZ/gOD7X0SYQWHFRj1mVkKJw=
+X-Gm-Gg: ASbGnctgW8XQgs3n5fiE13F4DtXTy0CIfop0Dulsoq9HWs72VznARZqnWiwQ/aN7jrv
+ z+9FuvrxJ9CTeM/l841/q0A+sFt0MX7PuborImdSs1p+HChkLDRpRr6XdmSqdR01pDwFKgFj0s+
+ mfiHd/wcq6gqFsW1SET2CicYOqAnyph47jg41Xbi6wW8dA/IH8ZegUn8xCV3bioC3cdSjJWRbEh
+ DrkRrWdEvux4SyQu529PJzSsM26lOJJ8zJ6cNynAqm6BjrUEA==
+X-Google-Smtp-Source: AGHT+IHT/mZ8pw7UEHEr9XGMFal0be6hOr5IQgcylx0j9Xb7INBZxJ+agBQ5iS09KGzmj2OG0ua1HOxl0NOZsxCq9g4=
+X-Received: by 2002:a05:6512:32c7:b0:55b:941d:bde3 with SMTP id
+ 2adb3069b0e04-55cb673adbdmr732817e87.10.1754566316760; Thu, 07 Aug 2025
+ 04:31:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250807-pinctrl_renesas-v1-1-055ace62c1dc@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAEuOlGgC/x2NUQrCMBAFr1L220BSFYNXEZFNfLULupbdIkLp3
- U39HIZhFnKYwOncLWT4iMtbG6RdR3VkfSDIvTH1sT/GHE9hEq2zPW8GhbOHcsg5ZQwxlT21qrA
- jFGOt49a92GfYJibDIN//6nJd1x+f3AK+egAAAA==
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul Barker <paul@pbarker.dev>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+References: <20250728-imx95b0-v1-0-5cdae3764d21@oss.nxp.com>
+ <20250728-imx95b0-v1-2-5cdae3764d21@oss.nxp.com>
+In-Reply-To: <20250728-imx95b0-v1-2-5cdae3764d21@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 7 Aug 2025 08:31:45 -0300
+X-Gm-Features: Ac12FXzrm22YYTbfBbEA0v2i7FUbJjKWk2FT6YGZ9r7wjqzEpQIDgThu6T_BFtY
+Message-ID: <CAOMZO5ATbHrjceR4cXQEmvzFgXL8+V6gc_DaTs_BcZi89tZypg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] imx95_evk: Restore support for i.MX95 A0 silicon
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, Tim Harvey <tharvey@gateworks.com>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,45 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In rzg2l_pinconf_set and rzg2l_get_pin_muxing if the call to
-rzg2l_selector_decode fails then the variable pin may not have been
-assigned to. Remove the use of pin from the error message.
+Hi Alice,
 
-This issue was found by Smatch.
+On Wed, Aug 6, 2025 at 9:40=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
+om> wrote:
+>
+> From: Alice Guo <alice.guo@nxp.com>
+>
+> This patch is used to restore support for i.MX95 A0 silicon. To avoid
+> duplicating defconfig, imx95.config is added and can be shared between
+> imx95_a0_19x19_evk_defconfig and imx95_19x19_evk_defconfig.
+>
+> container.cfg and imximage.cfg are used to created .cfgout files that
+> are be passed to mkimage with -n to build flash.bin. Now they have been
+> deleted and replaced by adding their content to the property cfg-content
+> of node which type is nxp-config under binman node.
+>
+> Fixes: 9936724aa9b ("imx95_evk: Add i.MX95 B0 support")
+>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> ---
+>  arch/arm/dts/imx95-u-boot.dtsi            |  48 ++++++++++
+>  arch/arm/mach-imx/Makefile                |   5 +
+>  arch/arm/mach-imx/imx9/Kconfig            |   5 +-
+>  arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
+>  arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
+>  configs/imx95.config                      | 150 ++++++++++++++++++++++++=
++++++
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/pinctrl/renesas/rzg2l-pfc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+In v3, please call it configs/imx95_evk.config
 
-diff --git a/drivers/pinctrl/renesas/rzg2l-pfc.c b/drivers/pinctrl/renesas/rzg2l-pfc.c
-index 3c751e9473a..3bdba5e365c 100644
---- a/drivers/pinctrl/renesas/rzg2l-pfc.c
-+++ b/drivers/pinctrl/renesas/rzg2l-pfc.c
-@@ -353,7 +353,7 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 		/* The pin selector refers to a multiplexed pin */
- 		int port = rzg2l_selector_decode(data, pin_selector, &pin);
- 		if (port < 0) {
--			dev_err(dev, "Invalid pin selector %u:%u\n", port, pin);
-+			dev_err(dev, "Invalid pin selector %u\n", port);
- 			return port;
- 		}
- 
-@@ -550,7 +550,7 @@ static int rzg2l_get_pin_muxing(struct udevice *dev, unsigned int selector,
- 
- 	port = rzg2l_selector_decode(data, selector, &pin);
- 	if (port < 0) {
--		dev_err(dev, "Invalid pin selector %u:%u\n", port, pin);
-+		dev_err(dev, "Invalid pin selector %u\n", port);
- 		return port;
- 	}
- 
-
----
-base-commit: 3526f990b77fca1c933f1d8b24eb9385010a05bf
-change-id: 20250807-pinctrl_renesas-b48818ef01b3
-
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+Thanks
