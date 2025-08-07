@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9279C87FCF
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 05:32:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E4D9C87FD2
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 05:32:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 785D183BF1;
-	Thu,  7 Aug 2025 07:32:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 073158433B;
+	Thu,  7 Aug 2025 07:32:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZxHAmx2I";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q4TGwtjn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6723483BF1; Thu,  7 Aug 2025 07:32:42 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id DB27B8433B; Thu,  7 Aug 2025 07:32:45 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42B9B83BC9
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 07:32:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67F3C83BC9
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 07:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-76bd6e84eddso816712b3a.0
- for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 22:32:39 -0700 (PDT)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-31ec95ad016so583623a91.3
+ for <u-boot@lists.denx.de>; Wed, 06 Aug 2025 22:32:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754544758; x=1755149558; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=c7TZZFdahogjAI/k+arCl179QzWpwb/O0uS5R95t4oI=;
- b=ZxHAmx2IJAhMASmhUbSODsqz3B+OEJqBpxGST09A6qjeA9oncZx+GLV2WfIGOwX66R
- U8ut/kyhA/sHzAr3gLY9gIjavZa4nh4oMQk/5B5aNp2H8EFA4xKvd/iTK5FwwjNp4WiK
- WmSgRkCZsnxzDWo6hTGreCBg/7nGhOq8OnwAgx4rhB1gtPZUhuRFxo8qNdPbEplnJtfg
- QBdQ/vlYtOhIILB/+KZY5FR7jh0y9FoyhkZfOIKXdOUFcfPNqjTpdC0OgI3rH2h1y1nW
- St8hz+bfVYXCyVGwKWpf9OHlJqbRtZR2evshoL+kg6EduboBJBUJMmgeDDRcHcU+8xiC
- iWAw==
+ d=gmail.com; s=20230601; t=1754544762; x=1755149562; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zDrSWzzNW9qcUnSpsmpSOBUgluhQyOePdSNbQ4n9AVU=;
+ b=Q4TGwtjnz4AYKZfo5K2rAppJn44uxpG7X11NT+okCP9ulNTGPqG6hXV1LkDiii+/BC
+ dwUiXq3oEzl7oa7AGhm6yRuVX9ArN2EIQXcXxvkzTrWUIqxN0FgKc+CkCgBT7yJvYcrN
+ v/hNq+ZiasyMZs8S4fQGgqk2Bac8ztTTOZnIhPHEGyp1Nk7wvZpUUmByIdpqzcE8fK0s
+ qt/r8Cb0Ycqn2Aftxcox6AUNuUAVuDAxP5kveUFd21Nl8ARXeNW0Jg/hlPERt8pAtgbW
+ fXnvN9FcUT8jw4uzfBKx+OuxUilaxYFt8o3NjNWaWeF8a/uSYeTYwlgUGz524zmNQ4QK
+ BDcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754544758; x=1755149558;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c7TZZFdahogjAI/k+arCl179QzWpwb/O0uS5R95t4oI=;
- b=rJRoqIb+q9Dsy8hROt23lXub+SY9PtFJrasmfPPbr2TypTl8GArdZJuGkUk5OjCLrU
- 5eVp5fxvhWDDSu0A5jKp1+VhHrBNfmSkxvh99pP/06SRqdQrvMo2S4Um4tyM0dzRB8v/
- H8tp2RzweaWIZSc4QGPvAqoRiHs2z5xvEpZFJb33sHuwHgbjZ9Lwd7gkZC0OTy585kNI
- kLivT3igHhoXH3Hbfwyhxgjskm7UY569SeaitYZotMXxVYL3X2lADEbVqeLRcZUI8vSw
- iOJDrH/MiOJVih+89CDvzGjXBuI6kLod68CSYx6n9MCjO7Q4oB4W5o8RSVlg/Xca4mLt
- DEjA==
-X-Gm-Message-State: AOJu0YwFxFb+Q9OruF1g7EZfsGpubEzvFHH0eBwhQump0qnfrm5OUOaU
- MTfYlUnDP3tPsTm50h1AISw5A4E6gZvmS24FVIB1Hddbmtum7fdB3cCz
-X-Gm-Gg: ASbGnctGVf86Z/szrcy5BReM+8mJ+dZLAj8hYnwREV5nNUOIFEwrNvSoTZP8P8sPgsu
- od04vAYOoRgonSrJPzwvD7STOD3FZTDl6uEbCEEiWwZ732mqj0hkTua1FaMuoxMZKog97v4zILI
- cGtpZ/7lKQrZNHgpwYUmSK8DYXKNjtazntpJsAkx/FA2deCDuu3tRNA/89OW/LkT9694loZKA+a
- WPPJL12426iQWUkNmmrwp05d57hO7JZ+eVPTb/QBw34YJCU9CkJDeHNSN4mmfOzgFLOwkU60eYD
- UyZeCLNQppa72iT/3SuUV6SYhBhJ/s07YGq+yGqiTlr8PlDnp+mLfow8j20dXnoBJ9YAJ3t/dXr
- 0pGJdlug8Fmx71X5mnvgXf+XbfxYgDndgq2OTWxzKZRnO
-X-Google-Smtp-Source: AGHT+IE6kHW8NNoi0GHOVn2PUvOcAmkG8e3Ypm4ICiyEJbAu+chuhEsotsqrB1Sd7ToFQlN6TZwp5w==
-X-Received: by 2002:a05:6a21:33a1:b0:23d:d9dd:8e4f with SMTP id
- adf61e73a8af0-240313b0efdmr8228206637.28.1754544758179; 
- Wed, 06 Aug 2025 22:32:38 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754544762; x=1755149562;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zDrSWzzNW9qcUnSpsmpSOBUgluhQyOePdSNbQ4n9AVU=;
+ b=gKlcSmzAlSGAe2yLaDvJgXkiNEuSE0oakR5A2JDyh2GHSL0nLTahsHg1BkVtvXBk7d
+ RiaS1ouU1ZiBbgcljdRLoxkuVlREnm4DW8+OUoqG+qVyXZeL7QTOR/D0+jB9PybA6iFE
+ 4VcGfTYYj+0ddCvYuV46iUeJO2+/ymPjHld0bHQAMVldQ3BEGkLkP3sZKOnjAhPX9bPv
+ 5GlSvVf3s9bcy/87uLUuz8SQY11LYnlPa6sgHl/IXnxI1tz2Y6zT1b4sPcqzouL8spUQ
+ lLhkIjwZ6cFRoW/jlwFqMO7iFyTlFqolCZnhFJUM+w9p9DZ3YNUGcAswYfKArUtMVVED
+ G3Cg==
+X-Gm-Message-State: AOJu0YwHDosqXkJ0dQ+vSFxxq2iTH3uaCkp/q0daJlslNC8WkYOXwZIQ
+ 9H1pCfoksVDXzdzwynVEKkiZnJGKa3LGyNEBDV9RzOb6M0iRmRhQdin9
+X-Gm-Gg: ASbGncuJKR67qEX+tkHu+Er0/CONDjg99uzUeseiiIBc6VI7fi+THG9uypPHoXCDG0a
+ VeL2IAiJSHmaNUStLq5vuDsHkYXL0P3eEssw6AFUWmKSwxx8ebn9kHvcGd7lgBbAMnfwB/zMZcJ
+ LSB28n5dp7+Uw7sP+cdEqxMgEkeN/Lqi/u80ckXh1WAFeRDe7vPGA9hHSgS74usCuTBjEjGyejQ
+ BevfezrR2OAttiAuE1XdlT0nBLRnxicUwKs+jyIqoPsqOm2R86B1qypwEloeM8y4jlmUWMIpaT3
+ lrAk0Y7DfsZo326QWUhZ7ROsIxu8sDh8K2XfbBW524m6YBN2KyWq9mQVkPJhgsnSARbLALN8jQW
+ GcgbDAdBBjtLNx3Us0d7YwoifZmMvslDzNA==
+X-Google-Smtp-Source: AGHT+IE7G7p1+sJxjOuyGrY15UrLreaCtYBhK//hypAjRFM6O9d4WnHYyO/JmkKZoT1K7sPM/9yIvw==
+X-Received: by 2002:a17:90b:5706:b0:31f:6d95:8f76 with SMTP id
+ 98e67ed59e1d1-32166cca3e0mr7040988a91.29.1754544761780; 
+ Wed, 06 Aug 2025 22:32:41 -0700 (PDT)
 Received: from cs20-buildserver.lan ([2402:7500:400:60db:2e0:4cff:fe68:863])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3216126c98fsm4384084a91.21.2025.08.06.22.32.36
+ 98e67ed59e1d1-3216126c98fsm4384084a91.21.2025.08.06.22.32.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 22:32:37 -0700 (PDT)
+ Wed, 06 Aug 2025 22:32:41 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, trini@konsulko.com,
  YSCHU@nuvoton.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 0/7] modify npcm7xx/8xx feature and bug fixed
-Date: Thu,  7 Aug 2025 13:32:17 +0800
-Message-Id: <20250807053224.2169557-1-JJLIU0@nuvoton.com>
+Cc: u-boot@lists.denx.de,
+	Stanley Chu <yschu@nuvoton.com>
+Subject: [PATCH v2 1/7] arm: dts: npcm8xx: add pinmux for VCD input
+Date: Thu,  7 Aug 2025 13:32:18 +0800
+Message-Id: <20250807053224.2169557-2-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250807053224.2169557-1-JJLIU0@nuvoton.com>
+References: <20250807053224.2169557-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,30 +100,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-modify npcm7xx/8xx feature and bug fixed
+From: Stanley Chu <yschu@nuvoton.com>
 
-Jim Liu (4):
-  arm: dts: nuvoton: Change timer node
-  misc: npcm_host_intf: Add Arbel eSPI workaround
-  misc: npcm_host_intf: Disable pending KCS/BPC interrupts
-  configs: npcm: remove CONFIG_SYS_SKIP_UART_INIT
+Add pinmux to select the HSYNC signal as the VCD input.
 
-Stanley Chu (3):
-  arm: dts: npcm8xx: add pinmux for VCD input
-  pinctrl: npcm8xx: add support for setting VCD input source
-  i2c: npcm: fix consecutive dm_i2c_read/write error
+Signed-off-by: Stanley Chu <yschu@nuvoton.com>
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+---
+ arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- arch/arm/dts/nuvoton-common-npcm8xx.dtsi  | 15 +++++------
- arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi  |  4 +++
- board/nuvoton/arbel_evb/arbel_evb.c       |  9 ++++++-
- board/nuvoton/poleg_evb/poleg_evb.c       |  2 ++
- configs/arbel_evb_defconfig               |  1 -
- configs/poleg_evb_defconfig               |  1 -
- drivers/i2c/npcm_i2c.c                    |  7 +++++
- drivers/misc/npcm_host_intf.c             | 33 ++++++++++++++++++++++-
- drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c |  2 ++
- 9 files changed, 61 insertions(+), 13 deletions(-)
-
+diff --git a/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi b/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi
+index bc047d4b443..6f933355d9e 100644
+--- a/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi
++++ b/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi
+@@ -1056,5 +1056,9 @@
+ 			groups = "jtag2";
+ 			function = "jtag2";
+ 		};
++		vcdhs_pins: vcdhs-pins {
++			groups = "vcdhs";
++			function = "vcdhs";
++		};
+ 	};
+ };
 -- 
 2.34.1
 
