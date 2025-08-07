@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96B1BC87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 22:35:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3BE0C87FCF
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 23:15:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA7808469C;
-	Fri,  8 Aug 2025 00:34:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1364784673;
+	Fri,  8 Aug 2025 01:15:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XYroMRTq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pgDYaW0R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5FC083C65; Fri,  8 Aug 2025 00:34:37 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA96D83C94
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 00:34:22 +0200 (CEST)
+ id B31CF84673; Fri,  8 Aug 2025 01:15:52 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id ACD5C845EC
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 01:14:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-61999e5fbb1so918374eaf.3
- for <u-boot@lists.denx.de>; Thu, 07 Aug 2025 15:34:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754606061; x=1755210861; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SHY4L6ucwpfFSzbmiMOpz+pu33kSuZz643NZTHYGTj4=;
- b=XYroMRTqEAjSdzDFSwZHOJjid5Gb2RoQ/ufrkWFl14fUMx6Qm4OMO75SdlIIc4phH5
- kMHxss914qTdLtqb6AZR9DH39yx4qWqQEs7GyJ5LpnidpOohvwJbC/1l6tgKNR+dZdDy
- BFe1CIoZ22WbYdyAFcNOZN4eAOYn4fkcKNADY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754606061; x=1755210861;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SHY4L6ucwpfFSzbmiMOpz+pu33kSuZz643NZTHYGTj4=;
- b=IrKuVr+OTrAWh31rBJxmW69ZExLmk+5ehU3xJ9tjbDPjHthn7qS1ZNunIVGOvzbM9t
- JfyURCmo6dfuQu9CVlkrJg+ctXTt2rxOxjCM/iHxe4AlerV8RrG+tVF/V0Du7xhCTQF1
- SKbJ4Rof+2cFrU7g6YbCQmgOR7SWRHOyz3P1r/eMJKrXBCchh0nj/+LAFZ/E/GzYZhXZ
- jzwRXIIL5pJjCEUp0xR0Ge2wlMbwU1H5LqClry5fJBGLBc8cEn1x3hs+Sx1lnvPe7/y9
- wjCG2vXGyrzbhJ+rd8StS+CArVweuCgMoDqX09wIzrUhlQ9Xp99JMrTSkCDf/eBDPtge
- 8BFQ==
-X-Gm-Message-State: AOJu0Yx1NW2FXUkKrsSSSDQaOguPLewzh9a4cDzPpbZP+ZZ3T7PxPnIM
- y7Or+UzgJbQi8+wV/Hk6v6dOPT5PO2Hgrdc9yeXSuLD/iXWg9P+ChP4igbJ9TK7VdZzOHUZB0Ma
- Zg+SN7Bs=
-X-Gm-Gg: ASbGncvjhssu85qAdpl3CUQfomv7xazWfNOMFGOnT2er8Amn8LUY9DsdEhWrQ75Rgzq
- USlwxqhpeDQ8D1Tl/Jy4QYRxzufxyVaSNpC3C5mVHyr+N6KrlD+PHpeqCBVkJC+XmmuTgT5Aap3
- LT5LZ6oiwdxoo5H8E3+cHSEyzQzbvFHa1gzwj/5s0IFJhzf+38803ldJW4QqYgc7FEEEqwltRqN
- FbOK/c1pv36QNJbLzyingDbwHr72wlSNCufHVbHPHfM/i/jmb5SN9kJv6cy6nwiienBwcTQmGjP
- QcC2cJcbvOZ5FTPA7u3YqrF7gark3znG2g6dsoaWuc4FPwADf417JE9BjuSaSt9LbJKEzRi633L
- 8r32SH6uzpR7SBbcipaJCswGQAFYuiEtfPwjdKBml5RAMXg0Mpuj4agQ=
-X-Google-Smtp-Source: AGHT+IHgjIwNcqoQ84eXh7Q8g5BzA4hd3k6u9agx53qY2PoYIDfgf2M+dSmgp+tvzVESEYv+mKGA4w==
-X-Received: by 2002:a05:6820:22a1:b0:615:ecc5:c07b with SMTP id
- 006d021491bc7-61b7c1ad9d3mr391479eaf.0.1754606061614; 
- Thu, 07 Aug 2025 15:34:21 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61b7c6eaf6csm73309eaf.0.2025.08.07.15.34.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 15:34:21 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Shiji Yang <yangshiji66@outlook.com>
-Cc: Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <TY1PR01MB16764FB6BEC2FDBCE2D96060BC5BA@TY1PR01MB1676.jpnprd01.prod.outlook.com>
-References: <TY1PR01MB16764FB6BEC2FDBCE2D96060BC5BA@TY1PR01MB1676.jpnprd01.prod.outlook.com>
-Subject: Re: [PATCH] meminfo: correct "free" memory region size
-Message-Id: <175460606067.3039738.13992669942920352487.b4-ty@konsulko.com>
-Date: Thu, 07 Aug 2025 16:34:20 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 577NEcj1848536;
+ Thu, 7 Aug 2025 18:14:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1754608478;
+ bh=jUVy+Ahepw0eeikRESXusTD6i2JZByBcvGbdZHk3vTA=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=pgDYaW0R22BS5k9v6gHf6/IVVNbhA8ZHnCnGtfBmLvfpDBqFPs4/ZTuDGymNCqmlh
+ AUpNMnV2ZT5yxiNKuxcWHNphcxhniI3qpaR22D+oTo/ZNZmp8AqfnnXR8TQwX/Lr8V
+ J99svalOOte97jLn9zu3TdstFfwWNvdbFXd44bRg=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 577NEckL487670
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 7 Aug 2025 18:14:38 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 7
+ Aug 2025 18:14:38 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 7 Aug 2025 18:14:38 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 577NEcmC2110357;
+ Thu, 7 Aug 2025 18:14:38 -0500
+Message-ID: <18f1e05c-2be9-4a6f-af50-904d4a2ed1c2@ti.com>
+Date: Thu, 7 Aug 2025 18:14:38 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/2] Add support for AM62P SR1.2
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
+ Rini <trini@konsulko.com>
+CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20250805161419.1781935-1-jm@ti.com>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <20250805161419.1781935-1-jm@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,17 +81,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 27 Jul 2025 15:42:01 +0800, Shiji Yang wrote:
+Hi Peng, Tom,
 
-> The size of free memory should be $lmb_base - $ram_base.
+On 8/5/25 11:14 AM, Judith Mendez wrote:
+> This patch series adds support for the AM62P SR1.2 silicon revision by
+> adding support in soc_ti_k3 to detect AM62P variants.
 > 
-> 
+> Also disable HS400 support for AM62P SR1.0 and SR1.1 in sdhci host driver.
+> For AM62P SR1.2, eMMC HS400 should be enabled by default.
 
-Applied to u-boot/master, thanks!
+I will have to change these patches due to mirror version of these
+patches changed in Linux drastically, mainly, DT patch was dropped which
+affects u-boot implementation.
 
-[1/1] meminfo: correct "free" memory region size
-      commit: c60898c9c6988e34d33a7c5d5b79c0bcc14da719
--- 
-Tom
+Sorry for jumping the gun with u-boot. I will respin u-boot patches
+once linux side is stable [0].
 
+[0] https://lore.kernel.org/linux-mmc/20250805234950.3781367-1-jm@ti.com
+
+~ Judith
 
