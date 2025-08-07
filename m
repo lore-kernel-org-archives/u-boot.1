@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC770C87FCA
-	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 11:39:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECFA4C87FCA
+	for <u-boot@archiver.kernel.org>; Thu,  7 Aug 2025 11:40:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8C448452C;
-	Thu,  7 Aug 2025 13:38:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7A66883AB4;
+	Thu,  7 Aug 2025 13:40:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D4FE84508; Thu,  7 Aug 2025 13:38:57 +0200 (CEST)
+ id 38A0684506; Thu,  7 Aug 2025 13:40:53 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C56B84564
- for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 13:38:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86CC983A92
+ for <u-boot@lists.denx.de>; Thu,  7 Aug 2025 13:40:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 577Bcbkc077785
+ by Atcsqr.andestech.com with ESMTPS id 577Bejbm078286
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK)
- for <u-boot@lists.denx.de>; Thu, 7 Aug 2025 19:38:37 +0800 (+08)
+ for <u-boot@lists.denx.de>; Thu, 7 Aug 2025 19:40:45 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS34.andestech.com
  (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 7 Aug
- 2025 19:38:37 +0800
+ 2025 19:40:45 +0800
 From: Leo Yu-Chi Liang <ycliang@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <ycliang@andestech.com>, <randolph@andestech.com>, <tim609@andestech.com>
-Subject: [PATCH 4/6] board: andestech: Add Voyager board support
-Date: Thu, 7 Aug 2025 19:38:32 +0800
-Message-ID: <20250807113832.362507-1-ycliang@andestech.com>
+Subject: [PATCH 5/6] configs: andes: add Voyager board defconfig
+Date: Thu, 7 Aug 2025 19:40:40 +0800
+Message-ID: <20250807114040.368578-1-ycliang@andestech.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -47,7 +47,7 @@ X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 577Bcbkc077785
+X-MAIL: Atcsqr.andestech.com 577Bejbm078286
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,156 +64,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce Voyager board specific code, including
-- dram info
-- shared cache enabling
+Add default configuration file for Voyager board.
 
 Signed-off-by: Randolph Sheng-Kai Lin <randolph@andestech.com>
 Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 ---
- board/andestech/voyager/Makefile  |  6 +++
- board/andestech/voyager/voyager.c | 71 +++++++++++++++++++++++++++++++
- include/configs/voyager.h         | 40 +++++++++++++++++
- 3 files changed, 117 insertions(+)
- create mode 100644 board/andestech/voyager/Makefile
- create mode 100644 board/andestech/voyager/voyager.c
- create mode 100644 include/configs/voyager.h
+ configs/voyager_spl_defconfig | 66 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 66 insertions(+)
+ create mode 100644 configs/voyager_spl_defconfig
 
-diff --git a/board/andestech/voyager/Makefile b/board/andestech/voyager/Makefile
+diff --git a/configs/voyager_spl_defconfig b/configs/voyager_spl_defconfig
 new file mode 100644
-index 00000000000..d293e3e2d89
+index 00000000000..2e8c822e115
 --- /dev/null
-+++ b/board/andestech/voyager/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2025 Andes Technology Corporation.
-+# Randolph Lin, Andes Technology Corporation <randolph@andestech.com>
-+
-+obj-y	:= voyager.o
-diff --git a/board/andestech/voyager/voyager.c b/board/andestech/voyager/voyager.c
-new file mode 100644
-index 00000000000..22d4a18d94e
---- /dev/null
-+++ b/board/andestech/voyager/voyager.c
-@@ -0,0 +1,71 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2025 Andes Technology Corporation
-+ * Randolph Lin, Andes Technology Corporation <randolph@andestech.com>
-+ */
-+
-+#include <asm/csr.h>
-+#include <asm/global_data.h>
-+#include <asm/sbi.h>
-+#include <config.h>
-+#include <cpu_func.h>
-+#include <dm.h>
-+#include <env.h>
-+#include <fdtdec.h>
-+#include <flash.h>
-+#include <image.h>
-+#include <init.h>
-+#include <linux/io.h>
-+#include <net.h>
-+#include <spl.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-+
-+#ifdef CONFIG_SPL_BOARD_INIT
-+void spl_board_init(void)
-+{
-+	/* enable andes-l2 cache */
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		enable_caches();
-+}
-+#endif
-+
-+
-+#ifdef CONFIG_BOARD_EARLY_INIT_R
-+int board_early_init_r(void)
-+{
-+	/* enable andes-l2 cache */
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		enable_caches();
-+
-+	return 0;
-+}
-+#endif
-+
-+#ifdef CONFIG_SPL
-+void board_boot_order(u32 *spl_boot_list)
-+{
-+	u8 i;
-+	u32 boot_devices[] = {
-+#ifdef CONFIG_SPL_RAM_SUPPORT
-+		BOOT_DEVICE_RAM,
-+#endif
-+#ifdef CONFIG_SPL_MMC
-+		BOOT_DEVICE_MMC1,
-+#endif
-+	};
-+
-+	for (i = 0; i < ARRAY_SIZE(boot_devices); i++)
-+		spl_boot_list[i] = boot_devices[i];
-+}
-+#endif
-diff --git a/include/configs/voyager.h b/include/configs/voyager.h
-new file mode 100644
-index 00000000000..f6630b07ec9
---- /dev/null
-+++ b/include/configs/voyager.h
-@@ -0,0 +1,40 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2025 Andes Technology Corporation
-+ * Randolph Lin, Andes Technology Corporation <randolph@andestech.com>
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#define RISCV_MMODE_TIMERBASE           0xe6000000
-+#define RISCV_MMODE_TIMER_FREQ          60000000
-+
-+#define RISCV_SMODE_TIMER_FREQ          60000000
-+
-+/* support JEDEC */
-+#define PHYS_FLASH_1                   0x8000000       /* BANK 0 */
-+#define CFG_SYS_FLASH_BASE             PHYS_FLASH_1
-+#define CFG_SYS_FLASH_BANKS_LIST       { PHYS_FLASH_1, }
-+#define CFG_SYS_FLASH_BANKS_SIZES      { 0x4000000 }
-+
-+/* Enable distro boot */
-+#define BOOT_TARGET_DEVICES(func) \
-+	func(MMC, mmc, 0) \
-+	func(DHCP, dhcp, na)
-+
-+#include <config_distro_bootcmd.h>
-+
-+#define CFG_EXTRA_ENV_SETTINGS	\
-+				"fdt_high=0xffffffffffffffff\0" \
-+				"initrd_high=0xffffffffffffffff\0" \
-+				"kernel_addr_r=0x400600000\0" \
-+				"kernel_comp_addr_r=0x404600000\0" \
-+				"kernel_comp_size=0x04000000\0" \
-+				"pxefile_addr_r=0x408600000\0" \
-+				"scriptaddr=0x408700000\0" \
-+				"fdt_addr_r=0x408800000\0" \
-+				"ramdisk_addr_r=0x408900000\0" \
-+				BOOTENV
-+
-+#endif /* __CONFIG_H */
++++ b/configs/voyager_spl_defconfig
+@@ -0,0 +1,66 @@
++CONFIG_RISCV=y
++CONFIG_TEXT_BASE=0x401800000
++CONFIG_SYS_MALLOC_LEN=0x80000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x410000000
++CONFIG_ENV_SIZE=0x20000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="qilai-voyager"
++CONFIG_SPL_BSS_START_ADDR=0x400400000
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_SYS_LOAD_ADDR=0x400100000
++CONFIG_SPL=y
++CONFIG_TARGET_ANDES_VOYAGER=y
++CONFIG_NR_CPUS=4
++CONFIG_ARCH_RV64I=y
++CONFIG_RISCV_SMODE=y
++# CONFIG_AVAILABLE_HARTS is not set
++CONFIG_SYS_MONITOR_BASE=0x88000000
++CONFIG_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x410000000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTDELAY=3
++CONFIG_CONSOLE_RECORD=y
++CONFIG_CONSOLE_RECORD_OUT_SIZE_F=0x2000
++CONFIG_SYS_PBSIZE=1050
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++# CONFIG_SPL_CYCLIC is not set
++CONFIG_BOARD_EARLY_INIT_R=y
++# CONFIG_BOARD_INIT is not set
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_CACHE=y
++CONFIG_SYS_PROMPT="RISC-V # "
++CONFIG_CMD_IMLS=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_BOOTP_PREFER_SERVERIP=y
++CONFIG_CMD_CACHE=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_BOOTP_SEND_HOSTNAME=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_MMC=y
++CONFIG_FTSDC010=y
++CONFIG_FTSDC010_SDIO=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_CFI_DRIVER=y
++CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_FTMAC100=y
++CONFIG_SYS_NS16550=y
++CONFIG_SPI=y
++CONFIG_ATCSPI200_SPI=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
++# CONFIG_BINMAN_FDT is not set
 -- 
 2.34.1
 
