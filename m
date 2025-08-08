@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0426EC87FD2
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 13:11:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C43EC87FD3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 14:05:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA3198473B;
-	Fri,  8 Aug 2025 15:11:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 042A183D92;
+	Fri,  8 Aug 2025 16:05:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mdbYBZ2v";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Ifz6x166";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D9F88473B; Fri,  8 Aug 2025 15:11:11 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DEFC483D9C; Fri,  8 Aug 2025 16:05:06 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C89D884728
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 15:11:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD34783D90
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 16:05:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bz4Cq6CRdz9t0j;
- Fri,  8 Aug 2025 15:11:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1754658663;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YDtKEvQOme07roTQ0eezgFNKZm5dcxClJw3ggpZfjtk=;
- b=mdbYBZ2vQned3xjyj63USTpkHxIfysoUambXe5EJiPwBvbakpVM0BVeQUaZftEWLvUN5aG
- QqohmkERBUeKXMQWTTaES5GC/4pE4mpKueQn3RXHDwdB+f4nntxyvUNTN23ALnFvfb3Id5
- zykjHacaUfuUcBfXrJdMThvID0qhx6Dpxq2rSeC7RGqTOIXs7dwvaom9qGiJzpm4nRttPG
- U7oZ+OtlLJpUYOpvVvZulvXkoervY9MEcEdKObtr+nikRFZKM5Satx92isXvMAUOL6eRxj
- qacGD0HjEjhRpN5JimaOdxjVQ3PhAbx9I9zjfZuvOmbG1q5XriZsyLdsGjK3MA==
-Message-ID: <6ecb3a72-a6ba-4930-ab57-292f17020b96@mailbox.org>
-Date: Fri, 8 Aug 2025 15:10:58 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=03156c240e=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 578E3KQF030517;
+ Fri, 8 Aug 2025 16:05:02 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ EEM849Yo2Mqsjq3SrGzdgzi87FOW3pyOdFanCsMeS7c=; b=Ifz6x166IueflBAL
+ PxwE7cZyBzjJIImtdnzwhfIAy2Rz8SVREUMLUwWjI6Uw+nc+dbTFjNiY4kj8K5Yz
+ 07JQdhWKA4AXnlR+9iUlAkdP2bS9c6rd/IPp6Szo8WWnYQBOuYTErnKCUsy3aspA
+ tbDoNx0aRhs6+fVBoKl1xO30jAiFk4s7pet0f3Lr3TogEYUNobjPVPKSggA1uoj3
+ 54GZKAINIvlpjpv0smLY0hq3YwYuaNK8w6WoqWs0nmzp4tw97L4p/7CDRividXMg
+ qwsanRjMhagWoW7/cw9tcerjNVSGlKy2QXMpV92+k6QH9Sjn/AN8l7YBqoC7tmE4
+ erWViA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48bpx0chg5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 08 Aug 2025 16:05:02 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5C5AC40046;
+ Fri,  8 Aug 2025 16:04:18 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 865317269F6;
+ Fri,  8 Aug 2025 16:04:05 +0200 (CEST)
+Received: from localhost (10.252.12.105) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 8 Aug
+ 2025 16:04:05 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Gatien Chevallier
+ <gatien.chevallier@foss.st.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] ARM: stm32mp: fix RIFSC semaphores acquisition
+Date: Fri, 8 Aug 2025 16:03:56 +0200
+Message-ID: <20250808140358.53164-2-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250808140358.53164-1-patrice.chotard@foss.st.com>
+References: <20250808140358.53164-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v6 2/4] Makefile: Add size check for u-boot-with-spl.bin
-To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
- Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-References: <20250807075653.356088-1-pro@denx.de>
- <20250807075653.356088-3-pro@denx.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250807075653.356088-3-pro@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 052784de66e25b2714a
-X-MBO-RS-META: zri6tpuxrboqf6fhgew1fst7ttrwkgjz
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.12.105]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-08_04,2025-08-06_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,35 +90,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/7/25 9:56 AM, Philip Oberfichtner wrote:
+From: Gatien Chevallier <gatien.chevallier@foss.st.com>
 
-[...]
+Fix RIFSC semaphores acquisition by not returning an error when the
+current CID already possess the semaphore. Also fix an incorrect mask
+for the CID value in the SEMCR register.
 
-> +++ b/Makefile
-> @@ -1715,6 +1715,7 @@ OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
->   				   --pad-to=$(CONFIG_SPL_PAD_TO)
->   u-boot-with-spl.bin: $(SPL_IMAGE) $(SPL_PAYLOAD) FORCE
->   	$(call if_changed,pad_cat)
-> +	@$(call size_check,$@,$(CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT))
+Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-It seems other size checks are not called unconditionally, see Makefile 
-around line 1100 . Why is this one called unconditionally ? Won't this 
-break boards which default this new option to 0 ?
+ arch/arm/mach-stm32mp/stm32mp2/rifsc.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
->   ifeq ($(CONFIG_ARCH_LPC32XX)$(CONFIG_SPL),yy)
->   MKIMAGEFLAGS_lpc32xx-spl.img = -T lpc32xximage -a $(CONFIG_SPL_TEXT_BASE)
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index ab05536bd02..b5c0c60ff6b 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -36,6 +36,13 @@ config SPL_FRAMEWORK_BOARD_INIT_F
->   	  - initialize the serial (preloader_console_init)
->   	  Unless you want to provide your own board_init_f, you should say Y.
->   
-> +config UBOOT_WITH_SPL_SIZE_LIMIT
-> +	hex "Maximum size of u-boot-with-spl.bin"
-> +	default 0x0
-> +	help
-> +	  Specifies the maximum length of the u-boot-with-spl.bin image.
-> +	  If this value is zero, it is ignored.
-Why not set SPL_SIZE_LIMIT and BOARD_SIZE_LIMIT ?
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/rifsc.c b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+index 50dececf77b..136ed68bba1 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
++++ b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+@@ -73,7 +73,8 @@ static int stm32_rif_acquire_semaphore(void *base, u32 id)
+ 	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
+ 
+ 	/* Check that the semaphore is available */
+-	if (!stm32_rif_is_semaphore_available(base, id))
++	if (!stm32_rif_is_semaphore_available(base, id) &&
++	    FIELD_GET(RIFSC_RISC_SCID_MASK, (readl(addr)) != RIF_CID1))
+ 		return -EACCES;
+ 
+ 	setbits_le32(addr, SEMCR_MUTEX);
+@@ -171,7 +172,7 @@ static int rifsc_check_access(void *base, u32 id)
+ 			return -EACCES;
+ 		}
+ 		if (!stm32_rif_is_semaphore_available(base, id) &&
+-		    !(FIELD_GET(RIFSC_RISC_SCID_MASK, sem_reg_value) & BIT(RIF_CID1))) {
++		    !(FIELD_GET(RIFSC_RISC_SCID_MASK, sem_reg_value) & RIF_CID1)) {
+ 			log_debug("Semaphore unavailable for peripheral %d\n", id);
+ 			return -EACCES;
+ 		}
+-- 
+2.25.1
+
