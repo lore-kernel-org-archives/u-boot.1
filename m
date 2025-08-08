@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB52C87FD3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 13:00:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A27E7C87FD3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 13:05:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ECF68472B;
-	Fri,  8 Aug 2025 15:00:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0029E84728;
+	Fri,  8 Aug 2025 15:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rzp6hLgj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IUaYO9Sx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 704CF8472B; Fri,  8 Aug 2025 15:00:35 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 7D1CA84701; Fri,  8 Aug 2025 14:31:38 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6224784728
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 15:00:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 939BD846F0
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 14:31:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-3322e4ac195so16861791fa.0
- for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 06:00:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=boewingloh.linux@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-af66d49daffso364674666b.1
+ for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 05:31:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754658032; x=1755262832; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JzvBZRt59fqyf66+xkEv6ezA5ADXU2S3GFslAe5loJM=;
- b=Rzp6hLgjSyPsMTyN2tWRNG5qgfo7GuJwloKuQ0whMWFNPE/ThZykDHzvPQEKCN9wk/
- smgEQ1KECh8d/kesSJC89VCpSKf/3BdIsIHvr2MCeT6glPUsJPw+6s3dZCzUD1lmxbYB
- l5SR2XlarlBMmCATCSi+LMlroun9ZV47rHa4R369wlj09BdqdWl+1rXpjkmTKVB7o0p6
- 9XJBeblr8RJNzlzO2HyBBt5EUnpGXMtoEIzN4M5lKVToVDqyOCT/ONEy07wdiyHyp2kG
- 10EraC9Jty9eCrr6SBMh1V+GMSbAZgjRR6LrR+FmScinm8R5rIIl8EvqNQ6Rf54AZMrs
- rPsA==
+ d=gmail.com; s=20230601; t=1754656296; x=1755261096; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=u4dqgGxrpX9Mua/Oey2bL4sRRIE3lCwhnK90Ja4bLRw=;
+ b=IUaYO9Sxg/pXxZG7qNp62BihNbP2PGcnSZaun0N+fJzWkJM9e2SmRzvWzbc3DaKlmC
+ U4XU2YOGZdz2HRYZ3YQzQOHbirOSU2jfA3LbAaOoiBIAFAqwjv7J/ZigNBYDC7WcUa2y
+ tXOIdWj5EvWOonO8f0TJP8N5u0h/rNUcttzppYffP7EWVjJ3nVEswJ5Ku99nRTNDl2bF
+ A+m/cyUVCtMgadC3yE0ksuHsEI0cCvJNC8E8yqHQ16y31tV0aOm2dShgZ4D4o7bk0BSy
+ m3Fl8XIBLnr85pHp1skhngwyvykEEwfG2TZPwiirG7jenaamYY5yYtAcASnKFek8LEMY
+ gxKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754658032; x=1755262832;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JzvBZRt59fqyf66+xkEv6ezA5ADXU2S3GFslAe5loJM=;
- b=qgB6n7VdmNOE1O1Qc4drqQGIruPu2cCLBcBtigQJNo6A/ctzCKXgjDTqwWjS9jE9GX
- ol7XO6SJ0E6jjZ4CF0Htn1CPkSbe1yQMy1cwHcL5ekosWX7asxh74b8nztmp72vZUsLr
- 4tKJBy6RTv+8Wn8d8TK/n6E8rwAparFcsaQNjbw4Q3sEXMsafBxS+Tff+F3JMMY4U/pL
- 0nmcMn6NyJ9PsUj7LdqyzDSfFWRcTo4fGIeL82UQKQ6BjdxOML7DljvmE5NTv6AjyOct
- mwZy6jjSgHYI3HlREKew4DEZiZnOshLHF5cTQY/qGMqJ1yX+1NZiIqp5MP9xASnH6z86
- yu2A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7tKYmLSaEPfuaW+ka7KFAulwY7w9+H4hNyY6GspnZnxi5/eDhr7ZLHEbcsRDPgqvWHkqhowY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx76wDdADRNOu4FW9nGP7rJDstrj636cBSIw+gZjtvXf4mElvuN
- qCewJaeiHZv5Vk8DTN5OsgL+anLfAWQKFnLrmPAV1TavY4Hxk8l8p2ZYMsndct7ZQ1jSTahfhch
- oJwMZGUQBLSG+NYJld0NqjZK84fKZD7k=
-X-Gm-Gg: ASbGncvIXOQMM4HlKttuAc9zP6oL779e0s7F7n89NFcryIlJfN96Wdtbc15Psi9LSW4
- vwxPH0HM8PXEREqg9XUT3PDDG+7IgekeDKtfQCPP/F27FTZzHABh/yVyll99bAvrcy7rGtQcVIm
- fLaBfKq35B+OKPhIU7ksLB2zsCUs/UsN6dUv2SuAMpVx4r9noc32mAeuNr1twMEw3ARxyZq+JoO
- 8lwYdGUjjQlObaL+EBi4EhbAvdYFAmOMgXlUqScwN80tWsv
-X-Google-Smtp-Source: AGHT+IGW5l7eonLwbZERZBvDkrc75EPGd71jRU3PHb7WxH0uaLm+Isr4VIQwNcOj+fUdPEf7zc74DdajKOzNNZ93Quk=
-X-Received: by 2002:a05:6512:b02:b0:55b:760d:c2e2 with SMTP id
- 2adb3069b0e04-55cc00e30b6mr684865e87.19.1754658031665; Fri, 08 Aug 2025
- 06:00:31 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754656296; x=1755261096;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=u4dqgGxrpX9Mua/Oey2bL4sRRIE3lCwhnK90Ja4bLRw=;
+ b=epBLfglvhAI6jw9ULpOofRLDRlOpZsXiOp336Q6qCPDqRkKuBrsIVbDF9ejWNI+kpy
+ o3kPy6cmV0aYYkGJObGyDJqye1lN/E6bNBtB+mzgNFucA6Thyw4ixYApKAXAeP/TLX7G
+ TuWaqTHGFjJbqGjUCRqMZMaP3zQA/7AEFm8vwiydx1QmR18R5IlGQdQs1p8jpBROK44h
+ m2RLLaj9Yl/MOJMIb5uS3ad9fSidDspHGinAXU5PrbZPaDTfNYL9cqKTmONmmiTPftmc
+ ve10Ly12OnoPglpQ4iURfbiXYjT3yxJbMaY0IXiVO+xgW4AS9mKtPjkfwD+1dk9C6ujR
+ zjIA==
+X-Gm-Message-State: AOJu0YxFP+C6PeeEPaFJmBhkcUlEyYEMKrgkKqCe5r/B8CO6d5Gn29TO
+ /3oXIN/q9bSn8Uot8XrMYsWdQ9bhA+9AboGlMcBwqlpV706wbcbgt6pzzC//I7fRs54=
+X-Gm-Gg: ASbGncsT5Il9RtGMnMNIfLxNGf6Wvzk/IIG2aWXigG5Uk5aqcwyJPu1TWZJJ8iqMm/5
+ X+tSbFbLQA6neh1s0iIDAc/wHpvCvovvd0JUOhGxqda6+KHnUzRlH6poqHbaIk/nto9EE4RGHQM
+ vO+BKjfVcz0LbGSqrWNY8CI25otIj4YNP6ucsQzh+BZPzoC8rkl0UM3exiwFMjwR2KgKGAnAj3d
+ 1n57S/fquOdxn+unnKj584kXQXHn01YREUFU0wS/423W6GLGzRNFJKIgkS4RonQUGPljpIvUyJz
+ HCplwosBgtfqh8LDoMbXK0MkuBRo/O/WZ5K1dYyvc3D+4EfLT6lIwvmHZcAFPCTbVIgNVMyWTGv
+ S6WKvDFWR/cLo6mlykHIrbWLdmTFKdjyoL1tHw5VTxjXDPr6bNvEcXwxv1FWtYA==
+X-Google-Smtp-Source: AGHT+IFA8XbRmIrU1zOGucIMkbePuQ4LGmlZx7CxWEnxY5K2RkJpHkFX+jmTwNoqf8GCjL3QjC0wkQ==
+X-Received: by 2002:a17:907:70a:b0:af9:a5f8:2f0c with SMTP id
+ a640c23a62f3a-af9c64f4460mr228418866b.28.1754656295692; 
+ Fri, 08 Aug 2025 05:31:35 -0700 (PDT)
+Received: from FrankBo-NB04.beckhoff.com (p4fe4d101.dip0.t-ipconnect.de.
+ [79.228.209.1]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-af91a219ecfsm1484667166b.94.2025.08.08.05.31.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Aug 2025 05:31:35 -0700 (PDT)
+From: boewingloh.linux@gmail.com
+X-Google-Original-From: f.boewingloh@beckhoff.com
+To: u-boot@lists.denx.de
+Cc: =?UTF-8?q?Frank=20B=C3=B6wingloh?= <f.boewingloh@beckhoff.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH 1/1] soc: xilinx: zynqmp: Fix zu1cg device detection
+Date: Fri,  8 Aug 2025 14:31:34 +0200
+Message-ID: <20250808123134.636-1-f.boewingloh@beckhoff.com>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-References: <20250807131354.1531908-1-primoz.fiser@norik.com>
-In-Reply-To: <20250807131354.1531908-1-primoz.fiser@norik.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 8 Aug 2025 10:00:20 -0300
-X-Gm-Features: Ac12FXzu6-hfFJVTalhz3qeR_CyZdJ3fM8x3nKZtFe-uTenYNPKSU5myAqDNAJo
-Message-ID: <CAOMZO5AstYMTkAtU7__hUgs0y7Mi-Tj-3rTAzuqs3PfB5sRdRA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] imx9: soc: Reuse and export low_drive_freq_update()
-To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, Mathieu Othacehe <m.othacehe@gmail.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, u-boot@lists.denx.de, 
- upstream@lists.phytec.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 08 Aug 2025 15:05:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,19 +98,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Aug 7, 2025 at 10:13=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
-m> wrote:
->
-> Reuse and export low_drive_freq_update() function. This way global imx9
-> board_fix_fdt() doesn't duplicate code. While low_drive_freq_update()
-> can be reused on boards such as phyCORE-i.MX93 (TARGET_PHYCORE_IMX93)
-> which is not using the global imx9 board_fix_fdt() implementation.
->
-> While at it, make printout logic less verbose by only outputting on the
-> error condition and not on each successful clock fixup. Also drop now
-> invalid comment (low_drive_freq_update() now does fixup for internal and
-> kernel device-tree).
->
-> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+From: Frank Böwingloh <f.boewingloh@beckhoff.com>
 
-Applied the series, thanks.
+Currently u-boot displayed a zu1cg soc as "Chip:  zu1eg".
+A value of 0468_8093h in the IDCODE (CSU) Register defines a ZU1 soc
+not only for the EG family but also for the CG family as described
+in the Xilinx Zynq UltraScale+ UG1085 documentation in Table 1-2.
+
+Signed-off-by: Frank Böwingloh <f.boewingloh@beckhoff.com>
+Cc:  Michal Simek <michal.simek@amd.com>
+---
+ drivers/soc/soc_xilinx_zynqmp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/soc/soc_xilinx_zynqmp.c b/drivers/soc/soc_xilinx_zynqmp.c
+index 0c45c781fef..4b69ff3de13 100644
+--- a/drivers/soc/soc_xilinx_zynqmp.c
++++ b/drivers/soc/soc_xilinx_zynqmp.c
+@@ -63,7 +63,7 @@ static const struct zynqmp_device zynqmp_devices[] = {
+ 	{
+ 		.id = 0x04688093,
+ 		.device = 1,
+-		.variants = ZYNQMP_VARIANT_EG,
++		.variants = ZYNQMP_VARIANT_EG | ZYNQMP_VARIANT_CG,
+ 	},
+ 	{
+ 		.id = 0x04689093,
+-- 
+2.47.2
+
