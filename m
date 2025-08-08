@@ -4,147 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA89C87FD3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 10:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 729E3C87FD2
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 10:29:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18BFC846C1;
-	Fri,  8 Aug 2025 12:04:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id CD656846AC;
+	Fri,  8 Aug 2025 12:29:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="HvhxAqUj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wX3HE716";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C97A7846BE; Fri,  8 Aug 2025 12:04:33 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2061e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::61e])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B9E0D846AD; Fri,  8 Aug 2025 12:29:37 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 082C6846B7
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 12:04:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E449846AA
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 12:29:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Vhx5ZE4oMfhRW/O3XXwFjB0OxJDNkv7AY40TGDUFNUuncG56mPvpXnI6X0P1rvfc7NAvnor/jcwX385jXNj+R5FQiYsDCI/M4wJKydgzBYIRnpkOqIjhdpdI/JgmMbkiMmNiGWawexajDeMT2YG97dRG5J3BifOATx5GnH6GRHISwl3HmHYiYkH9Lj8/xNzcokt+0s1AjxRuQT7iMkca+ljMFzOIEP1D3MXNGudCsHJctv1tArG4kvWwuni1Fibc09G4Fua0ZctptkVKdToWXyuSBPE8Z5WU2BMI3R5ZYT8z3TO349UwwW/Ypn2W9Ve9h1hjorboLGf1aDCnQ19wrg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iNaSZmBbruR0iUbCPl+nNeOOhsHFW+AvCUZTmYuCESw=;
- b=yd1jfYnWry9AWzSNJO5uyg5Xd9KKWFsMUdHyzvQ78rEhKOIEn7qLNlnyraGYqLyirncSUtohPQajd+dUwKkFLADqmPgBxdyvVtTo8CAzzrngQhZQY2R9zSvJeWaJBUaLpEITePS9FWbz6IXr14LAfrkeH7jD/45Khpv8Yxz1f5vx0qRpQj/An2M3ocUNE2SudxH9mkqZByDHRiiYpQD018pWGCUvPjVtkpUDen/e275mDkImj2Mk6N5yD6/4i48k+dVL3AcOsExH4B9IURgQkitXJLG+t+8Xe1mWSQlFDL3PriI0F2QL4llZuyZcq1+Z2lw9GNF/vaOmwOO96cSWBQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iNaSZmBbruR0iUbCPl+nNeOOhsHFW+AvCUZTmYuCESw=;
- b=HvhxAqUjSciBT9ovHjdsWsQXEnZhdRMnk+2kyYpBve0UnYsMNBOypSzdomKpI8jyOmef9R7msVejerG3DrKA+E5+CKhD25FYMCdrRDaAt7cquOieZusBGPfi8kX3k+pOQw4NKvRY+7T5RD0FlcLa/avOhHXmG+2Cm1eyGRApa40X8SOM1ltP143ygRN//LKyKzs9CmTQmuQpGfsiYO3NaGDTzRj6zntky3qGh7g454RAVjfhOYSr2GQDwyz++XWl5RC9V80+K+dWzG+MXB8yG3J2NXkJlpIzQyHyeG4vU1LGZClrbrp3NgGSqZns3WAJKx3wq2AjO5xRajtM6pkbbQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DS7PR03MB5542.namprd03.prod.outlook.com (2603:10b6:5:2c5::16)
- by PH0PR03MB7113.namprd03.prod.outlook.com (2603:10b6:510:298::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.14; Fri, 8 Aug
- 2025 10:04:24 +0000
-Received: from DS7PR03MB5542.namprd03.prod.outlook.com
- ([fe80::c3b6:3b8d:4383:ab7c]) by DS7PR03MB5542.namprd03.prod.outlook.com
- ([fe80::c3b6:3b8d:4383:ab7c%3]) with mapi id 15.20.9009.017; Fri, 8 Aug 2025
- 10:04:24 +0000
-From: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
-Subject: [PATCH 2/4] configs: Enable USB DWC3 host drivers for Agilex5
-Date: Fri,  8 Aug 2025 03:04:10 -0700
-Message-Id: <20250808100412.9320-3-nareshkumar.ravulapalli@altera.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
-References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR13CA0163.namprd13.prod.outlook.com
- (2603:10b6:a03:2c7::18) To DS7PR03MB5542.namprd03.prod.outlook.com
- (2603:10b6:5:2c5::16)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-459d62184c9so11971835e9.1
+ for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 03:29:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754648975; x=1755253775; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aDdtvr2xFN3+Vpw26hbG+Q8dOfUnIVYSft4vNq3xLDw=;
+ b=wX3HE716eW9y+Mut18js+1sESLqHbtv1rB//8J/WvMZTjZ1LtvU8FpVujqcCCJHu8N
+ bd6O1KaYRspwPJCbVn8OfDbL22bWux5tNa95r/g7bkqJzZE8Gnv5edR1sJAttNlc+jME
+ Mcxa6qJisUva0muhdB34IFubeedCt+6dXmWjUIiyYRkKn3CNL5YuUGKfHML0GEhM9BWv
+ k+87ZZRpx9fkInsllQhjDKaHrAPcUFDb3IWSblV3pJ42IKrtXTl9B8lGR0io6Ik+bYTM
+ b4Ps8G4iXFzbRZv+ZErm/Ydfzr/v+0ZJbJXmRisE8I4G3YfWx3AWJmKTAb0xJK0v+tB/
+ vIMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754648975; x=1755253775;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aDdtvr2xFN3+Vpw26hbG+Q8dOfUnIVYSft4vNq3xLDw=;
+ b=QC8d4PSSd4UjcQWlJu5J0NH5UXFdDUjI/DRownBTM2XZbMmJbk5qNMN4lw+XuwyJX1
+ vak69IJCfXFqL32uCMLJ8e7K1PjqhFxB//KciCoRQ7FnSG2YqpOnH34EIVXKSZF0xfdd
+ g2WzGtJSZt2z+NsDOWwBwV/E88OXc8VtzLUU9WXMKKx39fJq0oQwqF4wbZlMicuS5k6b
+ GCevgYrIT0aiXDrSei3Hk8x6SGA4b6jHWwYnqLhzHuQOdpfHEKbZVgfXMbHS2hweI1/I
+ jiN5f0AkI0Tduzx3Au+lwgPRZa1ZLs3IsW7Ig/iEAxMgRLzHE7EzdtnoZ6lweOaFJRGK
+ Uklg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXgfA6IcDQpjssvtfvzP7rGn2htvRzTJCAIBBduAjYFXoRNMpEh4IHeOpRb2X8w/XuBijsPo0w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyj/mScPOTLaBvbKPE3fYe1uYHEnkL+F4vp0MVmFMTKiDbcfue4
+ w4lRquipp1v5t1svwmrQha81fYLml2nd49SreWE2AnKpnAq1kczSV69u+4N68AAbJ9902BuRUN2
+ blNlvA/s=
+X-Gm-Gg: ASbGnctn9hS7cUEqCiMrMLctByRMByGzI8tgOlzzTo4Na5RzKH9bXfh8lfyizsMbNMq
+ Z+nyTDtAf4jD/mdUbcz9jQeD10iq5DD63mFoWxaasZ/ySqTf1OZtCwItmUQlY52DdBedFnh4pNb
+ NcMD1dnGuK0StbJOiAxUKb1eAgsPYEJWvUW8Z6NRxH21haS39uhsU8FSkOoyPV2ovk29ilnplJt
+ YuAVCTHTSzNzOJJGno9kNYU+TnUNYYzCgTL8+V4R7Bpsr17SvJOZd+lxQBZsLIESy/tZ47SE/ap
+ MVnHbSpuGqcl1vKmOCQZKijvCmPx/IslBC7JfSXDX2aNpvtmSrXlI9xYbVDf4EMpbWLoTqOyF8/
+ hsavn3NXEzEuhzzENjpiRMfgHiNyWvnQgZmMIhG4JGcCUQvure6M=
+X-Google-Smtp-Source: AGHT+IFyedp5nzR8aaorLvNlFKg8z9wqVzpx34pLxeTgDEnW36rkobWO/m6BmchHkjpiq1608my+Lw==
+X-Received: by 2002:a05:600c:3b1f:b0:43c:f0ae:da7 with SMTP id
+ 5b1f17b1804b1-459f4ea0e52mr20634465e9.7.1754648974748; 
+ Fri, 08 Aug 2025 03:29:34 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:e7fc:9a8d:4024:d186])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459dc900606sm194134685e9.15.2025.08.08.03.29.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Aug 2025 03:29:34 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Fri, 08 Aug 2025 11:29:33 +0100
+Subject: [PATCH] drivers: qe: avoid double free()
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR03MB5542:EE_|PH0PR03MB7113:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4a8b56e-6d17-420c-7e72-08ddd662f385
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6Sjm4V3R1S8ZHBaLJu1XZ84ullMDPbVKX2IxC3t+VXAUYT4wu+2sTuYGZs3c?=
- =?us-ascii?Q?DDTMQ5BwS0QCba+Xw+nSp1c92jeWE7LbfROp7Q3dxYN9eTdqipilLlACqYGJ?=
- =?us-ascii?Q?ETxgl0uWs/dfLxEk8bA/Ouj9uV9rkQnFss7AqpUIz9Xu9Piqd3JpViKlgQP/?=
- =?us-ascii?Q?zTmkEM4ADiHvbhCmCH/u0cTVwKG+D7OVdpesjqesXpw204t+pu9EpKFb4UPl?=
- =?us-ascii?Q?ThQaxoFH4CF7TKfEal90DeiD8IyqKDM8QLjXhNoci/OE74zKbueN7mEP+0QP?=
- =?us-ascii?Q?u21SCjMBqYE9ifwe6J8um5ZSFYWivxDrmuvmhfMlp36fWMz72bnTwaAwMKH2?=
- =?us-ascii?Q?FGRP8tqXdVkoyhpmFSay9s0C8vQt6vjWLbhQbgL/ed1EhkYqYrrnqJmRa+3X?=
- =?us-ascii?Q?x9XVcXp5WkCzYstXR1wrLTsDIMGx6CgDDZdKMEFrbPo67QzQ7LpJF1m29V2/?=
- =?us-ascii?Q?8qZJcmXLYgfCs53H0wTLrzNeAsLXwmj199BPrAdF67bzyLK+Wm3IjHM4V0rb?=
- =?us-ascii?Q?8pdiV/Vxpb0zhMnsfVInWU9wROuSPA4KOkhK/N4h9oRay7/njUSMpjlvrZc/?=
- =?us-ascii?Q?imY+n5BabanvRAIQ5DO6uMxlWHQIkz0MrG05BjZA9IuWrt9dIMrPh5+o5+/+?=
- =?us-ascii?Q?fkUe2gaMvpVGDuIJKXgg/IO1FtkSTGQs2/OXfYMvLdE3bAThVZcedlKjnHa5?=
- =?us-ascii?Q?euIgAzCYybbClPqw8NcLlY94DG/xQ75QgREvRIKBt10gXWfcQInA0YZIBUBD?=
- =?us-ascii?Q?oiCeySsziWcg81TW6nDXktj8xDi9Q1M7NFFkBc76JJpEdZfFMPJQIjXA8m+z?=
- =?us-ascii?Q?SbdeR/W5yXeLLGAGwtVDi7xGxMgM44p78IOYD7vt9q/S1bERQyxbh/5m5TOn?=
- =?us-ascii?Q?stkWOdh1onFX2XCpagbIlziN/6grre9LxRMWAxc8kJc9GfckUqmlxN6B4YSV?=
- =?us-ascii?Q?SubYVQa1DOZxIE0EnfCDputVaIN0lrU1sRhDmCRi2U166/oA9Ba2BriGD05G?=
- =?us-ascii?Q?eRmH22Ib2wNu7+dG5703AyzgOB3Siw4niwsfDiiJzYIoOAPUSTu4cvY6+a2v?=
- =?us-ascii?Q?FtgrpJOmwtUoHHXMDdQArV5tuCIGzuuLLV/dN89hoS7nJvr3G76ZY65vQrPm?=
- =?us-ascii?Q?OtIeQJATLJwJWTtYrapeTgJJJF70hBuNSn8qWfu/0mbv49ss2MUPm1XhuO15?=
- =?us-ascii?Q?/93LqCbtQs9PszXulBX7eAuvj6vXiqJv/BpYlStVhfRKmwY4zIPW/GA1S8KF?=
- =?us-ascii?Q?9CPWi4iwglgdgGaNtzizQaNPbQ/Fyar8C//bQ1e64z5DQ0K0SAv3yDK1hTvM?=
- =?us-ascii?Q?saRN1lKNTnefPax5SeUuXO3cLhwwp4IpdMbH7DDHHZGETTmVykIpENPHLeqO?=
- =?us-ascii?Q?/wYcG8W8uyTxsyrRvv7eVbKBW6b8X79/krQNUwKDTnQPrWRhCk3NjqWD+xEr?=
- =?us-ascii?Q?f+VY8wXBXnQ=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS7PR03MB5542.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/b6Squ0pq/nZjKxemAy4VM9Qx18im+MJl+rVSliA1cNcjXRlkFUrAXb739Jd?=
- =?us-ascii?Q?2yxGsSeXDbY79GEpkQrXn+D7azEw35aXn/7BwTtpWIlbM76pD+PYfCcHjKiu?=
- =?us-ascii?Q?JNjAAw0GTmiQtRCfIyHlYZQkC9rzUhqz6oagxjIyKcQaJj4l8HxU5y4tkPjC?=
- =?us-ascii?Q?iCZVzfwSI36FnU/7xvKaKNC0Mjb8kMunoWldZpd5dC+L4q8KU7VjrN1ZzTdN?=
- =?us-ascii?Q?qDMVe+w3/UjA2Q7uuVXu0MDU2Sl1odHF/817oKZwhsmNURttR6AJ/PLyN1HG?=
- =?us-ascii?Q?Nyr8EXqdilv14uhfdMI5673ONZWm4BBdgIgjJ3tV0hrrUUL17nRzooe9xgKq?=
- =?us-ascii?Q?joO9CCNFF2Ql5bMZsnswKQCGgujAgxSXDwj1EUj0iRHuu2JWI9dQUkgyzxIt?=
- =?us-ascii?Q?Dqax+BFegKv2rOah7WPdtGVPYQhMQCk505fhBjDeeXfuaZt5gmjtzAbBBeZv?=
- =?us-ascii?Q?yt/y1KFftNxq8AKNCCZBL79naExR5q29+2UcfXPhSG03buxca/dZ0dxIucwA?=
- =?us-ascii?Q?GOW6iAl8ssNijG5i9nsB9uShq+IyS5At42dM/ijoIiOom6fyaAak/DlVfhUc?=
- =?us-ascii?Q?mtXSUEWYai83Z3xhNsDfVTsBhIcWNFAGw6KKsCTz3/2+vCVAF4KmO6tP6utQ?=
- =?us-ascii?Q?6MBGtJsFBA10eP1oxN7jFuYDxhIwlx8l5C83+oLCyHjNGfgbNQ4ahv7MQ6Oy?=
- =?us-ascii?Q?DRerzttYrqGwNfXP2tby+bS7sEGZcE+i1QIpFk+C2JeDm98W5wjIe8eC0hzr?=
- =?us-ascii?Q?AjlvQCk0wl9rcrQ3NPrY6qmMPt1k8Av8D6vkfbbsK7K5XPG5Pzsj6zdtJvi/?=
- =?us-ascii?Q?y4HNEJ869kuX75239gmtaIAuss8/VBj+h16cBJnwcutQMxyV/4LpGTq0wsRw?=
- =?us-ascii?Q?6gtTnm7pHIMuw51DG5gNOcdXjasQP5RARZUhFk2CqGsgyGYNGtPNVu51d7HG?=
- =?us-ascii?Q?EfyDpZduh3LZG1lcMAzJKEa+5sQ/8CxTdIKFa0d2IPHPchbsAr2sjp3ujuQb?=
- =?us-ascii?Q?XWai/rUbJXSnTmOUN2bE/071Amy3b8UYZQOc+NSQHowp/lX4HP+NWz5buuLd?=
- =?us-ascii?Q?UziZM5wXdqutSq50bLKA+MpOFeTq6iAlBLhUL5PYEYNlSoRmf0KYXjdQ8smw?=
- =?us-ascii?Q?IFaBFx4YwHGlxC1uwKYUHn3mV4eItP0OsP4WipBwcVxpvEbKY4hl6xkUEmZ8?=
- =?us-ascii?Q?z/92pEWsX2QmAGQinW5IY0C3tqE8J09W97PWPJkNWWkyfB5hVm0FtMPRsljc?=
- =?us-ascii?Q?yvc+DYoFQP+hqsh2dtkTMct76OQJ92Flo8PPQ2mjePJnabhvidNZFM+Xhmpd?=
- =?us-ascii?Q?DOKYdR0ex1/UMsMTjW+0/qs3tSc/nfwPyxq2NipGAHz7HgIlBRwWrawmUN6H?=
- =?us-ascii?Q?BPJdYLG1UEohrdXDzHod8KT2+tSFCmDZoBPDuNLplX031J/Z3sg2bEpMBGo5?=
- =?us-ascii?Q?ZGLA38svkxbdpiyFGdqG/x/cxWO9+BR6KVJs1ZNkvnN9Akgyr2Eija0lVDcs?=
- =?us-ascii?Q?hw68zJqx7780PTZdbSMuc/W7EfJZsdu4AZ+d45GKDWZu0k59ftOAX+QnJsvV?=
- =?us-ascii?Q?azZIFxmcDbf2uxfj2b0wmDcF20r/NBT4zgzbW9rRcWgHyHNKzlIZsiXj4lMF?=
- =?us-ascii?Q?lcjyyXlfczsGa/htKh0lL2k=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4a8b56e-6d17-420c-7e72-08ddd662f385
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5542.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2025 10:04:24.0320 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vkPit1mtvsqalbSLInkCc1dJdk4jCH5ztOHe4Av3Pl3DP2BSPU1yh9VEe1a90qqcF6D0T2OF78l4+WZmBBlSh25Tsxajf5HvvSyrkcNTJrL6OCAHZynL+fxa37Y+qkyc
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB7113
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250808-qe-v1-1-7b62b9229128@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAIzRlWgC/x2MQQ5AMBBFryKz1qQaEnUVsRg1mIViRkQi7q4s3
+ /sv/wYlYVJoshuETlZeY4IizyDMGCcyPCQGZ11la1ubnUyPWHrvg6PCQwp71CQFY5i/dEE9SL5
+ hExr5+t/b7nlez1AJPW0AAAA=
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,28 +103,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Required USB DWC3 host driver configurations are enabled
-for Agilex5.
+Avoid calling free(addr) twice if the device for ucode is not found.
+This patch repeats a similar fix but that only applied to code without
+CONFIG_TFABOOT enabled. This patch applies to the code with
+CONFIG_TFABOOT enabled.
 
-Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+This issue was found by Smatch.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- configs/socfpga_agilex5_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/qe/qe.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/configs/socfpga_agilex5_defconfig b/configs/socfpga_agilex5_defconfig
-index cc812c7008c..859750f02e7 100644
---- a/configs/socfpga_agilex5_defconfig
-+++ b/configs/socfpga_agilex5_defconfig
-@@ -98,7 +98,9 @@ CONFIG_TIMER=y
- CONFIG_DESIGNWARE_APB_TIMER=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC2=y
-+CONFIG_USB_DWC3=y
- CONFIG_DESIGNWARE_WATCHDOG=y
- CONFIG_WDT=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
+diff --git a/drivers/qe/qe.c b/drivers/qe/qe.c
+index 69b7de084e5..25880db37cf 100644
+--- a/drivers/qe/qe.c
++++ b/drivers/qe/qe.c
+@@ -255,7 +255,6 @@ void u_qe_init(void)
+ 		struct mmc *mmc = find_mmc_device(CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 		if (!mmc) {
+-			free(addr);
+ 			printf("\nMMC cannot find device for ucode\n");
+ 		} else {
+ 			printf("\nMMC read: dev # %u, block # %u, count %u ...\n",
+
+---
+base-commit: 123cd77122a13288e1552b5d9b7c22a6f19e2e02
+change-id: 20250808-qe-baa4999c2e19
+
+Best regards,
 -- 
-2.35.3
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
