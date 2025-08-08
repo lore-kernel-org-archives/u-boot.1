@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A08FC87FD3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 12:57:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE8BC87FD2
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 12:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC06D846F0;
-	Fri,  8 Aug 2025 14:57:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C8E0846F0;
+	Fri,  8 Aug 2025 14:58:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MpL3c7I+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KUIq1/o7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 741BD84712; Fri,  8 Aug 2025 14:57:37 +0200 (CEST)
+ id 254928471D; Fri,  8 Aug 2025 14:58:43 +0200 (CEST)
 Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
  [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AF32846E9
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 14:57:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F893846E9
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 14:58:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
 Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-55b8248e77bso2161258e87.2
- for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 05:57:35 -0700 (PDT)
+ 2adb3069b0e04-55b978c61acso2022977e87.2
+ for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 05:58:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754657855; x=1755262655; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754657920; x=1755262720; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lJKja8fdd8Lg6EBLtJEcbhimLQndwCbBEGJQvkf5wVs=;
- b=MpL3c7I+F5MRrJGAoj550lYYciTQgA7epqYKER/BTNW38aGs4Q+eSTdq7VqFSzwcJL
- Noj4jdx0Vi3NkANpY3dU4QEZVmim9I1rnTVOjZkOOLPwMkoJTUGm2K3oG8JsA/600r0V
- 1LlVatG74dHUHjZWmSJb0MstTC9njV0/h2BfGP9GVbQAUFFPi3wHgh1zP6kcD5o/+YPy
- 8F7ruyW70zyNDZM73u6t5DEZIdl13ZryIXPowqiqf+3jVMcybn5JURNnw07aS/rn0JQO
- gv6KZi4QemlH+wevMohnGkjhKT6sWdo9fcHlkbL0xYjsdw8MRlUZjy0+OagSiT77qd+9
- WEnA==
+ bh=AaEb5rRaEnUxyrd2mm1N6/1ozy1yi0sLKiDNsP+z1O0=;
+ b=KUIq1/o712UCnVnIhWz+IFr8RfofhL0ppOWM9p2JZ77HLK3FxNhKS42XhpEpu+mGJ+
+ fuTFAfYRvbX4cTi0JXNTB18k3tGWQw+lpUzrCQjE77O5p0aFUElq6AJl1Ls+0yudCtW1
+ 1HbyX82Ejemurb77RY/lDH6tv75cO4n8HTk8gDl1OvVaT/DX7MpZQ/7M0uGIFzIh6D0m
+ akB/MVQmiKFX45/WvnQilf6LCvqbne0uaBN60J/ip/jF33u4IdZn4oskRxXldeZffgVR
+ kqH+juz3RUwSo+N881pAQUEDbyjE+WIy8nXN+3BDySEsRzmqIAKUYrmPCgpsb+ALo/XP
+ FKyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754657855; x=1755262655;
+ d=1e100.net; s=20230601; t=1754657920; x=1755262720;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lJKja8fdd8Lg6EBLtJEcbhimLQndwCbBEGJQvkf5wVs=;
- b=qey3YaCYRCgUP0bPz51tuVB2FFG4upN1e3Tvt8BDA9JK4b+0kuQqAU0yITsSFDq6YZ
- 5eCTRIlpS60+dSjjD4IVDDn4KMlvy3VEc9CqQ5Hlto84TajEsh3HJhvH1mfqbdyrw+5M
- jVYMFaUM7QrhtkE0a2uXVG8DOUlKSlAffCHjyrxSXFMhgie4BKv9nemrabiZajbEzoFi
- 9G0OTcFcDKz9FdcIpWZPwQPSdoC2NJ+2e5t4VbsWLdKeygFoMinoytAvgw4wuAl7mFzb
- FglE+MmeX5u3SFIFlkOKy8uXhCDKzzDx0Wg9CHPU7RBxkCEhw6UTJLKxaD6k82DiJR1z
- YQGA==
-X-Gm-Message-State: AOJu0Yx+anAy4AWa1U1WXZU9Uj64Gs1GnO/TUqBdh0OPb908iRzk75Vi
- n+5BvmY7JKN+zEjkxTvaX4R842GFraTwgxEcaFeQPRp7igmqizmMMGasHTnBrTV6835T1/ReBB6
- C8j77rJ1o2sgjv1+kctynp6wlNHDzu10tbw==
-X-Gm-Gg: ASbGncsG4rytpMl8zCFYKYJOVYKjlzluobcdf4yA/xUtP5I0+bWIDo8NKuE6Oy9XOIP
- NRibHfXTtw+HzmQYC9gyfVLJDEOXQS6gkz3jSfnz61mB99QgfPWPI0976db1d2s+QCTcbFTpb06
- LcxfEu8vhkgUEBhmN7nMj+fCClZcK/M7uK/2zoRPPqb16YGDaxDLlmhCDSjQcgf9B2FPYYpW8Zj
- 49PDcevAqhWSFLGw44/EOceApcCijxjx+IDzg==
-X-Google-Smtp-Source: AGHT+IF35pJ5z5y6ej/gIwl3rEsXg1aGQPHpJU1aQs7sNfYirKFFQ4Yp0xcOZpAUQAvFG61qn58ACDQSh+atWIl2DOs=
-X-Received: by 2002:a05:6512:2395:b0:55b:957e:3a86 with SMTP id
- 2adb3069b0e04-55cc013879cmr919151e87.54.1754657854682; Fri, 08 Aug 2025
- 05:57:34 -0700 (PDT)
+ bh=AaEb5rRaEnUxyrd2mm1N6/1ozy1yi0sLKiDNsP+z1O0=;
+ b=q0Bbjfa0ipRCqkK9XJKoEOrhjBUm1L2IwRmZ5QRz4wiQmFazwChSHnHl506bUHWSku
+ BU7CASP1gN9MMiqmjDaypNY/JJGbsn1GdoC0VRhNBvVf+nAWViGnZ6uJe7LtPsEnGkYZ
+ rknYPftxErZ3mFl2KIa637tjyNuwhFkepiOv5QoWGJKLiLrok6z2I7jA/WgoqS7noM61
+ PznBOaheiE4Tg/8u3RNn5u0XmX7tjvc8QdEmUiO1twQoWQzA5TMFamn3h1SNXmC906RF
+ lOFjAmtNgPXKHNKG6n3m+yGkv6Kw9o6XbzPam/yS0BH+1UrGYrrpcQMmc0h1gh+5xFfM
+ /cow==
+X-Gm-Message-State: AOJu0Yz98RDdNo4U8Xqj1mICQhXJ7IWWvo3WcebUtjt/kIOQ/hxo/k2e
+ B/EldQ1T3q5IJSnKLw8evl2syM2tFZdaMv4j9uolWRE7luswMwRCNqSvWGejycyh3+dXdNU3Ne0
+ o3r6McHbZoc1PBPjVOO7GqGwbZPvKxAo=
+X-Gm-Gg: ASbGncukWMZy2Kr4k2cuLhswa/PJUL9TiHawXJsWxNVgottsEfyg1s9Px8C2agkQqDH
+ Ma5e0f5FlYQIUc065yecqm/s0FaAs2OH1BH97dofzbYeADPUjIdtrcoq1rkVpGH2sbwlKUOjA8O
+ mijGufvSt37J57ibXiBTDVM1CKBtlKaX9X3aFQZ1Isdkj1pR+hmpv05m4rUQ9+CpiKjKYIuTHII
+ kDgPr4r5H1s9gtJvw5i4+hlRqIXyf1hnKj4YA==
+X-Google-Smtp-Source: AGHT+IFEpsVSbmL61wXJ/SBoJSim5cTU0/osFwbi5mKc6Y2aIcF3d1wCVrFdq7gzg6eHxEoialLTpGWlP/A0zcBLSog=
+X-Received: by 2002:ac2:4c48:0:b0:55b:9796:5d6c with SMTP id
+ 2adb3069b0e04-55cc0149ea1mr660143e87.39.1754657920318; Fri, 08 Aug 2025
+ 05:58:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250728223849.87212-1-marek.vasut@mailbox.org>
-In-Reply-To: <20250728223849.87212-1-marek.vasut@mailbox.org>
+References: <20250724002517.948571-1-davidzangcs@gmail.com>
+In-Reply-To: <20250724002517.948571-1-davidzangcs@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 8 Aug 2025 09:57:23 -0300
-X-Gm-Features: Ac12FXzEq6F0_AlG3Fp7DarPeGRHr7siTCWYEC-TZHDuMCMe-WVZvC0EF7mYkHY
-Message-ID: <CAOMZO5ANQpnh=ESK=K1kGMUJ04GvgJxzrOHLQbNuaeVqx+FYnw@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx6: dh-imx6: Enable USB OTG ID pin pull up in SPL
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Date: Fri, 8 Aug 2025 09:58:28 -0300
+X-Gm-Features: Ac12FXzyA8gXltENd4mqH7tyq-bCutbJUTJfVW8N40AxL0fGyj34OfZq07yLa0U
+Message-ID: <CAOMZO5BAozW_ukvESAeBJLBWdk9qkbGxofz0nJMDcTnUt-N3LQ@mail.gmail.com>
+Subject: Re: [PATCH] configs:imx8ulp: Enable temperature command
+To: David Zang <davidzangcs@gmail.com>
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,17 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jul 28, 2025 at 7:39=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.or=
-g> wrote:
+On Thu, Jul 24, 2025 at 3:05=E2=80=AFAM David Zang <davidzangcs@gmail.com> =
+wrote:
 >
-> Enable SoC pull up for USB OTG ID pin in SPL. There is no dedicated pull =
-up
-> resistor on the SoM itself, and the pull up is mandatory for correct USB =
-OTG
-> ID pin detection. U-Boot proper already configures the USB OTG ID pin pul=
-l
-> up via DT pinctrl node entry.
+> User can display temperature in the console runtime on i.MX8ULP board.
 >
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+> Signed-off-by: David Zang <davidzangcs@gmail.com>
 
-Applied, thanks.
+I changed the Subject to "imx8ul_evk: Enable temperature command" and
+applied, thanks.
