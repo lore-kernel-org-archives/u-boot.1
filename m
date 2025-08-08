@@ -4,86 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04381C87FD2
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 11:32:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0238BC87FD2
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 11:40:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35323846EA;
-	Fri,  8 Aug 2025 13:32:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 352C6846CE;
+	Fri,  8 Aug 2025 13:40:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tQ3RmwwK";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="PKdG3PV0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1397F846E6; Fri,  8 Aug 2025 13:32:42 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D1305846D0; Fri,  8 Aug 2025 13:40:24 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F56D846D8
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 13:32:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-459d40d16bdso13211435e9.0
- for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 04:32:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754652757; x=1755257557; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=X2M1n3GGN5IflwlH3yZdS6LGR/6ajlZkjdJu8J3ZwE8=;
- b=tQ3RmwwKjUw3VJOK0261DKOLDMa78iKtgPEwObbnqiO2OBQ+8ddtir/zcB3dequ8gJ
- PPah9MEugIyvaE5QpvDQtETfXcD5bGy8YtPu63+svW6ldESDh9YExsgItD5C0PiS0ngU
- CQUrOloBfe6PnI7bM5FZJyHv3tk1xRNjutqBAIis8cWWPuVwiu6Z4xrVsHCIqhFfdx+a
- z+9O3IKiCtah54NPSEAGim/7ohe88CxSAbPjDVXJnoApj9Twj2J33UB3iwwwmKMhfJVX
- dwr5+VY6HHFGh4f77sWESZs+7tFCKzy5qvOnU8aFGsAhXYL0xLDC4NBJbAOx9KhPo3vf
- NyaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754652757; x=1755257557;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=X2M1n3GGN5IflwlH3yZdS6LGR/6ajlZkjdJu8J3ZwE8=;
- b=tE38ecnGNcmdBFlr6EFwNY21hLySx/fM8s+7qGYE2tQ/6x+TwtkTtAmK+fLjryJkIW
- ejMpOkwa6pN8xh9c/L+j7RsVFIzWFHo/W2cRxP6AnVwqXKg32qxsZlpkmdtxIk9fYPqm
- n92Re3MvPEkpAkb+Q0LMriIh4F+pqCfMFR0pYz24eoljR3JHoVf9t5PSVR/jHMPU6T6n
- +5+BePXeyNS0HCicGWibjKHzgyrVVK455CF8FA5gDMJitriCV6fVeYB9tufjzEK3JD40
- SdJIqsHDjFOlvyp5RzGS10auptzO5/+yw6qO1wAanWhWCvAq+5Acvv8TZ3EI0iMdsf8Z
- ia4w==
-X-Gm-Message-State: AOJu0YwKWEb3UWc6t5I7HLrbqE25yYajaz/1L5I5Y5JrRSsvqsQ8iiWM
- Evz62ILDfgUM9mVPwmO/SYkMNWN3dMmf5+ieu9KNZH6dUpgfMz0lpU3SPRemMqU4KgM=
-X-Gm-Gg: ASbGncuDr6gtFRcgpdJHp3OeuxQd17+xvO5eVVX4XTOVLQi9bc94O0EEsstdW/ilQcu
- js6K9lNoABsIJl+KV+7TJLW/524w/QaGtfISWx7C9kQJVR0Tj3s6414yC6iQo/RM0ux8PdqbeiQ
- GHOAyic9RbhOq/4+dLSFjwZniVzIkuEEQM4KOyppJ3mlQiGBEFr8AjE3u3Atz/7yH6hk1rCl+DH
- wJGSUle/9WuUqjkIzc4M6x/x0pc2z2MB6xfX+RkvdJkLUDNQ+diq9uel6vrZO657TL9Xo1s8kX3
- tFvVp+sfx+D1hmIfW5Ojzkqx/vbKMuIfoAGe9Dc86ypMgxQZ9GPk2VYfv9ALTeTDqF2rdORFWDf
- o2LAqwVyCDFWbFuHPvQ0+2e/2UWdn+ZcW/MvJ5SPBqFAgjulAEpk=
-X-Google-Smtp-Source: AGHT+IH+H5hmCD8dgPI16y6o6um87HS/CGwBQQ1DuAdpWNWQVP82etFVyiMuDetpyflZ5Tx6fduYSg==
-X-Received: by 2002:a05:600c:524a:b0:456:1204:e7e6 with SMTP id
- 5b1f17b1804b1-459f4f517dbmr20417425e9.11.1754652756822; 
- Fri, 08 Aug 2025 04:32:36 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:e7fc:9a8d:4024:d186])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45923c34af8sm233770995e9.24.2025.08.08.04.32.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 04:32:36 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 08 Aug 2025 12:32:36 +0100
-Subject: [PATCH] ram: renesas: dbsc5: Fix off by 1 errors
+ by phobos.denx.de (Postfix) with ESMTPS id 4BC4C846CC
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 13:40:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id CB020104870; Fri,  8 Aug 2025 13:40:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1754653220; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=bv9c6fHjJoCKcdP+p681vKzQbI0jeWQSZ34oS249KqY=;
+ b=PKdG3PV04Mxh2cnfi5Y/iD3hl0yK8u9gwZPxVRJTCRWlsq3U29wu03ZmDCA38zHKsSdsnS
+ 1BoRiAgvlGZCeP+4kxthEHSTiPn9jIwsdhcr870LBwtbDb0brK7FCVsSKlz/lkoAi36atP
+ ISZ2kivTG0ZcRYk95xxwKpeIifbrK+4piAthLjciSAV4j5kKW8zXBtnLySi7xqYfbxiAR7
+ KEhhKN/j/dfukDDb6GTzoFrDVYsK2uxJy2vdqhdEUk3XIHPuHWjCUMBpbDxUVNOPwCxKQ1
+ YfjlqQAdvlDkOj5V70XTe6z63KuVbYk2xHyPD2QJyxijXoiabpfvkmU+qE0xiQ==
+From: Heiko Schocher <hs@nabladev.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heiko Schocher <hs@nabladev.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Enrico Leto <enrico.leto@siemens.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ No generic patch CC mail please <noreply@example.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Stefano Babic <sbabic@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>
+Subject: [PATCH] MAINTAINERS: update email address of Heiko Schocher
+Date: Fri,  8 Aug 2025 13:40:14 +0200
+Message-Id: <20250808114014.121402-1-hs@nabladev.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250808-ram_renesas-v1-1-c417163a2a38@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAFPglWgC/x2NwQqDMBAFf0X2bCAqltRfKSKrvtQ9GMtuKYL47
- 8Yeh2GYgwwqMOqKgxQ/MdlShqosaFo4veFkzky1r1sffHDK66BIMDYXH8+5Ck1sQvSUi5ENblR
- O03I3K9sXeouPIsr+37z687wAfSVVO3YAAAA=
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,75 +81,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In dbsc5_read_vref_training the arrays dvw_min_byte0_table and
-dvw_min_byte1_table have 128 elements per channel. The variable
-vref_stop_index is limited to be a maximum of 128. This means that the
-index used to access the arrays must use a test of '< vref_stop_index'
-rather than '<= vref_stop_index' in order to prevent out of bounds
-accesses to the arrays.
+use the new email address for community work.
 
-This issue was found by Smatch.
+While at it, cleanup git shortlog output, by adding
+fixes in .mailmap
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
- drivers/ram/renesas/dbsc5/dram.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=185&view=results
 
-diff --git a/drivers/ram/renesas/dbsc5/dram.c b/drivers/ram/renesas/dbsc5/dram.c
-index ca8a7fb4783..3ed02e11f9e 100644
---- a/drivers/ram/renesas/dbsc5/dram.c
-+++ b/drivers/ram/renesas/dbsc5/dram.c
-@@ -3735,7 +3735,7 @@ static u32 dbsc5_read_vref_training(struct udevice *dev)
- 	if (vref_stop_index > 0x80)
- 		return 0;
- 
--	for (i = 0; i <= vref_stop_index; i++) {
-+	for (i = 0; i < vref_stop_index; i++) {
- 		r_foreach_vch(dev, ch) {
- 			reg = dbsc5_ddr_getval_slice(dev, ch, 0, PHY_PAD_VREF_CTRL_DQ);
- 			reg &= 0xF << 10;
-@@ -3819,7 +3819,7 @@ static u32 dbsc5_read_vref_training(struct udevice *dev)
- 		best_vref_byte0_index = 0;
- 		best_dvw_min_byte0 = dvw_min_byte0_table[ch][0];
- 
--		for (i = 0; i <= vref_stop_index; i++) {
-+		for (i = 0; i < vref_stop_index; i++) {
- 			if (best_dvw_min_byte0 >= dvw_min_byte0_table[ch][i])
- 				continue;
- 
-@@ -3858,7 +3858,7 @@ static u32 dbsc5_read_vref_training(struct udevice *dev)
- 		vref_outlier = dbsc5_ddr_getval_slice(dev, ch, 0, PHY_RDLVL_VREF_OUTLIER);
- 		best_upper_vref = best_vref_byte0;
- 		outlier_cnt = vref_outlier;
--		for (i = best_vref_byte0_index; i <= vref_stop_index; i++) {
-+		for (i = best_vref_byte0_index; i < vref_stop_index; i++) {
- 			if (dvw_min_byte0_table[ch][i] <= 0)
- 				break;
- 
-@@ -3879,7 +3879,7 @@ static u32 dbsc5_read_vref_training(struct udevice *dev)
- 		best_vref_byte1 = vref_start;
- 		best_vref_byte1_index = 0;
- 		best_dvw_min_byte1 = dvw_min_byte1_table[ch][0];
--		for (i = 0; i <= vref_stop_index; i++) {
-+		for (i = 0; i < vref_stop_index; i++) {
- 			if (best_dvw_min_byte1 >= dvw_min_byte1_table[ch][i])
- 				continue;
- 
-@@ -3918,7 +3918,7 @@ static u32 dbsc5_read_vref_training(struct udevice *dev)
- 		vref_outlier = dbsc5_ddr_getval_slice(dev, ch, 1, PHY_RDLVL_VREF_OUTLIER);
- 		best_upper_vref = best_vref_byte1;
- 		outlier_cnt = vref_outlier;
--		for (i = best_vref_byte1_index; i <= vref_stop_index; i++) {
-+		for (i = best_vref_byte1_index; i < vref_stop_index; i++) {
- 			if (dvw_min_byte1_table[ch][i] <= 0)
- 				break;
- 
+ .mailmap                            | 5 +++++
+ MAINTAINERS                         | 6 +++---
+ board/aristainetos/MAINTAINERS      | 2 +-
+ board/bosch/shc/MAINTAINERS         | 2 +-
+ board/keymile/km83xx/MAINTAINERS    | 2 +-
+ board/siemens/capricorn/MAINTAINERS | 2 +-
+ board/siemens/corvus/MAINTAINERS    | 2 +-
+ board/siemens/smartweb/MAINTAINERS  | 2 +-
+ board/siemens/taurus/MAINTAINERS    | 2 +-
+ board/socrates/MAINTAINERS          | 2 +-
+ doc/git-mailrc                      | 2 +-
+ 11 files changed, 17 insertions(+), 12 deletions(-)
 
----
-base-commit: 123cd77122a13288e1552b5d9b7c22a6f19e2e02
-change-id: 20250808-ram_renesas-f69d183f38f0
-
-Best regards,
+diff --git a/.mailmap b/.mailmap
+index 67a42217cf8..f15697ca2df 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -48,6 +48,11 @@ Greg Malysa <malysagreg@gmail.com> <greg.malysa@timesys.com>
+ Harini Katakam <harini.katakam@amd.com> <harini.katakam@xilinx.com>
+ Harsha <harsha.harsha@amd.com> <harsha.harsha@xilinx.com>
+ Heiko Stuebner <heiko.stuebner@cherry.de> <heiko.stuebner@theobroma-systems.com>
++Heiko Schocher <hs@nabladev.com> <hs@denx.de>
++Heiko Schocher <hs@nabladev.com> <hs@pollux.denx.de>
++Heiko Schocher <hs@nabladev.com> <heiko.schocher@invitel.hu>
++Heiko Schocher <hs@nabladev.com> <[hs@denx.de]>
++Heiko Schocher <hs@nabladev.com> <hs@pollux.(none)>
+ Heinrich Schuchardt <xypron.glpk@gmx.de> <heinrich.schuchardt@canonical.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de> xypron.glpk@gmx.de <xypron.glpk@gmx.de>
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com> <ibai.erkiaga-elorza@xilinx.com>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d6c4587bf86..05291ed1ad0 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1244,7 +1244,7 @@ F:	drivers/misc/gsc.c
+ F:	include/gsc.h
+ 
+ I2C
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-i2c.git
+ F:	drivers/i2c/
+@@ -1498,7 +1498,7 @@ F:	drivers/pci_endpoint/
+ F:  include/pci_ep.h
+ 
+ PCI MPC85xx
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	drivers/pci/pci_mpc85xx.c
+ 
+@@ -1795,7 +1795,7 @@ F:	lib/optee
+ 
+ UBI
+ M:	Kyungmin Park <kmpark@infradead.org>
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-ubi.git
+ F:	drivers/mtd/ubi/
+diff --git a/board/aristainetos/MAINTAINERS b/board/aristainetos/MAINTAINERS
+index c81bef9cb7c..77d7b1614c8 100644
+--- a/board/aristainetos/MAINTAINERS
++++ b/board/aristainetos/MAINTAINERS
+@@ -1,5 +1,5 @@
+ ARISTAINETOS BOARD
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	board/aristainetos/
+ F:	include/configs/aristainetos2.h
+diff --git a/board/bosch/shc/MAINTAINERS b/board/bosch/shc/MAINTAINERS
+index 58104cc1318..a30c672e1d6 100644
+--- a/board/bosch/shc/MAINTAINERS
++++ b/board/bosch/shc/MAINTAINERS
+@@ -1,5 +1,5 @@
+ SHC BOARD
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	board/bosch/shc
+ F:	include/configs/am335x_shc.h
+diff --git a/board/keymile/km83xx/MAINTAINERS b/board/keymile/km83xx/MAINTAINERS
+index 8822e5d9155..af0d6afb2b4 100644
+--- a/board/keymile/km83xx/MAINTAINERS
++++ b/board/keymile/km83xx/MAINTAINERS
+@@ -1,6 +1,6 @@
+ KM83XX BOARD
+ M:	Holger Brunck <holger.brunck@hitachienergy.com>
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	board/keymile/km83xx/
+ F:	board/keymile/common/
+diff --git a/board/siemens/capricorn/MAINTAINERS b/board/siemens/capricorn/MAINTAINERS
+index 9c8c7a6ecdc..6c253983cf0 100644
+--- a/board/siemens/capricorn/MAINTAINERS
++++ b/board/siemens/capricorn/MAINTAINERS
+@@ -1,6 +1,6 @@
+ CAPRICORN BOARD
+ M:	Alexander Sverdlin <alexander.sverdlin@siemens.com>
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ M:	Walter Schweizer <walter.schweizer@siemens.com>
+ S:	Maintained
+ F:	arch/arm/dts/imx8-capricorn-cxg3.dts
+diff --git a/board/siemens/corvus/MAINTAINERS b/board/siemens/corvus/MAINTAINERS
+index 59176aae575..4471cf3ce3c 100644
+--- a/board/siemens/corvus/MAINTAINERS
++++ b/board/siemens/corvus/MAINTAINERS
+@@ -1,5 +1,5 @@
+ CORVUS BOARD
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	board/siemens/corvus/
+ F:	include/configs/corvus.h
+diff --git a/board/siemens/smartweb/MAINTAINERS b/board/siemens/smartweb/MAINTAINERS
+index 51298ffb5d6..09d7667241c 100644
+--- a/board/siemens/smartweb/MAINTAINERS
++++ b/board/siemens/smartweb/MAINTAINERS
+@@ -1,5 +1,5 @@
+ SMARTWEB_HW BOARD
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	board/siemens/smartweb
+ F:	include/configs/smartweb.h
+diff --git a/board/siemens/taurus/MAINTAINERS b/board/siemens/taurus/MAINTAINERS
+index 74e3518e0d9..c17bd51a0de 100644
+--- a/board/siemens/taurus/MAINTAINERS
++++ b/board/siemens/taurus/MAINTAINERS
+@@ -1,5 +1,5 @@
+ TAURUS BOARD
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	board/siemens/taurus/
+ F:	include/configs/taurus.h
+diff --git a/board/socrates/MAINTAINERS b/board/socrates/MAINTAINERS
+index 2b27a73c18c..d5571b0da4f 100644
+--- a/board/socrates/MAINTAINERS
++++ b/board/socrates/MAINTAINERS
+@@ -1,5 +1,5 @@
+ SOCRATES BOARD
+-M:	Heiko Schocher <hs@denx.de>
++M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+ F:	board/socrates/
+ F:	include/configs/socrates.h
+diff --git a/doc/git-mailrc b/doc/git-mailrc
+index 747ceda3307..65626d89eac 100644
+--- a/doc/git-mailrc
++++ b/doc/git-mailrc
+@@ -23,7 +23,7 @@ alias bmeng          Bin Meng <bmeng.cn@gmail.com>
+ alias danielschwierzeck Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+ alias dinh           Dinh Nguyen <dinguyen@kernel.org>
+ alias ehristev       Eugen Hristev <eugen.hristev@linaro.org>
+-alias hs             Heiko Schocher <hs@denx.de>
++alias hs             Heiko Schocher <hs@nabladev.com>
+ alias freenix        Peng Fan <peng.fan@nxp.com>
+ alias iwamatsu       Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+ alias jaehoon        Jaehoon Chung <jh80.chung@samsung.com>
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.20.1
 
+base-commit: 123cd77122a13288e1552b5d9b7c22a6f19e2e02
