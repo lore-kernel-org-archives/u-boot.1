@@ -4,78 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE70C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 17:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8573C87FCB
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 17:08:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30C7D832E6;
-	Fri,  8 Aug 2025 19:08:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87A608477D;
+	Fri,  8 Aug 2025 19:08:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G7RIGHku";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eOh/ei5o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 571668476D; Fri,  8 Aug 2025 19:08:30 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 763528477E; Fri,  8 Aug 2025 19:08:33 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0E478211F
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 19:08:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5222E84777
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 19:08:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-742f798bb20so1759199a34.1
- for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 10:08:27 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-30c29df87e6so265669fac.1
+ for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 10:08:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754672906; x=1755277706; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754672910; x=1755277710; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Av0jFzMokX5WGrugs3hzwLifAYNfSZP1AyOVGCvV/AQ=;
- b=G7RIGHkuKai5T7kZjLZruwC27Es5mnUNMrgm+Nb1h9tGMTMpulwjaZAU6AW/QQ2h4f
- 6q7PQ/VF7uA7nbkYO5qpeySN7LhVrigILdgVsGamBCNiLRZCYWLXpCTjN6iXOvvjbq1U
- BCndH4U085RSXaWjTmb3L8mI4hmYcFgyq4cfI=
+ bh=nqLZeWhzqi45/RgEJFOKmyNscK+9dKdn1S4s67WxATI=;
+ b=eOh/ei5okX32w1/KmCGKJ3B16K0i4awNukWiwr1Rhs/7nEqcsxlNvLciv95gb5DMJx
+ +BkNx7VXR5zTaBmkQRsYWe0TdVfp1/lfq/obOyV9sIafbpk1eQ+/FmShiGDBiSTOIKbG
+ xZS/5GFhsWIDdJAa+uJGTssQXC9yU6i2LOkJE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754672906; x=1755277706;
+ d=1e100.net; s=20230601; t=1754672910; x=1755277710;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Av0jFzMokX5WGrugs3hzwLifAYNfSZP1AyOVGCvV/AQ=;
- b=W+0Asfm/L7ucTscg3CILY1g6D2/vcpgxMTU3MosM+v/FikuEOOQqPpM1HpJAiiMQMM
- 62M4KJmOpWG8Qh1T8zmihklPYY3KeFaMEyC3XIVXRVIc/1QeAkl31gElVnY5Ndhm3yom
- fcFM3dq2qLIlGMeY9Ev+CPH73Sr5ZKXb52uZaXpXlsW5To1/3/d/2xg5VqdInro9RCBp
- hHORjQlGk0nt44auWKyhqHwgEcmaKg5uTHrF/oIXS6SofCVRjOcveKsSHzP2n0fx+dQC
- fcBcWF8dfTtYWEXQDh/3DsvtVsARZVrSIJfwQ7py1bv/nPKAS6NVOQbEAbBJv3qL/M+9
- G+tw==
-X-Gm-Message-State: AOJu0Yzd0B0+S14z+q+crETHiAo9w6FiBF2kyxIZ3vjKVKv1Bc4fts8u
- sYULcVNK1YL/O7D0TZx76RxOrj162zBLPNnMakgCeONQuQwdiFW5/TtLKm0n51reLey2XXLExBP
- uy6XLHag=
-X-Gm-Gg: ASbGnctGs/SBrmazV9L9bo2sZEFTucAyUJEbPzdVt8lymnNFc9gjuc2sPUIQLwwmUiX
- GAM7GXSwpNstyIfRcBMs7scelX69aZVEH3ZbhgtqiMddQLukA9v9SOVBbiXH3wNte9uGM6mFtsd
- LSe93V6bfcDMvixNXpm4nk3lxA+qHdnDZZY0tx52vhqaalp6O/nnd6xdX12A771Sl8GWTK+nikj
- mQYvfp/XxU74clD+cUeOaRDDY9e+OSI7BB1JRLjUNbYoNQuW5cany4PpBkzUney9oIsPrzR6ggI
- CL/7dwL1yahwsRcy7Uzr5gHxRpCZAWJW6kScZl1FL6CBl/MJqHt2VNoDURiWC1ewaHHVm9EOvc2
- Q0sC1thRNfQdu22aTaY39/dlgJoL/KS2+Gwz9Xcj5PT48Sufqriy4I47I5fWuMEH9NA==
-X-Google-Smtp-Source: AGHT+IEUi8OTolvBtRrwsnci8xsvtFeUdA8tlBpJY0xKMkwDgZ5Dd3m5KOt+1/IQ+gPke4ucXnaLJA==
-X-Received: by 2002:a05:6830:6b0a:b0:743:48c:5b1 with SMTP id
- 46e09a7af769-7432c8af911mr2688352a34.20.1754672906596; 
- Fri, 08 Aug 2025 10:08:26 -0700 (PDT)
+ bh=nqLZeWhzqi45/RgEJFOKmyNscK+9dKdn1S4s67WxATI=;
+ b=vlUnREXrBVAIOkCGNWTLcUlVZIEpdDbg/AG3mZW6x/322Gi4Tpcfzo2KX7ewvAwncU
+ 4w91+h7L0TF2qi4Qo9G7E4IBg4LPPPBfOiw90CsQhWRpuoEFNxbflk9YrEIW+WpjuJDh
+ +aZGhCndltWNfGtDmTMwGVUWNegqrTZt2hA/3rGyTpg9aS6dj3f2BuA0ABMkr1Us9EV4
+ HxOkjEhstgXtl7tzjWEZ0sAkRZv0pe5cW1gvLWdOofutSMSiA04vazRVSmCVB2jKKB1x
+ 36+mAtcOnMOINudFGZLqCJe7X7OYu3D1jsr8qXUYNgIlw6JBK5SkQsB0zQERx3M7zoJL
+ C+Jg==
+X-Gm-Message-State: AOJu0Yzf0rAN8Mi9G8VofQvs1HofKYel8BUxf/XhORrFwIOnoLKVPUFs
+ 4eKeuqy4UXBsvbWpMjFIQBEs/Ko8lca0GyqtKY/XcviEWiWuXtTDcQgojfdsAiaOoKY=
+X-Gm-Gg: ASbGncuzzxDZGYsq1rj0xbBEBxAxAk7KT0NRBesBX9F21VEjrgeQbKDUpgRWqX+aWBD
+ 5ncp079HCvpmBkKarDoMAXnDmTHcO8YE8bjm9G7b2MeEZ6PDoxVAZQ0RLb/HqbaTHbaPkRWqzr1
+ Zj3/pmWwC0KpXvbr53vWu73Qozk9aKIJG2Mpjmd3CFWtQfsrwvpiFfpYDBJJN09zrlghbEAjE9D
+ brp4jq3pHeolyVumhwZuw9YgIPoPBiC2nqatCSclqSaiaj9joDMqRmHtQ+2AXj29AP+TLnUM8lQ
+ vo61aIj4z0Vc61vOlirFrrDUTozJ7v5zJ7Zh2KJc/hc2Y5zkHBub9yzIL5xbmuahbn7OWbkffxd
+ bniUb9x/GFfWJr//AsMMFQBrNmP8lH/UNZe2WpZybGJvzn6sKTlmMkLU=
+X-Google-Smtp-Source: AGHT+IGmzUYXTTVJ7+Q50FTaMa4EoIwXtphK6F3RFglllnrqNgy4mOEbPrnHtGD6PPd00bfba9Cc4A==
+X-Received: by 2002:a05:6870:8992:b0:30b:cb15:28b1 with SMTP id
+ 586e51a60fabf-30c20f2d908mr2255918fac.7.1754672909835; 
+ Fri, 08 Aug 2025 10:08:29 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30bc9ede835sm2721061fac.32.2025.08.08.10.08.25
+ 586e51a60fabf-30bc9ede835sm2721061fac.32.2025.08.08.10.08.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 10:08:26 -0700 (PDT)
+ Fri, 08 Aug 2025 10:08:29 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250808125223.325211-1-festevam@gmail.com>
-References: <20250808125223.325211-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250808
-Message-Id: <175467290592.1469283.1429766378351960268.b4-ty@konsulko.com>
-Date: Fri, 08 Aug 2025 11:08:25 -0600
+To: Heiko Schocher <hs@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
+ Enrico Leto <enrico.leto@siemens.com>, 
+ Eugen Hristev <eugen.hristev@linaro.org>, 
+ Greg Malysa <malysagreg@gmail.com>, 
+ Holger Brunck <holger.brunck@hitachienergy.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ No generic patch CC mail please <noreply@example.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Simon Glass <sjg@chromium.org>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Walter Schweizer <walter.schweizer@siemens.com>
+In-Reply-To: <20250808114014.121402-1-hs@nabladev.com>
+References: <20250808114014.121402-1-hs@nabladev.com>
+Subject: Re: [PATCH] MAINTAINERS: update email address of Heiko Schocher
+Message-Id: <175467290803.1469283.9272845580231469969.b4-ty@konsulko.com>
+Date: Fri, 08 Aug 2025 11:08:28 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,20 +114,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 08 Aug 2025 09:52:23 -0300, Fabio Estevam wrote:
+On Fri, 08 Aug 2025 13:40:14 +0200, Heiko Schocher wrote:
 
-> Please pull from u-boot-imx/master, thanks.
+> use the new email address for community work.
 > 
-> The following changes since commit 3526f990b77fca1c933f1d8b24eb9385010a05bf:
+> While at it, cleanup git shortlog output, by adding
+> fixes in .mailmap
 > 
->   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2025-08-06 16:07:17 -0600)
 > 
-> are available in the Git repository at:
-> 
-> [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] MAINTAINERS: update email address of Heiko Schocher
+      commit: 9fd31937dd21245f9979d167d97ab66d065d3d56
 -- 
 Tom
 
