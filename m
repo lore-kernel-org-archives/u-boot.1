@@ -4,145 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14CC6C87FD2
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 09:32:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C7EC87FD2
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 09:34:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85BFF83BEF;
-	Fri,  8 Aug 2025 11:32:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 7136E83CEA;
+	Fri,  8 Aug 2025 11:34:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="OSGF+24S";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YrPJYVHa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4813283C0B; Fri,  8 Aug 2025 11:32:29 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2061a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::61a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 80E1483CEA; Fri,  8 Aug 2025 11:34:47 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D18B83BE1
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 11:32:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B6D683BE1
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 11:34:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ytsG8k2d0EQ6r5goOvo6TJER1e/RbRdWvpiSNln+LUrgs+gNVxp3ou+4P0LTdZxmlHDxvXSShEzp86NMkpA14JdO434scZuvVkeGWRR1tkeGwzSxVT0sh+B4MK8SdwDqUXooadNzpnRAtw0b3rnTvyYV5F2YBs6vTkh5jafFiyYHfdxqYw3G/9iMosEiRRzz5L9SVL9ORTbcM91+NuMLVtsdUt2Og0+pkSvsF2AhEFTgl394ydpoczw70RmnQ8HCIDlBMbScKx4UhY0qXPGIHlijMcLGqzSOeU7Ilg6Tzsmo+Xum9LMlKetKYizDAa4HGL4792wICe9Z765c4AJjmw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=opn/evTeXKmQMEYN2y5dRP4C0QeFk18V/RKnZS9/tU8=;
- b=vaOk/QTcU9F0Q1QRfNUJaYjDkbw/J+VA5Rr9agGW8MdwJEUxH16oKsG32cdf76eU7vANKb4ePqtlg3g9z5zqNmSPiBJwRSwjRWWMXhZtCTeO4fGskqLKYccpMTVFsvKWtBznOz8sDyPLQLr1C613d/y7E1PKbHw4wHt3hkOo1Rl8GVAPd5sLoyYTHGt7hW3/hlyFBQtOFImdrS/v0e+hNOoKPidejnxg11C8i1D6XaQgWOVf7UG7obFF/Yu5EL4x2+UeGZ4SNDm8NdbDGp4OjgyRpIt19w1+nedvonjM4vyE5+1mKUULztlIullxt8dTzET7nyK/5v3Rf3K2c4amWw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=opn/evTeXKmQMEYN2y5dRP4C0QeFk18V/RKnZS9/tU8=;
- b=OSGF+24SxtGQ5Z76YszZSMr2AgRttPIeSCGtL2HnA2J7Gc7G5y+8b4OPOt8HEdrR3028vfmmWPFJ8PkyPi+wziffGRL4ICLgiuo0OeKNW/2Pj+rr7rsXdQfjuGM2f6sNU5jM687fuiEuuD1EQhCdz4djr9ljJGvYh8UGJqfcNP4Hvqzo7Uw2RtFZmbHUKhklwRqs+e23lM+wh+D0RQ1mZwf9AWTJT1liKwY7lQBgf90DcyBsf2Vn3zlUusRSrE3paJSGLc1RZg2zwaJw4nZY4sKkRUCthPYXTQeVV5Jn3VKeXOJLsKrEZf9Z9AuESGPGaCvoFfjJZDmg4YTLK4Bq5Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DS7PR03MB5542.namprd03.prod.outlook.com (2603:10b6:5:2c5::16)
- by LV3PR03MB7730.namprd03.prod.outlook.com (2603:10b6:408:27f::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.18; Fri, 8 Aug
- 2025 09:32:24 +0000
-Received: from DS7PR03MB5542.namprd03.prod.outlook.com
- ([fe80::c3b6:3b8d:4383:ab7c]) by DS7PR03MB5542.namprd03.prod.outlook.com
- ([fe80::c3b6:3b8d:4383:ab7c%3]) with mapi id 15.20.9009.017; Fri, 8 Aug 2025
- 09:32:24 +0000
-From: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
-Subject: [PATCH] configs: Simplify Agilex7 VAB defconfig
-Date: Fri,  8 Aug 2025 02:30:41 -0700
-Message-Id: <20250808093041.15011-1-nareshkumar.ravulapalli@altera.com>
-X-Mailer: git-send-email 2.35.3
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0198.namprd03.prod.outlook.com
- (2603:10b6:a03:2ef::23) To DS7PR03MB5542.namprd03.prod.outlook.com
- (2603:10b6:5:2c5::16)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-458b49c98a7so12275205e9.1
+ for <u-boot@lists.denx.de>; Fri, 08 Aug 2025 02:34:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754645685; x=1755250485; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aHZdllu1/8epQ/AqnTK/iH+No+R+8tN+24QaooJoVu8=;
+ b=YrPJYVHaEJsS+f8AqLNLw0O++BrXiEdyK5BrT1KpXqiWojp+HjCKGOkjjsnMdXw5nH
+ t5+a96dBqELCewt3ggFMjj9SNw7TJn3d4kUoEB3Yw9zes80RYzrRXv5gKLoDit7aSt+S
+ vYFmrI31+ZnoA8SMOhi83BPRU7UY1upgyCGsFPt34mxUloHtSwV8BxLAsiMOHGU88mQt
+ IxI+zoyBvQSFDSpwWe++3Y9Zb3GD6H8FCHslE9Rtp9O0tZ1X8ZMf/c/RHWg3+dpe4ZKF
+ sgI/gteEItdC/7Obl4glxMPP45ztV+vPCmvNe9XTqEBcA39cX7GiJmhJKayxrquEHDlm
+ Ha/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754645685; x=1755250485;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aHZdllu1/8epQ/AqnTK/iH+No+R+8tN+24QaooJoVu8=;
+ b=SzSUJyW+BE2ECNSTnv9Nx3eolgWsBmge0d9+IePG3CyLglM/JTUdNajgC9mltCR3/3
+ jhxltyEBEP6/XbhqmAoaSPKLcqMiiqF7EDGbhCtwaQjV5mb0rlfiKzBTHomN6o/WAFKW
+ 87NmrT3LYAY6HBdgUXPkKBPyVSlCTcMFwvpRQFsHxKJygLkEsc0NbPD1NUIrXGBNl5H9
+ pt7+K74JpXN0+s3xvcWzFsFGC89BX5N4Pi4Cdj1GqsKFJvQOkQrjnI4AlXwxhoUNkE4i
+ KydjJSsefAYpFMbhzI3JVexu/up52xV1RT+XDds+532I7Epd6PWhUgdzW9KKd51Tgu40
+ XniA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXUKIP3ePtkgpxz4UfRBzQT1BktJ1jFyOo+tUFkQ16xP9QzAexBPpYUhn8ZvHIVBai9/46y0hk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7Bm8I0eLKbPbZu1lylVsAm53+d36QMP7sJf6Zfkk7/b3nRozL
+ 7w9IMwghUlklfdflfms/usrMm/U490UVFDoCPZENvHVLyjYmVbkQLOz+nbCUrDXtnlE=
+X-Gm-Gg: ASbGncuLpyX1PKxPqMMi5Ae5TJCtMJ/RO7q0Jl99zyeRGJ778p4+pJOXInDA4l2xVqU
+ 414OfYcUVcDReF1N+IAisYT2rnT8nXUF/Nf75BsyATZRFfJFe0e/bWdrcuupoSAVgm12HVHCpv3
+ Xbu14e3t3pHtTWS+LKdPvTunEOwIEyoHvojEJ7ZvWuEXTxO/UODKp8TN3Z5iLz+UFbcm6cBId/q
+ g11GYPgtDFx3jbdCjAwHPnXj1ayLL6WptXtw2VkZecf8AaP2s4vOnC30ZPPMibPZ4MQPPRB8WAj
+ 3o2VvPgcnUVtYEX33+QtTq1pSCsUklK0xuwigFR1aJYIlkt/6ReStuqLfe2OLwU6tAe+EFHYI2U
+ x745fyneIO0QPJ3KTCvzvw7mM9qY2JatRIAaxyjtZsRg8ylX8uEY=
+X-Google-Smtp-Source: AGHT+IE25h1Iy5OfzdsuVUh/G3b7rPeooK4yjmI/zyR/2PgT7WVdJkzPQ5pePNsQsHqInUB1nkCD/A==
+X-Received: by 2002:a05:600c:b8d:b0:458:c094:8ba5 with SMTP id
+ 5b1f17b1804b1-459f4f3e76emr18961695e9.12.1754645684541; 
+ Fri, 08 Aug 2025 02:34:44 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:e7fc:9a8d:4024:d186])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e6867193sm124063005e9.6.2025.08.08.02.34.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Aug 2025 02:34:44 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Fri, 08 Aug 2025 10:34:43 +0100
+Subject: [PATCH] pwm: meson: Stop premature exit from for loop
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR03MB5542:EE_|LV3PR03MB7730:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77ec5f34-a412-4813-ad97-08ddd65e7b2a
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DlNq6IPDLiMcPOcH+xDqDif/5X2ouJ7Nj+rWWQyF7KyXNXfd6rUQ/DO5pZaR?=
- =?us-ascii?Q?cRThVft7J6PH/ljEXo22aflyk/DVCr4C8pO+43PdafZDnPB9uw58cf4+IAA4?=
- =?us-ascii?Q?tqrVN+nLmANtOwmyVeMtR2eJXSJdKIAb3SoA+5a4W1sot1M77i1E9/URiLIM?=
- =?us-ascii?Q?NjYiDdBwGHr5cTzvrAhn/8AK6UtJDRf0hfnzEXAQeLGmhKrXKWu/w5c52UQu?=
- =?us-ascii?Q?6MRJ/p8SzIj15L6048TTSOfULockgfWy38lzvYS4VnCdSfSHoBBnKcAfbITl?=
- =?us-ascii?Q?Al+L5saXQJ2Wgb52dRg7VOi3+vIcfbh/74IOSReDd74ml2QIUdAedTLcvPAr?=
- =?us-ascii?Q?zinYq4aW7yVEKRtf9ciQ7YC9LGv3BALJ6GW4HZBWEZnWJLN5cAq9ah6PmFpC?=
- =?us-ascii?Q?dvOjz5E6DyY/VaWlwkxnodKm4e0UuObA0ZXW7KvacfPULBkRxQZajj0n20/g?=
- =?us-ascii?Q?7maiXdT6McCdcqQcNN2rLge+hZeIeZfRI9ZrEkbIrTrKXl6i5V/PsDnqYtXL?=
- =?us-ascii?Q?BnejpxZ8Jql6rHqIkd7DdHsn/fzje6W1JzmxH7bQubwCUiZ0GNf2NgQGPk3U?=
- =?us-ascii?Q?j+ZlsC7kQ0FqKTEX8mRf6LJSgjv/fI0gx+Bck0cl1x1i5T9kVCqyk/Jd6G0r?=
- =?us-ascii?Q?J3y0f8/ObcJFdG7WxpzkBUstY8y0y3+EuasAZP04KL5jfV7Gi4y9XoscKNsw?=
- =?us-ascii?Q?iXH6prgPZ6pLpLxGUjICMrSRzRrr4oHO2UtenknxJkSyc74fNxTvomVR4AAj?=
- =?us-ascii?Q?j/dnEh1A9Zem/Udipj5TfUzA47D8nlbk/UgQfOgB96V7O3a7Qq3VjfXUC3xC?=
- =?us-ascii?Q?aK7Zh52V2ylxxiZcvWln7eNmM9XKK4KNTtQSAPYPw/IuTRW+23qaNsn+BH5n?=
- =?us-ascii?Q?CH7u+3NxWbuylS7XJilcb2+E+3dzALQU1jZpE8N+2CzBskLGJToXMLrcYsB0?=
- =?us-ascii?Q?UQPBxyBNGCgjBXEITQkwmVFCtkDZngjfHDf8NO8BDcxbe+QjB1CBk5z4A2l9?=
- =?us-ascii?Q?PeljfUj+935rN6HOgdVOmpjhWOd0g9Uzm8IhV1VGNfe2PkI+AB2n9mpshN5N?=
- =?us-ascii?Q?uxZs5M05ZP0QKeOU2nzwuwKvpeN5QkfGmMElwrF7xQO7GYfqjbucUaaIpwUJ?=
- =?us-ascii?Q?ftPrsgbsTWXEK7bqYrrdQhwstCzWdew2dEa8Z0mEyambVAWwn6mwxnWs+Vwn?=
- =?us-ascii?Q?75DbrcDqbaKwFeIuHhCkBi2MiryxgiiAIM9Sfncb6RFr6ClMGImtwzMxUWZ2?=
- =?us-ascii?Q?K9lPf0hjaJo74DT+ijVpHH7rXNkEn2tf2TPDdPaV3XYLvy01v+Ex/unzETWc?=
- =?us-ascii?Q?EfIODlSau/3TlVhFpqBN1V8KHFBKKxISVlPRyxqtAkYHC7FU9Agc3lrAn9bR?=
- =?us-ascii?Q?u+WjRYfRvC7Owv1Vxh+G7wT2rD3tv3uiuFlI45o+ANBr2jNpSZc+2t+etsCk?=
- =?us-ascii?Q?ehphaieDmVE=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS7PR03MB5542.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Nr7Glynf6D/BaS7gKbOtb2T4s/RJYULVJQgBjBhyua5lRSG5YWdYX1K+q9St?=
- =?us-ascii?Q?0Q2yZP+KtpNiUkgn6C1A/xPxxHOb8tIVYa5+GCD28LLGEUbHdAhz/0jkpboF?=
- =?us-ascii?Q?1B8JWagT8MBdexpvZtJDSwxE/lmd/XZ74aV+Q0ApIo86ssSm7CVYS7fdeoEc?=
- =?us-ascii?Q?PAxa6DkU6N1iC0+GMWeewPWJxUmwi0q61dyLdjdY11DKSwUUyEz429CrIyRx?=
- =?us-ascii?Q?EjtlWz0SBsIWIpkP036YReQEepGny+zI3YJ5+w8tn1O5daAObV8vnqo8Ixde?=
- =?us-ascii?Q?8w48mgE4cGFO0r4khXjRDax2pXUylrgOxshrZs7EhbLx447ne8Eu6ASwdL5N?=
- =?us-ascii?Q?KSpXqXBMUDwKoG89rdhGQcrVZTki+WDkkHx85Kj8QpuEnT7lGThk9F+3a0qn?=
- =?us-ascii?Q?S98kcnRV92wT6SNPMqjDNRveYxyEDyrscZ+wfw9RGXx0ATVyB8eAWCBbO4Wf?=
- =?us-ascii?Q?5aMkFP7nykPV5pOkDk/UNixcZQ/ZTDqPc4LUJCEWPws0gxIGIVii1kFZUWXr?=
- =?us-ascii?Q?vxwUotxDCB5wBJA2klmWDK7rUJ8chAYThFuZNz9yCVpSql5dcTrtQE4TIXH/?=
- =?us-ascii?Q?PP3REC2YzzYqCS1cWaXPn5PJVqT2rtlLr0e0WWJ+VtHRhubLIReYOZ3xJZxq?=
- =?us-ascii?Q?5rVdrWxxZtNOiph1MvN+YMwMSYytso7TQDN5i+C+StfTuumptT4prCSQLQn9?=
- =?us-ascii?Q?vXECJl/08xxXktJLPdDNE694mteQXGQqhK8uiweALsNXLjdxgRSqq/dg0mrr?=
- =?us-ascii?Q?l+gCtB3SfFLQC/Essx7fJPtlewIIOgMmH1FAEoQzbbOSRmdcNmnbZ5tyWqSg?=
- =?us-ascii?Q?cSZk4RfkrZa/yhdyj5H14KaFrkvpxwQQCMQ57FPfpYKX/fDy43NAeGzEpwnO?=
- =?us-ascii?Q?Y1MXZY2JEdE+kc8tAhYpFO1v1R+jNvY/Y1pcACnNq+7k+2iOtRmOQUMcEsm4?=
- =?us-ascii?Q?XErZF679aIvDeMu07Ov4VeOkda/aQ8B/5i6J5L1IeXwVm53HR3GEEwW1S3Fi?=
- =?us-ascii?Q?4oEynku4AwS+HOKYwRn/xKIduiYPxk1QttTGNokBfweZyhezqVh8VFKqJ+Iy?=
- =?us-ascii?Q?m+hpBidte1UB9RNdohVXyqhJr95C8ruOC7MuZFjwR5OnE3jOY5BP4qV8X6rR?=
- =?us-ascii?Q?Wfviqxa0fOtSzkwH280fC6v4++FNUZ9VqGUFUqYsn8dGdwi/hoffe/ixt96H?=
- =?us-ascii?Q?T0udLvee6aPPgnmwaxiQURk5KApuFK/bq27Gf7hEUkyJyVR4Mv62Cqz9Bi6E?=
- =?us-ascii?Q?l7xXodWybBC0K5GGvU4RwCwS84+MTpo9u6VTSDakUdAjSJQTLNWPff87JqbL?=
- =?us-ascii?Q?RyNklwkklPpAmr14OCtiIdA4K7lYwqhx1dg6mlv4mRrOyKmZ+f2tvtMzz50F?=
- =?us-ascii?Q?mKKVTlbKwd9AoIwXmU4ahWCKLqSRuUT/EZifpUqMeIsm7quMEr8ictFHZxgY?=
- =?us-ascii?Q?bTqFTXxe5twUxkb9vscfM79RnW63Kdzh3EjyI+PPW8baZr1za9IXAM/RdnFS?=
- =?us-ascii?Q?J5c7MfHWD1UuV+2d+XVu9n3j0ZUULNQzk/TvKYtUXaOUuBArbv9GLPRVx8WQ?=
- =?us-ascii?Q?FA2x5GwDGQfIxTazuXcJrbAeWeHgEGlNvtCLVA/xaoZLgvs0ugN9Yn03++wV?=
- =?us-ascii?Q?Slkuu6K9JPwRNzXajdhY6b0=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77ec5f34-a412-4813-ad97-08ddd65e7b2a
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5542.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2025 09:32:24.0140 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AQWg1OfWgeWMj56ZY8S3tsbGAamsdiQ+qF6lVkZaaMnLlJ1RR3zOzGSIn3sQINvoHBMvCCRtL7gr954Olf9z09daKb4lg4QEd3Rpr46W1sVT6LN8BX5Xs62O8gXzBpXY
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7730
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250808-pwm_meson-v1-1-cddb7e5f76bd@linaro.org>
+X-B4-Tracking: v=1; b=H4sIALLElWgC/x2N0QrCMBAEf6Xcs4EYGq3+iohc2tXeQ9JyV1Qo/
+ XdTH4edZVYyqMDo2qykeIvJVCocDw31I5cXnAyVKfgQfec7N3/yI8Om4k4xthech9ByouonNri
+ kXPpxf2S2BboPs+Ip33/kdt+2H6Q4V850AAAA
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,117 +102,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To ensure unintentional bugs occurring because of config changes
-in master defconfig and its VAB variants, VAB defconfig files now
-include the master defconfig and enable config values specific to
-VAB functionality only.
+In meson_pwm_probe the for loop attempts to get the name of a clock but
+the following if..else statements only perform useful work if -ENODATA
+is returned from clk_get_by_name. If clk_get_by_name simply succeeds
+then this results in a premature exit from the for loop and the
+following code can never be reached. Make the else clause only apply for
+an error return from clk_get_by_name.
 
-Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+This issue was found by Smatch.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- configs/socfpga_agilex_vab_defconfig | 95 +---------------------------
- 1 file changed, 2 insertions(+), 93 deletions(-)
+ drivers/pwm/pwm-meson.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/configs/socfpga_agilex_vab_defconfig b/configs/socfpga_agilex_vab_defconfig
-index 8eec3d8d67a..4607dc73343 100644
---- a/configs/socfpga_agilex_vab_defconfig
-+++ b/configs/socfpga_agilex_vab_defconfig
-@@ -1,94 +1,3 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=400000000
--CONFIG_ARCH_SOCFPGA=y
--CONFIG_TEXT_BASE=0x200000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
--CONFIG_SF_DEFAULT_MODE=0x2003
--CONFIG_ENV_SIZE=0x1000
--CONFIG_ENV_OFFSET=0x200
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex_socdk"
--CONFIG_DM_RESET=y
--CONFIG_SPL_STACK=0xffe3f000
--CONFIG_SPL_TEXT_BASE=0xFFE00000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x3ff00000
--CONFIG_SPL_BSS_MAX_SIZE=0x100000
--CONFIG_SYS_BOOTM_LEN=0x2000000
--CONFIG_SYS_LOAD_ADDR=0x02000000
-+#include <configs/socfpga_agilex_defconfig>
-+
- CONFIG_SOCFPGA_SECURE_VAB_AUTH=y
--CONFIG_TARGET_SOCFPGA_AGILEX_SOCDK=y
--CONFIG_IDENT_STRING="socfpga_agilex"
--CONFIG_SPL_FS_FAT=y
--CONFIG_REMAKE_ELF=y
--CONFIG_FIT=y
--CONFIG_SPL_FIT_SIGNATURE=y
--CONFIG_SPL_LOAD_FIT=y
--CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
--CONFIG_BOOTDELAY=5
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="earlycon"
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
--CONFIG_SYS_PBSIZE=2082
--CONFIG_SPL_MAX_SIZE=0x40000
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_HAVE_INIT_STACK=y
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
--CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
--CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
--CONFIG_SPL_CACHE=y
--CONFIG_SPL_SPI_LOAD=y
--CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
--CONFIG_SPL_ATF=y
--CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
--CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
--CONFIG_HUSH_PARSER=y
--CONFIG_SYS_PROMPT="SOCFPGA_AGILEX # "
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_SPI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
--CONFIG_ENV_IS_IN_MMC=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="kernel.itb"
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
--CONFIG_SPL_ALTERA_SDRAM=y
--CONFIG_DWAPB_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_DW=y
--CONFIG_SYS_MMC_MAX_BLK_COUNT=256
--CONFIG_MMC_DW=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_PHY_MICREL=y
--CONFIG_PHY_MICREL_KSZ90X1=y
--CONFIG_ETH_DESIGNWARE=y
--CONFIG_MII=y
--CONFIG_SYS_NS16550_MEM32=y
--CONFIG_SPI=y
--CONFIG_CADENCE_QSPI=y
--CONFIG_DESIGNWARE_SPI=y
--CONFIG_USB=y
--CONFIG_USB_DWC2=y
--CONFIG_USB_STORAGE=y
--CONFIG_DESIGNWARE_WATCHDOG=y
--CONFIG_WDT=y
--# CONFIG_SPL_USE_TINY_PRINTF is not set
--CONFIG_PANIC_HANG=y
--CONFIG_SPL_CRC32=y
+diff --git a/drivers/pwm/pwm-meson.c b/drivers/pwm/pwm-meson.c
+index c2597d8b669..caa7af085fa 100644
+--- a/drivers/pwm/pwm-meson.c
++++ b/drivers/pwm/pwm-meson.c
+@@ -359,8 +359,9 @@ static int meson_pwm_probe(struct udevice *dev)
+ 
+ 			/* We have our source clock, do not alter HW clock mux */
+ 			continue;
+-		} else
++		} else if (err) {
+ 			return err;
++		}
+ 
+ 		/* Get id in list */
+ 		for (p = 0 ; p < data->num_parents ; ++p) {
+
+---
+base-commit: 123cd77122a13288e1552b5d9b7c22a6f19e2e02
+change-id: 20250808-pwm_meson-65549e7d24ab
+
+Best regards,
 -- 
-2.35.3
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
