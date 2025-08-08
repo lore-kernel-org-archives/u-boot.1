@@ -4,68 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F14C87FD2
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 14:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A105C87FD2
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 15:13:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08254846E5;
-	Fri,  8 Aug 2025 16:45:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A2E2846E5;
+	Fri,  8 Aug 2025 17:13:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eJcmIJuV";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="aQF72BOR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C8B7846E5; Fri,  8 Aug 2025 16:45:06 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D90BC846D5
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 16:45:00 +0200 (CEST)
+ id AA2438474D; Fri,  8 Aug 2025 17:12:58 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 98DE2846D5
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 17:12:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-jain1@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 578EixWq616073;
- Fri, 8 Aug 2025 09:44:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1754664299;
- bh=44RRDMxksYU9isUHifeeVL/0Il9uF2ypqqO9J/ULQ1g=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=eJcmIJuVzj82ZVJj49N3Y5zk74gs9PrIy6DKH58FxloLzDZMQbkuj//Dq0PglCj6s
- wGygM+W8kVk45j/bFEm8/4EmDsBGHMODK8iN1kCBWkW4DTEqilsfQInA8bIWdmt52o
- wR8Gt0qyyk0BqoFbFNjQqNegC64o99ttO1IYzj6o=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 578Eiw5B1695877
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 8 Aug 2025 09:44:58 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 8
- Aug 2025 09:44:58 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 8 Aug 2025 09:44:58 -0500
-Received: from [172.24.233.20] (a0512632.dhcp.ti.com [172.24.233.20])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 578Eium72895055;
- Fri, 8 Aug 2025 09:44:57 -0500
-Message-ID: <f9a547f8-093b-47db-970a-57f154bfcdf5@ti.com>
-Date: Fri, 8 Aug 2025 20:14:56 +0530
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=03156c240e=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 578FBaVg009805;
+ Fri, 8 Aug 2025 17:12:54 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ ogPoP2vh0zNHGg6dvxMz+dwk3N2nBZc3z1a2PnDp1Lc=; b=aQF72BORyFaXYGoC
+ ZCnMWVk0AY5iQ31fSbieTswPVVVhD27IKXlF8r3Nrr3PPydwZ/ToFiFyZMrsQaFE
+ I7ApiL4nu04pyn5hFQsNQi4Ws532hBAmAYSASvuc+i2jghJWOHlKvizdtzzE6D88
+ qkKHxEdraYdCjdbpp+ifMcQpZs9H06IOeKCZ5evMccsuks9FlqbwAfEsGANd1rYx
+ Vtd5byqakp8B9OwAiTiQuriJdSWCncO71cARmJmJTaZfLspz6Q950FYH+UWCQA7c
+ BBTJQrWXyZv2aWSzXyALjF3RazWctH07nqlBwR7gkUShC1E+UmfAonZ3OopBdLDz
+ 5DTVng==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48bpx0cr9c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 08 Aug 2025 17:12:54 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8683140050;
+ Fri,  8 Aug 2025 17:12:15 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8C18D72A0C1;
+ Fri,  8 Aug 2025 17:12:01 +0200 (CEST)
+Received: from localhost (10.252.12.105) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 8 Aug
+ 2025 17:12:01 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/5] ioport: Add resource check helpers
+Date: Fri, 8 Aug 2025 17:11:50 +0200
+Message-ID: <20250808151154.472860-2-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250808151154.472860-1-patrice.chotard@foss.st.com>
+References: <20250808151154.472860-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/8] video: tidss: Remove unused drivers
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, "Thakkar, Devarsh" <devarsht@ti.com>,
- "Raghavendra, Vignesh" <vigneshr@ti.com>
-References: <20250806145649.1664724-1-trini@konsulko.com>
- <21bad7ca-16e4-43dc-ac99-87bc31b3bc51@ti.com>
- <20250807155357.GW124814@bill-the-cat>
-Content-Language: en-US
-From: Swamil Jain <s-jain1@ti.com>
-In-Reply-To: <20250807155357.GW124814@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.12.105]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-08_04,2025-08-06_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,28 +89,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add resource_overlaps() and resource_contains() helpers.
+Code copied from kernel source.
 
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-On 8/7/25 21:23, Tom Rini wrote:
-> On Thu, Aug 07, 2025 at 09:16:55PM +0530, Swamil Jain wrote:
->>
->> On 8/6/25 20:26, Tom Rini wrote:
->>> These drivers are no longer used. Remove them.
->>>
->>> Signed-off-by: Tom Rini <trini@konsulko.com>
->>> ---
->> Hi Tom,
->> We are using this driver, we are refactoring it.
->> Already posted a v2 for the same, please check:
->> https://lore.kernel.org/all/20250725043012.1186886-1-s-jain1@ti.com/
-> 
-> OK, I can defer this one. Please make sure that with the refactor (and
-> likely a need for a v3) that it either builds on sandbox or has
-> sufficient Kconfig dependencies that it doesn't show up. I hit this as
-> part of "allyesconfig" (which today has too many failures to count).
-> 
-Thanks Tom, will send v3 and make sure it has sufficient Kconfig 
-dependencies such that it doesn't show up.
+ include/linux/ioport.h | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-Regards,
-Swamil.
+diff --git a/include/linux/ioport.h b/include/linux/ioport.h
+index 85288c3729a..c12a7f70ad7 100644
+--- a/include/linux/ioport.h
++++ b/include/linux/ioport.h
+@@ -135,6 +135,22 @@ static inline unsigned long resource_type(const struct resource *res)
+ 	return res->flags & IORESOURCE_TYPE_BITS;
+ }
+ 
++/* True iff r1 completely contains r2 */
++static inline bool resource_contains(struct resource *r1, struct resource *r2)
++{
++	if (resource_type(r1) != resource_type(r2))
++		return false;
++	if (r1->flags & IORESOURCE_UNSET || r2->flags & IORESOURCE_UNSET)
++		return false;
++	return r1->start <= r2->start && r1->end >= r2->end;
++}
++
++/* True if any part of r1 overlaps r2 */
++static inline bool resource_overlaps(struct resource *r1, struct resource *r2)
++{
++	return r1->start <= r2->end && r1->end >= r2->start;
++}
++
+ /* Convenience shorthand with allocation */
+ #define request_region(start,n,name)	__request_region(&ioport_resource, (start), (n), (name), 0)
+ #define __request_mem_region(start,n,name, excl) __request_region(&iomem_resource, (start), (n), (name), excl)
+-- 
+2.25.1
+
