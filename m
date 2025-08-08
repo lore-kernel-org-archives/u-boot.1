@@ -4,57 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4056C87FCB
-	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 04:01:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6573FC87FD3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Aug 2025 05:06:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D081483B80;
-	Fri,  8 Aug 2025 06:01:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 962C283CDC;
+	Fri,  8 Aug 2025 07:06:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="N7P2REzI";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="GyWybCIW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94F4E83C01; Fri,  8 Aug 2025 06:01:24 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id 8514483C70; Fri,  8 Aug 2025 05:37:31 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20602.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::602])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A399F83AE7
- for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 06:01:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3EFBB103F85; Fri,  8 Aug 2025 06:01:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1754625680;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=VGtnyygh+gbj+3/b/Q7q+dj46Gv95/1kR1C45qlv54o=;
- b=N7P2REzIAg//4Hf88tB32kYFqSF/ic2drneBTvPLwn0XOUkhq0fNDRjxflPPuyKye34CR2
- AGpn2MMrR/Wu5oIX9sYvZCH2K8+/dMBpOwgxrepdtmPRn72AKM6ZqizZhYS5e2wh2fI4g2
- hjz1FWqSfA9aBIBNXLA0uOC8lLPKrhHgvEmKB/JYevlJK+jKPpwCv9pT6DSuPwo9Wcfr4/
- g42DJZU0ru25YwbRkzVT4zFbRJvRUyHe/pHSirr1kXGo5Ni1zCWPC2lRWSlaffOQ9Rt3c/
- LN0BHsXQG4BLqYXjiwhVt+nJxxbWIvfVOGlwzfaa2+Jfb4IlBwMublqUQo47cw==
-Message-ID: <ac81671e-a784-1dce-09db-2435c79c5b26@nabladev.com>
-Date: Fri, 8 Aug 2025 06:01:38 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Content-Language: en-US
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 6062683C65
+ for <u-boot@lists.denx.de>; Fri,  8 Aug 2025 05:37:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o2XL87+iix58zbWeAgjhVLJHDz5/d9qT5BsIIQupZ3Mrpj3byhZc7/h3+KOgdruIWj79lIBW6+WisRMAkjKtpKPtUyhIiimimRYB+LyabWbSd7Lh/FG+gNC/X6yjkP2uCZK2MOi2m/3z+f5ZGs3zh8ua+gT71SLXnE7R9RaK8tEDgw8Muj2x6Wsw8lmtPgrK05mHy1NbsJJdGiW1xxoW54orW///b93WjKMIhNxKClkOjJdTc1XL1JXQ4SOSQcbqLq2wN2/f6keNdc0ua+xU++a1Z8Y/4h9YyffIQfSa4CAjTk0o1DeJ8myxCCDN4r0ek1C9upJrTUkWGwDb6V6GDA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pHBQKNV5Yh2uMpkLDc2I/MtO/BnofAQ+aLTpl/FyXtc=;
+ b=diItOy9A2zbP0Wh/ACJj8yRezblcCVLCAaaEoMSQl6ZI09V8gWnyYV0JXgOwHelsm19u4cxMRSVVcXrSI6K35jTjexQ0M4lKLseyv80+Y+P+eVjIDbBgd9yS6PHICWqY5IzyJQbci0F5bi5SNOqNx66+Dv+DAupiOf+b27RYtI0YHXINlFjtWid5MI+W4CWGaaz0OBI03F456slyQS3OjcdIMG7dM8l64JTbytEGX0qinvKFC6D+pPu9fhmnqgWxm4M7+dieJE7OzDi3PHuLVLNzF0wY/mtvRjSoOX7tvoGdpBLIxtfbGBAszT5j6aRyU3PM6t4dkT8tdDURyWqNMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pHBQKNV5Yh2uMpkLDc2I/MtO/BnofAQ+aLTpl/FyXtc=;
+ b=GyWybCIWrCCfo6IzRf+23ptrEnIDfZs0MsuTbND7jh0Ztg/Zi49eI/SmFh6G1Z+HZepn6b/IrVk7wO8W2nHAhgaIW2WEILLPS2B6ko+SlZMGBazEOWaNRe//K79DWF651jSvXlQcXjOIakxCzE0sFw2I9EsdOi9NZBKdEfM2SfNBjat3VU9sxB24ocjmGiU5OeCCqsKkj04dns4Ptjf1ig6CBoeNIFG31IvpI0Dt/7yyTpkccaWaOFlUSaZ0b4mkyi8467EWdJpIUD1bmdv5eNDQ/WsEHU8PQcys+ji0dTpWUGfwl1zJwjHqVndU3NEQqLEjVPtnGbLok5S5V7qL1A==
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by SJ0PR03MB5887.namprd03.prod.outlook.com (2603:10b6:a03:2ae::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.16; Fri, 8 Aug
+ 2025 03:37:24 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::c861:d54b:e055:49dd]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::c861:d54b:e055:49dd%5]) with mapi id 15.20.9009.013; Fri, 8 Aug 2025
+ 03:37:24 +0000
+From: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
+To: Heiko Schocher <hs@nabladev.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>
+Subject: RE: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Thread-Topic: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Thread-Index: AQHcBwDuPaOD/mM/X0iOG4si/UAJQLRW6hYAgAEzEEA=
+Date: Fri, 8 Aug 2025 03:37:24 +0000
+Message-ID: <PH7PR03MB6942E3C1339738845D3F3D0EF72FA@PH7PR03MB6942.namprd03.prod.outlook.com>
 References: <20250806183543.GR124814@bill-the-cat>
  <3e98b2c9-7e14-5bee-a03d-352a51eaab93@nabladev.com>
- <PH7PR03MB6942E3C1339738845D3F3D0EF72FA@PH7PR03MB6942.namprd03.prod.outlook.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <PH7PR03MB6942E3C1339738845D3F3D0EF72FA@PH7PR03MB6942.namprd03.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+In-Reply-To: <3e98b2c9-7e14-5bee-a03d-352a51eaab93@nabladev.com>
+Accept-Language: en-MW, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH7PR03MB6942:EE_|SJ0PR03MB5887:EE_
+x-ms-office365-filtering-correlation-id: f1af5f4c-1f17-4fa2-e890-08ddd62ce3e4
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?cWlVMkZ6SFRkdlhDT1Z5YVBEWi9USGxQUFF2TEVOQlArU3Z4aXJXOE93NTA1?=
+ =?utf-8?B?eWxBTExtYm15bkNsNDlPdkQ4M09nZ0loUVpvejMzUnRGQVU2RUNmT3RQOGNj?=
+ =?utf-8?B?OWVOZ2VTVlVkRjViSFJLS2U3ckRXeEFWcXZpWHhPVExCbDlZaG9oMWcyNEdr?=
+ =?utf-8?B?S1VwSk4vR2xSenR4RXY1Y0xFZVlVNjZzVFE5SSsweEx2ZjAwT1lHcFNzdW82?=
+ =?utf-8?B?NmxIRExINnRFRm0vVS9BUTl1ZExLYnQ5QlFZcGtRejdON3N2L0EybDJ3SUZK?=
+ =?utf-8?B?OTMyUEcwN0FTRGpoZkRSNGlheXgvSE1JYlVTOFM5L2tiNDFaWjBaZE5sZTQ3?=
+ =?utf-8?B?ODBva0dQa1VTLzJSSWI4Q21DMlJxYk0rZzl0MW1VZWhacG9OdHhZSEd3ZHNH?=
+ =?utf-8?B?ZWFoUHRZWEtseVowclNEYTZ2UzNtb2ZRaWFUTjVTK1V4ZHVyS20yWm0zYzBY?=
+ =?utf-8?B?bTdEaFFGUkRyYUx0bUtFeUVYcll2ZVp0WWo0ck5IVXVqOXNJMzVZVFZPRG9F?=
+ =?utf-8?B?djZTaG01aFVwU20ra29EdW5kWHhOTnlnRHRJamhwU1dEZXZXOUdITjF5aDA5?=
+ =?utf-8?B?QTJ0RHRXaVlCQkoreGZYRG5QNFYwUndhVGtZUmhuZ1puNzBibG9qSEcrQVp4?=
+ =?utf-8?B?NVVqV0t3TWh4TU0rQXM4Ry96NlR2R3ovdDQza1JaMkdnVzJkZ2ZaZWRWQ3Rn?=
+ =?utf-8?B?MW8zaWx6UTZWY0FGMVNHVnZGWDQ2dDU5anBndWxEajJ0NzhUTFJqcTNialFP?=
+ =?utf-8?B?K0NTUzZrYUttZmZLaW0zNG9PWG1NU08vd3dHbW4rRmkxOVpTV2NaNjdraERH?=
+ =?utf-8?B?amw3bmVQK1V4TU80c0c2TDdUYmlyOG1LeHdJbXdjTUR3bFJudXBINk9pU29y?=
+ =?utf-8?B?aVNSMlM2S0k5VmFKZjJsRGJmS3NOYTd1U0tkb3NyZHA1dm1rcWRldG00YnJD?=
+ =?utf-8?B?ZzdBRXk1azFjTTFaR0V5Q0tOL2Q1c0haQy9EWUZ4ZWt0YVFGaHFDdjg1MFho?=
+ =?utf-8?B?dmhmVGZsMW9CWlhBUXlJOGF3MnE4amVZMXZDOXprNkQxVEFEaWxuUkJtbm05?=
+ =?utf-8?B?ZWpvSjlSZG01MEZVT3plVlJQYkx3dzRCTWFsMVd1WE5VUWtEWGpDKzlWbXZP?=
+ =?utf-8?B?ZHhWM0s4bWZad2lEMGYxaEdSZ2RDa3FFT1VsWkhkbWJUZTkyTWdFVTlkS0g4?=
+ =?utf-8?B?R0NhNVZSMWtDeXFVZW9RMnpUK3ZaV05yZ3QzblVsSytmL05BQ3hodzJya1Z2?=
+ =?utf-8?B?L2ZvN0J1YmVKRDIvZnNtOGRNU0M2eEx3VnZFbkp5clcrbDBlMFc3MGVXL3Mr?=
+ =?utf-8?B?VERGcEZQTkswYnJqS0FxaWMwdWRhMkxHL2NDYS9oUHFJR2tmMTN5UVZGcjVv?=
+ =?utf-8?B?cUlyeG9PbkZTWU1ta3BBY1YxZ2d6ZWlCNnJ6MlI2aHREWDhqd2ZUMHNWeEI3?=
+ =?utf-8?B?akdqM01zUWdlSmxIcnNlUUJNcXZIMm5nTzdvSjlCSWxiOG9RcHI1OTdTVDk3?=
+ =?utf-8?B?c2liZVM2d3hRWnQzbUEyZ1RqN3pQQWRDRitJNDlBMVc5UEJ4ZjNGbkU1V0Jj?=
+ =?utf-8?B?RU40QWVIZTdXYlRJWlQ5QXB0LzVrbEJsYlhJVENPSVBwYThzYXlEdVo4ci9z?=
+ =?utf-8?B?RnJnTWZsMG0zaThVVVVyR1lSdWxxbllKY1lrczlJdWh3Umh0TGNuUkk1NTZm?=
+ =?utf-8?B?bkF0Y1FoSnBhRU50WXNNcFpLdHAwaTVGL3ZzQnlhSTlMa0RZNVVrS1RieStY?=
+ =?utf-8?B?RGhkWnVqdlFhVE81TVoweDNPSlJBcDFTZmZ6Uk0yY2NtbVV0Q0tZRTlxWnBE?=
+ =?utf-8?B?VG5VNm9pNExWVzUzQTRHWFgxMzJnaTdlNm5XNW0razRlMVM1Y2lqUkFaSVBv?=
+ =?utf-8?B?WnJiS21HYWdSNGNwM0Y1QzVXMDFmNzUxU0RqWmVzbjgzSVhNeXFMdEIrQXI2?=
+ =?utf-8?B?VmxkVmZyNVViSER4cVBKM0RhSXRkV2dUVVdRV3VObzQwbjlqdlFJaWROa016?=
+ =?utf-8?Q?eD+zqd6AflR2F2oQ93rK8tSI+8RFw4=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?aXoyR3k3ZU51WXAzNTBCT2YrUkV5Rk1iRnZxTW1pU0Z3N1dwcEt1SjE2UUF3?=
+ =?utf-8?B?aVZMMWorcG5tdGpmdHlPVDJoVEZxY2p6Mzc1cTNUVElVd0JIM3RYamtCVDFV?=
+ =?utf-8?B?ck4rbXVQZURKTFJ6MXFic3B5MjFCUlBiRGhNMnVRK3RtRTJZZkUxRVpFQ0VF?=
+ =?utf-8?B?aE1wTlQ3VU9ZdFViRFZDQW0zdXRmYmF5MUNBeHdJd05rWVY2V2Z5YzBFWi9r?=
+ =?utf-8?B?OXl6bDFKY0ZPcEgzbmZiN3BnWmNlaUE5aGdOVi94N0YxMnJHVUpKUXpwbTBR?=
+ =?utf-8?B?QWVNNm5xNVA1a25waHdpdEZGVGd6VGRIdTl5RklJTkJQRm5NbmhualgvMVBP?=
+ =?utf-8?B?V1ZrRUhMMXRRVEtEdnNnRTM0d2tjdmpqMzFPUnRNYVI5bURlTnRXbWpEL3g0?=
+ =?utf-8?B?aVZMcjNTZDlHVWcwYVYwT2xwVjl6amhMMnJFTC9CU05qN2M2TXlmQmZqeEkw?=
+ =?utf-8?B?QzJQVGlKWXdwV1dsV0JhVWxYOVhXZzE3WXIyd2xSaWROQmZuTWRKRk5GMFBp?=
+ =?utf-8?B?RURrZFlmZmRDUU10YlJVWUJxV1B3TVRsTFY4NVJmb1hXeU9KTlhQVXlaVTlh?=
+ =?utf-8?B?TDdoTTZLUFJXNDVuZXhGcmRCTHIxZ2VMbDZLeEd1alJxUTBaNmlZcGZoRmdH?=
+ =?utf-8?B?RGQxYzRVMHdzWUNRV0oxOTBXVnFDUGxPMmE3R0JVaVN4bFZBUis1SVN3M3dm?=
+ =?utf-8?B?SGlpbFo5R0FGRW1BclhlNUR3TWZEdUZMN2t4elhTODZSRDFpcHFMdndCNmd1?=
+ =?utf-8?B?Rmw3UUJyOW40cHVYN0hRNk9Gc1cvWGFjbkhiSVlHTnM3TGtaOSt0L01aTWFV?=
+ =?utf-8?B?ZE1KSlNrZHlTTkRBZTZCR1ZLLzE4YkluMDFZT2k0RHV1L3ZtSnJDcGdHbnpI?=
+ =?utf-8?B?N0ZpaDNFdnN2cWczdk90MzRoMmQ0b3NJVnNiSElBYjN1ZDBIaHdwQWNTRUR2?=
+ =?utf-8?B?UkpGT0VrRVhaZjFVYzBSYlZrWHJZOU9HbTFRQzBTWkYreEFKWG9mZFBhYmJy?=
+ =?utf-8?B?enk4dUZhVEYvaEpSMXpIYU5mNVBaZTBKNFlnM2R5OHJXa1ZRT2lGR0d3encw?=
+ =?utf-8?B?b0RvVnlxT0NWVmd0Q1RFR3FMdjBMcUlvbTlKVTVFSDlOWnFRN0JtQkJZM0hH?=
+ =?utf-8?B?dGx3ZmhWTFNuTzdhcjArYS9BMmlTbDBvcnl5ZjNteEc1aWdqVEpWcVBzSE9L?=
+ =?utf-8?B?c0NxRnlPODNQS0xKaVNTbVB1L2FtSzhNTDg4RnJlUWpha0lGeVJvYjR6MEF5?=
+ =?utf-8?B?T2NLa25rNlUrYjQ1bmo4VzJwNk9MenBLYmNqQWwvNnlSdUZoeGJzNEptRml6?=
+ =?utf-8?B?T3Y4Yk82dDVwYzRsVWZrQWFRc2c4eGtCNGw2QkZLWk81eUhqN1I2ck9UZ283?=
+ =?utf-8?B?WE15b1kra3h4TGtwZEJDWFc5UTN4N2QyUTZ2U3djSzY4YitGVHdpb0dYU3Zl?=
+ =?utf-8?B?L09sQ2lOTjBXeWZHL244TTRRNTdlUW0zRnZINktyeW1hKy9mcjQwYmtSWlZO?=
+ =?utf-8?B?TWl2ZzlieitCb1RlaTkyVit3c3NwcGh0dXRXTmVhdWZQSFV1VzROWXVkTlVm?=
+ =?utf-8?B?Q3Q4UEg5Mngvay9OaThxYklRTTVCQmhjdXBsTDZNRFhrcm9tQzh4REtkTklj?=
+ =?utf-8?B?aHpTeXNoejF3MkQzYjNtZndSczkvZWdGWXJDMktNbWFoTk1Vc1AveUhyVTZ2?=
+ =?utf-8?B?MVY4UUNZcFhWWldqSC9kM2RTWWRYVUtMWGVSNnJBKzlpQndPMUdrejdtL1Ri?=
+ =?utf-8?B?alNxK2toMDkrM0tJT0dzVWhYMGw1ay80UlA1cmlibVQ3OHJZeVF4OWxvdlE4?=
+ =?utf-8?B?RjBqbGZnL0c2Q0xMeFBtMzJYRCtmVGdWZ2h3cGRoVi9sTm13eTlkc0Vnakh1?=
+ =?utf-8?B?MFlYQ0lmNHpjVGE4cTZyZkxzcGxXNDdYaEhZdEpRc29sWDZzLzNYZ2Y1T0M2?=
+ =?utf-8?B?aGRiaHd2TXR0UFA0NmNSUkhacFNpYWVqZDZOeGdXd09Gck5DMG96WHV0d05B?=
+ =?utf-8?B?NVNPU1hjM21mbzZUYzJGUmJ6MmJac3lGSVl3VE52OFhRRFZ6b1JiR21yODV6?=
+ =?utf-8?B?OEZReU5EZm1ITWt4TFdzU0N5TU9BbmtZYkZSSkpVd0YzbkZ6YWxmbG1nMVFE?=
+ =?utf-8?Q?7G0V/7znRND1tvEslw27O+6zM?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f1af5f4c-1f17-4fa2-e890-08ddd62ce3e4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Aug 2025 03:37:24.6532 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: XkHtwQ02SL/z8WaRvow547mSvC1Rv2cIcmj+bB97jHnjhWzZU72d7oMnViUp+ZyqL2G3pjpuMnDrEd0uDOuQmt9xLmvsSb9cpS5SnCGxsxk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5887
+X-Mailman-Approved-At: Fri, 08 Aug 2025 07:06:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,395 +180,306 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Dinesh,
-
-On 08.08.25 05:37, Maniyam, Dinesh wrote:
-> Hi
-> 
->> -----Original Message-----
->> From: Heiko Schocher <hs@nabladev.com>
->> Sent: Thursday, 7 August 2025 5:17 pm
->> To: u-boot@lists.denx.de; Maniyam, Dinesh <dinesh.maniyam@altera.com>
->> Cc: Tom Rini <trini@konsulko.com>; Heiko Schocher <hs@denx.de>
->> Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
->>
->> [CAUTION: This email is from outside your organization. Unless you trust the
->> sender, do not click on links or open attachments as it may be a fraudulent email
->> attempting to steal your information and/or compromise your computer.]
->>
->> Hello Dinesh,
->>
->> On 06.08.25 20:35, Tom Rini wrote:
->>> Here's the latest report. Lets get these new issues addressed ASAP
->>> please, thanks.
->>>
->>> ---------- Forwarded message ---------
->>> From: <scan-admin@coverity.com>
->>> Date: Wed, Aug 6, 2025 at 12:23 PM
->>> Subject: New Defects reported by Coverity Scan for Das U-Boot
->>> To: <tom.rini@gmail.com>
->>>
->>>
->>> Hi,
->>>
->>> Please find the latest report on new defect(s) introduced to *Das
->>> U-Boot* found with Coverity Scan.
->>>
->>>      - *New Defects Found:* 8
->>>      - 4 defect(s), reported by Coverity Scan earlier, were marked fixed in
->>>      the recent build analyzed by Coverity Scan.
->>>      - *Defects Shown:* Showing 8 of 8 defect(s)
->>>
->>> Defect Details
->>>
->>> ** CID 583812:       Integer handling issues  (BAD_SHIFT)
->>> /drivers/i3c/master/dw-i3c-master.c: 1001           in dw_i3c_probe()
->>
->> Could you please look at the issues on i3c parts, as I go on vacation, thanks!
->>
-> 
-> Yes, I am working on it, give me just a couple of days!
-
-Of course, Thanks for your time!
-
-bye,
-Heiko
-> 
-> Thanks
-> Dinesh
-> 
->> @Tom: Feel free to pick up fixes, thanks!
->>
->> bye,
->> Heiko
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 583812:         Integer handling issues  (BAD_SHIFT)
->>> /drivers/i3c/master/dw-i3c-master.c: 1001             in dw_i3c_probe()
->>> 995           ret = readl(master->regs + DATA_BUFFER_STATUS_LEVEL);
->>> 996           master->caps.datafifodepth = DATA_BUFFER_STATUS_LEVEL_TX(ret);
->>> 997
->>> 998           ret = readl(master->regs + DEVICE_ADDR_TABLE_POINTER);
->>> 999           master->datstartaddr = ret;
->>> 1000          master->maxdevs = ret >> 16;
->>>>>>       CID 583812:         Integer handling issues  (BAD_SHIFT)
->>>>>>       In expression "0xffffffffffffffffUL >> 63 - (master->maxdevs - 1)", right
->> shifting by more than 63 bits has undefined behavior.  The shift amount, "63 -
->> (master->maxdevs - 1)", is 64.
->>> 1001          master->free_pos = GENMASK(master->maxdevs - 1, 0);
->>> 1002
->>> 1003          ret = i3c_master_register(&master->base, dev,
->>> 1004                                    &dw_mipi_i3c_ops, false);
->>> 1005          if (ret)
->>> 1006                  goto err_assert_rst;
->>>
->>> ** CID 583811:         (RESOURCE_LEAK)
->>> /drivers/i3c/master.c: 1610           in of_i3c_master_add_i3c_boardinfo()
->>> /drivers/i3c/master.c: 1586           in of_i3c_master_add_i3c_boardinfo()
->>> /drivers/i3c/master.c: 1591           in of_i3c_master_add_i3c_boardinfo()
->>> /drivers/i3c/master.c: 1598           in of_i3c_master_add_i3c_boardinfo()
->>> /drivers/i3c/master.c: 1603           in of_i3c_master_add_i3c_boardinfo()
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 583811:           (RESOURCE_LEAK)
->>> /drivers/i3c/master.c: 1610             in of_i3c_master_add_i3c_boardinfo()
->>> 1604          }
->>> 1605
->>> 1606          boardinfo->pid = ((u64)reg[1] << 32) | reg[2];
->>> 1607
->>> 1608          if ((boardinfo->pid & GENMASK_ULL(63, 48)) ||
->>> 1609              I3C_PID_RND_LOWER_32BITS(boardinfo->pid))
->>>>>>       CID 583811:           (RESOURCE_LEAK)
->>>>>>       Variable "boardinfo" going out of scope leaks the storage it points to.
->>> 1610                  return -EINVAL;
->>> 1611
->>> 1612          boardinfo->init_dyn_addr = init_dyn_addr;
->>> 1613          boardinfo->of_node = node;
->>> 1614          list_add_tail(&boardinfo->node, &master->boardinfo.i3c);
->>> 1615
->>> /drivers/i3c/master.c: 1586             in of_i3c_master_add_i3c_boardinfo()
->>> 1580          boardinfo = devm_kzalloc(dev, sizeof(*boardinfo), GFP_KERNEL);
->>> 1581          if (!boardinfo)
->>> 1582                  return -ENOMEM;
->>> 1583
->>> 1584          if (reg[0]) {
->>> 1585                  if (reg[0] > I3C_MAX_ADDR)
->>>>>>       CID 583811:           (RESOURCE_LEAK)
->>>>>>       Variable "boardinfo" going out of scope leaks the storage it points to.
->>> 1586                          return -EINVAL;
->>> 1587
->>> 1588                  addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
->>> 1589                                                            reg[0]);
->>> 1590                  if (addrstatus != I3C_ADDR_SLOT_FREE)
->>> 1591                          return -EINVAL;
->>> /drivers/i3c/master.c: 1591             in of_i3c_master_add_i3c_boardinfo()
->>> 1585                  if (reg[0] > I3C_MAX_ADDR)
->>> 1586                          return -EINVAL;
->>> 1587
->>> 1588                  addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
->>> 1589                                                            reg[0]);
->>> 1590                  if (addrstatus != I3C_ADDR_SLOT_FREE)
->>>>>>       CID 583811:           (RESOURCE_LEAK)
->>>>>>       Variable "boardinfo" going out of scope leaks the storage it points to.
->>> 1591                          return -EINVAL;
->>> 1592          }
->>> 1593
->>> 1594          boardinfo->static_addr = reg[0];
->>> 1595
->>> 1596          if (!dev_read_u32(dev, "assigned-address", &init_dyn_addr)) {
->>> /drivers/i3c/master.c: 1598             in of_i3c_master_add_i3c_boardinfo()
->>> 1592          }
->>> 1593
->>> 1594          boardinfo->static_addr = reg[0];
->>> 1595
->>> 1596          if (!dev_read_u32(dev, "assigned-address", &init_dyn_addr)) {
->>> 1597                  if (init_dyn_addr > I3C_MAX_ADDR)
->>>>>>       CID 583811:           (RESOURCE_LEAK)
->>>>>>       Variable "boardinfo" going out of scope leaks the storage it points to.
->>> 1598                          return -EINVAL;
->>> 1599
->>> 1600                  addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
->>> 1601                                                            init_dyn_addr);
->>> 1602                  if (addrstatus != I3C_ADDR_SLOT_FREE)
->>> 1603                          return -EINVAL;
->>> /drivers/i3c/master.c: 1603             in of_i3c_master_add_i3c_boardinfo()
->>> 1597                  if (init_dyn_addr > I3C_MAX_ADDR)
->>> 1598                          return -EINVAL;
->>> 1599
->>> 1600                  addrstatus = i3c_bus_get_addr_slot_status(&master->bus,
->>> 1601                                                            init_dyn_addr);
->>> 1602                  if (addrstatus != I3C_ADDR_SLOT_FREE)
->>>>>>       CID 583811:           (RESOURCE_LEAK)
->>>>>>       Variable "boardinfo" going out of scope leaks the storage it points to.
->>> 1603                          return -EINVAL;
->>> 1604          }
->>> 1605
->>> 1606          boardinfo->pid = ((u64)reg[1] << 32) | reg[2];
->>> 1607
->>> 1608          if ((boardinfo->pid & GENMASK_ULL(63, 48)) ||
->>>
->>> ** CID 298388:       Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 579           in dw_i3c_ccc_get()
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 298388:         Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 579             in dw_i3c_ccc_get()
->>> 573                   return -ENOMEM;
->>> 574
->>> 575           cmd = xfer->cmds;
->>> 576           cmd->rx_buf = ccc->dests[0].payload.data;
->>> 577           cmd->rx_len = ccc->dests[0].payload.len;
->>> 578
->>>>>>       CID 298388:         Integer handling issues  (SIGN_EXTENSION)
->>>>>>       Suspicious implicit sign extension: "ccc->dests[0].payload.len" with type
->> "u16" (16 bits, unsigned) is promoted in "ccc->dests[0].payload.len << 16" to type
->> "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits,
->> unsigned).  If "ccc->dests[0].payload.len << 16" is greater than 0x7FFFFFFF, the
->> upper bits of the result will all be 1.
->>> 579           cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(ccc-
->>> dests[0].payload.len) |
->>> 580                         COMMAND_PORT_TRANSFER_ARG;
->>> 581
->>> 582           cmd->cmd_lo = COMMAND_PORT_READ_TRANSFER |
->>> 583                         COMMAND_PORT_CP |
->>> 584                         COMMAND_PORT_DEV_INDEX(pos) |
->>>
->>> ** CID 298037:       Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 375           in dw_i3c_clk_cfg()
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 298037:         Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 375             in dw_i3c_clk_cfg()
->>> 369           scl_timing = SCL_EXT_LCNT_1(lcnt);
->>> 370           lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR2_SCL_RATE) - hcnt;
->>> 371           scl_timing |= SCL_EXT_LCNT_2(lcnt);
->>> 372           lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR3_SCL_RATE) - hcnt;
->>> 373           scl_timing |= SCL_EXT_LCNT_3(lcnt);
->>> 374           lcnt = DIV_ROUND_UP(core_rate, I3C_BUS_SDR4_SCL_RATE) - hcnt;
->>>>>>       CID 298037:         Integer handling issues  (SIGN_EXTENSION)
->>>>>>       Suspicious implicit sign extension: "lcnt" with type "u8" (8 bits, unsigned)
->> is promoted in "lcnt << 24" to type "int" (32 bits, signed), then sign-extended to
->> type "unsigned long" (64 bits, unsigned).  If "lcnt << 24" is greater than
->> 0x7FFFFFFF, the upper bits of the result will all be 1.
->>> 375           scl_timing |= SCL_EXT_LCNT_4(lcnt);
->>> 376           writel(scl_timing, master->regs + SCL_EXT_LCNT_TIMING);
->>> 377
->>> 378           return 0;
->>> 379     }
->>> 380
->>>
->>> ** CID 296053:       Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 535           in dw_i3c_ccc_set()
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 296053:         Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 535             in dw_i3c_ccc_set()
->>> 529                   return -ENOMEM;
->>> 530
->>> 531           cmd = xfer->cmds;
->>> 532           cmd->tx_buf = ccc->dests[0].payload.data;
->>> 533           cmd->tx_len = ccc->dests[0].payload.len;
->>> 534
->>>>>>       CID 296053:         Integer handling issues  (SIGN_EXTENSION)
->>>>>>       Suspicious implicit sign extension: "ccc->dests[0].payload.len" with type
->> "u16" (16 bits, unsigned) is promoted in "ccc->dests[0].payload.len << 16" to type
->> "int" (32 bits, signed), then sign-extended to type "unsigned long" (64 bits,
->> unsigned).  If "ccc->dests[0].payload.len << 16" is greater than 0x7FFFFFFF, the
->> upper bits of the result will all be 1.
->>> 535           cmd->cmd_hi = COMMAND_PORT_ARG_DATA_LEN(ccc-
->>> dests[0].payload.len) |
->>> 536                         COMMAND_PORT_TRANSFER_ARG;
->>> 537
->>> 538           cmd->cmd_lo = COMMAND_PORT_CP |
->>> 539                         COMMAND_PORT_DEV_INDEX(pos) |
->>> 540                         COMMAND_PORT_CMD(ccc->id) |
->>>
->>> ** CID 295976:         (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 395           in dw_i2c_clk_cfg()
->>> /drivers/i3c/master/dw-i3c-master.c: 401           in dw_i2c_clk_cfg()
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 295976:           (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 395             in dw_i2c_clk_cfg()
->>> 389                   return -EINVAL;
->>> 390
->>> 391           core_period = DIV_ROUND_UP(1000000000, core_rate);
->>> 392
->>> 393           lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FMP_TLOW_MIN_NS,
->> core_period);
->>> 394           hcnt = DIV_ROUND_UP(core_rate,
->> I3C_BUS_I2C_FM_PLUS_SCL_RATE) - lcnt;
->>>>>>       CID 295976:           (SIGN_EXTENSION)
->>>>>>       Suspicious implicit sign extension: "hcnt" with type "u16" (16 bits,
->> unsigned) is promoted in "hcnt << 16" to type "int" (32 bits, signed), then sign-
->> extended to type "unsigned long" (64 bits, unsigned).  If "hcnt << 16" is greater
->> than 0x7FFFFFFF, the upper bits of the result will all be 1.
->>> 395           scl_timing = SCL_I2C_FMP_TIMING_HCNT(hcnt) |
->>> 396                        SCL_I2C_FMP_TIMING_LCNT(lcnt);
->>> 397           writel(scl_timing, master->regs + SCL_I2C_FMP_TIMING);
->>> 398
->>> 399           lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FM_TLOW_MIN_NS,
->> core_period);
->>> 400           hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_SCL_RATE) -
->> lcnt;
->>> /drivers/i3c/master/dw-i3c-master.c: 401             in dw_i2c_clk_cfg()
->>> 395           scl_timing = SCL_I2C_FMP_TIMING_HCNT(hcnt) |
->>> 396                        SCL_I2C_FMP_TIMING_LCNT(lcnt);
->>> 397           writel(scl_timing, master->regs + SCL_I2C_FMP_TIMING);
->>> 398
->>> 399           lcnt = DIV_ROUND_UP(I3C_BUS_I2C_FM_TLOW_MIN_NS,
->> core_period);
->>> 400           hcnt = DIV_ROUND_UP(core_rate, I3C_BUS_I2C_FM_SCL_RATE) -
->> lcnt;
->>>>>>       CID 295976:           (SIGN_EXTENSION)
->>>>>>       Suspicious implicit sign extension: "hcnt" with type "u16" (16 bits,
->> unsigned) is promoted in "hcnt << 16" to type "int" (32 bits, signed), then sign-
->> extended to type "unsigned long" (64 bits, unsigned).  If "hcnt << 16" is greater
->> than 0x7FFFFFFF, the upper bits of the result will all be 1.
->>> 401           scl_timing = SCL_I2C_FM_TIMING_HCNT(hcnt) |
->>> 402                        SCL_I2C_FM_TIMING_LCNT(lcnt);
->>> 403           writel(scl_timing, master->regs + SCL_I2C_FM_TIMING);
->>> 404
->>> 405           writel(BUS_I3C_MST_FREE(lcnt), master->regs +
->> BUS_FREE_TIMING);
->>> 406           writel(readl(master->regs + DEVICE_CTRL) |
->> DEV_CTRL_I2C_SLAVE_PRESENT,
->>>
->>> ** CID 294913:       Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 724           in dw_i3c_master_priv_xfers()
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 294913:         Integer handling issues  (SIGN_EXTENSION)
->>> /drivers/i3c/master/dw-i3c-master.c: 724             in
->>> dw_i3c_master_priv_xfers()
->>> 718           if (!xfer)
->>> 719                   return -ENOMEM;
->>> 720
->>> 721           for (i = 0; i < i3c_nxfers; i++) {
->>> 722                   struct dw_i3c_cmd *cmd = &xfer->cmds[i];
->>> 723
->>>>>>       CID 294913:         Integer handling issues  (SIGN_EXTENSION)
->>>>>>       Suspicious implicit sign extension: "i3c_xfers[i].len" with type "u16" (16
->> bits, unsigned) is promoted in "i3c_xfers[i].len << 16" to type "int" (32 bits,
->> signed), then sign-extended to type "unsigned long" (64 bits, unsigned).  If
->> "i3c_xfers[i].len << 16" is greater than 0x7FFFFFFF, the upper bits of the result will
->> all be 1.
->>> 724                   cmd->cmd_hi =
->> COMMAND_PORT_ARG_DATA_LEN(i3c_xfers[i].len) |
->>> 725                           COMMAND_PORT_TRANSFER_ARG;
->>> 726
->>> 727                   if (i3c_xfers[i].rnw) {
->>> 728                           cmd->rx_buf = i3c_xfers[i].data.in;
->>> 729                           cmd->rx_len = i3c_xfers[i].len;
->>>
->>> ** CID 294627:       Integer handling issues  (BAD_SHIFT)
->>> /drivers/i3c/master.c: 181           in i3c_bus_get_addr_slot_status()
->>>
->>>
->>>
->> _________________________________________________________________
->> ____________________________
->>> *** CID 294627:         Integer handling issues  (BAD_SHIFT)
->>> /drivers/i3c/master.c: 181             in i3c_bus_get_addr_slot_status()
->>> 175           int status, bitpos = addr * 2;
->>> 176
->>> 177           if (addr > I2C_MAX_ADDR)
->>> 178                   return I3C_ADDR_SLOT_RSVD;
->>> 179
->>> 180           status = bus->addrslots[bitpos / BITS_PER_LONG];
->>>>>>       CID 294627:         Integer handling issues  (BAD_SHIFT)
->>>>>>       In expression "status >>= bitpos % 64", right shifting by more than 31 bits
->> has undefined behavior.  The shift amount, "bitpos % 64", is as much as 63.
->>> 181           status >>= bitpos % BITS_PER_LONG;
->>> 182
->>> 183           return status & I3C_ADDR_SLOT_STATUS_MASK;
->>> 184     }
->>> 185
->>> 186     static void i3c_bus_set_addr_slot_status(struct i3c_bus *bus, u16 addr,
->>>
->>>
->>>
->>> View Defects in Coverity Scan
->>> <https://scan.coverity.com/projects/das-u-boot?tab=overview>
->>>
->>> Best regards,
->>>
->>> The Coverity Scan Admin Team
->>>
->>> ----- End forwarded message -----
->>>
->>
->> --
->> Nabla Software Engineering
->> HRB 40522 Augsburg
->> Phone: +49 821 45592596
->> E-Mail: office@nabladev.com
->> Geschäftsführer : Stefano Babic
-
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+SGkNCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBIZWlrbyBTY2hvY2hl
+ciA8aHNAbmFibGFkZXYuY29tPg0KPiBTZW50OiBUaHVyc2RheSwgNyBBdWd1c3QgMjAyNSA1OjE3
+IHBtDQo+IFRvOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgTWFuaXlhbSwgRGluZXNoIDxkaW5lc2gu
+bWFuaXlhbUBhbHRlcmEuY29tPg0KPiBDYzogVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT47
+IEhlaWtvIFNjaG9jaGVyIDxoc0BkZW54LmRlPg0KPiBTdWJqZWN0OiBSZTogRndkOiBOZXcgRGVm
+ZWN0cyByZXBvcnRlZCBieSBDb3Zlcml0eSBTY2FuIGZvciBEYXMgVS1Cb290DQo+IA0KPiBbQ0FV
+VElPTjogVGhpcyBlbWFpbCBpcyBmcm9tIG91dHNpZGUgeW91ciBvcmdhbml6YXRpb24uIFVubGVz
+cyB5b3UgdHJ1c3QgdGhlDQo+IHNlbmRlciwgZG8gbm90IGNsaWNrIG9uIGxpbmtzIG9yIG9wZW4g
+YXR0YWNobWVudHMgYXMgaXQgbWF5IGJlIGEgZnJhdWR1bGVudCBlbWFpbA0KPiBhdHRlbXB0aW5n
+IHRvIHN0ZWFsIHlvdXIgaW5mb3JtYXRpb24gYW5kL29yIGNvbXByb21pc2UgeW91ciBjb21wdXRl
+ci5dDQo+IA0KPiBIZWxsbyBEaW5lc2gsDQo+IA0KPiBPbiAwNi4wOC4yNSAyMDozNSwgVG9tIFJp
+bmkgd3JvdGU6DQo+ID4gSGVyZSdzIHRoZSBsYXRlc3QgcmVwb3J0LiBMZXRzIGdldCB0aGVzZSBu
+ZXcgaXNzdWVzIGFkZHJlc3NlZCBBU0FQDQo+ID4gcGxlYXNlLCB0aGFua3MuDQo+ID4NCj4gPiAt
+LS0tLS0tLS0tIEZvcndhcmRlZCBtZXNzYWdlIC0tLS0tLS0tLQ0KPiA+IEZyb206IDxzY2FuLWFk
+bWluQGNvdmVyaXR5LmNvbT4NCj4gPiBEYXRlOiBXZWQsIEF1ZyA2LCAyMDI1IGF0IDEyOjIz4oCv
+UE0NCj4gPiBTdWJqZWN0OiBOZXcgRGVmZWN0cyByZXBvcnRlZCBieSBDb3Zlcml0eSBTY2FuIGZv
+ciBEYXMgVS1Cb290DQo+ID4gVG86IDx0b20ucmluaUBnbWFpbC5jb20+DQo+ID4NCj4gPg0KPiA+
+IEhpLA0KPiA+DQo+ID4gUGxlYXNlIGZpbmQgdGhlIGxhdGVzdCByZXBvcnQgb24gbmV3IGRlZmVj
+dChzKSBpbnRyb2R1Y2VkIHRvICpEYXMNCj4gPiBVLUJvb3QqIGZvdW5kIHdpdGggQ292ZXJpdHkg
+U2Nhbi4NCj4gPg0KPiA+ICAgICAtICpOZXcgRGVmZWN0cyBGb3VuZDoqIDgNCj4gPiAgICAgLSA0
+IGRlZmVjdChzKSwgcmVwb3J0ZWQgYnkgQ292ZXJpdHkgU2NhbiBlYXJsaWVyLCB3ZXJlIG1hcmtl
+ZCBmaXhlZCBpbg0KPiA+ICAgICB0aGUgcmVjZW50IGJ1aWxkIGFuYWx5emVkIGJ5IENvdmVyaXR5
+IFNjYW4uDQo+ID4gICAgIC0gKkRlZmVjdHMgU2hvd246KiBTaG93aW5nIDggb2YgOCBkZWZlY3Qo
+cykNCj4gPg0KPiA+IERlZmVjdCBEZXRhaWxzDQo+ID4NCj4gPiAqKiBDSUQgNTgzODEyOiAgICAg
+ICBJbnRlZ2VyIGhhbmRsaW5nIGlzc3VlcyAgKEJBRF9TSElGVCkNCj4gPiAvZHJpdmVycy9pM2Mv
+bWFzdGVyL2R3LWkzYy1tYXN0ZXIuYzogMTAwMSAgICAgICAgICAgaW4gZHdfaTNjX3Byb2JlKCkN
+Cj4gDQo+IENvdWxkIHlvdSBwbGVhc2UgbG9vayBhdCB0aGUgaXNzdWVzIG9uIGkzYyBwYXJ0cywg
+YXMgSSBnbyBvbiB2YWNhdGlvbiwgdGhhbmtzIQ0KPiANCg0KWWVzLCBJIGFtIHdvcmtpbmcgb24g
+aXQsIGdpdmUgbWUganVzdCBhIGNvdXBsZSBvZiBkYXlzIQ0KDQpUaGFua3MNCkRpbmVzaA0KDQo+
+IEBUb206IEZlZWwgZnJlZSB0byBwaWNrIHVwIGZpeGVzLCB0aGFua3MhDQo+IA0KPiBieWUsDQo+
+IEhlaWtvDQo+ID4NCj4gPg0KPiA+DQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+IF9fX19fX19fX19fX19fX19fX19f
+X19fX19fX18NCj4gPiAqKiogQ0lEIDU4MzgxMjogICAgICAgICBJbnRlZ2VyIGhhbmRsaW5nIGlz
+c3VlcyAgKEJBRF9TSElGVCkNCj4gPiAvZHJpdmVycy9pM2MvbWFzdGVyL2R3LWkzYy1tYXN0ZXIu
+YzogMTAwMSAgICAgICAgICAgICBpbiBkd19pM2NfcHJvYmUoKQ0KPiA+IDk5NSAgICAgICAgICAg
+cmV0ID0gcmVhZGwobWFzdGVyLT5yZWdzICsgREFUQV9CVUZGRVJfU1RBVFVTX0xFVkVMKTsNCj4g
+PiA5OTYgICAgICAgICAgIG1hc3Rlci0+Y2Fwcy5kYXRhZmlmb2RlcHRoID0gREFUQV9CVUZGRVJf
+U1RBVFVTX0xFVkVMX1RYKHJldCk7DQo+ID4gOTk3DQo+ID4gOTk4ICAgICAgICAgICByZXQgPSBy
+ZWFkbChtYXN0ZXItPnJlZ3MgKyBERVZJQ0VfQUREUl9UQUJMRV9QT0lOVEVSKTsNCj4gPiA5OTkg
+ICAgICAgICAgIG1hc3Rlci0+ZGF0c3RhcnRhZGRyID0gcmV0Ow0KPiA+IDEwMDAgICAgICAgICAg
+bWFzdGVyLT5tYXhkZXZzID0gcmV0ID4+IDE2Ow0KPiA+Pj4+ICAgICAgQ0lEIDU4MzgxMjogICAg
+ICAgICBJbnRlZ2VyIGhhbmRsaW5nIGlzc3VlcyAgKEJBRF9TSElGVCkNCj4gPj4+PiAgICAgIElu
+IGV4cHJlc3Npb24gIjB4ZmZmZmZmZmZmZmZmZmZmZlVMID4+IDYzIC0gKG1hc3Rlci0+bWF4ZGV2
+cyAtIDEpIiwgcmlnaHQNCj4gc2hpZnRpbmcgYnkgbW9yZSB0aGFuIDYzIGJpdHMgaGFzIHVuZGVm
+aW5lZCBiZWhhdmlvci4gIFRoZSBzaGlmdCBhbW91bnQsICI2MyAtDQo+IChtYXN0ZXItPm1heGRl
+dnMgLSAxKSIsIGlzIDY0Lg0KPiA+IDEwMDEgICAgICAgICAgbWFzdGVyLT5mcmVlX3BvcyA9IEdF
+Tk1BU0sobWFzdGVyLT5tYXhkZXZzIC0gMSwgMCk7DQo+ID4gMTAwMg0KPiA+IDEwMDMgICAgICAg
+ICAgcmV0ID0gaTNjX21hc3Rlcl9yZWdpc3RlcigmbWFzdGVyLT5iYXNlLCBkZXYsDQo+ID4gMTAw
+NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZkd19taXBpX2kzY19vcHMsIGZh
+bHNlKTsNCj4gPiAxMDA1ICAgICAgICAgIGlmIChyZXQpDQo+ID4gMTAwNiAgICAgICAgICAgICAg
+ICAgIGdvdG8gZXJyX2Fzc2VydF9yc3Q7DQo+ID4NCj4gPiAqKiBDSUQgNTgzODExOiAgICAgICAg
+IChSRVNPVVJDRV9MRUFLKQ0KPiA+IC9kcml2ZXJzL2kzYy9tYXN0ZXIuYzogMTYxMCAgICAgICAg
+ICAgaW4gb2ZfaTNjX21hc3Rlcl9hZGRfaTNjX2JvYXJkaW5mbygpDQo+ID4gL2RyaXZlcnMvaTNj
+L21hc3Rlci5jOiAxNTg2ICAgICAgICAgICBpbiBvZl9pM2NfbWFzdGVyX2FkZF9pM2NfYm9hcmRp
+bmZvKCkNCj4gPiAvZHJpdmVycy9pM2MvbWFzdGVyLmM6IDE1OTEgICAgICAgICAgIGluIG9mX2kz
+Y19tYXN0ZXJfYWRkX2kzY19ib2FyZGluZm8oKQ0KPiA+IC9kcml2ZXJzL2kzYy9tYXN0ZXIuYzog
+MTU5OCAgICAgICAgICAgaW4gb2ZfaTNjX21hc3Rlcl9hZGRfaTNjX2JvYXJkaW5mbygpDQo+ID4g
+L2RyaXZlcnMvaTNjL21hc3Rlci5jOiAxNjAzICAgICAgICAgICBpbiBvZl9pM2NfbWFzdGVyX2Fk
+ZF9pM2NfYm9hcmRpbmZvKCkNCj4gPg0KPiA+DQo+ID4NCj4gX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXw0KPiA+ICoqKiBDSUQgNTgzODExOiAgICAgICAgICAgKFJFU09V
+UkNFX0xFQUspDQo+ID4gL2RyaXZlcnMvaTNjL21hc3Rlci5jOiAxNjEwICAgICAgICAgICAgIGlu
+IG9mX2kzY19tYXN0ZXJfYWRkX2kzY19ib2FyZGluZm8oKQ0KPiA+IDE2MDQgICAgICAgICAgfQ0K
+PiA+IDE2MDUNCj4gPiAxNjA2ICAgICAgICAgIGJvYXJkaW5mby0+cGlkID0gKCh1NjQpcmVnWzFd
+IDw8IDMyKSB8IHJlZ1syXTsNCj4gPiAxNjA3DQo+ID4gMTYwOCAgICAgICAgICBpZiAoKGJvYXJk
+aW5mby0+cGlkICYgR0VOTUFTS19VTEwoNjMsIDQ4KSkgfHwNCj4gPiAxNjA5ICAgICAgICAgICAg
+ICBJM0NfUElEX1JORF9MT1dFUl8zMkJJVFMoYm9hcmRpbmZvLT5waWQpKQ0KPiA+Pj4+ICAgICAg
+Q0lEIDU4MzgxMTogICAgICAgICAgIChSRVNPVVJDRV9MRUFLKQ0KPiA+Pj4+ICAgICAgVmFyaWFi
+bGUgImJvYXJkaW5mbyIgZ29pbmcgb3V0IG9mIHNjb3BlIGxlYWtzIHRoZSBzdG9yYWdlIGl0IHBv
+aW50cyB0by4NCj4gPiAxNjEwICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4g
+MTYxMQ0KPiA+IDE2MTIgICAgICAgICAgYm9hcmRpbmZvLT5pbml0X2R5bl9hZGRyID0gaW5pdF9k
+eW5fYWRkcjsNCj4gPiAxNjEzICAgICAgICAgIGJvYXJkaW5mby0+b2Zfbm9kZSA9IG5vZGU7DQo+
+ID4gMTYxNCAgICAgICAgICBsaXN0X2FkZF90YWlsKCZib2FyZGluZm8tPm5vZGUsICZtYXN0ZXIt
+PmJvYXJkaW5mby5pM2MpOw0KPiA+IDE2MTUNCj4gPiAvZHJpdmVycy9pM2MvbWFzdGVyLmM6IDE1
+ODYgICAgICAgICAgICAgaW4gb2ZfaTNjX21hc3Rlcl9hZGRfaTNjX2JvYXJkaW5mbygpDQo+ID4g
+MTU4MCAgICAgICAgICBib2FyZGluZm8gPSBkZXZtX2t6YWxsb2MoZGV2LCBzaXplb2YoKmJvYXJk
+aW5mbyksIEdGUF9LRVJORUwpOw0KPiA+IDE1ODEgICAgICAgICAgaWYgKCFib2FyZGluZm8pDQo+
+ID4gMTU4MiAgICAgICAgICAgICAgICAgIHJldHVybiAtRU5PTUVNOw0KPiA+IDE1ODMNCj4gPiAx
+NTg0ICAgICAgICAgIGlmIChyZWdbMF0pIHsNCj4gPiAxNTg1ICAgICAgICAgICAgICAgICAgaWYg
+KHJlZ1swXSA+IEkzQ19NQVhfQUREUikNCj4gPj4+PiAgICAgIENJRCA1ODM4MTE6ICAgICAgICAg
+ICAoUkVTT1VSQ0VfTEVBSykNCj4gPj4+PiAgICAgIFZhcmlhYmxlICJib2FyZGluZm8iIGdvaW5n
+IG91dCBvZiBzY29wZSBsZWFrcyB0aGUgc3RvcmFnZSBpdCBwb2ludHMgdG8uDQo+ID4gMTU4NiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gMTU4Nw0KPiA+IDE1
+ODggICAgICAgICAgICAgICAgICBhZGRyc3RhdHVzID0gaTNjX2J1c19nZXRfYWRkcl9zbG90X3N0
+YXR1cygmbWFzdGVyLT5idXMsDQo+ID4gMTU4OSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZ1swXSk7DQo+ID4gMTU5MCAgICAgICAg
+ICAgICAgICAgIGlmIChhZGRyc3RhdHVzICE9IEkzQ19BRERSX1NMT1RfRlJFRSkNCj4gPiAxNTkx
+ICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsNCj4gPiAvZHJpdmVycy9p
+M2MvbWFzdGVyLmM6IDE1OTEgICAgICAgICAgICAgaW4gb2ZfaTNjX21hc3Rlcl9hZGRfaTNjX2Jv
+YXJkaW5mbygpDQo+ID4gMTU4NSAgICAgICAgICAgICAgICAgIGlmIChyZWdbMF0gPiBJM0NfTUFY
+X0FERFIpDQo+ID4gMTU4NiAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7
+DQo+ID4gMTU4Nw0KPiA+IDE1ODggICAgICAgICAgICAgICAgICBhZGRyc3RhdHVzID0gaTNjX2J1
+c19nZXRfYWRkcl9zbG90X3N0YXR1cygmbWFzdGVyLT5idXMsDQo+ID4gMTU4OSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZ1swXSk7
+DQo+ID4gMTU5MCAgICAgICAgICAgICAgICAgIGlmIChhZGRyc3RhdHVzICE9IEkzQ19BRERSX1NM
+T1RfRlJFRSkNCj4gPj4+PiAgICAgIENJRCA1ODM4MTE6ICAgICAgICAgICAoUkVTT1VSQ0VfTEVB
+SykNCj4gPj4+PiAgICAgIFZhcmlhYmxlICJib2FyZGluZm8iIGdvaW5nIG91dCBvZiBzY29wZSBs
+ZWFrcyB0aGUgc3RvcmFnZSBpdCBwb2ludHMgdG8uDQo+ID4gMTU5MSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gMTU5MiAgICAgICAgICB9DQo+ID4gMTU5Mw0K
+PiA+IDE1OTQgICAgICAgICAgYm9hcmRpbmZvLT5zdGF0aWNfYWRkciA9IHJlZ1swXTsNCj4gPiAx
+NTk1DQo+ID4gMTU5NiAgICAgICAgICBpZiAoIWRldl9yZWFkX3UzMihkZXYsICJhc3NpZ25lZC1h
+ZGRyZXNzIiwgJmluaXRfZHluX2FkZHIpKSB7DQo+ID4gL2RyaXZlcnMvaTNjL21hc3Rlci5jOiAx
+NTk4ICAgICAgICAgICAgIGluIG9mX2kzY19tYXN0ZXJfYWRkX2kzY19ib2FyZGluZm8oKQ0KPiA+
+IDE1OTIgICAgICAgICAgfQ0KPiA+IDE1OTMNCj4gPiAxNTk0ICAgICAgICAgIGJvYXJkaW5mby0+
+c3RhdGljX2FkZHIgPSByZWdbMF07DQo+ID4gMTU5NQ0KPiA+IDE1OTYgICAgICAgICAgaWYgKCFk
+ZXZfcmVhZF91MzIoZGV2LCAiYXNzaWduZWQtYWRkcmVzcyIsICZpbml0X2R5bl9hZGRyKSkgew0K
+PiA+IDE1OTcgICAgICAgICAgICAgICAgICBpZiAoaW5pdF9keW5fYWRkciA+IEkzQ19NQVhfQURE
+UikNCj4gPj4+PiAgICAgIENJRCA1ODM4MTE6ICAgICAgICAgICAoUkVTT1VSQ0VfTEVBSykNCj4g
+Pj4+PiAgICAgIFZhcmlhYmxlICJib2FyZGluZm8iIGdvaW5nIG91dCBvZiBzY29wZSBsZWFrcyB0
+aGUgc3RvcmFnZSBpdCBwb2ludHMgdG8uDQo+ID4gMTU5OCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gMTU5OQ0KPiA+IDE2MDAgICAgICAgICAgICAgICAgICBh
+ZGRyc3RhdHVzID0gaTNjX2J1c19nZXRfYWRkcl9zbG90X3N0YXR1cygmbWFzdGVyLT5idXMsDQo+
+ID4gMTYwMSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGluaXRfZHluX2FkZHIpOw0KPiA+IDE2MDIgICAgICAgICAgICAgICAgICBpZiAo
+YWRkcnN0YXR1cyAhPSBJM0NfQUREUl9TTE9UX0ZSRUUpDQo+ID4gMTYwMyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gL2RyaXZlcnMvaTNjL21hc3Rlci5jOiAx
+NjAzICAgICAgICAgICAgIGluIG9mX2kzY19tYXN0ZXJfYWRkX2kzY19ib2FyZGluZm8oKQ0KPiA+
+IDE1OTcgICAgICAgICAgICAgICAgICBpZiAoaW5pdF9keW5fYWRkciA+IEkzQ19NQVhfQUREUikN
+Cj4gPiAxNTk4ICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsNCj4gPiAx
+NTk5DQo+ID4gMTYwMCAgICAgICAgICAgICAgICAgIGFkZHJzdGF0dXMgPSBpM2NfYnVzX2dldF9h
+ZGRyX3Nsb3Rfc3RhdHVzKCZtYXN0ZXItPmJ1cywNCj4gPiAxNjAxICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaW5pdF9keW5fYWRkcik7
+DQo+ID4gMTYwMiAgICAgICAgICAgICAgICAgIGlmIChhZGRyc3RhdHVzICE9IEkzQ19BRERSX1NM
+T1RfRlJFRSkNCj4gPj4+PiAgICAgIENJRCA1ODM4MTE6ICAgICAgICAgICAoUkVTT1VSQ0VfTEVB
+SykNCj4gPj4+PiAgICAgIFZhcmlhYmxlICJib2FyZGluZm8iIGdvaW5nIG91dCBvZiBzY29wZSBs
+ZWFrcyB0aGUgc3RvcmFnZSBpdCBwb2ludHMgdG8uDQo+ID4gMTYwMyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gMTYwNCAgICAgICAgICB9DQo+ID4gMTYwNQ0K
+PiA+IDE2MDYgICAgICAgICAgYm9hcmRpbmZvLT5waWQgPSAoKHU2NClyZWdbMV0gPDwgMzIpIHwg
+cmVnWzJdOw0KPiA+IDE2MDcNCj4gPiAxNjA4ICAgICAgICAgIGlmICgoYm9hcmRpbmZvLT5waWQg
+JiBHRU5NQVNLX1VMTCg2MywgNDgpKSB8fA0KPiA+DQo+ID4gKiogQ0lEIDI5ODM4ODogICAgICAg
+SW50ZWdlciBoYW5kbGluZyBpc3N1ZXMgIChTSUdOX0VYVEVOU0lPTikNCj4gPiAvZHJpdmVycy9p
+M2MvbWFzdGVyL2R3LWkzYy1tYXN0ZXIuYzogNTc5ICAgICAgICAgICBpbiBkd19pM2NfY2NjX2dl
+dCgpDQo+ID4NCj4gPg0KPiA+DQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+IF9fX19fX19fX19fX19fX19fX19fX19f
+X19fX18NCj4gPiAqKiogQ0lEIDI5ODM4ODogICAgICAgICBJbnRlZ2VyIGhhbmRsaW5nIGlzc3Vl
+cyAgKFNJR05fRVhURU5TSU9OKQ0KPiA+IC9kcml2ZXJzL2kzYy9tYXN0ZXIvZHctaTNjLW1hc3Rl
+ci5jOiA1NzkgICAgICAgICAgICAgaW4gZHdfaTNjX2NjY19nZXQoKQ0KPiA+IDU3MyAgICAgICAg
+ICAgICAgICAgICByZXR1cm4gLUVOT01FTTsNCj4gPiA1NzQNCj4gPiA1NzUgICAgICAgICAgIGNt
+ZCA9IHhmZXItPmNtZHM7DQo+ID4gNTc2ICAgICAgICAgICBjbWQtPnJ4X2J1ZiA9IGNjYy0+ZGVz
+dHNbMF0ucGF5bG9hZC5kYXRhOw0KPiA+IDU3NyAgICAgICAgICAgY21kLT5yeF9sZW4gPSBjY2Mt
+PmRlc3RzWzBdLnBheWxvYWQubGVuOw0KPiA+IDU3OA0KPiA+Pj4+ICAgICAgQ0lEIDI5ODM4ODog
+ICAgICAgICBJbnRlZ2VyIGhhbmRsaW5nIGlzc3VlcyAgKFNJR05fRVhURU5TSU9OKQ0KPiA+Pj4+
+ICAgICAgU3VzcGljaW91cyBpbXBsaWNpdCBzaWduIGV4dGVuc2lvbjogImNjYy0+ZGVzdHNbMF0u
+cGF5bG9hZC5sZW4iIHdpdGggdHlwZQ0KPiAidTE2IiAoMTYgYml0cywgdW5zaWduZWQpIGlzIHBy
+b21vdGVkIGluICJjY2MtPmRlc3RzWzBdLnBheWxvYWQubGVuIDw8IDE2IiB0byB0eXBlDQo+ICJp
+bnQiICgzMiBiaXRzLCBzaWduZWQpLCB0aGVuIHNpZ24tZXh0ZW5kZWQgdG8gdHlwZSAidW5zaWdu
+ZWQgbG9uZyIgKDY0IGJpdHMsDQo+IHVuc2lnbmVkKS4gIElmICJjY2MtPmRlc3RzWzBdLnBheWxv
+YWQubGVuIDw8IDE2IiBpcyBncmVhdGVyIHRoYW4gMHg3RkZGRkZGRiwgdGhlDQo+IHVwcGVyIGJp
+dHMgb2YgdGhlIHJlc3VsdCB3aWxsIGFsbCBiZSAxLg0KPiA+IDU3OSAgICAgICAgICAgY21kLT5j
+bWRfaGkgPSBDT01NQU5EX1BPUlRfQVJHX0RBVEFfTEVOKGNjYy0NCj4gPmRlc3RzWzBdLnBheWxv
+YWQubGVuKSB8DQo+ID4gNTgwICAgICAgICAgICAgICAgICAgICAgICAgIENPTU1BTkRfUE9SVF9U
+UkFOU0ZFUl9BUkc7DQo+ID4gNTgxDQo+ID4gNTgyICAgICAgICAgICBjbWQtPmNtZF9sbyA9IENP
+TU1BTkRfUE9SVF9SRUFEX1RSQU5TRkVSIHwNCj4gPiA1ODMgICAgICAgICAgICAgICAgICAgICAg
+ICAgQ09NTUFORF9QT1JUX0NQIHwNCj4gPiA1ODQgICAgICAgICAgICAgICAgICAgICAgICAgQ09N
+TUFORF9QT1JUX0RFVl9JTkRFWChwb3MpIHwNCj4gPg0KPiA+ICoqIENJRCAyOTgwMzc6ICAgICAg
+IEludGVnZXIgaGFuZGxpbmcgaXNzdWVzICAoU0lHTl9FWFRFTlNJT04pDQo+ID4gL2RyaXZlcnMv
+aTNjL21hc3Rlci9kdy1pM2MtbWFzdGVyLmM6IDM3NSAgICAgICAgICAgaW4gZHdfaTNjX2Nsa19j
+ZmcoKQ0KPiA+DQo+ID4NCj4gPg0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fDQo+ID4gKioqIENJRCAyOTgwMzc6ICAgICAgICAgSW50ZWdlciBoYW5kbGluZyBpc3N1
+ZXMgIChTSUdOX0VYVEVOU0lPTikNCj4gPiAvZHJpdmVycy9pM2MvbWFzdGVyL2R3LWkzYy1tYXN0
+ZXIuYzogMzc1ICAgICAgICAgICAgIGluIGR3X2kzY19jbGtfY2ZnKCkNCj4gPiAzNjkgICAgICAg
+ICAgIHNjbF90aW1pbmcgPSBTQ0xfRVhUX0xDTlRfMShsY250KTsNCj4gPiAzNzAgICAgICAgICAg
+IGxjbnQgPSBESVZfUk9VTkRfVVAoY29yZV9yYXRlLCBJM0NfQlVTX1NEUjJfU0NMX1JBVEUpIC0g
+aGNudDsNCj4gPiAzNzEgICAgICAgICAgIHNjbF90aW1pbmcgfD0gU0NMX0VYVF9MQ05UXzIobGNu
+dCk7DQo+ID4gMzcyICAgICAgICAgICBsY250ID0gRElWX1JPVU5EX1VQKGNvcmVfcmF0ZSwgSTND
+X0JVU19TRFIzX1NDTF9SQVRFKSAtIGhjbnQ7DQo+ID4gMzczICAgICAgICAgICBzY2xfdGltaW5n
+IHw9IFNDTF9FWFRfTENOVF8zKGxjbnQpOw0KPiA+IDM3NCAgICAgICAgICAgbGNudCA9IERJVl9S
+T1VORF9VUChjb3JlX3JhdGUsIEkzQ19CVVNfU0RSNF9TQ0xfUkFURSkgLSBoY250Ow0KPiA+Pj4+
+ICAgICAgQ0lEIDI5ODAzNzogICAgICAgICBJbnRlZ2VyIGhhbmRsaW5nIGlzc3VlcyAgKFNJR05f
+RVhURU5TSU9OKQ0KPiA+Pj4+ICAgICAgU3VzcGljaW91cyBpbXBsaWNpdCBzaWduIGV4dGVuc2lv
+bjogImxjbnQiIHdpdGggdHlwZSAidTgiICg4IGJpdHMsIHVuc2lnbmVkKQ0KPiBpcyBwcm9tb3Rl
+ZCBpbiAibGNudCA8PCAyNCIgdG8gdHlwZSAiaW50IiAoMzIgYml0cywgc2lnbmVkKSwgdGhlbiBz
+aWduLWV4dGVuZGVkIHRvDQo+IHR5cGUgInVuc2lnbmVkIGxvbmciICg2NCBiaXRzLCB1bnNpZ25l
+ZCkuICBJZiAibGNudCA8PCAyNCIgaXMgZ3JlYXRlciB0aGFuDQo+IDB4N0ZGRkZGRkYsIHRoZSB1
+cHBlciBiaXRzIG9mIHRoZSByZXN1bHQgd2lsbCBhbGwgYmUgMS4NCj4gPiAzNzUgICAgICAgICAg
+IHNjbF90aW1pbmcgfD0gU0NMX0VYVF9MQ05UXzQobGNudCk7DQo+ID4gMzc2ICAgICAgICAgICB3
+cml0ZWwoc2NsX3RpbWluZywgbWFzdGVyLT5yZWdzICsgU0NMX0VYVF9MQ05UX1RJTUlORyk7DQo+
+ID4gMzc3DQo+ID4gMzc4ICAgICAgICAgICByZXR1cm4gMDsNCj4gPiAzNzkgICAgIH0NCj4gPiAz
+ODANCj4gPg0KPiA+ICoqIENJRCAyOTYwNTM6ICAgICAgIEludGVnZXIgaGFuZGxpbmcgaXNzdWVz
+ICAoU0lHTl9FWFRFTlNJT04pDQo+ID4gL2RyaXZlcnMvaTNjL21hc3Rlci9kdy1pM2MtbWFzdGVy
+LmM6IDUzNSAgICAgICAgICAgaW4gZHdfaTNjX2NjY19zZXQoKQ0KPiA+DQo+ID4NCj4gPg0KPiBf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXw0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+ID4gKioqIENJRCAyOTYw
+NTM6ICAgICAgICAgSW50ZWdlciBoYW5kbGluZyBpc3N1ZXMgIChTSUdOX0VYVEVOU0lPTikNCj4g
+PiAvZHJpdmVycy9pM2MvbWFzdGVyL2R3LWkzYy1tYXN0ZXIuYzogNTM1ICAgICAgICAgICAgIGlu
+IGR3X2kzY19jY2Nfc2V0KCkNCj4gPiA1MjkgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9N
+RU07DQo+ID4gNTMwDQo+ID4gNTMxICAgICAgICAgICBjbWQgPSB4ZmVyLT5jbWRzOw0KPiA+IDUz
+MiAgICAgICAgICAgY21kLT50eF9idWYgPSBjY2MtPmRlc3RzWzBdLnBheWxvYWQuZGF0YTsNCj4g
+PiA1MzMgICAgICAgICAgIGNtZC0+dHhfbGVuID0gY2NjLT5kZXN0c1swXS5wYXlsb2FkLmxlbjsN
+Cj4gPiA1MzQNCj4gPj4+PiAgICAgIENJRCAyOTYwNTM6ICAgICAgICAgSW50ZWdlciBoYW5kbGlu
+ZyBpc3N1ZXMgIChTSUdOX0VYVEVOU0lPTikNCj4gPj4+PiAgICAgIFN1c3BpY2lvdXMgaW1wbGlj
+aXQgc2lnbiBleHRlbnNpb246ICJjY2MtPmRlc3RzWzBdLnBheWxvYWQubGVuIiB3aXRoIHR5cGUN
+Cj4gInUxNiIgKDE2IGJpdHMsIHVuc2lnbmVkKSBpcyBwcm9tb3RlZCBpbiAiY2NjLT5kZXN0c1sw
+XS5wYXlsb2FkLmxlbiA8PCAxNiIgdG8gdHlwZQ0KPiAiaW50IiAoMzIgYml0cywgc2lnbmVkKSwg
+dGhlbiBzaWduLWV4dGVuZGVkIHRvIHR5cGUgInVuc2lnbmVkIGxvbmciICg2NCBiaXRzLA0KPiB1
+bnNpZ25lZCkuICBJZiAiY2NjLT5kZXN0c1swXS5wYXlsb2FkLmxlbiA8PCAxNiIgaXMgZ3JlYXRl
+ciB0aGFuIDB4N0ZGRkZGRkYsIHRoZQ0KPiB1cHBlciBiaXRzIG9mIHRoZSByZXN1bHQgd2lsbCBh
+bGwgYmUgMS4NCj4gPiA1MzUgICAgICAgICAgIGNtZC0+Y21kX2hpID0gQ09NTUFORF9QT1JUX0FS
+R19EQVRBX0xFTihjY2MtDQo+ID5kZXN0c1swXS5wYXlsb2FkLmxlbikgfA0KPiA+IDUzNiAgICAg
+ICAgICAgICAgICAgICAgICAgICBDT01NQU5EX1BPUlRfVFJBTlNGRVJfQVJHOw0KPiA+IDUzNw0K
+PiA+IDUzOCAgICAgICAgICAgY21kLT5jbWRfbG8gPSBDT01NQU5EX1BPUlRfQ1AgfA0KPiA+IDUz
+OSAgICAgICAgICAgICAgICAgICAgICAgICBDT01NQU5EX1BPUlRfREVWX0lOREVYKHBvcykgfA0K
+PiA+IDU0MCAgICAgICAgICAgICAgICAgICAgICAgICBDT01NQU5EX1BPUlRfQ01EKGNjYy0+aWQp
+IHwNCj4gPg0KPiA+ICoqIENJRCAyOTU5NzY6ICAgICAgICAgKFNJR05fRVhURU5TSU9OKQ0KPiA+
+IC9kcml2ZXJzL2kzYy9tYXN0ZXIvZHctaTNjLW1hc3Rlci5jOiAzOTUgICAgICAgICAgIGluIGR3
+X2kyY19jbGtfY2ZnKCkNCj4gPiAvZHJpdmVycy9pM2MvbWFzdGVyL2R3LWkzYy1tYXN0ZXIuYzog
+NDAxICAgICAgICAgICBpbiBkd19pMmNfY2xrX2NmZygpDQo+ID4NCj4gPg0KPiA+DQo+IF9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiAqKiogQ0lEIDI5NTk3Njog
+ICAgICAgICAgIChTSUdOX0VYVEVOU0lPTikNCj4gPiAvZHJpdmVycy9pM2MvbWFzdGVyL2R3LWkz
+Yy1tYXN0ZXIuYzogMzk1ICAgICAgICAgICAgIGluIGR3X2kyY19jbGtfY2ZnKCkNCj4gPiAzODkg
+ICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gMzkwDQo+ID4gMzkxICAgICAg
+ICAgICBjb3JlX3BlcmlvZCA9IERJVl9ST1VORF9VUCgxMDAwMDAwMDAwLCBjb3JlX3JhdGUpOw0K
+PiA+IDM5Mg0KPiA+IDM5MyAgICAgICAgICAgbGNudCA9IERJVl9ST1VORF9VUChJM0NfQlVTX0ky
+Q19GTVBfVExPV19NSU5fTlMsDQo+IGNvcmVfcGVyaW9kKTsNCj4gPiAzOTQgICAgICAgICAgIGhj
+bnQgPSBESVZfUk9VTkRfVVAoY29yZV9yYXRlLA0KPiBJM0NfQlVTX0kyQ19GTV9QTFVTX1NDTF9S
+QVRFKSAtIGxjbnQ7DQo+ID4+Pj4gICAgICBDSUQgMjk1OTc2OiAgICAgICAgICAgKFNJR05fRVhU
+RU5TSU9OKQ0KPiA+Pj4+ICAgICAgU3VzcGljaW91cyBpbXBsaWNpdCBzaWduIGV4dGVuc2lvbjog
+ImhjbnQiIHdpdGggdHlwZSAidTE2IiAoMTYgYml0cywNCj4gdW5zaWduZWQpIGlzIHByb21vdGVk
+IGluICJoY250IDw8IDE2IiB0byB0eXBlICJpbnQiICgzMiBiaXRzLCBzaWduZWQpLCB0aGVuIHNp
+Z24tDQo+IGV4dGVuZGVkIHRvIHR5cGUgInVuc2lnbmVkIGxvbmciICg2NCBiaXRzLCB1bnNpZ25l
+ZCkuICBJZiAiaGNudCA8PCAxNiIgaXMgZ3JlYXRlcg0KPiB0aGFuIDB4N0ZGRkZGRkYsIHRoZSB1
+cHBlciBiaXRzIG9mIHRoZSByZXN1bHQgd2lsbCBhbGwgYmUgMS4NCj4gPiAzOTUgICAgICAgICAg
+IHNjbF90aW1pbmcgPSBTQ0xfSTJDX0ZNUF9USU1JTkdfSENOVChoY250KSB8DQo+ID4gMzk2ICAg
+ICAgICAgICAgICAgICAgICAgICAgU0NMX0kyQ19GTVBfVElNSU5HX0xDTlQobGNudCk7DQo+ID4g
+Mzk3ICAgICAgICAgICB3cml0ZWwoc2NsX3RpbWluZywgbWFzdGVyLT5yZWdzICsgU0NMX0kyQ19G
+TVBfVElNSU5HKTsNCj4gPiAzOTgNCj4gPiAzOTkgICAgICAgICAgIGxjbnQgPSBESVZfUk9VTkRf
+VVAoSTNDX0JVU19JMkNfRk1fVExPV19NSU5fTlMsDQo+IGNvcmVfcGVyaW9kKTsNCj4gPiA0MDAg
+ICAgICAgICAgIGhjbnQgPSBESVZfUk9VTkRfVVAoY29yZV9yYXRlLCBJM0NfQlVTX0kyQ19GTV9T
+Q0xfUkFURSkgLQ0KPiBsY250Ow0KPiA+IC9kcml2ZXJzL2kzYy9tYXN0ZXIvZHctaTNjLW1hc3Rl
+ci5jOiA0MDEgICAgICAgICAgICAgaW4gZHdfaTJjX2Nsa19jZmcoKQ0KPiA+IDM5NSAgICAgICAg
+ICAgc2NsX3RpbWluZyA9IFNDTF9JMkNfRk1QX1RJTUlOR19IQ05UKGhjbnQpIHwNCj4gPiAzOTYg
+ICAgICAgICAgICAgICAgICAgICAgICBTQ0xfSTJDX0ZNUF9USU1JTkdfTENOVChsY250KTsNCj4g
+PiAzOTcgICAgICAgICAgIHdyaXRlbChzY2xfdGltaW5nLCBtYXN0ZXItPnJlZ3MgKyBTQ0xfSTJD
+X0ZNUF9USU1JTkcpOw0KPiA+IDM5OA0KPiA+IDM5OSAgICAgICAgICAgbGNudCA9IERJVl9ST1VO
+RF9VUChJM0NfQlVTX0kyQ19GTV9UTE9XX01JTl9OUywNCj4gY29yZV9wZXJpb2QpOw0KPiA+IDQw
+MCAgICAgICAgICAgaGNudCA9IERJVl9ST1VORF9VUChjb3JlX3JhdGUsIEkzQ19CVVNfSTJDX0ZN
+X1NDTF9SQVRFKSAtDQo+IGxjbnQ7DQo+ID4+Pj4gICAgICBDSUQgMjk1OTc2OiAgICAgICAgICAg
+KFNJR05fRVhURU5TSU9OKQ0KPiA+Pj4+ICAgICAgU3VzcGljaW91cyBpbXBsaWNpdCBzaWduIGV4
+dGVuc2lvbjogImhjbnQiIHdpdGggdHlwZSAidTE2IiAoMTYgYml0cywNCj4gdW5zaWduZWQpIGlz
+IHByb21vdGVkIGluICJoY250IDw8IDE2IiB0byB0eXBlICJpbnQiICgzMiBiaXRzLCBzaWduZWQp
+LCB0aGVuIHNpZ24tDQo+IGV4dGVuZGVkIHRvIHR5cGUgInVuc2lnbmVkIGxvbmciICg2NCBiaXRz
+LCB1bnNpZ25lZCkuICBJZiAiaGNudCA8PCAxNiIgaXMgZ3JlYXRlcg0KPiB0aGFuIDB4N0ZGRkZG
+RkYsIHRoZSB1cHBlciBiaXRzIG9mIHRoZSByZXN1bHQgd2lsbCBhbGwgYmUgMS4NCj4gPiA0MDEg
+ICAgICAgICAgIHNjbF90aW1pbmcgPSBTQ0xfSTJDX0ZNX1RJTUlOR19IQ05UKGhjbnQpIHwNCj4g
+PiA0MDIgICAgICAgICAgICAgICAgICAgICAgICBTQ0xfSTJDX0ZNX1RJTUlOR19MQ05UKGxjbnQp
+Ow0KPiA+IDQwMyAgICAgICAgICAgd3JpdGVsKHNjbF90aW1pbmcsIG1hc3Rlci0+cmVncyArIFND
+TF9JMkNfRk1fVElNSU5HKTsNCj4gPiA0MDQNCj4gPiA0MDUgICAgICAgICAgIHdyaXRlbChCVVNf
+STNDX01TVF9GUkVFKGxjbnQpLCBtYXN0ZXItPnJlZ3MgKw0KPiBCVVNfRlJFRV9USU1JTkcpOw0K
+PiA+IDQwNiAgICAgICAgICAgd3JpdGVsKHJlYWRsKG1hc3Rlci0+cmVncyArIERFVklDRV9DVFJM
+KSB8DQo+IERFVl9DVFJMX0kyQ19TTEFWRV9QUkVTRU5ULA0KPiA+DQo+ID4gKiogQ0lEIDI5NDkx
+MzogICAgICAgSW50ZWdlciBoYW5kbGluZyBpc3N1ZXMgIChTSUdOX0VYVEVOU0lPTikNCj4gPiAv
+ZHJpdmVycy9pM2MvbWFzdGVyL2R3LWkzYy1tYXN0ZXIuYzogNzI0ICAgICAgICAgICBpbiBkd19p
+M2NfbWFzdGVyX3ByaXZfeGZlcnMoKQ0KPiA+DQo+ID4NCj4gPg0KPiBfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fDQo+ID4gKioqIENJRCAyOTQ5MTM6ICAgICAgICAgSW50
+ZWdlciBoYW5kbGluZyBpc3N1ZXMgIChTSUdOX0VYVEVOU0lPTikNCj4gPiAvZHJpdmVycy9pM2Mv
+bWFzdGVyL2R3LWkzYy1tYXN0ZXIuYzogNzI0ICAgICAgICAgICAgIGluDQo+ID4gZHdfaTNjX21h
+c3Rlcl9wcml2X3hmZXJzKCkNCj4gPiA3MTggICAgICAgICAgIGlmICgheGZlcikNCj4gPiA3MTkg
+ICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9NRU07DQo+ID4gNzIwDQo+ID4gNzIxICAgICAg
+ICAgICBmb3IgKGkgPSAwOyBpIDwgaTNjX254ZmVyczsgaSsrKSB7DQo+ID4gNzIyICAgICAgICAg
+ICAgICAgICAgIHN0cnVjdCBkd19pM2NfY21kICpjbWQgPSAmeGZlci0+Y21kc1tpXTsNCj4gPiA3
+MjMNCj4gPj4+PiAgICAgIENJRCAyOTQ5MTM6ICAgICAgICAgSW50ZWdlciBoYW5kbGluZyBpc3N1
+ZXMgIChTSUdOX0VYVEVOU0lPTikNCj4gPj4+PiAgICAgIFN1c3BpY2lvdXMgaW1wbGljaXQgc2ln
+biBleHRlbnNpb246ICJpM2NfeGZlcnNbaV0ubGVuIiB3aXRoIHR5cGUgInUxNiIgKDE2DQo+IGJp
+dHMsIHVuc2lnbmVkKSBpcyBwcm9tb3RlZCBpbiAiaTNjX3hmZXJzW2ldLmxlbiA8PCAxNiIgdG8g
+dHlwZSAiaW50IiAoMzIgYml0cywNCj4gc2lnbmVkKSwgdGhlbiBzaWduLWV4dGVuZGVkIHRvIHR5
+cGUgInVuc2lnbmVkIGxvbmciICg2NCBiaXRzLCB1bnNpZ25lZCkuICBJZg0KPiAiaTNjX3hmZXJz
+W2ldLmxlbiA8PCAxNiIgaXMgZ3JlYXRlciB0aGFuIDB4N0ZGRkZGRkYsIHRoZSB1cHBlciBiaXRz
+IG9mIHRoZSByZXN1bHQgd2lsbA0KPiBhbGwgYmUgMS4NCj4gPiA3MjQgICAgICAgICAgICAgICAg
+ICAgY21kLT5jbWRfaGkgPQ0KPiBDT01NQU5EX1BPUlRfQVJHX0RBVEFfTEVOKGkzY194ZmVyc1tp
+XS5sZW4pIHwNCj4gPiA3MjUgICAgICAgICAgICAgICAgICAgICAgICAgICBDT01NQU5EX1BPUlRf
+VFJBTlNGRVJfQVJHOw0KPiA+IDcyNg0KPiA+IDcyNyAgICAgICAgICAgICAgICAgICBpZiAoaTNj
+X3hmZXJzW2ldLnJudykgew0KPiA+IDcyOCAgICAgICAgICAgICAgICAgICAgICAgICAgIGNtZC0+
+cnhfYnVmID0gaTNjX3hmZXJzW2ldLmRhdGEuaW47DQo+ID4gNzI5ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgY21kLT5yeF9sZW4gPSBpM2NfeGZlcnNbaV0ubGVuOw0KPiA+DQo+ID4gKiogQ0lE
+IDI5NDYyNzogICAgICAgSW50ZWdlciBoYW5kbGluZyBpc3N1ZXMgIChCQURfU0hJRlQpDQo+ID4g
+L2RyaXZlcnMvaTNjL21hc3Rlci5jOiAxODEgICAgICAgICAgIGluIGkzY19idXNfZ2V0X2FkZHJf
+c2xvdF9zdGF0dXMoKQ0KPiA+DQo+ID4NCj4gPg0KPiBfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fDQo+ID4gKioqIENJRCAyOTQ2Mjc6ICAgICAgICAgSW50ZWdlciBoYW5k
+bGluZyBpc3N1ZXMgIChCQURfU0hJRlQpDQo+ID4gL2RyaXZlcnMvaTNjL21hc3Rlci5jOiAxODEg
+ICAgICAgICAgICAgaW4gaTNjX2J1c19nZXRfYWRkcl9zbG90X3N0YXR1cygpDQo+ID4gMTc1ICAg
+ICAgICAgICBpbnQgc3RhdHVzLCBiaXRwb3MgPSBhZGRyICogMjsNCj4gPiAxNzYNCj4gPiAxNzcg
+ICAgICAgICAgIGlmIChhZGRyID4gSTJDX01BWF9BRERSKQ0KPiA+IDE3OCAgICAgICAgICAgICAg
+ICAgICByZXR1cm4gSTNDX0FERFJfU0xPVF9SU1ZEOw0KPiA+IDE3OQ0KPiA+IDE4MCAgICAgICAg
+ICAgc3RhdHVzID0gYnVzLT5hZGRyc2xvdHNbYml0cG9zIC8gQklUU19QRVJfTE9OR107DQo+ID4+
+Pj4gICAgICBDSUQgMjk0NjI3OiAgICAgICAgIEludGVnZXIgaGFuZGxpbmcgaXNzdWVzICAoQkFE
+X1NISUZUKQ0KPiA+Pj4+ICAgICAgSW4gZXhwcmVzc2lvbiAic3RhdHVzID4+PSBiaXRwb3MgJSA2
+NCIsIHJpZ2h0IHNoaWZ0aW5nIGJ5IG1vcmUgdGhhbiAzMSBiaXRzDQo+IGhhcyB1bmRlZmluZWQg
+YmVoYXZpb3IuICBUaGUgc2hpZnQgYW1vdW50LCAiYml0cG9zICUgNjQiLCBpcyBhcyBtdWNoIGFz
+IDYzLg0KPiA+IDE4MSAgICAgICAgICAgc3RhdHVzID4+PSBiaXRwb3MgJSBCSVRTX1BFUl9MT05H
+Ow0KPiA+IDE4Mg0KPiA+IDE4MyAgICAgICAgICAgcmV0dXJuIHN0YXR1cyAmIEkzQ19BRERSX1NM
+T1RfU1RBVFVTX01BU0s7DQo+ID4gMTg0ICAgICB9DQo+ID4gMTg1DQo+ID4gMTg2ICAgICBzdGF0
+aWMgdm9pZCBpM2NfYnVzX3NldF9hZGRyX3Nsb3Rfc3RhdHVzKHN0cnVjdCBpM2NfYnVzICpidXMs
+IHUxNiBhZGRyLA0KPiA+DQo+ID4NCj4gPg0KPiA+IFZpZXcgRGVmZWN0cyBpbiBDb3Zlcml0eSBT
+Y2FuDQo+ID4gPGh0dHBzOi8vc2Nhbi5jb3Zlcml0eS5jb20vcHJvamVjdHMvZGFzLXUtYm9vdD90
+YWI9b3ZlcnZpZXc+DQo+ID4NCj4gPiBCZXN0IHJlZ2FyZHMsDQo+ID4NCj4gPiBUaGUgQ292ZXJp
+dHkgU2NhbiBBZG1pbiBUZWFtDQo+ID4NCj4gPiAtLS0tLSBFbmQgZm9yd2FyZGVkIG1lc3NhZ2Ug
+LS0tLS0NCj4gPg0KPiANCj4gLS0NCj4gTmFibGEgU29mdHdhcmUgRW5naW5lZXJpbmcNCj4gSFJC
+IDQwNTIyIEF1Z3NidXJnDQo+IFBob25lOiArNDkgODIxIDQ1NTkyNTk2DQo+IEUtTWFpbDogb2Zm
+aWNlQG5hYmxhZGV2LmNvbQ0KPiBHZXNjaMOkZnRzZsO8aHJlciA6IFN0ZWZhbm8gQmFiaWMNCg==
