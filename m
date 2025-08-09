@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F622C87FDA
-	for <u-boot@archiver.kernel.org>; Sat,  9 Aug 2025 01:08:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE2EC87FDA
+	for <u-boot@archiver.kernel.org>; Sat,  9 Aug 2025 01:08:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59D24847B4;
+	by phobos.denx.de (Postfix) with ESMTP id C8DEA84812;
 	Sat,  9 Aug 2025 03:07:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="wi9u84fW";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="zcRQucJq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF1708480B; Sat,  9 Aug 2025 03:07:10 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 5B9A2847B4; Sat,  9 Aug 2025 03:07:11 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EBBA847B4
- for <u-boot@lists.denx.de>; Sat,  9 Aug 2025 03:05:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 206138479F
+ for <u-boot@lists.denx.de>; Sat,  9 Aug 2025 03:07:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VQR7F5AzV/UbDzvv57z3qq4nR0ijzrFbn6Q4vhW/Guivf4d4SpYJROSQJpzD7Thel2wimQugiTrkKRIRmG6QHclAdC7PM3JOEMU6mYmzFY0TTKZvQn+RrDSQWCzsOQ6xub1869LePtdLfVL8Xs+VbqG84zYTn1Mogsibdv9mpY8qvbWfZOUD9yWm/Pi/LW7BFSpk5a0gZ/8IexcKXi5Rpu7DEH35QmNmr5ouLbJaZar6NHfcYLlYsZbc/VG00wNYZHH6S6+C7BtPamKy9u6m7mUHs+awGZScr6a5q4tUrdIJuwga3KtOODh+lk+da2vogPJCRJiOhxMcjcdgln9cZQ==
+ b=lN1QWmiiGM4iM64NHEdS2pv+8eRCcsSDXiSIOnBhQvwn5e0HC0VvZ90d6zv5lCI02/1fBKtb7MeSs2l9WGSEYXkLBCZVkrCxPdycaNI1JcQZVzsr+ol1yuWUJJUiipZsn3K3LATHgg4I4q2k6MTdi8VmecFGn1ceyn+gWJhKstKrOI09IpnJRj1kgpN/ZUkwx62nEVcTukywcf0Gfu5Pd8ez5TQhArxFOX7Ln/hsyABhaYcRnpHQ10AtTyA9vxeMhVfBhmbS3DwELAj0WG7m3Etsbjkt8XkkxT62gEfFH9y9yOcdkaNfJKpe/X9adyrpir48FTPQ4OvmhpOHqTqv6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Po69HnmKEjS5NZswVw7gQo7e//y7LAixQPo+uv9yqc8=;
- b=eS0/cHXMP4gametMo9p31yLevLJpqtnerBsjoPdrGjdHI8E8m1w0K+pf1Ki5Po/pE8zQGGVKXXk+qu7sJ1WoHT+srT5GWFcHdBd8y+G0Oq5XteZlkQqJ2N8VL3Xz9N/PJrkM/YIhuGdcsjDJLlFhYhMZTP9szJcLDSCYKBk4WsufUsTgSSoAx7VpI9erfFdsqiFwpxPdH1Xl5Jt/LrASs7Z52OGO4J+QDoPW4KCjfarNgJa3cLvMpC6HoGigVoP0/fAIsZHLCPE+HSRlrkiKigezYwIF89ZVRBinKNu9d4AHya+XvIYOU1J2mdSNfBvKVRWdg8dghHbtmTinbAtNKw==
+ bh=WaaFSTDYWglp4MaW8paqMSiKVFvo9ZOjHatHZhhPcxo=;
+ b=A7eRg62CHuCAkHuZB8HpZDixNHNsyk+FXbmhXxHd04kiARexZhu5H5vbr8FLvkDG4RpVLNJHtyqrGN6aSei4/cPRrrVsWQBB0AIyA2glJLFMbmcWJ/CdKnIUgbOB/AdTaQQZeRwJ8iBZDFwA9FrLvxhP2zmAUB1TmeTkbgGEKlxyDNw6izeX+eA5nr/DX62fcZEipGLmKJfI5An7OMFq98z9nWgivyhTEwGAlcemeETvrW+YzOkw3pOPDxYytn9UHdjLPhXPeQ0FvQfn24IsD8+imVV7rgjc2DuUNSSUVteJO9HCS/F+X3jkGxjG4AImCdG7xK4QsJ6OVnd6ViieDA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Po69HnmKEjS5NZswVw7gQo7e//y7LAixQPo+uv9yqc8=;
- b=wi9u84fW7sXB1x1tAoR1BYCMSObOWH0ZueDn/DgBMn+mjqB5Q0Cfcbwyc8WlSU1LuV7sQ4/ZTWzhy/16PgijpAtF8foASFVjSaHlLtm5mLHdWz3XeMqzCsZltD8HgJZB8xXHUiB0eBLgZ1u7MqKMt1o6a1kM3dpS5VnviI25efLWgXQl6u8TiXMf/iwTpK69cCbFhMCoIw5YPDP7KLroialuP57aXE6AbV+LvJlznifLwIBArkAIc4Ar+WosnYf8yjKC+dBSek9VajfWZyAwHPl5pqfYqXFljLnOL3mIhS0bCb6/lL+ckimrPJzGdshKs7Z7pK8MndX+9TEyyQj0dA==
+ bh=WaaFSTDYWglp4MaW8paqMSiKVFvo9ZOjHatHZhhPcxo=;
+ b=zcRQucJqAIdOr9HdDJzjcZGRHB8aR4JawfniL1BMflvVWBkDS9vJ7zKHXkRmguHZfRebzJKDGwkIhhW7foszFf73lcDhLJmAF4uIoG2bdXUxeEZUQWyLArhlvcqJOMng2bRNBw0yN/QCbqULzZ8EVewgxXQ7DbfAkcH9kKjnoUn3wHVNNm8Jse+rANqSvUy2GI1QghgjUYMGTGhXK3uIDzUQYmjtr7fVcwWkaRPraBBg7xrJT2TCNU/sPzmaPtT1dPksLLggQtJxEisjmAjfIbcLKIrbn68lUTX0kPqeg+HLbjFjz4VGaCHyyeX6mQUXvIZfzKZtd0fS7vstPPvv0w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by DU0PR08MB9582.eurprd08.prod.outlook.com (2603:10a6:10:44a::5) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.18; Sat, 9 Aug
- 2025 01:05:19 +0000
+ 2025 01:05:30 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.8989.018; Sat, 9 Aug 2025
- 01:05:19 +0000
+ 01:05:30 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -64,12 +64,10 @@ To: Tom Rini <trini@konsulko.com>,
  Chuanhong Guo <gch981213@gmail.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Alexander Dahl <ada@thorsis.com>,
  u-boot@lists.denx.de
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Daniel Golle <daniel@makrotopia.org>
-Subject: [PATCH v4 11/24] mtd: spinand: set bitflip_threshold to 75% of ECC
- strength
-Date: Sat,  9 Aug 2025 04:04:43 +0300
-Message-ID: <20250809010457.3125925-12-mikhail.kshevetskiy@iopsys.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v4 20/24] mtd: spinand: Add a ->configure_chip() hook
+Date: Sat,  9 Aug 2025 04:04:52 +0300
+Message-ID: <20250809010457.3125925-21-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250809010457.3125925-1-mikhail.kshevetskiy@iopsys.eu>
 References: <11f6f79e-0622-42e2-901e-16335ad73409@kontron.de>
@@ -82,79 +80,79 @@ X-ClientProxiedBy: HE1PR0102CA0016.eurprd01.prod.exchangelabs.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DU0PR08MB9582:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9408bdad-97b7-4ffe-af4c-08ddd6e0cee1
+X-MS-Office365-Filtering-Correlation-Id: cb813c05-1d43-4223-e408-08ddd6e0d5b7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|7416014|52116014|366016|1800799024|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1DTILDU1MFfN2LJFcUKhmlZUjblPTa7Y2hlayrn+mYsgCf0OLuQgSExQNQ6m?=
- =?us-ascii?Q?vjUUOpsi0Dx6YqkO5xt7eptZC2eLe7jCS57ZRobr5z0uLn5u/HCYbHMn7T85?=
- =?us-ascii?Q?DEltnj41wKKnavCnKsTXHmQqqhQevoBA0Q5OgAauADfH7wWd8Q6cFwMiMqpr?=
- =?us-ascii?Q?7j4stHiqXVLd0uJ7tO9XowWvjUyj6o74XbUdTR384Hy03Fsd3pdZKxW5Rhb+?=
- =?us-ascii?Q?Tu9fIEM2zwucimY3p8m9Xpb6kN9s5RsWcch7O3Lp0DNlW2gu9S5L8uaT9qSA?=
- =?us-ascii?Q?62HrcITc4aNqSipwsHTdMlIIn+bOvrEPPrgFBqnbghr4uxO3Ipvw2S7oSpY6?=
- =?us-ascii?Q?rClZYigdr5YoZMjHQZnTA115ZRJ5+XJ9nxeFTDM+WzkqdEN9n2VHIpQ9KK4G?=
- =?us-ascii?Q?vVAvgNt8DOoctFVODQwuw7gljiQpx1qqfJ06GI8hMzatr1IfEb4pbowhJp8Y?=
- =?us-ascii?Q?/RFQI+niKoxQZyaSpm/iEGAXG86tCz/2PSq5yXFzZri8tJzP8aD9Id3UhH5Q?=
- =?us-ascii?Q?7f4B7TJZDYLrUo9FI1g7CUl5k/FIFd1iBGOWYYVtkADN35GjHsGrhjg+/Z60?=
- =?us-ascii?Q?I7NN01w1yW8fKGz2qa+Xpw5YZdYfKCTABUeiIy3tcaadl1JJStH8vohnUWxc?=
- =?us-ascii?Q?OYH6Dc25YeyGrOooNRIC//wQbIhKSHu0iCrr+JkrVefvv6MNBnU6unaNMSit?=
- =?us-ascii?Q?irC2TyYpnY5pFtcje+I7R0lUHnPa3bVCVb61JhiZ1z1MhVDihG1vKcpw4pFu?=
- =?us-ascii?Q?yjzvRKLSUvUTz+hPl7IVBPk/ztr4pfclKr3Bts7W3yZSDbFT8ETK6W/A04oR?=
- =?us-ascii?Q?Bt3LlGQzLnh7VMW0h26ZL4yalPPdBp6dhYM4yVPQCJvq1eQtY7XlZ2OPcocF?=
- =?us-ascii?Q?JUdwegy2MJZmtyIqOPsdizO/r28Xr/BECz66L8LnJuV5HaSMrQy+em/kZrQB?=
- =?us-ascii?Q?IzrP4y6rj5mmGwxzjir507qMVe0rJMyLbcd9JKwdk+pllYPatohqfAzQD7bW?=
- =?us-ascii?Q?0m0/zCcHIIOcjiZUHf7cwdnv4n8PgtRttJPqGMsbN2kWLyci//WnHRdPGM39?=
- =?us-ascii?Q?q5pMB8rgWH/UfwwVfZiHv6LB7IQ2AmW7mPYFjWVJT/oEB8DMmkRhqeUKNk7U?=
- =?us-ascii?Q?DVWWjhLXN8hIHyyQy9BpfBU0bPcj9CUtRlod5Ssgk/iHbzq8rS4A9ImHTC/x?=
- =?us-ascii?Q?rU7Q7vaPi91eEFMCnai5tE3TepVxdkckq7MQr9X65IO9ONf3cNvBkbVGGXkG?=
- =?us-ascii?Q?p7OXL5BUIwdJH8cQATFZG+KWOVk3mC7sX1hYNcN2CEdvwTa5hPDVulGIRg0k?=
- =?us-ascii?Q?rJvGyx2pAhq+Zq8SalZwQMvqTEjipFtBEYy8kQtpWgYYIWcIuYQndKeRLp2W?=
- =?us-ascii?Q?8bn7jylucWAUd/n9XWaq+hBCRhkF+bVPUDalx2hVJpNImK+a3YUy1z0EDN7n?=
- =?us-ascii?Q?05olpCNlO/yaL5E7HVhBY0mDoWO1CDTEdu/kAgYq1AdY3wP9zR6u48Xri/RV?=
- =?us-ascii?Q?ejCpemOeUIg2LQg=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Y7tTqm00scEFRt4Ylga7t3foyKUPUj6vu+PqwQnj/6L4PW4a8XiURMKrwfeY?=
+ =?us-ascii?Q?Y0fkSc8904QicC3QrVer1eJO6k43eN8E9ZSEje2F8OfanC0una/E0+pLuoub?=
+ =?us-ascii?Q?/t4ZGLsMCR+cH4lpl/f90g6wjfsWYg1wYJ4u5+AkRkig8clOAkmoezZk+pOW?=
+ =?us-ascii?Q?3FDbOLbVGYySXlQ70k5+q/wLXgiXAbimhpHKxZHxCdgV11CJOCVdQWL8iK3k?=
+ =?us-ascii?Q?RyxFGuCaiFYgorC7QdHvCWemjSR0SbbGYYSbHeHcaNEhZXDUw2zFXtWprL23?=
+ =?us-ascii?Q?V7rc40GMcvpr314aDfWwKrBposStV9w9yAcnJjNaaln+Q4S5KhRMzSxuvv/M?=
+ =?us-ascii?Q?VPJ74yhmkCBwWx+gfsNkc9n0AnliIIbYyMXoGfNq37zrhApFWHFyjIXr+8WE?=
+ =?us-ascii?Q?e7EWZHBbHlzDpqwQCuDTGlb2oyE2idc1sLMAp/kvfyFaq27Adu5n+BKDhq0O?=
+ =?us-ascii?Q?mjTk6/XfwJ/4DvrPrJGd5+L4Vm3pcO5K+8uVF5D+Czs02v8z0eZWd/JwmoWB?=
+ =?us-ascii?Q?1xFqxQeeEOjJtWCWAvAOfs2IYujsKj4wV8+QCOdUhktajPRPPnq5CvEB0pXl?=
+ =?us-ascii?Q?2K5JTeUsHRGFN/P8ud05RrlXe50yyQAblMJwZJSevgWbn0hVXh2KlpbAJweK?=
+ =?us-ascii?Q?RdVE8XVKenVoEbmj2OmAtO9adMBCLj6r8nvZToC8rzXClgZt9wKzSbAJ4dY7?=
+ =?us-ascii?Q?tf2m/aaRepunCCUHwppN8QzqSPSAOIqaWlJfS0dY1H7pdxmoUdQO4frL62sD?=
+ =?us-ascii?Q?X4NMdNJZtShw0sPqzpF9MtNdLEIjlcL0s9LnA72m/k6/ifQTw37rOXM4OoxC?=
+ =?us-ascii?Q?SjwJMWqPHvBp4VJzw/4gpukvEYXrNHiKXYM/UGBw77BzVmdbmQS7KVah3qdI?=
+ =?us-ascii?Q?QJouDjw5P7tQR76KTVKA7ymFDnnV7jm6W/WozJJLoVoVHdn/5YGRrMWGdWzD?=
+ =?us-ascii?Q?jOtJhsdGQ+aKKqlkIBnRtje7mCVaOQp0SqjjaiQOXAjY7tICfbqFf0ASth1B?=
+ =?us-ascii?Q?lOhbDcYdFTSExjkH5+9PpRBAN2f9jeM599k1TnF+KUgOox3rYiXIVk7L+gJy?=
+ =?us-ascii?Q?fqAphJ5JJZBGB/jJogRcQLUZDiAG31uOKNF1Uw4c/dJszVcdLH9HkzbC8PuU?=
+ =?us-ascii?Q?z+eTDU/4BbIGRxPMjBLuOXqVsNBX03jgoVgxOjVwY+KTURheO03sLnUw6Yv+?=
+ =?us-ascii?Q?+PTLsTVUUMGmcIJt0xEPtPJYwtesfnii87v04e4hCV4NZP1k+Io3l9N+4z4N?=
+ =?us-ascii?Q?orOgNQdD/rdB3EFzjvhvhCTv5jEVuiUUjeZlEGRnLjvmh3oKrQvxN4FKezhd?=
+ =?us-ascii?Q?NmAz2q13dhOLEYDbiCTLklnBgB1TGF8cwTW3zPYhVeb1xKIHxPwmvaXHzONg?=
+ =?us-ascii?Q?EY6U6YbJIVajIpbOxekHmT+goTDYhs71b2vtri6aXQzxFU/PSCdVaEKIxgon?=
+ =?us-ascii?Q?e/Am5ImrUWNDJikOx7yZGASigySLndc7TAX+Jel+jzAn+Fvf0715Lktp8xDk?=
+ =?us-ascii?Q?M+I9e00jYaVzasM=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(7416014)(52116014)(366016)(1800799024)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?oj09ki3+DmjE4tABe6IrWdOqDS/GK5sGG0OdX8hgSAbqx8JnlptHJxLYYtYW?=
- =?us-ascii?Q?gbRwp2Z8yvoioBemVRtrFrsO9mNe6PHJBdpm5BqnU/NDGPkWxDX3NVjkr26T?=
- =?us-ascii?Q?0yMqefKOZ4M/KVAvNHuPrMHIEpkAI0eMOrRY35yVdErWYbEeTkXA8YiJ0W/j?=
- =?us-ascii?Q?1vkYjhuTrHtxbLjLCFSLX+zliBPoqKTAfKVMCdn2judivW5FVPaEAQytwfeO?=
- =?us-ascii?Q?NupCxzjDh+N4RK1GFqZk5w4Z6xXHH72cHHzjQEcRNuB565qvOQmH9Ecm7CNx?=
- =?us-ascii?Q?gVXHN56OM26EFfRGoCCFneTCsny85O1IwabzRvVrPqBwqRxAlQSLpWh7TLZ4?=
- =?us-ascii?Q?Gncz6TjrbnHiGCkwnGq3gaKzeAvdaBEU0pgSDIzAxm7Nd1zTkJP7Y5oCXwQo?=
- =?us-ascii?Q?3OurHrIdCacVJ6B+xNd+GaBC7ZzbS137Atm1nX5jLCTukIWp+k/CC2Ef4uZI?=
- =?us-ascii?Q?bx4OthXYLpSmZ9QpeNljo3LnicdLYqh3UH3OXnz3rx5Ne0z63Q/OJ6qHfJhB?=
- =?us-ascii?Q?4NA/vUAqBhifFnv78ZLCVcItdaOIlTjwIOAf05Y8b7IjQGR6rdIl1NoIRaiB?=
- =?us-ascii?Q?BxwEWJ2eH4m3RDWnV74S6u2opDSNQCUHW4hP2oFyQCQfKBacKmBdBqq9Ktbb?=
- =?us-ascii?Q?WFTWd/BSh1grTKuE6+VB1zvM9zLLNm7uJK5nLqOUvnZEK32gbPqfxDjWX44g?=
- =?us-ascii?Q?SZ01LhH4djZCumcdbV8EIjr0bx1Ev/rCtF5JJyfPLa5/kPTrZq1SIqwiAS/n?=
- =?us-ascii?Q?X7d70zcsPFoJ0kBrf6Pthn0oEZJJx1z084aJR66qljKHiev2/LQeuTcOj7LP?=
- =?us-ascii?Q?nbnPbGbBBgfvXHNq2X3YgABFaYwenifA6JgPIAgu2nyzj+IVISghEkekHesg?=
- =?us-ascii?Q?BYL6kCJUQR30j4Ck80BW8zYuWsTJh31ShX/kQk7HTfetEScJ5OxiTCy5PFDq?=
- =?us-ascii?Q?Z2jibZj75xwplx8xZM2mYAPJUPECgrx8jNXUsgdmhEjF7vt/izJYZH4vy1B+?=
- =?us-ascii?Q?c87cPSSd3BhNCrZmpe6yG7GJ7iulU6gMCl0pVqcxZkeOoqZrnWGSIsJxNXW2?=
- =?us-ascii?Q?Ct90lzliXj331zDU0U6OF7WKD74kGi+rPKoy58x/3cIRCMlhGI6q8LEahZnK?=
- =?us-ascii?Q?5yugZU17BzFA+od77F7Gb9v7DTqMTTUpp+8zgo8Vk09eg7HDF723C7QxMUmw?=
- =?us-ascii?Q?M0zqHPjCaEpu1vuwer0EHB5Nw1RVEDZwGQxUAo67Y//omZzntzpnI+Rc6rRF?=
- =?us-ascii?Q?n3Ws8yKKu2PDg6Lov9DDESEdwULwgUk5xzHJyf+fiT2u/9uoqyprgHCiPUVj?=
- =?us-ascii?Q?nsZnUPiqkAHZD/XK5dhVycbu/rg9a89CuLtPZ9FQCTUDb44FvvYJtEQIVtOg?=
- =?us-ascii?Q?gf2/JWP75GIXa49G3ZdR4LFJRtp7loxJP+vw446Xo2D8xl+CmhZbTNjyEtR6?=
- =?us-ascii?Q?IVJjiNZ+kKzyWuvqIovyWSb0LUsTzAdP910a1C56KddR3Y7whLMGnAEse3d+?=
- =?us-ascii?Q?Y86BREQ5DhyGHmpSdnpC3EUzWK+ubueFof4Ygc88xrbRz5/TOyJRmcbf4dCt?=
- =?us-ascii?Q?an450fEgj2R7Fu3JR5vUkgVBlbOrdCWcpYcLbU0X2YriLo421x8aLu80vfzH?=
- =?us-ascii?Q?Cg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?R0aAxVNyqYuJicrfW36FW8UK0NK3LAH98bShgiGV9/PLQy/zOx8mFzFYp95t?=
+ =?us-ascii?Q?b2xZYFUptx/aRC/mHNjPj38PdQfUxZOcJziRLKDu70AuGuyD5XF6k/FkqG87?=
+ =?us-ascii?Q?aQXVFTmNCu/iGA4Y5LOnYM840C+8SRjKHFg2PL90HZj0jC4l1+8PYUaBWvol?=
+ =?us-ascii?Q?MU+ONCw1NA8TnsX5lT3RhtndMSfgS0+kF+mj1EVTEPwICH6KKxgvJyUsWQ8F?=
+ =?us-ascii?Q?4QDjA8Zv7izfH0sGWUFCeBMgUFZedyxqqWzNcyX4nPLDOb0KUGbQUv5bv6tX?=
+ =?us-ascii?Q?Ecop+RBvwOyTAtWeC8EMJl4cGrYC1Jc7p1OUvooWDLLHuvg00oLtUD0/tOC8?=
+ =?us-ascii?Q?0sCvU0h/8qGSIjZpRUnRIB3gEQ/q5fD0ln0vQxq+UZw6K5ORSCi4qPEoquB8?=
+ =?us-ascii?Q?MFm+0j2zGD64vQdbJvpAFj43p2a+YAH9+NuN9HQpXRXn0rL6ZwJZMjLp+Cyr?=
+ =?us-ascii?Q?udRxZHlv7PgLbzlWb7VpN3GW8hMDHdHYb2AHGl17rDTsJ+Kl8aFiOJFLKeVr?=
+ =?us-ascii?Q?Y2aSCMKZFQYFyKgwG1IT7Y+dL/wRkWpjq/ET6D8nxVImmqr6nFEd8yakCtEk?=
+ =?us-ascii?Q?JG3OSVpuhiX1+aNguBqLXecI3qJwO64wGdPiLPIH+qnlDhgvp4xNAbl1O6DZ?=
+ =?us-ascii?Q?6fBYaRvD8eVQEhFbn692nEFyjYiGI29CEbMd9gu5xBquD0klACq0Ok4z1y8C?=
+ =?us-ascii?Q?+nI927nQjRpw+5TjyT7ToXUP5+ZIqW9bYPOqvtQ/XDJmBDJYBewPcjD/1rX3?=
+ =?us-ascii?Q?iN5AYLMxANz2SM3YUGoHy54fd976BhjlZ/QH3aKM6Y8l0PwSV2GS1Jl2XQ9X?=
+ =?us-ascii?Q?Uw/mR4B82RfyIVkSgosfKW7QvsFixdMpGU98hqqT7a67MKR8xWoy/gblTOHV?=
+ =?us-ascii?Q?ftxEHtNfJxiDHRHbcf/8SEKCihtIRzIvDLgW0c1dNM1B6MumwmqS7U5woyHL?=
+ =?us-ascii?Q?Zf+XBdAE686E20Pk/0AbjHq27NIOKP4qtzAwWzqzwEeuJMHN/dkcWzp4B99R?=
+ =?us-ascii?Q?x3PehZClwTf5MrSh/fUjnjFLpnT+nfw2yr8EZWwUoLTj6dr8w8GeVvz4UPQ0?=
+ =?us-ascii?Q?+bnwai4LL/WQ97UjWRMjzsqhbAZ0b2V+bKMMZ2aiAC+T9P+e00IQNqCJtYEs?=
+ =?us-ascii?Q?KQwEKroASguxqaeGAazpKfA93M6jS7FVO8DAtXpti5As9+Kg6M6WsU5woxyN?=
+ =?us-ascii?Q?uVqGicT8JDbrYHJds6pHKRciku4x2P/WnwiDVCLeRm2VTg/P/Zyij/irLVsa?=
+ =?us-ascii?Q?w94SuQJq3ht8Z3BclOO7JZXVDwETNd7TTt5J0YvtJTCISOkcVvl1HoJG0zT7?=
+ =?us-ascii?Q?iDw+rHCWcsbj9j4wYwK1tU5zcUUb6d98Leo9ZWwSmGrSDP2ZlmG7hTX+tKgu?=
+ =?us-ascii?Q?raWWt/yOC8vLRIYsDnnBaRtgYGi98pwd3pGr+9sZYrvcUatyCwnVsqZgWSWy?=
+ =?us-ascii?Q?Ghucwq7/CsCKChvF3pnkvyxTlPEMJCm6MItlXjtFvmT5Wtm+ZX0jprXc+690?=
+ =?us-ascii?Q?xDBaADOQyR3l0B+Q/a2m7SAVd4LWovfCjFGaM2xwnymXMwImtqSg2O85jWBl?=
+ =?us-ascii?Q?Zw6zpn0CHdmj6ObiwfaxFN2i9HT9iCtvUOmiMVg3U6SGqjW3q96AVeBUnNgO?=
+ =?us-ascii?Q?Hg=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9408bdad-97b7-4ffe-af4c-08ddd6e0cee1
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb813c05-1d43-4223-e408-08ddd6e0d5b7
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Aug 2025 01:05:19.0077 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Aug 2025 01:05:30.4454 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Jljoe8Sx4ECHA7YgQwqrun/31Klz30GfqA0S92Ojqs1vfizmKqYGK4f8nh9DFQ5EYKIm/10tqaD0TWx4bhOtuCRP/JBXvaWNZWjJutr9QcE=
+X-MS-Exchange-CrossTenant-UserPrincipalName: +KZQ9WeF3pCUwUxjqT/S5b9+NOY8YibwpUccFag1pt5Vgwd9RRC0/UWvbvdS7Is0AnzCLSgc8vnaSfQrcyZxJi4TszHE5QphAMNsWiWibYQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9582
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -172,36 +170,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Daniel Golle <daniel@makrotopia.org>
+From: Miquel Raynal <miquel.raynal@bootlin.com>
 
-Reporting an unclean read from SPI-NAND only when the maximum number
-of correctable bitflip errors has been hit seems a bit late.
-UBI LEB scrubbing, which depends on the lower MTD device reporting
-correctable bitflips, then only kicks in when it's almost too late.
+There is already a manufacturer hook, which is manufacturer specific but
+not chip specific. We no longer have access to the actual NAND identity
+at this stage so let's add a per-chip configuration hook to align the
+chip configuration (if any) with the core's setting.
 
-Set bitflip_threshold to 75% of the ECC strength, which is also the
-default for raw NAND.
-
-This is a port of linux commit 1824520e7477bedf76bd08c32261c755e6405cd9
-(mtd: spinand: set bitflip_threshold to 75% of ECC strength)
-
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/nand/spi/core.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/mtd/nand/spi/core.c | 16 ++++++++++++++--
+ include/linux/mtd/spinand.h |  7 +++++++
+ 2 files changed, 21 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index b4795927277..7ace61fd19f 100644
+index 3e21a06dd0f..25e7a38a874 100644
 --- a/drivers/mtd/nand/spi/core.c
 +++ b/drivers/mtd/nand/spi/core.c
-@@ -1279,6 +1279,7 @@ static int spinand_init(struct spinand_device *spinand)
- 	/* Propagate ECC information to mtd_info */
- 	mtd->ecc_strength = nanddev_get_ecc_conf(nand)->strength;
- 	mtd->ecc_step_size = nanddev_get_ecc_conf(nand)->step_size;
-+	mtd->bitflip_threshold = DIV_ROUND_UP(mtd->ecc_strength * 3, 4);
+@@ -1251,8 +1251,19 @@ static int spinand_id_detect(struct spinand_device *spinand)
  
- 	ret = spinand_create_dirmaps(spinand);
- 	if (ret) {
+ static int spinand_manufacturer_init(struct spinand_device *spinand)
+ {
+-	if (spinand->manufacturer->ops->init)
+-		return spinand->manufacturer->ops->init(spinand);
++	int ret;
++
++	if (spinand->manufacturer->ops->init) {
++		ret = spinand->manufacturer->ops->init(spinand);
++		if (ret)
++			return ret;
++	}
++
++	if (spinand->configure_chip) {
++		ret = spinand->configure_chip(spinand);
++		if (ret)
++			return ret;
++	}
+ 
+ 	return 0;
+ }
+@@ -1363,6 +1374,7 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 		spinand->flags = table[i].flags;
+ 		spinand->id.len = 1 + table[i].devid.len;
+ 		spinand->select_target = table[i].select_target;
++		spinand->configure_chip = table[i].configure_chip;
+ 		spinand->set_cont_read = table[i].set_cont_read;
+ 		spinand->fact_otp = &table[i].fact_otp;
+ 		spinand->user_otp = &table[i].user_otp;
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index adfb5f3ffbc..94f324741e0 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -398,6 +398,7 @@ struct spinand_user_otp {
+  * @op_variants.update_cache: variants of the update-cache operation
+  * @select_target: function used to select a target/die. Required only for
+  *		   multi-die chips
++ * @configure_chip: Align the chip configuration with the core settings
+  * @set_cont_read: enable/disable continuous cached reads
+  * @fact_otp: SPI NAND factory OTP info.
+  * @user_otp: SPI NAND user OTP info.
+@@ -421,6 +422,7 @@ struct spinand_info {
+ 	} op_variants;
+ 	int (*select_target)(struct spinand_device *spinand,
+ 			     unsigned int target);
++	int (*configure_chip)(struct spinand_device *spinand);
+ 	int (*set_cont_read)(struct spinand_device *spinand,
+ 			     bool enable);
+ 	struct spinand_fact_otp fact_otp;
+@@ -453,6 +455,9 @@ struct spinand_info {
+ #define SPINAND_SELECT_TARGET(__func)					\
+ 	.select_target = __func,
+ 
++#define SPINAND_CONFIGURE_CHIP(__configure_chip)			\
++	.configure_chip = __configure_chip
++
+ #define SPINAND_CONT_READ(__set_cont_read)				\
+ 	.set_cont_read = __set_cont_read,
+ 
+@@ -521,6 +526,7 @@ struct spinand_dirmap {
+  *		passed in spi_mem_op be DMA-able, so we can't based the bufs on
+  *		the stack
+  * @manufacturer: SPI NAND manufacturer information
++ * @configure_chip: Align the chip configuration with the core settings
+  * @cont_read_possible: Field filled by the core once the whole system
+  *		configuration is known to tell whether continuous reads are
+  *		suitable to use or not in general with this chip/configuration.
+@@ -569,6 +575,7 @@ struct spinand_device {
+ 
+ 	u8 last_wait_status;
+ 
++	int (*configure_chip)(struct spinand_device *spinand);
+ 	bool cont_read_possible;
+ 	int (*set_cont_read)(struct spinand_device *spinand,
+ 			     bool enable);
 -- 
 2.47.2
 
