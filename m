@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D948CA0EDC
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 11:05:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06048CA0EE4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 11:05:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24A868211F;
-	Wed, 20 Aug 2025 13:05:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7926282F49;
+	Wed, 20 Aug 2025 13:05:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="IcnQNH4p";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="FS1j7fds";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28E1B82B07; Wed, 20 Aug 2025 13:05:15 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id D4806801DD; Wed, 20 Aug 2025 13:05:20 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAFD0801DD
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 13:05:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B10F82F03
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 13:05:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZuigMtzgVoDW+Zkji1XBFN4DuCESP4FgnvSCY16+nggAsZXjt1Uy5lPNe/dfiqnzIPXA8+RTzuni7p/FJGAbT6ubNNGCKhBQQRSl1gFgabkxeT18NTa0kBOF92g9gmpmMzoA1nHCm27Gww/XFA5T5awmSP6UDVSK49tWFUSsGPnznBH8se2rUTWqf1vHJzy82P0yc+VKV2sT/VtkU/pH7Fl9DI2FS7VcXYuK5e5iMhLKYoySYa/Xh1cLAghaxM93TPL4JK6H2oJm+9oQR0/AHhpyyVt5+4ed7CXkQ+Uu0R+Ii/a7Byn65UVRukWsRCOSZzb5Aj1urdvF7NC8fC+NtA==
+ b=oKESSnKhoskiBLWSs+SAJ+s2WE3v221+9OZ7LjPk5oKrKV/z43lzgcc/FpotISVUl/JB3UnISXw0AnjINNUcEwPIKerIemjxW5jdf1jh7W5JIdTKaNU4bsmFtQDlkWO6ZfTrBeSBLs3mu5HCxdy9BqcB4ZwtsweBzRCo6WRfdvWVbF59M8b5kQF23LQBc9mBFGiwG1wksb60Y9TMcBXt35zXimLYCinwUqAxpCXwsTx6xCxWyWvdoojPSLlHX0bd/f8A5j53gTUUnnt8tMCLj3pidvGi170YvUmnzZzbdNQMLw/m4H0cKAjGb7kiTtd3ZyFOs96XV5MdWIflGDAeNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=reiWdL17QpKJfFGt35PrSVcwqo4khvX1fO3Rh2tCuu8=;
- b=Mab2SmlhrR2sVz8nWJcsUgOtygFLaFol6zZbW2VzP4kSmlDPE8yT6p1KtnQYhPGUnh+lifIIIo2uIyFlDVsE9KFnICCPAE5kDNdS494MC2wz4zMIovRUsb1S9yfe/0LINWQpOns+LyZt2ITAcq70Gx9HIQauYY9dYPihopiZ0EgkkXpvCf9QF2JvBMVtcLiK5f9b0HSdInMTinvCHNOSBx68Q0chu4MKNy+6b1fR/STLtKTZr1SyGdhbt+Jpdpg5LSpoK/p5uAqLre0p4BcYeztw5Xk4m4JB8+e/2QxaUTtKbHbbx8GRhqZ7Q9yO0XZ6OnDpm2lfAzQ3kf7VhKy2Dg==
+ bh=eUoleuK47lZOxhkid3DcJ9WoSshTHvRCfuiFRlHHkFI=;
+ b=kipvGqzI7PSCD7qwdIsYzzx8mkn9IlqBYg2nA32qNakS1mNrCQWY0ekTGufcoLlit7naxETNMH5ONha7+H1km0y0H6GePkuqOLesuYfy9JtoRg/PpyKhxtkkUqKWfV8/dSkaqDasw+5L0kOIKNrEGivXmmqg66hXRk8AIl4y26LjoSfaLkv+Djoiau1wJHKnhyYoLugM1D2g6GffhhqAObiB1IZhYqfmCtED3hLNs8rKBA7wEmx842A7H6sucysCyZ0b2AfxVqI33FeljvFJy7qYevpN+Rlrt1eWU/ixJ6HhKsOjuGDwwIlPYh9WF28Cg/RWmfSXqaQy6UgCOUsRAg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=reiWdL17QpKJfFGt35PrSVcwqo4khvX1fO3Rh2tCuu8=;
- b=IcnQNH4p7GGnmphlGp+Vm1H2M1EgFwELcZGsSgosxpduN3Knabt/yTvVEvZN+vhPTKAcRGhOWG7t7esdfXstkeE29PHVKbctOxB3GJZ0mRBw+1gqZ+DJEXO6XoTdxkGuF43bmHkHjYaZGQFHbSIlgI2HqdM8yV218pLoVqyRwXEsPGNynml6Rw05RNJnPXCuoYId9Suk4ZCG0OgNpKj6wynQ8TKE+svL4gRpKotMCSxucxG+O3MVeZ0RV2ob4id0YRVdFI+Z7yMM7+GpNEPOJJpvF+71Q6gc51rTqm0NA01hpMa0XaaeQltP4RZChU/C7yR3E6UJ4ha7HnV439V4vQ==
+ bh=eUoleuK47lZOxhkid3DcJ9WoSshTHvRCfuiFRlHHkFI=;
+ b=FS1j7fds9FOthCEkt1j2CqPui5qcnX+9Xty6N0ktmPZZsMzNTcf/NBRWKWWpn1pmAUV5fbIiZY70bwJDrpait247DoWBQsXKKiO98fjWyNuvnla0K5cUSrEekkrmKN0phoU3vHD8BYtperpI5ULKjzgsQ2sKaMXWIkjxlN/8wj00YcdEoKHkOiN1S6HEDDHo+2WwpUorM+CDGuNvMBB85JC+WVU0GutmPxAhO0u+Do4iLeB8zeX/V4g4fRjgOcQmC/U8jGjsy2PHcewEZBFr8sP90Rl7O27eXwvKxYburLmOdvdA5TOt1hS2DsL4cOHwSRhN5Vrf4DEs+Kx6MGCAow==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by DU4PR04MB10364.eurprd04.prod.outlook.com (2603:10a6:10:560::11)
+ by OSKPR04MB11365.eurprd04.prod.outlook.com (2603:10a6:e10:95::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.13; Wed, 20 Aug
- 2025 11:05:07 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.14; Wed, 20 Aug
+ 2025 11:05:15 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9052.013; Wed, 20 Aug 2025
- 11:05:07 +0000
+ 11:05:15 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Subject: [PATCH v3 0/2] Restore support for i.MX95 A0 silicon
-Date: Mon, 11 Aug 2025 05:59:34 +0800
-Message-Id: <20250811-imx95-v1-0-569d8014172f@oss.nxp.com>
+Date: Mon, 11 Aug 2025 05:59:35 +0800
+Subject: [PATCH v3 1/2] binman: add a new entry type to support .bin file
+ generation for the i.MX95 platform
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEYWmWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDCwNL3czcCktTXUODJNMkQ4tUg8QUcyWg2oKi1LTMCrA50UplxkqxtbU
- AXvvv7lsAAAA=
+Message-Id: <20250811-imx95-v1-1-569d8014172f@oss.nxp.com>
+References: <20250811-imx95-v1-0-569d8014172f@oss.nxp.com>
+In-Reply-To: <20250811-imx95-v1-0-569d8014172f@oss.nxp.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
@@ -75,99 +75,99 @@ X-ClientProxiedBy: SG2PR03CA0120.apcprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DU4PR04MB10364:EE_
-X-MS-Office365-Filtering-Correlation-Id: 27de00ea-985e-437f-b539-08dddfd96c06
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|OSKPR04MB11365:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1fa2feca-e3e2-44a9-de57-08dddfd97104
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|19092799006|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RGVCeG5WUFk5L3VhV0tjVGZXdlNXdXI1aG1Lb2prV1VOQjdqL3U0QkszTUR0?=
- =?utf-8?B?Mkl2TzIwZjVrMFp2dHhvNEFJZi9xQ0VudTQ1VDdLRFdralRSRVJCVWJSazBw?=
- =?utf-8?B?UVRreUFlR1A5b3ZGT0NrcUwvOTVTeXE2TTRRZE5pMkNHOVlFdXYxSFB6V1VG?=
- =?utf-8?B?NmY4ZzlkOWozUzRCSSt1eXFIaGRhZlh3NmJVZlhIcnZxQ1p5YUhHZGVpN3F4?=
- =?utf-8?B?VWJsREFaaXg2Q25iVThwYkZNV2EwQmFGcDBuZ2NmUHZOVHMzQVJlRzlzYUtJ?=
- =?utf-8?B?Z0NLQXBpZ2VjK3VVQWdTS3FvWHVUbEhsSDlRTFFTUWN6SlArM1R5RVpnYVpt?=
- =?utf-8?B?dHRWM1lya1JNOExRRFlBTGtCUk00b3dkc05IZEE2eTYrTEhoWWxhdWw3eC9X?=
- =?utf-8?B?U0tGR056ZjBGVFQvSndUZFhERGlCOUZZcnQ4UFJnMTAzaWlFZE03STlLOVRB?=
- =?utf-8?B?a3ZoaFp3dHlzaTNHT0Z4djl2WHljMng0WUYyMWlsOUFBTWJUNDhMaTl5ck8y?=
- =?utf-8?B?VlRiOWNPZ1kwQzB6VGZ0RjdMeUxrTnlKZ1dNdi9EVC91ckR2M2hDZFlWRE9L?=
- =?utf-8?B?TXRDbDhaRnZXakFSVWZZeHdtMWEzYjUzMmhCZU5mWnVCWnRKbTFFOVhabUFa?=
- =?utf-8?B?UUZvMGJsZS8zMS9IZ3lvS3RTMzBxdmx1SEdxdGk0WldSZ1F3Q0wvWHI4bGww?=
- =?utf-8?B?N09TNExXUXkrakVzSktaUVZRM29QZFZvenRkdW5YeGpPUG5PNnR4QWxpeDUy?=
- =?utf-8?B?NUs3NTQzbW9YSlkvb0hOR0FDeFNaVzc5UE00OStZbjU0dHZwTjdlZEZxL1Nl?=
- =?utf-8?B?enpmVTIyMm5iUGh0RHZ4Qm5hdmRETVUvVGg1c2h1aGkvTFdrNFd4Mzd2Tmtk?=
- =?utf-8?B?ODVQOFhhOWJEYU45U2JVWHV3eW13cVdTdTNOaFJWeTZ4RW1IYmlqMlJ4Njhz?=
- =?utf-8?B?RGIrSDdPcmFOU2VjSi9XY0ZVQkF0MlFoMjFaWUtoTS93VXNxKy83TkY5MWxC?=
- =?utf-8?B?OStUUnVKeTFLdG5YYW4vYjN5RzRqS1lxVVQxV21lRHZxM2ZqVGZyQ1hiZXNs?=
- =?utf-8?B?SWFjMXVzL3cwdy9mRFRqejJCeE1NM25aQU9RRlhpNzRQVkxXeTExRkF5RytJ?=
- =?utf-8?B?Qmw1dTdpUEp3ZUQrMWpYWERoa1FTR3cvT3BUTWpzREc5OWVxWGpJOU9zbEVz?=
- =?utf-8?B?ME9LQjhraFhjaE4yRlNuRmpuTnk5VnBYL0E1STF4MGpBOGgxdUtxR3U0OUtB?=
- =?utf-8?B?eVZ6TkNTS3llU0JQczVnamxRSUIzNnlXcmpMa0lqNlNXOVNkL2JWaWFwbFRC?=
- =?utf-8?B?dEZ2VmtGTWkrV3M2Uzd0KzJXYTBHZ3IyRFE1YWo5SmswcDFycjc0eC9jQ0pv?=
- =?utf-8?B?dG9Jc2dEUVBXUVJlekpMWFhDc29EQzBvWG9MbVJma1BhcTNXa0V1WS9oVUVh?=
- =?utf-8?B?YlBINzAxMjh6ejU3RUxkS1RobWcwbmVYUmNiMGVZRWJFMzZaRS84M3NqTnJ1?=
- =?utf-8?B?NFlyS21KUk02aW9GNHA1Ulg2TkVVRW56ckNMaGVaN09QYmlPdDh2S3NEeDhT?=
- =?utf-8?B?a2w2MjkyU2VVVG1pSSsrRWM1UjRKTHNCU2V5WiszOFBQOCtLWVd4VXlhd1Nx?=
- =?utf-8?B?SVhzbTZxZ3RlNHJJaFNhMWROMlQ1azZQQ2ZqcTA4UGxnandCbUZ2cW4rYXI1?=
- =?utf-8?B?dFJwM1hxTEQySFVXQk0zbVdxSldmcmo0a2Fob2dYWlUwWHJNdHI0anlLRTR6?=
- =?utf-8?B?WGUvaGdKK1ZwMTRON09LcVpzcmFZUHQ3VngvTVZURXZQYzFhVE1vTlpldGMr?=
- =?utf-8?B?bkRrVy9WOHJUSXlDWUJ3K0FIemlITVIrWnNNcVJicTVzK1AxUm52SFZQclFM?=
- =?utf-8?B?bjFZaDdrYXZ6Qm5uMXcrMlg5dC9ScE56eUM0UW9aNVp5STB4TnpISk0xR1V5?=
- =?utf-8?B?UU9waUt6L2VEak1yREFmWklhUWFWdHhQSlFMMkpmSmszYldMN3VyNUVSbFFv?=
- =?utf-8?B?b3pYYk9hRnB3PT0=?=
+ ARA:13230040|376014|19092799006|52116014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cEdZcmV6N0cycmJudEtZNlBvQzJLcVRwRHlWOHhxcU9PdWFZdUlFSHJsQmJx?=
+ =?utf-8?B?SGhvdHR2Qk84RTg2dVRocnJBTVJIcytjM0lTaWZMMmpLRy94c1ZtWlkyaXhk?=
+ =?utf-8?B?eWRRUEJCYngreTgyT2FsRFB3SG9CR3lUaGZzYTd2aDZzNmFTbTFBZFZmdXI1?=
+ =?utf-8?B?MElnVlErQjl3bG5TZDBFSHJuN1plTDZWQjJObGQ4ZStMOGlKN0ovRk1YajlP?=
+ =?utf-8?B?bEFOVTN1SDJmTHVndVpHSmo4MzFSMzJPNXVsWldOcE9kamU2N0RFdTdiOTFY?=
+ =?utf-8?B?RS9IT2FkL3dQYXNoRERBSHRlL2R2b2VhdTQrOGFYWjE2bGZrdzJNVjBzd2ox?=
+ =?utf-8?B?dVN4UjFSUWx4NlAwTktnR09neDEyNkdhdXVtNU9hTTJMUkpRT08yRjI2UEkv?=
+ =?utf-8?B?QTV3bm00ZlkxOFM4T2hjeGNZdXRuZlV3ZFpHWUVhd2g1Z1Rhckd4Uzdobk1S?=
+ =?utf-8?B?Y1AvV1F2RmNLVnpqdi9lYk9rcXJyc2tVK1V1OFVDWkRLdCt1NXVBRnEzYUlF?=
+ =?utf-8?B?SjVWeEFMakx4MnZUa3Nsc2IvU0pZN1Q3eUh6N2kvTjBZRlJUZTA1MkhnRVNQ?=
+ =?utf-8?B?Yy9IWElGZUtyTlVBb2dET3VWeEwyS240eEV2Q1JWRVVWOUpDbWtrUzM5VkVa?=
+ =?utf-8?B?WnJUVnhYQU9ZTGlyVW5aS1BEYmlmTGl1cjhjSW5FeSs1eElXU1dJNnVZNHU4?=
+ =?utf-8?B?WDRQL2lQSG5oWFRxYVdVSFZ2SVc4K3htY1NkR1hFNlpCRVBmbkdkVGpJUmc4?=
+ =?utf-8?B?RS95MmUwREQ4RTNaWURXUG1DdkxZMEJxckV2NzE1aWlKYzdROTBWR2dNcWhX?=
+ =?utf-8?B?UHRNUVZkcXBHb3ByREVlb0JHZEM4UjlaaXRlaTJyNXZndStFYSt6OWUzTkNh?=
+ =?utf-8?B?aW1yb01jTDd4L01RTDRtVW5MdlhDNEl2d0dBekFqNzczS1NQb0p0dDRqNXZ1?=
+ =?utf-8?B?cGVTbm5UQnc1NnNoV21iRGNQQlpBRWhQZFExRFhacGZ0NU8zUGRLdEZTQzFy?=
+ =?utf-8?B?cCtaNWppdG5Mb2E3RUhIWk1rcVVGaWphZ2xXNTRpREFTTEgrWEdESTFnckFl?=
+ =?utf-8?B?NlF1aHI2bGErS3R6VEZTdkp0dXV6cDllcEFhd3pISjN0TFVSZTEzWFIrSGdX?=
+ =?utf-8?B?UTM1TkNHQWtGTmhCQVlRZkFRUnVkMmkzSk1MdWdnaWhITEtBdFRMREpnaEVu?=
+ =?utf-8?B?RWxYQm1xUlRYOGoxK0xUMkhCM3JjMXdPSWxuR3hpMU9vd1ZwV2JQMHEzMFFX?=
+ =?utf-8?B?UDJaZW9lYlRKcTNWS0FTUXNPdGRpT1FrMWMwNmhCMkR0SC9oWmdHZGFFeW5I?=
+ =?utf-8?B?VVg1d1RYZlhaVHBMVDNtTGo1YUMzUnFWcysvWDRnNEE3OE5naXF0OXYrSlo5?=
+ =?utf-8?B?Y25rMW90T0VXN3BTQkg3Ym9lbHdueHVHSDhmeEtxaUdvNWlIZklFUm8ySVdH?=
+ =?utf-8?B?elV0dXFGOW9DN05YVVgwSXNzVGF0U2Fua3pJODZ6UTR4dTFzYWlQaG5BQ2o1?=
+ =?utf-8?B?TWFKZDkrMXVOTFRqMm5NOFY1NGQxUC9iYVBlNHN6UXJ0VHRsUC9VL2xDaDc5?=
+ =?utf-8?B?S2VDVHRaNFhBbllGOXNEcVBhZWRhK0xBU2pKYk9kU0tEdkx1UnBydUJ6ZEJE?=
+ =?utf-8?B?WmxiVTE1czRGWFBEUEZrWnFNNlArUEtqSTM4MzVPcUNDL2pvbFVGMU54L1JL?=
+ =?utf-8?B?SjJkYVN3ajdRdEhCN1prNy96OXYwSDZKRzIyYVFacnl0YUcyTzNxZVRhdGxY?=
+ =?utf-8?B?d1Q5eVpEMXB0cGdHeUZUYzNuaHFBd0hVejA0S1pKaXFKOXozZ3FLVkx4VjJl?=
+ =?utf-8?B?TlMxWG1MQW01NEVXMFVTOEs1MytFOE5zWU9HZm9aWkJkcC9hREUrSklpR08z?=
+ =?utf-8?B?Vm5MaU5Xamd2QnJaN3RLbHdFQk52VUQrSHBQK3M1Wi9uSXJ2aVlndTlDZjJ1?=
+ =?utf-8?B?MmwzTU5vSVMrNXRmZnRXeVBPdTI4dUpDNnJpWHBPQjJXOVBjS3R6RDFxTFlJ?=
+ =?utf-8?B?YndncUdsNTNnPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(19092799006)(1800799024)(366016)(38350700014);
+ SFS:(13230040)(376014)(19092799006)(52116014)(1800799024)(366016)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZUQza1pUTlN0S0hwT3BVRE9SemIzL2JELzNEeU02eHdsYkNES2NtVTJITEJE?=
- =?utf-8?B?dnhIa0l1ekJjNXZpSlVJU0l6SThzRExsbGx3c2p3WmRuMHpTVlRZNTdtNWM4?=
- =?utf-8?B?UUF2d0JhaXI2QW1VMVlSeGlFZHIrbHVtUm9qbnBUOEJvRHd5YUplQVFvUUFM?=
- =?utf-8?B?OWIzYWJabVNFdTc4dCtnNENtcEZkMjJ1S2ZoTm05ZVFVblR0ZllNNDM4cGZj?=
- =?utf-8?B?R3JRcXNNendCMDhGVUhCR0Zsd3RnZktnWjVMK001SFJaeFZ3NUJDS0tId2Iv?=
- =?utf-8?B?YkcwV2gza2R3NEkxR2MwTjJNc1JoWG1GU0JxOU1tUTNrSUZ1VnhSQ3RaaVRB?=
- =?utf-8?B?cVdBeVFtMnBpUm5EQjhqd1Y5K0NnY0IwZ0ltMi8xUFdPY3dPbVkrNzBockNr?=
- =?utf-8?B?QlVDWExTSDVoTXNMQzJwc1A5Vm94a0EzdXBrYTlLNDl5aWpUK05PYTVQRzhF?=
- =?utf-8?B?ckxGYVlVTE5DQUs5ZzUwckQvS01ud2RjY3JrVXpKS2VzNlVrazduUkpkYVhz?=
- =?utf-8?B?dno1UUVZRTNPSVFjVUhsazBya1RPNmNjNkxhUXFJT2ZZcnNDTzJiMi90MDBC?=
- =?utf-8?B?N2ZDWXFoZjMxaGxvYlZzSXR1NEVCZjByV3ZOTzJFVUl3N3dzSUNvcGUzbzhJ?=
- =?utf-8?B?cUpHTkVmTzZkS2k2WmZiMTVJVXV2dnd1U01iQjhWeVF6cVZKR0hrbG1jSFZZ?=
- =?utf-8?B?cHQydDNpay8ySzFFM0hRaGZmVFBOek9yYm9DLzc4bEVkeG9kcjZVV1RTelZ6?=
- =?utf-8?B?aVBxZ1NzcmpDQmFnTkM2MGVXOWRraE1MMXltR242eHlMTnM0Sys3MnYwRkJX?=
- =?utf-8?B?Y0pWenFCdnZvWTAzejJFcWZHQ0pIWjNmNHdDcFY2VFNhaVo1Q2p4Rno4SkQ4?=
- =?utf-8?B?T2ZjNWExM2FDR2Y4NVJYOXZIcjQ2dDRuMXM4N2xEWmVrM3FLOXFoV3RKb2ZY?=
- =?utf-8?B?UFl6Q0hyTlJXOTZSWEhpckhMbUMydVhXeERXeFRHZ3BycVFuMlVGdm9ueDVN?=
- =?utf-8?B?emtsUEp3TXlKRm5hTlN0bTB3VDlRekxOb3p0ZFVEVE1ScTc0VjE0Ly9Eaitp?=
- =?utf-8?B?eEs2U3JvVHU5cWVxVEVCditzcUk3NTB5ZTg4aW5sdjRqU3FSR2h0N01xTGU4?=
- =?utf-8?B?VHRoNDVYRlZiMUpLL0JZWk1UVXIrN3RmdHY5cXRCK1hjN3JHc1ZNQ3Nsa1VD?=
- =?utf-8?B?MElYM2JsYXhBVTdoTXQxcHJXWFh0Uis2N0gvQjZwWm5salR0a2NFSWxxV3Ja?=
- =?utf-8?B?eno3OERPSEhZKzFXMktzNXZrZlRCdWZjZGNpd1QwMVlDK2VQazBWUmlOQUd0?=
- =?utf-8?B?MjZaTng3QmU2SnZndG1XdkZlWXFrdlc0RGo1eisySXh0cDJ4QkV1MmRzZFR1?=
- =?utf-8?B?SkROZ05vU3dxRDFqUGtSY3M5YWkzbDE2TDh0RkpDZXZIdVc3MzU0dDVUYk1C?=
- =?utf-8?B?dmMzMFBzVm5jaStyOVl1Q3Z2akVWSjVoYlBWVkJpWHV2YnpjVkY0eWhmb3Zh?=
- =?utf-8?B?SWdkRlg1clc4QkpjUm1HTnJSY0NWTTcvaStyUkwwK2RNY2hMQk5FTitwTFBO?=
- =?utf-8?B?VkVWUUZjQzEvZkVRVHA2bHFRU090QXlNd1hENE0rWlRRTHpjaW0wVHJPVmRQ?=
- =?utf-8?B?ckpmcFp1UEc5OW5HVkZDRThzSmtZSE9pc0tYckFheXhUTzg2RnpKdGZBampt?=
- =?utf-8?B?aVd1MVZiRnJQNG9adThsTnJmeVFGUUxMdmtUYzZHdEp5Q04zTVdneExsNU4v?=
- =?utf-8?B?MjRJMXVxeXZwdDVaSFduYWVmV3VjUFFuQnVRN2lpRXc1SXB3bE9uVjU0dVNL?=
- =?utf-8?B?U01ncm5pUWZla0tCVnl4MHNnWGtQOUFSbk5uRGlIdTRsM1VtanV1dGpYTDgv?=
- =?utf-8?B?NzgvZjFWUm9yUWptTDhqTUdHckswRjJHUVMyWXZCNUZWYW9pUElNVlhiVnRx?=
- =?utf-8?B?YXJJSU1WL2w4cHlST1NWREdhbGtaTmdhclE5dFFva28vZkpNNG1YZm5HQTBS?=
- =?utf-8?B?V3VaNk5vSWdzVkkyR2U5YTlkeXpBWGJVZ0FqTU9XNlJLZHN6ZkFPdGxCeDUw?=
- =?utf-8?B?OWtPcm5XZWFFN2FKQXIwbnlkcXBoOGdEM01ORzRxYzBpQkRwTFhTRnBhU2NO?=
- =?utf-8?Q?4FKFjTrv2ctrIwz8P0cihteXd?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?am41N0RCcFk0aTdQTFRDVm95L2hpM1NSYTJWZytBTUV2QVFLNVlwenJ1Zytv?=
+ =?utf-8?B?TlIzdEZjMWFHS244N0pDRUNEbWR6WHpwU0daSFg0MTdsY1VraUNPZzcxMXpJ?=
+ =?utf-8?B?SVd3aCtPckp2cHRoeGo0NEh2V3pCWWptMGE1TGV5R3QwR2phUVJMYUEzdXFo?=
+ =?utf-8?B?azFXdVpXWE9hc2o2cEE0QlJncFdyNEkwK3NUbS9PcDZMQW9kN3I0RExXTlkx?=
+ =?utf-8?B?c3hCTFRRcEs0L0hEV3J4bk9lTGVOUFNVUXN1YUNHejAyTFpscytSRzJyekFa?=
+ =?utf-8?B?cHkxV3p0YTNmZ05mQkVJZFk5b3JyREhpc0JPL0JHSFJBN3FnNEJBMFI5MW40?=
+ =?utf-8?B?YzlBczdSMnUrMUFvUDA5akIzd1VnUEhBZjlQRWtqYUZFb0s1RXZGSE9DWU5v?=
+ =?utf-8?B?SG5oelFEWGwvR0dtNFFHVlhoVnpYRmZPQWlTcTExeW9nK3l3bGdyZjg5OUtW?=
+ =?utf-8?B?c2lBSkk3VkRabkJjNDhJS3EzZjdrYWwyRDZaVUREdlRhdmFKRVdVb0JxVDFD?=
+ =?utf-8?B?RUhaY1RLNVNpNDZJeXIrT0FSNmxqV1JUTnFnNDUxZEVQVE1BdjZYSTFhbzVq?=
+ =?utf-8?B?bGdQQUdaKzJCNEMyUlFSQlV4SFFtTzJPNlFlTG1IbERhd3h6eXdSSUV3Qkhn?=
+ =?utf-8?B?ZWJsZ0NRWndvV1g5MVpNNlZJclFDZGdJbmtteXkzU0cxZTNMMmRXK3Nkb0I1?=
+ =?utf-8?B?VlY1SmV3SXlYYjFTdmR3cUlzUWdDNG5BTnAydldtRUcxcDNxQS9lQ0IzbjEw?=
+ =?utf-8?B?WWdNVU9MYTVWTENxTHREMEJ3OW1QRFBCdyt6YXhteWUzRkVRMkh6WTJPWWlM?=
+ =?utf-8?B?S09TZkRxTVZKTVducTRPMXJkU2xJcU5qc08rRUljTWFQQXJTRnNGSTFpZVNU?=
+ =?utf-8?B?Zkh5b2JPZjl6amRkWjVpS3pZNktHSlBYZnlqT054eDRpNUhVMTREcXcwa2tn?=
+ =?utf-8?B?WkJuVHBDemVHZW4yY3lOVUpFWmIvSVhCZmIzMS9aNGlrVmZ2RmVMN2pTQlZN?=
+ =?utf-8?B?ZVIvbmdMNDJQVjhxbnNnM3d5aEhDYkE5VkF0VVpxWE8rdHA0RjlybXhNSW53?=
+ =?utf-8?B?Z0JVakRhWDJzbTd5Q1NoL3MxU3FxU04rSk1aaDZXKzR3NEFmdDdHN0RsVHQv?=
+ =?utf-8?B?M1B4Zk1nMEt4WGtaME1jK3pSUFM3WjVVSmZZOWhtQUVtRjJ4TERTSmRqMDNM?=
+ =?utf-8?B?Y1htZ1dNOSsvT2pWYWt3aFNPMkVwNWYyOTRDTEZON2hNNmh5clU2TEx0UTJX?=
+ =?utf-8?B?aFZMZ2hCSlR2TzdlL2JQcFFubytkTW1maE5seHNGdjZITURiejdmUkVzTU8r?=
+ =?utf-8?B?YTcvUFVHMEFWV3Q2UStJZ3Z3TDhqNWczeXhidFJGS0h2RlB6Zno2elk2K1px?=
+ =?utf-8?B?ZkVJNWczRmtYeDJEd2NFQ2tDc3pjbkxZNXkxZWtVaEEyYm9pWmZObHhyYjRl?=
+ =?utf-8?B?YVM0NTBQc2x1YmdkUkJrVFZEOGhHaGlPeWZPdk56V24ybnBZZ0hQSzMyL0dX?=
+ =?utf-8?B?L05qTjU5a0Radnp5c3h4alRaTVNEL0Z5bkpUQThtYXAzMThMWUxUOHNnWGhD?=
+ =?utf-8?B?WWZBaUlwZCtvVVdPUlNLczRaSFRkZ0hqQ0d5dVl1akhUanQ0YUpzVHBuNkxO?=
+ =?utf-8?B?MXcxbWh1OHpJWW9VMG1QYmtTWG1vR3FZK3BEa05EbS9vVlNGa1AwbmNyU0NM?=
+ =?utf-8?B?RDFERS82M2tYQmtmZ1FWbnpJTDVaN2dQV3MxRzU0RmttM3F0elJpeXlDOWpP?=
+ =?utf-8?B?aGtpV0d6VzBxdzJiUGNibnduWFVjY2NnUmd0UzlxdFpQVzkvS0kxdE9uc2JP?=
+ =?utf-8?B?eDRUY3JFR2kvNVBaaHBVRmU1U0RjWGhOYjliZzh3YkVwMjJSWEliQjV0bjFw?=
+ =?utf-8?B?YXQrOER4Z1FnUm55dXZUUXcycnBCQXBObDFEbi9IYXRDbE5kWFA1bVMxb1dC?=
+ =?utf-8?B?MCtveDZUVTVNUnk4OE11UnpWVW5NMENQMFdNUUoxRllPWkQyZ01xSWJ2cFlh?=
+ =?utf-8?B?cG1Jb3FOQXJHNlI3SWszOUdXTTIzTGF1MDltTVpNVWl5WlFYK1piOFJmYXFL?=
+ =?utf-8?B?NEk1dVoyaThtNVo1ZC9kYm1RcjBDVjJjSmZJRTBnNWlXQXhnUCtVdTlxZW4x?=
+ =?utf-8?Q?LqQRSofMp2V/yPyYMGSLFLbJW?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 27de00ea-985e-437f-b539-08dddfd96c06
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1fa2feca-e3e2-44a9-de57-08dddfd97104
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2025 11:05:07.2561 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2025 11:05:15.4910 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gATsF2lcTtyYJB4P1oe8rxl2T27GqYrrHJnyKRFJ2+1mk9d6wgWyvjyxm8W6530d2U+kF9qa+hB5AtwrkltQ3Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10364
+X-MS-Exchange-CrossTenant-UserPrincipalName: jsI4SpJxFCqQkoCuAb1Ef/bbYHrhblJ1NfTnuJUq+apMWugmRQGd+X+NkfTPtWe+yiHD+gVIiXEX2ze+VrA0Fg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSKPR04MB11365
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -184,37 +184,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Changes for v3:
- - update the binman etype to generate a configuration file and a .bin
-   file
- - update Get ahab-container.img in imx95_evk.rst
- - rename configs/imx95.config to configs/imx95_evk.config
+From: Alice Guo <alice.guo@nxp.com>
+
+To support passing specific commands defined in enum imx8image_cmd to
+the imx8image_copy_image() function, this patch introduces a new entry
+type nxp-imx9image. This entry generates a plain text data file
+containing the relevant commands, enabling flexible configuration during
+image creation.
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
-Alice Guo (2):
-      binman: add a new entry type to support .bin file generation for the i.MX95 platform
-      imx95_evk: Restore support for i.MX95 A0 silicon
+ tools/binman/entries.rst            | 12 ++++++
+ tools/binman/etype/nxp_imx9image.py | 85 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 97 insertions(+)
 
- Makefile                                  |   3 +-
- arch/arm/dts/imx95-u-boot.dtsi            |  44 +++++++--
- arch/arm/mach-imx/Makefile                |   5 +
- arch/arm/mach-imx/imx9/Kconfig            |   5 +-
- arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
- arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
- board/freescale/imx95_evk/MAINTAINERS     |   1 +
- configs/imx95_19x19_evk_defconfig         | 153 +-----------------------------
- configs/imx95_a0_19x19_evk_defconfig      |   2 +
- configs/imx95_evk.config                  | 150 +++++++++++++++++++++++++++++
- doc/board/nxp/imx95_evk.rst               |  42 +++++++-
- tools/binman/entries.rst                  |  12 +++
- tools/binman/etype/nxp_imx9image.py       |  85 +++++++++++++++++
- 13 files changed, 338 insertions(+), 191 deletions(-)
----
-base-commit: 0c558bbad9e7581808b358091d1fd979f860e8ac
-change-id: 20250809-imx95-10b5b18e0ad7
+diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+index 12a39d070e4..8922d6cd070 100644
+--- a/tools/binman/entries.rst
++++ b/tools/binman/entries.rst
+@@ -1689,6 +1689,18 @@ together. See imx95_evk.rst for how to get DDR PHY Firmware Images.
+ 
+ 
+ 
++.. _etype_nxp_imx9image:
++
++Entry: nxp_imx9image: data file generator and mkimage invocation
++-----------------------------------------------------------------------------
++
++This entry is used to generate a data file that is passed to mkimage with the -n
++option. Each line in this data file represents a command defined in the enum
++imx8image_cmd. The imx8image_copy_image() function parses all commands and
++constructs a .bin file accordingly.
++
++
++
+ .. _etype_opensbi:
+ 
+ Entry: opensbi: RISC-V OpenSBI fw_dynamic blob
+diff --git a/tools/binman/etype/nxp_imx9image.py b/tools/binman/etype/nxp_imx9image.py
+new file mode 100644
+index 00000000000..af893cf27d7
+--- /dev/null
++++ b/tools/binman/etype/nxp_imx9image.py
+@@ -0,0 +1,85 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright 2025 NXP
++
++import os
++from binman.etype.mkimage import Entry_mkimage
++from dtoc import fdt_util
++from u_boot_pylib import tools
++
++class Entry_nxp_imx9image(Entry_mkimage):
++    """NXP i.MX9 .bin configuration file generator and mkimage invocation
++
++    Properties arguments:
++        - append: appends the specified blob file as-is
++        - boot-from: indicates the boot device to be used
++        - cntr-version: sets the image container format version
++        - container: indicates that it is a new container
++        - dummy-ddr: specifies the memory address for storing the DDR training
++                     data image
++        - dummy-v2x: specifies the memory address for storing V2X firmware
++        - hold: reserves a specified number of bytes after the previous image
++        - image: defines the option type, image filename, and the memory address
++                 where the image will be stored
++        - soc-type: specifies the target SoC for which the .bin file is generated
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
++        self.config_filename = None
++
++    def ReadNode(self):
++        super().ReadNode()
++        cfg_path = fdt_util.GetString(self._node, 'cfg-path')
++        self.config_filename = tools.get_output_filename(cfg_path)
++        accepted_keys = [
++            'append', 'boot-from', 'cntr-version', 'container', 'dummy-ddr',
++            'dummy-v2x', 'hold', 'image', 'soc-type'
++        ]
++
++        try:
++            with open(self.config_filename, 'w', encoding='utf-8') as f:
++                for prop in self._node.props.values():
++                    key = prop.name
++                    value = prop.value
++
++                    if not any(key.startswith(prefix) for prefix in accepted_keys):
++                        continue
++
++                    formatted_key = key.replace('-', '_')
++
++                    if key.startswith('image'):
++                        if isinstance(value, list) and len(value) == 3:
++                            combined = ' '.join(str(v) for v in value)
++                            f.write(f'image {combined}\n')
++                        else:
++                            self.Raise(f"Invalid value for image: {value}")
++                    elif isinstance(value, str):
++                        f.write(f'{formatted_key} {value}\n')
++                    elif isinstance(value, bool):
++                        f.write(f'{formatted_key}\n')
++                    elif isinstance(value, bytes):
++                        hex_value = hex(int.from_bytes(value, byteorder='big'))
++                        f.write(f'{formatted_key} {hex_value}\n')
++                    else:
++                        self.Raise(f"Unsupported property '{key}'")
++        except Exception as e:
++            self.Raise(f"Failed to write '{self.config_filename}': {e}")
++
++    def BuildSectionData(self, required):
++        data, input_fname, uniq = self.collect_contents_to_file(self._entries.values(), 'imx9image')
++
++        outfile = f'imx9image-out.{uniq}'
++        output_fname = tools.get_output_filename(outfile)
++
++        args = [
++            '-d', input_fname, '-n', self.config_filename, '-T', 'imx8image',
++            output_fname
++        ]
++
++        result = self.mkimage.run_cmd(*args)
++        if result is not None and os.path.exists(output_fname):
++            return tools.read_file(output_fname)
++
++        self.record_missing_bintool(self.mkimage)
++        return data
 
-Best regards,
 -- 
-Alice Guo <alice.guo@oss.nxp.com>
+2.43.0
 
