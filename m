@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D2F9C87FD2
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 05:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9C9C87FDA
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 05:04:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE5018354B;
-	Mon, 11 Aug 2025 07:02:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AB328357D;
+	Mon, 11 Aug 2025 07:02:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dOjXnhWt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jK/Y+e7F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F1EE832BC; Mon, 11 Aug 2025 01:38:31 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 83EBC832BC; Mon, 11 Aug 2025 01:38:33 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EB6783278
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 01:38:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61C9483278
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 01:38:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3b79bd3b1f7so1741884f8f.1
- for <u-boot@lists.denx.de>; Sun, 10 Aug 2025 16:38:29 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-459ddf8acf1so31735155e9.0
+ for <u-boot@lists.denx.de>; Sun, 10 Aug 2025 16:38:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754869109; x=1755473909; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754869110; x=1755473910; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FB42cfm/hGLuPBeGUgFDPPoHQgmqoJDkq3gQzL5Yw/Y=;
- b=dOjXnhWtCmL0V/XU6Wq94iiWN9H+JtY7Ml2CZkFpAiRjfFUhegj2U+u4WTJxWwhaJN
- eiPPceqIzdvf6XRe97X+g3lYS4uoQZ/SSdo6lPxnnE405zWFHKgR2FjMrbUkPI+dz9up
- 3T6Ofwr0/4fyreKXMapNkdUmdOGRDuj8pwpKJlxFaV1kgBkpbt4JiWV1kvbl+VRGOOvp
- QqPsqs8Bxk4MIkPZRCdXtx0cXYoQthT6Q20K3SfzMcN+x4faawVgWZMfm2teoM6uATS6
- BzedHuld8+OnWpJRaoQd9hxQQ6uCNTvvLUvrY6Ch+ENdyU3ABo44q+mImQA0v3pOkaG8
- M/0A==
+ bh=DLMkP2hJrvpOxpcLWSTgcSabNNYoiOprc8VcTCKW0MI=;
+ b=jK/Y+e7FaAkJji718FBDzAwmZHqaLPLrMYdCiU7876DG20XIWH+pmntjXUvKikKrC2
+ KzRtSCWC4P9yjjWzQRyyfOZWgXuHlNvfuusPnOgF/fWGfEvoV29gkRwcPs1447Vv1qCD
+ JzXLpyES0AQGyLRnbd7OhgZhA7tpr7Q6nAN+1NKEATYKqBoqqy0k3GirKzp3+v5DKGeG
+ Q2y4G0wgyHT8iHTO1DHB5ggnxpDjyb+H/CXYqiyxtiVGs2FLrtmJwEJHJq9pCT8HgFEP
+ 5/NQDbTQMSKsvMr+hs5NB/9nV8lQe6ftAtqyvWRFjYJOmjv8eILujJiD5Dsq5f7AGpNJ
+ 9iqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754869109; x=1755473909;
+ d=1e100.net; s=20230601; t=1754869110; x=1755473910;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FB42cfm/hGLuPBeGUgFDPPoHQgmqoJDkq3gQzL5Yw/Y=;
- b=O9TA1fHNgktQk+71Ax2eHLFNA3xAPrCmr3pUfmHaXE6ihUg3M0LQxDPrt1+1ZnpOlC
- llJ2ra9wjhycDlLNIrFBLrQxPDOX6Pp6MeAuZKUFw0g+f++S8POtP2I3jBSyeE1r4ord
- IC8tq30SOKKGaDqW3Wy2JkNDkFtJw+w3C+4X23yvvz9UJGgtY39hXnql98lh+W3s3qZU
- 7EvvzTq3BMbZOMNJ/sJrF69LnbQUgEs3fdM+Ktd5PYoxVKicAeMJZpvrAnyQ9lalWDgQ
- TAI/qZbILoWCbTT+BXMxqftBjHMluqut3LKZcV57ZXOCZClx9yTvMeQZOdox+G6JciVF
- +cVg==
-X-Gm-Message-State: AOJu0YxFKsO+9RsIn+7gwKJAQ/HX+X/vBoQVVkLmvmf1PcxRfAUO50x8
- wi1s2lQdS3TfgmT6tyA46qRaJVb5vJGzpxtThl9mNEG315Y41TSRUkmseAxUYA==
-X-Gm-Gg: ASbGncv553XnUHIYAPUVgZeETLLUQMFx2YcPB+g0RlWtrM3QJlaDXNIyOi/rQNlxf0Q
- /2wUpunMFbcyVBWOMhmwvCR8/TOhgtx2dOn5gjTLEdAFg8Bli+8wZUYyS56twJwoIJzsiNFwVr+
- LUYTsRo7IIQrxjywd15b4nBFP25zbi9cr6sS2MtPvyzwIRVulNPHgUyVI2u8HlwoXPq56gNIyn6
- zUXSTynWMGvLN2LlYLSwyqCnLAFSa8NIO+yt8jislCz6GEQVYeswJU4Gf8/IPQ952KUCMbTp351
- kBnCFeyw4Mn+5awmeNK88ihi4GOEqFWqi4KiGJbQej6bjgFbCZltqzZ8FTmxfupI3I67COsAZ5A
- rzmMovzhW4bsw31de1gfOp6jUNU4CHw==
-X-Google-Smtp-Source: AGHT+IHIkcQLISbXZIEuGQ9jXPsDTqZhDV8MKvzGLng+8Kqzrap8C+gn9FlC9k+ZPu8VbjPBLmUTTg==
-X-Received: by 2002:a05:6000:402b:b0:3b7:8481:e365 with SMTP id
- ffacd0b85a97d-3b90093f7bemr8690487f8f.10.1754869108560; 
- Sun, 10 Aug 2025 16:38:28 -0700 (PDT)
+ bh=DLMkP2hJrvpOxpcLWSTgcSabNNYoiOprc8VcTCKW0MI=;
+ b=CSqf90BeigvfREMkcSmotqKBYHVoUXmp2T88IlF6WxkFjNOVWnpmBBnmsASefqneP7
+ NlMc76+tnsVmVDhWBrdGzZymkAOC6LTZGSPOdKyItN3MJwgI1000Ol40Ogu512OuRxLu
+ d+oLDV4K80+zBSpuC3ButzCREwxI9cpMKEFHkZY7H8s4ioyJbyCcl98bKw5oRTKC6PZd
+ CAeZSKQOCIzNtU3K0X7KiPEHgSKXVYfRXMV1zXbSaYzWL9qVS6fPPrYfx8l8fiJL1pbh
+ jNdgCOF9LszZT8OGuoXU98nz+58uQKUeAMewmOAlvuR62SE9KO7mKv7/ODEoN4vAjLxF
+ 3jXg==
+X-Gm-Message-State: AOJu0YzpqSr2JDFOkxPVWbiZIYUHFU/Y7egjFsjbswz4o5lBouF2GX8B
+ YuSrKGzadHCJ+AGj/4KvnOn9x1xfXG8JpAmk5Qds7jitEVTOL35Ouaat2Eve7A==
+X-Gm-Gg: ASbGncsE27V9CSUVK91WL3YM22nqqRl3SMyUCpjOXhxZPA+4di9YHjszw8y+81TnY+O
+ OqVaPuASngjmjzRZIGbOxukzqrAQ/0rX71W4odPb+VJni3AU+iNtrwPwKgOmf9ZKBtALP7D/Ihz
+ JvD2Z0hXfFrJloweIg0PDeLi4zU2XyTXLK6PYYoWej9eqcHL+Hqcs1M/1Cfkdg2hW+RHTG/0Cih
+ Mg6SOw00egpleG3GIu1jQcXt3NopqJ9JRge1RT0ASW9NgVZS+z+31/PCyXDzM/j9thVSoiZk28k
+ 37N0hAHVZj/DDbFp4Ppp2tWdD+/9ELBij4944WBrxz5tON6ZHgmRMJeAAA1X01NBE8pSPDLIBzt
+ Abo8VhUtPEtnbfua9IJ1actQuAz0TVw==
+X-Google-Smtp-Source: AGHT+IFOqlSfy+wDT+Y+FYGojwiXTZO4nVZ8BrPwza7cJTQ8q51V3bW7IZE8Vgm+BwcBQAAqL4IN4g==
+X-Received: by 2002:a05:6000:2304:b0:3b7:8b64:3107 with SMTP id
+ ffacd0b85a97d-3b900b50c9emr8333664f8f.26.1754869110546; 
+ Sun, 10 Aug 2025 16:38:30 -0700 (PDT)
 Received: from N580G.. ([2001:8a0:c46c:a000:d911:da6:779c:bd3b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e585586esm242339815e9.13.2025.08.10.16.38.28
+ 5b1f17b1804b1-459e585586esm242339815e9.13.2025.08.10.16.38.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Aug 2025 16:38:28 -0700 (PDT)
+ Sun, 10 Aug 2025 16:38:30 -0700 (PDT)
 From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Subject: [PATCH 07/10] doc: Fix typo in doc/build/documentation.rst
-Date: Mon, 11 Aug 2025 00:37:38 +0100
-Message-ID: <20250810233742.51902-8-adrianocarvalho.pt@gmail.com>
+Subject: [PATCH 08/10] doc: Fix typo in doc/build/gen_compile_commands.rst
+Date: Mon, 11 Aug 2025 00:37:39 +0100
+Message-ID: <20250810233742.51902-9-adrianocarvalho.pt@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
 References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
@@ -100,22 +100,22 @@ X-Virus-Status: Clean
 
 Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 ---
- doc/build/documentation.rst | 2 +-
+ doc/build/gen_compile_commands.rst | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/doc/build/documentation.rst b/doc/build/documentation.rst
-index 098c96a4c4f..f102fbdd86d 100644
---- a/doc/build/documentation.rst
-+++ b/doc/build/documentation.rst
-@@ -64,7 +64,7 @@ PDF documentation
- -----------------
+diff --git a/doc/build/gen_compile_commands.rst b/doc/build/gen_compile_commands.rst
+index d503764f9e3..5eb9e4ccb0a 100644
+--- a/doc/build/gen_compile_commands.rst
++++ b/doc/build/gen_compile_commands.rst
+@@ -39,7 +39,7 @@ course) to have an up-to-date database.
  
- The *pdfdocs* target is meant to be used to build PDF documenation.
--As v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
-+As of v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
+ The database will be in the root of the repository. No further modifications are
+ needed for it to be usable by the LSP, unless you set a name for the database
+-other than it's default one (compile_commands.json).
++other than the default one (compile_commands.json).
  
- We can use texi2pdf instead:
- 
+ Compatible IDEs
+ ---------------
 -- 
 2.48.1
 
