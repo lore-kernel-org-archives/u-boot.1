@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77177CA0EC4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 15:34:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73388CA0ED3
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 15:36:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE51983096;
-	Mon, 11 Aug 2025 17:34:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD53D83096;
+	Mon, 11 Aug 2025 17:36:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hCes6Dib";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bC5tR0DD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F346E8309E; Mon, 11 Aug 2025 17:34:54 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 7DEAA8309E; Mon, 11 Aug 2025 17:36:20 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC3E683093
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 17:34:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 678E683093
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 17:36:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3b782cca9a0so2982436f8f.1
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 08:34:49 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3b7910123a0so4164162f8f.1
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 08:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754926489; x=1755531289; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754926575; x=1755531375; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pa5H7WjqtxlkYf4utEsbVoLUNd3hZDF6fSnW+rnO1uM=;
- b=hCes6DibNfDxnSNqqmQUUA/6vIH7R3gWgs1Jkrhgl80XMAp8zUUPOmEkkWX82JC+SL
- dlL85rRkvm7PAPvPiVJH/B0HOzdGv+GGE2W5kFvItR/7YQOp1lp2NSM/smoMseJSYLoX
- /CfL9mrrtwQ/xrXxNFuB7FZjFL9WeS1UIu1Sk0Sl7ZAEpKVFRDerSVtIWR0LVFN/2EKS
- Qi7yewSRB6iRxZNLmxxzyN1e5E+Z06oundh/Xx46D4/H3fqh7A0nVRwtmRo9T3skawSu
- WQQHMTe/1zNdTUjW5d7v7C3jPmBXe9V62WHaUqdB0svTHRgR+sGbHLHg+7MC9hKeai/v
- Qnug==
+ bh=MARdMrj7j95wET+0GfdIjVDG9+tfCI3tCFzuFFdiH+g=;
+ b=bC5tR0DDbM1dFd8x3HogldP0lFAtsQGIrPd+1EgHu712hOKJcKmerAkeu19n8E3K8U
+ oddzACgBd9bCOMvde5RlTnjdomb7vjleQxo4ZqvMqxeNUrHNohuwLyDu+TlKREe/+0bl
+ cVV/MA1nNCd6LqZ8H0daeZ0Bnz1sTR0yrBC2XDXB+G8rvETJ3gCs459/scqgwOvawXUa
+ 85Aj2axyBy++S/JfTdU8/Hhs7AfK1Lm3eG4e57xjoMGhe1B5lC05D3aUXTEugHjM906Q
+ WtxNoTmrR8CzFE6PxcGgRbB2FfUdS3BLDLrPa2XEZysfYFXplfylIOaEjw8qjRx37EeY
+ 6I1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754926489; x=1755531289;
+ d=1e100.net; s=20230601; t=1754926575; x=1755531375;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pa5H7WjqtxlkYf4utEsbVoLUNd3hZDF6fSnW+rnO1uM=;
- b=VA8lEAYZuAtyJCHcBci3jfhWoQzIua4qril2xiGppycGV+xLzF/YAdTyNY4gSUmSHR
- UKtHFQgpAiNq759nUV9QCiezwSbcTMeoJNaR2K9Msi0oP4aCb+Z/oiWCh4qPeVtvSonk
- sdU1aiVF1CcTxcmt7cDs0fT2r7cFDQ5t7JuYkxvhlbGefvK78YdDfnG/L5uJX0WDcjtM
- kx75G209hWkPMlpy+DKrOYmfz7y2Z86S7xTa2/akntBdMSnxbYs4l493qDKYSY/7CoC8
- eKLKnnyCLivkYg0hGr51ZpbQvNcZHX9XTF5u1Vk9WxJIEkLHnc1cAUek8sbulo4u1X64
- KpYw==
-X-Gm-Message-State: AOJu0YwZLFK5Yp7We/12FW2nf6NoIJiSV8sNO/MK1LXTnzG+MfRlTBNR
- I+1WVc/JM7AyUelTBRYWBtBPji7O0q7oxPSlQCva6dSSJvRTlDF8pBna0r2LCA==
-X-Gm-Gg: ASbGncsWueO6yVDrT8aARhoL7KJCcVROE2ffpuF2xgn3o6d7luDckEpoGtXcJef5br4
- 0WXDEvLaNYxhGJNGky6RAZ0yz1VnJYsftqCjtoqTn/abp23fYFbh+XcWwlPHfQtFa6SzG/Awe2v
- Dtm0cJvKDbzqsvm57+mQqg0xPKvqaIi9xv+H83FXzN5FBRBgzEjGyl621rUmYSAZRwfaBKvhv8i
- wHr9yw443EVrsbMhF7QWGl3Z5hGEdkAjPISulqxpKL7TzfGt8o0amfHfYRKNBevQ/CNftr8N7l5
- xq64tWoyTbaegWVAzgSWWAW/61dHaCkeaCw2yAyU6S7rWYUeu0khzpZ3IUsrgfLDij9tEKcQQq3
- CjA9XOzumrQhHHEWdxYHgzID8m2NSeS9hSGOG9+rM4C3aCAW2PzgPSE0iYyFd8vpirg8XJ5t4vw
- ==
-X-Google-Smtp-Source: AGHT+IETlEYVakrIWts/SDtqOPgNj2hqtRJvrQ1zlCWcYtFnXYmFrusELUL1i29Rdm37CZhkmgKa8A==
-X-Received: by 2002:a05:6000:25c7:b0:3b8:ef61:bab7 with SMTP id
- ffacd0b85a97d-3b900b503d5mr9112004f8f.27.1754926489047; 
- Mon, 11 Aug 2025 08:34:49 -0700 (PDT)
+ bh=MARdMrj7j95wET+0GfdIjVDG9+tfCI3tCFzuFFdiH+g=;
+ b=WrrPCe0cQVAE8ZNLvDUnDNZnFd4jny5rlbcPTGL41s5QRLSaa37Ku8edf7v839zKNN
+ sGpVzCoPrCuX3MjsbRcN3D0ZVwFJlQcnpK0kF2BBNDEHx6/q9au0EXIvDsJPEfiyHzgZ
+ nyBTzMORDAvSe/lVqEVvM29IvyhkiEnYMTWiqJjUsJnqeIhv0q6uYp1tzzK/TFV1jkL+
+ NJlm83FusbK3aFwYq+opUBsKp6ZVWwxzN8jmKMjFjAagoO2MtdqKdQ7D4Q/74K4+O9uL
+ 1Yruh/ZtHqLPCKlZkIzcG5GclApvci61aCbp0pnNdLQds+56CFjG/vYOjcLgdMKfD/kj
+ EBGg==
+X-Gm-Message-State: AOJu0Yw2ET7AGjF+po45veoqAmz96cwSR5SwvRJ04aL+Eoa3wNN4OSeM
+ iKrnCMZD9haj7l6gzvrNd//q8x0vU+M+qm/be/TNEBK91Pt6GZIkZ+gT9V4ftA==
+X-Gm-Gg: ASbGncud732QxfPLOZ0WVMu1r6hjFnZd3JbJ0HKy9tQ96tXSs9I3zPwxs5QK4Y+zgIP
+ hCGpDPFUkBz1ULV1U1pAEfv5uufAn+GKIw3H+gpEw7of1SMoCtwsYtaNXixSAPX5Qif3c0h5zv3
+ a/8kkwwjOxYzfN/uLQEUFnNxKwc6XsRm94otXhEIKRIZdqjK5EUJHCbZhqPmz19Z5sMfie/OecH
+ UU+pgTQivfnLph5h5EarYy6FYeA4ZAy08ojrf/qsL/zw0thqgZ/P3p7KoVzDibOB6UhIr9vXu+8
+ Hhg62VIDiRLDokyEw6u6Rsb8gCQfFcjLHLJaFoZ6O3ZvWTN3mBa0J6c/h8+fJ+myAWt/VirofRs
+ Vg82IZ95T2t8laNeYYaannXV5CDaHC4TpqNV0cx5ApIY1LiO9OKV/v+OsxUzXMGDInOs+ybzuzO
+ 7Mx3fLrYty
+X-Google-Smtp-Source: AGHT+IHcUY2aaPliOo9PDVkhuEJ3aoGr/a/6EIpAImT58OdOxpU7th0gigMNvkAJrRPT2gYr4jjA9A==
+X-Received: by 2002:a05:6000:2482:b0:3b8:d4c5:686f with SMTP id
+ ffacd0b85a97d-3b91100ea49mr143019f8f.39.1754926574712; 
+ Mon, 11 Aug 2025 08:36:14 -0700 (PDT)
 Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
  [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459d712c386sm343161245e9.23.2025.08.11.08.34.48
+ 5b1f17b1804b1-459e586a011sm281083275e9.19.2025.08.11.08.36.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 08:34:48 -0700 (PDT)
+ Mon, 11 Aug 2025 08:36:14 -0700 (PDT)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 To: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>
 Cc: Tom Rini <trini@konsulko.com>, Cody Eksal <masterr3c0rd@epochal.quest>,
  Chris Morgan <macromorgan@hotmail.com>, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 2/3] sunxi: spl: initialise timer before clocks
-Date: Mon, 11 Aug 2025 17:34:47 +0200
-Message-ID: <3363499.aeNJFYEL58@jernej-laptop>
-In-Reply-To: <20250801234918.19176-3-andre.przywara@arm.com>
+Subject: Re: [PATCH 1/3] sunxi: a133: dram: fix data type for address variable
+Date: Mon, 11 Aug 2025 17:36:13 +0200
+Message-ID: <8562188.T7Z3S40VBb@jernej-laptop>
+In-Reply-To: <20250801234918.19176-2-andre.przywara@arm.com>
 References: <20250801234918.19176-1-andre.przywara@arm.com>
- <20250801234918.19176-3-andre.przywara@arm.com>
+ <20250801234918.19176-2-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -100,51 +100,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sobota, 2. avgust 2025 ob 01:49:17 Srednjeevropski poletni =C4=8Das je =
+Dne sobota, 2. avgust 2025 ob 01:49:16 Srednjeevropski poletni =C4=8Das je =
 Andre Przywara napisal(a):
-> Recent changes in the H6 clock code added delay() calls into the SPL clock
-> setup routine, which requires the timers to work. When compiling for
-> AArch64, we are always using the Arm Generic Timer (aka. arch timer),
-> which does not require further setup, hence having an empty timer_init()
-> routine.
-> However for 32-bit SoCs we use the Allwinner timers, which require some
-> setup routine, and hence we need timer_init() to be called before
-> clock_init().
+> Variables holding addresses are typically using the "long" C type in
+> U-Boot, to be easily compatible with both 32-bit and 64-bit builds.
 >=20
-> Swap the order of the two calls, to be more robust when compiling the H6
-> clock code for AArch32 or when using the Allwinner timers for whatever
-> reason.
+> The A133 DRAM driver is typically compiled for AArch64, so u64 is the
+> same type as unsigned long, but that breaks when compiling the DRAM
+> driver in AArch32 (for some experiments).
+>=20
+> Fix the type to make the code more portable.
 >=20
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> ---
->  arch/arm/mach-sunxi/board.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-> index fb4837c2082..432b1c10f92 100644
-> --- a/arch/arm/mach-sunxi/board.c
-> +++ b/arch/arm/mach-sunxi/board.c
-> @@ -476,8 +476,8 @@ void board_init_f(ulong dummy)
->  	/* Enable non-secure access to some peripherals */
->  	tzpc_init();
-> =20
-> -	clock_init();
->  	timer_init();
-> +	clock_init();
 
-I contemplated similar change in past. It works fine for 64-bit architectur=
-es,
-but I'm unsure for 32-bit. If you take a look at A83t clock code, it uses
-sdelay() exactly because timer is not initialized at that time.
-
-So, are you sure that this change has no unwanted side effects?
+Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
 Best regards,
 Jernej
 
->  	gpio_init();
+> ---
+>  arch/arm/mach-sunxi/dram_sun50i_a133.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach-sunxi=
+/dram_sun50i_a133.c
+> index 3a231141168..1496f99624d 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> @@ -416,7 +416,7 @@ static void mctl_com_init(const struct dram_para *par=
+a,
+>  static void mctl_drive_odt_config(const struct dram_para *para)
+>  {
+>  	u32 val;
+> -	u64 base;
+> +	ulong base;
+>  	u32 i;
 > =20
->  	spl_init();
+>  	/* DX drive */
 >=20
 
 
