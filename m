@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20ACECA0EC4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 15:25:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72914CA0ECD
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 15:25:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 880E682E37;
-	Mon, 11 Aug 2025 17:24:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D98D482E37;
+	Mon, 11 Aug 2025 17:25:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gx5NNS8b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NDUrHtmb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85C6D82F5E; Mon, 11 Aug 2025 17:24:57 +0200 (CEST)
+ id 723DD82E37; Mon, 11 Aug 2025 17:25:22 +0200 (CEST)
 Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
  [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B8B382DA1
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 17:24:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2228E83280
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 17:25:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+ spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
 Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-458b885d6eeso28681835e9.3
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 08:24:55 -0700 (PDT)
+ 5b1f17b1804b1-459d62184c9so26359275e9.1
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 08:25:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754925895; x=1755530695; darn=lists.denx.de;
- h=content-transfer-encoding:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1754925919; x=1755530719; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t6M8EI/pab2deWZkibiP/LTbYU0J6QUknKE7OWWdjTc=;
- b=Gx5NNS8bIX7kNxwNqS/VXaEl0nLvxM2UB8/Ra4CdvGQtWeIzNNdh3jHwa1aFVB9I1r
- N9ioO6bmGY5NP8MwN0HWB2fev+qZyk0k0wUJNEkm/j9kXaP/YfQWn1ZQcqgsGi2Dfv7a
- +eE2fJCPXiCSK9jd2p75qgvtT45tO+CdWztMZXhpQ7ro6vOlLofxqGzoS0+uLHYVHWij
- Lj2rXzusjNRg5bR58lofHIzaaJE3p+JvlKTmCbADLingbjohW0A24w5k88qLWDguQIjV
- ilxgeds/iT3aTC9Bqc2otXPFClPGogWNxEa+R+aNNUYKvOkfUULdsqqIOsgoomnSjvc7
- rvFw==
+ bh=pWqasxKHxlPA09Szn0r5vmdtzPqapyvktVmaOeG4oRI=;
+ b=NDUrHtmbIDKcHql6qB/WQZOgfoKA50zYxlG3I4WEILK/0ySQX6cJdpka/djo/t/Iqm
+ A01uQj5bd8ySZWTzko7SkJLlrfxxsQ39a/617v737Nw3BB26GtSzCzdeARXZG7Auq7X2
+ BS0ERh2BVM44daF+sJGc8+l+CHp0s9+EypKmaPuLBKog7hk9bp3jYn2yrD5MlCUVBSUe
+ qVbxGA5z/ja7Q18jwDsokgsB4ui0v70D4Xbmzp4X7yT9Uc1h8/TRIfCx+/BFLc9K36yo
+ J8aChe3RD9UbsaGHMwlglnc/GSSvIh8021k/qlVcfg4g2MFzkFr5zqEDLrYV9dAL6wxb
+ hvBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754925895; x=1755530695;
- h=content-transfer-encoding:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=t6M8EI/pab2deWZkibiP/LTbYU0J6QUknKE7OWWdjTc=;
- b=j5p+hEnYZN+fUlxfL5kJnfhyiAeK2Tm4D7FYKM4yFftJFNXhsCcCLw1HCOh1UG0UgP
- 6fbKT7ix1d4CanEdcnwi/ofs9V3VCt/rMHBOXaA8xLBJp+mVduG63hqpfNlW8E7dCKu3
- NO8eGL/j54yxAON/slEepzrm3oTUDWdldp6KHm+HEnVzRtNApQl/7sPSFtq3Sb9e4yOu
- JHZpdhC4LVnISO1f1pKw/2iBJHrevsKzZyncOe7jM6K9+LdWbW/PczFUSnjvKYsIhnyo
- /a2+95TiywB2NyPuxdNYyQ3wqeEtikJvtt1rXv4rS6VJiQLSJmzfdiz2FbapmoRvgfqn
- 8lTg==
-X-Gm-Message-State: AOJu0YxFddlIvC4pOJFZ3K/9zOkGdrBJfcx+lW/atVivfnWR39zk43D+
- 770JHaYlAq2lGgQh+va/cXKTgkm/MpkS8HWJ1M6OWw01gMaCfrVC0RDNMpaPHRSuPrCjX919q1V
- B6g8M
-X-Gm-Gg: ASbGncuL99O1HPSTUtMRZPeJ10U8lyTzuMf0HGhChprVyoJ4iTHpn0LeXTYcR3gtHOc
- 5HOWA73S97adAorBg8bnyY3wgTRiSdiu20x/31VTUkyR9GsDsfvHGyFPMqot50xxzYO/gVXUy08
- wosGYZf9vQAVOShQ6zkvNlLCotXOSaTsqglByetti5vdBaxix0aFE8hFhh3dvTysTTax0Dqk+jm
- xjaib3IWrWW84xe05bCpDOvuq7G31F4Ggmwgt8CNRW+u0fJthmbvPAW7MfGwnElXInjJ2Zdiwrx
- AED3u75wviDZohi+b8m6kTaU9JyLiuBmR4d4OX2EDpdqR2yLn5k+lmJZgen5lQbcdiQ4KmW3jNM
- 4COPilgrGWQjYVsTSGHDwqmzvWjUxQzi0QDZgkkgPTfuaFZ9egWaXE0G4msFqgY4Y5Ce7j1ZJyW
- KIbQ==
-X-Google-Smtp-Source: AGHT+IHHf0aJJ9tYZfOV0Bj4uZ5BICJr6oAQbmMpzNLiKkXXpPz2qgMLoWvQUnGGw9OJ21pXvI3Gng==
-X-Received: by 2002:a05:600c:468d:b0:43c:f0ae:da7 with SMTP id
- 5b1f17b1804b1-45a10b9f391mr1235995e9.7.1754925894651; 
- Mon, 11 Aug 2025 08:24:54 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:f9e:3c01:3e73:96b1:418e:3053?
- ([2a0a:ef40:f9e:3c01:3e73:96b1:418e:3053])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c3abf0csm40155592f8f.14.2025.08.11.08.24.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Aug 2025 08:24:54 -0700 (PDT)
-Message-ID: <f5c94319-8ef8-459d-88b2-836702779cfb@linaro.org>
-Date: Mon, 11 Aug 2025 16:24:53 +0100
+ d=1e100.net; s=20230601; t=1754925919; x=1755530719;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pWqasxKHxlPA09Szn0r5vmdtzPqapyvktVmaOeG4oRI=;
+ b=OchfOcNVdKp5xaxHiReWHFi2hZleoq6CFMPddNh/pP4+q4iznHkQqWpdHeHH53YTAY
+ MXVgX5bk4MCNJ2YOQLtFXOVVZxGLub5UkrS4N01+sTaQ0P/kHLRx2wz6Cibi+jizU3Ql
+ 8i7XWkwzYuD5Dh+DPAB7NpBwUQpclAhONpn9U3UILBqFp+CGRNUaCAnBU7qSTe5eCX47
+ szRCYaTKZpUFK0AIUEzaH1ingw4eLXdPE25uZxhPH0ijQuQ48Zp1T6PwjkUzR52oVgu+
+ 6GdBwzBX+oUpJIedEMufgLI0JaAn6FhMuAdv4AyEs3SQ8sZ6kHqH4QpC7DmkUKNaP8JN
+ jhQQ==
+X-Gm-Message-State: AOJu0YwqtBGa68oYpHdtUjlelpieGotYzWQXLuvO9IEKYWu5TG+LUzoE
+ 2N4pMnxqru7nkrqCF58pvZG2adm+x3h4iCMXuO5ZHsNQxgwyJ8je7iYkuw2Syw==
+X-Gm-Gg: ASbGncuaETQGc/At/epAWRCuNWQPNcAb/8yOSPzqAqgT3HfrMp6MnzKvXgnJavQxYBt
+ u45XyAZoyMnHw4hZb3Sx4BHpVpA8dr0ZhO5cuZLbXiXTPc0CVndSoxhf5SlBPe5l1rzf5g296at
+ BU90X5mY/GegamGljwiO+++3pK16wqxH45xvHyUmEij8E3iQhJCqpqZxTYRxcyBMuu6BANWf2hv
+ XPReYRxrFNuGQE27pOZaTQzkMAH8KAZkgpVqmhxwtrsDrCJqfTYvCVbF7vIIwS9hWn8bzPETuBM
+ 93P2sc9U//FOW+TR3JnD37EZWNNEu1TTFD01NB/KXKYk+LPizQokSutPZ7d31PH5I21lKENJdH5
+ eA1IqoijLq6pu3YKdfuF6WA8WpxB9rO1cbDWICy7Ha5HbULMAm90ZV1H8XgYKm8mGC97A1k8qLg
+ ==
+X-Google-Smtp-Source: AGHT+IEcUX3iCjh2QpYFQipY2wnUYWpLpi3xJnhB/8ZjADct2G8pOqxPy4ZSCSS4G6iuXm+cRKZbMA==
+X-Received: by 2002:a05:600c:4f4f:b0:442:c993:6f94 with SMTP id
+ 5b1f17b1804b1-45a10baf652mr1440215e9.12.1754925919190; 
+ Mon, 11 Aug 2025 08:25:19 -0700 (PDT)
+Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
+ [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e58400f5sm254803195e9.2.2025.08.11.08.25.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Aug 2025 08:25:17 -0700 (PDT)
+From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+To: Rudi Horn <dyn-git@rudi-horn.de>
+Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ linux-sunxi <linux-sunxi@lists.linux.dev>
+Subject: Re: [PATCH] Fix detection of odd memory configurations on sunxi
+Date: Mon, 11 Aug 2025 17:25:15 +0200
+Message-ID: <1927944.tdWV9SEqCh@jernej-laptop>
+In-Reply-To: <56f44755-fca8-4364-905e-685e79fd1aea@rudi-horn.de>
+References: <56f44755-fca8-4364-905e-685e79fd1aea@rudi-horn.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: Seeking advice on API return type inconsistency
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,41 +102,137 @@ X-Virus-Status: Clean
 
 Hi,
 
-I was wondering what people's thoughts were on API return types. In 
-particular there is this and other examples in include/clk-uclass.h
+CC: Andre, Jagan, linux-sunxi (maintainers and customary linux-sunxi ML)
 
-/**
-  * get_rate() - Get current clock rate.
-  * @clk:	The clock to query.
-  *
-  * This returns the current rate of a clock. If the clock is disabled, it
-  * returns the rate at which the clock would run if it was enabled. The
-  * following pseudo-code should hold::
-  *
-  *   disable(clk)
-  *   rate = get_rate(clk)
-  *   enable(clk)
-  *   assert(get_rate(clk) == rate)
-  *
-  * Return:
-  * * The rate of @clk
-  * * -%ENOSYS if this function is not implemented for @clk
-  * * -%ENOENT if @clk->id is invalid. Prefer using an assert instead, 
-and doing
-  *   this check in request().
-  * * Another negative error value (such as %EIO or %ECOMM) if the rate 
-could
-  *   not be determined due to a bus error.
-  */
-ulong get_rate(struct clk *clk);
+Dne ponedeljek, 11. avgust 2025 ob 09:35:19 Srednjeevropski poletni =C4=8Da=
+s je Rudi Horn napisal(a):
+> Hello,
+>=20
+> I encountered a bug where u-boot detects that my OrangePI zero 3 (with=20
+> 1.5GB)
+> has 2GB and crashes.=20
+
+This is known missing feature, but you can also call it a bug. Anyway...
+
+> The orangepi u-boot source code contains an additional
+> modification in the `mctl_calc_size` which removes a quarter of the=20
+> memory the
+> calculated last address cannot be written to:
+>=20
+> https://github.com/orangepi-xunlong/u-boot-orangepi/blob/v2024.01/arch/ar=
+m/mach-sunxi/dram_sun50i_h616.c#L1365-L1368
+>=20
+> I'm not entirely sure if there is some specific logic that applies to this
+> modifier, but it does fix the issue on my system.
+>=20
+> I propose the following patch, but am open to any further suggestions.
+
+This is pretty neat solution. Please send proper submission according to ru=
+les
+with fixes below.
+
+>=20
+> Thanks,
+> Rudi Horn
+>=20
+> Note: Submitted in my personal capacity and is not affiliated with my=20
+> employer.
+>=20
+>=20
+>  From 2199f3b28e5fc853ed1921586358c33f3f1502d3 Mon Sep 17 00:00:00 2001
+> From: Rudi Horn <dyn-git@rudi-horn.de>
+> Date: Mon, 11 Aug 2025 08:58:34 +0200
+> Subject: [PATCH] arch: arm: mach-sonxi: Fix detection of odd memory
+>   configurations
+
+sonxi -> sunxi
+
+However, better prefix would be "sunxi: H616: dram:" (based on git log.)
+
+>=20
+> Fix detection of odd memory configurations. Previously 1.5GB devices were
+> incorrectly detected as 2GB devices, causing u-boot to crash.
+>=20
+> Signed-off-by: Rudi Horn <dyn-git@rudi-horn.de>
+> ---
+>   arch/arm/include/asm/arch-sunxi/dram.h |  1 +
+>   arch/arm/mach-sunxi/dram_dw_helpers.c  | 10 +++++++++-
+>   arch/arm/mach-sunxi/dram_helpers.c     |  8 ++++++++
+>   3 files changed, 18 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/arch/arm/include/asm/arch-sunxi/dram.h=20
+> b/arch/arm/include/asm/arch-sunxi/dram.h
+> index 0eccb1e6c28..7580421ca77 100644
+> --- a/arch/arm/include/asm/arch-sunxi/dram.h
+> +++ b/arch/arm/include/asm/arch-sunxi/dram.h
+> @@ -44,6 +44,7 @@
+>   unsigned long sunxi_dram_init(void);
+>   void mctl_await_completion(u32 *reg, u32 mask, u32 val);
+>   bool mctl_mem_matches(u32 offset);
+> +bool mctl_mem_matches_upto(u32 offset);
+
+I don't see a benefit for public function here, since it's unlikely to be
+used anywhere else. Just mark it static. Compiler can optimize it better.
+
+>   bool mctl_mem_matches_base(u32 offset, ulong base);
+>=20
+>   #endif /* _SUNXI_DRAM_H */
+> diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c=20
+> b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> index 24767354935..5bcd2672465 100644
+> --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
+> +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> @@ -146,5 +146,13 @@ unsigned long mctl_calc_size(const struct=20
+> dram_config *config)
+>          u8 width =3D config->bus_full_width ? 4 : 2;
+>=20
+>          /* 8 banks */
+> -       return (1ULL << (config->cols + config->rows + 3)) * width *=20
+> config->ranks;
+> +       unsigned long size =3D (1ULL << (config->cols + config->rows + 3)=
+)=20
+> * width * config->ranks;
+> +
+> +       /* some memory configurations such as 1.5GB rely on this to=20
+> compute the correct size */
+> +       if (!mctl_mem_matches_upto(size)) {
+> +               size =3D (size * 3) / 4;
+> +               debug("capping memory at 0x%lx\n", size);
+
+Maybe test again? It seems to me a bit dangerous to just assume that it
+will work. If it fails, panic() should be called.
+
+Best regards,
+Jernej
+
+> +       }
+> +
+> +  return size;
+>   }
+> diff --git a/arch/arm/mach-sunxi/dram_helpers.c=20
+> b/arch/arm/mach-sunxi/dram_helpers.c
+> index 83dbe4ca98f..68c75fa07a6 100644
+> --- a/arch/arm/mach-sunxi/dram_helpers.c
+> +++ b/arch/arm/mach-sunxi/dram_helpers.c
+> @@ -61,4 +61,12 @@ bool mctl_mem_matches(u32 offset)
+>   {
+>          return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
+>   }
+> +
+> +/*
+> + * Test if memory at offset matches memory at end of DRAM
+> + */
+> +bool mctl_mem_matches_upto(u32 offset)
+> +{
+> +       return mctl_mem_matches_base(offset - sizeof(u32),=20
+> CFG_SYS_SDRAM_BASE);
+> +}
+>   #endif
+> --
+> 2.43.0
+>=20
+>=20
 
 
-get_rate is declared as returning a ulong but the description says that 
-it can return negative errors. A simple test of the return value for 
-being less than 0 will always fail so errors can go undetected. Casting 
-to a signed type seems less than ideal.
 
-What is the best way to deal with this? Cast to a signed or update the 
-API to be signed or...?
 
-Andrew
