@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9F5C87FDB
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 13:12:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A35A4C87FDB
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 13:12:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 159AD832FE;
+	by phobos.denx.de (Postfix) with ESMTP id 8C4D083394;
 	Mon, 11 Aug 2025 15:12:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="hcy3Uo4A";
+	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="VZdWrhAY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 566CD83335; Mon, 11 Aug 2025 15:12:36 +0200 (CEST)
+ id 93B6083335; Mon, 11 Aug 2025 15:12:36 +0200 (CEST)
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AE4B83020
+ by phobos.denx.de (Postfix) with ESMTPS id B47B3832DD
  for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 15:12:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=frieder@fris.de
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 44A2DC970D; Mon, 11 Aug 2025 15:12:31 +0200 (CEST)
+ with ESMTPSA id 4C548C975B; Mon, 11 Aug 2025 15:12:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
- t=1754917953; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=jYh0sWfgLhd0bw8yGxfy/uyNBTWf2QPXUsh3JE6kZMY=;
- b=hcy3Uo4A5mP7UdKK8nfAcGLUUBmCDcPRruNgWAUMqRm2KXidQHc6mvzxa91t6jvvmpIEhi
- 32sMEghPUYI2P7ZF4xv9Oye2BwXaWb+aqwTdwX05Wf/I5eMjUN130qbb/L8r5T2lEMi64Q
- OWjvJKmu50/2ZV4EnjBtzFfTObTpRvS6KQpifD9SouRqZmp7CeJU2KaU9iCt6V/VAlXseY
- LVd6elHUDq5b34sOQR7teEXPZb+hw2ihTLWH3PiwRtCLPGj5j+TPWAT8YsEJ9vENAHNlcS
- aN3H0dfWkyRTJeC5OeNdy8DNDUYv6kWlBmAvRkw7vzhSXVSvbtM8sa0v6zIoqA==
+ t=1754917954; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding:in-reply-to:references;
+ bh=pLqZoUxu1al+9I3qJtbVAqo5w1/SQvOAmNJtBfARXEg=;
+ b=VZdWrhAYflR3fFOmC4A0WBRpm+sxDOWEfurAg0hSKxth3jev9W85cjbD+2GAwxbu2YVxrH
+ N3X/Y8AemmpC8/hwXghQEgUCQCNkt3Cj8Z5MXNBo+/JXzeMGKNXXoaDeC3H5ebBMLG+Lw7
+ I7rFfXo4U2Wzij28HxFi79wvPbo8vljSNBBmGK8J20H9tD3nC17lgbc+LeKdGxPRtjUOsl
+ RZnDISwsi20gJJndjwgSxROyxOV4vXiMxMjCp8OLBdh0+a8up40DgkXCan+ZOus+COgV6w
+ 3eeWK08cWFdDd52yaLH83x+tCx3892amrU4VKKvcP8F9LFz7whY+ktuc1LfwDg==
 From: Frieder Schrempf <frieder@fris.de>
-To: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marex@denx.de>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+To: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>
 Cc: Frieder Schrempf <frieder.schrempf@kontron.de>, Joy Zou <joy.zou@nxp.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH 0/6] Use correct LDO5 control registers for PCA9450
-Date: Mon, 11 Aug 2025 15:11:56 +0200
-Message-ID: <20250811131213.211124-1-frieder@fris.de>
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH 1/6] Revert "pmic: pca9450: Add optional SD_VSEL GPIO for LDO5"
+Date: Mon, 11 Aug 2025 15:11:57 +0200
+Message-ID: <20250811131213.211124-2-frieder@fris.de>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250811131213.211124-1-frieder@fris.de>
+References: <20250811131213.211124-1-frieder@fris.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -67,28 +67,78 @@ X-Virus-Status: Clean
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-This is a port for the following series in Linux, which is already
-available in mainline:
+This reverts commit 2add0511757e2c5897a88b57c5ea8c912140e60f.
 
-https://patchwork.kernel.org/project/linux-arm-kernel/cover/20241218152842.97483-1-frieder@fris.de/
+It turns out that all boards using the PCA9450 actually have the
+SD_VSEL input connected to the VSELECT signal of the SoCs SD/MMC
+interface. Therefore we don't need manual control for this signal
+via GPIO and there aren't any users.
 
-This aligns the PMIC driver with current Linux and allows to use
-upstream devicetrees in U-Boot.
+This is equivalent to the following change in Linux:
 
-Frieder Schrempf (6):
-  Revert "pmic: pca9450: Add optional SD_VSEL GPIO for LDO5"
-  pmic: pca9450: Fix enable register for LDO5
-  pmic: pca9450: Fix control register for LDO5
-  pmic: pca9450: Handle hardware with fixed SD_VSEL for LDO5
-  arm: dts: imx8mp-data-modul-edm-sbc: Remove deprecated sd-vsel-gpios
-  arm: dts: imx8mp-dhcom-som: Remove deprecated sd-vsel-gpios
+c73be62caabb ("Revert "regulator: pca9450: Add SD_VSEL GPIO for LDO5"")
 
- arch/arm/dts/imx8mp-data-modul-edm-sbc.dts |  1 -
- arch/arm/dts/imx8mp-dhcom-som.dtsi         |  1 -
- drivers/power/pmic/pca9450.c               | 22 -------------
- drivers/power/regulator/pca9450.c          | 37 ++++++++++++++++++++--
- 4 files changed, 34 insertions(+), 27 deletions(-)
+Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+---
+ drivers/power/pmic/pca9450.c | 22 ----------------------
+ 1 file changed, 22 deletions(-)
 
+diff --git a/drivers/power/pmic/pca9450.c b/drivers/power/pmic/pca9450.c
+index 9d875f8bdbe..0e3d14abf15 100644
+--- a/drivers/power/pmic/pca9450.c
++++ b/drivers/power/pmic/pca9450.c
+@@ -6,12 +6,9 @@
+ #include <fdtdec.h>
+ #include <errno.h>
+ #include <dm.h>
+-#include <dm/device_compat.h>
+ #include <i2c.h>
+-#include <linux/err.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+-#include <asm-generic/gpio.h>
+ #include <linux/printk.h>
+ #include <power/pmic.h>
+ #include <power/regulator.h>
+@@ -29,10 +26,6 @@ static const struct pmic_child_info pmic_children_info[] = {
+ 	{ },
+ };
+ 
+-struct pca9450_priv {
+-	struct gpio_desc *sd_vsel_gpio;
+-};
+-
+ static int pca9450_reg_count(struct udevice *dev)
+ {
+ 	return PCA9450_REG_NUM;
+@@ -85,21 +78,7 @@ static int pca9450_bind(struct udevice *dev)
+ 
+ static int pca9450_probe(struct udevice *dev)
+ {
+-	struct pca9450_priv *priv = dev_get_priv(dev);
+ 	unsigned int reset_ctrl;
+-	int ret = 0;
+-
+-	if (CONFIG_IS_ENABLED(DM_GPIO) && CONFIG_IS_ENABLED(DM_REGULATOR_PCA9450)) {
+-		priv->sd_vsel_gpio = devm_gpiod_get_optional(dev, "sd-vsel",
+-							     GPIOD_IS_OUT |
+-							     GPIOD_IS_OUT_ACTIVE);
+-		if (IS_ERR(priv->sd_vsel_gpio)) {
+-			ret = PTR_ERR(priv->sd_vsel_gpio);
+-			dev_err(dev, "Failed to request SD_VSEL GPIO: %d\n", ret);
+-			if (ret)
+-				return ret;
+-		}
+-	}
+ 
+ 	if (ofnode_read_bool(dev_ofnode(dev), "nxp,wdog_b-warm-reset"))
+ 		reset_ctrl = PCA9450_PMIC_RESET_WDOG_B_CFG_WARM;
+@@ -132,5 +111,4 @@ U_BOOT_DRIVER(pmic_pca9450) = {
+ 	.bind = pca9450_bind,
+ 	.probe = pca9450_probe,
+ 	.ops = &pca9450_ops,
+-	.priv_auto = sizeof(struct pca9450_priv),
+ };
 -- 
 2.50.1
 
