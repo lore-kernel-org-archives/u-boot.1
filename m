@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C02DACA0EC4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 22:21:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 530BBCA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 22:21:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE23A8329F;
-	Tue, 12 Aug 2025 00:21:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABF6D83335;
+	Tue, 12 Aug 2025 00:21:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NjR3NuTp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k6jhb5so";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7923832BC; Tue, 12 Aug 2025 00:21:03 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id B0082831C5; Tue, 12 Aug 2025 00:21:04 +0200 (CEST)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A50E1831C2
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 00:21:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99764831C5
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 00:21:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-3e54f38a595so6210965ab.1
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 15:21:01 -0700 (PDT)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-3e5429b9c37so22050335ab.0
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 15:21:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754950860; x=1755555660; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1754950861; x=1755555661; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DE3+jhv9oncRUvk6Dv5RQBMjltoTMs5RFgo3CAeTHjA=;
- b=NjR3NuTpeCm2SdOEF66H9jJ8zROZZejsIYRFStA9r+J9K5P2uDxDoE0133+0QVA+8/
- 31zEZoBQKw8EZBN4tqrLSpGZ9QALa4isF4wGlGfqP9qzOuDEPQiCFe/jIcBJ9nLmAe8+
- M9v47WbHMqC4P71+p+UQlokVSNNU5FsVkRzHw=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EOTm3prs7jV4+KIcocoxF4tGvA3Rr9Z7CbongYHllEc=;
+ b=k6jhb5soSMqICFsvdtJXFEK5xRcX+LK1OUAgUBfGOcE8YJm0H77lV+e0Y4kpwuln1t
+ C9mnuI0ZQ19S3aNneLt6rgeZj/2oB55nCrC2wnRaADFHMz5X7kBid0fIsQT/bShKc1kR
+ hYQPkdGgebAsrqLDmv3+ZqV0xKj5nK6JDaryI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754950860; x=1755555660;
+ d=1e100.net; s=20230601; t=1754950861; x=1755555661;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DE3+jhv9oncRUvk6Dv5RQBMjltoTMs5RFgo3CAeTHjA=;
- b=AdH1sEgWpTCbIEnaxB48ezspxqtVnHMh9HEZ9dUahqS3o5p99w+xRG9hySQhrTz16/
- nGOAZJ/CF3GL5JMDB1zdTvDIG8V5MMlLn1VqYdSjYP6OP6wi1Ry1uIiv7kJKqjFLepYZ
- HBmNIayq/9gwGvtGmN2zPhkD0NPfg8sDzO1UWc0ArQTppWn1UKcn+w9H9atKuXKJRws3
- 7QSJ/j7PuHCPGu/aajFPs7V/+c0+/BsUHO/qQA6ir4YdkfSi0ui+rII4V2PNUATZoZhM
- GFggWHm3HvsuuZk+WaxPxxohw4oklFVLhIaDeL9OoAYRIuHq0/i72FGXglq75ivaTOun
- IO7w==
-X-Gm-Message-State: AOJu0Yztj0uOtyG2UE8w6339z8F6VcxvWsu3XHDvb4LcfYcgG8Ux+Nn6
- kT6occ1yM5gIJ3ujoTlOrXgBxoBSjaF0Dj5Q1vqj4vGdHTvyVDlh9y9YOdmDnG01wnfcVKLjghH
- 7aIruazg=
-X-Gm-Gg: ASbGncuBMb5qpHP13A56YwvUtLUVAySMcL3m02w96+91Q6CZ4JVBoRgn0OposPR75cq
- zbub4EYKpK5HGLCw9pbpHfBRvhTFpsrJfsOoer2JXhse7yv2YXWe+HlVK1I2aTZCl+rjIHJbgUO
- YSih440R0zbf2OvIzlcWUyG3aOK7Ky0PnWxNzze9NspEHYPge4YBd7C7k6SeYTZ8YdMrhnKeoJt
- rBYdRvXQEYC9fvVxFIJ4Jlxl9D+9VNgLw1ulSmlzWeSIe6Sr8Q6GzTMdN11NuAhNyPqNjb1AmLF
- iiwtQp3VkCLo2kHsM9h1D7brxiuhM7ZS+/N685Nt2jcsRmImbsjhFniiyLwmFET2qsCIorccCyw
- HwpaRTu5tXjeouw3RXZKaEcVGgCBffNf+VvPG4yqduqCwPhF8HM+83Uk=
-X-Google-Smtp-Source: AGHT+IFCG+C3rA+UAL854QMqL1TDSWbnh8BfaFCV///gL6S+GA61D1i1Olmt8AumaQxq9MxUAX2VOA==
-X-Received: by 2002:a92:ca09:0:b0:3e5:5937:e54c with SMTP id
- e9e14a558f8ab-3e55af2ac30mr21329455ab.3.1754950860368; 
- Mon, 11 Aug 2025 15:21:00 -0700 (PDT)
+ bh=EOTm3prs7jV4+KIcocoxF4tGvA3Rr9Z7CbongYHllEc=;
+ b=lEyUhlCEsF+4lIKxbYG/3+ZRyWudmC9uaM2cLsbccGJsQzUXvw+I10AGkj39XvvSR3
+ eVolc4tYSRu0C0iJPS/ItlxQBWS/Lco5ckxb72QQavV4zHwFd2/C4M6tu41oKSCWC7vA
+ ukmhZi+DfuDoKbpj+qzIcLAuQlPqUuX71FpEhUog1zPHi9EGt25zpOTP5xN+JXm+T9ru
+ dIrg8oQUqqeQw+eE5W8HLCmGNtt3FfAvheg00irKU9220X1eBXJ7fkTmEuW2dOGxyL2c
+ 7YEXGcXSyD/4vNf/04S3Xq8m/PhWBPRgJKM+ODDP6GGEhh+qPwI4cRwy1yi/QPMgke1X
+ EHnw==
+X-Gm-Message-State: AOJu0YztHGIuJ69MmJXO5+S44WUWsaGAfHYZcx3hf09G1b6DwMxkW07h
+ sDlrUSEACRuHJvXSM+17qTplQsUoTbO/XqSRVUC+CYulzKpx+zLZeuAGtp1ZKzkh8pGZheSr0j4
+ 19q8WAEM=
+X-Gm-Gg: ASbGncsdF6syesU9L504VYd+EfXAMxrMH3ztQuR0lauGH2O5n+o8DvoqYEtD1kmoNZ3
+ IuWlToTOXjw9p5mVUW3aFU+X3Gz+vdI8DOLUHKpetJjbci4ludZ34+50TRhppVxEXQF5wFJAeTZ
+ +1MkTZjDptlElmiEopHyylEFD0epP0coq4ZMuaMoK1+T/KDDPPjiaC6YEgJ9jA0ffys6+mkw/UR
+ 21JUGd+Q/S4uCITTvFlD/YM7OX3u4L+pN4potMnMeIDFjG4DXWCYZDtWMyFtTKCK7XsvcRSd00p
+ QwJRtMREQXY0wmKLZSpNRk2OOn4stAkUonjnAN1m+swqifFO8DyzTGbPOs435pDqSHnAKHDkhDM
+ kCxdyjKkscFozUnwgjalXh8qCl2QOYKfaiEKxX4J6NvRMmtN6yNegtnHt/9xu1yQEUQ==
+X-Google-Smtp-Source: AGHT+IHFPoF2eoKz+cRp9i8OcAV/1E4jSZWww8vH0+Flsl61LQ6HfH4BZMMKj5cr3bp9EQCLhahofw==
+X-Received: by 2002:a05:6e02:152f:b0:3e5:5a03:c8fb with SMTP id
+ e9e14a558f8ab-3e55afb9265mr19521555ab.14.1754950861414; 
+ Mon, 11 Aug 2025 15:21:01 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3e533cdd3e6sm42092725ab.55.2025.08.11.15.20.59
+ e9e14a558f8ab-3e533cdd3e6sm42092725ab.55.2025.08.11.15.21.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 15:20:59 -0700 (PDT)
+ Mon, 11 Aug 2025 15:21:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250718011552.1334023-1-trini@konsulko.com>
-References: <20250718011552.1334023-1-trini@konsulko.com>
-Subject: Re: [PATCH] sandbox: Add more dummy functions to mimic other
- architectures
-Message-Id: <175495085958.1657597.3591473320262575007.b4-ty@konsulko.com>
-Date: Mon, 11 Aug 2025 16:20:59 -0600
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250723-cdce9xx_clk-v2-1-3ba5a5bdf6b3@linaro.org>
+References: <20250723-cdce9xx_clk-v2-1-3ba5a5bdf6b3@linaro.org>
+Subject: Re: [PATCH v2] clk: cdce9xx: Fix use of dev_read_u32_default
+Message-Id: <175495086051.1657597.18258689363296150245.b4-ty@konsulko.com>
+Date: Mon, 11 Aug 2025 16:21:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,19 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 17 Jul 2025 19:15:52 -0600, Tom Rini wrote:
+On Fri, 25 Jul 2025 11:41:12 +0100, Andrew Goodbody wrote:
 
-> This adds more common functions found on other architectures that will
-> allow for more compile-testing of drivers. These are either dummy
-> functions as we do not need them or mappings to existing functions,
-> similar to how other architectures handle it.
+> The function dev_read_u32_default does not return an error and the
+> variable 'val' is unsigned so testing for >= 0 will always be true. It
+> looks like the code was attempting to return -1 if xtal-load-pf was not
+> present but that cannot work. Instead use dev_read_u32 which returns an
+> error code separately from writing the value into the passed pointer.
 > 
+> This issue was found by Smatch.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] sandbox: Add more dummy functions to mimic other architectures
-      commit: 493c3da3ac530229ca4c4caadd5df041f6c25eb2
+[1/1] clk: cdce9xx: Fix use of dev_read_u32_default
+      commit: bd644d9613ee0cdc3bd2ac3bc7bcc52b09d821e7
 -- 
 Tom
 
