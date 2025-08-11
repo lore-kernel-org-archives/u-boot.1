@@ -4,104 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F8BC87FDB
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 10:28:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE33C87FD2
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 10:47:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AFDB832C8;
-	Mon, 11 Aug 2025 12:28:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E65383335;
+	Mon, 11 Aug 2025 12:47:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="p1JJXoLc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LUO7ue8G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D02DA832DD; Mon, 11 Aug 2025 12:28:41 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4CA6E8334A; Mon, 11 Aug 2025 12:47:30 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B89A3832BF
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 12:28:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A372D82FCA
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 12:47:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 7EF503F28B
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 10:28:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1754908115;
- bh=M8SAjQ8o98Auyjrtln8TE0vVYddXxJ47hgnzEjNBGcg=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=p1JJXoLcSFVuiPflwJgZVptBJciV8pl428Ph9h/TSIUoWNNVZjnH1FLHXopkD0qx1
- p9kfOzMRTWzdCojSRtZ3rYCdexBdZPtX6OVAb8s5ahiNBvqAfWRDZRMEpJ5NmR+zXR
- yi9B/GAqov4L+NDoQHcmX78tbsujjydGdAlqFXmAU1akFcOqSSwo93MP/jAfx3XkBf
- MRrRzGOQlbTuCiWO0YJq4Ca+eSrAcsonzfkRYo5uLC+z7FxBXYXxF4yZ/GKT/kCGmD
- mqwORt6cb47HpEkbb/Pt4szKoUA7++CkEBDnASpEqJqr/plXUn5qUxP7CbgQX+/8T8
- F3X+7YfO2zdtA==
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-3215b3229c7so4429232a91.2
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 03:28:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-459ddf83023so25193915e9.0
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 03:47:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754909247; x=1755514047; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lXS50i6WIEXLofL2AHxE3fCLiJxZaWxph2VcG+FXa60=;
+ b=LUO7ue8Gg5n4xPVCuPSqPWPW0D96KCHmJT2TMxbGVKMb6jGSg7R02E5VM5io1GEUv3
+ XOaTxDPSpejKffhL1RaFO4GvZOWEfaDAkxjM/UW/BvOeGtQMyMr49H+i3XbwXnOFaySC
+ d4kig2385u8Rq73Z2aySqzqvk9TcwsiHucvexUUqlXXI5X0TuLV6UpBcw7BVdOT70Bdu
+ ZztQG2XFqDkJq9lHrH+/YFghXF2t+tbGH0MHXyKxRfIuIy3otYCR7InxtJ6FAZGaZdJM
+ 7E1NUcYQ70zmRUffKTE2MvyBKRM079UGNXHMRWt28jFNo2jFglSpQCATrH1wey9oR6v3
+ U+AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754908114; x=1755512914;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1754909247; x=1755514047;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=M8SAjQ8o98Auyjrtln8TE0vVYddXxJ47hgnzEjNBGcg=;
- b=CzmTqgpgBSeagAS8VmsxMiMvQ0XAzdR9fLCcLa1lE3KuH5GLfBQT4UHRTwiy1RgHnA
- PP4dyedzOpXOXbsXYL492qusNFMMcf9C5Z9VBvPIg4xI6QIjP5z3Ro/Td7Dbdd00iSD+
- pSNA3ko8p1XMaLlGLFCIamHtf0uUC5ONMUQcS7TSpVSs4FRhRYEtX5e8L9BdPbLzB0FQ
- KQGEs1MmiJ4t3q73s9GVhQuHk4tGckXVmIdJh4cfj7L5JT4r1jO3+cZxSa+JkZqAsHW+
- XQk1bj/ik3wKd8sdR8P5G0JW8yWqm85iY0Cy6/9GzbCV+XMMi5Yhj/JUNYgC/tdPaiBX
- d8/A==
+ bh=lXS50i6WIEXLofL2AHxE3fCLiJxZaWxph2VcG+FXa60=;
+ b=aBNNRR8FuJDWj1zdjGpLDuS6kWSaooHzenlBKVQHxzjeqRkQp1wxgWbBhOdq8Z121I
+ JT0avEqa/t0RRy2yqpwm4h70EB+RTobTft+KQpATc5Da5dX246y8r1KN5TVz5WqWV5Hf
+ tGN56gsIejs1f8ZoHcWLhVnv8UUZn15K/Mt9qwiiJT5ThKFsFAnO4gHONgN7VABVeTLB
+ W5slYOAQ88IKCbOUs/KtpfL6I02nVXXGQcgYXrvQ1F/7kwxydDq2gkAzGWA1TbeuRZcp
+ tawYTc6cjyHErDMiSaOgt0fMkNrWr+Hg5wIt1GvR/tnyIpmosQrlN7SY/VHWU2/UP94K
+ Ab6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgYkckB0m4kWLCn/imzcyiI6xdjFUYwf4BPZf3EIC2fdcIwNBsyGYFct37JtRoKfK45szBHS4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzHGbwVYc+AZ6uJPqPkXwBcl4Ljb+bpYuBNVq20sRJ2Y00B34r7
- zqiXxgLEQ+XNzc5eOAZZj63EkzMQb/ldQ7PVu32CbMlPT0GwOVaZNKz99MfS126DO19ZWB0z2vd
- KWwP0RcoWAyhHyfHybwZmmTFmjCTH4HzOQJUcV6sgcxMkY2JRE9oYV4TEbhtq9BEqz7yLHLzqvn
- 01MVV3NwAuOehBIcVsRwqvqrW4WHYWY3bhrPdGgk99tg4DIw==
-X-Gm-Gg: ASbGncvib3IgSWiJN8/szPzJhB/FL1LljRxVKp/IVXXsuJ0hwVpNgYny9J7aCHThI1I
- nWL+mjspLsLohrDVyKODD/k/F/vqAB/BMerMqn8R5W3U6h6BljSUn7E/O+l6j9lj1NbR7Fe61cg
- ISqBlyZbw+rqZ5+mwwzw==
-X-Received: by 2002:a17:903:1746:b0:23f:adc0:8cc2 with SMTP id
- d9443c01a7336-242c2206c3fmr146962115ad.27.1754908113973; 
- Mon, 11 Aug 2025 03:28:33 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGtYZtVxgj2g7UuJl4NvbJbss9nx0NX0sDW2XoI6SGTl5LtaxfkyQIVFCbTaQhoqhI7+fCK6HJ2tLy1VYDiKbg=
-X-Received: by 2002:a17:903:1746:b0:23f:adc0:8cc2 with SMTP id
- d9443c01a7336-242c2206c3fmr146961795ad.27.1754908113534; Mon, 11 Aug 2025
- 03:28:33 -0700 (PDT)
+ AJvYcCXe1FBqR+1NUyV8CoWgn6NwaW3vkiOdYuqYm4BZSo2S0gnwPwBhsNyUbZ7EEHzi5qDsbR6J0P8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIfi1oTYZqVvmnVkdGst628CnfNlLzhfha6mfFmnrGKtonZHwf
+ d82n3I+DTkNa8u223rk2BQ3CVmCCdB3hHpUUBubM6vn9lyHrtI9dh7RUSdWzVPenxfo=
+X-Gm-Gg: ASbGnctXvQYm0qXvPdSIIWmdqYIBrX5usX9dRPCl7BLsigV0mIfpyBQ1E834MAlheii
+ TgzbZtPRXaHgJdclEi+P4QTiLt9GNa1uW/WYTUoISpdKZcXY1iOvLxZPfzuFdpVRaWfENTgi/DX
+ XAF3ZgYMXQzwPyXtXXYNqq7j7IN/SyyJ4CSf9o9w5ZjRlSkPZ8ySBzdYTpRHsIonDaqe8fzjqh5
+ 1fwduyvleyobuL5Xyh5Qc9yVhAlGezH2IiCCkYtRxG7fNmDm1Jr0rUGwvkzNcN8U/s3dr6+0DP4
+ CX3g4ZDdsZtrqe8Z72ByJP8igLu5OUCJ0sb9fC70Ri08sXsueEQ7JZ9Mc/gvCU+6a5VYRgi5Iod
+ uTnxz1OK9QYrYj8j9mFG3M5VbP0DeICD9kLF7ktj7xCDSxxrVUxdfyHJFzRUuLFpbysGR1Xz4MI
+ w=
+X-Google-Smtp-Source: AGHT+IEwAQ9ARpJnmYLbdG93Fp5ydzY5DLtbLRwQqB6mEyeRTPY++rwUQwVSpJX/2n9+8c4eAPAm+A==
+X-Received: by 2002:a05:600c:46cb:b0:458:a7fa:211d with SMTP id
+ 5b1f17b1804b1-459f4f3b207mr94116715e9.29.1754909246911; 
+ Mon, 11 Aug 2025 03:47:26 -0700 (PDT)
+Received: from lion.tail248178.ts.net (p4fc3dd6f.dip0.t-ipconnect.de.
+ [79.195.221.111]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e577d0f5sm250839295e9.0.2025.08.11.03.47.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Aug 2025 03:47:25 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Subject: [PATCH] mach-snapdragon: fix erroneous lmb allocations
+Date: Mon, 11 Aug 2025 12:45:13 +0200
+Message-ID: <20250811104710.1896382-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250807102436.452691-1-pro@denx.de>
- <20250807102436.452691-4-pro@denx.de>
- <1d3e5573-7e36-4050-88e8-90d31e5253a9@mailbox.org> <aJmwfBL48AzuFra8@antares>
-In-Reply-To: <aJmwfBL48AzuFra8@antares>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Mon, 11 Aug 2025 12:28:21 +0200
-X-Gm-Features: Ac12FXzWuhD-57RIcKE2UHGGlRtg1elBfGaRPqzJbNKxrjWZFT5PuYep4qtCTNE
-Message-ID: <CAM=mAOmnegd4HTCt5-daVsjNnb04AEx0+VEbowNU5LkB+CY4AQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] Image size checks: Simplify help text
-To: Philip Oberfichtner <pro@denx.de>
-Cc: Marek Vasut <marek.vasut@mailbox.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Gary Bisson <bisson.gary@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Paul Kocialkowski <contact@paulk.fr>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,71 +102,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Philip Oberfichtner <pro@denx.de> schrieb am Mo., 11. Aug. 2025, 10:57:
+In 6e4675b8e5d8 ("lmb: replace the lmb_alloc() and lmb_alloc_base()
+API's") an additional allocation was mistakenly introduced resulting
+in ${kernel_comp_size} containing the address of a second 64mb region
+rather than the actual value of KERNEL_COMP_SIZE.
 
-> On Thu, Aug 07, 2025 at 03:41:57PM +0200, Marek Vasut wrote:
-> > On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
-> > > For coherency, use the same help text for all related size checks
-> > > options. Furthermore, simplify the depends-on logic.
->
+Additionally, in b40d7b8f72f1 ("Merge patch series "lmb: use a single
+API for all allocations"") merge conflict resulted in an additional
+128mb allocation for ${loadaddr} when CONFIG_FASTBOOT is enabled, where
+it should actually be set to the same value as ${fastboot_addr_r} to
+respect size constraints (and since it doesn't seem to interfer with
+any bootflows).
 
-If you want to make two unrelated changes, please, create two separate
-patches.
+Fixup both of these, freeing up 192mb of memory.
 
-Best regards
+Fixes: 6e4675b8e5d8 ("lmb: replace the lmb_alloc() and lmb_alloc_base() API's")
+Fixes: b40d7b8f72f1 ("Merge patch series "lmb: use a single API for all allocations"")
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+ arch/arm/mach-snapdragon/board.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-Heinrich
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index fc921a4be269..5fb3240acc5a 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -533,21 +533,24 @@ int board_late_init(void)
+ 	status |= !lmb_alloc(SZ_128M, &addr) ?
+ 		env_set_hex("ramdisk_addr_r", addr) : 1;
+ 	status |= !lmb_alloc(KERNEL_COMP_SIZE, &addr) ?
+ 		env_set_hex("kernel_comp_addr_r", addr) : 1;
+-	status |= !lmb_alloc(KERNEL_COMP_SIZE, &addr) ?
+-		env_set_hex("kernel_comp_size", addr) : 1;
++	status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
+ 	status |= !lmb_alloc(SZ_4M, &addr) ?
+ 		env_set_hex("scriptaddr", addr) : 1;
+ 	status |= !lmb_alloc(SZ_4M, &addr) ?
+ 		env_set_hex("pxefile_addr_r", addr) : 1;
+ 
+ 	if (IS_ENABLED(CONFIG_FASTBOOT)) {
+ 		status |= !lmb_alloc(FASTBOOT_BUF_SIZE, &addr) ?
+ 			env_set_hex("fastboot_addr_r", addr) : 1;
+-		/* override loadaddr for memory rich soc */
+-		status |= !lmb_alloc(SZ_128M, &addr) ?
+-			env_set_hex("loadaddr", addr) : 1;
++		/*
++		 * Override loadaddr for memory rich soc since ${loadaddr} and
++		 * ${kernel_addr_r} need to be different for the Android boot image
++		 * flow. It's typically safe for ${loadaddr} to be the same address
++		 * as the fastboot buffer.
++		 */
++		status |= env_set_hex("loadaddr", addr);
+ 	}
+ 
+ 	fdt_status |= !lmb_alloc(SZ_2M, &addr) ?
+ 		env_set_hex("fdt_addr_r", addr) : 1;
+-- 
+2.50.1
 
-
-> >
-> > > Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> > > ---
-> > >
-> > > Notes:
-> > >      Changes in v2: new
-> > >
-> > >   Kconfig | 8 +++-----
-> > >   1 file changed, 3 insertions(+), 5 deletions(-)
-> > >
-> > > diff --git a/Kconfig b/Kconfig
-> > > index ec20603883b..490a706101a 100644
-> > > --- a/Kconfig
-> > > +++ b/Kconfig
-> > > @@ -543,10 +543,8 @@ config BOARD_SIZE_LIMIT
-> > >     default 1048576 if RCAR_64
-> > >     default 0
-> > >     help
-> > > -     Maximum size of the U-Boot image. When defined, the build system
-> > > -     checks that the actual size does not exceed it.  This does not
-> > > -     include SPL nor TPL, on platforms that use that functionality,
-> they
-> > > -     have separate options to restrict size.
-> > > +     Specifies the maximum length of the U-Boot image.
-> > > +     If this value is zero, it is ignored.
-> >
-> > This makes the description less accurate, sorry, NAK.
->
-> What about using just the first half:
->
->         Maximum size of the U-Boot image. When defined, the build system
->         checks that the actual size does not exceed it.
->         [plus/minus treatment of the value zero]
->
-> And dropping the remainder "This does not include ..."?
->
-> I think the hint on the separate options would be unnecessary, if they
-> are placed placed just below.
->
-> Best regards,
-> Philip
->
->
->
->
-> --
-> =====================================================================
-> DENX Software Engineering GmbH,
-> Managing Director: Johanna Denk, Tabea Lutz
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> =====================================================================
->
