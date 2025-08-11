@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72914CA0ECD
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 15:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77177CA0EC4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 15:34:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D98D482E37;
-	Mon, 11 Aug 2025 17:25:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EE51983096;
+	Mon, 11 Aug 2025 17:34:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NDUrHtmb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hCes6Dib";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 723DD82E37; Mon, 11 Aug 2025 17:25:22 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id F346E8309E; Mon, 11 Aug 2025 17:34:54 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2228E83280
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 17:25:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC3E683093
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 17:34:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-459d62184c9so26359275e9.1
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 08:25:20 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3b782cca9a0so2982436f8f.1
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 08:34:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754925919; x=1755530719; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754926489; x=1755531289; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pWqasxKHxlPA09Szn0r5vmdtzPqapyvktVmaOeG4oRI=;
- b=NDUrHtmbIDKcHql6qB/WQZOgfoKA50zYxlG3I4WEILK/0ySQX6cJdpka/djo/t/Iqm
- A01uQj5bd8ySZWTzko7SkJLlrfxxsQ39a/617v737Nw3BB26GtSzCzdeARXZG7Auq7X2
- BS0ERh2BVM44daF+sJGc8+l+CHp0s9+EypKmaPuLBKog7hk9bp3jYn2yrD5MlCUVBSUe
- qVbxGA5z/ja7Q18jwDsokgsB4ui0v70D4Xbmzp4X7yT9Uc1h8/TRIfCx+/BFLc9K36yo
- J8aChe3RD9UbsaGHMwlglnc/GSSvIh8021k/qlVcfg4g2MFzkFr5zqEDLrYV9dAL6wxb
- hvBg==
+ bh=pa5H7WjqtxlkYf4utEsbVoLUNd3hZDF6fSnW+rnO1uM=;
+ b=hCes6DibNfDxnSNqqmQUUA/6vIH7R3gWgs1Jkrhgl80XMAp8zUUPOmEkkWX82JC+SL
+ dlL85rRkvm7PAPvPiVJH/B0HOzdGv+GGE2W5kFvItR/7YQOp1lp2NSM/smoMseJSYLoX
+ /CfL9mrrtwQ/xrXxNFuB7FZjFL9WeS1UIu1Sk0Sl7ZAEpKVFRDerSVtIWR0LVFN/2EKS
+ Qi7yewSRB6iRxZNLmxxzyN1e5E+Z06oundh/Xx46D4/H3fqh7A0nVRwtmRo9T3skawSu
+ WQQHMTe/1zNdTUjW5d7v7C3jPmBXe9V62WHaUqdB0svTHRgR+sGbHLHg+7MC9hKeai/v
+ Qnug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754925919; x=1755530719;
+ d=1e100.net; s=20230601; t=1754926489; x=1755531289;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pWqasxKHxlPA09Szn0r5vmdtzPqapyvktVmaOeG4oRI=;
- b=OchfOcNVdKp5xaxHiReWHFi2hZleoq6CFMPddNh/pP4+q4iznHkQqWpdHeHH53YTAY
- MXVgX5bk4MCNJ2YOQLtFXOVVZxGLub5UkrS4N01+sTaQ0P/kHLRx2wz6Cibi+jizU3Ql
- 8i7XWkwzYuD5Dh+DPAB7NpBwUQpclAhONpn9U3UILBqFp+CGRNUaCAnBU7qSTe5eCX47
- szRCYaTKZpUFK0AIUEzaH1ingw4eLXdPE25uZxhPH0ijQuQ48Zp1T6PwjkUzR52oVgu+
- 6GdBwzBX+oUpJIedEMufgLI0JaAn6FhMuAdv4AyEs3SQ8sZ6kHqH4QpC7DmkUKNaP8JN
- jhQQ==
-X-Gm-Message-State: AOJu0YwqtBGa68oYpHdtUjlelpieGotYzWQXLuvO9IEKYWu5TG+LUzoE
- 2N4pMnxqru7nkrqCF58pvZG2adm+x3h4iCMXuO5ZHsNQxgwyJ8je7iYkuw2Syw==
-X-Gm-Gg: ASbGncuaETQGc/At/epAWRCuNWQPNcAb/8yOSPzqAqgT3HfrMp6MnzKvXgnJavQxYBt
- u45XyAZoyMnHw4hZb3Sx4BHpVpA8dr0ZhO5cuZLbXiXTPc0CVndSoxhf5SlBPe5l1rzf5g296at
- BU90X5mY/GegamGljwiO+++3pK16wqxH45xvHyUmEij8E3iQhJCqpqZxTYRxcyBMuu6BANWf2hv
- XPReYRxrFNuGQE27pOZaTQzkMAH8KAZkgpVqmhxwtrsDrCJqfTYvCVbF7vIIwS9hWn8bzPETuBM
- 93P2sc9U//FOW+TR3JnD37EZWNNEu1TTFD01NB/KXKYk+LPizQokSutPZ7d31PH5I21lKENJdH5
- eA1IqoijLq6pu3YKdfuF6WA8WpxB9rO1cbDWICy7Ha5HbULMAm90ZV1H8XgYKm8mGC97A1k8qLg
+ bh=pa5H7WjqtxlkYf4utEsbVoLUNd3hZDF6fSnW+rnO1uM=;
+ b=VA8lEAYZuAtyJCHcBci3jfhWoQzIua4qril2xiGppycGV+xLzF/YAdTyNY4gSUmSHR
+ UKtHFQgpAiNq759nUV9QCiezwSbcTMeoJNaR2K9Msi0oP4aCb+Z/oiWCh4qPeVtvSonk
+ sdU1aiVF1CcTxcmt7cDs0fT2r7cFDQ5t7JuYkxvhlbGefvK78YdDfnG/L5uJX0WDcjtM
+ kx75G209hWkPMlpy+DKrOYmfz7y2Z86S7xTa2/akntBdMSnxbYs4l493qDKYSY/7CoC8
+ eKLKnnyCLivkYg0hGr51ZpbQvNcZHX9XTF5u1Vk9WxJIEkLHnc1cAUek8sbulo4u1X64
+ KpYw==
+X-Gm-Message-State: AOJu0YwZLFK5Yp7We/12FW2nf6NoIJiSV8sNO/MK1LXTnzG+MfRlTBNR
+ I+1WVc/JM7AyUelTBRYWBtBPji7O0q7oxPSlQCva6dSSJvRTlDF8pBna0r2LCA==
+X-Gm-Gg: ASbGncsWueO6yVDrT8aARhoL7KJCcVROE2ffpuF2xgn3o6d7luDckEpoGtXcJef5br4
+ 0WXDEvLaNYxhGJNGky6RAZ0yz1VnJYsftqCjtoqTn/abp23fYFbh+XcWwlPHfQtFa6SzG/Awe2v
+ Dtm0cJvKDbzqsvm57+mQqg0xPKvqaIi9xv+H83FXzN5FBRBgzEjGyl621rUmYSAZRwfaBKvhv8i
+ wHr9yw443EVrsbMhF7QWGl3Z5hGEdkAjPISulqxpKL7TzfGt8o0amfHfYRKNBevQ/CNftr8N7l5
+ xq64tWoyTbaegWVAzgSWWAW/61dHaCkeaCw2yAyU6S7rWYUeu0khzpZ3IUsrgfLDij9tEKcQQq3
+ CjA9XOzumrQhHHEWdxYHgzID8m2NSeS9hSGOG9+rM4C3aCAW2PzgPSE0iYyFd8vpirg8XJ5t4vw
  ==
-X-Google-Smtp-Source: AGHT+IEcUX3iCjh2QpYFQipY2wnUYWpLpi3xJnhB/8ZjADct2G8pOqxPy4ZSCSS4G6iuXm+cRKZbMA==
-X-Received: by 2002:a05:600c:4f4f:b0:442:c993:6f94 with SMTP id
- 5b1f17b1804b1-45a10baf652mr1440215e9.12.1754925919190; 
- Mon, 11 Aug 2025 08:25:19 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IETlEYVakrIWts/SDtqOPgNj2hqtRJvrQ1zlCWcYtFnXYmFrusELUL1i29Rdm37CZhkmgKa8A==
+X-Received: by 2002:a05:6000:25c7:b0:3b8:ef61:bab7 with SMTP id
+ ffacd0b85a97d-3b900b503d5mr9112004f8f.27.1754926489047; 
+ Mon, 11 Aug 2025 08:34:49 -0700 (PDT)
 Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
  [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e58400f5sm254803195e9.2.2025.08.11.08.25.16
+ 5b1f17b1804b1-459d712c386sm343161245e9.23.2025.08.11.08.34.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 08:25:17 -0700 (PDT)
+ Mon, 11 Aug 2025 08:34:48 -0700 (PDT)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Rudi Horn <dyn-git@rudi-horn.de>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- linux-sunxi <linux-sunxi@lists.linux.dev>
-Subject: Re: [PATCH] Fix detection of odd memory configurations on sunxi
-Date: Mon, 11 Aug 2025 17:25:15 +0200
-Message-ID: <1927944.tdWV9SEqCh@jernej-laptop>
-In-Reply-To: <56f44755-fca8-4364-905e-685e79fd1aea@rudi-horn.de>
-References: <56f44755-fca8-4364-905e-685e79fd1aea@rudi-horn.de>
+To: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, Cody Eksal <masterr3c0rd@epochal.quest>,
+ Chris Morgan <macromorgan@hotmail.com>, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 2/3] sunxi: spl: initialise timer before clocks
+Date: Mon, 11 Aug 2025 17:34:47 +0200
+Message-ID: <3363499.aeNJFYEL58@jernej-laptop>
+In-Reply-To: <20250801234918.19176-3-andre.przywara@arm.com>
+References: <20250801234918.19176-1-andre.przywara@arm.com>
+ <20250801234918.19176-3-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -100,137 +100,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-CC: Andre, Jagan, linux-sunxi (maintainers and customary linux-sunxi ML)
-
-Dne ponedeljek, 11. avgust 2025 ob 09:35:19 Srednjeevropski poletni =C4=8Da=
-s je Rudi Horn napisal(a):
-> Hello,
+Dne sobota, 2. avgust 2025 ob 01:49:17 Srednjeevropski poletni =C4=8Das je =
+Andre Przywara napisal(a):
+> Recent changes in the H6 clock code added delay() calls into the SPL clock
+> setup routine, which requires the timers to work. When compiling for
+> AArch64, we are always using the Arm Generic Timer (aka. arch timer),
+> which does not require further setup, hence having an empty timer_init()
+> routine.
+> However for 32-bit SoCs we use the Allwinner timers, which require some
+> setup routine, and hence we need timer_init() to be called before
+> clock_init().
 >=20
-> I encountered a bug where u-boot detects that my OrangePI zero 3 (with=20
-> 1.5GB)
-> has 2GB and crashes.=20
-
-This is known missing feature, but you can also call it a bug. Anyway...
-
-> The orangepi u-boot source code contains an additional
-> modification in the `mctl_calc_size` which removes a quarter of the=20
-> memory the
-> calculated last address cannot be written to:
+> Swap the order of the two calls, to be more robust when compiling the H6
+> clock code for AArch32 or when using the Allwinner timers for whatever
+> reason.
 >=20
-> https://github.com/orangepi-xunlong/u-boot-orangepi/blob/v2024.01/arch/ar=
-m/mach-sunxi/dram_sun50i_h616.c#L1365-L1368
->=20
-> I'm not entirely sure if there is some specific logic that applies to this
-> modifier, but it does fix the issue on my system.
->=20
-> I propose the following patch, but am open to any further suggestions.
-
-This is pretty neat solution. Please send proper submission according to ru=
-les
-with fixes below.
-
->=20
-> Thanks,
-> Rudi Horn
->=20
-> Note: Submitted in my personal capacity and is not affiliated with my=20
-> employer.
->=20
->=20
->  From 2199f3b28e5fc853ed1921586358c33f3f1502d3 Mon Sep 17 00:00:00 2001
-> From: Rudi Horn <dyn-git@rudi-horn.de>
-> Date: Mon, 11 Aug 2025 08:58:34 +0200
-> Subject: [PATCH] arch: arm: mach-sonxi: Fix detection of odd memory
->   configurations
-
-sonxi -> sunxi
-
-However, better prefix would be "sunxi: H616: dram:" (based on git log.)
-
->=20
-> Fix detection of odd memory configurations. Previously 1.5GB devices were
-> incorrectly detected as 2GB devices, causing u-boot to crash.
->=20
-> Signed-off-by: Rudi Horn <dyn-git@rudi-horn.de>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 > ---
->   arch/arm/include/asm/arch-sunxi/dram.h |  1 +
->   arch/arm/mach-sunxi/dram_dw_helpers.c  | 10 +++++++++-
->   arch/arm/mach-sunxi/dram_helpers.c     |  8 ++++++++
->   3 files changed, 18 insertions(+), 1 deletion(-)
+>  arch/arm/mach-sunxi/board.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/arch/arm/include/asm/arch-sunxi/dram.h=20
-> b/arch/arm/include/asm/arch-sunxi/dram.h
-> index 0eccb1e6c28..7580421ca77 100644
-> --- a/arch/arm/include/asm/arch-sunxi/dram.h
-> +++ b/arch/arm/include/asm/arch-sunxi/dram.h
-> @@ -44,6 +44,7 @@
->   unsigned long sunxi_dram_init(void);
->   void mctl_await_completion(u32 *reg, u32 mask, u32 val);
->   bool mctl_mem_matches(u32 offset);
-> +bool mctl_mem_matches_upto(u32 offset);
+> diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+> index fb4837c2082..432b1c10f92 100644
+> --- a/arch/arm/mach-sunxi/board.c
+> +++ b/arch/arm/mach-sunxi/board.c
+> @@ -476,8 +476,8 @@ void board_init_f(ulong dummy)
+>  	/* Enable non-secure access to some peripherals */
+>  	tzpc_init();
+> =20
+> -	clock_init();
+>  	timer_init();
+> +	clock_init();
 
-I don't see a benefit for public function here, since it's unlikely to be
-used anywhere else. Just mark it static. Compiler can optimize it better.
+I contemplated similar change in past. It works fine for 64-bit architectur=
+es,
+but I'm unsure for 32-bit. If you take a look at A83t clock code, it uses
+sdelay() exactly because timer is not initialized at that time.
 
->   bool mctl_mem_matches_base(u32 offset, ulong base);
->=20
->   #endif /* _SUNXI_DRAM_H */
-> diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c=20
-> b/arch/arm/mach-sunxi/dram_dw_helpers.c
-> index 24767354935..5bcd2672465 100644
-> --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
-> +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
-> @@ -146,5 +146,13 @@ unsigned long mctl_calc_size(const struct=20
-> dram_config *config)
->          u8 width =3D config->bus_full_width ? 4 : 2;
->=20
->          /* 8 banks */
-> -       return (1ULL << (config->cols + config->rows + 3)) * width *=20
-> config->ranks;
-> +       unsigned long size =3D (1ULL << (config->cols + config->rows + 3)=
-)=20
-> * width * config->ranks;
-> +
-> +       /* some memory configurations such as 1.5GB rely on this to=20
-> compute the correct size */
-> +       if (!mctl_mem_matches_upto(size)) {
-> +               size =3D (size * 3) / 4;
-> +               debug("capping memory at 0x%lx\n", size);
-
-Maybe test again? It seems to me a bit dangerous to just assume that it
-will work. If it fails, panic() should be called.
+So, are you sure that this change has no unwanted side effects?
 
 Best regards,
 Jernej
 
-> +       }
-> +
-> +  return size;
->   }
-> diff --git a/arch/arm/mach-sunxi/dram_helpers.c=20
-> b/arch/arm/mach-sunxi/dram_helpers.c
-> index 83dbe4ca98f..68c75fa07a6 100644
-> --- a/arch/arm/mach-sunxi/dram_helpers.c
-> +++ b/arch/arm/mach-sunxi/dram_helpers.c
-> @@ -61,4 +61,12 @@ bool mctl_mem_matches(u32 offset)
->   {
->          return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
->   }
-> +
-> +/*
-> + * Test if memory at offset matches memory at end of DRAM
-> + */
-> +bool mctl_mem_matches_upto(u32 offset)
-> +{
-> +       return mctl_mem_matches_base(offset - sizeof(u32),=20
-> CFG_SYS_SDRAM_BASE);
-> +}
->   #endif
-> --
-> 2.43.0
->=20
+>  	gpio_init();
+> =20
+>  	spl_init();
 >=20
 
 
