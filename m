@@ -4,66 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD50C87FD2
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 07:30:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5346CA0EC0
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 07:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18F70832FE;
-	Mon, 11 Aug 2025 09:30:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AF088334A;
+	Mon, 11 Aug 2025 09:59:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=rudi-horn.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="sWKHIpBd";
+	dkim=fail reason="signature verification failed" (4096-bit key; unprotected) header.d=rudi-horn.de header.i=@rudi-horn.de header.b="xYf7i/py";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E8EB83321; Mon, 11 Aug 2025 09:30:52 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
+ id D498E83381; Mon, 11 Aug 2025 09:35:25 +0200 (CEST)
+Received: from mail.rudi-horn.de (mailv6.rudi-horn.de
+ [IPv6:2604:9a00:2100:af04:21::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5090830B3
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 09:30:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=311c96ee0=Mihai.Sain@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1754897450; x=1786433450;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=oZrSbERPhbU6Q2UZmWk4nsPGWbnSKUqU5Tulnwp0abc=;
- b=sWKHIpBdZVLEZycgJS4ZIZk8VVEh1yj/bVRWhZAis00TYHdeOYnzeMnB
- JrFq5S23WTPWowecQAznnqlIfvDqhvEtoU9N6CLbo9XlLmIJ6hfLrlF5F
- 5RDTM7TQe+vXUGR4sop3tKlGXFL4p8U7bz+qMBOrdzSWDPd9Xv9paIJXM
- hWbRfdxPbvrcUV5eIgZ5nqcHu9JH4Zq0/fbZQuD7EOg4w4Gx65kQi/Wvp
- N85h7d/GcD/IS0UFyZCAVW9h5MMgGHmjz9GMyTTvxWx8+qg3QZ9XrF+TS
- C5okNAqZDzYn5443nD7xgdgUnFJLcyWyYSco796VokLitaDm+1CDnMQDN A==;
-X-CSE-ConnectionGUID: mQhwjvK5QxiNpHTRUPhYNg==
-X-CSE-MsgGUID: b3DM0FCPR+Kaa8m3l46VsA==
-X-IronPort-AV: E=Sophos;i="6.17,278,1747724400"; d="scan'208";a="45034030"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 11 Aug 2025 00:30:48 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Mon, 11 Aug 2025 00:30:37 -0700
-Received: from archlinux.mchp-main.com (10.10.85.11) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Mon, 11 Aug 2025 00:30:36 -0700
-From: Mihai Sain <mihai.sain@microchip.com>
-To: <ryan.wanner@microchip.com>, <trini@konsulko.com>,
- <Romain.Sioen@microchip.com>, <marek.vasut+renesas@mailbox.org>,
- <u-boot@lists.denx.de>
-CC: Mihai Sain <mihai.sain@microchip.com>
-Subject: [PATCH] configs: sama7d65_curiosity: Resync with savedefconfig
-Date: Mon, 11 Aug 2025 10:30:33 +0300
-Message-ID: <20250811073033.5173-1-mihai.sain@microchip.com>
-X-Mailer: git-send-email 2.50.1
+ by phobos.denx.de (Postfix) with ESMTPS id 5B8C88334A
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 09:35:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=rudi-horn.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dyn-git@rudi-horn.de
+Received: from [192.168.178.22] (dhcp-82-220-85-57.bbcs.solnet.ch
+ [82.220.85.57]) (Authenticated sender: journal)
+ by mail.rudi-horn.de (Postfix) with ESMTPSA id AB3DE1A04A4;
+ Mon, 11 Aug 2025 09:35:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=rudi-horn.de;
+ s=mail-vserver01-rudi-horn; t=1754897722;
+ bh=1Yab8s95ynLEsEXIOYGfFJtLICuwk3HqXaICbKzz1Ys=;
+ h=Date:From:Subject:To:Cc:From;
+ b=xYf7i/pyH2ay91Aq09LtoexVuGsPphym7JeEoouYH6DiEisOQB0aHjVX84kAXrtzS
+ YasO2UtQK9g0EMAy5atVr5GTpha3+Q6pwb6y7c2KQ5SvbLqKtuXE1vRELeAp0r4FoO
+ 1gkmQ/cRI+eEsDO5i3IQ5mT8QRsoOdwn1sur7mUpY8Ho/jyleMvzZG+5i5v4N0WRKk
+ Wj2hv2R5oz9wdA6X7ste+TNRSabmFih3lAdMEZZ/vow7wf0bYXnSb1Ask2E7zuFvA+
+ JjA+Eky2Iv9y+Tbq3YL301MXZ0HgwZQJrFN7Ohwysxgm9R8hT3+/XQjVfgjGmBE7/N
+ nP8/3K/yXhDMAeguvPOzT60naX4enIGo+d6xOHCrd55OptuFnHUDA+1qZClOx5XDKG
+ FZ5M+ILLwCj38vDciXLeuUJOvMPUEnuEr6oP2ngK01OlSDsdgIAxHI+l9CWL7yCOGM
+ /DnCNHaMHYo8WvOSkq0K5uJc3ZiOLBGLxXmJEkRsOvt26I1pcXrqaDV6O4KCEHsCOV
+ mijELU+KOC1aeTilOu0Cfa0mAI5HJe3EHOHqDZnp9Pfkfy6HjKVIRQgjq+SEFSNmPf
+ CAnFc12uIwPUXISsAKp5zcFkA60gScm3NCpPM4Y2ATZFiVqMqcYj2YM4d/T/a/liN4
+ d9f/RKQXVfNRvG0f0ewx0keY=
+Message-ID: <56f44755-fca8-4364-905e-685e79fd1aea@rudi-horn.de>
+Date: Mon, 11 Aug 2025 09:35:19 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Rudi Horn <dyn-git@rudi-horn.de>
+Subject: [PATCH] Fix detection of odd memory configurations on sunxi
+To: u-boot@lists.denx.de
+Cc: jernej.skrabec@gmail.com
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-Mailman-Approved-At: Mon, 11 Aug 2025 09:59:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,121 +72,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Perform a clean up of the initial defconfig file,
-and resync with savedefconfig.
+Hello,
 
-Signed-off-by: Mihai Sain <mihai.sain@microchip.com>
+I encountered a bug where u-boot detects that my OrangePI zero 3 (with 
+1.5GB)
+has 2GB and crashes. The orangepi u-boot source code contains an additional
+modification in the `mctl_calc_size` which removes a quarter of the 
+memory the
+calculated last address cannot be written to:
+
+https://github.com/orangepi-xunlong/u-boot-orangepi/blob/v2024.01/arch/arm/mach-sunxi/dram_sun50i_h616.c#L1365-L1368
+
+I'm not entirely sure if there is some specific logic that applies to this
+modifier, but it does fix the issue on my system.
+
+I propose the following patch, but am open to any further suggestions.
+
+Thanks,
+Rudi Horn
+
+Note: Submitted in my personal capacity and is not affiliated with my 
+employer.
+
+
+ From 2199f3b28e5fc853ed1921586358c33f3f1502d3 Mon Sep 17 00:00:00 2001
+From: Rudi Horn <dyn-git@rudi-horn.de>
+Date: Mon, 11 Aug 2025 08:58:34 +0200
+Subject: [PATCH] arch: arm: mach-sonxi: Fix detection of odd memory
+  configurations
+
+Fix detection of odd memory configurations. Previously 1.5GB devices were
+incorrectly detected as 2GB devices, causing u-boot to crash.
+
+Signed-off-by: Rudi Horn <dyn-git@rudi-horn.de>
 ---
- configs/sama7d65_curiosity_mmc1_defconfig | 43 ++++++++---------------
- 1 file changed, 14 insertions(+), 29 deletions(-)
+  arch/arm/include/asm/arch-sunxi/dram.h |  1 +
+  arch/arm/mach-sunxi/dram_dw_helpers.c  | 10 +++++++++-
+  arch/arm/mach-sunxi/dram_helpers.c     |  8 ++++++++
+  3 files changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/configs/sama7d65_curiosity_mmc1_defconfig b/configs/sama7d65_curiosity_mmc1_defconfig
-index e819e51b458..61adebf1980 100644
---- a/configs/sama7d65_curiosity_mmc1_defconfig
-+++ b/configs/sama7d65_curiosity_mmc1_defconfig
-@@ -6,17 +6,21 @@ CONFIG_TARGET_SAMA7D65_CURIOSITY=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60014ef0
--CONFIG_SYS_MEMTEST_START=0x60000000
--CONFIG_SYS_MEMTEST_END=0x70000000
- CONFIG_ENV_SIZE=0x4000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="microchip/at91-sama7d65_curiosity"
--CONFIG_DEBUG_UART_BOARD_INIT=y
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_BOOTM_LEN=0x2000000
-+CONFIG_SYS_LOAD_ADDR=0x62000000
- CONFIG_DEBUG_UART_BASE=0xe2020200
- CONFIG_DEBUG_UART_CLOCK=100000000
-+CONFIG_DEBUG_UART_BOARD_INIT=y
- CONFIG_DEBUG_UART=y
-+CONFIG_SYS_MEMTEST_START=0x60000000
-+CONFIG_SYS_MEMTEST_END=0x70000000
- CONFIG_ENV_VARS_UBOOT_CONFIG=y
--CONFIG_SYS_LOAD_ADDR=0x62000000
-+# CONFIG_EFI_LOADER is not set
- CONFIG_FIT=y
- CONFIG_SD_BOOT=y
- CONFIG_USE_BOOTARGS=y
-@@ -25,8 +29,6 @@ CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="fatload mmc 0:1 0x61000000 at91-sama7d65_curiosity.dtb; fatload mmc 0:1 0x62000000 zImage; bootz 0x62000000 - 0x61000000"
- CONFIG_HUSH_PARSER=y
- CONFIG_CMD_BOOTZ=y
--CONFIG_SYS_BOOTM_LEN=0x2000000
--CONFIG_CMD_IMI=y
- CONFIG_CMD_MD5SUM=y
- CONFIG_CMD_MEMTEST=y
- CONFIG_CMD_STRINGS=y
-@@ -38,23 +40,21 @@ CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_NAND=y
--CONFIG_CMD_SF_TEST=y
- CONFIG_CMD_DHCP=y
--CONFIG_CMD_WGET=y
-+CONFIG_CMD_DNS=y
- CONFIG_CMD_MII=y
- CONFIG_CMD_PING=y
--CONFIG_CMD_DNS=y
-+CONFIG_CMD_WGET=y
- CONFIG_CMD_HASH=y
- CONFIG_HASH_VERIFY=y
- CONFIG_CMD_EXT4=y
- CONFIG_CMD_FAT=y
-+CONFIG_PARTITION_UUIDS=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ARP_TIMEOUT=200
- CONFIG_NET_RETRY_COUNT=50
--CONFIG_DM=y
- CONFIG_CLK=y
- CONFIG_CLK_CCF=y
- CONFIG_CLK_AT91=y
-@@ -72,37 +72,22 @@ CONFIG_MICROCHIP_FLEXCOM=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ATMEL=y
- CONFIG_MTD=y
--CONFIG_MTD_RAW_NAND=y
- CONFIG_DM_MTD=y
-+CONFIG_MTD_RAW_NAND=y
- CONFIG_DM_NAND_ATMEL=y
- CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_DM_SPI_FLASH=n
--CONFIG_SF_DEFAULT_MODE=0x0
--CONFIG_SF_DEFAULT_SPEED=133000000
--CONFIG_SPI_FLASH_SFDP_SUPPORT=n
--CONFIG_SPI_FLASH_SOFT_RESET=n
--CONFIG_SPI_FLASH_MACRONIX=n
--CONFIG_SPI_FLASH_MX66LM1G45G=n
--CONFIG_SPI_FLASH_SST=n
--CONFIG_SPI_FLASH_MTD=n
--CONFIG_DM_ETH=y
- CONFIG_PHY_SMSC=y
- CONFIG_DM_ETH_PHY=y
- CONFIG_MACB=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_AT91PIO4=y
--CONFIG_DM_RESET=y
- CONFIG_RESET_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
--CONFIG_SPI=n
--# CONFIG_ATMEL_SPI is not set
--CONFIG_TIMER=y
- CONFIG_SYSRESET=y
--CONFIG_SYSRESET_CMD_RESET=y
- CONFIG_SYSRESET_AT91=y
-+CONFIG_TIMER=y
- CONFIG_MCHP_PIT64B_TIMER=y
--CONFIG_OF_LIBFDT_OVERLAY=y
--# CONFIG_EFI_LOADER_HII is not set
-+CONFIG_FAT_RENAME=y
- CONFIG_PHANDLE_CHECK_SEQ=y
--- 
-2.50.1
+diff --git a/arch/arm/include/asm/arch-sunxi/dram.h 
+b/arch/arm/include/asm/arch-sunxi/dram.h
+index 0eccb1e6c28..7580421ca77 100644
+--- a/arch/arm/include/asm/arch-sunxi/dram.h
++++ b/arch/arm/include/asm/arch-sunxi/dram.h
+@@ -44,6 +44,7 @@
+  unsigned long sunxi_dram_init(void);
+  void mctl_await_completion(u32 *reg, u32 mask, u32 val);
+  bool mctl_mem_matches(u32 offset);
++bool mctl_mem_matches_upto(u32 offset);
+  bool mctl_mem_matches_base(u32 offset, ulong base);
+
+  #endif /* _SUNXI_DRAM_H */
+diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c 
+b/arch/arm/mach-sunxi/dram_dw_helpers.c
+index 24767354935..5bcd2672465 100644
+--- a/arch/arm/mach-sunxi/dram_dw_helpers.c
++++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+@@ -146,5 +146,13 @@ unsigned long mctl_calc_size(const struct 
+dram_config *config)
+         u8 width = config->bus_full_width ? 4 : 2;
+
+         /* 8 banks */
+-       return (1ULL << (config->cols + config->rows + 3)) * width * 
+config->ranks;
++       unsigned long size = (1ULL << (config->cols + config->rows + 3)) 
+* width * config->ranks;
++
++       /* some memory configurations such as 1.5GB rely on this to 
+compute the correct size */
++       if (!mctl_mem_matches_upto(size)) {
++               size = (size * 3) / 4;
++               debug("capping memory at 0x%lx\n", size);
++       }
++
++  return size;
+  }
+diff --git a/arch/arm/mach-sunxi/dram_helpers.c 
+b/arch/arm/mach-sunxi/dram_helpers.c
+index 83dbe4ca98f..68c75fa07a6 100644
+--- a/arch/arm/mach-sunxi/dram_helpers.c
++++ b/arch/arm/mach-sunxi/dram_helpers.c
+@@ -61,4 +61,12 @@ bool mctl_mem_matches(u32 offset)
+  {
+         return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
+  }
++
++/*
++ * Test if memory at offset matches memory at end of DRAM
++ */
++bool mctl_mem_matches_upto(u32 offset)
++{
++       return mctl_mem_matches_base(offset - sizeof(u32), 
+CFG_SYS_SDRAM_BASE);
++}
+  #endif
+--
+2.43.0
 
