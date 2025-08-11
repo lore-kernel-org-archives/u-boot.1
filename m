@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA77CA0EC4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E730CCA0EC4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:31:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17F5082BA1;
-	Mon, 11 Aug 2025 18:28:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 24AC4831E1;
+	Mon, 11 Aug 2025 18:31:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GYmur5+k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OuV7Jd7i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8748C82BA1; Mon, 11 Aug 2025 18:28:23 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 6FCA6831EA; Mon, 11 Aug 2025 18:31:36 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62BB782063
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:28:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 581A382BA1
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:31:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3b79bdc9a7dso2787082f8f.1
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 09:28:18 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4563cfac2d2so39300545e9.3
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 09:31:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754929698; x=1755534498; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1754929891; x=1755534691; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a6pZhPkTmPwrStRmjBBeOOl3BPnkkUEqZ/JYcvCMxtQ=;
- b=GYmur5+k7mE33qAxgxETQ/0CRB1+wC/EbKsPPItAkH/u1jxjIRKs92xySUMwV0yeWI
- egz56dMvnSnHxE3UGCrQtCFLC2F2q4Dg5Fj6MRAJOfFXcNJdAHUFXjPglgs3ay/W0Ir3
- PqjYSbvK0OehGWZVkDRHinDQNs3DhHRdInvVgAbBr7rXSFcNZCVTZFukpi9BU3h4kDhZ
- u89dhkTzflSl+nF+lQOqYKkTEh4Ni1oSMMriH7f1eqTdhUpKD3VeriGMcnOjQONkNKgv
- sGTqructATb3vsZtwk2A+tcQnKnqxmCP/Fyt5MHFpqwLJI7S2VJmPHPk0UFmtSVhVB67
- 9rEA==
+ bh=4YdRLPIMZH2swK7BCy4B9kH/zLDhhL0HbXD3QPuD768=;
+ b=OuV7Jd7igFclxuhoTDzbMQN69uefcMr9QiDYqCrLi15eYhpr5Q4TC2Pp/g59UbbihT
+ pnREi0G1gRkZgFjC6LnU/xMqSGy0u1qPE+8Wyw5tbTxaqobsERb8jOAMChTt8ifxXjPQ
+ pnEEdG7vNuoLKUULUhcH6bBkvqjMKKlN95fig4p2TACYmiuYnL8iJcM8QeZKuDehqETG
+ c7WPYx8O4/m7pB12vs2p3AtvuIy4tlXx3CJkRGUr/kjpwoAXPajfFm2BfuzifPZse+kg
+ rTMLwAup7+XMKhWDoQml6ll9TeIqTA9PTNl4HqCIvth2w0lHTjfwf+9RKeFKgLP0vRL9
+ bShQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754929698; x=1755534498;
+ d=1e100.net; s=20230601; t=1754929891; x=1755534691;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a6pZhPkTmPwrStRmjBBeOOl3BPnkkUEqZ/JYcvCMxtQ=;
- b=ewqhLhx0BVrZGgBl52snHoQTtJOKOlCj8+Pjl5JkULkv1Y6cTFyJMAzrjMq53QpZ9R
- uFmCGdrBSJJhzCdsdNfH3qIQiEJ8ph2/br5d85uiCeaG6qabgxnYqlovJVT6Js6vjKj0
- XcrzB7+t5dk9CP3h8gMqzPSL+F2ADrpwByYGxEF6yZisRj533pdS0UoszKyWG7qoww8x
- nQ/r9I6Gx0zxW6odx90ZJlcYolcvC1Ar4M4Q5xOv9gTsA28bQykHGK0OggsUZfGVsL9G
- TvvRw0UVr64euYp8oAuHeJ1j3L/REhMzWmvyrIm3HI9T8ETsDSU2WXRW/3lx0GJzHWWd
- 1cQw==
-X-Gm-Message-State: AOJu0YzDjmwx1fqmZtJalv/MOmg/xqC3Sfm9nfLdEiY/1g4YmxOsPoxb
- zm6q0P7510hyegnUYUJqa/FYUSQT8HfUMoyntTfKhiAVYLCk7XC9HO6Q
-X-Gm-Gg: ASbGncvc8swgJDFSxqacuLRuj45tAKj28n89pcigY0kzBP3dKsa/D3axEj/RoG4uje9
- 9KuP1fF1Lcyqtf+6tDZqc99ickJwE1JZ8vvQzYDsD/eOt4KsmjjMvh6cx8LJV2gtqjcAX0+dV7B
- 2vVgQM046h1kb6IIgjF/ux0B0hPDM6a6tLY0KVTBuMh16l5xpxKR6b11UVuceBGB9SMEC4A43fo
- yyU+sKY4xa20TwOHL4ydQAlUQmxqttMVCEiQgI7eF+rwtRQT/7y5Nr5Jk9d03voyla73HNT6VVw
- 3Su13M5UbZJkzt/T3hWqnGtJVzwAS0h+bz2hLC7blUhYQd/2HjYZl6SJJ4ATQcbS1SQ7gtP6G6+
- ZW/xRsB2/dyTB0mwWC+3ha3UKRIFua5nPGuJa1iRqMGeA8O7e7nKZCap2MX0fLbTSMEpDZZIbdg
+ bh=4YdRLPIMZH2swK7BCy4B9kH/zLDhhL0HbXD3QPuD768=;
+ b=a0IVUA2v55ky/MZVKD14pxwftDDNgbgQER8WqSdUV/gInFNglkk8O0vYJqsE4EVUee
+ JZ9TUBc580sfNiXk2mU0qnirIQiPj5+laqLMaSIcbGiQ/EX2cr99VmIK1/ReXhNxV7cP
+ /PnpAOq/N6TBFHj3L9IeYA/T2DTIxJ3moJ/Q55+5s7gTGbmZjrhUW+2ObMx8emBQ5K/o
+ 1jfQ11FTux+L0wVGlEny9ku0yPwqMgQ/q5n4T/04DhdgyNDO+RViL6GxqUyPEbptKtHx
+ OR4bzjK+0Atze3bkljwn1ElZIp8r7OWaOanmwNPrEAt9tE0eiI8tik0sngdH8zX+ZGQg
+ +cgw==
+X-Gm-Message-State: AOJu0YwFK/nhdpSLt0G/uVuR7msCY6ebCB0R/FYQdx0t+7BjtMHA/9S/
+ I6ybzUMG2WsGMr2rX0zKHpjo2Z7cqvEm8WNHLKGNyFFS+7QsxdWXvRD6
+X-Gm-Gg: ASbGnct0z/w/ItNnX9VY+xYTbUtU3Z14mbSNSE1rE+ZvRVbj7A/myGURDf9IS57FSNh
+ OFr7xLxQeS8cdP7rOMUdCkw7dBI1NTtlIbL1CkGCmnnt+ihTvwJ434ZRkUyRGOwKOb+CkQ6yhPY
+ qwPZhg0ITMpnfwjNHkYYz9ZQJMB/nlc+JMixkJWJAN7l6UWv+R2YxZvVaijXfl0XB8G+wr5qOFb
+ m/vB+c2RRmy9nwdxNWDgq6NTXTSsT3BEn7phrWMAYqDUKu10tIXE9iSY6JTHOEIBm5Hr0d39aPA
+ eXzK9oEnnkKFlacrrIoUfGBKdWvqvyn41xgTIdf0DpE1sHOal3OszykG2w6dSw32TWHhNSaVHlc
+ SQ4Or0ZdHw8lNvLgNWAnDyGjuVkqF+s+4xQG9rdcCEoG3Jt3XzFNGLglCwrVLSxEexEBAyaUdTQ
  ==
-X-Google-Smtp-Source: AGHT+IHSrH1ZW1fBH0gun9ZPAWYWoCnyX1s0CbkYhM+HManBK+cp2Z8O+AsqWZl4xD8QQV09FD8rUQ==
-X-Received: by 2002:a05:6000:220f:b0:3b7:924a:998f with SMTP id
- ffacd0b85a97d-3b900b499cfmr11694247f8f.5.1754929697663; 
- Mon, 11 Aug 2025 09:28:17 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE53jQO2Jsf14EJEngccMbARbtEBpmtlTdNVRzZP1NPhRrZiYXWdGSYahnKSkh6G+rabtvmTA==
+X-Received: by 2002:a05:600c:4fc2:b0:43c:eeee:b713 with SMTP id
+ 5b1f17b1804b1-459f4f04140mr103754445e9.20.1754929890591; 
+ Mon, 11 Aug 2025 09:31:30 -0700 (PDT)
 Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
  [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459de0d4cf1sm324974175e9.13.2025.08.11.09.28.16
+ 5b1f17b1804b1-459e0e70218sm289411705e9.20.2025.08.11.09.31.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 09:28:17 -0700 (PDT)
+ Mon, 11 Aug 2025 09:31:30 -0700 (PDT)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 To: Andre Przywara <andre.przywara@arm.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Cody Eksal <masterr3c0rd@epochal.quest>,
  Chris Morgan <macromorgan@hotmail.com>, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 3/3] sunxi: H616: dram: fix LPDDR3 mode register settings
-Date: Mon, 11 Aug 2025 18:28:16 +0200
-Message-ID: <4444430.ejJDZkT8p0@jernej-laptop>
-In-Reply-To: <20250811170816.60e57b14@donnerap.manchester.arm.com>
+Subject: Re: [PATCH 2/3] sunxi: spl: initialise timer before clocks
+Date: Mon, 11 Aug 2025 18:31:29 +0200
+Message-ID: <3833295.MHq7AAxBmi@jernej-laptop>
+In-Reply-To: <20250811165225.2a01a93d@donnerap.manchester.arm.com>
 References: <20250801234918.19176-1-andre.przywara@arm.com>
- <7836068.EvYhyI6sBW@jernej-laptop>
- <20250811170816.60e57b14@donnerap.manchester.arm.com>
+ <3363499.aeNJFYEL58@jernej-laptop>
+ <20250811165225.2a01a93d@donnerap.manchester.arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -102,122 +102,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne ponedeljek, 11. avgust 2025 ob 18:08:16 Srednjeevropski poletni =C4=8Da=
+Dne ponedeljek, 11. avgust 2025 ob 17:52:25 Srednjeevropski poletni =C4=8Da=
 s je Andre Przywara napisal(a):
-> On Mon, 11 Aug 2025 17:49:06 +0200
+> On Mon, 11 Aug 2025 17:34:47 +0200
 > Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 >=20
-> Hi Jernej,
->=20
-> many thanks for having a look!
->=20
-> > Dne sobota, 2. avgust 2025 ob 01:49:18 Srednjeevropski poletni =C4=8Das=
+> > Dne sobota, 2. avgust 2025 ob 01:49:17 Srednjeevropski poletni =C4=8Das=
  je Andre Przywara napisal(a):
-> > > The JEDEC LPDDR3 spec defines mode register 0 (MR0) as being read-onl=
-y,
-> > > so there is no point in trying to set its value.
-> > > Also the H616 memory controller encodes the mode register index to be
-> > > written starting from bit 8 in MRCTRL1 (for LPDDR3 and LPDDR4 chips),=
- so
-> > > we need to OR in that number to tell the controller which MR to progr=
-am.
+> > > Recent changes in the H6 clock code added delay() calls into the SPL =
+clock
+> > > setup routine, which requires the timers to work. When compiling for
+> > > AArch64, we are always using the Arm Generic Timer (aka. arch timer),
+> > > which does not require further setup, hence having an empty timer_ini=
+t()
+> > > routine.
+> > > However for 32-bit SoCs we use the Allwinner timers, which require so=
+me
+> > > setup routine, and hence we need timer_init() to be called before
+> > > clock_init().
 > > >=20
-> > > On top of that, the mode registers between DDR3 and LPDDR3 are
-> > > completely different, so writing values crafted for DDR3 into a LPDDR3
-> > > chip is just wrong. Due to the above mentioned bugs the writes for
-> > > MR0-MR2 did not have any effect (as they were all trying to set the
-> > > read-only MR0), so the mode registers just stayed unchanged. =20
-> >=20
-> > Nice catch! Looking at BSP DRAM code, it only sets MR1, MR2 and MR3.
-> >=20
+> > > Swap the order of the two calls, to be more robust when compiling the=
+ H6
+> > > clock code for AArch32 or when using the Allwinner timers for whatever
+> > > reason.
 > > >=20
-> > > Looking at the LPDDR3 spec and the BSP code, let's write the proper MR
-> > > values into LPDDR3 chips, using the proper addressing mode. =20
+> > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > > ---
+> > >  arch/arm/mach-sunxi/board.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >=20
+> > > diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+> > > index fb4837c2082..432b1c10f92 100644
+> > > --- a/arch/arm/mach-sunxi/board.c
+> > > +++ b/arch/arm/mach-sunxi/board.c
+> > > @@ -476,8 +476,8 @@ void board_init_f(ulong dummy)
+> > >  	/* Enable non-secure access to some peripherals */
+> > >  	tzpc_init();
+> > > =20
+> > > -	clock_init();
+> > >  	timer_init();
+> > > +	clock_init(); =20
 > >=20
-> > Please explain how you find those values. Are they always set in this w=
-ay
-> > for all boards using LPDDR3?
+> > I contemplated similar change in past. It works fine for 64-bit archite=
+ctures,
+> > but I'm unsure for 32-bit. If you take a look at A83t clock code, it us=
+es
+> > sdelay() exactly because timer is not initialized at that time.
+> >=20
+> > So, are you sure that this change has no unwanted side effects?
 >=20
-> Yeah, that's a good question! At first, I tried using what JEDEC describes
-> as the default settings, but that didn't work. Then I looked into some
-> parameters found in some BSP image dumps, but that didn't work either.
-> JEDEC describes those MRs as write-only, and I haven't tried whether
-> reading them would work nevertheless, not sure about the exact algorithm
-> for reading MRs anyway.
-> What eventually worked was to use the BSP values written by exactly the
-> boot0 on the eMMC that boots an LPDDR3 system - which is actually only one
-> in mainline: the Tanix TX1.
->=20
-> So yeah, those values work for me (TM), and there is only one LPDDR3 board
-> supported, so fingers crossed. But actually I wonder if those MR values
-> really belong into the timing routine (mctl_set_timing_params(), since
-> parts depend on the speed bin. I see some other SoC/DRAM type combinations
-> doing that already (H6 DDR3/LPDDR3 and A523 LPDDR4), maybe we should
-> follow suit here?
+> No, I am not ;-)
+> I was about to test this on some more boards. But I think with the
+> change in that direction, the only issue would be if the timer_init() code
+> relies on the clocks being set up already. And since timer_init() is only
+> *one* rather small function, just doing MMIO accesses, I think the risk is
+> quite low.
 
-Historically, I checked several boards and if MR value was the same in all
-configs, I just hardcoded the value. While this is a bit naive, it works mo=
-st
-of the time. There are some cases where it is set dynamically in BSP code. =
-Those
-cases can be a bit annoying to find. Ideally, MR values shout be Kconfig
-option with default values.
-
-It's up to you to decide which approach to take. Since it affects just one
-board and changes were tested:
-
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+As long as clock function doesn't need to enable bus or module clock,
+everything should be fine. Quick check didn't show any such code so
+it is probably safe to switch.
 
 Best regards,
 Jernej
 
 >=20
+> Thanks for having a look anyway, I will report back how the test goes.
+>=20
 > Cheers,
 > Andre
 >=20
->=20
 > >=20
-> > Best regards,
-> > Jernej
-> >=20
-> > > Use the opportunity to document the LPDDR3 mode register bits written.
-> > >=20
-> > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > > ---
-> > >  arch/arm/mach-sunxi/dram_sun50i_h616.c | 12 ++++++------
-> > >  1 file changed, 6 insertions(+), 6 deletions(-)
-> > >=20
-> > > diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-s=
-unxi/dram_sun50i_h616.c
-> > > index 877181016f3..3345c9b8e82 100644
-> > > --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> > > +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> > > @@ -1078,18 +1078,18 @@ static bool mctl_phy_init(const struct dram_p=
-ara *para,
-> > >  		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-> > >  		break;
-> > >  	case SUNXI_DRAM_TYPE_LPDDR3:
-> > > -		writel(mr0, &mctl_ctl->mrctrl1);
-> > > -		writel(0x800000f0, &mctl_ctl->mrctrl0);
-> > > -		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-> > > -
-> > > -		writel(4, &mctl_ctl->mrctrl1);
-> > > +		/* MR0 is read-only */
-> > > +		/* MR1: nWR=3D14, BL8 */
-> > > +		writel(0x183, &mctl_ctl->mrctrl1);
-> > >  		writel(0x800000f0, &mctl_ctl->mrctrl0);
-> > >  		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+> > >  	gpio_init();
 > > > =20
-> > > -		writel(mr2, &mctl_ctl->mrctrl1);
-> > > +		/* MR2: no WR leveling, WL set A, use nWR>9, nRL=3D14/nWL=3D8 */
-> > > +		writel(0x21c, &mctl_ctl->mrctrl1);
-> > >  		writel(0x800000f0, &mctl_ctl->mrctrl0);
-> > >  		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-> > > =20
-> > > +		/* MR3: 34.3 Ohm pull-up/pull-down resistor */
-> > >  		writel(0x301, &mctl_ctl->mrctrl1);
-> > >  		writel(0x800000f0, &mctl_ctl->mrctrl0);
-> > >  		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+> > >  	spl_init();
 > > >  =20
 > >=20
 > >=20
