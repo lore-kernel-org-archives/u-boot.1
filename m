@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01076CA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 17:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C19CA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 17:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B06983257;
-	Mon, 11 Aug 2025 19:03:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6084E83253;
+	Mon, 11 Aug 2025 19:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SdMd3kJ0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dGKrbP6j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 737F9802C1; Mon, 11 Aug 2025 19:03:43 +0200 (CEST)
+ id B7E68802C1; Mon, 11 Aug 2025 19:03:44 +0200 (CEST)
 Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
  [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89E8283214
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 19:03:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55BF683249
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 19:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
 Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-459e7ea3ebeso17531065e9.0
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 10:03:41 -0700 (PDT)
+ 5b1f17b1804b1-458b885d6eeso29513655e9.3
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 10:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754931821; x=1755536621; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754931822; x=1755536622; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9Do0POzyZZg4lMKLzlKLp9MsH1IahBn5zUldm22Is3A=;
- b=SdMd3kJ0HpnBhALwbyhuDaEyoJ7ZPIzHNMVIUH49cCCwEPUkGWWasDf5rlulQpox4q
- XuNtgaQ8UFMsZwc0w9Qn9TqI2RH6CL39JTYS3ezwrdY5fWS3jepzTvQYCBp+nnLGm0NC
- y4426zp2E4mKSPUw9ZROkKHye7AMISkY3Z2genL0O2idjaQvRm7OiVREa4t/P1ulPguq
- olc9eQnDpprLtL/5DfiY61V8IBwbkF4MuWhX+shrmfyzrNQ+roHZKp3v3UrScFa5biVS
- PNHKHi4CNHzGmTCf7OUgYlZ+L35JqxjU6LXmg1tY1yqbu3UfQt9Yg1reqnj1xL/EnEi6
- l7JQ==
+ :reply-to; bh=4fiyLyHBTKkTT0APTmpJKaVbc2Ebd4DDYk57OZ2r9Q0=;
+ b=dGKrbP6ju4II24GgeyCbZ3uyRudRxNpoos/NBmYCeEhSpNwFlAx0llfg034Gf9BuHs
+ y/qmHLrq+9/yR3cU8oGZ8ARw0hkpnhmy6HoFzmeeR0/fxU8ziccIY5wZ60mSMg/s42Jq
+ ujQeZ8QMRAudRr8Cvu2jINJcuinlciMvW8R80NCn4piOri89e5pvOwufZOZUe2NzfI/M
+ r5YodheZvTH6LPVJTt/ihazk9yybYUdEjbde8NYbZl42dg2CHZ7CdNJNkQpsMH36O0ne
+ CpbHGru9EZDg4HGBNdpCJv2MljbNZ3+5qpaUlJmWrvaRi6GssXCPg+Go0kpp4/Cil/0N
+ wBCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754931821; x=1755536621;
+ d=1e100.net; s=20230601; t=1754931822; x=1755536622;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9Do0POzyZZg4lMKLzlKLp9MsH1IahBn5zUldm22Is3A=;
- b=Su523omkfofytyOo/6b3bI/KST4xGdx3lJnuMo33W8D0Zc4Z2sfcaxjRbWQqoseMYz
- YY6Yg/9cprOJOBwT8pYk5cra68JA0S6gR+mKvjtMNNCZlwl6t0FBm2/5E7HHnHVE8bYX
- UYF6p/Ld5q36ZXYj4Oj+nDEjUwNCiqISBL01WpIGYtI1QrMwsFP1ie0ZCarTGJahirEt
- /oM5CE6VK15IbZA4IqZfLVqpuDz4fYbMh8LCBlhFPVr65sT4iJCbAg/GBsOT6CnieD/J
- 81mG3ibQsaEFiCfpOjJCayDetrJKfz6osApX2bkXhMmEPazatOFxVsLDeEw1mINkBWLQ
- 73ZQ==
+ bh=4fiyLyHBTKkTT0APTmpJKaVbc2Ebd4DDYk57OZ2r9Q0=;
+ b=XEKm4U1OLc0rrgS+J+l/QOzuIf/XCUQlKx4eAxCb4HCNmHqi+kMdBS1jxSgPDHiNbP
+ hBluoWiZ+0Pf9cayOUuD7oco20SpMfjNXxCxK9Lt+cgBejETQQrH/X4JD4AdEU9Fs3np
+ Y8z2NJrsy+1VGuoiHyEpApz3RhVanp8RWdWR+OCfvPJ6uKCZuyc0SYysXK3mrAPIzZ6v
+ mHTiGEEFKfnHUp5sIlZwDG9sQ0D39Qdro+qs6vADp9xnhbp3aQbUwM4R0E3IzkFQtmUE
+ tcYUdEB2GmrHMVhV0nLk8bJeOsFnUFTbNKCEFV3l+BEcKRw9TOj3KphMdKFY1gOgYfrg
+ 8qzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVj+QIy+S1gX/9eQiHtha1Fnyekp4H53nLwMisro7XXwJ81PM4yp66PBQET2LeQPZWtoErxfLY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUdbMMp/ts+vpr39Zah2WPF8nR5y/m0/w49smprkET+vbX07t5
- BhevTxL1C3pn5t24aHr0JoK3ahp4zVSlL0c/sCf0UC/9ThvfVsMoE5g/b1srXbcmVaQ=
-X-Gm-Gg: ASbGncu8zOF4gQDi0sNE44+xtb22Xrx2ULtQWVU+hddpvTqWAwk8W2SBFkimd6FPs0/
- pyOlHRgBNBPo86WKRccpOz3VUysmTa2/CwZalIYjyOYthWlLIiJcNDDiCmyDoCMk6ZKGScJYqDW
- YCf6CxmqTX1MKKkh6nu+xAUpx8Rsy+u7SAGVJqUKrbnPr6HyF0qI21MLjgsXqR0o5YwTBWnB5z2
- 0qUiAQdke4fNX+GdsRVqQBAO443agJRX9QyIyyXP5NJ44l0JXuEqx/k37Fr4/AAwpOsto9qgvVS
- Qg7A1rx/2MNc4us24WZYLVuBEvbpdsaU0xKsPCOWAxGo1eoEkRZhMvlTkXbqSTrTjmOdhMOnQUB
- r1B5Nt5iRuZ2yak5+2XDpjI/SJnEJoyvYWGupiebnJslm+Ydxqf8=
-X-Google-Smtp-Source: AGHT+IGEbzp3MrgIO/t78zbCguv6/WryAMALyaj72zC8YqCCombWwN+6/tUHwuMuyY5YBWMnFjPqQQ==
-X-Received: by 2002:a05:600c:c493:b0:43d:4e9:27ff with SMTP id
- 5b1f17b1804b1-45a10b9b154mr4104655e9.7.1754931820872; 
- Mon, 11 Aug 2025 10:03:40 -0700 (PDT)
+ AJvYcCUPzjfgjnQVIS6ihJsrp6c1X7Lyqo4csAFexlGOoaqvAU2RcIeRN2Zaff5ce6XS70jn+T46oEI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7jfZtU7X2c6K+ioNXzsZyb3OyIfgJX9GC9Pbx3vUcUxC7oZMk
+ 7B3fk9IeTPcXo/ntK929JlAB34aWEJuPxU6rtgu/mpXLMMsPpMG0nCVzMltd3xOik3U=
+X-Gm-Gg: ASbGncuc+SJsPiZ8aM7kQFwPhakhDlV2JxoH6qlBIHeM5keUKzjhbhVFBZuHl0GzyLR
+ 9dlmiGfhzGFVAAzKnc4YI5ACnrTz4afJ7Bmm8/5IwAWfAMWqc6Mo7ZNaNdP6IqDwIFXPs1MmhUx
+ 4s3NHDga5iY0TVgiiRX338e/s98x/wFEcyICAHbzp7zD9uTdDWTa7lIuoY5chTKl97aWS7owbti
+ nBjf5blJ0oFraVaLq0FARm+s0IUU1LzVJCpou6zh7Po+51sDx8FeUFh5AILBotKzx/CAlY8QYI0
+ wgB3gTEVmbDtb3wPU+QoImy6i9ze1UPRu2dzM3BOIfAiCk+4Qx+xE7HcORnfQ3sHGNGTk9ZZX8Q
+ 05w/wFbIp3/OIOHSAnXbHHPxeK/9VgagfuMoTaDthRq3ZwRGw95g=
+X-Google-Smtp-Source: AGHT+IHvmV8SC+99GAurQLJK7pXRnhgAy82g6MEVovo31bEINDdevwzskC9SUT7D4KYAtIRpt6uwxA==
+X-Received: by 2002:a05:6000:2381:b0:3b8:d7c7:62d7 with SMTP id
+ ffacd0b85a97d-3b910fd9b92mr383900f8f.16.1754931821731; 
+ Mon, 11 Aug 2025 10:03:41 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:3e73:96b1:418e:3053])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c45346asm41215266f8f.39.2025.08.11.10.03.40
+ ffacd0b85a97d-3b79c45346asm41215266f8f.39.2025.08.11.10.03.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 10:03:40 -0700 (PDT)
+ Mon, 11 Aug 2025 10:03:41 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 11 Aug 2025 18:03:39 +0100
-Subject: [PATCH 1/2] serial: msm-geni: Detect error from get_clk_div_rate
+Date: Mon, 11 Aug 2025 18:03:40 +0100
+Subject: [PATCH 2/2] serial: msm-geni: No need to NULL check priv
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250811-serial_msm_geni-v1-1-4499179491bc@linaro.org>
+Message-Id: <20250811-serial_msm_geni-v1-2-4499179491bc@linaro.org>
 References: <20250811-serial_msm_geni-v1-0-4499179491bc@linaro.org>
 In-Reply-To: <20250811-serial_msm_geni-v1-0-4499179491bc@linaro.org>
 To: Casey Connolly <casey.connolly@linaro.org>, 
@@ -103,33 +103,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In msm_serial_setbrg if the call to get_clk_div_rate fails then there
-will not have been an assignment to clk_div which will lead to the call
-to geni_serial_baud using an uninitialised value.
-Check for an error from get_clk_div_rate and return an error code if so.
+The NULL check for priv in qcom_geni_serial_poll_bit serves no useful
+prupose as too much other code surrounding it relies on priv being
+valid. Remove the NULL check for priv and other related code.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/serial/serial_msm_geni.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/serial/serial_msm_geni.c | 30 +++++++++++++-----------------
+ 1 file changed, 13 insertions(+), 17 deletions(-)
 
 diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-index cb6c09fdd09..33016f0cb53 100644
+index 33016f0cb53..0eb90f82a34 100644
 --- a/drivers/serial/serial_msm_geni.c
 +++ b/drivers/serial/serial_msm_geni.c
-@@ -252,6 +252,10 @@ static int msm_serial_setbrg(struct udevice *dev, int baud)
- 	priv->baud = baud;
+@@ -288,23 +288,19 @@ static bool qcom_geni_serial_poll_bit(const struct udevice *dev, int offset,
+ 	unsigned int tx_fifo_depth;
+ 	unsigned int tx_fifo_width;
+ 	unsigned int fifo_bits;
+-	unsigned long timeout_us = 10000;
+-
+-	baud = 115200;
+-
+-	if (priv) {
+-		baud = priv->baud;
+-		if (!baud)
+-			baud = 115200;
+-		tx_fifo_depth = geni_se_get_tx_fifo_depth(priv->base);
+-		tx_fifo_width = geni_se_get_tx_fifo_width(priv->base);
+-		fifo_bits = tx_fifo_depth * tx_fifo_width;
+-		/*
+-		 * Total polling iterations based on FIFO worth of bytes to be
+-		 * sent at current baud. Add a little fluff to the wait.
+-		 */
+-		timeout_us = ((fifo_bits * USEC_PER_SEC) / baud) + 500;
+-	}
++	unsigned long timeout_us;
++
++	baud = priv->baud;
++	if (!baud)
++		baud = 115200;
++	tx_fifo_depth = geni_se_get_tx_fifo_depth(priv->base);
++	tx_fifo_width = geni_se_get_tx_fifo_width(priv->base);
++	fifo_bits = tx_fifo_depth * tx_fifo_width;
++	/*
++	 * Total polling iterations based on FIFO worth of bytes to be
++	 * sent at current baud. Add a little fluff to the wait.
++	 */
++	timeout_us = ((fifo_bits * USEC_PER_SEC) / baud) + 500;
  
- 	clk_rate = get_clk_div_rate(baud, priv->oversampling, &clk_div);
-+	if (!clk_rate) {
-+		pr_err("%s: Couldn't get clock division rate\n", __func__);
-+		return -EINVAL;
-+	}
- 	ret = geni_serial_set_clock_rate(dev, clk_rate);
- 	if (ret < 0) {
- 		pr_err("%s: Couldn't set clock rate: %d\n", __func__, ret);
+ 	timeout_us = DIV_ROUND_UP(timeout_us, 10) * 10;
+ 	while (timeout_us) {
 
 -- 
 2.39.5
