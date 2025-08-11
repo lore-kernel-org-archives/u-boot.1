@@ -4,166 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F80C87FD2
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 12:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4573FC87FD2
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 12:33:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3E65832AD;
-	Mon, 11 Aug 2025 14:11:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AEFC832AD;
+	Mon, 11 Aug 2025 14:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IyG6bCja";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="js8Dj5zA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A38B0832BC; Mon, 11 Aug 2025 14:11:28 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 8D6C1832BC; Mon, 11 Aug 2025 14:32:58 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA76B830B5
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 14:11:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56F6F831EA
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 14:32:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nYWo37wvmKGnfn4bLQ12qlDNAyLOniIzSDntC2RyiDbA2yyhwtM0bgCrFGzUYZM/Jd96/2j449gUUzLJIgqJ2s3WDfgne73iXB+eCTbrYteoB36YJt7p7milZ8GWonv9AAtLdi6bk+J/A0YYiE8i4mDx9gRWfA0S/4cQDsyrlYTu2LNfBJw6P2yFIi5UwmWV2EQLlg/lZ1U+6YQr3shXUPqyiopGuzitxJIaHDm2XlU5uOYL4CKMfhKRj9X4chK27kFSksW9/OUb2o+0DzHrJ4UyCofPAHgUSPA/c/KJwqQWSIGblu0aXdqBJRRwIyf8lDFeLX1zlKJE+JC1FsGFug==
+ b=izPEnL0I4PHGAYSgowdrYVOzmJSu9ia+3zffy5tfcD2LZ1FPUPcLog468bYvq1x0dEE4q2Sq9mfZoz7COjyqqNK0vRlBG7GmBfgvwIGFX3XvBlvD3JGqQO/1Hnu/gMktYiXJl2zQEMB9GMBKI058RgRZmdMIZvtUnEDEWvk4Fcoimw4igNZercZUGMdINzQfmWRCyGDzBokqTVrwLe8UFrtoS2JQqPAbMg0ZdQq8WWoOGL0f7L3qjgfan6HJOTVj6YNXnUnqhqmZnW3nJ3fKPDMf4aOtj1GYn/I6ZGLCLrZEP4VphOSr394PHJkEL01HytOxVbhDWtiymhIu0aBL+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QdtJTqy3MtSN0dvBQ2Bf2sbFohuc+KNqGGVCENcadtw=;
- b=lZPu6bZmuOPKbceSvhj4YqlZLoDqOBIqFWEXn8wHL9EjTLLhAnzRL9J9N13AwLLGc2MkEyuWrizfmMmbDosfm13LRlJy8TCEYbINd+hmlX1hhheTtJ5qr8myTiKtBBdFESp0BBn2pbWj4MI3lMsI+qyFn3W6LE/M1FcrPwt2QhMqqEYi2G8dpkV8PYCy7nmiO7ton9SMc44gNsKlo1VRhye7jd+o0uRW3yXhYNxsggmoDjclX7l524GDpGj1A0f0+gJINj7JgAvDp7ec0pwR6adIOS1r18vgsHcQu3XEwMRr4lyO/myIz7m+clyKWKVMVOwHo3n8FRCXM5MUggYoOQ==
+ bh=JX0lYBHHhePHw/cnuRpMtgjfVLZ3CeybCLSydMX71Kw=;
+ b=t5VgMy9F3fyWqxZ41oNljTN5Cn8DLAGMKGdUTwaRD+qKoCFsxt2UHVM3/PJjhmupSNyDAuTnhuu+cP/q+USI9Lzb1mNfdOWyaLwBSU4qj7k189F00DKrvGAEla2XFXpuhQr+BO6EDxK/KMLen3GsKvFIqvaPZEGmFMw3ogIivMcPyPvSgF6q8d1QuolfFVTsRU+ag5ncPKVDJmVyA34pOs0nJQjRpmiIrAMaDBOqjRmwS1lm4L9f7DeFRur9Ba8TGV5FR/u4jSI0j5SvA+QCOqcLMsMR+XMF3OJN7Wqmv2RMLotDUlk/zslZhbHU+zaEZY5WWmpJBDVh8pr/AuzJ0g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QdtJTqy3MtSN0dvBQ2Bf2sbFohuc+KNqGGVCENcadtw=;
- b=IyG6bCjaqtqu3ekbDidfZhkRD6Lqt9qfXdd19AgZSsTHMkntwa0PbVVld7Js3PCNpIEdIMkc7apA8dG3rKSJpjYrXE/RpATMFRPwKq9RMSiV9Pz/3JBZv/uADVmtDwPtaS0yyk+3tKLO1gnJEIXaS/Ax9o6MZZRC6+8F/HIvKQk=
+ bh=JX0lYBHHhePHw/cnuRpMtgjfVLZ3CeybCLSydMX71Kw=;
+ b=js8Dj5zAQeQHn6MewvMd70MJAaUgS1yYQD612+WrRazNyRfbT0WF6Rn7XiDlcLYE9fvEvmWUsskX2eSDYhh6+lgCdnqqxMWbrGN6wjoVN7wzlAcEyQUoBaUQA4yDKrQfafclaDiuQemtaa+SaLvCG5QsZieZ+imwChjbvXwNEEc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI0PR04MB11070.eurprd04.prod.outlook.com (2603:10a6:800:264::20)
+ by PA4PR04MB7853.eurprd04.prod.outlook.com (2603:10a6:102:c0::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.20; Mon, 11 Aug
- 2025 12:11:22 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.9; Mon, 11 Aug
+ 2025 12:32:55 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.9031.011; Mon, 11 Aug 2025
- 12:11:22 +0000
-Message-ID: <334d11b4-20c2-4367-9b3d-9720b2209dcc@cherry.de>
-Date: Mon, 11 Aug 2025 14:11:21 +0200
+ 12:32:55 +0000
+Message-ID: <607c7cf6-6e16-4135-9b51-b1822b3e3ac3@cherry.de>
+Date: Mon, 11 Aug 2025 14:32:53 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] rockchip: Add initial RK3582 support
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250804181638.3855760-1-jonas@kwiboo.se>
- <20250804181638.3855760-2-jonas@kwiboo.se>
+Subject: Re: [PATCH] USB OTG: make dwc2 otg driver dependent on Exynos platform
+To: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
+References: <20250804094353.28658-1-m95d+git@psihoexpert.ro>
+ <6541cce1-f779-46fe-b3c8-e76303e59eab@kwiboo.se> <aJHurWqRi92fyO+C@GRAPHRT>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250804181638.3855760-2-jonas@kwiboo.se>
+In-Reply-To: <aJHurWqRi92fyO+C@GRAPHRT>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0074.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1e::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR4P281CA0405.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cf::11) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI0PR04MB11070:EE_
-X-MS-Office365-Filtering-Correlation-Id: e67d469e-59e7-427e-0464-08ddd8d02f9b
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA4PR04MB7853:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30e77c64-5028-4cd4-1d94-08ddd8d3322a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|10070799003|1800799024|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?U2hvd0o1OWtVVm8yTjRONlBISFhjekorWGFWODQ5M1h0ZWRrU0pyYVRhSlc3?=
- =?utf-8?B?bm1OOHQwUkVPbnppRnpRcVFVUUhHRXdjcjZDb1NEWWYzcWxPblluaTJ0ZGlQ?=
- =?utf-8?B?SmNyVnBUaE9HVjJlay9kVm1WZmY5NnhldzNNamJXaHVRUGhUVEtuVStmYUF5?=
- =?utf-8?B?ZUY1SDdOQU93SUpwSnFGWk1zSVVXYmFCb1RQQXZIcEdVTDlDRlF6MlBHdjZO?=
- =?utf-8?B?L3AvUzJkYjNSVlNzMWlLNUZBNVpPNnp4Q3o2b2IrZmZDU0UxUmRZNXFRN1p6?=
- =?utf-8?B?YTNKYS9oQmNYSS96QmRKL3ZIVTAyWXFJaDEvS1N1dm9USWpVLzY5My9BVTh4?=
- =?utf-8?B?K2lUdmM3MkNaYTNaUVFVcldzZjJSejZEc0ZvTnlhSzV0WmtUM2NwRlBmNEUx?=
- =?utf-8?B?bWZEcmZoWkEzSytlaUFXWm1rcEpJa3N5WTZyb29sazd6emFKYXVmcWlmTm14?=
- =?utf-8?B?QWxmOW5wM3FaQytKVDdZRVdFYXRRd2JZeDFPeEd2VnhXNFhzQ2ZhZHNZOFlv?=
- =?utf-8?B?SllxSjJOZ1ArNHpmRVRPQVNtQ09Hc3h5WXlweXBabHVIUEt5Y1VqdU1kR0Ny?=
- =?utf-8?B?M3I5OWgyaEYvR1lJMnNiL29nQ3Qyd2IzQnFsa3hFSlRlNCs3N1puVTZhZDZx?=
- =?utf-8?B?UGJQbG54MTZYOWRBNEMwRDdTejhrMit3UzFFczUwZk90UTFCcmc4ZTlwV2pr?=
- =?utf-8?B?OCtJZ1F3Y3JCL0lTRHdtQjN6SkFZYTlKU0cxYU5IM2RxMERMa0ljZDI4Rnha?=
- =?utf-8?B?MkY2OXlGNkZhQjZWMVU2d2Q3LzJHUUZSZEhmZTUyNWhHWTBEeEUrNXJSSnFv?=
- =?utf-8?B?ckdJb21BN1crSS94QXBOdmFtRlRPY25PcDBjbkZGUGcyKzVpSFRpOTZSNlY5?=
- =?utf-8?B?L2RXTThKTmJad1RzV04wWWhtZDgwSUVJMTF5ODRkdjhDT0RYODJmMFpJVDhs?=
- =?utf-8?B?RWRNaEQwQVpkczhlRnc2KzdaM0l1MXN2WEt6Vkpya3BZcG1OVVpMaW1vdTg2?=
- =?utf-8?B?alJZWFNYbGs1eU1IVE8yckJHQzNjWXNxblAvNVhCNEZpck1uVnZBZzkwRmVx?=
- =?utf-8?B?WjR2NXZIQksyZjdrYUtwcC9SbGhIV2UzZndwMUVtNGpSRXdGa29QdWc1ZmdR?=
- =?utf-8?B?dlQwWnVUTGxwRVo2VEVWdW1KeDQvRWJxOElPMmFNNkhnZ2YzNzFDdElHT0dC?=
- =?utf-8?B?V20xenZrSzNlT3h2ZTFSM3ZBWmsvV1lCQW84d3B3SWdNY3cwcHpxbEtBQnE0?=
- =?utf-8?B?dEhkZ09ERjI3Y2NscW9rNk9HcVJkNGMzWWowd3VmY2RMTzUyRUVYakNEYmhF?=
- =?utf-8?B?WFdNR2ZCdFVVQW42WEJaaHJMb1ZRUE80dEw2T2ZyTlJFalFoWHhtL2lDN3VU?=
- =?utf-8?B?OFZXMXhqYVllWDRzRSs4QXNwTEQrYjlSUmNvUWg3NHFvMEw0K3NqY2FuMGZC?=
- =?utf-8?B?TUpWQ040S2hoaDAyTER5ZG5HcldjVDQ3U2N0V2JRQUE2KzB2UXNZbXVjQWlN?=
- =?utf-8?B?U3ZMNkJ1NlVrZFR2NWpjalhGbnpDOHhTd1k0aWV3K2hWaWxwaXh4UUUxUUl4?=
- =?utf-8?B?N2FVN21lSjlrMkNOaGxYT09LVzV6aDYrcjRKKzdsN2FJaUNRUXF4Y1pVK0dj?=
- =?utf-8?B?aEpSbkhmNGRwMDAwSXhEQVFoczd4cmpvSkRWeDh0dEhzV3gvaU52Q3RDUlN4?=
- =?utf-8?B?cVBHVVdZNG1rZFhQcjFNeWNMclAvMWNURUdDZ2hVcGhvcERjVy8rVVp6MVdK?=
- =?utf-8?B?ck5rQ2xGSXpadmRhUE43ZUtlalRtM2puYks0cHpKRVNFenA3a0pCNW1tT2o1?=
- =?utf-8?B?NTJ1M0Zac29ibTYrM1dhSVJNTVJVVXFnNUxHQzhIaWdoVG40bFVTSDFkeWRu?=
- =?utf-8?B?OG5zNlh6SWhkQklNTnBremh6TjVUU0U4WkFJV1IwWmF2ZEZwaXlPZ1RTUmVn?=
- =?utf-8?Q?zht0QeNoXx8=3D?=
+ ARA:13230040|366016|10070799003|376014|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MzVaemI3RVVVdzdDVjVvNW9RK2V6K3pMc09DQjJZc1g3d1lUS2JZVTF5eXFO?=
+ =?utf-8?B?UVMrM2t3QWNhOWthYVJwYWx0bmo0NUcvWWpyczJxZ2FUNEJWVDloVnhxMW9l?=
+ =?utf-8?B?UlJLeDdOVFpoNm8rSHE0UEh1cSttbkNIN1BlSXpnaXA0bnAyRXJLcm1HSnBZ?=
+ =?utf-8?B?Y0JFOHpCTUZvUzdKY28zazBORlRMZEtMb0h4YW9jMklEUENxMGFzWnJZcHpz?=
+ =?utf-8?B?anFvL2hTOThYYkNHcUxOZUZTZlZmcU91WUJIeTRvMWR3Sk52NjdzT1F4Yk80?=
+ =?utf-8?B?RHBBWkw2Vmd2RURYUlE3R3A4OGdTc283cXF1ZnF4d0w5RUVSSTNSRjJVTkhz?=
+ =?utf-8?B?a1hxdUVvZVl0SS92V3VzL0hwbVBIY3UyOVpxOXNwOUdkdGorVnM4b1E3OThJ?=
+ =?utf-8?B?cXN1VHNJRURWOE1CUWg5ZUhlNFdCQVpWMFNnY1Y3K1JRZkVDVUxGSXpFdTJu?=
+ =?utf-8?B?Z3lQTHluTXY2ZlFYWWwyMERiOHNoVlZWZmJWNGJsU0JoWDU5RG9JQ24zOE5D?=
+ =?utf-8?B?Uy80eTRmYVY3ZXAwMDdsZUNUVWxIbSt5L2dnWlFWRm12ZFF2VVJNY2tGWTE5?=
+ =?utf-8?B?bVh4c0ZJVHJhNVlXODVRbFBteHBrK0Uza25VNXhHbng1NEIzYStBOEhsdDFK?=
+ =?utf-8?B?ckhxUkpGRUtGTWZwZlFYTHVjR3haVUlWMVZOTGkxcDJaSE9ZQVYvd0lyL3BX?=
+ =?utf-8?B?ODMxcDhvZVQ0NW15TktIWE83QzZaZ3RLa3E3a0Q0SzQwNnNNMDc5YUFUTHQw?=
+ =?utf-8?B?K204VlRVUFdnNmcxQ0VtTXVKQ3gwSmJQOEpROEFxSk5pRVBVSDJKdFJ1VEkx?=
+ =?utf-8?B?aCtBbVJodWNyNC9MZXNNSjZGTDZTTmZ4RFNzSGJzVHM5ZmRXeUxYb3dwLzFu?=
+ =?utf-8?B?QmtKSlJJS2V6NFlKbk90R2xVS3F3OHFpYXBMNTBUaDQ1MVloWU5YNG8xV2d4?=
+ =?utf-8?B?dWNjWnI1aGtNaHJ0c2RHMW9NLy96cUJkd1hHRnFtM3Rqc2pLTkZVend2d2lS?=
+ =?utf-8?B?N2pVcGluVHZpaUlOZ3kraU95U2hkVjNzT1MrN1ZnY0hINVVnb09TTXdBVFlr?=
+ =?utf-8?B?OU9VdEMzUXVBRnJkekpSdHhXRUV3NmlnK1BYZ2VXekV3WmxXdFY5akRjTkxj?=
+ =?utf-8?B?SGhZS2FTclpDT2I4Zm5hd04wUm4vaGlFRlZyK09sVVJ4VWZFY0xTK1FJSmVS?=
+ =?utf-8?B?VXpaZEh2WDVVSldDMzRZYWQ0ZjdVN2FlS1ZieEZDQmZBd1RWK0kvZy84UFI4?=
+ =?utf-8?B?WU9ZdWJXRUZZMWl1WEJsQjE5Z3o3c2NWMFA3ajd6RTdPL0cvVTRlMlZPSGti?=
+ =?utf-8?B?TlU0R3BWR2JYMjVycWdzZzY2M0VYbWdLUTg5N0FLS2ZIQ2lrazJyNXE2MXJm?=
+ =?utf-8?B?dXM1UE5DOWx1NWRBbitzUXRNZGh0TElxVlNoWFRhYlhaeXR4bVFad29lQjFD?=
+ =?utf-8?B?KzIyK2FEaDlBNENnTGlTWFVKSnNIV1VOSWhWRUJuUmx5Ym83RmhlektSL2Jr?=
+ =?utf-8?B?UEVXZ091LzZxNE5pa2JJbzl0c253N0VqcU1ack85a1RnN1B4RExXUm5qeU1z?=
+ =?utf-8?B?Q2plc2hFV3R2aGtpTlUySFA1V1JXaUpMUDV4N080Ukg3TEtSdG5GQjdmK2d2?=
+ =?utf-8?B?ampSaE1WdUNIV0xoYUpwV09FQ2JVd3VYcDlDZmM1MGtGNzh1NGJuOSs1TnQx?=
+ =?utf-8?B?VHZSZGdwZTlFd2llN25wc21na3RzR2JQa2ttUVlKNEx2UzFPMHM3dXd2Y2pr?=
+ =?utf-8?B?RDNha1JUTGZKdlh6NnhYTTV0TTd3b3RNWnBmdTVkTUk5OFI0dFovQ1k1bTZ2?=
+ =?utf-8?Q?QbrNZfCuZKuf7yoKIOkd9DAY+QiiXIG1Le5sQ=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(10070799003)(1800799024)(376014)(7053199007); DIR:OUT;
+ SFS:(13230040)(366016)(10070799003)(376014)(1800799024)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y0xKd1dSK2hGbkNLdHFSYy9WbGRMT3B6L0hnVThqVnhEamhVUHpscEwvUEdm?=
- =?utf-8?B?UkRVeU9kMENGYXR3dmlzVk1NUEZydUtnY2NQSkRDdkgyOUg0OVlrMkJyT3hh?=
- =?utf-8?B?YWdNRmEzTmRMQldDZ2crc0YzMUEyVjFaSjZhRUpxQkpZTFFlUzV4c3FxOVVl?=
- =?utf-8?B?TzRKYkJRTHRWRFNpWTd2UVhEUUd0RlNKamFhUTNIaVhoK1BpSGFSdDJwRGhE?=
- =?utf-8?B?V0dLQkl1a3kzeC9BMG5QaWwyYzJIN3hENU5qanRhOGNTMFI4MXRaK3plS29j?=
- =?utf-8?B?eFZwMjY2WEl5THhxR0cxRnlYT2ZBWWFPY1g3M3d3TWVwWFFRTlR2cWFYOHpy?=
- =?utf-8?B?bVJXZVBhRi9UZmlxeVM3V0cyQTVzRFBleStmc2VUOS8vTDJHWlV1aGIxWVhy?=
- =?utf-8?B?dDFHcmJ3ZHRURitscER4NGNIdzF6VTR1cFZtZkduN29wbWxtT1p0T0xwdVU4?=
- =?utf-8?B?UHpqQUJxSnhDb0lSQ24xempocWNWK2dVVVF5cG9kVUc0eHNyb0haUWFBVGNk?=
- =?utf-8?B?NDVlajNpdGFTeER5ejBwS1N5R0FPR25vTzRPWFlGUEhsN0NSaEJkVDNSai85?=
- =?utf-8?B?aitmcmVkU2VTalJZUEl1Zm1PTkNSL2s1czdFUk0vVGpweDJzS2VvaTVJNTB5?=
- =?utf-8?B?aTdFd3l4czhMMnJDZUpCNlFRWjV1dS9mZXRDMnVUQ0ZpMDFHMEd3STY5dHpR?=
- =?utf-8?B?cWtwM2dQUlZ4OUJNL1VMdlY0aFZSZTVyNWhHRnlEMmZnWVdjTGtsd1hKdzNI?=
- =?utf-8?B?Y3I1QWEwTlpMNUhrWHhsVDBmQ0ZVUXREVTh4OHFHRWEvS0hYRGY1RXZVZUZE?=
- =?utf-8?B?MEZxS2pINkFxNmNsQWNPQm94UStCQkt5cGJsTWRRamJ4SzFPSTBTU1ZZTjdy?=
- =?utf-8?B?VmFZa3llVmovZURVaEpabzRFblRjN2pDNnhMWVRVRVJZY0JsZm1hL2NOU05V?=
- =?utf-8?B?d1Arcm51K2QvMTY3QXlJTytkWk9idFZHMkx6TEFmWXZtZE41dmtSaUJrWUdO?=
- =?utf-8?B?QjZJWWZKYXdxa1lLQWI5a0VPc3V4Tlh3M2JLWnFPVVFkdmd3blUvdU9MNGhl?=
- =?utf-8?B?dkg2SWh5SURmTStwcGtMMTYwcDczT3QzaXpMVTIra0xuTExZWlVrQ21xaUlL?=
- =?utf-8?B?UmpKRis2OEpTTmtFY2JTZTNXSGZyeEEvNFZJWFpNWmsrdS9PRGNqVUxSd3gy?=
- =?utf-8?B?R21nTEZNcEtsWW9ZUGF6TVVEV3YrcGNYMlZ0Z2lyMzlyMlFNODg0YUltUVlI?=
- =?utf-8?B?RWMvdXdTbHJMOWpJcFZTOTFwNzZJN21uRDM1b0x5SGxoWmpSUFR4bDNWbm0r?=
- =?utf-8?B?aUNaMDlHdDdoaGpIcm1HVXZJN0cwMnEvQUR2bjRtK0FUQTFQMTJ4cGdVOXho?=
- =?utf-8?B?NWxuRnhjUG9RTWFGTmUrVlRBVkg3Ump1dFc3bWFGczRPdFhRbmxrUW15ZUkv?=
- =?utf-8?B?SnRCdjVkV1J2N0JGbXd4SFBtNXB3ZzJNV0tTWjlvRWJyZjRSOXhFWTdlU3h3?=
- =?utf-8?B?bURvZkVrQmxSWTVBUEF5b0p1aVc2TGRvbDgrRzlTUVBFazlqWGIrenQ4L3d6?=
- =?utf-8?B?OEt3TG5NNWNjRThvNEtHemlNdmxmY0hldlhpOTl1bVUxU1cvNnlHdlUvbGRs?=
- =?utf-8?B?aHltTXlPbnJneXBQenZBS2JoWWtDOTByc0dQMk5FeXdDNWlSR3JNKzMxc2dh?=
- =?utf-8?B?MjB2c0xNY0FJVDZPdVFKL1hFdnBHQ0p4d09iTzNTYlByQzlwUHJEQzV6RzlN?=
- =?utf-8?B?R1FZZjlvRkkzNXMzcll6MEpEZjlYMitzVUtlVHZpT0pROHNJUkRTTXA5aERx?=
- =?utf-8?B?QndvN3psdjh3WFFMVWJNUVRZMXJ2ZmlVaFF3RjJxTGYxMk5lQTlJbkdXNlJw?=
- =?utf-8?B?bGRtVkdvTi9oUzY4WFhsQjJnUDBKeDlOMnJOTWI4eUNVT20yOVNRZTY2ZUta?=
- =?utf-8?B?TnFJVnhWeGxwYzhoZ3dSTFQxNDhxdUJZTkFpbkJwRmQ2WEp2MzhhRkFmbE1m?=
- =?utf-8?B?WmFiYm80YjkvY1Azb1hrcC9RcnRiQ1oraTU4UmZkc0VjL0QwUmNHelArNTdi?=
- =?utf-8?B?Znplc2lhVXdzbUhsemVJaGpqNGZuNkdoblFjaVFDVHRvcUpvcldaWUhYczUz?=
- =?utf-8?B?VU9VaW0xZ0REOTBQSUxOL21EeEFlTmtjRi92NTVhYzVPRnFWMjNRQ1JGbVBv?=
- =?utf-8?B?N3Jhc25Eclh4dmN0dnR6akJYc2ptcGEwSytFeE9kV2oxRXpjOFRDTnR2L3Ni?=
- =?utf-8?B?a3hNcGlhWmJDTnp1TDBLNlpQWDVnPT0=?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WHlNUkR6UnhESUZhdlcvSm5ldTBmWHVVOVhIODY3SEMwMjVxR0lodHYxeDI3?=
+ =?utf-8?B?TWEvcTl4MVUwcHJsOWIrWHYrY3dNZ2JDZ0dHRVdQVG5CdFA5ci82Tk9zTER4?=
+ =?utf-8?B?Wjh6SVV0TkR6Sjhnb2tYamRoSUQ4NE15ZDhGcUJ0Y3JlRnRpa3NhRHBNRFo2?=
+ =?utf-8?B?TUhMQ2hubC9mUzBUam9Yc09iUitHYjVBbkphUThld3BvSVFsRGlZSDRqOVVJ?=
+ =?utf-8?B?WGRnRXlNeEdXRjdhbVVzRXpMZGtWdGtsSW05ZkNlbithYzlyWlJaTjVJd2V2?=
+ =?utf-8?B?UUE0amM5YmhVT0ZBbTRsdUNiS0o5bEY4RVN0R1c4SWoxKytaNzBDbkVMa3h1?=
+ =?utf-8?B?bkVqK1hSQlorVkFFMEVvWUJvWUc0RlBMYXRvOHdlSCtQRlVxaDF5dmhWTkty?=
+ =?utf-8?B?alJzRHRrN1dKQitRUmN3U2YyYUltb3ZhTVg0Y05za1Aza3Z4M1pqNWhRRkdP?=
+ =?utf-8?B?a0NQd3dnck44VXlqZnJIb3pIYTlyTFJDNDBkUE8rUUpwN0lCR01ySGpwcitK?=
+ =?utf-8?B?eCtqSkFtN1FIQndVTjVqK3lzQnNrV3BHeUFOSlRWdEhSNGduVzl2SUZEZjl2?=
+ =?utf-8?B?RXdXb3RsdUZEd1BmaU9nK1UvNU9GT0NSbjdUdHVJUDdxLzk4d3lsWjZzd2RH?=
+ =?utf-8?B?Y2E1ZzNDTW1FVXBFMGFOS0hkUlF0Q3hsOGx3THUvS1pFNXdDTXFVVm5DaVVx?=
+ =?utf-8?B?SVBQT25Dc28rc3JiNmtmRFBUNFV3WHdNbzg4a2ZtTHVlYW9QYS9lQ3ZmQnEy?=
+ =?utf-8?B?T0wxSHVJM3puRUVIVlVoMVFYRjNYNXQzRWgzOFM1NGR2ZlBPRS9rdHpuRW4r?=
+ =?utf-8?B?VU9wVUtpc2ZkQzZOWlpiT01ITi9XYjFnWjNWRC8rVU9ab0FuNWZYcnVZZ3BP?=
+ =?utf-8?B?UURjNXFCNjlyMnhVT1dTeld0ZTZoVUJSdnBVcWJsSE9iRWJDR2hkQy9XVkcy?=
+ =?utf-8?B?Vjh3WU10QjFXNkNaa2hOK0JRMnFlTUE0d29JbnQyQmtCQ3AwQW52eFd3VmFq?=
+ =?utf-8?B?OFAyL3B3ekxRcW5jcGV0bHpvd1BjRVlNMXNMckRhMXM4M2lyQ3JwbjlLczBp?=
+ =?utf-8?B?TUhENjN5d2dDRnBQZU11ak9HMkhueEwwUnliSnFhOGhzWUxYTUdNcnVyNnZ1?=
+ =?utf-8?B?eVRtZTVLWDRtdFZWUCt6S0hRWVBTR2ZhSjF3QSsybGFIbjFCNDJ3b0Yybnh4?=
+ =?utf-8?B?dm5INUdnTHU3SksvODRUZmdrQk5NTG1KVFh5UEkxVU1OWFJRTDJjTGpBb0JI?=
+ =?utf-8?B?N0hwMnhPK3RzM3g4ZHFhMURHMFhKdVZ3S0tWVjM4Z05ncXREUjQrRmFIVGQ2?=
+ =?utf-8?B?eHNZTWFRbXl5Sys0bHl4dXpNNGx1dDIrTTl5c3EwSkhlbWVtN1hHRUJuc2F6?=
+ =?utf-8?B?OHAvd3UwY3R3UkVUejFoclczUmlvOVZaUFJMcnBvMmlEUHhIWnNVWjhSWVNU?=
+ =?utf-8?B?MVpqMVk5Z3lwckJDOXBYWWE4V3BOcWlSeTFpb2k1TFNnNGttVFNuZDVvbzJu?=
+ =?utf-8?B?Qk8yaHpraEltS2N2R0xKTGx4cGNsdnNpWGwreTFqanByQm5lc1ZGL0dUNTBo?=
+ =?utf-8?B?NnViZUcvMjk4cGoyMGRIL0VVaVR5bmV2RmZsWWFHR0xlMWdCdnlWcVpNdzh6?=
+ =?utf-8?B?L1JXbjNVYVVzNEZtalBTaHBEd3JGV0gvOW1wMnd4bWJZVk03aFlhenBYSDNL?=
+ =?utf-8?B?Q0tTa0VmRkRiTVpLMGtJZUp4VEtRV0I5UHlkR09UZXFxWXZ3VnV5OVVzRDVQ?=
+ =?utf-8?B?QkNVdCtNTVI1emllOUlQa0RvRmtFblRiN1VucGN4cXRKcjlDcnNGUUVnSnVZ?=
+ =?utf-8?B?S0M3NC80WCtqQ0EvQ1NuZW5wUWhNV3BQVndIZGlXYk5MbDBkbTRTc1lvWU5s?=
+ =?utf-8?B?RGZKaEVVc2h1NVlhL0pHdEZyMHJYU08vYS9ZdGtoMk05T2dhNEpHbjVzWkxY?=
+ =?utf-8?B?ekIrOXlrRndySGltUlJadnhJNVQ0am9OTHFlYkZ1amdKc2JkakMyZDRBTDNh?=
+ =?utf-8?B?UHZkeEx3YlJTRFR1YlhGV25RT0xpWWQ3M2k1eHBOQ1N4dG14bVRtUmg4WUV6?=
+ =?utf-8?B?MXFaVFFFUFZIQmRBZ2l1ZXAwNHgxQU8vU2JEQVZSU0hta2Y0Qm5yeEVra3Uz?=
+ =?utf-8?B?RmYwTjNuMlVBbjAzTWp0WS93Ykt0azBjWktmSG80aE55cDdyTE52MDVUbk1p?=
+ =?utf-8?B?Z0RRZlJaWldzM3Y5d1NlOWxaeHVqZXdNb0RlbTBjQkcveXo0WGZaUDMxVXdt?=
+ =?utf-8?B?OTZmQUt0c3hwWjRPMVhkV2k4TWtBPT0=?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: e67d469e-59e7-427e-0464-08ddd8d02f9b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30e77c64-5028-4cd4-1d94-08ddd8d3322a
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2025 12:11:22.1551 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2025 12:32:54.9544 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xnOi3jLMK+FmKOK+DTGxz5SzGl6XciHnba0Xe+lKnxkO6oZInON/IEQjF8L0B/SnCKByRP2wxhkcEe7tAw9LOFA7vs1ik6K8L99ITyZyBrs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB11070
+X-MS-Exchange-CrossTenant-UserPrincipalName: WcLbCatZ0kvbMSLGQFu+p5el5GiGc4kLHjxM7JBcngXNBAqCSJ0EmePW9aJekFsweFDdRBuVMMQc5vL6LZzAybgtu6dDj94me9cZ7hS/vlQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7853
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,326 +175,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
-
-On 8/4/25 8:16 PM, Jonas Karlman wrote:
-> The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
-> What blocks are disabled/non-working is indicated by ip-state in OTP.
+On 8/5/25 1:44 PM, Marius Dinu wrote:
+> On Mon, 2025-08-04 14.42.11 ++0200, Jonas Karlman wrote:
+>> Hi Marius,
+>>
+>> On 8/4/2025 11:43 AM, Marius Dinu wrote:
+>>> drivers/usb/gadget/dwc2_udc_otg_phy.c uses s5p_cpu_id,
+>>> which is only defined for Exynos CPUs.
+>>>
+>>> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
+>>> ---
+>>>   drivers/usb/gadget/Kconfig | 3 ++-
+>>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+>>> index 46a83141481..deabcb3e51f 100644
+>>> --- a/drivers/usb/gadget/Kconfig
+>>> +++ b/drivers/usb/gadget/Kconfig
+>>> @@ -108,10 +108,11 @@ config USB_GADGET_AT91
+>>>   
+>>>   config USB_GADGET_DWC2_OTG
+>>>   	bool "DesignWare USB2.0 HS OTG controller (gadget mode)"
+>>> +	depends on ARCH_EXYNOS5
+>>
+>> There are other platforms using this driver not just exynos.
+>>
+>> You should probably change
+>>
+>>    if (s5p_cpu_id == 0x4412)
+>>
+>> into something like
+>>
+>>    if (IS_ENABLED(CONFIG_ARCH_EXYNOS5) && s5p_cpu_id == 0x4412)
+>>
+>> instead of breaking use of this driver for other platforms.
+>>
+>> Regards,
+>> Jonas
+>>
+>>>   	select USB_GADGET_DUALSPEED
+>>>   	help
+>>>   	  The Designware USB2.0 high-speed gadget controller
+>>> -	  integrated into many SoCs. Select this option if you want the
+>>> +	  integrated into many Exynos SoCs. Select this option if you want the
+>>>   	  driver to operate in Peripheral mode. This option requires
+>>>   	  USB_GADGET to be enabled.
+>>>   
+>>
 > 
-> This add initial support for RK3582 by using ft_system_setup() to mark
-> any cpu and/or gpu node with status=fail as indicated by ip-state.
+> I'm sorry. I'm unable to fix this driver. My C skills are not that good.
+> I didn't even know this was a bug.
 > 
-> This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
-> cores and the gpu is always failed/disabled.
+> BTW, what's the difference between IS_ENABLED(CONFIG_something) and
+> CONFIG_IS_ENABLED(something) ? I saw both variants.
 > 
-> Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
-> the required DT fixups for RK3582 board variants.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> Changes in v2:
-> - Refactor code to first apply policy to ip-state and then fail cores
->    based on the updated ip-state
-> - Add support for failing rkvdec and rkvenc cores
-> - Append soc compatible to board model
-> - Not picking up t-b tag due to significant changes to patch
-> ---
->   arch/arm/mach-rockchip/rk3588/rk3588.c | 221 +++++++++++++++++++++++++
->   1 file changed, 221 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index c01a40020896..3ab0afe0979e 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -7,6 +7,7 @@
->   #define LOG_CATEGORY LOGC_ARCH
->   
->   #include <dm.h>
-> +#include <fdt_support.h>
->   #include <misc.h>
->   #include <spl.h>
->   #include <asm/armv8/mmu.h>
-> @@ -200,6 +201,16 @@ int arch_cpu_init(void)
->   
->   #define RK3588_OTP_CPU_CODE_OFFSET		0x02
->   #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
-> +#define RK3588_OTP_IP_STATE_OFFSET		0x1d
-> +
-> +#define FAIL_CPU_CLUSTER0		GENMASK(3, 0)
-> +#define FAIL_CPU_CLUSTER1		GENMASK(5, 4)
-> +#define FAIL_CPU_CLUSTER2		GENMASK(7, 6)
-> +#define FAIL_GPU				GENMASK(4, 1)
-> +#define FAIL_RKVDEC0			BIT(6)
-> +#define FAIL_RKVDEC1			BIT(7)
-> +#define FAIL_RKVENC0			BIT(0)
-> +#define FAIL_RKVENC1			BIT(2)
->   
->   int checkboard(void)
->   {
-> @@ -245,3 +256,213 @@ int checkboard(void)
->   
->   	return 0;
->   }
-> +
-> +static int fdt_path_del_node(void *fdt, const char *path)
-> +{
-> +	int nodeoffset;
-> +
-> +	nodeoffset = fdt_path_offset(fdt, path);
-> +	if (nodeoffset < 0)
-> +		return nodeoffset;
-> +
-> +	return fdt_del_node(fdt, nodeoffset);
-> +}
-> +
-> +static int fdt_path_set_name(void *fdt, const char *path, const char *name)
-> +{
-> +	int nodeoffset;
-> +
-> +	nodeoffset = fdt_path_offset(fdt, path);
-> +	if (nodeoffset < 0)
-> +		return nodeoffset;
-> +
-> +	return fdt_set_name(fdt, nodeoffset, name);
-> +}
-> +
 
-
-Wondering if this shouldn't be something to add to the fdt "subsystem"?
-
-With tests and all?
-
-> +/*
-> + * RK3582 is a variant of the RK3588S with some IP blocks disabled. What blocks
-> + * are disabled/non-working is indicated by ip-state in OTP. ft_system_setup()
-> + * is used to mark any cpu and/or gpu node with status=fail as indicated by
-> + * ip-state. Apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
-> + * cores and the gpu is always failed/disabled. Enable OF_SYSTEM_SETUP to make
-> + * use of the required DT fixups for RK3582 board variants.
-> + */
-> +int ft_system_setup(void *blob, struct bd_info *bd)
-> +{
-> +	static const char * const cpu_node_names[] = {
-> +		"cpu@0", "cpu@100", "cpu@200", "cpu@300",
-> +		"cpu@400", "cpu@500", "cpu@600", "cpu@700",
-> +	};
-> +	int parent, node, i, comp_len, len, ret;
-> +	bool cluster1_removed = false;
-> +	u8 cpu_code[2], ip_state[3];
-> +	struct udevice *dev;
-> +	char soc_comp[16];
-> +	const char *comp;
-> +	void *data;
-> +
-> +	if (!IS_ENABLED(CONFIG_OF_SYSTEM_SETUP))
-> +		return 0;
-> +
-> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
-
-Mmmmm we should probably think about adding xPL symbols for 
-ROCKCHIP_OTP. No required for this patch as we already have code doing 
-that same check.
-
-> +		return -ENOSYS;
-> +
-> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +					  DM_DRIVER_GET(rockchip_otp), &dev);
-> +	if (ret) {
-> +		log_debug("Could not find otp device, ret=%d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
-> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
-> +	if (ret < 0) {
-> +		log_debug("Could not read cpu-code, ret=%d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	log_debug("cpu-code: %02x %02x\n", cpu_code[0], cpu_code[1]);
-> +
-> +	/* only fail devices on rk3582/rk3583 */
-> +	if (!(cpu_code[0] == 0x35 && cpu_code[1] == 0x82) &&
-> +	    !(cpu_code[0] == 0x35 && cpu_code[1] == 0x83))
-> +		return 0;
-> +
-> +	ret = misc_read(dev, RK3588_OTP_IP_STATE_OFFSET, &ip_state, 3);
-> +	if (ret < 0) {
-> +		log_err("Could not read ip-state, ret=%d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	log_debug("ip-state: %02x %02x %02x (otp)\n",
-> +		  ip_state[0], ip_state[1], ip_state[2]);
-> +
-> +	/* policy: fail entire big core cluster when one or more core is bad */
-> +	if (ip_state[0] & FAIL_CPU_CLUSTER1)
-> +		ip_state[0] |= FAIL_CPU_CLUSTER1;
-> +	if (ip_state[0] & FAIL_CPU_CLUSTER2)
-> +		ip_state[0] |= FAIL_CPU_CLUSTER2;
-> +
-> +	/* policy: always fail one big core cluster on rk3582/rk3583 */
-> +	if (!(ip_state[0] & (FAIL_CPU_CLUSTER1 | FAIL_CPU_CLUSTER2)))
-> +		ip_state[0] |= FAIL_CPU_CLUSTER2;
-> +
-> +	if (cpu_code[0] == 0x35 && cpu_code[1] == 0x82) {
-> +		/* policy: always fail gpu on rk3582 */
-> +		ip_state[1] |= FAIL_GPU;
-> +
-> +		/* policy: always fail rkvdec on rk3582 */
-> +		ip_state[1] |= FAIL_RKVDEC0 | FAIL_RKVDEC1;
-> +	} else if (cpu_code[0] == 0x35 && cpu_code[1] == 0x83) {
-
-Technically, we could have a simple else here as the code path before 
-the if is guaranteed to only be reached in two cases, 0x8235 and 0x8335, 
-so if you test the former and it doesn't match, it's necessarily the 
-latter. No strong opinion.
-
-> +		/* policy: always fail one rkvdec core on rk3583 */
-> +		if (!(ip_state[1] & (FAIL_RKVDEC0 | FAIL_RKVDEC1)))
-
-You could want to only check FAIL_RKVDEC0 as FAIL_RKVDEC1 is a bit (and 
-not a bitfield so we don't need to set the whole bitfield in the event 
-it's only partially set like for CPU clusters). No strong opinion.
-
-> +			ip_state[1] |= FAIL_RKVDEC1;
-> +	}
-> +
-> +	/* policy: always fail one rkvenc core on rk3582/rk3583 */
-> +	if (!(ip_state[2] & (FAIL_RKVENC0 | FAIL_RKVENC1)))
-> +		ip_state[2] |= FAIL_RKVENC1;
-> +
-> +	log_debug("ip-state: %02x %02x %02x (policy)\n",
-> +		  ip_state[0], ip_state[1], ip_state[2]);
-> +
-> +	/* cpu cluster1: ip_state[0]: bit4~5 */
-> +	if ((ip_state[0] & FAIL_CPU_CLUSTER1) == FAIL_CPU_CLUSTER1) {
-
-No need for the == FAIL_CPU_CLUSTER1 check as you'll have set the whole 
-bitfield earlier even if only one is set in the original ip_state from 
-the register. No strong opinion.
-
-> +		log_debug("remove cpu-map cluster1\n");
-> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster1");
-> +		cluster1_removed = true;
-> +	}
-> +
-> +	/* cpu cluster2: ip_state[0]: bit6~7 */
-> +	if ((ip_state[0] & FAIL_CPU_CLUSTER2) == FAIL_CPU_CLUSTER2) {
-
-Ditto. No strong opinion.
-
-> +		log_debug("remove cpu-map cluster2\n");
-> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster2");
-> +	} else if (cluster1_removed) {
-> +		/* cluster nodes must be named in a continuous series */
-> +		log_debug("rename cpu-map cluster2\n");
-> +		fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
-> +	}
-> +
-> +	/* gpu: ip_state[1]: bit1~4 */
-> +	if (ip_state[1] & FAIL_GPU) {
-> +		log_debug("fail gpu\n");
-> +		fdt_status_fail_by_pathf(blob, "/gpu@fb000000");
-> +	}
-> +
-> +	/* rkvdec: ip_state[1]: bit6,7 */
-> +	if (ip_state[1] & FAIL_RKVDEC0) {
-> +		log_debug("fail rkvdec0\n");
-> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdc38000");
-> +		fdt_status_fail_by_pathf(blob, "/iommu@fdc38700");
-> +	}
-> +	if (ip_state[1] & FAIL_RKVDEC1) {
-> +		log_debug("fail rkvdec1\n");
-> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdc40000");
-> +		fdt_status_fail_by_pathf(blob, "/iommu@fdc40700");
-> +	}
-> +
-> +	/* rkvenc: ip_state[2]: bit0,2 */
-> +	if (ip_state[2] & FAIL_RKVENC0) {
-> +		log_debug("fail rkvenc0\n");
-> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdbd0000");
-> +		fdt_status_fail_by_pathf(blob, "/iommu@fdbdf000");
-> +	}
-> +	if (ip_state[2] & FAIL_RKVENC1) {
-> +		log_debug("fail rkvenc1\n");
-> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdbe0000");
-> +		fdt_status_fail_by_pathf(blob, "/iommu@fdbef000");
-> +	}
-> +
-> +	parent = fdt_path_offset(blob, "/cpus");
-> +	if (parent < 0) {
-> +		log_err("Could not find /cpus, parent=%d\n", parent);
-> +		return parent;
-> +	}
-> +
-> +	/* cpu: ip_state[0]: bit0~7 */
-> +	for (i = 0; i < 8; i++) {
-> +		/* fail any bad cpu core */
-> +		if (!(ip_state[0] & BIT(i)))
-> +			continue;
-> +
-> +		node = fdt_subnode_offset(blob, parent, cpu_node_names[i]);
-> +		if (node >= 0) {
-> +			log_debug("fail cpu %s\n", cpu_node_names[i]);
-> +			fdt_status_fail(blob, node);
-> +		} else {
-> +			log_err("Could not find %s, node=%d\n",
-> +				cpu_node_names[i], node);
-> +			return node;
-> +		}
-> +	}
-
-I would move this closer to the renaming/removing of cpu-map. No strong 
-opinion though.
-
-I'm wondering why you aren't using a direct path like for other 
-controllers, e.g. fdt_status_fail_by_pathf(blob, cpu_node_names[i]) by 
-simply prefixing each node_name with /cpus/ ?
-
-> +
-> +	node = fdt_path_offset(blob, "/");
-> +	if (node < 0) {
-> +		log_err("Could not find /, node=%d\n", node);
-> +		return node;
-> +	}
-> +
-> +	snprintf(soc_comp, sizeof(soc_comp), "rockchip,rk35%x", cpu_code[1]);
-> +
-> +	for (i = 0, comp_len = 0;
-> +	     (comp = fdt_stringlist_get(blob, node, "compatible", i, &len));
-> +	     i++) {
-> +		/* stop at soc compatible */
-> +		if (!strcmp(comp, soc_comp) ||
-> +		    !strcmp(comp, "rockchip,rk3588s") ||
-> +		    !strcmp(comp, "rockchip,rk3588"))
-> +			break;
-> +
-> +		log_debug("compatible[%d]: %s\n", i, comp);
-> +		comp_len += len + 1;
-> +	}
-> +
-
-If it happens that none of the expected strings are found in the 
-compatible property, we should probably return early.
-
-> +	/* truncate to only include board compatible */
-> +	fdt_setprop_placeholder(blob, node, "compatible", comp_len, &data);
-> +
-> +	/* append soc compatible */
-> +	fdt_appendprop_string(blob, node, "compatible", soc_comp);
-> +	fdt_appendprop_string(blob, node, "compatible", "rockchip,rk3588s");
-
-I would rather insert rk3582/rk3583 before the rk3588/rk3588s and keep 
-the rest untouched instead of truncating to rockchip,rk3588/rk3588s and 
-then adding rockchip,rk3588s back only. I wouldn't want my device tree 
-to be modified too much and we don't know what we'll get from downstream 
-)I'm not necessarily talking about Rockchip's vendor kernel here) DTBs 
-for example, so truncating doesn't seem to be the best plan? What do you 
-think?
-
-Logic-wise aside from the "compatible" changes, this seems fine. I do 
-not own any RK3582/RK3583 so cannot test this.
-
-Cheers,
-Quentin
+https://docs.u-boot.org/en/latest/develop/codingstyle.html#conditional-compilation
