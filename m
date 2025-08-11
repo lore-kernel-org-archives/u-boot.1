@@ -4,59 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5036DC87FDA
-	for <u-boot@archiver.kernel.org>; Sun, 10 Aug 2025 22:27:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBFD7C87FDA
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 03:16:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3065683423;
-	Mon, 11 Aug 2025 00:27:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id E4FE083327;
+	Mon, 11 Aug 2025 05:16:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="edyB0s0E";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBDDE833FC; Mon, 11 Aug 2025 00:27:12 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id D172583330; Mon, 11 Aug 2025 05:16:09 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6368683420
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 00:27:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D97A683323
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 05:16:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f248=2X=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1754864829; bh=F6IJwgujK07UZiX43WQkE+QSqZM5fA3YW9Mr+kqcuRA=;
- b=edyB0s0EZy4T0DD6+FZKyydwPcWKTgNLTEvNkftj/o7rWOccZlibZdCrPXxKeeacMflOtifhM
- Rm88GIiFVf7bpIVYjoyT2i0rraG1NDiTnZL8YweeZYngw7DGKQRhRyoMmulmmNbh/P2R+mknLPJ
- nOvzVUAlduaIAYnDy7O1yLklWSKjN4+/b3Ga/Q30Ck+dKAXahFTM73+nK3u/RExRoswsB6oNqld
- tzJSD+IOzUconKKmHiD24FBkU4djIMWNYHlOhMdTr2fiBQukIoyTsikazCuaNbaW0rh/Tcno7UA
- g0bfh6d4GE/1XSXByZQlQggKnjTy67QKTC3sIYfgn91Q==
-X-Forward-Email-ID: 68991cb9b34c1b14a67b38e3
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.2.4
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 3/3] rockchip: rk3588s-rock-5c: Add support for ROCK 5C
- Lite variant
-Date: Sun, 10 Aug 2025 22:26:31 +0000
-Message-ID: <20250810222644.4095072-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250810222644.4095072-1-jonas@kwiboo.se>
-References: <20250810222644.4095072-1-jonas@kwiboo.se>
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.27.117])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 0966FB4E0005;
+ Mon, 11 Aug 2025 05:16:05 +0200 (CEST)
+Message-ID: <e6f1cb27-371c-44ef-b7ec-3f348ca0a085@freeshell.de>
+Date: Sun, 10 Aug 2025 20:16:04 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] starfive: fix return code of `mac write_eeprom`
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>, 
+ Yanhong Wang <yanhong.wang@starfivetech.com>, u-boot@lists.denx.de
+References: <20250809082155.6929-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250809082155.6929-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,80 +57,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Kconfig option OF_SYSTEM_SETUP=y to support booting ROCK 5C Lite
-boards with a RK3582 SoC. CPU and GPU cores are failed based on ip-state
-and policy.
 
-Tested on a ROCK 5C Lite v1.1:
 
-  cpu-code: 35 82
-  ip-state: 00 80 00 (otp)
-  ip-state: c0 80 04 (policy)
-  remove cpu-map cluster2
-  fail rkvdec1
-  fail rkvenc1
-  fail cpu cpu@600
-  fail cpu cpu@700
+On 8/9/25 01:21, Heinrich Schuchardt wrote:
+> When writing the EEPROM fails, the command usage help text is displayed
+> after the error message. We should only display the error message instead.
+> 
+> If writing the EEPROM fails, return CMD_RET_FAILURE (1) instead of
+> CMD_RET_USAGE (-1).
+> 
+> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  board/starfive/visionfive2/visionfive2-i2c-eeprom.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+> index 010e386e64d..17a44020bcf 100644
+> --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+> +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+> @@ -275,7 +275,7 @@ static int prog_eeprom(unsigned int size)
+>  
+>  	if (is_match_magic()) {
+>  		printf("MAGIC ERROR, Please check the data@%p.\n", pbuf.buf);
+> -		return -1;
+> +		return CMD_RET_FAILURE;
+>  	}
+>  
+>  	ret = i2c_get_chip_for_busnum(CONFIG_SYS_EEPROM_BUS_NUM,
+> @@ -285,7 +285,7 @@ static int prog_eeprom(unsigned int size)
+>  	if (ret) {
+>  		printf("Get i2c bus:%d addr:%d fail.\n", CONFIG_SYS_EEPROM_BUS_NUM,
+>  		       CONFIG_SYS_I2C_EEPROM_ADDR);
+> -		return ret;
+> +		return CMD_RET_FAILURE;
+>  	}
+>  
+>  	for (i = 0, p = (u8 *)pbuf.buf; i < size; ) {
+> @@ -314,11 +314,11 @@ static int prog_eeprom(unsigned int size)
+>  	if (ret) {
+>  		has_been_read = -1;
+>  		printf("Programming failed.\n");
+> -		return -1;
+> +		return CMD_RET_FAILURE;
+>  	}
+>  
+>  	printf("Programming passed.\n");
+> -	return 0;
+> +	return CMD_RET_SUCCESS;
+>  }
+>  
+>  /**
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-v3: Update commit message to reflect updated policy
-v2: New patch
----
- arch/arm/mach-rockchip/rk3588/Kconfig | 9 +++++----
- configs/rock-5c-rk3588s_defconfig     | 1 +
- doc/board/rockchip/rockchip.rst       | 2 +-
- 3 files changed, 7 insertions(+), 5 deletions(-)
+This patch is a good start, but I think maybe more is needed? Quoting
+the notes I wrote for myself last year:
 
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 4e7942ada875..afc26b0b3c6a 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -269,14 +269,15 @@ config TARGET_ROCK_5_ITX_RK3588
- 	  Powered by either 12V, ATX power-supply or PoE
- 
- config TARGET_ROCK_5C_RK3588S
--	bool "Radxa ROCK 5C RK3588S2 board"
-+	bool "Radxa ROCK 5C/5C Lite"
- 	help
--	  Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
-+	  Radxa ROCK 5C/5C Lite is a Rockchip RK3588S2/RK3582 based SBC (Single
-+	  Board Computer) by Radxa.
- 
- 	  Specification:
- 
--	  Quad A76 and Quad A55 CPU
--	  6 TOPS NPU
-+	  Quad/Dual A76 and Quad A55 CPU
-+	  6/5 TOPS NPU
- 	  up to 32GB LPDDR4x RAM
- 	  eMMC / SPI flash connector
- 	  Micro SD Card slot
-diff --git a/configs/rock-5c-rk3588s_defconfig b/configs/rock-5c-rk3588s_defconfig
-index 2748fb488c2d..f83d3f6d6c92 100644
---- a/configs/rock-5c-rk3588s_defconfig
-+++ b/configs/rock-5c-rk3588s_defconfig
-@@ -18,6 +18,7 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5c.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_SPL_MAX_SIZE=0x40000
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 726eed4ea45b..c025191302bc 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -153,7 +153,7 @@ List of mainline supported Rockchip boards:
-      - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
-      - Radxa ROCK 5A (rock5a-rk3588s)
-      - Radxa ROCK 5B/5B+ (rock5b-rk3588)
--     - Radxa ROCK 5C (rock-5c-rk3588s)
-+     - Radxa ROCK 5C/5C Lite (rock-5c-rk3588s)
-      - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
-      - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
-      - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
--- 
-2.50.1
+"
+mac command:
 
+if data did not change then "Programming passed." is printed regardless
+of write protect state but no action was taken and no usage help is
+printed. 'mac' still outputs in-memory info.
+
+when data was changed the command shows "Programming failed." or
+"Programming passed." followed by usage help and 'mac' command shows no
+output until 'mac read_eeprom'.
+
+Suggested:
+
+If data did not change at time of 'mac eeprom_write' then it should
+still try to write so the message pass/fail will be correct.
+The usage info following 'mac write_eeprom' is a bug, should not be printed.
+
+prog_eeprom return values inconsistent with command.h
+
+prog_eeprom returns -1 which overlaps with CMD_RET_USAGE
+should be 1 for failure
+
+show_eeprom()
+
+Print a message "No valid data. Please do mac read_eeprom".
+Maybe "Read nnn bytes from EEPROM" and "Displaying local copy of EEPROM
+from memory" to be more clear.
+"
+
+Acked-by: E Shattow <e@freeshell.de>
