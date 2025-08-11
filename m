@@ -4,71 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98A70C87FD2
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 08:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B7FC87FD2
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 08:30:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FAB38334A;
-	Mon, 11 Aug 2025 10:14:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9EF2083323;
+	Mon, 11 Aug 2025 10:30:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1754900080;
-	bh=FW7I0ni8n5ad+vFUuuPp3vSSAv8CcQwAMQXh03Pl0+Y=;
+	s=phobos-20191101; t=1754901030;
+	bh=8UToF/MmyJgnF1ZocoQ1bPUguDQbMGCwLCWcakSf0As=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=th5GBZscceV3DuOgUFigKr1qawzUbvwV+FOwDfb4cO87W9gZ23w7kloFyuUW2RKOP
-	 CAAKdQo61O8OKLwu5gxmOBOdQuPVjXre0UcuAXwwalPeZNH7PLMc3WH1fK1mbC3yfC
-	 MXMSxe4IlKW8Ud70bZAURLVySXlEfqivEn9B9qAlpXejVS4XpjRjDkk8gYFiil1Pmu
-	 ns80+JPhXSjYpIuD/o/givb5BFFTFT9qqaZ68bxazolTxXe2e+Pic2uy7fBEKCYtgo
-	 3sziHOvjZsRBpfie5hiSfkYER26fXOCSYZ+wYsakMj3G3JOkkWyk9/UwUN/OCiBDb6
-	 VQp1KAClAsoVw==
+	b=S7gaH+Jq69ZQQugMVJ1bGE6DwQK2RfBSun9ue9HiOQ2qk+Tl0NvpZaQD52/yyM5zs
+	 N9gADy1Yb9C0wOZOeNWMnZoax3zHCxjDcTA1GbQ25JIsBIHMPYbL79fBogLoAnUuUF
+	 7UkKRsHX2QCDYXqGs8PPg9Nstnyi+cwV5OqEcrkAYeQ22fInqopYNoSRTEiuQJgR7B
+	 PhwTWSRBCiNkKgmakBYV8NIJdoMA0i82F2RuZ8KqahIYP0xBl3XX68TDFj1EB9O0wu
+	 BL6+IgpvTGQaPNynDJ/2B/yWXaQ6OnIiNQNRf0SYfVpW//sfpqici+7NBOoWl11xDb
+	 eXINUeLS0SSDw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E2218334D; Mon, 11 Aug 2025 10:14:38 +0200 (CEST)
+ id 7D3F78334A; Mon, 11 Aug 2025 10:30:28 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5649283322
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 10:14:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CFF883322
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 10:30:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="JzUF2tuC"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="BPYbPLWJ"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A13D91038C11C; 
- Mon, 11 Aug 2025 10:14:30 +0200 (CEST)
+ with ESMTPSA id 6A2311038C11E; 
+ Mon, 11 Aug 2025 10:30:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1754900075; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=FW7I0ni8n5ad+vFUuuPp3vSSAv8CcQwAMQXh03Pl0+Y=;
- b=JzUF2tuC/mCPnovD7Nvqsdl9FxS8f4NVkVkkcFwa7TOsF1pdZ1ylvL7HsFjkr5Xjnrcto+
- kO4T1gBDaPLVivv4zR0I+clYKPJNecYuqG+owUGuphV6Q/NtnJA61F5+IqjeReJZKu1uEt
- /9vU4FS7H4BNU21nf3yEqk0Jl9SEIDU41kyyfqucYiKD0md/vVtyHxivSkYIyMX4Fp6AJv
- G1uQ5Jprr5/cHFwgddpSKHdVCihdB7wWDjaa54I/WBBMXnVcFYjOstBeFbNtITrCAuuqsk
- BohLwojssTFETjYS0hZHpq4TAGcySXRKu/EFoyCSkT3e0Mno233U0kyVQyyD1w==
-Date: Mon, 11 Aug 2025 10:14:28 +0200
+ t=1754901025; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=8UToF/MmyJgnF1ZocoQ1bPUguDQbMGCwLCWcakSf0As=;
+ b=BPYbPLWJ/1INBqxs505SXjrIxoMI88eU5TSHTNRThvfk7KJlM0LvdV1tuW2GxRRXQe6BKZ
+ ID3XbqZrqugZSvQrWfbkyxOX7uFmmmp5AYCkoB+BfDvFzHzdTjtBwFZ37Xhd0qAAK9NV4e
+ /wzLqITQQNPQvPmepH1YpewEnHBeg0q10LC4LGlypsWRuAPRf0qFQ65Q8icod/GxP7OQ9G
+ GMT2J47hZE/1m4joRZrtmDsNuQVFxDHcyPsBtGsHcBsp4tRurJ6zizo+oZb3+v3rQrI8gr
+ w6eamDAJsZ1QQEqV4m0KRTrtwDtVxMAXV3aSRnAlskgUJK8Iawjfv9RBeR6yrA==
+Date: Mon, 11 Aug 2025 10:30:22 +0200
 From: Philip Oberfichtner <pro@denx.de>
 To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v6 2/4] Makefile: Add size check for u-boot-with-spl.bin
-Message-ID: <aJmmZNHaHm2YhsnY@antares>
-References: <20250807075653.356088-1-pro@denx.de>
- <20250807075653.356088-3-pro@denx.de>
- <6ecb3a72-a6ba-4930-ab57-292f17020b96@mailbox.org>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <michael@walle.cc>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 1/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
+Message-ID: <aJmqHtGYYhFfGNXG@antares>
+References: <20250807102436.452691-1-pro@denx.de>
+ <20250807102436.452691-2-pro@denx.de>
+ <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <6ecb3a72-a6ba-4930-ab57-292f17020b96@mailbox.org>
+In-Reply-To: <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,52 +81,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 08, 2025 at 03:10:58PM +0200, Marek Vasut wrote:
-> On 8/7/25 9:56 AM, Philip Oberfichtner wrote:
+On Thu, Aug 07, 2025 at 03:41:38PM +0200, Marek Vasut wrote:
+> On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
+> > CONFIG_HAS_BOARD_SIZE_LIMIT is obsolete, if we interpret the value
+> > "zero" as "unlimited".
+> 
+> This sentence makes no sense. Is the variable not obsolete if its value is
+> non-zero ?
 > 
 > [...]
 > 
-> > +++ b/Makefile
-> > @@ -1715,6 +1715,7 @@ OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
-> >   				   --pad-to=$(CONFIG_SPL_PAD_TO)
-> >   u-boot-with-spl.bin: $(SPL_IMAGE) $(SPL_PAYLOAD) FORCE
-> >   	$(call if_changed,pad_cat)
-> > +	@$(call size_check,$@,$(CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT))
+> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > index c2aa88f59fb..36eed766d31 100644
+> > --- a/lib/efi_loader/Kconfig
+> > +++ b/lib/efi_loader/Kconfig
+> > @@ -74,7 +74,7 @@ config EFI_SIGNATURE_SUPPORT
+> >   config EFI_DEBUG_SUPPORT
+> >   	bool "EFI Debug Support"
+> > -	default y if !HAS_BOARD_SIZE_LIMIT
+> > +	default y if BOARD_SIZE_LIMIT = 0
+> This looks wrong, no board size limit does not imply EFI anything.
 > 
-> It seems other size checks are not called unconditionally, see Makefile
-> around line 1100 . Why is this one called unconditionally ? Won't this break
-> boards which default this new option to 0 ?
+> And use some common sense and reduce the CC list.
 
-No. Please see the
-	"test $$limit -gt 0"
-in [PATCH 1/4].
-
-
-> 
-> >   ifeq ($(CONFIG_ARCH_LPC32XX)$(CONFIG_SPL),yy)
-> >   MKIMAGEFLAGS_lpc32xx-spl.img = -T lpc32xximage -a $(CONFIG_SPL_TEXT_BASE)
-> > diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> > index ab05536bd02..b5c0c60ff6b 100644
-> > --- a/common/spl/Kconfig
-> > +++ b/common/spl/Kconfig
-> > @@ -36,6 +36,13 @@ config SPL_FRAMEWORK_BOARD_INIT_F
-> >   	  - initialize the serial (preloader_console_init)
-> >   	  Unless you want to provide your own board_init_f, you should say Y.
-> > +config UBOOT_WITH_SPL_SIZE_LIMIT
-> > +	hex "Maximum size of u-boot-with-spl.bin"
-> > +	default 0x0
-> > +	help
-> > +	  Specifies the maximum length of the u-boot-with-spl.bin image.
-> > +	  If this value is zero, it is ignored.
-> Why not set SPL_SIZE_LIMIT and BOARD_SIZE_LIMIT ?
-
-Please refer to the commit message above, where I explained my
-rationale.
-
-
--- 
-=====================================================================
-DENX Software Engineering GmbH,
-Managing Director: Johanna Denk, Tabea Lutz
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-=====================================================================
+Wouldn't the CC list naturally be large for a patch changing 43
+defconfigs?
