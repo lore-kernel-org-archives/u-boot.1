@@ -4,166 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B15DC87FD2
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 09:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F8BC87FDB
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 10:28:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 908278331B;
-	Mon, 11 Aug 2025 11:59:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 6AFDB832C8;
+	Mon, 11 Aug 2025 12:28:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Tq6qjKux";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="p1JJXoLc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 126B183321; Mon, 11 Aug 2025 11:59:39 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id D02DA832DD; Mon, 11 Aug 2025 12:28:41 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A3F5832FE
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 11:59:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id B89A3832BF
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 12:28:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oiykjF2LOsCvneSOGjOI0HzkpVv684Q+nG3jD2T3sOgoT/+rX/asGGNPw7HEUIZ7KkwcInqryzPBR+6hGZzZKx1X3sUFzi22Q2kX2Hin/ci2QcAZRvAPE3tM1QdizJt4AlbE/EbO6lcKqoHS6kX78l4xoGpAac1EIAVXjFVeV04HG7anDMwUufTnmvviRNUG1neWSwb7YU51dJ2bKSmc4HKSD3n7EexSmCUeRkRK6bEno0m1rbfk//ee9Z8pIe7bSAFjkf9RnxEAG53u3djrqYp/oXoTTHXxJ/YeVS9QirQ4YpMg017ssAUdMreCNwUk66MoqxcViSxasElTxyKWhA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oeFOxgHQLN8lvGntxtd3PIDE7EoCibWFTGA7p3nqL5w=;
- b=xa1CBENigkk0qksN7xUodD3RzS/USFC8mSWFYEQu+aInEDjVgsJezLPv5D6AU8zcwdTlFjJFrnJS153p7LUsFUuVFjD/T8B8qh1U/t/ET1rpl4URKO1AwZH90pd/KX6/t8rNtuIEZUU1dyd8AxKp5Xd7ZkXuA10HP16nTz6OtJyqEMtFf3BE2bt3Y5bkxPR++LBkOPlvfJ26y961ow6s0EPLQ1iwglqb5ClOsowfM1ZG2mOXacuUSP3aZT4xXH1uDhAXllBornuHGamDGPtX32Et9VThYPyV7QnRhaxxrOe/pYgFxo6TqJCgjDDfZSE88sme8e6V9NuJobsyOCDgZw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oeFOxgHQLN8lvGntxtd3PIDE7EoCibWFTGA7p3nqL5w=;
- b=Tq6qjKuxeCbR1Nco2hYlWUCYZZqf2Oxlld3wS7AsnmA+bRtShLvnI+8qpk7hu0rzVFLFgrR36XcVOoeKYX5au24zvB3BMc/CrM0AJ5YGOA6QADH00esflL2gon43RYjMvXPX7TOEa3TluyzUdWt7YLWeTu5rlxM0mtcmnyiGW8s=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DU0PR04MB9585.eurprd04.prod.outlook.com (2603:10a6:10:316::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.12; Mon, 11 Aug
- 2025 09:59:35 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.9031.011; Mon, 11 Aug 2025
- 09:59:35 +0000
-Message-ID: <a22ea144-ada6-4520-a7fd-43380f526ee4@cherry.de>
-Date: Mon, 11 Aug 2025 11:59:33 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] rockchip: rk3576: Add SPI Flash boot support
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250801210619.2618622-1-jonas@kwiboo.se>
- <20250801210619.2618622-4-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250801210619.2618622-4-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0141.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:95::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 7EF503F28B
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 10:28:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1754908115;
+ bh=M8SAjQ8o98Auyjrtln8TE0vVYddXxJ47hgnzEjNBGcg=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=p1JJXoLcSFVuiPflwJgZVptBJciV8pl428Ph9h/TSIUoWNNVZjnH1FLHXopkD0qx1
+ p9kfOzMRTWzdCojSRtZ3rYCdexBdZPtX6OVAb8s5ahiNBvqAfWRDZRMEpJ5NmR+zXR
+ yi9B/GAqov4L+NDoQHcmX78tbsujjydGdAlqFXmAU1akFcOqSSwo93MP/jAfx3XkBf
+ MRrRzGOQlbTuCiWO0YJq4Ca+eSrAcsonzfkRYo5uLC+z7FxBXYXxF4yZ/GKT/kCGmD
+ mqwORt6cb47HpEkbb/Pt4szKoUA7++CkEBDnASpEqJqr/plXUn5qUxP7CbgQX+/8T8
+ F3X+7YfO2zdtA==
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-3215b3229c7so4429232a91.2
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 03:28:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754908114; x=1755512914;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=M8SAjQ8o98Auyjrtln8TE0vVYddXxJ47hgnzEjNBGcg=;
+ b=CzmTqgpgBSeagAS8VmsxMiMvQ0XAzdR9fLCcLa1lE3KuH5GLfBQT4UHRTwiy1RgHnA
+ PP4dyedzOpXOXbsXYL492qusNFMMcf9C5Z9VBvPIg4xI6QIjP5z3Ro/Td7Dbdd00iSD+
+ pSNA3ko8p1XMaLlGLFCIamHtf0uUC5ONMUQcS7TSpVSs4FRhRYEtX5e8L9BdPbLzB0FQ
+ KQGEs1MmiJ4t3q73s9GVhQuHk4tGckXVmIdJh4cfj7L5JT4r1jO3+cZxSa+JkZqAsHW+
+ XQk1bj/ik3wKd8sdR8P5G0JW8yWqm85iY0Cy6/9GzbCV+XMMi5Yhj/JUNYgC/tdPaiBX
+ d8/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXgYkckB0m4kWLCn/imzcyiI6xdjFUYwf4BPZf3EIC2fdcIwNBsyGYFct37JtRoKfK45szBHS4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzHGbwVYc+AZ6uJPqPkXwBcl4Ljb+bpYuBNVq20sRJ2Y00B34r7
+ zqiXxgLEQ+XNzc5eOAZZj63EkzMQb/ldQ7PVu32CbMlPT0GwOVaZNKz99MfS126DO19ZWB0z2vd
+ KWwP0RcoWAyhHyfHybwZmmTFmjCTH4HzOQJUcV6sgcxMkY2JRE9oYV4TEbhtq9BEqz7yLHLzqvn
+ 01MVV3NwAuOehBIcVsRwqvqrW4WHYWY3bhrPdGgk99tg4DIw==
+X-Gm-Gg: ASbGncvib3IgSWiJN8/szPzJhB/FL1LljRxVKp/IVXXsuJ0hwVpNgYny9J7aCHThI1I
+ nWL+mjspLsLohrDVyKODD/k/F/vqAB/BMerMqn8R5W3U6h6BljSUn7E/O+l6j9lj1NbR7Fe61cg
+ ISqBlyZbw+rqZ5+mwwzw==
+X-Received: by 2002:a17:903:1746:b0:23f:adc0:8cc2 with SMTP id
+ d9443c01a7336-242c2206c3fmr146962115ad.27.1754908113973; 
+ Mon, 11 Aug 2025 03:28:33 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGtYZtVxgj2g7UuJl4NvbJbss9nx0NX0sDW2XoI6SGTl5LtaxfkyQIVFCbTaQhoqhI7+fCK6HJ2tLy1VYDiKbg=
+X-Received: by 2002:a17:903:1746:b0:23f:adc0:8cc2 with SMTP id
+ d9443c01a7336-242c2206c3fmr146961795ad.27.1754908113534; Mon, 11 Aug 2025
+ 03:28:33 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU0PR04MB9585:EE_
-X-MS-Office365-Filtering-Correlation-Id: 22239e69-d309-4db5-7c28-08ddd8bdc693
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|10070799003|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cHhMdXp6MndCRzhiSWJzNlZmR2VpSHZZek9zemJRbktaeklUUmp6NmJqWm5k?=
- =?utf-8?B?dnRLVjQ5SjBweXgvUm9NcGpveVNHNzZYK1dMRWNudVpYVkhvQUJSMW1QUitR?=
- =?utf-8?B?cklBWSt5YUtBZm1iVjZ4ZThqQ1g2M25uQXo1c3dYbmIxQUE1Ty9OWk1JM1VB?=
- =?utf-8?B?WXNpdG1XbFNWcTZ2ZVZaT3FhOG43UGQvVG05WmMyOEdRSjV0bXMyQ0s4Qmhq?=
- =?utf-8?B?NzhxNmxKckd6VUtMcHJWbjFURElYdytGZDNkQnhBbkVtM052UmMrbTVsbGtu?=
- =?utf-8?B?b2ZGa3JERk1GUThaZm5NSnBlaENMN3Y1RVhxWHVuRWtuVTFtOXF1V1diOW5P?=
- =?utf-8?B?VENkdFBuUFJuZnV1ajRmbUVwY3ltdjZ5TG8wSHFIb3craDZpSnVqZjh2NkRi?=
- =?utf-8?B?SzFSUDRmMEFoM1RJMFUrV00vRERGOFlnR05GTXJ1VG1FTDU0SmlrU3l1VzVm?=
- =?utf-8?B?SVJrczUrSmthS2c0MmVhNWsvT3ZRdi9wZ3ZuQXVrY0NMckNqaVo2OEFReTdH?=
- =?utf-8?B?U3RBaTgvazRVQjJTS0VtTWUxTm9NK0g1UTl1cHZTRHROMjVtdmJmOCt0MXRX?=
- =?utf-8?B?RjlWNnJta2ZuMElkYWdJOWkwQlIrUWJvZStQbzl3dHRyNUJwa3BGOWZ3OHdL?=
- =?utf-8?B?WDUxS25KOGNLdEpBcmJHZXYvbVVBWFpGRGNNN0hsVGI4R1FTeG1xUjBEV1NQ?=
- =?utf-8?B?UFo2YTN4M3hpdEtDaXVVM29QeFpteXdKNkEvT3J1S0tsQlhsSVVqNDEvR2s4?=
- =?utf-8?B?RWlaaU1tb2xuaTRzM0w3Y0xKWTlJR1JyY0oyblJhTTlwT2tjN3BJblB3RG1K?=
- =?utf-8?B?dm00ZlRHZkVUMVVqZmpFMXFwZTgzTE1IYzIxeVE2MW1qL251TjkvMnNsRi9l?=
- =?utf-8?B?THRHTktEVGlJdnBVY2J5eHdQbG5YcFdKSGVjQmR0bWZZTVBQU1RkVjJIWEFv?=
- =?utf-8?B?cS9MUkg3dGtJeS9oVFFTZ0M4Y3g0NWJwRUFpcDJjUUdMTHN0eU5FQklMNWVG?=
- =?utf-8?B?ZHpiaFBDOTNkdzJMMG1XSzFGSmhBdDJMckdKalR1Vjk0cWU4T0xLK1FHY2Er?=
- =?utf-8?B?bHdYcjVIMEErSHAwWGRveGdmTmVSYXlKQnlXNXpFNjltUVEzd2EyZFk1dVpX?=
- =?utf-8?B?SnZXWHNndG5MTGs3azJXTkZSVkRVMUZ2cVpldVM3dzI1dzJOalVyeDBpYmcy?=
- =?utf-8?B?eWlDdmFNS1VXaGFNZDRDUjdZalBvS0pNNW5PRmM3VVNSSG5UMC8yZVc5eEVz?=
- =?utf-8?B?UWtXMXdBR1BldHlHWTQrSWRZUGh4aTY4ZEFvZ1dSMGZlVjhFR2dNNDJ4b3Q4?=
- =?utf-8?B?QUhvT0JoeTlORUZEZ0Eyejd0QUs5SlRFL2VvaDFpdEh1cjA1VGRlM0xQRk4v?=
- =?utf-8?B?N1RSRXVGaGxYaTI3SEE3TGxaYmZkall5QXBTTkNBUlVKQ3VyRlRWQUtub0RM?=
- =?utf-8?B?dE80S0hmZkd0ZHdaQ2oyRHQrWTh2MnBISEliWUNyeVBsVTIzOGZrbXZSWmpE?=
- =?utf-8?B?bnAySU15SEVFRFdZYnF0Q0JtbUVDbDZUY2l6OS9vSEhkUlI1Tm9pWkRldGdu?=
- =?utf-8?B?UE9jRyt6Y1J4QllDdEd5T215V3EyWGdkaFkvTFlsQlRFa2FWV1p4eXdCOVJF?=
- =?utf-8?B?SXpwRkpGMjZVS1NzcFV2eVVvRmc1bUdnTmQ2WnVLK1R5QUFUbHdiYkR5Z2F5?=
- =?utf-8?B?bmJBMmc0UVpCVmdBT0VJbEE0dDJkcWJDaWQzbVNsL3N4T1VnSTFmQkt3d3FV?=
- =?utf-8?B?allTd0ljaG1MM3lTTkMrazErOTJlZzdTSzYwMElOVlJneG5UY3U0a3ZxdG9C?=
- =?utf-8?B?cU00QVNqODQ3L1FVWHRrdDdSWFh3bmVzSVgrT0pwb2Nwc3Z6YmVzS0FyVlZG?=
- =?utf-8?B?ZWl5SjEvbG5xMWkrNnFzQkpGdHllYU5ocVpDeU1zU2w4N0JLdlo4TDMwaXc1?=
- =?utf-8?Q?zG2IVeb4FUw=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(10070799003)(376014)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VXlGVktLT21DMGtoL0MyR2s2cTlkWFU5ekRsZzRWZGVGblFYQzJIK0VEUlF3?=
- =?utf-8?B?M01rSVhBcnpmQ3VJU25tMkppci9zTGZJU2pNUlZJalpCaytnaGtZV1M1UFhQ?=
- =?utf-8?B?eTZmVzJqbG1jK2lvYklDeFRZNHZiNGNCVlFxWlAreWtoNXVaNHI2aXl5QW9l?=
- =?utf-8?B?SFVQakJSZ1pIenc2a2Vib0VCYnR2YTVyNjhLS2FnQzI3dHVWZmk4QzR1aDBJ?=
- =?utf-8?B?dFM4V1lYYkM3MUVxV1NEcHNRYjViUUxJc2s0ZUJGQ240alJqY2tKQUF2ekJZ?=
- =?utf-8?B?Vk11MnJoaUN4VUtDdGNCMjVqVkZCWWN6K1Z2QjJaVzNiNUpDME5EbStHWkd1?=
- =?utf-8?B?aTJKcDF3VVluMkRtRC9TZHIvbFM2dWIrcWVnSmNHTzVKS3ZqaXhjVXFJbWhp?=
- =?utf-8?B?Z3E1dXNVYUQ4ZVArU09HZ2diWmdBUWtFMnRva3hYWnJ2emJhck5RWEduMENN?=
- =?utf-8?B?NFMxZEhJQjg5WUF3N1QwYjdiWlc2TncrVDV3TkNwSGt2dEpyMnVYRTAxUkUx?=
- =?utf-8?B?K1NhTkdpbGN6YTFoblJta1U3NlhmWmhCQ0tHMng4bHRpWGxxb2IrOHZURERI?=
- =?utf-8?B?Qnk3dWJ5WldFSjBTcXJIdGYwYm0xd3hxeXlhd3BFWWtiYk0yemQ3M2dtTGZ6?=
- =?utf-8?B?ZDBUOHdOcC9CVVVvTTdocmpyR0NZSzFVRG4wa2NtSkFyejFaL0hxVVZ5d3l6?=
- =?utf-8?B?TFhhZ1VTellrWWo4bk9JWlR6amNCZlA3NXZpM05PbE1HaHlhQ1FWRFhBc0tQ?=
- =?utf-8?B?cndDN2EwZE5nRVVlZXpKcDV3TnhmcUNxdnFjT3RDQkxYRFRlWnNEOXRxYmxw?=
- =?utf-8?B?VHUxZjFJOHhzOGd4cVFabms5SDUzZlhiOE9ZVW9rVDdNczRNeVJDWWt1YWt4?=
- =?utf-8?B?ZlZodWVzekFUQ1lPNitUYlo1ZEpoOTYvRFVaa25vYlhXc3dKbjBtSWZxZWhi?=
- =?utf-8?B?Y2ZOOVdTS05rOVZHdGcxNFZPdmN3WkRINTZIT1l1TmFYT3p5bTZyOEdab1Q0?=
- =?utf-8?B?TkRYeEZrdUREZTg2Um1wWmVQTlVhN0p5cmJKMlRudnE5QjJLeUtVLzdFRHBG?=
- =?utf-8?B?c3pHNE84ekt3aFBTamVXOXRFbzV0NGRMZFg2TURONUx4RmRCY01pcStxT2VW?=
- =?utf-8?B?YkVkc3pmbjBGc0k3MHZ1UzVZeXJad3lQYm16L1dxSVA5S0lXOWNpUVM3ak5k?=
- =?utf-8?B?NFI5cTIrL1BtTHZlSitnaEF0b1dXYjRlazMrdFVQRktidk9ETG5ubXBLTHNR?=
- =?utf-8?B?YWhuM01NRWtDU0FPNkdEYjZkSW9ab1RRcStVc2ZNS282TjF6ODNOdTlUUFRw?=
- =?utf-8?B?WG1YeEs5SDZoRjBtT3RGZXh0NENKUXp4enpqTVVwQzFDUEhydG9XUzA3Q0VD?=
- =?utf-8?B?UlUydGxhSG9RbXAyMTVOTkhCNWFpbmRhZEQ5NkR2cndpM0NyNExWcmRQVnNE?=
- =?utf-8?B?RndrTmxqVHNZUkdTakxDenZhbzMwdHdwNkZ1RWpIVnJ5WDI5V0p3M2g0TU5w?=
- =?utf-8?B?cnJ0bGZjNW5QRVgycTZCNGV3VlhKMy90KytCRTcwMFRjL0NLK3paK0xHQVJ6?=
- =?utf-8?B?Y21hbDdBdVg4SXVOd0FQdWhqZkRQY2tjOEZaYVB4Qkd2T2ZSaEJsVDFEaEhx?=
- =?utf-8?B?WDBxL01RRGhIRWZoanB5eHljejhqR0ZiMm9DNDd2UUZLTXFLMmZqZlZ1WWxU?=
- =?utf-8?B?T0pEYmx0Q1k2dy9iVEgrRW9ZNUxQWHY4NU5YVzN4cThtNEMrbWZSQ1RUOUlO?=
- =?utf-8?B?U3pySnZTOFk3UHZKZlE0RDNXNWVQTy83Wmp2SU9Vc3h3UFFBUWgxZmhXcU9n?=
- =?utf-8?B?N0lyRlN5dmJXMHY5TWFmR2JwWWtBMkt3TWFGSmtscWNKUlFNQWJtOGorY2lB?=
- =?utf-8?B?ZGFOeloyWWtvUDBSNjdHRnZrN3FxN1lMa21IYUo5ZHc3amEzM2VjNE1YanI2?=
- =?utf-8?B?VkFqTCtWSkQ1dldoS0FlUGQ3WXg5anNEWHF0Mmc2bG1OM0xvVkYyOGFEcCtX?=
- =?utf-8?B?cnU0aURmVFl0VWtlVkpnMXlObWZ0L2liakZGZE0vQ2NIUmhweG1QazJVVjJ1?=
- =?utf-8?B?MWlHTFlhbElZK2R0MnBVd1dVY3R6VVk2ekx6RFdCbFRyakFWOSs0MzNRU3ov?=
- =?utf-8?B?WnR6MU85bjEvSzhaajBGLzc4NGJ2bWVBbHlnMmxJK2RWWUlCSnlzc3NOdHNZ?=
- =?utf-8?B?dDlxcnFhdW9HdFFZa2pqQ2JmRSs5WkdqSCs1bEEwZUtWQkdVNVVrR2tJc1h4?=
- =?utf-8?B?a3Fna09tcnJEeDRablI5bFpHdnN3PT0=?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22239e69-d309-4db5-7c28-08ddd8bdc693
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2025 09:59:35.1010 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jl993KozBgl1YI3bDf8pk32kiboXP20yeF6qZLok9iK4WR0/f/3BU4TrJcgIum5txNOcceBkGNS1ET9ZFzU82/psoVgGVOnheJXzSiERpr4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9585
+References: <20250807102436.452691-1-pro@denx.de>
+ <20250807102436.452691-4-pro@denx.de>
+ <1d3e5573-7e36-4050-88e8-90d31e5253a9@mailbox.org> <aJmwfBL48AzuFra8@antares>
+In-Reply-To: <aJmwfBL48AzuFra8@antares>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Mon, 11 Aug 2025 12:28:21 +0200
+X-Gm-Features: Ac12FXzWuhD-57RIcKE2UHGGlRtg1elBfGaRPqzJbNKxrjWZFT5PuYep4qtCTNE
+Message-ID: <CAM=mAOmnegd4HTCt5-daVsjNnb04AEx0+VEbowNU5LkB+CY4AQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] Image size checks: Simplify help text
+To: Philip Oberfichtner <pro@denx.de>
+Cc: Marek Vasut <marek.vasut@mailbox.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Gary Bisson <bisson.gary@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul Kocialkowski <contact@paulk.fr>, 
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,85 +118,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Philip Oberfichtner <pro@denx.de> schrieb am Mo., 11. Aug. 2025, 10:57:
 
-On 8/1/25 11:06 PM, Jonas Karlman wrote:
-> The bootsource ids reported by BootROM of RK3576 for SPI NOR and USB
-> differs slightly compared to prior SoCs:
-> 
-> - Booting from sfc0 (ROCK 4D) report the normal bootsource id 0x3.
-> - Booting from sfc1 M1 (NanoPi M5) report a new bootsource id 0x23.
-> - Booting from sfc1 M0 has not been tested (no board using this config).
-> - Booting from USB report a new bootsource id 0x81.
-> 
-> Add a RK3576 specific read_brom_bootsource_id() function to help decode
-> the new bootsource id values and the required boot_devices mapping of
-> sfc0 and sfc1 to help support booting from SPI flash on RK3576.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> v2: No change
-> ---
->   arch/arm/dts/rk3576-u-boot.dtsi        | 36 ++++++++++++++++++++++++++
->   arch/arm/mach-rockchip/rk3576/rk3576.c | 23 ++++++++++++++++
->   2 files changed, 59 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
-> index fb5a107f47d9..c7ed09e03eec 100644
-> --- a/arch/arm/dts/rk3576-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3576-u-boot.dtsi
-> @@ -6,6 +6,11 @@
->   #include "rockchip-u-boot.dtsi"
->   
->   / {
-> +	aliases {
-> +		spi5 = &sfc0;
-> +		spi6 = &sfc1;
-> +	};
-> +
->   	chosen {
->   		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
->   	};
-> @@ -16,6 +21,17 @@
->   	};
->   };
->   
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> +			offset = <0x8000>;
+> On Thu, Aug 07, 2025 at 03:41:57PM +0200, Marek Vasut wrote:
+> > On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
+> > > For coherency, use the same help text for all related size checks
+> > > options. Furthermore, simplify the depends-on logic.
+>
 
-Is this a requirement of the SoC or just a default?
+If you want to make two unrelated changes, please, create two separate
+patches.
 
-E.g. on my RK3399 I can flash at offset 0 u-boot-rockchip-spi.bin and 
-it'll happily boot. Is it still the same on RK3576 but you preferred to 
-have a similar offset than for eMMC/SD (and/or have space to store a 
-partition table before?)
+Best regards
 
-> +		};
-> +	};
-> +};
-> +#endif
+Heinrich
 
-Not a blocker for this patch but I think it would make sense to invert 
-the logic globally now so that we don't need to have to do this for 
-every new Rockchip SoC we'll support.
 
-Have -T rksd in rockchip-u-boot.dtsi and all SoCs that have an SPI 
-controller and do not override this property would have -T rkspi set in 
-their SoC DTSI, e.g. rk3399-u-boot.dtsi would now get
-
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-
-Cheers,
-Quentin
+> >
+> > > Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> > > ---
+> > >
+> > > Notes:
+> > >      Changes in v2: new
+> > >
+> > >   Kconfig | 8 +++-----
+> > >   1 file changed, 3 insertions(+), 5 deletions(-)
+> > >
+> > > diff --git a/Kconfig b/Kconfig
+> > > index ec20603883b..490a706101a 100644
+> > > --- a/Kconfig
+> > > +++ b/Kconfig
+> > > @@ -543,10 +543,8 @@ config BOARD_SIZE_LIMIT
+> > >     default 1048576 if RCAR_64
+> > >     default 0
+> > >     help
+> > > -     Maximum size of the U-Boot image. When defined, the build system
+> > > -     checks that the actual size does not exceed it.  This does not
+> > > -     include SPL nor TPL, on platforms that use that functionality,
+> they
+> > > -     have separate options to restrict size.
+> > > +     Specifies the maximum length of the U-Boot image.
+> > > +     If this value is zero, it is ignored.
+> >
+> > This makes the description less accurate, sorry, NAK.
+>
+> What about using just the first half:
+>
+>         Maximum size of the U-Boot image. When defined, the build system
+>         checks that the actual size does not exceed it.
+>         [plus/minus treatment of the value zero]
+>
+> And dropping the remainder "This does not include ..."?
+>
+> I think the hint on the separate options would be unnecessary, if they
+> are placed placed just below.
+>
+> Best regards,
+> Philip
+>
+>
+>
+>
+> --
+> =====================================================================
+> DENX Software Engineering GmbH,
+> Managing Director: Johanna Denk, Tabea Lutz
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> =====================================================================
+>
