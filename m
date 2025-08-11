@@ -4,54 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EBFC87FD2
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 11:48:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77701C87FDB
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 12:05:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E9E9832AD;
-	Mon, 11 Aug 2025 13:48:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id D0FAB832AD;
+	Mon, 11 Aug 2025 14:05:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E5861832DD; Mon, 11 Aug 2025 13:48:03 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2761A8329F
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 13:48:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 57BBlI3X099746
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 11 Aug 2025 19:47:18 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 11 Aug
- 2025 19:47:18 +0800
-Date: Mon, 11 Aug 2025 19:47:15 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Yixun Lan <dlan@gentoo.org>
-CC: Niu Zhihong <zhihong@nzhnb.com>, <u-boot@lists.denx.de>,
- <spacemit@lists.linux.dev>
-Subject: Re: [PATCH] board: spacemit: Add SpacemiT MUSE Pi Pro
-Message-ID: <aJnYQyfeWBaln8ff@swlinux02>
-References: <20250728082547.454505-1-zhihong@nzhnb.com>
- <20250728100607-GYA777015@gentoo>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YSX7wqho";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D9B73832BC; Mon, 11 Aug 2025 14:05:19 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 51ECB830B5
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 14:05:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3b788feab29so2594340f8f.2
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 05:05:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754913917; x=1755518717; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kjC4GdQ6KVbIlmeAh5RNneNrQyIpqQ34cNbboRK/JzU=;
+ b=YSX7wqhoaAVGu+pz0CtvgCxcAjbWCtCLdJ+C/ZEN9cB0sSiUkr6SgXWU0JxFStCgo8
+ XMa0G1iK1p6dHaAHvNfEb42FoQdVH0Bstqc2iBky2RnFw/SUejjgmDUYyLkfWodaxEPO
+ 4jouH/Tm/WjXzRmRT0cx+B5i1lf2dyzT/gsQkUG3hiRhJ+gcgL2v4O/6muI24F/e2ORV
+ kr1+tGrjK0ex9geOOxJKnDcWoWRnbyQ0hDjRSVfxDNxj4hCrm2vhrUDabggVTqT5/dPU
+ 0tJv0gSU8xbMAwvpVYEr8x1eEU6QyLDvaGzR+aaj6p5J+gR3ST+WymdaK6K+4TvJqN+z
+ SJzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754913917; x=1755518717;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kjC4GdQ6KVbIlmeAh5RNneNrQyIpqQ34cNbboRK/JzU=;
+ b=sb6yhybbD0qxG1Gb12woJhg36JgRMo9yifML7R4JFS/3Tz8rvBc44xEi6zyp/urRdS
+ O5z7a4SAg3mBusosDqfwesZl+vPeKRBBk34uj3V+7uevxkCgW9i9IvglCsXRrW86aR59
+ QXjj2Pv90aYTxbz1/fQxTO2OKOZaAZC3b7Jy4Ms2dAuktSulCrnSw2q6Q4eweqJC1an8
+ EK6459RLQkeWeg4O9jYe1GJCdph/jIrjw5duSErktKgr0x7ZaHt/DVMRG3Qlj6LieKnz
+ 4yQU9xpXz6KPlwn0DxQn8VfpqMVuNyIZca9oQCS7qjHOoAGwNnPFnyFsLKF+DGW2gMe8
+ Dd3g==
+X-Gm-Message-State: AOJu0Yw17fNhVGZEpZONbAEUrlnTgoQ0QG/ehXQFFQpHGxjwjsJA2nSM
+ zu25ejPUtVISOwJnenm57TpkMHdYjqzr1qnSApjZNp5M4fnVMKCwoLek+gO8mjR6QpRnwMILk23
+ r+GQ1
+X-Gm-Gg: ASbGncsjWYX3rlaIzCCNehqG9UVJyJovXpx0ZofG5xsCB5xvqRXnKJNdFNfq3XvYvil
+ rfytZWziejJuNlMIu9LY9/XQsB0s5RxgMYjJy8NWvnsc0ZhNn/ilBH5krYSz79EY2hLmeohi7wW
+ r7FtAzTH1PKWdwaJk1SGJSuIdB2gcV1HfL4nAxdch9y9eyFNmnxmDA3v1Nk8l7DYK9V+jzNqKuP
+ xLtwUYhpBOtqTngOkRtwE+3P+5cq12Ba4NUx09RP8+f2U+CUCvmlz50IwryC6a0vGEVDYIyEnvQ
+ /N4lxTpr1kwcuJdSYbCUC93Lt4MwOr/iAitoAWEUDWtXZMseIt06Wd8HNVZ1SVkwgclhLBzQbMx
+ bE5WwwGQ/SR9xHAz9Pud3uttaKeuWqqGgi+iLVuuvBMuW/Dd7WB1icK1oTiTgkQ==
+X-Google-Smtp-Source: AGHT+IFF4TkYjyEACb2C/2IvgVzxm7io8DdRdlDL6+u9TR6T0RYiYHIzTQi98+bjA92aO3Sx2L8HnQ==
+X-Received: by 2002:a05:6000:22c7:b0:3b7:974d:533f with SMTP id
+ ffacd0b85a97d-3b900b502cdmr9229831f8f.34.1754913916347; 
+ Mon, 11 Aug 2025 05:05:16 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:3e73:96b1:418e:3053])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c453aeasm41893634f8f.40.2025.08.11.05.05.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Aug 2025 05:05:15 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Mon, 11 Aug 2025 13:05:15 +0100
+Subject: [PATCH] efi: serial: Use correct EFI status type
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250728100607-GYA777015@gentoo>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 57BBlI3X099746
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250811-serial_efi-v1-1-ca6050011a85@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAHrcmWgC/x2N2wqDQAwFf0Xy7ELWC1R/RUTimtZAu0oipSD+u
+ 7t9HM4M5wRjFTboixOUv2KyxQS+LCCsFF/sZEkMFVYtPrx32af3xE9x3CC2dViwqztIwUzGbla
+ KYc3Jh+xgzcOuSf/9X4bxum7TLOn6dQAAAA==
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,65 +100,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jul 28, 2025 at 06:06:07PM +0800, Yixun Lan wrote:
-> [EXTERNAL MAIL]
-> 
-> Hi Niu,
-> 
->   You need to split the patch, and prepare a cover letter..
-> 
->   Have to say, generally, this patch isn't really different comparing
-> with current in tree bananapi-f3, so neither it is useful..
-> 
->   I personally would expect to see more drivers support for K1 SoC,
-> then figure out how to have more boards enabled..
->   (I'd propose to not merge this patch, but if maintainer is ok with
->   this, then I'd have no objection)
+int is not sufficient to hold and test the return from an EFI function
+call. Use efi_status_t instead so that the test can work as expected.
 
-Hi Niu and Yixun,
+This issue was found by Smatch.
 
-I am OK merging the patch for new board,
-but as Yixun and Yao's suggestion,
-there are some modifications need to be made.
-Please follow the advice and re-spin a patchset, thanks!
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/serial/serial_efi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/serial/serial_efi.c b/drivers/serial/serial_efi.c
+index 5733eaaf9d4..d3cd4de34a2 100644
+--- a/drivers/serial/serial_efi.c
++++ b/drivers/serial/serial_efi.c
+@@ -33,7 +33,7 @@ int serial_efi_setbrg(struct udevice *dev, int baudrate)
+ 
+ static int serial_efi_get_key(struct serial_efi_priv *priv)
+ {
+-	int ret;
++	efi_status_t ret;
+ 
+ 	if (priv->have_key)
+ 		return 0;
+
+---
+base-commit: 83ce0b483c1680cb39565a9d91c6ef113a309c38
+change-id: 20250811-serial_efi-e40053cd0939
 
 Best regards,
-Leo
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
-> 
->   CC spacemit mailing list for more wide comments
-> 
-> On 16:25 Mon 28 Jul     , Niu Zhihong wrote:
-> > MUSE Pi Pro uses spacemit K1,
-> > a new generation of octa-core 64-bit RISC-V processor,
-> > which includes octa-core X60.
-> >
-> > Features tested on a MUSE Pi Pro 16GB:
-> > - SD-card boot
-> > - eMMC boot
-> this brings some confusions, as currently there is no SD/eMMC driver support
-> for K1, only means it's able to boot from SD/eMMC (with brom support)
-> 
-> >
-> > Signed-off-by: Niu Zhihong <zhihong@nzhnb.com>
-> > ---
-> >  arch/riscv/Kconfig                     |  4 ++
-> >  arch/riscv/dts/Makefile                |  1 +
-> >  arch/riscv/dts/k1-muse-pi-pro.dts      | 27 ++++++++
-> >  board/spacemit/muse-pi-pro/Kconfig     | 37 +++++++++++
-> >  board/spacemit/muse-pi-pro/MAINTAINERS |  6 ++
-> >  board/spacemit/muse-pi-pro/Makefile    |  3 +
-> >  board/spacemit/muse-pi-pro/board.c     |  8 +++
-> >  configs/muse-pi-pro_defconfig          |  6 ++
-> >  doc/board/spacemit/index.rst           |  1 +
-> >  doc/board/spacemit/muse-pi-pro.rst     | 85 ++++++++++++++++++++++++++
-> >  include/configs/muse-pi-pro.h          | 11 ++++
-> >  11 files changed, 189 insertions(+)
-> >  create mode 100644 arch/riscv/dts/k1-muse-pi-pro.dts
-> >  create mode 100644 board/spacemit/muse-pi-pro/Kconfig
-> >  create mode 100644 board/spacemit/muse-pi-pro/MAINTAINERS
-> >  create mode 100644 board/spacemit/muse-pi-pro/Makefile
-> >  create mode 100644 board/spacemit/muse-pi-pro/board.c
-> >  create mode 100644 configs/muse-pi-pro_defconfig
-> >  create mode 100644 doc/board/spacemit/muse-pi-pro.rst
-> >  create mode 100644 include/configs/muse-pi-pro.h
