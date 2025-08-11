@@ -4,62 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9914FCA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC22CA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:46:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31BFC831E1;
-	Mon, 11 Aug 2025 18:37:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 818308307F;
+	Mon, 11 Aug 2025 18:46:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="eyqGIaUL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fsqc6/5L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51B87831E4; Mon, 11 Aug 2025 18:37:45 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5567F831E1; Mon, 11 Aug 2025 18:46:32 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6573D82B07
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:37:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E96B68304F
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:46:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=cf87=2Y=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1754930261;
- bh=+IjSqwYQDHt1oALOH98wh/piwGa3CMni9+X0fxI0/w4=;
- b=eyqGIaULGsBdvml9yLrHOY+cAViwKFxnGEZHmTf9xZG9xqJeN000cUmUNrju46zghIcrj3am9
- L2os3sJSOTIQnj14ChwgrNNE8DUcBxMNTi8HnLDWd0KS/ZTOCokvMYibOu414qC05I2utQYMVLH
- KOMZpwoRkZ7WkcvYMw7Ui+8a+m6F9KaI38Y+uZxXi5IHObCl34GGqxwW/YHtmZKZGPZ3Y6w2YX2
- 1XhpLnq7r44MPFhTVXDzBnWAZ6dTvtghcWKGed2YAwrsoZf/I/rtpbV23Z5crrApAn+EPUXi8Lf
- Oc9wa3zyhxDWhFc28iqQ57xglM18SL78ws4Lso18D0eA==
-X-Forward-Email-ID: 689a1c2270d2d7c14f6729c6
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.2.4
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <8e9607db-2186-4d45-a713-8d215e200208@kwiboo.se>
-Date: Mon, 11 Aug 2025 18:36:45 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mcarausu@gmail.com
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-33245e653bbso29773031fa.1
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 09:46:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1754930789; x=1755535589; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=L0pB9haaurtUtb0uEZBNgOUo0jSGhPLXk8dw5uZpKVY=;
+ b=fsqc6/5Lxvo500HcVYRCuPKIVm1gr8rWsYLQDx7v+c8ACTHhJS7N0iZGRTQmtRZJNQ
+ ZdDn/tQIQsNiWvrlRYg4AYr0EAxo/IbOUVoz37GYfNThwXth+nfXICmNWYuW/hzdTFBN
+ cKllzSHM4SuPPAhgduHebaqHKIifTi2EndH5/7ZTzgsSlXrQWDKVSL3LTZTzlvjqv9Nl
+ 9YfV70citrzdk1pJa7+HnlPg5B4E94RcF91e34oMq918U0As3Dc8UE9+FtXb3gR1bnv7
+ BRHxu2c+OT52Meza+eqiMdw+STmD3MwbxGJmFq7KGYI+dMaGhYqJJ3LQKezE0na+OFeL
+ maNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754930789; x=1755535589;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=L0pB9haaurtUtb0uEZBNgOUo0jSGhPLXk8dw5uZpKVY=;
+ b=gm+YV1DB9yv4SQSn6fmH6RvUKGCMq6znsoaekFYxEZUkbOke4UxKo7tqVc6oeMb1cZ
+ AecYN7mZAylGPmyBr+6OMtFCMhMsn9OEE8ZFoRRiPlUxJ+KfVZkcZ68QkuWiirZRrNFb
+ pO4Px2jAEKPBoxTRHJzdcgZ+JSOCYzI1WdtKv9IWo0TTJuaNrgCfBSnNxt/sFb5pGmen
+ SjQpXtSPEaOo5ngT1a8IGi2asmlM32us+Sz3bUmH39XUaF5/l8xu1oCP4pzRgZGVbExY
+ nbKlpex6Oeb5SDIWgO1JGYuGr3B6IzL5FxFRqFupzCR6uuTX5rI98PJFKLhynHRJNd2Y
+ FzZg==
+X-Gm-Message-State: AOJu0Yw28qYAOG/eBwXZVUEiyR64Kyq60K9EfR78d2LOKr9npWTDiHfH
+ tv2oc+h/v5xXH+tAcmCLylm8Ux+PgfIXUVJzfK5S6l4n3L0lh5Q3VBUcwDRya6nWECYoIsTkeyP
+ fsA+P26+QO9quuL1oJCEW+1/GlWR9DC48yd7L
+X-Gm-Gg: ASbGncvLYP6XKSqYuAm3iYQsSUyriJiZyCvSqU4MoIJcjsCNNv5dGT0B5HwuxtPcA5V
+ SUcSShT5ZgYDJGp11i2cWwhHL1g3PUVhSSTwGTs5XMJqoIpZ4elxWo92u2JW+f4KALTV4Updj43
+ B3qrtbxavVl5dy753v3WVF03DVfiSMjKJJQniki3fp2/eTJE8OMTJ95R4DrTfKjC++bbdBJhTXQ
+ WLevadXn3S3Hk4Y
+X-Google-Smtp-Source: AGHT+IGLfxYdH9G2nsoE6ucuqwIr8S+zEG/DAOjGGc3iaNrl5W6cQoRybTriIT4NWEf5JCF152Vt/wYOlrP4DzL2LZM=
+X-Received: by 2002:a05:651c:3247:20b0:332:643d:7f49 with SMTP id
+ 38308e7fff4ca-333d7a70475mr661061fa.9.1754930788797; Mon, 11 Aug 2025
+ 09:46:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] rockchip: Add initial RK3582 support
+References: <CAMFYzVwEtRBndhOaog8wStZeBTZvei_gdZ8=6xM2y1=SU5R1cg@mail.gmail.com>
+ <112df3eb-96b0-47bd-8fdf-258e25bfb390@cherry.de>
+In-Reply-To: <112df3eb-96b0-47bd-8fdf-258e25bfb390@cherry.de>
+From: Mircea Carausu <mcarausu@gmail.com>
+Date: Mon, 11 Aug 2025 09:46:16 -0700
+X-Gm-Features: Ac12FXzDBtGkCHIwZk-qmS4x4E8fN8Nc0ZeJXSQCIzYj_1XtimrY-In2p9cJ_8c
+Message-ID: <CAMFYzVyLLzhH8u565AvTxBYL_5_g0WLjpaw8Pb61PytyxdTM5Q@mail.gmail.com>
+Subject: Re: How to avoid the need to run 'env default' command on modified
+ env variable
 To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250804181638.3855760-1-jonas@kwiboo.se>
- <20250804181638.3855760-2-jonas@kwiboo.se>
- <334d11b4-20c2-4367-9b3d-9720b2209dcc@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <334d11b4-20c2-4367-9b3d-9720b2209dcc@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,407 +95,69 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Hi Quentin,
+Thank you for your reply.
+I wish it would be that simple:
+- as mentioned we are using RAUC for firmware upgrade (https://rauc.io/)
+and A/B partitions. RAUC needs some u-boot env variables to point to the
+active slot to load and it maintains a retry count.
+(all of this is implemented with help from u-boot env variables, which have
+to be writable).
+I thought of erasing the entire u-boot env or corrupting the CRC signature
+to force loading the defaults. I can do that from Linux also - prior to
+reboot.
+In this way I lose two things:
+ - the active slot info that RAUC uses to point to the partition I just
+programmed.
+- the MAC address of the eth interfaces - perhaps for this there is a flag
+to protect it (i.e. write once type of attribute).
 
-On 8/11/2025 2:11 PM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 8/4/25 8:16 PM, Jonas Karlman wrote:
->> The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
->> What blocks are disabled/non-working is indicated by ip-state in OTP.
->>
->> This add initial support for RK3582 by using ft_system_setup() to mark
->> any cpu and/or gpu node with status=fail as indicated by ip-state.
->>
->> This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
->> cores and the gpu is always failed/disabled.
->>
->> Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
->> the required DT fixups for RK3582 board variants.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> Changes in v2:
->> - Refactor code to first apply policy to ip-state and then fail cores
->>    based on the updated ip-state
->> - Add support for failing rkvdec and rkvenc cores
->> - Append soc compatible to board model
->> - Not picking up t-b tag due to significant changes to patch
->> ---
->>   arch/arm/mach-rockchip/rk3588/rk3588.c | 221 +++++++++++++++++++++++++
->>   1 file changed, 221 insertions(+)
->>
->> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> index c01a40020896..3ab0afe0979e 100644
->> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
->> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> @@ -7,6 +7,7 @@
->>   #define LOG_CATEGORY LOGC_ARCH
->>   
->>   #include <dm.h>
->> +#include <fdt_support.h>
->>   #include <misc.h>
->>   #include <spl.h>
->>   #include <asm/armv8/mmu.h>
->> @@ -200,6 +201,16 @@ int arch_cpu_init(void)
->>   
->>   #define RK3588_OTP_CPU_CODE_OFFSET		0x02
->>   #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
->> +#define RK3588_OTP_IP_STATE_OFFSET		0x1d
->> +
->> +#define FAIL_CPU_CLUSTER0		GENMASK(3, 0)
->> +#define FAIL_CPU_CLUSTER1		GENMASK(5, 4)
->> +#define FAIL_CPU_CLUSTER2		GENMASK(7, 6)
->> +#define FAIL_GPU				GENMASK(4, 1)
->> +#define FAIL_RKVDEC0			BIT(6)
->> +#define FAIL_RKVDEC1			BIT(7)
->> +#define FAIL_RKVENC0			BIT(0)
->> +#define FAIL_RKVENC1			BIT(2)
->>   
->>   int checkboard(void)
->>   {
->> @@ -245,3 +256,213 @@ int checkboard(void)
->>   
->>   	return 0;
->>   }
->> +
->> +static int fdt_path_del_node(void *fdt, const char *path)
->> +{
->> +	int nodeoffset;
->> +
->> +	nodeoffset = fdt_path_offset(fdt, path);
->> +	if (nodeoffset < 0)
->> +		return nodeoffset;
->> +
->> +	return fdt_del_node(fdt, nodeoffset);
->> +}
->> +
->> +static int fdt_path_set_name(void *fdt, const char *path, const char *name)
->> +{
->> +	int nodeoffset;
->> +
->> +	nodeoffset = fdt_path_offset(fdt, path);
->> +	if (nodeoffset < 0)
->> +		return nodeoffset;
->> +
->> +	return fdt_set_name(fdt, nodeoffset, name);
->> +}
->> +
-> 
-> 
-> Wondering if this shouldn't be something to add to the fdt "subsystem"?
-> 
-> With tests and all?
+I can think of working around these  obstacles - just fearing I am
+reinventing the wheel when u-boot may already have a simpler way - hence
+the question.
+If there is no simple way in u-boot I will probably end up writing a RAUC
+hook to do some of the automation  I need before rebooting.
+Thank you,
+Mircea
 
-I have no idea if there is any other use for these functions, only
-wanted to simplify the code below as much as possible.
 
-> 
->> +/*
->> + * RK3582 is a variant of the RK3588S with some IP blocks disabled. What blocks
->> + * are disabled/non-working is indicated by ip-state in OTP. ft_system_setup()
->> + * is used to mark any cpu and/or gpu node with status=fail as indicated by
->> + * ip-state. Apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
->> + * cores and the gpu is always failed/disabled. Enable OF_SYSTEM_SETUP to make
->> + * use of the required DT fixups for RK3582 board variants.
->> + */
->> +int ft_system_setup(void *blob, struct bd_info *bd)
->> +{
->> +	static const char * const cpu_node_names[] = {
->> +		"cpu@0", "cpu@100", "cpu@200", "cpu@300",
->> +		"cpu@400", "cpu@500", "cpu@600", "cpu@700",
->> +	};
->> +	int parent, node, i, comp_len, len, ret;
->> +	bool cluster1_removed = false;
->> +	u8 cpu_code[2], ip_state[3];
->> +	struct udevice *dev;
->> +	char soc_comp[16];
->> +	const char *comp;
->> +	void *data;
->> +
->> +	if (!IS_ENABLED(CONFIG_OF_SYSTEM_SETUP))
->> +		return 0;
->> +
->> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
-> 
-> Mmmmm we should probably think about adding xPL symbols for 
-> ROCKCHIP_OTP. No required for this patch as we already have code doing 
-> that same check.
+On Mon, Aug 11, 2025 at 9:00=E2=80=AFAM Quentin Schulz <quentin.schulz@cher=
+ry.de>
+wrote:
 
-Agree, both ROCKCHIP_OTP and ROCKCHIP_EFUSE could have use for xPL
-variants, something for a different series.
-
-> 
->> +		return -ENOSYS;
->> +
->> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
->> +					  DM_DRIVER_GET(rockchip_otp), &dev);
->> +	if (ret) {
->> +		log_debug("Could not find otp device, ret=%d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
->> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
->> +	if (ret < 0) {
->> +		log_debug("Could not read cpu-code, ret=%d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	log_debug("cpu-code: %02x %02x\n", cpu_code[0], cpu_code[1]);
->> +
->> +	/* only fail devices on rk3582/rk3583 */
->> +	if (!(cpu_code[0] == 0x35 && cpu_code[1] == 0x82) &&
->> +	    !(cpu_code[0] == 0x35 && cpu_code[1] == 0x83))
->> +		return 0;
->> +
->> +	ret = misc_read(dev, RK3588_OTP_IP_STATE_OFFSET, &ip_state, 3);
->> +	if (ret < 0) {
->> +		log_err("Could not read ip-state, ret=%d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	log_debug("ip-state: %02x %02x %02x (otp)\n",
->> +		  ip_state[0], ip_state[1], ip_state[2]);
->> +
->> +	/* policy: fail entire big core cluster when one or more core is bad */
->> +	if (ip_state[0] & FAIL_CPU_CLUSTER1)
->> +		ip_state[0] |= FAIL_CPU_CLUSTER1;
->> +	if (ip_state[0] & FAIL_CPU_CLUSTER2)
->> +		ip_state[0] |= FAIL_CPU_CLUSTER2;
->> +
->> +	/* policy: always fail one big core cluster on rk3582/rk3583 */
->> +	if (!(ip_state[0] & (FAIL_CPU_CLUSTER1 | FAIL_CPU_CLUSTER2)))
->> +		ip_state[0] |= FAIL_CPU_CLUSTER2;
->> +
->> +	if (cpu_code[0] == 0x35 && cpu_code[1] == 0x82) {
->> +		/* policy: always fail gpu on rk3582 */
->> +		ip_state[1] |= FAIL_GPU;
->> +
->> +		/* policy: always fail rkvdec on rk3582 */
->> +		ip_state[1] |= FAIL_RKVDEC0 | FAIL_RKVDEC1;
->> +	} else if (cpu_code[0] == 0x35 && cpu_code[1] == 0x83) {
-> 
-> Technically, we could have a simple else here as the code path before 
-> the if is guaranteed to only be reached in two cases, 0x8235 and 0x8335, 
-> so if you test the former and it doesn't match, it's necessarily the 
-> latter. No strong opinion.
-
-I sent a v3 of this series yesterday where both the rk3582 and rk3583
-policy have been merged into a single policy to match upstream commit
-from linux-6.1-stan-rkr6, so this has already been changed.
-
-https://github.com/Kwiboo/u-boot-rockchip/commit/5566d7d920d20932d2188c0cec57cb9036a9eefd
-
-> 
->> +		/* policy: always fail one rkvdec core on rk3583 */
->> +		if (!(ip_state[1] & (FAIL_RKVDEC0 | FAIL_RKVDEC1)))
-> 
-> You could want to only check FAIL_RKVDEC0 as FAIL_RKVDEC1 is a bit (and 
-> not a bitfield so we don't need to set the whole bitfield in the event 
-> it's only partially set like for CPU clusters). No strong opinion.
-
-Main reason for this is to keep all policy logic more consistent.
-
-> 
->> +			ip_state[1] |= FAIL_RKVDEC1;
->> +	}
->> +
->> +	/* policy: always fail one rkvenc core on rk3582/rk3583 */
->> +	if (!(ip_state[2] & (FAIL_RKVENC0 | FAIL_RKVENC1)))
->> +		ip_state[2] |= FAIL_RKVENC1;
->> +
->> +	log_debug("ip-state: %02x %02x %02x (policy)\n",
->> +		  ip_state[0], ip_state[1], ip_state[2]);
->> +
->> +	/* cpu cluster1: ip_state[0]: bit4~5 */
->> +	if ((ip_state[0] & FAIL_CPU_CLUSTER1) == FAIL_CPU_CLUSTER1) {
-> 
-> No need for the == FAIL_CPU_CLUSTER1 check as you'll have set the whole 
-> bitfield earlier even if only one is set in the original ip_state from 
-> the register. No strong opinion.
-
-Main reason for keeping this is that if you comment out the policy part
-above, you could end up with a single core removed, so this extra check
-ensure that we only remove the cpu-map node when all cores in the
-cluster will be marked as fail.
-
-> 
->> +		log_debug("remove cpu-map cluster1\n");
->> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster1");
->> +		cluster1_removed = true;
->> +	}
->> +
->> +	/* cpu cluster2: ip_state[0]: bit6~7 */
->> +	if ((ip_state[0] & FAIL_CPU_CLUSTER2) == FAIL_CPU_CLUSTER2) {
-> 
-> Ditto. No strong opinion.
-> 
->> +		log_debug("remove cpu-map cluster2\n");
->> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster2");
->> +	} else if (cluster1_removed) {
->> +		/* cluster nodes must be named in a continuous series */
->> +		log_debug("rename cpu-map cluster2\n");
->> +		fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
->> +	}
->> +
->> +	/* gpu: ip_state[1]: bit1~4 */
->> +	if (ip_state[1] & FAIL_GPU) {
->> +		log_debug("fail gpu\n");
->> +		fdt_status_fail_by_pathf(blob, "/gpu@fb000000");
->> +	}
->> +
->> +	/* rkvdec: ip_state[1]: bit6,7 */
->> +	if (ip_state[1] & FAIL_RKVDEC0) {
->> +		log_debug("fail rkvdec0\n");
->> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdc38000");
->> +		fdt_status_fail_by_pathf(blob, "/iommu@fdc38700");
->> +	}
->> +	if (ip_state[1] & FAIL_RKVDEC1) {
->> +		log_debug("fail rkvdec1\n");
->> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdc40000");
->> +		fdt_status_fail_by_pathf(blob, "/iommu@fdc40700");
->> +	}
->> +
->> +	/* rkvenc: ip_state[2]: bit0,2 */
->> +	if (ip_state[2] & FAIL_RKVENC0) {
->> +		log_debug("fail rkvenc0\n");
->> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdbd0000");
->> +		fdt_status_fail_by_pathf(blob, "/iommu@fdbdf000");
->> +	}
->> +	if (ip_state[2] & FAIL_RKVENC1) {
->> +		log_debug("fail rkvenc1\n");
->> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdbe0000");
->> +		fdt_status_fail_by_pathf(blob, "/iommu@fdbef000");
->> +	}
->> +
->> +	parent = fdt_path_offset(blob, "/cpus");
->> +	if (parent < 0) {
->> +		log_err("Could not find /cpus, parent=%d\n", parent);
->> +		return parent;
->> +	}
->> +
->> +	/* cpu: ip_state[0]: bit0~7 */
->> +	for (i = 0; i < 8; i++) {
->> +		/* fail any bad cpu core */
->> +		if (!(ip_state[0] & BIT(i)))
->> +			continue;
->> +
->> +		node = fdt_subnode_offset(blob, parent, cpu_node_names[i]);
->> +		if (node >= 0) {
->> +			log_debug("fail cpu %s\n", cpu_node_names[i]);
->> +			fdt_status_fail(blob, node);
->> +		} else {
->> +			log_err("Could not find %s, node=%d\n",
->> +				cpu_node_names[i], node);
->> +			return node;
->> +		}
->> +	}
-> 
-> I would move this closer to the renaming/removing of cpu-map. No strong 
-> opinion though.
-
-Sounds good, I think this is just leftover from thinking we should
-continue to load Linux in case of an error, and just trying to fail as
-much as possible before there is a chance of an early return.
-
-> 
-> I'm wondering why you aren't using a direct path like for other 
-> controllers, e.g. fdt_status_fail_by_pathf(blob, cpu_node_names[i]) by 
-> simply prefixing each node_name with /cpus/ ?
-
-Good question, I think it may initially have been that I updated the
-ppi-partitions affinity using phandles to the cpu nodes. However, that
-part was removed before sending this out, will rework this for a v4.
-
-> 
->> +
->> +	node = fdt_path_offset(blob, "/");
->> +	if (node < 0) {
->> +		log_err("Could not find /, node=%d\n", node);
->> +		return node;
->> +	}
->> +
->> +	snprintf(soc_comp, sizeof(soc_comp), "rockchip,rk35%x", cpu_code[1]);
->> +
->> +	for (i = 0, comp_len = 0;
->> +	     (comp = fdt_stringlist_get(blob, node, "compatible", i, &len));
->> +	     i++) {
->> +		/* stop at soc compatible */
->> +		if (!strcmp(comp, soc_comp) ||
->> +		    !strcmp(comp, "rockchip,rk3588s") ||
->> +		    !strcmp(comp, "rockchip,rk3588"))
->> +			break;
->> +
->> +		log_debug("compatible[%d]: %s\n", i, comp);
->> +		comp_len += len + 1;
->> +	}
->> +
-> 
-> If it happens that none of the expected strings are found in the 
-> compatible property, we should probably return early.
-
-If none of them is found this logic will just try to append the two
-compatibles at the end of any existing compatible. Should be safe?
-
-The four main scenarios I try to anticipate is:
-- rk3582 boards: <board>, rockchip,rk3582, rockchip,rk3588s (do nothing)
-- rk3588s boards: <board>, rockchip,rk3588s (inject)
-- rk3588-generic: rockchip,rk3588 (replace)
-- other: <board>, <wrong soc> (append)
-
-> 
->> +	/* truncate to only include board compatible */
->> +	fdt_setprop_placeholder(blob, node, "compatible", comp_len, &data);
->> +
->> +	/* append soc compatible */
->> +	fdt_appendprop_string(blob, node, "compatible", soc_comp);
->> +	fdt_appendprop_string(blob, node, "compatible", "rockchip,rk3588s");
-> 
-> I would rather insert rk3582/rk3583 before the rk3588/rk3588s and keep 
-> the rest untouched instead of truncating to rockchip,rk3588/rk3588s and 
-> then adding rockchip,rk3588s back only.
-
-That is what this is trying to do without having to add too complex code.
-
-We can only replace the full nil separated string array, and adding
-logic to re-construct a single working string became too complex. We
-already had helper functions that could be used even if they are a
-little bit inefficient by causing three fdt prop value replace.
-
-The truncating changes the string length to where first (or none) soc
-compatible is found to then insert correct soc compatible.
-
-> I wouldn't want my device tree 
-> to be modified too much and we don't know what we'll get from downstream 
-> )I'm not necessarily talking about Rockchip's vendor kernel here) DTBs 
-> for example, so truncating doesn't seem to be the best plan? What do you 
-> think?
-
-We could possible make this very simple by just appending soc compatible
-when it is missing and not care about the compatible order.
-
-My intention was to ensure that we always end up with:
-
-  <board>, [<...>, *] rockchip,rk3582, rockchip,rk3588s
-
-With a simplified append it may instead end up as:
-
-  <board>, [<...>, *] rockchip,rk3588s, rockchip,rk3582
-
-Does the order matter or should I just drop all this and replace with
-something simple like:
-
-  ret = fdt_stringlist_search(blob, node, "compatible", soc_comp);
-  if (ret == -FDT_ERR_NOTFOUND)
-  	fdt_appendprop_string(blob, node, "compatible", soc_comp);
-
-Regards,
-Jonas
-
-> 
-> Logic-wise aside from the "compatible" changes, this seems fine. I do 
-> not own any RK3582/RK3583 so cannot test this.
-> 
+> Hi Mirceam
+>
+> On 8/11/25 6:30 AM, Mircea Carausu wrote:
+> > [You don't often get email from mcarausu@gmail.com. Learn why this is
+> important at https://aka.ms/LearnAboutSenderIdentification ]
+> >
+> > Hi All,
+> > apologies in advance if my question is trivial:
+> >
+> > I am changing some critical variables in the read-only / compiled-in
+> > section of u-boot env variables via CFG_EXTRA_ENV_SETTINGS in
+> > include/configs/<my_board.h>
+> > All I want is to have them take effect automatically (i.e. without havi=
+ng
+> > the need to stop in u-boot console and issue the env default command).
+> > I see the new values if I use the env default command.
+> > Since I am applying the new config via a RAUC bundle and some systems a=
+re
+> > using automated testing it is not practical to issue env default on eac=
+h
+> > board.
+> > Is there a way of telling u-boot to load / use the read-only / built-in
+> > values instead of the ones stored in env storage?
+>
+> Build U-Boot without external environment support?
+>
+> E.g. with only ENV_IS_NOWHERE?
+>
+> You can also entirely and permanently erase the stored environment with
+> `env erase` if you have CONFIG_CMD_ERASEENV enabled.
+>
+> If that's not fitting your use-case can you provide more information
+> please?
+>
 > Cheers,
 > Quentin
-
+>
