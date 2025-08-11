@@ -4,91 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 101CFC87FDB
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 12:58:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85AAC87FDB
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 13:02:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58702832FE;
-	Mon, 11 Aug 2025 14:58:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ED9188329C;
+	Mon, 11 Aug 2025 15:02:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AqyhwrAJ";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="VXhCMDTW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48F648331B; Mon, 11 Aug 2025 14:58:05 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 73242832DD; Mon, 11 Aug 2025 15:02:04 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 074108329B
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 14:58:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E45E8329B
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 15:02:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jpaulo.silvagoncalves@gmail.com
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-76bc61152d8so3558807b3a.2
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 05:58:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754917080; x=1755521880; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ypY9+0z4ajAjEu7Amojg9qJyiKH6ugKSPXm5TZduQew=;
- b=AqyhwrAJPuoJ/8WlS97j5ssClQSVvBGT3jA5Q3/RRXSR2iW6BufPFgXICX+3jIUDDT
- iGjErz/bOsY+oc/JIaGM0a4yESqIhuDbTJR39kb5iT388gJPQ2ujXKB7bRQqNzSu0IXh
- tfxFRaMR/8RwRpoFaS8i+oYAJ2Q0VB7qxqAuGu4C8vir5/Skw+uBXKsYu6fTtTJ88mWf
- JLUzBdrT7bsoxG9KCPf9c2Y4djicYLHIIMI6PDcEvnzRKSrrOEnSInNpg27L3qlqejzo
- uaFzB9bU4/2kAnAGaltRrYP9Hv49fQHfG9CSapeWT47BO45XQtvjaBL/A7Q92ySrxbKN
- nAyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754917080; x=1755521880;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ypY9+0z4ajAjEu7Amojg9qJyiKH6ugKSPXm5TZduQew=;
- b=Eh0X6WPCvCHMpGwb9n6tDJMGy6a2GIzOdzVggIbZzxXo8h0Aam5y+16DExTr9gPe1Z
- Z3+4DCIeu6N3yyKXCFwd+JNghuO0azOtfWSXfYPTwjvPxhqtEmUtd2N0jInQ8pVbTyCv
- fJe/RCifSYhqtKKDGKZ0qfnwXkkPT4XpVN9vzkfnBbmKXHV+dz9e8fBDA16xaE6nFS5O
- 8ZrqqJUghmAUJdqBz5JTth0jq7YWL3xtvhvqKN4x2n0E3vt8UnF5Bx+SeL/bpctuj+0T
- JeieEZYhwFqC8rZKmweG4fR8d6KWrbXc+RVUhjl/BDI9gTuUD5+iw8hjqTpbAy+VCf8g
- bYeA==
-X-Gm-Message-State: AOJu0Yy3SFfeJ7aHUW+cbaf1QCPToIkXnAQpkwFiEd3Rmw3vWnk3D5Wu
- J3gbW7Juwa3RfBxgdZeu91ixk2GD66isRd8KUlhQaUm9W0QAkcD5CDAs
-X-Gm-Gg: ASbGncuMM2bwdomh7cm9FcdsK+sQ7wconNeWCq3tYjaHICkzfjA9iL4u5LuO5HO2sOQ
- CdrBJ+6IwSXsLahE/hH1bbDALGrvbqxlAv+Ube14pp8owMA1GRcfk3VHbs/u5LSovVmUfoSq/HZ
- rxvp9DimMIVI5wsVuE+mZqJg4emmr+GBielC1sQ5Wq7nHhWRJzWzlr8FLjk1WZ1wr2FOq7ChJXU
- SyX8bVIWrAzAK1K43lMAQHmUuVtWwwcGociC1sYXHyVtVLM35HmVj6auqBqAZwzgeFim+tCzLe1
- Q9dJhz+IRWgeMpQ32DUodwX5KB9hHxl7F9V1o0mHq0rYflctPypDs1ezBLjEUigmG4kIBdQjpBA
- rqfRn1mcZmff5COghxb3kP/xwtEjbOY+SGQRjoADN
-X-Google-Smtp-Source: AGHT+IEOZL6pMa2Ylzk9yiGc5prFuL6MtRPyxNe1TDEmGCoHmQTiIV01T/uohhBJ6AKxaCeYItu0xg==
-X-Received: by 2002:a05:6a21:32a0:b0:240:1a3a:d7ec with SMTP id
- adf61e73a8af0-2405501258fmr20314048637.4.1754917080442; 
- Mon, 11 Aug 2025 05:58:00 -0700 (PDT)
-Received: from [192.168.0.7] ([2804:14c:490:1191:2ce:dae9:57a1:9602])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b4683722179sm3237560a12.13.2025.08.11.05.57.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 05:57:59 -0700 (PDT)
-From: =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>
-Date: Mon, 11 Aug 2025 09:57:50 -0300
-Subject: [PATCH v2] arm: imx: imx9: soc: Fix env location when booting from USB
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XBZpq/yBRKhbaYYWEGASHvfIqogXJoqaAbWGg3mytSkibEmEsV5NlOxysljHNyqQb7rbknQkvqiqyCLUCOzORzBTuihW6fuzRrhIhXqpjQc6khcn6P0BSiD+J1apacZON99AnRWJmkDFr8/DLFfbus5IwQCDMGAz5mKGfPzPNy2ddaHy6SUuAj66sMJCEUeIDqt76tLlZyBLFdc7ELnyuuSD7P42Yjid+H1VQUI3VRK2/VHDRfur6MxqVJ2AS/lDIBzrj+enn4j/qSeyC0ttNmno18SRakUX5F7DCzs1e6dj3W0OKnMJbHpkGVz9ls2FRFCBN6Nt4yzg9Yf3WV6SGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RJ3rTKuwgFn7OBD1Xvwtq0f8pCFE8omuufX57wehkGk=;
+ b=N3QKYENaJ6hXw/uz+Ooj6+TKyz+Jq5kIkI2ADelj+p5sIXEheTgCPuDDW7haYySvip2ttaT9UGyiZo3ufKaryBYQat1WDhc6sywtgjQLE5eH/lkpXYuJd86aCL9eSWyHhEuFq5VPCPFBTnS46a/D+F/Izbx1Qp7z11LvH9CTEeIuoS6xEJiyAXRTthrvf4TdpzVPxMyzVtR3PNhmcRl00KzosXbRLgP3fyu0BL18eBLio5GWxN72kYVJ2lz4t/fEc4feiDEyoC9SZakgYjd6D8HlgTO8vqjQ3+5YV9rU/ZT5zonnj1jVFHh/jTNtagIWsc5Ll/v4g5Grwu/koMOqBg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RJ3rTKuwgFn7OBD1Xvwtq0f8pCFE8omuufX57wehkGk=;
+ b=VXhCMDTWXGP5GTm6ylHNFsjxj+gvJqjk5jSf4CdxNUFtjNp3whJr9G37lPraNyphLZ8rqQDnQaMaxR7LcmO2ZYuqQ7T5gdedPxOzhv5S7t7euh6do9LY+JT4RZnXzvUaFVzzpmlC3NmoHlYPijY8CMrpuRNYtPWaqxlZtsxHdUk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PA1PR04MB10264.eurprd04.prod.outlook.com (2603:10a6:102:456::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.12; Mon, 11 Aug
+ 2025 13:02:00 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.9031.011; Mon, 11 Aug 2025
+ 13:02:00 +0000
+Message-ID: <277eb50f-26a5-4b24-acfe-210dfe346e49@cherry.de>
+Date: Mon, 11 Aug 2025 15:01:58 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: phy: vitesse: Fix incorrect test for timeout
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250806-net_vitesse-v1-1-47f5a923d586@linaro.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250806-net_vitesse-v1-1-47f5a923d586@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR5P281CA0014.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f2::7) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20250811-v2-fix-imx9-usb-boot-v2-1-3d89974e2881@toradex.com>
-X-B4-Tracking: v=1; b=H4sIAM3omWgC/4WNTQ6DIBSEr2Leuq+RH6101Xs0LkSwvoViwBIaw
- 91LvUCX32S+mQOC9WQD3KsDvI0UyK0F+KWCcR7Wl0UyhYHXvKk7xjBynCghLUnhO2jUzu0ou/a
- mlBKyFQaKunlbSufssy88U9id/5wvkf3SP4ORIUPVSCEmYXTHzKP4g7HpOroF+pzzF+vCTWO6A
- AAA
-X-Change-ID: 20250811-v2-fix-imx9-usb-boot-48679993463d
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>
-X-Mailer: b4 0.14.2
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA1PR04MB10264:EE_
+X-MS-Office365-Filtering-Correlation-Id: a298898c-d9d1-4de5-32a4-08ddd8d7423c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|1800799024|10070799003|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZTVrTkJ2cUVPZlVwbUNpd0JZbExoaitrcTdOS3JrUVJSS2R1UUZvMG4wL2o1?=
+ =?utf-8?B?QWhzZm9PUzhENjRtOE13Z2g3NE0rNFNYSVR4NzNQVWt2SDFMZzluSC9HYWpL?=
+ =?utf-8?B?bEluKy9SWnZKMFhmWTFrQVdhYTFXWUkrcHZVb0ZzQ2p6YXhvZ1dSK3J0SkJw?=
+ =?utf-8?B?eVEwTm1RSDU5ek9rQU5TNnJHQ2Npc25OekZ6VE9GQnVqbFY5U0VDdld3Zmgz?=
+ =?utf-8?B?dnZYdlhWVzdOVHBJZjVEb1dLb0lFdFI4YUsrS1R6N3pCTlUxUHV0cXB5M1FG?=
+ =?utf-8?B?TktCaTdWVzZmSW05WUp5QzBhWElqZGdhTDFvTng1RjhYaDlXQnhQYmdaQzBk?=
+ =?utf-8?B?TytUYXdTcU95OGptMDRxYTNyZEg0U3ZXN2dMUFR2UXdZdUtmTTUybTUvbWt4?=
+ =?utf-8?B?Vkt4YjI3ZmRodzBxTXJiMkVnWWxlSFphcG15TXFTWi92YWNyTDA2WlZEd0lv?=
+ =?utf-8?B?NFhyK1RidzBFWnR4QThvYzZpb2t4SDFXUTB6TlBqQVlyc1BsckdhY3ZIZUd0?=
+ =?utf-8?B?dkFVV2gzMUFpNjZZYXdTeVE2NytESWR4NWpFLzdpTWNGdjdoMzJGaFN2SU4x?=
+ =?utf-8?B?dWZVcXBQdFZ0OUdwOE9qMnJQb2xNWGlBVGd0cXNCL1VOODBSZlJQa0RrTnZj?=
+ =?utf-8?B?ZEpkc2ZjdFA2Rm5aNUxQdDBacElURHZVTWVway9KSjhSeWEwSjZVNHA2VWJP?=
+ =?utf-8?B?dUVmSDcwSUNWS3lrc1k4KzdieUlZeHV0TVdmL25YSHptbWVNdXdiTFowM1pp?=
+ =?utf-8?B?QXVtZUx0RGQxVm5XUkdaY0prSHRoc0NDNlFWV2FqZEt5c0JOTXN2dlFIQmVk?=
+ =?utf-8?B?NXltNmp4WFJVUGdCK21oTGk1MGtpRUxoVFRGUnpsdFNxUVpKczZvL0hKMVBB?=
+ =?utf-8?B?b1dHamk5YzArc29Tcmh6SzgzNEFxUUxrOW9yOGdick90L29VU0ZQZEY3b2k4?=
+ =?utf-8?B?ZVp6dk45cXl2TGRtbTlQSjc1d3hOYXVUY0E0aXY2b05LRG5KbjRGK0NsZlZu?=
+ =?utf-8?B?bGxQVGN4S2lzRVVtVlpzVTBMYW9kNVZYeXJycFZHTTh3TXpyZHh2ZnBpSy9x?=
+ =?utf-8?B?T1lQdG9rc1lMMkwxZHZ2QlgvUDY2VnJ0R2hERWNIM0h3aUJwV1lvSjV6NEts?=
+ =?utf-8?B?c2xsbzdkVUdxb0pMTTdrRmN2bE1XcGo4RmlyVFRDVFlRQWR5Y3pLcUIrN1Y2?=
+ =?utf-8?B?Q3JlUlFEbUo3MnFyUFJkTlVvcmpWYkxOTFJWaEMzK2hZSVQxTnJQNGxTNTF4?=
+ =?utf-8?B?U29Say9QTTA4eHFMdXppUm9tc0liMmh5aitOejNrWituSjFzUU5rZ1dTZnhV?=
+ =?utf-8?B?Q0xqL2Vtempha0NWQnpzR0F1R1FLM29PQmJkbjZGZUhpbFV1OUZPY2RhOS8y?=
+ =?utf-8?B?aTZlTGNVRGs5eXhMeENpK0x5aTIveTA3NDc4bUh5V1VLR2M4dWlXdktUeGRQ?=
+ =?utf-8?B?czA4eUUvQUR3TUhuVHRMS3JwK2x1QU4xZmtnOGxwWEY5VzdmUStnUmo4Z2dI?=
+ =?utf-8?B?MjdYTzhEdnRFK3ZyUTU0dVJiUmsvL2lFczJoUnFFYnpOMDVtOGVKTGVmblR2?=
+ =?utf-8?B?SmdmSm9pdFNUNVZTdUlFSmdHYVBiYnUzY2xpb3R1bnJDMFQrYXp3QTdCYlZI?=
+ =?utf-8?B?UWVtWjJnSURDSm1FVFR2bExNNmk1a0kzeTZhOExkNXZaSHlrS2NQcTZjSXpM?=
+ =?utf-8?B?QjdzdnllckJuTnM5aEdUZ2NvZzZ5VUNBZTVVaHlnaDJwRmgrMTk4RjN5NVpq?=
+ =?utf-8?B?SGZsbkZTL1UxM0JoVjh5UUV1SmpoQjJYSzZ6SGphNEFOalBxd21ZeTJCazBx?=
+ =?utf-8?B?VFcxaDVlRkhwdFhkcXo0b3luTTBIVVd0MVk1WWtIMnI3a1BTUVdlSjc2aEtN?=
+ =?utf-8?B?ZVVZMDFWaktuZElBWDlHNElZV2N1OTJ2RlZXSXExZzh5c1E9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(10070799003)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SnNmZDJpU0srdVQzMW1iQUk4MkdpSFhsRGlzNHdBK2UzU1B5Nms3N1dYaEs0?=
+ =?utf-8?B?bEJsenFadU1oV0N2elNvM0NUckx3dTJESWw0Mk5HUW1HUDlES1h4MnhHeldU?=
+ =?utf-8?B?VFh2R0xPN2VYQXNYSCsycy8rbUpyM2dQVVlOcDQrTWRYWDMyNXFVYzdhYXdl?=
+ =?utf-8?B?anZYSzNIWHBaUkY3QkphclNrRlVoWVhXOGs4azgyaUJFbFdXWXNiSWlhT0NG?=
+ =?utf-8?B?ZUNmNWVzZzNrdEEyOWtUQldKRUpMcUNXazY1aUJVdEROcVFDeFZUY0JyT0tU?=
+ =?utf-8?B?QTYvNFh6NzQ2bmM0cGYvT0ZTT0pPUjZ5UTZkeGFkTDJCa0tjTzY1QmhKZllS?=
+ =?utf-8?B?dTVLdzRhc0lGdG84UHF5azRadnd5TW1VZURUTTVMSG82dEZSMmloVzJmYm9s?=
+ =?utf-8?B?dGlsNWlLMVBONXBWN0cyM0FGQVVyM1ZjMHlMQi9ObjNFM08xay9EY3VuWExs?=
+ =?utf-8?B?VjVhWFllb2ZCdU1Hb2huWGw4WGlzeFJBdFFQWnJ4Z0pVVnhNdTVyZGRtOVRT?=
+ =?utf-8?B?SzhRL3NoR202bi9rY09tUkEvTG1PSm5RVjBFcTBWVHN2WXpxMnVmY1dKVjB0?=
+ =?utf-8?B?Sk1nZHpYSkJqSTNsZmhRU09sTEdMaUprVUoxRjhVQTNlVGR5MEtQcEpLeWhz?=
+ =?utf-8?B?dHhjT0lsTktwaWV1QThsZ3diYTdRY0ozR3ZGeUdYUFN6d2RIeTJIejI3L2M4?=
+ =?utf-8?B?cDJtVUZuQzNvMk8zYVMyVW5CbVl6N0U5cEVKWnlSMHgvQk9pRmtMM2NXQWls?=
+ =?utf-8?B?MmhrQXYxaVBWUUxUMVRVbk0yVmpBUWdtY1RqM1dmOUtMejNPRURkZVpqK2NO?=
+ =?utf-8?B?S1hxUXhkcllRSnUrcjJiL2hxa1RjT25RRVBVSDNENkxCVldLdjRnUjFmRlVI?=
+ =?utf-8?B?d1dtQ0Exdk1RUHpJWXpCNUFMU2lOQ3gzOHQvM01tS1NoKzNTSnFMeWliTlph?=
+ =?utf-8?B?aGlEM0RVcHFFTStScmlBd3V5NzRnSHI0dnpjV2g3ckhnWi84eGZ4L1VBWjRH?=
+ =?utf-8?B?TFprTzVnV3VmRVZ0QWRjaTNIaDlCaHI1aW1pc0c0VTFGeS9hc3R6c3JsWEhQ?=
+ =?utf-8?B?MEl2Ni9sYVVYL2wwWHZjRDl0S3hyU2V0QjNjVnQ2d2JoRnVQbGExK3VQMEtL?=
+ =?utf-8?B?RVFlYlFIR293dlBOQjB0RWs4OXgvaUt0V2tvbEI2ODNuYmh4QzJ4cWhydm5w?=
+ =?utf-8?B?Q01FOTNyclZTUWlwdzI3dDU2d2kxM2EzeExiMHYwNzVpZzNKMXRwdU0xSEFj?=
+ =?utf-8?B?K0x6T0NHLzRmdkhrL3NHek0zWkhtZnpiTWREWnh3Sk1QeDJEOEtjNHpMbDdV?=
+ =?utf-8?B?bDNMNzBzTWFPOXZaZVNPWFlENk1uTWxabHFOTG9QeXBQNGJCZEVTK3lxUUpi?=
+ =?utf-8?B?N0xaanhia2VmVUtQbWY2N3RqTEw2bUp2aURKNEYrcWJSNWcyNGYvRDZvem9R?=
+ =?utf-8?B?QW0ybTlycGo5eWZ6RDE3TTVjWXY4ditKalpta05PQnVPcEFacWtEeXFXam15?=
+ =?utf-8?B?Nkc0V1p6clZPMVRzaGtLak51d05CUGtGRS92cFZOUnFSV28xc2FiZlJIenlQ?=
+ =?utf-8?B?bERMNHRFeHdjREhtcVBUY1dXcGU3aFFFZVJTaGpPVXd4QmdSOXFsWFFqOTRN?=
+ =?utf-8?B?d3FCL2ZTZUFPRm9yT2ZTS1dXSlQrV2lNVVMvNkFyaHVSa1psd3RSWDBnQWFi?=
+ =?utf-8?B?czJxL2NvVnVieFRITnRVR283eDRCYnVGd1IxV1hINVZHa3RkSXdNT2hpdlNS?=
+ =?utf-8?B?Z3Y3TFQvS1Z3SmlsWHJYOWtpR2xDRzNvTWtQZzcza1FWb3JhSFA0Z3MwaGxH?=
+ =?utf-8?B?UWgrQTUrU20wVjY4VjZsaTZxQThXVWFHM2RaQ3RQenRoMGIvaWZVYzZEb1hI?=
+ =?utf-8?B?TGhHQmFMK0hBcWJvM1oyQ0UwRE9CUFN5Q28xZ3dLRjNhTUUwK0NDVzY1MXZ0?=
+ =?utf-8?B?SnNWQ0FtQmlZTW5FalZCUmk3NUtQRThKbU00YnA1UkNDcEVaSExsV0JZcC80?=
+ =?utf-8?B?K2o1Nlc1elZIWlBLKzlHYWNoWG93UHRLbDRYT05qY2NNQXF4WGQvNURHMmV5?=
+ =?utf-8?B?cW1qTjdXeHB2YU9QVXVwQXZoUGRKcmRtbGJQUWFVTlBEbk0vR2ZCUVkvVjYw?=
+ =?utf-8?B?Snl4eUtVV3lXVWlwU2V1QnBMR05LTWVCYnYvVE9reTRUQjRYRjlSQ25CTTNr?=
+ =?utf-8?B?NE4xaEM2OWQ2Q0tpZEpBc01hNW1QeGxYendyRS9nSWZuNnVhbEJIb0VIODFZ?=
+ =?utf-8?B?UllHaFZnOTdXMmdPMlRudnVvTmZBPT0=?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a298898c-d9d1-4de5-32a4-08ddd8d7423c
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2025 13:02:00.2146 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Fj1xqpm/6PlsfSJ8bPcjR568kjiX7tFOaCDM+E/4XxuQXKFSFHBsLNla48f6cnKpIV5Nu/EJfMaY1K4n6M6zI75QlEAyNETBw73MpslFKYU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10264
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,88 +178,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: João Paulo Gonçalves <joao.goncalves@toradex.com>
+Hi Andrew,
 
-On i.MX9 platforms, when booting from USB, the U-Boot environment is
-always assumed to be in RAM. However, this causes the boot to hang when
-`CONFIG_ENV_IS_NOWHERE` is not enabled. The boot also hangs even if the
-environment is present in another storage media (for example, eMMC). Fix
-the issue by correctly handling the U-Boot environment's location when
-booting from USB. Also for i.MX95, set the environment location based on
-the ENV config and not solely based on the boot device type.
+On 8/6/25 11:37 AM, Andrew Goodbody wrote:
+> In vsc8514_config there is a while loop for detecting a config failure
+> using a timeout counter with a post-decrement. In the case of a timeout
+> this will result in the loop exiting with timeout == -1 so use that as
+> the test below the loop to detect that the timeout occurred.
+> 
+> This issue was found by Smatch.
+> 
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>   drivers/net/phy/vitesse.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/net/phy/vitesse.c b/drivers/net/phy/vitesse.c
+> index 4867d1931b4..821d3878236 100644
+> --- a/drivers/net/phy/vitesse.c
+> +++ b/drivers/net/phy/vitesse.c
+> @@ -239,7 +239,7 @@ static int vsc8514_config(struct phy_device *phydev)
+>   	while ((val & MIIM_VSC8514_18G_CMDSTAT) && timeout--)
+>   		val = phy_read(phydev, MDIO_DEVAD_NONE, MIIM_VSC8514_GENERAL18);
+>   
+> -	if (0 == timeout) {
+> +	if (timeout == -1) {
 
-Suggested-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-Signed-off-by: João Paulo Gonçalves <joao.goncalves@toradex.com>
----
-v2:
-- Changed the env location order on USB boot to maintain current
-behavior on i.MX9
-- Applied the fix to other i.MX9 platforms, not only i.MX95
-- Added Suggested-by: Frieder Schrempf
-v1: https://lore.kernel.org/u-boot/20250722-v1-fix-imx95-usb-boot-v1-1-dec7f2384405@toradex.com/
----
- arch/arm/mach-imx/imx9/scmi/soc.c | 13 ++++++++++---
- arch/arm/mach-imx/imx9/soc.c      |  8 +++++++-
- 2 files changed, 17 insertions(+), 4 deletions(-)
+Could have used --timeout instead in the while loop and that could even 
+have allowed us to change the type of timeout to an unsigned number type.
 
-diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-index 13f13ca7d1056ac5a9f1b529b13e0d8dbe2462f1..f973652d0cbe8723b0cdc1a6235fbdd719146065 100644
---- a/arch/arm/mach-imx/imx9/scmi/soc.c
-+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-@@ -635,7 +635,8 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 
- 	switch (dev) {
- 	case QSPI_BOOT:
--		env_loc = ENVL_SPI_FLASH;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+			env_loc = ENVL_SPI_FLASH;
- 		break;
- 	case SD1_BOOT:
- 	case SD2_BOOT:
-@@ -643,10 +644,16 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 	case MMC1_BOOT:
- 	case MMC2_BOOT:
- 	case MMC3_BOOT:
--		env_loc =  ENVL_MMC;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
-+			env_loc =  ENVL_MMC;
- 		break;
- 	default:
--		env_loc = ENVL_NOWHERE;
-+		if (IS_ENABLED(CONFIG_ENV_IS_NOWHERE))
-+			env_loc = ENVL_NOWHERE;
-+		else if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+			env_loc = ENVL_SPI_FLASH;
-+		else if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
-+			env_loc = ENVL_MMC;
- 		break;
- 	}
- 
-diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
-index 9fb82644f126b8717b2f2ba1c9e77fb75d2e7757..3f7dafdcce5d3c6df102fe0a2a5d0b61c394937b 100644
---- a/arch/arm/mach-imx/imx9/soc.c
-+++ b/arch/arm/mach-imx/imx9/soc.c
-@@ -809,7 +809,13 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 			return ENVL_FAT;
- 		return ENVL_NOWHERE;
- 	default:
--		return ENVL_NOWHERE;
-+		if (IS_ENABLED(CONFIG_ENV_IS_NOWHERE))
-+			return ENVL_NOWHERE;
-+		else if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+			return ENVL_SPI_FLASH;
-+		else if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
-+			return ENVL_MMC;
-+		return ENVL_UNKNOWN;
- 	}
- }
- 
+But that works too, so
 
----
-base-commit: b6e2cfca1a6fd10c8f12016a40d690d2ec61796c
-change-id: 20250811-v2-fix-imx9-usb-boot-48679993463d
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Best regards,
--- 
-João Paulo Gonçalves <joao.goncalves@toradex.com>
-
+Thanks!
+Quentin
