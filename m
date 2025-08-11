@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC22CA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:46:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B3DCA0EC4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 818308307F;
-	Mon, 11 Aug 2025 18:46:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CF3908307F;
+	Mon, 11 Aug 2025 18:52:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fsqc6/5L";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YIl/Favn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5567F831E1; Mon, 11 Aug 2025 18:46:32 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 6A136831B4; Mon, 11 Aug 2025 18:52:07 +0200 (CEST)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E96B68304F
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:46:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 662F18304F
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:52:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mcarausu@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-33245e653bbso29773031fa.1
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 09:46:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-76bee58e01cso5375239b3a.1
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 09:52:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754930789; x=1755535589; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1754931123; x=1755535923;
+ darn=lists.denx.de; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L0pB9haaurtUtb0uEZBNgOUo0jSGhPLXk8dw5uZpKVY=;
- b=fsqc6/5Lxvo500HcVYRCuPKIVm1gr8rWsYLQDx7v+c8ACTHhJS7N0iZGRTQmtRZJNQ
- ZdDn/tQIQsNiWvrlRYg4AYr0EAxo/IbOUVoz37GYfNThwXth+nfXICmNWYuW/hzdTFBN
- cKllzSHM4SuPPAhgduHebaqHKIifTi2EndH5/7ZTzgsSlXrQWDKVSL3LTZTzlvjqv9Nl
- 9YfV70citrzdk1pJa7+HnlPg5B4E94RcF91e34oMq918U0As3Dc8UE9+FtXb3gR1bnv7
- BRHxu2c+OT52Meza+eqiMdw+STmD3MwbxGJmFq7KGYI+dMaGhYqJJ3LQKezE0na+OFeL
- maNg==
+ bh=LvkfpLIMSkIH6bHC7oomkhI90X/U5MYt4l7LvOTKTQo=;
+ b=YIl/FavnlgSo3lZmTXeNckY6sb+3xrh1DAhTotYsSwDFlJU8CYZtQuNIKl/PRpHV6F
+ VTPj1w/BNhX11LPqgT7VSpwydTFwUd0MPse+VAWTbHQGWCcvVzvecy/zZjyzAjQtL/uD
+ LsxMi38aEXu1Tm8a/foZzKNbuGa+SZS1aKVrM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754930789; x=1755535589;
+ d=1e100.net; s=20230601; t=1754931123; x=1755535923;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=L0pB9haaurtUtb0uEZBNgOUo0jSGhPLXk8dw5uZpKVY=;
- b=gm+YV1DB9yv4SQSn6fmH6RvUKGCMq6znsoaekFYxEZUkbOke4UxKo7tqVc6oeMb1cZ
- AecYN7mZAylGPmyBr+6OMtFCMhMsn9OEE8ZFoRRiPlUxJ+KfVZkcZ68QkuWiirZRrNFb
- pO4Px2jAEKPBoxTRHJzdcgZ+JSOCYzI1WdtKv9IWo0TTJuaNrgCfBSnNxt/sFb5pGmen
- SjQpXtSPEaOo5ngT1a8IGi2asmlM32us+Sz3bUmH39XUaF5/l8xu1oCP4pzRgZGVbExY
- nbKlpex6Oeb5SDIWgO1JGYuGr3B6IzL5FxFRqFupzCR6uuTX5rI98PJFKLhynHRJNd2Y
- FzZg==
-X-Gm-Message-State: AOJu0Yw28qYAOG/eBwXZVUEiyR64Kyq60K9EfR78d2LOKr9npWTDiHfH
- tv2oc+h/v5xXH+tAcmCLylm8Ux+PgfIXUVJzfK5S6l4n3L0lh5Q3VBUcwDRya6nWECYoIsTkeyP
- fsA+P26+QO9quuL1oJCEW+1/GlWR9DC48yd7L
-X-Gm-Gg: ASbGncvLYP6XKSqYuAm3iYQsSUyriJiZyCvSqU4MoIJcjsCNNv5dGT0B5HwuxtPcA5V
- SUcSShT5ZgYDJGp11i2cWwhHL1g3PUVhSSTwGTs5XMJqoIpZ4elxWo92u2JW+f4KALTV4Updj43
- B3qrtbxavVl5dy753v3WVF03DVfiSMjKJJQniki3fp2/eTJE8OMTJ95R4DrTfKjC++bbdBJhTXQ
- WLevadXn3S3Hk4Y
-X-Google-Smtp-Source: AGHT+IGLfxYdH9G2nsoE6ucuqwIr8S+zEG/DAOjGGc3iaNrl5W6cQoRybTriIT4NWEf5JCF152Vt/wYOlrP4DzL2LZM=
-X-Received: by 2002:a05:651c:3247:20b0:332:643d:7f49 with SMTP id
- 38308e7fff4ca-333d7a70475mr661061fa.9.1754930788797; Mon, 11 Aug 2025
- 09:46:28 -0700 (PDT)
+ bh=LvkfpLIMSkIH6bHC7oomkhI90X/U5MYt4l7LvOTKTQo=;
+ b=AafR6Af7ATnvKJKGCfNfY5uBSquFPdWDusNpVp2ijtXe8tncJ1/snDegAW4VluB27v
+ l87Nw7NE3uExVUtr/k2r5DmDIWZiCK5hq/tnL9jeXMr/Qmhpp7nXwYn2URg6aCLuvtM4
+ Z0NcGSTlskI/W0QQ+LBfv5hrLdyQxLlFmgZMxbi2dCHP6k7DCkT/yXZ2iQ0hFPf4oXxN
+ ftA0K2AQ/5lMDhn1GJIYCVUaS6vuRl5ASTF/iY/yFMHkhi2WrN5YEVABdYZxoeAePogM
+ 8TVeG631shjvfr8huQe4tTZC4EOQ0WpiWJXILDRqf/pFgKsz+5vu7KPO7vjV02GTCGF5
+ fL8g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVY2WUefIZvx5FBD3Yir90ojjkiWSpv5LcDVAVMHSy1nQHd5hf2BVoBwyPGLjszpeXRylh4cGw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyna8HsyQIK1g6gyOACLiHKFhENah9RF1Znqzzhm8n5Wk+Iffhz
+ F6TaIgx2oJKjHLXEUkpdc1akhM/TcKGYseAXBE9Mww0Fft06pX2JeQdhCPwMNEijy+6XNNXhWkr
+ v8x9poJrc9zamw0RHFuNd453KzHwusFqfomE94Nk6Ow==
+X-Gm-Gg: ASbGncsfVkT2JjNM6wlEhxkq99qGWP+MD3T76hRY9TjopDW14GOZycmXLgCNtt/C8gi
+ uz3AMEI1WvkxBhwFuz9c9Hfyiu6hT44yVAYHc7XaUXsCbitYLMNThw+WsJa0okb+SU5/eAbArFy
+ BxIwEJofEByzRSZHfyPprnA6DOqmmJRZTelgr8KVDHpVQ1o9nJ7BGhWk6mQrglhHi6TF3m7ARxR
+ 6SoXZDVh96ySNXHneHp
+X-Google-Smtp-Source: AGHT+IHWoXP+RyePuEGoYUWY3CBGLPTr3zaC6r+57zhJX7Ngue5YvKMtRvkeOge1QfPEBw99NchuMqOcjAw8uYvEycA=
+X-Received: by 2002:a17:903:2ace:b0:234:b123:b4ff with SMTP id
+ d9443c01a7336-242c2011167mr201785345ad.21.1754931122694; Mon, 11 Aug 2025
+ 09:52:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAMFYzVwEtRBndhOaog8wStZeBTZvei_gdZ8=6xM2y1=SU5R1cg@mail.gmail.com>
- <112df3eb-96b0-47bd-8fdf-258e25bfb390@cherry.de>
-In-Reply-To: <112df3eb-96b0-47bd-8fdf-258e25bfb390@cherry.de>
-From: Mircea Carausu <mcarausu@gmail.com>
-Date: Mon, 11 Aug 2025 09:46:16 -0700
-X-Gm-Features: Ac12FXzDBtGkCHIwZk-qmS4x4E8fN8Nc0ZeJXSQCIzYj_1XtimrY-In2p9cJ_8c
-Message-ID: <CAMFYzVyLLzhH8u565AvTxBYL_5_g0WLjpaw8Pb61PytyxdTM5Q@mail.gmail.com>
-Subject: Re: How to avoid the need to run 'env default' command on modified
- env variable
+References: <20250806181450.2324488-1-dregan@broadcom.com>
+ <20250806181450.2324488-2-dregan@broadcom.com>
+ <1b0c1d33-8d43-457d-b81d-702a9f7e7bee@cherry.de>
+In-Reply-To: <1b0c1d33-8d43-457d-b81d-702a9f7e7bee@cherry.de>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 11 Aug 2025 18:51:47 +0200
+X-Gm-Features: Ac12FXypz1x3m5gfjfwEygZX9nXMilTvQNJebtOdenCIbljKNnfoxslWV1tHhts
+Message-ID: <CAOf5uwnwZ2Tfi1gAgaYO-mYV8CUq9UapN8b=rgnObk53VLiYmQ@mail.gmail.com>
+Subject: Re: [PATCH 1/4] cmd: nand: bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB
 To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de
+Cc: david regan <dregan@broadcom.com>, dregan@mail.com, 
+ William Zhang <william.zhang@broadcom.com>,
+ Anand Gore <anand.gore@broadcom.com>, 
+ Tom Rini <trini@konsulko.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -94,70 +101,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-Thank you for your reply.
-I wish it would be that simple:
-- as mentioned we are using RAUC for firmware upgrade (https://rauc.io/)
-and A/B partitions. RAUC needs some u-boot env variables to point to the
-active slot to load and it maintains a retry count.
-(all of this is implemented with help from u-boot env variables, which have
-to be writable).
-I thought of erasing the entire u-boot env or corrupting the CRC signature
-to force loading the defaults. I can do that from Linux also - prior to
-reboot.
-In this way I lose two things:
- - the active slot info that RAUC uses to point to the partition I just
-programmed.
-- the MAC address of the eth interfaces - perhaps for this there is a flag
-to protect it (i.e. write once type of attribute).
+Hi
 
-I can think of working around these  obstacles - just fearing I am
-reinventing the wheel when u-boot may already have a simpler way - hence
-the question.
-If there is no simple way in u-boot I will probably end up writing a RAUC
-hook to do some of the automation  I need before rebooting.
-Thank you,
-Mircea
-
-
-On Mon, Aug 11, 2025 at 9:00=E2=80=AFAM Quentin Schulz <quentin.schulz@cher=
+On Mon, Aug 11, 2025 at 4:08=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
 ry.de>
 wrote:
 
-> Hi Mirceam
+> Hi David,
 >
-> On 8/11/25 6:30 AM, Mircea Carausu wrote:
-> > [You don't often get email from mcarausu@gmail.com. Learn why this is
-> important at https://aka.ms/LearnAboutSenderIdentification ]
+> On 8/6/25 8:14 PM, david regan wrote:
+> > bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB since MTD_OOB_AUTO does not
+> exist
 > >
-> > Hi All,
-> > apologies in advance if my question is trivial:
-> >
-> > I am changing some critical variables in the read-only / compiled-in
-> > section of u-boot env variables via CFG_EXTRA_ENV_SETTINGS in
-> > include/configs/<my_board.h>
-> > All I want is to have them take effect automatically (i.e. without havi=
-ng
-> > the need to stop in u-boot console and issue the env default command).
-> > I see the new values if I use the env default command.
-> > Since I am applying the new config via a RAUC bundle and some systems a=
-re
-> > using automated testing it is not practical to issue env default on eac=
-h
-> > board.
-> > Is there a way of telling u-boot to load / use the read-only / built-in
-> > values instead of the ones stored in env storage?
 >
-> Build U-Boot without external environment support?
+> There's also env/nand.c which uses this, can you also fix it?
 >
-> E.g. with only ENV_IS_NOWHERE?
+> Please also add:
 >
-> You can also entirely and permanently erase the stored environment with
-> `env erase` if you have CONFIG_CMD_ERASEENV enabled.
+> Fixes: dfe64e2c8973 ("mtd: resync with Linux-3.7.1")
 >
-> If that's not fitting your use-case can you provide more information
-> please?
+> To the commit log which i believe is the commit that introduced the issue=
+?
 >
+> Only a 12yo bug you just found, nice catch :)
+>
+>
+After I get a Fixes:  tag then I will queue with other patches
+
+Michael
+
+
 > Cheers,
 > Quentin
 >
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
