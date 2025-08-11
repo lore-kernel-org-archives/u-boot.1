@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606F9CA0EC4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 19:16:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40856CA0EC4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 19:26:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 752C58304F;
-	Mon, 11 Aug 2025 21:16:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E0798311B;
+	Mon, 11 Aug 2025 21:26:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dyzT1LnO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Oudm8fkL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1EE68304F; Mon, 11 Aug 2025 21:16:11 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id A50968313F; Mon, 11 Aug 2025 21:26:45 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6916183013
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 21:16:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5313683118
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 21:26:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-433fd4aeeb8so3071234b6e.0
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 12:16:09 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-8817f851294so287897539f.2
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 12:26:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1754939768; x=1755544568; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=OYDBtavLlM8g6t97QQcw55d+1SEPjoFQ+caUkIfMKIc=;
- b=dyzT1LnOIkcO516ob36eDL9SHfXq7Waqe8RWV00XzxGCWgBsQM+7ppUY5fUBS5xuHL
- /ESKnmNWL9wTXMEXmp9y+z/1zJab2W5/4PenY9jispgM2mBpXY9dVQAdaqZrzPbs9ckA
- 3498W3CG+EoFiSBbKcfX9OazLk4oMKw0dYUaA=
+ d=konsulko.com; s=google; t=1754940402; x=1755545202; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nr+Ks8lRwOfIuwGQIcD7o1AGi6h/+sIvDRe7wRyum+4=;
+ b=Oudm8fkLPWduKGd/vAPpI1cZi/4+E8bbwlJxiXBBVjRWTXO7zxFar5wI+TVSyZokf0
+ cP/+K8S0799iWDpJR3nBiXCIroW4xV9PZ0YiVyBUWCQBbKEgDwLfOc3X0VvuIJNg2FHu
+ E8i0eVLlmjkXZpzTG+5HPYLlQJ6z5W7I/wmhM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754939768; x=1755544568;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OYDBtavLlM8g6t97QQcw55d+1SEPjoFQ+caUkIfMKIc=;
- b=XwqOO3zH8zV8ppr1kOrx/NdKom6e0o0f0uO9IZlk5EnpVdEH889er05HFfOWEFQnST
- sexfkXiQlmsJwJrN1mi88LGOkSZQrAF5x1z5PfIY+c6H3xUjNwG8dueD2uQmDabv2+95
- KDN9WxRZUzcJxQKInuSjbI7g5GRdNU0KqXeL0Wk3W+EMttPNqkZyO+UdVElQnyql6wuv
- ijjj3GN6Gj5oR7sfFw/N9iVqoBtypm4VaE5eds0Ygalomg9kbOCS0NKVfRjkKFThfEsp
- Yo1p6PXSGn8drEoIjlqcQf4q7dxzO5pteX9AmQ/1M/c/UX1s3CcgR4pYDcLGpR5JkpfP
- u6Jw==
-X-Gm-Message-State: AOJu0Yxq22UDv3gcNWsvcYx6EK72ZCX6zJPSgmuCeiq0Is7AjMDQ/UrV
- 02COGujo1samTr4Zrv087tHWrulnt3hvPtRTkxeV09uIsr7k2g1he9GhBZYfcLBeegnhjbFwWbw
- z/I79ehU=
-X-Gm-Gg: ASbGncvLqtXb9ATNQM1d5NXls/B66xYiy1daPm3DFWsGZZQ+f5gSqImi0PGMY0RKNlV
- 4Vqalpyf8LLP9mBIjSXBIQPzkSX0JXIYzQxUVdJIXx1NLtKQ6dohojwJN8e1nw5iQobHU9KeBFs
- GkCim7RFnMlNQWUXR8lMOPVbQSTXBfnxyhOEUzBCXgkca+xyPqjyqzN1GIAVaT9tYfIfcgCIKq9
- DoyKR70IN3iMVZIeyY+TgRENurPzPQP9hU0oGUB/VlrwqqivA8zMRaQgYSU0WLXWXCjG6Dy4V/K
- +lB/9fg7curqwYs8QGSwfSue+wSI3J9sRCnZM/VllMnbdnZyqzeZsUsqxsGfgLVSZfjo9cWvGmG
- iiSYHiUyZFBHzmg2sRMarl6RgZAppXBAS6dJ920gTZ+rv3zgGQjhDjBblfIo=
-X-Google-Smtp-Source: AGHT+IGWNhrgA3xbYzm+yv9sVQ479kAUR8VoTn/jtXU4QB8XmFUlJHHMV5zUVWHhL8Zq8Tw3HQeGRw==
-X-Received: by 2002:a05:6808:1997:b0:435:744c:92ab with SMTP id
- 5614622812f47-435c91e48c6mr427877b6e.30.1754939768088; 
- Mon, 11 Aug 2025 12:16:08 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1754940402; x=1755545202;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nr+Ks8lRwOfIuwGQIcD7o1AGi6h/+sIvDRe7wRyum+4=;
+ b=fBEoN8hldoYXhp7JyE8DpKt8xMKF7ABb5kTak8Pzh4UjfU7HxYwSlT8UCmL8D374aB
+ TYEpX361I3rJQctMeXSsJOv6aIigip6zbL1hanRcv6NEPJxyMdJCPr+AHWZTKmyGOK8E
+ 9qQHz5QfngK00v5MDm2O2lSJM9Z68MZRJaIH3f0A8lAWreih14rtgDc76xfMav7R9jMm
+ zjZCNyG4e49zHrLriLkqdIS2uK0q5tG+0m7rnDnuUoTuCS6MpQYFtol5NAtYqgirX+kV
+ JDpJzzICq0ZxhH2thIPexcjHCJW5gLDSFiuXHQNcG1nyDaeiQHMHC9G712aTEHbfJnpm
+ rOAA==
+X-Gm-Message-State: AOJu0YxhtTbU3UpczU/GMIVKjoFYTWCCwUJGZvJRayVZpPa+OEB3TGa1
+ O2wI/13haA6C29sqona31GzSN9b52nv1yjXuwMQ+mlf2bU/p3S5XM3bj8b71hogd5cG9aJKvB+4
+ 7tdA8sao=
+X-Gm-Gg: ASbGncsdI0oMr3GDSZ1PXsPipNF6mKhRapxmxPglnYC4v+95M92GeQ0lIITluN8WvY2
+ 9mXWXQAeFlzjwt4976/XnBlfTVrm+h4/HZm4xi6yUAwve3fRErQc9bqZV2yWKG2MiR5qVOshvU1
+ rXp0QqBGOxjXGnnPfBM/+MotNb27U7+Z9oD6cfyJhASRVPpIxtDeZYo1n96zvRUDF5u38AeNA8M
+ YF26vFStNXMEYY5/BSenESj7gWu8SrDVfH5MQvOleZNsTm7wmF/EwopwpN6+y+c+WEJTtZbCQm/
+ S/4TvyQO69Kdd8/b3y7UMlxRFdnudD60OoRAGOZZHdb7wQkXPZJxsVAtvgqbJO+uocpJnvMtOPy
+ XzTDpK1huk+r5mDfOiGVGlTpf6ZtVJlYOjJ8iY7CRg35Vr0KgqVreN8ie
+X-Google-Smtp-Source: AGHT+IFr94yQW3nMjGm8RIc5nYPYETtb0oi5ujR9bwJDUR88FUM+g7HEOrDSOAH5m3Kjg/IvI4ry5A==
+X-Received: by 2002:a05:6602:1492:b0:881:7837:6058 with SMTP id
+ ca18e2360f4ac-883f10dcd58mr2503121739f.0.1754940401968; 
+ Mon, 11 Aug 2025 12:26:41 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50ae99cf4ffsm2441834173.26.2025.08.11.12.16.07
+ ca18e2360f4ac-883f18bace4sm313668539f.7.2025.08.11.12.26.40
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 12:16:07 -0700 (PDT)
+ Mon, 11 Aug 2025 12:26:41 -0700 (PDT)
+Date: Mon, 11 Aug 2025 13:26:38 -0600
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] arm: socfpga: Correct how we set BOOTFILE
-Date: Mon, 11 Aug 2025 13:16:06 -0600
-Message-ID: <20250811191606.1577182-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [PATCH] arm: socfpga: Correct how we set BOOTFILE
+Message-ID: <20250811192638.GK124814@bill-the-cat>
+References: <20250811191606.1577182-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6K3VA/ihdpTtH/Ka"
+Content-Disposition: inline
+In-Reply-To: <20250811191606.1577182-1-trini@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,51 +96,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to set the BOOTFILE symbol we first need to have USE_BOOTFILE
-be set, or some of the logic might not work as expected later on when
-building. Second, defaults like this belong with the symbol itself.
 
-Fixes: da595d236b97 ("include: configs: soc64: Use CONFIG_SPL_ATF to differentiate bootfile")
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- arch/arm/Kconfig | 4 +---
- env/Kconfig      | 1 +
- 2 files changed, 2 insertions(+), 3 deletions(-)
+--6K3VA/ihdpTtH/Ka
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index e7257ff3e03a..40368abc297e 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -22,9 +22,6 @@ config ARM64_CRC32
- 	  not be present on all ARMv8.0, but is always present on ARMv8.1 and
- 	  newer.
- 
--config BOOTFILE
--	default kernel.itb if SPL_ATF && TARGET_SOCFPGA_SOC64
--
- config COUNTER_FREQUENCY
- 	int "Timer clock frequency"
- 	depends on ARM64 || CPU_V7A
-@@ -1178,6 +1175,7 @@ config ARCH_SOCFPGA
- 	select SYSRESET_SOCFPGA_SOC64 if !TARGET_SOCFPGA_AGILEX5 && \
-            TARGET_SOCFPGA_SOC64
- 	select SYSRESET_PSCI if TARGET_SOCFPGA_AGILEX5
-+	select USE_BOOTFILE if SPL_ATF && TARGET_SOCFPGA_SOC64
- 	imply CMD_DM
- 	imply CMD_MTDPARTS
- 	imply CRC32_VERIFY
-diff --git a/env/Kconfig b/env/Kconfig
-index c667e8f2da19..1df7ebd547e6 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -957,6 +957,7 @@ config USE_BOOTFILE
- 
- config BOOTFILE
- 	string "'bootfile' environment variable value"
-+	default kernel.itb if SPL_ATF && TARGET_SOCFPGA_SOC64
- 	depends on USE_BOOTFILE
- 	help
- 	  The value to set the "bootfile" variable to.
--- 
-2.43.0
+On Mon, Aug 11, 2025 at 01:16:06PM -0600, Tom Rini wrote:
 
+> In order to set the BOOTFILE symbol we first need to have USE_BOOTFILE
+> be set, or some of the logic might not work as expected later on when
+> building. Second, defaults like this belong with the symbol itself.
+>=20
+> Fixes: da595d236b97 ("include: configs: soc64: Use CONFIG_SPL_ATF to diff=
+erentiate bootfile")
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+
+I will be applying this shortly as I found this as part of doing the
+defconfig resync for -rc2 and saw a massive churn related to BOOTFILE in
+other defconfig files.
+
+--=20
+Tom
+
+--6K3VA/ihdpTtH/Ka
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJpD6wAKCRAr4qD1Cr/k
+Cl4VAP9QAtNwu5cz7o/BPbcjX+3sKRrFa63RhyiUAJJ/i/Og8AEAruk+QGbxh9Kx
+jco02HYgI45OU8LACeVr8G631rigEAA=
+=v/3F
+-----END PGP SIGNATURE-----
+
+--6K3VA/ihdpTtH/Ka--
