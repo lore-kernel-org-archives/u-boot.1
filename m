@@ -4,89 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C19CA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 17:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8439ECA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 17:09:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6084E83253;
-	Mon, 11 Aug 2025 19:03:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D47DC831B4;
+	Mon, 11 Aug 2025 19:09:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dGKrbP6j";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="b8zrvHmn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7E68802C1; Mon, 11 Aug 2025 19:03:44 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5DFAD83214; Mon, 11 Aug 2025 19:09:49 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55BF683249
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 19:03:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95E6A83189
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 19:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-458b885d6eeso29513655e9.3
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 10:03:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754931822; x=1755536622; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4fiyLyHBTKkTT0APTmpJKaVbc2Ebd4DDYk57OZ2r9Q0=;
- b=dGKrbP6ju4II24GgeyCbZ3uyRudRxNpoos/NBmYCeEhSpNwFlAx0llfg034Gf9BuHs
- y/qmHLrq+9/yR3cU8oGZ8ARw0hkpnhmy6HoFzmeeR0/fxU8ziccIY5wZ60mSMg/s42Jq
- ujQeZ8QMRAudRr8Cvu2jINJcuinlciMvW8R80NCn4piOri89e5pvOwufZOZUe2NzfI/M
- r5YodheZvTH6LPVJTt/ihazk9yybYUdEjbde8NYbZl42dg2CHZ7CdNJNkQpsMH36O0ne
- CpbHGru9EZDg4HGBNdpCJv2MljbNZ3+5qpaUlJmWrvaRi6GssXCPg+Go0kpp4/Cil/0N
- wBCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754931822; x=1755536622;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4fiyLyHBTKkTT0APTmpJKaVbc2Ebd4DDYk57OZ2r9Q0=;
- b=XEKm4U1OLc0rrgS+J+l/QOzuIf/XCUQlKx4eAxCb4HCNmHqi+kMdBS1jxSgPDHiNbP
- hBluoWiZ+0Pf9cayOUuD7oco20SpMfjNXxCxK9Lt+cgBejETQQrH/X4JD4AdEU9Fs3np
- Y8z2NJrsy+1VGuoiHyEpApz3RhVanp8RWdWR+OCfvPJ6uKCZuyc0SYysXK3mrAPIzZ6v
- mHTiGEEFKfnHUp5sIlZwDG9sQ0D39Qdro+qs6vADp9xnhbp3aQbUwM4R0E3IzkFQtmUE
- tcYUdEB2GmrHMVhV0nLk8bJeOsFnUFTbNKCEFV3l+BEcKRw9TOj3KphMdKFY1gOgYfrg
- 8qzg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUPzjfgjnQVIS6ihJsrp6c1X7Lyqo4csAFexlGOoaqvAU2RcIeRN2Zaff5ce6XS70jn+T46oEI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7jfZtU7X2c6K+ioNXzsZyb3OyIfgJX9GC9Pbx3vUcUxC7oZMk
- 7B3fk9IeTPcXo/ntK929JlAB34aWEJuPxU6rtgu/mpXLMMsPpMG0nCVzMltd3xOik3U=
-X-Gm-Gg: ASbGncuc+SJsPiZ8aM7kQFwPhakhDlV2JxoH6qlBIHeM5keUKzjhbhVFBZuHl0GzyLR
- 9dlmiGfhzGFVAAzKnc4YI5ACnrTz4afJ7Bmm8/5IwAWfAMWqc6Mo7ZNaNdP6IqDwIFXPs1MmhUx
- 4s3NHDga5iY0TVgiiRX338e/s98x/wFEcyICAHbzp7zD9uTdDWTa7lIuoY5chTKl97aWS7owbti
- nBjf5blJ0oFraVaLq0FARm+s0IUU1LzVJCpou6zh7Po+51sDx8FeUFh5AILBotKzx/CAlY8QYI0
- wgB3gTEVmbDtb3wPU+QoImy6i9ze1UPRu2dzM3BOIfAiCk+4Qx+xE7HcORnfQ3sHGNGTk9ZZX8Q
- 05w/wFbIp3/OIOHSAnXbHHPxeK/9VgagfuMoTaDthRq3ZwRGw95g=
-X-Google-Smtp-Source: AGHT+IHvmV8SC+99GAurQLJK7pXRnhgAy82g6MEVovo31bEINDdevwzskC9SUT7D4KYAtIRpt6uwxA==
-X-Received: by 2002:a05:6000:2381:b0:3b8:d7c7:62d7 with SMTP id
- ffacd0b85a97d-3b910fd9b92mr383900f8f.16.1754931821731; 
- Mon, 11 Aug 2025 10:03:41 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:3e73:96b1:418e:3053])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c45346asm41215266f8f.39.2025.08.11.10.03.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 10:03:41 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 11 Aug 2025 18:03:40 +0100
-Subject: [PATCH 2/2] serial: msm-geni: No need to NULL check priv
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=cf87=2Y=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1754932184;
+ bh=X3cKFjlPm8DgkdYkN0tknzR6T3ImHl7YsNfM3bCoVOk=;
+ b=b8zrvHmnHwWikxaFeBb7e/hIwocwvI+py9YYwkI9eOR6BFCYMnPSmNuX7NPrzdr4VbIspY5Rn
+ p1X/atbehjWx7hyqAyDMVE65veVf5xGlg3v717xMzKqfe0nNcDagunc1OGj/xccVqET9SH9dXh1
+ R5n1lEaGEtZFa8D0/xWaNL4P+CwGVTI6zPY8vFdgl6MPRUBE3GEu2fy4J8XuVq6gStZ1F+GLbPi
+ X5tDteYxfTgKi1jZT2SZT+wfkLpKuIA9TO7nwNCrWYAAqpEZh4E2Y14sJmwpumwy1vxAcQietJk
+ HJJBta+Io80cSaP0w06rIbW7uFluMvvToPL9G/urnf8g==
+X-Forward-Email-ID: 689a23c170d2d7c14f67369a
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.2.4
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <f4babfd9-53a5-4af8-8b0d-813c61697400@kwiboo.se>
+Date: Mon, 11 Aug 2025 19:09:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] rockchip: Add initial RK3582 support
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20250810222644.4095072-1-jonas@kwiboo.se>
+ <20250810222644.4095072-2-jonas@kwiboo.se>
+ <1b1ad33a-3004-480d-9d32-3ea05e7eaf63@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <1b1ad33a-3004-480d-9d32-3ea05e7eaf63@cherry.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250811-serial_msm_geni-v1-2-4499179491bc@linaro.org>
-References: <20250811-serial_msm_geni-v1-0-4499179491bc@linaro.org>
-In-Reply-To: <20250811-serial_msm_geni-v1-0-4499179491bc@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,59 +77,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The NULL check for priv in qcom_geni_serial_poll_bit serves no useful
-prupose as too much other code surrounding it relies on priv being
-valid. Remove the NULL check for priv and other related code.
+Hi Quentin,
 
-This issue was found by Smatch.
+On 8/11/2025 5:44 PM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 8/11/25 12:26 AM, Jonas Karlman wrote:
+>> The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
+>> What blocks are disabled/non-working is indicated by ip-state in OTP.
+>>
+>> This add initial support for RK3582 by using ft_system_setup() to mark
+>> any cpu and/or vdec/venc node with status=fail as indicated by ip-state.
+>>
+>> This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
+>> cores and one vdec/venc core is always failed/disabled.
+>>
+>> Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
+>> the required DT fixups for RK3582 board variants.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> Changes in v3:
+>> - Apply same policy for RK3582/RK3583 to match vendor U-Boot
+>>    linux-6.1-stan-rkr6 tag, allow use of the GPU and one vdec core.
+> 
+> Isn't the GPU supposed to be possibly non-fonctional on RK3582/RK3583? 
+> If we don't disable it in the DT, how will the system actually behave?
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/serial/serial_msm_geni.c | 30 +++++++++++++-----------------
- 1 file changed, 13 insertions(+), 17 deletions(-)
+Not sure about this, I was also wondering what happened to the GPU, but
+this matches the updated policy [1] in vendor U-Boot and I do not want to
+deviate from the vendor policy:
 
-diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-index 33016f0cb53..0eb90f82a34 100644
---- a/drivers/serial/serial_msm_geni.c
-+++ b/drivers/serial/serial_msm_geni.c
-@@ -288,23 +288,19 @@ static bool qcom_geni_serial_poll_bit(const struct udevice *dev, int offset,
- 	unsigned int tx_fifo_depth;
- 	unsigned int tx_fifo_width;
- 	unsigned int fifo_bits;
--	unsigned long timeout_us = 10000;
--
--	baud = 115200;
--
--	if (priv) {
--		baud = priv->baud;
--		if (!baud)
--			baud = 115200;
--		tx_fifo_depth = geni_se_get_tx_fifo_depth(priv->base);
--		tx_fifo_width = geni_se_get_tx_fifo_width(priv->base);
--		fifo_bits = tx_fifo_depth * tx_fifo_width;
--		/*
--		 * Total polling iterations based on FIFO worth of bytes to be
--		 * sent at current baud. Add a little fluff to the wait.
--		 */
--		timeout_us = ((fifo_bits * USEC_PER_SEC) / baud) + 500;
--	}
-+	unsigned long timeout_us;
-+
-+	baud = priv->baud;
-+	if (!baud)
-+		baud = 115200;
-+	tx_fifo_depth = geni_se_get_tx_fifo_depth(priv->base);
-+	tx_fifo_width = geni_se_get_tx_fifo_width(priv->base);
-+	fifo_bits = tx_fifo_depth * tx_fifo_width;
-+	/*
-+	 * Total polling iterations based on FIFO worth of bytes to be
-+	 * sent at current baud. Add a little fluff to the wait.
-+	 */
-+	timeout_us = ((fifo_bits * USEC_PER_SEC) / baud) + 500;
- 
- 	timeout_us = DIV_ROUND_UP(timeout_us, 10) * 10;
- 	while (timeout_us) {
+[1] https://github.com/Kwiboo/u-boot-rockchip/commit/5566d7d920d20932d2188c0cec57cb9036a9eefd
 
--- 
-2.39.5
+> 
+> @Kever may have more official info on that?
+> 
+> See remarks on v2 otherwise, most of them still apply.
+> 
+>> - Update rkvdec node name to match latest mainling Linux DT patches.
+> 
+> Should we rather wait for the patches to be actually merged before 
+> trying to patch the device tree nodes that do not exist yet?
+
+This is what I did for v1, however Kever mentioned:
+
+"it would better to follow the vendor U-Boot as-is to handle the dts, eg. 
+seems you have skip the dts handle for rkvenc/rkvdec".
+
+So for v2+ I tried to anticipate those node names, and have also sent
+multiple reviews [2] to Linux ML for the rkvdec nodes to ensure the
+names matches. However, the latest DT patch [3] changed the reg order
+and thus the node name changed once again.
+
+We could drop the rkvdec/rkvenc handling and add it later once nodes
+have finally landed, or keep the handling and just patch U-Boot in
+case the node names ends up being changed before merge.
+
+[2] https://lore.kernel.org/linux-rockchip/c73a32b0-cc58-4d07-a0e5-719e5434adc3@kwiboo.se/
+[3] https://lore.kernel.org/linux-rockchip/20250808193602.142527-2-detlev.casanova@collabora.com/
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
 
