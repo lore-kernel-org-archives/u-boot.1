@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0D8DCA0EC4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32328CA0EC4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Aug 2025 16:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1772C831E4;
-	Mon, 11 Aug 2025 18:11:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7BBE9831D5;
+	Mon, 11 Aug 2025 18:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="kcXajUsl";
+	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="Ukvb7++u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7517831E4; Mon, 11 Aug 2025 18:11:18 +0200 (CEST)
+ id 273D68323A; Mon, 11 Aug 2025 18:11:22 +0200 (CEST)
 Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9344831BE
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:11:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16A24831E0
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:11:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de;
@@ -28,19 +28,19 @@ Authentication-Results: phobos.denx.de;
 dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
  c=relaxed/relaxed; q=dns/txt;
  h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References;
- bh=xhkxCLrK6T+ClgG3DV9kM59BxyMRJdTMZ/R1nL2/nIM=;
- b=kcXajUslJii4v/cLU0HLV8Ej64kfxArxaVIq7ddpkP3XmNwUVD6d0+fw4irsoK/MZJQoDmJ579Nr9COE+af81StY9Y8ou+wynlmnvNsad0tY1nzkGpXdZj6nKCPfpsOGAeHeJaE/k70NUI+ziL+HoS+fkTt5rTgEMH/xXNvCJqI=
+ bh=hwD/g985jJNhQLabPX6V+9+rK2B2guPi5ipafSjbiuM=;
+ b=Ukvb7++u2UbX8a5jA3bXv5nlvw3K3MPYEsRNE0/alabvyb9R6UjeNJnz+vhl/l18ukRydS/w4xEuBs5Oo1eX/PvmTdmPDLtelZ1yNf7UVzY8HFK0zgbGfGENoOAptkeuDTVKVKS0pzJK6PlOPCvHv4bw9Te32L80g1YcHoGoxsk=
 Received: from lukas-hpz440workstation.lan.sk100508.local (cm70-231.liwest.at
  [212.241.70.231]) by mail.netcube.li with ESMTPA
- ; Mon, 11 Aug 2025 18:11:15 +0200
+ ; Mon, 11 Aug 2025 18:11:19 +0200
 From: Lukas Schmid <lukas.schmid@netcube.li>
 To: Tom Rini <trini@konsulko.com>
 Cc: Lukas Schmid <lukas.schmid@netcube.li>,
 	u-boot@lists.denx.de
-Subject: [PATCH v1 1/2] rsa: allow operation without SPL_DM by falling back to
- software
-Date: Mon, 11 Aug 2025 18:10:33 +0200
-Message-Id: <20250811161035.2703435-2-lukas.schmid@netcube.li>
+Subject: [PATCH v1 2/2] sunxi: u-boot.dtsi: add support for signed SPL and
+ U-Boot images
+Date: Mon, 11 Aug 2025 18:10:34 +0200
+Message-Id: <20250811161035.2703435-3-lukas.schmid@netcube.li>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250811161035.2703435-1-lukas.schmid@netcube.li>
 References: <20250811161035.2703435-1-lukas.schmid@netcube.li>
@@ -62,82 +62,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boards using secure boot but lacking SPL_DM support currently cannot
-use FIT signature verification in SPL, as SPL_FIT_SIGNATURE depends
-on SPL_DM.  This dependency is only needed for hardware RSA modular
-exponentiation drivers; software RSA verification works without DM.
+Add conditional nodes to sunxi-u-boot.dtsi to support building signed
+SPL and U-Boot images, using the same #ifdef scheme as in the Rockchip
+u-boot.dtsi.  When CONFIG_SPL_FIT_SIGNATURE is enabled, the FIT image
+includes hash and signature nodes for firmware, loadables, and device
+trees, enabling SPL to verify U-Boot and associated binaries before
+boot.
 
-Remove the SPL_DM dependency in Kconfig and guard the hardware RSA
-path in rsa-verify.c with CONFIG_IS_ENABLED(DM).  This allows SPL to
-verify signed FIT images using the software RSA implementation on
-non-DM systems.
+This prepares Sunxi boards for secure boot flows similar to other SoCs.
 
 Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
 ---
- boot/Kconfig         |  2 +-
- lib/rsa/rsa-verify.c | 27 ++++++++++++++++-----------
- 2 files changed, 17 insertions(+), 12 deletions(-)
+ arch/arm/dts/sunxi-u-boot.dtsi | 68 ++++++++++++++++++++++++++++++++--
+ 1 file changed, 64 insertions(+), 4 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index a671d78e..6c0e2a49 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -203,7 +203,7 @@ config SPL_FIT_FULL_CHECK
- 
- config SPL_FIT_SIGNATURE
- 	bool "Enable signature verification of FIT firmware within SPL"
--	depends on SPL_DM
-+#	depends on SPL_DM
- 	depends on SPL_LOAD_FIT || SPL_LOAD_FIT_FULL
- 	select FIT_SIGNATURE
- 	select SPL_FIT
-diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
-index b65fbe44..314f75a2 100644
---- a/lib/rsa/rsa-verify.c
-+++ b/lib/rsa/rsa-verify.c
-@@ -327,8 +327,9 @@ static int rsa_verify_key(struct image_sign_info *info,
- 			  const uint32_t key_len)
- {
- 	int ret;
--#if !defined(USE_HOSTCC)
--	struct udevice *mod_exp_dev;
-+#ifndef USE_HOSTCC
-+	if (IS_ENABLED(CONFIG_DM))
-+		struct udevice *mod_exp_dev;
+diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
+index e1a9a7f5..bb428226 100644
+--- a/arch/arm/dts/sunxi-u-boot.dtsi
++++ b/arch/arm/dts/sunxi-u-boot.dtsi
+@@ -27,6 +27,38 @@
  #endif
- 	struct checksum_algo *checksum = info->checksum;
- 	struct padding_algo *padding = info->padding;
-@@ -354,17 +355,21 @@ static int rsa_verify_key(struct image_sign_info *info,
- 	uint8_t buf[sig_len];
- 	hash_len = checksum->checksum_len;
  
--#if !defined(USE_HOSTCC)
--	ret = uclass_get_device(UCLASS_MOD_EXP, 0, &mod_exp_dev);
--	if (ret) {
--		printf("RSA: Can't find Modular Exp implementation\n");
--		return -EINVAL;
--	}
-+#ifndef USE_HOSTCC
-+	if (IS_ENABLED(CONFIG_DM)) {
-+		ret = uclass_get_device(UCLASS_MOD_EXP, 0, &mod_exp_dev);
-+		if (ret) {
-+			printf("RSA: Can't find Modular Exp implementation\n");
-+			return -EINVAL;
-+		}
- 
--	ret = rsa_mod_exp(mod_exp_dev, sig, sig_len, prop, buf);
--#else
--	ret = rsa_mod_exp_sw(sig, sig_len, prop, buf);
-+		ret = rsa_mod_exp(mod_exp_dev, sig, sig_len, prop, buf);
-+	} else
- #endif
-+	{
-+		ret = rsa_mod_exp_sw(sig, sig_len, prop, buf);
-+	}
+ &binman {
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++	spl {
++#ifdef CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0
++		filename = "spl/u-boot-spl.bin";
++#else
++		filename = "spl/sunxi-spl.bin";
++#endif
 +
- 	if (ret) {
- 		debug("Error in Modular exponentation\n");
- 		return ret;
++		u-boot-spl-nodtb {
++		};
++
++		u-boot-spl-pubkey-dtb {
++			algo = "sha256,rsa2048";
++			required = "conf";
++			key-name-hint = "dev";
++		};
++	};
++
++#ifdef CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0
++		image {
++			filename = "spl/sunxi-spl.bin";
++
++			mkimage {
++				args = "-a 0x20060 -T sunxi_toc0";
++				data-to-imagename;
++
++				u-boot-spl {
++		};
++			};
++		};
++#endif
++#endif
+ 	u-boot-sunxi-with-spl {
+ 		filename = "u-boot-sunxi-with-spl.bin";
+ 		pad-byte = <0xff>;
+@@ -45,6 +77,9 @@
+ 			description = "Configuration to load U-Boot and firmware";
+ 			#address-cells = <1>;
+ 			fit,fdt-list = "of-list";
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++			fit,sign;
++#endif
+ 
+ 			images {
+ 				uboot {
+@@ -60,6 +95,11 @@
+ 
+ 					u-boot-nodtb {
+ 					};
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++					hash {
++						algo = "sha256";
++					};
++#endif
+ 				};
+ 
+ #if CONFIG_SUNXI_BL31_BASE
+@@ -76,6 +116,11 @@
+ 						filename = "bl31.bin";
+ 						missing-msg = "atf-bl31-sunxi";
+ 					};
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++					hash {
++						algo = "sha256";
++					};
++#endif
+ 				};
+ #endif
+ 
+@@ -92,6 +137,11 @@
+ 						missing-msg = "scp-sunxi";
+ 						optional;
+ 					};
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++					hash {
++						algo = "sha256";
++					};
++#endif
+ 				};
+ #endif
+ 
+@@ -99,6 +149,11 @@
+ 					description = "NAME";
+ 					type = "flat_dt";
+ 					compression = "none";
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++					hash {
++						algo = "sha256";
++					};
++#endif
+ 				};
+ 			};
+ 
+@@ -108,16 +163,21 @@
+ 				@config-SEQ {
+ 					description = "NAME";
+ #if CONFIG_SUNXI_BL31_BASE
+-					firmware = "atf";
++					firmware = "atf", "uboot";
+ #else
+ 					firmware = "uboot";
+ #endif
+ #if CONFIG_SUNXI_SCP_BASE
+-					loadables = "scp", "uboot";
+-#else
+-					loadables = "uboot";
++					loadables = "scp";
+ #endif
+ 					fdt = "fdt-SEQ";
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++					signature {
++						algo = "sha256,rsa2048";
++						key-name-hint = "dev";
++						sign-images = "firmware", "loadables", "fdt";
++					};
++#endif
+ 				};
+ 			};
+ 		};
 -- 
 2.39.5
 
