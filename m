@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1821AC87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 15:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C86CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 15:22:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EA9382AFC;
-	Tue, 12 Aug 2025 17:04:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D32BF82F03;
+	Tue, 12 Aug 2025 17:22:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J/drQnHo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ctqlaHNE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23A0982AFC; Tue, 12 Aug 2025 17:04:06 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 7299583287; Tue, 12 Aug 2025 17:22:31 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8A4782A53
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 17:04:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4BEB82CEA
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 17:22:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-30b776f0805so3301644fac.3
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:04:03 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-433f63d7803so1799198b6e.1
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:22:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755011042; x=1755615842; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755012147; x=1755616947; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bJ+30cuRCPE4j/wAskvq2tmSd8Tg94vomfWJbeE53uA=;
- b=J/drQnHoOSAoFlh/wFEqy5ltx/lQvhs2bpoCtMv7NxfnG6IVKAj3BWYH4or93ZLm+t
- ybBhJsSd+jO3V16dpcSsS+NTBTwH5C14xpUwrnrYkXzVdLmGREyVZqO9CzLpR5jc7F2p
- +M1gLNYrMHzR9A/s8sYw/QpbZ8rySbzbTw/og=
+ bh=qHYm5YX62urGnExGqn7oeaq/nuNCjA1B96q9gi6Pr2s=;
+ b=ctqlaHNE3YHmOi12i/2dGat6zV4AjxlHNjOcGZiprYGeJa0O8FZUkAydCn+f/4VzN2
+ tDOpvs6PQwvLckvVffzXTUrwervBdFtuiyDd6P+yyTyp8HhpBHrVPtoaU8rDmjge3Yhk
+ EWnTlqU6Ixu0cjfvq9m1xvu3/c01rwEDq3f4U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755011042; x=1755615842;
+ d=1e100.net; s=20230601; t=1755012147; x=1755616947;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bJ+30cuRCPE4j/wAskvq2tmSd8Tg94vomfWJbeE53uA=;
- b=BHBUaGAYHkU+RdXF538D9rT0wPrsx/zz4cf56vZ6yc1i4d7NahR1Frb0/KkWgbdkAF
- 5ssRY9ucuiKzyqqg9YVOlJNWYPx46GHmmlF37C6VQfZUczPadUZ/uSWg2noa7aMRR4xz
- qyb3AUgqyRaluXJSVvP8TCTLIXn7q7v8UVY2qUi8N+XF7WkX2p/NT4CWsP8aWaEZoB/w
- 61i4Ir06nwOU5Cp4HRrxcSzx8uwPHVO4pzmAL9AfguWv1ypzm4yy1qxFjJWc3G+qAR6/
- YcPRwSqbJdQwT+mdRTN7xOS7JA1iEWRrXEVQMSrzDoJWMYPnHSawhJfl+oJaTNvzPCWZ
- OBNA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVdvk8TvSst4IYeMH8AF7zTn6ml6DlUBa3wAiqO+K35JmYdNEoZzM0qCGwzQeu3DgszWEUT14c=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmzlMWUXu0V/tE45w9oblzdGW+4pQ1wDOwcNlXVgcUJloAFFUv
- gh4Q6toH8fjS1/hVwCP4AOPPi4j+La1m4tI4JtGc8Glfk+y9fR2AJziKVRZIrLnaLIk=
-X-Gm-Gg: ASbGncsc3XEiZr6EE+vOKeQeJk4sLQa8WHhps9W5dnJqnh+Jm83WV0HgdwJT/6CZrWt
- h0mS+0fj1zwhoFCBfCn9t4kSW28fNh7WBnetv6Igz36BmosUboLJyPTZz9FdfBA4knzZ6IueH4I
- Rj98Jte4XROqC4+hcj/+koMC2/kG9mbmwmFDjEZssTR3SF3xXgEpNBZIrAqOjLwrZuhQEcPFOxL
- +0lcTMLbzxv8fNlyWV7eoFrcnvqFvoa0SPjQCD85ZLg83jiOcGWtIs5J83vCGVwrxBaodLNR9RR
- vDXWgyIX2NJmB83h3B0XiKBqahuRPKfOt2aAkxLpfLBr355ZL1RRIx0dXDyAOXCyAEc+fz8RgOJ
- UW2ldc5urp9oU/x8pC76nIhsXFjgRvT0dN9JHrWKqVF8Nn+Z9vSt7wJWw
-X-Google-Smtp-Source: AGHT+IGzMJVj0tPsMsuWvO8qps86rZKrTRPLVxGLW+Y5+wlVOrpvfWWmmMUCagfAJdwF7PONs4OoRQ==
-X-Received: by 2002:a05:6870:2806:b0:308:fc2b:b7e with SMTP id
- 586e51a60fabf-30c211b8be7mr10229860fac.47.1755011041701; 
- Tue, 12 Aug 2025 08:04:01 -0700 (PDT)
+ bh=qHYm5YX62urGnExGqn7oeaq/nuNCjA1B96q9gi6Pr2s=;
+ b=esqUqtb2pFJb949nTB8rBkf0/tURWHE8KTM1E88YFXmgDzLQACrjHr9LFyJWAFNZve
+ cqXnj3dFWkHdmmLI7sruCYgT/PayHJXV1qPT5uS0mlnTOxLUe+mR3mxMc0ZQjzXrZkvc
+ brJjfG80m1mo85XsmB1S3HRfNzGx620sDGT3yL9JLskG0GkhLdl+Jc7GkCJLkypG+/SJ
+ 9fIY77IYJXuYeFKfpk0U5EO+Rjpngfz9xRYE5NMC0LB1fZ680F5k2Tc5BDRlOYNxCQvE
+ sFpGotULlIaghLR2NUa0gkiSZOPXVojldxbyRN9guKw0LHVvJkM6uR+707rHDZNLoX37
+ j0vQ==
+X-Gm-Message-State: AOJu0Yyd6RCwfQkyXdDhbnZIoSz7iP5znOOxpDBDxcrICHdPmoD5fBnY
+ ICmTir7bMCulPAXNAwdwT/PXIpQBUjrDNpPg8+iTaqVwc4dCtyQQ1apFCSPJBzi4pQAKwQ4kR3i
+ fmMcdmeE=
+X-Gm-Gg: ASbGnctNo/OoXtL2eWpfkoE1/yxrp29w0+sQ95l6Embu7WY94sQXdL1jeLXZX7hWomc
+ G5qzdl2neH0h70i6iv2ug0uCIvO5Q+3I/zlbMdS9ffGzR8IfWzq68Bqa0YbucCd3EgpGWQiYOyN
+ vMpzyDXi4Sppzp3EPsCT8n2JkWokuKgNUVnZarMm3uBOlFgzqY3Udj7KlJ0ex5me8O4mQqvM6eU
+ x0PdytPBpCFKPg6stacXuzYf8heuogE2ywsqx3JEUNcQl8xTC+DtXi/0H8m9KlMbsryV0TXHDa2
+ xQtOiddTHs7bkCLjDmLZ8zE8souxO73BHysGeB7K+h8zyhQYYz1ydko5IBDsD9akZGNjC3O2bGm
+ m1XhiDudhHNUbfJLiy6sHUOTk+nlBngi65qfEsXYqJ4IHsH1+lRmb6v5A
+X-Google-Smtp-Source: AGHT+IGRgf+tmmpQGGrToA4IYIdppwg8u+B6mz3SZvuwlDYL1Gfov1TWqoOv3xZb3TRsKcBRxPY8bQ==
+X-Received: by 2002:a05:6808:8957:b0:434:ee4:b95b with SMTP id
+ 5614622812f47-435c9259a86mr2561226b6e.39.1755012147459; 
+ Tue, 12 Aug 2025 08:22:27 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30c512bb7f6sm2486620fac.6.2025.08.12.08.04.00
+ 5614622812f47-435ce6fe528sm212451b6e.7.2025.08.12.08.22.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 08:04:00 -0700 (PDT)
-Date: Tue, 12 Aug 2025 09:03:59 -0600
+ Tue, 12 Aug 2025 08:22:26 -0700 (PDT)
+Date: Tue, 12 Aug 2025 09:22:24 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Seeking advice on API return type inconsistency
-Message-ID: <20250812150359.GS124814@bill-the-cat>
-References: <f5c94319-8ef8-459d-88b2-836702779cfb@linaro.org>
- <e10a39e4-9606-4ae4-86dd-11de4b39b5ed@cherry.de>
- <2d6457b8-c637-4531-8f56-e2aea320a319@linaro.org>
- <20250812143349.GQ124814@bill-the-cat>
- <cc82add8-5f9c-4ee1-87ea-a458e840e621@linaro.org>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com,
+ heinrich.schuchardt@canonical.com, ben.dooks@codethink.co.uk,
+ jamie.gibbons@microchip.com, sputnik@on-the-web.ch, michal.simek@amd.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20250812152224.GT124814@bill-the-cat>
+References: <aJr1oclCSUMcK3bb@swlinux02>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Kku3DdrMgTVUM8Lf"
+ protocol="application/pgp-signature"; boundary="bp0ET7GURns2n8hF"
 Content-Disposition: inline
-In-Reply-To: <cc82add8-5f9c-4ee1-87ea-a458e840e621@linaro.org>
+In-Reply-To: <aJr1oclCSUMcK3bb@swlinux02>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,98 +99,93 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Kku3DdrMgTVUM8Lf
-Content-Type: text/plain; charset=iso-8859-1
+--bp0ET7GURns2n8hF
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 12, 2025 at 03:46:56PM +0100, Andrew Goodbody wrote:
-> On 12/08/2025 15:33, Tom Rini wrote:
-> > On Tue, Aug 12, 2025 at 10:17:47AM +0100, Andrew Goodbody wrote:
-> > > On 11/08/2025 17:36, Quentin Schulz wrote:
-> > > > Hi Andrew,
-> > > >=20
-> > > > On 8/11/25 5:24 PM, Andrew Goodbody wrote:
-> > > > > Hi,
-> > > > >=20
-> > > > > I was wondering what people's thoughts were on API return types. =
-In
-> > > > > particular there is this and other examples in include/clk-uclass=
-=2Eh
-> > > > >=20
-> > > > > /**
-> > > > >  =A0=A0* get_rate() - Get current clock rate.
-> > > > >  =A0=A0* @clk:=A0=A0=A0 The clock to query.
-> > > > >  =A0=A0*
-> > > > >  =A0=A0* This returns the current rate of a clock. If the clock is
-> > > > > disabled, it
-> > > > >  =A0=A0* returns the rate at which the clock would run if it was =
-enabled. The
-> > > > >  =A0=A0* following pseudo-code should hold::
-> > > > >  =A0=A0*
-> > > > >  =A0=A0*=A0=A0 disable(clk)
-> > > > >  =A0=A0*=A0=A0 rate =3D get_rate(clk)
-> > > > >  =A0=A0*=A0=A0 enable(clk)
-> > > > >  =A0=A0*=A0=A0 assert(get_rate(clk) =3D=3D rate)
-> > > > >  =A0=A0*
-> > > > >  =A0=A0* Return:
-> > > > >  =A0=A0* * The rate of @clk
-> > > > >  =A0=A0* * -%ENOSYS if this function is not implemented for @clk
-> > > > >  =A0=A0* * -%ENOENT if @clk->id is invalid. Prefer using an assert
-> > > > > instead, and doing
-> > > > >  =A0=A0*=A0=A0 this check in request().
-> > > > >  =A0=A0* * Another negative error value (such as %EIO or %ECOMM) =
-if the
-> > > > > rate could
-> > > > >  =A0=A0*=A0=A0 not be determined due to a bus error.
-> > > > >  =A0=A0*/
-> > > > > ulong get_rate(struct clk *clk);
-> > > > >=20
-> > > > >=20
-> > > > > get_rate is declared as returning a ulong but the description says
-> > > > > that it can return negative errors. A simple test of the return
-> > > > > value for being less than 0 will always fail so errors can go
-> > > > > undetected. Casting to a signed type seems less than ideal.
-> > > > >=20
-> > > > > What is the best way to deal with this? Cast to a signed or update
-> > > > > the API to be signed or...?
-> > > > >=20
-> > > >=20
-> > > > Note that clk_get_rate() in the kernel has the same function signat=
-ure
-> > > > so I would refrain from changing the type otherwise we'll have some
-> > > > "funny" bugs to handle considering it isn't that uncommon to import
-> > > > drivers almost as-is from the Linux kernel.
-> > >=20
-> > > Ah yes. The difference being that the kernel does not seem to attempt=
- to
-> > > push an error code through this API, you get a rate or you get 0.
-> >=20
-> > How is the error code pushed? Or is it up to the caller to decide that 0
-> > means on a case by case basis?
->=20
-> In the Linux kernel almost no code checks the return of clk_get_rate at a=
-ll.
-> Some code will check the value is sensible and 0 is obviously not sensibl=
-e.
-> But pretty much the call to clk_get_rate is not expected to fail.
+On Tue, Aug 12, 2025 at 04:04:49PM +0800, Leo Liang wrote:
 
-Perhaps getting lost in the specifics then, but perhaps for this case we
-should just do the same? But your question was more general, so another
-example might help.
+> Hi Tom,
+>=20
+> The following changes since commit acfacf452441d0a659e3afbd55fd6061aa17e6=
+47:
+>=20
+>   Prepare v2025.10-rc2 (2025-08-11 13:47:46 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to bddcd6bcba081aaaaafe30d1b8f9f3c83f069bde:
+>=20
+>   starfive: fix return code of `mac write_eeprom` (2025-08-12 15:34:39 +0=
+800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/27348
+> ----------------------------------------------------------------
+> - Board: mbv: Prepare MBV for CI
+> - Board: MPFS Icicle Kit cleanup
+> - Board: Add Andes Voyager board support
+> - RISCV: Update SYS_BOOTM_LEN to commonly used value
+> - starfive: fix return code of `mac write_eeprom`
+
+So, there's a few problems here. First, checkpatch.pl finds spacing and
+spelling issues, which I would normally just fixup in place. But second,
+voyager_spl doesn't build:
+   riscv64:  +   voyager_spl
++(voyager_spl) In file included from include/linux/printk.h:4,
++(voyager_spl)                  from include/linux/kernel.h:5,
++(voyager_spl)                  from include/linux/libfdt_env.h:13,
++(voyager_spl)                  from include/linux/libfdt.h:6,
++(voyager_spl)                  from include/fdtdec.h:17,
++(voyager_spl)                  from include/dm/ofnode.h:11,
++(voyager_spl)                  from include/dm/device.h:13,
++(voyager_spl)                  from include/dm.h:13,
++(voyager_spl)                  from common/spl/spl.c:13:
++(voyager_spl) common/spl/spl.c: In function 'spl_set_header_raw_uboot':
++(voyager_spl) common/spl/spl.c:281:27: error: format '%x' expects argument=
+ of type 'unsigned int', but argument 2 has type 'long int' [-Werror=3Dform=
+at=3D]
++(voyager_spl)   281 |                 log_debug("Default load addr %x (u_b=
+oot_pos=3D%lx)\n",
++(voyager_spl)       |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~~~~~~~~~~~
++(voyager_spl) include/log.h:234:24: note: in definition of macro 'log'
++(voyager_spl)   234 |                 printf(_fmt, ##_args); \
++(voyager_spl)       |                        ^~~~
++(voyager_spl) common/spl/spl.c:281:17: note: in expansion of macro 'log_de=
+bug'
++(voyager_spl)       |                 ^~~~~~~~~
++(voyager_spl) common/spl/spl.c:281:47: note: format string is defined here
++(voyager_spl)       |                                              ~^
++(voyager_spl)       |                                               |
++(voyager_spl)       |                                               unsign=
+ed int
++(voyager_spl)       |                                              %lx
++(voyager_spl) cc1: all warnings being treated as errors
++(voyager_spl) make[3]: *** [scripts/Makefile.build:296: spl/common/spl/spl=
+=2Eo] Error 1
++(voyager_spl) make[2]: *** [scripts/Makefile.xpl:547: spl/common/spl] Erro=
+r 2
++(voyager_spl) make[1]: *** [Makefile:2358: spl/u-boot-spl] Error 2
++(voyager_spl) make: *** [Makefile:198: sub-make] Error 2
+
+Please fix and re-submit, thanks.
 
 --=20
 Tom
 
---Kku3DdrMgTVUM8Lf
+--bp0ET7GURns2n8hF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJtX3gAKCRAr4qD1Cr/k
-CuMcAQCraxSssB+PP443Mdd9juwBfUrOhrbNzCaa4gcOg9XHrgD+MXsgpytEq6+0
-WCmAVNMz7YX6peLo7Sowy+vml/ac4gQ=
-=dKzW
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJtcLAAKCRAr4qD1Cr/k
+CtywAQCpkEGeZNGk/VqMzHSkWInwKOJB57GvCRL9D/gOwyIy9gD+PcwPZIdhjdUM
+J9CWjSnXH3hLPrwOBqChcIjbcvkHMgQ=
+=bZ9e
 -----END PGP SIGNATURE-----
 
---Kku3DdrMgTVUM8Lf--
+--bp0ET7GURns2n8hF--
