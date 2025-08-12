@@ -4,70 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03CEEC87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 06:23:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B002CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 07:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7903A831C2;
-	Tue, 12 Aug 2025 08:23:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 18BB4831BB;
+	Tue, 12 Aug 2025 09:43:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XqlMCfS0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J/kUmzxi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 734C4831C5; Tue, 12 Aug 2025 08:23:43 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40FE28312A
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:23:41 +0200 (CEST)
+ id C69678319A; Tue, 12 Aug 2025 03:25:49 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 54CE28312A
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 03:25:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57C6NdEw1368439;
- Tue, 12 Aug 2025 01:23:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1754979819;
- bh=NOnAIRFBaxPeukfrIjP7t9AuneLRqLstZ1al2IZkYww=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=XqlMCfS0kSyibfiH0AECY83ZBaXCR9lF5ulWo3L8IO+zN1K7UufzMylOVo8sZFp6m
- 2msJLyiZT0HA9kkHUqf9T/O8XulAPBK0WRaSkPb0EpQZenEshpVxkTb60tqsYllCS1
- p7ng6DG/P7AbktZtxUcr2V887G+1nssu5evDXHis=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57C6Nd0s3258504
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 12 Aug 2025 01:23:39 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 12
- Aug 2025 01:23:39 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 12 Aug 2025 01:23:39 -0500
-Received: from [172.24.235.200]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57C6NaRR206816;
- Tue, 12 Aug 2025 01:23:37 -0500
-Message-ID: <172ca186-d72c-4731-83d4-f12189680ea0@ti.com>
-Date: Tue, 12 Aug 2025 11:53:36 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cn.liweihao@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-615622ed677so5984595a12.1
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 18:25:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1754961947; x=1755566747; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m6X/uYPl4nxEaUptH7OSLMTtMsCamcbCZRK2Q09ag2k=;
+ b=J/kUmzxiaBVpxshPwcOUbJHvZxa+BsStKaT6Yq8CH7bGdfFHPi6wFHm3GK3trYyHW2
+ vqo/8TasskIo6Z1LUyv9k2K2O95XIRh77tRIqokpkRJiuXyME0RHzlBDTy6KSj/jnjIW
+ 6I6CkpzhGpXtx7xweSWpuOCFSN9F0MCqMNHO+iL/5meDL/4tTOVhg2xjZqZZcouDeCXk
+ wjXZay4orLgHF4YA31ZNmmybP06Tksv4Cw4me6KgF9m0wv8sFicUnPtgjtaMYf84P8QB
+ yLXpagHWq5xJjyROc25EfnxzHz50JHE+GO7JSy4wgpUgWJv1d3soYTGbNlYq3LCcZrlJ
+ ljyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754961947; x=1755566747;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=m6X/uYPl4nxEaUptH7OSLMTtMsCamcbCZRK2Q09ag2k=;
+ b=oitvZiksoPaQyqxPUvpEWbx6m5CgvYa77enEzL9PzP1HYuhQzokGbpv02ePwRzbW9j
+ /pPy+E4VBlzSxTQYz0/6JW1ZJnR6em8Nikx5+fN8UWQjnWmz/ekkuQvr4xQ57cA7jYBh
+ gGAbxNKBbJTePmpR+sptFlOE0GWKbv90CIbccG8E0pleXpkSyH7VMPrxDZ22srZxcB+f
+ +Arv52lG50BF3TCclsCtxCDXoF3CydEWp3xIfvsasmOHhPn+pNgXBWjZQvKXqliTPbqh
+ K5ADerBJ4UT/Pm+l6XEme+p/s/Wxy4mAouxU4wrdjEKNnl5putGKiD92xbSI4RGurO3P
+ PApg==
+X-Gm-Message-State: AOJu0YybL7sSBy3tic/09yJFuo4xR44RcsgF1M4L6sndyFiCkpPt4MnS
+ cHN0e2bMt6le8FemVzmp0nIKT0HzOgwVZfhTs468hbKIWVD73go5un5qWl1NAuHzZuidPMrYaB6
+ ZfwJiSHSsMi6rRtRLX8XLC2k5Uku8nzU=
+X-Gm-Gg: ASbGncsno4Mx4czSmBuFMcLs7Kdl6kgUz5iBl0iGOeml0CdmRa+mf/PNPED3ccXYrNa
+ wvUAfJkQQWqSrrQhW20ohaGAJME3IGUL65Nfj/eX+Ktu7/jknxYqWWdH8GIqtu8+8xgMY1OHYZk
+ P2qdNSwxpTuZ3C23r7cjNMHbvQI5LZhFpXNd6GWAOw3GczIWvw7omRxnG7azfHDaePkvXfZKCpd
+ B/P2PhXyWi8mRYBC4KLiZejbA==
+X-Google-Smtp-Source: AGHT+IFpnEA2huZqlcDRwYD2t/cTp8enZjazDsg6quCQLAgZnza6UebxiENk8p2axkYanbxo3WhgAP/vxeGWfmYt/7A=
+X-Received: by 2002:a17:907:a4a:b0:af9:57ae:dbb3 with SMTP id
+ a640c23a62f3a-afa1dffcb78mr124248766b.22.1754961946344; Mon, 11 Aug 2025
+ 18:25:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 8/9] ram: k3-ddrss: Add support for partial inline ECC
- in multi-DDR systems
-To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <bb@ti.com>,
- <w.egorov@phytec.de>, <s-k6@ti.com>, <marek.vasut+renesas@mailbox.org>
-CC: <u-boot@lists.denx.de>
-References: <20250730133720.3315478-1-n-francis@ti.com>
- <20250730133720.3315478-9-n-francis@ti.com>
- <3c42e330-ae1c-44dc-a933-46260db5421d@ti.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <3c42e330-ae1c-44dc-a933-46260db5421d@ti.com>
+References: <20250807074419.336752-1-cn.liweihao@gmail.com>
+ <20250807074419.336752-11-cn.liweihao@gmail.com>
+ <e19f94a0-4d69-4c63-bbdb-2598e3f5bf68@cherry.de>
+In-Reply-To: <e19f94a0-4d69-4c63-bbdb-2598e3f5bf68@cherry.de>
+From: =?UTF-8?B?5p2O57u06LGq?= <cn.liweihao@gmail.com>
+Date: Tue, 12 Aug 2025 09:25:33 +0800
+X-Gm-Features: Ac12FXyPOgiCXccvZA50R_zkqP26r9DGV0Aga9RCLOu2kIUoVDhGDQIk0YOvA_c
+Message-ID: <CAPEOAkQS_0eHZ5ZKOGqj-+4bZfyXdBDpZSKsQfzxfxaVMei9aQ@mail.gmail.com>
+Subject: Re: [PATCH 10/10] board: rockchip: add rk3368 ymd8_mb support
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, antonio.borneo@foss.st.com, mk7.kang@samsung.com, 
+ gregkh@linuxfoundation.org, semen.protsenko@linaro.org, 
+ mikhail.kshevetskiy@iopsys.eu, bb@ti.com, justin.swartz@risingedge.co.za, 
+ lukasz.czechowski@thaumatec.com, robh@kernel.org, tharvey@gateworks.com, 
+ clement.legoffic@foss.st.com, marek.vasut@mailbox.org, 
+ dinesh.maniyam@altera.com, patrice.chotard@foss.st.com, festevam@gmail.com, 
+ jerome.forissier@linaro.org, andrew.goodbody@linaro.org, 
+ sumit.garg@kernel.org, ag.dev.uboot@gmail.com, rfried.dev@gmail.com, 
+ joe.hershberger@ni.com, jh80.chung@samsung.com, peng.fan@nxp.com, 
+ seanga2@gmail.com, lukma@denx.de, kever.yang@rock-chips.com, 
+ philipp.tomsich@vrull.eu, sjg@chromium.org, trini@konsulko.com, 
+ WeiHao Li <ieiao@outlook.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 12 Aug 2025 09:43:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,123 +106,294 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07/08/25 10:28, Kumar, Udit wrote:
-> 
-> On 7/30/2025 7:07 PM, Neha Malcom Francis wrote:
->> The existing approach does not account for interleaving in the DDRs when
->> setting up regions. There is support for MSMC to calculate the regions
->> for each DDR, so modify k3_ddrss_probe to set the regions accordingly
->> for multi-DDR systems.
->>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   drivers/ram/k3-ddrss/k3-ddrss.c | 58 ++++++++++++++++++++++++++++-----
->>   1 file changed, 50 insertions(+), 8 deletions(-)
->>
->> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c
->> b/drivers/ram/k3-ddrss/k3-ddrss.c
->> index 1c2e5e1835b..e00711a2235 100644
->> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
->> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
->> @@ -828,11 +828,12 @@ static void k3_ddrss_lpddr4_ecc_init(struct
->> k3_ddrss_desc *ddrss)
->>     static int k3_ddrss_probe(struct udevice *dev)
->>   {
->> -    u64 end;
->> +    u64 end, bank0, bank1;
->>       int ret;
->>       struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
->> -    __maybe_unused u32 ddr_ram_size, ecc_res;
->> +    __maybe_unused u32 inst, ddr_ram_size, ecc_res, st;
-> 
-> size of ddr may go above 4G
+Hi Quentin,
 
-For this and the other remaining comments; will address them in v3. Thanks!
-> 
-> 
->>       __maybe_unused struct k3_ddrss_ecc_region *range =
->> &ddrss->ecc_range;
->> +    __maybe_unused struct k3_msmc *msmc_parent = NULL;
->>         debug("%s(dev=%p)\n", __func__, dev);
->>   @@ -873,26 +874,67 @@ static int k3_ddrss_probe(struct udevice *dev)
->>           k3_ddrss_ddr_inline_ecc_base_size_calc(range);
->>             end = ddrss->ecc_range.start + ddrss->ecc_range.range;
->> +        inst = ddrss->instance;
->>           ddr_ram_size = ddrss->ddr_ram_size;
->>           ecc_res = ddrss->ecc_reserved_space;
->> +        bank0 = ddrss->ddr_bank_base[0];
->> +        bank1 = ddrss->ddr_bank_base[1];
->>             if (!range->range) {
->>               /* Configure entire DDR space by default */
->>               debug("%s: Defaulting to protecting entire DDR space
->> using inline ECC\n",
->>                     __func__);
->> -            ddrss->ecc_range.start = ddrss->ddr_bank_base[0];
->> +            ddrss->ecc_range.start = bank0;
->>               ddrss->ecc_range.range = ddr_ram_size - ecc_res;
->>           } else {
->>               ddrss->ecc_range.start = range->start;
->>               ddrss->ecc_range.range = range->range;
->>           }
->>   -        if (end > (ddr_ram_size - ecc_res))
->> -            ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
->> -        else
->> -            ddrss->ecc_regions[0].range = ddrss->ecc_range.range;
->> +        st = ddrss->ecc_range.start;
->> +
->> +        if (!CONFIG_IS_ENABLED(K3_MULTI_DDR)) {
->> +            if (end > (ddr_ram_size - ecc_res))
->> +                ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
->> +            else
->> +                ddrss->ecc_regions[0].range = ddrss->ecc_range.range;
->>   -        ddrss->ecc_regions[0].start = ddrss->ecc_range.start -
->> ddrss->ddr_bank_base[0];
->> +            /* Check in which bank we are */
->> +            if (st > bank1)
->> +                ddrss->ecc_regions[0].start = st - bank1 +
->> ddrss->ddr_bank_size[0];
->> +            else
->> +                ddrss->ecc_regions[0].start = st - bank0;
->> +        } else {
->> +            /* For multi-DDR, we rely on MSMC's calculation of
->> regions for each DDR */
->> +            msmc_parent = kzalloc(sizeof(msmc_parent), GFP_KERNEL);
->> +            if (!msmc_parent)
->> +                return -ENOMEM;
->> +
->> +            msmc_parent = dev_get_priv(dev->parent);
->> +            if (!msmc_parent) {
->> +                printf("%s: could not get MSMC parent to set up
->> inline ECC regions\n",
->> +                       __func__);
->> +                kfree(msmc_parent);
->> +                return -EINVAL;
->> +            }
->> +
->> +            if (msmc_parent->R0[0].start < 0) {
->> +                /* Configure entire DDR space by default */
->> +                ddrss->ecc_regions[0].start = ddrss->ddr_bank_base[0];
->> +                ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
->> +            } else {
->> +                end = msmc_parent->R0[inst].start +
->> msmc_parent->R0[inst].range;
->> +
->> +                if (end > (ddr_ram_size - ecc_res))
->> +                    ddrss->ecc_regions[0].range = ddr_ram_size -
->> ecc_res;
->> +                else
->> +                    ddrss->ecc_regions[0].range =
->> msmc_parent->R0[inst].range;
->> +
->> +                ddrss->ecc_regions[0].start = 
->> msmc_parent->R0[inst].start;
->> +            }
->> +
->> +            kfree(msmc_parent);
->> +        }
->>             k3_ddrss_lpddr4_ecc_init(ddrss);
->>       }
+Thanks for your review.
 
--- 
-Thanking You
-Neha Malcom Francis
+Quentin Schulz <quentin.schulz@cherry.de> =E4=BA=8E2025=E5=B9=B48=E6=9C=881=
+1=E6=97=A5=E5=91=A8=E4=B8=80 23:01=E5=86=99=E9=81=93=EF=BC=9A
+>
+> Hi WeiHao Li,
+>
+> On 8/7/25 9:44 AM, WeiHao Li wrote:
+> > [You don't often get email from cn.liweihao@gmail.com. Learn why this i=
+s important at https://aka.ms/LearnAboutSenderIdentification ]
+> >
+>
+> Please always include a few words in the commit log.
+>
+
+I will add some necessary description in the commit log.
+
+> I believe the description of the board as told in the cover letter is
+> good enough, so start with that maybe :)
+>
+> > Signed-off-by: WeiHao Li <ieiao@outlook.com>
+> > ---
+> >   arch/arm/dts/Makefile                   |   1 +
+> >   arch/arm/dts/rk3368-ymd8-mb-u-boot.dtsi |  44 ++++
+> >   arch/arm/dts/rk3368-ymd8-mb.dts         | 326 +++++++++++++++++++++++=
++
+> >   arch/arm/dts/rk3368.dtsi                | 258 +++++++++++++++++++
+> >   arch/arm/mach-rockchip/rk3368/Kconfig   |   6 +
+> >   board/rockchip/ymd8_mb/Kconfig          |  12 +
+> >   board/rockchip/ymd8_mb/MAINTAINERS      |   6 +
+> >   board/rockchip/ymd8_mb/Makefile         |   7 +
+> >   board/rockchip/ymd8_mb/README           |   1 +
+> >   board/rockchip/ymd8_mb/ymd8_mb_rk3368.c |  19 ++
+> >   configs/ymd8-mb_defconfig               |  72 ++++++
+> >   include/configs/ymd8_mb.h               |  11 +
+> >   12 files changed, 763 insertions(+)
+> >   create mode 100644 arch/arm/dts/rk3368-ymd8-mb-u-boot.dtsi
+> >   create mode 100644 arch/arm/dts/rk3368-ymd8-mb.dts
+> >   create mode 100644 board/rockchip/ymd8_mb/Kconfig
+> >   create mode 100644 board/rockchip/ymd8_mb/MAINTAINERS
+> >   create mode 100644 board/rockchip/ymd8_mb/Makefile
+> >   create mode 100644 board/rockchip/ymd8_mb/README
+> >   create mode 100644 board/rockchip/ymd8_mb/ymd8_mb_rk3368.c
+> >   create mode 100644 configs/ymd8-mb_defconfig
+> >   create mode 100644 include/configs/ymd8_mb.h
+> >
+> > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> > index 0dc7e190eb..1dfd1c5236 100644
+> > --- a/arch/arm/dts/Makefile
+> > +++ b/arch/arm/dts/Makefile
+> > @@ -73,6 +73,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3368) +=3D \
+> >          rk3368-sheep.dtb \
+> >          rk3368-geekbox.dtb \
+> >          rk3368-px5-evb.dtb \
+> > +       rk3368-ymd8-mb.dtb
+> >
+> >   dtb-$(CONFIG_ARCH_S5P4418) +=3D \
+> >          s5p4418-nanopi2.dtb
+> > diff --git a/arch/arm/dts/rk3368-ymd8-mb-u-boot.dtsi b/arch/arm/dts/rk3=
+368-ymd8-mb-u-boot.dtsi
+> > new file mode 100644
+> > index 0000000000..925264e620
+> > --- /dev/null
+> > +++ b/arch/arm/dts/rk3368-ymd8-mb-u-boot.dtsi
+> > @@ -0,0 +1,44 @@
+> > +// SPDX-License-Identifier: GPL-2.0+ OR X11
+> > +/*
+> > + * (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
+> > + */
+> > +
+>
+> I'm quite sure Theobroma didn't work on that, and not in 2017 :)
+>
+> Please remove us (Theobroma got renamed to Cherry Embedded Solutions
+> last year) from this copyright notice and provide the appropriate
+> copyright holder there instead.
+>
+
+Got it.
+
+> > +#include "rk3368-u-boot.dtsi"
+> > +
+> > +&pinctrl {
+> > +       bootph-all;
+> > +};
+> > +
+> > +&service_msch {
+> > +       bootph-all;
+> > +};
+> > +
+> > +&dmc {
+> > +       bootph-all;
+> > +       status =3D "okay";
+> > +};
+> > +
+> > +&pmugrf {
+> > +       bootph-all;
+> > +};
+> > +
+> > +&cru {
+> > +       bootph-all;
+> > +};
+> > +
+> > +&grf {
+> > +       bootph-all;
+> > +};
+> > +
+> > +&uart2 {
+> > +       bootph-all;
+> > +       clock-frequency =3D <24000000>;
+> > +};
+> > +
+> > +&pwm1 {
+> > +       bootph-all;
+> > +};
+> > +
+> > +&vop {
+> > +       bootph-all;
+> > +};
+> > diff --git a/arch/arm/dts/rk3368-ymd8-mb.dts b/arch/arm/dts/rk3368-ymd8=
+-mb.dts
+> > new file mode 100644
+> > index 0000000000..661390b9d5
+> > --- /dev/null
+> > +++ b/arch/arm/dts/rk3368-ymd8-mb.dts
+>
+> Are you planning to support this board in upstream Linux as well? I'm
+> sure Heiko would welcome it. If so, maybe think about selecting
+> OF_UPSTREAM for your board once the device tree is merged upstream and
+> appears in dts/upstream directory in U-Boot? It may not be easy to do as
+> no RK3368-based board has been migrated to use OF_UPSTREAM yet.
+>
+> We typically do not allow (in Rockchip) to support new boards without
+> OF_UPSTREAM, but considering how old and how little activity we see for
+> RK3368 maybe Kever will let this pass?
+>
+
+Yes, I'm planning to suport this board in upstream Linux. but it may take s=
+ome
+time.
+
+Maybe I can separate this patch serial to 2 set, one for driver fix, anothe=
+r for
+board support., the board support patchset submit after upstream Linux merg=
+ed?
+
+> > @@ -0,0 +1,326 @@
+> > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> > +/*
+> > + * Copyright (c) 2025 Weihao Li
+> > + */
+> > +
+> > +/dts-v1/;
+> > +#include "rk3368.dtsi"
+> > +#include <dt-bindings/input/input.h>
+> > +
+> > +/ {
+> > +       model =3D "YMD8_MB";
+> > +       compatible =3D "rockchip,YMD8_MB", "rockchip,rk3368";
+>
+> The first compatible isn't right if Rockchip isn't the actual
+> manufacturer/seller of the whole product. I couldn't see anything on the
+> PCB picture you posted on your wiki but maybe there's some information
+> on the casing or elsewhere?
+
+I do not find any manufacturer info for now, I will try to search later.
+
+>
+> [...]
+>
+> > diff --git a/arch/arm/dts/rk3368.dtsi b/arch/arm/dts/rk3368.dtsi
+> > index 4c64fbefb4..77ff551681 100644
+> > --- a/arch/arm/dts/rk3368.dtsi
+> > +++ b/arch/arm/dts/rk3368.dtsi
+>
+> Nope, this we won't allow.
+>
+> If you add support for a board, don't modify the device tree of the SoC
+> in the same patch. Please separate those changes from the patch adding
+> supoprt for the board.
+>
+> Here, because the rk3368.dtsi already exists, you'll need a patch per
+> logical thing you are adding. There are a few I could notice here:
+> - hdmi
+> - lvds
+> - rgb
+> - edp
+> - dsi
+> - vop
+>
+> First, only add what you tested. I believe this would be DSI+VOP only?
+>
+
+It's reasonable, I'll fix that.
+
+> Second, where did you get all the info? I don't see anything in upstream
+> Linux's rk3368.dtsi so it must come from somewhere else? Where? Please
+> specify this in the commit logs. it would be very nice to have this sent
+> and reviewed by the Linux kernel community as well.
+>
+
+I cross-referenced the downstream U-Boot and Linux repositories of
+Rockchip and made some reasonable inferences based on drivers for the
+same series of SoCs.
+
+I will add this information to commit log at next submit.
+
+> [...]
+>
+> > diff --git a/arch/arm/mach-rockchip/rk3368/Kconfig b/arch/arm/mach-rock=
+chip/rk3368/Kconfig
+> > index a7be30bbd8..1d05a6784f 100644
+> > --- a/arch/arm/mach-rockchip/rk3368/Kconfig
+> > +++ b/arch/arm/mach-rockchip/rk3368/Kconfig
+> > @@ -21,6 +21,11 @@ config TARGET_EVB_PX5
+> >            HDMI video input/output interface, audio codec ES8396,
+> >            WIFI/BT (on RTL8723BS), Gsensor BMA250E and light&proximity
+> >            sensor STK3410.
+> > +
+> > +config TARGET_YMD8_MB
+> > +       select BOARD_EARLY_INIT_R
+> > +       bool "YMD8_MB board"
+> > +
+>
+> Please add a help text so we have some clue what this board actually is.
+>
+
+Got it.
+
+> [...]
+>
+> > diff --git a/board/rockchip/ymd8_mb/MAINTAINERS b/board/rockchip/ymd8_m=
+b/MAINTAINERS
+> > new file mode 100644
+> > index 0000000000..a5156b8be3
+> > --- /dev/null
+> > +++ b/board/rockchip/ymd8_mb/MAINTAINERS
+> > @@ -0,0 +1,6 @@
+> > +RK3368 YMD8_MB Board
+> > +M:     Weihao Li <cn.liweihao@gmail.com>
+> > +S:     Maintained
+> > +F:     board/rockchip/ymd8_mb_rk3368/
+>
+> This is also missing the new device tree you added which you need to
+> maintain.
+
+Got it
+
+>
+> > +F:     include/configs/ymd8_mb.h
+> > +F:     configs/ymd8-mb_defconfig
+> > diff --git a/board/rockchip/ymd8_mb/Makefile b/board/rockchip/ymd8_mb/M=
+akefile
+> > new file mode 100644
+> > index 0000000000..a3a34edb43
+> > --- /dev/null
+> > +++ b/board/rockchip/ymd8_mb/Makefile
+> > @@ -0,0 +1,7 @@
+> > +#
+> > +# (C) Copyright 2016 Rockchip Electronics Co., Ltd
+> > +#
+> > +# SPDX-License-Identifier:     GPL-2.0+
+> > +#
+> > +
+> > +obj-y  +=3D ymd8_mb_rk3368.o
+> > diff --git a/board/rockchip/ymd8_mb/README b/board/rockchip/ymd8_mb/REA=
+DME
+> > new file mode 100644
+> > index 0000000000..de980f2f23
+> > --- /dev/null
+> > +++ b/board/rockchip/ymd8_mb/README
+> > @@ -0,0 +1 @@
+> > +see board/rockchip/sheep_rk3368/README
+>
+> I don't think that's right.
+>
+> Remove this file and add a proper entry in doc/board/rockchip for this
+> board (or its own documentation file like we did for Theobroma boards,
+> up to you if there are important details that typically differ from
+> other Rockchip boards).
+
+I forgot to modify it when I separate patch, I'll adjust that.
+
+>
+> Cheers,
+> Quentin
+
+Best regards,
+WeiHao
