@@ -4,72 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67601C87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 10:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88BA5C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 10:26:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E67928329F;
-	Tue, 12 Aug 2025 12:18:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BFFAE82E34;
+	Tue, 12 Aug 2025 12:26:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lat4uvuF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y2HeX3Us";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 755DA832DA; Tue, 12 Aug 2025 12:18:55 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8614A83287
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 12:18:52 +0200 (CEST)
+ id 9A3688317B; Tue, 12 Aug 2025 12:26:10 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CF12D82D32
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 12:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57CAIjdA1800820;
- Tue, 12 Aug 2025 05:18:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1754993925;
- bh=Kj1z3VRnFEcGqrBIFklgEB0duVcauWjqteJ0TyhpiPQ=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=lat4uvuFep02sc5vjKkFgMzLw5xp3ACrb8dBc1bd6fAElKVa40UIbWvAWz1erA7OI
- 1G7x4T0BhawxIH4WG89kRhuLKnaxbHBxbkcV0SjBL4zSuD2HHEan1Tl50eU4yHqflg
- WbwQTozvJVDu8kruGzL1tMeKPQhJK2whTtpBelDc=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57CAIjqr3746132
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 12 Aug 2025 05:18:45 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 12
- Aug 2025 05:18:44 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 12 Aug 2025 05:18:44 -0500
-Received: from [172.24.235.200]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57CAId3r191508;
- Tue, 12 Aug 2025 05:18:40 -0500
-Message-ID: <52fc7042-f7c2-4161-b044-ba4000e13ef0@ti.com>
-Date: Tue, 12 Aug 2025 15:48:39 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3b7834f2e72so2580785f8f.2
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 03:26:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754994367; x=1755599167; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=abTm/152PcXbzn3M1086/LJcy4TplDgPOCZPqSCwstI=;
+ b=y2HeX3UslikHaPgb1oViekXpAbZ/WYoNvqWXOf6VZT30AK9jyZO8VY7wSoSAs8dIyG
+ 1inTkniQ0oP3mT8dIGC2QbS/lYHgSequWI3puaZcsR6HNqcIPMcrW+mf+VrO8/1vAwCF
+ +vTTM/nTQ5r5OyWhMram+jPBt5b98oNb/9kVMGh1MojhMOxI8bQTQxhfSc3Gn/c8GhWM
+ CwogwcCnkGmZh+Zt065TPSEI+bwYFUy3a1xEo6kBaEKbyjG+mwrF9XELwxsiuJ7MDj6Z
+ JCyXWPMlq0g+PexRJNLz/Q4B28zSxKaSPtkH5YgXiP3l4Lu98ifvHd1/JoQ4Y5+TFlFW
+ vgNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754994367; x=1755599167;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=abTm/152PcXbzn3M1086/LJcy4TplDgPOCZPqSCwstI=;
+ b=H5fc6ZKHcJ0u1FGuDy/WrSsHycyNm2ZaLfp+opJ4SRv82BCZYRyAO/hQ+GZ/nUc23q
+ KW1Sx/HGRSBr4jkpnEkiDe/B/6Of6WcB/Ge72VRGAPiFzGCxLtTChQDvWWuH0N22tXwc
+ +I2VWgiBJTxDZZve+ouNN9D2PQtFq7IQIgubgCPGtzqzQUXss+W1roXov6FDL2I4K9Xg
+ ZGXw7+g/Z3AwjQCvLWofJ9yZ2Epu2Ls+MlQ0aoY+YgVMpAeaO7NGLrboGxtEt8ZMe6Na
+ K8RqxECmTsLfbI5HRb8QYWhkkwakFl4PdWuYc+4oRG8urUxMUaJ7VPH/Yq79FpQR856T
+ 97nw==
+X-Gm-Message-State: AOJu0YxwL15cZaYLgBTS2rbns6THUDbNma3th9ZENKOj708ISfp6GpKY
+ iYrYc07SQyPSZPRkBuE/JwI51SYRf+SA3/FgxBgDL4rt9Rhq8zAeyWDxcAIdnExc0bp9SDm2RGG
+ hgLW+
+X-Gm-Gg: ASbGncs0G/AiBZrGQzu5n7GvLGZIKH7mocpb8kfDquNM7lkwXH4qCNyv+pLLfVkJcr3
+ G3IFHThZ1sS+OY34QQHL/lBPSkwUoRc6YfacV32u4vpRQIMMucBQP+lN/PxByTRl/tRzlrkJmsu
+ 38guoleYKkRCOijy6WqD8f6S5LAhXfVjNBaRQEsNeVt2Ha8Gebc179mgPbLoEe/y5qUIs6f1fCl
+ sVa8iII9Qy4Sy+B9NGcQiBj/hiVaazNVkwl++ZiVMHDCR60OIepHVuueMHRQZSDLKzg14McyqVM
+ 8XsegPOn3ZQPys7meU0oC7rAOuXMReT4astszOEW4lxKMsaBk+G8Iqm99YZiZRU+2EcJT2fu+ey
+ TZYBXIVRc5umYT01Z5xE5DVuK7upYBtsa/CBONkW4MFF8msQJC8E=
+X-Google-Smtp-Source: AGHT+IGU4QWypBUtn9JuM2kKgfKoak2s9a9tWO7HgKRJftOpcsqPATBmup+JgJPKyxCL8CEYEYi5Eg==
+X-Received: by 2002:a5d:5849:0:b0:3b8:f8e7:7fea with SMTP id
+ ffacd0b85a97d-3b910fceceemr2315387f8f.7.1754994367212; 
+ Tue, 12 Aug 2025 03:26:07 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:97a2:1bc7:9f2e:6519])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b910180aebsm4312717f8f.59.2025.08.12.03.26.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Aug 2025 03:26:06 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Tue, 12 Aug 2025 11:26:06 +0100
+Subject: [PATCH] sound: maxim_codec: Fix coding mistake
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/5] binman: Fix FIT image overlap issues
-To: Aristo Chen <jj251510319013@gmail.com>, <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <al.kochet@gmail.com>, <paul.henrys_ext@softathome.com>, <bb@ti.com>,
- <y.moog@phytec.de>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>, <afd@ti.com>,
- <d.schultz@phytec.de>, <d-gole@ti.com>, <ravi@prevas.dk>,
- <carlos.lopezr4096@gmail.com>, Aristo Chen <aristo.chen@canonical.com>
-References: <20250729125022.4220-1-aristo.chen@canonical.com>
- <20250729125022.4220-2-aristo.chen@canonical.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250729125022.4220-2-aristo.chen@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Message-Id: <20250812-maxim_codec-v1-1-3941a84c0795@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAL0Wm2gC/x2NwQqDMBAFf0X2bCBGbEN/RUTW9bXuwShJKQHx3
+ 409zsAwByVERaJXdVDET5NuoUBTVyQLhw+MzoXJWddZ3zizctZ1lG2GGIfu+Wi9b60wlWLiBDN
+ FDrLcTUD+3nqPeGv+T/rhPC9c7WrNdAAAAA==
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,83 +100,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
+In maxim_i2c_read the code mistakenly just returned the return value
+from dm_i2c_read leaving the following code unreachable. Instead assign
+ret to be the return value from dm_i2c_read so that the following code
+can operate as expected.
 
-On 29/07/25 18:18, Aristo Chen wrote:
-> Fix three binman tests that has memory region overlap issue, the test
-> cases needed to be updated to use non-overlapping memory layouts.
-> 
-> * Tests fixed:
->   - testFitFirmwareLoadables
->   - testFitSignSimple
->   - testFitSignNoSingatureNodes
+This issue was found by Smatch.
 
-nitpick: s/Singature/Signature
-> 
-> * Changes made:
->   Updated DTB test files to change U-Boot load addresses from 0x0 to
->   0x2000 to avoid overlapping with ATF in the 0x10-0xfc range:
->   - 276_fit_firmware_loadables.dts
->   - 340_fit_signature.dts
->   - 342_fit_signature.dts
-> 
-> An upcoming commit will validate if the memory region is overlapped
-> 
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-> ---
->  tools/binman/test/276_fit_firmware_loadables.dts | 4 ++--
->  tools/binman/test/340_fit_signature.dts          | 4 ++--
->  tools/binman/test/342_fit_signature.dts          | 4 ++--
->  3 files changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/tools/binman/test/276_fit_firmware_loadables.dts b/tools/binman/test/276_fit_firmware_loadables.dts
-> index 2f79cdc9bb8..d344036a11a 100644
-> --- a/tools/binman/test/276_fit_firmware_loadables.dts
-> +++ b/tools/binman/test/276_fit_firmware_loadables.dts
-> @@ -19,8 +19,8 @@
->  					arch = "arm64";
->  					os = "u-boot";
->  					compression = "none";
-> -					load = <0x00000000>;
-> -					entry = <0x00000000>;
-> +					load = <0x00002000>;
-> +					entry = <0x00002000>;
->  
->  					u-boot-nodtb {
->  					};
-> diff --git a/tools/binman/test/340_fit_signature.dts b/tools/binman/test/340_fit_signature.dts
-> index 9dce62e52de..1c25d52cba4 100644
-> --- a/tools/binman/test/340_fit_signature.dts
-> +++ b/tools/binman/test/340_fit_signature.dts
-> @@ -20,8 +20,8 @@
->  					arch = "arm64";
->  					os = "u-boot";
->  					compression = "none";
-> -					load = <0x00000000>;
-> -					entry = <0x00000000>;
-> +					load = <0x00002000>;
-> +					entry = <0x00002000>;
->  
->  					u-boot-nodtb {
->  					};
-> diff --git a/tools/binman/test/342_fit_signature.dts b/tools/binman/test/342_fit_signature.dts
-> index 267105d0f68..2ac600b1c70 100644
-> --- a/tools/binman/test/342_fit_signature.dts
-> +++ b/tools/binman/test/342_fit_signature.dts
-> @@ -20,8 +20,8 @@
->  					arch = "arm64";
->  					os = "u-boot";
->  					compression = "none";
-> -					load = <0x00000000>;
-> -					entry = <0x00000000>;
-> +					load = <0x00002000>;
-> +					entry = <0x00002000>;
->  
->  					u-boot-nodtb {
->  					};
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/sound/maxim_codec.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+diff --git a/drivers/sound/maxim_codec.c b/drivers/sound/maxim_codec.c
+index 98f094c0e9a..505a739ad7d 100644
+--- a/drivers/sound/maxim_codec.c
++++ b/drivers/sound/maxim_codec.c
+@@ -45,7 +45,7 @@ unsigned int maxim_i2c_read(struct maxim_priv *priv, unsigned int reg,
+ {
+ 	int ret;
+ 
+-	return dm_i2c_read(priv->dev, reg, data, 1);
++	ret = dm_i2c_read(priv->dev, reg, data, 1);
+ 	if (ret != 0) {
+ 		debug("%s: Error while reading register %#04x\n",
+ 		      __func__, reg);
 
+---
+base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
+change-id: 20250812-maxim_codec-2e57638830ca
+
+Best regards,
 -- 
-Thanking You
-Neha Malcom Francis
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
