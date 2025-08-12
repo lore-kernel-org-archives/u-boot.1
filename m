@@ -4,81 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE427CA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 15:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FEEAC87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 16:01:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A81982F8F;
-	Tue, 12 Aug 2025 17:59:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B71348340C;
+	Tue, 12 Aug 2025 18:01:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dwrQnDgT";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D3158313F; Tue, 12 Aug 2025 17:59:57 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6C841832DA; Tue, 12 Aug 2025 17:17:52 +0200 (CEST)
+Received: from cstnet.cn (smtp81.cstnet.cn [159.226.251.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C34F82E37
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 17:59:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6E8D83280
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 17:17:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=iscas.ac.cn
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-30799a41109so2102641fac.2
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:59:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755014394; x=1755619194; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rLG5z/Qt6/EVcveDm4BzlfKBnbc1/u57gcoxAm9cfDI=;
- b=dwrQnDgTd5f1LJFnCnD4MTs9k0Qt6uM/steNRG6emCVB1QtnwTnE7wwRVSDobdAOKv
- lCdpd8ZK24fZ3Z4DVU2MfO7x9MRirPdlpkZPuO1Hy0Ti0QwYpQH+eU3ylW5jBKzssbMh
- 1gJ0EfOWThnzuWkCjcEUwzpHG6Iq4cGd5/XA0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755014394; x=1755619194;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rLG5z/Qt6/EVcveDm4BzlfKBnbc1/u57gcoxAm9cfDI=;
- b=sfAfKkk9UWs7Ku6zaQY6aKFiF5UzZi2Y9B6CkzkADK16mgNf3yXX+5qP5qPYO/sFeN
- X52O7SzEOMSUPkuvBFkcZHwK3PBc76igywa42UwRybmuEP7INhOEEnJFw6+divBwyHFM
- YeTj5fE2Y3Uu0Vb0oDCBc9Yh+8g31cQ1RdWPWhHGLYSBnAcrKtx4/WdqqmDN8uSEhcLK
- TMG5u7ujLKdQRfAelsXTZwYLyoR+htNiXNqDaoVB5BjEsiGLbex7vvBsjK8jtSZSxt68
- 0ByFvtfmXpGFNF+I0CoPA4n1eWVauWRpGnvsSrwIK90PtQSgHaQY5cv+kOc6UNLl9Wu3
- OXsw==
-X-Gm-Message-State: AOJu0Yy59PKi5YTpisAwprplsWDhEtcpGhePmHAQ62Y9LbVREmck6YT5
- KximxlOui7yRy3f6AvDxqSTEHBHxF9oUANHSIZ214NJjwYwp1P4r0mhRjf0YrYX/+io=
-X-Gm-Gg: ASbGncvIM7hvAJYDtvn3xCf95L05THzm1Fv7qxqjyMh2zn6Zbivj06AxqEmHZTxjeLF
- orYMJDetn2mdHkVv+9myd/1nzcfJH1oXia3XwSsiL5lpbehrjhQT0H1RkRyp4cHxw2Sv3ogVhAH
- H3gL9q0NzBx3f45u1UUg2mcjn8QfwM9kLDIeavDgSs/E8gIdKnCJYl4I8H/Db1KYA++L6BraH1T
- QTDp37UZugk5QH/fkvi0eNvkrdAdDonbgumgd8NpWNcXR73Ed5/l1AbLkxs/dXfRYfkg5Qa0nm8
- 1OaHxaJl6s/UQVK4fata+GWQwSdnVbP95f/85aJk8QPU58ILrwxnK/krZUifADRz7Q1gEndIUtw
- +RrFfpiwrUkU3YRJ9LsgM0X3uzEYMob+SxBWM0tXzDeNNZdi3s6uWF2+q
-X-Google-Smtp-Source: AGHT+IGV/T0jak6mhqs81uh2yYy5jg3so1xDVYXby+L8k0eBlMDJmCuUbeh+AWZyxP+q25ikT73BIQ==
-X-Received: by 2002:a05:6871:c1c6:b0:2d5:2955:aa6a with SMTP id
- 586e51a60fabf-30c94e74628mr2273486fac.7.1755014394060; 
- Tue, 12 Aug 2025 08:59:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30b84945a84sm7008024fac.11.2025.08.12.08.59.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 08:59:53 -0700 (PDT)
-Date: Tue, 12 Aug 2025 09:59:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andri Yngvason <andri@yngvason.is>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] drivers: led: Add WS28XX compatible LED driver
-Message-ID: <20250812155951.GW124814@bill-the-cat>
-References: <20250812153048.2775200-1-andri@yngvason.is>
+ spf=pass smtp.mailfrom=wangruikang@iscas.ac.cn
+Received: from [192.168.0.111] (unknown [114.241.87.235])
+ by APP-03 (Coremail) with SMTP id rQCowADnfX8XW5to_nk3Cw--.36595S2;
+ Tue, 12 Aug 2025 23:17:43 +0800 (CST)
+Message-ID: <8397369a-9b0b-4798-9c30-3a81165657d6@iscas.ac.cn>
+Date: Tue, 12 Aug 2025 23:17:42 +0800
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DQ6FF16HnJGynz45"
-Content-Disposition: inline
-In-Reply-To: <20250812153048.2775200-1-andri@yngvason.is>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>
+From: Vivian Wang <wangruikang@iscas.ac.cn>
+Subject: riscv: v2025.10-rc2 fails on QEMU with "Failed to reserve memory for
+ fdt"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
+X-CM-TRANSID: rQCowADnfX8XW5to_nk3Cw--.36595S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3Xw1Dur45KF15JF1xXrWUJwb_yoW7Zr1rpr
+ 4xGry5CrW8Wr18Xw18Jw1UX3yjyr4jya4UJry5JF1rCry5Wry0qF1DWr129r1DJr4xXF17
+ XF1UGryjva48JaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9Ib7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4
+ A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IE
+ w4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMc
+ vjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACY4xI67k04243AVAKzVAKj4xxM4xv
+ F2IEb7IF0Fy26I8I3I1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2
+ IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v2
+ 6r1Y6r17MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2
+ IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv
+ 67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l6VACY4xI67k04243Ab
+ IYCTnIWIevJa73UjIFyTuYvjxUgG-eDUUUU
+X-Originating-IP: [114.241.87.235]
+X-CM-SenderInfo: pzdqw2pxlnt03j6l2u1dvotugofq/
+X-Mailman-Approved-At: Tue, 12 Aug 2025 18:01:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,41 +72,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+SGksDQoNCk9uIFFFTVUgMTAuMC4yIChOaXhPUyB1bnN0YWJsZSksIFUtQm9vdCB2MjAyNS4x
+MC1yYzIgd2l0aA0KcWVtdS1yaXNjdjY0X3Ntb2RlX2RlZmNvbmZpZyBmYWlscyB0byBib290
+IGEgbG9hZGVkIGtlcm5lbCwgd2l0aCBhDQoiRmFpbGVkIHRvIHJlc2VydmUgbWVtb3J5IGZv
+ciBmZHQiIGVycm9yLiBFeHBsaWNpdGx5IGxvYWRpbmcgYW4gRkRUDQpzZWVtcyB0byBmaXgg
+dGhpcywgc28gdGhpcyBsb29rcyBsaWtlIGEgcHJvYmxlbSB3aXRoIHJldXNpbmcgdGhlIGJv
+b3QgRkRULg0KDQpNeSBzdGVwcyBhcmU6DQoNCm1rZGlyIC1wIHZtc2hhcmUvZXh0bGludXgN
+CmVjaG8gJ2xhYmVsIDAnID4gdm1zaGFyZS9leHRsaW51eC9leHRsaW51eC5jb25mDQplY2hv
+ICcgIGxpbnV4IC9JbWFnZScgPj4gdm1zaGFyZS9leHRsaW51eC9leHRsaW51eC5jb25mDQpj
+cCAuLi4vSW1hZ2Ugdm1zaGFyZS8gIyBHcmFiIGEgTGludXgga2VybmVsDQpxZW11LXN5c3Rl
+bS1yaXNjdjY0IC1tIDFHIC1NIHZpcnQgLW5vZ3JhcGhpYyAta2VybmVsIHUtYm9vdC5iaW4g
+XA0KwqAgwqAgLWRyaXZlIGZpbGU9ZmF0OnJvOnZtc2hhcmUsZm9ybWF0PXJhdyxyZWFkLW9u
+bHk9b24NCg0KUmVzdWx0aW5nIGluOg0KDQpEZXZpY2UgMDogMWFmNCBWaXJ0SU8gQmxvY2sg
+RGV2aWNlDQrCoMKgwqDCoMKgwqDCoMKgwqDCoMKgVHlwZTogSGFyZCBEaXNrDQrCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgQ2FwYWNpdHk6IDUwNC4wIE1CID0gMC40IEdCICgxMDMyMTkyIHgg
+NTEyKQ0KLi4uIGlzIG5vdyBjdXJyZW50IGRldmljZQ0KU2Nhbm5pbmcgdmlydGlvIDA6MS4u
+Lg0KRm91bmQgL2V4dGxpbnV4L2V4dGxpbnV4LmNvbmYNClJldHJpZXZpbmcgZmlsZTogL2V4
+dGxpbnV4L2V4dGxpbnV4LmNvbmYNCjE6IMKgwqDCoMKgwqAwDQpSZXRyaWV2aW5nIGZpbGU6
+IC9JbWFnZQ0KTW92aW5nIEltYWdlIGZyb20gMHg4NDAwMDAwMCB0byAweDgwMjAwMDAwLCBl
+bmQ9MHg4MWU4ODAwMA0KIyMgRmxhdHRlbmVkIERldmljZSBUcmVlIGJsb2IgYXQgYmVlOGY2
+NDANCsKgwqBCb290aW5nIHVzaW5nIHRoZSBmZHQgYmxvYiBhdCAweGJlZThmNjQwDQpXb3Jr
+aW5nIEZEVCBzZXQgdG8gYmVlOGY2NDANCkZhaWxlZCB0byByZXNlcnZlIG1lbW9yeSBmb3Ig
+ZmR0IGF0IDB4YmVlOGY2NDANCkZEVCBjcmVhdGlvbiBmYWlsZWQhIGhhbmdpbmcuLi4jIyMg
+RVJST1IgIyMjIFBsZWFzZSBSRVNFVCB0aGUgYm9hcmQgIyMjDQoNCihTZWUgYm90dG9tIGZv
+ciBmdWxsIG91dHB1dCBpbmNsdWRpbmcgT3BlblNCSSkNCg0KVGhlIHNhbWUgc3RlcHMgc3Vj
+Y2VlZHMgd2l0aCBVLUJvb3QgMjAyNS4wNywgc28gdGhpcyBhcHBlYXJzIHRvIGJlIGENCnJl
+Z3Jlc3Npb24uIEkgaGF2ZW4ndCB5ZXQgZG9uZSBhIGJpc2VjdGlvbiBvciBhbnkgKHN1Y2Nl
+c3NmdWwpDQpkZWJ1Z2dpbmcsIGJ1dCB0aGlzIGNoZWNrIHNlZW1zIHRvIGJlIGFkZGVkIGlu
+IFsxXS4NCg0KU3VnaG9zaCBHYW51OiBUaGlzIG1lc3NhZ2Ugc2VlbXMgdG8gYmUgYWRkZWQg
+YnkgWzFdLiBEbyB5b3UgaGF2ZSBhbnkgaWRlYT8NCg0KVml2aWFuICJkcmFtZm9yZXZlciIg
+V2FuZw0KDQpbMV06DQpodHRwczovL2xvcmUua2VybmVsLm9yZy91LWJvb3QvMjAyNTA2MTcx
+MDQzNDYuMTM3OTk4MS0xLXN1Z2hvc2guZ2FudUBsaW5hcm8ub3JnLw0KDQoNCkZ1bGwgbG9n
+IG91dHB1dDoNCg0KT3BlblNCSSB2MS41LjENCsKgIMKgX19fX8KgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIF9fX19fIF9fX18gX19fX18NCsKgIC8gX18gXMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIC8gX19fX3zCoCBfIFxfwqAgwqBffA0KwqB8IHzCoCB8IHxfIF9fwqAg
+wqBfX18gXyBfXyB8IChfX18gfCB8XykgfHwgfA0KwqB8IHzCoCB8IHwgJ18gXCAvIF8gXCAn
+XyBcIFxfX18gXHzCoCBfIDwgfCB8DQrCoHwgfF9ffCB8IHxfKSB8wqAgX18vIHwgfCB8X19f
+XykgfCB8XykgfHwgfF8NCsKgIFxfX19fL3wgLl9fLyBcX19ffF98IHxffF9fX19fL3xfX19f
+L19fX19ffA0KwqAgwqAgwqAgwqAgfCB8DQrCoCDCoCDCoCDCoCB8X3wNCg0KUGxhdGZvcm0g
+TmFtZcKgIMKgIMKgIMKgIMKgIMKgIMKgOiByaXNjdi12aXJ0aW8scWVtdQ0KUGxhdGZvcm0g
+RmVhdHVyZXPCoCDCoCDCoCDCoCDCoDogbWVkZWxlZw0KUGxhdGZvcm0gSEFSVCBDb3VudMKg
+IMKgIMKgIMKgOiAxDQpQbGF0Zm9ybSBJUEkgRGV2aWNlwqAgwqAgwqAgwqA6IGFjbGludC1t
+c3dpDQpQbGF0Zm9ybSBUaW1lciBEZXZpY2XCoCDCoCDCoDogYWNsaW50LW10aW1lciBAIDEw
+MDAwMDAwSHoNClBsYXRmb3JtIENvbnNvbGUgRGV2aWNlwqAgwqA6IHVhcnQ4MjUwDQpQbGF0
+Zm9ybSBIU00gRGV2aWNlwqAgwqAgwqAgwqA6IC0tLQ0KUGxhdGZvcm0gUE1VIERldmljZcKg
+IMKgIMKgIMKgOiAtLS0NClBsYXRmb3JtIFJlYm9vdCBEZXZpY2XCoCDCoCA6IHN5c2Nvbi1y
+ZWJvb3QNClBsYXRmb3JtIFNodXRkb3duIERldmljZcKgIDogc3lzY29uLXBvd2Vyb2ZmDQpQ
+bGF0Zm9ybSBTdXNwZW5kIERldmljZcKgIMKgOiAtLS0NClBsYXRmb3JtIENQUEMgRGV2aWNl
+wqAgwqAgwqAgOiAtLS0NCkZpcm13YXJlIEJhc2XCoCDCoCDCoCDCoCDCoCDCoCDCoDogMHg4
+MDAwMDAwMA0KRmlybXdhcmUgU2l6ZcKgIMKgIMKgIMKgIMKgIMKgIMKgOiAzMjcgS0INCkZp
+cm13YXJlIFJXIE9mZnNldMKgIMKgIMKgIMKgIDogMHg0MDAwMA0KRmlybXdhcmUgUlcgU2l6
+ZcKgIMKgIMKgIMKgIMKgIDogNzEgS0INCkZpcm13YXJlIEhlYXAgT2Zmc2V0wqAgwqAgwqAg
+OiAweDQ5MDAwDQpGaXJtd2FyZSBIZWFwIFNpemXCoCDCoCDCoCDCoCA6IDM1IEtCICh0b3Rh
+bCksIDIgS0IgKHJlc2VydmVkKSwgMTEgS0IgKHVzZWQpLCAyMSBLQiAoZnJlZSkNCkZpcm13
+YXJlIFNjcmF0Y2ggU2l6ZcKgIMKgIMKgOiA0MDk2IEIgKHRvdGFsKSwgNDE2IEIgKHVzZWQp
+LCAzNjgwIEIgKGZyZWUpDQpSdW50aW1lIFNCSSBWZXJzaW9uwqAgwqAgwqAgwqA6IDIuMA0K
+DQpEb21haW4wIE5hbWXCoCDCoCDCoCDCoCDCoCDCoCDCoCA6IHJvb3QNCkRvbWFpbjAgQm9v
+dCBIQVJUwqAgwqAgwqAgwqAgwqA6IDANCkRvbWFpbjAgSEFSVHPCoCDCoCDCoCDCoCDCoCDC
+oCDCoDogMCoNCkRvbWFpbjAgUmVnaW9uMDDCoCDCoCDCoCDCoCDCoCA6IDB4MDAwMDAwMDAw
+MDEwMDAwMC0weDAwMDAwMDAwMDAxMDBmZmYgTTogKEksUixXKSBTL1U6IChSLFcpDQpEb21h
+aW4wIFJlZ2lvbjAxwqAgwqAgwqAgwqAgwqAgOiAweDAwMDAwMDAwMTAwMDAwMDAtMHgwMDAw
+MDAwMDEwMDAwZmZmIE06IChJLFIsVykgUy9VOiAoUixXKQ0KRG9tYWluMCBSZWdpb24wMsKg
+IMKgIMKgIMKgIMKgIDogMHgwMDAwMDAwMDAyMDAwMDAwLTB4MDAwMDAwMDAwMjAwZmZmZiBN
+OiAoSSxSLFcpIFMvVTogKCkNCkRvbWFpbjAgUmVnaW9uMDPCoCDCoCDCoCDCoCDCoCA6IDB4
+MDAwMDAwMDA4MDA0MDAwMC0weDAwMDAwMDAwODAwNWZmZmYgTTogKFIsVykgUy9VOiAoKQ0K
+RG9tYWluMCBSZWdpb24wNMKgIMKgIMKgIMKgIMKgIDogMHgwMDAwMDAwMDgwMDAwMDAwLTB4
+MDAwMDAwMDA4MDAzZmZmZiBNOiAoUixYKSBTL1U6ICgpDQpEb21haW4wIFJlZ2lvbjA1wqAg
+wqAgwqAgwqAgwqAgOiAweDAwMDAwMDAwMGM0MDAwMDAtMHgwMDAwMDAwMDBjNWZmZmZmIE06
+IChJLFIsVykgUy9VOiAoUixXKQ0KRG9tYWluMCBSZWdpb24wNsKgIMKgIMKgIMKgIMKgIDog
+MHgwMDAwMDAwMDBjMDAwMDAwLTB4MDAwMDAwMDAwYzNmZmZmZiBNOiAoSSxSLFcpIFMvVTog
+KFIsVykNCkRvbWFpbjAgUmVnaW9uMDfCoCDCoCDCoCDCoCDCoCA6IDB4MDAwMDAwMDAwMDAw
+MDAwMC0weGZmZmZmZmZmZmZmZmZmZmYgTTogKCkgUy9VOiAoUixXLFgpDQpEb21haW4wIE5l
+eHQgQWRkcmVzc8KgIMKgIMKgIDogMHgwMDAwMDAwMDgwMjAwMDAwDQpEb21haW4wIE5leHQg
+QXJnMcKgIMKgIMKgIMKgIMKgOiAweDAwMDAwMDAwYmZlMDAwMDANCkRvbWFpbjAgTmV4dCBN
+b2RlwqAgwqAgwqAgwqAgwqA6IFMtbW9kZQ0KRG9tYWluMCBTeXNSZXNldMKgIMKgIMKgIMKg
+IMKgIDogeWVzDQpEb21haW4wIFN5c1N1c3BlbmTCoCDCoCDCoCDCoCA6IHllcw0KDQpCb290
+IEhBUlQgSUTCoCDCoCDCoCDCoCDCoCDCoCDCoCA6IDANCkJvb3QgSEFSVCBEb21haW7CoCDC
+oCDCoCDCoCDCoCA6IHJvb3QNCkJvb3QgSEFSVCBQcml2IFZlcnNpb27CoCDCoCA6IHYxLjEy
+DQpCb290IEhBUlQgQmFzZSBJU0HCoCDCoCDCoCDCoCA6IHJ2NjRpbWFmZGNoDQpCb290IEhB
+UlQgSVNBIEV4dGVuc2lvbnPCoCA6IHNzdGMsemljbnRyLHppaHBtLHppY2Jveix6aWNib20s
+c2R0cmlnLHN2YWR1DQpCb290IEhBUlQgUE1QIENvdW50wqAgwqAgwqAgwqA6IDE2DQpCb290
+IEhBUlQgUE1QIEdyYW51bGFyaXR5IDogMiBiaXRzDQpCb290IEhBUlQgUE1QIEFkZHJlc3Mg
+Qml0czogNTQNCkJvb3QgSEFSVCBNSFBNIEluZm/CoCDCoCDCoCDCoDogMTYgKDB4MDAwN2Zm
+ZjgpDQpCb290IEhBUlQgRGVidWcgVHJpZ2dlcnPCoCA6IDIgdHJpZ2dlcnMNCkJvb3QgSEFS
+VCBNSURFTEVHwqAgwqAgwqAgwqAgwqA6IDB4MDAwMDAwMDAwMDAwMTY2Ng0KQm9vdCBIQVJU
+IE1FREVMRUfCoCDCoCDCoCDCoCDCoDogMHgwMDAwMDAwMDAwZjBiNTA5DQoNCg0KVS1Cb290
+IDIwMjUuMTAtcmMyIChKYW4gMDEgMTk4MCAtIDAwOjAwOjAwICswMDAwKQ0KDQpDUFU6wqAg
+wqByaXNjdg0KTW9kZWw6IHJpc2N2LXZpcnRpbyxxZW11DQpEUkFNOsKgIDEgR2lCDQp1c2lu
+ZyBtZW1vcnkgMHhiZWU5MTAwMC0weGJmNmIxMDAwIGZvciBtYWxsb2MoKQ0KQ29yZTrCoCAy
+NyBkZXZpY2VzLCAxNCB1Y2xhc3NlcywgZGV2aWNldHJlZTogYm9hcmQNCkZsYXNoOiAzMiBN
+aUINCkxvYWRpbmcgRW52aXJvbm1lbnQgZnJvbSBub3doZXJlLi4uIE9LDQpJbjrCoCDCoCBz
+ZXJpYWwsdXNia2JkDQpPdXQ6wqAgwqBzZXJpYWwsdmlkY29uc29sZQ0KRXJyOsKgIMKgc2Vy
+aWFsLHZpZGNvbnNvbGUNCk5vIFVTQiBjb250cm9sbGVycyBmb3VuZA0KTmV0OsKgIMKgTm8g
+ZXRoZXJuZXQgZm91bmQuDQoNCldvcmtpbmcgRkRUIHNldCB0byBiZWU4ZjY0MA0KSGl0IGFu
+eSBrZXkgdG8gc3RvcCBhdXRvYm9vdDogMA0KDQpEZXZpY2UgMDogdW5rbm93biBkZXZpY2UN
+Cg0KRGV2aWNlIDA6IDFhZjQgVmlydElPIEJsb2NrIERldmljZQ0KwqAgwqAgwqAgwqAgwqAg
+wqAgVHlwZTogSGFyZCBEaXNrDQrCoCDCoCDCoCDCoCDCoCDCoCBDYXBhY2l0eTogNTA0LjAg
+TUIgPSAwLjQgR0IgKDEwMzIxOTIgeCA1MTIpDQouLi4gaXMgbm93IGN1cnJlbnQgZGV2aWNl
+DQpTY2FubmluZyB2aXJ0aW8gMDoxLi4uDQpGb3VuZCAvZXh0bGludXgvZXh0bGludXguY29u
+Zg0KUmV0cmlldmluZyBmaWxlOiAvZXh0bGludXgvZXh0bGludXguY29uZg0KMTrCoCDCoCDC
+oCAwDQpSZXRyaWV2aW5nIGZpbGU6IC9JbWFnZQ0KTW92aW5nIEltYWdlIGZyb20gMHg4NDAw
+MDAwMCB0byAweDgwMjAwMDAwLCBlbmQ9MHg4MWU4ODAwMA0KIyMgRmxhdHRlbmVkIERldmlj
+ZSBUcmVlIGJsb2IgYXQgYmVlOGY2NDANCsKgIMKgQm9vdGluZyB1c2luZyB0aGUgZmR0IGJs
+b2IgYXQgMHhiZWU4ZjY0MA0KV29ya2luZyBGRFQgc2V0IHRvIGJlZThmNjQwDQpGYWlsZWQg
+dG8gcmVzZXJ2ZSBtZW1vcnkgZm9yIGZkdCBhdCAweGJlZThmNjQwDQpGRFQgY3JlYXRpb24g
+ZmFpbGVkISBoYW5naW5nLi4uIyMjIEVSUk9SICMjIyBQbGVhc2UgUkVTRVQgdGhlIGJvYXJk
+ICMjIw0KDQo=
 
---DQ6FF16HnJGynz45
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Aug 12, 2025 at 03:30:18PM +0000, Andri Yngvason wrote:
-> This is a new LED driver for the WS28XX family of LED controllers from
-> Worldsemi and compatible devices from other manufacturers.
->=20
-> The LED chain must be connected to an SPI output. This driver uses SPI
-> to emulate the required digital signal.
->=20
-> Each LED gets a fixed colour assigned to it in the device tree.
->=20
-> Signed-off-by: Andri Yngvason <andri@yngvason.is>
-> ---
->  doc/device-tree-bindings/leds/leds-ws28xx.txt |  48 ++++
-
-We have dts/upstream/Bindings/leds/ now, so this needs to be upstream
-and the driver compatible with that. If the driver is already
-compatible, we can just omit adding this file. Thanks.
-
---=20
-Tom
-
---DQ6FF16HnJGynz45
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJtk8wAKCRAr4qD1Cr/k
-CoJNAP44nPig8zUAY+JLDqLM7CEp5VPe0+jNpXEoGJXbQxrmEgEAoZnMztwbmhlK
-mOU306Fgkb2aC7B5mDdrN1xMv+FoGwc=
-=HE0e
------END PGP SIGNATURE-----
-
---DQ6FF16HnJGynz45--
