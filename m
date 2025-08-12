@@ -4,82 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4C5CA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 06:10:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598B9C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 06:22:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BFA883192;
-	Tue, 12 Aug 2025 08:10:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 80011831D3;
+	Tue, 12 Aug 2025 08:22:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dFVUZUj8";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RMwnbSTd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB15C831D8; Tue, 12 Aug 2025 08:10:30 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E628E8311B
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:10:28 +0200 (CEST)
+ id EE013831E1; Tue, 12 Aug 2025 08:22:43 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 83174831C2
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-61813e2fc73so4243952a12.0
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 23:10:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754979028; x=1755583828; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jhF12Yw0ivhe4Jo+BSVAB3k7+s4a70NdtxJmL+oktSU=;
- b=dFVUZUj8iDbZiU1B49nPa877Qji960cCEk4HDWZ5TN4xZFi1ILJMfkgjhWFV7K5yyw
- HO6pHF8WfRYLZGUVjN3kvTOIB/ZC23gKfAZN2CQsy6LyUWaMXl3hNn/iGXj//E117uDF
- ExIw0dVxvyUUDfBt1uAerXTEOEfzpKDeRLVCAhW92vXsEebZbEr9elmW0d+RXMq83qj9
- x0ScE6nVW0bjrMLRcta9xqKqMNdk0vhbo744c8NPTCHk1FO25XKLbHvd2uDwWlhiS1gM
- oihuLloRCny0OBiW69pS/Tz18F7G+xEkwj89rhQKrVaACkl4VQ43llvKMnsfEniP7RhQ
- l80A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754979028; x=1755583828;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jhF12Yw0ivhe4Jo+BSVAB3k7+s4a70NdtxJmL+oktSU=;
- b=CPAFON0zT63eY1A47sz6atSPMYWQqKdRUnk4El+ZATnC+Enq3Yja7JRPkZsMyEO5as
- gOqt72D8Y7j6Us1O+C/Dru4Kf8cOLkdJ6jaTOWN2aMYBQesC3aT7dtyE32gCn1EiasLy
- edbUT70+VR2mQBCelI4w7S5fNSmoZSAg56vkhqVsI7HOMNr4RNHG1CuqJuWXyP2NI1hu
- 3x/fCz4x7YqyJLVr4hlfYWV5xq82g4CBc6FDK3sf+K2GD9Milpguf9E9IogLVr/GeczK
- HQH0lLS2zBiPf8lVAcrcgwGtiwslOxlgkJuMXZgCkjCQUtkbqco8B3+JsVtnyn9yjubd
- Ie+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpxymlg/pkQph5zRoFWunsuwe7TDU6f7lrG0UhehKT7FVONWaiFK6TANHo5EDqFdZqMan0rFU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTa1FoTyl7g6yzGMD8NciPB7bEYjeXbQ6vaCX/J2YtF/vRDvlp
- IxTVu70q2nh96nBv+SRz+hHQRpqI3JBxl9Pss4JyG1dUQi8PThNsUhRQ8NEoGYubsnQ=
-X-Gm-Gg: ASbGncvomfyVxfX4sNloE6nEWJ24cpmjq8YodXEN/4vVCDuJpFflCaL4+5SyDs/S/54
- J5/c2NoJF+nJwcFM0fEDwYDJuoDf5d7fHGNeeJPdW3q1QKrGkocqsf3lXB8J+76yfIOaPrrKJzI
- zQrLceFQsPL+PoUrWWcljPUpdVJDOIQQQbx4bLzWJdvEbRy3w1S1zIL43VjqRM+ClWeFk0mmSln
- Yzm1Al2Qzo5/ucfWiDgTTmmGZXU8n1cwKcRtCxMOSpzWF8+XlWKv3dJCVFsP+7i04vBbVKSbGH1
- VCEZTY4OhkPxN/Ku3ItM0oTaQoS/ekz1x7S8Lat2v98epbKuUecwVCyXFNWCAFUVwFy99VNFOBX
- DZ8TQLWLej0bYcni0+I2k8jJjUg==
-X-Google-Smtp-Source: AGHT+IE3hs09hhTbsI4f722GPHRaJhl8efwZMUrOCjA+4+P6WXr8wgOsr2jpaUIHZiMD8+5aElJdJQ==
-X-Received: by 2002:a05:6402:1ecb:b0:615:f76:9408 with SMTP id
- 4fb4d7f45d1cf-6184ec9434cmr1655680a12.32.1754979028264; 
- Mon, 11 Aug 2025 23:10:28 -0700 (PDT)
-Received: from hera.. ([46.198.241.143]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-615a8f152easm19374680a12.15.2025.08.11.23.10.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 23:10:27 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
-	u-boot@lists.denx.de
-Subject: [PATCH] tools: aisimage: Make aisimage_check_params() static
-Date: Tue, 12 Aug 2025 09:10:20 +0300
-Message-ID: <20250812061021.1237280-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57C6McvZ1368277;
+ Tue, 12 Aug 2025 01:22:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1754979758;
+ bh=qnaEquV3+FBTsjnWTQNkYP31uG0iXwRpYclHL1mCVzo=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=RMwnbSTdkJ6w9RGbQlYkKn9sAZCgw26FFa1hPtBA2V8A+xcxMkoMmc3bIdIwFDzmE
+ 2pZEkvG9O2551/EYoPkRacFqqX6QVEvvEixpZ+VwhjOGg/at2s6LbvhdjgBvjrx/dr
+ Mv8vcrtnMvtPO2eZfgo6T5+pl8AaMllyU3stcVJA=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57C6McJg032620
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 12 Aug 2025 01:22:38 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 12
+ Aug 2025 01:22:38 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 12 Aug 2025 01:22:38 -0500
+Received: from [172.24.235.200]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57C6MZwr4094538;
+ Tue, 12 Aug 2025 01:22:36 -0500
+Message-ID: <e6659d0c-7c6a-4781-b943-3042abf509b3@ti.com>
+Date: Tue, 12 Aug 2025 11:52:34 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/9] ram: k3-ddrss: Add support for a partial inline
+ ECC region
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <bb@ti.com>,
+ <w.egorov@phytec.de>, <s-k6@ti.com>, <marek.vasut+renesas@mailbox.org>
+CC: <u-boot@lists.denx.de>
+References: <20250730133720.3315478-1-n-francis@ti.com>
+ <20250730133720.3315478-5-n-francis@ti.com>
+ <18c2739f-f8ce-47d1-b44b-283f9177f90b@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <18c2739f-f8ce-47d1-b44b-283f9177f90b@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,27 +84,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We are trying to enable -Wmissing-prototypes and this functiion is only
-used locally. Mark it as static.
+Hi Udit,
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- tools/aisimage.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 07/08/25 10:16, Kumar, Udit wrote:
+> 
+> On 7/30/2025 7:07 PM, Neha Malcom Francis wrote:
+>> Instead of defaulting to choosing the entire DDR region when enabling
+>> inline ECC, allow picking of a range within the DDR space using DT to
+>> enable.
+>>
+>> It expects such a node within the memory node, in the absence of which
+>> we resort to enabling inline ECC for the entire DDR region:
+>>
+>> inline_ecc: protected@9e780000 {
+>>          device_type = "ecc";
+>>          reg = <0x9e780000 0x0080000>;
+>>          bootph-all;
+>> };
+> 
+> Please mention , where you expect this node to available in all
+> controller nodes or just one controller (in case of multiple controllers)
+> 
 
-diff --git a/tools/aisimage.c b/tools/aisimage.c
-index c5b33b559b02..7a44b2d6ab69 100644
---- a/tools/aisimage.c
-+++ b/tools/aisimage.c
-@@ -387,7 +387,7 @@ static void aisimage_set_header(void *ptr, struct stat *sbuf, int ifd,
- {
- }
- 
--int aisimage_check_params(struct image_tool_params *params)
-+static int aisimage_check_params(struct image_tool_params *params)
- {
- 	if (!params)
- 		return CFG_INVALID;
+This is not part of the memorycontroller node; it is a subnode of the
+memory/ node.
+
+> 
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   drivers/ram/k3-ddrss/k3-ddrss.c | 55 +++++++++++++++++++++++++++++++--
+>>   1 file changed, 52 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c
+>> b/drivers/ram/k3-ddrss/k3-ddrss.c
+>> index a94755c3542..cd117d7eba7 100644
+>> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
+>> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+>> @@ -155,6 +155,7 @@ struct k3_ddrss_desc {
+>>       lpddr4_obj *driverdt;
+>>       lpddr4_config config;
+>>       lpddr4_privatedata pd;
+>> +    struct k3_ddrss_ecc_region ecc_range;
+>>       struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REG];
+>>       u64 ecc_reserved_space;
+>>       u64 ddr_bank_base[CONFIG_NR_DRAM_BANKS];
+>> @@ -733,6 +734,30 @@ static void k3_ddrss_ddr_reg_init(struct
+>> k3_ddrss_desc *ddrss)
+>>       writel(DDRSS_ECC_CTRL_REG_DEFAULT, ddrss->ddrss_ss_cfg +
+>> DDRSS_ECC_CTRL_REG);
+>>   }
+>>   +static void k3_ddrss_ddr_inline_ecc_base_size_calc(struct
+>> k3_ddrss_ecc_region *range)
+>> +{
+>> +    fdt_addr_t base;
+>> +    fdt_size_t size;
+>> +    ofnode node1;
+>> +
+>> +    node1 = ofnode_null();
+>> +
+>> +    do {
+>> +        node1 = ofnode_by_prop_value(node1, "device_type", "ecc", 4);
+>> +    } while (!ofnode_is_enabled(node1));
+>> +
+> 
+> Depending where you expect node to available, parsing logic may change a
+> little
+
+As mentioned above, it will always be in a single place i.e. memory/
+node. The distribution to the different memory controllers is handled by
+the driver.
+
+> 
+> 
+>> +    base = ofnode_get_addr_size(node1, "reg", &size);
+>> +
+>> +    if (base == FDT_ADDR_T_NONE) {
+>> +        debug("%s: Failed to get ECC node reg and size\n", __func__);
+>> +        range->start = 0;
+>> +        range->range = 0;
+>> +    } else {
+>> +        range->start = base;
+>> +        range->range = size;
+>> +    }
+>> +}
+>> +
+>>   static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct
+>> k3_ddrss_desc *ddrss)
+>>   {
+>>       fdtdec_setup_mem_size_base_lowest();
+>> @@ -782,8 +807,11 @@ static void k3_ddrss_lpddr4_ecc_init(struct
+>> k3_ddrss_desc *ddrss)
+>>     static int k3_ddrss_probe(struct udevice *dev)
+>>   {
+>> +    u64 end;
+>>       int ret;
+>>       struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
+>> +    __maybe_unused u32 ddr_ram_size, ecc_res;
+> 
+> ddr_ram_size may go above u32
+> 
+>> +    __maybe_unused struct k3_ddrss_ecc_region *range =
+>> &ddrss->ecc_range;
+>>         debug("%s(dev=%p)\n", __func__, dev);
+>>   @@ -821,9 +849,30 @@ static int k3_ddrss_probe(struct udevice *dev)
+>>             k3_ddrss_lpddr4_ecc_calc_reserved_mem(ddrss);
+>>   -        /* Always configure one region that covers full DDR space */
+>> -        ddrss->ecc_regions[0].start = 0;
+>> -        ddrss->ecc_regions[0].range = ddrss->ddr_ram_size -
+>> ddrss->ecc_reserved_space;
+> 
+> patch 1/8 is remove here, please check if you really need 1/8 ?
+> 
+
+1/8 still changes what ddrss->ecc_regions[0].start implies. So the call
+to k3_ddrss_set_ecc_range_r0 is also changed there.
+> 
+>> +        k3_ddrss_ddr_inline_ecc_base_size_calc(range);
+>> +
+>> +        end = ddrss->ecc_range.start + ddrss->ecc_range.range;
+>> +        ddr_ram_size = ddrss->ddr_ram_size;
+>> +        ecc_res = ddrss->ecc_reserved_space;
+>> +
+>> +        if (!range->range) {
+>> +            /* Configure entire DDR space by default */
+>> +            debug("%s: Defaulting to protecting entire DDR space
+>> using inline ECC\n",
+>> +                  __func__);
+>> +            ddrss->ecc_range.start = ddrss->ddr_bank_base[0];
+>> +            ddrss->ecc_range.range = ddr_ram_size - ecc_res;
+>> +        } else {
+>> +            ddrss->ecc_range.start = range->start;
+>> +            ddrss->ecc_range.range = range->range;
+>> +        }
+>> +
+> 
+> Please add comment here for below code .
+> 
+> I think you are trying to fix, if end goes above one ddr
+
+Yes will add comments here, thanks for the review!
+
+> 
+>> +        if (end > (ddr_ram_size - ecc_res))
+>> +            ddrss->ecc_regions[0].range = ddr_ram_size - ecc_res;
+>> +        else
+>> +            ddrss->ecc_regions[0].range = ddrss->ecc_range.range;
+>> +
+>> +        ddrss->ecc_regions[0].start = ddrss->ecc_range.start -
+>> ddrss->ddr_bank_base[0];
+>> +
+>>           k3_ddrss_lpddr4_ecc_init(ddrss);
+>>       }
+>>   
+
 -- 
-2.49.0
-
+Thanking You
+Neha Malcom Francis
