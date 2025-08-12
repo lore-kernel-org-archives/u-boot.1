@@ -4,100 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0955C87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 14:40:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A41C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 14:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3567E8344E;
-	Tue, 12 Aug 2025 16:40:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id D9F4783145;
+	Tue, 12 Aug 2025 16:47:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dqGeuycU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bkuysF2n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97CE6830B3; Tue, 12 Aug 2025 16:40:23 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0AB39830B3; Tue, 12 Aug 2025 16:47:01 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F44D830B3
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 16:40:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18CB1830B3
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 16:46:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8DCA23F4BE
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 14:40:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1755009620;
- bh=sSmAXmrnVlNwCT4Y7MmwxF4fmOcyIGOu3DsCAfbzPSs=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=dqGeuycUsQCjmN9AAmYSEEqdPzRo6zfhTRHf+XwgJFt8e58jOs6ISGnxuYuA4bSZx
- tH0QPv85UxHn6JZzwjsWKBnM7dnRnhB4brwDNL1SL9cDQKXTOtPPVdImIDAtxxzz0v
- FSYSqkx5ssn1bq8MyUdpCjmJKcA+sBAVVVdUt4AGzuOHYWPklgKD+Tv39/mvNyQQZy
- fOkF/Zi0Z5Ev5k3hBq/jK5t2wQpXD/nqxnubCybVSa3OL1JasTmxpEjrZTD3HTcWFe
- cC1H5mKfSKa1tVq81V0awf7FTGNfWDvWFebBHsVGmVv6xs0OtDLKCQT/+xeaD4YdcN
- rPphnGg/PfMrg==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-af95125cf52so427016266b.2
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 07:40:20 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-458b2d9dba5so35681085e9.1
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 07:46:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755010017; x=1755614817; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/TOEhcBKI6o3rvCjlFHNCNirHNtn5Ieg1csuwyGjHfo=;
+ b=bkuysF2nCCFOfFSj1aX2Rty0n47vQrLdt1dkzrup25dmZx45k0usOL+cyhlg9yqabU
+ F3JRyFEBedEueSA2VpEvGqzbDD1X6LuOJ6c6Ifk2NEDoa+rF5HrF1+fPOCn6JXq1zCVV
+ T4C7jYzAsNz80lzmvfEPXEqr94+8BNqt9ufJEMxXfT2f+p9vkM8kmC58JrJa3lgWVhVY
+ mOqNsnas5ds5AMbpEHV/cQfx2BUjnH7pVK5xrIaOApd41l+se4o/uHA6SWqGAQi3Q2hr
+ aftuJ9+o91b8qw2hmqK830qH/E+4Pg4h5W1xXidmfMcLaHzqIbfrYjY/yX5+nqiV/4/R
+ 5+Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755009619; x=1755614419;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:user-agent:mime-version:date:message-id:from
+ d=1e100.net; s=20230601; t=1755010017; x=1755614817;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sSmAXmrnVlNwCT4Y7MmwxF4fmOcyIGOu3DsCAfbzPSs=;
- b=V0V4GgsPvdvLFwGFRu8X1v+2Y4fS9YNBlaB+iRUxJv9REMnvFwkwhpXMRpoKrJmTjq
- mvOu9UxkTCMVcHmcHs3FythxhRGVxWly3IkyOSSNm1fsvFCjIUHm9wcINVwyCNNskN1I
- Nfl2hJ6eIvWBF83n66+ApWeIcAUCMZssqCrhu0u0dxRqmx3LbELdLsQAl3F6gmGjclyx
- l3AKsstclkVd9LZ/sZf4e4k92GTXwaK1laM8Z5qhvd2I7+kXVRA1wh3aPR631rUNtV46
- CXNNhjqfyDyHIokzzw4QXAJmXAvvVFxmzC0kZFvB5qwd7SC5gP699eK/772CW901zhMC
- eBMw==
+ bh=/TOEhcBKI6o3rvCjlFHNCNirHNtn5Ieg1csuwyGjHfo=;
+ b=haAdR9kI4kYHWfohIIlMdUbUPE1bmoaDIxbkXxWZMI/xmSzsaKdEhutVc+OmjMEjU8
+ s9x+k6GqKBwsIi67bx7ZbFAw//OpsKrQXSXBtZduacAmRVMiS9Cw02KmkFW9tAyXsI2g
+ AA8LEBCfd3KDiR8wgiPvvPAmaMGt/ZWTvmPiD/J+pNYgu23wE1hLdNQJCZ+tLZh5Zl4v
+ L+A8ipTnzmZGF7iczx6womjzJZNUD5CU044k/0u7zkDwfxLRP1xoKwgZTBnA5okVZcfR
+ 7LsOGt6z926ygTbmR94vU2f93s/nu2nryEdzZ4KxUSEnHUsHZy2mptWazoPWYH3YT1ai
+ rkjQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVo1oOnn8q8NUmSqhxSgK7eY9JPum/XphpJD1MEUX6G5pejOoDQMS5CY7I7ir/9Jct82FgH/rE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzi4apSjxR2mi+FyV4HE4EevCmwORtdWNF7xyxDlHXUc4OXFkI0
- T/TPuK1AGjtB7L77DDhwQpTNX92+hmWM15zMBa0ahe1YfboF3OjEnDOX8ta9Z9K+FsM7m1NDacs
- DfqCYiq4UmOCZnS9K/a3EB2GWQ2PxU1L0R0Xkpzbyu43CFsHj4agtb3bwGu8VF5ST5HzBhHM=
-X-Gm-Gg: ASbGncvYY8KCX6k4/qHvhGXHs/L/5U4pur8m4W+2ZUH6MvXGsED3ApVFmoqCvbYJk4d
- +ulEJQZ3V8QNUalUQW5CR6tss1HshUrKe2dm/qWXyP531a7j4hiRv/8+75ZMZ5LlQV+FtFRR1rg
- E5LYMT/cGzBJ7V2yF+Z179/hLeuZ5wWYyx6WsWr2rdr0uEAgO/oAeayc8t9b1wf31sIPR7pGtZq
- xg9IAbtjfanjVizpknd0XpvVkoNfSf+nRccYHO300Hr3BpsWLdopbP9EilqgILRWUFJbIbyqQDd
- KosB72Q0RvuERyZ8hEq5DD8xw38mXzJ7SNGOM0SFC8ChXdxpznC7dRXJcHddd7LE/4dthrDlNzE
- SzK8P49Hog+dD4gGvjkM=
-X-Received: by 2002:a17:907:97d2:b0:af9:237c:bb35 with SMTP id
- a640c23a62f3a-afa1dfef21amr310431666b.22.1755009619597; 
- Tue, 12 Aug 2025 07:40:19 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHS0vHHica7IXfWri4vUZ1sLgcFUx+JWu8AU7faNNcRbo3QwPy9poMgn7s8uq2wapXnHOLaqQ==
-X-Received: by 2002:a17:907:97d2:b0:af9:237c:bb35 with SMTP id
- a640c23a62f3a-afa1dfef21amr310429666b.22.1755009619201; 
- Tue, 12 Aug 2025 07:40:19 -0700 (PDT)
-Received: from [192.168.103.116]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ AJvYcCXCt0AlFXySZT3fOd68TH/uABfL/3zP4djCgDARqb2i4LOuTlItHYlnzk/g5Y2dJXN+r/Zj+60=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSheMxQCJhStTr3Fyle/nH4+78hCGHGUCGDVj/LhE1G3XAmymP
+ bGTrJPqeSfrhQivLnkBBZdf3MoeuMkIWPFcWTkoUyxp84wkcrq46BMN/MlBiGSGXzP4=
+X-Gm-Gg: ASbGncvRG+RsRVLvbTZa2gWl7v2a0a4/wJeNqCJwz99TTBSooYWpyXtZGuf3v5W54o7
+ iS8Y9TYGOHe87yPVZUcTVEDbS7gxUsvtzug25x7ioO5KMG4optSDRG+ORpkPA4Ok+SS5g1iOTv/
+ TONAmc+zAjwgPtDKkIwV2Pi56Yze/hp37p2zYVwo4T3IIFtMJ6ttzw2Cexu7CHGp9u09OmB25di
+ SUpIkfCS6hrYnIwmc7dkin+JC2mHyxMZLpGKg25CdqtyFSczGr7B5dcMw+LQNrPMGyTLl0aKAUQ
+ itr/H2p7+cKFuKsYcTXeoOsGABE/7lHgMv1420fJMT7BGAClaI4REK0B8o9Lk3SZp5Cj6DcB2gB
+ 0cDOn9BIi69ZJSzC06Y1j6kO4wbNFizbqswOtVVll88sFwlk5X8A35Vj/vtuyIpzB4viX/0Q6/z
+ 97Bw==
+X-Google-Smtp-Source: AGHT+IH/jrbtkzSDG+Udzrm8azvg+UMRCSBXskCRfket4Asly4QM4jGTibaZAC5SzrVgvOEgEfNJ0Q==
+X-Received: by 2002:a05:600c:1d02:b0:456:285b:db29 with SMTP id
+ 5b1f17b1804b1-45a15b4eee8mr633985e9.29.1755010017380; 
+ Tue, 12 Aug 2025 07:46:57 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:97a2:1bc7:9f2e:6519?
+ ([2a0a:ef40:f9e:3c01:97a2:1bc7:9f2e:6519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af91a0a3b58sm2217435766b.58.2025.08.12.07.40.17
+ 5b1f17b1804b1-459e6867193sm304631815e9.6.2025.08.12.07.46.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Aug 2025 07:40:18 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
-Message-ID: <05f7c566-e833-4561-bb49-8769e533c16c@gmx.de>
-Date: Tue, 12 Aug 2025 16:40:17 +0200
+ Tue, 12 Aug 2025 07:46:56 -0700 (PDT)
+Message-ID: <cc82add8-5f9c-4ee1-87ea-a458e840e621@linaro.org>
+Date: Tue, 12 Aug 2025 15:46:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Seeking advice on API return type inconsistency
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
+To: Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 References: <f5c94319-8ef8-459d-88b2-836702779cfb@linaro.org>
  <e10a39e4-9606-4ae4-86dd-11de4b39b5ed@cherry.de>
  <2d6457b8-c637-4531-8f56-e2aea320a319@linaro.org>
  <20250812143349.GQ124814@bill-the-cat>
-Content-Language: en-US
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
 In-Reply-To: <20250812143349.GQ124814@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
@@ -117,7 +107,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.08.25 16:33, Tom Rini wrote:
+On 12/08/2025 15:33, Tom Rini wrote:
 > On Tue, Aug 12, 2025 at 10:17:47AM +0100, Andrew Goodbody wrote:
 >> On 11/08/2025 17:36, Quentin Schulz wrote:
 >>> Hi Andrew,
@@ -174,13 +164,9 @@ On 12.08.25 16:33, Tom Rini wrote:
 > 
 > How is the error code pushed? Or is it up to the caller to decide that 0
 > means on a case by case basis?
-> 
 
-Using macro IS_ERR_VALUE() in the caller should do the needed.
+In the Linux kernel almost no code checks the return of clk_get_rate at 
+all. Some code will check the value is sensible and 0 is obviously not 
+sensible. But pretty much the call to clk_get_rate is not expected to fail.
 
-See include/linux/err.h:21:
-#define IS_ERR_VALUE(x) unlikely((x) >= (unsigned long)-MAX_ERRNO)
-
-Best regards
-
-Heinrich
+Andrew
