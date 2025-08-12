@@ -4,67 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9F4CA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 12:44:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E4E4CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 12:44:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62DE8834E5;
+	by phobos.denx.de (Postfix) with ESMTP id ADDCF83526;
 	Tue, 12 Aug 2025 14:43:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="r4QPkapk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vHIR6dsJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6A38834E1; Tue, 12 Aug 2025 14:43:55 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AD288341A
+ id 291C08341A; Tue, 12 Aug 2025 14:43:56 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DBC73834B6
  for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 14:43:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57CChoCk1398240;
- Tue, 12 Aug 2025 07:43:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1755002630;
- bh=fECoaIVmre+9FOuqyHo0wIZrSQKgZBFPjDU5wq5NYbA=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=r4QPkapkvsl0FyAM2gTjAXEvohSdb9xxZJy8xwFeFp2Xy5KZNkxuryCS+5CKf2e5z
- fslq0ex0lS19ivTCseYWwvNn4EQ7Fy/ZE+fBgFXfZ4L0OlynlOKij4L4j6N2jIHPCp
- krGLPRVnhZkT+QYFZ+CF8CIinhXvcWyaH9g77BSA=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57CCho1F301008
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 12 Aug 2025 07:43:50 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 12
- Aug 2025 07:43:50 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 12 Aug 2025 07:43:50 -0500
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57CChPlG653236;
- Tue, 12 Aug 2025 07:43:47 -0500
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <trini@konsulko.com>, <bb@ti.com>, <w.egorov@phytec.de>, <s-k6@ti.com>,
- <marek.vasut+renesas@mailbox.org>, <sabiya.d@ti.com>
-CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 7/9] ram: k3-ddrss: Add support for MSMC calculation of DDR
- inline ECC regions
-Date: Tue, 12 Aug 2025 18:13:22 +0530
-Message-ID: <20250812124324.124306-8-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250812124324.124306-1-n-francis@ti.com>
-References: <20250812124324.124306-1-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-459d4d7c745so49418395e9.1
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 05:43:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755002633; x=1755607433; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9pCu2CoQaahv8bBIqFJPXxCVDnCn7evJjk8WDdRglTQ=;
+ b=vHIR6dsJk2t2bqzioTP0cg2BdU/R+tqieHkpdGtn+N2ZUu1WwWZ7ha71WiTDI5ddj0
+ skSHz187H8tehLqHhY5TU9AF82OHKnpH1yil/OD2nGlZ4lNqpIilUEwTQnCj8g7Y0tMa
+ /CdK5MS5H0lsgVRN/hcliP/DjRgH8jdYFKefRv36CWJRkSm1A3B+JpdiMx+orwhV1f7J
+ ZZBO2JylyBE332298xUBM4im9kdubEFXFF+Ptsz3hxt2pDdi3eZ980KPA2/jW0PkGwoW
+ Z0I36QDLxpY2ylJn28tdBNTZAvzCKc4GnZbJC6/dBVZZSbErO38kvixQ51H/luBiOqaF
+ ovkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755002633; x=1755607433;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9pCu2CoQaahv8bBIqFJPXxCVDnCn7evJjk8WDdRglTQ=;
+ b=ABBD2nCdmqkrWDF0P5eTOmj48hvlWthCEJ1R4uGrORvpJ87mx8rFm2k6ylH/VdDI+7
+ q4XOFf3GOX+6Sr5eD1EmHlw3/Mswa/nQY9aBu6P0J02EmaIvPfguZfM+baojUDQ80FyZ
+ 466pIuk2Ogpil6DtcylVFnOFoo8cdu4DdIUaq8Pb1wbk0ZNKMSDKWBWM+F3+pJL+pBgs
+ 46sy15MNfe9Slkc5K4P4jPzpOiQp5yYY3JrYLB9PEO6SCWf2su4epky22PfE8NoQXed9
+ BSpWBzQ0QW3+Cuu6bqnzrKAQFVLFys9uPSIS6yAGMk4sjKqMtWgy/bmKUwTpFsHEgYqi
+ beNw==
+X-Gm-Message-State: AOJu0YzhUBROSwQ/34ARITYTvB4Q0D5tnaKH8mQUKP+K8Ns78vdAw7Do
+ sZT1MDcYTDuj/dZ+XwoZCDeNYnCvlTGJoZJ6/q4xfFY0PrVW/Q0a8/wNpCNaZZzubYQMLG+WdIm
+ +yMV8Tihl+Q==
+X-Gm-Gg: ASbGncvlenRa0YBxCqJpDIcVFLhPWUHQlTD448hMElQVPJyuJ3DiwFuKgTHMYGb4V0h
+ /6YQwchrEFDZEiPVSSUhIdPk45YX0QWV9fAA713EIrsOr2QuKapzaqoC1EnOoH0bq9RDXszs/2U
+ b3Wsucg4MLXWhKoezGjNCuGrtCqmkAxyX9ACYtAPFdc1j5XnMzbUYY99TVeIB261AFHkDdn2kCe
+ EaM7EXbKoUuyQXglIK39kUQcdWp708I0nWEDm6xXOnEm4s3JV44vOmNtmJcR7NvnhBn00CA9IMu
+ SMCZArSqdLvwtKUCM1BPeo23AwVxDnsBGKJ+Y9Lz76HUY36YvebKCM0YH0jZbGZAUJ2+alN05Jg
+ vVgT+8d9JOFmBdmBa50LxyiBSyzzncH0=
+X-Google-Smtp-Source: AGHT+IH+OYZTrk9XzECE+FRofap3OEi/6NA+bk/kQA1KFHXRj2yo3dJKOkgXO8SG4SiVXbWkH5wAWA==
+X-Received: by 2002:a05:600c:3b97:b0:458:bfb1:1fb6 with SMTP id
+ 5b1f17b1804b1-45a11e79ac3mr21831415e9.2.1755002633066; 
+ Tue, 12 Aug 2025 05:43:53 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:6b34:4d0b:774a:130d])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e585430csm297745475e9.11.2025.08.12.05.43.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Aug 2025 05:43:52 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/2] lwip: add Kconfig to decode and print ICMP unreachable
+ messages
+Date: Tue, 12 Aug 2025 14:43:17 +0200
+Message-ID: <20250812124331.1464879-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,163 +103,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for calculation of the protected regions for each DDR in
-multi-DDR systems. Since MSMC is the parent node of the individual DDRs
-as well as responsible for their interleaving, it only makes sense for
-MSMC to contain the logic for dividing the regions.
+When using commands based on UDP such as tftp or sntp, if the server is
+not reachable or the service is not started on the expected port then
+the command ultimately times out. However it often happens that the server
+or a router sends back an ICMP Destination Unreachable message. That can
+help troubleshooting. Therefore, add support to the lwIP stack and to
+U-Boot to handle those packets and print a diagnostic message on the
+console.
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
-No change since v2
+Changes in v2:
+- Fix typo in subject (s/detination/destination)
+- Add link to upstream pull request
 
- drivers/ram/k3-ddrss/k3-ddrss.c | 106 ++++++++++++++++++++++++++++++++
- 1 file changed, 106 insertions(+)
+Jerome Forissier (2):
+  lwip: icmp: allow reporting ICMP destination unreachable
+  net: lwip: add Kconfig option to show ICMP unreachable errors
 
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index 856aa96e50f..cb1863a6e9a 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -59,6 +59,7 @@
- 
- #define SINGLE_DDR_SUBSYSTEM	0x1
- #define MULTI_DDR_SUBSYSTEM	0x2
-+#define MAX_MULTI_DDR 4
- 
- #define MULTI_DDR_CFG0  0x00114100
- #define MULTI_DDR_CFG1  0x00114104
-@@ -82,6 +83,24 @@ enum intrlv_gran {
- 	GRAN_16GB
- };
- 
-+u64 gran_bytes[] = {
-+	0x80,
-+	0x200,
-+	0x800,
-+	0x1000,
-+	0x4000,
-+	0x8000,
-+	0x80000,
-+	0x40000000,
-+	0x60000000,
-+	0x80000000,
-+	0xC0000000,
-+	0x100000000,
-+	0x180000000,
-+	0x200000000,
-+	0x400000000
-+};
-+
- enum intrlv_size {
- 	SIZE_0,
- 	SIZE_128MB,
-@@ -135,6 +154,7 @@ struct k3_msmc {
- 	enum emif_config config;
- 	enum emif_active active;
- 	u32 num_ddr_controllers;
-+	struct k3_ddrss_ecc_region R0[MAX_MULTI_DDR];
- };
- 
- struct k3_ddrss_desc {
-@@ -942,6 +962,80 @@ U_BOOT_DRIVER(k3_ddrss) = {
- 	.priv_auto		= sizeof(struct k3_ddrss_desc),
- };
- 
-+__maybe_unused static int k3_msmc_calculate_r0_regions(struct k3_msmc *msmc)
-+{
-+	u32 n1;
-+	u32 size, ret = 0;
-+	u32 gran = gran_bytes[msmc->gran];
-+	u32 num_ddr = msmc->num_ddr_controllers;
-+	struct k3_ddrss_ecc_region *range = NULL;
-+	struct k3_ddrss_ecc_region R[num_ddr];
-+
-+	range = kzalloc(sizeof(range), GFP_KERNEL);
-+	if (!range) {
-+		ret = -ENOMEM;
-+		return ret;
-+	}
-+
-+	k3_ddrss_ddr_inline_ecc_base_size_calc(range);
-+
-+	if (!range->range) {
-+		ret = -EINVAL;
-+		goto range_err;
-+	}
-+
-+	memset(R, 0, num_ddr);
-+
-+	/* Find the first controller in the range */
-+	n1 = ((range->start / gran) % num_ddr);
-+	size = range->range;
-+
-+	if (size < gran) {
-+		R[n1].start = range->start - 0x80000000;
-+		R[n1].range = range->start + range->range - 0x80000000;
-+	} else {
-+		u32 chunk_start_addr = range->start;
-+		u32 chunk_size = range->range;
-+
-+		while (chunk_size > 0) {
-+			u32 edge;
-+			u32 end = range->start + range->range;
-+
-+			if ((chunk_start_addr % gran) == 0)
-+				edge = chunk_start_addr + gran;
-+			else
-+				edge = ((chunk_start_addr + (gran - 1)) & (-gran));
-+
-+			if (edge > end)
-+				break;
-+
-+			if (R[n1].start == 0)
-+				R[n1].start = chunk_start_addr;
-+
-+			R[n1].range = edge - R[n1].start;
-+			chunk_size = end - edge;
-+			chunk_start_addr = edge;
-+
-+			if (n1 == (num_ddr - 1))
-+				n1 = 0;
-+			else
-+				n1++;
-+		}
-+
-+		for (int i = 0; i < num_ddr; i++)
-+			R[i].start = (R[i].start - 0x80000000 - (gran * i)) / num_ddr;
-+	}
-+
-+	for (int i = 0; i < num_ddr; i++) {
-+		msmc->R0[i].start = R[i].start;
-+		msmc->R0[i].range = R[i].range;
-+	}
-+
-+range_err:
-+	free(range);
-+	return ret;
-+}
-+
- static int k3_msmc_set_config(struct k3_msmc *msmc)
- {
- 	u32 ddr_cfg0 = 0;
-@@ -1021,6 +1115,18 @@ static int k3_msmc_probe(struct udevice *dev)
- 	}
- 	msmc->num_ddr_controllers = ret;
- 
-+	if (IS_ENABLED(CONFIG_K3_MULTI_DDR) && IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
-+		ret = k3_msmc_calculate_r0_regions(msmc);
-+		if (ret) {
-+			/* Default to enabling inline ECC for entire DDR region */
-+			debug("%s: calculation of inline ECC regions failed, defaulting to entire region\n",
-+			      __func__);
-+
-+			/* Use first R0 entry as a flag to denote MSMC calculation failure */
-+			msmc->R0[0].start = -1;
-+		}
-+	}
-+
- 	return 0;
- }
- 
+ lib/lwip/lwip/src/core/ipv4/icmp.c | 17 +++++++++----
+ lib/lwip/u-boot/arch/cc.h          |  7 ++++++
+ lib/lwip/u-boot/lwipopts.h         |  4 ++++
+ net/lwip/Kconfig                   | 13 ++++++++++
+ net/lwip/Makefile                  |  1 +
+ net/lwip/icmp_unreach.c            | 38 ++++++++++++++++++++++++++++++
+ 6 files changed, 76 insertions(+), 4 deletions(-)
+ create mode 100644 net/lwip/icmp_unreach.c
+
 -- 
-2.34.1
+2.43.0
 
+base-commit: ae5711f881100f856ead1e76832c32b92dba93c7
+branch: lwip-icmp-unreach
