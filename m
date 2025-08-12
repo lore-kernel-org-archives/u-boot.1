@@ -4,79 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E4AC87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 09:51:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81808C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 10:13:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F381832C8;
-	Tue, 12 Aug 2025 11:51:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id ABD43831C5;
+	Tue, 12 Aug 2025 12:13:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1754992316;
-	bh=cSnAikQeSfWm1LfnXMIv7TsaznR63i7JtAfbE2grXTE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TjV0TVsy0uBCzr13eLt/QFdRiplR1BE5nTKy5sG5aLvomvi9jwTHMMeYjDF2zcEeA
-	 hO2yKVgi9aRph9DP4sY7dEqBU/MnUSgVwFkdsRCPHfrwiolHZs67B2wg/O7rc6RQzJ
-	 ufeBJ73lg+MtVl1JnXsjBCcKmCcxSdB3jObOtBK8BKQJ0Vw0d4rLTFIReHoH1LNkgF
-	 yrQsqtdtoNK1jLtt2yrPdDdurEmKpVK2SVR1a5hmTwgAlgr7zHFuozZYfv5LP1dPkZ
-	 4/EHL/+Dr0Lfxix7Y9QWqO7uLPVw5HIElr4arbyOdyJplWbkaYGUVm1ui8YUqy3FE+
-	 /btelugFgI7RA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id DBE6983323; Tue, 12 Aug 2025 11:51:55 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB9218317B
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 11:51:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="eLnn8jow"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 17A0A1038C11C; 
- Tue, 12 Aug 2025 11:51:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1754992312; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=cSnAikQeSfWm1LfnXMIv7TsaznR63i7JtAfbE2grXTE=;
- b=eLnn8jowINODrtifEyzQdKlHPg4FESDuu9Af3aJkWtIndlfmd8sO2XtzwfW3u/3IezUtmg
- HCYLwerYHAWMDGQ9QpKgO8llLg/9mmr3chM2Auy33RJIcLGybf6wHOQ3LPOB7aPtcy4Wcl
- Yzi36N7wQ456lRsrqDGmXON9XprEuvf6VXUbSMoejC9lN6tynlQ7nPEj9z6peHEjxMzJFL
- SYr8Cf4ScXUVnCq+iOprmBAgRgsxGMh7nSK+d/bIMtnjj0TCpCbpvc2zpnnG09NmgzcEu6
- uelKb9hDAUztJmemF/R6noRbCq0pB90INDepk8t1vKUegKr587vFfzfWGyDnPw==
-Date: Tue, 12 Aug 2025 11:51:44 +0200
-From: Philip Oberfichtner <pro@denx.de>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
- Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Gary Bisson <bisson.gary@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
-Subject: Re: [PATCH v2 3/3] Image size checks: Simplify help text
-Message-ID: <aJsOsEqa912RQUzg@antares>
-References: <20250807102436.452691-1-pro@denx.de>
- <20250807102436.452691-4-pro@denx.de>
- <1d3e5573-7e36-4050-88e8-90d31e5253a9@mailbox.org>
- <aJmwfBL48AzuFra8@antares>
- <63434f64-3633-49a7-91cf-69f52b43c0e7@mailbox.org>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pdP6vVtj";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4FAD283290; Tue, 12 Aug 2025 12:13:53 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6032E8317B
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 12:13:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-458bf6d69e4so48438595e9.2
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 03:13:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754993631; x=1755598431; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Weve+gPXZxaHahsWHsEymZzGE19OKDErumTE3tbm5zU=;
+ b=pdP6vVtjC90iNu3ONQvuyF+4Z+X2svyoBy8drmYHJnRLcOGU3AXWjoIBA+rCbYx6rL
+ i7qsgBoX0A63ChjRart/1xSKkZtqC+OVuPekCUpgYoJmD4KBm1rbSQL9Y6ejoiLFQc41
+ y4J6nHdFXCWszlabRXbd9DND7pghsWrDYV/WCJpE86nmmQDO7L31s7CsgGIBlGIrF8Ob
+ OJ5a6SdYmiqM7PjEzr2RyqH6+eDucanM3hBv0Pgss5BKs61tPCtC3Hd0gg/1B3EMIuV3
+ fmUSYCKzts1hpci5v6kh7N59uMdQ58Dh8Dp6J7MJun+JPCzrqQK9WT05zSUvSfCSedUB
+ BYHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754993631; x=1755598431;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Weve+gPXZxaHahsWHsEymZzGE19OKDErumTE3tbm5zU=;
+ b=UGsIIzn8mYDcfaKFbrGc1/xhA+G0pCyKOzi1G4TWmUss81ApgIJAFz/RIHGXwYQeoy
+ FaZQVv3x9RBAtRLJQTMXxz7TDh9kU+AW+ko3zp7q2xJmoOyJh4YIWTXQlwyK3SYDhM1O
+ n1phsn73e8j9b5P3xuIVVcH4z80OSqqP60hBInM+A8FaX7PeNvVPEzzYmsPHjXyRRL/O
+ 9thIQSDPTnMMAwOOEHjuiy/uy6i+LSwK025HV3k6uEzVI8l65Pmg/LlwS89iAEYSnUis
+ L/YgtEnCsC+I0sI78KTkbcjDAy5U1OCyKNGQLmpbVGWPsFVel+PG56NNf6PBBmD5MXJp
+ eRUg==
+X-Gm-Message-State: AOJu0Ywht+bUqMlf9egD1oN11+TK41iGkc4RV1QM4jPeuVKtPrq+9k9R
+ JGs9iewk32VlEEBIzidqGYNLOycXRiIMswcgEYJ6jH1bjFl0swIa/7ht3ZO27ac0QQwU3brPg3X
+ zugB1
+X-Gm-Gg: ASbGncuJveMfaXQcO49gZsOYEOTLnX8NhioY1C4w6pviGc5iEYVVzGAiDXunKYO6oIs
+ dFuT1QKq52PV6InmU6dlEtfdKavgczOYTGOl12abFUEdejL/YCIWDAxOrGiycEyCmhGtE0n9mkS
+ GfjtyTJXOpz1qxgBNNV4DnqAqefPUHEu1tbyTe/8xY//4fxattHBE26D9A5srRNDMmZHjz6rOID
+ kRXcYH2hHb8P87+Hi5KvpLk/QhfHnCcCU6IvyF1rRpNRRriGNqDeiPXjJLI9wREwnuTdvq9IPci
+ 6rie7i/i/16wKeqJRNtguQC0DQlfZAVdTlIe6uZ3BV/1eXaq+8MhKZf96z3m3HbeATNxDqG6Rnu
+ OvdRRoEgX5vOwhewSecClddytcxVP8cvmTnoazdPzps+QSPUuIeE=
+X-Google-Smtp-Source: AGHT+IEZvJTV28h/15OxIcWCMdZJ0TWSqCV1qMgyRSQ3G6msnazgU483bUqS+OD+p7CIQThN8e8qFA==
+X-Received: by 2002:a05:600c:548f:b0:456:1a69:950b with SMTP id
+ 5b1f17b1804b1-459f4f9b23cmr127219925e9.22.1754993630613; 
+ Tue, 12 Aug 2025 03:13:50 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:97a2:1bc7:9f2e:6519])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c453ab0sm44090808f8f.44.2025.08.12.03.13.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Aug 2025 03:13:50 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/2] soc: ti: k3-navss-ringacc: Fix Smatch reported issues
+Date: Tue, 12 Aug 2025 11:13:48 +0100
+Message-Id: <20250812-k3-navss-v1-0-a88f7db58998@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <63434f64-3633-49a7-91cf-69f52b43c0e7@mailbox.org>
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANwTm2gC/x2N0QqDMAxFf0XyvECNHcp+Zeyh1VSDEEczRCj+u
+ 3WP53Iup4BxFjZ4NQUy72KyaYX20cC4BJ0ZZaoM5OjphpZw7VDDboa9m1LqiPzgI1Q9BmOMOei
+ 43Afl43fP38xJjn/h/TnPC6TZa7pxAAAA
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,56 +100,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 11, 2025 at 04:25:03PM +0200, Marek Vasut wrote:
-> On 8/11/25 10:57 AM, Philip Oberfichtner wrote:
-> > On Thu, Aug 07, 2025 at 03:41:57PM +0200, Marek Vasut wrote:
-> > > On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
-> > > > For coherency, use the same help text for all related size checks
-> > > > options. Furthermore, simplify the depends-on logic.
-> > > > 
-> > > > Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> > > > ---
-> > > > 
-> > > > Notes:
-> > > >       Changes in v2: new
-> > > > 
-> > > >    Kconfig | 8 +++-----
-> > > >    1 file changed, 3 insertions(+), 5 deletions(-)
-> > > > 
-> > > > diff --git a/Kconfig b/Kconfig
-> > > > index ec20603883b..490a706101a 100644
-> > > > --- a/Kconfig
-> > > > +++ b/Kconfig
-> > > > @@ -543,10 +543,8 @@ config BOARD_SIZE_LIMIT
-> > > >    	default 1048576 if RCAR_64
-> > > >    	default 0
-> > > >    	help
-> > > > -	  Maximum size of the U-Boot image. When defined, the build system
-> > > > -	  checks that the actual size does not exceed it.  This does not
-> > > > -	  include SPL nor TPL, on platforms that use that functionality, they
-> > > > -	  have separate options to restrict size.
-> > > > +	  Specifies the maximum length of the U-Boot image.
-> > > > +	  If this value is zero, it is ignored.
-> > > 
-> > > This makes the description less accurate, sorry, NAK.
-> > 
-> > What about using just the first half:
-> > 
-> > 	Maximum size of the U-Boot image. When defined, the build system
-> > 	checks that the actual size does not exceed it.
-> > 	[plus/minus treatment of the value zero]
-> > 
-> > And dropping the remainder "This does not include ..."?
-> Why would removing the SPL/TPL clarification be any improvement ?
+Smatch reported issues including a derference of a pointer before its
+NULL check and the use of an uninitialised variable.
 
-This statement used to be sensible, as long as all those size limit
-options were spread out over many different Kconfig files. Now having
-them all together in on place, I find it rather obvious.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Andrew Goodbody (2):
+      soc: ti: k3-navss-ringacc: NULL check before dereference
+      soc: ti: k3-navss-ringacc: Do not use uninitialised variable
 
-Furthermore, if you want maximum accuracy, you'd have to extend the text
-to also include a reference to VPL and u-boot-with-spl config options.
-But even then, you still won't be able to fully grasp the functioning of
-BOARD_SIZE_LIMIT without consulting the Makefile.
+ drivers/soc/ti/k3-navss-ringacc.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+---
+base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
+change-id: 20250812-k3-navss-70dff322484b
 
-Well, that's what I thought. If you don't agree, I'm also fine to just
-leave it as is.
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
