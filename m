@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF24ECA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 13:58:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBCA8CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 14:15:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 260A583390;
-	Tue, 12 Aug 2025 15:58:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 218CE8307F;
+	Tue, 12 Aug 2025 16:15:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QxQfNGZV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MYpAFNGK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 297BF833FC; Tue, 12 Aug 2025 15:26:06 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id DA98383290; Tue, 12 Aug 2025 16:15:31 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EF3283390
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 15:26:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4219483071
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 16:15:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-af98b77d2f0so1016981766b.3
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 06:26:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-741b8c26e70so1133021a34.0
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 07:15:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1755005163; x=1755609963;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QtgLhjVDncV6kKjDGtWzgP+vyaxQtj4IqXnjj4TLsbI=;
- b=QxQfNGZVr46PG7ElpUf/COuygipLEm9WmV79DN1TnkkYBXc2cIYxZQOllaWaLwSy5A
- ytLMLpWEZfxOENpa5c1qtz9/Fn907NFxvYKnEYiL8G1936EUgJvsjGUnuHO5Pb+xZOQA
- YzHvk7SmDtea7Fac2acMkFMRaZmYxawgjZRYt0Q9JSfo31EK+mvJBKtnUnPUTRzPObf/
- BIDOKUw+dpQdTRggQBMVVhIGF+vXFbW21ynMtkyme54gasZk3r/nyhuhepAjsaKa66Tx
- kob02Ruqik4wnDTypMOXLM+xRzz+XqZ1iqOsRBn5WeMspssPChO+OZyuyf0nZi6kIV7p
- Mccw==
+ d=konsulko.com; s=google; t=1755008128; x=1755612928; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gLO6ykzafXA7CdrBuCQpOkq39CLn9QkjjOHgE72jSo8=;
+ b=MYpAFNGKvVQ4jr5J/yMNjUe0I7MA2B3NZoWm6TZI2NCYWg9J2QsHOZ38nLWkIrrDU9
+ GxrsZ4YS1KsgbvH9RX3a8mflfQPcbjFU9Btd0akw9l7Vox1COhnJEHtyEciMa4cZMfAg
+ xCSYh2jRrf/6QQojBuc15Me565uNs/w3QZpoo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755005163; x=1755609963;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QtgLhjVDncV6kKjDGtWzgP+vyaxQtj4IqXnjj4TLsbI=;
- b=h6f4YUlPQwoEtfzgYwoJDcp8kKrJtJ35YDMkIBnZCks3FraKtUpmI/8hjl+rSBK8BW
- eCZ0NqDoN6G6dmpUO63p+rKOjPCJ4I9EXH521OM7g5va1tX6Mc+isCgLzq1xcCH+9Yq1
- GZfOqN7cznYsJAkiLRtIg6IDTb4r9fBUZMav2CMJ87rgGlDK8hmDHaVdCxy1QJq+2eE1
- JYZH+mCI6jBGtT+dMNsT0gyg8EP476j59JkV+U+q6zCvO5xcwEO35C5mMLbVu0haV6OC
- fhXKXOBkBkjJxTjQvJjvaKBT90k/f5i49CSfwn/3gZI9T7eS3AZGCZso4//PJCUBDUGy
- rhEQ==
+ d=1e100.net; s=20230601; t=1755008128; x=1755612928;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gLO6ykzafXA7CdrBuCQpOkq39CLn9QkjjOHgE72jSo8=;
+ b=lNj83jjMPBFciceuzDzDnSiRc/cpcVbY6p/kacWif2kOwm9yvPRthwkaxrwqyEeOLF
+ chJrKlSsQe/oX1OvbgNB5XN9yikXzE4tNyvPcT48bFkgGALOPpie1Qa8xFjbm/Ae8+Ik
+ DRT2+dSJY28mgQRNsRvMR7N4ar/LV314ri7OqosYvsrYFjdYxIMGJJrnGwDh+MHBFhTK
+ HNLOhydHRIdV5GqIknmAIdqGKQodjP4QBNRTJlW2f8Vl8RkEy1OQIzMYxov0ZcOZmRHz
+ 0xv419J/EkuY1iNLgb1rEN6YbOE2ojfVfuxFqckA01cci+WvPQeeRJvt2JGLhqplI7dC
+ CxSQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEYM5Wau/LVOXKMMrajrMvi1G+T1/24W0t21w1hZ3oQN1olC/j/EjSkCcgX1oLAZ+RIkp/lRg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyE2D1Sz3bboRdEL8Ogkj/AQjMuoZqrle7R9s2pB20ipATRTIyB
- Uz/ie1hcIiW2RRCTu8r4NGgpamnqKyserluJ/8BY/WyEcGOu/RN579sVyYk8HVYS9H4=
-X-Gm-Gg: ASbGnctYL6Rl62EO9n2DA3AXQeyMpJf5zBqelbmx8a9sUseFTzIL00I7Jo/nJARn9bR
- EwHFNt+Ok5+iKswghDrmCrI61E0oxij3Ko9pFlamJoaUSDbeJzOh1uPQnHmAw/oiy2FJcbC6Dsj
- 86r25oPK3kbnhNHSVzD4gTLa9X9RZAqFocYqxTL8hhMq7Ikf+++m22Tc5JfujbV0sf5upYbV9Cp
- VpqJnd3Hnv3ogWKvUW6j3ZEeVrB8tYAgY7oguyq4tygR5vKUBqoGtvOYies8YZBdo+MiClCmdXu
- Qb++cdjVaD0jaD9hYzaC/OF8ZaWVMr1T6ZCZiuNpbo/+NsG8NrSKlShVt2uFXnSF0mIWV0bgSzB
- cnyL7/4zvE9G8Kg==
-X-Google-Smtp-Source: AGHT+IElAdZH6iRxSpN6EnK788bQtIEPCXAP7jqvBcy4iBKU6J7KsktIwXPmCzDOMJSbPIFVy69RMw==
-X-Received: by 2002:a17:906:9fca:b0:af2:b9b5:1c06 with SMTP id
- a640c23a62f3a-af9c6453129mr1597763566b.14.1755005162792; 
- Tue, 12 Aug 2025 06:26:02 -0700 (PDT)
-Received: from localhost ([195.52.61.108]) by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-af91a0766e2sm2199660066b.27.2025.08.12.06.26.00
+ AJvYcCW2QIH/rXoHp2F07hgmlY9lL1Vnjn4sc+g1lTz/jKdYX1B3aX5wBPU7/qT6Kxzyw+iWm3x7VRQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5gnzX5v4p6SWSGI7tbNxhrFdEfOqhszD8NJ2RcdaRYrDRGAs5
+ JQmGB1c6rg+XEyoWwicpKEKmWzjP0IeVHfPA+xbQvVfit8iVF8sdXiOAI6y2+6AV9Jj8W63N4+F
+ JqPmgYgE=
+X-Gm-Gg: ASbGncvFvPO1ISCHmJ6mZorSZwf6w63A7lqA7gFMaMWwvc+wtmjUjDp2AoR4/uk6jsZ
+ eDjh9wQor7WtIC4TSIsCbO/oDMXzj7Vhk8Ss3sNZyEKJQ8ouI+LpC32/Mbg7/TlEwazHqnk2eTd
+ kzFgSxoZgwGmiInwnZ1FXxgSup66pKj76o0bps7rk/VEY5lt9046ZEzEPcFnRQzT6EQqpqoUQYY
+ j/saqohyXMkm9Jk7tcLBp0LwN17agLaFptIIk+3gOg6WNx9JIk/FjuFGAwLnbP9d8FXIvuzi9mW
+ gQw8fcwBc64rGv9fRloh1xaRRnIovECQqFvMYfLIX1LCanRYQFi+r7QjHjp4njoVczCINP4kzB7
+ zukYGh08WASea4DsPeBwXFcc66q8aRfunbhcHhGhrFMyeV3SdlHWChPxZ
+X-Google-Smtp-Source: AGHT+IELKcm/elluXm7tEoBv14tDYpCE5p62P8ifJKGDBDBqdkm7oDW/7TKYXG4uo/3V1zoHPoDQoQ==
+X-Received: by 2002:a05:6830:4084:b0:727:3111:1416 with SMTP id
+ 46e09a7af769-74366c8f123mr2054977a34.24.1755008127696; 
+ Tue, 12 Aug 2025 07:15:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-30c3a9d071csm3010640fac.16.2025.08.12.07.15.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 06:26:00 -0700 (PDT)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=1ec1c947af5f0c00cd54054de5f869e7620c6b98ed15cb72325b102ada23;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Tue, 12 Aug 2025 15:25:52 +0200
-Message-Id: <DC0HEKLG5NCR.1XPU8UANUK4I4@baylibre.com>
-Cc: "Sebin Francis" <sebin.francis@ti.com>, "Dhruva Gole" <d-gole@ti.com>,
- <u-boot@lists.denx.de>, "Kevin Hilman" <khilman@baylibre.com>, "Vishal
- Mahaveer" <vishalm@ti.com>, "Kendall Willis" <k-willis@ti.com>
-Subject: Re: [PATCH v3 03/22] ram: k3-ddrss: Add support for DDR in
- self-refresh
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Akashdeep Kaur" <a-kaur@ti.com>, "Sumit Garg" <sumit.garg@kernel.org>,
- "Nishanth Menon" <nm@ti.com>, "Bryan Brattlof" <bb@ti.com>, "Tom Rini"
- <trini@konsulko.com>, "Robert Nelson" <robertcnelson@gmail.com>, "Vignesh
- Raghavendra" <vigneshr@ti.com>
-X-Mailer: aerc 0.20.1
-References: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-0-a4da322c16af@baylibre.com>
- <20250623-topic-am62-ioddr-v2025-04-rc1-v3-3-a4da322c16af@baylibre.com>
- <cd4f6a21-74c3-45e1-bece-426efb2b0705@ti.com>
-In-Reply-To: <cd4f6a21-74c3-45e1-bece-426efb2b0705@ti.com>
-X-Mailman-Approved-At: Tue, 12 Aug 2025 15:58:39 +0200
+ Tue, 12 Aug 2025 07:15:26 -0700 (PDT)
+Date: Tue, 12 Aug 2025 08:15:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH RFC] rockchip: add /chosen/bootsource to U-Boot proper DT
+Message-ID: <20250812141524.GN124814@bill-the-cat>
+References: <20250730-dt-chosen-bootsource-v1-1-955f045b386b@cherry.de>
+ <20250730172438.GU1807455@bill-the-cat>
+ <8f60f137-0e58-4dd0-9c7b-dd8bce55617d@cherry.de>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Jy/LeCa7OGfj7MHd"
+Content-Disposition: inline
+In-Reply-To: <8f60f137-0e58-4dd0-9c7b-dd8bce55617d@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,180 +102,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---1ec1c947af5f0c00cd54054de5f869e7620c6b98ed15cb72325b102ada23
+
+--Jy/LeCa7OGfj7MHd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
 
-Hi Akashdeep,
+On Tue, Aug 12, 2025 at 03:15:00PM +0200, Quentin Schulz wrote:
+> Hi Tom,
+>=20
+> On 7/30/25 7:24 PM, Tom Rini wrote:
+> > On Wed, Jul 30, 2025 at 02:03:18PM +0200, Quentin Schulz wrote:
+> >=20
+> > > From: Quentin Schulz <quentin.schulz@cherry.de>
+> > >=20
+> > > U-Boot typically can be loaded from different storage media, such as
+> > > eMMC, SD card, SPI flash, but also from non-persistent media such as =
+USB
+> > > (via proprietary protocols loading directly into SRAM, or fastboot, D=
+FU,
+> > >   etc..), JTAG, ...
+> > >=20
+> > > This information is usually reported by the BootROM via some propriet=
+ary
+> > > mechanism (some specific address in registers/DRAM for example). For
+> > > Rockchip, that information is stored in a register
+> > > (BROM_BOOTSOURCE_ID_ADDR).
+> > >=20
+> > > While we already have the information about which medium was used to
+> > > load U-Boot proper from SPL (via /chosen/u-boot,spl-boot-device), this
+> > > new property represents the medium used to load U-Boot first phase
+> > > (depending on configuration, can be VPL/TPL/SPL) which absolutely may
+> > > differ from the one used to load U-Boot proper!
+> > >=20
+> > > It would be useful to know which medium was used to load the first ph=
+ase
+> > > of U-Boot, for example to check fallback mechanisms (proper loaded fr=
+om
+> > > a different medium than first phase) are actually working.
+> > >=20
+> > > For now, this only applies to Rockchip's U-Boot proper DT but could be
+> > > applied to the kernel's as well and possibly for other architectures =
+or
+> > > vendors.
+> > >=20
+> > > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > > ---
+> > > I have a board (RK3399 Puma) running U-Boot which currently has 9 boot
+> > > scenarios (eMMC/SD/SPI-NOR for the first phase, eMMC/SD/SPI-NOR for t=
+he
+> > > next phases; not counting USB loading yet, which would make it a few
+> > > more). I cannot force the BootROM of this board to select a specific
+> > > device aside from erasing the other media.
+> > >=20
+> > > The only way to identify which device was used for the first phase is=
+ to
+> > > parse U-Boot first phase console output or add some custom logic for =
+my
+> > > board. To validate that a new version of the bootloader works, includ=
+ing
+> > > the fallback mechanisms, I need to make sure the BootROM loads the fi=
+rst
+> > > phase from the expected device otherwise I may have false positives.
+> > > This would be useful for automated testing.
+> > >=20
+> > > Patches pending in the devicetree-spec[1] and dt-schema[2], hence the
+> > > RFC here.
+> > >=20
+> > > [1] https://lore.kernel.org/devicetree-spec/20250505-bootsource-v2-1-=
+5a315d9bff26@cherry.de/
+> > > [2] https://github.com/devicetree-org/dt-schema/pull/169
+> >=20
+> > I am conceptually fine with the changes, but this needs to have the
+> > schema side approved first, just for the record.
+> >=20
+>=20
+> Now merged in the dt-schema (still no news on the spec side though aside
+> from a R-b from Simon 2 months ago). Is that good enough or do we need to
+> wait on the spec part too?
 
-On Wed Jul 2, 2025 at 8:49 AM CEST, Akashdeep Kaur wrote:
-> Hi Markus,
->
-> On 23/06/25 17:38, Markus Schneider-Pargmann wrote:
->> In IO+DDR the DDR is kept in self-refresh while the SoC cores are
->> powered off completely. During boot the normal initialization routine of
->> DDR is slightly different to exit self-refresh and keep the DDR contents=
-.
->>=20
->> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
->> ---
->>   drivers/ram/k3-ddrss/k3-ddrss.c | 177 ++++++++++++++++++++++++++++++++=
-++++++++
->>   1 file changed, 177 insertions(+)
->>=20
->> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-d=
-drss.c
->> index 6590d57ad84f3c4dc5c72c6c5889038c463b0469..874614140c6d4a785fcca6ed=
-a4a8736e1183e193 100644
->> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
->> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
->> @@ -57,6 +57,16 @@
->>   #define DDRSS_V2A_INT_SET_REG_ECC2BERR_EN	BIT(4)
->>   #define DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN	BIT(5
->> +static void k3_ddrss_self_refresh_exit(struct k3_ddrss_desc *ddrss)
->> +{
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_CTL_169,
->> +				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK |
->> +				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK,
->> +				 0x0);
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_PHY_1820,
->> +				 0,
->> +				 BIT(2) << K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT);
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_CTL_106,
->> +				 0,
->> +				 K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT);
->> +	writel(0, ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_PI_146);
->
-> Can we change this writel also to reg update function based call?
+Ah good, OK. So should this be in v2025.10 or will v2026.01 be OK? It's
+small enough I'm OK taking it now.
 
-Yes, that would be possible, but it would transform a single write into
-a read/update/write.
+--=20
+Tom
 
->
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_PI_150,
->> +				 K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN,
->> +				 0x0);
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_PI_6,
->> +				 0,
->> +				 K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R);
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_CTL_21,
->> +				 K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE,
->> +				 0);
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_CTL_20,
->> +				 0,
->> +				 K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE);
->> +}
->> +
->> +static void k3_ddrss_lpm_resume(struct k3_ddrss_desc *ddrss)
->> +{
->> +	int ret;
->> +	unsigned long timeout_start;
->> +
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_CTL_160,
->> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK,
->> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY);
->> +	ret =3D wait_for_bit_32(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL=
-_345,
->> +			      (1 << K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT),
->> +			      true, 5000, false);
->> +	if (ret)
->> +		panic("Failed waiting for low power command %d\n", ret);
->> +
->> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
->> +				 K3_DDRSS_CFG_DENALI_CTL_353,
->> +				 0,
->> +				 1 << K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT);
->> +
->> +	timeout_start =3D get_timer(0);
->> +	while (1) {
->> +		if (get_timer(timeout_start) > 5000)
->> +			panic("Failed waiting for low power state\n");
->> +
->> +		if ((readl(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_169) &
->> +		     K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK) =3D=3D
->> +		    0x40 << K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT)
->> +			break;
->
-> As i see, wait for bit function can wait on mask also, can we use wait=20
-> on the bit transition with timeout in this case?
-
-If I see it correctly wait_for_bit_32 accepts a mask but can only check
-if the full mask is set or not. In the example above we would need
-separate arguments for mask and expected value, e.g.
-K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK as mask and 0x40 shifted as
-the expected value.
-
->> +	}
->> +}
->> +
->> +static void k3_ddrss_deassert_retention(struct k3_ddrss_desc *ddrss)
->> +{
->> +	int ret;
->> +
->> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
->> +				 0x0,
->> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD |
->> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK,
->> +				 0);
->> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
->> +				 0x0,
->> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
->> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD);
->> +
->> +	ret =3D wait_for_bit_32((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
->> +			      K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
->> +			      true, 5000, false);
->> +	if (ret)
->> +		panic("Failed waiting for latching of retention %d\n", ret);
->> +
->> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
->> +				 0x0,
->> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
->> +				 0);
->> +}
->> +
->> +static bool k3_ddrss_wkup_conf_canuart_wakeup_active(struct k3_ddrss_de=
-sc *ddrss)
->> +{
->> +	u32 active;
->> +
->> +	active =3D readl(ddrss->ddrss_ctrl_mmr + K3_WKUP_CTRL_MMR_CANUART_WAKE=
-_STAT1);
->
-> As seen in=20
-> https://elixir.bootlin.com/u-boot/v2025.07-rc5/source/arch/arm/dts/k3-am6=
-2a-ddr.dtsi#L10=20
-> - the address range for CTRL MMR is starting from 0x43014000 and has a=20
-> size of 0x100 but the address we want to access is outside that range.=20
-> (0x43018318)
-> We need to increase the address range in this node in dt file as well.
-
-Thanks for pointing this out. I am trying to push for a syscon node
-upstream without success yet. The CTRL_MMR register definition is
-overlapping with the wkup_conf device node in the upstream dts
-k3-am62a-wakeup.dtsi, so I chose to didn't increase the size.
-
-Best
-Markus
-
---1ec1c947af5f0c00cd54054de5f869e7620c6b98ed15cb72325b102ada23
+--Jy/LeCa7OGfj7MHd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaJtA4BsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlN7
-BwEAlnvQZNJ3yqqNiaC1p4xd46RYNlBwDOujFy5SPECIjMYBAPw+/fW60h6U9Fpc
-sAlk30QYiig5xmCuwD+/rbhJjj4G
-=W5Y+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJtMeAAKCRAr4qD1Cr/k
+ClP5AQDr5uvCQvITSp12L969OKYBLqJpvSvhvqYgv4EOJc8X8wD/e9UeBO4A3Rwz
+TwF40xfDvAG//6kq5tVUfcnrFjWUAwk=
+=UtR8
 -----END PGP SIGNATURE-----
 
---1ec1c947af5f0c00cd54054de5f869e7620c6b98ed15cb72325b102ada23--
+--Jy/LeCa7OGfj7MHd--
