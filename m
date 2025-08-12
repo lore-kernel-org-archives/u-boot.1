@@ -4,112 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 393B5CA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 18:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4176CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 19:02:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8038830F6;
-	Tue, 12 Aug 2025 20:08:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 382C2830A0;
+	Tue, 12 Aug 2025 21:02:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=inbox.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Dnbr9LVC";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=inbox.ru header.i=@inbox.ru header.b="kHvh5Za1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76D4983102; Tue, 12 Aug 2025 20:08:53 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id F1DA28312A; Tue, 12 Aug 2025 20:56:17 +0200 (CEST)
+Received: from send240.i.mail.ru (send240.i.mail.ru [95.163.59.79])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82E75830A0
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 20:08:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45DF1830A0
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 20:56:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=inbox.ru
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1755022130; x=1755626930; i=xypron.glpk@gmx.de;
- bh=jPd4875VrRwtjrLzzrtFHM5WRINM6JKyaEbCrNdQiO4=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=Dnbr9LVCDis6err/0JaoRmvwBO5ho9BPHH1Rg6JI1fXawdA6QcheiFiHHak69bWQ
- 6dRMXsMwTioRZZodJwyL/lQMVSVFM4Jl4bZ/2Dms/q52o8c2TCc9lrRqj7wYLBcVR
- ZzUeioy+saKSZ00CYqMpeUuvQYyeeOj2kUddENrwa2HDMSJhgtVlIU/EFwfd6nBPU
- uYs0KOBdLm3Rzvt4LyhXYLsYaucq8Ix+7cyGNUUjeELs4lEGdt34iqPW0JkJCCg7O
- u6FaOHLdsIUoK5EiqE3h0nyEn7l6j3x4rqs1fNM9IVl4l4CUM9RBEqnzit63rRT/V
- ZiUVB36y1xFIrvT3mQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.105.11]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCsPy-1uuj7B2Ve4-00Azvl; Tue, 12
- Aug 2025 20:08:50 +0200
-Date: Tue, 12 Aug 2025 20:08:44 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH=5D_efi=5Floader=3A_Make_EFI=5FVARI?=
- =?US-ASCII?Q?ABLES=5FPRESEED_depend_on_!COMPILE=5FTEST?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250812180132.3057893-1-trini@konsulko.com>
-References: <20250812180132.3057893-1-trini@konsulko.com>
-Message-ID: <D6F70FDA-51F2-406F-B3EF-ED83292CF9F0@gmx.de>
+ spf=pass smtp.mailfrom=fido_max@inbox.ru
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru;
+ s=mail4; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References
+ :Cc:To:Subject:MIME-Version:Date:Message-ID:From:Sender:Reply-To:To:Cc:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:
+ List-Archive:X-Cloud-Ids:Disposition-Notification-To;
+ bh=Ba8jsx6wmks4Jl8Mrc+cv01ZnR0fhYNb1LQEVyLR/qU=; t=1755024975; x=1755114975; 
+ b=kHvh5Za1K2MJmuYGDCRRrJJGX5JYzAWk9lW+tQFoW8Im12Nx8Rczi4YhO30bP0saShqPy8Wz74L
+ GFHC8InW/hOzAFx2RQiO1bpvLTFeSaDlI2LV5rVHwso0SofOnEOACxkVAXDaP7gOZaInqx/X0SPas
+ XA9Ph2XZRULake7bOfsv0loWT71TJOqucx2QE/ZomYm/jy4AMVRAdU07dDyKJmZkliTtHemGT5x00
+ 49igOLgIR1B2FErgxBFmDnhxCmwwttZffknWhZEZbsfe2BjNY2gycTX++b8/YrHrer7OjMEu32GFO
+ rmkiVZXpjDN51aQrPBF9uRCi2/VY38sMHFuA==;
+Received: by exim-smtp-657df4cdbd-6lqhr with esmtpa (envelope-from
+ <fido_max@inbox.ru>)
+ id 1uluAP-00000000LSk-274p; Tue, 12 Aug 2025 21:56:14 +0300
+Message-ID: <9294dcae-42fa-45c2-962b-691fdaada13a@inbox.ru>
+Date: Tue, 12 Aug 2025 21:56:12 +0300
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:gD19xNrm340NdPRgOMQJqi2nEoKlePJzSqICdQ3MrSbXFs0ESC8
- dxTFaBU3eo9E3ZR+laB4C76jz6QCKuh1tor/3mcxQjqLVGVmAnTdEZ7YKBgcal5Rj28AxxB
- s8Xh9DZrHWQpsdAJW7y66VRNlAYXfgB9C8LXsjtNk5nndNPVfOHN8AzWob0LkV495KGpbwW
- YM4jJJo9UXXtSqQW23/lg==
-UI-OutboundReport: notjunk:1;M01:P0:NyAgQLFREtM=;U+tgLRbLjhaktoR89kxHPOaucrZ
- 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
- t9/Qs5VMIOw==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] clk: introduce of_clk_detect_critical helper
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: u-boot@lists.denx.de, quentin.schulz@cherry.de, jonas@kwiboo.se,
+ marex@denx.de, semen.protsenko@linaro.org, miquel.raynal@bootlin.com,
+ patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com, sjg@chromium.org,
+ trini@konsulko.com, seanga2@gmail.com, lukma@denx.de
+References: <20250812162946.892728-1-fido_max@inbox.ru>
+ <689b6eb9.050a0220.d7261.4aab@mx.google.com>
+Content-Language: en-US
+From: Maxim Kochetkov <fido_max@inbox.ru>
+In-Reply-To: <689b6eb9.050a0220.d7261.4aab@mx.google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: exim-smtp-657df4cdbd-6lqhr;
+ auth=pass smtp.auth=fido_max@inbox.ru
+ smtp.mailfrom=fido_max@inbox.ru
+X-Mailru-Src: smtp
+X-4EC0790: 10
+X-7564579A: 646B95376F6C166E
+X-77F55803: 4F1203BC0FB41BD9C53E288BA7BF03061562304242DC1DBDC2F78164DCED4E4C00894C459B0CD1B9636E5EDC46D03554460A1D3C0470A96D69E04806EEB58F05FDF874762BC5A246EDD16E8EE75FCBE4
+X-7FA49CB5: 4BFC5D8501E51E47CA8F6BE7C18995EBF17A87A28845877638471299500719A2A6333920E0F9D84FF01C4FAB541DE28FCE208E8FC270FF883B56EE1CD41719AD6EEED3D1F8F94EF624AD3460B7163A6507627EB66F572D0C63D3EDE7CE9F49F504D6AF0AB02B6E8A0BD82CCAF9CC6664E537E12F68611B83C47E3B7CE6D2E883A99006929014511A3ACB880A4D218A94D06846632FBE334206AB96975ABF485581DA2A2DF6E06EB9C0F7AC48229FE00DAC7943500F4AA200B2D76FFBEB4135451A495265874E50823A509FAFE750B9BFE47C9C07E8DDB84581DA2A2DF6E06EB9961C42723899017F08BD49AA745F4EB947D288F8AA3B935C386B6D831821CFCFE47C9C07E8DDB845C2F20794B249F36DCA8F6BE7C18995EBAA484E9BD3D4964B9E5F4869DB6CD4C2953E0C1C45D6C2334B13DB96BB93DED2A3C43680391634B289ECC0B28F30D08BB30857F2626D88CBE117F2D40454C7D4D535C393DDB9A574
+X-C1DE0DAB: B30BEEBCB9DAB3F0B6B691E933463DE1478DEAD3877DCF164B047A768301ACBDEA2DBE28EDD98AB9BCC2DF43DD22AB26DB841BC0FD54B826F8DB205C223665D42290FBF13227320B
+X-C8649E89: 1C3962B70DF3F0ADE00A9FD3E00BEEDF3FED46C3ACD6F73ED3581295AF09D3DF87807E0823442EA2ED31085941D9CD0AF7F820E7B07EA4CFB2DE471CEB449FC4F8CA6299C8FAAB7E98E4ECB0E5B35FE6A85DFF047FD17670A54F2CFF063EE8C0852ABD534936F63186DBBAF023832A85C1D46AB69B1799AD0BBAAD9DCB1AE4BEE4FDFA4A036B0C3902C26D483E81D6BEEB84411BD425175970A7FB4ED9620804ADE12199CE9660BE
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+ObcCpyrx6l7KImUglyhkEat/+ysWwi0gdhEs0JGjl6ggRWTy1haxBpVdbIX1nthFXMZebaIdHP2ghjoIc/363UZI6Kf1ptIMVUcWHxAuDCnG+0nXBAtgZ24=
+X-Mailru-Sender: 689FA8AB762F7393FE9E42A757851DB667691964590DC4277E72B3C874DCD9F3FB02E9567810733890DE4A6105A3658D481B2AED7BCCC0A49AE3A01A4DD0D55C6C99E19F044156F45FEEDEB644C299C0ED14614B50AE0675
+X-Mras: Ok
+X-Mailman-Approved-At: Tue, 12 Aug 2025 21:02:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,36 +88,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 12=2E August 2025 20:01:32 MESZ schrieb Tom Rini <trini@konsulko=2Ecom>:
->When doing compile testing build we cannot rely on having a valid file
->for EFI_VAR_SEED_FILE to exist, so disable this option when doing
->compile tests=2E
->
->Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
-
-Acked-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+12.08.2025 19:41, Christian Marangi wrote:
+> On Tue, Aug 12, 2025 at 07:29:46PM +0300, Maxim Kochetkov wrote:
+>> This helper find clock-critiacl property in dts and assign
+> 
+> clock-critiacl -> typo
 
 
->---
->This was found when working on "allyesconfig" and the issue is that the
->file in EFI_VAR_SEED_FILE will not exist=2E
->Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
->Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
->---
-> lib/efi_loader/Kconfig | 1 +
-> 1 file changed, 1 insertion(+)
->
->diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
->index c2aa88f59fbb=2E=2Ea7092c2e8a8a 100644
->--- a/lib/efi_loader/Kconfig
->+++ b/lib/efi_loader/Kconfig
->@@ -195,6 +195,7 @@ endchoice
->=20
-> config EFI_VARIABLES_PRESEED
-> 	bool "Initial values for UEFI variables"
->+	depends on !COMPILE_TEST
-> 	depends on !EFI_MM_COMM_TEE
-> 	help
-> 	  Include a file with the initial values for non-volatile UEFI variable=
-s
+Thanks. Will fix it in v2
+
+> 
+>> CLK_IS_CRITICAL flag to the clock.
+>>
+>> Signed-off-by: Maxim Kochetkov <fido_max@inbox.ru>
+>> ---
+>>   drivers/clk/clk-uclass.c | 17 +++++++++++++++++
+>>   drivers/core/of_access.c | 22 ++++++++++++++++++++++
+>>   include/clk.h            | 28 ++++++++++++++++++++++++++++
+>>   include/dm/of_access.h   | 17 +++++++++++++++++
+>>   4 files changed, 84 insertions(+)
+>>
+>> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+>> index 7262e89b512..4f35b90382f 100644
+>> --- a/drivers/clk/clk-uclass.c
+>> +++ b/drivers/clk/clk-uclass.c
+>> @@ -835,6 +835,23 @@ struct clk *devm_clk_get(struct udevice *dev, const char *id)
+>>   	return clk;
+>>   }
+>>   
+>> +int of_clk_detect_critical(struct device_node *np, int index,
+>> +			   unsigned long *flags)
+>> +{
+>> +	struct property *prop;
+>> +	const __be32 *cur;
+>> +	uint32_t idx;
+>> +
+>> +	if (!np || !flags)
+>> +		return -EINVAL;
+>> +
+>> +	of_property_for_each_u32(np, "clock-critical", prop, cur, idx)
+>> +		if (index == idx)
+>> +			*flags |= CLK_IS_CRITICAL;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>>   int clk_uclass_post_probe(struct udevice *dev)
+>>   {
+>>   	/*
+>> diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
+>> index b11e36202c1..59dda3ae152 100644
+>> --- a/drivers/core/of_access.c
+>> +++ b/drivers/core/of_access.c
+>> @@ -666,6 +666,28 @@ int of_property_read_string_helper(const struct device_node *np,
+>>   	return i <= 0 ? -ENODATA : i;
+>>   }
+>>   
+>> +const __be32 *of_prop_next_u32(struct property *prop, const __be32 *cur,
+>> +			       u32 *pu)
+>> +{
+>> +	const void *curv = cur;
+>> +
+>> +	if (!prop)
+>> +		return NULL;
+>> +
+>> +	if (!cur) {
+>> +		curv = prop->value;
+>> +		goto out_val;
+>> +	}
+>> +
+>> +	curv += sizeof(*cur);
+>> +	if (curv >= prop->value + prop->length)
+>> +		return NULL;
+>> +
+>> +out_val:
+>> +	*pu = be32_to_cpup(curv);
+>> +	return curv;
+>> +}
+>> +
+>>   static int __of_root_parse_phandle_with_args(struct device_node *root,
+>>   					     const struct device_node *np,
+>>   					     const char *list_name,
+>> diff --git a/include/clk.h b/include/clk.h
+>> index f94135ff778..ea708f54fd5 100644
+>> --- a/include/clk.h
+>> +++ b/include/clk.h
+>> @@ -589,6 +589,27 @@ bool clk_dev_binded(struct clk *clk);
+>>    */
+>>   ulong clk_get_id(const struct clk *clk);
+>>   
+>> +/**
+>> + * of_clk_detect_critical() - set CLK_IS_CRITICAL flag from Device Tree
+>> + * @np: Device node pointer associated with clock provider
+>> + * @index: clock index
+>> + * @flags: pointer to top-level framework flags
+>> + *
+>> + * Detects if the clock-critical property exists and, if so, sets the
+>> + * corresponding CLK_IS_CRITICAL flag.
+>> + *
+>> + * Do not use this function. It exists only for legacy Device Tree
+>> + * bindings, such as the one-clock-per-node style that are outdated.
+>> + * Those bindings typically put all clock data into .dts and the Linux
+>> + * driver has no clock data, thus making it impossible to set this flag
+>> + * correctly from the driver. Only those drivers may call
+>> + * of_clk_detect_critical from their setup functions.
+>> + *
+>> + * Return: error code or zero on success
+>> + */
+>> +int of_clk_detect_critical(struct device_node *np, int index,
+>> +			   unsigned long *flags);
+>> +
+>>   #else /* CONFIG_IS_ENABLED(CLK) */
+>>   
+>>   static inline int clk_request(struct udevice *dev, struct clk *clk)
+>> @@ -665,6 +686,13 @@ static inline ulong clk_get_id(const struct clk *clk)
+>>   {
+>>   	return 0;
+>>   }
+>> +
+>> +int of_clk_detect_critical(struct device_node *np, int index,
+>> +			   unsigned long *flags)
+>> +{
+>> +	return 0;
+>> +}
+>> +
+>>   #endif /* CONFIG_IS_ENABLED(CLK) */
+>>   
+>>   /**
+>> diff --git a/include/dm/of_access.h b/include/dm/of_access.h
+>> index 44143a5a391..dba725498f5 100644
+>> --- a/include/dm/of_access.h
+>> +++ b/include/dm/of_access.h
+>> @@ -405,6 +405,17 @@ int of_property_read_string_helper(const struct device_node *np,
+>>   				   const char *propname, const char **out_strs,
+>>   				   size_t sz, int index);
+>>   
+>> +/*
+>> + * struct property *prop;
+>> + * const __be32 *p;
+>> + * u32 u;
+>> + *
+>> + * of_property_for_each_u32(np, "propname", prop, p, u)
+>> + *         printk("U32 value: %x\n", u);
+>> + */
+>> +const __be32 *of_prop_next_u32(struct property *prop, const __be32 *cur,
+>> +			       u32 *pu);
+>> +
+>>   /**
+>>    * of_property_read_string_index() - Find and read a string from a multiple
+>>    * strings property.
+>> @@ -701,4 +712,10 @@ int of_remove_property(struct device_node *np, struct property *prop);
+>>    */
+>>   int of_remove_node(struct device_node *to_remove);
+>>   
+>> +#define of_property_for_each_u32(np, propname, prop, p, u)	\
+>> +	for (prop = of_find_property(np, propname, NULL),	\
+>> +		p = of_prop_next_u32(prop, NULL, &u);		\
+>> +		p;						\
+>> +		p = of_prop_next_u32(prop, p, &u))
+>> +
+>>   #endif
+>> -- 
+> 
+> I would split these of additional function to a separate commit also
+> where they come from? They are ported from Linux Kernel?
+
+Ok, I will split it.
+Yes these function are ported from Linux Kernel.
+
+> 
+> Also would be ideal to have some scenario where it's needed to declare a
+> clock in DT that is critical. Isn't that handled directly by the clock
+> driver internally?
+> 
+
+Yes. Now we can use this property from DT by custom drivers to mark 
+critical clocks.
 
