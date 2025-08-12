@@ -4,85 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9B23C87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 10:37:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE9FCC87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 10:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08E1183253;
-	Tue, 12 Aug 2025 12:36:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D1F0483257;
+	Tue, 12 Aug 2025 12:42:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nQITjYvl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W7n31P0j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4196583257; Tue, 12 Aug 2025 12:36:57 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F32B83236
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 12:36:55 +0200 (CEST)
+ id 2B11883287; Tue, 12 Aug 2025 12:42:27 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DF7D383236
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 12:42:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3b914186705so194403f8f.0
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 03:36:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754995014; x=1755599814; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NnmVwJmKyUJ5XOIPfi0yUX08NampTl64LRZpzV/9xfc=;
- b=nQITjYvlyETmvPjhcxYUyIEWD5KNVZTCr+VtDvhqTC2HXOttawc3o0Rfmt+tT0B+Nw
- q30pM9KbVmIAHyThpjRtRWZyUsGFJH41mnRRDarvuJAGFW9VkWF+5NfwVdP/Aa6Eq22X
- Vx3wyx5iUuHsdEnU8DeGDhlvjkiLbdnJWgAXRMpoNJks98geK0RZlTfaOgrGOm/AXnM5
- UObkQpJEP7exirksuXkWMDFqJpy3eh/VYUn1D4os8ZLl8o9WvNWjo3UGGuI0STBcJemS
- dDCpZdEou71e+zzERy+TCyyAEVmsWCnZ32SKBZS8sLdeR3PaeVRNPGsoGqBBZOnOs/Pw
- 6Z+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754995014; x=1755599814;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NnmVwJmKyUJ5XOIPfi0yUX08NampTl64LRZpzV/9xfc=;
- b=maxTd+/RZM7vktG3Hx9pkc09eciqnVB6kq9zLswGufkNfdD5otPsCJsQP+QAf/yw84
- V0BFFDJl4F1aZHYqzsP7246EbKq9UlUxGWQ59Nkxij3XxNFUM2sbfLJP4lgCPsOzWrkL
- pLDbqlaq8l0NN91fvy3Nn5QvRUwlcsVk4m9Khb1gTrGTmvONKrF+N/RPw2J8qdnBULb6
- mBMvId9aXxCK03VXdEdQqurbJJWXhWRUkFgYkyi3W5WLPk7jY8Ugl8q6rdrEe9SpBjhp
- XVAyar75s/CpJnj35g/bx02FLuHAXTppzMnl7ITJXzmOvMIrJlId4TUKrBo5lNjyCAgH
- wYiA==
-X-Gm-Message-State: AOJu0YzAFz5IoukPpTPc7BNIq8ZaebPi0zIbIdZaHr+Ipedt3pOm3nAO
- JswfUnz889b2bX4oPUUiROga7GtEXMT0paLgJMLzEKxPuCWPq5px3Zp0Kek7wIKD/TA=
-X-Gm-Gg: ASbGncte0WsBRSxNe8HrrLi9mdyRIPv32ThhVJV84ogxEBecbYSeu6DtI3c5Y1WgWn0
- 94Wf7gpBBMsZSXOFmTEsff64Rpzde2iJ1Tvi86tjS05qDOhhXl2FuR/0QMATr9qbM77XPw0+5K2
- X/G4fFLh6mNlnfDNgcvRd7n8a/ESRgI21pdhKWlGeGMfbg0i5W8Zl3ba257NZAOhTQV02u9QIYi
- qsXCXWUl8gk+H6Tn35nJ+10IK9uMrLVlFf3SxNfek+ibWv5MnjbWsyB0at2LSZOE10jgoaxPZ9b
- 1l3TL7TKRXb+xyHoeEk7GAUgkKmLnqxWY3yWyqkGaRaE3eOZR7HGbLaECQpuJmWTrmo6aVm9Hku
- O6mYVyAhC/WIiMU6h6vccrOzYBhb5pbPNjUjw0uLSpDPStAHuJxg=
-X-Google-Smtp-Source: AGHT+IETa4WeA0pmie+0OftapEmCJ7vj5cUKj5jw6Bxzv+ZSG49C9PvrzBPO1d/gmq0aTvYVp+JP0Q==
-X-Received: by 2002:a05:6000:25c7:b0:3b8:ef61:bab7 with SMTP id
- ffacd0b85a97d-3b900b503d5mr11000285f8f.27.1754995014372; 
- Tue, 12 Aug 2025 03:36:54 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:97a2:1bc7:9f2e:6519])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b8e054036bsm34109370f8f.31.2025.08.12.03.36.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 03:36:53 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 12 Aug 2025 11:36:53 +0100
-Subject: [PATCH] sound: rt5677: Cannot test unsigned for being negative
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57CAgKZg1874883;
+ Tue, 12 Aug 2025 05:42:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1754995340;
+ bh=Cv9Wsrc3W3opHMWe1z3/82g+ekdXKyoci2gQg4h/gWM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=W7n31P0jArherrCq0GqD+HBgH+WMxKcqIWigXcbdHQF6tKJ1554jto2pTaPXsjpxr
+ 96exzTCCEYB57KTzR0DFfKI0m3bPojjrbOx2suRRIkMbWNfWC/JOTtTkqApt6YLaIh
+ j6OP082qwcqCcMNLnp+cJHADY8PI2BNarVjkomvk=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57CAgKpp242583
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 12 Aug 2025 05:42:20 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 12
+ Aug 2025 05:42:19 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 12 Aug 2025 05:42:19 -0500
+Received: from [172.24.235.200]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57CAgEoj218622;
+ Tue, 12 Aug 2025 05:42:15 -0500
+Message-ID: <095932d6-f6e0-41db-8d21-8d35ea8a2052@ti.com>
+Date: Tue, 12 Aug 2025 16:12:14 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/5] binman: Fix FIT image overlap issues for
+ testFitSplitElf
+To: Aristo Chen <jj251510319013@gmail.com>, <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
+ <al.kochet@gmail.com>, <paul.henrys_ext@softathome.com>, <bb@ti.com>,
+ <y.moog@phytec.de>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>, <afd@ti.com>,
+ <d.schultz@phytec.de>, <d-gole@ti.com>, <ravi@prevas.dk>,
+ <carlos.lopezr4096@gmail.com>, Aristo Chen <aristo.chen@canonical.com>
+References: <20250729125022.4220-1-aristo.chen@canonical.com>
+ <20250729125022.4220-3-aristo.chen@canonical.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250729125022.4220-3-aristo.chen@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250812-sound_rt5677-v1-1-52105f86182c@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAEUZm2gC/x2N0QqDMAwAf0XyvIIWnN1+Rcaoaap5iZLoEMR/X
- /XxDo47wEiZDN7VAUo/Np6lQPOoAKcoIzlOhcHXvq1D453Nm6Svru2z6xz5HDDji0JCKMkQjdy
- gUXC6IqF9vfSilHm/L/3nPP9iSJRvdQAAAA==
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,38 +87,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In rt5677_bic_or the call to rt5677_i2c_read returns an int so old
-should also be an int to receive that value and then be able to test it
-for being negative which would indicate an error.
+On 29/07/25 18:18, Aristo Chen wrote:
+> Fix one binman test that has memory region overlap issue, the test case
+> needed to be updated to use non-overlapping memory layouts.
+> 
+> * Tests fixed:
+>   - testFitSplitElf
+> 
+> * Changes made:
+>   1. ELF section layouts: added elf_sections_tee.lds with different
+>      address for TEE to avoid overlap with ATF address defined in
+>      elf_sections.lds
+>   2. Makefile to properly build elf_sections_tee binary
+>   3. Updat ftest.py to use separate ELF files for TEE vs ATF components
+>      in split-elf operations.
+> 
+> An upcoming commit will validate if the memory region is overlapped
+> 
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> ---
+>  tools/binman/ftest.py                  |  2 +-
+>  tools/binman/test/Makefile             |  6 ++++-
+>  tools/binman/test/elf_sections_tee.c   |  1 +
+>  tools/binman/test/elf_sections_tee.lds | 31 ++++++++++++++++++++++++++
+>  4 files changed, 38 insertions(+), 2 deletions(-)
+>  create mode 120000 tools/binman/test/elf_sections_tee.c
+>  create mode 100644 tools/binman/test/elf_sections_tee.lds
+> 
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> index a90db3c9351..f0c0487300d 100644
+> --- a/tools/binman/ftest.py
+> +++ b/tools/binman/ftest.py
+> @@ -252,7 +252,7 @@ class TestFunctional(unittest.TestCase):
+>          TestFunctional._MakeInputFile('bl31.elf',
+>              tools.read_file(cls.ElfTestFile('elf_sections')))
+>          TestFunctional.tee_elf_path = TestFunctional._MakeInputFile('tee.elf',
+> -            tools.read_file(cls.ElfTestFile('elf_sections')))
+> +            tools.read_file(cls.ElfTestFile('elf_sections_tee')))
+>  
+>          # Newer OP_TEE file in v1 binary format
+>          cls.make_tee_bin('tee.bin')
+> diff --git a/tools/binman/test/Makefile b/tools/binman/test/Makefile
+> index 4d152eee9c0..66279e0e207 100644
+> --- a/tools/binman/test/Makefile
+> +++ b/tools/binman/test/Makefile
+> @@ -30,12 +30,13 @@ LDS_BINMAN_BAD := -T $(SRC)u_boot_binman_syms_bad.lds
+>  LDS_BINMAN_X86 := -T $(SRC)u_boot_binman_syms_x86.lds
+>  LDS_BINMAN_EMBED := -T $(SRC)u_boot_binman_embed.lds
+>  LDS_EFL_SECTIONS := -T $(SRC)elf_sections.lds
+> +LDS_EFL_SECTIONS_TEE := -T $(SRC)elf_sections_tee.lds
+>  LDS_BLOB := -T $(SRC)blob_syms.lds
+>  
+>  TARGETS = u_boot_ucode_ptr u_boot_no_ucode_ptr bss_data bss_data_zero \
+>  	u_boot_binman_syms u_boot_binman_syms.bin u_boot_binman_syms_bad \
+>  	u_boot_binman_syms_size u_boot_binman_syms_x86 embed_data \
+> -	u_boot_binman_embed u_boot_binman_embed_sm elf_sections blob_syms.bin
+> +	u_boot_binman_embed u_boot_binman_embed_sm elf_sections elf_sections_tee blob_syms.bin
+>  
+>  all: $(TARGETS)
+>  
+> @@ -84,6 +85,9 @@ blob_syms: blob_syms.c
+>  elf_sections: CFLAGS += $(LDS_EFL_SECTIONS)
+>  elf_sections: elf_sections.c
+>  
+> +elf_sections_tee: CFLAGS += $(LDS_EFL_SECTIONS_TEE)
+> +elf_sections_tee: elf_sections_tee.c
+> +
+>  clean:
+>  	rm -f $(TARGETS)
+>  
+> diff --git a/tools/binman/test/elf_sections_tee.c b/tools/binman/test/elf_sections_tee.c
+> new file mode 120000
+> index 00000000000..01b200a365e
+> --- /dev/null
+> +++ b/tools/binman/test/elf_sections_tee.c
+> @@ -0,0 +1 @@
+> +elf_sections.c
+> \ No newline at end of file
+> diff --git a/tools/binman/test/elf_sections_tee.lds b/tools/binman/test/elf_sections_tee.lds
+> new file mode 100644
+> index 00000000000..501d85a1f68
+> --- /dev/null
+> +++ b/tools/binman/test/elf_sections_tee.lds
+> @@ -0,0 +1,31 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (c) 2016 Google, Inc
 
-This issue was found by Smatch.
+Copyright year 2025
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/sound/rt5677.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> + */
+> +
+> +OUTPUT_FORMAT("elf32-i386", "elf32-i386", "elf32-i386")
+> +OUTPUT_ARCH(i386)
+> +ENTRY(_start)
+> +
+> +SECTIONS
+> +{
+> +	. = 0x00100010;
+> +	_start = .;
+> +
+> +	. = ALIGN(4);
+> +	.text :
+> +	{
+> +		*(.text*)
+> +	}
+> +
+> +	. = 0x00101000;
+> +	.sram :
+> +	{
+> +		*(.sram*)
+> +	}
+> +
+> +	/DISCARD/ : {
+> +		*(.comment)
+> +		*(.dyn*)
+> +	}
+> +}
 
-diff --git a/drivers/sound/rt5677.c b/drivers/sound/rt5677.c
-index b5c997c6dd5..a9d1e94951a 100644
---- a/drivers/sound/rt5677.c
-+++ b/drivers/sound/rt5677.c
-@@ -94,8 +94,8 @@ static int rt5677_i2c_write(struct rt5677_priv *priv, uint reg, uint data)
- static int rt5677_bic_or(struct rt5677_priv *priv, uint reg, uint bic,
- 			 uint set)
- {
--	uint old, new_value;
--	int ret;
-+	uint new_value;
-+	int old, ret;
- 
- 	old = rt5677_i2c_read(priv, reg);
- 	if (old < 0)
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
----
-base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
-change-id: 20250812-sound_rt5677-e2f8cfc9e8dc
-
-Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+Thanking You
+Neha Malcom Francis
