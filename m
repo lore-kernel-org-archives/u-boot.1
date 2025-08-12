@@ -4,74 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D45AECA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 10:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F597CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 11:34:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 026E18323A;
-	Tue, 12 Aug 2025 12:59:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id F0CC28327A;
+	Tue, 12 Aug 2025 13:34:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jg+tFS2z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ap/OyY9R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 092C48327A; Tue, 12 Aug 2025 12:59:41 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 520C783106
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 12:59:38 +0200 (CEST)
+ id EB2668331C; Tue, 12 Aug 2025 13:34:41 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D9608313F
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 13:34:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57CAxXAs1428019;
- Tue, 12 Aug 2025 05:59:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1754996373;
- bh=ib9M2xVAURbD8V4O8wXXt3X/T6yHlGL7l03X87wIomo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=jg+tFS2zH3gFK94duTZDbJ32xWhaOzf5kHRPGYuZ7ddkJ0cy4cTUZ7lMJH9CXBhoG
- SmjkC7UDzGa+PAj8ss3BYPNgOpSMyC4daXNh5CWLscjNHU3kQRZjrvG8ub9I9RSvxB
- 4ronWwtGY2mSQcGWBaxxU5GaXaLZDzWh7womuVYE=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57CAxXbk249521
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 12 Aug 2025 05:59:33 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 12
- Aug 2025 05:59:32 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 12 Aug 2025 05:59:32 -0500
-Received: from [172.24.235.200]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57CAxR3D541796;
- Tue, 12 Aug 2025 05:59:28 -0500
-Message-ID: <543ed0da-4313-4fc9-a9c9-b4c00ca50e21@ti.com>
-Date: Tue, 12 Aug 2025 16:29:27 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3b78a034f17so4052128f8f.2
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 04:34:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1754998479; x=1755603279; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nxjGKpN9uZ+yRVyrORuwySbOpsXgKviEwZG08KoXSEg=;
+ b=ap/OyY9RmbLF2Nn8/Hxerhr1urmCJTbDLOUimTZFf/cPmLoqSfPmBcpVhfHEU1PATK
+ nTxYyqvwLqW3x3+E4Je1EoxDF/KWSJuvH2iWHsNYl01TXVCRri6QoDoftT5rxVvq5jta
+ 6ff8obR/HSblVaVZ38jrnOEL9a6I8wG6g71AEJ5uT0Ejii98hikvdDod1AQA/fdgPDcE
+ 3A0U5g9gUDsPqWW27sNLe3OM68OiHLe3yiJZJc/E4XA+pIR3ROljEEwxTwuHK3dfj2UQ
+ Pc1Ubqn+o5AcLrh0sGeHMepn4R3ZTQAYfBqyXD+tYJ+Wa3QnmxuMFpF8LsxcsOQc69Ri
+ h2eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754998479; x=1755603279;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nxjGKpN9uZ+yRVyrORuwySbOpsXgKviEwZG08KoXSEg=;
+ b=viTGbsUZtvr26+LPd0OwAMloPQ6/ADyJ8O6i3hCdbvGMkLkhY+tnDzi6NBLvyiZd2g
+ n6GBnLAIUCo1w4b9I8FUXA/vGUYijLNsSPceiGljpmTFB5LYKEXacOZaHAGgMrz8jv3x
+ AnY5ZKOfl4Z+EOs66k8oM/dIgj2xfBwbvG2cWQ7V4/csAjeeeOyrjjJ0qAl/L1dAib0o
+ F7hRx93RZfpJYnYdRW+6LMH/5IiffRafynJVh/845eZhWPwepqiJjFLv87hR8znPsEku
+ 1cZAtSCI82wLOOy+O3GwI2Y2gi/Pi0c4+rxMTWDxsubPUtQvetpsI9IOt/dJJrkStdhh
+ hHIA==
+X-Gm-Message-State: AOJu0YyHDaYNSmaqXcw4Btw3itI4Vjwvlkizmie89xF1vWhJel1PabJa
+ 4h7boiM31EpANz3XJzWgvZ8sSKW6ACNvN39WqFS/iADLkjvK1f0QzhRt/MG7N00NGVY5U9mokbY
+ vOhYw
+X-Gm-Gg: ASbGnctGBbJqL55SaZOUIHGnSH5ktuflPa5C9oKx4yFztcIPoaQEqHEKsrpilsPX2U6
+ Ju/qjk5IXYGbYzF7wb789uWGaYMPehaAK7qohRQq9Ksd4+GJp/NNN+sadyT8iu8FpHV6pHwxIe9
+ BjCl8yJM5cWCgp4Fw5hOBh0TxugVLMo8K0vRC2CO3XmNKM1+RU88m6pqoEZ9PvaZOXLsMxlhpR1
+ zu/ez7ilAdb51KSyzjTMI9nZ6e9mD/NcU2vfHQxPGeLfV8EFNB6tWzxZPTGFKvnSs5kMUtCw2eW
+ 3uthEOGbnd05J1j79kkVGKqBYxS73+6FNy6IP4IH24csEoZVCWnAexif6JuvIjljGxCHPO0CAP0
+ zza70LPupAsAx9sWwXkUcIo8XLE5e7xl4TCyf8AAC4JHL0Ss3zKo=
+X-Google-Smtp-Source: AGHT+IE0LV9HsELA5j6sgVzJuCwSc0Ym6SJKiHhHy3HAusxq68v+U7d8wXLefIlGLhNyVYREO+toLg==
+X-Received: by 2002:a05:6000:25c5:b0:3b7:82d3:ff90 with SMTP id
+ ffacd0b85a97d-3b900b4f0a7mr17234549f8f.15.1754998478864; 
+ Tue, 12 Aug 2025 04:34:38 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:97a2:1bc7:9f2e:6519])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c485444sm44524027f8f.66.2025.08.12.04.34.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Aug 2025 04:34:38 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/2] spi: cadence_qspi: Fix Smatch reported issues
+Date: Tue, 12 Aug 2025 12:34:37 +0100
+Message-Id: <20250812-cadence_qspi-v1-0-0d693d810145@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/5] arm: dts: k3-am6xx: Fix FIT image memory overlap
- in binman configurations
-To: Aristo Chen <jj251510319013@gmail.com>, <u-boot@lists.denx.de>, "Gole,
- Dhruva" <d-gole@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <al.kochet@gmail.com>, <paul.henrys_ext@softathome.com>, <bb@ti.com>,
- <y.moog@phytec.de>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>, <afd@ti.com>,
- <d.schultz@phytec.de>, <ravi@prevas.dk>, <carlos.lopezr4096@gmail.com>,
- Aristo Chen <aristo.chen@canonical.com>
-References: <20250729125022.4220-1-aristo.chen@canonical.com>
- <20250729125022.4220-4-aristo.chen@canonical.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250729125022.4220-4-aristo.chen@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-B4-Tracking: v=1; b=H4sIAM0mm2gC/x2NwQqDQAwFf0Vy7oKuCLW/UkpZk7eaS2o3pQjiv
+ 3ftcQaG2clRFE63ZqeCr7q+rEJ3aYiXZDOCSmWKbRzaaxcDJ4Exnm9fNWThUXIv6AemmkzJEaa
+ SjJczMmyfU68FWbf/5f44jh8Jbf5zdQAAAA==
+To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,66 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 29/07/25 18:18, Aristo Chen wrote:
-> Fix memory overlaps in FIT image configurations for TI AM62x and AM64x
-> PHYCore and SK boards.
-> 
-> The overlaps occurred in two categories:
-> 
-> 1. TI firmware stub images (tifsstub-hs, tifsstub-fs, tifsstub-gp):
->    These mutually exclusive firmware variants were incorrectly assigned
->    the same load address within FIT configurations, causing overlap
+Smatch reported issues with an off by 1 error in a test for a timeout
+and also an error exit that did not set an error code.
 
-I think this will break TIFS stub functionality which uses the "os"
-property to figure out the right stub to pick from the FIT. See [0]
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Andrew Goodbody (2):
+      spi: cadence_qspi: Off by 1 in test for timeout
+      spi: cadence_qspi: Do not return unset error code
 
-While I agree that ideally FIT images have to have non-overlapping
-addresses, we may have to find a solution for such use-cases prior to
-adopting this series/rule.
+ drivers/spi/cadence_qspi.c     | 2 +-
+ drivers/spi/cadence_qspi_apb.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+---
+base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
+change-id: 20250812-cadence_qspi-fdc9df3de35c
 
-Require Dhruva to comment further on this TIFS stub load address change.
-
->    detection to fail. Adjust addresses with 64KB spacing:
->    - tifsstub-hs: Keep original address
->    - tifsstub-fs: Move to +64KB offset
->    - tifsstub-gp: Move to +128KB offset
-> 
-> 2. Device tree overlay images (som-no-rtc, som-no-spi, som-no-eth):
->    These overlay files had insufficient spacing between load addresses,
->    causing actual memory overlaps. Increase spacing to 8KB boundaries
->    to accommodate overlay sizes safely.
-> 
-> An upcoming commit will validate if the memory region is overlapped
-> 
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-> ---
->  arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 22 +++++++++----------
->  arch/arm/dts/k3-am625-sk-binman.dtsi          | 16 +++++++-------
->  .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 16 +++++++-------
->  arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 22 +++++++++----------
->  arch/arm/dts/k3-am62a-sk-binman.dtsi          | 16 +++++++-------
->  arch/arm/dts/k3-am642-phycore-som-binman.dtsi |  6 ++---
->  6 files changed, 49 insertions(+), 49 deletions(-)
-> 
-> diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-> index a9bd5a2be84..4344cefeba3 100644
-> --- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-> +++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-> @@ -234,8 +234,8 @@
->  					arch = "arm32";
->  					compression = "none";
->  					os = "tifsstub-fs";
-> -					load = <0x9dc00000>;
-> -					entry = <0x9dc00000>;
-> +					load = <0x9dc10000>;
-> +					entry = <0x9dc10000>;
->  					blob-ext {
-
-[...]
-
-[0]
-https://elixir.bootlin.com/u-boot/v2025.07/source/arch/arm/mach-k3/r5/common.c#L349
-
+Best regards,
 -- 
-Thanking You
-Neha Malcom Francis
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
