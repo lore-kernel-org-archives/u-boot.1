@@ -4,94 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E877C87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 07:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486D7C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 07:53:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DF10831E0;
-	Tue, 12 Aug 2025 09:49:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8ACA7831E1;
+	Tue, 12 Aug 2025 09:53:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lz1MUbxp";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="W5pBWnaI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9010831E1; Tue, 12 Aug 2025 09:49:46 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D4C2483211; Tue, 12 Aug 2025 09:53:49 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B481E8319C
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 09:49:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 544C48319C
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 09:53:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-615460d9897so5906637a12.0
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 00:49:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754984983; x=1755589783; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hxzD5gFj8yoQpXv1rKfcV/gBNkXad4ViG2+1c3sEpjw=;
- b=lz1MUbxpLM3s920b4+fzlW436l59MhCORtwimsxIlMZZSLFdM7FtrwzU2+vBHMZeh1
- kQsAo8e9L73D5wkKSJ94vvAoCphof2RfbP+ww8ZZMv20hgingjSFA7f9bTHW15VTRhws
- LwSZkAjYO1mAmz1huppgq8jZL2Vj3OOsxLQ7aK3cVsuMEmpBXaJV+0MhDXsTnT9brg8N
- PyezG61mT54xgs16jMprkRUPWzO6bvt/2Yz9CcNIU7v3nTeMV9TItDQDjOtT0tSjlsww
- G57g6OOXxdHZ0oOf32nf6FvmIQViGxfPrUpF48u5nskpENW1q3LVYn9FkxKg8V/ydEs4
- /xfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754984983; x=1755589783;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hxzD5gFj8yoQpXv1rKfcV/gBNkXad4ViG2+1c3sEpjw=;
- b=WAefACFvXe44rhl5L28WmCwcMfeI/vvK5RqqbvKjJe3oQaZmqVOLtUwxvmoWdTfBFd
- wQiXUI1QJDvlabVVUasuRF8arrbIXOHhueFIbAemE2A2K85wORkz71Ku6IlN7yfXmSLL
- wNnOwyyNdZxEdtSVCIP746cUw3xC5o4OovQPjEO8xbSbhFR+KCMxIOgVI29QNco1BBQD
- S+dn5FtundpusTesmhzRqeXo2syWHC5dSqqH+Ykc37sbJp5pvX6VyDVOzwTUpTw2/oJR
- 0VU8pbCMeCfQthTs9AcbAxvHMSyCZwSeTj68yRYBDltryIB4fidaUUVBQFDcGN+YxHi/
- 4Cxg==
-X-Gm-Message-State: AOJu0YyFqoZSBFD3sJuTPGVq6svyYSiLx6E2HVx+a0vTuRXQGVOPYmGn
- sYqN8gmZKnEUFI9GMHLOzF0ZSdZKdSUw9xafofoD9opy2l+He5OGryeuk47C++PDj/g=
-X-Gm-Gg: ASbGnct5U7PPy/bClGB4Eu2kcn257dNWHHCXoyKAIpKofLWfXgaaAHi4Fs4avWmfOqP
- dP/wjJKvBH9hnW2otg4H2rjrGpq5A2YnGuYbaAnHtdvasHVNil+h8pdG19LgqFij2HboxZPvsV/
- tzqfo1g0FDWBjL4UmtHgh90QsRXOKnFHQ/eTck1cmuuYhJM9gQjULNghimNJVWZ/obQSG1xpRiW
- 3DClb+dQOztExUDuyd91FhQho/DaAa67e7lP51p/WMvNgu8nx8iKTb+kZQiRR9Tq/IFT7++gfMU
- hYrOmhNnG5y/wSFYXB3Hn8v1BK0ZYWh0nzBSYc+gQCM9SXIGpnxyLlvJub8YIWWBjd40Ze60C8/
- QwsGTkDUybC2BMpjineSO5EQAHIPvx+2jiw==
-X-Google-Smtp-Source: AGHT+IHjnXIKZv01arzb0pch7JbA8yGgxtInnfACEh3+3+qPJEXYQTqh+PVdYMWYlJ6ES9dC7RDS+w==
-X-Received: by 2002:a05:6402:520b:b0:617:d013:74a with SMTP id
- 4fb4d7f45d1cf-6184eb5266dmr1999739a12.4.1754984973611; 
- Tue, 12 Aug 2025 00:49:33 -0700 (PDT)
-Received: from [10.100.0.2] ([194.15.111.159])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6177dc4b209sm12557214a12.28.2025.08.12.00.49.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Aug 2025 00:49:31 -0700 (PDT)
-Message-ID: <5f3e997a-f070-417f-a09a-90e1bf7774cb@linaro.org>
-Date: Tue, 12 Aug 2025 09:49:29 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PlZvCKpORla2LXUFI6+HpsIfzKGy2qtCLZI01CD3tgJS9xq7IoSAhHGSyrA43DZkimxbDEPxlM7cKeimOQDE1lUooPKLUaqSXKmBVCaHv7fl3+1RfzRR174C8RTl8B/aJO97BRivFxTz629VGFy1L72gK/SqiYDASry3PMaPydxy7rfmkdR2YYl+aqadKKKvlU/+2NLLW94xnpmNq0fTkMRkJTMEUw6QtXdzXiHJlk8s5GAlzn5jq//Q16Yg5tnnxic+YHX2nHuXWSbzJLC8QD/XYUcvbQqPAwiL0cTqc8cx0bz9H+JWb6dLWZJG/VUz5zcgI69YThYz8unOger/lg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UWvVB67FmpBPDdS5rmUpnpJn2QzfG3ueJcMCFIZc96A=;
+ b=q+dri7A7lg4QGZCye83mkwI37p6nprnngOhAZbr2AR8dvGoNZZdJCuRzIixOVnYRVQ4YPQgSw81xPeZVwWlZHcHl4H4PmiOGEZA2xd7q3dg3ytnQjTwsHiWJ2z7GNoKn15ABTr1OflDXIYLcU4OVAPyAVEAMNjaDCd7STzyJ6RUF7hNisSZ0XfFCOB6Sa3nGnpi5MqwDrSgjmW58jkImrXutz0CoUk3SEDNM7qQv6dlWbgL5SqK/H48KpnFc/8xBPtLUWXv0dMcR/fH5CR6hXwhCeNXkLC52D60SiX3+FHo7agjiFSY7za6C7rOjPY1trLlerkqETAVdMYEdtFI7eA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UWvVB67FmpBPDdS5rmUpnpJn2QzfG3ueJcMCFIZc96A=;
+ b=W5pBWnaIfEKDylyl7nI1cRCZO0Wsa0oF9BmpUQvVvrMEkNuEc0nd3T3azc49kUv8bfFjnWqrND5KJ43XzwotENNZ1MdrkUegeMjGF9Edjcbjjxm/PjYunXRxTlyWv32uucm4n7Z3V1AJrGk5mYPcYR5COCidjes7jE0WawsU/oA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DBBPR04MB7945.eurprd04.prod.outlook.com (2603:10a6:10:1f3::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.13; Tue, 12 Aug
+ 2025 07:53:45 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.9031.012; Tue, 12 Aug 2025
+ 07:53:45 +0000
+Message-ID: <681994c6-2b95-459c-b06a-ff1fd6093eca@cherry.de>
+Date: Tue, 12 Aug 2025 09:53:43 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/2] lwip: add Kconfig to decode and print ICMP
- unreachable messages
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot mailing list <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>
-References: <20250806085959.2130339-1-jerome.forissier@linaro.org>
- <CALeDE9NsfBRyfOdxr8S0iRSj5kdSwyKVr-pfroJCdjqT0hbmvA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] rockchip: rock5b-rk3588: Add support for ROCK 5B+
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20250801170933.2530191-1-jonas@kwiboo.se>
+ <20250801170933.2530191-3-jonas@kwiboo.se>
+ <d236a958-8605-4ad7-85f5-6cc03048f8b0@cherry.de>
+ <8dfbfa29-839b-4067-b4ba-62ee3ce60f78@kwiboo.se>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CALeDE9NsfBRyfOdxr8S0iRSj5kdSwyKVr-pfroJCdjqT0hbmvA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <8dfbfa29-839b-4067-b4ba-62ee3ce60f78@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: FR3P281CA0095.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a1::7) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBBPR04MB7945:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9d36d99-e147-4876-d51b-08ddd9755cdd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0; ARA:13230040|10070799003|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QWtsMmszNXMxYldBSzhYTGsyOStoR0t2MTVMMFo3QU5yNFUxbnhNU3Zkb1Vr?=
+ =?utf-8?B?MU9uUDRxQkFrNFc4UVM1TWFMSXo0VFVVSFpkOTh0bWR3b0hnMW54MnF2bUtx?=
+ =?utf-8?B?UjZTRzVTR2ZqZ1lJaWpiM2p3SGJQbDg1bUtEcStlU2pVT2VvQkJTTFcwSnRo?=
+ =?utf-8?B?UEpBUnlXanUzbWhTbGdlNDhkZ0xGK0ZBU0lTNzlPQUJhdXhTWTZuTTNlMWZE?=
+ =?utf-8?B?bCtiQXBnVHJ5aHNjVndVRVpxTUZNc2wrckJkTnY0RFpsdU9xczFhM2QwTDZ5?=
+ =?utf-8?B?ZUtUeVlGd3UySFk4OGNhdDJlNi9CSEhyUjBpZ0xZditHV2lsWUpRMlFmS2la?=
+ =?utf-8?B?MVUxL3daS0s0SloxaWFtSTR3Sm43Y3NyMG5SZytHbkpGUXhzaUhrNWZXSUYv?=
+ =?utf-8?B?Wm5pUVZ1c2F2VEdENkVTdlk3S1RPSEREakl3bGFDZzc4RHNEMmlmaUVLaTYy?=
+ =?utf-8?B?dDlUaXVkL1FCcG4yclZ6aHlvYndabGxkNUZHY1QxclBtcUtJdnVxd2V0ckd0?=
+ =?utf-8?B?Y21BeENsYTd1THVnWFV2aXNyZVovM3FaYkJzWVVldVV2N2JKQThtSVo5Yjd6?=
+ =?utf-8?B?R0haOWNPVG5jdnE4RHBJVlB3eEJUK3AxWGN2Y3pUN0ZnWTBZbmpRZGtud3VM?=
+ =?utf-8?B?dWUvQ0VwZ2hBVmgvMnJSSmhheEZkK1FvYkV3N0pRYU5sQjVFcU1WY0dUUUM2?=
+ =?utf-8?B?WVZuWkJnRnVzWTlpOTRPbTdJNTNOWGZqM2pHdEhScTBNeSs5KzY2TERlNWxQ?=
+ =?utf-8?B?UThWV2hvWGZmaWJRaS9DQkZEV1dTbnRYU0RJcFhBeTkzWTh6L0tveEtmZjNG?=
+ =?utf-8?B?ejI4Zzk0UDRBeGxNUTVJajZsREhNRDdRUi9KcFZBQ3dubHJCQ3RzWGpFNEpM?=
+ =?utf-8?B?YXNFZHV5dnZldzc0eEYyQVpXMXRaL2RqcDdSRGJIUHozZXF2YnlvYWM1U0x0?=
+ =?utf-8?B?d2pFK09ZcXNWa3pQZWl6UXhLTHNQOWNLMjg5SXBUSVdiWXVEaXhpeWtVTExi?=
+ =?utf-8?B?NExLbitKbnY5Ti9hTTIybEFwdkF2OXMxMWIzWGRGeGVoRUJPN1p0N2dQemhz?=
+ =?utf-8?B?RCtISEdkUzhvaFovT29FSW85Yk1yY1ZGMWVLVVJmVXhGU0VPQVpFMndKSXpS?=
+ =?utf-8?B?L0kvTVhuL2d0U2JJZWZxMDg0K2psWHc5UlZWTGVDZUh5STIydzFWdU1sSFRI?=
+ =?utf-8?B?VitGeU5mVnZxcTl3WEpVS2poRTV1Y0ZJTE5NSGRvNFlSd3cvSXpKZmpTNDYx?=
+ =?utf-8?B?Tmg2REFobDZ0THRUL3BJRHkvZ3V0NWdjVnZESkxITXZ0RmRsdFV1bzA2aytr?=
+ =?utf-8?B?OWQzWVVTbVczbmRaUmZXeU1qOUdYQXZ5NXcrU25xaTlyd1hYVlREQ3BUMnlT?=
+ =?utf-8?B?MTlndFNCN2h3cGdyRzlBUHBxS0xCV2pVT2tDbHJTNHBaRGFCYm9OVlZrTUhS?=
+ =?utf-8?B?S2lGRmlhMStxd0hDVXZub1VsVFkzVHhlc1l6M1JLaTl3TVgwUDhMMzdhRyty?=
+ =?utf-8?B?WExFZSsrSU5JZU1nWklLUXpNaVZMRUFRWG5Cdjdad0xyKzJpZ3k1Wmdma3VE?=
+ =?utf-8?B?K2RTVzAvTjlGSURzSHdWUG95bnA1MDZ4RVhiOTdFWXpDeEZlWkdvQ0RZd3ZD?=
+ =?utf-8?B?SFpyUkg5dWVmMGovSTYwcmNDUm9qVm82aXhDQTBvVXo5eFhWSzdzdlNhenVU?=
+ =?utf-8?B?QUU1RFZzZDhYYVZ0VWVrNktiNGxIbWxjaEJSK2J2UGxWS3U0WHhFbElianRn?=
+ =?utf-8?B?YWJJVVVWTGZ3c2p6amg3SHlHNWoxL1VQaTNheVM1WEJMUURqc1VlaG1kNk9Z?=
+ =?utf-8?Q?Oli4mAcuC8nXXlwMJcy+SlfP2sVlF9nqJlCD0=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UlpvY1ZUZ3hxa0pTR0RaVTB4WlFFOVJ5c2Q5dno5NGFCWGdxR2dMUUhBeUl4?=
+ =?utf-8?B?UVJseDk5WWZtcXhRQ0dMZ0hmWEdwWGFtK2JxcHdxQmdsWWZISUZVYkdBQzYx?=
+ =?utf-8?B?YmgzaXhrWk1peTl1d09qbjFZNzJYVUxBV3dMV09jWlBuZTNIbENYaXdPMFdL?=
+ =?utf-8?B?YTZEWnBLMFNYVGl2SEtyQVRZSjZhbUZObTh5VnB2Y1JsSzNTcE5XWUFoazg5?=
+ =?utf-8?B?MjFpc0J4NkcrUEFrWk5kT3V3SVNXZFl5RjlvZHE3ZHdoaHE2Q3lycEloRjlj?=
+ =?utf-8?B?Ympqc3kwOXZYQ0VjNlpMUUlacHhZQ0E0dG9RbVg2OTY3UE5FVTdKUnBKVWV4?=
+ =?utf-8?B?L3hrdU9DM0tIcFB5enYyQVRjOVd2d0tpNXgraldHUGdyVndwUTFJZFdyUVp6?=
+ =?utf-8?B?YytLMDVlS3dpdWNtaytxOVNmQUNhWTh0bytqYjB2TkJQcWZSL2VYMzliQTU1?=
+ =?utf-8?B?blFoM1U1OUZRVWI2UjkzbVhjWTdYZWFHQ0NsRzBNdnUyV0c4N1dmYzJ3R1Zx?=
+ =?utf-8?B?dHFBU1Y2ajlwanZGV0VtcjYybzA5SjZGZ3BaZVYyeW1Wejd2cmVKWkZTUTY3?=
+ =?utf-8?B?aFBpb2ZVVFVqRTJHb0VSZkwyTFBFR2lVcncvcWhqa1hRTDdtWStJYnJpV2pR?=
+ =?utf-8?B?QjMwbDM1elB4ck5hR3d1VTJXL3UwcWY2NGh5Qk1UbHBlTXVTb1lHbFhRTXJU?=
+ =?utf-8?B?cExlWkh4cXluTjdncmRmZFlIWVpZNnk0L01yQmswbzNHNEtjUXQ2ZmM5blQ0?=
+ =?utf-8?B?WXdMM0FCeEdsNkhYMWFVd2tvMDlQQW1DSnN3T01EbEZNSnZMM0RlT3BlRHJN?=
+ =?utf-8?B?WGJ2ZWV2ZzE5TENBaWk0V080VlFpOTZrWWRKcnQzL0Q5L0pnVUp2bjVNZ25V?=
+ =?utf-8?B?WnRuNGlTVzdFYWdvTUlJM09DNVNlS1ptTkdaM1hBcTB5N29meEhCSGVJYk02?=
+ =?utf-8?B?d2o1M2VlcjgrWDhJZ2pJaEQ1WndKcGJCcHVsY1BVWUJqMEdHRk5UTmNhcHRl?=
+ =?utf-8?B?M2FUNWgzTHVVOEtIL2JvSnYvVXNwZ1hLZnpiK1g3NlRMZHNGamRxQ1pUbVgy?=
+ =?utf-8?B?eHYxUW0xc1Eya1hPSzJmb2FHUnhnZVErZjE5SzJBOGZLS0s3OUNONklXYXp1?=
+ =?utf-8?B?QjZKcytwVllCSDIwUy85d2xJdUcyMkJ2NnoreXFIMlFCRlV3YlIrQ202SjVQ?=
+ =?utf-8?B?eHFSRHlPcVNFN205dFoybVlKeFBYZGl3YldpSXFxa2xLU043eGVOVG9mc2Qv?=
+ =?utf-8?B?bW1jamtYYVBwUTBqOGIzellHQWh5a3poeDdNS05aUFZuYmVVVksxbU1VN3ZI?=
+ =?utf-8?B?Q3R5N291UmZ1OHRMbXdMaHZKR3VTVTlnZTRMRUZXY2JDbmdSWGozN1NmcU9X?=
+ =?utf-8?B?NWhhQWpoNnpuaGZ6MDRQN01qT2JYMmxJam11dm14cWxqem90c1U2WXFwOG80?=
+ =?utf-8?B?elJyM2JvQjlZSGo0VDZMRFNXeUV5czVBY0c0Uk05UkJqaFZ2enQ4eUkzMi9q?=
+ =?utf-8?B?Y2JUUHJ2MjNybW4wMmpBVFpXRWZQRzB4c1gxWHZSRUlVcEY1YmhYQUhTYTNs?=
+ =?utf-8?B?ZWFreDlWY2x3UXpBSTVYZy9zMTVMbkVMRk9ka3hWbGRidnppUyttQUxhbHN5?=
+ =?utf-8?B?VWhKTkxvTHphcXBqTjhzTDV4UE9CaVk2ZU9venliUzFuVnBxYlFGZUQreVJD?=
+ =?utf-8?B?eFZtQkIrNUcwNEtFSUZPN2VsL29raXBTcTFKRHNrbHRlUjd1cHJIRUduN3pP?=
+ =?utf-8?B?T05QbUtBYVNpVStBY1J2VVZhN1ZpeG1GSEpPclhvbXNRSVZyRjFUeUxsU0Fo?=
+ =?utf-8?B?aE43bEhSbXpEckxGNzZOYU8yMFYxb2IzOUJNU1JFTGYwRDk5WGVFTlFtazRr?=
+ =?utf-8?B?Q3lCcmgwR2t5ZG4wUmlwSmxVSTNMWERIdkxJNDJUSXhEQkRwMFRac2ROVUxs?=
+ =?utf-8?B?L29LSGF3NHVlTGFEVHQ0YjZ6dkpCb1JtdXpoaytPUUF2Z0JmQ0pCVjR5NFpr?=
+ =?utf-8?B?VkV3aUlycEpaVkhJZGp2US9KSkpQVHRJSHkwNkpXSHdWQklnRGRmdHIxRnZs?=
+ =?utf-8?B?elRObTVmemNKbW44OEVvQlV4cUNKU045emVGdGdacDE4azZwK004Sk9YWitp?=
+ =?utf-8?B?dUw4bmpNSkdsbzVSZ0laaUY4ckY5YzBERGo4bFF0TnhXaUU0aWJuY2p5cGQv?=
+ =?utf-8?B?QW1kR2w5N2MrcmlYTVBVR1IwaFZZL2pCdDBoaHEzVGRSeG5Va2lmUXpIYW1j?=
+ =?utf-8?B?WHl0SEY1T3dMbmxqU2tWZmFEU0lnPT0=?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9d36d99-e147-4876-d51b-08ddd9755cdd
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2025 07:53:45.0493 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NaumpXgNFEgqfaAWf7qdIB4Zxll9rgX4gRYXFpEuVUAqN5swCXH2Hm7c9mvjsE1goHYhhMJDya+W1ZsUee/BR413hgXOPfINb7gzPCYkhNU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7945
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,81 +179,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
-
-On 8/11/25 17:56, Peter Robinson wrote:
-> Hi Jerome,
+On 8/11/25 11:17 PM, Jonas Karlman wrote:
+> Hi Quentin,
 > 
->> When using commands based on UDP such as tftp or sntp, if the server is
->> not reachable or the service is not started on the expected port then
->> the command ultimately times out. However it often happens that the server
->> or a router sends back an ICMP Destination Unreachable message. That can
->> help troubleshooting. Therefore, add support to the lwIP stack and to
+> On 8/11/2025 11:24 AM, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 8/1/25 7:09 PM, Jonas Karlman wrote:
+[...]
+>>> +#define PMU1GRF_BASE		0xfd58a000
+>>> +#define OS_REG2_REG		0x208
+>>> +
+>>
+>> I assume the register address and meaning is stable across all RK3588,
+>> so maybe we should abstract that somewhere in the SoC file
+>> (arch/arm/mach-rockchip/rk3588) so that the caller doesn't need to
+>> specify them?
 > 
-> Has the patch for adding support to the lwIP stack been sent upstream
-> for review? Please reference the upstream patch for this.
-
-Yes, see https://github.com/lwip-tcpip/lwip/pull/73. I will add a link to
-the commit description.
- 
-> Also related, what is the status of other out of tree patches to upstream LWIP?
-
-At the moment we have:
-
-- 5634ecc88e9 ("net: lwip: tftp: bind to TFTP port only when in server mode")
-Submitted upstream as https://savannah.nongnu.org/patch/?10480 and
-https://github.com/lwip-tcpip/lwip/pull/61.
-Status: MERGED (https://github.com/lwip-tcpip/lwip/commit/b1edb7780f5f)
-
-- 27d7ccda94f ("net: lwip: tftp: add support of blksize option to client")
-further modified by 10917df17f2 ("net: lwip: tftp: fix find_option()")
-Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/62
-Status: PENDING
-
-- f69f7aef26f ("lwip: tls: enforce checking of server certificates based on
-CA availability")
-Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/63
-Status: PENDING
-
-- Part of 9349fc2e9c76 ("net, net-lwip: wget: suppress console output when
-called by EFI")
-Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/66
-Status: PENDING
-
-- Patch 1/2 in this series ("lwip: icmp: allow reporting ICMP detination
-unreachable")
-Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/73
-Status: PENDING
-
-FYI we do track this information internally here at Linaro. I could as well
-store it in a public location if it makes more sense.
-
-Regards,
--- 
-Jerome
-
-
-> Peter
+> Correct, these are stable for the SoC and could be defined in soc
+> related header and is something I have very slowly been working on in my
+> optimize branch at [1] for a future series.
 > 
->> U-Boot to handle those packets and print a diagnostic message on the
->> console.
+> Right now we have some code using syscon_get_first_range() to get a base
+> addr from DT, and newer code that instead use a define. See e.g.
+> sdram_rk3588.c vs sdram_rk3576.c, getting the base from DT adds several
+> ms delay and something that seem pointless when we know the stable addr
+> at compile time.
+> 
+
+We could do something more akin to:
+
+u8 _rockchip_sdram_type(phys_addr_t reg)
+{
+	u32 dram_type, version;
+	u32 sys_reg2 = readl(reg);
+	u32 sys_reg3 = readl(reg + 4);
+
+	dram_type = (sys_reg2 >> SYS_REG_DDRTYPE_SHIFT) & SYS_REG_DDRTYPE_MASK;
+	version = (sys_reg3 >> SYS_REG_VERSION_SHIFT) & SYS_REG_VERSION_MASK;
+	if (version >= 3)
+		dram_type |= ((sys_reg3 >> SYS_REG_EXTEND_DDRTYPE_SHIFT) &
+			      SYS_REG_EXTEND_DDRTYPE_MASK) << 3;
+
+	return dram_type;
+}
+
+u8 __weak rockchip_dram_type_reg(void)
+{
+     return 0;
+}
+
+u8 rockchip_sdram_type(void)
+{
+	phys_addr_t reg = rockchip_dram_type_reg();
+	if (!reg)
+		return UNUSED;
+
+	return _rockchip_sdram_type(reg);
+}
+
+and define
+
+u8 rockchip_dram_type_reg(void)
+{
+	return PMU1GRF_BASE + OS_REG2_REG;
+}
+
+in drivers/ram/rockchip/sdram_rk3588.c for example.
+
+That's what I had in mind rather than going for a syscon.
+
+> So for now I just kept this here with the expectation that this should
+> be changed in a future series.
+> 
+> [1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/3a11ab7fba8db133374e60edf8ab2b46195cf684
+> 
 >>
+>>> +#define HW_ID_CHANNEL		5
+>>> +
+>>> +struct board_model {
+>>> +	unsigned int dram;
+>>> +	unsigned int low;
+>>> +	unsigned int high;
+>>> +	const char *fdtfile;
+>>> +};
+>>> +
+>>> +static const struct board_model board_models[] = {
+>>> +	{ LPDDR5, 4005, 4185, "rockchip/rk3588-rock-5b-plus.dtb" },
+>>> +};
+>>> +
+>>> +static const struct board_model *get_board_model(void)
+>>> +{
+>>> +	unsigned int val, dram_type;
+>>> +	int i, ret;
 >>
->> Jerome Forissier (2):
->>   lwip: icmp: allow reporting ICMP detination unreachable
->>   net: lwip: add Kconfig option to show ICMP unreachable errors
+>> i could be an unsigned number type as well. (and it should since we're
+>> using it to access items in an array)
+> 
+> Sure, will change in v3.
+> 
 >>
->>  lib/lwip/lwip/src/core/ipv4/icmp.c | 17 +++++++++----
->>  lib/lwip/u-boot/arch/cc.h          |  7 ++++++
->>  lib/lwip/u-boot/lwipopts.h         |  4 ++++
->>  net/lwip/Kconfig                   | 13 ++++++++++
->>  net/lwip/Makefile                  |  1 +
->>  net/lwip/icmp_unreach.c            | 38 ++++++++++++++++++++++++++++++
->>  6 files changed, 76 insertions(+), 4 deletions(-)
->>  create mode 100644 net/lwip/icmp_unreach.c
+>>> +
+>>> +	dram_type = rockchip_sdram_type(PMU1GRF_BASE + OS_REG2_REG);
+>>> +
+>>> +	ret = adc_channel_single_shot("adc@fec10000", HW_ID_CHANNEL, &val);
+>>> +	if (ret)
+>>> +		return NULL;
+>>> +
 >>
->> --
->> 2.43.0
+>> While checking whether adc_channel_single_shot() is the right function
+>> to call, I stumbled upon the call in arch/arm/mach-rockchip/boot_mode.c
+>> which i believe wouldn't work for Rockchip SoCs whose DTSI uses adc@ as
+>> node name instead of saradc@. That would be rk3328, rk3588, rk3576,
+>> rk3528 and rv1126.
+> 
+> Correct, the saradc@ in boot_mode.c is typically used for "recovery" or
+> "maskrom" detection. However, this uses a hardcoded saradc channel that
+> may not necessarily be used for that purpose, especially on newer SoCs.
+> 
+> I suggest we do not try to change that to cover more SoCs without first
+> adding a way to define what channel to use for the button detection,
+> possible in a /config or a Kconfig option.
+> 
 >>
->> base-commit: ae5711f881100f856ead1e76832c32b92dba93c7
->> branch: lwip-icmp-unreach
+>> I guess there are different ways to fix this. We could have each SoC
+>> define a constant string with the node name of the SARADC or have an
+>> additional entry in /aliases for saradc in the DT? Maybe some other way
+>> could be used as well, just throwing ideas :)
+>>
+>> Unrelated to this patch though, so feel free to ignore.
+> 
+> As noted above, I think it is something to fix/consider but it may have
+> unintended consequences to blindly try and fix boot_mode.c for all RK
+> SoCs without having some sort of board option to specify when and how
+> the feature should be used.
+> 
+
+Agreed.
+
+Cheers,
+Quentin
