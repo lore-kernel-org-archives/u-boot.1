@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B158CA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 17:56:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA9D1C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 17:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 961B882F03;
-	Tue, 12 Aug 2025 19:56:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D16183020;
+	Tue, 12 Aug 2025 19:59:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iRB22a/Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oBzzc/bI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66F3582F30; Tue, 12 Aug 2025 19:56:39 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 1EB0A8307F; Tue, 12 Aug 2025 19:59:14 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42D4C82F00
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 19:56:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07C2F82AFC
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 19:59:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-61b8cb58f21so1645666eaf.2
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 10:56:37 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7430e1fffe1so4165128a34.2
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 10:59:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755021396; x=1755626196; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755021551; x=1755626351; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=QTXNK/Myvgajjx7w0eID4gJ0GRuaUsO4BdpqqkdOU/M=;
- b=iRB22a/Zx3jsli8mJ8u0QDVDhxAPsHoiB2KYKpo302tMKSkSyj6256YGelOi+bWN9h
- rN72crAjpcHpNTHVIoY1ysOzMe+CnuSEpv7kqJIyIW98GQfxnYZPMb3JBxItEbXKNvMt
- tgWJb9oOam+CfdrsfUUf49UIY8wmn1zXrttZs=
+ bh=cumotT2JZ4zmWl2jnEiFSqSMv5qA/qDohHZI/foM5as=;
+ b=oBzzc/bIb7NLvzmPnEf2KCXiAktRddn/WN2JIRsLziWomtoxlO0fnJJ0XKhjapZo53
+ 6owJea+nMbgwI0Nr43W4Yx/yzwW3cXxLds4KPHkCo3biUCxFUQ0JvQ1Io4v/4EMQY+mb
+ pH9+JnkmE6KUZA8eQ6ftsIUKUV74DlRvP0NVA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755021396; x=1755626196;
+ d=1e100.net; s=20230601; t=1755021551; x=1755626351;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QTXNK/Myvgajjx7w0eID4gJ0GRuaUsO4BdpqqkdOU/M=;
- b=GC1g8Y0l1JW+ti8Wzi5mJRKoLfFacIE1cJ5rOJQndrANp56DoEe3AA1fdOzKKfnqAt
- O6qrXh48gpHkR1VohkoAF3LUrQYcxwSl/B9F/I41hUW7a0zoGRDC52YzgLxlfNQKoafu
- 3mXbLnYngwVZDowVlDL88GGCsb3R92vL0jhr5dp+ZmwiT5lEB+ynVbff+SprEHfe+0kx
- 8E4Yetxw/49wQofC6ZroegKOVjZ12pRzWmmGvcqM+dK7jv7QgA3mHZCBEnocnt9+a00q
- 3sfkZ/ZW3uBcTLL9RGBKSKfJ9I+0tFdWl9FSbsVplL60Q21r6IVlWC0TihI+CqNNAQN8
- LiqQ==
-X-Gm-Message-State: AOJu0YyOHFcU7tj3GL2zz5vWFQ4P1sN7KXavuhTzsB7aLb7YzLtnbSUU
- d1jENBxlu4P0MXOUebUVOvnEB6OHu9ATk2tkfRzEmKrb3JLVNFcfTShXBTW/VH5OBxje9ROViS1
- Zgge0rOE=
-X-Gm-Gg: ASbGnctIOLNFN5iQjV5dtJOZbZg+pIC/9ysGpd0c2ivV79dytkM4Ae+n6OUrj+1JffF
- Mf0DGUlY809O9wyNupZRSrt6LUm7H6eiPoVnuLt9e1Y0GIq+gzTL19aqDXlQC58l8RdInps13bu
- dUCCiR+ymQ/T5woBc5tosjytOkfgJpDGpzYdXjgIuNIeCny/hNIDlNAgMA6lGI20F82aeTlLdA4
- uiMlwE+Xiz+7VPwF3j7kr24PNVPwztxb6Mr8H61NcKk0YIDVIAkEa2mrO/L12aoonde64gx4Q7N
- y6pzwesxy4AMYvRVXbQKF/60ljOQ9T2/hMNFdgcDX7T5LLKWe+IFo4aOYGw96gM2hPXodr0VcHU
- D02QtK+gGpU94uagz7bQE4sfZrNkyOTyneImXeyZNE5mtR62gaMwC/JEz9T3nj6cFCBtCWw==
-X-Google-Smtp-Source: AGHT+IGsieicxoQVqNgDWO5MmOrrsKGhegXaKvZobiHuA6iZYNOkoTmiUNjVYh9LGL3gbtHZa1j4IQ==
-X-Received: by 2002:a05:6871:62c4:b0:2ff:96c6:f712 with SMTP id
- 586e51a60fabf-30cb5c7eff2mr54492fac.26.1755021395758; 
- Tue, 12 Aug 2025 10:56:35 -0700 (PDT)
+ bh=cumotT2JZ4zmWl2jnEiFSqSMv5qA/qDohHZI/foM5as=;
+ b=lKJR0/uqUfj4PlP6aKvPksyLN5eracFQvx91H2zMQQ2CNYPtXmWfC+nadd3vIuNUvf
+ c6SwwDIH1d+c1UL0vhQyIZ8QrxWvUr2U3HJnd22gWxBnC2hEAVOpSdIjYYTYowS6C7+w
+ duJn/bvnPbxPSRUMGVCvdbOjYtaRLzAzwYjydB2WkZ+nXCwhyc+2X4CHPtZN9aRm4GhE
+ NJNtv/6ITD2J8mLyubCXDtOdJjkLKb826QO2G0IN1evntYh84w7PA8KLfhZ+ZaJwq4Ji
+ S7Bp15pJVHvd65uRY0wIYRUnPnBNGlAaSlD1dCKYNTOqidQrqWOW/PMOb8IofdFHiZdK
+ L45w==
+X-Gm-Message-State: AOJu0YyhwybrgHwrbvwRvVQzHpOkoM75lhzeYuXgOSve4AEWYtL5/ktA
+ LHy43vc/QtUw92b3nHbiGd9F9bNlknjr7FgECAOk9BlXp2139G6k7G3DeVTRExye1r4WuIkde1N
+ Wz/7rHjE=
+X-Gm-Gg: ASbGncs3vUWO4UKM++LPD3AgqMyWmEN67zJya52FH9Xs7bOnoNHav5hi8/Vb7lfB7yW
+ 4vF8hqQipdsS3816wpUJCjXtHrcrD8MyhLZ7EWg8La2YXgUQnLX/3hqYjtoBI6MdBToMj/sJfdn
+ CUN+jrdrzehWJrNXFxeghb33LBSkkSrHBG7pQp/lqL4zC9WOl+4j9coN1d3ieoWpTN00xhbzbg+
+ gZeA0WMo6vlgGqh6IxyRARJWvQ6zqHKobZLWweCKM4RMy0PSUgtIV8f4XQ2/MGjW3aWWVw6pr9o
+ qaTAGGHVFBwsXoTh6/ly6+T+twNZceg3jUk4+04ABOvNOEZhQDw80o5bW8YqrEd8UW3tOL6Oil+
+ epsOmkHUJnr134Lz5Ba1QfUIQ6cljMZMP+gSKui9cBLduu9dZPLWZUy0DY0o=
+X-Google-Smtp-Source: AGHT+IEgz8vaDrQywy9C+za/X8+Ilnpq5c27j9vdCsYjLA97ATM7tv29D5DxNnHwjqeR4EtGNSVdmw==
+X-Received: by 2002:a05:6830:4101:b0:743:152a:114c with SMTP id
+ 46e09a7af769-743754a8108mr174904a34.13.1755021550662; 
+ Tue, 12 Aug 2025 10:59:10 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-30ba8228a79sm6356726fac.35.2025.08.12.10.56.34
+ 46e09a7af769-7436f87a162sm353684a34.17.2025.08.12.10.59.09
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 10:56:34 -0700 (PDT)
+ Tue, 12 Aug 2025 10:59:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] net: Add SYS_FAULT_MII_ADDR to Kconfig
-Date: Tue, 12 Aug 2025 11:56:33 -0600
-Message-ID: <20250812175633.3056595-1-trini@konsulko.com>
+Subject: [PATCH 1/2] sandbox: Improve dummy local_irq_save implementation
+Date: Tue, 12 Aug 2025 11:59:07 -0600
+Message-ID: <20250812175908.3057051-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,48 +91,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The support found under SYS_FAULT_ECHO_LINK_DOWN requires that the
-SYS_FAULT_MII_ADDR symbol also be set. This wasn't previously found in
-Kconfig, so add it now.
+Normally, local_save_flags is used as part of the local_irq_* macros, so
+remove that as it's unused. Make local_irq_save do something to the
+passed variable so that it won't trigger unused variable warnings later.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-This was found as part of testing "allyesconfig". I'm not sure if
-there's anything useful that could be put in the "help" text here.
----
- README      | 3 ---
- net/Kconfig | 4 ++++
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ arch/sandbox/include/asm/system.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/README b/README
-index 65305e6a0371..7808af528625 100644
---- a/README
-+++ b/README
-@@ -1249,9 +1249,6 @@ Note: once the monitor has been relocated, then it will complain if
- the default environment is used; a new CRC is computed as soon as you
- use the "saveenv" command to store a valid environment.
+diff --git a/arch/sandbox/include/asm/system.h b/arch/sandbox/include/asm/system.h
+index 7933b6292e21..73f34683b275 100644
+--- a/arch/sandbox/include/asm/system.h
++++ b/arch/sandbox/include/asm/system.h
+@@ -7,10 +7,9 @@
+ #define __ASM_SANDBOX_SYSTEM_H
  
--- CONFIG_SYS_FAULT_MII_ADDR:
--		MII address of the PHY to check for the Ethernet link state.
--
- - CONFIG_DISPLAY_BOARDINFO
- 		Display information about the board that U-Boot is running on
- 		when U-Boot starts up. The board function checkboard() is called
-diff --git a/net/Kconfig b/net/Kconfig
-index 24508026200d..6d5de9a675e4 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -60,6 +60,10 @@ config SYS_FAULT_ECHO_LINK_DOWN
- 	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
- 	  be configured.
+ /* Define this as nops for sandbox architecture */
+-#define local_irq_save(x)
++#define local_irq_save(x)	do { (x) = 0; } while (0)
+ #define local_irq_enable()
+ #define local_irq_disable()
+-#define local_save_flags(x)
+ #define local_irq_restore(x)
  
-+config SYS_FAULT_MII_ADDR
-+	hex "MII address of the PHY to check for the Ethernet link state"
-+	depends on SYS_FAULT_ECHO_LINK_DOWN
-+
- config TFTP_PORT
- 	bool "Set TFTP UDP source/destination ports via the environment"
- 	help
+ #endif
 -- 
 2.43.0
 
