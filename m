@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26925CA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 17:46:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B158CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 17:56:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 486B182F00;
-	Tue, 12 Aug 2025 19:46:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 961B882F03;
+	Tue, 12 Aug 2025 19:56:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZzazkOyX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iRB22a/Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A5A682F8F; Tue, 12 Aug 2025 19:46:33 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 66F3582F30; Tue, 12 Aug 2025 19:56:39 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41E4282EB8
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 19:46:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42D4C82F00
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 19:56:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2403df11a2aso38956375ad.0
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 10:46:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-61b8cb58f21so1645666eaf.2
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 10:56:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755020790; x=1755625590; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RCRZKXbQOiAIebogGAYdjqBks+j5Gm1qVC8IzPRwxCs=;
- b=ZzazkOyX23JaVMGpGOUDozTZ7ojpWNBq3cinJxnvQeWFfa7Yo2/T9uZJNy6SipH7+I
- p+2RLFvoQvV7kMnMmX6T/tjaatgAKh0W6jFeYCmZXz0k/PDlg4Kzsk2AlPzeFT6WNbaM
- 9sLedg2HB2VET9PCeIYY8gVAIOY51VbySKJsnqMU/Epye8jsz4TFAWIpvRDzcsXplcMJ
- qLmj5nf04fZs8AiiX9jli/U9tJ3eEK7GCG+hrHTq3dVZd0HfMWtfPTIsmpa2j0qwV7J7
- tlyIqsljvu+uKY7R6K6GhwlMUHXf36Axv/4NSkJ/uHkl/T81ZCqMsXkIwyaS9lNXEz/h
- yL8Q==
+ d=konsulko.com; s=google; t=1755021396; x=1755626196; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QTXNK/Myvgajjx7w0eID4gJ0GRuaUsO4BdpqqkdOU/M=;
+ b=iRB22a/Zx3jsli8mJ8u0QDVDhxAPsHoiB2KYKpo302tMKSkSyj6256YGelOi+bWN9h
+ rN72crAjpcHpNTHVIoY1ysOzMe+CnuSEpv7kqJIyIW98GQfxnYZPMb3JBxItEbXKNvMt
+ tgWJb9oOam+CfdrsfUUf49UIY8wmn1zXrttZs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755020790; x=1755625590;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RCRZKXbQOiAIebogGAYdjqBks+j5Gm1qVC8IzPRwxCs=;
- b=Hsvfe8qKQDO1D48p1KX21H1uxeCjFOknM+ep025JUPw0jXYD9BDg2rxNfiNh/nld0p
- 7i27+Ukq7ll7lz8zku2Xaf/oeoQ/EpNyTOr341BWnD/Rp57/9Zb7rcqDjX7NnBEbiIRJ
- a2s1sV/30FVzdUcFRWkZ9t9hr4+YQA52CycYhMfV0t7rRovtjWomajxfjfV4IP31bXs/
- oj2CwgmDbVxfU+0t6kfAGVfauXHid5eaDPnpG7LF9LXkSnXTbZxubLVNgSar7JLSsGrl
- HoIrulw6u5fO5UB0NI19vDg7dgLm6YBZUzlhY7FVpjnF+twSsyz6yisAD3ql2XcdCURD
- JCzA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVr0kmyU9DOgGlO5xPhPhQTObhU5FxWx8Jw+ifzOJlA8FFJ6iyg9dVoifAE9jDAVFl3/5UaSq4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7ePiKMX2d/I2+pGqF/QuZ9+rqeSKa7Wrl2nExN9NIIC7Avhnv
- VbEOjMqbDuyDxIx0fmE3H5e7WAL6xPRT/rkppFSsgvrAgVZIY7UT62au
-X-Gm-Gg: ASbGncsm1V+CN+/XPD/jPY2DKquNXSZBC38x1hgCicCyLF6NWWMYnx+L+3dpBKz4j9k
- tvQzQ4PdqyzL6ztDV6jELVIiRmvBAjwU60czIg3HJhX47TB5Ydm99JRQJfKSbsuz4IWpnCaz4ZT
- pg0QIOuxxL4ZLx+O3Xk8beoYOO0DLwImP7Ghmx5YJpM9PeG9Qyj8RChHJHRDtK0MKyAAJp+jRKE
- 24YE0xTSdc+tQJ8aS+kZbsqinlvTZAaPGJP5ctpb94dNSbFKmnOxV6VdF1a/0j9QMwiQY/k5W9n
- 8Hi+CCXL91zwRcXaFL25q0P51ecEwQGoYxFqclzHrsy2DgOiwNFI1aJexYJAPUfVfNrJY28UmgP
- R+ksIe5DSR47LpdCbwLdUBokmazXj1joevoDXXB9oMQDMAsA=
-X-Google-Smtp-Source: AGHT+IHnwuc8DScJ/WeyAOS0TubACRPFzivV4ZP5gcDUyJoSDF8WI14CYKKk294mNhHb2wvN0VyVsg==
-X-Received: by 2002:a17:902:d492:b0:23f:ecc1:ed6f with SMTP id
- d9443c01a7336-2430d0e62ddmr1329235ad.17.1755020789723; 
- Tue, 12 Aug 2025 10:46:29 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:4c8c:4a84:8608:9a5a])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241d1ef7c30sm304527205ad.37.2025.08.12.10.46.27
+ d=1e100.net; s=20230601; t=1755021396; x=1755626196;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QTXNK/Myvgajjx7w0eID4gJ0GRuaUsO4BdpqqkdOU/M=;
+ b=GC1g8Y0l1JW+ti8Wzi5mJRKoLfFacIE1cJ5rOJQndrANp56DoEe3AA1fdOzKKfnqAt
+ O6qrXh48gpHkR1VohkoAF3LUrQYcxwSl/B9F/I41hUW7a0zoGRDC52YzgLxlfNQKoafu
+ 3mXbLnYngwVZDowVlDL88GGCsb3R92vL0jhr5dp+ZmwiT5lEB+ynVbff+SprEHfe+0kx
+ 8E4Yetxw/49wQofC6ZroegKOVjZ12pRzWmmGvcqM+dK7jv7QgA3mHZCBEnocnt9+a00q
+ 3sfkZ/ZW3uBcTLL9RGBKSKfJ9I+0tFdWl9FSbsVplL60Q21r6IVlWC0TihI+CqNNAQN8
+ LiqQ==
+X-Gm-Message-State: AOJu0YyOHFcU7tj3GL2zz5vWFQ4P1sN7KXavuhTzsB7aLb7YzLtnbSUU
+ d1jENBxlu4P0MXOUebUVOvnEB6OHu9ATk2tkfRzEmKrb3JLVNFcfTShXBTW/VH5OBxje9ROViS1
+ Zgge0rOE=
+X-Gm-Gg: ASbGnctIOLNFN5iQjV5dtJOZbZg+pIC/9ysGpd0c2ivV79dytkM4Ae+n6OUrj+1JffF
+ Mf0DGUlY809O9wyNupZRSrt6LUm7H6eiPoVnuLt9e1Y0GIq+gzTL19aqDXlQC58l8RdInps13bu
+ dUCCiR+ymQ/T5woBc5tosjytOkfgJpDGpzYdXjgIuNIeCny/hNIDlNAgMA6lGI20F82aeTlLdA4
+ uiMlwE+Xiz+7VPwF3j7kr24PNVPwztxb6Mr8H61NcKk0YIDVIAkEa2mrO/L12aoonde64gx4Q7N
+ y6pzwesxy4AMYvRVXbQKF/60ljOQ9T2/hMNFdgcDX7T5LLKWe+IFo4aOYGw96gM2hPXodr0VcHU
+ D02QtK+gGpU94uagz7bQE4sfZrNkyOTyneImXeyZNE5mtR62gaMwC/JEz9T3nj6cFCBtCWw==
+X-Google-Smtp-Source: AGHT+IGsieicxoQVqNgDWO5MmOrrsKGhegXaKvZobiHuA6iZYNOkoTmiUNjVYh9LGL3gbtHZa1j4IQ==
+X-Received: by 2002:a05:6871:62c4:b0:2ff:96c6:f712 with SMTP id
+ 586e51a60fabf-30cb5c7eff2mr54492fac.26.1755021395758; 
+ Tue, 12 Aug 2025 10:56:35 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-30ba8228a79sm6356726fac.35.2025.08.12.10.56.34
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 10:46:29 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: joe.hershberger@ni.com, otavio@ossystems.com.br, u-boot@lists.denx.de,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH 3/3] env: fat: Standardize the interface type check
-Date: Tue, 12 Aug 2025 14:46:12 -0300
-Message-Id: <20250812174612.1159634-3-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250812174612.1159634-1-festevam@gmail.com>
-References: <20250812174612.1159634-1-festevam@gmail.com>
+ Tue, 12 Aug 2025 10:56:34 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] net: Add SYS_FAULT_MII_ADDR to Kconfig
+Date: Tue, 12 Aug 2025 11:56:33 -0600
+Message-ID: <20250812175633.3056595-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,32 +91,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make the interface type check consistent among the other interface types
-by checking it agains the ifname string.
+The support found under SYS_FAULT_ECHO_LINK_DOWN requires that the
+SYS_FAULT_MII_ADDR symbol also be set. This wasn't previously found in
+Kconfig, so add it now.
 
-The ifname string contains the string returned by env_fat_get_intf(), which
-returns the CONFIG_ENV_FAT_INTERFACE value.
-
-No functional change.
-
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- env/fat.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This was found as part of testing "allyesconfig". I'm not sure if
+there's anything useful that could be put in the "help" text here.
+---
+ README      | 3 ---
+ net/Kconfig | 4 ++++
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/env/fat.c b/env/fat.c
-index 412d95dc3057..58c279ff7690 100644
---- a/env/fat.c
-+++ b/env/fat.c
-@@ -131,7 +131,7 @@ static int env_fat_load(void)
- #endif
- #ifndef CONFIG_XPL_BUILD
- #if defined(CONFIG_AHCI) || defined(CONFIG_SCSI)
--	if (!strcmp(CONFIG_ENV_FAT_INTERFACE, "scsi"))
-+	if (!strcmp(ifname, "scsi"))
- 		scsi_scan(true);
- #endif
- #if defined(CONFIG_VIRTIO)
+diff --git a/README b/README
+index 65305e6a0371..7808af528625 100644
+--- a/README
++++ b/README
+@@ -1249,9 +1249,6 @@ Note: once the monitor has been relocated, then it will complain if
+ the default environment is used; a new CRC is computed as soon as you
+ use the "saveenv" command to store a valid environment.
+ 
+-- CONFIG_SYS_FAULT_MII_ADDR:
+-		MII address of the PHY to check for the Ethernet link state.
+-
+ - CONFIG_DISPLAY_BOARDINFO
+ 		Display information about the board that U-Boot is running on
+ 		when U-Boot starts up. The board function checkboard() is called
+diff --git a/net/Kconfig b/net/Kconfig
+index 24508026200d..6d5de9a675e4 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -60,6 +60,10 @@ config SYS_FAULT_ECHO_LINK_DOWN
+ 	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
+ 	  be configured.
+ 
++config SYS_FAULT_MII_ADDR
++	hex "MII address of the PHY to check for the Ethernet link state"
++	depends on SYS_FAULT_ECHO_LINK_DOWN
++
+ config TFTP_PORT
+ 	bool "Set TFTP UDP source/destination ports via the environment"
+ 	help
 -- 
-2.34.1
+2.43.0
 
