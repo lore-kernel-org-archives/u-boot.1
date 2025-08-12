@@ -4,165 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486D7C87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 07:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB111C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 08:02:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ACA7831E1;
-	Tue, 12 Aug 2025 09:53:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE9B283211;
+	Tue, 12 Aug 2025 10:02:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="W5pBWnaI";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="nS8pxunH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4C2483211; Tue, 12 Aug 2025 09:53:49 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 983E58323A; Tue, 12 Aug 2025 10:02:35 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 544C48319C
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 09:53:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A1CB8319C
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 10:02:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PlZvCKpORla2LXUFI6+HpsIfzKGy2qtCLZI01CD3tgJS9xq7IoSAhHGSyrA43DZkimxbDEPxlM7cKeimOQDE1lUooPKLUaqSXKmBVCaHv7fl3+1RfzRR174C8RTl8B/aJO97BRivFxTz629VGFy1L72gK/SqiYDASry3PMaPydxy7rfmkdR2YYl+aqadKKKvlU/+2NLLW94xnpmNq0fTkMRkJTMEUw6QtXdzXiHJlk8s5GAlzn5jq//Q16Yg5tnnxic+YHX2nHuXWSbzJLC8QD/XYUcvbQqPAwiL0cTqc8cx0bz9H+JWb6dLWZJG/VUz5zcgI69YThYz8unOger/lg==
+ b=uNqtymtzktR2rf2KVx/0ZbdoC6RmQAwATL+zKeReeKKUzpZed+9s5xb0VagfB243tzfVX4bM88iuUmzIGD0hPS5dhyXhK9U/Y46sAM+pm9rRp5KmE3FQGQtkwll7bedLxmWbItK7oS3zd+HOe6XS9cAQWedR8MU/OEasKGsTS1oBCZ9zKjqGfvZRNjB1Tslm3wGqf1hDjpS7NpWOBcqaOVzldHrWJfbISjWmF3S3OuG6+99wJbaZmU/Gr86nqIAaYWlq+HJudWtc7KtTJEM/J9pIfZWw6tcDuEhfxQ0kBA4ebAHPRET0DdYNea5QVOpEWMfEQ1gs5fDLRcX5kMZBOg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UWvVB67FmpBPDdS5rmUpnpJn2QzfG3ueJcMCFIZc96A=;
- b=q+dri7A7lg4QGZCye83mkwI37p6nprnngOhAZbr2AR8dvGoNZZdJCuRzIixOVnYRVQ4YPQgSw81xPeZVwWlZHcHl4H4PmiOGEZA2xd7q3dg3ytnQjTwsHiWJ2z7GNoKn15ABTr1OflDXIYLcU4OVAPyAVEAMNjaDCd7STzyJ6RUF7hNisSZ0XfFCOB6Sa3nGnpi5MqwDrSgjmW58jkImrXutz0CoUk3SEDNM7qQv6dlWbgL5SqK/H48KpnFc/8xBPtLUWXv0dMcR/fH5CR6hXwhCeNXkLC52D60SiX3+FHo7agjiFSY7za6C7rOjPY1trLlerkqETAVdMYEdtFI7eA==
+ bh=y+P5Xt8lB+/nRj4zw7p0Yy55eUSY15GGLs4JvUllYUQ=;
+ b=w+SVYiNV81KVyHRVx0dtqZcVcYj63QYnc3fWxrs5pu1HGk1xpDQTROGnKhUzVTi/mLzAu3u4sMMW81a30d2COuMspGrrcoDCHesxfyV56E7e6jlwxffJlV00QsMU2ZylvA6Y90f9oWAiW2xoQusfxGPT3zJ1+7Zssp3BpLRTlCIE+pKcHHm5DIXclhdL0KMoVRoRl1cKSveA1p41VyF7aMow868xTaXIrQYuryoRfYKQTMY572WYpShyiSfvVFfiUmaW64/VNhPQCQ81naMxWy3KQ6i103CNg9lFqrnwJFZSnBBGENAN/oisxTMDoHG6Y0smNezmN8FgDYljwt/zGQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UWvVB67FmpBPDdS5rmUpnpJn2QzfG3ueJcMCFIZc96A=;
- b=W5pBWnaIfEKDylyl7nI1cRCZO0Wsa0oF9BmpUQvVvrMEkNuEc0nd3T3azc49kUv8bfFjnWqrND5KJ43XzwotENNZ1MdrkUegeMjGF9Edjcbjjxm/PjYunXRxTlyWv32uucm4n7Z3V1AJrGk5mYPcYR5COCidjes7jE0WawsU/oA=
+ bh=y+P5Xt8lB+/nRj4zw7p0Yy55eUSY15GGLs4JvUllYUQ=;
+ b=nS8pxunHp/rMfiCLGYasxYWF6th7gJUPjMao3Rgp9FptYy57Qq9pnQHAyPsBS7z3i1S7ym1XeJU9QTkictZ5z9T6MwtLQpGHc77QVsPbQV60x80RtYfJizDsDgKQ9/M1LK3qAlgcUTxbelyT6D7hBAvs2zAPLmPJYKzd7ugqdqY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DBBPR04MB7945.eurprd04.prod.outlook.com (2603:10a6:10:1f3::17)
+ by DU2PR04MB8791.eurprd04.prod.outlook.com (2603:10a6:10:2e2::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.13; Tue, 12 Aug
- 2025 07:53:45 +0000
+ 2025 08:02:31 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.9031.012; Tue, 12 Aug 2025
- 07:53:45 +0000
-Message-ID: <681994c6-2b95-459c-b06a-ff1fd6093eca@cherry.de>
-Date: Tue, 12 Aug 2025 09:53:43 +0200
+ 08:02:31 +0000
+Message-ID: <eba0984a-ee81-4d94-a7d3-7d31b6a23350@cherry.de>
+Date: Tue, 12 Aug 2025 10:02:29 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] rockchip: rock5b-rk3588: Add support for ROCK 5B+
+Subject: Re: [PATCH v2 3/4] rockchip: rk3576: Add SPI Flash boot support
 To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, Simon Glass <sjg@chromium.org>,
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250801170933.2530191-1-jonas@kwiboo.se>
- <20250801170933.2530191-3-jonas@kwiboo.se>
- <d236a958-8605-4ad7-85f5-6cc03048f8b0@cherry.de>
- <8dfbfa29-839b-4067-b4ba-62ee3ce60f78@kwiboo.se>
+ u-boot@lists.denx.de
+References: <20250801210619.2618622-1-jonas@kwiboo.se>
+ <20250801210619.2618622-4-jonas@kwiboo.se>
+ <a22ea144-ada6-4520-a7fd-43380f526ee4@cherry.de>
+ <ad21e750-5606-422d-842e-23a33772e7b8@kwiboo.se>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <8dfbfa29-839b-4067-b4ba-62ee3ce60f78@kwiboo.se>
+In-Reply-To: <ad21e750-5606-422d-842e-23a33772e7b8@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: FR3P281CA0095.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a1::7) To AS8PR04MB8897.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR09CA0159.eurprd09.prod.outlook.com
+ (2603:10a6:800:120::13) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBBPR04MB7945:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9d36d99-e147-4876-d51b-08ddd9755cdd
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU2PR04MB8791:EE_
+X-MS-Office365-Filtering-Correlation-Id: 85a8c974-a09b-4772-551a-08ddd9769682
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|10070799003|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QWtsMmszNXMxYldBSzhYTGsyOStoR0t2MTVMMFo3QU5yNFUxbnhNU3Zkb1Vr?=
- =?utf-8?B?MU9uUDRxQkFrNFc4UVM1TWFMSXo0VFVVSFpkOTh0bWR3b0hnMW54MnF2bUtx?=
- =?utf-8?B?UjZTRzVTR2ZqZ1lJaWpiM2p3SGJQbDg1bUtEcStlU2pVT2VvQkJTTFcwSnRo?=
- =?utf-8?B?UEpBUnlXanUzbWhTbGdlNDhkZ0xGK0ZBU0lTNzlPQUJhdXhTWTZuTTNlMWZE?=
- =?utf-8?B?bCtiQXBnVHJ5aHNjVndVRVpxTUZNc2wrckJkTnY0RFpsdU9xczFhM2QwTDZ5?=
- =?utf-8?B?ZUtUeVlGd3UySFk4OGNhdDJlNi9CSEhyUjBpZ0xZditHV2lsWUpRMlFmS2la?=
- =?utf-8?B?MVUxL3daS0s0SloxaWFtSTR3Sm43Y3NyMG5SZytHbkpGUXhzaUhrNWZXSUYv?=
- =?utf-8?B?Wm5pUVZ1c2F2VEdENkVTdlk3S1RPSEREakl3bGFDZzc4RHNEMmlmaUVLaTYy?=
- =?utf-8?B?dDlUaXVkL1FCcG4yclZ6aHlvYndabGxkNUZHY1QxclBtcUtJdnVxd2V0ckd0?=
- =?utf-8?B?Y21BeENsYTd1THVnWFV2aXNyZVovM3FaYkJzWVVldVV2N2JKQThtSVo5Yjd6?=
- =?utf-8?B?R0haOWNPVG5jdnE4RHBJVlB3eEJUK3AxWGN2Y3pUN0ZnWTBZbmpRZGtud3VM?=
- =?utf-8?B?dWUvQ0VwZ2hBVmgvMnJSSmhheEZkK1FvYkV3N0pRYU5sQjVFcU1WY0dUUUM2?=
- =?utf-8?B?WVZuWkJnRnVzWTlpOTRPbTdJNTNOWGZqM2pHdEhScTBNeSs5KzY2TERlNWxQ?=
- =?utf-8?B?UThWV2hvWGZmaWJRaS9DQkZEV1dTbnRYU0RJcFhBeTkzWTh6L0tveEtmZjNG?=
- =?utf-8?B?ejI4Zzk0UDRBeGxNUTVJajZsREhNRDdRUi9KcFZBQ3dubHJCQ3RzWGpFNEpM?=
- =?utf-8?B?YXNFZHV5dnZldzc0eEYyQVpXMXRaL2RqcDdSRGJIUHozZXF2YnlvYWM1U0x0?=
- =?utf-8?B?d2pFK09ZcXNWa3pQZWl6UXhLTHNQOWNLMjg5SXBUSVdiWXVEaXhpeWtVTExi?=
- =?utf-8?B?NExLbitKbnY5Ti9hTTIybEFwdkF2OXMxMWIzWGRGeGVoRUJPN1p0N2dQemhz?=
- =?utf-8?B?RCtISEdkUzhvaFovT29FSW85Yk1yY1ZGMWVLVVJmVXhGU0VPQVpFMndKSXpS?=
- =?utf-8?B?L0kvTVhuL2d0U2JJZWZxMDg0K2psWHc5UlZWTGVDZUh5STIydzFWdU1sSFRI?=
- =?utf-8?B?VitGeU5mVnZxcTl3WEpVS2poRTV1Y0ZJTE5NSGRvNFlSd3cvSXpKZmpTNDYx?=
- =?utf-8?B?Tmg2REFobDZ0THRUL3BJRHkvZ3V0NWdjVnZESkxITXZ0RmRsdFV1bzA2aytr?=
- =?utf-8?B?OWQzWVVTbVczbmRaUmZXeU1qOUdYQXZ5NXcrU25xaTlyd1hYVlREQ3BUMnlT?=
- =?utf-8?B?MTlndFNCN2h3cGdyRzlBUHBxS0xCV2pVT2tDbHJTNHBaRGFCYm9OVlZrTUhS?=
- =?utf-8?B?S2lGRmlhMStxd0hDVXZub1VsVFkzVHhlc1l6M1JLaTl3TVgwUDhMMzdhRyty?=
- =?utf-8?B?WExFZSsrSU5JZU1nWklLUXpNaVZMRUFRWG5Cdjdad0xyKzJpZ3k1Wmdma3VE?=
- =?utf-8?B?K2RTVzAvTjlGSURzSHdWUG95bnA1MDZ4RVhiOTdFWXpDeEZlWkdvQ0RZd3ZD?=
- =?utf-8?B?SFpyUkg5dWVmMGovSTYwcmNDUm9qVm82aXhDQTBvVXo5eFhWSzdzdlNhenVU?=
- =?utf-8?B?QUU1RFZzZDhYYVZ0VWVrNktiNGxIbWxjaEJSK2J2UGxWS3U0WHhFbElianRn?=
- =?utf-8?B?YWJJVVVWTGZ3c2p6amg3SHlHNWoxL1VQaTNheVM1WEJMUURqc1VlaG1kNk9Z?=
- =?utf-8?Q?Oli4mAcuC8nXXlwMJcy+SlfP2sVlF9nqJlCD0=3D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|10070799003|366016|1800799024|376014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bjZCWlJNQUhmdU9YZTVGSzRrOXZJMkxURXFFU0J2L2gySXQrQzRyVmdncm1U?=
+ =?utf-8?B?bWgyTXIreFFibmM5QjVPam94RTIyZmlvQjRWWElZQmF4Z2IzZFRMZlVvQWs2?=
+ =?utf-8?B?WVlRTFJhT01yV1ZxOFZ1ek9pTkk4Q2Z0Zno5Q3QrNDBIVGdaaXQ3VUcyVGVo?=
+ =?utf-8?B?M1pCNDRoV2JDSDRyTGlZeEtSUmtPQ090UGtDSUo2K3ltQWJPQ0NzUGRRMHZL?=
+ =?utf-8?B?SnZjbmRKQk11U2pjck5pZkFBSEdaUlh2dGlncHhwY0FkQUQ1SllWcUlZQXhp?=
+ =?utf-8?B?RkdvZFFxOHMyL0tvTStkSWpBNk9nVnR0Z1dtaDRNS0NUTS9lYkYzYVFqczFZ?=
+ =?utf-8?B?KzBVUHpZMXdGMEdsa25mMHZSUDJGNm5rdmFRUUJxNjBLZ2hhQUFiU0cxZW1O?=
+ =?utf-8?B?WTIvR1lraHpEeDlTbVlrZ1FkNUdpUHlPbHVFaDJVZ2FTelhXZ2VCTzhZczN5?=
+ =?utf-8?B?SmxpaDNORnozamd4eTQyUEYxQk95UGtvb3ZOL0hidjgvVWhUUWdlYmwySENT?=
+ =?utf-8?B?ZDBXdC9xNVE1MjVNTG9JUFVuTVVPUnQ3TVExYnlHem1PUm9makhTSkU5bGNa?=
+ =?utf-8?B?NVJFNzhaSTRuQ1VrVk50KzRQQ2ZHWDEyNFB2V0ZaR2JqQmFwRlZWRmwvSG42?=
+ =?utf-8?B?eU1ybk8zUlZ4aGNzejI0RTZ4VkkxZFlNc2dmbjZvekhCbFFSbFdraGUycVJG?=
+ =?utf-8?B?SVBuRWQ4RXQ0b2dwcmNPV3FBMTdTT21FZzlJbGdnR09jeGp6SFVYT3U0eG5M?=
+ =?utf-8?B?ek1qTVJ0R1ZPWGVGajlKdmtROENYUzNBOEQ2cUkwYUFPWW9MTVlnaFhCRXY4?=
+ =?utf-8?B?WmRWaklmTnc4dm52YmE2RElKcnBCcVpwOUdaK0x5R3dZNjdmMlAweHpTWFhk?=
+ =?utf-8?B?VXhtUXdaaEhQdUYwYjJyd0pQWXQ1VGxNRnJXNmZxTDdUNmRzYUhuQVAxcE01?=
+ =?utf-8?B?emJ4UWc4NFlYRkpUQTRjbXR2M1JFTzlpd2tuNFUzaGVmR1FYaUdNNUg4Rkw1?=
+ =?utf-8?B?azV6dDA0am5FTWZCOHo4SjdLV1dkU21oM0ZjVE1kODRQZUVtKy9hek5IVXZu?=
+ =?utf-8?B?eEMxblduRlhyYlBzbnhMcWhoNjg0dEo4eFNNQ21jZzRBczNGZFhFYVJmRy9S?=
+ =?utf-8?B?N2VJdi83U25UTE5QamNmUW1CMmVtMG9KTDBRcDRaVDk0d2I0YzFGclVVT014?=
+ =?utf-8?B?YXJUTWRaRC9jdFQ1MmFEeW1nTk80aEw4bzZXQnN6TE41MzdsMDUyd3RhaW9h?=
+ =?utf-8?B?elVxZHdmTnVJWnVxWjNMdkI2azRoU1ZaUERMT2FlRE0zOUtKd1JlUnlBcWUy?=
+ =?utf-8?B?WXp0SGMrYTlxWk0rb0NXQjFwNzR1MUNwZldsUTE5SzM2aTRMSDRLQWRMMnJ2?=
+ =?utf-8?B?M0NqREFGTytrUFFERmprakJiWC9vTjU4TUhZV2dObk1qT3Z3MDZBQ09ydUls?=
+ =?utf-8?B?VWthWm9WcWU5R3dpaFFFSVoyamVXUnd2Z3AvcDhzMHY0MzBIVGRWMHlwWC9G?=
+ =?utf-8?B?MTRPTEU1VmNQZjdWWHBLaVc5U1d3YjFRS2VXenZ1MVhQOHdEM3hXSUtZTlBr?=
+ =?utf-8?B?SmVsYzhPTkIxcXFCc1BNL0NydVdlRDhCVVpPRzNZejA0QUN6a2RheG1XUS9G?=
+ =?utf-8?B?SU9RdnlzVm0vSFlScWtMa0RBOE9Jemc4RHM2dEdlWDdiYzExYzRQUTZWQ3Zt?=
+ =?utf-8?B?VFl3TjRrWWF3a3JjUnh2NDUxVFlnWWZxYmFzYkZoWU9GcWZNamNSWjdvMnBY?=
+ =?utf-8?B?dVVhNHhqK0lIbk9icWVIUXBNTUUva1Ewd3lwc3V1MWxtdnFCVlY3bnlQNzlu?=
+ =?utf-8?B?eWF5S0RWb0NjMHRJVXVKaC8yT09WTVVvOFJNOUxXTnRjSnBHbUc1a0c5VmJm?=
+ =?utf-8?B?Z2ZjYWRjaVo3SnJTUHA5UXRHbFdCYnYxdXNHWHdhMnVWclRqR0RRYXpUOTYz?=
+ =?utf-8?Q?tZGsa4WHATI=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(10070799003)(366016)(1800799024)(376014)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UlpvY1ZUZ3hxa0pTR0RaVTB4WlFFOVJ5c2Q5dno5NGFCWGdxR2dMUUhBeUl4?=
- =?utf-8?B?UVJseDk5WWZtcXhRQ0dMZ0hmWEdwWGFtK2JxcHdxQmdsWWZISUZVYkdBQzYx?=
- =?utf-8?B?YmgzaXhrWk1peTl1d09qbjFZNzJYVUxBV3dMV09jWlBuZTNIbENYaXdPMFdL?=
- =?utf-8?B?YTZEWnBLMFNYVGl2SEtyQVRZSjZhbUZObTh5VnB2Y1JsSzNTcE5XWUFoazg5?=
- =?utf-8?B?MjFpc0J4NkcrUEFrWk5kT3V3SVNXZFl5RjlvZHE3ZHdoaHE2Q3lycEloRjlj?=
- =?utf-8?B?Ympqc3kwOXZYQ0VjNlpMUUlacHhZQ0E0dG9RbVg2OTY3UE5FVTdKUnBKVWV4?=
- =?utf-8?B?L3hrdU9DM0tIcFB5enYyQVRjOVd2d0tpNXgraldHUGdyVndwUTFJZFdyUVp6?=
- =?utf-8?B?YytLMDVlS3dpdWNtaytxOVNmQUNhWTh0bytqYjB2TkJQcWZSL2VYMzliQTU1?=
- =?utf-8?B?blFoM1U1OUZRVWI2UjkzbVhjWTdYZWFHQ0NsRzBNdnUyV0c4N1dmYzJ3R1Zx?=
- =?utf-8?B?dHFBU1Y2ajlwanZGV0VtcjYybzA5SjZGZ3BaZVYyeW1Wejd2cmVKWkZTUTY3?=
- =?utf-8?B?aFBpb2ZVVFVqRTJHb0VSZkwyTFBFR2lVcncvcWhqa1hRTDdtWStJYnJpV2pR?=
- =?utf-8?B?QjMwbDM1elB4ck5hR3d1VTJXL3UwcWY2NGh5Qk1UbHBlTXVTb1lHbFhRTXJU?=
- =?utf-8?B?cExlWkh4cXluTjdncmRmZFlIWVpZNnk0L01yQmswbzNHNEtjUXQ2ZmM5blQ0?=
- =?utf-8?B?WXdMM0FCeEdsNkhYMWFVd2tvMDlQQW1DSnN3T01EbEZNSnZMM0RlT3BlRHJN?=
- =?utf-8?B?WGJ2ZWV2ZzE5TENBaWk0V080VlFpOTZrWWRKcnQzL0Q5L0pnVUp2bjVNZ25V?=
- =?utf-8?B?WnRuNGlTVzdFYWdvTUlJM09DNVNlS1ptTkdaM1hBcTB5N29meEhCSGVJYk02?=
- =?utf-8?B?d2o1M2VlcjgrWDhJZ2pJaEQ1WndKcGJCcHVsY1BVWUJqMEdHRk5UTmNhcHRl?=
- =?utf-8?B?M2FUNWgzTHVVOEtIL2JvSnYvVXNwZ1hLZnpiK1g3NlRMZHNGamRxQ1pUbVgy?=
- =?utf-8?B?eHYxUW0xc1Eya1hPSzJmb2FHUnhnZVErZjE5SzJBOGZLS0s3OUNONklXYXp1?=
- =?utf-8?B?QjZKcytwVllCSDIwUy85d2xJdUcyMkJ2NnoreXFIMlFCRlV3YlIrQ202SjVQ?=
- =?utf-8?B?eHFSRHlPcVNFN205dFoybVlKeFBYZGl3YldpSXFxa2xLU043eGVOVG9mc2Qv?=
- =?utf-8?B?bW1jamtYYVBwUTBqOGIzellHQWh5a3poeDdNS05aUFZuYmVVVksxbU1VN3ZI?=
- =?utf-8?B?Q3R5N291UmZ1OHRMbXdMaHZKR3VTVTlnZTRMRUZXY2JDbmdSWGozN1NmcU9X?=
- =?utf-8?B?NWhhQWpoNnpuaGZ6MDRQN01qT2JYMmxJam11dm14cWxqem90c1U2WXFwOG80?=
- =?utf-8?B?elJyM2JvQjlZSGo0VDZMRFNXeUV5czVBY0c0Uk05UkJqaFZ2enQ4eUkzMi9q?=
- =?utf-8?B?Y2JUUHJ2MjNybW4wMmpBVFpXRWZQRzB4c1gxWHZSRUlVcEY1YmhYQUhTYTNs?=
- =?utf-8?B?ZWFreDlWY2x3UXpBSTVYZy9zMTVMbkVMRk9ka3hWbGRidnppUyttQUxhbHN5?=
- =?utf-8?B?VWhKTkxvTHphcXBqTjhzTDV4UE9CaVk2ZU9venliUzFuVnBxYlFGZUQreVJD?=
- =?utf-8?B?eFZtQkIrNUcwNEtFSUZPN2VsL29raXBTcTFKRHNrbHRlUjd1cHJIRUduN3pP?=
- =?utf-8?B?T05QbUtBYVNpVStBY1J2VVZhN1ZpeG1GSEpPclhvbXNRSVZyRjFUeUxsU0Fo?=
- =?utf-8?B?aE43bEhSbXpEckxGNzZOYU8yMFYxb2IzOUJNU1JFTGYwRDk5WGVFTlFtazRr?=
- =?utf-8?B?Q3lCcmgwR2t5ZG4wUmlwSmxVSTNMWERIdkxJNDJUSXhEQkRwMFRac2ROVUxs?=
- =?utf-8?B?L29LSGF3NHVlTGFEVHQ0YjZ6dkpCb1JtdXpoaytPUUF2Z0JmQ0pCVjR5NFpr?=
- =?utf-8?B?VkV3aUlycEpaVkhJZGp2US9KSkpQVHRJSHkwNkpXSHdWQklnRGRmdHIxRnZs?=
- =?utf-8?B?elRObTVmemNKbW44OEVvQlV4cUNKU045emVGdGdacDE4azZwK004Sk9YWitp?=
- =?utf-8?B?dUw4bmpNSkdsbzVSZ0laaUY4ckY5YzBERGo4bFF0TnhXaUU0aWJuY2p5cGQv?=
- =?utf-8?B?QW1kR2w5N2MrcmlYTVBVR1IwaFZZL2pCdDBoaHEzVGRSeG5Va2lmUXpIYW1j?=
- =?utf-8?B?WHl0SEY1T3dMbmxqU2tWZmFEU0lnPT0=?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Vi93V2U3TmNXWmtsaDNYZ0R0NnhBc2Uzc1Zud2JEWkVHai9sTG9mdm4wd1NI?=
+ =?utf-8?B?WVU4Wm9EQUc1WmxtancyaS9PRlQ1QytrcEw4ZUlSV2g2R3hnNm5Pa3pzajJ4?=
+ =?utf-8?B?SEIrbE5RSHlPSEl4SlJMTUp1WTBuNG5ua1BveE1uU3Z0Rm1oVE9PNjM1YlFl?=
+ =?utf-8?B?c3FSdEJXRkQ2SEVQVDhLQ0laRlpTK2hBUkRCbGNZVlVGRUlqblloZVQzWEta?=
+ =?utf-8?B?VGt5L0tORFlJaTZnV3ZmM0pRT2l5blhrcXZJNFlydlpMaTVEd2ZqTmU2MkZa?=
+ =?utf-8?B?Ukplb3B4enN3Ni9LNW1LQmtmMkp1M2thYzRmWG5RSjVhYkZobWZGUmpEaHI1?=
+ =?utf-8?B?cURHa3ZmSDNsRytDdjVmbHZaL0tlMlRTNDYwMkhQQkdOQ3BtQ3J3dnl1MU1T?=
+ =?utf-8?B?WWZ6Q0kwWlVjZ281N2NaR09NbUZPMW12bTZrenkwWmdIcUVwK2tmTUwyRE5v?=
+ =?utf-8?B?YmVnNVY1T05PTWdCay8xTi9NbzZrSFlRaXBLa3drSHlGQVNUQ2hmaHJUcFp6?=
+ =?utf-8?B?Y250WUxoWE1xbTU0SjFabG1tNjJDYk85am9pTjllb2UwRXd6bjQ1dzhVZmZU?=
+ =?utf-8?B?ek5wUlZ0N1RNelRrRkRSeEo3Unc3eTJYNzV4KytPTFkrOGx5UGRMQmhsUjJL?=
+ =?utf-8?B?dTNwYndlY0VwSi9pd1IrZG5NZjBFZ3k0ZklUaDhCc25Cc0toMjNPZU1rVzNp?=
+ =?utf-8?B?MS91Qy9kbkV5SExyakVkTzFERmRFUEgyYzU3Mi9uWVpiQ2RCZnZZOSs3a1h6?=
+ =?utf-8?B?blFqSDlEWlBSbnVTN0x2Z3VrTjF3TGR0aVppVEY4bFR4T05wL0JYeEd4b1Bw?=
+ =?utf-8?B?bCt2Y0EvWlZLRnNlWHFQQzhFclJzbUlVQmpuaGxrRDhQZStQcW41dWh2MExZ?=
+ =?utf-8?B?ZjVITDYyaENrOGtoQ3VhNFFSQlp6c1oyTFBTOXNqVkxDQURDN3hyNXFqOGFq?=
+ =?utf-8?B?cHB5SStkc0M5ZEpnNFhRR3lWck1yajlTSm9RSVE0VjR6WHJXdWY1SlVQclJG?=
+ =?utf-8?B?UzZvRGFJL1NUdENYbXZIbW9vZ2NSR0drSVk3SnIveGplL210eGhBMWxhSnd3?=
+ =?utf-8?B?TngzTEdMRDh1K0FRQVF6amhsazI4RHhuTDJLMC96MWE3UFpQdWFGN29HbnlI?=
+ =?utf-8?B?WE0zVE5XVWpqdjZxT29RSERWckttYUV3ZUZMVXR5YWIzWUZ2R1NQZ2k3U2JT?=
+ =?utf-8?B?UEw0KzZHeUFNdUlFMGNETVZCaTlzU3Q4UjRtSnJTNmFwaFBvY1FmaWRXcksx?=
+ =?utf-8?B?eEkvRUVFWXhMZjNEL3ZxRG1ORmI0OFpvRlFqSkFiTE9PaXpvbGx1OE5CcnAv?=
+ =?utf-8?B?QmdOMGNBdjNLcElvTmNxQnZNYmF5REtoeXhnV2xKdE9BNHJoVTVWR0VYQjNl?=
+ =?utf-8?B?cE9QdHRIaWdMWG5vUzhvL0lvbFRJZU1pemNTREc5aUxJaU4zVFpmNGYxTkxi?=
+ =?utf-8?B?K01ZM2xXNTBPMFZDeUo0U2F6QjlCdkpRVkNhMWxnMjlNT3JJaEVFN2F1Vktn?=
+ =?utf-8?B?L1A4U04xY1VGSjF3Mi82VWdXVWJqRjM5M2pwdEdBUTZMWWpDbXVDZHZuRTBL?=
+ =?utf-8?B?NjAzWDVkM3luWUtWQ3BBMFVTMDc4ZEh5ak82R09saGxkRWRSU0JXVU1ycHMw?=
+ =?utf-8?B?bUFtTzFuWUlmOEdETEZIZEVPWk11eFV3K1Jjd0VoWmNzNzZxdXMrbDFrNmVE?=
+ =?utf-8?B?YjdTb1hESTRhYU5qR3JMbXRVM2RJMkNRRkwrYkJDQkZaTm9tOXo5WGFTK1ZU?=
+ =?utf-8?B?ZTVXNTg0ZTNWM0RrRzZqaW9VMXJTamlUR2FuRlNXTnJEeVFUSlp1Q3cwYkxX?=
+ =?utf-8?B?S1hOa2Qvd2xnOFh2K0lVY3NPY0xHU3ZVVVQyUkUzdzFGVzVQbU5aL0Yrd1Z2?=
+ =?utf-8?B?Y0NiNS9xUnJQV2hJOU1wTExyN2dXVWZ1VVhYeWk1elZOVm9SSTRmVnVtY3lo?=
+ =?utf-8?B?bllRenRDQVJJTVVkQVZDdERkc3ZjSTd0RnIyendTQVR6K3lhMUdyVVlsWElI?=
+ =?utf-8?B?QzNpVDE3UVNmVkVsbFBONmNPbEtvNDI0aThybitPY2puOUR3Z3RTOXhuUnJk?=
+ =?utf-8?B?Uk1hTUt5RTIwUDhkdnF4SDRTYVZCVVNjNDRJMmpKcjVUclQ2aVpuRVFzYk80?=
+ =?utf-8?B?TDJpb0R3VU5rNC9YRDV3TUJFZ1lrSmtveDVHNFdRcnpmTVNvMm1PSEVJRWdi?=
+ =?utf-8?B?eU90akN1UXA3dnNPT1d2NEhWQmFGbjE2UUVUd2U4WjRDZ0lweFNSV1JtbVB4?=
+ =?utf-8?B?RHhzdmZ2UVZ1MlFybkZtN1czSXBRPT0=?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9d36d99-e147-4876-d51b-08ddd9755cdd
+X-MS-Exchange-CrossTenant-Network-Message-Id: 85a8c974-a09b-4772-551a-08ddd9769682
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2025 07:53:45.0493 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2025 08:02:31.3717 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NaumpXgNFEgqfaAWf7qdIB4Zxll9rgX4gRYXFpEuVUAqN5swCXH2Hm7c9mvjsE1goHYhhMJDya+W1ZsUee/BR413hgXOPfINb7gzPCYkhNU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7945
+X-MS-Exchange-CrossTenant-UserPrincipalName: Fso3HH/vOIH32xIB8YX2lkQxDXaVef03SG1+agVcnHrCskfv2HwMnmUJECrBWHvImExrQ9qHztV0dLj//F9DUaSpVnI8/r23WrW1pYtK4dQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8791
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,143 +184,125 @@ X-Virus-Status: Clean
 
 Hi Jonas,
 
-On 8/11/25 11:17 PM, Jonas Karlman wrote:
+On 8/12/25 12:02 AM, Jonas Karlman wrote:
 > Hi Quentin,
 > 
-> On 8/11/2025 11:24 AM, Quentin Schulz wrote:
+> On 8/11/2025 11:59 AM, Quentin Schulz wrote:
 >> Hi Jonas,
 >>
->> On 8/1/25 7:09 PM, Jonas Karlman wrote:
-[...]
->>> +#define PMU1GRF_BASE		0xfd58a000
->>> +#define OS_REG2_REG		0x208
+>> On 8/1/25 11:06 PM, Jonas Karlman wrote:
+>>> The bootsource ids reported by BootROM of RK3576 for SPI NOR and USB
+>>> differs slightly compared to prior SoCs:
+>>>
+>>> - Booting from sfc0 (ROCK 4D) report the normal bootsource id 0x3.
+>>> - Booting from sfc1 M1 (NanoPi M5) report a new bootsource id 0x23.
+>>> - Booting from sfc1 M0 has not been tested (no board using this config).
+>>> - Booting from USB report a new bootsource id 0x81.
+>>>
+>>> Add a RK3576 specific read_brom_bootsource_id() function to help decode
+>>> the new bootsource id values and the required boot_devices mapping of
+>>> sfc0 and sfc1 to help support booting from SPI flash on RK3576.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> ---
+>>> v2: No change
+>>> ---
+>>>    arch/arm/dts/rk3576-u-boot.dtsi        | 36 ++++++++++++++++++++++++++
+>>>    arch/arm/mach-rockchip/rk3576/rk3576.c | 23 ++++++++++++++++
+>>>    2 files changed, 59 insertions(+)
+>>>
+>>> diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
+>>> index fb5a107f47d9..c7ed09e03eec 100644
+>>> --- a/arch/arm/dts/rk3576-u-boot.dtsi
+>>> +++ b/arch/arm/dts/rk3576-u-boot.dtsi
+>>> @@ -6,6 +6,11 @@
+>>>    #include "rockchip-u-boot.dtsi"
+>>>    
+>>>    / {
+>>> +	aliases {
+>>> +		spi5 = &sfc0;
+>>> +		spi6 = &sfc1;
+>>> +	};
 >>> +
+>>>    	chosen {
+>>>    		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
+>>>    	};
+>>> @@ -16,6 +21,17 @@
+>>>    	};
+>>>    };
+>>>    
+>>> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+>>> +&binman {
+>>> +	simple-bin-spi {
+>>> +		mkimage {
+>>> +			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
+>>> +			offset = <0x8000>;
 >>
->> I assume the register address and meaning is stable across all RK3588,
->> so maybe we should abstract that somewhere in the SoC file
->> (arch/arm/mach-rockchip/rk3588) so that the caller doesn't need to
->> specify them?
-> 
-> Correct, these are stable for the SoC and could be defined in soc
-> related header and is something I have very slowly been working on in my
-> optimize branch at [1] for a future series.
-> 
-> Right now we have some code using syscon_get_first_range() to get a base
-> addr from DT, and newer code that instead use a define. See e.g.
-> sdram_rk3588.c vs sdram_rk3576.c, getting the base from DT adds several
-> ms delay and something that seem pointless when we know the stable addr
-> at compile time.
-> 
-
-We could do something more akin to:
-
-u8 _rockchip_sdram_type(phys_addr_t reg)
-{
-	u32 dram_type, version;
-	u32 sys_reg2 = readl(reg);
-	u32 sys_reg3 = readl(reg + 4);
-
-	dram_type = (sys_reg2 >> SYS_REG_DDRTYPE_SHIFT) & SYS_REG_DDRTYPE_MASK;
-	version = (sys_reg3 >> SYS_REG_VERSION_SHIFT) & SYS_REG_VERSION_MASK;
-	if (version >= 3)
-		dram_type |= ((sys_reg3 >> SYS_REG_EXTEND_DDRTYPE_SHIFT) &
-			      SYS_REG_EXTEND_DDRTYPE_MASK) << 3;
-
-	return dram_type;
-}
-
-u8 __weak rockchip_dram_type_reg(void)
-{
-     return 0;
-}
-
-u8 rockchip_sdram_type(void)
-{
-	phys_addr_t reg = rockchip_dram_type_reg();
-	if (!reg)
-		return UNUSED;
-
-	return _rockchip_sdram_type(reg);
-}
-
-and define
-
-u8 rockchip_dram_type_reg(void)
-{
-	return PMU1GRF_BASE + OS_REG2_REG;
-}
-
-in drivers/ram/rockchip/sdram_rk3588.c for example.
-
-That's what I had in mind rather than going for a syscon.
-
-> So for now I just kept this here with the expectation that this should
-> be changed in a future series.
-> 
-> [1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/3a11ab7fba8db133374e60edf8ab2b46195cf684
-> 
+>> Is this a requirement of the SoC or just a default?
 >>
->>> +#define HW_ID_CHANNEL		5
->>> +
->>> +struct board_model {
->>> +	unsigned int dram;
->>> +	unsigned int low;
->>> +	unsigned int high;
->>> +	const char *fdtfile;
+>> E.g. on my RK3399 I can flash at offset 0 u-boot-rockchip-spi.bin and
+>> it'll happily boot. Is it still the same on RK3576 but you preferred to
+>> have a similar offset than for eMMC/SD (and/or have space to store a
+>> partition table before?)
+> 
+> Not sure if I ever tested using offset 0 for rk3576, will do before v3.
+> 
+> If I remember correctly the rk356x/rk3588 (and/or others SoCs) would not
+> boot when using offset 0, so I probably only tested the 32 KiB offset
+
+Possibly, I only own one board with a bootable SPI, my old RK3399 Puma 
+so that's about the sample size I can get :)
+
+> that is known working for other rk35xx SoCs. And on RK3326 (probably
+> also PX30) a 64 KiB offset resulted in working boot from SPI flash.
+> 
+
+IIRC, I mistakenly flashed on 32KiB offset for RK3399 as well and it 
+booted (the SPL, then it broke because it's so much space constrained on 
+RK3399 Puma that I cannot afford the 32KiB offset).
+
+I guess this could also be something we could have as default. If you 
+want a different offset, then you can update it in your board 
+-u-boot.dtsi (or have a Kconfig symbol, but IIRC we don't have one for 
+MMC so why have one for SPI only?).
+
+>>
+>>> +		};
+>>> +	};
 >>> +};
->>> +
->>> +static const struct board_model board_models[] = {
->>> +	{ LPDDR5, 4005, 4185, "rockchip/rk3588-rock-5b-plus.dtb" },
->>> +};
->>> +
->>> +static const struct board_model *get_board_model(void)
->>> +{
->>> +	unsigned int val, dram_type;
->>> +	int i, ret;
+>>> +#endif
 >>
->> i could be an unsigned number type as well. (and it should since we're
->> using it to access items in an array)
-> 
-> Sure, will change in v3.
-> 
+>> Not a blocker for this patch but I think it would make sense to invert
+>> the logic globally now so that we don't need to have to do this for
+>> every new Rockchip SoC we'll support.
 >>
->>> +
->>> +	dram_type = rockchip_sdram_type(PMU1GRF_BASE + OS_REG2_REG);
->>> +
->>> +	ret = adc_channel_single_shot("adc@fec10000", HW_ID_CHANNEL, &val);
->>> +	if (ret)
->>> +		return NULL;
->>> +
+>> Have -T rksd in rockchip-u-boot.dtsi and all SoCs that have an SPI
+>> controller and do not override this property would have -T rkspi set in
+>> their SoC DTSI, e.g. rk3399-u-boot.dtsi would now get
 >>
->> While checking whether adc_channel_single_shot() is the right function
->> to call, I stumbled upon the call in arch/arm/mach-rockchip/boot_mode.c
->> which i believe wouldn't work for Rockchip SoCs whose DTSI uses adc@ as
->> node name instead of saradc@. That would be rk3328, rk3588, rk3576,
->> rk3528 and rv1126.
+>> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+>> +&binman {
+>> +	simple-bin-spi {
+>> +		mkimage {
+>> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
+>> +		};
+>> +	};
+>> +};
+>> +#endif
 > 
-> Correct, the saradc@ in boot_mode.c is typically used for "recovery" or
-> "maskrom" detection. However, this uses a hardcoded saradc channel that
-> may not necessarily be used for that purpose, especially on newer SoCs.
+> I fully agree, there is now a minority using the special rkspi format so
+> a flip to have rksd (and possible also the 32 KiB offset) in
+> rockchip-u-boot.dtsi is a very good idea for a future series.
 > 
-> I suggest we do not try to change that to cover more SoCs without first
-> adding a way to define what channel to use for the button detection,
-> possible in a /config or a Kconfig option.
-> 
->>
->> I guess there are different ways to fix this. We could have each SoC
->> define a constant string with the node name of the SARADC or have an
->> additional entry in /aliases for saradc in the DT? Maybe some other way
->> could be used as well, just throwing ideas :)
->>
->> Unrelated to this patch though, so feel free to ignore.
-> 
-> As noted above, I think it is something to fix/consider but it may have
-> unintended consequences to blindly try and fix boot_mode.c for all RK
-> SoCs without having some sort of board option to specify when and how
-> the feature should be used.
+>  From a quick grep maybe only rk3288 and rk3399 may need this special
+> rkspi format? Probably also some older SoCs, not sure we really support
+> building working SPI flash images for such older SoCs anyway.
 > 
 
-Agreed.
+What we can start with is doing a flip which results in the exact same 
+binary before and after the flip. Then whichever SoC doesn't actually 
+need the rkspi trick can disable it on the SoC level I guess in a later 
+patch?
 
 Cheers,
 Quentin
