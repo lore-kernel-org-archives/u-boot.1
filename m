@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4301CC87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 06:08:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4C5CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 06:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7075A831C6;
-	Tue, 12 Aug 2025 08:08:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4BFA883192;
+	Tue, 12 Aug 2025 08:10:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NQ2zNdjR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dFVUZUj8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 009B3831D8; Tue, 12 Aug 2025 08:08:14 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id DB15C831D8; Tue, 12 Aug 2025 08:10:30 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9332B83106
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:08:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E628E8311B
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 08:10:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-615622ed70fso8158354a12.3
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 23:08:11 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-61813e2fc73so4243952a12.0
+ for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 23:10:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754978891; x=1755583691; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1754979028; x=1755583828; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=og3JlpGv46KwZuXuuqI1cmlBgLxxh1VZk+i7/Orufj4=;
- b=NQ2zNdjRCtnuk6WlmPPPH22dztSw+KzaC+jDxB2qqtylFc+iaueg/As6J6IZmbZjQ7
- CNofynm1Kz9s39GqKx7pwsKONVs4vWJQixL2AnvpXIiwBQ/dcn2EhaY2MJpDq0YXXsZ2
- FTPfzKWDsg9ZCD8gUDM6dOQHAsUarwjRaymYlP5Eh4QmpIH5NpYaePoFqgxGcxobqM/j
- EUY6QUUx3jBgz+7ZXCEoKy0toVZcJr3jYg8oWlPDTMvDXQJqx1VCZSJRV4b7R+UFgF6y
- dNwLJbGFBRoreAv9R1bFS2gc2qnUqRKiZLsi14geNelxaSn7m7TKOblaYqhwWPqpJItC
- jmbw==
+ bh=jhF12Yw0ivhe4Jo+BSVAB3k7+s4a70NdtxJmL+oktSU=;
+ b=dFVUZUj8iDbZiU1B49nPa877Qji960cCEk4HDWZ5TN4xZFi1ILJMfkgjhWFV7K5yyw
+ HO6pHF8WfRYLZGUVjN3kvTOIB/ZC23gKfAZN2CQsy6LyUWaMXl3hNn/iGXj//E117uDF
+ ExIw0dVxvyUUDfBt1uAerXTEOEfzpKDeRLVCAhW92vXsEebZbEr9elmW0d+RXMq83qj9
+ x0ScE6nVW0bjrMLRcta9xqKqMNdk0vhbo744c8NPTCHk1FO25XKLbHvd2uDwWlhiS1gM
+ oihuLloRCny0OBiW69pS/Tz18F7G+xEkwj89rhQKrVaACkl4VQ43llvKMnsfEniP7RhQ
+ l80A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754978891; x=1755583691;
+ d=1e100.net; s=20230601; t=1754979028; x=1755583828;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=og3JlpGv46KwZuXuuqI1cmlBgLxxh1VZk+i7/Orufj4=;
- b=xS72me7KGfzBzKggBNvMIiEhcSin5cKObaspsiTu9HZ4W/fNnkaa5OXqRE0CGCrSEw
- aE2VMoS8aCckaVNm1kKcZLPki0+LzRQ9Hls162AABeSwAhrNpjA1PMW4Qu9o64CGP+AI
- NLn2DhmUuldn+9erO988eQf/CYjepfn2/Sqe1RakV6xvqzNGPzpmZ5etyvlV+hTHQF8x
- K4XJzuWMjq/cy6vZRH2NE3w+7MLmm22T3N8hojYn+Ui2OfKtXQh9tenhsu+G7TmkzdB1
- 4kfWqG8Rx+k5WBVeq+5TU4R7zHn/hV7kbbYaRJX55IzOr63BJtEYPkSMVu4fXdCMNJW6
- caHQ==
+ bh=jhF12Yw0ivhe4Jo+BSVAB3k7+s4a70NdtxJmL+oktSU=;
+ b=CPAFON0zT63eY1A47sz6atSPMYWQqKdRUnk4El+ZATnC+Enq3Yja7JRPkZsMyEO5as
+ gOqt72D8Y7j6Us1O+C/Dru4Kf8cOLkdJ6jaTOWN2aMYBQesC3aT7dtyE32gCn1EiasLy
+ edbUT70+VR2mQBCelI4w7S5fNSmoZSAg56vkhqVsI7HOMNr4RNHG1CuqJuWXyP2NI1hu
+ 3x/fCz4x7YqyJLVr4hlfYWV5xq82g4CBc6FDK3sf+K2GD9Milpguf9E9IogLVr/GeczK
+ HQH0lLS2zBiPf8lVAcrcgwGtiwslOxlgkJuMXZgCkjCQUtkbqco8B3+JsVtnyn9yjubd
+ Ie+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2Cbgvsh54xIuMcepjxSD4qB5u2P1+sFVZH0g+KQPnO4UoBg4rxFVTiOaEs/cl3c2plQ1ujyM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyR3arj+JfiIeMFVw3zZmpQX53bO8WwIWisxEh9q1l97bbsLnLZ
- YQRFb7vtNlLgA4LnrOEQQ35nfuDkkOB16g1xP8F6gpMN/KigqO1qry3j7ew/we67RfQ=
-X-Gm-Gg: ASbGncvaYEiSEZ3yr6O7ZsGl+rmmUcdqIWalyrUbNtb+MX0SonhYfOzIkLu1Hu8+6UP
- nmtAfbXHFGUhBkhgM4KTYE6bNPYNOadn+TfgaG/yoptBym1KKhMZGabExiIx/jW1hdQy67qEe51
- HLO7Pycog4dNHjOkLKzzx3U/Vtme7qeC0iIEb5p1Qb5BuwRQE6naKmq4THSrJLi4950RiKQz3RP
- 5b/kai2mjn4aG4j/IK3ceGcohxVjelo1rHsADl34EYblP7E/6Zh3XlEuKgcsGSchmT56bYHcr0r
- l2k+j7SU7GJi/Axfn9BSrZQq0ulu1wu8ypff2yXgb8YBAA7NBWsUuFKU+Vlx8Kr5HC9qQ/JJ5Wp
- oKQkdiUdPvVSGKCvbtA26w0ajFw==
-X-Google-Smtp-Source: AGHT+IEV7OU/LckwkETKKPTQrNCsT9sGBIjY/7VXE/w/QlsxI5Ke6o1wdwhOW+3mXASZTO84XgwHJg==
-X-Received: by 2002:a05:6402:3553:b0:612:b742:5bba with SMTP id
- 4fb4d7f45d1cf-6184ec56e85mr1686474a12.13.1754978891003; 
- Mon, 11 Aug 2025 23:08:11 -0700 (PDT)
+ AJvYcCUpxymlg/pkQph5zRoFWunsuwe7TDU6f7lrG0UhehKT7FVONWaiFK6TANHo5EDqFdZqMan0rFU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTa1FoTyl7g6yzGMD8NciPB7bEYjeXbQ6vaCX/J2YtF/vRDvlp
+ IxTVu70q2nh96nBv+SRz+hHQRpqI3JBxl9Pss4JyG1dUQi8PThNsUhRQ8NEoGYubsnQ=
+X-Gm-Gg: ASbGncvomfyVxfX4sNloE6nEWJ24cpmjq8YodXEN/4vVCDuJpFflCaL4+5SyDs/S/54
+ J5/c2NoJF+nJwcFM0fEDwYDJuoDf5d7fHGNeeJPdW3q1QKrGkocqsf3lXB8J+76yfIOaPrrKJzI
+ zQrLceFQsPL+PoUrWWcljPUpdVJDOIQQQbx4bLzWJdvEbRy3w1S1zIL43VjqRM+ClWeFk0mmSln
+ Yzm1Al2Qzo5/ucfWiDgTTmmGZXU8n1cwKcRtCxMOSpzWF8+XlWKv3dJCVFsP+7i04vBbVKSbGH1
+ VCEZTY4OhkPxN/Ku3ItM0oTaQoS/ekz1x7S8Lat2v98epbKuUecwVCyXFNWCAFUVwFy99VNFOBX
+ DZ8TQLWLej0bYcni0+I2k8jJjUg==
+X-Google-Smtp-Source: AGHT+IE3hs09hhTbsI4f722GPHRaJhl8efwZMUrOCjA+4+P6WXr8wgOsr2jpaUIHZiMD8+5aElJdJQ==
+X-Received: by 2002:a05:6402:1ecb:b0:615:f76:9408 with SMTP id
+ 4fb4d7f45d1cf-6184ec9434cmr1655680a12.32.1754979028264; 
+ Mon, 11 Aug 2025 23:10:28 -0700 (PDT)
 Received: from hera.. ([46.198.241.143]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-615a9113e40sm19636474a12.57.2025.08.11.23.08.09
+ 4fb4d7f45d1cf-615a8f152easm19374680a12.15.2025.08.11.23.10.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 23:08:10 -0700 (PDT)
+ Mon, 11 Aug 2025 23:10:27 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Heiko Schocher <hs@nabladev.com>,
- Alice Guo <alice.guo@nxp.com>, Fabio Estevam <festevam@denx.de>,
- Gary Bisson <bisson.gary@gmail.com>, Maks Mishin <maks.mishinfz@gmail.com>,
- u-boot@lists.denx.de
-Subject: [PATCH] tools: imx8image: Make imx8image_check_params() static
-Date: Tue, 12 Aug 2025 09:08:06 +0300
-Message-ID: <20250812060807.1224861-1-ilias.apalodimas@linaro.org>
+	u-boot@lists.denx.de
+Subject: [PATCH] tools: aisimage: Make aisimage_check_params() static
+Date: Tue, 12 Aug 2025 09:10:20 +0300
+Message-ID: <20250812061021.1237280-1-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -104,22 +101,22 @@ used locally. Mark it as static.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- tools/imx8image.c | 2 +-
+ tools/aisimage.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index 5a76643c06e8..3cea536b8e88 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -23,7 +23,7 @@ static uint8_t cntr_version;
- static uint32_t custom_partition;
- static uint32_t scfw_flags;
- 
--int imx8image_check_params(struct image_tool_params *params)
-+static int imx8image_check_params(struct image_tool_params *params)
+diff --git a/tools/aisimage.c b/tools/aisimage.c
+index c5b33b559b02..7a44b2d6ab69 100644
+--- a/tools/aisimage.c
++++ b/tools/aisimage.c
+@@ -387,7 +387,7 @@ static void aisimage_set_header(void *ptr, struct stat *sbuf, int ifd,
  {
- 	return 0;
  }
+ 
+-int aisimage_check_params(struct image_tool_params *params)
++static int aisimage_check_params(struct image_tool_params *params)
+ {
+ 	if (!params)
+ 		return CFG_INVALID;
 -- 
 2.49.0
 
