@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85223C87FCB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 14:28:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F247ECA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 14:33:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6243833C0;
-	Tue, 12 Aug 2025 16:27:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A4D58338D;
+	Tue, 12 Aug 2025 16:33:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qId7t2uu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YiaUB8w6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B4598340C; Tue, 12 Aug 2025 16:27:58 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id CEEA58340C; Tue, 12 Aug 2025 16:33:55 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BC7983145
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 16:27:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B228C83145
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 16:33:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-433f42c9fe3so3401309b6e.1
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 07:27:55 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-306db05b292so1855965fac.1
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 07:33:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755008874; x=1755613674; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755009232; x=1755614032; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Z929v8wWFehmixRX05gZU9T6a1AzEyXC5O670SyvhBk=;
- b=qId7t2uucj9nd55HtNQQmG/jww0wBEt3WHa6OwR6caXU75yvKggVnrCpmEUHo+djDf
- EARP5BvGu3mTpFlrFa+HPSHN7TPYfpxM/QFS30Ayw5/48eyzSUi+Ego32lxmr1LkcFDL
- eQDnptmhImpNHYX339IyH39JkXiiZzF2bA/qk=
+ bh=yMemuf/juviWNzPRewhMb/ZqC9WBLT7nX2Gn1AtVtNQ=;
+ b=YiaUB8w6m6nOjhaT7knkuRa8PO0/6sIcwNdvZqNSPXJH+PERDr+Rf40OtI1onXyiZz
+ eZ5fIVwLNCft9eeDcn5ONjJg2y8aQzrm78CyZU2Wx//o9EJbYinA+Xh9tKntr3w6sTUr
+ +exXtuQKzvccAYc49OUqi8g3OJ5y9qDPzv6n8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755008874; x=1755613674;
+ d=1e100.net; s=20230601; t=1755009232; x=1755614032;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z929v8wWFehmixRX05gZU9T6a1AzEyXC5O670SyvhBk=;
- b=Dv6537YwQ0Nv6DWxKtGb/i2B89UUny06IoRGrgyh1PAhoIJONdcdL2b85E5pwbYLdQ
- NlJJqcje5V8sZaz7NhDjJcchYAEamfwoNaNMFETo0iSqzkkRXwPPszP1OySq5PT+Kyc5
- b+jiazXrLh8JBn78uNWC1tS6hY6B1xhKSPatCswzjKruCtr45sdyCwqoB9FG2rU7qXnO
- wYVvevVpjulb+XW/Gr6xIKonqqmj7THi1JFFq0KOF511J4S6wefkNut8N+UjesXXw+wV
- iyWEfw+N2rNbo4EQfL6eqRVKOCgL3c4+vX114qflXViRw1GJKVbsrzi1AXRN5aASNsBA
- U2HQ==
+ bh=yMemuf/juviWNzPRewhMb/ZqC9WBLT7nX2Gn1AtVtNQ=;
+ b=kYwUXknje/gb7Jjf8WVQERSPVFmkJqLrpNz9SUnkJELJN0weZXUog8tSbJYhcO795d
+ JWTclKW0cv9hyi04FlNlYsTk/Opit8+TkpiwJzym7FkSSASnJzWZ9G106UJ4smx+wqvX
+ vBTQrlO/JGQ8IyD5n5KZL+gd3N/f04TfyWTA6dAx/F2tafUpzChD0V6+bVu45Igw4k8u
+ BPZiU03+MtBpuJnYz4pZa004Zn1SsbZLIFMVM5H6RqOi4kC49y2LREWO+55lL+Y/9ovs
+ wLwg2uQfl/z2dY6EhFpP8fALRSwBoFVsgTti8/WVgmRsFzW7Y2uaTLt+QV/qSQBHM15b
+ 4ZRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVUTsPWhZ3bYNtoZ+eTVmOVW01fK57ia9BkiLimMOVYhe63KagCOyFkuyGI3khB1AI1jMB2S5I=@lists.denx.de
-X-Gm-Message-State: AOJu0YwE1Og0ho3dDcbVKEJp7sRcL7kX0eF3NE1eT18TJ5JWvMokRM8R
- XNZQIMZZNgDdZ5ZTgoUXoow/iHj9kN4tn0lwEuGDEv+nJ6JdxesWAv3vWJgylKAHZt8=
-X-Gm-Gg: ASbGnctQ26y0rLaR7cw6xIJyNb0rjCLQiiMNydaqnlQY+F+IL7e3GMXeEFg1KlKGstg
- c919tjJn7V6XkJuAtw/ar3J2xQYMh9rEwCtA9B7hAltErO+XVgr9i4dzuRM9FyF8cuPZblumcx7
- hZgAicFfvpwE+l6EzUFq79Tbi9TSPkbCxHANch7Z5VEz6zS8xcVDZdjLiiDNY4cl3NFhgxniRWe
- mL7UxSoz9MU/ffBtzUqfgaMKa1zMbjin/tDMANN4k2AhH4wAMKxRsr01Ld3Fq70QeVzJMN0eX3b
- wAKjDlYMe3Xm5RuErW/ded0FBHHoF0WOz08bntbQYKPQqro0VF4gf3PDmcJJEecDM40uBDARKig
- 2IuNZNjSqvJK0APq1CyRNcrUK+UQhO1+G5BpMpDdjikU886Z8QV/nX6O2
-X-Google-Smtp-Source: AGHT+IEfngyzJjeuZfvdfpBL72gRBY7Cn/vGjWcNwve5mJ0e6i40NVH+ZR0UUqPzKolbuS+ma57d8A==
-X-Received: by 2002:a05:6808:198e:b0:434:bef0:2f0 with SMTP id
- 5614622812f47-43597b202abmr9338002b6e.6.1755008874161; 
- Tue, 12 Aug 2025 07:27:54 -0700 (PDT)
+ AJvYcCVz+YsML4Sp6HlHKzW858hog8D2EXYL9uY2Zf2GcV7C59vQQOKySy1SLkmJaFkEUZA7RkjWkU0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyFR06xe3wRyYzrE1mRwqs1HEM+nYmJuONNx3hNU5QpBs/mpgqU
+ 4R9Plp7lFIm/Lt+Gsxx8py8Y4RsfQHJYzLL3IHbbMc+JM7VW+PudHnlczVX25Ii2hUE=
+X-Gm-Gg: ASbGncshQhELvruKpPOTjKw+HVOKuDa/wJu7ClMsgyYiXEsEWQlmacelTUdCyY4qENw
+ TpGZ61Arid0Pbg0oorME6J72P406ovm3r3xop3SYpAA0jhM3MuAxcjTnTYEv7TeLJ2LZBbveWZI
+ 7tH/ph3rnuzyTVh9a+4qOv/5dOG/9tCDL7IJ/JMn9/uYXKALAbTtSncY7wnddHzi4drtenENWvd
+ ZjgXu5nA4OYJviMpS6YQHBH+d5ZYzJZvQ2h6GX2oOBFYiQCvNJ10EFAYGAgFMc69caVTOFmMmqJ
+ HcexFvzD9/eJ2EklIKFciQ1fkHLejOo22YoSEnEuDLR50LuPdkJCNHtNbyI/pNbyC1jAlsnMdJv
+ BO7vLqLGLKxse3WFnjtt/rkLd9WSt9/5QGy1nKS+xBEnk+/ZIusNfAV1F
+X-Google-Smtp-Source: AGHT+IF6G3vsDXr5H/fbPS/A+xGJBwtMsDMI8+wowF6PgIqXsl/6FaQg42BmhFYQEepQgKlcjW/Htw==
+X-Received: by 2002:a05:6870:8a14:b0:30c:b54:ed77 with SMTP id
+ 586e51a60fabf-30c95051f05mr2250170fac.19.1755009232263; 
+ Tue, 12 Aug 2025 07:33:52 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-435ce85683dsm203146b6e.20.2025.08.12.07.27.52
+ 586e51a60fabf-30c10c7a694sm3870477fac.9.2025.08.12.07.33.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 07:27:53 -0700 (PDT)
-Date: Tue, 12 Aug 2025 08:27:51 -0600
+ Tue, 12 Aug 2025 07:33:51 -0700 (PDT)
+Date: Tue, 12 Aug 2025 08:33:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC] rockchip: add /chosen/bootsource to U-Boot proper DT
-Message-ID: <20250812142751.GP124814@bill-the-cat>
-References: <20250730-dt-chosen-bootsource-v1-1-955f045b386b@cherry.de>
- <20250730172438.GU1807455@bill-the-cat>
- <8f60f137-0e58-4dd0-9c7b-dd8bce55617d@cherry.de>
- <20250812141524.GN124814@bill-the-cat>
- <c455fb2f-a71c-4939-ad5d-0c7c95f01431@cherry.de>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: Seeking advice on API return type inconsistency
+Message-ID: <20250812143349.GQ124814@bill-the-cat>
+References: <f5c94319-8ef8-459d-88b2-836702779cfb@linaro.org>
+ <e10a39e4-9606-4ae4-86dd-11de4b39b5ed@cherry.de>
+ <2d6457b8-c637-4531-8f56-e2aea320a319@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FFI4bXqErnucP+RZ"
+ protocol="application/pgp-signature"; boundary="EY9Bzxmi6ntMEl1P"
 Content-Disposition: inline
-In-Reply-To: <c455fb2f-a71c-4939-ad5d-0c7c95f01431@cherry.de>
+In-Reply-To: <2d6457b8-c637-4531-8f56-e2aea320a319@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,124 +101,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FFI4bXqErnucP+RZ
-Content-Type: text/plain; charset=us-ascii
+--EY9Bzxmi6ntMEl1P
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 12, 2025 at 04:26:14PM +0200, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 8/12/25 4:15 PM, Tom Rini wrote:
-> > On Tue, Aug 12, 2025 at 03:15:00PM +0200, Quentin Schulz wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 7/30/25 7:24 PM, Tom Rini wrote:
-> > > > On Wed, Jul 30, 2025 at 02:03:18PM +0200, Quentin Schulz wrote:
-> > > >=20
-> > > > > From: Quentin Schulz <quentin.schulz@cherry.de>
-> > > > >=20
-> > > > > U-Boot typically can be loaded from different storage media, such=
- as
-> > > > > eMMC, SD card, SPI flash, but also from non-persistent media such=
- as USB
-> > > > > (via proprietary protocols loading directly into SRAM, or fastboo=
-t, DFU,
-> > > > >    etc..), JTAG, ...
-> > > > >=20
-> > > > > This information is usually reported by the BootROM via some prop=
-rietary
-> > > > > mechanism (some specific address in registers/DRAM for example). =
-For
-> > > > > Rockchip, that information is stored in a register
-> > > > > (BROM_BOOTSOURCE_ID_ADDR).
-> > > > >=20
-> > > > > While we already have the information about which medium was used=
- to
-> > > > > load U-Boot proper from SPL (via /chosen/u-boot,spl-boot-device),=
- this
-> > > > > new property represents the medium used to load U-Boot first phase
-> > > > > (depending on configuration, can be VPL/TPL/SPL) which absolutely=
- may
-> > > > > differ from the one used to load U-Boot proper!
-> > > > >=20
-> > > > > It would be useful to know which medium was used to load the firs=
-t phase
-> > > > > of U-Boot, for example to check fallback mechanisms (proper loade=
-d from
-> > > > > a different medium than first phase) are actually working.
-> > > > >=20
-> > > > > For now, this only applies to Rockchip's U-Boot proper DT but cou=
-ld be
-> > > > > applied to the kernel's as well and possibly for other architectu=
-res or
-> > > > > vendors.
-> > > > >=20
-> > > > > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> > > > > ---
-> > > > > I have a board (RK3399 Puma) running U-Boot which currently has 9=
- boot
-> > > > > scenarios (eMMC/SD/SPI-NOR for the first phase, eMMC/SD/SPI-NOR f=
-or the
-> > > > > next phases; not counting USB loading yet, which would make it a =
-few
-> > > > > more). I cannot force the BootROM of this board to select a speci=
-fic
-> > > > > device aside from erasing the other media.
-> > > > >=20
-> > > > > The only way to identify which device was used for the first phas=
-e is to
-> > > > > parse U-Boot first phase console output or add some custom logic =
-for my
-> > > > > board. To validate that a new version of the bootloader works, in=
-cluding
-> > > > > the fallback mechanisms, I need to make sure the BootROM loads th=
-e first
-> > > > > phase from the expected device otherwise I may have false positiv=
-es.
-> > > > > This would be useful for automated testing.
-> > > > >=20
-> > > > > Patches pending in the devicetree-spec[1] and dt-schema[2], hence=
- the
-> > > > > RFC here.
-> > > > >=20
-> > > > > [1] https://lore.kernel.org/devicetree-spec/20250505-bootsource-v=
-2-1-5a315d9bff26@cherry.de/
-> > > > > [2] https://github.com/devicetree-org/dt-schema/pull/169
-> > > >=20
-> > > > I am conceptually fine with the changes, but this needs to have the
-> > > > schema side approved first, just for the record.
-> > > >=20
-> > >=20
-> > > Now merged in the dt-schema (still no news on the spec side though as=
-ide
-> > > from a R-b from Simon 2 months ago). Is that good enough or do we nee=
-d to
-> > > wait on the spec part too?
+On Tue, Aug 12, 2025 at 10:17:47AM +0100, Andrew Goodbody wrote:
+> On 11/08/2025 17:36, Quentin Schulz wrote:
+> > Hi Andrew,
 > >=20
-> > Ah good, OK. So should this be in v2025.10 or will v2026.01 be OK? It's
-> > small enough I'm OK taking it now.
+> > On 8/11/25 5:24 PM, Andrew Goodbody wrote:
+> > > Hi,
+> > >=20
+> > > I was wondering what people's thoughts were on API return types. In
+> > > particular there is this and other examples in include/clk-uclass.h
+> > >=20
+> > > /**
+> > > =A0=A0* get_rate() - Get current clock rate.
+> > > =A0=A0* @clk:=A0=A0=A0 The clock to query.
+> > > =A0=A0*
+> > > =A0=A0* This returns the current rate of a clock. If the clock is
+> > > disabled, it
+> > > =A0=A0* returns the rate at which the clock would run if it was enabl=
+ed. The
+> > > =A0=A0* following pseudo-code should hold::
+> > > =A0=A0*
+> > > =A0=A0*=A0=A0 disable(clk)
+> > > =A0=A0*=A0=A0 rate =3D get_rate(clk)
+> > > =A0=A0*=A0=A0 enable(clk)
+> > > =A0=A0*=A0=A0 assert(get_rate(clk) =3D=3D rate)
+> > > =A0=A0*
+> > > =A0=A0* Return:
+> > > =A0=A0* * The rate of @clk
+> > > =A0=A0* * -%ENOSYS if this function is not implemented for @clk
+> > > =A0=A0* * -%ENOENT if @clk->id is invalid. Prefer using an assert
+> > > instead, and doing
+> > > =A0=A0*=A0=A0 this check in request().
+> > > =A0=A0* * Another negative error value (such as %EIO or %ECOMM) if the
+> > > rate could
+> > > =A0=A0*=A0=A0 not be determined due to a bus error.
+> > > =A0=A0*/
+> > > ulong get_rate(struct clk *clk);
+> > >=20
+> > >=20
+> > > get_rate is declared as returning a ulong but the description says
+> > > that it can return negative errors. A simple test of the return
+> > > value for being less than 0 will always fail so errors can go
+> > > undetected. Casting to a signed type seems less than ideal.
+> > >=20
+> > > What is the best way to deal with this? Cast to a signed or update
+> > > the API to be signed or...?
+> > >=20
 > >=20
+> > Note that clk_get_rate() in the kernel has the same function signature
+> > so I would refrain from changing the type otherwise we'll have some
+> > "funny" bugs to handle considering it isn't that uncommon to import
+> > drivers almost as-is from the Linux kernel.
 >=20
-> I'm fine with v2026.01, there's no hurry for me as I can carry it in my
-> downstream forks until it's merged upstream.
->=20
-> So, up to you!
+> Ah yes. The difference being that the kernel does not seem to attempt to
+> push an error code through this API, you get a rate or you get 0.
 
-OK, thanks. I'll put it in -next soon then for v2026.01.
+How is the error code pushed? Or is it up to the caller to decide that 0
+means on a case by case basis?
 
 --=20
 Tom
 
---FFI4bXqErnucP+RZ
+--EY9Bzxmi6ntMEl1P
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJtPZgAKCRAr4qD1Cr/k
-CqelAP4s28VbD4Fp1IzqkPA/RokFgsXIf4kbuBwZ7cAi8u0yagEAx+kX4qHCMShV
-C7IUHPtiUrj2zyipPnrMCDsQVnG5pgs=
-=k/yc
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJtQzAAKCRAr4qD1Cr/k
+CsRKAQCayzb49kmewGhhe8Iwg2sF/vQ6NzucaeDNgIdazp45VQD9FEpOnH21mGqm
+AME+Y9/ObsXXW8KwXfN3boPHhW44wws=
+=SQ8R
 -----END PGP SIGNATURE-----
 
---FFI4bXqErnucP+RZ--
+--EY9Bzxmi6ntMEl1P--
