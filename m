@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB589CA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 12:01:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12E08CA0EC4
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 12:37:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0F9E83164;
-	Tue, 12 Aug 2025 14:01:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 089A08319A;
+	Tue, 12 Aug 2025 14:37:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ougnOdW/";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dMdHGiLR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A076E8319A; Tue, 12 Aug 2025 14:01:07 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F82E83236; Tue, 12 Aug 2025 14:37:42 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FCEA83096
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 14:01:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F09468312A
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 14:37:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-459e20ec1d9so52848405e9.3
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 05:01:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755000062; x=1755604862; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kNtwJkp5fDv5+JcrYQtQLc3qLvetHXqKELh56XvHN+8=;
- b=ougnOdW/Vxg4idaOqkC+UjHwVOenZbIEQj3PZoOFa5FLd0TDt0xcVULQ5ve33qGM4n
- Pm/OuLsIMCDWCHGsbaNgD9aIUa8wmgKJYDIuMwukZsxYPvgHA8N5R/Syx7t5QZGDZYxT
- V4Po0KXibkQbobg4Ek6F+VMyFvRjFvX0PHMdPn644Q5vDTvr8tZmLuGY6X6GoODyEQGc
- HfyEuxFmQrzJS98vaVWigJnIARGN4oZX2oDGodm/eRoKAIDl8Tvg2w5bgvksXeGIwLnU
- OMRtnPQtq+oXnP7p0zW8mblB9tHE7Fuq8rs8T5fWn6K5PKMUVDhC7AtVszzMQ8CxiDVB
- 6oxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755000062; x=1755604862;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kNtwJkp5fDv5+JcrYQtQLc3qLvetHXqKELh56XvHN+8=;
- b=v1MS1YU2V5D4u7kLh8EJHAsqLht0rruhL2D1E8dMJzdVY38F86BBj/5BAOSBWuKLue
- MUoF1euwclOBNN3iJQ5VO2rxQHitcybSEzalgo6/erzfbrFSetkptcTcFxA3+g6wPVMv
- mL4OijJYjIWqbVbw6Khrz5cv7LZzI3foqKmxmrmKCb6IFmX+UExnchY7wRQfDP93rNxg
- bEFTpl/ypc1YtY0dKvIfh1Ri5DOrvPyKHL8e9djlqcENJBLP7tj4GlJQFvnGtAfi93KU
- ZOxEQsoveqAsEeDYy77LglkG3hwLCOQEwSIYyGx6vnfJmZVQXQYih21WRasfMeTrEfgK
- zFWQ==
-X-Gm-Message-State: AOJu0YyiL+2GEFDGaTvzy8NaPpHbdjrG59GDCA0FT2pLQ2hlFQQEJBSR
- cvFPc1an5rLzSfqgyWzYMxycHQJaVT9wT7NAbUcq0dNsYFu0tUmaKcWxNUO5XhDGBi8=
-X-Gm-Gg: ASbGncvbYCEGBDB1EQQ3um4c4gD5zdmYxZ1gknbfR6xNiA6AyalEjCMD/UX/dvu8wf4
- dsT4PdomdCgyXOIfGLyo2BoFMi66OBPbP6YllxxgDiBCN2pPE1GMuAeYBu31osUzKOVFYzbrSoe
- 2iY548sOmS2xkSsHxDARsm6IASUyADXz+1BkduiiGRch8gTrbOs1M9BO/sXb0jGrSKxdLwJyjdg
- yaPyOJnir45hU2pRRXkKdwhxDHzhBTDQoTCAb+c8p3z1eEE41bfPbi8mBZ1BX+9G3uhgie0StWJ
- +iasY50etkbWmujVQbyb3rIHpK4Uu/jqQk+JyP3mFhERSL2QfeF+uw1pRo7/HydrkvPpMUXsdOq
- R5OwxyzLS8OaP2lxozW5hSaqI/pCn5W8OYdRxTYoWH9nHBRX141w=
-X-Google-Smtp-Source: AGHT+IG/WkQ9fAb8+I31wA1hB2kET5qohIx0EJC+9LFs6n9ZbGrp0gr7M5P7l3nMUS4AkKkvv5hySw==
-X-Received: by 2002:a05:600c:19d2:b0:459:ddad:a3bd with SMTP id
- 5b1f17b1804b1-45a114c20e9mr28575935e9.15.1755000062340; 
- Tue, 12 Aug 2025 05:01:02 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:97a2:1bc7:9f2e:6519])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c45346asm44004676f8f.39.2025.08.12.05.01.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Aug 2025 05:01:01 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 12 Aug 2025 13:01:01 +0100
-Subject: [PATCH] spi: exynos: Remove extra term from test
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=03194c3c15=christophe.kerello@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57CCYffq029054;
+ Tue, 12 Aug 2025 14:37:35 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=FhbPKTp8pgOPW1lJoNZOSD
+ j6wNSwN4hJGyLbpVb/pjc=; b=dMdHGiLRarZvhWxS5Bt83cBIHiLQgSxOBzUW5m
+ 32I3tMjvb9E6jtQgQUif3VDoY/oVH4InalkZp5zHQF8dLfzaFpIEDzM2Gds0mwYl
+ vTQsmvy2YMmGKeHdJMrKeKkWV2K3Xa60pJCbniP7JXqx8CK+RGbMn5T87rHV9UCD
+ XnyVMA+LvgJUspzULIp7xysgLJU4/yvX3puD70QUoecBiOO4CgDRZTenhwVT1tK5
+ eN5aJ3O45ws9aHLSjbBUhpvjLAsSwspG8v98YK91Dc3EtrMYLI3yPRskqRd5MvKm
+ L3EuMLO8kAZv06DzmCbWR7ZeqSERTtObAjpZNzCHBo0Bu3tA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48efw4rejy-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Aug 2025 14:37:35 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8083240046;
+ Tue, 12 Aug 2025 14:36:37 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8765B783009;
+ Tue, 12 Aug 2025 14:36:03 +0200 (CEST)
+Received: from localhost (10.48.87.65) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 12 Aug
+ 2025 14:36:03 +0200
+From: Christophe Kerello <christophe.kerello@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice CHOTARD
+ <patrice.chotard@foss.st.com>, Christophe Kerello
+ <christophe.kerello@foss.st.com>, Andrew Goodbody
+ <andrew.goodbody@linaro.org>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] mtd: rawnand: stm32_fmc2: set available OOB bytes per page
+Date: Tue, 12 Aug 2025 14:35:11 +0200
+Message-ID: <20250812123511.250782-1-christophe.kerello@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250812-exynos_spi-v1-1-bd0813ff6593@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAPwsm2gC/x2NwQqDMBAFf0X23ICJSEN/pZSSxNe6l1WyIhHx3
- 40eZ2CYnRSZofRqdspYWXmSCvbRUBqD/GF4qEyudX3rrTMom0z61ZmNt0+HFDsbfEc1iEFhYg6
- SxisRlOXSc8aPy/14f47jBIodtqdzAAAA
-To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.65]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-12_06,2025-08-11_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,38 +90,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In spi_rx_tx there comes a test for execution of a code block that
-allows execution if rxp is not NULL or stopping is true. However all the
-code in this block relies on rxp being valid so allowing entry just if
-stopping is true does not make sense. So remove this from the test
-expression leaving just a NULL check for rxp.
+File system such as YAFFS2 need to know the number of available
+OOB bytes per page to be able to choose if they should locate their
+metadata in the data area or in the spare area.
 
-This issue was found by Smatch.
-
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Signed-off-by: Christophe Kerello <christophe.kerello@foss.st.com>
 ---
- drivers/spi/exynos_spi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/spi/exynos_spi.c b/drivers/spi/exynos_spi.c
-index 1b9bf004b7c..d11952afe5d 100644
---- a/drivers/spi/exynos_spi.c
-+++ b/drivers/spi/exynos_spi.c
-@@ -166,7 +166,7 @@ static int spi_rx_tx(struct exynos_spi_priv *priv, int todo,
- 						stopping = 0;
- 					}
- 				} else {
--					if (rxp || stopping) {
-+					if (rxp) {
- 						if (step == 4)
- 							*(uint32_t *)rxp = temp;
- 						else
+ drivers/mtd/nand/raw/stm32_fmc2_nand.c | 1 +
+ 1 file changed, 1 insertion(+)
 
----
-base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
-change-id: 20250812-exynos_spi-8172ecb31a83
-
-Best regards,
+diff --git a/drivers/mtd/nand/raw/stm32_fmc2_nand.c b/drivers/mtd/nand/raw/stm32_fmc2_nand.c
+index d1c88643c98..21e3c88a55a 100644
+--- a/drivers/mtd/nand/raw/stm32_fmc2_nand.c
++++ b/drivers/mtd/nand/raw/stm32_fmc2_nand.c
+@@ -1034,6 +1034,7 @@ static int stm32_fmc2_nfc_probe(struct udevice *dev)
+ 		ecclayout->eccpos[i] = oob_index;
+ 	ecclayout->oobfree->offset = oob_index;
+ 	ecclayout->oobfree->length = mtd->oobsize - ecclayout->oobfree->offset;
++	ecclayout->oobavail = ecclayout->oobfree->length;
+ 	chip->ecc.layout = ecclayout;
+ 
+ 	if (chip->options & NAND_BUSWIDTH_16)
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.25.1
 
+base-commit: a0b83b90e0fbdb15546f34c660c87f1aca999452
+branch: FMC-YAFFS2
