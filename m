@@ -4,81 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3148ACA0EC4
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 07:43:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E877C87FCB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 07:49:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB32F831EA;
-	Tue, 12 Aug 2025 09:43:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6DF10831E0;
+	Tue, 12 Aug 2025 09:49:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RS8ybCL8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lz1MUbxp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F1BE831C2; Tue, 12 Aug 2025 06:00:06 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id C9010831E1; Tue, 12 Aug 2025 09:49:46 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B3F831B4
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 06:00:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B481E8319C
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 09:49:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ejona86@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-455b00339c8so31874995e9.3
- for <u-boot@lists.denx.de>; Mon, 11 Aug 2025 21:00:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-615460d9897so5906637a12.0
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 00:49:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754971200; x=1755576000; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0c1GMSRzJgw1VyGTUJNouoNdUcXSTz0PpZU4PZzYAas=;
- b=RS8ybCL8uUYfUfMcSXlFfmhzH9spY20ncpe9FV3ebW4M/7pGcY3y0/CirbqNC//TXe
- yo80HtFqcVduvvCJzSwH9owHDdT3uVz2UIvYlEAQHRM0qdJ2tiAlS6b2y2gXOOYdNvyq
- Dqji3w1bfCEcKwBn/R8KowLPOS8vxfTyOh4pLwIyC5JDiWCTZeDLgqWSvE+YFevOvDkE
- iM7lpfNhIBk5e9TxSFKOCBbIlrUicj+7T8NOgbGDTS5NJIHJEA2/7hBKXPaknD0FSKE1
- GT5akz8agdO+WH31Tq2OVQltpvJy0Aw2CbkATCsgUDanUrfcbxwVv4xvSP+U9swVCHtI
- oWtA==
+ d=linaro.org; s=google; t=1754984983; x=1755589783; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hxzD5gFj8yoQpXv1rKfcV/gBNkXad4ViG2+1c3sEpjw=;
+ b=lz1MUbxpLM3s920b4+fzlW436l59MhCORtwimsxIlMZZSLFdM7FtrwzU2+vBHMZeh1
+ kQsAo8e9L73D5wkKSJ94vvAoCphof2RfbP+ww8ZZMv20hgingjSFA7f9bTHW15VTRhws
+ LwSZkAjYO1mAmz1huppgq8jZL2Vj3OOsxLQ7aK3cVsuMEmpBXaJV+0MhDXsTnT9brg8N
+ PyezG61mT54xgs16jMprkRUPWzO6bvt/2Yz9CcNIU7v3nTeMV9TItDQDjOtT0tSjlsww
+ G57g6OOXxdHZ0oOf32nf6FvmIQViGxfPrUpF48u5nskpENW1q3LVYn9FkxKg8V/ydEs4
+ /xfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754971200; x=1755576000;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0c1GMSRzJgw1VyGTUJNouoNdUcXSTz0PpZU4PZzYAas=;
- b=vVH7glfbKJlm1G0c2MdQGDl2+cKcZ4dc6+VniQWLjc2+zXdzXNbW02srAFs+kRBWxP
- mKKQlpC6jP++//O8ONi0gJ/cLFTFCNaWjM8UgvWdGSQO4McDnYOAFkhX3yTmsyg9p0aZ
- sSXq/jQp54ij5kkJ0NFNDOMdEjGUbOTM4Iy6pnuqjySrA4lohnyn3poV0cE1WZ8EMFI2
- 7RPUtI/UIf3v8TbZQfzo5HUFige7I/Q9mzLl/SlnRPR7hFnVuHh15o54o2LFwqR2LSWs
- BebmynsuXu2IYB62COB9n+dCer11t+HtaAno9+ndPVotDDk4shwxnNnrCmq4vhTyA+6O
- QKOA==
-X-Gm-Message-State: AOJu0Yz/rEO6tp32aJeJfGqL2zMcWMlKJvhmnwbMBN8/+s7CkSLBtDOR
- SzZQYbkMRBDm/zTihrV+z9KrRwzFme2Gf+1MZSz+Yn9z6x2tZ2ELi84d7N4htVErLqMoE86brPz
- qoX30yCCgrYNlyepub40O2VFtG/26C6sZQHtI
-X-Gm-Gg: ASbGncsYM8CW/v1rYuhVq71B3C1brCzLGo9BiejiUjwKARNbUWmRcU7wOSFL2uUjo2e
- zNjE30vBrGvwqZNGR1HTZLHbfgMnU7YMPQt4HWCoCQMDc/12Bfxq2NMOoGdKWmFmJzhpnWprVXZ
- hLxyn4/2NK2iXohDJbKQ2tuMX+OD1gQ0kYlGVeFwRht0rf4S9zD/0d66UEUSz4/kMKRBK6kn0fc
- 8XU5vgfuZ7aKfkA0DM4st32uLTWr5ZjHtjH40mw
-X-Google-Smtp-Source: AGHT+IFAHjifxEPFvVM9RtM81jQ6M0pqG97zHgGcyrSvgAJHJSdAmE/eFdbmTa6DzZMNTZx9s5GL1xb9M3rQXLygrJY=
-X-Received: by 2002:a05:6000:250a:b0:3b8:d1a4:bab9 with SMTP id
- ffacd0b85a97d-3b9110323c1mr1444691f8f.45.1754971199470; Mon, 11 Aug 2025
- 20:59:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1754984983; x=1755589783;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hxzD5gFj8yoQpXv1rKfcV/gBNkXad4ViG2+1c3sEpjw=;
+ b=WAefACFvXe44rhl5L28WmCwcMfeI/vvK5RqqbvKjJe3oQaZmqVOLtUwxvmoWdTfBFd
+ wQiXUI1QJDvlabVVUasuRF8arrbIXOHhueFIbAemE2A2K85wORkz71Ku6IlN7yfXmSLL
+ wNnOwyyNdZxEdtSVCIP746cUw3xC5o4OovQPjEO8xbSbhFR+KCMxIOgVI29QNco1BBQD
+ S+dn5FtundpusTesmhzRqeXo2syWHC5dSqqH+Ykc37sbJp5pvX6VyDVOzwTUpTw2/oJR
+ 0VU8pbCMeCfQthTs9AcbAxvHMSyCZwSeTj68yRYBDltryIB4fidaUUVBQFDcGN+YxHi/
+ 4Cxg==
+X-Gm-Message-State: AOJu0YyFqoZSBFD3sJuTPGVq6svyYSiLx6E2HVx+a0vTuRXQGVOPYmGn
+ sYqN8gmZKnEUFI9GMHLOzF0ZSdZKdSUw9xafofoD9opy2l+He5OGryeuk47C++PDj/g=
+X-Gm-Gg: ASbGnct5U7PPy/bClGB4Eu2kcn257dNWHHCXoyKAIpKofLWfXgaaAHi4Fs4avWmfOqP
+ dP/wjJKvBH9hnW2otg4H2rjrGpq5A2YnGuYbaAnHtdvasHVNil+h8pdG19LgqFij2HboxZPvsV/
+ tzqfo1g0FDWBjL4UmtHgh90QsRXOKnFHQ/eTck1cmuuYhJM9gQjULNghimNJVWZ/obQSG1xpRiW
+ 3DClb+dQOztExUDuyd91FhQho/DaAa67e7lP51p/WMvNgu8nx8iKTb+kZQiRR9Tq/IFT7++gfMU
+ hYrOmhNnG5y/wSFYXB3Hn8v1BK0ZYWh0nzBSYc+gQCM9SXIGpnxyLlvJub8YIWWBjd40Ze60C8/
+ QwsGTkDUybC2BMpjineSO5EQAHIPvx+2jiw==
+X-Google-Smtp-Source: AGHT+IHjnXIKZv01arzb0pch7JbA8yGgxtInnfACEh3+3+qPJEXYQTqh+PVdYMWYlJ6ES9dC7RDS+w==
+X-Received: by 2002:a05:6402:520b:b0:617:d013:74a with SMTP id
+ 4fb4d7f45d1cf-6184eb5266dmr1999739a12.4.1754984973611; 
+ Tue, 12 Aug 2025 00:49:33 -0700 (PDT)
+Received: from [10.100.0.2] ([194.15.111.159])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6177dc4b209sm12557214a12.28.2025.08.12.00.49.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 Aug 2025 00:49:31 -0700 (PDT)
+Message-ID: <5f3e997a-f070-417f-a09a-90e1bf7774cb@linaro.org>
+Date: Tue, 12 Aug 2025 09:49:29 +0200
 MIME-Version: 1.0
-References: <20250713002741.367252-1-ejona86@gmail.com>
- <20250812003057.0068a65e@minigeek.lan>
-In-Reply-To: <20250812003057.0068a65e@minigeek.lan>
-From: Eric Anderson <ejona86@gmail.com>
-Date: Mon, 11 Aug 2025 20:59:48 -0700
-X-Gm-Features: Ac12FXxskpIDlwSu6B_XSY4PEZxpved26US70OVdyT5AWMcq6rZnhhkVR2K6L7w
-Message-ID: <CAFyMnzY1+e814mVek2GczOpX16TySVT2mdAvbt3x7jz3JVAdBw@mail.gmail.com>
-Subject: Re: [PATCH] sunxi: Enable SPL/SPI boot for OLinuXino Lime2
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, linux-sunxi <linux-sunxi@lists.linux.dev>, 
- Stefan Mavrodiev <stefan@olimex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 12 Aug 2025 09:43:35 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/2] lwip: add Kconfig to decode and print ICMP
+ unreachable messages
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250806085959.2130339-1-jerome.forissier@linaro.org>
+ <CALeDE9NsfBRyfOdxr8S0iRSj5kdSwyKVr-pfroJCdjqT0hbmvA@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CALeDE9NsfBRyfOdxr8S0iRSj5kdSwyKVr-pfroJCdjqT0hbmvA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,35 +108,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 11, 2025 at 4:33=E2=80=AFPM Andre Przywara <andre.przywara@arm.=
-com> wrote:
-> But actually I wonder why Olimex has two different DTs for the
-> eMMC-less boards and the board with eMMC.
-> ...snip...
-> So I wonder if anyone wants to clean this up, because I think we would
-> only need the A20-OLinuXino-Lime2-eMMC_defconfig,
-> A20-OLinuXino_MICRO-eMMC_defconfig and a64-olinuxino_defconfig.
 
-I had wondered the same, but expected I'd not understand. Looking just
-now, it sounds like it doesn't mix with the NAND variant (-n8G) well?
 
-https://github.com/torvalds/linux/commit/27dd9af6bc000ab21fdd41e58e3dddedba=
-57ab92
+On 8/11/25 17:56, Peter Robinson wrote:
+> Hi Jerome,
+> 
+>> When using commands based on UDP such as tftp or sntp, if the server is
+>> not reachable or the service is not started on the expected port then
+>> the command ultimately times out. However it often happens that the server
+>> or a router sends back an ICMP Destination Unreachable message. That can
+>> help troubleshooting. Therefore, add support to the lwIP stack and to
+> 
+> Has the patch for adding support to the lwIP stack been sent upstream
+> for review? Please reference the upstream patch for this.
 
-It looks like the emmc DT has gotten slightly slimmer since being
-introduced. It doesn't seem the eMMC DT turns off any part of the NAND
-DT, so I might try to poke at this some. But I don't have a NAND
-version of the board to fully test.
+Yes, see https://github.com/lwip-tcpip/lwip/pull/73. I will add a link to
+the commit description.
+ 
+> Also related, what is the status of other out of tree patches to upstream LWIP?
 
-> >  CONFIG_SPL=3Dy
-> > +CONFIG_SPL_SPI_SUNXI=3Dy
->
-> This needs to go further down below. After configuring for a board, run
-> "make savedefconfig", then compare the generated "defconfig" file
-> with your ..._defconfig version (or just copy ./defconfig over).
+At the moment we have:
 
-Oh, right, the tooling would know the proper order. I just sorted it,
-but I forgot I had wondered earlier how things were ordered. Thanks
-for the explanation.
+- 5634ecc88e9 ("net: lwip: tftp: bind to TFTP port only when in server mode")
+Submitted upstream as https://savannah.nongnu.org/patch/?10480 and
+https://github.com/lwip-tcpip/lwip/pull/61.
+Status: MERGED (https://github.com/lwip-tcpip/lwip/commit/b1edb7780f5f)
 
-Thanks for fixing it up.
+- 27d7ccda94f ("net: lwip: tftp: add support of blksize option to client")
+further modified by 10917df17f2 ("net: lwip: tftp: fix find_option()")
+Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/62
+Status: PENDING
+
+- f69f7aef26f ("lwip: tls: enforce checking of server certificates based on
+CA availability")
+Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/63
+Status: PENDING
+
+- Part of 9349fc2e9c76 ("net, net-lwip: wget: suppress console output when
+called by EFI")
+Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/66
+Status: PENDING
+
+- Patch 1/2 in this series ("lwip: icmp: allow reporting ICMP detination
+unreachable")
+Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/73
+Status: PENDING
+
+FYI we do track this information internally here at Linaro. I could as well
+store it in a public location if it makes more sense.
+
+Regards,
+-- 
+Jerome
+
+
+> Peter
+> 
+>> U-Boot to handle those packets and print a diagnostic message on the
+>> console.
+>>
+>>
+>> Jerome Forissier (2):
+>>   lwip: icmp: allow reporting ICMP detination unreachable
+>>   net: lwip: add Kconfig option to show ICMP unreachable errors
+>>
+>>  lib/lwip/lwip/src/core/ipv4/icmp.c | 17 +++++++++----
+>>  lib/lwip/u-boot/arch/cc.h          |  7 ++++++
+>>  lib/lwip/u-boot/lwipopts.h         |  4 ++++
+>>  net/lwip/Kconfig                   | 13 ++++++++++
+>>  net/lwip/Makefile                  |  1 +
+>>  net/lwip/icmp_unreach.c            | 38 ++++++++++++++++++++++++++++++
+>>  6 files changed, 76 insertions(+), 4 deletions(-)
+>>  create mode 100644 net/lwip/icmp_unreach.c
+>>
+>> --
+>> 2.43.0
+>>
+>> base-commit: ae5711f881100f856ead1e76832c32b92dba93c7
+>> branch: lwip-icmp-unreach
