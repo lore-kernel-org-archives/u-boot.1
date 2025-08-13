@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A3BCA0EE0
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 13:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D83C87FCF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 13:18:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C2A4835CB;
-	Wed, 13 Aug 2025 15:17:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F334982C84;
+	Wed, 13 Aug 2025 15:18:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IC3duaxA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iTTLMlIm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA08A835D4; Wed, 13 Aug 2025 15:17:15 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 04584835C9; Wed, 13 Aug 2025 15:18:42 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9884C835C9
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 15:17:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1022B80FA8
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 15:18:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3b78d13bf10so6749736f8f.1
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 06:17:10 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-459ddada9b1so61252425e9.0
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 06:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755091030; x=1755695830; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1755091119; x=1755695919; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=b3TKzu3Rh+M1k4WeFg/jGzC6eliAJogtjRZJ+yfpCag=;
- b=IC3duaxAenAxMgKbgIbRPzPlW2TZpOIYINukL0hvtLLZfDEnIdpEIAUHvEbE0QT8Rm
- q3YkH+Qfwp614vK8ZaFFhc9Q7+cUXEJp08YFWrPoXNtp2p8tnf4PnMuSNZqtKG6DjmtS
- YDSCO3CeJxMk2YZ+dnQsV1wns31LXGVTR47NRqBqqbQ5hobhFdnb/7saT1XBxXCRCGQU
- hft/jb3F8KPmLL0K22Ok0JyjVsbagtVeV5st6VI5ElPg9ANEc1Rpsso5/NU/5oaIgJmY
- ppdWxDQqsdW3toUbmaVs0hEghSl9MxBYmMtklfdRZ9ef8lDWNAJ3rb6lMTEq5Jadl0XE
- K6nw==
+ bh=pDG6+av9C5rAN4Htpa7D8JCl0QzwlsQEsZqj2ovqczE=;
+ b=iTTLMlImuEsXwTGbJYNVNxbJoHVtR0sOIobPOrzQeYswj4x4CrcP641VN3JljUJThx
+ u50DtIPQfFhv9c+15npLIXjY3lSVoAPX1Z570Io5/Ktf6sqY5NTj3xYVrsJKMNSGszu8
+ hfygDFgHozJ89IUy+zUauZ4cDPr8vEg2JCAliYtqjjOuITioUEJz7JtASndzmKuiB+JW
+ H4/ZS6hUNTu0WTYU+yshwsQUYSiEa5e5Zk6zOrqRTqm1ZbaWDz60xrjqyQ0EPIz0vjMJ
+ +milUg+QY/oMCZtvhBH9smh4aKB8VJ3SQMn0MY2ced+308eYvuOu0/tZiNXDRC211+Y/
+ z+KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755091030; x=1755695830;
+ d=1e100.net; s=20230601; t=1755091119; x=1755695919;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=b3TKzu3Rh+M1k4WeFg/jGzC6eliAJogtjRZJ+yfpCag=;
- b=jpqQcneF2j5lrceIbsVtHZlfUvvrA5zjpEi7CWqAOVcj5v3mIPb4HLMqu3Te/D9RT7
- QnCKH43VbwjSLmOLtSCfxKmtAn4wfx1HDhLQn83nuW1870xRhL6G0QOCsp1nUVJ1YH/X
- HKLjzhsQ3wXB4kGnNP7zbYVC+/HT0H6hgXie4lM5pYCT3/CPbz+uKJPkY/oF8dMU8KcX
- N5HUkQxzSxYZx3WJBR93ASvzTzWUqV+XZ2H88PLMYaDBJKveokM011xO7WtQXx3XYGdc
- WQ3GR18J+Il+3KYzTpDwdkrSA0q9f4LDl5ASVymHu/eqq7pK4PDfrO1x85A/OZZk8b0w
- 8Urg==
+ bh=pDG6+av9C5rAN4Htpa7D8JCl0QzwlsQEsZqj2ovqczE=;
+ b=dPLgCL2dSaJhQ3fmbkeeHD02xi0eCrgrPjzvDsd6f7hf0gYCa1aXWYhfLNeskpA+BI
+ Jiv0Lh+8M2DbRpxYdZiNjBA3+denjbDVE/fKzBJkmvUq8XqrXC7rPAMrzogDHQYZazFv
+ 7gQTbh8H/JCCqSPzRPqBB7vKJddDAvLgZSVe1L2OP+qeTuWeGpph/yFqboMt3PAginTB
+ 4W27CSpG/XGi6wH4wIBX8uO9BAGLh5Yu0AFEdENZTU5mKw0HN+Gm/LV9hBY0VRVF5eEW
+ EEDkq6DZOXCXNAD4umaGHP7f6riM0oGtapHjtuoxn5jK4GgcXLCQwHmyINnawfiWWSP7
+ XOEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgmmFVfBaRXNl7k0P5ZcDfSU5Rt/lE8KUydN5mGPQMzcC75VGKHCBpv/0knjlpgUCXypHvyp4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzXInyoLCHW+jTuyEoTb4bjRhC5kTca7pG2RuCy3fMvso2nnIzI
- 22GdimEy2uj8nnofx3KNuV6jr36vTLe0oPC5OZPrdi0ascyQ1VnZcoYVMrfI/4KwY5o=
-X-Gm-Gg: ASbGncvSvPdQ/Eo+Q50B+KJy4XmMl7NjqNG78gwn8UW1saiglWhNuN6dgFgbtJrPf1X
- UCqrsQ0UsPnbLUq+C83IiAADkXKa1LvqNb0+goqjHFBxSlTmyHn0yYyfhqRJvZVZsQT7Ntxqk1h
- 1pzeh+GK7D2O6o9tHHRqpy79mBBoMqWhmRoy6VSGvfXBWC0+oGiwzDCge7+93+ijh4J9/DXbMTU
- TjwnjlfEcxkSYyWnnJhF+BqtwldawJB3lUjESNbpvOv4jHCYr4QZnLXF9UeIgtCYwZJOobW2gqp
- fNWcao6h+ipJWjv0K8PkNyHUBZEiZTG911L8JTOwLbHe2KfHwMM5w4d0J/BNyUc2RLRjn4WxOuv
- DqwYgf8CaMJJsiC57BkmNYu9Rc3YxrI8qEsovAl3cHTJvzQ9+mYMcVWFlcp4cP1wB
-X-Google-Smtp-Source: AGHT+IEJ0KWwTYndrwnaFO19YHBx67B0XF5EnM+u3AAgWSYuuKVTlzIogVXUuxkXw4MAi8RfDg9sXA==
-X-Received: by 2002:a05:6000:230a:b0:3b7:888d:8d9a with SMTP id
- ffacd0b85a97d-3b917eae6abmr2509940f8f.29.1755091029828; 
- Wed, 13 Aug 2025 06:17:09 -0700 (PDT)
+ AJvYcCXI8o2/SQYXWt+hHLOKEgrx7ckdfpDx4wXWjK3T7UIsiJJ5y+xN7f0aIDj1hJk/PHsskvcBruc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNfvPIZMXN39ztMMYuD98FkedZp62PIko8oSk1d0t3R9RxaK5o
+ OP2wzbycJLlafRi9q3ja4hAg8Ow77+YRPKyjVDlVSvj9TMGSrNC7qaOVLbLJdzb99WX9CE2YcJk
+ 5AqF9
+X-Gm-Gg: ASbGnct2CvL6baP4oYciYZrEkqdmBusM58hDLw86eC4nyUC6zycyeXZk9MFTdmgQEZy
+ jh/2s9zz/BlAYnOh9bg76oPcHshNyJCiCjIpZTiOxVEKWUEaiyKJ9BHlVcCt8eAFA6kFeI5QmTs
+ ioVVz7a0LfgEqalLk6daOTNZYcPxfX/56jPbZKn4VWRG3yqK0qZU1wgnjC8PCCfUulrspSKjgxP
+ t59ZU7w6tB00HyaTJaT29xaIBHF2hEYgFDa24aSQRaz8GJ3m8N4Z/9sTze+0d+jM2M4l5O8YjoO
+ GKeipA2NMHzT0NpZjHHc8oko334wofVj7r2PDSeMgmhlki/cowsmnatz4Wmikb4iw4MKMgnx1nR
+ U0VN2gJ+L2B3T5LjaZA0ynJ7BM8kEvivN1ubP/TXHkdK+rb+bVb8KWCRWKoq7qUWYI6o4ME6U9p
+ 0=
+X-Google-Smtp-Source: AGHT+IHGHHaWxn2Zny4zTHFRXOUGoFEBvT01WHZUg8S6yz3iDSIHYCCgH0rOYeBDQwIYydv7GpdE0A==
+X-Received: by 2002:a05:600c:4f8a:b0:459:dfde:3329 with SMTP id
+ 5b1f17b1804b1-45a165f7e8fmr29993895e9.31.1755091119464; 
+ Wed, 13 Aug 2025 06:18:39 -0700 (PDT)
 Received: from [192.168.1.36] (p4fc3dd6f.dip0.t-ipconnect.de. [79.195.221.111])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c4530b3sm48556867f8f.34.2025.08.13.06.17.08
+ 5b1f17b1804b1-45a1a5961a0sm1929545e9.27.2025.08.13.06.18.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Aug 2025 06:17:08 -0700 (PDT)
-Message-ID: <1a2d436f-2a90-4f35-853d-8a21c00ade53@linaro.org>
-Date: Wed, 13 Aug 2025 15:17:08 +0200
+ Wed, 13 Aug 2025 06:18:38 -0700 (PDT)
+Message-ID: <b506b4e6-3ff4-4319-a851-1583815ba005@linaro.org>
+Date: Wed, 13 Aug 2025 15:18:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] serial: msm-geni: No need to NULL check priv
+Subject: Re: [PATCH 0/2] pinctrl: qcom: Address two Smatch reported issues
 Content-Language: en-US
 To: Andrew Goodbody <andrew.goodbody@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250811-serial_msm_geni-v1-0-4499179491bc@linaro.org>
- <20250811-serial_msm_geni-v1-2-4499179491bc@linaro.org>
+References: <20250807-pinctrl_qcom-v1-0-42fac6707fd5@linaro.org>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250811-serial_msm_geni-v1-2-4499179491bc@linaro.org>
+In-Reply-To: <20250807-pinctrl_qcom-v1-0-42fac6707fd5@linaro.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,63 +107,27 @@ X-Virus-Status: Clean
 
 
 
-On 11/08/2025 19:03, Andrew Goodbody wrote:
-> The NULL check for priv in qcom_geni_serial_poll_bit serves no useful
-> prupose as too much other code surrounding it relies on priv being
-> valid. Remove the NULL check for priv and other related code.
-> 
-> This issue was found by Smatch.
+On 07/08/2025 13:20, Andrew Goodbody wrote:
+> Smatch reported issues with the limit checks in these two drivers that
+> could lead to an index in an array going out of bounds.
 > 
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 
 Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
 > ---
->  drivers/serial/serial_msm_geni.c | 30 +++++++++++++-----------------
->  1 file changed, 13 insertions(+), 17 deletions(-)
+> Andrew Goodbody (2):
+>       pinctrl: qcom: sa8775: Limit check for array index not correct
+>       pinctrl: qcom: sdm845: Limit check off by 1
 > 
-> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-> index 33016f0cb53..0eb90f82a34 100644
-> --- a/drivers/serial/serial_msm_geni.c
-> +++ b/drivers/serial/serial_msm_geni.c
-> @@ -288,23 +288,19 @@ static bool qcom_geni_serial_poll_bit(const struct udevice *dev, int offset,
->  	unsigned int tx_fifo_depth;
->  	unsigned int tx_fifo_width;
->  	unsigned int fifo_bits;
-> -	unsigned long timeout_us = 10000;
-> -
-> -	baud = 115200;
-> -
-> -	if (priv) {
-> -		baud = priv->baud;
-> -		if (!baud)
-> -			baud = 115200;
-> -		tx_fifo_depth = geni_se_get_tx_fifo_depth(priv->base);
-> -		tx_fifo_width = geni_se_get_tx_fifo_width(priv->base);
-> -		fifo_bits = tx_fifo_depth * tx_fifo_width;
-> -		/*
-> -		 * Total polling iterations based on FIFO worth of bytes to be
-> -		 * sent at current baud. Add a little fluff to the wait.
-> -		 */
-> -		timeout_us = ((fifo_bits * USEC_PER_SEC) / baud) + 500;
-> -	}
-> +	unsigned long timeout_us;
-> +
-> +	baud = priv->baud;
-> +	if (!baud)
-> +		baud = 115200;
-> +	tx_fifo_depth = geni_se_get_tx_fifo_depth(priv->base);
-> +	tx_fifo_width = geni_se_get_tx_fifo_width(priv->base);
-> +	fifo_bits = tx_fifo_depth * tx_fifo_width;
-> +	/*
-> +	 * Total polling iterations based on FIFO worth of bytes to be
-> +	 * sent at current baud. Add a little fluff to the wait.
-> +	 */
-> +	timeout_us = ((fifo_bits * USEC_PER_SEC) / baud) + 500;
->  
->  	timeout_us = DIV_ROUND_UP(timeout_us, 10) * 10;
->  	while (timeout_us) {
+>  drivers/pinctrl/qcom/pinctrl-sa8775p.c | 4 +++-
+>  drivers/pinctrl/qcom/pinctrl-sdm845.c  | 2 +-
+>  2 files changed, 4 insertions(+), 2 deletions(-)
+> ---
+> base-commit: 3526f990b77fca1c933f1d8b24eb9385010a05bf
+> change-id: 20250807-pinctrl_qcom-5aa7ec35301b
 > 
+> Best regards,
 
 -- 
 // Casey (she/her)
