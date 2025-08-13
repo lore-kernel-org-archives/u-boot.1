@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11F39CA0EE0
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 17:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51ADCC87FCF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 17:13:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F14B836A4;
-	Wed, 13 Aug 2025 19:13:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B322836AB;
+	Wed, 13 Aug 2025 19:13:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="euvUTUVT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oLKunZ9H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67A26836A6; Wed, 13 Aug 2025 19:13:11 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id A72258334F; Wed, 13 Aug 2025 19:13:16 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9046D836A4
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 19:13:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC388836AC
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 19:13:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-435de6dfcefso61324b6e.1
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 10:13:08 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-30ccec50c0aso86663fac.3
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 10:13:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755105187; x=1755709987; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755105192; x=1755709992; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=G/WgLHIE+/WZ7rQ8jPFapNkb4FePc73NVwSr3F4OeHA=;
- b=euvUTUVTPQ3SJGClsw1hbMRtQbDKZ0PaDkQXjy6EAX+t8skj2jBE/2r/AEEx+tmdI4
- Jl/F8w4+rJpI57GqPomjBQ+2uTVbQkm2C+LAnuYfjajEa2mP5RXBo66GTo/+b4kDHGAe
- N1B66xKPgg1oSwtW7afTrdM16SGrDGlzhizTM=
+ bh=PAhtG8JpBdgWm++apjK+KMdE6lt5ngZnZUqRGK+aR00=;
+ b=oLKunZ9HP+XxJb5Uykc84FNEiO7iY93VCQcfj/kxkn8VJHlyWb8pm2tik2A+zqil4T
+ BM8wefhFTvgHmeRnfcf2KZYHOT+gAeopNPvS/KqE2STqKhxDSCiViy2g6LzXvWxDFaY7
+ SsjuQO7mjs8OqMP9nQgyIXmEetOhnCJ8HZwVs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755105187; x=1755709987;
+ d=1e100.net; s=20230601; t=1755105192; x=1755709992;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=G/WgLHIE+/WZ7rQ8jPFapNkb4FePc73NVwSr3F4OeHA=;
- b=Xg+W+kISRw6VcDx5CogdmKpxwf26w5/Zzsop4ZNJhxq+r+jR3sHDZTmcp1DHGDLqUw
- vBfjpJ+z4Nj7NIPa/XneT6sUNpCLsl0FXbwejFkVJFc1Lb5nKqRA9Xze70AroiGC++S4
- QbxoaT0yUa2VgNhJqYiameTZ0eLHpqj+Z2TyQlItB1asgs/lrxV0s1JgBGV5RyzJVMDl
- xmERGuu3Q/L66kYo+quPucolYdsPG0ckpxHKotn94HUZqnQ2AfzgSrIeHFo9/iBMXg64
- j3RB4fHBkZbBodAlJf6e+RhNQOriqOrhEZHox/8SVETAStn9RJHyWsxKPJUdGFzKf8iY
- w8gA==
+ bh=PAhtG8JpBdgWm++apjK+KMdE6lt5ngZnZUqRGK+aR00=;
+ b=Dhp7TTsLSodV3z8JxxCsvfF5tm/1Jr+ixfeVwXwRGwH35iFm10XVuGsOGtgIzwRlXQ
+ BnqyGlCfyRCd4rTD00WquDzTcTiRFIOfJWXL3x/pCGUe4YxYuOjA02nzFGDEFXDsoBUS
+ WuXYfBq8fLTM58Lm8qpfxNnfHJVXIFTu/k/TvR97U4xUK5EVeK6corwqpi5dKeY7FVHd
+ lRfMyPhhkAxrTd8TbD8VJhcFE5uWVsS4vMy33m6ryTF6Ua8I6PTC9NI3i/9TVxVP0w7S
+ smioADXHNrWMq7TgX0nRF3nh2sKvMFOoCp6SleMB4toITl+M1E5830y1lJjn+WCZHVQm
+ ItLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXQVPoFx9mir+O4i3ZG60hWxvnmNjP0dc2eIl6zaezCIZ3nDbWlF8aXHQ0Cv666zJW/OG5pAc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzapiWZj6X0Nn6+jVQKNbcaNsOiq1kbHr4M8EP4UaBTGm6j77un
- eo1BUVouy4LFRGxFal0kzOIBwbFs13VhoZVpVwX10p0MmGnqEWZOHIkBnkAgMYj/BIM=
-X-Gm-Gg: ASbGncuBLH/D8lGHtLNDPRDjAEXoSxJpW+PdVpfh2mU0xwFI/gSBfh2fi4u8iSv4fzT
- a5ruX8p7IL0wOZXRsJGNAHJQiOq0TC6ZDfijDohNIV67OqD7mhVXIx9gfjDNEK1oXaNKLGHAk9h
- u3yE7ChQl4FvpH/oWoorrUOzwL1AlrZaFBxheT0fKVCZYZ4pu5jyyicHQ843s3jPe4rmFTAOkuy
- kRvFgRkyAH/lWTth7uUo36kDiLG4uHKCExw3a8BQ0aS2wgE5v4MDpwseWMmkrJPOC6C+CO8yNk7
- cWUlV4Bw7j7qPxJdtFLPznwEIpjhyWz0xUkMIUznrYFJ/Q5r/5vshoFHXTtuZo41kVQjKbWWWiE
- Sg+IYVYIjN5yWg/nOSfrV3jbhcEQJqTdo/ZsuQ6uV5WAd5CsiJOAKTyE0
-X-Google-Smtp-Source: AGHT+IEimZjGrzJWXH9Ey07Yf5py7yhR7xR6x0qHqBnpT7ZgYOWFD9wwlD2goKLIn9wrBwAMGwJN7Q==
-X-Received: by 2002:a05:6808:15a4:b0:40b:fe6:569c with SMTP id
- 5614622812f47-435d429b2ebmr2559648b6e.33.1755105187210; 
- Wed, 13 Aug 2025 10:13:07 -0700 (PDT)
+ AJvYcCVflfPeEJn6RCJiTGgt9imt42JqV5bHuZZzcY4wQ1keSl6VpPiXuz7b4xb4d6dWTkelG1VQ7j0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbvdIAuqGZ8YyJiGqRdtZjEXC/6GfFojQAKKdnWXNiFANhDFHT
+ GnwuGBfP0vleOcnNOW0BAhqaosAhaeQ/42YBHrHHRkHmwrKGe3vB7nlKM5cSPsrcg8KSB1Fb2mI
+ ypnQPO20=
+X-Gm-Gg: ASbGncsjTO7K885/Qjzihdjagko5hntQRUVuE/rBeaWNkqFCa+UuK5qHyqUEnaYP8LV
+ 18s76eQiv6YEEDSgnn+gG0g5rFlF7qfyyPs9OoSpC7l9WiMrJ6s5+v2H5otQix5OKRonMIHEQtb
+ XvR6rnEKufRrg2fMhEN9HA5+RStcnXjXMNpsiiaqpZBjGItnme9LE4tLKEX7W/VRzZDfP2rcGWD
+ tYsvUIATTYlk5En723IZGci+C3hs5PDoVnT336I4mKNb64yG+t66AZNOuMEs+b+JKHlvYpv+brU
+ KsnpVMpuKWJ/DUkuhzgxHMSvKCldOQWGA3ons5DNnwUyWoZuWLSnCgVkbYqc+ZCHjLb/EVNhFqO
+ Eeup1iGDpWmrKI9L+k+Gjiu6nJtVuPap7pTN3Ch4yBOtYN6FBLRVyD4rAJK+ieoGZaJY=
+X-Google-Smtp-Source: AGHT+IFiRhjOpwxjIQYE4HnKBT4yyf3SxqSmqsm9hTRF4TPxIOINV92UTm2Ejcv3FuWL/7JSKh4ZjQ==
+X-Received: by 2002:a05:6870:5586:b0:30b:bd6a:de31 with SMTP id
+ 586e51a60fabf-30cb5cdfe57mr2454359fac.34.1755105192205; 
+ Wed, 13 Aug 2025 10:13:12 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-435ce7289a2sm745532b6e.9.2025.08.13.10.13.05
+ 586e51a60fabf-30cd00de9e9sm22206fac.23.2025.08.13.10.13.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Aug 2025 10:13:06 -0700 (PDT)
-Date: Wed, 13 Aug 2025 11:13:04 -0600
+ Wed, 13 Aug 2025 10:13:11 -0700 (PDT)
+Date: Wed, 13 Aug 2025 11:13:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- U-Boot mailing list <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH v1 0/2] lwip: add Kconfig to decode and print ICMP
- unreachable messages
-Message-ID: <20250813171304.GD124814@bill-the-cat>
-References: <20250806085959.2130339-1-jerome.forissier@linaro.org>
- <CALeDE9NsfBRyfOdxr8S0iRSj5kdSwyKVr-pfroJCdjqT0hbmvA@mail.gmail.com>
- <5f3e997a-f070-417f-a09a-90e1bf7774cb@linaro.org>
+To: Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PULL] Please pull qcom-fixes-13Aug2025
+Message-ID: <20250813171309.GE124814@bill-the-cat>
+References: <20250813141201.276510-2-casey.connolly@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kIX7zTg8ZKeIDQkz"
+ protocol="application/pgp-signature"; boundary="yvAZFrMU9Seyu+7b"
 Content-Disposition: inline
-In-Reply-To: <5f3e997a-f070-417f-a09a-90e1bf7774cb@linaro.org>
+In-Reply-To: <20250813141201.276510-2-casey.connolly@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,83 +100,36 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kIX7zTg8ZKeIDQkz
+--yvAZFrMU9Seyu+7b
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 12, 2025 at 09:49:29AM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 8/11/25 17:56, Peter Robinson wrote:
-> > Hi Jerome,
-> >=20
-> >> When using commands based on UDP such as tftp or sntp, if the server is
-> >> not reachable or the service is not started on the expected port then
-> >> the command ultimately times out. However it often happens that the se=
-rver
-> >> or a router sends back an ICMP Destination Unreachable message. That c=
-an
-> >> help troubleshooting. Therefore, add support to the lwIP stack and to
-> >=20
-> > Has the patch for adding support to the lwIP stack been sent upstream
-> > for review? Please reference the upstream patch for this.
->=20
-> Yes, see https://github.com/lwip-tcpip/lwip/pull/73. I will add a link to
-> the commit description.
-> =20
-> > Also related, what is the status of other out of tree patches to upstre=
-am LWIP?
->=20
-> At the moment we have:
->=20
-> - 5634ecc88e9 ("net: lwip: tftp: bind to TFTP port only when in server mo=
-de")
-> Submitted upstream as https://savannah.nongnu.org/patch/?10480 and
-> https://github.com/lwip-tcpip/lwip/pull/61.
-> Status: MERGED (https://github.com/lwip-tcpip/lwip/commit/b1edb7780f5f)
->=20
-> - 27d7ccda94f ("net: lwip: tftp: add support of blksize option to client")
-> further modified by 10917df17f2 ("net: lwip: tftp: fix find_option()")
-> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/62
-> Status: PENDING
->=20
-> - f69f7aef26f ("lwip: tls: enforce checking of server certificates based =
-on
-> CA availability")
-> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/63
-> Status: PENDING
->=20
-> - Part of 9349fc2e9c76 ("net, net-lwip: wget: suppress console output when
-> called by EFI")
-> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/66
-> Status: PENDING
->=20
-> - Patch 1/2 in this series ("lwip: icmp: allow reporting ICMP detination
-> unreachable")
-> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/73
-> Status: PENDING
->=20
-> FYI we do track this information internally here at Linaro. I could as we=
-ll
-> store it in a public location if it makes more sense.
+On Wed, Aug 13, 2025 at 04:09:46PM +0200, Casey Connolly wrote:
 
-If it's not too much trouble, filing issues in gitlab in the u-boot-net
-repository (I just enabled issue tracking there) would be good so it's
-visible to all? Thanks.
+> Hi Tom,
+>=20
+> Quite a few Smatch issues reported by Andrew, and the LMB allocation fix.
+>=20
+> CI for this is: https://source.denx.de/u-boot/custodians/u-boot-snapdrago=
+n/-/pipelines/27364
+>=20
+> Thanks
+
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---kIX7zTg8ZKeIDQkz
+--yvAZFrMU9Seyu+7b
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJzHnwAKCRAr4qD1Cr/k
-CkqSAP9Z1hvrxQyNv7UqxcMDuDC8CLN4+VL6J+8L7aKjymadHAD+IC2NlCF8a91W
-cku4R0lAQa8nT7bjlcnCSae4q1ZpewI=
-=PRjf
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJzHpQAKCRAr4qD1Cr/k
+CjYVAPkBLvKjNmNcp6UTEkmC+J42BTlADBwf96wggD0IdZo0BwD+IxGY/LSxcqTN
+iGhcxRBB/yzx/J+p8uiIlQ0TrKcfjAM=
+=sHl3
 -----END PGP SIGNATURE-----
 
---kIX7zTg8ZKeIDQkz--
+--yvAZFrMU9Seyu+7b--
