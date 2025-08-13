@@ -4,79 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63265CA0EDB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Aug 2025 19:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57AD9CA0EC4
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 00:24:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC80F83071;
-	Tue, 12 Aug 2025 21:27:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 354F882F03;
+	Wed, 13 Aug 2025 02:24:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cVp0e469";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ffCH7b07";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nqv271IA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 549EB8319C; Tue, 12 Aug 2025 21:27:23 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6A7D282F5E; Wed, 13 Aug 2025 02:24:25 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEAF783020
- for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 21:27:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EBAF82E34
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 02:24:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4c1hN84zhHz9t8b;
- Tue, 12 Aug 2025 21:27:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755026840;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vW3qkv3hHCc8jDVPGb0oPXUxAGvNVY3f1G2W5dSxgYs=;
- b=cVp0e469idsMZnnficT9olcvFp4+LsTBieAe6PN+JutWvxFrxBwvR8warY48/Zr5zrSS1W
- 2fILu2wALfCBG+jSmFyHhT4JNtXEVbUAFtcnsE4vnj23YeGlkZfgTkmEvPiHai4/x02DY9
- FSYry7CFchwmhRwiC5uq5ZzwUu8WZWsRm8711F/LG6Yr2i5Np6RrXV8YV08LHHAaNl1+jG
- ZQN6QJuds8KSHy7CEqu6y1ozUKcjTh5yFQtUTY4ibLVXgRN2ORbsOmF+M8MJ7WokfQyjv3
- dmEruxOWjIgKj9a3qQ46+lBCRxBbBA4iiwBa8VJDaNhAtcIhHC961MyF4fPpbw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ffCH7b07;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <80600dfe-2ae1-4894-8e92-1d44d8b43d8f@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755026838;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vW3qkv3hHCc8jDVPGb0oPXUxAGvNVY3f1G2W5dSxgYs=;
- b=ffCH7b07/949kiPLKweWsmW24ilTR4DdILpYazBFBBqqlFHIoctFB/vmls5xhlyOxjbPTy
- a+f7Y1sgPp7GFvh2IJOiZ2yV52u5PbC7W0NfnzQWn/UXFsn1+XlAI4HhrYs4+4O/X56wrY
- 3DTVCtGMX6mgeYuupOnfCuxxTojaOVyXlGdykY5W2xfUmCe3IQFbZyuJWFkS+dxbP2JiVC
- 6rQ37AF27MVIpoyJg398BYOzLTwGtA/QWxDOYxfq6ZnP5ej1NvTjsihr9Z7cURtd2rX3qo
- vkwinkPLDKqVE1NGJMBMVLNAIK6l1JoL7KZkTmLzd0qReQnJVm92D9NYUtQ0Ng==
-Date: Tue, 12 Aug 2025 21:27:17 +0200
+ spf=pass smtp.mailfrom=cn.liweihao@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-61868d83059so854870a12.0
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 17:24:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755044663; x=1755649463; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zK7Q/xxR5WvgW0vKheG1nlaffEHnGCjGQ0xLxLHhwKQ=;
+ b=nqv271IACmfmxL3NHwG2QdFmHKDcPB15xwSZC5bek8fWoChCAWIKXhu4IAXo/dH/7W
+ qrSnjMcPVoWx6WRjIoq45LLaxjywduyIfYgT/IW4ZruOU436KJITjS+Ambwkn14PGxT5
+ km64W5gN55xY9ZS2O5X7oYdJSuaof55XEnPvfQoAnrN4kZnuNn7KoL2/lFG3Mxqbc+Dq
+ mfh3ln7FCx1RhuJhqiDQyOjr2UCmxK2PRXwPSjPqkeGYy+36K3zXVoyIVICpu+OBJNYR
+ iKCzC3gNqY0426pDD0WR6Z+b1CbatKglRxTExEu5Z6EQFg1mTH1h0ULYl8V5+IR2lCOg
+ a2/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755044663; x=1755649463;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zK7Q/xxR5WvgW0vKheG1nlaffEHnGCjGQ0xLxLHhwKQ=;
+ b=JM5JKVXXgsu0ftZrkZv2Fhu277ss8nuu2WrG0SE+NCGvmtNSwaPKA1HXnvPJKOSphN
+ 49AZaLOV7ZqVeeu5YCi+xJCoMF+Nn8OZBBbw/TWfh1GFnqJjvCTrX71aFRbm4diV7NC4
+ LGOc0H/Gf2Kkj6+o3vvHkFV7qrLey0hWUhNd/ctsEfyc691VoUpLqqdXOC28yS/8ZBoL
+ 4atJIPf9UMcJPsHa6OnVAke5GgHwC/+rKpO5AwzbyJt0juf6a/+VxKT3VwLEW5ieMRz9
+ 74LzBdsel3tNC0/WlFGenHvfT9KPBybgwzRy93h+DVGpwybsh+rSsFaWMoesSSEZos7M
+ 7lJA==
+X-Gm-Message-State: AOJu0Yzic996vWu7p2nZQckgyNESPeE0Ne+odX4DqdNG5fE8+6Tr8S17
+ W327f22Krj+1H9zPNfxHSXdtCP0JjlV1ma4KGc8WpOZg7vXBvZZHrBG8eUO/DXuqv4ZE6Ke045k
+ BfObiIY5qbH9BQZ9iXpkDOxWks3PpM1I=
+X-Gm-Gg: ASbGnctq9lNjoST2m5dR5Bp4u3OW6BQCVcbvvRMK3xj7yRCpOjZcN/8SNT9xLbpHSoZ
+ c/uxllx1MIuYG9PGmorgBb2TbreWgtnsGpauY/nXYIrtjGSSyscAWEv1bJOghHHpgyAiQvPI7br
+ RWeWinDmzVdUF8KNLBU6g+ESU7wpm4+po3XRfG9lE6JQWwKCslLW3alI2jCVJ4qIbeMTpO+qir0
+ /60CXBowKqLFAjkjGL35QoH
+X-Google-Smtp-Source: AGHT+IGAPHQWDApYDiFN+rh2laaIbuESd1Em2/KLfhfB9fJvwTLNi9jJghMMIuJ/cts3nwuTRgkbUbeipcOB9fNslCY=
+X-Received: by 2002:a17:907:9712:b0:af5:5d76:3fbd with SMTP id
+ a640c23a62f3a-afca83aa910mr49005266b.11.1755044662552; Tue, 12 Aug 2025
+ 17:24:22 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] env: Correct Kconfig type for ENV_MMC_SW_PARTITION
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20250812173109.1813657-1-trini@konsulko.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250812173109.1813657-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: r96isyeiamty8waqaqayywjossxscmau
-X-MBO-RS-ID: a34799a3e0d3e89d30a
-X-Rspamd-Queue-Id: 4c1hN84zhHz9t8b
+References: <20250807074419.336752-1-cn.liweihao@gmail.com>
+ <20250807074419.336752-3-cn.liweihao@gmail.com>
+ <9f234367-9ee0-4656-a222-d1c461a49c3d@kwiboo.se>
+In-Reply-To: <9f234367-9ee0-4656-a222-d1c461a49c3d@kwiboo.se>
+From: =?UTF-8?B?5p2O57u06LGq?= <cn.liweihao@gmail.com>
+Date: Wed, 13 Aug 2025 08:24:10 +0800
+X-Gm-Features: Ac12FXxbKBXh-pwvRJEq7z6Uy2ZO-f2E7oKj8wflcp2QzzWEN7H9A9IcvA8XiH0
+Message-ID: <CAPEOAkT4b2upydjPwamavCUbYYm_z_4Atf6Xvemha4HjDNyz=w@mail.gmail.com>
+Subject: Re: [PATCH 02/10] mmc: rockchip: fix clock get wrong index
+To: jonas@kwiboo.se
+Cc: u-boot@lists.denx.de, antonio.borneo@foss.st.com, mk7.kang@samsung.com, 
+ gregkh@linuxfoundation.org, semen.protsenko@linaro.org, 
+ mikhail.kshevetskiy@iopsys.eu, bb@ti.com, justin.swartz@risingedge.co.za, 
+ lukasz.czechowski@thaumatec.com, robh@kernel.org, tharvey@gateworks.com, 
+ clement.legoffic@foss.st.com, marek.vasut@mailbox.org, 
+ dinesh.maniyam@altera.com, patrice.chotard@foss.st.com, festevam@gmail.com, 
+ jerome.forissier@linaro.org, quentin.schulz@cherry.de, 
+ andrew.goodbody@linaro.org, sumit.garg@kernel.org, ag.dev.uboot@gmail.com, 
+ rfried.dev@gmail.com, joe.hershberger@ni.com, jh80.chung@samsung.com, 
+ peng.fan@nxp.com, seanga2@gmail.com, lukma@denx.de, kever.yang@rock-chips.com, 
+ philipp.tomsich@vrull.eu, sjg@chromium.org, trini@konsulko.com, 
+ WeiHao Li <ieiao@outlook.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 13 Aug 2025 02:24:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,13 +106,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/12/25 7:31 PM, Tom Rini wrote:
-> As part of renaming environment related Kconfig options,
-> ENV_MMC_SW_PARTITION was inadvertently changed from a string to a bool.
-> Correct this.
-> 
-> Fixes: ffc4914703a2 ("env: Rename ENV_MMC_PARTITION to ENV_MMC_SW_PARTITION")
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Hi Jonas,
 
-Thanks
+Thanks for your review.
+
+Jonas Karlman <jonas@kwiboo.se> =E4=BA=8E2025=E5=B9=B48=E6=9C=8813=E6=97=A5=
+=E5=91=A8=E4=B8=89 01:50=E5=86=99=E9=81=93=EF=BC=9A
+>
+> Hi,
+>
+> On 8/7/2025 9:44 AM, WeiHao Li wrote:
+> > Signed-off-by: WeiHao Li <ieiao@outlook.com>
+> > ---
+> >  drivers/mmc/rockchip_dw_mmc.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mm=
+c.c
+> > index 7a72abaa38..a3f001d7e7 100644
+> > --- a/drivers/mmc/rockchip_dw_mmc.c
+> > +++ b/drivers/mmc/rockchip_dw_mmc.c
+> > @@ -132,7 +132,7 @@ static int rockchip_dwmmc_probe(struct udevice *dev=
+)
+> >
+> >       ret =3D clk_get_by_phandle(dev, &dtplat->clocks[1], &priv->clk);
+> >  #else
+> > -     ret =3D clk_get_by_index(dev, 1, &priv->clk);
+> > +     ret =3D clk_get_by_index(dev, 0, &priv->clk);
+>
+> Index 1 is the ciu clk and matches the linux driver and u-boot driver
+> usage of the clock.
+>
+> Please explain why you think this should use index 0?
+>
+> Could it be the device tree that is using "wrong" clock order?,
+> the dt-binding define following order: biu, ciu, ciu-drive, ciu-sample.
+>
+> Or possible an issue in the rk3368 u-boot clk driver?
+>
+> Also if this is wrong then &dtplat->clocks[1] should also be changed.
+
+I'm also a little confused about this part, so I rechecking this part
+last night.
+
+I saw the rockchip downstream uboot driver uses index 0 at first and it wor=
+ks.
+But I noticed upstream driver commit history switch index between 0 and 1
+multi times, and stay 1 at then end.
+
+Then I looked rockchip other SOC's clock driver like RK3399 and RK3288, bot=
+h
+of these drivers are support HCLK_EMMC&SCLK_EMMC and its have exactly
+same logic.
+
+Because of that, I think the best solution is add SCLK_EMMC clock for RK336=
+8,
+I'll add and test it later.
+
+Please ignore this patch, I think it's inappropriate.
+
+>
+> Regards,
+> Jonas
+>
+> >  #endif
+> >       if (ret < 0 && ret !=3D -ENOSYS)
+> >               return log_msg_ret("clk", ret);
+>
+
+Best regards,
+WeiHao
