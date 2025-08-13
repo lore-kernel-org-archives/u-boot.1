@@ -4,86 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24EEFCA0EE0
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 14:54:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99370CA0EE0
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 15:40:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B76A82C84;
-	Wed, 13 Aug 2025 16:54:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CC8E835C7;
+	Wed, 13 Aug 2025 17:40:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XDp5PkKq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FtqBJR9j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2BB783641; Wed, 13 Aug 2025 16:25:20 +0200 (CEST)
-Received: from mail-ua1-x935.google.com (mail-ua1-x935.google.com
- [IPv6:2607:f8b0:4864:20::935])
+ id 230A183621; Wed, 13 Aug 2025 17:40:40 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1E0C803DF
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 16:25:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD9DC8211F
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 17:40:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gchan9527@gmail.com
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-88e373c07f8so1042903241.1
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 07:25:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-619bc5f638aso1154931eaf.0
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 08:40:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755095117; x=1755699917; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oHiC26WguChm2nmXJtRIRsaLpJKv8WmO3DsYwW7s1yU=;
- b=XDp5PkKqte6Xlfvhb/EDtOLn9NlCMBys90b7sFOJlwuUEXUBvHcv5iBaqjgXNCvuDL
- 382ODDuLghYL9EwNAeq/oDmDwKOaRnY8DNpYI1TFT8bJ6gk9BCQay3S6rK/k+9mS0ue4
- Z3dYWKVryWZjRt8tjEunX+yIvt0u6LAnG3htUvs1Vc7q6nNz6Tgish1O8bEePC8rb8qK
- +KJW5eEF3Q9ll2uGXF+G8b2k1yGbW1yqYPdZiIawjZ3O+XwbHU5P7xZf69CgrMLjFUCp
- 5d95gOw9qtQElL0jSW5d553rlI4yYXbrzzoH3jUOKH0Xqw/iJoxlaC8KqSQogkZYaMGD
- RcpQ==
+ d=konsulko.com; s=google; t=1755099636; x=1755704436; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rKywC7DwwFtDjNbG4pmTixmf24xjIKw0hJrJ28XDERc=;
+ b=FtqBJR9j9hZHNDAZjXr98XHuifvFFhS3FwV+rDAFDyMOIE0cR+/ash3HB2GJzCgrGO
+ 1Z3M91Rtj52JDpZu8wqWkBHrtNfwZsg3b4XxC07P2/RvINNUgJ6yqn/yEUYSC0ClykGg
+ 1sXVqYpZss0E0b6KsMvL+MiqfLTKPTqyxXhxs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755095117; x=1755699917;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oHiC26WguChm2nmXJtRIRsaLpJKv8WmO3DsYwW7s1yU=;
- b=C3R9DYK5EdIpXZDVTjdIFE/iNN0WM8PUDy8CYJ6vdOJxYAieJ4rVD3pjg0mx5Fw9QX
- h6F8lYhJWCQnv7zYhvHeL2IWg8k77zVoU92vQ3zfbtmogHiZsBHt/SV9NjDjNZ7ZBHTM
- yGl+Hkf4x8FyPYz/MRSzJCrW5taXHgsRm9Fz0uh/jZ6Rm67Uoe9qOYevVf+ahdLuT4Uu
- XGz0rHd1Kmo5GiceiAKLeYuz8sKW++qFhQEphVb0QtGYv6nz5mIPy21P5mSrEMQRVya2
- 9BoqbgQkjQ1z3WbigcLn1FS27CBOx7i7q97SJV5r1HAPOvh5+q4g7Bcex9EAFsSM40Jc
- T9gw==
+ d=1e100.net; s=20230601; t=1755099636; x=1755704436;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rKywC7DwwFtDjNbG4pmTixmf24xjIKw0hJrJ28XDERc=;
+ b=B5yWYQXOoX5r3LPFs9vXJHEeZ1k8t4hC+pDbwq2drpXjnG9MaMX22jjo4syxYPebIu
+ j8eWzwc3uuTAON5dXqTezWk9BOQeTImterZrENwIb0Jgo6TZAW0BD6AQWgb98jfyZ5IR
+ jcO7Ah++jCi0P35Zv1tVcgEdLaFK4k5C5naRd8IsSU19JMaNvA+GifR34MeRx/sW0Zq4
+ eWix/ykSNxFgVLKZozZnUlI9tBYX5RkNUgz15r0I8BquEKf94KIKSv9Dtuyb1WJERamX
+ XZQJS/h2SlNETUGGippKtVngHOAepDFDJBqPam18aDpOz1IiA8+nQDX8sDVtHgP/25oe
+ GWJQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIDML+bVLvtmOb1k3eGY8Gw4vu3yaxVVjJU5/IeeGBbth8nHQp98czwF7Y/KHq65+CO5yZ2Mg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzU0+nf++aFXWIxj5pqadwtzDJPGsoWBy1+7K7jJkUTpv+qTqAD
- hESCzr0WUsDe1nbSeJ2QqhKHXyIEwBCoPbDUqXeVyLHyJLZsjb9gy/040bFjmdKy3feaVLUBAZA
- koWfP6sgBpQEmwu5l6uvIIpnXeUD0yYc=
-X-Gm-Gg: ASbGncsdPw5AkvFVJY2/+Rdm8dEPYRjsJGb9I82jGvH4zREnio7CvlPqEyXaqrh05oV
- rV8CbYBeBPnP7uCbpYDFCNhqxmXRwDlrS7Y6RSgQ2Dh/tc5Q8EQR8g4gFeEiIYGIfo0Vm+fmyrP
- 8RBLOSiYdji35fszNK4/SJueKZeCS9+aYsBrxPvm0XLDF+3bOUWTKZ0LqS8IdghmjPXxdiUoeL5
- 0P9U7ES6w==
-X-Google-Smtp-Source: AGHT+IFYIVLUkQMrKjf/2P2iHWWNDe04OR0rrKPPF6QePJ69tAOmJZKesv+moDzPrCs09tCaCoTuk/fwAAQkaqwUOko=
-X-Received: by 2002:a67:f342:0:b0:4e2:aafe:1bde with SMTP id
- ada2fe7eead31-50e80e0b912mr779255137.9.1755095111763; Wed, 13 Aug 2025
- 07:25:11 -0700 (PDT)
+ AJvYcCWIhhR/SMcMUtqdliMJJ0+uSMBb3g1n3HeVW4NvIClTLSOsnQcqT3zn+pCKKYQY6m/sasyTvV0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzY8dFHdrI+IkPZDcfFigKXMdpzFFzPSXlvNKb6VNvx6stJ87Hw
+ AqaWD/BUyPfk44Kv9Pb0hrjXhDMEabfu96OftpT6UDQk1dBSEcSnr1eXdvBGXOzt2dM=
+X-Gm-Gg: ASbGncvYdbhXLUY0Wl7IER2vyvw4EqxZEbi+w+aGMuAp0HCf4MV2A2dAZFR5RnQRy2r
+ df78Nsq+P7ESyZyL27Zern/WB5s7lCPQZ4RIYEnT8qmfM7sQxIoc0CekJbI+j13cNSzF2V/6x84
+ FrE+veS/7EFdjG4y1LdowoqPvtmCumDQYS4A6na5eBPejgAgiIFk4Tg0jgShsSJV3TUU0WK+qk5
+ ZK/KAa2feNtkO95LNqGwYJEevlrRvzXs8V9/kvoCMtFY2rxKZpbTqqhH9xRISDQdH6eZueGK4T+
+ XCIeq4wS7exqDZR0si8Dk1ReNixa0U+q9YLbjdIwrh8XzAO1pwocshsR4U5CmOhLm/w3zxlae/C
+ rx20qKHSTNSGIeQwQY9sVZ0qciecLXM4v+VE4yaTQCc4k+8jiy0Mw7Cun
+X-Google-Smtp-Source: AGHT+IFlyVZge3A1OUy7MKVoMJTyZt1wWlYYZMALTjC+3pANqtrSNo9EqU4Sk+XzboneG4a7LtA8aQ==
+X-Received: by 2002:a05:6808:4f66:b0:435:722d:f7c6 with SMTP id
+ 5614622812f47-435d424642dmr2253600b6e.18.1755099636220; 
+ Wed, 13 Aug 2025 08:40:36 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-435ce8b4028sm682620b6e.33.2025.08.13.08.40.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Aug 2025 08:40:35 -0700 (PDT)
+Date: Wed, 13 Aug 2025 09:40:33 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: Seeking advice on API return type inconsistency
+Message-ID: <20250813154033.GB124814@bill-the-cat>
+References: <f5c94319-8ef8-459d-88b2-836702779cfb@linaro.org>
+ <e10a39e4-9606-4ae4-86dd-11de4b39b5ed@cherry.de>
+ <2d6457b8-c637-4531-8f56-e2aea320a319@linaro.org>
+ <20250812143349.GQ124814@bill-the-cat>
+ <cc82add8-5f9c-4ee1-87ea-a458e840e621@linaro.org>
+ <20250812150359.GS124814@bill-the-cat>
+ <56d03251-1185-44ca-98e6-f45ac0e0af53@linaro.org>
+ <aJx54frzXkLRFcGO@kitsune.suse.cz>
 MIME-Version: 1.0
-References: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
- <764f11e1-c269-4ad1-8d5e-6054de6eec4a@linaro.org>
-In-Reply-To: <764f11e1-c269-4ad1-8d5e-6054de6eec4a@linaro.org>
-From: george chan <gchan9527@gmail.com>
-Date: Wed, 13 Aug 2025 22:24:59 +0800
-X-Gm-Features: Ac12FXxza9QmZUnY73wbyeYh_vvEb2-f2Yj0FvvHwys9XEX1dFo-RIAPMMhS9X0
-Message-ID: <CADgMGStoszaTWEsWbCa70g0twnYNbQBEqvfcm406h00wn3R0hw@mail.gmail.com>
-Subject: Re: [PATCH v4 0/6] A series of patch for enable sc7180 android boot
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Vitalii Skorkin <nikroks@mainlining.org>
-X-Mailman-Approved-At: Wed, 13 Aug 2025 16:54:04 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Xg5OWSto4fWg85jF"
+Content-Disposition: inline
+In-Reply-To: <aJx54frzXkLRFcGO@kitsune.suse.cz>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,130 +106,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[resend with full list, sorry for duplicated email]
 
-Hi Casey,
+--Xg5OWSto4fWg85jF
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for getting back with the the patch series.
+On Wed, Aug 13, 2025 at 01:41:21PM +0200, Michal Such=E1nek wrote:
+> Hello,
+>=20
+> On Wed, Aug 13, 2025 at 11:58:19AM +0100, Andrew Goodbody wrote:
+> > On 12/08/2025 16:03, Tom Rini wrote:
+> > > On Tue, Aug 12, 2025 at 03:46:56PM +0100, Andrew Goodbody wrote:
+> > > > On 12/08/2025 15:33, Tom Rini wrote:
+> > > > > On Tue, Aug 12, 2025 at 10:17:47AM +0100, Andrew Goodbody wrote:
+> > > > > > On 11/08/2025 17:36, Quentin Schulz wrote:
+> > > > > > > Hi Andrew,
+> > > > > > >=20
+> > > > > > > On 8/11/25 5:24 PM, Andrew Goodbody wrote:
+> > > > > > > > Hi,
+> > > > > > > >=20
+> > > > > > > > I was wondering what people's thoughts were on API return t=
+ypes. In
+> > > > > > > > particular there is this and other examples in include/clk-=
+uclass.h
+> > > > > > > >=20
+> > > > > > > > /**
+> > > > > > > >   =A0=A0* get_rate() - Get current clock rate.
+> > > > > > > >   =A0=A0* @clk:=A0=A0=A0 The clock to query.
+> > > > > > > >   =A0=A0*
+> > > > > > > >   =A0=A0* This returns the current rate of a clock. If the =
+clock is
+> > > > > > > > disabled, it
+> > > > > > > >   =A0=A0* returns the rate at which the clock would run if =
+it was enabled. The
+> > > > > > > >   =A0=A0* following pseudo-code should hold::
+> > > > > > > >   =A0=A0*
+> > > > > > > >   =A0=A0*=A0=A0 disable(clk)
+> > > > > > > >   =A0=A0*=A0=A0 rate =3D get_rate(clk)
+> > > > > > > >   =A0=A0*=A0=A0 enable(clk)
+> > > > > > > >   =A0=A0*=A0=A0 assert(get_rate(clk) =3D=3D rate)
+> > > > > > > >   =A0=A0*
+> > > > > > > >   =A0=A0* Return:
+> > > > > > > >   =A0=A0* * The rate of @clk
+> > > > > > > >   =A0=A0* * -%ENOSYS if this function is not implemented fo=
+r @clk
+> > > > > > > >   =A0=A0* * -%ENOENT if @clk->id is invalid. Prefer using a=
+n assert
+> > > > > > > > instead, and doing
+> > > > > > > >   =A0=A0*=A0=A0 this check in request().
+> > > > > > > >   =A0=A0* * Another negative error value (such as %EIO or %=
+ECOMM) if the
+> > > > > > > > rate could
+> > > > > > > >   =A0=A0*=A0=A0 not be determined due to a bus error.
+> > > > > > > >   =A0=A0*/
+> > > > > > > > ulong get_rate(struct clk *clk);
+> > > > > > > >=20
+> > > > > > > >=20
+> > > > > > > > get_rate is declared as returning a ulong but the descripti=
+on says
+> > > > > > > > that it can return negative errors. A simple test of the re=
+turn
+> > > > > > > > value for being less than 0 will always fail so errors can =
+go
+> > > > > > > > undetected. Casting to a signed type seems less than ideal.
+> > > > > > > >=20
+> > > > > > > > What is the best way to deal with this? Cast to a signed or=
+ update
+> > > > > > > > the API to be signed or...?
+> > > > > > > >=20
+> > > > > > >=20
+> > > > > > > Note that clk_get_rate() in the kernel has the same function =
+signature
+> > > > > > > so I would refrain from changing the type otherwise we'll hav=
+e some
+> > > > > > > "funny" bugs to handle considering it isn't that uncommon to =
+import
+> > > > > > > drivers almost as-is from the Linux kernel.
+> > > > > >=20
+> > > > > > Ah yes. The difference being that the kernel does not seem to a=
+ttempt to
+> > > > > > push an error code through this API, you get a rate or you get =
+0.
+> > > > >=20
+> > > > > How is the error code pushed? Or is it up to the caller to decide=
+ that 0
+> > > > > means on a case by case basis?
+>=20
+> Presumably it returns -EBUSY which is then implicitly converted to a large
+> positive value. For pointers there is IS_ERR macro to decode that, and
+> for integers there is another corresponding macro (I don't recall the
+> name).
+>=20
+> For memory this assumes that the last page that holds the 'error'
+> pointers cannot be mapped, and there was already a bug in the kernel
+> that this was not true.
+>=20
+> For clock rates this assumes that rates close to the maximum value are
+> invalid which is not guaranteed in any way whatsoever.
+>=20
+> Consequently, this should not be used.
+>=20
+> 0 is the only clock rate guaranteed to be invalid.
+>=20
+> As far as I have seen in the u-boot code almost no caller checks the
+> result, and those that do cannot do anything meaningful with it anyway,
+> at most a message is printed. That can be done by the driver without
+> passing around the error.
+>=20
+> > > > In the Linux kernel almost no code checks the return of clk_get_rat=
+e at all.
+> > > > Some code will check the value is sensible and 0 is obviously not s=
+ensible.
+> > > > But pretty much the call to clk_get_rate is not expected to fail.
+> > >=20
+> > > Perhaps getting lost in the specifics then, but perhaps for this case=
+ we
+> > > should just do the same? But your question was more general, so anoth=
+er
+> > > example might help.
+> >=20
+> > I suspect that the answer is always going to that it depends on the
+> > specifics of each case. The U-Boot implementation of clk_get_rate seems=
+ to
+> > have become more complicated leading to the addition of returning error
+> > codes. This leads to the question about what level of compatibility sho=
+uld
+> > there be maintained with the kernel? That addition of returning error c=
+odes
+> > in U-Boot already means that the API is no longer compatible with that =
+of
+> > the kernel.
+>=20
+> I would suggest to abolish returning 'errors' as clock rates.
 
-=E5=9C=A8 2025=E5=B9=B48=E6=9C=8813=E6=97=A5=E9=80=B1=E4=B8=89 21:39=EF=BC=
-=8CCasey Connolly <casey.connolly@linaro.org> =E5=AF=AB=E9=81=93=EF=BC=9A
+Yes, I think this is a case where we should change our internal API,
+both for easier driver migrations from the linux kernel and also because
+it seems our design here can't quite work as intended.
 
-> Hi George,
->
-> Sorry for not getting around to this sooner, I got it mixed up with your
-> other patch series!
->
-> I think this is ready to go but there's a few checkpatch errors, can you
-> run "b4 prep --check", fix the issues and then resend this and I'll pick
-> it up for next.
->
+--=20
+Tom
 
-i am afraid it is still have some sort of concern about the logic change.
-So even through with respin....I suggested[1] to get those patches with
-review-by to get in this round, and leave the yet-to-discuss as independent
-patch later.
+--Xg5OWSto4fWg85jF
+Content-Type: application/pgp-signature; name="signature.asc"
 
-If you agreed with this arrangement then please git cherry-pick from this
-series, or once found difficulty then let me know I can start a fresh new
-series for you.
+-----BEGIN PGP SIGNATURE-----
 
-Thanks,
-George
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJyx5gAKCRAr4qD1Cr/k
+CnZaAQCYm+ylnt1BgeeFamc69P+RVZTCoEOcM4imAu0nkn3ndwD9E6sEGEgi0IEj
+lcWeyFP8C6wzObBoE/yuW/rnEmRRlAc=
+=OMMz
+-----END PGP SIGNATURE-----
 
-[1]https://lists.denx.de/pipermail/u-boot/2025-July/594610.html
-
-
-> Thanks and regards,
->
-> On 30/06/2025 09:56, George Chan via B4 Relay wrote:
-> > Since attempt[1] to embed android specific boot param into fdt bootargs=
-,
-> > a new idea is formed as to make use of env file to contain default para=
-m
-> > value. Current code logic is already working fine, unless the priority
-> > of param at begining is higher than at tail. From env file, bootargs is
-> > treated important, and prepend at begining. So there is a need to
-> > reverse the logic, and make sure default bootargs value at the end, and
-> > let androidboot img bootargs value sit at begining.
-> >
-> > So a new kconfig item is introduced. Once enabled, the bootargs strcat
-> > param will get reversed.
-> >
-> > A similar logic is needed for fastboot->bootm glue function, so split
-> > function of patch #1 into 2 functions as #2, fixed some issues #3, and
-> > apply #4 with same trick to glue function too.
-> >
-> > Some one-liners patch is included to enable device driver for sc7180
-> > soc. It is about iommu for usb, usb gadget vendor/product id.
-> >
-> > Reduce dependency on abootimg when androidboot v3 or greater is not
-> > needed. Since Tom suggested to reduce __maybe_unused directive and
-> > use IS_ENABLE() instead; two __weak func proto need to add into image.h
-> >
-> > [1]https://lists.denx.de/pipermail/u-boot/2025-May/588828.html
-> > [2]https://lists.denx.de/pipermail/u-boot/2025-May/589926.html
-> >
-> > Signed-off-by: George Chan <gchan9527@gmail.com>
-> > ---
-> > Changes in v4:
-> > - Drop patch #3.
-> > - Refine #2 to remove intermediate variables and code style.
-> > - Link to v3:
-> https://lore.kernel.org/r/20250628-sc7180-android-boot-v3-0-105098a19165@=
-gmail.com
-> >
-> > Changes in v3:
-> > - Collect acks-by and review-by.
-> > - Split function and replace old #2 into #2-#4, code reuse in #4
-> > - Modify changelog and Kconfig description of #1, suggested by Mattijs
-> > - Slightly modify #5, add back line break.
-> > - Rebase to latest next
-> > - Link to v2:
-> https://lore.kernel.org/r/20250607-sc7180-android-boot-v2-0-2df5d7f61124@=
-gmail.com
-> >
-> > Changes in v2:
-> > - Add new patch #2 that is same trick as #1 to fastboot->bootm glue
-> layer.
-> > - Remove default n to patch #1, suggested by Tom.
-> > - Use IS_ENABLE() instead, suggested by Tom.
-> > - Collect review-by from Casey and Neil.
-> > - Rebase to u-boot/next branch.
-> > - CCing myself too.
-> > - Link to v1:
-> https://lore.kernel.org/r/20250520-sc7180-android-boot-v1-0-3075a84ea094@=
-gmail.com
-> >
-> > ---
-> > George Chan (6):
-> >       image-android: Prepend/postpend default bootargs value with given
-> bootcmd
-> >       boot/image-android.c: Split android_image_get_kernel into two
-> functions
-> >       bootm: Append bootargs value when bootmeth_android provide cmdlin=
-e
-> >       boot: bootmeth_android: Conditionally dependent on abootimg
-> >       iommu: qcom-smmu: Introduce sc7180 compatible string
-> >       usb: gadget: Introduce usb gadget vendor/product default id for
-> ARCH_QCOM
-> >
-> >  boot/Kconfig                  |  9 ++++
-> >  boot/bootm.c                  |  2 +-
-> >  boot/bootmeth_android.c       |  2 +-
-> >  boot/image-android.c          | 97
-> ++++++++++++++++++++++++++++---------------
-> >  drivers/iommu/qcom-hyp-smmu.c |  1 +
-> >  drivers/usb/gadget/Kconfig    |  2 +
-> >  include/image.h               | 14 +++++++
-> >  7 files changed, 92 insertions(+), 35 deletions(-)
-> > ---
-> > base-commit: 490ae8ceae2d5999c9de863e014e463f5c1495a6
-> > change-id: 20250520-sc7180-android-boot-a845ecf48a48
-> >
-> > Best regards,
->
-> --
-> // Casey (she/her)
->
->
+--Xg5OWSto4fWg85jF--
