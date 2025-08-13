@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78FDCC87FCF
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 14:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6EA7CA0EE0
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 14:08:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86BC98362A;
+	by phobos.denx.de (Postfix) with ESMTP id D088983641;
 	Wed, 13 Aug 2025 16:07:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E83B283623; Wed, 13 Aug 2025 16:07:54 +0200 (CEST)
-Received: from smtp-1908.mail.infomaniak.ch (smtp-1908.mail.infomaniak.ch
- [185.125.25.8])
+ id 432E183623; Wed, 13 Aug 2025 16:07:55 +0200 (CEST)
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [84.16.66.174])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34D1C829F5
+ by phobos.denx.de (Postfix) with ESMTPS id EF822835FE
  for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 16:07:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,22 +25,20 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4c29F35Qh5zvkh;
- Wed, 13 Aug 2025 16:07:51 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4c29F450R1ztyD;
+ Wed, 13 Aug 2025 16:07:52 +0200 (CEST)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4c29F21TT0zKcP; Wed, 13 Aug 2025 16:07:50 +0200 (CEST)
+ id 4c29F35nrfzD3h; Wed, 13 Aug 2025 16:07:51 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH v2 0/5] power: rk8xx: allow to customize RK806 reset mode
- -- cover
-Date: Wed, 13 Aug 2025 16:07:38 +0200
-Message-Id: <20250813-rk8xx-rst-fun-v2-0-a2223e17cb2c@cherry.de>
+Date: Wed, 13 Aug 2025 16:07:39 +0200
+Subject: [PATCH v2 1/5] dt-bindings: mfd: rk806: Allow to customize PMIC
+ reset mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACqcnGgC/13MQQ6CMBCF4auQWTuGVuyAK+9hWNQytY0JmCkSC
- OHuVty5/F/yvhUSS+QEl2IF4SmmOPQ59KEAF2z/YIxdbtClPpdGE8qznmeUNKJ/9+jrE5M11la
- Vhfx5Cfs4796tzR1iGgdZdn5S3/UnkTJ/0qRQoTaNJnJ3ooavLrDIcuwY2m3bPumsh/2qAAAA
-X-Change-ID: 20250627-rk8xx-rst-fun-f83e7a6aa44a
+Message-Id: <20250813-rk8xx-rst-fun-v2-1-a2223e17cb2c@cherry.de>
+References: <20250813-rk8xx-rst-fun-v2-0-a2223e17cb2c@cherry.de>
+In-Reply-To: <20250813-rk8xx-rst-fun-v2-0-a2223e17cb2c@cherry.de>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
@@ -48,8 +46,7 @@ To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
  Sebastian Reichel <sebastian.reichel@collabora.com>
 Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
  Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, 
- "Rob Herring (Arm)" <robh@kernel.org>, Lee Jones <lee@kernel.org>, 
- Heiko Stuebner <heiko@sntech.de>
+ "Rob Herring (Arm)" <robh@kernel.org>, Lee Jones <lee@kernel.org>
 X-Mailer: b4 0.14.2
 X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
@@ -68,42 +65,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RK3588 Theobroma boards (Tiger and Jaguar) need a different reset
-mode for the PMIC to work properly, c.f. DT patches in this series.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-While the kernel just recently (v6.17-rc1) gained support for setting
-this appropriately, all upstream kernels before that release will simply
-not behave appropriately for those boards. While it is typically much
-easier to update the Linux kernel than U-Boot, let's cover all possible
-scenario by adding support for setting this reset mode properly from
-U-Boot so that there isn't a need for patching or updating the kernel.
+The RK806 PMIC allows to configure its reset/restart behavior whenever
+the PMIC is reset either programmatically or via some external pins
+(e.g. PWRCTRL or RESETB).
 
+The following modes exist:
+ - 0; restart PMU,
+ - 1; reset all power off reset registers and force state to switch to
+   ACTIVE mode,
+ - 2; same as mode 1 and also pull RESETB pin down for 5ms,
+
+For example, some hardware may require a full restart (mode 0) in order
+to function properly as regulators are shortly interrupted in this mode.
+
+This is the case for RK3588 Jaguar and RK3588 Tiger which have a
+companion microcontroller running on an independent power supply and
+monitoring the PMIC power rail to know the state of the main system.
+When it detects a restart, it resets its own IPs exposed to the main
+system as if to simulate its own reset. Failing to perform this fake
+reset of the microcontroller may break things (e.g. watchdog not
+automatically disabled, buzzer still running until manually disabled,
+leftover configuration from previous main system state, etc...).
+
+Some other systems may be depending on the power rails to not be
+interrupted even for a small amount of time[1].
+
+This allows to specify how the PMIC should perform on the hardware level
+and may differ between hardware designs, so a DT property seems
+warranted. I unfortunately do not see how this could be made generic
+enough to make it a non-vendor property.
+
+[1] https://lore.kernel.org/linux-rockchip/2577051.irdbgypaU6@workhorse/
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
-Changes in v2:
-- added DT patches from v6.17-rc1
-- Link to v1: https://lore.kernel.org/r/20250716-rk8xx-rst-fun-v1-1-269277cb779e@cherry.de
+Reviewed-by: "Rob Herring (Arm)" <robh@kernel.org>
+Link: https://lore.kernel.org/r/20250627-rk8xx-rst-fun-v4-1-ce05d041b45f@cherry.de
+Signed-off-by: Lee Jones <lee@kernel.org>
 
----
-Quentin Schulz (5):
-      dt-bindings: mfd: rk806: Allow to customize PMIC reset mode
-      arm64: dts: rockchip: add header for RK8XX PMIC constants
-      arm64: dts: rockchip: force PMIC reset behavior to restart PMU on RK3588 Jaguar
-      arm64: dts: rockchip: force PMIC reset behavior to restart PMU on RK3588 Tiger
-      power: rk8xx: allow to customize RK806 reset mode
+[ upstream commit: 404005d1083997daec7236620b9ba14bccdce449 ]
 
- drivers/power/pmic/rk8xx.c                        | 21 ++++++++++++---------
- dts/upstream/Bindings/mfd/rockchip,rk806.yaml     | 21 +++++++++++++++++++++
- dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts |  2 ++
- dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi |  2 ++
- dts/upstream/src/arm64/rockchip/rk8xx.h           | 18 ++++++++++++++++++
- include/power/rk8xx_pmic.h                        |  2 ++
- 6 files changed, 57 insertions(+), 9 deletions(-)
+(cherry picked from commit 8ee72356e9844265334fd344bc05139d1f615c4d)
 ---
-base-commit: 83ce0b483c1680cb39565a9d91c6ef113a309c38
-change-id: 20250627-rk8xx-rst-fun-f83e7a6aa44a
+ dts/upstream/Bindings/mfd/rockchip,rk806.yaml | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-Best regards,
+diff --git a/dts/upstream/Bindings/mfd/rockchip,rk806.yaml b/dts/upstream/Bindings/mfd/rockchip,rk806.yaml
+index 3c2b06629b75ea94f90712470bf14ed7fc16d68d..eb5bca31948ef0d39c46025d0cca65b8b4105a50 100644
+--- a/dts/upstream/Bindings/mfd/rockchip,rk806.yaml
++++ b/dts/upstream/Bindings/mfd/rockchip,rk806.yaml
+@@ -31,6 +31,27 @@ properties:
+ 
+   system-power-controller: true
+ 
++  rockchip,reset-mode:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    enum: [0, 1, 2]
++    description:
++      Mode to use when a reset of the PMIC is triggered.
++
++      The reset can be triggered either programmatically, via one of
++      the PWRCTRL pins (provided additional configuration) or
++      asserting RESETB pin low.
++
++      The following modes are supported
++
++      - 0; restart PMU,
++      - 1; reset all power off reset registers and force state to
++        switch to ACTIVE mode,
++      - 2; same as mode 1 and also pull RESETB pin down for 5ms,
++
++      For example, some hardware may require a full restart (mode 0)
++      in order to function properly as regulators are shortly
++      interrupted in this mode.
++
+   vcc1-supply:
+     description:
+       The input supply for dcdc-reg1.
+
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.50.1
 
