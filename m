@@ -4,50 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33AB6C87FCF
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 06:16:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD810C87FCF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 06:21:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3247182EB8;
-	Wed, 13 Aug 2025 08:16:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 458F382EB8;
+	Wed, 13 Aug 2025 08:21:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CBCEA82F00; Wed, 13 Aug 2025 08:16:54 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CC0C82E34
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 08:16:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 57D6Ggji093220
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK)
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 14:16:42 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 13 Aug
- 2025 14:16:42 +0800
-From: Leo Yu-Chi Liang <ycliang@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <ycliang@andestech.com>
-Subject: [PATCH 1/1] common: spl: fix compilation warning
-Date: Wed, 13 Aug 2025 14:16:35 +0800
-Message-ID: <20250813061635.3908363-1-ycliang@andestech.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gfa0IFVr";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 57696831BB; Wed, 13 Aug 2025 08:21:17 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DD13E82E34
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 08:21:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e8e1ae319c6so5011686276.0
+ for <u-boot@lists.denx.de>; Tue, 12 Aug 2025 23:21:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755066074; x=1755670874; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=l0XsqmjKzY9ukhYz+FkYsE6XLbVEDfw5GURI9XWWlHc=;
+ b=gfa0IFVr69dC0BGVNGW+w9AvhY4W35Rw2/VjzLM2EGngYKVBe0+iGBlsbw2ytkWQcy
+ HvvC1FwJb577ejCkWxiVJhL1VDACBLyDV0TiHqjOaOEPkkzCQKNQAleASCgyqEWX1i/L
+ BPbo8ToZSq0ZOqURuRucJhHS6z6fJ2U+AIAv+UEIT0ladtWWV+9C7SmWwhHhpmq/U8zn
+ t6CrnvK1R5T4Z31YEjVKRzr7zE6ibS23d77BNmeWMT8sv4EnyzWIB9euvoA+PUuadgQS
+ UGtt7sP9rljBgTOFcZN4AiFmLoMWiEH9ixJn6C9pdW9EnHT+rg74XJ+MGQQ8EAqZszzc
+ dojA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755066074; x=1755670874;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l0XsqmjKzY9ukhYz+FkYsE6XLbVEDfw5GURI9XWWlHc=;
+ b=HGAl7XJt4PVSQHBGjC1CVP/AmiFDp++lbp5hhJcNfti9YnPXnReB5u0x6r0OzM4Z1p
+ a7NKtJoxRazfx8556PqVql0DR4DaKXsghfdfVmXeCPniF6coYcnm7S6yMzwN6GRqGDm8
+ NDr1CBigPm7ydeFqsSM70VbWbiTm0fIXbQZnn3OzlarhtTnYZ69UkXeEnnIi0BNjeLl2
+ zxifo5Bj7YsMjbVBjykdI+HtHBhksAVIyRoyYpODdgnHx/nLAHP9qaKNoqrUvIi6XEwR
+ ZQiaw4+tMeIKmYEYgjLm+p7lIWWDqIMADy3ZxBFJgaPiZVzn8o8UkSzFmij3igNKQnce
+ +fig==
+X-Gm-Message-State: AOJu0Yy0Nej5Rq7DRVYWbtkJaTDvKYuFYKG0F0l8B76vbt6eE5hLuNvb
+ UvWnhdxZkbsjU58FaMYvIDw1tboHXx01IFd4xXKn2W5sDJpSzEOubBj2bI++GvqW2nJ3epFCW/5
+ e2KiiyBX2kHJJjSa9fGJnExnocOga0GqsBZyMkRqbUQ==
+X-Gm-Gg: ASbGncuZ6BMD0U13UCKn4Kwrc8jIxoWOgRN7Z+gCYQDCOR9fyNB7te1yNzjLQnBcs9P
+ OmF4mJUjLYc+Bi8URhhYsesa6zQt10ioxQJZKWiHsVd3YBc6uMWqYpgU7KR0Du0+J/hEmDFtVPT
+ Psz1SR6ll0dRpZThCn1PVm3l9Nt4ObPAKMEcGudDkMF7F7CwAFhmJuxAeO94K5xcLP1csL/gzOW
+ WERAJBe
+X-Google-Smtp-Source: AGHT+IGKk2bAnv/bZgo+HxWyLizPc3dZgLjRa9kAiYURNIcT2xfpPo4t6PQ05iOSQD2Y2EDFzStQA0IooUmTy29KcDI=
+X-Received: by 2002:a05:690c:6511:b0:71c:1395:c8bf with SMTP id
+ 00721157ae682-71d4e3f6182mr20498947b3.4.1755066073686; Tue, 12 Aug 2025
+ 23:21:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 57D6Ggji093220
+References: <20250812180132.3057893-1-trini@konsulko.com>
+In-Reply-To: <20250812180132.3057893-1-trini@konsulko.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 13 Aug 2025 09:20:37 +0300
+X-Gm-Features: Ac12FXx83oxKu-ONUc3nG_ZBn3TbaP3MH3qSG9R7sdNsE0nziW71aODgg42B8UE
+Message-ID: <CAC_iWjLv5YQEe=p80c4Wn5Bnm=wTqK5+_o-KWYUVHMBaXdxxFA@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: Make EFI_VARIABLES_PRESEED depend on
+ !COMPILE_TEST
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,29 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Explicitly specify the type by replacing macro with variable
-to fix the possible compilation warning.
+On Tue, 12 Aug 2025 at 21:01, Tom Rini <trini@konsulko.com> wrote:
+>
+> When doing compile testing build we cannot rely on having a valid file
+> for EFI_VAR_SEED_FILE to exist, so disable this option when doing
+> compile tests.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> This was found when working on "allyesconfig" and the issue is that the
+> file in EFI_VAR_SEED_FILE will not exist.
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  lib/efi_loader/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index c2aa88f59fbb..a7092c2e8a8a 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -195,6 +195,7 @@ endchoice
+>
+>  config EFI_VARIABLES_PRESEED
+>         bool "Initial values for UEFI variables"
+> +       depends on !COMPILE_TEST
+>         depends on !EFI_MM_COMM_TEE
+>         help
+>           Include a file with the initial values for non-volatile UEFI variables
+> --
+> 2.43.0
+>
 
-Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
----
- common/spl/spl.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index ed443c645a7..55ad497c86d 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -278,8 +278,8 @@ void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
- 	} else {
- 		spl_image->entry_point = CONFIG_SYS_UBOOT_START;
- 		spl_image->load_addr = CONFIG_TEXT_BASE;
--		log_debug("Default load addr %x (u_boot_pos=%lx)\n",
--			  CONFIG_TEXT_BASE, u_boot_pos);
-+		log_debug("Default load addr %lx (u_boot_pos=%lx)\n",
-+			  spl_image->load_addr, u_boot_pos);
- 	}
- 	spl_image->os = IH_OS_U_BOOT;
- 	spl_image->name = xpl_name(xpl_next_phase());
--- 
-2.34.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
