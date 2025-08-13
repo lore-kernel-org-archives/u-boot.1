@@ -4,78 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A68CA0EE0
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 21:41:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28102CA0EE0
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 23:22:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 435E282ADA;
-	Wed, 13 Aug 2025 23:41:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7A4E683775;
+	Thu, 14 Aug 2025 01:22:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Bc7TrepO";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xq9Gup8v";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kkRY4Blx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24CE2836C8; Wed, 13 Aug 2025 23:41:12 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C64E082A53
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 23:41:09 +0200 (CEST)
+ id D3674837B9; Wed, 13 Aug 2025 23:47:13 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DD39E83775
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 23:47:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4c2MJ54Bxgz9stK;
- Wed, 13 Aug 2025 23:41:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755121269;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Z1mmRfzQVDoTnHKJ+Mq3ts6PPxPWVsOhP9NjAqEJOBU=;
- b=Bc7TrepOUwUN0aqf7W4dRelLDRp8chvG3UXyV9/usCsonTXnYkm/pHh88V6W8M3W8kUzX+
- nnadeOcx3W9EQ3NoPz2KEGjwaoSw/Xcf1+5DRyP/t3cqumX+sO+pTyiqaqzL9YL9xuQlkX
- 3m4NMveMgYuW6YZcG1tY7iKf2wS5pt8Bjos0yDTDJ2SlQKY093teODOf2Nxw7t/6++9bsT
- QsL/azGb8h2TwWKqBgJyFYaWZGq6acCdn+E/sN+RVpe9N+9J8IP0d6Ix4erYpScVhuJjay
- 0Vq0uFi4Oy5rScOTMGyOwuLLt+7/W6iLR5wDJny12leanpmw6YYoemZCGjStcw==
-Message-ID: <78d92d4d-c665-4d95-bfee-68d3b79efa2b@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755121267;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Z1mmRfzQVDoTnHKJ+Mq3ts6PPxPWVsOhP9NjAqEJOBU=;
- b=xq9Gup8vHj5yNGGnJmUBPzJA7HbbOgpZHx8W7pLG2ryKr7Zd73nzr6jlr/BJlWP+dzm3d5
- BYVXleshTAcx30FyRFNM2xkZo8aQdDlRypaVsrMpqrCnhTY2SozBwYz4s6EEEKauRSypGx
- jKoqsObMwe1BwcAvSk3KJHEhNwaenFZVQFQ+r92GtsLWO2J+So39zjGNzxLS8oPIDRwP6W
- gUIYLJN2OzZikgYOS1OglSR0DXkSxLdBSyusAvqbucn1H1/WVUtMcOrh5qDH3JTRUz29Vu
- yFQDfsme3k1wKcLM/2LVv1zP/gyFbnSsPlKIvFYRDd3S2QafGIYbTAZdeKjuTw==
-Date: Wed, 13 Aug 2025 23:41:03 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hnagalla@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57DLl87P1789439;
+ Wed, 13 Aug 2025 16:47:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1755121628;
+ bh=BDft3S5kQb7Td1+lHeDKZyT1Y+dMknoY0i+wCIJr4oo=;
+ h=From:To:CC:Subject:Date;
+ b=kkRY4Blx+WCCs4dkRtWNWXOA/hQ+dXSJwpKi+rynYn53aYwFZUovsJLCVps1rdNRR
+ PFwkWa4BSYwVeHai314Rk+TtT5pDgVfNhwv865mFEF7F0oM6Xg1CqItitTngXCEt4X
+ 8xUmY7UG+05kNflleo38lDZGkuwI53UnjZrXixuM=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57DLl8KG356348
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 13 Aug 2025 16:47:08 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 13
+ Aug 2025 16:47:08 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 13 Aug 2025 16:47:08 -0500
+Received: from localhost ([10.249.48.175])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57DLl8YW2921933;
+ Wed, 13 Aug 2025 16:47:08 -0500
+From: Hari Nagalla <hnagalla@ti.com>
+To: <trini@konsulko.com>
+CC: <vigneshr@ti.com>, <afd@ti.com>, <b-padhi@ti.com>, <jm@ti.com>,
+ <u-kumar1@ti.com>, <u-boot@lists.denx.de>, Hari Nagalla <hnagalla@ti.com>
+Subject: [PATCH] remoteproc: k3-r5: Add support for single cpu mode
+Date: Wed, 13 Aug 2025 16:47:05 -0500
+Message-ID: <20250813214705.12774-1-hnagalla@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: Re: [U-Boot, v4, 1/1] misc: fs_loader: Add
- request_firmware_into_buf_via_script() for flexible firmware loading via
- U-Boot script
-To: "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de,
- marek.vasut+renesas@mailbox.org, tien.fong.chee@altera.com,
- trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, seanga2@gmail.com,
- daniel@makrotopia.org
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de, albert-al.lee@airoha.com
-References: <20250804150734.4901-1-lucienzx159@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250804150734.4901-1-lucienzx159@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 3j9nc8nrrsmi1zzjsowk3o1yow1e76nb
-X-MBO-RS-ID: ef20a18a8f991c0a12f
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Thu, 14 Aug 2025 01:22:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,84 +77,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/4/25 5:07 PM, Lucien.Jheng wrote:
+Add early boot support for AM64 single cpu mode configuration.
+In single CPU mode the 2nd core of the R5F cluster can't be used or
+unavailable.
 
-> +/**
-> + * request_firmware_into_buf_via_script() -
-> + * Load firmware using a U-Boot script and copy to buffer
-> + * @buf: Pointer to a pointer where the firmware buffer will be stored.
-> + * @max_size: Maximum allowed size for the firmware to be loaded.
-> + * @script_name: Name of the U-Boot script to execute for firmware loading.
-> + *
-> + * Executes a U-Boot script (@script_name) that loads firmware into
-> + * memory and sets the environment variables 'fw_addr' (address) and
-> + * 'fw_size' (size in bytes)
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+---
+logs: https://paste.sr.ht/~hnagalla/d8a941e1949c2558e10cf28bcb91c0dfa73ef037
 
-- Allocates a buffer, copies the firmware
-- from the given address, and returns the pointer via @buf.
+ drivers/remoteproc/ti_k3_r5f_rproc.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-+ On success, copies the firmware
-+ from the given address to user buffer @buf.
+diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
+index f4bab6868ee..2986e5ccad7 100644
+--- a/drivers/remoteproc/ti_k3_r5f_rproc.c
++++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
+@@ -233,7 +233,7 @@ static int k3_r5f_prepare(struct udevice *dev)
+ 
+ 	dev_dbg(dev, "%s\n", __func__);
+ 
+-	if (cluster->mode == CLUSTER_MODE_LOCKSTEP)
++	if ((cluster->mode == CLUSTER_MODE_LOCKSTEP) || (cluster->mode == CLUSTER_MODE_SINGLECPU))
+ 		ret = k3_r5f_lockstep_release(cluster);
+ 	else
+ 		ret = k3_r5f_split_release(core);
+@@ -269,6 +269,13 @@ static int k3_r5f_core_sanity_check(struct k3_r5f_core *core)
+ 		return -EINVAL;
+ 	}
+ 
++	if (cluster->mode == CLUSTER_MODE_SINGLECPU && !is_primary_core(core)) {
++		dev_err(core->dev,
++			"Invalid op: Trying to start secondary core %d in single CPU mode\n",
++			core->tsp.proc_id);
++		return -EINVAL;
++	}
++
+ 	if (cluster->mode == CLUSTER_MODE_SPLIT && !is_primary_core(core)) {
+ 		if (!core->cluster->cores[0]->in_use) {
+ 			dev_err(core->dev,
+@@ -768,7 +775,7 @@ static void k3_r5f_core_adjust_tcm_sizes(struct k3_r5f_core *core)
+ {
+ 	struct k3_r5f_cluster *cluster = core->cluster;
+ 
+-	if (cluster->mode == CLUSTER_MODE_LOCKSTEP)
++	if ((cluster->mode == CLUSTER_MODE_LOCKSTEP) || (cluster->mode == CLUSTER_MODE_SINGLECPU))
+ 		return;
+ 
+ 	if (!core->ipdata->tcm_is_double)
+-- 
+2.34.1
 
-> + *
-> + * The script must set these environment variables:
-> + *   fw_addr - Address where firmware is loaded in memory
-> + *   fw_size - Size of the firmware in bytes
-> + *
-> + * The script should be defined in the U-Boot environment, for example:
-> + *   env set script_name 'load mmc 0:1 ${loadaddr} firmware.bin &&
-> + *   env set fw_addr ${loadaddr} && env set fw_size ${filesize}
-> + * Return: 0 on success, negative value on error.
-> + */
-
-This function description can be present only in one copy in the header 
-file include/fs_loader.h , drop this redundant copy.
-
-> +int request_firmware_into_buf_via_script(void **buf, size_t max_size,
-> +					 const char *script_name)
-> +{
-> +	ulong addr, size;
-> +	int ret;
-> +	char cmd[32];
-> +
-> +	if (!buf || !script_name || !max_size)
-> +		return -EINVAL;
-> +
-> +	/* Create command to run the firmware loading script */
-> +	snprintf(cmd, sizeof(cmd), "run %s", script_name);
-> +
-> +	/* Run the firmware loading script */
-> +	ret = run_command_list(cmd, -1, 0);
-> +	if (ret) {
-> +		log_err("Firmware loading script '%s' not defined or failed.\n",
-> +			script_name);
-> +		return -EINVAL;
-> +	}
-> +
-> +	/* Find out where the firmware got loaded and how long it is */
-> +	addr = env_get_hex("fw_addr", 0);
-> +	size = env_get_hex("fw_size", 0);
-> +
-> +	/* Clear the variables set by the firmware loading script */
-> +	env_set("fw_addr", NULL);
-> +	env_set("fw_size", NULL);
-> +
-> +	if (!addr || !size) {
-> +		log_err("Firmware address (0x%lx) or size (0x%lx) are invalid.\n",
-> +			addr, size);
-> +		return -EINVAL;
-> +	}
-
-Please also add one more check:
-
-if (size > max_size) {
-   log_err("Loaded firmware size 0x%lx exceeded maximum allowed size 
-0x%lx.\n", size, max_size);
-   return -E2BIG;
-}
-
-> +	memcpy(*buf, (void *)addr, min(size, max_size));
-> +
-> +	return 0;
-> +}
-With these two nitpicks above fixed, it looks perfect. Thanks !
