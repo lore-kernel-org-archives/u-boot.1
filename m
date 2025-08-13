@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2531CC87FCF
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 13:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B0FBCA0EE0
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 13:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84BAB83599;
+	by phobos.denx.de (Postfix) with ESMTP id E84C4835CB;
 	Wed, 13 Aug 2025 15:10:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lsxWE+8j";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JUng9uDa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BB1982C84; Wed, 13 Aug 2025 12:30:03 +0200 (CEST)
+ id 9A57E8338D; Wed, 13 Aug 2025 12:30:03 +0200 (CEST)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E737B82CEA
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 12:29:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E621F831D3
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 12:29:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57DATpHx1679970;
- Wed, 13 Aug 2025 05:29:51 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57DATr0T1679974;
+ Wed, 13 Aug 2025 05:29:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1755080991;
- bh=1IEDpcuyg2wxSHTHD0xAMnBRwGwCoXGOV01YHaRZZUA=;
+ s=ti-com-17Q1; t=1755080993;
+ bh=5mZAB3pOTz1XILuvbH8EJC3fKsoLqOfaU84HENGmZd0=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=lsxWE+8jR6QeyxAkKWvk0FYOwmGSHXVIGvvQ7birt5TY7VOaUZ0RonY3F4h09ejfT
- 7+zBQ9EpEkpniYbTHP3EoyJFuKhNeFyBfA7BcgS2e/wUE/lfspQpQHdQrim5Z6rvvC
- uq2Bj6u0sQlEcXFaoMP9X3Uzn5+h0zou6vZAUK3s=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57DATp6w1007002
+ b=JUng9uDaedGKcLI1+XP+R+eSAG+R9UwfY4k+Dk9Ufvg+4DuO0TOfGZ7o5e1Ldxh0j
+ qe0G+XW7oCIYq0z1yH85UOHb5WIZmhjBjMuN+B9vzKSs5RTGS2MnuByVjUKftG/wYA
+ nWtggObl872FFYqETNfw1YT4ko91OghMzWr5fPf8=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57DATroc4185807
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 13 Aug 2025 05:29:51 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 13 Aug 2025 05:29:53 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 13
- Aug 2025 05:29:50 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2025 05:29:52 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 13 Aug 2025 05:29:50 -0500
+ Frontend Transport; Wed, 13 Aug 2025 05:29:52 -0500
 Received: from localhost (kamlesh.dhcp.ti.com [172.24.233.19])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57DATnMv1859740;
- Wed, 13 Aug 2025 05:29:50 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57DATpfR2165849;
+ Wed, 13 Aug 2025 05:29:52 -0500
 From: Kamlesh Gurudasani <kamlesh@ti.com>
-Date: Wed, 13 Aug 2025 15:59:35 +0530
-Subject: [PATCH 1/2] clk: scmi: fix set_parent support when CCF is not
- being used
+Date: Wed, 13 Aug 2025 15:59:36 +0530
+Subject: [PATCH 2/2] clk: scmi: add compatibility for clock version 3.0 and
+ onwards
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250813-b4-scmi-v1-v1-1-bef20fc32d4b@ti.com>
+Message-ID: <20250813-b4-scmi-v1-v1-2-bef20fc32d4b@ti.com>
 References: <20250813-b4-scmi-v1-v1-0-bef20fc32d4b@ti.com>
 In-Reply-To: <20250813-b4-scmi-v1-v1-0-bef20fc32d4b@ti.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom
@@ -64,11 +64,11 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom
  <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>
 CC: <u-boot@lists.denx.de>, Kamlesh Gurudasani <kamlesh@ti.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1755080987; l=805;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1755080987; l=3008;
  i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
- bh=yyozV8/oAttMnD863ICAjIa2+dz2mpZLekvsKO+wXh0=;
- b=+QMWGArWjiAhOMrtJR6l9UehMaZCEXK4x0o2+uZVdRi/71MsGdfPR1itnv+/9vjDbq25VZbJk
- IvxhKnWp9B7AcK/rpiIgyXDE/aD9nvANzcDXZfjNr4eIwYcLLeab2aD
+ bh=0lf6SHyRTCTIdHintJDbItCC3Y+mKcEtdwO0X2FTNZE=;
+ b=S9l9g+5Xt+mQDmdZI5aR0WYEPGK2yjQfOtVnY0rPAEF/MY1ITOiiB0IqU8CCa/VJNHy5Q6jHT
+ qsqxoAZtP2WCLhZ8iL6eyeNu3Q/St8japPUmZhU2zaL36NEUNppcYmk
 X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
  pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -89,31 +89,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When not using Common clock framework(CCF), calls to
-scmi_clk_set_parent returns -ENOTSUPP, which should not be the case.
-Fix that.
+Clock version 3.0 specified in ARM SCMI Platform design document
+v3.2, adds extended_config_val parameter in CLOCK_CONFIG_SET.
 
-Fixes: 15fdfef6642c ("clk: scmi: check the clock state/parent/rate
-control permissions)
+The SCMI server with clock version 3.0 rejects the message if
+they don't have this field.
+
+Add support so that both SCMI server with clock version 2.0 and 3.0
+can be handled.
 
 Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
 ---
- drivers/clk/clk_scmi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/clk_scmi.c   | 49 ++++++++++++++++++++++++++++++++++++++-----------
+ include/scmi_protocols.h |  6 ++++++
+ 2 files changed, 44 insertions(+), 11 deletions(-)
 
 diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index 0c9a81cabcc..83ea7bb4286 100644
+index 83ea7bb4286..b547f2494c6 100644
 --- a/drivers/clk/clk_scmi.c
 +++ b/drivers/clk/clk_scmi.c
-@@ -359,7 +359,7 @@ static int scmi_clk_set_parent(struct clk *clk, struct clk *parent)
+@@ -135,17 +135,44 @@ static int scmi_clk_gate(struct clk *clk, int enable)
+ 		.clock_id = clk_get_id(clk),
+ 		.attributes = enable,
+ 	};
+-	struct scmi_clk_state_out out;
+-	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
+-					  SCMI_CLOCK_CONFIG_SET,
+-					  in, out);
++
++	struct scmi_clock_priv *priv = dev_get_priv(clk->dev);
++
  	int ret;
  
- 	if (!CONFIG_IS_ENABLED(CLK_CCF))
--		return -ENOTSUPP;
-+		return __scmi_clk_set_parent(clk, parent);
+-	ret = devm_scmi_process_msg(clk->dev, &msg);
+-	if (ret)
+-		return ret;
++	if (priv->version >= CLOCK_PROTOCOL_VERSION_3_0) {
++		struct scmi_clk_state_in_v2 in = {
++			.clock_id = clk->id,
++			.attributes = enable,
++		};
++		struct scmi_clk_state_out out;
++		struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
++						  SCMI_CLOCK_CONFIG_SET,
++						  in, out);
  
- 	ret = clk_get_by_id(clk->id, &c);
+-	return scmi_to_linux_errno(out.status);
++		ret = devm_scmi_process_msg(clk->dev, &msg);
++		if (ret)
++			return ret;
++
++		return scmi_to_linux_errno(out.status);
++	} else {
++		struct scmi_clk_state_in_v2 in = {
++			.clock_id = clk->id,
++			.attributes = enable,
++		};
++		struct scmi_clk_state_out out;
++		struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
++						  SCMI_CLOCK_CONFIG_SET,
++						  in, out);
++
++		ret = devm_scmi_process_msg(clk->dev, &msg);
++		if (ret)
++			return ret;
++
++		return scmi_to_linux_errno(out.status);
++	}
++
++	return 0;
+ }
+ 
+ static int scmi_clk_enable(struct clk *clk)
+@@ -275,12 +302,12 @@ static int scmi_clk_probe(struct udevice *dev)
  	if (ret)
+ 		return ret;
+ 
+-	if (!CONFIG_IS_ENABLED(CLK_CCF))
+-		return 0;
+-
+ 	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
+ 					    &priv->version);
+ 
++	if (!CONFIG_IS_ENABLED(CLK_CCF))
++		return 0;
++
+ 	/* register CCF children: CLK UCLASS, no probed again */
+ 	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
+ 		return 0;
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index 762a1032c37..a4d1a4c80c8 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -807,6 +807,12 @@ struct scmi_clk_state_in {
+ 	u32 attributes;
+ };
+ 
++struct scmi_clk_state_in_v2 {
++	u32 clock_id;
++	u32 attributes;
++	u32 extended_config_val;
++};
++
+ /**
+  * struct scmi_clk_state_out - Response payload for CLOCK_CONFIG_SET command
+  * @status:	SCMI command status
 
 -- 
 2.34.1
