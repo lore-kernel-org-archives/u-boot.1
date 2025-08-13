@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B1DC87FCF
-	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 13:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2531CC87FCF
+	for <u-boot@archiver.kernel.org>; Wed, 13 Aug 2025 13:10:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3876A829E7;
+	by phobos.denx.de (Postfix) with ESMTP id 84BAB83599;
 	Wed, 13 Aug 2025 15:10:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i3vEGTJu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lsxWE+8j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 580558338D; Wed, 13 Aug 2025 12:30:00 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 9BB1982C84; Wed, 13 Aug 2025 12:30:03 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A769829E7
- for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 12:29:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E737B82CEA
+ for <u-boot@lists.denx.de>; Wed, 13 Aug 2025 12:29:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57DATnSH2130061;
- Wed, 13 Aug 2025 05:29:49 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57DATpHx1679970;
+ Wed, 13 Aug 2025 05:29:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1755080989;
- bh=PkzECAPZeCj/JXwbV3utlp9o0Wg/IJJPLJwyIYW4jSQ=;
- h=From:Subject:Date:To:CC;
- b=i3vEGTJunqstkpSV5GSoLxcmYrzWPSiIIQyzMX71uOEVWqiDXo9v7BsjzeOC8JN+z
- 4bFmIx9X8ENQD4U2WqMEUBnM03SfR5aWc6OkeicUD7y/cAEv+0IMvY16neJNHmnQfV
- okj4b8n/XwFaGQe0U+Y4Pnia6xfPB8NKe/2V2bgQ=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57DATn5J4185787
+ s=ti-com-17Q1; t=1755080991;
+ bh=1IEDpcuyg2wxSHTHD0xAMnBRwGwCoXGOV01YHaRZZUA=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=lsxWE+8jR6QeyxAkKWvk0FYOwmGSHXVIGvvQ7birt5TY7VOaUZ0RonY3F4h09ejfT
+ 7+zBQ9EpEkpniYbTHP3EoyJFuKhNeFyBfA7BcgS2e/wUE/lfspQpQHdQrim5Z6rvvC
+ uq2Bj6u0sQlEcXFaoMP9X3Uzn5+h0zou6vZAUK3s=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57DATp6w1007002
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 13 Aug 2025 05:29:49 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 13 Aug 2025 05:29:51 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 13
- Aug 2025 05:29:48 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2025 05:29:50 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 13 Aug 2025 05:29:48 -0500
+ Frontend Transport; Wed, 13 Aug 2025 05:29:50 -0500
 Received: from localhost (kamlesh.dhcp.ti.com [172.24.233.19])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57DATlZs2165819;
- Wed, 13 Aug 2025 05:29:48 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57DATnMv1859740;
+ Wed, 13 Aug 2025 05:29:50 -0500
 From: Kamlesh Gurudasani <kamlesh@ti.com>
-Subject: [PATCH 0/2] Add compatibility for scmi clock protocol version 3.0
-Date: Wed, 13 Aug 2025 15:59:34 +0530
-Message-ID: <20250813-b4-scmi-v1-v1-0-bef20fc32d4b@ti.com>
+Date: Wed, 13 Aug 2025 15:59:35 +0530
+Subject: [PATCH 1/2] clk: scmi: fix set_parent support when CCF is not
+ being used
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAA5pnGgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDC0Nj3SQT3eLk3EzdMkPdJOOU1CQL87REc0MjJaCGgqLUtMwKsGHRsbW
- 1ALHYx2VcAAAA
+Message-ID: <20250813-b4-scmi-v1-v1-1-bef20fc32d4b@ti.com>
+References: <20250813-b4-scmi-v1-v1-0-bef20fc32d4b@ti.com>
+In-Reply-To: <20250813-b4-scmi-v1-v1-0-bef20fc32d4b@ti.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom
  Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Ye Li
  <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>
 CC: <u-boot@lists.denx.de>, Kamlesh Gurudasani <kamlesh@ti.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1755080986; l=936;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1755080987; l=805;
  i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
- bh=8n/UAGvuSkJLOBUxlliH8uqr6t32kgmtn90ajW7VQ5w=;
- b=5oRTM5ASTRbk2DquxhbLVuMhkXtHLnBlo55zSkAzL0JQ5d2TP3LoTOyePU1peZ1nLP2e1oX3s
- sZrk3DJc9xlBfUXGzKax21KcfpiQB45qKnILvKooi2Bp5k+S23zKlBf
+ bh=yyozV8/oAttMnD863ICAjIa2+dz2mpZLekvsKO+wXh0=;
+ b=+QMWGArWjiAhOMrtJR6l9UehMaZCEXK4x0o2+uZVdRi/71MsGdfPR1itnv+/9vjDbq25VZbJk
+ IvxhKnWp9B7AcK/rpiIgyXDE/aD9nvANzcDXZfjNr4eIwYcLLeab2aD
 X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
  pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -89,31 +89,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clock version 3.0 specified in ARM SCMI Platform design document
-v3.2, adds extended_config_val parameter in CLOCK_CONFIG_SET.
+When not using Common clock framework(CCF), calls to
+scmi_clk_set_parent returns -ENOTSUPP, which should not be the case.
+Fix that.
 
-The SCMI server with clock version 3.0 rejects the message if
-it doesn't have this field.
-
-Add support so that both SCMI server with clock version 2.0 and 3.0
-can be handled.
-
-While at it, fix the set_parent support for non CCF flow.
+Fixes: 15fdfef6642c ("clk: scmi: check the clock state/parent/rate
+control permissions)
 
 Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
 ---
-Kamlesh Gurudasani (2):
-      clk: scmi: fix set_parent support when CCF is not being used
-      clk: scmi: add compatibility for clock version 3.0 and onwards
+ drivers/clk/clk_scmi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- drivers/clk/clk_scmi.c   | 51 +++++++++++++++++++++++++++++++++++++++------------
- include/scmi_protocols.h |  6 ++++++
- 2 files changed, 45 insertions(+), 12 deletions(-)
----
-base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
-change-id: 20250813-b4-scmi-v1-b3deb87fa712
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index 0c9a81cabcc..83ea7bb4286 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -359,7 +359,7 @@ static int scmi_clk_set_parent(struct clk *clk, struct clk *parent)
+ 	int ret;
+ 
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+-		return -ENOTSUPP;
++		return __scmi_clk_set_parent(clk, parent);
+ 
+ 	ret = clk_get_by_id(clk->id, &c);
+ 	if (ret)
 
-Best regards,
 -- 
-Kamlesh Gurudasani <kamlesh@ti.com>
+2.34.1
 
