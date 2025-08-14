@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D2C9CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CC21CA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:48:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A53DA83A2D;
-	Thu, 14 Aug 2025 20:48:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 11C3483A3A;
+	Thu, 14 Aug 2025 20:48:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O+9rylDM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ym/PKjMg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E873683A34; Thu, 14 Aug 2025 20:48:34 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 3247B839C7; Thu, 14 Aug 2025 20:48:35 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D90EE839C7
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:48:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DC90839CC
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:48:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-88432ccd787so65567639f.0
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:48:32 -0700 (PDT)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3e56fe95d83so7282555ab.0
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:48:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755197311; x=1755802111; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755197312; x=1755802112; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tvgMK/AFyba3sFSYoO27NobTkDmWX1QbH3ELuRrSEvA=;
- b=O+9rylDM5+6MTHc1bNkjasHochTtQObwloJ6SxeSC9diGe2lwQ31TRLJP4T6RmxVOx
- 5phWUbNPpOochRj9LKQwAbNc2TB9fwVnHYSTth06heDzXWPO9tCRRy01xRUrFTLqwBH6
- yAINGP527/3NDvdInKDajIBvSbQmALWmRMe48=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=70qIzARJA1ohjTYuqc2zE3p4ZDYN5nJSjVfVP0X463g=;
+ b=Ym/PKjMgLhMCG8sxqdna04cYtMUqjO+RKNzrh0bDicGoo3TTsu9ICgyvAylu3zAVjH
+ ztwbMBEKhWLQnfWZU4rSvpDu7OzRvDKiKgG4tm/9b9IzKbszxBnq4K6thGRw6RHKQBEY
+ NM1fdlFtkCosuBydFZBiGvMFvkVSzI5tautKs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755197311; x=1755802111;
+ d=1e100.net; s=20230601; t=1755197312; x=1755802112;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tvgMK/AFyba3sFSYoO27NobTkDmWX1QbH3ELuRrSEvA=;
- b=qKufpewfvK+Dmy49u1JjPSJoiMbrD4l8VgdBNWidnkBm7UW2D68aoBqhUZMuTLJo75
- 4dCRajLBIYqVhd8WXvkklBb95MuKI1iCa4Bsi4NMGBulS3Vz57HRui8vEqnac561NRXE
- ZvH/TKSid7e98PJ4gErWi4mbiHZNf/T5+o98E/mkZBmSPWe5NZJbPpgP4TY6Kq3Kep0Z
- 9tthL2Maw+4Zdvo8mku/O64kg8BEbUJXRBs0rV4xbr9h1lMmjCg1uCw0UsK0yDzsvITH
- 0WFSrUu1BJq+qnr9PbIJr7jbWC0L3tSZVd9jRFrvuZVGOWG3P8RDosGTjUIjndUPRkYC
- GW4w==
-X-Gm-Message-State: AOJu0Yzrr4o+5oJSDrNlvJgpRrxSv2DzCxWes5zCR4JITVwMwgddbJio
- 0ujw5p13FXOu5t4/LpOuCRwMUr0j+J+TKVl2gLhj3kXdwNxiOkYicZIrBuTu1w02+FXgEc7yMfX
- 3mlC/R1g=
-X-Gm-Gg: ASbGncuQjGPvDAqaesjrERW9eV71Id9VPnFwmR5AuHUV4uRN57EcLkz1Ls/fJ0Nv12D
- AwkehVWM/XwB1+M1s/JWVKzrkouTSoX19QaL5wyN9ZMZRWXywK3zV/IW4Awc9FBOpSK0dYelXI0
- gnyVTvGUTtygDAifGOmuXqh1FOnd5pq0+oQM0DWRXSB3SeH/C+yo1oUjiJlP82V3388vwDgWfnz
- k3LsQuX5TeK8N59pXmYtGNAQgMX6m5QhN5AF6xOZajRoTmgrLYOpTjdcECnxzYSkNIgiWAl4tSw
- nwubqCixEPE03aiVThsf2E2FQV3/seZkXVFyrFbyEfAVPdnHizeVYLcs3oR6GcFuHbfOIyeN8j0
- Zwg7Jo7fqIEjBT0zBXsrGyPZ078W8RXcIYqKikVCh17uCPxnAvT40sTU=
-X-Google-Smtp-Source: AGHT+IEW7PwaFR92pvtUD/jaIvBiK000V9cbg1lGYPrLpqcke8bBcwrvmHFAboMAHdWbho4j3/gzJQ==
-X-Received: by 2002:a05:6e02:188f:b0:3e5:42ec:1372 with SMTP id
- e9e14a558f8ab-3e571e2d63emr70972515ab.19.1755197310888; 
- Thu, 14 Aug 2025 11:48:30 -0700 (PDT)
+ bh=70qIzARJA1ohjTYuqc2zE3p4ZDYN5nJSjVfVP0X463g=;
+ b=mIc/3knHsJu0jBdCf3T2F+zFHRYDAw4fc323lAJxTH0mR76wz0QCUcBTHJocVLI0U/
+ LSN1YDWCf3LLL2UVSK99YW0RRcJgFkJDnMoR0TzgWLiWQcN0Yh/rtwtGVIMzp5HLVozQ
+ CGxOMdizJKf3ufR+6S40MtFqWE4b4wuqCQKSc09QpsQ17J3LsMAckefUl21qHqnIdiXy
+ S7+K/AUBImDF/3mTHND+VvqcR8fbbwBYS8KlNkeX/9SvkULbPCyUAY3daeQZjqIXY0Up
+ WmT0W4rcBzqkHnZvqRyk1MaKjMaaNicM61icizUUhcobUnqNvAKAzd38jbOkEAZr6DaK
+ 2vrg==
+X-Gm-Message-State: AOJu0Yzhb5Xf+RfcV0cG9DdjOegd8csQhI3l7pzkxwktdnMYh8VPgCiN
+ xOjEG8wn8RAkWm1L9CZnrAQvWmcx64LGGt6faT87rMDokzEyg6BxHBZ72nBkuWPGMcff7zVOaAP
+ JHilIBLY=
+X-Gm-Gg: ASbGncsTEUbjj9CgqsLN94bY1a25jSFAbZT4EkUgMQlhlulguNwau7ypNcLALCxcrTt
+ /uHu9OvSmdAL739wiKPdPTIh89HFbSU5zJMTerMcHD9OwbMnQ8L0ZiYXIhKQrHgi723iB2ogTM6
+ JQoPan32sbSxeCAvcARbyStwm/xfBF83z0qVAJXq9iSZOQMPhsu/4aMzxAeocP37wRzQlRvmppi
+ H5f1VbKu4o4kat3WFy2wky5JGRMio9fYdpMdLXruzD1f2PYSX04kYiYNMi2fxpCjAZHaaSq/3ZZ
+ beIjYcEkW3gVD4Pa9fm5A3YkrpwrDkeJfoBq4jOeKntpJviHGRVqUuvqfAvMWD/qP/OR4xSwgux
+ og8DV4Q+scx3buEAbNE1/hrMd0WcXAuPJ4za3cBN5FI+xM7YuPbTvjx3DOjQNtWri1g==
+X-Google-Smtp-Source: AGHT+IHdIHgTs2vYNdOCk59NJkC2Zhs3Tc5NSvi8dC7uxa0kj+Unq3zGZnS+h5KRU4hS6dZYkBAZPA==
+X-Received: by 2002:a05:6e02:1561:b0:3e3:cc1b:2b5e with SMTP id
+ e9e14a558f8ab-3e570866948mr75460215ab.15.1755197311774; 
+ Thu, 14 Aug 2025 11:48:31 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50b3d6ff137sm1219762173.41.2025.08.14.11.48.29
+ 8926c6da1cb9f-50b3d6ff137sm1219762173.41.2025.08.14.11.48.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 11:48:30 -0700 (PDT)
+ Thu, 14 Aug 2025 11:48:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250804-e1000-v1-1-2b181911e8a4@linaro.org>
-References: <20250804-e1000-v1-1-2b181911e8a4@linaro.org>
-Subject: Re: [PATCH] net: e1000: Free temporary buffer on exit
-Message-Id: <175519730993.3600102.9886861671435701871.b4-ty@konsulko.com>
-Date: Thu, 14 Aug 2025 12:48:29 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250804215008.1411974-1-trini@konsulko.com>
+References: <20250804215008.1411974-1-trini@konsulko.com>
+Subject: Re: [PATCH] sandbox: Add an additional dummy sync macro
+Message-Id: <175519731101.3600102.13860013650786989006.b4-ty@konsulko.com>
+Date: Thu, 14 Aug 2025 12:48:31 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,21 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 04 Aug 2025 16:32:51 +0100, Andrew Goodbody wrote:
+On Mon, 04 Aug 2025 15:50:08 -0600, Tom Rini wrote:
 
-> In do_e1000_spi_checksum a temporary buffer is allocated but never
-> freed. Add code to free on exit. Also refactor the code to make the exit
-> code common.
-> 
-> This issue found by Smatch.
+> There are some drivers which call a "dmb" for a type of sync. Add that
+> as well to sandbox.
 > 
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] net: e1000: Free temporary buffer on exit
-      commit: 4266b8a2839f4e3eee2d7ce5f61af0c0ed0fe3b9
+[1/1] sandbox: Add an additional dummy sync macro
+      commit: d68db76b95b106227a40fcf41ebf4dccb2225a0e
 -- 
 Tom
 
