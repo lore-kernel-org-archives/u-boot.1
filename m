@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A32ECA0EE4
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CDECCA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:13:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C58E583959;
-	Thu, 14 Aug 2025 15:13:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19A9583952;
+	Thu, 14 Aug 2025 15:13:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j4fCAy99";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B1L/75am";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E44FD83965; Thu, 14 Aug 2025 15:13:39 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 6826D83938; Thu, 14 Aug 2025 15:13:50 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F841838C7
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:13:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE31F8396C
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:13:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cn.liweihao@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-24457fe9704so6854665ad.0
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 06:13:37 -0700 (PDT)
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-b471738daabso727512a12.1
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 06:13:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755177215; x=1755782015; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1755177226; x=1755782026; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bIy9b7tGKTIXQvpPQzXtcU5TiX9XsiX3Gkf8OMBPhqU=;
- b=j4fCAy99EF/13y3mKor6nZVcV8NSBdBF9UGjGvBwp0byFoZFPi9dNr0yGlPRKJtl2M
- ByNu/ix6z4YMvqerHozwcN3Aa84pNBpVUnwc4XK7GVWjdPEpCN17VJTXo1JABNOks2Lf
- I23dsEjZoY8ngEM9fin5TqKFJu0AfghyZQZ0cgHoiwHFuQz+jx9BxvR5Dbbl/NXPchS0
- 5nqnsvMerA5mDzapF5sb+cQRBg0hP3nRHrPkDXvg9N1w5L/rLkgJ7Is3HXQAM7/plWh1
- HoOaij8VgzyhMfZhPuIz4SIaovuVugb9AREdo4PmA6Y51RrVRrBZidfG9m5TD+Y+RT8C
- DOoA==
+ bh=5Mn8JdjZmvbRD1YCpUQEmcwjs2CHDgPXzNAAZQj6svQ=;
+ b=B1L/75amw3wOeAHn7eh4da87lmcJ2dGakXPruESypKGKQf+dkACSbQKUTgebiGOZ8p
+ UmogXIJiIVlaWCFwg7HKsnaNHhp4rcwQ5MxZlM/+c/pi1jwdSrTdQ9RW9Mbt0WcUxMMd
+ 8jNViIXsg6sc0BS7djqJkl5XfGHLOSf2ssHbBCSkgna6ROEPlb11Kn7jTtY9CZUcD7kR
+ 70FHX8DA33SNJny0PBj6I0oLJDcerpeGLBDa+a11s7HP88Hl0bj+jD6hUgPZRsoGfcIZ
+ 9p2jhAigTZXf5Ag5SUFunYMX3xoWbp3t7H7NDkDYvxSdraNtkXWesP396hwgEdN0g6eg
+ Mxcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755177215; x=1755782015;
+ d=1e100.net; s=20230601; t=1755177226; x=1755782026;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bIy9b7tGKTIXQvpPQzXtcU5TiX9XsiX3Gkf8OMBPhqU=;
- b=gBTLzqpSE32rElWYxWHOg9BLc9csuzX25GmDK5MgfhCGfjl6aMROeWwpb0lBIDR+pY
- xnLoHxzOEbuYP5kWkdZJKXqZmGKsLT2HmzhRDCTErtqeptdQRAr47HZVssU1UXIasqyN
- mhbvoVwTcgfgjJV5vfC0m2zooGgWh59yV6IGljIy8f/6JVQfOU6at4Gy+42RxsrdwTKP
- QOmQfELcZ2cTPX03OU4cVow8Jth6HSbfk+QpgaGug0liLSihdg2SlbosGbeb5rOReVCr
- 3XqEYUhW6KhEhkKFcEDaW/PQvxOWQYDHu35W09n6fu+LWMketpz01Ejj1Zf3BQ72Zqdq
- IHtA==
-X-Gm-Message-State: AOJu0YyOd6saxkftqJGJnz5D4Ih6ctI9zL8ErDO1Ok9nNXjlRMKQPVJN
- 88guYD3AJh1fWzCAiyn7aUMk+Pf+aB1RN0yUoU1ZCNhcK7ZVrbyaHh/mfufgq4QMGqRYWTuL
-X-Gm-Gg: ASbGncsqB5Fhzr8REixXYtW3FJ3eB/+phJHd/Eyv7Am5PIn1lN2iC1uxK3c/IupFBRb
- br62DVows9SjfYSkX+Q3m3yF55CtIIH0qU37yNbuZZ5ET6lfjT5R3GVscpQvxI79nvMR5C7g4al
- pXiPtNybVbcLJmV0F8MOY8KghZO9DSR7mPgfvs5l441cWKC+AX9Lk73jA1DT0aEi9FE/SBIpN6V
- ojaKx4QRigFLZExQxGNi6X1yCUnUDhWWIDqgo8BgL03GBy9TrqxrNsxdcV2HZcVFV5MV8gKEzsb
- Ebf7jjvQzUckCPJ73syA52X5h7hXM7VU75LET5lz2i2xlehBYHGdATvO/7nI1werKDqWnM0J/F0
- GqMFpFkjPoHBEybwBZDzEzs+7hLKIgjEY7l/1aQ==
-X-Google-Smtp-Source: AGHT+IEtsPEakLXgD/GdsZmOFAvEtSmL05PnVd894h3Or0fk85kWcKZGW5HQF4K1PfrCeLwX5CohtQ==
-X-Received: by 2002:a17:903:19c7:b0:244:5089:ff44 with SMTP id
- d9443c01a7336-244586b642bmr43986865ad.41.1755177214970; 
- Thu, 14 Aug 2025 06:13:34 -0700 (PDT)
+ bh=5Mn8JdjZmvbRD1YCpUQEmcwjs2CHDgPXzNAAZQj6svQ=;
+ b=n+pfNC6CREjMqz54BFKE4HGfbvJr8QYPkVzp1klB3fCXWcf7w1PTPPdCUl0Ovb6EC6
+ A1J9ox/WXkEo0K32WyzVeM1I++7n1/pwuKEBFnBrP37u7W4Wim14W3NutMkgwHSvNKdu
+ fhsBWHhX/QtN0/7tJuqyDIYS9V1bn6SZjIr1NUaxdchCMov6xGXwbrQdEiNaF9RO70xh
+ zrqU5wzYfaYOlJBnyfDNwyzZnhIRdHyTkMYlyHz8H1TihDtgag/1EOWK3CePTPfcbHfs
+ 6s1mYUTVGUCS2/2860reMvowYllTZhSmP7KyI9P3U/qeni/N2HDFlF6u4KuMeq6pcXAS
+ UjQw==
+X-Gm-Message-State: AOJu0YwVO2P0w0DEFCsIO+cs0sjAf4OGooUX48nxOVXzDWttlND1pmb7
+ cpXL/praDzwOcrqHQgWmn6ufveH1OuB+8TnpHfVb1XzcF/t/E7Mvrf6NT38dwn+y1qJ2iWUd
+X-Gm-Gg: ASbGncuvdQ+17Bs3bY6vP5WIbn/v1qbe64M+rU4G8JLkPJYsQ8RgGP3HVhB2dHTG4+V
+ wO1NmSzgs9WZmiA9Wp5GXaRUhckl083+neH8X05YjX+TPhUIiMWuESOIIVVx/s5yySCNCdONpnR
+ /+NYUficzsyGvA2ll+EdVyKdHxuPOCHmWCiX7KjTPfhS/GoQk/ZMGCZ2N6RXQXoS+4VN8ZYOMvp
+ XkSBwTKvasCnWYrjPPRtkqA+Yu8a7AjAAjmakguFfuZzUt+qQQ7p3BpO4hY89CiNlL1X0c84q9Q
+ e6eppOv/DiCa2NQLb3bCXG7wrYPLT/w8l0BNFY6Sw1qz/8IMrPBgtTr+1YPnIk7bvMsnb6tPHjv
+ MgKt0eemdAJ7M/kvXqXQuxBbmydw86sKlpFmv5g==
+X-Google-Smtp-Source: AGHT+IG0RrOjklBPhz7icFDnPxXtK0C8Bzgas44GKKN+Rk29Zpel3ybJLvU/tBGfnolovOxdYw1oUg==
+X-Received: by 2002:a17:903:2947:b0:240:3bb7:fdc3 with SMTP id
+ d9443c01a7336-244586c46damr32241165ad.28.1755177225817; 
+ Thu, 14 Aug 2025 06:13:45 -0700 (PDT)
 Received: from localhost.localdomain ([104.28.159.212])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24300f8c9d1sm67902195ad.129.2025.08.14.06.13.27
+ d9443c01a7336-24300f8c9d1sm67902195ad.129.2025.08.14.06.13.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 06:13:34 -0700 (PDT)
+ Thu, 14 Aug 2025 06:13:45 -0700 (PDT)
 From: WeiHao Li <cn.liweihao@gmail.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
  kever.yang@rock-chips.com, lukma@denx.de, seanga2@gmail.com,
  ag.dev.uboot@gmail.com, muratdemirtaseu@outlook.com,
  WeiHao Li <cn.liweihao@gmail.com>
-Subject: [PATCH 4/5] video: rockchip: Add bridge support for VOP
-Date: Thu, 14 Aug 2025 21:12:36 +0800
-Message-Id: <20250814131237.8135-5-cn.liweihao@gmail.com>
+Subject: [PATCH 5/5] video: rockchip: add RK3368 VOP support
+Date: Thu, 14 Aug 2025 21:12:37 +0800
+Message-Id: <20250814131237.8135-6-cn.liweihao@gmail.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250814131237.8135-1-cn.liweihao@gmail.com>
 References: <20250814131237.8135-1-cn.liweihao@gmail.com>
@@ -100,157 +100,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockchip VOP driver only support UCLASS_DISPLAY for now, It can't work
-if SOC use dw-mipi with inno-dphy like RK3368.
+This patch adds RK3368 VOP driver based on RK3288. I got its GRF register
+user manual from a online forum.
 
-This patch try to add UCLASS_VIDEO_BRIDGE support to let it support
-dw-mipi-dsi-rockchip driver, will support SOC use dw-mipi with inno-dphy.
+Link: https://github.com/ieiao/wiki/blob/master/docs/embedded-dev/rockchip/rk3368/Rockchip_RK3368_GRF.pdf
 
-This patch basic same as muratdemirtas's github repository, just adjust
-some code style.
-
-Link: https://github.com/muratdemirtas/rockchip-rk3399-uboot-mipi-dsi
-
-Signed-off-by: muratdemirtas <muratdemirtaseu@outlook.com>
 Signed-off-by: WeiHao Li <cn.liweihao@gmail.com>
 ---
- drivers/video/rockchip/rk_vop.c | 92 +++++++++++++++++++++++++--------
- 1 file changed, 71 insertions(+), 21 deletions(-)
+ drivers/video/rockchip/Makefile               |  1 +
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 20 +++++
+ drivers/video/rockchip/rk3368_vop.c           | 79 +++++++++++++++++++
+ 3 files changed, 100 insertions(+)
+ create mode 100644 drivers/video/rockchip/rk3368_vop.c
 
-diff --git a/drivers/video/rockchip/rk_vop.c b/drivers/video/rockchip/rk_vop.c
-index 17dfe62c9..71786da77 100644
---- a/drivers/video/rockchip/rk_vop.c
-+++ b/drivers/video/rockchip/rk_vop.c
-@@ -14,6 +14,8 @@
- #include <reset.h>
- #include <syscon.h>
- #include <video.h>
-+#include <video_bridge.h>
-+#include <panel.h>
- #include <asm/global_data.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
-@@ -257,6 +259,8 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
- 	ofnode remote;
- 	const char *compat;
- 	struct reset_ctl dclk_rst;
-+	struct udevice *bridge;
-+	struct udevice *panel;
+diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
+index f55beceeb..83c0b7aef 100644
+--- a/drivers/video/rockchip/Makefile
++++ b/drivers/video/rockchip/Makefile
+@@ -7,6 +7,7 @@ ifdef CONFIG_VIDEO_ROCKCHIP
+ obj-y += rk_vop.o
+ obj-$(CONFIG_ROCKCHIP_RK3288) += rk3288_vop.o
+ obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328_vop.o
++obj-$(CONFIG_ROCKCHIP_RK3368) += rk3368_vop.o
+ obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399_vop.o
+ obj-$(CONFIG_DISPLAY_ROCKCHIP_EDP) += rk_edp.o
+ obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
+diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+index fa5121735..122974d60 100644
+--- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
++++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+@@ -134,6 +134,11 @@
+ #define DW_MIPI_NEEDS_PHY_CFG_CLK	BIT(0)
+ #define DW_MIPI_NEEDS_GRF_CLK		BIT(1)
  
- 	debug("%s(%s, 0x%lx, %s)\n", __func__,
- 	      dev_read_name(dev), fbbase, ofnode_get_name(ep_node));
-@@ -298,6 +302,10 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
- 			return -EINVAL;
- 		}
- 
-+		uclass_find_device_by_ofnode(UCLASS_VIDEO_BRIDGE, remote, &bridge);
-+		if (bridge)
-+			break;
++#define RK3368_GRF_SOC_CON7		0x41c
++#define RK3368_DSI_FORCETXSTOPMODE	(0xf << 7)
++#define RK3368_DSI_FORCERXMODE		(0x1 << 6)
++#define RK3368_DSI_TURNDISABLE		(0x1 << 5)
 +
- 		uclass_find_device_by_ofnode(UCLASS_DISPLAY, remote, &disp);
- 		if (disp)
- 			break;
-@@ -326,27 +334,60 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
- 	}
- 	debug("vop_id=%d\n", vop_id);
+ #define RK3399_GRF_SOC_CON20		0x6250
+ #define RK3399_DSI0_LCDC_SEL		BIT(0)
+ #define RK3399_DSI1_LCDC_SEL		BIT(4)
+@@ -911,6 +916,18 @@ struct video_bridge_ops dw_mipi_dsi_rockchip_ops = {
+ 	.set_backlight = dw_mipi_dsi_rockchip_set_bl,
+ };
  
--	disp_uc_plat = dev_get_uclass_plat(disp);
--	debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
--	if (display_in_use(disp)) {
--		debug("   - device in use\n");
--		return -EBUSY;
--	}
-+	if (bridge) {
-+		/* video bridge detected, probe it */
-+		ret = device_probe(bridge);
-+		if (ret) {
-+			debug("%s: device '%s' bridge won't probe (ret=%d)\n",
-+			      __func__, dev->name, ret);
-+			return ret;
-+		}
- 
--	disp_uc_plat->source_id = remote_vop_id;
--	disp_uc_plat->src_dev = dev;
-+		/* Attach the DSI controller and the display to the bridge. */
-+		ret = video_bridge_attach(bridge);
-+		if (ret) {
-+			debug("Failed to attach video bridge: %d\n", ret);
-+			return ret;
-+		}
- 
--	ret = device_probe(disp);
--	if (ret) {
--		debug("%s: device '%s' display won't probe (ret=%d)\n",
--		      __func__, dev->name, ret);
--		return ret;
--	}
-+		/*
-+		 * Get the panel device
-+		 * TODO: Maybe fetch it from the bridge private data.
-+		 */
-+		ret = uclass_first_device_err(UCLASS_PANEL, &panel);
-+		if (ret) {
-+			debug("Panel device error: %d\n", ret);
-+			return ret;
-+		}
- 
--	ret = display_read_timing(disp, &timing);
--	if (ret) {
--		debug("%s: Failed to read timings\n", __func__);
--		return ret;
-+		ret = panel_get_display_timing(panel, &timing);
-+		if (ret) {
-+			debug("%s: Failed to read timings\n", __func__);
-+			return ret;
-+		}
-+	} else {
-+		disp_uc_plat = dev_get_uclass_plat(disp);
-+		debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
-+		if (display_in_use(disp)) {
-+			debug("   - device in use\n");
-+			return -EBUSY;
-+		}
++static const struct rockchip_dw_dsi_chip_data rk3368_chip_data[] = {
++	{
++		.reg = 0xff960000,
++		.lanecfg1_grf_reg = RK3368_GRF_SOC_CON7,
++		.lanecfg1 = HIWORD_UPDATE(0, RK3368_DSI_TURNDISABLE |
++					     RK3368_DSI_FORCETXSTOPMODE |
++					     RK3368_DSI_FORCERXMODE),
++		.max_data_lanes = 4,
++	},
++	{ /* sentinel */ }
++};
 +
-+		disp_uc_plat->source_id = remote_vop_id;
-+		disp_uc_plat->src_dev = dev;
+ static const struct rockchip_dw_dsi_chip_data rk3399_chip_data[] = {
+ 	{
+ 		.reg = 0xff960000,
+@@ -980,6 +997,9 @@ static const struct rockchip_dw_dsi_chip_data rk3568_chip_data[] = {
+ };
+ 
+ static const struct udevice_id dw_mipi_dsi_rockchip_dt_ids[] = {
++	{ .compatible = "rockchip,rk3368-mipi-dsi",
++	  .data = (long)&rk3368_chip_data,
++	},
+ 	{ .compatible = "rockchip,rk3399-mipi-dsi",
+ 	  .data = (long)&rk3399_chip_data,
+ 	},
+diff --git a/drivers/video/rockchip/rk3368_vop.c b/drivers/video/rockchip/rk3368_vop.c
+new file mode 100644
+index 000000000..b4aac51c5
+--- /dev/null
++++ b/drivers/video/rockchip/rk3368_vop.c
+@@ -0,0 +1,79 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Author(s): WeiHao Li <cn.liweihao@gmail.com>
++ */
 +
-+		ret = device_probe(disp);
-+		if (ret) {
-+			debug("%s: device '%s' display won't probe (ret=%d)\n",
-+			      __func__, dev->name, ret);
-+			return ret;
-+		}
++#include <display.h>
++#include <dm.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <video.h>
++#include <asm/global_data.h>
++#include <asm/arch-rockchip/clock.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <linux/delay.h>
++#include "rk_vop.h"
 +
-+		ret = display_read_timing(disp, &timing);
-+		if (ret) {
-+			debug("%s: Failed to read timings\n", __func__);
-+			return ret;
-+		}
- 	}
- 
- 	ret = clk_get_by_index(dev, 1, &clk);
-@@ -383,9 +424,18 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
- 
- 	rkvop_enable(dev, fbbase, 1 << l2bpp, &timing, &dclk_rst);
- 
--	ret = display_enable(disp, 1 << l2bpp, &timing);
--	if (ret)
--		return ret;
-+	if (bridge) {
-+		/* Attach the DSI controller and the display to the bridge. */
-+		ret = video_bridge_set_backlight(bridge, 80);
-+		if (ret) {
-+			printf("Failed to start the video bridge: %d\n", ret);
-+			return ret;
-+		}
-+	} else {
-+		ret = display_enable(disp, 1 << l2bpp, &timing);
-+		if (ret)
-+			return ret;
-+	}
- 
- 	uc_priv->xsize = timing.hactive.typ;
- 	uc_priv->ysize = timing.vactive.typ;
++DECLARE_GLOBAL_DATA_PTR;
++
++static void rk3368_set_pin_polarity(struct udevice *dev,
++				    enum vop_modes mode, u32 polarity)
++{
++	struct rk_vop_priv *priv = dev_get_priv(dev);
++	struct rk3288_vop *regs = priv->regs;
++
++	/* The RK3368 VOP (v3.2) has its polarity configuration in ctrl0 */
++	clrsetbits_le32(&regs->dsp_ctrl0,
++			M_DSP_DCLK_POL | M_DSP_DEN_POL |
++			M_DSP_VSYNC_POL | M_DSP_HSYNC_POL,
++			V_DSP_PIN_POL(polarity));
++}
++
++/*
++ * Try some common regulators. We should really get these from the
++ * device tree somehow.
++ */
++static const char * const rk3368_regulator_names[] = {
++	"vcc18_lcd",
++	"VCC18_LCD",
++	"vdd10_lcd_pwren_h",
++	"vdd10_lcd",
++	"VDD10_LCD",
++	"vcc33_lcd"
++};
++
++static int rk3368_vop_probe(struct udevice *dev)
++{
++	/* Before relocation we don't need to do anything */
++	if (!(gd->flags & GD_FLG_RELOC))
++		return 0;
++
++	/* Probe regulators required for the RK3368 VOP */
++	rk_vop_probe_regulators(dev, rk3368_regulator_names,
++				ARRAY_SIZE(rk3368_regulator_names));
++
++	return rk_vop_probe(dev);
++}
++
++struct rkvop_driverdata rk3368_driverdata = {
++	.set_pin_polarity = rk3368_set_pin_polarity,
++};
++
++static const struct udevice_id rk3368_vop_ids[] = {
++	{ .compatible = "rockchip,rk3368-vop",
++	  .data = (ulong)&rk3368_driverdata },
++	{ }
++};
++
++static const struct video_ops rk3368_vop_ops = {
++};
++
++U_BOOT_DRIVER(rockchip_rk3368_vop) = {
++	.name		= "rockchip_rk3368_vop",
++	.id		= UCLASS_VIDEO,
++	.of_match 	= rk3368_vop_ids,
++	.ops		= &rk3368_vop_ops,
++	.bind		= rk_vop_bind,
++	.probe		= rk3368_vop_probe,
++	.priv_auto	= sizeof(struct rk_vop_priv),
++};
 -- 
 2.39.5
 
