@@ -4,100 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C156ECA0EE3
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 08:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43342CA0EE3
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 08:44:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE29C8309A;
-	Thu, 14 Aug 2025 10:18:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A7AC78309A;
+	Thu, 14 Aug 2025 10:44:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W5X0HmR+";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Yo9J3Oa2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EA7E8309A; Thu, 14 Aug 2025 10:18:03 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3E51583734; Thu, 14 Aug 2025 10:44:24 +0200 (CEST)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20731.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::731])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56ED38367B
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 10:18:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B92380548
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 10:44:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-45a1b098f43so4424325e9.2
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 01:18:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755159480; x=1755764280; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=AKO5UdjgRAJPEmbreBME6PNQ2gwFG0wtQ5RecZKeGf4=;
- b=W5X0HmR+MVUvPCbUUL0t5/oo7M+P+hySPNGQqh6hOg7ScEwD/XkHbonuRoe3MPjkmC
- QScx+sUt/iKt+4kgrhEATUBFT+jYIyvh21KUBwbMq78n+U4abgdgeuUzvudT5H0fqr7R
- xRdSH6kGn2gGSMbKkHr74YvGA5YvWx+PB9B0wXwBVLbean90+Co+A5yEzfvB/lEiOYxp
- ll53kqH4HurPjkiyb81yXfq531vhA7rBGTw5gr0fD72xjFvT0aLzbCluaI2WV3orOKTh
- mvXoRjddmr0zu/8jyr/7g/FLkwvAmlIdvQWGXeyeTi+xf2FvzJfQJ+vYsoz7y+FB2A+T
- 1FLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755159480; x=1755764280;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=AKO5UdjgRAJPEmbreBME6PNQ2gwFG0wtQ5RecZKeGf4=;
- b=XZ8qXwOOFiAnsHIQYqzjXu33kFJX3XhnFeN9iFXIX+1K7+hkbzHwUkMwICw3NcMhab
- aANZ1aLkBqsKTmedyGvqUPyJSjMHGHk5mMKpKDD1zVg2q3eODCDHoBygrWuxqCgVPTdD
- mRGfduV4hjmFGfV/Kz2cumhSssRBWk7GHI4nhi+zEAxn5zeJdh7G3Ki+TqHI3VR5HVFS
- eMhc8dfTOfzpcRBKNaLtziNKJKTKxgDpA9R4CR/tyoHGNY7dB9Gq2SnxguJKxTp/AXYe
- KP+UUzHtMaUUlgfg4DgCFt+5EHrhLpyYrD9WXcoW6MF1lTxx1AhaAg6u/HuDOXfnW84Q
- 825A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQnU4aO8zIJwgd69kttNvV7nc7aZ9Hd238RH4x6WmEEGnfhQ/45ht2nbPs+ICdmAK/dW8W1lc=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywsit9YF7bDh99QyYoim3+JBXuINVvS7Q1b/1x4qCV01Tq1RIu+
- Fc+4nooQciSi0iEUTfadgDzl2UXxLx42NpMsR3OtACcbrsd0vmPjLlvC8RF6MdCaIv0=
-X-Gm-Gg: ASbGnctNvCrACDygRSdE1vfruaihSy/mRo+U0atDbYtRrc7Hqmvh/717MbLY3Jc+cTk
- erCyWWQKofvr3TX4DSq4szVWEsc9vkhYJheeXpMKo/tJRvye8t/d7BuwHDFhOZFlpj4h9mmLduw
- 49gIQjJkW4bOQ8iq2+JfOtjakyX6H1Ut2Gby3GjPygv7kACDfEmJFX+QY3viUYycxh78QutDYvk
- V7P7uAFap+B9Tfunp5s1yaPBwxf7u0lmw7cM/yHJDjUX9VV4uxGbqTAivVfug7CN3eWuFdVEtQv
- vLCq7co5JZQUOWbUbzegoY3tcrlPDvw7xeoSwesstyWd6OkN7SPiGV/Wdaof9XmweSjXrLgJxlU
- YSSxcmYc5A/n8BHf5xRRv8bon2yI75noQaQHu0HOz1sA2nkRurh7aA3M1zN2y76zp13bPBC0CCn
- EBZQ==
-X-Google-Smtp-Source: AGHT+IFJTNb1MEKLQxFX8K4AFKdZMRRWBgsckfqA+69dBXG7CYBzPckEzUJkMJOsesAs0oB6EKWxNA==
-X-Received: by 2002:a05:600c:19c7:b0:459:dde3:1a33 with SMTP id
- 5b1f17b1804b1-45a1b66e81emr14229985e9.26.1755159479708; 
- Thu, 14 Aug 2025 01:17:59 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:49c3:742c:5c4b:5c45?
- ([2a01:e0a:3cb:7bb0:49c3:742c:5c4b:5c45])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b91b05b28fsm3834950f8f.21.2025.08.14.01.17.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Aug 2025 01:17:59 -0700 (PDT)
-Message-ID: <733280be-f5a3-4e1a-b374-615566707f2a@linaro.org>
-Date: Thu, 14 Aug 2025 10:17:58 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qWEkG/PXaLsNEcaYrrzRCBrTP7RDmbEHvf97/e5BoWPeT8kKdCW28lV55b4WmU21BDeh89Hz7mbivjzRiA1W13K8vsB2SlTR6deUqDdCoHO0tgpekZiDU2qLRexZ5T2BbbdYS68SY8YXGYORIB+2sHLek0V6hH3gP9dnIYhTcLL1+sOzI0R+1E2MveMvRj07aAn42BsqI8O74QMgAQIA7ok4aP3uDTvpqooAzc9CZn5BN/SHeU832E7FSPlZaTXjCvRI+PTn+E2RrCoB9qBZpXwfTM/t4BacFm71oxGBy7OgggRpqPjQRL1h7TRxmh+h/Gjx/7smOLxgp2O0QKebbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=w+Tgx4YrEb6xpOLB2FF5fF00Pl5akbPFOxvTITlyKQ0=;
+ b=Md75K3HXLk1myrDshgrAQcrvwMmekwzYifvdR1ijpZlUy4OM16CqfWHT09KwAiaKsZJhJNaelF8AoiBzL9sajlBW6TvnJqg6zpN9/YJRA4AwYPx1twfQz1trWsS7jCAbR/v0tAvA6CK+uqpdJUaUmt82KdVs3SEp56D6KZf7xoDJtiJYLoGE3PYb5bcJpiLRj2SjneN3bg7GfpUR8Wj8W9F0LN4xL1Mp83FjwSWPApLMXtckz5aBFa8umn4Wro6BSQbsY1HUuHHL8/9ZrK9pFgj5ZzFrr7jNO3PrWglCd5y8+lmgOJo8O3S/ekMNapdIRn9wOhnJqibcmDqdtO+IhQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=w+Tgx4YrEb6xpOLB2FF5fF00Pl5akbPFOxvTITlyKQ0=;
+ b=Yo9J3Oa2MxetJVByFZSGYdWiPmPlXkSUCPy51sjKMzNQbrbtQqRxpgCzZdcbUAOl7NCrCXBwTmS7AubcLlTq6OMBrKHsCJx7XYGPxKfglT08Z4UZ9JHsrE0s8FOdJpU25Cnnx9LGGNDrxxLORalDy8lM9VAqYRBS1NhWn+np37EWmACYtw0nBqKGgRDfCbSFRtB2UhTsH2REhGx1477AiCkb3qiIL8sWfM5IAv99BQsIf2+74F+Qe0DJkDaY5apC+5TeonqG84zLYNV+At0mzgLaIADRD0f4tYptiJkHnKxHaS9tdmLJhQ9QSk+Ztab2E5WE4ITQrih3A2wL9qkIFg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from DB9P195MB1444.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:33e::16)
+ by AM7PPF51497A851.EURP195.PROD.OUTLOOK.COM (2603:10a6:20f:fff1::74c) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.17; Thu, 14 Aug
+ 2025 08:44:19 +0000
+Received: from DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+ ([fe80::f79f:1750:8791:4336]) by DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+ ([fe80::f79f:1750:8791:4336%5]) with mapi id 15.20.9031.014; Thu, 14 Aug 2025
+ 08:44:19 +0000
+Message-ID: <b1f83b3e-b5f5-4d7f-ac76-834ecfd6d5f9@phytec.de>
+Date: Thu, 14 Aug 2025 11:44:17 +0300
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/2] lwip: add Kconfig to decode and print ICMP
- unreachable messages
-To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- U-Boot mailing list <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>
-References: <20250806085959.2130339-1-jerome.forissier@linaro.org>
- <CALeDE9NsfBRyfOdxr8S0iRSj5kdSwyKVr-pfroJCdjqT0hbmvA@mail.gmail.com>
- <5f3e997a-f070-417f-a09a-90e1bf7774cb@linaro.org>
- <20250813171304.GD124814@bill-the-cat>
+Subject: Re: [PATCH v2 1/2] bootstd: Add implementation for bootmeth rauc
+To: Martin Schwan <m.schwan@phytec.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20250602-wip-bootmeth-rauc-v2-0-9d2384131486@phytec.de>
+ <20250602-wip-bootmeth-rauc-v2-1-9d2384131486@phytec.de>
+From: Wadim Egorov <w.egorov@phytec.de>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250813171304.GD124814@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20250602-wip-bootmeth-rauc-v2-1-9d2384131486@phytec.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR09CA0182.eurprd09.prod.outlook.com
+ (2603:10a6:800:120::36) To DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:10:33e::16)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9P195MB1444:EE_|AM7PPF51497A851:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f346d0c-6280-4801-99ca-08dddb0ec259
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eE1GOWF6UVR5a3R6RVYydTlqNVRhUitpeWpyUldQVVBDNUJmWVIzaE1tdG9U?=
+ =?utf-8?B?M21HR2lMVlRheFAwcGl5cXA2RXREejJBT0E1Z1dkdVdkTEt4Snd4RmtFYktk?=
+ =?utf-8?B?L3ZGTkxNd01kSitXbTk2bG5rak55cEJYWDliSHJBeFNxQUxSQkI5M0Vwa2dH?=
+ =?utf-8?B?ZzYzTUs4RlNNTUhWYTJHWXNLVlJzRVNHODUwd0RWajBSTnZqdGhNNmNadDFC?=
+ =?utf-8?B?RTZMdktkbjNCUDcvSlRWb3NOK3FyenUrUGF1T29CTGx0b1hsMHdDeU9jVlJl?=
+ =?utf-8?B?eWNGcFpGTVN1anRHczZMMWRlcG8vR21BMjhOeFZkeC9BVEpQUThMVnA4amUy?=
+ =?utf-8?B?OTl6WDBmRmh1K0dTWHFMZzNaSWZnNlhmZkkwT1VUZ0E0Ykdib09IUU1PajNu?=
+ =?utf-8?B?b0xydklmQWVZTUZRUmtsbVBMSTNnb05KWG5QQ2IrdWhWTTBIYk1iZnVlNnNv?=
+ =?utf-8?B?ZFNNVmFIbEc0eGIwZEpDN29ycUV0bWMxcUhFWW43U0xnNWVDSFNoQmlOUDNY?=
+ =?utf-8?B?V0J1OWNvNE5xeTV0RUN2VnkvUFZoSjdwd1NHaUNaTEJqTXZMWFVkOElDQWt3?=
+ =?utf-8?B?UWZkYWs0WGVGcWJHenJTQ2QweDVKUzFPdXdja0VFQnpuV3RSSHhRYlpYQ0k4?=
+ =?utf-8?B?K1VuR3EvR05BUko4YkNjcUZldDJhUFpaZlRRYlVaTHhBczFRSGJHM01PTG92?=
+ =?utf-8?B?ejd2clNBMllEY2VEeDI3ZlFGUzJjQTdkNTVBZ3cvSjVBRnBTZFU1bzB0YjBO?=
+ =?utf-8?B?OXU0YmwvclFmVTVQVmthdmdVL2F3TnpId0xUd3BoUGtZWTdNcDl0clM3dDFS?=
+ =?utf-8?B?NEVPMUZlTzFBQ2JWZTVIMmpteGxNSSswTkxXTHJoeld6NGt2U1piQVVQOGdL?=
+ =?utf-8?B?RkhhV1JaSzJyb0plTkhmRHgwbmkrZGx1Z1h5bVdoVW5rU3Q4Z1NUUUZQY3BR?=
+ =?utf-8?B?elZEcWlvTStPaWlaR0MycWVRTWp2Y3hLcUwwcmZwY2FvN1h0UGFKZ3k4bzV5?=
+ =?utf-8?B?amdPTTBPMkpjWnJON3ZyVVF1cmhoai9tTkdpR0duUUFiajhwQmYrWXk0WmMy?=
+ =?utf-8?B?dTVDTEpsREZjTWxWWEw2KzN1Z1dtRVVYaTdFeEVVUXZlQ0VHaW1yTXorRlhw?=
+ =?utf-8?B?M0JwbFI2VjF2OUloTmY1UFpHLzNHMXJ1c0c0Y016TlFBcXN5SUxJeEpBOG1m?=
+ =?utf-8?B?QmovTVFzWS9jSjRXUXB3Y3RnRXZ2SCtLbnlBOEVRVHk3Z2pBVUZyUFRQUXRh?=
+ =?utf-8?B?Q0xaMjJ0WkVzVmRsdXZ1WUoxUW9FS2h3NzlPRGtRL2dtQVlIVm81NXM2azNF?=
+ =?utf-8?B?WkZDakszMlBhVHJrVWo2dERZaWtHRk1Fc2FROVJvVXZ6RGlUYVlRNVRsdlB2?=
+ =?utf-8?B?N2k2YkIveTcwbG96MzB2K0tZTGdmL1lOMEV0Vk1udi9pWjZ6eXdsSWFHeXJO?=
+ =?utf-8?B?MVU0L3RnV0hTZGJUVWc5SkQrYWdjZGplcUdaRnExeG9mQlJXNGlsRS9maE5t?=
+ =?utf-8?B?LzZVL0FSdWRWYmtqREpBcFl2R3V3ZkY5SmlvM3gvbGxmN2FsdHBSczRubFBj?=
+ =?utf-8?B?U0NYVUZiekZja3pSYTN3SzhpSHB4SXZURHBPMkx1ekU2ZjNKeFMva3ZrOG5H?=
+ =?utf-8?B?UFlhMFdBdDJCcnkzUmZXTlMyU2M1WlovMXlCVTJ2dHhkZ0JxS0g5NUN2cnFS?=
+ =?utf-8?B?MitBN2hoUC9WSlJmSXkxYnBSdFpJeWRGK1J5ZW44bVN5K0Rpdjl1eVVjRjJI?=
+ =?utf-8?B?VDZwQkNXcU1pTmVvMkxXam51M1hRbUp3SWdXN0E5amFTMmhsaTMwZ0p0SlIy?=
+ =?utf-8?B?UHhnakJzaGYyYTFoK2JKVjB1eUZPd2tuaW50UkJ2L0VqYmoxdngwOUNqd2hO?=
+ =?utf-8?B?V2xSQk55UEpWWXlYa3VjK05rOGxsak5xenVLbm9qZXpGeG12b1BhUHRiay9j?=
+ =?utf-8?Q?doseZfxeMEM=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9P195MB1444.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WHplODF2Nkk4dzVGcGgzSnU0d05iaHFGMUhOM216Q2s4Z05qWHBzV1E5MERm?=
+ =?utf-8?B?bzl3RWRwRHR2cjdLSTVUMUY0TGkrK0NuTHhtcDFPZWk0clFVRDhqODQvNXRX?=
+ =?utf-8?B?VG9HL0xWOTl0ZXQ5dGdTWWNBWnVHb1R1T09SakRibmRxNGpwNm1xdzhMdFNY?=
+ =?utf-8?B?R3dnN3BmL3hJM3BZamsvbUZYa0lXTTdacFlvMDhjRllaMWxsOWFzMXdjTTBV?=
+ =?utf-8?B?MEdodDNLLzYrSXBkMm5zWXNTQ1Zxazh3SDlnZDQvVTRlUkp2UGxaTm45UXVp?=
+ =?utf-8?B?VWV5ZGlIMFhkSlI2ODVtS0piN2dLOUZ1QXhodlN2ZkdIN2ZGYzh3YkVmMlpz?=
+ =?utf-8?B?b2lrZVN0VGtZMnF0SDYxL0x2UHZPa2J0bHV3Z2taVyt6RmVwMUZrR1A3ZkVQ?=
+ =?utf-8?B?UWlQb3J0MzRLT091VXR0UERPWU5mQlNUMzBGdGxmZWR1UlRHc2FkZFJQOTNC?=
+ =?utf-8?B?OFVWZUQvaUlQV0V4OHBhakllTU1HYVI5RC9JWk1xR09uWXlMalkwWDg3THdE?=
+ =?utf-8?B?dXhEL3VRZVgwczRuS2ZuVEpBZDQ0VlhtUXM0Q2t6Y1ZRdTFJVlFZMzluc2Qy?=
+ =?utf-8?B?R3NtREhHLy9HNnJwNnZoTXF4SzdqYW5NbDB0cUk5NWVSSFd2cHdLN2RFOEZl?=
+ =?utf-8?B?SUVBQTlXZWRLU2ZWcEFrTlY0UGYydktpZXVPeXBtM2IvMm05MW02MUpNcmo4?=
+ =?utf-8?B?Nk9NanRQTHpoY2Z3TTFRYjd2S1ZjT3ZXNjdtc3JMYmh0SXp0bU9pK29lbUdQ?=
+ =?utf-8?B?b1ZqUXg0YktRanF3VDBuNjlhQXlLVUtSRlYxQlZTSWxTVlhmaTQzN3hOOGpm?=
+ =?utf-8?B?a2dJaGp6aHI2SmJraVBtbWdJSXVxTnhpamdpd3Vid1NKeHB1Z0tGRms1SnM4?=
+ =?utf-8?B?Vi96T1VjcUV2QWVXVTJnYkJoVEU3dFR3N1drVmdIM3g0Uk5SZHdRN3BjWmpO?=
+ =?utf-8?B?MjhtekNrZkFYbzhyaGpZQlJETkIzN0xFbXVPbjBnMUpKS1B4MG14ZWgxenpD?=
+ =?utf-8?B?OUYxdUFGbnBwQ3REbGV0c21SVVo1OXZNbEllWnFkLzZBZ0NRZjZYbGc3V2Qz?=
+ =?utf-8?B?V05FOFo5ZmFOb1dFQ1lnaE1uTXNlbWppc3BiWHlGeEsyc2MybFRYR1FRQ1o0?=
+ =?utf-8?B?SytMNHo0OEVDQjFaSWZYQ2tQNHEzU09nckZwUldadDM0RTh1alI2OWI2YWkx?=
+ =?utf-8?B?QVgvQ0VCbmhHYmRWOWMzbUEvNU53bkh4TlQvNUludVpBS0NZellDVFhEeU9o?=
+ =?utf-8?B?Y1RvbjV6T3M1L3Ewa1ArZVVnQ2FKa2FTcDdscGNDd2FkQmVGdjZsTzlpWW5O?=
+ =?utf-8?B?aVdMeGhONDYwZW8ya25DRFRTZTd4U3padDU3anNJemo0SUtnQTNNNEtnSXQx?=
+ =?utf-8?B?OWV3djdheGJ2QU52QXB2M3paNHUyVEFPcyt1aEVvM1ZtT0JZaHkySDgzdmZR?=
+ =?utf-8?B?MnVZREJCV0VsRVlsTmlURVc2dHFmWklGZlRhV0o3ODRmOWxTdklvM2NTL3c0?=
+ =?utf-8?B?bVdaRXBYaitRUzYrTmgwbnpmVnVNbzFOWnA3d001S2JEelBVbHdpUXpEYlNo?=
+ =?utf-8?B?MVk3c3pnalhYd09OTXZNNy9qd2ZRS0FLcHlhZU4wVUl2czlGWGlRbVJ2QW5P?=
+ =?utf-8?B?czFIcVpCb3RIWTdudHF4VzA1bDdDaGRRbjE0SXhHejRYSC9Tejl4c2lQTGJY?=
+ =?utf-8?B?WjdHRnNjV2puNG5jNFNKK0kyTmdFMTIrRUZpa2UzaEExQVlRd3pDMmpvWEYr?=
+ =?utf-8?B?QmpKZWNEQlpVNjBaT0NHVHJGY2Nma25FMEJ6SFZtZmZNR1V0SWdiQlI2Tysw?=
+ =?utf-8?B?WG1BQ1M1L1hIYTdJakNsZGYxdzdGbTBmWGxsNElXSjB2QnZNamIyeExUenlO?=
+ =?utf-8?B?Qllqb0ZkeTY5OUZFK3dUSXluTG5aQ1JkUmUvTXAyeHdFcDFIL3BGdWVDL1Ri?=
+ =?utf-8?B?VlgyUHpKYWwzVUxtbjJHT0xDTGN1ZkdVUnZzcG9aTG0wNC9jOTlXbDNSV1pm?=
+ =?utf-8?B?YkJlbFBMTjYvTTBadkZRY29sSlV0cXViWHJ6OWRFZzU2ckZ3UFFZZytrNVFk?=
+ =?utf-8?B?c1dXMWhKNGdkdTR2Ny9DbHBxZWppQkN0SU85bzBkeXlTQXpZWkxMQlFxM2JY?=
+ =?utf-8?Q?VtREulYbGzggHJLgo2h3s7rr7?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f346d0c-6280-4801-99ca-08dddb0ec259
+X-MS-Exchange-CrossTenant-AuthSource: DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2025 08:44:19.5279 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7xAXUcU5duc3RYA8ToTfoZnm6/2tTQUxMBXcHkTqKH5JilphhmJvIfdBw/ItC7BuQux3+d1S755KgTDroLAI9g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PPF51497A851
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,63 +177,537 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On 8/13/25 19:13, Tom Rini wrote:
-> On Tue, Aug 12, 2025 at 09:49:29AM +0200, Jerome Forissier wrote:
->>
->>
->> On 8/11/25 17:56, Peter Robinson wrote:
->>> Hi Jerome,
->>>
->>>> When using commands based on UDP such as tftp or sntp, if the server is
->>>> not reachable or the service is not started on the expected port then
->>>> the command ultimately times out. However it often happens that the server
->>>> or a router sends back an ICMP Destination Unreachable message. That can
->>>> help troubleshooting. Therefore, add support to the lwIP stack and to
->>>
->>> Has the patch for adding support to the lwIP stack been sent upstream
->>> for review? Please reference the upstream patch for this.
->>
->> Yes, see https://github.com/lwip-tcpip/lwip/pull/73. I will add a link to
->> the commit description.
->>  
->>> Also related, what is the status of other out of tree patches to upstream LWIP?
->>
->> At the moment we have:
->>
->> - 5634ecc88e9 ("net: lwip: tftp: bind to TFTP port only when in server mode")
->> Submitted upstream as https://savannah.nongnu.org/patch/?10480 and
->> https://github.com/lwip-tcpip/lwip/pull/61.
->> Status: MERGED (https://github.com/lwip-tcpip/lwip/commit/b1edb7780f5f)
->>
->> - 27d7ccda94f ("net: lwip: tftp: add support of blksize option to client")
->> further modified by 10917df17f2 ("net: lwip: tftp: fix find_option()")
->> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/62
->> Status: PENDING
->>
->> - f69f7aef26f ("lwip: tls: enforce checking of server certificates based on
->> CA availability")
->> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/63
->> Status: PENDING
->>
->> - Part of 9349fc2e9c76 ("net, net-lwip: wget: suppress console output when
->> called by EFI")
->> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/66
->> Status: PENDING
->>
->> - Patch 1/2 in this series ("lwip: icmp: allow reporting ICMP detination
->> unreachable")
->> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/73
->> Status: PENDING
->>
->> FYI we do track this information internally here at Linaro. I could as well
->> store it in a public location if it makes more sense.
+On 6/2/25 2:31 PM, Martin Schwan wrote:
+> Add a bootmeth driver which supports booting A/B system with RAUC as
+> their update client.
 > 
-> If it's not too much trouble, filing issues in gitlab in the u-boot-net
-> repository (I just enabled issue tracking there) would be good so it's
-> visible to all? Thanks.
+> Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+> ---
+>   boot/Kconfig         |  51 ++++++
+>   boot/Makefile        |   1 +
+>   boot/bootmeth_rauc.c | 432 +++++++++++++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 484 insertions(+)
+> 
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 30eb5b328d7ad8a73a2e84812dd7853b66039164..a610cf9faf99cd5480f94dcac89c3401cca394ae 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -855,6 +855,57 @@ config EXPO
+>   	  The expo can be presented in graphics form using a vidconsole, or in
+>   	  text form on a serial console.
+>   
+> +config BOOTMETH_RAUC
+> +	bool "Bootdev support for RAUC A/B systems"
+> +	default y if BOOTSTD_FULL
 
-Good idea. https://source.denx.de/u-boot/custodians/u-boot-net/-/issues/1
+I noticed that the merge 009d7722ffd7 ("Merge patch series "bootstd: New 
+bootmeth for RAUC A/B systems"") deleted the above line.
+
+Was it on purpose?
 
 Regards,
--- 
-Jerome
+Wadim
+
+> +	depends on CMDLINE
+> +	select BOOTMETH_GLOBAL
+> +	select HUSH_PARSER
+> +	help
+> +	  Enables support for booting RAUC A/B systems from MMC devices. This
+> +	  makes the bootdevs look for a 'boot.scr.uimg' or 'boot.scr' in the
+> +	  respective boot partitions, describing how to boot the distro.
+> +
+> +if BOOTMETH_RAUC
+> +
+> +config BOOTMETH_RAUC_BOOT_ORDER
+> +	string "RAUC boot order"
+> +	default "A B"
+> +	help
+> +	  Sets the default boot order. This must be list of space-separated
+> +	  strings naming the individual boot slots. Each entry in this string
+> +	  should correspond to an existing slot on the target's flash device.
+> +
+> +config BOOTMETH_RAUC_PARTITIONS
+> +	string "RAUC boot and root partitions indexes"
+> +	default "1,2 3,4"
+> +	help
+> +	  Sets the partition indexes of boot and root slots. This must be a list
+> +	  of comma-separated pair values, which in turn are separated by spaces.
+> +	  The first value in pair is for the boot partition and second for the
+> +	  root partition.
+> +
+> +config BOOTMETH_RAUC_DEFAULT_TRIES
+> +	int "RAUC slot default tries"
+> +	default 3
+> +	help
+> +	  Sets how many times a slot should be tried booting, before considering
+> +	  it to be bad.
+> +
+> +config BOOTMETH_RAUC_RESET_ALL_ZERO_TRIES
+> +	bool "Reset slot tries when all RAUC slots have zero tries left"
+> +	default y
+> +	help
+> +	  When all slots have zero tries left or no valid slot was found, reset
+> +	  to the default boot order set by BOOTMETH_RAUC_BOOT_ORDER and set the
+> +	  slot tries to their default value specified by
+> +	  BOOTMETH_RAUC_DEFAULT_TRIES.
+> +
+> +	  This prevents a system from remaining in an unbootable state, after
+> +	  all slot tries were decremented to zero.
+> +
+> +endif # BOOTMETH_RAUC
+> +
+>   config BOOTMETH_SANDBOX
+>   	def_bool y
+>   	depends on SANDBOX
+> diff --git a/boot/Makefile b/boot/Makefile
+> index 71dafaefa76bca7896741dd896829575bd9e8f10..46f27e71856c598a866424cb93ee01444ea6a19a 100644
+> --- a/boot/Makefile
+> +++ b/boot/Makefile
+> @@ -32,6 +32,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_EFILOADER) += bootmeth_efi.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_QFW) += bootmeth_qfw.o
+> +obj-$(CONFIG_$(PHASE_)BOOTMETH_RAUC) += bootmeth_rauc.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_SCRIPT) += bootmeth_script.o
+>   obj-$(CONFIG_$(PHASE_)CEDIT) += cedit.o
+> diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..4d48d643c0a727d5ebd5f3514c173f0dd824b7cd
+> --- /dev/null
+> +++ b/boot/bootmeth_rauc.c
+> @@ -0,0 +1,432 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Bootmethod for distro boot with RAUC
+> + *
+> + * Copyright 2025 PHYTEC Messtechnik GmbH
+> + * Written by Martin Schwan <m.schwan@phytec.de>
+> + */
+> +
+> +#define LOG_CATEGORY UCLASS_BOOTSTD
+> +
+> +#include <blk.h>
+> +#include <bootflow.h>
+> +#include <bootmeth.h>
+> +#include <bootstd.h>
+> +#include <dm.h>
+> +#include <env.h>
+> +#include <fs.h>
+> +#include <malloc.h>
+> +#include <mapmem.h>
+> +#include <string.h>
+> +#include <asm/cache.h>
+> +
+> +/* Length of env var "BOOT_*_LEFT" */
+> +#define BOOT_LEFT_LEN	(5 + 32 + 5)
+> +
+> +static const char * const script_names[] = { "boot.scr", "boot.scr.uimg", NULL };
+> +
+> +/**
+> + * struct distro_rauc_slot - Slot information
+> + *
+> + * A slot describes the unit of a bootable system consisting of one or multiple
+> + * partitions. This usually includes a root filesystem, kernel and potentially other
+> + * files, like device trees and boot scripts for that particular distribution.
+> + *
+> + * @name	The slot name
+> + * @boot_part	The boot partition number on disk
+> + * @root_part	The root partition number on disk
+> + */
+> +struct distro_rauc_slot {
+> +	char *name;
+> +	int boot_part;
+> +	int root_part;
+> +};
+> +
+> +/**
+> + * struct distro_rauc_priv - Private data
+> + *
+> + * @slots	All slots of the device in default order
+> + * @boot_order	String of the current boot order containing the active slot names
+> + */
+> +struct distro_rauc_priv {
+> +	struct distro_rauc_slot **slots;
+> +};
+> +
+> +static struct distro_rauc_slot *get_slot(struct distro_rauc_priv *priv,
+> +					 const char *slot_name)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; priv->slots[i]->name; i++) {
+> +		if (!strcmp(priv->slots[i]->name, slot_name))
+> +			return priv->slots[i];
+> +	}
+> +
+> +	return NULL;
+> +}
+> +
+> +static int distro_rauc_check(struct udevice *dev, struct bootflow_iter *iter)
+> +{
+> +	/*
+> +	 * This distro only works on whole MMC devices, as multiple partitions
+> +	 * are needed for an A/B system.
+> +	 */
+> +	if (bootflow_iter_check_mmc(iter))
+> +		return log_msg_ret("mmc", -EOPNOTSUPP);
+> +	if (iter->part)
+> +		return log_msg_ret("part", -EOPNOTSUPP);
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_scan_boot_part(struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc;
+> +	struct distro_rauc_priv *priv;
+> +	char *boot_order;
+> +	const char **boot_order_list;
+> +	bool exists;
+> +	int ret;
+> +	int i;
+> +	int j;
+> +
+> +	desc = dev_get_uclass_plat(bflow->blk);
+> +
+> +	priv = bflow->bootmeth_priv;
+> +	if (!priv || !priv->slots)
+> +		return log_msg_ret("priv", -EINVAL);
+> +
+> +	boot_order = env_get("BOOT_ORDER");
+> +	boot_order_list = str_to_list(boot_order);
+> +	for (i = 0; boot_order_list[i]; i++) {
+> +		exists = false;
+> +		for (j = 0; script_names[j]; j++) {
+> +			const struct distro_rauc_slot *slot;
+> +
+> +			slot = get_slot(priv, boot_order_list[i]);
+> +			if (!slot)
+> +				return log_msg_ret("env", -ENOENT);
+> +			ret = fs_set_blk_dev_with_part(desc, slot->boot_part);
+> +			if (ret)
+> +				return log_msg_ret("blk", ret);
+> +			exists |= fs_exists(script_names[j]);
+> +		}
+> +		if (!exists)
+> +			return log_msg_ret("fs", -ENOENT);
+> +	}
+> +	str_free_list(boot_order_list);
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	struct distro_rauc_priv *priv;
+> +	int ret;
+> +	char *slot;
+> +	int i;
+> +	char *partitions;
+> +	char *boot_order;
+> +	const char *default_boot_order;
+> +	const char **default_boot_order_list;
+> +	char *boot_order_copy;
+> +	char boot_left[BOOT_LEFT_LEN];
+> +	char *parts;
+> +
+> +	/* Get RAUC variables or set their default values */
+> +	boot_order = env_get("BOOT_ORDER");
+> +	if (!boot_order) {
+> +		log_debug("BOOT_ORDER did not exist yet, setting default value\n");
+> +		if (env_set("BOOT_ORDER", CONFIG_BOOTMETH_RAUC_BOOT_ORDER))
+> +			return log_msg_ret("env", -EPERM);
+> +		boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
+> +	}
+> +	default_boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
+> +	default_boot_order_list = str_to_list(default_boot_order);
+> +	for (i = 0; default_boot_order_list[i]; i++) {
+> +		sprintf(boot_left, "BOOT_%s_LEFT", default_boot_order_list[i]);
+> +		if (!env_get(boot_left)) {
+> +			log_debug("%s did not exist yet, setting default value\n",
+> +				  boot_left);
+> +			if (!env_set_ulong(boot_left, CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES))
+> +				return log_msg_ret("env", -EPERM);
+> +		}
+> +	}
+> +	str_free_list(default_boot_order_list);
+> +
+> +	priv = calloc(1, sizeof(struct distro_rauc_priv));
+> +	if (!priv)
+> +		return log_msg_ret("buf", -ENOMEM);
+> +	priv->slots = calloc(1, sizeof(struct distro_rauc_slot));
+> +
+> +	/* Copy default boot_order, so we can leave the original unmodified */
+> +	boot_order_copy = strdup(default_boot_order);
+> +	partitions = strdup(CONFIG_BOOTMETH_RAUC_PARTITIONS);
+> +
+> +	for (i = 1;
+> +	     (parts = strsep(&partitions, " ")) &&
+> +	     (slot = strsep(&boot_order_copy, " "));
+> +	     i++) {
+> +		struct distro_rauc_slot *s;
+> +
+> +		s = calloc(1, sizeof(struct distro_rauc_slot));
+> +		s->name = strdup(slot);
+> +		s->boot_part = simple_strtoul(strsep(&parts, ","), NULL, 10);
+> +		s->root_part = simple_strtoul(strsep(&parts, ","), NULL, 10);
+> +		priv->slots = realloc(priv->slots, (i + 1) *
+> +				      sizeof(struct distro_rauc_slot));
+> +		priv->slots[i - 1] = s;
+> +		priv->slots[i]->name = NULL;
+> +	}
+> +
+> +	bflow->bootmeth_priv = priv;
+> +
+> +	ret = distro_rauc_scan_boot_part(bflow);
+> +	if (ret < 0) {
+> +		for (i = 0; priv->slots[i]->name; i++) {
+> +			free(priv->slots[i]->name);
+> +			free(priv->slots[i]);
+> +		}
+> +		free(priv);
+> +		free(boot_order_copy);
+> +		bflow->bootmeth_priv = NULL;
+> +		return ret;
+> +	}
+> +
+> +	bflow->state = BOOTFLOWST_READY;
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_read_file(struct udevice *dev, struct bootflow *bflow,
+> +				 const char *file_path, ulong addr,
+> +				 enum bootflow_img_t type, ulong *sizep)
+> +{
+> +	/*
+> +	 * Reading individual files is not supported since we only operate on
+> +	 * whole MMC devices (because we require multiple partitions).
+> +	 */
+> +	return log_msg_ret("Unsupported", -ENOSYS);
+> +}
+> +
+> +static int distro_rauc_load_boot_script(struct bootflow *bflow,
+> +					const struct distro_rauc_slot *slot)
+> +{
+> +	struct blk_desc *desc;
+> +	struct distro_rauc_priv *priv;
+> +	struct udevice *bootstd;
+> +	const char *const *prefixes;
+> +	int ret;
+> +	int i;
+> +	int j;
+> +
+> +	ret = uclass_first_device_err(UCLASS_BOOTSTD, &bootstd);
+> +	if (ret)
+> +		return log_msg_ret("std", ret);
+> +	prefixes = bootstd_get_prefixes(bootstd);
+> +
+> +	desc = dev_get_uclass_plat(bflow->blk);
+> +	priv = bflow->bootmeth_priv;
+> +	if (!priv || !priv->slots)
+> +		return log_msg_ret("priv", -EINVAL);
+> +
+> +	bflow->part = slot->boot_part;
+> +	if (!bflow->part)
+> +		return log_msg_ret("part", -ENOENT);
+> +
+> +	ret = bootmeth_setup_fs(bflow, desc);
+> +	if (ret)
+> +		return log_msg_ret("set", ret);
+> +
+> +	for (i = 0; prefixes[i] && bflow->state != BOOTFLOWST_FILE; i++) {
+> +		for (j = 0; script_names[j] && bflow->state != BOOTFLOWST_FILE; j++) {
+> +			if (!bootmeth_try_file(bflow, desc, prefixes[i], script_names[j])) {
+> +				log_debug("Found file '%s%s' in %s.part_%x\n",
+> +					  prefixes[i], script_names[j],
+> +					  bflow->dev->name, bflow->part);
+> +				bflow->subdir = strdup(prefixes[i]);
+> +			}
+> +		}
+> +	}
+> +	if (bflow->state != BOOTFLOWST_FILE)
+> +		return log_msg_ret("file", -ENOENT);
+> +
+> +	ret = bootmeth_alloc_file(bflow, 0x10000, ARCH_DMA_MINALIGN,
+> +				  (enum bootflow_img_t)IH_TYPE_SCRIPT);
+> +	if (ret)
+> +		return log_msg_ret("read", ret);
+> +
+> +	return 0;
+> +}
+> +
+> +static int find_active_slot(char **slot_name, ulong *slot_tries)
+> +{
+> +	ulong tries;
+> +	char boot_left[BOOT_LEFT_LEN];
+> +	char *boot_order;
+> +	const char **boot_order_list;
+> +	bool slot_found = false;
+> +	int ret;
+> +	int i;
+> +
+> +	boot_order = env_get("BOOT_ORDER");
+> +	if (!boot_order)
+> +		return log_msg_ret("env", -ENOENT);
+> +	boot_order_list = str_to_list(boot_order);
+> +	for (i = 0; boot_order_list[i] && !slot_found; i++) {
+> +		sprintf(boot_left, "BOOT_%s_LEFT", boot_order_list[i]);
+> +		tries = env_get_ulong(boot_left, 10, ULONG_MAX);
+> +		if (tries == ULONG_MAX)
+> +			return log_msg_ret("env", -ENOENT);
+> +
+> +		if (tries) {
+> +			ret = env_set_ulong(boot_left, tries - 1);
+> +			if (ret)
+> +				return log_msg_ret("env", ret);
+> +			*slot_name = strdup(boot_order_list[i]);
+> +			*slot_tries = tries;
+> +			slot_found = true;
+> +		}
+> +	}
+> +	str_free_list(boot_order_list);
+> +
+> +	if (!slot_found) {
+> +		if (IS_ENABLED(CONFIG_BOOTMETH_RAUC_RESET_ALL_ZERO_TRIES)) {
+> +			log_warning("WARNING: No valid slot found\n");
+> +			log_info("INFO: Resetting boot order and all slot tries\n");
+> +			boot_order_list = str_to_list(CONFIG_BOOTMETH_RAUC_BOOT_ORDER);
+> +			for (i = 0; boot_order_list[i]; i++) {
+> +				sprintf(boot_left, "BOOT_%s_LEFT", boot_order_list[i]);
+> +				ret = env_set_ulong(boot_left, CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES);
+> +				if (ret)
+> +					return log_msg_ret("env", ret);
+> +			}
+> +			str_free_list(boot_order_list);
+> +			ret = env_save();
+> +			if (ret)
+> +				return log_msg_ret("env", ret);
+> +			do_reset(NULL, 0, 0, NULL);
+> +		}
+> +		log_err("ERROR: No valid slot found\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_boot(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc;
+> +	struct distro_rauc_priv *priv;
+> +	const struct distro_rauc_slot *slot;
+> +	char *boot_order;
+> +	const char **boot_order_list;
+> +	char *active_slot;
+> +	ulong active_slot_tries;
+> +	char raucargs[64];
+> +	char boot_left[BOOT_LEFT_LEN];
+> +	ulong addr;
+> +	int ret = 0;
+> +	int i;
+> +
+> +	desc = dev_get_uclass_plat(bflow->blk);
+> +	if (desc->uclass_id != UCLASS_MMC)
+> +		return log_msg_ret("blk", -EINVAL);
+> +	priv = bflow->bootmeth_priv;
+> +
+> +	/* Device info variables */
+> +	ret = env_set("devtype", blk_get_devtype(bflow->blk));
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	ret = env_set_hex("devnum", desc->devnum);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Find active, valid slot */
+> +	ret = find_active_slot(&active_slot, &active_slot_tries);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Kernel command line arguments */
+> +	sprintf(raucargs, "rauc.slot=%s", active_slot);
+> +	ret = env_set("raucargs", raucargs);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Active slot info */
+> +	slot = get_slot(priv, active_slot);
+> +	if (!slot)
+> +		return log_msg_ret("env", -ENOENT);
+> +	ret = env_set_hex("distro_bootpart", slot->boot_part);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +	ret = env_set_hex("distro_rootpart", slot->root_part);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +	ret = env_save();
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Load distro boot script */
+> +	ret = distro_rauc_load_boot_script(bflow, slot);
+> +	if (ret)
+> +		return log_msg_ret("load", ret);
+> +
+> +	log_info("INFO: Booting slot %s, %lu of %d tries left\n",
+> +		 active_slot, active_slot_tries, CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES);
+> +
+> +	log_debug("devtype: %s\n", env_get("devtype"));
+> +	log_debug("devnum: %s\n", env_get("devnum"));
+> +	log_debug("distro_bootpart: %s\n", env_get("distro_bootpart"));
+> +	log_debug("distro_rootpart: %s\n", env_get("distro_rootpart"));
+> +	log_debug("raucargs: %s\n", env_get("raucargs"));
+> +	boot_order = env_get("BOOT_ORDER");
+> +	if (!boot_order)
+> +		return log_msg_ret("env", -EPERM);
+> +	log_debug("BOOT_ORDER: %s\n", boot_order);
+> +	boot_order_list = str_to_list(boot_order);
+> +	for (i = 0; boot_order_list[i]; i++) {
+> +		sprintf(boot_left, "BOOT_%s_LEFT", boot_order_list[i]);
+> +		log_debug("%s: %s\n", boot_left, env_get(boot_left));
+> +	}
+> +	str_free_list(boot_order_list);
+> +
+> +	/* Run distro boot script */
+> +	addr = map_to_sysmem(bflow->buf);
+> +	ret = cmd_source_script(addr, NULL, NULL);
+> +	if (ret)
+> +		return log_msg_ret("boot", ret);
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_bootmeth_bind(struct udevice *dev)
+> +{
+> +	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
+> +
+> +	plat->desc = "RAUC distro boot from MMC";
+> +	plat->flags = BOOTMETHF_GLOBAL;
+> +
+> +	return 0;
+> +}
+> +
+> +static struct bootmeth_ops distro_rauc_bootmeth_ops = {
+> +	.check		= distro_rauc_check,
+> +	.read_bootflow	= distro_rauc_read_bootflow,
+> +	.read_file	= distro_rauc_read_file,
+> +	.boot		= distro_rauc_boot,
+> +};
+> +
+> +static const struct udevice_id distro_rauc_bootmeth_ids[] = {
+> +	{ .compatible = "u-boot,distro-rauc" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(bootmeth_rauc) = {
+> +	.name		= "bootmeth_rauc",
+> +	.id		= UCLASS_BOOTMETH,
+> +	.of_match	= distro_rauc_bootmeth_ids,
+> +	.ops		= &distro_rauc_bootmeth_ops,
+> +	.bind		= distro_rauc_bootmeth_bind,
+> +};
+> 
+
