@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB4CFCA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 04:35:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FC38CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 05:48:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 193A283835;
-	Thu, 14 Aug 2025 06:34:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id BB5B6836D3;
+	Thu, 14 Aug 2025 07:48:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="gmgIZiSU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="R3q6XRx3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4377083844; Thu, 14 Aug 2025 05:21:38 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 944158381D; Thu, 14 Aug 2025 07:48:40 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49F638382F
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 05:21:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id CA0A8837A7
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 07:48:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D54321050E9; Thu, 14 Aug 2025 05:21:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1755141695;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=2m18hFTZrJj0mBdaUqzkn4iR2TzEbZ83yCqvU4xbBvg=;
- b=gmgIZiSU63KcEQEkfDuCuhXuf2Okm5TA+3HCtXWBJeTOeefW/12mvDfq3pilwoHUDbz3Si
- RsYzLcwCoOq7wMDBsw5KU3HfPzyY01+sZz5wdKmyycWXSx7wNVcmQnNaHpZkQWVI23Cq3n
- GiMwulDvFjh2OS3MGi3qDVexCMafamOVFEcRSUKynB0FIXUo89VwOu12vt2UG7weNKgJIo
- cqJxiNK7Oz7bvefjO1GEwBI12+j/kbiSzJ2dnSszw7tuvtDlKazvnfsQe06ri10eIS49c6
- 8kbUhKMAdXvZSFy/AkFCQO0Ygsqohm1VFbd4mhygcmUe5EmimF0d8dzXD/9wSQ==
-Message-ID: <b83f79a7-66e9-43b9-859e-ebb69e4d536b@nabladev.com>
-Date: Thu, 14 Aug 2025 05:21:33 +0200
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 615825C5949;
+ Thu, 14 Aug 2025 05:48:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5F70C4CEF4;
+ Thu, 14 Aug 2025 05:48:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1755150516;
+ bh=UmYqS2u2gKO3jABLMnOmSskXKmBdg8nbfe8Pxg+tzp0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=R3q6XRx3bWT1QEKV29DVJ9yzjsZ3QZR5oOxho5zo1jP4w+dbmxKZoqUS+xhp7nOxv
+ 6KeiRdTjFqYM+ZLaQqEM/tzdV5Oz5MVmjGBHN/1WyPj3HA4dldXrma+oK7UHSWExMq
+ Z3xkVCsr34EMMsfEIw/9r6jGDtTXufL5dRDTyQGFVIolObzAOyvUU8UDj4Sv2RIFMu
+ JWNQ0kXokuzBk1HLE2dqW/BZj2/XuPHAt2pguUrFK87pp7WLhyFQJ4Mmdqlmj8t0dr
+ TbpcFoyf1qQA+hQGyyqHvJuWNOyc/DaG9fqB90BbV46lLFomBHZrLQpdfdVPmqppgu
+ oY6+OmSfpjljQ==
+Date: Thu, 14 Aug 2025 11:18:19 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io, neil.armstrong@linaro.org, trini@konsulko.com,
+ dmitry.baryshkov@oss.qualcomm.com, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH v2] qcom_defconfig: Add VID/PID to represent fastboot
+ device
+Message-ID: <aJ14o75G4SnU_Emp@sumit-X1>
+References: <20250724111911.67872-1-sumit.garg@kernel.org>
+ <4816e2ef-b690-4f56-acf3-9c8b7a491b5f@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: cdns3: Do not access memory after free
-To: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
- <trini@konsulko.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: u-boot@lists.denx.de
-References: <20250813-usb_cdns3-v1-1-3779912fe660@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <20250813-usb_cdns3-v1-1-3779912fe660@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Thu, 14 Aug 2025 06:34:20 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4816e2ef-b690-4f56-acf3-9c8b7a491b5f@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,46 +72,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/13/25 6:30 PM, Andrew Goodbody wrote:
-> The call to cdns3_gadget_ep_free_request will free priv_req so do the
-> call to list_del_init which accesses the memory pointed to by priv_req
-> before the free.
+On Wed, Aug 13, 2025 at 03:50:21PM +0200, Casey Connolly wrote:
+> Hi Sumit,
 > 
-> This issue was found by Smatch.
+> On 24/07/2025 13:19, Sumit Garg wrote:
+> > From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > 
+> > Currently fastboot mode is enumerated as VID/PID: 0000:0000 which is
+> > not appropriate. On Qcom platforms, fastboot mode is rather enumerated
+> > as VID/PID: 18d1:d00d in ABL or from fastboot.efi app. So lets use the
+> > same VID/PID pair in U-Boot to represent fastboot mode.
 > 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   drivers/usb/cdns3/gadget.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+> Since we have different defconfigs going on for Qualcomm, I think it
+> makes more sense to set defaults in drivers/usb/gadget/Kconfig like
+> rockchip does, then we don't need to update all the defconfigs and we
+> can just override them if desired. Would you mind respinning this? Sorry
+> this is coming so late...
+
+No worries, Kconfig option sounds reasonable to me. I can spin up a v3
+with that.
+
+-Sumit
+
 > 
-> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
-> index a30c40ef80e..9eaf7e40ab6 100644
-> --- a/drivers/usb/cdns3/gadget.c
-> +++ b/drivers/usb/cdns3/gadget.c
-> @@ -557,10 +557,10 @@ static void cdns3_wa2_remove_old_request(struct cdns3_endpoint *priv_ep)
->   
->   		trace_cdns3_wa2(priv_ep, "removes eldest request");
->   
-> +		list_del_init(&priv_req->list);
->   		kfree(priv_req->request.buf);
->   		cdns3_gadget_ep_free_request(&priv_ep->endpoint,
->   					     &priv_req->request);
-> -		list_del_init(&priv_req->list);
-
-Shouldn't the kfree() be moved here instead ? 
-cdns3_gadget_ep_free_request() also accesses priv_req->request .
-
->   		--priv_ep->wa2_counter;
->   
->   		if (!chain)
-> @@ -1959,10 +1959,10 @@ static int cdns3_gadget_ep_disable(struct usb_ep *ep)
->   	while (!list_empty(&priv_ep->wa2_descmiss_req_list)) {
->   		priv_req = cdns3_next_priv_request(&priv_ep->wa2_descmiss_req_list);
->   
-> +		list_del_init(&priv_req->list);
->   		kfree(priv_req->request.buf);
->   		cdns3_gadget_ep_free_request(&priv_ep->endpoint,
->   					     &priv_req->request);
-> -		list_del_init(&priv_req->list);
-
-DTTO ?
+> Kind regards,>
+> > Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > ---
+> > 
+> > Changes in v2:
+> > - Rebased to tip of master since v1 didn't apply cleanly there.
+> > 
+> >  configs/qcom_defconfig | 2 ++
+> >  1 file changed, 2 insertions(+)
+> > 
+> > diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> > index b9ba7a677d9..4e24a43b888 100644
+> > --- a/configs/qcom_defconfig
+> > +++ b/configs/qcom_defconfig
+> > @@ -140,6 +140,8 @@ CONFIG_USB_XHCI_DWC3=y
+> >  CONFIG_USB_DWC3=y
+> >  CONFIG_USB_DWC3_GENERIC=y
+> >  CONFIG_USB_GADGET=y
+> > +CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
+> > +CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
+> >  CONFIG_USB_FUNCTION_MASS_STORAGE=y
+> >  CONFIG_UFS=y
+> >  CONFIG_QCOM_UFS=y
+> 
+> -- 
+> // Casey (she/her)
+> 
