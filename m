@@ -4,50 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6805DCA0EE4
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFB5CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:14:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 946318399D;
-	Thu, 14 Aug 2025 20:10:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id B48FA83A25;
+	Thu, 14 Aug 2025 20:14:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="FWzM6F4b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N6OQfHrM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED2068399D; Thu, 14 Aug 2025 20:10:57 +0200 (CEST)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.36])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3011F83A1F; Thu, 14 Aug 2025 20:14:46 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01DB48399C
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:10:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id 233E18399C
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:14:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:In-Reply-To:References;
- bh=Z2I3aU3KaxsshGq4Chs+eRxaliDJfXGPcZB7yPfIdLc=;
- b=FWzM6F4bQhwE8tmzzV28nBvWKyRFTzezXOz/gupRZogCHIF76iP8jIi51b/v/WkANxXgWMOoGnqqd8PXCnr198c43VPCIp68oCgx5FUAQ/q22LoSlXS5jeXqHPcio/apZ1Ez7eSPnwOIWG2wVIOvJ36PT3NrQllLmGEmRYdB01D0DxLXLFU56v92S0759/yfksE/KuyXP9KDyblP+pfbWslCJDW5oR/tJJk7iZnG3o6p6estxQwtY60awD
- GfMyl9QExeURdkpibdXyxO4CJOGggyC/fgFoggiBF5hJS56eTq5XkbESmdpFWughBNV4EDOGmgrRWWJQCWAt8ei7hfHA==
-Received: from GRAPHRT (188-24-194-92.rdsnet.ro [188.24.194.92])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Thu, 14 Aug 2025 18:10:50 +0000
-Date: Thu, 14 Aug 2025 21:10:49 +0300
-From: Marius Dinu <m95d+git@psihoexpert.ro>
-To: Tom Rini <trini@konsulko.com>
-Cc: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] timer: Mark this as incompatible with SYS_ARCH_TIMER
-Message-ID: <aJ4mqWaJuJ0Ka+28@GRAPHRT>
-References: <20250813205511.3420638-1-trini@konsulko.com>
- <20250813205511.3420638-2-trini@konsulko.com>
- <aJ4OR2rhl6eFV3GE@GRAPHRT> <20250814164021.GM124814@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-76e2e8e54f8so1115757b3a.1
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:14:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755195282; x=1755800082; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YA+NB2gofxTArnSMWf8x5CbNRFY99E/WMN3vIrvmwX4=;
+ b=N6OQfHrMK9q+gQ0EByWWHDObTcgKbad+hCvuDGyUgTIIg/y0fjVTOSNMfm1FG6vSiv
+ jVctS7+ANFgH1WEeb6LikqIPKI+USQIFAa2Mnb9QYloM3YiE4xgnmtP4k0vycdPfev8V
+ oH+na9BY8UzUTTzNFedfR4bSvkZal8Tk6p2U4mwQJncSyIsbpqiLZO8Jb1D0LdMhMcp9
+ cO2/uKWjMSOZAMsLK17t3aHIDbhNM6b6E9kU9XD9Kr4DY9lWMEkf0c9r/jSJ7VtPnpFg
+ /Ce/mEgbWc5vSr2WG556f027PosQZglFfZOVkLnSBDHxnKKmzcVBZC2PLbL4Ztq6sqsn
+ 2TpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755195282; x=1755800082;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YA+NB2gofxTArnSMWf8x5CbNRFY99E/WMN3vIrvmwX4=;
+ b=UCxjq4tWiVEs+3npDKTWTOf2Ex7Hht0QbMS0JRAe6hz8M+TbhoJVihffSBA0/yUDWP
+ X/LynJsoea7iofrbn2TIWadqQYFRcqZvX9VagnHwilhgzk+gh9P2szR1CHOHj51+VnRB
+ aIPOwraTS/kRE1tYmGoxT1M00zO9LmkL++ZjH2M3rZgA9iMwp3XGX641yE/4jdS+6xGz
+ 7RDfaoo3UMRhQAuhM1zMYm3cxUramAFnwxWRp0gQtcZ5gWxL3q8m67UJ2XdgCOr8ffWs
+ H+n7GrnY9UYuipwb5LCKQ0XiDjC1U7y1gcc/NzaBOyuPSky/muasPWB3UzJTJcD+Cqcv
+ hBIQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVw6uzntO5qiQl4MaNtUI48VQo18V8Tzz6rqLMy3Okw+WLWcX0HYTS1XBodGiq/jwm9AzJ5oKk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzbcRdt4eh5nIzX9GQhFY0AZ7s15CqMgc/yyu1+VL4fVnpOqS6I
+ jGFQbI70S5lZGMr1I6bFTRzJ7bnwPJmqY3NN3BXYM6ycYmsOWcW2yDgs
+X-Gm-Gg: ASbGncvp0R0tklWiwDxuG3rRagjL0nxonSAvJv5zaQz+JSBAo0e49c+CDwOf13ZLqpm
+ Me6aIF2uYKL4FO0GMac6tArJlsHyzDiN5ZSQyYYXpcpZfOknv5kssdKBTTfo5HKD1lFunDJ+XmY
+ g4O6jHl3HCk+YBUq66c4cMYW+b9qoTNRZVFFMGEY6BOc1fRScvj9Ing/wg2n3aeSqcQ8x+Jg4TA
+ 1yrqIKHSyh3bDrLKXLPSaol/q8R35yEIVvH92t4si5pnxwEI9XxdJZ9FFZzCcDFa0p0Sb5w5cBn
+ lIlfQwzvx/czfu3hGjm5CAVyYtNhmmgE7Krkzhn/BpkqP5eVjyo+DukvYEBtqutsyOmlDloiuwI
+ ZwfDg+7Jkd2bEj7AdnAd5i5FCndVgKx0/piGr4ofMUipF0g==
+X-Google-Smtp-Source: AGHT+IH85cm00A8o+ZUZSuCsVlqli8npH7YCsZasHdf1mq7iVDBdGeu+AcP0/2ATguys1nFIIvwxcQ==
+X-Received: by 2002:a05:6a00:3ccc:b0:740:a023:5d60 with SMTP id
+ d2e1a72fcca58-76e2fb1400emr6470554b3a.19.1755195282327; 
+ Thu, 14 Aug 2025 11:14:42 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:f50d:900e:961:a245])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-76bccfbce4bsm34713327b3a.77.2025.08.14.11.14.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Aug 2025 11:14:41 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: tuomas.tynkkynen@iki.fi, jan.kiszka@siemens.com, u-boot@lists.denx.de,
+ heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
+ Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH v2 1/2] Kconfig: Convert SYS_EARLY_PCI_INIT to Kconfig
+Date: Thu, 14 Aug 2025 15:14:35 -0300
+Message-Id: <20250814181436.1598067-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250814164021.GM124814@bill-the-cat>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,55 +98,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2025-08-14 10.40.21 +-0600, Tom Rini wrote:
-> On Thu, Aug 14, 2025 at 07:26:47PM +0300, Marius Dinu wrote:
-> > On Wed, 2025-08-13 14.55.11 +-0600, Tom Rini wrote:
-> > > The timers implemented under SYS_ARCH_TIMER are not part of the TIMER
-> > > framework and thus cannot be enabled at the same time. Express this
-> > > dependency in Kconfig and add a note to the help of SYS_ARCH_TIMER.
-> > > 
-> > > Reported-by: Marius Dinu <m95d+git@psihoexpert.ro>
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > ---
-> > > Marius, I ended up reworking things a bit (and also found part 1/2 of
-> > > this series) but please let me know if you feel this should retain your
-> > > Author and such instead. Thanks!
-> > 
-> > No need for credits.
-> 
-> OK.
-> 
-> > I think you should keep the warning message in the Timer drivers menu.
-> > It provides a quick explanation why the menu is empty.
-> 
-> I thought about it, and we don't do anything like that for other
-> either/or choices, and it's now in the help text itself at least. The
-> other thing however, is that a few platforms do allow for both, because
-> they play some games with CFG_SYS_TIMER* defines. So I'm not entirely
-> sure what to do here.
-> 
-> > Bugs are reported in this mailing list too?
-> 
-> Yes.
-> 
-> -- 
-> Tom
+The CONFIG_SYS_EARLY_PCI_INIT symbol is currently not supported
+by Kconfig.
 
-With the original patch I only tried to reduce the number of compilation
-failures. I encounter a lot. I'm no expert and I can only try to fix little
-things such as this one.
+Make it a Kconfig symbol so that users could select it via defconfig.
 
-I belive some people (like myself) would be confused by an empty menu and
-would not immediately remember the SYS_ARCH_TIMER in a completely different
-part of menuconfig.
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+---
+Changes since v1:
+- Only collected Tom's RB tag.
 
+ common/Kconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-I tried to find configs with both CONFIG_SYS_ARCH_TIMER and CONFIG_TIMER
-enabled amd I couldn't find any. So it's probably OK to leave the patch as it
-is and exceptions, if needed, can be added later.
-
-PS: I saw your other patches that add dependencies on platform type.
-    Nice work, really needed!
-
-Marius
+diff --git a/common/Kconfig b/common/Kconfig
+index a2f653f7e722..cb17f0561537 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -833,6 +833,13 @@ config PCI_INIT_R
+ 	  case of DM PCI-based Ethernet devices, which will not be detected
+ 	  without having the enumeration performed earlier.
+ 
++config SYS_EARLY_PCI_INIT
++	bool "Enumerate PCI buses early during init"
++	depends on PCI
++	help
++	  Do early PCI configuration before the eMMC gets initialised,
++	  because PCI resources are crucial for eMMC access on some boards.
++
+ config RESET_PHY_R
+ 	bool "Reset ethernet PHY during init"
+ 	help
+-- 
+2.34.1
 
