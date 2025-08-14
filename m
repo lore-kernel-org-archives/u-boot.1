@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C21CA0EE4
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:13:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D413CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C255838D4;
-	Thu, 14 Aug 2025 15:13:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5174583939;
+	Thu, 14 Aug 2025 15:13:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pylauw70";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AOsnS9mS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8C2F83930; Thu, 14 Aug 2025 15:13:03 +0200 (CEST)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 1DFCF83939; Thu, 14 Aug 2025 15:13:11 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D7D2838C7
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:13:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A5C4838C7
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:13:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cn.liweihao@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2445806d44fso6974605ad.1
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 06:13:01 -0700 (PDT)
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-b47174beccfso656287a12.2
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 06:13:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755177179; x=1755781979; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0n6mysQEdYvKvZY6R8FQRbk+OtOTPscCPeAuTaaOiVY=;
- b=Pylauw70oDXptQATZKh88UQv98KTEOmNW4L3FoTKt9Fi+7lgal12nLQF15nHmBEwmN
- 3kEflJlW9hflYdA2mMm5EmK77wsgTIBeUO1PrKgV6ho7iZktLM4nnB93iQ3fG7v0sK8U
- btU8cIJMsJMRRxlKo59VQd1b9ZDUSzfvnZSrnMXT+S33ThrvWOLqq203ENRBETSlDp05
- vLq6dUBPsM/au1OHJtCps3ee5Rx+6tmit9433LBA8wVcXJpfinC3M2FrezM/x61ND/Rj
- I/luWvhRdqdIXVDkABnEWOzNSipXjbDWjTOPEGz9YlkPzgUrMyuzeA+rpSugo6oeRzdn
- q+ug==
+ d=gmail.com; s=20230601; t=1755177187; x=1755781987; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=My9Nxb6n7nXWpTRMwMLyYK8Xz9Tge5Gq01wqXT/NLOA=;
+ b=AOsnS9mSHkMVYWeETO73p72qcTXrju7qqTVVMlegxb339fHTpg4PKWi7gqCarrbK9p
+ E5manVGVdc6RF2dHcGZ2lhapIedwsukRlWqbKqHh8zR0Y+rALvcseOe84ONamlluD2R8
+ qprmstJIUR2GHZciGqd4/ieDjz//YGiNRPqE9ZnfpzIWzTCgaq7XdsO/DgA6Fwoif7sO
+ Hv6hvKgbTHBHoifoHs13duGri8kapmvbq6RkQDXyYGqyZxB+Fq1sPP6VaOrm0PSSy4Oj
+ BCTssV/Po0TLON+knMIB/ZX0n0mtogMU14weNO/NlGq/TfPRLJyx2NJIzKf6rlhQkH2i
+ evCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755177179; x=1755781979;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0n6mysQEdYvKvZY6R8FQRbk+OtOTPscCPeAuTaaOiVY=;
- b=eFI76e2oBSQt/w2C5glH1vsKjiU4QQZHZRT6ZSWJbDnljoGqV8Dalk+2nbwJ0A7a6U
- Un5qiavLicBw0WyKGblzU5fIgBGKuAVYipHrqfCoVrinuiuSEXFlW9WGMCurygV7EW2a
- /Hwte1Zdm009tCXfwVMqyJHK98sfhLAGAaC6TgXjwnJYlumxy5vTftNXzMWGMdl/kVGH
- iIbyDiVgCj9Eq0y/7f60b3NW5YXZXw8vsZ8gINs+Htic1SslmmMNDvVX1jDDa70pRAl1
- rdNleWtiAxIitSqxR9hYP7ah1cq/Zk9Kk6QV5Oe4k5mMY1uQN0wVu8dHPhITrQlVcYyW
- gilQ==
-X-Gm-Message-State: AOJu0Yz9Vl62yPHM7pfymlPV6XelZldf1G4+9SSAsCKFL4CQ4r+Z7GnP
- W1s1RlLfaEiyEu40L4NOaARhAomzxkIrFNvWwMDRLuzOqTQMEc2h9mIPtOutml8JNgpiCDOn
-X-Gm-Gg: ASbGncsgmVC61ZAR/QetvdOJtjeIPH/OEq5I9wrUNvLZUDFD0sRFqnmlipxOxOxEJRo
- c9WFEsd0Rflcdi7+2Z4un817h0Epg6KYF5qT2z2L3F41YVk/+NtvRqGAdktsiCwEfRtHr2qzwR4
- uuUhauZIIRmOH/ZV7cFCKuJ9uO/KZABwpxVzneZOS4RrkfqOjIfQBGvdnSYg0cxYhjOGzsd0mvf
- qxxpeeAyzy3O4gcLHdTqaZDAQMORWWmwnNmQfj4v4PZUpMYTWhZcE5phuC4aL5bVdJLnB+H/Jhm
- FwpEaD6FGc4MmtMAn2WXWrA6qWKTN4l62T4fR+Ir1+paxKVVtg0FPgy7fiu5cDKYbMiNSRC2kng
- iO0TEWH9FlYR9D8EUK9XJwpIw+M8x6ZJ5IaKccQ==
-X-Google-Smtp-Source: AGHT+IFnntyoNuSejGbeVmdQjgaBEW+yL+RjXNsXDNjbRM9Gcrfs7+ZGAfmJMMTzXoYVhuf3nQs9Ag==
-X-Received: by 2002:a17:903:234c:b0:242:a0b0:3c30 with SMTP id
- d9443c01a7336-244586c6e39mr46072805ad.43.1755177179376; 
- Thu, 14 Aug 2025 06:12:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1755177187; x=1755781987;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=My9Nxb6n7nXWpTRMwMLyYK8Xz9Tge5Gq01wqXT/NLOA=;
+ b=VNBRkMi/7UfAMY/al+Ys6KPw93rUWxNs7Zl/I+GoeZFD0BokAevVhF855lTG0/4MJ8
+ DSc27OSNJmJc0PqHVbpsdyn9D6ukrFaNVBeuaSjsCebakhMIFG/gaF2tJY33Ndq5EoQU
+ 05vBTBZuLco4dHX+LdLfYa0B9z1R9JGxD2/V3lGBd50aONQoTOxZF13LJohrJTVBEMYv
+ RoBcoJPnYIceSOtB5dsZc5EdaTeUDIghPt7N6NFUZRC2Tz4baT5+zV5QcNgP7nXJmvvP
+ kcNOgv8MRAdwzt0jlykwiTvCNaPwPSsa/zml69tHDpouIQM1F3O8KO6na/o6maFjFa/8
+ 2LYA==
+X-Gm-Message-State: AOJu0YyphnFZciu4hR0YUXf43A9QguOxvP1SLfnS/jSiCM2mJTcynPzK
+ 0W5uTrxuqXwhDsgts6EEeW6CMNw+3o1JPxyL6hZXZOZChenSiYwqJrpJbUpfVKMJXsuFTrBN
+X-Gm-Gg: ASbGncsGIJPVjcklTYWXq6La5aMRJ9uOoaCVBNCCLHHWFrpkmbcM7xY+ncDvjOhP7Md
+ Xl2XxhdjnshP3BDuCH7aqj9yo4JB1BYPREnu4w1yyA9gTEa1c2o6EHzuGewIqN/iUktHaseC2Nj
+ FQSZpP3dEfpa7teHL6Am6AhagTwyUmvDXAt1fHuhRQFOgMkTzxK5F11NO8VRM3wlxKYWE7f0W9T
+ Q/QTNwnnF0j4ezXgocx9LPxqzxdf+9Efqsp9vRFTX21JrccapvxCUO7gGPLXcxqixEv6/b04JKB
+ ZES+9iGlDtGE2sxDNUWBW8qY8fiDFWghzbqJJThEWsp+Th/5o51snNLZ98xFkLk180WF+GCCR7q
+ QB2ht5dmMJO2wIU95ZZj+EHdI1peDmuCcM2fZbQ==
+X-Google-Smtp-Source: AGHT+IF3ERF3soZjMW9PGnoSEMaK6ooD5YN0hrNRo9iEHNEIY4N3Q9JUHjsGczq/giRB5RnovY0KUg==
+X-Received: by 2002:a17:902:f786:b0:242:abc2:7f1e with SMTP id
+ d9443c01a7336-244585089eemr49115295ad.22.1755177186571; 
+ Thu, 14 Aug 2025 06:13:06 -0700 (PDT)
 Received: from localhost.localdomain ([104.28.159.212])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24300f8c9d1sm67902195ad.129.2025.08.14.06.12.52
+ d9443c01a7336-24300f8c9d1sm67902195ad.129.2025.08.14.06.13.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 06:12:58 -0700 (PDT)
+ Thu, 14 Aug 2025 06:13:05 -0700 (PDT)
 From: WeiHao Li <cn.liweihao@gmail.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
  kever.yang@rock-chips.com, lukma@denx.de, seanga2@gmail.com,
  ag.dev.uboot@gmail.com, muratdemirtaseu@outlook.com,
  WeiHao Li <cn.liweihao@gmail.com>
-Subject: [PATCH 0/5] Rockchip RK3368 drivers improve
-Date: Thu, 14 Aug 2025 21:12:32 +0800
-Message-Id: <20250814131237.8135-1-cn.liweihao@gmail.com>
+Subject: [PATCH 1/5] clk: rockchip: rk3368: Add bus clk get/set
+Date: Thu, 14 Aug 2025 21:12:33 +0800
+Message-Id: <20250814131237.8135-2-cn.liweihao@gmail.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250814131237.8135-1-cn.liweihao@gmail.com>
+References: <20250814131237.8135-1-cn.liweihao@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,36 +100,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RK3368 clock and VOP drivers are incomplete, some function is missing.
+Some of board need operate PMIC like RK808-B for power supply. It's
+depends on I2C peripheral, this patch add bus clock get/set function
+which include I2C clock support.
 
-This patchset improved clk and vop driver to make emmc, i2c, vop and
-mipi-dsi working normally.
+This patch get form Rockchip downstream uboot repository.
 
-These patches already tested on a RK3368-based board and it works good,
-you can review my test log follow the link blow [1].
+Link: https://github.com/rockchip-linux/u-boot
 
-This patchset with additional board support already submit to my github
-repository, you can find it follow the link blow [2].
+Signed-off-by: WeiHao Li <cn.liweihao@gmail.com>
+---
+ .../include/asm/arch-rockchip/cru_rk3368.h    | 12 +++
+ drivers/clk/rockchip/clk_rk3368.c             | 94 +++++++++++++++++++
+ 2 files changed, 106 insertions(+)
 
-Link [1]: https://ieiao.github.io/wiki/embedded-dev/rockchip/rk3368/
-Link [2]: https://github.com/ieiao/u-boot/tree/ymd8_mb
-
-WeiHao Li (5):
-  clk: rockchip: rk3368: Add bus clk get/set
-  clk: rockchip: rk3368: add SCLK for mmc clock get/set
-  clk: rockchip: rk3368: Add VOP clock get/set
-  video: rockchip: Add bridge support for VOP
-  video: rockchip: add RK3368 VOP support
-
- .../include/asm/arch-rockchip/cru_rk3368.h    |  34 ++
- drivers/clk/rockchip/clk_rk3368.c             | 342 +++++++++++++++++-
- drivers/video/rockchip/Makefile               |   1 +
- drivers/video/rockchip/dw_mipi_dsi_rockchip.c |  20 +
- drivers/video/rockchip/rk3368_vop.c           |  79 ++++
- drivers/video/rockchip/rk_vop.c               |  92 +++--
- 6 files changed, 542 insertions(+), 26 deletions(-)
- create mode 100644 drivers/video/rockchip/rk3368_vop.c
-
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3368.h b/arch/arm/include/asm/arch-rockchip/cru_rk3368.h
+index ed2a61218..845113f13 100644
+--- a/arch/arm/include/asm/arch-rockchip/cru_rk3368.h
++++ b/arch/arm/include/asm/arch-rockchip/cru_rk3368.h
+@@ -80,6 +80,18 @@ enum {
+ 	PLL_RESET			= 1,
+ 	PLL_RESET_MASK			= GENMASK(5, 5),
+ 
++	/* CLKSEL8CON */
++	PCLK_BUS_DIV_CON_SHIFT		= 12,
++	PCLK_BUS_DIV_CON_MASK		= 0x7 << PCLK_BUS_DIV_CON_SHIFT,
++	HCLK_BUS_DIV_CON_SHIFT		= 8,
++	HCLK_BUS_DIV_CON_MASK		= 0x3 << HCLK_BUS_DIV_CON_SHIFT,
++	CLK_BUS_PLL_SEL_CPLL		= 0,
++	CLK_BUS_PLL_SEL_GPLL		= 1,
++	CLK_BUS_PLL_SEL_SHIFT		= 7,
++	CLK_BUS_PLL_SEL_MASK		= 1 << CLK_BUS_PLL_SEL_SHIFT,
++	ACLK_BUS_DIV_CON_SHIFT		= 0,
++	ACLK_BUS_DIV_CON_MASK		= 0x1f << ACLK_BUS_DIV_CON_SHIFT,
++
+ 	/* CLKSEL12_CON */
+ 	MCU_STCLK_DIV_SHIFT		= 8,
+ 	MCU_STCLK_DIV_MASK		= GENMASK(10, 8),
+diff --git a/drivers/clk/rockchip/clk_rk3368.c b/drivers/clk/rockchip/clk_rk3368.c
+index 630253fbb..994330162 100644
+--- a/drivers/clk/rockchip/clk_rk3368.c
++++ b/drivers/clk/rockchip/clk_rk3368.c
+@@ -453,6 +453,82 @@ static ulong rk3368_saradc_set_clk(struct rk3368_cru *cru, uint hz)
+ 	return rk3368_saradc_get_clk(cru);
+ }
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++static ulong rk3368_bus_get_clk(struct rk3368_cru *cru, ulong clk_id)
++{
++	u32 div, con, parent;
++
++	switch (clk_id) {
++	case ACLK_BUS:
++		con = readl(&cru->clksel_con[8]);
++		div = (con & ACLK_BUS_DIV_CON_MASK) >> ACLK_BUS_DIV_CON_SHIFT;
++		parent = rkclk_pll_get_rate(cru, GPLL);
++		break;
++	case HCLK_BUS:
++		con = readl(&cru->clksel_con[8]);
++		div = (con & HCLK_BUS_DIV_CON_MASK) >> HCLK_BUS_DIV_CON_SHIFT;
++		parent = rk3368_bus_get_clk(cru, ACLK_BUS);
++		break;
++	case PCLK_BUS:
++	case PCLK_PWM0:
++	case PCLK_PWM1:
++	case PCLK_I2C0:
++	case PCLK_I2C1:
++		con = readl(&cru->clksel_con[8]);
++		div = (con & PCLK_BUS_DIV_CON_MASK) >> PCLK_BUS_DIV_CON_SHIFT;
++		parent = rk3368_bus_get_clk(cru, ACLK_BUS);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return DIV_TO_RATE(parent, div);
++}
++
++static ulong rk3368_bus_set_clk(struct rk3368_cru *cru,
++				ulong clk_id, ulong hz)
++{
++	int src_clk_div;
++
++	/*
++	 * select gpll as pd_bus bus clock source and
++	 * set up dependent divisors for PCLK/HCLK and ACLK clocks.
++	 */
++	switch (clk_id) {
++	case ACLK_BUS:
++		src_clk_div = DIV_ROUND_UP(rkclk_pll_get_rate(cru, GPLL), hz);
++		assert(src_clk_div - 1 < 31);
++		rk_clrsetreg(&cru->clksel_con[8],
++			     CLK_BUS_PLL_SEL_MASK | ACLK_BUS_DIV_CON_MASK,
++			     CLK_BUS_PLL_SEL_GPLL << CLK_BUS_PLL_SEL_SHIFT |
++			     (src_clk_div - 1) << ACLK_BUS_DIV_CON_SHIFT);
++		break;
++	case HCLK_BUS:
++		src_clk_div = DIV_ROUND_UP(rk3368_bus_get_clk(cru,
++							      ACLK_BUS),
++					   hz);
++		assert(src_clk_div - 1 < 3);
++		rk_clrsetreg(&cru->clksel_con[8],
++			     HCLK_BUS_DIV_CON_MASK,
++			     (src_clk_div - 1) << HCLK_BUS_DIV_CON_SHIFT);
++		break;
++	case PCLK_BUS:
++		src_clk_div = DIV_ROUND_UP(rk3368_bus_get_clk(cru,
++							      ACLK_BUS),
++					   hz);
++		assert(src_clk_div - 1 < 3);
++		rk_clrsetreg(&cru->clksel_con[8],
++			     PCLK_BUS_DIV_CON_MASK,
++			     (src_clk_div - 1) << PCLK_BUS_DIV_CON_SHIFT);
++		break;
++	default:
++		printf("do not support this bus freq\n");
++		return -EINVAL;
++	}
++	return rk3368_bus_get_clk(cru, clk_id);
++}
++#endif
++
+ static ulong rk3368_clk_get_rate(struct clk *clk)
+ {
+ 	struct rk3368_clk_priv *priv = dev_get_priv(clk->dev);
+@@ -469,6 +545,17 @@ static ulong rk3368_clk_get_rate(struct clk *clk)
+ 	case SCLK_SPI0 ... SCLK_SPI2:
+ 		rate = rk3368_spi_get_clk(priv->cru, clk->id);
+ 		break;
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++	case ACLK_BUS:
++	case HCLK_BUS:
++	case PCLK_BUS:
++	case PCLK_PWM0:
++	case PCLK_PWM1:
++	case PCLK_I2C0:
++	case PCLK_I2C1:
++		rate = rk3368_bus_get_clk(priv->cru, clk->id);
++		break;
++#endif
+ #if !IS_ENABLED(CONFIG_XPL_BUILD) || CONFIG_IS_ENABLED(MMC)
+ 	case HCLK_SDMMC:
+ 	case HCLK_EMMC:
+@@ -500,6 +587,13 @@ static ulong rk3368_clk_set_rate(struct clk *clk, ulong rate)
+ 		ret = rk3368_ddr_set_clk(priv->cru, rate);
+ 		break;
+ #endif
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++	case ACLK_BUS:
++	case HCLK_BUS:
++	case PCLK_BUS:
++		rate = rk3368_bus_set_clk(priv->cru, clk->id, rate);
++		break;
++#endif
+ #if !IS_ENABLED(CONFIG_XPL_BUILD) || CONFIG_IS_ENABLED(MMC)
+ 	case HCLK_SDMMC:
+ 	case HCLK_EMMC:
 -- 
 2.39.5
 
