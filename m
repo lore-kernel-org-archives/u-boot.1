@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF429CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 04:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F04C6CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 04:34:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74A0C83865;
+	by phobos.denx.de (Postfix) with ESMTP id C4FAF8389A;
 	Thu, 14 Aug 2025 06:34:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="EraP6lQ6";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="bA+HCJLT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A70938382F; Thu, 14 Aug 2025 05:18:03 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::60b])
+ id 77AE283816; Thu, 14 Aug 2025 05:18:08 +0200 (CEST)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on2061d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2409::61d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AEEB837B6
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 05:18:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FE6A8382F
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 05:18:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=boon.khai.ng@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ONv/Pd91C9nCD4bdLOzxZbhnb3K5yAeItc0oQSq9GwEhveSD3BwHnM8Ng61/2YdeJVqsy4RFatw+ADJwK9dvoT7jXYLum23COT+2Ya3XVE0gflvI4Hc8YZ5ONOEIrmUu0f8+CVChYI0MvVkC0m0RrtkFhgePyNtOhzUZNNVv5sq9ZrmHh9cg4F4mcwliTbKWmwcq5QueQ/WJZ31PW7traMFJHKFLiFwS3dnNet1U/fHZgbRnHMNWoijJULwA55YvGsl4JC5hcgmUiTPGzvdimjyIYAAYxkarBLo+Gl51MedM+ZAvy+h7i6DXVXVpc+RJuvmiN8vKyDYtId9V3dnNZg==
+ b=xmplponrFTtpgcM0jSB2FeZWPLjiyuaBZp3DwkU8sY9dbclH9+pOusP+ACgjJUs6vdkkFfI974d4LjbQMyG3QE7Qz+aEs4Bi4QgvNAk5Tn9OfIP+ltfSEitSVn282yThJzuYn3GuYYIevCNqcc5/qJerjgnJCM8YJRdU62rpOJgfrkpSa62rBS+suqCNuj8xcQ9vRW/C/eM18EJ3KKgKgHsJAuLYOabBfcWEgOk2GDqLsuwQQga5co1iQ8My+4d6Dx6hp5ky61NVkEb9G5YzcRK/0RBxecZ/dcuQQYoFsk8FJajmUNsbz+JXqGqUberZ6qP8V3JP33NPpA/SAhbYoQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+37dOk+kvYI1hlDNju5XaAkNhYzb8S62umXjQVsKREM=;
- b=QP8w+urydxu1xeY6H4mYWxb1Nrnv4I/ol6p8ZkrRIpkcCHbIRJlz8ZxOEeLiFYVE0V665F7YgNDgpZcoCYqopumeyJuIwri8GwGnCmiohxNdqMhZcu6Bi4naVaPuE1zjedtyKU8nr4MXkQnC6ES29bd3rPgc/1er0DkKIVx/Nkhb8QYEpE2DPcZl/D7iOYM4L2SY3PDC7a+WYHphpU/3rQxIk8TOaOu26Rr68oHqtExouh2/tsJ7Efe+Rm8CsHl6YWX24dKSYemTMmI1YBcmJ4g4phvxvR56NdWj3Z6JM2a8OJ0BFyzg8Fd97POA15CHoqUmlrk+8MxdSkrIZFt3Dw==
+ bh=OPv1iX8m3cMdkpAjzGGbXqSdj1OONLXuhPb9m6MZSJU=;
+ b=nc+1KvLjCp29mk0Wt5EXAinmX400D2qq+3Jg4LoPjqPV8nSO22FgL2M9hMtRKlnHjELe3DxQZwNecS44+9KLWpopfFXMnxtPqxYm6rOuqVcSop48xKM4grgaL8mPMiUB5rRhQ91KDDmAb214tEkLCiqgD4Kyu1UD1tRFUV61dimtr3w8U5VQMxKLVUTjkmcQmp+LSyPZsW15BFA1IwE4SYAYFZs0o/kOm6Pyrd667YymOjf28jkP77utjd55ulTrUwvBtmGQhkpyRba3b+ga2BNTDeYhYFeAKGUydDXY0ypF4xQINtrILri71bbbj9LeFIFsSwplqU9YxumfnMDmsg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+37dOk+kvYI1hlDNju5XaAkNhYzb8S62umXjQVsKREM=;
- b=EraP6lQ6PHTlBHxwldBzOm5gh08bKDoEuW+66zCB04uHjXvJIskS4BFExP2IDxYp4lmzc4Mz66n3fa8IIl/lIHjRQ9egA6vTTAbSaIYV2+Tbqfx2xU+hYizDYy9DSoJK9tHfpZabLHfeY53WIWMIt2blGlGTESJ7m5whmjnZft622UTBErXmjPTN1J4TJuot+c6+Em63KX/WmmnG8SAial/69dFkKCOT16Rwvfj8VQvlXUNUnJTnpZO1eZM5kxh+XxDYoJIw5NlYWDOJLfjerk+huLoa4NQCAh+f/A/nUdz73D6AXED303hVnKf9mqDVX4h02fZoQsba4S2Nyi8qfw==
+ bh=OPv1iX8m3cMdkpAjzGGbXqSdj1OONLXuhPb9m6MZSJU=;
+ b=bA+HCJLTmU9sL9/7cJOIf/vyxDGMZM1vyenkTpLtnWZYLpxN9ugyDQ1jlFjJiV6oMwBjZARYyvclxccQoUvRrEyTrKpb7qdt0WDj6KsFebMlqBf87dp+HAODnNu7TyeI3jBmhiEk6mxC01qHy4fwaR+ml1dyh9HcGgWPX093kCqLQeu8iu3aB0lTORnkLC1UaRG98VjPHJpzRYk7mrQzo4veQ3HZUokF5S7lMOr0mQdCcUlX9jozWq25jUOzpvp/LlvvZAKUcFQkoBMXxoYWaKGVwJEcGRDwmKK/0/JfsZ9FM47TSJZCk5kZHDvCDmsrfanVW2JCDT6j2djx+pgOag==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
  by SA0PR03MB5580.namprd03.prod.outlook.com (2603:10b6:806:b0::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.16; Thu, 14 Aug
- 2025 03:17:57 +0000
+ 2025 03:18:04 +0000
 Received: from SA3PR03MB7187.namprd03.prod.outlook.com
  ([fe80::3145:43b1:92d7:f7a4]) by SA3PR03MB7187.namprd03.prod.outlook.com
  ([fe80::3145:43b1:92d7:f7a4%6]) with mapi id 15.20.9031.008; Thu, 14 Aug 2025
- 03:17:57 +0000
+ 03:18:04 +0000
 From: Boon Khai Ng <boon.khai.ng@altera.com>
 To: U-boot Openlist <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -67,11 +67,13 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Mahesh Rao <mahesh.rao@altera.com>
-Subject: [PATCH v2 0/3] socfpga: Agilex5: Fix dcache usage in SPL and SMC
- mailbox flow
-Date: Thu, 14 Aug 2025 11:17:38 +0800
-Message-Id: <20250814031741.4887-1-boon.khai.ng@altera.com>
+Subject: [PATCH v2 1/3] arch: arm: mach-socfpga: smc: Add dcache flushing and
+ invalidation in smc_send_mailbox()
+Date: Thu, 14 Aug 2025 11:17:39 +0800
+Message-Id: <20250814031741.4887-2-boon.khai.ng@altera.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20250814031741.4887-1-boon.khai.ng@altera.com>
+References: <20250814031741.4887-1-boon.khai.ng@altera.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: BY3PR05CA0042.namprd05.prod.outlook.com
@@ -80,77 +82,76 @@ X-ClientProxiedBy: BY3PR05CA0042.namprd05.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|SA0PR03MB5580:EE_
-X-MS-Office365-Filtering-Correlation-Id: fe1deefa-370e-4ffd-f104-08dddae12a96
+X-MS-Office365-Filtering-Correlation-Id: 8b6d5e01-b0c7-44b9-d2d3-08dddae12e55
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?uFooTwiYS5euHy72RsOv4VQfXh9O6O6SWL2m5SiiJ7sUrC0+Ir0S62Uxrjb+?=
- =?us-ascii?Q?UWmxpZxuH/PFbxbGYfuveOfgRz5NGlKjLcnESsIbRMqOuaI1dWHBscMGjWGA?=
- =?us-ascii?Q?fgHa4SwhpYXy/ieFxvmeEQaDpHwk6IBmiV998JK7ZNKSWJVDcvh8U2SOMCz6?=
- =?us-ascii?Q?L3BmDmBaaE2nGujI3bzABwUfnaoZvZUig1B2HH5Tk4bPyTHnbPtkQePNdX51?=
- =?us-ascii?Q?HuhEPVXoodtwPYe3Wg7AKforAZcqPj/st4bNpS4TzkRJlLKISM38esrSLgoc?=
- =?us-ascii?Q?ZMAeKK2gs4LrD9rFPoF3NLKtk3q0v9mW7tl8gjiose72gJ374oINMBzGQ3Cr?=
- =?us-ascii?Q?toYCpF9awBKaFxkaGMVGNj4sQPSbpuUGKTLAqSx5W645bzHyK4Tp51ud5qix?=
- =?us-ascii?Q?EM/yqJzBbRjRZECbMtEeYFQBUyjEjWuhvvMSp1c2nykm1Y0r9hzJPo3OgyRX?=
- =?us-ascii?Q?Atd0l3TI85JBpAunCb42iW6b7goTV9G7OMlqC7EpEuqb86+e57Kwr9XCza8G?=
- =?us-ascii?Q?4qTk/AvxcCSq2q76LlldbPeG2f06ut4YbAwkfzffSINXkbPben+MNnenrMVE?=
- =?us-ascii?Q?WIBqqK/ZF+/4Q7MtSo7NqbjEP4UVgfuWFgCmX8qqMGfQqNYLdJVFZsLh7dgC?=
- =?us-ascii?Q?wbdiyE59KVDzEiWsucU5VBEjCcwFkiZ6PmJ1Sv8fO0sqd1Dnz+BWlmewS7fW?=
- =?us-ascii?Q?ev7Ew68C+hO/jvWVLuqllJrsu9jj9OWBr3GyadmhgzmHdZCU9hHQwzCNZ5S3?=
- =?us-ascii?Q?l4GNzP828LqPcvkmZRW3b28mMePVfZOZrJ3o4PnbLEw57OTUkUuy1j4Y//5e?=
- =?us-ascii?Q?lVCKFulnvXt2AIUI85osOjDxKSJDrX27z+fr17r9o5O3fzlKgg6I6i4tyTOI?=
- =?us-ascii?Q?oBzGifMSjuhe2p/l5/dITy08jbLYBe2H9IlelXqyjuFPpkIYFbbQQMocOUT/?=
- =?us-ascii?Q?lquOOzyNbe9zCCLWppc1nT+ZrA7c0hWPz9+WeF2+JIV8jY/EUZ4BPHZAK3y4?=
- =?us-ascii?Q?rhpcc81T45Ifila6YFgDy1iDvj/2jUSUwoLRPf5BVuzY8M+rrYyXFFo06yd5?=
- =?us-ascii?Q?sPku9N2O3b7ZfWQS9st4DFOjlkhyhBJEit3qnj+rJu3cLXExTjgwVOsoqyGE?=
- =?us-ascii?Q?oRBUuumFP7sEYvHA7N0MiKLvxx/H9mztHiIu/+hPktw1dALKcr6ETpJ2Hs0U?=
- =?us-ascii?Q?S0nHc+D4TefQN6PJtePDiJncLFbrPlKHaCnn+YqWIKvAoAAbr0PfGNLLS2Rd?=
- =?us-ascii?Q?7x+3vZtUvvMTp1shuB3Csn6GJyfw4+GEPz+ittECnuGn34X4WyFFcf4ZW+lZ?=
- =?us-ascii?Q?Q9mHLBe18sC0WgByNMfh44Vrn9+SZu22L1Dkjh3Pw+FFaJZkZMQmWrvGNhFv?=
- =?us-ascii?Q?hYSmXyhNU3TXJKXWpjX+JGIyO/LGaNZMym+Hp9rVNU50Bhdb+rL1tJvUhCIP?=
- =?us-ascii?Q?wADwkJJjhy0=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bypJKIAHMQK6vQWMlaKLYIh+uZKKkhR/L/pAPL2fHO3lzv7O/ltDk7U0gha/?=
+ =?us-ascii?Q?tSCgV0054DBRJvAfanzPYkg4lh3RhGdhkiHQdT95IdDCGokPEhvDklFaUCHV?=
+ =?us-ascii?Q?NV7UrEx9gPG10Fr4wgMw6TR/aU9botcImqqmfAi+Qe+1zUxjIMQ9y467eqoy?=
+ =?us-ascii?Q?L9x/yrBRa59fASDwlQmatevtJOfnLf+awYu9i83uc28vefeSDzk47pUQn9c2?=
+ =?us-ascii?Q?u/v76zkL2CsIRL+CqzLBokH7H/GElsQSmzUFrD1FYrImX1ntguBmMpxRgsyu?=
+ =?us-ascii?Q?nvd5NGvHJ7lZXC/eY7xeJs07gg/UsCi3pBvao3G+aVluIK5gODRBTdBcTI1Q?=
+ =?us-ascii?Q?5x3ueAZN89QgcjGKp4XY5O3yyNAfgdM7gOqKmS+Xfxs948Bi4XWpQO4r/eUW?=
+ =?us-ascii?Q?iQcPKo0J+8hj6/zb3/i4+XwJMVOfdzuk8vg0kHHMmAoHv5nh+zyISncfDDCi?=
+ =?us-ascii?Q?aj0s3YKG0WDnvKTT1y4/pDmPrcwbLJRiBNP/sxN7mVFXJyLOigdizpXYEjvk?=
+ =?us-ascii?Q?KNlDhrqLSxNLDEcKd3IOYmwYFlf/YlWwJOhhAxSjOGOl3LrAQ48wp4hoG/bU?=
+ =?us-ascii?Q?Ix6wD6PmSnp6irlA1KCZQwYfXTu265QcjGRjk+zMa2sDAl3coQY5/VC7mU/P?=
+ =?us-ascii?Q?VIhy1M8PY022mWkEIePzxzOLUo0uAHWpjULoyAsMI6i5niPRtTfQ1JsP+W3a?=
+ =?us-ascii?Q?V/YtIhZqrWnJQ4THshG43WG8EhvwGgBpipUOEBz8pumL4p9bn3/JYPBnb7TR?=
+ =?us-ascii?Q?5nRjFSxeQPPOgW655uoC84CxhJTEaNGrFi3PN4bO5Wu44JMJ8QMmoF8a+8Si?=
+ =?us-ascii?Q?Wf9KIt8eUQm74Tkh39TFxFDwbV1UhfuWPNHpEa1YjFXg26at1v0itJ+60GuV?=
+ =?us-ascii?Q?Hf3cewGEfiO2m+44m5IfyHap1uCDqmTSFGuUynzswVf3tfyLg7zm8p3YEIUf?=
+ =?us-ascii?Q?Spa4UD9If+ac/8DrbAIcZq8j0X/ByDTznzA9+XjFV54pLedyIIzeFezLqLhA?=
+ =?us-ascii?Q?ueuEX4tzAetmPXtKKa68YEcqwFtRWy8Pq4RjlAuIyI+OVUTb8BgTnDqgUtjy?=
+ =?us-ascii?Q?g8r7aS5ukIzn6yxmm66NGZLkddjECS0yknDC+xAsgUZxRjblV7I2IlpsWE7p?=
+ =?us-ascii?Q?f6m39rKPWj5iQDiuqIPm4j0DK5i8yG3krG9u0wvmdu+Dj3x0DBycb6bToYDh?=
+ =?us-ascii?Q?rVg88rF5Z6qJchOKCKQSXjJx3+QGMCFKaoAN/6j/9mrVf7TeduqXq8aDI4eY?=
+ =?us-ascii?Q?EBMQCvvvMKusL0d8CE9JbS7YeeDLnYTlzAfPRzp2adcoNK1PJ2Vg1YOvk2ZM?=
+ =?us-ascii?Q?+SBDDoeTSVSIgzcxVbkVCQIjd29XoK0FLfkvCfl3+Svgbm7isXs/iUQGOtA7?=
+ =?us-ascii?Q?mMvqwSH7phIFfZ1PJCMn9IlSSeBShRqiBJxiBwKJzp5f26GcCENybi80ylg6?=
+ =?us-ascii?Q?RC1xnTObb1Y=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qUevLwiKmMRB+44YqRBlSeM43GMvWfHY4GbcqnuERm3RvEer54zyV8H3PJha?=
- =?us-ascii?Q?CayFJl7v7nlYiaLE/RuXSr3t+4ZBo3VE0iP1L+4zyXmtZX7e/FcXGqwFA7WO?=
- =?us-ascii?Q?j14j3icYoeaO4rTz6BoAHChUagFngigFGZIZysA5VgGU+JXNXFdHAzXWNXhM?=
- =?us-ascii?Q?Uzvcj1vPpGDZarmXTlO5t3ay5f342YqQ+Rn7xEYJLkzCgqQNQJ/cP7SVoBnS?=
- =?us-ascii?Q?rpUKhgAomGGwWEnj2imioDx0ffFuS9Dp/zS4njJKzSXHjIn90yhud6JKHU6i?=
- =?us-ascii?Q?NH06mKNkpo6tjC8Zh4Pbyf4FUeKiZ1/FZk6OltBzX5tH1jnbslDrXNEzVVGa?=
- =?us-ascii?Q?YoLdWrh5pXSqv6VT15nYdNLOgGeDh5uDJWP+DpXKLpt/Qv5DNJ18QYLTOE75?=
- =?us-ascii?Q?igcPwl9pgC/D1ypmweckcEZLcoja277CDxqhd2IiAdOevIC4ACmwOJIzKVFO?=
- =?us-ascii?Q?ZFotQZdHsDPpTgJOrmEbOFhSSa5I+rJLIYeLuo44THhjz/GlCj/WBmhsFh5q?=
- =?us-ascii?Q?egsOHbLVtWmfyT5FUdPMAh8BIii1+wXuEvGrPK6pzoz+n//vkaeOL7YdeRhq?=
- =?us-ascii?Q?fNVy38xG9I6p5plIUv1y4BhhNY0yKrsv5j3+fz9dEVqyq3GveDJSfqTuY5mS?=
- =?us-ascii?Q?50c5F94nSTXSFaZoKdfhJfmlLZ48SdhQ1ZBTDvO2Wyj0ENYRFNdYmAhxQcet?=
- =?us-ascii?Q?y/iG2NgsrqH/ncLwbMhhDJuiVQtNwany+oGbltzsd+2u1bYJ1uKswNVyksl/?=
- =?us-ascii?Q?Q/Pn3PTxpISn8fhosXUBrYN/fbpMShAlcT2IfDCUcjE/meWHTXH5p9v3pR6u?=
- =?us-ascii?Q?6sRDiobiS4NjJRqi5ntSZpC5F/4RWoLfe4whQb/ekminD+ST9l/h3klvzqQU?=
- =?us-ascii?Q?VtLwZ01ZhP5U7AqmtYVTYqEHQ2CfBS4ex59jQxoWCkl1E21lDkAJbg739/6P?=
- =?us-ascii?Q?usBuF+KzhP046VEm2hb5W8bYsA2kARAbtwHbJA/Xi/7oR/G8XwzGg9oh73kH?=
- =?us-ascii?Q?55QhUDS3DHso+wzdhlfbVTSFupx6i0pYx1S6RvOeLUkgEiqLlaxmlYMJO/d1?=
- =?us-ascii?Q?7hrDehGEAv/0kxqMUz2kTF7vjZnTkNw/UIfI/4YOIs7BIcpzeQICl5+bACuj?=
- =?us-ascii?Q?PDmrTPGsQoL2bGkq7P7S6rZLaDG4I2BTanBfVsCr7U5we8SuMc8F0GnRcRmp?=
- =?us-ascii?Q?yUuQ1HN7cCvRAZPaoVbv1Bfq65FQaKA8cLBbyEAZSL/wJUTLWxbGBHVTHec8?=
- =?us-ascii?Q?XPdfX8I4hIvbeiGmCtUJjZyFOJZBN6pT0pjeAOWUMVznW20djSxVal/LKQrj?=
- =?us-ascii?Q?ljzrXd6DgwnAzOGYHvYNgvsW/e6nLfGZhNLCv0W534wMf/T7qDIUrgpmfEMi?=
- =?us-ascii?Q?ShJkx4PTiVPS1zyEQrzgwAhM8d8FSoFFSXCGCXFWc2ruGALEoVS722Q6yIRH?=
- =?us-ascii?Q?BwmhuOC1IYPjHSCo4oYfNPEg7XosWFNIh+veI3CPtRi1fPllTME4Bw76KpVL?=
- =?us-ascii?Q?dnuRToNhhbs+pAOp9JFIjrFktm3SThzB7oRHioNuz3NEBfren30ytQI5ylYD?=
- =?us-ascii?Q?dTIQbWK56QBIO2/PDLOjZpI1f7h/jpAVIlQAe000hlcQ9CGj8VkFERbCQzII?=
- =?us-ascii?Q?dg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PvVCVCi00eHJ141D/r6MQpraUhqktl+XwylxyduFfx2Bwo17ppstlNPiIkZn?=
+ =?us-ascii?Q?Fitm/7e4wMzRLdRzh3dMuFBxwJtsvPcQq3rAFX7b9i3MHu+Cil+QE6MD82pD?=
+ =?us-ascii?Q?ejDChaFcqkqUmv78r7SOBLwfJTRPGutK9ghZdfTyw0rBELLNgZxHwMQPhH8D?=
+ =?us-ascii?Q?dpqZnp/fzuzju35uhg4pKQ5yKwHAEuTESaAn3BLi5BuYRrL10fjEoE0yOUb2?=
+ =?us-ascii?Q?MyGacR/f2YDtNHCE9zm5fdZt8rk76c6G9W5Ua4hWq4ytk6jFkKyL1b2ywKBK?=
+ =?us-ascii?Q?tvzuZoj+SsFFPUZqKtIzNCOcOGxuG/E8nu2RAOB8phq7b780iEPhoOc2kDG8?=
+ =?us-ascii?Q?lecqiebMj5NtaEeDYjSve5XQCgz8IUB+IftVntIivvv9FLm7v03zUmnPPlAx?=
+ =?us-ascii?Q?XWa1udP+WVADk6lSCpNBWf8oh+C3ByioyJoteEIjaYOHVN57NaVrfJF09JWR?=
+ =?us-ascii?Q?GenZn3PyLOZg+T7nrN2FrA939CTchc4j4cdkTiDmKtmUmAuPyzgP+/sULYZe?=
+ =?us-ascii?Q?Le8TmG4QaBKI6uYyKiIDbOmUNkWLXgPBZlLxrzlVfs5Hw/GiTKOXEudNCWnP?=
+ =?us-ascii?Q?V+wztMPpbUSl+awTlS3EpX46X3u1gmdk+9j/fnmWV0A/1cCuuSTJwHaBvyrD?=
+ =?us-ascii?Q?KsOpxt3TEKLygVsKbNxKZ5XGLr4IHVkVuK0IGygYA0amD/pSuUPSyLIanMWJ?=
+ =?us-ascii?Q?ol+aJVZW3Tkdf6OCenKRlis1yOOIcwsahhp8bZoMOl4mLt+mKbE7fHuuo0Lc?=
+ =?us-ascii?Q?d8rY/ef6WGRbYqmrIyyGUpT7dyYR7zYik+BU6RctztnyPHH52rJTukSYBJoD?=
+ =?us-ascii?Q?1Gk88nOqLSoVPjMzfEZwaaPh+J+u78awHtPmL/aKciAPDD2pVf9aXxTsXB+2?=
+ =?us-ascii?Q?A3gwsNi+qcSy49rrloYGZY9vdD6Ccu9K+SKiU440hAGTG5S0N1+mkJVwneAA?=
+ =?us-ascii?Q?UDbZxAmhSewNOmySpJWEwEgWQkKQnzvRNpIP+7FPfEL2cpDhw7u7TZ3I2vDO?=
+ =?us-ascii?Q?oLbzjD9135W/wKB/XuBrZzA4Tt39F2Akc+GdmCGo0mJh3GaLUy71SCDnO9FP?=
+ =?us-ascii?Q?zlxGfu5CahstLQ/IfkUpfcmK1UhO3rcKIUUu+q10PLuJWAnyTu9ZfG/GI0rN?=
+ =?us-ascii?Q?Ql1IEoRHckkcQX4NVU93EQ9m3QXE9tZt9PXb4MUJJxAYMVK358iZ4DPrtWQu?=
+ =?us-ascii?Q?42q+ZDS/NoV2nnQble8ZDGVzgFMTZJrq7MOmCblmhTpyoONk5UzU9MKkI1+f?=
+ =?us-ascii?Q?A/7PvnonQ57TAMuyoLPXwOVWgvOXKWJSuwCZqtRT0jXFZkA+dwxBmilBLTYR?=
+ =?us-ascii?Q?O+b6Wz2gCVEeuqYC9B/OcGDgy2SQcdflP4wDIjIJcxGDwc9/ZrpLh+aYD+Ak?=
+ =?us-ascii?Q?IE7f+c8PiA2qfDzKZjh5jpuErcgGPJxB9WtDHhS3nzgplNmHVFA2tphrVPIF?=
+ =?us-ascii?Q?99lNcd+oYgxf3upyurs7FyDfJEDfI3dW1va5805+b95ktFL54pKR5twJQ9pk?=
+ =?us-ascii?Q?6TaoVn3IlatL4RmJR90lyH75YuTFmH3vuYzfrnrjfqTzR/ajNrnsZYQ57k1r?=
+ =?us-ascii?Q?WK9ogYP0ELtEZS9ilJecgjtat3V4BxqLxcv09VfR?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe1deefa-370e-4ffd-f104-08dddae12a96
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8b6d5e01-b0c7-44b9-d2d3-08dddae12e55
 X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2025 03:17:57.7035 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2025 03:18:03.9533 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0kTvSTmF6YzDIX9AeKcIQ8OdydCnfsXCrP7+fPFZ16JAvBShMTvnianRza1a88Q9m82kMmQZ/pnJoTu/pK1xXQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Sq3ffvewaDdOMjQuifVwwCW/nB+SboY9/NoBujIHN1ERp2VYM7+ydjJtAnWwX/f2NUCI17f1VqFlHH7jCh+7kw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR03MB5580
 X-Mailman-Approved-At: Thu, 14 Aug 2025 06:34:12 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -169,62 +170,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Adding the dcache flushing and invalidation in the smc_send_mailbox()
+At the same time replace the use of u64 with uintptr_t to ensure
+compatibility across different architectures and correct the
+pointer arithmetic for buffer end address calculation.
 
-Proposing the following fix to address data cache handling issues in
-the Agilex5 platform, particularly in the SPL build and SMC mailbox
-communication path. It ensures correctness in cache operations.
-Other than that, trying to resolve undefined symbol errors, and
-provides the necessary configuration to disable data cache in
-SPL where required.
+Signed-off-by: Mahesh Rao <mahesh.rao@altera.com>
+Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+---
+ arch/arm/mach-socfpga/smc_api.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Patch Summary:
-[1/3] arch: arm: mach-socfpga: smc: Add dcache flushing and
-invalidation in smc_send_mailbox()
-
-Ensures that the response buffer from the secure monitor call (SMC)
-is properly invalidated in cache to avoid stale data access.
-
-Updates pointer arithmetic by replacing u64 with uintptr_t to
-improve portability and correctness.
-
-[2/3] cache: Check dcache availability before calling cache functions
-
-Adds a !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) check before calling
-dcache_status() and mmu_status() to avoid compilation failures
-when dcache is disabled.
-
-[3/3] configs: agilex5: Enable config SPL_SYS_DCACHE_OFF
-
-Disables SPL data cache explicitly via CONFIG_SPL_SYS_DCACHE_OFF
-to align with the above changes and prevent inconsistencies during
-early boot.
-
-This patchset has been tested on Agilex5 and resolves the SPL build
-issues related to missing symbols, while also improving runtime
-robustness in SMC-based communication.
-
-Let me know if there are any concerns or feedback. Thank you!
-
-Changes from previous submitted patches:
-v1:
-Using weak function to resolve the compilation failed
-with undefined function when invoking cache related function.
-https://patchwork.ozlabs.org/project/uboot/patch/
-20250806032206.16688-3-boon.khai.ng@altera.com/
-
-Boon Khai Ng (3):
-  arch: arm: mach-socfpga: smc: Add dcache flushing and invalidation in
-    smc_send_mailbox()
-  cache: Check dcache availability before calling cache functions
-  configs: agilex5: Enable config SPL_SYS_DCACHE_OFF
-
- arch/arm/include/asm/io.h         | 28 ++++++++++++++++------------
- arch/arm/mach-socfpga/smc_api.c   |  1 +
- common/memsize.c                  |  5 ++++-
- configs/socfpga_agilex5_defconfig |  1 +
- 4 files changed, 22 insertions(+), 13 deletions(-)
-
+diff --git a/arch/arm/mach-socfpga/smc_api.c b/arch/arm/mach-socfpga/smc_api.c
+index b212a94b321..a531030f5be 100644
+--- a/arch/arm/mach-socfpga/smc_api.c
++++ b/arch/arm/mach-socfpga/smc_api.c
+@@ -57,6 +57,7 @@ int smc_send_mailbox(u32 cmd, u32 len, u32 *arg, u8 urgent, u32 *resp_buf_len,
+ 			 resp, ARRAY_SIZE(resp));
+ 
+ 	if (ret == INTEL_SIP_SMC_STATUS_OK && resp_buf && resp_buf_len) {
++		invalidate_dcache_range((uintptr_t)resp_buf, (uintptr_t)(resp_buf + *resp_buf_len));
+ 		if (!resp[0])
+ 			*resp_buf_len = resp[1];
+ 	}
 -- 
 2.35.3
 
