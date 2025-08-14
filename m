@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C5CCA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDCD8CA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A45B083A61;
+	by phobos.denx.de (Postfix) with ESMTP id EFBBF83A71;
 	Thu, 14 Aug 2025 20:48:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hPzWva77";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rGVb5xxa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 089EC83A5D; Thu, 14 Aug 2025 20:48:40 +0200 (CEST)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id CCA3A83A61; Thu, 14 Aug 2025 20:48:40 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA59A839C7
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:48:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB73883A43
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:48:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3e56fc0f337so8224355ab.1
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:48:37 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-88432efaf45so10975839f.3
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:48:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1755197317; x=1755802117; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bDfaVvv5t/tHhG/i2XFNx3+GHBR4ITU7suB0jR/V1xM=;
- b=hPzWva77ehyGNdRZsCBSplIHHii9vbI9mfDw99pBgF75ZY3b9nE39asNZ9zYyNPnr4
- 7/+3/h/N6ffhhMXwQBWUcKursVOlFzb8CQXOp0KuKX8TVRayMo7Y0fSJArVXn209vNJu
- vTePqmsElVXHb3WRA3UcRrGj/wDUDfHJqTbwY=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hZMWqho/Tyr4SaJ2MvkkCbZuBQ4ZWUhViPeHfd/PPOA=;
+ b=rGVb5xxa9HOtte+wztjVfwmyqROc4pcutnVG1rRHXocXOnC0YV01ujXUBmDXAWpkf5
+ qRBCN70PewI1JVfDRzApXPjkJugMHlldJQjGN9S2sCox2tFo88oT7Sd6bYxik5fFub/R
+ ZGIl9tl7MVwth1lWTGI2w2JbqgN+RJiTR9ysY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1755197317; x=1755802117;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bDfaVvv5t/tHhG/i2XFNx3+GHBR4ITU7suB0jR/V1xM=;
- b=jEDeo8hPXjhiNFXQvdQXu1P6Xa/231Aw8aAfsG/6xsFY5seKnFOgU0/mldg5oWm5zp
- mOk4vGMTOFA/rfRALXT3IiK+PNQQj1Vo1X52RIlfmyRKSRDw5ylJaBpTBGfDOlT5YoXE
- /qihGSHJq/VT6RkZLvJq4Tm4RLRc4iUIPna7wToKOMe13x1Irdne0iuRvMhHVcNXzxWe
- oPFTo0PuhvZrSC6+9Iq3sKuaewVgnWxEAoSCC4yos2PGYbp+L+1vEsBgfsP+bVQA5sAq
- haGVsgUspQT83rk/EKHItAuD/TCkbp+mZng57pjMHN6iSHboofeCMzcNy404LB3toDVr
- DCeg==
-X-Gm-Message-State: AOJu0Yw/C8ynY+h06AtM5PYAvgBDBAsDA1iH1IwY//UNOKzwiQSk84pn
- gFTXDUdfUgfNEN+OI6fv4zjtTD1J71t+djoZgF1kn4VHNAKllqv4N0Rdo7SK80tjpL67+/nQ/Wn
- tzOypPyc=
-X-Gm-Gg: ASbGnctJkN+opYAdx+Rfchv2GT/XVjA7wroCTCMwWXDf+uUFutmMWWrZpu2JC2f/gqZ
- 6XPv/oCeQzZVjZvEcOXVYS9Q1mb4GrVb5eBS7Zhc0kBCtoc8cRo7YmMIleSBNrQ4YRF7d+gm12Y
- G2YVLwEe0jgnxPJk8OpBBkKRAWJALSF+7OtJO8dg1kKUuMDZWbgPAchU5IZ9/g68D2v8FeVSlNh
- q5q22BvDxC/z26z6qhVcXzS/nE0wEajGa7gTNGpNiHF/gRzGIuM+VYPhIoMW0rLQR54MOPQWIbr
- y6Qcf+Fyg7RBEgSovj0B+4drN2toMBy2Vi4bph6gtdExkgleumaym9nemX/UDXW3BUxSW1u60Yy
- 9RZHGwQTVq27vvZOdzPe02p7RcNvtbN96wDeLKL575w8vkRsuNYHL5zrLWIwRlso2Sg==
-X-Google-Smtp-Source: AGHT+IFHtY7XNYB6OhF8OE1Yhz2vprgltn7KHe6woOYBS8r+K6ghh7JmJrLiHaqxNzk0jPJG3gJcdw==
-X-Received: by 2002:a92:c0c3:0:b0:3e5:4326:d9cd with SMTP id
- e9e14a558f8ab-3e5718397camr63255145ab.3.1755197316662; 
- Thu, 14 Aug 2025 11:48:36 -0700 (PDT)
+ bh=hZMWqho/Tyr4SaJ2MvkkCbZuBQ4ZWUhViPeHfd/PPOA=;
+ b=v97m/31ZP8B3FsKCkxqIBOr1z90Q2txTwuI9EyrKdUZxwLlbPLl2i8neF1ptsqUXW6
+ PKQBgHCN4xGOg7ZJbNKz44u1xiOByErt8wqkamdBFbnGKKZcZtSefhb+N3MXwbikVJ5c
+ Vi377v8NBvIRy7bWXf+ub/3tUlNEbjycdzdxXZuFcspR7ydGhYbLm0TH9FoKclYEw3oM
+ T34dXOfnll63rGO6Q2zRhfqbrVRCvhZO+B2GjLPpYHXm9EPV+96P/x6fFFPvgg68VK/D
+ DPdG4alOgYi6AxB/vZC7k/X43Rr/zZrLoP31g5v1KhayQVtIkaltLhE8yoTYWXQVAu11
+ VO9A==
+X-Gm-Message-State: AOJu0YxpY7aX7KDz08HRj8JxoGmSHJURuxhYy07AC4qmqs3Bu+5EAfXn
+ u/JHgMqjsy9dPBZvA7dZDOctYR5Zz3CPSqsfCpYLvJa0pQ2PtTEPjKZkzLr+hwv637s=
+X-Gm-Gg: ASbGncvKUbuo91VWJ8PFyFYOKeHvMPGttxy7LeGp5JrLhBqDc1lymBDyqIRIa3G11GK
+ 2Rh9f/0KwsJQdRpdvoE9KiiV44qUlhNgy2rs3oeyMC3cKrIJqfKKkaiwwYL6HjAKVPtaNB8Zhds
+ 4jFKzVrlJK/HAmtI66CAOikdHNpOLuFOCEgT4BPJjji3Yt2zegz/e4OFCuHQLRyr83FxLcBPQaN
+ LBZD+s5D1GM+7kvhCXiXC5oznY2S0mvgXEffK4XkNEGvWY5vv4Gae87HnKM2Z+SHu3+wtjr9CxK
+ VIaUbzYZc+u/YtWFX/S399WatgDkIdOPdMc4QeyZ6z5xJVLmNUg8bukrK7tELp+/6eYI1w1zdfG
+ Wg2MP0I/p1J4inhIWJaxoy4gvR93Av2i70DV6qeewq3FAKO94pw46+s0=
+X-Google-Smtp-Source: AGHT+IGIRnX0NRwV9mcKeiacqRiEUA+q0D7Q0DIae6jpAcdJDMbOWaQhu61X/h2fxQN0jHwOPnqdXg==
+X-Received: by 2002:a05:6e02:148b:b0:3e5:4f4c:9f17 with SMTP id
+ e9e14a558f8ab-3e5709962c8mr82533765ab.19.1755197317491; 
+ Thu, 14 Aug 2025 11:48:37 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
  8926c6da1cb9f-50b3d6ff137sm1219762173.41.2025.08.14.11.48.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 11:48:36 -0700 (PDT)
+ Thu, 14 Aug 2025 11:48:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250804215425.1412704-3-trini@konsulko.com>
-References: <20250804215425.1412704-1-trini@konsulko.com>
- <20250804215425.1412704-3-trini@konsulko.com>
-Subject: Re: [PATCH] reset: Tighten some reset driver dependencies
-Message-Id: <175519731604.3600102.11956988757956404517.b4-ty@konsulko.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250804215719.1413106-6-trini@konsulko.com>
+References: <20250804215719.1413106-1-trini@konsulko.com>
+ <20250804215719.1413106-6-trini@konsulko.com>
+Subject: Re: [PATCH] soc: Tighten some soc driver dependencies
+Message-Id: <175519731680.3600102.13680988237146318268.b4-ty@konsulko.com>
 Date: Thu, 14 Aug 2025 12:48:36 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -95,17 +96,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 04 Aug 2025 15:54:25 -0600, Tom Rini wrote:
+On Mon, 04 Aug 2025 15:57:15 -0600, Tom Rini wrote:
 
-> A few reset drivers cannot build without access to some platform
-> specific header files. Express those requirements in Kconfig as well.
+> The Qualcomm Snapdragon "SoC" driver cannot build without access to some
+> ARM64 specific functionality. Express that requirements in Kconfig as
+> well.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] reset: Tighten some reset driver dependencies
-      commit: 0ae7725e874a65d86ccdc964048940a490185972
+[1/1] soc: Tighten some soc driver dependencies
+      commit: 01bc65a0e9b2e0bac7af28bf102ee0df4f98b205
 -- 
 Tom
 
