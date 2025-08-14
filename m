@@ -4,83 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0849CA0EE4
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 19:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD670CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 21:00:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A83583A32;
-	Thu, 14 Aug 2025 21:55:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 0622A83A24;
+	Thu, 14 Aug 2025 23:00:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="G76C9LEm";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="Z7YEQxxd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D19D83A32; Thu, 14 Aug 2025 21:55:16 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 8E48083A1F; Thu, 14 Aug 2025 20:07:15 +0200 (CEST)
+Received: from mail-yw1-x1163.google.com (mail-yw1-x1163.google.com
+ [IPv6:2607:f8b0:4864:20::1163])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97DEA83A31
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 21:55:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F18608399C
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:07:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-74381ff668cso642137a34.3
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 12:55:12 -0700 (PDT)
+ spf=fail smtp.mailfrom=dregan@broadcom.com
+Received: by mail-yw1-x1163.google.com with SMTP id
+ 00721157ae682-71d6016a730so551167b3.0
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:07:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1755201310; x=1755806110; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EfjfVbPoiie9l4cuDvGyoB/naunt5tIjCo+txjpWbp4=;
- b=G76C9LEmBg3SxjPNRZwGFuhGPg7HtiYXjVTrDR2MD22DjRwU/Wt1fJH3e9ADQRR+oY
- MvgSEa8wqQtnJRMHc4m78N3uv5CrzSH/az8Hml50Hv54bEW4SpQGzEvcIHOMm+0KtQCR
- nUUusiQ1yX0XZjd5Np3wnjhK35Ea2y0Eqe3wMw6RJyOO3nn5nfr5OLcl+OMW/kseBH5Z
- OlliKqAuV9SAJSsaKRjm+mZpqG4QH1bp1IXRbEYpCvi4oQaF0mgNqS1iSu9s/Q+U57Qo
- 2KitXLzksJmwgLILR/KawRFww2eepyZXQAxS4pOb+92LgBa/QwgXitvOgwbJcau6FXcJ
- zYfQ==
+ d=broadcom.com; s=google; t=1755194832; x=1755799632; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=c9jIJ/MvLWmm0WzzwU8hAy2H0VAppgsVqR318w5iBsM=;
+ b=Z7YEQxxdNwCd/KzquCoX/lFXjlftfTNSg7ZE/nbC1V20UpqCjecqFy7N1sqoVTxATq
+ vNtCIoOGHQ2OSPbCu+YIXkue4A1+kwE232OrQg20A6QrwTcT5ByEXN6ChEopFtusNJA2
+ M58AVuRsO1qkvybg3rJC1bPg1hPdEIQ6FWyag=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755201310; x=1755806110;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EfjfVbPoiie9l4cuDvGyoB/naunt5tIjCo+txjpWbp4=;
- b=ipYd2dPBLKnFLDTLLd++Vyitxt/9dXHssSbmKVHjKhPAyC6S6Uj22hOuhSuVAYfn2O
- cTbAX2sWr5djnZ6D22+oB8me4fMp83P5wmTeBT2QwJ96gK9jrZfGAzDSSNzpKQ9+OJgI
- E/kLoM1KU2s/wzYTHoIR3gTi740oiUsYGGf00TC5oCYVvCUg5rBmeYLRxITgrApSRXaB
- mc0nt8yYmeihfk3+WUs9pWtsXs8LOqUUnoKmuFesG+XzY2YWhTbZioHfO8qo46Pv2Kgl
- 01zuDvMfQqjuvzswdtlnd3+pKuVTQDIcFxQWj9wEFK3ZoAVKudDOYcewoNQXVZ1Eb3OK
- GzLQ==
+ d=1e100.net; s=20230601; t=1755194832; x=1755799632;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=c9jIJ/MvLWmm0WzzwU8hAy2H0VAppgsVqR318w5iBsM=;
+ b=P0+Rhj1UBtjGo80n/DaeZ0RVo7OpHzn2+vKq+vZpR7M3JNpQAcNNvCodPM9Bcl+tLM
+ uhtzPM6MY826o9U3v2Xoe9zcC16THaRN5ehCNI5vzEe8jwQuKc84BnJRh6UETQ4NgX0C
+ UuCtfetCZ2O6HVR7IO7hSuUWIJpkkjS8n00tFtbllDcezkql5GCAKW8PCZVbLWcwVPGv
+ b+HCoBoDEoxxYGODig9sx9ZWt+Cq/qFTVF7pWD58H3lw1+v4QXh9SFb+BsrvIR7tcQgl
+ B0MyrwxqIhVINMuahBXGLwVt5sG+h+wVEC+7FuI6NSQN67+1534XXkcnieB2L4O9uP+8
+ 8jXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWdBB3kJ+4XHcwjIBDlkukDWEpXzsmqtWvSfS8jjMEedG0nGR6eCogPt5jDk8xF/0XP7HLpx+g=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzu3SrID6Xjh8aURM6C2vHh9GW87Ylp3u8wZzA7wbyy6xErNTiL
- FhYyeowZ9cW0QnFkr2vfAxio/ww9OQpHrwFWIx7qBpA4Rh7I3EUuInDl9axsR9JuyZuoft0cHyK
- 9m99jS5wqg3jeuLRExlAKKy1GoRCTnjla1/JQ0T5mbw==
-X-Gm-Gg: ASbGncsPlKkbe5dBxMcuxnM5TZOTbOddKtpYFcGqIQUrRHQCUBxnFQ657TThayw1BST
- nYpT9CRD6sKh4gUj8twWnSOW8EAJRBRRv73QBCkCXfYNXSqkjKIx5t9cxKQ8E26fyw1OPXVeNbR
- I7oBhyYUkbsaSaDRgcv+1cbYGLhwVjacrpAeaOPX/xyXP2NCCfH4n+1rKMHaLBcnKcl6n7d1tM8
- pA2led63OLrd2NAMA==
-X-Google-Smtp-Source: AGHT+IHgG9HntuYo6oxsSEQonE33Q3tyeDWYopadAMG4ZD9TCgXbVoG6nNigqojgzKZ+6630aw7JOovHxsmUd+GjeiM=
-X-Received: by 2002:a05:6808:3996:b0:434:d9f:f8ea with SMTP id
- 5614622812f47-435df6f6917mr2888140b6e.14.1755201310581; Thu, 14 Aug 2025
- 12:55:10 -0700 (PDT)
+ AJvYcCXK2z8ZQVPWvrETRQN1Uwr54zrsV/a4k80q5YGt0OSAnUiMiyUCiFoC+9Y9owl5c5bY5bxKyyY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLv09QHRi31VzVq/cBrjQjYTeagYG9ruuh2S4BVPRRswaOVQyA
+ q88W6qp3Ow1SBkq302icUXP6W5Vvx6i9T2eJykHYEVDCB0Llsoudr801Ah0tIDTt+SRgoG/dhkk
+ GlMmzPesfivY8yWuuCoFsApb3FUntP+Zi7A==
+X-Gm-Gg: ASbGncuXALkNkeGUAQlBjIdiNfbxRyFzGzzVuh5UOg+eBasj+c/GAsTGCe4Lm8rgDGR
+ ulXXPWsq8xl4rFuy1Alb618/xrv/6hGVGFW0y1w91TTvlbYyQiTNISN1w3aM+SuWy9RX+vE1Yo7
+ rAjhb1oYMksPDLIC30tuXEpwE+VGpTEkmgwPV5wLbgz4IFBweotC5b1ZMbgjgzmyTxZ4iwn8wbG
+ 6jtqtxL9mbsafUT4e4uyMEbhn+tipfVAYmFGrYbRXEhM8an3q6f1aJYd7snYtNokkATK2bBHRDG
+ 0olzM/lQnS4n+3+ctGz8fgu/2MP8mrneJ1p2UDVETlo2rkPRu226cy3cSSerky6BavAYnRgbUQC
+ cGl0O4w3IfK26vg==
+X-Google-Smtp-Source: AGHT+IGp9NM6QpAS+H/TD593kKa55Qw+82fTUEH+C0FhktDzSxBVOLARHKV7BcoyRlw4jRrSXR1DF8dC4A8y
+X-Received: by 2002:a05:690c:490c:b0:71a:20b7:451a with SMTP id
+ 00721157ae682-71d635b48b1mr27856747b3.4.1755194831728; 
+ Thu, 14 Aug 2025 11:07:11 -0700 (PDT)
+Received: from bcacpedev-irv-2.lvn.broadcom.net ([192.19.161.250])
+ by smtp-relay.gmail.com with ESMTPS id
+ 00721157ae682-71d60d6b387sm1970937b3.5.2025.08.14.11.07.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Aug 2025 11:07:11 -0700 (PDT)
+X-Relaying-Domain: broadcom.com
+From: david regan <dregan@broadcom.com>
+To: dregan@broadcom.com, dregan@mail.com,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ William Zhang <william.zhang@broadcom.com>,
+ Anand Gore <anand.gore@broadcom.com>, Tom Rini <trini@konsulko.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Subject: [PATCH v2 0/4] cmd: nand: various updates
+Date: Thu, 14 Aug 2025 11:04:54 -0700
+Message-ID: <20250814180647.1805196-1-dregan@broadcom.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-References: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
- <175096060477.1879961.6525302263431603846.b4-ty@konsulko.com>
-In-Reply-To: <175096060477.1879961.6525302263431603846.b4-ty@konsulko.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 14 Aug 2025 12:54:59 -0700
-X-Gm-Features: Ac12FXyiLBIBLxh-HZw2R5GliUsBlPEeL18v0dv2XHHo8SgJL0ROd9eSuHhEZ7A
-Message-ID: <CAJ+vNU1c6RchWTjX+A1dUi-WQ+m-60QacY+-dA5ScodFsc95_A@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] Fix handling of optional blobs in binman
-To: Yannic Moog <y.moog@phytec.de>, Fabio Estevam <festevam@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- upstream@lists.phytec.de, 
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 14 Aug 2025 23:00:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,67 +104,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 26, 2025 at 10:57=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Fri, 13 Jun 2025 14:02:39 +0200, Yannic Moog wrote:
->
-> > This series solves a contradiction regarding ext blobs packaged in
-> > binman. When they are marked as optional, by default they are faked, tw=
-o
-> > messages are emitted. One says the image is not functional the other
-> > says the image is still functional. Both concern the same binman
-> > entry/blob.
-> >
-> > Binman is set up to have fake external blobs in case they are missing.
-> > This is regardless on whether they are optional or not.
-> > The implementation does not allow different types of entries to overrid=
-e
-> > the faking decision; at least there wouldn't be much sense in doing so.
-> >
-> > [...]
->
-> Applied to u-boot/next, thanks!
->
-> [1/6] binman: drop "faked" return value from check_fake_fname
->       commit: a657d87f08789c4c50423897bd5ee052c6223ee6
-> [2/6] binman: mark optional missing blobs as absent
->       commit: 3ae668b9d2101d111d257ee7d8912c19cfb0e102
-> [3/6] binman: rework dropping absent entries from packaged image
->       commit: 21bc3433a43d3add3430543c9eee2a95d4dee2f6
-> [4/6] binman: add faked optional entry case in CheckForProblems
->       commit: f5817e05efd39dd455c2e6a0f0622d709fe7ea2d
-> [5/6] binman: ftest: pass allow_fake_blob to _DoReadFileDtb
->       commit: e749d64b4622806072c56a839cf9a36a5081b575
-> [6/6] binman: test: assert optional blobs don't cause non-functionality
->       commit: 0dbb0a8d1f2aefb2a7fdd8e627edd955e4fe8d3a
-> --
-> Tom
->
->
+Bug fix of name changed OOB placement option
+Change ambiguous 'count' to 'pages' for read/write raw
+nand dump display update to show ASCII characters and data offset
+  into NAND
+Add option to nand dump with ECC corrected data
+---
+ v2: applied MTD_OOB_AUTO to MTD_OPS_AUTO_OOB fix to env/nand.c
+     per Quentin request & added Fixes tag
 
-Hi Yannic,
+david regan (4):
+  cmd: nand: bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB
+  cmd: nand: more descriptive help info
+  cmd: nand: nand dump display update
+  cmd: nand: nand dump with ecc option
 
-I haven't had time to dig into it in detail yet but it looks like
-imx8m boards are failing again in master due to tee changes again and
-perhaps its this series that is causing it.
+ cmd/nand.c | 56 +++++++++++++++++++++++++++---------------------------
+ env/nand.c |  2 +-
+ 2 files changed, 29 insertions(+), 29 deletions(-)
 
-Here's what I see with today's mater:
-make imx8mm_evk_defconfig
-make
-...
-  BINMAN  .binman_stamp
-Image 'image' is missing optional external blobs but is still functional: t=
-ee-os
+-- 
+2.43.5
 
-binman: module 'importlib.resources' has no attribute 'files'
-make: *** [Makefile:1339: .binman_stamp] Error 1
-
-I thought I had read something about a warning that wasn't an error
-but above is clearly a build failure.
-
-Am I missing something here?
-
-Best Regards,
-
-Tim
