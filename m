@@ -4,62 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33267CA0EE4
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 12:52:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C21CA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:13:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59A818391B;
-	Thu, 14 Aug 2025 14:52:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 9C255838D4;
+	Thu, 14 Aug 2025 15:13:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="G8BU5m04";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pylauw70";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D65E68391C; Thu, 14 Aug 2025 14:52:42 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D8C2F83930; Thu, 14 Aug 2025 15:13:03 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4244838C7
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 14:52:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D7D2838C7
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:13:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 9101a422-790d-11f0-9775-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 9101a422-790d-11f0-9775-005056999439;
- Thu, 14 Aug 2025 14:52:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=content-type:mime-version:subject:to:from:message-id:date;
- bh=uvXo9wFTQhGqwKrzbzdetK4q3ssrsaUwHPnPEAjvNto=;
- b=G8BU5m04mEdQaGQ5PlbNAto5V6ZERrRWt440POhU2CP5Bv2cc4oQGiOKi7gZHjmnXwgS+faUfp2p3
- MG+F3hLGUoSdWGPm6wkHDxsHy04i3WEofllC/lGQxztPdfaKuegwEPFADExJ5Fc918jJSy5sI7S8bO
- UVcBWS5Cz5ea+mXOLy48qFbCmkbKN3dBKZe18r28DlUyaBArIZL/doPGT/EyUmODezz/E70akogGhP
- OIyIkw0n4q5V3aFUHFSjnmEMgJwjPZI54R8TOjtY+P/R95yoW6QIh6BbZuV+ydlTBApSzrnMpdhTSc
- VFuxLnl7XsXMuQbycbfWH0i/VgD682A==
-X-KPN-MID: 33|471lG7L76iXOZ0aXVbpIF8ABNigQDqGT9yW4HIBx6nel8hrxHtCLlX4g6iwfmiP
- ZLId+dW0KWyWRRzIRkScGfM4QlHgAJmSuseBvbAbMt7M=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|ECSIu/BoXcfV8KmzlNWY3dqJYz4rjq4uXrcFg5h9BFowDLDY9E5do8UZhH4nQRf
- tdSoIHWupZIGGOr9uNMZziw==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 8f3f04ec-790d-11f0-8897-00505699d6e5;
- Thu, 14 Aug 2025 14:52:39 +0200 (CEST)
-Date: Thu, 14 Aug 2025 14:52:39 +0200
-Message-Id: <87h5yakqug.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: jan.kiszka@siemens.com, trini@konsulko.com, u-boot@lists.denx.de
-In-Reply-To: <CAOMZO5D+1v-721g5nE3NFQ4igrBHvF0rWs6Jkvm-Jo+R0QXKwA@mail.gmail.com>
- (message from Fabio Estevam on Thu, 14 Aug 2025 09:22:57 -0300)
-Subject: Re: CONFIG_SYS_EARLY_PCI_INIT for PCI-attached eMMC
-References: <cdfbaad3-e9ed-4678-9a65-c3561537d600@siemens.com>
- <CAOMZO5D+1v-721g5nE3NFQ4igrBHvF0rWs6Jkvm-Jo+R0QXKwA@mail.gmail.com>
-MIME-version: 1.0
-Content-type: text/plain; charset=utf-8
+ spf=pass smtp.mailfrom=cn.liweihao@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2445806d44fso6974605ad.1
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 06:13:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755177179; x=1755781979; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0n6mysQEdYvKvZY6R8FQRbk+OtOTPscCPeAuTaaOiVY=;
+ b=Pylauw70oDXptQATZKh88UQv98KTEOmNW4L3FoTKt9Fi+7lgal12nLQF15nHmBEwmN
+ 3kEflJlW9hflYdA2mMm5EmK77wsgTIBeUO1PrKgV6ho7iZktLM4nnB93iQ3fG7v0sK8U
+ btU8cIJMsJMRRxlKo59VQd1b9ZDUSzfvnZSrnMXT+S33ThrvWOLqq203ENRBETSlDp05
+ vLq6dUBPsM/au1OHJtCps3ee5Rx+6tmit9433LBA8wVcXJpfinC3M2FrezM/x61ND/Rj
+ I/luWvhRdqdIXVDkABnEWOzNSipXjbDWjTOPEGz9YlkPzgUrMyuzeA+rpSugo6oeRzdn
+ q+ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755177179; x=1755781979;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0n6mysQEdYvKvZY6R8FQRbk+OtOTPscCPeAuTaaOiVY=;
+ b=eFI76e2oBSQt/w2C5glH1vsKjiU4QQZHZRT6ZSWJbDnljoGqV8Dalk+2nbwJ0A7a6U
+ Un5qiavLicBw0WyKGblzU5fIgBGKuAVYipHrqfCoVrinuiuSEXFlW9WGMCurygV7EW2a
+ /Hwte1Zdm009tCXfwVMqyJHK98sfhLAGAaC6TgXjwnJYlumxy5vTftNXzMWGMdl/kVGH
+ iIbyDiVgCj9Eq0y/7f60b3NW5YXZXw8vsZ8gINs+Htic1SslmmMNDvVX1jDDa70pRAl1
+ rdNleWtiAxIitSqxR9hYP7ah1cq/Zk9Kk6QV5Oe4k5mMY1uQN0wVu8dHPhITrQlVcYyW
+ gilQ==
+X-Gm-Message-State: AOJu0Yz9Vl62yPHM7pfymlPV6XelZldf1G4+9SSAsCKFL4CQ4r+Z7GnP
+ W1s1RlLfaEiyEu40L4NOaARhAomzxkIrFNvWwMDRLuzOqTQMEc2h9mIPtOutml8JNgpiCDOn
+X-Gm-Gg: ASbGncsgmVC61ZAR/QetvdOJtjeIPH/OEq5I9wrUNvLZUDFD0sRFqnmlipxOxOxEJRo
+ c9WFEsd0Rflcdi7+2Z4un817h0Epg6KYF5qT2z2L3F41YVk/+NtvRqGAdktsiCwEfRtHr2qzwR4
+ uuUhauZIIRmOH/ZV7cFCKuJ9uO/KZABwpxVzneZOS4RrkfqOjIfQBGvdnSYg0cxYhjOGzsd0mvf
+ qxxpeeAyzy3O4gcLHdTqaZDAQMORWWmwnNmQfj4v4PZUpMYTWhZcE5phuC4aL5bVdJLnB+H/Jhm
+ FwpEaD6FGc4MmtMAn2WXWrA6qWKTN4l62T4fR+Ir1+paxKVVtg0FPgy7fiu5cDKYbMiNSRC2kng
+ iO0TEWH9FlYR9D8EUK9XJwpIw+M8x6ZJ5IaKccQ==
+X-Google-Smtp-Source: AGHT+IFnntyoNuSejGbeVmdQjgaBEW+yL+RjXNsXDNjbRM9Gcrfs7+ZGAfmJMMTzXoYVhuf3nQs9Ag==
+X-Received: by 2002:a17:903:234c:b0:242:a0b0:3c30 with SMTP id
+ d9443c01a7336-244586c6e39mr46072805ad.43.1755177179376; 
+ Thu, 14 Aug 2025 06:12:59 -0700 (PDT)
+Received: from localhost.localdomain ([104.28.159.212])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-24300f8c9d1sm67902195ad.129.2025.08.14.06.12.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Aug 2025 06:12:58 -0700 (PDT)
+From: WeiHao Li <cn.liweihao@gmail.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ kever.yang@rock-chips.com, lukma@denx.de, seanga2@gmail.com,
+ ag.dev.uboot@gmail.com, muratdemirtaseu@outlook.com,
+ WeiHao Li <cn.liweihao@gmail.com>
+Subject: [PATCH 0/5] Rockchip RK3368 drivers improve
+Date: Thu, 14 Aug 2025 21:12:32 +0800
+Message-Id: <20250814131237.8135-1-cn.liweihao@gmail.com>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,56 +97,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Fabio Estevam <festevam@gmail.com>
-> Date: Thu, 14 Aug 2025 09:22:57 -0300
-> 
-> On Thu, Aug 14, 2025 at 6:11 AM Jan Kiszka <jan.kiszka@siemens.com> wrote:
-> >
-> > Hi all,
-> >
-> > I'm currently playing with eMMC emulation for qemu-system-aarch64 -M
-> > virt and will likely propose upstream to allow user-instantiate emmc
-> > devices (-> -device sdhci-pci -device emmc).
-> >
-> > To make U-Boot recognize such a setup, I currently need this:
-> >
-> > diff --git a/include/configs/qemu-arm.h b/include/configs/qemu-arm.h
-> > index e296f398798..4e22aa36fa6 100644
-> > --- a/include/configs/qemu-arm.h
-> > +++ b/include/configs/qemu-arm.h
-> > @@ -11,4 +11,6 @@
-> >
-> >  /* For timer, QEMU emulates an ARMv7/ARMv8 architected timer */
-> >
-> > +#define CONFIG_SYS_EARLY_PCI_INIT      1
-> > +
-> >  #endif /* __CONFIG_H */
-> >
-> > Is this the right way to achieve? Then a patch for U-Boot would follow
-> > as well.
-> 
-> CONFIG_SYS_EARLY_PCI_INIT is not defined anywhere as a Kconfig symbol.
-> 
-> I'm wondering if we should change it like this instead:
+RK3368 clock and VOP drivers are incomplete, some function is missing.
 
-Not without removing the 2nd pci_init_r() that is conditionalized on
-!CONFIG_IS_ENABLED(SYS_EARLY_PCI_INIT).
+This patchset improved clk and vop driver to make emmc, i2c, vop and
+mipi-dsi working normally.
 
-That would require some thorough testing though; I certainly wouldn't
-be sure calling pci_init_r() is safe at that point on the boards I
-maintain.
+These patches already tested on a RK3368-based board and it works good,
+you can review my test log follow the link blow [1].
 
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 143d51d06330..3da749b05fcc 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -685,7 +685,7 @@ static void initcall_run_r(void)
->         INITCALL(post_output_backlog);
->  #endif
->         WATCHDOG_RESET();
-> -#if CONFIG_IS_ENABLED(PCI_INIT_R) && CONFIG_IS_ENABLED(SYS_EARLY_PCI_INIT)
-> +#if CONFIG_IS_ENABLED(PCI_INIT_R)
->         /*
->          * Do early PCI configuration _before_ the flash gets initialised,
->          * because PCU resources are crucial for flash access on some boards.
-> 
+This patchset with additional board support already submit to my github
+repository, you can find it follow the link blow [2].
+
+Link [1]: https://ieiao.github.io/wiki/embedded-dev/rockchip/rk3368/
+Link [2]: https://github.com/ieiao/u-boot/tree/ymd8_mb
+
+WeiHao Li (5):
+  clk: rockchip: rk3368: Add bus clk get/set
+  clk: rockchip: rk3368: add SCLK for mmc clock get/set
+  clk: rockchip: rk3368: Add VOP clock get/set
+  video: rockchip: Add bridge support for VOP
+  video: rockchip: add RK3368 VOP support
+
+ .../include/asm/arch-rockchip/cru_rk3368.h    |  34 ++
+ drivers/clk/rockchip/clk_rk3368.c             | 342 +++++++++++++++++-
+ drivers/video/rockchip/Makefile               |   1 +
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c |  20 +
+ drivers/video/rockchip/rk3368_vop.c           |  79 ++++
+ drivers/video/rockchip/rk_vop.c               |  92 +++--
+ 6 files changed, 542 insertions(+), 26 deletions(-)
+ create mode 100644 drivers/video/rockchip/rk3368_vop.c
+
+-- 
+2.39.5
+
