@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E108ECA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 17:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4117CA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 17:50:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55FD2839E8;
-	Thu, 14 Aug 2025 19:07:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BB07E8399D;
+	Thu, 14 Aug 2025 19:50:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gag/7Wsn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VcBZ/PHu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA9EB839FB; Thu, 14 Aug 2025 19:07:32 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id DE5AB839D7; Thu, 14 Aug 2025 19:50:47 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38C50839D7
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 19:07:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C310183980
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 19:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-55ce521f77bso1166733e87.1
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 10:07:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-30cce90227aso508051fac.1
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 10:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755191249; x=1755796049; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N4wrV72FBbweu+vrtAalyJjOaVVtDO9OH57APWhMWrI=;
- b=gag/7WsnfEsJFO2PQB0ZP/JWOROOYTrE/ekiKvSooFIuZVk5YLq0VHdDD0fGcGwbIx
- NDu4HKUYCRFPr2byZjt4d6EeFnMpP32XmMSmEA+DPO6kMKvPH9hCq4sb0ECHuXYunpk2
- tx9qfZnGf5M+XsNneXbPEaoaOM/nXNMrNbRpleMQgq0ZzelXG/oqhDMGcvGrlhdjI7XN
- UubG+auhTDyGspr73KlaHrLHLUn0oYrxXj1lZQYZbOi2K65HQKqqRXmuP7bbquW+Rwao
- i/5hPGJFIaTWzuvig95OiK7pUWq0CB8guMUmcNkDicbQN3Iu9vMDimZw/ouq+MKcE8sZ
- mrSQ==
+ d=konsulko.com; s=google; t=1755193844; x=1755798644; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mALW2RQO13r5w09QFKQBK8swxpd+TnN08Xl/45rUwbc=;
+ b=VcBZ/PHuWXBCXGUy0EQiQq8Vc5Eo0ECPDawtMETj0DxTG9U+wU6gMubb0puGulCsQd
+ WdL5s2fYm+jBJSqgP0RLIBERTm+NzlpOANy0CWxcVxK47dEFtegxZY0Ma6x0xtNK5X+U
+ KAYMNgLsu9nckUPeZzSum577/LnJpBaPVmMbY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755191249; x=1755796049;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=N4wrV72FBbweu+vrtAalyJjOaVVtDO9OH57APWhMWrI=;
- b=Slw2LiXCZGugLwmmn59Ikz01LwO7Akz4gjOh3+xPWecelFwKJ5d6P77TYige/Fkog3
- BTFjBJjl9nf3oCrFOCBYgEcbpR3UDwfZzXoK9/5yLMQAJgE2dY2Yx/WgSwKBljwKYpL/
- JnfNJo8UlWReyXzEZGaNjoRHyNEFtFjfe1ejZLv3sv0uR8RsWnt9P2ktJYgEL5iadeKV
- frb5KW0JrHOpQ374SNHUaMIiaysWpFqD3auFFe8tXD6YQwoXVxPvnu7NY5lwETjqEt4Q
- 2Pzm0LmNyQjV8KeqfoqVO6SMk5GfhElQS3w1KK1b2uYYPux+p9JU67PmfCT2OiHOaoUf
- FlCw==
+ d=1e100.net; s=20230601; t=1755193844; x=1755798644;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mALW2RQO13r5w09QFKQBK8swxpd+TnN08Xl/45rUwbc=;
+ b=uPqEZRojINljITyOyrYghxlh3pgQ+VfghQfKlTuNXMhQZWwQQ9FXeiYv41THAY7F/a
+ KLT5omvJkrlfERBKSU7PH3tvAxhKe9WaCPNtjoztWS1OFS0QVC7u/sV5f3HGGv/54Wp7
+ yHu8CbCPaVZ6jSM94QhsrBC9tw0oR99UZamogB16pVJrC1ji/E3gtnCVgynX9crGRRu4
+ /8y86NavkoivOVN17sqgZzLaqPSRA7z1vXs/317XkZWJ6Vsq1+pHL78E81nXO6pwxqgg
+ iSMIKRZdqY16siKDsQcLpEB0tNYD/0LrkfUbbhv4XfNKsSxxKPfkwpm02uxU6E25XtjK
+ dEIg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4lZqp7AEr0EPTYaR+oJvw5BAK1Z3es2otKS4JNi4YHkJ5pWtVMvlpz4+shER6iNtHDW6p6/c=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhgPTjNsDT9JN88nxWUN/cJMbgLCa/NwG/nuFDI+xQxPDEO9nD
- IMKMQoJgw1q80ohM/rKrFjSLmeumLrIcxQNzpiL9U82iGzvvq5cvjXtj4+NAs/9Pyz7ucuaYRDL
- KgH8vSQx5ufuPr/H2se/6IDaQ1mQRlNngGxu5
-X-Gm-Gg: ASbGncu+UHTAQXA1lB5FpVKexOGBgyY/PFRRpLoorKSfb26wvehKwIA8GYeDua0gV+C
- HHRZrj1xd84sAWQ1OdBqHSCOyPHKZa8uIaUplEqYDX+jFVmV4DZ0bAOAWcqVnC9dZgeIStvKqPz
- ChfORqtQ6IuWwGxduw+IQ8FvGUCZzhsVIy2UR4rmh9LvAaj8UzfsocL7TAk+qz/jT77TDDJjZ+p
- hq4hD8N2U7kvUdDMfRFW+HOsFpOWhNfEyYMgmzg3CMMPKy8
-X-Google-Smtp-Source: AGHT+IFJ16MdE4awCzjPd5ju87U0/uT009b5mnm7UWjgDv2v5SWHzUiAdRiY3rK74owsAeUciGZ4R30xEI6llLwBExc=
-X-Received: by 2002:a05:6512:114b:b0:55b:93f2:6b58 with SMTP id
- 2adb3069b0e04-55ce62a48c5mr929179e87.8.1755191249179; Thu, 14 Aug 2025
- 10:07:29 -0700 (PDT)
+ AJvYcCV8W+RisEtu0I1HXVVx0SfgCmlgUUgP/hodnVnSmNYmn8pWzAk0APn3c/OxpzDlzNzqA4OSEk4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxX9y8Wx8VOqmY+oGNtnMU/IDRYSm/rUF3eVBbBrCWUrIkFif5q
+ +xuUIJjAVjnAc3+ePUVDVwQr4XPAoJTxuiRXcJr5xnFBXyPnmYRbjmkvTtPRlkMTNMI=
+X-Gm-Gg: ASbGncvp4Br5P3ikV0GTXiMx8ixFPXD9VCCoJL5qwRarGtA3iAXKj7YMKM2NI7NE5BX
+ dFtvgOBETQmdLr+aMH7b0EYXW1F2OStT2uSu1c7S/APGUQ9K0G6bxQaqDciTbX/dnOHf6Go2mXQ
+ a2TnN7Gw05D/ohS0zkOsJ7NVG5hMYJVwG0myxMOKuL8feXWUIqAH15mG20zwWyLFCwrwb5yB69y
+ Ns8++RGzOv12RNgzwZRolwvyBkJfELq+CiayzxUcRe2zXmq/Nov0MqRBPoTUxL0WxtxZYOwS0PD
+ URkBQ0sfPmoCgXU+K9AvUBU7jsOjhTS1fYfFo4SzNgzjt19ww6De/59pOPbpreu3J7w/gfUCmtI
+ vvfIN8Le+nOFWtD78aqIFGxtlO0QzCBT5JO+yBVLQe6yg2TTnFEw9OjbO
+X-Google-Smtp-Source: AGHT+IFUtA14HIEdGNwRWIvzwL/3zVLOjsGjlxMc65YW0yl86XTqFuNeNFmuH+sfzfW0Rr5Iugc5Og==
+X-Received: by 2002:a05:6870:414c:b0:2d5:1232:b081 with SMTP id
+ 586e51a60fabf-30cd1338d4dmr3077297fac.29.1755193844350; 
+ Thu, 14 Aug 2025 10:50:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-50ae9bd3286sm4543209173.64.2025.08.14.10.50.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Aug 2025 10:50:43 -0700 (PDT)
+Date: Thu, 14 Aug 2025 11:50:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: tuomas.tynkkynen@iki.fi, jan.kiszka@siemens.com, u-boot@lists.denx.de,
+ heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl
+Subject: Re: [PATCH 2/2] qemu_arm: Select CONFIG_SYS_EARLY_PCI_INIT
+Message-ID: <20250814175041.GN124814@bill-the-cat>
+References: <20250814165932.1584854-1-festevam@gmail.com>
+ <20250814165932.1584854-2-festevam@gmail.com>
 MIME-Version: 1.0
-References: <20250814163926.1205901-1-jeremie.dautheribes@bootlin.com>
-In-Reply-To: <20250814163926.1205901-1-jeremie.dautheribes@bootlin.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 14 Aug 2025 14:07:16 -0300
-X-Gm-Features: Ac12FXwWIZHKv793MhNsNhCsQTqI_Zl8iENC8JtxakC5MIjQijuY8hXcmvt5bSk
-Message-ID: <CAOMZO5Ank65-NpF+b4icn8BxCAR11VEUPt-v4VAMrQeu0Xr1NQ@mail.gmail.com>
-Subject: Re: [PATCH] imx: imx93_evk: Fix conflict SPL early malloc address
-To: =?UTF-8?B?SsOpcsOpbWllIERhdXRoZXJpYmVz?= <jeremie.dautheribes@bootlin.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9UedeaE/Cs/IxhS3"
+Content-Disposition: inline
+In-Reply-To: <20250814165932.1584854-2-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,13 +99,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi J=C3=A9r=C3=A9mie,
 
-On Thu, Aug 14, 2025 at 1:40=E2=80=AFPM J=C3=A9r=C3=A9mie Dautheribes
-<jeremie.dautheribes@bootlin.com> wrote:
+--9UedeaE/Cs/IxhS3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> -#ifdef CONFIG_XPL_BUILD
-> -#define CFG_MALLOC_F_ADDR              0x204D0000
-> -#endif
+On Thu, Aug 14, 2025 at 01:59:32PM -0300, Fabio Estevam wrote:
 
-Should imx93_frdm.h and imx93_qsb.h be changed like this as well?
+> Select CONFIG_SYS_EARLY_PCI_INIT so that eMMC emulation can
+> work.
+>=20
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> ---
+>  configs/qemu_arm_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
+> index d5890bf87fb3..db60f7de6da9 100644
+> --- a/configs/qemu_arm_defconfig
+> +++ b/configs/qemu_arm_defconfig
+> @@ -28,6 +28,7 @@ CONFIG_USE_PREBOOT=3Dy
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+>  # CONFIG_BOARD_INIT is not set
+> +CONFIG_SYS_EARLY_PCI_INIT=3Dy
+>  CONFIG_PCI_INIT_R=3Dy
+>  CONFIG_CMD_BOOTEFI_SELFTEST=3Dy
+>  CONFIG_CMD_NVEDIT_EFI=3Dy
+
+I thought Jan was doing this on arm64? But we should probably imply it
+under BOARD_SPECIFIC_OPTIONS in board/emulation/qemu-arm/Kconfig.
+
+--=20
+Tom
+
+--9UedeaE/Cs/IxhS3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ4h7QAKCRAr4qD1Cr/k
+ClPBAP49fhevrU/yTGf4kIhOtbifS7DktEGK8Xe17vgGoNO28QD/YyCLE7HyXK1q
+jtQuXWe5lzgHNHGmFBfCKxpksr4Q7A4=
+=sXTO
+-----END PGP SIGNATURE-----
+
+--9UedeaE/Cs/IxhS3--
