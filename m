@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81845CA0EE4
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 14:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AEABCA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 14:28:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C08488393F;
-	Thu, 14 Aug 2025 16:28:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 64C0E83984;
+	Thu, 14 Aug 2025 16:28:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aOyWWTOl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="phhYcuA/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDC968397B; Thu, 14 Aug 2025 16:28:21 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 0DF2083984; Thu, 14 Aug 2025 16:28:31 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B489883939
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 16:28:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D2A283939
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 16:28:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3e57376f644so4917185ab.1
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 07:28:19 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-88428b19ea9so67701139f.0
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 07:28:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755181698; x=1755786498; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755181706; x=1755786506; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TUU5NtEcTpiWMiRRDG7zM3IHrsYLG9Ly9Xj7UnCwPf8=;
- b=aOyWWTOlL7jn+ccgzq1ZBof1cL/5VXidZLSwpmH+0rvKnEgyDeEuibgd0jwucWWtfa
- cA5EeP3FFKLezgeSYhCoF5/biHHqd/6T4ZHuMmLVwJ7EcPtThzj0i2YgB7yuCU7DOITP
- kfShwfN5mhiDpVRyyaD1zUN5ZPzSba0o1GhmE=
+ bh=QDWz24VMjBjWw9uaGcjVxy2lXZ7y/r1WcUkKHnJGLII=;
+ b=phhYcuA/posOh7dRzC6nhmAToSxH3tOMMbEqbtD08R8bQ/O3Niw8nLJBBbO8esX4Yx
+ 2dX8/oY/zHZ+qM/Fur86tndwmxK5hSHa2Ck32o7YWvNj6niGObNXqXrumCx9Oekrx76m
+ oeUVSFfMrJ9wBjt6gMP7V4Oktj8ZQdzW1Cj9s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755181698; x=1755786498;
+ d=1e100.net; s=20230601; t=1755181706; x=1755786506;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TUU5NtEcTpiWMiRRDG7zM3IHrsYLG9Ly9Xj7UnCwPf8=;
- b=SaFeagBUzzDCBbAgUCXm9bjzbn3f69iqVeN3TzT+0AyFf63tkjFWFerT0bFQUOHvWh
- QodNpU4gpNHVTkfu4eavbhn1YsNGTkx8XYMFMGPFbKSiBb5vkngZEBGNIYme44bh23OB
- 4KHJAyuSUoEkkTe6Dg5k3+jXuR6HoH2/wCLseuFiiDwMcGAa9Vt/q7lBxdcNBDbwR9OU
- gC+iSDUc7RzLTrH+HIEu7L/bxYGnd132ej0nzMeT+ErJih1jThzy+4h4C9ORADd65uY2
- 2dC2OvTO4TxGdDFYj3shwbpAuguuXHAI0hExgyvz1CoG8+7RSu9G4nmtJL/aPFBP52XS
- J2GQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWims8LuLlEPOF5EP1qQqKLnJGytLqHnUvSCoBoBmPPyXBAa3gViREG0HHujnu1OsA+qearogo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwIRIFNnDH0dJAxjA+hRqoWTPs2VvR1rzRt6MbG5FRGWR6ZPPom
- 0Efbb7/C+6OUht4yKdwi9iGnVaVMr527PWuLfgZaapD3fFo6N8qpERchtLt3a7RiwkLWwVC7hmD
- TlqRopTk=
-X-Gm-Gg: ASbGncv2BWyX2yf/XkSeZXNWi+HROQcajMPrmDplQumLJyJ+aGxIEIjZ6viRuBpqoxn
- GapZ36KHLG9y+ig/v7nTSDasuRR38k5ykU/QcJ/+SekiWbIIyYJGlYmKZvfS3dMGvBfFx80JXTH
- CTh424H1Skx4qdMqqAANrwjhzvGFiT1WVfm2zfBV91sPUC9N08xaRyyZadb83idId/27yNr53iV
- uwIE7FMO+83slyjYlZNexKa4jVDZtP53d2Ny/uEuQHYMCkFQrWfGBq2Xk/qNf9BRG6oh1fiqk0e
- wAD5eFqSNZRU88wZuv9BNxZT4gAzmi570pbx1+zSeMLhC7v1nUD1A0S1I/V7TZ7s6be2dKl4UWB
- 1SNoWSmzA7jCkenxLLjTnIMLDoKluYypA7/hJQ0kkIFg3IKl2mvxCQpOo
-X-Google-Smtp-Source: AGHT+IExtkc3kGQLAPiAn3vIZxosYQoXuG1U1SF4X8AplBYNSOwkrbowr8m5Cp86Lgox4851vxUoFA==
-X-Received: by 2002:a92:c24e:0:b0:3e5:5d59:4cb7 with SMTP id
- e9e14a558f8ab-3e5709a7cb4mr53247905ab.21.1755181698285; 
- Thu, 14 Aug 2025 07:28:18 -0700 (PDT)
+ bh=QDWz24VMjBjWw9uaGcjVxy2lXZ7y/r1WcUkKHnJGLII=;
+ b=hmZtxd/AC9gPU9MG5o1WhgZ4wBHYOsumJPII1IOvFHHLlRTJpdHtLrN33LMi9G5nL9
+ arVoVlu5STzZ0WEBJWSSF9KeeSXZnWRY5M0ABaBvEQxNcHhU64dhU/Dq1M0EeZVV6RgL
+ snxjaPa357aXY1krVO29/QQ7pN9n31/OkzsS927VafFsx1QBcxlUHJwdPEeCbS4FuLlg
+ IDhP3HcCeFqXIAHZqFSD9iMUIaLudIti3lFkqdtGkg4HASkoEXUhzS0XxpMRSTE/QQ4p
+ 2VW9QoTC7i26Cx5gyTQauQ8nvlxtnwKjQtz/ATFI2eR7B4UNR3zlhgzr2dZd4VX8EY1c
+ sY5A==
+X-Gm-Message-State: AOJu0YxE0ZFR6P8XZrIKqA97J2GAD7I+P9Vlhbyq3nxfchPkeVPGOMg1
+ mvGIDb/BhGiHyiBu+hU+9uK02Uvn4lOobu0aqsL4mbC0eho8s7UPz6JeHRmfWIfJqxw=
+X-Gm-Gg: ASbGncsb8ebpRrFy6QAA7IpABrOjsiU3hALa+i3nM/+8NZIa/CtjAgVCLyGoZhLNRYe
+ 8c0QUkmdGf595SHFv5TnQnkVuonOoRhfTR5y5jlNo55d2MboLzVYKQd27Uak61n9TPuRzNbUejY
+ w1AAle2TPIJ5OcBZ+yUA8w0V6dvO6YyNEJ++4Awy7e+gKBhP+PiWNTQgKNVsR2XGRaRqW9Y9nZH
+ KP0mvY0zAVueGi4lzwKpW0jgsrsRgmc/WU40c0EXTmsTqCRhiO+1ytCE+qh3xmTu3K0LM7K4Y2k
+ R/wqKp76YzDrRevBmLA8OJ4lPGp/H9QR5wOyU0485kYydOwTkN/0ciZosd7dL8rJ99UEe8Nxe/t
+ OqwSm1leg36volYmqhVXG830/di6K+Jto3sHlrogupz41+Akbp3Dix95b
+X-Google-Smtp-Source: AGHT+IEqgxBRs+inSkv1xLOnXNMWcUKZKAJmm8Xl6NZ92alCM7pbP/vmBYNuDEW7yxxY/Fg5aLt59A==
+X-Received: by 2002:a05:6e02:1c2b:b0:3e5:4816:8bab with SMTP id
+ e9e14a558f8ab-3e571c4b936mr48793935ab.7.1755181705913; 
+ Thu, 14 Aug 2025 07:28:25 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3e5455a56cfsm51566645ab.5.2025.08.14.07.28.17
+ e9e14a558f8ab-3e545da3189sm49141125ab.56.2025.08.14.07.28.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 07:28:17 -0700 (PDT)
-Date: Thu, 14 Aug 2025 08:28:15 -0600
+ Thu, 14 Aug 2025 07:28:25 -0700 (PDT)
+Date: Thu, 14 Aug 2025 08:28:22 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: Martin Schwan <m.schwan@phytec.de>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] bootstd: Add implementation for bootmeth rauc
-Message-ID: <20250814142815.GG124814@bill-the-cat>
-References: <20250602-wip-bootmeth-rauc-v2-0-9d2384131486@phytec.de>
- <20250602-wip-bootmeth-rauc-v2-1-9d2384131486@phytec.de>
- <b1f83b3e-b5f5-4d7f-ac76-834ecfd6d5f9@phytec.de>
- <1a53cbc0-e929-4e3b-8242-7e35c2d02734@phytec.de>
+To: Boon Khai Ng <boon.khai.ng@altera.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan <alif.zakuan.yuslaimi@altera.com>,
+ Jit Loon Lim <jit.loon.lim@altera.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mahesh Rao <mahesh.rao@altera.com>
+Subject: Re: [PATCH v2 2/3] cache: Check dcache availability before calling
+ cache functions
+Message-ID: <20250814142822.GH124814@bill-the-cat>
+References: <20250814031741.4887-1-boon.khai.ng@altera.com>
+ <20250814031741.4887-3-boon.khai.ng@altera.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uk5EMzLBgHw50Hdt"
+ protocol="application/pgp-signature"; boundary="0juydG2nyMCqyNwl"
 Content-Disposition: inline
-In-Reply-To: <1a53cbc0-e929-4e3b-8242-7e35c2d02734@phytec.de>
+In-Reply-To: <20250814031741.4887-3-boon.khai.ng@altera.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,71 +108,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uk5EMzLBgHw50Hdt
-Content-Type: text/plain; charset=iso-8859-1
+--0juydG2nyMCqyNwl
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 14, 2025 at 11:46:36AM +0300, Wadim Egorov wrote:
->=20
->=20
-> On 8/14/25 11:44 AM, Wadim Egorov wrote:
-> > Hi Tom,
-> >=20
-> > On 6/2/25 2:31 PM, Martin Schwan wrote:
-> > > Add a bootmeth driver which supports booting A/B system with RAUC as
-> > > their update client.
-> > >=20
-> > > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
-> > > ---
-> > > =A0 boot/Kconfig=A0=A0=A0=A0=A0=A0=A0=A0 |=A0 51 ++++++
-> > > =A0 boot/Makefile=A0=A0=A0=A0=A0=A0=A0 |=A0=A0 1 +
-> > > =A0 boot/bootmeth_rauc.c | 432
-> > > +++++++++++++++++++++++++++++++++++++++++ ++++++++++
-> > > =A0 3 files changed, 484 insertions(+)
-> > >=20
-> > > diff --git a/boot/Kconfig b/boot/Kconfig
-> > > index 30eb5b328d7ad8a73a2e84812dd7853b66039164..a610cf9faf99cd5480f94=
-dcac89c3401cca394ae
-> > > 100644
-> > > --- a/boot/Kconfig
-> > > +++ b/boot/Kconfig
-> > > @@ -855,6 +855,57 @@ config EXPO
-> > > =A0=A0=A0=A0=A0=A0=A0 The expo can be presented in graphics form usin=
-g a
-> > > vidconsole, or in
-> > > =A0=A0=A0=A0=A0=A0=A0 text form on a serial console.
-> > > +config BOOTMETH_RAUC
-> > > +=A0=A0=A0 bool "Bootdev support for RAUC A/B systems"
-> > > +=A0=A0=A0 default y if BOOTSTD_FULL
-> >=20
-> > I noticed that the merge 009d7722ffd7 ("Merge patch series "bootstd: New
-> > bootmeth for RAUC A/B systems"") deleted the above line.
-> >=20
-> > Was it on purpose?
->=20
-> Nvm, missed your comment
->=20
->   [trini: Don't enable by default].
->=20
-> What would be wrong about it to enable it by default?
+On Thu, Aug 14, 2025 at 11:17:40AM +0800, Boon Khai Ng wrote:
 
-It is a lot of global size growth. And since the system still needs to
-be installed with RAUC in mind, enabling it globally didn't seem worth
-the size increase.
+> When the data cache (dcache) is disabled, calling related
+> status functions can lead to compilation errors due to
+> undefined references.
+>=20
+> Adding a !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) check before
+> invoking dcache_status() (used in common/memsize.c:get_ram_size())
+> and mmu_status() (from arch/arm/include/asm/io.h).
+>=20
+> Without this check, builds with dcache disabled will fail to compile.
+>=20
+> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---uk5EMzLBgHw50Hdt
+--0juydG2nyMCqyNwl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ3yfAAKCRAr4qD1Cr/k
-CnpvAQCdKFRLCioXoHu8YJc/G/pczOA3/mfr21SUegzYu7POfAEA0/fVO8Ub+m35
-/th92aVDxIctfYymh8MjC+t7SHmBdg0=
-=K+wo
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ3yhgAKCRAr4qD1Cr/k
+ClziAP9wFs9J2UuLj8E16BCZBZN1S2GqxJ0SoukB2Hm8hHDvrAD/Um2OmczHFZFq
+oZ4wAdk0R+xLH5poCtPCaBG/1LQaMA0=
+=fiNB
 -----END PGP SIGNATURE-----
 
---uk5EMzLBgHw50Hdt--
+--0juydG2nyMCqyNwl--
