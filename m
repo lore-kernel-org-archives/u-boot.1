@@ -4,160 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA46CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 06:17:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C156ECA0EE3
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 08:18:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2BDF8367B;
-	Thu, 14 Aug 2025 08:17:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id CE29C8309A;
+	Thu, 14 Aug 2025 10:18:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Djsv/0yj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W5X0HmR+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFC51836A4; Thu, 14 Aug 2025 08:17:05 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2071e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::71e])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5EA7E8309A; Thu, 14 Aug 2025 10:18:03 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6E848334F
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 08:17:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 56ED38367B
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 10:18:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MbgX3Kk6kdjHwTfVjfhheY1Glwo+I6k1849WbiIlybi1B2mcSZZIwz1IiQnP9mdEVxBAGdAZ4qWP245Cedv6HTvd+wlZVDZxRksPSeX5RIRZJFBsvRsQhPEgtarG0hWbaLJpSWf9lIWfxbqC8pEZALR3GjtXYivfN4VG03Qzu6Q5aVUnNe8LGhLg0vhziRcx1K7FpMnka6kgDIAvYfK1OAF1ezzZeMpba7IIfS/76rnJqX99yaeFOGwlYTElQncKgU81Xrcgr2DJfuRR80+QU834O+TloXENm0LVLn3G4d4ojjieOk3s/ZuABtMEe39kCiKs6J00tYinQdBmbsZNqQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wK1JW5EtDqjVPDWGAcFLq1OcwLpmSJxEmVtAYgHpCcc=;
- b=wZCIxjNHOzH49ptdiyQ92s/0csOdLg7Z0koJFqgFIVk8LCjE+8zHjmoCrL8ZS86G/YdTD5EWyo1gsyUpWC9rtoypnZVlgRqZzVVZ8j3NUKyBGGw4oxzhdib7enz0oe6ax+lIQjDet83HahHGFA/MZZSHFVml6M49PxHYaq/3uMpfOTp9xkVgWbOaT0OoozStgYTGafaIK83cmS5LPLIDBejQVqU271VtYWx8ImoSCvogOCv4K5noslG8jWSfFEUFbDkeylImC5W3FDaXjGVLFj6P1rcmcOuX5syIT/xoPazLSwi7XDiFt8hXcsTIDmSmeGVfsG/t74ZJTSJgomhIyA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
- dkim=pass header.d=phytec.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wK1JW5EtDqjVPDWGAcFLq1OcwLpmSJxEmVtAYgHpCcc=;
- b=Djsv/0yj2lxUcVpWFv7lnM5ksnJu2V/1iglIO1/oaWpSamLIv1ixhUbO12rm8PBe1wFwW1iiZG8SATb6VHGODjkQ6zaGS2yZS9a6CYf/4fptMTRUX0xsv1UbjR+zaWew4vBVsMDZbTuf++lyXoLkzyACu52gHVy1mD/oEJXjFexftz1aZO6qgp5LYTeqMaJQYPmED9gb/5Bwab1ggQpQAfVB3sNrjc0WzhWM/zgHTjgUNT3+pDZqxtl9WBQVLLAy0TQgZFZSDuhBoKIrk9XlgXVL9TO30eiqZxZqc0p77IM7kvEhTlazZxhPy5rGGIhoLQrZ6N7B/2LT+uAl7rQTBw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received: from DB9P195MB1444.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:33e::16)
- by AM6P195MB2697.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:6bf::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.17; Thu, 14 Aug
- 2025 06:17:01 +0000
-Received: from DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
- ([fe80::f79f:1750:8791:4336]) by DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
- ([fe80::f79f:1750:8791:4336%5]) with mapi id 15.20.9031.014; Thu, 14 Aug 2025
- 06:17:01 +0000
-Message-ID: <76ab1570-bf8b-4463-9aca-84aef37b9e79@phytec.de>
-Date: Thu, 14 Aug 2025 09:16:58 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: phytec: common: k3: Making setup_mac_from_eeprom
- optional
-To: John Ma <jma@phytec.com>, trini@konsulko.com, d.schultz@phytec.de,
- michal.simek@amd.com, ilias.apalodimas@linaro.org, j-humphreys@ti.com
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
-References: <20250813213116.3076551-1-jma@phytec.com>
-From: Wadim Egorov <w.egorov@phytec.de>
-Content-Language: en-US
-In-Reply-To: <20250813213116.3076551-1-jma@phytec.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0208.eurprd06.prod.outlook.com
- (2603:10a6:802:2c::29) To DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:10:33e::16)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-45a1b098f43so4424325e9.2
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 01:18:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755159480; x=1755764280; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=AKO5UdjgRAJPEmbreBME6PNQ2gwFG0wtQ5RecZKeGf4=;
+ b=W5X0HmR+MVUvPCbUUL0t5/oo7M+P+hySPNGQqh6hOg7ScEwD/XkHbonuRoe3MPjkmC
+ QScx+sUt/iKt+4kgrhEATUBFT+jYIyvh21KUBwbMq78n+U4abgdgeuUzvudT5H0fqr7R
+ xRdSH6kGn2gGSMbKkHr74YvGA5YvWx+PB9B0wXwBVLbean90+Co+A5yEzfvB/lEiOYxp
+ ll53kqH4HurPjkiyb81yXfq531vhA7rBGTw5gr0fD72xjFvT0aLzbCluaI2WV3orOKTh
+ mvXoRjddmr0zu/8jyr/7g/FLkwvAmlIdvQWGXeyeTi+xf2FvzJfQJ+vYsoz7y+FB2A+T
+ 1FLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755159480; x=1755764280;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=AKO5UdjgRAJPEmbreBME6PNQ2gwFG0wtQ5RecZKeGf4=;
+ b=XZ8qXwOOFiAnsHIQYqzjXu33kFJX3XhnFeN9iFXIX+1K7+hkbzHwUkMwICw3NcMhab
+ aANZ1aLkBqsKTmedyGvqUPyJSjMHGHk5mMKpKDD1zVg2q3eODCDHoBygrWuxqCgVPTdD
+ mRGfduV4hjmFGfV/Kz2cumhSssRBWk7GHI4nhi+zEAxn5zeJdh7G3Ki+TqHI3VR5HVFS
+ eMhc8dfTOfzpcRBKNaLtziNKJKTKxgDpA9R4CR/tyoHGNY7dB9Gq2SnxguJKxTp/AXYe
+ KP+UUzHtMaUUlgfg4DgCFt+5EHrhLpyYrD9WXcoW6MF1lTxx1AhaAg6u/HuDOXfnW84Q
+ 825A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQnU4aO8zIJwgd69kttNvV7nc7aZ9Hd238RH4x6WmEEGnfhQ/45ht2nbPs+ICdmAK/dW8W1lc=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywsit9YF7bDh99QyYoim3+JBXuINVvS7Q1b/1x4qCV01Tq1RIu+
+ Fc+4nooQciSi0iEUTfadgDzl2UXxLx42NpMsR3OtACcbrsd0vmPjLlvC8RF6MdCaIv0=
+X-Gm-Gg: ASbGnctNvCrACDygRSdE1vfruaihSy/mRo+U0atDbYtRrc7Hqmvh/717MbLY3Jc+cTk
+ erCyWWQKofvr3TX4DSq4szVWEsc9vkhYJheeXpMKo/tJRvye8t/d7BuwHDFhOZFlpj4h9mmLduw
+ 49gIQjJkW4bOQ8iq2+JfOtjakyX6H1Ut2Gby3GjPygv7kACDfEmJFX+QY3viUYycxh78QutDYvk
+ V7P7uAFap+B9Tfunp5s1yaPBwxf7u0lmw7cM/yHJDjUX9VV4uxGbqTAivVfug7CN3eWuFdVEtQv
+ vLCq7co5JZQUOWbUbzegoY3tcrlPDvw7xeoSwesstyWd6OkN7SPiGV/Wdaof9XmweSjXrLgJxlU
+ YSSxcmYc5A/n8BHf5xRRv8bon2yI75noQaQHu0HOz1sA2nkRurh7aA3M1zN2y76zp13bPBC0CCn
+ EBZQ==
+X-Google-Smtp-Source: AGHT+IFJTNb1MEKLQxFX8K4AFKdZMRRWBgsckfqA+69dBXG7CYBzPckEzUJkMJOsesAs0oB6EKWxNA==
+X-Received: by 2002:a05:600c:19c7:b0:459:dde3:1a33 with SMTP id
+ 5b1f17b1804b1-45a1b66e81emr14229985e9.26.1755159479708; 
+ Thu, 14 Aug 2025 01:17:59 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:49c3:742c:5c4b:5c45?
+ ([2a01:e0a:3cb:7bb0:49c3:742c:5c4b:5c45])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b91b05b28fsm3834950f8f.21.2025.08.14.01.17.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 14 Aug 2025 01:17:59 -0700 (PDT)
+Message-ID: <733280be-f5a3-4e1a-b374-615566707f2a@linaro.org>
+Date: Thu, 14 Aug 2025 10:17:58 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9P195MB1444:EE_|AM6P195MB2697:EE_
-X-MS-Office365-Filtering-Correlation-Id: b5384c87-e548-4585-d55e-08dddafa2e51
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UzlHT1pZTDY3RklWck82WGlzVkU3U2J6elcyVUc2dHFBcStIN3hDMm9TeEFo?=
- =?utf-8?B?R3UyY1orcDBzeXdzV1ZCQTU5a2VhNGFUd3hUcXRGRUoxNUYxMEJidjNmeEpO?=
- =?utf-8?B?VElleE5iN09hZ05JdmVrZlovaGt4OHZhOUpzZm91VEpjMloyTEsyelFYS1l1?=
- =?utf-8?B?dDY5c0dpQ1hoWDN0SjdGNitBVTc3L1dqVE0va1k1WEVBK1Z0RzJvMnFka2Rj?=
- =?utf-8?B?cFIyeWR2WTN5NllFUEQ5NGoxMnI3WWxOUUJ3R0RXSHVNOS9HOVNDTkdSbTdI?=
- =?utf-8?B?bVZ5MmlUdmxjVTlOZWMyc25SOW1GTXhQczBHdHhSRXhNa21WQnBCS3NkN1k4?=
- =?utf-8?B?NEhMSStLUzFoVzhhMXM5bEFhWkZuT0s3bXB3eGRxa0xnV3luRnE4UnlRbWxn?=
- =?utf-8?B?UDlKWnFyR3d1NE8xTEJPYk9iZGpDWW93dlVvOEtzVFhzcVNVNFBhaVBqMlgz?=
- =?utf-8?B?MHhKdnRCNGdrUWtVcjlwZDVURWdQdFhydVQ4bnZJRm1kZUpPUFZqdEhEYjNO?=
- =?utf-8?B?TWZMTHFFOXkxaTFrVWtkTExUYS9BSEJlZFd3QjFaUlhiamNqS2o3V3FIVGdU?=
- =?utf-8?B?eWRWc2N6cUFjYk5vc3NSSk45MExUNFR1QzJZNkN1L25qSFJIdFE5MnArMjFk?=
- =?utf-8?B?MWJZZndmV0JUZGFzUGk2Wmp2YlpWMFI3bTRJeWcwMnljL2NoQmFTZVNpTkhX?=
- =?utf-8?B?eG9oVEFtREkxY1BtLzB3NU9tZHA0dmhLaEg4VW1TZ3NiS292K3NGREgzSnRo?=
- =?utf-8?B?d1V4dXF3OU4rbTZ6K0VDTm4walJYT1NTeE1HS0hNN2FVRlRub3QwOG8yYWMx?=
- =?utf-8?B?SzRXYzExejFjV3hyWTZKVVozbnJOcytXdEtWd0ZnVWlyU1F2N2NNamtJa1Np?=
- =?utf-8?B?bG5JSm5Pa1RTQ1l1OGUvU04waXV1R1Ura0M0VXJ0aWVCZ2JHeWtXd3UySURy?=
- =?utf-8?B?ZEY1VmhHVFM5NDZuR2p6UXAwK2dMWW51ODVWSUNWZmtTejVzU3dyaFltWkFH?=
- =?utf-8?B?WEQyS0xNV3N4N1c0UDE4amxlVFN3Tk9pajB4bk1mQXlsUHU4Z0RUSWxQT3BM?=
- =?utf-8?B?RElrYVd5VmI0VmJpcjdVekY4L2FvcEUzT2VraXdEeDZQOHJLZk53YzVoVUE2?=
- =?utf-8?B?dmtyQWNsODJ4YjUvTUxsckUyQ1pBMzg5a09RRFMxSzBvWnoyNjdsLzU1VFR5?=
- =?utf-8?B?SWtZWWFmc0xCN1NQaEhORUIzeEZVdy81dDNFSjFyWmhMdDNkbm1abmNtRHFl?=
- =?utf-8?B?dTBqYzlXaXVkdFA4V0RSSE1xazgvRFV0dENLOW0zZmwzVmJqMFB3elc1TGFx?=
- =?utf-8?B?b3BDeFJRSGpqS05NNyttQWVDdjNxRlJwYjg3a2J4QVdVZy9WdlJkVjA1L1Nm?=
- =?utf-8?B?UHNEa3RPZnZXS3I5UTZaSHhYTktPZEppV3NWSzNHT0Z6WWRPcVRHRmFvWUFy?=
- =?utf-8?B?UGNqWFNZZHJBWHR0T0p3OXdVN2Fqc3RNYkk2WGVFT0NxR1ZScDhGL3JESHdB?=
- =?utf-8?B?RkZoNXJWUm9RVEJ1N1ZuYlBkbkxSTURsbkxHUGJkTXhRT0pneXY3cHJjWWxt?=
- =?utf-8?B?bEVhL2pvUHRRclZSYm9jcGxIRHM2T3UxclhCcXZsc0l6QXd3MVFibndpeU8z?=
- =?utf-8?B?UGkzaE4xa21nNGYvbVFXcEQ5ZGlaYUhDWXIyb1NxOENTNTV0b2RPTmdUZkdz?=
- =?utf-8?B?VUtlbkJKYnlHWWtrMTlhWEhNTExjK2JOUzBHeld1OEczR21UVS9yb3pHTWlE?=
- =?utf-8?B?WFZvV0ZrR0ZaZklaL1RvQUNxeUpHK01mODYwWXFBODVpU1pVbjUvTVNqK0VP?=
- =?utf-8?B?elYzcmhZM0ZqcDViVS9IYVg1VVNUTkN3WDFqdlBpY1Z4L2xoZ2R3ZTZTZDBp?=
- =?utf-8?B?YXovZHR1UGt3eWRnclZoMno2M2kzZXhOMysvTTR1cmZpUGc9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9P195MB1444.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YUJRTnYxN21rT0hQS0tHVFZEWk1aUVRuV2F1cHZ2R0R3MUg0TFBXOGJCbUVM?=
- =?utf-8?B?Mk5LQUg1N1c0UzdMK3VzZ0RzVDVqQ1JXUlZ3SUxBRDk5RzhORHllcXc0cmlu?=
- =?utf-8?B?dGpwOVBwaW03d3VnWXg3WmI0NWZCbGU4bEozdXlsdUpzclFLYXNVNkdzdnNa?=
- =?utf-8?B?dlFObm9ja2cwZ21OMk9BaGJ1WXVGWEI1WTBTSE5udlk1UUtWc3N6N2IrS3VG?=
- =?utf-8?B?QzBwMi9xTzFnWW9PNTliTjFvUXhkNGQvRGw4Zk91dHdIaFdWcEd2VVNDRXZk?=
- =?utf-8?B?QVNCSEsvYWhhVzF2RnBYRGprOVJscC9KVFI4K3gxMlloeEtGY0ZQNk9lNS9j?=
- =?utf-8?B?ZEtKMW5kV3F5RDJEVVc2YytJdldNcjFZaFpwVTZ1VUdPYTFyVGZhUlpsSlc4?=
- =?utf-8?B?dER6a3duSE9raTNWUC9LQnQxeEtlckF4Q2xoQ1dyRUJPUVNLa05kS1ZTNkVt?=
- =?utf-8?B?THBubENvYitEMWtKS2V0ME1qdUNWVjlTcjIrdTNLTThoQ2pYQmdjNHF3Uzcz?=
- =?utf-8?B?YlBJZE4xOHZoUzhPSUJvTUp2WDU0SU1OT2pjbTFrcVNqd1JyQWVXWHEyYW4w?=
- =?utf-8?B?UjI2TGJZbGc0cHlCQ0lXT1c0dllrbjlTQzZBUXFscndIUWV2cHNZMVUvUTA2?=
- =?utf-8?B?WjA2Z2pUUWtQUEd6d09jaFZsUUxFVndEOWtNZk1nQWNHQytnTWVRSy9wK3BF?=
- =?utf-8?B?clNZdlNmOXozREhKdEhETlpGWXFSKzN0SkxPMWNycWZvVFZmcW5OZXVaa3pi?=
- =?utf-8?B?aGt2c0dhNGNBMDRYOExxQmVHU3FxWVQvMFEvNFFMRmZ5MlJ3d2JBaVNzQVAr?=
- =?utf-8?B?OFovMVJGRS9UaXVrSlYyL1dSSTBhdWdtS1JrdzZ6K0QrTTM0RjQzZjJFdlJj?=
- =?utf-8?B?NEV6Z09Pa2JrcnJId1BZYThVdXdFeHBrYzlHY2F1VTF1L2oyTzRvblJUajdF?=
- =?utf-8?B?RVpadDVvYytXdXNycjNhb2YrVExaU0xGdDhQNDVJaFUzWDFLZWlOMlUrOFov?=
- =?utf-8?B?OWtoaStSb25JQTZnYXp1UE9vaytIQlJKc3VWbHhJS2lwZUczcERiVklXTUhY?=
- =?utf-8?B?REt5L2FtYm02Szcwa1NjdzkvSzZrLytrVUNQcVdsK0UyZ3hXL0FqK1dFWjBm?=
- =?utf-8?B?eS84WnpaWTJrZnc0WmlVeUYxVkZtSmpBc1lDNldFTlA1SVhpdUVNV2xpazZH?=
- =?utf-8?B?Y05PS093R0hOZ0JPZGRzM0E2elZSc3RWcDVraG82bFI1eWlJUjJhNHgyV3Fu?=
- =?utf-8?B?cHpqY2M2aVA4cXNWTVd4aTIwamp3WTBER3k0WTRGNzlVWnFSUXZJUGl0V1F3?=
- =?utf-8?B?OFQ1TzRCZXdrOUpzMCtwMGE2UEdWZHc5d3FueTNjYUhibUNsblg4UDhPOWRh?=
- =?utf-8?B?YjJIbFFuby95MURVOG1kL09VOVhPUFJNV0RJT3Y1emtWcHppbnNVVCtRR1d3?=
- =?utf-8?B?TFl4aFd6YTJ1NXB5Z1VhM0J0a2lFMXgxSStkVGVXWWRIQWJSSDArK3U0ZEZq?=
- =?utf-8?B?WGFKYlFlTWs2U3RDdWNrMFZUMmVHSitrai9FVzdkTEdxSEFzYm44cGNLVjc0?=
- =?utf-8?B?UWVqWGFjQ1Y4MCtJdVp1MlVYZ1N6M3M2WjVVSm5GQnc4d2ZMWmFFdksyTFNh?=
- =?utf-8?B?SXV4OTJGTlVyaTBlbDlEeVlpMytVK0xHd29NZFVDeHdyN1ZoMVFrelU2ejRt?=
- =?utf-8?B?d3RUTUxyc0pXYnFLRnluK0dlSDdEQ0s4elhxczRaUWk5d1NTQmxQaU1jWURG?=
- =?utf-8?B?YnFCYWVvNDYzc3ZqM2FpREhqRW4zK09MbGsxSUt5dXRnNTBrdFRRRENXa1ZG?=
- =?utf-8?B?TnR0WEZ0WTJPbHRyUVZOZEJSTTNPK3BmeExmZWhJeHVSbDd1d01hc1J5V1p1?=
- =?utf-8?B?Tys2OGJKOXFxbStaUGhPOW8zWHFONTFxeFVzK3hPT3p2SlZaNWUrTjlnYWJY?=
- =?utf-8?B?Q0hqZVhXd3hDWWFMaDlrcnMwcjd0SVhGc2dzVnFwWUNlaEFTOFNhR1I5WUFV?=
- =?utf-8?B?SitKZmVWMmVvRU5QZ3owTmh4V0FTdmZHelZMT3k2TkNVWUVRNFdwTnZucDlr?=
- =?utf-8?B?RUwwQzVJRWd3Z2NQREsvSk1jMTJpcWk4U0VaQ212NjJMcmxyVjQvL25jaldT?=
- =?utf-8?Q?R8vW8Suhbk+eLJUAz39GBp3Ir?=
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b5384c87-e548-4585-d55e-08dddafa2e51
-X-MS-Exchange-CrossTenant-AuthSource: DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2025 06:17:01.2493 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AJtGoufr8TTTxS2PkgmQbawwtYIG3bTK+Hw9lOV6r25h+kHCy6wtfDNKnq40gr3v/4hnGily5HZOpriHRQso3Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6P195MB2697
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/2] lwip: add Kconfig to decode and print ICMP
+ unreachable messages
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot mailing list <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>
+References: <20250806085959.2130339-1-jerome.forissier@linaro.org>
+ <CALeDE9NsfBRyfOdxr8S0iRSj5kdSwyKVr-pfroJCdjqT0hbmvA@mail.gmail.com>
+ <5f3e997a-f070-417f-a09a-90e1bf7774cb@linaro.org>
+ <20250813171304.GD124814@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250813171304.GD124814@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,48 +114,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-
-On 8/14/25 12:31 AM, John Ma wrote:
-> Making the setup_mac_from_eeprom optional for boards without
-> CONFIG_PHYTEC_SOM_DETECTION_BLOCKS.
+On 8/13/25 19:13, Tom Rini wrote:
+> On Tue, Aug 12, 2025 at 09:49:29AM +0200, Jerome Forissier wrote:
+>>
+>>
+>> On 8/11/25 17:56, Peter Robinson wrote:
+>>> Hi Jerome,
+>>>
+>>>> When using commands based on UDP such as tftp or sntp, if the server is
+>>>> not reachable or the service is not started on the expected port then
+>>>> the command ultimately times out. However it often happens that the server
+>>>> or a router sends back an ICMP Destination Unreachable message. That can
+>>>> help troubleshooting. Therefore, add support to the lwIP stack and to
+>>>
+>>> Has the patch for adding support to the lwIP stack been sent upstream
+>>> for review? Please reference the upstream patch for this.
+>>
+>> Yes, see https://github.com/lwip-tcpip/lwip/pull/73. I will add a link to
+>> the commit description.
+>>  
+>>> Also related, what is the status of other out of tree patches to upstream LWIP?
+>>
+>> At the moment we have:
+>>
+>> - 5634ecc88e9 ("net: lwip: tftp: bind to TFTP port only when in server mode")
+>> Submitted upstream as https://savannah.nongnu.org/patch/?10480 and
+>> https://github.com/lwip-tcpip/lwip/pull/61.
+>> Status: MERGED (https://github.com/lwip-tcpip/lwip/commit/b1edb7780f5f)
+>>
+>> - 27d7ccda94f ("net: lwip: tftp: add support of blksize option to client")
+>> further modified by 10917df17f2 ("net: lwip: tftp: fix find_option()")
+>> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/62
+>> Status: PENDING
+>>
+>> - f69f7aef26f ("lwip: tls: enforce checking of server certificates based on
+>> CA availability")
+>> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/63
+>> Status: PENDING
+>>
+>> - Part of 9349fc2e9c76 ("net, net-lwip: wget: suppress console output when
+>> called by EFI")
+>> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/66
+>> Status: PENDING
+>>
+>> - Patch 1/2 in this series ("lwip: icmp: allow reporting ICMP detination
+>> unreachable")
+>> Submitted upstream as https://github.com/lwip-tcpip/lwip/pull/73
+>> Status: PENDING
+>>
+>> FYI we do track this information internally here at Linaro. I could as well
+>> store it in a public location if it makes more sense.
 > 
-> Signed-off-by: John Ma <jma@phytec.com>
+> If it's not too much trouble, filing issues in gitlab in the u-boot-net
+> repository (I just enabled issue tracking there) would be good so it's
+> visible to all? Thanks.
 
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+Good idea. https://source.denx.de/u-boot/custodians/u-boot-net/-/issues/1
 
-> ---
->   board/phytec/common/k3/board.c | 7 +++++--
->   1 file changed, 5 insertions(+), 2 deletions(-)
-> 
-> diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
-> index 7f34d71d530..647f93a1d7a 100644
-> --- a/board/phytec/common/k3/board.c
-> +++ b/board/phytec/common/k3/board.c
-> @@ -176,6 +176,7 @@ static void boot_targets_setup(void)
->   	env_set("boot_targets", boot_targets);
->   }
->   
-> +#if IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION_BLOCKS)
->   static void setup_mac_from_eeprom(void)
->   {
->   	struct phytec_api3_element *block_element;
-> @@ -197,13 +198,15 @@ static void setup_mac_from_eeprom(void)
->   		}
->   	}
->   }
-> +#endif
->   
->   int board_late_init(void)
->   {
->   	boot_targets_setup();
->   
-> -	if (IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION_BLOCKS))
-> -		setup_mac_from_eeprom();
-> +#if IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION_BLOCKS)
-> +	setup_mac_from_eeprom();
-> +#endif
->   
->   #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
->   	configure_capsule_updates();
-
+Regards,
+-- 
+Jerome
