@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD670CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 21:00:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1A71CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 21:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0622A83A24;
+	by phobos.denx.de (Postfix) with ESMTP id A8EEE83A47;
 	Thu, 14 Aug 2025 23:00:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="Z7YEQxxd";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="cEtC3fWg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E48083A1F; Thu, 14 Aug 2025 20:07:15 +0200 (CEST)
+ id B514883A1F; Thu, 14 Aug 2025 20:07:16 +0200 (CEST)
 Received: from mail-yw1-x1163.google.com (mail-yw1-x1163.google.com
  [IPv6:2607:f8b0:4864:20::1163])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F18608399C
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:07:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2F1983A13
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:07:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=dregan@broadcom.com
 Received: by mail-yw1-x1163.google.com with SMTP id
- 00721157ae682-71d6016a730so551167b3.0
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:07:12 -0700 (PDT)
+ 00721157ae682-71d6059f3aaso913037b3.3
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:07:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1755194832; x=1755799632; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=c9jIJ/MvLWmm0WzzwU8hAy2H0VAppgsVqR318w5iBsM=;
- b=Z7YEQxxdNwCd/KzquCoX/lFXjlftfTNSg7ZE/nbC1V20UpqCjecqFy7N1sqoVTxATq
- vNtCIoOGHQ2OSPbCu+YIXkue4A1+kwE232OrQg20A6QrwTcT5ByEXN6ChEopFtusNJA2
- M58AVuRsO1qkvybg3rJC1bPg1hPdEIQ6FWyag=
+ d=broadcom.com; s=google; t=1755194833; x=1755799633; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=etbuUdpypO6/LfP2tknlT8HDcNbEz5Ub0dqWkAhy3Fs=;
+ b=cEtC3fWglN1sjIW0MJimZWgJRvBLX6dE7CdYsPTlJ7ZLPBNEmnmNBpebr0GLvtmfDz
+ cUnFsK78diOHd8m5apYt9ExZ1S/Dh8ecunzgD/fyBJ5r5IA89+3Mif8HkWnIAmJbxNBP
+ N8MwVcMfD6ExLPwQScdw1cSD+lDSQRWaCyL/k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755194832; x=1755799632;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c9jIJ/MvLWmm0WzzwU8hAy2H0VAppgsVqR318w5iBsM=;
- b=P0+Rhj1UBtjGo80n/DaeZ0RVo7OpHzn2+vKq+vZpR7M3JNpQAcNNvCodPM9Bcl+tLM
- uhtzPM6MY826o9U3v2Xoe9zcC16THaRN5ehCNI5vzEe8jwQuKc84BnJRh6UETQ4NgX0C
- UuCtfetCZ2O6HVR7IO7hSuUWIJpkkjS8n00tFtbllDcezkql5GCAKW8PCZVbLWcwVPGv
- b+HCoBoDEoxxYGODig9sx9ZWt+Cq/qFTVF7pWD58H3lw1+v4QXh9SFb+BsrvIR7tcQgl
- B0MyrwxqIhVINMuahBXGLwVt5sG+h+wVEC+7FuI6NSQN67+1534XXkcnieB2L4O9uP+8
- 8jXQ==
+ d=1e100.net; s=20230601; t=1755194833; x=1755799633;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=etbuUdpypO6/LfP2tknlT8HDcNbEz5Ub0dqWkAhy3Fs=;
+ b=r1cW8fjfLbexZ3h/DFlTwsP5vqKUArBSZFe75C4FWclIU50TpmytMY/VcOHRw/gaPg
+ xksrhEsVtb4Dz7LnDrzsQtiZtu62yqW0yneKCNNjYsG3MzkB16snvxm5qBEqxbx3Xnf5
+ 7pZ01XTFnlI1z8dRSrqUeQuDd1qFexITH9AJ8uzuNcpu15/c8IFfnsH7Ty0PaLYXLE9E
+ Dte19PKVjpBn9TS4F6oaxov+QcN5OxHS24/lyB4SMdoDBk/IIQNvY+pkrxH8bDkOrQs3
+ KZcoHQ+p3DGT/VUReQ5C3bwflsTyiJ5krpzitPCyVu4s+ncR7OcGnKMK66Xz8Gc5CRxG
+ jqQg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXK2z8ZQVPWvrETRQN1Uwr54zrsV/a4k80q5YGt0OSAnUiMiyUCiFoC+9Y9owl5c5bY5bxKyyY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLv09QHRi31VzVq/cBrjQjYTeagYG9ruuh2S4BVPRRswaOVQyA
- q88W6qp3Ow1SBkq302icUXP6W5Vvx6i9T2eJykHYEVDCB0Llsoudr801Ah0tIDTt+SRgoG/dhkk
- GlMmzPesfivY8yWuuCoFsApb3FUntP+Zi7A==
-X-Gm-Gg: ASbGncuXALkNkeGUAQlBjIdiNfbxRyFzGzzVuh5UOg+eBasj+c/GAsTGCe4Lm8rgDGR
- ulXXPWsq8xl4rFuy1Alb618/xrv/6hGVGFW0y1w91TTvlbYyQiTNISN1w3aM+SuWy9RX+vE1Yo7
- rAjhb1oYMksPDLIC30tuXEpwE+VGpTEkmgwPV5wLbgz4IFBweotC5b1ZMbgjgzmyTxZ4iwn8wbG
- 6jtqtxL9mbsafUT4e4uyMEbhn+tipfVAYmFGrYbRXEhM8an3q6f1aJYd7snYtNokkATK2bBHRDG
- 0olzM/lQnS4n+3+ctGz8fgu/2MP8mrneJ1p2UDVETlo2rkPRu226cy3cSSerky6BavAYnRgbUQC
- cGl0O4w3IfK26vg==
-X-Google-Smtp-Source: AGHT+IGp9NM6QpAS+H/TD593kKa55Qw+82fTUEH+C0FhktDzSxBVOLARHKV7BcoyRlw4jRrSXR1DF8dC4A8y
-X-Received: by 2002:a05:690c:490c:b0:71a:20b7:451a with SMTP id
- 00721157ae682-71d635b48b1mr27856747b3.4.1755194831728; 
- Thu, 14 Aug 2025 11:07:11 -0700 (PDT)
+ AJvYcCUBTQQefgC0hS38ACsX8kbeo5DhMhHz1Ou16fuiahohCJt8f7t5yqK0Mccf3XFG2Zu4EYOTlHw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcjsJLCIK57FpYaIhSLZxoNIyNQjXygv3OpVMmj9b99Dpq4Ye0
+ P+Vg7GrOxikFfP87vACq680DCvkQWdgHJky2qd/8KO/Jc5BmmT/Te9h1n+4bNEJSWvJIH4y1mTo
+ t6Mt1eBKf/n3znT1yCV2m7U3nZmUAYOwz9w==
+X-Gm-Gg: ASbGncsOszdD/Xm3oPKWyVY4sDVdVQp7oJwPfNJm9ifW3I6BNDpcrB3wwt2W/LqLSK7
+ ekTLFyVWRqqQgnzGU0M6FeiKq33DvQyGLBwKJsLUkDPXqGhI3fonvRO9qAXKOV0t8UxLe7NN04M
+ TPAq8/gIm2U/rPlbuQRgBd5FUlKBtWfKCcTuAATFVwaGbwiHmrgldLkPYNDcRJcZzl4h4wlYqT1
+ UImkhu6+2ttv650uLZ5p5KU8nQYAEIm8YA4UbfM/5PVNUvqm5ksvtjzm9XM2ygUU08vGpdyz12e
+ +eyoFDYy0gU/+zk/g99NHZzw2ykSy1uLE6rL2Msgtcvyzeko2BjffnfPy9g3EDQvcnV17gOE+3Q
+ 1EtiLRTplqWlFZw==
+X-Google-Smtp-Source: AGHT+IECmkwawMyRCiEffxj/cSuHzL75dThYpQ4zvSf/XYCPGX36uzLVI11d+UxxzAguDbavlUtyM8q8KqZc
+X-Received: by 2002:a05:690c:a591:b0:71d:500b:d255 with SMTP id
+ 00721157ae682-71d500be1e0mr35953447b3.0.1755194833356; 
+ Thu, 14 Aug 2025 11:07:13 -0700 (PDT)
 Received: from bcacpedev-irv-2.lvn.broadcom.net ([192.19.161.250])
  by smtp-relay.gmail.com with ESMTPS id
- 00721157ae682-71d60d6b387sm1970937b3.5.2025.08.14.11.07.10
+ 00721157ae682-71d60d6b387sm1970937b3.5.2025.08.14.11.07.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 11:07:11 -0700 (PDT)
+ Thu, 14 Aug 2025 11:07:13 -0700 (PDT)
 X-Relaying-Domain: broadcom.com
 From: david regan <dregan@broadcom.com>
 To: dregan@broadcom.com, dregan@mail.com,
@@ -81,10 +82,12 @@ To: dregan@broadcom.com, dregan@mail.com,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 0/4] cmd: nand: various updates
-Date: Thu, 14 Aug 2025 11:04:54 -0700
-Message-ID: <20250814180647.1805196-1-dregan@broadcom.com>
+Subject: [PATCH v2 1/4] cmd: nand: bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB
+Date: Thu, 14 Aug 2025 11:04:55 -0700
+Message-ID: <20250814180647.1805196-2-dregan@broadcom.com>
 X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20250814180647.1805196-1-dregan@broadcom.com>
+References: <20250814180647.1805196-1-dregan@broadcom.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 14 Aug 2025 23:00:20 +0200
@@ -104,25 +107,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bug fix of name changed OOB placement option
-Change ambiguous 'count' to 'pages' for read/write raw
-nand dump display update to show ASCII characters and data offset
-  into NAND
-Add option to nand dump with ECC corrected data
+bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB since MTD_OOB_AUTO does not exist
+
+Fixes: dfe64e2c8973 ("mtd: resync with Linux-3.7.1")
+Signed-off-by: david regan <dregan@broadcom.com>
 ---
- v2: applied MTD_OOB_AUTO to MTD_OPS_AUTO_OOB fix to env/nand.c
-     per Quentin request & added Fixes tag
+ v2: applied fix to env/nand.c per Quentin request & added Fixes tag
+---
+ cmd/nand.c | 2 +-
+ env/nand.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-david regan (4):
-  cmd: nand: bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB
-  cmd: nand: more descriptive help info
-  cmd: nand: nand dump display update
-  cmd: nand: nand dump with ecc option
-
- cmd/nand.c | 56 +++++++++++++++++++++++++++---------------------------
- env/nand.c |  2 +-
- 2 files changed, 29 insertions(+), 29 deletions(-)
-
+diff --git a/cmd/nand.c b/cmd/nand.c
+index 2f785deeb7f6..e09e145bc2d8 100644
+--- a/cmd/nand.c
++++ b/cmd/nand.c
+@@ -412,7 +412,7 @@ int do_nand_env_oob(struct cmd_tbl *cmdtp, int argc, char *const argv[])
+ 		}
+ 
+ 		ops.datbuf = NULL;
+-		ops.mode = MTD_OOB_AUTO;
++		ops.mode = MTD_OPS_AUTO_OOB;
+ 		ops.ooboffs = 0;
+ 		ops.ooblen = ENV_OFFSET_SIZE;
+ 		ops.oobbuf = (void *) oob_buf;
+diff --git a/env/nand.c b/env/nand.c
+index fdaa903cd612..709f8411eb6d 100644
+--- a/env/nand.c
++++ b/env/nand.c
+@@ -275,7 +275,7 @@ int get_nand_env_oob(struct mtd_info *mtd, unsigned long *result)
+ 	int ret;
+ 
+ 	ops.datbuf	= NULL;
+-	ops.mode	= MTD_OOB_AUTO;
++	ops.mode	= MTD_OPS_AUTO_OOB;
+ 	ops.ooboffs	= 0;
+ 	ops.ooblen	= ENV_OFFSET_SIZE;
+ 	ops.oobbuf	= (void *)oob_buf;
 -- 
 2.43.5
 
