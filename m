@@ -4,58 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7E5CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1567ECA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:37:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15D8F8393F;
-	Thu, 14 Aug 2025 15:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
+	by phobos.denx.de (Postfix) with ESMTP id F2A458394A;
+	Thu, 14 Aug 2025 15:37:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="0xsehPJq";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vAnMuSpy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34ABD83957; Thu, 14 Aug 2025 15:28:25 +0200 (CEST)
-Received: from mail-24421.protonmail.ch (mail-24421.protonmail.ch
- [109.224.244.21])
+ id D926183952; Thu, 14 Aug 2025 15:37:12 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9E6F83939
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:28:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=philipmolloy.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6D1068393F
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:37:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philip@philipmolloy.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail3; t=1755178101; x=1755437301;
- bh=x9f1F9pD2mJaD2BxIdGN6Cx4BBZUrlgobC+yXz6wiks=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=0xsehPJqbALuaygfTzLWCKkypNKzPayp5Q5l2Yyvd3GWRiwUJLh7vVx19yzovh3Ta
- xgZYzFinLsq6M2Bj+4Cce4ozFtXeEMPUBLNy34w3s2h1i1ipg2C7ORVTSQQznhQrs3
- Km2hxGuY98LsJa85BratidGbX7nNpAMaLdQNYJ5y56uJvOTnUji9azTSxXR5yjEDMD
- gWsYwkmaRE6qqu3b/qXa94K/Ly4AHZhZ/v8RNO+S3gGYGm1gSvuZBgVG+1DSRB1Oyp
- UaYozLGT/1FzOWpvgf/BrUwsuAKrG2LCu+SM3gVc0IjEepq5yt2+Zm+WWhiVvE/QrU
- nxb6P4nWN2lLw==
-Date: Thu, 14 Aug 2025 13:28:13 +0000
-To: u-boot@lists.denx.de
-From: Philip Molloy <philip@philipmolloy.com>
-Cc: Michael Hennerich <michael.hennerich@analog.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- adsp-linux@analog.com
-Subject: [PATCH v2] mach-sc5xx: generate U-Boot proper in ADI ldr format
-Message-ID: <20250814152733.2514599-1-philip@philipmolloy.com>
-Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: 86613ea3f575ff9dd5f7260cd113917146709887
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4c2mW73ppwz9tFm;
+ Thu, 14 Aug 2025 15:37:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1755178627;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nMDewS9h4e99F7/5HiBas2VBHtSLFsVMS1CmtdwaT78=;
+ b=vAnMuSpynDp/0AFopp/8BM5ZRokrYlF/4uCH/dWSd+VIbm3txZoKQ9RtryKHGdnQaWN/eo
+ kax0Sn6uY++M+zfTVe6mamFJ50zl8NvHXiHg/hryqh2a5b+mk4rkQcwATboeoYJ3hyCVBD
+ RhRQBzV80+M+52Ydnk7D4RNYxMob+M0G6f+YxVnSGBHlymkWwtPXg8lDgqOqz+yC8EhU0B
+ bbnZYj4B7evVkMF+aKPCPKi9o96dZZZsu0KNw3Yc9yK0XExu8Wr72QUn/v9tRj8KPyL+P+
+ I8bDf2FmE/5Lvi7wTIMCokB99J2pJmNFDRhrVm8W9LatQ5tHqhqGfDmC2fyIaQ==
+Message-ID: <a10f97cf-72d8-4f82-870f-cb845e5cb72e@mailbox.org>
+Date: Thu, 14 Aug 2025 15:37:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2] configs: stm32mp25: Enable OF_UPSTREAM_BUILD_VENDOR
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Cheick Traore <cheick.traore@foss.st.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250814120938.1358059-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250814120938.1358059-1-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: b61c2fbb653f223224a
+X-MBO-RS-META: j18yg7w5aj6s5dcs43ec7nj3dek7thqg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,35 +80,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Philip Molloy <philip.molloy@analog.com>
+On 8/14/25 2:09 PM, Patrice Chotard wrote:
+> Initially, only one STM32MP25 based board was available, the
+> stm32mp257f-ev1 board which was set by default in stm32mp25_defconfig.
+> 
+> Since commit 79f3e77133bd ("Subtree merge tag 'v6.16-dts' of dts repo [1] into dts/upstream")
+> we inherited of a second MP25 based board which is the stm32mp257f-dk board.
+> 
+> Enable OF_UPSTREAM_BUILD_VENDOR and set OF_UPSTREAM_VENDOR to allow all
+> STMicroelectronics DT compilation.
+If I build stm32mp25_defconfig , I can run the result on both EV1 and DK 
+now ?
 
-Generating an ldr boot stream containing U-Boot Proper was never added
-to U-Boot because it is done by the ADI Yocto layer. Add it to U-Boot to
-support projects that do not use that layer.
+It seems only the EV1 DT is built into the binary, so why compile all DTs ?
 
-Signed-off-by: Philip Molloy <philip.molloy@analog.com>
----
-Changes in v2:
-- Fix typo in commit message
-- Link to v1: https://lore.kernel.org/u-boot/20250814135456.2496908-1-phili=
-p@philipmolloy.com/
----
- arch/arm/mach-sc5xx/config.mk | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/arch/arm/mach-sc5xx/config.mk b/arch/arm/mach-sc5xx/config.mk
-index e7e4c9a1181..266d2e3a777 100644
---- a/arch/arm/mach-sc5xx/config.mk
-+++ b/arch/arm/mach-sc5xx/config.mk
-@@ -12,5 +12,7 @@ ifdef CONFIG_XPL_BUILD
- INPUTS-y +=3D $(obj)/u-boot-spl.ldr
- endif
-=20
-+INPUTS-y +=3D u-boot.ldr
-+
- LDR_FLAGS +=3D --bcode=3D$(CONFIG_SC_BOOT_MODE)
- LDR_FLAGS +=3D --use-vmas
---=20
-2.50.1
-
+$ grep TREE configs/stm32mp25_defconfig
+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp257f-ev1"
 
