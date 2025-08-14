@@ -4,58 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99570CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 11:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98068CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 12:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1FE6838C7;
-	Thu, 14 Aug 2025 13:55:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
+	by phobos.denx.de (Postfix) with ESMTP id EEFF7838C7;
+	Thu, 14 Aug 2025 14:07:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="aReXeSHP";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="X722N0VA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3AE3838CC; Thu, 14 Aug 2025 13:55:47 +0200 (CEST)
-Received: from mail-10627.protonmail.ch (mail-10627.protonmail.ch
- [79.135.106.27])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BC749838E3; Thu, 14 Aug 2025 14:07:03 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02496838C5
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 13:55:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=philipmolloy.com
+ by phobos.denx.de (Postfix) with ESMTPS id 724D9838C5
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 14:07:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philip@philipmolloy.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail3; t=1755172544; x=1755431744;
- bh=tWSxkTyu9g8EZMr2V8Lff+mw+9WqhJedNO8MnpXGn7Y=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=aReXeSHPkpnUw7chJRv6X2hZTNP0cDXR1iF5DgdA/HGVFAHF/Xw5pfQf+YcY53iDo
- l3AqnZc1rWSIGpgWpio+6V7qoJYizplNO7HigFGKs+5Yz3iaclNNev5OUhKiA3UEwS
- y9MB7ADQ1Zkjot+69g+X1FVu8xvRcWhO4d06ZZcIOs6HVwHrKhfVUOl4iwY9dI2fwk
- qi31BokEZBC+lKHgngPVgwJmuMx4Vs01ESZcefjYQh647uNO2AE+zbe2g6FlzhjwZL
- VTvyOkVy14dA9xKDuQnQYOQbs16HrMzqnIwOkaazA3UnAsM5pbPomTae6lG9JYuvh4
- j5DdNOIW+YbMg==
-Date: Thu, 14 Aug 2025 11:55:36 +0000
-To: u-boot@lists.denx.de
-From: Philip Molloy <philip@philipmolloy.com>
-Cc: Michael Hennerich <michael.hennerich@analog.com>,
- Philip Molloy <philip.molloy@analog.com>, Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- adsp-linux@analog.com
-Subject: [PATCH] mach-sc5xx: generate U-Boot proper in ADI ldr format
-Message-ID: <20250814135456.2496908-1-philip@philipmolloy.com>
-Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: 31e082ec649f5aeff2701a63cd425b61662d2682
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0321314444=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57EBkUgt010749;
+ Thu, 14 Aug 2025 14:06:59 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ n7Co4T7nKe39VT8IA1K1YWmwudDd8u6CmIUVYth4y64=; b=X722N0VAXhVZJ0e3
+ 0qhJSb8BPD453K6NEDKTnusp4alsP9J6w6YK9HTbe+PCLTcXN5e1Fg9RruluTmP4
+ Guz8/SMmSa+RxwYS5ZAjJ6kkotHR39TVzhb/8/mfEn5OrDr1Y+PuKNucO/4tf8Gt
+ Nje1v5M1QdPSt6wzhX4uHbbm145YfUMcORinTykoMceQNtcklfv/nSNTXus6yoSJ
+ t25QFqoTuE4khrwwP4RX04dR554UaDi2wGkMoycF3YwGfnegf4VeTsGVNcQIWZ/L
+ sjbKwhLTsMEOPTjUuEIWoijYgqfGKKrJ7T9EGMiJfLdkxdgPE3PwFyRA8o4mD4Z5
+ nhkgOA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48eh9nh2vu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 14 Aug 2025 14:06:59 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1BA4C4002D;
+ Thu, 14 Aug 2025 14:05:55 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 24A2A72626D;
+ Thu, 14 Aug 2025 14:05:27 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 14 Aug
+ 2025 14:05:26 +0200
+Message-ID: <1397960e-d5c8-4925-96dc-007e079c4a1c@foss.st.com>
+Date: Thu, 14 Aug 2025 14:05:25 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: stm32mp25: Enable OF_UPSTREAM_BUILD_VENDOR
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Cheick Traore
+ <cheick.traore@foss.st.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250814094116.1351454-1-patrice.chotard@foss.st.com>
+ <c2816793-b8dd-497e-b967-3c5f70d87323@mailbox.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <c2816793-b8dd-497e-b967-3c5f70d87323@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-13_02,2025-08-14_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,30 +94,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Philip Molloy <philip.molloy@analog.com>
-
-Generating an ldr boot stream containing U-Boot Proper was as never
-added to U-Boot because it is done by the ADI Yocto layer. Add it to
-U-Boot to support projects that do not use that layer.
-
-Signed-off-by: Philip Molloy <philip.molloy@analog.com>
----
- arch/arm/mach-sc5xx/config.mk | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/arch/arm/mach-sc5xx/config.mk b/arch/arm/mach-sc5xx/config.mk
-index e7e4c9a1181..266d2e3a777 100644
---- a/arch/arm/mach-sc5xx/config.mk
-+++ b/arch/arm/mach-sc5xx/config.mk
-@@ -12,5 +12,7 @@ ifdef CONFIG_XPL_BUILD
- INPUTS-y +=3D $(obj)/u-boot-spl.ldr
- endif
-=20
-+INPUTS-y +=3D u-boot.ldr
-+
- LDR_FLAGS +=3D --bcode=3D$(CONFIG_SC_BOOT_MODE)
- LDR_FLAGS +=3D --use-vmas
---=20
-2.50.1
 
 
+On 8/14/25 12:38, Marek Vasut wrote:
+> On 8/14/25 11:41 AM, Patrice Chotard wrote:
+>> Enable OF_UPSTREAM_BUILD_VENDOR and set OF_UPSTREAM_VENDOR.
+> Because ... why ?
+> 
+> What kind of sloppy commit message is this, you surely do know how to write a better one .
+Hi Marek
+
+Sure, i will enrich the commit message.
+
+Patrice
