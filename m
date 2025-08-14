@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D322CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D2C9CA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:48:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49C1B839CC;
-	Thu, 14 Aug 2025 20:47:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A53DA83A2D;
+	Thu, 14 Aug 2025 20:48:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YS/lblmg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O+9rylDM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7012C83A1F; Thu, 14 Aug 2025 20:47:14 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id E873683A34; Thu, 14 Aug 2025 20:48:34 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ACB5839C7
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:47:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D90EE839C7
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:48:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3e56face8a2so8157815ab.0
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:47:12 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-88432ccd787so65567639f.0
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:48:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755197231; x=1755802031; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U+wedn3nsJ1znUJgzbsUY8ldzhquxZbRZXdF7xqnkVo=;
- b=YS/lblmgRquoreS7nfRawcIsf/OicL0Y4HfcJSKUed7KmiC0dSILj3Raf6fuV/aCw5
- gCDxUGGfF5J7nYmW6TL/zN7CKkt7SfTyl/Q1lGCF2v/atqR/7uNa5mvpqhHaOUTvADOi
- JjCLzysPft3x36jI051tA6DrfnvQ3QMJv7Xig=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755197231; x=1755802031;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1755197311; x=1755802111; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U+wedn3nsJ1znUJgzbsUY8ldzhquxZbRZXdF7xqnkVo=;
- b=UrXtfkmpTjxxepEwK852jikXMnIvEw54DidTiATYfj412uqOA/ij6+3jCcWAv6gE6n
- 4ptwbIvA8RB3ZomT5gvUU7k+Qe/i8S/4Is4y14BMlNHD6vJUw9rovlYyIpoDBc4GhJ63
- hfMJmXFSZglL+EHjq1HDYR21cpOa8aPyb5anEUqqxnSCAj7gcGx4bHAOyIaHas63hD0I
- /v3uOIuJlb8ubGptgsNF3jSzDlxVGKM2srwfJrxtLwrz6gfcJmQ3AKkyty0fuOMY3mWU
- tAZaG3wPrEaz96ZUh4dkem2s+j1MXNH028+6WsMugeO6u05EFzlcsOAZFqO/UuNRdpvH
- UYbA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV2Adhbi4U3NBhL6IYh7nAF/3oaXdrMKLzlN88pkQso1YQPfzJMYviIquYe2jDnHmDvgUHUH6E=@lists.denx.de
-X-Gm-Message-State: AOJu0YypmtA+X6jfvhJn2QmRTTn06/DkPbOEz2o1SFlEm21e8dQvmBVr
- HOqJhAoAJOuSi2D0pr5nKVh1ioSfKUNvMxIElvBQdixfXFRWlS8/1OqSTHEZ1RYXYlY=
-X-Gm-Gg: ASbGncuAPhVT6YYGa2crSU/tD+vX0640iIzLYYtrWoCZc2HqGATFBAPF2GKp1kJ/ho5
- fmi7/Upi4daunn2tBq3EVejQYP1nEc7jTARP2G6rNNoGOu7oV8DoIYlynJ+5Ay7myv5mnrHNb1H
- 42ApkGOZCRPr/HdGdcm5eplIpMdi4YYShbQtHjgLmPLSpIGhQjVzX9xF5IizdpFqL3cwsb5T5/8
- uVDDKSb8GYNNMCbnXJQyAa5bY5/gONDxQ178c0z3YEkOLaM9tIja+b5uM89fJh8S83NLOUsYBTs
- RdsN1w/QoFGor3GQrayGf3822iKIf6Zprp80zbcqcBwWZZJxWiwdGuxRPx+bNJ74NHBJZcOT1uA
- 7zT0CedAy1/SD4l2vq44CQH6RJvMY95FYCnMNitW81iROwjnJpELRsXI7
-X-Google-Smtp-Source: AGHT+IFfypHMknlxQH2vd2nPuIPoTclRlXiDbYam5PIchbLafS4Q+V7Ov19iRBKnECEcMEbEKFM+eg==
-X-Received: by 2002:a05:6e02:2384:b0:3e3:b35a:e8ff with SMTP id
- e9e14a558f8ab-3e571896ee1mr78565605ab.6.1755197230985; 
- Thu, 14 Aug 2025 11:47:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50ae9c2999fsm4709454173.73.2025.08.14.11.47.09
+ bh=tvgMK/AFyba3sFSYoO27NobTkDmWX1QbH3ELuRrSEvA=;
+ b=O+9rylDM5+6MTHc1bNkjasHochTtQObwloJ6SxeSC9diGe2lwQ31TRLJP4T6RmxVOx
+ 5phWUbNPpOochRj9LKQwAbNc2TB9fwVnHYSTth06heDzXWPO9tCRRy01xRUrFTLqwBH6
+ yAINGP527/3NDvdInKDajIBvSbQmALWmRMe48=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755197311; x=1755802111;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tvgMK/AFyba3sFSYoO27NobTkDmWX1QbH3ELuRrSEvA=;
+ b=qKufpewfvK+Dmy49u1JjPSJoiMbrD4l8VgdBNWidnkBm7UW2D68aoBqhUZMuTLJo75
+ 4dCRajLBIYqVhd8WXvkklBb95MuKI1iCa4Bsi4NMGBulS3Vz57HRui8vEqnac561NRXE
+ ZvH/TKSid7e98PJ4gErWi4mbiHZNf/T5+o98E/mkZBmSPWe5NZJbPpgP4TY6Kq3Kep0Z
+ 9tthL2Maw+4Zdvo8mku/O64kg8BEbUJXRBs0rV4xbr9h1lMmjCg1uCw0UsK0yDzsvITH
+ 0WFSrUu1BJq+qnr9PbIJr7jbWC0L3tSZVd9jRFrvuZVGOWG3P8RDosGTjUIjndUPRkYC
+ GW4w==
+X-Gm-Message-State: AOJu0Yzrr4o+5oJSDrNlvJgpRrxSv2DzCxWes5zCR4JITVwMwgddbJio
+ 0ujw5p13FXOu5t4/LpOuCRwMUr0j+J+TKVl2gLhj3kXdwNxiOkYicZIrBuTu1w02+FXgEc7yMfX
+ 3mlC/R1g=
+X-Gm-Gg: ASbGncuQjGPvDAqaesjrERW9eV71Id9VPnFwmR5AuHUV4uRN57EcLkz1Ls/fJ0Nv12D
+ AwkehVWM/XwB1+M1s/JWVKzrkouTSoX19QaL5wyN9ZMZRWXywK3zV/IW4Awc9FBOpSK0dYelXI0
+ gnyVTvGUTtygDAifGOmuXqh1FOnd5pq0+oQM0DWRXSB3SeH/C+yo1oUjiJlP82V3388vwDgWfnz
+ k3LsQuX5TeK8N59pXmYtGNAQgMX6m5QhN5AF6xOZajRoTmgrLYOpTjdcECnxzYSkNIgiWAl4tSw
+ nwubqCixEPE03aiVThsf2E2FQV3/seZkXVFyrFbyEfAVPdnHizeVYLcs3oR6GcFuHbfOIyeN8j0
+ Zwg7Jo7fqIEjBT0zBXsrGyPZ078W8RXcIYqKikVCh17uCPxnAvT40sTU=
+X-Google-Smtp-Source: AGHT+IEW7PwaFR92pvtUD/jaIvBiK000V9cbg1lGYPrLpqcke8bBcwrvmHFAboMAHdWbho4j3/gzJQ==
+X-Received: by 2002:a05:6e02:188f:b0:3e5:42ec:1372 with SMTP id
+ e9e14a558f8ab-3e571e2d63emr70972515ab.19.1755197310888; 
+ Thu, 14 Aug 2025 11:48:30 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-50b3d6ff137sm1219762173.41.2025.08.14.11.48.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 11:47:09 -0700 (PDT)
-Date: Thu, 14 Aug 2025 12:47:07 -0600
+ Thu, 14 Aug 2025 11:48:30 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: tuomas.tynkkynen@iki.fi, jan.kiszka@siemens.com, u-boot@lists.denx.de,
- heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl
-Subject: Re: [PATCH v2 2/2] qemu_arm: Select CONFIG_SYS_EARLY_PCI_INIT
-Message-ID: <20250814184707.GP124814@bill-the-cat>
-References: <20250814181436.1598067-1-festevam@gmail.com>
- <20250814181436.1598067-2-festevam@gmail.com>
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250804-e1000-v1-1-2b181911e8a4@linaro.org>
+References: <20250804-e1000-v1-1-2b181911e8a4@linaro.org>
+Subject: Re: [PATCH] net: e1000: Free temporary buffer on exit
+Message-Id: <175519730993.3600102.9886861671435701871.b4-ty@konsulko.com>
+Date: Thu, 14 Aug 2025 12:48:29 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Lkk0wl3Wz+xpmHTG"
-Content-Disposition: inline
-In-Reply-To: <20250814181436.1598067-2-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,33 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 04 Aug 2025 16:32:51 +0100, Andrew Goodbody wrote:
 
---Lkk0wl3Wz+xpmHTG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> In do_e1000_spi_checksum a temporary buffer is allocated but never
+> freed. Add code to free on exit. Also refactor the code to make the exit
+> code common.
+> 
+> This issue found by Smatch.
+> 
+> 
+> [...]
 
-On Thu, Aug 14, 2025 at 03:14:36PM -0300, Fabio Estevam wrote:
+Applied to u-boot/next, thanks!
 
-> Select CONFIG_SYS_EARLY_PCI_INIT so that eMMC emulation can
-> work.
->=20
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
+[1/1] net: e1000: Free temporary buffer on exit
+      commit: 4266b8a2839f4e3eee2d7ce5f61af0c0ed0fe3b9
+-- 
 Tom
 
---Lkk0wl3Wz+xpmHTG
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ4vJwAKCRAr4qD1Cr/k
-CjPRAQD1As5wHltH2PmD4roB48OUmDuWvDYxKgqjOwTGRB8vJAD9FPmkILYM6fV7
-A/qiB4ct2Jv2HWZLve+/Y3cdcyDyLAU=
-=7amp
------END PGP SIGNATURE-----
-
---Lkk0wl3Wz+xpmHTG--
