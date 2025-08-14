@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CDECCA0EE4
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:13:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C724CA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 13:27:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19A9583952;
-	Thu, 14 Aug 2025 15:13:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A38D58393F;
+	Thu, 14 Aug 2025 15:27:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B1L/75am";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QxmQPU8c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6826D83938; Thu, 14 Aug 2025 15:13:50 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 3665B83939; Thu, 14 Aug 2025 15:27:26 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE31F8396C
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:13:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DA8183942
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 15:27:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cn.liweihao@gmail.com
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-b471738daabso727512a12.1
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 06:13:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-55ce5090b1cso982460e87.0
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 06:27:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755177226; x=1755782026; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1755178043; x=1755782843; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5Mn8JdjZmvbRD1YCpUQEmcwjs2CHDgPXzNAAZQj6svQ=;
- b=B1L/75amw3wOeAHn7eh4da87lmcJ2dGakXPruESypKGKQf+dkACSbQKUTgebiGOZ8p
- UmogXIJiIVlaWCFwg7HKsnaNHhp4rcwQ5MxZlM/+c/pi1jwdSrTdQ9RW9Mbt0WcUxMMd
- 8jNViIXsg6sc0BS7djqJkl5XfGHLOSf2ssHbBCSkgna6ROEPlb11Kn7jTtY9CZUcD7kR
- 70FHX8DA33SNJny0PBj6I0oLJDcerpeGLBDa+a11s7HP88Hl0bj+jD6hUgPZRsoGfcIZ
- 9p2jhAigTZXf5Ag5SUFunYMX3xoWbp3t7H7NDkDYvxSdraNtkXWesP396hwgEdN0g6eg
- Mxcw==
+ bh=WqBntBmL2QGxKlLZA1F2i1RklGRvumatyO36RVU7k2s=;
+ b=QxmQPU8cYFWCppr+WWW10kTSIavAbKanybxG0xqe54bxqbnz7bDobFzMPMcvGpVRWa
+ RoYgSSEGP7sypgB/ksl8pVfN0To8zrnb0aeRDCoF6be1H5GVAwhiSwzGbI1AKEnTmajW
+ ibc0jSrNE0yvggQZtz78HolXivYMq0DBg9Zfx7qEkhkRzQFv6QxpTUPUasVgnYTGT1zV
+ /ew+Ai6Cqu2GQvvqxP72zAG806kVzNH51qO8BPmsrZY7e1wYpAbjNSCwhYZBjFJjEjJV
+ tdtQTx0T1GqVG+isY8I2A324LTpKs4U18tBcAytaiExWGDt0DZoP0W8AU/eZUOiND+rf
+ Zv1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755177226; x=1755782026;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1755178043; x=1755782843;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5Mn8JdjZmvbRD1YCpUQEmcwjs2CHDgPXzNAAZQj6svQ=;
- b=n+pfNC6CREjMqz54BFKE4HGfbvJr8QYPkVzp1klB3fCXWcf7w1PTPPdCUl0Ovb6EC6
- A1J9ox/WXkEo0K32WyzVeM1I++7n1/pwuKEBFnBrP37u7W4Wim14W3NutMkgwHSvNKdu
- fhsBWHhX/QtN0/7tJuqyDIYS9V1bn6SZjIr1NUaxdchCMov6xGXwbrQdEiNaF9RO70xh
- zrqU5wzYfaYOlJBnyfDNwyzZnhIRdHyTkMYlyHz8H1TihDtgag/1EOWK3CePTPfcbHfs
- 6s1mYUTVGUCS2/2860reMvowYllTZhSmP7KyI9P3U/qeni/N2HDFlF6u4KuMeq6pcXAS
- UjQw==
-X-Gm-Message-State: AOJu0YwVO2P0w0DEFCsIO+cs0sjAf4OGooUX48nxOVXzDWttlND1pmb7
- cpXL/praDzwOcrqHQgWmn6ufveH1OuB+8TnpHfVb1XzcF/t/E7Mvrf6NT38dwn+y1qJ2iWUd
-X-Gm-Gg: ASbGncuvdQ+17Bs3bY6vP5WIbn/v1qbe64M+rU4G8JLkPJYsQ8RgGP3HVhB2dHTG4+V
- wO1NmSzgs9WZmiA9Wp5GXaRUhckl083+neH8X05YjX+TPhUIiMWuESOIIVVx/s5yySCNCdONpnR
- /+NYUficzsyGvA2ll+EdVyKdHxuPOCHmWCiX7KjTPfhS/GoQk/ZMGCZ2N6RXQXoS+4VN8ZYOMvp
- XkSBwTKvasCnWYrjPPRtkqA+Yu8a7AjAAjmakguFfuZzUt+qQQ7p3BpO4hY89CiNlL1X0c84q9Q
- e6eppOv/DiCa2NQLb3bCXG7wrYPLT/w8l0BNFY6Sw1qz/8IMrPBgtTr+1YPnIk7bvMsnb6tPHjv
- MgKt0eemdAJ7M/kvXqXQuxBbmydw86sKlpFmv5g==
-X-Google-Smtp-Source: AGHT+IG0RrOjklBPhz7icFDnPxXtK0C8Bzgas44GKKN+Rk29Zpel3ybJLvU/tBGfnolovOxdYw1oUg==
-X-Received: by 2002:a17:903:2947:b0:240:3bb7:fdc3 with SMTP id
- d9443c01a7336-244586c46damr32241165ad.28.1755177225817; 
- Thu, 14 Aug 2025 06:13:45 -0700 (PDT)
-Received: from localhost.localdomain ([104.28.159.212])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24300f8c9d1sm67902195ad.129.2025.08.14.06.13.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 06:13:45 -0700 (PDT)
-From: WeiHao Li <cn.liweihao@gmail.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, lukma@denx.de, seanga2@gmail.com,
- ag.dev.uboot@gmail.com, muratdemirtaseu@outlook.com,
- WeiHao Li <cn.liweihao@gmail.com>
-Subject: [PATCH 5/5] video: rockchip: add RK3368 VOP support
-Date: Thu, 14 Aug 2025 21:12:37 +0800
-Message-Id: <20250814131237.8135-6-cn.liweihao@gmail.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250814131237.8135-1-cn.liweihao@gmail.com>
-References: <20250814131237.8135-1-cn.liweihao@gmail.com>
+ bh=WqBntBmL2QGxKlLZA1F2i1RklGRvumatyO36RVU7k2s=;
+ b=e6/AP22JhDOxqA05OriQXYqHF/12OUReZJXzv4Nxpfx1Pt77WLfUlQv0Tsk0ZFm3tC
+ HlQ2VNFEzcMhnqJiAdGs94LDrWTwH00U5Tx/A3T0F/B6mdgfvBLoSbMBdpKzdmoKxz3z
+ UKQIedJC3wz2ckrQ0QH3LdbWdquEptPfU6OreiAemxoZGf1GOTCoKSU5Q/zQESelfM63
+ g8rY4khO7N5QjiVTkKFEE14AU/ftR86o9IwPrPQXQswmlcGPWZNsoJySqgOxutvlM/sG
+ ITRoy1t8CMImzY7m6L7WzvujflJ2/vM6loH64LbD4sBYmpC6CaAbFAvzb0oh9ospRmXd
+ Dwig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQRewoLbR62Qw4FGogzAMUVivlfJdgEWsuktOINTJqFFUQwgASN/0/v5YnKjl0LTBwlob8tlc=@lists.denx.de
+X-Gm-Message-State: AOJu0YziuGmWKvz9CZchni0aYa3SdAKi5CrkSBsCeml0RmmupID9LUBG
+ MB3WEfogBoqxmgOaE6zphUoN8BhXyLSuW1XzXk9tzAYExQERuI2RpAENqGnZ8UTpiiJ/cB+ZeTx
+ EKdYi3JIVgcFtaPCpNmd10paTd4xkhqI=
+X-Gm-Gg: ASbGnctepXpNOoA8AMAdPqg473ZXco9U8DzB6+EBi8ArDwZmAwcInR6Ni92F2eQXy2+
+ j7dtjCdpw24Fz3pSrFGHHQJ+db/7xEQJPmQq9tpQj4SkldHRr7jRc/dmWXpdNCwRntLYeP0l3GI
+ +b3JyIbiI7ji0LfFC8UHkOUEPq9ZfFtDY8LsHIZ18bx4hYprDkdnH4ZpB22QK7djiBQqDotkr+M
+ /TX0nN0lfcmjOt6EkqvTC5oozGE/fzhaXWU7YAH8W8yo4XC
+X-Google-Smtp-Source: AGHT+IH/EkNW+k++NYJjyFndHgDQpUtSxwK/voeuZk00iX5gsrg2dd+P5ih+aoLO8hb6IlJzy4QV9Zg1fLxH2kePSd8=
+X-Received: by 2002:a05:6512:33c7:b0:55c:c937:111a with SMTP id
+ 2adb3069b0e04-55ce5029cb2mr885145e87.35.1755178043099; Thu, 14 Aug 2025
+ 06:27:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cdfbaad3-e9ed-4678-9a65-c3561537d600@siemens.com>
+ <CAOMZO5D+1v-721g5nE3NFQ4igrBHvF0rWs6Jkvm-Jo+R0QXKwA@mail.gmail.com>
+ <87h5yakqug.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87h5yakqug.fsf@bloch.sibelius.xs4all.nl>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 14 Aug 2025 10:27:11 -0300
+X-Gm-Features: Ac12FXwgjTdhkBC8Re6la-BImTVqbxVA5iky6rRNcjMrFWGT8UBq3_s-JW7DMZc
+Message-ID: <CAOMZO5Cmgs3zUxdy_PRtE85pJLzG5=_1kReezFfKX6Xv05vHdg@mail.gmail.com>
+Subject: Re: CONFIG_SYS_EARLY_PCI_INIT for PCI-attached eMMC
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: jan.kiszka@siemens.com, trini@konsulko.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,161 +96,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds RK3368 VOP driver based on RK3288. I got its GRF register
-user manual from a online forum.
+On Thu, Aug 14, 2025 at 9:52=E2=80=AFAM Mark Kettenis <mark.kettenis@xs4all=
+.nl> wrote:
 
-Link: https://github.com/ieiao/wiki/blob/master/docs/embedded-dev/rockchip/rk3368/Rockchip_RK3368_GRF.pdf
+> Not without removing the 2nd pci_init_r() that is conditionalized on
+> !CONFIG_IS_ENABLED(SYS_EARLY_PCI_INIT).
+>
+> That would require some thorough testing though; I certainly wouldn't
+> be sure calling pci_init_r() is safe at that point on the boards I
+> maintain.
 
-Signed-off-by: WeiHao Li <cn.liweihao@gmail.com>
----
- drivers/video/rockchip/Makefile               |  1 +
- drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 20 +++++
- drivers/video/rockchip/rk3368_vop.c           | 79 +++++++++++++++++++
- 3 files changed, 100 insertions(+)
- create mode 100644 drivers/video/rockchip/rk3368_vop.c
+You're right.
 
-diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
-index f55beceeb..83c0b7aef 100644
---- a/drivers/video/rockchip/Makefile
-+++ b/drivers/video/rockchip/Makefile
-@@ -7,6 +7,7 @@ ifdef CONFIG_VIDEO_ROCKCHIP
- obj-y += rk_vop.o
- obj-$(CONFIG_ROCKCHIP_RK3288) += rk3288_vop.o
- obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328_vop.o
-+obj-$(CONFIG_ROCKCHIP_RK3368) += rk3368_vop.o
- obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399_vop.o
- obj-$(CONFIG_DISPLAY_ROCKCHIP_EDP) += rk_edp.o
- obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
-diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-index fa5121735..122974d60 100644
---- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-+++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-@@ -134,6 +134,11 @@
- #define DW_MIPI_NEEDS_PHY_CFG_CLK	BIT(0)
- #define DW_MIPI_NEEDS_GRF_CLK		BIT(1)
- 
-+#define RK3368_GRF_SOC_CON7		0x41c
-+#define RK3368_DSI_FORCETXSTOPMODE	(0xf << 7)
-+#define RK3368_DSI_FORCERXMODE		(0x1 << 6)
-+#define RK3368_DSI_TURNDISABLE		(0x1 << 5)
-+
- #define RK3399_GRF_SOC_CON20		0x6250
- #define RK3399_DSI0_LCDC_SEL		BIT(0)
- #define RK3399_DSI1_LCDC_SEL		BIT(4)
-@@ -911,6 +916,18 @@ struct video_bridge_ops dw_mipi_dsi_rockchip_ops = {
- 	.set_backlight = dw_mipi_dsi_rockchip_set_bl,
- };
- 
-+static const struct rockchip_dw_dsi_chip_data rk3368_chip_data[] = {
-+	{
-+		.reg = 0xff960000,
-+		.lanecfg1_grf_reg = RK3368_GRF_SOC_CON7,
-+		.lanecfg1 = HIWORD_UPDATE(0, RK3368_DSI_TURNDISABLE |
-+					     RK3368_DSI_FORCETXSTOPMODE |
-+					     RK3368_DSI_FORCERXMODE),
-+		.max_data_lanes = 4,
-+	},
-+	{ /* sentinel */ }
-+};
-+
- static const struct rockchip_dw_dsi_chip_data rk3399_chip_data[] = {
- 	{
- 		.reg = 0xff960000,
-@@ -980,6 +997,9 @@ static const struct rockchip_dw_dsi_chip_data rk3568_chip_data[] = {
- };
- 
- static const struct udevice_id dw_mipi_dsi_rockchip_dt_ids[] = {
-+	{ .compatible = "rockchip,rk3368-mipi-dsi",
-+	  .data = (long)&rk3368_chip_data,
-+	},
- 	{ .compatible = "rockchip,rk3399-mipi-dsi",
- 	  .data = (long)&rk3399_chip_data,
- 	},
-diff --git a/drivers/video/rockchip/rk3368_vop.c b/drivers/video/rockchip/rk3368_vop.c
-new file mode 100644
-index 000000000..b4aac51c5
---- /dev/null
-+++ b/drivers/video/rockchip/rk3368_vop.c
-@@ -0,0 +1,79 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Author(s): WeiHao Li <cn.liweihao@gmail.com>
-+ */
-+
-+#include <display.h>
-+#include <dm.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+#include <video.h>
-+#include <asm/global_data.h>
-+#include <asm/arch-rockchip/clock.h>
-+#include <asm/arch-rockchip/hardware.h>
-+#include <linux/delay.h>
-+#include "rk_vop.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static void rk3368_set_pin_polarity(struct udevice *dev,
-+				    enum vop_modes mode, u32 polarity)
-+{
-+	struct rk_vop_priv *priv = dev_get_priv(dev);
-+	struct rk3288_vop *regs = priv->regs;
-+
-+	/* The RK3368 VOP (v3.2) has its polarity configuration in ctrl0 */
-+	clrsetbits_le32(&regs->dsp_ctrl0,
-+			M_DSP_DCLK_POL | M_DSP_DEN_POL |
-+			M_DSP_VSYNC_POL | M_DSP_HSYNC_POL,
-+			V_DSP_PIN_POL(polarity));
-+}
-+
-+/*
-+ * Try some common regulators. We should really get these from the
-+ * device tree somehow.
-+ */
-+static const char * const rk3368_regulator_names[] = {
-+	"vcc18_lcd",
-+	"VCC18_LCD",
-+	"vdd10_lcd_pwren_h",
-+	"vdd10_lcd",
-+	"VDD10_LCD",
-+	"vcc33_lcd"
-+};
-+
-+static int rk3368_vop_probe(struct udevice *dev)
-+{
-+	/* Before relocation we don't need to do anything */
-+	if (!(gd->flags & GD_FLG_RELOC))
-+		return 0;
-+
-+	/* Probe regulators required for the RK3368 VOP */
-+	rk_vop_probe_regulators(dev, rk3368_regulator_names,
-+				ARRAY_SIZE(rk3368_regulator_names));
-+
-+	return rk_vop_probe(dev);
-+}
-+
-+struct rkvop_driverdata rk3368_driverdata = {
-+	.set_pin_polarity = rk3368_set_pin_polarity,
-+};
-+
-+static const struct udevice_id rk3368_vop_ids[] = {
-+	{ .compatible = "rockchip,rk3368-vop",
-+	  .data = (ulong)&rk3368_driverdata },
-+	{ }
-+};
-+
-+static const struct video_ops rk3368_vop_ops = {
-+};
-+
-+U_BOOT_DRIVER(rockchip_rk3368_vop) = {
-+	.name		= "rockchip_rk3368_vop",
-+	.id		= UCLASS_VIDEO,
-+	.of_match 	= rk3368_vop_ids,
-+	.ops		= &rk3368_vop_ops,
-+	.bind		= rk_vop_bind,
-+	.probe		= rk3368_vop_probe,
-+	.priv_auto	= sizeof(struct rk_vop_priv),
-+};
--- 
-2.39.5
+Maybe we could solve it with two patches:
 
+1. Convert EARLY_PCI_INIT to a Kconfig symbol:
+
+diff --git a/common/Kconfig b/common/Kconfig
+index a2f653f7e722..9119a1c0869f 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -824,6 +824,13 @@ config SYS_I2C_EEPROM_NXID
+
+ endchoice
+
++config EARLY_PCI_INIT
++       bool "Enumerate PCI buses early during init"
++       depends on PCI
++       help
++         Do early PCI configuration _before_ the flash gets initialised,
++         because PCU resources are crucial for flash access on some boards=
+.
++
+ config PCI_INIT_R
+        bool "Enumerate PCI buses during init"
+        depends on PCI
+
+2. Select CONFIG_EARLY_PCI_INIT in the defconfig
+
+diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
+index d5890bf87fb3..a0d03dc19d0b 100644
+--- a/configs/qemu_arm_defconfig
++++ b/configs/qemu_arm_defconfig
+@@ -28,6 +28,7 @@ CONFIG_USE_PREBOOT=3Dy
+ # CONFIG_DISPLAY_CPUINFO is not set
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ # CONFIG_BOARD_INIT is not set
++CONFIG_EARLY_PCI_INIT=3Dy
+ CONFIG_PCI_INIT_R=3Dy
+ CONFIG_CMD_BOOTEFI_SELFTEST=3Dy
+ CONFIG_CMD_NVEDIT_EFI=3Dy
