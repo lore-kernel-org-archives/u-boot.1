@@ -4,76 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32554CA0EEA
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 09:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6282DCA0EDC
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 09:47:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68002802C1;
-	Thu, 14 Aug 2025 11:43:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id C633E8381D;
+	Thu, 14 Aug 2025 11:47:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Wh6O4vuu";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E49B5802C1; Thu, 14 Aug 2025 11:43:23 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id E030B83845; Thu, 14 Aug 2025 11:47:45 +0200 (CEST)
+Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4C5E80194
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:43:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 074378381D
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:47:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0321314444=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57E8jgtO022068;
- Thu, 14 Aug 2025 11:43:17 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=wbVKAvjPmm/+hM3TIxi+zo
- XPyXtvFh2bnyuvfbMyHXk=; b=Wh6O4vuu9cOMJDJRielHX16D4uYLl9lEbYkLKo
- KGPfmetcQ4rbiNQwg1jxqwq+zRCXbvPw+T/70vzQs21GAz03rlP4BAd2AC74XQif
- SDchIKhAj1ZBoNgXGRGxBBqd2+PEFCGEc/l4E0hdsut8Pb5EURI+rNHdsOJoENUV
- O/t9PWcHc51FmR+FgXHTIjK8ZMTxuWp9swkMPpkf6mduZpXysVEljLEsv4GAzjbP
- xhnxnbWCZRJd0kLejuxVTPKNEI8MXvesS4Nx8q7S2yLKKVYBJYq7a+/oH9dX9dpf
- QZE52iyRUYQvKjFpcEETi35rPb2aksIsiiQN5qZCiHMpHaHg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48dwp236wh-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 14 Aug 2025 11:43:17 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5D29E4002D;
- Thu, 14 Aug 2025 11:42:18 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2293D6C9737;
- Thu, 14 Aug 2025 11:41:19 +0200 (CEST)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 14 Aug
- 2025 11:41:18 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Cheick Traore
- <cheick.traore@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] configs: stm32mp25: Enable OF_UPSTREAM_BUILD_VENDOR
-Date: Thu, 14 Aug 2025 11:41:15 +0200
-Message-ID: <20250814094116.1351454-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+Received: from [89.212.21.243] (port=34012 helo=localhost.localdomain)
+ by cpanel.siel.si with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96.2)
+ (envelope-from <primoz.fiser@norik.com>) id 1umUYh-003mrl-1I;
+ Thu, 14 Aug 2025 11:47:42 +0200
+From: Primoz Fiser <primoz.fiser@norik.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de,
+ Paul Geurts <paul.geurts@prodrive-technologies.com>
+Subject: [PATCH v2 1/2] power: pmic: pca9450: Add support for system reset
+Date: Thu, 14 Aug 2025 11:47:40 +0200
+Message-Id: <20250814094741.4177431-1-primoz.fiser@norik.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-13_02,2025-08-11_01,2025-03-28_01
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
+ primoz.fiser@norik.com
+X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,29 +66,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable OF_UPSTREAM_BUILD_VENDOR and set OF_UPSTREAM_VENDOR.
+The family of PCA9450 PMICs have the ability to perform system resets.
+Restarting via PMIC is preferred method of restarting the system as all
+the peripherals are brought to a know state after a power-cycle. The
+PCA9450 features a cold restart procedure which is initiated by an I2C
+command 0x14 to the SW_RST register.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Support in Linux for restarting via PCA9450 PMIC has been added by
+Linux commit 6157e62b07d9 ("regulator: pca9450: Add restart handler").
+
+Now add support for it also in the U-Boot via sysreset framework.
+
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 ---
+Change in v2:
+- no change
 
- configs/stm32mp25_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Link to v1: https://lore.kernel.org/all/20250716114547.1343797-1-primoz.fiser@norik.com/
 
-diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-index 14619ffd96c..2b02cd86d61 100644
---- a/configs/stm32mp25_defconfig
-+++ b/configs/stm32mp25_defconfig
-@@ -41,6 +41,8 @@ CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_LOG=y
- CONFIG_CMD_UBI=y
- CONFIG_OF_LIVE=y
-+CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
-+CONFIG_OF_UPSTREAM_VENDOR="st"
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
+ drivers/power/pmic/pca9450.c | 42 ++++++++++++++++++++++++++++++++++++
+ include/power/pca9450.h      |  2 ++
+ 2 files changed, 44 insertions(+)
+
+diff --git a/drivers/power/pmic/pca9450.c b/drivers/power/pmic/pca9450.c
+index 9d875f8bdbe8..abc39d0a1946 100644
+--- a/drivers/power/pmic/pca9450.c
++++ b/drivers/power/pmic/pca9450.c
+@@ -7,15 +7,18 @@
+ #include <errno.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
++#include <dm/lists.h>
+ #include <i2c.h>
+ #include <linux/err.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+ #include <asm-generic/gpio.h>
++#include <linux/delay.h>
+ #include <linux/printk.h>
+ #include <power/pmic.h>
+ #include <power/regulator.h>
+ #include <power/pca9450.h>
++#include <sysreset.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -101,6 +104,14 @@ static int pca9450_probe(struct udevice *dev)
+ 		}
+ 	}
+ 
++	if (CONFIG_IS_ENABLED(SYSRESET)) {
++		ret = device_bind_driver_to_node(dev, "pca9450_sysreset",
++						 "pca9450_sysreset",
++						 dev_ofnode(dev), NULL);
++		if (ret)
++			return ret;
++	}
++
+ 	if (ofnode_read_bool(dev_ofnode(dev), "nxp,wdog_b-warm-reset"))
+ 		reset_ctrl = PCA9450_PMIC_RESET_WDOG_B_CFG_WARM;
+ 	else
+@@ -134,3 +145,34 @@ U_BOOT_DRIVER(pmic_pca9450) = {
+ 	.ops = &pca9450_ops,
+ 	.priv_auto = sizeof(struct pca9450_priv),
+ };
++
++#ifdef CONFIG_SYSRESET
++static int pca9450_sysreset_request(struct udevice *dev, enum sysreset_t type)
++{
++	u8 cmd = PCA9450_SW_RST_COLD_RST;
++
++	if (type != SYSRESET_COLD)
++		return -EPROTONOSUPPORT;
++
++	if (pmic_write(dev->parent, PCA9450_SW_RST, &cmd, 1)) {
++		dev_err(dev, "reset command failed\n");
++	} else {
++		/* tRESTART is 250ms, delay 300ms just to be sure */
++		mdelay(300);
++		/* Should not get here, warn if we do */
++		dev_warn(dev, "didn't respond to reset command\n");
++	}
++
++	return -EINPROGRESS;
++}
++
++static struct sysreset_ops pca9450_sysreset_ops = {
++	.request	= pca9450_sysreset_request,
++};
++
++U_BOOT_DRIVER(pca9450_sysreset) = {
++	.name		= "pca9450_sysreset",
++	.id		= UCLASS_SYSRESET,
++	.ops		= &pca9450_sysreset_ops,
++};
++#endif /* CONFIG_SYSRESET */
+diff --git a/include/power/pca9450.h b/include/power/pca9450.h
+index e5ab09fb8c83..9119ef793b1f 100644
+--- a/include/power/pca9450.h
++++ b/include/power/pca9450.h
+@@ -75,4 +75,6 @@ enum {
+ #define PCA9450_PMIC_RESET_WDOG_B_CFG_WARM		0x40
+ #define PCA9450_PMIC_RESET_WDOG_B_CFG_COLD_LDO12	0x80
+ 
++#define PCA9450_SW_RST_COLD_RST		0x14
++
+ #endif
 -- 
-2.25.1
+2.34.1
 
-base-commit: cd97f431b8062dcbc669d1ae7dd87736d9fca995
-branch: upstream_OF_UPSTREAM_BUILD_VENDOR_for_mp25
