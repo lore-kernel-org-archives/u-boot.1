@@ -4,49 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC3DCA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 16:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC3ACA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 16:32:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B4358399D;
-	Thu, 14 Aug 2025 18:26:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id D7FA68399D;
+	Thu, 14 Aug 2025 18:32:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="XbHkTgQ6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N4eMubms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B496D839A9; Thu, 14 Aug 2025 18:26:56 +0200 (CEST)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.36])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 467D7839CA; Thu, 14 Aug 2025 18:32:18 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 526888391B
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 18:26:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id A8C7F8391B
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 18:32:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:In-Reply-To:References;
- bh=rLRfo8di6RJDKVmO5Ggri142bskAESoak3ym2q9POCs=;
- b=XbHkTgQ6nz7OYSuReevR2tRAPa6ZZjfbA6nYEiHe5ytoLz3xG7MZoYawvFq+TtXslV3i+cQ2DnTkAK8DKCLgjsrMAXdWTTGT8QoVQAPogMyDuJnTnM5iRmX2JoEnTPaKvvXMpSzJIN8lXRZdoqQivdFYQ88K0kwdNggg3J+ZIfgxjhmu3eHJJ2dA1zlC2boqhvKIdnyxlbA/45Y57d7W55SNdsVLnAEl1bv/PxK9+RRNylGzuYs+QN0Y2p
- Xv5Q4okAD43GNzWkuXngKl7OYxQ+jsYwG9VyNGe44A3PvD5cX7fF0XQMK1qPXRhZ7/zc3Ql43SIQq4BOJOEQpjcgrxrQ==
-Received: from GRAPHRT (188-24-194-92.rdsnet.ro [188.24.194.92])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Thu, 14 Aug 2025 16:26:49 +0000
-Date: Thu, 14 Aug 2025 19:26:47 +0300
-From: Marius Dinu <m95d+git@psihoexpert.ro>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Marius Dinu <m95d+git@psihoexpert.ro>
-Subject: Re: [PATCH 2/2] timer: Mark this as incompatible with SYS_ARCH_TIMER
-Message-ID: <aJ4OR2rhl6eFV3GE@GRAPHRT>
-References: <20250813205511.3420638-1-trini@konsulko.com>
- <20250813205511.3420638-2-trini@konsulko.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3e57008acd8so9465225ab.3
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 09:32:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1755189134; x=1755793934; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KTUfsdRt9imfWvjw5CJOFVsRrbllapL+6j6qR2mFrYE=;
+ b=N4eMubmsAlmm1KLWB/DSKBWSsa1nw0G05FOOALHmnX8GBKuEzsbUs9EbaCyAHwWanS
+ W/OonJYB18CKaqfsgbyDOkAb2+U2Qubq+8PeFvbzO4mpcWbB9OayPwuc5C+0Q9xfdixQ
+ KNvHvzYWFAEWDdoXppt36tDjUw7/4DGThWOnM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755189134; x=1755793934;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KTUfsdRt9imfWvjw5CJOFVsRrbllapL+6j6qR2mFrYE=;
+ b=W772heAxwPFDOovYqFTyqx11tg+dUZa0aKRj9i/bfrgW43vpMuIIpsZtpi5dmHbdDA
+ +Q3h+ViTC5EwhXEcIQPFgaGse0UCqy+zvGNq5WHiYthYZlwXzRW1exmRGhS0hS7HkJei
+ iMPuZ9zkCRgGWqIwYZZBTDvEySvdnXhHsPpA+32F591sczUtPaMtEKqFPXhA4wsoG5ls
+ i4OAUWwFpjDjgfXPweb2sxw48ZA6i8VchtRAIxysNoeW+PZ2m7yDiAlNrdmAxNylXAr/
+ 7myPSvRWp9g7LtbHYpaFShIwHoq7TWlRLjYm6a3Ti37GKkd0NfzNjct6rom4d/AK1cG2
+ 28Sg==
+X-Gm-Message-State: AOJu0YzOPp849e37fG/dKx6Wlehwv18IdvrzGWPlJI0fY+ixLvEKPowT
+ wQyLXQzY5s/DbQ3kLJqBuoAVuS1B73/Blryele/ow+96LMOd9mXHrcKp1Mc2HlpA/6b9ZPh+c0b
+ VGTZ5cAM=
+X-Gm-Gg: ASbGnctwIkC6jkXbCMLWKPdfaBpEyXvPcoIBotKlA+wNxWdTo0iQBScK6ILTM7jZgQb
+ VIcuBP6MwUL4+aFQLIsbhJVrwikt1vGYE7AXKOpzztgujyUIeNdksctcUtsNGu4kmW/EP7jpC08
+ uskO/DOLWtDs0HDM1jXLkbHbkz7krhbUIeYrPgXas9AvEfc0SIZh0neM3ZWi+INM+hc1dw4osaX
+ NYOq0bb2yJTySRTzxbPV//z5rt9Nz3toGu7sp5lIj5lO+fo6xMnucpU7UOMAg5TXugMcZ7saRFF
+ hRN+ZbwFLPYXIJuSS2kC4gGkGPalcrrmINvyHTQ6ETShxJTf/O5RNa5NwuT/I96uP13AoOelcXR
+ KUTOaTEGABoaYyEcZ0Se7MKvCPq+aRMNK9eDLImm9lqydQVseMcatzoPN
+X-Google-Smtp-Source: AGHT+IEllTrJfFOQR8iBfhlb0+WMcGEoqSzlCrOc9GzWLiXbS7d9V4S02dWQvLOs1CZtQsyuzftrHQ==
+X-Received: by 2002:a05:6e02:216a:b0:3e5:4447:5eaa with SMTP id
+ e9e14a558f8ab-3e57076e5ddmr72240365ab.1.1755189134274; 
+ Thu, 14 Aug 2025 09:32:14 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3e56053a60dsm24615415ab.48.2025.08.14.09.32.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Aug 2025 09:32:13 -0700 (PDT)
+Date: Thu, 14 Aug 2025 10:32:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com,
+ heinrich.schuchardt@canonical.com, ben.dooks@codethink.co.uk,
+ jamie.gibbons@microchip.com, michal.simek@amd.com, sputnik@on-the-web.ch
+Subject: Re: [GIT PULL, v2] u-boot-riscv/master
+Message-ID: <20250814163210.GL124814@bill-the-cat>
+References: <aJ29JN0YOKGS5tBn@swlinux02>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="57PSdRcFerxVJHV+"
 Content-Disposition: inline
-In-Reply-To: <20250813205511.3420638-2-trini@konsulko.com>
+In-Reply-To: <aJ29JN0YOKGS5tBn@swlinux02>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,56 +98,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2025-08-13 14.55.11 +-0600, Tom Rini wrote:
-> The timers implemented under SYS_ARCH_TIMER are not part of the TIMER
-> framework and thus cannot be enabled at the same time. Express this
-> dependency in Kconfig and add a note to the help of SYS_ARCH_TIMER.
-> 
-> Reported-by: Marius Dinu <m95d+git@psihoexpert.ro>
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Marius, I ended up reworking things a bit (and also found part 1/2 of
-> this series) but please let me know if you feel this should retain your
-> Author and such instead. Thanks!
 
-No need for credits.
-I think you should keep the warning message in the Timer drivers menu.
-It provides a quick explanation why the menu is empty.
+--57PSdRcFerxVJHV+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Bugs are reported in this mailing list too?
-Thanks!
+On Thu, Aug 14, 2025 at 06:40:36PM +0800, Leo Liang wrote:
 
-> ---
->  arch/arm/Kconfig      | 1 +
->  drivers/timer/Kconfig | 1 +
->  2 files changed, 2 insertions(+)
-> 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 73b4aad28b50..0dba2e2c8567 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -452,6 +452,7 @@ config SYS_ARCH_TIMER
->  	  interface to a timer source on an SoC.
->  	  It is mandatory for ARMv8 implementation and widely available
->  	  on ARMv7 systems.
-> +	  This timer driver is incompatible with the DM timer framework.
->  
->  config ARM_SMCCC
->  	bool "Support for ARM SMC Calling Convention (SMCCC)"
-> diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-> index cb6fc0e7fda8..2ab4d971dffa 100644
-> --- a/drivers/timer/Kconfig
-> +++ b/drivers/timer/Kconfig
-> @@ -2,6 +2,7 @@ menu "Timer Support"
->  
->  config TIMER
->  	bool "Enable driver model for timer drivers"
-> +	depends on !SYS_ARCH_TIMER
->  	depends on DM
->  	help
->  	  Enable driver model for timer access. It uses the same API as
-> -- 
-> 2.43.0
-> 
+> Hi Tom,
+>=20
+> The following changes since commit 869217ee2907595919261b6d4ae81fd76a8ddd=
+81:
+>=20
+>   Merge tag 'qcom-fixes-13Aug2025' of https://source.denx.de/u-boot/custo=
+dians/u-boot-snapdragon (2025-08-13 08:57:49 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to 35d6caad6de93b3a5545df7bcdc6d322a4edb93c:
+>=20
+>   arch/riscv/lib: update memmove and memcpy for big-endian (2025-08-14 15=
+:33:00 +0800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/27379
+> ----------------------------------------------------------------
+> - Board: mbv: Prepare MBV for CI
+> - Board: MPFS Icicle Kit cleanup
+> - Board: Add Andes Voyager board support
+> - RISCV: Update SYS_BOOTM_LEN to commonly used value
+> - starfive: fix return code of `mac write_eeprom`
+> - arch/riscv/lib: update memmove and memcpy for big-endian
+> ----------------------------------------------------------------
 
+Ugh. Does RISC-V still have some reason that fdt_high / initrd_high need
+to be set to disable relocation? I thought that had been fixed
+already...
 
+--=20
+Tom
+
+--57PSdRcFerxVJHV+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ4PhwAKCRAr4qD1Cr/k
+Cv/WAP0ZH0z2BGKRSK6tLkA0yC19r2e0ixtvjwuiZIS8Ski9pQEA5dHVMTFBujod
+4qYEgv+lErtdFm/u7qqI9O2sdDd47Ac=
+=gbj+
+-----END PGP SIGNATURE-----
+
+--57PSdRcFerxVJHV+--
