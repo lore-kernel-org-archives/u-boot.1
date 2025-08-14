@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFB5CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:14:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56CBCCA0EE6
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:14:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B48FA83A25;
-	Thu, 14 Aug 2025 20:14:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05DC58399D;
+	Thu, 14 Aug 2025 20:14:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N6OQfHrM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GxemwJcH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3011F83A1F; Thu, 14 Aug 2025 20:14:46 +0200 (CEST)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id CD91583A2A; Thu, 14 Aug 2025 20:14:48 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 233E18399C
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:14:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAE8D8399C
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:14:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-76e2e8e54f8so1115757b3a.1
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:14:43 -0700 (PDT)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-76e2eb9ae80so1157458b3a.3
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:14:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755195282; x=1755800082; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YA+NB2gofxTArnSMWf8x5CbNRFY99E/WMN3vIrvmwX4=;
- b=N6OQfHrMK9q+gQ0EByWWHDObTcgKbad+hCvuDGyUgTIIg/y0fjVTOSNMfm1FG6vSiv
- jVctS7+ANFgH1WEeb6LikqIPKI+USQIFAa2Mnb9QYloM3YiE4xgnmtP4k0vycdPfev8V
- oH+na9BY8UzUTTzNFedfR4bSvkZal8Tk6p2U4mwQJncSyIsbpqiLZO8Jb1D0LdMhMcp9
- cO2/uKWjMSOZAMsLK17t3aHIDbhNM6b6E9kU9XD9Kr4DY9lWMEkf0c9r/jSJ7VtPnpFg
- /Ce/mEgbWc5vSr2WG556f027PosQZglFfZOVkLnSBDHxnKKmzcVBZC2PLbL4Ztq6sqsn
- 2TpA==
+ d=gmail.com; s=20230601; t=1755195285; x=1755800085; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MWfJ3I35nD2TRHlGDF789xD04LKGuhALS6RuTfXiwjY=;
+ b=GxemwJcHyDPzdJjWqgPvYrDvFtigwKTPwhsTeyiXezlq1tYX5q2dVOAj6XhUE8GdUK
+ 2TbotavSKqkHlPcIaSApiFyW9Fz+4qbYV9vsIODeslXhy4o2obRQlC0jeugY15JRO5kt
+ 9XQD+uUPqplhh7dP9ZZEuGU7q6YZKhWwQ2oH+HQXHqCGhADkojq5SJMmBk1peH/tSu6/
+ MM3GmHpwvnl7fzh5mZWeLh+zqCcPDryCs+Z9JFK+Ah2J69cQja7LPdmIPaz3Prj7YVzl
+ me9Vwcf9aA2a4HnDaU822ZrcdXij6t2FUZ73xrspTRKfXkcR1am1BwgUyM+rAcIg7eyt
+ CbMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755195282; x=1755800082;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YA+NB2gofxTArnSMWf8x5CbNRFY99E/WMN3vIrvmwX4=;
- b=UCxjq4tWiVEs+3npDKTWTOf2Ex7Hht0QbMS0JRAe6hz8M+TbhoJVihffSBA0/yUDWP
- X/LynJsoea7iofrbn2TIWadqQYFRcqZvX9VagnHwilhgzk+gh9P2szR1CHOHj51+VnRB
- aIPOwraTS/kRE1tYmGoxT1M00zO9LmkL++ZjH2M3rZgA9iMwp3XGX641yE/4jdS+6xGz
- 7RDfaoo3UMRhQAuhM1zMYm3cxUramAFnwxWRp0gQtcZ5gWxL3q8m67UJ2XdgCOr8ffWs
- H+n7GrnY9UYuipwb5LCKQ0XiDjC1U7y1gcc/NzaBOyuPSky/muasPWB3UzJTJcD+Cqcv
- hBIQ==
+ d=1e100.net; s=20230601; t=1755195285; x=1755800085;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MWfJ3I35nD2TRHlGDF789xD04LKGuhALS6RuTfXiwjY=;
+ b=FNiNCAZj4quodulrUUT0KnKUnOirXGj6tvkUJidv4c4V7hXnrLRTU44QrsZDhiyAg5
+ lZjN39B3F0S223w9IuWfYgoXLaT5rHDZvy4YEXpQdK/KncQ3vGm0m1wwu7pZevBtSGGF
+ VuNq+hqRRtIw/JdvMDqWtDI9cxbEuVUmDNCP+ZAzkz8myLeO/vOfPCcUyyuk+Me2HC4J
+ kjqthIohqqn2RxGNI8v3A7BhjlOXJ0x1YBu9BUZr+a5nqWSNAT9/dI79n12DDTlNpIqd
+ luuyQsjpdEcvjhZTkAoVBUdcw0MH0TUf/eXfrpcVWt38XAy2VQgqadWspDSq4Naddn/Y
+ wGYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVw6uzntO5qiQl4MaNtUI48VQo18V8Tzz6rqLMy3Okw+WLWcX0HYTS1XBodGiq/jwm9AzJ5oKk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbcRdt4eh5nIzX9GQhFY0AZ7s15CqMgc/yyu1+VL4fVnpOqS6I
- jGFQbI70S5lZGMr1I6bFTRzJ7bnwPJmqY3NN3BXYM6ycYmsOWcW2yDgs
-X-Gm-Gg: ASbGncvp0R0tklWiwDxuG3rRagjL0nxonSAvJv5zaQz+JSBAo0e49c+CDwOf13ZLqpm
- Me6aIF2uYKL4FO0GMac6tArJlsHyzDiN5ZSQyYYXpcpZfOknv5kssdKBTTfo5HKD1lFunDJ+XmY
- g4O6jHl3HCk+YBUq66c4cMYW+b9qoTNRZVFFMGEY6BOc1fRScvj9Ing/wg2n3aeSqcQ8x+Jg4TA
- 1yrqIKHSyh3bDrLKXLPSaol/q8R35yEIVvH92t4si5pnxwEI9XxdJZ9FFZzCcDFa0p0Sb5w5cBn
- lIlfQwzvx/czfu3hGjm5CAVyYtNhmmgE7Krkzhn/BpkqP5eVjyo+DukvYEBtqutsyOmlDloiuwI
- ZwfDg+7Jkd2bEj7AdnAd5i5FCndVgKx0/piGr4ofMUipF0g==
-X-Google-Smtp-Source: AGHT+IH85cm00A8o+ZUZSuCsVlqli8npH7YCsZasHdf1mq7iVDBdGeu+AcP0/2ATguys1nFIIvwxcQ==
-X-Received: by 2002:a05:6a00:3ccc:b0:740:a023:5d60 with SMTP id
- d2e1a72fcca58-76e2fb1400emr6470554b3a.19.1755195282327; 
- Thu, 14 Aug 2025 11:14:42 -0700 (PDT)
+ AJvYcCWOXBCJLPyQBr7gnKp6kIdI94rAQd3N8eJRQJoJw2GiW9V6r8hC6pzcHJSkPJkbc/LQXe/wp5Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YwalD3ThFGEi24uOCvxbJmg5W29i+8XhPR98tHOe9ZSM9oVvDss
+ AsMOkWxGfG2P/Jxy21+I1En2rwR1rjjc6C6Iqfmknrn3+3iCfuE2W6GJ
+X-Gm-Gg: ASbGncvC+xa+Ke0OpIg5dLP9TTrGgAD5TFDaQUnPjGWEwxJiWpbqRtPGNz+w9GlnK2F
+ Epa7+0hhXvQVqULzSBVGoddBif3g27wKfboloa+b/llyy7kUCLg6cwRf5PMrpf2dEKsdsbZ23ZG
+ di6RUyqiQKfopCgt7TOJjGEs/4YGKEAc8aURtVXebepDIt4Y5nfZJyuPSvSjOISyaFn9WvSyuOw
+ q8GVl6EAnD2bSPPhWafYVFL3Y6qNHlRV/lFEQakfBbtnPjUM8hXMFLzzljovNF175ciR+O98hv4
+ /XMqg5rs3TAJIFFFyRSW9f++A3u0LSAhCXIVKEAY7GHRBtaNKIgSoQ+XBnTzuiicNJ2iLc8+mcw
+ 5IpN1nIAw415bJ9SS8drDRyexDqJ6WR+SIckAzNrEww9d7Q==
+X-Google-Smtp-Source: AGHT+IGu3ZdTp01MsR0iOW3xCPZ9dDyEPpkRU5xL6JnE9m1Ru3+i8sb7xzdPLip4qZ+iNwMfh5nMIQ==
+X-Received: by 2002:a05:6a00:4fc4:b0:76a:986b:6d2 with SMTP id
+ d2e1a72fcca58-76e2fd4e63cmr5999874b3a.11.1755195285077; 
+ Thu, 14 Aug 2025 11:14:45 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:f50d:900e:961:a245])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bccfbce4bsm34713327b3a.77.2025.08.14.11.14.39
+ d2e1a72fcca58-76bccfbce4bsm34713327b3a.77.2025.08.14.11.14.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 11:14:41 -0700 (PDT)
+ Thu, 14 Aug 2025 11:14:44 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: trini@konsulko.com
 Cc: tuomas.tynkkynen@iki.fi, jan.kiszka@siemens.com, u-boot@lists.denx.de,
  heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
  Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v2 1/2] Kconfig: Convert SYS_EARLY_PCI_INIT to Kconfig
-Date: Thu, 14 Aug 2025 15:14:35 -0300
-Message-Id: <20250814181436.1598067-1-festevam@gmail.com>
+Subject: [PATCH v2 2/2] qemu_arm: Select CONFIG_SYS_EARLY_PCI_INIT
+Date: Thu, 14 Aug 2025 15:14:36 -0300
+Message-Id: <20250814181436.1598067-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250814181436.1598067-1-festevam@gmail.com>
+References: <20250814181436.1598067-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,38 +101,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CONFIG_SYS_EARLY_PCI_INIT symbol is currently not supported
-by Kconfig.
-
-Make it a Kconfig symbol so that users could select it via defconfig.
+Select CONFIG_SYS_EARLY_PCI_INIT so that eMMC emulation can
+work.
 
 Signed-off-by: Fabio Estevam <festevam@gmail.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 Changes since v1:
-- Only collected Tom's RB tag.
+- Select via imply in board/emulation/qemu-arm/Kconfig. (Tom)
 
- common/Kconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+ board/emulation/qemu-arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index a2f653f7e722..cb17f0561537 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -833,6 +833,13 @@ config PCI_INIT_R
- 	  case of DM PCI-based Ethernet devices, which will not be detected
- 	  without having the enumeration performed earlier.
- 
-+config SYS_EARLY_PCI_INIT
-+	bool "Enumerate PCI buses early during init"
-+	depends on PCI
-+	help
-+	  Do early PCI configuration before the eMMC gets initialised,
-+	  because PCI resources are crucial for eMMC access on some boards.
-+
- config RESET_PHY_R
- 	bool "Reset ethernet PHY during init"
- 	help
+diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
+index 80ab9d8e1c3f..447061b25cd8 100644
+--- a/board/emulation/qemu-arm/Kconfig
++++ b/board/emulation/qemu-arm/Kconfig
+@@ -8,6 +8,7 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	select HAS_CUSTOM_SYS_INIT_SP_ADDR
+ 	select QFW if ACPI
+ 	select QFW_MMIO if CMD_QFW
++	imply SYS_EARLY_PCI_INIT
+ 	imply VIRTIO_MMIO
+ 	imply VIRTIO_PCI
+ 	imply VIRTIO_NET
 -- 
 2.34.1
 
