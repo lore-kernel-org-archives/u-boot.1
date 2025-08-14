@@ -4,84 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C9FCA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 17:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6805DCA0EE4
+	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 18:11:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 448B383A15;
-	Thu, 14 Aug 2025 19:50:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 946318399D;
+	Thu, 14 Aug 2025 20:10:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VDnHBt7W";
+	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="FWzM6F4b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2705A83980; Thu, 14 Aug 2025 19:50:55 +0200 (CEST)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ED2068399D; Thu, 14 Aug 2025 20:10:57 +0200 (CEST)
+Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.36])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 168F783A15
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 19:50:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01DB48399C
+ for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:10:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-88432ccff13so31433539f.0
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 10:50:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755193852; x=1755798652; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yIjVKeM/+3Qh9RU1pVLaB70/qHANZkLxjMBTQP0r+po=;
- b=VDnHBt7Wa16H9BMJa0WILF9MqdiQMVB5ko1t8MwQthXzQw/DMQWEFAESNpCpcToYb/
- 06L8uTqiW4Q0WfUbfAjaf1PPylClZxTBh0j+oc3JHjVn1tPmoHE5qzw0IdrnbE178edU
- VOQ5GUTPdpTnGsm4ME8xRkWS14ShnJ4i7ljFg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755193852; x=1755798652;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yIjVKeM/+3Qh9RU1pVLaB70/qHANZkLxjMBTQP0r+po=;
- b=op8kwCw6GV1pmM2PM6ZwoxQzTNAC8dfT71dD0XI+4BqVs885niWarG2UjEztO0uRWp
- hRAmnqxBvC9b0RmmXhEcX60yJdsAEcbOkybj0ogBd1nkmsVhAp8XKNMk0k2VAHNbZO6V
- NTIRCLlbhTyxz7D/K/mt2UF0xTZHH3mJINCw4nLpm1M0fkRB11pwEONI/GK7XCsE5Jhr
- rYP1oicrdf4d5Tx6zXOnLysDTW0Esa9VRSzn/ePVJ+lsXlgOnx/5dmAiZOMwHuyPJcdi
- WMiobSBfBl29LvuhfqvSH09NfXttzyFkcxOxMMLkFgrQy4UA8A9im9VELprqkOKjxyIM
- aySQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVZoyUXm+4LDkzxiG9mIFF/5Kwjw6fRNb+padYLjOyxTNmUbt9QiFurIOfb5ObEAabfhq6BXaI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0kg7qjn1UGgM/O3YYoxLlUYQy3C+S/OkDw+hqSCK8Dqvol86E
- 06ft0muz1U4SiJxWQ+ySYFE0uIB+X8510OOX5oD8fJY2hW5uWUhrefXxYiad21DkbuY=
-X-Gm-Gg: ASbGnctxUkY533HzBKAvE3NPuniBtPm5ZpUnENXxwSJtxgVk/w3epAx8W0T3713t5bl
- OcBryjohF+1sOU8D8A7Eka4dwKFhmmz5MIpRuvp7sxzI0BwsiOdbdlcKVFj/2BbRaNWUmkp7jU2
- 71OKC9gJWrFbL6LMG8CUciYcIvtgb89FiZ0M2C06KcSEob5TptNeLe8dcmnKuKAxygu3W71EZFX
- EAkqhWMbulopFa//gdIY5mZ5TYCEF7p0nUEyaE5z3PxqFrHBnvZ4mVmVHRWhVs1CQTOEEbDrO5Z
- RhBesq6NnvtIN2Xy9YiYSvpFs5GIp1KEflmPL1LNaS/N9hOSmH2wtebqhd04gn6R6dIc2YVluCU
- U2u2rwxYe5Da3eXYwPoby6dkMHue1834FlbkvPvVcykYOhGkHIJvKjBeX
-X-Google-Smtp-Source: AGHT+IG0h7ckhQXJgQ1r5CfQstnsqCHfU2Lg7MR8EvwKW+MwwRWqkknCVMROBAT4jSThGmU1fdqRXw==
-X-Received: by 2002:a05:6602:480d:b0:879:26b0:1cca with SMTP id
- ca18e2360f4ac-884339e5f00mr769173239f.13.1755193851800; 
- Thu, 14 Aug 2025 10:50:51 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-883f198f8e7sm531634439f.17.2025.08.14.10.50.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 10:50:50 -0700 (PDT)
-Date: Thu, 14 Aug 2025 11:50:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: tuomas.tynkkynen@iki.fi, jan.kiszka@siemens.com, u-boot@lists.denx.de,
- heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl
-Subject: Re: [PATCH 1/2] Kconfig: Convert SYS_EARLY_PCI_INIT to Kconfig
-Message-ID: <20250814175047.GO124814@bill-the-cat>
-References: <20250814165932.1584854-1-festevam@gmail.com>
+ spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
+dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
+ c=relaxed/relaxed; q=dns/txt;
+ h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:In-Reply-To:References;
+ bh=Z2I3aU3KaxsshGq4Chs+eRxaliDJfXGPcZB7yPfIdLc=;
+ b=FWzM6F4bQhwE8tmzzV28nBvWKyRFTzezXOz/gupRZogCHIF76iP8jIi51b/v/WkANxXgWMOoGnqqd8PXCnr198c43VPCIp68oCgx5FUAQ/q22LoSlXS5jeXqHPcio/apZ1Ez7eSPnwOIWG2wVIOvJ36PT3NrQllLmGEmRYdB01D0DxLXLFU56v92S0759/yfksE/KuyXP9KDyblP+pfbWslCJDW5oR/tJJk7iZnG3o6p6estxQwtY60awD
+ GfMyl9QExeURdkpibdXyxO4CJOGggyC/fgFoggiBF5hJS56eTq5XkbESmdpFWughBNV4EDOGmgrRWWJQCWAt8ei7hfHA==
+Received: from GRAPHRT (188-24-194-92.rdsnet.ro [188.24.194.92])
+ by mx1.wiredblade.com with ESMTPSA
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
+ ; Thu, 14 Aug 2025 18:10:50 +0000
+Date: Thu, 14 Aug 2025 21:10:49 +0300
+From: Marius Dinu <m95d+git@psihoexpert.ro>
+To: Tom Rini <trini@konsulko.com>
+Cc: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] timer: Mark this as incompatible with SYS_ARCH_TIMER
+Message-ID: <aJ4mqWaJuJ0Ka+28@GRAPHRT>
+References: <20250813205511.3420638-1-trini@konsulko.com>
+ <20250813205511.3420638-2-trini@konsulko.com>
+ <aJ4OR2rhl6eFV3GE@GRAPHRT> <20250814164021.GM124814@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TWa94OqUdj7jBmSS"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250814165932.1584854-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20250814164021.GM124814@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,35 +64,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 2025-08-14 10.40.21 +-0600, Tom Rini wrote:
+> On Thu, Aug 14, 2025 at 07:26:47PM +0300, Marius Dinu wrote:
+> > On Wed, 2025-08-13 14.55.11 +-0600, Tom Rini wrote:
+> > > The timers implemented under SYS_ARCH_TIMER are not part of the TIMER
+> > > framework and thus cannot be enabled at the same time. Express this
+> > > dependency in Kconfig and add a note to the help of SYS_ARCH_TIMER.
+> > > 
+> > > Reported-by: Marius Dinu <m95d+git@psihoexpert.ro>
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > ---
+> > > Marius, I ended up reworking things a bit (and also found part 1/2 of
+> > > this series) but please let me know if you feel this should retain your
+> > > Author and such instead. Thanks!
+> > 
+> > No need for credits.
+> 
+> OK.
+> 
+> > I think you should keep the warning message in the Timer drivers menu.
+> > It provides a quick explanation why the menu is empty.
+> 
+> I thought about it, and we don't do anything like that for other
+> either/or choices, and it's now in the help text itself at least. The
+> other thing however, is that a few platforms do allow for both, because
+> they play some games with CFG_SYS_TIMER* defines. So I'm not entirely
+> sure what to do here.
+> 
+> > Bugs are reported in this mailing list too?
+> 
+> Yes.
+> 
+> -- 
+> Tom
 
---TWa94OqUdj7jBmSS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+With the original patch I only tried to reduce the number of compilation
+failures. I encounter a lot. I'm no expert and I can only try to fix little
+things such as this one.
 
-On Thu, Aug 14, 2025 at 01:59:31PM -0300, Fabio Estevam wrote:
+I belive some people (like myself) would be confused by an empty menu and
+would not immediately remember the SYS_ARCH_TIMER in a completely different
+part of menuconfig.
 
-> The CONFIG_SYS_EARLY_PCI_INIT symbol is currently not supported
-> by Kconfig.
->=20
-> Make it a Kconfig symbol so that users could select it via defconfig.
->=20
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+I tried to find configs with both CONFIG_SYS_ARCH_TIMER and CONFIG_TIMER
+enabled amd I couldn't find any. So it's probably OK to leave the patch as it
+is and exceptions, if needed, can be added later.
 
---=20
-Tom
+PS: I saw your other patches that add dependencies on platform type.
+    Nice work, really needed!
 
---TWa94OqUdj7jBmSS
-Content-Type: application/pgp-signature; name="signature.asc"
+Marius
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ4h9wAKCRAr4qD1Cr/k
-Cr9IAP9I/oYKlDpTXMTcAqjtBdn/V7dVFPB7YOfVzb8PhJdZtQD/YLhEPNro6Pve
-A+VXHoDQZ0Kb17vyGnNW8jdEbtMeng8=
-=A5n1
------END PGP SIGNATURE-----
-
---TWa94OqUdj7jBmSS--
