@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC4DCA0ED1
-	for <u-boot@archiver.kernel.org>; Fri, 15 Aug 2025 16:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E513CA0EE4
+	for <u-boot@archiver.kernel.org>; Fri, 15 Aug 2025 18:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C0CA80194;
-	Fri, 15 Aug 2025 18:53:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 0400783AEC;
+	Fri, 15 Aug 2025 20:58:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="j3ijLA+p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kNy96g5u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7452F803DF; Fri, 15 Aug 2025 18:53:29 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id F369983AED; Fri, 15 Aug 2025 20:58:25 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B80180107
- for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 18:53:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBF0283AEA
+ for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 20:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-61bd4a7b02fso1208513eaf.0
- for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 09:53:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-88432e76dc1so139158339f.3
+ for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 11:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1755276805; x=1755881605; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dZexm2w9sL2UyC3J9aiu4UB9lSyBs4J9yUkdQWPuP10=;
- b=j3ijLA+p/2P0h0dwAdbJKui3yQg1dw4qbD2zzC+OzzN4Pi0P1Y9Fxc89D+ZeaQE1fd
- JzfnSsAj3XQalM+lwuybN2cxf7fTU6/yEqWNl93rTVqF1WeqyayVVjXMYOWDPaTy49id
- zLBrkmAlDia+jVqQCYNIyHRQ4iK9+cVdPvf1ov9avBa4mjWgznmeMxHBy0XLcY75xbvQ
- KEhIO3nvmMbQNGqgxMs7koy/wSKZoI4fbOqtnw9+r6sJS0W5BZ3FbbHmXTfGgZ0q1Ej2
- YCqyGJ8qsazr5gVuFDlvTmL8F1E75Q2zpc2FxPsIChqpMMHGGXhbdUQ1BRqLxFClT7+n
- 3j2g==
+ d=konsulko.com; s=google; t=1755284302; x=1755889102; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Or7qpOtUhNEC0eH9fYk2JpaAZAA9z3ABK7FvyZo6ik0=;
+ b=kNy96g5uPEqAKPMazHdAI5W6IzfzMbNdjWz+N2a5TN3RnQNIXDUsgoq2mO9ydgcWgI
+ vu2A+wi+FcpqhSpVA87Vus7Ix3WtMNtIW28oJK89m2iI5gj9nylyTge0PhcktdtjKuwr
+ TMNIe7/dbTuUTpBKRLDddPr4Ys6HDXP+ufCZw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755276805; x=1755881605;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dZexm2w9sL2UyC3J9aiu4UB9lSyBs4J9yUkdQWPuP10=;
- b=YjXI7KKopSAxTwcdAwdKo2ZpkE4/XWglwO5zh/L91LK8Fvd8R6e1C4tYl1g7M27QYh
- huw5Hr5XqvDu12zyl9+Xi0BXv4+m7eqwL18RFQIpsnyj8j/HtZ+A1E19Rp+5MqaQl3pA
- JuGg9jD1qyw++nvMyGDtIMV0QpZTgZXLBFrYjJSm8xqMbFVFwbn0nimrd8BbQnnLUIDU
- /xKN9SHjDkX5cPcOdcaUQ5s5MfiOrZ4gVdQMCJfkh+9HT3zJbZuY0gTcfpasgngb5DvA
- NcK6y/zsd1vyZmQY1fDEdnN6EaWk6haOQv/jzFZWtNmPC+bhu+RHbZbryECaH4/WSs3G
- cErQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5RftTFJzf+rR3fkvKMHIEgaFzT6dAQZ2Njr7FeyMDcez95fra9qqXHGUZYx861z6uW0NC0Q4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwBN6VxgEzefkGH5XE74wO4bPkNl9Xn71xjQiTJrT70Lj56Ib52
- NqFioDZjzbRd86hxhq+g4Hpx6TOIswgI5onadq56/Vzrl0xpJO7cin4zTZA2EB7YDlwlFcZUzJu
- bJ9+2Zw7dw9xzFf42VjlXHmwBS9AdppVnaoMv+Lfu9A==
-X-Gm-Gg: ASbGncsZCVii9aU3gy1gVzrd26FrUvsJzYWTSHMJDLE/GqyWqeenARjpdoh+Fd1RGJ3
- yXgHJGuhDmm0qaCTNV9o8u4yJ5cG6eNldfs95klsra7ROqnPuIkEjY8DrCpcpJ1ScuOfplA9M14
- Si7BRicznY0Z4wJT+vwf0H/4921BPPso3/zGimqBtzdHOZOxVvQWjz885KVWM99k00xWx0P6t9J
- QV9dzgXUd3ZW9eddA==
-X-Google-Smtp-Source: AGHT+IGRQoL9ROQeT8ibI2wyezCzgrAHCRtStYGDcEVCTUlpdQvb7fbft89IFua3DUG1yDQqiDdPXzwiv/p4AFoHiD0=
-X-Received: by 2002:a05:6820:1b84:b0:61b:d431:ac96 with SMTP id
- 006d021491bc7-61bea7294bamr1754738eaf.2.1755276805218; Fri, 15 Aug 2025
- 09:53:25 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1755284302; x=1755889102;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Or7qpOtUhNEC0eH9fYk2JpaAZAA9z3ABK7FvyZo6ik0=;
+ b=eHTVBrpFWeEAuw6N+SxAnpdxCxKtuhNDY05EmGtGpVS7KtTKzJ9p5IrWwNmVRWy6Rz
+ W2N2pKxLHCNsUYAMy3/9mnz4BDgz+6w8lxefhQP09uC+LzlXzLZHUZt5c4hks33+lR/z
+ y46zBacqwANIX3R5GhrdDT9kct9o25EDYvqYx4H30i1Xsn6YPZsMr4SB+vaSLCflZ4Qm
+ VMUIdUVgunbHxohrevjg4BtiUjxlidzRpPKy2GkfFXS8KTe98k6iyNqnULuXS/2QQ+ZI
+ ByyLHm9Wxjjd+KZy/fqz22zaDdKdcnmY2vuD1DQv1mIXsvrU+BUQtYwS2V0hpWb1b8a7
+ k+Gw==
+X-Gm-Message-State: AOJu0YzT5dlt7vkwF2isClQ6ISrqY/E/aEYeRAJBKmWr4sfd3+u4vu+m
+ mPPvMdxfHAu28c/jcVg8FeoL5fREGTqY2KB7yQ3mKPrjsvlNcrtTTc68tfbLiEZd+9g=
+X-Gm-Gg: ASbGncut8uQkJZD72ag5I3N436zP7XW/BN0KY99zqVvBdFOWFxNZ844PwlkUAq4dn/3
+ rm6xFC+opHdzy33B50wMSFCQ8sPKMoopllV2dJMpDyOiuRl0kO3ENtPBdK7f0VJY1Jx8GSHzUOm
+ XanJd7DmKl+pjTIO2cwYr2krKZDq/M0BRZwk/nV3VVRvpzDMqb/CoNPucrPIzlTT9cadDdbQnvy
+ 7van5SSBW+okXNbmn201Equ/0FHrjk2JXlzHvYkBVS5cFJhbLoGsxpbyh64IB/4vdHSKx5BaXNL
+ GYy72Siln6kkDwRTA1FNVJo20nflp3/sw6V9LSQQE3QQaBWCUGjUMdiy+ItQuiYX8AAG9m94v1L
+ khfjjb0VIk4Zlepeb+RL0mfG9n95oWOM5F8SuMzPi5l5EPs8AyRqTK2dO8zfY/Ko6zvo=
+X-Google-Smtp-Source: AGHT+IEOS4wtw8mE8CPg82Rr+lLAZP0qvzK5EcsD/Yh07Qs4cGAD4UJN8OE3rg6nlYdIJaR4gAnLVw==
+X-Received: by 2002:a05:6602:60c5:b0:881:7e3a:4a37 with SMTP id
+ ca18e2360f4ac-8843e3761e3mr691078139f.6.1755284302462; 
+ Fri, 15 Aug 2025 11:58:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-50c9477f44fsm589413173.21.2025.08.15.11.58.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Aug 2025 11:58:21 -0700 (PDT)
+Date: Fri, 15 Aug 2025 12:58:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: alif.zakuan.yuslaimi@altera.com
+Cc: u-boot@lists.denx.de, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+Subject: Re: [PATCH v1] misc: fs_loader: Initialize actread variable
+Message-ID: <20250815185818.GA55961@bill-the-cat>
+References: <20250805024630.24558-1-alif.zakuan.yuslaimi@altera.com>
 MIME-Version: 1.0
-References: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
- <175096060477.1879961.6525302263431603846.b4-ty@konsulko.com>
- <CAJ+vNU1c6RchWTjX+A1dUi-WQ+m-60QacY+-dA5ScodFsc95_A@mail.gmail.com>
- <e22d803c78a0e02747be94bac23f02da37bc13fa.camel@phytec.de>
- <5afb0dd2ffa60298890a9778a5e44047a5e39753.camel@phytec.de>
-In-Reply-To: <5afb0dd2ffa60298890a9778a5e44047a5e39753.camel@phytec.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 15 Aug 2025 09:53:13 -0700
-X-Gm-Features: Ac12FXzcdNUeSHlnK8frhwAajDqFOFsUlF-Y43hF7BKSDK0yk8ljihq87W6F3cQ
-Message-ID: <CAJ+vNU2VGS10BwgQEeTOPrmw83OxBV-W6nsvd2w7VwkfFH2SmQ@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] Fix handling of optional blobs in binman
-To: Yannic Moog <Y.Moog@phytec.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nB7zsVmSSKtptOul"
+Content-Disposition: inline
+In-Reply-To: <20250805024630.24558-1-alif.zakuan.yuslaimi@altera.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,132 +97,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Aug 14, 2025 at 11:46=E2=80=AFPM Yannic Moog <Y.Moog@phytec.de> wro=
-te:
->
-> Am Freitag, dem 15.08.2025 um 05:44 +0000 schrieb Yannic Moog:
-> > Hi Tim,
-> >
-> > Am Donnerstag, dem 14.08.2025 um 12:54 -0700 schrieb Tim Harvey:
-> > > On Thu, Jun 26, 2025 at 10:57=E2=80=AFAM Tom Rini <trini@konsulko.com=
-> wrote:
-> > > >
-> > > > On Fri, 13 Jun 2025 14:02:39 +0200, Yannic Moog wrote:
-> > > >
-> > > > > This series solves a contradiction regarding ext blobs packaged i=
-n
-> > > > > binman. When they are marked as optional, by default they are fak=
-ed, two
-> > > > > messages are emitted. One says the image is not functional the ot=
-her
-> > > > > says the image is still functional. Both concern the same binman
-> > > > > entry/blob.
-> > > > >
-> > > > > Binman is set up to have fake external blobs in case they are mis=
-sing.
-> > > > > This is regardless on whether they are optional or not.
-> > > > > The implementation does not allow different types of entries to o=
-verride
-> > > > > the faking decision; at least there wouldn't be much sense in doi=
-ng so.
-> > > > >
-> > > > > [...]
-> > > >
-> > > > Applied to u-boot/next, thanks!
-> > > >
-> > > > [1/6] binman: drop "faked" return value from check_fake_fname
-> > > >       commit: a657d87f08789c4c50423897bd5ee052c6223ee6
-> > > > [2/6] binman: mark optional missing blobs as absent
-> > > >       commit: 3ae668b9d2101d111d257ee7d8912c19cfb0e102
-> > > > [3/6] binman: rework dropping absent entries from packaged image
-> > > >       commit: 21bc3433a43d3add3430543c9eee2a95d4dee2f6
-> > > > [4/6] binman: add faked optional entry case in CheckForProblems
-> > > >       commit: f5817e05efd39dd455c2e6a0f0622d709fe7ea2d
-> > > > [5/6] binman: ftest: pass allow_fake_blob to _DoReadFileDtb
-> > > >       commit: e749d64b4622806072c56a839cf9a36a5081b575
-> > > > [6/6] binman: test: assert optional blobs don't cause non-functiona=
-lity
-> > > >       commit: 0dbb0a8d1f2aefb2a7fdd8e627edd955e4fe8d3a
-> > > > --
-> > > > Tom
-> > > >
-> > > >
-> > >
-> > > Hi Yannic,
-> > >
-> > > I haven't had time to dig into it in detail yet but it looks like
-> > > imx8m boards are failing again in master due to tee changes again and
-> > > perhaps its this series that is causing it.
-> >
-> > Thanks for reporting,
-> >
-> > >
-> > > Here's what I see with today's mater:
-> > > make imx8mm_evk_defconfig
-> > > make
-> > > ...
-> > >   BINMAN  .binman_stamp
-> > > Image 'image' is missing optional external blobs but is still functio=
-nal:
-> > > tee-
-> > > os
-> > >
-> > > binman: module 'importlib.resources' has no attribute 'files'
-> > > make: *** [Makefile:1339: .binman_stamp] Error 1
-> > >
-> > > I thought I had read something about a warning that wasn't an error
-> > > but above is clearly a build failure.
-> > >
-> > > Am I missing something here?
-> >
-> > My initial gut feeling says it could be related to this series:
-> > https://lore.kernel.org/u-boot/20250701-pkg_resoures-removal-v3-1-27018=
-8b335ae@phytec.de/
-> >
-> > Maybe the combination of the 2 series causes this. Anyway, I'll investi=
-gate
-> > and
-> > report back.
->
-> So the error you are seeing is encountered here:
-> https://github.com/u-boot/u-boot/blob/0c558bbad9e7581808b358091d1fd979f86=
-0e8ac/tools/binman/control.py#L98
->
-> This is indeed caused by the patch I linked above.
-> When writing the patch (i.e. following the migration guide) I foolishly
-> overlooked the fact that importlib.resources.files was only introduced in=
- python
-> 3.9, yet we support >=3D3.7.
->
-> I remember you use python 3.8, so that is why you see the error (and I do=
-n't).
 
-Hi Yannic,
+--nB7zsVmSSKtptOul
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I confirmed via docker containers that ubuntu-noble 24.04 (python
-3.12.3) and ubuntu-jammy 22.04.04 (python 3.10.12) build ok and that
-ubuntu-focal 20.04.6 (python 3.8.10) which I was using fails.
+On Mon, Aug 04, 2025 at 07:46:30PM -0700, alif.zakuan.yuslaimi@altera.com w=
+rote:
 
-I recall Tom saying we should aim for supporting Python 3.7+
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>=20
+> Initialize the actread variable to prevent undefined behavior
+> that can occur if the variable is used before being assigned a
+> value.
+>=20
+> This will help to prevent potential issues, especially if
+> actread is used (e.g., read, incremented, or returned) before
+> being explicitly set elsewhere in the code.
+>=20
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> ---
+>  drivers/misc/fs_loader.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+> index 66803f4b997..cc07bfa7f14 100644
+> --- a/drivers/misc/fs_loader.c
+> +++ b/drivers/misc/fs_loader.c
+> @@ -1,6 +1,7 @@
+>  // SPDX-License-Identifier: GPL-2.0
+>   /*
+>   * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
+> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+>   *
+>   */
+> =20
+> @@ -148,7 +149,7 @@ static int _request_firmware_prepare(struct udevice *=
+dev,
+>   */
+>  static int fw_get_filesystem_firmware(struct udevice *dev)
+>  {
+> -	loff_t actread;
+> +	loff_t actread =3D 0;
+>  	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
+>  	int ret;
 
->
-> I believe I need some help on finding a good solution.
-> For this diff
->
-> -    glob_list =3D pkg_resources.resource_listdir(__name__, 'etype')
-> -    glob_list =3D [fname for fname in glob_list if fname.endswith('.py')=
-]
-> +    entries =3D importlib_resources.files(__package__).joinpath('etype')
-> +    glob_list =3D [entry.name for entry in entries.iterdir()
-> +                 if entry.name.endswith('.py') and entry.is_file()]
->
-> I haven't found a good replacement that is python 3.7 compatible.
-> Any ideas?
+A one line "initialize a variable" is not sufficient for adding a
+Copyright line, please drop in v2, thanks.
 
-Sorry, I haven't embraced the snake.
+--=20
+Tom
 
-I guess I should update my build system to stop hitting this stuff :)
+--nB7zsVmSSKtptOul
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Best Regards,
+-----BEGIN PGP SIGNATURE-----
 
-Tim
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ+DRwAKCRAr4qD1Cr/k
+CrmiAQCPFnJuEOADyCBnc1eEubQliM47GZqEZrLvxDuLe0FlkQD/W1CFCDZugxvU
+3YjAquX4HjHp8pSVJpvyWgXuioqWuQ4=
+=WCu/
+-----END PGP SIGNATURE-----
+
+--nB7zsVmSSKtptOul--
