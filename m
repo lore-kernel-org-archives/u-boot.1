@@ -4,93 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BB4CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 14 Aug 2025 21:01:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC308CA0ED1
+	for <u-boot@archiver.kernel.org>; Fri, 15 Aug 2025 03:40:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A3D783A8D;
-	Thu, 14 Aug 2025 23:00:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
+	by phobos.denx.de (Postfix) with ESMTP id B6E7B83A2D;
+	Fri, 15 Aug 2025 05:40:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="WZELu7fB";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="mOnbBULr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB51183A13; Thu, 14 Aug 2025 20:07:21 +0200 (CEST)
-Received: from mail-yw1-x1162.google.com (mail-yw1-x1162.google.com
- [IPv6:2607:f8b0:4864:20::1162])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7CBC983A43; Fri, 15 Aug 2025 05:40:47 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20603.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::603])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 933418399D
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 20:07:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=broadcom.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3BAD683A28
+ for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 05:40:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=dregan@broadcom.com
-Received: by mail-yw1-x1162.google.com with SMTP id
- 00721157ae682-71d603c1006so1968087b3.1
- for <u-boot@lists.denx.de>; Thu, 14 Aug 2025 11:07:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1755194838; x=1755799638; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=gciOZC9LClHBOsWu1dBWHhjAlr6sSJyptOHdglYvScw=;
- b=WZELu7fB+aFggmAFT6X+o+G33XCEe7xBDAHAp7Pl5h59ZXgkGAd/jw7bUve6+R+x93
- xkPLpCtbzzRusKEZMPUHvYV9J5MM39VSLffq2XThoiRbgXMirv1wJ125TUcmYwnpb91l
- 72Y+GfLdBicZeIP7tkZoXMBo6zNvkP0kR9Vx4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755194838; x=1755799638;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gciOZC9LClHBOsWu1dBWHhjAlr6sSJyptOHdglYvScw=;
- b=TMSZgdLHOjuKhjPkrJ8Z4LW+n81ubOYv8cddXAEHlCAjQ/w/VOYeD9phVyWoKvOF6Q
- xLlWw+V7Aoyf/ThHZvXkBHbqeJfxl8jzgGUlU85tyHqwAXlh1U516BGVxjQAwEFFd0/t
- qUOJcn0JYS0PGiirIT5ki076QwiSagH2HnVuqklL9Pist8Y0thu9yguoOxkA0EkOFmGQ
- BSi7ClOhv8Wk/lxC3AtTC+aEJK8btAjEhlHkHrgyDviuymRdF3PW8KTrNSbbM/6i1XxQ
- 944OSBpbMFBV2AL/bmK+hggoHVufZ0TxYcRE3LqB5fWu5log5CH1DklDDsOAXqM6/MPa
- HJFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXzIaNtnzjaB7oX6xF5VW3ussZu7Oo0W2ZzLMfaAB4KYc87mXPB8Kazkjuh8gJ4ZUuh0ZT3Nkw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyAXQ5269lOC7Kk8XFfjZ+qbf/2bf2cp3cZ9Sy1Csv24tylUtb/
- EeRIRYuzfjQ3575H/ItB3e+NCkaKt45lupaAuxmLkqdGzkRL+r7o/lfU1L6NCHhtSiHGQWq1iLa
- HnO6o/6euv7ToH13uceC6VTA+J4VaD/VytQ==
-X-Gm-Gg: ASbGncvk5ydIupQfrti3/AeZu0abqzVyQNUy/Mjra9chYgUc8Jf/DNxtu2cU4mnOWX1
- UJhBKreT0K44BMmd4URvaHMheKqs2gWkUMEdL3p0xH01Q2pEiGhDdXntAZ00UzN/G4N5CrnsT2p
- N3r+UDooYFL6MCfhVwGRA8d6dHYNf38qi7rw16rL9y0Oq919MgUqlmp+iTX/6Zfu8UxkPMMkb3L
- sUsk4UOO7PjCjT6XQNlT6dW+odaMhr7i25wbEuHDP6cLDJJ4NAatMHRleHIiAj8r2fy/igiSaXD
- eHgv+8+c3xCbJMnaEkonBWdm40JCZFU4C9O3mAw53EUzB2r3X8DfnRMvQVI5M5TRrE0YCGv8NRG
- T2b0VI2xDe5ZznQ==
-X-Google-Smtp-Source: AGHT+IHDnTbSfQzkjmXxTDCmgTnAYfdFt7YGTCo8h00JVgeJpqsDEVnCn1V/+4aeN+vzw+uIXehqy1zWEzbD
-X-Received: by 2002:a05:690c:dd5:b0:719:dd9e:aea3 with SMTP id
- 00721157ae682-71d633f0eeemr28710987b3.1.1755194838349; 
- Thu, 14 Aug 2025 11:07:18 -0700 (PDT)
-Received: from bcacpedev-irv-2.lvn.broadcom.net ([192.19.161.250])
- by smtp-relay.gmail.com with ESMTPS id
- 00721157ae682-71d60d6b387sm1970937b3.5.2025.08.14.11.07.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 11:07:18 -0700 (PDT)
-X-Relaying-Domain: broadcom.com
-From: david regan <dregan@broadcom.com>
-To: dregan@broadcom.com, dregan@mail.com,
- Quentin Schulz <quentin.schulz@cherry.de>,
- William Zhang <william.zhang@broadcom.com>,
- Anand Gore <anand.gore@broadcom.com>, Tom Rini <trini@konsulko.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 4/4] cmd: nand: nand dump with ecc option
-Date: Thu, 14 Aug 2025 11:04:58 -0700
-Message-ID: <20250814180647.1805196-5-dregan@broadcom.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250814180647.1805196-1-dregan@broadcom.com>
-References: <20250814180647.1805196-1-dregan@broadcom.com>
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FOHk8zFPFgVpPa/+xPFw9sH4oJ8ZS3RAWYxWlupCAMSvbAEZ+hn5Km7z0vAd/rFdrcG9gjMglYWTJo9VQZMV44Mvo8hXTWIw7uKscF1jDmpl1TX/v4vHl8nnveAMrmoUmKLfV/nPDpNcCd+pacCwxmwvT78AoGJXRe8dGjoj1YDbZ53zQ5s5DoFnOugrO1dRmVPLjn+faSYAvwnrry3jY/zG9CvGxgQYByhv8E6xeBOxUbfhQI1jX6ihlJS4RdFStGqtDh7DHfxGB1T+QnEjm/rdVFaH2Ck+d3CTNtRMqmiwY2fps7q1bwaGVuRZkzSCUABsSyWDMBMBF0wvEYLN2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/+qD4m7JPvp3fSEY80AGzlQFpeFOY+nTQmfsrrQQWGw=;
+ b=PCSSVwsCrhj5Oq74dODYKMYf5H4fZfPs5LeW0X4PCq8FmDEsJTCUMVfzVRkgE0YEk/tknfKDTef+spHSJXonYM9b6XfA25MOILXtQOaH/2EpUnmq6rRo5gmzI3ggaDNYb+1avjYZG5OvdT44GnX+wjCkYPxn/0CBlMn1oSdrkz97CDs4sECyInY9ndK05L7sPwanqEF1jFA01LVxvTnh5HfZ/JtgU6FfaBYHbBwP6OYNCltlqM4ztiyry+OKfMT/AKdjHsy3xPWkOQhAypVjTgMFIdt+GmZm65EaR4m2w1zvbPJCP9R5zfr/NHH47I88gzytJhKOH4caI/dnJtZFlQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/+qD4m7JPvp3fSEY80AGzlQFpeFOY+nTQmfsrrQQWGw=;
+ b=mOnbBULrDdp/B7Jm0W8g2pi7RjHwTtd+r9+2UIwEogJpLs3z1p/+HhTBCasIvnfMEmWIMxtJBy37mMxGqrkinzgO4Ij0fVl0qq0D25UOPJl6KoOIOjS5ye4JJ7u8Eqdy8WDwOqda3aEqfB+yZMBsY+m2Lb/zpoIhfT+6vSq2m/oc6ad+C0hfA2u9PxHi2Ym8I6fce8XhfOdDMAsqL1PrV8LZhVu4KI8HK/TV64T/z+WzDpgHQ4XvJFsW3bKLauAC6rFuSfrffgNzCIZmLP5Cw1MAk/tSGJa0CDAvh6jmKrncQhHbMaPmSTG4C/MEvsy4hj6siKppW11S607FjY+OOQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
+ by MN6PR03MB7695.namprd03.prod.outlook.com (2603:10b6:208:4f4::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.15; Fri, 15 Aug
+ 2025 03:40:42 +0000
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::d020:3494:f031:fc29]) by PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::d020:3494:f031:fc29%3]) with mapi id 15.20.9031.014; Fri, 15 Aug 2025
+ 03:40:41 +0000
+From: alif.zakuan.yuslaimi@altera.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1] configs: agilex5: Increase watchdog timeout
+Date: Thu, 14 Aug 2025 20:40:22 -0700
+Message-Id: <20250815034022.11243-1-alif.zakuan.yuslaimi@altera.com>
+X-Mailer: git-send-email 2.35.3
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 14 Aug 2025 23:00:20 +0200
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR13CA0058.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c2::33) To PH7PR03MB7063.namprd03.prod.outlook.com
+ (2603:10b6:510:2a4::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|MN6PR03MB7695:EE_
+X-MS-Office365-Filtering-Correlation-Id: 00615111-dbf1-4b86-a72f-08dddbad8221
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Jhr9lPnJH9qAlXYy5evqBmzHWEo2HemFFsEJ8Rbq52uuobXZiHByt1A5exTP?=
+ =?us-ascii?Q?2vAbVTckdIhVrmxz1OS+HYyWyZ+kZl6Gw0oyXNMCeOmuAtP3nrFmnv+Bp5Kc?=
+ =?us-ascii?Q?wa+mMZ2Ng3xBUv484W+TRMn4GGt0rx2Mx/hVxi8g4jsDJCBpyLUpjJUPZ4eN?=
+ =?us-ascii?Q?DUOE6hBOBiSPgK66fsQvy3FbXLitramAVjQOSmpZwD0ps1KsLxJHpLjfmRF1?=
+ =?us-ascii?Q?UPviz5gzZZfOlQ5psAby7h9ZPlwxqFEzzbQBa9NZ1jsHoLg497F7znV9wqOh?=
+ =?us-ascii?Q?CNOGgM/FanhBW5J8EBHxyeVWirzIBrm8RiRivDOJQL8gu6SXxx35J+ePf6Pr?=
+ =?us-ascii?Q?3DZNdr2ywmoQK5PTDnB3v9ACFQycdlGhhrleuQSV+st/oDgBZwpUZ5ACc/1/?=
+ =?us-ascii?Q?WqdnWO/3SMexO/rLgWteORZsFvdoHMbhrBFx0qHT/vCAFXeO3iUTEoBbp8A2?=
+ =?us-ascii?Q?4chmOH+NA2sYW+pwT1SXTgJq8oGZwZeJuGh4mmE+FIq+hjphr6pOEDg5B79K?=
+ =?us-ascii?Q?HCGIpou3KUhBTvwLOttr6AiFnlMf2oqStIA+l4CAllsc3m/AL+tYgFBIws3J?=
+ =?us-ascii?Q?okeRFVJ+9WdDT0c0MmwATY7N2JAnGeqTprFoDwzBmwy2WsWL+vKZ7k0fK54x?=
+ =?us-ascii?Q?qRzXNStcwwRPftnMUsSX0hunbo2ec0191qZDennIctZhaI0Czb9ikpBWauZQ?=
+ =?us-ascii?Q?IK7Vgcr0EZn03UuIu73ryIvFULW1OG1q8cG5UK2SPjfv4clrLKV1hfhyu/dS?=
+ =?us-ascii?Q?Y4vxQjdqzzyG5+YpcRa8VJm32uRo5687oVhCsofLmuuH+dzuOkSjet9ch2gt?=
+ =?us-ascii?Q?lNOT12PRdwtq6jtx7fIbSTS11fqIK7NkxRFpqDRPcR2D583CylkiWxqV88ey?=
+ =?us-ascii?Q?K8amFz1VgXwlk40udXmX5A5QzgnsF+/8PctH/XR6A/gNcYc4xsZ4UvMUkWaK?=
+ =?us-ascii?Q?YR4EPlOimqpe7FETvTTGkHHZ7RCq7cyyuALFNWwdgcLFiNlvl/hALRb+H2O1?=
+ =?us-ascii?Q?J0oKZOhh7v2vpJRTphRDX6vlo32ygwQ4gQoDMJ/XnaqeDjEC+8lLbEBz44sN?=
+ =?us-ascii?Q?VJQbrKsfU8gWsUZnsx3sFa7eue1BKh+LKLn0NXzNv7RoOYuRmGCl1+jqF2c4?=
+ =?us-ascii?Q?SYtHgTIcYPvOsKqknUEhSPiaoU2+WI4lq1Zg761w6hDm14nRD6H5zQOWYCcv?=
+ =?us-ascii?Q?DkanDwhH4SJzVv0/aTaMRMtfUtm9CbiNffNz8Wl+Ag/1yG7Qaim/07ZjyxdK?=
+ =?us-ascii?Q?Bwv8pqTY9mTGIGZck95oDckEQR0uG7qiegG7SdFxiXIc2oJ/6JxllK7QFGi2?=
+ =?us-ascii?Q?BW7lzo+akRBz09EP864iTRl1e+Dn8eDb6GznJNN6pk/jrARWf/t+nkO90m9h?=
+ =?us-ascii?Q?wB1IRHlmUbyq2c3A0r8tQ3N1X+lhR8+WYNftSaeWKtpuKmgLeFidV2DPyI/B?=
+ =?us-ascii?Q?Nb5DUsrP1Jc=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VbcCzghInB4YAfqiRYKTeX+87kgSEiJ8buHIeS727qodVSVpfEQnlkQG9+Co?=
+ =?us-ascii?Q?sV3IFwnQpjbK6zU69UH+VvBjIA/M4PKwbtxjqv1GHUG1EFlUSSCILB6h3xK3?=
+ =?us-ascii?Q?1xszFpE02XmuEPv1KNCRzvumLdx+tHXZZ4OD9Pw7La3Wcm9QPbGVSwAwL6if?=
+ =?us-ascii?Q?2r4kTCrZE6wVP8sz65SUAlMPYNa6r37hvy07ssKOLFiFUwYBLPRFfebgde/8?=
+ =?us-ascii?Q?S/6DavRd0J9JarN37/pv+ptwL442PR9elxM152b0zfWheaI+sFsQ7TKXqqvx?=
+ =?us-ascii?Q?VsMvViudEzPubGOp/dFCgCO34qBnIcPjVdy/E65SlxOWlEI/KBjsupBZYDsE?=
+ =?us-ascii?Q?a3fG4g8kDzLpMDDXQ0D2FfwvP3lzVgqAks3n+9+kv3U4zJ2g18XFiNwhGH5l?=
+ =?us-ascii?Q?AozgtTypzv0hRsGi67S0+q/WwtMK0zBYA+0j7/NIX+e/PJONLmbp9Pilkuj2?=
+ =?us-ascii?Q?qd2xBCOPGunP8nzkrFNcHQeutPq7J0XjDRy3vWkg1TGN+4Eo/QgeimUD7bep?=
+ =?us-ascii?Q?5bfTpIymJUNgiaQsAe3GCYYogQ8sek31zXMTCF52plrqrbdqDq4DEJrpsfx7?=
+ =?us-ascii?Q?0x9YEhQGLOxSaGJ7JZ5AmyuI92XgO1MoeICZeG1gg1LiSRm4LeiKjzVynlxG?=
+ =?us-ascii?Q?Qipr+C7UQX5nhGjXZrgeed/n2K9uk+vdONS8v7KtVT+iLO1AK+dbKgadg6Vw?=
+ =?us-ascii?Q?X3HyLhbz4tmcYCK5BecZar6x3Wxb+2+vCe7E3EybIKl5x1tAoVs+HVZs0VD3?=
+ =?us-ascii?Q?K//wGNdwizQOF2zx3NZEDcTswvs0ED7MCcj0vf2V7IuSv/GWzgIVwgEXmR71?=
+ =?us-ascii?Q?0QI8KqeRjA2A6M1c0EdK8Sx542rFCMXED0aeOFwYotrG8vI8kHTYtkyugeFr?=
+ =?us-ascii?Q?uVul6w9IH4b4Y1f8wYSg0yp1867vAbWlcWFKGD9VMNne7cY0Iw0bVq0+P+T3?=
+ =?us-ascii?Q?2+pzzIMRA7gFYrJDMt74k11nhM67SEMxd9XjNUBiLjj661847cXWwqnfrqnn?=
+ =?us-ascii?Q?he4WvU1YMfE9t0UgpgElcKtGCIbNqU6xXS73l5aJqkuUglx8c1dxuzRU4M1H?=
+ =?us-ascii?Q?EcVVQDd9JUQNEgN6YQMKH9Z1fYQzs0hKvF661mM/w1czZGzFmAdDmoUWPbq+?=
+ =?us-ascii?Q?z78ikE5IYghP2ExyLj/iHhGmiHhfHQ4a4qKmsZ9YeJfByX9ekr9h7cg3u9fk?=
+ =?us-ascii?Q?zmmgLQf1Ibu401CM+cQHCrcIGcriv347WgVfBh/SWR6OIoyfSsKWuyyyk7Hh?=
+ =?us-ascii?Q?xZGCCIcwfrYUB1C4g+KIXSS2ViXxure0n3g783Ud5ZD5p2sMaFATlds0wrHk?=
+ =?us-ascii?Q?vK2a280NxYvcUPsko4DeEezlBeaOlo3bTzPux/kiPXGvZAJx3J/1gouukmY3?=
+ =?us-ascii?Q?nvCqFi9Xa3kQ0N3SrnIrCZ93wRHU6IUZSQiQibEPkH2Q0QQ61rMFtZj8PpEW?=
+ =?us-ascii?Q?uv3RVi0nZ1rIeG+v0f9kN0yDRIa6X9pylNwEcTh4BSTTkJc1H5vNPS59QHRd?=
+ =?us-ascii?Q?Mi7qRw/SVMjJFza4KvrKgyfVHqt05a+YSyHvj8RCa2sm5eduFbnWSqOW7st4?=
+ =?us-ascii?Q?6Umbdc9bxhk4buW2n/eg1yLru4fPgKZx3Y7yJTWjNhg6YLxliBZEjYXVIAXQ?=
+ =?us-ascii?Q?ag=3D=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 00615111-dbf1-4b86-a72f-08dddbad8221
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Aug 2025 03:40:41.7540 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: C2h7yIrwV1mKdh/2WHihCx4BKrOQjnSiwFC4zogJhe+PGfH9X6jcfh+29iafr2J5k0kFToaE1aK7umbzxFMedS85HNnfbe9yOeuLIARLxrY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR03MB7695
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,86 +160,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-option to show nand dump data ecc corrected as opposed to just raw
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Signed-off-by: david regan <dregan@broadcom.com>
----
- v2: no change
----
- cmd/nand.c | 25 ++++++++++++++++++-------
- 1 file changed, 18 insertions(+), 7 deletions(-)
+Linux kernel will fail to boot due to exceeding timeout trying to
+probe I3C device.
 
-diff --git a/cmd/nand.c b/cmd/nand.c
-index 832e990108c5..b5678b0a0085 100644
---- a/cmd/nand.c
-+++ b/cmd/nand.c
-@@ -160,7 +160,7 @@ free_memory:
- }
- 
- static int nand_dump(struct mtd_info *mtd, ulong off, int only_oob,
--		     int repeat)
-+		     int ecc, int repeat)
- {
- 	int i;
- 	u_char *datbuf, *oobbuf, *p;
-@@ -192,12 +192,16 @@ static int nand_dump(struct mtd_info *mtd, ulong off, int only_oob,
- 	ops.oobbuf = oobbuf;
- 	ops.len = mtd->writesize;
- 	ops.ooblen = mtd->oobsize;
--	ops.mode = MTD_OPS_RAW;
-+	if (ecc)
-+		ops.mode = MTD_OPS_PLACE_OOB;
-+	else
-+		ops.mode = MTD_OPS_RAW;
- 	i = mtd_read_oob(mtd, addr, &ops);
- 	if (i < 0) {
--		printf("Error (%d) reading page %08lx\n", i, off);
-+		printf("Error reading page at offset %08lx, %d %s\n",
-+		       off, i, i == -EUCLEAN ? "correctable" :
-+		       "uncorrectable, dumping raw data");
- 		ret = 1;
--		goto free_all;
- 	}
- 	printf("\nPage at offset %08lx dump:\n", off);
- 
-@@ -212,7 +216,6 @@ static int nand_dump(struct mtd_info *mtd, ulong off, int only_oob,
- 	p = oobbuf;
- 	print_buffer(0, p, 1, i, 8);
- 
--free_all:
- 	free(oobbuf);
- free_dat:
- 	free(datbuf);
-@@ -697,11 +700,19 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	if (strncmp(cmd, "dump", 4) == 0) {
-+		int only_oob, ecc;
-+
- 		if (argc < 3)
- 			goto usage;
- 
-+		only_oob = !strcmp(&cmd[4], ".oob") || !strcmp(&cmd[4], ".ecc.oob") ||
-+			!strcmp(&cmd[4], ".oob.ecc");
-+
-+		ecc = !strcmp(&cmd[4], ".ecc") || !strcmp(&cmd[4], ".ecc.oob") ||
-+			!strcmp(&cmd[4], ".oob.ecc");
-+
- 		off = (int)hextoul(argv[2], NULL);
--		ret = nand_dump(mtd, off, !strcmp(&cmd[4], ".oob"), repeat);
-+		ret = nand_dump(mtd, off, only_oob, ecc, repeat);
- 
- 		return ret == 0 ? 1 : 0;
- 	}
-@@ -1031,7 +1042,7 @@ U_BOOT_LONGHELP(nand,
- 	"nand erase.part [clean] partition - erase entire mtd partition'\n"
- 	"nand erase.chip [clean] - erase entire chip'\n"
- 	"nand bad - show bad blocks\n"
--	"nand dump[.oob] off - dump page\n"
-+	"nand dump[.oob][.ecc] off - dump raw (default) or ecc corrected page at offset\n"
- #ifdef CONFIG_CMD_NAND_WATCH
- 	"nand watch <off> <size> - check an area for bitflips\n"
- 	"nand watch.part <part> - check a partition for bitflips\n"
+Increasing the watchdog timeout 30 seconds will give enough time for
+Linux to probe the I3C device and will be able to boot up successfully.
+
+User is expected to fine tune the watchdog timeout for the complete
+boot in production.
+
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+---
+ configs/socfpga_agilex5_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/socfpga_agilex5_defconfig b/configs/socfpga_agilex5_defconfig
+index b373201dbaa..846c18eed27 100644
+--- a/configs/socfpga_agilex5_defconfig
++++ b/configs/socfpga_agilex5_defconfig
+@@ -15,6 +15,7 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x9ff00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x100000
+ CONFIG_SYS_LOAD_ADDR=0x82000000
++CONFIG_WATCHDOG_TIMEOUT_MSECS=30000
+ CONFIG_TARGET_SOCFPGA_AGILEX5_SOCDK=y
+ CONFIG_IDENT_STRING="socfpga_agilex5"
+ CONFIG_SPL_FS_FAT=y
 -- 
-2.43.5
+2.35.3
 
