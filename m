@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D4ECA0EE4
-	for <u-boot@archiver.kernel.org>; Fri, 15 Aug 2025 19:11:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B82D1CA0EE4
+	for <u-boot@archiver.kernel.org>; Fri, 15 Aug 2025 20:17:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF1DA83AEC;
-	Fri, 15 Aug 2025 21:11:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF66583AEC;
+	Fri, 15 Aug 2025 22:17:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EGyT4G+B";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="noxHbLFg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B77683AEA; Fri, 15 Aug 2025 21:11:04 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 0FF7483AFD; Fri, 15 Aug 2025 22:17:24 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0728C83B03
- for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 21:11:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D58C083AEA
+ for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 22:17:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-61bd4ff762eso1229321eaf.3
- for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 12:11:01 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3e57008acd8so20192665ab.3
+ for <u-boot@lists.denx.de>; Fri, 15 Aug 2025 13:17:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755285061; x=1755889861; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755289040; x=1755893840; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P5tv3cczvsYB9s9omeFh67piDWw4rx5WWWEFzHJ/rhE=;
- b=EGyT4G+B41y/XNqkG5Bo9Dn9N5xgv+eau4uRNMgREfKJZfGmiJ/vuiYqoSoXFmGQQO
- cvQ+8rmYf2O3GskzFTcAH0VDFAupnfBBNK3YAmGe7a7KC0dwMBQrzT+Yf0plXdjUhi9Y
- CwDxQe6iIf65Hik8gq2TGpBx2mg3sOpS4JfPo=
+ bh=WBfZal2AaOFOsNC69qDc8iBvHWAS2dzAlW9VTQtfS74=;
+ b=noxHbLFgR6Qh77GwgcvYvrq7gG9GUurwRj+wLdAQP8BhudZE5PXFhU8YivB+bZn3HK
+ fWhe3XEtc5tYjHF75NN7aHuWd7dFeC3J0oKY0ADb3XXnwmy0gADy97EmXQaP4tjwMTjx
+ dUEn2amPY7/NGFiT6xXPnxsXjuBxDKClGrgzA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755285061; x=1755889861;
+ d=1e100.net; s=20230601; t=1755289040; x=1755893840;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P5tv3cczvsYB9s9omeFh67piDWw4rx5WWWEFzHJ/rhE=;
- b=Mnasq14tBtL7D4WOH7Nt5OhpXZoDUPqMEeqIl37cCUMEfO2XHUdWTq6Ju6iNtimDj6
- EBRID+VqqznAQBch8m53hoaZPsGc5GwApe85sPUoO21f14s3Pe/dGjCIq5QFq3/sCp5w
- m7DiPtHi0vyzGUL3ZO2d/nYfPIu2mEURqUwLL9lTbumtOAn+FmWTeT529jsPioaQbXFD
- cgeCq3FkKTdtlnzg/Y5U9tKH8Z0eRhb9M/HhLdY+hMstYi9WZsVvhZTAqqkqNFg0tePw
- YWe/jqRfT5nypysFO5ZFV4C6drwXxR3HnA4HkHYbtLCGh6oE6IfJf96inAbxyRZcp8bB
- 8nvA==
+ bh=WBfZal2AaOFOsNC69qDc8iBvHWAS2dzAlW9VTQtfS74=;
+ b=WqsQaqrYeYC32HRkL4Uxb9jR5L6pnAB+mSoMXQUZOU6LHq+EzhVRxX0vFKgyUUpmvt
+ qts8cH2czfnskNvwnGtA4fXS5+2ZhcxtQ0co+vkukFaEnSW9ADc/KTsmh6oLC63d/YkH
+ +Ye7TLQne2QqK9eL4d8JJX2Wv781Pw7mmHNf/0q/cF+xX3ukNZC1xCkyHHBJQRS1oH8Q
+ IYfzLStviNWAgvkwkqrG3gYjMeziKKeNf47pxwQdylNUbKGjzeLNctcSEwl+SywbL7qT
+ bUyYL209UxWdIQ7mPeuv5pCI725yhqLW8ChrFOvIGE+bz0uEfeIKn/AsYeYPEq7Q8Yfh
+ wbrA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWY2vYIIJyxKasufzSKlIQuAvLzFafxJInM6QQ74CM6IQwVlZiz29aRegNaOnF7B31w0jzSitY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5l3A4m5LXYJ4rbdAHNEqOCa2rdmWY1lSACLsgAt5bNtQlLtpV
- rMhO0o3wSb7Zc0oKVTNtY7R2fDubiFwHZ/GioxXIYg2GLq+lODh0FN5J3UYr11Dc7dU=
-X-Gm-Gg: ASbGncvsdHsq/BTw/afM3JULeNmOsCGibnlNl+KHMJSQEYJnUYLm9W2Mg5ALiDp3Tu3
- QzVG8i+xugP4sptLJAB0yErTDLudE5WVgUmfidCzUOX21gMvrjuD61XIj0X0jPvjks2uG1dX8ly
- yUM/XyV/UbXY3LintIC0VWsj832WT/H3H/7x/CUK0uufFteOqSzv139SIVuwcTgJuMFm5GvdkH2
- XBSmnsr3LYCvaEfcdOaR5zeRiQ4l6rMbW9nBdVUg/kbRdapmu53JWNQ3/rkk9hPwCqHh82fsP3d
- Jtyociym10JFmQVzbM94borPRjfm1Df897cdzAnk6c2KyczZUbE7AVKfMbi1mJ5aMaqIzTsgruf
- fzW+9ZbjnMf2pyH41f+wH2Z4Ae4NtTgWZjI3HCbfeCn07TYgwZxyEMt5ere4/GrQQPDY=
-X-Google-Smtp-Source: AGHT+IER6hCEMebdwp1GE+B+aF1AWe5pGBP9RYNvxMgisHSrskYXpoEnA2idViCIsInV8W7LPmcf/w==
-X-Received: by 2002:a05:6870:de0d:b0:2bc:7811:5bb8 with SMTP id
- 586e51a60fabf-310aac91337mr1910398fac.18.1755285060698; 
- Fri, 15 Aug 2025 12:11:00 -0700 (PDT)
+ AJvYcCWT5ZDen4+2814q1i6KnEgSVqvsvhBGCSLFKVPph/0HMY4NMkO1bctUluDm7k0P4vQfZgP1hTw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtwrNoIBR9I+xK30+/kP2pFZFbYCU66UcPbBWrN4WNMKKQfgI0
+ 9Tq/+jUYrZJp0A0o5c0OxmgxTblfrgwufBGd7gCf9vdxzrp2n34P34oqzxpHuXrYqr9fBzlq/f+
+ dTU/1IQs=
+X-Gm-Gg: ASbGncuQ7m38vBG80/pMrhl3yrnxRoQEgnsX6NYpLIFWbBM5uIsSoB06rmDBDR7nK8k
+ VFeJJDhghFe6zKn59ODMzT4HvcNZA/86o/MW4g6nm+cdEkRwSDqZI9hCs41OMEXpxW6m8db5HCN
+ Iv75ChKVo160kd0jH4M40ZyembnPN3vCz7xf5/FtYIYNQpG7t4lUakv8SLVlCSX/IkKBorCyU29
+ FJogJaJ2Kh0+SgQAsB3TMRCmkWXLlVLuIIyo9JMj5XCxsJlWDdVJkiWkuF+9bRCry70OHQSvoAT
+ LTN+Zb5+Xdf+0HdqDdluDl7u2YaXt4yZHT5j7gjBWheLRxRpLeeDo5LEMBOP3XEcwYBC3hse+jF
+ wucZ8us3ofKkA1NHTj2ncWCo93ypYMF6O7y/5ADI7v4DKHqwhMWU0fR7C
+X-Google-Smtp-Source: AGHT+IEmf9dbBm1CDh9GV7NlheXENL0MtPBVZcVeLfcOZvggaAeW37zyqk53GrRraTPJL62yV+wV6w==
+X-Received: by 2002:a05:6e02:148b:b0:3e5:4351:ad0a with SMTP id
+ e9e14a558f8ab-3e57e8504a8mr57907555ab.7.1755289040467; 
+ Fri, 15 Aug 2025 13:17:20 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50c947b4150sm579830173.29.2025.08.15.12.10.59
+ 8926c6da1cb9f-50c947b3666sm604287173.24.2025.08.15.13.17.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Aug 2025 12:10:59 -0700 (PDT)
-Date: Fri, 15 Aug 2025 13:10:57 -0600
+ Fri, 15 Aug 2025 13:17:19 -0700 (PDT)
+Date: Fri, 15 Aug 2025 14:17:17 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de,
- Tien Fong Chee <tien.fong.chee@altera.com>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Subject: Re: [PATCH v1] misc: fs_loader: Initialize actread variable
-Message-ID: <20250815191057.GU124814@bill-the-cat>
-References: <20250805024630.24558-1-alif.zakuan.yuslaimi@altera.com>
- <20250815185818.GA55961@bill-the-cat>
- <b4df190a-84b7-4c4f-aecf-116b9a1f4899@mailbox.org>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] pci: apple: i needs to be initialised and used
+Message-ID: <20250815201717.GA66660@bill-the-cat>
+References: <20250806-pcie_apple-v1-1-1a99f83d3cc5@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Z1lRMc6GOjgSxOly"
+ protocol="application/pgp-signature"; boundary="DGp0oT23FzNYgH/S"
 Content-Disposition: inline
-In-Reply-To: <b4df190a-84b7-4c4f-aecf-116b9a1f4899@mailbox.org>
+In-Reply-To: <20250806-pcie_apple-v1-1-1a99f83d3cc5@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,78 +99,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Z1lRMc6GOjgSxOly
+--DGp0oT23FzNYgH/S
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 15, 2025 at 09:07:17PM +0200, Marek Vasut wrote:
-> On 8/15/25 8:58 PM, Tom Rini wrote:
-> > On Mon, Aug 04, 2025 at 07:46:30PM -0700, alif.zakuan.yuslaimi@altera.c=
-om wrote:
-> >=20
-> > > From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> > >=20
-> > > Initialize the actread variable to prevent undefined behavior
-> > > that can occur if the variable is used before being assigned a
-> > > value.
-> > >=20
-> > > This will help to prevent potential issues, especially if
-> > > actread is used (e.g., read, incremented, or returned) before
-> > > being explicitly set elsewhere in the code.
-> > >=20
-> > > Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> > > ---
-> > >   drivers/misc/fs_loader.c | 3 ++-
-> > >   1 file changed, 2 insertions(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
-> > > index 66803f4b997..cc07bfa7f14 100644
-> > > --- a/drivers/misc/fs_loader.c
-> > > +++ b/drivers/misc/fs_loader.c
-> > > @@ -1,6 +1,7 @@
-> > >   // SPDX-License-Identifier: GPL-2.0
-> > >    /*
-> > >    * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
-> > > + * Copyright (C) 2025 Altera Corporation <www.altera.com>
-> > >    *
-> > >    */
-> > > @@ -148,7 +149,7 @@ static int _request_firmware_prepare(struct udevi=
-ce *dev,
-> > >    */
-> > >   static int fw_get_filesystem_firmware(struct udevice *dev)
-> > >   {
-> > > -	loff_t actread;
-> > > +	loff_t actread =3D 0;
-> > >   	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
-> > >   	int ret;
-> >=20
-> > A one line "initialize a variable" is not sufficient for adding a
-> > Copyright line, please drop in v2, thanks.
-> Technically they already have a copyright line there, they only updated t=
-he
-> year. This was probably written when altera was intel PSG, now altera is
-> altera again, so there are two copyright lines, but it is the same group =
-of
-> people.
+On Wed, Aug 06, 2025 at 12:30:00PM +0100, Andrew Goodbody wrote:
+> In apple_pcie_probe the variable 'i' is declared and then its value
+> printed on an error but 'i' is not initialised nor is it made use of.
+> Add an initial value for 'i' and have it incremented in the for loop.
+>=20
+> This issue was found by Smatch.
+>=20
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  drivers/pci/pcie_apple.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/pci/pcie_apple.c b/drivers/pci/pcie_apple.c
+> index 6a8e715d4b6..216b6512af1 100644
+> --- a/drivers/pci/pcie_apple.c
+> +++ b/drivers/pci/pcie_apple.c
+> @@ -335,7 +335,7 @@ static int apple_pcie_probe(struct udevice *dev)
+>  	struct apple_pcie_priv *pcie =3D dev_get_priv(dev);
+>  	fdt_addr_t addr;
+>  	ofnode of_port;
+> -	int i, ret;
+> +	int i =3D 0, ret;
+> =20
+>  	pcie->hw =3D (struct reg_info *)dev_get_driver_data(dev);
+> =20
+> @@ -353,7 +353,7 @@ static int apple_pcie_probe(struct udevice *dev)
+>  	INIT_LIST_HEAD(&pcie->ports);
+> =20
+>  	for (of_port =3D ofnode_first_subnode(dev_ofnode(dev));
+> -	     ofnode_valid(of_port);
+> +	     ofnode_valid(of_port), i++;
+>  	     of_port =3D ofnode_next_subnode(of_port)) {
+>  		if (!ofnode_is_enabled(of_port))
+>  			continue;
 
-It's been a while since I waded in to discussion about copyright lines
-in code, but I seem to recall that a one line change of this nature is
-also not enough for extending a year on an existing claim. Something
-about substantial work needing to be done.
+I don't think this is right because with this applied:
+            apple_m1       : all -1425 rodata -101 text -1324
+               u-boot: add: 0/-3, grow: 0/-1 bytes: 0/-1324 (-1324)
+                 function                                   old     new   d=
+elta
+                 gpio_request_by_name_nodev                  12       -    =
+ -12
+                 devfdt_get_addr_name                        80       -    =
+ -80
+                 _gpio_request_by_name_nodev                156       -    =
+-156
+                 apple_pcie_probe                          1204     128   -=
+1076
+
+So the probe becomes an almost nothing func (that I assume returns
+early) and we can discard some other functions.
 
 --=20
 Tom
 
---Z1lRMc6GOjgSxOly
+--DGp0oT23FzNYgH/S
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ+GPQAKCRAr4qD1Cr/k
-CifpAP9WwFFu0fd7NXBQlBIbYgBqEX1zISI82e1Gqa4hmlH8VgEAs5yj75RCKkSa
-l8AusXP5VaBYOe8lMrEUay0P226/yAo=
-=f7Es
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaJ+VyQAKCRAr4qD1Cr/k
+CvZNAP42Vf58kpS57bulzMp4h2qrWWysLX217mNxRqTvc9Hv3AEA63XFosOsJder
+r6q1LbBVxjR2QYCYzkAgZJhW9p5c/gY=
+=Atwg
 -----END PGP SIGNATURE-----
 
---Z1lRMc6GOjgSxOly--
+--DGp0oT23FzNYgH/S--
