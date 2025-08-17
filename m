@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23D7CA0EDC
-	for <u-boot@archiver.kernel.org>; Sun, 17 Aug 2025 15:25:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF87ECA0EE4
+	for <u-boot@archiver.kernel.org>; Sun, 17 Aug 2025 15:25:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46F1783B0E;
+	by phobos.denx.de (Postfix) with ESMTP id 9128783B24;
 	Sun, 17 Aug 2025 17:24:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KDE7blhT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nTKM5ETx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DAD783B21; Sun, 17 Aug 2025 17:24:54 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 8706F83B22; Sun, 17 Aug 2025 17:24:55 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FB9883ACE
- for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 17:24:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71C2082B07
+ for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 17:24:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-30ccec50c0aso2700112fac.3
- for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 08:24:52 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-30ccebab736so2987637fac.3
+ for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 08:24:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755444291; x=1756049091; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755444292; x=1756049092; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1t+EuW0xhYHzdDDjtiLA/oIGF0XFW7MAGWqK1Gs1A4M=;
- b=KDE7blhTyop2dkx6ksKvByIb47rlvlb1zu7IGNInO/KOw/iRI9ZEsh9jG6LkX8tNjt
- +Hzoz+4Ie4eLTrmuhiw0Fen7euivEs/0fs8R8ZsLKyJjgrtg7UcQK8LdeaQo7SqHQspK
- JLD5j7h8/+BgmQBN8De8NfZYBdVmW3bAe3yQU=
+ bh=w3+SLya1/wiBq0mBhkunCsAvhENTsRV/FYuMJGnW+0c=;
+ b=nTKM5ETx0TJBzNSYQuWwC+r1D+r87mq7zqxapj0x90GlBI+UhetAxfAA7OziEDQTxE
+ 3eZanm/tlt06KF2+Lv//15smISapNhn4M9k0VJI5U426tM8VtY78GIrlvOC087BfYA0x
+ AHo26y5q5BabpMZHPlF5xEwW4yuHSYNntZXw4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755444291; x=1756049091;
+ d=1e100.net; s=20230601; t=1755444292; x=1756049092;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1t+EuW0xhYHzdDDjtiLA/oIGF0XFW7MAGWqK1Gs1A4M=;
- b=ASF5ocP3xV2bs1ywzvLoLhvMGeVM4yapVsz9TswKOEdS92mtNf5qq5PI/z6lKdPyR1
- 07bFAwZkobNBlOP/PRj0X35Os3kZx2oZYAcUqYPTOw83ghO/3dEKJouGMO6uHiw28Ur3
- GonlJ9AIjyDcAzVyZjq46rqWme4T2shG7tGx5oDvUbzf33tKk6rcC0aHFIUDQxNpPuOn
- ynEhYTZZ0zzcADToinhAnVPk6i0xBtXgl4yi/RZ4ik3SOSYBBYKIH9x/laGCR5gij8Uj
- Gtv6sh7UwiBV3FoJpACfoXubEqlEYoGCFxXd1eDTvHPKMUMsi1nkj5IZ38jxhvpRtXbn
- Z6+A==
-X-Gm-Message-State: AOJu0Yy/P2utJwSKazd8yEbSxZ4bUYob4xvDnzbmieS4cnUK+ymGm992
- 8lrEqcOV4nVSG4go033sPNCLb7sFGUdxVY7nNoenPuF0MOeRHlmZ/BlnKPmh2CnYYti6Z8SqNne
- NCf0d/Bs=
-X-Gm-Gg: ASbGncu+QL74099XYVF7yrBB79P1Kee3CPQhk+JocPdiWBVqrduKWR28Aqb6xSfC9vS
- 8fCz+8QRtaF55LN747C/LjSeL0ltPikJ/KyG+W3iizFfzVJXtCZPg+mMMyZXDwkfRgMLb3onMNG
- GawG889575hVL7EaYYe2i8JKHq2h0+978dDOM3lSOS8P62RD9vQSawB10xeII8jA1Y0I3MtZ0sK
- gIuazFjj3csXOKdsf7K7Wv/gKsWuFJ0i3lib6vBlDXEl2e18QByDTEyAROMjN5TX8+/XZPmTHdF
- HNHVOXzPzbrFcPdIwJZaJ4eK3dnD8Zr1u08yj5o8gjrM4EysN3hn0X0eMbcnCZ6pxirfidWt+a4
- ymb7tfudL4Vgn1JahlF9QEDLspj7lL1f1MRLyUeGWQPvASH9WjybFuEo=
-X-Google-Smtp-Source: AGHT+IH9OJL8GdT666eq53kjM2gc/LZOiX4/sUKCRGYur9p2zA7LeogEm6b8bVz2HhFeswLn7zlYmg==
-X-Received: by 2002:a05:6871:7b07:b0:301:eb97:1f7f with SMTP id
- 586e51a60fabf-310aacb473dmr4326687fac.3.1755444291177; 
- Sun, 17 Aug 2025 08:24:51 -0700 (PDT)
+ bh=w3+SLya1/wiBq0mBhkunCsAvhENTsRV/FYuMJGnW+0c=;
+ b=Mg13OVXIUPN4DHJUokawdKah0/r6Pj9CuOdTV7BVrAyitXZ2CEPh1zTvfBmna9nS0a
+ J+KcuuqrOVN14PDcCHM1AOvLKycgRMX5RPqRyMWwJ5T3dV7mMnl0XoEiH8VZ/zFtPK7P
+ 83gZJF3EozwtacmNEATRmoZNG5ZliUbGLiwwmlSJrQPcrrVHenYvfgogRaiRr1p18pM8
+ dRYHa8U1eY6Ac/Xr6Qqcb60hlmTeKlZNYYcp6kKtOgqZ28PxQ4k51J/IQBhSnWzpWeCV
+ nIs3QxvFumIm7L3qWIIIV0x7pYGU0nkYIyQfxhh86IKoMU4QWH9skBAhFNTKNiJNAAUe
+ yYOg==
+X-Gm-Message-State: AOJu0Yw1+flMruYDOcTo/UNgrexP+sqpx/3j3J6Unkq0LqebqaU0BZvV
+ uAIa3e6GibRLtNL0nMLj2CK2UitF/R0yzj2SJUti7uXezYjIW5GRPjKE1+PfQms3dKTrzblD8wf
+ IY/xf3ck=
+X-Gm-Gg: ASbGncu6/GFD6H7/A8j/CdSYPXX3l6y00O+jXvsl804VTtNBThMj5n75x1Ct0ZR7rGj
+ UjFWsx+7XN9A1K137AInh80P77PbfFOZkOZp9Ocols/mmNr6fD/o9FvUsSGGIrucWY+cmvgEv0W
+ +3b+7OZ7YUWmCF+C5ia3hvshWUvdIjGBvWEsPSec1ezDLX5utkLJLOSS7F1pasGSPwwV6RMwKCe
+ JgIOlNfKQg57E7F/BjYjHtbjH+JJWfDw7CUVpL42DcFKNrM8P8zo2v1l2iQPQOUhEgqARm3aEcM
+ npdnVDH7heyd7+7GEnIYUCPKzKAE+v8RC8p7a3fZlDHSUsiKhQ2uY7vBYzKWz71XCZbdbwD1bMb
+ h01yE5TURcRyXfXB4RWPNb3hG6ngozQnfYbF6O5pUaYTuYN1ZiZiBS0w=
+X-Google-Smtp-Source: AGHT+IFron/YhO/DovOfleqAtIWv04j6Xev3SrD2ycKh7e+zg4ESI7GSIrEnXM66pNAwuSLBKNn1nQ==
+X-Received: by 2002:a05:6870:d207:b0:30b:66b0:becd with SMTP id
+ 586e51a60fabf-310be68e467mr3451436fac.27.1755444292228; 
+ Sun, 17 Aug 2025 08:24:52 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-310ab878a4esm1998472fac.3.2025.08.17.08.24.50
+ 586e51a60fabf-310ab878a4esm1998472fac.3.2025.08.17.08.24.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Aug 2025 08:24:50 -0700 (PDT)
+ Sun, 17 Aug 2025 08:24:51 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250806-keystone-usb-phy-v1-1-eb7d42dd6b6f@linaro.org>
-References: <20250806-keystone-usb-phy-v1-1-eb7d42dd6b6f@linaro.org>
-Subject: Re: [PATCH] phy: keystone-usb: Do not negate return code
-Message-Id: <175544429002.372553.2139338338590851408.b4-ty@konsulko.com>
-Date: Sun, 17 Aug 2025 09:24:50 -0600
+In-Reply-To: <20250806-phy_ti_j721e_wiz-v1-1-9b6649dda32a@linaro.org>
+References: <20250806-phy_ti_j721e_wiz-v1-1-9b6649dda32a@linaro.org>
+Subject: Re: [PATCH] phy: ti: j721e-wiz: Set error code before goto
+Message-Id: <175544429133.372553.2707691454201890902.b4-ty@konsulko.com>
+Date: Sun, 17 Aug 2025 09:24:51 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,19 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 06 Aug 2025 16:47:46 +0100, Andrew Goodbody wrote:
+On Wed, 06 Aug 2025 18:03:26 +0100, Andrew Goodbody wrote:
 
-> In keystone_usb_init the return code from psc_enable_module should be
-> returned as is rather than being negated.
+> In j721e_wiz_probe the test for too many lanes jumps to the error exit
+> path without assigning an error code which could lead to calling code
+> silently ignoring the failure. Set the error code.
 > 
 > This issue was found by Smatch.
 > 
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] phy: keystone-usb: Do not negate return code
-      commit: 26d9bd1ccd6b344d1cc9ddb3d50981b106fed3b8
+[1/1] phy: ti: j721e-wiz: Set error code before goto
+      commit: fc96c1de5b719561db15259009a9ef22e671ee3d
 -- 
 Tom
 
