@@ -4,78 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E06CA0EE4
-	for <u-boot@archiver.kernel.org>; Sun, 17 Aug 2025 12:27:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 732DECA0EE4
+	for <u-boot@archiver.kernel.org>; Sun, 17 Aug 2025 14:30:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7168C83845;
-	Sun, 17 Aug 2025 14:27:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7957883935;
+	Sun, 17 Aug 2025 16:30:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qsQtlQ6q";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="opMVPepz";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jIXdazNh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F286838C5; Sun, 17 Aug 2025 14:27:08 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 5124F83939; Sun, 17 Aug 2025 16:30:56 +0200 (CEST)
+Received: from mail-m4921.qiye.163.com (mail-m4921.qiye.163.com [45.254.49.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC7783844
- for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 14:27:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E65083824
+ for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 16:30:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4c4Zpy0rBsz9scL;
- Sun, 17 Aug 2025 14:27:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755433626;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7ZUkoSk+57sxvxsrnFXNMdogti+znJHPM+3UXVW4cuc=;
- b=qsQtlQ6qbjn6aOWFLYZAc/JWJmyaINm4UDpS40Fvqjh6zS9TNXWQ3OHILeyNAlBHBJfs2E
- zU8/iMStBvj1nBrid92P9YZZkVljYvkpHbFeKF3JvHalO6lqUoqU27LG/cY9BPMsMmBhYp
- tdjFvBL2R3cB7su6uKwDKel1HRfHpU40CZkNDMdZnQB3rwAegqO4rWyKCAvxCkZI/69Q43
- 1lzuzYIMsyqD3bWDRtYEO9dmhUiRxkrT7ZuU7Deto5YDVHEKcICzDVyHKvNBVdkwTC0ski
- xSAIQh1vtc77UFoHQ6Lo++tZFqzcillsXQd/bJ/lQvri5wvCSM+H26ujoxytsw==
-Message-ID: <ac2915fd-a91e-4b2c-a733-ee45e3f4f58a@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755433624;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7ZUkoSk+57sxvxsrnFXNMdogti+znJHPM+3UXVW4cuc=;
- b=opMVPepz7OtUhu1KjMB6/xUwOuzZJKvEVbYpZm12jOTFWWgaxgfiOkRpEb9pxVBXc2Whv9
- POoi8fUwjxtnRihyrGB2jfoOTvNQmsr+3RC9FJn3kdBEHK09KZWKWajEOTMjGRcTRr+RsV
- iUyUPfmLuR5qNBotBROWopzJ8HMdf+AX6RAQOap1VG8h6k4LU945W48tpLUi/KxPBLyjoB
- OJtuJb4pCp6quBKpUFptvkoZ8yd4bC2w5FzlBG6Ol4c0idUnmYTuk6SXyEu09USwbYETjO
- LDtVBx7safa7C6xFKIU70QIlilZUG605J0CZ1xqeIPqazzEyD94zD3GGNgykxQ==
-Date: Sun, 17 Aug 2025 14:27:00 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.1.64] (unknown [121.204.18.212])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 1fa11ec6e;
+ Sun, 17 Aug 2025 22:30:46 +0800 (GMT+08:00)
+Message-ID: <6af1a69a-8c00-44c3-85c9-e7a3771b63c5@rock-chips.com>
+Date: Sun, 17 Aug 2025 22:30:46 +0800
 MIME-Version: 1.0
-Subject: Re: [U-Boot, v5, 1/1] misc: fs_loader: Add
- request_firmware_into_buf_via_script() for flexible firmware loading via
- U-Boot script
-To: "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de,
- marek.vasut+renesas@mailbox.org, tien.fong.chee@altera.com,
- trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, seanga2@gmail.com,
- daniel@makrotopia.org
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de
-References: <20250814151253.11053-1-lucienzx159@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] rockchip: Add initial RK3582 support
+To: Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman
+ <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20250810222644.4095072-1-jonas@kwiboo.se>
+ <20250810222644.4095072-2-jonas@kwiboo.se>
+ <1b1ad33a-3004-480d-9d32-3ea05e7eaf63@cherry.de>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250814151253.11053-1-lucienzx159@gmail.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <1b1ad33a-3004-480d-9d32-3ea05e7eaf63@cherry.de>
+X-HM-Tid: 0a98b870a58503afkunma2cd470fc33235
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTB4aVh9KTRlPTR5JTxodGVYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpDVUlKSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0
+ tVSkJLS1kG
+DKIM-Signature: a=rsa-sha256;
+ b=jIXdazNh09f9QKhdcKJLjsToVy/anVSTEHeEt6DF9i7lDWk73HVkupEliuozwDJFuVLuuWkU8lPSaxjNeOApJz0ORD+L50cgEGxA2AGSZl3zwqhLudtfA1CVidclqevWhNcxT6ARgQ/p+l2FgykpMhus7JS28iEM2gP5eKS2VVI=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=NS1zml+p61r5fy0xy0Yb8Oi0OniYJqg6R0b9nFwcjpQ=;
+ h=date:mime-version:subject:message-id:from;
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: kg4dybmsbdnxqj9ei4mefoyxgcnidxw7
-X-MBO-RS-ID: 5f92670f2cc052befa0
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,18 +73,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/14/25 5:12 PM, Lucien.Jheng wrote:
+Hi Quentin, Jonas,
 
-Hi,
 
-> +	if (size > max_size) {
-> +		log_err("Loaded firmware size 0x%lx exceeded maximum allowed size 0x%lx.\n",
-> +			size, max_size);
-> +		return -E2BIG;
-> +	}
-> +
-> +	memcpy(*buf, (void *)addr, min(size, max_size));
-Do you still need the min() function ^ here , now that size is surely <= 
-max_size ?
+On 2025/8/11 23:44, Quentin Schulz wrote:
+> Hi Jonas,
+>
+> On 8/11/25 12:26 AM, Jonas Karlman wrote:
+>> The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
+>> What blocks are disabled/non-working is indicated by ip-state in OTP.
+>>
+>> This add initial support for RK3582 by using ft_system_setup() to mark
+>> any cpu and/or vdec/venc node with status=fail as indicated by ip-state.
+>>
+>> This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
+>> cores and one vdec/venc core is always failed/disabled.
+>>
+>> Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
+>> the required DT fixups for RK3582 board variants.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> Changes in v3:
+>> - Apply same policy for RK3582/RK3583 to match vendor U-Boot
+>>    linux-6.1-stan-rkr6 tag, allow use of the GPU and one vdec core.
+>
+> Isn't the GPU supposed to be possibly non-fonctional on RK3582/RK3583? 
+> If we don't disable it in the DT, how will the system actually behave?
+>
+> @Kever may have more official info on that?
 
-Besides that, I think the patch is pretty much ready.
+RK3582 and RK3583 is different on GPU,  RK3582 do not have GPU, while 
+RK3583 has limited GPU.
+
+Did you see any RK3583 device on the market, it should only available in 
+limited device instead of public, so maybe we can support rk3582 first 
+due to
+
+we have a ROCK 5C Lite with this chipset.
+
+Thanks,
+
+- Kever
+
+>
+> See remarks on v2 otherwise, most of them still apply.
+>
+>> - Update rkvdec node name to match latest mainling Linux DT patches.
+>
+> Should we rather wait for the patches to be actually merged before 
+> trying to patch the device tree nodes that do not exist yet?
+>
+> Cheers,
+> Quentin 
