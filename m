@@ -4,78 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F844CA0EDC
-	for <u-boot@archiver.kernel.org>; Sun, 17 Aug 2025 23:00:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F74BCA0EDC
+	for <u-boot@archiver.kernel.org>; Sun, 17 Aug 2025 23:09:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A06AC8319C;
-	Mon, 18 Aug 2025 01:00:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D85FE831E4;
+	Mon, 18 Aug 2025 01:09:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="R9MeqeTB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VLUGCkd3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mq1doYPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76FE2831B4; Mon, 18 Aug 2025 01:00:25 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C907283939; Sun, 17 Aug 2025 16:19:18 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4C7283164
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 01:00:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF3983824
+ for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 16:19:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4c4rsd3623z9tQQ;
- Mon, 18 Aug 2025 01:00:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755471621;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Bw2c4SSecIJyayxz4gOhbs6JHI7znoDWVb4q9H0VoKg=;
- b=R9MeqeTBpafpOrT0uZ0YthQdWDo0as+RslCr9Q8C9fnXarDUM7QS5vkaapn4AIzEGfvnHJ
- TO6dZ2MJx6ASMm7ucHs8rxV8fCAmdYj+M4AhbjHPVSO7nzj+fGV8LjNI4PNSsZ1RdXgOco
- TiQaY484ENYNEL3FSrtz5Ii+BV5bnubsV4K10yN14e6qMJsAWl7t1N5WqnordXDeaeyAKl
- zEXUk+A1govm/gn/8ZzvT4YaHmfSJz/5vCiGjay40x93Qx1Vitvaey/XpCoMLOZuN44MfR
- 18qyy9/ACAuXizvV0HcNLSRSTxcrFPSmRHbyAGngUj2AacvhV6zevWjmeJAMDA==
-Message-ID: <5cb388f9-d488-4091-9556-c0063f637aed@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755471619;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Bw2c4SSecIJyayxz4gOhbs6JHI7znoDWVb4q9H0VoKg=;
- b=VLUGCkd3IGfshnNj/UP1QhVWgjJtgbSFM8Cj229F0ch8l/4Ng7cUgK+HkJWlaAJv/GUMUI
- /vKtqnvXkEcU7Ixrtsm+0dIoCvsqGJJgvYQL83sn6P1JVvI8SsvdWrjY6pL8/om6kzw5EI
- rz42fJcHXxtVV22yUe7M4MlWUwTcBWi0yz8SgSpRHxSEjj3zTbw1tHJkDuXfSD3nolnflq
- b1PQ5bQwdTg9JWXlTs3BMTxD8BCKqsl6oFsaW2LFhQSQdBNSVSuPCcO58MXXVb0rcq0iXe
- bGC40rPWuomuS7CVe/HKs8fgynlEn0Yw1tWaNZqOgdzOH1l/c3VDggktxOcUAw==
-Date: Mon, 18 Aug 2025 01:00:16 +0200
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-24457fe9704so24233175ad.0
+ for <u-boot@lists.denx.de>; Sun, 17 Aug 2025 07:19:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755440355; x=1756045155; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=EGb57e+5BH/BefwwFswqkulrFGXASJ+uAgOaVP9ccLM=;
+ b=mq1doYPmVb9v6to6Pk1N9FsONf2KNvDJtjUi+JdhsqpjqU4qL/hkapJlLB2CaxB1X8
+ LQWoCiPL5k3wkmH+PcI/7waU7gSm/X1UdsxVnhvZ/Ntr6x4+uo0CrKh8V26OJgfMRDcy
+ aatBF/Dz1aA/IGkdV8yrBR4nP2aFtVdguE4ETUGUPpekfJDRLs6gRB224ybb6gBrYwfo
+ 9Wsei3jXwnbD9IDnhcck8It4TkclhP8A0SkufDRc2g1kSHQ0L6qQ7uT17k3UpjbMaMaw
+ TmU/obTY0VCfTsrSLxWKu/Bh524vxRdM423IP/b5S6FJ/9TM6SB3OvMCnStBrz6qK3Gp
+ Xyow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755440355; x=1756045155;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=EGb57e+5BH/BefwwFswqkulrFGXASJ+uAgOaVP9ccLM=;
+ b=PMd97+wcTwWXRU99rgVeJl8GrtS/rUiMxGczMKJy8gPhcKDN3mpbNF/MGEUmeLiqUE
+ Sis8AMZLE5+b06PIqyv2aIRWRfBjMYSnriuwH0nHcqPepoE7MKcJfk0y7MYgFOWw4KZE
+ HEt+aF5heXgCrSpBDE69RMAFvQd09RjpvzAAGhli0+EwPLfjYP406ul35odqIouea2sU
+ Mnd4fXonNGHyvWIAZ8AZzTRF6UFz1V7185wQmxSYjDUCUsns9FlpJz5MC+zLuGy+Juy0
+ ShKOQkFgiMg2f+rXWlA8a0o7Do2+cojSZ40zXVM9sSTx4QmeJyLlKD41So+JIj2mAxGQ
+ aT1A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqoKEtsLyDqlK8JB73ieI1DeL9RWxP6JceWewHwmIZDBToWmCKm026heNctNtEQLQGjtnLJHE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7wQRuW3siVC2dhH5Twlcx6j1eGglgDU1Z3pzBWrG5LglElgmn
+ gtlVvq3+OcbayNSNe4qhzqDSTlzErDmB+yW3yP2Kxpq25H7CgMfNzjS8
+X-Gm-Gg: ASbGncvsV5NRplKZHMRSTvtKu9wKIlJlFHXBLLard+XVTxbAW+JP7PpuKviL2ll2ZPp
+ J+U3xasfM7AQSnekYDANtPnLPGYNoQMCBJywUZZrtqbAaZtvvt3xxUnwC3btESn1LKlqOEzQfrY
+ JLiPhyGEI1RojMdEFDPwv63+TKuMzNTD7DGdaM42Ip25pCYotxSE17rpkxSLj1GDnmu2mmkAJor
+ /PcPSKWCNO0Tt6ehbU8c1SNXq280QjzX3rrZGZwhbcfFdgOA0N2vaLnMBjxFLfJfzyVgf8EpF4a
+ aPS592WEYOOoFlFdk+h2OEZw/51XDoK3v3uAC69+v+lJc3BNhIlS2s+JZV2lgrnk4Sk488g5inU
+ KBXmUGryAwRoJZ7jufpoZi7PKI//DmmRmiqGO2UVqOdJ4bnRvMlb0KgglspJ14tmiU+sL8EjgRw
+ 1j4tb0qAQ=
+X-Google-Smtp-Source: AGHT+IEUAMD0AL1SSbynCrr9MHJgm8ANprvhKP0FF/ML1jM8htYoxVdqOYv3LDRvo8OpRovTdAxiUg==
+X-Received: by 2002:a17:902:f542:b0:240:483:dc0b with SMTP id
+ d9443c01a7336-2446d973fbdmr139170215ad.52.1755440355001; 
+ Sun, 17 Aug 2025 07:19:15 -0700 (PDT)
+Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2446d57e14bsm55939455ad.154.2025.08.17.07.19.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 17 Aug 2025 07:19:14 -0700 (PDT)
+Message-ID: <abf97008-1186-48f6-bf8a-feb56bcccaf8@gmail.com>
+Date: Sun, 17 Aug 2025 22:19:11 +0800
 MIME-Version: 1.0
-Subject: Re: [U-Boot, v6, 1/1] misc: fs_loader: Add
+User-Agent: Mozilla Thunderbird
+Subject: Re: [U-Boot, v5, 1/1] misc: fs_loader: Add
  request_firmware_into_buf_via_script() for flexible firmware loading via
  U-Boot script
-To: "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de,
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  marek.vasut+renesas@mailbox.org, tien.fong.chee@altera.com,
  trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, seanga2@gmail.com,
  daniel@makrotopia.org
 Cc: lucien.jheng@airoha.com, frank-w@public-files.de
-References: <20250817150203.52850-1-lucienzx159@gmail.com>
+References: <20250814151253.11053-1-lucienzx159@gmail.com>
+ <ac2915fd-a91e-4b2c-a733-ee45e3f4f58a@mailbox.org>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250817150203.52850-1-lucienzx159@gmail.com>
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+In-Reply-To: <ac2915fd-a91e-4b2c-a733-ee45e3f4f58a@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 6d72b0128a225c147c5
-X-MBO-RS-META: zwnxcpzct6tc5b6ezbtnjyh8fkk5s5qj
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 18 Aug 2025 01:09:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,45 +109,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/17/25 5:02 PM, Lucien.Jheng wrote:
-> This commit introduces a new API,
-> request_firmware_into_buf_via_script(), to the fs_loader framework.
-> This function allows firmware to be loaded into memory using
-> a user-defined U-Boot script, providing greater flexibility for
-> firmware loading scenarios that cannot be handled by static file
-> paths or device/partition selection alone.
-> 
-> Key features:
-> - The API runs a specified U-Boot script (by name), which is responsible
->    for loading the firmware into memory by any means (e.g., load from MMC, USB, network, etc.).
-> - The script must set two environment variables: 'fw_addr'
->    (the memory address where the firmware is loaded) and
->    'fw_size' (the size of the firmware in bytes).
-> - The function validates these variables, copies the firmware into a newly
->    allocated buffer (using memdup), and returns the pointer
->    via the provided double pointer argument.
-> - The maximum allowed firmware size is checked to prevent buffer overflows.
-> - The environment variables are cleared after use to avoid stale data.
-> - Detailed error messages are provided for all failure conditions to aid debugging.
-> 
-> Usage example:
-> 1. Define a U-Boot script in the environment that loads the firmware
->     and sets the required variables:
->     => env set my_fw_script 'load mmc 0:1 ${loadaddr} firmware.bin &&
->     env set fw_addr ${loadaddr} && env set fw_size ${filesize}'
-> 
-> 2. In your code, call the new API:
->     void *fw_buf = NULL;
->     int ret = request_firmware_into_buf_via_script(&fw_buf, 0x46000000, "my_fw_script");
->     if (ret < 0)
-> 		return ret;
-> 
-> This approach allows board integrators and users to customize the firmware
-> loading process without modifying the source code,
-> simply by changing the script in the U-Boot environment.
-> 
-> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Marek Vasut 於 2025/8/17 下午 08:27 寫道:
+> On 8/14/25 5:12 PM, Lucien.Jheng wrote:
+>
+> Hi,
+>
+>> +    if (size > max_size) {
+>> +        log_err("Loaded firmware size 0x%lx exceeded maximum allowed 
+>> size 0x%lx.\n",
+>> +            size, max_size);
+>> +        return -E2BIG;
+>> +    }
+>> +
+>> +    memcpy(*buf, (void *)addr, min(size, max_size));
+> Do you still need the min() function ^ here , now that size is surely 
+> <= max_size ?
+>
+> Besides that, I think the patch is pretty much ready.
 
-Thank you for all this hard work.
+Hi Marek
+
+The min() function isn't needed. I'll make that change and submit a new 
+patch shortly.
+
+Thanks!
+
