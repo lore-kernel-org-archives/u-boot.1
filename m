@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59808CA0EFF
-	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 07:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53084C8303F
+	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 07:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B786D831D3;
-	Wed, 27 Aug 2025 09:06:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C75E5831E4;
+	Wed, 27 Aug 2025 09:07:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="B6VZgyBr";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="GXitqky4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4ED6831D3; Wed, 27 Aug 2025 09:06:53 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id E247183214; Wed, 27 Aug 2025 09:07:05 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D013F83192
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 09:06:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA7DA83192
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 09:07:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SfPk3f56rhDrmN9EBr+uovHsoamnTa0ABk10p2w/CPRqXg+mpiTRijsZuJfOtjw5yWuP8KjMhGoutYH13TVCY4dNWsx8CeRhMoxW6jMrhAT3GASk7Ns9UgcwB/l7Z9hAOwJfo3DSDWZgSilhD9Z4Vky5FZWtovqeHj2h2yEum3YGDNKBDWaqCWzOf9wN/IthKsz7zaF74gdp3C4JgMdpJyaGUVZWlEB6BId5NBTYG431ZNoWGjvDD7Zk/Ljs7Sitwd54yge1I68gSlIL1hpSObt9q1ORJTY7fW4TiH79jWfSlwUSMy/JL61s/aluf+l3p1kQRoKQHsopjbRvnlCJhg==
+ b=qPWI0aiPd0N41b+i+zMARd9iGFq9MXPAEz238xlTOZNwM5VcESr1C2R448l7tn2nqdVEtDehJq85a/vMuVYcTjJ7zX3PMgegzeP0i6T/ShQ0AeopxAJqHzUmyW8x0uddlfCYiIDWgTspTeBbkYeiKyCBvRaB5AE8nwLdBytSGyjUpx/Al/B2wXURum4Z20z3ptGXZZvQSuKjF4kWmjZG9usffGCBl9DZDGetjM/aF3/9zd2RKM0TlB9N7rIk7caM9mWMnuXHnqUQnPJNEkCMqJzuO+x4aHv9UjsORYKEC15ABrkXltbtjwNxdXdznylSRi0L5zDTu9M9ai6Xc4+2jQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ySQPbuDK7/uSxtaIgHGAXSWobTIjFnGQFguqgttDupQ=;
- b=XxXlFlNSmS53Hu60nP1t5/mItfC0l8ZzG8BFPkC0eTbPYiumiEOw7CGzD+he9S0riUs+CeDM1mtb3q/xlMrVCAOqjchJ3upfPJ9B1EMOXuqoGAdZPQDpwamOQsZsgGL8FHLvdroMHX6ms/2SCPlMpuQfr3oRCnMRO7agrPcoLbPDHN0DcLsC9HX8FJGl1rHG3xFFoNgxzIxuJZZcDB3+XuJqsbx9TzuhRkK7GbTUaHrm+P/bggfMRwKM9iosZXj+o3diKypx5j3QG1P+TbyaeJhFXkCNVGGu4/rzk6/+IPmw5GZdn/f/N1hZALAyQ/HdhPkOOwV4u+XGRX5AGSO56g==
+ bh=PZlYBXVIBiSAonNUE+SU1Qj1Z2WgO8BGsitSD/hGv0o=;
+ b=oTqbdfBqsZFJciFUShpyUWMQi1ewoBgR3s67t/j6QDHnZtlWyb7cca0SPhdyx/hFmmZ2XkcmAN1Awac/ErXjc5rpet/4xpRNZkh+/KvgA00H8yKEjoJviQ3IQSQFzZ6qb/4f8qSkkzelZuXjiTkugnzB5dyFAd4e2VY1M1GI/ZNMk2noR9fwZx2RtFLDW7QBSAjU9UPw3dNKyK1oh1YUOg/f1cMH4BmM3uObUJlTBsUP8BiA85eKw+fnkXVh9dMxq5irt9BWPHVOP2PwuJUO1wYU8UcvEqBdruMwZbRndQ/mRGrddwyZkXDi/K/Hl7FVPiEZm5IzwxUGfR8PQRSxig==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ySQPbuDK7/uSxtaIgHGAXSWobTIjFnGQFguqgttDupQ=;
- b=B6VZgyBrexEKB1ZqBIJ3DbMBj1Mbh2pOuv7x3k7aluGbebJilmQ2hfslMG89Py63PO/anF3EIu+AvWhm6GoHpqx2fZHnFu3pgCl7IwejpFauW5AnqEN+WkjNeu84FR+3ocwSGp8wVXM8wmdeVA/qXPIuDdzXutmJMDrT0LfKou5ZyP3i+hZZl3OINxw0Sr2JiwmBwN5N8fD4Idg5eCBLUMbzW9k/nB16JF0TaSsgsJa+IzT/Hl+j0N/X2f0O/6okf9ramQ6NRgybOoG7PtTLxyg+SH/iOydwC4wSBjAytghMP3VMnvrQvFV+z02DLyzrQFs89B5B1fbKuFruY4Cq3A==
+ bh=PZlYBXVIBiSAonNUE+SU1Qj1Z2WgO8BGsitSD/hGv0o=;
+ b=GXitqky4OH9lF6M3rNE/ASQiFGQNC10KbEMQXQr7pnZRh7Gv+XX7oG7K0w3K9qgWsyLHNLdk/hCcenVYXmcPNB131LlLhqNqjKE7hdN/Pev32k/A2HCttdOGjha4WkFCYQs1x0r8LRnKUjNvT1LIEzdMdgqB0wwaMIiU1eTjkofrv77d4hTqIfK9SGwfBioFM6GSeuWf8yoxa+pP3g37LICoU1RkljQhAO6toiJDAKf4/Q9Ex08w8rmmy0WMRFld5IGx2UI63fmPcX3cuQ8AzLZgizHkaX+ehOhMgo1yIkdog8zWqlxMnMEdSA46L+qc9l9G/03Y4m5BAprQSnjCdA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by VI0PR04MB10101.eurprd04.prod.outlook.com (2603:10a6:800:24a::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.13; Wed, 27 Aug
- 2025 07:06:49 +0000
+ 2025 07:06:58 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9073.010; Wed, 27 Aug 2025
- 07:06:49 +0000
+ 07:06:58 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Date: Mon, 18 Aug 2025 02:01:06 +0800
-Subject: [PATCH v4 1/2] binman: add a new entry type to support .bin file
- generation for the i.MX95 platform
+Date: Mon, 18 Aug 2025 02:01:07 +0800
+Subject: [PATCH v4 2/2] imx95_evk: Restore support for i.MX95 A0 silicon
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250818-imx95-v1-1-f68a19fe30b6@oss.nxp.com>
+Message-Id: <20250818-imx95-v1-2-f68a19fe30b6@oss.nxp.com>
 References: <20250818-imx95-v1-0-f68a19fe30b6@oss.nxp.com>
 In-Reply-To: <20250818-imx95-v1-0-f68a19fe30b6@oss.nxp.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -76,97 +75,97 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|VI0PR04MB10101:EE_
-X-MS-Office365-Filtering-Correlation-Id: 06f105a6-5388-4ca9-e27a-08dde5384a1d
+X-MS-Office365-Filtering-Correlation-Id: 942458e9-e55c-4921-441d-08dde5384fa6
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|19092799006|376014|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?R2I5UGM1bzkxWklZeG1TZS9vRS9USmpXVi95TWl0cmhyS0lJRWREendEeWg5?=
- =?utf-8?B?TXhEL0hJQWxDQVlRNm9URHlXdHJZRG05M1VIQ3BDMlRTVUtoeE9ZaG84elBR?=
- =?utf-8?B?bXcvYjlnY2lhZFdpajVLTzh2a1EwUGc5OTBWZGh6ektZNll5OVd4MzNCQU9S?=
- =?utf-8?B?Y1hCUWh2TFh4OG8xaEhMRGJHVVY1REQ5TU8zNkVETExOdXZiY2xrdkdRZU9p?=
- =?utf-8?B?Z0NsbmVtWEtnc3llNnhJeGVRTFF1QXZlcE91RDEvYjJIUDV1MEo3VjYvWXJF?=
- =?utf-8?B?bGM0cHhXZytHNDhpbUtvWm90bUdwcCtTNWFLZDduUjh0Y0QwcmR6MU5hSURs?=
- =?utf-8?B?SGRHcGtmV2ZqZWR6aUQyalJtVWdmV3RjdUNrNVgza2x1UzRWZDR2SXdPRGU1?=
- =?utf-8?B?ZkVMZHpZb1psajg5Q3NvbEpvVk9nTkQrbzZRUXpyMWszVkZEcXpxbmlPVEY3?=
- =?utf-8?B?OFdIQzZCK0Q5V295L0pVVExFb0U1VWduOVhBWUFLY3N2NmVYRlRkbFREdFlO?=
- =?utf-8?B?bmtxaVNhdVdtVWtVRVJtUklMNlZNNzJvUjlBRmlUYm9adC9YRnRkZmFoSmRF?=
- =?utf-8?B?UjYrblFib1p1SFBXY1lGVllZV0c3YW9lL1V5WmJKU3FGZFQzVGhvQmhpTmZM?=
- =?utf-8?B?YnYzUHMxemVUeW10b3RucmFVemdlZTJLSHJoY0xoM3FiM3VNR3RucXcyMmo1?=
- =?utf-8?B?blpnbzF1dVdWNndncVl2blZKenVGU1NhMWpXNFlKVTVYWWs4d3lRcVI3TGJ3?=
- =?utf-8?B?SDlsMTFOdlNka2pzVkFVY2E0S0ZxS1BYdk1JZmpld0UrK2U3SDVLSHM1YWpU?=
- =?utf-8?B?RytKQkZsMm1zSGxreGh1Y0FtdXFUVTVDcVROUnBLencwYVNYeitoZ3VBNjYz?=
- =?utf-8?B?Mmh1d2VNV004NnJuQXU0bjllVmdYRHRrWEJCRnNhZVlhL0NxV25HQ091Vnlv?=
- =?utf-8?B?S0dFQU4wTnN0MCsxcGVnU1dVa2xhM2I5ZEQ4aytCOWdZMjFHTXlzd1NQU1J3?=
- =?utf-8?B?UEY0YTZBeVJLT0thRm84ZEdOVldDM0Rqem1odkMzTlVFUkxWZHBmZ0ZVTzJj?=
- =?utf-8?B?UUdPbzlhRVB5WjFqcG9PSm0zMDZJT0xQalVjREVEMlowV2JsR3AzM2JKc0Z3?=
- =?utf-8?B?K0l0Z3cwOW9NeVJYTjR3djFVZFZTUzNRUXBEbW9Bc2hFalRVSVhHWnBiaklU?=
- =?utf-8?B?bmJCN0JqKzZ1Q3VHT3dYTlhTRk5NS2dwaGVob1ptQjYvL1ovL1BZQXdIaWtt?=
- =?utf-8?B?ZlpRRkk1NVVWblBhL0Z4RGFFQ1REQ084ZldBSDlnTnlVSzJ1YkNhWmRPaW5o?=
- =?utf-8?B?ZENoOWNKbTBTTVpFVGIxVDdac3lCNUVZakRnamFRelM1TWhxYmI4OFBLaDV6?=
- =?utf-8?B?WWEvWU9LZjVGcmNFY1Z2RUxPRXlPUzhjNzBqaTdlY0ZNcVJ0QXFRVjlJelJ2?=
- =?utf-8?B?TGxaQ0pnenBkYUx3dXZwYjgwSE1SS3grVzF0aGxMOXJpSi9TSFJTTUhKUDla?=
- =?utf-8?B?dUtkVC92cmxkTFdqUkFOenhkaDdteFBHTm5ZN2ZDOGYxR2I4UFI1TVltVDE4?=
- =?utf-8?B?UWp0cGtVWXUyTGUyQzBrQVc4bVErYlZHR090blVwN3owT0YrL1V3V2tud1gx?=
- =?utf-8?B?bmhhZHFEL2FjRGV3aEkxTGFvWDNYQk4ybXR5aGc1d1dxdHhDemlqTnZpeXk3?=
- =?utf-8?B?TUJuUENHdTE4bTB0bkdRSEkyT1hXb3lqSzYyYmZBQ2VMTkpId3YzMEpxYWdU?=
- =?utf-8?B?UjlRcENxZFFsd2VLbW1MVmZLK1lIRUc5ODUzbWRKNEhNdTRrYVFTQU5LWEsx?=
- =?utf-8?B?K3dOUzJ1cmRwbmNZVml3d3FzbU0wT0g4Ym11eTRSd25IenF2UE5iM3hOWURn?=
- =?utf-8?B?S1JpdDJsY1QrRnhwV3Zrb0ZtUTR4RldQWEQvUDJHdFl5dmw1dllsRUo3QnBK?=
- =?utf-8?B?a1JrRlZma3IxSmlxcFUvWmNUSVJha1JVcTJPRkJNMjZUWlV5c0tERHBacXF3?=
- =?utf-8?B?VHBZb0E2RlhBPT0=?=
+ ARA:13230040|366016|1800799024|19092799006|376014|52116014|38350700014|13003099007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dGNnRjZkZVRyaFdUdFZhck13WEFMQlEvMVJBUHNleVo3WUUvd2pqZW5NUGd5?=
+ =?utf-8?B?K2xaNnZpbTRxc0F6MHR3cExnclBCR3lITVRuajJuNXMrd29BVDdXN3pPaEdE?=
+ =?utf-8?B?YitmTHl0OFl4aVBnNG5NcXpqeFJxem5FKzNPRmU5TTBCakxwMGxmUjc1VHlw?=
+ =?utf-8?B?T1ZLSm5mRURlaGxTOWdSbko3QUNQVjdvOSt4aXJyaVRoeTBqMFhoemFSSWlD?=
+ =?utf-8?B?Q2JGcUhOSFBzYzJlcEozYkR1U05aVFZGQUJkYy9yWC9ZZVprVi9Ya1ZGNFFS?=
+ =?utf-8?B?L0xsdjFzVThBZjJ2cTl1emFudzA5RGNhdVh1eitMVlZIbnRqZzcwNnZHSW93?=
+ =?utf-8?B?Y0NuSzZJSmhYZEJDRHZvYkxSQjIxWXhNc1hpVGtlNGRWMFNSdENZcDZVblQ4?=
+ =?utf-8?B?R1JyK3VvM0VvQVJpOXMvSml2ZWtnTkl1ZUwvbk9iWEpyNnEwSEJ6Y2hXRThG?=
+ =?utf-8?B?dDRNZ3l3UmZYQUYxTHJxVXNuUHdWVUs0T2dlNFBLazkrcHhwRC9GTjYwN3N6?=
+ =?utf-8?B?U3BHc25VNmlVdGN5Z1FRUVFRR29wd2VFbkZOUWdscGxsdVo4cm0vVmVUd2Nr?=
+ =?utf-8?B?dzk5Y1ZSZ0lVZ2t6OGFRRllndWdibUpycTZDOXpWM3hPS3dGYVVTWGpJYzdw?=
+ =?utf-8?B?blNJL25xdjkzeWxlQUxOLzJycEswbTdacDhoTWxmNHIvTEtYNjY5cDVZbGNo?=
+ =?utf-8?B?ZjQ1by9qZzEyY1Z3VHNlRnZLNkFjNG56L1pyNTUwYmpqVFRta3FpbWR4L3JQ?=
+ =?utf-8?B?dFJMelNwQWYzcjk5MmUwR3FBa1c0d2dTbUx0OVJuWFRTeFBDb205WEFWWXFh?=
+ =?utf-8?B?alVTa2FweExaelc4dVRiSjRrOGUyMWp3VTNuL3dUakprYjB6SG1adWNUTXNh?=
+ =?utf-8?B?YitnekZ6dlV2ZDN2Y3UxdmpVUkJscXZkbE52Z3lsZlpxdnA5MGwrMENpclBr?=
+ =?utf-8?B?TWJqaGNkYnQ2RFRiS2RFZXAzL1E4d2pkalNXV2ZWVi9BcFNFelRVNThvYXJD?=
+ =?utf-8?B?SXZIRkRsYW1zSzB5RkZsVWx3TzdXem5YTGVTRStocnVkNjNoUVJoT0RoaC9G?=
+ =?utf-8?B?L0FnTnhMWi9WY2tUQUNLNmFSSE9rK0duQytkakVxVU1va2pYTlIrNUc5ZFk0?=
+ =?utf-8?B?QjhkVncrd0VWVDl1T0lieUtBWE9WVVlBQzZaUnpaT1Z2UmFMTUtHV3JPQnFX?=
+ =?utf-8?B?VjNDTGd5a2N3NkI1WXVyWUhTR2F5RUJ6cVN6MnZQaEZWbmcya2dnL3B0TUYw?=
+ =?utf-8?B?M0R1NFNiaVBKejJkTUFCK3I2cU9GUGlNdHkvOWtNN2JiZVVnTm5wNmJ2eWxU?=
+ =?utf-8?B?clp4R2loSTl0V0MxSC9HUWpDdmk1Y25lbzdnWDFlNXZySFBMNjQ0eGk5WXFX?=
+ =?utf-8?B?eXZIU0tIY0tld1hEUXBoaFFHd0FxWXpZYlUyS3hoREdqK21Xc1JQSENZeElL?=
+ =?utf-8?B?MU1SenF2OWVkVkc2dncwcHlNbUhmNGdmb1JRejFhVXMya2NTZHlkSnJJNmJD?=
+ =?utf-8?B?MVV4Rmg0c1QyS0ZGZEZKUzJEZ2FZcHVhSnowZ1UyVVZNYllsSVcvK1ZYQkxa?=
+ =?utf-8?B?TE1EQlFBUklxZmxYbzdnVkl6SXZVUW1peVprVGk0c2hkakxTV2RnVEliRVlU?=
+ =?utf-8?B?RE5YNHJLbG8vSWZhaDRVN1lYY3RWMUtZZ0NLZ0RBeitEUS9sQm9UZnovK0Vk?=
+ =?utf-8?B?bHVDQk51TlpBejJjekcwREdHSmoxTGV5NW9iUEF6eGluWDZxaHNPY0pUa2p4?=
+ =?utf-8?B?UGNESHVwZEJSVUdNcjZuRW83Y1hWQi96dHpwRXVQWm5pMlcrQTZyUDJSV2pN?=
+ =?utf-8?B?RitnVSt0c055Vyt2MUk3R0dzK3dwdXZTUjFXZDFJZ3FVRGNHU3dFeFMvQlBs?=
+ =?utf-8?B?SHpmbnk2UjkyczFibloxZDBEVEQyZWhpb2QrNjhjcURvdDl1Mi9lcVlPK0lR?=
+ =?utf-8?B?Vnd0V3BMOWtjQmkyMDJiUHZOaXRpS1VGNlhmS1hSdUJnaVdiYTZTVEthZElL?=
+ =?utf-8?Q?tXdp3fIIz4hjTZ5el1DRVY/pZUdJfA=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(19092799006)(376014)(52116014)(38350700014);
+ SFS:(13230040)(366016)(1800799024)(19092799006)(376014)(52116014)(38350700014)(13003099007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z25Damd4YUZmUGZseDhiVGpab0xSM0RubDN3Q1RPTHBLQWJBd3FMS3pmR0lP?=
- =?utf-8?B?cXRpNUZtbDVCSjFEWVlXYXU3aDdOZUNpWlBpaEZ6WU9RWUtpMnlxM0JrUHlX?=
- =?utf-8?B?TmpCU0pLWFUrYnR3cHhhZk0rVmZES1VKOHlXTDZkamhVSVVVQUEwQ3JORzVs?=
- =?utf-8?B?OUQ3amJYaDVCTnhpUUpPVi9ETUIyYWJNWmNOQk9FRkYzWEJBQXNHenYrdStC?=
- =?utf-8?B?VVUzMEJaT3FqMXpYWk15SjVhc1ExTW51VzUzUHgzVjR3NTVEeUNGaDdXV1d1?=
- =?utf-8?B?UW5zdVU0aGY3YUpnN2tpazFvc3Yyci9BUlVFaUdBQ3hUWExpVllDVFQrSitN?=
- =?utf-8?B?S2pmbHNrdElONWVaUnFTcC94K21WSDIwcmdaWm14VnRGSHdGQWRFdTRpWWpO?=
- =?utf-8?B?TkhteXgyT0l0VWpESE5aQUJpRloyZ1dkeG0zQ0JCZklNbjNzMVFGSjJMSnFk?=
- =?utf-8?B?RlcyR3BtbHV5QzNWNFBTMWNId3l5QUFuSWRZcmRkNjg2RUx6RzR3ZFh3YWpZ?=
- =?utf-8?B?bG1WOHNmcFNUNWVuSmxodSthckJERkVKR0hjSy9RdDB5eVdveHNzQU1Nbzc5?=
- =?utf-8?B?UnFWZ3lDUGpLRU9PaDdFM1JtMkNUMmVOWVArUVpUOGpsbWJrOUxWVXYybWtM?=
- =?utf-8?B?TTVVM1YzNy9SaUJMUmgwVm55NUEvd0d4Q1dGRVhvUEFXcllJWFhjYVFwbmVM?=
- =?utf-8?B?OE1Lbk5ldU1lMWw5RWJMRHJzYSsvWjh4MU50M2hZcTFUMzUwMnBDOEN6ZnJC?=
- =?utf-8?B?T000R2VVU0I0cDlGMTRFVmZ5RWF2enJpdUY1ZDdQOXU0czROYkVMQ2hwVndJ?=
- =?utf-8?B?em41M0YzbnlDeFE4ck8vcTU1c05aSWNML3pMUHJELzU4SzZ6bU5xNkVkSTV5?=
- =?utf-8?B?WWRXK2hneDNTdmFKOXRRT2N2b21kbzBIaG5jWTI4UWVHTURob1ltdUkzZVo2?=
- =?utf-8?B?ZWxLLzNEaUVhK2U5NnZ1czQrL2k5MXh3SHdaZG9ZQ0IxZU1xemx2cjdkWUd0?=
- =?utf-8?B?b1FRMGxpQ2ltNHdteGU4clpYcGlROE1TVGtEeEVZWVFHT3E5NW1GTlFJK01E?=
- =?utf-8?B?QzhnZ2Myc1o4WjlReWpDMU56WkNKdjRDcVhMNDB6T1UvcWU0Q2Jub3BWeUdV?=
- =?utf-8?B?d2lrQmJUbmg5ZEVzODE5aTRycGJzanNIdWNlY2tpYTdsa1RRWlo2K3Z6cFZv?=
- =?utf-8?B?SGxSVUcwbHpGakRWbGduVmI4V0dPZjBib1Y0THJYV3RKazUrS0orSkF5emFz?=
- =?utf-8?B?OHA0eWQwL2lvWmVGQTRYQ3BlOUdCQ002aDZWdUQvNmVTd2VZVVFLczVKN1lp?=
- =?utf-8?B?bVFpeWhoVnlGeG4ra0doaE9EYXVUV1VIaHhzaEJDM1JlV3BEUTU0TFdwalA5?=
- =?utf-8?B?MDJTL29wYXhzWklEa1VMdm9QV2d1WEcybUpvcVllc0t0Z0d0YUptYTJZeWtv?=
- =?utf-8?B?dzhMOGtmcmxJai9RZDBoNTAyMURKck81VGNZK2x2RnBkTnFxbTM3Y3l3MDgr?=
- =?utf-8?B?TGN5SGFOTHNacjlGaVRzanpNWm4rV0cwUGUwaWp0SE9pM3FiTXl2VnpVRWwx?=
- =?utf-8?B?ZEdGVThoMFlycU56MzJSaFFwTVYwRWhqVjlmLy9FeW9ROTErYVBZUGNtS21D?=
- =?utf-8?B?NE9iemEyNUpuVWY4aEpVanZmM1BISWZZd0taNFNxSTVxeG1lZTJ5S0JYYXQw?=
- =?utf-8?B?K21kc1AycGFvWDJSbEJIT1MxYzhRVXF5Zlo2UmN3amF0N3hUSzVmTGRtQkZU?=
- =?utf-8?B?V0pJZ0V3dFhwNDZnYnZNQnVoOEhGNXRoTHpJcGF4R1ZUSkR4Q2RLMU1VTjdj?=
- =?utf-8?B?OFh6V0VSNXdTOTlzd3VDazFJMEtKbWFxQndpWU91Y0szT3cxSHl1MForRkI3?=
- =?utf-8?B?ZUhRNlM5ZHJYVU54cjgrRUwyVjQyV0ZRRitDd3U4a2NKbnB6ZFZYMkgzY0lh?=
- =?utf-8?B?V0xQL0RHQXBiRFlsaHpVTU5ucEc0VXBFZFNEK1ByV3IvWUZ2cG1SODF6NmhQ?=
- =?utf-8?B?cXNvdURLOFl1VHA0UjJvL08zRVhCSW4zN1lzelJjeUtOaGFXT0tydSs3Qnkw?=
- =?utf-8?B?dm4xYXMzemVUMW9BQUI1c0gyUWY2Z3N4SXZBZCtwaHFLTjVmTkMzMkxhRFBl?=
- =?utf-8?Q?uDClaWaZcd0tX/qg4tTIbW7TZ?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SWlKOElHQ1dJZEd6ekUzRVZuaDBzK21wNkdlL04wYzdZSkJla01yTjV3dktv?=
+ =?utf-8?B?VlF5Q0p2eUhiVGlaVUtPOU53Z3puV21ZTmdkRHJ5TGtQRFVRM0JGYlNrbGUx?=
+ =?utf-8?B?V1JHWis3UEFyRGZabVRWMnljamhhZGYvU0wvYlM3NmRSL0p2NFhvZHpNWGRD?=
+ =?utf-8?B?SlVQbGZEREs4N0p4VG9VVHdycTV0SzZ2YzFyRk00UzlZL25FaTU2c1hGaXlu?=
+ =?utf-8?B?a0F4ZXh5enRrdVpqQjJJK0hkNGhSek0rc1dXaHBZK0RDK2dFdys5cXU0RnFv?=
+ =?utf-8?B?TmtmQXJTdm9SOWVnMzBDRnUwV2FmYnNmamJaWTZaejd5b0w5SzlOcTZrSll0?=
+ =?utf-8?B?S0g3WDhBSXE3T0NBWmhoUWgva0tKVFJHcFNzd0N2SzVlTVdYNEtPbWQ4UW01?=
+ =?utf-8?B?NTF6L0QvNy9KUmFFdVhoVm8vY2doQURWRVBWV2llRjlwQWE0TmlMWnhvYjAv?=
+ =?utf-8?B?VCt1V1p0Z08rQ2R2QTFOM2hRMjVKNFlDY2hTQTI4cStDYTl3VFVOMlk0NFMz?=
+ =?utf-8?B?TVM2SjFRTTJRM2xBaTFXY3o1YUF3QUhsZjdGTHdqTXp5Sm5nMVBOSFBiaTdM?=
+ =?utf-8?B?bU94ejNhWnpkUTljcXFvZ3lqZGZKQjMwamdDL0tjbmdhQllVT0VZMXhNUjg1?=
+ =?utf-8?B?ZVhLMmo5TkZ4MFBTbk9IMm4waWtYK0VPaWpHaGRLbWJ1dzVWWWx2ZTJzQktJ?=
+ =?utf-8?B?ZWg2bVNITzhYY2RMa3FRYjZ2NENzSldwNW4yYnRyWVhyc3RnRitscTl1Qk90?=
+ =?utf-8?B?SFFNMGVsNkd2bmZTTXYyczZQbWYxaHFtT1dLRXdOSm53NXFjcXA1SDVJRVFU?=
+ =?utf-8?B?TEhCUGJJbFZxMFdvUEZ6dTU0NmJjS25PUzlIVkdsQm02K2lqa1crK21BVXhj?=
+ =?utf-8?B?Z0haakR1Vm53RUFkZFUyRjl2NnRSVE14RjNqOEh5RnBUcDFqM3VUVWl2ZWJo?=
+ =?utf-8?B?NytSalVJSVFIc0UrN1RDaVh4WDZtYzJiS0pVQVJ1ZDJjd1dvY2dKODJJeGNa?=
+ =?utf-8?B?V01QSFpSSHl0T2RneVI0T0hPbGJCMEhMZ3grcGdnRHVTMmgyOFIxS2h6ekhk?=
+ =?utf-8?B?OFYybHlDZ3RFMy9pVzQzOG5IWXF3NnpQMEVFdFppRVB6SWR6dHU5TW44YUZu?=
+ =?utf-8?B?STFDbEZOUUptdDltTDdHZ2ZXM2IzbGRsdHF2TmdqMlV4bENMQUNtZkVFNjZP?=
+ =?utf-8?B?QlZLVWxFRllaaHd6THZ0Wnc3VlJxR1k1SDJRVS9xaDZmUDh0d1lWaGlWT1B6?=
+ =?utf-8?B?Tjg4bmVCVHJIMWlodUh5UVRqb2llLzJIOUtaQVFvUHlZK3ZZeVRaVWxNbkM1?=
+ =?utf-8?B?RmFKRUFlY09XOXpML1hXVHlGQS81YmRUL2xrRXpZaU5xNkJvVHJKR0w4Ympu?=
+ =?utf-8?B?NzRMNzkxeC9mWFlUTWQ4UUp1eHNuSkdkaE9hR0tkcnZndGxTWjBPRFI3blIz?=
+ =?utf-8?B?Uzh3bEVua2MwNzQ3eDByV1hCeFk3VUVtNldFZnQ0eHlSaWRlRVNWbjJ3OXZ5?=
+ =?utf-8?B?ZHczbVNOWjJIcUJkYStrRHFNSGZmMkxPY1g4RGV6QTdQSmx4SmZ5TCtDZmd4?=
+ =?utf-8?B?VkRiWTAxWmJ3SkhMNjN3eUwxS3hBRExtNVFrN2xtTFQycjkwUHJQb0JqTzB1?=
+ =?utf-8?B?ekp6c3g3blh4aUM3MzlGNmhwN1d4enFkQmpwMy9hQUNySU02bk9xWUkvaWs4?=
+ =?utf-8?B?SGZ2aDdWcE1BeGpOL3RYUWhWcU83bGRBb00xZHp0bnZLdWhWMit0V1FlcG5E?=
+ =?utf-8?B?UWtheXlNS0NNczBVNTFZOXk2a0VadXlUbkZQNmZyTllYOTBkQXowWnhGUkd3?=
+ =?utf-8?B?Y0tQaG0zNWU1ZFRVU0pBMlA2U3BaKzFGT2RMMVBoYVZaMGNnUUNoWVVuQnRy?=
+ =?utf-8?B?N2xRN0pQZ2JFVDN0OHdXWkJkUnJ3akJPWFFxSkdENkVsckIwOXdYamVRQ3Y4?=
+ =?utf-8?B?WGNwaFBDMHAwSjNEYi9aUTdTUXJBWHFFNjZvTmZ3RXErc21FRXdJTFU4dE1D?=
+ =?utf-8?B?TVMzWjRUZlhVN0lQYXFxQndNeXpvL0VkODNjamE2MVE1OVVpS2NFYXRZb2tr?=
+ =?utf-8?B?SFptcyt1MitheC9VQlVZSHBhank3MGg3eHY2Wm9ldXpINlQ0Q3g5Z2txZnVG?=
+ =?utf-8?Q?jfM1XvaZF3LOvBis6dw3SuBsd?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06f105a6-5388-4ca9-e27a-08dde5384a1d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 942458e9-e55c-4921-441d-08dde5384fa6
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2025 07:06:48.3361 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2025 07:06:57.9929 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HmFJz5bF/9/jYqLRzulU0lWNmaRy4ojBXdD57QC2Qn2s8R+21oD2oo28LT3KToNAes1i/eujRGJ65QWiFJ4twA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Gqh+FKwHUr8HOu6YqZsxC+NdfVXZEt/krlF+TIlxjDJZYfZAA+IC2853Nq7U8Pr309TpoYdQiBg6hy6oyGPpsw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10101
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -186,173 +185,605 @@ X-Virus-Status: Clean
 
 From: Alice Guo <alice.guo@nxp.com>
 
-To support passing specific commands defined in enum imx8image_cmd to
-the imx8image_copy_image() function, this patch introduces a new entry
-type nxp-imx9image. This entry generates a plain text data file
-containing the relevant commands, enabling flexible configuration during
-image creation.
+This patch is used to restore support for i.MX95 A0 silicon. To avoid
+duplicating defconfig, imx95.config is added and can be shared between
+imx95_a0_19x19_evk_defconfig and imx95_19x19_evk_defconfig.
+
+container.cfg and imximage.cfg are used to created .cfgout files that
+are be passed to mkimage with -n to build flash.bin. Now they have been
+deleted and replaced by adding their content to properties of node which
+type is nxp-imx9image under binman node.
+
+Fixes: 9936724aa9b ("imx95_evk: Add i.MX95 B0 support")
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Tested-By: Tim Harvey <tharvey@gateworks.com> # imx95-19x19-evk (rA0)
 ---
- tools/binman/entries.rst            | 12 ++++++
- tools/binman/etype/nxp_imx9image.py | 77 +++++++++++++++++++++++++++++++++++++
- tools/binman/ftest.py               |  8 ++++
- tools/binman/test/350_nxp_imx95.dts | 22 +++++++++++
- 4 files changed, 119 insertions(+)
+ Makefile                                  |   3 +-
+ arch/arm/dts/imx95-u-boot.dtsi            |  44 +++++++--
+ arch/arm/mach-imx/Makefile                |   5 +
+ arch/arm/mach-imx/imx9/Kconfig            |   5 +-
+ arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
+ arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
+ board/freescale/imx95_evk/MAINTAINERS     |   1 +
+ configs/imx95_19x19_evk_defconfig         | 153 +-----------------------------
+ configs/imx95_a0_19x19_evk_defconfig      |   2 +
+ configs/imx95_evk.config                  | 150 +++++++++++++++++++++++++++++
+ doc/board/nxp/imx95_evk.rst               |  42 +++++++-
+ 11 files changed, 241 insertions(+), 191 deletions(-)
 
-diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index 12a39d070e4..8922d6cd070 100644
---- a/tools/binman/entries.rst
-+++ b/tools/binman/entries.rst
-@@ -1689,6 +1689,18 @@ together. See imx95_evk.rst for how to get DDR PHY Firmware Images.
+diff --git a/Makefile b/Makefile
+index b4f10c08d75..569a2c0070b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2469,7 +2469,8 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
+ 	       mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
+ 	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
+ 	       Test* capsule*.*.efi-capsule capsule*.map mkimage.imx-boot.spl \
+-	       mkimage.imx-boot.u-boot mkimage-out.imx-boot.spl mkimage-out.imx-boot.u-boot
++	       mkimage.imx-boot.u-boot mkimage-out.imx-boot.spl mkimage-out.imx-boot.u-boot \
++	       imx9image* m33-oei-ddrfw*
  
+ # Directories & files removed with 'make mrproper'
+ MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
+diff --git a/arch/arm/dts/imx95-u-boot.dtsi b/arch/arm/dts/imx95-u-boot.dtsi
+index 9bf8f9834c9..de74398fdfe 100644
+--- a/arch/arm/dts/imx95-u-boot.dtsi
++++ b/arch/arm/dts/imx95-u-boot.dtsi
+@@ -52,15 +52,47 @@
+ 			pad-byte = <0x00>;
  
+ 			spl {
+-				align = <0x400>;
+-				align-size = <0x400>;
+-				type = "mkimage";
+-				args = "-n spl/u-boot-spl.cfgout -T imx8image";
++				type = "nxp-imx9image";
++				cfg-path = "spl/u-boot-spl.cfgout";
++				args;
++
++#ifndef CONFIG_IMX95_A0
++				cntr-version = <2>;
++#endif
++				boot-from = "sd";
++				soc-type = "IMX9";
++#ifdef CONFIG_IMX95_A0
++				append = "mx95a0-ahab-container.img";
++#else
++				append = "mx95b0-ahab-container.img";
++#endif
++				container;
++#ifndef CONFIG_IMX95_A0
++				dummy-ddr;
++#endif
++				image0 = "oei", "m33-oei-ddrfw.bin", "0x1ffc0000";
++				hold = <0x10000>;
++#ifdef CONFIG_IMX95_A0
++				image1 = "oei", "oei-m33-tcm.bin", "0x1ffc0000";
++#endif
++				image2 = "m33", "m33_image.bin", "0x1ffc0000";
++				image3 = "a55", "spl/u-boot-spl.bin", "0x20480000";
++				dummy-v2x = <0x8b000000>;
+ 			};
  
-+.. _etype_nxp_imx9image:
+ 			u-boot {
+-				type = "mkimage";
+-				args = "-n u-boot-container.cfgout -T imx8image";
++				type = "nxp-imx9image";
++				cfg-path = "u-boot-container.cfgout";
++				args;
 +
-+Entry: nxp_imx9image: data file generator and mkimage invocation
-+-----------------------------------------------------------------------------
-+
-+This entry is used to generate a data file that is passed to mkimage with the -n
-+option. Each line in this data file represents a command defined in the enum
-+imx8image_cmd. The imx8image_copy_image() function parses all commands and
-+constructs a .bin file accordingly.
-+
-+
-+
- .. _etype_opensbi:
++#ifndef CONFIG_IMX95_A0
++				cntr-version = <2>;
++#endif
++				boot-from = "sd";
++				soc-type = "IMX9";
++				container;
++				image0 = "a55", "bl31.bin", "0x8a200000";
++				image1 = "a55", "u-boot.bin", "0x90200000";
+ 			};
+ 		};
+ 	};
+diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
+index 8bd85e889ab..fa2cdaba144 100644
+--- a/arch/arm/mach-imx/Makefile
++++ b/arch/arm/mach-imx/Makefile
+@@ -223,6 +223,10 @@ endif
  
- Entry: opensbi: RISC-V OpenSBI fw_dynamic blob
-diff --git a/tools/binman/etype/nxp_imx9image.py b/tools/binman/etype/nxp_imx9image.py
+ ifeq ($(CONFIG_ARCH_IMX9)$(CONFIG_ARCH_IMX8ULP), y)
+ 
++ifneq ($(and $(CONFIG_IMX95),$(CONFIG_BINMAN)),)
++SPL: spl/u-boot-spl.bin FORCE
++	$(call if_changed,mkimage)
++else
+ quiet_cmd_cpp_cfg_imx9_check = CHECK    $@
+ cmd_cpp_cfg_imx9_check = $(CPP) $(cpp_flags) -D__ASSEMBLY__ -x c -o $@ $< && $(srctree)/tools/imx9_image.sh $@
+ 
+@@ -244,6 +248,7 @@ u-boot-container.cfgout: $(IMX_CONTAINER_CFG) FORCE
+ flash.bin: spl/u-boot-spl-ddr.bin container.cfgout FORCE
+ 	$(call if_changed,mkimage)
+ endif
++endif
+ 
+ else
+ MKIMAGEFLAGS_SPL = -n $(filter-out $(PLUGIN).bin $< $(PHONY),$^) \
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index 4e0e194690b..b6acbb20ff0 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -25,6 +25,9 @@ config IMX91
+ 	select ARCH_MISC_INIT
+ 	select ARMV8_SPL_EXCEPTION_VECTORS
+ 
++config IMX95_A0
++	bool "Support for i.MX95 A0 silicon version"
++
+ config IMX95
+ 	bool
+ 	select ARCH_MISC_INIT
+@@ -33,7 +36,7 @@ config IMX95
+ 	select DM_MAILBOX
+ 	select SCMI_FIRMWARE
+ 	select SPL_IMX_CONTAINER_USE_TRAMPOLINE
+-	select IMX_PQC_SUPPORT
++	select IMX_PQC_SUPPORT if !IMX95_A0
+ 
+ config SYS_SOC
+ 	default "imx9"
+diff --git a/arch/arm/mach-imx/imx9/scmi/container.cfg b/arch/arm/mach-imx/imx9/scmi/container.cfg
+deleted file mode 100644
+index b25f3b726c5..00000000000
+--- a/arch/arm/mach-imx/imx9/scmi/container.cfg
++++ /dev/null
+@@ -1,11 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2025 NXP
+- */
+-
+-CNTR_VERSION 2
+-BOOT_FROM SD
+-SOC_TYPE IMX9
+-CONTAINER
+-IMAGE A55 bl31.bin 0x8a200000
+-IMAGE A55 u-boot.bin CONFIG_TEXT_BASE
+diff --git a/arch/arm/mach-imx/imx9/scmi/imximage.cfg b/arch/arm/mach-imx/imx9/scmi/imximage.cfg
+deleted file mode 100644
+index c2c92174c1c..00000000000
+--- a/arch/arm/mach-imx/imx9/scmi/imximage.cfg
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2025 NXP
+- */
+-
+-CNTR_VERSION 2
+-BOOT_FROM SD
+-SOC_TYPE IMX9
+-APPEND mx95b0-ahab-container.img
+-CONTAINER
+-DUMMY_DDR
+-IMAGE OEI m33-oei-ddrfw.bin 0x1ffc0000
+-HOLD 0x10000
+-IMAGE M33 m33_image.bin 0x1ffc0000
+-IMAGE A55 spl/u-boot-spl.bin 0x20480000
+-DUMMY_V2X 0x8b000000
+diff --git a/board/freescale/imx95_evk/MAINTAINERS b/board/freescale/imx95_evk/MAINTAINERS
+index 5caf763e0cc..9d5c4e41b65 100644
+--- a/board/freescale/imx95_evk/MAINTAINERS
++++ b/board/freescale/imx95_evk/MAINTAINERS
+@@ -3,4 +3,5 @@ M:	Alice Guo <alice.guo@nxp.com>
+ S:	Maintained
+ F:	board/freescale/imx95_evk/
+ F:	include/configs/imx95_evk.h
++F:	configs/imx95_a0_19x19_evk_defconfig
+ F:	configs/imx95_19x19_evk_defconfig
+diff --git a/configs/imx95_19x19_evk_defconfig b/configs/imx95_19x19_evk_defconfig
+index 73818a82627..542b71f5c07 100644
+--- a/configs/imx95_19x19_evk_defconfig
++++ b/configs/imx95_19x19_evk_defconfig
+@@ -1,152 +1 @@
+-CONFIG_ARM=y
+-CONFIG_ARCH_IMX9=y
+-CONFIG_TEXT_BASE=0x90200000
+-CONFIG_SYS_MALLOC_LEN=0x2000000
+-CONFIG_SYS_MALLOC_F_LEN=0x10000
+-CONFIG_SPL_GPIO=y
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=3
+-CONFIG_ENV_SOURCE_FILE="imx95_19x19_evk"
+-CONFIG_SF_DEFAULT_SPEED=40000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0x700000
+-CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/scmi/imximage.cfg"
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="freescale/imx95-19x19-evk"
+-CONFIG_TARGET_IMX95_19X19_EVK=y
+-CONFIG_OF_LIBFDT_OVERLAY=y
+-CONFIG_SYS_MONITOR_LEN=524288
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_TEXT_BASE=0x20480000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x204d6000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+-CONFIG_SYS_LOAD_ADDR=0x90400000
+-CONFIG_SPL=y
+-CONFIG_SPL_RECOVER_DATA_SECTION=y
+-CONFIG_PCI=y
+-CONFIG_SYS_MEMTEST_START=0x90000000
+-CONFIG_SYS_MEMTEST_END=0xA0000000
+-CONFIG_REMAKE_ELF=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_SYSTEM_SETUP=y
+-CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
+-CONFIG_DEFAULT_FDT_FILE="imx95-19x19-evk.dtb"
+-CONFIG_SYS_CBSIZE=2048
+-CONFIG_SYS_PBSIZE=2074
+-CONFIG_BOARD_EARLY_INIT_F=y
+-# CONFIG_BOARD_INIT is not set
+-CONFIG_BOARD_LATE_INIT=y
+-CONFIG_PCI_INIT_R=y
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_BOARD_INIT=y
+-CONFIG_SPL_LOAD_IMX_CONTAINER=y
+-CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/scmi/container.cfg"
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x93200000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
+-CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_DM_MAILBOX=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_WATCHDOG=y
+-CONFIG_SYS_PROMPT="u-boot=> "
+-CONFIG_CMD_ERASEENV=y
+-CONFIG_CMD_NVEDIT_EFI=y
+-CONFIG_CRC32_VERIFY=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_POWEROFF=y
+-CONFIG_CMD_SNTP=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EFIDEBUG=y
+-CONFIG_CMD_RTC=y
+-CONFIG_CMD_TIME=y
+-CONFIG_CMD_GETTIME=y
+-CONFIG_CMD_TIMER=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_HASH=y
+-CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_NOWHERE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_ENV_MMC_DEVICE_INDEX=1
+-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eth0"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SYS_RX_ETH_BUFFER=8
+-CONFIG_SPL_DM=y
+-CONFIG_REGMAP=y
+-CONFIG_SYSCON=y
+-CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_CLK=y
+-CONFIG_SPL_CLK=y
+-CONFIG_SPL_CLK_CCF=y
+-CONFIG_CLK_CCF=y
+-CONFIG_CLK_SCMI=y
+-CONFIG_SPL_CLK_SCMI=y
+-CONFIG_DFU_MMC=y
+-CONFIG_DFU_RAM=y
+-CONFIG_SPL_FIRMWARE=y
+-# CONFIG_SCMI_AGENT_SMCCC is not set
+-CONFIG_IMX_RGPIO2P=y
+-CONFIG_DM_PCA953X=y
+-CONFIG_ADP5585_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_IMX_LPI2C=y
+-CONFIG_IMX_MU_MBOX=y
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_MMC_IO_VOLTAGE=y
+-CONFIG_MMC_UHS_SUPPORT=y
+-CONFIG_MMC_HS400_ES_SUPPORT=y
+-CONFIG_MMC_HS400_SUPPORT=y
+-CONFIG_FSL_USDHC=y
+-CONFIG_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_MT35XU=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_AQUANTIA=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_DM_MDIO=y
+-CONFIG_MII=y
+-CONFIG_FSL_ENETC=y
+-CONFIG_PCIE_ECAM_GENERIC=y
+-CONFIG_PHY=y
+-CONFIG_PINCTRL=y
+-CONFIG_SPL_PINCTRL=y
+-CONFIG_PINCTRL_IMX_SCMI=y
+-CONFIG_POWER_DOMAIN=y
+-CONFIG_SCMI_POWER_DOMAIN=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_SPL_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_SPL_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_RTC=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_FSL_LPUART=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_NXP_FSPI=y
+-CONFIG_ULP_WATCHDOG=y
+-CONFIG_LZO=y
+-CONFIG_BZIP2=y
++#include <configs/imx95_evk.config>
+diff --git a/configs/imx95_a0_19x19_evk_defconfig b/configs/imx95_a0_19x19_evk_defconfig
 new file mode 100644
-index 00000000000..e82f82b5129
+index 00000000000..9376f11b151
 --- /dev/null
-+++ b/tools/binman/etype/nxp_imx9image.py
-@@ -0,0 +1,77 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright 2025 NXP
-+
-+import os
-+from binman.etype.mkimage import Entry_mkimage
-+from dtoc import fdt_util
-+from u_boot_pylib import tools
-+
-+class Entry_nxp_imx9image(Entry_mkimage):
-+    """NXP i.MX9 .bin configuration file generator and mkimage invocation
-+
-+    Properties arguments:
-+        - append: appends the specified blob file as-is
-+        - boot-from: indicates the boot device to be used
-+        - cntr-version: sets the image container format version
-+        - container: indicates that it is a new container
-+        - dummy-ddr: specifies the memory address for storing the DDR training
-+                     data image
-+        - dummy-v2x: specifies the memory address for storing V2X firmware
-+        - hold: reserves a specified number of bytes after the previous image
-+        - image: defines the option type, image filename, and the memory address
-+                 where the image will be stored
-+        - soc-type: specifies the target SoC for which the .bin file is generated
-+    """
-+
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+        self.config_filename = None
-+
-+    def ReadNode(self):
-+        super().ReadNode()
-+        cfg_path = fdt_util.GetString(self._node, 'cfg-path')
-+        self.config_filename = tools.get_output_filename(cfg_path)
-+        accepted_keys = [
-+            'append', 'boot-from', 'cntr-version', 'container', 'dummy-ddr',
-+            'dummy-v2x', 'hold', 'image', 'soc-type'
-+        ]
-+
-+        with open(self.config_filename, 'w', encoding='utf-8') as f:
-+            for prop in self._node.props.values():
-+                key = prop.name
-+                value = prop.value
-+
-+                if not any(key.startswith(prefix) for prefix in accepted_keys):
-+                    continue
-+
-+                formatted_key = key.replace('-', '_')
-+
-+                if key.startswith('image') and isinstance(value, list) and len(value) == 3:
-+                    image_path = os.path.join(tools.get_output_dir(), value[1])
-+                    value[1] = image_path
-+
-+                    combined = ' '.join(map(str, value))
-+                    f.write(f'image {combined}\n')
-+                elif isinstance(value, str):
-+                    f.write(f'{formatted_key} {value}\n')
-+                elif isinstance(value, bool):
-+                    f.write(f'{formatted_key}\n')
-+                elif isinstance(value, bytes):
-+                    hex_value = hex(int.from_bytes(value, byteorder='big'))
-+                    f.write(f'{formatted_key} {hex_value}\n')
-+
-+    def BuildSectionData(self, required):
-+        data, input_fname, uniq = self.collect_contents_to_file(self._entries.values(), 'imx9image')
-+
-+        outfile = f'imx9image-out.{uniq}'
-+        output_fname = tools.get_output_filename(outfile)
-+
-+        args = [
-+            '-d', input_fname, '-n', self.config_filename, '-T', 'imx8image',
-+            output_fname
-+        ]
-+
-+        result = self.mkimage.run_cmd(*args)
-+        if result is not None and os.path.exists(output_fname):
-+            return tools.read_file(output_fname)
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index a90db3c9351..f0e45c977fd 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7906,6 +7906,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-                          len(IMX_LPDDR_DMEM_DATA).to_bytes(4, 'little') +
-                          IMX_LPDDR_IMEM_DATA + IMX_LPDDR_DMEM_DATA, data)
- 
-+    def testNxpImx9Image(self):
-+        """Test that binman can generate a .bin file"""
-+        testdir = tempfile.mkdtemp(prefix='binman.')
-+        image_path = os.path.join(testdir, 'image.bin')
-+        with open(image_path, 'w') as f:
-+            pass
-+        self._DoTestFile('350_nxp_imx95.dts', output_dir=testdir)
-+
-     def testFitSignSimple(self):
-         """Test that image with FIT and signature nodes can be signed"""
-         if not elf.ELF_TOOLS:
-diff --git a/tools/binman/test/350_nxp_imx95.dts b/tools/binman/test/350_nxp_imx95.dts
++++ b/configs/imx95_a0_19x19_evk_defconfig
+@@ -0,0 +1,2 @@
++#include <configs/imx95_evk.config>
++CONFIG_IMX95_A0=y
+diff --git a/configs/imx95_evk.config b/configs/imx95_evk.config
 new file mode 100644
-index 00000000000..be7e2c447b0
+index 00000000000..231b42cb377
 --- /dev/null
-+++ b/tools/binman/test/350_nxp_imx95.dts
-@@ -0,0 +1,22 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/configs/imx95_evk.config
+@@ -0,0 +1,150 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX9=y
++CONFIG_TEXT_BASE=0x90200000
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x10000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=3
++CONFIG_ENV_SOURCE_FILE="imx95_19x19_evk"
++CONFIG_SF_DEFAULT_SPEED=40000000
++CONFIG_ENV_SIZE=0x4000
++CONFIG_ENV_OFFSET=0x700000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx95-19x19-evk"
++CONFIG_TARGET_IMX95_19X19_EVK=y
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_SYS_MONITOR_LEN=524288
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_TEXT_BASE=0x20480000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x204d6000
++CONFIG_SPL_BSS_MAX_SIZE=0x2000
++CONFIG_SYS_LOAD_ADDR=0x90400000
++CONFIG_SPL=y
++CONFIG_SPL_RECOVER_DATA_SECTION=y
++CONFIG_PCI=y
++CONFIG_SYS_MEMTEST_START=0x90000000
++CONFIG_SYS_MEMTEST_END=0xA0000000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
++CONFIG_DEFAULT_FDT_FILE="imx95-19x19-evk.dtb"
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_PBSIZE=2074
++CONFIG_BOARD_EARLY_INIT_F=y
++# CONFIG_BOARD_INIT is not set
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_PCI_INIT_R=y
++CONFIG_SPL_MAX_SIZE=0x20000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_LOAD_IMX_CONTAINER=y
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x93200000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_SYS_PROMPT="u-boot=> "
++CONFIG_CMD_ERASEENV=y
++CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CRC32_VERIFY=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
++CONFIG_CMD_SNTP=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_GETTIME=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_HASH=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_MMC_DEVICE_INDEX=1
++CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_USE_ETHPRIME=y
++CONFIG_ETHPRIME="eth0"
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SYS_RX_ETH_BUFFER=8
++CONFIG_SPL_DM=y
++CONFIG_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_CLK_CCF=y
++CONFIG_CLK_SCMI=y
++CONFIG_SPL_CLK_SCMI=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_RAM=y
++CONFIG_SPL_FIRMWARE=y
++# CONFIG_SCMI_AGENT_SMCCC is not set
++CONFIG_IMX_RGPIO2P=y
++CONFIG_DM_PCA953X=y
++CONFIG_ADP5585_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_IMX_LPI2C=y
++CONFIG_IMX_MU_MBOX=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_MT35XU=y
++CONFIG_PHYLIB=y
++CONFIG_PHY_AQUANTIA=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DM_MDIO=y
++CONFIG_MII=y
++CONFIG_FSL_ENETC=y
++CONFIG_PCIE_ECAM_GENERIC=y
++CONFIG_PHY=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_IMX_SCMI=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_SCMI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RTC=y
++CONFIG_DM_SERIAL=y
++CONFIG_FSL_LPUART=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_NXP_FSPI=y
++CONFIG_ULP_WATCHDOG=y
++CONFIG_LZO=y
++CONFIG_BZIP2=y
+diff --git a/doc/board/nxp/imx95_evk.rst b/doc/board/nxp/imx95_evk.rst
+index 27cd15eb7c9..709992e016d 100644
+--- a/doc/board/nxp/imx95_evk.rst
++++ b/doc/board/nxp/imx95_evk.rst
+@@ -25,6 +25,17 @@ Note: srctree is U-Boot source directory
+ 
+    $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-2.0.2-89161a8.bin
+    $ sh firmware-ele-imx-2.0.2-89161a8.bin --auto-accept
 +
-+/dts-v1/;
++i.MX95 A0 silicon version
 +
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
++.. code-block:: bash
 +
-+	binman {
-+		u-boot {
-+			type = "nxp-imx9image";
-+			cfg-path = "u-boot-container.cfgout";
-+			args;
++   $ cp firmware-ele-imx-2.0.2-89161a8/mx95a0-ahab-container.img $(srctree)
 +
-+			cntr-version = <2>;
-+			boot-from = "sd";
-+			soc-type = "IMX9";
-+			container;
-+			image = "a55", "image.bin", "0x90200000";
-+		};
-+	};
-+};
++i.MX95 B0 silicon version
++
++.. code-block:: bash
++
+    $ cp firmware-ele-imx-2.0.2-89161a8/mx95b0-ahab-container.img $(srctree)
+ 
+ Get DDR PHY Firmware Images
+@@ -53,12 +64,24 @@ branch: master
+    $ export TOOLS=$PWD
+    $ git clone -b master https://github.com/nxp-imx/imx-oei.git
+    $ cd imx-oei
+-   $ make board=mx95lp5 oei=ddr DEBUG=1
++
++i.MX95 A0 silicon version
++
++.. code-block:: bash
++
++   $ make board=mx95lp5 oei=ddr DEBUG=1 r=A0 DDR_CONFIG=XIMX95LPD5EVK19_6400mbps_train_timing_a1 all
+    $ cp build/mx95lp5/ddr/oei-m33-ddr.bin $(srctree)
+ 
+-   $ make board=mx95lp5 oei=tcm DEBUG=1
++   $ make board=mx95lp5 oei=tcm DEBUG=1 r=A0 all
+    $ cp build/mx95lp5/tcm/oei-m33-tcm.bin $(srctree)
+ 
++i.MX95 B0 silicon version
++
++.. code-block:: bash
++
++   $ make board=mx95lp5 oei=ddr DEBUG=1 r=B0 all
++   $ cp build/mx95lp5/ddr/oei-m33-ddr.bin $(srctree)
++
+ Get and Build System Manager Image
+ --------------------------------------
+ 
+@@ -82,13 +105,14 @@ Get and Build the ARM Trusted Firmware
+ 
+ Note: srctree is U-Boot source directory
+ Get ATF from: https://github.com/nxp-imx/imx-atf/
+-branch: lf_v2.10
++branch: lf_v2.12
+ 
+ .. code-block:: bash
+ 
+    $ export CROSS_COMPILE=aarch64-poky-linux-
+    $ unset LDFLAGS
+-   $ git clone -b lf_v2.10 https://github.com/nxp-imx/imx-atf.git
++   $ unset AS
++   $ git clone -b lf_v2.12 https://github.com/nxp-imx/imx-atf.git
+    $ cd imx-atf
+    $ make PLAT=imx95 bl31
+    $ cp build/imx95/release/bl31.bin $(srctree)
+@@ -96,6 +120,16 @@ branch: lf_v2.10
+ Build the Bootloader Image
+ --------------------------
+ 
++i.MX95 A0 silicon version
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ make imx95_a0_19x19_evk_defconfig
++   $ make
++
++i.MX95 B0 silicon version
++
+ .. code-block:: bash
+ 
+    $ export CROSS_COMPILE=aarch64-poky-linux-
 
 -- 
 2.43.0
