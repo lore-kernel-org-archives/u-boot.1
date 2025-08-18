@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52598CA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 16:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7122CA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 16:52:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A19A9801BE;
-	Mon, 18 Aug 2025 18:51:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D5A2801DD;
+	Mon, 18 Aug 2025 18:52:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PskUj+w9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m2gzK3xm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F1DB801DD; Mon, 18 Aug 2025 18:51:25 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id B5CB880548; Mon, 18 Aug 2025 18:52:10 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D550380107
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 18:51:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97FCF801BE
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 18:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-30cceb07f45so2924277fac.2
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 09:51:22 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-743749537caso4724918a34.0
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 09:52:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755535881; x=1756140681; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lsswQ9vSHXgL4fnabo+LbmeWfeH1x9Bh5olKJ+gqxj4=;
- b=PskUj+w95Paap4CCe/GGIpWGBPctbld9RM75jI3qx1OhoSL8v6PyFpc0gBwLVbuqFh
- lrdXrD8dlGmUx9Yoh5GVNTf8MqcmvqeKIO5QzSLZTiVIWUKddeWhG/kyPj6kxN2PkoYY
- 76ncGHiQpwtG+mP0qWt/+H3+KBwSsOMu3Sv9I=
+ d=konsulko.com; s=google; t=1755535927; x=1756140727; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P4MDQIQpP7HujBlMfVIEMlCVuJbOZhX8n83rZig/koA=;
+ b=m2gzK3xmKJepjSB8HdiZ9fzDlCSOC8H4vkDHaF8j9n3lI5eYqn0CrF38NVorpJvhll
+ hVuHoSkRfLuIZbIefux6PDQD1NoKLEsY7HSWNTM3IPlyEMb7wkwPa3zI0ZzbM36aqKhf
+ TnjVKdni4+b6RMFo7TVh/mZzAHBKduMVofNsU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755535881; x=1756140681;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lsswQ9vSHXgL4fnabo+LbmeWfeH1x9Bh5olKJ+gqxj4=;
- b=QqNuwbc/6fby9Ou/jWTdR3x1CnGW5k7J/yRGfkjieCczwDr6CgcQHYBtFlRnqF9/AX
- 5pfWp4SKX3TKGFXR4puVylnJtcZkidhTacxauIpp5x0abVMK0VDRBhcz+NsLlDFSe+D1
- QbNplJQ7HTKTP5F53dtjZqpnGpdG4d9+zwtGWbRaia6jKp1Bwc7p4sD5gb2CC0M7oVZP
- UrLjY+xMHun4anFWd/IGXY4C36x5CbW/5psHdXiBYnqpd9lZmC1QjpJpkOyAXtPm6AzA
- 5g+vud+FH3kBx9ubhobkujoNR8S4JAudgR6+WL2bTzfBMaHGhQcQtJoRZcXoL2dJZPo0
- D7jw==
-X-Gm-Message-State: AOJu0Ywx6uTlEs6Clz0VGHo2iPOxLXZcPGfYbKDTm4nMpFdbSwFOaumo
- 7LtFnjRiPXq0BQXBXswV8Px8VfkarcV8MbQNxmXXcJI6hihcTn8+2e+Jhc7ayKLf2jNpVULYUyv
- 3rFMbOXc=
-X-Gm-Gg: ASbGncueAinLWXrW9GAXU62ZDxO6EkDUsuD6mP/GdnuHn6mBKfkodoI1djH2x1on3kU
- FGlsxDiMmTC/YRRMJzwaQxh9VaqfRKk7pZGvh3weFSjmZoZZcZMxdKNhXLoeW2StTf6aaCO1XvY
- W3Umi4SvxjvaeQVP6Y1qj2t76ayR9i2eBPstyt+0YYOunM1ckxNmAvhQ00bm+h5jY6PI45sKFQq
- obR4NRQBnXrY5h5SlzJx77iQHM3at95HhFXnKSodzSOtYwWaL7NC5xLWnoEAUXlDLEpUnOuGjD9
- 9tGbWe06J1lh3d3EktUi//ilEAnCwSk1LVHZ6TXS+PucQf4pAKigFN7yI7Z5lQdl1yHtHJ+ytGq
- sj/K10Ex1/97eMJ9WXoaA/VQi8i1ZXm0ZWvVI47UkZYUjuTGqi92L8ZJE81k=
-X-Google-Smtp-Source: AGHT+IHXZzIwjrBdv2+ysdh9zqXWuNfc0/tjnPuWTmwc2LUDHqSD51jlafKXu3UknE8mSq12cyOKrw==
-X-Received: by 2002:a05:6870:440d:b0:30b:b37a:6bcd with SMTP id
- 586e51a60fabf-310aab043f2mr8070639fac.6.1755535881499; 
- Mon, 18 Aug 2025 09:51:21 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-310ab90df03sm2725804fac.12.2025.08.18.09.51.20
+ d=1e100.net; s=20230601; t=1755535927; x=1756140727;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=P4MDQIQpP7HujBlMfVIEMlCVuJbOZhX8n83rZig/koA=;
+ b=MD2Ad1eSz5tgDMw4GOMTPeGhld0MxBgeasLKtE687Pkx1hedku5J16nNcTBfDkXqgn
+ +nsFZZG6I6wzFVHHb0P4hEbFmY/BThKY8oD0eikAZj1mEQGPPMBot5AbKSMaxBwWXCIy
+ BXhjoInrHqxteA2Tuad0PC8/LDUhwxYVsXvVUufYPTdTnfkr9khVWq6PztT/m05AnRhn
+ 96bHrx+385HWYqt9fm8565883cTPO4jzOGKtj9mWgBtZLjA2NZ7GT4MHqne41dAuHpO2
+ AyrzOr4gZpYkuMGoIHaBu9M8UEzjNxYl+wz2qA89QH4xTmpPfDW7ebQrBk2G7gqmJbJK
+ +Wsg==
+X-Gm-Message-State: AOJu0YzctFRHrLzxBnurXFXPMn3J806IQzF2I+Zt1hcb+llfJXSru7Rc
+ QN0S23dymXIvryUb/HZdJl0Q/ctupenBKwJeKryump7yPGb2NlaSshtqRlcpgYPavaicmLo6WqA
+ 7jj6hIUA=
+X-Gm-Gg: ASbGncuYwkCQJ7qlb/JjsxR96ZfwSBYK37pgMt3RGM7MavtyP9C5kAI/jsMe5b/Nnil
+ KHtuWWcA6qh8kaMSJQuhPUf3+8WhFxeMvxH2LzYMMUCfRWM/F8wpEst68rqEi2mMfUM6CwM+Ca2
+ WjuCQKer4/c4o5sLNrifSPpm/1YnsfM+xLZTKtq8oKOZSGNqgngDZJJuJQ2yMkg2gW2qUH1kvDK
+ snCPiPFeY0Zeur2yh/9EMQEmfFk9GufTW5v5SpJ/SIbtwOcsAKfdAuOXCB5XwR6V/4NZms1UGTF
+ d7/5mD7KGl4vJKc2JLfomWaJ4uBzhXLNf604J+X6HygIfI4WMTQTkMyRK2RqTZVP2Nk1StHkdCA
+ wEKvxkbPyVQf1I78nj/FSs1XicbVZTdXn39CtjizSx8qXtnB1kGLtFx8=
+X-Google-Smtp-Source: AGHT+IES7CSfZYbvPwT0w7lOl/7dgAOv/LBmBJoOy92g14VNlY7I32ZHcpmEI6EvdNkt/UhUiTjk4w==
+X-Received: by 2002:a05:6830:6b4e:b0:741:a2b5:3c72 with SMTP id
+ 46e09a7af769-744df09b92amr151484a34.9.1755535927283; 
+ Mon, 18 Aug 2025 09:52:07 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7439204d28dsm1976204a34.35.2025.08.18.09.52.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Aug 2025 09:51:20 -0700 (PDT)
+ Mon, 18 Aug 2025 09:52:06 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Sascha Silbe <sascha-pgp@silbe.org>
-Subject: [PATCH] boot: Add LEGACY_IMAGE_FORMAT to DISTRO_DEFAULTS
-Date: Mon, 18 Aug 2025 10:51:19 -0600
-Message-ID: <20250818165119.3193853-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+In-Reply-To: <20250817221035.196421-1-marek.vasut+renesas@mailbox.org>
+References: <20250817221035.196421-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PULL] u-boot-sh/master
+Message-Id: <175553592655.3194065.5429494069653211071.b4-ty@konsulko.com>
+Date: Mon, 18 Aug 2025 10:52:06 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,29 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At this time there are still major Linux distributions which by default
-boot using LEGACY_IMAGE_FORMAT type scripts. Add this option to
-DISTRO_DEFAULTS to ensure these platforms can still boot.
+On Mon, 18 Aug 2025 00:09:09 +0200, Marek Vasut wrote:
 
-Fixes: d780965927d4 ("Drop the special am335x_boneblack_vboot target")
-Reported-by: Sascha Silbe <sascha-pgp@silbe.org>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- boot/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+> Fixes for newer revision of Retronix R-Car V4H Sparrow Hawk and
+> fixes for boards which enable POSITION_INDEPENDENT and also set
+> non-zero CONFIG_TEXT_BASE .
+> 
+> The following changes since commit 0c558bbad9e7581808b358091d1fd979f860e8ac:
+> 
+>   bootstd: rauc: Change global method to check any partition (2025-08-14 09:18:43 -0600)
+> 
+> [...]
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 2ff6f0037384..a6fc46ff4f5f 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1163,6 +1163,7 @@ config DISTRO_DEFAULTS
- 	select CMD_SYSBOOT
- 	select HUSH_PARSER
- 	select SYS_LONGHELP
-+	select LEGACY_IMAGE_FORMAT
- 	help
- 	  Note: These scripts have been replaced by Standard Boot. Do not use
- 	  them on new boards. See 'Migrating from distro_boot' at
+Merged into u-boot/master, thanks!
+
 -- 
-2.43.0
+Tom
+
 
