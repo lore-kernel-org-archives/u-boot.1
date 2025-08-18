@@ -4,88 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A42B6CA0EE4
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 09:24:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F67ECA0EE4
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 09:30:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAE95802C1;
-	Mon, 18 Aug 2025 11:24:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 67AEA80107;
+	Mon, 18 Aug 2025 11:30:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ud7tht/B";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1755509406;
+	bh=Sck+pMaNyqq3MqNyffK1X5N3hUwa4rEClo5L6/mU3Io=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=WeFZ8CECPt3DT6UGjvZ7G+enB63nq5eeKo1H7+Qb2y8I+jyCBXyykUvm8cyYNPGHN
+	 /mqD/3DsxYndabaLnueoAoK4UJGlWRwNAd5Y1pSSwFEPlcEPPZ27Di0AfsEb4Grw+q
+	 xfIFvnATzUSxA90+7pvNcQWg3YvIKYeV3hVN+KT7kQQgnrrP/9beO4Oou7nfW1TELL
+	 5OZcHSvDcH5I1vqS0VitgXWewboQdxo7+n4B9IPvn5aoJ5C51cd3SmYHCKKCI4CzW6
+	 J+/dMlOwrBNUURoQhrtXzP2FfJe/CJphMqtRMT6pUScGh699omhAlDTpoJSKxsbo49
+	 qmcGz1nSb25cQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1BB2803DF; Mon, 18 Aug 2025 11:24:39 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F0E6C80194; Mon, 18 Aug 2025 11:30:04 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B464D80194
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 11:24:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E684F800D7
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 11:30:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3b9dc5c6521so2806357f8f.1
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 02:24:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755509077; x=1756113877; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UUzaGZJK8OmE4L2X28GYXXAJb0dAh8Y3zCOaGzft2HQ=;
- b=Ud7tht/Bb6EWNN7AAHR9c7tRGEpgy28B7jPsMjpRS+VwT3Er1QRtZF98f2jxQyPz4H
- 0YSwKJWi7FY8PYzat215ExUua3+Yj1sE3FuBxSNcxmtGYEJO7Cj4fyYAV2y1xW5js9hv
- Z+5mC2zfo4rbWgIw20nZwcv3lX3SJa8Cu0J17d9/2Lj2bf8RinGNvixBabcGpIYZh5HI
- FWUJT1ruDe+ky0pTme+4E0jz7Yq/ZPXeZZWbRKiuJSJB3fqQaog/4bYSNl6Uoh5ic1q6
- TXqYiEh4TfBxLygslOfYfHrGf+kCwVxEmE1J/fo7UoHOSx3ca6J+Hhjr7ivD0JfYlZrv
- jdfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755509077; x=1756113877;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UUzaGZJK8OmE4L2X28GYXXAJb0dAh8Y3zCOaGzft2HQ=;
- b=HMFvS/Uc8Bf2uIHX7wJjWJgYcwRCfj8/7rDT7RzhRMb3SxU+4+iVDi6qozjgAlv25c
- DpGf2AQLklyVR9q+jwTsR81ci3mbv4VYDDUwuQflHI5VJ2oFT4Au126SmhdWe/CSH+Gw
- xCzlaPj1nB4jv7MA2ihrRFo08JB2hHMcwMSRStxmxxVZTjn1eU28mIsdBcjVqr4dgPOL
- o4UpW7GfcZhT+USY/nMCx9KN170fp3n/L7P6+J3v7HbknmTdwnwEz+W6Gytsa+3Pshdj
- xIHaKJ81kGRZFlNHi2vqVZ9NkVbX/MKCX6+wmeSQPH8/rRlTM6dDiFfQkcZ5611Uy5ga
- jQ3Q==
-X-Gm-Message-State: AOJu0Yz691QxXhAKQ9NOPROddBpLEwqG4y4AGFihMZhYgbt4zM1mJMsr
- H55KV3GKtSEG+MRxuAC99g3cVFpIb5wPc/QPFlVqNHjD410MleUkkuj7RMMmasK85hM=
-X-Gm-Gg: ASbGncuwCPgoMJKoTMM23JFXg0g8oGVXUJYiXo02oKdLqyF8DvHzJSZw4JwfdXxeIib
- DJuIYfYr+NWUKVqC76TT6eV9qxUX8zer1nmIrYUqQiPoOkohX2YU/VSJvasML952uG+6ibsyRa5
- dLgCNsHjNBD9pw9gei2tUvHmkfpyUs7XBFM9UmpFbLwyhifr/bvHtZdNnt/NzT6Ew4gsJdBLmfK
- fWFqAiGOn/hMj7BkjY7r0pDgfLMUzA4x5DFtNM9hWhc2Kf4DW9y9r/wKaE8v0E5zIxQbN6nAQLX
- eHlI9OFjswm0t21sPBE+GDNcJrGvhRBI1UCFHkcKSq0xCIcwWUZ4uMOyFN8SewyUFyWC79ziHi4
- evR3oSgatbju9Sqt9TQm1ikEQDpY7TWQxMdAFzLAwBxSDRo+4XoY=
-X-Google-Smtp-Source: AGHT+IG9nVjVToauHrCp9iKbMBdh0SL6KEIGeuwTSHwU16cPu+GYLUKLRW4YfnIamKglHaJxYAW4ww==
-X-Received: by 2002:a05:6000:4308:b0:3b7:911c:83f with SMTP id
- ffacd0b85a97d-3bb6636ccdamr7013216f8f.9.1755509077058; 
- Mon, 18 Aug 2025 02:24:37 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:69b5:38a0:910b:c9c8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3bb64758561sm12216594f8f.11.2025.08.18.02.24.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Aug 2025 02:24:36 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 18 Aug 2025 10:24:36 +0100
-Subject: [PATCH v2] net: axi_emac: Fix timeout test
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="QVqCk5Il"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1AE851038C11C; 
+ Mon, 18 Aug 2025 11:29:59 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1755509401; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=Sck+pMaNyqq3MqNyffK1X5N3hUwa4rEClo5L6/mU3Io=;
+ b=QVqCk5IlMqy97ZwUIVRo5byBP+PImSqgBdnam/QO/Asz2ZxTfL1GMBgE6RE7TQEa9jrvHr
+ 16fXBSb04GgxBgtOhevlhzsekJsu1E16hs+Wfe3JHk3l0Bx2nz8FnxwoMZg09FVJ+jbzYa
+ FiH/gjSnktxDD4y3UMk0hstPNEnu7Uh61V+0GL6RoTky5fi1Ra5InOnA+SZjkudAULnI2N
+ Eqs877tqs89LOMZopZY8zvezi17GRu81PFUxz1BrLxZMPS4eZ8lfnnj6GpiVYqVIpyvc6P
+ gGEhhMd1WE19mrAZWig7X/KP9hnKIuuji88Edo1jk3rql82sShd/3OU8QLDRpg==
+Date: Mon, 18 Aug 2025 11:29:57 +0200
+From: Philip Oberfichtner <pro@denx.de>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <michael@walle.cc>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH v2 1/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
+Message-ID: <aKLylfvzdfebJRWe@antares>
+References: <20250807102436.452691-1-pro@denx.de>
+ <20250807102436.452691-2-pro@denx.de>
+ <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
+ <20250807162115.GZ124814@bill-the-cat>
+ <06dd9037-af3d-48a3-974e-80db481c7121@mailbox.org>
+ <20250807201142.GC124814@bill-the-cat>
+ <4813ce12-ad82-4170-999c-e5f816a42708@mailbox.org>
+ <20250807232421.GD124814@bill-the-cat> <aJmuxlTEFT4R7HR_@antares>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250806-net_xilinx_axi-v2-1-6311cf59451d@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAFPxomgC/3WNQQqDMBBFryKzbkoiNDZd9R5FZIxTHWiTMhFJE
- e/e6L7L9z+Pt0IiYUpwq1YQWjhxDAXqUwV+wjCS4qEw1Lq+6Ku2KtDcZX5xyB1mVs6jw8aZwRo
- DReoxkeoFg5927Y1pJtmPj9CT81F6tIUnTnOU7xFezL7+bSxGGaV1T9pq63xj7+VCiecoI7Tbt
- v0AM2r7s8YAAAA=
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aJmuxlTEFT4R7HR_@antares>
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,56 +88,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The timeout test in axi_dma_init is not correct due to the
-post-decrement used on the timeout variable which will mean timeout is
-not 0 if the timeout occurs. Make the timeout variable an int instead of
-a u32 and then test for timeout being -1.
+On Mon, Aug 11, 2025 at 10:50:17AM +0200, Philip Oberfichtner wrote:
+> The idea of treating a size limit of zero as unlimited has been common
+> practice in mainline U-Boot since 2019, where CONFIG_SPL_SIZE_LIMIT has
+> been introduced. The same logic has later been applied to TPL and VPL
+> size limits.
+> 
+> If we want to consistently stick to the HAS_*_SIZE_LIMIT approach, we'd
+> have to introduce four extra Kconfig options alongside
+> HAS_BOARD_SIZE_LIMIT:
+> 
+> 	CONFIG_HAS_UBOOT_WITH_SPL_SIZE_LIMIT
+> 	CONFIG_HAS_SPL_SIZE_LIMIT
+> 	CONFIG_HAS_TPL_SIZE_LIMIT
+> 	CONFIG_HAS_VPL_SIZE_LIMIT
+> 
+> 
+> Furthermore, the extra lines of code in the toplevel Makefile, which
+> could otherwise be removed:
+> 
+> 	ifneq ($(CONFIG_BOARD_SIZE_LIMIT),)
+> 	BOARD_SIZE_CHECK= @ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
+> 	else
+> 	BOARD_SIZE_CHECK =
+> 	endif
+> 
+> 	ifneq ($(CONFIG_HAS_UBOOT_WITH_SPL_SIZE_LIMIT),0x0)
+> 	UBOOT_WITH_SPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT)
+> 	else
+> 	UBOOT_WITH_SPL_SIZE_CHECK =
+> 	endif
+> 
+> 	ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
+> 	SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
+> 	else
+> 	SPL_SIZE_CHECK =
+> 	endif
+> 
+> 	ifneq ($(CONFIG_TPL_SIZE_LIMIT),0x0)
+> 	TPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
+> 	else
+> 	TPL_SIZE_CHECK =
+> 	endif
+> 
+> 	ifneq ($(CONFIG_VPL_SIZE_LIMIT),0x0)
+> 	VPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_VPL_SIZE_LIMIT))
+> 	else
+> 	VPL_SIZE_CHECK =
+> 	endif
+> 
+> 
+> Is it really worth adding this much of extra code?
 
-This issue was found by Smatch.
-
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
-Changes in v2:
-- Refactor the code so it returns on success from the while loop
-- Link to v1: https://lore.kernel.org/r/20250806-net_xilinx_axi-v1-1-00be06069c76@linaro.org
----
- drivers/net/xilinx_axi_emac.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/net/xilinx_axi_emac.c b/drivers/net/xilinx_axi_emac.c
-index c8038ddef1b..22e119370c8 100644
---- a/drivers/net/xilinx_axi_emac.c
-+++ b/drivers/net/xilinx_axi_emac.c
-@@ -558,7 +558,7 @@ static int axiemac_write_hwaddr(struct udevice *dev)
- /* Reset DMA engine */
- static void axi_dma_init(struct axidma_priv *priv)
- {
--	u32 timeout = 500;
-+	int timeout = 500;
- 
- 	/* Reset the engine so the hardware starts from a known state */
- 	writel(XAXIDMA_CR_RESET_MASK, &priv->dmatx->control);
-@@ -571,11 +571,11 @@ static void axi_dma_init(struct axidma_priv *priv)
- 		if (!((readl(&priv->dmatx->control) |
- 				readl(&priv->dmarx->control))
- 						& XAXIDMA_CR_RESET_MASK)) {
--			break;
-+			return;
- 		}
- 	}
--	if (!timeout)
--		printf("%s: Timeout\n", __func__);
-+
-+	printf("%s: Timeout\n", __func__);
- }
- 
- static int axiemac_start(struct udevice *dev)
-
----
-base-commit: 007610da2cca405ea7739fc120d90085be4b6ac2
-change-id: 20250806-net_xilinx_axi-9ca9a791d611
-
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+Ping @Marek: So are you in favor of this surplus of code?
