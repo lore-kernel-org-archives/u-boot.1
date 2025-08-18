@@ -4,47 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4F46CA0EE4
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 12:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1589BCA0EE4
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 13:05:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD73F801BE;
-	Mon, 18 Aug 2025 14:57:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=silbe.org
+	by phobos.denx.de (Postfix) with ESMTP id 23358801BE;
+	Mon, 18 Aug 2025 15:05:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B65B802C1; Mon, 18 Aug 2025 10:23:32 +0200 (CEST)
-Received: from bbox-ptr.sascha.silbe.org (bbox-ptr.sascha.silbe.org
- [IPv6:2a03:4000:20:16f::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A00880050
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 10:23:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=silbe.org
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="hphlcPAy";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5DB21801DD; Mon, 18 Aug 2025 15:05:53 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 09A1E80107
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 15:05:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sascha-ml-reply-to-2025-3@silbe.org
-Received: from twin.sascha.silbe.org (twin.sascha.silbe.org [192.168.1.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1)
- server-digest SHA256
- client-signature RSA-PSS (2048 bits) client-digest SHA256)
- (Client CN "twin.sascha.silbe.org", Issuer "stunnel Pseudo-CA" (verified OK))
- by bbox.sascha.silbe.org (Postfix) with ESMTPS id 63D411E165F;
- Mon, 18 Aug 2025 10:23:28 +0200 (CEST)
-Received: (nullmailer pid 1412739 invoked by uid 71000);
- Mon, 18 Aug 2025 08:23:27 -0000
-From: Sascha Silbe <sascha-ml-reply-to-2025-3@silbe.org>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-Subject: [PATCH] am335x_evm: re-enable legacy image format
-Date: Mon, 18 Aug 2025 10:22:35 +0200
-Message-Id: <20250818082235.1412022-1-sascha-ml-reply-to-2025-3@silbe.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <yh7ro6sfsbjh.fsf@twin.sascha.silbe.org>
-References: <yh7ro6sfsbjh.fsf@twin.sascha.silbe.org>
+ smtp.mailfrom=prvs=0325d41c3d=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57IBp5iC013848;
+ Mon, 18 Aug 2025 15:05:49 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ dQkNHWM62Iw1zqJdJdieze5oxNLBGk3TqZiB/cqQp/0=; b=hphlcPAyRkZzQUfu
+ ZVwDS4TlVQphf/pkyiVuO3+nLPFyJ/0oA3kzy3K9yOpzzLKpUjbEiP2n12dcrpyW
+ SXeHKReFp8bjuGBn+IarUjuGISMI4kl3Rsh85IzI5OzpR/qiLjisjahv/CloJgY4
+ 1KGZQ+pARpnBhsoeVdxyqWcHgLYqSI0ENglnNR9+YFYD7bhY2u9Ae3OipQQtkLiQ
+ bxbbMlDflSkrSQOd+omOjAePNTR+F9mdglY4l5XiapfsYFE/YSPlFt1dnweGb0Sh
+ 3u/9RSpy5P0XxLfcmuBjAPnq4YM8yStu/nRbexrHRfM2gkPSEkY7ci0ioiNSsZn1
+ Zu1AIg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48k4xmm7ut-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 18 Aug 2025 15:05:49 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 11ABF40045;
+ Mon, 18 Aug 2025 15:04:55 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C662772626D;
+ Mon, 18 Aug 2025 15:04:35 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 18 Aug
+ 2025 15:04:35 +0200
+Message-ID: <93f5f0db-ad74-467e-a68d-893504c45eb1@foss.st.com>
+Date: Mon, 18 Aug 2025 15:04:34 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 18 Aug 2025 14:57:05 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: stm32_sdmmc2: avoid infinite while loop
+To: Christophe Kerello <christophe.kerello@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250812135526.268574-1-christophe.kerello@foss.st.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250812135526.268574-1-christophe.kerello@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-18_05,2025-08-14_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,46 +91,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
 
-in case dropping CONFIG_LEGACY_IMAGE_FORMAT was not intentional,
-here's a patch to fix it.
 
-Sascha
+On 8/12/25 15:55, Christophe Kerello wrote:
+> Avoid unlimited while loop by adding a timeout. The timeout is
+> calculated based on a minimal throughput of 256 KB/s.
+> The timeout is set at least to 2 seconds.
+> 
+> Signed-off-by: Christophe Kerello <christophe.kerello@foss.st.com>
+> ---
+> 
+>  drivers/mmc/stm32_sdmmc2.c | 16 +++++++++++++++-
+>  1 file changed, 15 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
+> index 9483fb57daf..122690aef3e 100644
+> --- a/drivers/mmc/stm32_sdmmc2.c
+> +++ b/drivers/mmc/stm32_sdmmc2.c
+> @@ -385,15 +385,29 @@ static int stm32_sdmmc2_end_data(struct udevice *dev,
+>  	u32 mask = SDMMC_STA_DCRCFAIL | SDMMC_STA_DTIMEOUT |
+>  		   SDMMC_STA_IDMATE | SDMMC_STA_DATAEND;
+>  	u32 status;
+> +	unsigned long timeout_msecs = ctx->data_length >> 8;
+> +	unsigned long start_timeout;
+> +
+> +	/* At least, a timeout of 2 seconds is set */
+> +	if (timeout_msecs < 2000)
+> +		timeout_msecs = 2000;
+>  
+>  	if (data->flags & MMC_DATA_READ)
+>  		mask |= SDMMC_STA_RXOVERR;
+>  	else
+>  		mask |= SDMMC_STA_TXUNDERR;
+>  
+> +	start_timeout = get_timer(0);
+>  	status = readl(plat->base + SDMMC_STA);
+> -	while (!(status & mask))
+> +	while (!(status & mask)) {
+> +		if (get_timer(start_timeout) > timeout_msecs) {
+> +			ctx->dpsm_abort = true;
+> +			return -ETIMEDOUT;
+> +		}
+> +
+> +		schedule();
+>  		status = readl(plat->base + SDMMC_STA);
+> +	}
+>  
+>  	/*
+>  	 * Need invalidate the dcache again to avoid any
 
--- >8 --
-From: Sascha Silbe <sascha-pgp@silbe.org>
-Date: Sat, 16 Aug 2025 14:31:39 +0200
-Subject: [PATCH] am335x_evm: re-enable legacy image format
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-When am335x_boneblack_vboot was rolled into the generic am335x_evm
-target CONFIG_LEGACY_IMAGE_FORMAT was dropped as a side effect of
-enabling CONFIG_FIT_SIGNATURE. This breaks distro boot using scripts
-inside legacy image files (boot.scr).
-
-Explicitly re-enable legacy image format so that distro boot support
-is fully working again.
-
-Tested on BeagleBone Black.
-
-Fixes: d780965927d4 ("Drop the special am335x_boneblack_vboot target")
-Signed-off-by: Sascha Silbe <sascha-pgp@silbe.org>
----
- configs/am335x_evm_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-index 2b68902edef..9393cced885 100644
---- a/configs/am335x_evm_defconfig
-+++ b/configs/am335x_evm_defconfig
-@@ -15,6 +15,7 @@ CONFIG_TIMESTAMP=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_BOOTCOMMAND="run findfdt; run init_console; run finduuid; run distro_bootcmd"
--- 
-2.39.5
-
+Thanks
+Patrice
