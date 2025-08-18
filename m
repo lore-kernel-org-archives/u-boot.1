@@ -4,74 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36191CA0EE4
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 13:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC040CA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 13:58:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0AAC801BE;
-	Mon, 18 Aug 2025 15:20:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BA3BF801BE;
+	Mon, 18 Aug 2025 15:58:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RT4lap4I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fy/U/Dfb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2818581D6A; Mon, 18 Aug 2025 15:20:38 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0224801BE
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 15:20:35 +0200 (CEST)
+ id 00B72801DD; Mon, 18 Aug 2025 15:58:19 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 416C080107
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 15:58:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57IDKR7B2666072;
- Mon, 18 Aug 2025 08:20:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1755523227;
- bh=vBfWmfnfJAypBncndnjve29DVJ7kUNDQPEp33meYt1s=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=RT4lap4IVhqdiU6JjOGIw6gkVmVCshfjnD2WV8uSL8XZ3bE1+/JXxczZms5SArDa8
- DwIV4FD5jRQ98tmfrzVZaac5kkxlAbAen7w3wXlMFk3S+Rmwu7puNQMN41+fexBRW8
- /UwC1hv0yrR+QqWUxOEtsJgDiSCZBoHfYIVh0hEs=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57IDKRra318215
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 18 Aug 2025 08:20:27 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 18
- Aug 2025 08:20:26 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 18 Aug 2025 08:20:26 -0500
-Received: from localhost (kamlesh.dhcp.ti.com [172.24.233.19])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57IDKPVJ1072942;
- Mon, 18 Aug 2025 08:20:26 -0500
-From: Kamlesh Gurudasani <kamlesh@ti.com>
-Date: Mon, 18 Aug 2025 18:50:19 +0530
-Subject: [PATCH v2 2/2] clk: scmi: add compatibility for clock version 3.0
- and onwards
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3b9edf504e6so1936276f8f.3
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 06:58:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755525495; x=1756130295; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1S94n1Lj2aywoAfkmv6G9iuPh5IvbuZr+p39q/fQnV4=;
+ b=fy/U/DfbbJws4+8ve+mK7tD/68y2OGybKBOPEQzafipye8xyctWqFmC5VFVHT7KZlN
+ Aj1MBbkC7xzCPFdZrHKKhaEH5TrEuSNl4mSt+qLXQ/XtJJJd2YDcuzPr3hFA37bMjWJf
+ 9Z6tFh0a4YiNowaCey8kvGHGocITQHMOefk9BkAm6WM1Rnsb8IvvpdEPCC7EOnul2GLz
+ twQr+VraQX0FwJGGLO0FJtNoi698GVPPV0dT9g39U09uHE23QhoL97ZfPJGVu7BYTUfU
+ EKM52oBoFJQt1UYoqjvDOmBAOCealmIwqjtmopBnGVk4sQ8xcClBozfQw9O1zPlLxBJy
+ OLjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755525495; x=1756130295;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1S94n1Lj2aywoAfkmv6G9iuPh5IvbuZr+p39q/fQnV4=;
+ b=khCd6vrYITH1rggeshAiv2qHAT/1BZrTg0m4cjPcGEyyYca7eu/M9eOyJpx9lq8KLJ
+ LkqBsnxaJJkkJ3iSU+5gv1KYs+RXwDficwXr1DkhbvF38L7jZIxjcZV4Ef8mpvi57quK
+ 4H7HtPFIFWKZiWTJLRet5gID+XD4NVCW4cY3nU6+nv1nneN4Zf8CxeeMJa3B7JBdaWsn
+ D/XAcdZw9PrYMSjbVENkVHaUX1+F2Cieou/PrsnABomXQHsJ4zbJ2b9RvEFdyXpwoJ5Z
+ GWF1aGWzWFuvIsttQMeNIaYoPT+OSqN+En9+QJenI23G81MdjqSOGmK5vtAq1tvYJvX8
+ fvzw==
+X-Gm-Message-State: AOJu0Yzp49UO2Z5MFlbu1fbhSXvAK92omt6kCnn1rtGdavxaELQoSi42
+ Yhxz91XB72bVQmnx5g6XLDGdZbX0HBKpM79PqFEb4jZmxOMDvEmWHLzQhNleimduX/YNRpqe3Mc
+ l6Itqkdfj0g==
+X-Gm-Gg: ASbGnct7iLerWiYnLHg55vF5DUnUqv44foeCwj0eqXc4+OZD3zUSH0yEYnGJGmvAcVz
+ +A5PCHvhKYknx8jkP82bhyUHyTx//GWETZF9CvSPi+Pp2REJ8kEZFLyk4hgobaUmnyhdveIlwhw
+ cTTx0kYmRQDI8a0ktjC8gcrexLS6tmLbGe/+CjRiqQuKXgiM3wJ7PzVoi6chCoHKFQHKGXiVdS+
+ 7kTimUsWpymFqCetN7GzZAljF7JljqARy1Y8guNx/O3XnbqFIzP3Rz5/6hMmJyrdY4efXqZWf4u
+ 4SZcO1p4inos0crsJRvyXpZSqsgFbbKeQbYKzoCMDzQdSV6xtgsuoRSOnv+fccQ4B3IVvqAIkji
+ Q+/XYfgrno66T6nVOC6oO0ticS80FxJL492FECnMhyRuUuybdjQuSYMZBG8N/jB5L9oTfl4Hp+M
+ 14cg==
+X-Google-Smtp-Source: AGHT+IF0Fu0YMW3X/SstfbAsRap5RhJkbWpskk7DIq4+wxi1jZRzf9bjqdlvKOIovyZL0ZaxLkn7SA==
+X-Received: by 2002:a05:6000:200e:b0:3b7:8cac:821b with SMTP id
+ ffacd0b85a97d-3bb66c296e0mr8788083f8f.20.1755525495101; 
+ Mon, 18 Aug 2025 06:58:15 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:2d28:4b2d:6840:1003?
+ ([2a01:e0a:3cb:7bb0:2d28:4b2d:6840:1003])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3bb64d2a405sm13190038f8f.20.2025.08.18.06.58.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Aug 2025 06:58:14 -0700 (PDT)
+Message-ID: <43827d75-e2ad-4c78-b540-112c1cde68e9@linaro.org>
+Date: Mon, 18 Aug 2025 15:58:13 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: Add SYS_FAULT_MII_ADDR to Kconfig
+To: Tom Rini <trini@konsulko.com>
+References: <20250812175633.3056595-1-trini@konsulko.com>
+Content-Language: en-US
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250812175633.3056595-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250818-b4-scmi-v1-v2-2-e0351c4d839e@ti.com>
-References: <20250818-b4-scmi-v1-v2-0-e0351c4d839e@ti.com>
-In-Reply-To: <20250818-b4-scmi-v1-v2-0-e0351c4d839e@ti.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom
- Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Ye Li
- <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>
-CC: <u-boot@lists.denx.de>, Kamlesh Gurudasani <kamlesh@ti.com>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1755523221; l=3175;
- i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
- bh=Y5jwiGDYIDDuT4mbFjLg3PTfnp5ACAtQc+VW+jhLnJU=;
- b=M0IAD7OVTvKMeiStv6dg2MMtKDwGSx7Oupaxm7RCWQgKf9k8nbzHg0L+V1y2kZBX40osUhlUb
- fxgppxzEuOFD1qzdMqya9mARh3dIKyxeYG8lBwTGu+CborWJsqvxpqS
-X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
- pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,116 +102,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clock version 3.0 specified in ARM SCMI Platform design document
-v3.2, adds extended_config_val parameter in CLOCK_CONFIG_SET.
+Hi Tom,
 
-The SCMI server with clock version 3.0 rejects the message if
-they don't have this field.
+On 8/12/25 19:56, Tom Rini wrote:
+> The support found under SYS_FAULT_ECHO_LINK_DOWN requires that the
+> SYS_FAULT_MII_ADDR symbol also be set. This wasn't previously found in
+> Kconfig, so add it now.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> This was found as part of testing "allyesconfig". I'm not sure if
+> there's anything useful that could be put in the "help" text here.
+> ---
+>  README      | 3 ---
+>  net/Kconfig | 4 ++++
+>  2 files changed, 4 insertions(+), 3 deletions(-)>
+> diff --git a/README b/README
+> index 65305e6a0371..7808af528625 100644
+> --- a/README
+> +++ b/README
+> @@ -1249,9 +1249,6 @@ Note: once the monitor has been relocated, then it will complain if
+>  the default environment is used; a new CRC is computed as soon as you
+>  use the "saveenv" command to store a valid environment.
+>  
+> -- CONFIG_SYS_FAULT_MII_ADDR:
+> -		MII address of the PHY to check for the Ethernet link state.
+> -
+>  - CONFIG_DISPLAY_BOARDINFO
+>  		Display information about the board that U-Boot is running on
+>  		when U-Boot starts up. The board function checkboard() is called
+> diff --git a/net/Kconfig b/net/Kconfig
+> index 24508026200d..6d5de9a675e4 100644
+> --- a/net/Kconfig
+> +++ b/net/Kconfig
+> @@ -60,6 +60,10 @@ config SYS_FAULT_ECHO_LINK_DOWN
+>  	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
+>  	  be configured.
+>  
+> +config SYS_FAULT_MII_ADDR
+> +	hex "MII address of the PHY to check for the Ethernet link state"
+> +	depends on SYS_FAULT_ECHO_LINK_DOWN
+> +
+>  config TFTP_PORT
+>  	bool "Set TFTP UDP source/destination ports via the environment"
+>  	help
 
-Add support so that both SCMI server with clock version 2.0 and 3.0
-can be handled.
+This breaks qemu_m68k in CI [1].
 
-Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
----
- drivers/clk/clk_scmi.c   | 53 ++++++++++++++++++++++++++++++++++++++---------------
- include/scmi_protocols.h |  6 ++++++
- 2 files changed, 44 insertions(+), 15 deletions(-)
+[1] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1224987
 
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index 83ea7bb4286..127368897dc 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -131,21 +131,44 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
- 
- static int scmi_clk_gate(struct clk *clk, int enable)
- {
--	struct scmi_clk_state_in in = {
--		.clock_id = clk_get_id(clk),
--		.attributes = enable,
--	};
--	struct scmi_clk_state_out out;
--	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
--					  SCMI_CLOCK_CONFIG_SET,
--					  in, out);
-+	struct scmi_clock_priv *priv = dev_get_priv(clk->dev);
-+
- 	int ret;
- 
--	ret = devm_scmi_process_msg(clk->dev, &msg);
--	if (ret)
--		return ret;
-+	if (priv->version >= CLOCK_PROTOCOL_VERSION_3_0) {
-+		struct scmi_clk_state_in_v2 in = {
-+			.clock_id = clk_get_id(clk),
-+			.attributes = enable,
-+			.extended_config_val = 0,
-+		};
-+		struct scmi_clk_state_out out;
-+		struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-+						  SCMI_CLOCK_CONFIG_SET,
-+						  in, out);
- 
--	return scmi_to_linux_errno(out.status);
-+		ret = devm_scmi_process_msg(clk->dev, &msg);
-+		if (ret)
-+			return ret;
-+
-+		return scmi_to_linux_errno(out.status);
-+	} else {
-+		struct scmi_clk_state_in in = {
-+			.clock_id = clk_get_id(clk),
-+			.attributes = enable,
-+		};
-+		struct scmi_clk_state_out out;
-+		struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-+						  SCMI_CLOCK_CONFIG_SET,
-+						  in, out);
-+
-+		ret = devm_scmi_process_msg(clk->dev, &msg);
-+		if (ret)
-+			return ret;
-+
-+		return scmi_to_linux_errno(out.status);
-+	}
-+
-+	return 0;
- }
- 
- static int scmi_clk_enable(struct clk *clk)
-@@ -275,12 +298,12 @@ static int scmi_clk_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
--	if (!CONFIG_IS_ENABLED(CLK_CCF))
--		return 0;
--
- 	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
- 					    &priv->version);
- 
-+	if (!CONFIG_IS_ENABLED(CLK_CCF))
-+		return 0;
-+
- 	/* register CCF children: CLK UCLASS, no probed again */
- 	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
- 		return 0;
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index 762a1032c37..a4d1a4c80c8 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -807,6 +807,12 @@ struct scmi_clk_state_in {
- 	u32 attributes;
- };
- 
-+struct scmi_clk_state_in_v2 {
-+	u32 clock_id;
-+	u32 attributes;
-+	u32 extended_config_val;
-+};
-+
- /**
-  * struct scmi_clk_state_out - Response payload for CLOCK_CONFIG_SET command
-  * @status:	SCMI command status
+More specifically:
 
+$ tools/buildman/buildman -o /tmp/build -w -E -W -e --board M5208EVBE
+Building current source for 1 boards (1 thread, 24 jobs per thread)
+      m68k:  +   M5208EVBE
++.config:598:warning: symbol value '' invalid for SYS_FAULT_MII_ADDR
++
++Error in reading or end of file.
++make[3]: *** [scripts/kconfig/Makefile:75: syncconfig] Terminated
++make[2]: *** [Makefile:647: syncconfig] Terminated
++make: *** [Makefile:198: sub-make] Terminated
++(** did you define an int/hex Kconfig with no default? **)
+    0    0    1 /1              M5208EVBE
+Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+
+Cheers,
 -- 
-2.34.1
-
+Jerome
