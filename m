@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E574ACA0EC0
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 10:09:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C40A1CA0EC6
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 10:10:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6C3683087;
-	Mon, 18 Aug 2025 12:07:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E9C483197;
+	Mon, 18 Aug 2025 12:07:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="AunkBYKQ";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="ioalFEPE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43250831BB; Mon, 18 Aug 2025 12:06:59 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id D4D1582F49; Mon, 18 Aug 2025 12:07:01 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCD5882998
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 12:06:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 975DA8206E
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 12:06:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OVpKKnf1pV9f+Hm3nOvmAhPnKM0rEqKq0PUdpIPp/IkJuesOYT0LWi13p+Wc+jD1I/7P3xr9kul2Am18D8Zd5bhwNNuyrWf8TIWSoK0Q7cKYr9YKgJjJfUqhgKsgA4iASIVKASz9u80CmJd1pG5pwLjsd//Xn5aDqUwPRc87Dubwsv6nL1lEdP+Ww0tq0EHQur3lycAsindIUT8mUoigEnNXKz7B288UtKVEWHLKyqgIGv1GsKKnamCqElwGq37EQKbIjis9SYyw3RypBWAT3kS+6iqWf5tm7RoTLU0kLyaEZx6fZEQv50zAGRLesr0vwt1bU4BiPThXws9sdgejwQ==
+ b=j2nxKdFUmtIBB1+mFj1phaBM4OiQZNOhH+lZPkcBesOXGDyvzR4LoVM4JKNy77Utp3LRPr+RjPIgUW60zZ0zCRur6cLAPhkSHmU3q0lChKTrRXqywl+oQzKdaQXDjLDPvpFHCgEXbD6Auv7n2ooyTuLUji/PbZBbFhbOU2aYYDt9dKuXI0x87ccu5QZdnwBWOrnP1lD08s+ou93Vt2JgG8ADiPUbhpL0LscC7I+5yfVgZ7Li7RIBnSL50jV8rdWxSdvjIaeeBVd2zzaaQvv2JpjMHHRcsw2ZQKlmt2qoKlHcvFndPFBhfLzA459uZKAgTuWeZe1qXn9Ezn5LL9YTjA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O2cAmCVbdcRfnvfMSx1C5B0SOKGXKwGBsDMZNxbzR3g=;
- b=liYa8TXOs4/5uac4mlykQPtAAEIM3kt3x9LCF4ItpBWR84Y4R2FP5RCmf49I585hTBM0NRBdkimb9Q0aEqWD9cimhNrKJAgSiWz6NSdFGwGnj6qlaZIxvQIYpKiI0I5hssCzkIxzUUXNzP3LKzVgAKXx/+q6EAuz6Y+WnkoQyf+KTnhPx1EtLibS0xPPxa5ijg/LjqXyb2DdbkDh0ljPPCoUqeGrztShOgn4HNHuYeDTSEINyJ8fq5YhSkWPWMyskXUyStUC0wh5SAysrnL0VrG3L7LrWKkfyc8plchRhR3X5SZTWkerM4SOVIVHXdMxlseKX/dv2KtG24XaZgjQeQ==
+ bh=vr5xEVZ5gUdh0s93mgfzCaOQQBXs8FeR3wEXdz9N+TA=;
+ b=iR7Y0wRiLF5fye0t4OdFnC6CSrB+U+d9zAUYe/1sc3dnbJcVrykigeooLXAgNh63UJceMcKrhZpaVnkKpe395rFkPG9hEEEgFRA3PWDoQYqhEfPnLKCjY7VNoJRz/sjpC4oVT95d/4M3LsuhJBJDwxD/jMzerUnQ777aYxsmE9aO9mFMoIp4CaAN0LoGIL9bjZYVWu3s0L2l4nta/a9MXwtX5aFMVlMTdyubO4aLGytLkQbadJZZuONetEhka87JyYHqabVzEQhRrGkluCaAp5gkoYY0tk1KrLs40G++/350wNToProitx3bkrM84tOAYqTJTbc02PGwjB7HNlZRxQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O2cAmCVbdcRfnvfMSx1C5B0SOKGXKwGBsDMZNxbzR3g=;
- b=AunkBYKQZj/0FgnkjjY35iwl43o8eVHOACfXGAPM9FgWvU4B6sYLtZejA6m56X5bDSn29ceFa8hDPEfDy8B6kEmy/tBKQ87lyuFIAVceCVoOot20bVYEhR9cVIuLPnLt7TbjIbsk1sljSeta8pwRSlPaLQmvI2Wciy5I+oE2ddcDu20qWyKs1WQ51xtOXt3Ch77AJ11guhNV6QFt1WWeI2j/q0w/KEWScHA8rDh/ShO2ULBOmpTNKrGBAksKe0SFWR5Vfj851oza4IlZ0kuqQ0yAD6wZW1IDmaH9pNycw3DtrHDJWVEIpV6E27zzrQqwCuf2rZd7ItwB9n4WQuA6QQ==
+ bh=vr5xEVZ5gUdh0s93mgfzCaOQQBXs8FeR3wEXdz9N+TA=;
+ b=ioalFEPEY8mQL2RkH19DalgsMLlIdCPiduQgBpbhtDSV97HYF3GtxlVvidCQiFBHj6qRX6O4iKovFNhf8AuMZjEGWkk6AY71FtVXow/anQVKEXAY4y4r1v4jeSkMWrWSvt/JeAcTg058thuan6r9AwxUlivnVaPHmn5ZpGBjiRR0tvo85eEm8Lii8OSwR4e/DeNSsWkJJE2udoS10LhsC5yVCNYYKvHu76KA98kQsWm+6RYXZI1/dsUk7sDw86FHHsDcyz71YI2QpRun2obMqdIvnNVURYoqkQK+VcbGG/BmFWpKwMYq153WAPYs4gsD38TlTI6fh9/JFy0D5q9jVg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by PAWPR08MB9892.eurprd08.prod.outlook.com (2603:10a6:102:342::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Mon, 18 Aug
- 2025 10:06:54 +0000
+ 2025 10:06:56 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.9031.018; Mon, 18 Aug 2025
- 10:06:54 +0000
+ 10:06:55 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -64,11 +64,11 @@ To: Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Boris Brezillon <boris.brezillon@collabora.com>,
  Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH v6 20/21] mtd: spinand: Add a ->configure_chip() hook
-Date: Mon, 18 Aug 2025 13:06:12 +0300
-Message-ID: <20250818100614.432931-21-mikhail.kshevetskiy@iopsys.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v6 21/21] mtd: spinand: Sync core code and device support with
+ Linux 6.17-rc1
+Date: Mon, 18 Aug 2025 13:06:13 +0300
+Message-ID: <20250818100614.432931-22-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250818100614.432931-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20250813234314.3945708-1-mikhail.kshevetskiy@iopsys.eu>
@@ -81,79 +81,79 @@ X-ClientProxiedBy: GV3PEPF00002E2E.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAWPR08MB9892:EE_
-X-MS-Office365-Filtering-Correlation-Id: 188a6970-8297-4a1f-0b61-08ddde3ef559
+X-MS-Office365-Filtering-Correlation-Id: c9ab2821-619b-4fb2-d0e0-08ddde3ef622
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|376014|52116014|7416014|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/ER7Z+FUKFnNpxz3W64GR75ivHdRN9P4BCJhkrRERe9FLA8OUaCoWkCbsPR5?=
- =?us-ascii?Q?fBR5yK/c4p2/aC9cD+FpCZeIP3EieBRds05wyZM9tVAhcRYl2n3lwd6G+Nvp?=
- =?us-ascii?Q?xBQWYRDILf5PPDjMG8IWLXESfv/GecLQOM1FPEBLnzzZzokJPTzsjXPozmVE?=
- =?us-ascii?Q?nKOHhy5hJmtBLCbfScNMyn+JGU2mWFeF7uKWhktPcD1bCzdLzPlZvyZG55rR?=
- =?us-ascii?Q?R3cyPtwXDPvMFRJwldqIhesRR8Y8FDfIRNVYpYlBcmn9NyynhY+13lG+9pkK?=
- =?us-ascii?Q?/GtxW+uEx63pqSPfOKT0uoOxv1JEGujh26GLYeSHApoKQx9bnt3lUGSFmBP5?=
- =?us-ascii?Q?VqywJP+5AQeu76EjZWxH+EULJtrIgRYZnNAl3Y7wA27kopF1Ab/zZvZ/xKlp?=
- =?us-ascii?Q?47iiROnpR+JfFi0A5EeGCvZUcyFaSuMO9Oyuz4b41zWxdxeeWSumCmWCyaJC?=
- =?us-ascii?Q?zeq3GxdnkLpmsZl9LSDKxDdkM0lQidOKlMHu4f56VG+P2lIRBg14X0pbqJys?=
- =?us-ascii?Q?4g3cN4JMnSmHVFlT/o4wWlTQecrw4WxPGm/mBlJxgO4L6fgEtF+ec5tO3fUh?=
- =?us-ascii?Q?I5jUbEDy7HPesS/R4C6CUlt/dI+Chk3jfIpMBDIrAa4qqe07P4oxhtsKnaEZ?=
- =?us-ascii?Q?hTvewSPFPTKcmo3UsAKMsnCoRGjqVinuZJ2BlKhW/4Pr+jCMGxUlmRqcqNDT?=
- =?us-ascii?Q?KmDJ0qJS6ejY4g6eu3wqmdJVIiCc5/s5RvXkRfYh8cgoKLH1rUl37VqDNUFT?=
- =?us-ascii?Q?/6FZwTSp/umIuQ3dGZgq/zt8tYDCWRqCEZ2rY/Vs9EhFdqiYDkq40/m7Z7d2?=
- =?us-ascii?Q?ETVeh9CVPzxIQSTBpdly6kOWi1Q4/MyoevV2fO1sQPJ/SNvOL54f6jVeaYO8?=
- =?us-ascii?Q?SWg079RCo+LBR/5+ocPaXSMwMtMuZg8eziOC+HOHgpneOWLkvc2xF5DjaCl+?=
- =?us-ascii?Q?cRJXI/jktxqgo+f8RShXe16AoJbErjQcbaZZuBbljMLMNOqneyeajkqyFljb?=
- =?us-ascii?Q?a6SXR16bIXcuF+GQQ/aqbA/NBjGroe1iZWo5OwCBU9fXAhNSfXtr9qgpKgwR?=
- =?us-ascii?Q?m+NzgeLMUEoSDlxFH7XTOpZDhbZKk5OAGF89pq1KLmTgbOqhBeIEdARtdHFb?=
- =?us-ascii?Q?uYl2/O5Wk1ir77WqsV1JRMsFwCYNZopTSPhFUQ2oUdPMsERHb1yBSIpwNo6i?=
- =?us-ascii?Q?uqwe9pNpLuhatIgwbzjlD0bdSwwY7j0oa/K4IjvKdjUyID92zV4h0/gl8o8T?=
- =?us-ascii?Q?uxA/MMfbWqk0hdHQ9cKSS8drVU8q9ewsVgK4flNN0ULF2wty+PtNJaPCsLax?=
- =?us-ascii?Q?4ueXM4WimnJs4dVBxFK5PFy1XWbUZxoVQ50XS17uLYF33ihLJ4jhKrARQOeo?=
- =?us-ascii?Q?LKcMqVaP9uSI934iD/M4KarjApj8IBiiMewhv9iZCc+2JPA8kwqbSdnzcTJ5?=
- =?us-ascii?Q?L9GQ2/nLXqcA7SfBfsq/4U3z0GXzt3lG+ET4gKGJN6KVLiHs0qPRsKSPWZJz?=
- =?us-ascii?Q?bM+iEnRZ4QP9pME=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?x76rWH80Q0h9G3twlKCPysbX1HJCscrFzz9YnsmcUl/Qb5G30kpPTYTKhTfc?=
+ =?us-ascii?Q?4xFJvJPFmJoo+Jv22dhbyvY/YoPypizl7oFem0hVQ7Qaz2yQ3Cbs3++kD/e0?=
+ =?us-ascii?Q?tO7BT22d/aKJ++1lbY6ZP2lYESrFEBRbBgnWzCalqmlQj3UzeuTWMB4Fgq/n?=
+ =?us-ascii?Q?ggclyZIDtjNkSCzyLx0SxAgtUSsnyIRF8NrtEBFg/tf2oc303V6NWYJG0EqR?=
+ =?us-ascii?Q?Lh7bPV4cFH4jgkCBEbY/mJ16VxI2EsNq7b/SRmGSMVNYBZ3qvt0vqNGO40QQ?=
+ =?us-ascii?Q?dUWIgrEHDYnK2T3m2YWsIptmXtSJN05BmtRKbtomu9VeKAmOLovSAmSRO7QM?=
+ =?us-ascii?Q?NTLxljCM5l2gOZ/P0J1aknfn/Y5fQGc3ITozOaoigYXGrgbZTsqFbfzMG+5U?=
+ =?us-ascii?Q?2/Mh/jQHZAOpZdclbpyNIcAnNOm6VOscn8gRhEkRA0UGTTiMdbtkJaBUpEEZ?=
+ =?us-ascii?Q?O9/hoLoGzEmyNl2ocNwPXIJETVLsC1a0ILWuahUhwWoi9d1Nsp3ZqqetZoXx?=
+ =?us-ascii?Q?COldfRk6xOasgoJ6hWiA2A1MITjGShUTcqLOKSKB16fUiRmvZGU2Jv74Lhkv?=
+ =?us-ascii?Q?O6IOYnVaiH+BL4mG76rDqjFuTRmXGF0pRrPSDAvzXlQPiY7Gs1Od6LpFwnaT?=
+ =?us-ascii?Q?LylWo+IGoytMhtA0UGwoWHREtID4VVFIU+oT4+/7YLyw0sFToCV66Do4S0u6?=
+ =?us-ascii?Q?c6J4q5SjdbvSezSSQnwAw16Y1B1iwu5lB4CQ8j0hMZZtT2E6SD/fAfI4pjy8?=
+ =?us-ascii?Q?5Nkdq4kvr+NGEIM3fmc/u2l0Kwfhwqfz7T8h/lI2KwRsQnVQPrHG/NdScEL1?=
+ =?us-ascii?Q?QyiVyHJPAcHOjLw9FfudXLaHiUBQEtiGagLYMoRG5ss7dp4+/t5Q6uVNh8g+?=
+ =?us-ascii?Q?zRA87hbJeDb6Pz8MIS/YZTdY3KM4SYBNXOHPa3oo0AozxBMbrpznkpnKoGda?=
+ =?us-ascii?Q?RyzQgF0sT8ouXbuwQrvagLKHs88zypp2BxGjdWgb+bVkGGa95gSkD5W5Uk+E?=
+ =?us-ascii?Q?iPxA5chzojVV9qJpEMHDE9aSLhc7gTa3DH1EpOmT5JTzXVPi9cQKcuPcY7Vk?=
+ =?us-ascii?Q?WkGtbtgc/3/NXGeUwwjqLbYRaviwsbFepry9pUaQaooTnyQMibHgogTVUux/?=
+ =?us-ascii?Q?DrNBD9ENQ2AebwBEs7xpGvNxTNkNGlcXB8gFdBE/64LMalsjrpTvVyhMHZNG?=
+ =?us-ascii?Q?mEqHIfOkZQdHot9fNqPj1hK6ZkMDI5u2R0DqlqsSIi/VIuh2SyloldV/LZt3?=
+ =?us-ascii?Q?14EiRCpaphcdt9a7F2QEBOU/oWpJqSgwlGjdKWcUSIi0qAgrKvoB6UDufkTX?=
+ =?us-ascii?Q?t4NjzjG7p4lg6ofsCXqHIZe2Giw8gbPnBqHrroTDyLS8GNx1N44p4Dn3QVRm?=
+ =?us-ascii?Q?1GkGV148DlsIX1EshCtl0vF1tB8za74Z0H8setXhQmESVBMsRgKbLnSI5dDl?=
+ =?us-ascii?Q?EprfQz/Ev+TUrtNTzxvFege35r7VBKD4g4ZiAHCpe4K0bHIcNDQehjExUWoa?=
+ =?us-ascii?Q?cwwkI09iRuExuAA=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(376014)(52116014)(7416014)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?b5pNxBe3KkdUDssIFg4seFQBaXqRckoK72zNCmwj72iGWSyu0pZJmsvzbDGT?=
- =?us-ascii?Q?oQ/Ms4BuJ5466MPByyptq4++kgW4IbCc0rPcHtApXUmcWpTm/3CpQTpUxnDd?=
- =?us-ascii?Q?S0R7j6VLDlnL8HWIj51e25tD4GkJpNtrIERaKbe4nl/fmwThfR6YXbs/1yWk?=
- =?us-ascii?Q?zNX4+hKhOQbaHBjfOV7FnvryoIBIAdhfGcIdGy77scC5L1mbkwYlMaCH6OOF?=
- =?us-ascii?Q?DGVPnRgLvkJY+wADEYlNrnjd6wW3ychAtNhYf/4TkRoFsZiORn/xZnCyQFeB?=
- =?us-ascii?Q?FlukSpjrZU/T66rEeG+A7pgc2RA6wnTDjGwRfZM+aFMZ1e0p7NU43u6EedsU?=
- =?us-ascii?Q?HBGjZiYCjpgA5x0dqAesJaw/1GvzqLFRURrlf+lkY+T8DRdkXbQbfDRcgwqi?=
- =?us-ascii?Q?Y4qdgpF96KmqInoBMkDjvCxvdf4c9PSNHseeQDJ/vi+WuAsoTkw4uUt7M+0H?=
- =?us-ascii?Q?6j5/m+XFs3nW/NASnxtFIDMqzE+ojhn4nROjW5iAVPwNfDrmtBpRjnvCZ92h?=
- =?us-ascii?Q?AIVwcisfIGRJTEzRhsRdiEyjICNLNq7dJsbbG5M2mSkll4S8l5bySZ3mYnr2?=
- =?us-ascii?Q?BQzVo1umW4n2FZiKPRVEbvsp3SdU7RZe9zlaYyF1jM57QEl8PpWjF35NFC6E?=
- =?us-ascii?Q?3zP4cmeiJjdSKb0e5r2jXmWo2xj6WqD+9yNxwpXZ71HL7m44XmG0pitw4teS?=
- =?us-ascii?Q?HVSqxEvJUPra8ecrCgXiznduy+w94UEPL91aU6lpSCiLScWxMHqXZyZfuqm4?=
- =?us-ascii?Q?JKEQSnb8S8MeG7ZSj1GZ8Q37YWc9QpDmWgDy89589sNrUnYlbr5FHSbFBV1O?=
- =?us-ascii?Q?DS2sEFE2q/xBgig0CATti5GbcUBgvFjQ6FCa+cJf2ZoFXxMIidC93wTCFQ5Z?=
- =?us-ascii?Q?l17oWqDs27nmjLQQfB0QkdBQoJgOvrKbllUzZxvZlaQXPb6RRZjPZH4eH3vJ?=
- =?us-ascii?Q?J98Y9llmbPd3eHmP2QH/barxmG/w60KqD+IYQKcf6+qfllsS92qSgIK16Frx?=
- =?us-ascii?Q?TYQntw/hiEalW1zD64M36RwaqEK7xkwTx5HSnQL0toJwt5z1KdwF21IpDLBp?=
- =?us-ascii?Q?JYq3ydHb74PEcI4PYaR7aiFtEZkmEijVXD/FL4EiSFeSD3YxzMbw0OpNMPhr?=
- =?us-ascii?Q?aBNxcs0BTd7AiXov5wUyUjjFdrtB4nkU24V1AGBa2jfmwRMMW6O01gHJLIeX?=
- =?us-ascii?Q?W4DDIKJSeUaK2r2EXQawcmUBJmoAz1k4hC0HcCRG+7s7/YZnctpSlVe+Kg00?=
- =?us-ascii?Q?sz3e4UJMlgRxENKaOLdcbp9Qm+QQtgDTjFgXq6q4xCj322zbDd0W4WYmTtiI?=
- =?us-ascii?Q?zl4G22/ZDGVmTtFSzbahRbSrgIcL6xKfq6SDvQ5/+N3/LClUZ5Nr3WJRVHbn?=
- =?us-ascii?Q?hl/i7581frKKtdUSFTAbvd7SbYUwBP1/DsSsC6kPCUXE7cT5kqHtcLOrP4Xm?=
- =?us-ascii?Q?N22tV3vjukikaPNMcJ5sad1HpDvJb0GADAT41RK3qqYZY/7TZyD5R2vJP6fU?=
- =?us-ascii?Q?KTYRWRhHYaS6uSmIwBgKvPAxg3XjWw2wGHcl0S0vJsgPlubaqXcrFWd/SRtk?=
- =?us-ascii?Q?z0HRYtJGePQCaPL/Aeyfh6JcG1bwm416FObfvmU/u1uBgdRxWol6p1jhXw3A?=
- =?us-ascii?Q?l90ElbPFfdzXyd9dG3jPgYU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?o9adA9MRP0U3qXgUyP/w3Lk9Fv92LYSOJcG2naqphwSLxnPTdOI5haBk4r+Q?=
+ =?us-ascii?Q?za+Qz7pmiFe2AMfPQb9tgIpk5S9NEjwG8hcNJO372xxQZ3prJHBYiJDmGtr+?=
+ =?us-ascii?Q?AlPsid+ocmmFA4Uj35WI6LMu8tShOYzn85kzNpwUGP3RnzPRFt9HaIlEoS1u?=
+ =?us-ascii?Q?f6ywrPN170xkkVOLV5/p9z7XXRPhAZ4DQfkyYddsh4Mj9e56IT3L0AzIpu+p?=
+ =?us-ascii?Q?761IchWBe1MqM25c0qWvcCT2FE3BYwRS3isd/bcDoRb2hnPOzdt6vIcOMh+I?=
+ =?us-ascii?Q?Rg5bFrzfH0cGWcO4LddbIAc5pg/MAZSElVQmRCZ0/UlmtVkKzyvMwWV7MmIM?=
+ =?us-ascii?Q?3+lLzMcclsHFsNu+6XrEkOk4zwZq6ttbiOU3dS6AeN09E1/5DubyYTM2Fu5L?=
+ =?us-ascii?Q?xupw4ou7bELVqwCXEWeDPZI/BQCWDS5d1kS8MLU5oVxFRvLibvAzGeo/EANq?=
+ =?us-ascii?Q?VBRkh7YfKbnj1GV145gWcF5KLfe/0J4u1wPKhgd8auzmswPykv3QI6ul1ybr?=
+ =?us-ascii?Q?fhAnPAzGEawHQdBEIuu6Llk+LiFEq3YSCRxpIQudK7XCeHLXR+qAMmCnH9m6?=
+ =?us-ascii?Q?3OekjClHu67LA0YEKdIUfBjUG4rVTkpDK3ySX+15bE0WlQ+cdOzi4mFNecwQ?=
+ =?us-ascii?Q?s5k1222WrhBk0Q7RDFOOp7Ey86yKwp7jp2f03Blpbscf07lPtwtt1hfpLH7Y?=
+ =?us-ascii?Q?xa3owUWMKTL/T1lV0VTt9ynPX6lU8hyQWgSgQqttpxzlLImZ89lkcs3e1+Rr?=
+ =?us-ascii?Q?kfDncQB1MDe8gCn/nqw3Is+HCeMsyrCwM3LdrDBWd7RY8IOgKYNJxLNpSRYO?=
+ =?us-ascii?Q?UGVefkoYeviGpiG93cuJtzATnGjpJeoyqq0SORMCbuFdoVrVxwxt7++EqmQC?=
+ =?us-ascii?Q?iqlLOThY9t3xSamLoqgVxTlBifuwanDclujRagzx4TWR0rE2Mqec8hRu5a2p?=
+ =?us-ascii?Q?/gk4tSwKZqGKz1w5xUZCEusOiczO2jaXojykaQ9Gc62ceAieSZwz3PgEGr17?=
+ =?us-ascii?Q?IpQHzNoHzhvwXEErD6bV8aS41LKDP20rWTuesas5TD8r1NMl3oF0BjLYy+dP?=
+ =?us-ascii?Q?+7UzTuQhnvQ0mNh47HiH7EKEKaKur+I2tWrZtevXpO6EHMnKR8N1NfOKdSpF?=
+ =?us-ascii?Q?CyVCW6flu0J/KPotR0+dKPAC4XOfuWHuFvxR7BXSm3qfMrfjlsO++l94kuyc?=
+ =?us-ascii?Q?Uv1i/YlsF0sNyc3W6Y1HBjryQkfIHm/hoZq5bGP2PzbZIww272XjZyEB2KKn?=
+ =?us-ascii?Q?78BggNofm/j9ZrBw9PpBe666OkIR/gmmAcR3E/jO9tTB0PJDAJybUvcaelVU?=
+ =?us-ascii?Q?9m0t5awc6aAzabEm+MmvPC4cctPeVwLlVQ4eYMP8A2k49bVXDyXBX0rFkbLX?=
+ =?us-ascii?Q?ZMWEFS1Gd4BO/ih4FYDkCKMOfh+XKmbhglDooFcghfu5RGBzgy9B2mDwzzFD?=
+ =?us-ascii?Q?kpq7dYejHQEDY/RAT1abe/HNLxcsZiK2m5JMNr0HPrxxl2MnUhr71ryKCa6z?=
+ =?us-ascii?Q?fidD1uGxZ4JNIAXzmV1rFhh0Bd7I72i1WcwMpotMtIVoiIiokirvBtPPa7oB?=
+ =?us-ascii?Q?YqeyUUvHrAZQ/ZChAi4Nho+Qg4MhXyl02WtS0hnrKf+D72mL7GV81k0isvce?=
+ =?us-ascii?Q?k34ldS1D8ps5Fusfs2oMPbI=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 188a6970-8297-4a1f-0b61-08ddde3ef559
+X-MS-Exchange-CrossTenant-Network-Message-Id: c9ab2821-619b-4fb2-d0e0-08ddde3ef622
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2025 10:06:54.3906 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2025 10:06:55.9047 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bPNqPXq555pBvZsGU3sCoyStJBjO2+wJJc11wicsi5x3Y2q0n/HTNzVjWKc4Uu5TYbvnML9z1iZeI0R3+63Ju5tazBEZ21/LYr2GQRtLke8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: T0tMHgCnsUCrtdwzke9BzdCU3lp2juMT0y31eICFtT08Y7xlAjvLwpm23X8WAAkiZIp+ofzIOY6y9L5sP55AD2OFQnnj2SNaV+OF2KR379M=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB9892
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,103 +171,2369 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Miquel Raynal <miquel.raynal@bootlin.com>
+This makes the U-Boot SPI NAND driver almost the same as in Linux
+6.17-rc1. The only major differences are:
+ * support of ECC engines. The Linux driver supports different ECC
+   engines while U-Boot uses on-die ECC only.
+ * per operation maximum SPI bus frequency
 
-There is already a manufacturer hook, which is manufacturer specific but
-not chip specific. We no longer have access to the actual NAND identity
-at this stage so let's add a per-chip configuration hook to align the
-chip configuration (if any) with the core's setting.
-
-This is a port of linux commit
-da55809ebb45 ("mtd: spinand: Add a ->configure_chip() hook")
-
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu> # U-Boot port
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- drivers/mtd/nand/spi/core.c | 16 ++++++++++++++--
- include/linux/mtd/spinand.h |  7 +++++++
- 2 files changed, 21 insertions(+), 2 deletions(-)
+ drivers/mtd/nand/spi/Makefile         |   2 +-
+ drivers/mtd/nand/spi/alliancememory.c |  20 +-
+ drivers/mtd/nand/spi/ato.c            |  18 +-
+ drivers/mtd/nand/spi/core.c           |  21 +-
+ drivers/mtd/nand/spi/esmt.c           | 111 +++++++-
+ drivers/mtd/nand/spi/foresee.c        |  26 +-
+ drivers/mtd/nand/spi/gigadevice.c     |  80 +++---
+ drivers/mtd/nand/spi/macronix.c       | 269 ++++++++++++++++----
+ drivers/mtd/nand/spi/micron.c         | 178 +++++++++++--
+ drivers/mtd/nand/spi/paragon.c        |  24 +-
+ drivers/mtd/nand/spi/skyhigh.c        | 149 +++++++++++
+ drivers/mtd/nand/spi/toshiba.c        |  22 +-
+ drivers/mtd/nand/spi/winbond.c        | 352 +++++++++++++++++++++++---
+ drivers/mtd/nand/spi/xtx.c            |  20 +-
+ include/linux/mtd/nand.h              |  30 ++-
+ include/linux/mtd/spinand.h           | 177 ++++++++++---
+ 16 files changed, 1233 insertions(+), 266 deletions(-)
+ create mode 100644 drivers/mtd/nand/spi/skyhigh.c
 
+diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
+index 831760da1c9..152aa1a3783 100644
+--- a/drivers/mtd/nand/spi/Makefile
++++ b/drivers/mtd/nand/spi/Makefile
+@@ -2,5 +2,5 @@
+ 
+ spinand-objs := core.o otp.o
+ spinand-objs += alliancememory.o ato.o esmt.o foresee.o gigadevice.o macronix.o
+-spinand-objs += micron.o paragon.o toshiba.o winbond.o xtx.o
++spinand-objs += micron.o paragon.o skyhigh.o toshiba.o winbond.o xtx.o
+ obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
+diff --git a/drivers/mtd/nand/spi/alliancememory.c b/drivers/mtd/nand/spi/alliancememory.c
+index e29e4cc77ec..a3772b8c2f0 100644
+--- a/drivers/mtd/nand/spi/alliancememory.c
++++ b/drivers/mtd/nand/spi/alliancememory.c
+@@ -19,20 +19,20 @@
+ #define AM_STATUS_ECC_MAX_CORRECTED	(3 << 4)
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-			   SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-			   SPINAND_PROG_LOAD(true, 0, NULL, 0));
++			   SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++			   SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-			   SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-			   SPINAND_PROG_LOAD(false, 0, NULL, 0));
++			   SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++			   SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int am_get_eccsize(struct mtd_info *mtd)
+ {
+diff --git a/drivers/mtd/nand/spi/ato.c b/drivers/mtd/nand/spi/ato.c
+index f0d4436cf45..a726df3eb98 100644
+--- a/drivers/mtd/nand/spi/ato.c
++++ b/drivers/mtd/nand/spi/ato.c
+@@ -11,20 +11,23 @@
+ #endif
+ #include <linux/mtd/spinand.h>
+ 
++
+ #define SPINAND_MFR_ATO		0x9b
+ 
++
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
++
+ 
+ static int ato25d1ga_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				   struct mtd_oob_region *region)
+@@ -60,6 +63,7 @@ static const struct mtd_ooblayout_ops ato25d1ga_ooblayout = {
+ 	.rfree = ato25d1ga_ooblayout_free,
+ };
+ 
++
+ static const struct spinand_info ato_spinand_table[] = {
+ 	SPINAND_INFO("ATO25D1GA",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x12),
 diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 3e21a06dd0f..25e7a38a874 100644
+index 25e7a38a874..b3d53e234b7 100644
 --- a/drivers/mtd/nand/spi/core.c
 +++ b/drivers/mtd/nand/spi/core.c
-@@ -1251,8 +1251,19 @@ static int spinand_id_detect(struct spinand_device *spinand)
+@@ -42,9 +42,9 @@ struct spinand_plat {
+ /* SPI NAND index visible in MTD names */
+ static int spi_nand_idx;
  
- static int spinand_manufacturer_init(struct spinand_device *spinand)
+-static int spinand_read_reg_op(struct spinand_device *spinand, u8 reg, u8 *val)
++int spinand_read_reg_op(struct spinand_device *spinand, u8 reg, u8 *val)
  {
--	if (spinand->manufacturer->ops->init)
--		return spinand->manufacturer->ops->init(spinand);
+-	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(reg,
++	struct spi_mem_op op = SPINAND_GET_FEATURE_1S_1S_1S_OP(reg,
+ 						      spinand->scratchbuf);
+ 	int ret;
+ 
+@@ -58,7 +58,7 @@ static int spinand_read_reg_op(struct spinand_device *spinand, u8 reg, u8 *val)
+ 
+ int spinand_write_reg_op(struct spinand_device *spinand, u8 reg, u8 val)
+ {
+-	struct spi_mem_op op = SPINAND_SET_FEATURE_OP(reg,
++	struct spi_mem_op op = SPINAND_SET_FEATURE_1S_1S_1S_OP(reg,
+ 						      spinand->scratchbuf);
+ 
+ 	*spinand->scratchbuf = val;
+@@ -357,9 +357,9 @@ static void spinand_ondie_ecc_save_status(struct nand_device *nand, u8 status)
+ 	spinand->last_wait_status = status;
+ }
+ 
+-static int spinand_write_enable_op(struct spinand_device *spinand)
++int spinand_write_enable_op(struct spinand_device *spinand)
+ {
+-	struct spi_mem_op op = SPINAND_WR_EN_DIS_OP(true);
++	struct spi_mem_op op = SPINAND_WR_EN_DIS_1S_0_0_OP(true);
+ 
+ 	return spi_mem_exec_op(spinand->slave, &op);
+ }
+@@ -369,7 +369,7 @@ static int spinand_load_page_op(struct spinand_device *spinand,
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	unsigned int row = nanddev_pos_to_row(nand, &req->pos);
+-	struct spi_mem_op op = SPINAND_PAGE_READ_OP(row);
++	struct spi_mem_op op = SPINAND_PAGE_READ_1S_1S_0_OP(row);
+ 
+ 	return spi_mem_exec_op(spinand->slave, &op);
+ }
+@@ -516,7 +516,7 @@ static int spinand_program_op(struct spinand_device *spinand,
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	unsigned int row = nanddev_pos_to_row(nand, &req->pos);
+-	struct spi_mem_op op = SPINAND_PROG_EXEC_OP(row);
++	struct spi_mem_op op = SPINAND_PROG_EXEC_1S_1S_0_OP(row);
+ 
+ 	return spi_mem_exec_op(spinand->slave, &op);
+ }
+@@ -526,7 +526,7 @@ static int spinand_erase_op(struct spinand_device *spinand,
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	unsigned int row = nanddev_pos_to_row(nand, pos);
+-	struct spi_mem_op op = SPINAND_BLK_ERASE_OP(row);
++	struct spi_mem_op op = SPINAND_BLK_ERASE_1S_1S_0_OP(row);
+ 
+ 	return spi_mem_exec_op(spinand->slave, &op);
+ }
+@@ -586,7 +586,7 @@ out:
+ static int spinand_read_id_op(struct spinand_device *spinand, u8 naddr,
+ 			      u8 ndummy, u8 *buf)
+ {
+-	struct spi_mem_op op = SPINAND_READID_OP(
++	struct spi_mem_op op = SPINAND_READID_1S_1S_1S_OP(
+ 		naddr, ndummy, spinand->scratchbuf, SPINAND_MAX_ID_LEN);
+ 	int ret;
+ 
+@@ -599,7 +599,7 @@ static int spinand_read_id_op(struct spinand_device *spinand, u8 naddr,
+ 
+ static int spinand_reset_op(struct spinand_device *spinand)
+ {
+-	struct spi_mem_op op = SPINAND_RESET_OP;
++	struct spi_mem_op op = SPINAND_RESET_1S_0_0_OP;
+ 	int ret;
+ 
+ 	ret = spi_mem_exec_op(spinand->slave, &op);
+@@ -1188,6 +1188,7 @@ static const struct spinand_manufacturer *spinand_manufacturers[] = {
+ 	&macronix_spinand_manufacturer,
+ 	&micron_spinand_manufacturer,
+ 	&paragon_spinand_manufacturer,
++	&skyhigh_spinand_manufacturer,
+ 	&toshiba_spinand_manufacturer,
+ 	&winbond_spinand_manufacturer,
+ 	&xtx_spinand_manufacturer,
+diff --git a/drivers/mtd/nand/spi/esmt.c b/drivers/mtd/nand/spi/esmt.c
+index 23be098b885..6a46f3a3bfc 100644
+--- a/drivers/mtd/nand/spi/esmt.c
++++ b/drivers/mtd/nand/spi/esmt.c
+@@ -8,25 +8,33 @@
+ #ifndef __UBOOT__
+ #include <linux/device.h>
+ #include <linux/kernel.h>
++#else
++#include <dm/device_compat.h>
++#include <spi-mem.h>
++#include <spi.h>
+ #endif
+ #include <linux/mtd/spinand.h>
+ 
+ /* ESMT uses GigaDevice 0xc8 JECDEC ID on some SPI NANDs */
+ #define SPINAND_MFR_ESMT_C8			0xc8
+ 
++#define ESMT_F50L1G41LB_CFG_OTP_PROTECT		BIT(7)
++#define ESMT_F50L1G41LB_CFG_OTP_LOCK		\
++	(CFG_OTP_ENABLE | ESMT_F50L1G41LB_CFG_OTP_PROTECT)
++
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-			   SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-			   SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-			   SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-			   SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++			   SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++			   SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++			   SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++			   SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-			   SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-			   SPINAND_PROG_LOAD(true, 0, NULL, 0));
++			   SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++			   SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-			   SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-			   SPINAND_PROG_LOAD(false, 0, NULL, 0));
++			   SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++			   SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ /*
+  * OOB spare area map (64 bytes)
+@@ -104,6 +112,83 @@ static const struct mtd_ooblayout_ops f50l1g41lb_ooblayout = {
+ 	.rfree = f50l1g41lb_ooblayout_free,
+ };
+ 
++static int f50l1g41lb_otp_info(struct spinand_device *spinand, size_t len,
++			       struct otp_info *buf, size_t *retlen, bool user)
++{
++	if (len < sizeof(*buf))
++		return -EINVAL;
++
++	buf->locked = 0;
++	buf->start = 0;
++	buf->length = user ? spinand_user_otp_size(spinand) :
++			     spinand_fact_otp_size(spinand);
++
++	*retlen = sizeof(*buf);
++	return 0;
++}
++
++static int f50l1g41lb_fact_otp_info(struct spinand_device *spinand, size_t len,
++				    struct otp_info *buf, size_t *retlen)
++{
++	return f50l1g41lb_otp_info(spinand, len, buf, retlen, false);
++}
++
++static int f50l1g41lb_user_otp_info(struct spinand_device *spinand, size_t len,
++				    struct otp_info *buf, size_t *retlen)
++{
++	return f50l1g41lb_otp_info(spinand, len, buf, retlen, true);
++}
++
++static int f50l1g41lb_otp_lock(struct spinand_device *spinand, loff_t from,
++			       size_t len)
++{
++	struct spi_mem_op write_op = SPINAND_WR_EN_DIS_1S_0_0_OP(true);
++	struct spi_mem_op exec_op = SPINAND_PROG_EXEC_1S_1S_0_OP(0);
++	u8 status;
 +	int ret;
 +
-+	if (spinand->manufacturer->ops->init) {
-+		ret = spinand->manufacturer->ops->init(spinand);
-+		if (ret)
-+			return ret;
++	ret = spinand_upd_cfg(spinand, ESMT_F50L1G41LB_CFG_OTP_LOCK,
++			      ESMT_F50L1G41LB_CFG_OTP_LOCK);
++	if (!ret)
++		return ret;
++
++	ret = spi_mem_exec_op(spinand->slave, &write_op);
++	if (!ret)
++		goto out;
++
++	ret = spi_mem_exec_op(spinand->slave, &exec_op);
++	if (!ret)
++		goto out;
++
++	ret = spinand_wait(spinand,
++			   SPINAND_WRITE_INITIAL_DELAY_US,
++			   SPINAND_WRITE_POLL_DELAY_US,
++			   &status);
++	if (!ret && (status & STATUS_PROG_FAILED))
++		ret = -EIO;
++
++out:
++	if (spinand_upd_cfg(spinand, ESMT_F50L1G41LB_CFG_OTP_LOCK, 0)) {
++		dev_warn(spinand->slave->dev,
++			 "Can not disable OTP mode\n");
++		ret = -EIO;
 +	}
 +
-+	if (spinand->configure_chip) {
-+		ret = spinand->configure_chip(spinand);
-+		if (ret)
-+			return ret;
-+	}
++	return ret;
++}
++
++static const struct spinand_user_otp_ops f50l1g41lb_user_otp_ops = {
++	.info = f50l1g41lb_user_otp_info,
++	.lock = f50l1g41lb_otp_lock,
++	.read = spinand_user_otp_read,
++	.write = spinand_user_otp_write,
++};
++
++static const struct spinand_fact_otp_ops f50l1g41lb_fact_otp_ops = {
++	.info = f50l1g41lb_fact_otp_info,
++	.read = spinand_fact_otp_read,
++};
++
+ static const struct spinand_info esmt_c8_spinand_table[] = {
+ 	SPINAND_INFO("F50L1G41LB",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x01, 0x7f,
+@@ -114,17 +199,21 @@ static const struct spinand_info esmt_c8_spinand_table[] = {
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+-		     SPINAND_ECCINFO(&f50l1g41lb_ooblayout, NULL)),
++		     SPINAND_ECCINFO(&f50l1g41lb_ooblayout, NULL),
++		     SPINAND_USER_OTP_INFO(28, 2, &f50l1g41lb_user_otp_ops),
++		     SPINAND_FACT_OTP_INFO(2, 0, &f50l1g41lb_fact_otp_ops)),
+ 	SPINAND_INFO("F50D1G41LB",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x11, 0x7f,
+-				0x7f, 0x7f),
++				0x7f),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(1, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+-		     SPINAND_ECCINFO(&f50l1g41lb_ooblayout, NULL)),
++		     SPINAND_ECCINFO(&f50l1g41lb_ooblayout, NULL),
++		     SPINAND_USER_OTP_INFO(28, 2, &f50l1g41lb_user_otp_ops),
++		     SPINAND_FACT_OTP_INFO(2, 0, &f50l1g41lb_fact_otp_ops)),
+ 	SPINAND_INFO("F50D2G41KA",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x51, 0x7f,
+ 				0x7f, 0x7f),
+diff --git a/drivers/mtd/nand/spi/foresee.c b/drivers/mtd/nand/spi/foresee.c
+index 6229c959b2c..370f8494fb5 100644
+--- a/drivers/mtd/nand/spi/foresee.c
++++ b/drivers/mtd/nand/spi/foresee.c
+@@ -14,18 +14,18 @@
+ #define SPINAND_MFR_FORESEE		0xCD
  
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int f35sqa002g_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				    struct mtd_oob_region *region)
+@@ -83,6 +83,16 @@ static const struct spinand_info foresee_spinand_table[] = {
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&f35sqa002g_ooblayout,
+ 				     f35sqa002g_ecc_get_status)),
++	SPINAND_INFO("F35SQA001G",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x71, 0x71),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&f35sqa002g_ooblayout,
++				     f35sqa002g_ecc_get_status)),
+ };
+ 
+ static const struct spinand_manufacturer_ops foresee_spinand_manuf_ops = {
+diff --git a/drivers/mtd/nand/spi/gigadevice.c b/drivers/mtd/nand/spi/gigadevice.c
+index f3608a13d8e..32fbe11e908 100644
+--- a/drivers/mtd/nand/spi/gigadevice.c
++++ b/drivers/mtd/nand/spi/gigadevice.c
+@@ -28,44 +28,44 @@
+ #define GD5FXGQ4UXFXXG_STATUS_ECC_UNCOR_ERROR	(7 << 4)
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants_f,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP_3A(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP_3A(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP_3A(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP_3A(false, 0, 0, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_3A_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_3A_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_3A_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_3A_1S_1S_1S_OP(0, 0, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants_1gq5,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 2, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants_2gq5,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 4, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 2, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 4, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int gd5fxgq4xa_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				  struct mtd_oob_region *region)
+@@ -189,7 +189,7 @@ static int gd5fxgq4uexxg_ecc_get_status(struct spinand_device *spinand,
+ 					u8 status)
+ {
+ 	u8 status2;
+-	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(GD5FXGQXXEXXG_REG_STATUS2,
++	struct spi_mem_op op = SPINAND_GET_FEATURE_1S_1S_1S_OP(GD5FXGQXXEXXG_REG_STATUS2,
+ 						      spinand->scratchbuf);
+ 	int ret;
+ 
+@@ -232,7 +232,7 @@ static int gd5fxgq5xexxg_ecc_get_status(struct spinand_device *spinand,
+ 					u8 status)
+ {
+ 	u8 status2;
+-	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(GD5FXGQXXEXXG_REG_STATUS2,
++	struct spi_mem_op op = SPINAND_GET_FEATURE_1S_1S_1S_OP(GD5FXGQXXEXXG_REG_STATUS2,
+ 						      spinand->scratchbuf);
+ 	int ret;
+ 
+@@ -537,6 +537,26 @@ static const struct spinand_info gigadevice_spinand_table[] = {
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
+ 				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GM9UExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x91, 0x01),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GM9RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x81, 0x01),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
+ };
+ 
+ static const struct spinand_manufacturer_ops gigadevice_spinand_manuf_ops = {
+diff --git a/drivers/mtd/nand/spi/macronix.c b/drivers/mtd/nand/spi/macronix.c
+index c2a7aa2da96..f21103bb15a 100644
+--- a/drivers/mtd/nand/spi/macronix.c
++++ b/drivers/mtd/nand/spi/macronix.c
+@@ -5,6 +5,7 @@
+  * Author: Boris Brezillon <boris.brezillon@bootlin.com>
+  */
+ 
++#include <linux/bitfield.h>
+ #ifndef __UBOOT__
+ #include <linux/device.h>
+ #include <linux/kernel.h>
+@@ -13,21 +14,35 @@
+ #include <linux/mtd/spinand.h>
+ 
+ #define SPINAND_MFR_MACRONIX		0xC2
+-#define MACRONIX_ECCSR_MASK		0x0F
++#define MACRONIX_ECCSR_BF_LAST_PAGE(eccsr) FIELD_GET(GENMASK(3, 0), eccsr)
++#define MACRONIX_ECCSR_BF_ACCUMULATED_PAGES(eccsr) FIELD_GET(GENMASK(7, 4), eccsr)
++#define MACRONIX_CFG_CONT_READ         BIT(2)
++#define MACRONIX_FEATURE_ADDR_READ_RETRY 0x70
++#define MACRONIX_NUM_READ_RETRY_MODES 5
++
++#define STATUS_ECC_HAS_BITFLIPS_THRESHOLD (3 << 4)
++
++/* Bitflip theshold configuration register */
++#define REG_CFG_BFT 0x10
++#define CFG_BFT(x) FIELD_PREP(GENMASK(7, 4), (x))
++
++struct macronix_priv {
++	bool cont_read;
++};
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int mx35lfxge4ab_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				      struct mtd_oob_region *region)
+@@ -52,8 +67,9 @@ static const struct mtd_ooblayout_ops mx35lfxge4ab_ooblayout = {
+ 	.rfree = mx35lfxge4ab_ooblayout_free,
+ };
+ 
+-static int mx35lf1ge4ab_get_eccsr(struct spinand_device *spinand, u8 *eccsr)
++static int macronix_get_eccsr(struct spinand_device *spinand, u8 *eccsr)
+ {
++	struct macronix_priv *priv = spinand->priv;
+ 	struct spi_mem_op op = SPI_MEM_OP(SPI_MEM_OP_CMD(0x7c, 1),
+ 					  SPI_MEM_OP_NO_ADDR,
+ 					  SPI_MEM_OP_DUMMY(1, 1),
+@@ -63,12 +79,21 @@ static int mx35lf1ge4ab_get_eccsr(struct spinand_device *spinand, u8 *eccsr)
+ 	if (ret)
+ 		return ret;
+ 
+-	*eccsr &= MACRONIX_ECCSR_MASK;
++	/*
++	 * ECCSR exposes the number of bitflips for the last read page in bits [3:0].
++	 * Continuous read compatible chips also expose the maximum number of
++	 * bitflips for the whole (continuous) read operation in bits [7:4].
++	 */
++	if (!priv->cont_read)
++		*eccsr = MACRONIX_ECCSR_BF_LAST_PAGE(*eccsr);
++	else
++		*eccsr = MACRONIX_ECCSR_BF_ACCUMULATED_PAGES(*eccsr);
++
  	return 0;
  }
-@@ -1363,6 +1374,7 @@ int spinand_match_and_init(struct spinand_device *spinand,
- 		spinand->flags = table[i].flags;
- 		spinand->id.len = 1 + table[i].devid.len;
- 		spinand->select_target = table[i].select_target;
-+		spinand->configure_chip = table[i].configure_chip;
- 		spinand->set_cont_read = table[i].set_cont_read;
- 		spinand->fact_otp = &table[i].fact_otp;
- 		spinand->user_otp = &table[i].user_otp;
+ 
+-static int mx35lf1ge4ab_ecc_get_status(struct spinand_device *spinand,
+-				       u8 status)
++static int macronix_ecc_get_status(struct spinand_device *spinand,
++				   u8 status)
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 eccsr;
+@@ -86,16 +111,14 @@ static int mx35lf1ge4ab_ecc_get_status(struct spinand_device *spinand,
+ 		 * in order to avoid forcing the wear-leveling layer to move
+ 		 * data around if it's not necessary.
+ 		 */
+-		if (mx35lf1ge4ab_get_eccsr(spinand, spinand->scratchbuf))
++		if (macronix_get_eccsr(spinand, spinand->scratchbuf))
+ 			return nanddev_get_ecc_conf(nand)->strength;
+ 
+ 		eccsr = *spinand->scratchbuf;
+-		if (WARN_ON(eccsr > nanddev_get_ecc_conf(nand)->strength ||
+-			    !eccsr))
++		if (WARN_ON(eccsr > nanddev_get_ecc_conf(nand)->strength || !eccsr))
+ 			return nanddev_get_ecc_conf(nand)->strength;
+ 
+ 		return eccsr;
+-
+ 	default:
+ 		break;
+ 	}
+@@ -103,6 +126,38 @@ static int mx35lf1ge4ab_ecc_get_status(struct spinand_device *spinand,
+ 	return -EINVAL;
+ }
+ 
++static int macronix_set_cont_read(struct spinand_device *spinand, bool enable)
++{
++	struct macronix_priv *priv = spinand->priv;
++	int ret;
++
++	ret = spinand_upd_cfg(spinand, MACRONIX_CFG_CONT_READ,
++			      enable ? MACRONIX_CFG_CONT_READ : 0);
++	if (ret)
++		return ret;
++
++	priv->cont_read = enable;
++
++	return 0;
++}
++
++/**
++ * macronix_set_read_retry - Set the retry mode
++ * @spinand: SPI NAND device
++ * @retry_mode: Specify which retry mode to set
++ *
++ * Return: 0 on success, a negative error code otherwise.
++ */
++static int macronix_set_read_retry(struct spinand_device *spinand,
++					     unsigned int retry_mode)
++{
++	struct spi_mem_op op = SPINAND_SET_FEATURE_1S_1S_1S_OP(MACRONIX_FEATURE_ADDR_READ_RETRY,
++							       spinand->scratchbuf);
++
++	*spinand->scratchbuf = retry_mode;
++	return spi_mem_exec_op(spinand->slave, &op);
++}
++
+ static const struct spinand_info macronix_spinand_table[] = {
+ 	SPINAND_INFO("MX35LF1GE4AB",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x12),
+@@ -113,7 +168,7 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ 	SPINAND_INFO("MX35LF2GE4AB",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x22),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 2, 1, 1),
+@@ -121,10 +176,12 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+-		     SPINAND_HAS_QE_BIT,
++		     SPINAND_HAS_QE_BIT |
++		     SPINAND_HAS_PROG_PLANE_SELECT_BIT |
++		     SPINAND_HAS_READ_PLANE_SELECT_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL)),
+ 	SPINAND_INFO("MX35LF2GE4AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x26),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x26, 0x03),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -132,9 +189,12 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_CONT_READ(macronix_set_cont_read),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35LF4GE4AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x37),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x37, 0x03),
+ 		     NAND_MEMORG(1, 4096, 128, 64, 2048, 40, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -142,34 +202,67 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_CONT_READ(macronix_set_cont_read),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35LF1G24AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x14),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x14, 0x03),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+-		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL)),
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35LF2G24AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x24),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x24, 0x03),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 2, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT |
++		     SPINAND_HAS_PROG_PLANE_SELECT_BIT,
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
++	SPINAND_INFO("MX35LF2G24AD-Z4I8",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x64, 0x03),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+-		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL)),
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35LF4G24AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x35),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x35, 0x03),
+ 		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 2, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT |
++		     SPINAND_HAS_PROG_PLANE_SELECT_BIT,
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
++	SPINAND_INFO("MX35LF4G24AD-Z4I8",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x75, 0x03),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+-		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL)),
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout, NULL),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX31LF1GE4BC",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x1e),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+@@ -179,7 +272,7 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ 	SPINAND_INFO("MX31UF1GE4BC",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x9e),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+@@ -189,7 +282,7 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ 
+ 	SPINAND_INFO("MX35LF2G14AC",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x20),
+@@ -198,21 +291,38 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+-		     SPINAND_HAS_QE_BIT,
++		     SPINAND_HAS_QE_BIT |
++		     SPINAND_HAS_PROG_PLANE_SELECT_BIT |
++		     SPINAND_HAS_READ_PLANE_SELECT_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ 	SPINAND_INFO("MX35UF4G24AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xb5),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xb5, 0x03),
+ 		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 2, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT |
++		     SPINAND_HAS_PROG_PLANE_SELECT_BIT,
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
++				     macronix_ecc_get_status),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
++	SPINAND_INFO("MX35UF4G24AD-Z4I8",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xf5, 0x03),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35UF4GE4AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xb7),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xb7, 0x03),
+ 		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -220,7 +330,10 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_CONT_READ(macronix_set_cont_read),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35UF2G14AC",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xa0),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 2, 1, 1),
+@@ -228,21 +341,38 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+-		     SPINAND_HAS_QE_BIT,
++		     SPINAND_HAS_QE_BIT |
++		     SPINAND_HAS_PROG_PLANE_SELECT_BIT |
++		     SPINAND_HAS_READ_PLANE_SELECT_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ 	SPINAND_INFO("MX35UF2G24AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xa4),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xa4, 0x03),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 2, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT |
++		     SPINAND_HAS_PROG_PLANE_SELECT_BIT,
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
++				     macronix_ecc_get_status),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
++	SPINAND_INFO("MX35UF2G24AD-Z4I8",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xe4, 0x03),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35UF2GE4AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xa6),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xa6, 0x03),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -250,9 +380,12 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_CONT_READ(macronix_set_cont_read),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35UF2GE4AC",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xa2),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xa2, 0x01),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
+ 		     NAND_ECCREQ(4, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -260,7 +393,8 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_CONT_READ(macronix_set_cont_read)),
+ 	SPINAND_INFO("MX35UF1G14AC",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x90),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+@@ -270,9 +404,9 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ 	SPINAND_INFO("MX35UF1G24AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x94),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x94, 0x03),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -280,9 +414,11 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35UF1GE4AD",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x96),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x96, 0x03),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -290,9 +426,12 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status),
++		     SPINAND_CONT_READ(macronix_set_cont_read),
++		     SPINAND_READ_RETRY(MACRONIX_NUM_READ_RETRY_MODES,
++					macronix_set_read_retry)),
+ 	SPINAND_INFO("MX35UF1GE4AC",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x92),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x92, 0x01),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(4, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -300,8 +439,8 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
+-
++				     macronix_ecc_get_status),
++		     SPINAND_CONT_READ(macronix_set_cont_read)),
+ 	SPINAND_INFO("MX31LF2GE4BC",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x2e),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
+@@ -311,7 +450,7 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ 	SPINAND_INFO("MX3UF2GE4BC",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xae),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
+@@ -321,10 +460,30 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+-				     mx35lf1ge4ab_ecc_get_status)),
++				     macronix_ecc_get_status)),
+ };
+ 
++static int macronix_spinand_init(struct spinand_device *spinand)
++{
++	struct macronix_priv *priv;
++
++	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
++	if (!priv)
++		return -ENOMEM;
++
++	spinand->priv = priv;
++
++	return 0;
++}
++
++static void macronix_spinand_cleanup(struct spinand_device *spinand)
++{
++	kfree(spinand->priv);
++}
++
+ static const struct spinand_manufacturer_ops macronix_spinand_manuf_ops = {
++	.init = macronix_spinand_init,
++	.cleanup = macronix_spinand_cleanup,
+ };
+ 
+ const struct spinand_manufacturer macronix_spinand_manufacturer = {
+diff --git a/drivers/mtd/nand/spi/micron.c b/drivers/mtd/nand/spi/micron.c
+index 01c177facfb..9af3e99664f 100644
+--- a/drivers/mtd/nand/spi/micron.c
++++ b/drivers/mtd/nand/spi/micron.c
+@@ -9,8 +9,14 @@
+ #ifndef __UBOOT__
+ #include <linux/device.h>
+ #include <linux/kernel.h>
++#include <linux/spi/spi-mem.h>
++#else
++#include <dm/device_compat.h>
++#include <spi-mem.h>
++#include <spi.h>
+ #endif
+ #include <linux/mtd/spinand.h>
++#include <linux/string.h>
+ 
+ #define SPINAND_MFR_MICRON		0x2c
+ 
+@@ -30,34 +36,38 @@
+ 
+ #define MICRON_SELECT_DIE(x)	((x) << 6)
+ 
++#define MICRON_MT29F2G01ABAGD_CFG_OTP_STATE		BIT(7)
++#define MICRON_MT29F2G01ABAGD_CFG_OTP_LOCK		\
++	(CFG_OTP_ENABLE | MICRON_MT29F2G01ABAGD_CFG_OTP_STATE)
++
+ static SPINAND_OP_VARIANTS(quadio_read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 2, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(x4_write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(x4_update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ /* Micron  MT29F2G01AAAED Device */
+ static SPINAND_OP_VARIANTS(x4_read_cache_variants,
+-			   SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-			   SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-			   SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-			   SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++			   SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++			   SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++			   SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++			   SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(x1_write_cache_variants,
+-			   SPINAND_PROG_LOAD(true, 0, NULL, 0));
++			   SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(x1_update_cache_variants,
+-			   SPINAND_PROG_LOAD(false, 0, NULL, 0));
++			   SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int micron_8_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				  struct mtd_oob_region *region)
+@@ -133,7 +143,7 @@ static const struct mtd_ooblayout_ops micron_4_ooblayout = {
+ static int micron_select_target(struct spinand_device *spinand,
+ 				unsigned int target)
+ {
+-	struct spi_mem_op op = SPINAND_SET_FEATURE_OP(MICRON_DIE_SELECT_REG,
++	struct spi_mem_op op = SPINAND_SET_FEATURE_1S_1S_1S_OP(MICRON_DIE_SELECT_REG,
+ 						      spinand->scratchbuf);
+ 
+ 	if (target > 1)
+@@ -170,6 +180,136 @@ static int micron_8_ecc_get_status(struct spinand_device *spinand,
+ 	return -EINVAL;
+ }
+ 
++static inline bool mem_is_zero(const void *s, size_t n)
++{
++	return !memchr_inv(s, 0, n);
++}
++
++static int mt29f2g01abagd_otp_is_locked(struct spinand_device *spinand)
++{
++	size_t bufsize = spinand_otp_page_size(spinand);
++	size_t retlen;
++	u8 *buf;
++	int ret;
++
++	buf = kmalloc(bufsize, GFP_KERNEL);
++	if (!buf)
++		return -ENOMEM;
++
++	ret = spinand_upd_cfg(spinand,
++			      MICRON_MT29F2G01ABAGD_CFG_OTP_LOCK,
++			      MICRON_MT29F2G01ABAGD_CFG_OTP_STATE);
++	if (ret)
++		goto free_buf;
++
++	ret = spinand_user_otp_read(spinand, 0, bufsize, &retlen, buf);
++
++	if (spinand_upd_cfg(spinand, MICRON_MT29F2G01ABAGD_CFG_OTP_LOCK,
++			    0)) {
++		dev_warn(spinand->slave->dev,
++			 "Can not disable OTP mode\n");
++		ret = -EIO;
++	}
++
++	if (ret)
++		goto free_buf;
++
++	/* If all zeros, then the OTP area is locked. */
++	if (mem_is_zero(buf, bufsize))
++		ret = 1;
++
++free_buf:
++	kfree(buf);
++	return ret;
++}
++
++static int mt29f2g01abagd_otp_info(struct spinand_device *spinand, size_t len,
++				   struct otp_info *buf, size_t *retlen,
++				   bool user)
++{
++	int locked;
++
++	if (len < sizeof(*buf))
++		return -EINVAL;
++
++	locked = mt29f2g01abagd_otp_is_locked(spinand);
++	if (locked < 0)
++		return locked;
++
++	buf->locked = locked;
++	buf->start = 0;
++	buf->length = user ? spinand_user_otp_size(spinand) :
++			     spinand_fact_otp_size(spinand);
++
++	*retlen = sizeof(*buf);
++	return 0;
++}
++
++static int mt29f2g01abagd_fact_otp_info(struct spinand_device *spinand,
++					size_t len, struct otp_info *buf,
++					size_t *retlen)
++{
++	return mt29f2g01abagd_otp_info(spinand, len, buf, retlen, false);
++}
++
++static int mt29f2g01abagd_user_otp_info(struct spinand_device *spinand,
++					size_t len, struct otp_info *buf,
++					size_t *retlen)
++{
++	return mt29f2g01abagd_otp_info(spinand, len, buf, retlen, true);
++}
++
++static int mt29f2g01abagd_otp_lock(struct spinand_device *spinand, loff_t from,
++				   size_t len)
++{
++	struct spi_mem_op write_op = SPINAND_WR_EN_DIS_1S_0_0_OP(true);
++	struct spi_mem_op exec_op = SPINAND_PROG_EXEC_1S_1S_0_OP(0);
++	u8 status;
++	int ret;
++
++	ret = spinand_upd_cfg(spinand,
++			      MICRON_MT29F2G01ABAGD_CFG_OTP_LOCK,
++			      MICRON_MT29F2G01ABAGD_CFG_OTP_LOCK);
++	if (!ret)
++		return ret;
++
++	ret = spi_mem_exec_op(spinand->slave, &write_op);
++	if (!ret)
++		goto out;
++
++	ret = spi_mem_exec_op(spinand->slave, &exec_op);
++	if (!ret)
++		goto out;
++
++	ret = spinand_wait(spinand,
++			   SPINAND_WRITE_INITIAL_DELAY_US,
++			   SPINAND_WRITE_POLL_DELAY_US,
++			   &status);
++	if (!ret && (status & STATUS_PROG_FAILED))
++		ret = -EIO;
++
++out:
++	if (spinand_upd_cfg(spinand, MICRON_MT29F2G01ABAGD_CFG_OTP_LOCK, 0)) {
++		dev_warn(spinand->slave->dev,
++			 "Can not disable OTP mode\n");
++		ret = -EIO;
++	}
++
++	return ret;
++}
++
++static const struct spinand_user_otp_ops mt29f2g01abagd_user_otp_ops = {
++	.info = mt29f2g01abagd_user_otp_info,
++	.lock = mt29f2g01abagd_otp_lock,
++	.read = spinand_user_otp_read,
++	.write = spinand_user_otp_write,
++};
++
++static const struct spinand_fact_otp_ops mt29f2g01abagd_fact_otp_ops = {
++	.info = mt29f2g01abagd_fact_otp_info,
++	.read = spinand_fact_otp_read,
++};
++
+ static const struct spinand_info micron_spinand_table[] = {
+ 	/* M79A 2Gb 3.3V */
+ 	SPINAND_INFO("MT29F2G01ABAGD",
+@@ -181,7 +321,9 @@ static const struct spinand_info micron_spinand_table[] = {
+ 					      &x4_update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&micron_8_ooblayout,
+-				     micron_8_ecc_get_status)),
++				     micron_8_ecc_get_status),
++		     SPINAND_USER_OTP_INFO(12, 2, &mt29f2g01abagd_user_otp_ops),
++		     SPINAND_FACT_OTP_INFO(2, 0, &mt29f2g01abagd_fact_otp_ops)),
+ 	/* M79A 2Gb 1.8V */
+ 	SPINAND_INFO("MT29F2G01ABBGD",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x25),
+diff --git a/drivers/mtd/nand/spi/paragon.c b/drivers/mtd/nand/spi/paragon.c
+index 079431cea8f..a7106ae194b 100644
+--- a/drivers/mtd/nand/spi/paragon.c
++++ b/drivers/mtd/nand/spi/paragon.c
+@@ -11,8 +11,10 @@
+ #endif
+ #include <linux/mtd/spinand.h>
+ 
++
+ #define SPINAND_MFR_PARAGON	0xa1
+ 
++
+ #define PN26G0XA_STATUS_ECC_BITMASK		(3 << 4)
+ 
+ #define PN26G0XA_STATUS_ECC_NONE_DETECTED	(0 << 4)
+@@ -20,21 +22,23 @@
+ #define PN26G0XA_STATUS_ECC_ERRORED		(2 << 4)
+ #define PN26G0XA_STATUS_ECC_8_CORRECTED		(3 << 4)
+ 
++
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 2, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
++
+ 
+ static int pn26g0xa_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				   struct mtd_oob_region *region)
+diff --git a/drivers/mtd/nand/spi/skyhigh.c b/drivers/mtd/nand/spi/skyhigh.c
+new file mode 100644
+index 00000000000..5e9487bd27a
+--- /dev/null
++++ b/drivers/mtd/nand/spi/skyhigh.c
+@@ -0,0 +1,149 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2024 SkyHigh Memory Limited
++ *
++ * Author: Takahiro Kuwano <takahiro.kuwano@infineon.com>
++ * Co-Author: KR Kim <kr.kim@skyhighmemory.com>
++ */
++
++#ifndef __UBOOT__
++#include <linux/device.h>
++#include <linux/kernel.h>
++#endif
++#include <linux/mtd/spinand.h>
++
++#define SPINAND_MFR_SKYHIGH			0x01
++#define SKYHIGH_STATUS_ECC_1TO2_BITFLIPS	(1 << 4)
++#define SKYHIGH_STATUS_ECC_3TO6_BITFLIPS	(2 << 4)
++#define SKYHIGH_STATUS_ECC_UNCOR_ERROR		(3 << 4)
++#define SKYHIGH_CONFIG_PROTECT_EN		BIT(1)
++
++static SPINAND_OP_VARIANTS(read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 4, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_variants,
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_variants,
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
++
++static int skyhigh_spinand_ooblayout_ecc(struct mtd_info *mtd, int section,
++					 struct mtd_oob_region *region)
++{
++	/* ECC bytes are stored in hidden area. */
++	return -ERANGE;
++}
++
++static int skyhigh_spinand_ooblayout_free(struct mtd_info *mtd, int section,
++					  struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	/* ECC bytes are stored in hidden area. Reserve 2 bytes for the BBM. */
++	region->offset = 2;
++	region->length = mtd->oobsize - 2;
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops skyhigh_spinand_ooblayout = {
++	.ecc = skyhigh_spinand_ooblayout_ecc,
++	.rfree = skyhigh_spinand_ooblayout_free,
++};
++
++static int skyhigh_spinand_ecc_get_status(struct spinand_device *spinand,
++					  u8 status)
++{
++	switch (status & STATUS_ECC_MASK) {
++	case STATUS_ECC_NO_BITFLIPS:
++		return 0;
++
++	case SKYHIGH_STATUS_ECC_UNCOR_ERROR:
++		return -EBADMSG;
++
++	case SKYHIGH_STATUS_ECC_1TO2_BITFLIPS:
++		return 2;
++
++	case SKYHIGH_STATUS_ECC_3TO6_BITFLIPS:
++		return 6;
++
++	default:
++		break;
++	}
++
++	return -EINVAL;
++}
++
++static const struct spinand_info skyhigh_spinand_table[] = {
++	SPINAND_INFO("S35ML01G301",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x15),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(6, 32),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_NO_RAW_ACCESS,
++		     SPINAND_ECCINFO(&skyhigh_spinand_ooblayout,
++				     skyhigh_spinand_ecc_get_status)),
++	SPINAND_INFO("S35ML01G300",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x14),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(6, 32),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_NO_RAW_ACCESS,
++		     SPINAND_ECCINFO(&skyhigh_spinand_ooblayout,
++				     skyhigh_spinand_ecc_get_status)),
++	SPINAND_INFO("S35ML02G300",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x25),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 2, 1, 1),
++		     NAND_ECCREQ(6, 32),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_NO_RAW_ACCESS,
++		     SPINAND_ECCINFO(&skyhigh_spinand_ooblayout,
++				     skyhigh_spinand_ecc_get_status)),
++	SPINAND_INFO("S35ML04G300",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x35),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 80, 2, 1, 1),
++		     NAND_ECCREQ(6, 32),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_NO_RAW_ACCESS,
++		     SPINAND_ECCINFO(&skyhigh_spinand_ooblayout,
++				     skyhigh_spinand_ecc_get_status)),
++};
++
++static int skyhigh_spinand_init(struct spinand_device *spinand)
++{
++	/*
++	 * Config_Protect_En (bit 1 in Block Lock register) must be set to 1
++	 * before writing other bits. Do it here before core unlocks all blocks
++	 * by writing block protection bits.
++	 */
++	return spinand_write_reg_op(spinand, REG_BLOCK_LOCK,
++				    SKYHIGH_CONFIG_PROTECT_EN);
++}
++
++static const struct spinand_manufacturer_ops skyhigh_spinand_manuf_ops = {
++	.init = skyhigh_spinand_init,
++};
++
++const struct spinand_manufacturer skyhigh_spinand_manufacturer = {
++	.id = SPINAND_MFR_SKYHIGH,
++	.name = "SkyHigh",
++	.chips = skyhigh_spinand_table,
++	.nchips = ARRAY_SIZE(skyhigh_spinand_table),
++	.ops = &skyhigh_spinand_manuf_ops,
++};
+diff --git a/drivers/mtd/nand/spi/toshiba.c b/drivers/mtd/nand/spi/toshiba.c
+index bf7da57de13..2e7572d72b4 100644
+--- a/drivers/mtd/nand/spi/toshiba.c
++++ b/drivers/mtd/nand/spi/toshiba.c
+@@ -18,28 +18,28 @@
+ #define TOSH_STATUS_ECC_HAS_BITFLIPS_T	(3 << 4)
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_x4_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_x4_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ /*
+  * Backward compatibility for 1st generation Serial NAND devices
+  * which don't support Quad Program Load operation.
+  */
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int tx58cxgxsxraix_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 					struct mtd_oob_region *region)
+@@ -76,7 +76,7 @@ static int tx58cxgxsxraix_ecc_get_status(struct spinand_device *spinand,
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 mbf = 0;
+-	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(0x30, spinand->scratchbuf);
++	struct spi_mem_op op = SPINAND_GET_FEATURE_1S_1S_1S_OP(0x30, spinand->scratchbuf);
+ 
+ 	switch (status & STATUS_ECC_MASK) {
+ 	case STATUS_ECC_NO_BITFLIPS:
+diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbond.c
+index fc3e3855d41..a89aaec516b 100644
+--- a/drivers/mtd/nand/spi/winbond.c
++++ b/drivers/mtd/nand/spi/winbond.c
+@@ -14,28 +14,83 @@
+ #include <linux/bitfield.h>
+ #include <linux/bug.h>
+ #include <linux/mtd/spinand.h>
++#include <linux/delay.h>
++
++#define HZ_PER_MHZ			1000000UL
+ 
+ #define SPINAND_MFR_WINBOND		0xEF
+ 
+ #define WINBOND_CFG_BUF_READ		BIT(3)
+ 
+-#define W25N04KV_STATUS_ECC_5_8_BITFLIPS FIELD_PREP_CONST(STATUS_ECC_MASK, 0x3)
++#define W25N04KV_STATUS_ECC_5_8_BITFLIPS	(3 << 4)
++
++#define W25N0XJW_SR4			0xD0
++#define W25N0XJW_SR4_HS			BIT(2)
++
++#define W35N01JW_VCR_IO_MODE			0x00
++#define W35N01JW_VCR_IO_MODE_SINGLE_SDR		0xFF
++#define W35N01JW_VCR_IO_MODE_OCTAL_SDR		0xDF
++#define W35N01JW_VCR_IO_MODE_OCTAL_DDR_DS	0xE7
++#define W35N01JW_VCR_IO_MODE_OCTAL_DDR		0xC7
++#define W35N01JW_VCR_DUMMY_CLOCK_REG	0x01
++
++/*
++ * "X2" in the core is equivalent to "dual output" in the datasheets,
++ * "X4" in the core is equivalent to "quad output" in the datasheets.
++ * Quad and octal capable chips feature an absolute maximum frequency of 166MHz.
++ */
++
++static SPINAND_OP_VARIANTS(read_cache_octal_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1D_8D_OP(0, 3, NULL, 0, 120 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1D_8D_OP(0, 2, NULL, 0, 105 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_8S_8S_OP(0, 20, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_8S_8S_OP(0, 16, NULL, 0, 162 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_8S_8S_OP(0, 12, NULL, 0, 124 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_8S_8S_OP(0, 8, NULL, 0, 86 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_8S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_8S_OP(0, 1, NULL, 0, 133 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_octal_variants,
++		SPINAND_PROG_LOAD_1S_8S_8S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_8S_OP(0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_octal_variants,
++		SPINAND_PROG_LOAD_1S_8S_8S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(read_cache_dual_quad_dtr_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4D_4D_OP(0, 8, NULL, 0, 80 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1D_4D_OP(0, 2, NULL, 0, 80 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 4, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 2, NULL, 0, 104 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2D_2D_OP(0, 4, NULL, 0, 80 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1D_2D_OP(0, 2, NULL, 0, 80 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 104 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1D_1D_OP(0, 2, NULL, 0, 80 * HZ_PER_MHZ),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 54 * HZ_PER_MHZ));
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 2, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 2, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int w25m02gv_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				  struct mtd_oob_region *region)
+@@ -80,6 +135,18 @@ static int w25m02gv_select_target(struct spinand_device *spinand,
+ 	return spi_mem_exec_op(spinand->slave, &op);
+ }
+ 
++static int w25n01kv_ooblayout_ecc(struct mtd_info *mtd, int section,
++				  struct mtd_oob_region *region)
++{
++	if (section > 3)
++		return -ERANGE;
++
++	region->offset = 64 + (8 * section);
++	region->length = 7;
++
++	return 0;
++}
++
+ static int w25n02kv_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				  struct mtd_oob_region *region)
+ {
+@@ -104,17 +171,57 @@ static int w25n02kv_ooblayout_free(struct mtd_info *mtd, int section,
+ 	return 0;
+ }
+ 
++static const struct mtd_ooblayout_ops w25n01kv_ooblayout = {
++	.ecc = w25n01kv_ooblayout_ecc,
++	.rfree = w25n02kv_ooblayout_free,
++};
++
+ static const struct mtd_ooblayout_ops w25n02kv_ooblayout = {
+ 	.ecc = w25n02kv_ooblayout_ecc,
+ 	.rfree = w25n02kv_ooblayout_free,
+ };
+ 
++static int w35n01jw_ooblayout_ecc(struct mtd_info *mtd, int section,
++				  struct mtd_oob_region *region)
++{
++	if (section > 7)
++		return -ERANGE;
++
++	region->offset = (16 * section) + 12;
++	region->length = 4;
++
++	return 0;
++}
++
++static int w35n01jw_ooblayout_free(struct mtd_info *mtd, int section,
++				   struct mtd_oob_region *region)
++{
++	if (section > 7)
++		return -ERANGE;
++
++	region->offset = 16 * section;
++	region->length = 12;
++
++	/* Extract BBM */
++	if (!section) {
++		region->offset += 2;
++		region->length -= 2;
++	}
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops w35n01jw_ooblayout = {
++	.ecc = w35n01jw_ooblayout_ecc,
++	.rfree = w35n01jw_ooblayout_free,
++};
++
+ static int w25n02kv_ecc_get_status(struct spinand_device *spinand,
+ 				   u8 status)
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 mbf = 0;
+-	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(0x30, spinand->scratchbuf);
++	struct spi_mem_op op = SPINAND_GET_FEATURE_1S_1S_1S_OP(0x30, spinand->scratchbuf);
+ 
+ 	switch (status & STATUS_ECC_MASK) {
+ 	case STATUS_ECC_NO_BITFLIPS:
+@@ -147,18 +254,126 @@ static int w25n02kv_ecc_get_status(struct spinand_device *spinand,
+ 	return -EINVAL;
+ }
+ 
++static int w25n0xjw_hs_cfg(struct spinand_device *spinand)
++{
++	const struct spi_mem_op *op;
++	bool hs;
++	u8 sr4;
++	int ret;
++
++	op = spinand->op_templates.read_cache;
++	if (op->cmd.dtr || op->addr.dtr || op->dummy.dtr || op->data.dtr)
++		hs = false;
++	else if (op->cmd.buswidth == 1 && op->addr.buswidth == 1 &&
++		 op->dummy.buswidth == 1 && op->data.buswidth == 1)
++		hs = false;
++	else if (!op->max_freq)
++		hs = true;
++	else
++		hs = false;
++
++	ret = spinand_read_reg_op(spinand, W25N0XJW_SR4, &sr4);
++	if (ret)
++		return ret;
++
++	if (hs)
++		sr4 |= W25N0XJW_SR4_HS;
++	else
++		sr4 &= ~W25N0XJW_SR4_HS;
++
++	ret = spinand_write_reg_op(spinand, W25N0XJW_SR4, sr4);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static int w35n0xjw_write_vcr(struct spinand_device *spinand, u8 reg, u8 val)
++{
++	struct spi_mem_op op =
++		SPI_MEM_OP(SPI_MEM_OP_CMD(0x81, 1),
++			   SPI_MEM_OP_ADDR(3, reg, 1),
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, spinand->scratchbuf, 1));
++	int ret;
++
++	*spinand->scratchbuf = val;
++
++	ret = spinand_write_enable_op(spinand);
++	if (ret)
++		return ret;
++
++	ret = spi_mem_exec_op(spinand->slave, &op);
++	if (ret)
++		return ret;
++
++	/*
++	 * Write VCR operation doesn't set the busy bit in SR, which means we
++	 * cannot perform a status poll. Minimum time of 50ns is needed to
++	 * complete the write.
++	 */
++	ndelay(50);
++
++	return 0;
++}
++
++static int w35n0xjw_vcr_cfg(struct spinand_device *spinand)
++{
++	const struct spi_mem_op *op;
++	unsigned int dummy_cycles;
++	bool dtr, single;
++	u8 io_mode;
++	int ret;
++
++	op = spinand->op_templates.read_cache;
++
++	single = (op->cmd.buswidth == 1 && op->addr.buswidth == 1 && op->data.buswidth == 1);
++	dtr = (op->cmd.dtr || op->addr.dtr || op->data.dtr);
++	if (single && !dtr)
++		io_mode = W35N01JW_VCR_IO_MODE_SINGLE_SDR;
++	else if (!single && !dtr)
++		io_mode = W35N01JW_VCR_IO_MODE_OCTAL_SDR;
++	else if (!single && dtr)
++		io_mode = W35N01JW_VCR_IO_MODE_OCTAL_DDR;
++	else
++		return -EINVAL;
++
++	ret = w35n0xjw_write_vcr(spinand, W35N01JW_VCR_IO_MODE, io_mode);
++	if (ret)
++		return ret;
++
++	dummy_cycles = ((op->dummy.nbytes * 8) / op->dummy.buswidth) / (op->dummy.dtr ? 2 : 1);
++	switch (dummy_cycles) {
++	case 8:
++	case 12:
++	case 16:
++	case 20:
++	case 24:
++	case 28:
++		break;
++	default:
++		return -EINVAL;
++	}
++	ret = w35n0xjw_write_vcr(spinand, W35N01JW_VCR_DUMMY_CLOCK_REG, dummy_cycles);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
+ static const struct spinand_info winbond_spinand_table[] = {
+-	SPINAND_INFO("W25M02GV",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xab, 0x21),
+-		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 2),
++	/* 512M-bit densities */
++	SPINAND_INFO("W25N512GW", /* 1.8V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x20),
++		     NAND_MEMORG(1, 2048, 64, 64, 512, 10, 1, 1, 1),
+ 		     NAND_ECCREQ(1, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+-		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL),
+-		     SPINAND_SELECT_TARGET(w25m02gv_select_target)),
+-	SPINAND_INFO("W25N01GV",
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL)),
++	/* 1G-bit densities */
++	SPINAND_INFO("W25N01GV", /* 3.3V */
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xaa, 0x21),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(1, 512),
+@@ -167,43 +382,95 @@ static const struct spinand_info winbond_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL)),
+-	SPINAND_INFO("W25N02KV",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xaa, 0x22),
+-		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
+-		     NAND_ECCREQ(8, 512),
++	SPINAND_INFO("W25N01GW", /* 1.8V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x21),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+-		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
+-	SPINAND_INFO("W25N01JW",
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL)),
++	SPINAND_INFO("W25N01JW", /* high-speed 1.8V */
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xbc, 0x21),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_dual_quad_dtr_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL),
++		     SPINAND_CONFIGURE_CHIP(w25n0xjw_hs_cfg)),
++	SPINAND_INFO("W25N01KV", /* 3.3V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xae, 0x21),
++		     NAND_MEMORG(1, 2048, 96, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(4, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+-		     SPINAND_ECCINFO(&w25m02gv_ooblayout, w25n02kv_ecc_get_status)),
+-	SPINAND_INFO("W25N02JWZEIF",
++		     SPINAND_ECCINFO(&w25n01kv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W35N01JW", /* 1.8V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xdc, 0x21),
++		     NAND_MEMORG(1, 4096, 128, 64, 512, 10, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_octal_variants,
++					      &write_cache_octal_variants,
++					      &update_cache_octal_variants),
++		     0,
++		     SPINAND_ECCINFO(&w35n01jw_ooblayout, NULL),
++		     SPINAND_CONFIGURE_CHIP(w35n0xjw_vcr_cfg)),
++	SPINAND_INFO("W35N02JW", /* 1.8V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xdf, 0x22),
++		     NAND_MEMORG(1, 4096, 128, 64, 512, 10, 1, 2, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_octal_variants,
++					      &write_cache_octal_variants,
++					      &update_cache_octal_variants),
++		     0,
++		     SPINAND_ECCINFO(&w35n01jw_ooblayout, NULL),
++		     SPINAND_CONFIGURE_CHIP(w35n0xjw_vcr_cfg)),
++	SPINAND_INFO("W35N04JW", /* 1.8V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xdf, 0x23),
++		     NAND_MEMORG(1, 4096, 128, 64, 512, 10, 1, 4, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_octal_variants,
++					      &write_cache_octal_variants,
++					      &update_cache_octal_variants),
++		     0,
++		     SPINAND_ECCINFO(&w35n01jw_ooblayout, NULL),
++		     SPINAND_CONFIGURE_CHIP(w35n0xjw_vcr_cfg)),
++	/* 2G-bit densities */
++	SPINAND_INFO("W25M02GV", /* 2x1G-bit 3.3V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xab, 0x21),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 2),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL),
++		     SPINAND_SELECT_TARGET(w25m02gv_select_target)),
++	SPINAND_INFO("W25N02JW", /* high-speed 1.8V */
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xbf, 0x22),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 2, 1),
+-		     NAND_ECCREQ(4, 512),
+-		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_dual_quad_dtr_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+-		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
+-	SPINAND_INFO("W25N512GW",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x20),
+-		     NAND_MEMORG(1, 2048, 64, 64, 512, 10, 1, 1, 1),
+-		     NAND_ECCREQ(4, 512),
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL),
++		     SPINAND_CONFIGURE_CHIP(w25n0xjw_hs_cfg)),
++	SPINAND_INFO("W25N02KV", /* 3.3V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xaa, 0x22),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
+-	SPINAND_INFO("W25N02KWZEIR",
++	SPINAND_INFO("W25N02KW", /* 1.8V */
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x22),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+@@ -212,18 +479,19 @@ static const struct spinand_info winbond_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
+-	SPINAND_INFO("W25N01GWZEIG",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x21),
+-		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+-		     NAND_ECCREQ(4, 512),
++	/* 4G-bit densities */
++	SPINAND_INFO("W25N04KV", /* 3.3V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xaa, 0x23),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 40, 2, 1, 1),
++		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     0,
+-		     SPINAND_ECCINFO(&w25m02gv_ooblayout, w25n02kv_ecc_get_status)),
+-	SPINAND_INFO("W25N04KV",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xaa, 0x23),
+-		     NAND_MEMORG(1, 2048, 128, 64, 4096, 40, 2, 1, 1),
++		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W25N04KW", /* 1.8V */
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x23),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 40, 1, 1, 1),
+ 		     NAND_ECCREQ(8, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+ 					      &write_cache_variants,
+diff --git a/drivers/mtd/nand/spi/xtx.c b/drivers/mtd/nand/spi/xtx.c
+index aee1849a71f..3e1f884fd89 100644
+--- a/drivers/mtd/nand/spi/xtx.c
++++ b/drivers/mtd/nand/spi/xtx.c
+@@ -25,20 +25,20 @@
+ #define XT26XXXD_STATUS_ECC_UNCOR_ERROR     (2)
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+-		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
+-		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+-		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+-		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
+ 
+ static int xt26g0xa_ooblayout_ecc(struct mtd_info *mtd, int section,
+ 				  struct mtd_oob_region *region)
+diff --git a/include/linux/mtd/nand.h b/include/linux/mtd/nand.h
+index 9285edd5c4b..243955ac1a1 100644
+--- a/include/linux/mtd/nand.h
++++ b/include/linux/mtd/nand.h
+@@ -19,7 +19,7 @@
+  * @oobsize: OOB area size
+  * @pages_per_eraseblock: number of pages per eraseblock
+  * @eraseblocks_per_lun: number of eraseblocks per LUN (Logical Unit Number)
+- * @max_bad_eraseblocks_per_lun: maximum number of eraseblocks per LUN
++ * @max_bad_eraseblocks_per_lun: maximum number of bad eraseblocks per LUN
+  * @planes_per_lun: number of planes per LUN
+  * @luns_per_target: number of LUN per target (target is a synonym for die)
+  * @ntargets: total number of targets exposed by the NAND device
+@@ -286,6 +286,20 @@ nanddev_pages_per_eraseblock(const struct nand_device *nand)
+ 	return nand->memorg.pages_per_eraseblock;
+ }
+ 
++/**
++ * nanddev_pages_per_target() - Get the number of pages per target
++ * @nand: NAND device
++ *
++ * Return: the number of pages per target.
++ */
++static inline unsigned int
++nanddev_pages_per_target(const struct nand_device *nand)
++{
++	return nand->memorg.pages_per_eraseblock *
++	       nand->memorg.eraseblocks_per_lun *
++	       nand->memorg.luns_per_target;
++}
++
+ /**
+  * nanddev_per_page_oobsize() - Get NAND erase block size
+  * @nand: NAND device
+@@ -309,6 +323,18 @@ nanddev_eraseblocks_per_lun(const struct nand_device *nand)
+ 	return nand->memorg.eraseblocks_per_lun;
+ }
+ 
++/**
++ * nanddev_eraseblocks_per_target() - Get the number of eraseblocks per target
++ * @nand: NAND device
++ *
++ * Return: the number of eraseblocks per target.
++ */
++static inline unsigned int
++nanddev_eraseblocks_per_target(const struct nand_device *nand)
++{
++	return nand->memorg.eraseblocks_per_lun * nand->memorg.luns_per_target;
++}
++
+ /**
+  * nanddev_target_size() - Get the total size provided by a single target/die
+  * @nand: NAND device
+@@ -335,7 +361,7 @@ static inline unsigned int nanddev_ntargets(const struct nand_device *nand)
+ }
+ 
+ /**
+- * nanddev_neraseblocks() - Get the total number of erasablocks
++ * nanddev_neraseblocks() - Get the total number of eraseblocks
+  * @nand: NAND device
+  *
+  * Return: the total number of eraseblocks exposed by @nand.
 diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
-index adfb5f3ffbc..94f324741e0 100644
+index 94f324741e0..cf9b9656d05 100644
 --- a/include/linux/mtd/spinand.h
 +++ b/include/linux/mtd/spinand.h
-@@ -398,6 +398,7 @@ struct spinand_user_otp {
-  * @op_variants.update_cache: variants of the update-cache operation
-  * @select_target: function used to select a target/die. Required only for
-  *		   multi-die chips
-+ * @configure_chip: Align the chip configuration with the core settings
-  * @set_cont_read: enable/disable continuous cached reads
-  * @fact_otp: SPI NAND factory OTP info.
-  * @user_otp: SPI NAND user OTP info.
-@@ -421,6 +422,7 @@ struct spinand_info {
- 	} op_variants;
- 	int (*select_target)(struct spinand_device *spinand,
- 			     unsigned int target);
-+	int (*configure_chip)(struct spinand_device *spinand);
- 	int (*set_cont_read)(struct spinand_device *spinand,
- 			     bool enable);
- 	struct spinand_fact_otp fact_otp;
-@@ -453,6 +455,9 @@ struct spinand_info {
- #define SPINAND_SELECT_TARGET(__func)					\
- 	.select_target = __func,
+@@ -26,126 +26,218 @@
+  * Standard SPI NAND flash operations
+  */
  
-+#define SPINAND_CONFIGURE_CHIP(__configure_chip)			\
-+	.configure_chip = __configure_chip
+-#define SPINAND_RESET_OP						\
++#define SPINAND_RESET_1S_0_0_OP						\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0xff, 1),				\
+ 		   SPI_MEM_OP_NO_ADDR,					\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_NO_DATA)
+ 
+-#define SPINAND_WR_EN_DIS_OP(enable)					\
++#define SPINAND_WR_EN_DIS_1S_0_0_OP(enable)				\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD((enable) ? 0x06 : 0x04, 1),		\
+ 		   SPI_MEM_OP_NO_ADDR,					\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_NO_DATA)
+ 
+-#define SPINAND_READID_OP(naddr, ndummy, buf, len)			\
++#define SPINAND_READID_1S_1S_1S_OP(naddr, ndummy, buf, len)		\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0x9f, 1),				\
+ 		   SPI_MEM_OP_ADDR(naddr, 0, 1),			\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
+ 		   SPI_MEM_OP_DATA_IN(len, buf, 1))
+ 
+-#define SPINAND_SET_FEATURE_OP(reg, valptr)				\
++#define SPINAND_SET_FEATURE_1S_1S_1S_OP(reg, valptr)			\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0x1f, 1),				\
+ 		   SPI_MEM_OP_ADDR(1, reg, 1),				\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_DATA_OUT(1, valptr, 1))
+ 
+-#define SPINAND_GET_FEATURE_OP(reg, valptr)				\
++#define SPINAND_GET_FEATURE_1S_1S_1S_OP(reg, valptr)			\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0x0f, 1),				\
+ 		   SPI_MEM_OP_ADDR(1, reg, 1),				\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_DATA_IN(1, valptr, 1))
+ 
+-#define SPINAND_BLK_ERASE_OP(addr)					\
++#define SPINAND_BLK_ERASE_1S_1S_0_OP(addr)				\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0xd8, 1),				\
+ 		   SPI_MEM_OP_ADDR(3, addr, 1),				\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_NO_DATA)
+ 
+-#define SPINAND_PAGE_READ_OP(addr)					\
++#define SPINAND_PAGE_READ_1S_1S_0_OP(addr)				\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0x13, 1),				\
+ 		   SPI_MEM_OP_ADDR(3, addr, 1),				\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_NO_DATA)
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_OP(fast, addr, ndummy, buf, len)	\
+-	SPI_MEM_OP(SPI_MEM_OP_CMD(fast ? 0x0b : 0x03, 1),		\
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x03, 1),				\
+ 		   SPI_MEM_OP_ADDR(2, addr, 1),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 1))
++		   SPI_MEM_OP_DATA_IN(len, buf, 1),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_OP_3A(fast, addr, ndummy, buf, len) \
+-	SPI_MEM_OP(SPI_MEM_OP_CMD(fast ? 0x0b : 0x03, 1),		\
+-		   SPI_MEM_OP_ADDR(3, addr, 1),				\
++#define SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x0b, 1),				\
++		   SPI_MEM_OP_ADDR(2, addr, 1),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 1))
++		   SPI_MEM_OP_DATA_IN(len, buf, 1),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_X2_OP(addr, ndummy, buf, len)	\
+-	SPI_MEM_OP(SPI_MEM_OP_CMD(0x3b, 1),				\
+-		   SPI_MEM_OP_ADDR(2, addr, 1),				\
++#define SPINAND_PAGE_READ_FROM_CACHE_3A_1S_1S_1S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x03, 1),				\
++		   SPI_MEM_OP_ADDR(3, addr, 1),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 2))
++		   SPI_MEM_OP_DATA_IN(len, buf, 1),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_X2_OP_3A(addr, ndummy, buf, len)	\
+-	SPI_MEM_OP(SPI_MEM_OP_CMD(0x3b, 1),				\
++#define SPINAND_PAGE_READ_FROM_CACHE_FAST_3A_1S_1S_1S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x0b, 1),				\
+ 		   SPI_MEM_OP_ADDR(3, addr, 1),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 2))
++		   SPI_MEM_OP_DATA_IN(len, buf, 1),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_X4_OP(addr, ndummy, buf, len)	\
+-	SPI_MEM_OP(SPI_MEM_OP_CMD(0x6b, 1),				\
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1D_1D_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x0d, 1),				\
++		   SPI_MEM_DTR_OP_ADDR(2, addr, 1),			\
++		   SPI_MEM_DTR_OP_DUMMY(ndummy, 1),			\
++		   SPI_MEM_DTR_OP_DATA_IN(len, buf, 1),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
 +
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x3b, 1),				\
+ 		   SPI_MEM_OP_ADDR(2, addr, 1),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 4))
++		   SPI_MEM_OP_DATA_IN(len, buf, 2),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_X4_OP_3A(addr, ndummy, buf, len)	\
+-	SPI_MEM_OP(SPI_MEM_OP_CMD(0x6b, 1),				\
++#define SPINAND_PAGE_READ_FROM_CACHE_3A_1S_1S_2S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x3b, 1),				\
+ 		   SPI_MEM_OP_ADDR(3, addr, 1),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 4))
++		   SPI_MEM_OP_DATA_IN(len, buf, 2),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1D_2D_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x3d, 1),				\
++		   SPI_MEM_DTR_OP_ADDR(2, addr, 1),			\
++		   SPI_MEM_DTR_OP_DUMMY(ndummy, 1),			\
++		   SPI_MEM_DTR_OP_DATA_IN(len, buf, 2),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(addr, ndummy, buf, len)	\
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(addr, ndummy, buf, len, freq) \
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0xbb, 1),				\
+ 		   SPI_MEM_OP_ADDR(2, addr, 2),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 2),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 2))
++		   SPI_MEM_OP_DATA_IN(len, buf, 2),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP_3A(addr, ndummy, buf, len) \
++#define SPINAND_PAGE_READ_FROM_CACHE_3A_1S_2S_2S_OP(addr, ndummy, buf, len, freq) \
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0xbb, 1),				\
+ 		   SPI_MEM_OP_ADDR(3, addr, 2),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 2),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 2))
++		   SPI_MEM_OP_DATA_IN(len, buf, 2),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_2D_2D_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0xbd, 1),				\
++		   SPI_MEM_DTR_OP_ADDR(2, addr, 2),			\
++		   SPI_MEM_DTR_OP_DUMMY(ndummy, 2),			\
++		   SPI_MEM_DTR_OP_DATA_IN(len, buf, 2),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x6b, 1),				\
++		   SPI_MEM_OP_ADDR(2, addr, 1),				\
++		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
++		   SPI_MEM_OP_DATA_IN(len, buf, 4),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_3A_1S_1S_4S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x6b, 1),				\
++		   SPI_MEM_OP_ADDR(3, addr, 1),				\
++		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
++		   SPI_MEM_OP_DATA_IN(len, buf, 4),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1D_4D_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x6d, 1),				\
++		   SPI_MEM_DTR_OP_ADDR(2, addr, 1),			\
++		   SPI_MEM_DTR_OP_DUMMY(ndummy, 1),			\
++		   SPI_MEM_DTR_OP_DATA_IN(len, buf, 4),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(addr, ndummy, buf, len)	\
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(addr, ndummy, buf, len, freq) \
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0xeb, 1),				\
+ 		   SPI_MEM_OP_ADDR(2, addr, 4),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 4),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 4))
++		   SPI_MEM_OP_DATA_IN(len, buf, 4),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
+ 
+-#define SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP_3A(addr, ndummy, buf, len) \
++#define SPINAND_PAGE_READ_FROM_CACHE_3A_1S_4S_4S_OP(addr, ndummy, buf, len, freq) \
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0xeb, 1),				\
+ 		   SPI_MEM_OP_ADDR(3, addr, 4),				\
+ 		   SPI_MEM_OP_DUMMY(ndummy, 4),				\
+-		   SPI_MEM_OP_DATA_IN(len, buf, 4))
+-
+-#define SPINAND_PROG_EXEC_OP(addr)					\
++		   SPI_MEM_OP_DATA_IN(len, buf, 4),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_4D_4D_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0xed, 1),				\
++		   SPI_MEM_DTR_OP_ADDR(2, addr, 4),			\
++		   SPI_MEM_DTR_OP_DUMMY(ndummy, 4),			\
++		   SPI_MEM_DTR_OP_DATA_IN(len, buf, 4),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1S_8S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x8b, 1),				\
++		   SPI_MEM_OP_ADDR(2, addr, 1),				\
++		   SPI_MEM_OP_DUMMY(ndummy, 1),				\
++		   SPI_MEM_OP_DATA_IN(len, buf, 8),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_8S_8S_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0xcb, 1),				\
++		   SPI_MEM_OP_ADDR(2, addr, 8),				\
++		   SPI_MEM_OP_DUMMY(ndummy, 8),				\
++		   SPI_MEM_OP_DATA_IN(len, buf, 8),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PAGE_READ_FROM_CACHE_1S_1D_8D_OP(addr, ndummy, buf, len, freq) \
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x9d, 1),				\
++		   SPI_MEM_DTR_OP_ADDR(2, addr, 1),			\
++		   SPI_MEM_DTR_OP_DUMMY(ndummy, 1),			\
++		   SPI_MEM_DTR_OP_DATA_IN(len, buf, 8),			\
++		   SPI_MEM_OP_MAX_FREQ(freq))
++
++#define SPINAND_PROG_EXEC_1S_1S_0_OP(addr)				\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(0x10, 1),				\
+ 		   SPI_MEM_OP_ADDR(3, addr, 1),				\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_NO_DATA)
+ 
+-#define SPINAND_PROG_LOAD(reset, addr, buf, len)			\
++#define SPINAND_PROG_LOAD_1S_1S_1S_OP(reset, addr, buf, len)		\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(reset ? 0x02 : 0x84, 1),		\
+ 		   SPI_MEM_OP_ADDR(2, addr, 1),				\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_DATA_OUT(len, buf, 1))
+ 
+-#define SPINAND_PROG_LOAD_X4(reset, addr, buf, len)			\
++#define SPINAND_PROG_LOAD_1S_1S_4S_OP(reset, addr, buf, len)		\
+ 	SPI_MEM_OP(SPI_MEM_OP_CMD(reset ? 0x32 : 0x34, 1),		\
+ 		   SPI_MEM_OP_ADDR(2, addr, 1),				\
+ 		   SPI_MEM_OP_NO_DUMMY,					\
+ 		   SPI_MEM_OP_DATA_OUT(len, buf, 4))
+ 
++#define SPINAND_PROG_LOAD_1S_1S_8S_OP(addr, buf, len)			\
++	SPI_MEM_OP(SPI_MEM_OP_CMD(0x82, 1),				\
++		   SPI_MEM_OP_ADDR(2, addr, 1),				\
++		   SPI_MEM_OP_NO_DUMMY,					\
++		   SPI_MEM_OP_DATA_OUT(len, buf, 8))
++
++#define SPINAND_PROG_LOAD_1S_8S_8S_OP(reset, addr, buf, len)		\
++	SPI_MEM_OP(SPI_MEM_OP_CMD(reset ? 0xc2 : 0xc4, 1),		\
++		   SPI_MEM_OP_ADDR(2, addr, 8),				\
++		   SPI_MEM_OP_NO_DUMMY,					\
++		   SPI_MEM_OP_DATA_OUT(len, buf, 8))
++
+ /**
+  * Standard SPI NAND flash commands
+  */
+@@ -274,6 +366,7 @@ extern const struct spinand_manufacturer gigadevice_spinand_manufacturer;
+ extern const struct spinand_manufacturer macronix_spinand_manufacturer;
+ extern const struct spinand_manufacturer micron_spinand_manufacturer;
+ extern const struct spinand_manufacturer paragon_spinand_manufacturer;
++extern const struct spinand_manufacturer skyhigh_spinand_manufacturer;
+ extern const struct spinand_manufacturer toshiba_spinand_manufacturer;
+ extern const struct spinand_manufacturer winbond_spinand_manufacturer;
+ extern const struct spinand_manufacturer xtx_spinand_manufacturer;
+@@ -453,13 +546,13 @@ struct spinand_info {
+ 	}
+ 
+ #define SPINAND_SELECT_TARGET(__func)					\
+-	.select_target = __func,
++	.select_target = __func
+ 
+ #define SPINAND_CONFIGURE_CHIP(__configure_chip)			\
+ 	.configure_chip = __configure_chip
+ 
  #define SPINAND_CONT_READ(__set_cont_read)				\
- 	.set_cont_read = __set_cont_read,
+-	.set_cont_read = __set_cont_read,
++	.set_cont_read = __set_cont_read
  
-@@ -521,6 +526,7 @@ struct spinand_dirmap {
-  *		passed in spi_mem_op be DMA-able, so we can't based the bufs on
-  *		the stack
-  * @manufacturer: SPI NAND manufacturer information
-+ * @configure_chip: Align the chip configuration with the core settings
-  * @cont_read_possible: Field filled by the core once the whole system
-  *		configuration is known to tell whether continuous reads are
-  *		suitable to use or not in general with this chip/configuration.
-@@ -569,6 +575,7 @@ struct spinand_device {
+ #define SPINAND_FACT_OTP_INFO(__npages, __start_page, __ops)		\
+ 	.fact_otp = {							\
+@@ -667,7 +760,9 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 			   enum spinand_readid_method rdid_method);
  
- 	u8 last_wait_status;
+ int spinand_upd_cfg(struct spinand_device *spinand, u8 mask, u8 val);
++int spinand_read_reg_op(struct spinand_device *spinand, u8 reg, u8 *val);
+ int spinand_write_reg_op(struct spinand_device *spinand, u8 reg, u8 val);
++int spinand_write_enable_op(struct spinand_device *spinand);
+ int spinand_select_target(struct spinand_device *spinand, unsigned int target);
  
-+	int (*configure_chip)(struct spinand_device *spinand);
- 	bool cont_read_possible;
- 	int (*set_cont_read)(struct spinand_device *spinand,
- 			     bool enable);
+ int spinand_wait(struct spinand_device *spinand, unsigned long initial_delay_us,
 -- 
 2.50.1
 
