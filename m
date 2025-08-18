@@ -4,60 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8982BCA0EE4
-	for <u-boot@archiver.kernel.org>; Sun, 17 Aug 2025 23:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A53CCA0EE4
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 00:31:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD5E983252;
-	Mon, 18 Aug 2025 01:49:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=she-devel.com
+	by phobos.denx.de (Postfix) with ESMTP id A554F832F0;
+	Mon, 18 Aug 2025 02:31:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=she-devel.com header.i=@she-devel.com header.b="E4Ev6mP/";
+	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="z5nbb+He";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5DD783281; Mon, 18 Aug 2025 01:49:48 +0200 (CEST)
-Received: from mx.kolabnow.com (mx.kolabnow.com [212.103.80.154])
+ id AA58083314; Mon, 18 Aug 2025 02:31:34 +0200 (CEST)
+Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
+ [202.36.163.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6202831E4
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 01:49:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=she-devel.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alison@she-devel.com
-Received: from localhost (unknown [127.0.0.1])
- by mx.kolabnow.com (Postfix) with ESMTP id 73D022058CD3;
- Mon, 18 Aug 2025 01:49:45 +0200 (CEST)
-Authentication-Results: ext-mx-out011.mykolab.com (amavis); dkim=pass
- reason="pass (just generated, assumed good)" header.d=she-devel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=she-devel.com;
- h=content-transfer-encoding:mime-version:message-id:date:date
- :subject:subject:from:from:received:received:received; s=dkim2;
- t=1755474584; x=1757288985; bh=8IF6ZZnrbKdnsqIKPsFnNY6moxo9HdHl
- eHD6DnHRWPM=; b=E4Ev6mP/naKe5IEsrvhek23IBk2wyrZ+4reAwqCW8XttO2tJ
- c8hZtgNmJD33NH0u+UbTUVvKmI1olnyyP7/xWL/rrBRi0ku7XsSlinfLB541suQQ
- 58CpVOjZ/PrvhZ1cAooT8TeK08qoTqjLH9IV3GtboGnIVsPj7cdl7NwUfCcVLsSa
- M29Ls+B7CZUE45fSe7INQNYG1MmUl0i5ozlBSKSJFZUcuZwx1Au4os+dM1fjhS8Z
- bb6kM0zKob9E8d/4ukE6h4K+NYlkgfIJOcXcNvp/EolCc8yBF2k3orTX6+f5V4EH
- 5tRuq9NAlKo4+x1uWBEClPINcHcqJbsdN9jCRQ==
-Received: from mx.kolabnow.com ([127.0.0.1])
- by localhost (ext-mx-out011.mykolab.com [127.0.0.1]) (amavis, port 10024)
- with ESMTP id DBJ0ZxpJXMil; Mon, 18 Aug 2025 01:49:44 +0200 (CEST)
-Received: from int-mx009.mykolab.com (unknown [10.9.13.9])
- by mx.kolabnow.com (Postfix) with ESMTPS id B85B420660F6;
- Mon, 18 Aug 2025 01:49:44 +0200 (CEST)
-Received: from ext-subm010.mykolab.com (unknown [10.9.6.10])
- by int-mx009.mykolab.com (Postfix) with ESMTPS id 4F74C20C19AD;
- Mon, 18 Aug 2025 01:49:44 +0200 (CEST)
-From: alison@she-devel.com
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org,
-	alison@she-devel.com
-Subject: [PATCH] sandbox: fix linker error for SDL build
-Date: Sun, 17 Aug 2025 16:49:40 -0700
-Message-ID: <20250817234940.3023378-1-alison@she-devel.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 7B3F6831E4
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 02:31:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=alliedtelesis.co.nz
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Chris.Packham@alliedtelesis.co.nz
+Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id D8FB82C0330;
+ Mon, 18 Aug 2025 12:31:26 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+ s=mail181024; t=1755477086;
+ bh=Nr8DIOXkOKOtZtgg8Q3ImYQt8GwgVnFBDLrihBpHXuc=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=z5nbb+HeKxnEhuTQXy6L8dhUzUBC2U3/90dgSqgtoqFSCHYLkA1vgmpkfIF+vAQ5d
+ K3GWYKg1itCdXCl/LWFYB8cNm3NGiKB8I6x3UpvzLuatClaknRZIVyCktTawJRIuJz
+ 7zAwaBHT0BLjbUeGRkoitOGD0QRYHZUfOlYNSYTp1QP6QXKoskkrRgeLE1X30Ds9hL
+ x18jce7HKXZYywMmS4qavw9rZYnGMx1mYQi+kw1CieEhHHQcKTtqQ5jLBd6rB54iSw
+ +VbUKC/6mr6R71jJoVaRgUFCYLIjYINgeU7nVZPOM3sOzvq1bXx/GHvKCVjH4vabfj
+ 9QdGElsDezDbg==
+Received: from svr-chch-ex2.atlnz.lc (Not Verified[2001:df5:b000:bc8::76]) by
+ svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
+ id <B68a2745e0000>; Mon, 18 Aug 2025 12:31:26 +1200
+Received: from svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8:f753:6de:11c0:a008) by
+ svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8:f753:6de:11c0:a008) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.14; Mon, 18 Aug 2025 12:31:26 +1200
+Received: from svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567]) by
+ svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567%15]) with mapi id
+ 15.02.1544.014; Mon, 18 Aug 2025 12:31:26 +1200
+From: Chris Packham <Chris.Packham@alliedtelesis.co.nz>
+To: Ben Hoelker <Ben.Hoelker@alliedtelesis.co.nz>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Bruce Adams <Bruce.Adams@alliedtelesis.co.nz>, Mark Tomlinson
+ <Mark.Tomlinson@alliedtelesis.co.nz>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] drivers: rtc: max313xx: Add delay after setting date
+Thread-Topic: [PATCH] drivers: rtc: max313xx: Add delay after setting date
+Thread-Index: AQHcD8bXHQdtWRzjIk2y5vkNviwOQbRmxiQA
+Date: Mon, 18 Aug 2025 00:31:26 +0000
+Message-ID: <4054f6d2-e570-4f50-b538-abce156e8731@alliedtelesis.co.nz>
+References: <20250818102959.1.I51da487efb143e03f6609e584f452e5aae1c9e9a@changeid>
+In-Reply-To: <20250818102959.1.I51da487efb143e03f6609e584f452e5aae1c9e9a@changeid>
+Accept-Language: en-NZ, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.33.22.30]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <6A13E8A85BA34E4796CC52159BEC07C2@alliedtelesis.co.nz>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-SEG-SpamProfiler-Analysis: v=2.4 cv=dtt4CEg4 c=1 sm=1 tr=0 ts=68a2745e
+ a=Xf/6aR1Nyvzi7BryhOrcLQ==:117 a=xqWC_Br6kY4A:10 a=75chYTbOgJ0A:10
+ a=IkcTkHD0fZMA:10 a=2OwXVqhp2XgA:10 a=6WUYveBszS4Gzd4hnDcA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-SEG-SpamProfiler-Score: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,64 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alison Chaiken <alison@she-devel.com>
-
-The patches fixes the following build failure:
-
-$ make sandbox_defconfig
-
-$ make nconfig
-
-Turn on SANDBOX_SDL.
-
-$ make u-boot
-
-[ . . . ]
-
-  LTO     u-boot
-/usr/bin/ld: /tmp/ccEZac9f.ltrans48.ltrans.o: in function
-    `dm_test_video_bmp8':
-/home/alison/gitsrc/u-boot/test/dm/video.c:415:(.text+0x16bb): undefined
-    reference to `sandbox_sdl_set_bpp'
-/usr/bin/ld: /tmp/ccEZac9f.ltrans48.ltrans.o: in function
-    `dm_test_video_bmp32':
-/home/alison/gitsrc/u-boot/test/dm/video.c:507:(.text+0x189c): undefined
-    reference to `sandbox_sdl_set_bpp'
-/usr/bin/ld: /tmp/ccEZac9f.ltrans48.ltrans.o: in function
-    `dm_test_video_comp_bmp32':
-/home/alison/gitsrc/u-boot/test/dm/video.c:543:(.text+0x1a7d): undefined
-    reference to `sandbox_sdl_set_bpp'
-/usr/bin/ld: /tmp/ccEZac9f.ltrans48.ltrans.o: in function
-    `dm_test_video_comp_bmp8':
-/home/alison/gitsrc/u-boot/test/dm/video.c:563:(.text+0x1c5e): undefined
-    reference to `sandbox_sdl_set_bpp'
-/usr/bin/ld: /tmp/ccEZac9f.ltrans48.ltrans.o: in function
-    `dm_test_video_bmp16':
-/home/alison/gitsrc/u-boot/test/dm/video.c:437:(.text+0x1e49): undefined
-    reference to `sandbox_sdl_set_bpp'
-/usr/bin/ld: /tmp/ccEZac9f.ltrans48.ltrans.o:
-    /home/alison/gitsrc/u-boot/test/dm/video.c:461: more undefined
-        references to `sandbox_sdl_set_bpp' follow
-collect2: error: ld returned 1 exit status
-make: *** [Makefile:2029: u-boot] Error 1
-
-Signed-off-by: Alison Chaiken <alison@she-devel.com>
----
- arch/sandbox/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
-index d61a327f151..d8fedee55b1 100644
---- a/arch/sandbox/Kconfig
-+++ b/arch/sandbox/Kconfig
-@@ -55,6 +55,7 @@ config HOST_HAS_SDL
- config SANDBOX_SDL
- 	bool "Enable SDL2 support in sandbox"
- 	default HOST_HAS_SDL
-+	select VIDEO_SANDBOX_SDL if VIDEO
- 
- config SANDBOX_CRASH_RESET
- 	bool "Reset on crash"
--- 
-2.47.2
-
+SGkgQmVuLA0KDQpPbiAxOC8wOC8yMDI1IDEwOjMwLCBCZW4gSG9lbGtlciB3cm90ZToNCj4gVGhl
+IE1BWDMxMzMxIHdhcyBub3QgY29ycmVjdGx5IHVwZGF0aW5nIHRoZSBzZWNvbmRzIHdoZW4NCj4g
+c2V0dGluZyB0aGUgdGltZSBhbmQgd291bGQgcmV0dXJuIHRoZSBzZWNvbmRzIHByZXZpb3VzbHkg
+c2V0Lg0KPg0KPiBMaWtlIHRoZSBNQVgzMTM0MywgYSBkZWxheSBuZWVkcyB0byBiZSBhZGRlZCBh
+ZnRlciBzZXR0aW5nIHRoZQ0KPiB0aW1lLiBXYWl0IG9uZSBzZWNvbmQgYWZ0ZXIgd3JpdGluZyBz
+byB0aGF0IHRoZSBkYXRlIGNvbW1hbmQgc2hvd3MgdGhlDQo+IGNvcnJlY3QgdGltZS4NCj4NCj4g
+UmV2aWV3ZWQtYnk6IENocmlzIFBhY2toYW0gPGNocmlzLnBhY2toYW1AYWxsaWVkdGVsZXNpcy5j
+by5uej4NCj4gUmV2aWV3ZWQtYnk6IEJydWNlIEFkYW1zIDxicnVjZS5hZGFtc0BhbGxpZWR0ZWxl
+c2lzLmNvLm56Pg0KV2hlbiBzZW5kaW5nIGNoYW5nZXMgdXBzdHJlYW0gdGhlIHItYnkgc2hvdWxk
+IGNvbWUgZnJvbSBhIHJlc3BvbmRlciBvbiANCnRoZSBsaXN0IGFuZCB3aWxsIGJlIGNvbGxlY3Rl
+ZCBieSB0aGUgbWFpbnRhaW5lciBhcHBseWluZyB0aGUgcGF0Y2guIFlvdSANCmNhbiBpbmNsdWRl
+IGl0IG9uIHYyIG9mIGEgcGF0Y2ggKGlmIGl0IGhhcyBiZWVuIG9mZmVyZWQpLg0KPiBTaWduZWQt
+b2ZmLWJ5OiBCZW4gSG9lbGtlciA8YmVuLmhvZWxrZXJAYWxsaWVkdGVsZXNpcy5jby5uej4NClRo
+ZSBhYm92ZSBhc2lkZQ0KDQpSZXZpZXdlZC1ieTogQ2hyaXMgUGFja2hhbSA8Y2hyaXMucGFja2hh
+bUBhbGxpZWR0ZWxlc2lzLmNvLm56Pg0KDQo+IC0tLQ0KPg0KPiAgIGRyaXZlcnMvcnRjL21heDMx
+M3h4LmMgfCAxICsNCj4gICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykNCj4NCj4gZGlm
+ZiAtLWdpdCBhL2RyaXZlcnMvcnRjL21heDMxM3h4LmMgYi9kcml2ZXJzL3J0Yy9tYXgzMTN4eC5j
+DQo+IGluZGV4IDJjYjNmMjQ1MDQxLi5mMGQzOGIxMGM5NyAxMDA2NDQNCj4gLS0tIGEvZHJpdmVy
+cy9ydGMvbWF4MzEzeHguYw0KPiArKysgYi9kcml2ZXJzL3J0Yy9tYXgzMTN4eC5jDQo+IEBAIC0z
+MDgsNiArMzA4LDcgQEAgc3RhdGljIGludCBtYXgzMTN4eF9zZXRfdGltZShzdHJ1Y3QgdWRldmlj
+ZSAqZGV2LCBjb25zdCBzdHJ1Y3QgcnRjX3RpbWUgKnQpDQo+ICAgCQkJcmV0dXJuIHJldDsNCj4g
+ICANCj4gICAJCWJyZWFrOw0KPiArCWNhc2UgSURfTUFYMzEzMzE6DQo+ICAgCWNhc2UgSURfTUFY
+MzEzNDM6DQo+ICAgCQkvKiBUaW1lIGlzIG5vdCB1cGRhdGVkIGZvciAxIHNlY29uZCBhZnRlciB3
+cml0aW5nICovDQo+ICAgCQkvKiBTbGVlcCBoZXJlIHNvIHRoZSBkYXRlIGNvbW1hbmQgc2hvd3Mg
+dGhlIG5ldyB0aW1lICov
