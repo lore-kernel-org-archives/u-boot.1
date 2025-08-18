@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC040CA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 13:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 477BDCA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 14:17:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA3BF801BE;
-	Mon, 18 Aug 2025 15:58:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 48915801BE;
+	Mon, 18 Aug 2025 16:17:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fy/U/Dfb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mpj2LSvs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00B72801DD; Mon, 18 Aug 2025 15:58:19 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 85E5E801DD; Mon, 18 Aug 2025 16:17:12 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 416C080107
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 15:58:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D34FC80107
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 16:17:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3b9edf504e6so1936276f8f.3
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 06:58:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-74382015df5so728884a34.3
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 07:17:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755525495; x=1756130295; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=1S94n1Lj2aywoAfkmv6G9iuPh5IvbuZr+p39q/fQnV4=;
- b=fy/U/DfbbJws4+8ve+mK7tD/68y2OGybKBOPEQzafipye8xyctWqFmC5VFVHT7KZlN
- Aj1MBbkC7xzCPFdZrHKKhaEH5TrEuSNl4mSt+qLXQ/XtJJJd2YDcuzPr3hFA37bMjWJf
- 9Z6tFh0a4YiNowaCey8kvGHGocITQHMOefk9BkAm6WM1Rnsb8IvvpdEPCC7EOnul2GLz
- twQr+VraQX0FwJGGLO0FJtNoi698GVPPV0dT9g39U09uHE23QhoL97ZfPJGVu7BYTUfU
- EKM52oBoFJQt1UYoqjvDOmBAOCealmIwqjtmopBnGVk4sQ8xcClBozfQw9O1zPlLxBJy
- OLjg==
+ d=konsulko.com; s=google; t=1755526627; x=1756131427; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=R6Mf8qi9XYQra4OOvNZTOrB7PFEhvM5dTWaY0Ug5a98=;
+ b=mpj2LSvsYDmlGXJ8je7ffYGMMxL/cSqKqJ6J7+jBJ8b4zTFIdSoT+yjICf5TIznj2q
+ qJmYd2mo7fHPrUiuELNXwdrdU4qfVRpCVG2+cgHOaxZAxKvpmm1Ru/BQ94MXUmFYGXyJ
+ 3IkJTWsvPKS93AfFf/SBouoLYunC04kLCBbFw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755525495; x=1756130295;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1S94n1Lj2aywoAfkmv6G9iuPh5IvbuZr+p39q/fQnV4=;
- b=khCd6vrYITH1rggeshAiv2qHAT/1BZrTg0m4cjPcGEyyYca7eu/M9eOyJpx9lq8KLJ
- LkqBsnxaJJkkJ3iSU+5gv1KYs+RXwDficwXr1DkhbvF38L7jZIxjcZV4Ef8mpvi57quK
- 4H7HtPFIFWKZiWTJLRet5gID+XD4NVCW4cY3nU6+nv1nneN4Zf8CxeeMJa3B7JBdaWsn
- D/XAcdZw9PrYMSjbVENkVHaUX1+F2Cieou/PrsnABomXQHsJ4zbJ2b9RvEFdyXpwoJ5Z
- GWF1aGWzWFuvIsttQMeNIaYoPT+OSqN+En9+QJenI23G81MdjqSOGmK5vtAq1tvYJvX8
- fvzw==
-X-Gm-Message-State: AOJu0Yzp49UO2Z5MFlbu1fbhSXvAK92omt6kCnn1rtGdavxaELQoSi42
- Yhxz91XB72bVQmnx5g6XLDGdZbX0HBKpM79PqFEb4jZmxOMDvEmWHLzQhNleimduX/YNRpqe3Mc
- l6Itqkdfj0g==
-X-Gm-Gg: ASbGnct7iLerWiYnLHg55vF5DUnUqv44foeCwj0eqXc4+OZD3zUSH0yEYnGJGmvAcVz
- +A5PCHvhKYknx8jkP82bhyUHyTx//GWETZF9CvSPi+Pp2REJ8kEZFLyk4hgobaUmnyhdveIlwhw
- cTTx0kYmRQDI8a0ktjC8gcrexLS6tmLbGe/+CjRiqQuKXgiM3wJ7PzVoi6chCoHKFQHKGXiVdS+
- 7kTimUsWpymFqCetN7GzZAljF7JljqARy1Y8guNx/O3XnbqFIzP3Rz5/6hMmJyrdY4efXqZWf4u
- 4SZcO1p4inos0crsJRvyXpZSqsgFbbKeQbYKzoCMDzQdSV6xtgsuoRSOnv+fccQ4B3IVvqAIkji
- Q+/XYfgrno66T6nVOC6oO0ticS80FxJL492FECnMhyRuUuybdjQuSYMZBG8N/jB5L9oTfl4Hp+M
- 14cg==
-X-Google-Smtp-Source: AGHT+IF0Fu0YMW3X/SstfbAsRap5RhJkbWpskk7DIq4+wxi1jZRzf9bjqdlvKOIovyZL0ZaxLkn7SA==
-X-Received: by 2002:a05:6000:200e:b0:3b7:8cac:821b with SMTP id
- ffacd0b85a97d-3bb66c296e0mr8788083f8f.20.1755525495101; 
- Mon, 18 Aug 2025 06:58:15 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:2d28:4b2d:6840:1003?
- ([2a01:e0a:3cb:7bb0:2d28:4b2d:6840:1003])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3bb64d2a405sm13190038f8f.20.2025.08.18.06.58.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Aug 2025 06:58:14 -0700 (PDT)
-Message-ID: <43827d75-e2ad-4c78-b540-112c1cde68e9@linaro.org>
-Date: Mon, 18 Aug 2025 15:58:13 +0200
+ d=1e100.net; s=20230601; t=1755526627; x=1756131427;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R6Mf8qi9XYQra4OOvNZTOrB7PFEhvM5dTWaY0Ug5a98=;
+ b=MTOWFYN4oEQSbHzjInRBKlAbWcQ6syerimHdY+4RAVEMYcJ1KJRAT7wUuouDddFEMv
+ 5Wph+PyAn0Lts8zeSD/YUyULyuUnsU0rQ6MZ+T4DimOIwzI+maPHOXc1Lm3PvOWCEmGV
+ dlQOfyLiXJI+31uBfU4Ot8MPzYxb75KaZ2hUO40YmU9MJ1o7yZXB5TTObws713ASUZQj
+ 5L7eGFqaHRuq08zvLBWnpjIWVyqf9xM2rQta3nxAQ4ZKk/7TN0otTNavtKF+KcYBS5Tg
+ suQzNy0Qp/+iYi+2E5B6P6Q4w3bV6nYmNbKM6wzJUx9IoxVoMHxdk7brIibGHNG20USw
+ xamg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqf5GyrV4AsiRB7fItwMtY00WQKkTYF5g4vDAxEAAAmDEk12nBsbHP/bCQP4dym4qXY1sByAU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwjaWHMH6TmTh6iE8/5AoSTIHEglUTpYk9N6+JmIn8qsT3A7VZl
+ pBx7KzRKTVildfzx6CPI2Fw5g9uBgHuAGFEQFmASb0ajR4fuYmvzsGAaL4zgT62tyLw=
+X-Gm-Gg: ASbGncveMC8VxJJuaqIn9yQZP5zpNgFHbq0MzcfkgrBa/deM794oSVZzhl9XsxREcnj
+ O5XP1Lf0oXfRX1D7XlRjzyu8AAc74+/R7TLMVjOxgXdHd10oS+MWegicL26ha12M3Bbu7KLFcjD
+ 7r6BH8A8ZDPryCcrFD/m476zXvtrFkQDe1LA+FC2whvAOC6gqVX2moBHJhYdYkFAvBhsKb963Z4
+ AMEQJyhvhkSqzDrIcidMFhBwQCc1Pkmv2tUvdJwzt87ceHj2QL8sxbDgl7wpqoKw6AawFYkgDkO
+ SQxxjdb4YcVUEfMkcG9FDb3jEcsuzW3+bPZy88iWaUpvHWEFHPSxKQaCNBLcTtZQZtyCjq8etQf
+ 9M7F1JbCe0xFxFXnlk0sRRJAwaJBucVFV1xHtarNHBpm0ungR4eNkFyVT
+X-Google-Smtp-Source: AGHT+IEsADfHgvZkc+azXSdh2VhV4LZa8FOE2YQcFS6CknXhBeBjrE18QYe23T1Scl9aF0SLhik8kA==
+X-Received: by 2002:a05:6830:43a8:b0:741:a9d1:3135 with SMTP id
+ 46e09a7af769-7439244f671mr8913969a34.12.1755526627411; 
+ Mon, 18 Aug 2025 07:17:07 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-74391bd1ce7sm1840849a34.15.2025.08.18.07.17.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Aug 2025 07:17:06 -0700 (PDT)
+Date: Mon, 18 Aug 2025 08:17:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sascha Silbe <sascha-ml-reply-to-2025-3@silbe.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v6 8/8] Drop the special am335x_boneblack_vboot target
+Message-ID: <20250818141704.GW124814@bill-the-cat>
+References: <20240627082949.357089-1-sjg@chromium.org>
+ <20240627082949.357089-9-sjg@chromium.org>
+ <yh7ro6sfsbjh.fsf@twin.sascha.silbe.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: Add SYS_FAULT_MII_ADDR to Kconfig
-To: Tom Rini <trini@konsulko.com>
-References: <20250812175633.3056595-1-trini@konsulko.com>
-Content-Language: en-US
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250812175633.3056595-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GzDkNfLmo/LCIOmV"
+Content-Disposition: inline
+In-Reply-To: <yh7ro6sfsbjh.fsf@twin.sascha.silbe.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,70 +99,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On 8/12/25 19:56, Tom Rini wrote:
-> The support found under SYS_FAULT_ECHO_LINK_DOWN requires that the
-> SYS_FAULT_MII_ADDR symbol also be set. This wasn't previously found in
-> Kconfig, so add it now.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> This was found as part of testing "allyesconfig". I'm not sure if
-> there's anything useful that could be put in the "help" text here.
-> ---
->  README      | 3 ---
->  net/Kconfig | 4 ++++
->  2 files changed, 4 insertions(+), 3 deletions(-)>
-> diff --git a/README b/README
-> index 65305e6a0371..7808af528625 100644
-> --- a/README
-> +++ b/README
-> @@ -1249,9 +1249,6 @@ Note: once the monitor has been relocated, then it will complain if
->  the default environment is used; a new CRC is computed as soon as you
->  use the "saveenv" command to store a valid environment.
->  
-> -- CONFIG_SYS_FAULT_MII_ADDR:
-> -		MII address of the PHY to check for the Ethernet link state.
-> -
->  - CONFIG_DISPLAY_BOARDINFO
->  		Display information about the board that U-Boot is running on
->  		when U-Boot starts up. The board function checkboard() is called
-> diff --git a/net/Kconfig b/net/Kconfig
-> index 24508026200d..6d5de9a675e4 100644
-> --- a/net/Kconfig
-> +++ b/net/Kconfig
-> @@ -60,6 +60,10 @@ config SYS_FAULT_ECHO_LINK_DOWN
->  	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
->  	  be configured.
->  
-> +config SYS_FAULT_MII_ADDR
-> +	hex "MII address of the PHY to check for the Ethernet link state"
-> +	depends on SYS_FAULT_ECHO_LINK_DOWN
-> +
->  config TFTP_PORT
->  	bool "Set TFTP UDP source/destination ports via the environment"
->  	help
+--GzDkNfLmo/LCIOmV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This breaks qemu_m68k in CI [1].
+On Sat, Aug 16, 2025 at 02:20:34PM +0200, Sascha Silbe wrote:
+> Hello Simon,
+>=20
+> Simon Glass <sjg@chromium.org> writes:
+>=20
+> [...]
+> > Now that am335x_evm boots OK on the Beaglebone black, drop the latter
+> > and update the docs to cover the change.
+> [...]
+> > diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
+> > index d243cb16e72..cabc181460a 100644
+> > --- a/configs/am335x_evm_defconfig
+> > +++ b/configs/am335x_evm_defconfig
+> > @@ -13,6 +13,8 @@ CONFIG_AM335X_USB0_PERIPHERAL=3Dy
+> >  CONFIG_AM335X_USB1=3Dy
+> >  CONFIG_SPL=3Dy
+> >  CONFIG_TIMESTAMP=3Dy
+> > +CONFIG_FIT_SIGNATURE=3Dy
+> > +CONFIG_FIT_VERBOSE=3Dy
+>=20
+> Your patch drops CONFIG_LEGACY_IMAGE_FORMAT as a side effect of enabling
+> CONFIG_FIT_SIGNATURE. Is that intentional?
 
-[1] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1224987
+It wasn't entirely intentional, no.
 
-More specifically:
+> Debian systems use "legacy" format boot scripts to boot (at least when
+> using the "flash-kernel" package which is probably the most common
+> configuration) so recent U-Boot versions cannot boot Debian systems on
+> BeagleBone Black any more:
 
-$ tools/buildman/buildman -o /tmp/build -w -E -W -e --board M5208EVBE
-Building current source for 1 boards (1 thread, 24 jobs per thread)
-      m68k:  +   M5208EVBE
-+.config:598:warning: symbol value '' invalid for SYS_FAULT_MII_ADDR
-+
-+Error in reading or end of file.
-+make[3]: *** [scripts/kconfig/Makefile:75: syncconfig] Terminated
-+make[2]: *** [Makefile:647: syncconfig] Terminated
-+make: *** [Makefile:198: sub-make] Terminated
-+(** did you define an int/hex Kconfig with no default? **)
-    0    0    1 /1              M5208EVBE
-Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+It's frustrating that it looks like Debian 13 is shipping with this
+legacy option as the default, I assume for all 32bit ARM systems, rather
+than any of the more modern options. I'll take a look at what the impact
+is on adding LEGACY_IMAGE_FORMAT to the "distro boot" option so that
+nothing else is missing this.
 
-Cheers,
--- 
-Jerome
+--=20
+Tom
+
+--GzDkNfLmo/LCIOmV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKM13AAKCRAr4qD1Cr/k
+CvRBAQD5Eni0i2RaI8CQmysNg16dBKeAz59jSKWCMrb/nIV48gD+LT9NnjHbt6AP
+rEUCIiwEKx6IPSH706bIXcox+IDH8ww=
+=Fbyy
+-----END PGP SIGNATURE-----
+
+--GzDkNfLmo/LCIOmV--
