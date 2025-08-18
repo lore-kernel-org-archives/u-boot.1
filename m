@@ -4,115 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1E8CA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 04:24:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DD06CA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 04:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 015CD8346A;
-	Mon, 18 Aug 2025 06:24:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id A92C482FC7;
+	Mon, 18 Aug 2025 06:48:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EB1828338C; Mon, 18 Aug 2025 04:14:45 +0200 (CEST)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20714.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::714])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3ECE8311B
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 04:14:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nNDw7qPcXA+qQGE+UjJha/DnLaIZ0WhjJbsySURo6sn301UfX5u8h+MoI+73SRzqmWX3pkXPzpRPOSMMVA3JYU/SDJ5ZKxVXghT+sOAGIVA28CEM9IkY3HzTAt4nWVX/Ut0BdI+gXpURJj0QgjgD6c1KGi1UipHefnX99/PuAC/jfOF7jMTXqSa1uFoBqAMkAsiULD/XFgx2p53mUhOTZzT7vcaMkNDIEokocgN64lKz2uGYMZ/R0zXpxNfQx8oZyjrXqWGJeJu5hkqeGsx9te2TGwdKEmp8d/igw3oyv6P3/c3RFdLGd9BOA+iJ3bS/Ii4fabMlgQjVUt+NtrWY8g==
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZCaPcLTU";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4F1FA82FC7; Mon, 18 Aug 2025 06:48:30 +0200 (CEST)
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on20606.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2408::606])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DA0DD80EE5
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 06:48:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yxqUdAT7hCqOqOgjtlN71f3+3BjkniR7NPl5H/4rmY8ctThB7M/sqt2gfqZt0u8uKCdzYsNUHu/1Nmv+Jq6f9zUFWdTGUDNtsM1B23/T/gSo4PJH9jQt90+Xyck91BSakVfdkIzKnxWHbpMsMTOwe5wulp28PJ8cc1rUKv8tWyKdLUKvG5rtmLs7jt9i2AcmDsM6B0FWdQwv84GmZgJqwBTg7x2nM/KidvfSFxuVuB7Jc08vZJQYu3F7RxvpkjF+pjdkypTQykUwMW6Cwtw54ghTTS0DYXyaf6L+mjZCJu61M4NEq4wDx+Z751UhHgwNMmUtXt70N6RB/aRvDP1LHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
+ s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IgUdbMko1mAvcri2DixhTyPnM3mdqLg9UWNq+plkysM=;
- b=UJAZsGHBTLM/ni97vfdVjOxvC0Fet5tMGRRpv58gdgF5YHemvjOMQBw1yLBSmBJuhtePCDbjFIKAwuEmdIT3DsZWPI9U9L4zIga4eOkptvXB9bsCp0Vufz900P1uu8l9y9YIEssExDUYrbiIQflsPMG6B2PdIwtRozsRAH5i1fbEwQA5DPNs5zS/ffWB47a66mS5UzcstR4UGHVwmAiMpgyTVEK1euICKk/lUHWrtsCO8uKQW3BCvr5j3X2sR1fdon6z70uOlw9mIwRdMpHqbspAqlKrPMcjVeQ/6miGn7BRikr8FmTYm+RnIW+N+GHBVG0X5boEaBQzwLS1dP8Rbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1290.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:11::8) with Microsoft SMTP Server (version=TLS1_2,
+ bh=oVQUBXxLPyZrEyMDl2DKRbT5Qxts5Da2jvSKtrrZN/o=;
+ b=kQUDq9xBHdG+0pL5ulVFewqumxsebscj6sY/7qliFTHbureE49JouRcleq5Tr8JhrtrKCs53fLocZQB0ciZS/JiSC8KMWOm6Cq7a8kq2P+Wwy8+8u+GVAH/sYSR5SG0ry9pKocMkHSgsEigSRJrJGFtb67VNXF1lOXeIbGWVtXf9untvW2lzp+tgboaw9bvAd+PhhRB5XnvRaVeSUaExRK2V7QRmjIReUI3Vk4b6sbiQK41TB9UjdzS2bQJLKWFmvDu6rfCT58vvtmA4oFptsh7yeEpSr5C9BmgNgcToSm5kxcaI1sh4YjdLD5YkJmm4mddb4DpulbLYXBIw7g8KPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oVQUBXxLPyZrEyMDl2DKRbT5Qxts5Da2jvSKtrrZN/o=;
+ b=ZCaPcLTUA4gflEK5US3b8lbz6IOCB5Qf8zES4mne4/QkXzoiiYagXrIdVlVYEBLU5FT/vRBNh5YrNULyZZR+LaSFJ6T0h2HbcLKDDlqv0HosRNWH1Xq3AZUqOnm2ffhkhRuvGMcOfyL+vpAIkac3KcH3tD+SMD3KhIbknw4vnQs=
+Received: from MN2PR12CA0028.namprd12.prod.outlook.com (2603:10b6:208:a8::41)
+ by IA0PR12MB8086.namprd12.prod.outlook.com (2603:10b6:208:403::7)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Mon, 18 Aug
- 2025 02:14:37 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7%6]) with mapi id 15.20.9031.023; Mon, 18 Aug 2025
- 02:14:37 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-CC: E Shattow <e@freeshell.de>, Leo Yu-Chi Liang <ycliang@andestech.com>, Rick
- Chen <rick@andestech.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: [PATCH 1/1] starfive: fix return code of `mac write_eeprom`
-Thread-Topic: [PATCH 1/1] starfive: fix return code of `mac write_eeprom`
-Thread-Index: AQHcCQayohy2IPZY5kWbuSjGFH06e7RnuMvA
-Date: Mon, 18 Aug 2025 02:14:37 +0000
-Message-ID: <ZQ2PR01MB1307874E4F87DBC0CF2CB514E6312@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-References: <20250809082155.6929-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250809082155.6929-1-heinrich.schuchardt@canonical.com>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1290:EE_
-x-ms-office365-filtering-correlation-id: ffd13f0d-54be-4dac-4852-08ddddfcfb1a
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|41320700013|366016|38070700018; 
-x-microsoft-antispam-message-info: aVgmOFcVV9WuS8zS7PE/ArJeRQUKQ3PsBJvABIb8KDTluhQV9RWRoPyrJYEuiZElsT5zo706xwkd+mgT9Y1TmQtP7Vvnni5NlWIRsOKmBWwqBaCm4zGYwicdAsOGEzW7wnPGigQAcjN3+O+3gSNsB4kYvpntM6xnkiaqr0Fv+5Y7rH1PpABOvKKgnCyUsTJ6sYkITmb4i60uwCX2XtoH16V/I2XduOI27LeAxkFDJF1cirwHIUXZ/SqkS0clAacwV5IYqZTY6E81UFNV17dwfLaazGgC9ZfeeihKDA63ImvnijauEOLttZ9rZSxwagW5RATh3AUlxLoKa05g2W99K/ZpT2icUuV+X72VnD9eWKNABVFzAd1gR0oZr5cJM4DvivgC8y5e4CSfZGBMu/ucMu3xtFrKPdDgAVu0dFzOgRXbx7b3I4NsKq4P2Z0X+3CUQkLHpjQ4Vq7asPJ9wo48SFDKAmTzF1PnVIVEMlUwxMOJ8Ewcmm6KHJQ5pZUzt/JY/9I4gtRcmraBVbb8G5Gr+DloKHCuXWOtyEOjkHIbiAqmlcRg67ggBfs+hwhLjju5bfw5tMthoYSQzBJR6OV9K0G4VFGuQkWTxZjn5e/qmKM=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE; SFS:(13230040)(1800799024)(41320700013)(366016)(38070700018);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?qOPb4qIzTSickiUQANn6vc0ei2gHMvkiWN9s0QNeMhPSkdacgdvHe77VpSbU?=
- =?us-ascii?Q?7tKFMjCVdRJ6vmEOGxFNjh+9Ku9HiWzgXiqbwM0oKhsKvJnauOFAteNUbmL4?=
- =?us-ascii?Q?pdJszAyVGrj8KYo6h07owsCSNSQSPZS53hDNaF2+vvEXrXixvfMcUyywpdKK?=
- =?us-ascii?Q?FG2RXTKYRxLECd2xL3hL9P69JmJRVL23a7ydXaQcsVs/ZzwyhhqbKGqDiOBE?=
- =?us-ascii?Q?1S75HrJGFG9Pv2w9GD1AINLtNW5ey5OqpNzR1WdWAha03/3+fuGhBsToauqx?=
- =?us-ascii?Q?O1UNaXnchOdUQkwuyW4kQeOufqMc0c6E7GGJPkwr4C86vS1a/TvWAAxE/6B5?=
- =?us-ascii?Q?SH/uDRFWg7XhRaVVMrrIvNsMC/OfEreC0hkD+6b8udRdA7nRbrDl5XJC4Y7b?=
- =?us-ascii?Q?lD4j7oSYqY+R0g5+1kPNrMYV+5ThipmJGBOltHq6kRBepU9i2Q1FOqPBjIXz?=
- =?us-ascii?Q?nDtLjShR/P7JaS5lg3XLabWT0GWA/QdwCRU66vwi9DZw3eauKLZJ8ezrdCYs?=
- =?us-ascii?Q?d4pNRX1dKpkuKVe8mmJCuRMB7DJsFLLi4FQgSRPLKKCNuepSf1wx4WLy4aK0?=
- =?us-ascii?Q?o2l46QvO0/ol7Fj44N+fpMDqVCAeA3cLuAlsg/tgUzUmbB6+XVBAsMSgX3e/?=
- =?us-ascii?Q?KMXOSzhk78IzTCl6c0ym3usFAqSGRzw7wEhF4quL6LLHY5vGbB7vhJBdAXyT?=
- =?us-ascii?Q?nbozqPFncd6TMisfM6h15+iF3mEhXSDD3qqBTQcfufqr3OwEFBXENvLdeeoR?=
- =?us-ascii?Q?BCb7ZA03/WsAHd2R0gDIwLD6T4RYsFM5g62fCAQQx7iqzSMjgmh19pYcnwuZ?=
- =?us-ascii?Q?lD0Glq6BIqerAHrcbAimIZglQSZ3Iw8Lmj1F0e4Mf/t6SP4ZBcthbuUeCIT4?=
- =?us-ascii?Q?D+06AoTVd9aMMfQc83wzjKO6QNDm+wz220n1/PeCBLRHexpyL82w+essx85b?=
- =?us-ascii?Q?KnrL8IL6I0S/iyaBxfSlNKiXLBQalaGP5DWqWs2OVfWj8xUr+AlORIXMwtX+?=
- =?us-ascii?Q?EmPe2PxY8+akj9rht9xPL9UcJdIqX3YWemip57jb2pMOMm2JneVkbRf4+0B1?=
- =?us-ascii?Q?UH7v6zHco6uKJTW5HOB7CuDW+rFm+f7gbnat4mAaguoGBydVIhsjmnCW3Ul0?=
- =?us-ascii?Q?Jn9qXwt7o/wazLorub6T5NwD/2DgCAWuMDf5gCOfQT3zVFKbaic5kIsZ1XKS?=
- =?us-ascii?Q?QvIsGXtM547Z9bn+q+r0+9bOThmANQpCdZWYJReT0Y/EO5ecAFZmiezVnasz?=
- =?us-ascii?Q?iyXa5YWn0CNQfjQzdQ+QA28zWVwXJ+G+E9DxeweFrz6TEBavWMkVKzW8RloZ?=
- =?us-ascii?Q?670DOTZFxioHsPo9T4BzgFDfa5JwjHoyOh59/4T3qDIXr9LqMcxN+K0HF7VK?=
- =?us-ascii?Q?k7zRdn8PN9T3QCLiuZiAuxYFAfgDA8limxGwn08Fjf/mMJ6O+K8trPRqah3W?=
- =?us-ascii?Q?qAQynlnaqztiP/yyMXOgE3Em1c+nM9vU9EZ7leX5jLDGqNJXAYonQKTR3Ptr?=
- =?us-ascii?Q?Ler2WpGM1GpJccCXy6F/4qlFwYIkcAz9Q1mH/x91lSLq94MEz4dL7LPFN6AV?=
- =?us-ascii?Q?EmGpjLQsnXW7/EYzy3P0nHSkUink1AEqDA0jsKic?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ 2025 04:48:24 +0000
+Received: from BN1PEPF0000467F.namprd03.prod.outlook.com
+ (2603:10b6:208:a8:cafe::25) by MN2PR12CA0028.outlook.office365.com
+ (2603:10b6:208:a8::41) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9031.20 via Frontend Transport; Mon,
+ 18 Aug 2025 04:48:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN1PEPF0000467F.mail.protection.outlook.com (10.167.243.84) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.9052.8 via Frontend Transport; Mon, 18 Aug 2025 04:48:24 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 17 Aug
+ 2025 23:48:24 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Sun, 17 Aug
+ 2025 21:48:23 -0700
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Sun, 17 Aug 2025 23:48:21 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
+ <git@amd.com>
+Subject: [PATCH] usb: dwc3: Add versal2 compatibility string to dwc3 glue ids
+Date: Mon, 18 Aug 2025 10:18:15 +0530
+Message-ID: <20250818044815.4052070-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: ffd13f0d-54be-4dac-4852-08ddddfcfb1a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Aug 2025 02:14:37.0349 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: IFQ1wOSjJq+R6rgpPPOKxQOYPNFAhMfL1yD85HDT+bO5v10w+8OnMB15dMQp17TvEXCMqUoyGgH2w49flNoI/IGER9obwbtoOiyrDJiVLFE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1290
-X-Mailman-Approved-At: Mon, 18 Aug 2025 06:24:28 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000467F:EE_|IA0PR12MB8086:EE_
+X-MS-Office365-Filtering-Correlation-Id: de73bb33-05e1-41e6-c134-08ddde127714
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?EjYISUFJmdItsCEIZI5xvuquyR/A4EQD0mC2R5j0V6qTqMTTP++AQYfkeF4I?=
+ =?us-ascii?Q?Ii84lJ72q7v4fGcFkqqDmVVSyUokBaJycu5plV39i4RxbKEiVjdcw5r8By7k?=
+ =?us-ascii?Q?8iHoGaYcRgtiVTbOATw36ZZuoSlNlBxHbzUR+x7xl/G9U9pCitEHd9EixFEm?=
+ =?us-ascii?Q?mTPdJwofTN2hvFUFTBihrC6Dhz6fqeRB0XYlxI6nC247Qt3jq9KOxDY82lPZ?=
+ =?us-ascii?Q?az9R6ZE6BFMQIYAi73xwu5Bc3AhF/55R1qNPaIe7f1zH5SXt3O+V2NxcyGlK?=
+ =?us-ascii?Q?N3yiwGFazewenooGy3iNpRpRPcMOKGANBBJRDtbDSvCG3D6ega4U9VaaVUYv?=
+ =?us-ascii?Q?RJVUVGc4OVxl4f3oWm1ZplO2pDXiuHnHNmXJbINehc7gFMJI/T2B1eiihe1W?=
+ =?us-ascii?Q?ilJr3N7SkbACQIEB4EtXew/NilFpM7Jcx61N/ODnf0J9495kTXTeQwJtw1yB?=
+ =?us-ascii?Q?Lxp8Oq/ZhmaPB+ITZbWoQQcme/nQiL0xn4cxobB4nev1jMFULC/dNKgd2/0r?=
+ =?us-ascii?Q?qRp+uBfiB7eKyYsED4pjUlZwg8XQefPVdJYf7q4QGVQk7JesQEdUKgrbPdZ6?=
+ =?us-ascii?Q?m+hoCeTS4mO1tDRO8xKgKisjZcaVkEQ94m6qFaOOIdYVpLMlVQQ0BSXGGX2g?=
+ =?us-ascii?Q?uT8fVVACdMnqSAFPnBOQbSZVNFTws0VWrXBYlpm//zg2Vy6ZAs+eEYR9f5SU?=
+ =?us-ascii?Q?W0iPEXvJci9LTa6DISQJsOpmKeEV859iQXjUNtEFLKU6T+xd+wqc9yhIuxev?=
+ =?us-ascii?Q?bmE7G35MNKCb6eLxU0mmgqwpwKFW82Pt8j20Dg/wpm+ApI0y7Pcmv72xMuNF?=
+ =?us-ascii?Q?1UvUCHw6+Hu2wbbhTqEVEFfvQyBn+9dNrlMOvUkSBRGXwOVki8g5xIwzcAcJ?=
+ =?us-ascii?Q?ur+lKDDA822UV+JM7MYdGe+JZuwwzMyD2RhLq02fKWLxZ778Yr4W2BTkRvnF?=
+ =?us-ascii?Q?cyksrSwR76kCS1MmnyoBaJoBhasvmi0dW8EaL5LzbotyHxKeT4NxZ/k8UUPw?=
+ =?us-ascii?Q?FU9xxxo8DtGswToICp460k50X2CWzgRCBZd40vzFc1Q9KNf9p75fiuETn60F?=
+ =?us-ascii?Q?qtlS5/olgjQHUL6ybcxS/RYXCzzgKRsjgb9r12HdZO5UejG0LN+xFZZECZGv?=
+ =?us-ascii?Q?pnH9E5vhqy+oUa0e1pbsmzwW9xWQeEt7H2XFyvGcZRMIqz+wTM9SX7iBh12E?=
+ =?us-ascii?Q?eych1bxgc5eckItK+U72nFqxlrOy7874qOmtFG+QcHmbRBHs8RD17OLCOVYZ?=
+ =?us-ascii?Q?bXcS6y1wPI2m11W0ATTWMmX/+4vbLdYlQo/WoGbStHuea61B4Vg72Gkxuxi9?=
+ =?us-ascii?Q?ANURIOrYPs7wBO8qdtuwDYbHA5zpy+5pBnPrAZhpliyyGHIjz6EqQfesEe5g?=
+ =?us-ascii?Q?6BU7hDepLcI+LcAmuXA9VTZxqEN21uJ7uug43ms3RXUIEW2wVBfzVJQiOdLa?=
+ =?us-ascii?Q?EO6iwuPJ8qwMxSuQggGjwpozgbxkTJ9Ig/0NASF1CzUxLyisnVDlXL4HzhuB?=
+ =?us-ascii?Q?ZFhTEY0lUsWdH8K0ST3MfAZNrDwsWb+BTDuq?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2025 04:48:24.4683 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: de73bb33-05e1-41e6-c134-08ddde127714
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF0000467F.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8086
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,17 +149,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On 09.08.25 16:22, Heinrich Schuchardt wrote:
->=20
-> When writing the EEPROM fails, the command usage help text is displayed
-> after the error message. We should only display the error message instead=
-.
->=20
-> If writing the EEPROM fails, return CMD_RET_FAILURE (1) instead of
-> CMD_RET_USAGE (-1).
->=20
-> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Add mmi usb controller support which uses dwc3 and hence its
+compatible string needs to be added to dwc3 glue ids.
+USB3 DRD IP is usb3.1 gen2 controller which support following
+speed SSP (10-Gbps), SuperSpeed(5-Gbps), high-speed(480-Mbps),
+full-speed(12-Mbps) and low-speed(1.5-Mbps) operation modes.
 
-Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/usb/dwc3/dwc3-generic.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+index 3cda2b74b7e..538b6efe5c7 100644
+--- a/drivers/usb/dwc3/dwc3-generic.c
++++ b/drivers/usb/dwc3/dwc3-generic.c
+@@ -692,6 +692,7 @@ int dwc3_glue_remove(struct udevice *dev)
+ static const struct udevice_id dwc3_glue_ids[] = {
+ 	{ .compatible = "xlnx,zynqmp-dwc3" },
+ 	{ .compatible = "xlnx,versal-dwc3" },
++	{ .compatible = "xlnx,versal2-mmi-dwc3" },
+ 	{ .compatible = "ti,keystone-dwc3"},
+ 	{ .compatible = "ti,dwc3", .data = (ulong)&ti_ops },
+ 	{ .compatible = "ti,am437x-dwc3", .data = (ulong)&ti_ops },
+-- 
+2.25.1
 
