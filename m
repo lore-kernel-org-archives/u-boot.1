@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C35ACA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 15:43:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52598CA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 16:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABB8D801DD;
-	Mon, 18 Aug 2025 17:43:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A19A9801BE;
+	Mon, 18 Aug 2025 18:51:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SjbfBRYZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PskUj+w9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DE9580548; Mon, 18 Aug 2025 17:43:46 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 0F1DB801DD; Mon, 18 Aug 2025 18:51:25 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C938C80107
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 17:43:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D550380107
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 18:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-435de818a74so2364020b6e.2
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 08:43:43 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-30cceb07f45so2924277fac.2
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 09:51:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755531822; x=1756136622; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KJMexpDzgdOuSfiodXflyqp10fxyzFXxbbdqMurAQls=;
- b=SjbfBRYZ0j7BrRgkkkJLLwRqAKyOoNpK6e22L+N8gOy5EX6tjrxCLrUFttJ9r1CLPr
- TEADDdG6369EjXdlZ58tQSMN3DvVHlm3glT4BJkHhcd5d/83JUxueOm8agLGplC6Tyod
- plKGMBbAJd7lyvZSSjxvPMUO3WY8UbDqVukKg=
+ d=konsulko.com; s=google; t=1755535881; x=1756140681; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lsswQ9vSHXgL4fnabo+LbmeWfeH1x9Bh5olKJ+gqxj4=;
+ b=PskUj+w95Paap4CCe/GGIpWGBPctbld9RM75jI3qx1OhoSL8v6PyFpc0gBwLVbuqFh
+ lrdXrD8dlGmUx9Yoh5GVNTf8MqcmvqeKIO5QzSLZTiVIWUKddeWhG/kyPj6kxN2PkoYY
+ 76ncGHiQpwtG+mP0qWt/+H3+KBwSsOMu3Sv9I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755531822; x=1756136622;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KJMexpDzgdOuSfiodXflyqp10fxyzFXxbbdqMurAQls=;
- b=mE4EK9jeXTsLSDu4KqOKcSzg3p6RV0SxyMWDS941LOt/3UqS8NVlU2+B4gmSeOPK+l
- xU8hbAtT5/LH5jqdQ5WpTYB6vS4fF2V02/hd46GHghdOzeodrolptXMxNWHU0QTVz6Pg
- AyPRfqbO4w1C72oKnVxG/TKrCSNue4QYSWpnrS7qUWkLrQwNyU4ew06AY5Y2kgFQfBDh
- gjCPElOq/rnXqeeivqKU6sAWDM/t6a+JdGvg8cRCCEjGabJImPRQPE+gsemi0chkQA83
- zYtxCjZyaWrGBf0aDBzYI5tZ3DeRq29SL5PyLuy27RhVgsapdeo8xEGLDq7ESxj0eUa6
- h6iQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX8mf6V76RkZhm0yudP17h8YDnuDUfwEwK69k6KfkuSmQbHW2R6NLFH0bnNgwfoS1eNosN4jCk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwkK1WTo2xG95mb7TgLWobiV41u7ZMCc34HKRVS80zzo1dYR/91
- O57pOpFcPqqxGGumn5PwQp2WeZxKxuC3ElTZMaWQo4KAdhtN5WM9Gij1oonfceDeg70=
-X-Gm-Gg: ASbGnctnI6LWyarf+caHqZaOrTHTideFI4LW6+l5VMvy1WkAwi38yPikIkgjHEJ1SD5
- pBwu6IMBCfG+Yamvs1PGzziWDluqiQLlMK4w91Em+eb2teTD6Zljmi3Yl/yyLh7mPmcypZfaTqt
- ZvSM2w9X3Wi01K6RApfZ6HIC2XF1DCMDhlSI30LGeZhmDwWr/ZzR3YvJbcEvbsLro7qNQak37xc
- n/vZnGCyYwajt0+OGlmOhFB/I97slQnPj4omrkeZ5GAJwZNysApY19BZWeMvuXGkjcsKb+EuT2Q
- iQIe1ZekbMdHqQXuC5knG3Vealtepc3snu5sVI8IjJRmJ8WqWdPTIQ8IyMPcyQcNBpC1P5xOcpd
- o+RfRftvHZMuIZS8d6phfFD343gYNbyJEy8yyh64r0eRXr0AMCjy6n9MumsftbU2r2KE=
-X-Google-Smtp-Source: AGHT+IG50puyV/IvwrZcLhc2slmp89T3kC79mRly9MR56Qg+k6QA7BJqctjpqqxFJvth1Be1hCtBzg==
-X-Received: by 2002:a05:6808:1828:b0:40a:fb27:9e8d with SMTP id
- 5614622812f47-435ec3b4229mr6911005b6e.15.1755531822535; 
- Mon, 18 Aug 2025 08:43:42 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1755535881; x=1756140681;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lsswQ9vSHXgL4fnabo+LbmeWfeH1x9Bh5olKJ+gqxj4=;
+ b=QqNuwbc/6fby9Ou/jWTdR3x1CnGW5k7J/yRGfkjieCczwDr6CgcQHYBtFlRnqF9/AX
+ 5pfWp4SKX3TKGFXR4puVylnJtcZkidhTacxauIpp5x0abVMK0VDRBhcz+NsLlDFSe+D1
+ QbNplJQ7HTKTP5F53dtjZqpnGpdG4d9+zwtGWbRaia6jKp1Bwc7p4sD5gb2CC0M7oVZP
+ UrLjY+xMHun4anFWd/IGXY4C36x5CbW/5psHdXiBYnqpd9lZmC1QjpJpkOyAXtPm6AzA
+ 5g+vud+FH3kBx9ubhobkujoNR8S4JAudgR6+WL2bTzfBMaHGhQcQtJoRZcXoL2dJZPo0
+ D7jw==
+X-Gm-Message-State: AOJu0Ywx6uTlEs6Clz0VGHo2iPOxLXZcPGfYbKDTm4nMpFdbSwFOaumo
+ 7LtFnjRiPXq0BQXBXswV8Px8VfkarcV8MbQNxmXXcJI6hihcTn8+2e+Jhc7ayKLf2jNpVULYUyv
+ 3rFMbOXc=
+X-Gm-Gg: ASbGncueAinLWXrW9GAXU62ZDxO6EkDUsuD6mP/GdnuHn6mBKfkodoI1djH2x1on3kU
+ FGlsxDiMmTC/YRRMJzwaQxh9VaqfRKk7pZGvh3weFSjmZoZZcZMxdKNhXLoeW2StTf6aaCO1XvY
+ W3Umi4SvxjvaeQVP6Y1qj2t76ayR9i2eBPstyt+0YYOunM1ckxNmAvhQ00bm+h5jY6PI45sKFQq
+ obR4NRQBnXrY5h5SlzJx77iQHM3at95HhFXnKSodzSOtYwWaL7NC5xLWnoEAUXlDLEpUnOuGjD9
+ 9tGbWe06J1lh3d3EktUi//ilEAnCwSk1LVHZ6TXS+PucQf4pAKigFN7yI7Z5lQdl1yHtHJ+ytGq
+ sj/K10Ex1/97eMJ9WXoaA/VQi8i1ZXm0ZWvVI47UkZYUjuTGqi92L8ZJE81k=
+X-Google-Smtp-Source: AGHT+IHXZzIwjrBdv2+ysdh9zqXWuNfc0/tjnPuWTmwc2LUDHqSD51jlafKXu3UknE8mSq12cyOKrw==
+X-Received: by 2002:a05:6870:440d:b0:30b:b37a:6bcd with SMTP id
+ 586e51a60fabf-310aab043f2mr8070639fac.6.1755535881499; 
+ Mon, 18 Aug 2025 09:51:21 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-435ed1e7721sm1821026b6e.25.2025.08.18.08.43.41
+ 586e51a60fabf-310ab90df03sm2725804fac.12.2025.08.18.09.51.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Aug 2025 08:43:41 -0700 (PDT)
-Date: Mon, 18 Aug 2025 09:43:39 -0600
+ Mon, 18 Aug 2025 09:51:20 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sumit Garg <sumit.garg@kernel.org>, Karel Balej <balejk@matfyz.cz>,
- David Wronek <david@mainlining.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] ARM: dts: pxa1908: convert to OF_UPSTREAM
-Message-ID: <20250818154339.GY124814@bill-the-cat>
-References: <20250816-pxa1908-upstream-v1-1-6bd5ad032021@dujemihanovic.xyz>
+To: u-boot@lists.denx.de
+Cc: Sascha Silbe <sascha-pgp@silbe.org>
+Subject: [PATCH] boot: Add LEGACY_IMAGE_FORMAT to DISTRO_DEFAULTS
+Date: Mon, 18 Aug 2025 10:51:19 -0600
+Message-ID: <20250818165119.3193853-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="I7AHjCSRacny6kLt"
-Content-Disposition: inline
-In-Reply-To: <20250816-pxa1908-upstream-v1-1-6bd5ad032021@dujemihanovic.xyz>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,48 +92,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+At this time there are still major Linux distributions which by default
+boot using LEGACY_IMAGE_FORMAT type scripts. Add this option to
+DISTRO_DEFAULTS to ensure these platforms can still boot.
 
---I7AHjCSRacny6kLt
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: d780965927d4 ("Drop the special am335x_boneblack_vboot target")
+Reported-by: Sascha Silbe <sascha-pgp@silbe.org>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ boot/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Sat, Aug 16, 2025 at 09:35:19PM +0200, Duje Mihanovi=C4=87 wrote:
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 2ff6f0037384..a6fc46ff4f5f 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1163,6 +1163,7 @@ config DISTRO_DEFAULTS
+ 	select CMD_SYSBOOT
+ 	select HUSH_PARSER
+ 	select SYS_LONGHELP
++	select LEGACY_IMAGE_FORMAT
+ 	help
+ 	  Note: These scripts have been replaced by Standard Boot. Do not use
+ 	  them on new boards. See 'Migrating from distro_boot' at
+-- 
+2.43.0
 
-> Convert the PXA1908 platform and its coreprimevelte board to OF_UPSTREAM
-> and enable the few drivers found in the upstream DTS.
->=20
-> Signed-off-by: Duje Mihanovi=C4=87 <duje@dujemihanovic.xyz>
-> ---
-> Important note: The PXA1908 DTs were merged into Linux during the v6.17
-> merge window. Thus, it depends on the v6.17-rc1-dts subtree tag being
-> merged. I'm sending this now just so that any eventual feedback can be
-> addressed in time for the v6.17 release.
-> ---
->  arch/arm/Kconfig                                   |   1 +
->  .../dts/pxa1908-samsung-coreprimevelte-u-boot.dtsi |  20 ++++
->  arch/arm/dts/pxa1908-samsung-coreprimevelte.dts    |  74 --------------
->  arch/arm/dts/pxa1908.dtsi                          | 106 ---------------=
-------
->  configs/coreprimevelte_defconfig                   |   7 +-
->  5 files changed, 27 insertions(+), 181 deletions(-)
-
-Given how far off that is, I would recommend that once v6.17-rc1-dts is
-tagged you use tools/update-subtree.sh and "pick" the required commits,
-then say this patch requires those patches applied.
-
---=20
-Tom
-
---I7AHjCSRacny6kLt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKNKJAAKCRAr4qD1Cr/k
-ClDwAPwISeUbwlANsVLm6WZRR6RsqCaFEAFHvyD77aT42CIecgD/RI0lPDz21eD8
-H51AeFboRQL5szhGZsZ7QCpgCnUW6g0=
-=Q8U5
------END PGP SIGNATURE-----
-
---I7AHjCSRacny6kLt--
