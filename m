@@ -4,63 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D720CA0EE4
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 17:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A86ACA0ED1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 17:41:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 067C5801BE;
-	Mon, 18 Aug 2025 19:40:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 42296801BE;
+	Mon, 18 Aug 2025 19:41:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NBCMJIWZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ND67mdpi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB4DE801DD; Mon, 18 Aug 2025 19:40:20 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09DA080107
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 19:40:17 +0200 (CEST)
+ id 7A631801DD; Mon, 18 Aug 2025 17:58:02 +0200 (CEST)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A55E80107
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 17:58:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57IHeF992709610;
- Mon, 18 Aug 2025 12:40:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1755538815;
- bh=S1my8GElPuIT2zKPLIZwcAzhRUJjKCws8GGEHr7Syjk=;
- h=From:To:CC:Subject:Date;
- b=NBCMJIWZW2Yeh6KufdECcpk2j7h05zjngKmNVyLbRxBVfzE0ehBiMf9SPOwdD8DgK
- R2wnBk28pyre6r3aJgkxPWmJ0xuPjha65XBdfSq4Fa8nDHrjTVgEP1TjlayP072pOK
- DJULDJ0mbl7Zr4MSUg56oSadv5CfXigxlijn5ABI=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57IHeF9d455332
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 18 Aug 2025 12:40:15 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 18
- Aug 2025 12:40:15 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 18 Aug 2025 12:40:15 -0500
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57IHeFYx1402841;
- Mon, 18 Aug 2025 12:40:15 -0500
-From: Judith Mendez <jm@ti.com>
-To: Judith Mendez <jm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH] mach-k3: am62*: Fix backup from eMMC boot mode
-Date: Mon, 18 Aug 2025 12:40:15 -0500
-Message-ID: <20250818174015.2879675-1-jm@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-76e2e613e90so3105448b3a.0
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 08:58:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755532678; x=1756137478; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/MmvxRinNvuuXRtYB0CKMsB9SSGgYe0IybFm8N3OFio=;
+ b=ND67mdpisR7kMyCpRaGD6tESegMkqJzo+U2rirMA8Gk1e/FoPBy1SbLIciE44kLj6n
+ bnZk50gCADMYMtTplhFLw2tkShDSYCFHZ7W0zacEgUb1jGK8iiWFK0Rs1UEcXiSKgn8l
+ fZ9bVLC6ozEvIQkly1J6FPHqmdpIuDh1c3x05pFfjYT3lE2Bpr6WFYDf+vTKnd54pmef
+ +dORhtkp3YfuUPDwtiHCW1RijOWKNHqaIXd2zOYmHvJWPmh5K4MXUZ4d60uGeqYjMO0B
+ Xuwc/LRf2f7tbp5lUdOak5VwxhjJq3cVtuWea9To57KdvhOrtI0lISjvNTUZzvg8yCv8
+ d6qQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755532678; x=1756137478;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/MmvxRinNvuuXRtYB0CKMsB9SSGgYe0IybFm8N3OFio=;
+ b=azUcaOkq8SVasWjRgpBCSNUenfCmNrMOScWenDyOTK297zjntWR5pk+bDs0VeALyYg
+ 9JYSdCSdzEyoUSl2rbtKJvB1nSP2V7piDIuMqXqdzIVe391ddP2FD/oI7nuyC0TYyLWo
+ KaGby509/DVXFg0L2ZXInSiNqU/B0lA2wwOYhkd9PqzbGuUF/68rs31S4R2KOpdxouEd
+ kf0rE98owfPIMKFtGo4szPPqGzOAluvUdMLPBsM5kzCF10JoUbCaTJnBpWi2Ou2QzKbc
+ UtRXYsvIa2QKamyYKwdgn5QsPQmYuWytVUK1pqCwXq6Yj3FRdrh9Ypq5RmgW8js6oFMO
+ fv/Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWHyvoSobrbGjTN6aLl0csc30sZ/CUriwewvupU1o2HnnUq6ij3UgJAdyAfoSFbHue6Iq99YsY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzyUMmcxSw4sCpsTs+pNFfeGZnW7oPIo5qb0yX6fB6MMttUGngz
+ pgUhHla9tz7wYrH3ot9UUv8Plmjptrb4MNS8497KFCsMFsv+y/fT9tbW
+X-Gm-Gg: ASbGnctj5cLIeWk07x1hqpfe8pl/ABwOwgWkVlLeoDzOcJ53+pitf3cYmR1U+iFJ6qy
+ rPXKXHumEqKcXeBZEzqpOuEWmb4IFNRQc7veiowZinD/F2GmsGa0T6rliD3VNiNlp/P33tqqi+d
+ 6bldmhF400QOX/jaDgHnNNLULALA6TWsg9nhcf1UUZpFOX9uo6l6YpoMdUNpTnqSjRhf/XFebMY
+ KTbxk38pWpsjbQhVJSrCOs8rD2p9qeIUI7CVcQsnfNmBFbQP5PhVqJyCVKvPP3n2gtUH9TVsJsn
+ XgYPXhv5JA+szNQ65Qjoq2vQ3UH+oxepFG2jUXtIB+zXnBW2AT15aLRtoxdzmEr7isZaHQZ/xlT
+ tORF/oBMQfEI7wM++nLLmYRQtNOpsA6+X2MnbcDbp+hdJFza7cA3Ee+yus580mHMKkkS82RBqZF
+ BKluZScyc=
+X-Google-Smtp-Source: AGHT+IHtJ22GyUtQ6rfgETgzOstV6rGEBCeCEoawLHWPFBjUrgT/2BVwMKCGYW4spKdnGF5gkwxlaQ==
+X-Received: by 2002:a05:6a00:2192:b0:740:afda:a742 with SMTP id
+ d2e1a72fcca58-76e44565015mr16361036b3a.0.1755532678497; 
+ Mon, 18 Aug 2025 08:57:58 -0700 (PDT)
+Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-76e4558b021sm7438899b3a.96.2025.08.18.08.57.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Aug 2025 08:57:58 -0700 (PDT)
+Message-ID: <6bfb72dd-7488-4534-8e4c-1e67196976d2@gmail.com>
+Date: Mon, 18 Aug 2025 23:57:54 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [U-Boot, v6, 1/1] misc: fs_loader: Add
+ request_firmware_into_buf_via_script() for flexible firmware loading via
+ U-Boot script
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ marek.vasut+renesas@mailbox.org, tien.fong.chee@altera.com,
+ trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, seanga2@gmail.com,
+ daniel@makrotopia.org
+Cc: lucien.jheng@airoha.com, frank-w@public-files.de
+References: <20250817150203.52850-1-lucienzx159@gmail.com>
+ <5cb388f9-d488-4091-9556-c0063f637aed@mailbox.org>
+Content-Language: en-US
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+In-Reply-To: <5cb388f9-d488-4091-9556-c0063f637aed@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Mon, 18 Aug 2025 19:41:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,127 +109,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently logic in spl_mmc_boot_mode only lookes at main devstat
-to determine the bootmode to return. Thus, when using: 'eMMC boot'
-as primary boot mode and 'MMCSD boot from eMMC UDA' as backup
-boot mode, 'eMMC boot' is always selected. Add check for bootindex
-to determine if ROM boot via backup boot mode and return MMCSD_MODE_FS
-which is the only supported backup bootmode with eMMC device.
 
-Signed-off-by: Judith Mendez <jm@ti.com>
----
- arch/arm/mach-k3/am62ax/am62a7_init.c | 22 +++++++++++++---------
- arch/arm/mach-k3/am62px/am62p5_init.c | 24 ++++++++++++++----------
- arch/arm/mach-k3/am62x/am625_init.c   | 22 +++++++++++++---------
- 3 files changed, 40 insertions(+), 28 deletions(-)
+Marek Vasut 於 2025/8/18 上午 07:00 寫道:
+> On 8/17/25 5:02 PM, Lucien.Jheng wrote:
+>> This commit introduces a new API,
+>> request_firmware_into_buf_via_script(), to the fs_loader framework.
+>> This function allows firmware to be loaded into memory using
+>> a user-defined U-Boot script, providing greater flexibility for
+>> firmware loading scenarios that cannot be handled by static file
+>> paths or device/partition selection alone.
+>>
+>> Key features:
+>> - The API runs a specified U-Boot script (by name), which is responsible
+>>    for loading the firmware into memory by any means (e.g., load from 
+>> MMC, USB, network, etc.).
+>> - The script must set two environment variables: 'fw_addr'
+>>    (the memory address where the firmware is loaded) and
+>>    'fw_size' (the size of the firmware in bytes).
+>> - The function validates these variables, copies the firmware into a 
+>> newly
+>>    allocated buffer (using memdup), and returns the pointer
+>>    via the provided double pointer argument.
+>> - The maximum allowed firmware size is checked to prevent buffer 
+>> overflows.
+>> - The environment variables are cleared after use to avoid stale data.
+>> - Detailed error messages are provided for all failure conditions to 
+>> aid debugging.
+>>
+>> Usage example:
+>> 1. Define a U-Boot script in the environment that loads the firmware
+>>     and sets the required variables:
+>>     => env set my_fw_script 'load mmc 0:1 ${loadaddr} firmware.bin &&
+>>     env set fw_addr ${loadaddr} && env set fw_size ${filesize}'
+>>
+>> 2. In your code, call the new API:
+>>     void *fw_buf = NULL;
+>>     int ret = request_firmware_into_buf_via_script(&fw_buf, 
+>> 0x46000000, "my_fw_script");
+>>     if (ret < 0)
+>>         return ret;
+>>
+>> This approach allows board integrators and users to customize the 
+>> firmware
+>> loading process without modifying the source code,
+>> simply by changing the script in the U-Boot environment.
+>>
+>> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+>
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>
+> Thank you for all this hard work.
 
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index 00173e6836b..fa3570d07ec 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -218,17 +218,21 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
- 			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
- 
--	switch (bootmode) {
--	case BOOT_DEVICE_EMMC:
--		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-+	if (bootindex == K3_PRIMARY_BOOTMODE) {
-+		switch (bootmode) {
-+		case BOOT_DEVICE_EMMC:
-+			if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-+				return MMCSD_MODE_EMMCBOOT;
-+			if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+				return MMCSD_MODE_FS;
- 			return MMCSD_MODE_EMMCBOOT;
--		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+		case BOOT_DEVICE_MMC:
-+			if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-+				return MMCSD_MODE_RAW;
-+		default:
- 			return MMCSD_MODE_FS;
--		return MMCSD_MODE_EMMCBOOT;
--	case BOOT_DEVICE_MMC:
--		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
--			return MMCSD_MODE_RAW;
--	default:
-+		}
-+	} else {
- 		return MMCSD_MODE_FS;
- 	}
- }
-diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
-index 44a2d445d24..cb34938788f 100644
---- a/arch/arm/mach-k3/am62px/am62p5_init.c
-+++ b/arch/arm/mach-k3/am62px/am62p5_init.c
-@@ -264,18 +264,22 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
- 			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
- 
--	switch (bootmode) {
--	case BOOT_DEVICE_EMMC:
--		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-+	if (bootindex == K3_PRIMARY_BOOTMODE) {
-+		switch (bootmode) {
-+		case BOOT_DEVICE_EMMC:
-+			if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-+				return MMCSD_MODE_EMMCBOOT;
-+			if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+				return MMCSD_MODE_FS;
- 			return MMCSD_MODE_EMMCBOOT;
--		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+		case BOOT_DEVICE_MMC:
-+			if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-+				return MMCSD_MODE_RAW;
-+			fallthrough;
-+		default:
- 			return MMCSD_MODE_FS;
--		return MMCSD_MODE_EMMCBOOT;
--	case BOOT_DEVICE_MMC:
--		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
--			return MMCSD_MODE_RAW;
--		fallthrough;
--	default:
-+		}
-+	} else {
- 		return MMCSD_MODE_FS;
- 	}
- }
-diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-index a422919fab1..312f81a1457 100644
---- a/arch/arm/mach-k3/am62x/am625_init.c
-+++ b/arch/arm/mach-k3/am62x/am625_init.c
-@@ -314,17 +314,21 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
- 			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
- 
--	switch (bootmode) {
--	case BOOT_DEVICE_EMMC:
--		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-+	if (bootindex == K3_PRIMARY_BOOTMODE) {
-+		switch (bootmode) {
-+		case BOOT_DEVICE_EMMC:
-+			if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-+				return MMCSD_MODE_EMMCBOOT;
-+			if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+				return MMCSD_MODE_FS;
- 			return MMCSD_MODE_EMMCBOOT;
--		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+		case BOOT_DEVICE_MMC:
-+			if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-+				return MMCSD_MODE_RAW;
-+		default:
- 			return MMCSD_MODE_FS;
--		return MMCSD_MODE_EMMCBOOT;
--	case BOOT_DEVICE_MMC:
--		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
--			return MMCSD_MODE_RAW;
--	default:
-+		}
-+	} else {
- 		return MMCSD_MODE_FS;
- 	}
- }
--- 
-2.49.0
+Hi Marek
+
+Thank you for your detailed review and suggestions.
+
 
