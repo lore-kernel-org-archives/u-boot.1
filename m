@@ -4,56 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5355ECA0ED1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 06:47:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90D94CA0EE4
+	for <u-boot@archiver.kernel.org>; Mon, 18 Aug 2025 07:13:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BEC9831BE;
-	Mon, 18 Aug 2025 08:47:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C180283510;
+	Mon, 18 Aug 2025 09:13:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NyiWtTsT";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="I9uLVSeG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2749D8352B; Mon, 18 Aug 2025 08:47:27 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 071CA83559; Mon, 18 Aug 2025 09:13:21 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C76B82D88
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 08:47:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A3A78346A
+ for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 09:13:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 1A2723F29E; 
- Mon, 18 Aug 2025 06:47:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1755499642;
- bh=SRL+cRUj7OXHamlV3Jq4RHJPIlkKfHEIrWzby5dj0Xw=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=NyiWtTsTe6lW/zZ82J0sAeiRWlcMKBqnHBCoVqghj0UvrwQA2mdteGOJjqE9PYmuO
- 2qb7SdiwN/mWXDue/c295iXWsJq1w7jZQH35xJ7CxH7q1PViVI4ULwEy79ziGugfk6
- sDDxCmNpbuKE92F59hBDIpYD26QoECx63OmsFocob9xFfMp708gnTCrH9DIAx+/UjP
- HQW86ezePkWaJo8+OZHYNX26lg8lDwAnp2BS2SvQQHHaT13UH8r4m1ZpYhd65DAqA0
- kYht2RJtRzI2vKmUKAqOhjMWoTMOkyWFON3FLsqVg+HM3FcvqAId/533MBuUPVASqD
- 1XxYDssAnxtsw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, Janne Grunau <j@jannau.net>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] arm: Fix swtiching typo
-Date: Mon, 18 Aug 2025 08:47:15 +0200
-Message-ID: <20250818064715.20359-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.50.0
+ smtp.mailfrom=prvs=0325d41c3d=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57I71Sse012331;
+ Mon, 18 Aug 2025 09:13:11 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 54xFtXqDkxSujF1wM9IRkmci8f6G54xNXzvk13MWJIg=; b=I9uLVSeG1uY08gJi
+ 23ceLpI6/2eN/IcznMz7oYKpe9cOlpPUpaxNq+Fhvhg3Dj1VtrDNgfT31wROVMpb
+ MfkPE1uXxGNTlos/lsc7NAuN4ufXQ9sKAeSJ33/wAE8hXDny9tNnd4HREwrTDQXC
+ vwpRSsJb1Pzm0CTWKYMsVayJX/Bv0SryW/8V3GBUMLqI/LMNThbwUdPwxnms84tE
+ OQiYK4Yeq9SLa9jTpVHjAUdTAqP9UXiOzzJVYiCfGZsfTAUGgMLl873qEvOKeOa0
+ c2DrzveMFgcJZ2/uhBetZhZFX5fq/U7dQPCOaJYrNVVLNKWVj1OfragmcMbCUt8d
+ ucMDjA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48k4xmjx0w-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 18 Aug 2025 09:13:11 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2C1D34004C;
+ Mon, 18 Aug 2025 09:12:19 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 403246C5F88;
+ Mon, 18 Aug 2025 09:11:58 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 18 Aug
+ 2025 09:11:57 +0200
+Message-ID: <a8dad650-96b5-47bb-807d-27f38b0ab34f@foss.st.com>
+Date: Mon, 18 Aug 2025 09:11:56 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: dwc2: fix reset logic in dwc2_core_reset
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: Peter Robinson <pbrobinson@gmail.com>, Junhui Liu
+ <junhui.liu@pigmoral.tech>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250723170913.1.I20e0e3d5851ea2e4a22b20be372800fe059cc2d1@changeid>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250723170913.1.I20e0e3d5851ea2e4a22b20be372800fe059cc2d1@changeid>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-18_03,2025-08-14_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,29 +92,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <sjg@chromium.org>
 
-This should say 'switching', so fix it.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- arch/arm/lib/bootm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 7/23/25 17:09, Patrick Delaunay wrote:
+> Use GUSBCFG_FORCEHOSTMODE to detected the HOST forced mode as it is done
+> in the Linux driver drivers/usb/dwc2/core.c:dwc2_core_reset().
+> 
+> The host polling must be executed only if the current mode is host,
+> either due to the force HOST mode (which persists after core reset)
+> or the connector id pin.
+> 
+> The GUSBCFG_FORCEDEVMODE bits is used to force the device mode (for
+> example used on STM32MP1x platform) and when it is activated the DWC2 reset
+> failed with the trace:
+> "dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout"
+> 
+> Fixes: c5d685b8993c ("usb: dwc2: Unify flush and reset logic with v4.20a support")
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  drivers/usb/common/dwc2_core.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/common/dwc2_core.c b/drivers/usb/common/dwc2_core.c
+> index 63062d5cc943..37007134e5b3 100644
+> --- a/drivers/usb/common/dwc2_core.c
+> +++ b/drivers/usb/common/dwc2_core.c
+> @@ -17,7 +17,7 @@ int dwc2_core_reset(struct dwc2_core_regs *regs)
+>  	bool host_mode = false;
+>  
+>  	if (!(readl(&regs->global_regs.gotgctl) & GOTGCTL_CONID_B) ||
+> -	    (readl(&regs->global_regs.gusbcfg) & GUSBCFG_FORCEDEVMODE))
+> +	    (readl(&regs->global_regs.gusbcfg) & GUSBCFG_FORCEHOSTMODE))
+>  		host_mode = true;
+>  
+>  	/* Core Soft Reset */
+Hi
 
-diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
-index 7eb764e1f4e..ca4cec61f22 100644
---- a/arch/arm/lib/bootm.c
-+++ b/arch/arm/lib/bootm.c
-@@ -183,7 +183,7 @@ __weak void setup_board_tags(struct tag **in_params) {}
- static void do_nonsec_virt_switch(void)
- {
- 	smp_kick_all_cpus();
--	dcache_disable();	/* flush cache before swtiching to EL2 */
-+	dcache_disable();	/* flush cache before switching to EL2 */
- }
- #endif
- 
--- 
-2.50.0
+tested on stm32mp157c-dk2
 
+Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
