@@ -4,129 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09348CA0EE6
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 11:02:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E862DCA0EE6
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 11:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 640BD80FA1;
-	Tue, 19 Aug 2025 13:02:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 126A282E05;
+	Tue, 19 Aug 2025 13:05:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="btwzKdeu";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="NtIJIYkD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 908F582E05; Tue, 19 Aug 2025 13:02:48 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 762AF82E37; Tue, 19 Aug 2025 13:05:40 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E13F802C1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 13:02:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AF0C80FA1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 13:05:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1755601362; x=1756206162; i=xypron.glpk@gmx.de;
- bh=yxBM7vcxoA9mNDCYdWcM3Kd3N3PH8MH1oCHJa4Oh5jM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=btwzKdeulBhFUy0o2oTfTUAxl1p22LnfJQ6wq5th/eijuwL1D37vbgBoidWT1JUv
- La1SMTBmJg5SeU2RWegOHXhWa6Z5UULHFr35LW+cwXzYFl34yOpobRzF/HUmlMYXY
- WDuP1IEZDSNk3P4KPysKltOs1L7doBZYfAIFxIwk2VWie9dcuCj58vNOVUTXdDlCj
- F4ZuHSiSBc3ht1mvpnxo/gBqeJaoFstpkoTDzO9XQw+7HmMFrXHC9VVPdyL/IPT/Q
- jGKcauwrxXWJ22kEf7SoTvnSeI2CXe4D3vEY7iEInB/h7eeGBFLCR8xH+GzoFJXTM
- KYbAzZdTKIbkxVxqOA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MRTN9-1v9PjL1Wir-00OcDR; Tue, 19
- Aug 2025 13:02:42 +0200
-Message-ID: <f80c123f-edf2-4fde-b6b6-93e9c035a15a@gmx.de>
-Date: Tue, 19 Aug 2025 13:02:36 +0200
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aTIo3rmHGTmCLEj6CcIYav1vrHP/ZX8V393LXOyE7SmpyjaEavrZgew2Ozd0PTU7QumlHweaD7+MJmZWk8T/eBwCd5jj6z0glj7KVVUDpCyYarIII7aPloosUC49IR31+VunyPuRNoHg7Zc0Bv61U8LbnH8btU11+oyregUuULnqqzei7k2O/x3aMs61Srt7/rILIbCzqL9jekUuoqo5enIaeHC4nf82uBM6DGZDOWH01rY3MXfGSbA/AU2f1164/e3t0wv51Odos736QMITdyXaTfv9BQx7K7x13sf7Wf9LRp/6s6hqwIdcQ/AfEg9PZ5HiqYuCllsGd0cyG0hHVA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rhZfo6YsB6NFwnS3x9T/ufWI4T2Kkjx3KE/A2EoByws=;
+ b=nlZnE65EVCHY9VaMU8IETHnya1Dq+odMzPQuMg6g6Q6uSyYIdb3DCNVbcCczkDlq2emGTGwpvNC8oiVoq9jb+KaraLVKq2CSw8i4sqP1pRvcDoEXOGL/tbjIcAoM7DqJcoaYsUtywwtB+BdVSSTV6H4Hgb13HlRg8W6x6KRRjGAZ2KFIkJ/k6xzew55ZxU45Z0oYSvBtbxJFNiQZJ/HotDVmSp/WeVCcryD/9yJPPdah2twUMFhRFMlXlggh6mSDXxixe3STS7YGmiY2SC8x662LhxRZV/yozMncy3Aw3/OMArBXfuOuj9UBwV9LFJvDaYDe0tYtjqyk1RjHOMnJ4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rhZfo6YsB6NFwnS3x9T/ufWI4T2Kkjx3KE/A2EoByws=;
+ b=NtIJIYkDVDa7VobcV73oO4sY8B37ONandObQiQk1bpV4qRXeWrSuzA1srZ95EAJaZpwjiNGVk6e2BIsbOB5g1Oa5hRmMLoMVi9O2TJOnX9ONmc9S6Ym9xqcoddg/h0KJSXSg6F8k1Lxg1eXZzRu88sl5f0PWWO3lGVMcbV+h9YM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by PAVPR10MB7307.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:31e::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Tue, 19 Aug
+ 2025 11:05:34 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5%5]) with mapi id 15.20.9031.023; Tue, 19 Aug 2025
+ 11:05:34 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,  Sascha Silbe <sascha-pgp@silbe.org>
+Subject: Re: [PATCH] boot: Add LEGACY_IMAGE_FORMAT to DISTRO_DEFAULTS
+In-Reply-To: <20250818165119.3193853-1-trini@konsulko.com> (Tom Rini's message
+ of "Mon, 18 Aug 2025 10:51:19 -0600")
+References: <20250818165119.3193853-1-trini@konsulko.com>
+Date: Tue, 19 Aug 2025 13:05:27 +0200
+Message-ID: <87jz2z372g.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0041.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::16) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] common/spl: use memmove() in load_simple_fit()
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: Tom Rini <trini@konsulko.com>, Sam Edwards <cfsworks@gmail.com>,
- Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
-References: <20250819105554.3067982-1-ravi@prevas.dk>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250819105554.3067982-1-ravi@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Kvw7r/wdq8aBwOvL0o5+h93qGQoVTRVTz9COx0VXLe8vLVmH/xA
- 1finZ00eerHNaI3AR0GIettL8nW/Zry7t0FV5R1dIwzj902txJS9GMs3oZ7/1Q9rQpjjNCE
- gO21NgIPefzAOukBSvCCDY6ud8mgeyLb5iADKjPCrIuAzkLjunu1nmnrMVHSDZrrvqiAtE9
- aq4GhOEbQ+WYe8O99uDlA==
-UI-OutboundReport: notjunk:1;M01:P0:RmLv5gLayqc=;iG74wvCzZ0RYCSYDV+mite7bAeZ
- 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
- TixI68nRuaCvGltnVW9ifkn5/jatm/4/PdLGI
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PAVPR10MB7307:EE_
+X-MS-Office365-Filtering-Correlation-Id: 98ef23c9-1118-454a-0c67-08dddf10519e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|366016|376014|1800799024|7053199007|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6/IacTYwOEirmN7KXE2jHhm0Tt85DgYeunLuilRVfDqCbtu1nHnvZKtFHS6n?=
+ =?us-ascii?Q?qfvtPeQ1dsh1vhJrH22RdIss0GjNxLJixdhB876L/GKJ+rru4IrYvSVwp50Q?=
+ =?us-ascii?Q?HSU7ml6Bgoh632jGTqN3LQsTIH9+mLzljNEucHv54HxjaX/tNV5v0OXbRRsT?=
+ =?us-ascii?Q?Rg5T8tDIAbiK1T8iTTcqpDolzhJGJdAPdpVuQ2t7kmhxnkrLnuTlpP5yVTyP?=
+ =?us-ascii?Q?NgLPoEynvfsmFS60Wctye67ckok0qY6dmPeIWlp+O7+7zztclAJ7zwweoZue?=
+ =?us-ascii?Q?Slh5VtaviRLiUom20jZNkBTAc4V1XWond5fm1Vus8nC8NxpBMMTJ6qZsQ9Wr?=
+ =?us-ascii?Q?s8XMfUZiZNHcwAQXVWFOWH6jXLktjUujSKWDrmx1+QCbC3ejmLOdGaE502Xc?=
+ =?us-ascii?Q?Hf+0mXSdk3nbdhwRRD7jgX2Sw0D7zJMg7sqVgPsXp3bNyfmOCHXRS7kTAhA7?=
+ =?us-ascii?Q?v3TPGcxFrxNE65lUIGqPQq3dUaufPDXOiKMlIGRWoivaGzp+jd75YGfJcP2Y?=
+ =?us-ascii?Q?ae1WVcXBkelEsE6iNuW0A+JG4YtdG5mZ3eqXmQsBrgfyQTqhkvmrVjq9epbh?=
+ =?us-ascii?Q?KS1rBfRQ5oO1iha8dnlBq/5hAQ7JxwL5Ub8VUJ62hSs6J7aGzLju4gCixM1m?=
+ =?us-ascii?Q?mpWqJ6Xv8C+m3GDEIPYGvu4v1Z5ExWRls+6RY6ja86UJlNvqOz65aXHhLNl9?=
+ =?us-ascii?Q?U4o4wEHv1v3lJlDqtZYuKQftd/xNfxo4hSsh7fKYuwbeLC84rfji7y66Fdzi?=
+ =?us-ascii?Q?23ShtJFW2swvXLXyamaEIdjlrVplesOPllfH6CgYVRGRIwvzm9SIE7RXooTf?=
+ =?us-ascii?Q?bG1Qui1rp89FFhQ1pYuS3KaGx33s9XAcBHNzoib7eej4+s/RjWd00PPlpFSl?=
+ =?us-ascii?Q?FXEyPJUi1pTgBMYAJHKtGGvqS3nRPn3yy9zRTLT8HlYoD0UsqXQb3kSNxMEF?=
+ =?us-ascii?Q?5w1Jz7Cf/8/SCA80jfnWM3f6RkcPkruGsSiXM8kFFRAOTE2xbgKsYovFD3pN?=
+ =?us-ascii?Q?zhAxiJI1rPlCOhtxIB3bHo92YNt/Dk1IPWo1aSq/gS1jVJXWFMWsEm2GpynJ?=
+ =?us-ascii?Q?MQob1HV3y70c2YYyMb6lR4vPPAidObRhVWt3MFp8RpE+wwct6RrjVsNmcUwf?=
+ =?us-ascii?Q?HYWRnRujiMNKh2GGnctMqmDgblQ1y2xXzH0SUe/NLaidaYSRCo3YKzzFvIJE?=
+ =?us-ascii?Q?lU1bn3b1FIkBkeX7OaH/S83fePfAHVRsMrNupL8dXDcOabq3Z312OT5luef6?=
+ =?us-ascii?Q?DVXx5D19eBv0VJnpUgxPHVf3hI/1qgBrkf96qi+xjuOeTc6/ylU8DIE1GENB?=
+ =?us-ascii?Q?RiYBfI0BGGoexzZMCgmxmR8LGKELRiPfM0kuaKed8eH4SfXliycawwi5gE8N?=
+ =?us-ascii?Q?EBBBT6QPrujJ/SqUknwCBFNGd9/I220hqi/V0U57KkieC5QMTpB4CYC+Rxy8?=
+ =?us-ascii?Q?pebKdYK6vSNTXxo17ORqxi73YbJfNZsjOu2N71fTsVvXN8FGQdK3ag=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(366016)(376014)(1800799024)(7053199007)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uV0QW5rUmJa5dAGZuKibLNTx0DjA0OatFcrzLUyPsXiQFdFNr0dYIhGVPADr?=
+ =?us-ascii?Q?lbPiwGSDR+AKjmUVs7FkDowpDU+8xctzZe31ix9h2qy52pnMDyecNdYJA0Jg?=
+ =?us-ascii?Q?KQq8AkNyaXnpUGcCzJX36uJrjzxY6rq0OWE6Zif2MJgzT53VDTYuxdL5D/dt?=
+ =?us-ascii?Q?I3JYyIPIFRFPE/my6tWUJb9FNHqfEsQnWTMe2YHP34+EACgwl7yGx7QFjHqJ?=
+ =?us-ascii?Q?/EWht3eusLUDc1ccOLV2kfL4YRwQC0zAIWNyXvaQiitgGlwAkvcBKC2oyWF1?=
+ =?us-ascii?Q?1Xu5C5IxbthFbh7lz74vrNL9SWMAuO/C10L2dy+BHKo/hg1X2NP25KLXlQmw?=
+ =?us-ascii?Q?A9dDIbTlTGX2hFQqwt6itKeabUlUScYRpEFFjYYOSuaN1nw7wS0lUIRNcWIB?=
+ =?us-ascii?Q?kDj/OJhc9DQXp/0sFr2DWv9+ZKygB1XQYzS6GTYLokOpDL1A+65RvN5hT1rC?=
+ =?us-ascii?Q?GbADYseYVZm+uB9Cfs9uU/OB1BbdWfi8h/seBnx8W0lbIGhFO7qHc5oz8SVG?=
+ =?us-ascii?Q?BRB9b/1F/E3mXv9lnsEO5Ac9uv1glP11Kib/9UoqpNbv37L0FWWoPERsc4+c?=
+ =?us-ascii?Q?6dq4r+uYMA5sWN5pjCe0ME73GByhOBiAe/4h6zw5S+x21P8n5uolZeFLAAFF?=
+ =?us-ascii?Q?whbDlFIrhsmjapyTYglw6c4/vlvr/7g7A0fxK+oelpsKwWEMWGXMv+VG+MaI?=
+ =?us-ascii?Q?1I5ofIvsIw6tTmz02c7I/Pd2u7V88fGvmJ0wQRp4aqNpXl+b/z55gMaaqc/S?=
+ =?us-ascii?Q?MIs7m9Jwtc2/g5PF6+p+5iJTtDFx63NRZmB3yXHZXALUgifnIiIZhXJKFtwg?=
+ =?us-ascii?Q?Ugdk78ClrrJRUdE1JSa22uMmea6JvuiWCUGUDK+n65kQaaObs+5UX8m+RYcJ?=
+ =?us-ascii?Q?XEMUENoelp2m/B1tF/wJvCf41BSWcHY4z6+9j2lR4QGcJHf1T5Oe6YHJVhqW?=
+ =?us-ascii?Q?NPsiillSbVPbTPjEYcFmaVcL+wkBSA66r4itZF+9Mor8vPIK/I9TJ9E/+Kj2?=
+ =?us-ascii?Q?+21uCIcwVg3t1ffL6qKcrpvyPwkKiEKzbhVhjZPOqFSu6rMIAWCcOdRMg8UK?=
+ =?us-ascii?Q?Mo42o9pTH7Ig0HSKv2ItdeD+18LZverxueLyxo+MSlvSa8xSeSZgKcLlJq6O?=
+ =?us-ascii?Q?saokB0tJVmwvR/lim0QQAxjco50nMOnZHiUKCCIzK3XUrAgLYQkDkmskynSJ?=
+ =?us-ascii?Q?TgQxuSKfQMuSAxHO5inFtQhFGdzNhmqiVZrQUPKud52ih83fW9lU51lXL7Ar?=
+ =?us-ascii?Q?FFRVp1OQ3XkmdTw6Dmm/4KnNWCHGSJIikYvwLQl3WZ+/bTlT3Ucw3ITNjztj?=
+ =?us-ascii?Q?Pna6gJTU4rj4BDa5wyk0Tq+yLV6iyECP0yPlCmzjAdxguHFGLST7GwWWdQa5?=
+ =?us-ascii?Q?nwl9QtbxioSqQXjqOHzd3Mk7IVy9mZb7SMZojEfg+7nqoHxLAu672XEoVOWY?=
+ =?us-ascii?Q?YqhzLKs+oUOwSxS9VkT7i1Sjv6uvTr/l/6b7FNwWzDwlDcyckzJGTIpuMsxK?=
+ =?us-ascii?Q?6BGv5imvc9kHd5Or3rLcIJNao4bdpiU9Ssf1w7p9VlSB35Dm67qY72Towv/z?=
+ =?us-ascii?Q?pgh2usDR82oBdSbSqRdmpcD2z4Klmg0cKJdlxnXUEqPN0AGSoATXu2lEbSQK?=
+ =?us-ascii?Q?8A=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98ef23c9-1118-454a-0c67-08dddf10519e
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 11:05:33.9969 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RvQZlxyRlOdQ5/XRcsDC1Hq5Wg1JI2zWXzLwQK8s+guWkyXnzn7d9G6yeMhe/3JxYt8GMoo3CfzBf0Rspp8oQrtKYS4X5108jwKku2lBYQ8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7307
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,49 +158,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19.08.25 12:55, Rasmus Villemoes wrote:
-> I had trouble booting some am335x boards (both
-> beagleboneblack and a custom board). SPL would start just fine, and
-> apparently load U-Boot proper, but it would hang when jumping to
-> U-Boot.
->=20
-> While debugging, I stumbled on this memcpy() which from code
-> inspection very much looked to have overlapping src and dst, and
-> indeed a simple printf revealed
->=20
->    calling memcpy(0x8087bf68, 0x8087bf80, 0xf7f8)
->=20
-> Now, it will always be with src > dst, our memcpy()
-> implementations "most likely" do forward-copying, and in the end it
-> turned out that this wasn't the culprit after all [*].
->=20
-> But to avoid me or others barking up the wrong tree in the future, and
-> because this use of memcpy() is technically undefined, use memmove()
-> instead.
->=20
-> [*] That was 358d1cc232c ("spl: Align FDT load address"), which has
-> since been fixed in master but not the v2025.07 I worked of by
-> 52caad0d14a ("ARM: Align image end to 8 bytes to fit DT alignment").
->=20
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+On Mon, Aug 18 2025, Tom Rini <trini@konsulko.com> wrote:
+
+> At this time there are still major Linux distributions which by default
+> boot using LEGACY_IMAGE_FORMAT type scripts. Add this option to
+> DISTRO_DEFAULTS to ensure these platforms can still boot.
+>
+> Fixes: d780965927d4 ("Drop the special am335x_boneblack_vboot target")
+> Reported-by: Sascha Silbe <sascha-pgp@silbe.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->   common/spl/spl_fit.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> index 25f3c822a49..746c3d2fa28 100644
-> --- a/common/spl/spl_fit.c
-> +++ b/common/spl/spl_fit.c
-> @@ -353,7 +353,7 @@ static int load_simple_fit(struct spl_load_info *inf=
-o, ulong fit_offset,
->   		}
->   		length =3D loadEnd - CONFIG_SYS_LOAD_ADDR;
->   	} else {
-> -		memcpy(load_ptr, src, length);
-> +		memmove(load_ptr, src, length);
->   	}
->  =20
->   	if (image_info) {
+>  boot/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 2ff6f0037384..a6fc46ff4f5f 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -1163,6 +1163,7 @@ config DISTRO_DEFAULTS
+>  	select CMD_SYSBOOT
+>  	select HUSH_PARSER
+>  	select SYS_LONGHELP
+> +	select LEGACY_IMAGE_FORMAT
+>  	help
 
+No objections, but I wonder if this, and all the others, would be better
+of being "imply" instead of "select". After all, DISTRO_DEFAULTS is
+mostly a convenience symbol that turns on other commonly needed/useful symbols,
+not something that is absolute required when turning on some
+"DISTRO_DEFAULTS feature".
 
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@gmx.de>
+That would allow a defconfig file to set DISTRO_DEFAULTS, but still
+explicitly disable things like LEGACY_IMAGE_FORMAT. And it's actually
+somewhat hard to migrate away from having that set if it's select'ed by
+DISTRO_DEFAULTS - one would have to deselect that, but then manually
+ensure that all the previously select'ed items were set explicitly.
+
+Rasmus
