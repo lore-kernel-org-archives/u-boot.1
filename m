@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FD8CA0EEB
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 19:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD9DCA0EE6
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 19:56:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DFC58317B;
-	Tue, 19 Aug 2025 21:43:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F23282E37;
+	Tue, 19 Aug 2025 21:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g4Hgqsia";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EwBzj59P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 025DF80FA1; Tue, 19 Aug 2025 21:43:19 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 48FBF82E67; Tue, 19 Aug 2025 21:56:01 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E02E982F30
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 21:43:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 284F882E34
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 21:55:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-30ccea94438so3738166fac.2
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:43:16 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3e57002bc23so28780555ab.3
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:55:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755632595; x=1756237395; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CE64j1R+TZ2Z9JcrFUUVVF2rjQJSaoHbJ4b/yRaRyUA=;
- b=g4Hgqsia6Grgn+aFFBDMTrNuaxPyHjfNvbNk5RWTv68ymR4mwtwmpQ+gsXJTa2Q8gQ
- 772DJj3DgXxSkTzBIRe6YzU6mlfkeY3k/HHhoynesVlni+mBfaTIWO0LkqpuWNyE0G1D
- vYxoiSJCazZldhtirHmgQEir/jfqdMZ0mn+oA=
+ d=konsulko.com; s=google; t=1755633358; x=1756238158; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KgjFcO6nw3ImhxBAZqEfGWDVwuwfHALemP+O490gh/0=;
+ b=EwBzj59PnAStGfP1wY5zqRDruKpA4LcepItxJ1KFrSbS8kCn/DBSHiE9CQngl9Iumb
+ 7rpOuNxZE5Jt0blOcCZWmsNoMnf/oYf/40x+lztyH+Kl4ohu7qgxTh6QJmBVhgHqLyl3
+ eKdKnGIGB8N4NV1yWE/YaKZa107koQnaJnHhU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755632595; x=1756237395;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CE64j1R+TZ2Z9JcrFUUVVF2rjQJSaoHbJ4b/yRaRyUA=;
- b=BOB3d9cIz/dkMdy+T3RKoAAb58cd7JAQUVlYzu/vs1NcziHMPOEOIt4daPM/5hyqmt
- zRR7h/t4pcl4UV1mnbvPP6CZ9Rx7eX+K4A34eJ/Ra+35eSefMJhPOZwrOPtAl0oNxIlH
- wQROjwXvI2lZTEKRQFGYFvpKz8lW2+YSDSm9gaC/EHCchY2ZameqBOs6jzTRcH4PNIIG
- f6YupMzPHwpkZ7A/xegzZ5TLh+kqatmL6IF9ft8kfvfztdR3erBb7nF5rHV1Y3x6JokG
- 2DI6cyoWVXPa038i+yC/OQmt9nTZGzdD+hajEKgcZF0FgxuWn9w1agRz7oMfO60MD516
- cP7g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU9RoUL8K2FpVw1ZaMkQKJ2VEYVOIj4NwblAqsJJpwtK7K+MXiyW1OajUFO827QKrdkciFTKF4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyEj0JnW7y6SnPS6ol0HD+a8e5nR7NtCUn91y0dZ1grNjNfF5Wb
- WHAHapHK5qP3r1wrtutPN3casP+/S4nb9oYNIRtygBEkqMr4i1O/Li3e97lONeSdHzw=
-X-Gm-Gg: ASbGncsDgftPqyP6qHp3VnV0wdYr308URUikggdtm1BQLa1vVHOMbh9yKhyyEKjAf6b
- sBAM2/gSQ2KzIqB3pJyDxAlU8Dwt6m8dsCwW4LLYweYS2UEZsRPNWtJWS5N/qAA0y25MCGfmF3s
- uCxM2ugiXov7GOAvuIqvCifdDceEUp5qAwaXH4nn1yu0Zux8FZ+qorvdvwb60kTlpeWdayZ47We
- H0YT0zrNwU03s5lsT+d0qujiFeLeEzqpNCJu1emDA3O6hfX9CzHWHSS2GRu7UpI1uxJpLbr0mpV
- V0ZPma1y+15fTvm0GFZUtzQOYrJdXiMdu4p11DIoD1R6s+K6lFHU2Oh7FMWiysFrTJushFTpoK9
- 3+g1sK5ILrloo/Uub00lpHZ6RVbqvns9kuvXVn+eDH9eu7R6+XxVSkxI=
-X-Google-Smtp-Source: AGHT+IHCzctTbuOIk93w/I/4vWr6g4gZ64bOVAxdgBvyYwhZz/PcNJVjB0JaYMz6YAUPiULS+quYEg==
-X-Received: by 2002:a05:6870:649f:b0:30c:99ff:730a with SMTP id
- 586e51a60fabf-311229856bemr148679fac.23.1755632595596; 
- Tue, 19 Aug 2025 12:43:15 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7439204e5easm2525109a34.38.2025.08.19.12.43.14
+ d=1e100.net; s=20230601; t=1755633358; x=1756238158;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KgjFcO6nw3ImhxBAZqEfGWDVwuwfHALemP+O490gh/0=;
+ b=GBcZeevZeMQXPQqvQogDkX0MCv/+qS7nUfQaQpVRDHcTO5sx003uQN3VAkdqzs6gX7
+ NkSIslohY2XZ+UdhGN1nVrPO+PdGtB3Vh95p8hAuNrEkoq5oQova2psy4q4sGL1TgZYd
+ aAlzgCG58/LnP2nbHiHDzHWetp9MSjBj9m5LQrEspDcik+LO5R1/Y0oC38/jJmZqqq1q
+ 3F/HMIRC31yT9wH48H4qEFJ3/b72hHiTiHIgpaG/xm5K8bglptTAabRRKoQss6m+vDXI
+ rA9SUEvTCIyx0BEP9McykIQLkG0p+VAh6GdOrT9oSSuJy/Ie+130O8ZO/bweWKbgjXud
+ GbXA==
+X-Gm-Message-State: AOJu0YxLAwEiA7olvqdj4OL2BYP51onVcVWbb8ksPpr2MEJUU5AWZnHz
+ jvGxSFZ7VpNhwW8ZRz3q5/wSmaoQ4hT86/vOpphkb2mnJWKXXxC5JPVF+V44zhVDBn/Il+1/Slr
+ KeEBzAAE=
+X-Gm-Gg: ASbGncsxMsDMkm3e/Giv0jMh5MFt8/rOlBWWUHaZyzDZ9LMhSsavxzfD1rLeZIJ48f6
+ Hk0vXafgjiZONX3JZoevWbPFqtn5T+m5vZEmcTCaBIVok148/jnrdXiPxEkzQ/bgCO97AMT/RBV
+ 6aG3lx/NgjTzz+oJYn4AVSq5E8cvX3oQqDgkq8JM3tgMW+zgq6o+CLNZTbTEv3Pb3LMCAchCxYH
+ oE9uxKxyxrF2Vbfb0ZKOgVcoJvcMH67MfDhzlKREvIFa4hfrWVPAxItfeZfliW5oOsbmLxblXdH
+ A7oBLSVRferCym7W5Di/dAEFFVD1qfWzhq0ex+TEQ1d+aTperJO+E2+ecKUjDJMl0yvXdfyoPEq
+ eDIp0LvYP3rPa2zFBgdyCNwUYB4ndVcypvSt7W5AyL7KK77dYbspGGfi6
+X-Google-Smtp-Source: AGHT+IGpERrZdEu5xP80hwXqiiSFnAlue0Hb6KMeAs6vePP8QUXJaODs00sXh1rLQDJEmstRBZ8k7g==
+X-Received: by 2002:a05:6e02:1a66:b0:3e5:6645:e78f with SMTP id
+ e9e14a558f8ab-3e67c9e6c4emr6557835ab.10.1755633357575; 
+ Tue, 19 Aug 2025 12:55:57 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-50c947b397fsm3599496173.23.2025.08.19.12.55.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Aug 2025 12:43:15 -0700 (PDT)
+ Tue, 19 Aug 2025 12:55:56 -0700 (PDT)
+Date: Tue, 19 Aug 2025 13:55:53 -0600
 From: Tom Rini <trini@konsulko.com>
-To: bb@ti.com, w.egorov@phytec.de, s-k6@ti.com, 
- marek.vasut+renesas@mailbox.org, sabiya.d@ti.com, 
- Neha Malcom Francis <n-francis@ti.com>
-Cc: u-kumar1@ti.com, u-boot@lists.denx.de
-In-Reply-To: <20250812124324.124306-1-n-francis@ti.com>
-References: <20250812124324.124306-1-n-francis@ti.com>
-Subject: Re: [PATCH v3 0/9] ram: k3-ddrss: Support partial inline ECC
-Message-Id: <175563259451.3359676.2722856312905766361.b4-ty@konsulko.com>
-Date: Tue, 19 Aug 2025 13:43:14 -0600
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, Sascha Silbe <sascha-pgp@silbe.org>
+Subject: Re: [PATCH] boot: Add LEGACY_IMAGE_FORMAT to DISTRO_DEFAULTS
+Message-ID: <20250819195553.GH124814@bill-the-cat>
+References: <20250818165119.3193853-1-trini@konsulko.com>
+ <CALeDE9PqJBA9gS+YaNjM605fH011wL1SyT8Odk_k2Lm_V9EHLQ@mail.gmail.com>
+ <20250819145737.GB124814@bill-the-cat>
+ <CALeDE9PXjSh9kySvOEc-4KDVp7dT+DUUQVYh7JUk2pS+vohe7w@mail.gmail.com>
+ <20250819153522.GE124814@bill-the-cat>
+ <CALeDE9Nt9j7Hq-C1Etxh5EpdD-r09+XYeafL=U4O5cV1rvejHw@mail.gmail.com>
+ <20250819174415.GG124814@bill-the-cat>
+ <CALeDE9MMah7DndMf8TrF9yXPHdk=LtefX5=uM6qV4ZSW6baiFw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lRMfvjaERuj7spPL"
+Content-Disposition: inline
+In-Reply-To: <CALeDE9MMah7DndMf8TrF9yXPHdk=LtefX5=uM6qV4ZSW6baiFw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,43 +103,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Aug 2025 18:13:15 +0530, Neha Malcom Francis wrote:
 
-> Currently, the inline ECC implementation enables inline ECC across the
-> entire DDR space. However this is not always required and a more common
-> ask is to have only a portion of the DDR protected as enabling ECC
-> impacts read/write performance metrics.
-> 
-> This series aims to modify the logic to firstly support partial inline
-> ECC in its' most basic form which works for single controllers. Then it
-> introduces an algorithm to support multi DDR controllers where
-> interleaving plays a role. Since interleaving is handled by the MSMC, it
-> only makes sense to have the MSMC decide the inline ECC ranges for each
-> DDR.
-> 
-> [...]
+--lRMfvjaERuj7spPL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Tue, Aug 19, 2025 at 06:46:19PM +0100, Peter Robinson wrote:
+> On Tue, 19 Aug 2025 at 18:44, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Aug 19, 2025 at 06:38:46PM +0100, Peter Robinson wrote:
+> > > On Tue, 19 Aug 2025 at 16:35, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Aug 19, 2025 at 04:33:07PM +0100, Peter Robinson wrote:
+> > > > > On Tue, 19 Aug 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Tue, Aug 19, 2025 at 12:13:31PM +0100, Peter Robinson wrote:
+> > > > > > > On Mon, 18 Aug 2025 at 17:51, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >
+> > > > > > > > At this time there are still major Linux distributions whic=
+h by default
+> > > > > > > > boot using LEGACY_IMAGE_FORMAT type scripts. Add this optio=
+n to
+> > > > > > > > DISTRO_DEFAULTS to ensure these platforms can still boot.
+> > > > > > >
+> > > > > > > What is the legacy image format exactly? Does select make it =
+non
+> > > > > > > optional, can we use imply or similar here?
+> > > > > >
+> > > > > > In this case "legacy image format" is uImage-style images, rath=
+er than
+> > > > > > FIT images. And no, we can't imply it because then we'd break D=
+ebian
+> > > > > > (which doesn't boot on a handful of platforms now which do have
+> > > > > > DISTRO_DEFAULTS but don't have this).
+> > > > >
+> > > > > The distro boot stuff, which if my memory servers, is what the
+> > > > > DISTRO_DEFAULTS is used for, never used the uImage style kernels.
+> > > >
+> > > > The same uImage-style header is what's on top of a "boot.scr" type =
+file.
+> > >
+> > > The distro default scripts never used that either, the whole point of
+> > > them was to move away from manually crafted scripts and custom formats
+> > > to boot a device.
+> >
+> > Maybe we're talking past each other now. If distro_bootcmd never would
+> > have found /boot/boot.scr, erm, OK. But the resulting U-Boot image could
+> > still be used by Debian (and I think others, perhaps armbian) that would
+> > still rather write their own logic and set the bootcmd, and relied on a
+> > set of standard features being enabled in any board.
+>=20
+> The major concern I have here is not being able to turn it off for
+> boards that are constrained, which is typically the older/smaller
+> boards like BBone, Jetson Nano etc
 
-[1/9] ram: k3-ddrss: Use DDR address instead of system address for ecc_regions
-      commit: 520d9c2521f4082209ce5121be1b3c1eae98994c
-[2/9] ram: k3-ddrss: s/K3_DDRSS_MAX_ECC_REGIONS/K3_DDRSS_MAX_ECC_REG
-      commit: e511c651f6dd0ec89a4b7dec25140540740cf13e
-[3/9] ram: k3-ddrss: Add comment about ecc_reserved_space
-      commit: 1c70e33b0aca6d5d84145636400e496feb19c8b9
-[4/9] ram: k3-ddrss: Add support for a partial inline ECC region
-      commit: f43f710122541f870ba164e8121445003032c71c
-[5/9] ram: k3-ddrss: Add CONFIG_K3_MULTI_DDR
-      commit: 3a0793fe9be3f0e6026d31dec8545a6b0e102ccd
-[6/9] ram: k3-ddrss: Add support for number of controllers under MSMC
-      commit: 2310aac8ae0180ad78da1d44657f846610296e4d
-[7/9] ram: k3-ddrss: Add support for MSMC calculation of DDR inline ECC regions
-      commit: c32ac5b3b934942fdcd97ee631ca2362032e0e53
-[8/9] ram: k3-ddrss: Add support for partial inline ECC in multi-DDR systems
-      commit: d1efbc8d65702f9eb7d032e904e092a2fd3075b3
-[9/9] ram: k3-ddrss: Support multiple ECC regions for a single controller
-      commit: 0824703fb2b49ed64edee6f8db483bedfa0189dd
--- 
+Right. But the initial report here was for BBone :) Given the relative
+few platforms that didn't already have this on, I'm not sure how much an
+issue it is. But that gets back to the trade-offs question too. If
+you're super size constrained and can't find something else too to do,
+then it's time to manage things more directly.
+
+--=20
 Tom
 
+--lRMfvjaERuj7spPL
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKTWxQAKCRAr4qD1Cr/k
+CrhYAP45lCFNe1C7d0pILuZx37CyDLUMoAhTA2X5dtZ9eBS6SQD/XBrtKVkhiBUS
+bN+1dzKIWDXAdT7CXbM7r5NZgsFWYAQ=
+=Bsi4
+-----END PGP SIGNATURE-----
+
+--lRMfvjaERuj7spPL--
