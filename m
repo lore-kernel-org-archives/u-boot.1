@@ -4,84 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC4ACA0EE6
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 05:31:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03ED8CA0EE6
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 05:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8447802C1;
-	Tue, 19 Aug 2025 07:31:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F121802C1;
+	Tue, 19 Aug 2025 07:39:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="etLGd3WI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="lQTm1F4S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD12B80422; Tue, 19 Aug 2025 07:31:18 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C7EA80422; Tue, 19 Aug 2025 07:39:45 +0200 (CEST)
+Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F3878006D
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 07:31:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 12E968006D
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 07:39:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-24458317464so54261135ad.3
- for <u-boot@lists.denx.de>; Mon, 18 Aug 2025 22:31:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1755581475; x=1756186275;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fs+DUxSWn1TgLhwOGwPK8d+depwXe1pG9IkYyAo2xu0=;
- b=etLGd3WI8QyUV6lnX3X0q4eDbApHHi3gn5iZcQayrzqY61nTCxKGuh+Xk6rRVLJvA9
- 7NYNFwQ4oLP3tDFK6VmBCkU+M4dIZFnwpoUKkVMZj0ZURO73gbjLUfBhfcClqUwDM1lr
- 1l28RjRQQg8PuMAdlQxTW38F5jhAPwq37RX8E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755581475; x=1756186275;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fs+DUxSWn1TgLhwOGwPK8d+depwXe1pG9IkYyAo2xu0=;
- b=sbvfe1g7JWimitIpMrFVb8xRBVtl3ar85aHkaI0VxlnRViHeztH0jbx18VWbNLpTVl
- bb4PEZAvYlHoKMww9bwqvM1eoSfgHlq9oBM/tjNbYg2yH+NKOgizWJ8t/PTGJsCbKACz
- bIRxRaJv86ef+DYuVydbXv4Bt4XnbnL/rlG9WWOcA8SdErfTvcgnjD4ojDpNe8RLZ24y
- IYSeys/MQAD9phFBEoIpeE59PWP2gfcLsrXUk0C8WGrbtRH2K6QGVqX2+FxZZcvggktJ
- kM1HycU3Vs9IpIfqds5jv+g8I0xcZbdtbUSCzU/I+HE/hQtZN3rl1qjw2PDZq/l7X4fE
- 6zUg==
-X-Gm-Message-State: AOJu0YzZaJpqGhuEvSm2v6qjVBook5BEqTE+nHVS7/E/9JuhaB9tDdgT
- dkt4efFzfnkshvR5xpm3e2FxElIG4mmMCdWBJACBMKuouQlXZHqkjwVGrYdocL6VdYVIT6nNR2E
- nHbA/i/zSxsDVsCqUjSCpiTWoIgPWOnE1DljBOwZZhL8g/GGgdjZc
-X-Gm-Gg: ASbGncs2D7oUf8bIfFDNkupx+oNFfuU2nriRSVnAGz2BrdYGBJqH787lSESwF0+WzRs
- 1PVEjeL33QDiPS8e0vfiQGtWNE6niGWjOCe43+1bw7zSOYGpn6Ol6J+VZmBefrcHXE4nrAllKIR
- NTGruZ6Z5ztpb9++WxN/4ihlOXbspr02Hu8mrT/Sf4IZ8WLyBK4TaCjdmB99Tue84qFTR5tfTgY
- 2NEGw==
-X-Google-Smtp-Source: AGHT+IE9UgVj5rjnnmdWMNEP7yN18EMugipZkO958M9J/jppPIyZsjDrd+UA8xkupFLBkK76GnokPgAwIkCENmppCKs=
-X-Received: by 2002:a17:902:ef01:b0:240:3e40:43b8 with SMTP id
- d9443c01a7336-245e055b7b7mr14230565ad.53.1755581474618; Mon, 18 Aug 2025
- 22:31:14 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NTZNxsqSWFUwyObWSVJcQorO/Sg30PtZDWVvFIRVUno=; b=lQTm1F4S3z7DMzBt0xNgy098Bu
+ oYMbZI0DqO+hS4OjGSdXTjKPhqNB2oxAC+b9WuPgEuQ03iPT0s8p9cXF9Er4hdoqNSrU2C4KMaddG
+ RiFs0vrmYP/U5BKvIShS88HVBBH1+l0hLWpUBbL/CWucJloi5bPi9Ewx1qW9v1e04goPWs5M83fBH
+ XqIQVcmWvUQY/jcA6P9JpnnEpQeIOM9yaV9OTkkrndDfMSB8mJootEh62fkXo0zI8t2GTKX4noMWh
+ X0Hzs24SoLXIC06U65HElmvI4krywrgu2kcmPxVuj3JZuXLSdzSfOlAqNM4CD2WL3twz5hIERZtfT
+ KLXAACPw==;
+Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:56986
+ helo=localhost.localdomain)
+ by cpanel.siel.si with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96.2)
+ (envelope-from <primoz.fiser@norik.com>) id 1uoF4Q-005L6K-1e;
+ Tue, 19 Aug 2025 07:39:42 +0200
+From: Primoz Fiser <primoz.fiser@norik.com>
+To: Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	upstream@lists.phytec.de
+Subject: [PATCH] board: phytec: phycore-imx93: Fix EEPROM bus mismatch in SPL
+Date: Tue, 19 Aug 2025 07:39:41 +0200
+Message-Id: <20250819053941.908834-1-primoz.fiser@norik.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250819052204.2628-1-dinesh.maniyam@altera.com>
-In-Reply-To: <20250819052204.2628-1-dinesh.maniyam@altera.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 19 Aug 2025 07:31:02 +0200
-X-Gm-Features: Ac12FXwmYotNLpS4In8Nz9jvPeSHP4c3VnYIvLCzdupZko8pKOQ4FBo1IYBkgTY
-Message-ID: <CAOf5uwmrQEUXNcVJWi0VkfLMLN-jfxu007MN4cHhnQwqkE0x0Q@mail.gmail.com>
-Subject: Re: [PATCH] mtd: nand: cadence: Fix device assignment to avoid warm
- reset issue
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>, Marek <marex@denx.de>, 
- Simon <simon.k.r.goldschmidt@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Tien Fong <tien.fong.chee@altera.com>, Kok Kiang <kok.kiang.hea@altera.com>, 
- Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>, 
- Jit Loon Lim <jit.loon.lim@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
+ primoz.fiser@norik.com
+X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,60 +83,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Fix PHYTEC EEPROM bus mismatch between SPL and U-Boot proper by enabling
+CONFIG_SPL_DM_SEQ_ALIAS=y on phyCORE-i.MX93 boards. This way, both the
+SPL and U-Boot proper will respect the device-tree aliases for I2C devs
+and use the same I2C bus number for phytec_eeprom_data_setup() function
+calls. This makes code less confusing and more robust.
 
-Il mar 19 ago 2025, 07:22 <dinesh.maniyam@altera.com> ha scritto:
+Fixes an issue apparent since commit 79f3e77133bd ("Subtree merge tag
+'v6.16-dts' of dts repo [1] into dts/upstream") where SPL would spew the
+following error:
 
-> From: Dinesh Maniyam <dinesh.maniyam@intel.com>
->
-> The driver currently does:
->     mtd->dev->parent =3D cadence->dev;
->
-> This works in Linux because `struct mtd_info` embeds a `struct device`,
-> so `mtd->dev` is always valid and its `.parent` can be set.
->
-> In U-Boot, however, `mtd->dev` is only a pointer to a `struct udevice`.
-> Dereferencing it before assignment is invalid, which breaks the device
-> hierarchy. As a result, consumers relying on `mtd->dev` (e.g. partition
-> parser, reset and re-init paths) operate on a dangling pointer. This
-> leads to failures during warm reset when the NAND device is accessed
-> again.
->
-> Fix by assigning the device pointer directly:
->     mtd->dev =3D cadence->dev;
->
-> This matches U-Boot=E2=80=99s device model, preserves a valid hierarchy, =
-and
-> resolves the warm reset issue on Cadence NAND.
->
+  phytec_eeprom_read: i2c EEPROM not found: -110.
+  phytec_eeprom_data_setup: EEPROM data init failed
 
+While later in U-Boot proper, EEPROM would be successfully read out.
+This happens because Linux device-tree for phyBOARD-Segin-i.MX93 since
+aforementioned commit enables I2C bus 2 (lpi2c2 is used for audio codec
+and RTC) which breaks SPL I2C bus number ordering and I2C EEPROM bus is
+shifted by +1. Now, lets prevent this from happening again by utilizing
+device-tree aliases also in the SPL.
 
-Please add commit that it fixes
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+---
+ board/phytec/phycore_imx93/spl.c | 3 +--
+ configs/imx93-phycore_defconfig  | 1 +
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Michael
+diff --git a/board/phytec/phycore_imx93/spl.c b/board/phytec/phycore_imx93/spl.c
+index 7b5d38d438f2..beaa536c6007 100644
+--- a/board/phytec/phycore_imx93/spl.c
++++ b/board/phytec/phycore_imx93/spl.c
+@@ -52,8 +52,7 @@ void spl_dram_init(void)
+ 	int ret;
+ 	enum phytec_imx93_ddr_eeprom_code ddr_opt = PHYTEC_IMX93_DDR_INVALID;
+ 
+-	/* NOTE: In SPL lpi2c3 is mapped to bus 0 */
+-	ret = phytec_eeprom_data_setup(NULL, 0, EEPROM_ADDR);
++	ret = phytec_eeprom_data_setup(NULL, 2, EEPROM_ADDR);
+ 	if (ret && !IS_ENABLED(CONFIG_PHYCORE_IMX93_RAM_TYPE_FIX))
+ 		goto out;
+ 
+diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
+index 6210be646723..af149128ed41 100644
+--- a/configs/imx93-phycore_defconfig
++++ b/configs/imx93-phycore_defconfig
+@@ -92,6 +92,7 @@ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_CLK_IMX93=y
+ CONFIG_CLK_IMX93=y
+ CONFIG_DFU_MMC=y
+-- 
+2.34.1
 
->
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> ---
->  drivers/mtd/nand/raw/cadence_nand.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/mtd/nand/raw/cadence_nand.c
-> b/drivers/mtd/nand/raw/cadence_nand.c
-> index 27aa7f97a45..4771440d1de 100644
-> --- a/drivers/mtd/nand/raw/cadence_nand.c
-> +++ b/drivers/mtd/nand/raw/cadence_nand.c
-> @@ -2196,7 +2196,7 @@ static int cadence_nand_chip_init(struct
-> cadence_nand_info *cadence, ofnode node
->         chip->controller =3D &cadence->controller;
->         nand_set_flash_node(chip, node);
->         mtd =3D nand_to_mtd(chip);
-> -       mtd->dev->parent =3D cadence->dev;
-> +       mtd->dev =3D cadence->dev;
->
->         chip->options |=3D NAND_BUSWIDTH_AUTO;
->         chip->select_chip =3D cadence_nand_select_chip;
-> --
-> 2.35.3
->
->
