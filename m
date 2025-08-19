@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F7ACA0EF5
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 19:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6EE0CA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 19:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCFC482E34;
-	Tue, 19 Aug 2025 21:43:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 61CCA83093;
+	Tue, 19 Aug 2025 21:43:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KL7dgcub";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NnL21+ja";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9765882B07; Tue, 19 Aug 2025 21:43:15 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id AB922830B4; Tue, 19 Aug 2025 21:43:16 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F6C780FA1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 21:43:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4CED82F30
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 21:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-74381df0c04so3212701a34.0
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:43:13 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-74381e207a0so3087657a34.0
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755632592; x=1756237392; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755632593; x=1756237393; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=y4B1JQyWVNOADvJWIg25wkh4xIyBeZGN5puqi95uyQU=;
- b=KL7dgcub8A5i1WpEmvofV/+bYEzPsNQFxUK41OBQO/SflJuIXFr3MZrZH7flloYcyf
- 0K6sE70t9krR132gejHq2D8KON3gOAKmGCOH1EGLfDVEune5gdtY1fqcV3T2DUyPdANH
- erDoYVhUfRpsavqo/euYYGAZRBqlZBUFnJC1c=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YiyFcH4Ltw64BP/DT9qssvHsQzxcvfeIPHhs/wbALYc=;
+ b=NnL21+jasqOsT+goEMk6HHhSBhKBbWUisjNolYF3IhN41u0OaYs8Ab2PwihLxel/Hv
+ sJeaIwuYzwZFcQMZV3nzPcdah8RqqKQbmFUhH42LrMiEJoJLUroGOm3wcdTGaz/sNtOz
+ GGVDM1T2KshCN03KSzLsmuvziF/JGviDkB7ms=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755632592; x=1756237392;
+ d=1e100.net; s=20230601; t=1755632593; x=1756237393;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y4B1JQyWVNOADvJWIg25wkh4xIyBeZGN5puqi95uyQU=;
- b=ULVeLF9vrmMjyzFqQGCxdZjQi7Q1TQDfYpQ7upFnxLr7fA8TPRLp8u7x6f4UC0MPHX
- Y1QnKwdHexdPXEnwnlpulaC+WrHbv+vMugBdbc+AmtJU17Dp0ISDe2VDlIjIAF1Z3TsO
- i7Bf7PMhuIt6g9sg5pF6h4P/zcSas/++5wiEkssEfU27Nd5ekAPKa2BGniCTMjMqUomT
- 4uBApQQp3wR42/1/HzTC8vWnCyiOLZbZIB07SWWt2E+qnSMRsNie8iUNiFrL+uwWiC1T
- WVhNHo9a+IGLXhG+sqUbFZjSKxQWf3fK6xI56wGlGv5oOfECa0JfOgtx0CAm7XS7Qk6m
- aZmg==
-X-Gm-Message-State: AOJu0YyL0r2feiXz1muD4tA0mscBQ5AZOG3hduilR1a09W/YOC/cVP7o
- odVSPSJA0rJ1Pwc7xZF3REsg33S6E6wLoKlZqYRzsR839zl5Yi6FlE5DEGeVcyg8n71DUgtGh7q
- 4hqNK1qc=
-X-Gm-Gg: ASbGncvECrox64vmZt4Mf5Qv8yyAKgU+x8C9PkGqwONK7gdDwWf/bEOIt9M+/oZUgYo
- EpkM7ECf7Qd8TikmQUP6rIgJKt8ujcG3CpLcqHBIpu2m0nlVi7zKClfTAj7MyacV6S3zacEaGq6
- WNN7B1fGITMMh8xy671Bd99YuW6Y+/mg3m6XbR7rz/EBdVUUjUK5oqYfAaD5oNcr4X7BdhhpTNY
- Ui7wLHwCCoeLwK9K6PB1gbsGndUaZGuMS9+3rAI3uPfvJsN24ZU6J/kMB33Eq85/5AluxO2uOvC
- 77f76+2fvaZfuigwOYJ4h7x8r3nH9NR5jTl358rhvcNKShj3hoSKTM12s3xg2HAukw+f/WE/N+p
- CFX+S1GCnnmJQbTYOG93HTo5pN4GOGdZFJNtFKNYAMp5tIXmUF9ti7bQ=
-X-Google-Smtp-Source: AGHT+IEHvuZt81nlPIIm9Q27vmtMn5Hk59yL/NyiZfCJI9RlhA6BBhhx1Ik7GcFuqYsKGpjvEWFjhQ==
-X-Received: by 2002:a05:6830:618b:b0:72b:9b1f:2e33 with SMTP id
- 46e09a7af769-744ebbcc84amr308665a34.18.1755632592141; 
- Tue, 19 Aug 2025 12:43:12 -0700 (PDT)
+ bh=YiyFcH4Ltw64BP/DT9qssvHsQzxcvfeIPHhs/wbALYc=;
+ b=r9FUWhdfDsP4m0t1IZ8Hl02P+zBkyoKRJTKb/HkIxoYBo2H3pI+9+399jbGBOmun9H
+ m+SdVBq+X7Fvwc0ZIcB2XsNFogY86GWEpS8o69h7IhjPCrsbzucPjCEljHklbNioET2Z
+ jFIOwFKJggCXdbUvndHjuVI4+DjnRuSq0yfTeqbVdrO8c2U1ezdn86CMhS/YLGzXrFYJ
+ bJ7Fc8O0FvB5pi1tlwuSj94A4Q2SfOLx4ZHjQrC0+jU7LChec6X7ZfjX368Hmk58dMFl
+ /QE4yAxiJHJb0UE85Thw+iWq7t+9Qlj8l/X4HQtkehlx+vISmtUr9YaSO9Ew6sOSVSWK
+ mryg==
+X-Gm-Message-State: AOJu0Yw0hMrDsPl54yCemUJL7XsRTjjUeIvifZsYCFZt834VycNrwx73
+ jsqH0hIcV/TDqmM3hWBkXZ0VRYGoxNasHg3Y4Pe69hmulPJVmeMLpXt3vN2aq3UK+3coNvqtZJC
+ 0wMOJ0NA=
+X-Gm-Gg: ASbGncvje06IgsKcba8oz2ZNRE/NeUbXXfs8ToA0qsjsL45bm+jwUV8dMy+3AOlIIl9
+ SpwQurnJL3twMXDoGUOGLUDJmcHMVvOk5HglpWusLuB1A/YShckQrqy2jK7yFKaoOsBDDCzU7dT
+ 261c5lb/JU4BwX+Y47jtG96letudiNyfHtUOdGznrmIL1japvH1ZKkiop0JOX5dgcOPOo5aEWsc
+ d1BhkwaU6nFSgtRkzXa2uuTd0dZYce4mqW4eeK0SQ5EJWh5noGaAq15373EuzUOTZY4kgK/QeSx
+ 8fOmAbzstgNf17sxIKVEgld1+4DvO/m5Ktc581zVZQo8UwRkdjr6VttWGd/IKoOCEmCZI78OuWE
+ sOt+3nzuGVrpn/NeUokAy+BapEJZ+WBVfXibMOoL8LapND18sfMxCtkk=
+X-Google-Smtp-Source: AGHT+IEWISCdoLXG1MrVlZEQUqIVLTs5UjyKj6ODl4fVLT3uZzuqWWepGiAnDKcB2r4zSkZ1pcxHgg==
+X-Received: by 2002:a05:6830:2a0d:b0:73b:2617:87f1 with SMTP id
+ 46e09a7af769-744ebc21da8mr293072a34.28.1755632593357; 
+ Tue, 19 Aug 2025 12:43:13 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7439204e5easm2525109a34.38.2025.08.19.12.43.11
+ 46e09a7af769-7439204e5easm2525109a34.38.2025.08.19.12.43.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Aug 2025 12:43:11 -0700 (PDT)
+ Tue, 19 Aug 2025 12:43:12 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250812175908.3057051-1-trini@konsulko.com>
-References: <20250812175908.3057051-1-trini@konsulko.com>
-Subject: Re: [PATCH 1/2] sandbox: Improve dummy local_irq_save implementation
-Message-Id: <175563259120.3359676.12727821315547235227.b4-ty@konsulko.com>
-Date: Tue, 19 Aug 2025 13:43:11 -0600
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250808-remoteproc_tik3-v1-0-f7dae0b177b2@linaro.org>
+References: <20250808-remoteproc_tik3-v1-0-f7dae0b177b2@linaro.org>
+Subject: Re: [PATCH 0/2] remoteproc: k3: Fix two Smatch issue reports
+Message-Id: <175563259227.3359676.1630368240944038132.b4-ty@konsulko.com>
+Date: Tue, 19 Aug 2025 13:43:12 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,20 +96,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Aug 2025 11:59:07 -0600, Tom Rini wrote:
+On Fri, 08 Aug 2025 13:00:21 +0100, Andrew Goodbody wrote:
 
-> Normally, local_save_flags is used as part of the local_irq_* macros, so
-> remove that as it's unused. Make local_irq_save do something to the
-> passed variable so that it won't trigger unused variable warnings later.
+> Smatch reported two issues, firstly attempting to compare a u8 to a 16
+> bit macro and secondly a potentially uninitialised variable.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/2] sandbox: Improve dummy local_irq_save implementation
-      commit: 58998fed9e63e8310a96229565d2996ad29d191e
-[2/2] sandbox: Add generic asm/atomic.h
-      commit: 66ff673a8e9f56d2c08a32d12867094c77ea5fd3
+[1/2] remoteproc: ti_k3_arm64: Cannot set or compare u8 to 16bits
+      commit: f780ad4be9fe84fbdd874455c7518e0576e4d845
+[2/2] remoteproc: k3-r5: Ensure ret is initialised
+      commit: c9cd480b5c5496b809d954424ce3554673c278d3
 -- 
 Tom
 
