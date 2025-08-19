@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE182CA0EE6
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 15:03:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD226CA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 15:25:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24309809A5;
-	Tue, 19 Aug 2025 17:03:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 75CF7809A5;
+	Tue, 19 Aug 2025 17:25:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KDRSidRH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qt0c1OEU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD62180FA1; Tue, 19 Aug 2025 17:03:14 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 172D882D88; Tue, 19 Aug 2025 17:25:29 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5754E802C1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 17:03:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86A72802C1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 17:25:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-30ccec2515dso3935782fac.3
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 08:03:12 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-74381fdbdbeso2799272a34.2
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 08:25:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755615791; x=1756220591; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=f/PhPUm7UISgXrfP/1uegymidi4T5Eq0kCR44VfVTeo=;
- b=KDRSidRHCHLidlNpExoDmxVMO68VDck3SFHbfFM2vZJSlBHCR0+wujhP1QbYrL9Wwl
- WmVL2/lI8Se9RToxtha2mys8nY2hbDYIMU2t0CHXUOg1g9Mpfo/NJXlARONlZxV936bF
- /FazEpfyAqwTj5kRiJg/KpZDKtUwOGqGIuIJk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755615791; x=1756220591;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1755617125; x=1756221925; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f/PhPUm7UISgXrfP/1uegymidi4T5Eq0kCR44VfVTeo=;
- b=HhA4lNrVny6CJQyIKEhLBI4KsD+1VEPb8BYOCiuk2LI/AdTp76nF2DC3bFF9dk4qxj
- ybSRRXGp0KIExCf/4Ny6gVfbF9k6DcJ20qd1G/PQZ1wjb1UjaUFbxiXVtp2myiPsQzCB
- walNaq1/DM55K3vFYUuvMclUkzdbvCpoKqVTU9YAImeGdKTXhngnueKdtN9GDW08ciPA
- 8J/FJtw5eyJMuwTYLWWcwbd1zG1ce9YV5c9DEEoJhFcFw1c2TWO0LJt6p6a5c1Mwu4Xm
- lWxxAvR/hGOUcNuQWtErmnItnLGmKUYWcjMqpng7BrgKWQWkQpTJBoU8rK+hHVMTBsm8
- 25XQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZcxSjrfWGPWTaTeRmDyXEQ9qFG5Wac9j8P6XAYTye8722zkEgMtU8LbPugbTt/lq5cxoa0NM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTiyaiF24j5zCweVtbJmPNpDEUlmraJrWbCWVfEkKeh/pqLIox
- 4RE03XJrzW2Hv83lbIJhd5l1m+aN5iy81UZcki+UpN7gl4kI+T/MxWo/H3XQugVbMVqA2ecKw6y
- gC2AicVs=
-X-Gm-Gg: ASbGncuvTLJGsWtxvmj5fz8jEhqYYWjAnFun55C20go1r1uvbpAVWLQUg/XTz0oqawW
- U6o09tylhNRtmiLKdrhIpUbpZFYww1KW6xw6h+m0qKwCYhp7jj3zIzNyEGwa+286bWtoG1mAUks
- DYXQ9WwrEo70kiYSQ0TOe2JizIr3MblmTK+9O5/2f+EUyIdU/UNcrfmXUBXZ/okt8aY5w2he4lS
- HtBVetKmzG2wiUWrYs4deB+83RzzvNtJjR1XfqvUERSXAPv2vw4u6D1o+4dsO2pFo2TzX5bQDM4
- QFF3oTyt1Y9yCe7H4gxFYNEbBAYNIGo3/87sjxnwEoiSzXBgKnhqdwWALbWqoM+qQCVGrzNuHYE
- 5OSk1ZFWtv1UMKiRoDEoNYJiOHEbp/E9oukU49WYfWmcONrFNTzkYE9zG
-X-Google-Smtp-Source: AGHT+IGHE4vmc1uo2KrLaeTf/x6drtZukYQrPcrxqh9O5m6hGB8tIEMLXOBe+yUzy3bX7ETYI2E6tw==
-X-Received: by 2002:a05:6870:b605:b0:2ea:7574:e243 with SMTP id
- 586e51a60fabf-3110c1cd90bmr2121194fac.9.1755615790492; 
- Tue, 19 Aug 2025 08:03:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-310abbb1d26sm3485902fac.28.2025.08.19.08.03.08
+ bh=Q8PQGbc1PXUGaVNyofGSY8799j9uX9y5kLnF8uPLgVM=;
+ b=Qt0c1OEUs8uxlxx5V5SR92h/mKUsRu8L4zZzVBChfawtbi1NQNdROoLYtacIsL46gW
+ G3d1AFaJ6XFvWint4RwFOwwpmWRrikBUjFZ0c2zrMMfuH0bD9JNPV+lMNNkB6Nnh+y41
+ vFgyXZfIpL1pXhLy0/T1p7r6mNj2MlmW6lQM4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755617125; x=1756221925;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Q8PQGbc1PXUGaVNyofGSY8799j9uX9y5kLnF8uPLgVM=;
+ b=bZ+hy3XlcxpkskVdyXALi3iI/wEieqUmOrnrvmkPGo/kMWq8YoOZJFpVnyw74S1WwW
+ 0aJNM+wyGEBxY22ZAmThMjmB/SG+aJaulrsRQhxkkyPUSG19yIvyq/RMd4Vc4sfdMY0+
+ y74BmhuBzYNIurKRZrR3SL/FinN6cmfua+EqS3cjkjj6Z1Aa6r6J09cMNwaxAp4QfJvw
+ lF0WdHMttCWnZtmeJMHESnE260wTjhsTihAYGu0LzqDOfdWgj2u/hu/MXoHqfpctlJQA
+ 2Vfwu3hgrux0B7ePKphqtfT8rQ9wttUD2cLebhj81ccwha8h5mXIoByweHyGH8G+T2up
+ P+ow==
+X-Gm-Message-State: AOJu0YwCb7eqgKfNL5eOcQlR6u6JshDEiHsh+OZHlfUjYbbWGILYYemr
+ hiX66xWr8Kdh6Pe5glPIqC+OWkdk3yV6mWWJoOr3gs5qFD+OeNgc0/MbiFB89Vv9SOo=
+X-Gm-Gg: ASbGncsxqrqkHMzCb/df3ZZvZf0dZCWEtLH+2BrhcjQyStvU/tYJlkpXy5qLuO/4XpW
+ DaZJ26c32Oglee6Pd1CqMoi1UiEzBmqkJMbCKLP/N78NJiL0q7I1JSySLf9Tfrld85qEchAzNZ3
+ u3Mz6Los8rgXAtosVTQhAqq0mI1AUPLka9hFJt6sVUzHPbuaPhlfdcx9jQ2CqQUjuaOBGJn9rHk
+ Vw7TKF6/IoiWO4hd0PkpGF2JF5UWR2iuX4wC59rmJavHuU9jv9x9vRO2dxIZlXAeWrb1t5BxFnx
+ NBtom/jFlysiQ2ofgh9KBu57q/1otNWxLlR0otyOKib5/al7V4PXD6eLWAfEgJZSBpfo4t9BseL
+ VgOBVW5Oekxix02ppN2lZKVYC1t6mC8Crvlra7r59cBQzBhglh/9tR3rruiHdxHhRWQ==
+X-Google-Smtp-Source: AGHT+IHyjr0Zz+LXTyF70KSbpuML+NtvPWTSOzQZPqES1UtEN0jdIAaWTTH1iiDKZYW4MnbG6N+flA==
+X-Received: by 2002:a05:6830:378e:b0:727:439c:d18b with SMTP id
+ 46e09a7af769-744e0aa17e8mr2023209a34.15.1755617125191; 
+ Tue, 19 Aug 2025 08:25:25 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-310abb34366sm3459731fac.23.2025.08.19.08.25.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Aug 2025 08:03:09 -0700 (PDT)
-Date: Tue, 19 Aug 2025 09:03:06 -0600
+ Tue, 19 Aug 2025 08:25:24 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Sascha Silbe <sascha-ml-reply-to-2025-3@silbe.org>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: legacy image format on BBB / Debian (was: Re: [PATCH v6 8/8]
- Drop the special am335x_boneblack_vboot target)
-Message-ID: <20250819150306.GC124814@bill-the-cat>
-References: <20240627082949.357089-1-sjg@chromium.org>
- <20240627082949.357089-9-sjg@chromium.org>
- <yh7ro6sfsbjh.fsf@twin.sascha.silbe.org>
- <20250818141704.GW124814@bill-the-cat>
- <yh7rjz2z3eae.fsf@brick.sascha.silbe.org>
+To: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, Jim Liu <jim.t90615@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250807053224.2169557-1-JJLIU0@nuvoton.com>
+References: <20250807053224.2169557-1-JJLIU0@nuvoton.com>
+Subject: Re: [PATCH v2 0/7] modify npcm7xx/8xx feature and bug fixed
+Message-Id: <175561712393.3333765.5755767529907583203.b4-ty@konsulko.com>
+Date: Tue, 19 Aug 2025 09:25:23 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CYnlCz/LZtWg1HaK"
-Content-Disposition: inline
-In-Reply-To: <yh7rjz2z3eae.fsf@brick.sascha.silbe.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,65 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 07 Aug 2025 13:32:17 +0800, Jim Liu wrote:
 
---CYnlCz/LZtWg1HaK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> modify npcm7xx/8xx feature and bug fixed
+> 
+> Jim Liu (4):
+>   arm: dts: nuvoton: Change timer node
+>   misc: npcm_host_intf: Add Arbel eSPI workaround
+>   misc: npcm_host_intf: Disable pending KCS/BPC interrupts
+>   configs: npcm: remove CONFIG_SYS_SKIP_UART_INIT
+> 
+> [...]
 
-On Tue, Aug 19, 2025 at 10:29:29AM +0200, Sascha Silbe wrote:
-> Hello Tom,
->=20
-> Tom Rini <trini@konsulko.com> writes:
->=20
-> > It's frustrating that it looks like Debian 13 is shipping with this
-> > legacy option as the default, I assume for all 32bit ARM systems, rather
-> > than any of the more modern options. I'll take a look at what the impact
-> > is on adding LEGACY_IMAGE_FORMAT to the "distro boot" option so that
-> > nothing else is missing this.
->=20
-> flash-kernel has no way of knowing whether the boot loader used to boot
-> will be the stock boot loader or the one shipped in the u-boot-omap
-> Debian package (if installed and manually copied to SD card / eMMC by
-> the user). Did all BBB rev C boards ship with an U-Boot version that had
-> FIT image support? The oldest version I could find on the BBBs I have
-> running and reachable via SSH is U-Boot 2015.10-00001-g143c9ee (probably
-> shipped in 2017).
+Applied to u-boot/next, thanks!
 
-Yes, it's a choice of what the distribution is / isn't going to support
-and require end users to do. And lots of people are opinionated about
-it, and different distributions disagree on what's needed. I'm not even
-saying Debian should have worked out the tooling for FIT (my thought
-would be why not EFI for all the ARMv7a supported platforms, but I'm
-sure there would end up being some other problem).
-
-My frustration is what the patch I posted solves, U-Boot broke our
-agreement at large at some point (DISTRO_DEFAULTS provides what common
-distros use) and so here we are, Debian doesn't work.
-
-> FWIW, the main README in the U-Boot repo only mentions FIT image format
-> in passing (referencing a file that doesn't exist) and then goes on to
-> explain the "Old uImage format" in detail. To a casual reader that
-> suggests that the old format is still the primary format and that FIT is
-> the more modern one that can be used for more complicated cases if
-> needed.
-
-Yes, we need to continue to work on removing the top-level README as
-it's so out of date and https://docs.u-boot.org/en/latest/ is where we
-have more up to date documentation.
-
---=20
+[1/7] arm: dts: npcm8xx: add pinmux for VCD input
+      commit: 6e212f32aaf312002a1ab1f3c18925e7c053f694
+[2/7] pinctrl: npcm8xx: add support for setting VCD input source
+      commit: ad3a33e57742bab08a8ca1a9e34c262b6fbf0268
+[3/7] i2c: npcm: fix consecutive dm_i2c_read/write error
+      commit: 3c632fc090dab1838cedb525e09d049a903c37a6
+[4/7] arm: dts: nuvoton: Change timer node
+      commit: 59a1c2875597c234eb2cde3ba2e48880523ab92e
+[5/7] misc: npcm_host_intf: Add Arbel eSPI workaround
+      commit: 121927e37be0725139d5b07d08361ac266685808
+[6/7] misc: npcm_host_intf: Disable pending KCS/BPC interrupts
+      commit: 987880581646d5836d2485e5f7a5af6ce8600da1
+[7/7] configs: npcm: remove CONFIG_SYS_SKIP_UART_INIT
+      commit: 58fa3b5159cf4090ed926507d7778ebd1dc0686f
+-- 
 Tom
 
---CYnlCz/LZtWg1HaK
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKSSKQAKCRAr4qD1Cr/k
-CglGAQD8biwC3eYmzSAXEmLgkuASbBPqfuihU0fx1+zA2na31QEAxxB2PzhA/FGA
-jHmelclbzPca5Bf2zETld5bTCxdIiAE=
-=/W6K
------END PGP SIGNATURE-----
-
---CYnlCz/LZtWg1HaK--
