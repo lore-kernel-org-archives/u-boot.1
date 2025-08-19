@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC050CA0EF5
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 08:49:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46A30CA0EF8
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 08:49:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E75A282BF6;
-	Tue, 19 Aug 2025 10:49:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B3E6E82E37;
+	Tue, 19 Aug 2025 10:49:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="sxFTYbK2";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="IlcQ2NTS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1340F82D88; Tue, 19 Aug 2025 10:48:59 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id C452C80FA1; Tue, 19 Aug 2025 10:49:04 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3361780FA1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 10:48:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18DE582E34
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 10:49:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6188b73bef3so9100784a12.3
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 01:48:57 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-afcb78d5e74so854683566b.1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 01:49:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1755593336; x=1756198136;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1755593341; x=1756198141;
  darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :references:cc:to:from:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=y94xqTbFgyD/KdFYon9+rTtAVg9OiH1rlaOFwjVj1AU=;
- b=sxFTYbK2x9Fzux3AyqtvqkF9PydvHe7m6wshgvxvf4lkLBNhskgbQzcQnFHJWHJ+/G
- yoh3LAVTpR/2T+1xZoc+9sKJnnpM+FldP/0LLPri+s4Qn4e4UEcpbKvadmoZL9MQcgBk
- zWPGAsB7U78VaUUKEBQKi2g7su+Sn0hcr3kLLaTf+jqbrEs093xACuxc6+VCT2YKFgL9
- w5JGoTNX5oHPXabQtpcsi2GuKUOEJ8lyUMthm/jl53Jxd6rScsCUZd6+FrawYA/NvPxc
- H7DH7SQgq7cZlq4bsKa17+LRBrjHNamtvxx0WZYrUOhyDkIiv4CFsTr7M5NnPVHYcMQ0
- AQ6Q==
+ bh=CvEtbrfhqAf9HU9+EoLtaVXOhH3ai2v8VPbLRNv8nzs=;
+ b=IlcQ2NTS/3BNDBJEcJPvEGkvV/+SX4JHKUs8iWjEn6gv2YROQ+/gkhyjfaCe6VI0AT
+ G6OlXXBtvrxqGZ9yWEFYDNyErL45tWZrqvv2ny8aZBwsQTpaHKR0rgRgnN3I0Ae6ltCC
+ IL7La1u7tta2fqL4uB7LZWwC9QF3Ql74Q5BOErL/vDTbf0BtoBlowJJY+EuDZhrGN8KK
+ vZbmWZHLK9vJItdkHtk5jO1Hns1521PQl8/A/8QSgwNJJobxApC1q+/Xcini+wzRzga5
+ f+U9Oe1mUNZX7BKFTCScdM/qZr11s3uz4Tt0x4EMkcJmb0NSr5oG1/gqO92K1+e2ptTZ
+ ZTlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755593336; x=1756198136;
+ d=1e100.net; s=20230601; t=1755593341; x=1756198141;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :references:cc:to:from:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=y94xqTbFgyD/KdFYon9+rTtAVg9OiH1rlaOFwjVj1AU=;
- b=PbwRYcOnkw0zUKumNRzskWL7ZrNE7bKzZUiCk+eY881/SJpYH68CLVjoA5KGSul3yi
- diKdu17uNu/HRYRLd8+YKx/CsllwcNrRYeQjqqt63OQSXBE7sr5ccjwrbYFT77jVD0zM
- YjMRm3pafwWZKlGEupbgEKxE0muNut1L7yX0TKbwbhOxBAOFe5vDUkYaD+yMpQg08XMw
- ifLyQis5CyzbSd9/K68+R8K9nkTj8pC3T2dBJPZ3XnuDsNvWXAvUKompG9HIMoIHiYYB
- BQ6CuGOMPK1zCh/+ZX0Xy6Wrui7j+xNpxYEkoVQXHsQx3Tk30tN0ZOZ81pB6rZvMw8MX
- CPPQ==
-X-Gm-Message-State: AOJu0YxdXXFl1rMPggxHFd9osku//CnYX7V3ySK79cSVmxDPVqtnBG9b
- H6XhKbiKHd6U9Ug6gu3rzWab8BlVPUPPqmISpECIdY1lqQOfJwD/CmUJj6E2oWnE4MLdJMcgDP3
- /UylnUzLe
-X-Gm-Gg: ASbGncsUp/bhFMuI1G28OCPGVOGCWRVjq/I76XJwaVr6xtI6vPShautTd+apv0AVHha
- XIwMzMO+N0yi6SAlZ8uYp3kmocgOaxhe+l5gRZNReb6FCG555ECcRkclbFhbo2bK67JJuw9aLTM
- pw5h1dlZ/8wmzV3fTMLec8bdu98IGbBvpx5oH95djJrH4bz4D8XTJW7mGeb5+3RmC0KR/W6OGGr
- J3/qRkwYdbFmhzcp82NCcBHzU1wTad4xzCMGBbag2QoD5Alug09o5sKAl3d586yImIf2t7cBb0M
- rJVbiiMufPZq/53p5qwcJFSeVDAMK5+JyZHTqIAnAcFSU/wfnJiU6jy8xx38G5jOUmvzev0KSvI
- sy1XWV/8+YH2wYSc4lQsZZKCI
-X-Google-Smtp-Source: AGHT+IEoPxMfcqf3oZknU+DILaBq7TNXpW/2fMrxc2C0x3yvV/3G6r0b9DRfDDpOs+hz1CgN+f3p0w==
-X-Received: by 2002:a05:6402:1d4d:b0:615:4106:9c10 with SMTP id
- 4fb4d7f45d1cf-61a7e7473a5mr1496498a12.17.1755593336355; 
- Tue, 19 Aug 2025 01:48:56 -0700 (PDT)
+ bh=CvEtbrfhqAf9HU9+EoLtaVXOhH3ai2v8VPbLRNv8nzs=;
+ b=RZ+RhbOnF2IwNPoGnjbihxk6VdzDkSuoljBnHKUuPyMz76tuw2+ZqW0Jr/d1zHlPTA
+ CwN22k2Gqzd86KvXfBm4e/GuGEaLz/vWquBvDXTZlq1od6zSlEW3oxwQ4hr1RgJ2tu1t
+ DPPMVn9Cp5zuLvXJPi/WpgID/ZW/j/vR+oC7Jwp9N8az5sQgkOETJVefBXDYVP2Ltaaa
+ XpkzawWGmAXesMX1TEbxgruwIDUDFQReTAcAtzKa7zfS6M+3YufABTKs5zQ/4MVaxrav
+ GbvBjcRuu9D34mPxWQ23C4iBnUCiFjaIbRd86OlkuAea/LYzBFAWV9nN+m/XzjF1jcP8
+ VEMw==
+X-Gm-Message-State: AOJu0Yym5TSxsHQUDhgNjZJBFcS+i4gtp6nBNa09c/ufPmVThLFX9pnB
+ s/+b+o/3UNQs6GCag8Dk8LVQ0pa7O/Nm2exGxwxSRXKen+u5Ss6HRTzXOZoTz6rUnNueyoiX/9s
+ bBmos9vDl
+X-Gm-Gg: ASbGncvf3DOdGozWJCayE/0l/YI4QXfoJEhH/M8X7iecYVyAufWSCW3iS6Q8zJzon75
+ scLTDlkMeczC9xYzIJhObHgjUV/N59utkmqrf4JXKTtfF+gZaGB7Z3FbbhmScfhxntux04qV9vT
+ 0V3PXev0gM89UnABrBM6SUF90oojCCL2qCR+li+HPHxYED0KmdzpRzU8ZnIAW7ceNDmWDQCnT2o
+ 9Bp5trUpGRZvkPv3+qkbsoeWTrcCgS1DmnkC3Oi/8eL+qBrvyRsZ939FRpYScAIbXwFRcb2mlwq
+ aKK6pnnwA3T95WCAWYJx0kSqfK+Nr0fgwUnLnfG5vhAklGL6lpLColMDBSHd/tj31ffXLPZWHQi
+ oPld1WnvGyPQkjiMcXmsxmOy1
+X-Google-Smtp-Source: AGHT+IHsmpS2Vg8few53J0R2t1couT9+WG6D5V7sVi3l/VhCmSaxtC+Rf/OOymI8JLSVhyQ3v5goiQ==
+X-Received: by 2002:a17:907:868b:b0:ade:9b52:4cc0 with SMTP id
+ a640c23a62f3a-afddcb8fb06mr152685266b.26.1755593340994; 
+ Tue, 19 Aug 2025 01:49:00 -0700 (PDT)
 Received: from [10.254.183.223] ([149.199.62.131])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61a75778c5dsm1325203a12.31.2025.08.19.01.48.50
+ 4fb4d7f45d1cf-61a75778c5dsm1325203a12.31.2025.08.19.01.48.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Aug 2025 01:48:55 -0700 (PDT)
-Message-ID: <3dcc839f-2700-4074-a8b7-99c2a1e0d069@monstr.eu>
-Date: Tue, 19 Aug 2025 10:48:47 +0200
+ Tue, 19 Aug 2025 01:49:00 -0700 (PDT)
+Message-ID: <d1912d8c-eb84-43b0-9428-a52d2efa5e1a@monstr.eu>
+Date: Tue, 19 Aug 2025 10:48:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/3] fpga: Remove lattice and ACEX1 support
+Subject: Re: [PATCH v2] CI: Wire mbv32 combinations
 From: Michal Simek <monstr@monstr.eu>
-To: u-boot@lists.denx.de, git@xilinx.com, p.bruenn@beckhoff.com
-Cc: Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+To: u-boot@lists.denx.de, git@xilinx.com
+Cc: Adriano Cordova <adrianox@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
- Pieter Van Trappen <pieter.van.trappen@cern.ch>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>
-References: <cover.1753686468.git.michal.simek@amd.com>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <02e5c14552b05200ece94136db0077cbdd47738c.1753945577.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -134,7 +130,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <cover.1753686468.git.michal.simek@amd.com>
+In-Reply-To: <02e5c14552b05200ece94136db0077cbdd47738c.1753945577.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -155,46 +151,123 @@ X-Virus-Status: Clean
 
 
 
-On 7/28/25 09:07, Michal Simek wrote:
-> Hi,
+On 7/31/25 09:06, Michal Simek wrote:
+> After upgrading to QEMU 10 by commit 1d782a3f229c ("Docker, CI: Update to
+> latest Ubuntu and Dockerfile") let's wire mbv32 which is the part of QEMU
+> to have it under regression.
 > 
-> when fpga drivers were enabled via sandbox some coverity issues came and
-> make no sense to fix them when there is no user of these drivers that's why
-> it is easier just remove them completely.
-> 
-> Another candidate for removal is FPGA_CYCLON2 which is enabled only by
-> mx53cx9020_defconfig.
-> Patrick: Is this board still maintained?
-> 
-> Thanks,
-> Michal
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
 > 
 > Changes in v2:
-> - Get EP2/EP3/EP4 sizes back even they are not used by any code today
+> - Add missing backslash to azure pipeline
 > 
-> Michal Simek (3):
->    fpga: xilinx: Check valid desc structure
->    fpga: Remove ancient ACEX1K support
->    fpga: lattice: Remove unused support
+> gitlab I have tested.
+> azure I didn't test it but did blindly all changes as they are in github
+> one.
 > 
->   configs/sandbox_defconfig |    2 -
->   drivers/fpga/ACEX1K.c     |  245 ---
->   drivers/fpga/Kconfig      |   12 -
->   drivers/fpga/Makefile     |    2 -
->   drivers/fpga/altera.c     |    5 +-
->   drivers/fpga/fpga.c       |   23 -
->   drivers/fpga/ivm_core.c   | 3149 -------------------------------------
->   drivers/fpga/lattice.c    |  379 -----
->   drivers/fpga/xilinx.c     |    3 +
->   include/ACEX1K.h          |   32 -
->   include/fpga.h            |    1 -
->   include/lattice.h         |  298 ----
->   12 files changed, 4 insertions(+), 4147 deletions(-)
->   delete mode 100644 drivers/fpga/ACEX1K.c
->   delete mode 100644 drivers/fpga/ivm_core.c
->   delete mode 100644 drivers/fpga/lattice.c
->   delete mode 100644 include/lattice.h
+> This patch has be applied on the top of this series
+> https://lore.kernel.org/r/cover.1753182218.git.michal.simek@amd.com
 > 
+> ---
+>   .azure-pipelines.yml | 20 ++++++++++++++++++--
+>   .gitlab-ci.yml       | 32 ++++++++++++++++++++++++++++++--
+>   2 files changed, 48 insertions(+), 4 deletions(-)
+> 
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 8209d2b329cb..d4bf43e7a923 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -258,11 +258,11 @@ stages:
+>             ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+>             ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
+>             ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
+> -          if [[ "\${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
+> +          if [[ "\${TEST_PY_BD}" == "qemu-riscv32_spl" ]] || [[ "\${TEST_PY_BD}" == "xilinx_mbv32_smode" ]]; then
+>                 wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>                 export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
+>             fi
+> -          if [[ "\${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+> +          if [[ "\${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]] || [[ "\${TEST_PY_BD}" == "xilinx_mbv64_smode" ]]; then
+>                 wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>                 export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+>             fi
+> @@ -540,6 +540,22 @@ stages:
+>             TEST_PY_BD: "sifive_unleashed"
+>             TEST_PY_ID: "--id spi-nor_qemu"
+>             TEST_PY_TEST_SPEC: "not sleep"
+> +        xilinx_mbv32:
+> +          TEST_PY_BD: "xilinx_mbv32"
+> +          TEST_PY_ID: "--id qemu"
+> +          TEST_PY_TEST_SPEC: "not sleep"
+> +        xilinx_mbv32_smode test.py:
+> +          TEST_PY_BD: "xilinx_mbv32_smode"
+> +          TEST_PY_ID: "--id qemu"
+> +          TEST_PY_TEST_SPEC: "not sleep"
+> +        xilinx_mbv64 test.py:
+> +          TEST_PY_BD: "xilinx_mbv64"
+> +          TEST_PY_ID: "--id qemu"
+> +          TEST_PY_TEST_SPEC: "not sleep"
+> +        xilinx_mbv64_smode test.py:
+> +          TEST_PY_BD: "xilinx_mbv64_smode"
+> +          TEST_PY_ID: "--id qemu"
+> +          TEST_PY_TEST_SPEC: "not sleep"
+>           xilinx_zynq_virt:
+>             TEST_PY_BD: "xilinx_zynq_virt"
+>             TEST_PY_ID: "--id qemu"
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 85401d3e09b1..b83cd1a5b232 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -43,11 +43,11 @@ stages:
+>       - ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+>       - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
+>       - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
+> -    - if [[ "${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
+> +    - if [[ "${TEST_PY_BD}" == "qemu-riscv32_spl" ]] || [[ "${TEST_PY_BD}" == "xilinx_mbv32_smode" ]]; then
+>           wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>           export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
+>         fi
+> -    - if [[ "${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+> +    - if [[ "${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "${TEST_PY_BD}" == "sifive_unleashed" ]] || [[ "${TEST_PY_BD}" == "xilinx_mbv64_smode" ]]; then
+>           wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>           export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+>         fi
+> @@ -550,6 +550,34 @@ vexpress_fvp_bloblist test.py:
+>       - ${DEFAULT_AMD64_TAG}
+>     <<: *buildman_and_testpy_dfn
+>   
+> +xilinx_mbv32 test.py:
+> +  variables:
+> +    TEST_PY_BD: "xilinx_mbv32"
+> +    TEST_PY_TEST_SPEC: "not sleep"
+> +    TEST_PY_ID: "--id qemu"
+> +  <<: *buildman_and_testpy_dfn
+> +
+> +xilinx_mbv32_smode test.py:
+> +  variables:
+> +    TEST_PY_BD: "xilinx_mbv32_smode"
+> +    TEST_PY_TEST_SPEC: "not sleep"
+> +    TEST_PY_ID: "--id qemu"
+> +  <<: *buildman_and_testpy_dfn
+> +
+> +xilinx_mbv64 test.py:
+> +  variables:
+> +    TEST_PY_BD: "xilinx_mbv64"
+> +    TEST_PY_TEST_SPEC: "not sleep"
+> +    TEST_PY_ID: "--id qemu"
+> +  <<: *buildman_and_testpy_dfn
+> +
+> +xilinx_mbv64_smode test.py:
+> +  variables:
+> +    TEST_PY_BD: "xilinx_mbv64_smode"
+> +    TEST_PY_TEST_SPEC: "not sleep"
+> +    TEST_PY_ID: "--id qemu"
+> +  <<: *buildman_and_testpy_dfn
+> +
+>   xilinx_zynq_virt test.py:
+>     variables:
+>       TEST_PY_BD: "xilinx_zynq_virt"
 
 Applied.
 M
