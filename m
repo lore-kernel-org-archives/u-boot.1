@@ -4,101 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB747CA0EEB
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 14:45:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B494CA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 14:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44EC2809A5;
-	Tue, 19 Aug 2025 16:45:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C0419809A5;
+	Tue, 19 Aug 2025 16:51:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eX+LvkP5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wUWa38IH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7A92809A5; Tue, 19 Aug 2025 16:45:53 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 79DAF80FA1; Tue, 19 Aug 2025 16:51:32 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B02D480FA1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 16:45:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70687802C1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 16:51:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B57CF3F5DF
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 14:45:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1755614750;
- bh=cZh+XK9gtvbhJfmeQ4PSy4NxlrTY45calF/p4yO8fJc=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=eX+LvkP5JTMgcEuCHLoslaUxV2AWaKtY9V4hPy+CA5+rHMWSQLY9645Kg+RBXnngU
- b8tO2pKjMz+sJtM605KKO7PdQx/2MiGY00gECdv+dlolnTEt45GRfQuVL2vyaGouT/
- cD29ExadQYjHS6ro2ff5tfkXRsc0OWIol1S5WHrVdhkI0tvZsGMTXDetWJQIGpRu7o
- G1I4XQoTYvTlogqM2gTyzQyTq8fJGbWM4iz+q5qm+zGU2NbGlzbUOED3ZK7NQ+OoG+
- +I4xLrkzWHxtlb9r767CBxRwRKltpqmgNBM2KSWkNonQznRDcjWXZyoSFroibH2nvq
- BUgiUNlmHmIjA==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-45a1b0bd6a9so23451845e9.2
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 07:45:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755614750; x=1756219550;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:user-agent:mime-version:date:message-id:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cZh+XK9gtvbhJfmeQ4PSy4NxlrTY45calF/p4yO8fJc=;
- b=X4qbWb53aoP46dCr7Bz8xt4NmWgZcRfvuKzA9M5PDzb7j7eDPThH1bkKiTsxP0H7NX
- wxLJhXeXHIwzVWHLUXTESQUapLT3j2tESY0IJz76j33X6OlFfVswV3HJvdKUvgOw8Bqz
- 75/JJfdDxXaaIb4ztKc1MVqa93fVdWp2DDC6VOD06usANtbHzU4uBuMnegW5qp1xLCN+
- Zvew4q1nu2x8YAFH2ijAgODzpUXo2fCIOMAp9LyWmmChDgu9F1ZJaeV46P25Das1l3lq
- +D37fquWLUF88O5/aOnSnKUxUuQke5rs8m31YHLWpy8QtaX7KVOX2RLwpG9FGYUL+rel
- Dxpw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW2jplZI7fXmHyYCVHsJnScdyRI3/OYGbnJzqYpWLUfQOXWGmC61Hd9eUhCcwWX0v6OVpw9hd4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSts4RUu7NCW7DAt6zD01DjWJXqq4N9zpAnrsNTnwVhj+btqiN
- Y06iin8IWI+2iSiQF7Bk0HoWyrUR5l4NaPpddotWOzmM+7wapiqMRLm6STv3gaq9aaSk7AuZGM7
- Nw3NO7IQHEHz5iZSTnWt0wLXSlMWZ0XqwLDKDi3NnlAvX2mcIuAUJDiILwEu4QaTE990Ax3I=
-X-Gm-Gg: ASbGncuGRx4g62OBAT08drM17s5YEBZP6+rk8IyhYEBJnS6dMaod6P//b+AFcIGJMEz
- JEWZghXyUznCorLq2cFwJ8p+fZAYfds1vNVyqyfSwPnbDFWcApDvt44qhVoMmCmZ/veWFZ7Q2A/
- COaM8EBA1cWv3zop69J4+n1omb37Id/m33FXPE2kt2FClB1sBL1bWw8RqgXxTAy+g39S+xEcsof
- ZPw2dd95lYskErYxTEy29P4285Jrd9KA49ejmxE2auRr9UPfVx7yRhwM9ShJzuo9eIDMy2GWYdP
- 8KHh35k8ezgCRyxUif5ZhdeaaE2sD4/IL24im0/xvJ0NEk0OPN/ak+QdN6MM6x286z771CNeVqo
- b1UA9Xo3ubkjfs+a1+P4D
-X-Received: by 2002:a05:600c:1d25:b0:456:2698:d4d9 with SMTP id
- 5b1f17b1804b1-45b46c9c8b8mr4517355e9.3.1755614750163; 
- Tue, 19 Aug 2025 07:45:50 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IExWkhwzT471w2ZreI7ztp1QoNgbX8L3b8p7LUuM4PpfXOLJZUlMokoeMFV32+2iCgri+Pg2w==
-X-Received: by 2002:a05:600c:1d25:b0:456:2698:d4d9 with SMTP id
- 5b1f17b1804b1-45b46c9c8b8mr4517065e9.3.1755614749732; 
- Tue, 19 Aug 2025 07:45:49 -0700 (PDT)
-Received: from [192.168.103.116]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b42a8f972sm47624325e9.20.2025.08.19.07.45.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Aug 2025 07:45:48 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
-Message-ID: <b89b50af-e37a-4d7f-b08b-918a1a6839fb@gmx.de>
-Date: Tue, 19 Aug 2025 16:45:47 +0200
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4c5swc20H4z9tJh;
+ Tue, 19 Aug 2025 16:51:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1755615088;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HaFdQcVNI8XL/2WHAuVEjIsbps1wZYUnh6S7mrcn7MI=;
+ b=wUWa38IHENaFAMUQjoCor2YLCT50nbp1789tzZrCjkmLSSOrfDnP7bsXztCxI2o5kmGQTF
+ ghmgQskbN/rCtmI5C9FFdM2Vkss5BA9uE7H1rC5vVojAEqWaPjxqLG+oWsyFtjbaKJybMP
+ traeIKxRFjmj3hmV8mHC6jZRrHcy/oaHP+iTCwt712KEJITbNy91+1z6ULePkJunElsw3R
+ ZVY8zgdg1whMPCefxEi7xtyaH71Sv1tk6STx30p/0yVY8WOuN+V5b6yyOGsyPO3aSUgXAU
+ b6d7O5CikD8vZfZ5GhgVNKKRUZPbCvgx/TEDWK2i6wToSo3+QBqyhN7DZy80yQ==
+Message-ID: <84535d73-7496-4fd3-8ecb-ac6830974d51@mailbox.org>
+Date: Tue, 19 Aug 2025 16:51:25 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi: Select also CMD_DHCP from EFI_HTTP_BOOT
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <fffc4713-4f89-4a04-acc6-8b295e453226@siemens.com>
+Subject: Re: [PATCH] usb: cdns3: Do not access memory after free
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
+ <trini@konsulko.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: u-boot@lists.denx.de
+References: <20250813-usb_cdns3-v1-1-3779912fe660@linaro.org>
+ <b83f79a7-66e9-43b9-859e-ebb69e4d536b@nabladev.com>
+ <0a4f4611-8858-4a38-be70-bf0947d689c1@linaro.org>
 Content-Language: en-US
-In-Reply-To: <fffc4713-4f89-4a04-acc6-8b295e453226@siemens.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <0a4f4611-8858-4a38-be70-bf0947d689c1@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 334e9faedb5d69db3e1
+X-MBO-RS-META: awwh1rs9sz1t6ht5auyqx1pjgb18wjpd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,40 +79,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19.08.25 16:33, Jan Kiszka wrote:
-> From: Jan Kiszka <jan.kiszka@siemens.com>
+On 8/14/25 12:45 PM, Andrew Goodbody wrote:
+> On 14/08/2025 04:21, Marek Vasut wrote:
+>> On 8/13/25 6:30 PM, Andrew Goodbody wrote:
+>>> The call to cdns3_gadget_ep_free_request will free priv_req so do the
+>>> call to list_del_init which accesses the memory pointed to by priv_req
+>>> before the free.
+>>>
+>>> This issue was found by Smatch.
+>>>
+>>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>>> ---
+>>>   drivers/usb/cdns3/gadget.c | 4 ++--
+>>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+>>> index a30c40ef80e..9eaf7e40ab6 100644
+>>> --- a/drivers/usb/cdns3/gadget.c
+>>> +++ b/drivers/usb/cdns3/gadget.c
+>>> @@ -557,10 +557,10 @@ static void cdns3_wa2_remove_old_request(struct 
+>>> cdns3_endpoint *priv_ep)
+>>>           trace_cdns3_wa2(priv_ep, "removes eldest request");
+>>> +        list_del_init(&priv_req->list);
+>>>           kfree(priv_req->request.buf);
+>>>           cdns3_gadget_ep_free_request(&priv_ep->endpoint,
+>>>                            &priv_req->request);
+>>> -        list_del_init(&priv_req->list);
+>>
+>> Shouldn't the kfree() be moved here instead ? 
+>> cdns3_gadget_ep_free_request() also accesses priv_req->request .
 > 
-> This is needed because distro_efi_read_bootflow_net will then need
-> dhcp_run which is not already enabled by CMD_NET.
-> 
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> ---
->   lib/efi_loader/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index c2aa88f59fb..a4055e1cb43 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -564,6 +564,7 @@ config EFI_HTTP_BOOT
->   	bool "EFI HTTP Boot support"
->   	depends on NET || NET_LWIP
->   	select CMD_NET
-> +	select CMD_DHCP
-
-It would be preferable to get rid of all CMD_* symbols here. They are 
-just the result of missing separation of CLI and library.
-
-DHCP is not needed to boot via HTTP. You can manually set up a network 
-interface.
-
-Please, change your patch to use "implies".
-
-Best regards
-
-Heinrich
-
->   	select CMD_DNS
->   	select CMD_WGET
->   	select BLKMAP
-
+> No, I do not think so. The kfree frees priv_req->request.buf not 
+> priv_req->request so must happen before the call to 
+> cdns3_gadget_ep_free_request.
+Thank you for clarifying. Please add this into the commit message, 
+ideally wait for TI to test this and provide RB, then send V2 so this 
+can go in.
