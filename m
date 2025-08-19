@@ -4,66 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 935FFCA0EED
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 10:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFEC0CA0EED
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 10:55:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5A6780FA1;
-	Tue, 19 Aug 2025 12:54:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 50B1F80FA1;
+	Tue, 19 Aug 2025 12:55:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HKQttCPp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UW5r+VFL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62B1182998; Tue, 19 Aug 2025 12:54:25 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2DE4182998; Tue, 19 Aug 2025 12:55:04 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F77D802C1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:54:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADFD4802C1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:55:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4c5mg11TF4z9shq;
- Tue, 19 Aug 2025 12:54:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755600861;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=l1OxigwBtGBan9cEgK9RDUy6D/LPXwLIVu1xmTgQKOY=;
- b=HKQttCPpIaCn0CMUNwu5M4EA0WGa3QcT3XVj8mPFD7VZFauZitIqFBUqncVRrKERBpyNk+
- iAIY2FLtWp9drcfaDA5YnWLHV4ok49ujHsArKYE1sXnszLagt3olsfQuAfXPO5uPUEyT2p
- 8ZUrHZHksavAs9Bfz5A67lmTfFz8GtywUTWw8kQvlQnnjTClTUWyaeX6yrNacQKUatBRii
- NpxrjY4BOR03so/wPhrGSkBMK9KY8a8s7FdA7tR6UbaMxmTgYnF/57C/2dJqFzhI7qKG15
- s4LqsNNNLUSxk6zYCbAiSFslPMSGl7ts81/uAgHUcA1Y3qrfdOjwxzvwEg/hQQ==
-Message-ID: <81059c20-971d-43ce-ac98-421329efe938@mailbox.org>
-Date: Tue, 19 Aug 2025 12:54:18 +0200
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-45a1b00f23eso28555765e9.0
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 03:55:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755600900; x=1756205700; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=a/VTGcSBzdzRzQ17zz05BcxiLnihWf7i4AMyEGw+pCI=;
+ b=UW5r+VFLLDFhklVH62qGH+ELeNMp8/BI8hszlouQPDXj3sUPiQANii1pAoAziQ34vC
+ RwBfYFAKFOvGn8bV5CwosYhtLd9VqlGrRxcTfgrA+L4z41ybbn0RA7GxWTp8BCxXRKQg
+ 8RTicY838u/nvqy+XkbhAqM6srbG8AGCvxqsezIwy2l6s3KZzXq9FmBxO3jPakE8gviO
+ m6Pe/CjRiI/BX5sx74Vk7z6FYDjmyW0EJF3GdKf61BbW9u2xjp+QJMrDPON7EsIR4GOD
+ mlbRv0YJoXRjTTy1I2Bqh8c9M5CrveNeL5qELnhlt49jKxftlnjJondAyhjVNAeZylnx
+ iozQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755600900; x=1756205700;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=a/VTGcSBzdzRzQ17zz05BcxiLnihWf7i4AMyEGw+pCI=;
+ b=K8zRIGZbOL5x7prjtBQoqG4KuLdrDVqfio91uz5emxb9f3RXV+xfVOoJD93gENhd9H
+ 9QRG8LBkuM+NeiU0GSFXZ0yRHtbqev223BLivWrwhxhE7h18/u20zLxl7NrdL7Hd1QN+
+ 8q43Orlx36EvtHEkqkj9BY4dxWVc8FsYnWzzVSpdWczfCLNjfRvTNkuAi7qtxmBNYyyY
+ c9O0hYmhEniu5bJ3xlOPmVdjJHDhqa9bFQHZMtRfHn2Ce9C5Hau/m3mifYWi0Sxq14q/
+ eBkiKpJQCutzHOdpXr8gLOSsY6zBQPk1IWPITIWxaGggqCOFj69baaCzALDIb+FuwQkm
+ /K+Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUY648t8XI91C9I3MBNF703KCdyqbJPYaxfgr8tGMUvdHi7wnWaL0nVmY6qfEfjn5QZGhWWnEo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxjt81QW4O8OAtVlWuVY2rnOxWKipAaoNXIKauaJr4KzhITL79h
+ jOFiAUjgHJkJi7kLK2RttGXSQeT+2X+0254nRIr1+0c6+0uWYHfRRPcyjJZgsAJJBlc=
+X-Gm-Gg: ASbGncsNsHeI3BoA+IOYwcsjVzUwBkoqDRt9LMHEg0dttL28j6+e1HkP/fsXSWen3CY
+ QX9aaBh25vCNnVh0NX5TKEcNoVwlWIH6ZJbljinkQX1gx3/jQpA1ZdLnEnydaZRk+wIcOrYfNdJ
+ FkxTqKUcdi2Epw9vRM2hIWXmvkxLCfRmOKxY5Mw3uQNqNWsdMoOeniYYpqWuwOtOrg5Ord/M8CE
+ ZpsU8BQtvifqjonS6/txXMI/aCOJJQ/Dp90dh3B7Sc7DRHX53TbYCy0xXeZh4xmEUddptvJY8LI
+ 7froQ/vuDrynBhrQJCrwnudj/m7d9mLWlVV/s/3Y92OlcBLI/DXru6Pn1otE40BQxg4MZs45ztH
+ MrgjUSpwbDVRqbscY2F0g7h1YrL1g6xAA77Sp2pMcU8V2FBaZV2FjGBRYvjT1HQ/rcOPCZx+jFM
+ IIDJmbtqu2jA==
+X-Google-Smtp-Source: AGHT+IGu3G4iMNtpeSCd4OVBiKSd8JuKUTVSJRf/xhl/N5Vy07CQm8PPrpEzKlsHaisfrwLXxumfdg==
+X-Received: by 2002:a05:600c:4fc7:b0:43c:ec4c:25b4 with SMTP id
+ 5b1f17b1804b1-45b43dc5099mr22631325e9.10.1755600899992; 
+ Tue, 19 Aug 2025 03:54:59 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:fd2d:e2d:29ec:13cf?
+ ([2a0a:ef40:f9e:3c01:fd2d:e2d:29ec:13cf])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3c074d439adsm3276356f8f.21.2025.08.19.03.54.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Aug 2025 03:54:59 -0700 (PDT)
+Message-ID: <1d78f5dd-d9d8-406e-be21-ea5759a2381a@linaro.org>
+Date: Tue, 19 Aug 2025 11:54:58 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] configs: stm32mp25: Enable OF_UPSTREAM_BUILD_VENDOR
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Cheick Traore <cheick.traore@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250814120938.1358059-1-patrice.chotard@foss.st.com>
- <a10f97cf-72d8-4f82-870f-cb845e5cb72e@mailbox.org>
- <626aac73-10f5-4514-a6ea-0b67a7b2d45b@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <626aac73-10f5-4514-a6ea-0b67a7b2d45b@foss.st.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] net: axi_emac: Fix timeout test
+To: Michal Simek <michal.simek@amd.com>, Anand Moon <linux.amoon@gmail.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250806-net_xilinx_axi-v2-1-6311cf59451d@linaro.org>
+ <CANAwSgRvnJcZ71eNRCf+9G2NJjq8CxzV43h6w-cGEsmHLGGz+A@mail.gmail.com>
+ <b61eb3a3-1c86-4d03-9a80-642ef64f71a6@amd.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <b61eb3a3-1c86-4d03-9a80-642ef64f71a6@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: tcmfwefw5cinw77st1z1wzj3dqat8nh7
-X-MBO-RS-ID: e27c6d14c06c2477d7e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,56 +107,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/14/25 5:23 PM, Patrice CHOTARD wrote:
+On 18/08/2025 14:17, Michal Simek wrote:
 > 
 > 
-> On 8/14/25 15:37, Marek Vasut wrote:
->> On 8/14/25 2:09 PM, Patrice Chotard wrote:
->>> Initially, only one STM32MP25 based board was available, the
->>> stm32mp257f-ev1 board which was set by default in stm32mp25_defconfig.
+> On 8/18/25 13:40, Anand Moon wrote:
+>> Hi Andrew,
+>>
+>> On Mon, 18 Aug 2025 at 14:54, Andrew Goodbody
+>> <andrew.goodbody@linaro.org> wrote:
 >>>
->>> Since commit 79f3e77133bd ("Subtree merge tag 'v6.16-dts' of dts repo [1] into dts/upstream")
->>> we inherited of a second MP25 based board which is the stm32mp257f-dk board.
+>>> The timeout test in axi_dma_init is not correct due to the
+>>> post-decrement used on the timeout variable which will mean timeout is
+>>> not 0 if the timeout occurs. Make the timeout variable an int instead of
+>>> a u32 and then test for timeout being -1.
 >>>
->>> Enable OF_UPSTREAM_BUILD_VENDOR and set OF_UPSTREAM_VENDOR to allow all
->>> STMicroelectronics DT compilation.
->> If I build stm32mp25_defconfig , I can run the result on both EV1 and DK now ?
->>
+>>> This issue was found by Smatch.
+>>>
+>> You can use read_poll_timeout instead of a while loop timeout?
+> he could use it but then this should be split to two reads because two 
+> conditions are checked and not sure if it is worth to do it.
 > 
-> With this patch yes
-> 
->> It seems only the EV1 DT is built into the binary, so why compile all DTs ?
-> 
-> By default yes, only EV1 DT is built. that's why OF_UPSTREAM_BUILD_VENDOR is needed to
-> allow all other st/*.dtb to be built.
-> 
->>
->> $ grep TREE configs/stm32mp25_defconfig
->> CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp257f-ev1"
->>
-> 
-> Currently if you try to build U-Boot for stm32mp257f-dk board using the following commands:
-> 
-> make stm32mp25_defconfig
-> make DEVICE_TREE=st/stm32mp257f-dk
+> Thanks,
+> Michal
 
-Please introduce defconfig for each board instead of this hackage .
+I would rather not expand the scope of this patch beyond fixing the 
+reported issue.
 
-Look at this example on how to use #include in defconfig files, it even 
-supports multiple levels of config structure for deduplication purposes:
-
-$  git grep include configs/imx*dh*
-configs/imx6_dhcom_drc02_defconfig:#include <configs/dh_imx6.config>
-configs/imx6_dhcom_pdk2_defconfig:#include <configs/dh_imx6.config>
-configs/imx6_dhcom_picoitx_defconfig:#include <configs/dh_imx6.config>
-configs/imx8mp_dhcom_drc02_defconfig:#include <configs/imx8mp_dhsom.config>
-configs/imx8mp_dhcom_pdk2_defconfig:#include <configs/imx8mp_dhsom.config>
-configs/imx8mp_dhcom_pdk3_defconfig:#include <configs/imx8mp_dhsom.config>
-configs/imx8mp_dhcom_picoitx_defconfig:#include 
-<configs/imx8mp_dhsom.config>
-configs/imx8mp_dhsom.config:#include <configs/imx_dhsom.config>
-configs/imx_dhsom.config:#include <configs/dhsom.config>
-
--- 
-Best regards,
-Marek Vasut
+Thanks,
+Andrew
