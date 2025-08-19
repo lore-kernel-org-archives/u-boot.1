@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A032DCA0EEB
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 11:10:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE2BCA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 11:13:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E20BA82D88;
-	Tue, 19 Aug 2025 13:10:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7F61180FA1;
+	Tue, 19 Aug 2025 13:13:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fvw8HFRC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CzCkBPhP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B4FA82E05; Tue, 19 Aug 2025 13:10:35 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A61F282BF6; Tue, 19 Aug 2025 13:13:46 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1417D80FA1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 13:10:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4F2D802C1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 13:13:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4c5n1f4VKDz9srM;
- Tue, 19 Aug 2025 13:10:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755601830;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZZ6lItFyUG1+O3SSzAUpIZ/CURVejigGkmKlwmSfqaA=;
- b=fvw8HFRCs9Glzjt8OrxVx0XwpEhAo00y/WURGWsXSAr1mYon31FKhkvXH5W3MWXTzTb1cS
- 0u4YElQPU1Gd94LAXKXk85RUCwySEwrqTKLwK/rhXVftQsN6ZPqmxvGVpa6TSiNS1pEJ+D
- RxXhmvgGmNoqnIPQJWwp5FEAoR/UfbJmUm21mgQCWCn9tervcbKwyOE0d5sQdL3BJC1Ax1
- UIM/VtU7IVWNDE+NUUtxG7wt5ROLnfrMCM9CHgZTWngYIqLB5C+JK0DbuAmnMK2bF+HEhk
- X1fcr84pXx9VDaSTGwtR9vIutJ7U/bNB0y0H2rIogI2/6SLVraopKJRpMgSpUQ==
-Message-ID: <905b7b4b-a216-4bdc-868b-5b38efb61317@mailbox.org>
-Date: Tue, 19 Aug 2025 13:10:23 +0200
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6188b5b1f1cso6095997a12.0
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 04:13:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755602024; x=1756206824; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ydr2WfEtOgMsHZxNJTgMKODrTIF5R1/fFcCX7R0mmsc=;
+ b=CzCkBPhPcvq7G9O2w/tumWoD6JjBQyBZOewr3dsrhqur6TjQWWdIjjKja4D34IFzB1
+ dn6KngMFGqBD+ZEAWFlakBvHEu3ADQT8DdLBjBHKi/N+RwiGCsiEpwQXN8AbAYFu8/uU
+ yYvD1GUwqyHCQDKkrI0/zxPzf0/rc5YG8OC4vwKcmRIirXB2qgT6uM8tPc1ghPu6LF4i
+ PgNRuRpR0Tx+Rd7Dd4fXtNB06d92WVJJa+rG2oyLNsWZZUV80sTuRboNKazBypbsoOL7
+ OgIceivqv92J0RkfMGkdmNy063pUF5Fa2PquENLtvRkNpJOwr3O8TPj94psHW27yIlvF
+ 2EWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755602024; x=1756206824;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ydr2WfEtOgMsHZxNJTgMKODrTIF5R1/fFcCX7R0mmsc=;
+ b=LqRkWbMgDxsWw8pY/vqXDP/U1BqrYfvdod6wbospNakPuEYeJPfh9b+7fSgSZivFKr
+ LMYyDg0so5V2cS5Wj3yL1FXMP7qM4PzV2YrsVn7lsqgnW1bmvRO4sk6MPY5ch3XTQcpp
+ 3ToqfdrgJMWjE2rGaEBnn4LceMnK9OKA/4gya7u0+5tb0f0LqDIrf17OZbd0uRzlml3l
+ AwXdiFY+8mmAIXZpWBYnrcrZksJ0tGsGNSRl8c081w6fQ/YkXn9USHhyIT0FbXRK1ipU
+ 4ErYjVYXSXs16mrid2FwhNH0uiOB+DrgTMB2Na57p26Xj3VcesoqR4FehycUUwgWAimv
+ RP4Q==
+X-Gm-Message-State: AOJu0YyX0mOhdVT88/x3qTfjo0JGEPA+ZhB7haQFf1pkmsCHLKiNEqzG
+ B7T1sYj/m2ndzDoIbpQ0AEn+LrY/fQXpsGd9Ce3Fc04QfjtRZLwPCRiN9kq0go0KrhaeJ/FB9iR
+ jNDrgsJKWgGOgsVjQqmmKozLyZyUwAXU=
+X-Gm-Gg: ASbGncsk/s+HqxcVyb1XY7vurcUVl/7QPmNEmaDKtykmIq22KLyuEjkVCN5eYrfpl74
+ VuzF1MHtHIqS5YCHWCvhxKnexL/gu/tBEqM/sGUhEQH1U3F9pzZsZPEa/cDMbTecF/9KzjqzprV
+ s2byrQzANdn0SFZQyXlEbVd4g1DGXrQ0cHx4DNzoI4x2QJuTrwN8ikPfQYlfr6wjxwhJ7HatbBZ
+ ml0kfU=
+X-Google-Smtp-Source: AGHT+IHvLySV+Qv8dROb8RCi+M6P6MoGODehV2vMQK2E/sUtw3IOcSffIcKJMSRFehnaC7Fz3ZfK9G/YFbxvJqagU5A=
+X-Received: by 2002:a05:6402:26cc:b0:618:9908:d2c2 with SMTP id
+ 4fb4d7f45d1cf-61a7e74099dmr1678637a12.26.1755602023896; Tue, 19 Aug 2025
+ 04:13:43 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 0/5] stm32mp2: Add SPI flashes support
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Alexander Dahl <ada@thorsis.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Cheick Traore <cheick.traore@foss.st.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- John Watts <contact@jookia.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-References: <20250808151154.472860-1-patrice.chotard@foss.st.com>
- <827b1b5e-ac74-4710-8424-5bf0390441f6@mailbox.org>
- <9c805dc1-fc95-4d01-99cf-306264fd4b2b@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <9c805dc1-fc95-4d01-99cf-306264fd4b2b@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 8t9wduq6jbmaqa9695chgspthzqampuu
-X-MBO-RS-ID: 129ef360455819f3eec
+References: <20250818165119.3193853-1-trini@konsulko.com>
+In-Reply-To: <20250818165119.3193853-1-trini@konsulko.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 19 Aug 2025 12:13:31 +0100
+X-Gm-Features: Ac12FXxutlAB7sliBYsW7ZPNXxE3G9v2S5dDoRwRJHU-aOwQiDdLBzkWyAkB0hw
+Message-ID: <CALeDE9PqJBA9gS+YaNjM605fH011wL1SyT8Odk_k2Lm_V9EHLQ@mail.gmail.com>
+Subject: Re: [PATCH] boot: Add LEGACY_IMAGE_FORMAT to DISTRO_DEFAULTS
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sascha Silbe <sascha-pgp@silbe.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,33 +90,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/13/25 10:53 AM, Patrice CHOTARD wrote:
-> 
-> 
-> On 8/8/25 17:24, Marek Vasut wrote:
->> On 8/8/25 5:11 PM, Patrice Chotard wrote:
->>> This series introduces 2 new drivers:
->>>     _ STM32 Octo Memory Manager driver
->>>     _ STM32 OSPI driver
->>>
->>> It adds resource check helpers which are used by OMM driver.
->>> It adds and enables OMM and OSPI driver support for stm32mp257f-ev1 board
->> Can I test this with mainline TFA and mainline OpTee-OS ?
-> 
-> Hi Marek
-> 
-> Currently, it misses regulator support in OPTEE.
-> But you can enable "manually" VDDIO3 and VDDIO4 in U-Boot console
-Actually, I need to enable VDDIO3/4 even earlier, otherwise I get no 
-UART and no I2C, so that's not a problem. VDDIO3/4 handling seems to be 
-broken in the ST downstream TFA with almost 1000 patches on top of old 
-version of TFA, and upstream TFA for STM32MP25xx is entirely bare bones 
-that it barely works.
+On Mon, 18 Aug 2025 at 17:51, Tom Rini <trini@konsulko.com> wrote:
+>
+> At this time there are still major Linux distributions which by default
+> boot using LEGACY_IMAGE_FORMAT type scripts. Add this option to
+> DISTRO_DEFAULTS to ensure these platforms can still boot.
 
-I also didn't manage to start upstream U-Boot on STM32MP25xx at all yet, 
-I still have to upport about 400 patches (reduced from some 800 from ST 
-downstream old U-Boot fork), and the result won't work unless I use the 
-obsolete ST downstream OpTee-OS 4.0 fork with almost 1700 patches on top.
+What is the legacy image format exactly? Does select make it non
+optional, can we use imply or similar here?
 
-Maybe the upstream OpTee-OS is missing something, like the entire SCMI 
-implementation ?
+> Fixes: d780965927d4 ("Drop the special am335x_boneblack_vboot target")
+> Reported-by: Sascha Silbe <sascha-pgp@silbe.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  boot/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 2ff6f0037384..a6fc46ff4f5f 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -1163,6 +1163,7 @@ config DISTRO_DEFAULTS
+>         select CMD_SYSBOOT
+>         select HUSH_PARSER
+>         select SYS_LONGHELP
+> +       select LEGACY_IMAGE_FORMAT
+>         help
+>           Note: These scripts have been replaced by Standard Boot. Do not use
+>           them on new boards. See 'Migrating from distro_boot' at
+> --
+> 2.43.0
+>
