@@ -4,169 +4,176 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 010ADCA0EED
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 07:41:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BA83CA0EE6
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 07:42:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F9A981FEE;
-	Tue, 19 Aug 2025 09:41:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id CAF0A81FEE;
+	Tue, 19 Aug 2025 09:42:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="clWLBGP6";
+	dkim=pass (2048-bit key; unprotected) header.d=kontron.de header.i=@kontron.de header.b="HikKLxTy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D25C82A53; Tue, 19 Aug 2025 09:41:39 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 1B71E81FEE; Tue, 19 Aug 2025 09:42:05 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0560280FA1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 09:41:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 43A5F80FA1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 09:42:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=none (p=none dis=none) header.from=kontron.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iEwfSgmilmtFnQBetOOFvVMLJYseXQ/2R0tl8HdTxx6tuQDqCkSm099lp7b7r8iF5RzwIoyGsV3sGkLEUEE02iG5PZeb8SZJ7ML5LFZEOFcrGiHJT3IBdYt3AQ8a4ZuHCmtAzSeK//VCey+XHJZHKk5JWpxTykjp8Qji6sm33YcZ2tC7cqF/J1Xs3DfR3qoOO9pcjnFFzJCLisdObWT7E5nqP0Oq67E9sMtDgznGRiyyJEqyvvX51hlvZIWtHw/2pilDzQI72Ks3fn1sOWKQ203lpEeRvkPnOSunvW3g/Aay2utArn6bwyy762l3q2hcXAhMbdNn+TYdG+VWACZqkg==
+ b=E1mikxaVVkb305jrweZ3VaevlIDpLJAxfipukQrl2KdVIV5buTiXSFqfG4ofUlrq0APRWrxyu1n6LvpE0d4id+cuYaB6R8lKfZetW6f7rH5Z8ylKqqjFJvlXH30guFyRFqSiLTjSVHPytNJ7w4FQHLZZDX9sc6CIZ0gE6VuikXSa/emea0Py8EIAP7l7v7JropY64dO1Mi98FLJF+Njm96oAE7C9CfljgxcS7XhqABrNLN79Dvh3CYZsJcDABlHGGGxnZoD4YX9C3SGNC7IH3J+EPo44tfpttF9pGzCvOWkB+y+WS6cwZ04OQDtj9xOZyttUuKsreWi6IMFX6+oWZg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q10TRaQ74Pd1rnD9tr8HzpQEIXCa/bSk7GQlcBvPe1E=;
- b=mQoy25lxQKFpNx2RP70H3gsmp8IUL+nqw/dzYa4y25p4NmwBGJwpo57azYO01rUhR4JKmYpPcQ2NKQqqHyBEYCAipiXvBQ8WL76Z2N4OM01AX89SjyAcRXwNJAA7GcchUaIW7JPPqOGju1C8Yxngc40su4mzHeglzssALT22l7cyLMmeZmJV2YvECR2O9HrPGrnJUgf/816EkQvzR0qEsy/im1vOty4PzSMcwcB8//iHuYM/gjtazZIkWB45Ig7TtciHWnglfNyZAZrf1rr9W/OicJtCjc2Rkdw6xn1YXIXSvhcw73hZxDsKdauxyXyK/oxdxz67SxCzh5cs1ebwFQ==
+ bh=ifSGOHrYQd/AQJ8SCFSIT6/eiyhuwYTuVUFrpQUALhI=;
+ b=GIlu2bRAvm1L5Gs1hYmp5MAL2YnewyNzVwEskyqhrUFKF53S11a21+9vR+35coGqd6vt2yonwGP9fM/p1BwaXyAzZwhcQTocND+bm2S3db1zKa/bqSpZjF+C7dUcwmTljJm/TfUZUFFPY7vjMSoUyWOfgL9RRO92ggmp4XdmUsw04Bygh93bnSeusxsYrevoH5+nhajodagWdX/btO0DTic2OQPCFp7IExsLgMNHjDM08vRC9PK1Dxq8qUyW0WkDWu1cxZ0sawQD2dq+R2tsj6TDKC6ywLnnjUU0LqgnisNVngABf/IOOYjyGTWVzz6UlSLE4vVUW4jlfukdBltlow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q10TRaQ74Pd1rnD9tr8HzpQEIXCa/bSk7GQlcBvPe1E=;
- b=clWLBGP6X2y2HJexPBkJPGRQHP1SgmsO7IqcNEoq+OP4FmSGB+wyjt7u1TUbPeN5rX7YUL73Iikgj75rpH/weB0QSJDyjmYWjmZHGt3WyYmhaCmMPFuWOV6Evcs+cFK9yBRnDO+loFiWTWzolo1Ce/XzKcmKCoWtIY5Hj2IOYFE=
+ bh=ifSGOHrYQd/AQJ8SCFSIT6/eiyhuwYTuVUFrpQUALhI=;
+ b=HikKLxTy++aBTnoBW1C0kzkow2GnrehajowIJUsRKsaQC5To6RZyfloyFdZAMeXsvKI1Sefsim7n4kJRDQWJfMi/Lqzgr63nGHBrGvhVmUj58X0vQlA93pdpL+8BsXKISC7fZ0QMu2rUexaCEEjKYI93FNpK3L3o182iMfT+RBHb92ZohRzitClYOi3eMpVipGiKJRA53Cu5xnhGleXOauJj4Za81T5m9AFA7BqPVV99rTLg9shycJWO4CDNy2JNeNDRC3fbUIxFoWpr8sBMaIGcseuK4LABfu7PQ6bKSaqG35P6S46RSrljipJ7i74O9yy2URpGarSpo5i/Xzpymw==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PA1PR04MB11432.eurprd04.prod.outlook.com (2603:10a6:102:4f7::19)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
+ by DU0PR10MB9263.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:5c9::23)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.12; Tue, 19 Aug
- 2025 07:41:35 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.9052.011; Tue, 19 Aug 2025
- 07:41:35 +0000
-Message-ID: <2ad54e51-96cb-4f42-85f3-6a9d606951dd@cherry.de>
-Date: Tue, 19 Aug 2025 09:41:33 +0200
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Tue, 19 Aug
+ 2025 07:42:01 +0000
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b854:7611:1533:2a19]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b854:7611:1533:2a19%4]) with mapi id 15.20.9031.018; Tue, 19 Aug 2025
+ 07:42:01 +0000
+Message-ID: <dd503e25-a0d7-4c4a-81d1-45a28e65e730@kontron.de>
+Date: Tue, 19 Aug 2025 09:41:59 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] clk: introduce of_clk_detect_critical helper
-To: Maxim Kochetkov <fido_max@inbox.ru>,
- Christian Marangi <ansuelsmth@gmail.com>
-Cc: u-boot@lists.denx.de, jonas@kwiboo.se, marex@denx.de,
- semen.protsenko@linaro.org, miquel.raynal@bootlin.com,
- patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com, sjg@chromium.org,
- trini@konsulko.com, seanga2@gmail.com, lukma@denx.de
-References: <20250812162946.892728-1-fido_max@inbox.ru>
- <689b6eb9.050a0220.d7261.4aab@mx.google.com>
- <9294dcae-42fa-45c2-962b-691fdaada13a@inbox.ru>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <9294dcae-42fa-45c2-962b-691fdaada13a@inbox.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0283.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e6::12) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+Subject: Re: [PATCH v6 18/21] mtd: spinand: Enhance the logic when picking a
+ variant
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Cheng Ming Lin <chengminglin@mxic.com.tw>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Chuanhong Guo <gch981213@gmail.com>, Christian Marangi
+ <ansuelsmth@gmail.com>, Boris Brezillon <boris.brezillon@collabora.com>,
+ Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
+References: <20250813234314.3945708-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250818100614.432931-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250818100614.432931-19-mikhail.kshevetskiy@iopsys.eu>
+ <46de0ac5-1777-4f05-a951-ea3cc80bfe26@kontron.de>
+ <00e93439-e47a-4ca3-b309-1400b54d8bfa@iopsys.eu>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <00e93439-e47a-4ca3-b309-1400b54d8bfa@iopsys.eu>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0360.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f4::13) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:102:263::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA1PR04MB11432:EE_
-X-MS-Office365-Filtering-Correlation-Id: 11871e57-1337-4046-08e3-08dddef3d2b0
+X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|DU0PR10MB9263:EE_
+X-MS-Office365-Filtering-Correlation-Id: b86dd162-9c29-46f9-ff0f-08dddef3e23b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|10070799003|7416014|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eFlvc3Z6N3UxZW0rUzNLdnV0SUVkVGFTaW9uTUVCeUdLWUI5YnUvTVB2d0sv?=
- =?utf-8?B?aFRRRTROQ0tqUzhLWFNnNGtleE1Tcjc2STh0ZzVCNUFBUlkwTndWd3RIMlIr?=
- =?utf-8?B?ZXNMU3NaS3MySVhiSDVuUDN5dDN2azBzMHd4ZkpBUEJQcFlCaTVzUzBDU3Z2?=
- =?utf-8?B?WjlYc0l5VnllTGQvdVk0aFRNQnVOcks3bW1XL2Uxd3dXUnIwVG9ockNqZjc0?=
- =?utf-8?B?RGRmekRZcXhTRUVDbU5TU3dBUm1zREx5RVVvNStHNkxyVU80UlFWNFhqVmNZ?=
- =?utf-8?B?WTJGSkhaSUhURjYyZy9NZE00K0tjUDRTQXVoN3ZFdmwyV1k4N016TE41TkRN?=
- =?utf-8?B?eG1UZGxzS3ZpR0ZmaE51UTVjNFpjc1BSQThIOFg3Wk5RQlhERklIL2lXNjlr?=
- =?utf-8?B?YUhaZTBnM0hURjh4dVBwY1Y5dmxrK2VhaUZ3QUxPY0xPNjk1ZzJ5UGt1TzFF?=
- =?utf-8?B?NFlrY09xanZRa2lPVHlzcTVnMytGS0RlVkZKSDZ0NlcxOEdvRmJTWC8zZkk5?=
- =?utf-8?B?dmQ4KzZ4MGxnQTJRdm5pS2lJeVZoN2RJeXE3ZGcvNVU4NGFqdERZVk1JMGl4?=
- =?utf-8?B?TGNmTFIzZkVPQU90UzdQVTJYb0p5Wk1BYjhZYjBrRDJ3L3BkLzZDNWwySmk4?=
- =?utf-8?B?bTZ2S1Q1N3M3dHgzaWxkeHVJemZtZHVGVWxIOUNQT2xFSlZSZmNTdWlaVEwy?=
- =?utf-8?B?THlMOGxNUEc2aHlLc1JNWTVTQW5YS3FMbytlKzRpdlJaemRmNHRDZy9Ud2ZN?=
- =?utf-8?B?K01laXlJeVQzUFRZUnB2dEZsMjcwRWNKb1ZyV2JJcWpDVU90RG9CZ1VaZmZ2?=
- =?utf-8?B?Q1R6TGlHUEFmd3B3b1c5QXlBVHhkWnVNWS90ckNUa3hIMFBLVHlKYmRPTlJi?=
- =?utf-8?B?MC9ZdTNtMFc4UmVFTGRqQlhTNmFhK1VDYk1ENXlXK3NCeVpHS3UrSHJMUW05?=
- =?utf-8?B?TjdpV2xOOXFHZFc3TnpoZEZ5ZnhkTDIxMzkydHIwaDYzSnRWTHh2YjZjRGRC?=
- =?utf-8?B?QXkyM0R6UnFIQU5Nc0t6U2hJdmZBSHgrWnVxdk41K2NEaVgxQnQraFJCMEJL?=
- =?utf-8?B?MWFobVhUWklGdEhqNkUyVk9Bbm5CVU9oaWZlVHM3VEVoSENPY3ByNlRYOEx6?=
- =?utf-8?B?NERpbStTV3daYnZ2Wi9sY0xCSTJXNWhNQXAvckE4cWdJSjZsY2dGbERBUkJ6?=
- =?utf-8?B?K1hOanlTekZvVFpJYlRTYnBMdGNRSnkyTTlLSCtCTi9EMDQ5YkExaW5lM0Js?=
- =?utf-8?B?ZEx5dWw0QmZrNVh6djJuOEdSdFB0aERNWEVoQ3JlbVYyYmJhUnBjS1hWQkdj?=
- =?utf-8?B?TSt4RCtoMndvWElxbms4T1d3UWpjS3VmbG44TDhkWFBJWDExQnM2ZUdzOE5L?=
- =?utf-8?B?c3VLRTZYN3k3YkRSMDBJR2w1ZERFVjIzTy8wYTJTeno4ejZhMGJZU1RxaVBI?=
- =?utf-8?B?bjFMRmpoSW9DOFFqbE9uUlBKUWI4RDA5NU9kbzFrMjdhVEpPL29qaXVJWGNC?=
- =?utf-8?B?Tk9VTXg1VkprRFRIbjVzQ1BOK3llQVVMN1hxamRmMjZ6ajJ0aHpvcTdLRlli?=
- =?utf-8?B?YWQyb0QySExEYUk1WWszaDFHcXpSTzAyeDkxS1Q1NEp2bE9keXMvU0xnNks1?=
- =?utf-8?B?dVJUSElRZm1QRUV4Q3pSeWEwdTB4MUQ0MExOUEFmVmc5QmthSktiQkxOUmpr?=
- =?utf-8?B?ZVp2TklWSU1FUmppR2tmTE5QT0Y4UFhRR2twN01QQzZkMmdnSnZCQm84VDNH?=
- =?utf-8?B?SU02UnhvRjNUaEQxVk93OC9NRW01MDd3dWRPRGg3YThZYUtTN29GMUY0ZkI2?=
- =?utf-8?B?aHJPaFN5RzBiaEUrUHRnN3o5OXc5RFlEWmE4NW9HdUF1L1pPZUloT1d1akZx?=
- =?utf-8?B?bnRZcEFKeHcyRHB1ck9nQ2Z4MjVyMGhOSkt5eWc0WHVzelpSM3hMVDloNUg3?=
- =?utf-8?Q?ckfc+3upLzA=3D?=
+ ARA:13230040|366016|1800799024|7416014|376014|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NStaMjFnQ2xocmFaclJMUzQ5Q2NFL2kzOG9HWStsT0xMdGE4dFFycmdWYWR5?=
+ =?utf-8?B?dm1naDJwTmZiN2MrWVRWN2hhR24zbGRtWHlhdUpweFliTmZLRUNMUWJpd2gv?=
+ =?utf-8?B?K2ZNZkg1cWtZWEh1WStuT2JyVUYvb2psMTVDcFlyNlBUVWppZTZMQkJEOEY5?=
+ =?utf-8?B?ZGV2dXAvN1FFYWp6N005YzY1ZjhuaHIzMlBPMWxzRTFMTm12NDFjVW1tRkpz?=
+ =?utf-8?B?S3djTktaSmRQSWpoVCtwRkUxNFZBRDBLVXRJb3F3OVRRWGlqNTJsMzBlUm5k?=
+ =?utf-8?B?MndFNW1yS0s5b0pBdlZwU3E0ZGlhTFRmRW1mQW9sNW1ZUlJOR09xalNrZ2Er?=
+ =?utf-8?B?Uy81R2hkYkhPSDJ3L3ZXcm9wd3p0Z3ZiUnVkbzZRSWRHUmxPYUpxdHY1VFJH?=
+ =?utf-8?B?VmIwWktwMnRRQkhlWjBnR3M3Zi9lMDcvWVR3Zm5TVmhYZmVkd1o3RDVNQzdr?=
+ =?utf-8?B?c1Z1TGNZZHpRdVp0bU9TemxUSlU0STNuMnRSNnpsQUx3L2JMMUc5R0NkK290?=
+ =?utf-8?B?WGl2djh6aUJwUTZZcnRRbVZuTGQ2WlIzYmVNbEVCT1MrdTd3ZjZPV2J0VnR5?=
+ =?utf-8?B?c2dBNVRYM2VsZThCY05FQWlDeVh5NStodVcwaTJIMFJVYThWNzRvU0E0RzVH?=
+ =?utf-8?B?RTA2SjhFT2R6Q2x4ajlIc0psbHkzRmRhVktKNHJtR2pKdDc2K2U1enRjSlJk?=
+ =?utf-8?B?bFllZnEyUVlaM0dTamdkYjc1OFV5MUJpYStoVmZLU0phOFVzcGszbENkTXA2?=
+ =?utf-8?B?V3FwZHVaMEVFRnJkeVlIRndkYkd3YVZSZXZ0dVBKSkV0TzhPYnBBOW9GKzRB?=
+ =?utf-8?B?VGNzY0txSmlUOFlueE1jT2hsWUU3ZFhHVDB1ZGxOZ2xGc29ROUhNemgvNzN4?=
+ =?utf-8?B?Nm5Fb1FaaEwzMlFOK2l4bmhQcDlGVEFMaklmT1c3WjdwQlNJUmRodGd6b0FB?=
+ =?utf-8?B?SXViOXRJNEkwQ2VPZmV3UTVkMU1xN3FvR2dKKzVMTGYrVFFXeUEyUFlmOEhQ?=
+ =?utf-8?B?aUszcCsyWUZ2OUEwbmZ4TjlZNzBxcXdzWkVLcTU0TjdLeHl0cjkxQXYwaFpu?=
+ =?utf-8?B?R3prUEFoeG9wQjZNQk5SRWNLOC9aNzBtZ1NTS3FySFFRMk95VFZLTU5HKzFH?=
+ =?utf-8?B?TmdPV3g3RGtYM0tlczNGOXE3dG9HTVpiWU00bWlqYlFVa2ZZS0hoT1hNTnha?=
+ =?utf-8?B?MzhaYStmdzdVVGRGRm9abW9UQXpyc2pUeXJEUm54dy85aXBUcjR0UGZlbDBh?=
+ =?utf-8?B?VEZ5SFcxalpYdnNaVEgrSVU0MEU3dVFueUt4VEpIV2VxVndxeXFlTC9Gb010?=
+ =?utf-8?B?T1B4NFBiOE5adU9lWFp1OVJieEh5YjlFME1DRXRxTG9QNElQdTBiLy9sWllM?=
+ =?utf-8?B?SWhzelhscDdGdkxkQnhIVFdielhzZmliMFlUclZ0b1ptamNwK1lwMTZxUnVx?=
+ =?utf-8?B?ODh4b3NLNi9jMkhOc3BKKzN6QVdyUTdBMi9LNW1iaGVwZkNTWVlOc2FhcXlo?=
+ =?utf-8?B?eHpxU2RDMFZmSDRnOFZGNVFSL2FoWCthM09VS09adDdwUHVjd1UvanE5R01S?=
+ =?utf-8?B?RytITXpkcFRRb0c4Ynp5aWs4RUc2REMwTlZzSUJtYUxZNlpvQVZzRk8wdlA2?=
+ =?utf-8?B?cjYzS1RPN05YNDN1OFFBSFFRVWJrL1hOVVp2eHlMTEVhdm8vQTJlR2tVazVG?=
+ =?utf-8?B?dGdmWlMyN2RVb21KR2VnNGNCd2lycVJucUpQUzFDTXJhLzBYK0FySnh4d2lL?=
+ =?utf-8?B?ZnRZZExXVXVBd1ZmSUtINWJqRjhkYzNVZEdwNVhoSndtQjY5ZmE2dTdIY0Vz?=
+ =?utf-8?B?c0dQS25nMlRxbHFDYkJSMUNDVE9XaGFzRFhVaU14K2RDT1lEYTBPN2NNelIx?=
+ =?utf-8?B?NVVZK0dVSG5KVXlpS25BSE9IeXdlL1dKbHRQTzA3bG14Z3oyRWVYNm1OQWVO?=
+ =?utf-8?B?OHhYWUZOQ2xCMzFORVlzdUJQUnYyeURCdGs1N1dPSVA4NjUwdGZJc3hvNGl3?=
+ =?utf-8?B?ci9qMElwT1VBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(10070799003)(7416014)(376014)(7053199007);
- DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(7416014)(376014)(921020); DIR:OUT; SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SFlSck1sUS9TMnZ0OHZBUStUTjhLY1lXRXFvTXJJN0QrV3d3VUh4VW9wcWFR?=
- =?utf-8?B?Qk85RkYzb0tnMTRSclVVTkdDcG9wdFAxd2o2VE5rTEIxNVl3OHl0S3MrOUFP?=
- =?utf-8?B?V2lTVnhUZkp6dzdVT2liTTBVV0F1N3QraCtQRzJVTWJFTFovVW5tYUs3SHk3?=
- =?utf-8?B?MkRwUzJBaVhlQ1NVWnVaYW56QTloaWZ2Y3UzZmNpemtKTUJ2d3VTOGhlcGsw?=
- =?utf-8?B?ODFsTytMN2dPZ3ZqQUN1OWtDQlVUcjYxRDhydGhadHJ6cG9LVFl1YXIzekRp?=
- =?utf-8?B?OWVOdkhFVldPN3k2OVkwcTR5YTVWQVU1cmMvRnFIeGdVWkdiUTU0MGhENlhW?=
- =?utf-8?B?Zi8xZjJHSTdWcUJaTjhCam1XMGN2S1BNWnNWc3A0UDBLVXVXSHNHZWk2OVVl?=
- =?utf-8?B?WWZmWWppWlRiZVczdzkxN2dnUlRnZmIyM0lYWnlsTnJxNU40Q0ZyaHNBMVlU?=
- =?utf-8?B?amowdVJPR0RJeW5yZU8yS1RvaWNILzliSHFyYXEyTCtaejNESGtYQktaRkR2?=
- =?utf-8?B?VFF6dmhvN3lKd2F3cW5saDZjVzdvYkQrZ25nVXR5Tm5adUNHSkF4aHkwMENY?=
- =?utf-8?B?Y1FObXpZaFE2N1d4QThvcHZJRS96SGRxWU82NGpKcHJkaXVFMUhaaFUzRG9z?=
- =?utf-8?B?ZXVVN2g4SlRJUE9ZdUR1SVNyY3BxVTZTWjJFNFVORm5Odnk0emNPUlM4eXFm?=
- =?utf-8?B?Q2I3K3JWWVdDN2xEcHNISjI1LzZMdnZwNmx4cVJnZ2lGQ05ucmdGd3laU2Ns?=
- =?utf-8?B?Q3YvOFVhQjlDeVM1djhiYmFXWHE5SHdEd3JtdXo2czBobnRiai9tU1JuaDJZ?=
- =?utf-8?B?RitJMjloSVNaTmV0bnRxc3FlRzROUmZJSTZ6Y1BqeEhsbWw1QUdId3l4SFFu?=
- =?utf-8?B?MStiZUxmcXAva01aZU1mWmxpNGcvUVJra1BJN2loU3hBY2ZodE94WDhYeTRh?=
- =?utf-8?B?MVdBUE90NkwyamNJaHpLWmRGdlU3ZDRSMFc1NWxUR01MaXNIREFITHhJTXJ5?=
- =?utf-8?B?VEMzWHlPU2EvNC96NFFLQ0ozaWFDRWdtdXNpQTNTcGg1VmQ0c1IyU1VDdnh3?=
- =?utf-8?B?MWlNQ1JObEZqaTVyYnE5QzRIc3A0Ym9HNktNYkxHdStvZ2Z6d2NNVkk5bndr?=
- =?utf-8?B?eUszYWZKL1k4NTFLWW9NL1B1N1JsVjhmeVBkZ1dmcmlaRHZ5TWJ0bVNuQks2?=
- =?utf-8?B?RkVBL1R6UVlwYS9qZTdxNU9QUndqb2xvSkNoOFNHTjdsQjRLT2tYbDZqa0lR?=
- =?utf-8?B?Skxua3dKTlNTQ1J2eFhIWUV6WUJYZUZXQ1NFaUcxaGo2VXpibVR3djFMOUo5?=
- =?utf-8?B?NjhtdWxWaENKMEUxeHZWSTdKRXhrVWZrWmxIcWZnSGlUSjFtVUNlQU9nRkdL?=
- =?utf-8?B?MDFNdisrSm1VenFFWHMzekZuY0g3cDJ5eCtoWVJlc2JOL1cvSmNtWGhFbFNt?=
- =?utf-8?B?Ky9IM2VDcG52SHNUbElWcG0rUFhuVTd6N3MwekRwb2gwaTJrLzhkdGN0UXJu?=
- =?utf-8?B?citRVTZNbTBrald3MGxrZm1pT0VJdXF1Lzc2YkttbStLZXZzSWJ5cldlSXJR?=
- =?utf-8?B?VnplOEF6WHFzVGNaTnJXdURnUFV4OWhTVVQ3NHUwdk1pOUdjRVZYeHBlRVc5?=
- =?utf-8?B?ZHFnZTlxNElWVDdYRkhmckJIOHY5Y0NwVVVTWldXczViQmtnY2FKRkpabkhn?=
- =?utf-8?B?VFgrU2xQVnhoQUFBMWlFYzhlblIrQm5LNDE2M2NBY1J2YVIxaklsMUdtM1pi?=
- =?utf-8?B?cHVlQzN2OGNtd1ljckIxaS9zRTVSMUdGN0swS01ST1c0Q2VOMXlORnZFUWtY?=
- =?utf-8?B?czdmV3R6SkFQUWJXMlhpNkwxemFFbExjckp0bXB0bDAzeVhoMk13Mm0xMnE5?=
- =?utf-8?B?bm00M0hIbDVES09CRmVWYS9pNnVXYlZkSTdUV3hHL2xzU2lXakZpSUdXUWk1?=
- =?utf-8?B?RUx6M3Q3WGloT0orZXdSQThaSnFEcFQrWk9zaExITVNPcGNaT0tkZ1kwVWxs?=
- =?utf-8?B?ZXlpQ1p1eHVHb1RyWXV6Q2w2WWpFaFpkZkJQT3kwMG5LQnBYTDVoemhMcTBi?=
- =?utf-8?B?dEQvVHd6cGxCZFc0elRLRUNhbzZPcnF4UnM2ekRka0Q5UjhoWHNXOVFsVkJF?=
- =?utf-8?B?UFZtTUQyT1o5eXlzSUpQN1dFdlNnT1hyOUZZMjV1aVhxdUNFQmVxVFhjNDcr?=
- =?utf-8?B?K3NzZTJSSmsxWE03YkE4TUNsZitDZVZ4dEo0bDkreStpbzhoQkVzZFNPV0hS?=
- =?utf-8?B?NTVpQXB4NGJXeXZqUG5xU0M1MytBPT0=?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11871e57-1337-4046-08e3-08dddef3d2b0
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OGhYZW45RXlzOUdHMmdQWkg1MmxKS2tmak5OMWFJS0EzMW9TNjBOVTQ5Z2xQ?=
+ =?utf-8?B?bmlndzU5NHRlenhkZzVxWmRNVzB3VjgrQU5zQlBySHJMYjhoVHlIQy9wYTZL?=
+ =?utf-8?B?dkhYRXJ6OXNNYVZ5K1U4MGxhd1V2bWRySFJwZlJMMkMwcWZOQzBPb2d0NmJw?=
+ =?utf-8?B?aVFzcnpOMDZGcXhWcWdwWFBkS25NemxjeTJZUWJYR1o4dUNodWpIMVljOTY4?=
+ =?utf-8?B?eGwrbmJWckRVN0J6VlhEVW82bnRBeURPVUM5VFNCU1owajBnYnBuUGJ2TmRL?=
+ =?utf-8?B?aHRobXBEQmpzV0gvTlMzQnY2MmpmUmprUmRvbnN1Y1FjWkN4eGpQdmhaaVc3?=
+ =?utf-8?B?c2RyeGZzNmMwTkN1cE0zdG4wazBrRTBzWk9uYndXTTVBcmtUdHNzSC9HM3Ux?=
+ =?utf-8?B?UnVoZ3dLcFNNSUtSV2Z3aktrdHN6aERvN3VDOTRMajE0ZmlFTVh1NjZsUGNo?=
+ =?utf-8?B?R2lyMHNIaVFWbXE5dGhPVWxGZU9UZnJBdlBTbEJRbFNHVTdSMWg4enplbTBF?=
+ =?utf-8?B?dVE4Z2FialhvdS85Z1dMNWZqWnhOWk9GRFU3dEE1RHNPdzF1S0NyYzQvMXc0?=
+ =?utf-8?B?c2FlZVJHclNxYlorVjRLQ1Q1blJ5OFVubjVueXVSUmdqeXdKdVZZUXZ6NWU3?=
+ =?utf-8?B?dWRVRENIZmVsaFIzTlFrWUxsclNVR3pDMC9lcmJ6M3B5UlU2eGNIQmdJT0x6?=
+ =?utf-8?B?RWl2QXNPLzRidFJDcXB2K21JRm5oUHlMZWVMazA5QW9QRnRja284alFpMnMx?=
+ =?utf-8?B?RFBJd3NRcG1tTTNBMWtuQ2d2c2p6YVh4bXVUMDkzQ0xlNE1ubkE0amgwWXJE?=
+ =?utf-8?B?dW9iVXJaQnNmWlB1eDVpa1dSa0FCUzdkNzRGKzg5ekxVV25ldUFKWkcraVd4?=
+ =?utf-8?B?MEwwTU82ZG1RamhkU0hMalppNS9wOWdETGdxS3lSRTRTeitBeERhRXNIcGlU?=
+ =?utf-8?B?eWxmSzdlME5SZ0ZhQlVHS01uK05ERDQzK01pOU5vUWM5YW92VjE5V3hHV1pp?=
+ =?utf-8?B?Mno4dEdhVmVmRmJJRlY0SXNsZUNLaXJ5TW5SOHpwWmRWRXc4OUdhT2E1aXFR?=
+ =?utf-8?B?R0VVWVB4bHpyVmZmbEo0Y0Y4VHhpNDNqZmx2eFdpU21BVG5Vb3I5cFdqdkVW?=
+ =?utf-8?B?ckI3MDlaZGprV1g2N0pzNlM0cmVrOTYzOVhoNytHSHpTZ2RGRE9OR3JsR0dG?=
+ =?utf-8?B?dWdQRDd6QVJORm8zMHBleVVBSzBZbWdvaGhtb3Jrd2k3T205bXNDSEc4eDhT?=
+ =?utf-8?B?N0dDM3FxS3FBSjh0eGpRSzErV1B2VDZONzVnNzNrM3NQSlNUYm1sWUFIWXlG?=
+ =?utf-8?B?Mnc5dVBRV1ZOZ1VGU3QxQ3hhVlBBSkF4TnFyV09GNytiNDNQM0FlOXNUWnJU?=
+ =?utf-8?B?eDdKK0hVTnZ0elJZcCtQNW41MEVjUGFyWTdpdU8vYk9LNWRFeDhabWZBenJM?=
+ =?utf-8?B?S2pKWXdIR1kvNUh6MHlOdEs4V3dJM0ttRytvS09tRFErY2ZwSXQyUjAwZ3ZC?=
+ =?utf-8?B?U1Y3Q3hSZTc2YlNpdkFxY3o3YzdhOWlYY1RIR2dJZTcyNllOZkFYSTB4VmFV?=
+ =?utf-8?B?L1JBUUc5ZG5leVViSU5BTUwwbFVBM21RM0VUNGFONDZkaFA0cjZXSVgyKzlC?=
+ =?utf-8?B?VDZJNTFXaTRTbkk2RUZhOERQYTg4YUxUdkRlZU5NMmlQYnowOWl0ZlZxSE5J?=
+ =?utf-8?B?U2luZTBsRHc0ZVR0bWh5bHBBdUtqalRkcWpFb0d4dSsrZldHTkduUElNNUpv?=
+ =?utf-8?B?b1BrQURHZjdsa2F2cTR4R3RjKzRuNFJHWXk1eHI2OElwb2R4WWpsMHZvYzF5?=
+ =?utf-8?B?dlBOUWxEU1N4Zm1RT1JXcXFwM0ZRZ1ZPSWxoTkIxbURNMG0xRU5CR2UxMUc4?=
+ =?utf-8?B?K3FxS0tnQUFUZk10SVAzd2YwaXYvNTJTZnY3bWxwb0NMU1daNmVLYXU4aHYx?=
+ =?utf-8?B?cHk5SFdCSXY4L2FJNTAwd0pEdmFJZ2tTWVlXM3dTRjNNenRMTmg5VjJhS3BE?=
+ =?utf-8?B?T1NDSFhJVWQydVBaTUhNZ0RZYjFOQWRFY3NkZmhsVUVVMmlMN1JDdWtTRkU1?=
+ =?utf-8?B?NnNqMnQwSU41OHV2K3kvVHRMN1lZZlRjMnZqWjl3TWVLL241N2F0RHpFSU94?=
+ =?utf-8?B?MGRZUEpwUzlxeXBVbnRDQUhWSWZTU2lLOTA3ZUxOMUV3bTIyTUhlWjdYZlA3?=
+ =?utf-8?B?QVE9PQ==?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b86dd162-9c29-46f9-ff0f-08dddef3e23b
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 07:41:35.1043 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 07:42:01.2266 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZUOm3RBoVTR0qapu3qYAFT/557VY1/Ho7rAGlE0n27Ttu526/QvXYDerj2ye/Evm2EMH3I+GPorbotg7Pb+Zy4XmkQgarQsRtR8O3AXvPxw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB11432
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZLLA/Y6CVddqrjCYi1BfTM4ssW+/19Sg0peG/lmr7aDyEmrQDe4n36aaJZbEkJOBQN1MpxegAfHEaS7QtZLrUI5H/K0zYfEO9CBlgx6N28w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB9263
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -183,216 +190,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Maxim,
+Am 18.08.25 um 22:00 schrieb Mikhail Kshevetskiy:
+> Hello Frieder, is there any comments on patches 3, 4, 11, 12, 13, 14,
+> 15, 16, 17, 19, 20 ?
 
-On 8/12/25 8:56 PM, Maxim Kochetkov wrote:
-> [You don't often get email from fido_max@inbox.ru. Learn why this is 
-> important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> 12.08.2025 19:41, Christian Marangi wrote:
->> On Tue, Aug 12, 2025 at 07:29:46PM +0300, Maxim Kochetkov wrote:
->>> This helper find clock-critiacl property in dts and assign
->>
->> clock-critiacl -> typo
-> 
-> 
-> Thanks. Will fix it in v2
-> 
->>
->>> CLK_IS_CRITICAL flag to the clock.
->>>
->>> Signed-off-by: Maxim Kochetkov <fido_max@inbox.ru>
->>> ---
->>>   drivers/clk/clk-uclass.c | 17 +++++++++++++++++
->>>   drivers/core/of_access.c | 22 ++++++++++++++++++++++
->>>   include/clk.h            | 28 ++++++++++++++++++++++++++++
->>>   include/dm/of_access.h   | 17 +++++++++++++++++
->>>   4 files changed, 84 insertions(+)
->>>
->>> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
->>> index 7262e89b512..4f35b90382f 100644
->>> --- a/drivers/clk/clk-uclass.c
->>> +++ b/drivers/clk/clk-uclass.c
->>> @@ -835,6 +835,23 @@ struct clk *devm_clk_get(struct udevice *dev, 
->>> const char *id)
->>>      return clk;
->>>   }
->>>
->>> +int of_clk_detect_critical(struct device_node *np, int index,
->>> +                       unsigned long *flags)
->>> +{
->>> +    struct property *prop;
->>> +    const __be32 *cur;
->>> +    uint32_t idx;
->>> +
->>> +    if (!np || !flags)
->>> +            return -EINVAL;
->>> +
->>> +    of_property_for_each_u32(np, "clock-critical", prop, cur, idx)
->>> +            if (index == idx)
->>> +                    *flags |= CLK_IS_CRITICAL;
->>> +
->>> +    return 0;
->>> +}
->>> +
->>>   int clk_uclass_post_probe(struct udevice *dev)
->>>   {
->>>      /*
->>> diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
->>> index b11e36202c1..59dda3ae152 100644
->>> --- a/drivers/core/of_access.c
->>> +++ b/drivers/core/of_access.c
->>> @@ -666,6 +666,28 @@ int of_property_read_string_helper(const struct 
->>> device_node *np,
->>>      return i <= 0 ? -ENODATA : i;
->>>   }
->>>
->>> +const __be32 *of_prop_next_u32(struct property *prop, const __be32 
->>> *cur,
->>> +                           u32 *pu)
->>> +{
->>> +    const void *curv = cur;
->>> +
->>> +    if (!prop)
->>> +            return NULL;
->>> +
->>> +    if (!cur) {
->>> +            curv = prop->value;
->>> +            goto out_val;
->>> +    }
->>> +
->>> +    curv += sizeof(*cur);
->>> +    if (curv >= prop->value + prop->length)
->>> +            return NULL;
->>> +
->>> +out_val:
->>> +    *pu = be32_to_cpup(curv);
->>> +    return curv;
->>> +}
->>> +
->>>   static int __of_root_parse_phandle_with_args(struct device_node *root,
->>>                                           const struct device_node *np,
->>>                                           const char *list_name,
->>> diff --git a/include/clk.h b/include/clk.h
->>> index f94135ff778..ea708f54fd5 100644
->>> --- a/include/clk.h
->>> +++ b/include/clk.h
->>> @@ -589,6 +589,27 @@ bool clk_dev_binded(struct clk *clk);
->>>    */
->>>   ulong clk_get_id(const struct clk *clk);
->>>
->>> +/**
->>> + * of_clk_detect_critical() - set CLK_IS_CRITICAL flag from Device Tree
->>> + * @np: Device node pointer associated with clock provider
->>> + * @index: clock index
->>> + * @flags: pointer to top-level framework flags
->>> + *
->>> + * Detects if the clock-critical property exists and, if so, sets the
->>> + * corresponding CLK_IS_CRITICAL flag.
->>> + *
->>> + * Do not use this function. It exists only for legacy Device Tree
->>> + * bindings, such as the one-clock-per-node style that are outdated.
->>> + * Those bindings typically put all clock data into .dts and the Linux
->>> + * driver has no clock data, thus making it impossible to set this flag
->>> + * correctly from the driver. Only those drivers may call
->>> + * of_clk_detect_critical from their setup functions.
->>> + *
->>> + * Return: error code or zero on success
->>> + */
->>> +int of_clk_detect_critical(struct device_node *np, int index,
->>> +                       unsigned long *flags);
->>> +
->>>   #else /* CONFIG_IS_ENABLED(CLK) */
->>>
->>>   static inline int clk_request(struct udevice *dev, struct clk *clk)
->>> @@ -665,6 +686,13 @@ static inline ulong clk_get_id(const struct clk 
->>> *clk)
->>>   {
->>>      return 0;
->>>   }
->>> +
->>> +int of_clk_detect_critical(struct device_node *np, int index,
->>> +                       unsigned long *flags)
->>> +{
->>> +    return 0;
->>> +}
->>> +
->>>   #endif /* CONFIG_IS_ENABLED(CLK) */
->>>
->>>   /**
->>> diff --git a/include/dm/of_access.h b/include/dm/of_access.h
->>> index 44143a5a391..dba725498f5 100644
->>> --- a/include/dm/of_access.h
->>> +++ b/include/dm/of_access.h
->>> @@ -405,6 +405,17 @@ int of_property_read_string_helper(const struct 
->>> device_node *np,
->>>                                 const char *propname, const char 
->>> **out_strs,
->>>                                 size_t sz, int index);
->>>
->>> +/*
->>> + * struct property *prop;
->>> + * const __be32 *p;
->>> + * u32 u;
->>> + *
->>> + * of_property_for_each_u32(np, "propname", prop, p, u)
->>> + *         printk("U32 value: %x\n", u);
->>> + */
->>> +const __be32 *of_prop_next_u32(struct property *prop, const __be32 
->>> *cur,
->>> +                           u32 *pu);
->>> +
->>>   /**
->>>    * of_property_read_string_index() - Find and read a string from a 
->>> multiple
->>>    * strings property.
->>> @@ -701,4 +712,10 @@ int of_remove_property(struct device_node *np, 
->>> struct property *prop);
->>>    */
->>>   int of_remove_node(struct device_node *to_remove);
->>>
->>> +#define of_property_for_each_u32(np, propname, prop, p, u)  \
->>> +    for (prop = of_find_property(np, propname, NULL),       \
->>> +            p = of_prop_next_u32(prop, NULL, &u);           \
->>> +            p;                                              \
->>> +            p = of_prop_next_u32(prop, p, &u))
->>> +
->>>   #endif
->>> -- 
->>
->> I would split these of additional function to a separate commit also
->> where they come from? They are ported from Linux Kernel?
-> 
-> Ok, I will split it.
-> Yes these function are ported from Linux Kernel.
-> 
->>
->> Also would be ideal to have some scenario where it's needed to declare a
->> clock in DT that is critical. Isn't that handled directly by the clock
->> driver internally?
->>
-> 
-> Yes. Now we can use this property from DT by custom drivers to mark
-> critical clocks.
-> 
+I reviewed everything now. Patch 11 already has my Rb tag from Linux.
+For patch 19 I would propose to fold it into patch 10.
 
-How this is typically handled today is by hardcoding the clock that is 
-critical in the SoC clock controller driver directly, c.f. 
-https://lore.kernel.org/linux-rockchip/20241214224820.200665-1-heiko@sntech.de/
+Please note that I'm not a maintainer. Dario or Michael might request
+further changes.
 
-This is of course then forced-enabled for all boards based on this SoC. 
-If that is something that isn't desirable, then we need to properly need 
-to represent this clock in the Device Tree. You haven't really explained 
-the real life example that would benefit from this. Is there one? What 
-is it?
-
-Finally, we do not accept Device Tree properties anymore if they aren't 
-part of the Device Tree binding coming from the kernel, the Device Tree 
-specification or the dt-schema. So it needs to go through those channels 
-first before we can make use of this property here in U-Boot. Our 
-ultimate goal is to have the exact same Device Tree for U-Boot than in 
-the Linux kernel (and I assume even further than that, anything that 
-requires DT use the same one across all SW stack).
-
-Cheers,
-Quentin
+Thanks again for your work!
