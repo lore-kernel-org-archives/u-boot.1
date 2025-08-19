@@ -4,144 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5EACA0EE6
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 04:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32DBDCA0EE6
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 04:16:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE53A802C1;
-	Tue, 19 Aug 2025 06:14:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA380802C1;
+	Tue, 19 Aug 2025 06:16:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Ko0q85g/";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="bP2u9a1l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F27080422; Tue, 19 Aug 2025 06:14:34 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20626.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::626])
+ id 665AD80422; Tue, 19 Aug 2025 06:16:14 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::610])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1210C8006D
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 06:14:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EF018006D
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 06:16:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qY2Cc8AJwhn76zyaebCeBRQuc/gmoharaG3gpeoeumImNADNcoRIeqZU3svzLPcuWYu6Zmrai/nWG4lXqi11NDc/Uwx9FuXjxj3oyK8MsH5yq2Jgm9kJ7C90Jea0GHY5fM29RuShhxv2mmGWZLw4xvs4MVIqXZxguOmCKmtTjIa+7sNYI88dDmy4bJGLMnCdRp/gb2go7ySotbYPbeHmQHY9Mv7DjcAXDB5Hj9JlvDCoYJ59sEvPstyzUvFQTFelzz3gZd73sZpeLO7QF38yW+SCaxgoAGUbYWz0iY5Ka81E7wuNro7ZmBXYXwVqPK8xcpJf0oMQm+WBc/gucVGEeA==
+ b=llrrMo2quH7DYQ/I1oQ5Lu6FpdThqPCUdR+kBVhp51332/5/u94yGK3e8HyzrgRHdhNJypu9qfXzbFCFA09cNTmGKx/V4ynKRzZ1vn3C6f/qWksAStx70nDHy4hP6/AKObxFUbbVF669G8CDNGIfUi02hCDWlD+JFHnXRYTHL7bte4VxgduQ54REkSBwpi6S1hYFKHAIrDiGtZw3JVbGefW/oPBroV4RaO3IBRAti5YitmxYCYu8sjgoPfAk8LZ1kjENqK8sLMAblzDcD2daQN2wk5OYjPhU8DEb4Me3Jq79rpRBF5JSDKTfxuvPcxPa3eQDgHulEuxTU8LAz+6JJQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M3tqEG+bT/IdKWdJwcP/iA6Ec/2dGMdLyfGmzgEPCeQ=;
- b=P58aQKX+4LEca3H8YWSVKgsQ4uBe1tfxvXT3QLmDamKLI+cIjmZDjpKmIIRd03DXydqB0Dj4nKqpGYdunSEa+wmvxLyM0mRKVIrLT63048JtPu7B8b7UPiASSMAyC7j0lua4cr5VyI2POFV1KCqoL/EUnQNekhbVR2wyvAXNaXYCQ3rfAKbmvxkwOWdZmUnJ7SgDMm0lYrfW/3fqbNiYNxCS8GW+LJETBb3JEUSQbJlVKkxJKhwFIB0ipgcZfV9erdTcafMIY2BdAI7lLUPHQvLzY5EpyVQNCnE1cAI6Sycs4llD+hR+wJ1pB65TjJGENPOqu7D/LqBgx3mS+WrHWA==
+ bh=w3wv3vfVRBgOW/Lsdp5qxAR6o7C3cvMh5SdDZEciLac=;
+ b=aLAsS/qMiAImpmyuHaFWxg1jtFfs6hma3Isnb3kx9dMIWII5QFBZjcxaKcv3LcfafmLIUxKYhfb3AxaqQ8O6R2c/ubX1m4uq1UieWVMC70iAw8qsWejtgIm15diOaRLfwKN41+V9gg9JDaqiFQfwawG2VTYPQhkfltrreKTQ9Mac4D/X4XWnmkmcCa6WoP06dv1RRw2+lb70yroGenccM35UWjU8AiiogIcbU4p2/JVp08HzbcLXUMsKsX7lRCofZmGKJq3BQRmft47mYirmRfAXvBoxYToj36CEx+AT73Dyyq7xyaX401gE0urC5gvvAiYiIxDG3OWnMpkkqirarQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M3tqEG+bT/IdKWdJwcP/iA6Ec/2dGMdLyfGmzgEPCeQ=;
- b=Ko0q85g/7KkKS+8xuErbNtZIlX3FICDkIKTdoTEKgHMW4Xb8xmA/WG8eNFf/E7ppzCtrBFOlybogq8EzGMga6RPuJ/tCjz83b5ifPd4hH5mYUS2GhwG1fa4nQrFnZqQ+QHINW3wpEvg+eYH/E0HVTuntIVMU96RMAgM6E4ZP6QxUFcpgeVL6W5B/8+qwWM/hBfhURiuwrTCA+o11Cz9dk/jPrTAalLurCoeS1dy7zMKc2Euib7bKgpTv5F1iRFhHiJhztfJOMEMlTOGTZJGb2NLHq4OLsK6vwO9oR1dA7v6vGIMeFKDi5Wnj8cPO6R/2QxBIvbL48ZtvA6vDSpwjjg==
+ bh=w3wv3vfVRBgOW/Lsdp5qxAR6o7C3cvMh5SdDZEciLac=;
+ b=bP2u9a1lCXZT3WE12VgdwW6j0tcWMJZckw0Aom0R79jrOUtPd2epi/ws3HbnNqrbf2HDW03P/XC3PPQjb0ER6F0TcREGPYHNhZRTEavpxnyw6EfpzYEQVrd2DAVc87NFUQX0pAZ+5f2IIToogLi7HtjuFZdwHLhXw8R/A2C7b7VNakIsdwdG+6yG1MH96muyUwDGC74DrL+F17IUjBNWaz5UAAYrQY3B1EPteiBUt7cv8lNjTatiqLkTMMRJ2oJqSPVhV40qO1w5wPe5rp1IR7eaMYzw0/nrYU5trm2HHHbfVInKfRz6O9e6BgkaB71whws+ZsQrknKwg0LfPN+qSA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from DS7PR03MB5542.namprd03.prod.outlook.com (2603:10b6:5:2c5::16)
  by MW4PR03MB6948.namprd03.prod.outlook.com (2603:10b6:303:1bf::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.12; Tue, 19 Aug
- 2025 04:14:28 +0000
+ 2025 04:16:09 +0000
 Received: from DS7PR03MB5542.namprd03.prod.outlook.com
  ([fe80::c3b6:3b8d:4383:ab7c]) by DS7PR03MB5542.namprd03.prod.outlook.com
  ([fe80::c3b6:3b8d:4383:ab7c%3]) with mapi id 15.20.9052.011; Tue, 19 Aug 2025
- 04:14:28 +0000
+ 04:16:09 +0000
 From: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
  Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
-Subject: [PATCH] misc: fs_loader: Add QSPI RAW partition loading support
-Date: Mon, 18 Aug 2025 21:14:11 -0700
-Message-Id: <20250819041411.21036-1-nareshkumar.ravulapalli@altera.com>
+Subject: [PATCH] arm: dts: socfpga: Enable driver model for watchdog timer
+Date: Mon, 18 Aug 2025 21:16:04 -0700
+Message-Id: <20250819041604.22221-1-nareshkumar.ravulapalli@altera.com>
 X-Mailer: git-send-email 2.35.3
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR13CA0084.namprd13.prod.outlook.com
- (2603:10b6:a03:2c4::29) To DS7PR03MB5542.namprd03.prod.outlook.com
+X-ClientProxiedBy: BYAPR11CA0085.namprd11.prod.outlook.com
+ (2603:10b6:a03:f4::26) To DS7PR03MB5542.namprd03.prod.outlook.com
  (2603:10b6:5:2c5::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DS7PR03MB5542:EE_|MW4PR03MB6948:EE_
-X-MS-Office365-Filtering-Correlation-Id: 67442755-02de-4fb0-097c-08ddded6e396
+X-MS-Office365-Filtering-Correlation-Id: 0ed3bc8f-48fc-4a14-455e-08ddded71fd2
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|1800799024|366016|376014|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1Ht/4yag1t13Lo8agZJxqqf7+U0k8OhzZYRqLunk2RyqbsjlEpGe5drpxJ+U?=
- =?us-ascii?Q?yae0s6kOECAm+Qxmi4cOSxpcc8qDJr7bzVbE8rgzs8Me+01i8UiYNliDfvXh?=
- =?us-ascii?Q?hCrppl1L3VrDn/10c0CBQVSx268lSIsojem11KZLNaUJQ+ddtLvXDOa3kL+y?=
- =?us-ascii?Q?WCR/QBQitWD0vlbefbzWLlkX/oqTlOWG80Vn5952oIGkJjv9lT+An9NwPOXw?=
- =?us-ascii?Q?8O+8AZQOKb7UA5k71UEIRVwZ+CujtiCTboil3Svwuq5W1phHe5Gf6LHDmj2D?=
- =?us-ascii?Q?rgIKAboHj1EkvCJBoDkwfeUeXJNctXaI49GUo6xoS0v4qm8cOb8MlAtOyPDH?=
- =?us-ascii?Q?6owF3k8MyG8Re593bEoAY2sTxvdhI2vWLmLuACPCYlNZwQ7SXr4tCFS+wL6P?=
- =?us-ascii?Q?n1dFg+LLfaZfPYHJZSFOODWnNiLumTyNurZgE9hmdnMlZp8cfmphFZdbiobQ?=
- =?us-ascii?Q?kcTRYfZHgHPNQbcH3RInwI/Rmhrt9scaQOVWfiTXvFmY1lgGfDBtObwW/RZ+?=
- =?us-ascii?Q?jjQCTfBZdHY7Dpvh3IiA9TzLwmKTfEZaAlGIwYB+ph3ikdby8g8AlvGToTjY?=
- =?us-ascii?Q?o4Ew9tvQ338SwIs0794cSOG2kRhoO7B6+2rxc532x6Rn+I1SOpjZjHBPaeV8?=
- =?us-ascii?Q?lorfGY74P9eJ13xVFCAOF2+XpWKFlLIPlKKtz41rWN63rqBkPofrUtIjC3iT?=
- =?us-ascii?Q?HOIU7xsBNpYDN6Z6uj/fNoL7A9E+X9oun27Odmf5T2JoLqjPePBPuNNTOYbi?=
- =?us-ascii?Q?PRYoehXNoQ+2oPOkiL0zC3EfGB1iraNKKsnkglOOyIv6nffsxlPZvu/GLYKG?=
- =?us-ascii?Q?rS9Cq/qYymlYZYvAetqTyC8DYBGaqHpeClPp+xfq8sMnUiFU4KYu8+qmT/Hg?=
- =?us-ascii?Q?F8QyYZLxZEcowrffzWLJg+I8D5BAppWNfQfLR8Q/s2V7+FPQxrhWkf5J7tvV?=
- =?us-ascii?Q?IJYoxu240IgLnnQjYtjPV2/6nZbkwUduiJ3/slbtwqsai5hQRebdyP/1Vt/4?=
- =?us-ascii?Q?1S2Sv0NbPMkG0exphLGmaOu4X1a2QNYTtqCsrrZu+zmyXluXJm5H2uN0KAdA?=
- =?us-ascii?Q?s/cmmJLAnSrdYsRrFweK98akxXhZgOei18BhlslrKzE4zRLzayXWfCiWH7x0?=
- =?us-ascii?Q?rXHYpYSH5LYl0dLzchbcbIbArmmUWQ2MeWJ6ZERm7jISzJSJ+tBlFxLZfbLl?=
- =?us-ascii?Q?CWcWYiMtTXct4H8ZoWhrALjiqRKoJwnFnWL0OfMxnQReBeRakd99JkXo31O2?=
- =?us-ascii?Q?MOARzVdFtRDVnTkwaau4pVSasgwigE0lLuGocVoUjy8IhjA78H6hVJDVIyHB?=
- =?us-ascii?Q?wX4he9LwgK7JTXbXpF1Q1Ox6f3NjnvFlNqJyNrJzn+uvvHi+E5PsIPrhuCGh?=
- =?us-ascii?Q?ydX3621M0M+GLiPrsDvnQ3J97CBROfjrbpRSqomQfo9cSBUwQrP/NbVyCKd3?=
- =?us-ascii?Q?LWu6kb9DjBE=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?U96tjLgZNv9M5WNuCZDqPJHfpkZdsnheUrmOw4dhT8WASYrbIn4KrD9bfxt7?=
+ =?us-ascii?Q?e2PJ5AGmGCEK1/kT8OStyNAVn4oa7TixpBwY88bBRB8OA7QgkcAmH1YdYfAl?=
+ =?us-ascii?Q?u8SIaYbxYZUwlSLtDKgtI3LiLK92D8petu05pINbB+uB5bXu9AlHdcC1IrDf?=
+ =?us-ascii?Q?hMXqavXDDgyhnEwD4olWjh/M3+WTB9AA7TZ9I4Up8gqNgKF4ZETkc7AeZquN?=
+ =?us-ascii?Q?l9eMbkta0ODUPBmJhPGx7xrri1bOi6LQ6XJoMvWMKfHl8gihjG7k7cJEEw/s?=
+ =?us-ascii?Q?FTGlvnhD/o3L1JrC71sNSCJkaN4NO2D0hApGytw1QZalE9Ug2UCZYTfKFzXU?=
+ =?us-ascii?Q?NmgTi97mnJdCgeGrCHBZF/ylv9F5guc1FzQvS4EI5t8qY5XEHAZVlXaGFBdH?=
+ =?us-ascii?Q?3FVjjlJk0OGjmmTHgqDbDLrElz/RXduzMFm8DABMM4k4ii83bUiBLLunSu+X?=
+ =?us-ascii?Q?mck+d8byRT8sPZQhoRJ00IqTI9DQGDvTXwuA9Zn/vagaemchZsP5zKFYUFAX?=
+ =?us-ascii?Q?sHq2/EDmVunSituyZCUqwrHCgJvaFV14imnfVyyYURv/OAjoLhjgqa4PyMR9?=
+ =?us-ascii?Q?InOudIFuD9OdDNR1wtuM3L9a8tYUNhLYLXFahRkpr3QnTXxNYk9DCPMh8l8/?=
+ =?us-ascii?Q?fvX+WfkyFIiL/ieNl6/fphNx7EY33r5bEIrP7Di4H/ION9YrGbdsIi9sst3x?=
+ =?us-ascii?Q?JalxIp89JfXwTk/KLSVqlGZXyQzHwfGW2UBYYMJize2MPX4ajlwyabsiXHfg?=
+ =?us-ascii?Q?AdLktE/SKJ45vRuLLEjkYY62BXmopMBWRsjynUVsW3kxc1+l03O1dIAFkd1n?=
+ =?us-ascii?Q?A5iBYr1jrtXlPKbNaJygc5yHPoIv/Ule2ESXXJYI+il9t/gpdUUEZ9H7RKZT?=
+ =?us-ascii?Q?eJSLsSq0eKYn2WCD/IQx5gAcqShopwumVxlsFTfIt/OBXxaZkJ3LQwQMKCtV?=
+ =?us-ascii?Q?z9rO94fOim5DkHBYed8ar61tILAW7zp2tBLCD8rtBoS6c7ZvROZ/7OnP35SV?=
+ =?us-ascii?Q?7UmSIziwWYiTjrRv5VNHwFUBdEvfAwIgpiCI5TXfBzWwjxT9VE57G/hVZj4o?=
+ =?us-ascii?Q?uU3zOV+/hpjdH1BKqTeNbpZC6o1XbaVr9i7UApIrJmUFp40uhXVoRvfeye+4?=
+ =?us-ascii?Q?GIIvduQyjMAIWo2RPyrHHqynIVV9d6fBCQcJlMVdvC4Bykxa5FfskreeSvC9?=
+ =?us-ascii?Q?hC63VsKk+r/fmhSqOmSmb79O40rY+S8rIwwXKWqPNRm2bFqyFW9oWdtg0DLO?=
+ =?us-ascii?Q?aQPbECIREDSelftnsioihfuMvrqDBptBh1m1abL6EbAFHUXgzmVam6ACNa+V?=
+ =?us-ascii?Q?/SZdNJgGRHPThYFYYKItXsI0mrSSYUv5q8BtsIR7LRFa3fH6BBuXBdYyb1j0?=
+ =?us-ascii?Q?P2ihtqzZhQak7DtNkvLVIMBjlS500qm/VwVUjwNPjkjBH1chhadQackZ3iJt?=
+ =?us-ascii?Q?jreEmrFXG7w=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DS7PR03MB5542.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(13003099007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VswyKTt9AosSBGO6x2hwfn1Bk7OE0AzlD9VbHfV617+J7V6GYNE3dYCv9Mzf?=
- =?us-ascii?Q?tZdzkdxy5hmnMsmlyDq8PWGpac1rWo0zajfY/R62xmwGMQtn6lDk0QR3CVR5?=
- =?us-ascii?Q?QULbt3LsVzEM7A8HDIhiBXE+cJjxua4raV3if+iPXgi1s0zubn6MWVZewNrW?=
- =?us-ascii?Q?7PAEz6Yn9Tl+JAt+4NkXlffXzS9d6oBCPT9mDQewDObdlVsLWF3VUl4f4J8U?=
- =?us-ascii?Q?z5cipwnEZrr24X5pFXgMPpt9H3hV5SJvRl5cn+SJkxCdR9hWu1C/mDG/Q0r+?=
- =?us-ascii?Q?x9CoGr9Y71pr+AIsu1Y/OQmn6kU8X8jgl5fn7EK1H8qc5JRFHuKbLofxJu1A?=
- =?us-ascii?Q?4wetp+byd74j58aIBOvMBRiXHUjtqBLK5FTIySljOROZxIRcV6QW8yWIvQE/?=
- =?us-ascii?Q?Sgm9XF0HKrors4sobVXzPR3aPOYtJWD/zhVy4mQ5RNcq3qsWPNk44BFAorEv?=
- =?us-ascii?Q?yysh+S2ZeP7U1AnwRiN2DCRCTNgFurJ7OE23Psxt2t1592A1Gc+zPOGZkji0?=
- =?us-ascii?Q?JICUC5SKkDmdftXrohh/cgSSnQDeIJvzJeRjgzTLUmfDb0Ot0e77omiUH8Vc?=
- =?us-ascii?Q?aINLiX4f18J8DpzEFc82fn9q7KQ4KwlU+U2lkkSGmrmvtFWmM9QRnL1Gl+Gg?=
- =?us-ascii?Q?H024L83FfLrOPH6b6vT6AfFuuwRUBJLPpm2vU30sV/NnXSjAihfW/tUD3gSM?=
- =?us-ascii?Q?8sRSzNb/DBjPnUyOx2sZZCr+zqdDdHQy+xM/OVxKrwZDSWc2/xD+ReUO9n5T?=
- =?us-ascii?Q?jC1hDA31fvUCJpuDPpJnAqDon5yH3FepYREs9qsCBloMVe+Hvlo3hzhr1/Dy?=
- =?us-ascii?Q?iy4FdIDxj00dLxv2Ht9Eb/aMQHngpv7A4EN7T+HJJ6LyuzdSu6CSH6pP5oMX?=
- =?us-ascii?Q?bUyQ+j6tsC2Xa9l3eAEztNO30aWPAO8UlC9FkQ168Z7zDD4+sNnniNfYzG4d?=
- =?us-ascii?Q?3z3qtzyqiQS6vSY2r4BkG/vrLFhKe1GiWkUhszGQKcVjavcdXAGh5xyPXG05?=
- =?us-ascii?Q?sL23/BjnMuBrTMi6UqoqZijHm54U2T88/pzCY2fLtGrpzqRKeQ8IUMn/7e7Y?=
- =?us-ascii?Q?Uz1aO4dH4IBN0wXoevf6psS+864ujUv7EWJ6PYhyt8+NZwFbibURcB310Xdt?=
- =?us-ascii?Q?af1N9o9lVuv8vHIG9dC/Sb/TSagR4qiBZmNYoOKGubQsQfJOKBMrYVv9GfdR?=
- =?us-ascii?Q?KJIAyS/31QbI7mbMiqQW+ljuxA1VfIKdDzapT74ETL3kOImxQXa/lSjnhI/V?=
- =?us-ascii?Q?Gir1q9OJK9csQfnQXfr03vx1Mv+RiqEPJt89/9shnG5ob7G0pZUzxznnVTM0?=
- =?us-ascii?Q?j2g0HuAiCt3fpkrpF0wKukJ2wOuaR0jXeqTdE0Vet62WGxf4DbdWekr1Or01?=
- =?us-ascii?Q?eq4zUyu4x3KroWxErrMyf/8T0sD65ExBEW3W0kx/zlbgVtoGHKnheBGjws7N?=
- =?us-ascii?Q?psPLW1/fq77XYqEqlm1UXzFm78JZaZgX6NVElhKYS+G+ySpYh6rExiXe/y1x?=
- =?us-ascii?Q?4WeL8M3nd973iPWF1Jo5qZ03Mecbd6eQ6GEXDxMWQlUwfEUxi/igXltuEACR?=
- =?us-ascii?Q?MMzedAtYZqi7PeiWMbBhR6fipBztt+YemaKvpJrZtlRnDYQCs+PfSVWBYXxD?=
- =?us-ascii?Q?TKdFuW0gdBL+MSznNe2oslU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LRromrfDT+2/bPoP+dX20X2/LrxAd+1KLaZSt+KvlFSLYhwrtuhNAKOpWmIA?=
+ =?us-ascii?Q?BEfgkUPhR7S204Ee8TvdoUThgaBDJluWlQyzsT8A/+HUDlD26kwJDRHs+dgp?=
+ =?us-ascii?Q?gszSesmEaRgbVPXdeMKpQT1lbhzY+KCBoZ1GFAJDYW2gDvsUpa1COh6kbnbP?=
+ =?us-ascii?Q?9D+lyLTd4KEt+WDrJHJHoRz0mYf/TzBGOStopftr3JaZJSVpNLxJNplK+KW2?=
+ =?us-ascii?Q?TazhYaMZ//oKm6+iDEL/vjp1EPWgPGWCnoq3jxK6nXq7f58sa15LIsQ2Q8wK?=
+ =?us-ascii?Q?a5/EKi9C9TYMDlwOnCVVD/LUC5GtKM1rWq99F648nY27iCoXjVa4pFp4wvks?=
+ =?us-ascii?Q?RkdZNxCJIR6G3XcjGoR+oz660r5x6h0LkoUnUtxZq2E48Cqr5/0d7vcPo+Cd?=
+ =?us-ascii?Q?I8g9UrR3SddCzCtBDfbewRSIPQZYi2Vj/bkC+RdPKygWESRCIhVhNOMcHGqh?=
+ =?us-ascii?Q?y1cRT1E3Ee3ZSY1LdkGzRdIKFOQgKBptayJVx1vKixeH6q5JfIWmUr4yQjGI?=
+ =?us-ascii?Q?uISZ/JlW4T9NdVofb8/wrpVzAbImPfoyyxC87JyqJ9bFu5PO4zUCzqkbDm3W?=
+ =?us-ascii?Q?ARHGdWIEBJkZ1RJ24/NESYEyTBB5OcJUBhtE9lMMhyG25GC52YAkFeict6XG?=
+ =?us-ascii?Q?93LZ5E7pYkTZlL6Z7o0f2HcMe9REuMN5VTqebwllhFkvJQibbdc6g1zDd/kj?=
+ =?us-ascii?Q?/P6iIMw1J6ENn258IDwQWGz/D1ZgFDF/hQktu3Eihfruq+8psRdri+ReKktB?=
+ =?us-ascii?Q?0/XgkZpHgG8LZNgY6Lz7OfoeBA8qwU6h/2lkxIhvHHO4FBMfHiLIntqNEaxu?=
+ =?us-ascii?Q?V5HVDorq+piOXRF88t4aRMywPk+lj2mVkMCf2ixw5uGoXXrT1dVBfYddbd0w?=
+ =?us-ascii?Q?tUoh9miZeWOjJfghqEs5PvQ7Zt2pCajBsNc1w5oAdr5yKipJcSlmWjAFFMaL?=
+ =?us-ascii?Q?N7XHjM601zuQ2FIdR8yGQFljXxipaWRwcNzw8C7NbtR8ZeaCdCuZzxiDV+Y1?=
+ =?us-ascii?Q?n0UoOTi7pZSbNHVvC7wlpTVLr9wcRTODnWEbjkntlleRMZWQywpfHe2OtJCl?=
+ =?us-ascii?Q?fkxQC5ErDkXqyN5tLc8uUsOa6rBKhprukpcbuV4qED2lHPNLHZSlqvWWkcn3?=
+ =?us-ascii?Q?VPp93bpMKdd7HjmuwYCUFhHGvauO0ayxOMDDmHTnsxHZask8peZEK7uarG8b?=
+ =?us-ascii?Q?PbJ6QitK98ipsbZBECeCZtP1kp5BYqPl/07uGD/LLVKBYAg29vTWRaPHG593?=
+ =?us-ascii?Q?uL2M/i400kHdG7lqZogIbU3lbP3vhdWgJPIdQXoyhbw9IosgtuJIAKGccbTv?=
+ =?us-ascii?Q?tedcrUwtFIqNSOMSRdf6Yn8EWDocC/iPbpWlwgCrPAzG9EqofhdA05L36f09?=
+ =?us-ascii?Q?WKlK/n1jWhtUD5Bz611LpgLNxs/5IYU+vRTD8KbQuscDrphRMP+BNdTnGVrk?=
+ =?us-ascii?Q?USiY7qjNfnojxIbVbqC/UtqpHCQkX2wywcJzG9w6Dag+NOitTwC/YdciaZrF?=
+ =?us-ascii?Q?lA8rMdWHhsW6TTcFUfgSHQOPYlu8UsGBG5Flm+t7iFQKWIsXJFCKH1Nv3v79?=
+ =?us-ascii?Q?+7MufYtKq01PivzUWgJ2bIYDWChv3fBt4yO2f06HHrdCrPpOhT2UswSpzYzt?=
+ =?us-ascii?Q?s7azcUkXVuErN0RnGAEjnCA=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 67442755-02de-4fb0-097c-08ddded6e396
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0ed3bc8f-48fc-4a14-455e-08ddded71fd2
 X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5542.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 04:14:28.1379 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 04:16:09.1767 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /moMP0QYg8WP/fCEkLgyY8ouNM92F3EDkt3I3pWggzKnC9G8yIObDG695JbKCR2I1unpMCaO2JLDWrcqjH8J3SW0y7lvGnoDlx8ZxIt0xqQxZoRF1pi0JikFTUUoAnAJ
+X-MS-Exchange-CrossTenant-UserPrincipalName: qsQPVMxzmqyqT9beXsLRiHTxWniAqHguMyMRklmLKPgYjotF4QxZrlfH7VZb7kcZeUhXUcADod+0kri/Wdy2MkKETHWn+taeQloVaf8YiHKvUUFFDWKAF4pIOP9+TDTL
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6948
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -159,258 +159,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enhanced the generic firmware loader to support QSPI RAW partition
-loading. This would enable FPGA configuration bitstream loading
-from QSPI RAW partition to program FPGA.
+All SoCFPGA platforms are switching to CONFIG_WDT (driver
+model for watchdog timer drivers) from CONFIG_HW_WATCHDOG. Status
+of watchdog is enabled to assist with this switching.
 
-Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
 Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
 ---
- drivers/misc/fs_loader.c | 86 +++++++++++++++++++++++++++++++++-------
- include/fs_loader.h      | 36 ++++++++++++++++-
- 2 files changed, 106 insertions(+), 16 deletions(-)
+ arch/arm/dts/socfpga_stratix10_socdk.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
-index 66803f4b997..931443048e5 100644
---- a/drivers/misc/fs_loader.c
-+++ b/drivers/misc/fs_loader.c
-@@ -1,7 +1,7 @@
--// SPDX-License-Identifier: GPL-2.0
-+// SPDX-License-Identifier: GPL-2.0+
-  /*
-  * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
-- *
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-  */
- 
- #define LOG_CATEGORY UCLASS_FS_FIRMWARE_LOADER
-@@ -20,6 +20,7 @@
- #include <mapmem.h>
- #include <malloc.h>
- #include <spl.h>
-+#include <spi_flash.h>
- 
- #ifdef CONFIG_CMD_UBIFS
- #include <ubi_uboot.h>
-@@ -70,6 +71,11 @@ static int mount_ubifs(char *mtdpart, char *ubivol)
- }
- #endif
- 
-+__weak struct blk_desc *blk_get_by_device(struct udevice *dev)
-+{
-+	return NULL;
-+}
-+
- static int select_fs_dev(struct device_plat *plat)
- {
- 	int ret;
-@@ -124,16 +130,26 @@ static int _request_firmware_prepare(struct udevice *dev,
- 				    const char *name, void *dbuf,
- 				    size_t size, u32 offset)
- {
--	if (!name || name[0] == '\0')
--		return -EINVAL;
--
- 	struct firmware *firmwarep = dev_get_priv(dev);
-+	struct device_plat *plat = dev_get_plat(dev);
-+	char *endptr;
-+	u32 fw_offset;
- 
- 	if (!firmwarep)
- 		return -ENOMEM;
- 
- 	firmwarep->name = name;
--	firmwarep->offset = offset;
-+
-+	if (plat->data_type == DATA_RAW) {
-+		fw_offset = simple_strtoul(firmwarep->name, &endptr, 16);
-+		if (firmwarep->name == endptr || *endptr != '\0')
-+			return -EINVAL;
-+
-+		firmwarep->offset = fw_offset + offset;
-+	} else {
-+		firmwarep->offset = offset;
-+	}
-+
- 	firmwarep->data = dbuf;
- 	firmwarep->size = size;
- 
-@@ -148,9 +164,10 @@ static int _request_firmware_prepare(struct udevice *dev,
-  */
- static int fw_get_filesystem_firmware(struct udevice *dev)
- {
--	loff_t actread;
-+	loff_t actread = 0;
- 	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
--	int ret;
-+	int ret = 0;
-+	struct device_plat *plat = dev_get_plat(dev);
- 
- 	storage_interface = env_get("storage_interface");
- 	dev_part = env_get("fw_dev_part");
-@@ -170,7 +187,8 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 		else
- 			ret = -ENODEV;
- 	} else {
--		ret = select_fs_dev(dev_get_plat(dev));
-+		if (plat->data_type == DATA_FS)
-+			ret = select_fs_dev(dev_get_plat(dev));
- 	}
- 
- 	if (ret)
-@@ -181,8 +199,18 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 	if (!firmwarep)
- 		return -ENOMEM;
- 
--	ret = fs_read(firmwarep->name, (ulong)map_to_sysmem(firmwarep->data),
--			firmwarep->offset, firmwarep->size, &actread);
-+	if (plat->data_type == DATA_FS)
-+		ret = fs_read(firmwarep->name,
-+			      (ulong)map_to_sysmem(firmwarep->data),
-+			      firmwarep->offset, firmwarep->size, &actread);
-+	else if (plat->data_type == DATA_RAW) {
-+#ifdef CONFIG_SPI_FLASH
-+		ret = spi_flash_read_dm(plat->flash, firmwarep->offset,
-+					firmwarep->size,
-+					(void *)map_to_sysmem(firmwarep->data));
-+		actread = firmwarep->size;
-+#endif
-+	}
- 
- 	if (ret) {
- 		debug("Error: %d Failed to read %s from flash %lld != %zu.\n",
-@@ -231,6 +259,7 @@ int request_firmware_into_buf(struct udevice *dev,
- static int fs_loader_of_to_plat(struct udevice *dev)
- {
- 	u32 phandlepart[2];
-+	u32 sfconfig[2];
- 
- 	ofnode fs_loader_node = dev_ofnode(dev);
- 
-@@ -250,6 +279,15 @@ static int fs_loader_of_to_plat(struct udevice *dev)
- 
- 		plat->ubivol = (char *)ofnode_read_string(
- 				 fs_loader_node, "ubivol");
-+
-+		if (!ofnode_read_u32_array(fs_loader_node, "sfconfig", sfconfig,
-+					   2)) {
-+			plat->data_type = DATA_RAW;
-+			plat->sfconfig.bus = sfconfig[0];
-+			plat->sfconfig.cs = sfconfig[1];
-+		} else {
-+			plat->data_type = DATA_FS;
-+		}
- 	}
- 
- 	return 0;
-@@ -257,10 +295,30 @@ static int fs_loader_of_to_plat(struct udevice *dev)
- 
- static int fs_loader_probe(struct udevice *dev)
- {
--#if CONFIG_IS_ENABLED(DM) && CONFIG_IS_ENABLED(BLK)
--	int ret;
-+	int ret = 0;
- 	struct device_plat *plat = dev_get_plat(dev);
- 
-+#ifdef CONFIG_SPI_FLASH
-+	if (!plat->flash) {
-+		debug("bus = %d\ncs = %d\n",
-+		      plat->sfconfig.bus, plat->sfconfig.cs);
-+
-+		ret = spi_flash_probe_bus_cs(plat->sfconfig.bus,
-+					     plat->sfconfig.cs,
-+					     &plat->flash);
-+		if (ret) {
-+			debug("fs_loader: Failed to initialize SPI flash at ");
-+			debug("%u:%u (error %d)\n", plat->sfconfig.bus,
-+			      sfconfig.cs, ret);
-+			return -ENODEV;
-+		}
-+
-+		if (!plat->flash)
-+			return -EINVAL;
-+	}
-+#endif
-+
-+#if CONFIG_IS_ENABLED(DM) && CONFIG_IS_ENABLED(BLK)
- 	if (plat->phandlepart.phandle) {
- 		ofnode node = ofnode_get_by_phandle(plat->phandlepart.phandle);
- 		struct udevice *parent_dev = NULL;
-@@ -280,7 +338,7 @@ static int fs_loader_probe(struct udevice *dev)
- 	}
- #endif
- 
--	return 0;
-+	return ret;
+diff --git a/arch/arm/dts/socfpga_stratix10_socdk.dts b/arch/arm/dts/socfpga_stratix10_socdk.dts
+index e6d8fe6a907..864f4093ef8 100644
+--- a/arch/arm/dts/socfpga_stratix10_socdk.dts
++++ b/arch/arm/dts/socfpga_stratix10_socdk.dts
+@@ -137,3 +137,7 @@
+ &usb0 {
+ 	status = "okay";
  };
- 
- static const struct udevice_id fs_loader_ids[] = {
-diff --git a/include/fs_loader.h b/include/fs_loader.h
-index 5eb5b7ab4a1..1b36f05415a 100644
---- a/include/fs_loader.h
-+++ b/include/fs_loader.h
-@@ -1,8 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2018 Intel Corporation <www.intel.com>
-- *
-- * SPDX-License-Identifier:    GPL-2.0
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-  */
 +
- #ifndef _FS_LOADER_H_
- #define _FS_LOADER_H_
- 
-@@ -22,6 +23,31 @@ struct phandle_part {
- 	u32 partition;
- };
- 
-+/**
-+ * struct sf_config - A place for storing serial flash configuration
-+ *
-+ * This holds information about bus, chip-select, and speed and mode of a serial
-+ * flash configuration.
-+ *
-+ * @bus: SPI bus number.
-+ * @cs: SPI chip selection.
-+ */
-+struct sf_config {
-+	u32 bus;
-+	u32 cs;
++&watchdog0 {
++	status = "okay";
 +};
-+
-+/**
-+ * enum data_flags - Flag to indicate data as RAW or as filesystem
-+ *
-+ * DATA_RAW: Data stored as RAW.
-+ * DATA_FS: DATA stored as filesystem.
-+ */
-+enum data_flags {
-+	DATA_RAW, /* Stored in raw */
-+	DATA_FS,  /* Stored within a file system */
-+};
-+
- /**
-  * struct phandle_part - A place for storing all supported storage devices
-  *
-@@ -30,11 +56,17 @@ struct phandle_part {
-  * @phandlepart: Attribute data for block device.
-  * @mtdpart: MTD partition for ubi partition.
-  * @ubivol: UBI volume-name for ubifsmount.
-+ * @enum data_flags: Data type (RAW or filesystem).
-+ * @struct sf_config: Serial flash configuration.
-+ * @struct spi_flash: Information about a SPI flash.
-  */
- struct device_plat {
- 	struct phandle_part phandlepart;
- 	char *mtdpart;
- 	char *ubivol;
-+	enum data_flags data_type;
-+	struct sf_config sfconfig;
-+	struct udevice *flash;
- };
- 
- /**
 -- 
 2.35.3
 
