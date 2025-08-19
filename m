@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22593CA0EF5
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 08:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC050CA0EF5
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 08:49:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B83781FEE;
-	Tue, 19 Aug 2025 10:48:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E75A282BF6;
+	Tue, 19 Aug 2025 10:49:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="i5h01+PD";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="sxFTYbK2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A5A782BF6; Tue, 19 Aug 2025 10:48:32 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 1340F82D88; Tue, 19 Aug 2025 10:48:59 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E18B80FA1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 10:48:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3361780FA1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 10:48:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-afca3e71009so893460666b.0
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 01:48:30 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-6188b73bef3so9100784a12.3
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 01:48:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1755593309; x=1756198109;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1755593336; x=1756198136;
  darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :references:cc:to:from:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=x+l50qHk+23ihczaYSxOPGaktc1TCqWkRWaeysE3/B0=;
- b=i5h01+PDrqHv72CTzFvtU9F2olIg5Lz0EOab2GAFIP8ouayh08JGBV6k+TzrurGBT0
- snfz5HK8A3doS8K9dVtt36p6fhXqlVmjlHSNxeDfOzy3O23J7kmrozCmtYn6Qs+QxOeN
- Tt7Gc+NI/qjaRpJmWjo3310CobDUgyQz31fWBatsO1TXaHbeWdTnAxwpvqMfP1d0IxJb
- IT34jvH2O+7GR3fnnRLzqoJs/sHlZctk/xoD5LdMLQ9MdSl/PNbQ+7TCGDXKhHETCmjI
- E4o+gIgAh+tTh81gqCW3PH3FfTvFY94mF16uVGCA5vQETjRBjdmweIvgRyNzDXhN+XCg
- 1Ljg==
+ bh=y94xqTbFgyD/KdFYon9+rTtAVg9OiH1rlaOFwjVj1AU=;
+ b=sxFTYbK2x9Fzux3AyqtvqkF9PydvHe7m6wshgvxvf4lkLBNhskgbQzcQnFHJWHJ+/G
+ yoh3LAVTpR/2T+1xZoc+9sKJnnpM+FldP/0LLPri+s4Qn4e4UEcpbKvadmoZL9MQcgBk
+ zWPGAsB7U78VaUUKEBQKi2g7su+Sn0hcr3kLLaTf+jqbrEs093xACuxc6+VCT2YKFgL9
+ w5JGoTNX5oHPXabQtpcsi2GuKUOEJ8lyUMthm/jl53Jxd6rScsCUZd6+FrawYA/NvPxc
+ H7DH7SQgq7cZlq4bsKa17+LRBrjHNamtvxx0WZYrUOhyDkIiv4CFsTr7M5NnPVHYcMQ0
+ AQ6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755593309; x=1756198109;
+ d=1e100.net; s=20230601; t=1755593336; x=1756198136;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :references:cc:to:from:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=x+l50qHk+23ihczaYSxOPGaktc1TCqWkRWaeysE3/B0=;
- b=mMdO35vDUQSoXH8yA+ZXwnxgNxMzGBuIh5BNLZYxi44yhvcbrj6Yxc6dEOHQ1XH1Ch
- ddXH+sb/lorc9C57UF5jw81mWn4CJ4UZB+h0euu2hKOvT+7D9NtDntGsgeSVgXt0jg8T
- kdpAqyxwqnfjDV0G10YG0pE/4iIbZEHZvbn0iBfgCaO3yXMTH8CO59Fl5HUdzc0IA9Gf
- LgrXlopSA9ZZ6XsUTR4Q7FVpXNI6BMnPbrMYAMv+yJ9LzUY0c26R4gySCteFOd3IX837
- kJYWxirTssl+dGJ6UG8uaVEkjRNCob6Yw907oBJTGbIEAs1NWe0hllwb3M7c9qnE11Fr
- /xtQ==
-X-Gm-Message-State: AOJu0YzZCbFBlW36AWprQYZ+7soqAEDjHmRCQfKUiNP0oFNlqUTmhXog
- VwvthyeodlbzyWp+1cNsQazo20EdMCy6g1IqfRzywqlzPyKd6CJ6bu5b59IKC8tXydVcnSSTu7G
- +Galuadl0
-X-Gm-Gg: ASbGncutYMr80orL+PpK6/D6Vw1QjdRfcBgeOSEPK7V6iu5ZtB+4WX53bXJc/bpXsDY
- vVHoa4XFbEsw4pH9yK+4lDLrEydC28LfcypLc851X7zNazPjAHl//Q6UzHXDxvTFlqtDh8q0rwp
- vcDGIi5I6r+BQXWywT75knAO5SwArvBBD3xcyyoDMO7itb/4sRnZrcgfkw/Oenh1KgWdLQLqbfJ
- USkxXBetL0JkDcPY4yydWYFMtZnHxWnXtCZ/oGXypIw2CNl/1DgEQjgNi+QaDeOktbQ5MaL6DPl
- ufjvq57x6Ijmu5x8gWWLoeBBaJwItkdmJoBRB6R5+Ek1l3+ErZVpvmj4jYb0HDTHbGd7h/91xpv
- c48zdthaESCcBT2QfsIEGbHQJ
-X-Google-Smtp-Source: AGHT+IGOMO0d9KzrK/T+47I0pYViyWZ17dGO6FhyZYlHqxLe1VOCttnmBUMZVjRDE6RIqMHSwYXibQ==
-X-Received: by 2002:a17:906:cac7:b0:afc:d246:8425 with SMTP id
- a640c23a62f3a-afddf10e297mr137639366b.19.1755593309313; 
- Tue, 19 Aug 2025 01:48:29 -0700 (PDT)
+ bh=y94xqTbFgyD/KdFYon9+rTtAVg9OiH1rlaOFwjVj1AU=;
+ b=PbwRYcOnkw0zUKumNRzskWL7ZrNE7bKzZUiCk+eY881/SJpYH68CLVjoA5KGSul3yi
+ diKdu17uNu/HRYRLd8+YKx/CsllwcNrRYeQjqqt63OQSXBE7sr5ccjwrbYFT77jVD0zM
+ YjMRm3pafwWZKlGEupbgEKxE0muNut1L7yX0TKbwbhOxBAOFe5vDUkYaD+yMpQg08XMw
+ ifLyQis5CyzbSd9/K68+R8K9nkTj8pC3T2dBJPZ3XnuDsNvWXAvUKompG9HIMoIHiYYB
+ BQ6CuGOMPK1zCh/+ZX0Xy6Wrui7j+xNpxYEkoVQXHsQx3Tk30tN0ZOZ81pB6rZvMw8MX
+ CPPQ==
+X-Gm-Message-State: AOJu0YxdXXFl1rMPggxHFd9osku//CnYX7V3ySK79cSVmxDPVqtnBG9b
+ H6XhKbiKHd6U9Ug6gu3rzWab8BlVPUPPqmISpECIdY1lqQOfJwD/CmUJj6E2oWnE4MLdJMcgDP3
+ /UylnUzLe
+X-Gm-Gg: ASbGncsUp/bhFMuI1G28OCPGVOGCWRVjq/I76XJwaVr6xtI6vPShautTd+apv0AVHha
+ XIwMzMO+N0yi6SAlZ8uYp3kmocgOaxhe+l5gRZNReb6FCG555ECcRkclbFhbo2bK67JJuw9aLTM
+ pw5h1dlZ/8wmzV3fTMLec8bdu98IGbBvpx5oH95djJrH4bz4D8XTJW7mGeb5+3RmC0KR/W6OGGr
+ J3/qRkwYdbFmhzcp82NCcBHzU1wTad4xzCMGBbag2QoD5Alug09o5sKAl3d586yImIf2t7cBb0M
+ rJVbiiMufPZq/53p5qwcJFSeVDAMK5+JyZHTqIAnAcFSU/wfnJiU6jy8xx38G5jOUmvzev0KSvI
+ sy1XWV/8+YH2wYSc4lQsZZKCI
+X-Google-Smtp-Source: AGHT+IEoPxMfcqf3oZknU+DILaBq7TNXpW/2fMrxc2C0x3yvV/3G6r0b9DRfDDpOs+hz1CgN+f3p0w==
+X-Received: by 2002:a05:6402:1d4d:b0:615:4106:9c10 with SMTP id
+ 4fb4d7f45d1cf-61a7e7473a5mr1496498a12.17.1755593336355; 
+ Tue, 19 Aug 2025 01:48:56 -0700 (PDT)
 Received: from [10.254.183.223] ([149.199.62.131])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-afcdcfcb2bbsm970608166b.77.2025.08.19.01.48.26
+ 4fb4d7f45d1cf-61a75778c5dsm1325203a12.31.2025.08.19.01.48.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Aug 2025 01:48:28 -0700 (PDT)
-Message-ID: <cb51edb1-8da1-4e2d-9246-b630282a9fbf@monstr.eu>
-Date: Tue, 19 Aug 2025 10:48:23 +0200
+ Tue, 19 Aug 2025 01:48:55 -0700 (PDT)
+Message-ID: <3dcc839f-2700-4074-a8b7-99c2a1e0d069@monstr.eu>
+Date: Tue, 19 Aug 2025 10:48:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Add missing ethernet alias for kr260-revB
+Subject: Re: [PATCH v2 0/3] fpga: Remove lattice and ACEX1 support
 From: Michal Simek <monstr@monstr.eu>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <87d88dba98f7ed96463964684ee45a506d557226.1753797318.git.michal.simek@amd.com>
+To: u-boot@lists.denx.de, git@xilinx.com, p.bruenn@beckhoff.com
+Cc: Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <cover.1753686468.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -127,7 +134,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <87d88dba98f7ed96463964684ee45a506d557226.1753797318.git.michal.simek@amd.com>
+In-Reply-To: <cover.1753686468.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -148,34 +155,46 @@ X-Virus-Status: Clean
 
 
 
-On 7/29/25 15:55, Michal Simek wrote:
-> Ethernet aliases are used in fdt_fixup_ethernet() to inject
-> local-mac-address in every boot for OS. Similar change has been done for
-> other carrier cards by commit c4a711253613 ("arm64: zynqmp: Describe
-> ethernet controllers via aliases on SOM").
+On 7/28/25 09:07, Michal Simek wrote:
+> Hi,
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
+> when fpga drivers were enabled via sandbox some coverity issues came and
+> make no sense to fix them when there is no user of these drivers that's why
+> it is easier just remove them completely.
 > 
->   arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 5 +++++
->   1 file changed, 5 insertions(+)
+> Another candidate for removal is FPGA_CYCLON2 which is enabled only by
+> mx53cx9020_defconfig.
+> Patrick: Is this board still maintained?
 > 
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> index 0d915d496cae..60ac5085f738 100644
-> --- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> @@ -20,6 +20,11 @@
->   		     "xlnx,zynqmp-sk-kr260", "xlnx,zynqmp";
->   	model = "ZynqMP KR260 revB";
->   
-> +	aliases {
-> +		ethernet0 = "/axi/ethernet@ff0b0000"; /* &gem0 */
-> +		ethernet1 = "/axi/ethernet@ff0c0000"; /* &gem1 */
-> +	};
-> +
->   	ina260-u14 {
->   		compatible = "iio-hwmon";
->   		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
+> Thanks,
+> Michal
+> 
+> Changes in v2:
+> - Get EP2/EP3/EP4 sizes back even they are not used by any code today
+> 
+> Michal Simek (3):
+>    fpga: xilinx: Check valid desc structure
+>    fpga: Remove ancient ACEX1K support
+>    fpga: lattice: Remove unused support
+> 
+>   configs/sandbox_defconfig |    2 -
+>   drivers/fpga/ACEX1K.c     |  245 ---
+>   drivers/fpga/Kconfig      |   12 -
+>   drivers/fpga/Makefile     |    2 -
+>   drivers/fpga/altera.c     |    5 +-
+>   drivers/fpga/fpga.c       |   23 -
+>   drivers/fpga/ivm_core.c   | 3149 -------------------------------------
+>   drivers/fpga/lattice.c    |  379 -----
+>   drivers/fpga/xilinx.c     |    3 +
+>   include/ACEX1K.h          |   32 -
+>   include/fpga.h            |    1 -
+>   include/lattice.h         |  298 ----
+>   12 files changed, 4 insertions(+), 4147 deletions(-)
+>   delete mode 100644 drivers/fpga/ACEX1K.c
+>   delete mode 100644 drivers/fpga/ivm_core.c
+>   delete mode 100644 drivers/fpga/lattice.c
+>   delete mode 100644 include/lattice.h
+> 
 
 Applied.
 M
