@@ -4,144 +4,179 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C717CA0EEB
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 10:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDAE2CA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 10:59:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD9680FA1;
-	Tue, 19 Aug 2025 12:56:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 4C91680FA1;
+	Tue, 19 Aug 2025 12:59:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="g7Y2CGD6";
+	dkim=pass (2048-bit key; unprotected) header.d=kontron.de header.i=@kontron.de header.b="Z3gUd8CD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AE9882998; Tue, 19 Aug 2025 12:56:42 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id C9A8082998; Tue, 19 Aug 2025 12:59:16 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27300802C1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:56:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95C45802C1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 12:59:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qePYfgqEsp0JGVILjVonWqux1CYRPPPr8I9r0ijZC9tW5q7svfK7NN0dxdYK9Q4vupAHxHKDIDYJKZ3LRKXvkPCZ7WMfOnVb6sC605YlrnUNz3HdiiVaisGI6buFW44n2POEEi+Bc9Mk4p8MtY7Ig23HjSMFlfQWjpFc4wo+Hj2YcwV4OvWrUXfBooSqAC5jo8Vs3+3DKRj4zECeQNGOeTGaub+q+bXcDmOcCOClFI19W0keKGu9ypvZe7U0wzxxKnuhrafAkjgdDOk9yXmwJSgASevbqSoWpdgLjK6X/RP93GpnYO5aXf82gFnDDND6Zg6HyGspWZ3BTDTtN5vfKw==
+ b=BDC5RCGK02/DyrvLF7YeyDYWQTnSgNJihJQeDBSoQq8/4yUClSchOmMIRg3tDrGSdxP1gmW/R9LHbU6DB/oJoCO4YGTYpbVQZBO1hvMfCpnSuanrDWx0xmFGdcRUhJp62DksLXIIePXTRuQSVbYk5vF520KAunJWaYTcoTCgYeHtdDBOemcpH8GYy9Ujk+KD/BxEpw1YUU3S/adGwDjA8Tw8GuM6aqzbIY0mEt1rnQ8sb/hXqYftUo3FA79Mfn263WuvGDxMJK4dfzXyK08S1JG7v6w4SGGYZ0cNEaW/1D0ygs3DVmhB42g1qVc3yZxpCHwcPIjM2vhngghum7t7QA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JuP7YSL9SJVUQ6DLgAQqrV4CXuz/4tIL/Zb55jd7Tcc=;
- b=AlVpiizYL8ySeRODkPnqX8MUfKHKAhn4oOeNqP7mIbW9sW25kU36OBb8uS+6ItfGYCxzfWH/mrNUOC2tcMp1WVhB4fG7ipnR6R+EswvfokGzfWVgDgdMpQfKkCq27r9pUHl08oOA05S+qm7T2DfL+XejK4t291hTAVVwwfAjbu3UjRbrYvdORxPaUgojdT6XQluj6bA233WWZjVu603jyO95SSAAJxlvvl6nIC4VwgY7UNZp24LiYthxsl+O2AinKxonkc7SY3Bz3HgJNeu9bL7wY3cxyWp8gsfaq2ZA0Qytyo67eG2Ulho3fNt9hGI7b56c63/1BdxvHXvBbV8hkQ==
+ bh=6nhNgJz0UL0qU5wBmvMWw0eYKdJYmm6FEcBeelMUKDY=;
+ b=ukfMOabwloHnr/PVt1yxTdhJrN3vy3cOJLkD2zucghwLQL8GMNY7arhK4Ep8UPIgmOF4gpaTvsG7yZIbLgJT5+V1A67JOb59GvxzvtzSmdgtLBF7bgYjXnDeKajUPEmbuNKK8gpRdIbVas701wx7msXCC1rlQKMU8ZHT+0V63pdAVUV6Cs7n/kWxcqgANMibYVvZOxWFjoEwb0p8lqYXqBgalXXmOrta36bsnp8QyPyDC/IhYe77Kl3ifI1RJxuux+xzNfsZxf2ehA1UMGMy2pGfNEkdHAKrqBt54U6+rpwj7D24F8oslZS+PvzGqzaJpHznKJJnI4ReRYUGGtCRkg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JuP7YSL9SJVUQ6DLgAQqrV4CXuz/4tIL/Zb55jd7Tcc=;
- b=g7Y2CGD6uqDqtyiKHctfBNfKhbpERn6h88JFr5ExcyPoV2CXfeSGoVAqsRgqSHjqu+Q9zVIvqojtQNDpkTvQGUpOU3eZ7VyKb240RDDmLYZlpA/qo+PyP2RGj2TDazeL2NYu1qStBbOod5agkaRiXMuv6jKaqJFSUMGGMKbZeWU=
+ bh=6nhNgJz0UL0qU5wBmvMWw0eYKdJYmm6FEcBeelMUKDY=;
+ b=Z3gUd8CDCNoP9BUvrwKPzTg08L8Q+GFCJcqomVT6mWTTSGmPFwwFFaDdCYH27SP4GVUeHQicIrYxOvGGsscpiDbhBVJOzjj/9IqeBKo0vuwn8HMZpfFCiRXAN1YLcJ53h/a0gWQbItW1WVQFBIFr6/709iDywd+J0Qz+827fDXMipn8HUnD8UA/s8ejPsL13NMVQNjuBCc44UjIH932eaJy/w1B2W84hyJV62Q41OQyT24FoJBjtL9v6HiW9J9jAfXLmp+VjRpNUk6qTnLQDLiy8SE8gvAwluL8MAYuPSVvOX67/KMvdaKcTG6Du6Vg9EoC9HI1a27FSZpxOZJx+UA==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DU0PR10MB6156.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3e8::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Tue, 19 Aug
- 2025 10:56:37 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5%5]) with mapi id 15.20.9031.023; Tue, 19 Aug 2025
- 10:56:36 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Sam Edwards <cfsworks@gmail.com>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] common/spl: use memmove() in load_simple_fit()
-Date: Tue, 19 Aug 2025 12:55:54 +0200
-Message-ID: <20250819105554.3067982-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.50.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0094.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::35) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
+ by DB8PR10MB3163.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:118::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.20; Tue, 19 Aug
+ 2025 10:59:11 +0000
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b854:7611:1533:2a19]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b854:7611:1533:2a19%4]) with mapi id 15.20.9031.018; Tue, 19 Aug 2025
+ 10:59:11 +0000
+Message-ID: <7b167416-41d2-4ab9-9786-bd9a98358922@kontron.de>
+Date: Tue, 19 Aug 2025 12:59:10 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 19/21] mtd: spinand: propagate spinand_wait() errors
+ from spinand_write_page()
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Cheng Ming Lin <chengminglin@mxic.com.tw>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Chuanhong Guo <gch981213@gmail.com>, Christian Marangi
+ <ansuelsmth@gmail.com>, Boris Brezillon <boris.brezillon@collabora.com>,
+ Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
+Cc: Gabor Juhos <j4g8y7@gmail.com>, Miquel Raynal <miquel.raynal@bootlin.com>
+References: <20250813234314.3945708-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250818100614.432931-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250818100614.432931-20-mikhail.kshevetskiy@iopsys.eu>
+ <d4e3714d-d687-427d-8136-5388694603ec@kontron.de>
+ <8b7bcbd2-4c66-4e2d-b169-c79eb7081f2b@iopsys.eu>
+ <d2f236a3-b3dc-4949-bd3b-4020a4ba108d@kontron.de>
+ <d7db7457-12e4-4dd8-84a5-581095833add@iopsys.eu>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <d7db7457-12e4-4dd8-84a5-581095833add@iopsys.eu>
+Content-Type: text/plain; charset=UTF-8
+X-ClientProxiedBy: FR2P281CA0095.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9b::17) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:102:263::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB6156:EE_
-X-MS-Office365-Filtering-Correlation-Id: 343cf168-f418-4326-07a2-08dddf0f1172
+X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|DB8PR10MB3163:EE_
+X-MS-Office365-Filtering-Correlation-Id: d6fee9c8-c4fc-4ab2-fc71-08dddf0f6dcc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?PgScZJS08WG5Na+I6SL3F0cYgJoT4xnR2beugxAIM15qAeQjuv6nnD/f+Tq9?=
- =?us-ascii?Q?/NvgOf/CfbZWetNp+y/MshOFC3vpZiy6yH7YSPYG8XuksO6s/Nd8qoeU+i17?=
- =?us-ascii?Q?AxjZgLzV4H/YfGXcWapPH1HPDqJWEB1md8VCxlCe5BImARd0k6h0M0XHpgXw?=
- =?us-ascii?Q?TgXBCGiqg9KhXOtLDYICEssNdDFWxUeGCN0ZEdGHS9c7/yg7h2kR8gcYhNvt?=
- =?us-ascii?Q?ss+qK64rXy0xBPbxUGFTqsNLGepNIUB+nqxr0Tk9ruyKR8geS2W+ZAxkd9yy?=
- =?us-ascii?Q?NUV9v73lMsU4u4BPF1Lko0T5nfSTbUCyu4+PJ6RJCqE1Zi1ujUtTa/Y3xreC?=
- =?us-ascii?Q?8T+xRyxMbMU5r1CdXb6zHcPJOXSHaSReHeOPIOOJTGZX3Jl894NJQf+2JJWC?=
- =?us-ascii?Q?LFYeOMeI/I/TfZcs8ErIOJmHlqNME/6PHrS5+Xn/uvgLC212S9dbE6GoEi89?=
- =?us-ascii?Q?Phh2vQNmOLReLuiSQ80RUtEKAMjM8wRj7z+3NpyRlyC+bxuTshg0VNIqcG8l?=
- =?us-ascii?Q?aF8g3JxbXl665p9C05U6NrUOjtFA/MCgfQTmok3WRQkcgDlYDlI1TRliT2fZ?=
- =?us-ascii?Q?KBrbEyMqk5C60SDnOidcSxSbxSnYaA3FpuNh09C3t8TWH7aJjBUJo4rFyMPC?=
- =?us-ascii?Q?CafI1vvipzCFr8mK143ajJuqK4r0bKfNmQ5pA8meHMVQEJLQPgWWb5Nvw0As?=
- =?us-ascii?Q?afYc3ijAl8jUXeiUu0sENaDhKjX8M4iZP6sQ9kfm93ihgFJd2T3FAa9sIP9R?=
- =?us-ascii?Q?uWX02ha2Za6OhktP2SjzgwkMZIJ1Cn6nAGg2b4Ee34vlivM2S3b7q3Y/XODV?=
- =?us-ascii?Q?EgrURVMOQq1ahddv0pUtg1KDYL6EmkPAVZbca7oyFF2BGqhzbOdlwyl3qJDx?=
- =?us-ascii?Q?RaYjHaGv6iUPHaMKspxLwtUTjzkcK5ManAmB0frauEBSIWiaNiQKNtgM8Kyx?=
- =?us-ascii?Q?qzHv6lrSkqU5hDzeELXCDb6JRfWv8vRYf4W8iEemvwaeZSgZvSbmDq9ZA8GD?=
- =?us-ascii?Q?y7/jkmkPGU8L2O/IwBE4WImqyIqPOS4VAQuRoWOlxk/PgJ0E6A6EpnXFfuZs?=
- =?us-ascii?Q?XzW5uYM+pRixAZ89cKQGZj7y9h2k+BxFMgThDLQu0WNqUYUSckLDVJmEXAuE?=
- =?us-ascii?Q?OxoxV8HT35yCko+/3Dmhvh5H7rfILE6GhpyU5aqdOKdU259a34Uoc8iso3DO?=
- =?us-ascii?Q?tuODCebkAmYo4HlnNaXm6jCvQL5DcZ03dNxVrXMIHpEqcwQz6YpkJ+q4fQM3?=
- =?us-ascii?Q?VTRNAKWFhjtn84gwokbJdef2kBHsALvO/aAkYi25j8RGTigJnwI4FiZMXeDT?=
- =?us-ascii?Q?xTQoDzzmtikPzLBFjFY62ZNxS2exSzn3iegp9r60fYl12WEUfBK4VP6TXh3y?=
- =?us-ascii?Q?J0oeLPeIy2THg/o88bSUg4fQKEJgsPXW7uwLLBnfwysChg05+4tBSoI2Wk6z?=
- =?us-ascii?Q?eCjoZUdEqXXXpgI0pju4qm6kUSFGW3eygPINmwPpal6h+UbuxqZ7Jw=3D=3D?=
+ ARA:13230040|366016|376014|1800799024|7416014|921020|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NVhBck1uRDhQSm14S1VoblEwRGd0NTdYVEZPL2oxc0FpY0VOMnJMNXU4RitZ?=
+ =?utf-8?B?eXYzOFJGaStESlBnZWd4alNVWUJvYmRpY0F3SHJIcmJyYXBjeG45TlVpZHhT?=
+ =?utf-8?B?eXBSTHp2U3p5VmY4aTlNcVAxeWs5ekJuelFwb1RvcURKVklpZFJVSk8yeFVm?=
+ =?utf-8?B?VHFNRVRGTUcxblRoSlhodGEvSDVkSE0wSHIxR2Y2RjlHb1AyWmh5ZElGYnRv?=
+ =?utf-8?B?TWFDQWdHdkMxTHk0bEdxQ1BJbmx5UDJGeEo2MDlQRUd5RHFtdmtSVW1RM0JM?=
+ =?utf-8?B?S2pGZ3hWZk1od21ZZE92K0JWQXR4bDNHK3lzRHk0QmlqaGNFTlFrUHlwM3dw?=
+ =?utf-8?B?VnVocGduZGRKd3pLWmcraDkrWCtWWEo0Z3BBVUV0NXA2dVB2ZGRjTzNjZ01B?=
+ =?utf-8?B?N2JZbXVydkdOOFR0TmMrbCtNWEtNN2hXdUNwSkxnVE1Kb0xkaklDRjF6T09W?=
+ =?utf-8?B?SzkwQUZKMWR3M1hNaGFhc2xGUlNhQ3c0N2RwY1ExS01zUGNzRVlSQ29WUGMr?=
+ =?utf-8?B?bFJQMG1xUUtWbEo1VUxIekZUQnk4NnlYdy8rV3YvdzMwTCs2M0cvNzI3dGhi?=
+ =?utf-8?B?S0t6MnIyNmpUNEdWb2xFc0Ira0lWMTdmQnR4RG5tVEIyc2I4RkNGRzJPWDVq?=
+ =?utf-8?B?Z3dtYWJkOTZCQWdpb2JqTW4rd205SWxrWDhiNUUvOVJVMTRaYVdIS3dqQ2I4?=
+ =?utf-8?B?NTZZQzk5dmVtSkhPWFUzK0I2ZFE2V2x5S1Q3ZnhDZGxpOGhRQUU3SHhsTEhh?=
+ =?utf-8?B?L05OdERxUE1FSXd6V1FhR3JoN0ltajVNNHM5ZWdhTUdVc3BzNFlLcy84OU5U?=
+ =?utf-8?B?UlBjZmc2Ty80dnNpSWI1elhFVHhWRWdUYit4VnpDWXAxUWIwejhpY0FzaTlJ?=
+ =?utf-8?B?YUxqeGlSWWN6WG5XWWQva2Z4L2xKRzU5Y0JjcEUvWHZJdFg2dHZHZWoyWHBF?=
+ =?utf-8?B?Qm1yUHZyckFsVVo3MkFqVzM2RlRlRVdMVlJGTE5HQ2RibnpQdHlpdlNjbU9N?=
+ =?utf-8?B?M3ZFQi9SZWhVYTlROVFpb0laVmduZW1ZNlpQUXA1c0VnSUNqdHpQK2RkNDlh?=
+ =?utf-8?B?SjBJSnN6R1pLbmZpMjltNVdxMW02M2YwRzdhRnhtdm9xVUJnYWtsbHZaMVRT?=
+ =?utf-8?B?UDhHWnBFdmVVUFBQSzBVN3VNWkd6K1JSYmV0WnZ5dTFEZm8ybXNCTHJJQ2Ir?=
+ =?utf-8?B?cFdjWXRmNFh0QU1xU09iMFBUSS91SGt6N1dRSTdsZEd0Z1R1ZVJHWGQ0VitW?=
+ =?utf-8?B?RmpjWE9Bb1dXcTRzMGNHaGxaS3FVbFdhZlJzam9YZktTNGczRjRKNkFXcVY1?=
+ =?utf-8?B?OFV3R2paRk5QN0ZrZGVxMXFMSmM1UVdjczJGeUs5SGppM0FBMnI5SzFvU252?=
+ =?utf-8?B?dVBzTHEwVWxpUk9HaGNGVUpoYzE0ZXZKb3Z1WWpHS25oTjB0Ykp2T2hvaExx?=
+ =?utf-8?B?TnNlWHV6dkhTTC9rMGFUT2RMNlJ1RFhCV0M2L3pMWU9YUW1CMDBZU0hkME9N?=
+ =?utf-8?B?WHpVK0VtakRuT2hMYzdTcHpHY3dpTW9nQXRXZlh2ZWxrT3NzTmF1T0NZdHR5?=
+ =?utf-8?B?NmhHNk1zampLNUxZVThzTWRISXJ3eFBFeEwzYlRvcmgyaHZKY0E5TWJZNVVr?=
+ =?utf-8?B?a1hONGpXYUhPTFhJbHFjemgwYW8xVEFRd3p4Ym5KNG1hTDVVdlkxS011ZkdY?=
+ =?utf-8?B?TjVVZ0Qwc2RuTGpzZHp2Yjh4ZGd6YXVLRktaRTJCVG9nRlNaWHFqOWNGMFFy?=
+ =?utf-8?B?NktBM1B3ZFRoaGw3MnBEeGtPQnVPdGR3TVNudldQRWxPS3JpaTdJS0toVUNo?=
+ =?utf-8?B?a3VuSGlxanFYVzd1OGhUMFl6MEtCTTlwMDVsTmhza3dyd2piYys4WmtxRFh5?=
+ =?utf-8?B?Q2E1bS90ZFU5SmRESk1Wdm9ScFVOcHRmR0I0MmIzNjdjalJIcXR1cVRmK0ha?=
+ =?utf-8?B?Q1pibnY1QVlvemRnV08zMlRCY2NPdEdWS3l5aE8xMzMrVHV1U2ViSVFRV0Zv?=
+ =?utf-8?B?eFFwOTRud1BnPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(52116014)(38350700014); DIR:OUT;
- SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7416014)(921020)(7053199007);
+ DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VKyV3uORBi0J0Ni+PlIM5pfjXKZmVgLrTC5AuIcWmvxKo98/wK4z6b+sM/SP?=
- =?us-ascii?Q?vKid7G1PDELouu1VL/saPaHIAug1paATfZ91glSXp/wC2/skNg09lF56QXib?=
- =?us-ascii?Q?u4hE1t0vfvuTfU6mVIEacHR+Kes0q8QujWzV+7zvZI6R2r3c8YaqwGZ3i7sm?=
- =?us-ascii?Q?NDu8LYxrBTcSoqNcNXe4XPrBHB8ArylLXZX9NoiPh2c1TATQqolzfk2/T48d?=
- =?us-ascii?Q?4MQLXY8nlipMQXy6PirRo0L/k2aH6mht7qWSFczTD+EOZe2gDEkA6J6kFB9J?=
- =?us-ascii?Q?pjlC5itiFZLKuA5NpAgkBw192apEwPMWNEIEBwMlm50ghbsZqDrUWTzmW5Hi?=
- =?us-ascii?Q?WbuA62CArcZ/GN2koliktY8dzKcc4PpdHDbvhDbb/IlDVZtYhhCE83oUl+O8?=
- =?us-ascii?Q?xm1XNk7n/WWkL7Flo3caTOkReStCNT9i8Z5T5q5TcAWwPjeY8TO9p4TuWPhx?=
- =?us-ascii?Q?4mTojuX0Tb3hhu21nCtB41eMQjVqu+yBfoRq0dowdWWdMUt+u6WfBpPoQQuD?=
- =?us-ascii?Q?fQmlUdeLBxkbdr9bEDIL66CguofT4HID2uaoykFI7e4qc9r29ojMtyTQqC79?=
- =?us-ascii?Q?oSSVcHe7hao4yL3RxgHTrhaU0xVlY4w3vsFaQh8TLOk3mhpWXpUjX7XJPreE?=
- =?us-ascii?Q?e41IxBYM5M1Oe5h+R7bQBpWzosa7oklTowuXk+FS0vm2tRs8JM0Rak3t4zKl?=
- =?us-ascii?Q?T7YQpFS17SgLIh8VGE5LGhMfFrVVOfD5QiwQhE5k/dL53Z4lI6L+OrdHpGOE?=
- =?us-ascii?Q?13NC+8hJdZI5qWt/FGDRfyyWl1IXfgJ7T3RzKkV631duN23sRr0UebWl4XBg?=
- =?us-ascii?Q?DemIlurrCAvU7DcSdjaeHrV+RBUvk5uSTe7fA3YYPDogeIsM5qGWoNf5UdJs?=
- =?us-ascii?Q?ZpiTUqMMwg7VIYfrbInBewn7OUrWpDLmm5h8I6pmh4uE1KBdWP19QcbQ31o6?=
- =?us-ascii?Q?O+PLhi7P8JChXIbhNfLAO7R8l+PEVh+GWqLObv34gDCHQA0Cqq0EMmtZTx12?=
- =?us-ascii?Q?mZg6xXTIV3Q7b8JhJq5NYb8s8OWuu2inwCdzKS/wi0xIjfcxeLdsnRY/QUxr?=
- =?us-ascii?Q?/uiKngPJShyKcfi4JLDLl6K9GzYztqFehtml3w5Mp4WONz9pPKTO3phgq29n?=
- =?us-ascii?Q?atPOnkwos3vaPGDnAQMqe1XM+BKS2TNKKd5q2hd54RRgr+mTvZGFKUAirOXo?=
- =?us-ascii?Q?DWQyeKrGX39K7buMvaQHL/OYRv1j3Kj4iJN3SkjmCeXHWJmK0C/zG/Q+O1U4?=
- =?us-ascii?Q?5R2XnBklqy6oyhLaOh7rrHk5ScHdm0L/+JGK/gK+dKtf0pJm/wcntCg+lf9B?=
- =?us-ascii?Q?TR7cw2ClYmsu3356Hal/00+F2ANH9fJ/dtv1uxsOlE4+KZwha21Fn36+mjtE?=
- =?us-ascii?Q?peuRaJouwL0xmQtIDOwfRGIe5jJItlpwEvToWVvYhgzBGjvWNamQ3/fLWuZn?=
- =?us-ascii?Q?fmuCr2Ltk1qt77gH7C+4fT0eM/Uul1+f5f6xCrsjWx4jaSGAtRgcgQB2Sagc?=
- =?us-ascii?Q?QPx5AoD6tQXnZyeyfbONAiMxq9Z8m9Ba+ommMlZDjkhcObbo1s2D+6MWdcQk?=
- =?us-ascii?Q?UzE1wsqWrrUg5kRetqoXz8rpKj2Ry3p2RgUXqbR1mtijl43cvaSHs8KeAmtP?=
- =?us-ascii?Q?mQ=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 343cf168-f418-4326-07a2-08dddf0f1172
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K1ByKzFsL3FSTlpEYjA3M2llaVFqV21ZL2cwekRKRUJyNGRVakFtRW05UVlt?=
+ =?utf-8?B?RVAwcER2cXZpMWtqOUpFUjF3QmJoMzFyU3pwSkFGSGhqVWRMR3hPRzV4aW8z?=
+ =?utf-8?B?VUpLRU9PUE0zY1FsNEJZL0wxOGZFWDBqSThuT2FNVmVnT0IvSCtWQWtRUytu?=
+ =?utf-8?B?YVhnMTlRa1E2Ym92RGRqQ3hwUjhycWhWSVJiaU9QbGkvU20wS1ZDVlhQT0E2?=
+ =?utf-8?B?SVpuTDl5aSsvQXBLTTJ4eWxSekkwTEFwVkJpeGVtTmRLZG5DaDdQdDdJdWxu?=
+ =?utf-8?B?NGtxSitRR0xQRHFBazliY0V1ME9Odm5SNXB5eEJ6SlpVY2xGQWNkcjZPWFVC?=
+ =?utf-8?B?cm5DaW56NEtyK0R0a0VUTVF1bW1Pek9CQzh3WFI5TTIxa0ZuTDJud1ZaUkJz?=
+ =?utf-8?B?elRNSk00WVJMbld5b2FESEU0R3Jxak5oZHMrMDNNYjVHR2drN0F5ZnBoR0NZ?=
+ =?utf-8?B?NlRVbHBrNE0yYm40ODVkRHc5TWI1UVRnVExSV1dYZkJ4UUNncVBTV0lmdG1p?=
+ =?utf-8?B?Q1k0dmhGT2hsK09IdDZlK2w0eE5zcjVEZmJneGEwN2llNElzVkxoeHA0QTRZ?=
+ =?utf-8?B?OTE1Y21aTXE5RHpJb1ZPTjZseDlteDhmcE50VFV0MkViYXpYczJSRVBoSnVa?=
+ =?utf-8?B?NWEvOTB1cWdhRExQYlRxSDVMdDMrd3RQbnAxR1ozc254Q1ErY3FiVzcrWXIy?=
+ =?utf-8?B?QStncHgzZjVQOVhTbHdZN3JiVEZGbnZPRWxTWG9zWEdubi8zMjZsZUNSZmw3?=
+ =?utf-8?B?VVhnNlFNSWZsQnQ1akMrOEZvTjZlVWhoSmdiK0NQZk5vN25zQ3NmLzVMYzFM?=
+ =?utf-8?B?M0R2WVVvZkpsdkkyclBCQTZwOVZSL25rUUF4aTJWYU55Ukw2VEVlb2hCeGZW?=
+ =?utf-8?B?ZVJTZ012MkZMay9wYnB6WVp1QzBJMEUybUtJNXNDaHYxcjNWUjVRRlFiZFNL?=
+ =?utf-8?B?ZWx2Q0d0Yit0elJrSUlBR1NPRTFhS2lnbUpzb3pRYmR3V1dBZGU3WGprcGty?=
+ =?utf-8?B?SWpzcXVUU1g2dkE1ck9jaWxLQThXOVNBYzBlU3RzZTdMU2I4YnhOTEhudUg3?=
+ =?utf-8?B?SjVmaXlsL0U1akw5NE05S3FVampUMWlWaHRlQjN1MWRFeGt3dzFKY0ZIZ1pZ?=
+ =?utf-8?B?cFVuUDhFaFlBOWRFckptdDU3MXRzb0lDcExDQzN5ZU1yMFdzL29ybGV5Zk8w?=
+ =?utf-8?B?ZEJhL0JuWVNvN3NIaGhHVXN3VXhLUi8ySTN6b2hGTy9SdkFsaGtDR28yQ2ps?=
+ =?utf-8?B?YlJGTUZCakEyU3ZvMkJuTWFic1NzZkFCM0xScXoxelRiQi9mOGo1Y205Y2dC?=
+ =?utf-8?B?eE9GdEFSdUZrWTZYclVpdGNsRms5b1M0eTN4Rkt4WnJINmg3SEZnc1JNMUhX?=
+ =?utf-8?B?aS9jNWFDWkVUbGdoMldhTnZSUXZ5Y05pWmErd1IxQloxVnZHWUlsYWNycWY0?=
+ =?utf-8?B?b3o1YkxLMTdRcDFwdU5BdkJOdFpJUkZ6VC9kT2dWcTlPbXZaK3U5YVdFY3dn?=
+ =?utf-8?B?ZCtQeU13YzUzV3JhVWIrcUN5bmRyM2QvbVZKeGluOC92MkJoYm9MZTJFN0NI?=
+ =?utf-8?B?ZU1xRk92OTQ3OE5rRUQ5WTdiTmEyNFdoaE51K1o0OHpLNW5Zb01nV3Z0T2hF?=
+ =?utf-8?B?bU9udDkxV1JwQW1QRStvL2daZlIzRWVxVWF1ZzRIeUR5a0RENW9jSGpyZVor?=
+ =?utf-8?B?N1JWWlQ4SU05WmNEYjJ5TkRIei9CYm44T09hMVhabGxLbTd4NXRCTTJzdU5X?=
+ =?utf-8?B?R3Z0MEpzMkc0WkV0QXdYUDdPcFlyRTFudEtsanM3Zm8zWE1yc2ZROWQ2TVQx?=
+ =?utf-8?B?ajdkUG5JbWp3Qnl3a2I3aTVENmxYZEFCcDJZZmRKNi9mRmxBMG9RdlVVTDJG?=
+ =?utf-8?B?VHorK201NERDempnazRnV1JlRGQvbllDbm5kc3hPNkNkYUJlMkRiN0M3b0Ez?=
+ =?utf-8?B?ZXhzSGJsM2F5ZmRKM1h4U3IzcWwxRHZUS3kzUGNPdjRMZmY4Qnc0S0JrYVhD?=
+ =?utf-8?B?eWFUc2lhekJnZG9QZnJORktqMWhPQUZsZk93Z3lDODBOdTBxTDF1K2NpYVhN?=
+ =?utf-8?B?TnJnSHovUmtmLzRjeVlQaUVOSmErTEszbERVMVprMEE0Y2IrN3hMVEczZXNQ?=
+ =?utf-8?B?S3JFVCtLZlZsSm0rdytHTmZ4azFhVVVrS2R6NW5MQkpQbjBQWW1vVlFGR2FW?=
+ =?utf-8?B?ZlE9PQ==?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: d6fee9c8-c4fc-4ab2-fc71-08dddf0f6dcc
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 10:56:36.8198 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 10:59:11.7333 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FLwlt/5U4WiwqJW2mK3CH9dLoQHf71mdp0ZOHB0HlSAyM+oJSqtvfKWkr+7PGysliJhaYPac2/HGKyJ7dhT08zBC0ulkj1fjYqdrljyMiHw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6156
+X-MS-Exchange-CrossTenant-UserPrincipalName: aGUq943lmx8yHWua3ysu263/3hGxRbq1keHZfEG2e2n+E6qrlinWp++oD4SHy2wiNK2fmBYqeNU3rcVIQnMITmIRE75FLElbE65I4RiYYMw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3163
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,47 +193,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I had trouble booting some am335x boards (both
-beagleboneblack and a custom board). SPL would start just fine, and
-apparently load U-Boot proper, but it would hang when jumping to
-U-Boot.
+Am 19.08.25 um 12:47 schrieb Mikhail Kshevetskiy:
+> 
+> On 19.08.2025 13:42, Frieder Schrempf wrote:
+>> Am 19.08.25 um 12:34 schrieb Mikhail Kshevetskiy:
+>>> On 19.08.2025 10:26, Frieder Schrempf wrote:
+>>>> Am 18.08.25 um 12:06 schrieb Mikhail Kshevetskiy:
+>>>>> From: Gabor Juhos <j4g8y7@gmail.com>
+>>>>>
+>>>>> Since commit 3d1f08b032dc ("mtd: spinand: Use the external ECC engine
+>>>>> logic") the spinand_write_page() function ignores the errors returned
+>>>>> by spinand_wait(). Change the code to propagate those up to the stack
+>>>>> as it was done before the offending change.
+>>>>>
+>>>>> This is a port of linux commit
+>>>>> 091d9e35b85b ("mtd: spinand: propagate spinand_wait() errors from spinand_write_page()")
+>>>>>
+>>>>> Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
+>>>>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>>>>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu> # U-Boot port
+>>>> This seems to be a fix for a change that was introduced in patch 10 of
+>>>> this series. We should avoid introducing regressions and fixing them in
+>>>> a later patch to preserve bisectability.
+>>> Hm, this a bit contradict with removing fixes for continuous mode. In
+>>> linux, continuous mode makes some flashes (mostly macronix) almost
+>>> unusable on some platforms.
+>> Sorry, I don't understand how this is related to the continuous mode
+>> fixes. I'm just asking to squash patch 19 of this series into patch 10
+>> so the changes of patch 19 are included in patch 10 in order to make
+>> this a single consistent change.
+> you write: We should avoid introducing regressions and fixing them in a
+> later patch to preserve bisectability.
+> Continuous mode introduce regressions (see:
+> https://lkml.org/lkml/2025/8/14/349). My patches fixes this regressions,
 
-While debugging, I stumbled on this memcpy() which from code
-inspection very much looked to have overlapping src and dst, and
-indeed a simple printf revealed
+Thanks, now I got it. By syncing with the current mainline Linux, we
+also introduce the same regressions that are currently existing in
+Linux, yes.
 
-  calling memcpy(0x8087bf68, 0x8087bf80, 0xf7f8)
+But that's a different topic than introducing a regression in the
+patchset and fixing it later in the same patchset.
 
-Now, it will always be with src > dst, our memcpy()
-implementations "most likely" do forward-copying, and in the end it
-turned out that this wasn't the culprit after all [*].
+The first problem should IMHO be solved like this:
 
-But to avoid me or others barking up the wrong tree in the future, and
-because this use of memcpy() is technically undefined, use memmove()
-instead.
+1. Fix regresssions in Linux
+2. Port fixes to U-Boot
 
-[*] That was 358d1cc232c ("spl: Align FDT load address"), which has
-since been fixed in master but not the v2025.07 I worked of by
-52caad0d14a ("ARM: Align image end to 8 bytes to fit DT alignment").
-
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- common/spl/spl_fit.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 25f3c822a49..746c3d2fa28 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -353,7 +353,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 		}
- 		length = loadEnd - CONFIG_SYS_LOAD_ADDR;
- 	} else {
--		memcpy(load_ptr, src, length);
-+		memmove(load_ptr, src, length);
- 	}
- 
- 	if (image_info) {
--- 
-2.50.1
-
+If we want to avoid introducing the regressions from Linux, we should
+delay the merging of this patchset until the Kernel is fixed.
