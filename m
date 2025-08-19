@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 084DECA0EEB
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 15:53:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FA7DCA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 17:39:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E2A0809A5;
-	Tue, 19 Aug 2025 17:53:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B056802C1;
+	Tue, 19 Aug 2025 19:39:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WyUYujw4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gvj0GY0T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D7580FA1; Tue, 19 Aug 2025 17:53:38 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 91E4780FA1; Tue, 19 Aug 2025 19:39:00 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CCD0802C1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 17:53:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFF8C80107
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 19:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3b9e4106460so4324357f8f.2
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 08:53:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-618adc251f0so7315169a12.3
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 10:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755618816; x=1756223616; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qFu12/frkuNynUyQ90/Gcao/Tlj5NS47sRtF+lN+Hmc=;
- b=WyUYujw4YnZoPa40WGOvDCUwMFSsPOrIGyWLCZmFV+EpKgvogWbFvWiCcOMGfBSJ5G
- Mulj4K4V2818byBMY8sLLVqrCNsayYEUL9697eEJ4X1SZ1MKT7/BbaKtVXh1SqWqpYTO
- 2szMmlLj+tkXU/1EoC+pzb+AK/P9ku4ofacRJ0JEjmJgxXb/KX3UyO1jTRBDz7fuvMNC
- o9NvgAfM56InR3hoI2ulCat6I92t17GORsNqPL5Y6LIwEVGrY/naQVc6VQl2C0oVXKvt
- jMjrsh+ozJAYkbApL5dIwNoBwYoZO6EWRPZQA80SfZ0OF+HKjBCZ1ligY4amj5PfTHvF
- Ideg==
+ d=gmail.com; s=20230601; t=1755625138; x=1756229938; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IxVbnzWas2fdmhYx/mEbpynaulucbt5xWQ2+WIRPFBA=;
+ b=gvj0GY0TM0lstknOUYbpz5Am5UnAFNv5mkIjkFt2j8XMEpjKaqLhvzVEkWpj91XEYw
+ 7U/bRQFNtpXPhV7DsOT3lFHB0r1ZO7Mn3n2amwNnghHfVNM06B94I1T0Pprg/ZGIDqDr
+ VaMwZ8SDlrgEWUTL1gtgw10ns1d0JAUpg3Z48PkNN4T+Wdl056VUxQZ/yszTxU1Y7zlw
+ RcmUMxInJcaePk62J98neSbmOqyPoaxFB7IancRFqjm5r6zblRSFTgxUHEzDiUeWf03v
+ /nHQmOuT5OaqlYmtQ6mQq9L3G3fOsI8tgmLkqpekkZFFH91id+hW2OKTvPEQ4uKUgUze
+ Q2Jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755618816; x=1756223616;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qFu12/frkuNynUyQ90/Gcao/Tlj5NS47sRtF+lN+Hmc=;
- b=ITKNErXkoUzKwrhkMHvWhT877pA0tj0DEuruXVtsDuEflI9GmPpPjmA7yp4m5On+2w
- sUjpOuT5KsvgIhuodQ+Ty2AgB07xif2z3R4sz+KfbMFNXav9RyvQy5TIXlXPifaR5YgW
- NZUIbT09JougleHpoiYIYYM1YjbQmBJUQ5dvqk5jlNUk9MVHssQebUERbjawUxpe0XvL
- 4UDJorrIpqv7r4g6StuP1l9+d88rOs8xiJlEVD2JQWkJnQwCCBYrkv5tYaRA+p8FwBw7
- 3wgJNJMPxESa2cYt4Kf2wT9nhvWdcGagoVow1ckWiKwfxZz/R4cfJHtlsbHVqCddW2x/
- SBbA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhO0RUg7E5YVHQOs7ZfdoW7tytT7VEPGvW+6CCrfWQ+4uAToza9FJ4n/O/b9xCvPoXs9G5l+k=@lists.denx.de
-X-Gm-Message-State: AOJu0YyeBbv5rR8HC7XcEB9weH1ZVHZ086IbJpD/m5BIOY4Na4rtcvPr
- CL0enYX3prZ2ftKj197nbaK8+DeyEEwdJmzAt7iySWJT5F+AH4/Po71cNvCigCYt/BH1CEfiMNJ
- U11GBJzidaoc5DHF6baUPWU/yx2BmDqbH8A==
-X-Gm-Gg: ASbGncs8PetPoXrKbMFL/ymjWMTlcpB1WORLIb7PCYJbl64my1hs7ftRNQha6VGWnhS
- yDF20yAR3X5pZuD6bVoiu9H1lv/yVCQHGuhx5o6Aca8lSXL53yL4XzfEXHA8dLtd8Xq7J6qnKzT
- OUWr3dJOJQTlxm2PRyFCgQNk/6t/8xYOcdvbVlrvV4UZih2XuCnDmv2LrPmMpsLK5wNZ5qVfTXU
- IJzj5u4EIlc4oKUBEI=
-X-Google-Smtp-Source: AGHT+IH0LBl0ZoqMxJgX+vIj0dMlZhrhs/JiWJjoJUhwWmcMi7ygPOvThjcS9bHuF6gx3+rTSenlDYVDxEZd9XePdRk=
-X-Received: by 2002:a05:6000:2886:b0:3b7:901c:92ee with SMTP id
- ffacd0b85a97d-3c0ed7b9188mr2171582f8f.58.1755618815761; Tue, 19 Aug 2025
- 08:53:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1755625138; x=1756229938;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IxVbnzWas2fdmhYx/mEbpynaulucbt5xWQ2+WIRPFBA=;
+ b=OFCGlqlQCd650SE9bC7aWJPbXJJFztLhay6GvVfAEWu4ezTWntafyFbLy1jeG2AhFE
+ ubdYDCiyQYgnEIjc0f9Jf5S02Srq8YefE0UohIdL43zZwBLb3z4qFOYVj02D1ONqCAW7
+ RxJWPQMirNNarep0SMwszl44Bz5gRHJ64KMJXJnlfAPlU7iXJJCN8xw71m6BRRRjiV98
+ 8sMjo3/L7T2Py28YuaR6fCCdMQeNLsPiu3ggkpfAdDhiLayvJxXYgTvDl1vfTsdjGRUn
+ wAWUNE3jJkVsF6by6rx4/KCjJgzGrl08wYYM1V6AcOWeaMw3BRLc5aqdCrD1PNIxLLEH
+ eRAw==
+X-Gm-Message-State: AOJu0Yzat1riXjbp/YDEyoVun7ZwrT2aKDJjmEdwGPYB1J1vZQpPk8ou
+ Fl5dmeeQ6tOI4c+Gm8P9TCAJoKBVRyYjRDbpYa3UXVBpXhtxHFdCg4Pc9d76zRbutOyX0LC8wxt
+ QbG8gOHa2LMXJJZYN/p2ubZEsaQeQOvGpE0NxGJU=
+X-Gm-Gg: ASbGncuBrOoFIY38CPNCkHVMzhRfmXYW/eePMbWKIvrtXMZjCZTGfhsbmHRogemHotk
+ +1WMJ9k0+1oZ9OXrkutZI8IokbVd6THe2o3bNuWnCAcvsgV2Zlh0unVSanNVTTyXyQ4J/CkoO+J
+ jA1KmSeyeYYkz/ahCgnQW54Igiz5p8vSnaL160Mij5wDhNyG343qZgfWzbMKo8b8Yp/AIyW9uOw
+ PAVKw==
+X-Google-Smtp-Source: AGHT+IGY+ZWJJNWniRjlaCwRpah+BwQmGeiVgqmVv9SggJq8cYwKvGUmeoTynHjZyu/yfcL8/1GUNd1bs5EAB7f6xWs=
+X-Received: by 2002:a05:6402:2086:b0:61a:87c8:1b2b with SMTP id
+ 4fb4d7f45d1cf-61a9752bademr132122a12.3.1755625137868; Tue, 19 Aug 2025
+ 10:38:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250819154025.604784-1-pbrobinson@gmail.com>
-In-Reply-To: <20250819154025.604784-1-pbrobinson@gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 19 Aug 2025 18:53:24 +0300
-X-Gm-Features: Ac12FXw_sLDbk__Wkn6UgXmvgvo-t1VtI_eYl5zc9V9uxprdkDUuX-_EYEgDI5Q
-Message-ID: <CAPVz0n2UiG2exN-mBDLv2jX-5+DVmALRwQ1ry7o5LzVL5zQoOQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] p3450: reduce size of Jetson Nano u-boot.bin
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>, 
- Tom Warren <twarren@nvidia.com>, u-boot@lists.denx.de
+References: <20250818165119.3193853-1-trini@konsulko.com>
+ <CALeDE9PqJBA9gS+YaNjM605fH011wL1SyT8Odk_k2Lm_V9EHLQ@mail.gmail.com>
+ <20250819145737.GB124814@bill-the-cat>
+ <CALeDE9PXjSh9kySvOEc-4KDVp7dT+DUUQVYh7JUk2pS+vohe7w@mail.gmail.com>
+ <20250819153522.GE124814@bill-the-cat>
+In-Reply-To: <20250819153522.GE124814@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 19 Aug 2025 18:38:46 +0100
+X-Gm-Features: Ac12FXxjhdanHZC6aSzF3B7tyhSc0AyYw6JM87O_3lTVFP_hBpjhYLxd7yPcvvk
+Message-ID: <CALeDE9Nt9j7Hq-C1Etxh5EpdD-r09+XYeafL=U4O5cV1rvejHw@mail.gmail.com>
+Subject: Re: [PATCH] boot: Add LEGACY_IMAGE_FORMAT to DISTRO_DEFAULTS
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sascha Silbe <sascha-pgp@silbe.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,25 +94,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 19 =D1=81=D0=B5=D1=80=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 18:4=
-0 Peter Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+On Tue, 19 Aug 2025 at 16:35, Tom Rini <trini@konsulko.com> wrote:
 >
-> The Jetson Nano contains all it's firmware on a 4Mb SPI
-> flash, the allocated size in that flash for U-Boot is
-> 753664 bytes so we need to ensure the u-boot.bin doesn't
-> exceed that else it will fail.
+> On Tue, Aug 19, 2025 at 04:33:07PM +0100, Peter Robinson wrote:
+> > On Tue, 19 Aug 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Aug 19, 2025 at 12:13:31PM +0100, Peter Robinson wrote:
+> > > > On Mon, 18 Aug 2025 at 17:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > At this time there are still major Linux distributions which by default
+> > > > > boot using LEGACY_IMAGE_FORMAT type scripts. Add this option to
+> > > > > DISTRO_DEFAULTS to ensure these platforms can still boot.
+> > > >
+> > > > What is the legacy image format exactly? Does select make it non
+> > > > optional, can we use imply or similar here?
+> > >
+> > > In this case "legacy image format" is uImage-style images, rather than
+> > > FIT images. And no, we can't imply it because then we'd break Debian
+> > > (which doesn't boot on a handful of platforms now which do have
+> > > DISTRO_DEFAULTS but don't have this).
+> >
+> > The distro boot stuff, which if my memory servers, is what the
+> > DISTRO_DEFAULTS is used for, never used the uImage style kernels.
 >
-> Add a BOARD_SIZE_LIMIT and drop a few large, and somewhat
-> esoteric, options to bring us back under that limit.
->
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
->  configs/p3450-0000_defconfig | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
+> The same uImage-style header is what's on top of a "boot.scr" type file.
 
-Thank you for your contribution! Both patches LGTM, but I would like
-to run a few tests and checks. If all goes well, I will pick them.
-
-Best regards,
-Svyatoslav R.
+The distro default scripts never used that either, the whole point of
+them was to move away from manually crafted scripts and custom formats
+to boot a device.
