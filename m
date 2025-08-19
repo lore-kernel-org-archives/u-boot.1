@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1971DCA0EE6
-	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 15:25:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C7DDCA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 19 Aug 2025 15:33:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D261582E37;
-	Tue, 19 Aug 2025 17:25:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D1C4809A5;
+	Tue, 19 Aug 2025 17:33:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nhVsy9sZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NTBI6S2C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90CC6802C1; Tue, 19 Aug 2025 17:25:29 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 1887B80FA1; Tue, 19 Aug 2025 17:33:22 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 872A680FA1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 17:25:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D30B802C1
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 17:33:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-74381f217e7so3594669a34.1
- for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 08:25:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6188b5f620dso6058270a12.0
+ for <u-boot@lists.denx.de>; Tue, 19 Aug 2025 08:33:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755617126; x=1756221926; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5H3ilZjRZVHMdHwn5Ag8ozamCw9M4OHScDdlQJFzCo8=;
- b=nhVsy9sZsnvlldNT2H8FhQNliSACFHwdBD+74IAdWpXMTBzw//3Yck3HAAHDaFBxee
- QJqVp5WYEs5F6gsFmnT5ozp6vmu8vzDtuPXphAV/UZFvKX0+T3H3nvCDLpZUsBXUt0Ts
- 5QdElzacthOkdeJLhVKZlQSGVw2S8vKvEey9o=
+ d=gmail.com; s=20230601; t=1755617599; x=1756222399; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PriZIRLDaJlPSNbLotvDQOgIVJfQqdNVzfybxePtctw=;
+ b=NTBI6S2CaFzv3fRMC0dkGxXH06s+9BcKUHd+iNYHHy5P3vzijMhOqtQWH7KLxTS6zh
+ 7GDoZWcFbp8YY0c/I8qVcBkhdJFy3OlT0Jt2cZekQM5wFHgV2kqH0JK9ygt0XCcaxU1Z
+ Lru4YD3GgYW0X93/mDvDd9aAU6ouycTNinb2+Y/Fuwotp4yJ+wSukqlMyJyEG2ZKscgK
+ c3JQYF6WtiaHXA5oUPUx9OHWQzRIQ/06QphixPsYfWUwf6gJYaxuWGt3XLMgSfeeeLQq
+ 8a/xMKha4N1UgxiPbN/ztQGn6EPmmafAw2I6XI4nNOttSDCgjnA/qBPlKhiqqFoNbmid
+ +emw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755617126; x=1756221926;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5H3ilZjRZVHMdHwn5Ag8ozamCw9M4OHScDdlQJFzCo8=;
- b=XFkjGdCCc8c6IQmHnu8Cm+S7x1XYTkxgugQYUWJIVI3JPd7Bxw01s7dMI6aUH4lzb/
- hvEKVZGGSGnHHT9SQ2gNioRJPWlq5buIbMHsUnDCeuz8EjdGl3vEBEqUb2S80xaRllUU
- JtMbw6XvcuHHHO6h4DkDvph6qqwRK0so33I8VfQBMCQR1SKEGWrbw7h5oSMHcE3Sxpvw
- RbSpMrvrf/06c9b8JrJItwPttTwkiT+vfjaDgw7MScaQAkA1y5USSQYQDu/rQfnNRCG5
- vBKs4Kk8wPUg8ZeBQ1xzTAt2Z9wjlu5nkrfoJCKBvKzmxR/mIkZgJ0bfzBOJZ6ypCJuv
- sTmw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXz1C4xTLEg5nyiZZm14WqCIj9ryOP33pi1vNBYtYeRDBUnincAqRuXI4hscXsvqz/0uuKqrqo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz57zZQx/yfspET9B7CtdvKmg/+cIGbEr5bLIaSrkWW+wDVLVGG
- JoIu6ywpKg/V82rXRAUNXFyN2+CYcwwA9zt0/X9e/3F8eGfCpfyvJXjkNEyudUe+ogM=
-X-Gm-Gg: ASbGnct29t4j1CJptt7HlA7C85kChofHMyEH4M/mw1DHHEHkjBTsW8VFFY33csKY4qE
- ua0h9/z5ThLGthzUYidJBxiuKmTOyhqemOHi9UYF94XMIYWFknyTnLF29PUp7L52J5Fb79fam26
- H9/9SvNHhjlHn1JDfGRDBbGjwN91uEGNCW/tKeSWhDkzGJxsu4dcFKWUuoGPYXuDWgA5e+juZYo
- SVTn9zhLqLevDdmu8ND3Gyg+8QE2eNIBZR5NJmu/lq6EiPU/1xROaI2i2I934WjHQ7NOOYKEvO4
- pbt1uti0MU10tSsa9hdS+J2pJWyPhh/zGvxg9jdsatRBatpQndoMdCNTEc7Dxnoorf8EDYXqyAu
- y7Kp11JfG/pjPsVWuybFB0zss9oWghx1QfDOLRdDv2eEgsL/cQO/LcMA=
-X-Google-Smtp-Source: AGHT+IGVodVVF2IXvKOSpd5HSwZ+aUQ6T+xxZ3kns38cmNsZ6iavjdyVT6KPS+eDQWp8jWVRxnnxuQ==
-X-Received: by 2002:a05:6830:2813:b0:741:c46b:4fd9 with SMTP id
- 46e09a7af769-744e0afa74emr1695172a34.24.1755617126204; 
- Tue, 19 Aug 2025 08:25:26 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-310abb34366sm3459731fac.23.2025.08.19.08.25.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Aug 2025 08:25:25 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Jonathan Humphreys <j-humphreys@ti.com>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250807080819.1058411-1-ilias.apalodimas@linaro.org>
-References: <20250807080819.1058411-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 1/4] test/py: Correctly restore the DT after capsule tests
-Message-Id: <175561712530.3333765.5202514334961563334.b4-ty@konsulko.com>
-Date: Tue, 19 Aug 2025 09:25:25 -0600
+ d=1e100.net; s=20230601; t=1755617599; x=1756222399;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PriZIRLDaJlPSNbLotvDQOgIVJfQqdNVzfybxePtctw=;
+ b=Nlsl4tp4bSFJtYXN7HKijE1seKRlAbpnCq6dAr2YLHt3toJBPo9w+FAfNDsaFDj8Jg
+ gizkx5lMUYQTmeSrWz9Np3PkmlkrLpFZj9wbTnn9LOJ5eFqBhHSX1Phc9KBiRYnzgMNv
+ +quUWvi3wspiMygWNbMh3I29FtXfE1ygwMaP4t0Bn7cEet9iETIEwYRxo1sQwq2ptqQO
+ GGNSdLiS5ngs1A/Ko8NxYVQ5YuC3NDORQTgskamHBgHOKc3Pc4jocTy265gEEjm39nya
+ XcK0FmS21lfJkwcpa8FKq16Gee0hpTzghW7uHGay1d0nvuuRsdMcPiq6cipCDh41wZ6u
+ EJHg==
+X-Gm-Message-State: AOJu0YzQpUWW2p/cxGJVbrfb5NQQJVMxqABNzOkBltzglvFWMmDZoQFo
+ /UKiXEGowIKVJESy8BfpUN2ejpSABd+Vooa5RRYMJdrGkPRhfOFmuPrUhM//+TsMHU4lYdtJq1X
+ OY4pWLEUSpCzxv8kZlGjBvDtdPDOiA10oEl7+SPHhQA==
+X-Gm-Gg: ASbGncv0tkHUGma+F2EFU3Vb0/UCqa+VRrDVpS2PiA+t0F02c9HocOAM1HGdXTEYJkL
+ y9DyLDZTmwA0/LHey9uFHWGOXxoOZ+7bDI38ldHv/C20Tg7I6m/djl0fVhoqxm2EgRePMA6rwu6
+ +Bu5WVl2m0JWNdc0FsptAT55s4QEvgtFjnxv0VVW+6Yxxoq7NaL4FZSb6yJhqPtYOa70xg9Y++y
+ Bdj6w==
+X-Google-Smtp-Source: AGHT+IHFlZTS8fVjnPqP7Ff+dzeXfjdcpXa123PPILwjGviXVZMzVz86ud8fxUCZFxo4IjU9F02klywZ15S0frmUBe0=
+X-Received: by 2002:a05:6402:42c3:b0:615:a847:c179 with SMTP id
+ 4fb4d7f45d1cf-61a7e7454d2mr2541411a12.18.1755617599160; Tue, 19 Aug 2025
+ 08:33:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250818165119.3193853-1-trini@konsulko.com>
+ <CALeDE9PqJBA9gS+YaNjM605fH011wL1SyT8Odk_k2Lm_V9EHLQ@mail.gmail.com>
+ <20250819145737.GB124814@bill-the-cat>
+In-Reply-To: <20250819145737.GB124814@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 19 Aug 2025 16:33:07 +0100
+X-Gm-Features: Ac12FXxEBMklks_SzaVP4jOgp4_JVCKMNBPuO8GK13HZCUYXD_cPsOCiwwONvG4
+Message-ID: <CALeDE9PXjSh9kySvOEc-4KDVp7dT+DUUQVYh7JUk2pS+vohe7w@mail.gmail.com>
+Subject: Re: [PATCH] boot: Add LEGACY_IMAGE_FORMAT to DISTRO_DEFAULTS
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sascha Silbe <sascha-pgp@silbe.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,30 +92,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 07 Aug 2025 11:08:14 +0300, Ilias Apalodimas wrote:
+On Tue, 19 Aug 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Aug 19, 2025 at 12:13:31PM +0100, Peter Robinson wrote:
+> > On Mon, 18 Aug 2025 at 17:51, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > At this time there are still major Linux distributions which by default
+> > > boot using LEGACY_IMAGE_FORMAT type scripts. Add this option to
+> > > DISTRO_DEFAULTS to ensure these platforms can still boot.
+> >
+> > What is the legacy image format exactly? Does select make it non
+> > optional, can we use imply or similar here?
+>
+> In this case "legacy image format" is uImage-style images, rather than
+> FIT images. And no, we can't imply it because then we'd break Debian
+> (which doesn't boot on a handful of platforms now which do have
+> DISTRO_DEFAULTS but don't have this).
 
-> Some capsule tests are changing the sandbox DT to test various features,
-> e.g authenticated capsule updates, versioning support etc. However, no one
-> restores the original DT and the CI pops errors looking like
-> 
-> /u-boot
-> Bloblist at 100 not found (err=-2)
-> Failed to find FDT file '/tmp/sandbox/persistent-data/scratch/EFI/CapsuleTestData/test_ver.dtb'
-> initcall_run_f(): initcall fdtdec_setup() failed
-> 
-> [...]
-
-Applied to u-boot/next, thanks!
-
-[1/4] test/py: Correctly restore the DT after capsule tests
-      commit: b0465eb88f0406ba286df9ee056b9a62c8ab9c80
-[2/4] test/py: Read from the correct offset when initializing capsules
-      commit: 5096f81bda1cfac2a8a325e850442bf463be2f00
-[3/4] test/py: Fix race conditions on EFI capsule tests
-      commit: fa2a2e20d0b4d7af92ee118d66f3245055cc9ba3
-[4/4] test/py: Fix capsule update tests
-      commit: fc2686d2a87391dd1b165e44ffd525b61c93e521
--- 
-Tom
-
-
+The distro boot stuff, which if my memory servers, is what the
+DISTRO_DEFAULTS is used for, never used the uImage style kernels.
