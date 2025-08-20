@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470C9CA0EEB
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 02:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3C18CA0EE6
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 02:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78C24802C1;
+	by phobos.denx.de (Postfix) with ESMTP id EF2E782F8F;
 	Wed, 20 Aug 2025 04:21:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="S9dtBG/B";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="iNFIrGQN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D659682E05; Wed, 20 Aug 2025 04:21:10 +0200 (CEST)
+ id D683B80107; Wed, 20 Aug 2025 04:21:10 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E32C82F03
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 04:21:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 845B582E67
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 04:21:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 4e129b007d6c11f08729452bf625a8b4-20250820
+X-UUID: 4bcec2107d6c11f08729452bf625a8b4-20250820
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=UqEHEJhe8pPXTXki60n+1sqp2SQH93oVqFayCzB8lv0=; 
- b=S9dtBG/BzFlhkZEsCLPCNb5n+r+G7JWTFDqNIwlYUijA3CH0UkuzsDPiT62PZ6Y5578xMWaO961IuhD7Vs5rVHM7piHlNp8yNp7HzlluT9BsSigcB+N31pt+Zwip+QQMvzxe3UE9hljUYu+VjC2ZJV+ePXVbxnIa3ItsbWMmkYw=;
+ bh=dnvfXK+63/iUekpJmtU9/VYqT3U/yh/bQNqybIbPIlo=; 
+ b=iNFIrGQNmjV8SdquhkH/OV5QuuRoQu1dfUzxtP7PAgErYVGpDOc8uvplGPUO/9oPpHhC+TTzZ8sIaljGxrZ53kDy+lr7RZDmn9SVuOtLJat+Go+LNkKq14HEmIiNnCL9jhn2SkfaScpRjaB5dJjyx04ugrd5fwwGDEhf7rfN+IA=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.3, REQID:28cddd01-8b02-470b-8a61-e810aeee2a63, IP:0,
+X-CID-O-INFO: VERSION:1.3.3, REQID:8b44a68c-7efc-45b4-8f02-d451ee0ffe0a, IP:0,
  UR
  L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
  elease,TS:0
-X-CID-META: VersionHash:f1326cf, CLOUDID:0910666d-c2f4-47a6-876f-59a53e9ecc6e,
+X-CID-META: VersionHash:f1326cf, CLOUDID:68aca744-18c5-4075-a135-4c0afe29f9d6,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:-5,Content:0|15|50,EDM:
  -3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,
@@ -45,26 +45,28 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 4e129b007d6c11f08729452bf625a8b4-20250820
-Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
+X-UUID: 4bcec2107d6c11f08729452bf625a8b4-20250820
+Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 224397295; Wed, 20 Aug 2025 10:20:56 +0800
+ with ESMTP id 1574056819; Wed, 20 Aug 2025 10:20:53 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- MTKMBS09N1.mediatek.inc (172.21.101.35) with Microsoft SMTP Server
+ mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Wed, 20 Aug 2025 10:20:54 +0800
+ 15.2.1258.39; Wed, 20 Aug 2025 10:20:50 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Wed, 20 Aug 2025 10:20:54 +0800
+ 15.2.1258.39 via Frontend Transport; Wed, 20 Aug 2025 10:20:50 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 4/4] MAINTAINERS: update ethernet-related file list for
- MediaTek ARM platform
-Date: Wed, 20 Aug 2025 10:20:54 +0800
-Message-ID: <42d7729013964d2c07cd00813db77d3e40c7274a.1755655935.git.weijie.gao@mediatek.com>
+ <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, Sky Huang
+ <SkyLake.Huang@mediatek.com>
+Subject: [PATCH 3/4] dt-bindings: mediatek: add doc for MediaTek MT7987/MT7988
+ 2.5Gb ethernrt PHY
+Date: Wed, 20 Aug 2025 10:20:50 +0800
+Message-ID: <60e0de8d66ed3d540605d3e1d69db3d831b32044.1755655935.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1755655935.git.weijie.gao@mediatek.com>
 References: <cover.1755655935.git.weijie.gao@mediatek.com>
@@ -87,35 +89,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update ethernet-related files for MediaTek ARM platform
+The MediaTek MT7987 and MT7988 platforms supports one built-in 2.5Gb
+ethernet PHY through eth1 interface.
 
+This patch add documentation for configuring these PHYs.
+
+Signed-off-by: Sky Huang <SkyLake.Huang@mediatek.com>
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
- MAINTAINERS | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../net/phy/mediatek,mt798x-i2p5ge-phy.txt    | 60 +++++++++++++++++++
+ 1 file changed, 60 insertions(+)
+ create mode 100644 doc/device-tree-bindings/net/phy/mediatek,mt798x-i2p5ge-phy.txt
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 3fb163aa1db..065834246de 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -423,6 +423,8 @@ F:	drivers/clk/mediatek/
- F:	drivers/cpu/mtk_cpu.c
- F:	drivers/i2c/mtk_i2c.c
- F:	drivers/mmc/mtk-sd.c
-+F:	drivers/net/mtk_eth/
-+F:	drivers/net/phy/mediatek/
- F:	drivers/phy/phy-mtk-*
- F:	drivers/pinctrl/mediatek/
- F:	drivers/power/domain/mtk-power-domain.c
-@@ -437,8 +439,6 @@ F:	drivers/timer/mtk_timer.c
- F:	drivers/usb/host/xhci-mtk.c
- F:	drivers/usb/mtu3/
- F:	drivers/watchdog/mtk_wdt.c
--F:	drivers/net/mtk_eth.c
--F:	drivers/net/mtk_eth.h
- F:	drivers/reset/reset-mediatek.c
- F:	drivers/serial/serial_mtk.c
- F:	include/dt-bindings/clock/mediatek,*
+diff --git a/doc/device-tree-bindings/net/phy/mediatek,mt798x-i2p5ge-phy.txt b/doc/device-tree-bindings/net/phy/mediatek,mt798x-i2p5ge-phy.txt
+new file mode 100644
+index 00000000000..ebac28d2d9a
+--- /dev/null
++++ b/doc/device-tree-bindings/net/phy/mediatek,mt798x-i2p5ge-phy.txt
+@@ -0,0 +1,60 @@
++MediaTek MT7987/MT7988 built-in 2.5Gb Ethernet PHY
++
++This document describes the device tree bindings for MediaTek MT7987/MT7988
++built-in 2.5Gb Ethernet PHY.
++
++Required properties:
++- reg: The phy address
++
++Optional properties:
++- pd-disable: Boolean. PD (Parallel detction) is enabled in this PHY, even
++  though this may cause duplex mismatch for devices supporting only 10M/half
++  or 100M/half. If you are concerned with duplex mismatch, use this option to
++  prevent this built-in PHY to link up with those devices.
++
++- gbe-min-ipg-11-bytes: Boolean. If present, enables 11-byte minimum
++  inter-packet gap for 1000Mbps link speed. When not present (by default),
++  the PHY uses optimized IPG settings for better performance. This option is
++  basically for those legacy 1G link partners which only accept higher IPG
++  transfer.
++
++- auto-downshift-disable: Boolean. If present, disables the hardware
++  auto-downshift feature. When not present (by default), the PHY will
++  automatically downshift link speed when link quality is poor.
++
++- pinctrl-names: Accepts "i2p5gbe-led" pinctrl for PHY status indicator
++
++Notes:
++- Firmware loading is required for proper operation. The driver expects
++  firmware files to be available through weak symbol functions provided by
++  boards.
++
++Examples:
++&eth1 {
++	status = "okay";
++	phy-mode = "xgmii";
++	phy-handle = <&phy15>;
++
++	phy15: ethernet-phy@15 {
++		compatible = "ethernet-phy-ieee802.3-c45";
++		reg = <15>;
++		phy-mode = "xgmii";
++	};
++};
++
++&eth1 {
++	status = "okay";
++	pinctrl-names = "i2p5gbe-led";
++	pinctrl-0 = <&i2p5gbe_led0_pins>;
++	phy-mode = "xgmii";
++	phy-handle = <&phy15>;
++
++	phy15: ethernet-phy@15 {
++		compatible = "ethernet-phy-ieee802.3-c45";
++		reg = <15>;
++		pd-disable;
++		gbe-min-ipg-11-bytes;
++		auto-downshift-disable;
++		phy-mode = "xgmii";
++	};
++};
 -- 
 2.34.1
 
