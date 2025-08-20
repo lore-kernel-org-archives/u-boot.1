@@ -4,50 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F205CA0EE4
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 12:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B665CA0EE4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 12:38:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4A888211F;
-	Wed, 20 Aug 2025 14:33:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 71B768211F;
+	Wed, 20 Aug 2025 14:38:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W0uWqiQW";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA2E382B07; Wed, 20 Aug 2025 14:33:46 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 270C3801DD
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 14:33:44 +0200 (CEST)
+ id BF40982B07; Wed, 20 Aug 2025 14:38:37 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D9B79801DD
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 14:38:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 49B2A150C;
- Wed, 20 Aug 2025 05:33:35 -0700 (PDT)
-Received: from e130802.arm.com (e130802.arm.com [10.1.37.58])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E6B453F63F;
- Wed, 20 Aug 2025 05:33:39 -0700 (PDT)
-Date: Wed, 20 Aug 2025 13:33:31 +0100
-From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Davidson kumaresan <davidson.kumaresan@arm.com>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
- Adam Johnston <Adam.Johnston@arm.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 00/24] Introduce Firmware Update Support for Arm PSA
-Message-ID: <aKXAm3utM25aZ3pO@e130802.arm.com>
-References: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e93498d435cso3358784276.1
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 05:38:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755693514; x=1756298314; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HsZ7Ap4CZ+RKZxcUUEKd2KNVLjY3F2xNkLXq30DTXz8=;
+ b=W0uWqiQWqgNxPzVCvRY+kdS/UQwLhy/GQohtfVgduRzAFxq7ub5uhjYEeY38xY0iZC
+ s7r+8lWX+bIEvjiRZ48v1MlDJCyna++kXhZq8AiQraRiiNi8uJstjIxOyTbGX+gkVjK+
+ 9vgCdiNTkwWBtrLeYXS1lrAmAf9gN5OvWgZRkPuo4Aajc3sAZrpfwu2Kd43T/C0nf85q
+ 8UnNPsKHu9RxGQalD+c5ke80pwt5fhhYtUENDOiVfhPUHWXmeW7kG3WNO8IVwWdtOrxP
+ x6NRS9qYruO4XqXKPJIxcyCvm7NLaMjUKmGSJQ8GyzwDuhsN1SyiyFlzoCicKNdveq70
+ bUCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755693514; x=1756298314;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HsZ7Ap4CZ+RKZxcUUEKd2KNVLjY3F2xNkLXq30DTXz8=;
+ b=OEHXNtVycZfJeDX7i8fRlAlLE5guAvnMDAmDnVFveibYs6lw3tDxZkj4m6tV/smTWs
+ m8UUS5prv04RSjROg0J0NMJ6Xvtfc2GzuATNPb0rxjiXnT9NcEcqbvF+rLXWk85jMVcs
+ hMPeYZsb6eTcUMSrMeqG1Zmj5vQa9W4AyXVd8DEotfjdwINf1aImurdj2EmZGzH0FCms
+ FJLn2QG2jlVTNZGPI+CGhKASjgaWOh6+MD5cO1EYpz9asJFvTbsA+neqHimBRQXpBASl
+ 4WkkQireAVRx3Q/sZ9CGfjcYfdCmH+GuBSrzm0vRqTBtrrmeicfPtyVZfRjBjfYPPJQ/
+ L/XQ==
+X-Gm-Message-State: AOJu0YwX0Qe9TkXGPbn4/8O/8cz4pui+568QEsv7sgc3wmCivm/1hEIv
+ C/Fxe9+LpCBPNqg9dsqDUoV8GIiC1rlCCsYH8LRaU3faSeMEQIzZbQ8/OMLYDbcHaMuSEoMLK+r
+ 7PoGwDevAzK/5rlgZgu4Pt3mf8NmWOQm6gKtHMAb38A==
+X-Gm-Gg: ASbGncusn1fMs0Y7Zt+mK8wlq1bRqxNWKrulu/X5sm+Dt1ZCtAdj9rLf7hH5hMnh4lZ
+ iq0UKE58YzFAY/vvwvFxZmNKLaFStYqT1UE8s/w4XmnCKGm+QjYlWw7v+EWk1qBdv/eaaUpXGFe
+ aLKT5JK8bv/RImJnTHE7qL76prLo8HyXbWSadxxrMD4+CnfnWceneUEKs6QF5xHxXZgMRh2ARk6
+ oeuHA==
+X-Google-Smtp-Source: AGHT+IG6r+qKnKiA/PzWATWT6/ymWcusejUfJoxCJG2LwVzlv087BYwn9J2cCH/FG9lBVvdikc+oIZ7LrKSTZUabYts=
+X-Received: by 2002:a05:6902:158f:b0:e93:4a43:577c with SMTP id
+ 3f1490d57ef6-e94f66495f4mr2844267276.36.1755693513582; Wed, 20 Aug 2025
+ 05:38:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
+References: <20250725155010.285831-1-abdellatif.elkhlifi@arm.com>
+ <20250725155010.285831-15-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20250725155010.285831-15-abdellatif.elkhlifi@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 20 Aug 2025 15:37:57 +0300
+X-Gm-Features: Ac12FXxEJveNxcum5-WXxXJkg6-FYvAAUZlmQzMVDaVZD-yBIQ8NC6SVHfRsoTk
+Message-ID: <CAC_iWjLvr0CZeEGogR11a-fpJauaHRc1-WeYwV3dzRtGknogYg@mail.gmail.com>
+Subject: Re: [PATCH v4 14/24] efi_loader: fwu: fwu_arm_psa: Skip accepting the
+ payload after set_image()
+To: abdellatif.elkhlifi@arm.com
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,137 +97,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich, Michal,
+ ?
 
-> This patch series adds Firmware Update (FWU) support for Arm PSA
-> Certified platforms [1], enabling U-Boot to serve as
-> the FWU Client, with the Secure World acting as the Update Agent that
-> manages the firmware store and its metadata.
-> 
-> This implementation adheres to the Platform Security Firmware Update
-> specification [3] for the A-profile Arm Architecture and leverages the
-> Trusted Services framework [4] to interact with the Secure World update
-> agent. By delegating update management to the Secure World, U-Boot
-> handles only the client-side coordination, invoking a well-defined set
-> of ABIs over the FF-A interface [5] to deliver update capsules.
-> 
-> Key features include:
-> 
-> - Generic, platform-agnostic design.
-> - FF-A-based ABI: All interactions between U-Boot and the update agent
->     occur over the FF-A interface, ensuring compatibility across
->     PSA-compliant systems.
-> - Multi-payload capsules: Support for capsules containing multiple
->     payloads, start/end markers, signed firmware images.
-> - ESRT support: Capsule payloads may be signed for authenticity, and
->     U-Boot can populate the EFI System Resource Table (ESRT) for
->      OS-level firmware management.
-> - On-disk and standard capsule handling.
-> 
-> For implementation details, please refer to the documentation [6].
-> For a real world example, please see the Arm PSA FWU logs [7] when used
-> for on-disk capsule update in Corstone-1000 [2].
-> 
-> Changes in v4:
-> 
-> - Update the function headers in fwu_arm_psa.c to pass kernel-doc tests
-> 
-> Cheers,
-> Abdellatif
-> 
-> [1]: PSA: https://www.psacertified.org
-> [2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
-> [3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest 
-> [4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
-> [5]: FF-A interface: doc/arch/arm64.ffa.rst
-> [6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
-> [7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
-> 
-> ```
-> CapsuleApp: capsule block/size              0xDD741040/0x25ACE
-> Found EFI system partition on Boot0001: OnDiskFWU
-> FS2:;HD0b:;BLK4: 
-> Succeed to write edk2-corstone1000-fvp-v6.uefi.capsule
-> resetting ...
-> NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
-> ...
-> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
-> ...
-> FWU: System booting in Regular State
-> FWU: ABI version 1.0 detected
-> FWU: Updating 1 payload(s)
-> Applying capsule edk2-corstone1000-fvp-v6.uefi.capsule succeeded.
-> Reboot after firmware update.
-> NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
-> ...
-> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
-> ...
-> FWU: System booting in Trial State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
-> ...
-> root@corstone1000-fvp:~# reboot
-> ...
-> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
-> ...
-> FWU: System booting in Regular State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
-> 
-> corstone1000-fvp login:
-> 
-> root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
-> 0x0
-> f1d883f9-dfeb-5363-98d8-686ee3b69f4f
-> 0
-> 6
-> 0
-> 6
-> 0
-> 0x0
-> 7fad470e-5ec5-5c03-a2c1-4756b495de61
-> 0
-> 0
-> 0
-> 0
-> 0
-> 0x0
-> f1933675-5a8c-5b6d-9ef4-846739e89bc8
-> 0
-> 0
-> 0
-> 0
-> 0
-> 0x0
-> f771aff9-c7e9-5f99-9eda-2369dd694f61
-> 0
-> 0
-> 0
-> 0
-> 0
-> root@corstone1000-fvp:~# 
-> ```
+On Fri, 25 Jul 2025 at 18:50, <abdellatif.elkhlifi@arm.com> wrote:
+>
+> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>
+> Do not update the acceptance metadata bit after updating an image
+>
+> The update agent (secure world) is responsible of setting the acceptance
 
-This is a gentle reminder regarding the review of my patchset.
-All review comments have been addressed in the latest version.
+[...]
 
-For your convenience, here are the test instructions for evaluating the Arm PSA
-Firmware Update (FWU) on the Fixed Virtual Platform (FVP):
+>
+> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+> index 234e3c1b3c0..1dac691d24d 100644
+> --- a/lib/efi_loader/efi_capsule.c
+> +++ b/lib/efi_loader/efi_capsule.c
+> @@ -696,17 +696,20 @@ static efi_status_t efi_capsule_update_firmware(
+>                                 status = fwu_clear_accept_image(image_type_id,
+>                                                                 update_index);
+>                         }
+> -                       ret = fwu_to_efi_error(status);
+> -                       if (ret != EFI_SUCCESS) {
+> -                               log_err("Unable to %s the accept bit for the image %pUs\n",
+> -                                       fw_accept_os ? "clear" : "set",
+> -                                       image_type_id);
+> -                               goto out;
+> -                       }
+>
+> -                       log_debug("%s the accepted bit for Image %pUs\n",
+> -                                 fw_accept_os ? "Cleared" : "Set",
+> -                                 image_type_id);
+> +                       if (!IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
 
-1) Building the Software Stack on Corstone-1000:
+The function above always returns EFI_SUCCESS if PSA is enabled
 
-    Please refer to the Corstone-1000 User Guide [1] for detailed build and
-    configuration steps.
+> +                               ret = fwu_to_efi_error(status);
+> +                               if (ret != EFI_SUCCESS) {
+> +                                       log_err("Unable to %s the accept bit for the image %pUs\n",
+> +                                               fw_accept_os ? "clear" : "set",
+> +                                               image_type_id);
+> +                                       goto out;
+> +                               }
+> +
+> +                               log_debug("%s the accepted bit for Image %pUs\n",
+> +                                         fw_accept_os ? "Cleared" : "Set",
+> +                                         image_type_id);
 
-2) Generating Capsules and Testing on FVP:
+I don't think we need more ifdefery here. Just slightly tweak the %s
+prints in case PSA is enabled.
+Something like
+log_debug("%s %s the accepted bit for image %pUs\n",
+IS_ENABLED(CONFIG_FWU_ARM_PSA) ? "PSA will" : "", fw_accept_os ?
+"Cleared" : "Set", etc etc
 
-    Instructions for creating firmware update capsules and running the tests on
-    the FVP can be found here [2].
+> +                       }
+>                 }
+>
+>         }
+> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> index 7f085a0211f..46b6f9356a7 100644
+> --- a/lib/fwu_updates/fwu.c
+> +++ b/lib/fwu_updates/fwu.c
+> @@ -1,6 +1,11 @@
+>  // SPDX-License-Identifier: GPL-2.0-or-later
+>  /*
+>   * Copyright (c) 2022, Linaro Limited
+> + *
+> + * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+> + *
+> + * Author:
+> + *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>   */
 
-Your review and feedback would be greatly appreciated.
+I've pinged Tom about the copyright updates, I don't think this is
+such a big change that justifies it
 
-Cheers
-Abdellatif
+>
+>  #include <dm.h>
+> @@ -586,6 +591,14 @@ out:
+>   */
+>  int fwu_accept_image(efi_guid_t *img_type_id, u32 bank)
+>  {
+> +       /*
+> +        * In case of Arm PSA accepting images is either
+[...]
 
-[1]: https://git.yoctoproject.org/meta-arm/tree/meta-arm-bsp/documentation/corstone1000/user-guide.rst
-[2]: https://git.yoctoproject.org/meta-arm/tree/meta-arm-bsp/documentation/corstone1000/user-guide.rst#n838
+Thanks
+/Ilias
