@@ -4,131 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD56ACA0EF8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 21:21:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79387CA0EF8
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 21:38:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D3E781E13;
-	Wed, 20 Aug 2025 23:21:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C1E781E13;
+	Wed, 20 Aug 2025 23:38:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aa9OMace";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bORXUxF6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8DB081FEE; Wed, 20 Aug 2025 23:21:49 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 7C3F882B07; Wed, 20 Aug 2025 23:38:07 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BB01801DD
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 23:21:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0E40801DD
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 23:38:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1755724907; x=1756329707; i=xypron.glpk@gmx.de;
- bh=9TLmkbWxqMNsTWjB3CKvcNRzBUdLWG3QIOTm9cYizx4=;
+ s=s31663417; t=1755725883; x=1756330683; i=xypron.glpk@gmx.de;
+ bh=7KwDF4TMCTFzLSrRnFvm0e0duUNGAc5lZxGPw/clVTU=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
  References:Cc:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=aa9OMaceWiFkC1ogvOdmHUOZbXI0QI+c5v/JJ0wQ4nsxc7/jnJcOnQTfKRYC4w/F
- OCYZmUjTa3pkESnUK/gg/UC+r/QfdyRcMbHfq/ARgzTjJsiff1NBrYUY0jAEBEJP7
- ewGd1BMc539M6lwnWhfF4r20SU/Gwk/wpsW/L8uZvEf9P4gE5c9O1YfqJSccRAciZ
- 6ZYeVnKJ9/RHf48Oj7Cw6RCOjIZr5nyc/vwLzGeJi1A8s85bDktpsHjZ5rCYLv5DQ
- RKpAWLG46rMju8mLrBnWwoMg5E7gPymgxquob+F4HSF3FR9UGNTiDddbKoqCMG+ha
- QJ21bMQAja7Cc/rDxQ==
+ b=bORXUxF6xtbpAmqNbMoQ7MUOUxs/wV1q2A8sthP4VCcQmr6diNEzF9iKxnK23y0v
+ 7eysUG1BU+DjxkF91wOF9dlEFky7JenlYqA004Kk9m9vXnBOMeFzxW6oFgjB13B5H
+ 4IxcB0yW5+k+F7Z2fCHXQDGeEkv9brXK8F0kpZ2BqqwjmhRGPws11kULlN6ioWqEc
+ YRpDlw1nFcCaw74HVcwb3v9/P/g9KzKdD3taEnWijf2njEmqu6nSUpUGy5dvkwamd
+ aun9/E88W0d5GCTeslNPgiEAr+sohwJ0OHspStQurF5vDS6NhuGqwQkinfk9Ya26i
+ z5FGqd7acxsUTuafwA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.104] ([46.114.108.215]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mz9Un-1ubYnR3obj-00zLzi; Wed, 20
- Aug 2025 23:21:46 +0200
-Message-ID: <b1425bd1-2082-44cf-b8d3-9db0ca9c7d5d@gmx.de>
-Date: Wed, 20 Aug 2025 23:21:46 +0200
+Received: from [192.168.143.104] ([46.114.108.215]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M5fIW-1uuvJ31F7q-008BTg; Wed, 20
+ Aug 2025 23:38:03 +0200
+Message-ID: <fe0f464c-5696-4f88-98d6-fe545d268d72@gmx.de>
+Date: Wed, 20 Aug 2025 23:38:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/10] doc: Quote all long form options using double ticks
- in tools/buildman/buildman.rst
+Subject: Re: [PATCH 03/10] doc: Fix typos and improve wording in
+ tools/buildman/buildman.rst
 To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
- <20250810233742.51902-5-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-4-adrianocarvalho.pt@gmail.com>
 Content-Language: en-US
-Cc: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250810233742.51902-5-adrianocarvalho.pt@gmail.com>
+In-Reply-To: <20250810233742.51902-4-adrianocarvalho.pt@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:AQ91Ds5OYxAZ18Z2GH4cl5qJ5/nayB6WvWtEvjLNz2JBoqRp9d7
- GeoxQB6TVbrSnJ4g3bItTyBmshZCmiMgDj4NQfWNeE+sbUcxWNun43P4Bf2s13Rl8nsa1gQ
- TsPUDpDGktuasd0b3AptiSZWdjXtEwt30XsD7F0/OCEs23RXjfYCVezsDDA76F3NOefabK9
- xVZT9UhF60w7hwu1M541w==
-UI-OutboundReport: notjunk:1;M01:P0:OEdqnviFtus=;kFSg59M2VoC8ZCUAk358y69xxAy
- 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
+X-Provags-ID: V03:K1:llq3GlkoslK7wRH1PGyM44qXlk6iTWTG8K6PNeadflWCaRxxErv
+ jdyjS80XpB9fQb+DYYSRnFEzQjl9UkzT+p+8rHMI5hD9pfURBdpftnvUJ8Uwmavq9cCEDxs
+ DfVGRaJfzUTCoT1dKvRYcEEkocqGbCYvVcwPnnKlQe2vdsf7X7Gr77rCKHCVkp48BmWO5iJ
+ YCdDYL2iBP1oT47NsFOpQ==
+UI-OutboundReport: notjunk:1;M01:P0:5N46C6Owms0=;ZmLMncLJxdqJveMaoMh/SWqOMN5
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,285 +146,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Unicode character commonly referred to as a "tick" or "check mark"=20
-is U+2713 (=E2=9C=93).
+On 11.08.25 01:37, Adriano Carvalho wrote:
+> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> ---
+>   tools/buildman/buildman.rst | 49 ++++++++++++++++++-------------------
+>   1 file changed, 24 insertions(+), 25 deletions(-)
+>=20
+> diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+> index 8c45a841024..a9d5543a1a4 100644
+> --- a/tools/buildman/buildman.rst
+> +++ b/tools/buildman/buildman.rst
+> @@ -22,10 +22,10 @@ example Raspberry Pi 2):
+>   What is this?
+>   -------------
+>  =20
+> -This tool handles building U-Boot to check that you have not broken it
+> -with your patch series. It can build each individual commit and report
+> -which boards fail on which commits, and which errors come up. It aims
+> -to make full use of multi-processor machines.
+> +This tool builds U-Boot to check that you have not broken it with your
+> +patch series. It can build each individual commit and report which boar=
+ds
+> +fail on which commits, and which errors come up. It aims to make full u=
+se
+> +of multi-processor machines.
+>  =20
+>   A key feature of buildman is its output summary, which allows warnings=
+,
+>   errors or image size increases in a particular commit or board to be
+> @@ -83,7 +83,7 @@ incremental build (i.e. not using 'make xxx_defconfig'=
+ unless you use -C).
+>   Eventually the thread reaches the last commit and stops. If a commit c=
+auses
+>   an error or warning, buildman will try it again after reconfiguring (b=
+ut see
+>   -Q). Thus some commits may be built twice, with the first result silen=
+tly
+> -discarded. Lots of errors and warnings will causes lots of reconfigures=
+ and your
+> +discarded. Lots of errors and warnings will cause lots of reconfigures =
+and your
+>   build will be very slow. This is because a file that produces just a w=
+arning
+>   would not normally be rebuilt in an incremental build. Once a thread f=
+inishes
+>   building all the commits for a board, it starts on the commits for ano=
+ther
+> @@ -154,7 +154,7 @@ means to build all arm boards except nvidia, freesca=
+le and anything ending
+>   with 'ball'.
+>  =20
+>   For building specific boards you can use the --boards (or --bo) option=
+, which
+> -takes a comma-separated list of board target names and be used multiple=
+ times
+> +takes a comma-separated list of board target names and can be used mult=
+iple times
+>   on the command line:
+>  =20
+>   .. code-block:: bash
+> @@ -212,7 +212,7 @@ Setting up
+>      The toolchain-alias section indicates that the i386 toolchain shoul=
+d be used
+>      to build x86 commits.
+>  =20
+> -   Note that you can also specific exactly toolchain prefixes if you li=
+ke::
+> +   Note that you can also specify toolchain prefixes if you like::
+>  =20
+>         [toolchain-prefix]
+>         arm: /opt/arm-eabi-4.6/bin/arm-eabi-
+> @@ -243,9 +243,9 @@ Setting up
+>  =20
+>      This tells buildman to use a compiler wrapper in front of CROSS_COM=
+PILE. In
+>      this example, ccache. It doesn't affect the toolchain scan. The wra=
+pper is
+> -   added when CROSS_COMPILE environtal variable is set. The name in thi=
+s
+> -   section is ignored. If more than one line is provided, only the last=
+ one
+> -   is taken.
+> +   added when the CROSS_COMPILE environment variable is set. The tag na=
+me in
+> +   this section is not important. If more than one line is provided, on=
+ly the
+> +   last one is used.
+>  =20
+>   #. Make sure you have the required Python pre-requisites
+>  =20
+> @@ -484,7 +484,7 @@ Setting up
+>   How to run it
+>   -------------
+>  =20
+> -First do a dry run using the -n flag: (replace <branch> with a real, lo=
+cal
+> +First do a dry run using the -n flag (replace <branch> with a real, loc=
+al
+>   branch with a valid upstream):
+>  =20
+>   .. code-block:: bash
+> @@ -898,7 +898,7 @@ The .buildman settings file
+>  =20
+>   The .buildman file provides information about the available toolchains=
+ and
+>   also allows build flags to be passed to 'make'. It consists of several
+> -sections, with the section name in square brackets. Within each section=
+ are
+> +sections, with the section name in square brackets. Within each section=
+ there are
+>   a set of (tag, value) pairs.
+>  =20
+>   '[global]' section
+> @@ -939,8 +939,7 @@ a set of (tag, value) pairs.
+>   '[toolchain-prefix]' section
+>       This can be used to provide the full toolchain-prefix for one or m=
+ore
+>       architectures. The full CROSS_COMPILE prefix must be provided. The=
+se
+> -    typically have a higher priority than matches in the '[toolchain]',=
+ due to
+> -    this prefix.
+> +    typically have a higher priority than matches in the '[toolchain]'.
+>  =20
+>       The tilde character ``~`` is supported in paths, to represent the =
+home
+>       directory.
+> @@ -1062,7 +1061,7 @@ For example::
+>       + u-boot.cfg: CONFIG_SPL_ENV_SUPPORT=3D1 CONFIG_SPL_NET=3D1
+>       + u-boot-spl.cfg: CONFIG_SPL_MMC=3D1 CONFIG_SPL_NAND_SUPPORT=3D1
+>       + all: CONFIG_SPL_ENV_SUPPORT=3D1 CONFIG_SPL_MMC=3D1 CONFIG_SPL_NA=
+ND_SUPPORT=3D1 CONFIG_SPL_NET=3D1
+> -    am335x_evm_usbspl :
+> +    am335x_evm_usbspl:
+>       + u-boot.cfg: CONFIG_SPL_ENV_SUPPORT=3D1 CONFIG_SPL_NET=3D1
+>       + u-boot-spl.cfg: CONFIG_SPL_MMC=3D1 CONFIG_SPL_NAND_SUPPORT=3D1
+>       + all: CONFIG_SPL_ENV_SUPPORT=3D1 CONFIG_SPL_MMC=3D1 CONFIG_SPL_NA=
+ND_SUPPORT=3D1 CONFIG_SPL_NET=3D1
+> @@ -1073,15 +1072,15 @@ This shows that commit 44 enabled three new opti=
+ons for the board
+>   am335x_evm_usbspl which were not enabled in commit 43. There is also a
+>   summary for 'arm' showing all the changes detected for that architectu=
+re.
+>   In this case there is only one board with changes, so 'arm' output is =
+the
+> -same as 'am335x_evm_usbspl'/
+> +same as 'am335x_evm_usbspl'.
+>  =20
+>   The -K option uses the u-boot.cfg, spl/u-boot-spl.cfg and tpl/u-boot-t=
+pl.cfg
+>   files which are produced by a build. If all you want is to check the
+>   configuration you can in fact avoid doing a full build, using --config=
+-only.
+> -This tells buildman to configuration U-Boot and create the .cfg files, =
+but not
+> +This tells buildman to configure U-Boot and create the .cfg files, but =
+not
+>   actually build the source. This is 5-10 times faster than doing a full=
+ build.
+>  =20
+> -By default buildman considers the follow two configuration methods
+> +By default buildman considers the following two configuration methods
+>   equivalent::
+>  =20
+>      #define CONFIG_SOME_OPTION
+> @@ -1089,7 +1088,7 @@ equivalent::
+>      CONFIG_SOME_OPTION=3Dy
+>  =20
+>   The former would appear in a header filer and the latter in a defconfi=
+g
+> -file. The achieve this, buildman considers 'y' to be '1' in configurati=
+on
+> +file. To achieve this, buildman considers 'y' to be '1' in configuratio=
+n
+>   variables. This avoids lots of useless output when converting a CONFIG
+>   option to Kconfig. To disable this behaviour, use --squash-config-y.
+>  =20
+> @@ -1176,7 +1175,7 @@ Use the -L (--no-lto) flag to disable LTO.
+>   Doing a simple build
+>   --------------------
+>  =20
+> -In some cases you just want to build a single board and get the full ou=
+tput, use
+> +In some cases you just want to build a single board and get the full ou=
+tput. Use
+>   the -w option, for example:
 
-Unicode calls the character U+0060 grave accent. Sphinx documentation=20
-refers to it as backtick.
+Keep it simple:
 
-Otherwise the change looks ok.
+   In case you want to build as single board and get the full output, use
+   the -w option, for example:
+
+
+>  =20
+>   .. code-block:: bash
+> @@ -1262,7 +1261,7 @@ Some options have values, in which case you can ch=
+ange them:
+>       buildman -a 'BOOTCOMMAND=3D"echo hello"' CONFIG_SYS_LOAD_ADDR=3D0x=
+1000
+>  =20
+>   Note that you must put quotes around string options and the whole thin=
+g must be
+
+%s/thing/argument/
+
+> -in single quotes, to make sure the shell leave it alone.
+> +in single quotes, to make sure the shell leaves it alone.
+
+%s/, to make sure the shell leaves it alone./to ensure that the shell=20
+recognizes it as a single argument./
+
+>  =20
+>   If you try to set an option that does not exist, or that cannot be cha=
+nged for
+>   some other reason (e.g. it is 'selected' by another option), then buil=
+dman
+> @@ -1281,8 +1280,8 @@ shows an error::
+>  =20
+>   One major caveat with this feature with branches (-b) is that buildman=
+ does not
+>   name the output directories differently when you change the configurat=
+ion, so
+> -doing the same build again with different configuration will not trigge=
+r a
+> -rebuild. You can use -f to work around that.
+> +doing the same build with a different configuration will not trigger a =
+rebuild.
+> +You can use -f to work around that.
+
+"Doing a build does not trigger a rebuild." - This sentence is not=20
+comprehensible.
+
+Do you mean
+
+"Re-launching buildman with an updated configuration will not trigger a=20
+rebuild."
+
+
+>  =20
+>  =20
+>   Other options
+> @@ -1344,7 +1343,7 @@ directory.
+>   Build summary
+>   -------------
+>  =20
+> -When buildman finishes it shows a summary, something like this::
+> +When buildman finishes it shows a summary. Something like this::
+
+When Buildman finishes, it displays a summary, similar to the following::
+
+>  =20
+>       Completed: 5 total built, duration 0:00:21, rate 0.24
+>  =20
+> @@ -1378,7 +1377,7 @@ Use the `--maintainer-check` option to check this:=
+:
+>      WARNING: board/mikrotik/crs3xx-98dx3236/MAINTAINERS: missing defcon=
+fig ending at line 7
+>      WARNING: no maintainers for 'clearfog_spi'
+>  =20
+> -Buildman returns with an exit code of 2 if there area any warnings.
+> +Buildman returns with an exit code of 2 if there are any warnings.
+>  =20
+>   An experimental `--full-check option` also checks for boards which don=
+'t have a
+
+These should be double backticks.
 
 Best regards
 
 Heinrich
 
-On 11.08.25 01:37, Adriano Carvalho wrote:
-> Otherwise, the two dashes are rendered as just one.
->=20
-> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-> ---
->   tools/buildman/buildman.rst | 50 ++++++++++++++++++-------------------
->   1 file changed, 25 insertions(+), 25 deletions(-)
->=20
-> diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-> index a9d5543a1a4..48938044520 100644
-> --- a/tools/buildman/buildman.rst
-> +++ b/tools/buildman/buildman.rst
-> @@ -100,8 +100,8 @@ threads do not affect the state of your git reposito=
-ry. Any checkouts done
->   by the thread affect only the working directory for that thread.
->  =20
->   Buildman automatically selects the correct tool chain for each board. =
-You
-> -must supply suitable tool chains (see --fetch-arch), but buildman takes=
- care
-> -of selecting the right one.
-> +must supply suitable tool chains (see ``--fetch-arch``), but buildman t=
-akes
-> +care of selecting the right one.
->  =20
->   Buildman generally builds a branch (with the -b flag), and in this cas=
-e
->   builds the upstream commit as well, for comparison. So even if you hav=
-e one
-> @@ -153,9 +153,9 @@ You can also use -x to specifically exclude some boa=
-rds. For example:
->   means to build all arm boards except nvidia, freescale and anything en=
-ding
->   with 'ball'.
->  =20
-> -For building specific boards you can use the --boards (or --bo) option,=
- which
-> -takes a comma-separated list of board target names and can be used mult=
-iple times
-> -on the command line:
-> +For building specific boards you can use the ``--boards`` (or ``--bo``)=
- option,
-> +which takes a comma-separated list of board target names and can be use=
-d
-> +multiple times on the command line:
->  =20
->   .. code-block:: bash
->  =20
-> @@ -492,7 +492,7 @@ branch with a valid upstream):
->      ./tools/buildman/buildman -b <branch> -n
->  =20
->   If it can't detect the upstream branch, try checking out the branch, a=
-nd
-> -doing something like 'git branch --set-upstream-to upstream/master'
-> +doing something like ``git branch --set-upstream-to upstream/master``
->   or something similar. Buildman will try to guess a suitable upstream b=
-ranch
->   if it can't find one (you will see a message like "Guessing upstream a=
-s ...").
->   You can also use the -c option to manually specify the number of commi=
-ts to
-> @@ -731,17 +731,17 @@ Note that the 'text' region and 'rodata' are split=
- out. You should add the
->   two together to get the total read-only size (reported as the first co=
-lumn
->   in the output from binutil's 'size' utility).
->  =20
-> -A useful option is --step which lets you skip some commits. For example
-> ---step 2 will show the image sizes for only every 2nd commit (so it wil=
-l
-> +A useful option is ``--step`` which lets you skip some commits. For exa=
-mple
-> +``--step 2`` will show the image sizes for only every 2nd commit (so it=
- will
->   compare the image sizes of the 1st, 3rd, 5th... commits). You can also=
- use
-> ---step 0 which will compare only the first and last commits. This is us=
-eful
-> +``--step 0`` which will compare only the first and last commits. This i=
-s useful
->   for an overview of how your entire series affects code size. It will b=
-uild
->   only the upstream commit and your final branch commit.
->  =20
->   You can also use -d to see a detailed size breakdown for each board. T=
-his
->   list is sorted in order from largest growth to largest reduction.
->  =20
-> -It is even possible to go a little further with the -B option (--bloat)=
-. This
-> +It is even possible to go a little further with the -B option (``--bloa=
-t``). This
->   shows where U-Boot has bloated, breaking the size change down to the f=
-unction
->   level. Example output is below::
->  =20
-> @@ -924,7 +924,7 @@ a set of (tag, value) pairs.
->       This lists the available toolchains. The tag here doesn't matter, =
-but
->       make sure it is unique. The value is the path to the toolchain. Bu=
-ildman
->       will look in that path for a file ending in 'gcc'. It will then ex=
-ecute
-> -    it to check that it is a C compiler, passing only the --version fla=
-g to
-> +    it to check that it is a C compiler, passing only the ``--version``=
- flag to
->       it. If the return code is 0, buildman assumes that it is a valid C
->       compiler. It uses the first part of the name as the architecture a=
-nd
->       strips off the last part when setting the CROSS_COMPILE environmen=
-t
-> @@ -1005,7 +1005,7 @@ By default, buildman doesn't execute 'make mrprope=
-r' prior to building the
->   first commit for each board. This reduces the amount of work 'make' do=
-es, and
->   hence speeds up the build. To force use of 'make mrproper', use -the -=
-m flag.
->   This flag will slow down any buildman invocation, since it increases t=
-he amount
-> -of work done on any build. An alternative is to use the --fallback-mrpr=
-oper
-> +of work done on any build. An alternative is to use the ``--fallback-mr=
-proper``
->   flag, which retries the build with 'make mrproper' only after a build =
-failure.
->  =20
->   One possible application of buildman is as part of a continual edit, b=
-uild,
-> @@ -1040,7 +1040,7 @@ of the source tree, thus allowing rapid tested evo=
-lution of the code::
->  =20
->       ./tools/buildman/buildman -Pr tegra
->  =20
-> -Note also the `--dtc-skip` option which uses the system device-tree com=
-piler to
-> +Note also the ``--dtc-skip`` option which uses the system device-tree c=
-ompiler to
->   avoid needing to build it for each board. This can save 10-20% of buil=
-d time.
->   An alternative is to set DTC=3D/path/to/dtc when running buildman.
->  =20
-> @@ -1076,7 +1076,7 @@ same as 'am335x_evm_usbspl'.
->  =20
->   The -K option uses the u-boot.cfg, spl/u-boot-spl.cfg and tpl/u-boot-t=
-pl.cfg
->   files which are produced by a build. If all you want is to check the
-> -configuration you can in fact avoid doing a full build, using --config-=
-only.
-> +configuration you can in fact avoid doing a full build, using ``--confi=
-g-only``.
->   This tells buildman to configure U-Boot and create the .cfg files, but=
- not
->   actually build the source. This is 5-10 times faster than doing a full=
- build.
->  =20
-> @@ -1090,7 +1090,7 @@ equivalent::
->   The former would appear in a header filer and the latter in a defconfi=
-g
->   file. To achieve this, buildman considers 'y' to be '1' in configurati=
-on
->   variables. This avoids lots of useless output when converting a CONFIG
-> -option to Kconfig. To disable this behaviour, use --squash-config-y.
-> +option to Kconfig. To disable this behaviour, use ``--squash-config-y``=
-.
->  =20
->  =20
->   Checking the environment
-> @@ -1165,7 +1165,7 @@ Link-time optimisation (LTO) is designed to reduce=
- code size by globally
->   optimising the U-Boot build. Unfortunately this can dramatically slow =
-down
->   builds. This is particularly noticeable when running a lot of builds.
->  =20
-> -Use the -L (--no-lto) flag to disable LTO.
-> +Use the -L (``--no-lto``) flag to disable LTO.
->  =20
->   .. code-block:: bash
->  =20
-> @@ -1195,7 +1195,7 @@ each error line. Also, buildman prints information=
- about what it is about to do,
->   along with a summary at the end.
->  =20
->   When using buildman from an IDE, it is helpful to drop this behaviour.=
- Use the
-> --I/--ide option for that. You might find -W helpful also so that warnin=
-gs do
-> +``-I/--ide`` option for that. You might also find -W helpful so that wa=
-rnings do
->   not cause the build to fail:
->  =20
->   .. code-block:: bash
-> @@ -1287,7 +1287,7 @@ You can use -f to work around that.
->   Other options
->   -------------
->  =20
-> -Buildman has various other command-line options. Try --help to see them=
-.
-> +Buildman has various other command-line options. Try ``--help`` to see =
-them.
->  =20
->   To find out what toolchain prefix buildman will use for a build, use t=
-he -A
->   option.
-> @@ -1325,11 +1325,11 @@ figure out the root cause of the build failure.
->  =20
->   For situations where buildman is invoked from multiple running process=
-es, it is
->   sometimes useful to have buildman wait until the others have finished.=
- Use the
-> ---process-limit option for this: --process-limit 1 will allow only one =
-buildman
-> -to process jobs at a time.
-> +``--process-limit`` option for this: ``--process-limit 1`` will allow o=
-nly one
-> +buildman to process jobs at a time.
->  =20
->   To build a particular target, rather than the default U-Boot target, u=
-se the
-> -`--target` option. This is unlikely to be useful unless you are buildin=
-g a
-> +``--target`` option. This is unlikely to be useful unless you are build=
-ing a
->   single board.
->  =20
->   Buildman normally builds out-of-tree, meaning that the source director=
-y is not
-> @@ -1358,7 +1358,7 @@ Using boards.cfg
->  =20
->   This file is no-longer needed by buildman but it is still generated in=
- the
->   working directory. This helps avoid a delay on every build, since scan=
-ning all
-> -the Kconfig files takes a few seconds. Use the `-R <filename>` flag to =
-force
-> +the Kconfig files takes a few seconds. Use the ``-R <filename>`` flag t=
-o force
->   regeneration of the file - in that case buildman exits after writing t=
-he file
->   with exit code 2 if there was an error in the maintainer files. To use=
- the
->   default filename, use a hyphen, i.e. `-R -`.
-> @@ -1371,7 +1371,7 @@ Checking maintainers
->   --------------------
->  =20
->   Sometimes a board is added without a corresponding entry in a MAINTAIN=
-ERS file.
-> -Use the `--maintainer-check` option to check this::
-> +Use the ``--maintainer-check`` option to check this::
->  =20
->      $ buildman --maintainer-check
->      WARNING: board/mikrotik/crs3xx-98dx3236/MAINTAINERS: missing defcon=
-fig ending at line 7
-> @@ -1379,8 +1379,8 @@ Use the `--maintainer-check` option to check this:=
-:
->  =20
->   Buildman returns with an exit code of 2 if there are any warnings.
->  =20
-> -An experimental `--full-check option` also checks for boards which don'=
-t have a
-> -CONFIG_TARGET_xxx where xxx corresponds to their defconfig filename. Th=
-is is
-> +An experimental ``--full-check option`` also checks for boards which do=
-n't have
-> +a CONFIG_TARGET_xxx where xxx corresponds to their defconfig filename. =
-This is
->   not strictly necessary, but may be useful information.
->  =20
->  =20
+
+>   CONFIG_TARGET_xxx where xxx corresponds to their defconfig filename. T=
+his is
 
