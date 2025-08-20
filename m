@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5059CA0EDC
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 17:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9672ACA0EDC
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 17:14:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A372682F03;
+	by phobos.denx.de (Postfix) with ESMTP id E66CB82FC7;
 	Wed, 20 Aug 2025 19:14:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="p1OKNkC+";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="SfSDgdfY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76ED18006D; Wed, 20 Aug 2025 18:20:20 +0200 (CEST)
+ id 4801B82E05; Wed, 20 Aug 2025 18:20:22 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79B8882B07
+ by phobos.denx.de (Postfix) with ESMTPS id 92EF382E34
  for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 18:20:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=03278829c7=raphael.gallais-pou@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57KDh9jO016751;
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57KG2weZ022097;
  Wed, 20 Aug 2025 18:20:11 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- OhzMBfFUWaWxy4WLCj9nBtii7ItRQHtK5UtKssVZ2CU=; b=p1OKNkC+RHyRvv7z
- z9X4WPAdAEu9IVX4y+Vw9ZUzF3c0BxXoQz35oHnHim01VVqC6Uop0Mc0jsOHIRTM
- UCxbjcWP7AJSiFyq+LDMOfuIL/x2kS+dun1CRKoLDOAoViFVsT+8oBJiZntpQpPb
- gvylEy1kOgUbDt0yBAUcRb1pYelQFEAiyki9Ud9Ocu8UvwXlR/V1fvhkDWN1OSaI
- VHQryim+3980cRkFiOI93JcP/ej6Gmt1Kx6VJfOQqH83xiPJPlTeVpnS+eKaU+sf
- dUe2pNoXvYw5eUfCLvozyDlIrBeUMhyaqO6Pw42KAn8+rGITOZM7zD4qGrSMn0ZD
- JB4EiQ==
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=d35EPuPJtFCqmgMiIJjoZU
+ isLNGUbwJFsKvq+r8GTDE=; b=SfSDgdfYRueOG+cC+tBf47I2zMGLyvxBuDS+4m
+ pwi7Hk1BhcjDTVmRSYqBAtdD2f6gTJYBKXIbF4WDPXuFmh6LQEel+imXjLktB3bS
+ o35yB6mZpAMU+6A1hGzpu8qTke9pFtlwWv13tYfgDISsGRP8yE5J3VkTrCgncn42
+ M+0yQLMDKqjnkwjg1CXVU0DhRkWfCZ4Vp+SnlX+VM6Vxbg6+LGqTrrxuSIcYz6ai
+ xJ193XloRMcKCqH9ilyXmviWJdKmWNhZgN6NHw4ZUmt1vPaLiEUPY3tp4nAgEQ8C
+ D8lwSFwZ4JRt+LK7OV0AA1/CJtVSa/o2RFFzkPkg/0yOx7lQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48n754as7t-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48n7w5tm9g-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Wed, 20 Aug 2025 18:20:11 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3897740050;
- Wed, 20 Aug 2025 18:19:18 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5FFCA4004D;
+ Wed, 20 Aug 2025 18:19:17 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 960746C843A;
- Wed, 20 Aug 2025 18:19:02 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8089272B801;
+ Wed, 20 Aug 2025 18:18:55 +0200 (CEST)
 Received: from localhost (10.252.7.99) by SHFDAG1NODE2.st.com (10.75.129.70)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 20 Aug
- 2025 18:19:02 +0200
+ 2025 18:18:55 +0200
 From: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
-Date: Wed, 20 Aug 2025 18:17:46 +0200
-Subject: [PATCH 7/8] ARM: dts: stm32: remove panel property in
- stm32mp257f-ev1-u-boot
+Subject: [PATCH 0/8] Add display support for STM32MP25
+Date: Wed, 20 Aug 2025 18:17:39 +0200
+Message-ID: <20250820-master-v1-0-fc76f18ab2fd@foss.st.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250820-master-v1-7-fc76f18ab2fd@foss.st.com>
-References: <20250820-master-v1-0-fc76f18ab2fd@foss.st.com>
-In-Reply-To: <20250820-master-v1-0-fc76f18ab2fd@foss.st.com>
+X-B4-Tracking: v=1; b=H4sIACP1pWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDC0Nj3dzE4pLUIl0j4+RUS4vkxJTUVAMloOKCotS0zAqwQdGxtbUASuA
+ oalgAAAA=
+X-Change-ID: 20250813-master-23ce98cadee0
 To: Tom Rini <trini@konsulko.com>, Kamil Lulko <kamil.lulko@gmail.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Dillon Min
  <dillon.minfei@gmail.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
@@ -93,35 +93,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SCMI regulators are not yet implemented in OP-TEE.  This leads to an
-invalid argument error when retrieving the 'power-supply' property.
-Ultimately this chains into the panel not probing and makes the whole
-display pipe fail.
+This series aims to add basic LVDS display support for STM32MP257F-EV1
+board.
 
-Remove the property in the upstream device-tree to allow display pipe to
-boot.
+It introduces:
+- the STM32 LVDS Display Interface Transmitter driver.
+- a new version of the STM32 LTDC driver.
+- the support of "panel-lvds" compatible.
+
+It adds and enables driver support for stm32mp257f-ev1-u-boot
+It also brings fixes to the ofnode driver.
+
+This work is based on the Linux device-tree sent recently [1].
+
+[1] https://lore.kernel.org/lkml/20250819-drm-misc-next-v3-0-04153978ebdb@foss.st.com
 
 Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
 ---
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+Raphael Gallais-Pou (8):
+      ofnode: support panel-timings in ofnode_decode_display_timing
+      video: simple_panel: add support for "panel-lvds" display
+      video: stm32: STM32 driver support for LVDS
+      video: stm32: ltdc: support new hardware version for STM32MP25 SoC
+      video: stm32: ltdc: properly search the first available panel
+      ARM: dts: stm32: use LTDC and LVDS nodes before relocation in stm32mp25-u-boot
+      ARM: dts: stm32: remove panel property in stm32mp257f-ev1-u-boot
+      configs: stm32mp25: enable LVDS display support
 
-diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-index 9a566e18d3fd9b0cf4e21605f2cb060b49fadcb6..7a4b623664a1e167ccc0f4c73a979a083337d7a2 100644
---- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-@@ -12,6 +12,10 @@
- 	};
- };
- 
-+&panel_lvds {
-+	/delete-property/ power-supply;
-+};
-+
- &usart2 {
- 	bootph-all;
- };
+ MAINTAINERS                              |   1 +
+ arch/arm/dts/stm32mp25-u-boot.dtsi       |   8 +
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |   4 +
+ configs/stm32mp25_defconfig              |   3 +
+ doc/board/st/st-dt.rst                   |   1 +
+ drivers/core/ofnode.c                    |  17 +-
+ drivers/video/simple_panel.c             |   1 +
+ drivers/video/stm32/Kconfig              |   9 +
+ drivers/video/stm32/Makefile             |   1 +
+ drivers/video/stm32/stm32_ltdc.c         | 157 ++++++-
+ drivers/video/stm32/stm32_lvds.c         | 673 +++++++++++++++++++++++++++++++
+ 11 files changed, 855 insertions(+), 20 deletions(-)
+---
+base-commit: 54fbdd408873413af86d86de03a490c5abf280f1
+change-id: 20250813-master-23ce98cadee0
 
+Best regards,
 -- 
-2.25.1
+Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
 
