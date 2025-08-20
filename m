@@ -4,83 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE0F6CA0EF8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 20:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34060CA0EDC
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 21:08:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A70781FEE;
-	Wed, 20 Aug 2025 22:59:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A77E881FEE;
+	Wed, 20 Aug 2025 23:08:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="h4uQs5G5";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="s4jDtEYA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gcIBOp/c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4071682B07; Wed, 20 Aug 2025 22:59:12 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 62B0982E67; Wed, 20 Aug 2025 23:08:38 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24BB3801DD
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 22:59:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7635C801DD
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 23:08:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4c6f2N6Q2Fz9vMV;
- Wed, 20 Aug 2025 22:59:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755723548;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SakPdjbwlTFA62uulmMuLdbIgHAG9KWu8ZU7v+ZcCvo=;
- b=h4uQs5G5RD+ZHm5TYWQ9r5AZNbTxAVusODRIEn9vvYx6BGmifg9AwXigasGPL9RZBMl43D
- RV33vuydik1A3lRov//SHZwSjUabYdEujqPWb18Kvh1Snh55rIpF2UOPDAV3KqLQxU5dOK
- YGeieHYc5MelmXEMyP21vddM6lDpQ9zhCzwEt4AbDEjz4gExrgIVRYMjdVU6ARhV82XvTa
- b4Gb6PwIRgnyHlQAQpKhysEToBOkDgJ2IkYSFfYEI4zmOrlCT5JHajYsMhainR510NOg16
- +dUg10Fr7yAAS1NgX19mvIE8ru5ilCzuN04ROBSc+gv5r+KKs8nkzkBOdBPfkg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=s4jDtEYA;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <5046fa19-eab6-47fc-a740-d8f3268070f2@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755723547;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SakPdjbwlTFA62uulmMuLdbIgHAG9KWu8ZU7v+ZcCvo=;
- b=s4jDtEYAtsPxANdputsukQyvivgoDZlhcVnO9zv/2JPUX3BKmI+mQSd2AMB20G5Aq4oU9J
- B0+aF82E8grrhDBE+lX9cPahtBR+eGTv/Cw3SapVSig4HWwMogsWh6+9Gzsske0APfs1ii
- QlxKfDQNFsaPLtsEIFHU/Igy1jBWVYGP3ZwiDJwYiHJXxthBQ4GcsShcXTlTiv81jjYTka
- FGtXhMHZlRUUu2rQ7phNzYU5ipPPJFBNgz6VLuzD4bqIvSzljjrBcL6PQ2ZN9S/PT3Ci5p
- B1Me5Hw4olFo8q0UQezHJ0kE2htC0oJPHtvTa5RRJTAbQErTFXXLe+tkeK/ZcA==
-Date: Wed, 20 Aug 2025 22:59:04 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1755724115; x=1756328915; i=xypron.glpk@gmx.de;
+ bh=9qzS+4ihK0HjJb9KPREIuRNaB8VvD4kcl3BNNZeofOM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=gcIBOp/cxjl+hv8jzFhCsj1Gm9jwrtT6/7mh+4o/g+T6qUdbsSvTdrck0zhTl5YK
+ FpQlkwOEskD6aOJbXm9h4N1yagBnoJ7syl/87zJiighnMNQ1pwd9WpMRLwFoKvX2v
+ Xp7lrBPtNQmEXivpz/J9tLZ/keYPiK4GaTrNPgWA4V4k/4AsOpaskxMd/UtKivod8
+ Nnmo5/THuzSeZfCbaC0Y28AO5xGbeSFnjHnlcjR9oZV4D0f0icE2sqU6GF/crIwJK
+ 0q+ohhliddnt7qCOOmJv1V5K6l+arcxFYDoh8pBDxhRrqibdLExEk/C8l4tCljx23
+ 0oudGMfDJxKmwL4FfA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.104] ([46.114.108.215]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mqb1W-1uBKMt0v7Q-00ppZi; Wed, 20
+ Aug 2025 23:08:35 +0200
+Message-ID: <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
+Date: Wed, 20 Aug 2025 23:08:34 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] env: spi: Fix gd->env_valid for the first write
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <03aa59f72f47fe0ecafd1e1ca52cbb8a5a8f0446.1755613540.git.michal.simek@amd.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 06/10] doc: Add riscv to the list of architectures in
+ tools/buildman/buildman.rst
+To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <03aa59f72f47fe0ecafd1e1ca52cbb8a5a8f0446.1755613540.git.michal.simek@amd.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 8267be66b7758ca2250
-X-MBO-RS-META: icxfadbhznxr6ip9n9rnmkp3fszs5bdf
-X-Rspamd-Queue-Id: 4c6f2N6Q2Fz9vMV
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:AMcOBKlCNtZJMtXKQbXbQayqMAdCEc1k9eLLfD/fQLYx2LeOmZU
+ ceKVF+SbNoLhw7aWw8ydS8Y1HXRWB04g+NOargF+ej6jiEnbdg82fyGM4bnrOkS/4CJeGh4
+ fmkRbfQI4hJLuSEjqrSWd7ppoSQZLtms7oPT58bXXVP1t7shLOhzU37026sjrKkog6ixXzb
+ eJtGAI5l+gDQZNiShjTpg==
+UI-OutboundReport: notjunk:1;M01:P0:VWEGrjuVSEQ=;5j3e9u1FFifWs9UqGuQXtvyljjH
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,132 +146,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/19/25 4:25 PM, Michal Simek wrote:
-[...]
+On 11.08.25 01:37, Adriano Carvalho wrote:
+> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> ---
+>   tools/buildman/buildman.rst | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+> index d5d22732088..7944adcd867 100644
+> --- a/tools/buildman/buildman.rst
+> +++ b/tools/buildman/buildman.rst
+> @@ -478,7 +478,8 @@ Setting up
+>  =20
+>      At the time of writing, U-Boot has these architectures:
+>  =20
+> -      arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, sh, x8=
+6, xtensa
+> +      arc, arm, m68k, microblaze, mips, nios2, powerpc, riscv, sandbox,=
+ sh, x86,
+> +      xtensa
 
-> ZynqMP> mtd read "U-Boot storage variables" 1000
+The output examples above this line should also be updated to show RISC-V.
 
-It would be better to spray the 0x1000 area with pattern first, 
-otherwise, if the 'mtd read' fails, such failure might go undetected.
+Shouldn't we provide human readable names, e.g.
 
-> Reading 131072 byte(s) at offset 0x00000000
-> ZynqMP> md 1000
-> 00001000: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001010: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001020: ffffffff ffffffff ffffffff ffffffff  ................
+* RISC-V (riscv)
+* SuperH (sh)
 
-[...]
+Best regards
 
-> ZynqMP> savee
+Heinrich
 
-"env save" is the modern equivalent.
+>  =20
+>  =20
+>   How to run it
 
-> Saving Environment to SPIFlash... Erasing SPI flash...Writing to SPI flash... offset 2200000
-> done
-> Valid environment: 2
-> OK
-> ZynqMP> mtd read "U-Boot storage variables" 1000
-> Reading 131072 byte(s) at offset 0x00000000
-
-This here looks odd:
-- Where is the "offset 2200000" print coming from ?
-- The valid environment is indicated to be 2 , shouldn't that be 1
-   (primary copy = 1, redundant copy = 2) ?
-- The dump of what looks like primary copy also seems valid, so
-   shouldn't Valid environment be 1 (see previous bullet)
-
-> ZynqMP> md 1000
-> 00001000: 5d691224 63726101 72613d68 7561006d  $.i].arch=arm.au
-> 00001010: 6f6c6f74 6e3d6461 6162006f 61726475  toload=no.baudra
-> 00001020: 313d6574 30323531 6f620030 3d647261  te=115200.board=
-> 00001030: 716e797a 6200706d 6472616f 6e616d5f  zynqmp.board_man
-> 00001040: 63616675 65727574 49583d72 584e494c  ufacturer=XILINX
-> 00001050: 616f6200 6e5f6472 3d656d61 4b2d4d53  .board_name=SM-K
-> 00001060: 582d3632 47324c43 44452d43 616f6200  26-XCL2GC-ED.boa
-> 00001070: 725f6472 423d7665 616f6200 735f6472  rd_rev=B.board_s
-> 00001080: 61697265 30353d6c 42323735 46313131  erial=50572B111F
-> 00001090: 62004832 6472616f 7465735f 723d7075  2H.board_setup=r
-> 000010a0: 64206374 30207665 797a203b 706d716e  tc dev 0; zynqmp
-> 000010b0: 696d6d20 72775f6f 20657469 46467830   mmio_write 0xFF
-> 000010c0: 30304143 30203031 66666678 203b3020  CA0010 0xfff 0;
-> 000010d0: 74206669 20747365 61637b24 5f316472  if test ${card1_
-> 000010e0: 656d616e 203d207d 2d4b4353 472d564b  name} = SCK-KV-G
-> 000010f0: 6874203b 72206e65 74206e75 6b5f6d70  ; then run tpm_k
-> ZynqMP> mtd read "U-Boot storage variables backup" 1000
-> Reading 131072 byte(s) at offset 0x00000000
-> ZynqMP> md 1000
-> 00001000: ffffffff ffffff00 ffffffff ffffffff  ................
-> 00001010: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001020: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001030: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001040: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001050: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001060: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001070: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001080: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001090: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010a0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010b0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010c0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010d0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010e0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010f0: ffffffff ffffffff ffffffff ffffffff  ................
-> ZynqMP> savee
-> Saving Environment to SPIFlash... Erasing SPI flash...Writing to SPI flash... offset 2200000
-> done
-> Valid environment: 1
-> OK
-> ZynqMP> mtd read "U-Boot storage variables" 1000
-
-This behavior here looks correct .
-
-> Reading 131072 byte(s) at offset 0x00000000
-> ZynqMP> md 1000
-> 00001000: 5d691224 63726101 72613d68 7561006d  $.i].arch=arm.au
-> 00001010: 6f6c6f74 6e3d6461 6162006f 61726475  toload=no.baudra
-> 00001020: 313d6574 30323531 6f620030 3d647261  te=115200.board=
-> 00001030: 716e797a 6200706d 6472616f 6e616d5f  zynqmp.board_man
-> 00001040: 63616675 65727574 49583d72 584e494c  ufacturer=XILINX
-> 00001050: 616f6200 6e5f6472 3d656d61 4b2d4d53  .board_name=SM-K
-> 00001060: 582d3632 47324c43 44452d43 616f6200  26-XCL2GC-ED.boa
-> 00001070: 725f6472 423d7665 616f6200 735f6472  rd_rev=B.board_s
-> 00001080: 61697265 30353d6c 42323735 46313131  erial=50572B111F
-> 00001090: 62004832 6472616f 7465735f 723d7075  2H.board_setup=r
-> 000010a0: 64206374 30207665 797a203b 706d716e  tc dev 0; zynqmp
-> 000010b0: 696d6d20 72775f6f 20657469 46467830   mmio_write 0xFF
-> 000010c0: 30304143 30203031 66666678 203b3020  CA0010 0xfff 0;
-> 000010d0: 74206669 20747365 61637b24 5f316472  if test ${card1_
-> 000010e0: 656d616e 203d207d 2d4b4353 472d564b  name} = SCK-KV-G
-> 000010f0: 6874203b 72206e65 74206e75 6b5f6d70  ; then run tpm_k
-> ZynqMP> mtd read "U-Boot storage variables backup" 1000
-> Reading 131072 byte(s) at offset 0x00000000
-> ZynqMP> md 1000
-> 00001000: ffffffff ffffff00 ffffffff ffffffff  ................
-> 00001010: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001020: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001030: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001040: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001050: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001060: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001070: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001080: ffffffff ffffffff ffffffff ffffffff  ................
-> 00001090: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010a0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010b0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010c0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010d0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010e0: ffffffff ffffffff ffffffff ffffffff  ................
-> 000010f0: ffffffff ffffffff ffffffff ffffffff  ................
-> ZynqMP> savee
-> Saving Environment to SPIFlash... Erasing SPI flash...Writing to SPI flash... offset 2220000
-> done
-> Valid environment: 2
-> OK
-> ZynqMP> savee
-> Saving Environment to SPIFlash... Erasing SPI flash...Writing to SPI flash... offset 2200000
-> done
-> Valid environment: 1
-It would be good to validate that both copies of the env are actually 
-written where they are supposed to be written . This part is missing 
-from this test. And in fact -- it would be good if this fix did have a 
-proper test .
