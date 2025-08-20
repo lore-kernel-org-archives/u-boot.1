@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8665FCA0EE6
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 02:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A582CA0EE6
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 02:21:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB5BF801DD;
-	Wed, 20 Aug 2025 04:20:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1365082B07;
+	Wed, 20 Aug 2025 04:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="a6wJGTtV";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="c14JBOKc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F0A580FA1; Wed, 20 Aug 2025 04:20:56 +0200 (CEST)
+ id 34181801DD; Wed, 20 Aug 2025 04:20:56 +0200 (CEST)
 Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4162C801DD
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 04:20:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27E3480107
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 04:20:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 46ced0a27d6c11f0b33aeb1e7f16c2b6-20250820
+X-UUID: 4434ff6a7d6c11f0b33aeb1e7f16c2b6-20250820
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=gTSLPL6kAkWmIVq+BwipEAPTAypQwP034S6lj/n72BU=; 
- b=a6wJGTtVmMeDn6byQ43sQ/yKI0O0phyfK1VJoqo70jaSmgxweAlgGya9jGgu4hM4lqU8m5db4VnTJ96lP2lHRO8Ek3gSWYtcDC67VJVPZh4aLTkB91s6HnQAgikYZC8vgaBHCYAjXeFB2IGoy9HjLErhPEseaAvyOkx7hmuC/V0=;
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=+LCwyGQ7rM59P/GnyyQWuFyk80uB9QnBlSdRqWQ5D9s=; 
+ b=c14JBOKc9WrolyutRbz7ZHzLcRVZAP/Vonl0OhK5ukBJQ9mCAI9s4VCanmun/St8suUqYNZ2agTQytlOKExgveEirRMbX6bFb4r+JSSiVT6hBzAdJBV6t+t9Ne6YW81QqkYRb5lxB25pM9THAex2KioLIWl95I+0prSYpJzicPY=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.3, REQID:1cfceb45-38dc-4e7b-9fd9-eb3a85f6e07f, IP:0,
+X-CID-O-INFO: VERSION:1.3.3, REQID:47e12c40-df82-4fdc-9f6d-6b95d1afbad3, IP:0,
  UR
- L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
- elease,TS:0
-X-CID-META: VersionHash:f1326cf, CLOUDID:34cf1bf4-66cd-4ff9-9728-6a6f64661009,
+ L:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:-5
+X-CID-META: VersionHash:f1326cf, CLOUDID:310f666d-c2f4-47a6-876f-59a53e9ecc6e,
  B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:-5,Content:0|15|50,EDM:
- -3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,
- AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:-5,Content:0|15|50,EDM:-3,IP:
+ nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,L
+ ES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
 X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 46ced0a27d6c11f0b33aeb1e7f16c2b6-20250820
-Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
+X-UUID: 4434ff6a7d6c11f0b33aeb1e7f16c2b6-20250820
+Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
  mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 2107294668; Wed, 20 Aug 2025 10:20:44 +0800
+ with ESMTP id 1813937469; Wed, 20 Aug 2025 10:20:40 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Wed, 20 Aug 2025 10:20:42 +0800
+ 15.2.1258.39; Wed, 20 Aug 2025 10:20:37 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Wed, 20 Aug 2025 10:20:41 +0800
+ 15.2.1258.39 via Frontend Transport; Wed, 20 Aug 2025 10:20:37 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
  <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 1/4] net: mediatek: associate PHY device with dts node
- specified by phy-handle
-Date: Wed, 20 Aug 2025 10:20:42 +0800
-Message-ID: <945eaf5180db0723d2bdc9007af74a67a07f1407.1755655935.git.weijie.gao@mediatek.com>
+Subject: [PATCH 0/4] Add support for MediaTek MT7987/MT7988 built-in 2.5Gb
+ ethernet PHY
+Date: Wed, 20 Aug 2025 10:20:36 +0800
+Message-ID: <cover.1755655935.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1755655935.git.weijie.gao@mediatek.com>
-References: <cover.1755655935.git.weijie.gao@mediatek.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-MTK: N
@@ -88,44 +86,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Associate PHY device with its device node specified by phy-handle
-property. This makes it possible for PHY drivers to read dedicated
-information to configure the PHY device.
+This patch adds PHY driver for MediaTek MT7987/MT7988 built-in 2.5Gb
+ethernet PHY.
 
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
- drivers/net/mtk_eth/mtk_eth.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Weijie Gao (4):
+  net: mediatek: associate PHY device with dts node specified by
+    phy-handle
+  net: phy: Add MediaTek built-in 2.5Gb ethernet PHY driver
+  dt-bindings: mediatek: add doc for MediaTek MT7987/MT7988 2.5Gb
+    ethernrt PHY
+  MAINTAINERS: update ethernet-related file list for MediaTek ARM
+    platform
 
-diff --git a/drivers/net/mtk_eth/mtk_eth.c b/drivers/net/mtk_eth/mtk_eth.c
-index 5d6a42bceb4..e91f7b6d176 100644
---- a/drivers/net/mtk_eth/mtk_eth.c
-+++ b/drivers/net/mtk_eth/mtk_eth.c
-@@ -100,6 +100,7 @@ struct mtk_eth_priv {
- 	bool pn_swap;
- 
- 	struct phy_device *phydev;
-+	ofnode phy_node;
- 	int phy_interface;
- 	int phy_addr;
- 
-@@ -572,6 +573,7 @@ static int mtk_phy_probe(struct udevice *dev)
- 	if (!phydev)
- 		return -ENODEV;
- 
-+	phydev->node = priv->phy_node;
- 	phydev->supported &= PHY_GBIT_FEATURES;
- 	phydev->advertising = phydev->supported;
- 
-@@ -1458,6 +1460,8 @@ static int mtk_eth_of_to_plat(struct udevice *dev)
- 			return ret;
- 		}
- 
-+		priv->phy_node = args.node;
-+
- 		priv->phy_addr = ofnode_read_s32_default(args.node, "reg", -1);
- 		if (priv->phy_addr < 0) {
- 			printf("error: phy address is not specified\n");
+ MAINTAINERS                                   |   4 +-
+ .../net/phy/mediatek,mt798x-i2p5ge-phy.txt    |  60 ++
+ drivers/net/mtk_eth/mtk_eth.c                 |   4 +
+ drivers/net/phy/Kconfig                       |   2 +
+ drivers/net/phy/Makefile                      |   1 +
+ drivers/net/phy/mediatek/Kconfig              |  15 +
+ drivers/net/phy/mediatek/Makefile             |   4 +
+ drivers/net/phy/mediatek/mtk-2p5ge.c          | 586 ++++++++++++++++++
+ drivers/net/phy/mediatek/mtk-phy-lib.c        | 106 ++++
+ drivers/net/phy/mediatek/mtk.h                | 103 +++
+ 10 files changed, 883 insertions(+), 2 deletions(-)
+ create mode 100644 doc/device-tree-bindings/net/phy/mediatek,mt798x-i2p5ge-phy.txt
+ create mode 100644 drivers/net/phy/mediatek/Kconfig
+ create mode 100644 drivers/net/phy/mediatek/Makefile
+ create mode 100644 drivers/net/phy/mediatek/mtk-2p5ge.c
+ create mode 100644 drivers/net/phy/mediatek/mtk-phy-lib.c
+ create mode 100644 drivers/net/phy/mediatek/mtk.h
+
 -- 
 2.34.1
 
