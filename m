@@ -4,42 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2A4CA0EE6
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 02:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 765C5CA0EDC
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 04:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38FA2801DD;
-	Wed, 20 Aug 2025 04:45:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id BB9AD808AF;
+	Wed, 20 Aug 2025 06:04:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CBE0F802C1; Wed, 20 Aug 2025 04:45:04 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF96780107
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 04:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [98.97.63.12]) (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 2A48EB4E0001;
- Wed, 20 Aug 2025 04:44:58 +0200 (CEST)
-Message-ID: <84cd3c89-5f82-468c-a63f-9815909ad110@freeshell.de>
-Date: Tue, 19 Aug 2025 19:44:56 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BU08sItS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 782B7809A5; Wed, 20 Aug 2025 06:04:02 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 29D528006D
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 06:03:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57K43uaM161320;
+ Tue, 19 Aug 2025 23:03:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1755662636;
+ bh=1KqpuVwPIEzSXApX3iPlVDeUagnYL6Z+ZC9hQmOv0Zw=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=BU08sItSxFUj12YF+SewUpyBfImbpdkhfv+8/nGeYsI3p4gXtX2wnS7KZN2JDJZ/f
+ voi4SZNjDXYFtyst+dIoH3ysm/KFEC6pPTYfSlLjGbxEvhB4nDI7ty3CByvY1BbuVz
+ vZLCQrKtCnC9ASQMexyv+o7C4MAAG8tv6XcfyvrY=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57K43uoH1071611
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 19 Aug 2025 23:03:56 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 19
+ Aug 2025 23:03:55 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 19 Aug 2025 23:03:55 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57K43sbr3787389;
+ Tue, 19 Aug 2025 23:03:55 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] riscv: dts: starfive: prune redundant jh7110-common
- overrides
-To: Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20250815050315.62956-1-e@freeshell.de>
- <ZQ2PR01MB1307043F4B7527EA41FF1754E6312@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <ZQ2PR01MB1307043F4B7527EA41FF1754E6312@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Wed, 20 Aug 2025 09:32:47 +0530
+Message-ID: <DC6YFT34VBJE.1U87BHIUTR8OE@ti.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH] mach-k3: am62*: Fix backup from eMMC boot mode
+From: Anshul Dalal <anshuld@ti.com>
+To: Judith Mendez <jm@ti.com>, Tom Rini <trini@konsulko.com>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+References: <20250818174015.2879675-1-jm@ti.com>
+In-Reply-To: <20250818174015.2879675-1-jm@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,212 +79,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Judith,
 
-On 8/17/25 23:45, Hal Feng wrote:
->> On 15.08.25 13:03, E Shattow wrote: 
->> Prune jh7110-common-u-boot.dtsi (clocks, qspi flash, eeprom, and bootph-
->> pre-ram hints now upstream since devicetree-rebasing v6.16) and replace by
->> remaining dependency jh7110-u-boot.dtsi (not yet upstream).
->>
->> Signed-off-by: E Shattow <e@freeshell.de>
->> ---
->>  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 99 -------------------
->>  .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |  2 +-
->> arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  2 +-
->>  .../dts/jh7110-pine64-star64-u-boot.dtsi      |  2 +-
->>  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |  2 +-  ...10-starfive-visionfive-
->> 2-v1.3b-u-boot.dtsi |  2 +-
->>  6 files changed, 5 insertions(+), 104 deletions(-)  delete mode 100644
->> arch/riscv/dts/jh7110-common-u-boot.dtsi
->>
->> diff --git a/arch/riscv/dts/jh7110-common-u-boot.dtsi
->> b/arch/riscv/dts/jh7110-common-u-boot.dtsi
->> deleted file mode 100644
->> index 049b0a7ce28..00000000000
->> --- a/arch/riscv/dts/jh7110-common-u-boot.dtsi
->> +++ /dev/null
->> @@ -1,99 +0,0 @@
->> -// SPDX-License-Identifier: GPL-2.0 OR MIT
->> -/*
->> - * Copyright (C) 2023 StarFive Technology Co., Ltd.
->> - */
->> -
->> -#include "jh7110-u-boot.dtsi"
->> -/ {
->> -	aliases {
->> -		spi0 = &qspi;
->> -	};
->> -
->> -	chosen {
->> -		bootph-pre-ram;
->> -	};
->> -
->> -	firmware {
->> -		spi0 = &qspi;
->> -		bootph-pre-ram;
->> -	};
->> -
->> -	memory@40000000 {
->> -		bootph-pre-ram;
->> -	};
->> -};
->> -
->> -&uart0 {
->> -	bootph-pre-ram;
->> -	reg-offset = <0>;
->> -	current-speed = <115200>;
->> -};
->> -
->> -&mmc0 {
->> -	bootph-pre-ram;
->> -};
->> -
->> -&mmc1 {
->> -	bootph-pre-ram;
->> -};
->> -
->> -&qspi {
->> -	bootph-pre-ram;
->> -
->> -	flash@0 {
->> -		bootph-pre-ram;
->> -		cdns,read-delay = <2>;
->> -		spi-max-frequency = <100000000>;
->> -	};
->> -};
->> -
->> -&syscrg {
->> -	assigned-clocks = <&syscrg JH7110_SYSCLK_CPU_ROOT>,
->> -			  <&syscrg JH7110_SYSCLK_BUS_ROOT>,
->> -			  <&syscrg JH7110_SYSCLK_PERH_ROOT>,
->> -			  <&syscrg JH7110_SYSCLK_QSPI_REF>;
->> -	assigned-clock-parents = <&pllclk JH7110_PLLCLK_PLL0_OUT>,
->> -				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
->> -				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
->> -				 <&syscrg JH7110_SYSCLK_QSPI_REF_SRC>;
->> -	assigned-clock-rates = <0>, <0>, <0>, <0>;
->> -};
->> -
->> -&sysgpio {
->> -	bootph-pre-ram;
->> -};
->> -
->> -&mmc0_pins {
->> -	bootph-pre-ram;
->> -	rst-pins {
->> -		bootph-pre-ram;
->> -	};
->> -};
->> -
->> -&mmc1_pins {
->> -	bootph-pre-ram;
->> -	clk-pins {
->> -		bootph-pre-ram;
->> -	};
->> -
->> -	mmc-pins {
->> -		bootph-pre-ram;
->> -	};
->> -};
->> -
->> -&i2c5_pins {
->> -	bootph-pre-ram;
->> -	i2c-pins {
->> -		bootph-pre-ram;
->> -	};
->> -};
->> -
->> -&i2c5 {
->> -	bootph-pre-ram;
->> -	eeprom@50 {
->> -		bootph-pre-ram;
->> -		compatible = "atmel,24c04";
->> -		reg = <0x50>;
->> -		pagesize = <16>;
->> -	};
->> -};
->> diff --git a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->> b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->> index ab882d07f6f..b9202f2acce 100644
->> --- a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->> +++ b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->> @@ -3,5 +3,5 @@
->>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>   */
->>
->> -#include "jh7110-common-u-boot.dtsi"
->> +#include "jh7110-u-boot.dtsi"
->>  #include "starfive-visionfive2-binman.dtsi"
->> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->> b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->> index ab882d07f6f..b9202f2acce 100644
->> --- a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->> @@ -3,5 +3,5 @@
->>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>   */
->>
->> -#include "jh7110-common-u-boot.dtsi"
->> +#include "jh7110-u-boot.dtsi"
->>  #include "starfive-visionfive2-binman.dtsi"
->> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->> b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->> index ab882d07f6f..b9202f2acce 100644
->> --- a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->> @@ -3,5 +3,5 @@
->>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>   */
->>
->> -#include "jh7110-common-u-boot.dtsi"
->> +#include "jh7110-u-boot.dtsi"
->>  #include "starfive-visionfive2-binman.dtsi"
->> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->> b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->> index ab882d07f6f..b9202f2acce 100644
->> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->> @@ -3,5 +3,5 @@
->>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>   */
->>
->> -#include "jh7110-common-u-boot.dtsi"
->> +#include "jh7110-u-boot.dtsi"
->>  #include "starfive-visionfive2-binman.dtsi"
->> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->> b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->> index 874074174ff..848ed8225ac 100644
->> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->> @@ -3,5 +3,5 @@
->>   * Copyright (C) 2023 StarFive Technology Co., Ltd.
->>   */
->>
->> -#include "jh7110-common-u-boot.dtsi"
->> +#include "jh7110-u-boot.dtsi"
->>  #include "starfive-visionfive2-binman.dtsi"
->>
->> base-commit: 0c558bbad9e7581808b358091d1fd979f860e8ac
-> 
-> I find that there are no ''bootph-pre-ram'' in mmc0_pins and mmc1_pins in
-> dts/upstream/src/riscv/starfive/jh7110-common.dtsi.
-> 
-> Is it ready now to drop jh7110-common-u-boot.dtsi?
-> 
-> Best regards,
-> Hal
+On Mon Aug 18, 2025 at 11:10 PM IST, Judith Mendez wrote:
+> Currently logic in spl_mmc_boot_mode only lookes at main devstat
 
-Yes, thank you for your review.
+Nit: s/lookes/looks
 
-Currently the U-Boot SPL code path that requires eMMC and SD Card
-functionality is with these deprecated JH7110 loader modes, or some
-unlikely runtime change in RGPIO0 / RGPIO1 state before U-Boot SPL
-following the JH7110 loader.
+> to determine the bootmode to return. Thus, when using: 'eMMC boot'
+> as primary boot mode and 'MMCSD boot from eMMC UDA' as backup
+> boot mode, 'eMMC boot' is always selected. Add check for bootindex
+> to determine if ROM boot via backup boot mode and return MMCSD_MODE_FS
+> which is the only supported backup bootmode with eMMC device.
+>
+> Signed-off-by: Judith Mendez <jm@ti.com>
+> ---
+>  arch/arm/mach-k3/am62ax/am62a7_init.c | 22 +++++++++++++---------
+>  arch/arm/mach-k3/am62px/am62p5_init.c | 24 ++++++++++++++----------
+>  arch/arm/mach-k3/am62x/am625_init.c   | 22 +++++++++++++---------
+>  3 files changed, 40 insertions(+), 28 deletions(-)
+>
+> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am6=
+2ax/am62a7_init.c
+> index 00173e6836b..fa3570d07ec 100644
+> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
+> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+> @@ -218,17 +218,21 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 bo=
+ot_device)
+>  	u32 bootmode_cfg =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK)=
+ >>
+>  			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+> =20
+> -	switch (bootmode) {
+> -	case BOOT_DEVICE_EMMC:
+> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
+> +	if (bootindex =3D=3D K3_PRIMARY_BOOTMODE) {
+> +		switch (bootmode) {
+> +		case BOOT_DEVICE_EMMC:
+> +			if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
+> +				return MMCSD_MODE_EMMCBOOT;
+> +			if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+> +				return MMCSD_MODE_FS;
+>  			return MMCSD_MODE_EMMCBOOT;
+> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+> +		case BOOT_DEVICE_MMC:
+> +			if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+> +				return MMCSD_MODE_RAW;
+> +		default:
+>  			return MMCSD_MODE_FS;
+> -		return MMCSD_MODE_EMMCBOOT;
+> -	case BOOT_DEVICE_MMC:
+> -		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+> -			return MMCSD_MODE_RAW;
+> -	default:
+> +		}
+> +	} else {
+>  		return MMCSD_MODE_FS;
+>  	}
+>  }
 
-I will consider seriously to support the deprecated functionality if
-there is sufficient documentation in the form of a full source code
-listing for the JH7110 mask ROM loader. Otherwise I do not have time or
-interest to reverse-engineer these things lacking in documentation from
-StarFive.
+[snip]
 
--E
+Just having a check for bootindex before the switch block would be more
+readable imo, like:
+
+if (bootindex !=3D K3_PRIMARY_BOOTMODE)
+	return MMCSD_MODE_FS;
+
+switch (bootmode) {
+	<Existing code>
+}
+
+Regards,
+Anshul
