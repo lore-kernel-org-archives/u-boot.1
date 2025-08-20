@@ -4,100 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1EC5CA0EE4
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 18:41:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BFECA0EE4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 20:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9C1E81E13;
-	Wed, 20 Aug 2025 20:41:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D78F81E13;
+	Wed, 20 Aug 2025 22:17:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T30r+qh4";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XVIf2qrV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9246881FEE; Wed, 20 Aug 2025 20:41:08 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F2D9C81FEE; Wed, 20 Aug 2025 22:17:23 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C1FF801DD
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 20:41:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCA188004F
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 22:17:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-314c3dc92f4so18717fac.1
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 11:41:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755715265; x=1756320065; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t7A/eLLE7NpVu85KBG0zHIP2r221KebhBb2IjdyW4kk=;
- b=T30r+qh4Qq3SF7p/sXP3lc//Jy7TOH7Na3HIvDlSJVkP8B2GBv3wccCEJ5vaZPDV4z
- HagHdbKtZOmcom3W3YDTCISCHD3GqF0mtAshDtxJaWbyW664EBQv7lcfARV71fkXNrkX
- 4a08XM5vww1ddEOoqvVhQDC2vbGC9xxyv+p+g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755715265; x=1756320065;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=t7A/eLLE7NpVu85KBG0zHIP2r221KebhBb2IjdyW4kk=;
- b=DuWqxRGXJPZ1rB0MsgQjRiXBJIJESchjExJO+mqNl/SYJlAvcHiF9hoAkV6yNNWEWN
- KARLjwRK9+NTnYCj0naifxt0A5CkG+THojdV5rwWYkXgTI0fnRwSFAc+nEW/w4jzldXO
- 1J9keBN/bWo1k0RPkNPCPgk6Gfc3ranCSWgdTIH4VLnJ77WLK8wj8ThAOTCdDbG1ypxM
- Yyu587he8jy/T6iLDrBJ7KOcXzBYD4+0aNvHiY7lNmbOj5gTQCfhXHFciioa6tjQ8jiA
- Cc5UoD2OTXwRHtL9CZaX+6gGaBDQIGxEX8TcIsbslH7QcchyU2RNyQGnvjH8Jzt4apfR
- /fgQ==
-X-Gm-Message-State: AOJu0YylxIIcriKWEv9pJwb10k/tAi7YjrOQgGtjZlZPUoKG+7xq2Xty
- zIOvjF7yra+P3km2YD42DdMRGrFyafQzNSoy7LAPUgzw9PP/TIKwnLUUIRuJSL/hwpI=
-X-Gm-Gg: ASbGncv1DEk36qwwUKPUTvulufC9cdQCgNPXLQe+ZWVK9Mg3oqamcCj9W12q5SUc3Mk
- 1/zdt3loeyBZLSNnUbeOz0jCPYF1hijTkxT9M1hi6+2Vmd77fodyJnoGe54In7urY+XpqPArez+
- tUQ8s6K4P6izv2tW2CMbBhHQOD7yP+eI+oUj+1oSCGpB5AHTcw1JaaLdetOn3NPSmzgrz0bc6tH
- 8J4EZZJVm8tfuG5hCQf0Ki0K7iQfgivPfuVjx+oEPWAdey22KCVT9+8V0I3kneMZG00rD0uPNFw
- q0kxSEq103CwLZCbN9Egkmqzq4zb7aWiPI8Pb+LhcqEj+Z4ImS/6DzJ/fxfwu+0WEoE5BGcBGrf
- Uns9k24WvMgHDzKtTcIEIPUKgxzky3GIbFSR9iXt+gPVOOxlJw4P99zY=
-X-Google-Smtp-Source: AGHT+IE2AdJjAMvX09WqTYdgayZwnnLaGEdElR15DDvtnK2fgEbBXR/Ph7g5AlvFp8yUwjAaLT+phg==
-X-Received: by 2002:a05:6870:63a3:b0:314:9689:a464 with SMTP id
- 586e51a60fabf-314c09b4e12mr330034fac.20.1755715264700; 
- Wed, 20 Aug 2025 11:41:04 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-310b6e61351sm4106096fac.0.2025.08.20.11.41.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Aug 2025 11:41:04 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Richard Genoud <richard.genoud@bootlin.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Bhavya Kapoor <b-kapoor@ti.com>, 
- Parth Pancholi <parth.pancholi@toradex.com>, 
- Andreas Dannenberg <dannenberg@ti.com>, Moteen Shah <m-shah@ti.com>, 
- Beleswar Padhi <b-padhi@ti.com>, Anshul Dalal <anshuld@ti.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Prasanth Babu Mantena <p-mantena@ti.com>, Wadim Egorov <w.egorov@phytec.de>, 
- Simon Glass <sjg@chromium.org>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, 
- Kishon Vijay Abraham I <kishon@ti.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Jayesh Choudhary <j-choudhary@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, 
- Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Chintan Vankar <c-vankar@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250731075956.605474-1-c-vankar@ti.com>
-References: <20250731075956.605474-1-c-vankar@ti.com>
-Subject: Re: [PATCH v4 00/21] Add support for Ethernet boot
-Message-Id: <175571526259.3510627.5533095969532405581.b4-ty@konsulko.com>
-Date: Wed, 20 Aug 2025 12:41:02 -0600
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1755721041; x=1756325841; i=xypron.glpk@gmx.de;
+ bh=IufqXpBHspK3FrzXeSJDJYYOO3gjNhIQFmEJlUTJXsk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=XVIf2qrV0f2Povr5wAI5rDSXGrCd+zqo9EFJIks69e/fj+ysNU7hXH7UElMWq7iF
+ +RVgDOT3129wKpmKARznXmKSbnU58JN4T73scDWQu0CgaZns3J+bBIb2IUiZ+eFvP
+ KbMM/bbZVjvgfk8zrjP2EpWUofygXFRBT/Nx/vbG8EMnJClLE0QsY908p58krYeNE
+ R0+ZsUVPLCYkEguSYgdQ+vBM7VSH0kuTRHtmSfF3zSdAoIChXgSpgChnKe0X6WShy
+ khLnNXI9tf8eTYml5WMkbq12u3lcneiLflFf5mLhmj3CISaY++kObYodweCQCsmSX
+ b/YUK4XHe4kqrbRLBw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.104] ([46.114.108.215]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MN5iZ-1v5f8v0YeD-00IJTl; Wed, 20
+ Aug 2025 22:17:20 +0200
+Message-ID: <16659fb4-2528-4615-bfdf-3e7fe1023ef0@gmx.de>
+Date: Wed, 20 Aug 2025 22:17:12 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 10/10] doc: Fix typo in tools/buildman/buildman.rst
+To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>, u-boot@lists.denx.de
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-11-adrianocarvalho.pt@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250810233742.51902-11-adrianocarvalho.pt@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:9f/qldtayu/u6KnJ2Elg+iE+AeeT5QU4pugDgcsZeUgk+xtupCV
+ fIU3BXZXZxUM7SKXPXoVEMYbhr2iO5Jsu0L+H7w1I0gWEHR3TQ2TXoPAofkWMjguk+hkSg9
+ 18MSh5AKJtQbu/KnY0VbrVUsV9ctUk/yfBYsgVkcDSWnlCPWWBORcRCALTfJHCOh6ZoG8/f
+ o5F/qpkUdP6GzB9Id6D2w==
+UI-OutboundReport: notjunk:1;M01:P0:IYmDfkk69wU=;OAn3XBg5jU8lnTdHCc7KNKfG6yV
+ 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
+ KyFUI8mxSibskKDQ60uLsYX74dSN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,62 +143,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 31 Jul 2025 13:29:35 +0530, Chintan Vankar wrote:
+On 11.08.25 01:37, Adriano Carvalho wrote:
+> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 
-> This series adds bind method for CPSW to avoid explicit probing, removes
-> explicit probing of CPSW, adds support for Ethernet boot on SK-AM68,
-> SK-AM62P-LP, J722S, SK-AM69.
-> 
-> This series is based on commit 'a8f20bb6650df56d' of origin/master
-> branch of U-Boot.
-> 
-> [...]
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Applied to u-boot/next, thanks!
-
-[01/21] net: ti: am65-cpsw-nuss: Define bind method for CPSW driver
-        commit: 3943531a54680b76813960655458e88f49f6bfb7
-[02/21] arch: mach-k3: common: Remove explicit probing of CPSW driver
-        commit: 50ededad3204072a5fe6b8ee49826643e7c8e7aa
-[03/21] Revert "mach-k3: am642_init: Probe AM65 CPSW NUSS for R5/A53 SPL"
-        commit: 3967d64740b69cda6b2642036bfb9269b05a7e35
-[04/21] Revert "arm: mach-k3: am62x: am625_init: Probe AM65 CPSW NUSS"
-        commit: b4a0702c924851906b1c127b3c9884e8a4870bd1
-[05/21] arm: mach-k3: j721s2: Update SoC auto-gen data to enable Ethernet boot
-        commit: 0b092a2aa81b84eba1ea48f87c04b0be62afd1e9
-[06/21] arm: mach-k3: j721s2_spl: Alias Ethernet boot to CPGMAC
-        commit: e85b090165ec55ef7e19bdd7fc11e9e6f74ec58e
-[07/21] net: ti: Kconfig: Enable SPL_SYSCON config for CPSW
-        commit: 333b50d32d76ded3d69e3f65d47ca0de1d32dcc4
-[08/21] configs: am68_sk_r5_ethboot: Add configs for enabling Ethernet boot in R5SPL
-        commit: 07774020f75b51fc3437d697528cac5978b407ac
-[09/21] configs: am68_sk_a72_ethboot: Enable configs required for Ethernet boot
-        commit: 3325b13d53f5a8991185936adc981678eb6d1b97
-[10/21] arm: mach-k3: am62p: Update SoC auto-gen data to enable Ethernet boot
-        commit: 6fc2a6a97171e0d4ecb8cef9385fb1a0a0a14611
-[11/21] board: ti: am62px: evm: Enable cache for AM62p
-        commit: 3bab8f17fb17c59f83ef409eb14b3aec92cd3f9b
-[12/21] configs: am62px_evm_r5_ethboot: Add configs to enable Ethernet boot in R5SPL
-        commit: c8c2da2ab817d78efdad88b85ef4449dd5719e01
-[13/21] configs: am62px_evm_a53_ethboot: Enable configs required for Ethboot
-        commit: c1f1d28c44543dc0fd74653215e25f5153ddd398
-[14/21] arm: mach-k3: j722s: Update SoC autogenerated data to enable Ethernet boot
-        commit: a02009f3a816e7de42fccff895397906304290ef
-[15/21] board: ti: j722s: evm: Enable cache for J722s
-        commit: 80b529d8776fe48eb595bc3eaf739751b5bea15c
-[16/21] configs: j722s_evm_r5_ethboot: Add configs to enable Ethernet boot in R5SPL
-        commit: d449db6cd7c896d69e2dba2b902797d9b329beef
-[17/21] configs: j722s_evm_a53_ethboot: Enable configs required for Ethernet boot
-        commit: 9def2b0fc17d5ed1162d6a8fbe9a06ec26557512
-[18/21] arm: mach-k3: j784s4: Update SoC auto-gen data to enable Ethernet boot
-        commit: 8eecd9edb58e57018ce1a9adf9283d88541e974f
-[19/21] arm: mach-k3: j784s4_spl: Alias Ethernet boot to CPGMAC
-        commit: 721d5c30f5704c78e7e45fa0234c8096a1bcd683
-[20/21] configs: am69_sk_r5_ethboot: Add configs to enable Ethernet boot in R5SPL
-        commit: 02b2a3277116d80137e62cb931dd365eda54790c
-[21/21] configs: am69_sk_a72_ethboot: Add configs to enable Ethernet boot
-        commit: 841d3d06ce2c1fb9d7a785bd7df5a1b6b70003bb
--- 
-Tom
-
+> ---
+>   tools/buildman/buildman.rst | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+> index 3e41d6ec304..2f365ae4ec9 100644
+> --- a/tools/buildman/buildman.rst
+> +++ b/tools/buildman/buildman.rst
+> @@ -1364,7 +1364,7 @@ regeneration of the file -- in that case buildman =
+exits after writing the file
+>   with exit code 2 if there was an error in the maintainer files. To use=
+ the
+>   default filename, use a hyphen, i.e. `-R -`.
+>  =20
+> -You should use 'buildman -nv <criteria>' instead of greoing the boards.=
+cfg file,
+> +You should use 'buildman -nv <criteria>' instead of greping the boards.=
+cfg file,
+>   since it may be dropped altogether in future.
+>  =20
+>  =20
 
