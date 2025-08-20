@@ -4,74 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E5BECA0EDC
-	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 14:05:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 647BACA0EE4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Aug 2025 15:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69B9A801DD;
-	Wed, 20 Aug 2025 16:05:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BACCD81E13;
+	Wed, 20 Aug 2025 17:03:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AHCt5csT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="df1B59m5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 154F58211F; Wed, 20 Aug 2025 16:05:24 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id ED1D082B07; Wed, 20 Aug 2025 17:03:35 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 927C78003E
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 16:05:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56F37801DD
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 17:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marietto2008@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-323266cdf64so5139030a91.0
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 07:05:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=robertcnelson@gmail.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-24458272c00so66557475ad.3
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 08:03:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755698720; x=1756303520; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=36o0Dkacq+CyS9LhJWCrlMMDuqPszU3GjMXMwHobevY=;
- b=AHCt5csTP1Ci1GSZ9xnTnxHeLSY7AIm+L7eQlUvRetrhRKbogUXqpR5NfKP/tlWZRf
- NxiWrBRo2Z+CXC1qNAIPg2h9q4zX+gJe96qSnLGu2KSw8Ja0vmOmXXYLpgQny3gayu0d
- Kb8KGK4QZ5If08Se8VbfoAhLZzNpmyN0bbTZ91b7iNMkGq90hSiabiYK6D2YX7GjRQN/
- D6V9mZRUFSvkpDIrM/99WLtpVZ2VtEuetH2qFxJY2wNDAM5fwZZf9xNJ+ensm1LSBYXY
- Ot04ymSVnbChcxJKPUesI4aQJrX/2KhMaErWTqeSATGDOrB2G4t3vSJjfe/wlqprAawA
- tV/A==
+ d=gmail.com; s=20230601; t=1755702212; x=1756307012; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b3KoY5thk0kYxlYopfLcd4socsJK/8l9RzVSEsm1gP4=;
+ b=df1B59m5bj1uVm3dkkSTQpDMBj7+kP5opqhpNenqY/ThdHRfyidoMCNk6OIp/J1El6
+ dfl0Epe2a3G/ZKJBwAgK2T/HmVLvphW8FjXS5GZNbZRFeuh4J10bL7KzoddJIjQELuKU
+ nnc11OwevW52oO5i3UR0vjhcbI4/yA2icTS5UUj5cJA4NAg+ul81RHxLk9VlaLtBtdJn
+ qsdNQPZ1eR6LAXnkaUe2+1nPs5NBrtOJJwxGrHhVvlzKN/WOvn+RK2ohUzoZhTUQ03xT
+ A4R9I4O+QCIkSHKQQqAL4cgQsTlm3URgTSmh56TRgV/gCmkL0Qhsk3ZDv4phjLeJmJ24
+ xBFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755698720; x=1756303520;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=36o0Dkacq+CyS9LhJWCrlMMDuqPszU3GjMXMwHobevY=;
- b=iNy0tTOs3wYLGBOkZB5eaTuWLupnUb2o300u+3TMXn3hkRU9ha6vPOed3QeXbRmVMK
- brtLQ4hBRTTBEKf8AP5Iy4cNVlt5+VSKIvfhOjdi5Bi+8HqV1K23gJ1ANlDYInM+JuKj
- aBrlWKOBqtuzmSPIv26DM/pop/eVk80ZoweHkDokcfLPPUFWpCWSJcbd0LFtHhdVdscX
- IoflCmUlam3l0Wn5EpAwpeKWCq/wdvVlKUR0F3SyBEXQZzOZMGCKDc9S3a1EtukuUsWn
- D0gGJLv7Q/gqbYdNZmkbSENI2vehpeJ80r30RcqyseKcSK7dPpVNBQP5v41jEpwWLJN5
- zHdQ==
-X-Gm-Message-State: AOJu0YwfSWbJJiLz/xKfv9JvaGdIqdZqDHugP/Vw6crZ8ycQXtLop4rJ
- c2FI6YD9GBPFuUeMhsFHS14/9LzRenIaeZwVqJ2YncNOQU0jw61zQnIV3uvtkOGRisLvIgDtQNU
- C3/rfE/ccJjsizug80Fmhb2WKZIwzkr46nyTX
-X-Gm-Gg: ASbGncvbQYemaN5P/YeabpeFwh3SR8j4ifKkX9ZnzcCDqvLj/gUqJBrGGA7+Ifxaxnd
- 8jiznJc77yEw3T8K4ZwIyKXIaVu1cJJNhky2bZJq2i4ESzR4QxyFH5VNAV3tMJWvl5N0CLvPEpc
- R0oeLyMy+3dHmv3THHjI623sK6SI+7P+DCFCL4Vh1F3NmdhPk1rFaxdmtCxihnOqT+VkaXHRQuQ
- ianwwW2
-X-Google-Smtp-Source: AGHT+IF6WdSAuUN/6L7CDcLkfofvkoSBxjmlIyRyWEsV9vQigng98fvslf9lMfeWlDniASCOACntJUL3lLU6T1WOV6o=
-X-Received: by 2002:a17:90b:3a4f:b0:31e:f3a4:333 with SMTP id
- 98e67ed59e1d1-324e1465da1mr3877428a91.26.1755698719162; Wed, 20 Aug 2025
- 07:05:19 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1755702212; x=1756307012;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=b3KoY5thk0kYxlYopfLcd4socsJK/8l9RzVSEsm1gP4=;
+ b=QtKnPFWFqDY+mnzXx/AzVmawZ5zRgS+i9Ehnt1c4aSG69wmGW/1X+EUUfiBm/U1iA+
+ pN2g05DCS/6qSbq+umg4HQh6RdtJtjbnem7Pd57ArmsdgKO4GKuBEmj3NwMNgBFL8iEB
+ TDRqet+YqnsOGCwcZ9L2Ywl+x46P5k4GPuBwK6KCfIf7bvPD4YDLitLXp2JaDQuE/U24
+ ZUUWROg2hCbtWpHduq6gAIiv6fEa/QbRGZghMG9pIMTjlVh36ULYUUcqPlG4eoDbTl/D
+ cbqaLwIdU2XAXMK8k1vjD0GVrVzJM0/s1nFyPpetgARVZUnoXMncV3zbOfVuL6+qQxzW
+ nMQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfe9cZByX0YsDq2OyDiXgPB2PFlBuFruUwxxUadpXgS3gNIOiFysHrHffVX+nPyryTL+jH6WQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZqCVN4nRM8YEEs7k34HTR82SoMrlrWLpmq45WqqLdCC6OKTxJ
+ B+F3BQgg9ivZidUzVYZQqCHA4EVjCP+Eud/EC9zQXMEmdUfNptF4WIlfhmfEyBocrZEe5N+VPLj
+ wKMciqOYsmamTi7wDKZU1d9vQuHyO4Kk=
+X-Gm-Gg: ASbGncv8NOzmBt8EMWeZMpr12gD88PtSeMNrNWNB5JvZCvhX5BVZrpbt1VO3asoX7Mq
+ yI7EDlHiheVXAIeOQSIPZVZ20q4dcn+fxQRXSlqoCnUJmVK+ut+K0ft1aNA/F9A2KVoN3rUQzqu
+ rvgKkIAsESQzeyVlUxlTZ2WeqpB28tgRyi9eQz7u54PYrhxgCu0KOYVZ2swWvemJTnawC+aviC9
+ 01r488myA==
+X-Google-Smtp-Source: AGHT+IGSI3kBJTigxJ/Mqs40t+5AMhx6Q1i+O+0LFWOkhFJ3xmhKzGcKkvbHU3ZLdtrB+AKwXb+XE9fnlFFu6HcxPOU=
+X-Received: by 2002:a17:903:1b47:b0:240:70d4:85c3 with SMTP id
+ d9443c01a7336-245ef0fe513mr39684255ad.9.1755702145181; Wed, 20 Aug 2025
+ 08:02:25 -0700 (PDT)
 MIME-Version: 1.0
-From: Mario Marietto <marietto2008@gmail.com>
-Date: Wed, 20 Aug 2025 16:04:41 +0200
-X-Gm-Features: Ac12FXxrga5UsMUh2IdvcSwhWukABs3A93AxtZqo3kAuBI6mP3uA8hgo4CcAE8s
-Message-ID: <CA+1FSijAu7otPPwQLNbTQ+PKuK4Jk-0L5MFtokx1MoQR4+3Khg@mail.gmail.com>
-Subject: Trying to boot FreeBSD 14.2 on the KHADAS-EDGE-V with some 4 inches
- HDMI displays....
-To: u-boot@lists.denx.de
+References: <20240627082949.357089-1-sjg@chromium.org>
+ <20240627082949.357089-9-sjg@chromium.org>
+ <yh7ro6sfsbjh.fsf@twin.sascha.silbe.org>
+ <20250818141704.GW124814@bill-the-cat>
+ <yh7rjz2z3eae.fsf@brick.sascha.silbe.org>
+ <CAOCHtYgDAjkQNcwQecLgBuk6GqKiEuhhMpxh-W9K-UB=VYvKTA@mail.gmail.com>
+In-Reply-To: <CAOCHtYgDAjkQNcwQecLgBuk6GqKiEuhhMpxh-W9K-UB=VYvKTA@mail.gmail.com>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 20 Aug 2025 10:01:57 -0500
+X-Gm-Features: Ac12FXzZtqdtapO3Qa7qBhN1IALAMFAnQLVn6hSKBZBVbvwDv4_9aEdwQzt2gLc
+Message-ID: <CAOCHtYjbXg8R4PtN8t5+ZevvCuOVoGKmxPdHPUkVrOpyXXS5TA@mail.gmail.com>
+Subject: Re: legacy image format on BBB / Debian (was: Re: [PATCH v6 8/8] Drop
+ the special am335x_boneblack_vboot target)
+To: Sascha Silbe <sascha-ml-reply-to-2025-3@silbe.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,32 +101,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello.
+On Tue, Aug 19, 2025 at 5:02=E2=80=AFPM Robert Nelson <robertcnelson@gmail.=
+com> wrote:
+>
+> On Tue, Aug 19, 2025 at 4:52=E2=80=AFAM Sascha Silbe
+> <sascha-ml-reply-to-2025-3@silbe.org> wrote:
+> >
+> > flash-kernel has no way of knowing whether the boot loader used to boot
+> > will be the stock boot loader or the one shipped in the u-boot-omap
+> > Debian package (if installed and manually copied to SD card / eMMC by
+> > the user). Did all BBB rev C boards ship with an U-Boot version that ha=
+d
+> > FIT image support? The oldest version I could find on the BBBs I have
+> > running and reachable via SSH is U-Boot 2015.10-00001-g143c9ee (probabl=
+y
+> > shipped in 2017).
+>
+> Good News, rev C is almost completely out of production!
+>
+> BeagleBoard finally ran out of NXP tda998x's, so we had to change the
+> HDMI framer.  (NXP last time buy'ed these pre covid, so
+> BeagleBoard.org scrapped the barrel finding every last one..)
+>
+> The newer Rev D, now has an ITE HDMI framer in place of NXP's.
+>
+> I wish I could tell you exactly what build SeeedStudio placed in the
+> eMMC, but I'm also waiting for a full (untouched) production board to
+> show up from a 3rd party shop to personally verify..
+>
+> It's probably: v2022.04:
+> https://github.com/beagleboard/u-boot/tree/v2022.04-bbb.io-am335x-am57xx
 
-I've installed FreeBSD 14.2-RELEASE on both my boards (RockPro64 and Khadas
-Edge V),both based on the Rockchip RK3399 and I've used a display that has
-a resolution of 720 x 720 resolution and I saw that the screen remains
-almost black (almost black (almost because I see a dim illumination coming
-from the display) .
+First rev_d showed up on our discord channel, they got them at mouser..
 
-I don't even see the u-boot logo. Instead,it is able to turn on my large
-HDMI monitor,which has a resolution of 1920x1080 pixels.
+Seeed flashed: `U-Boot SPL 2022.04-gc6f4cf7d (Apr 24 2025 - 03:22:59 +0000)=
+`
 
-Since I'm building a FreeBSD modular phone, I want to use a small HDMI
-display with a low resolution.
+(from: https://github.com/beagleboard/u-boot/tree/v2022.04-bbb.io-am335x-am=
+57xx
+)
 
-Later I remembered that I had two displays,stored inside the shelf,that
-could be tested,to see if they work with u-boot and the khadas-edge-v. The
-first one is a 4 inch display,720x720 from waveshare,the second one is a
-480x480 from a Chinese brand. The result that I've got is the same for both
-:
+Regards,
 
-https://drive.google.com/file/d/1InM4f4DLcYX8Y3ntERItnhwVuEnmHWeK/view?usp=sharing
-
-What happens is that u-boot is able to show the first stage of messages on
-the screen and then it becomes black and it remains black....
-
-What's broken ? How to fix it ? Thanks.
-
--- 
-Mario.
+--=20
+Robert Nelson
+https://rcn-ee.com/
