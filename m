@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3804CA0EFA
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 23:55:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95588CA0EFA
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 23:59:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B49780548;
-	Fri, 22 Aug 2025 01:55:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 194E680548;
+	Fri, 22 Aug 2025 01:59:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YOgBuN0k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IqbtcKZH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81D9E80548; Fri, 22 Aug 2025 01:55:03 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id ACF1581FEE; Fri, 22 Aug 2025 01:59:09 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE3ED8006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 01:55:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 954168006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 01:59:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-61d99c87d32so746703eaf.1
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 16:55:00 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-436011e8ed1so759157b6e.2
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 16:59:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755820499; x=1756425299; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CKeDefxJZ24YLKDBeueunUExg/8vaXjYXd+AtnPbKLA=;
- b=YOgBuN0kjhy2ybl+o6KnW7JgBTE6fPEQUmgaYxlULhqx2+kaDe4V49zaSXQnGhpPVc
- pxScnZBSkJM2tiycIgNwONzdks7ICTfCShVBnkiIBw/fvtcR10prdg38IKet5Ryiwq8a
- 2HeFU5GFdXDMKaKHWn+YA+vD/exqWfGi7wL84=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755820499; x=1756425299;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1755820746; x=1756425546; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CKeDefxJZ24YLKDBeueunUExg/8vaXjYXd+AtnPbKLA=;
- b=AMAERMT66s1v/nSnw3syewoBa4cHCdm+TRd/Coyy/eQQEHOvYXuk4Mx/NK0X2P/+2o
- 4lWjvyeeJwPMwMfetEZMTwKwaMAu4IHJxVzNlfVX2nwP5WvUrWYGcViEqiHHWapUel+A
- RLqAlSiEIq89GSqWVlU3YUAxl1v1fJwxJWt6k7ZYiHU+6rAQluNlADDxBN8JHp9hhZmS
- 0aIcQXyHssCE3BgROCh+rPOMVUvq9bw1AoECt2asoP5d2G51NCH1UFtrm93smisIoEMb
- lbLYCuILprqujQgaY6sM4kTJ96ElO8IDYoQZa/E0OdIA/cJ1gI3+T16/rGAb+2MVVYL5
- hRSg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJVDQW1xcbxyCTKZMI8K4Csqa3ur8Zs5lrtnhI4F/R0fByDM9/Vm0XEqlnLbM664hQN6kvBoU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2+StCbd3Pcv6shEo6beii9/m3IW5uNImMUu5aFkNAdTcThKQI
- yvYex4r+aKQc8CPUgfyZ0iDpHj1yFv9JnesmIpv8fuxaqADYhK1WiSAL63fxYNSvABg=
-X-Gm-Gg: ASbGncvolS7GFpeIfOZEiz5Pl4ox48SRpWXFPBco5hNjVCstDXQrZiGk+JD2UXBE9o9
- nUKlHUbyqJzpO2+ct4BufhmzPKEEoU6i+yRvioZy0H1DkYgdg0V16+vezsUGhMFT7zXqaiSn7W5
- nn4aNtGcmLy0iZqegheQkvJahzIahTUbly0D9UL67vBhEuYt6N85AFGm7W/53YvDjEH+/dnQ+3y
- qyIF+jBQAcOvB4ILq9f/cIeHra+W7zu26W5F7qA37ViGk4E7dvMAEsDDOsnCmyI8N9+tZddMGui
- LHz4TCzjmlZto5IRk1Jajnr852xqEwmIZ2kru08e7pvvc6ivwOfC/E2Aw9r3vThgwkyXOl55dDj
- m2yg2eMvfo4MMAfmq0KKGG7SnHTYYLGdtlI0pC0PsA2rO7iRwi5PiD+fG
-X-Google-Smtp-Source: AGHT+IFilb3NQ2wQD8r4tNwgHB56S7jlVR66CfoVIR/l0oIhjC7YQIsR1EELNrkuxgmeV1/IL+RZOQ==
-X-Received: by 2002:a05:6808:11cf:b0:435:12e5:d79a with SMTP id
- 5614622812f47-4378518edd1mr664131b6e.5.1755820499568; 
- Thu, 21 Aug 2025 16:54:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-310ab87a84csm5447798fac.7.2025.08.21.16.54.58
+ bh=E3QtfJYtJLyLvXkvAi+eVr1GyAm1glcs2Chklnk4xYA=;
+ b=IqbtcKZHTCG0sxPhOjiItLRRxUKHbjXGDz4yMeh/ZEGIvG2Qu8aIYi1M0tTVTZ6wHQ
+ 63WtWhSxXGzdaxuh2AejBH3NvvuYs0QPvEUSQLeoIhjidJTQnhBXia+EuBedMMR1sTaU
+ ezufXdlxlParUqbTkNLLiVTDrFn7vddsJ28+A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755820746; x=1756425546;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E3QtfJYtJLyLvXkvAi+eVr1GyAm1glcs2Chklnk4xYA=;
+ b=S6UoZ1gmYSAZB6goBucodQO4FmFUPWPelTJn98d1KoB7uLkRA8GFn1JnMM+6Lx9jc7
+ 47aRl78PeyKdZGtSMmJTeGxTJlHmywDZmkh+T4xv8EKK+cHuEkm6oKL3K5U66IxjsF48
+ niGIsCcF3EpeVn4MtKdqFCE2uP8qduGt7LcKna7MVbxA0xJ4Sp4f/j5quApN8dALR/nB
+ XhBG6KHkoJwuU7ZIFgmHvl1rLHHRg/dZjvpiALWdrHEWLb89/CrTQBB0feUTAdzW+dGj
+ C9impvFb0Bcb7WVlYWonDUWxxK64vwu6vENL5WFlk0drxQiRRr721pcB8byFnCkIyST/
+ kpbg==
+X-Gm-Message-State: AOJu0YwfTXoIjAX0P29HXcVmpsgpo87uGD6DqCHRFZhpo2wOxjSRxs5Q
+ 4Y9RmtUGt2FDOV4gHne1NMaKI7VhNAv2uLm/qfscmQ7YJXEQxGByUPJEqlmExDO4vAVHV/Zp+wq
+ WckFNG8Y=
+X-Gm-Gg: ASbGncv+8YurjmKdXXd6NiZeEz+2/TUlBmeDkrIUfjPXpAZv0YpDK58hEOtDWlMKczy
+ UQscuZ9vOvXUaVaKLZ3CzqLko3Zo7oZXujBI7UAuEgQHSdkKAg7jWiegEtL2DFOA01p5Lja/3bD
+ oQ/UqPLkCofsKGiJnqctdaaGsGBJ40a1mq7OUhLPpmE98xUfKGIKYuAOLzMKAriEFyNcwT+4wkY
+ 65n2Ud18xe7uLfx3sod8NdmWypWqrR+KbzLuGvkja0BvhnOfbQxem9rRUuJvKo3MNcrL4qlc6Hh
+ q1eKCEYT+i4PoIKkOdXaxJaoOddBnM0q9TzigXVBxUe1u3TlLQfHaR60M+vN4n6wR1sXAJrVu2m
+ d5izVb6ZzCqVdBenH1PCj6h5mN/+RetviKYAyrGpA1FltGovX/enYnBk=
+X-Google-Smtp-Source: AGHT+IG8okxrTAxK4vr5RrXCV5MEi3gLJBZhyHUHgddolu0udvzF8D82Hn2IDVPak1dh+Oggr159LQ==
+X-Received: by 2002:a05:6808:350b:b0:437:79d2:cbad with SMTP id
+ 5614622812f47-437851cbf23mr805327b6e.14.1755820746314; 
+ Thu, 21 Aug 2025 16:59:06 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-61bec11cd94sm1892634eaf.21.2025.08.21.16.59.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Aug 2025 16:54:58 -0700 (PDT)
-Date: Thu, 21 Aug 2025 17:54:56 -0600
+ Thu, 21 Aug 2025 16:59:05 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Stefan Roese <stefan.roese@mailbox.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] ddr: marvell: a38x: Fix unsigned issues
-Message-ID: <20250821235456.GN124814@bill-the-cat>
-References: <20250728-a38x_ddr-v1-1-4102aa87697c@linaro.org>
- <fc2eb511-430e-406a-a9fc-b47e6eb9812f@mailbox.org>
- <0d13343e-654a-417f-9f99-e33a5bc36301@mailbox.org>
- <CAJaLiFyNmTQQr-bN_aj4bPCL-4Zb+rakQ7RGiGfvkFupKG3fvA@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>, Martin Schwan <m.schwan@phytec.de>
+Cc: u-boot@lists.denx.de, Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20250813-wip-bootmeth-rauc-priv-free-v1-0-1ef928169469@phytec.de>
+References: <20250813-wip-bootmeth-rauc-priv-free-v1-0-1ef928169469@phytec.de>
+Subject: Re: [PATCH 0/4] bootstd: rauc: Fix segfault when scanning device
+ with unsupported layout
+Message-Id: <175582074503.947488.11788901318777484713.b4-ty@konsulko.com>
+Date: Thu, 21 Aug 2025 17:59:05 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BW455cSsgC5qH0Lq"
-Content-Disposition: inline
-In-Reply-To: <CAJaLiFyNmTQQr-bN_aj4bPCL-4Zb+rakQ7RGiGfvkFupKG3fvA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,43 +97,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 13 Aug 2025 13:54:04 +0200, Martin Schwan wrote:
 
---BW455cSsgC5qH0Lq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This series fixes a segfault, that would occur at the end of scanning a
+> device, which does not contain the required partition layout scheme for
+> a RAUC system.
+> 
+> With this series, a "bootflow scan" should now correctly scan the
+> specified devices with boot method "rauc" without crashing on invalid
+> partition schemes.
+> 
+> [...]
 
-On Thu, Aug 21, 2025 at 04:43:29PM -0700, Tony Dinh wrote:
+Applied to u-boot/master, thanks!
 
-> Hi Tom and Stefan,
->=20
-> It looks like we have some problem with ./scripts/get_maintainer.pl. I
-> was the author for the Marvell A38x DDR4 port (Commit 54a08c4), but
-> curiously I did not receive patch email from Andrew. So I ran the
-> script,
-
-To explain, there's a time-limit on how far git history is considered,
-and so your last change to the file in question pushed you off of the
-list of recipients. To answer a possible follow-up question from you,
-I've gotten complaints from contributors previously about being cc'd on
-patches for something they did a long time ago. The answer is that you
-need an entry in the MAINTAINERS file somewhere to match on a given file
-patterns to always be considered for a patch. I *think* MAINTAINERS
-files in drivers/ would work with get_maintainers.pl and we just don't
-have any yet.
-
---=20
+[1/4] bootstd: rauc: Fix segfault when cleaning up slots
+      commit: 074066790c7f726f149c1974e01b8b3f75738c73
+[2/4] bootstd: rauc: Don't null bootflow->bootmeth_priv
+      commit: b389967f9a624b35c163767c34919cbdcd4e0917
+[3/4] bootstd: rauc: Move freeing private struct to its own function
+      commit: 302830499d9f0ebec42fe62254429a4d8db6b36c
+[4/4] bootstd: rauc: Free private data when booting
+      commit: 498e423457a0360c01d976aa21a218995a1bdef8
+-- 
 Tom
 
---BW455cSsgC5qH0Lq
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKexzAAKCRAr4qD1Cr/k
-CmtyAPsHh0tLapI4KRjQsJ4nAkVgBn9+N8DAg7XzjLvZHo0oIQEAioFVZmNx/Q8Y
-jCz0ZxUDvCV55TLSHN5VILGdWIuE6Qw=
-=Jjfv
------END PGP SIGNATURE-----
-
---BW455cSsgC5qH0Lq--
