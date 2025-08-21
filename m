@@ -4,70 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B40BFCA0EEB
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 12:03:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0643CA0EEB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 13:24:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1693980B9B;
-	Thu, 21 Aug 2025 14:03:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 15A6A80548;
+	Thu, 21 Aug 2025 15:24:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="psZsijIC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="spswXO74";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EF3C81D5D; Thu, 21 Aug 2025 14:03:23 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C2C2980B9B; Thu, 21 Aug 2025 15:24:41 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF53480548
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 14:03:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6F8980422
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 15:24:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4c725g5F4nz9slm;
- Thu, 21 Aug 2025 14:03:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755777799;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lVlPe5ywCkJzp+tgmwunXeyy86VK1F4W2NONM5U56BM=;
- b=psZsijICoiDLvYS1eXRgl2XjJr9LxZDQSqFGUNFc7fZNwvOEP47jhU1TwssN3XLbi/ZzTo
- /fJ59NMQRhLtxlOUzV8gNQxAGQDyJLM7rvgIUiY963aJ4y+Xcel4hEW2DuH64iuEkpsnff
- ekDwJ/J0v0tvEvtelLlsevdKVlIY8Zm/mDHpOBRr7CTpXUBlGERNiKsArUS/PQ3p1Gnkd8
- 5UPCyTG+HT/d8eIodsDJGkic/DQ/NdR3KCSL2WnvIvAiejHc2p5t3UWC8t+u144Vd4JL79
- j7IZxl6bgbJnmGZvGDDwxJ9St/AYsTkc/mldAFhbKHxmtlGbY4gr5n0ShCyxIg==
-Message-ID: <6935fd0b-8027-48a0-b9ec-076535d929b9@mailbox.org>
-Date: Thu, 21 Aug 2025 14:03:18 +0200
+ spf=pass smtp.mailfrom=jens.wiklander@linaro.org
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-437727c903aso288150b6e.1
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 06:24:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1755782677; x=1756387477; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PDcK3AKb8+OjYloNyqOmvHjTKsFJ9vW3H9nTmQ7Etrw=;
+ b=spswXO74TYtJX+jqZIrGJd0Gvt877IjnI51OgusDOOGEmDpC75iufQqU8Nf+HOrPrN
+ rHsKRctk6FSol1ZpU1aKt5J2tSSct839xwFyg33phZ3DbIhx6mO/d8HzuBBrhCeozV/i
+ sWz7rkzYvRZEGFE1eZDiKdVSug/DcgPOj8TgE4Hat/CQsVQ5sM1IawQC1LdG6VOughln
+ qRzUTLBO24Kgt46jGKPHEcGacrei80Xhwk7pgADbFn+44VaDHFgAl4xF/0stcbyFKR14
+ eUKkunC+DYQzlopfOD6AjA53s8hdQcSDNSPv2ukmzWVf0bqHJ6vkx5o1+kChAEHoy6ld
+ USmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755782677; x=1756387477;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PDcK3AKb8+OjYloNyqOmvHjTKsFJ9vW3H9nTmQ7Etrw=;
+ b=KWgOHQg0fs3AP8qMwkkeDv5YMfivglf8K9Dn+ooZoXObDZlVHBjuu09WhpAYRmi+BU
+ XSClT3biupc/CR62RqQlvTyoi6h0Wju5vFOcQhCHhP69+2f8km7k1J62HDNHs9tFsjtu
+ xD0LghEh2f4LwFv6eWl+WnYJX74ZiV9pUV92o/tHTOoQwkqtNHI4UhPICvAjka2eBMmA
+ awBbgc42mwJB4jaHYkND71po4OmzLLeSzyfWRIO7xYMG6D6ysXB1Vtaw2Y6Yu/X1sbNx
+ kRnd6jCPSJFq2Tb4O6Gto5+VIdEfthr4k62KYj5hk0wyB+CK7FqRfYFRPvdmUCcab2jI
+ fgZw==
+X-Gm-Message-State: AOJu0YxobiG1zcBEEp2H/ubY4lZD0m4CoNmcB++H2UmpOy6FsRySUooU
+ ybLThmo3ykTHCRtbiek1D1zsfTx2AJGuk7gZZbt7A43h4ZzrPlLipef4pFQnCu1mcs4ZnJpSVu3
+ K6Qvw7aZRys4elE3H0AMaW3exbUXewArVZLjii/KJWA==
+X-Gm-Gg: ASbGnctrIY47UK8EXO0N8sYNL0lVz4NKWJ6Bi8Zcy4HjRVv1vGpouxpc4FWVEP3Gpyw
+ YBBVBxO9edlYWRCVllWcfObyTqK3CdRox0X4iOGhQy2N4RZQSZddP5/Xa0mY5ze9i7QbPmuUYBK
+ rqUcijlxbX4zyxMbERs1XWoTQucWAFQXFIXnG70Bf/vVnrFELyKb2FXCS0QxGEVeSl8wDH2YEZ8
+ 2qI5iZH
+X-Google-Smtp-Source: AGHT+IGuLlArOcweaz8Gm3XqGiPFGauRJCn6ycyF6Ojj0yPlG3x/LrpAY54JLTv06lITQ0UPWAWypB/3qAKOdv1kPog=
+X-Received: by 2002:a05:6808:2385:b0:433:fd5b:ca78 with SMTP id
+ 5614622812f47-4377d796411mr1011638b6e.31.1755782677142; Thu, 21 Aug 2025
+ 06:24:37 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] misc: fs_loader: Add QSPI RAW partition loading support
-To: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>,
- u-boot@lists.denx.de
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-References: <20250820075351.6455-1-nareshkumar.ravulapalli@altera.com>
- <24b4a185-3575-46ae-8d5d-43fd0902a4f3@mailbox.org>
- <088604a7-3220-4158-a7aa-6e1528b9e38d@altera.com>
- <4f28a730-3952-4a6e-8f9b-506b588b43e6@mailbox.org>
- <6f4b1dbf-45ea-42d8-8f26-a611ed215d75@altera.com>
- <48d5afec-0508-46d6-b444-117d4a7bfe32@mailbox.org>
- <303a50e6-e670-4456-a23c-cb829bc1dd88@altera.com>
- <edcc50c3-4968-494e-9fb1-6acdefd26a53@mailbox.org>
- <c13ee750-2534-4cfa-ac6c-a6a51dec33b1@altera.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <c13ee750-2534-4cfa-ac6c-a6a51dec33b1@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ijtiqq41d8wq1ga5kbe7fdkcj9owcape
-X-MBO-RS-ID: 46f83ab35170bac4054
+References: <20250711144917.1876948-1-abdellatif.elkhlifi@arm.com>
+ <20250711144917.1876948-4-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20250711144917.1876948-4-abdellatif.elkhlifi@arm.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Thu, 21 Aug 2025 15:24:25 +0200
+X-Gm-Features: Ac12FXxEdywJBvAFxyuJYeLfpBwsOCxKTXoi9jLpN3WdzATNDxeDgEqxt2tmRt8
+Message-ID: <CAHUa44GFo2e85BKN_SFzC32KsS5sLAHbjYQVeoKOk8uyf+YJog@mail.gmail.com>
+Subject: Re: [PATCH v2 03/25] arm_ffa: Add FFA_MEM_RECLAIM support
+To: abdellatif.elkhlifi@arm.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,32 +96,280 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/21/25 12:26 PM, Ravulapalli, Naresh Kumar wrote:
+On Fri, Jul 11, 2025 at 4:49=E2=80=AFPM <abdellatif.elkhlifi@arm.com> wrote=
+:
+>
+> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>
+> Add to the FF-A bus FFA_MEM_RECLAIM ABI
+>
+> The FFA_MEM_RECLAIM is a memory management ABI described in the FF-A
+> v1.0 specification [1].
+>
+> This ABI restores exclusive access to a memory region back to its Owner.
+>
+> This work is based on the implementation in Linux [2].
+>
+> [1]: https://developer.arm.com/documentation/den0077/a/?lang=3Den
+> [2]: commit cc2195fe536c28e192df5d07e6dd277af36814b4
+>      File: drivers/firmware/arm_ffa/driver.c
+>
+> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jens Wiklander <jens.wiklander@linaro.org>
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-[...]
+Looks good to me:
+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 
->> How big is the file ? crc32 is weak . Why not use e.g. fitImage for 
->> this ?
->>
->> If this raw loading should be available to users, it should come with a
->> BIG WARNING about data integrity.
-> 
-> User can use CRC32 and if they require SHA256/512, they can use that as 
-> well or any other algorithm as desired.
-> 
-> RAW partition support is helpful for flash constraint devices especially 
-> in a use case where we need to store data as RAW during run-time and if 
-> data integrity is required, user has the flexibility to choose 
-> respective algorithms like CRC/SHA etc. The whole objective of this 
-> patch is to provide that flexibility to the user.
-> 
-> I don't think we need the BIG WARNING, as RAW data by definition will 
-> not have any built-in integrity features and users should exercise 
-> caution if data integrity is required. It is mentioned in the enum 
-> definition that choosing "DATA_RAW" flag will store data as RAW.
+Cheers,
+Jens
 
-It is not a good idea to use RAW data in the first place, because it 
-gives the user false sense of safety, but in reality it can lead to 
-silent data corruption. Hence, please add big warning.
-
-Also, how big are your payloads ? You did not answer that question .
+>
+> ---
+>
+> Changelog of changes:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>
+> v2:
+>
+> * As suggested by Heinrich: The ops NULL check removed
+>
+> v1:
+>
+> * Add FFA_MEM_RECLAIM support
+>
+>  doc/arch/arm64.ffa.rst                    |  2 +
+>  drivers/firmware/arm-ffa/arm-ffa-uclass.c | 73 +++++++++++++++++++++++
+>  drivers/firmware/arm-ffa/arm-ffa.c        |  1 +
+>  include/arm_ffa.h                         | 25 +++++++-
+>  include/arm_ffa_priv.h                    |  3 +-
+>  5 files changed, 102 insertions(+), 2 deletions(-)
+>
+> diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
+> index 3eec735d741..d2c4fb49f79 100644
+> --- a/doc/arch/arm64.ffa.rst
+> +++ b/doc/arch/arm64.ffa.rst
+> @@ -186,6 +186,7 @@ The following features are provided:
+>      - FFA_MSG_SEND_DIRECT_REQ
+>      - FFA_MSG_SEND_DIRECT_RESP
+>      - FFA_MEM_SHARE
+> +    - FFA_MEM_RECLAIM
+>
+>  - Support for the 64-bit version of the following ABIs:
+>
+> @@ -205,6 +206,7 @@ The following features are provided:
+>      - ffa_sync_send_receive
+>      - ffa_rxtx_unmap
+>      - ffa_memory_share
+> +    - ffa_memory_reclaim
+>
+>  - FF-A bus discovery makes sure FF-A framework is responsive and compati=
+ble
+>    with the driver
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware=
+/arm-ffa/arm-ffa-uclass.c
+> index 9af574760d2..b9b66bf68f9 100644
+> --- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> +++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> @@ -109,6 +109,18 @@ static struct ffa_abi_errmap err_msg_map[FFA_ERRMAP_=
+COUNT] =3D {
+>                         "DENIED: Memory region ownership, permission, acc=
+ess or attributes error",
+>                 },
+>         },
+> +       [FFA_ID_TO_ERRMAP_ID(FFA_MEM_RECLAIM)] =3D {
+> +               {
+> +                       [ABORTED] =3D
+> +                       "ABORTED: ABI invocation failure",
+> +                       [INVALID_PARAMETERS] =3D
+> +                       "INVALID_PARAMETERS: Invalid handle or flags",
+> +                       [NO_MEMORY] =3D
+> +                       "NO_MEMORY: Failure to create the Owner's mapping=
+",
+> +                       [DENIED] =3D
+> +                       "DENIED: Memory region state issue",
+> +               },
+> +       },
+>  };
+>
+>  /**
+> @@ -1114,6 +1126,44 @@ int ffa_memory_share_hdlr(struct udevice *dev, str=
+uct ffa_mem_ops_args *args)
+>         return ffa_memory_ops(dev, FFA_MEM_SHARE, args);
+>  }
+>
+> +/**
+> + * ffa_memory_reclaim_hdlr() - FFA_MEM_RECLAIM handler function
+> + * @dev: The FF-A bus device
+> + * @g_handle: The memory region globally unique Handle
+> + * @flags: Zero memory and time slicing flags
+> + *
+> + * Implement FFA_MEM_RECLAIM FF-A function
+> + * to restore exclusive access to a memory region back to its Owner.
+> + * Note: FFA_MEM_RECLAIM can not be used at EFI runtime because memory t=
+hat was
+> + * lent as per the memory map during boot time can not be reclaimed into=
+ the
+> + * memory map during runtime.
+> + *
+> + * Return:
+> + *
+> + * 0 on success. Otherwise, failure
+> + */
+> +int ffa_memory_reclaim_hdlr(struct udevice *dev, u64 g_handle, u32 flags=
+)
+> +{
+> +       ffa_value_t res;
+> +       int ffa_errno;
+> +
+> +       invoke_ffa_fn((ffa_value_t){
+> +                       .a0 =3D FFA_SMC_32(FFA_MEM_RECLAIM),
+> +                       .a1 =3D HANDLE_LOW(g_handle), .a2 =3D HANDLE_HIGH=
+(g_handle),
+> +                       .a3 =3D flags,
+> +                       },
+> +                       &res
+> +       );
+> +
+> +       if (res.a0 !=3D FFA_SMC_32(FFA_SUCCESS)) {
+> +               ffa_errno =3D res.a2;
+> +               ffa_print_error_log(FFA_MEM_RECLAIM, ffa_errno);
+> +               return ffa_to_std_errno(ffa_errno);
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+>  /* FF-A driver operations (used by clients for communicating with FF-A)*=
+/
+>
+>  /**
+> @@ -1216,6 +1266,29 @@ int ffa_memory_share(struct udevice *dev, struct f=
+fa_mem_ops_args *args)
+>         return ops->memory_share(dev, args);
+>  }
+>
+> +/**
+> + * ffa_memory_reclaim() - FFA_MEM_RECLAIM driver operation
+> + * @dev: The FF-A bus device
+> + * @g_handle: The memory region globally unique Handle
+> + * @flags: Zero memory and time slicing flags
+> + *
+> + * Driver operation for FFA_MEM_RECLAIM.
+> + * Please see ffa_memory_reclaim_hdlr() description for more details.
+> + *
+> + * Return:
+> + *
+> + * 0 on success. Otherwise, failure
+> + */
+> +int ffa_memory_reclaim(struct udevice *dev, u64 g_handle, u32 flags)
+> +{
+> +       struct ffa_bus_ops *ops =3D ffa_get_ops(dev);
+> +
+> +       if (!ops->memory_reclaim)
+> +               return -ENOSYS;
+> +
+> +       return ops->memory_reclaim(dev, g_handle, flags);
+> +}
+> +
+>  /**
+>   * ffa_do_probe() - probing FF-A framework
+>   * @dev:       the FF-A bus device (arm_ffa)
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa.c b/drivers/firmware/arm-ff=
+a/arm-ffa.c
+> index df904cae412..de36f5647d2 100644
+> --- a/drivers/firmware/arm-ffa/arm-ffa.c
+> +++ b/drivers/firmware/arm-ffa/arm-ffa.c
+> @@ -85,6 +85,7 @@ static const struct ffa_bus_ops ffa_ops =3D {
+>         .sync_send_receive =3D ffa_msg_send_direct_req_hdlr,
+>         .rxtx_unmap =3D ffa_unmap_rxtx_buffers_hdlr,
+>         .memory_share =3D ffa_memory_share_hdlr,
+> +       .memory_reclaim =3D ffa_memory_reclaim_hdlr,
+>  };
+>
+>  /* Registering the FF-A driver as an SMCCC feature driver */
+> diff --git a/include/arm_ffa.h b/include/arm_ffa.h
+> index b91b0279371..1229e6e3d02 100644
+> --- a/include/arm_ffa.h
+> +++ b/include/arm_ffa.h
+> @@ -147,8 +147,9 @@ struct ffa_mem_ops_args {
+>   * struct ffa_bus_ops - Operations for FF-A
+>   * @partition_info_get:        callback for the FFA_PARTITION_INFO_GET
+>   * @sync_send_receive: callback for the FFA_MSG_SEND_DIRECT_REQ
+> - * @rxtx_unmap:        callback for the FFA_RXTX_UNMAP
+> + * @rxtx_unmap:                callback for the FFA_RXTX_UNMAP
+>   * @memory_share:      callback for the FFA_MEM_SHARE
+> + * @memory_reclaim:    callback for the FFA_MEM_RECLAIM
+>   *
+>   * The data structure providing all the operations supported by the driv=
+er.
+>   * This structure is EFI runtime resident.
+> @@ -161,6 +162,7 @@ struct ffa_bus_ops {
+>                                  bool is_smc64);
+>         int (*rxtx_unmap)(struct udevice *dev);
+>         int (*memory_share)(struct udevice *dev, struct ffa_mem_ops_args =
+*args);
+> +       int (*memory_reclaim)(struct udevice *dev, u64 g_handle, u32 flag=
+s);
+>  };
+>
+>  #define ffa_get_ops(dev)        ((struct ffa_bus_ops *)(dev)->driver->op=
+s)
+> @@ -280,6 +282,27 @@ int ffa_memory_share(struct udevice *dev, struct ffa=
+_mem_ops_args *args);
+>   */
+>  int ffa_memory_share_hdlr(struct udevice *dev, struct ffa_mem_ops_args *=
+args);
+>
+> +/**
+> + * ffa_memory_reclaim() - FFA_MEM_RECLAIM driver operation
+> + * Please see ffa_memory_reclaim_hdlr() description for more details.
+> + */
+> +int ffa_memory_reclaim(struct udevice *dev, u64 g_handle, u32 flags);
+> +
+> +/**
+> + * ffa_memory_reclaim_hdlr() - FFA_MEM_RECLAIM handler function
+> + * @dev: The FF-A bus device
+> + * @g_handle: The memory region globally unique Handle
+> + * @flags: Zero memory and time slicing flags
+> + *
+> + * Implement FFA_MEM_RECLAIM FF-A function
+> + * to restore exclusive access to a memory region back to its Owner.
+> + *
+> + * Return:
+> + *
+> + * 0 on success. Otherwise, failure
+> + */
+> +int ffa_memory_reclaim_hdlr(struct udevice *dev, u64 g_handle, u32 flags=
+);
+> +
+>  struct ffa_priv;
+>
+>  /**
+> diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
+> index a259911d5b9..54196199ce3 100644
+> --- a/include/arm_ffa_priv.h
+> +++ b/include/arm_ffa_priv.h
+> @@ -133,10 +133,11 @@ enum ffa_abis {
+>         FFA_MSG_SEND_DIRECT_REQ   =3D 0x6f,
+>         FFA_MSG_SEND_DIRECT_RESP  =3D 0x70,
+>         FFA_MEM_SHARE             =3D 0x73,
+> +       FFA_MEM_RECLAIM           =3D 0x77,
+>
+>         /* To be updated when adding new FFA IDs */
+>         FFA_FIRST_ID              =3D FFA_ERROR, /* Lowest number ID */
+> -       FFA_LAST_ID               =3D FFA_MEM_SHARE, /* Highest number ID=
+ */
+> +       FFA_LAST_ID               =3D FFA_MEM_RECLAIM, /* Highest number =
+ID */
+>  };
+>
+>  enum ffa_abi_errcode {
+> --
+> 2.25.1
+>
