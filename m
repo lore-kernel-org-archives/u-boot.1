@@ -4,82 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD1BDCA0EFA
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 18:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBEB5CA0EEB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 18:51:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E587780422;
-	Thu, 21 Aug 2025 20:49:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 40C6580422;
+	Thu, 21 Aug 2025 20:51:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N4JoDU0H";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CQnwON01";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 037868144A; Thu, 21 Aug 2025 20:49:13 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 766398004F
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 20:49:10 +0200 (CEST)
+ id 3375D81D5D; Thu, 21 Aug 2025 20:51:23 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 58BD78004F
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 20:51:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-61bd4ff762eso653277eaf.3
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 11:49:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755802149; x=1756406949; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mW1IV7TtUhTOBiSyGS/dNM8LlXFe3RwVSfUMdpGaYWk=;
- b=N4JoDU0H/JwJU1ZqAMtJ3IPOjsn+TZIYShgyWYGy4OlbyyasoXc0d1lxDvKSK0xC7N
- dLgrxZSAZW5ie62NyHfy3lpP7bP2RRDH6UQf7UkbxSZE+9idBnc+SBt++T8Iqz9WdRCd
- lkaUEs6YDIcdUKPbv7RRKZ7bM4zHUI8/e3I9o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755802149; x=1756406949;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mW1IV7TtUhTOBiSyGS/dNM8LlXFe3RwVSfUMdpGaYWk=;
- b=HmJGcwMbR1cZSzeZSKc+Czv7TQi9Ug4mGO/IBWKJ6rrE0MIeAh7bIQk19MzhnLPil0
- oWXc48gC0geY4pUzB37EsXEVQQn88+xkfKlPpSkEPZmcFzxUYhIsPAjzDbXSONE6QSof
- XHRDNUBgvWephHJQKlZsKii5xasWfQaj0xYxHNM2QvKjlqoFHU7+Elhl+1LqhhfEoh2N
- 6x8zVNdUSZXRo21noGPwB2RuvhHhxsYX0DWFwNOOQ/eN8J+YCu6O3D3QOoSGRgrpXmKo
- LACJ3oDzNImBJUV/O5PA22rCAoRd5Bt22pB0huPRmDT1+EYGjGy7WxD3Syg7YUx6J3oo
- bRLg==
-X-Gm-Message-State: AOJu0Yzxv85mLlTPB/tcv5O/B6xc3YKIe6MKYGHu8+777mmwwxioqeEc
- r9qMQue7aiuUVCia/Y+XF8DWLG6ySaRE+ddQuCWa+dvujdV7LcnKttRfEy/HMIzRBBxGIGk6wMT
- I9JyAdQ8=
-X-Gm-Gg: ASbGncvZSVrNGpQVUc1pdhPdo/zKIRKN20+tjzz+A25M6HO/ij0zqYRSyjYNmQ5hVtR
- 2lYmEM/kc5kZZu0frRljyswHb9GQ/FXBFTb7mVf1iT7qdMUi0Ob7gF7srH49TkTB/FpNgf/QB0u
- P7FxW70NSJOFLJbO3WdSsOhStYCgDVsMbgsOG0fg94CCq5ztlx5Kvv7z6k9lwSvikEUMmEcyNhX
- 41WR9R+P1PfpMlG9McgjbIz7x7n+CmkOX/M9t+8W5L1UMELawz1rFiqgENH4zX5M2fijwwZ9xmE
- ah2zhWN/vW4+y8ziFlCpuSg5Ooz71BSbuQYqXmN274FvExqLwb3fGBg+kTZ31CDvqserqe8xa2n
- HTvGZ6TeM0weFit2A0kKMupcB6+MRljoBHaUt+4pl1gTIA5Df/J5oOiE=
-X-Google-Smtp-Source: AGHT+IFScZbj7zqbJMfceabPn8uDVQtf49411mCC0upBPf48NA5QJcc0Lh3GuI+0/4LoXXH37ysyVg==
-X-Received: by 2002:a05:6870:618c:b0:2d4:e101:13ec with SMTP id
- 586e51a60fabf-314dce7070cmr116510fac.33.1755802149188; 
- Thu, 21 Aug 2025 11:49:09 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7439203b1efsm3578313a34.27.2025.08.21.11.49.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Aug 2025 11:49:08 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20250821172359.154970-1-marek.vasut+renesas@mailbox.org>
-References: <20250821172359.154970-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <175580214827.915379.16525075373814963138.b4-ty@konsulko.com>
-Date: Thu, 21 Aug 2025 12:49:08 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57LIpGAp073966;
+ Thu, 21 Aug 2025 13:51:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1755802276;
+ bh=NPLUjgsJszAEc281B4NZv/oTpJY2R69+d7inMWpms00=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=CQnwON01dKM7uXfLgbqcm76VpO8spIemNX2HDWw/paZDzmDQPEsXCMYcX24U5NRiA
+ cErl278crlU6oe/Y3TA5H80wN5puM6FaOozoGMwnNdDLzT6Fbx3HJSORAUdPVlndrc
+ xZK/cd3N1EDk/wpRP+yg6xvJ1w2C8METdGf+foFQ=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57LIpGJT2724892
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 21 Aug 2025 13:51:16 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 21
+ Aug 2025 13:51:15 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 21 Aug 2025 13:51:15 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57LIpFLb2315053;
+ Thu, 21 Aug 2025 13:51:15 -0500
+Message-ID: <4d04d2cb-dda0-4bef-805e-191cdc037dbb@ti.com>
+Date: Thu, 21 Aug 2025 13:51:15 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mach-k3: am62*: am62*_init: Prohibit boot from UDA w/
+ eMMC boot
+To: Nishanth Menon <nm@ti.com>, Judith Mendez <jm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, Bryan
+ Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Michael
+ Trimarchi <michael@amarulasolutions.com>, <u-boot@lists.denx.de>
+References: <20250710171135.669838-1-jm@ti.com>
+ <20250821183012.ps6ygzebsxoi2hoj@dolphin>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250821183012.ps6ygzebsxoi2hoj@dolphin>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +83,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 21 Aug 2025 19:23:44 +0200, Marek Vasut wrote:
-
-> DRAM controller driver off-by-one error fix.
+On 8/21/25 1:30 PM, Nishanth Menon wrote:
+> On 12:11-20250710, Judith Mendez wrote:
+>> This removes support from booting from UDA when in eMMC boot.
+>>
+>> When user selects eMMC boot [0], that is, boot from eMMC boot0 or
+>> boot1 HW partitions, we should not boot from eMMC UDA. The current
+>> logic confuses the end user and mixes two different boot modes.
 > 
-> The following changes since commit 54fbdd408873413af86d86de03a490c5abf280f1:
+> Wrong! what ROM uses to boot has no bearing as to what bootloader needs
+> to do for rest of the system.
 > 
->   Merge tag 'net-20250818' of https://source.denx.de/u-boot/custodians/u-boot-net (2025-08-18 10:54:44 -0600)
+
+Yes it does, this is how *every* single other boot mode works. We pick
+the next stage from the same media we booted this stage from. If I OSPI
+boot SPL, it will look for U-Boot on OSPI, UART, DFU, NET, etc..
+
+eMMC boot0 is the *only* exception to this rule. We pivot from boot0 to UDA.
+
+> https://docs.u-boot.org/en/latest/board/beagle/am62x_beagleplay.html#flash-to-emmc
 > 
-> are available in the Git repository at:
+> There is a reason we chose this flow in BeaglePlay and other Beagle
+> platforms - U-boot and other components keep growing and our emmc's boot
+> partition is too small to handle things.
 > 
-> [...]
 
-Merged into u-boot/master, thanks!
+eMMC's boot partition are 4-8MB, more than enough for tiboot3.bin, tispl.bin
+and u-boot.img. Sure it is not big enough to handle the next stages like Kernel,
+but that is now located on a different rootfs partition anyway, even for regular
+SD card booting.
 
--- 
-Tom
+> 
+> NAK if you are trying to bring the old problems we solved back.
 
+You did not solve it, you hacked it for your specific Beagle use-case.
+Now if someone instead wants to boot all stages from Boot0 they have no
+good option for that. It will switch to UDA after R5 SPL if they like it
+or not. The only way to stop it would be to enable "SUPPORT_EMMC_BOOT"
+config (confusing why that changes the boot flow), or disable SPL_FS_*
+configs (again confusing why filesystem support changes boot media flow).
+
+Plan is to add a clean and explicit config option that signals the
+boot0 -> UDA pivot should happen. Since you want your Beagle's to do
+that, the option will be enabled for you. For those who want to stick
+to all boot stages on boot0, then they disable the option. Simple :)
+
+Judith is working on that now for v2.
+
+Andrew
+
+>>
+>> The logic was added for AM62A/AM62P with commit: 3b7893145e36, but
+>> this is not a clean solution and fix will come later for falcon boot.
+>>
+>> Logic was also added for AM62X with commit: 664593464634, but this
+>> logic is incorrect according to TRM [0] under Primary Boot Mode Selection
+>> for 'eMMC Boot'.
+>>
+>> Fixes: 3b7893145e36 ("mach-k3: add eMMC FS boot support for am62[ap]")
+>> Fixes: 664593464634 ("arm: mach-k3: am625: Relax emmc boot condition")
+>> Signed-off-by: Judith Mendez <jm@ti.com>
+>> ---
+>>   arch/arm/mach-k3/am62ax/am62a7_init.c | 4 ----
+>>   arch/arm/mach-k3/am62px/am62p5_init.c | 4 ----
+>>   arch/arm/mach-k3/am62x/am625_init.c   | 4 ----
+>>   3 files changed, 12 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+>> index edd43a1d78d..1d8644bd073 100644
+>> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
+>> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+>> @@ -217,10 +217,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>>   
+>>   	switch (bootmode) {
+>>   	case BOOT_DEVICE_EMMC:
+>> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
+>> -			return MMCSD_MODE_EMMCBOOT;
+>> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+>> -			return MMCSD_MODE_FS;
+>>   		return MMCSD_MODE_EMMCBOOT;
+>>   	case BOOT_DEVICE_MMC:
+>>   		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+>> diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
+>> index 6e3c66e5107..01e47deca94 100644
+>> --- a/arch/arm/mach-k3/am62px/am62p5_init.c
+>> +++ b/arch/arm/mach-k3/am62px/am62p5_init.c
+>> @@ -262,10 +262,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>>   
+>>   	switch (bootmode) {
+>>   	case BOOT_DEVICE_EMMC:
+>> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
+>> -			return MMCSD_MODE_EMMCBOOT;
+>> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+>> -			return MMCSD_MODE_FS;
+>>   		return MMCSD_MODE_EMMCBOOT;
+>>   	case BOOT_DEVICE_MMC:
+>>   		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+>> diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
+>> index a422919fab1..eb7e245843c 100644
+>> --- a/arch/arm/mach-k3/am62x/am625_init.c
+>> +++ b/arch/arm/mach-k3/am62x/am625_init.c
+>> @@ -316,10 +316,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>>   
+>>   	switch (bootmode) {
+>>   	case BOOT_DEVICE_EMMC:
+>> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
+>> -			return MMCSD_MODE_EMMCBOOT;
+>> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+>> -			return MMCSD_MODE_FS;
+>>   		return MMCSD_MODE_EMMCBOOT;
+>>   	case BOOT_DEVICE_MMC:
+>>   		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+>> -- 
+>> 2.49.0
+>>
+> 
 
