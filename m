@@ -4,86 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3D6ACA0FE2
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 19:12:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3793DCA0EEB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 20:22:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE7708006D;
-	Thu, 21 Aug 2025 21:12:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A42480422;
+	Thu, 21 Aug 2025 22:22:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q0l0h9SO";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tp8VDx0j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EE1A80422; Thu, 21 Aug 2025 21:12:39 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2367A80548; Thu, 21 Aug 2025 22:22:49 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7DBC8004F
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 21:12:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E38E8006D
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 22:22:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-435de838484so943144b6e.3
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 12:12:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755803555; x=1756408355; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QJ6mzgt0xendzwkj695o9TM0fjAGp+tHvvYSJhCbFUU=;
- b=q0l0h9SO1J+CaoiEtWkMsrQvYqjRkuVm0A+nvTWim+gRDrAUTw5HcD06YDfZ0ChpUA
- eYS8qNf2j4WRt3q/vAeEbGC00NlSGCVm2XRpjCnQ9NfnCyjj6Jdzg0uFJdDB3BzSzJeP
- KiEii9mDcAhM5cJp8Vn418oEYrS0sXakAiFd0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755803555; x=1756408355;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QJ6mzgt0xendzwkj695o9TM0fjAGp+tHvvYSJhCbFUU=;
- b=HSORUI6JOwh2lwpgUmHKaN1YEJJf35OkfXdA346+CXnajwh9g8GvXo7mJDSQ0FK+vz
- u10+NLdhCYbzpV2RF69eqYRltegi6jpuJXrvgHnncnlf6dv0lOtYkGaeiUDpUbIhjF/E
- 1ENhXlisx9oPECWd89+4iNucFEDo3p8tAuXvhjHdLbCKWGvxRPhrZtYxzYd3CqYSqzFX
- 1p4l4uvniLwUn7b0L6Eey9m+6gki5Ln1q1vfrMivtDYW+kI79hwUmix3eFk9Zqzyc4GL
- tbwPvFH5A6diZAKDy7RwhGLJjgQ3WdIy4wLkj/SuI3DjaVNsnB9az/ZGP0IdNHuHfCcW
- J8uw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/gJ24/AbScShYSTrBQYlFne8XIjon9X3y0xmwZ/pYOgAY7lA9vOO1jSD01luWsSW5vZEWprk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbEb8zkzCpq+CXCMMRArTZSzEZw9kfbMUnOfaomqryykiXT/q9
- s47cUBSvZ0LFU8L/fVv14nqf8pE2x3kAiC3WFO49CiBBE5sC1cE0rjdkk1BzNVEnqM/OIs1mXXC
- Qh2b8dgc=
-X-Gm-Gg: ASbGncuB73DU2TrxXCWRsjsg1A8CjwkfoegtiH3oxTBUCM9YyozgFnPixh948RDkci5
- tD8ypBUtObNdsBw81bJ5JgoVtyjLnDDpPNXk6HrgNpcsNkPNC4Z5ucHPonvMuJSkKvmk8eMTkTx
- YQw02Z5bwQvVy8qq7bi0rynxtJZiYqjDO6y6aVFYMGaWR8v6igZPpBpgRzB0waOcwUGmWm0Ab/t
- mulXRttnpzScp99mXD1nf5BE6uLyogS0mhxE8jGivVfLIJdb+3WP11UnTZnN9uYW060Jic8HCeB
- NIZUf03cQdSL2RsOS6RNy2kaKpLbXUWJV2g0C8sHriK8bqUBSx3FtS0Mgsk8++7mrdMxkh3jxDX
- V3dvTozTwODUPX7qzwVVMirA43tSd70E1QWArVmwCjVYDNJqI9lr3OG1S
-X-Google-Smtp-Source: AGHT+IEz9DdFb7EwhZuDQNX6OTmjMmpm5Nrm10uyL39wEJVcFCyG3pUYBpSC5TkmCFX+BxIEQoRnUQ==
-X-Received: by 2002:a05:6808:2101:b0:434:231:3e2c with SMTP id
- 5614622812f47-43785009150mr351078b6e.0.1755803555273; 
- Thu, 21 Aug 2025 12:12:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7439204d621sm3653937a34.40.2025.08.21.12.12.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Aug 2025 12:12:34 -0700 (PDT)
-Date: Thu, 21 Aug 2025 13:12:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Max Merchel <Max.Merchel@ew.tq-group.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- u-boot@ew.tq-group.com
-Subject: Re: [PATCH] bloblist: fix missing OR between licenses in the
- SPDX-License-Identifier
-Message-ID: <20250821191232.GA917481@bill-the-cat>
-References: <20250814120029.234237-1-Max.Merchel@ew.tq-group.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4c7F9w4xfsz9tLj;
+ Thu, 21 Aug 2025 22:22:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1755807764;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pmlqWnkbE1ilxfgSM35OkfLrDeGULQHI9JK0DKfQF3Q=;
+ b=tp8VDx0j+IwCEKSmrCX+VEKsd2H4YCCcXoPGQ56KPwGxhW9WeZqtaNkY7iXVbMZPnQ6fRP
+ 00Ki9a+AHnPUR4nwdwJftzS8VBX3V3adytAuBBMzMWMQmcPhqTEtmGDFgpl/sLpeDkkfPG
+ 2v/7BMcOCcCwOikxNq8zZ5A3GAx6aTSJ6mKhXjJgh49S2q2OgQnifFD4zTe6AhdD7+wURG
+ 1ZU0t2znm1P3y10OUgHdVLOWO+DWWkO82+kus5hSBSjr/xjeA/zprpnPRB6c78ZpMpbdRD
+ mk1mV2SHXDxZpvzyCIV+rKoyu0r7/E+wN/h7O5qYO/I6RNE30QH27B02PGCm5Q==
+Message-ID: <2ff9412a-795c-422b-9be4-576e64a7f395@mailbox.org>
+Date: Thu, 21 Aug 2025 22:22:43 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="viloPxx2VZPZn9Oe"
-Content-Disposition: inline
-In-Reply-To: <20250814120029.234237-1-Max.Merchel@ew.tq-group.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] usb: cdns3: Do not access memory after free
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
+ <trini@konsulko.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
+ u-boot@lists.denx.de
+References: <20250813-usb_cdns3-v1-1-3779912fe660@linaro.org>
+ <b83f79a7-66e9-43b9-859e-ebb69e4d536b@nabladev.com>
+ <0a4f4611-8858-4a38-be70-bf0947d689c1@linaro.org>
+ <84535d73-7496-4fd3-8ecb-ac6830974d51@mailbox.org>
+ <e2257066-ee97-44ff-9338-cec69f8c7f03@ti.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <e2257066-ee97-44ff-9338-cec69f8c7f03@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: p65gr9fk6nnbu6xfih7m7ng9ehct9xra
+X-MBO-RS-ID: 04c0d5877ec93ee9d6e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,47 +81,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 8/21/25 8:16 AM, Siddharth Vadapalli wrote:
 
---viloPxx2VZPZn9Oe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Thu, Aug 14, 2025 at 02:00:11PM +0200, Max Merchel wrote:
+>>>>> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+>>>>> index a30c40ef80e..9eaf7e40ab6 100644
+>>>>> --- a/drivers/usb/cdns3/gadget.c
+>>>>> +++ b/drivers/usb/cdns3/gadget.c
+>>>>> @@ -557,10 +557,10 @@ static void
+>>>>> cdns3_wa2_remove_old_request(struct cdns3_endpoint *priv_ep)
+>>>>>            trace_cdns3_wa2(priv_ep, "removes eldest request");
+>>>>> +        list_del_init(&priv_req->list);
+>>>>>            kfree(priv_req->request.buf);
+>>>>>            cdns3_gadget_ep_free_request(&priv_ep->endpoint,
+>>>>>                             &priv_req->request);
+>>>>> -        list_del_init(&priv_req->list);
+>>>>
+>>>> Shouldn't the kfree() be moved here instead ?
+>>>> cdns3_gadget_ep_free_request() also accesses priv_req->request .
+>>>
+>>> No, I do not think so. The kfree frees priv_req->request.buf not
+>>> priv_req->request so must happen before the call to
+>>> cdns3_gadget_ep_free_request.
+>> Thank you for clarifying. Please add this into the commit message, ideally
+>> wait for TI to test this and provide RB, then send V2 so this can go in.
+> 
+> I was planning to test this patch but the change being made is only
+> applicable to Controller Versions:
+> 	#define DEV_VER_NXP_V1		0x00024502
+> 	#define DEV_VER_TI_V1		0x00024509
+> and not to:
+> 	#define DEV_VER_V2		0x0002450C
+> 	#define DEV_VER_V3		0x0002450d
+> 
+> Since I don't have an SoC and a Board with DEV_VER_TI_V1, I cannot test
+> it. However, the change looks correct to me.
+> 
+> Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+The change does indeed look correct.
 
-> Currently, the conditions of both licenses (GPL 2.0 and BSD-3-Clause) must
-> be met. However, the original commit message states that the BSD-3-Clause
-> was added to allow use of the files under a less restrictive license than
-> GPL 2.0. Therefore, the required OR between the licenses has been added.
->=20
-> While at it update the SPDX-License-Identifier to SPDX version 3.
->=20
-> Fixes: 6c9e3d1f ("bloblist: Relicense to allow BSD-3-Clause")
-> Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
-> ---
->  common/bloblist.c  | 2 +-
->  include/bloblist.h | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-
-So I'm going to defer this as the outcome of
-https://patchwork.ozlabs.org/project/uboot/patch/20250101195817.995321-1-sj=
-g@chromium.org/
-was that it's fine to relicense but a v2 with a differ commit message
-is needed. And while I thought about doing the v2 myself now, I think
-this is something that really must come from the author.
-
---=20
-Tom
-
---viloPxx2VZPZn9Oe
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKdvnAAKCRAr4qD1Cr/k
-CthcAQDP81Od4lX4lcCZzyIMIoWPHaPqVvB7yjaDnhirn8VSngD/QUhSDaLxolvw
-qrvghprQ3uLXNDvKXtLO11kGgqNNxQk=
-=1RGM
------END PGP SIGNATURE-----
-
---viloPxx2VZPZn9Oe--
+Do you know who might still have that board and could test ? (and which 
+board/soc is that) ?
