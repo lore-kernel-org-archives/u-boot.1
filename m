@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C28CA0EF8
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 14:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F58BCA0EEB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 15:02:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B293480548;
-	Thu, 21 Aug 2025 16:23:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8656C81D5D;
+	Thu, 21 Aug 2025 17:02:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s95eaR7K";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Uu2BN+tA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA10E80B9B; Thu, 21 Aug 2025 16:23:49 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id A938081FEE; Thu, 21 Aug 2025 17:02:28 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 078FB80422
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 16:23:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B95680422
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 17:02:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-b472da8ff0eso662307a12.3
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 07:23:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3e56ff1c11eso5182525ab.0
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 08:02:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755786225; x=1756391025; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U2FcK3ryxi1cwu4XZY7Lyk4mF1qA4Blf1BM1+XiS8xc=;
- b=s95eaR7KxP7vIHb2CZUbvYgMahI+MOmJblUxg44WkS/5xSIpc1gtR+2vsbcWs7Svx4
- Urwoi5xdUV++zISryNLdi7NJpQBwe291AT0lFOBLvoMWG/Gye3cKmfp5uW21IoYIBr3G
- tUWE/UVhn8y4mXtIKbkozIoQy9TrnSfmX8okkUP/9h/3tjwTLju+UOLrOQ2m2xpN78a6
- OctIpcxN9WqlbkgNvmaBxzZd8BFM0Y7mTvNjltvRJuNc+c2qAoVrQT1poD88zhg2MVuy
- 36d72wIwGUmylDNZVD5hHXrQN7jOUb2bXDDefBaWGe0y5DkkYcxYh+549m7Up0pDbZ0S
- 8HWw==
+ d=konsulko.com; s=google; t=1755788545; x=1756393345; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=eXmffAm4HWWUXRoyf5ymrn1gaXah5qgCVC6G9JM1H20=;
+ b=Uu2BN+tAz2OpIOt2JOEaHCr2SPsngwt01jU1LmUsg2iLZJOBcMqu3qJVF/fnd5cONj
+ UGk8UJFT3l931EUkhR1r4ZZVRzW+gRIjzfyC/KOETU26XJMJFVymHQZDQFwnhbTQ+AHZ
+ CUwL325R0PFXdmEawxwSqzyANr4Q6P8ER5GEI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755786225; x=1756391025;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U2FcK3ryxi1cwu4XZY7Lyk4mF1qA4Blf1BM1+XiS8xc=;
- b=YoVWZyOxU2mBtOGJmsod0Fn2ARwASD0emgnZBeldfdzFTR1l7Fi+ZefrrDwn/p/IIJ
- rirv+/YIuJNuXRUnd46ru7nK+19OshcnK35+x6qRy53pDlipVKI2/2rU23bPnNYSX4do
- IOroMeaJWwuB9fiYfTfsvIptiw8Rak2mI3400O876HTffxA/jmpN2x5bjwBVPtKAbBmM
- M1jR09/YSEArljBSmW5fzn+FhAHGBBNBIATIWFpRw84rxronCxx772Mp1D09kcQgWb9E
- MRGmF5f7hK6w+CnxLdYECxAwBNIUJxhmifjPzR1MvHm1zzLdjTvPJ2ji6L5dRopezaI7
- C39A==
-X-Gm-Message-State: AOJu0Yyg4RMKQ83UfgEicgjpycGoKUcIsqf8KZRH3Xwz+69n2GxxG8eA
- fGlGHSkY7buylI/Hox8lg25cC2nFmuEEZmVIKfuBB5rIeslKw1iOrTotefjqwzeVj7k2tqUsf6L
- 5aIRiycbb9TWa7BMI72Y9tWC/JEsjJZE1jzWR0INZQA==
-X-Gm-Gg: ASbGnctjbhunfKGw2pRwIUMkTyny8HWeaWaXYe/sSHRNQYPyFV4cicomtIijcrR69Hk
- igOf9mTl88XEYlYcf8EWJyF3dF9Hwh+pQbkP8DXW2mdFK92z2kxwk60zPPD2e0Az9Ef7uimWTT3
- 1lYprlcGe/cHrkrryiQSBlPbg1vGIUYWCcdKinLX3MEe9tUwL9D6sWhNfOdh0QnJqjs3fT3xE6u
- TEKM2wCMQ==
-X-Google-Smtp-Source: AGHT+IG7fJqvIx59xzpWSgDbvyuZEdxKMStr0gZMbmmbg5EJzIrosQ1CxI3UXlttxJh+0YKy/cS9L0NpeqjHVKUn9BI=
-X-Received: by 2002:a17:903:a90:b0:244:9c27:9829 with SMTP id
- d9443c01a7336-245febed60bmr33399815ad.10.1755786225435; Thu, 21 Aug 2025
- 07:23:45 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1755788545; x=1756393345;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eXmffAm4HWWUXRoyf5ymrn1gaXah5qgCVC6G9JM1H20=;
+ b=Rptauf5FuToNxc4ozepI+djwT/cPe3L+5DUuJQh5acIIS4Ur34TcJ41QbV/HPHp2P/
+ H7VH47Xx1n17v1b8dgRjQvb99+YMG8yx+Cg+0NGOg7ScASCGwzGUDHICWUWZ3hzwjBlb
+ 3nG6AipVvW4zMIbM6l4GbPvTyedasw74C9fsyQjlvZt72HJ888mHrthX+K2LkK8tASEz
+ ZUv1w8hITGRFqbJYG0rnIQjjgs2PsQpCnlJCFX45LIGrjGKaLoVh0unlPzie14w3S+Cj
+ 8/hGU9QpaG4ffUsuCgkfhfoEwAB+h+kC5yy5i0apAdo3SbYUmKE8qd7dyri8JjWstgM/
+ QmPg==
+X-Gm-Message-State: AOJu0Yzes04k8plStyeCJukXGiQ9HrHQ2LULN1b7F6PId4lbSMJlUKtg
+ Oiv/hGN7oK1mNzzXXogEjgsBof9lrytDniqw+bHY9WRGBwcctg2ck1e++NyMbEkROFF0NnJYC3o
+ Fm+zytsg=
+X-Gm-Gg: ASbGncskn+EchzuexFzccETVr9QjKNbxybYcoN4LMbN1YLoRh5E1k30DFrJkc7BYTWB
+ /fUNDU5uaObx8aRVoB6iPttfgUV2Ucym/6dhKu5RnJUjwTNkCnK0vU+JPj9JE24xKufaxKARTQu
+ Wph3rSkojJDMZMlOwVKxo1rRXha3yjKAN4wlLoXm+UZgl8mAI0KxRGsrqQju4/cYGeoHbbyeqNN
+ +gt92LiDgb8/8PR/fVa4FvrDYS9gcyoTfBvJXnOInDQChvdQvJx879N9BrYcwNyDVC9gNEOutmi
+ 3SO+tj+hqO29jfGxJbCWBtQ0lfaWEN/Eo/xpuXjAsXuDdsqt//Mv2std2wGEUa+Wk+HkJesUpS8
+ 7zCmNSDAfpQR5n9MwM6X/EbWKhdp3QOyWHc0R0BmdgjQe0PkCk4LsIKIF
+X-Google-Smtp-Source: AGHT+IFJTc6W0m7hewhL6RqV8tl02Le9I+ccE6H8g3SWXMuOKUdvZ/m/PUEBOkEUiddcY6YcnJXPxQ==
+X-Received: by 2002:a05:6e02:3813:b0:3e5:67a6:d3fe with SMTP id
+ e9e14a558f8ab-3e6d405b797mr44723415ab.9.1755788544533; 
+ Thu, 21 Aug 2025 08:02:24 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-884702457d5sm233839739f.17.2025.08.21.08.02.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Aug 2025 08:02:23 -0700 (PDT)
+Date: Thu, 21 Aug 2025 09:02:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] lib: use utf-8 as encoding for C includes
+Message-ID: <20250821150220.GK124814@bill-the-cat>
+References: <20250820231711.45677-1-heinrich.schuchardt@canonical.com>
+ <20250821002223.GJ124814@bill-the-cat>
+ <df457055-aa0e-417f-b9dc-d35a9d5c5a0d@canonical.com>
 MIME-Version: 1.0
-References: <20250718141621.3147633-1-raymond.mao@linaro.org>
- <SA1PR12MB86977E312AB3965DFB8D2DD79833A@SA1PR12MB8697.namprd12.prod.outlook.com>
-In-Reply-To: <SA1PR12MB86977E312AB3965DFB8D2DD79833A@SA1PR12MB8697.namprd12.prod.outlook.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 21 Aug 2025 10:23:33 -0400
-X-Gm-Features: Ac12FXwTgsRJzARft5AMt-qBxGjj8l5WjQlA_dbmz7qAG3bsO91Lv1EGVtYwyLY
-Message-ID: <CAEfUkUJZ+G=yJLwgZHFj_P2PJiXMsKar-QKxB94pRjT8rBCh6g@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] Add support for DT overlays handoff
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Simek,
- Michal" <michal.simek@amd.com>, 
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rwC5grzXX6p4HpoO"
+Content-Disposition: inline
+In-Reply-To: <df457055-aa0e-417f-b9dc-d35a9d5c5a0d@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,94 +98,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Venkatesh,
 
-On Wed, 20 Aug 2025 at 01:15, Abbarapu, Venkatesh
-<venkatesh.abbarapu@amd.com> wrote:
->
-> [AMD Official Use Only - AMD Internal Distribution Only]
->
-> Hi @Raymond Mao,
-> I was trying to test these patches with the transfer list binary which contains tl.bin(dtb+dtbo) inside it. Facing issue with the dtbo address and fdt_check_header(*blob) from fdtdec_apply_dto_blob() gets the invalid magic num.
+--rwC5grzXX6p4HpoO
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Currently, DTO support is not enabled in TF-A qemu - It won't append a
-DTO via qemu so I am not sure if you had your own patch or platform
-code to make this work.
-To verify this U-Boot patch, please simply follow the 'Notes for
-testing' in my cover letter, my working branch referred by my manifest
-provides necessary changes for TF-A and OP-TEE to allow loading a DTO
-file via qemu, place it into a TF-A reserved memory and append it as a
-TE.
+On Thu, Aug 21, 2025 at 09:09:01AM +0200, Heinrich Schuchardt wrote:
+> On 21.08.25 02:22, Tom Rini wrote:
+> > On Thu, Aug 21, 2025 at 01:17:11AM +0200, Heinrich Schuchardt wrote:
+> > > Correct spelling of name 'Joan Lled=F3' in copyright comments.
+> > >=20
+> > > This avoids warnings in CI:
+> > >=20
+> > >      Skipping file './lib/lwip/lwip/contrib/ports/unix/posixlib/lwipo=
+pts.h'
+> > >      due to unicode error
+> > >=20
+> > >      Skipping file
+> > >      './lib/lwip/lwip/contrib/ports/unix/posixlib/include/posix/socke=
+ts.h'
+> > >      due to unicode error
+> > >=20
+> > >      Skipping file
+> > >      './lib/lwip/lwip/contrib/ports/unix/posixlib/include/posix/inet.=
+h'
+> > >      due to unicode error
+> > >=20
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > >   lib/lwip/lwip/contrib/ports/unix/posixlib/include/posix/inet.h  | 2=
+ +-
+> > >   .../lwip/contrib/ports/unix/posixlib/include/posix/sockets.h    | 2=
+ +-
+> > >   lib/lwip/lwip/contrib/ports/unix/posixlib/lwipopts.h            | 2=
+ +-
+> > >   3 files changed, 3 insertions(+), 3 deletions(-)
+> >=20
+> > Which test does this and can we just tell it to ignore what are
+> > essentially untouched upstream files?
+> >=20
+>=20
+> One of these:
+>=20
+> tools/dtoc/src_scan.py:629:                print("Skipping file '%s' due =
+to
+> unicode error" % fname)
+> tools/dtoc/src_scan.py:654:                print("Skipping file '%s' due =
+to
+> unicode error" % fname)
+> tools/dtoc/test_src_scan.py:87:                         r"Skipping file '=
+=2E*'
+> due to unicode error\s*")
+>=20
+> The patch only changes the encoding, not the content of a comment.
+> Why would you want to use codepage 437?
 
-Regards,
-Raymond
+I don't want to touch upstream files if at all possible. Submit the fix
+upstream too at least?
 
-> fdt_magic=0x38 fdt_chk_version=0x1
->
-> Attaching the log with details. Let me know if you need any other information.
->
-> Thanks
-> Venkatesh
->
-> > -----Original Message-----
-> > From: Raymond Mao <raymond.mao@linaro.org>
-> > Sent: Friday, July 18, 2025 7:46 PM
-> > To: u-boot@lists.denx.de
-> > Cc: Simek, Michal <michal.simek@amd.com>; Abbarapu, Venkatesh
-> > <venkatesh.abbarapu@amd.com>; Raymond Mao <raymond.mao@linaro.org>;
-> > Tom Rini <trini@konsulko.com>; Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>;
-> > Liviu Dudau <liviu.dudau@foss.arm.com>; Simon Glass <sjg@chromium.org>; Ilias
-> > Apalodimas <ilias.apalodimas@linaro.org>; Dan Carpenter
-> > <dan.carpenter@linaro.org>; Patrick Rudolph <patrick.rudolph@9elements.com>;
-> > Andrew Goodbody <andrew.goodbody@linaro.org>; Harrison Mutai
-> > <harrison.mutai@arm.com>; Jerome Forissier <jerome.forissier@linaro.org>;
-> > Heinrich Schuchardt <xypron.glpk@gmx.de>; Evgeny Bachinin
-> > <EABachinin@salutedevices.com>; Matthias Brugger <mbrugger@suse.com>; Lad
-> > Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> > Subject: [PATCH v3 0/6] Add support for DT overlays handoff
-> >
-> > The series include refactoring on bloblist and fdtdec to support handoff of multiple
-> > DT overlays and applying them into the DT base during setup.
-> > All changes are aligned to the spec update for supporting DT overlay handoff[1].
-> >
-> > Notes for testing:
-> >
-> > Currently DT overlay is not yet enabled in TF-A, but with the test patches I provided
-> > for TF-A and OP-TEE build, importing a DT overlay blob file from QEMU to TF-A
-> > reserved memory is supported.
-> > Follow below instructions to build and run for test:
-> > $ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml Replace your
-> > local qemu_v8.xml with [2], which contains all necessary changes in both TF-A and
-> > OP-TEE build.
-> > $ repo sync
-> > $ cd build
-> > $ make toolchains
-> > $ make ARM_FIRMWARE_HANDOFF=y all
-> > Copy and rename your DT overlay blob as 'qemu_v8.dtb' into out/bin $ make
-> > ARM_FIRMWARE_HANDOFF=y run-only
-> >
-> > [1] Add Transfer Entry for Devicetree Overlay
-> > https://github.com/FirmwareHandoff/firmware_handoff/pull/74
-> >
-> > [2]
-> > https://github.com/raymo200915/optee_manifest/blob/dt_overlay_handoff/qemu_v8.x
-> > ml
-> >
-> > Raymond Mao (6):
-> >   bloblist: add blob type for DT overlay
-> >   bloblist: add helper functions
-> >   bloblist: fix a potential negative size for memmove
-> >   bloblist: add API for applying blobs with specified tag
-> >   fdtdec: apply DT overlays from bloblist
-> >   configs: Select OF_LIBFDT_OVERLAY to hand over DTO via bloblist
-> >
-> >  common/bloblist.c                       | 67 ++++++++++++++++++++-
-> >  configs/qemu_arm64_defconfig            |  1 +
-> >  configs/vexpress_fvp_bloblist_defconfig |  1 +
-> >  include/bloblist.h                      | 34 ++++++++++-
-> >  lib/fdtdec.c                            | 80 +++++++++++++++++++++++++
-> >  5 files changed, 181 insertions(+), 2 deletions(-)
-> >
-> > --
-> > 2.25.1
->
+--=20
+Tom
+
+--rwC5grzXX6p4HpoO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKc0+AAKCRAr4qD1Cr/k
+CoEqAP0f3LZ3nXEmJXrymPtBvly5tDlbnRfejlHNac8+LVKCdgD/dpVmF0mXKsru
+F5dQ22QZOt1jjxZH18QyDdvIP4qSwws=
+=HE2z
+-----END PGP SIGNATURE-----
+
+--rwC5grzXX6p4HpoO--
