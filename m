@@ -4,82 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0643CA0EEB
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 13:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C28CA0EF8
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 14:23:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15A6A80548;
-	Thu, 21 Aug 2025 15:24:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B293480548;
+	Thu, 21 Aug 2025 16:23:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="spswXO74";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s95eaR7K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2C2980B9B; Thu, 21 Aug 2025 15:24:41 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id AA10E80B9B; Thu, 21 Aug 2025 16:23:49 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6F8980422
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 15:24:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 078FB80422
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 16:23:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-437727c903aso288150b6e.1
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 06:24:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-b472da8ff0eso662307a12.3
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 07:23:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755782677; x=1756387477; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PDcK3AKb8+OjYloNyqOmvHjTKsFJ9vW3H9nTmQ7Etrw=;
- b=spswXO74TYtJX+jqZIrGJd0Gvt877IjnI51OgusDOOGEmDpC75iufQqU8Nf+HOrPrN
- rHsKRctk6FSol1ZpU1aKt5J2tSSct839xwFyg33phZ3DbIhx6mO/d8HzuBBrhCeozV/i
- sWz7rkzYvRZEGFE1eZDiKdVSug/DcgPOj8TgE4Hat/CQsVQ5sM1IawQC1LdG6VOughln
- qRzUTLBO24Kgt46jGKPHEcGacrei80Xhwk7pgADbFn+44VaDHFgAl4xF/0stcbyFKR14
- eUKkunC+DYQzlopfOD6AjA53s8hdQcSDNSPv2ukmzWVf0bqHJ6vkx5o1+kChAEHoy6ld
- USmA==
+ d=linaro.org; s=google; t=1755786225; x=1756391025; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=U2FcK3ryxi1cwu4XZY7Lyk4mF1qA4Blf1BM1+XiS8xc=;
+ b=s95eaR7KxP7vIHb2CZUbvYgMahI+MOmJblUxg44WkS/5xSIpc1gtR+2vsbcWs7Svx4
+ Urwoi5xdUV++zISryNLdi7NJpQBwe291AT0lFOBLvoMWG/Gye3cKmfp5uW21IoYIBr3G
+ tUWE/UVhn8y4mXtIKbkozIoQy9TrnSfmX8okkUP/9h/3tjwTLju+UOLrOQ2m2xpN78a6
+ OctIpcxN9WqlbkgNvmaBxzZd8BFM0Y7mTvNjltvRJuNc+c2qAoVrQT1poD88zhg2MVuy
+ 36d72wIwGUmylDNZVD5hHXrQN7jOUb2bXDDefBaWGe0y5DkkYcxYh+549m7Up0pDbZ0S
+ 8HWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755782677; x=1756387477;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PDcK3AKb8+OjYloNyqOmvHjTKsFJ9vW3H9nTmQ7Etrw=;
- b=KWgOHQg0fs3AP8qMwkkeDv5YMfivglf8K9Dn+ooZoXObDZlVHBjuu09WhpAYRmi+BU
- XSClT3biupc/CR62RqQlvTyoi6h0Wju5vFOcQhCHhP69+2f8km7k1J62HDNHs9tFsjtu
- xD0LghEh2f4LwFv6eWl+WnYJX74ZiV9pUV92o/tHTOoQwkqtNHI4UhPICvAjka2eBMmA
- awBbgc42mwJB4jaHYkND71po4OmzLLeSzyfWRIO7xYMG6D6ysXB1Vtaw2Y6Yu/X1sbNx
- kRnd6jCPSJFq2Tb4O6Gto5+VIdEfthr4k62KYj5hk0wyB+CK7FqRfYFRPvdmUCcab2jI
- fgZw==
-X-Gm-Message-State: AOJu0YxobiG1zcBEEp2H/ubY4lZD0m4CoNmcB++H2UmpOy6FsRySUooU
- ybLThmo3ykTHCRtbiek1D1zsfTx2AJGuk7gZZbt7A43h4ZzrPlLipef4pFQnCu1mcs4ZnJpSVu3
- K6Qvw7aZRys4elE3H0AMaW3exbUXewArVZLjii/KJWA==
-X-Gm-Gg: ASbGnctrIY47UK8EXO0N8sYNL0lVz4NKWJ6Bi8Zcy4HjRVv1vGpouxpc4FWVEP3Gpyw
- YBBVBxO9edlYWRCVllWcfObyTqK3CdRox0X4iOGhQy2N4RZQSZddP5/Xa0mY5ze9i7QbPmuUYBK
- rqUcijlxbX4zyxMbERs1XWoTQucWAFQXFIXnG70Bf/vVnrFELyKb2FXCS0QxGEVeSl8wDH2YEZ8
- 2qI5iZH
-X-Google-Smtp-Source: AGHT+IGuLlArOcweaz8Gm3XqGiPFGauRJCn6ycyF6Ojj0yPlG3x/LrpAY54JLTv06lITQ0UPWAWypB/3qAKOdv1kPog=
-X-Received: by 2002:a05:6808:2385:b0:433:fd5b:ca78 with SMTP id
- 5614622812f47-4377d796411mr1011638b6e.31.1755782677142; Thu, 21 Aug 2025
- 06:24:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1755786225; x=1756391025;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=U2FcK3ryxi1cwu4XZY7Lyk4mF1qA4Blf1BM1+XiS8xc=;
+ b=YoVWZyOxU2mBtOGJmsod0Fn2ARwASD0emgnZBeldfdzFTR1l7Fi+ZefrrDwn/p/IIJ
+ rirv+/YIuJNuXRUnd46ru7nK+19OshcnK35+x6qRy53pDlipVKI2/2rU23bPnNYSX4do
+ IOroMeaJWwuB9fiYfTfsvIptiw8Rak2mI3400O876HTffxA/jmpN2x5bjwBVPtKAbBmM
+ M1jR09/YSEArljBSmW5fzn+FhAHGBBNBIATIWFpRw84rxronCxx772Mp1D09kcQgWb9E
+ MRGmF5f7hK6w+CnxLdYECxAwBNIUJxhmifjPzR1MvHm1zzLdjTvPJ2ji6L5dRopezaI7
+ C39A==
+X-Gm-Message-State: AOJu0Yyg4RMKQ83UfgEicgjpycGoKUcIsqf8KZRH3Xwz+69n2GxxG8eA
+ fGlGHSkY7buylI/Hox8lg25cC2nFmuEEZmVIKfuBB5rIeslKw1iOrTotefjqwzeVj7k2tqUsf6L
+ 5aIRiycbb9TWa7BMI72Y9tWC/JEsjJZE1jzWR0INZQA==
+X-Gm-Gg: ASbGnctjbhunfKGw2pRwIUMkTyny8HWeaWaXYe/sSHRNQYPyFV4cicomtIijcrR69Hk
+ igOf9mTl88XEYlYcf8EWJyF3dF9Hwh+pQbkP8DXW2mdFK92z2kxwk60zPPD2e0Az9Ef7uimWTT3
+ 1lYprlcGe/cHrkrryiQSBlPbg1vGIUYWCcdKinLX3MEe9tUwL9D6sWhNfOdh0QnJqjs3fT3xE6u
+ TEKM2wCMQ==
+X-Google-Smtp-Source: AGHT+IG7fJqvIx59xzpWSgDbvyuZEdxKMStr0gZMbmmbg5EJzIrosQ1CxI3UXlttxJh+0YKy/cS9L0NpeqjHVKUn9BI=
+X-Received: by 2002:a17:903:a90:b0:244:9c27:9829 with SMTP id
+ d9443c01a7336-245febed60bmr33399815ad.10.1755786225435; Thu, 21 Aug 2025
+ 07:23:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250711144917.1876948-1-abdellatif.elkhlifi@arm.com>
- <20250711144917.1876948-4-abdellatif.elkhlifi@arm.com>
-In-Reply-To: <20250711144917.1876948-4-abdellatif.elkhlifi@arm.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Thu, 21 Aug 2025 15:24:25 +0200
-X-Gm-Features: Ac12FXxEdywJBvAFxyuJYeLfpBwsOCxKTXoi9jLpN3WdzATNDxeDgEqxt2tmRt8
-Message-ID: <CAHUa44GFo2e85BKN_SFzC32KsS5sLAHbjYQVeoKOk8uyf+YJog@mail.gmail.com>
-Subject: Re: [PATCH v2 03/25] arm_ffa: Add FFA_MEM_RECLAIM support
-To: abdellatif.elkhlifi@arm.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+References: <20250718141621.3147633-1-raymond.mao@linaro.org>
+ <SA1PR12MB86977E312AB3965DFB8D2DD79833A@SA1PR12MB8697.namprd12.prod.outlook.com>
+In-Reply-To: <SA1PR12MB86977E312AB3965DFB8D2DD79833A@SA1PR12MB8697.namprd12.prod.outlook.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 21 Aug 2025 10:23:33 -0400
+X-Gm-Features: Ac12FXwTgsRJzARft5AMt-qBxGjj8l5WjQlA_dbmz7qAG3bsO91Lv1EGVtYwyLY
+Message-ID: <CAEfUkUJZ+G=yJLwgZHFj_P2PJiXMsKar-QKxB94pRjT8rBCh6g@mail.gmail.com>
+Subject: Re: [PATCH v3 0/6] Add support for DT overlays handoff
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Simek,
+ Michal" <michal.simek@amd.com>, 
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,280 +104,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 11, 2025 at 4:49=E2=80=AFPM <abdellatif.elkhlifi@arm.com> wrote=
-:
->
-> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
->
-> Add to the FF-A bus FFA_MEM_RECLAIM ABI
->
-> The FFA_MEM_RECLAIM is a memory management ABI described in the FF-A
-> v1.0 specification [1].
->
-> This ABI restores exclusive access to a memory region back to its Owner.
->
-> This work is based on the implementation in Linux [2].
->
-> [1]: https://developer.arm.com/documentation/den0077/a/?lang=3Den
-> [2]: commit cc2195fe536c28e192df5d07e6dd277af36814b4
->      File: drivers/firmware/arm_ffa/driver.c
->
-> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jens Wiklander <jens.wiklander@linaro.org>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Hi Venkatesh,
 
-Looks good to me:
-Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+On Wed, 20 Aug 2025 at 01:15, Abbarapu, Venkatesh
+<venkatesh.abbarapu@amd.com> wrote:
+>
+> [AMD Official Use Only - AMD Internal Distribution Only]
+>
+> Hi @Raymond Mao,
+> I was trying to test these patches with the transfer list binary which contains tl.bin(dtb+dtbo) inside it. Facing issue with the dtbo address and fdt_check_header(*blob) from fdtdec_apply_dto_blob() gets the invalid magic num.
 
-Cheers,
-Jens
+Currently, DTO support is not enabled in TF-A qemu - It won't append a
+DTO via qemu so I am not sure if you had your own patch or platform
+code to make this work.
+To verify this U-Boot patch, please simply follow the 'Notes for
+testing' in my cover letter, my working branch referred by my manifest
+provides necessary changes for TF-A and OP-TEE to allow loading a DTO
+file via qemu, place it into a TF-A reserved memory and append it as a
+TE.
 
+Regards,
+Raymond
+
+> fdt_magic=0x38 fdt_chk_version=0x1
 >
-> ---
+> Attaching the log with details. Let me know if you need any other information.
 >
-> Changelog of changes:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
+> Thanks
+> Venkatesh
 >
-> v2:
->
-> * As suggested by Heinrich: The ops NULL check removed
->
-> v1:
->
-> * Add FFA_MEM_RECLAIM support
->
->  doc/arch/arm64.ffa.rst                    |  2 +
->  drivers/firmware/arm-ffa/arm-ffa-uclass.c | 73 +++++++++++++++++++++++
->  drivers/firmware/arm-ffa/arm-ffa.c        |  1 +
->  include/arm_ffa.h                         | 25 +++++++-
->  include/arm_ffa_priv.h                    |  3 +-
->  5 files changed, 102 insertions(+), 2 deletions(-)
->
-> diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
-> index 3eec735d741..d2c4fb49f79 100644
-> --- a/doc/arch/arm64.ffa.rst
-> +++ b/doc/arch/arm64.ffa.rst
-> @@ -186,6 +186,7 @@ The following features are provided:
->      - FFA_MSG_SEND_DIRECT_REQ
->      - FFA_MSG_SEND_DIRECT_RESP
->      - FFA_MEM_SHARE
-> +    - FFA_MEM_RECLAIM
->
->  - Support for the 64-bit version of the following ABIs:
->
-> @@ -205,6 +206,7 @@ The following features are provided:
->      - ffa_sync_send_receive
->      - ffa_rxtx_unmap
->      - ffa_memory_share
-> +    - ffa_memory_reclaim
->
->  - FF-A bus discovery makes sure FF-A framework is responsive and compati=
-ble
->    with the driver
-> diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware=
-/arm-ffa/arm-ffa-uclass.c
-> index 9af574760d2..b9b66bf68f9 100644
-> --- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-> +++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-> @@ -109,6 +109,18 @@ static struct ffa_abi_errmap err_msg_map[FFA_ERRMAP_=
-COUNT] =3D {
->                         "DENIED: Memory region ownership, permission, acc=
-ess or attributes error",
->                 },
->         },
-> +       [FFA_ID_TO_ERRMAP_ID(FFA_MEM_RECLAIM)] =3D {
-> +               {
-> +                       [ABORTED] =3D
-> +                       "ABORTED: ABI invocation failure",
-> +                       [INVALID_PARAMETERS] =3D
-> +                       "INVALID_PARAMETERS: Invalid handle or flags",
-> +                       [NO_MEMORY] =3D
-> +                       "NO_MEMORY: Failure to create the Owner's mapping=
-",
-> +                       [DENIED] =3D
-> +                       "DENIED: Memory region state issue",
-> +               },
-> +       },
->  };
->
->  /**
-> @@ -1114,6 +1126,44 @@ int ffa_memory_share_hdlr(struct udevice *dev, str=
-uct ffa_mem_ops_args *args)
->         return ffa_memory_ops(dev, FFA_MEM_SHARE, args);
->  }
->
-> +/**
-> + * ffa_memory_reclaim_hdlr() - FFA_MEM_RECLAIM handler function
-> + * @dev: The FF-A bus device
-> + * @g_handle: The memory region globally unique Handle
-> + * @flags: Zero memory and time slicing flags
-> + *
-> + * Implement FFA_MEM_RECLAIM FF-A function
-> + * to restore exclusive access to a memory region back to its Owner.
-> + * Note: FFA_MEM_RECLAIM can not be used at EFI runtime because memory t=
-hat was
-> + * lent as per the memory map during boot time can not be reclaimed into=
- the
-> + * memory map during runtime.
-> + *
-> + * Return:
-> + *
-> + * 0 on success. Otherwise, failure
-> + */
-> +int ffa_memory_reclaim_hdlr(struct udevice *dev, u64 g_handle, u32 flags=
-)
-> +{
-> +       ffa_value_t res;
-> +       int ffa_errno;
-> +
-> +       invoke_ffa_fn((ffa_value_t){
-> +                       .a0 =3D FFA_SMC_32(FFA_MEM_RECLAIM),
-> +                       .a1 =3D HANDLE_LOW(g_handle), .a2 =3D HANDLE_HIGH=
-(g_handle),
-> +                       .a3 =3D flags,
-> +                       },
-> +                       &res
-> +       );
-> +
-> +       if (res.a0 !=3D FFA_SMC_32(FFA_SUCCESS)) {
-> +               ffa_errno =3D res.a2;
-> +               ffa_print_error_log(FFA_MEM_RECLAIM, ffa_errno);
-> +               return ffa_to_std_errno(ffa_errno);
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  /* FF-A driver operations (used by clients for communicating with FF-A)*=
-/
->
->  /**
-> @@ -1216,6 +1266,29 @@ int ffa_memory_share(struct udevice *dev, struct f=
-fa_mem_ops_args *args)
->         return ops->memory_share(dev, args);
->  }
->
-> +/**
-> + * ffa_memory_reclaim() - FFA_MEM_RECLAIM driver operation
-> + * @dev: The FF-A bus device
-> + * @g_handle: The memory region globally unique Handle
-> + * @flags: Zero memory and time slicing flags
-> + *
-> + * Driver operation for FFA_MEM_RECLAIM.
-> + * Please see ffa_memory_reclaim_hdlr() description for more details.
-> + *
-> + * Return:
-> + *
-> + * 0 on success. Otherwise, failure
-> + */
-> +int ffa_memory_reclaim(struct udevice *dev, u64 g_handle, u32 flags)
-> +{
-> +       struct ffa_bus_ops *ops =3D ffa_get_ops(dev);
-> +
-> +       if (!ops->memory_reclaim)
-> +               return -ENOSYS;
-> +
-> +       return ops->memory_reclaim(dev, g_handle, flags);
-> +}
-> +
->  /**
->   * ffa_do_probe() - probing FF-A framework
->   * @dev:       the FF-A bus device (arm_ffa)
-> diff --git a/drivers/firmware/arm-ffa/arm-ffa.c b/drivers/firmware/arm-ff=
-a/arm-ffa.c
-> index df904cae412..de36f5647d2 100644
-> --- a/drivers/firmware/arm-ffa/arm-ffa.c
-> +++ b/drivers/firmware/arm-ffa/arm-ffa.c
-> @@ -85,6 +85,7 @@ static const struct ffa_bus_ops ffa_ops =3D {
->         .sync_send_receive =3D ffa_msg_send_direct_req_hdlr,
->         .rxtx_unmap =3D ffa_unmap_rxtx_buffers_hdlr,
->         .memory_share =3D ffa_memory_share_hdlr,
-> +       .memory_reclaim =3D ffa_memory_reclaim_hdlr,
->  };
->
->  /* Registering the FF-A driver as an SMCCC feature driver */
-> diff --git a/include/arm_ffa.h b/include/arm_ffa.h
-> index b91b0279371..1229e6e3d02 100644
-> --- a/include/arm_ffa.h
-> +++ b/include/arm_ffa.h
-> @@ -147,8 +147,9 @@ struct ffa_mem_ops_args {
->   * struct ffa_bus_ops - Operations for FF-A
->   * @partition_info_get:        callback for the FFA_PARTITION_INFO_GET
->   * @sync_send_receive: callback for the FFA_MSG_SEND_DIRECT_REQ
-> - * @rxtx_unmap:        callback for the FFA_RXTX_UNMAP
-> + * @rxtx_unmap:                callback for the FFA_RXTX_UNMAP
->   * @memory_share:      callback for the FFA_MEM_SHARE
-> + * @memory_reclaim:    callback for the FFA_MEM_RECLAIM
->   *
->   * The data structure providing all the operations supported by the driv=
-er.
->   * This structure is EFI runtime resident.
-> @@ -161,6 +162,7 @@ struct ffa_bus_ops {
->                                  bool is_smc64);
->         int (*rxtx_unmap)(struct udevice *dev);
->         int (*memory_share)(struct udevice *dev, struct ffa_mem_ops_args =
-*args);
-> +       int (*memory_reclaim)(struct udevice *dev, u64 g_handle, u32 flag=
-s);
->  };
->
->  #define ffa_get_ops(dev)        ((struct ffa_bus_ops *)(dev)->driver->op=
-s)
-> @@ -280,6 +282,27 @@ int ffa_memory_share(struct udevice *dev, struct ffa=
-_mem_ops_args *args);
->   */
->  int ffa_memory_share_hdlr(struct udevice *dev, struct ffa_mem_ops_args *=
-args);
->
-> +/**
-> + * ffa_memory_reclaim() - FFA_MEM_RECLAIM driver operation
-> + * Please see ffa_memory_reclaim_hdlr() description for more details.
-> + */
-> +int ffa_memory_reclaim(struct udevice *dev, u64 g_handle, u32 flags);
-> +
-> +/**
-> + * ffa_memory_reclaim_hdlr() - FFA_MEM_RECLAIM handler function
-> + * @dev: The FF-A bus device
-> + * @g_handle: The memory region globally unique Handle
-> + * @flags: Zero memory and time slicing flags
-> + *
-> + * Implement FFA_MEM_RECLAIM FF-A function
-> + * to restore exclusive access to a memory region back to its Owner.
-> + *
-> + * Return:
-> + *
-> + * 0 on success. Otherwise, failure
-> + */
-> +int ffa_memory_reclaim_hdlr(struct udevice *dev, u64 g_handle, u32 flags=
-);
-> +
->  struct ffa_priv;
->
->  /**
-> diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
-> index a259911d5b9..54196199ce3 100644
-> --- a/include/arm_ffa_priv.h
-> +++ b/include/arm_ffa_priv.h
-> @@ -133,10 +133,11 @@ enum ffa_abis {
->         FFA_MSG_SEND_DIRECT_REQ   =3D 0x6f,
->         FFA_MSG_SEND_DIRECT_RESP  =3D 0x70,
->         FFA_MEM_SHARE             =3D 0x73,
-> +       FFA_MEM_RECLAIM           =3D 0x77,
->
->         /* To be updated when adding new FFA IDs */
->         FFA_FIRST_ID              =3D FFA_ERROR, /* Lowest number ID */
-> -       FFA_LAST_ID               =3D FFA_MEM_SHARE, /* Highest number ID=
- */
-> +       FFA_LAST_ID               =3D FFA_MEM_RECLAIM, /* Highest number =
-ID */
->  };
->
->  enum ffa_abi_errcode {
-> --
-> 2.25.1
+> > -----Original Message-----
+> > From: Raymond Mao <raymond.mao@linaro.org>
+> > Sent: Friday, July 18, 2025 7:46 PM
+> > To: u-boot@lists.denx.de
+> > Cc: Simek, Michal <michal.simek@amd.com>; Abbarapu, Venkatesh
+> > <venkatesh.abbarapu@amd.com>; Raymond Mao <raymond.mao@linaro.org>;
+> > Tom Rini <trini@konsulko.com>; Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>;
+> > Liviu Dudau <liviu.dudau@foss.arm.com>; Simon Glass <sjg@chromium.org>; Ilias
+> > Apalodimas <ilias.apalodimas@linaro.org>; Dan Carpenter
+> > <dan.carpenter@linaro.org>; Patrick Rudolph <patrick.rudolph@9elements.com>;
+> > Andrew Goodbody <andrew.goodbody@linaro.org>; Harrison Mutai
+> > <harrison.mutai@arm.com>; Jerome Forissier <jerome.forissier@linaro.org>;
+> > Heinrich Schuchardt <xypron.glpk@gmx.de>; Evgeny Bachinin
+> > <EABachinin@salutedevices.com>; Matthias Brugger <mbrugger@suse.com>; Lad
+> > Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> > Subject: [PATCH v3 0/6] Add support for DT overlays handoff
+> >
+> > The series include refactoring on bloblist and fdtdec to support handoff of multiple
+> > DT overlays and applying them into the DT base during setup.
+> > All changes are aligned to the spec update for supporting DT overlay handoff[1].
+> >
+> > Notes for testing:
+> >
+> > Currently DT overlay is not yet enabled in TF-A, but with the test patches I provided
+> > for TF-A and OP-TEE build, importing a DT overlay blob file from QEMU to TF-A
+> > reserved memory is supported.
+> > Follow below instructions to build and run for test:
+> > $ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml Replace your
+> > local qemu_v8.xml with [2], which contains all necessary changes in both TF-A and
+> > OP-TEE build.
+> > $ repo sync
+> > $ cd build
+> > $ make toolchains
+> > $ make ARM_FIRMWARE_HANDOFF=y all
+> > Copy and rename your DT overlay blob as 'qemu_v8.dtb' into out/bin $ make
+> > ARM_FIRMWARE_HANDOFF=y run-only
+> >
+> > [1] Add Transfer Entry for Devicetree Overlay
+> > https://github.com/FirmwareHandoff/firmware_handoff/pull/74
+> >
+> > [2]
+> > https://github.com/raymo200915/optee_manifest/blob/dt_overlay_handoff/qemu_v8.x
+> > ml
+> >
+> > Raymond Mao (6):
+> >   bloblist: add blob type for DT overlay
+> >   bloblist: add helper functions
+> >   bloblist: fix a potential negative size for memmove
+> >   bloblist: add API for applying blobs with specified tag
+> >   fdtdec: apply DT overlays from bloblist
+> >   configs: Select OF_LIBFDT_OVERLAY to hand over DTO via bloblist
+> >
+> >  common/bloblist.c                       | 67 ++++++++++++++++++++-
+> >  configs/qemu_arm64_defconfig            |  1 +
+> >  configs/vexpress_fvp_bloblist_defconfig |  1 +
+> >  include/bloblist.h                      | 34 ++++++++++-
+> >  lib/fdtdec.c                            | 80 +++++++++++++++++++++++++
+> >  5 files changed, 181 insertions(+), 2 deletions(-)
+> >
+> > --
+> > 2.25.1
 >
