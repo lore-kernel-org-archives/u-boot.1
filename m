@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6002CCA0EFA
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 21:00:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DB5ECA0EFA
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 22:42:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98ED882BA7;
-	Thu, 21 Aug 2025 23:00:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AEDDC80422;
+	Fri, 22 Aug 2025 00:42:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kZVp/PdN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C9yUlSQ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52FAB82998; Thu, 21 Aug 2025 23:00:36 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 0F71A80548; Fri, 22 Aug 2025 00:42:38 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BAAA82B07
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 23:00:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 192AC8006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 00:42:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-74382048b8cso861642a34.3
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 14:00:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-618b62dba1aso2078272a12.2
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 15:42:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755810031; x=1756414831; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XWtTs+s4itAxme/VlZu3dc39geC2sfQrQwzWiS/PRGo=;
- b=kZVp/PdNbZvp1uKZb8SlxicIhNBEDEKbUwVurg8fIEpyVkSCfe+02iAEOLcxy5OmDk
- cym7PnLneQy0GvsjepNqXylctUeKMiHIYcL/anQlWq7+xG6DK6GOWpHiz8YpRkat1gB0
- LhvvEgNfbakTduLW6HNQ9aR2mo78EUPfOi2cg=
+ d=gmail.com; s=20230601; t=1755816155; x=1756420955; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MzlQuEMNz25NX1rrDdA9hFqqRhU0tMtMNKkQhHzINIg=;
+ b=C9yUlSQ9w/vGi5EwX+aL+/ERBqwqYPWgCDs9pSoGCx3GFMt9IOUacb+6Uq49NAOwKo
+ S553wn/G0Itn5iH7KBZV/n8wwCo0JeUJhtLxDum/HuTMV66bdvwwvMoZaQVbKew/mDCe
+ r2Czd8j82/ChwmP62QRJW/Pb4BQK8DgEzR236THV2Cz3dsQTPyRijd13Vg5UsC5sU2EE
+ 6INNzg346t58nX9FYdNIdrkfECc7MXYlaLYdDQ+I5/SzDa85BDB2wkOjtRxB7EIcfhBU
+ HgE+ElTEOTnvwx2bbGL/NCINyQvQnLnMcf1RsdA+gc14gN5enBOX8U01dQruc4crN6Cb
+ UBfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755810031; x=1756414831;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XWtTs+s4itAxme/VlZu3dc39geC2sfQrQwzWiS/PRGo=;
- b=HGfCLD9OKfaAvcHmw6PTUVTkYE08C9dk7j3PP3FTHMjL3ulQiEx6BsmU06ANpBsn+k
- 5PCJQF4lDy8TFcBGQzZ6No1Sx2YVlkomvXu2RNTdVnQ5p2DrKoBqYUnyeL2lY3nh1IDk
- TNxZahoZU7ZLhOww3Q9nU2GtwrKFNwc7dSO7MfmAyb9WcgrbZ/X+1V8AFe5FmvzB8BIk
- Kn3eKb9A8xp4/BxERrFzmc0DO9ioE54mLA72+0FAek9rFqAXSKpKXksvtBmeropHZCTL
- v+/6f44gXxaf/CsdC7JJi+wL6FVvRzIi6G2FEWP3CwVBNf7kZ9xflFbTargGgjI4R0OG
- lwwA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIDQ9vDOBb2nFk8HhYlfdtuECP9NBGZggRHTdj1E4EEIknXHNdUBfrVOtcEBdA53Huc5LDBdM=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywr7fg6IOjo4zrw3dEFqjxNJNCMwgETaH5u1Y1iPdBDK8w2uIc+
- VECIioaB7+kT7KwVdZIcBkgS6hfoN/IK1m4eldTd12efXE2MvU4G9KI53DVup8bNa2s=
-X-Gm-Gg: ASbGnctmKtYcDRtiFG1EysXKoitQVkThp2BdCgNPvcR2hxTJJ21txOGi4taTty+REzF
- DuBggqWjSTjEbse9Hj/2+mlBqE22y/eGfPRH7i8PaMVQns4HE02ZPkx7T5hxEqryVEJIohdeivq
- +AHi++pkI8VjU8irCP2KzfYU7E/AEG6hOpwfsJoZzp/g96P1Sa6tOVvGiZPYP5fpcGp26Nmw3F0
- HXOzLtiMUImi5j+vLFbGnKSA30NwO7mSncSWxuB5RnEHY2CuEDZhPf9Zbx7v3gHn6fxJ9Y+eEIM
- gKYYzhtRcx/4j95oObf67gL44Otmv3ii93YZigiEzPBgFxXoFFX18EUpBblW5MvAj26m/eJ/kDn
- xHeRPhVORiLSdcf4wcTnqjaZorCdt+5nmcaY3/ncQxiHNnudfzdevCi8=
-X-Google-Smtp-Source: AGHT+IETMC0TeXOof6C/wkNaxhBObhSANf8kzjC+oBEYNrvrMrqY3jXnDu03iQXqiCpKY17MwpTU8Q==
-X-Received: by 2002:a05:6830:6011:b0:73e:9293:556e with SMTP id
- 46e09a7af769-74500905585mr580013a34.6.1755810031013; 
- Thu, 21 Aug 2025 14:00:31 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-744e06a845esm1631957a34.20.2025.08.21.14.00.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Aug 2025 14:00:30 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: tuomas.tynkkynen@iki.fi, jan.kiszka@siemens.com, u-boot@lists.denx.de, 
- mark.kettenis@xs4all.nl, Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250814181436.1598067-1-festevam@gmail.com>
-References: <20250814181436.1598067-1-festevam@gmail.com>
-Subject: Re: [PATCH v2 1/2] Kconfig: Convert SYS_EARLY_PCI_INIT to Kconfig
-Message-Id: <175581003019.928164.8759574554881375454.b4-ty@konsulko.com>
-Date: Thu, 21 Aug 2025 15:00:30 -0600
+ d=1e100.net; s=20230601; t=1755816155; x=1756420955;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MzlQuEMNz25NX1rrDdA9hFqqRhU0tMtMNKkQhHzINIg=;
+ b=YZbqzqDtGlxlU5wckCk69ONzpWMys87w0Odvpo8cmvpnzrYh4W1BQdRR/1n0oFHaIk
+ hOgOPb2u8dSuPVgCo6MwfTNevr3J8GtMxHxdRBW0Jp0iU4bp2beaX7UmJ22c3LhAjgze
+ QhGx8cXWYN1+gtl9uzfBTzkYrO4FHJ4/nJbssl8PUttktCEUUqMmLDFksvITREsVUqWf
+ 7D9/IfJoPOyy1jTTcgBR5QgkSeUUN6qQwjRAtSRtdE2b7kmon7mv8PZnsdKSHUx3TbEL
+ ZIO333AGsaHF6j0GNHAKjrEcP4cZBX1G7o6Uqm0vR0D4nZWEMPEvmj7FU8A6bBwL0H2Z
+ LwsQ==
+X-Gm-Message-State: AOJu0Yy9kx/16cFMBLjDAqnpR4Gok1jKJ4qfBiqUrgv5Hh7nwY0vsTlH
+ mpDc0uaWdM8YqEwthljsa49q3LpMj3msZcMy7POdYrtbG6Gk4vTiqqGaGv7mErGB3k1//4RS/YE
+ dsclUbFUc0MiKVvM0onLjnRXkmZLu2m9P5Mg4Rzc=
+X-Gm-Gg: ASbGncuP0jRx+bC64wKoAdI2ClTki14PYm8BsZJxufPMtpERTRpOGApdeq1CnBFSxeL
+ OzHZs0zSRS9K3MagHFhiHO4dz3N5uuKnL8ZvkHGCK1p2+nPIsry7uVV+8EIVlA/kmM0/WKFQhtR
+ NtFjnJwCyxJ76bJGk+tZPM3YZSy6dR7o9PSskRdk+0h9PXP6hvWMPA8kjlT++OxOE7Qiiap2vjh
+ x1vDcohjK2wHpj4WubeG+W6e2sSIfZDrPEqWNO2
+X-Google-Smtp-Source: AGHT+IGP0VK7/Z1U8bfeTHFUD76Am4vNv9vViaVKCHMEChGB17Iih4ksr9nXXZFTjzS+81HOXeOYR2FCY6eqwjXJEu4=
+X-Received: by 2002:a05:6402:40c4:b0:61a:3236:22b5 with SMTP id
+ 4fb4d7f45d1cf-61c1b708cc9mr571866a12.25.1755816155278; Thu, 21 Aug 2025
+ 15:42:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <03b60737-2289-48c2-b4c7-63c768ca4149@gmx.de>
+In-Reply-To: <03b60737-2289-48c2-b4c7-63c768ca4149@gmx.de>
+From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Date: Thu, 21 Aug 2025 23:42:24 +0100
+X-Gm-Features: Ac12FXyMfhfFDMHBmF8-SXgnz3k4cS4fBIJuyo3XKlzZzlIJTo4S9_gHPl2_jmw
+Message-ID: <CACAHuLBGed=O00UrQ788iJTJk37+6Y+Bh-Nqo2u4Sat1S4GaQA@mail.gmail.com>
+Subject: Re: [PATCH 00/10] doc: minor fixes and improvements
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,22 +91,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Aug 2025 15:14:35 -0300, Fabio Estevam wrote:
+> [...]
 
-> The CONFIG_SYS_EARLY_PCI_INIT symbol is currently not supported
-> by Kconfig.
-> 
-> Make it a Kconfig symbol so that users could select it via defconfig.
-> 
-> 
+Thank you for the heads-up.
 
-Applied to u-boot/next, thanks!
-
-[1/2] Kconfig: Convert SYS_EARLY_PCI_INIT to Kconfig
-      commit: 0b0641470b3037e7e212b40c7101c1269653f86e
-[2/2] qemu_arm: Select CONFIG_SYS_EARLY_PCI_INIT
-      commit: 51214ffcc543dde83ad687c35cb2de61a34e0602
--- 
-Tom
-
-
+Com os melhores cumprimentos. / Best regards.
+Adriano Carvalho
