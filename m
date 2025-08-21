@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C18F2CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 00:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2501CA0EED
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 00:51:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D320281E13;
-	Thu, 21 Aug 2025 02:22:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F0EBC82B07;
+	Thu, 21 Aug 2025 02:51:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qyaQuq7w";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="iC12qZuI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AE3282B07; Thu, 21 Aug 2025 02:22:30 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 0BD0082E34; Thu, 21 Aug 2025 02:51:57 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E182801DD
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 02:22:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62D9D81E13
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 02:51:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-3e56ff1c11eso2204105ab.0
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 17:22:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-30cceb3be82so505611fac.2
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 17:51:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755735747; x=1756340547; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+Faxh2bENrFBPLwgc0NxHNsPPbVzBZA5K0Gv4fpYpCg=;
- b=qyaQuq7wuz8yOgpp5ZeumaSnEHYP6PFvPl3OuHLO4ibBAo0WhHnA9p2wU7te4n0bOb
- JWUZuIngUt3C74rCXHnKzVBroPnBEobVtvsflSwT7CXrA0vKBWEFanQ6JNDB/tEc2nNf
- mXiRATF6newyOBgysXATIe7rMQeDVMOQH3K/w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755735747; x=1756340547;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1755737513; x=1756342313; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+Faxh2bENrFBPLwgc0NxHNsPPbVzBZA5K0Gv4fpYpCg=;
- b=V2ShpCb7hgnrD0Krqc9J3DamNHw/RK46uXonshSms6bxg1wkY9615Nlwp9Q6n7Xfr6
- v7CJytwhNBu/QRZ0OCd6Pv/SayAbNYyc+f21J+heyWyXCIQNb/9uVoxxFBDNMHWO6UXb
- qUmA83tMPJ5m03FsStjUGANWdqf4whs9tjQTqcfaozTK/6sFQYlvOLi+vwh3Ycf3PSCx
- 46oOuYTrFdzeEdQv5hh997I0CNX2QkDhHWVGdXLy6E3Sv9Z7PtEaL/saUAXQisma+EAJ
- qVO9Qd8pn3yg81o716vgeG6mdcvykgzSb7znhmuqZvQ1R2Outc/NoM35c3bLQxYtI1WB
- ufTA==
-X-Gm-Message-State: AOJu0YzdHQ5iA2fiXH0LMWD9k9dcX1Z7Q81ovmoRoyltSYx8EMKK2ZP+
- 0Lgp3leE/i/cOflMIp/rKZRvY7FOSNGId5WPQbr4yzVjNpOzPbMRcqTn/wwnRE9ooI8=
-X-Gm-Gg: ASbGncsrjAk+GGEr1VN5fmGEJcUygvQXtdQ3Np5ws0P2fBRlG3slCwNeiLzQZGhPOKY
- iev3IvTZEVEY0JIRo+TArOiTjVlyBTcpgDFGB+TDCtK5Mo/oXVrsOWYGSGHPtSXLXc/PGVflI5Q
- 5hYGASJROcVd1e5wrbbAosUx9BonkOeoRhSVj4FGApBQEuEqe/695+Lm6eU2efnx9hdaV/4p+/Z
- MHZ/TdDVQfD08B1qIXVoXnilxxaoa0x4866T6cduEUJCb/xYOYQTy4hEvzrBpM8/XN3W1BgDWhe
- qOAXOV2UouZDIAiK3EOgp7gJrgPZhKjSor48yTBrl6AQfSHBL/Sppbgw+cPVQVKQ23XxKspRryr
- sgqYAmbX9KrbXGULLozorM0n39Ia5v1axlxCqVk6iXH1fprg69mSo3m16
-X-Google-Smtp-Source: AGHT+IFPs53dudlN2C4ei5uvj7ogSXfNLotBFYYL/ZDoPTimU08NvKz2f9+9QBw6/J6F/hn48IaJnA==
-X-Received: by 2002:a05:6602:6692:b0:884:552:d2be with SMTP id
- ca18e2360f4ac-886b48a0e4cmr124185339f.12.1755735747105; 
- Wed, 20 Aug 2025 17:22:27 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-8843f7fec8esm589495839f.4.2025.08.20.17.22.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Aug 2025 17:22:26 -0700 (PDT)
-Date: Wed, 20 Aug 2025 18:22:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] lib: use utf-8 as encoding for C includes
-Message-ID: <20250821002223.GJ124814@bill-the-cat>
-References: <20250820231711.45677-1-heinrich.schuchardt@canonical.com>
+ bh=WfV/132JC5dMN905UUqh85JDxc9Gs7KQ9CX9vap+Cl4=;
+ b=iC12qZuI1sRFcV0dVJ3PpHUz6Kcjf4vUBucntQIwcOod2nRAa2viuMkqGztmXw3ddt
+ QT67c8/WSkpSv4ApQNNSSzOIrg0HUQCfTpRQkZ3ji761dpVo4wJ+Grgr/8QTsTSWIO24
+ UnZdJ0Gp00tOyQCDpip+Q2sMR0zxm5vHiLHn/l2AZ1QR+GTixAJlWMcc/DqvbTvlLAb6
+ Ta1NB76HDN4Lrjx/6218IuBccsZ1Grkg2byE/6ff6ameXU46ZYSL1f3qB7hDabNsE/Lb
+ +W1mEm6mKFQ7WTD5Ad+g5XtWZBRNXvI3miI5NBjJRiWZdPwAimW9CeQu7KtRMC5ih8uR
+ Qopg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755737513; x=1756342313;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WfV/132JC5dMN905UUqh85JDxc9Gs7KQ9CX9vap+Cl4=;
+ b=gQTpXqXgyKC57hsyLJ6iRcIbyg24jifQFsmxFWyp8nXRt/tkNRW5OSaE3sNvS/kVTK
+ 9ohGSVubrviqs+8cERiQMOWTawS3Pz9bIaJg5p3W9mnRQmecxRh90K9uFzzhQImKPIVY
+ Uwx4evTPKPnzu7ObiAC+2IjlwwF3JlXgHGf43b9i0FgXw6UF18KYB7+vcTInVWfUKbZ0
+ XY+QigSgwCBC3N7wN2dLWPO5OPXRqfdMSkM3r9NTRv9SWy4uR/zuSm+Nup3VzqQeZfGr
+ untq3l+eDUn7133xq/9vFH4fVqhLSrxSIuQhWFwVfNAe4nLVhf0K+VEvu2m9bn3866co
+ 7Ijw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXvBmDR9wDUpq7KM7fMcllsRjRsmoZCF/EAwX1Z4Pj+oi4qKd6Lj1/Z80+zrkZzp9RVAuevCnk=@lists.denx.de
+X-Gm-Message-State: AOJu0YztGsgSxmA3xVXZFbMO+bhx+2Kp8+t3rZGq81TJMtANHIf2BWuk
+ zoAQuqD88PSQtEBipYRyXLCJGUVbnmmQR+Ab09RqBrWiV/nWtRVCAIiltIeQoPjPANxX+hwKwOF
+ jBr+C36gDBd9X0ggXUNwDVKsHkKY1lTaJ2umTOI5Tjw==
+X-Gm-Gg: ASbGncvwNYUMIAv8CF2sJkH/WqN5aXuSV5l9lZ+Sb7iN3jUcOUvpY3gYRV8mtkDk8No
+ nUTnMLI15VKOzsScSc8w+oVLjAJhxi1vyeDYbQhVQ30cOdgCS+GHzj67zG7nuC9m9pOye8ugxwM
+ MXG97RADuBGGEhp+SWwvYVHj1qaVdroQnqHxrr+uns0FGwBhN8dP3UmsRJL8l48lNLQyMnkM2w/
+ fP+VbMT2Z17qTo+Xw==
+X-Google-Smtp-Source: AGHT+IG4foq8lQSqgv5s4aIL8osAemuzFzI7MfJPQgzBJ8zYdrNEgTm+uB4XmWcrfSQ5WYwe5L78d2+n79uPPU/fJ7A=
+X-Received: by 2002:a05:6871:4cc:b0:308:fc2b:b78 with SMTP id
+ 586e51a60fabf-314c656715emr373855fac.41.1755737512889; Wed, 20 Aug 2025
+ 17:51:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="f/QxtQM8urZQf4Lf"
-Content-Disposition: inline
-In-Reply-To: <20250820231711.45677-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250811-imx95-v1-0-569d8014172f@oss.nxp.com>
+In-Reply-To: <20250811-imx95-v1-0-569d8014172f@oss.nxp.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Wed, 20 Aug 2025 17:51:41 -0700
+X-Gm-Features: Ac12FXy1Qejs6frCXly_yxIlPluhJmCFsE24XkZ_VqU6JobLkP2CU_yJUtK40G4
+Message-ID: <CAJ+vNU0q4ogZuNSxCMNPwXq4-ojqi7ss8ABYip0Q-BfSkvaidA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] Restore support for i.MX95 A0 silicon
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, 
+ Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,50 +100,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---f/QxtQM8urZQf4Lf
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Aug 21, 2025 at 01:17:11AM +0200, Heinrich Schuchardt wrote:
-> Correct spelling of name 'Joan Lled=F3' in copyright comments.
->=20
-> This avoids warnings in CI:
->=20
->     Skipping file './lib/lwip/lwip/contrib/ports/unix/posixlib/lwipopts.h'
->     due to unicode error
->=20
->     Skipping file
->     './lib/lwip/lwip/contrib/ports/unix/posixlib/include/posix/sockets.h'
->     due to unicode error
->=20
->     Skipping file
->     './lib/lwip/lwip/contrib/ports/unix/posixlib/include/posix/inet.h'
->     due to unicode error
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+On Wed, Aug 20, 2025 at 4:05=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
+>
+> Changes for v3:
+>  - update the binman etype to generate a configuration file and a .bin
+>    file
+>  - update Get ahab-container.img in imx95_evk.rst
+>  - rename configs/imx95.config to configs/imx95_evk.config
+>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
 > ---
->  lib/lwip/lwip/contrib/ports/unix/posixlib/include/posix/inet.h  | 2 +-
->  .../lwip/contrib/ports/unix/posixlib/include/posix/sockets.h    | 2 +-
->  lib/lwip/lwip/contrib/ports/unix/posixlib/lwipopts.h            | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
+> Alice Guo (2):
+>       binman: add a new entry type to support .bin file generation for th=
+e i.MX95 platform
+>       imx95_evk: Restore support for i.MX95 A0 silicon
+>
+>  Makefile                                  |   3 +-
+>  arch/arm/dts/imx95-u-boot.dtsi            |  44 +++++++--
+>  arch/arm/mach-imx/Makefile                |   5 +
+>  arch/arm/mach-imx/imx9/Kconfig            |   5 +-
+>  arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
+>  arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
+>  board/freescale/imx95_evk/MAINTAINERS     |   1 +
+>  configs/imx95_19x19_evk_defconfig         | 153 +-----------------------=
+------
+>  configs/imx95_a0_19x19_evk_defconfig      |   2 +
+>  configs/imx95_evk.config                  | 150 ++++++++++++++++++++++++=
++++++
+>  doc/board/nxp/imx95_evk.rst               |  42 +++++++-
+>  tools/binman/entries.rst                  |  12 +++
+>  tools/binman/etype/nxp_imx9image.py       |  85 +++++++++++++++++
+>  13 files changed, 338 insertions(+), 191 deletions(-)
+> ---
+> base-commit: 0c558bbad9e7581808b358091d1fd979f860e8ac
+> change-id: 20250809-imx95-10b5b18e0ad7
+>
+> Best regards,
+> --
+> Alice Guo <alice.guo@oss.nxp.com>
+>
 
-Which test does this and can we just tell it to ignore what are
-essentially untouched upstream files?
+Hi Alice,
 
---=20
-Tom
+I have a board with IMX95 A1 silicon - with respect to this
+documentation should that be considered A0 vs B0? Are there any issues
+with A1 that would make the oei/sm/atf/uboot not compatible here?
 
---f/QxtQM8urZQf4Lf
-Content-Type: application/pgp-signature; name="signature.asc"
+As far as I can tell the only part of boot firmware that needs
+compile-time configuration based on silicon revision is the imx-oei
+and I only see special handling for r=3DA0. If I build with anything
+other than r=3DA0 the OEI does not run for me whereas building with r=3DA0
+the OEI's appear to run fine yet I don't seem to make it to U-Boot
+SPL.
 
------BEGIN PGP SIGNATURE-----
+Any ideas?
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKZmuAAKCRAr4qD1Cr/k
-CvfLAP4rrznXdvDSG3uH/XJlgNgjh/qgPV7jdnO7YGxe7twLYgEAxXBmTnIVpmOm
-dHLCHjjexVY1vZH0x2Y2Z87Hwthq+Qc=
-=VTQx
------END PGP SIGNATURE-----
+Best Regards,
 
---f/QxtQM8urZQf4Lf--
+Tim
