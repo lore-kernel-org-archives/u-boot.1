@@ -4,67 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 363E9CA0EFA
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 18:30:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A095CCA0EFA
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 18:33:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CD0F80B9B;
-	Thu, 21 Aug 2025 20:30:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D3AD180422;
+	Thu, 21 Aug 2025 20:33:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Y/zmkrQP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K+0eIekF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE43D81D5D; Thu, 21 Aug 2025 20:30:20 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD4AD8004F
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 20:30:17 +0200 (CEST)
+ id 55D8C80B9B; Thu, 21 Aug 2025 20:33:02 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 187A68004F
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 20:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57LIUDuF542870;
- Thu, 21 Aug 2025 13:30:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1755801013;
- bh=Rg+xDMqtUWZi7RtxU2L+8+HXwU0AbuW36OYrNFU1Qks=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Y/zmkrQPa4XE30Xe7ry/mBingQASx10qVnYPTWDYYyGm6kKl5O8ZSo7jaM8Bwb0UR
- VH6LpRGUXD4OMnGYoMfMUvAKmdMA7ZACQPgMiACjpH42urpSlsi0JbxGNnNWsadVgw
- JU4bIYv5/gTjwvTG1rQw+oDkr5c5sG9cNbz+8muA=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57LIUDkc3011985
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 21 Aug 2025 13:30:13 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 21
- Aug 2025 13:30:12 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 21 Aug 2025 13:30:12 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57LIUCFl2292554;
- Thu, 21 Aug 2025 13:30:12 -0500
-Date: Thu, 21 Aug 2025 13:30:12 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Judith Mendez <jm@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, Bryan
- Brattlof <bb@ti.com>, Andrew Davis <afd@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Michael Trimarchi <michael@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] mach-k3: am62*: am62*_init: Prohibit boot from UDA w/
- eMMC boot
-Message-ID: <20250821183012.ps6ygzebsxoi2hoj@dolphin>
-References: <20250710171135.669838-1-jm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-3111c59720dso771694fac.1
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 11:33:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1755801179; x=1756405979; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BPDVt4Nw4OJzAhv+uPqLzm9B/0O2lotIK+dcyOITAUM=;
+ b=K+0eIekF2ekZBP3qdRC2dBpiezYbc8uKtpxmXIltRyrygzKjOEQGGq8Q8rp/jK94QR
+ CtgOjgd+7fwt5yJ58466B4sILxAvVZB6kcYtJjHEQ2oeH91OwxOGHCa1Rv2lmwlf65XT
+ YTSHuqPA6IIUhcwHlnmPNKRmGVhsd5NHHzDWk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755801179; x=1756405979;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BPDVt4Nw4OJzAhv+uPqLzm9B/0O2lotIK+dcyOITAUM=;
+ b=rpFImdOY5i1DEfOWmDNyHKIrfS6Yh529SVpKuaho5t2YRlgUPvDwIIDN+Cq1gN1EGz
+ ii5avqVm27yL375IvoJJBIDXfMefsHBc6RyQwDc5mAMYgJLwTvfrcuGFjdyhMNws3daE
+ iTVqeBVcDca2NIPVG6HQ7NvVfhFdXyrb3hMTgGIbvzc5YQ948eu9cOg9+YaxOcTu5JLT
+ F61FMjs3PbgOrU9jXaqo1+X4mNPvvznMCusj3A6HoNt3GdvAZuPNyhDkZMhd92qP0k3p
+ vvap00kul4/PpYEMIx4rY+j4kIQOoQYEvq45FuxIsLCnIHBusQIyai7mBpvdodCNAZ7w
+ ADBA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXZpOisQf8i2s5BvlMy02E3nWQ/Lkiwd5wjJjaN1WImxFWtUX84qAjiKZwJRX9vwrZQXiBje3U=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHclMDTtE38e3j5xII7+iqd+qwfrWP2iiqCz2kdAtz6P7oEFGt
+ GcjS8dUdaQdtxNyYuNKkjCvGyv6RV7B1j2Xu8eoABo5KqlbtAUmowoLnw/VK4aayIKs=
+X-Gm-Gg: ASbGnct6tgIi9ui76wkTNSroL6gPNkBGx7G2ntBQ30wNlKWIuougjivvAm12hgkHZ8H
+ yAJv7Ivbi/eEpNo+3cHF0sxcSITMbj9PiT7WqsKBzvMfRn1v0i6fj4erhWEa7yvxIsuTk+iAf+d
+ mTw30jWe4q7I9v9ZImFIazDoY98MY20xm2IJFS/iSN5/jYLwVk/2GRBNJdPXjUv52kC5nXW0zRO
+ /pUHsocbr5VHrFkKF/EhTh9w3xxpTrF19xLRc9NAPHNKDS0cr67kzBKxVdNiJu+tX54u6um6vOZ
+ cnM5V9w4dGR7isIk30uMgHUA+/osL3wHJH8SuaODMGNOjVhV1BjjUGiG84mHlSSlYlQtqQYBNQn
+ GMRGIERuYBeDhrRpxFbSFzQAqird0LUCZqKHrX1rqBg9tg7AUB2bxh/Qh2EfyQM18VXI=
+X-Google-Smtp-Source: AGHT+IHCroJ2Gu25FvF3vLPne5Dr3nVNye25mfqdZD3FvdSKDrWZTfXpcHeMvFoX8ZZui9GEOKozTg==
+X-Received: by 2002:a05:6870:3308:b0:30b:cb2f:bae4 with SMTP id
+ 586e51a60fabf-314dcb54479mr127750fac.12.1755801178729; 
+ Thu, 21 Aug 2025 11:32:58 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-310abbad019sm5077179fac.25.2025.08.21.11.32.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Aug 2025 11:32:57 -0700 (PDT)
+Date: Thu, 21 Aug 2025 12:32:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Karel Balej <balejk@matfyz.cz>,
+ David Wronek <david@mainlining.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] ARM: dts: pxa1908: convert to OF_UPSTREAM
+Message-ID: <20250821183255.GM124814@bill-the-cat>
+References: <20250816-pxa1908-upstream-v1-1-6bd5ad032021@dujemihanovic.xyz>
+ <12753632.O9o76ZdvQC@radijator>
+ <20250821150404.GL124814@bill-the-cat>
+ <5032885.GXAFRqVoOG@radijator>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2DSnuLg+QXXNXMMw"
 Content-Disposition: inline
-In-Reply-To: <20250710171135.669838-1-jm@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <5032885.GXAFRqVoOG@radijator>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,92 +102,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:11-20250710, Judith Mendez wrote:
-> This removes support from booting from UDA when in eMMC boot.
-> 
-> When user selects eMMC boot [0], that is, boot from eMMC boot0 or
-> boot1 HW partitions, we should not boot from eMMC UDA. The current
-> logic confuses the end user and mixes two different boot modes.
 
-Wrong! what ROM uses to boot has no bearing as to what bootloader needs
-to do for rest of the system.
+--2DSnuLg+QXXNXMMw
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-https://docs.u-boot.org/en/latest/board/beagle/am62x_beagleplay.html#flash-to-emmc
+On Thu, Aug 21, 2025 at 07:18:45PM +0200, Duje Mihanovi=C4=87 wrote:
+> On Thursday, 21 August 2025 17:04:04 Central European Summer Time Tom Rin=
+i=20
+> wrote:
+> > No, sorry, I mean you literally do
+> > ./tools/update-subtree.sh pick dts commit-hash
+> > And then send that patch to the U-Boot mailing list. That will make it
+> > easier to manage resyncs later.
+>=20
+> Ah, sounds good. I suppose it's fine for that patch to be separate from=
+=20
+> everything else?
 
-There is a reason we chose this flow in BeaglePlay and other Beagle
-platforms - U-boot and other components keep growing and our emmc's boot
-partition is too small to handle things.
+Yes, thanks.
 
+--=20
+Tom
 
-NAK if you are trying to bring the old problems we solved back.
-> 
-> The logic was added for AM62A/AM62P with commit: 3b7893145e36, but
-> this is not a clean solution and fix will come later for falcon boot.
-> 
-> Logic was also added for AM62X with commit: 664593464634, but this
-> logic is incorrect according to TRM [0] under Primary Boot Mode Selection
-> for 'eMMC Boot'.
-> 
-> Fixes: 3b7893145e36 ("mach-k3: add eMMC FS boot support for am62[ap]")
-> Fixes: 664593464634 ("arm: mach-k3: am625: Relax emmc boot condition")
-> Signed-off-by: Judith Mendez <jm@ti.com>
-> ---
->  arch/arm/mach-k3/am62ax/am62a7_init.c | 4 ----
->  arch/arm/mach-k3/am62px/am62p5_init.c | 4 ----
->  arch/arm/mach-k3/am62x/am625_init.c   | 4 ----
->  3 files changed, 12 deletions(-)
-> 
-> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-> index edd43a1d78d..1d8644bd073 100644
-> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-> @@ -217,10 +217,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
->  
->  	switch (bootmode) {
->  	case BOOT_DEVICE_EMMC:
-> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-> -			return MMCSD_MODE_EMMCBOOT;
-> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-> -			return MMCSD_MODE_FS;
->  		return MMCSD_MODE_EMMCBOOT;
->  	case BOOT_DEVICE_MMC:
->  		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-> diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
-> index 6e3c66e5107..01e47deca94 100644
-> --- a/arch/arm/mach-k3/am62px/am62p5_init.c
-> +++ b/arch/arm/mach-k3/am62px/am62p5_init.c
-> @@ -262,10 +262,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
->  
->  	switch (bootmode) {
->  	case BOOT_DEVICE_EMMC:
-> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-> -			return MMCSD_MODE_EMMCBOOT;
-> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-> -			return MMCSD_MODE_FS;
->  		return MMCSD_MODE_EMMCBOOT;
->  	case BOOT_DEVICE_MMC:
->  		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-> diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-> index a422919fab1..eb7e245843c 100644
-> --- a/arch/arm/mach-k3/am62x/am625_init.c
-> +++ b/arch/arm/mach-k3/am62x/am625_init.c
-> @@ -316,10 +316,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
->  
->  	switch (bootmode) {
->  	case BOOT_DEVICE_EMMC:
-> -		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT))
-> -			return MMCSD_MODE_EMMCBOOT;
-> -		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-> -			return MMCSD_MODE_FS;
->  		return MMCSD_MODE_EMMCBOOT;
->  	case BOOT_DEVICE_MMC:
->  		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-> -- 
-> 2.49.0
-> 
+--2DSnuLg+QXXNXMMw
+Content-Type: application/pgp-signature; name="signature.asc"
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
-https://ti.com/opensource
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKdmUwAKCRAr4qD1Cr/k
+CjQyAQDco8BDDpBwE014HCml+gWChwlVZ0BANUikqsH5PYMnpAD/YapiOkMsX6PV
+QzOT9voqmUT5M6Wf9h1vVVvuqlPn8AY=
+=Knbi
+-----END PGP SIGNATURE-----
+
+--2DSnuLg+QXXNXMMw--
