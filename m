@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9393CA0EDC
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 06:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D054CA0EF8
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 06:21:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC68580B9B;
-	Thu, 21 Aug 2025 08:17:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BDA0080B9B;
+	Thu, 21 Aug 2025 08:21:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iLCZVozq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ygyhp4n+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 726B281D5D; Thu, 21 Aug 2025 08:17:58 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id BE4CE81E13; Thu, 21 Aug 2025 08:21:10 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E533F80422
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 08:17:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BEA380422
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 08:21:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e95011504d4so658870276.3
- for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 23:17:55 -0700 (PDT)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e931c71a1baso805298276.0
+ for <u-boot@lists.denx.de>; Wed, 20 Aug 2025 23:21:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755757075; x=1756361875; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1755757266; x=1756362066; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JxAm+9dtG/yAMxzxdnP8QX4p+PxVMuVVkPQogQgWBc8=;
- b=iLCZVozq6632IQ8pOlpN8HV/bz4Rr7J/UejvU9MDc7v0l39oXC8ep2rrqUdzd9uuid
- sHf6eiIcCTOOBWIxphVW0OjacIbyzCEDM2GU2KCfqU0al7g2qABubL9oUkBaYXCcBY/G
- QtDjxtkfUjwI2SRFL2UKRj6YNMDBM/E7a/naFRxWIsA/A7EA5R7U8MiesTdDp8hHXZRb
- 2nc7Pvv9GSo3uZb+7+mjbJOyAknkMvu2c9kW7YPpAiNCl2mkhXg45AodSFuYAFeLf53L
- Ugqn5hRI1rTQH6DeqrjEaVdESrEtB5OwMVYNFSJYsZiW/FliDtZ8xj3aPM931mH97VIk
- 0XJg==
+ bh=2gOf5fWCT3vtUT/qu3PjQhxI58FwQ9Max16dlVPBbTs=;
+ b=ygyhp4n+WsQUTQLzh8H5puKfr6LdMP7PGtX47+McaHDIRjBWhg7RvwFSxx3celDKHN
+ uOW1bntrsciLjjAf5/vMoPD0KT7LQVIhsNHnbgkp8ZIXGaGf7cCr8VSUpQYBwRmt+s+Q
+ RD1peAnRwulAG6jN8fOQ7bgtzVKfyXQTtYVVrSSlHHUfLZzrBDFBPfilLruzqZ4yT6Ul
+ U1jATyIcDsZMWne8BNHDpHptnSqy2hexR8pR2FBajZvvFydfFtpJdfnJrN+0rrqWcenj
+ BnLM9P+JzUxNIJLJy0TcnYYsKibVG9GWsX+jAUNi0eoExwzN91Yjuem0O8RSXMwJhTzC
+ 0Fcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755757075; x=1756361875;
+ d=1e100.net; s=20230601; t=1755757266; x=1756362066;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JxAm+9dtG/yAMxzxdnP8QX4p+PxVMuVVkPQogQgWBc8=;
- b=cb/uRhCCPI2acH9QjBQv9PSS0YcFYY0GnHYXhTN5RKHqQMaJRc6VZGXVzxHCcPKSJ2
- vL6+Dal2j0ZYv4r+OL/m4aCzbOiwNQ6ep5P+9qUOB158Xlf3Lua2hXoKC/vnU+r/lQU8
- se4Hr0nItr0er897v4A6Iph6GVCJDICDu+yg352T5afk4C9kyXvTn9/QwoYudl4oXnuJ
- ml4dHPKI5VJPEjhWIULlQT1Iv9uW9TFuKfv0SCE1fsTahbagikMAZBU4CQL2MUTVhJ/5
- U5t3tH0AnTx2/aWf7TjYLigHbC/iMXtjxB1gwRkTkk0IWoWeidO5P8CtG3whAruQN4X1
- Ldqg==
-X-Gm-Message-State: AOJu0Yw6boc6kIeujP7cqyTjjefx+VKZPHGB4sJ5E2i161cxV5wJFuGu
- ZudHMLLlnUqvhONSLoU5YMfnndhmooxHyVPgfU3eSLL+NlRM6ylSfL8fbuxJ3NfoFzRIPt8OZ4c
- 2We40/OwiN0NgFWSW5lie7v8od7SxO48HZwiAgF71CQ==
-X-Gm-Gg: ASbGncs/WLSGKV8iqM8JXS99CZn9sFP5cPOJvM4epAZcqJhFrGjK5Y1y4DJnxga3zN/
- Igo+NGt+29aFBHPGWlQM+ueNLje8Dzwo4mlhaefOCdC6K+1wHgxeQWBSTi5dKl5NB5TkyjU0hZA
- qFkGCwcAFzo8rE6wV6BmmavLFaPNUl0rhx9ChOo4X1YgvNNduwNnp+bqOSi7W/MLYCPLkMrO5V4
- iTTWZTxe8SwLt5NYTSm60r+JZ60HMF3i+tlA/n9
-X-Google-Smtp-Source: AGHT+IHS9hIZtcDSCiyHNdvS8wYjTZbm/e0tZzuimd6/m77/aH2GJ3wh9vHsPiNy6/R2kQW9ftYroS4Ayj1KCdZAc2A=
-X-Received: by 2002:a05:6902:3485:b0:e94:fa5b:5b9e with SMTP id
- 3f1490d57ef6-e95088ffa74mr1305186276.16.1755757074714; Wed, 20 Aug 2025
- 23:17:54 -0700 (PDT)
+ bh=2gOf5fWCT3vtUT/qu3PjQhxI58FwQ9Max16dlVPBbTs=;
+ b=PUb4Xjb/HyknX9ak4i5isL6rJwhcJ27XipT1hQfdKpai8vh1A2+vcMTFpMSLkG0e5x
+ 0ibbhENB/TVTDxAeZcNOQ830gaQCk+W9Egwkd4O00aF6gUp/9wOQjKuBTuwtp+A3DdLl
+ ksNfnnFnHZOmG2f/iDhfwKMz7L6jR7J0K9FX+2X1nYq97QxaluhIDxUVc2c3nKiDFbWS
+ ga885NmUa5ccfu46pE2/6RP3bEN8jjVQlu7DWKQTgmRnUt/jwvrFHfRScXA4zK1r8Leg
+ IRZk6Uy239BXsK0BPrOa/Sdi3Yl25C11cHgd6AQpK5QQVUv1iPhhelzA2m+DXOpLbp+e
+ 8Nfg==
+X-Gm-Message-State: AOJu0YzATZ5y+OEHn48e1jnCVUg8EeoiZduM5h8E/lvmBb7UYHnxCliz
+ Xzt06KBv44pi2jhF0BuQu36YJUkAkRgjN9ZEA+7pramo9uKoylXuGSv0jZ3BWfGJ75kD9M71p0t
+ XYxZDVaHurZPOTALIorqek7CJTw/YslaHXJrF1lNqNg==
+X-Gm-Gg: ASbGnct71eirChu4gVFr4vaD4AXMthdi6Qm7+Tk5kRnvbmjE7U2UiSGQE03ZPDqgAJJ
+ nhMg0fa9kNw50lpBTbZFnyX55SE6qZo+Xic0HLevWEN4LNF7QJTVutxzdLFPx01xiIGVvd2iQ/k
+ 3vqqE7V3IOWbRRshW+yNB9UFmagvZ4tym5ZWasuxZc32HfaYMO0u5gXpNl6/CQjFsDJHofq78zE
+ KTiEb8onXbFNZFQ0f2w6jNDO3DCGfuDNW4OUDVV
+X-Google-Smtp-Source: AGHT+IHCkg1oa9am+Khulvl98h09ce3e87jG+/UBwup3phPc5hvCdaNQ9kD5LzxzoeM4rk/qlx9/oCn8ZarsqpGi3WQ=
+X-Received: by 2002:a05:6902:2b89:b0:e93:2de7:7453 with SMTP id
+ 3f1490d57ef6-e9509a7a85cmr1356012276.48.1755757266294; Wed, 20 Aug 2025
+ 23:21:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250703133533.104758-1-anshuld@ti.com>
- <20250703133533.104758-4-anshuld@ti.com>
- <DB63G6T323QW.2AQUT656TKCGJ@linaro.org> <DC28GWHJ2HQM.2OO7QTNTJ2UMT@ti.com>
-In-Reply-To: <DC28GWHJ2HQM.2OO7QTNTJ2UMT@ti.com>
+ <20250703133533.104758-3-anshuld@ti.com>
+ <DB63KZ89ZWMY.3KGIHVA42RGM4@linaro.org> <DC27M9DO6JP0.2ZG4RG8ZUIRMP@ti.com>
+In-Reply-To: <DC27M9DO6JP0.2ZG4RG8ZUIRMP@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 21 Aug 2025 09:17:18 +0300
-X-Gm-Features: Ac12FXzYP9JYVKJJmSRxc9H2POvmpezh6NlGuz65vf_mThy3MxEZATVt8FIo2k4
-Message-ID: <CAC_iWjJNTw7DKOuJ0_hJiVMZxWZn0cAY54ybJaWdbBNuWira4A@mail.gmail.com>
-Subject: Re: [PATCH v5 3/4] mach-k3: add dynamic mmu fixups for SPL stage
+Date: Thu, 21 Aug 2025 09:20:30 +0300
+X-Gm-Features: Ac12FXz0N5mVttm6c5fHKim1BrggJOz4bEXSZ83ly9bCE1UsB3nIBdjrs_52OTE
+Message-ID: <CAC_iWjJ9Ra6x=J3F4_yVJrh-YvLP-_Bi_QkpPfR3oaiSbftLig@mail.gmail.com>
+Subject: Re: [PATCH v5 2/4] mach-k3: add runtime configuration of MMU table
 To: Anshul Dalal <anshuld@ti.com>
 Cc: u-boot@lists.denx.de, vigneshr@ti.com, trini@konsulko.com, nm@ti.com, 
  robertcnelson@gmail.com, w.egorov@phytec.de, francesco.dolcini@toradex.com, 
@@ -95,65 +95,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Aug 2025 at 17:52, Anshul Dalal <anshuld@ti.com> wrote:
+On Thu, 14 Aug 2025 at 17:12, Anshul Dalal <anshuld@ti.com> wrote:
 >
-> Hello Ilias,
->
-> On Tue Jul 8, 2025 at 1:39 AM IST, Ilias Apalodimas wrote:
+> On Tue Jul 8, 2025 at 1:45 AM IST, Ilias Apalodimas wrote:
 > > Hi Anshul,
 > >
 > > On Thu Jul 3, 2025 at 4:35 PM EEST, Anshul Dalal wrote:
-> >> On platforms with spl splash support such as 62p and 62x
-> >> (CONFIG_VIDEO=y), the top of DDR is reserved for the framebuffer.
+> >> k3_mem_map is used by u-boot to configure the MMU on k3 devices but
+> >> currently it's a static array which does not scale for platforms with
+> >> non-standard load addresses for ATF and OP-TEE. Additionally on systems
+> >> with limited DRAM, more space is mapped than is available on the device.
 > >>
-> >> The size of the framebuffer is computed at runtime by video_reserve.
-> >> During the MMU configuration an entry corresponding to the framebuffer
-> >> should be dynamically created to properly allocate the required space
-> >> for the framebuffer.
+> >> Therefore this patch adds a new k3_mem_map_init function which can
+> >> be called from dram_init to configure the table at runtime where we
+> >> can query the required DDR information and reserved regions from the
+> >> device-tree.
+> >
+> > Is this a problem for k3 only? This kind of code should be aimed at the mmu
+> > support and improving armv8 overall, not specific platforms
+> >
+>
+> In K3 we try to support a wide array of SoCs with a single memory map.
+> Since the requirements are similar across all K3 devices i.e:
+>
+> 1. Map all DDR banks
+> 2. Create carveouts for ATF and OPTEE
+> 3. At SPL stage, map framebuffer region for VIDEO enabled devices
+>
+> Of the 3 here, #1 and #3 could be useful for ARMv8 overall but #2 is
+> quite specific to the platform's boot flow.
+
+Option is also very common across platforms. I don't remember the
+details, but we do have code adding op-tee reserved-memory nodes etc.
+
+>
+> As I see it, since most of the existing platforms are using a static map
+> and thus won't benefit from a generic way to handle #1 and #3.
+
+ I think this is just a limitation of the current code. I've seen
+enough platforms only mapping one of their banks for example.
+I am not asking you to fix the entire codebase, just extend it to the
+part were k3 is supported, but anyone who wishes to do something
+similar can re-use your work
+
+> The few
+> that do have runtime fixups for the memory map, only seem to have #1 in
+> common (imx and renesas).
+>
 > >>
-> >> Therefore this patch adds k3_spl_mem_map_init which adds the required
-> >> MMU entry by querying the gd after the framebuffer size has been
-> >> computed in spl_reserve_video_from_ram_top.
+> >> A dummy implementation is also added in r5/common.c to allow the build
+> >> to pass without masking each call to k3_mem_map_init behind an ifdef
+> >> CONFIG_ARM64.
 > >>
 > >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> >> ---
-> >>  arch/arm/mach-k3/arm64/arm64-mmu.c | 13 ++++++++++++-
-> >>  arch/arm/mach-k3/common.c          | 17 ++++++++++++++---
-> >>  2 files changed, 26 insertions(+), 4 deletions(-)
-> >>
-> >> diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
-> >> index 49dd6fcb23b..b1b287f2114 100644
-> >> --- a/arch/arm/mach-k3/arm64/arm64-mmu.c
-> >> +++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
-> >> @@ -131,6 +131,13 @@ static int k3_setup_extra_mem_banks(unsigned int *map_idx)
-> >>      return 0;
-> >>  }
-> >>
-> >> +static void k3_spl_mem_map_init(unsigned int *map_idx)
-> >> +{
-> >> +    if (CONFIG_IS_ENABLED(VIDEO))
-> >> +            k3_mmu_add_cachable_entry(gd_video_bottom(), gd_video_top(),
-> >> +                                      map_idx);
-> >> +}
+> >
+> > [...]
+> >
 > >> +
+> >> +static void k3_mmu_add_cachable_entry(u64 start, u64 end, unsigned int *map_idx)
+> >> +{
+> >> +    if (start >= end)
+> >> +            return;
+> >> +
+> >> +    k3_mem_map[*map_idx].virt = start,
+> >> +    k3_mem_map[*map_idx].phys = start,
+> >> +    k3_mem_map[*map_idx].size = end - start,
+> >> +    k3_mem_map[*map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> >> +                                 PTE_BLOCK_INNER_SHARE;
+> >> +    (*map_idx)++;
+> >> +}
 > >
-> > I don't know wnough details for this board, but generally speaking we should be doing
-> > this commonly for all arm64 platforms. There's mmu code for that. Can you explain why
-> > this is only useful to k3?
+> > Doesn't this need a break-before-make?
+> > Also why does it have to be a board specific function? Is there something mmu_change_region_attr()
+> > doesn't do ?
 > >
 >
-> Could you point me to the relevant mmu code for it, from what I know
-> U-Boot doesn't map the framebuffer region at SPL stage by itself. Though
-> I'll replace k3_mmu_add_cachable_entry with something like
-> mmu_map_region in the next revision.
+> Oh, I wasn't aware of that API, I'll update in my next revision.
 
-We have functions like mmu_set_region_dcache_behaviour(),
-mmu_map_region(), mmu_change_region_attr() etc. If you are missing
-some configuration for the MMU, we are better off adding it for all
-Arm platforms, not k3 specifically.
+Great, thanks.
 
-Thanks
+>
+> Thanks for the review,
+
+yw
 /Ilias
->
-> Regards,
 > Anshul
