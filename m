@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B484CA0EEB
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 21:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6002CCA0EFA
+	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 21:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9A9282998;
-	Thu, 21 Aug 2025 23:00:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 98ED882BA7;
+	Thu, 21 Aug 2025 23:00:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cb+H6DIj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kZVp/PdN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E28D81D5D; Thu, 21 Aug 2025 23:00:34 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 52FAB82998; Thu, 21 Aug 2025 23:00:36 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6ADFB82AC4
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 23:00:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BAAA82B07
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 23:00:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-74382015df5so338949a34.3
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 14:00:31 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-74382048b8cso861642a34.3
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 14:00:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755810030; x=1756414830; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755810031; x=1756414831; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GOLVw6C2w05OsWjIcGSEgdJfoAIu6rcMEpXYfYI9bFI=;
- b=Cb+H6DIjmXIIz2GnNYOhRbPcWB4VDVXStc/e0cRFvJ9TziPbyxnYIc+CWvGIQ56Eag
- ZvD+Hx3T5zw3gWyE/ntnekQjbPf9tcJ5avJPHxdYIJm78VPPkBlX8/a6Wv4P34Ow/ABd
- 21/3mCNYGrEOfiVmdrC0hnnf7SoYJFGkop9XY=
+ bh=XWtTs+s4itAxme/VlZu3dc39geC2sfQrQwzWiS/PRGo=;
+ b=kZVp/PdNbZvp1uKZb8SlxicIhNBEDEKbUwVurg8fIEpyVkSCfe+02iAEOLcxy5OmDk
+ cym7PnLneQy0GvsjepNqXylctUeKMiHIYcL/anQlWq7+xG6DK6GOWpHiz8YpRkat1gB0
+ LhvvEgNfbakTduLW6HNQ9aR2mo78EUPfOi2cg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755810030; x=1756414830;
+ d=1e100.net; s=20230601; t=1755810031; x=1756414831;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GOLVw6C2w05OsWjIcGSEgdJfoAIu6rcMEpXYfYI9bFI=;
- b=O+m0m+fjhW9I3B5W9b5ISsfXevIRK0Qb0XeOhJX9l+2fD1MH7n4Qvj9Z9vWzVITEh9
- puFqYO1G5NDY8Cy+xXhAgYMTZ0pTBy6ukT9ZkjAdct11QhFAYXNdfRHfyuImXOX7q756
- n6F5pLz9r99p0IMkIMoD9t/E6Fx4n2zVXyXAvnD967Ee8KbdIlMYtuxbuJ4NF9Vx7rhV
- bWWDX8uYiBwQL8pHcidpx36kcgbK3u60j8j5+3zBBhla335zxtDEbAesolcfmKRcrxxo
- BRkWolLaoqI6NqSAtLYdGN6/Z2NOCfg8hL7xOWDjGk9ZUjHnooq/ViBZ5jPd1DIRTejP
- ge0g==
-X-Gm-Message-State: AOJu0YwjcHa904EiVymV5aLYzUEtz0V+f7t74Wljpa7zNQp8H4/S04I1
- MCrlczHgZsbIZuQFtnntzFM6mg71InRJxpgH0MX4mwBTDmJsF+wfUvuzPM5Mlfz0DzV0tcNGvIx
- ocNgMi9E=
-X-Gm-Gg: ASbGncvIkAQvoEgEXhF9GtXLirkf0ZGu+cqk4vxLT7IUFnZ9wRAy96JiNKRtZbOcJ10
- dL1i3hi0YQLcCggnGGSc/oxmLzrCIbWyxY3mufCbS5B9r9ahN2HS3nhr1cHFgyqeMQH0CEahD+z
- MYjalLor5snAp4jNUxCo4+IQymvKdHWdu/DbcfGz9H1Egqg6dr74ie2NFmyWZ1nqaU4v8hZexAL
- M27ywY7iCn0tLKnt3cZCEENi8htBFrziTvtnAuuHsJu3oVTnUnKCG3Eja2CZLmq/4JwjZ15pQf4
- pOMAZ2AuAsE4jxVMjWhoqgO154iyOcoMDLUp7UQiNc4VGIp0TCFHe7R1QD++YBMR6WyDP2tC5Jx
- KtCWRiJHuzhfVNq9ex7+MVv2ak2YcpeRQYZe9zp117ozEdU9ocamqd0s=
-X-Google-Smtp-Source: AGHT+IGVOpO6zcI7vbmsMchLnG5vGUM1DMtVGwGI+aOqbbR0q+S8z9/4ZNiF+mr4kQzAsW4mitsxXQ==
-X-Received: by 2002:a05:6830:4890:b0:741:c0a9:9494 with SMTP id
- 46e09a7af769-74500a5b6bemr507433a34.17.1755810030044; 
- Thu, 21 Aug 2025 14:00:30 -0700 (PDT)
+ bh=XWtTs+s4itAxme/VlZu3dc39geC2sfQrQwzWiS/PRGo=;
+ b=HGfCLD9OKfaAvcHmw6PTUVTkYE08C9dk7j3PP3FTHMjL3ulQiEx6BsmU06ANpBsn+k
+ 5PCJQF4lDy8TFcBGQzZ6No1Sx2YVlkomvXu2RNTdVnQ5p2DrKoBqYUnyeL2lY3nh1IDk
+ TNxZahoZU7ZLhOww3Q9nU2GtwrKFNwc7dSO7MfmAyb9WcgrbZ/X+1V8AFe5FmvzB8BIk
+ Kn3eKb9A8xp4/BxERrFzmc0DO9ioE54mLA72+0FAek9rFqAXSKpKXksvtBmeropHZCTL
+ v+/6f44gXxaf/CsdC7JJi+wL6FVvRzIi6G2FEWP3CwVBNf7kZ9xflFbTargGgjI4R0OG
+ lwwA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVIDQ9vDOBb2nFk8HhYlfdtuECP9NBGZggRHTdj1E4EEIknXHNdUBfrVOtcEBdA53Huc5LDBdM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywr7fg6IOjo4zrw3dEFqjxNJNCMwgETaH5u1Y1iPdBDK8w2uIc+
+ VECIioaB7+kT7KwVdZIcBkgS6hfoN/IK1m4eldTd12efXE2MvU4G9KI53DVup8bNa2s=
+X-Gm-Gg: ASbGnctmKtYcDRtiFG1EysXKoitQVkThp2BdCgNPvcR2hxTJJ21txOGi4taTty+REzF
+ DuBggqWjSTjEbse9Hj/2+mlBqE22y/eGfPRH7i8PaMVQns4HE02ZPkx7T5hxEqryVEJIohdeivq
+ +AHi++pkI8VjU8irCP2KzfYU7E/AEG6hOpwfsJoZzp/g96P1Sa6tOVvGiZPYP5fpcGp26Nmw3F0
+ HXOzLtiMUImi5j+vLFbGnKSA30NwO7mSncSWxuB5RnEHY2CuEDZhPf9Zbx7v3gHn6fxJ9Y+eEIM
+ gKYYzhtRcx/4j95oObf67gL44Otmv3ii93YZigiEzPBgFxXoFFX18EUpBblW5MvAj26m/eJ/kDn
+ xHeRPhVORiLSdcf4wcTnqjaZorCdt+5nmcaY3/ncQxiHNnudfzdevCi8=
+X-Google-Smtp-Source: AGHT+IETMC0TeXOof6C/wkNaxhBObhSANf8kzjC+oBEYNrvrMrqY3jXnDu03iQXqiCpKY17MwpTU8Q==
+X-Received: by 2002:a05:6830:6011:b0:73e:9293:556e with SMTP id
+ 46e09a7af769-74500905585mr580013a34.6.1755810031013; 
+ Thu, 21 Aug 2025 14:00:31 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-744e06a845esm1631957a34.20.2025.08.21.14.00.29
+ 46e09a7af769-744e06a845esm1631957a34.20.2025.08.21.14.00.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Aug 2025 14:00:29 -0700 (PDT)
+ Thu, 21 Aug 2025 14:00:30 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: vigneshr@ti.com, praneeth@ti.com
-In-Reply-To: <20250814152145.2853307-1-anshuld@ti.com>
-References: <20250814152145.2853307-1-anshuld@ti.com>
-Subject: Re: [PATCH v1] remoteproc: k3: update compatible for am654 syscon
-Message-Id: <175581002909.928164.4782059063073591013.b4-ty@konsulko.com>
-Date: Thu, 21 Aug 2025 15:00:29 -0600
+To: Fabio Estevam <festevam@gmail.com>
+Cc: tuomas.tynkkynen@iki.fi, jan.kiszka@siemens.com, u-boot@lists.denx.de, 
+ mark.kettenis@xs4all.nl, Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250814181436.1598067-1-festevam@gmail.com>
+References: <20250814181436.1598067-1-festevam@gmail.com>
+Subject: Re: [PATCH v2 1/2] Kconfig: Convert SYS_EARLY_PCI_INIT to Kconfig
+Message-Id: <175581003019.928164.8759574554881375454.b4-ty@konsulko.com>
+Date: Thu, 21 Aug 2025 15:00:30 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,23 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Aug 2025 20:51:43 +0530, Anshul Dalal wrote:
+On Thu, 14 Aug 2025 15:14:35 -0300, Fabio Estevam wrote:
 
-> The existing compatible name for U-Boot's k3 system controller driver
-> i.e "ti,am625-system-controller" has been added to linux[1] device-tree.
-> This compatible in kernel is meant for configuring the Control Module
-> registers (CTRL_MMR0).
+> The CONFIG_SYS_EARLY_PCI_INIT symbol is currently not supported
+> by Kconfig.
 > 
-> However in U-Boot, the matching driver was being used to load the system
-> firmware on the secure M-cores by the R5 SPL and therefore must be
-> updated to a different compatible to avoid conflicts.
+> Make it a Kconfig symbol so that users could select it via defconfig.
 > 
-> [...]
+> 
 
 Applied to u-boot/next, thanks!
 
-[1/1] remoteproc: k3: update compatible for am654 syscon
-      commit: 2792cbf5d281b519692c546849638b2141046a4e
+[1/2] Kconfig: Convert SYS_EARLY_PCI_INIT to Kconfig
+      commit: 0b0641470b3037e7e212b40c7101c1269653f86e
+[2/2] qemu_arm: Select CONFIG_SYS_EARLY_PCI_INIT
+      commit: 51214ffcc543dde83ad687c35cb2de61a34e0602
 -- 
 Tom
 
