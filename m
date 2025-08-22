@@ -4,64 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 893EACA0EED
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 19:06:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25952CA0EEB
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:12:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CEF180422;
-	Fri, 22 Aug 2025 21:06:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 2CEFE80422;
+	Fri, 22 Aug 2025 23:12:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IXkhdv+y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MKFjMfKT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6075A80548; Fri, 22 Aug 2025 21:06:49 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9C56380548; Fri, 22 Aug 2025 23:12:33 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50A4C8006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 21:06:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0168C8006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:12:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4c7qRn2hSkz9tS7;
- Fri, 22 Aug 2025 21:06:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755889605;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JkktD82t/vACJI1a9RQHtp7OwVwoXYuKqbvnB68DR2U=;
- b=IXkhdv+yhE3cQtuvwq2FEf6/nGP4ZINq+Q3bZj9oGg9iCiFC5Kid0GR2mhPah/jD9sGQfp
- p/0n48ZZDnLfqv7O+8yCJr76uwOptj29kh7p0luKrtaIA1mmDm4VXy8rgac8jF5WLWWlRQ
- CmM1+Xur9M0OVbOiU4dlWYxk4zPNrMWCrEaUDww5NkrS+G3q9fYH5BYtimNQiDILqMB+ey
- RIsb+lWnsyPVdbLRCXD1bQorgsiKth2X+UVfq/tJoYLCKS95qruDxzgbbenx/o0AcE8hac
- e80BauIsbgwK33ds2Iz8x+KN+ActZx6JwwNfNjstceFG1scNGwsYz255pRo3Uw==
-Message-ID: <2e7151dd-c793-4ad7-ae95-5173927ad40e@mailbox.org>
-Date: Fri, 22 Aug 2025 21:06:42 +0200
+ spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-61c325a4da7so458096a12.0
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:12:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755897150; x=1756501950; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CJRZj7XkW7ZcJu8shF+/ApG+r1ifMxstaYCmtGNKd04=;
+ b=MKFjMfKTB+TUltJgfPVGrvGiTtL8LlIkMka0mjsQHUXabqTNVRxF3XSxsZxfXF4iTY
+ 6ZEcnIiIiIUaPw8u1AF+qvYS0E9BVKeTRXwZVZq513CN8qKiw5+IYEXHNuEqSATsHTrL
+ GsaeY0chErOKofCPNngY5bq6QjDnUMKiLv5pD2hS12bZFyGvBxyeO1MXVPqJERaTo1AR
+ 7TIs1Fkf3Gx4M8us9WhbTvm4KXykIqJ861Zz2awP5a8hIJ2wk+tt27rwo17PIIND4kVD
+ 3Hm1kD/B7jDdC03/hJvJw6cOucyKLImzFyZkAyy9c/XWxhK/3LjvwpEXN4268y46fBno
+ RzWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755897150; x=1756501950;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CJRZj7XkW7ZcJu8shF+/ApG+r1ifMxstaYCmtGNKd04=;
+ b=NHamxjVQjDGVV7bwj1i/ujb1UpHIMS/k17beM4MPDdrAu3ETIm/2t2TkW1tjqh6Ury
+ Bm3aFrO0ePqGlAMyoKX6Y2WD6MDP8P0sZ7W1CLf6ZczMvi4pj7DlDqIyS7QQJg14f9Qg
+ +5dQovYIYr3Yvt3Zv8yo8By76mx1sb2xuQjU8YZuH7OH3xU8VH3KEOW8PzqaGJLLLan1
+ vHEsFYtyxOQa2UHD9OVjfDLY95UKVHOwpqymAzXbDDksJM/PLf1Ivy4bJSvrxLmI8Xeb
+ XkpGlZRgbd987D+fz2GB2hTWm/OYJFSkYUYen61ecWz/jNda+tYFg0tOQPH63I19LXEc
+ 1bDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUvvIjzb1/nPayLY/X3nD424dIx5uMPRWioz27pC4m9doUht/77om8wp0pz2R4vkvWgWDmVjq4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1XlGUAJPajDSeCSKVI3Jytw91KF8FJOGXjCFe4l4vZ3+WbNRm
+ JyJxD8RC2hrWsHq8RS3bmeSqw/KSBEhQgT2IZixajtjTfw3FnWLkcZYyV33bzZqXj78rDzW+Vda
+ VNUnzrkoQnxIkDZOClYRlIJNq7QuL15w=
+X-Gm-Gg: ASbGncvNkTAa9kNQd4MWgleBhrhQ5+K2vBh4vyOTtaB7gCCSKNnhFv4eZ8xIY0MhwVj
+ tUODsE0H8n/GtZKiMChfBT9dr0VsVZhfuVOjdZK2HzqOAyZRFB7PcI7spKTs4mTw0z3UTt3gmyX
+ 7HLvy1EkZgcXIozucro1MxjCs5+eyVXVYcip89514Ut+Qn34duk/KtddZmR1nNS+kziEsLi4eEf
+ knFCiK3t57Cug8GG+LjvmZxUpo/9qaDufzCFnEL
+X-Google-Smtp-Source: AGHT+IF/iL5s0nolJFixoDdGv4gOtY5mL1eIboxI6Kw8pPL9uPU/+PB31GF1qwTXN5Hq8JNgiyx9pekg7+RHWggCTvM=
+X-Received: by 2002:a05:6402:4406:b0:618:47a0:3ba2 with SMTP id
+ 4fb4d7f45d1cf-61c1b6f3a56mr3328648a12.24.1755897150187; Fri, 22 Aug 2025
+ 14:12:30 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/10] usb: host: dwc3-of-simple: Add exynos850 compatible
-To: Sam Protsenko <semen.protsenko@linaro.org>,
- Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>
-Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-References: <20250806222710.23773-1-semen.protsenko@linaro.org>
- <20250806222710.23773-2-semen.protsenko@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250806222710.23773-2-semen.protsenko@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 93ce73e3afb6581a0b3
-X-MBO-RS-META: hnh5qai4ifzdacfqdwp8t31ynoxook8c
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
+ <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
+ <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
+In-Reply-To: <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
+From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Date: Fri, 22 Aug 2025 22:12:19 +0100
+X-Gm-Features: Ac12FXyKrt9kC1QFe8-zX-45rJ-XIKm2_dEMbdSncKkgZKS6j9ZOfSfck5uX_9c
+Message-ID: <CACAHuLD=fkEKq9e83f3ePQHO1N5dnVsRuFHwR6U12jv2EBJnew@mail.gmail.com>
+Subject: Re: [PATCH 06/10] doc: Add riscv to the list of architectures in
+ tools/buildman/buildman.rst
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,11 +97,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/7/25 12:27 AM, Sam Protsenko wrote:
-> Enable support for Exynos850 SoC in DWC3 host glue layer driver.
-> 
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+On Fri, 22 Aug 2025 at 01:04, Adriano Carvalho
+<adrianocarvalho.pt@gmail.com> wrote:
+>
+> On Wed, 20 Aug 2025 at 22:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > On 11.08.25 01:37, Adriano Carvalho wrote:
+> > > Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> > > ---
+> > >   tools/buildman/buildman.rst | 3 ++-
+> > >   1 file changed, 2 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+> > > index d5d22732088..7944adcd867 100644
+> > > --- a/tools/buildman/buildman.rst
+> > > +++ b/tools/buildman/buildman.rst
+> > > @@ -478,7 +478,8 @@ Setting up
+> > >
+> > >      At the time of writing, U-Boot has these architectures:
+> > >
+> > > -      arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, sh, x86, xtensa
+> > > +      arc, arm, m68k, microblaze, mips, nios2, powerpc, riscv, sandbox, sh, x86,
+> > > +      xtensa
+> >
+> > The output examples above this line should also be updated to show RISC-V.
+>
+> Do you mean what's under "Check the available toolchains"?
+>
+> To reproduce, I would need to install quite a few toolchains. If
+> anyone already has all those toolchains they could just send me the
+> output. Do you know someone who can do that? Can you do that? Or
+> should I just install all those toolchains and reproduce?
+> [...]
 
-Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+With docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025,
+I got the following:
 
-Thanks
+$ ./tools/buildman/buildman --list-tool-chains
+List of available toolchains (17):
+aarch64   : /opt/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
+arc       : /opt/gcc-14.2.0-nolibc/arc-linux/bin/arc-linux-gcc
+arm       : /opt/gcc-14.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc
+c89       : /usr/bin/c89-gcc
+c99       : /usr/bin/c99-gcc
+i386      : /opt/gcc-14.2.0-nolibc/i386-linux/bin/i386-linux-gcc
+m68k      : /opt/gcc-14.2.0-nolibc/m68k-linux/bin/m68k-linux-gcc
+microblaze: /opt/gcc-14.2.0-nolibc/microblaze-linux/bin/microblaze-linux-gcc
+mips      : /opt/gcc-14.2.0-nolibc/mips-linux/bin/mips-linux-gcc
+nios2     : /opt/gcc-14.2.0-nolibc/nios2-linux/bin/nios2-linux-gcc
+powerpc   : /opt/gcc-14.2.0-nolibc/powerpc-linux/bin/powerpc-linux-gcc
+riscv32   : /opt/gcc-14.2.0-nolibc/riscv32-linux/bin/riscv32-linux-gcc
+riscv64   : /opt/gcc-14.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc
+sandbox   : /usr/bin/gcc
+sh2       : /opt/gcc-14.2.0-nolibc/sh2-linux/bin/sh2-linux-gcc
+x86_64    : /opt/gcc-14.2.0-nolibc/x86_64-linux/bin/x86_64-linux-gcc
+xtensa    : /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-gcc
+
+Compare to the original:
+- a few architectures are missing (e.g., alpha, am33_2.0, bfin, frv, h8300)
+- No "Scanning for tool chains" at the beginning
+- No "Tool chain test"
+
+Have the missing architectures been removed since? All those in the
+arch folder and some more are listed.
+
+Has the output for Buildman changed to not include those lines?
+
+Com os melhores cumprimentos. / Best regards.
+Adriano Carvalho
