@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63129CA0EED
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 11:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2417CA0EED
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 11:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2FF280548;
-	Fri, 22 Aug 2025 13:38:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0701E80422;
+	Fri, 22 Aug 2025 13:59:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A/oppR1a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MEB96vE2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C71C881D5D; Fri, 22 Aug 2025 13:38:31 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 997038006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 13:38:28 +0200 (CEST)
+ id 0825880548; Fri, 22 Aug 2025 13:59:11 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E85358006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 13:59:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57MBcQpV717094;
- Fri, 22 Aug 2025 06:38:26 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1755862706;
- bh=RubpowqBmrX9JBaEDjgbhy2SHDD8pEdNiu/TGMgLX00=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=A/oppR1apjfu4xqFGLdHnK1PrabK8vsVed0zam25+NvG/3c23mJcX97UiC/dg4EX+
- TJrZkAS2dSj1DPOf1miBbQ74shaymmuJc8O4jMAwZSnsbxcfE85uycxcfb0Tq85LLC
- KzTj0d+n3IQ46oPJFxUa99pYNRZ6Tn7T5SIDdUKw=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57MBcQ5x3571383
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 22 Aug 2025 06:38:26 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 22
- Aug 2025 06:38:26 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 22 Aug 2025 06:38:26 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57MBcOtQ3769548;
- Fri, 22 Aug 2025 06:38:25 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-afcb61f6044so356593366b.0
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 04:59:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755863948; x=1756468748; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KpEP5DuV4WO/uQlXchaLktbkGUe9h5EkPENDL3Mo/wg=;
+ b=MEB96vE2cZjZgcBawcx5XK5i9CpTIVexSgGhe42Ska1t9vsg2WDPvM9rEEDc/lRWE5
+ fSnuAe6L0yxeMaVaCs7WWqZVry4V7mtgbrq4i7FgUpDgCF8KIHQQQlnI7xALIx0Ipx3/
+ kyIQ2SlnV0nluEBNUPa/pAmU1kWg+dWD3gkTktffQBpv2PAPoLKMeEhh0zH+zQDeoitu
+ oH3oIE970jeMuib2ys6EmglpVV+pO6do214K/K8hpe748UavXXIGpTJR6IKFHFFVX+Or
+ wBwwxtdVDdlbFTCl/bBer0OcaGWmbPOS090uiHluolLHtvyIkP991Am+Ss+gelOLYc/q
+ uamA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755863948; x=1756468748;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KpEP5DuV4WO/uQlXchaLktbkGUe9h5EkPENDL3Mo/wg=;
+ b=is7v56vw1hbi2Ql7oaszBngr2bW47aSwLCzLbsdcU8fE6bLTYhlcn6V3yRUfZaon48
+ zj50f4VwCU51YInWlAnBw2GNnZC18+9LyFpxGBNZIAZW2WpBdJ63TiDcdNhwVPsyqlkT
+ jO37C59iMbSJLy4ZL4oqvZuibG08YPuH1onQ6TlcClJhB84XDvgSFI8FPf8dIs641vXa
+ 8/G/yG8cZ1Cl7wNaA1qM5RiJ/fovVrAW52eT9otHpjtLiXqP6ZQ/gZNkSKbszVqli6SJ
+ B//0xBCORHi99brdK3g6PTrqlTQhxuC4mrE6Jx0ShPLlkucP3lieWn2P+f4F7Vc//ex6
+ 48rA==
+X-Gm-Message-State: AOJu0Yypc5s6gO1/Ga2LImfKLeJ+DNBQNSk46XNdcsh5IJpPAtvhwLnd
+ wulasrQL/G3HhR+3JzirKWBJL6N7Mqfy4xR2wxMmW22OFrA4LlM3IY5+9LycajM4Tjm7Uehth7Y
+ 1WISSG3hGSh8w/WovENi+D3FKJdLUApNmMziIzNk=
+X-Gm-Gg: ASbGncs7cGryXeHN4MjRm7IavBav8cVgYVbT6P4lgPWFjwjYiPbAMtD6NG3cxbbNziz
+ vheScboKICAk/TjblJMMtiyCBR5CXH13NaZVUnzTe+5VwxMwOSl+fz0wJQcsH8tWTT/Ky1M7Tn8
+ KPBoWMrcfwh73sMeakj0pvSYOXFcO8W6qy4lTlY65ik4n89LFa2PK4my3Uvy0CXujuyXUjoUoek
+ Li6H0xV3u5+HcuiYVwvTxCHX2T2sbo4y+jOc8I=
+X-Google-Smtp-Source: AGHT+IFFA29TRwPVZF9QsJ2oRS1AlBFI03VPrI6QUAFYQa68/YXZumw9f5v6z8YR3VLJqxYzrcwZ65FVSjSoATIAyTM=
+X-Received: by 2002:a17:907:3cc4:b0:afc:b3c2:82eb with SMTP id
+ a640c23a62f3a-afe0b0d9668mr561442466b.13.1755863948136; Fri, 22 Aug 2025
+ 04:59:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-8-adrianocarvalho.pt@gmail.com>
+ <cd2e240b-0108-41b5-b2b9-74514c93c01e@gmx.de>
+In-Reply-To: <cd2e240b-0108-41b5-b2b9-74514c93c01e@gmx.de>
+From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Date: Fri, 22 Aug 2025 12:58:56 +0100
+X-Gm-Features: Ac12FXxioxvMk-qsu4pIrqyRwMubcmoGyLKWWadPwdaSpu4JeptL1Gesggz1D2E
+Message-ID: <CACAHuLCi-eptudENfAeYdXEG+wPYgBAO63eyaM_iq++0+za25w@mail.gmail.com>
+Subject: Re: [PATCH 07/10] doc: Fix typo in doc/build/documentation.rst
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 22 Aug 2025 17:07:15 +0530
-Message-ID: <DC8XCV7VF4V7.2DK03WE5W9DPX@ti.com>
-CC: <vigneshr@ti.com>, <praneeth@ti.com>, <nm@ti.com>
-Subject: Re: [PATCH v1] remoteproc: k3: update compatible for am654 syscon
-From: Anshul Dalal <anshuld@ti.com>
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250814152145.2853307-1-anshuld@ti.com>
- <175581002909.928164.4782059063073591013.b4-ty@konsulko.com>
-In-Reply-To: <175581002909.928164.4782059063073591013.b4-ty@konsulko.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,38 +92,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-CC+: Nishanth
-
-On Fri Aug 22, 2025 at 2:30 AM IST, Tom Rini wrote:
-> On Thu, 14 Aug 2025 20:51:43 +0530, Anshul Dalal wrote:
+On Wed, 20 Aug 2025 at 21:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> [...]
+> >   The *pdfdocs* target is meant to be used to build PDF documenation.
 >
->> The existing compatible name for U-Boot's k3 system controller driver
->> i.e "ti,am625-system-controller" has been added to linux[1] device-tree.
->> This compatible in kernel is meant for configuring the Control Module
->> registers (CTRL_MMR0).
->>=20
->> However in U-Boot, the matching driver was being used to load the system
->> firmware on the secure M-cores by the R5 SPL and therefore must be
->> updated to a different compatible to avoid conflicts.
->>=20
->> [...]
+> Please, also fix the "documenation" typo.
 >
-> Applied to u-boot/next, thanks!
+> > -As v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
+> > +As of v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
 >
-> [1/1] remoteproc: k3: update compatible for am654 syscon
->       commit: 2792cbf5d281b519692c546849638b2141046a4e
+> Building target pdfdocs for origin/master on Ubuntu 25.10 fails with a
+> different error:
+>
+> Cannot determine size of graphic in boot_diagram_am62.svg
+>
+> Please, improve the description: How about
+>
+>      "Multiple failures have been reported for this build target."
+>
+> Maybe we should simply drop the build target.
+> [...]
 
-Actually the patch was meant for master since upstream u-boot's broken
-for AM65 right now. Could you merge it to master as well?
+I'll see what I can do to fix these failures. Unless you tell me it's
+not worth it.
 
-As for upstreaming the new compatible, it might not get accepted since
-it represents the same hardware block as the existing "ti,k2g-sci" but
-before tifs has been loaded to it.
+When I say this what comes to my mind is: What distributions
+must/should be supported? If I provide a fix for Ubuntu, that doesn't
+mean it'll work in other distributions.
 
-Down the line I'll see if we can merge the two nodes or the drivers so
-we won't need this new compatible to begin with.
+ATM, and for this patch series, it seems the best is:
 
-Regards,
-Anshul
+-The *pdfdocs* target is meant to be used to build PDF documenation.
+-As of v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
++The *pdfdocs* target is meant to be used to build PDF documentation.
++However, multiple failures have been reported for this build target.
+
+(In the first sentence: documenation -> documentation.)
+
+Com os melhores cumprimentos. / Best regards.
+Adriano Carvalho
