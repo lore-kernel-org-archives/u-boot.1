@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A07D4CA0EED
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:40:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD25CA0EEB
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 23:29:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2974080422;
-	Fri, 22 Aug 2025 23:40:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D0CB681D5D;
+	Sat, 23 Aug 2025 01:29:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fifSVwUs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aSNmttRI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DA1F829E7; Fri, 22 Aug 2025 23:40:52 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 43E9C8006D; Sat, 23 Aug 2025 01:29:42 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51E688006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:40:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 350768006D
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 01:29:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-3e67e6a1cc8so14132215ab.1
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:40:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3b9e415a68fso2208902f8f.2
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 16:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755898849; x=1756503649; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=honG4O3dz8vfvXMgrR2G+8IKoeQksaROY5ZQd6HULT0=;
- b=fifSVwUsgIa1xFM3umNp2Yriewaf7TqSxkdyZ9TPVeNr9YurQBu3QTBocXHmtle+ux
- 9ueDdh8JzcVzhBUy1eT4IVmDkPRpsLzdedQKWf1aLMaBRk5+gXoPdBd+J2IYaeakIsKR
- TjkaC9Ou10yZhQJOa8b0Numqw+9sS60lG+w+8=
+ d=gmail.com; s=20230601; t=1755905379; x=1756510179; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=U0aAiXrTpjD+Sw0LhAcpYatzGil94Xathgq0jvKYS/Y=;
+ b=aSNmttRIwq3knMXNX1a55ZLwqToJCaW1M45FQ/w4p0pPFGMQn81HbVB3jZxpzSVQck
+ /M3XzTnCXa51IlU5+Niea9IaQ6k2jIcV6MVhXWEa/nex0a5STuD36a+MoQruBh748pyT
+ tRywIEk7bDKwWVooUNspuSawEPGBBqZNdoom7YFZgGlJwY7X1Yhj6hmxopC3O4jLqLeo
+ 86ebY91YBYaiQLvmpU86OV6J3UGKN0CORcbQ2b61mihBbhX/lB/CcuFwCXtzjkfzdZV0
+ cNTd8B4memNbhMk2wBK2UBFM4oY9v10AdU0oO09ePR5zYTaBlHE6LZvvyOw1y5nSJDAR
+ rk1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755898849; x=1756503649;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=honG4O3dz8vfvXMgrR2G+8IKoeQksaROY5ZQd6HULT0=;
- b=YEZ8WwdpAuQJbUgtGl3JLGNSve+em4oZdnxZ7AqDCYotNU5cZnIiHVXWlsULCyBPyc
- B44UT7s9A2ug1q1T9c5sIQNr1Cppxk1gu13j3s5hdQ70rMgXNbqfCQ97xON8DRrwBTF4
- GVQCckqjbW6bWLerQslZwFGbG9CkG2Av7az/0ykqpKIWm9wzv5X/D/DoUD3XuLxlnrTf
- ca08w+rXvI7Mxe1ecbsjBfj7tTTEJ/QB2ARyH5bansiXRNBmcK3Bg1ZA3hT8JmMob/WP
- 1z7CJY4QdkzAySLb3+y2gNZ640X3YcaENt5OtfWjB0QEVipD/5NlsODVmrXmz8gbhxTl
- XMcw==
+ d=1e100.net; s=20230601; t=1755905380; x=1756510180;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=U0aAiXrTpjD+Sw0LhAcpYatzGil94Xathgq0jvKYS/Y=;
+ b=XAFh0zIvm2dUNJi7osZdNrpQQa0FyE9fixYhFA+1CbPd+PkIXOqb6Iawo2YqHMRZta
+ GE9V9vriJyeycZXIORUY2T/t9yNEeM39VPy2lRLSezRaZ3LMEm5FAlbjumL6Z1LKUwKu
+ qdLjoZRGAYoSEVfjv2WLvSK7kgU27zXx/djUT1qmcWKtgNcHt30iRNevJt1n1JTytrLb
+ dx+hs+Pn0dQFsdQNA6WEB38ZTFcHSfnuxoJnwGLhU5M8BZiJP2gbqzELREzVrwBJttQv
+ CtOQ/a3zQRtJHPM/aFHbxE//qfW27raZxJG1haZWq7YkV/naMcmJnw0q7cQ9saVap3jA
+ fLDQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXitZRjiORHXYeIvLzZgPlRQO6GItldsB217MM7LoAhN+fXDfs8M0oJCzy3oiWOiaNjzBncsL8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzwv7SyUnUKG1oVCr99m3PDaaflYmv8WnkmQ5BIkmHTedcPmzcY
- kjUUmJs4GfHJ8bYkbbdp01SAPbaEP9WaEGThbgrDS0mx9R5DxLWPUAGhGRypMkECCbpxKD8fDs4
- tPE30YQY=
-X-Gm-Gg: ASbGnctWccFweAt9RYyPElbJUe3ZfOu7i+WFJECuueQo885i2qQmhB39uA4eqamOqzF
- +vJFS5707bmtMg3ji8VHl8A59GwezcSBWYlODFBWWPW63gUgC4uJOLlOcHReelYGWADYighOYNL
- BeeWRQ0RLm8GnNaZTIvFmjLLaTx7QzesMZ8bvU+/5gwAuF7tTv2BVZ189dqMFEwk8R94dRek9Ds
- PMxAFCGYnsZEqYgXKejq1Sen4/KVLGTW61zs/i3/QzVyMYe6lsG9n5LgRYQJVLWdd526ZG253TB
- w+Dk2NNfh1mhlNWU4vm2vCMa7yABi0RmLFPE+5nTErBD1YYe4jQgdjkc4a9VRCB4HtxpG7TI+hg
- cRlF24IRMXHpmRREGfgW/k5Wm5d2u8Yt9DV7OrTe1P0U8kGUZgPnld92e
-X-Google-Smtp-Source: AGHT+IFzGaWzS0s5gTr6dPKqt5KobQTJ78wG3Ii+Jy/g+fiziV00KlC7R5x17HqaA+fJayiezLdiLw==
-X-Received: by 2002:a05:6e02:1a43:b0:3e9:e4ca:4aa8 with SMTP id
- e9e14a558f8ab-3e9e4ca4fe2mr37517815ab.25.1755898848709; 
- Fri, 22 Aug 2025 14:40:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-886c8fa400asm71287239f.14.2025.08.22.14.40.47
+ AJvYcCVmhIMpJ6ResQWoaLLAHQatOqUFZ7iDknr4lJ9tNOOatWFMEjaIW5CEUC8n5aCYAkCH1Sx3xBU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZabfTL8wsy3xGP/5T/4BhVwdopJN+UmK52jPuzh18gc8QKnxw
+ TlMrBHp2ZVWJnbAF1+zllQhP6YjvaVSjN4YrnCN986u8J64vlQfBDII3
+X-Gm-Gg: ASbGncvIZ2lzxYY2BZqnj/JicJ+GRzP+7lFgFCaG3ELxtXQxHXTj89fNE0a+UC+CKPf
+ V8y+k7YPctbHfxwbEp/ryQx1IGLTx7W1iATMVXEJOuYgMbhBoH8nAXf5eClZv232+zg58lj9gBV
+ TB79OqJdW5h9joT/Bsso/JzY7GWyTVczf4g8UZv70xEmBmLb7zO2aKF57wCtr+gfrkCFmT2lz3i
+ GyvJipzaXQexNLQpcLY7esXOFBdmAjEjS/z8NovkaXckjBRflhYFEX4I6cd/3+jWzZqJWlfm18n
+ 9urhWGAUm16gEwZUd0M6kdCeDtuVzDz70KcV+Pwf905gWM4sPktIjm0fiiWw3Nbo3553opOhBkZ
+ FK55OefsLDmc/Xrhi1tJAaXK08peevIylN4rPZ/1krthPwvbsvVrS5EF+8/l7MY9j2idq71Y=
+X-Google-Smtp-Source: AGHT+IG3ueWYmOAqvwaboLafgMXduknn8kSBNbRA3r99kwB4FELBB5/bpSbcMrFnbwiYQayoKy4L1w==
+X-Received: by 2002:a05:6000:400e:b0:3b7:9c79:3293 with SMTP id
+ ffacd0b85a97d-3c5dce05162mr4269383f8f.58.1755905379353; 
+ Fri, 22 Aug 2025 16:29:39 -0700 (PDT)
+Received: from Ansuel-XPS24 (host-95-251-209-58.retail.telecomitalia.it.
+ [95.251.209.58]) by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-3c7116e1483sm1216970f8f.50.2025.08.22.16.29.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Aug 2025 14:40:47 -0700 (PDT)
-Date: Fri, 22 Aug 2025 15:40:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 06/10] doc: Add riscv to the list of architectures in
- tools/buildman/buildman.rst
-Message-ID: <20250822214045.GP124814@bill-the-cat>
-References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
- <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
- <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
- <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
- <CACAHuLD=fkEKq9e83f3ePQHO1N5dnVsRuFHwR6U12jv2EBJnew@mail.gmail.com>
+ Fri, 22 Aug 2025 16:29:38 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, u-boot@lists.denx.de
+Subject: [RFC PATCH 0/5] airoha: add MDIO + PCS support
+Date: Sat, 23 Aug 2025 01:29:14 +0200
+Message-ID: <20250822232921.30076-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JFH+qey3mkWn/0rU"
-Content-Disposition: inline
-In-Reply-To: <CACAHuLD=fkEKq9e83f3ePQHO1N5dnVsRuFHwR6U12jv2EBJnew@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,115 +97,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This initial series rework the MT7531 to a dedicated driver
+to add support for AN7581 (based on MT7988 Switch).
 
---JFH+qey3mkWn/0rU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Also add support for configuring the PCS to setup the
+Serdes port.
 
-On Fri, Aug 22, 2025 at 10:12:19PM +0100, Adriano Carvalho wrote:
-> On Fri, 22 Aug 2025 at 01:04, Adriano Carvalho
-> <adrianocarvalho.pt@gmail.com> wrote:
-> >
-> > On Wed, 20 Aug 2025 at 22:08, Heinrich Schuchardt <xypron.glpk@gmx.de> =
-wrote:
-> > >
-> > > On 11.08.25 01:37, Adriano Carvalho wrote:
-> > > > Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-> > > > ---
-> > > >   tools/buildman/buildman.rst | 3 ++-
-> > > >   1 file changed, 2 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.=
-rst
-> > > > index d5d22732088..7944adcd867 100644
-> > > > --- a/tools/buildman/buildman.rst
-> > > > +++ b/tools/buildman/buildman.rst
-> > > > @@ -478,7 +478,8 @@ Setting up
-> > > >
-> > > >      At the time of writing, U-Boot has these architectures:
-> > > >
-> > > > -      arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, s=
-h, x86, xtensa
-> > > > +      arc, arm, m68k, microblaze, mips, nios2, powerpc, riscv, san=
-dbox, sh, x86,
-> > > > +      xtensa
-> > >
-> > > The output examples above this line should also be updated to show RI=
-SC-V.
-> >
-> > Do you mean what's under "Check the available toolchains"?
-> >
-> > To reproduce, I would need to install quite a few toolchains. If
-> > anyone already has all those toolchains they could just send me the
-> > output. Do you know someone who can do that? Can you do that? Or
-> > should I just install all those toolchains and reproduce?
-> > [...]
->=20
-> With docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025,
-> I got the following:
->=20
-> $ ./tools/buildman/buildman --list-tool-chains
-> List of available toolchains (17):
-> aarch64   : /opt/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
-> arc       : /opt/gcc-14.2.0-nolibc/arc-linux/bin/arc-linux-gcc
-> arm       : /opt/gcc-14.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueab=
-i-gcc
-> c89       : /usr/bin/c89-gcc
-> c99       : /usr/bin/c99-gcc
-> i386      : /opt/gcc-14.2.0-nolibc/i386-linux/bin/i386-linux-gcc
-> m68k      : /opt/gcc-14.2.0-nolibc/m68k-linux/bin/m68k-linux-gcc
-> microblaze: /opt/gcc-14.2.0-nolibc/microblaze-linux/bin/microblaze-linux-=
-gcc
-> mips      : /opt/gcc-14.2.0-nolibc/mips-linux/bin/mips-linux-gcc
-> nios2     : /opt/gcc-14.2.0-nolibc/nios2-linux/bin/nios2-linux-gcc
-> powerpc   : /opt/gcc-14.2.0-nolibc/powerpc-linux/bin/powerpc-linux-gcc
-> riscv32   : /opt/gcc-14.2.0-nolibc/riscv32-linux/bin/riscv32-linux-gcc
-> riscv64   : /opt/gcc-14.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc
-> sandbox   : /usr/bin/gcc
-> sh2       : /opt/gcc-14.2.0-nolibc/sh2-linux/bin/sh2-linux-gcc
-> x86_64    : /opt/gcc-14.2.0-nolibc/x86_64-linux/bin/x86_64-linux-gcc
-> xtensa    : /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-gcc
->=20
-> Compare to the original:
-> - a few architectures are missing (e.g., alpha, am33_2.0, bfin, frv, h830=
-0)
-> - No "Scanning for tool chains" at the beginning
-> - No "Tool chain test"
->=20
-> Have the missing architectures been removed since? All those in the
-> arch folder and some more are listed.
->=20
-> Has the output for Buildman changed to not include those lines?
+Posting as RFC to have some comments about the rework of the
+MT7531.
 
-There's a few things well out date at this point:
-- The output from '--fetch-arch list' shows what can be downloaded from
-  kernel.org. Keep in mind these are public toolchains, for the Linux
-  kernel and are also fine for us. That's why it lists so many more.
-- The section "Check the available toolchains" should be replaced with
-  modern output, and you need to pass -v to get such verbose details now
-  rather than simply a list of what would be used.
-- The section "Install new toolchains if needed" should be replaced with
-  output from using an architecture U-Boot still supports such as arm64
-  or riscv.
-- The "toolchain-alias" parts don't list what aliases one needs and
-  since 'riscv =3D riscv64' is needed, rephrasing that earlier part of the
-  document should be done too.
+Christian Marangi (5):
+  net: mediatek: move MT7531 mdio to dedicated driver
+  net: airoha: bind MDIO controller on Ethernet load
+  net: airoha: add support for Airoha PCS driver
+  net: airoha: fill in support for PCS in Airoha Ethernet driver
+  airoha: add PCS node for AN7581
 
-Thanks for working on this area!
+ arch/arm/dts/an7581-u-boot.dtsi        |   71 ++
+ arch/arm/dts/en7581-evb-u-boot.dtsi    |   18 +
+ drivers/net/Kconfig                    |    7 +
+ drivers/net/Makefile                   |    5 +
+ drivers/net/airoha/Kconfig             |   12 +
+ drivers/net/airoha/Makefile            |    6 +
+ drivers/net/airoha/pcs-airoha-common.c |  803 ++++++++++++++
+ drivers/net/airoha/pcs-airoha.h        | 1216 +++++++++++++++++++++
+ drivers/net/airoha/pcs-an7581.c        | 1369 ++++++++++++++++++++++++
+ drivers/net/airoha_eth.c               |  115 ++
+ drivers/net/mdio-mt7531.c              |  140 +++
+ drivers/net/mdio-mt7531.h              |    9 +
+ drivers/net/mtk_eth/Kconfig            |    1 +
+ drivers/net/mtk_eth/mt753x.c           |   29 +-
+ drivers/net/mtk_eth/mt753x.h           |    3 +
+ 15 files changed, 3784 insertions(+), 20 deletions(-)
+ create mode 100644 drivers/net/airoha/Kconfig
+ create mode 100644 drivers/net/airoha/Makefile
+ create mode 100644 drivers/net/airoha/pcs-airoha-common.c
+ create mode 100644 drivers/net/airoha/pcs-airoha.h
+ create mode 100644 drivers/net/airoha/pcs-an7581.c
+ create mode 100644 drivers/net/mdio-mt7531.c
+ create mode 100644 drivers/net/mdio-mt7531.h
 
---=20
-Tom
+-- 
+2.50.0
 
---JFH+qey3mkWn/0rU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKjj2QAKCRAr4qD1Cr/k
-CrcEAQDFpzgaQXj9AUhX/hjeTutBBTkxJ9TCm7HJShzb+Y4XCAD/ZwuM4qRf6Eaw
-FY5ExE10vD0pm3b877gAFS8JLZoX2gk=
-=T5KB
------END PGP SIGNATURE-----
-
---JFH+qey3mkWn/0rU--
