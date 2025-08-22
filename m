@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB761CA0EEB
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6DDACA0EEB
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:38:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A50880422;
-	Fri, 22 Aug 2025 23:24:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD2E380422;
+	Fri, 22 Aug 2025 23:38:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="QZS2PEkO";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="VQeaolNu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A29FA82103; Fri, 22 Aug 2025 23:24:26 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 7DA9582998; Fri, 22 Aug 2025 23:38:03 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 336BD8006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:24:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 957C68006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:38:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-30cceaaecd8so1107508fac.2
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:24:24 -0700 (PDT)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-435de764e08so1499748b6e.1
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:38:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1755897863; x=1756502663; darn=lists.denx.de;
+ d=gateworks.com; s=google; t=1755898679; x=1756503479; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fBE0FyG8mV3daf3eMmuKVP/rUL/fbXyl1wunLJ43VK4=;
- b=QZS2PEkOC93iUTCwqKyvX3//z5jtudm07o0YCoPAhLhcRmwMHvS/+YeuSyGYD/p2OT
- an/qGXqBUBQhxE33zAPY08FMguX9OuNsVmgfBKc0i/9UDQGVOeVieXJvPaqq6u++kL14
- 9DGq7SU+tQbOoLZpRo3ZUEFOFdwAljxgwFWweniGSHz1ULkyXBFMp7wVxoy8k1vMJfjO
- wSb9kJAchdMvpRfQFlnwsMuAMKVakeNEilhlnW+5eGsnwFmedMhguBwjrP5mi3Uy5Yds
- InR0wdtwQoz7+EYbb8vXZU8Ra1Yz964WZnjg4XnWUyZF5cEvI3nyXlEhslE8tQn7nXjo
- Gq4g==
+ bh=DzZDvf3UZfbe2iW7BvjwOUsVx5VDGHxQ33mZbVKGogg=;
+ b=VQeaolNuf07IgyeLVJTeCN3G1xEbirMyxRI7U86KhcZwrhT5eGwIMFBObRxp/rYuzO
+ hYA7iQuuZhKr8qwlFqwTMGlY2coblR22F+LdoWIkrcOhxVG6xoqmdltJ0PumWKlgD5hN
+ ODcH7911vjUsve8Ni5vyAl1WimdTu4tg+N9waMsMHKO7osf1OGcxg2JRH+1ivJ7XiRw2
+ bAK1mC8tOrSyzhn+hvmYv14UN8nooR/o5nnz/akhhWXxN1NYJn/7oKEK0zxKh8VB0Aqr
+ tXEHe5YeS7Zq4yp5nWQjMJ5Vn573DhjhLouBz+JtINp2J738gE0wwAcMaIwo5gqhVH+N
+ xpWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755897863; x=1756502663;
+ d=1e100.net; s=20230601; t=1755898679; x=1756503479;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fBE0FyG8mV3daf3eMmuKVP/rUL/fbXyl1wunLJ43VK4=;
- b=Qy1O6Yz434gESKti8fu4+EXewbF5d46vGryx8m3qFZSIt5ZY4/OvAbZIRb5G9yFpA9
- ywoAxYRf/h5Lz7cYHiPfzcAjJCsRpuXs5tKzoVgtAsL15I4c0Lssz+NpY/9NP4yGEizC
- BTBdR3HN7tm/xcgiXtXUiVidjdw4YfXhKgt7+9RAlqRih2oJUnH+0DhQRL17+4zQ10Wt
- QOGmCyydL8YfIFcRxha+ZOX8nv24PTHZyuBpsRnDWYi9Xsofugx7z+zweuI2MnR6/B6W
- 91wIiLK/JETToAtepAw8I8VJDKhq+KfeSBASV47GwWe5yTeDPO98Mkp3RvAx0Ybc+Eg3
- 5Hbw==
+ bh=DzZDvf3UZfbe2iW7BvjwOUsVx5VDGHxQ33mZbVKGogg=;
+ b=DnOKPWFGLxgfjMAO89asG+qM9FzZ7iOkKKJCU6532LhIr2d17Kfrw0V5K+zNOl9oW/
+ 4hr4AV4q+QYOPF5mS282lLJZLh9HzBogdismefshq6eW3eDyDv5DLYWrOYcyj3rP3v++
+ FOqIMlWByAfxlQdtw9lp3tEgNUyLVh01aIykgGr9eqLRoucaqoebcJ06wXoU6VR9Bfn+
+ Tx2gf6BcH0bN2rnTHfnoQi1CoxsFBp+BE3flvzCUkbWoDNzgd5uD9er556BQPgGMJboY
+ Qy9JYbQEOkPFkYWsLCbrLr8+sn9bji3OZQg9OoZLbMgMQe4RpcEK6B0+lAf5zNLw4/1v
+ oUsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUK+TTb7lfmhe+11CEn1j/KKpQrCMq1Yy+lz+BTWfaviI+NcBLgD5JT52+XQTmNtOHYY3pEODA=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywx6hLcaLsPbTSCPR+L/a7TxhNRyd9XhHGl7dDapE7s+RVpidbr
- qoCQ9IQkY+6+xa7G4bAR7Fiw51pglZ4KAX5saHdTzfAKZxWc/yp7o6aOe04f2Qcnu5l8FwIdSRl
- 4lBlDvKn2L2/aeplpJouz8Ped64wuAB4kj+zAtVkVqw==
-X-Gm-Gg: ASbGncshRG6lX5GzEIcbTj6zwhka55ZHrYBO8nTv8a27tipfWg8N+NQiiXdz283Rxjn
- zXsvUjNB0wN42Bs8cmA343W81OJPlMKW6+l3N0WrCDYF1WsXjlfs1thvLUCHZWQllOM+JoYbOKj
- e6RO6m8eLMHVHN8c3rMwqLtvuTFpLGk/uPjpRIvOl+FWIyTPR0KD/aeBVsnYzLLxZDt0x7TW6/8
- 8XZLDf6pFro2Cm3OQ==
-X-Google-Smtp-Source: AGHT+IFR7WhhODUEnydjFSIlTREnmYkLUgMhhulUEWp7ReEtXJT7LHNPUTGw09lhu6OVs+D9Jwjpvvf7XlCGbrSiL10=
-X-Received: by 2002:a05:6870:7188:b0:314:b6a6:686c with SMTP id
- 586e51a60fabf-314dce19f71mr1991125fac.46.1755897862806; Fri, 22 Aug 2025
- 14:24:22 -0700 (PDT)
+ AJvYcCVkqrGaJv3aOKMPUJdGop0fqQ9BAUcdow7ApKaw+G1AcmH7d0pXk+67w2AX6Y5U0D9yQ6qsVWk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwB8dNanmY9us5p2N0e9ZWYck/CUiLXUoW2y6B1QZhkGYH3u4El
+ 1hxrgqGEJGyyQTCUB9oBoNMJszf784JjM/DrXSnwcaK6CqFkflWsVBR6EdCMy6BXvS8b1hq37QF
+ xltJyrKnlkBohzSrQ4qwNleE4XWVt0UhB6GGvPZzPaw==
+X-Gm-Gg: ASbGncsH3Oe4/QBdcRf7FIbLbUc5BrnBfgdIXfA83BFyaNyq+wWDCS+SrGj6gr5Xtx/
+ wIGhJ6c8mzi/ORnNksHWEFYMEywh9NZqYChNOmdfTlLxRXn7TvHw9Et4FJn7tiagDpZTwxpHYrZ
+ v97C9cwoyFvX06IX0osoXjJFIUp/zoqFqS0UXe5BaxRK3WLVTuhGCVvWRQdyJRzbVugy5Ki2qsh
+ HSn0ZY=
+X-Google-Smtp-Source: AGHT+IFd3RPmyJan8iotbY3tpLOSi89nkhwhID3FgjDXrTNDGBPcJUNmjecxRRlexnTRgnV10POL3cdmi9PpvIubmyE=
+X-Received: by 2002:a05:6808:1485:b0:433:ed9b:fcfd with SMTP id
+ 5614622812f47-437851bacf6mr1967495b6e.19.1755898679143; Fri, 22 Aug 2025
+ 14:37:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250811-imx95-v1-0-569d8014172f@oss.nxp.com>
- <CAJ+vNU0q4ogZuNSxCMNPwXq4-ojqi7ss8ABYip0Q-BfSkvaidA@mail.gmail.com>
- <PAXPR04MB96443502294D1C7F8D66A26FE232A@PAXPR04MB9644.eurprd04.prod.outlook.com>
-In-Reply-To: <PAXPR04MB96443502294D1C7F8D66A26FE232A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+References: <20250721180205.2696763-1-tharvey@gateworks.com>
+ <20250724034438.GH18395@nxa18884-linux.ap.freescale.net>
+ <CAJ+vNU0bm6ZB3cZP6Az45sNsMZ3QZJEVj7C20yFygF_YSqa5bA@mail.gmail.com>
+In-Reply-To: <CAJ+vNU0bm6ZB3cZP6Az45sNsMZ3QZJEVj7C20yFygF_YSqa5bA@mail.gmail.com>
 From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 22 Aug 2025 14:24:12 -0700
-X-Gm-Features: Ac12FXxXfRh4rl35Oida1IcuJgaS99oWegiCpD9-xUL9N7aKba5BpqSptf7jkdo
-Message-ID: <CAJ+vNU1QCMd-dT94VQLL8e1T3rCWUCNzpDbzBnirL95mZH+eyA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] Restore support for i.MX95 A0 silicon
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+Date: Fri, 22 Aug 2025 14:37:48 -0700
+X-Gm-Features: Ac12FXxs8vwVw5OZPbe78Dd3HsliCLeUunZGET9dXY1nOSBE-n8BeJDbu3lbVHU
+Message-ID: <CAJ+vNU1n_+Q70jYEtZ4Eii4qM_R6e+uVfHPKZD5KYHt_ZrX2cw@mail.gmail.com>
+Subject: Re: [PATCH v2] usb: ehci-mx6: Add i.MX95 OTG support
+To: Peng Fan <peng.fan@oss.nxp.com>, Fabio Estevam <festevam@denx.de>
+Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@oss.nxp.com>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, peng.fan@nxp.com,
  Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Marek Vasut <marek.vasut@mailbox.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Ye Li <ye.li@nxp.com>
+ Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -101,94 +99,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 20, 2025 at 8:37=E2=80=AFPM Alice Guo (OSS) <alice.guo@oss.nxp.=
-com> wrote:
+On Mon, Jul 28, 2025 at 11:04=E2=80=AFAM Tim Harvey <tharvey@gateworks.com>=
+ wrote:
 >
-> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
-> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Tim Harvey <tharvey@gateworks.com>
-> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B48=E6=9C=8821=E6=97=
-=A5 8:52
-> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>
-> > =E6=8A=84=E9=80=81: Tom Rini <trini@konsulko.com>; Simon Glass <sjg@chr=
-omium.org>; Alper
-> > Nebi Yasak <alpernebiyasak@gmail.com>; Stefano Babic
-> > <sbabic@nabladev.com>; Fabio Estevam <festevam@gmail.com>; dl-uboot-imx
-> > <uboot-imx@nxp.com>; Alice Guo <alice.guo@nxp.com>; Marek Vasut
-> > <marek.vasut@mailbox.org>; u-boot@lists.denx.de; Ye Li <ye.li@nxp.com>
-> > =E4=B8=BB=E9=A2=98: Re: [PATCH v3 0/2] Restore support for i.MX95 A0 si=
-licon
+> On Wed, Jul 23, 2025 at 7:34=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> w=
+rote:
 > >
-> > On Wed, Aug 20, 2025 at 4:05=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.=
-nxp.com>
-> > wrote:
-> > >
-> > > Changes for v3:
-> > >  - update the binman etype to generate a configuration file and a .bi=
-n
-> > >    file
-> > >  - update Get ahab-container.img in imx95_evk.rst
-> > >  - rename configs/imx95.config to configs/imx95_evk.config
-> > >
-> > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> > > ---
-> > > Alice Guo (2):
-> > >       binman: add a new entry type to support .bin file generation fo=
-r the
-> > i.MX95 platform
-> > >       imx95_evk: Restore support for i.MX95 A0 silicon
-> > >
-> > >  Makefile                                  |   3 +-
-> > >  arch/arm/dts/imx95-u-boot.dtsi            |  44 +++++++--
-> > >  arch/arm/mach-imx/Makefile                |   5 +
-> > >  arch/arm/mach-imx/imx9/Kconfig            |   5 +-
-> > >  arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
-> > > arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
-> > >  board/freescale/imx95_evk/MAINTAINERS     |   1 +
-> > >  configs/imx95_19x19_evk_defconfig         | 153 +-------------------=
-----------
-> > >  configs/imx95_a0_19x19_evk_defconfig      |   2 +
-> > >  configs/imx95_evk.config                  | 150
-> > +++++++++++++++++++++++++++++
-> > >  doc/board/nxp/imx95_evk.rst               |  42 +++++++-
-> > >  tools/binman/entries.rst                  |  12 +++
-> > >  tools/binman/etype/nxp_imx9image.py       |  85 +++++++++++++++++
-> > >  13 files changed, 338 insertions(+), 191 deletions(-)
-> > > ---
-> > > base-commit: 0c558bbad9e7581808b358091d1fd979f860e8ac
-> > > change-id: 20250809-imx95-10b5b18e0ad7
-> > >
-> > > Best regards,
-> > > --
-> > > Alice Guo <alice.guo@oss.nxp.com>
-> > >
+> > Hi Tim,
 > >
-> > Hi Alice,
+> > On Mon, Jul 21, 2025 at 11:02:05AM -0700, Tim Harvey wrote:
+> > >When the usb node is defined dr_mode=3D"otg" ehci_usb_phy_mode() is ca=
+lled
+> > >to determine the mode from status registers.
+> > >
+> > >The IMX95RM does not currently define the USBNC STATUS register but it=
+ is
+> > >assumed to be an omission as the first three registers are defined.
+> > >It has been expirimentally verified that the USBNC_PHY_STATUS register
+> > >at offset 0x23C bit4 (USBNC_PHYSTATUS_ID_DIG) reads 0 when USB_ID is G=
+ND
+> > >and 1 when floating.
+> > >
+> > >Use is_imx9() as this driver works for i.MX91, i.MX93 and i.MX95 and a=
+ll
+> > >of these determine the role based on the USBNC_PHY_STATUS register.
 > >
-> > I have a board with IMX95 A1 silicon - with respect to this documentati=
-on should
-> > that be considered A0 vs B0? Are there any issues with A1 that would ma=
-ke the
-> > oei/sm/atf/uboot not compatible here?
-> >
-> > As far as I can tell the only part of boot firmware that needs compile-=
-time
-> > configuration based on silicon revision is the imx-oei and I only see s=
-pecial
-> > handling for r=3DA0. If I build with anything other than r=3DA0 the OEI=
- does not run
-> > for me whereas building with r=3DA0 the OEI's appear to run fine yet I =
-don't seem
-> > to make it to U-Boot SPL.
+> > Just a question, does your board use USB2.0 port for SDP? And any publi=
+c
+> > patches ready for that?
 > >
 >
-> flash.bin for i.MX95 A1 can be generated in the same way as i.MX95 A0. Ca=
-n sm run work well? oei-m33-tcm.bin is required for A1.
+> Hi Peng,
+>
+> Yes, I am using the USB2.0 interface for SDP. Aside from this patch
+> the usb2 nodes need to be added to the dt (usbphynop, usb2, usbmisc
+> which are already in kernel but not yet in uboot dts/upstream).
+>
+> However, unlike SDP on the USB3.0 interface which I was able to get
+> working, I was getting stuck somewhere between the ATF and U-Boot
+> proper on USB2.0. I can no longer boot software on my imx95_19x19_evk
+> after the changes merged for B0 so I'm unable to test and compare
+> notes at the moment.
+>
+> Best Regards,
+>
+> Tim
+>
 >
 
-Hi Alice,
+Hi Peng,
 
-Thanks for confirming this. I can report that configuring for A0 works
-and I'm booting into U-Boot now on A1.
+Just to follow-up here I have been able to get imx95 to boot via SDP
+on imx95-19x19's USB2 with the following:
+1. the patch in this thread
+2. the env-is-nowhere patch from Jo=C3=A3o Paulo Gon=C3=A7alves:
+https://www.mail-archive.com/u-boot@lists.denx.de/msg550594.html
+3. adding the usb2/reg_usb_vbus/usbphynop to imx95-19x19-evk-u-boot.dtsi
+4. the following changes to defconfig:
+--- a/configs/imx95.config
++++ b/configs/imx95.config
+@@ -129,6 +129,8 @@ CONFIG_DM_MDIO=3Dy
+ CONFIG_MII=3Dy
+ CONFIG_FSL_ENETC=3Dy
+ CONFIG_PCIE_ECAM_GENERIC=3Dy
++CONFIG_SPL_PHY=3Dy
++CONFIG_SPL_NOP_PHY=3Dy
+ CONFIG_PINCTRL=3Dy
+ CONFIG_SPL_PINCTRL=3Dy
+ CONFIG_PINCTRL_IMX_SCMI=3Dy
+@@ -146,16 +148,17 @@ CONFIG_SPI=3Dy
+ CONFIG_DM_SPI=3Dy
+ CONFIG_NXP_FSPI=3Dy
+ CONFIG_USB=3Dy
+-CONFIG_SPL_DM_USB_GADGET=3Dy
++CONFIG_SPL_USB_HOST=3Dy
++CONFIG_USB_EHCI_HCD=3Dy
+-CONFIG_USB_DWC3=3Dy
+-CONFIG_SPL_USB_DWC3_GENERIC=3Dy
+ CONFIG_USB_GADGET=3Dy
+ CONFIG_SPL_USB_GADGET=3Dy
+ CONFIG_USB_GADGET_MANUFACTURER=3D"FSL"
+ CONFIG_USB_GADGET_VENDOR_NUM=3D0x1fc9
+ CONFIG_USB_GADGET_PRODUCT_NUM=3D0x0152
++CONFIG_CI_UDC=3Dy
+ CONFIG_SDP_LOADADDR=3D0x90400000
++CONFIG_USB_GADGET_DOWNLOAD=3Dy
++CONFIG_USB_FUNCTION_SDP=3Dy
+ CONFIG_SPL_USB_SDP_SUPPORT=3Dy
+ CONFIG_ULP_WATCHDOG=3Dy
+ CONFIG_LZO=3Dy
+
+Note that I had to disable DWC3 and I think that's because it uses dm
+for gadget mode and CI_UDC does not support that and thus duplicates
+functions.
+
+This was needed to bring up a custom board that runs USB3 to a HUB and
+USB2 to a Type-C connector.
+
+Fabio,
+
+I'm not sure if you were needing more reviews for this one or if you
+were just waiting for a follow-up to Peng's question.
 
 Best Regards,
 
