@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08DA3CA0EEB
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 23:30:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C94CA0EED
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 23:30:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0F0080422;
-	Sat, 23 Aug 2025 01:29:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B9058304A;
+	Sat, 23 Aug 2025 01:29:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XnVbVevC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aFL+AQip";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9B3982E67; Sat, 23 Aug 2025 01:29:46 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 121128006D; Sat, 23 Aug 2025 01:29:51 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BA8C80422
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 01:29:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CCBA82C84
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 01:29:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3b9e7437908so1748663f8f.3
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 16:29:45 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3b9d41d2a5cso2123214f8f.0
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 16:29:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755905384; x=1756510184; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1755905388; x=1756510188; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=BxWmXax6xENmBeqqxY4PRGm34X/rWdA0WE93dwOBdds=;
- b=XnVbVevCWx2+5ZsTVC7zitFlI8RTwXe7NqAT61PoPvxn01+7r6lI1pk02+4ydwGSWW
- P/S3gQcr4PrsncXZ3bcAmjYR8v1B1tCq6yHyGAuTZvdf1TZspAG3ZtXVgEseSahtNmVK
- kBPtBZsZY1DK3WaV9HsQnMkWgQoyJ8MByCtr2pHJ26cSxh4kPSpgmX4FRrSTMaO6P4Sy
- PEjm4wk8+zk4Z9GvtDsp9Oq5cHHiythDmS6EwHsKx8FIOv1cPVhEy/jNIb2607JBmFhq
- OjaRYkXdsudJHqs0BXIP1GansfRlkkyY5P+5+uaCfVKAOwf1NlmOu/CBI2p5uyskoe0o
- rjdw==
+ :reply-to; bh=Okm1QHY+DETNclmbC1sE+425Gvc3JjLPmc2dDPZgr60=;
+ b=aFL+AQipjtqgbjHixp0X8S9oD45n2fJ3lu1+w7J6dMAUVCXAle/BsIp40m27TK7DSa
+ kwHMoGvNo6emqPfEfS5CMIneZfsZ7FCsB4AlV+mQ03TO5al8XZwKWZzrqjlFnpEiMWkD
+ heNz9NX0rfcU3MxR/82W5BHb1BWyv4y6VlIl5GD9MbVxKaKT0GubJlAT3vBBeVu+C5Jo
+ meAfVe7uUkOc8RnPkiPwKFjBjpnnhUcUUmbYlUKlHNdWWR1KFyf+Bt2nbkneHsXefDDB
+ 9wytMWDQb+PcCyxP8d19qBZtyoX7S1ZcNzAKNIz135vrF7EcAeImunOJq4xCFukJrT3U
+ OAcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755905384; x=1756510184;
+ d=1e100.net; s=20230601; t=1755905388; x=1756510188;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BxWmXax6xENmBeqqxY4PRGm34X/rWdA0WE93dwOBdds=;
- b=tEScOwpXA1Z72i1VLHLSPxsJluEXP1f0WX2Pt8WGYSl5p542Zf9lWLjHNhy5ebhGK9
- /jqF//5ujB+E+nhta/9q2EL1v4fAIMzyhOuQBaNnUaLJgPcPv9i59YYO9LouZY6ZsXRa
- nwW1F3IKnrX5zcWqeahmPqjbEH8aeL2lGKMUUia7dNxRtSqeCG2VvKOfmdTYCG4MZ4Qs
- weQ/qw+0EoQ3p9B36XWgT2Jn4VP+qRdJV7+NCSIHwuuP7Z+n26isq/aiOIu1sAOal3+B
- t44mUV9bAQV0HvfF/bDBp1q8t2Bum4/VLpuj8eMtYRS5/W+jM1hE2Qdjrby4y4W5+TQl
- svjw==
+ bh=Okm1QHY+DETNclmbC1sE+425Gvc3JjLPmc2dDPZgr60=;
+ b=Td2I31dBmhQSGJh0fzUQhHXaNFLgTppqqq6H1HUy205m/vwMFBLLBp9xFW2kVtYd8m
+ pTuykmMHJ1ZEyk+m+kvXXTtI+rcEY+YQhlZH/Sp07Zl4UtRgT2d4gkYrQSIr6EaJMQk5
+ IPDvgnpsr1CW1VW3TNrIyQaTTpI3WyMrjCGOb2Yt0KaJjksaqD9yCeah1aHkHpoXk6Do
+ +g4hKVWqW5Mp1Y4LQ4Use8QJCkzQZXxQWWhxupanBgLvy9X0svXxEKRABt1J+BBFtGlL
+ hseC3MQfTrzUhRP02yDW/ZVGQoc+qaVtXT4snym75TNo1w7nyRnYFVos9aOb2nlx2rAm
+ wMuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWU7hUujwsPQ4ziNuVNhgLBMUdb7HL8UlMENq8BlUYZeoilLKUTZQvTFjTRA8mQxkrNuME07eY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyIOGddCKhdYKANMk+9VA8vdGeGm3t3T2OOqJULMSl5zOPKSact
- Syd0XQct3WblmzjBXJHUBTLUvVGfmODQtyX6ABDy6gYnNdgKIjMFppsu
-X-Gm-Gg: ASbGncu3ENeHlqL22P6fmfeWCeRftWf49J4ckOEuYh035JEGQuMV98deOZZQt58lD1L
- PhX6OflG2rzFIDM3nluP6q0QeslRFYc4+HMlVUUOSn+8tLIwvL1/XiLFRSxHvJkMBOqiVC5jMNM
- P+NEYpCzT+50cJyNDYYNecRXDvEdtJkTk++gcgkqb1VXtDc1ixzkkkQN0xScHk9LcqX01jbFhfA
- 6Ih3mC6B6lVoAFUznPzyh398iXQvI8Vn1rwslsLFH/KNIR9BFGWBZ699NQH9NQQJlKzWJp6Kpk+
- kZdQaG6zWjcuHYYQq391obu36xYyfqWPXwPp8ubZfZtMFt1BOP+KJQH7d2/P9CyxQMcN39gVrU6
- kDUzyQxhzIFdlYaWVdxkJ0IHIq1WozZ+WEncv9h1IcHVdh4yrk7DjO7P9dW3xud48Lz8qkW8=
-X-Google-Smtp-Source: AGHT+IF1rZuq0tQxyihnA5rJV60GjdY6vNjAsAEZ+tPTzLRRebT65YKmaPgeLN0GO2MUuMMGSLGmdw==
-X-Received: by 2002:a05:6000:40ce:b0:3b7:899c:e867 with SMTP id
- ffacd0b85a97d-3c5dcefd9aemr3816345f8f.59.1755905384177; 
- Fri, 22 Aug 2025 16:29:44 -0700 (PDT)
+ AJvYcCXLGOzhmsfu3H8r0R/FBVJr4OaGIo+WWTZJOzbf+HD17AWBDzQtKH6dL+iC1/lXwAQH1k7zSj4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyHqVVN/PULDGx6USlnb39uB6/0DoKjy3OUyBI4CKTOMFuIB8m/
+ CnJDHVWLL3rhCFXkpzMTS/lJ4aj+n5Xj8ILHjZYAxZBP6BrINRYz4pif
+X-Gm-Gg: ASbGncvux35u0jBpBotmeUtBNZbU1ifLi59i2qdVDjfc6L8hrWp2BGZS9VB3Hz5bdm9
+ axBjB18aTy8LISWMNPiwhf5l9iQ0kPQxGVbO4RU4/tzf6kNDGe6HLA0m/uSNQbMNjIxCfQ2Ahy+
+ +V0vnNYeLV2dMI+XUCi0sFlhKEUSvbzouIwRpTFnEicqeegJHutxg1lPOhuV3tIolqcsSmNuZDm
+ ehLhXG7Qou7CDPoPu2IfKuWSUtRbEE26lfvclxximu0S6rDHcxuXpx+hfL66++4yq/D0WNr5onn
+ wKK3C1XEUreRHKafzQcX7x71JEdJiOyiaimk1NnslE088YDA22iZgk1D57fZGEsraKnPfScJkEA
+ 9dCJDg3oT+x37FRnXPN2ZM9SMcIGCUHVkt680tw9PKNLvyKyi09kR7IJWqOyGpAPtUaw1aCX33f
+ /7pLZT/Q==
+X-Google-Smtp-Source: AGHT+IH7jFCTBcS5gUZ8pnrsZRSEBaOga+EVCNWUL7GyoSUiNNYV9Mr4tLjnV2FLvEckIZIC3w9gUQ==
+X-Received: by 2002:a05:6000:4287:b0:3b8:ffd1:80d2 with SMTP id
+ ffacd0b85a97d-3c5dac1aae7mr4268208f8f.24.1755905388456; 
+ Fri, 22 Aug 2025 16:29:48 -0700 (PDT)
 Received: from Ansuel-XPS24 (host-95-251-209-58.retail.telecomitalia.it.
  [95.251.209.58]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3c7116e1483sm1216970f8f.50.2025.08.22.16.29.41
+ ffacd0b85a97d-3c7116e1483sm1216970f8f.50.2025.08.22.16.29.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Aug 2025 16:29:43 -0700 (PDT)
+ Fri, 22 Aug 2025 16:29:48 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Weijie Gao <weijie.gao@mediatek.com>, u-boot@lists.denx.de
-Subject: [RFC PATCH 2/5] net: airoha: bind MDIO controller on Ethernet load
-Date: Sat, 23 Aug 2025 01:29:16 +0200
-Message-ID: <20250822232921.30076-3-ansuelsmth@gmail.com>
+Subject: [RFC PATCH 4/5] net: airoha: fill in support for PCS in Airoha
+ Ethernet driver
+Date: Sat, 23 Aug 2025 01:29:18 +0200
+Message-ID: <20250822232921.30076-5-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250822232921.30076-1-ansuelsmth@gmail.com>
 References: <20250822232921.30076-1-ansuelsmth@gmail.com>
@@ -100,74 +102,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind MDIO controller on Ethernet Controller load. The Airoha AN7581 SoC
-have an integrated Switch based on MT7531 (or more saying MT7988).
+Add required changes to call PCS function to configure the Serdes Port.
+The Ethernet driver is adapted following Upstream Kernel node structure.
 
-Attach it to the switch node to support scanning for MDIO devices on the
-BUS.
+Function calling order is the same of Phylink upstream kernel.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
  drivers/net/Kconfig      |  1 +
- drivers/net/airoha_eth.c | 26 ++++++++++++++++++++++++++
- 2 files changed, 27 insertions(+)
+ drivers/net/airoha_eth.c | 89 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 90 insertions(+)
 
 diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 9ac9bee46c9..f7ea12f9b37 100644
+index f73dafa7d09..e0e426204ce 100644
 --- a/drivers/net/Kconfig
 +++ b/drivers/net/Kconfig
-@@ -126,6 +126,7 @@ config AIROHA_ETH
- 	depends on ARCH_AIROHA
+@@ -129,6 +129,7 @@ config AIROHA_ETH
  	select PHYLIB
  	select DM_RESET
-+	select MDIO_MT7531
+ 	select MDIO_MT7531
++	select PCS_AIROHA_AN7581
  	help
  	  This Driver support Airoha Ethernet QDMA Driver
  	  Say Y to enable support for the Airoha Ethernet QDMA.
 diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
-index 6588eb3a806..6be6ec2845b 100644
+index 6be6ec2845b..9bd5123ba05 100644
 --- a/drivers/net/airoha_eth.c
 +++ b/drivers/net/airoha_eth.c
-@@ -971,6 +971,31 @@ static int arht_eth_write_hwaddr(struct udevice *dev)
- 	return 0;
+@@ -18,10 +18,13 @@
+ #include <linux/bitfield.h>
+ #include <linux/delay.h>
+ #include <linux/dma-mapping.h>
++#include <linux/ethtool.h>
+ #include <linux/io.h>
+ #include <linux/iopoll.h>
+ #include <linux/time.h>
+ 
++#include "airoha/pcs-airoha.h"
++
+ #define AIROHA_MAX_NUM_GDM_PORTS	1
+ #define AIROHA_MAX_NUM_QDMA		1
+ #define AIROHA_MAX_NUM_RSTS		3
+@@ -645,9 +648,71 @@ static int airoha_qdma_init(struct udevice *dev,
+ 	return airoha_qdma_hw_init(qdma);
  }
  
-+static int airoha_eth_bind(struct udevice *dev)
++static int airoha_pcs_init(struct udevice *dev, ofnode node)
 +{
-+	struct airoha_eth_soc_data *data = (void *)dev_get_driver_data(dev);
-+	struct udevice *mdio_dev;
-+	ofnode switch_node;
-+	int ret = 0;
++	struct airoha_pcs_priv *priv;
++	struct udevice *pcs_dev;
++	phy_interface_t mode;
++	const char *managed;
++	int pcs_phandle;
++	bool neg_mode;
++	int speed;
++	int ret;
 +
-+	if (!CONFIG_IS_ENABLED(MDIO_MT7531))
++	/* PCS property is mandatory */
++	if (!ofnode_read_bool(node, "pcs"))
 +		return 0;
 +
-+	switch_node = ofnode_by_compatible(ofnode_null(),
-+					   "airoha,en7581-switch");
-+	if (!ofnode_valid(switch_node)) {
-+		debug("Warning: missing switch node\n");
-+		return 0;
++	ret = ofnode_read_u32(node, "pcs", &pcs_phandle);
++	if (ret)
++		return ret;
++
++	ret = uclass_get_device_by_phandle_id(UCLASS_MISC, pcs_phandle, &pcs_dev);
++	if (ret || !pcs_dev)
++		return ret;
++
++	priv = dev_get_priv(pcs_dev);
++
++	mode = ofnode_read_phy_mode(node);
++	managed = ofnode_read_string(node, "managed");
++	neg_mode = !strncmp(managed, "in-band-status", sizeof("in-band-status"));
++
++	airoha_pcs_pre_config(priv, mode);
++
++	ret = airoha_pcs_post_config(priv, mode);
++	if (ret)
++		return ret;
++
++	ret = airoha_pcs_config(priv, neg_mode, mode, NULL, true);
++	if (ret)
++		return ret;
++
++	/* Hardcode speed for linkup */
++	switch (mode) {
++	case PHY_INTERFACE_MODE_USXGMII:
++	case PHY_INTERFACE_MODE_10GBASER:
++		speed = SPEED_10000;
++		break;
++	case PHY_INTERFACE_MODE_2500BASEX:
++		speed = SPEED_2500;
++		break;
++	case PHY_INTERFACE_MODE_SGMII:
++	case PHY_INTERFACE_MODE_1000BASEX:
++		speed = SPEED_1000;
++		break;
++	default:
++		return -EINVAL;
 +	}
 +
-+	ret = device_bind_driver_to_node(dev, "mt7531-mdio", "mdio",
-+					 switch_node, &mdio_dev);
-+	if (ret)
-+		debug("Warning: failed to bind mdio controller\n");
++	airoha_pcs_link_up(priv, neg_mode, mode, speed, DUPLEX_FULL);
 +
 +	return 0;
 +}
 +
- static const struct udevice_id airoha_eth_ids[] = {
- 	{ .compatible = "airoha,en7581-eth" },
- 	{ }
-@@ -990,6 +1015,7 @@ U_BOOT_DRIVER(airoha_eth) = {
- 	.id = UCLASS_ETH,
- 	.of_match = airoha_eth_ids,
- 	.probe = airoha_eth_probe,
-+	.bind = airoha_eth_bind,
- 	.ops = &airoha_eth_ops,
- 	.priv_auto = sizeof(struct airoha_eth),
- 	.plat_auto = sizeof(struct eth_pdata),
+ static int airoha_hw_init(struct udevice *dev,
+ 			  struct airoha_eth *eth)
+ {
++	ofnode node;
+ 	int ret, i;
+ 
+ 	/* disable xsi */
+@@ -665,6 +730,10 @@ static int airoha_hw_init(struct udevice *dev,
+ 	if (ret)
+ 		return ret;
+ 
++	ret = reset_deassert_bulk(&eth->xsi_rsts);
++	if (ret)
++		return ret;
++
+ 	mdelay(20);
+ 
+ 	ret = airoha_fe_init(eth);
+@@ -677,6 +746,26 @@ static int airoha_hw_init(struct udevice *dev,
+ 			return ret;
+ 	}
+ 
++	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
++		u32 id;
++
++		if (!ofnode_device_is_compatible(node, "airoha,eth-mac"))
++			continue;
++
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		ret = ofnode_read_u32(node, "reg", &id);
++		if (ret)
++			continue;
++
++		/* Skip PCS init for embedded Switch */
++		if (id == 1)
++			continue;
++
++		airoha_pcs_init(dev, node);
++	}
++
+ 	return 0;
+ }
+ 
 -- 
 2.50.0
 
