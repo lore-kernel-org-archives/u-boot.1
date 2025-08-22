@@ -4,79 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F403CCA0EFC
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 12:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98E22CA0EED
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 12:22:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C46E280422;
-	Fri, 22 Aug 2025 14:13:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D611980422;
+	Fri, 22 Aug 2025 14:22:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hifmaVbw";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Mvnj65I9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F92180548; Fri, 22 Aug 2025 14:13:02 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 38CF581D5D; Fri, 22 Aug 2025 14:22:28 +0200 (CEST)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20708.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::708])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B00B8006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:13:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-61c26f3cf6fso601451a12.1
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 05:13:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755864780; x=1756469580; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QUqcP/z8Mr0E2fxIiFIBIxYC6WZkKoVKKm++TRtnEu8=;
- b=hifmaVbwg/9CcxQF9ZUtfeu7kyK11jKpXmhE6dlXohO7Mb3/6Tu3TnURhj82xCpmqI
- zV5Uic2r6xjzdxCOXiYAXrNmOYG2H99/v64RnSr+o+Qh5J2GmmR28JbvcZTm6qycZVbx
- tPcf/VQomnBnLXWCh5K5mi+H9tg62Z8z75rs8itZ2sCoDMM+P9FGEHsb3LzkDIqc8oaY
- 28VSUNzmvvbd++aONj+nd4i4FMCfakxH8MG6YTCKPx9ItEbrwtvhikrQLrUR71SnEWpu
- MjyaTG9EJNwUziUGJTyyeBpRajYwlYD5BpHFyJ+jiFlLCCS5cBra3GxSJ65uXqIxKhAx
- Gkog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755864780; x=1756469580;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QUqcP/z8Mr0E2fxIiFIBIxYC6WZkKoVKKm++TRtnEu8=;
- b=iF/5gUqSacnpRRRmbmlkfpDYxVO4MJPcqsyG6cquhNbhGLhAMW8NNuet73TaXN87J7
- lM+YlS4jHUG/hq7QRHW2kcNCFVC+ZtBwoPs/fCsQMk3Aig4/QvO+zXP/BE1Ie4ASwEet
- iNSLoACNtBGA+fG0QH08XrWwQE9UurjPUMQmxaW/Wia82hKxTWN8kmf/RVP4ffch9oxG
- 4l+yVMeySlmCKzmu8ZwvZ6MEWB1LKcj6pdFpiCGYWB48reN7OqgM39VCcShjPuZyJXJ5
- cRKxcRTc2JBnFqDDSuacZK+lEEiSsDT8/7zvKxFSwH5yyH0cjSplAf7Z0e6pbbpViZx+
- ghKg==
-X-Gm-Message-State: AOJu0Yxxbz/1WlCpuEjYE/Yo7icqOT2gA7flcNBTRNXK9y5+TJzRvqO0
- FncPIlRtSk0Wx8nlwNGiyRA1pB2rpT8R/De5GuEeYtXjbkBmoLathNAMmVMtKbhV1yJWmCEstkM
- W2ExfV/OiBNl1gZEpivGTV3XzbqG5hF0=
-X-Gm-Gg: ASbGncvHFgNNaTRVFmvnDmd9irCSpHlDFE5K4pIzLrim9G3O1EtTo7SxlJgrC388cXy
- GcPnWo7IvD7GplnM5o/l24S1UWMnRXqwTSYIzC4JnLZLjkWfCBzvR6LCSDl/cGyT/VKTrAVJg4F
- u3Umg7sKR4hbK04RwARHHLY6zDlLbom5Kf1UFbRsedyizXG1QvQr5tGucYddFKnLdSnp010rVrz
- U22w+CCgkdYiiK/OU/A96ZSzH0P28DxKf9fzfQyeOvCVc4suA==
-X-Google-Smtp-Source: AGHT+IECOh6bjyvlLT8gXriPOwqnK614h30ROpQnTDVnYLvWxAwrKih7h0KJwjuGSXQw0yrN+u33v1J2JHQ1Qq9x1Ls=
-X-Received: by 2002:a05:6402:2801:b0:615:c767:5b9e with SMTP id
- 4fb4d7f45d1cf-61c1b6e4a43mr2248740a12.20.1755864779469; Fri, 22 Aug 2025
- 05:12:59 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E9518006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:22:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SMpUMLJwrA4IHN2q3m2ad4fMSNDuZAKRJ4wkfAsr6wbYOEDVoUbF2wlSY6ZjTwq+H9osCFQKgBKPlUjKg3IhxvZoZWG91DgasK20ksrmE2lwficq4+RUsJsRIqNbAttkUN3vM8csmtUidWnMsvBEW3owlhYhcte3snIXf+X5xIfuo/7OC8P5SLzw4xH/wdsc4bsm43+FohP0XM+/YWtE+qsXNR/KrxA/DvrcX3NPYa7W5UhW7CbNh7T/Vyz7K3QnMqRkDKpUYw0JqTRo7YlghonrWeIKlVKVejtO/sQ5j+YUUEkYIiLCuzhTM9PooreY6A3bl0AWbrNJpihw0u+TRQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8K0Cx5ShSEK3ASlrg7FoNseibU+O5XWGq6SbsmJWIKM=;
+ b=fk4OdZAUOuNxFpQ03YiyjHvUlGAFjDBcNG3H3cag7Mm9zZDEjH422gW0ZdlBMdC/FL4Lx6YGnxGgFiOdYZJhkJVghUvsFnw4UTUfEyt49GNYBJaay6YQfxyB4fd2dOxKoALCwINtUNoqccuGnEEU2Cw4cZlrFHyEGuRqXczbdCmqoSIcFOut3aVzNRXiydl4bJXYit3neEIi963VQsj2oAJ8cNahnEF+X8or/SYxuavPCX2Mqamlk4UCvPUlBAlTRKXA/ZQbeT3zS2zRq8Q5kJuc3WUiOLJAdRueq1mdbAwjPqzPQ7rueVBYAPDgOEd8wWH8bSoq8pcgdBvL6F8yzA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=nabladev.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8K0Cx5ShSEK3ASlrg7FoNseibU+O5XWGq6SbsmJWIKM=;
+ b=Mvnj65I9tbMzTpc8FMc5JUjtfovbrLK5kW4JOm+j1FQ0KdWrYBMNUYjKSvgs1tacmcKt7iXS5lh67J9bmGTUK0hDsJHCOid+8LKkvOumW733GfCjDOyv3PaE0h2j7RSAlxeotTlNgYfb/bpZO9ahlDN7xtX1/5dQ6BoQ/hE0ClhE3wukD35HnMnPbVT8srI06Dl6UqOTaK10hGhrH0foRpd190ougUuCit8cjXLo/QP+pzGP2+Ldttxh08zgA61KbVW0/SV0bUmtOXr2zTX5cNk37LMwGvv/fK46PUNFV5FZu8tZbqpm/s8gMFePDg4O0Gqa2a4/DfipmtznBSYXLQ==
+Received: from AS4P250CA0012.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:5df::18)
+ by AS8P195MB1798.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:52e::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.17; Fri, 22 Aug
+ 2025 12:21:47 +0000
+Received: from AM3PEPF00009BA2.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5df:cafe::5c) by AS4P250CA0012.outlook.office365.com
+ (2603:10a6:20b:5df::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.17 via Frontend Transport; Fri,
+ 22 Aug 2025 12:21:47 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AM3PEPF00009BA2.mail.protection.outlook.com (10.167.16.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.9052.8 via Frontend Transport; Fri, 22 Aug 2025 12:21:47 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Fri, 22 Aug
+ 2025 14:21:47 +0200
+Received: from llp-moog.phytec.de (172.25.32.60) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Fri, 22 Aug
+ 2025 14:21:46 +0200
+From: Yannic Moog <y.moog@phytec.de>
+Date: Fri, 22 Aug 2025 14:21:29 +0200
+Subject: [PATCH v3] Add imx8mp-libra-fpsc board
 MIME-Version: 1.0
-References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
- <20250810233742.51902-10-adrianocarvalho.pt@gmail.com>
- <e69d0df0-aadd-409f-82a7-b65a5b764a48@gmx.de>
-In-Reply-To: <e69d0df0-aadd-409f-82a7-b65a5b764a48@gmx.de>
-From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Date: Fri, 22 Aug 2025 13:12:47 +0100
-X-Gm-Features: Ac12FXyhqMZZOVM3CwvQj00OgwKVl1ouNcT2Uy7u37ivk1tGAHDh6Z47W2XVizc
-Message-ID: <CACAHuLAncZVsUdYxPYDYjAOdHpzHYausUpsijM_1L3iJ_FDfsQ@mail.gmail.com>
-Subject: Re: [PATCH 09/10] doc: Use a long dash instead in
- tools/buildman/buildman.rst
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20250822-imx8mp-libra-fpsc-v3-1-50ba9cd2d474@phytec.de>
+X-B4-Tracking: v=1; b=H4sIAMhgqGgC/1XMPQ7CMAxA4asgzxglaRApE/dADEnrUkv9iZxQF
+ VW9OxETjN/w3gaJhCnB9bCB0MKJ56mgOh6g6f30JOS2GIwyZ+WMRh5XN0YcOIjHLqYGLVnjjAp
+ eBQ2li0Idr9/n/VHcyTxi7oX8z0nb/xNPnNkPmF4xzpJxMaixDrVubXUhb90t9u9Mzakl2PcPs
+ 3IIrbcAAAA=
+X-Change-ID: 20250821-imx8mp-libra-fpsc-4e42820ba0b1
+To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
+CC: Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>,
+ Wadim Egorov <w.egorov@phytec.de>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>, Yannic Moog
+ <y.moog@phytec.de>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1755865306; l=60362;
+ i=y.moog@phytec.de; s=20250509; h=from:subject:message-id;
+ bh=nox/b9jniQ+AKQ5O3ni3okE9gOhbz0G8q0kPP4MYo1k=;
+ b=2kc91PVBI+pOQtw3at/aFn9viEWkoDAUHht4hb+pKom/fY24qx03JL7r4p6rPce2UmSInlE01
+ W7Wd2/9MRc7AXybZP8wQ/IlS4RjRvINeAp5e553QB594M88YO/YhOS2
+X-Developer-Key: i=y.moog@phytec.de; a=ed25519;
+ pk=rpKoEJ4E7nD9qsrU/rfKVwMTWNWYaTBylZuJUXUiFr8=
+X-Originating-IP: [172.25.32.60]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009BA2:EE_|AS8P195MB1798:EE_
+X-MS-Office365-Filtering-Correlation-Id: a653477f-7d57-4852-6f52-08dde176770f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dFFOK28yMFcvTWs3T1Eyek1hTW0wRmxndnpMeHA1MTE2djBrK0FJbm5MTEoz?=
+ =?utf-8?B?TlBJRmlaSmpjdWV0T3lHYzFBSFVyR3E4TGgvVjNEenFKR3doaENVOXdpQm1W?=
+ =?utf-8?B?VW9uUlRmR1lzQ25Cam1Kc2RMK2NXaU50S0NpVFNxTUE4dUFjcnVhQWtnWXQv?=
+ =?utf-8?B?RHhjVHZGYVRWUVVrbmxLVWVuVlpLUllRWEE5eGJnNGhSUTB0WktWbGVJYXVt?=
+ =?utf-8?B?UXIwQ2NSWHFxSEtVZnZKMHEycU1PSE12UzVJc0hqV1hpbHY1M0FvTFpVU2xN?=
+ =?utf-8?B?aENOSHdPV1lxeHB4cG0wRlRsRytINVl3QWVOclIyYTA3V2hBNHc4NGpuNEIv?=
+ =?utf-8?B?Q0FRM1JVWFppNm9GS3VGWW5SMm43Vy9YVlQ1c1dFMHJ3eHpUWWdwZTlUVGxC?=
+ =?utf-8?B?M0lSK2pOVXN3OTIxMzFQUlpLcVU1NUJzNlFleUhvSjZTUWNzeWFlSzdEUG9j?=
+ =?utf-8?B?aTVyQytxK0xJQ2JQRml4ZTFUTHJLYlE0RGM4OHMzd0l6L3dqUjlLU29ZV2Jl?=
+ =?utf-8?B?emtmVnppUGV2R3lOSkMrRC8wa0ZXMW1mdGprTWZTTmVrajU4dXU2ZUVZaDRn?=
+ =?utf-8?B?Q2I0VVVVc1pjTDF0VVNTdURORmJJdmIxNFV3NmpxMEhzanJlOFlkSzdHT3lT?=
+ =?utf-8?B?QkJjcDhKaDg5eEdqS211dHpJMHM1UXNyaXRKaStoeDV2WmRETXdIK3I3Q2RC?=
+ =?utf-8?B?RU1nb21ienhYUStrU090eGcxZGE0dERVM3FKL1R6ZDg1Tk55cEl1T0RROTJY?=
+ =?utf-8?B?aGpybG5FZEZCODVXbXJZcDh3NmdEbENSY2JnVFlwdm5JaGQ0eDNLb3ljZHFJ?=
+ =?utf-8?B?ZjE4c0QyYXdoY1VQYUpmQmI1ZFFRZFZtcFNNc2VLR3c3eHBMWHdhR0o0T3g4?=
+ =?utf-8?B?VDcxWWhqM2YxejMxcHphU1Q0VTVuSkhrL2xwRWo1RFRUZ1VzNEQrMy9KeUho?=
+ =?utf-8?B?R3NWbGR4N2w5V1U0OGNZRUxnQ0g5b3ZiYlEyL3JVNS81dlM1WUVsbmYyb1BN?=
+ =?utf-8?B?blRsTnVpTUNOWHgzRnNoSzYzMmU0c0FMalAxMWxKcFc3M2E3bUhiNjRqRklC?=
+ =?utf-8?B?b3V3Y2dxa0U5L1JvemVCemJLUmdiUHRUOWh0VTZwV2lmL3FOR1RSY3dtL2U1?=
+ =?utf-8?B?QnhnRFQ5aW5VbTVDaW9QWWNSNmZtZDJRT2lMai92cXI1MHl5bS8yUDlhRCtz?=
+ =?utf-8?B?N1NRNVMxeHNINC96NFRMdWRqcmtkVlFwdWFOZ0s3MlNGSXV6NUs5Ull2cVhq?=
+ =?utf-8?B?UnB2QjhNOTFrUnBGaGF5WTdZemxPV2JFYW5VemJVaGpRWTlGSmNHQXpRQVdj?=
+ =?utf-8?B?WHp3bFl4elBMUWUyZnN2bXp4ODdVNzAyQkNQS2xaNTU3REQ5b2RSdk5Tbmg3?=
+ =?utf-8?B?cUtKTkFSL1Vkc2lLeG9tL2tRbzRvZkRFemp2SUlJT3V6VEJwUW9aK0ZkUVVU?=
+ =?utf-8?B?VEpvdXZSYUZ3SW1vSXQraHJFamcrUmw5UkZlUUFzemhkdjRkRGljU3QrcFJy?=
+ =?utf-8?B?eU5QZkdxSUZ6ZUFBampWM1hGb1R5RFROeFR4V0NSSG8wMWg5OTJuUDlDQXA0?=
+ =?utf-8?B?RUszQVgrTWpSQmNqSE5hRWV6c2tEVDdPRjJWUHZ2UzdGdDBCYVV4OWJzLzla?=
+ =?utf-8?B?QXNtUjZqVFhoTU5xR2FPNDQ0aXlMcnRGMVRPeVRuWFVQSiszazV5d0lsd3Yy?=
+ =?utf-8?B?VGlBbE9uVGVIZXcwWmk1WGpJZ2xJb01KcHJUUy9YMjUwS09HTElvTENFc2VI?=
+ =?utf-8?B?cUs3YzR6aVF3UDgyRXkwemFLZE5pSTJVcnlaUHViZ2Y4djJkdHAybWdjRWZZ?=
+ =?utf-8?B?NXV2bTE1TkhnK1FBM3UvNDVUSW9HdG1Gd0RxR2pVWFlob0pvU0kzWldqSW1w?=
+ =?utf-8?B?RDFYSVVZbWdpb0dYM0x4Q0JCYUlQeDA0bDZOelNNRS9PdG9pWFBkMGhQOEVZ?=
+ =?utf-8?B?U29ham1GMDg0dHUyMVBKYjdMaEF5dHY4YVVJWkdrOWp0ODBjS2YzZnJyZDBk?=
+ =?utf-8?B?WkVHNFBSdlFnPT0=?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014)(13003099007);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2025 12:21:47.5943 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a653477f-7d57-4852-6f52-08dde176770f
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009BA2.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB1798
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,58 +170,2696 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Aug 2025 at 21:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 11.08.25 01:37, Adriano Carvalho wrote:
-> > Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-> > ---
-> >   tools/buildman/buildman.rst | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-> > index 7944adcd867..3e41d6ec304 100644
-> > --- a/tools/buildman/buildman.rst
-> > +++ b/tools/buildman/buildman.rst
-> > @@ -1360,7 +1360,7 @@ Using boards.cfg
-> >   This file is no-longer needed by buildman but it is still generated in the
-> >   working directory. This helps avoid a delay on every build, since scanning all
-> >   the Kconfig files takes a few seconds. Use the ``-R <filename>`` flag to force
-> > -regeneration of the file - in that case buildman exits after writing the file
-> > +regeneration of the file -- in that case buildman exits after writing the file
->
-> Please, use the Unicode character, that you want to display, e.g. U+2014
-> (em dash), or U+2013 (en dash). This way readers of the raw rst file
-> will not be irritated and the rendering in HTML will not depend on the
-> smartquotes_action setting.
->
-> But to be honest I don't see great value in this typography change.
->
-> Best regards
->
-> Heinrich
->
-> >   with exit code 2 if there was an error in the maintainer files. To use the
-> >   default filename, use a hyphen, i.e. `-R -`.
-> >
->
+From: Benjamin Hahn <B.Hahn@phytec.de>
 
-In the build directory (+ tools/buildman/buildman.rst), this style of
-writing is used only once (here). With a dash, it looks sloppy on the
-browser.
+Add new imx8mp-libra-fpsc board.
+Bootph tags as well as USB device tree nodes are in u-boot.dtsi for now
+and will be removed when upstreamed.
+The Libra i.MX 8M Plus FPSC is a single board computer. It uses an i.MX
+8M Plus FPSC [1] System on Module which utilizes the FPSC standard [2].
 
-What about replacing the dash with a period?
+[1] https://www.phytec.eu/en/produkte/system-on-modules/phycore-imx-8m-plus-fpsc
+[2] https://www.phytec.eu/en/produkte/system-on-modules/fpsc
 
- This file is no-longer needed by Buildman but it is still generated in the
- working directory. This helps avoid a delay on every build, since scanning all
- the Kconfig files takes a few seconds. Use the ``-R <filename>`` flag to force
--regeneration of the file - in that case Buildman exits after writing the file
-+regeneration of the file. In that case Buildman exits after writing the file
- with exit code 2 if there was an error in the maintainer files. To use the
- default filename, use a hyphen, i.e. `-R -`.
+Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+Signed-off-by: Yannic Moog <y.moog@phytec.de>
+---
+Changes in v3:
+- take over series from Benjamin
+- add imply OF_UPSTREAM, remove from defconfig
+- style fixes with regards to proper Product name
+- add USB dt properties to u-boot.dtsi (until present in upstream)
+- remove som_detection code from board code (still present in spl as som
+  info is printed; in u-boot proper code, nothing is done)
+- standard boot:
+  - add CONFIG_DEFAULT_FDT_FILE for fdtfile variable
+  - change addresses for standard boot variables; align with imx8mm
+    PHYTEC boards
+  - use u-boot.dtsi to define standard boot support
+- Doc:
+  - add doc file to toctree
+  - remove optional from optee_os build instructions
+  - update imx-firmware version
+  - drop export commands, use single make command for instructions
+- Link to v2: https://lore.kernel.org/r/20250814-imx8mp-libra-initial-support-v2-1-9b91d437ea48@phytec.de
 
-I understand this is probably worthless and I could just be wasting
-everyone's time. Please let me know if I should just ignore these very
-minor "typos".
+Changes in v2:
+- Review comments from v1 (too many to list them all)
+- removed the first two patches (devicetree is now in of_upstream)
+- added the latest version of ram timings
+- add optee support (libra is now in upstream optee)
+- add CONFIG_CMD_MMC_REG command for mmc reg read command
+- Link to v1: https://lore.kernel.org/r/20250725-imx8mp-libra-initial-support-v1-0-d9982df21a4b@phytec.de
+---
+ arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi     |  131 ++
+ arch/arm/mach-imx/imx8m/Kconfig                    |   10 +
+ board/phytec/imx8mp-libra-fpsc/Kconfig             |   16 +
+ board/phytec/imx8mp-libra-fpsc/MAINTAINERS         |    9 +
+ board/phytec/imx8mp-libra-fpsc/Makefile            |   10 +
+ board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c |   89 +
+ .../phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.env |   19 +
+ board/phytec/imx8mp-libra-fpsc/imximage-8mp-sd.cfg |    9 +
+ board/phytec/imx8mp-libra-fpsc/lpddr4_timing.c     | 1814 ++++++++++++++++++++
+ board/phytec/imx8mp-libra-fpsc/spl.c               |  132 ++
+ configs/imx8mp-libra-fpsc_defconfig                |  175 ++
+ doc/board/phytec/imx8mp-libra-fpsc.rst             |   84 +
+ doc/board/phytec/index.rst                         |    1 +
+ include/configs/imx8mp-libra-fpsc.h                |   27 +
+ 14 files changed, 2526 insertions(+)
 
-Com os melhores cumprimentos. / Best regards.
-Adriano Carvalho
+diff --git a/arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi b/arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..1320f1540ed9844133abe55a3e33493555719d4e
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi
+@@ -0,0 +1,131 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ */
++
++#include "imx8mp-u-boot.dtsi"
++
++/ {
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
++
++	bootstd {
++		bootph-verify;
++		compatible = "u-boot,boot-std";
++
++		filename-prefixes = "/", "/boot/";
++		bootdev-order = "mmc2", "mmc1", "ethernet";
++
++		efi {
++			compatible = "u-boot,distro-efi";
++		};
++
++		rauc {
++			compatible = "u-boot,distro-rauc";
++		};
++
++		script {
++			compatible = "u-boot,script";
++		};
++	};
++};
++
++&reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
++
++&pinctrl_uart4 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc3 {
++	bootph-pre-ram;
++};
++
++&pinctrl_wdog {
++	bootph-pre-ram;
++};
++
++&gpio1 {
++	bootph-pre-ram;
++};
++
++&gpio2 {
++	bootph-pre-ram;
++};
++
++&gpio3 {
++	bootph-pre-ram;
++};
++
++&gpio4 {
++	bootph-pre-ram;
++};
++
++&gpio5 {
++	bootph-pre-ram;
++};
++
++&uart4 {
++	bootph-pre-ram;
++};
++
++&i2c1 {
++	bootph-pre-ram;
++};
++
++&pmic {
++	bootph-pre-ram;
++};
++
++/* USB1 Type-C */
++&usb3_phy0 {
++	status = "okay";
++};
++
++&usb3_0 {
++	fsl,over-current-active-low;
++	fsl,power-active-low;
++	status = "okay";
++};
++
++&usb_dwc3_0 {
++	dr_mode = "peripheral";
++	status = "okay";
++};
++
++/* USB2 4-port USB3.0 HUB */
++&usb3_phy1 {
++	vbus-supply = <&reg_vdd_5v0>;
++	status = "okay";
++};
++
++&usb3_1 {
++	fsl,permanently-attached;
++	fsl,disable-port-power-control;
++	status = "okay";
++};
++
++&usb_dwc3_1 {
++	dr_mode = "host";
++	status = "okay";
++};
++
++&usdhc2 {
++	bootph-pre-ram;
++};
++
++&usdhc3 {
++	bootph-pre-ram;
++};
++
++&wdog1 {
++	bootph-pre-ram;
++};
+diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
+index 74416a7884737651a3334c20dbae6c5074b8b6e8..e7bc154b8053f8eb0e99411fe4879ab06d923532 100644
+--- a/arch/arm/mach-imx/imx8m/Kconfig
++++ b/arch/arm/mach-imx/imx8m/Kconfig
+@@ -345,6 +345,15 @@ config TARGET_PHYCORE_IMX8MP
+ 	select IMX8M_LPDDR4
+ 	imply OF_UPSTREAM
+ 
++config TARGET_IMX8MP_LIBRA_FPSC
++	bool "PHYTEC Libra i.MX 8M Plus FPSC"
++	select IMX8MP
++	select SUPPORT_SPL
++	select IMX8M_LPDDR4
++	imply OF_UPSTREAM
++	help
++	  Libra i.MX8M Plus FPSC is an SBC based on the NXP i.MX 8M Plus SoC.
++
+ config TARGET_IMX8MM_CL_IOT_GATE
+ 	bool "CompuLab iot-gate-imx8"
+ 	select IMX8MM
+@@ -409,6 +418,7 @@ source "board/kontron/sl-mx8mm/Kconfig"
+ source "board/menlo/mx8menlo/Kconfig"
+ source "board/msc/sm2s_imx8mp/Kconfig"
+ source "board/mntre/imx8mq_reform2/Kconfig"
++source "board/phytec/imx8mp-libra-fpsc/Kconfig"
+ source "board/phytec/phycore_imx8mm/Kconfig"
+ source "board/phytec/phycore_imx8mp/Kconfig"
+ source "board/polyhex/imx8mp_debix_model_a/Kconfig"
+diff --git a/board/phytec/imx8mp-libra-fpsc/Kconfig b/board/phytec/imx8mp-libra-fpsc/Kconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..4961611f7b251dbcf02da9cf2ec201bf22f1a7f1
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/Kconfig
+@@ -0,0 +1,16 @@
++if TARGET_IMX8MP_LIBRA_FPSC
++
++config SYS_BOARD
++	default "imx8mp-libra-fpsc"
++
++config SYS_VENDOR
++	default "phytec"
++
++config IMX_CONFIG
++	default "board/phytec/imx8mp-libra-fpsc/imximage-8mp-sd.cfg"
++
++config SYS_CONFIG_NAME
++	default "imx8mp-libra-fpsc"
++
++source "board/phytec/common/Kconfig"
++endif
+diff --git a/board/phytec/imx8mp-libra-fpsc/MAINTAINERS b/board/phytec/imx8mp-libra-fpsc/MAINTAINERS
+new file mode 100644
+index 0000000000000000000000000000000000000000..1fd99888a2e0cec693bbe3eb054618a1e37a3c19
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/MAINTAINERS
+@@ -0,0 +1,9 @@
++Libra-i.MX 8M Plus
++M:	Teresa Remmet <t.remmet@phytec.de>
++W:	https://www.phytec.eu/en/produkte/system-on-modules/phycore-imx-8m-plus-fpsc/
++S:	Maintained
++F:	arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi
++F:	board/phytec/imx8mp-libra-fpsc/
++F:	configs/imx8mp-libra-fpsc_defconfig
++F:	include/configs/imx8mp-libra-fpsc.h
++F:	doc/board/phytec/imx8mp-libra-fpsc.rst
+diff --git a/board/phytec/imx8mp-libra-fpsc/Makefile b/board/phytec/imx8mp-libra-fpsc/Makefile
+new file mode 100644
+index 0000000000000000000000000000000000000000..21b35d9142f4081771d3d2587ba9cf4f23d46a3a
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/Makefile
+@@ -0,0 +1,10 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2025 PHYTEC Messtechnik GmbH
++
++obj-y += imx8mp-libra-fpsc.o
++
++ifdef CONFIG_XPL_BUILD
++obj-y += spl.o
++obj-$(CONFIG_IMX8M_LPDDR4) += lpddr4_timing.o
++endif
+diff --git a/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c b/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..ffa21da1b34309f716f6bc3e5bd875df5abb00b7
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c
+@@ -0,0 +1,89 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ */
++
++#include <asm/arch/clock.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/global_data.h>
++#include <linux/io.h>
++#include <asm/mach-imx/boot_mode.h>
++#include <dwc3-uboot.h>
++#include <env.h>
++#include <init.h>
++#include <fdt_support.h>
++#include <jffs2/load_kernel.h>
++#include <miiphy.h>
++#include <mtd_node.h>
++#include <usb.h>
++#include <i2c.h>
++
++#define EEPROM_ADDR		0x51
++
++#define TUSB_PORT_POL_CRTL_REG	0xB
++#define TUSB_CUSTOM_POL		BIT(7)
++#define TUSB_P0_POL		BIT(0)
++
++/*
++ * WORKAROUND for PCM-937-L 1618.0, 1618.1.
++ * USB HUB TUSB8042A has swapped upstream pin polarity.
++ * Set i2c registers to inform the hub that the lines
++ * are swapped.
++ */
++void tusb8042a_swap_lines(void)
++{
++	const u8 pol_swap_val = (TUSB_CUSTOM_POL | TUSB_P0_POL);
++	const int addr = 0x44;
++	struct udevice *dev = 0;
++	int ret = i2c_get_chip_for_busnum(2, addr, 1, &dev);
++
++	if (!ret)
++		dm_i2c_write(dev, TUSB_PORT_POL_CRTL_REG, &pol_swap_val, 1);
++	else
++		printf("TUSB8042A: Failed to fixup USB HUB.\n");
++}
++
++int board_init(void)
++{
++	tusb8042a_swap_lines();
++
++	return 0;
++}
++
++int board_mmc_get_env_dev(int devno)
++{
++	return devno;
++}
++
++int board_late_init(void)
++{
++	switch (get_boot_device()) {
++	case SD2_BOOT:
++		env_set_ulong("mmcdev", 1);
++		if (!strcmp(env_get("boot_targets"), env_get_default("boot_targets")))
++			env_set("boot_targets", "mmc1 mmc2 ethernet");
++		break;
++	case MMC3_BOOT:
++		env_set_ulong("mmcdev", 2);
++		break;
++	case USB_BOOT:
++		printf("Detect USB boot. Will enter fastboot mode!\n");
++		if (!strcmp(env_get("bootcmd"), env_get_default("bootcmd")))
++			env_set("bootcmd", "fastboot 0; bootflow scan -lb;");
++		break;
++	default:
++		break;
++	}
++
++	return 0;
++}
++
++int board_phys_sdram_size(phys_size_t *size)
++{
++	if (!size)
++		return -EINVAL;
++
++	*size = get_ram_size((void *)PHYS_SDRAM, PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE);
++
++	return 0;
++}
+diff --git a/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.env b/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.env
+new file mode 100644
+index 0000000000000000000000000000000000000000..c744248ab7a6189d2b6e425e4c20b36c83f7e956
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.env
+@@ -0,0 +1,19 @@
++boot_script_dhcp=boot.scr.uimg
++console=ttymxc3,CONFIG_BAUDRATE
++emmc_dev=2  /* This is needed by built-in uuu flash scripts */
++fdtfile=CONFIG_DEFAULT_FDT_FILE
++fdt_addr_r=0x40480000
++fdt_overlay_addr_r=0x404a0000
++fit_fdtconf=conf-imx8mp-libra-rdk-fpsc.dtb
++kernel_addr_r=0x40a00000
++kernel_comp_addr_r=0x43a00000
++kernel_comp_size=0x1e00000
++mmcroot=2
++pxefile_addr_r=0x45800000
++ramdisk_addr_r=0x45802000
++scriptaddr=0x47600000
++script_offset_f=0x0
++script_size_f=0x2000
++sd_dev=1    /* This is needed by built-in uuu flash scripts */
++ip_dyn=yes
++nfsroot=/srv/nfs
+diff --git a/board/phytec/imx8mp-libra-fpsc/imximage-8mp-sd.cfg b/board/phytec/imx8mp-libra-fpsc/imximage-8mp-sd.cfg
+new file mode 100644
+index 0000000000000000000000000000000000000000..6dedf1724ab656aacffefef2bec9855c155658c7
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/imximage-8mp-sd.cfg
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2021 NXP
++ */
++
++
++ROM_VERSION	v2
++BOOT_FROM	sd
++LOADER		u-boot-spl-ddr.bin	0x920000
+diff --git a/board/phytec/imx8mp-libra-fpsc/lpddr4_timing.c b/board/phytec/imx8mp-libra-fpsc/lpddr4_timing.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..1206bc7ca31751816858131b30b0a75ce0131596
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/lpddr4_timing.c
+@@ -0,0 +1,1814 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright 2025 NXP
++ *
++ * Code generated with DDR Tool v3.5.0_9-1ddf053d.
++ * DDR PHY FW2020.06
++ */
++
++#include <linux/kernel.h>
++#include <asm/arch/ddr.h>
++
++/* Initialize DDRC registers */
++struct dram_cfg_param ddr_ddrc_cfg[] = {
++	{0x3d400304, 0x1},
++	{0x3d400030, 0x1},
++	{0x3d400000, 0xa1080020},
++	{0x3d400020, 0x1323},
++	{0x3d400024, 0x1e84800},
++	{0x3d400064, 0x7a0118},
++	{0x3d400070, 0x7027f90},
++	{0x3d400074, 0x790},
++	{0x3d4000d0, 0xc00307a3},
++	{0x3d4000d4, 0xc50000},
++	{0x3d4000dc, 0xf4003f},
++	{0x3d4000e0, 0xe30000},
++	{0x3d4000e8, 0x440048},
++	{0x3d4000ec, 0x140048},
++	{0x3d400100, 0x2028222a},
++	{0x3d400104, 0x8083f},
++	{0x3d40010c, 0xe0e000},
++	{0x3d400110, 0x12040a12},
++	{0x3d400114, 0x2050f0f},
++	{0x3d400118, 0x1010009},
++	{0x3d40011c, 0x502},
++	{0x3d400130, 0x20800},
++	{0x3d400134, 0xe100002},
++	{0x3d400138, 0x120},
++	{0x3d400144, 0xc80064},
++	{0x3d400180, 0x3e8001e},
++	{0x3d400184, 0x3207a12},
++	{0x3d400188, 0x0},
++	{0x3d400190, 0x4a3820e},
++	{0x3d400194, 0x80303},
++	{0x3d4001b4, 0x230e},
++	{0x3d4001a0, 0xe0400018},
++	{0x3d4001a4, 0xdf00e4},
++	{0x3d4001a8, 0x80000000},
++	{0x3d4001b0, 0x11},
++	{0x3d4001c0, 0x7},
++	{0x3d4001c4, 0x1},
++	{0x3d4000f4, 0x799},
++	{0x3d400108, 0x9141d1c},
++	{0x3d400200, 0x1f},
++	{0x3d400208, 0x0},
++	{0x3d40020c, 0x0},
++	{0x3d400210, 0x1f1f},
++	{0x3d400204, 0x80808},
++	{0x3d400214, 0x7070707},
++	{0x3d400218, 0x7070707},
++	{0x3d40021c, 0xf0f},
++	{0x3d400250, 0x1705},
++	{0x3d400254, 0x2c},
++	{0x3d40025c, 0x4000030},
++	{0x3d400264, 0x900093e7},
++	{0x3d40026c, 0x2005574},
++	{0x3d400400, 0x111},
++	{0x3d400404, 0x72ff},
++	{0x3d400408, 0x72ff},
++	{0x3d400494, 0x2100e07},
++	{0x3d400498, 0x620096},
++	{0x3d40049c, 0x1100e07},
++	{0x3d4004a0, 0xc8012c},
++	{0x3d400028, 0x0},
++};
++
++/* PHY Initialize Configuration */
++struct dram_cfg_param ddr_ddrphy_cfg[] = {
++	{0x100a0, 0x0},
++	{0x100a1, 0x1},
++	{0x100a2, 0x2},
++	{0x100a3, 0x3},
++	{0x100a4, 0x4},
++	{0x100a5, 0x5},
++	{0x100a6, 0x6},
++	{0x100a7, 0x7},
++	{0x110a0, 0x0},
++	{0x110a1, 0x1},
++	{0x110a2, 0x3},
++	{0x110a3, 0x4},
++	{0x110a4, 0x5},
++	{0x110a5, 0x2},
++	{0x110a6, 0x7},
++	{0x110a7, 0x6},
++	{0x120a0, 0x0},
++	{0x120a1, 0x1},
++	{0x120a2, 0x3},
++	{0x120a3, 0x2},
++	{0x120a4, 0x5},
++	{0x120a5, 0x4},
++	{0x120a6, 0x7},
++	{0x120a7, 0x6},
++	{0x130a0, 0x0},
++	{0x130a1, 0x1},
++	{0x130a2, 0x2},
++	{0x130a3, 0x3},
++	{0x130a4, 0x4},
++	{0x130a5, 0x5},
++	{0x130a6, 0x6},
++	{0x130a7, 0x7},
++	{0x1005f, 0x1ff},
++	{0x1015f, 0x1ff},
++	{0x1105f, 0x1ff},
++	{0x1115f, 0x1ff},
++	{0x1205f, 0x1ff},
++	{0x1215f, 0x1ff},
++	{0x1305f, 0x1ff},
++	{0x1315f, 0x1ff},
++	{0x55, 0x1ff},
++	{0x1055, 0x1ff},
++	{0x2055, 0x1ff},
++	{0x3055, 0x1ff},
++	{0x4055, 0x1ff},
++	{0x5055, 0x1ff},
++	{0x6055, 0x1ff},
++	{0x7055, 0x1ff},
++	{0x8055, 0x1ff},
++	{0x9055, 0x1ff},
++	{0x200c5, 0x18},
++	{0x2002e, 0x2},
++	{0x90204, 0x0},
++	{0x20024, 0x1e3},
++	{0x2003a, 0x2},
++	{0x2007d, 0x212},
++	{0x2007c, 0x61},
++	{0x20056, 0x3},
++	{0x1004d, 0x600},
++	{0x1014d, 0x600},
++	{0x1104d, 0x600},
++	{0x1114d, 0x600},
++	{0x1204d, 0x600},
++	{0x1214d, 0x600},
++	{0x1304d, 0x600},
++	{0x1314d, 0x600},
++	{0x10049, 0x618},
++	{0x10149, 0x618},
++	{0x11049, 0x618},
++	{0x11149, 0x618},
++	{0x12049, 0x618},
++	{0x12149, 0x618},
++	{0x13049, 0x618},
++	{0x13149, 0x618},
++	{0x43, 0x21},
++	{0x1043, 0x21},
++	{0x2043, 0x21},
++	{0x3043, 0x21},
++	{0x4043, 0x21},
++	{0x5043, 0x21},
++	{0x6043, 0x21},
++	{0x7043, 0x21},
++	{0x8043, 0x21},
++	{0x9043, 0x21},
++	{0x20018, 0x3},
++	{0x20075, 0x4},
++	{0x20050, 0x0},
++	{0x20008, 0x3e8},
++	{0x20088, 0x9},
++	{0x200b2, 0xdc},
++	{0x10043, 0x5a1},
++	{0x10143, 0x5a1},
++	{0x11043, 0x5a1},
++	{0x11143, 0x5a1},
++	{0x12043, 0x5a1},
++	{0x12143, 0x5a1},
++	{0x13043, 0x5a1},
++	{0x13143, 0x5a1},
++	{0x200fa, 0x1},
++	{0x20019, 0x1},
++	{0x200f0, 0x0},
++	{0x200f1, 0x0},
++	{0x200f2, 0x4444},
++	{0x200f3, 0x8888},
++	{0x200f4, 0x5555},
++	{0x200f5, 0x0},
++	{0x200f6, 0x0},
++	{0x200f7, 0xf000},
++	{0x20025, 0x0},
++	{0x2002d, 0x1},
++	{0x2002c, 0x0},
++};
++
++/* PHY trained csr */
++struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
++	{0x1005f, 0x0},
++	{0x1015f, 0x0},
++	{0x1105f, 0x0},
++	{0x1115f, 0x0},
++	{0x1205f, 0x0},
++	{0x1215f, 0x0},
++	{0x1305f, 0x0},
++	{0x1315f, 0x0},
++	{0x55, 0x0},
++	{0x1055, 0x0},
++	{0x2055, 0x0},
++	{0x3055, 0x0},
++	{0x4055, 0x0},
++	{0x5055, 0x0},
++	{0x6055, 0x0},
++	{0x7055, 0x0},
++	{0x8055, 0x0},
++	{0x9055, 0x0},
++	{0x200c5, 0x0},
++	{0x2002e, 0x0},
++	{0x90204, 0x0},
++	{0x20024, 0x0},
++	{0x2003a, 0x0},
++	{0x2007d, 0x0},
++	{0x2007c, 0x0},
++	{0x20056, 0x0},
++	{0x1004d, 0x0},
++	{0x1014d, 0x0},
++	{0x1104d, 0x0},
++	{0x1114d, 0x0},
++	{0x1204d, 0x0},
++	{0x1214d, 0x0},
++	{0x1304d, 0x0},
++	{0x1314d, 0x0},
++	{0x10049, 0x0},
++	{0x10149, 0x0},
++	{0x11049, 0x0},
++	{0x11149, 0x0},
++	{0x12049, 0x0},
++	{0x12149, 0x0},
++	{0x13049, 0x0},
++	{0x13149, 0x0},
++	{0x43, 0x0},
++	{0x1043, 0x0},
++	{0x2043, 0x0},
++	{0x3043, 0x0},
++	{0x4043, 0x0},
++	{0x5043, 0x0},
++	{0x6043, 0x0},
++	{0x7043, 0x0},
++	{0x8043, 0x0},
++	{0x9043, 0x0},
++	{0x20018, 0x0},
++	{0x20075, 0x0},
++	{0x20050, 0x0},
++	{0x20008, 0x0},
++	{0x20088, 0x0},
++	{0x200b2, 0x0},
++	{0x10043, 0x0},
++	{0x10143, 0x0},
++	{0x11043, 0x0},
++	{0x11143, 0x0},
++	{0x12043, 0x0},
++	{0x12143, 0x0},
++	{0x13043, 0x0},
++	{0x13143, 0x0},
++	{0x200fa, 0x0},
++	{0x20019, 0x0},
++	{0x200f0, 0x0},
++	{0x200f1, 0x0},
++	{0x200f2, 0x0},
++	{0x200f3, 0x0},
++	{0x200f4, 0x0},
++	{0x200f5, 0x0},
++	{0x200f6, 0x0},
++	{0x200f7, 0x0},
++	{0x20025, 0x0},
++	{0x2002d, 0x0},
++	{0x2002c, 0x0},
++	{0xd0000, 0x0},
++	{0x90000, 0x0},
++	{0x90001, 0x0},
++	{0x90002, 0x0},
++	{0x90003, 0x0},
++	{0x90004, 0x0},
++	{0x90005, 0x0},
++	{0x90029, 0x0},
++	{0x9002a, 0x0},
++	{0x9002b, 0x0},
++	{0x9002c, 0x0},
++	{0x9002d, 0x0},
++	{0x9002e, 0x0},
++	{0x9002f, 0x0},
++	{0x90030, 0x0},
++	{0x90031, 0x0},
++	{0x90032, 0x0},
++	{0x90033, 0x0},
++	{0x90034, 0x0},
++	{0x90035, 0x0},
++	{0x90036, 0x0},
++	{0x90037, 0x0},
++	{0x90038, 0x0},
++	{0x90039, 0x0},
++	{0x9003a, 0x0},
++	{0x9003b, 0x0},
++	{0x9003c, 0x0},
++	{0x9003d, 0x0},
++	{0x9003e, 0x0},
++	{0x9003f, 0x0},
++	{0x90040, 0x0},
++	{0x90041, 0x0},
++	{0x90042, 0x0},
++	{0x90043, 0x0},
++	{0x90044, 0x0},
++	{0x90045, 0x0},
++	{0x90046, 0x0},
++	{0x90047, 0x0},
++	{0x90048, 0x0},
++	{0x90049, 0x0},
++	{0x9004a, 0x0},
++	{0x9004b, 0x0},
++	{0x9004c, 0x0},
++	{0x9004d, 0x0},
++	{0x9004e, 0x0},
++	{0x9004f, 0x0},
++	{0x90050, 0x0},
++	{0x90051, 0x0},
++	{0x90052, 0x0},
++	{0x90053, 0x0},
++	{0x90054, 0x0},
++	{0x90055, 0x0},
++	{0x90056, 0x0},
++	{0x90057, 0x0},
++	{0x90058, 0x0},
++	{0x90059, 0x0},
++	{0x9005a, 0x0},
++	{0x9005b, 0x0},
++	{0x9005c, 0x0},
++	{0x9005d, 0x0},
++	{0x9005e, 0x0},
++	{0x9005f, 0x0},
++	{0x90060, 0x0},
++	{0x90061, 0x0},
++	{0x90062, 0x0},
++	{0x90063, 0x0},
++	{0x90064, 0x0},
++	{0x90065, 0x0},
++	{0x90066, 0x0},
++	{0x90067, 0x0},
++	{0x90068, 0x0},
++	{0x90069, 0x0},
++	{0x9006a, 0x0},
++	{0x9006b, 0x0},
++	{0x9006c, 0x0},
++	{0x9006d, 0x0},
++	{0x9006e, 0x0},
++	{0x9006f, 0x0},
++	{0x90070, 0x0},
++	{0x90071, 0x0},
++	{0x90072, 0x0},
++	{0x90073, 0x0},
++	{0x90074, 0x0},
++	{0x90075, 0x0},
++	{0x90076, 0x0},
++	{0x90077, 0x0},
++	{0x90078, 0x0},
++	{0x90079, 0x0},
++	{0x9007a, 0x0},
++	{0x9007b, 0x0},
++	{0x9007c, 0x0},
++	{0x9007d, 0x0},
++	{0x9007e, 0x0},
++	{0x9007f, 0x0},
++	{0x90080, 0x0},
++	{0x90081, 0x0},
++	{0x90082, 0x0},
++	{0x90083, 0x0},
++	{0x90084, 0x0},
++	{0x90085, 0x0},
++	{0x90086, 0x0},
++	{0x90087, 0x0},
++	{0x90088, 0x0},
++	{0x90089, 0x0},
++	{0x9008a, 0x0},
++	{0x9008b, 0x0},
++	{0x9008c, 0x0},
++	{0x9008d, 0x0},
++	{0x9008e, 0x0},
++	{0x9008f, 0x0},
++	{0x90090, 0x0},
++	{0x90091, 0x0},
++	{0x90092, 0x0},
++	{0x90093, 0x0},
++	{0x90094, 0x0},
++	{0x90095, 0x0},
++	{0x90096, 0x0},
++	{0x90097, 0x0},
++	{0x90098, 0x0},
++	{0x90099, 0x0},
++	{0x9009a, 0x0},
++	{0x9009b, 0x0},
++	{0x9009c, 0x0},
++	{0x9009d, 0x0},
++	{0x9009e, 0x0},
++	{0x9009f, 0x0},
++	{0x900a0, 0x0},
++	{0x900a1, 0x0},
++	{0x900a2, 0x0},
++	{0x900a3, 0x0},
++	{0x40000, 0x0},
++	{0x40020, 0x0},
++	{0x40040, 0x0},
++	{0x40060, 0x0},
++	{0x40001, 0x0},
++	{0x40021, 0x0},
++	{0x40041, 0x0},
++	{0x40061, 0x0},
++	{0x40002, 0x0},
++	{0x40022, 0x0},
++	{0x40042, 0x0},
++	{0x40062, 0x0},
++	{0x40003, 0x0},
++	{0x40023, 0x0},
++	{0x40043, 0x0},
++	{0x40063, 0x0},
++	{0x40004, 0x0},
++	{0x40024, 0x0},
++	{0x40044, 0x0},
++	{0x40064, 0x0},
++	{0x40005, 0x0},
++	{0x40025, 0x0},
++	{0x40045, 0x0},
++	{0x40065, 0x0},
++	{0x40006, 0x0},
++	{0x40026, 0x0},
++	{0x40046, 0x0},
++	{0x40066, 0x0},
++	{0x40007, 0x0},
++	{0x40027, 0x0},
++	{0x40047, 0x0},
++	{0x40067, 0x0},
++	{0x40008, 0x0},
++	{0x40028, 0x0},
++	{0x40048, 0x0},
++	{0x40068, 0x0},
++	{0x40009, 0x0},
++	{0x40029, 0x0},
++	{0x40049, 0x0},
++	{0x40069, 0x0},
++	{0x4000a, 0x0},
++	{0x4002a, 0x0},
++	{0x4004a, 0x0},
++	{0x4006a, 0x0},
++	{0x4000b, 0x0},
++	{0x4002b, 0x0},
++	{0x4004b, 0x0},
++	{0x4006b, 0x0},
++	{0x4000c, 0x0},
++	{0x4002c, 0x0},
++	{0x4004c, 0x0},
++	{0x4006c, 0x0},
++	{0x4000d, 0x0},
++	{0x4002d, 0x0},
++	{0x4004d, 0x0},
++	{0x4006d, 0x0},
++	{0x4000e, 0x0},
++	{0x4002e, 0x0},
++	{0x4004e, 0x0},
++	{0x4006e, 0x0},
++	{0x4000f, 0x0},
++	{0x4002f, 0x0},
++	{0x4004f, 0x0},
++	{0x4006f, 0x0},
++	{0x40010, 0x0},
++	{0x40030, 0x0},
++	{0x40050, 0x0},
++	{0x40070, 0x0},
++	{0x40011, 0x0},
++	{0x40031, 0x0},
++	{0x40051, 0x0},
++	{0x40071, 0x0},
++	{0x40012, 0x0},
++	{0x40032, 0x0},
++	{0x40052, 0x0},
++	{0x40072, 0x0},
++	{0x40013, 0x0},
++	{0x40033, 0x0},
++	{0x40053, 0x0},
++	{0x40073, 0x0},
++	{0x40014, 0x0},
++	{0x40034, 0x0},
++	{0x40054, 0x0},
++	{0x40074, 0x0},
++	{0x40015, 0x0},
++	{0x40035, 0x0},
++	{0x40055, 0x0},
++	{0x40075, 0x0},
++	{0x40016, 0x0},
++	{0x40036, 0x0},
++	{0x40056, 0x0},
++	{0x40076, 0x0},
++	{0x40017, 0x0},
++	{0x40037, 0x0},
++	{0x40057, 0x0},
++	{0x40077, 0x0},
++	{0x40018, 0x0},
++	{0x40038, 0x0},
++	{0x40058, 0x0},
++	{0x40078, 0x0},
++	{0x40019, 0x0},
++	{0x40039, 0x0},
++	{0x40059, 0x0},
++	{0x40079, 0x0},
++	{0x4001a, 0x0},
++	{0x4003a, 0x0},
++	{0x4005a, 0x0},
++	{0x4007a, 0x0},
++	{0x900a4, 0x0},
++	{0x900a5, 0x0},
++	{0x900a6, 0x0},
++	{0x900a7, 0x0},
++	{0x900a8, 0x0},
++	{0x900a9, 0x0},
++	{0x900aa, 0x0},
++	{0x900ab, 0x0},
++	{0x900ac, 0x0},
++	{0x900ad, 0x0},
++	{0x900ae, 0x0},
++	{0x900af, 0x0},
++	{0x900b0, 0x0},
++	{0x900b1, 0x0},
++	{0x900b2, 0x0},
++	{0x900b3, 0x0},
++	{0x900b4, 0x0},
++	{0x900b5, 0x0},
++	{0x900b6, 0x0},
++	{0x900b7, 0x0},
++	{0x900b8, 0x0},
++	{0x900b9, 0x0},
++	{0x900ba, 0x0},
++	{0x900bb, 0x0},
++	{0x900bc, 0x0},
++	{0x900bd, 0x0},
++	{0x900be, 0x0},
++	{0x900bf, 0x0},
++	{0x900c0, 0x0},
++	{0x900c1, 0x0},
++	{0x900c2, 0x0},
++	{0x900c3, 0x0},
++	{0x900c4, 0x0},
++	{0x900c5, 0x0},
++	{0x900c6, 0x0},
++	{0x900c7, 0x0},
++	{0x900c8, 0x0},
++	{0x900c9, 0x0},
++	{0x900ca, 0x0},
++	{0x900cb, 0x0},
++	{0x900cc, 0x0},
++	{0x900cd, 0x0},
++	{0x900ce, 0x0},
++	{0x900cf, 0x0},
++	{0x900d0, 0x0},
++	{0x900d1, 0x0},
++	{0x900d2, 0x0},
++	{0x900d3, 0x0},
++	{0x900d4, 0x0},
++	{0x900d5, 0x0},
++	{0x900d6, 0x0},
++	{0x900d7, 0x0},
++	{0x900d8, 0x0},
++	{0x900d9, 0x0},
++	{0x900da, 0x0},
++	{0x900db, 0x0},
++	{0x900dc, 0x0},
++	{0x900dd, 0x0},
++	{0x900de, 0x0},
++	{0x900df, 0x0},
++	{0x900e0, 0x0},
++	{0x900e1, 0x0},
++	{0x900e2, 0x0},
++	{0x900e3, 0x0},
++	{0x900e4, 0x0},
++	{0x900e5, 0x0},
++	{0x900e6, 0x0},
++	{0x900e7, 0x0},
++	{0x900e8, 0x0},
++	{0x900e9, 0x0},
++	{0x900ea, 0x0},
++	{0x900eb, 0x0},
++	{0x900ec, 0x0},
++	{0x900ed, 0x0},
++	{0x900ee, 0x0},
++	{0x900ef, 0x0},
++	{0x900f0, 0x0},
++	{0x900f1, 0x0},
++	{0x900f2, 0x0},
++	{0x900f3, 0x0},
++	{0x900f4, 0x0},
++	{0x900f5, 0x0},
++	{0x900f6, 0x0},
++	{0x900f7, 0x0},
++	{0x900f8, 0x0},
++	{0x900f9, 0x0},
++	{0x900fa, 0x0},
++	{0x900fb, 0x0},
++	{0x900fc, 0x0},
++	{0x900fd, 0x0},
++	{0x900fe, 0x0},
++	{0x900ff, 0x0},
++	{0x90100, 0x0},
++	{0x90101, 0x0},
++	{0x90102, 0x0},
++	{0x90103, 0x0},
++	{0x90104, 0x0},
++	{0x90105, 0x0},
++	{0x90106, 0x0},
++	{0x90107, 0x0},
++	{0x90108, 0x0},
++	{0x90109, 0x0},
++	{0x9010a, 0x0},
++	{0x9010b, 0x0},
++	{0x9010c, 0x0},
++	{0x9010d, 0x0},
++	{0x9010e, 0x0},
++	{0x9010f, 0x0},
++	{0x90110, 0x0},
++	{0x90111, 0x0},
++	{0x90112, 0x0},
++	{0x90113, 0x0},
++	{0x90114, 0x0},
++	{0x90115, 0x0},
++	{0x90116, 0x0},
++	{0x90117, 0x0},
++	{0x90118, 0x0},
++	{0x90119, 0x0},
++	{0x9011a, 0x0},
++	{0x9011b, 0x0},
++	{0x9011c, 0x0},
++	{0x9011d, 0x0},
++	{0x9011e, 0x0},
++	{0x9011f, 0x0},
++	{0x90120, 0x0},
++	{0x90121, 0x0},
++	{0x90122, 0x0},
++	{0x90123, 0x0},
++	{0x90124, 0x0},
++	{0x90125, 0x0},
++	{0x90126, 0x0},
++	{0x90127, 0x0},
++	{0x90128, 0x0},
++	{0x90129, 0x0},
++	{0x9012a, 0x0},
++	{0x9012b, 0x0},
++	{0x9012c, 0x0},
++	{0x9012d, 0x0},
++	{0x9012e, 0x0},
++	{0x9012f, 0x0},
++	{0x90130, 0x0},
++	{0x90131, 0x0},
++	{0x90132, 0x0},
++	{0x90133, 0x0},
++	{0x90134, 0x0},
++	{0x90135, 0x0},
++	{0x90136, 0x0},
++	{0x90137, 0x0},
++	{0x90138, 0x0},
++	{0x90139, 0x0},
++	{0x9013a, 0x0},
++	{0x9013b, 0x0},
++	{0x9013c, 0x0},
++	{0x9013d, 0x0},
++	{0x9013e, 0x0},
++	{0x9013f, 0x0},
++	{0x90140, 0x0},
++	{0x90141, 0x0},
++	{0x90142, 0x0},
++	{0x90143, 0x0},
++	{0x90144, 0x0},
++	{0x90145, 0x0},
++	{0x90146, 0x0},
++	{0x90147, 0x0},
++	{0x90148, 0x0},
++	{0x90149, 0x0},
++	{0x9014a, 0x0},
++	{0x9014b, 0x0},
++	{0x9014c, 0x0},
++	{0x9014d, 0x0},
++	{0x9014e, 0x0},
++	{0x9014f, 0x0},
++	{0x90150, 0x0},
++	{0x90151, 0x0},
++	{0x90152, 0x0},
++	{0x90153, 0x0},
++	{0x90154, 0x0},
++	{0x90155, 0x0},
++	{0x90156, 0x0},
++	{0x90157, 0x0},
++	{0x90158, 0x0},
++	{0x90159, 0x0},
++	{0x9015a, 0x0},
++	{0x9015b, 0x0},
++	{0x9015c, 0x0},
++	{0x9015d, 0x0},
++	{0x9015e, 0x0},
++	{0x9015f, 0x0},
++	{0x90160, 0x0},
++	{0x90161, 0x0},
++	{0x90162, 0x0},
++	{0x90163, 0x0},
++	{0x90164, 0x0},
++	{0x90165, 0x0},
++	{0x90166, 0x0},
++	{0x90167, 0x0},
++	{0x90168, 0x0},
++	{0x90169, 0x0},
++	{0x9016a, 0x0},
++	{0x9016b, 0x0},
++	{0x9016c, 0x0},
++	{0x9016d, 0x0},
++	{0x9016e, 0x0},
++	{0x9016f, 0x0},
++	{0x90170, 0x0},
++	{0x90171, 0x0},
++	{0x90172, 0x0},
++	{0x90173, 0x0},
++	{0x90174, 0x0},
++	{0x90175, 0x0},
++	{0x90176, 0x0},
++	{0x90177, 0x0},
++	{0x90178, 0x0},
++	{0x90179, 0x0},
++	{0x9017a, 0x0},
++	{0x9017b, 0x0},
++	{0x9017c, 0x0},
++	{0x9017d, 0x0},
++	{0x9017e, 0x0},
++	{0x9017f, 0x0},
++	{0x90180, 0x0},
++	{0x90181, 0x0},
++	{0x90006, 0x0},
++	{0x90007, 0x0},
++	{0x90008, 0x0},
++	{0x90009, 0x0},
++	{0x9000a, 0x0},
++	{0x9000b, 0x0},
++	{0xd00e7, 0x0},
++	{0x90017, 0x0},
++	{0x9001f, 0x0},
++	{0x90026, 0x0},
++	{0x400d0, 0x0},
++	{0x400d1, 0x0},
++	{0x400d2, 0x0},
++	{0x400d3, 0x0},
++	{0x400d4, 0x0},
++	{0x400d5, 0x0},
++	{0x400d6, 0x0},
++	{0x400d7, 0x0},
++	{0x200be, 0x0},
++	{0x2000b, 0x0},
++	{0x2000c, 0x0},
++	{0x2000d, 0x0},
++	{0x2000e, 0x0},
++	{0x9000c, 0x0},
++	{0x9000d, 0x0},
++	{0x9000e, 0x0},
++	{0x9000f, 0x0},
++	{0x90010, 0x0},
++	{0x90011, 0x0},
++	{0x90012, 0x0},
++	{0x90013, 0x0},
++	{0x20010, 0x0},
++	{0x20011, 0x0},
++	{0x40080, 0x0},
++	{0x40081, 0x0},
++	{0x40082, 0x0},
++	{0x40083, 0x0},
++	{0x40084, 0x0},
++	{0x40085, 0x0},
++	{0x400fd, 0x0},
++	{0x10011, 0x0},
++	{0x10012, 0x0},
++	{0x10013, 0x0},
++	{0x10018, 0x0},
++	{0x10002, 0x0},
++	{0x100b2, 0x0},
++	{0x101b4, 0x0},
++	{0x102b4, 0x0},
++	{0x103b4, 0x0},
++	{0x104b4, 0x0},
++	{0x105b4, 0x0},
++	{0x106b4, 0x0},
++	{0x107b4, 0x0},
++	{0x108b4, 0x0},
++	{0x11011, 0x0},
++	{0x11012, 0x0},
++	{0x11013, 0x0},
++	{0x11018, 0x0},
++	{0x11002, 0x0},
++	{0x110b2, 0x0},
++	{0x111b4, 0x0},
++	{0x112b4, 0x0},
++	{0x113b4, 0x0},
++	{0x114b4, 0x0},
++	{0x115b4, 0x0},
++	{0x116b4, 0x0},
++	{0x117b4, 0x0},
++	{0x118b4, 0x0},
++	{0x12011, 0x0},
++	{0x12012, 0x0},
++	{0x12013, 0x0},
++	{0x12018, 0x0},
++	{0x12002, 0x0},
++	{0x120b2, 0x0},
++	{0x121b4, 0x0},
++	{0x122b4, 0x0},
++	{0x123b4, 0x0},
++	{0x124b4, 0x0},
++	{0x125b4, 0x0},
++	{0x126b4, 0x0},
++	{0x127b4, 0x0},
++	{0x128b4, 0x0},
++	{0x13011, 0x0},
++	{0x13012, 0x0},
++	{0x13013, 0x0},
++	{0x13018, 0x0},
++	{0x13002, 0x0},
++	{0x130b2, 0x0},
++	{0x131b4, 0x0},
++	{0x132b4, 0x0},
++	{0x133b4, 0x0},
++	{0x134b4, 0x0},
++	{0x135b4, 0x0},
++	{0x136b4, 0x0},
++	{0x137b4, 0x0},
++	{0x138b4, 0x0},
++	{0x20089, 0x0},
++	{0xc0080, 0x0},
++	{0x200cb, 0x0},
++	{0x10068, 0x0},
++	{0x10069, 0x0},
++	{0x10168, 0x0},
++	{0x10169, 0x0},
++	{0x10268, 0x0},
++	{0x10269, 0x0},
++	{0x10368, 0x0},
++	{0x10369, 0x0},
++	{0x10468, 0x0},
++	{0x10469, 0x0},
++	{0x10568, 0x0},
++	{0x10569, 0x0},
++	{0x10668, 0x0},
++	{0x10669, 0x0},
++	{0x10768, 0x0},
++	{0x10769, 0x0},
++	{0x10868, 0x0},
++	{0x10869, 0x0},
++	{0x100aa, 0x0},
++	{0x10062, 0x0},
++	{0x10001, 0x0},
++	{0x100a0, 0x0},
++	{0x100a1, 0x0},
++	{0x100a2, 0x0},
++	{0x100a3, 0x0},
++	{0x100a4, 0x0},
++	{0x100a5, 0x0},
++	{0x100a6, 0x0},
++	{0x100a7, 0x0},
++	{0x11068, 0x0},
++	{0x11069, 0x0},
++	{0x11168, 0x0},
++	{0x11169, 0x0},
++	{0x11268, 0x0},
++	{0x11269, 0x0},
++	{0x11368, 0x0},
++	{0x11369, 0x0},
++	{0x11468, 0x0},
++	{0x11469, 0x0},
++	{0x11568, 0x0},
++	{0x11569, 0x0},
++	{0x11668, 0x0},
++	{0x11669, 0x0},
++	{0x11768, 0x0},
++	{0x11769, 0x0},
++	{0x11868, 0x0},
++	{0x11869, 0x0},
++	{0x110aa, 0x0},
++	{0x11062, 0x0},
++	{0x11001, 0x0},
++	{0x110a0, 0x0},
++	{0x110a1, 0x0},
++	{0x110a2, 0x0},
++	{0x110a3, 0x0},
++	{0x110a4, 0x0},
++	{0x110a5, 0x0},
++	{0x110a6, 0x0},
++	{0x110a7, 0x0},
++	{0x12068, 0x0},
++	{0x12069, 0x0},
++	{0x12168, 0x0},
++	{0x12169, 0x0},
++	{0x12268, 0x0},
++	{0x12269, 0x0},
++	{0x12368, 0x0},
++	{0x12369, 0x0},
++	{0x12468, 0x0},
++	{0x12469, 0x0},
++	{0x12568, 0x0},
++	{0x12569, 0x0},
++	{0x12668, 0x0},
++	{0x12669, 0x0},
++	{0x12768, 0x0},
++	{0x12769, 0x0},
++	{0x12868, 0x0},
++	{0x12869, 0x0},
++	{0x120aa, 0x0},
++	{0x12062, 0x0},
++	{0x12001, 0x0},
++	{0x120a0, 0x0},
++	{0x120a1, 0x0},
++	{0x120a2, 0x0},
++	{0x120a3, 0x0},
++	{0x120a4, 0x0},
++	{0x120a5, 0x0},
++	{0x120a6, 0x0},
++	{0x120a7, 0x0},
++	{0x13068, 0x0},
++	{0x13069, 0x0},
++	{0x13168, 0x0},
++	{0x13169, 0x0},
++	{0x13268, 0x0},
++	{0x13269, 0x0},
++	{0x13368, 0x0},
++	{0x13369, 0x0},
++	{0x13468, 0x0},
++	{0x13469, 0x0},
++	{0x13568, 0x0},
++	{0x13569, 0x0},
++	{0x13668, 0x0},
++	{0x13669, 0x0},
++	{0x13768, 0x0},
++	{0x13769, 0x0},
++	{0x13868, 0x0},
++	{0x13869, 0x0},
++	{0x130aa, 0x0},
++	{0x13062, 0x0},
++	{0x13001, 0x0},
++	{0x130a0, 0x0},
++	{0x130a1, 0x0},
++	{0x130a2, 0x0},
++	{0x130a3, 0x0},
++	{0x130a4, 0x0},
++	{0x130a5, 0x0},
++	{0x130a6, 0x0},
++	{0x130a7, 0x0},
++	{0x80, 0x0},
++	{0x1080, 0x0},
++	{0x2080, 0x0},
++	{0x3080, 0x0},
++	{0x4080, 0x0},
++	{0x5080, 0x0},
++	{0x6080, 0x0},
++	{0x7080, 0x0},
++	{0x8080, 0x0},
++	{0x9080, 0x0},
++	{0x10020, 0x0},
++	{0x10080, 0x0},
++	{0x10081, 0x0},
++	{0x100d0, 0x0},
++	{0x100d1, 0x0},
++	{0x1008c, 0x0},
++	{0x1008d, 0x0},
++	{0x10180, 0x0},
++	{0x10181, 0x0},
++	{0x101d0, 0x0},
++	{0x101d1, 0x0},
++	{0x1018c, 0x0},
++	{0x1018d, 0x0},
++	{0x100c0, 0x0},
++	{0x100c1, 0x0},
++	{0x101c0, 0x0},
++	{0x101c1, 0x0},
++	{0x102c0, 0x0},
++	{0x102c1, 0x0},
++	{0x103c0, 0x0},
++	{0x103c1, 0x0},
++	{0x104c0, 0x0},
++	{0x104c1, 0x0},
++	{0x105c0, 0x0},
++	{0x105c1, 0x0},
++	{0x106c0, 0x0},
++	{0x106c1, 0x0},
++	{0x107c0, 0x0},
++	{0x107c1, 0x0},
++	{0x108c0, 0x0},
++	{0x108c1, 0x0},
++	{0x100ae, 0x0},
++	{0x100af, 0x0},
++	{0x11020, 0x0},
++	{0x11080, 0x0},
++	{0x11081, 0x0},
++	{0x110d0, 0x0},
++	{0x110d1, 0x0},
++	{0x1108c, 0x0},
++	{0x1108d, 0x0},
++	{0x11180, 0x0},
++	{0x11181, 0x0},
++	{0x111d0, 0x0},
++	{0x111d1, 0x0},
++	{0x1118c, 0x0},
++	{0x1118d, 0x0},
++	{0x110c0, 0x0},
++	{0x110c1, 0x0},
++	{0x111c0, 0x0},
++	{0x111c1, 0x0},
++	{0x112c0, 0x0},
++	{0x112c1, 0x0},
++	{0x113c0, 0x0},
++	{0x113c1, 0x0},
++	{0x114c0, 0x0},
++	{0x114c1, 0x0},
++	{0x115c0, 0x0},
++	{0x115c1, 0x0},
++	{0x116c0, 0x0},
++	{0x116c1, 0x0},
++	{0x117c0, 0x0},
++	{0x117c1, 0x0},
++	{0x118c0, 0x0},
++	{0x118c1, 0x0},
++	{0x110ae, 0x0},
++	{0x110af, 0x0},
++	{0x12020, 0x0},
++	{0x12080, 0x0},
++	{0x12081, 0x0},
++	{0x120d0, 0x0},
++	{0x120d1, 0x0},
++	{0x1208c, 0x0},
++	{0x1208d, 0x0},
++	{0x12180, 0x0},
++	{0x12181, 0x0},
++	{0x121d0, 0x0},
++	{0x121d1, 0x0},
++	{0x1218c, 0x0},
++	{0x1218d, 0x0},
++	{0x120c0, 0x0},
++	{0x120c1, 0x0},
++	{0x121c0, 0x0},
++	{0x121c1, 0x0},
++	{0x122c0, 0x0},
++	{0x122c1, 0x0},
++	{0x123c0, 0x0},
++	{0x123c1, 0x0},
++	{0x124c0, 0x0},
++	{0x124c1, 0x0},
++	{0x125c0, 0x0},
++	{0x125c1, 0x0},
++	{0x126c0, 0x0},
++	{0x126c1, 0x0},
++	{0x127c0, 0x0},
++	{0x127c1, 0x0},
++	{0x128c0, 0x0},
++	{0x128c1, 0x0},
++	{0x120ae, 0x0},
++	{0x120af, 0x0},
++	{0x13020, 0x0},
++	{0x13080, 0x0},
++	{0x13081, 0x0},
++	{0x130d0, 0x0},
++	{0x130d1, 0x0},
++	{0x1308c, 0x0},
++	{0x1308d, 0x0},
++	{0x13180, 0x0},
++	{0x13181, 0x0},
++	{0x131d0, 0x0},
++	{0x131d1, 0x0},
++	{0x1318c, 0x0},
++	{0x1318d, 0x0},
++	{0x130c0, 0x0},
++	{0x130c1, 0x0},
++	{0x131c0, 0x0},
++	{0x131c1, 0x0},
++	{0x132c0, 0x0},
++	{0x132c1, 0x0},
++	{0x133c0, 0x0},
++	{0x133c1, 0x0},
++	{0x134c0, 0x0},
++	{0x134c1, 0x0},
++	{0x135c0, 0x0},
++	{0x135c1, 0x0},
++	{0x136c0, 0x0},
++	{0x136c1, 0x0},
++	{0x137c0, 0x0},
++	{0x137c1, 0x0},
++	{0x138c0, 0x0},
++	{0x138c1, 0x0},
++	{0x130ae, 0x0},
++	{0x130af, 0x0},
++	{0x90201, 0x0},
++	{0x90202, 0x0},
++	{0x90203, 0x0},
++	{0x90205, 0x0},
++	{0x90206, 0x0},
++	{0x90207, 0x0},
++	{0x90208, 0x0},
++	{0x20020, 0x0},
++	{0x20077, 0x0},
++	{0x20072, 0x0},
++	{0x20073, 0x0},
++	{0x400c0, 0x0},
++	{0x10040, 0x0},
++	{0x10140, 0x0},
++	{0x10240, 0x0},
++	{0x10340, 0x0},
++	{0x10440, 0x0},
++	{0x10540, 0x0},
++	{0x10640, 0x0},
++	{0x10740, 0x0},
++	{0x10840, 0x0},
++	{0x11040, 0x0},
++	{0x11140, 0x0},
++	{0x11240, 0x0},
++	{0x11340, 0x0},
++	{0x11440, 0x0},
++	{0x11540, 0x0},
++	{0x11640, 0x0},
++	{0x11740, 0x0},
++	{0x11840, 0x0},
++	{0x12040, 0x0},
++	{0x12140, 0x0},
++	{0x12240, 0x0},
++	{0x12340, 0x0},
++	{0x12440, 0x0},
++	{0x12540, 0x0},
++	{0x12640, 0x0},
++	{0x12740, 0x0},
++	{0x12840, 0x0},
++	{0x13040, 0x0},
++	{0x13140, 0x0},
++	{0x13240, 0x0},
++	{0x13340, 0x0},
++	{0x13440, 0x0},
++	{0x13540, 0x0},
++	{0x13640, 0x0},
++	{0x13740, 0x0},
++	{0x13840, 0x0},
++};
++
++/* P0 message block parameter for training firmware */
++struct dram_cfg_param ddr_fsp0_cfg[] = {
++	{0xd0000, 0x0},
++	{0x54003, 0xfa0},
++	{0x54004, 0x2},
++	{0x54005, 0x3c3c},
++	{0x54006, 0x11},
++	{0x54008, 0x131f},
++	{0x54009, 0xc8},
++	{0x5400b, 0x2},
++	{0x5400f, 0x100},
++	{0x54012, 0x110},
++	{0x54019, 0x3ff4},
++	{0x5401a, 0xe3},
++	{0x5401b, 0x4844},
++	{0x5401c, 0x4800},
++	{0x5401e, 0x14},
++	{0x5401f, 0x3ff4},
++	{0x54020, 0xe3},
++	{0x54021, 0x4844},
++	{0x54022, 0x4800},
++	{0x54024, 0x14},
++	{0x5402b, 0x1000},
++	{0x5402c, 0x1},
++	{0x54032, 0xf400},
++	{0x54033, 0xe33f},
++	{0x54034, 0x4400},
++	{0x54035, 0x48},
++	{0x54036, 0x48},
++	{0x54037, 0x1400},
++	{0x54038, 0xf400},
++	{0x54039, 0xe33f},
++	{0x5403a, 0x4400},
++	{0x5403b, 0x48},
++	{0x5403c, 0x48},
++	{0x5403d, 0x1400},
++	{0xd0000, 0x1}
++};
++
++/* P0 2D message block parameter for training firmware */
++struct dram_cfg_param ddr_fsp0_2d_cfg[] = {
++	{0xd0000, 0x0},
++	{0x54003, 0xfa0},
++	{0x54004, 0x2},
++	{0x54005, 0x3c3c},
++	{0x54006, 0x11},
++	{0x54008, 0x61},
++	{0x54009, 0xc8},
++	{0x5400b, 0x2},
++	{0x5400f, 0x100},
++	{0x54010, 0x1f7f},
++	{0x54012, 0x110},
++	{0x54019, 0x3ff4},
++	{0x5401a, 0xe3},
++	{0x5401b, 0x4844},
++	{0x5401c, 0x4800},
++	{0x5401e, 0x14},
++	{0x5401f, 0x3ff4},
++	{0x54020, 0xe3},
++	{0x54021, 0x4844},
++	{0x54022, 0x4800},
++	{0x54024, 0x14},
++	{0x5402b, 0x1000},
++	{0x5402c, 0x1},
++	{0x54032, 0xf400},
++	{0x54033, 0xe33f},
++	{0x54034, 0x4400},
++	{0x54035, 0x48},
++	{0x54036, 0x48},
++	{0x54037, 0x1400},
++	{0x54038, 0xf400},
++	{0x54039, 0xe33f},
++	{0x5403a, 0x4400},
++	{0x5403b, 0x48},
++	{0x5403c, 0x48},
++	{0x5403d, 0x1400},
++	{0xd0000, 0x1}
++};
++
++/* DRAM PHY init engine image */
++struct dram_cfg_param ddr_phy_pie[] = {
++	{0xd0000, 0x0},
++	{0x90000, 0x10},
++	{0x90001, 0x400},
++	{0x90002, 0x10e},
++	{0x90003, 0x0},
++	{0x90004, 0x0},
++	{0x90005, 0x8},
++	{0x90029, 0xb},
++	{0x9002a, 0x480},
++	{0x9002b, 0x109},
++	{0x9002c, 0x8},
++	{0x9002d, 0x448},
++	{0x9002e, 0x139},
++	{0x9002f, 0x8},
++	{0x90030, 0x478},
++	{0x90031, 0x109},
++	{0x90032, 0x0},
++	{0x90033, 0xe8},
++	{0x90034, 0x109},
++	{0x90035, 0x2},
++	{0x90036, 0x10},
++	{0x90037, 0x139},
++	{0x90038, 0xb},
++	{0x90039, 0x7c0},
++	{0x9003a, 0x139},
++	{0x9003b, 0x44},
++	{0x9003c, 0x633},
++	{0x9003d, 0x159},
++	{0x9003e, 0x14f},
++	{0x9003f, 0x630},
++	{0x90040, 0x159},
++	{0x90041, 0x47},
++	{0x90042, 0x633},
++	{0x90043, 0x149},
++	{0x90044, 0x4f},
++	{0x90045, 0x633},
++	{0x90046, 0x179},
++	{0x90047, 0x8},
++	{0x90048, 0xe0},
++	{0x90049, 0x109},
++	{0x9004a, 0x0},
++	{0x9004b, 0x7c8},
++	{0x9004c, 0x109},
++	{0x9004d, 0x0},
++	{0x9004e, 0x1},
++	{0x9004f, 0x8},
++	{0x90050, 0x0},
++	{0x90051, 0x45a},
++	{0x90052, 0x9},
++	{0x90053, 0x0},
++	{0x90054, 0x448},
++	{0x90055, 0x109},
++	{0x90056, 0x40},
++	{0x90057, 0x633},
++	{0x90058, 0x179},
++	{0x90059, 0x1},
++	{0x9005a, 0x618},
++	{0x9005b, 0x109},
++	{0x9005c, 0x40c0},
++	{0x9005d, 0x633},
++	{0x9005e, 0x149},
++	{0x9005f, 0x8},
++	{0x90060, 0x4},
++	{0x90061, 0x48},
++	{0x90062, 0x4040},
++	{0x90063, 0x633},
++	{0x90064, 0x149},
++	{0x90065, 0x0},
++	{0x90066, 0x4},
++	{0x90067, 0x48},
++	{0x90068, 0x40},
++	{0x90069, 0x633},
++	{0x9006a, 0x149},
++	{0x9006b, 0x10},
++	{0x9006c, 0x4},
++	{0x9006d, 0x18},
++	{0x9006e, 0x0},
++	{0x9006f, 0x4},
++	{0x90070, 0x78},
++	{0x90071, 0x549},
++	{0x90072, 0x633},
++	{0x90073, 0x159},
++	{0x90074, 0xd49},
++	{0x90075, 0x633},
++	{0x90076, 0x159},
++	{0x90077, 0x94a},
++	{0x90078, 0x633},
++	{0x90079, 0x159},
++	{0x9007a, 0x441},
++	{0x9007b, 0x633},
++	{0x9007c, 0x149},
++	{0x9007d, 0x42},
++	{0x9007e, 0x633},
++	{0x9007f, 0x149},
++	{0x90080, 0x1},
++	{0x90081, 0x633},
++	{0x90082, 0x149},
++	{0x90083, 0x0},
++	{0x90084, 0xe0},
++	{0x90085, 0x109},
++	{0x90086, 0xa},
++	{0x90087, 0x10},
++	{0x90088, 0x109},
++	{0x90089, 0x9},
++	{0x9008a, 0x3c0},
++	{0x9008b, 0x149},
++	{0x9008c, 0x9},
++	{0x9008d, 0x3c0},
++	{0x9008e, 0x159},
++	{0x9008f, 0x18},
++	{0x90090, 0x10},
++	{0x90091, 0x109},
++	{0x90092, 0x0},
++	{0x90093, 0x3c0},
++	{0x90094, 0x109},
++	{0x90095, 0x18},
++	{0x90096, 0x4},
++	{0x90097, 0x48},
++	{0x90098, 0x18},
++	{0x90099, 0x4},
++	{0x9009a, 0x58},
++	{0x9009b, 0xb},
++	{0x9009c, 0x10},
++	{0x9009d, 0x109},
++	{0x9009e, 0x1},
++	{0x9009f, 0x10},
++	{0x900a0, 0x109},
++	{0x900a1, 0x5},
++	{0x900a2, 0x7c0},
++	{0x900a3, 0x109},
++	{0x40000, 0x811},
++	{0x40020, 0x880},
++	{0x40040, 0x0},
++	{0x40060, 0x0},
++	{0x40001, 0x4008},
++	{0x40021, 0x83},
++	{0x40041, 0x4f},
++	{0x40061, 0x0},
++	{0x40002, 0x4040},
++	{0x40022, 0x83},
++	{0x40042, 0x51},
++	{0x40062, 0x0},
++	{0x40003, 0x811},
++	{0x40023, 0x880},
++	{0x40043, 0x0},
++	{0x40063, 0x0},
++	{0x40004, 0x720},
++	{0x40024, 0xf},
++	{0x40044, 0x1740},
++	{0x40064, 0x0},
++	{0x40005, 0x16},
++	{0x40025, 0x83},
++	{0x40045, 0x4b},
++	{0x40065, 0x0},
++	{0x40006, 0x716},
++	{0x40026, 0xf},
++	{0x40046, 0x2001},
++	{0x40066, 0x0},
++	{0x40007, 0x716},
++	{0x40027, 0xf},
++	{0x40047, 0x2800},
++	{0x40067, 0x0},
++	{0x40008, 0x716},
++	{0x40028, 0xf},
++	{0x40048, 0xf00},
++	{0x40068, 0x0},
++	{0x40009, 0x720},
++	{0x40029, 0xf},
++	{0x40049, 0x1400},
++	{0x40069, 0x0},
++	{0x4000a, 0xe08},
++	{0x4002a, 0xc15},
++	{0x4004a, 0x0},
++	{0x4006a, 0x0},
++	{0x4000b, 0x625},
++	{0x4002b, 0x15},
++	{0x4004b, 0x0},
++	{0x4006b, 0x0},
++	{0x4000c, 0x4028},
++	{0x4002c, 0x80},
++	{0x4004c, 0x0},
++	{0x4006c, 0x0},
++	{0x4000d, 0xe08},
++	{0x4002d, 0xc1a},
++	{0x4004d, 0x0},
++	{0x4006d, 0x0},
++	{0x4000e, 0x625},
++	{0x4002e, 0x1a},
++	{0x4004e, 0x0},
++	{0x4006e, 0x0},
++	{0x4000f, 0x4040},
++	{0x4002f, 0x80},
++	{0x4004f, 0x0},
++	{0x4006f, 0x0},
++	{0x40010, 0x2604},
++	{0x40030, 0x15},
++	{0x40050, 0x0},
++	{0x40070, 0x0},
++	{0x40011, 0x708},
++	{0x40031, 0x5},
++	{0x40051, 0x0},
++	{0x40071, 0x2002},
++	{0x40012, 0x8},
++	{0x40032, 0x80},
++	{0x40052, 0x0},
++	{0x40072, 0x0},
++	{0x40013, 0x2604},
++	{0x40033, 0x1a},
++	{0x40053, 0x0},
++	{0x40073, 0x0},
++	{0x40014, 0x708},
++	{0x40034, 0xa},
++	{0x40054, 0x0},
++	{0x40074, 0x2002},
++	{0x40015, 0x4040},
++	{0x40035, 0x80},
++	{0x40055, 0x0},
++	{0x40075, 0x0},
++	{0x40016, 0x60a},
++	{0x40036, 0x15},
++	{0x40056, 0x1200},
++	{0x40076, 0x0},
++	{0x40017, 0x61a},
++	{0x40037, 0x15},
++	{0x40057, 0x1300},
++	{0x40077, 0x0},
++	{0x40018, 0x60a},
++	{0x40038, 0x1a},
++	{0x40058, 0x1200},
++	{0x40078, 0x0},
++	{0x40019, 0x642},
++	{0x40039, 0x1a},
++	{0x40059, 0x1300},
++	{0x40079, 0x0},
++	{0x4001a, 0x4808},
++	{0x4003a, 0x880},
++	{0x4005a, 0x0},
++	{0x4007a, 0x0},
++	{0x900a4, 0x0},
++	{0x900a5, 0x790},
++	{0x900a6, 0x11a},
++	{0x900a7, 0x8},
++	{0x900a8, 0x7aa},
++	{0x900a9, 0x2a},
++	{0x900aa, 0x10},
++	{0x900ab, 0x7b2},
++	{0x900ac, 0x2a},
++	{0x900ad, 0x0},
++	{0x900ae, 0x7c8},
++	{0x900af, 0x109},
++	{0x900b0, 0x10},
++	{0x900b1, 0x10},
++	{0x900b2, 0x109},
++	{0x900b3, 0x10},
++	{0x900b4, 0x2a8},
++	{0x900b5, 0x129},
++	{0x900b6, 0x8},
++	{0x900b7, 0x370},
++	{0x900b8, 0x129},
++	{0x900b9, 0xa},
++	{0x900ba, 0x3c8},
++	{0x900bb, 0x1a9},
++	{0x900bc, 0xc},
++	{0x900bd, 0x408},
++	{0x900be, 0x199},
++	{0x900bf, 0x14},
++	{0x900c0, 0x790},
++	{0x900c1, 0x11a},
++	{0x900c2, 0x8},
++	{0x900c3, 0x4},
++	{0x900c4, 0x18},
++	{0x900c5, 0xe},
++	{0x900c6, 0x408},
++	{0x900c7, 0x199},
++	{0x900c8, 0x8},
++	{0x900c9, 0x8568},
++	{0x900ca, 0x108},
++	{0x900cb, 0x18},
++	{0x900cc, 0x790},
++	{0x900cd, 0x16a},
++	{0x900ce, 0x8},
++	{0x900cf, 0x1d8},
++	{0x900d0, 0x169},
++	{0x900d1, 0x10},
++	{0x900d2, 0x8558},
++	{0x900d3, 0x168},
++	{0x900d4, 0x70},
++	{0x900d5, 0x788},
++	{0x900d6, 0x16a},
++	{0x900d7, 0x1ff8},
++	{0x900d8, 0x85a8},
++	{0x900d9, 0x1e8},
++	{0x900da, 0x50},
++	{0x900db, 0x798},
++	{0x900dc, 0x16a},
++	{0x900dd, 0x60},
++	{0x900de, 0x7a0},
++	{0x900df, 0x16a},
++	{0x900e0, 0x8},
++	{0x900e1, 0x8310},
++	{0x900e2, 0x168},
++	{0x900e3, 0x8},
++	{0x900e4, 0xa310},
++	{0x900e5, 0x168},
++	{0x900e6, 0xa},
++	{0x900e7, 0x408},
++	{0x900e8, 0x169},
++	{0x900e9, 0x6e},
++	{0x900ea, 0x0},
++	{0x900eb, 0x68},
++	{0x900ec, 0x0},
++	{0x900ed, 0x408},
++	{0x900ee, 0x169},
++	{0x900ef, 0x0},
++	{0x900f0, 0x8310},
++	{0x900f1, 0x168},
++	{0x900f2, 0x0},
++	{0x900f3, 0xa310},
++	{0x900f4, 0x168},
++	{0x900f5, 0x1ff8},
++	{0x900f6, 0x85a8},
++	{0x900f7, 0x1e8},
++	{0x900f8, 0x68},
++	{0x900f9, 0x798},
++	{0x900fa, 0x16a},
++	{0x900fb, 0x78},
++	{0x900fc, 0x7a0},
++	{0x900fd, 0x16a},
++	{0x900fe, 0x68},
++	{0x900ff, 0x790},
++	{0x90100, 0x16a},
++	{0x90101, 0x8},
++	{0x90102, 0x8b10},
++	{0x90103, 0x168},
++	{0x90104, 0x8},
++	{0x90105, 0xab10},
++	{0x90106, 0x168},
++	{0x90107, 0xa},
++	{0x90108, 0x408},
++	{0x90109, 0x169},
++	{0x9010a, 0x58},
++	{0x9010b, 0x0},
++	{0x9010c, 0x68},
++	{0x9010d, 0x0},
++	{0x9010e, 0x408},
++	{0x9010f, 0x169},
++	{0x90110, 0x0},
++	{0x90111, 0x8b10},
++	{0x90112, 0x168},
++	{0x90113, 0x1},
++	{0x90114, 0xab10},
++	{0x90115, 0x168},
++	{0x90116, 0x0},
++	{0x90117, 0x1d8},
++	{0x90118, 0x169},
++	{0x90119, 0x80},
++	{0x9011a, 0x790},
++	{0x9011b, 0x16a},
++	{0x9011c, 0x18},
++	{0x9011d, 0x7aa},
++	{0x9011e, 0x6a},
++	{0x9011f, 0xa},
++	{0x90120, 0x0},
++	{0x90121, 0x1e9},
++	{0x90122, 0x8},
++	{0x90123, 0x8080},
++	{0x90124, 0x108},
++	{0x90125, 0xf},
++	{0x90126, 0x408},
++	{0x90127, 0x169},
++	{0x90128, 0xc},
++	{0x90129, 0x0},
++	{0x9012a, 0x68},
++	{0x9012b, 0x9},
++	{0x9012c, 0x0},
++	{0x9012d, 0x1a9},
++	{0x9012e, 0x0},
++	{0x9012f, 0x408},
++	{0x90130, 0x169},
++	{0x90131, 0x0},
++	{0x90132, 0x8080},
++	{0x90133, 0x108},
++	{0x90134, 0x8},
++	{0x90135, 0x7aa},
++	{0x90136, 0x6a},
++	{0x90137, 0x0},
++	{0x90138, 0x8568},
++	{0x90139, 0x108},
++	{0x9013a, 0xb7},
++	{0x9013b, 0x790},
++	{0x9013c, 0x16a},
++	{0x9013d, 0x1f},
++	{0x9013e, 0x0},
++	{0x9013f, 0x68},
++	{0x90140, 0x8},
++	{0x90141, 0x8558},
++	{0x90142, 0x168},
++	{0x90143, 0xf},
++	{0x90144, 0x408},
++	{0x90145, 0x169},
++	{0x90146, 0xd},
++	{0x90147, 0x0},
++	{0x90148, 0x68},
++	{0x90149, 0x0},
++	{0x9014a, 0x408},
++	{0x9014b, 0x169},
++	{0x9014c, 0x0},
++	{0x9014d, 0x8558},
++	{0x9014e, 0x168},
++	{0x9014f, 0x8},
++	{0x90150, 0x3c8},
++	{0x90151, 0x1a9},
++	{0x90152, 0x3},
++	{0x90153, 0x370},
++	{0x90154, 0x129},
++	{0x90155, 0x20},
++	{0x90156, 0x2aa},
++	{0x90157, 0x9},
++	{0x90158, 0x8},
++	{0x90159, 0xe8},
++	{0x9015a, 0x109},
++	{0x9015b, 0x0},
++	{0x9015c, 0x8140},
++	{0x9015d, 0x10c},
++	{0x9015e, 0x10},
++	{0x9015f, 0x8138},
++	{0x90160, 0x104},
++	{0x90161, 0x8},
++	{0x90162, 0x448},
++	{0x90163, 0x109},
++	{0x90164, 0xf},
++	{0x90165, 0x7c0},
++	{0x90166, 0x109},
++	{0x90167, 0x0},
++	{0x90168, 0xe8},
++	{0x90169, 0x109},
++	{0x9016a, 0x47},
++	{0x9016b, 0x630},
++	{0x9016c, 0x109},
++	{0x9016d, 0x8},
++	{0x9016e, 0x618},
++	{0x9016f, 0x109},
++	{0x90170, 0x8},
++	{0x90171, 0xe0},
++	{0x90172, 0x109},
++	{0x90173, 0x0},
++	{0x90174, 0x7c8},
++	{0x90175, 0x109},
++	{0x90176, 0x8},
++	{0x90177, 0x8140},
++	{0x90178, 0x10c},
++	{0x90179, 0x0},
++	{0x9017a, 0x478},
++	{0x9017b, 0x109},
++	{0x9017c, 0x0},
++	{0x9017d, 0x1},
++	{0x9017e, 0x8},
++	{0x9017f, 0x8},
++	{0x90180, 0x4},
++	{0x90181, 0x0},
++	{0x90006, 0x8},
++	{0x90007, 0x7c8},
++	{0x90008, 0x109},
++	{0x90009, 0x0},
++	{0x9000a, 0x400},
++	{0x9000b, 0x106},
++	{0xd00e7, 0x400},
++	{0x90017, 0x0},
++	{0x9001f, 0x29},
++	{0x90026, 0x68},
++	{0x400d0, 0x0},
++	{0x400d1, 0x101},
++	{0x400d2, 0x105},
++	{0x400d3, 0x107},
++	{0x400d4, 0x10f},
++	{0x400d5, 0x202},
++	{0x400d6, 0x20a},
++	{0x400d7, 0x20b},
++	{0x2003a, 0x2},
++	{0x200be, 0x3},
++	{0x2000b, 0x7d},
++	{0x2000c, 0xfa},
++	{0x2000d, 0x9c4},
++	{0x2000e, 0x2c},
++	{0x9000c, 0x0},
++	{0x9000d, 0x173},
++	{0x9000e, 0x60},
++	{0x9000f, 0x6110},
++	{0x90010, 0x2152},
++	{0x90011, 0xdfbd},
++	{0x90012, 0x2060},
++	{0x90013, 0x6152},
++	{0x20010, 0x5a},
++	{0x20011, 0x3},
++	{0x40080, 0xe0},
++	{0x40081, 0x12},
++	{0x40082, 0xe0},
++	{0x40083, 0x12},
++	{0x40084, 0xe0},
++	{0x40085, 0x12},
++	{0x400fd, 0xf},
++	{0x10011, 0x1},
++	{0x10012, 0x1},
++	{0x10013, 0x180},
++	{0x10018, 0x1},
++	{0x10002, 0x6209},
++	{0x100b2, 0x1},
++	{0x101b4, 0x1},
++	{0x102b4, 0x1},
++	{0x103b4, 0x1},
++	{0x104b4, 0x1},
++	{0x105b4, 0x1},
++	{0x106b4, 0x1},
++	{0x107b4, 0x1},
++	{0x108b4, 0x1},
++	{0x11011, 0x1},
++	{0x11012, 0x1},
++	{0x11013, 0x180},
++	{0x11018, 0x1},
++	{0x11002, 0x6209},
++	{0x110b2, 0x1},
++	{0x111b4, 0x1},
++	{0x112b4, 0x1},
++	{0x113b4, 0x1},
++	{0x114b4, 0x1},
++	{0x115b4, 0x1},
++	{0x116b4, 0x1},
++	{0x117b4, 0x1},
++	{0x118b4, 0x1},
++	{0x12011, 0x1},
++	{0x12012, 0x1},
++	{0x12013, 0x180},
++	{0x12018, 0x1},
++	{0x12002, 0x6209},
++	{0x120b2, 0x1},
++	{0x121b4, 0x1},
++	{0x122b4, 0x1},
++	{0x123b4, 0x1},
++	{0x124b4, 0x1},
++	{0x125b4, 0x1},
++	{0x126b4, 0x1},
++	{0x127b4, 0x1},
++	{0x128b4, 0x1},
++	{0x13011, 0x1},
++	{0x13012, 0x1},
++	{0x13013, 0x180},
++	{0x13018, 0x1},
++	{0x13002, 0x6209},
++	{0x130b2, 0x1},
++	{0x131b4, 0x1},
++	{0x132b4, 0x1},
++	{0x133b4, 0x1},
++	{0x134b4, 0x1},
++	{0x135b4, 0x1},
++	{0x136b4, 0x1},
++	{0x137b4, 0x1},
++	{0x138b4, 0x1},
++	{0x20089, 0x1},
++	{0x20088, 0x19},
++	{0xc0080, 0x2},
++	{0xd0000, 0x1},
++};
++
++struct dram_fsp_msg ddr_dram_fsp_msg[] = {
++	{
++		/* P0 4000mts 1D */
++		.drate = 4000,
++		.fw_type = FW_1D_IMAGE,
++		.fsp_cfg = ddr_fsp0_cfg,
++		.fsp_cfg_num = ARRAY_SIZE(ddr_fsp0_cfg),
++	},
++	{
++		/* P0 4000mts 2D */
++		.drate = 4000,
++		.fw_type = FW_2D_IMAGE,
++		.fsp_cfg = ddr_fsp0_2d_cfg,
++		.fsp_cfg_num = ARRAY_SIZE(ddr_fsp0_2d_cfg),
++	},
++};
++
++/* ddr timing config params */
++struct dram_timing_info dram_timing = {
++	.ddrc_cfg = ddr_ddrc_cfg,
++	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg),
++	.ddrphy_cfg = ddr_ddrphy_cfg,
++	.ddrphy_cfg_num = ARRAY_SIZE(ddr_ddrphy_cfg),
++	.fsp_msg = ddr_dram_fsp_msg,
++	.fsp_msg_num = ARRAY_SIZE(ddr_dram_fsp_msg),
++	.ddrphy_trained_csr = ddr_ddrphy_trained_csr,
++	.ddrphy_trained_csr_num = ARRAY_SIZE(ddr_ddrphy_trained_csr),
++	.ddrphy_pie = ddr_phy_pie,
++	.ddrphy_pie_num = ARRAY_SIZE(ddr_phy_pie),
++	.fsp_table = { 4000, },
++};
++
+diff --git a/board/phytec/imx8mp-libra-fpsc/spl.c b/board/phytec/imx8mp-libra-fpsc/spl.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..d704d588579ecbc90ddf7a4070a13b3807ff064a
+--- /dev/null
++++ b/board/phytec/imx8mp-libra-fpsc/spl.c
+@@ -0,0 +1,132 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ */
++
++#include <config.h>
++#include <asm/arch/clock.h>
++#include <asm/arch/ddr.h>
++#include <asm/arch/imx8mp_pins.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/global_data.h>
++#include <asm/mach-imx/boot_mode.h>
++#include <asm/mach-imx/gpio.h>
++#include <asm/mach-imx/mxc_i2c.h>
++#include <asm/mach-imx/iomux-v3.h>
++#include <hang.h>
++#include <init.h>
++#include <log.h>
++#include <power/pmic.h>
++#include <power/pca9450.h>
++#include <spl.h>
++
++#if IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION)
++#include "../common/imx8m_som_detection.h"
++#endif
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define EEPROM_ADDR		0x51
++
++int spl_board_boot_device(enum boot_device boot_dev_spl)
++{
++	return BOOT_DEVICE_BOOTROM;
++}
++
++void spl_dram_init(void)
++{
++#if IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION)
++	int ret;
++
++	ret = phytec_eeprom_data_setup(NULL, 0, EEPROM_ADDR);
++	if (!ret) {
++		ret = phytec_imx8m_detect(NULL);
++		if (!ret)
++			phytec_print_som_info(NULL);
++	}
++#endif
++
++	ddr_init(&dram_timing);
++}
++
++#define I2C_PAD_CTRL (PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE | PAD_CTL_PE)
++#define PC MUX_PAD_CTRL(I2C_PAD_CTRL)
++struct i2c_pads_info i2c_pad_info1 = {
++	.scl = {
++		.i2c_mode = MX8MP_PAD_I2C1_SCL__I2C1_SCL | PC,
++		.gpio_mode = MX8MP_PAD_I2C1_SCL__GPIO5_IO14 | PC,
++		.gp = IMX_GPIO_NR(5, 14),
++	},
++	.sda = {
++		.i2c_mode = MX8MP_PAD_I2C1_SDA__I2C1_SDA | PC,
++		.gpio_mode = MX8MP_PAD_I2C1_SDA__GPIO5_IO15 | PC,
++		.gp = IMX_GPIO_NR(5, 15),
++	},
++};
++
++int power_init_board(void)
++{
++	struct pmic *p;
++	int ret;
++
++	ret = power_pca9450_init(0, 0x25);
++	if (ret)
++		printf("power init failed");
++	p = pmic_get("PCA9450");
++	pmic_probe(p);
++
++	/* BUCKxOUT_DVS0/1 control BUCK123 output */
++	pmic_reg_write(p, PCA9450_BUCK123_DVS, 0x29);
++
++	/* Increase VDD_SOC and VDD_ARM to OD voltage 0.95V */
++	pmic_reg_write(p, PCA9450_BUCK1OUT_DVS0, 0x1C);
++	pmic_reg_write(p, PCA9450_BUCK2OUT_DVS0, 0x1C);
++
++	/* Set BUCK1 DVS1 to suspend controlled through PMIC_STBY_REQ */
++	pmic_reg_write(p, PCA9450_BUCK1OUT_DVS1, 0x14);
++	pmic_reg_write(p, PCA9450_BUCK1CTRL, 0x59);
++
++	/* Set WDOG_B_CFG to cold reset */
++	pmic_reg_write(p, PCA9450_RESET_CTRL, 0xA1);
++
++	return 0;
++}
++
++void spl_board_init(void)
++{
++	arch_misc_init();
++
++	/* Set GIC clock to 500Mhz for OD VDD_SOC. */
++	clock_enable(CCGR_GIC, 0);
++	clock_set_target_val(GIC_CLK_ROOT, CLK_ROOT_ON | CLK_ROOT_SOURCE_SEL(5));
++	clock_enable(CCGR_GIC, 1);
++}
++
++int board_fit_config_name_match(const char *name)
++{
++	return 0;
++}
++
++void board_init_f(ulong dummy)
++{
++	int ret;
++
++	arch_cpu_init();
++
++	ret = spl_early_init();
++	if (ret) {
++		debug("spl_early_init() failed: %d\n", ret);
++		hang();
++	}
++
++	preloader_console_init();
++
++	enable_tzc380();
++
++	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info1);
++
++	power_init_board();
++
++	/* DDR initialization */
++	spl_dram_init();
++}
+diff --git a/configs/imx8mp-libra-fpsc_defconfig b/configs/imx8mp-libra-fpsc_defconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..a23e604425d5b47c2abd6ef4b31979e2221993d1
+--- /dev/null
++++ b/configs/imx8mp-libra-fpsc_defconfig
+@@ -0,0 +1,175 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX8M=y
++CONFIG_TEXT_BASE=0x40200000
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SF_DEFAULT_SPEED=80000000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0x3C0000
++CONFIG_ENV_SECT_SIZE=0x10000
++CONFIG_SYS_I2C_MXC_I2C1=y
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mp-libra-rdk-fpsc"
++CONFIG_IMX8M_OPTEE_LOAD_ADDR=0x7e000000
++CONFIG_TARGET_IMX8MP_LIBRA_FPSC=y
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_SYS_MONITOR_LEN=524288
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_STACK=0x960000
++CONFIG_SPL_TEXT_BASE=0x920000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x98fc00
++CONFIG_SPL_BSS_MAX_SIZE=0x400
++CONFIG_SYS_LOAD_ADDR=0x47602000
++CONFIG_SPL=y
++CONFIG_ENV_OFFSET_REDUND=0x3e0000
++CONFIG_IMX_BOOTAUX=y
++CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
++# CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_FIT=y
++CONFIG_FIT_EXTERNAL_OFFSET=0x3000
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_FDT_FIXUP_PARTITIONS=y
++CONFIG_DEFAULT_FDT_FILE="imx8mp-libra-rdk-fpsc.dtb"
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_PBSIZE=2074
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_SPL_MAX_SIZE=0x26000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_BOOTROM_SUPPORT=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_HAVE_INIT_STACK=y
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
++CONFIG_SPL_I2C=y
++CONFIG_SPL_NOR_SUPPORT=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_SYS_PROMPT="u-boot=> "
++CONFIG_CMD_ERASEENV=y
++CONFIG_CMD_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
++CONFIG_SYS_EEPROM_SIZE=4096
++CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
++CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
++CONFIG_CMD_CLK=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MMC_REG=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_SDP=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_REDUNDANT=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_MMC_DEVICE_INDEX=2
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SPL_DM=y
++CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_SPL_CLK_IMX8MP=y
++CONFIG_CLK_IMX8MP=y
++CONFIG_FSL_CAAM=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x42800000
++CONFIG_FASTBOOT_BUF_SIZE=0x13000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_UUU_SUPPORT=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=2
++CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
++CONFIG_FASTBOOT_MMC_BOOT1_NAME="mmc2boot0"
++CONFIG_FASTBOOT_MMC_BOOT2_NAME="mmc2boot1"
++CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
++CONFIG_FASTBOOT_MMC_USER_NAME="mmc2"
++CONFIG_MXC_GPIO=y
++CONFIG_DM_I2C=y
++# CONFIG_SPL_DM_I2C is not set
++CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR=0x51
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_BAR=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_SST=y
++CONFIG_SPI_FLASH_WINBOND=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_PHY_GIGE=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_IMX=y
++CONFIG_FEC_MXC=y
++CONFIG_RGMII=y
++CONFIG_MII=y
++CONFIG_PHY_IMX8MQ_USB=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_IMX8M=y
++CONFIG_SPL_POWER_LEGACY=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8M_POWER_DOMAIN=y
++CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
++CONFIG_POWER_PCA9450=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_POWER_I2C=y
++CONFIG_DM_RNG=y
++CONFIG_DM_SERIAL=y
++CONFIG_MXC_UART=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_NXP_FSPI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_TEE=y
++CONFIG_OPTEE=y
++CONFIG_DM_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_DWC3=y
++CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0525
++CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
++CONFIG_IMX_WATCHDOG=y
+diff --git a/doc/board/phytec/imx8mp-libra-fpsc.rst b/doc/board/phytec/imx8mp-libra-fpsc.rst
+new file mode 100644
+index 0000000000000000000000000000000000000000..fb65b8e92b117bc0bb3b41a3d02705ffa3fceab0
+--- /dev/null
++++ b/doc/board/phytec/imx8mp-libra-fpsc.rst
+@@ -0,0 +1,84 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Libra i.MX 8M Plus FPSC
++=======================
++
++The Libra i.MX 8M Plus FPSC is a SBC based with the phyCORE-i.MX 8M Plus FPSC
++SoM.
++The phyCORE-i.MX 8M Plus FPSC with 2GB of main memory is supported.
++
++Quick Start
++-----------
++
++- Build the ARM Trusted firmware binary
++- Build the OP-TEE binary
++- Get ddr firmware
++- Build U-Boot
++- Boot
++
++Build the ARM Trusted firmware binary
++-------------------------------------
++
++.. code-block:: bash
++
++   $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
++   $ cd trusted-firmware-a
++   $ make -j $(nproc) \
++          CROSS_COMPILE=aarch64-linux-gnu- \
++          PLAT=imx8mp \
++          IMX_BOOT_UART_BASE=0x30a60000 \
++          BL32_BASE=0x7e000000 \
++          SPD=opteed \
++          bl31
++
++Build the OP-TEE binary
++-----------------------
++
++.. code-block:: bash
++
++   $ git clone https://github.com/OP-TEE/optee_os.git
++   $ cd optee_os
++   $ make -j $(nproc) \
++          CROSS_COMPILE=aarch64-linux-gnu- \
++          CFG_TEE_BENCHMARK=n \
++          O=out/arm \
++          PLATFORM=imx-mx8mp_libra_fpsc
++
++Get the ddr firmware
++--------------------
++
++.. code-block:: bash
++
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.28-994fa14.bin
++   $ chmod +x firmware-imx-8.28-994fa14.bin
++   $ ./firmware-imx-8.28-994fa14.bin
++
++Build U-Boot for SD card
++------------------------
++
++Copy binaries
++^^^^^^^^^^^^^
++
++.. code-block:: bash
++
++   $ cp <TF-A dir>/build/imx8mp/release/bl31.bin .
++   $ cp <OP-TEE dir>/out/arm/core/tee-raw.bin tee.bin
++   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr4*.bin .
++
++Build U-Boot
++^^^^^^^^^^^^
++
++.. code-block:: bash
++
++   $ make flash.bin
++   $ make -j $(nproc) \
++          CROSS_COMPILE=aarch64-linux-gnu- \
++          imx8mp-libra-fpsc_defconfig \
++          flash.bin
++
++Flash SD card
++^^^^^^^^^^^^^
++
++.. code-block:: bash
++
++   $ sudo dd if=flash.bin of=/dev/sd[x] bs=1024 seek=32 conv=fsync
+diff --git a/doc/board/phytec/index.rst b/doc/board/phytec/index.rst
+index 1ae30c2dcd58657f6ba2bd4eeb580447418b6f95..e24040a496e98b5b8c94ca03a5d6382fbab0ab0b 100644
+--- a/doc/board/phytec/index.rst
++++ b/doc/board/phytec/index.rst
+@@ -6,6 +6,7 @@ PHYTEC
+ .. toctree::
+    :maxdepth: 2
+ 
++   imx8mp-libra-fpsc
+    imx8mm-phygate-tauri-l
+    imx93-phycore
+    phycore-am62x
+diff --git a/include/configs/imx8mp-libra-fpsc.h b/include/configs/imx8mp-libra-fpsc.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..cde91dc364256bf7783b68e507e9f79f5f894cf9
+--- /dev/null
++++ b/include/configs/imx8mp-libra-fpsc.h
+@@ -0,0 +1,27 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ */
++
++#ifndef __IMX8MP_LIBRA_FPSC_H
++#define __IMX8MP_LIBRA_FPSC_H
++
++#include <linux/sizes.h>
++#include <asm/arch/imx-regs.h>
++
++#define CFG_SYS_UBOOT_BASE \
++		(QSPI0_AMBA_BASE + CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 512)
++
++/* Link Definitions */
++
++#define CFG_SYS_INIT_RAM_ADDR	0x40000000
++#define CFG_SYS_INIT_RAM_SIZE	SZ_512K
++
++#define CFG_SYS_SDRAM_BASE		0x40000000
++
++#define PHYS_SDRAM			0x40000000
++#define PHYS_SDRAM_SIZE                 (SZ_2G + SZ_1G) /* 3GB */
++#define PHYS_SDRAM_2                    0x100000000
++#define PHYS_SDRAM_2_SIZE               (SZ_4G + SZ_1G) /* 5GB */
++
++#endif /* __IMX8MP_LIBRA_FPSC_H */
+
+---
+base-commit: b6e2cfca1a6fd10c8f12016a40d690d2ec61796c
+change-id: 20250821-imx8mp-libra-fpsc-4e42820ba0b1
+
+Best regards,
+-- 
+Yannic Moog <y.moog@phytec.de>
+
