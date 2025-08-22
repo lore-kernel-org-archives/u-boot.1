@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6DDACA0EEB
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A07D4CA0EED
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:40:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD2E380422;
-	Fri, 22 Aug 2025 23:38:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 2974080422;
+	Fri, 22 Aug 2025 23:40:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="VQeaolNu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fifSVwUs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DA9582998; Fri, 22 Aug 2025 23:38:03 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 8DA1F829E7; Fri, 22 Aug 2025 23:40:52 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 957C68006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:38:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51E688006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:40:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-435de764e08so1499748b6e.1
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:38:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3e67e6a1cc8so14132215ab.1
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:40:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1755898679; x=1756503479; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DzZDvf3UZfbe2iW7BvjwOUsVx5VDGHxQ33mZbVKGogg=;
- b=VQeaolNuf07IgyeLVJTeCN3G1xEbirMyxRI7U86KhcZwrhT5eGwIMFBObRxp/rYuzO
- hYA7iQuuZhKr8qwlFqwTMGlY2coblR22F+LdoWIkrcOhxVG6xoqmdltJ0PumWKlgD5hN
- ODcH7911vjUsve8Ni5vyAl1WimdTu4tg+N9waMsMHKO7osf1OGcxg2JRH+1ivJ7XiRw2
- bAK1mC8tOrSyzhn+hvmYv14UN8nooR/o5nnz/akhhWXxN1NYJn/7oKEK0zxKh8VB0Aqr
- tXEHe5YeS7Zq4yp5nWQjMJ5Vn573DhjhLouBz+JtINp2J738gE0wwAcMaIwo5gqhVH+N
- xpWA==
+ d=konsulko.com; s=google; t=1755898849; x=1756503649; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=honG4O3dz8vfvXMgrR2G+8IKoeQksaROY5ZQd6HULT0=;
+ b=fifSVwUsgIa1xFM3umNp2Yriewaf7TqSxkdyZ9TPVeNr9YurQBu3QTBocXHmtle+ux
+ 9ueDdh8JzcVzhBUy1eT4IVmDkPRpsLzdedQKWf1aLMaBRk5+gXoPdBd+J2IYaeakIsKR
+ TjkaC9Ou10yZhQJOa8b0Numqw+9sS60lG+w+8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755898679; x=1756503479;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DzZDvf3UZfbe2iW7BvjwOUsVx5VDGHxQ33mZbVKGogg=;
- b=DnOKPWFGLxgfjMAO89asG+qM9FzZ7iOkKKJCU6532LhIr2d17Kfrw0V5K+zNOl9oW/
- 4hr4AV4q+QYOPF5mS282lLJZLh9HzBogdismefshq6eW3eDyDv5DLYWrOYcyj3rP3v++
- FOqIMlWByAfxlQdtw9lp3tEgNUyLVh01aIykgGr9eqLRoucaqoebcJ06wXoU6VR9Bfn+
- Tx2gf6BcH0bN2rnTHfnoQi1CoxsFBp+BE3flvzCUkbWoDNzgd5uD9er556BQPgGMJboY
- Qy9JYbQEOkPFkYWsLCbrLr8+sn9bji3OZQg9OoZLbMgMQe4RpcEK6B0+lAf5zNLw4/1v
- oUsw==
+ d=1e100.net; s=20230601; t=1755898849; x=1756503649;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=honG4O3dz8vfvXMgrR2G+8IKoeQksaROY5ZQd6HULT0=;
+ b=YEZ8WwdpAuQJbUgtGl3JLGNSve+em4oZdnxZ7AqDCYotNU5cZnIiHVXWlsULCyBPyc
+ B44UT7s9A2ug1q1T9c5sIQNr1Cppxk1gu13j3s5hdQ70rMgXNbqfCQ97xON8DRrwBTF4
+ GVQCckqjbW6bWLerQslZwFGbG9CkG2Av7az/0ykqpKIWm9wzv5X/D/DoUD3XuLxlnrTf
+ ca08w+rXvI7Mxe1ecbsjBfj7tTTEJ/QB2ARyH5bansiXRNBmcK3Bg1ZA3hT8JmMob/WP
+ 1z7CJY4QdkzAySLb3+y2gNZ640X3YcaENt5OtfWjB0QEVipD/5NlsODVmrXmz8gbhxTl
+ XMcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkqrGaJv3aOKMPUJdGop0fqQ9BAUcdow7ApKaw+G1AcmH7d0pXk+67w2AX6Y5U0D9yQ6qsVWk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwB8dNanmY9us5p2N0e9ZWYck/CUiLXUoW2y6B1QZhkGYH3u4El
- 1hxrgqGEJGyyQTCUB9oBoNMJszf784JjM/DrXSnwcaK6CqFkflWsVBR6EdCMy6BXvS8b1hq37QF
- xltJyrKnlkBohzSrQ4qwNleE4XWVt0UhB6GGvPZzPaw==
-X-Gm-Gg: ASbGncsH3Oe4/QBdcRf7FIbLbUc5BrnBfgdIXfA83BFyaNyq+wWDCS+SrGj6gr5Xtx/
- wIGhJ6c8mzi/ORnNksHWEFYMEywh9NZqYChNOmdfTlLxRXn7TvHw9Et4FJn7tiagDpZTwxpHYrZ
- v97C9cwoyFvX06IX0osoXjJFIUp/zoqFqS0UXe5BaxRK3WLVTuhGCVvWRQdyJRzbVugy5Ki2qsh
- HSn0ZY=
-X-Google-Smtp-Source: AGHT+IFd3RPmyJan8iotbY3tpLOSi89nkhwhID3FgjDXrTNDGBPcJUNmjecxRRlexnTRgnV10POL3cdmi9PpvIubmyE=
-X-Received: by 2002:a05:6808:1485:b0:433:ed9b:fcfd with SMTP id
- 5614622812f47-437851bacf6mr1967495b6e.19.1755898679143; Fri, 22 Aug 2025
- 14:37:59 -0700 (PDT)
+ AJvYcCXitZRjiORHXYeIvLzZgPlRQO6GItldsB217MM7LoAhN+fXDfs8M0oJCzy3oiWOiaNjzBncsL8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzwv7SyUnUKG1oVCr99m3PDaaflYmv8WnkmQ5BIkmHTedcPmzcY
+ kjUUmJs4GfHJ8bYkbbdp01SAPbaEP9WaEGThbgrDS0mx9R5DxLWPUAGhGRypMkECCbpxKD8fDs4
+ tPE30YQY=
+X-Gm-Gg: ASbGnctWccFweAt9RYyPElbJUe3ZfOu7i+WFJECuueQo885i2qQmhB39uA4eqamOqzF
+ +vJFS5707bmtMg3ji8VHl8A59GwezcSBWYlODFBWWPW63gUgC4uJOLlOcHReelYGWADYighOYNL
+ BeeWRQ0RLm8GnNaZTIvFmjLLaTx7QzesMZ8bvU+/5gwAuF7tTv2BVZ189dqMFEwk8R94dRek9Ds
+ PMxAFCGYnsZEqYgXKejq1Sen4/KVLGTW61zs/i3/QzVyMYe6lsG9n5LgRYQJVLWdd526ZG253TB
+ w+Dk2NNfh1mhlNWU4vm2vCMa7yABi0RmLFPE+5nTErBD1YYe4jQgdjkc4a9VRCB4HtxpG7TI+hg
+ cRlF24IRMXHpmRREGfgW/k5Wm5d2u8Yt9DV7OrTe1P0U8kGUZgPnld92e
+X-Google-Smtp-Source: AGHT+IFzGaWzS0s5gTr6dPKqt5KobQTJ78wG3Ii+Jy/g+fiziV00KlC7R5x17HqaA+fJayiezLdiLw==
+X-Received: by 2002:a05:6e02:1a43:b0:3e9:e4ca:4aa8 with SMTP id
+ e9e14a558f8ab-3e9e4ca4fe2mr37517815ab.25.1755898848709; 
+ Fri, 22 Aug 2025 14:40:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-886c8fa400asm71287239f.14.2025.08.22.14.40.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Aug 2025 14:40:47 -0700 (PDT)
+Date: Fri, 22 Aug 2025 15:40:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 06/10] doc: Add riscv to the list of architectures in
+ tools/buildman/buildman.rst
+Message-ID: <20250822214045.GP124814@bill-the-cat>
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
+ <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
+ <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
+ <CACAHuLD=fkEKq9e83f3ePQHO1N5dnVsRuFHwR6U12jv2EBJnew@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250721180205.2696763-1-tharvey@gateworks.com>
- <20250724034438.GH18395@nxa18884-linux.ap.freescale.net>
- <CAJ+vNU0bm6ZB3cZP6Az45sNsMZ3QZJEVj7C20yFygF_YSqa5bA@mail.gmail.com>
-In-Reply-To: <CAJ+vNU0bm6ZB3cZP6Az45sNsMZ3QZJEVj7C20yFygF_YSqa5bA@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 22 Aug 2025 14:37:48 -0700
-X-Gm-Features: Ac12FXxs8vwVw5OZPbe78Dd3HsliCLeUunZGET9dXY1nOSBE-n8BeJDbu3lbVHU
-Message-ID: <CAJ+vNU1n_+Q70jYEtZ4Eii4qM_R6e+uVfHPKZD5KYHt_ZrX2cw@mail.gmail.com>
-Subject: Re: [PATCH v2] usb: ehci-mx6: Add i.MX95 OTG support
-To: Peng Fan <peng.fan@oss.nxp.com>, Fabio Estevam <festevam@denx.de>
-Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@oss.nxp.com>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, peng.fan@nxp.com,
- Stefano Babic <sbabic@nabladev.com>, 
- Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JFH+qey3mkWn/0rU"
+Content-Disposition: inline
+In-Reply-To: <CACAHuLD=fkEKq9e83f3ePQHO1N5dnVsRuFHwR6U12jv2EBJnew@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,108 +104,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jul 28, 2025 at 11:04=E2=80=AFAM Tim Harvey <tharvey@gateworks.com>=
- wrote:
->
-> On Wed, Jul 23, 2025 at 7:34=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> w=
-rote:
+
+--JFH+qey3mkWn/0rU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Aug 22, 2025 at 10:12:19PM +0100, Adriano Carvalho wrote:
+> On Fri, 22 Aug 2025 at 01:04, Adriano Carvalho
+> <adrianocarvalho.pt@gmail.com> wrote:
 > >
-> > Hi Tim,
-> >
-> > On Mon, Jul 21, 2025 at 11:02:05AM -0700, Tim Harvey wrote:
-> > >When the usb node is defined dr_mode=3D"otg" ehci_usb_phy_mode() is ca=
-lled
-> > >to determine the mode from status registers.
+> > On Wed, 20 Aug 2025 at 22:08, Heinrich Schuchardt <xypron.glpk@gmx.de> =
+wrote:
 > > >
-> > >The IMX95RM does not currently define the USBNC STATUS register but it=
- is
-> > >assumed to be an omission as the first three registers are defined.
-> > >It has been expirimentally verified that the USBNC_PHY_STATUS register
-> > >at offset 0x23C bit4 (USBNC_PHYSTATUS_ID_DIG) reads 0 when USB_ID is G=
-ND
-> > >and 1 when floating.
+> > > On 11.08.25 01:37, Adriano Carvalho wrote:
+> > > > Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> > > > ---
+> > > >   tools/buildman/buildman.rst | 3 ++-
+> > > >   1 file changed, 2 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.=
+rst
+> > > > index d5d22732088..7944adcd867 100644
+> > > > --- a/tools/buildman/buildman.rst
+> > > > +++ b/tools/buildman/buildman.rst
+> > > > @@ -478,7 +478,8 @@ Setting up
+> > > >
+> > > >      At the time of writing, U-Boot has these architectures:
+> > > >
+> > > > -      arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, s=
+h, x86, xtensa
+> > > > +      arc, arm, m68k, microblaze, mips, nios2, powerpc, riscv, san=
+dbox, sh, x86,
+> > > > +      xtensa
 > > >
-> > >Use is_imx9() as this driver works for i.MX91, i.MX93 and i.MX95 and a=
-ll
-> > >of these determine the role based on the USBNC_PHY_STATUS register.
+> > > The output examples above this line should also be updated to show RI=
+SC-V.
 > >
-> > Just a question, does your board use USB2.0 port for SDP? And any publi=
-c
-> > patches ready for that?
+> > Do you mean what's under "Check the available toolchains"?
 > >
->
-> Hi Peng,
->
-> Yes, I am using the USB2.0 interface for SDP. Aside from this patch
-> the usb2 nodes need to be added to the dt (usbphynop, usb2, usbmisc
-> which are already in kernel but not yet in uboot dts/upstream).
->
-> However, unlike SDP on the USB3.0 interface which I was able to get
-> working, I was getting stuck somewhere between the ATF and U-Boot
-> proper on USB2.0. I can no longer boot software on my imx95_19x19_evk
-> after the changes merged for B0 so I'm unable to test and compare
-> notes at the moment.
->
-> Best Regards,
->
-> Tim
->
->
+> > To reproduce, I would need to install quite a few toolchains. If
+> > anyone already has all those toolchains they could just send me the
+> > output. Do you know someone who can do that? Can you do that? Or
+> > should I just install all those toolchains and reproduce?
+> > [...]
+>=20
+> With docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025,
+> I got the following:
+>=20
+> $ ./tools/buildman/buildman --list-tool-chains
+> List of available toolchains (17):
+> aarch64   : /opt/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
+> arc       : /opt/gcc-14.2.0-nolibc/arc-linux/bin/arc-linux-gcc
+> arm       : /opt/gcc-14.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueab=
+i-gcc
+> c89       : /usr/bin/c89-gcc
+> c99       : /usr/bin/c99-gcc
+> i386      : /opt/gcc-14.2.0-nolibc/i386-linux/bin/i386-linux-gcc
+> m68k      : /opt/gcc-14.2.0-nolibc/m68k-linux/bin/m68k-linux-gcc
+> microblaze: /opt/gcc-14.2.0-nolibc/microblaze-linux/bin/microblaze-linux-=
+gcc
+> mips      : /opt/gcc-14.2.0-nolibc/mips-linux/bin/mips-linux-gcc
+> nios2     : /opt/gcc-14.2.0-nolibc/nios2-linux/bin/nios2-linux-gcc
+> powerpc   : /opt/gcc-14.2.0-nolibc/powerpc-linux/bin/powerpc-linux-gcc
+> riscv32   : /opt/gcc-14.2.0-nolibc/riscv32-linux/bin/riscv32-linux-gcc
+> riscv64   : /opt/gcc-14.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc
+> sandbox   : /usr/bin/gcc
+> sh2       : /opt/gcc-14.2.0-nolibc/sh2-linux/bin/sh2-linux-gcc
+> x86_64    : /opt/gcc-14.2.0-nolibc/x86_64-linux/bin/x86_64-linux-gcc
+> xtensa    : /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-gcc
+>=20
+> Compare to the original:
+> - a few architectures are missing (e.g., alpha, am33_2.0, bfin, frv, h830=
+0)
+> - No "Scanning for tool chains" at the beginning
+> - No "Tool chain test"
+>=20
+> Have the missing architectures been removed since? All those in the
+> arch folder and some more are listed.
+>=20
+> Has the output for Buildman changed to not include those lines?
 
-Hi Peng,
+There's a few things well out date at this point:
+- The output from '--fetch-arch list' shows what can be downloaded from
+  kernel.org. Keep in mind these are public toolchains, for the Linux
+  kernel and are also fine for us. That's why it lists so many more.
+- The section "Check the available toolchains" should be replaced with
+  modern output, and you need to pass -v to get such verbose details now
+  rather than simply a list of what would be used.
+- The section "Install new toolchains if needed" should be replaced with
+  output from using an architecture U-Boot still supports such as arm64
+  or riscv.
+- The "toolchain-alias" parts don't list what aliases one needs and
+  since 'riscv =3D riscv64' is needed, rephrasing that earlier part of the
+  document should be done too.
 
-Just to follow-up here I have been able to get imx95 to boot via SDP
-on imx95-19x19's USB2 with the following:
-1. the patch in this thread
-2. the env-is-nowhere patch from Jo=C3=A3o Paulo Gon=C3=A7alves:
-https://www.mail-archive.com/u-boot@lists.denx.de/msg550594.html
-3. adding the usb2/reg_usb_vbus/usbphynop to imx95-19x19-evk-u-boot.dtsi
-4. the following changes to defconfig:
---- a/configs/imx95.config
-+++ b/configs/imx95.config
-@@ -129,6 +129,8 @@ CONFIG_DM_MDIO=3Dy
- CONFIG_MII=3Dy
- CONFIG_FSL_ENETC=3Dy
- CONFIG_PCIE_ECAM_GENERIC=3Dy
-+CONFIG_SPL_PHY=3Dy
-+CONFIG_SPL_NOP_PHY=3Dy
- CONFIG_PINCTRL=3Dy
- CONFIG_SPL_PINCTRL=3Dy
- CONFIG_PINCTRL_IMX_SCMI=3Dy
-@@ -146,16 +148,17 @@ CONFIG_SPI=3Dy
- CONFIG_DM_SPI=3Dy
- CONFIG_NXP_FSPI=3Dy
- CONFIG_USB=3Dy
--CONFIG_SPL_DM_USB_GADGET=3Dy
-+CONFIG_SPL_USB_HOST=3Dy
-+CONFIG_USB_EHCI_HCD=3Dy
--CONFIG_USB_DWC3=3Dy
--CONFIG_SPL_USB_DWC3_GENERIC=3Dy
- CONFIG_USB_GADGET=3Dy
- CONFIG_SPL_USB_GADGET=3Dy
- CONFIG_USB_GADGET_MANUFACTURER=3D"FSL"
- CONFIG_USB_GADGET_VENDOR_NUM=3D0x1fc9
- CONFIG_USB_GADGET_PRODUCT_NUM=3D0x0152
-+CONFIG_CI_UDC=3Dy
- CONFIG_SDP_LOADADDR=3D0x90400000
-+CONFIG_USB_GADGET_DOWNLOAD=3Dy
-+CONFIG_USB_FUNCTION_SDP=3Dy
- CONFIG_SPL_USB_SDP_SUPPORT=3Dy
- CONFIG_ULP_WATCHDOG=3Dy
- CONFIG_LZO=3Dy
+Thanks for working on this area!
 
-Note that I had to disable DWC3 and I think that's because it uses dm
-for gadget mode and CI_UDC does not support that and thus duplicates
-functions.
+--=20
+Tom
 
-This was needed to bring up a custom board that runs USB3 to a HUB and
-USB2 to a Type-C connector.
+--JFH+qey3mkWn/0rU
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Fabio,
+-----BEGIN PGP SIGNATURE-----
 
-I'm not sure if you were needing more reviews for this one or if you
-were just waiting for a follow-up to Peng's question.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKjj2QAKCRAr4qD1Cr/k
+CrcEAQDFpzgaQXj9AUhX/hjeTutBBTkxJ9TCm7HJShzb+Y4XCAD/ZwuM4qRf6Eaw
+FY5ExE10vD0pm3b877gAFS8JLZoX2gk=
+=T5KB
+-----END PGP SIGNATURE-----
 
-Best Regards,
-
-Tim
+--JFH+qey3mkWn/0rU--
