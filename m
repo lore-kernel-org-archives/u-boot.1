@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA6FCA0EED
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 18:34:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45CC6CA0EED
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 18:34:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F3FB82998;
-	Fri, 22 Aug 2025 20:34:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA9ED829E7;
+	Fri, 22 Aug 2025 20:34:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="N/yR+Q3l";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="cZULEULw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17E968006D; Fri, 22 Aug 2025 20:34:35 +0200 (CEST)
-Received: from out-186.mta1.migadu.com (out-186.mta1.migadu.com
- [IPv6:2001:41d0:203:375::ba])
+ id 3897C82E34; Fri, 22 Aug 2025 20:34:37 +0200 (CEST)
+Received: from out-181.mta1.migadu.com (out-181.mta1.migadu.com
+ [95.215.58.181])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDB6F8006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 20:34:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10D8882103
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 20:34:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=grimler.se
 Authentication-Results: phobos.denx.de;
@@ -29,40 +29,39 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1755887671;
+ t=1755887674;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=6omdbLL/gmEuli5kdijr6F4gk9Zye1zu9f26AMWf+Ks=;
- b=N/yR+Q3l1D4hdHc4P7UbvfFz7g+5pGet+tBRQTWwdwQaVH9soMDGkRL+TpiNMkjV0Sx/H0
- /z5JGddRaECYDQLQVi5M/pUQjJi2d/D2uqp4AzLAY6wdRe4MoJ1OILjU70BVJrmp/miSoS
- G29zwPW2jyfrSXHWMOfW8DiGmUROKmA=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=s258ZGVJ5WbFOJtNupcqyVuTKG3AkbcA9Bjld4uu+/c=;
+ b=cZULEULwiOQ7ofIoc6rPLQ4ni32Oi06XNoFUDb0EHAyy+KKCQo1A5JojQxsQmTFQuHaezD
+ wk0+tVUqVLHxWRFp4jreBMpWyrGlB6zSbvrFFrVlnpYMOGWbDUG+7AyEyVtSgACbaA/9zJ
+ NW3FXA1pNjarBuMxEh4zYUKbjV/2jgA=
 From: Henrik Grimler <henrik@grimler.se>
-Subject: [PATCH 00/11] power: update compatibles for PMICs used by exynos
- devices
-Date: Fri, 22 Aug 2025 20:33:22 +0200
-Message-Id: <20250822-b4-exynos-power-v1-0-9e2f2f740029@grimler.se>
+Date: Fri, 22 Aug 2025 20:33:23 +0200
+Subject: [PATCH 01/11] power: pmic: s2mps11: look for both
+ {voltage-,}regulators
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAPK3qGgC/x3MTQqAIBBA4avErBuwKUO6SrToZ6zZaCiUId09a
- fkt3ssQOQhHGKoMgS+J4l1BU1ewHrPbGWUrBlKklSHCpUNOj/MRT39zQKVsY3ptNLcGSnUGtpL
- +4zi97wdsIgjyYQAAAA==
-X-Change-ID: 20250822-b4-exynos-power-00f186585e38
+Message-Id: <20250822-b4-exynos-power-v1-1-9e2f2f740029@grimler.se>
+References: <20250822-b4-exynos-power-v1-0-9e2f2f740029@grimler.se>
+In-Reply-To: <20250822-b4-exynos-power-v1-0-9e2f2f740029@grimler.se>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
 Cc: David Virag <virag.david003@gmail.com>, 
  Sam Protsenko <semen.protsenko@linaro.org>, 
  ~postmarketos/upstreaming@lists.sr.ht, u-boot@lists.denx.de, 
  Henrik Grimler <henrik@grimler.se>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2073; i=henrik@grimler.se;
- h=from:subject:message-id; bh=pHrTIrZxAN6yBVvyZP3ovKMz/bwoxpCgTCnTKszT0QA=;
- b=owEBbQGS/pANAwAKAbAHbkkLcWFrAcsmYgBoqLgOs1Est+BQ5NKlqxnWfo5Ty9maOo0qqRXgv
- 6eW8u6PiKeJATMEAAEKAB0WIQQsfymul4kfZBmp4s2wB25JC3FhawUCaKi4DgAKCRCwB25JC3Fh
- a1XvB/9RzhNH2rNYuo0mTwYNdKAxMKhfm4yN1buaFvQuh891CtvPc//sPX0+ednnawVNE4Sl/bD
- e+y4S50FpVPdOlRwTpFhvXiPEA2peSYGcmxMTLNW45lL2AJ2bw7iDVSj7dD5oiJ6Mu/IfnvNvb9
- 8yzsY0bICYzjhVFfM1zJiQ2ujNzxloUXf89wx+bcOn/Gmdy6wP7Z2xV1M1jYTEBpGpX4v7J0JhK
- zj3w1/popfGSohj0sGO2qemlLd6WqfIrMMjqRfjQSZuzoUh8N6EtmxoBOmcmfinvj7xBx5W/m3o
- tDFrF+yTPjulcQ/fZwFp2HzjeorAndM5s0cLEdBfAbGG59nu
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1316; i=henrik@grimler.se;
+ h=from:subject:message-id; bh=T7eTBH5t4ICsuRMQxgSipktU8pryARCzhhz0fHrWzYg=;
+ b=owEBbQGS/pANAwAKAbAHbkkLcWFrAcsmYgBoqLgSbIb/neOuJO3+aOdTT1d+kVEPEJ64xPbgZ
+ BTMwNRH7eKJATMEAAEKAB0WIQQsfymul4kfZBmp4s2wB25JC3FhawUCaKi4EgAKCRCwB25JC3Fh
+ a/9kB/0eHAiJNr1MuvoaTjm+DilPGoipp4Kuu6nFOb5RrFyTCoKFFSYYG4cTuuzE7lFUCSw5k1k
+ gutazM8x0SlWTcg64BpAZBxO93UxbHq9JxEJFcoLDFzk6uZpp1EBXnmbgbIvQFUQkv9Rm1eKfbE
+ IjOvXwnKPetxU9uqXZY/4zO2BcWBeg4QVPvWrhxTnGaWL+VRcASw8vBkxdtofbOj73U5HmQtC7+
+ zccpyUTTk/idWYUgfgRiMcpYkBrYSQ10YvKlpMNWD5QHqiGcEXWrn7T7Vt+w3SGAvKwBeASb2uO
+ RtiQr8o8vkYm/qVG6xrcN9ULByuOJ0MDlRe1rSG5HiDXvyXb
 X-Developer-Key: i=henrik@grimler.se; a=openpgp;
  fpr=2C7F29AE97891F6419A9E2CDB0076E490B71616B
 X-Migadu-Flow: FLOW_OUT
@@ -82,53 +81,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To allow for using Linux DTSes through OF_UPSTREAM, we need to support
-more compatibles in the relevant pmic drivers. This series therefore
-adds support to drivers for the compatibles used by Linux DTSes, and
-then updates the u-boot DTSes to use the same, in a bisectable way.
-
-Also drop exynos_power_init for odroid board fix errors due to
-regulators otherwise being enabled twice, and also fix some typos in
-max8997 Kconfig help message.
-
-The series has been tested on:
-
-* odroid-xu4
-* odroid-u2
-* samsung-i9100 (similar to exynos4210-trats)
-
-Best regards,
-Henrik Grimler
+Linux's DTSes uses regulators { }; while u-boot's DTSes uses
+voltage-regulators { };.  Look for regulators, and fallback to
+voltage-regulators if not found, so that both type of DTSes can be
+used with the driver.
 
 Signed-off-by: Henrik Grimler <henrik@grimler.se>
 ---
-Henrik Grimler (11):
-      power: pmic: s2mps11: look for both {voltage-,}regulators
-      ARM: dts: exynos5422-odroidxu3: rename s2mps11 regulators node
-      power: pmic: s2mps11: remove check for voltage-regulators node
-      ARM: dts: exynos4210-universal_c210: rename max8998 regulators node
-      ARM: dts: s5c1xx-goni: rename max8998-pmic regulators node
-      power: pmic: fix typo and capitalisation in max8997 Kconfig help msg
-      power: pmic: max8997: support maxim,max8997-pmic compatible as well
-      ARM: dts: exynos4210-trats: use maxim,max8997-pmic compatible
-      power: pmic: max8997: drop maxim,max8997 compatible
-      ARM: dts: trats: rename max8997-pmic regulators node
-      board: samsung: odroid: drop exynos_power_init
+ drivers/power/pmic/s2mps11.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
- arch/arm/dts/exynos4210-trats.dts          |  4 ++--
- arch/arm/dts/exynos4210-universal_c210.dts |  2 +-
- arch/arm/dts/exynos5422-odroidxu3.dts      |  2 +-
- arch/arm/dts/s5pc1xx-goni.dts              |  2 +-
- board/samsung/odroid/odroid.c              | 15 ---------------
- drivers/power/pmic/Kconfig                 |  4 ++--
- drivers/power/pmic/max8997.c               |  2 +-
- drivers/power/pmic/s2mps11.c               |  2 +-
- 8 files changed, 9 insertions(+), 24 deletions(-)
----
-base-commit: 94e690c44a03959c39f0f5a44a9b89c851af3b60
-change-id: 20250822-b4-exynos-power-00f186585e38
+diff --git a/drivers/power/pmic/s2mps11.c b/drivers/power/pmic/s2mps11.c
+index 17780017035bc2f8c6b672976eb4d25e484307b7..3aa8cad0827f68f1d35505a09d629787250b0378 100644
+--- a/drivers/power/pmic/s2mps11.c
++++ b/drivers/power/pmic/s2mps11.c
+@@ -52,11 +52,14 @@ static int s2mps11_probe(struct udevice *dev)
+ 	ofnode regulators_node;
+ 	int children;
+ 
+-	regulators_node = dev_read_subnode(dev, "voltage-regulators");
++	regulators_node = dev_read_subnode(dev, "regulators");
+ 	if (!ofnode_valid(regulators_node)) {
+-		debug("%s: %s regulators subnode not found!\n", __func__,
+-		      dev->name);
+-		return -ENXIO;
++		regulators_node = dev_read_subnode(dev, "voltage-regulators");
++		if (!ofnode_valid(regulators_node)) {
++			debug("%s: %s regulators subnode not found!\n", __func__,
++			      dev->name);
++			return -ENXIO;
++		}
+ 	}
+ 
+ 	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
 
-Best regards,
 -- 
-Henrik Grimler <henrik@grimler.se>
+2.50.1
 
