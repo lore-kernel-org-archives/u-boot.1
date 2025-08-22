@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B58BECA0EEB
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 17:06:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DD6CA0EEB
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 18:02:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F43D80422;
-	Fri, 22 Aug 2025 19:06:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B91080422;
+	Fri, 22 Aug 2025 20:02:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="V2UJ2R7t";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TXf9n92O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EED3F8006D; Fri, 22 Aug 2025 19:06:00 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id A7A4380548; Fri, 22 Aug 2025 20:02:52 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A058182998
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 19:05:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD70C8006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 20:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-30cce8c3afaso1492504fac.1
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 10:05:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e95011504d4so2426600276.3
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 11:02:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1755882356; x=1756487156; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1755885767; x=1756490567; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cY88SbMzrPRc+vp4uCDzFK2rASzKCDzg+MbgJpskbds=;
- b=V2UJ2R7tjKRc/YKQ/P1P8RzmSA1i1hU76eW5UHJEVd7wHWbyUzstNj+A0fnWMvDhbC
- jtDnWu314nvvI4KlGJyUBbmb/R7xHwr7ga/Vguj9Rfu/hGfbVVVcpjW/qFcnYfkHAyAa
- f4h+3tfikYa50Rz4AJAz93y15cTTsmJ+wNKA4ZhdfkAz9ttGIkK62W9C3jhJpTf+CH3h
- gf48EZuBjBx+z8rIg9J8q7ifX/yye6VZXQLEltDpmr6L9UWP7ywaQdLMKrlP7uVvpMRt
- E6G3mOcgmmBqbYpJo2+htQ9UQWiEmA8X+wXx37+pOar0FTBhWVA+oaqYvv0E1RUgsgrP
- XFzA==
+ bh=nIv7oUH4s/c26WwPUWrjcwYNtZRcdy9v8mJIOdjw+RQ=;
+ b=TXf9n92OqCEKe133Ee3LQiQn3LSI0S+BXXQCEk+yvPEuBDXImlNghOI7CA4imt3bkH
+ lJJVjH37Nf3Zzn5CSXmg3yLSYFrmVBClzXbTloYfVkiPDdyWwBXqRGWSqIrwlr4ILdYB
+ LiPqF2vtvWWu5ORU6Wu1g6q3opmXRfUg23gboPK8jBviXBxIUhXEHm2VzdU/+Tj2m3yq
+ dVVksc3JcHXoO4HBHi85+cJTtlu406j2SvujujdUl7YDPOPKM4ir0zvsfgIc9q1vFWHP
+ mZKh6T6rpx2sWII28p3HyUDKf3HLDRRqUp39YqaGz43i8ah3yD12sC+g3YAXjiSGji/9
+ wsBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755882356; x=1756487156;
+ d=1e100.net; s=20230601; t=1755885767; x=1756490567;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cY88SbMzrPRc+vp4uCDzFK2rASzKCDzg+MbgJpskbds=;
- b=PZ+j6lLbKhapHrsZvtVASmQCxjSdjWMnHI7l7PmogGbCxgUK7U3FQWlFVFxv5kAxOu
- VlYftegpHK4sgSGYNzFfecfHHgMTD1s1ef3RakDz5U63UxE+g1nktBMLpWsyuIorgr+9
- 1YPOe1gtUdnMDQpQ+epKsuKTFYmVYR2qRhyiibEXurCXic1aHGjEBNm0auyIy+2ENXA/
- tkf3Pa4ggru0hbbdhZSlkjNFlzAwrrZ0Nk/JeDEk8HGx11dpyduQRTVf+paOXCZasZWF
- uk+kIvihvgQE6PH4dXnj8eI5bWQLMutbvn75fSyNpDxlhyV162rSl7qeYbyoUNbtsTmD
- 4R0Q==
+ bh=nIv7oUH4s/c26WwPUWrjcwYNtZRcdy9v8mJIOdjw+RQ=;
+ b=oRmb4hHEAJkWqYGLUH69hLn1zSkcX0LqSmQBrE2K80+0+Ii9xxyt265Go0WXPXG0Wk
+ 6gblfqOIVfL94dpFYnMYGqMGl1CxkAQprdoSzZMXw+IiCjUtx9C/NYwUT544YaoRyVQ+
+ Mq3qz+HHoWPnIUP51vVpv7dF5P25/ma1wFdnfQyIFUw9Qb5PJrSP0sz3++8c6L8SzF4Q
+ 4YAhDHIB0rizNtWS2+7pEav3lf+tTKFkRkkG3Zy3l0nmXlsy0NskfZnTbbhRtK02L5E4
+ fEdn/5HfpYKbowYh0DXUb8A6sFL5w2sDlZ22cSz9Vx6kimVFTbmjIoUallHVRq8zq/4f
+ fmow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrsQK1ijR8KYP6Oxg+YmfSBPOejHbo8WqW3qyC5K7lbJlQ9GGIXsyq00QlCu/us3EVrmtVEh0=@lists.denx.de
-X-Gm-Message-State: AOJu0YynkV6iEqm0bjADqcmpk57hW1P0pkHWr+l4NQL3vNgkIm+Hu99s
- gso1q+BbrRyWh5x8+pkCrjeRf1O/OyqHzRbmunn9qHq6ZXfTXkB505HHinB04ywgpfZn+FiWFPh
- W65VSvFvoOLwat3ZBYZjSOZSyvOF80mt3g5+P2BqiAQ==
-X-Gm-Gg: ASbGncsTp8S027D+unuF2P5tO4fHLgA4AgumwYVobOWUULlq4AVvQgQdMnK7uMS+Y3K
- 4FzLlly5mk7MdabNgbWO+tj8vV6nnH8gfbnkQ78uBaIz2ezg1Fi5T19ZuPvLCTntfjtXX2QAPU6
- Q8I0MM3OcRaxJ/FGjblMHZxtYxhNNDFjD853piFJV4rDUK06EKQ3JKotrQ4GMjnkH907LEvHBux
- UhLjiM97q1HTYBMdQ==
-X-Google-Smtp-Source: AGHT+IHH+3V4RSUbeot8lqOUkJQzRabb3mA7V7jySuH4qS0RecmJsACIbF+gBOH1mT6m3MxOOCj9YGdHE2AQO+89LtI=
-X-Received: by 2002:a05:6871:4009:b0:300:3df6:921f with SMTP id
- 586e51a60fabf-314dcac768fmr1445290fac.8.1755882356351; Fri, 22 Aug 2025
- 10:05:56 -0700 (PDT)
+ AJvYcCXkXLceWSsI800j3WAZMP/eQFe82fSkUAe83NesPdsRUldeOxuuz7F45YpinPdwcNjvekLrB/4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNJTFAq5tPvIXsl7gvS2f9PAsbq6lqdfZ5wZnKfc3YSktKfH/+
+ KGgXHS6NDm0twUWI57Gq0qHRTJutVuKSZKTeVLHnjOdoS7BKzeJc9G49Cf8g1N+ZJxAORISBIZi
+ 7gmQd7to3hVaSrvy1RsQhwLLzedymkAwmqr/gykMqIQ==
+X-Gm-Gg: ASbGncuTr3PRTpxLFhzKJchynxMZj8/6Vv1uBk12nFXzuy/dkb7IhitrjPv5ifdiQqv
+ DzCtIgvr/7kq35LZmCoZFZuVnvs41fs1W51HJB8cVh2IfyYo0IyFfwoVMg6zt9RAaVt1WaHyQ7F
+ PKsCh2Rwom22W8hdSU0Of/BCRylwz/if9IKcdt2bVlGg2JAO+bD36ZinryxS9oUbU05PbzxVxzZ
+ np6q5ajJCcuZuCk
+X-Google-Smtp-Source: AGHT+IEkQRWqpesiPQQFYDnadocl2LQhSgXV96SI1BVhM03C77TGrw+dTxmNXNY3TVBwk+32lZozGnc4fk1C4FJjz4c=
+X-Received: by 2002:a05:6902:4111:b0:e93:437c:c6c2 with SMTP id
+ 3f1490d57ef6-e951c32b6eemr3419010276.17.1755885767467; Fri, 22 Aug 2025
+ 11:02:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <pqr4l75nuc57vmrp4r3hjwjxi4p5dgwxlz7h5nrn77rfxwpfmr@dto7364jv2ei>
- <beef5a40-acb8-4f47-944d-d876f5634cdc@kontron.de>
-In-Reply-To: <beef5a40-acb8-4f47-944d-d876f5634cdc@kontron.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 22 Aug 2025 10:05:45 -0700
-X-Gm-Features: Ac12FXwX6e-IvofeJS9rrRVYJFY6aCgp-C2-8LmQ-oBVE90DBbmHlYXICcMxUAo
-Message-ID: <CAJ+vNU0pWaYCG86_XNwb9dMOLhTUzw_9hdFE7xpbMh4G73X0nA@mail.gmail.com>
-Subject: Re: [PATCH] arm: imx: imx9: scmi: Fix booting from USB
-To: =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>
-Cc: Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Francesco Dolcini <francesco@dolcini.it>, Peng Fan <peng.fan@oss.nxp.com>, 
- Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>, 
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>
+References: <20250806222710.23773-1-semen.protsenko@linaro.org>
+In-Reply-To: <20250806222710.23773-1-semen.protsenko@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Fri, 22 Aug 2025 13:02:35 -0500
+X-Gm-Features: Ac12FXxo5dM5Tzhnf8CwqYOfAFM7njiUj_1TgWnZfuegxHGZ3NFc04Cxi-ZcT9Q
+Message-ID: <CAPLW+4n5m6XmsL2j1V76C+YdMxh89zpfZQft9tPEzDQt=2csrg@mail.gmail.com>
+Subject: Re: [PATCH 00/10] samsung: e850-96: Enable USB host and Ethernet
+To: Minkyu Kang <mk7.kang@samsung.com>
+Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -102,99 +97,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Aug 5, 2025 at 11:53=E2=80=AFPM Frieder Schrempf
-<frieder.schrempf@kontron.de> wrote:
+On Wed, Aug 6, 2025 at 5:27=E2=80=AFPM Sam Protsenko <semen.protsenko@linar=
+o.org> wrote:
 >
-> Am 31.07.25 um 20:47 schrieb Jo=C3=A3o Paulo Gon=C3=A7alves:
-> > Hello,
-> >
-> > On Mon, Jul 28, 2025 at 11:25:04AM -0300, Fabio Estevam wrote:
-> >> What confuses me about Jo=C3=A3o's patch is that it was not tested aga=
-inst
-> >> the mainline U-Boot.
-> >
-> > In the end, the code is nearly identical between the downstream and
-> > mainline U-Boot.
-> >
-> > On Wed, Jul 30, 2025 at 08:35:40AM +0200, Frieder Schrempf wrote:
-> >> I have the below patch in our downstream fork to fix the issue mention=
-ed
-> >> here for i.MX93. It is derived from Fabio's patch [1]. I'm not sure if
-> >> it's correct, though.
-> >
-> > We are also doing something similar on our branch.
-> >
-> > I have two proposals. My goal is to prevent the board from hanging when
-> > booting from USB if CONFIG_ENV_IS_NOWHERE=3Dn (since the current code
-> > assumes it is always enabled) and/or if the environment is defined
-> > elsewhere:
-> >
-> > 1) Imply CONFIG_ENV_IS_NOWHERE for i.MX9 (as mentioned earlier), to mak=
-e
-> > it clear that it is required by ARCH.
-> >
-> > or
-> >
-> > 2) Doing something similar to what Frieder showed for USB boot (which i=
-s
-> > almost the same on i.MX8MM/i.MX8MP), but preserving the current
-> > behavior:
-> >
-> > diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9=
-/scmi/soc.c
-> > index 13f13ca7d105..f973652d0cbe 100644
-> > --- a/arch/arm/mach-imx/imx9/scmi/soc.c
-> > +++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-> > @@ -635,7 +635,8 @@ enum env_location env_get_location(enum env_operati=
-on op, int prio)
-> >
-> >         switch (dev) {
-> >         case QSPI_BOOT:
-> > -               env_loc =3D ENVL_SPI_FLASH;
-> > +               if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-> > +                       env_loc =3D ENVL_SPI_FLASH;
-> >                 break;
-> >         case SD1_BOOT:
-> >         case SD2_BOOT:
-> > @@ -643,10 +644,16 @@ enum env_location env_get_location(enum env_opera=
-tion op, int prio)
-> >         case MMC1_BOOT:
-> >         case MMC2_BOOT:
-> >         case MMC3_BOOT:
-> > -               env_loc =3D  ENVL_MMC;
-> > +               if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
-> > +                       env_loc =3D  ENVL_MMC;
-> >                 break;
-> >         default:
-> > -               env_loc =3D ENVL_NOWHERE;
-> > +               if (IS_ENABLED(CONFIG_ENV_IS_NOWHERE))
-> > +                       env_loc =3D ENVL_NOWHERE;
-> > +               else if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-> > +                       env_loc =3D ENVL_SPI_FLASH;
-> > +               else if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
-> > +                       env_loc =3D ENVL_MMC;
-> >                 break;
-> >         }
-> >
-> > With this patch, I believe Peng's concerns are addressed, and it also
-> > works for our use case.
-> >
-> > What do you think?
+> The E850-96 board has a LAN9514 chip which acts as a USB hub and
+> Ethernet controller. It's connected to the SoC via USB lines. In order
+> to make this chip functional the USB controller in Exynos850 SoC has to
+> be configured in the host role, and the corresponding power regulator
+> has to be enabled as well.
 >
-> On first glance, this looks good to me. If possible, can you please also
-> send a patch for i.MX93 (arch/arm/mach-imx/imx9/soc.c) to align the
-> behavior of both platforms?
+> This patch series enables USB host and network support on the E850-96 by
+> making use of the LAN9514 chip. While at it, enable all power regulators
+> (LDO) in the PMIC chip which can be useful in the bootloader and kernel,
+> including the regulator used for LAN9514.
 >
-> Thanks!
+> Sam Protsenko (10):
+>   usb: host: dwc3-of-simple: Add exynos850 compatible
+>   board: samsung: e850-96: Set ethaddr
+>   board: samsung: e850-96: Add ACPM code
+>   board: samsung: e850-96: Add PMIC code
+>   board: samsung: e850-96: Configure PMIC regulators
+>   board: samsung: e850-96: Extract device info from fw loading code
+>   board: samsung: e850-96: Add bootdev var to choose boot device
+>   configs: e850-96: Disable CONFIG_DEFAULT_FDT_FILE
+>   configs: e850-96: Enable USB host support
+>   configs: e850-96: Enable Ethernet
+>
+>  board/samsung/e850-96/Makefile    |   2 +-
+>  board/samsung/e850-96/acpm.c      | 169 ++++++++++++++++++++++++++++++
+>  board/samsung/e850-96/acpm.h      |  27 +++++
+>  board/samsung/e850-96/e850-96.c   |  97 +++++++++++++++--
+>  board/samsung/e850-96/e850-96.env |   2 +-
+>  board/samsung/e850-96/fw.c        |  45 ++++----
+>  board/samsung/e850-96/fw.h        |   4 +-
+>  board/samsung/e850-96/pmic.c      | 144 +++++++++++++++++++++++++
+>  board/samsung/e850-96/pmic.h      |  14 +++
+>  configs/e850-96_defconfig         |  10 +-
+>  drivers/usb/host/dwc3-of-simple.c |   1 +
+>  11 files changed, 482 insertions(+), 33 deletions(-)
+>  create mode 100644 board/samsung/e850-96/acpm.c
+>  create mode 100644 board/samsung/e850-96/acpm.h
+>  create mode 100644 board/samsung/e850-96/pmic.c
+>  create mode 100644 board/samsung/e850-96/pmic.h
 >
 
-Hi Jo=C3=A3o,
+Hi Minkyu,
 
-This does resolve an issue I encountered as well on the imx95 while
-booting via USB2 SDP.
+If there are no objections, can you please apply this series?
 
-Can you submit a formal patch?
+Thanks!
 
-Best Regards,
-
-Tim
+> --
+> 2.39.5
+>
