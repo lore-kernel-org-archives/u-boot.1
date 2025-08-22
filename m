@@ -4,83 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DD6CA0EEB
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 18:02:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87EFECA0EED
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 18:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B91080422;
-	Fri, 22 Aug 2025 20:02:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF70280548;
+	Fri, 22 Aug 2025 20:20:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TXf9n92O";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Bf98Ys1S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7A4380548; Fri, 22 Aug 2025 20:02:52 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 941AF82B20; Fri, 22 Aug 2025 20:20:45 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD70C8006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 20:02:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20B048006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 20:20:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e95011504d4so2426600276.3
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 11:02:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755885767; x=1756490567; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nIv7oUH4s/c26WwPUWrjcwYNtZRcdy9v8mJIOdjw+RQ=;
- b=TXf9n92OqCEKe133Ee3LQiQn3LSI0S+BXXQCEk+yvPEuBDXImlNghOI7CA4imt3bkH
- lJJVjH37Nf3Zzn5CSXmg3yLSYFrmVBClzXbTloYfVkiPDdyWwBXqRGWSqIrwlr4ILdYB
- LiPqF2vtvWWu5ORU6Wu1g6q3opmXRfUg23gboPK8jBviXBxIUhXEHm2VzdU/+Tj2m3yq
- dVVksc3JcHXoO4HBHi85+cJTtlu406j2SvujujdUl7YDPOPKM4ir0zvsfgIc9q1vFWHP
- mZKh6T6rpx2sWII28p3HyUDKf3HLDRRqUp39YqaGz43i8ah3yD12sC+g3YAXjiSGji/9
- wsBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755885767; x=1756490567;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nIv7oUH4s/c26WwPUWrjcwYNtZRcdy9v8mJIOdjw+RQ=;
- b=oRmb4hHEAJkWqYGLUH69hLn1zSkcX0LqSmQBrE2K80+0+Ii9xxyt265Go0WXPXG0Wk
- 6gblfqOIVfL94dpFYnMYGqMGl1CxkAQprdoSzZMXw+IiCjUtx9C/NYwUT544YaoRyVQ+
- Mq3qz+HHoWPnIUP51vVpv7dF5P25/ma1wFdnfQyIFUw9Qb5PJrSP0sz3++8c6L8SzF4Q
- 4YAhDHIB0rizNtWS2+7pEav3lf+tTKFkRkkG3Zy3l0nmXlsy0NskfZnTbbhRtK02L5E4
- fEdn/5HfpYKbowYh0DXUb8A6sFL5w2sDlZ22cSz9Vx6kimVFTbmjIoUallHVRq8zq/4f
- fmow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXkXLceWSsI800j3WAZMP/eQFe82fSkUAe83NesPdsRUldeOxuuz7F45YpinPdwcNjvekLrB/4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzNJTFAq5tPvIXsl7gvS2f9PAsbq6lqdfZ5wZnKfc3YSktKfH/+
- KGgXHS6NDm0twUWI57Gq0qHRTJutVuKSZKTeVLHnjOdoS7BKzeJc9G49Cf8g1N+ZJxAORISBIZi
- 7gmQd7to3hVaSrvy1RsQhwLLzedymkAwmqr/gykMqIQ==
-X-Gm-Gg: ASbGncuTr3PRTpxLFhzKJchynxMZj8/6Vv1uBk12nFXzuy/dkb7IhitrjPv5ifdiQqv
- DzCtIgvr/7kq35LZmCoZFZuVnvs41fs1W51HJB8cVh2IfyYo0IyFfwoVMg6zt9RAaVt1WaHyQ7F
- PKsCh2Rwom22W8hdSU0Of/BCRylwz/if9IKcdt2bVlGg2JAO+bD36ZinryxS9oUbU05PbzxVxzZ
- np6q5ajJCcuZuCk
-X-Google-Smtp-Source: AGHT+IEkQRWqpesiPQQFYDnadocl2LQhSgXV96SI1BVhM03C77TGrw+dTxmNXNY3TVBwk+32lZozGnc4fk1C4FJjz4c=
-X-Received: by 2002:a05:6902:4111:b0:e93:437c:c6c2 with SMTP id
- 3f1490d57ef6-e951c32b6eemr3419010276.17.1755885767467; Fri, 22 Aug 2025
- 11:02:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uo9mBZbT/+Wrcj5MvpWqP6qmLlCfki38dnk15aBOGUs0b4a9d1PuB7YxlJWkc4a/v1K7HndamUqC4CBurVbumZegHNexqLta/AtzR3COeOLKSNAByMlLxHgxA6tbvDiXxZUSCrWKi6ogAXzKaX/wkuGao9bOpoCj8hiI0+xKXXvtteWvxM2Kp8x7TnMyS9sPnKOk61xPocWuy2AdvvSjTfSw03TdTcY5SGkdx4h5E8UeDnSb59vhe60I6KmFtAEyRpA3I2f9/Octo+syD1kGw9MGsWdyLBDVfdC5xTx6zGEQu0L4Jwzk9UPcLssXoO8byaD/AAvFh5vQxZzbURHJig==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yX0dhi5n0d/xvBmq6owMR/jTWIB35x73IITMlzefhRI=;
+ b=JBFxyNdhFv/KZcwV6EbK/ifYiIERnlGk0bXGy1l9XUnwWJHEV6cBCB1FSP2fp9j1zj2OzpkYtysfUpbRdE1ZYPqH/BGpcNTaLZ83VW5bcDwibuOqOZWyUNZtiRYaHA+0prJjf6WWspW0hcI4P/ikoRp6ISfzHelDtzMNVcX1GKcbBjg1QZwQ/szeEDEzW16FJJWSrp89Ng8+hSJCxw8Ve2isUpcbpiJiwDKEdW8SISYtptQeB7bCvbH860SmSb6nTn5BoIvqymLGRaEUyVh2XGetZYVewJP9aJDgS0HzX//pOf2fRhqViW7Nsoa+0vUxLhEpfVUQ5DyDVe5ne+LBqQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yX0dhi5n0d/xvBmq6owMR/jTWIB35x73IITMlzefhRI=;
+ b=Bf98Ys1SSoOnmIPDQCayROcJsfJWKU3oQ+e2j4U0hExIHJt/5IJXP+fE+enw6O4oFZIZjittXAVUIC8Q8NokY+zO6XF6iYVdfnCxGGqGCjw6W61ZUrazS7TgB2ImchE/tk++7ullGb4c3zkT5yIO4xPEt+nC4cmCJGLpYljBrdM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by VI1PR10MB3742.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:13c::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.18; Fri, 22 Aug
+ 2025 18:20:39 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5%5]) with mapi id 15.20.9052.014; Fri, 22 Aug 2025
+ 18:20:33 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+	Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH 0/3] memtest performance improvements
+Date: Fri, 22 Aug 2025 20:18:45 +0200
+Message-ID: <20250822181848.3325832-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.50.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0046.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::20) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-References: <20250806222710.23773-1-semen.protsenko@linaro.org>
-In-Reply-To: <20250806222710.23773-1-semen.protsenko@linaro.org>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Fri, 22 Aug 2025 13:02:35 -0500
-X-Gm-Features: Ac12FXxo5dM5Tzhnf8CwqYOfAFM7njiUj_1TgWnZfuegxHGZ3NFc04Cxi-ZcT9Q
-Message-ID: <CAPLW+4n5m6XmsL2j1V76C+YdMxh89zpfZQft9tPEzDQt=2csrg@mail.gmail.com>
-Subject: Re: [PATCH 00/10] samsung: e850-96: Enable USB host and Ethernet
-To: Minkyu Kang <mk7.kang@samsung.com>
-Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|VI1PR10MB3742:EE_
+X-MS-Office365-Filtering-Correlation-Id: c3030e04-91f7-4f6c-be44-08dde1a89594
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|376014|366016|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JBOMm9n+wjiWTiNKuWqnHSamPdRkw+n2wqWA9kdsqKb3LCSUIyDZNWFPdG73?=
+ =?us-ascii?Q?c4RIPyBsNVAMewkdQhm9pfV4REypz9jCj/ReLnSwWvyMb7DHS2mTXQ93Y3DB?=
+ =?us-ascii?Q?LECJW826yHffU/t2+zNxF85X1yz8yyOElpRgwXYvz1k9TsmVtWs6L2izNf/i?=
+ =?us-ascii?Q?6cIfH0ZbGLaIYeCvmDmw3OJYrVBvfH/L4Mv+0iFGfjHswQPJjUQ5f+8bowhs?=
+ =?us-ascii?Q?Rz7DJ4sMCzPI0QEUav1dCC2B49LJv0IE+wsyDeOgGYJM4klY/yZTklkgjH67?=
+ =?us-ascii?Q?a2z88tvSzEfVkGZOrVstSAnxR5p55O+UZPkjux+TVPyjM/IBlr15TxG0bOpa?=
+ =?us-ascii?Q?QgV8jMWTbRCKBkoeN9ObHHAPi4heZ+G3gho8XwtW1geTkJZB62XmDOMkNus2?=
+ =?us-ascii?Q?mTxY/pKkHnio1kPXZpoQbr4rLh9Ba4G4KDIw/ktIOCYIFz8jaTFKky1aOVzj?=
+ =?us-ascii?Q?IUNVvEnqxioxBzrOPLH/T2SUD8Y+gnm9NXyeER5YGvJZwIxe3J1pczfZNqPU?=
+ =?us-ascii?Q?+3FuxNHp1adH9BttscYtsZRVqENHUn30e0jXjU/EdEUPhcZ9kV8PXZ76moLP?=
+ =?us-ascii?Q?k5pdTGQA0Xp2FzZnaPKbB/obQe+Gw78gYU64+yMrUw0MOzAEEXUqWrvYezmB?=
+ =?us-ascii?Q?v8/MI8xhnMoomxnvAOHF8nS2I3ffv8n0GFRbpj6TJTJJ0i2HXNQ5H6Fn314w?=
+ =?us-ascii?Q?sX0/NIoZJHFAEuNReELjMxlxf1SGPg/W0Cgp+VXM9l1+wweHDJr03aL4KGNg?=
+ =?us-ascii?Q?dJH3dqcDHeK/1XgdFXhJSyG3ctdoIWw7WmwStNRgvyR6DfTYqO6WswlQUWe1?=
+ =?us-ascii?Q?iVhKdFLMPqrrEYzAT7SsD9VbV5+TjzFQBmZ1oh5RYizP7wis04+zw//3evYj?=
+ =?us-ascii?Q?YGmYnvlDhUrxLS3XWtl5yIwLd93h7rsIXGldUH7m/fqCb/Kgn+COTlGLZe8I?=
+ =?us-ascii?Q?Y5+IT2wipEOJMfdvEwTYDR3yXBeE8xlegsayqWczSRQAdkWkAq2i+Hwam20p?=
+ =?us-ascii?Q?RWfoxqcfzMfW6TBcsZHeSdDfyXIY4qJr+lCRfAgYn/v8Aq3RvfRkbSVC0TjD?=
+ =?us-ascii?Q?rxw6E4LWG3BygufkTIh1cxc2qwuuTzTf9q5I3CR/BSpudJb+0+t+iZb6R2vE?=
+ =?us-ascii?Q?BdpSzMlw+tUcW9MOWw4ejLeZeRiIBcj7kvqLck6wIk9P8NRbp5QHRffPP8Yu?=
+ =?us-ascii?Q?tsPbSEs1JIPZQjAMQ7TXP089Rqdd09mlT1wOI0cBvZB5GPipszs8/ZNfQ8w6?=
+ =?us-ascii?Q?3Z9XimhW3CM62SL7u+PFwCGfPqiQ8+YYwaVCnKfMc66lMqs4YrJ5mhKbnkR9?=
+ =?us-ascii?Q?JKccbBLUWB5gEjaFIfBYSPzEWdOMAJWMpzj+a62W1pk8wnb7V+R0b1B8aPq7?=
+ =?us-ascii?Q?Zu/Ph+k3KRjNZ4MjwjCMHkIJ/J4gdtvgWbVHjqdGX2IlawNyKAu0+zfVtpIt?=
+ =?us-ascii?Q?Pgqc+R+VCtySOz1UETApSZLHF0OrNx+DkvguBNHG3/hmTfewgex1RQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8pf2/4NWqC6fDzJj9oS5TLx/HUKG8nLqNuwxNWCOY78oPOkjoOXruNDyyBKS?=
+ =?us-ascii?Q?0l+XRBPyWn/1cYMzeX08RgevBqMTKSIQmS35J/U4mOPHauAIw5hNqoxZcRzL?=
+ =?us-ascii?Q?Q9DQe4bI8yCoPzmP+FGVpqGFYl24C48aoEeKX/9slrwPZtIS1y55y4tR0ACg?=
+ =?us-ascii?Q?ofORz19Kx596UuEp7GehMNr+UKT3igzIP28pgp9HOeNPqdnzL5h0bKuIHXf6?=
+ =?us-ascii?Q?QqliKHUh3t32ege8kikvzdbwppN0LkmW7/4d9/pPeyGDp4ZzDWlT9ai1Y6xI?=
+ =?us-ascii?Q?x2PuOwzJPJkWJzVN1LcjMundeT3a9pFuz3pYtwQJYwDRtk3CBz9eGj82UaCi?=
+ =?us-ascii?Q?hmV4pujMgNWCMpjFPTVSsoEsSY1aUoQ1+iqYTk7t+UgMaMlwcmf0E2jyg62w?=
+ =?us-ascii?Q?5q/2He7/3VEjUeJP/3ymDl84tIBcba1xBFEBTCN/tlhAa+dtaM03q6KfucSw?=
+ =?us-ascii?Q?lztuIxq0ZNXnQ3Q+4zRg0aD7YXk1xrdowd+6lRtdtxuCMiy9etA4JxkkDx9H?=
+ =?us-ascii?Q?B3fzX2CJH6cs1zis47z7xqEzkZIk0cTWp43jWbI7Yk8JNS7W780UBy4zSfT0?=
+ =?us-ascii?Q?DFZPgFA73T/Jeb1cskcmu9xf0fs0cmeGrseP05uX7wGCluh7xvTkybt7iZ/l?=
+ =?us-ascii?Q?iXyj8QqnBEF+pNQTIzvY5r36gaV0VbDrV/yykOhyL4B/wjMTQswxerZUqHle?=
+ =?us-ascii?Q?B+5WyeMqyKa6olK4krUV10/ybujdZymcdieRHVIh3Mh8HQ5PAkhsCjkA7l+s?=
+ =?us-ascii?Q?xX+UBMIjufJqBr5M24whs7IXKRUa+SQWzBp5R9PH/yPGrpD3CJfMX2vweRxz?=
+ =?us-ascii?Q?h/idld57ShDUeI7R79qMA9E4i1/Te4X4lQVmVMJZc9s0Rj6DupJRVDtP93Dh?=
+ =?us-ascii?Q?XLu5R5X+UjLPCsAP4zXEPhZIvcdCnuo7fM6vVCql67Kuznyp4tl9UfZ9ld0O?=
+ =?us-ascii?Q?VoqmKCZHUwHuQzqLOg4dku70kYMwPvwA2niq4/KFcA72/1D/vZJRwLqSvA6N?=
+ =?us-ascii?Q?dcqrkGjbDGIuXFYJIlOuShx+lXN0A6wQQoX+FReVXUIakgHnJMt65yAqLNKo?=
+ =?us-ascii?Q?fAoFVlYShhE110yTZwJ1CZLS06IQyhUAwhCSlGZYKU7t+e6rRnwSmCamg8lb?=
+ =?us-ascii?Q?8C/82NkzyfR1xVwhTO+WkBTgSPef8PwpLZSaDXguE7i9RU6WLNf0q4MDfGRf?=
+ =?us-ascii?Q?A7ArEg1c65jC+mJGyD447d8HXH4lvQ9IyKW6wBWsBlzhRQe4ZChrxdwcr6Vz?=
+ =?us-ascii?Q?Nt4lpvyx863u4NxIUryW5F/7Os1PlKd8zeKKLDNcPeyEobSjhhdXJ4dtGeUu?=
+ =?us-ascii?Q?BNMxqF+AehUKPwymWZMiVzIMIehSQKkij2/Tg8pi+O6fXKsZVhM6qilJVsY1?=
+ =?us-ascii?Q?YsqSVsLB2hs3TnHVWYm/eCQP/pg9phARklFRNRv+OHrOS8wCb4Uqnv1oWDxN?=
+ =?us-ascii?Q?PO4mOhTJXok62MxOdjzv0OhPdY51vDhmGEqdehWSmSKZk2mYuSA9Ryvfw6Rp?=
+ =?us-ascii?Q?6j+zFDzrkFItXNuJxuhaCq9hik1pRCvjUoEUylGtWhS9S15Gub8X0ahod9v5?=
+ =?us-ascii?Q?lp1az90jS8mIjj11Qs4MxmNGJ/64zcpw9ZQqSddAgJwF2SicPRogR+sgNmpm?=
+ =?us-ascii?Q?Cg=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: c3030e04-91f7-4f6c-be44-08dde1a89594
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2025 18:20:33.8503 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: guQR7CteKXSedKfBGx1XzdZh88xxZ7ncYwefXCGrbrLmWGQsz/DdlAOIciH9mt13J6TYuvCUmNLgbgdczoJTWs0igFA0bE7mdy/853PXWXk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3742
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,56 +157,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 6, 2025 at 5:27=E2=80=AFPM Sam Protsenko <semen.protsenko@linar=
-o.org> wrote:
->
-> The E850-96 board has a LAN9514 chip which acts as a USB hub and
-> Ethernet controller. It's connected to the SoC via USB lines. In order
-> to make this chip functional the USB controller in Exynos850 SoC has to
-> be configured in the host role, and the corresponding power regulator
-> has to be enabled as well.
->
-> This patch series enables USB host and network support on the E850-96 by
-> making use of the LAN9514 chip. While at it, enable all power regulators
-> (LDO) in the PMIC chip which can be useful in the bootloader and kernel,
-> including the regulator used for LAN9514.
->
-> Sam Protsenko (10):
->   usb: host: dwc3-of-simple: Add exynos850 compatible
->   board: samsung: e850-96: Set ethaddr
->   board: samsung: e850-96: Add ACPM code
->   board: samsung: e850-96: Add PMIC code
->   board: samsung: e850-96: Configure PMIC regulators
->   board: samsung: e850-96: Extract device info from fw loading code
->   board: samsung: e850-96: Add bootdev var to choose boot device
->   configs: e850-96: Disable CONFIG_DEFAULT_FDT_FILE
->   configs: e850-96: Enable USB host support
->   configs: e850-96: Enable Ethernet
->
->  board/samsung/e850-96/Makefile    |   2 +-
->  board/samsung/e850-96/acpm.c      | 169 ++++++++++++++++++++++++++++++
->  board/samsung/e850-96/acpm.h      |  27 +++++
->  board/samsung/e850-96/e850-96.c   |  97 +++++++++++++++--
->  board/samsung/e850-96/e850-96.env |   2 +-
->  board/samsung/e850-96/fw.c        |  45 ++++----
->  board/samsung/e850-96/fw.h        |   4 +-
->  board/samsung/e850-96/pmic.c      | 144 +++++++++++++++++++++++++
->  board/samsung/e850-96/pmic.h      |  14 +++
->  configs/e850-96_defconfig         |  10 +-
->  drivers/usb/host/dwc3-of-simple.c |   1 +
->  11 files changed, 482 insertions(+), 33 deletions(-)
->  create mode 100644 board/samsung/e850-96/acpm.c
->  create mode 100644 board/samsung/e850-96/acpm.h
->  create mode 100644 board/samsung/e850-96/pmic.c
->  create mode 100644 board/samsung/e850-96/pmic.h
->
+The first two patches make memtest run ~40x faster (when, as it should
+be, dcache is disabled), with the second patch being responsible for
+most of that. At least on the beagleboneblack which I used for
+testing; other boards and configurations will likely see different
+numbers.
 
-Hi Minkyu,
+This is for CONFIG_SYS_ALT_MEMTEST=y and
+CONFIG_SYS_ALT_MEMTEST_BITFLIP=n; one could probably get a similar
+improvement in the bitflip case since that also has a schedule() call
+in the inner loop.
 
-If there are no objections, can you please apply this series?
+Rasmus Villemoes (3):
+  memtest: don't volatile-qualify local variables
+  memtest: only call schedule() once for every 256 words
+  memtest: remove use of vu_long typedef in mem_test_alt
 
-Thanks!
+ cmd/mem.c | 40 +++++++++++++++++++++-------------------
+ 1 file changed, 21 insertions(+), 19 deletions(-)
 
-> --
-> 2.39.5
->
+-- 
+2.50.1
+
