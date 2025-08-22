@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2417CA0EED
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 11:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F403CCA0EFC
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 12:13:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0701E80422;
-	Fri, 22 Aug 2025 13:59:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C46E280422;
+	Fri, 22 Aug 2025 14:13:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MEB96vE2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hifmaVbw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0825880548; Fri, 22 Aug 2025 13:59:11 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 9F92180548; Fri, 22 Aug 2025 14:13:02 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E85358006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 13:59:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B00B8006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:13:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-afcb61f6044so356593366b.0
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 04:59:08 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-61c26f3cf6fso601451a12.1
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 05:13:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755863948; x=1756468748; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1755864780; x=1756469580; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KpEP5DuV4WO/uQlXchaLktbkGUe9h5EkPENDL3Mo/wg=;
- b=MEB96vE2cZjZgcBawcx5XK5i9CpTIVexSgGhe42Ska1t9vsg2WDPvM9rEEDc/lRWE5
- fSnuAe6L0yxeMaVaCs7WWqZVry4V7mtgbrq4i7FgUpDgCF8KIHQQQlnI7xALIx0Ipx3/
- kyIQ2SlnV0nluEBNUPa/pAmU1kWg+dWD3gkTktffQBpv2PAPoLKMeEhh0zH+zQDeoitu
- oH3oIE970jeMuib2ys6EmglpVV+pO6do214K/K8hpe748UavXXIGpTJR6IKFHFFVX+Or
- wBwwxtdVDdlbFTCl/bBer0OcaGWmbPOS090uiHluolLHtvyIkP991Am+Ss+gelOLYc/q
- uamA==
+ bh=QUqcP/z8Mr0E2fxIiFIBIxYC6WZkKoVKKm++TRtnEu8=;
+ b=hifmaVbwg/9CcxQF9ZUtfeu7kyK11jKpXmhE6dlXohO7Mb3/6Tu3TnURhj82xCpmqI
+ zV5Uic2r6xjzdxCOXiYAXrNmOYG2H99/v64RnSr+o+Qh5J2GmmR28JbvcZTm6qycZVbx
+ tPcf/VQomnBnLXWCh5K5mi+H9tg62Z8z75rs8itZ2sCoDMM+P9FGEHsb3LzkDIqc8oaY
+ 28VSUNzmvvbd++aONj+nd4i4FMCfakxH8MG6YTCKPx9ItEbrwtvhikrQLrUR71SnEWpu
+ MjyaTG9EJNwUziUGJTyyeBpRajYwlYD5BpHFyJ+jiFlLCCS5cBra3GxSJ65uXqIxKhAx
+ Gkog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755863948; x=1756468748;
+ d=1e100.net; s=20230601; t=1755864780; x=1756469580;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KpEP5DuV4WO/uQlXchaLktbkGUe9h5EkPENDL3Mo/wg=;
- b=is7v56vw1hbi2Ql7oaszBngr2bW47aSwLCzLbsdcU8fE6bLTYhlcn6V3yRUfZaon48
- zj50f4VwCU51YInWlAnBw2GNnZC18+9LyFpxGBNZIAZW2WpBdJ63TiDcdNhwVPsyqlkT
- jO37C59iMbSJLy4ZL4oqvZuibG08YPuH1onQ6TlcClJhB84XDvgSFI8FPf8dIs641vXa
- 8/G/yG8cZ1Cl7wNaA1qM5RiJ/fovVrAW52eT9otHpjtLiXqP6ZQ/gZNkSKbszVqli6SJ
- B//0xBCORHi99brdK3g6PTrqlTQhxuC4mrE6Jx0ShPLlkucP3lieWn2P+f4F7Vc//ex6
- 48rA==
-X-Gm-Message-State: AOJu0Yypc5s6gO1/Ga2LImfKLeJ+DNBQNSk46XNdcsh5IJpPAtvhwLnd
- wulasrQL/G3HhR+3JzirKWBJL6N7Mqfy4xR2wxMmW22OFrA4LlM3IY5+9LycajM4Tjm7Uehth7Y
- 1WISSG3hGSh8w/WovENi+D3FKJdLUApNmMziIzNk=
-X-Gm-Gg: ASbGncs7cGryXeHN4MjRm7IavBav8cVgYVbT6P4lgPWFjwjYiPbAMtD6NG3cxbbNziz
- vheScboKICAk/TjblJMMtiyCBR5CXH13NaZVUnzTe+5VwxMwOSl+fz0wJQcsH8tWTT/Ky1M7Tn8
- KPBoWMrcfwh73sMeakj0pvSYOXFcO8W6qy4lTlY65ik4n89LFa2PK4my3Uvy0CXujuyXUjoUoek
- Li6H0xV3u5+HcuiYVwvTxCHX2T2sbo4y+jOc8I=
-X-Google-Smtp-Source: AGHT+IFFA29TRwPVZF9QsJ2oRS1AlBFI03VPrI6QUAFYQa68/YXZumw9f5v6z8YR3VLJqxYzrcwZ65FVSjSoATIAyTM=
-X-Received: by 2002:a17:907:3cc4:b0:afc:b3c2:82eb with SMTP id
- a640c23a62f3a-afe0b0d9668mr561442466b.13.1755863948136; Fri, 22 Aug 2025
- 04:59:08 -0700 (PDT)
+ bh=QUqcP/z8Mr0E2fxIiFIBIxYC6WZkKoVKKm++TRtnEu8=;
+ b=iF/5gUqSacnpRRRmbmlkfpDYxVO4MJPcqsyG6cquhNbhGLhAMW8NNuet73TaXN87J7
+ lM+YlS4jHUG/hq7QRHW2kcNCFVC+ZtBwoPs/fCsQMk3Aig4/QvO+zXP/BE1Ie4ASwEet
+ iNSLoACNtBGA+fG0QH08XrWwQE9UurjPUMQmxaW/Wia82hKxTWN8kmf/RVP4ffch9oxG
+ 4l+yVMeySlmCKzmu8ZwvZ6MEWB1LKcj6pdFpiCGYWB48reN7OqgM39VCcShjPuZyJXJ5
+ cRKxcRTc2JBnFqDDSuacZK+lEEiSsDT8/7zvKxFSwH5yyH0cjSplAf7Z0e6pbbpViZx+
+ ghKg==
+X-Gm-Message-State: AOJu0Yxxbz/1WlCpuEjYE/Yo7icqOT2gA7flcNBTRNXK9y5+TJzRvqO0
+ FncPIlRtSk0Wx8nlwNGiyRA1pB2rpT8R/De5GuEeYtXjbkBmoLathNAMmVMtKbhV1yJWmCEstkM
+ W2ExfV/OiBNl1gZEpivGTV3XzbqG5hF0=
+X-Gm-Gg: ASbGncvHFgNNaTRVFmvnDmd9irCSpHlDFE5K4pIzLrim9G3O1EtTo7SxlJgrC388cXy
+ GcPnWo7IvD7GplnM5o/l24S1UWMnRXqwTSYIzC4JnLZLjkWfCBzvR6LCSDl/cGyT/VKTrAVJg4F
+ u3Umg7sKR4hbK04RwARHHLY6zDlLbom5Kf1UFbRsedyizXG1QvQr5tGucYddFKnLdSnp010rVrz
+ U22w+CCgkdYiiK/OU/A96ZSzH0P28DxKf9fzfQyeOvCVc4suA==
+X-Google-Smtp-Source: AGHT+IECOh6bjyvlLT8gXriPOwqnK614h30ROpQnTDVnYLvWxAwrKih7h0KJwjuGSXQw0yrN+u33v1J2JHQ1Qq9x1Ls=
+X-Received: by 2002:a05:6402:2801:b0:615:c767:5b9e with SMTP id
+ 4fb4d7f45d1cf-61c1b6e4a43mr2248740a12.20.1755864779469; Fri, 22 Aug 2025
+ 05:12:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
- <20250810233742.51902-8-adrianocarvalho.pt@gmail.com>
- <cd2e240b-0108-41b5-b2b9-74514c93c01e@gmx.de>
-In-Reply-To: <cd2e240b-0108-41b5-b2b9-74514c93c01e@gmx.de>
+ <20250810233742.51902-10-adrianocarvalho.pt@gmail.com>
+ <e69d0df0-aadd-409f-82a7-b65a5b764a48@gmx.de>
+In-Reply-To: <e69d0df0-aadd-409f-82a7-b65a5b764a48@gmx.de>
 From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Date: Fri, 22 Aug 2025 12:58:56 +0100
-X-Gm-Features: Ac12FXxioxvMk-qsu4pIrqyRwMubcmoGyLKWWadPwdaSpu4JeptL1Gesggz1D2E
-Message-ID: <CACAHuLCi-eptudENfAeYdXEG+wPYgBAO63eyaM_iq++0+za25w@mail.gmail.com>
-Subject: Re: [PATCH 07/10] doc: Fix typo in doc/build/documentation.rst
+Date: Fri, 22 Aug 2025 13:12:47 +0100
+X-Gm-Features: Ac12FXyhqMZZOVM3CwvQj00OgwKVl1ouNcT2Uy7u37ivk1tGAHDh6Z47W2XVizc
+Message-ID: <CACAHuLAncZVsUdYxPYDYjAOdHpzHYausUpsijM_1L3iJ_FDfsQ@mail.gmail.com>
+Subject: Re: [PATCH 09/10] doc: Use a long dash instead in
+ tools/buildman/buildman.rst
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -92,42 +93,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Aug 2025 at 21:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> [...]
-> >   The *pdfdocs* target is meant to be used to build PDF documenation.
+On Wed, 20 Aug 2025 at 21:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Please, also fix the "documenation" typo.
+> On 11.08.25 01:37, Adriano Carvalho wrote:
+> > Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> > ---
+> >   tools/buildman/buildman.rst | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+> > index 7944adcd867..3e41d6ec304 100644
+> > --- a/tools/buildman/buildman.rst
+> > +++ b/tools/buildman/buildman.rst
+> > @@ -1360,7 +1360,7 @@ Using boards.cfg
+> >   This file is no-longer needed by buildman but it is still generated in the
+> >   working directory. This helps avoid a delay on every build, since scanning all
+> >   the Kconfig files takes a few seconds. Use the ``-R <filename>`` flag to force
+> > -regeneration of the file - in that case buildman exits after writing the file
+> > +regeneration of the file -- in that case buildman exits after writing the file
 >
-> > -As v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
-> > +As of v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
+> Please, use the Unicode character, that you want to display, e.g. U+2014
+> (em dash), or U+2013 (en dash). This way readers of the raw rst file
+> will not be irritated and the rendering in HTML will not depend on the
+> smartquotes_action setting.
 >
-> Building target pdfdocs for origin/master on Ubuntu 25.10 fails with a
-> different error:
+> But to be honest I don't see great value in this typography change.
 >
-> Cannot determine size of graphic in boot_diagram_am62.svg
+> Best regards
 >
-> Please, improve the description: How about
+> Heinrich
 >
->      "Multiple failures have been reported for this build target."
+> >   with exit code 2 if there was an error in the maintainer files. To use the
+> >   default filename, use a hyphen, i.e. `-R -`.
+> >
 >
-> Maybe we should simply drop the build target.
-> [...]
 
-I'll see what I can do to fix these failures. Unless you tell me it's
-not worth it.
+In the build directory (+ tools/buildman/buildman.rst), this style of
+writing is used only once (here). With a dash, it looks sloppy on the
+browser.
 
-When I say this what comes to my mind is: What distributions
-must/should be supported? If I provide a fix for Ubuntu, that doesn't
-mean it'll work in other distributions.
+What about replacing the dash with a period?
 
-ATM, and for this patch series, it seems the best is:
+ This file is no-longer needed by Buildman but it is still generated in the
+ working directory. This helps avoid a delay on every build, since scanning all
+ the Kconfig files takes a few seconds. Use the ``-R <filename>`` flag to force
+-regeneration of the file - in that case Buildman exits after writing the file
++regeneration of the file. In that case Buildman exits after writing the file
+ with exit code 2 if there was an error in the maintainer files. To use the
+ default filename, use a hyphen, i.e. `-R -`.
 
--The *pdfdocs* target is meant to be used to build PDF documenation.
--As of v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
-+The *pdfdocs* target is meant to be used to build PDF documentation.
-+However, multiple failures have been reported for this build target.
-
-(In the first sentence: documenation -> documentation.)
+I understand this is probably worthless and I could just be wasting
+everyone's time. Please let me know if I should just ignore these very
+minor "typos".
 
 Com os melhores cumprimentos. / Best regards.
 Adriano Carvalho
