@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95588CA0EFA
-	for <u-boot@archiver.kernel.org>; Thu, 21 Aug 2025 23:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 371D6CA0EFA
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 00:04:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 194E680548;
-	Fri, 22 Aug 2025 01:59:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B2FBA80548;
+	Fri, 22 Aug 2025 02:04:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IqbtcKZH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LfndNoJZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACF1581FEE; Fri, 22 Aug 2025 01:59:09 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id B12E081D5D; Fri, 22 Aug 2025 02:04:53 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 954168006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 01:59:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD0DC8006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 02:04:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-436011e8ed1so759157b6e.2
- for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 16:59:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6197efa570eso3003787a12.1
+ for <u-boot@lists.denx.de>; Thu, 21 Aug 2025 17:04:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755820746; x=1756425546; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E3QtfJYtJLyLvXkvAi+eVr1GyAm1glcs2Chklnk4xYA=;
- b=IqbtcKZHTCG0sxPhOjiItLRRxUKHbjXGDz4yMeh/ZEGIvG2Qu8aIYi1M0tTVTZ6wHQ
- 63WtWhSxXGzdaxuh2AejBH3NvvuYs0QPvEUSQLeoIhjidJTQnhBXia+EuBedMMR1sTaU
- ezufXdlxlParUqbTkNLLiVTDrFn7vddsJ28+A=
+ d=gmail.com; s=20230601; t=1755821091; x=1756425891; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GwQbiRh0nZ0Jnd7ok2OarXuG6O2/EQpRnJW6J89ek24=;
+ b=LfndNoJZ6IDRWQeROkqi4pK9BOoS914W67kgDASc6fsZ6CHty9YbUOoX9+RwrNyDMo
+ j7LUO7b9WwFFYWC6R2tlxIJXkV7gRjTxWrVRgNBkYxFlh490Z+7R/cF6jONSzgeCyii7
+ +unlHX6KoVhHAesrJTenf/2Kr7wLz7tVzvJhFTvCSzWwX8LUzmNIYwP0vwtDdyEM2Pn6
+ TM/uxEV1NdEla160/LUgxf1GakIb1kGyQxr8GFZV1V7KKJ2nRn3tfhlcPhdqAD+mFALM
+ aoKAbiV6TKrHJmqu2JcVzf4UrZ2Z6T+pEGsGx+bTnBHd0qUibw9ye/W3FXX25TsMHloh
+ tsoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755820746; x=1756425546;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E3QtfJYtJLyLvXkvAi+eVr1GyAm1glcs2Chklnk4xYA=;
- b=S6UoZ1gmYSAZB6goBucodQO4FmFUPWPelTJn98d1KoB7uLkRA8GFn1JnMM+6Lx9jc7
- 47aRl78PeyKdZGtSMmJTeGxTJlHmywDZmkh+T4xv8EKK+cHuEkm6oKL3K5U66IxjsF48
- niGIsCcF3EpeVn4MtKdqFCE2uP8qduGt7LcKna7MVbxA0xJ4Sp4f/j5quApN8dALR/nB
- XhBG6KHkoJwuU7ZIFgmHvl1rLHHRg/dZjvpiALWdrHEWLb89/CrTQBB0feUTAdzW+dGj
- C9impvFb0Bcb7WVlYWonDUWxxK64vwu6vENL5WFlk0drxQiRRr721pcB8byFnCkIyST/
- kpbg==
-X-Gm-Message-State: AOJu0YwfTXoIjAX0P29HXcVmpsgpo87uGD6DqCHRFZhpo2wOxjSRxs5Q
- 4Y9RmtUGt2FDOV4gHne1NMaKI7VhNAv2uLm/qfscmQ7YJXEQxGByUPJEqlmExDO4vAVHV/Zp+wq
- WckFNG8Y=
-X-Gm-Gg: ASbGncv+8YurjmKdXXd6NiZeEz+2/TUlBmeDkrIUfjPXpAZv0YpDK58hEOtDWlMKczy
- UQscuZ9vOvXUaVaKLZ3CzqLko3Zo7oZXujBI7UAuEgQHSdkKAg7jWiegEtL2DFOA01p5Lja/3bD
- oQ/UqPLkCofsKGiJnqctdaaGsGBJ40a1mq7OUhLPpmE98xUfKGIKYuAOLzMKAriEFyNcwT+4wkY
- 65n2Ud18xe7uLfx3sod8NdmWypWqrR+KbzLuGvkja0BvhnOfbQxem9rRUuJvKo3MNcrL4qlc6Hh
- q1eKCEYT+i4PoIKkOdXaxJaoOddBnM0q9TzigXVBxUe1u3TlLQfHaR60M+vN4n6wR1sXAJrVu2m
- d5izVb6ZzCqVdBenH1PCj6h5mN/+RetviKYAyrGpA1FltGovX/enYnBk=
-X-Google-Smtp-Source: AGHT+IG8okxrTAxK4vr5RrXCV5MEi3gLJBZhyHUHgddolu0udvzF8D82Hn2IDVPak1dh+Oggr159LQ==
-X-Received: by 2002:a05:6808:350b:b0:437:79d2:cbad with SMTP id
- 5614622812f47-437851cbf23mr805327b6e.14.1755820746314; 
- Thu, 21 Aug 2025 16:59:06 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61bec11cd94sm1892634eaf.21.2025.08.21.16.59.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Aug 2025 16:59:05 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Martin Schwan <m.schwan@phytec.de>
-Cc: u-boot@lists.denx.de, Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20250813-wip-bootmeth-rauc-priv-free-v1-0-1ef928169469@phytec.de>
-References: <20250813-wip-bootmeth-rauc-priv-free-v1-0-1ef928169469@phytec.de>
-Subject: Re: [PATCH 0/4] bootstd: rauc: Fix segfault when scanning device
- with unsupported layout
-Message-Id: <175582074503.947488.11788901318777484713.b4-ty@konsulko.com>
-Date: Thu, 21 Aug 2025 17:59:05 -0600
+ d=1e100.net; s=20230601; t=1755821091; x=1756425891;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GwQbiRh0nZ0Jnd7ok2OarXuG6O2/EQpRnJW6J89ek24=;
+ b=W+bI6jziC7MshOGMxvl5QW/Fdzh0kXCW1pLsEn4U2o5rk4or1aDnzBJRJ1rMGm574/
+ s6NV32dpwxia34aqHx+yHXQB0Q6OKD4vO3caNPzCXjfNO9SgeZU/Q4BcBSqQiE6bfdaz
+ VQ5oNMp6ruQ3fBTROv3PvYo/Xa27wOXpeg4SzjiDz5sIYHRcqJiNSrPQZAku4uBUDbfg
+ P1MNvZW5XRjP5MUqx2gL902ZGuaiC9ifuREv7Z0E3LRy/6qFTpyQC05adl/N4NZxJ+b3
+ NdN7kppfprOE20dzewBgmrtXFHXYpdRyZ4US6PDBVyu5GlNDKwDEgjmeUJP76g2sjMQZ
+ cjjA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXkmEK1bk1ksAIm0GZOjBvl8Io1ikAxyT/uuApiep3F49hSGaOr8RGjlSxlqi3XUI3eulwpJT8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6QeWCwk8xnMsqONsQhsrpD9Kz27kFaLnTT/WzehEWlOywW9Zz
+ gFj7Yrp8z3l0WmPgfatDLzOYeeNCchmbagYr8ovMuEKacYPFr7vm4uU3dUc/k4CzCX5LcDf+Ol4
+ QiN3gYvKl521lwIkZb2GQvzArpZe+itM=
+X-Gm-Gg: ASbGncsYNG9I2ITxy6/vpZDkMTIc8au+NdwE+Tpa4RGzqHR6pxevaQtfyeDssmHkr5f
+ RQNZw4qgmErwYdqrHew6ycNZcLI+GEL0OGig0Nmowx8wqTSaK/Jf7LlKk0o4HFOZAftB3wqMQAH
+ /y6EYeLTaak+uXgPdIj2y/SSx7gBk9QA93XydW37O1U7hEd1KMxFjyhLZ/5aLHn/SWorK1QAQPS
+ iBKDiUF9yHlIar958oQSEQtolsy7ZNyVLJHAKlp
+X-Google-Smtp-Source: AGHT+IH0WFkRaUuqLlMbSZBMh9kUfjGtxQkeoJCq7LUhC2k2sPedu2ipYv22KHwVUf8P6NU1gcdTBLvo6QQUm7PognM=
+X-Received: by 2002:a05:6402:1d4f:b0:617:cd9d:e2a4 with SMTP id
+ 4fb4d7f45d1cf-61c1b45c282mr682816a12.2.1755821091113; Thu, 21 Aug 2025
+ 17:04:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
+ <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
+In-Reply-To: <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
+From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Date: Fri, 22 Aug 2025 01:04:40 +0100
+X-Gm-Features: Ac12FXyMV0pj0rVW4zuaUJgEHBCouDkHZeWg-X26Tbi7i54dCa1Yxp738aZwUm4
+Message-ID: <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
+Subject: Re: [PATCH 06/10] doc: Add riscv to the list of architectures in
+ tools/buildman/buildman.rst
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,29 +96,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 13 Aug 2025 13:54:04 +0200, Martin Schwan wrote:
+On Wed, 20 Aug 2025 at 22:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 11.08.25 01:37, Adriano Carvalho wrote:
+> > Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> > ---
+> >   tools/buildman/buildman.rst | 3 ++-
+> >   1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+> > index d5d22732088..7944adcd867 100644
+> > --- a/tools/buildman/buildman.rst
+> > +++ b/tools/buildman/buildman.rst
+> > @@ -478,7 +478,8 @@ Setting up
+> >
+> >      At the time of writing, U-Boot has these architectures:
+> >
+> > -      arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, sh, x86, xtensa
+> > +      arc, arm, m68k, microblaze, mips, nios2, powerpc, riscv, sandbox, sh, x86,
+> > +      xtensa
+>
+> The output examples above this line should also be updated to show RISC-V.
 
-> This series fixes a segfault, that would occur at the end of scanning a
-> device, which does not contain the required partition layout scheme for
-> a RAUC system.
-> 
-> With this series, a "bootflow scan" should now correctly scan the
-> specified devices with boot method "rauc" without crashing on invalid
-> partition schemes.
-> 
-> [...]
+Do you mean what's under "Check the available toolchains"?
 
-Applied to u-boot/master, thanks!
+To reproduce, I would need to install quite a few toolchains. If
+anyone already has all those toolchains they could just send me the
+output. Do you know someone who can do that? Can you do that? Or
+should I just install all those toolchains and reproduce?
 
-[1/4] bootstd: rauc: Fix segfault when cleaning up slots
-      commit: 074066790c7f726f149c1974e01b8b3f75738c73
-[2/4] bootstd: rauc: Don't null bootflow->bootmeth_priv
-      commit: b389967f9a624b35c163767c34919cbdcd4e0917
-[3/4] bootstd: rauc: Move freeing private struct to its own function
-      commit: 302830499d9f0ebec42fe62254429a4d8db6b36c
-[4/4] bootstd: rauc: Free private data when booting
-      commit: 498e423457a0360c01d976aa21a218995a1bdef8
--- 
-Tom
+> Shouldn't we provide human readable names, e.g.
+>
+> * RISC-V (riscv)
+> * SuperH (sh)
 
+That seems right. I'll include that in the next revision.
 
+How do you call the "actual" name v. the "code" name? I am thinking of
+adding something like this after the list: Each item above includes
+the architecture's "actual" name and in parenthesis the architecture
+"code" name in U-Boot.
+
+[...]
+
+Com os melhores cumprimentos. / Best regards.
+Adriano Carvalho
