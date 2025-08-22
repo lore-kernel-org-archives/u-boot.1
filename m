@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25952CA0EEB
-	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:12:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB761CA0EEB
+	for <u-boot@archiver.kernel.org>; Fri, 22 Aug 2025 21:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CEFE80422;
-	Fri, 22 Aug 2025 23:12:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A50880422;
+	Fri, 22 Aug 2025 23:24:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MKFjMfKT";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="QZS2PEkO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C56380548; Fri, 22 Aug 2025 23:12:33 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id A29FA82103; Fri, 22 Aug 2025 23:24:26 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0168C8006D
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:12:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 336BD8006D
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 23:24:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-61c325a4da7so458096a12.0
- for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:12:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-30cceaaecd8so1107508fac.2
+ for <u-boot@lists.denx.de>; Fri, 22 Aug 2025 14:24:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755897150; x=1756501950; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CJRZj7XkW7ZcJu8shF+/ApG+r1ifMxstaYCmtGNKd04=;
- b=MKFjMfKTB+TUltJgfPVGrvGiTtL8LlIkMka0mjsQHUXabqTNVRxF3XSxsZxfXF4iTY
- 6ZEcnIiIiIUaPw8u1AF+qvYS0E9BVKeTRXwZVZq513CN8qKiw5+IYEXHNuEqSATsHTrL
- GsaeY0chErOKofCPNngY5bq6QjDnUMKiLv5pD2hS12bZFyGvBxyeO1MXVPqJERaTo1AR
- 7TIs1Fkf3Gx4M8us9WhbTvm4KXykIqJ861Zz2awP5a8hIJ2wk+tt27rwo17PIIND4kVD
- 3Hm1kD/B7jDdC03/hJvJw6cOucyKLImzFyZkAyy9c/XWxhK/3LjvwpEXN4268y46fBno
- RzWw==
+ d=gateworks.com; s=google; t=1755897863; x=1756502663; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fBE0FyG8mV3daf3eMmuKVP/rUL/fbXyl1wunLJ43VK4=;
+ b=QZS2PEkOC93iUTCwqKyvX3//z5jtudm07o0YCoPAhLhcRmwMHvS/+YeuSyGYD/p2OT
+ an/qGXqBUBQhxE33zAPY08FMguX9OuNsVmgfBKc0i/9UDQGVOeVieXJvPaqq6u++kL14
+ 9DGq7SU+tQbOoLZpRo3ZUEFOFdwAljxgwFWweniGSHz1ULkyXBFMp7wVxoy8k1vMJfjO
+ wSb9kJAchdMvpRfQFlnwsMuAMKVakeNEilhlnW+5eGsnwFmedMhguBwjrP5mi3Uy5Yds
+ InR0wdtwQoz7+EYbb8vXZU8Ra1Yz964WZnjg4XnWUyZF5cEvI3nyXlEhslE8tQn7nXjo
+ Gq4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755897150; x=1756501950;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CJRZj7XkW7ZcJu8shF+/ApG+r1ifMxstaYCmtGNKd04=;
- b=NHamxjVQjDGVV7bwj1i/ujb1UpHIMS/k17beM4MPDdrAu3ETIm/2t2TkW1tjqh6Ury
- Bm3aFrO0ePqGlAMyoKX6Y2WD6MDP8P0sZ7W1CLf6ZczMvi4pj7DlDqIyS7QQJg14f9Qg
- +5dQovYIYr3Yvt3Zv8yo8By76mx1sb2xuQjU8YZuH7OH3xU8VH3KEOW8PzqaGJLLLan1
- vHEsFYtyxOQa2UHD9OVjfDLY95UKVHOwpqymAzXbDDksJM/PLf1Ivy4bJSvrxLmI8Xeb
- XkpGlZRgbd987D+fz2GB2hTWm/OYJFSkYUYen61ecWz/jNda+tYFg0tOQPH63I19LXEc
- 1bDA==
+ d=1e100.net; s=20230601; t=1755897863; x=1756502663;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fBE0FyG8mV3daf3eMmuKVP/rUL/fbXyl1wunLJ43VK4=;
+ b=Qy1O6Yz434gESKti8fu4+EXewbF5d46vGryx8m3qFZSIt5ZY4/OvAbZIRb5G9yFpA9
+ ywoAxYRf/h5Lz7cYHiPfzcAjJCsRpuXs5tKzoVgtAsL15I4c0Lssz+NpY/9NP4yGEizC
+ BTBdR3HN7tm/xcgiXtXUiVidjdw4YfXhKgt7+9RAlqRih2oJUnH+0DhQRL17+4zQ10Wt
+ QOGmCyydL8YfIFcRxha+ZOX8nv24PTHZyuBpsRnDWYi9Xsofugx7z+zweuI2MnR6/B6W
+ 91wIiLK/JETToAtepAw8I8VJDKhq+KfeSBASV47GwWe5yTeDPO98Mkp3RvAx0Ybc+Eg3
+ 5Hbw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvvIjzb1/nPayLY/X3nD424dIx5uMPRWioz27pC4m9doUht/77om8wp0pz2R4vkvWgWDmVjq4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1XlGUAJPajDSeCSKVI3Jytw91KF8FJOGXjCFe4l4vZ3+WbNRm
- JyJxD8RC2hrWsHq8RS3bmeSqw/KSBEhQgT2IZixajtjTfw3FnWLkcZYyV33bzZqXj78rDzW+Vda
- VNUnzrkoQnxIkDZOClYRlIJNq7QuL15w=
-X-Gm-Gg: ASbGncvNkTAa9kNQd4MWgleBhrhQ5+K2vBh4vyOTtaB7gCCSKNnhFv4eZ8xIY0MhwVj
- tUODsE0H8n/GtZKiMChfBT9dr0VsVZhfuVOjdZK2HzqOAyZRFB7PcI7spKTs4mTw0z3UTt3gmyX
- 7HLvy1EkZgcXIozucro1MxjCs5+eyVXVYcip89514Ut+Qn34duk/KtddZmR1nNS+kziEsLi4eEf
- knFCiK3t57Cug8GG+LjvmZxUpo/9qaDufzCFnEL
-X-Google-Smtp-Source: AGHT+IF/iL5s0nolJFixoDdGv4gOtY5mL1eIboxI6Kw8pPL9uPU/+PB31GF1qwTXN5Hq8JNgiyx9pekg7+RHWggCTvM=
-X-Received: by 2002:a05:6402:4406:b0:618:47a0:3ba2 with SMTP id
- 4fb4d7f45d1cf-61c1b6f3a56mr3328648a12.24.1755897150187; Fri, 22 Aug 2025
- 14:12:30 -0700 (PDT)
+ AJvYcCUK+TTb7lfmhe+11CEn1j/KKpQrCMq1Yy+lz+BTWfaviI+NcBLgD5JT52+XQTmNtOHYY3pEODA=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywx6hLcaLsPbTSCPR+L/a7TxhNRyd9XhHGl7dDapE7s+RVpidbr
+ qoCQ9IQkY+6+xa7G4bAR7Fiw51pglZ4KAX5saHdTzfAKZxWc/yp7o6aOe04f2Qcnu5l8FwIdSRl
+ 4lBlDvKn2L2/aeplpJouz8Ped64wuAB4kj+zAtVkVqw==
+X-Gm-Gg: ASbGncshRG6lX5GzEIcbTj6zwhka55ZHrYBO8nTv8a27tipfWg8N+NQiiXdz283Rxjn
+ zXsvUjNB0wN42Bs8cmA343W81OJPlMKW6+l3N0WrCDYF1WsXjlfs1thvLUCHZWQllOM+JoYbOKj
+ e6RO6m8eLMHVHN8c3rMwqLtvuTFpLGk/uPjpRIvOl+FWIyTPR0KD/aeBVsnYzLLxZDt0x7TW6/8
+ 8XZLDf6pFro2Cm3OQ==
+X-Google-Smtp-Source: AGHT+IFR7WhhODUEnydjFSIlTREnmYkLUgMhhulUEWp7ReEtXJT7LHNPUTGw09lhu6OVs+D9Jwjpvvf7XlCGbrSiL10=
+X-Received: by 2002:a05:6870:7188:b0:314:b6a6:686c with SMTP id
+ 586e51a60fabf-314dce19f71mr1991125fac.46.1755897862806; Fri, 22 Aug 2025
+ 14:24:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
- <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
- <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
- <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
-In-Reply-To: <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
-From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Date: Fri, 22 Aug 2025 22:12:19 +0100
-X-Gm-Features: Ac12FXyKrt9kC1QFe8-zX-45rJ-XIKm2_dEMbdSncKkgZKS6j9ZOfSfck5uX_9c
-Message-ID: <CACAHuLD=fkEKq9e83f3ePQHO1N5dnVsRuFHwR6U12jv2EBJnew@mail.gmail.com>
-Subject: Re: [PATCH 06/10] doc: Add riscv to the list of architectures in
- tools/buildman/buildman.rst
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
+References: <20250811-imx95-v1-0-569d8014172f@oss.nxp.com>
+ <CAJ+vNU0q4ogZuNSxCMNPwXq4-ojqi7ss8ABYip0Q-BfSkvaidA@mail.gmail.com>
+ <PAXPR04MB96443502294D1C7F8D66A26FE232A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB96443502294D1C7F8D66A26FE232A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 22 Aug 2025 14:24:12 -0700
+X-Gm-Features: Ac12FXxXfRh4rl35Oida1IcuJgaS99oWegiCpD9-xUL9N7aKba5BpqSptf7jkdo
+Message-ID: <CAJ+vNU1QCMd-dT94VQLL8e1T3rCWUCNzpDbzBnirL95mZH+eyA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] Restore support for i.MX95 A0 silicon
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Marek Vasut <marek.vasut@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Ye Li <ye.li@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,71 +101,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 22 Aug 2025 at 01:04, Adriano Carvalho
-<adrianocarvalho.pt@gmail.com> wrote:
+On Wed, Aug 20, 2025 at 8:37=E2=80=AFPM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
 >
-> On Wed, 20 Aug 2025 at 22:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Tim Harvey <tharvey@gateworks.com>
+> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B48=E6=9C=8821=E6=97=
+=A5 8:52
+> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>
+> > =E6=8A=84=E9=80=81: Tom Rini <trini@konsulko.com>; Simon Glass <sjg@chr=
+omium.org>; Alper
+> > Nebi Yasak <alpernebiyasak@gmail.com>; Stefano Babic
+> > <sbabic@nabladev.com>; Fabio Estevam <festevam@gmail.com>; dl-uboot-imx
+> > <uboot-imx@nxp.com>; Alice Guo <alice.guo@nxp.com>; Marek Vasut
+> > <marek.vasut@mailbox.org>; u-boot@lists.denx.de; Ye Li <ye.li@nxp.com>
+> > =E4=B8=BB=E9=A2=98: Re: [PATCH v3 0/2] Restore support for i.MX95 A0 si=
+licon
 > >
-> > On 11.08.25 01:37, Adriano Carvalho wrote:
-> > > Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> > On Wed, Aug 20, 2025 at 4:05=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.=
+nxp.com>
+> > wrote:
+> > >
+> > > Changes for v3:
+> > >  - update the binman etype to generate a configuration file and a .bi=
+n
+> > >    file
+> > >  - update Get ahab-container.img in imx95_evk.rst
+> > >  - rename configs/imx95.config to configs/imx95_evk.config
+> > >
+> > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
 > > > ---
-> > >   tools/buildman/buildman.rst | 3 ++-
-> > >   1 file changed, 2 insertions(+), 1 deletion(-)
+> > > Alice Guo (2):
+> > >       binman: add a new entry type to support .bin file generation fo=
+r the
+> > i.MX95 platform
+> > >       imx95_evk: Restore support for i.MX95 A0 silicon
 > > >
-> > > diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-> > > index d5d22732088..7944adcd867 100644
-> > > --- a/tools/buildman/buildman.rst
-> > > +++ b/tools/buildman/buildman.rst
-> > > @@ -478,7 +478,8 @@ Setting up
+> > >  Makefile                                  |   3 +-
+> > >  arch/arm/dts/imx95-u-boot.dtsi            |  44 +++++++--
+> > >  arch/arm/mach-imx/Makefile                |   5 +
+> > >  arch/arm/mach-imx/imx9/Kconfig            |   5 +-
+> > >  arch/arm/mach-imx/imx9/scmi/container.cfg |  11 ---
+> > > arch/arm/mach-imx/imx9/scmi/imximage.cfg  |  16 ----
+> > >  board/freescale/imx95_evk/MAINTAINERS     |   1 +
+> > >  configs/imx95_19x19_evk_defconfig         | 153 +-------------------=
+----------
+> > >  configs/imx95_a0_19x19_evk_defconfig      |   2 +
+> > >  configs/imx95_evk.config                  | 150
+> > +++++++++++++++++++++++++++++
+> > >  doc/board/nxp/imx95_evk.rst               |  42 +++++++-
+> > >  tools/binman/entries.rst                  |  12 +++
+> > >  tools/binman/etype/nxp_imx9image.py       |  85 +++++++++++++++++
+> > >  13 files changed, 338 insertions(+), 191 deletions(-)
+> > > ---
+> > > base-commit: 0c558bbad9e7581808b358091d1fd979f860e8ac
+> > > change-id: 20250809-imx95-10b5b18e0ad7
 > > >
-> > >      At the time of writing, U-Boot has these architectures:
+> > > Best regards,
+> > > --
+> > > Alice Guo <alice.guo@oss.nxp.com>
 > > >
-> > > -      arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, sh, x86, xtensa
-> > > +      arc, arm, m68k, microblaze, mips, nios2, powerpc, riscv, sandbox, sh, x86,
-> > > +      xtensa
 > >
-> > The output examples above this line should also be updated to show RISC-V.
+> > Hi Alice,
+> >
+> > I have a board with IMX95 A1 silicon - with respect to this documentati=
+on should
+> > that be considered A0 vs B0? Are there any issues with A1 that would ma=
+ke the
+> > oei/sm/atf/uboot not compatible here?
+> >
+> > As far as I can tell the only part of boot firmware that needs compile-=
+time
+> > configuration based on silicon revision is the imx-oei and I only see s=
+pecial
+> > handling for r=3DA0. If I build with anything other than r=3DA0 the OEI=
+ does not run
+> > for me whereas building with r=3DA0 the OEI's appear to run fine yet I =
+don't seem
+> > to make it to U-Boot SPL.
+> >
 >
-> Do you mean what's under "Check the available toolchains"?
+> flash.bin for i.MX95 A1 can be generated in the same way as i.MX95 A0. Ca=
+n sm run work well? oei-m33-tcm.bin is required for A1.
 >
-> To reproduce, I would need to install quite a few toolchains. If
-> anyone already has all those toolchains they could just send me the
-> output. Do you know someone who can do that? Can you do that? Or
-> should I just install all those toolchains and reproduce?
-> [...]
 
-With docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025,
-I got the following:
+Hi Alice,
 
-$ ./tools/buildman/buildman --list-tool-chains
-List of available toolchains (17):
-aarch64   : /opt/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
-arc       : /opt/gcc-14.2.0-nolibc/arc-linux/bin/arc-linux-gcc
-arm       : /opt/gcc-14.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc
-c89       : /usr/bin/c89-gcc
-c99       : /usr/bin/c99-gcc
-i386      : /opt/gcc-14.2.0-nolibc/i386-linux/bin/i386-linux-gcc
-m68k      : /opt/gcc-14.2.0-nolibc/m68k-linux/bin/m68k-linux-gcc
-microblaze: /opt/gcc-14.2.0-nolibc/microblaze-linux/bin/microblaze-linux-gcc
-mips      : /opt/gcc-14.2.0-nolibc/mips-linux/bin/mips-linux-gcc
-nios2     : /opt/gcc-14.2.0-nolibc/nios2-linux/bin/nios2-linux-gcc
-powerpc   : /opt/gcc-14.2.0-nolibc/powerpc-linux/bin/powerpc-linux-gcc
-riscv32   : /opt/gcc-14.2.0-nolibc/riscv32-linux/bin/riscv32-linux-gcc
-riscv64   : /opt/gcc-14.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc
-sandbox   : /usr/bin/gcc
-sh2       : /opt/gcc-14.2.0-nolibc/sh2-linux/bin/sh2-linux-gcc
-x86_64    : /opt/gcc-14.2.0-nolibc/x86_64-linux/bin/x86_64-linux-gcc
-xtensa    : /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-gcc
+Thanks for confirming this. I can report that configuring for A0 works
+and I'm booting into U-Boot now on A1.
 
-Compare to the original:
-- a few architectures are missing (e.g., alpha, am33_2.0, bfin, frv, h8300)
-- No "Scanning for tool chains" at the beginning
-- No "Tool chain test"
+Best Regards,
 
-Have the missing architectures been removed since? All those in the
-arch folder and some more are listed.
-
-Has the output for Buildman changed to not include those lines?
-
-Com os melhores cumprimentos. / Best regards.
-Adriano Carvalho
+Tim
