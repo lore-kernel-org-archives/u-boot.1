@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C58BBCA0EFA
-	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 21:14:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA794CA0EFA
+	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 21:15:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01359800D7;
-	Sat, 23 Aug 2025 23:14:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 422CE829E7;
+	Sat, 23 Aug 2025 23:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UKiG35L9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kHPPvd74";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1BAB82998; Sat, 23 Aug 2025 23:14:49 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id B075E80077; Sat, 23 Aug 2025 23:14:50 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8500580077
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 23:14:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 979D180EE5
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 23:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3e6666a4f55so31955935ab.3
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 14:14:47 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3e67d83ee4bso16183495ab.1
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 14:14:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755983686; x=1756588486; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1755983687; x=1756588487; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1NzNCdngSLuq48FAxVcY+8saPER/R2JqWqr5OphEYQY=;
- b=UKiG35L9X2e2BshxRkSoQCABFuHHJvhvrDp/1GG9XIvAPBxV75em3gGD1v5Zw2GYZ4
- Devg8LtQRKdIc0JyB3KcP0CLnQmP7XRk0HI4jakEhU7+cWNnOBfbzpLhkyQ1sNEbIAke
- pwOh3Ffw/FMhvYUQYaO7wbUKGerSoZ55B7Pgo=
+ bh=YKhniBguSpNdchSBatYnJvd6CjO+ms7aRrHvLiHpcek=;
+ b=kHPPvd74v5I2LyGy15/R6NTdzWze7MfpK7mYSTC5mHDcHGLXPxBhjUOdwV8DhuDYtG
+ LsCoIwJTsGbL00Q6/YPsVbwqbm+vDfmhPyEqpeImUDT+NapfKMXZO4s2G9uGLGZ/IGX5
+ BLiHRoQ6e0mZtnB9CtgDhLDSseGawwJdiP8LM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755983686; x=1756588486;
+ d=1e100.net; s=20230601; t=1755983687; x=1756588487;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1NzNCdngSLuq48FAxVcY+8saPER/R2JqWqr5OphEYQY=;
- b=RHJJI9AIUXE+S41ZFcpAwJP0EAxrl5d+59REG6tSTFY8fOun8EwJtNBqUWy5VP6C5W
- avvGugRmullhaOL3lP9/JyNA4qiOukq+3MaIdci7bZ+LnEPqAsHW0kJa836EIWeQFYKF
- 7c/7PA4nDcq8aUph74e3iH21WS6niiW1BsXXXG53EZIdimJXo+JF/bRYnbfwheqKWnRI
- KSDVNhZmd1Ju9WJTpXrT86uhzojOraLinnskd5pOQiuozfvoi8Q4ztahQjO80Cy4sz9G
- ZOWfD2oAtff5HyDC7iBxS1fbUyIR+F6t6A+NNaE4LgENmu+MUT+8c4Yq3f2ArUOin/YD
- nFdg==
-X-Gm-Message-State: AOJu0YzTcIaijL6b3T+CHzr5m/7DIKjr2sYlEPEIoTjqKwAoaSamkkZ8
- TfBnQbnX/vCE1mVS4KIODS0CF8ABwrMTDhDO4XsagVxjCROjCT89erSEDOLZZ6CkwLU=
-X-Gm-Gg: ASbGncvDj1L/529S9qMD9F9ABug90eK7x8W9qzo2hh7g/jXtkMp5IcL4JENyP4Y6xPE
- Ut1nVcCyEJ4sd3PgGXquunlIweAXIYyV0u7ElUq7ltTY8LOv9EUiYd9g6FsjJC/sEuxt2ehiegy
- bvR/wanIfNL3WvX46NwCSTNH9m5W/eMUR/zs3hB40JVWyKBSHuQpxmo9mXgIJQ4Sn4kqV2Q7Y38
- 0PWm/2VdlMBQR63F77RmIP1s2oygurLUSmbXIQlrqcc57VCurZ2rhdpp+xi+3Xx0ISIYn6+sGwc
- cUwlA59rZl+zkT3ZKib8DubZBcm6srPBVPHuehi5aYMcJv3LX47UWuSU1Krwp9K1KZwVthmKsYN
- EeUcrHha+Y0tjDUKn6a7rUFV3BDSMD0sbMqj4jCbhD6VmqhtgUGqvbdQ=
-X-Google-Smtp-Source: AGHT+IHbFZhuF8/SRqp8aaEX2RsThzytSaLUIVRY2O05IYO3kNordg+54wRSQm5Zv6XTxcsbhED1HQ==
-X-Received: by 2002:a05:6e02:3790:b0:3e6:6b01:eb1 with SMTP id
- e9e14a558f8ab-3e921f3b624mr104161645ab.17.1755983686230; 
- Sat, 23 Aug 2025 14:14:46 -0700 (PDT)
+ bh=YKhniBguSpNdchSBatYnJvd6CjO+ms7aRrHvLiHpcek=;
+ b=KsNdtPUreBg4Rgx2P2y6lIFxm2l6DRdfRTVZwpGFN8hyB2FbthCO0iEZvndFaP7m0t
+ 6vAIdxHS/M2WYcTxAPep/LnSKVuaVLUE7U7KP/QdmU7MBoTJ6q1sVVZiWHvGohy11oMt
+ alhQ2DRgLTmDGC/rgmy2CttpWGZO3Wek/CX4aEk+di8A2lshusHlGQ/6GCsQLNKVfOA+
+ W2ArdaeNcI0N5EjWT+vmK0t8XaH6uQG6QDeoZPgNU+/GCCkZElUdTC/CqRVBGWmTJgAW
+ Q+HEtU8kKj115i7RwL2SEgy6nRTMUcly6aG204N3Lc9ChhlhMYQ3s95fWxOo5bITev9j
+ EpQA==
+X-Gm-Message-State: AOJu0YyrCHO5n2rKRQXRZJNjYenJZuyiY/adH+PajeG1aBGo1wdF2FXG
+ trkAalDjObtWwL9BcWoYwfsL/IaIgYZ0/Jyr1gVKgGdD0p+GOg6gkPVB2ahAmKmKFGNVId9yFD0
+ tOgph+xk=
+X-Gm-Gg: ASbGncs6Sue2IXJJdmWm5irf4FHN3rDuhJOAzb4D1dlFabn8tb+DrzgrLM7HPJYcGeS
+ Yc/f/qtbXDopWkJyGvN+WevtNbRAS++GzY9YMOG9ST1ZW7ec8w2oFVlWqM+6RgbGcq5Te+cjSt6
+ uY4TZzT0IXiP/GdxqeWs+Q1Il98wtH2Yg3F0f1veCZ++4d4Rxulgiev9Jgu7xIQN7M+3BExTqup
+ RknwATFBIrHIKnWNkCf8c0xdJaVR1UM7ic5GM7Ssqhvs0L/fznFrkfq0E/IK/TjrakhtJq4bI/i
+ uaPQKrE2ZWHY0MLPk90tYVx5sysbT07PuzgbCqon6B+phDBelSlyYxoxQzUdD2Z4Pwwl5xfCgoQ
+ oAskRBTTaBTMZLmsQyjyjuwXVyXvw5KX4/R4OWPBiZFD4YUBO3/82Pak=
+X-Google-Smtp-Source: AGHT+IFBRs7RDxJG/rA86N6epmwKmz0MaZvk9E4qpvM33ipAaXDMWg1Au5ANFfE7cY3+vXtvwonF1g==
+X-Received: by 2002:a05:6e02:152d:b0:3e8:b64c:105f with SMTP id
+ e9e14a558f8ab-3e91f93e0e9mr113716025ab.5.1755983687307; 
+ Sat, 23 Aug 2025 14:14:47 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3ea4c28624bsm21423305ab.18.2025.08.23.14.14.44
+ e9e14a558f8ab-3ea4c28624bsm21423305ab.18.2025.08.23.14.14.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Aug 2025 14:14:45 -0700 (PDT)
+ Sat, 23 Aug 2025 14:14:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250823193307.290885-1-festevam@gmail.com>
-References: <20250823193307.290885-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250823
-Message-Id: <175598368464.1246629.15870696307418930173.b4-ty@konsulko.com>
-Date: Sat, 23 Aug 2025 15:14:44 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Tim Harvey <tharvey@gateworks.com>
+In-Reply-To: <20250823190249.352162-1-marek.vasut+usb@mailbox.org>
+References: <20250823190249.352162-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <175598368635.1246629.14102870857675462949.b4-ty@konsulko.com>
+Date: Sat, 23 Aug 2025 15:14:46 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,15 +97,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 23 Aug 2025 16:33:07 -0300, Fabio Estevam wrote:
+On Sat, 23 Aug 2025 21:02:35 +0200, Marek Vasut wrote:
 
-> Please pull from u-boot-imx/master, thanks.
-> 
 > The following changes since commit 94e690c44a03959c39f0f5a44a9b89c851af3b60:
 > 
 >   Merge patch series "bootstd: rauc: Fix segfault when scanning device with unsupported layout" (2025-08-21 15:05:15 -0600)
 > 
 > are available in the Git repository at:
+> 
+>   git://source.denx.de/u-boot-usb.git master
 > 
 > [...]
 
