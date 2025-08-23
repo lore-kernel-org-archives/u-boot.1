@@ -4,88 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8AC3CA0EE4
-	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 11:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F80CCA0EFA
+	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 12:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12F108304A;
-	Sat, 23 Aug 2025 13:53:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BCCA782E37;
+	Sat, 23 Aug 2025 14:21:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c4Oui3Jq";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="k6FtCJzZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C12583096; Sat, 23 Aug 2025 13:53:24 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EDEC88304A; Sat, 23 Aug 2025 14:21:23 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7351482E37
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 13:53:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB64A82BA7
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 14:21:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-55ce526627dso3074266e87.3
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 04:53:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755950002; x=1756554802; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PA4CQaCMKlMfV3xPo95VM44ncW1jK839/8RCHzssz+g=;
- b=c4Oui3JqzIRAX2nS4RUSSgKYwZhOXgTEllwv3bu3LTB2v1pk+6D3rcF+WhnvwHp/x6
- GhhLzicvqqQr5LwhiNB4tuKujDODe1nkuuYIiQ5gvSb+ylerKgAodZ7S7xAdQerhnaog
- A0x1gRX9FfDJgzL4szf4u/RRx9YIU5yIu6xIv3MZP/Rp4Rcr1a5aNyaCQnKNdkyzfdh5
- dLf9dbr8iNOVFwCyRTMOpnwEXbHakxJYSVKqrb6gyE/ynVsvX1qbNgQwNy13bV2cjAnY
- M/l+dmozkf0GhQt/g38PLpbcfLbYjzEONMx0eZIgVsM1rzinkCBsrjnZoJZA67mlecNs
- bsRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755950002; x=1756554802;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PA4CQaCMKlMfV3xPo95VM44ncW1jK839/8RCHzssz+g=;
- b=sL3QSsqd1mv/A+IJ2si3S9CeeNKbKtgRX45XGs6w7KHWOyS/pPtGEfmpGgDSxCw3+h
- c/AkzZ0jRPjc1Yl887dea50uwlowPJPpFK6q5DliDtbgp3TvLapL+qUPJFqf1Tft1Udd
- 7gMIV/meXABs1xiQgM6RXPzVh5/ZV/G5X2MwMisTGHS2zBR+R0wsalWAMp13O/7lPCsK
- +Ty1wBQ3TK4xLhdLsVk+IAD8jdrlLqCuKuoEdz0MyLByY1nZO5CMcfOkGK1eBSRrbIjh
- BcyjVpBHkw5xI5ueHgdyN/aDkRHg9GtB7RQUx2/RcnR6+OOVbRauJxz5o5hIqisSqk++
- i3sA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZHjsIroM3HcKe2hRyGiAncun0h2w5nfd3ztL2x0K++qThZ1uVGKsIar+hN5I/6wtRho7DU7M=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDhoFzta9LDWd2+LZ3l8885bBFukB2YeDbYuohYxcSIk26myBL
- Qjpzcpr6rrlbxthK2No2HfMADxFyK6khcmxMBsNGNEWZoriix0QdD21QxCMKqXedFKZHw7+6337
- X/15BPUFX1aoaz1gjM9Cr7VgrfzK22qQ=
-X-Gm-Gg: ASbGncs4k2iElSYzOG7CKS6XqZVOqigB1LTzHieBk9d+YNXnuojjsDAJ6ivJIzQWHFw
- uwcn7m9pBCVdNKRLE5QxswqprVBTc1p8XVSP4IlilxE/PR76V49GUP+pdOJnmtKc0/35bNwJvlJ
- CIGQ2qcyYoOKwQZclL9TwHavShqLHpLQ0AtMdmw393OTzhmx297z25JGU2yjLFMoCVN4JGgx2Gk
- a6EJjeLtao1jOJjhxD60u0UQKy35/gCKNpjWmmwqnVRfORNrA==
-X-Google-Smtp-Source: AGHT+IHfPFhLzC6cSAH8uTvcJjIq+cHqtddCCtKxwh+29R5VChAitiA6LZSNjdNc9JNrmExaZZGOMWc0qEAKIcaHBp0=
-X-Received: by 2002:a05:6512:6711:b0:553:a3ed:f2ee with SMTP id
- 2adb3069b0e04-55f0c6a4088mr1459722e87.13.1755950001399; Sat, 23 Aug 2025
- 04:53:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4c8GPW6x5mz9tPJ;
+ Sat, 23 Aug 2025 14:21:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1755951680;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J7397MrAYDcaoGJbUNgg6/ozx9MDFZQheI3djLfHs8g=;
+ b=k6FtCJzZI2p47LQ8+b3ivpQtQ8Vuk4Xl1UOQu6xtK3J4RNYA6QPu0voKJwSJmpPROlPUDh
+ X8pgGRM+tOorpC3SogDvf84Ix+Rh2eQtsHkTp6QDUW7NijCbeqeDQl08hQewBacoV6FtEu
+ UFrPiOc2ZWqWlIVoohN08P63P/N8CAol4S5ucIWnDXoLxA9+T3ZqfqyYLGI8yr7RGGdH/T
+ bmTEUU9fwwtkgvNuxv1J4TkThnvMGXnlX2O8wF0wmD186jQJw2EzntwVU72+/sstglgwAA
+ 9dSHRfl4AyvwQse/DYsESql9Wag1/pZT21BRqTMqNX3YhQw3kDcsW0ry/IQGsg==
+Message-ID: <24dab90e-b15a-49d6-acbb-3302ae34ac1a@mailbox.org>
+Date: Sat, 23 Aug 2025 14:21:18 +0200
 MIME-Version: 1.0
-References: <20250721180205.2696763-1-tharvey@gateworks.com>
- <20250724034438.GH18395@nxa18884-linux.ap.freescale.net>
- <CAJ+vNU0bm6ZB3cZP6Az45sNsMZ3QZJEVj7C20yFygF_YSqa5bA@mail.gmail.com>
- <CAJ+vNU1n_+Q70jYEtZ4Eii4qM_R6e+uVfHPKZD5KYHt_ZrX2cw@mail.gmail.com>
-In-Reply-To: <CAJ+vNU1n_+Q70jYEtZ4Eii4qM_R6e+uVfHPKZD5KYHt_ZrX2cw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 23 Aug 2025 08:53:09 -0300
-X-Gm-Features: Ac12FXx9CcfiFZt_pe-iDr3ERspcQnZ_VbEytXkHoMXKzWKvuygiyre48Ddt33I
-Message-ID: <CAOMZO5CSjZeXpHGqRCZsh_j2iSo_RLA+VKZV-vM=LUyrhhPn=Q@mail.gmail.com>
-Subject: Re: [PATCH v2] usb: ehci-mx6: Add i.MX95 OTG support
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, Fabio Estevam <festevam@denx.de>,
- Marek Vasut <marex@denx.de>, 
- Alice Guo <alice.guo@oss.nxp.com>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- peng.fan@nxp.com, 
- Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
+Subject: Re: [PATCH] usb: cdns3: Do not access memory after free
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: Nishanth Menon <nm@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
+ <trini@konsulko.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20250813-usb_cdns3-v1-1-3779912fe660@linaro.org>
+ <b83f79a7-66e9-43b9-859e-ebb69e4d536b@nabladev.com>
+ <0a4f4611-8858-4a38-be70-bf0947d689c1@linaro.org>
+ <84535d73-7496-4fd3-8ecb-ac6830974d51@mailbox.org>
+ <e2257066-ee97-44ff-9338-cec69f8c7f03@ti.com>
+ <2ff9412a-795c-422b-9be4-576e64a7f395@mailbox.org>
+ <63d6759a-a8be-41d6-8870-72bdc3856c05@ti.com>
+ <bf35a459-29dc-48f8-a353-7f75493e959c@mailbox.org>
+ <a6bb77e3-2702-469d-a684-0dce753e78b0@ti.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <a6bb77e3-2702-469d-a684-0dce753e78b0@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: rf7ke8iafzweghpwwmpx9i8zxi6iwgsw
+X-MBO-RS-ID: ea841564eba2b3b4ae6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,20 +85,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+On 8/23/25 4:07 AM, Siddharth Vadapalli wrote:
 
-On Fri, Aug 22, 2025 at 6:38=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
-wrote:
+Hi,
 
-> Fabio,
->
-> I'm not sure if you were needing more reviews for this one or if you
-> were just waiting for a follow-up to Peng's question.
-
-This patch looks good to me:
-
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
-
-It will go through Marek's USB tree.
-
-Thanks
+>>>>> I was planning to test this patch but the change being made is only
+>>>>> applicable to Controller Versions:
+>>>>> 	#define DEV_VER_NXP_V1		0x00024502
+>>>>> 	#define DEV_VER_TI_V1		0x00024509
+>>>>> and not to:
+>>>>> 	#define DEV_VER_V2		0x0002450C
+>>>>> 	#define DEV_VER_V3		0x0002450d
+>>>>>
+>>>>> Since I don't have an SoC and a Board with DEV_VER_TI_V1, I cannot test
+>>>>> it. However, the change looks correct to me.
+>>>>>
+>>>>> Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>>>> The change does indeed look correct.
+>>>>
+>>>> Do you know who might still have that board and could test ? (and which
+>>>> board/soc is that) ?
+>>>
+>>> None of the boards that I have worked with have a DEV_VER_TI_V1 version
+>>> of the controller. I also tried to use the Linux device-tree to check if
+>>> I could identify the SoC/board but I was unable to do so.
+>> Do you know which SoC is V2 and V3 ?
+> 
+> I spent more time on this and found out that J721E SR 1.0 has the
+> controller with DEV_VER_TI_V1 version but other revisions of J721E as
+> well as all of the following SoCs have DEV_VER_V3 version of the
+> controller:
+> AM64, AM68, AM69, J7200, J721S2, J722S, J742S2 and J784S4.
+> 
+> I will try to find an SR 1.0 J721E SoC and test the patch on it and
+> share the results here.
+This is awesome, thank you !
