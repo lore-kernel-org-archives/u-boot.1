@@ -4,71 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F80CCA0EFA
-	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 12:21:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6EFACA0EED
+	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 13:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCCA782E37;
-	Sat, 23 Aug 2025 14:21:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E663281D5D;
+	Sat, 23 Aug 2025 15:26:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="k6FtCJzZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gT/qS1wg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDEC88304A; Sat, 23 Aug 2025 14:21:23 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B33FF82BA7; Sat, 23 Aug 2025 15:26:12 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB64A82BA7
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 14:21:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B064F800D7
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 15:26:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4c8GPW6x5mz9tPJ;
- Sat, 23 Aug 2025 14:21:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1755951680;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=J7397MrAYDcaoGJbUNgg6/ozx9MDFZQheI3djLfHs8g=;
- b=k6FtCJzZI2p47LQ8+b3ivpQtQ8Vuk4Xl1UOQu6xtK3J4RNYA6QPu0voKJwSJmpPROlPUDh
- X8pgGRM+tOorpC3SogDvf84Ix+Rh2eQtsHkTp6QDUW7NijCbeqeDQl08hQewBacoV6FtEu
- UFrPiOc2ZWqWlIVoohN08P63P/N8CAol4S5ucIWnDXoLxA9+T3ZqfqyYLGI8yr7RGGdH/T
- bmTEUU9fwwtkgvNuxv1J4TkThnvMGXnlX2O8wF0wmD186jQJw2EzntwVU72+/sstglgwAA
- 9dSHRfl4AyvwQse/DYsESql9Wag1/pZT21BRqTMqNX3YhQw3kDcsW0ry/IQGsg==
-Message-ID: <24dab90e-b15a-49d6-acbb-3302ae34ac1a@mailbox.org>
-Date: Sat, 23 Aug 2025 14:21:18 +0200
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3c68ac7e238so574743f8f.1
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 06:26:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1755955570; x=1756560370; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:subject:cc:to:from:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=xO6TbKHebfxfs168EGupvR8l5/KdYiNZOhrZbwOqW40=;
+ b=gT/qS1wgVfPRp+P/MGYlf/fwIvPu7vXCUOR8Yx/YuuxPpUPkxPg5vam6rPhNn34Tlk
+ f5zPQiKV2va6kvfggQCQY8ub1yQ3cmW6+SJe+Rbw8IEMFM3dJsuMeGFNR7T0S2pWhz/E
+ gC1p1R7o6IF6HmfmqmxpBPD2037Sq8d2xuzNX/xqcZXynucsihxvn0v5mNQdRPEKt1HG
+ w4Y7j8wxLuMOpbDe8KFkuMEVm0JhNLIBLrpAtUjCkho8WDn1x6Ix1meoUGw9QZWlAFyc
+ Oi5FZd8JKG4UGRuWYCv7WJu50IJ4c4DpAqlvVFmzs3jnQhj/LhQYgZIRIv6JzART/TvS
+ Hurg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755955570; x=1756560370;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:subject:cc:to:from:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xO6TbKHebfxfs168EGupvR8l5/KdYiNZOhrZbwOqW40=;
+ b=UWvHRiciNIatvb1Uz38uzSJBMDGbOkJ4I7vJY5MwSzoum4EoPzIuUxp8emTr7PWkuS
+ TBProX+Vcd0UCPE1TiV7DqnUlEc625JSYSqbCa3lq+TAAtCKix5EeWODxfGKdGwCTWXR
+ Z3Z7MszGSyqeCOJtxnAFdhIQ+wsgiaBIvSS5dxqgBRvOOmYXpJNCbLhPbbSwQWgg4Fch
+ IcKqoPO/P76ma8H0p/BBHSf5eRZ7UMvao9v0WzjyZHhftXsDbrs1oVXny4bNk0hU3a03
+ SQDxzfATzKWaJJ15HPdizYNuq5IRgGAfbXxbalhX6cRLeQAMdv+DX+hwObcDmcvmcm3T
+ 9oQw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU5uBtZwfJ/gAWiZflzyPYTGdfv1Fo0U6G4ap2L+KGZZsjAZApAg2QOc+JWEMZFCK6nHzK7xzg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKYxHhUKk06IGhKmLhVJdUzqYgh176hDdLVIQidNHQkhbpEElD
+ nvpI9c9daSidQ/Ec8nmDXpe4HL4Pj+aUx60ZanYOrVybBQueOvQBFDSy
+X-Gm-Gg: ASbGncs0Q+g+llLIVXO+CGewDgCoFV8kyh+llNzHEqPARspRPmPENpdDJhiBnutrnNR
+ w0gWxo95y4N0xbq85hQtdPzWF/wbYaa5aAAsvv9UOWn0nx4rwU0eVnMzE7dKggy/AW0Ao1OnmMx
+ 0OR8L5YsgJXyOoOhHYFTKAReK/bvYHExgJ1RiJS4NRAC8bRfo1+IDj5BnidWGX/gc2rYsVgoDYC
+ ROoouXVbjrIm3uWkox7onUKqaKEkKtk2UUxLlukqR9FF1pu0qymoqzvBOhDdjO0NwyE4M0nxMsz
+ 6Om7pBTOssw0x2aFIT+94SHUeMdL6tixrX0EqVMG5d1xmUw4eUmwUUFNcHukxujFsxIXLdnKudD
+ n6hNRMTXmMom+zLcmWPe9UsefT++otnN7ZwDuccxGYBx+KH3Qk5xj5Fx1QF4cVhE8NdHdhQ==
+X-Google-Smtp-Source: AGHT+IHHFtRvT2uBndjzgUDIrh0xGhIadBEw2AH43+YXCpvwF0RDqmA8tWaEp0ezOESYo6KOrnkZZw==
+X-Received: by 2002:a05:6000:40de:b0:3b7:b3f2:f8c3 with SMTP id
+ ffacd0b85a97d-3c5de3496a2mr5402041f8f.57.1755955569781; 
+ Sat, 23 Aug 2025 06:26:09 -0700 (PDT)
+Received: from Ansuel-XPS. (host-95-251-209-58.retail.telecomitalia.it.
+ [95.251.209.58]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3c711f8a0d6sm3557273f8f.66.2025.08.23.06.26.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 23 Aug 2025 06:26:09 -0700 (PDT)
+Message-ID: <68a9c171.5d0a0220.2720d2.b8b7@mx.google.com>
+X-Google-Original-Message-ID: <aKnBbzyFNtREvyUd@Ansuel-XPS.>
+Date: Sat, 23 Aug 2025 15:26:07 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] airoha: rework RAM size handling to support multiple RAM
+ size
+References: <20250722184426.6964-1-ansuelsmth@gmail.com>
+ <a374f7d9-b658-456c-bcce-30fa501f505e@iopsys.eu>
+ <68861451.050a0220.a546a.2ace@mx.google.com>
+ <2c6a55c7-e4b0-4af9-ba66-ff5cada14de0@iopsys.eu>
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: cdns3: Do not access memory after free
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: Nishanth Menon <nm@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
- <trini@konsulko.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
- u-boot@lists.denx.de
-References: <20250813-usb_cdns3-v1-1-3779912fe660@linaro.org>
- <b83f79a7-66e9-43b9-859e-ebb69e4d536b@nabladev.com>
- <0a4f4611-8858-4a38-be70-bf0947d689c1@linaro.org>
- <84535d73-7496-4fd3-8ecb-ac6830974d51@mailbox.org>
- <e2257066-ee97-44ff-9338-cec69f8c7f03@ti.com>
- <2ff9412a-795c-422b-9be4-576e64a7f395@mailbox.org>
- <63d6759a-a8be-41d6-8870-72bdc3856c05@ti.com>
- <bf35a459-29dc-48f8-a353-7f75493e959c@mailbox.org>
- <a6bb77e3-2702-469d-a684-0dce753e78b0@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <a6bb77e3-2702-469d-a684-0dce753e78b0@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: rf7ke8iafzweghpwwmpx9i8zxi6iwgsw
-X-MBO-RS-ID: ea841564eba2b3b4ae6
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <2c6a55c7-e4b0-4af9-ba66-ff5cada14de0@iopsys.eu>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,38 +109,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/23/25 4:07 AM, Siddharth Vadapalli wrote:
-
-Hi,
-
->>>>> I was planning to test this patch but the change being made is only
->>>>> applicable to Controller Versions:
->>>>> 	#define DEV_VER_NXP_V1		0x00024502
->>>>> 	#define DEV_VER_TI_V1		0x00024509
->>>>> and not to:
->>>>> 	#define DEV_VER_V2		0x0002450C
->>>>> 	#define DEV_VER_V3		0x0002450d
->>>>>
->>>>> Since I don't have an SoC and a Board with DEV_VER_TI_V1, I cannot test
->>>>> it. However, the change looks correct to me.
->>>>>
->>>>> Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
->>>> The change does indeed look correct.
->>>>
->>>> Do you know who might still have that board and could test ? (and which
->>>> board/soc is that) ?
->>>
->>> None of the boards that I have worked with have a DEV_VER_TI_V1 version
->>> of the controller. I also tried to use the Linux device-tree to check if
->>> I could identify the SoC/board but I was unable to do so.
->> Do you know which SoC is V2 and V3 ?
+On Sun, Jul 27, 2025 at 03:03:30PM +0300, Mikhail Kshevetskiy wrote:
 > 
-> I spent more time on this and found out that J721E SR 1.0 has the
-> controller with DEV_VER_TI_V1 version but other revisions of J721E as
-> well as all of the following SoCs have DEV_VER_V3 version of the
-> controller:
-> AM64, AM68, AM69, J7200, J721S2, J722S, J742S2 and J784S4.
-> 
-> I will try to find an SR 1.0 J721E SoC and test the patch on it and
-> share the results here.
-This is awesome, thank you !
+> On 27.07.2025 14:58, Christian Marangi wrote:
+> > On Thu, Jul 24, 2025 at 01:30:45PM +0300, Mikhail Kshevetskiy wrote:
+> >> On 22.07.2025 21:44, Christian Marangi wrote:
+> >>> There are multiple version of the same reference board with different
+> >>> RAM size and it's not enough to base the RAM size entirely from DT. To
+> >>> better support it use the get_ram_size way to scan for the actual RAM
+> >>> size of Airoha SoC and increase the size of the memory map.
+> >>>
+> >>> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> >>> ---
+> >>>  arch/arm/mach-airoha/an7581/init.c | 23 +++++++++++++++++++----
+> >>>  1 file changed, 19 insertions(+), 4 deletions(-)
+> >>>
+> >>> diff --git a/arch/arm/mach-airoha/an7581/init.c b/arch/arm/mach-airoha/an7581/init.c
+> >>> index d149e0ee3c8..0f72365c4ab 100644
+> >>> --- a/arch/arm/mach-airoha/an7581/init.c
+> >>> +++ b/arch/arm/mach-airoha/an7581/init.c
+> >>> @@ -2,10 +2,14 @@
+> >>>  
+> >>>  #include <fdtdec.h>
+> >>>  #include <init.h>
+> >>> +#include <linux/sizes.h>
+> >>>  #include <sysreset.h>
+> >>>  #include <asm/armv8/mmu.h>
+> >>> +#include <asm/global_data.h>
+> >>>  #include <asm/system.h>
+> >>>  
+> >>> +DECLARE_GLOBAL_DATA_PTR;
+> >>> +
+> >>>  int print_cpuinfo(void)
+> >>>  {
+> >>>  	printf("CPU:   Airoha AN7581\n");
+> >>> @@ -14,12 +18,23 @@ int print_cpuinfo(void)
+> >>>  
+> >>>  int dram_init(void)
+> >>>  {
+> >>> -	return fdtdec_setup_mem_size_base();
+> >>> +	int ret;
+> >>> +
+> >>> +	ret = fdtdec_setup_mem_size_base();
+> >>> +	if (ret)
+> >>> +		return ret;
+> >>> +
+> >>> +	gd->ram_size = get_ram_size((void *)gd->ram_base, SZ_8G);
+> >> Can we use a memory size passed by airoha trusted firmware instead of
+> >> playing with  get_ram_size()?
+> >>
+> > Hi I received some feedback from Airoha about this and sadly it's not
+> > possible. There are too much version of ATF and only some of them
+> > provide RAM size in some way or another. Also there isn't an exact HW
+> > trap to read to know the RAM size hence raw testing the ram and not
+> > depending externally is the only solution :(
+> >
+> > I will address all the other comments.
+> great.
+> >>> +
+> >>> +	return 0;
+> >>>  }
+> >>>  
+> >>>  int dram_init_banksize(void)
+> >>>  {
+> >>> -	return fdtdec_setup_memory_banksize();
+> >>> +	gd->bd->bi_dram[0].start = gd->ram_base;
+> >>> +	gd->bd->bi_dram[0].size = gd->ram_size;
+> >> as I know u-boot can safely use only 2Gb of memory, thus it's better
+> >>
+> >>         #define CFG_MAX_MEM_MAPPED  SZ_2G
+> >>
+
+Sorry for coming back on this but by declaring CFG_MAX_MEM_MAPPED 
+aren't we limiting the memory to 2gb? Also these info are passed to the
+kernel so we are limiting the RAM also there. Am I wrong?
+
+Also I notice the weak function dram_init_banksize is exactly the
+current one with the usage of effective ram so I guess I can drop it
+entirely?
+
+Can you help me understand the usage of MAX_MEM_MAPPED and confirm this
+doesn't limit the total RAM when loading the kernel? (we don't use ATAGS
+as we use FDT)
+
+> >> and replace above line with
+> >>
+> >>         gd->bd->bi_dram[0].size = get_effective_memsize();
+> >>
+> >>> +
+> >>> +	return 0;
+> >>>  }
+> >>>  
+> >>>  void reset_cpu(void)
+> >>> @@ -32,12 +47,12 @@ static struct mm_region an7581_mem_map[] = {
+> >>>  		/* DDR */
+> >>>  		.virt = 0x80000000UL,
+> >>>  		.phys = 0x80000000UL,
+> >>> -		.size = 0x80000000UL,
+> >>> +		.size = 0x200000000ULL,
+> >>>  		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
+> >>>  	}, {
+> >>>  		.virt = 0x00000000UL,
+> >>>  		.phys = 0x00000000UL,
+> >>> -		.size = 0x20000000UL,
+> >>> +		.size = 0x40000000UL,
+> >>>  		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> >>>  			 PTE_BLOCK_NON_SHARE |
+> >>>  			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+
+-- 
+	Ansuel
