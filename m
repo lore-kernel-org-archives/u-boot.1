@@ -4,88 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C420DCA0EE4
-	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 19:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BFFCA0EE4
+	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 19:52:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D393800D7;
-	Sat, 23 Aug 2025 21:36:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D1B180548;
+	Sat, 23 Aug 2025 21:52:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cSSbgoii";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="j4sKo+Sh";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ItBVEA1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6EF182BF6; Sat, 23 Aug 2025 21:36:21 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 154BC80548; Sat, 23 Aug 2025 21:03:10 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7344C80077
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 21:36:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99E8180077
+ for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 21:03:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-55ce5097493so2873092e87.0
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 12:36:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755977778; x=1756582578; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=glJnXiaeQDtfLAm0ANCcMk4P7xEsXK5AV5HdByjYNgk=;
- b=cSSbgoiik5oFFeYq//zrZHkY1LXWtt6QFcTFrvWTCoaKeLUL3mp4PL7tlGH9o7hlKP
- 0D79e2gR1UcULeeXETjoYgEPJOoFL82DpqqYlAAtT/pTFAySZCTBs/1wW7UnhDNgMrjz
- JfBGLVrAaSRdtrg0Ttazov8fDTNmXjI2WY6bggGRqpHLowRB8Tuwv2PGJK0ZmgTwrhHq
- x1734b0WWF46hc4RcmcnYkg76ArYAFLmeatfemaAJknC6kbp36UwvFPi4PbPJtv5u6iq
- 7t7XV/erqRaYPbjtpNC3UWUZZrZ75hEWoJf6moY4sYqTmQnKZr1V5G4u6DpuNU2TV8lC
- y95g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755977778; x=1756582578;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=glJnXiaeQDtfLAm0ANCcMk4P7xEsXK5AV5HdByjYNgk=;
- b=lHLhQouIQBgZ+XttXzdzI5PAYCGKWMGeT1H4IfY3F/EQzfGYq2aSdtsJ2MWSDqz5MS
- 4oOXXw2ki/iYcw+bhmjwcV+pQiLCbpULZmWcVlL/sdRn23d/d0QkEZNQ9t7+2IyB8Ia2
- n53NJ4P1envbTG3rnNXFEC+ve5JbIGOERRtz8PeQYX1ACeokLORSpX10FRy76EJv+Mcc
- nQ4OMvqOm2Mx0HMR8BPoOEjC/fp6EPfmcHVXYTHhTn51boNxZg4cWgQqiLK8IlohoJO3
- kn54D/AUx2iHOFdzyMwCfNWsMPugvLLtInmZBJ/GPabqoY7WlarTOKiev79RDNIYbBs2
- XTxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhsUdbGm7B8b6jQNMAmFyixS8mXYeMT70EaoVq3PFFux2oSgJW4+ou2hVcpz74ILuSw3JPnn4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZZLcMUL9uxtqQaITtdigjHa2gsrlohzhiOojDw1dCtp5EWH1S
- jiiJO93Beo7AhjhvaJNDNAFSdR4SliBosJDGNWKz/x6+RHtQoW0bkx1QE81rEmC7Hm+Pftu2W4f
- wBoYnoIvQzxUmyYMW+DpnIK2ZFKB5Q3Q=
-X-Gm-Gg: ASbGncs/qDy29L62f3SnBfZ+j86R6bMpGStsnCP3RK9jflralz3kLXr34jq828oNIWH
- 2Ka8TCUo2PSvujT6d+KGOyjp84rI3lZ65J5/DfNl0QoZr7TP/zUS7OZMg4XqSmRtnjsrKVXkEeB
- 1+HQ3vpccbI5doUZD4bakTgQsQjYcrWQdAhIyWp142tbloWL87kCeMW6S2zhjovXWoSoCBqNPzl
- M4zu7rwEj5z6r9/IJqeF9j/X8OaM9rWdwKh8b8=
-X-Google-Smtp-Source: AGHT+IG83e5oO84ocUx9Tu0HX82QX6WnN/sqIyQpqkdt3UtEMv0XmMFnawaJWkJvbgRCTbIz6sSZ4fdmnnhJnDFaIIQ=
-X-Received: by 2002:a05:6512:3ca8:b0:55f:3faa:7bf4 with SMTP id
- 2adb3069b0e04-55f3faa85a6mr212851e87.17.1755977778108; Sat, 23 Aug 2025
- 12:36:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4c8RK73Lh5z9v1t;
+ Sat, 23 Aug 2025 21:03:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1755975787;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=D4QxHxjXPhJjFs1Iw2z23poh8AqeMwPxUEyOrfAXcRE=;
+ b=j4sKo+ShtMMd5LpcLy+iXNa8JztK4y7d3izx3YhO2N34u5P8z3mDhK7CZRzpoRm30T+38r
+ DUagdemMo3ID+jG6mCoOelTCrha0rvMjjnfiC8kmaJA4eY8gfoyDbmVuULW+Ulkt2Ge2Rn
+ 1k49qAoc7qFzpttlyh+rbo9Ol1tMHMqPcsSn+AsjNIOZhhkTMPv8LCan6pE2o+vKJ7e/zp
+ Vv1JXWwInkjaA+Mv5D3IVe1VqOUo/AazwdQit8FiuanZ9wnv2BT+yxplaOPwlz/4sdExzD
+ s43ICRiu7mbNXW4YAilh0/X4XuWpjash8qtZL0PBiX+vK674202fBLO3CrBx7Q==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ItBVEA1y;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+usb@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut+usb@mailbox.org
+From: Marek Vasut <marek.vasut+usb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1755975785;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=D4QxHxjXPhJjFs1Iw2z23poh8AqeMwPxUEyOrfAXcRE=;
+ b=ItBVEA1y6xXOAX9MZGz6r2cgs0/3Fl4tVlwG0OqALohIKdBfXQ6aucVtXOdCVgBmWpCRMX
+ c5TFWPdRyymckX18/AjksoKgzrNJUpTCuVsBAcahNOV6f5LxHCFl0TklvN5Qfg2jG3h81u
+ lSI+87PIF2m4cAwuEhIiKsyhm7AscYmCzQ2vEcZtMy3s863xLEaQcPb6/xajNBsoDVTK3r
+ WSgHQBt+Bbi607u4FYP1lMNlm15kWe9yOauAA+Hd3FqO5v90IOFIBlcuSni92WiBL4JntD
+ MSkm3Ri8E1PogoQsPMgUIUOSPlBeFiLKdAjLvYJl2c/CIqxw45/dilyfjKX4QA==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tim Harvey <tharvey@gateworks.com>
+Subject: [PULL] u-boot-usb/master
+Date: Sat, 23 Aug 2025 21:02:35 +0200
+Message-ID: <20250823190249.352162-1-marek.vasut+usb@mailbox.org>
 MIME-Version: 1.0
-References: <20250811-v2-fix-imx9-usb-boot-v2-1-3d89974e2881@toradex.com>
-In-Reply-To: <20250811-v2-fix-imx9-usb-boot-v2-1-3d89974e2881@toradex.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 23 Aug 2025 16:36:06 -0300
-X-Gm-Features: Ac12FXx_Sz3FJbM0x5WrQuIzncz_lLi98tMguOYbJV2c5I0qZuPzG3Eo5jRe7x0
-Message-ID: <CAOMZO5CD61vfQOUAo_uFSkuMuaD=tjw9H66io5z+z8cKT=L3TQ@mail.gmail.com>
-Subject: Re: [PATCH v2] arm: imx: imx9: soc: Fix env location when booting
- from USB
-To: =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Alice Guo <alice.guo@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: f77fbdf376bad37b636
+X-MBO-RS-META: fii3p8m9agmsfk8j5cbh69bw73fxipeu
+X-Rspamd-Queue-Id: 4c8RK73Lh5z9v1t
+X-Mailman-Approved-At: Sat, 23 Aug 2025 21:52:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,29 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 11, 2025 at 9:58=E2=80=AFAM Jo=C3=A3o Paulo Gon=C3=A7alves
-<jpaulo.silvagoncalves@gmail.com> wrote:
->
-> From: Jo=C3=A3o Paulo Gon=C3=A7alves <joao.goncalves@toradex.com>
->
-> On i.MX9 platforms, when booting from USB, the U-Boot environment is
-> always assumed to be in RAM. However, this causes the boot to hang when
-> `CONFIG_ENV_IS_NOWHERE` is not enabled. The boot also hangs even if the
-> environment is present in another storage media (for example, eMMC). Fix
-> the issue by correctly handling the U-Boot environment's location when
-> booting from USB. Also for i.MX95, set the environment location based on
-> the ENV config and not solely based on the boot device type.
->
-> Suggested-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> Signed-off-by: Jo=C3=A3o Paulo Gon=C3=A7alves <joao.goncalves@toradex.com=
->
-> ---
-> v2:
-> - Changed the env location order on USB boot to maintain current
-> behavior on i.MX9
-> - Applied the fix to other i.MX9 platforms, not only i.MX95
-> - Added Suggested-by: Frieder Schrempf
-> v1: https://lore.kernel.org/u-boot/20250722-v1-fix-imx95-usb-boot-v1-1-de=
-c7f2384405@toradex.com/
+The following changes since commit 94e690c44a03959c39f0f5a44a9b89c851af3b60:
 
-Applied, thanks.
+  Merge patch series "bootstd: rauc: Fix segfault when scanning device with unsupported layout" (2025-08-21 15:05:15 -0600)
+
+are available in the Git repository at:
+
+  git://source.denx.de/u-boot-usb.git master
+
+for you to fetch changes up to 332714b905923d9e97a2cc7590dfc41e49980d35:
+
+  usb: dwc2: fix reset logic in dwc2_core_reset (2025-08-23 18:20:01 +0200)
+
+----------------------------------------------------------------
+Patrick Delaunay (1):
+      usb: dwc2: fix reset logic in dwc2_core_reset
+
+Tim Harvey (2):
+      phy: phy-imx8mq-usb: Add support for i.MX95 USB3 PHY
+      usb: ehci-mx6: Add i.MX95 OTG support
+
+ drivers/phy/Kconfig            |  6 +--
+ drivers/phy/phy-imx8mq-usb.c   | 91 +++++++++++++++++++++++++++++++++++++++++-
+ drivers/usb/common/dwc2_core.c |  2 +-
+ drivers/usb/host/ehci-mx6.c    |  2 +-
+ 4 files changed, 95 insertions(+), 6 deletions(-)
