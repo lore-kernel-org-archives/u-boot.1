@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 123A3CA0EEB
-	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 13:33:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28900CA0EEB
+	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 13:33:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FCF682DA1;
-	Sun, 24 Aug 2025 15:33:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E55582FC7;
+	Sun, 24 Aug 2025 15:33:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EGYEYZ2y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UW6eeeP2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EFDC82E37; Sun, 24 Aug 2025 15:33:21 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 94D7983013; Sun, 24 Aug 2025 15:33:44 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46CE982AE1
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 15:33:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9B2982AE1
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 15:33:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-afcb7a16441so548086366b.2
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 06:33:19 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-61c68525abbso188465a12.3
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 06:33:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756042399; x=1756647199; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1756042422; x=1756647222; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qKJWiH+iIgew6liod6ln/mbvv2vi3iC1pLP7Xj7+t64=;
- b=EGYEYZ2yynaVlFy7ahaq4Iil+s5rW2/5fQAeDb5noLqp3/1l+TDoKVk0XzBqsU8aUB
- 7py5R7TgJE8LgECBhCmOF7yM/xD6v2sdeYOYYhWhRy+8hhYUxSIh61PVyyX0Ufp1s0eq
- iXvyYmmRWSmPX2zP9qY7xfF/IR40Z8B721aGJfcPpyl2NssdD0eM/+y5jO5C5kWw5qD9
- F82LL4YnYe2gQyE0QZQ1wICE42xetp8ivwLSlHcMZ0jJWAv9ONIHNYGdHhMMKiydIt2x
- NULvfan4lH78HF+G1cDugo+3ln5XJ+3iSxtDK0W0aqe4RUOauNvRtg6KR1jQ3nJ+5uAD
- u4sA==
+ bh=a88aK2QAjJAO69Y+nOuwEZkKVM40AO3zW48JQGDNaRE=;
+ b=UW6eeeP2AIBAl1u5EORrdPL5Pajta+XUhL4l72K1710qQXReIYS90p6lI9uZKqY5qF
+ sftRJdJ7SuNDsSx2aF+D76LcqAgcTs7L47XqSCbMeZMVVVs5r6G7hnuUFnXW0r9scySv
+ ZyptltDbFhaRwlWDOVVLwD9EPkxT0I4SqZr/bQ45wGiqWdU3OlUV4C7DzXsAkafyqu9h
+ 2cYg1WQ7ssiDRF6ZbUg4HmlBOIXQMG29x7JBhJL9Ggl88tpzIv7ybY6LF8bLoFIPjgzX
+ lF5QkizVNo3SlgLnqks+wLtEZtkvEWo3LrJ6CAbuXFkti81f83jBswnUdtKWUf2mla12
+ iLVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756042399; x=1756647199;
+ d=1e100.net; s=20230601; t=1756042422; x=1756647222;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qKJWiH+iIgew6liod6ln/mbvv2vi3iC1pLP7Xj7+t64=;
- b=GiF1rg4orpn+LrKQ0cj9oFQYu//+UgjUl9b+OF0J8rdEgw/BUpRpc2/PhC2D7oAeQg
- IgOUE/fVbNXmBhjcNJB9tFNxKXtymB4pUlkIKY/gIzspXimwP85iMLc3Uqo94mtRxRmM
- OuyHLqTjZDC/n86G+zQkWba33y/o7K/iCrbY5lNg9+uP49Lwp2ukn6WZDXsoQUt/kjO4
- rQa9S++FYZShflGdJg/Cabf4kQ8wVn9T1Rnjkg0frS6ZoSF+WEmB21qqTWWuoysRKmo+
- jclbzLWXPLzDnzpNsDnaZQtzOtspmWisIKOIJLY2lAZIyEiwDoUcCe1zbFkuvGr783BW
- SjtQ==
+ bh=a88aK2QAjJAO69Y+nOuwEZkKVM40AO3zW48JQGDNaRE=;
+ b=InHxDw+UIwht1uVxjKLsa+QEXEIYvWB3bWPx0rLz70po5dd0rAYmY+6Gv3fwi0V/Si
+ KGyCD79BfidsFXwR79TzQUoUhDXKpdfp+yIrm7mDGJFFOjAf/Q/8ifIM0BXC/ceJcJNM
+ yJmunBqCSRoCkVVz9sUC0CDu1kcRMcROsSG7rPAxB6WsVtISeaxwmfLTQ3kfKuLm2f8a
+ yGI+WO/9CSoih8hN3K464ad7TQEf1zhbqmQfhXtddWkYLwNui8Xr7HGmdcEKqqxrp6L5
+ 5wIy0Xz0i/fBl+F7aRrqT+w3psylyW9pWsn9RJqzETZ9ZQoZrGgbPO8izySw/Cvp1Hpt
+ C5nw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW1FmQJImr4tAqRwtKlffelWt02lMsqy9IbNhxJVZ8G+alb7DN8f3CFxKDG/MZKleSn4QvcwXA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzO7y8qBXbzML+bHVdP6xU87+kKoIYYZyD0C177yo7QZIe5tTPZ
- p7zQ7+aFniAPw7Gqqxekg9UXcn0KRP209At6j9m9+sy4iUqryVLXJubAZlvOdGPRRAdwcHifQbg
- pf+IJfwsC+iF2vN3VFvZipiSJmOL9NG3sPw==
-X-Gm-Gg: ASbGncvpWElMRVVi9KJmmnUFs1nkq2cOUlfzDW/Teu8v97GTwXx9cdEJatNAt45ibCt
- 6nFSes2/DB9ks4Loiu7GAovWMUdroL2R4MQYeMIumd2bwdvj//kJZXhTlbWH3lwZhnsDXuMkL3d
- ZiV+VQFRFrCuWwdd4YrG/iqwUIYSFU+QHNf13OeL6sGeW7h+l2T4x+iqdk0V4mkPbytwstjdGvJ
- +NkVgdY02hod3ve
-X-Google-Smtp-Source: AGHT+IFSPjdZgBYjLX7EkBcGOBweI751oHTQzTTe+j3y8Z8vzX9zC05Mg8u5MACs+LoE3WZjVR2xmCBjfMOJl7Jewl0=
-X-Received: by 2002:a05:6402:4381:b0:609:9115:60f1 with SMTP id
- 4fb4d7f45d1cf-61c1b4a27c7mr8003219a12.16.1756042398661; Sun, 24 Aug 2025
- 06:33:18 -0700 (PDT)
+ AJvYcCV7hS37VpFNCJJ1vXzUQii3vVyIBEfwW+wUlmZfi+BgWkfTEsY7op8EZJGkCk1s97ptbbp0UvQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMZsMRkdGQ6+8y4z49QzpmqZn12oUWA72EE3D/3A75FTMfX+jI
+ +3Y+1slF2CO9kzsbISht0QKcOWlTBf52NLnq03xf+C+W9xoueZGl8IPoRv3T0EK52ADTa/Df1Gd
+ Lzg2C1WI13dNSxe+LY01G8x5f8yU1ru0=
+X-Gm-Gg: ASbGncuyzFqkZsWgQlKY0JZtLdLbpJsYUYY8IwHj66dwG0nfyOtNBsyoiYFREkus7w9
+ +NKk/uos/PKVlks2U1zEfrnBefFwZ79CCOv6A638jV66fVxv1jW3eBbcukoOo/jkfqUzIOoBNk8
+ LVSsXMOl1NIbHZNhL9dY7qrpbIKfgnOq0PeyXtI6niqrKeujIq4C7HUUtNLVk9J4ftR0aST/zv6
+ CgOOA==
+X-Google-Smtp-Source: AGHT+IFnwtEXPQpjWas+bYYZpaGKKEQbKyHXeG/h4zcC7KTPqPWfGz8AnLS/nnsfCIALvXOrrFd+MDAbDwTZFNU3DZU=
+X-Received: by 2002:a05:6402:2813:b0:61c:4dca:9d2a with SMTP id
+ 4fb4d7f45d1cf-61c4dcaaaacmr2721548a12.3.1756042422114; Sun, 24 Aug 2025
+ 06:33:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250822-b4-exynos-power-v1-0-9e2f2f740029@grimler.se>
- <20250822-b4-exynos-power-v1-2-9e2f2f740029@grimler.se>
-In-Reply-To: <20250822-b4-exynos-power-v1-2-9e2f2f740029@grimler.se>
+ <20250822-b4-exynos-power-v1-3-9e2f2f740029@grimler.se>
+In-Reply-To: <20250822-b4-exynos-power-v1-3-9e2f2f740029@grimler.se>
 From: Anand Moon <linux.amoon@gmail.com>
-Date: Sun, 24 Aug 2025 19:03:01 +0530
-X-Gm-Features: Ac12FXxCH73CEaXXrSYLR9wRlmD_uI9XJqot3gaBTNaB9xLb2sbem1vhP1tnSRw
-Message-ID: <CANAwSgQMJU4C72SmANxsioTU3xyDeEorR3257CQX4BpqJwqZzQ@mail.gmail.com>
-Subject: Re: [PATCH 02/11] ARM: dts: exynos5422-odroidxu3: rename s2mps11
- regulators node
+Date: Sun, 24 Aug 2025 19:03:25 +0530
+X-Gm-Features: Ac12FXzWGVKxsn33rc6pfrwOjVDymDLAE17RI-8XkRUxfteQiUkb8yE3mcuXJKM
+Message-ID: <CANAwSgTPJBb2UVSO3tC6jiidx=s9YXheSgoKWB4SR3_KEFybhg@mail.gmail.com>
+Subject: Re: [PATCH 03/11] power: pmic: s2mps11: remove check for
+ voltage-regulators node
 To: Henrik Grimler <henrik@grimler.se>
 Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
  David Virag <virag.david003@gmail.com>,
@@ -99,10 +99,11 @@ X-Virus-Status: Clean
 
 Hi Henrik,
 
-On Sat, 23 Aug 2025 at 00:04, Henrik Grimler <henrik@grimler.se> wrote:
+On Sat, 23 Aug 2025 at 00:05, Henrik Grimler <henrik@grimler.se> wrote:
 >
-> With this both linux and u-boot uses the same node name, which
-> simplifies devicetree parsing in s2mps11 driver.
+> All devicetrees that use s2mps11 driver have been converted to use
+> regulators { };, so we can safely drop the voltage-regulators fallback
+> check.
 >
 > Signed-off-by: Henrik Grimler <henrik@grimler.se>
 > ---
