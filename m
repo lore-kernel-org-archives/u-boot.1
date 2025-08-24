@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1960CA0EFC
-	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 13:34:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 093A4CA0EFC
+	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 13:34:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E808982E67;
-	Sun, 24 Aug 2025 15:34:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D80B82FC7;
+	Sun, 24 Aug 2025 15:34:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AnAVf2df";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XNHmfayb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35F0C83043; Sun, 24 Aug 2025 15:34:05 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 1C76483071; Sun, 24 Aug 2025 15:34:23 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52F7782DA1
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 15:34:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3341F83020
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 15:34:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-61c51f57224so614087a12.2
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 06:34:03 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-61c51f57224so614212a12.2
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 06:34:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756042443; x=1756647243; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1756042461; x=1756647261; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tdUSFE8/6Urdujb7YT+L06gKB00frxisKHF0pJLZ8U4=;
- b=AnAVf2df7Vw8hVn7sjvtPATzagHmnK/015wzm8erKFNtABU7pkd+8ET16xJrCLPIn0
- iGQpei/F0N7Gu0xQyI/qZJTGRmp0qm5ECgN92OYXH9Z79mXAysNy6j5Qe0YzRwuWveSF
- 3Lf8JFsZxy2YeNxEJgbRj8PYnKS8sLM0XB/Y3FQ3f1vX3gGVe6NidAVt573oA8FrwSyd
- KNU8ErcylkcguXu7z/QVO5JGRM1wPQksSd0yiniFUWE1NPMzvYyXI+9v8YYZEHGHEUJk
- 5AjX7EHPQjMJF2UPDwkwGdJZxKeoaejNeLj2OE1ZPPlesIp2itbJ3XYeN8xANPBOpsih
- 8HDA==
+ bh=Ny5npgVRt+tr58NgGLBX2EmLPuQ+xco3xdIxbuv4nfs=;
+ b=XNHmfaybKXHFOaabNg6VbUNJ5Ra2Bj2pKWYG+Q2C8WFTu08dbDoEus0vbnwrIkjv3x
+ F4ejE76VjyKWdo3VaavE99ua5mnnE2Hx6hL3PaaKmL6zpicb5Kv+VcnROu5TeylOkaOn
+ 2YCSP7iLeHZn+9ffM79h5ypQNwEvysD3jZtICooPmtE22GOiqUsL/9cg1fsMLKFAekGn
+ D9eVtHk1CVSKLzX9QMMTpR/Slpb38ibMepE4s9y9VUIJluUlW+bLx7JNjGU9IImneQHH
+ D2o7Ez72Zp4Qva6/cM73Neo8uGFaTg7YDszSQ4IWuoMgvahx55fi5BYAWss+TNNb89B3
+ oMTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756042443; x=1756647243;
+ d=1e100.net; s=20230601; t=1756042461; x=1756647261;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tdUSFE8/6Urdujb7YT+L06gKB00frxisKHF0pJLZ8U4=;
- b=eH3ejBlUug7Tuxrd1bzGiXo+oa+sAP8Ec17xEBGrP73oj77KIBEBh55i6HfRY33EV9
- tn2HqH8r8xGESoTHNqLDcfX61eND8GBmWUb4lo6ulIv1963xl2dBWlPppm3izAwhanUh
- m9PgZD3GiFZLrYtX0sxDMdROiQ4/DtCeIhYsOo8DlKxd91XbsjNOjT5VuyjT28P9Do/g
- EH4EuWzKIMOUFGcIHE6DTIPoce/8T/1sLjh2X0hJLnyCNx5IhXuz7hspYCADcy2YHag3
- Q9lRgwccL9EDo9O5F7xZEJreuwp1t3y7x/6eKd/Xk4l6F+7joaE/wk2PbzuA3IKK4/42
- gk4A==
+ bh=Ny5npgVRt+tr58NgGLBX2EmLPuQ+xco3xdIxbuv4nfs=;
+ b=vInNCnyQ5zZToRMkajFz8OCXnNny4F6E4N5dhfO+VIbLAkE6av9pd3rRDGqkp1Q/8u
+ lbEMuqXEhS5D9nZZx7QEpHVUsaAcK6r9twUp4+DIgbGoN/aH9pWFxSVDxvBnW3LYj+TA
+ 2okFbmim3ab82Wkvv5PNVKzCnDFeT9c6t8Z032vSEDBCr9pqp0RaKNROixXUOlK55smI
+ kDCBTfhxX8tmcLuUL6npgvzC/cP+zFuaz+sA1U8dolQHoxIMBTvyyiy2krTJd+GjP1sX
+ +N6OXPH+gmgccuQLQIuA7/cI0Y4VOVQwc/XIIbOonYRADjwWEkLN1kWOKoS8221TxifD
+ 47EQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJejbcelZAG8B3gmc1W+9fthdYNCRaZG2ynPgNd4PYRXvTKZ3RkTyapb43+8UGEqnhgYTWVrA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvW13T0zZSYHSdAEruG62juWx2HmIxSG4Kz8GRcDTk+XtPHE4i
- x0sxGXt4cl1o2sgnkv5WdhrvuIPmY74PeXWIEItf3J2mCNeKrxfhhL6MZw2JL2CK2X9UPxTM4ms
- lXMQE8ydQgfpVX8vQU1tb7lP2ZLbS8WA=
-X-Gm-Gg: ASbGncs3ClUgsxjoR7bxjHBWjiQF79kAxjqCQyLjFmTVpwfXP/RGRO721zeSByKF2YG
- 3zIQ4FGs6DpePpY1s9nRyMecVQ8DT4oP8j6UZs5Sc6OXzkJZ/k+1czokTDBb7sEz4r9SLkXNdfF
- GuN0pb2G9OXmRJlO+oWjGSXJvGikvmzGZ4SISjjrzNNQd5kgOwZcLfc04YbSvzUDum/ZrmfHLlH
- nFnag==
-X-Google-Smtp-Source: AGHT+IHuCiZ6GzgaS6ZnfjUYlOhAUN0fHeIDEfEVyHQ9HK2ofXNCmf5VT/1P3AqW/Kx7Uxkrx3HtFMpZenSEP6oXVwo=
-X-Received: by 2002:a05:6402:50d1:b0:615:adc4:1e66 with SMTP id
- 4fb4d7f45d1cf-61c1b708a40mr7751960a12.25.1756042442698; Sun, 24 Aug 2025
- 06:34:02 -0700 (PDT)
+ AJvYcCWhnTc2WeR8CUUdGInXiF7O2SJ5XKxvQ8gvIVyjwirfFNzrmWTz7EmTLDUPf9sMYxFQOALJxMI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxo1YvKp64Y4JFplag4bHjm5rZ6mLwKTUquItEpKvtc0BwWHUWt
+ qPk4bppypaO36SKYCkZvdPqVq6DrGk6WvfHC6abgRxz9hdnZ5FjYa5pSu29LAk+Zy7EHNT5jWKE
+ xhBn29uvg59Y222k8sZBd0+7x08K6Bdw=
+X-Gm-Gg: ASbGncsPpAQuuHhq8qZEnOpIppokcBO30pzCexV/ye4HMH9i8WaIEVzRaKQlIsMTzUZ
+ 0LhsfndOPPA0Cn/gAy7hycitFKxMLsZ6JWpgcJ6AQjHULJJ9IBzRtH487cvvKlnIVxWlp6u0UIY
+ JKfb7XQSoenEribErA33iX2BMh2zPYPKkOsMziZjseNTwHSWRdbsL0B3dL034e4DTIiIIppckni
+ r58yw==
+X-Google-Smtp-Source: AGHT+IH9/ar7iaKNULx+6Vhyof6SMaJq60GXZo6qKqtEe8VpjZpd4yAvGC1t4ZPwdE1yY/jTKh+U0EYWo9/K1965eeM=
+X-Received: by 2002:a05:6402:a0d7:b0:61a:7e43:662b with SMTP id
+ 4fb4d7f45d1cf-61c1b7095a3mr7828704a12.27.1756042460422; Sun, 24 Aug 2025
+ 06:34:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250822-b4-exynos-power-v1-0-9e2f2f740029@grimler.se>
- <20250822-b4-exynos-power-v1-1-9e2f2f740029@grimler.se>
-In-Reply-To: <20250822-b4-exynos-power-v1-1-9e2f2f740029@grimler.se>
+ <20250822-b4-exynos-power-v1-11-9e2f2f740029@grimler.se>
+In-Reply-To: <20250822-b4-exynos-power-v1-11-9e2f2f740029@grimler.se>
 From: Anand Moon <linux.amoon@gmail.com>
-Date: Sun, 24 Aug 2025 19:03:45 +0530
-X-Gm-Features: Ac12FXxHowpRDdfqJHX-fgSE-_Bw9abdpMs3HZUVWRHRBX0YQJ-BP427yToVFXY
-Message-ID: <CANAwSgQ+Cwkb0O4Cp2L5BvyuB6qtiJn68qaSY2sCZDYD-C7=7A@mail.gmail.com>
-Subject: Re: [PATCH 01/11] power: pmic: s2mps11: look for both {voltage-,
- }regulators
+Date: Sun, 24 Aug 2025 19:04:04 +0530
+X-Gm-Features: Ac12FXzKujBKFq2W_tD_MvoKksa1C-7Tjfx4dzDMeSR9PHyXx-FOcdixnOCytmE
+Message-ID: <CANAwSgQqV1LZVoWr_Fwbj7+CRO749P5AE+FThrY=5LPjwOanwg@mail.gmail.com>
+Subject: Re: [PATCH 11/11] board: samsung: odroid: drop exynos_power_init
 To: Henrik Grimler <henrik@grimler.se>
 Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
  David Virag <virag.david003@gmail.com>,
@@ -97,14 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Henrik
+Hi Henrik,
 
-On Sat, 23 Aug 2025 at 00:13, Henrik Grimler <henrik@grimler.se> wrote:
+On Sat, 23 Aug 2025 at 00:33, Henrik Grimler <henrik@grimler.se> wrote:
 >
-> Linux's DTSes uses regulators { }; while u-boot's DTSes uses
-> voltage-regulators { };.  Look for regulators, and fallback to
-> voltage-regulators if not found, so that both type of DTSes can be
-> used with the driver.
+> exynos_power_init sets up regulators for the emmc and sdcard, but
+> these regulators are already marked as always-on and boot-on and hence
+> are handled already by the regulator-uclass. Since we currently try to
+> set them up twice we get error -114 (EALREADY) from exynos_power_init
+> on every boot:
+>
+>     LDO20@VDDQ_EMMC_1.8V: set 1800000 uV; enabling (ret: -114)
+>     LDO22@VDDQ_EMMC_2.8V: set 2800000 uV; enabling (ret: -114)
+>     LDO21@TFLASH_2.8V: set 2800000 uV; enabling (ret: -114)
+>
+> Remove the superfluous exynos_power_init to silence these errors.
 >
 > Signed-off-by: Henrik Grimler <henrik@grimler.se>
 > ---
