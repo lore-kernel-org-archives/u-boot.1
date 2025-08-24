@@ -4,74 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E1ACCA0EFC
-	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 10:36:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A4BCA0EFC
+	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 10:37:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28A99828A2;
-	Sun, 24 Aug 2025 12:36:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9464C82E37;
+	Sun, 24 Aug 2025 12:37:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZrNBG1K4";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="alBIT/fD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B3DE82AE1; Sun, 24 Aug 2025 12:36:43 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 6103A82E67; Sun, 24 Aug 2025 12:37:13 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DECE800C1
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 12:36:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D31A882DA1
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 12:37:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-b49d98691faso317500a12.1
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 03:36:40 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-324fb2bb058so2140192a91.3
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 03:37:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1756031799; x=1756636599;
+ d=amarulasolutions.com; s=google; t=1756031829; x=1756636629;
  darn=lists.denx.de; 
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=y3PAHPPAfQLkr2Ie1Ls4hNGAkXOANN645aNQ692QiV4=;
- b=ZrNBG1K4ISfZ70YO/gWFHowWu5jdVMIYi57nHGeMii6Jpzfrr693YHWPkRUCmGvVAN
- qmqT0pVTJbKKXCX9GNZbuQyflBVt3MiznlW71mT/oHNsMiWyXBd6ixhl4gjQ0VRH3BX4
- 8AyG/GzzADuiUmU5mh0XydGZsF+TOkeUobavc=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xK3dYyxMRFiyrNSP8qAz/hbt7kIZD0cMbZiIU0VMtRU=;
+ b=alBIT/fDwgir4fuan8yS9oV0x+0r4A5n/ehGrVTu/GkewVWdtC92C/+76WsArLBq5R
+ hXbfduEz0UYtxw+VGMAC4OhxRxAC3DPUHVd/Pplf4cGhTOMRrYhdamN1ajYp53EDL0Ik
+ vdC5GiPHd1EyPdSv3UQzSrAEQX4D+APdAMRr4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756031799; x=1756636599;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=y3PAHPPAfQLkr2Ie1Ls4hNGAkXOANN645aNQ692QiV4=;
- b=cCKF7wjr6z116G8+czL2pZn+7x6DxaHdGA05/AwCJBAE7yldms45x5LKLbBkiUomjM
- EPpfNvxIL/QPkN3RmK9xoIUOHmNX1j3BcI6YIZY5Ll8LnO73s8DJTjn3EAdIVr7gyV2I
- 6EklriDdTPz/ewLNfLxQA/+fCs4fupi6XrDXhyZ1B0RXqedMdXdvGuRjgw5CCqDXgF7z
- O8RkiZnRKJRiHkam0u/osHQneZECnpOHhlW+asK1RevaDnCxBVgjyqwyg+vJnc8W5+Hl
- TnwJb5Nd8xa+1ohNk8HWOfg7hktClYOBTMnC1u9eug/G1IXoi3HYzuUrLktt5TFb+EQh
- nrZA==
+ d=1e100.net; s=20230601; t=1756031829; x=1756636629;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xK3dYyxMRFiyrNSP8qAz/hbt7kIZD0cMbZiIU0VMtRU=;
+ b=V+6sk4nebrvmtpMr/pV6YEvdR42kqayqqcOqW+TzQURPuHFmnhtmusLE3ZL1eETPzn
+ LE0GV/z+GsPWQVGY/vrkVfpEq71WnwH7p4WIxrvCXykt1YDGwIgmLr2teaRUgkZAg0jz
+ gRwCmk59HBPnXce4rm947CnO/YhAsaP5kb+fO8gkb0wZh1nEgIFh7WjQ+macwGlWRMqW
+ H/sJITvUTNQkUaRAbtQhqYBWEreIu+onnCQdC8E3XH9fWisC3DXrQ/D+Nt18x3IeHS4m
+ cgNH6TxSa9MYWjCSEKrj5tFxfVvQcSveb4rBl6iQyvgV47xgEYAqBHBV7zG49mOCp/oW
+ 5iqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhc6pVMg9akldedD5yNgdTBTDfw2MESB/dDu4R2TVnskmhUXEmOappQUbiDuVM9wHIc5ocAoY=@lists.denx.de
-X-Gm-Message-State: AOJu0YydYkjES7j41U9eCANJR2GwQiopPyQ4VEmVuVVo+BVzlx9/Cq9v
- WGmrm9IXadv9rZpm89e8Z4q44ZbiO6LaD8/Dy8P7OTYIcZL6DcarhR135+GVOggekeOor7TwBzi
- QQikclZnoSlAZfNzCzzMrW/ycr4uYaVrt66ogn5kcsQ==
-X-Gm-Gg: ASbGncuQeCek7g345iv+MxEazL1OA7UD/SeGZlozMRcjgM/Kf4c2CTymfMQTU+wPkQU
- 0Y5c2XK7dQcUI/RgFKS37NQZdjKOWLtyh03fnFKpaJuiz+44EcqrDqsP9VhKmHt2nxERArjJV2M
- MuKXleBQlw6bw9WluB7ijm5AcH4yEMmW7bwS1euEIrzl3eQoq5IyXwAzLFkPmF1l1yfBXxW3PI1
- LewOOo=
-X-Google-Smtp-Source: AGHT+IFwkgdIlJ+dFy5TuRMKeV0Y57dym1vtA9vqMtKCxE8noPhdNFQlx2gVhCbg4GHTDQyZ3KENPBsKoNExLlLEB88=
-X-Received: by 2002:a17:903:b4f:b0:246:ae6e:e5e4 with SMTP id
- d9443c01a7336-246ae6ee8abmr23964195ad.6.1756031798823; Sun, 24 Aug 2025
- 03:36:38 -0700 (PDT)
+ AJvYcCVWqi6Nbs7t4h/+gxwLgDoxxMyrh+Cirn6+2mGAgV5T50xuhmge3BacRv0IBRxZBkr/6nrSf0I=@lists.denx.de
+X-Gm-Message-State: AOJu0YwI4pBx0qi9g7YRWY2yri/mvjpiRJfpXNpWdRl1vEwFn7bekdVo
+ fbO8K7fxEIuCtXD8jYve4e0vQi8lvZ4sBp7F0H1v+eov01RsERMN8Y+snPe+YQ2SlcOapaIpQBc
+ Z91cpFPJNNmXi46XqXB0yStAq6beQeu6iPJFSWAwlwg==
+X-Gm-Gg: ASbGncskdURw8JksmXtMpJPZlFR4qQO9dBmv/RPodawneo8Ayd/3TiQL6b57+lOXesR
+ DOM6e18+zWhe0OPvYIF/Xr+6MPpAkNB84UC0swLCXjfkyF2lrHO0N26I86qVFiCrP7NJUoX412I
+ sCcUJu6+qf8KUJibAQ5eUq8rRDVNUeqNrPiiZQZ5rCN6Fr84OQFpsdk3NOTbxH2lFdLvA+rS6Gv
+ bkdeD0=
+X-Google-Smtp-Source: AGHT+IElIzkY73bh1ok7soxpZXYgdTMW4BSNlSeBZ55fQHJZUVJMfv0WsXji17cELVD64uJKaDiS+iAMYerkh41Vk38=
+X-Received: by 2002:a17:90b:2810:b0:325:4c48:af54 with SMTP id
+ 98e67ed59e1d1-3254c48af7fmr6141572a91.11.1756031828815; Sun, 24 Aug 2025
+ 03:37:08 -0700 (PDT)
 MIME-Version: 1.0
+References: <20250814180647.1805196-1-dregan@broadcom.com>
+In-Reply-To: <20250814180647.1805196-1-dregan@broadcom.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 24 Aug 2025 12:36:27 +0200
-X-Gm-Features: Ac12FXyGVXFZ4KBCYtXx9jOds4m2jJm13Y2dhgBy5OdoogNFY2bLsZAO6OQj_jc
-Message-ID: <CAOf5uwn3zo=yXVc=04Y2hcFZaEv2UTkPUN4SpPx9LeJ8DTx_Vw@mail.gmail.com>
-Subject: Pull request for u-boot-nand-23082025
-To: Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- U-Boot-Denx <u-boot@lists.denx.de>
+Date: Sun, 24 Aug 2025 12:36:57 +0200
+X-Gm-Features: Ac12FXyQoQVlFyWIryKqKLeW3hY47CgmCZYACEB-0Nrn3Nw-BNrzAVVrfonUJlA
+Message-ID: <CAOf5uw=FF=fK1AqvoBhZUN0R2zy7sqRLUWZn=RvBat_W3zerhQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] cmd: nand: various updates
+To: david regan <dregan@broadcom.com>
+Cc: dregan@mail.com, Quentin Schulz <quentin.schulz@cherry.de>, 
+ William Zhang <william.zhang@broadcom.com>,
+ Anand Gore <anand.gore@broadcom.com>, 
+ Tom Rini <trini@konsulko.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,48 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 94e690c44a03959c39f0f5a44a9b89c851af3b60:
+Hi
 
-  Merge patch series "bootstd: rauc: Fix segfault when scanning device with
-unsupported layout" (2025-08-21 15:05:15 -0600)
+On Thu, Aug 14, 2025 at 8:07=E2=80=AFPM david regan <dregan@broadcom.com> w=
+rote:
 
-are available in the Git repository at:
+> Bug fix of name changed OOB placement option
+> Change ambiguous 'count' to 'pages' for read/write raw
+> nand dump display update to show ASCII characters and data offset
+>   into NAND
+> Add option to nand dump with ECC corrected data
+> ---
+>  v2: applied MTD_OOB_AUTO to MTD_OPS_AUTO_OOB fix to env/nand.c
+>      per Quentin request & added Fixes tag
+>
+> david regan (4):
+>   cmd: nand: bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB
+>   cmd: nand: more descriptive help info
+>   cmd: nand: nand dump display update
+>   cmd: nand: nand dump with ecc option
+>
+>  cmd/nand.c | 56 +++++++++++++++++++++++++++---------------------------
+>  env/nand.c |  2 +-
+>  2 files changed, 29 insertions(+), 29 deletions(-)
+>
+> --
+> 2.43.5
+>
+>
+Applied thanks
 
-  https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
-u-boot-nand-23082025
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-for you to fetch changes up to 6b156c62ced25d3f8aed64c81e471353b56d0f2c:
-
-  mtd: nand: Do not dereference before NULL check (2025-08-23 16:37:26
-+0200)
-
-This series address issues found by Andrew Goodbody and David Regan. Add a
-new
-benchmark tool from Miguel and small feature
-
-The patches pass the pipeline CI:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/27449
-
-----------------------------------------------------------------
-Andrew Goodbody (1):
-      mtd: nand: Do not dereference before NULL check
-
-Dinesh Maniyam (1):
-      mtd: nand: cadence: Fix device assignment to avoid warm reset issue
-
-Miquel Raynal (1):
-      cmd: mtd: Enable speed benchmarking
-
-david regan (4):
-      cmd: nand: bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB
-      cmd: nand: more descriptive help info
-      cmd: nand: nand dump display update
-      cmd: nand: nand dump with ecc option
-
- cmd/mtd.c                           | 15 +++++++++-
- cmd/nand.c                          | 56
-++++++++++++++++++-------------------
- drivers/mtd/nand/core.c             |  7 +++--
- drivers/mtd/nand/raw/cadence_nand.c |  2 +-
- env/nand.c                          |  2 +-
- 5 files changed, 49 insertions(+), 33 deletions(-)
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
