@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFFA6CA0EFC
-	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 10:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B2C2CA0EEB
+	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 10:39:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46741828A2;
-	Sun, 24 Aug 2025 12:38:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E190828A2;
+	Sun, 24 Aug 2025 12:38:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="PTEQpqRh";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="nA2TyStm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE46F82DA1; Sun, 24 Aug 2025 12:38:06 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 1C1BF83020; Sun, 24 Aug 2025 12:38:57 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3730800C1
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 12:38:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FDAC800C1
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 12:38:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-32326e67c95so3805612a91.3
- for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 03:38:03 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2460757107bso30444825ad.2
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 03:38:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1756031882; x=1756636682;
+ d=amarulasolutions.com; s=google; t=1756031933; x=1756636733;
  darn=lists.denx.de; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9JS6lPobsOorp9rmOzkb/yKoYBSKoqx/mv4lY5/TKGY=;
- b=PTEQpqRh3P3MOO1BlPdVEC6ijoYfOqkhvg8oorOMk/tp2RtnQgwor1y9/ISeFWPlUR
- QRempYTd192vjosVA376753QV4LiCDkIH4gK6iBT43UIwwkmePNJZByWsXFl13VBRYxp
- mHTYd3OyIEIgpLWScOWGEDyBy6Qkny4vWG9Fs=
+ bh=4xG9fE1lwVf+4LP4t33FpIM+S8mwlJJT9y/NhXVzP3w=;
+ b=nA2TyStmWkWUW2T+vRo8KRrj7mcrSBg6V2ZVHda7BYLo2uP5+ooHerlWhhPiozrdtf
+ 8JKPDmUDyHoWnUiZJAMcYq/UniYbKqshu7y46dHgdOjQYCX4nrdK1y8rwJXzbohPEV2N
+ KbBtHkosvlwkkXR5+UhSEAyu2CrgRO+FAkRvY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756031882; x=1756636682;
+ d=1e100.net; s=20230601; t=1756031933; x=1756636733;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9JS6lPobsOorp9rmOzkb/yKoYBSKoqx/mv4lY5/TKGY=;
- b=pO7aLYvYc2E9dMPCm9MZRd5zK4ba6q4RJzThbjiylZ+MhCL0f3KeByQfOYkXYcORXB
- pr1Ptwlz/hy0HQ+MjjrIQAnxBu+TUcqbWZeGy38q/B4e9wJU4PeLcX5zv/RFYvz++tUp
- JbeDfIZyftULtDnA/Omw+oUQnnht2I/tBbSSQ5hTtCPZ1Fe254OIQDlyDZBsQx5LmyPD
- MvFPgqQ7EjCgK2XF+Wa97+fWglmLeu5om/pkCbTrwzFg5qNG2i1wr1JxRU2cI8p/DOXm
- HcGcFqodz8GW5sKcEKxvHmAEzyYw/3aab06lImfYIuaQe37BiwPvucl27YCxJtn/4UWB
- KJcw==
+ bh=4xG9fE1lwVf+4LP4t33FpIM+S8mwlJJT9y/NhXVzP3w=;
+ b=qAWrhIEWcOc1khmp0qqAG8LGNn9MVPgdZ2ZbNIa0OQhhv3g0/r2fb4inigOrs0I4i7
+ opXHc+613c6Lyyv1+8EEjpkVm38x72obs0RyJMTeVrGVU4qn+t21BpmOtKP9K3gLEhQw
+ ga9QP/MmJnte+evXkqA+20+xGZqOAa/ftL7xG+YB+majncnPztpg18nzELNDoA5zWiAW
+ J/NCskHQ0zxTFyLR/aPaItHyHhhx5LCoSrxRcYTYq0UWAhm2aYdM56TUc4VmmNGNgI51
+ MAZlDzlFPAlrxcIkCgzu6aCx4e95/uko5pifpQ6VZrJc81ndehobAd++7u+EXZKgZBCJ
+ hj/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWMRr/xSsXRjzJ9UWNqojC67ahbC00h2BHqdn5RyVJG00T5U4nMnUwweKKDnR+8wNWZBJLjZ/c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOXGg3xs9CitzG+lcHIIEH9fogsAAFy9ezWg5rVnPqolKvUt+k
- ZO6dfEywoTSEzDouTlD8SnWN+59ycCxAKCvTCsBpp+BcXQ4vx8r6NP99y5ZE4B0UnXllYnhossx
- gW2Se35MCAwTHfjzf3dA1d4P7Az7nLNxT9s6f+jdk0A==
-X-Gm-Gg: ASbGncvM1kr2IfHjR542ybGXpaypYp8CaTraw75SvmIjcuUMYYSf034wS5bT7uUHrIV
- 2WoFU4TsFYClPR4xxAPJN3k6DupmR8OBFpemQN2MjSoPJFgtLan/5ba1mhZTTGLw4XkM7M+fqHJ
- KyWMJrPnfgmb+XP2/Z5WEWEYouTZvspn6vEXpb5Uu5DgRIK8XDjgsUeDfNp5qlnDXTVqbcSipO3
- X2qfWs=
-X-Google-Smtp-Source: AGHT+IFzFyeihHJAN/51o4tbOm7qF9uxZCThkOqlKTJp3L1RX2CjdVjpVM2DvhumrFeCacls5qpb2DnzUaQMVbtEaWw=
-X-Received: by 2002:a17:90b:1642:b0:31f:2ef4:bc04 with SMTP id
- 98e67ed59e1d1-32515e4f2d2mr11351320a91.14.1756031882365; Sun, 24 Aug 2025
- 03:38:02 -0700 (PDT)
+ AJvYcCXFsc63afaYSIUOyHrYu1IDU5YsSJvp4QEaTLvxwgbPfRGlRuvyCn3MNffzKQLi55PVbe95IPg=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywq6SVMVlWAutDnX2xgbmME3Dpe3WgMKS3IgJOIkeAZ7dEreN0N
+ YKvxtJhEvf2OfRgARZjqLWHCyI7iPqfxb0J5RBX1IKpObQ0W61N+8i5MybtnvU4nNC/dSl4zE0Q
+ BRHkFcDWtklT5qZC/ycmgsE7DEdcvhFyr688ktvmBxQ==
+X-Gm-Gg: ASbGncslP8G6w/ln9N5P5YSm6Xm1se4fNF9aKYnxjPBcZ2wgFNwu5+A5ytF0U/i+Sb0
+ VCLx5FVE8BNi5JaqijhCrmNMkr7XXb0cALiwO2f00HZDJFsIpoGB0M3XHbNXGvo2jwKhT6+PyTG
+ ywiELRDqsWeOoG/hfC1+Weoa9X4PJdkRiz7KrLLPX8kmubLp6cBUaQOE1a5mVzWdoBQN/hfTkda
+ ZZ0vuQ=
+X-Google-Smtp-Source: AGHT+IEY8qirDXi1j6bYoKu8uvMIi/XciUpWapFHYUMbHAbzfyBrvRDGJNN24ssyQrLIAe7ZbFXMVHXuwLtkMLMx5UE=
+X-Received: by 2002:a17:903:8c6:b0:240:92f9:7b85 with SMTP id
+ d9443c01a7336-2462eb19bc8mr113018975ad.0.1756031932871; Sun, 24 Aug 2025
+ 03:38:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250804092137.404647-1-miquel.raynal@bootlin.com>
- <CAOf5uw=DzXH1g4=hVzSbQrjy12zuNO1p9N+UUZYrOi2xkowRdg@mail.gmail.com>
-In-Reply-To: <CAOf5uw=DzXH1g4=hVzSbQrjy12zuNO1p9N+UUZYrOi2xkowRdg@mail.gmail.com>
+References: <20250731-nand_core-v1-1-b4d16bc29169@linaro.org>
+In-Reply-To: <20250731-nand_core-v1-1-b4d16bc29169@linaro.org>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 24 Aug 2025 12:37:49 +0200
-X-Gm-Features: Ac12FXyXj8rWzXOc2Q9DNj80BuFbxFJ_UXbkX5-gMWEuYKhuuGrV6yOlhH6MJ2A
-Message-ID: <CAOf5uwno76aLnFEUaiE69cjd+8TjFNseaboVxjBWTySJKnVqoA@mail.gmail.com>
-Subject: Re: [PATCH v2] cmd: mtd: Enable speed benchmarking
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de, 
- Steam Lin <stlin2@winbond.com>
+Date: Sun, 24 Aug 2025 12:38:41 +0200
+X-Gm-Features: Ac12FXyJAELGHHxbYXGfhh_pehgg6ep1N6B08T0t5C-RO8T0z4ELN0R71pBc7NA
+Message-ID: <CAOf5uw=J9BMGbfxWhE8=oYkR+LuNjct72+FsJ1TkpepNQ3mAJg@mail.gmail.com>
+Subject: Re: [PATCH] mtd: nand: Do not dereference before NULL check
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -99,130 +94,61 @@ X-Virus-Status: Clean
 
 Hi
 
-On Mon, Aug 4, 2025 at 11:22=E2=80=AFAM Michael Nazzareno Trimarchi <
-michael@amarulasolutions.com> wrote:
+On Thu, Jul 31, 2025 at 6:21=E2=80=AFPM Andrew Goodbody <andrew.goodbody@li=
+naro.org>
+wrote:
 
-> Hi
+> In nanddev_init mtd and memorg are assigned values that dereference nand
+> but this happens before a NULL check for nand. Move the assignments
+> after the NULL check.
 >
-> On Mon, Aug 4, 2025 at 11:21=E2=80=AFAM Miquel Raynal <miquel.raynal@boot=
-lin.com>
-> wrote:
+> This issue was found by Smatch.
 >
->> Linux features a flash_speed speed test from the mtd-utils suite, U-Boot
->> does not. Benchmarks are useful for speed improvement developments as
->> well as troubleshooting or regression testing sometimes.
->>
->> Enable a benchmark option to enable this feature.
->>
->> Example of output on a Nuvoton platform:
->>
->> MA35D1> mtd read nor0 0x81000000 0 0x10000
->> Reading 65536 byte(s) at offset 0x00000000
->> MA35D1> mtd read.benchmark nor0 0x81000000 0 0x10000
->> Reading 65536 byte(s) at offset 0x00000000
->> Read speed: 3752kiB/s
->>
->> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
->> ---
->> Changes in v2:
->> * Use an unsigned long as advised by Michael for accounting time.
->> ---
->>  cmd/mtd.c | 15 ++++++++++++++-
->>  1 file changed, 14 insertions(+), 1 deletion(-)
->>
->> diff --git a/cmd/mtd.c b/cmd/mtd.c
->> index c25997cfb246..2520b89eed2c 100644
->> --- a/cmd/mtd.c
->> +++ b/cmd/mtd.c
->> @@ -17,6 +17,7 @@
->>  #include <malloc.h>
->>  #include <mapmem.h>
->>  #include <mtd.h>
->> +#include <time.h>
->>  #include <dm/devres.h>
->>  #include <linux/err.h>
->>
->> @@ -466,8 +467,9 @@ static int mtd_special_write_oob(struct mtd_info
->> *mtd, u64 off,
->>  static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
->>                      char *const argv[])
->>  {
->> -       bool dump, read, raw, woob, write_empty_pages, has_pages =3D fal=
-se;
->> +       bool dump, read, raw, woob, benchmark, write_empty_pages,
->> has_pages =3D false;
->>         u64 start_off, off, len, remaining, default_len;
->> +       unsigned long bench_start, bench_end;
->>         struct mtd_oob_ops io_op =3D {};
->>         uint user_addr =3D 0, npages;
->>         const char *cmd =3D argv[0];
->> @@ -490,6 +492,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
-,
->> int argc,
->>         read =3D dump || !strncmp(cmd, "read", 4);
->>         raw =3D strstr(cmd, ".raw");
->>         woob =3D strstr(cmd, ".oob");
->> +       benchmark =3D strstr(cmd, ".benchmark");
->>         write_empty_pages =3D !has_pages || strstr(cmd, ".dontskipff");
->>
->>         argc -=3D 2;
->> @@ -559,6 +562,9 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
-,
->> int argc,
->>
->>         led_activity_blink();
->>
->> +       if (benchmark)
->> +               bench_start =3D timer_get_us();
->> +
->>         /* Loop over the pages to do the actual read/write */
->>         while (remaining) {
->>                 /* Skip the block if it is bad */
->> @@ -586,6 +592,13 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int
->> flag, int argc,
->>                 io_op.oobbuf +=3D io_op.oobretlen;
->>         }
->>
->> +       if (benchmark && bench_start) {
->> +               bench_end =3D timer_get_us();
->> +               printf("%s speed: %lukiB/s\n",
->> +                      read ? "Read" : "Write",
->> +                      ((io_op.len * 1000000) / (bench_end -
->> bench_start)) / 1024);
->> +       }
->> +
->>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  drivers/mtd/nand/core.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 >
-> Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+> diff --git a/drivers/mtd/nand/core.c b/drivers/mtd/nand/core.c
+> index 472ad0bdefb..01ff6e3befa 100644
+> --- a/drivers/mtd/nand/core.c
+> +++ b/drivers/mtd/nand/core.c
+> @@ -201,8 +201,8 @@ EXPORT_SYMBOL_GPL(nanddev_mtd_erase);
+>  int nanddev_init(struct nand_device *nand, const struct nand_ops *ops,
+>                  struct module *owner)
+>  {
+> -       struct mtd_info *mtd =3D nanddev_to_mtd(nand);
+> -       struct nand_memory_organization *memorg =3D nanddev_get_memorg(na=
+nd);
+> +       struct mtd_info *mtd;
+> +       struct nand_memory_organization *memorg;
 >
+>         if (!nand || !ops)
+>                 return -EINVAL;
+> @@ -210,6 +210,9 @@ int nanddev_init(struct nand_device *nand, const
+> struct nand_ops *ops,
+>         if (!ops->erase || !ops->markbad || !ops->isbad)
+>                 return -EINVAL;
 >
->>         led_activity_off();
->>
->>         if (!ret && dump)
->> --
->> 2.50.1
->>
->>
+> +       mtd =3D nanddev_to_mtd(nand);
+> +       memorg =3D nanddev_get_memorg(nand);
+> +
+>         if (!memorg->bits_per_cell || !memorg->pagesize ||
+>             !memorg->pages_per_eraseblock || !memorg->eraseblocks_per_lun
+> ||
+>             !memorg->planes_per_lun || !memorg->luns_per_target ||
+>
+> ---
+> base-commit: 79f3e77133bd7248e4579827effc13f97a32a8a8
+> change-id: 20250731-nand_core-399525609ec5
+>
+> Best regards,
+> --
+> Andrew Goodbody <andrew.goodbody@linaro.org>
 >
 >
 Applied thanks
-
 Michael
-
-> --
-> Michael Nazzareno Trimarchi
-> Co-Founder & Chief Executive Officer
-> M. +39 347 913 2170
-> michael@amarulasolutions.com
-> __________________________________
->
-> Amarula Solutions BV
-> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> T. +31 (0)85 111 9172
-> info@amarulasolutions.com
-> www.amarulasolutions.com
->
-
 
 --=20
 Michael Nazzareno Trimarchi
