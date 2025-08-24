@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA794CA0EFA
-	for <u-boot@archiver.kernel.org>; Sat, 23 Aug 2025 21:15:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8DFCA0EFC
+	for <u-boot@archiver.kernel.org>; Sun, 24 Aug 2025 08:02:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 422CE829E7;
-	Sat, 23 Aug 2025 23:14:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A954582998;
+	Sun, 24 Aug 2025 10:02:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kHPPvd74";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sG6nkBX4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B075E80077; Sat, 23 Aug 2025 23:14:50 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 979D180EE5
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 23:14:48 +0200 (CEST)
+ id E8FB582AE1; Sun, 24 Aug 2025 10:02:41 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 02789828A2
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 10:02:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3e67d83ee4bso16183495ab.1
- for <u-boot@lists.denx.de>; Sat, 23 Aug 2025 14:14:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1755983687; x=1756588487; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YKhniBguSpNdchSBatYnJvd6CjO+ms7aRrHvLiHpcek=;
- b=kHPPvd74v5I2LyGy15/R6NTdzWze7MfpK7mYSTC5mHDcHGLXPxBhjUOdwV8DhuDYtG
- LsCoIwJTsGbL00Q6/YPsVbwqbm+vDfmhPyEqpeImUDT+NapfKMXZO4s2G9uGLGZ/IGX5
- BLiHRoQ6e0mZtnB9CtgDhLDSseGawwJdiP8LM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755983687; x=1756588487;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YKhniBguSpNdchSBatYnJvd6CjO+ms7aRrHvLiHpcek=;
- b=KsNdtPUreBg4Rgx2P2y6lIFxm2l6DRdfRTVZwpGFN8hyB2FbthCO0iEZvndFaP7m0t
- 6vAIdxHS/M2WYcTxAPep/LnSKVuaVLUE7U7KP/QdmU7MBoTJ6q1sVVZiWHvGohy11oMt
- alhQ2DRgLTmDGC/rgmy2CttpWGZO3Wek/CX4aEk+di8A2lshusHlGQ/6GCsQLNKVfOA+
- W2ArdaeNcI0N5EjWT+vmK0t8XaH6uQG6QDeoZPgNU+/GCCkZElUdTC/CqRVBGWmTJgAW
- Q+HEtU8kKj115i7RwL2SEgy6nRTMUcly6aG204N3Lc9ChhlhMYQ3s95fWxOo5bITev9j
- EpQA==
-X-Gm-Message-State: AOJu0YyrCHO5n2rKRQXRZJNjYenJZuyiY/adH+PajeG1aBGo1wdF2FXG
- trkAalDjObtWwL9BcWoYwfsL/IaIgYZ0/Jyr1gVKgGdD0p+GOg6gkPVB2ahAmKmKFGNVId9yFD0
- tOgph+xk=
-X-Gm-Gg: ASbGncs6Sue2IXJJdmWm5irf4FHN3rDuhJOAzb4D1dlFabn8tb+DrzgrLM7HPJYcGeS
- Yc/f/qtbXDopWkJyGvN+WevtNbRAS++GzY9YMOG9ST1ZW7ec8w2oFVlWqM+6RgbGcq5Te+cjSt6
- uY4TZzT0IXiP/GdxqeWs+Q1Il98wtH2Yg3F0f1veCZ++4d4Rxulgiev9Jgu7xIQN7M+3BExTqup
- RknwATFBIrHIKnWNkCf8c0xdJaVR1UM7ic5GM7Ssqhvs0L/fznFrkfq0E/IK/TjrakhtJq4bI/i
- uaPQKrE2ZWHY0MLPk90tYVx5sysbT07PuzgbCqon6B+phDBelSlyYxoxQzUdD2Z4Pwwl5xfCgoQ
- oAskRBTTaBTMZLmsQyjyjuwXVyXvw5KX4/R4OWPBiZFD4YUBO3/82Pak=
-X-Google-Smtp-Source: AGHT+IFBRs7RDxJG/rA86N6epmwKmz0MaZvk9E4qpvM33ipAaXDMWg1Au5ANFfE7cY3+vXtvwonF1g==
-X-Received: by 2002:a05:6e02:152d:b0:3e8:b64c:105f with SMTP id
- e9e14a558f8ab-3e91f93e0e9mr113716025ab.5.1755983687307; 
- Sat, 23 Aug 2025 14:14:47 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3ea4c28624bsm21423305ab.18.2025.08.23.14.14.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Aug 2025 14:14:46 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Tim Harvey <tharvey@gateworks.com>
-In-Reply-To: <20250823190249.352162-1-marek.vasut+usb@mailbox.org>
-References: <20250823190249.352162-1-marek.vasut+usb@mailbox.org>
-Subject: Re: [PULL] u-boot-usb/master
-Message-Id: <175598368635.1246629.14102870857675462949.b4-ty@konsulko.com>
-Date: Sat, 23 Aug 2025 15:14:46 -0600
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57O82UOU1043191;
+ Sun, 24 Aug 2025 03:02:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756022550;
+ bh=0nz0XorugURIepI9Kj2TGcu9kxXv0pNPqMUVlLQKGfE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=sG6nkBX4WbWbOd5u717OOWS0cl0oxH9/tsw9PFozMW27KqYGMViPTCjKqkTDtknqc
+ Z4rGeLymr5tmD3LY6CHEB60gTiLTS5ypWQtmaf73AJOz7jSLcM3FccVq7iamZgnSkf
+ ej3iMVDqY4gf5p2itueFWMTc5xVtVNknF2O3dUZg=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57O82UFu689535
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Sun, 24 Aug 2025 03:02:30 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Sun, 24
+ Aug 2025 03:02:29 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Sun, 24 Aug 2025 03:02:30 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [172.24.231.84])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57O82SNq2135734;
+ Sun, 24 Aug 2025 03:02:29 -0500
+Date: Sun, 24 Aug 2025 13:32:28 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>, "vigneshr@ti.com"
+ <vigneshr@ti.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] usb: cdns3: Do not access memory after free
+Message-ID: <6e5ccaaa-3ced-440a-abe7-439ef6e7f1db@ti.com>
+References: <20250813-usb_cdns3-v1-1-3779912fe660@linaro.org>
+ <b83f79a7-66e9-43b9-859e-ebb69e4d536b@nabladev.com>
+ <0a4f4611-8858-4a38-be70-bf0947d689c1@linaro.org>
+ <84535d73-7496-4fd3-8ecb-ac6830974d51@mailbox.org>
+ <e2257066-ee97-44ff-9338-cec69f8c7f03@ti.com>
+ <2ff9412a-795c-422b-9be4-576e64a7f395@mailbox.org>
+ <63d6759a-a8be-41d6-8870-72bdc3856c05@ti.com>
+ <bf35a459-29dc-48f8-a353-7f75493e959c@mailbox.org>
+ <a6bb77e3-2702-469d-a684-0dce753e78b0@ti.com>
+ <24dab90e-b15a-49d6-acbb-3302ae34ac1a@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <24dab90e-b15a-49d6-acbb-3302ae34ac1a@mailbox.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +90,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 23 Aug 2025 21:02:35 +0200, Marek Vasut wrote:
-
-> The following changes since commit 94e690c44a03959c39f0f5a44a9b89c851af3b60:
+On Sat, Aug 23, 2025 at 02:21:18PM +0200, Marek Vasut wrote:
+> On 8/23/25 4:07 AM, Siddharth Vadapalli wrote:
 > 
->   Merge patch series "bootstd: rauc: Fix segfault when scanning device with unsupported layout" (2025-08-21 15:05:15 -0600)
+> Hi,
 > 
-> are available in the Git repository at:
-> 
->   git://source.denx.de/u-boot-usb.git master
-> 
-> [...]
+> > > > > > I was planning to test this patch but the change being made is only
+> > > > > > applicable to Controller Versions:
+> > > > > > 	#define DEV_VER_NXP_V1		0x00024502
+> > > > > > 	#define DEV_VER_TI_V1		0x00024509
+> > > > > > and not to:
+> > > > > > 	#define DEV_VER_V2		0x0002450C
+> > > > > > 	#define DEV_VER_V3		0x0002450d
+> > > > > > 
+> > > > > > Since I don't have an SoC and a Board with DEV_VER_TI_V1, I cannot test
+> > > > > > it. However, the change looks correct to me.
+> > > > > > 
+> > > > > > Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> > > > > The change does indeed look correct.
+> > > > > 
+> > > > > Do you know who might still have that board and could test ? (and which
+> > > > > board/soc is that) ?
+> > > > 
+> > > > None of the boards that I have worked with have a DEV_VER_TI_V1 version
+> > > > of the controller. I also tried to use the Linux device-tree to check if
+> > > > I could identify the SoC/board but I was unable to do so.
+> > > Do you know which SoC is V2 and V3 ?
+> > 
+> > I spent more time on this and found out that J721E SR 1.0 has the
+> > controller with DEV_VER_TI_V1 version but other revisions of J721E as
+> > well as all of the following SoCs have DEV_VER_V3 version of the
+> > controller:
+> > AM64, AM68, AM69, J7200, J721S2, J722S, J742S2 and J784S4.
+> > 
+> > I will try to find an SR 1.0 J721E SoC and test the patch on it and
+> > share the results here.
+> This is awesome, thank you !
 
-Merged into u-boot/master, thanks!
+I was able to get an SR 1.0 J721E SoC and also the J721E
+Common-Processor-Board for testing the patch.
 
--- 
-Tom
+Enabling debug info in the cdns3/gadget.c driver, I see:
+	cdns-usb3-peripheral usb@6000000: Device Controller version: 00024509
+	cdns-usb3-peripheral usb@6000000: USB Capabilities:: 09203324
+	cdns-usb3-peripheral usb@6000000: On-Chip memory cnfiguration: 00000c34
+which confirms the Controller Version.
 
+However, the code changed by the current patch is only affecting the
+execution of code associated with Workaround 2 which is described in
+detail in the driver. I am summarizing it here for your reference:
 
+Issue:
+	Controller for OUT endpoints has shared on-chip buffers for all
+	incoming packets. The buffer acts as a FIFO, due to which,
+	missing a DMA descriptor for one packet will block subsequent
+	transfers/packets meant for other Endpoints that were queued.
+
+Workaround:
+	If the Endpoint Status register indicates a Descriptor Miss,
+	rearm the DMA transfer to complete the missed transfer.
+
+In order to test the patch, I used USBACM for STDIO/STDOUT to check if I
+could trigger the descriptor miss workaround. The command I ran was:
+setenv stdio usbacm; setenv stdout usbacm;
+/dev/ttyACM0 showed up on my PC and I was also able to access the U-Boot
+prompt via ACM0. While it is functional, I didn't see the code
+associated with the workaround being triggered. Reviewing the driver
+again, I identified that the workaround is being disabled very early on
+within "cdns3_wa2_gadget_ep_queue()" with the comment stating:
+
+	 * If transfer was queued before DESCMISS appear than we
+	 * can disable handling of DESCMISS interrupt. Driver assumes that it
+	 * can disable special treatment for this endpoint.
+
+Given the above, it doesn't seem easy to recreate the issue since I
+would have to trigger a descriptor miss event prior to the very first
+USB transfer for the Endpoint. Please let me know if you have any
+suggestions for speeding up testing.
+
+Regards,
+Siddharth.
