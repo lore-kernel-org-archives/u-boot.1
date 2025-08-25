@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 738ABCA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 18:34:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FB6DC8303F
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 18:34:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E6A7830B5;
-	Mon, 25 Aug 2025 20:34:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E710882DA1;
+	Mon, 25 Aug 2025 20:34:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wb0wTAjb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="npudBUI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73E45830B4; Mon, 25 Aug 2025 20:34:45 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 61A23830E4; Mon, 25 Aug 2025 20:34:47 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5873B82C84
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 20:34:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25E7D83020
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 20:34:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-30cce5cb708so3214399fac.0
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:34:43 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-31533486f07so533656fac.0
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:34:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756146882; x=1756751682; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1756146884; x=1756751684; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Lfb5Q5rpGrPBPJ8XggogQ+i4PU5Ufj50pzAac+fI0lU=;
- b=Wb0wTAjb5WHY2FeX+FI4SsrpZLthRJEqIrI/CybNWny6NO8bzm8xo5fxpqCVFGsjol
- yg/FDHPSfcxjY4gj+Wr6Q0N/y6py5xlMpfw3EIyB0pqkJilxGNyCNmbTNPb/3B4p9tkE
- 4yoZC9OrOCO+EeUUHlk2K/Dv9pbM5/KO+3qSE=
+ bh=zB2wqTW4wGlqt+YI5IRW9BoStGtpMTyflPRNnbsV2+8=;
+ b=npudBUI44duZ5PA3MzjLvm1ZKgMg5WjL1WU0LRyMC4V2FznBlh/L5LSTK7pgs6Jacr
+ YTd21Md3uhXljKGb+P8AZxScP1CggA//cvT9cJs28mGk4y+2rSqg8bNURwB6zpVxRQan
+ 6HXacwDZgQdHBWHswH8hCVHAKwb0A/q3T1g6c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756146882; x=1756751682;
+ d=1e100.net; s=20230601; t=1756146884; x=1756751684;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Lfb5Q5rpGrPBPJ8XggogQ+i4PU5Ufj50pzAac+fI0lU=;
- b=wt2DtZ4hEVpfD+CQZli093ehKRCfgnCzIW7Uph0dnvEUbZY5d9/6FKIPkYnWrEd6EU
- ck9ZWPwPfYJmTRtSwD8KJpc7MRGPT2Z84Qz4RZPTgbbxYUwpxIp40hKc8bhP/nr0l60i
- ndYmhqNADV/NTJrL+8kYP/Z9K6eCAn/lRN31kYSAG/OhQc3FbRu9yCVs46SXd6/WzArY
- +AgpXVfzNcE9MPsXeTqdfju6FAtYEhf1CwKpF6FpoZZfxqI7FSBzMmGuwsUVWZjYyQdI
- VNyqeQmimne27BtPzcjRNZdENxj9Jdgw/o7DLjTfrqdappTRNfo/6ahTdi8PikfA9JYz
- 5ORA==
-X-Gm-Message-State: AOJu0YzTzIIQOYEgapWnAeAGByPW6E3ru5f3mycCQ+AMTor7WghlLVYm
- KS/5/NJkmL+hvY5MgyHDJ2x2ofqARTLhUU57uRbHOoNn2Yyhi28Xka0HQXBA4l6aRqw=
-X-Gm-Gg: ASbGncuDOj7S7Ja3+yMlAu46SFRmOk1tOu5SFQlSSsFMkiyl40VQJCly93Jff0Sa425
- naWG+6U6uh3NynhNXhih7BbIRwzwMBb0+CZzrgm2UX44AWRBtT7Nm9onB0myZc2p3edaJuz7RUO
- +S8lI4xY8fbDs611KGGwqURRolLJDahSfrUoVQm7Uj1+ShKzXBsR3tqWuQVxVcPd8JACv23exme
- OvOM+vi6X1BvBBu/adQocYTzuuXqCmj/GcoFz2YwLvFBQaYTg9er3Rb4g9MuznlYpy50R9BAmCz
- QE8TquN/3UgOcDVBsLWqGVYHLExxWhLwBQ4pO7KhvgXuTN8mwLWckuDnRJ/oS/czfvPpcr4onLH
- t6MPPdjpqcjErMv6dQ4CQM0EorMjzMVruuLUd2v5i5A3WtYnAuDyd+cE=
-X-Google-Smtp-Source: AGHT+IF8ezO+TECdqDW07Qh4+DalfadRG/jR+FMxnz3+oPUWX4QSBQFxjHMoJ/GOyk0vvS/H7dfzVA==
-X-Received: by 2002:a05:6870:8990:b0:30b:7d90:1061 with SMTP id
- 586e51a60fabf-314dcb54640mr7482901fac.4.1756146881872; 
- Mon, 25 Aug 2025 11:34:41 -0700 (PDT)
+ bh=zB2wqTW4wGlqt+YI5IRW9BoStGtpMTyflPRNnbsV2+8=;
+ b=lrxuOXcyAqogfNdV98G91OblgfIbZuQff8z3xIsCV13yTxxc+VYxn14lwPGRuhVNi1
+ GAW5Cz/Ab6z7WUIKldvyE2C2TRlKqDkh59Rvozbt+l7OOq+3+um0mDiuaCbshb4LTs9Q
+ Cl8QkdFzkwXhYr5KXb2KuxYNBypPGWCGGz48B7FvKp0gsLhao2DhYiKiILyo6OexfGJ2
+ 7JHWTnG+qNyo1/Om7wLrAYHRqAjdRsRZPNKtQBAo4o9SUcRAjX2rzVzzCp/9w5cU4vzt
+ FI47bFmHWrgbOnAwlGa++kM2c2VoR+IzCSgMAkBhtWEDPNF3o/RXl1HDNk89W2Cq79yj
+ QVSw==
+X-Gm-Message-State: AOJu0YxNQ1VI7Eg8mkGdc56GbctCxfsozeBMr4WuOsbB5EnJskBH7i84
+ ipFV6Vp54CYXNrlu6fsHAIr0POmFxdBFkgcGOvxlSovtkY/poCcRd38oCH5LV+LQrhq5zKWW459
+ /MpKMEaQ=
+X-Gm-Gg: ASbGncuceoNSuUF5zqxaPcsVm+iu01uuUsFlTW39JRDnmpWbsMYq/TswuGW9ZVuqRaP
+ BkybHlcvs1LY/IIFVKZFTPEYJKdnLbXPFhKttYkqwjy0P+mhOhQ8poWtKqktT7CBKf53cFkb5xL
+ 6f7UxSMKAWzyiKr13nf5eS3MC50tQG7fraIbK55RPQpzIWSlIUmPWcuCoM7sXIGTCMj+oIk2nYC
+ p3fjRfSsM2n8a7ukynlXd++Z9AmA/h0AK/h/dxKD56IMqot+ydnHGQCMiKfvAneluZ1JLxP4FMm
+ RCLN356jGuqN0JYLgq/lHqaEbrTXtoCZMgBwmbDa+IEIWrldQRyYDXtG1jDi9sGQj2iwtmIkQ3o
+ DN4rpQbF75+oK7zElTu1RWs1j4UxGslrDg8cAJzotqzv+b05HQcLMeuk=
+X-Google-Smtp-Source: AGHT+IE1XdwvY8hvILmROTKJnv/v81Qz6NcMJqNRR90Vq52zrEPqaFJq/d/IO5MIVPVszFDv8bcrsA==
+X-Received: by 2002:a05:6870:e997:b0:30b:b618:2cb3 with SMTP id
+ 586e51a60fabf-315439130eamr321437fac.8.1756146883863; 
+ Mon, 25 Aug 2025 11:34:43 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-314f79bbcfdsm1931051fac.7.2025.08.25.11.34.40
+ 586e51a60fabf-314f79bbcfdsm1931051fac.7.2025.08.25.11.34.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 11:34:40 -0700 (PDT)
+ Mon, 25 Aug 2025 11:34:42 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-In-Reply-To: <5fc42e68-9fb1-40d0-8765-afe3f5c8f652@monstr.eu>
-References: <5fc42e68-9fb1-40d0-8765-afe3f5c8f652@monstr.eu>
-Subject: Re: [GIT PULL] AMD/Xilinx changes for 2025-10-rc3
-Message-Id: <175614688037.2891795.10009288784077655091.b4-ty@konsulko.com>
-Date: Mon, 25 Aug 2025 12:34:40 -0600
+To: Martin Schwan <m.schwan@phytec.de>
+Cc: u-boot@lists.denx.de, Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20250815-wip-bootmeth-rauc-no-config-global-v1-1-4de26389bdb2@phytec.de>
+References: <20250815-wip-bootmeth-rauc-no-config-global-v1-1-4de26389bdb2@phytec.de>
+Subject: Re: [PATCH] bootstd: rauc: Do not select BOOTMETH_GLOBAL
+Message-Id: <175614688264.2891795.11218821502173290819.b4-ty@konsulko.com>
+Date: Mon, 25 Aug 2025 12:34:42 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,21 +96,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Aug 2025 18:00:36 +0200, Michal Simek wrote:
+On Fri, 15 Aug 2025 09:12:56 +0200, Martin Schwan wrote:
 
-> I have collected couple of patches for current release which are fixing issues
-> and would be good to get them to current release. It include issues reported by
-> Coverity and Smatch and also fixing small issues.
+> Since the bootmeth "rauc" is not a global boot method, do not select the
+> corresponding BOOTMETH_GLOBAL option.
 > 
-> Gitlab CI is not reporting any issue.
 > 
-> Thanks,
-> Michal
-> 
-> [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] bootstd: rauc: Do not select BOOTMETH_GLOBAL
+      commit: 997c0c45c197dd8bfedc41c72d4579160b018e5e
 -- 
 Tom
 
