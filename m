@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5B95CA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 22:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD10C8303F
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 22:34:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3795A828A2;
-	Tue, 26 Aug 2025 00:34:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ACA4183106;
+	Tue, 26 Aug 2025 00:34:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KQHNH+r5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gbVOk7Z2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B57CE830F6; Tue, 26 Aug 2025 00:34:23 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id AEFDC80819; Tue, 26 Aug 2025 00:34:30 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C95DD828A2
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 00:34:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADA988311B
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 00:34:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3c7aa4ce85dso1297386f8f.3
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:34:21 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-45b5c12dd87so18256655e9.2
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:34:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756161261; x=1756766061; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1756161268; x=1756766068; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q97MBpiO4/zyXPCWEeGuh3+trRW6+XwuLZSAjqmBeGw=;
- b=KQHNH+r5dbhn4anzP4bLO0xmX6Wk2DWoc6guCZ0tcPU8qcf3BeKtU1iKyEd0D4zt8p
- J85KOt/5wH1IjzUuuNGFWQ7a1DZRzgA9n017ug3KKk0Urv6T9QOeVrkqOoTuSLesz91N
- C4fn0a/c2RdHkUtjRJtyITZ9g7eloJpLsljgCNk+hKV3MMe5cfPDYr6Mc71xLL9tLgte
- Tonc/QSUO/7IapFAcxRz+41wpsFL0KopN6dIYupfLVnlZFzm+kUW6HprLqgZbYur5RT3
- vPuzO2tFt7LhDFEVDoxOwQjS34tz+a5LuZi3XU/uwWWj9WX9TAwgVK1bjpHF39TI5TTJ
- SNVA==
+ bh=US+63CMGn4cUU2RpbHydsaf7YEtD0GbL9ziKtZYvkqg=;
+ b=gbVOk7Z2FdFldDYN0owhB04FQI45qGHeBosaU+L4jN+0ei4j9qLNHLtBStQX0DOk01
+ xYa0C4uVemNLzI0x2Etn0DmBDht9nM8O+CzZtcWEPnBUNULEwGLFyBg3pg0kXNqguYtQ
+ R5rFPIx8TsiGV1+dqEICFvC47Kl+bIsjSi9tbm7+4pMM4fZsZeDj+jl6OmOQ2rjKad3k
+ GOpLriQjXHEcXWFe5bGpXJcWZEBDWMqzpHBo5n5FD9dgTr2ov+uEpH3O/DGF1qeiUQdH
+ n6soUjnAVUZV/PZQXNnjBLzbjNDXW+OInW4asL4sP39R/PG8+1cMGAmon/jt0mEzZt0E
+ sGaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756161261; x=1756766061;
+ d=1e100.net; s=20230601; t=1756161268; x=1756766068;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q97MBpiO4/zyXPCWEeGuh3+trRW6+XwuLZSAjqmBeGw=;
- b=QyLioJir/95AKhgKGiPalW7yynfwSOyU8+D00d8j83B7r1NMJ8Ao2QFzIXdtwJyGGV
- ChLoopAzXIN6MLCuP1cE9IfRfzelQYW3s/Qsbo8EcxHKnvy+aWJcXJVa7J4zfATBL4Mi
- CS5eKDcmfE5Rw8TAP5SwvNy5PrmkaunLuRF7GzxUAeVsgdMw83d8p28wJjobKQyzK//i
- Btz4uVCdutx/Qps/vqJN0hIqJviw+VFsACg1VG3YYDSGjR46+x5fJ/EbWw18QpuvBYFV
- aH/ZQSMn+ZupkE4dv+xg4h7T444jLeXGbOTROUg34Pooj5PGKvaJoiWsZy/tfVTbjLMO
- ukHA==
-X-Gm-Message-State: AOJu0Yy+c9H1+Y3waNo8HcO/1o9+JXWpuTJfQ7uU9w2N29ClNPy0iHBA
- Ty9OsQ2jemJTxxWOg523kHq+uDqICwkpXiXSaTmi+8Hnjn1Q/1YXV+xKj0Gnr876JWk=
-X-Gm-Gg: ASbGncv7PYdSB8ryE9OYIL4f27Vz6rGuWRCJ/OZPQDch2fFVfQH+4UXiZLVqx99z9q4
- fmzggsnybjTX3bM+/7JCvPy7LEp93q5EKjO1TtKTLZaGi0Coz60zKdJyu7lbLqRBhnKyABqGqIb
- o3KIKhPkZbQQrZ2WrobtZH2asNR5rxlvVTwXaHfcnQsS5OLn6w0aZG3Hi0lKvgbf0OOwG7qz9GK
- 0KRFWj1aYJ0Bgf8TqQXoQWZZJB7lzlhKjaioDaGYUjh2aJgJjP8y1s0SOnmHJiXaZ+zS0B2wnen
- VMThbu4Xdiqj0zPpjYs+4/97Fzr0ojsyKXNMDficI505qAWy66IWi7cnO9GQOVfV1EikZP5qfMe
- q9keyBbZqhFfAQ/8pGKxcwOw3OftKhCmS0e8NjH4=
-X-Google-Smtp-Source: AGHT+IHmWxfTkVeEa9zyr7YiZ/yI7O6/UgK0PoOsp9TQQs0s0WNEG2jom5FemtgC9hBgLZaqQzmlhw==
-X-Received: by 2002:a05:6000:2512:b0:3c9:3f46:70eb with SMTP id
- ffacd0b85a97d-3c93f467c6amr3667140f8f.52.1756161260947; 
- Mon, 25 Aug 2025 15:34:20 -0700 (PDT)
+ bh=US+63CMGn4cUU2RpbHydsaf7YEtD0GbL9ziKtZYvkqg=;
+ b=Y/MoXYhHZ62I7jQWZqaIQaEDv/BV6DTeekUQvcq3xc9FMIJMpqs/oSWrPHPKnuLgOe
+ hrtPl32MU75BSnBAMi3hCwdVv3MMzRqy9JOoG7NWZHPtLgC7+L42E2rDp+bx5N4nPu7T
+ vfz7toISux39yg1dYryplIovooT+YsW1c6modfhs/+k6xegrRWCAWVexjaiEblc62wcN
+ AnT8wOAlv7/Y41TEr2AkmDadVHhf53vE1Pki4o822vcn7kVy22C9BNtCdtCZKt8RYmLX
+ z2BxFMl9v4n6Yefd+EWeh4V8Aru+/K6jQ7ryGhGNSzPum0dDzaClGPpdwR3fsj3SIqRc
+ 6uwg==
+X-Gm-Message-State: AOJu0Yyv8jp3awdXgtqctfCfaGpBvs8pyGG6Nvj7rmGo7rSR+E3OJgP/
+ u8ys3ifJ4rIr5XcqpN4sPsaqNwNmfg9TmQuOBmEGUuMrTiG3cLRpAvr7BmYGymYq+qk=
+X-Gm-Gg: ASbGnctzLlFfh/OgXmVcwUSNh4IqHhlJ/yAHk+kRjufEsxDz/aV5qsjkq77NsA6xlct
+ 6ztxGgAKpBh//JiUCrIK1iTjgYKNCn4aa1I1llqZt951KIj1E/QHjW6g3LWyrst3UgysVsrUFfI
+ fCr07dXdVh2xcMdknorloliL241RjQJSS2nKw5xZs+0xRh0ISn3m2RQTeGWNyYFPmKFv3i4z0G/
+ XnO9FEn9KJSAVNk0OCjqVGRE4TWTnI+XojjXfT9Vsfs0s3dA2MnJqNIXzA7DeyzPRxxs/d6FhpC
+ uNwDr4lzagyR3g6xQSVR9JFC4vz9nyGcZ2gh9dbVREWolrj2W7GpviSg4WWupFO9HjufVg5gyG9
+ wy5iI7J0kP/yQRf0oX1SFactSwIdWeMR5cCYm8Aw=
+X-Google-Smtp-Source: AGHT+IHW3WFkEmYVOToEPlHfHidNlhS2ZNsd+u4piwVZRBprHbuNspjpDLIoDVlnPowc/KF6Kg/5pQ==
+X-Received: by 2002:a05:600c:3149:b0:45b:47e1:ef73 with SMTP id
+ 5b1f17b1804b1-45b517df336mr94161885e9.34.1756161267840; 
+ Mon, 25 Aug 2025 15:34:27 -0700 (PDT)
 Received: from N580G.. ([2001:8a0:c46c:a000:ba6:baf1:694:9882])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b575928b0sm123733395e9.24.2025.08.25.15.34.20
+ 5b1f17b1804b1-45b575928b0sm123733395e9.24.2025.08.25.15.34.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 15:34:20 -0700 (PDT)
+ Mon, 25 Aug 2025 15:34:27 -0700 (PDT)
 From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Adriano Carvalho <adrianocarvalho.pt@gmail.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 04/10] doc: Add riscv and unfold the list with the
- architecture/code name
-Date: Mon, 25 Aug 2025 23:32:31 +0100
-Message-ID: <20250825223251.674591-5-adrianocarvalho.pt@gmail.com>
+Subject: [PATCH v2 05/10] doc: Rephrase in a simpler way
+Date: Mon, 25 Aug 2025 23:32:32 +0100
+Message-ID: <20250825223251.674591-6-adrianocarvalho.pt@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250825223251.674591-2-adrianocarvalho.pt@gmail.com>
 References: <20250825223251.674591-2-adrianocarvalho.pt@gmail.com>
@@ -100,40 +99,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-riscv was missing from the list.
-To some, the architecture's name may not be obvious from the code name.
+It reads a bit nicer.
 
 Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 ---
- tools/buildman/buildman.rst | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+ tools/buildman/buildman.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-index 49ac5caeb14..368ef5c6f19 100644
+index 368ef5c6f19..a6ae9b0a9d1 100644
 --- a/tools/buildman/buildman.rst
 +++ b/tools/buildman/buildman.rst
-@@ -478,7 +478,20 @@ Setting up
+@@ -1188,7 +1188,7 @@ Use the -L (``--no-lto``) flag to disable LTO.
+ Doing a simple build
+ --------------------
  
-    At the time of writing, U-Boot supports these architectures:
+-In some cases you just want to build a single board and get the full output, use
++In case you want to build a single board and get the full output, use
+ the -w option, for example:
  
--      arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, sh, x86, xtensa
-+   - ARC (arc)
-+   - ARM (arm)
-+   - Motorola 68k (m68k)
-+   - MicroBlaze (microblaze)
-+   - MIPS (mips)
-+   - Nios II (nios2)
-+   - PowerPC (powerpc)
-+   - RISC-V (riscv)
-+   - Sandbox (sandbox)
-+   - SuperH (sh)
-+   - x86 (x86)
-+   - Xtensa (xtensa)
-+
-+   Each entry list the architecture's name, followed by its code name in U-Boot.
- 
- 
- How to run it
+ .. code-block:: bash
 -- 
 2.48.1
 
