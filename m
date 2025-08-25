@@ -4,73 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A1BCA0EFA
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 14:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F49ACA0EFA
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 14:30:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 403EF8304F;
+	by phobos.denx.de (Postfix) with ESMTP id 88CA383096;
 	Mon, 25 Aug 2025 16:29:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=inbox.ru
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sima.ai
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=inbox.ru header.i=@inbox.ru header.b="YzYXoGsz";
+	dkim=pass (2048-bit key; unprotected) header.d=sima.ai header.i=@sima.ai header.b="Z79vGXsd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C065E8307F; Mon, 25 Aug 2025 15:49:34 +0200 (CEST)
-Received: from send264.i.mail.ru (send264.i.mail.ru [95.163.59.103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CB82C8309D; Mon, 25 Aug 2025 15:57:38 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8298082DA1
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:49:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFBFD83043
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:57:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=inbox.ru
+ dmarc=pass (p=none dis=none) header.from=sima.ai
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fido_max@inbox.ru
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru;
- s=mail4; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References
- :Cc:To:Subject:MIME-Version:Date:Message-ID:From:Sender:Reply-To:To:Cc:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:
- List-Archive:X-Cloud-Ids:Disposition-Notification-To;
- bh=aE1a3H05aKVSEGwJy5KQjI1148kKRY8hcifI6hc+DC4=; t=1756129772; x=1756219772; 
- b=YzYXoGszyNSAdfl+Ro8febSWZ8ju195LQ4i06uNxcYkN/DX50sjmgCGMVyXWIcR5pnd2TA/VwRd
- SrYyhFC90qjh5dYfwr/KcOeuifdz04Ke1aKI+uI1z0sxfnSEdyD1SgPBEEN9S47DaSMMsmrN4pKoW
- X5fuqRYACE8ABONRpwvlupZTp8uEplQeovCazqIvawDuDVoFRij03J6L5VqChOFBylndgSClZJUia
- k1JLPPOCLp5V/TSCdPQ3sJYguJ54BNi0pdnB4jCdEPNUVSp6yUUSYZZsET59GpbzAsIF5bTzjO0AC
- MvJdyzgliIEP+EQhJTsUcVBxG/mo8mTG5qSQ==;
-Received: by exim-smtp-6944cbb85b-bz2qk with esmtpa (envelope-from
- <fido_max@inbox.ru>)
- id 1uqXZi-00000000B1z-3jeh; Mon, 25 Aug 2025 16:49:31 +0300
-Message-ID: <ccf326ff-b4d3-43f0-92df-07a22bd5c60e@inbox.ru>
-Date: Mon, 25 Aug 2025 16:49:30 +0300
+ spf=pass smtp.mailfrom=nikunj.kela@sima.ai
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-771ed4a839eso40948b3a.2
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 06:57:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sima.ai; s=google; t=1756130254; x=1756735054; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=gnSCTVgUUqKVy2JFEWGEOf2Cv/OVaDx74fzSGiymRT8=;
+ b=Z79vGXsdNCP30VuL5/nLr88MsF9Gi52lZL64E09oZgY5AjMEVhIx0J25OYLHRMpJYP
+ GTS18Csi68fawQr1k/SAm1XbyDe5bRwKsi7ikSQGT/CX68uQvDhmvFSFhW5jyjNCefe0
+ I79DIaEDrOWhW5coDZIXSit54XXmdamXzGKJQ02suQ6zN2ZysG64iymY8BQqNq9ohv5X
+ gpILrAkG2Vpgmi6o3gfO7q8U2cIurIu0alyWwIzXedBABrkP6iur+Nj626Bi+A/T+HtY
+ zzUzTkcMPlD1HpLGhhsw8wGW2Y2f8VWSUcdj9PAfNqdZIA+sImlIyWCbsxae4RAxPDIw
+ 1Y2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756130254; x=1756735054;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gnSCTVgUUqKVy2JFEWGEOf2Cv/OVaDx74fzSGiymRT8=;
+ b=JKhBHGxJP1O97twPhaWhes838MQvIpGW26ugqnYh3KTi0dkd7Tc3m/eZHwrKmpmqyG
+ rLUJ4jz6OLZxA2lKbtatlJX7XvQfaSiw6s13Qgbyhfz9gr/le3W92w93YxvUcc1esOhX
+ O7SOJPYGqVCsm8N9nHGl+XqlcVaVlVVv5DXjgu0ixvieo4daYpw7Yv6ihwV6szrDrAB1
+ JHXR4El2XkHk7kaolbrxtaqSLM7kqhqo55uRCfhO549lFh31NEmI88qWD6JdDUHiPufR
+ lU/VbKRahtWPrtqQODa+p2NxafRCFbPb3d7BkG/sNRBZyEqS8ZAmf0iIWeX72AjlYFZf
+ +Daw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX2lpjs3N3oHBGG7Nq48IbeDakpsiEqrF1LpGaAaV9VIOrGy8CdPOa7gUZev/qotLTzy/BJg/o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDxkRLeyQuJGseNov4+6Jg5Uyu/cF5+WDGr8Hz1H2uNxBfjPOe
+ /vXDfzJFFBU3alwNLyppbF6PZIF0O7gjtlkAXAZzUuPFUdTJ9AFZ1rULUjPWgLF8tYE=
+X-Gm-Gg: ASbGncshradqMhMDa4iz9Hgr6yryu91ObPxJ4gGHfcaCY4u9mteXnmfXqSUibXBeO9Q
+ MWxdru/Z2KQhyLMC6xXIfvUiOSdAqGveHdloQiPl8PtOYo9c5I7jgQWe97GsaGgMaoodXK82c/q
+ 55Rwfh8kJHjCKBja7iGKshKYMdin+TSFeBtyl95AyfLVUraYyy8jeymRb7My8JkqBriu69fpn56
+ rNxPeWkYSaSmKVfrr0d8CkCClnvvzCeM9aH78scR8r1j/7SRcq8YdyWGzV+58VpE4llHhPSInVp
+ dJ9dZd4DEAswrE85ZsLxXwngsUsOEtcDwaKAdsOasaTZay62RxoAY/21+7+OatM8M6X5p8iMPRd
+ A+YMKR/ne24OOaNBLdZzQamGCa+qXyByFRVbVDI6SQxLoZZNENw==
+X-Google-Smtp-Source: AGHT+IH6qhkR+YOEvvuY338MxtvXAd3XZD8iVvRYsd/Auq+jR0/QRm4k9Qb5ffzxgpSjZKZOdxrGbA==
+X-Received: by 2002:a05:6a20:729a:b0:240:4400:838d with SMTP id
+ adf61e73a8af0-24340e06856mr10410186637.5.1756130254236; 
+ Mon, 25 Aug 2025 06:57:34 -0700 (PDT)
+Received: from [172.16.1.17] ([45.62.187.227])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-771f2b2d2bfsm428601b3a.93.2025.08.25.06.57.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 Aug 2025 06:57:33 -0700 (PDT)
+Message-ID: <c186daa2-2ad4-4a7b-9729-e6a3329b968a@sima.ai>
+Date: Mon, 25 Aug 2025 06:57:31 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] clk: scmi: add compatibility for clock version 3.0
- and onwards
-To: Kamlesh Gurudasani <kamlesh@ti.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Alice Guo <alice.guo@nxp.com>
-Cc: u-boot@lists.denx.de
-References: <20250819-b4-scmi-v1-v3-0-360145076b3b@ti.com>
- <20250819-b4-scmi-v1-v3-2-360145076b3b@ti.com>
+Subject: Re: [PATCH] net: xgmac: Augment mdio read/write with cl-45 format
+ support
+To: joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com,
+ boon.khai.ng@altera.com
+Cc: tien.fong.chee@intel.com, boon.khai.ng@intel.com, u-boot@lists.denx.de
+References: <20250510041200.2552981-1-nikunj.kela@sima.ai>
 Content-Language: en-US
-From: Maxim Kochetkov <fido_max@inbox.ru>
-In-Reply-To: <20250819-b4-scmi-v1-v3-2-360145076b3b@ti.com>
+From: Nikunj Kela <nikunj.kela@sima.ai>
+In-Reply-To: <20250510041200.2552981-1-nikunj.kela@sima.ai>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Authentication-Results: exim-smtp-6944cbb85b-bz2qk;
- auth=pass smtp.auth=fido_max@inbox.ru
- smtp.mailfrom=fido_max@inbox.ru
-X-Mailru-Src: smtp
-X-7564579A: 646B95376F6C166E
-X-77F55803: 4F1203BC0FB41BD9F7647FA575010556EB3CE62DFDA153339DDCAAFD7C65029E182A05F5380850409B5E43A52C3D6E283DE06ABAFEAF670543EE5933DDD95B219E539799F905E81D11E210A9E84E14EE
-X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE745C0EDBD94D46193EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F7900637AC83A81C8FD4AD23D82A6BABE6F325AC2E85FA5F3EDFCBAA7353EFBB55337566FA0CDBC57965D23774115853392A106CA092D237786D07F7E2BB5F966B8BC9E08EEF46B7454FC60B9742502CCDD46D0DEDCF5861DED71B2F389733CBF5DBD5E913377AFFFEAFD269176DF2183F8FC7C0E8801E8C4F941C018941B15DA834481FCF19DD082D7633A0EF3E4896CB9E6436389733CBF5DBD5E9D5E8D9A59859A8B6F7EC8CC465A83DA3CC7F00164DA146DA6F5DAA56C3B73B237318B6A418E8EAB86D1867E19FE14079C09775C1D3CA48CF3D321E7403792E342EB15956EA79C166A417C69337E82CC275ECD9A6C639B01B78DA827A17800CE7E1BCFB2C0BE3F189731C566533BA786AA5CC5B56E945C8DA
-X-C1DE0DAB: 0D63561A33F958A5AA10677B3DFF25F05002B1117B3ED69653EA60AF13B4ECF18B25839F35DFE037823CB91A9FED034534781492E4B8EEAD2739D626790C8313BDAD6C7F3747799A
-X-C8649E89: 1C3962B70DF3F0ADE00A9FD3E00BEEDF77DD89D51EBB7742D3581295AF09D3DF87807E0823442EA2ED31085941D9CD0AF7F820E7B07EA4CF4BA37C5FA4023BD2AD186747C6262B20AF2ED671280AC6019C7CFEBB4D0E0C86A08A323FE4E4FE8442B2DB2C2921DC12844482C152D7DE7E88A48AD9EC923586FA73F511ABF4355B9FDC11CE098E8E5C913E6812662D5F2A17D6C1CDD2003EB8E03787203701020945C72C348FB7EED3
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+ObcCpyrx6l7KImUglyhkEat/+ysWwi0gdhEs0JGjl6ggRWTy1haxBpVdbIX1nthFXMZebaIdHP2ghjoIc/363UZI6Kf1ptIMVXNcwk+fZooKPvc2Y+Mj+yM=
-X-Mailru-Sender: 689FA8AB762F7393FE9E42A757851DB69D2CBE67FB7810B1C52F8F6D640FAAC8AE5F78F88061344290DE4A6105A3658D481B2AED7BCCC0A49AE3A01A4DD0D55C6C99E19F044156F45FEEDEB644C299C0ED14614B50AE0675
-X-Mras: Ok
 X-Mailman-Approved-At: Mon, 25 Aug 2025 16:29:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,39 +104,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-19.08.2025 10:33, Kamlesh Gurudasani wrote:
-> Clock version 3.0 specified in ARM SCMI Platform design document
-> v3.2, adds extended_config_val parameter in CLOCK_CONFIG_SET.
-> 
-> The SCMI server with clock version 3.0 rejects the message if
-> they don't have this field.
-> 
-> Add support so that both SCMI server with clock version 2.0 and 3.0
-> can be handled.
-> 
-> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
+Gentle Reminder..
+
+On 5/9/25 9:12 PM, Nikunj Kela wrote:
+> Currently, clause-22 format is supported. This change adds
+> support for clause-45 format.
+>
+> Signed-off-by: Nikunj Kela <nikunj.kela@sima.ai>
 > ---
->   drivers/clk/clk_scmi.c   | 43 ++++++++++++++++++++++++++++++-------------
->   include/scmi_protocols.h |  6 ++++++
->   2 files changed, 36 insertions(+), 13 deletions(-)
-> 
-> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-> index 83ea7bb4286..b33cc05685d 100644
-> --- a/drivers/clk/clk_scmi.c
-> +++ b/drivers/clk/clk_scmi.c
-> @@ -131,19 +131,36 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+>   drivers/net/dwc_eth_xgmac.c | 67 +++++++++++++++++++++++++++----------
+>   1 file changed, 49 insertions(+), 18 deletions(-)
+>
+> diff --git a/drivers/net/dwc_eth_xgmac.c b/drivers/net/dwc_eth_xgmac.c
+> index 03959ea95a5..68c69b7b3df 100644
+> --- a/drivers/net/dwc_eth_xgmac.c
+> +++ b/drivers/net/dwc_eth_xgmac.c
+> @@ -147,6 +147,7 @@ static int xgmac_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+>   	u32 val;
+>   	u32 hw_addr;
+>   	int ret;
+> +	u32 c45 = 1;
 >   
->   static int scmi_clk_gate(struct clk *clk, int enable)
->   {
-> -	struct scmi_clk_state_in in = {
-> -		.clock_id = clk_get_id(clk),
-> -		.attributes = enable,
-> -	};
-> +	struct scmi_clock_priv *priv = dev_get_priv(clk->dev);
-
-struct scmi_clock_priv *priv = dev_get_priv(clk->dev->parent);
-
->   	struct scmi_clk_state_out out;
-> -	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-> -					  SCMI_CLOCK_CONFIG_SET,
-> -					  in, out);
+>   	debug("%s(dev=%p, addr=0x%x, reg=%d):\n", __func__, xgmac->dev, mdio_addr,
+>   	      mdio_reg);
+> @@ -159,19 +160,34 @@ static int xgmac_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+>   		return ret;
+>   	}
+>   
+> -	/* Set clause 22 format */
+> -	val = BIT(mdio_addr);
+> -	writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+> +	if (mdio_devad == MDIO_DEVAD_NONE) {
+> +		/* Set clause 22 format */
+> +		c45 = 0;
+> +		val = BIT(mdio_addr);
+> +		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+> +	} else {
+> +		val = readl(&xgmac->mac_regs->mdio_clause_22_port);
+> +		val &= ~BIT(mdio_addr);
+> +		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+> +	}
+>   
+> -	hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+> -		   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
+> +	if (c45) {
+> +		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+> +			   (mdio_reg & 0xffff);
+> +		hw_addr |= mdio_devad << XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
+> +	} else {
+> +		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+> +			   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
+> +	}
+>   
+>   	val = xgmac->config->config_mac_mdio <<
+>   	      XGMAC_MAC_MDIO_ADDRESS_CR_SHIFT;
+>   
+> -	val |= XGMAC_MAC_MDIO_ADDRESS_SADDR |
+> -	       XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_READ |
+> -	       XGMAC_MAC_MDIO_ADDRESS_SBUSY;
+> +	if (!c45)
+> +		val |= XGMAC_MAC_MDIO_ADDRESS_SADDR;
+> +
+> +	val |= XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_READ |
+> +		XGMAC_MAC_MDIO_ADDRESS_SBUSY;
+>   
+>   	ret = xgmac_mdio_wait_idle(xgmac);
+>   	if (ret) {
+> @@ -207,6 +223,7 @@ static int xgmac_mdio_write(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+>   	u32 val;
+>   	u32 hw_addr;
+>   	int ret;
+> +	u32 c45 = 1;
+>   
+>   	debug("%s(dev=%p, addr=0x%x, reg=%d, val=0x%x):\n", __func__, xgmac->dev,
+>   	      mdio_addr, mdio_reg, mdio_val);
+> @@ -219,21 +236,35 @@ static int xgmac_mdio_write(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+>   		return ret;
+>   	}
+>   
+> -	/* Set clause 22 format */
+> -	val = BIT(mdio_addr);
+> -	writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+> -
+> -	hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+> -		   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
+> +	if (mdio_devad == MDIO_DEVAD_NONE) {
+> +		c45 = 0;
+> +		/* Set clause 22 format */
+> +		val = BIT(mdio_addr);
+> +		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+> +	} else {
+> +		val = readl(&xgmac->mac_regs->mdio_clause_22_port);
+> +		val &= ~BIT(mdio_addr);
+> +		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+> +	}
+>   
+> -	hw_addr |= (mdio_reg >> XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) <<
+> -		    XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
+> +	if (c45) {
+> +		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+> +			   (mdio_reg & 0xffff);
+> +		hw_addr |= mdio_devad << XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
+> +	} else {
+> +		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+> +			   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
+> +		hw_addr |= (mdio_reg >> XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) <<
+> +			    XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
+> +	}
+>   
+>   	val = (xgmac->config->config_mac_mdio <<
+>   	       XGMAC_MAC_MDIO_ADDRESS_CR_SHIFT);
+>   
+> -	val |= XGMAC_MAC_MDIO_ADDRESS_SADDR |
+> -		mdio_val | XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_WRITE |
+> +	if (!c45)
+> +		val |= XGMAC_MAC_MDIO_ADDRESS_SADDR;
+> +
+> +	val |=	mdio_val | XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_WRITE |
+>   		XGMAC_MAC_MDIO_ADDRESS_SBUSY;
+>   
+>   	ret = xgmac_mdio_wait_idle(xgmac);
