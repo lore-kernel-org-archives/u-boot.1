@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71F4CA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 13:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F83CA0EFA
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 13:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 499268313B;
+	by phobos.denx.de (Postfix) with ESMTP id ADBEB82FC7;
 	Mon, 25 Aug 2025 15:55:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="BARKSlCL";
+	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="BBG+Kpmc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EEAA830E4; Mon, 25 Aug 2025 15:55:43 +0200 (CEST)
+ id B7C5A82DA1; Mon, 25 Aug 2025 15:55:44 +0200 (CEST)
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B8CE830B4
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:55:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C10E082FC7
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:55:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=frieder@fris.de
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 16E0AC994C; Mon, 25 Aug 2025 15:55:41 +0200 (CEST)
+ with ESMTPSA id 2214EC994D; Mon, 25 Aug 2025 15:55:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
- t=1756130141; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1756130142; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=O7xx8EKaGjU5dfUHkrhMwvFWewbl7CjTm8bW7bg/JJo=;
- b=BARKSlCLjgeKItpITsxcp7OIEjKBxCTNhkvpCtbdujEEqG31ybjddNSE1MzR36Wh4q/uS8
- v5W0ORb0TA9uLrh2e25jwpuFLRclvifesaeN4yp3/xZ7b7GfKBXLxf7wy7dAb7mW8fuX90
- eWiJKILhri6j99QOL94ui3StcD4qS+1p+f+gkjjTF6+3xuA4Q8N2XKde5MWEEZJB6zmGtR
- oZgfQjuHj748gwnBjcusRWeRbXpoxsqmbm9THAWM+FXGNpcHXWfbZgSO6m3dxrqP6K5m2Z
- OGsPADYab5N676FmrxSK2/SY3qUl7T0pfZCDqWpwhUFBucuYPQoj1vhWu517GQ==
+ bh=FdzlvFWRCOK0BeqgM33kDI6bQHpuvTmLQHif9qMvfaw=;
+ b=BBG+KpmcsLjRfRiOd8kNUXqoX9Y+NGB90Q6zvGro4HK6vxu9zxFLY65HI3UcvK+ifj7zHZ
+ PuCiK/qTQksoiFYxvoaKMC8MEhBOAkQhe4O8h+R6SEslvj3x7+sQO5btfBaBev4Jo2cjT2
+ 8SAbJ+5YFWkMqNsrGZI+Xwakluzhw18uPy0xc2gw7zAaIp5TTNDTvaNhO05f80bjLYgKeO
+ sSJDFZwtB1HnQpe72QkbWHs1G5ETfU2Q11mSiEtVRPw9CTo3Z0yv6DlcUt7AIji3Qg5t1H
+ QxMRU4QDo8ZhBcSVkGW+uEJdQSdOXSs5ZL8f6BOmm8k/09MGjezkL396UxVugg==
 From: Frieder Schrempf <frieder@fris.de>
-To: Frieder Schrempf <frieder.schrempf@kontron.de>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Annette Kobou <annette.kobou@kontron.de>,
- Eberhard Stoll <eberhard.stoll@kontron.de>, Marek Vasut <marex@denx.de>,
- Oualid Derouiche <oualid.derouiche@kontron.de>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH 03/11] imx: kontron-sl-mx6ul: Set CONFIG_SDP_LOADADDR to fix
- SDP boot
-Date: Mon, 25 Aug 2025 15:54:27 +0200
-Message-ID: <20250825135504.193004-4-frieder@fris.de>
+To: Fabio Estevam <festevam@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: [PATCH 04/11] imx: kontron-sl-mx6ul: Enable second ethernet interface
+Date: Mon, 25 Aug 2025 15:54:28 +0200
+Message-ID: <20250825135504.193004-5-frieder@fris.de>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250825135504.193004-1-frieder@fris.de>
 References: <20250825135504.193004-1-frieder@fris.de>
@@ -69,26 +68,47 @@ X-Virus-Status: Clean
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-We need to set CONFIG_SDP_LOADADDR to a valid RAM address to make
-SDP boot work. Use the end of the DDR (256 MiB minimum) as other
-boards do.
+This ensures both interfaces can be used in U-Boot and both MAC addresses
+are exported to the Linux kernel devicetree.
 
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- configs/kontron-sl-mx6ul_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/imx6ul-kontron-bl-common-u-boot.dtsi | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/configs/kontron-sl-mx6ul_defconfig b/configs/kontron-sl-mx6ul_defconfig
-index b04cd75a7d4..7ecf2bbaa9f 100644
---- a/configs/kontron-sl-mx6ul_defconfig
-+++ b/configs/kontron-sl-mx6ul_defconfig
-@@ -107,5 +107,6 @@ CONFIG_USB_GADGET_MANUFACTURER="FSL"
- CONFIG_USB_GADGET_VENDOR_NUM=0x0525
- CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
- CONFIG_CI_UDC=y
-+CONFIG_SDP_LOADADDR=0x8f7fffc0
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_SPL_USB_SDP_SUPPORT=y
+diff --git a/arch/arm/dts/imx6ul-kontron-bl-common-u-boot.dtsi b/arch/arm/dts/imx6ul-kontron-bl-common-u-boot.dtsi
+index 39cc6d05d3f..042bda7462a 100644
+--- a/arch/arm/dts/imx6ul-kontron-bl-common-u-boot.dtsi
++++ b/arch/arm/dts/imx6ul-kontron-bl-common-u-boot.dtsi
+@@ -30,9 +30,6 @@
+  * in Linux we can't assign the shared reset GPIO to the PHYs, as this
+  * would cause Linux to reset both PHYs every time one of them gets
+  * reinitialized.
+- *
+- * Also we disable the second ethernet as it currently doesn't work with
+- * the devicetree setup in U-Boot.
+  */
+ 
+ &fec1 {
+@@ -53,11 +50,16 @@
+ 			clocks = <&clks IMX6UL_CLK_ENET_REF>;
+ 			clock-names = "rmii-ref";
+ 		};
++
++		ethphy2: ethernet-phy@2 {
++			reg = <2>;
++			micrel,led-mode = <0>;
++			clocks = <&clks IMX6UL_CLK_ENET2_REF>;
++			clock-names = "rmii-ref";
++		};
+ 	};
+ };
+ 
+ &fec2 {
+-	status = "disabled";
+-	/delete-property/ phy-handle;
+ 	/delete-node/ mdio;
+ };
 -- 
 2.50.1
 
