@@ -4,93 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17A4CCA0EFA
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 08:34:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE968CA0EFA
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 08:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 993FC83020;
-	Mon, 25 Aug 2025 10:34:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E752D82FC7;
+	Mon, 25 Aug 2025 10:37:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y+BfvNgq";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ZQWHPsQA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97EF3808AF; Mon, 25 Aug 2025 10:34:06 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 226A783020; Mon, 25 Aug 2025 10:37:42 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20620.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::620])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37E6383043
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 10:34:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08F8981E13
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 10:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-45a1b0cbbbaso34792955e9.3
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 01:34:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756110844; x=1756715644; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:subject:cc:to:from:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=VDvZF5gUXUZ43dLg/Q+QjfqYoXvwFWCHTc7a5mh7riw=;
- b=Y+BfvNgq55DpYLIwJ7rqfratjdNtURsn4/cW3YqqXrnMWyZI195ttbtqS5Xa0bWS4Q
- QTIeaXo0ZZYlW5QRUfbjsgJ8ZSxF3BX5xuTNtfkREed+aSXVa0BABvbpWSmRq6GyEK44
- IMXWtNfj1WH2YRmvRtZndattzxBlDLzWASeNe2o/bj3zygVkTrOkZPwfHqFjocFNKoKX
- hXoLQfUZbZbKTSKofaNeFqVI+yp6loVSyB0TxwHQPqBmjGSNPgdQc495AzZ7AI3MCok8
- 1l5lh6Y40m1iIBiN1TcBJLep/QY+Vk/frRfWHqx/8msnqXSavwUYYXFXjjuy2md85fRo
- AHoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756110844; x=1756715644;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:subject:cc:to:from:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VDvZF5gUXUZ43dLg/Q+QjfqYoXvwFWCHTc7a5mh7riw=;
- b=h6d+dE0RyHKJvTS11m6j/N1YQG+/9kk9TGkmnZRydv5tmGLdF11jKv+oPXFUFJ/0XE
- 3qpAqWaJ6Uca0j+mekdWkkUhAX6ef2BSMqP+rUy7ZyqJWSdtGDuMBqqI6QIsQTv7L4KA
- 9d7n6UEveIWyjUmgVuE6zJ74zkmKFj8l8wHgNqFRo82loYLuKyrr4p1jKDOxfIDZF1Ot
- aD2N31o1rCsYlQuW3JjzM+RsOrkrotwDeOXcVnCT3e5o0FkPJNChDgNGjTmPwvEgbDa4
- +cevjFZrYXKgEqkkR50axwCf7G0GA4wrhxC7Z/E9jAHhAM2D+sa3NEc8XAs9Yd7eKz2l
- BEjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQ3EhFsUVckLbtAT4JKCpSKKMjK+34N7ewNefgDveDlCAaugSXbIPti0tJ+ckKkfHH93XmBNc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGbBfj/NCGOFaPKTvoiWGw04ifed3kDbbrR50nlx4eojth3UER
- Ylq6FDDDHTPD/d55ZeIj7xzKNw/p6UPRDT2U8vkaiKVIgV32cFkA7VqnXbEf3g==
-X-Gm-Gg: ASbGnct7p38IQVtQrRufsBw86ICKaGmnQ9z6CAJj15wEOV4LCLnLmDNPdgyb5CtW2HY
- KFBnECuGDiX6QUWE4+JDsNLDBCcg3JyPrQk8b017vr0+d/0G/jjW0z0gVkPmoPWMDe+R5ft+kfG
- I7pqusA0GFRl2mgqa2xtx7PZFG8yyH1hOfDO+508FL4MdGAe6WUeO0xgz1n1yr89iSaY05Fm3NA
- xkswUWPCIoN/o8eGUB9tmXhVcjdi72cIq4eptgK+mHtshMhjc3I4OkfsmtBfa6i/EiL1JS23zZi
- ixDsyhovdDQW4s5i3JJZmstjvD8AjOrNvnzuPHNCx9QIwAKwL0jTCMSk3r2tmO8olCrJI5SyGKk
- co2pBymrkc8g0WRrCwJhzauA=
-X-Google-Smtp-Source: AGHT+IGegiJGPnQpHIiu7sra9q07DsXnSDbmsHxDSCrXxKDDBXxAO4nCsATLUrSrM0c1x4e0Sl2oqA==
-X-Received: by 2002:a05:600c:198c:b0:45b:47e1:ef69 with SMTP id
- 5b1f17b1804b1-45b517e8e28mr82331215e9.36.1756110843265; 
- Mon, 25 Aug 2025 01:34:03 -0700 (PDT)
-Received: from Ansuel-XPS. ([109.52.221.120]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3c7116e1397sm10480941f8f.49.2025.08.25.01.34.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 01:34:02 -0700 (PDT)
-Message-ID: <68ac1ffa.5d0a0220.17158b.0bb1@mx.google.com>
-X-Google-Original-Message-ID: <aKwf93556jYEPNZY@Ansuel-XPS.>
-Date: Mon, 25 Aug 2025 10:33:59 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Weijie Gao =?utf-8?B?KOmrmOaDn+adsCk=?= <Weijie.Gao@mediatek.com>
-Cc: "trini@konsulko.com" <trini@konsulko.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>
-Subject: Re: [RFC PATCH 1/5] net: mediatek: move MT7531 mdio to dedicated
- driver
-References: <20250822232921.30076-1-ansuelsmth@gmail.com>
- <20250822232921.30076-2-ansuelsmth@gmail.com>
- <68a8fe48.050a0220.21a6f3.6783@mx.google.com>
- <b5d3f9ce91eefe2f039b63fd5f9ab557383f74dd.camel@mediatek.com>
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ONZhHvHzTE8U8vep2DUM15+QpsoamLx2dSBGXs4HnQjCXpjUElhQU9t9pHQehrtk0lMgxfMwrl1k2zKsTqV3LBeMaTO7gDsx510QKbrUL6sLgA+t4U0lJnZi3/L/Ow2ikoHufQNVg2VVrBnmePUh9xc6Dc83g3+XoPCcg//2MPiSUzFm3RHKpsnK5BDHeusu5eayrEh3GQwDCpv5MPpiqH+luDinfv9qixG8fMj4IXxsXy79kItEmnb1nEGzgQIBU0rd/obTZFyUOcmsUNxgVq7ob2r7fHevlpZyw2Bgx5WeMFDLTbWjZ/q27P7M0yv6IId6eNq9xP50t9HM+D4juA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WySCbfaGqc8Yv67Ee29L3ah8RzITzLAteM8A8cmfmoE=;
+ b=j09y8ODpSzLPQcS+7we/M+bqz9hpQdfeL+hTf8m5fwpqSyResYGbjPQ8ZrxHNFNMt/zGzG8d0dTHXNrk3H9zwQ34K0UIq7Y/9bZlOxDFBlg4uHpNlsgh7MfZ4HcO/GwSiqaoyW8Fr3r5FiZCAQ4jWFQtU4zwsmageEj7VspVJFASGBog2FwH+EcdV2e4k8S+weZuiGB6i2teo3Xhi5lYBarrwxK8WG8NuqSBcAR/BYqeFAuFBGV4BuotjRlIkcOxEVs2LDDfGa63OGQUC8ehVJRHVbXiR/PJadrVhT5f+J16Kk9/arqnV0F2mFB3QrbJIgbd+djJbyxp4p7GKdNKJg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WySCbfaGqc8Yv67Ee29L3ah8RzITzLAteM8A8cmfmoE=;
+ b=ZQWHPsQAqEwHPCqbdlXLZBvaA6WNogh0wNDb8qgXM062gbPDvX2oZKAKw8lGwAwSsmobEAzNGjvAog8kDTDE6xnnEh3tBqHvxsh3vZ6YDBvKsqtUW+tfisTJDAL7uBpeHUF7sc0LPclFD3cQpS1qVUstcRxGKBeAlZ+CyKfZ5d8NdDM7g7WciDS3X+L7sJWLy1FPpi63LFFFVvT9QEzX1pkHcFhdEsJtfqq6HoEje5+NTF0QV3jfn6vEgJR1umKFeMaHL1Ooa3o/t60NRgK1fx9gT59NE9uUYy5RuYo+4szsqww15fxME3fDYj3IR7H7fHWKM6oVaxo4H6RJbd0o8g==
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by DM4PR03MB6998.namprd03.prod.outlook.com (2603:10b6:8:44::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.10; Mon, 25 Aug
+ 2025 08:37:36 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9073.010; Mon, 25 Aug 2025
+ 08:37:36 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+To: "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: RE: [PATCH 1/4] arch: arm: dts: Enable USB3.1 for Agilex5
+Thread-Topic: [PATCH 1/4] arch: arm: dts: Enable USB3.1 for Agilex5
+Thread-Index: AQHcCEvSXiV/Ah2pQkuiy+3ffilQa7RzJl4g
+Date: Mon, 25 Aug 2025 08:37:36 +0000
+Message-ID: <LV8PR03MB81375887BB1DB30ACA699F31A73EA@LV8PR03MB8137.namprd03.prod.outlook.com>
+References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
+ <20250808100412.9320-2-nareshkumar.ravulapalli@altera.com>
+In-Reply-To: <20250808100412.9320-2-nareshkumar.ravulapalli@altera.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|DM4PR03MB6998:EE_
+x-ms-office365-filtering-correlation-id: 516a63f6-5b43-4e1d-842d-08dde3b2a4ef
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|7053199007|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?P3bbjC2yv6lixbqHcDszY65ycZjba6wd8S/jV+o99RnWl7QchUNNiIGP8Aeo?=
+ =?us-ascii?Q?KVRFgM7o1GMiNyEl4F/tlmOBw6PGAk6I0+YgeNjU6MA/g2bCdSFhD/Muo+qW?=
+ =?us-ascii?Q?IIvpONwWy56UJ32PzE1dJ0sZpyXPDI9zE68XSAXS/P6N8R03JBk+h1CMtHg/?=
+ =?us-ascii?Q?f4ZiblflsOY7olRCmTjE5UORla3S3xj+yiDYn4iOfIM0Dqnv5gSn+62Vy10s?=
+ =?us-ascii?Q?+HaMIdptnbgIknKeN7eSRj+qOZPDsH5HNig3CsbHfR+qCN2mf5DEJezmbK6k?=
+ =?us-ascii?Q?n21/Cr9IxRIcYfpImyP9yjVR/uvOIBHi/T55JJ7d7NtYIReIqyx8PIcMIOCP?=
+ =?us-ascii?Q?dTpQE2iV2FAn9OiX+M1EX/OIh1vqR4v53ZLTkZrkOi0fUbiZsaCCVornrS6p?=
+ =?us-ascii?Q?PH/m8OhwNkFu70dPR72zYyPwHmea0lIu/PIVFrGT7P8tk0i2To7hQuqwfsSZ?=
+ =?us-ascii?Q?dJKl0pEqGky/CufSxefj+g9CgNOAw3bZa82Dt6z9h00QcRmCqjzh49znOn5U?=
+ =?us-ascii?Q?RPxoenV3z3O07X/zZYYNW+WemCSzz9r31VJ6ny13swPyJrnFNN+U8w0T9HWo?=
+ =?us-ascii?Q?tR9qDNCkoSVyEQ37osGj4RSIiX7y36HrkBXpfRbiMSZMwTAw7rnrOT3Xusly?=
+ =?us-ascii?Q?AOyxwTbFVfbwfuRz2GNmcsMiYeUpoHX8Ukyd7jm6olnOQRCbxsmf4E/cgSjY?=
+ =?us-ascii?Q?iuAsvNGkZAhpMWAXwrBSYX/h0Xq1VA3NE8pOS+P7NyeQ8Md36uwmyFFLNGb/?=
+ =?us-ascii?Q?2+pPUEhe6iOBW/5zFovs23BapNrHB5eO66gAnZCBWnrqnzwOc7E8Ss+pw7Ql?=
+ =?us-ascii?Q?UWr7cG8nkvGPuJJlkKoEZ5BUt8PDkBGrT4xhzrRc+tLNsZhayL57hsa1iU7i?=
+ =?us-ascii?Q?d3MdcHGryxxTTwsLykm5GqRLXL+6/P030ta0oLEj/uurrysgnjwXKpDNm6Ao?=
+ =?us-ascii?Q?CUCTckCxCx/TvX/mez6NZBlMFElMeNYgxuOh8BSwZeVNM5dpJh2Xiz9dzLzt?=
+ =?us-ascii?Q?ykOF8At2BjUmc2rhycwuQDAWgcNAhxKfuFpFaI0wgfj0baPewpCjUdbUt/cF?=
+ =?us-ascii?Q?gvIDITKkW0UpDAt8qpY/4891S1IsuIorLsY/WoO8szPSLrWML8QyXtp7Oive?=
+ =?us-ascii?Q?cassQM+K1x6rERZb2SSE4zs/1fFPVurqZFTtC4ntXV0IU1gjjIsThfMHTSFn?=
+ =?us-ascii?Q?IrCeuB1IKHpCR14KftiYGvH21B3/cqCbU5gcoiAOJYc+9UBXTP53vAdCRv1e?=
+ =?us-ascii?Q?Z27IFsLbt7X07DJIYM2f2/9d0Z3XgzVTxNQ2czMMQNyJELnTh0AULW518je+?=
+ =?us-ascii?Q?+Ku0CQsY1+63r6RscZCIFFEeVbL9UDK3XXc0y2Con0K1u/v08xAtwl9+Yocs?=
+ =?us-ascii?Q?5yhX/m4XEXGMWoVG52hYbCTiCJUqdP2N/52JZLnFDlOr5af52klb32Sv2OBy?=
+ =?us-ascii?Q?MkcAs9jBkH4=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7053199007)(38070700018); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?hfxQ72/rAf8yP1d5GknlM0q63UiQf3kOhwLjo0neoHG93Ma+fdSSKfONBaN+?=
+ =?us-ascii?Q?3syL3VQDbCbKcf9wI0ITGMOVtY3KxTeAVmXDavldVnnWrcvMZbTNcjZKKXrR?=
+ =?us-ascii?Q?PG4pu/yLAI+G3XYxOVLsjiFGB+nAz230hysStdqfzpM7vaSvBcIyykzy3tes?=
+ =?us-ascii?Q?qsoSrS6OKfIZ+l8m9sGo95IC0LUdMxOhgggtPHl9Oae67h8/doXdz5+5fWwW?=
+ =?us-ascii?Q?B7iNV9gj/uqGd8ufVQ4NEF1uPtp1b1tzgHkckSaWK6DeyqPYUhQDZRwaicnP?=
+ =?us-ascii?Q?HJPcn3lbmxKt6BvT2gZSVq15tEMI4kyP9X6mqJqphncCvGpYAnrd08gUDdL/?=
+ =?us-ascii?Q?Ec/ineiPquKAf7U9FFu3PR9Y4p0ZkYBxW2NfFk6Q2Z1c1ErXHCFttKIx3xxU?=
+ =?us-ascii?Q?rvdTkwlBKuLkIrUGv7Jjw18IxVNPHuaEaDe0ikiC7GWHM8n15DIeeH/Bmd9R?=
+ =?us-ascii?Q?Abzt9rPX0rtKU/3RBkcLMNTpt3OLu3BpyYQR9fry4VXq9lKjaxzf6+FlQm5j?=
+ =?us-ascii?Q?2qdxin09MFZRPjcRzJf1G4wmdevgQMhWaW1gO4PHrtHcLXL3oZ80VY6hZU9f?=
+ =?us-ascii?Q?r3kNXduRD7m/mJOwTdjvX/T4MkNm4LAk8QLKU4jI7afZjd/+OrzEI41Oxbxd?=
+ =?us-ascii?Q?qJzJ8WP54GbSAOKM6ueYilf4YlHnEjrUDyqVwmbD4FM639wZ3ydCzVuXbTEW?=
+ =?us-ascii?Q?baM//Q1vaSAJc4IdmGKxeEFN4WFx86fSra9Qg/P2Ej2gcwbqhOXbcKLDlTR9?=
+ =?us-ascii?Q?dDLHpPPySyDpXxih9+/+yRFKv8S0Wets2m7QSqnILs/9OZrp7deXJAkfsjHf?=
+ =?us-ascii?Q?5i3ZXYFZUDEsQvi5jpWEGjvlnUw50hKe7FmNGHQZSrSuE4PoJAixhQ65MPq+?=
+ =?us-ascii?Q?P/mywLA7kRK32oypk1LfQ5EHsmT+eUVCNHQRiek7SLqCP/jeLC2LthyGQeUp?=
+ =?us-ascii?Q?Ls5n43uPAaXOO2Ohy4MUkeZd6JxpAhJTlTa0yADMm/D/4aOeEijAUu1iQvIc?=
+ =?us-ascii?Q?TEvr6xPyzjwcX+jwxjqS3CuBvG1LPMvl6EO5GaaG4QdAbNZNpWVMwF6nXLpv?=
+ =?us-ascii?Q?QYWKv8b/KQN6kHnIoiCFADZaMr2fCJrVkVXiJAJLaIABxxX07z4BDZXTf/Bw?=
+ =?us-ascii?Q?Q1UadnsNoTwPwcXfNH6qfvQGfj/NTMC984qS3EJAm6vXUl3CKn0IaElZV4Tt?=
+ =?us-ascii?Q?a/d4Pkzfi1ioz45L/Np8pxYbuKIsjvXbc7UmNT817OBL0tU23agCoC1W2WY0?=
+ =?us-ascii?Q?NZDZ/bnnsUun1uK2MfezekOyEqOW22ABmBT0fXHoNty0SH+vDGQedHegFkwS?=
+ =?us-ascii?Q?l2SCuVDakpdi1gdqztn4mQh1haAFBNC5LRzi8NW5bDgpgN7+1MGcZHaANHhG?=
+ =?us-ascii?Q?ghCJ9bgNl9vcQhv6twgVRAE0iHwoj4geE3dy4Gb8A5AokmMEdhnbImgGvlEn?=
+ =?us-ascii?Q?ppDMBbqnDVzIxQjhWUi8aUrwdPvde4UWbQ8bp85wnEnFnf005DSMQws+o/VX?=
+ =?us-ascii?Q?/N/Jh9vrSmb9D5wkrVJ1w7drEybxa7VCTW+NjbDygnQaaFydBVx0HKF6Kjyo?=
+ =?us-ascii?Q?MmT4LrNkEMTmm7rTmN0GB46JtDUv64CzGSJfEbdh?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <b5d3f9ce91eefe2f039b63fd5f9ab557383f74dd.camel@mediatek.com>
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 516a63f6-5b43-4e1d-842d-08dde3b2a4ef
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Aug 2025 08:37:36.7297 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: WUj7U9Ire4zxmCg6DFlAmmUdNchQX4z6mrjXmMCaK7J9uR/oKV9blKblucMeE6Mw+gE61mQPF4RYRa1C4uyVrtRVSsOHw64BRtr4RuaD91Q=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6998
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,409 +164,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 25, 2025 at 01:15:40AM +0000, Weijie Gao (高惟杰) wrote:
-> On Sat, 2025-08-23 at 01:33 +0200, Christian Marangi wrote:
-> > External email : Please do not click links or open attachments until
-> > you have verified the sender or the content.
-> > 
-> > 
-> > On Sat, Aug 23, 2025 at 01:29:15AM +0200, Christian Marangi wrote:
-> > > In preparation for support of MDIO on AN7581, move the MT7531 logic
-> > > to a
-> > > dedicated driver and permit usage of the mdio read/write function
-> > > to the
-> > > mtk_eth driver.
-> > > 
-> > > Minor changes are required to mtk_eth for this change as the
-> > > dedicated
-> > > MDIO driver only needs info of the GSW register and nothing else.
-> > > 
-> > > This permits Airoha driver to make use of DM_MDIO to bind for the
-> > > MT7531
-> > > driver that have the same exact register.
-> > > 
-> > > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> > > ---
-> > >  drivers/net/Kconfig          |   3 +
-> > >  drivers/net/Makefile         |   4 +
-> > >  drivers/net/mdio-mt7531.c    | 140
-> > > +++++++++++++++++++++++++++++++++++
-> > >  drivers/net/mdio-mt7531.h    |   9 +++
-> > >  drivers/net/mtk_eth/Kconfig  |   1 +
-> > >  drivers/net/mtk_eth/mt753x.c |  29 +++-----
-> > >  drivers/net/mtk_eth/mt753x.h |   3 +
-> > >  7 files changed, 169 insertions(+), 20 deletions(-)
-> > >  create mode 100644 drivers/net/mdio-mt7531.c
-> > >  create mode 100644 drivers/net/mdio-mt7531.h
-> > > 
-> > > diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-> > > index d1cb69f85ad..9ac9bee46c9 100644
-> > > --- a/drivers/net/Kconfig
-> > > +++ b/drivers/net/Kconfig
-> > > @@ -966,6 +966,9 @@ config TSEC_ENET
-> > >         This driver implements support for the (Enhanced) Three-
-> > > Speed
-> > >         Ethernet Controller found on Freescale SoCs.
-> > > 
-> > > +config MDIO_MT7531
-> > > +     bool
-> > > +
-> > >  source "drivers/net/mtk_eth/Kconfig"
-> > > 
-> > >  config HIFEMAC_ETH
-> > > diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-> > > index f8f9a71f815..beb7864adc2 100644
-> > > --- a/drivers/net/Makefile
-> > > +++ b/drivers/net/Makefile
-> > > @@ -62,7 +62,11 @@ obj-$(CONFIG_LITEETH) += liteeth.o
-> > >  obj-$(CONFIG_MACB) += macb.o
-> > >  obj-$(CONFIG_MCFFEC) += mcffec.o mcfmii.o
-> > >  obj-$(CONFIG_MDIO_IPQ4019) += mdio-ipq4019.o
-> > > +<<<<<<< HEAD
-> > >  obj-$(CONFIG_MDIO_GPIO_BITBANG) += mdio_gpio.o
-> > > +=======
-> > > +obj-$(CONFIG_MDIO_MT7531) += mdio-mt7531.o
-> > > +>>>>>>> net: mediatek: move MT7531 mdio to dedicated driver
-> > 
-> > This merge conflict slipped in and will be fixed in the next
-> > revision.
-> > These changes were tested locally on an AN7581 RFB board.
-> > 
-> > >  obj-$(CONFIG_MDIO_MUX_I2CREG) += mdio_mux_i2creg.o
-> > >  obj-$(CONFIG_MDIO_MUX_MESON_G12A) += mdio_mux_meson_g12a.o
-> > >  obj-$(CONFIG_MDIO_MUX_MESON_GXL) += mdio_mux_meson_gxl.o
-> > > diff --git a/drivers/net/mdio-mt7531.c b/drivers/net/mdio-mt7531.c
-> > > new file mode 100644
-> > > index 00000000000..4772c9b5407
-> > > --- /dev/null
-> > > +++ b/drivers/net/mdio-mt7531.c
-> > > @@ -0,0 +1,140 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +
-> > > +#include <asm/io.h>
-> > > +#include <dm.h>
-> > > +#include <linux/bitfield.h>
-> > > +#include <linux/iopoll.h>
-> > > +#include <miiphy.h>
-> > > +
-> > > +#define MT7531_PHY_IAC                       0x701c
-> > > +#define   MT7531_PHY_ACS_ST          BIT(31)
-> > > +#define   MT7531_MDIO_REG_ADDR_CL22  GENMASK(29, 25)
-> > > +#define   MT7531_MDIO_DEV_ADDR               MT7531_MDIO_REG_ADDR_
-> > > CL22
-> > > +#define   MT7531_MDIO_PHY_ADDR               GENMASK(24, 20)
-> > > +#define   MT7531_MDIO_CMD            GENMASK(19, 18)
-> > > +#define   MT7531_MDIO_CMD_READ_CL45  FIELD_PREP_CONST(MT7531_MDIO_
-> > > CMD, 0x3)
-> > > +#define   MT7531_MDIO_CMD_READ_CL22  FIELD_PREP_CONST(MT7531_MDIO_
-> > > CMD, 0x2)
-> > > +#define   MT7531_MDIO_CMD_WRITE              FIELD_PREP_CONST(MT75
-> > > 31_MDIO_CMD, 0x1)
-> > > +#define   MT7531_MDIO_CMD_ADDR               FIELD_PREP_CONST(MT75
-> > > 31_MDIO_CMD, 0x0)
-> > > +#define   MT7531_MDIO_ST             GENMASK(17, 16)
-> > > +#define   MT7531_MDIO_ST_CL22                FIELD_PREP_CONST(MT75
-> > > 31_MDIO_ST, 0x1)
-> > > +#define   MT7531_MDIO_ST_CL45                FIELD_PREP_CONST(MT75
-> > > 31_MDIO_ST, 0x0)
-> > > +#define   MT7531_MDIO_RW_DATA                GENMASK(15, 0)
-> > > +#define   MT7531_MDIO_REG_ADDR_CL45  MT7531_MDIO_RW_DATA
-> > > +
-> > > +#define MT7531_MDIO_TIMEOUT          100000
-> > > +#define MT7531_MDIO_SLEEP            20
-> > > +
-> > > +struct mt7531_mdio_priv {
-> > > +     phys_addr_t switch_regs;
-> > > +};
-> > > +
-> > > +static int mt7531_mdio_wait_busy(struct mt7531_mdio_priv *priv)
-> > > +{
-> > > +     unsigned int busy;
-> > > +
-> > > +     return readl_poll_sleep_timeout(priv->switch_regs +
-> > > MT7531_PHY_IAC,
-> > > +                                     busy, (busy &
-> > > MT7531_PHY_ACS_ST) == 0,
-> > > +                                     MT7531_MDIO_SLEEP,
-> > > MT7531_MDIO_TIMEOUT);
-> > > +}
-> > > +
-> > > +int mt7531_mdio_read(struct udevice *dev, int addr, int devad, int
-> > > reg)
-> > > +{
-> > > +     struct mt7531_mdio_priv *priv = dev_get_priv(dev);
-> > > +     u32 val;
-> > > +
-> > > +     if (devad != MDIO_DEVAD_NONE) {
-> > > +             if (mt7531_mdio_wait_busy(priv))
-> > > +                     return -ETIMEDOUT;
-> > > +
-> > > +             val = MT7531_PHY_ACS_ST |
-> > > +                   MT7531_MDIO_ST_CL45 | MT7531_MDIO_CMD_ADDR |
-> > > +                   FIELD_PREP(MT7531_MDIO_PHY_ADDR, addr) |
-> > > +                   FIELD_PREP(MT7531_MDIO_DEV_ADDR, devad) |
-> > > +                   FIELD_PREP(MT7531_MDIO_REG_ADDR_CL45, reg);
-> > > +
-> > > +             writel(val, priv->switch_regs + MT7531_PHY_IAC);
-> > > +     }
-> > > +
-> > > +     if (mt7531_mdio_wait_busy(priv))
-> > > +             return -ETIMEDOUT;
-> > > +
-> > > +     val = MT7531_PHY_ACS_ST | FIELD_PREP(MT7531_MDIO_PHY_ADDR,
-> > > addr);
-> > > +     if (devad != MDIO_DEVAD_NONE)
-> > > +             val |= MT7531_MDIO_ST_CL45 |
-> > > MT7531_MDIO_CMD_READ_CL45 |
-> > > +                    FIELD_PREP(MT7531_MDIO_DEV_ADDR, devad);
-> > > +     else
-> > > +             val |= MT7531_MDIO_ST_CL22 |
-> > > MT7531_MDIO_CMD_READ_CL22 |
-> > > +                    FIELD_PREP(MT7531_MDIO_REG_ADDR_CL22, reg);
-> > > +
-> > > +     writel(val, priv->switch_regs + MT7531_PHY_IAC);
-> > > +
-> > > +     if (mt7531_mdio_wait_busy(priv))
-> > > +             return -ETIMEDOUT;
-> > > +
-> > > +     val = readl(priv->switch_regs + MT7531_PHY_IAC);
-> > > +     return val & MT7531_MDIO_RW_DATA;
-> > > +}
-> > > +
-> > > +int mt7531_mdio_write(struct udevice *dev, int addr, int devad,
-> > > +                   int reg, u16 value)
-> > > +{
-> > > +     struct mt7531_mdio_priv *priv = dev_get_priv(dev);
-> > > +     u32 val;
-> > > +
-> > > +     if (devad != MDIO_DEVAD_NONE) {
-> > > +             if (mt7531_mdio_wait_busy(priv))
-> > > +                     return -ETIMEDOUT;
-> > > +
-> > > +             val = MT7531_PHY_ACS_ST |
-> > > +                   MT7531_MDIO_ST_CL45 | MT7531_MDIO_CMD_ADDR |
-> > > +                   FIELD_PREP(MT7531_MDIO_PHY_ADDR, addr) |
-> > > +                   FIELD_PREP(MT7531_MDIO_DEV_ADDR, devad) |
-> > > +                   FIELD_PREP(MT7531_MDIO_REG_ADDR_CL45, reg);
-> > > +
-> > > +             writel(val, priv->switch_regs + MT7531_PHY_IAC);
-> > > +     }
-> > > +
-> > > +     if (mt7531_mdio_wait_busy(priv))
-> > > +             return -ETIMEDOUT;
-> > > +
-> > > +     val = MT7531_PHY_ACS_ST | FIELD_PREP(MT7531_MDIO_PHY_ADDR,
-> > > addr) |
-> > > +           MT7531_MDIO_CMD_WRITE | FIELD_PREP(MT7531_MDIO_RW_DATA,
-> > > value);
-> > > +     if (devad != MDIO_DEVAD_NONE)
-> > > +             val |= MT7531_MDIO_ST_CL45 |
-> > > +                    FIELD_PREP(MT7531_MDIO_DEV_ADDR, devad);
-> > > +     else
-> > > +             val |= MT7531_MDIO_ST_CL22 |
-> > > +                    FIELD_PREP(MT7531_MDIO_REG_ADDR_CL22, reg);
-> > > +
-> > > +     writel(val, priv->switch_regs + MT7531_PHY_IAC);
-> > > +
-> > > +     if (mt7531_mdio_wait_busy(priv))
-> > > +             return -ETIMEDOUT;
-> > > +
-> > > +     return 0;
-> > > +}
-> > > +
-> > > +static const struct mdio_ops mt7531_mdio_ops = {
-> > > +     .read = mt7531_mdio_read,
-> > > +     .write = mt7531_mdio_write,
-> > > +};
-> > > +
-> > > +static int mt7531_mdio_probe(struct udevice *dev)
-> > > +{
-> > > +     struct mt7531_mdio_priv *priv = dev_get_priv(dev);
-> > > +
-> > > +     priv->switch_regs = dev_read_addr(dev);
-> > > +     if (priv->switch_regs == FDT_ADDR_T_NONE)
-> > > +             return -EINVAL;
-> > > +
-> > > +     return 0;
-> > > +}
-> > > +
-> > > +U_BOOT_DRIVER(mt7531_mdio) = {
-> > > +     .name           = "mt7531-mdio",
-> > > +     .id             = UCLASS_MDIO,
-> > > +     .probe          = mt7531_mdio_probe,
-> > > +     .ops            = &mt7531_mdio_ops,
-> > > +     .priv_auto        = sizeof(struct mt7531_mdio_priv),
-> > > +};
-> > > diff --git a/drivers/net/mdio-mt7531.h b/drivers/net/mdio-mt7531.h
-> > > new file mode 100644
-> > > index 00000000000..ee096112f92
-> > > --- /dev/null
-> > > +++ b/drivers/net/mdio-mt7531.h
-> > > @@ -0,0 +1,9 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +
-> > > +struct mt7531_mdio_priv {
-> > > +     phys_addr_t switch_regs;
-> > > +};
-> > > +
-> > > +int mt7531_mdio_read(struct udevice *dev, int addr, int devad, int
-> > > reg);
-> > > +int mt7531_mdio_write(struct udevice *dev, int addr, int devad,
-> > > +                   int reg, u16 value);
-> > > diff --git a/drivers/net/mtk_eth/Kconfig
-> > > b/drivers/net/mtk_eth/Kconfig
-> > > index e8cdf408237..67b2b612b1a 100644
-> > > --- a/drivers/net/mtk_eth/Kconfig
-> > > +++ b/drivers/net/mtk_eth/Kconfig
-> > > @@ -4,6 +4,7 @@ config MEDIATEK_ETH
-> > >       select PHYLIB
-> > >       select DM_GPIO
-> > >       select DM_RESET
-> > > +     select MDIO_MT7531
-> > >       help
-> > >         This Driver support MediaTek Ethernet GMAC
-> > >         Say Y to enable support for the MediaTek Ethernet GMAC.
-> > > diff --git a/drivers/net/mtk_eth/mt753x.c
-> > > b/drivers/net/mtk_eth/mt753x.c
-> > > index cdd52f3ff1b..cf643f336d6 100644
-> > > --- a/drivers/net/mtk_eth/mt753x.c
-> > > +++ b/drivers/net/mtk_eth/mt753x.c
-> > > @@ -138,8 +138,8 @@ int mt7531_mii_read(struct mt753x_switch_priv
-> > > *priv, u8 phy, u8 reg)
-> > > 
-> > >       phy_addr = MT753X_PHY_ADDR(priv->phy_base, phy);
-> > > 
-> > > -     return mt7531_mii_rw(priv, phy_addr, reg, 0, MDIO_CMD_READ,
-> > > -                          MDIO_ST_C22);
-> > > +     return mt7531_mdio_read(&priv->mdio_priv, phy_addr,
-> > > MDIO_DEVAD_NONE,
-> > > +                             reg);
-> > >  }
-> > > 
-> > >  int mt7531_mii_write(struct mt753x_switch_priv *priv, u8 phy, u8
-> > > reg, u16 val)
-> > > @@ -151,48 +151,36 @@ int mt7531_mii_write(struct
-> > > mt753x_switch_priv *priv, u8 phy, u8 reg, u16 val)
-> > > 
-> > >       phy_addr = MT753X_PHY_ADDR(priv->phy_base, phy);
-> > > 
-> > > -     return mt7531_mii_rw(priv, phy_addr, reg, val,
-> > > MDIO_CMD_WRITE,
-> > > -                          MDIO_ST_C22);
-> > > +     return mt7531_mdio_write(&priv->mdio_priv, phy_addr,
-> > > MDIO_DEVAD_NONE,
-> > > +                              reg, val);
-> > >  }
-> > > 
-> > >  int mt7531_mmd_read(struct mt753x_switch_priv *priv, u8 addr, u8
-> > > devad,
-> > >                   u16 reg)
-> > >  {
-> > >       u8 phy_addr;
-> > > -     int ret;
-> > > 
-> > >       if (addr >= MT753X_NUM_PHYS)
-> > >               return -EINVAL;
-> > > 
-> > >       phy_addr = MT753X_PHY_ADDR(priv->phy_base, addr);
-> > > 
-> > > -     ret = mt7531_mii_rw(priv, phy_addr, devad, reg,
-> > > MDIO_CMD_ADDR,
-> > > -                         MDIO_ST_C45);
-> > > -     if (ret)
-> > > -             return ret;
-> > > -
-> > > -     return mt7531_mii_rw(priv, phy_addr, devad, 0,
-> > > MDIO_CMD_READ_C45,
-> > > -                          MDIO_ST_C45);
-> > > +     return mt7531_mdio_read(&priv->mdio_priv, phy_addr, devad,
-> > > +                             reg);
-> > >  }
-> > > 
-> > >  int mt7531_mmd_write(struct mt753x_switch_priv *priv, u8 addr, u8
-> > > devad,
-> > >                    u16 reg, u16 val)
-> > >  {
-> > >       u8 phy_addr;
-> > > -     int ret;
-> > > 
-> > >       if (addr >= MT753X_NUM_PHYS)
-> > >               return 0;
-> > > 
-> > >       phy_addr = MT753X_PHY_ADDR(priv->phy_base, addr);
-> > > 
-> > > -     ret = mt7531_mii_rw(priv, phy_addr, devad, reg,
-> > > MDIO_CMD_ADDR,
-> > > -                         MDIO_ST_C45);
-> > > -     if (ret)
-> > > -             return ret;
-> > > -
-> > > -     return mt7531_mii_rw(priv, phy_addr, devad, val,
-> > > MDIO_CMD_WRITE,
-> > > -                          MDIO_ST_C45);
-> > > +     return mt7531_mdio_write(&priv->mdio_priv, phy_addr, devad,
-> > > +                              reg, val);
-> > >  }
-> > > 
-> > >  static int mt7531_mdio_read(struct mii_dev *bus, int addr, int
-> > > devad, int reg)
-> > > @@ -224,6 +212,7 @@ int mt7531_mdio_register(struct
-> > > mt753x_switch_priv *priv)
-> > >       if (!mdio_bus)
-> > >               return -ENOMEM;
-> > > 
-> > > +     priv->mdio_priv.switch_regs = priv->epriv.ethsys_base +
-> > > GSW_BASE;
-> 
-> This will break all other platforms using dedicated MT7531 IC.
-> 
-> Only mt7988 uses built-in mt7531 which allows memory-mapped register
-> access. Other platforms connects mt7531 through MDIO bus and only
-> supports accessing registers with MDIO.
-> 
-> You should either change only mt7988 to use this logic, or modify the
-> mdio-mt7531 to accept MDIO-based access.
->
 
-Thanks for the feedback.
 
-I can rework the MDIO driver to regmap and use that or limit it only to
-mt7988. What do you prefer?
+> -----Original Message-----
+> From: Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
+> Sent: Friday, August 8, 2025 6:04 PM
+> To: u-boot@lists.denx.de
+> Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt
+> <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong
+> <tien.fong.chee@altera.com>; Tom Rini <trini@konsulko.com>; Ravulapalli,
+> Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
+> Subject: [PATCH 1/4] arch: arm: dts: Enable USB3.1 for Agilex5
+>=20
+> USB 3.1 node is enabled for Agilex5.
+>=20
+> Signed-off-by: Naresh Kumar Ravulapalli
+> <nareshkumar.ravulapalli@altera.com>
+> ---
+>  arch/arm/dts/socfpga_agilex5_socdk.dts | 5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/arch/arm/dts/socfpga_agilex5_socdk.dts
+> b/arch/arm/dts/socfpga_agilex5_socdk.dts
+> index 2ab143e38f8..86e6d374948 100644
+> --- a/arch/arm/dts/socfpga_agilex5_socdk.dts
+> +++ b/arch/arm/dts/socfpga_agilex5_socdk.dts
+> @@ -1,6 +1,7 @@
+>  // SPDX-License-Identifier:     GPL-2.0
+>  /*
+>   * Copyright (C) 2024 Intel Corporation <www.intel.com>
+> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+>   */
+>  #include "socfpga_agilex5.dtsi"
+>=20
+> @@ -87,6 +88,10 @@
+>  	disable-over-current;
+>  };
+>=20
+> +&usb31 {
+> +	status =3D "okay";
+> +};
+> +
+>  &watchdog0 {
+>  	status =3D "okay";
+>  };
+> --
+> 2.35.3
 
-I think limiting to mt7988 is easier?
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
-> > >       mdio_bus->read = mt7531_mdio_read;
-> > >       mdio_bus->write = mt7531_mdio_write;
-> > >       snprintf(mdio_bus->name, sizeof(mdio_bus->name), priv-
-> > > >epriv.sw->name);
-> > > diff --git a/drivers/net/mtk_eth/mt753x.h
-> > > b/drivers/net/mtk_eth/mt753x.h
-> > > index 65046a1421c..cd128ad39fe 100644
-> > > --- a/drivers/net/mtk_eth/mt753x.h
-> > > +++ b/drivers/net/mtk_eth/mt753x.h
-> > > @@ -14,6 +14,8 @@
-> > >  #include <linux/bitops.h>
-> > >  #include <linux/bitfield.h>
-> > > 
-> > > +#include "../mdio-mt7531.h"
-> > > +
-> > >  struct mtk_eth_priv;
-> > > 
-> > >  #define MT753X_NUM_PHYS              5
-> > > @@ -254,6 +256,7 @@ struct mtk_eth_priv;
-> > > 
-> > >  struct mt753x_switch_priv {
-> > >       struct mtk_eth_switch_priv epriv;
-> > > +     struct mt7531_mdio_priv mdio_priv;
-> > >       struct mii_dev *mdio_bus;
-> > >       u32 smi_addr;
-> > >       u32 phy_base;
-> > > --
-> > > 2.50.0
-> > > 
-> > 
-> > --
-> >         Ansuel
+Best regards,
+Tien Fong
 
--- 
-	Ansuel
