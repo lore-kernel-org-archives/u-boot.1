@@ -4,192 +4,192 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF7ECA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 13:15:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75812CA0FE7
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 13:15:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CBF48304F;
-	Mon, 25 Aug 2025 15:15:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5849883096;
+	Mon, 25 Aug 2025 15:15:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=evk.biz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=evkgmbh.onmicrosoft.com header.i=@evkgmbh.onmicrosoft.com header.b="JCZ+4mtq";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=evkgmbh.onmicrosoft.com header.i=@evkgmbh.onmicrosoft.com header.b="QAtgzu+r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85E54828A2; Mon, 25 Aug 2025 07:54:11 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 7EB46828A2; Mon, 25 Aug 2025 07:59:18 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FEB0808AF
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 07:54:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87DB1808AF
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 07:59:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=quarantine dis=none) header.from=evk.biz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christoph.reiter@evk.biz
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=A5aFB3MT3paBXe/XwBupc6tRkHfrkhgz55NgU8/XmtcO38jfQXnfdWdeQ9T5u37BdwPT4HKkiJpG8vEE4Ps6shqkZcpvNSHnSdbvDNKpoKzJiH3WsH9AUH/JIuKunhM94wghAVjIc7LZ+YOG4ZFyQtHUkJrk81i3hGA2US1f2wkIjOtunVvhtX6bBC4dSTlDeW66mK1YrocoJpDYP40NuB81e7kxfmmF6FK0fNhmNgP9vW9TImHKlbDrYBk2ACxgsW8iDFtC1YBVoRzyjpWj5whWlOVzckHa5tfxT/Nrx7EPJVUrWuWWuVelvCvKUsljuKQtRZ2XW8zgNIzT2md3Tg==
+ b=gbYz58Ni5dT5tR2DpF3vNpfAzXfcpSHm8DD4jxdjZgrOgLr/xmH0uYJOEGO/BS+130I8MrlztyVNP3FVdEbR/AxVz5r88wAqGdt3zDjNZYKByGwMZzlNauJI4IJFqhOAd8pIDoenl8ZNIPOBDWne/BLu6u5BjNu1olfI5X+K9NLlaVK4w8h5iyHg0KLuLyJM0uLMSRLhFbeXvh2PFOf1ilIwvIhdf239pMMG3sJOswHUjix1SI0IsFs4PTQNC8h0tqYNxfVGtIF/OvCRI/XKr8RXvI7hYdxoIaiNbro9AM4QwMjIiIjFA31GvlxTq3za3c4iQpz83ecfrcYrCCsJjQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BbHSQtFAkJQFjzG7Ros08qO1QHATEl+oZmX8yYZuRZs=;
- b=wpLmdkFEkcl0iJ3yojVTL77+LmuLTBOgiXLbAruZtSB6T1dNmWcXprF2Srdu6Y/B+tQvOiZDJRvUKg5me/7Yk2lr7X5NFx2aOFaOjgQ8mSBOvEu0GJeM4aW2X7oTV52xaaktVIYqGoP3pnc0YxdzGdu2zzUT9SC0UkjGRHgku5fpYCcpMwqimgOqroTuintuxqWgDapU5U0q+elwMReKvi5KLAoHGWpqmUJfsUU0/tTf2/yMeLSgefsO5Q+dGn5IeUGsqJ/3wTxH+krz97OzLGOMbaWwiUwl/0T6nXxfxVAD5PAIpBMCRUtapgJd+rXLWod2s+PR0sFv3qeJKGVn0g==
+ bh=UPZ/umSJr/lkDlourBfIXaaZni3SDKAl662tzmxb53w=;
+ b=GFETA1O016Anfgmo4nFy2qW47Erv/6n6lh9KTmRl1a281sW6F9mnATJEUrkZkLaKf8qlIs6zetyXwkFgUVZ6g18N/6ogd2LISrAcHCKTqITymAp0/m60LHGFxpzb+X2NYG2rq1NgfBkCcLz4ekegc52YvA33hivCZLbc2/YdAdPWnK4PcADNW603Z2bWWYwRM+29D5C//+i2/s0y9+hwz6684DpCRmcnfkk4Me5PLbS2FJppcLk6ZaxE4skqKvYamYnaXoWbHLcqqhQDM9pGoOTHjQMxHgBX/u7ttXjzYKIqgDDz5wwcCb6WtC6CWWziedxyjv2y71rxmcirMDIDeg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 104.40.229.156) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=evk.biz;
+ 52.169.0.179) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=evk.biz;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=evk.biz; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=evkgmbh.onmicrosoft.com; s=selector2-evkgmbh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BbHSQtFAkJQFjzG7Ros08qO1QHATEl+oZmX8yYZuRZs=;
- b=JCZ+4mtqrTWE1LUVZ3P/T8jL6sKho9reTDW0dHohppW3JXVL6A1DaFEUlhkv5ERzNd5LKu8lowYdUkX+OdtxMCxIo8uKD9H1n27bwglVIELFlcfyWlqOjHpqrXj0Aer++7KRbFzItEvPe/nDoJRhWcdSUwZsVEUYLmFtD5zWE74=
-Received: from DB8PR04CA0029.eurprd04.prod.outlook.com (2603:10a6:10:110::39)
- by VI0PR09MB7668.eurprd09.prod.outlook.com (2603:10a6:800:23d::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.19; Mon, 25 Aug
- 2025 05:54:03 +0000
-Received: from DB5PEPF00014B8F.eurprd02.prod.outlook.com
- (2603:10a6:10:110:cafe::6) by DB8PR04CA0029.outlook.office365.com
- (2603:10a6:10:110::39) with Microsoft SMTP Server (version=TLS1_3,
+ bh=UPZ/umSJr/lkDlourBfIXaaZni3SDKAl662tzmxb53w=;
+ b=QAtgzu+r5xthARZSk2FUWEkkpWKl1hNUuWtsgMaQuRo2HEtWDOYXu9ROtFnDZb0Zus3I2TzwDu2VWoIjtiNxp2fosjt+eq1YcuSDoO8iYzbPTImNRx4JY0oCHhXKydkeq6Ny6xf6Aja4QvL9tTT7K/RM3RQ160oXxWSv+Ma/Y4k=
+Received: from DU2P250CA0028.EURP250.PROD.OUTLOOK.COM (2603:10a6:10:231::33)
+ by VI0PR09MB7389.eurprd09.prod.outlook.com (2603:10a6:800:23c::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.21; Mon, 25 Aug
+ 2025 05:59:10 +0000
+Received: from DU2PEPF00028D0E.eurprd03.prod.outlook.com
+ (2603:10a6:10:231:cafe::4a) by DU2P250CA0028.outlook.office365.com
+ (2603:10a6:10:231::33) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.21 via Frontend Transport; Mon,
- 25 Aug 2025 05:54:03 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 104.40.229.156)
+ 25 Aug 2025 05:59:10 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 52.169.0.179)
  smtp.mailfrom=evk.biz; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=evk.biz;
 Received-SPF: Pass (protection.outlook.com: domain of evk.biz designates
- 104.40.229.156 as permitted sender) receiver=protection.outlook.com;
- client-ip=104.40.229.156; helo=eu1.smtp.exclaimer.net; pr=C
-Received: from eu1.smtp.exclaimer.net (104.40.229.156) by
- DB5PEPF00014B8F.mail.protection.outlook.com (10.167.8.203) with Microsoft
+ 52.169.0.179 as permitted sender) receiver=protection.outlook.com;
+ client-ip=52.169.0.179; helo=eu2.smtp.exclaimer.net; pr=C
+Received: from eu2.smtp.exclaimer.net (52.169.0.179) by
+ DU2PEPF00028D0E.mail.protection.outlook.com (10.167.242.22) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9073.11 via Frontend Transport; Mon, 25 Aug 2025 05:54:01 +0000
-Received: from OSPPR02CU001.outbound.protection.outlook.com (40.93.81.74) by
- eu1.smtp.exclaimer.net (104.40.229.156) with Exclaimer Signature Manager
- ESMTP Proxy eu1.smtp.exclaimer.net (tlsversion=TLS12,
- tlscipher=TLS_DIFFIEHELLMAN_WITH_AES256_NONE); Mon, 25 Aug 2025 05:54:01
+ 15.20.9073.11 via Frontend Transport; Mon, 25 Aug 2025 05:59:07 +0000
+Received: from MRWPR03CU001.outbound.protection.outlook.com (40.93.69.28) by
+ eu2.smtp.exclaimer.net (52.169.0.179) with Exclaimer Signature Manager
+ ESMTP Proxy eu2.smtp.exclaimer.net (tlsversion=TLS12,
+ tlscipher=TLS_DIFFIEHELLMAN_WITH_AES256_NONE); Mon, 25 Aug 2025 05:59:09
  +0000
 X-ExclaimerHostedSignatures-MessageProcessed: true
-X-ExclaimerProxyLatency: 8969356
-X-ExclaimerImprintLatency: 2416157
-X-ExclaimerImprintAction: 5dc450814d9f4dc892053803fd48b94b
+X-ExclaimerProxyLatency: 23704315
+X-ExclaimerImprintLatency: 17615830
+X-ExclaimerImprintAction: d96e6bc1aed84c30a051fe10d14eba0e
 Received: from DU2PR09MB5294.eurprd09.prod.outlook.com (2603:10a6:10:239::11)
  by AS2PR09MB6261.eurprd09.prod.outlook.com (2603:10a6:20b:5f8::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.20; Mon, 25 Aug
- 2025 05:53:58 +0000
+ 2025 05:59:05 +0000
 Received: from DU2PR09MB5294.eurprd09.prod.outlook.com
  ([fe80::f848:f95a:fb2e:827d]) by DU2PR09MB5294.eurprd09.prod.outlook.com
  ([fe80::f848:f95a:fb2e:827d%5]) with mapi id 15.20.9052.019; Mon, 25 Aug 2025
- 05:53:58 +0000
+ 05:59:05 +0000
 From: Christoph Reiter <christoph.reiter@evk.biz>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
  "vigneshr@ti.com" <vigneshr@ti.com>, "tudor.ambarus@linaro.org"
  <tudor.ambarus@linaro.org>
-Subject: [PATCH] mtd: spi-nor-ids:  Add Fujitsu MB85RS256TY FRAM
-Thread-Topic: [PATCH] mtd: spi-nor-ids:  Add Fujitsu MB85RS256TY FRAM
-Thread-Index: AdwVhKWSXp/0tzTITGSGX8RZLzS56g==
-Date: Mon, 25 Aug 2025 05:53:58 +0000
-Message-ID: <DU2PR09MB5294504C1221EF029607D88C8E3EA@DU2PR09MB5294.eurprd09.prod.outlook.com>
+Subject: [PATCH] mtd: spi-nor: implement ASP lock for S25FL512S
+Thread-Topic: [PATCH] mtd: spi-nor: implement ASP lock for S25FL512S
+Thread-Index: AdwVhTNHy0RYSAf7TYOhhUsmlqLQ/Q==
+Date: Mon, 25 Aug 2025 05:59:05 +0000
+Message-ID: <DU2PR09MB5294FB350E187DEB85B7662B8E3EA@DU2PR09MB5294.eurprd09.prod.outlook.com>
 Accept-Language: de-DE, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 Authentication-Results-Original: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=evk.biz;
-x-ms-traffictypediagnostic: DU2PR09MB5294:EE_|AS2PR09MB6261:EE_|DB5PEPF00014B8F:EE_|VI0PR09MB7668:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0424afc1-5345-4bbe-635c-08dde39bcaa8
+x-ms-traffictypediagnostic: DU2PR09MB5294:EE_|AS2PR09MB6261:EE_|DU2PEPF00028D0E:EE_|VI0PR09MB7389:EE_
+X-MS-Office365-Filtering-Correlation-Id: ebf14f20-cb3d-4537-d8ef-08dde39c8200
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
  ARA:13230040|376014|1800799024|366016|38070700018; 
-X-Microsoft-Antispam-Message-Info-Original: =?us-ascii?Q?HSSn/s2wlLLC5w6X0xRLQCiokxJ4A8rurynb/y2ZAq1ac75YXY3OkWTAG4N7?=
- =?us-ascii?Q?MstImmLzk1U1JZacWg4xltSyOo+ZTeiRHyeMoHnaX+sbyZbC3UM8id3rM0Q/?=
- =?us-ascii?Q?t1GRGH1FfWZkf8Cuzk0goFj90kXHbHttQm25C/J2PnwaRh9/eDs3wTB89GyZ?=
- =?us-ascii?Q?yQ0+RMw0x9DUPLrEypUZb1V5f8a1u1C7aOSC+wG9MFR1XMbemPKnuzzmO45S?=
- =?us-ascii?Q?/VpVqU3QIG06XAYtWEC2XUnZqXs3MbTiQ4G8+lNqLGk9VwAbdwxYhfNl79dY?=
- =?us-ascii?Q?qnaxOuPFOU5RdjFq38ILiwWOgeHf2qj38xI4KBwCbcUpt3Y3Ff5WLjbfAb76?=
- =?us-ascii?Q?BDsYGFKKXAocRDqixTXkXAfCN1k2AVXDjxt18f1EdsKfKQwVx++0EN59DEj7?=
- =?us-ascii?Q?fPBh/4z8CHHaSKSLa1uuKbkLbIqcR1TfgZbl+mvlyAPLiFwhDJ7n7gDnAnRt?=
- =?us-ascii?Q?otr4Dq0tzocD8rKjAQTslUwY+IFATuq4kMhgG7cUfqytQ2oL/Tf49kkxGoAH?=
- =?us-ascii?Q?CjgfRI6HYoCsslEQaSUFyIdKTl1Jd73x43T8z10k1MWNvAivNOWfnyISJz8I?=
- =?us-ascii?Q?/Zq9Q2sVX2JFMARM5/vj2zvv9wB/i7VUFCgZFKceFSKQF3dEhOgOFb3Ge9CJ?=
- =?us-ascii?Q?nf1oVUkpmSe0uB9J9apHgMhhzJYlzMFqSoWAzt9UwiTqSRwErSkzEgT4dUI8?=
- =?us-ascii?Q?afTvfSf5sSJh4KAk/VdB8gKNsYbGXMV/5tbi6CGIt/6n8Ta4UDQKYVsJwkrF?=
- =?us-ascii?Q?H9r1aoV6DSinkWdJnh46NL1yXLHRqaqgL6pfcWaw5fuYaw0jMBHt6fkb6R+K?=
- =?us-ascii?Q?OOCeLL/xR/MxY3Hlzid4sIt7mNVL1/dLeS7DFMeqjWac1+RSoQSfyOaMubxc?=
- =?us-ascii?Q?LeTRYLAddi+ZcsdoJx/ItpFy8REQADf6t0hNqgS3hQ6/fJkxvgd1avyxALRF?=
- =?us-ascii?Q?t/yMHBHOWJJF+gnaDZk7vQoRRoDkm/Vjtdp1Gxhe3+brazS0DohTUDrhZd/a?=
- =?us-ascii?Q?DvHBRXDkdlik9N5P583V30D7DhSHMgAyGO51H3aYqs8FQR1dsCPJEQ0lN+pf?=
- =?us-ascii?Q?+72AF8Ytja6RQStd9++uFfPZbu84KcSALWQ4wqwO07Pz3lhygBFxJuyHHdv0?=
- =?us-ascii?Q?iepsS8+SE4h8JwcjXTMYASnNtN2ZNu63qAUB5uE657zCxFOk81D6Kc9TEdoA?=
- =?us-ascii?Q?0BlGf9DdKMhX0xkUmsqFhi5NbRJCuDeI0aY+5CfNI0ymITz+USzVASi2Vl8n?=
- =?us-ascii?Q?ChYabwzG1sNHdNKexqEamWZPNxd1uW77F6ibuXNMtBBfXPHjsPLe02GoJs+E?=
- =?us-ascii?Q?rk2O7ObFsJ+0BaIVCQQF4PouKcQGoUy1yui9rECritywQ2OdNiM9UQxD9J8M?=
- =?us-ascii?Q?nP4QHpR3qu3LCguLM44DUY5xRN9/j8g6FHewNAbDuaedwdLbJKUqY0oquFj1?=
- =?us-ascii?Q?q7NX2LJH0ojdPnKyg/FyJ4Oalmvku4Fgx097VC3iHmjjc6tznWF7Zw=3D=3D?=
+X-Microsoft-Antispam-Message-Info-Original: =?us-ascii?Q?atp/dG2tiuoQpesFR1JixbVfN6ipmqSqdwiS00WoXLB4PXTR/2XmFdz6a9Pk?=
+ =?us-ascii?Q?2y64bRGcVfdK2dtKWJ0agOBGVayZtOfHIZFuL7weteG1tahv0iK1fzKKZdZ1?=
+ =?us-ascii?Q?8Vqh+9IPFKDt2ci3TcMzXw+J3B3wzuGx3v7kyNUf4Y4PSz2CpxgP8/ltbMKQ?=
+ =?us-ascii?Q?zKny+C9mWQROw7YP5G7V5XAyNrzz8t5e8b78tSzsWLOHFy4f3STee+Hm6QVH?=
+ =?us-ascii?Q?90pr/BdlOU6seNyHlXQfN7vwVhNseHYNL98RCgtECqyT45S9zmpuSJ0xhDSq?=
+ =?us-ascii?Q?WHmrHG87tUHh0A+Q7kTRkAu0kklRhwYYE8VfFWk4CGxPSUJRv98eBc6ZxRGu?=
+ =?us-ascii?Q?x384PalZRD5Ln5cuN/mrGHahK1oiU92bI1Ax+VRE0bemuxKo2IORsrsQPtDR?=
+ =?us-ascii?Q?p+nT8Fq4Jpz6DBrbRC4qYRYLobQt9ClrFz1yhxqdncCcy5B6O35XXsq1AVm0?=
+ =?us-ascii?Q?Jtl96YpFZ1vuVwSmE3MIR1FcowdM3mzfpZAdQ1RnyWNq+s9EhvYh8DhkmKyP?=
+ =?us-ascii?Q?FQ0D4uc3RF/dDK1xcsuxextaZlHQZa2r4wQmzftXkjEb2adoK2j7kklyzAN5?=
+ =?us-ascii?Q?dcApjXJDFLGXLApuWmt3LAk9WtLi8VX06KQgkKI8iAi+RVKgGeVqg5dVtTkZ?=
+ =?us-ascii?Q?OPn/XqUno2cr8dT5CyPgiOu2m1/I9JreILorPMocq7HkjXmN0gSqWIaeG385?=
+ =?us-ascii?Q?uTRWnmNSiNeHOR4c/m26vqyDtmY81G0M2PWUytsJS2XhiNY5qLYcmVXEy8yt?=
+ =?us-ascii?Q?NJYQqOxESn9XFzr7/ZSmFLead8vr6Z9zvysSoHbSyKKY8zl7pO33hb9mH3I7?=
+ =?us-ascii?Q?TRE5AuHXZZs3vvFco+eNO+BUmlZQSPJ1ZsWizOoncpkXyruTJJAe6sS+lULq?=
+ =?us-ascii?Q?dqyytg8QIBLp8jT/MJd/7bHGmsuOk49jRt7TGPMroOUWH5G9JqqNxw1SB3gT?=
+ =?us-ascii?Q?gEYVNMj+J18bBvIYc5zgX+eTcf4o68GBKmbq3IVtZhCTwE3TFdPt0SIpF39w?=
+ =?us-ascii?Q?LIiMdViWWCoCLRsN7G8f/U4Sps/cPx/PkZiqT8EE9Y8aMV+6JohNBCm+7gUU?=
+ =?us-ascii?Q?szzCuLQKkwf9xGdmxYgS02dVbWk7gJYK2Et9Rxm5gcTKpYXtmnouAXM/QOWH?=
+ =?us-ascii?Q?Hz7wf7RBBxhPa07EbfMhpfD4pOyJjkcQtJR4bc8A2qUdBfE12h9nWURMJiZ+?=
+ =?us-ascii?Q?Ypt0E9JwrJiVEz57e76LM5e4HWXGtJX4vEQ0QNZC+JORdbp6/QcZu3DUtxQe?=
+ =?us-ascii?Q?OPohH74OIiJ4iVXiERT5yp5pwhshUsZiu28tM9jkE4FSdujR3183EYPqxnH+?=
+ =?us-ascii?Q?7Lal2rYP0oJpjnb25axAbWA9Se+3wZ7K0OdLYmAoCTeo5I1XnLIsUlO+IJFK?=
+ =?us-ascii?Q?OH2OA1ZjVbw80oMzaJfXdpZWcBH8lA3DEnOiLgxReEUa/j3zYBpkxnBQP8Wh?=
+ =?us-ascii?Q?qIsTdDEcpZFE/VMyq3XG47eBjjxFOmYmVQDkYj/DTIrlbRqFumBVbA=3D=3D?=
 X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DU2PR09MB5294.eurprd09.prod.outlook.com;
  PTR:; CAT:NONE; SFS:(13230040)(376014)(1800799024)(366016)(38070700018);
  DIR:OUT; SFP:1102; 
 MIME-Version: 1.0
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR09MB6261
-Content-Type: multipart/alternative; boundary="=-sjGK/4C3v8oeUjfGnkygLg=="
+Content-Type: multipart/alternative; boundary="=-bU5OaDbTrqtBK1XrRol+Rg=="
 X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB5PEPF00014B8F.eurprd02.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU2PEPF00028D0E.eurprd03.prod.outlook.com
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 6846d292-1294-4ae5-cce3-08dde39bc8d9
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 9d00574b-8835-4b79-4156-08dde39c7fd4
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|35042699022|376014|1032899013|1800799024|36860700013|82310400026|69100299015|14060799003|4053099003|8096899003|2066899003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TUlWVTVESVlsK2t4WktsbE1pTzV3bnhwbW9wdUVpN2ZQampJMm1CY0p0VThw?=
- =?utf-8?B?Yzd5bHBtQy9WWjlJemFZVHRzK2pYempMVGIyTms2YkhnUERwSzYxOVlsSVI1?=
- =?utf-8?B?NVl3WTBlREVMQ2hodTlPaUgyMWxpSnIxS0I3RkwwV3ZuREl5Y3VKS2FrQzNS?=
- =?utf-8?B?SDFqcWZuRVJWU1FNeS8yL05kYlZvWmFsaW9adWxaZldYczdWb0h5YnAwTDg3?=
- =?utf-8?B?bUpack4yaHdrRTFWYWRwM2JGNjU0YTBHdHBhaXVnbms1aE16NWVGMDMzRU5m?=
- =?utf-8?B?elQyL2lFSVNENm91UTRpOFBsQ3oyd3kyTDBsNktyMWUyOHR4d0VzZEZDV3Ny?=
- =?utf-8?B?elovQjRWZkJjcjd4ZDluSDMvNmV1UExxdTQ5WlpML3dFWEVvWnR1VEtwN0My?=
- =?utf-8?B?ZTlTUU96MjkxbkdhU2QvZ2FRZk9McDA2eG9pTld5U0lHOTNQSGlpR0svajFC?=
- =?utf-8?B?eU1JYnA4Q1VZQW4vVlZXb0FyeEx1aW9qMnl5VytzZHdua3RYMGlWL2FrMXZt?=
- =?utf-8?B?WEY1a1hRaUFjL293Zmp0TEZuODREYXlGUGlIbE1VMy9mb3FXSDJTOGRtenFU?=
- =?utf-8?B?NGFPK2JyR3IvT0FrKzdqT0o5M3MwSG9OWFpJQ3B0ODJ0d2E1Z1dZQm1SQ3Za?=
- =?utf-8?B?RnVLdnQvdnVYWFo3RWgvemsvZlNoaEZWNFlHbUdvQXp3aDJ4UE1BM2VwM2Np?=
- =?utf-8?B?WjRlbHhYdDNKNStiY0RDQjZJOHFxSG55akpUZCtPOHVBbktnK2hMb1BMUHVn?=
- =?utf-8?B?eW1FbHpBOGhjU0dHK1NxNllJdmg0SW5vZ3ZKM2xTMFNINVZHcnROZURucklh?=
- =?utf-8?B?cGZCQnZheUZ5VHZUbEVraTNOZmlibXFmMzB2SGE0dWtKeXo2QUZjKzhUYjJI?=
- =?utf-8?B?Y1MvV2tuTVY1K1NnRkZYcjFUZWN2blJFamJSQUFhc1NNWk85T1ZCc2R6SmpT?=
- =?utf-8?B?empRZHR1ZkVnQmpkSUhQWVBWRktlUXk1aVJFMFgydmtHUXhaVDdsK2l1Y0xx?=
- =?utf-8?B?NVd1aUJEY1pKMjhaRWJscC8zSUhmWXJaZjZ4QnFkZEJGVXN3Wnl6dzFYcTFa?=
- =?utf-8?B?K29PTUtGQ0VOSjNDcDh5MW02WmRXeXdCM0dxelRSbytlL2lpWnJFWHFGYVM5?=
- =?utf-8?B?Um1Ebi9Xamg2QktFVzVyRkZONjYzTjhnVEN4cTZoSXhoUG9IYzZldDdBUkpY?=
- =?utf-8?B?TWV6RXBSMkhIdXVmZkxxMjg1NUVQMWZJanIwMmR2WWRwVHBaVWJ0OEMwVVo3?=
- =?utf-8?B?eWdWV05PUmR6MllhYkh5REJvSm9QVHczRjdUMWIvVzBCMDJNR3RlYnZLWEUz?=
- =?utf-8?B?K1l5YVBEV3BjRlpoc3BHMWpHdWdGR29mM0JvSTJDclZPOFpsaVkxeTQxWGhx?=
- =?utf-8?B?bkZOT0NwbjBuZWwxOGs0a25GWkQ4K1VjQU9QU1JRSjVDcWJ4RVZDYi8yc3hJ?=
- =?utf-8?B?clVobnM4aWVBSWdSRnpzOUJtZTlYdjNPSEp6NTJneWRaSE1IZTZTNWdaZWk0?=
- =?utf-8?B?SzBvTTRzdUJSTEZKcytHcm9MMU50ZTRvWmJ0ZFUzblJDZkNTYnZTK1MxVXl5?=
- =?utf-8?B?UDBOMGlnRTF2TXFrdHVYRWZKVFUvSDg3TW9IQzcxUTdvbmFMK1NHVmN3bElQ?=
- =?utf-8?B?YXBGbncvTk5GRGo3Z21rWlVVc2c5N2Z2RlRJejE0Y3ZleDUrSzQrM0VkK0pq?=
- =?utf-8?B?aWFFUEkwVjhFWEVOQ1R1TlhSSW1zZ0wrUjh0b20zRGYxejhncjBTZk96LzUw?=
- =?utf-8?B?NjFrYnFvQ1RGMjNpejcwZEdDVEFkVkw2a3Z5T1cxSW83eGhIU00xRFAzQko4?=
- =?utf-8?B?NGNOYzRiZlY5SExaRWEwREVoWFBySVpxN2RNL1YwekxvSDl1Z09FTElPUjZQ?=
- =?utf-8?B?RVZYQ25ENFZwa002RGwwMmQwTDZVcXZvMkRua3pjNFNweWtVaHpScjhCLzVz?=
- =?utf-8?B?Q2VONnhlWWtsNnlMRE9mZ2s0RWVsekF0ZlJsbWtLZ2ZLQ0REWlQ2L3l3WEJN?=
- =?utf-8?B?ellkNnV6a1RRPT0=?=
-X-Forefront-Antispam-Report: CIP:104.40.229.156; CTRY:NL; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:eu1.smtp.exclaimer.net; PTR:eu1.smtp.exclaimer.net;
+ ARA:13230040|35042699022|1800799024|69100299015|1032899013|14060799003|36860700013|82310400026|376014|4053099003|2066899003|8096899003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?b0dvZEdNbWY5Z2ZsUTRDMHBqbjhlQU1hTTJjZ2Z0ckk4bjYrd3VoTTRLMzZl?=
+ =?utf-8?B?eGtNZ1VGUE44dW5saDVMeWdJaUVvZ0RpS0ZNVFB0a1JXNDJUcVpvM1d4cmM3?=
+ =?utf-8?B?elAwQzJGNHJUSEtJK3h3bTV3K1BFNmYzNGtLK2ZJcGxRNVR6bERrbnIvWTkz?=
+ =?utf-8?B?RWczTDdRMUoxRng5S1RxTVdmVzZ0R1pxSWova0s2QjJvZHZEM2Y2UFlYdWZJ?=
+ =?utf-8?B?SWdBY3ozNWdFTmhqNkhFNVB6bGFuOEppQ2k0K3hYOXNRbEpETTZUQmxlN3Ji?=
+ =?utf-8?B?QzJFUkNxQVVjRDl0ZzJvK2dreXpvU05iQ3VNL3dwR3dEMnY2ckVLOUt0Y0Z4?=
+ =?utf-8?B?RDEvWUNHaGY2Qm5VSlJrTlgwMGdKWXpYMkJWZVR0UFZqZnZGQzJXS21VZjhZ?=
+ =?utf-8?B?OHQ0cHMrZXAvWjBnbHNLNnJUMkdQQUVMUEtaN1FTYUNoWWJUTWlqMHNWczgy?=
+ =?utf-8?B?V05ZUzJHQmw2WWNOamJnR2RhMlZmalFmeG5RZWEzcEFLQlRvU3JSTWRSazE4?=
+ =?utf-8?B?ZnhHaHhURmxZRjFScXZNbkpEbnlpeVQ1Z21zSHRvWkNlN1BLM2tISEttTVJV?=
+ =?utf-8?B?T0VMck5JaUo1SVlBOGFRaUl3SGd0WWRZWGhOQ00wSzk5UzgrQk5ZRXhkNkdm?=
+ =?utf-8?B?QWVwVHF4VHg2UzJMcEtTTTMxQkZrMmVsVy9ZNzFzbzRqWlVDbTFWZWhNN3lU?=
+ =?utf-8?B?b2hMdVRZTjh0TzVIcGN4Tlh5Yk1qdEh2Z1J1S1ZTNGNNbkp0OGhHK04wV1JN?=
+ =?utf-8?B?emMvQ3duWndZREd5M3duRGI2RXIrRWlwS3BWZUUyYjFNUVdKY1J3eExTZk41?=
+ =?utf-8?B?aExENUdXWGM4QnJ4RlRaN2M3cTB1RElZV1VQa1dTcEtsQjZRdUFtMjE3TkNN?=
+ =?utf-8?B?c2dUMndpZkNnKzBMYy9IV205OXZTczNCd3VHR0toWmx0STE5WmcxMUgxVTNV?=
+ =?utf-8?B?bnJObHRlRmEyb1gwMlF4Qk81NVBQZjNuSkJKdnFuQVpMcThEZ1YzcEp1aXc3?=
+ =?utf-8?B?TkQ1b2RBcUErMzFFUEd4YXVhS2FZdCsyOXBzd043Nlh4aWJPSUF6V0w2OUtJ?=
+ =?utf-8?B?SERUNkhhWlVOTlhzTkd2cmJHRUp3UVhDYnA4aEp2WitlUmxEWFJNZm81VTZE?=
+ =?utf-8?B?WDlPNGIxazI0UnhQVUFEbE45VDBkdUlpd3J5WkR5Wi9pampaWmdCd2ZaNk5U?=
+ =?utf-8?B?UnVzbXVUZ1VrUzhHTTdLZ0NwRUpPMVNaQ05WdSs4QjY5dnliSVE2U3VTZlI3?=
+ =?utf-8?B?U2xmRUFiTU50ODNZeDBQK3hWUG1OYnd0MFBabzZ4MzRVRUdmWDY5TlFidERa?=
+ =?utf-8?B?YlNzUUNYZmVSdjRKVGhpS1ZQTDVMV3ZOcjRqZ1NvT3djcXY4eCtLaFNDRWZK?=
+ =?utf-8?B?RktvRzA5T3hIK0NoU01rNmtsdEpKRy9uSXFLUXl3aHovdUVBMUQ3V29CejhW?=
+ =?utf-8?B?QWVCcXZzTEFoWXBjWmNWSnlDM252Zm5rNk9uVkJtTWpnTkQ3RGlpS3M5TUpN?=
+ =?utf-8?B?d3ZJTXduY2pLMkg2NU5GSisyK0ZJbDdoUW1RdUo1d0FSUzd4Yld4U2ZQTnE2?=
+ =?utf-8?B?Y0VxWmdmOHhjd1cxM1d2TmY3WlhtNXBZTDZsWisxdDJzQXhyWGtxY3Q5NmZV?=
+ =?utf-8?B?SVJEUE5zZFlYR1ZBNmw2ZXMyNUhMbFZVb2RTbGlMMzhhWm51Tk5GOU92ZnRq?=
+ =?utf-8?B?d052ZlBCcVJXcXVZSVB6c1N3S0oxbXVjbXIzVlF0czYrbjlMdktJQUIraG9h?=
+ =?utf-8?B?SjZFaEs1SEJvRzFhVVFGYVU0bnFNSlg2ZnNQZG9Ja2lsa1lwYVQ0UWlXdWFO?=
+ =?utf-8?B?NjR6TlhyaVNlUTJySjJadTRZL0YvTWNSR2xaL01jQUY4OG9vUzlGbk1jQjUv?=
+ =?utf-8?B?M3JpdGFMUlJXSU16M1FDdjhGVDVsR3pIRlBsekZ3N1BXcENhOUh3MTN3bnYw?=
+ =?utf-8?B?bXAxUGRYSzRkbm9IWUI0d2x6ZXhTQmRPcTZqNkxqVC84bkRWUEMrem0wckNM?=
+ =?utf-8?B?ZUZaOU1yWHB3PT0=?=
+X-Forefront-Antispam-Report: CIP:52.169.0.179; CTRY:IE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:eu2.smtp.exclaimer.net; PTR:eu2.smtp.exclaimer.net;
  CAT:NONE;
- SFS:(13230040)(35042699022)(376014)(1032899013)(1800799024)(36860700013)(82310400026)(69100299015)(14060799003)(4053099003)(8096899003)(2066899003);
+ SFS:(13230040)(35042699022)(1800799024)(69100299015)(1032899013)(14060799003)(36860700013)(82310400026)(376014)(4053099003)(2066899003)(8096899003);
  DIR:OUT; SFP:1102; 
 X-OriginatorOrg: evk.biz
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2025 05:54:01.0849 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0424afc1-5345-4bbe-635c-08dde39bcaa8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2025 05:59:07.2330 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ebf14f20-cb3d-4537-d8ef-08dde39c8200
 X-MS-Exchange-CrossTenant-Id: 9fe586cd-4f01-4c82-995e-8d696ae0e90e
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9fe586cd-4f01-4c82-995e-8d696ae0e90e; Ip=[104.40.229.156];
- Helo=[eu1.smtp.exclaimer.net]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B8F.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9fe586cd-4f01-4c82-995e-8d696ae0e90e; Ip=[52.169.0.179];
+ Helo=[eu2.smtp.exclaimer.net]
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D0E.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR09MB7668
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR09MB7389
 X-Mailman-Approved-At: Mon, 25 Aug 2025 15:15:31 +0200
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -208,61 +208,274 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---=-sjGK/4C3v8oeUjfGnkygLg==
+--=-bU5OaDbTrqtBK1XrRol+Rg==
 Content-Language: de-DE
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-This part is an FRAM, but can be used through the spi-nor generic code.
+This implements the locking mechanism used for protecting individual
+sectors of Spansion/Infineon S25FL512S chips. This might be applicable to o=
+ther chips of this series,
+but I don't have the hardware to test it.
 
-Signed-off-by: Christoph Reiter mailto:christoph.reiter@evk.biz
+Signed-off-by: Christoph Reiter <christoph.reiter@evk.biz>
 ---
- drivers/mtd/spi/Kconfig       |  6 ++++++
- drivers/mtd/spi/spi-nor-ids.c | 13 +++++++++++++
- 2 files changed, 19 insertions(+)
+ drivers/mtd/spi/sf_internal.h  |   1 +
+ drivers/mtd/spi/spi-nor-core.c | 163 +++++++++++++++++++++++++++++++++
+ drivers/mtd/spi/spi-nor-ids.c  |   4 +-
+ include/linux/mtd/spi-nor.h    |   2 +
+ 4 files changed, 168 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
-index ca60a425ba3..6f92dfaa2ef 100644
---- a/drivers/mtd/spi/Kconfig
-+++ b/drivers/mtd/spi/Kconfig
-@@ -291,4 +291,10 @@ config SPL_SPI_FLASH_MTD
+diff --git a/drivers/mtd/spi/sf_internal.h b/drivers/mtd/spi/sf_internal.h
+index 8d2249ce354..319f4840cd6 100644
+--- a/drivers/mtd/spi/sf_internal.h
++++ b/drivers/mtd/spi/sf_internal.h
+@@ -69,6 +69,7 @@ struct flash_info {
+ #define SPI_NOR_HAS_SST26LOCK	BIT(15)	/* Flash supports lock/unlock via BP=
+R */
+ #define SPI_NOR_OCTAL_READ	BIT(16)	/* Flash supports Octal Read */
+ #define SPI_NOR_OCTAL_DTR_READ	BIT(17)	/* Flash supports Octal DTR Read */
++#define SPI_NOR_HAS_ASP_LOCK	BIT(18)	/* Flash supports Advanced sector pro=
+tection */
+ };
 =20
- 	  If unsure, say N
-=20
-+config SPI_FRAM_FUJITSU
-+	bool "Fujitsu SPI FRAM support"
-+	help
-+	  Add support for the Fujitsu MB85RS256TY FRAM chip. It's treated the sam=
-e
-+	  as SPI NOR flash at the moment.
+ extern const struct flash_info spi_nor_ids[];
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.=
+c
+index 76c33b24368..8821afeda99 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -1553,6 +1553,158 @@ static int stm_is_unlocked(struct spi_nor *nor, lof=
+f_t ofs, uint64_t len)
+ 	return stm_is_unlocked_sr(nor, ofs, len, status);
+ }
+ #endif /* CONFIG_SPI_FLASH_STMICRO */
 +
- endmenu # menu "SPI Flash Support"
++
++/* Advanced Sector Protection for S25FL512S */
++
++#define ASP_DYB_LOCKED 0x0
++#define ASP_DYB_UNLOCKED 0xff
++
++static int _asp_check_params(struct spi_nor *nor, loff_t ofs, uint64_t len=
+)
++{
++	if (ofs + len > nor->size) {
++		dev_err(nor->dev, "Params exceed length of flash\n");
++		return -1;
++	}
++	return 0;
++}
++
++static int _asp_read_dyb(struct spi_nor *nor, loff_t ofs)
++{
++	u8 buf;
++	int ret;
++	struct spi_mem_op op =3D SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_ASP_DYBRD, 0),
++		SPI_MEM_OP_ADDR(4, ofs, 0), /* 4 address bytes */
++		SPI_MEM_OP_NO_DUMMY,
++		SPI_MEM_OP_DATA_IN(1, &buf, 0)); /* read 1 byte */
++	spi_nor_setup_op(nor, &op, nor->reg_proto);
++	op.data.dir =3D SPI_MEM_DATA_IN;
++	ret =3D spi_mem_exec_op(nor->spi, &op);
++	if (ret) {
++		debug("%s: spi_mem_exec_op() ret %d\n", __func__, ret);
++		return ret < 0 ? ret : -1;
++	}
++	return buf;
++}
++
++static int _asp_write_dyb(struct spi_nor *nor, loff_t ofs, u8 value)
++{
++	int ret;
++	struct spi_mem_op op =3D SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_ASP_DYBWR, 0),
++		SPI_MEM_OP_ADDR(4, ofs, 0), /* 4 address bytes */
++		SPI_MEM_OP_NO_DUMMY,
++		SPI_MEM_OP_DATA_OUT(1, &value, 0)); /* write 1 byte */
++	spi_nor_setup_op(nor, &op, nor->reg_proto);
++	op.data.dir =3D SPI_MEM_DATA_OUT;
++
++	write_enable(nor);
++
++	ret =3D spi_mem_exec_op(nor->spi, &op);
++	if (ret) {
++		debug("%s: spi_mem_exec_op() ret %d\n", __func__, ret);
++		return ret < 0 ? ret : -1;
++	}
++
++	ret =3D spi_nor_wait_till_ready(nor);
++	if (ret) {
++		debug("%s: spi_nor_wait_till_ready() ret %d\n", __func__, ret);
++		return ret < 0 ? ret : -1;
++	}
++
++	write_disable(nor);
++	return 0;
++}
++
++static int asp_is_unlocked(struct spi_nor *nor, loff_t ofs, uint64_t len)
++{
++	int ret;
++	loff_t sec_first =3D ofs & ~(nor->sector_size - 1);
++	loff_t sec_last =3D (ofs + len - 1) & ~(nor->sector_size - 1);
++
++	/* Iterate over sectors */
++	for (loff_t sec =3D sec_first; sec <=3D sec_last; sec +=3D nor->sector_si=
+ze) {
++		/* Read DYB byte of that sector */
++		ret =3D _asp_read_dyb(nor, sec);
++		if (ret < 0) {
++			/* Error while reading DYB */
++			debug("%s: _asp_read_dyb() ret %d\n", __func__, ret);
++			return ret;
++		}
++		debug("%s: sector %llx=3D%x\n", __func__, sec, ret);
++		if (ret =3D=3D ASP_DYB_LOCKED) {
++			/* At least 1 sector locked - return immediately */
++			return 0;
++		}
++	}
++	return 1;
++}
++
++static int asp_lock(struct spi_nor *nor, loff_t ofs, uint64_t len)
++{
++	int ret;
++	loff_t sec_first, sec_last;
++
++	if (_asp_check_params(nor, ofs, len)) {
++		return -1;
++	}
++	if (!len) {
++		return 0;
++	}
++	sec_first =3D ofs & ~(nor->sector_size - 1);
++	sec_last =3D (ofs + len - 1) & ~(nor->sector_size - 1);
++
++	/* Iterate over sectors */
++	for (loff_t sec =3D sec_first; sec <=3D sec_last; sec +=3D nor->sector_si=
+ze) {
++		/* Skip if already locked */
++		if (!asp_is_unlocked(nor, sec, nor->sector_size)) {
++			debug("%s: sector %llx already locked\n", __func__, sec);
++			continue;
++		}
++		/* Lock the sector */
++		ret =3D _asp_write_dyb(nor, sec, ASP_DYB_LOCKED);
++		if (ret < 0) {
++			dev_err(nor->dev, "Error locking sector %llx\n", sec);
++			return ret;
++		}
++		debug("%s: Locked sector %llx\n", __func__, sec);
++	}
++	printf("Locked flash sectors %llx-%llx\n", sec_first, sec_last);
++	return 0;
++}
++
++static int asp_unlock(struct spi_nor *nor, loff_t ofs, uint64_t len)
++{
++	int ret;
++	loff_t sec_first, sec_last;
++
++	if (_asp_check_params(nor, ofs, len)) {
++		return -1;
++	}
++	if (!len) {
++		return 0;
++	}
++	sec_first =3D ofs & ~(nor->sector_size - 1);
++	sec_last =3D (ofs + len - 1) & ~(nor->sector_size - 1);
++
++	/* Iterate over sectors */
++	for (loff_t sec =3D sec_first; sec <=3D sec_last; sec +=3D nor->sector_si=
+ze) {
++		/* Skip if already unlocked */
++		if (asp_is_unlocked(nor, sec, nor->sector_size)) {
++			debug("%s: sector %llx already unlocked\n", __func__, sec);
++			continue;
++		}
++		/* Unlock the sector */
++		ret =3D _asp_write_dyb(nor, sec, ASP_DYB_UNLOCKED);
++		if (ret < 0) {
++			dev_err(nor->dev, "Error unlocking sector %llx\n", sec);
++			return ret;
++		}
++		debug("%s: Unlocked sector %llx\n", __func__, sec);
++	}
++	printf("Unlocked flash sectors %llx-%llx\n", sec_first, sec_last);
++	return 0;
++}
++
+ #endif
+=20
+ static const struct flash_info *spi_nor_read_id(struct spi_nor *nor)
+@@ -4570,6 +4722,17 @@ int spi_nor_scan(struct spi_nor *nor)
+ 		nor->flash_is_unlocked =3D sst26_is_unlocked;
+ 	}
+ #endif
++
++#if defined(CONFIG_SPI_FLASH_SPANSION)
++	/* Advanced sector protection */
++	if (info->flags & SPI_NOR_HAS_ASP_LOCK) {
++		log_info("Enabling ASP for %s\n", nor->mtd_name);
++		nor->flash_lock =3D asp_lock;
++		nor->flash_unlock =3D asp_unlock;
++		nor->flash_is_unlocked =3D asp_is_unlocked;
++	}
++#endif
++
+ #endif
+ 	if (info->flags & USE_FSR)
+ 		nor->flags |=3D SNOR_F_USE_FSR;
 diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 0383175beb5..83c836b2596 100644
+index 0383175beb5..48ec20d8ab1 100644
 --- a/drivers/mtd/spi/spi-nor-ids.c
 +++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -86,6 +86,19 @@ const struct flash_info spi_nor_ids[] =3D {
- 	{ INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
- 	{ INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K) },
- #endif
-+#ifdef CONFIG_SPI_FRAM_FUJITSU
-+	/* Fujitsu MB85RS256TY */
-+	{
-+		INFO_NAME("mb85rs256ty")
-+		.id =3D {0x04, 0x7f, 0x25, 0x00, 0x00},
-+		.id_len =3D 3,
-+		.sector_size =3D 32 * 1024,
-+		.n_sectors =3D 1,
-+		.page_size =3D 32 * 1024, /* Whole chip can be written at once */
-+		.flags =3D SPI_NOR_NO_ERASE,
-+		.addr_width =3D 2,
-+	},
-+#endif
- #ifdef CONFIG_SPI_FLASH_GIGADEVICE	/* GIGADEVICE */
- 	/* GigaDevice */
- 	{
+@@ -374,12 +374,12 @@ const struct flash_info spi_nor_ids[] =3D {
+ 	{ INFO("s25sl064p",  0x010216, 0x4d00,  64 * 1024, 128, SPI_NOR_DUAL_READ=
+ | SPI_NOR_QUAD_READ) },
+ 	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR) },
+-	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR | SPI_NOR_HAS_ASP_LOCK) },
+ 	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ | USE_CLSR) },
+-	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL=
+_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO("s25fl512s_256k", 0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_=
+READ | SPI_NOR_QUAD_READ | USE_CLSR | SPI_NOR_HAS_ASP_LOCK) },
+ 	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_=
+READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO("s25fl512s_512k", 0x010220, 0x4f00, 256 * 1024, 256, SPI_NOR_DUAL_=
+READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO("s70fs01gs_256k", 0x010221, 0x4d00, 256 * 1024, 512, SPI_NOR_DUAL_=
+READ | SPI_NOR_QUAD_READ) },
+diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
+index 4eef4ab0488..2294a75b420 100644
+--- a/include/linux/mtd/spi-nor.h
++++ b/include/linux/mtd/spi-nor.h
+@@ -141,6 +141,8 @@
+ #define SPINOR_OP_BRRD		0x16	/* Bank register read */
+ #define SPINOR_OP_CLSR		0x30	/* Clear status register 1 */
+ #define SPINOR_OP_EX4B_CYPRESS	0xB8	/* Exit 4-byte mode */
++#define SPINOR_ASP_DYBRD	0xe0	/* Advanced sector protection - DYB Read */
++#define SPINOR_ASP_DYBWR	0xe1	/* Advanced sector protection - DYB Write */
+=20
+ /* Used for Micron flashes only. */
+ #define SPINOR_OP_RD_EVCR	0x65	/* Read EVCR register */
 --=20
 2.46.1.windows.1
+
 
 ----
 Christoph Reiter, MSc
@@ -287,13 +500,13 @@ t any use, dissemination, or reproduction is strictly prohibited and may be=
 If you are not the intended recipient, please contact the sender by return =
 e-mail and destroy all copies of the original message. [v12190717]
 
---=-sjGK/4C3v8oeUjfGnkygLg==
-Content-Type: image/png; name=image755760.png
+--=-bU5OaDbTrqtBK1XrRol+Rg==
+Content-Type: image/png; name=image537092.png
 Content-Transfer-Encoding: base64
-Content-Disposition: inline; creation-date="Mon, 25 Aug 2025 05:54:01 +0000";
-	filename=image755760.png;
-	modification-date="Mon, 25 Aug 2025 05:54:01 +0000"; size=87116
-Content-Description: image755760.png
+Content-Disposition: inline; creation-date="Mon, 25 Aug 2025 05:59:09 +0000";
+	filename=image537092.png;
+	modification-date="Mon, 25 Aug 2025 05:59:09 +0000"; size=87116
+Content-Description: image537092.png
 
 iVBORw0KGgoAAAANSUhEUgAAAzEAAACyCAYAAAByWkFrAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
 jwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8
@@ -1825,4 +2038,4 @@ iW2C64FQJKGQwDCu2CkyAYGLjUmWJrGWheJlqG6Co2cO8tjWzXT19hIJR1BKBTJp4koLz5UQeH7+
 zFhi/1jomcC0LWzT8uvriDBCUfxGg7LangZCOfd/xVUQEwQEZFDYVNGht6LAqdoMjuahehcbMf8P
 pfvYwZk524oAAAAASUVORK5CYII=
 
---=-sjGK/4C3v8oeUjfGnkygLg==--
+--=-bU5OaDbTrqtBK1XrRol+Rg==--
