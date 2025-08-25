@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A66CA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 18:35:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBD68C8303F
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 18:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FEF9830E4;
-	Mon, 25 Aug 2025 20:34:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6165B82DA1;
+	Mon, 25 Aug 2025 20:49:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f4y3g7tN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fzzi0Lsa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 587D383020; Mon, 25 Aug 2025 20:34:48 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 4930283020; Mon, 25 Aug 2025 20:49:51 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D7A682C84
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 20:34:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C7B382C84
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 20:49:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-30ccebcc7e4so2142123fac.3
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:34:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-61c38da68ddso5254629a12.2
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:49:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756146885; x=1756751685; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aTjr/X9ZtXNX8jfs+wxDEtdSVb3yudo8pmSPyjvsmiY=;
- b=f4y3g7tNMfm/Rxwwwbgdzj6jq8GDUlkXs3apVZ3ZPNxtu4mw53XFwY+uifMp7ZyR3i
- DYXOMTau5rzJiTSNOXvhwsJMa3UQhRgnOAZUSd2LNlJKbXheNc85s2dpREtA1+e6jdbx
- FLlp6xfr3RfMAHztUoFWqafavMzi+lSGyitjM=
+ d=gmail.com; s=20230601; t=1756147788; x=1756752588; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=MXFhFby4JZ6rzfkFVF3kldklqgQAOqYRk4GAhSpdo34=;
+ b=Fzzi0Lsa2bJCBB8fniJqpPRdhiQbhrP7uROkcWkacxh00L4+QBkhPCHYPDNuMraAKQ
+ nx8lg9MAt0Q/OXm6y+oY8CthKHizeFYK7stcMP0w8Wnr8/B6jQx3djccv/Dthf36Q8Ci
+ thWTp+XgDsD/19ikCuW/gv9cOivT4+pxbxJXO03IYDDbH3MKygalC2EoJ7LhlTjKqVAR
+ Z9elkmuxS57tiCMGanlddQKHpZV95Bni5QApvBNcXEFQ6c9Rnb1IJ7LhGks2SlWxnbo1
+ pR02Y6rwpqm3BV9ZmVgoG8V0jRYB98KmNewuTKklTZigySagD1qiXupvSNvVqUZmIq1u
+ y71Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756146885; x=1756751685;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aTjr/X9ZtXNX8jfs+wxDEtdSVb3yudo8pmSPyjvsmiY=;
- b=Amg/lg+6j8s/2D9ThgBnL1sroHwjzlW8Y+x/ZLr6C6kw7M9/CND8Kpl3axZvMjSTuD
- R+rrFPuC6YT7cNXao1rwp8g5o46MDyRagxh+nxkRAmgqkCv1SY1oLE3GWZ17MK8W59i/
- b2W6qz5ZhPj6I+4G+goo8rPGJ5rTZQkRDM0rBSTHi14q2dKXsdFQOnCtb5MorFcDsmC2
- PZZ8/zUkd7gbt5WBuyJazx8UAerB0heOa6WkYqMoK0OFtUOLDiDbv8iV+X1ess7SNROb
- SYO2l6Hp6Y/LJzrXqtnIKEUgT9UMZ8uC17IgaZ6l88/7JkpkyBH7ANleMCUxtkjUisp2
- NU+A==
-X-Gm-Message-State: AOJu0Yx25dbf0f/nghsrkWKZ09BpD4xPk8JE/x3e/PHNf2OlKE+fLXaP
- 0xgTs93OwS/OEvkyVyQYsTaf4NFYm56/Dtg7ITM3G+gqMExQX9hSDTebgo9ewyXLdPY=
-X-Gm-Gg: ASbGncul8ERVMJzXSjVEjnQucvCgocFCTyY9nfExVRlBUzJC9fb+AwPKGpUMHKax3ga
- kespm/KtKibjpnT3Q5TYJkqA+jwbNqfJtIJj3fDPWEiBPmNWanZ0PnDkRXHXiPuMq30bgxYO87g
- tDI8ydgIkbh3/3qJjpX2n8UcA7gAn+ZBLI+1uYoo7vTBa0XwqjknO6l6QwzsnX4H6c0EFJLv4gt
- s91tcB+vE/9S6qfAr9qRf5ffaDgmF73L/hi9CP/GdRxFu7x2KhmzBDHid0BOIXM5PIKNyfNLkfT
- KjTrOW+dBL2E7HJPIrWshC5O7CsgsCGg+lXV9a4zQxC2NHD0DVV5O1E/LElH/X8tCnz7ClWT8S3
- TqQLuNCfFvJFUsCi/DIwDNBbW+NfpxAmbybwaQmUgVF9FzVbfU6Jpgxk=
-X-Google-Smtp-Source: AGHT+IF1xNfyDNGMvW21LbrdlGoVjpbUtlMORVfV9K8xXEHF3vWWBRO6U/xtCAOvf+RKJxuKOXB2hA==
-X-Received: by 2002:a05:6870:2481:b0:30b:8cb9:e709 with SMTP id
- 586e51a60fabf-314dcaac1eemr5239948fac.8.1756146884790; 
- Mon, 25 Aug 2025 11:34:44 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-314f79bbcfdsm1931051fac.7.2025.08.25.11.34.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 11:34:44 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: d.schultz@phytec.de, ggiordano@phytec.com, m.schwan@phytec.de, 
- Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
-In-Reply-To: <20250818102605.2248056-1-w.egorov@phytec.de>
-References: <20250818102605.2248056-1-w.egorov@phytec.de>
-Subject: Re: [PATCH] board: phytec: phycore_am6xx: Add rauc to bootmeths
-Message-Id: <175614688398.2891795.3073723610707927494.b4-ty@konsulko.com>
-Date: Mon, 25 Aug 2025 12:34:43 -0600
+ d=1e100.net; s=20230601; t=1756147788; x=1756752588;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MXFhFby4JZ6rzfkFVF3kldklqgQAOqYRk4GAhSpdo34=;
+ b=oaCusw7daS+vrFlMCyAe33FPBxmW2qFvNDmkbdnw1z4o4GWoJcRStLEeZ4NWrjzi9P
+ dDL1M74VAYELcIMjPauMp+g1YxytNuKyKQvnMmpZ0laDm3fqVry/rpifEfYZ6dkUc0lG
+ xxC9KQ/pDxzCVBMLKwdFln4eZIEJPpwV4sr7myuHn/eB0GKHPQ4bOu/GGQcA9yD6YhW4
+ xjm8ZOjriaP0dNfpPZBQ7Vfq0sHZmsoOYSqhdJVz9sCbfSet/Is0gfwZY9rUM9CmePLj
+ kyIbFuuh9SG/KCPxobxoCOYgj1gk5sR46A1JkCd8lZ1zCtl9jGaQ904pU7sO8AA3DXec
+ my/A==
+X-Gm-Message-State: AOJu0YwgJLrwxjMk9yxo9BlQDmPr9921+CEZTVtzk6dYGPsoBnM3pcXI
+ Zj60AymkvAGuDc5mb/jT9tx0Qe0hc6EoV8XDjVA7VGJuCbo2iQrPzoxmUaA1Xye6kLFtV5plCLF
+ pr0H89fuxuZj5N6JLWek64U24WRDBxAfSvsw1
+X-Gm-Gg: ASbGnctAJ+djF7ionjRq6dg5f6A285w/HZx7Ed1HBCMdtAuAaTOv45JYlDk1JYqtsHE
+ xTnBtL8pMNMbx0lrY+nYixaJikfmBcR/YP5Gx5BF6qqlRtiVQEwjaKwZshwNQui7DH1Irz4lrrm
+ y4UV81mWrVn7CDbI/VDDuzGLBeUMKn1C2fzi6r21XuErpVbiq2aZydalGi8iz9ZyBx07udPs9cR
+ u8x9TzE
+X-Google-Smtp-Source: AGHT+IFk6//h2+ZpoVN/3NBhtXCtIo1GO6iOE86VckCFyh8BhvrEeeYtC+ajr5PMizMHGC3dYjmJHGsXoWWX8h+1L0o=
+X-Received: by 2002:a05:6402:2353:b0:61c:793e:9f07 with SMTP id
+ 4fb4d7f45d1cf-61c793ea749mr2431865a12.6.1756147788215; Mon, 25 Aug 2025
+ 11:49:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 25 Aug 2025 11:49:35 -0700
+X-Gm-Features: Ac12FXyAkjNw6T0xaXluVDJjXbJ2irCGRNrVp-v_ML91c79vW_yItGvY2r-oPt4
+Message-ID: <CAJaLiFwxjWPg+SQ4VVO7Oay4OX-WcCTmNa7FPHCYW6JLQmd9Uw@mail.gmail.com>
+Subject: tools: patman cannot find aiohttp module
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,18 +87,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 18 Aug 2025 12:26:05 +0200, Wadim Egorov wrote:
+Hi Tom,
 
-> Add rauc to bootmeths variable if BOOTMETH_RAUC is enabled.
-> This is setting a proper default for RAUC enabled systems.
-> 
-> 
+I've just done a git pull on the master branch. And then ran patman
+and got this error.
 
-Applied to u-boot/master, thanks!
+./tools/patman/patman  -c1 -s2 send -n
+Traceback (most recent call last):
+  File "/usr/src/u-boot-marvell/./tools/patman/patman", line 21, in <module>
+    from patman import control
+  File "/usr/src/u-boot-marvell/tools/patman/../patman/control.py",
+line 24, in <module>
+    from patman import cseries
+  File "/usr/src/u-boot-marvell/tools/patman/../patman/cseries.py",
+line 19, in <module>
+    from patman import cser_helper
+  File "/usr/src/u-boot-marvell/tools/patman/../patman/cser_helper.py",
+line 18, in <module>
+    import aiohttp
+ModuleNotFoundError: No module named 'aiohttp'
 
-[1/1] board: phytec: phycore_am6xx: Add rauc to bootmeths
-      commit: 03baafe0623b558f3a6b19fad94f34b42abb537a
--- 
-Tom
+I'm on Debian 12.11 and have Python 3.11.2. Is there something I might
+be missing?
 
-
+Thanks,
+Tony
