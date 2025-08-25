@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18C6DC8303F
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 21:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C872ACA0FE7
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 21:59:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28B8F82C84;
-	Mon, 25 Aug 2025 23:33:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E85182DA1;
+	Mon, 25 Aug 2025 23:59:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XO2tb+ru";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GA/9xfvf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D72282DA1; Mon, 25 Aug 2025 23:33:02 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 138AD83020; Mon, 25 Aug 2025 23:59:21 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C3E3828A2
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 23:33:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EB16828A2
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 23:59:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-30ccec2515dso3463806fac.3
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 14:32:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-afcb7af30a5so838350266b.3
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 14:59:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756157579; x=1756762379; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FunEx1iGoQ49JgKMjA4YEksLXBts+mWo41cU9MVEaQ0=;
- b=XO2tb+ruvfO/l2pnXRXSdQnJyd/DNP2fK0GKkAWSWlR111NPQcPULA8HEFkm4lC0oB
- GnELsqFd6a0sl0w1pcuTzoCA688eJdmW0r0qftRJCV3dcfAf+exlNAKQG7RunIzI5498
- 2hcwbkScigsiZEPXm955UbqTR7xKyg1CafUaU=
+ d=gmail.com; s=20230601; t=1756159159; x=1756763959; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QA0k4H3x0oAHUL1JrMuCzbx9stqolY3KtXEUK53m7CI=;
+ b=GA/9xfvfQgBHfdxZh5zvoHqtaGaZCxyeRTu3h7vMUs0uQxy2EXzxb3vS10k6hNpXRW
+ DZLGFtrEZjGzwGc1FuQUKVyF9i56m6QZ2KqrpgeSE62BJnljpPunw3eH29T8nKusfL2u
+ h944AwvaNV3YEEYmPUJnT77eEfVA+f+up0W5LRM891Ob6JVVPFgyKPjo9CyKOOuxOXCU
+ INllCaFUAgSMDx6sga4ggnX6FG2XRtduoTyMjEPM5fQeVGhrXirF15rnt5++nH8jlWik
+ pVQgYMLxYLy7uJLXHOogawrrf3SqOXDH+hEeY/HqpWOwlx009Ugw2gbmnAsJlPz1VLcO
+ 2Vjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756157579; x=1756762379;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FunEx1iGoQ49JgKMjA4YEksLXBts+mWo41cU9MVEaQ0=;
- b=Rj0nLPxgaHHZIZFgei0wDl1L3Tb3OT0Ob3j30RvOo4eczUzDy1XFRsZj9GjUuVjtTU
- x0iNrhL4ayxvOtcVQ5M1XrNHRAakmy/lTkrBgV6t9CE/snQQ37Wc4jNkiPPdnrB9845Q
- EaDjCDriu6RzBnaZtlW+OB4HBQcNL/j59fqR73BMq4N472eDqV10h/XQKBvm+u9rFa/J
- 6xbTpg0yYUe/tkZdfEKPcyYllulcP4G0u1UFL2d7lq9rwHHW6mXe2F9UxR2s9EyYtI9B
- gHodvtVEltdz2Ai1+datuS85Xq0DB7UKQN3XSLzRBBtQAiIeeF3Q5vqZPN9meICRcJn3
- 16RQ==
-X-Gm-Message-State: AOJu0YzvuLCJm6LR7Em2afG+nwAfSZyv5+Ppomzqp74zz9+nYfGFQ2aC
- h8CgIm3Or1rCcpRnMRvHm91e5KOFlmznE44aGsji3yJiYv8qw0kGOsJBZoH97Smno+QzYkvlY+g
- Mr1QDXFM=
-X-Gm-Gg: ASbGncu69U9hcPBtseGRPtoG6NkfpH7F0my6+Rs7ECzJgT+EkrzXEni0m9y72NUnHr9
- 75CK0ZMD1dum/wnHY8hArhNKMA7mDqieykdwMLdUKtRrIdzMv1TSx5uVUS85bD7CnOZrFlAuPHZ
- sMkWL2WFj04LaKsgxff5MXP+fwod6hcZpNalkYrAVVPAQdFBi58OPow1vBp22LuFjk+g+4uhEW/
- VRUYvRtbQ+y0+D0EJ31ZYhF+3bycUq7jtl0I/XGYKzsMR4odwgGiBS6Cmo24r5kpkO9Qzh/mmWY
- gfZ5A/cqyqQieoZMnupyg2w+w3WYAQuGnMQhFFxVuTezEaQ6m4FOrSKyPS9l+ywJ0+zBuZoJ7lT
- vLr2wfwgqOzqgihTUFMpzuaRmAz5ughhyeNUckxyFPG+Ve9/lE6n/oZrq89dqqYfu+w==
-X-Google-Smtp-Source: AGHT+IFZUnLWV+jBgrkmnpn01B1EBg+2tQ1oi1j3xZ1wkJ9urhpJuffnq/8k6YRM2+RA0q99Lg61Zw==
-X-Received: by 2002:a05:6870:e85:b0:30b:b37a:6bcd with SMTP id
- 586e51a60fabf-314dcac2a8emr6958655fac.6.1756157578804; 
- Mon, 25 Aug 2025 14:32:58 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7450e2841ccsm1984421a34.13.2025.08.25.14.32.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 14:32:58 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
-Cc: Heiko Schocher <hs@nabladev.com>, Aniket Limaye <a-limaye@ti.com>
-In-Reply-To: <20250815061719.2758662-1-ravi@prevas.dk>
-References: <20250815061719.2758662-1-ravi@prevas.dk>
-Subject: Re: [PATCH] i2c: omap24xx_i2c: remove unused members of struct
- omap_i2c
-Message-Id: <175615757784.113379.2458531680905401594.b4-ty@konsulko.com>
-Date: Mon, 25 Aug 2025 15:32:57 -0600
+ d=1e100.net; s=20230601; t=1756159159; x=1756763959;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QA0k4H3x0oAHUL1JrMuCzbx9stqolY3KtXEUK53m7CI=;
+ b=B+QrvLBdNhzy5n/jq2EooxwMDggYySYMWLZhtyoJy+btoECJpkRnk6NmfVWbLwqqlE
+ cWboMNapC15yj4oduc8qzhdWt2+TjLYJko2ZH6hyB9nly9wWpJxEB5pEiseqcvUuvAV7
+ zCR4VR4/pdTQ8AP1oh4pc41Hf5rbVcVGhqx80rcaFm6OxOgvfY+TCXSaciJyphYwQaIZ
+ ZuOacvcRtcd9GmVTMXIayXTqsElZOWyzZVcCdIkFCNHA/uNhiVkZc9CC75Nq8nRY8Moy
+ dDUhaG7jBXz1gu5WSrWhph2OKApRMzQePX2fpZN7hoURKtQeRus66F9ZipZzgq8Bj1he
+ JNig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWz8VmJhDJK7+JLidX0YHkPcPmWAgSO20dSUZYdeOQPotGRF1ixZmwpjl7nfdwAiVDPfxzI1J0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRntSuQEocx1q0cPYDfJKTvkkYt8SJlH15q5K6UafXdP/FsdjH
+ ICot6NNEwjgHw4ke5zZg9ujfg1XgcezYaEDY6GKpuH/6vfmbRd+T5ITZy3/tK5DuFXjJ8MXAoKx
+ qq3Qfke57Iu2JxfF392BU1yPDooB+gVs=
+X-Gm-Gg: ASbGncuP1Bfu2jL8LBYs292tLmrasdbdJarojnt0k7DpHHfnxgobJBNc5psNeSZVRmu
+ kKfEEwtb+KiVOqvIoRHsIaNvts/xPNM+Dst2ivGo4Ny3wqfKFrtZPiWAWC9a9IViH5VtREM2AA2
+ QgAKV69/0/N5EFO1MnIMJH2xy/XgxFEbTXSNfjGLvYygDYh1hlJvUJlUOVh0/I7nGJ8GQC8ftXQ
+ hYQ0oNAORF9V7grnupY4/u2bXpjTRnH9qnuww==
+X-Google-Smtp-Source: AGHT+IEdsm+tSqDx5yiU2sV8EB4WT3C4B+6Y8HI9sB/wlKcUSjYu1i+k04Q4ZuAPkV0fdekR7RLVsG6PBAmgaiYX7KA=
+X-Received: by 2002:a17:906:9f87:b0:af9:c31c:eeca with SMTP id
+ a640c23a62f3a-afe295c0d8bmr1338662766b.48.1756159158297; Mon, 25 Aug 2025
+ 14:59:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250810233742.51902-1-adrianocarvalho.pt@gmail.com>
+ <20250810233742.51902-7-adrianocarvalho.pt@gmail.com>
+ <b8fa5fa1-0028-43e5-bb14-db94fd16bf3c@gmx.de>
+ <CACAHuLDQ9gp6G1KnbPTH2bcdFChY4x_M1HC0fJU-SJ0ozkghKA@mail.gmail.com>
+ <CACAHuLD=fkEKq9e83f3ePQHO1N5dnVsRuFHwR6U12jv2EBJnew@mail.gmail.com>
+ <20250822214045.GP124814@bill-the-cat>
+In-Reply-To: <20250822214045.GP124814@bill-the-cat>
+From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Date: Mon, 25 Aug 2025 22:59:05 +0100
+X-Gm-Features: Ac12FXwB_lyUUZ81OTFeZUGCvADQKOmC1sRUaKgBXiVWkFGc42u7oMi7phIxHto
+Message-ID: <CACAHuLDXaAuWTey1iFw4NUCq=kysuy4PKLWXRSypGtdK4XprVA@mail.gmail.com>
+Subject: Re: [PATCH 06/10] doc: Add riscv to the list of architectures in
+ tools/buildman/buildman.rst
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,18 +99,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Aug 2025 08:17:19 +0200, Rasmus Villemoes wrote:
+On Fri, 22 Aug 2025 at 22:40, Tom Rini <trini@konsulko.com> wrote:
+> [...]
+> There's a few things well out date at this point:
+> - The output from '--fetch-arch list' shows what can be downloaded from
+>   kernel.org. Keep in mind these are public toolchains, for the Linux
+>   kernel and are also fine for us. That's why it lists so many more.
+> - The section "Check the available toolchains" should be replaced with
+>   modern output, and you need to pass -v to get such verbose details now
+>   rather than simply a list of what would be used.
+> - The section "Install new toolchains if needed" should be replaced with
+>   output from using an architecture U-Boot still supports such as arm64
+>   or riscv.
+> - The "toolchain-alias" parts don't list what aliases one needs and
+>   since 'riscv = riscv64' is needed, rephrasing that earlier part of the
+>   document should be done too.
+>
+> Thanks for working on this area!
+>
+> --
+> Tom
 
-> The clk and clk_id members of struct omap_i2c are not used anywhere,
-> and AFAICT never have been.
-> 
-> 
+I hope you don't mind that I'll leave that to a different patch series.
 
-Applied to u-boot/next, thanks!
-
-[1/1] i2c: omap24xx_i2c: remove unused members of struct omap_i2c
-      commit: 91595c96a53360dce696c2da694b1983c91d64f6
--- 
-Tom
-
-
+Com os melhores cumprimentos. / Best regards.
+Adriano Carvalho
