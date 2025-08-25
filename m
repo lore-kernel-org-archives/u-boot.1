@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 582F5CA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 22:46:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2ED9CA0FE7
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 22:47:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C19D0831BB;
-	Tue, 26 Aug 2025 00:46:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5AEB7831B4;
+	Tue, 26 Aug 2025 00:46:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bNgAEKKR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dePSM3dO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71B23831B4; Tue, 26 Aug 2025 00:46:23 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id B3AF0831C5; Tue, 26 Aug 2025 00:46:25 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77E7C828A2
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 00:46:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BA5B828A2
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 00:46:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3c98b309804so1242939f8f.1
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:46:21 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-45a1b0c52f3so30024925e9.3
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:46:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756161981; x=1756766781; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1756161983; x=1756766783; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=342mSs5rRvHrnlOqA/DiZjoWIF40U8xpFJ9hdmW/dj4=;
- b=bNgAEKKRwt9ohxFdoc+/J1P5cpMDoIcP2230Pn4k6Kpw5qg5kq8YVylRYYOAv39gWL
- wUImlTXw7CTFhbt2FjKz9jC/ZC9yJfpdpYWo881IEJ9iSROSbGdgxxgcfY6caS0kvetF
- mcPm6mJ34CJyaL+XhivQs72fQzp3TLraI7YwtJyBkwxzqYAQ1w2//Bz6N3PebJu2dkPj
- 5LptHRjbXDSRdFjc5bsH2oWuwkHe0pfk3dCyu3Epu5qxqadsEmUqkleaSnOykLM+rHsa
- FyNk/CUFaX5VO1Dhxrtsp/TLlLIWP9KtuGqxZl48/PUX5bqZ7PpK+/CyEuNV9+G3SClZ
- nFug==
+ bh=Q3f4nxo5XWpQtStMzFY6ECnd0WuPgRu1GAEjhp/I1gM=;
+ b=dePSM3dOYIPgJYaP+/+t8EAbDv6VW4nHtjdPqnO+9ixvKyyIyBJXKJHuePNgnPBWy5
+ yQ3TzLHKimJXMqDkF1gRvuq3ObnRySMpZaFuUARaYQRiXHpf4eZ5itdGPXl8rs7Yg9Pj
+ /5knwAASMI8GsEZOGv3sYY8Art94FkIOVjSEImovvYgPr6FBHTNiNWNNFhBfoCjb3yab
+ sf5uuR1bgAAj+RfKsEld3JS66ArNquqWv4OMB7T8oQQZHHQh42AVHAclqC+um0RaWNm8
+ wYG15fpVE+9Yg/Wyy9fNqZc2JxOSk/6QCqKmUDAjkZqo3ffmtqm9sVjnh5BVYqNR7QVH
+ 1mBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756161981; x=1756766781;
+ d=1e100.net; s=20230601; t=1756161983; x=1756766783;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=342mSs5rRvHrnlOqA/DiZjoWIF40U8xpFJ9hdmW/dj4=;
- b=lS2R6NfH6FYKcka20ZBNUcj6CoINLCe86j1VEc+JnAf5uqMp64Oqj95k92flU2hpg6
- r0QUyF/6kQMDPDXOblwLQ3XQt9zHE5Biag1ssAaDI/ZeWc6uY0FK4IC4FtRrfKyeOeNi
- L6FMZDmVb8Q/pKGw/EwJZJu3vmbtlKe66NlWJ8r0AVMppqt2gavfVr8eGA1x3NP1r3PX
- yBGlVQvdGa299mabdnY2kviwb9uQ+4Fh00x/UjiC9DSMMjpUEOYIF2hgHITuW8Zvdypp
- utOs5Wh4jBuzCbA0bKAGV0XaLoMh9ZR8P/wpBE9Wizu408LER/TbHm7T3HEJFFQK9Y7/
- dJZw==
-X-Gm-Message-State: AOJu0Yy7KUGZ/+mKp3klcX4PjxEL7v5LOSvfMXluJ0ft6c2FLEd4GVa6
- W3+Jj7d9+q8X1b+ao8lru9LZNKwgGFbm5Bntg7Hp9/UKcfjDJvirt+H1BS7Wh1jecSA=
-X-Gm-Gg: ASbGncsMOdIUEMZzY61fwA+xw4/TByhHlESeF5l8qCuW2dScqeYR1KUqb0uA/cMu1Po
- x0w0hab4Er3qS/z0h8P6n50SoN6fu+qG385LHx43EdgcDoJkB87FRH6FsNqfRThRMxCH/9ZyHxB
- DqgSSno2zXl+b+uN4zCvwgx85Vvq8igNOKIyq5gWUeL/npg9y5uA46xM4cSFychJAVa23ZRFUDH
- 63hYEGJp1iRtOk6BXLjkCN6c2NhgDQW+GgRhrfzqyya/bkC2ur28JIds3f9WGmsscjDyBus7SKF
- WezOT+rPVOc7XIJKJJFy7MsjRGaHmgpRYmDcAU6K1okbCEnLGbMMl+904VRdKxmKE8aLkLxgNQV
- 9zvSf0jGWJqMP9ezinjwFh1bPgxE6
-X-Google-Smtp-Source: AGHT+IGcPA+HClwwFsPxUu6AZK0Gk51mwFqUc6oWKpg5+kCa2fSogL5OEojpNj6UTebDQJeUrpg9bw==
-X-Received: by 2002:a5d:64ce:0:b0:3bb:2fb3:9dc3 with SMTP id
- ffacd0b85a97d-3c5da54e679mr11048316f8f.5.1756161980586; 
- Mon, 25 Aug 2025 15:46:20 -0700 (PDT)
+ bh=Q3f4nxo5XWpQtStMzFY6ECnd0WuPgRu1GAEjhp/I1gM=;
+ b=JnB+ElLDmy9XcRM4gVlrSJ/H1ESWMBxPtR0RYKpOsMcyDePulrmjxUhRW3Q3IVBG+9
+ qrfCj6XTo+JJR3JgHPSjFFCu0xW2kNyOcW3JEhXypYvtqQgpZkIe24XmSCjX+wKgbja3
+ A5mYC/ujgrzQxtCKjLGkOoKAXLOFc9POJeDI9MRSSGMaEcDl3KruC0w/RLhgHmMPBULq
+ SCLMj+2QBHiekzMcb/+yysOBlnMNPCZBQLwF6nxcOzTrv3FxSFBJWWsa+nwBGgKj2ncx
+ TpdBjwsaI834Il+Lzvu26jjx+0M8V03KnEM0E//IdBe72npTXeL0+xwoH4XIPlIeB45/
+ F3ug==
+X-Gm-Message-State: AOJu0Yzx2qfkojw+bCxocOVCElBlSmntxt+Eiwd0HDToj4P//X7Rucof
+ g+JQgEtJ/7n4VF63tMVvnfNTC5bHd6yj0/d7AkyNyqcoXTadJDs+MNQ751WaVgW86vg=
+X-Gm-Gg: ASbGncu8engV6b9x0NRbNPsQeH8MBdddMdbK6qTPhyyRCmz2IyPTUK61nJM0tywEORS
+ V53gIWuZwScVkX7s5E7aGjClpxktnPyOdT/xKLWaNNmOzKhynbPl4WvIsdrc9DRBnKm3QRzg/q5
+ 5aTzcxyS4Xp+fErUxKpxJdvJkhJgU6uBK/acjVhxTaJgl/iYw/oUcZRpQCfOsvj6WobYsVOxXC7
+ MLlJonhAWC5XeOMW2rL1DpTVcn3lH/cTncs1vb0EYoznCmVRhAd9yzH0UVNta4iBsFZqe2hoWfb
+ v6lBHmihaYV3Gex8CUgrqhhfVddVoSKJvAiQ1yAxyaw9bXpKvvq1O6MCO4O7XAx+vNUBnqJEm1x
+ MxKH9wwjWDg9oq/O2MHC88nKV0KBi
+X-Google-Smtp-Source: AGHT+IFVwAmMMkXJW5elOzbVugFNrsNjq8pPNSyBnMmr9RcdIX+842OcaAus59gz0KnkaAscCTWmow==
+X-Received: by 2002:a05:600c:4695:b0:456:26a1:a0c1 with SMTP id
+ 5b1f17b1804b1-45b517cb8e5mr147040215e9.17.1756161982684; 
+ Mon, 25 Aug 2025 15:46:22 -0700 (PDT)
 Received: from N580G.. ([2001:8a0:c46c:a000:ba6:baf1:694:9882])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3c7116e1397sm13296086f8f.49.2025.08.25.15.46.19
+ ffacd0b85a97d-3c7116e1397sm13296086f8f.49.2025.08.25.15.46.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 15:46:20 -0700 (PDT)
+ Mon, 25 Aug 2025 15:46:22 -0700 (PDT)
 From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Adriano Carvalho <adrianocarvalho.pt@gmail.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Neha Malcom Francis <n-francis@ti.com>
-Subject: [PATCH 6/7] doc: make pdfdocs: Increase the maximum list depth
-Date: Mon, 25 Aug 2025 23:44:49 +0100
-Message-ID: <20250825224459.682403-7-adrianocarvalho.pt@gmail.com>
+Subject: [PATCH 7/7] doc: make pdfdocs: Remove redundant "-j" option
+Date: Mon, 25 Aug 2025 23:44:50 +0100
+Message-ID: <20250825224459.682403-8-adrianocarvalho.pt@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250825224459.682403-1-adrianocarvalho.pt@gmail.com>
 References: <20250825224459.682403-1-adrianocarvalho.pt@gmail.com>
@@ -100,81 +100,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to sphinx-build's documentation, by default the maximum list depth (latex_elements.maxlistdepth in conf.py) is six, which is not enough for U-Boot's documentation, leading to errors. See below.
-This commit sets maxlistdepth to ten, solving the problem.
-
-If maxlistdepth is not set to ten, this is what I get with docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025:
-
-(myenv) uboot@35c89b9ab70e:~/u-boot$ make pdfdocs
-[...]
-xelatex  'android.tex'
-[...]
-Output written on android.pdf (28 pages).
-[...]
-xelatex  'api.tex'
-[...]
-Output written on api.pdf (431 pages).
-[...]
-xelatex  'arch.tex'
-[...]
-Output written on arch.pdf (62 pages).
-[...]
-xelatex  'board.tex'
-[...]
-
-[340]
-
-! LaTeX Error: Too deeply nested.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...
-
-l.25503 \begin{itemize}
-
-? Output written on board.pdf (344 pages).
-Transcript written on board.log.
-make[2]: *** [Makefile:29: board.pdf] Error 1
-make[1]: *** [doc/Makefile:95: pdfdocs] Error 2
-make: *** [Makefile:2686: pdfdocs] Error 2
-
-This solves the problem with the pdfdocs target (in docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025 at least).
-The docs have been updated as well, assuming the issues with the pdfdocs target are fixed.
+The "-j" option is specified twice which seems redundant.
+sphinx-build's documentation doesn't mention the use of this options twice.
+The "-j auto" version has been kept and the other version removed.
 
 Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 ---
- doc/build/documentation.rst | 4 +---
- doc/conf.py                 | 2 ++
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ doc/Makefile | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/doc/build/documentation.rst b/doc/build/documentation.rst
-index 1e97085fc89..bb13b8589b3 100644
---- a/doc/build/documentation.rst
-+++ b/doc/build/documentation.rst
-@@ -84,9 +84,7 @@ The *pdfdocs* target is meant to be used to build PDF documentation:
-     # Deactivate the Python environment
-     deactivate
- 
--However, as of v2023.01 it fails with 'LaTeX Error: Too deeply nested'.
--
--We can use texi2pdf instead:
-+The *texinfodocs* target, together with *texi2pdf*, can also be used to build PDF documentation:
- 
- .. code-block:: bash
- 
-diff --git a/doc/conf.py b/doc/conf.py
-index 43472d5dc3d..7b1a1a2a6a1 100644
---- a/doc/conf.py
-+++ b/doc/conf.py
-@@ -378,6 +378,8 @@ latex_elements = {
-         \\setromanfont{DejaVu Serif}
-         \\setmonofont{DejaVu Sans Mono}
-      ''',
-+
-+     'maxlistdepth': 10, # Default is 6.
- }
- 
- # At least one book (translations) may have Asian characters
+diff --git a/doc/Makefile b/doc/Makefile
+index d0904a9f990..b37071b2803 100644
+--- a/doc/Makefile
++++ b/doc/Makefile
+@@ -56,7 +56,6 @@ quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(BUILDDIR)/$3/$4)
+ 	PYTHONDONTWRITEBYTECODE=1 \
+ 	BUILDDIR=$(abspath $(BUILDDIR)) SPHINX_CONF=$(abspath $(srctree)/$(src)/$5/$(SPHINX_CONF)) \
+ 	$(SPHINXBUILD) \
+-	-j$(shell nproc) \
+ 	-b $2 \
+ 	-j auto \
+ 	-c $(abspath $(srctree)/$(src)) \
 -- 
 2.48.1
 
