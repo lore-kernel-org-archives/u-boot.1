@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9A2CA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 22:58:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B198C8303F
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 23:00:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D999805D7;
-	Tue, 26 Aug 2025 00:58:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BFBED830B4;
+	Tue, 26 Aug 2025 01:00:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MigI4j21";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ULMWyPFi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 866FD805D7; Tue, 26 Aug 2025 00:58:31 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id B02B4830C0; Tue, 26 Aug 2025 01:00:51 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C429803F5
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 00:58:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80D5A805D7
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 01:00:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-30cce8c3afaso3104046fac.1
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:58:29 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-743814bcca2so3972121a34.0
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 16:00:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756162708; x=1756767508; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1756162848; x=1756767648; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kuZAe7hOa/5mifswFh6JNnxh9hKR4+1jmVJGjkMkCAE=;
- b=MigI4j21iFASFSm6WzHLMLU57XOutLnGqBb1Q+BVUBuCzTyZudAcUmPGNPhhEsfxir
- BMCorlCVn/rGZ7J+sY6s371WVrVoExDmXqxQ316eycsRHsqR2WASHyaK0y1T+BfD3weW
- ug/jCcve7lVHnYhw7j6/rzgLnboTm8r8MxKfw=
+ bh=aGuuwE2kfnirhpgN/DkKOQhkaOpkRMqEJp53vR8FoJc=;
+ b=ULMWyPFikjCVSmhR15FROvXoBCziWsTH/CceRpMgBnQbAZ6L7bqijKGG5hOa5XCx1r
+ TA0OYto68igeCj0QORKuHa2BL+kayE++IN8Y5npcokbR0SXIFDB+tKlWNxFkeoqUt+Eh
+ 9sJLUmCfLyH+gpafRE/FzE8zP8f6Ha6N+Tlq4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756162708; x=1756767508;
+ d=1e100.net; s=20230601; t=1756162848; x=1756767648;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kuZAe7hOa/5mifswFh6JNnxh9hKR4+1jmVJGjkMkCAE=;
- b=u830HOgmGfR+nd6C7DfqWpSzfv+FGTThWLAEh9EYHv7MGm+4VnpuQIuEm0XdFxFTYK
- GeF687ii586az54uOGTEK39juIHV3Vp2q4//x0WfeLkVmUY1+zQd38yhsjWntrOMvvCZ
- 9D86N4DmbgJDKtns0YjoZ6FUhvQb0OKa1lzi2w7urrWuFMfWO4cVz9gUiJvKwWDyBw8f
- BVHsu6r8WSbQ3OnDi0Gh6HuuG0dOKBc0E28AdcaI6kTn87fSazMbYYHZEDoOK7J0bgEF
- fu9I/yfr0kIPiaRe+GET6l4b7w6WlxlyvXUsmb7bzJNcHXkbcrfT+I11OxsMNGi48wPv
- IqPw==
-X-Gm-Message-State: AOJu0YzqU2GXjnVYe4JMOboolMQ20XI/+ch47YHH36NCf10/BCYQo7z8
- fzMOVzrYJW8DE+SPGLiDZTjkgvVvWIhAwBiHmdWmq1riE70jXU16ofWG0+sZOs6B/gI=
-X-Gm-Gg: ASbGncvpYgodjsUI8qgzXLBdFx3+EvJspM7vcOenW4+Bs0633davsci0R9JeEHflVCH
- 67rd3idlq3rOh5umhd/OJQQcdh2qzemd3DgSM4ZJHhIHwc/F8NJZYvkz1N2MMF2pyc2YPshdz4l
- VmDucv2csDtn3ETKvRSNvTI9ja5e+az/j1bHM2DDMSWEz8/gPkJqVNygCa36F3a11N+Nxuk3gw1
- yIhWxJu8KGxWC0WQPby2qWS6zGumpxsEpBshg6fYVfdY2UjzuxBAHYNH41ufB2wCORy4qeJ2HL/
- sj2aDwTW0T003YajfBAhzV/lt8lCg7pJQ1g6YCHGc1Zo6YP9f18VIo53G3Jh7i2H2yQ1WjexsB5
- kxCdH9BARIy7zfnokpK9ngcpnG0JBNfAiFYnLBA05NOF8zTHm1Lw4yFAO
-X-Google-Smtp-Source: AGHT+IHLgnZCu+ouhfqExNWUkABaGXSFYUC/97+UGgQiQMekMd1VaRSFK0ffwrwCnop86qQDVaTpNQ==
-X-Received: by 2002:a05:6871:e786:b0:2ff:9224:b1c8 with SMTP id
- 586e51a60fabf-314dcdb031cmr7130416fac.36.1756162708143; 
- Mon, 25 Aug 2025 15:58:28 -0700 (PDT)
+ bh=aGuuwE2kfnirhpgN/DkKOQhkaOpkRMqEJp53vR8FoJc=;
+ b=GPZ8Ec7eM3hrvjzh3elhtKN6rSgnSDwgay24QJhu62bfnbYmjbTMjrAlZuG6U8Zaa5
+ u0jxciDj8TM0cvdDV519X8s/GZgqRPToYija1yzWLdrc+GikbGmJm/cGC1J6pHpzMRhd
+ XdLesYd0y40ch/x0ds73qIABaMCwDZzymad9EpStRuWaUVll6O76jFJzvnzN54DC3MBi
+ WFottLtjh3EVFsL2fYrYLHuIP5vyj/OJ6DtCx849QIzR4Wkg7g6zzVf2aL0Dk83HopYY
+ t/kFNVKgLEIOy8nnMXzWLmXoHYcaCro4krKRUs4wFDoHJTB2TrzIPHLLkrWC0Ur4xTIE
+ DzQQ==
+X-Gm-Message-State: AOJu0YwG6VOQYNgx6e9FnIT7VjuBufr3whyiFEfwyVmK+9bU5TPVVVDp
+ xcuk4BxsEU69Hr8pGt+9sC2ZObn+wWPpajMXxp0hxJSo8VT6ZBmLt/jreAxRIiIB4TI=
+X-Gm-Gg: ASbGnctC6TSIpxKieszxsu/V7iMctm+ubqDTvHmxJhmeD3JgJpKgRJm7BSvMkUyn3cA
+ SNxgaITXzIhD6ma2uex6Q3lHOzk2kHWBxHzplrglXJvkhUMMT1dlHm3IMgNHsTFMUTq/dHL7KJq
+ wmaGhe5shGW4Oij+rUSaVx1Tfhqa1iyRYRBLNruLHuhLItMtx4QW5aWmiJqpgT6popH2RrR7JGv
+ 5tFnVUrkV2xCv4kL4RNMj3E5ZwCq1rE7GJcxWW+TbqgGY4WMDe4EucnCaBScOmQLsuExGjzKFlj
+ YqzwX6YpCyCbUFwXyUi8NnkZBtfraQqPg4/UtAzl9taL7vcKeoIzGvKS6om3UgATOD1KpnbsS3T
+ jPWRlgjAGX257CbmDkQ3J6VzQFREADcylrN/ex/zTmCiAJFhe6UNfQWQb
+X-Google-Smtp-Source: AGHT+IHhDqQWicQZdXL07t0BlvXyQOTz6mLPGY3ennLFsDSIdYciT2rvNDkV9jKZ+7dEp65clSKhSA==
+X-Received: by 2002:a05:6830:8414:b0:742:fd5a:5a17 with SMTP id
+ 46e09a7af769-74532b5b2d5mr58712a34.6.1756162848177; 
+ Mon, 25 Aug 2025 16:00:48 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-314f79ab6ddsm2066158fac.6.2025.08.25.15.58.26
+ 006d021491bc7-61dc786cafbsm1131936eaf.18.2025.08.25.16.00.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 15:58:26 -0700 (PDT)
-Date: Mon, 25 Aug 2025 16:58:24 -0600
+ Mon, 25 Aug 2025 16:00:47 -0700 (PDT)
+Date: Mon, 25 Aug 2025 17:00:44 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Neha Malcom Francis <n-francis@ti.com>
-Subject: Re: [PATCH 5/7] doc: make pdfdocs: Update empty SVG file to
- something, otherwise compilation of the *.tex files fails
-Message-ID: <20250825225824.GA124814@bill-the-cat>
+Subject: Re: [PATCH 4/7] doc: make pdfdocs: Ensure SVG files are converted to
+ PDF before the compilation of *.tex files
+Message-ID: <20250825230044.GB124814@bill-the-cat>
 References: <20250825224459.682403-1-adrianocarvalho.pt@gmail.com>
- <20250825224459.682403-6-adrianocarvalho.pt@gmail.com>
+ <20250825224459.682403-5-adrianocarvalho.pt@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MRUhgw6ZzUx3SD9K"
+ protocol="application/pgp-signature"; boundary="wGP8wVvhKelSNqp/"
 Content-Disposition: inline
-In-Reply-To: <20250825224459.682403-6-adrianocarvalho.pt@gmail.com>
+In-Reply-To: <20250825224459.682403-5-adrianocarvalho.pt@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,55 +100,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---MRUhgw6ZzUx3SD9K
+--wGP8wVvhKelSNqp/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 25, 2025 at 11:44:48PM +0100, Adriano Carvalho wrote:
+On Mon, Aug 25, 2025 at 11:44:47PM +0100, Adriano Carvalho wrote:
 
-> There is one SVG file (doc/develop/pics/spl_before_reloc.svg) that is emp=
-ty (0-byte) and because of that it is not translated to PDF leading to an e=
-rror. See below.
-> This commit updates that file to something (i.e., an simple image with "T=
-ODO" written on it), solving the problem.
->=20
-> The error in docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul=
-2025:
->=20
-> uboot@35c89b9ab70e:~/u-boot$ make pdfdocs
-> [...]
-> WARNING: cannot copy image file '/home/uboot/u-boot/doc/output/.doctrees/=
-images/spl_before_reloc.pdf': /home/uboot/u-boot/doc/output/.doctrees/image=
-s/spl_before_reloc.pdf does not exist
-> [...]
-> build finished with problems, 1 warning (with warnings treated as errors).
-> make[1]: *** [doc/Makefile:84: latexdocs] Error 1
-> make: *** [Makefile:2686: pdfdocs] Error 2
->=20
-> NOTE: This won't completely fix the pdfdocs target. See next commit(s).
->=20
-> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-> ---
->  doc/develop/pics/spl_before_reloc.svg | Bin 0 -> 239 bytes
->  1 file changed, 0 insertions(+), 0 deletions(-)
+> SVG files are not handled directly in the *.tex files.
+> This commit adds sphinxcontrib.inkscapeconverter (from the sphinxcontrib-=
+svg2pdfconverter package) to sphinx's extensions in conf.py to ensure SVG f=
+iles are converted to PDF before the compilation of *.tex files.
+> The needed steps are also updated and inkscape is specified as a dependen=
+cy.
 
-It's not supposed to be zero byte I assume, so can we please figure out
-what patch was misapplied (I have some ideas) and then find the version
-where we get the right SVG? Thanks.
+This seems very heavy, is there not some other conversion we can do in
+order to support PDF output?
 
 --=20
 Tom
 
---MRUhgw6ZzUx3SD9K
+--wGP8wVvhKelSNqp/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKzqkAAKCRAr4qD1Cr/k
-Cue+AQCz18f/aPGOVovVNHh449VPlj1GxkefRl4IzQvUl8qwSwD+J928+R9P9lv8
-e3znNURhxKIzmlAwVRUNZIr+QyrK+Ao=
-=pKt7
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaKzrHAAKCRAr4qD1Cr/k
+CnNPAP9tTV5XNAbvAcKfPKPzScHyWesT0Z868FuTI+azUpkvRAD/WYdM/NcE2/Kx
+O5Kxlo0z9kt24zvOHHXTzEFV7/HndQM=
+=+igJ
 -----END PGP SIGNATURE-----
 
---MRUhgw6ZzUx3SD9K--
+--wGP8wVvhKelSNqp/--
