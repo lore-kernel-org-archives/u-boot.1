@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 104BFCA0FE7
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 14:16:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A1BCA0EFA
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 14:29:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D7D883071;
-	Mon, 25 Aug 2025 16:16:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 403EF8304F;
+	Mon, 25 Aug 2025 16:29:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=inbox.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ftgllJZm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=inbox.ru header.i=@inbox.ru header.b="YzYXoGsz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA1EA8307F; Mon, 25 Aug 2025 16:16:03 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C065E8307F; Mon, 25 Aug 2025 15:49:34 +0200 (CEST)
+Received: from send264.i.mail.ru (send264.i.mail.ru [95.163.59.103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C84C58304F
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 16:16:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8298082DA1
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 15:49:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=inbox.ru
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-61ddbc4264cso339840eaf.0
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 07:16:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756131359; x=1756736159; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5q1nEe/l/w+e6jZU9X+Ed2XP46q2FPL1EJM2UgU6NIM=;
- b=ftgllJZmrS9rlFtU+mZU1YXI1ThiiTBJucE6GuAPJ9pvOCPN1TX+gXvvc/3kfG4Rgs
- twns/VKnvzj5so4L8xsT41hiShvNsuu00mDDoestBXVU9bvZUwlDw4S0skkvf2dteiHs
- GmIs/P0Swnp5dv1evUHNSctMpw+WsmU7cx67w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756131359; x=1756736159;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5q1nEe/l/w+e6jZU9X+Ed2XP46q2FPL1EJM2UgU6NIM=;
- b=GORnaU7li864NOY/RdZrXQEN7ymg1ZNv9vqbuJsIR5EDPdgq62KJD+IMvJ0ntKp8k0
- 7FuG4HIzR21qrmruksyUjhdfh7FiyUovvmajanIAwOxZIwNK1jvHtpWZDTKi9+/YBaFx
- AUYPY8hq/p0FXtMugGj4bISakm7/Ins7f8O0c0SO9gos8EnWgl1q/bgHGT9z6LMINArN
- l1c6x1FndRndoNG/A9OC2OMvw7ADvBFUb5O+24rE+Plhbpzp1da8+0NyrhlE2RwGTka6
- av1xVXINJzwhoES6lgE7THVPpS9H2pCPOToGT7Pv0nQ5jjhEy1dJGFAyxBsbqin0nUNj
- 982w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrPSBiR5L5aVYgtLWDj1CgxSNOcSA3LE/E/PJSRcux4pS3pY4XJNcZfhBV5+PVM+CYMLIgUEM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzh3Ey2EjwjoOeaTwHdKEzGPIVflNZ44kIHxzXIKpGcH0liaSBp
- /ekCMCyPW5M30gqYGHpGlKLmcCIRUe4E6V88j2No+r4+gEy5ZlEsUSfqZS/hba+OiXhQ5TXDrOv
- bS0Cc9f0=
-X-Gm-Gg: ASbGncv+fvZo98eFMD3c5ifO1Zlvm5NEJq6isCGmsSC4/rBbqd4WwhUOfEpj7VbtvXM
- IY86FztO5DUSc00Lx1cdphZMkMULzU86UzeO9hP0R9lXNrzeJYw6yAIX+x2VqGm1ZnZrf6n0bvI
- KoB81ZjsFB1tydhPQikBw9Z/sJKp1FevftNqNvoDyzhRsrb0X5slSO5i2AHln5KeQz+TwixukC+
- R3tMLuKcUg82y1tvnQSqqgs/25doa13ZC31O7jojjk0tlyvbl9sjrOfzx7uExiqg/CZnBiCDOy2
- mUgwERtOOvpbTOeUcsKLSJQe9VareKAAjoVUr9Tv8t28k8z2qj4Nh3XP0TMTa4TqsX/7lhSmVnq
- tiiQbwFoS6eoW7lxIInXKTyRwhJEJOFphG6ob6osjWYKGCbXKrxUZbFE=
-X-Google-Smtp-Source: AGHT+IEhXEadJM/vOqEYsOhbE6gBrQTV2xFqzNUKP/5lhLggOKcG0TCmRr9nGAeHjzHlvpp1InxV5A==
-X-Received: by 2002:a05:6808:23ce:b0:433:f8ac:2eca with SMTP id
- 5614622812f47-43785238250mr5381685b6e.27.1756131359380; 
- Mon, 25 Aug 2025 07:15:59 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-437a7a83d6bsm550437b6e.20.2025.08.25.07.15.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Aug 2025 07:15:58 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- U-Boot-Denx <u-boot@lists.denx.de>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-In-Reply-To: <CAOf5uwn3zo=yXVc=04Y2hcFZaEv2UTkPUN4SpPx9LeJ8DTx_Vw@mail.gmail.com>
-References: <CAOf5uwn3zo=yXVc=04Y2hcFZaEv2UTkPUN4SpPx9LeJ8DTx_Vw@mail.gmail.com>
-Subject: Re: Pull request for u-boot-nand-23082025
-Message-Id: <175613135861.1523777.12146464856191148666.b4-ty@konsulko.com>
-Date: Mon, 25 Aug 2025 08:15:58 -0600
+ spf=pass smtp.mailfrom=fido_max@inbox.ru
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru;
+ s=mail4; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References
+ :Cc:To:Subject:MIME-Version:Date:Message-ID:From:Sender:Reply-To:To:Cc:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:
+ List-Archive:X-Cloud-Ids:Disposition-Notification-To;
+ bh=aE1a3H05aKVSEGwJy5KQjI1148kKRY8hcifI6hc+DC4=; t=1756129772; x=1756219772; 
+ b=YzYXoGszyNSAdfl+Ro8febSWZ8ju195LQ4i06uNxcYkN/DX50sjmgCGMVyXWIcR5pnd2TA/VwRd
+ SrYyhFC90qjh5dYfwr/KcOeuifdz04Ke1aKI+uI1z0sxfnSEdyD1SgPBEEN9S47DaSMMsmrN4pKoW
+ X5fuqRYACE8ABONRpwvlupZTp8uEplQeovCazqIvawDuDVoFRij03J6L5VqChOFBylndgSClZJUia
+ k1JLPPOCLp5V/TSCdPQ3sJYguJ54BNi0pdnB4jCdEPNUVSp6yUUSYZZsET59GpbzAsIF5bTzjO0AC
+ MvJdyzgliIEP+EQhJTsUcVBxG/mo8mTG5qSQ==;
+Received: by exim-smtp-6944cbb85b-bz2qk with esmtpa (envelope-from
+ <fido_max@inbox.ru>)
+ id 1uqXZi-00000000B1z-3jeh; Mon, 25 Aug 2025 16:49:31 +0300
+Message-ID: <ccf326ff-b4d3-43f0-92df-07a22bd5c60e@inbox.ru>
+Date: Mon, 25 Aug 2025 16:49:30 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/2] clk: scmi: add compatibility for clock version 3.0
+ and onwards
+To: Kamlesh Gurudasani <kamlesh@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>
+Cc: u-boot@lists.denx.de
+References: <20250819-b4-scmi-v1-v3-0-360145076b3b@ti.com>
+ <20250819-b4-scmi-v1-v3-2-360145076b3b@ti.com>
+Content-Language: en-US
+From: Maxim Kochetkov <fido_max@inbox.ru>
+In-Reply-To: <20250819-b4-scmi-v1-v3-2-360145076b3b@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Authentication-Results: exim-smtp-6944cbb85b-bz2qk;
+ auth=pass smtp.auth=fido_max@inbox.ru
+ smtp.mailfrom=fido_max@inbox.ru
+X-Mailru-Src: smtp
+X-7564579A: 646B95376F6C166E
+X-77F55803: 4F1203BC0FB41BD9F7647FA575010556EB3CE62DFDA153339DDCAAFD7C65029E182A05F5380850409B5E43A52C3D6E283DE06ABAFEAF670543EE5933DDD95B219E539799F905E81D11E210A9E84E14EE
+X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE745C0EDBD94D46193EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F7900637AC83A81C8FD4AD23D82A6BABE6F325AC2E85FA5F3EDFCBAA7353EFBB55337566FA0CDBC57965D23774115853392A106CA092D237786D07F7E2BB5F966B8BC9E08EEF46B7454FC60B9742502CCDD46D0DEDCF5861DED71B2F389733CBF5DBD5E913377AFFFEAFD269176DF2183F8FC7C0E8801E8C4F941C018941B15DA834481FCF19DD082D7633A0EF3E4896CB9E6436389733CBF5DBD5E9D5E8D9A59859A8B6F7EC8CC465A83DA3CC7F00164DA146DA6F5DAA56C3B73B237318B6A418E8EAB86D1867E19FE14079C09775C1D3CA48CF3D321E7403792E342EB15956EA79C166A417C69337E82CC275ECD9A6C639B01B78DA827A17800CE7E1BCFB2C0BE3F189731C566533BA786AA5CC5B56E945C8DA
+X-C1DE0DAB: 0D63561A33F958A5AA10677B3DFF25F05002B1117B3ED69653EA60AF13B4ECF18B25839F35DFE037823CB91A9FED034534781492E4B8EEAD2739D626790C8313BDAD6C7F3747799A
+X-C8649E89: 1C3962B70DF3F0ADE00A9FD3E00BEEDF77DD89D51EBB7742D3581295AF09D3DF87807E0823442EA2ED31085941D9CD0AF7F820E7B07EA4CF4BA37C5FA4023BD2AD186747C6262B20AF2ED671280AC6019C7CFEBB4D0E0C86A08A323FE4E4FE8442B2DB2C2921DC12844482C152D7DE7E88A48AD9EC923586FA73F511ABF4355B9FDC11CE098E8E5C913E6812662D5F2A17D6C1CDD2003EB8E03787203701020945C72C348FB7EED3
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+ObcCpyrx6l7KImUglyhkEat/+ysWwi0gdhEs0JGjl6ggRWTy1haxBpVdbIX1nthFXMZebaIdHP2ghjoIc/363UZI6Kf1ptIMVXNcwk+fZooKPvc2Y+Mj+yM=
+X-Mailru-Sender: 689FA8AB762F7393FE9E42A757851DB69D2CBE67FB7810B1C52F8F6D640FAAC8AE5F78F88061344290DE4A6105A3658D481B2AED7BCCC0A49AE3A01A4DD0D55C6C99E19F044156F45FEEDEB644C299C0ED14614B50AE0675
+X-Mras: Ok
+X-Mailman-Approved-At: Mon, 25 Aug 2025 16:29:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,23 +88,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 24 Aug 2025 12:36:27 +0200, Michael Nazzareno Trimarchi wrote:
-
-> The following changes since commit 94e690c44a03959c39f0f5a44a9b89c851af3b60:
+19.08.2025 10:33, Kamlesh Gurudasani wrote:
+> Clock version 3.0 specified in ARM SCMI Platform design document
+> v3.2, adds extended_config_val parameter in CLOCK_CONFIG_SET.
 > 
->   Merge patch series "bootstd: rauc: Fix segfault when scanning device with
-> unsupported layout" (2025-08-21 15:05:15 -0600)
+> The SCMI server with clock version 3.0 rejects the message if
+> they don't have this field.
 > 
-> are available in the Git repository at:
+> Add support so that both SCMI server with clock version 2.0 and 3.0
+> can be handled.
 > 
->   https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
-> u-boot-nand-23082025
+> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
+> ---
+>   drivers/clk/clk_scmi.c   | 43 ++++++++++++++++++++++++++++++-------------
+>   include/scmi_protocols.h |  6 ++++++
+>   2 files changed, 36 insertions(+), 13 deletions(-)
 > 
-> [...]
+> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+> index 83ea7bb4286..b33cc05685d 100644
+> --- a/drivers/clk/clk_scmi.c
+> +++ b/drivers/clk/clk_scmi.c
+> @@ -131,19 +131,36 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+>   
+>   static int scmi_clk_gate(struct clk *clk, int enable)
+>   {
+> -	struct scmi_clk_state_in in = {
+> -		.clock_id = clk_get_id(clk),
+> -		.attributes = enable,
+> -	};
+> +	struct scmi_clock_priv *priv = dev_get_priv(clk->dev);
 
-Merged into u-boot/master, thanks!
+struct scmi_clock_priv *priv = dev_get_priv(clk->dev->parent);
 
--- 
-Tom
-
-
+>   	struct scmi_clk_state_out out;
+> -	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
+> -					  SCMI_CLOCK_CONFIG_SET,
+> -					  in, out);
