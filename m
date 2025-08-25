@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7BFFCA0EFA
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 09:34:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D4DACA0FE9
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 09:43:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D75B81E13;
-	Mon, 25 Aug 2025 11:34:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF62A81E13;
+	Mon, 25 Aug 2025 11:43:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="hbU+gh6P";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="VUU5iaxI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A01DB828A2; Mon, 25 Aug 2025 11:34:30 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::60d])
+ id 56EBB82DA1; Mon, 25 Aug 2025 11:43:06 +0200 (CEST)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC3BA808AF
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:34:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1A63808AF
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:43:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ry5B5rKPbYwd4hUFGSlENimch6yqzX36swEhXH00JlMINzAyDciDyVo1rsWIeXPkL/kwjlhU+jPMbogClYFoOcFu9NyoTbJldfv4GY9jSDXzbVG9jFwcupXZVmHvYFU5qSvQQvhRAIyMnnzMsIApNg001oRZPwu+hnhj7L+WlDgqsonignHEb1IHU5TgJohNU29QLRX7LpGgnsmhNIhP7Vtd2hXJNMMoYSo++mp+qyn05NnpI64byEZ8Uwp4VWrgktrtKmNY+d1wS2Oc+ETmuqFJRdrpuLtziZ02UHlmlVubSCV1TXf9lnhdeI8OszW0blrlKmD4awpgblYExNnGpQ==
+ b=QRTqsMDcvCHzFrLeJrbUJZO5jps3Pyd3YANIrycYlp6rTIImw3EfTMCVVzC9EJL5VBooGGwD1LG2REde71n6/wIUHF9NNjr//u//+xX9JzIlyCo6QJVYZ2jSYbPkEmIvVHknGENdISY4AWSMi/V++nTbQy/uktQXqwKdtSdCOuGBPvpCOb9l09djfp75wTjyO4EkgptBGMXfAOQPBKjnCB3iSEzpoSrJSWS1lgzb3cYD4SHiL25+IX026S9K3FlQDVIr90VVOLTweIu45tbJbOF7/jHuinwlF0wqplk2WSUKH1lTOebWz7yXA3/f+NsUsaq7e+aaxiCFKDgOnM2Svg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R+v5QggzHorNHvUwYx2TKPVD7EBj7I0k2AW5UKIpYPk=;
- b=l5C20ElLekgL1XF+Htb48HaVSVLdoifzTtZnLjfoKLS79F5E9ykk3dCuuU7T1oiMtUVvGjCbmtkbJcUdAagiRH7l7RFrsg03vaA8wKmqvY1tJvLqpq2OW2ePwppEh4H/+VtiShYH5OOpn6NywRYn7tut2pFErZnb4seyzcF9uoiH/bT234qQ6xN9IfvJ591Y5mXiqThvQcKVdb9s0I02W0lgaZEWGWsvsFba7f0qie/I+gCEUNT76arNeySf6WBEK6KKfyPnEGkVsRJm10TTndPtYUxtMhrSnitt7ZxdijnVMo8KQN7sMjDSR35pX45iL3LVqLKYyN7fGxkfbpnqlA==
+ bh=X4iFR8TpUd8pBq/CWI36iWcZKIUfydSujlSrgTguv5A=;
+ b=l5oO1bU/k/cwYzTo1E1U8a3435DeiLjXG3Mq29be+jto5ItElDSKpohkBEp53KXPGzLVETvYOFiJ16lLKMQl+BSVkK5o6xfvBAUcp/70BRxdjrJaUTL4nWRtky4d9qb8J1cRXglD70RKTTeTuzrlqswVCFtjpnuPtysZ6Tif8Q4IuV1PJNH4NpMp9Mn6IpzUF/KO/w9VgUJxC4/9sdM9eTrtbQn/H5ix/GZ8roCcRryg/UxmvHa7OZ8P0SsfkjgLUCuoqiEtAYJwJ7ESIBGAgn3O7P1rk9b4m48FeMvxVB36Tx0S+rzzF8ywKspf4WMsvz+/Zy8ZCh+cH4es/GEM0w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R+v5QggzHorNHvUwYx2TKPVD7EBj7I0k2AW5UKIpYPk=;
- b=hbU+gh6P/Tu898niNN/J2JBCaKrpKjX8ueUDuGJ2wt7JEfQRxo9IPlVCG7T6pq7pjeAsOSN3xf9DxaiXCZDpIDPByeG831OBcTvF7pNpbgpZZUFkx+iVUgxtpofc5lK+raWC2F0ALfZCAmYqlb7xH+SBWoNbN+8MUASWrR/7j+SFM9oiM9FYgea45YIJ2vOihV2s2CPXVbe9KKJw833QQ4FLMG2XlUL5R0MTZ0eqIUUbohxC2ANW7UPSEgC/cTeHj6sHvIgjSk0BsKuEf1nA2xeTPY9dK7TRXNkz199uqFYqmAHco5RfjRcLQHIagORCcTZrRZBTZSDa9Bq/H0VVEA==
+ bh=X4iFR8TpUd8pBq/CWI36iWcZKIUfydSujlSrgTguv5A=;
+ b=VUU5iaxI8GIGTkql3xMU9Frf4H+iXlueUelgBtp8vJwD4QV+TmridAKH8Ponc/E1ToIdP0RuAhfeSg6Dv+yzg8MJ72uZ8eQCffW59FHzaoXWBdhqbfltMVcJrrhHQELuwPshqDtUr5uNDciLuefZugBnhoUCjCboREm9A9Jtyp9BeciTlKr39Cl4OjzShB4mZVIDLK6dyr4atLLRDT7A6TdUGMqxY2hHO9eIau3IHbFfMmiB6rtI9JPj5r+1Ai3xef4HsvM01AIRRVKItWIEz8E9liCNE2orZ0+aLTUDIx4N/TL/nddtkQjmGvfkJjI838T6r9owK8WW+7h0/w1oMQ==
 Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by IA1PR03MB8237.namprd03.prod.outlook.com (2603:10b6:208:5b1::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.11; Mon, 25 Aug
- 2025 09:34:24 +0000
+ by DS1PR03MB7944.namprd03.prod.outlook.com (2603:10b6:8:21d::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.10; Mon, 25 Aug
+ 2025 09:43:00 +0000
 Received: from LV8PR03MB8137.namprd03.prod.outlook.com
  ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
  ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9073.010; Mon, 25 Aug 2025
- 09:34:24 +0000
+ 09:42:59 +0000
 From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 To: "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
@@ -58,16 +58,16 @@ CC: Marek Vasut <marek.vasut@mailbox.org>, Simon Goldschmidt
  <simon.k.r.goldschmidt@gmail.com>, Michal Simek <michal.simek@amd.com>, "Ng,
  Boon Khai" <boon.khai.ng@altera.com>, "Yuslaimi, Alif Zakuan"
  <alif.zakuan.yuslaimi@altera.com>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH v2 1/3] arch: arm: socfpga: Add SMMU initialization and
- setup
-Thread-Topic: [PATCH v2 1/3] arch: arm: socfpga: Add SMMU initialization and
- setup
-Thread-Index: AQHcEaSS9f4IK4fDBUy43OJN3DW/q7RzIGPg
-Date: Mon, 25 Aug 2025 09:34:24 +0000
-Message-ID: <LV8PR03MB8137E80BFD22E9731A284037A73EA@LV8PR03MB8137.namprd03.prod.outlook.com>
+Subject: RE: [PATCH v2 3/3] drivers: fpga: Check bitstream address doesn't
+ exceed 512MB
+Thread-Topic: [PATCH v2 3/3] drivers: fpga: Check bitstream address doesn't
+ exceed 512MB
+Thread-Index: AQHcEaSTwiJDwYP8OkCqo7/tKLpHMLRzJYMg
+Date: Mon, 25 Aug 2025 09:42:59 +0000
+Message-ID: <LV8PR03MB81370A93399D0C1E3D814F13A73EA@LV8PR03MB8137.namprd03.prod.outlook.com>
 References: <20250820073201.8649-1-nareshkumar.ravulapalli@altera.com>
- <20250820073201.8649-2-nareshkumar.ravulapalli@altera.com>
-In-Reply-To: <20250820073201.8649-2-nareshkumar.ravulapalli@altera.com>
+ <20250820073201.8649-4-nareshkumar.ravulapalli@altera.com>
+In-Reply-To: <20250820073201.8649-4-nareshkumar.ravulapalli@altera.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -75,83 +75,83 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|IA1PR03MB8237:EE_
-x-ms-office365-filtering-correlation-id: d486eb41-d963-4c89-5aa6-08dde3ba93ef
+x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|DS1PR03MB7944:EE_
+x-ms-office365-filtering-correlation-id: fc2c5a6e-c5a8-4a80-f069-08dde3bbc751
 x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|38070700018|7053199007|13003099007; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?jg3zWwzb28KDE5eysWdMKKrfYQjLBLv530ajmKq89w9QK9AZCfMFre40m4KE?=
- =?us-ascii?Q?T+O5P+NL2ildivl3OtqrJA7PjldM1GaPiNNShQRpRhDaSQ2QCZMKtEk/az5d?=
- =?us-ascii?Q?IprMIqAkxlxZRNGvqUA8nvIqwMLM6c7ByNK6euZzn0dXTwjXhpaER4Bt1vq3?=
- =?us-ascii?Q?mFo5R5zhZgSqo6zpcYkDOG7ZD3vw1pXRXFYpmv1Jgn9KN66GLxawWawxG7dQ?=
- =?us-ascii?Q?5B9XKyyP5Vflt0XnZhl5fi/jppyOAcUVxFx2flqK16x+nit7+bmSn4rWZP7C?=
- =?us-ascii?Q?5FZoyUmdSJX6XWL6SVshaaUnwVhyPEQ8PxjnAxyWNwlMEZ1ENOKgfkR70BP9?=
- =?us-ascii?Q?Y9Tb9PEjKjEYvfTOrxlR5Kx+EDyej1N5Oadlf4qb1hRnWdJlQulvcrAVsZwy?=
- =?us-ascii?Q?nfBEMIb/zqsLgCFVJi5UeyFKazqz9ZtbcS2VzJ+5tSaVXJw6oINJT33ERgYJ?=
- =?us-ascii?Q?QkhSAEFkkxkxEbPtt82t6oraHiihSnh8oKbpI06Hm+dPkZLICX5yu86vkcPR?=
- =?us-ascii?Q?pO4fAMpxXzsFOOPvTpomR8mwCluhUevxJUQcjs3OzQ2wbu9dN4/73MMGhqcV?=
- =?us-ascii?Q?lkOiWxkqbVMXXaFvWqWPEPgyVQvXix8Osp79ZAUn4mF9n8NNZj2wtdCvP6hk?=
- =?us-ascii?Q?swYURBBwVm/DcWjk7NJONAL86Hbi+iYvkdeaaZc9UWOlJFnmZDcTsx9HQ1yB?=
- =?us-ascii?Q?PRxSm0Gxv45Ak4EsNYdtJZcMiDs/7TbxqyYkl7B6gYQl2gekmhxUYatqjFCE?=
- =?us-ascii?Q?rSZvPogdR3ji+4D7MPQggQiVFm3rPe30xIsuJSfJtD4Dul7EhUgixpEl9FAW?=
- =?us-ascii?Q?+tQ/yUImS6uKF8zWxTYWEUsfF9dwG3JK3siNCOQEWZ1mPCFv2ctZSnZQFej4?=
- =?us-ascii?Q?OvJ+Se75gx/GLvgYlR5fliLSpFIQoIegg6sddqBfW/vVGyzWpjNtqV4eksQD?=
- =?us-ascii?Q?C891/CN9DIxo8LzSCuLOEFoH/lDkKOIyPxPZGkPbhr+kWwVF793v0CdotAVf?=
- =?us-ascii?Q?kmGcZcTWG317spwtxj1KFKwUvzx7Zkdbj2x2DPsfGIAhTsDLKLUh5Qcdo49P?=
- =?us-ascii?Q?H4EwzoyvOec5WJiGmjmKTHdvqk1+jvtMrcQLIoGHnLEXvqdss07WuvtiU1tb?=
- =?us-ascii?Q?kronyczPZC1zlOKW1huqk7om68EFLjUOoXjP4Ov9obo/XtmFQCqTsVOLZTsB?=
- =?us-ascii?Q?+yHnaMkwDP3Y6Dg1JCVe8h+/n4EXkKIFwvoSucflrgyHvTzeu2753UOrMHoD?=
- =?us-ascii?Q?+9PzUIx8gkuvo4aQXfOLoj7QhBQqNVGO0BvK9bP8pJFjywGMJv6zutwzSmYF?=
- =?us-ascii?Q?Y6Hlx3lJ4h2LrmfCt74FBRec+thGPE6WBYAQc4n63qN3qa/aP7njVgDyJsDw?=
- =?us-ascii?Q?5dTREMaZ+EVX3hLFAl/wCufyVvOxPnQCOwdezR7f8StAGpzHr9gbcP/TLS5o?=
- =?us-ascii?Q?Q+gNwzz0JKI=3D?=
+ ARA:13230040|376014|366016|1800799024|38070700018|7053199007; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?1ICP9KvEqYg/Xupa6UMP9RxtbqT1rTgjCWiTu5EXRGDyWhfMQtr6o8osERPO?=
+ =?us-ascii?Q?h5933S2VavWnx6XXFjqgkq8b+DsrTdVXNHm2zUBnFs8M0OwRtjShzrZhbFQ7?=
+ =?us-ascii?Q?DNbmKb3XdS9Q+ZXUOxngvWdIFNBsrOOWciT19kbOsq3tGz0WEGmVejvPcv5O?=
+ =?us-ascii?Q?w9HMFwgkyt3o2esMry3QVbCL45mpVBBL7Y9ydOrLymJD7uV1FK2ySYZotM6e?=
+ =?us-ascii?Q?hVDB/sWQyeSMgADna6++MBRfV0XxxMOrlHQfDHN8cyMfszGXUN/zQDlt0vb1?=
+ =?us-ascii?Q?BP3YdH0ahrsWCx8EPa1I2KRxJ2dwljoQbn6vfoescYxRYfT8F9KdwoMrrN6T?=
+ =?us-ascii?Q?Z+OnPSLsUbfOWcZOdfbRfV9KzFSK2pUEbeYNb0Lj4mZwMswHvBFS9SxY876s?=
+ =?us-ascii?Q?QLotQQa2LFTvfKO5+DEDrJ+b2FIBcf8jiSGfSnD1NHXBczmD5J3Ex2vwoTB2?=
+ =?us-ascii?Q?fVFam0gfxfqTCcBdsWgKqQWFXMg2vUH0GNlWEgMCE/asC6+XlddSrnYrYki3?=
+ =?us-ascii?Q?7lnUp8drqv1LfGnF9PEUzILxg7q/wltRejtu9YFH3TgCI2kkyFIg9/AuvCn5?=
+ =?us-ascii?Q?nLbGezuY7MXnzvCmgQaLx1ErIp+2oog6CRxvcJIjDFs24aM/Bk5SBVX2jsoj?=
+ =?us-ascii?Q?lJsaFtzvgTqpxW1VNr2BTBD8Wpk/KYJGP4HRuZzhVPqUcdcHZlOf1TGXh5It?=
+ =?us-ascii?Q?GyroeEDCtgd6UOLIwUgUjF+OQs9bdoYpe66P4aewbl6GfKmKCQdLFwiuRaNJ?=
+ =?us-ascii?Q?44NUZD+fKTEb+plg9huAGgf2uahzENHzecd3cmDBWRz9W3tEftFY/vI4v+Qs?=
+ =?us-ascii?Q?CLE9dB0UpP7mqB0Mb1iChmHQwipIUc6/zU29A1eb/IdSDDP+PT8C6p3UlacL?=
+ =?us-ascii?Q?CUEApbgNNZaBmI1Jr8SFIF8E6RhDSta8fIGx8WR09ADHsNVTOXbkWvqSF9IQ?=
+ =?us-ascii?Q?SUNRUwJSlhA9MRj59pPy4Oj3VeU0Gtvmwf7Hf71Of1jfLUu7XYE4oFsBETyQ?=
+ =?us-ascii?Q?bvd/gy7hAbcr7yieeEAweA9nS1u0kXgCpsilcyOMKIstisCmU9+VhjSLkalr?=
+ =?us-ascii?Q?91Qh6Tw85+gM81knztABMIk59Oe4mnnoTVZHdNz8i8Ml9b52w0M+DTT1uqli?=
+ =?us-ascii?Q?Gvgc+cpQallPo6HC+xJcgsIwByDyChcQ8u5+5z7o2inNtshr8m55JgQvDZJu?=
+ =?us-ascii?Q?WJqnLXLxNH4NV23kMrchLHOgF+nlspW9ASQZb9KpO4rMl7L95oasa6adbV/i?=
+ =?us-ascii?Q?DHOnl8WRvKmqtnxYMbSDJCAuutgtCk/wHsDP0K5CCeFnKCnSweKqoRk4a2gi?=
+ =?us-ascii?Q?mNTNzkPo7MBVeDkxIBmsbMsU6eQB98gas823dEB/CW1YCL7FWMY3Lkv6f59G?=
+ =?us-ascii?Q?EK/UuKnP4wn3UPMfUS4ZHyZQ1nvxXynrQ/NeSL3R0egM87qFyHjyLYOOoHPo?=
+ =?us-ascii?Q?J5yORkDfAWUBR40MqIxb7m7QZ4dXQ3yDr1QIqL1RpnKT//C46dPFcg=3D=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018)(7053199007)(13003099007);
- DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700018)(7053199007); DIR:OUT;
+ SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?Phxo/wYGab2CarYED2Im65GeigIBhwQ6xaPOs2rlzB1+ipdwoWZZEvSnLULc?=
- =?us-ascii?Q?VAWbvIw3UBmx1cAJhJzB4FfPok5oji5cXfSrrPQX9YVPy3X4His5ztIJaw6L?=
- =?us-ascii?Q?KkqnhbqCaOMmApr+p5OaP7IoKuzACrwTj3G2C2YhJPgaZtmIo1aiwHslFWHE?=
- =?us-ascii?Q?PXus9JYl2g82WRd36Eqt4Dq9S9D0O/y9B+NaeWmmZfMytWRwh1vcYuIDgmw7?=
- =?us-ascii?Q?sOQf39BVM6E3n6ipFrWu/KExICpHI5B3T4XT3YnMFkqrqKan2HK1kIEaLsOQ?=
- =?us-ascii?Q?lc7TgkvcXCT28Orn4I92v1nxwMriqUXdmVKhHoEP4pYcleweWFeaLvqH7Z9W?=
- =?us-ascii?Q?eGh0F7xIrj6gGpsbp+wgoqp0BfmsbxA6eINM0fP9oPZr20Z2hr4mymP6YdrQ?=
- =?us-ascii?Q?5f6aFGTARtuXA4COqWvbOVWc31+31ZrZMUqRdI5qUsNRd5xSxbL030BE4P1v?=
- =?us-ascii?Q?Co5onLxIewzsypCBDPgVwG+7TMdx68HXTfyIwmhZmm4zZFRW0Wk3ZOy8h7qZ?=
- =?us-ascii?Q?DNEjAhAPoJYWyTTsUSS6ZnQdppkrtXJOQ4YPWw0eawtJGvcgjWayfqApi43X?=
- =?us-ascii?Q?98eiDEWF9zj0QyrWUoani+FihhqGMxZQLYJ9cVpQBOm8V10CUPuUBYCfpw14?=
- =?us-ascii?Q?I5kVNJpow4qWvei665oZ08TvWOk5qCcmM1pIdu+9aTujBkLKqKZF5Ncm6V5M?=
- =?us-ascii?Q?YTJFH5qL39ha0RiWha+rJjkawuQKpF6qr53p/LxbyO7cMksfTu1/MgEqNZnM?=
- =?us-ascii?Q?5aG9aaZNYcjb9Ty0ryfjwtzXG1hbqbGXn+CPUFblMWjguetWFLsxShYqkDUj?=
- =?us-ascii?Q?7SspxX6MCk5iIXmWvn4QEUcuGc2HBT31o4ji1q89dDLpMyrWiGK9XkZPjqLf?=
- =?us-ascii?Q?j0Q0nJ9R+EyGrdl0xmeQgfi4LZ3JsKk/OfvyJI3EXinBnGIywjX5ujpPvZbF?=
- =?us-ascii?Q?5cqyrVz4/cEOwjjfM9Mog0b2pMV91ih+/fLJcQSvrdV1Uk4HrHavCUOKPv52?=
- =?us-ascii?Q?1/fbix8AQ4Z9NDQ3SmKswHzHHgeqdQtVbhpFoCY29gvj3uS7vFs5SrndPnjj?=
- =?us-ascii?Q?D/Q9OWrEaMq3ntPhMMQfxklPp7CkMFmtNpyOhmULlki5yWmrupSV1iuywaCr?=
- =?us-ascii?Q?v8eRNxEdY4muo5AUskd5NBhaNVSz02/qHe+IlPK0XfYqsH1s3zDWauEe2zdu?=
- =?us-ascii?Q?ZY4X1iyN29Q4YyD4ZY2YZ5G3i8V+UJpJBpAPUj8d0X5lboyyr1cHSCLlH8e9?=
- =?us-ascii?Q?HtVUwXc/gFbcArlb9sTmJx1ckssWe3LKlByo6SzgKPF35rgSL0+qY52KZvTw?=
- =?us-ascii?Q?kGWITpp+XyWl1gIc1sL3iuf0dbE02JJRTugTbd2d/rFcAkVZV/2mjd4nMREB?=
- =?us-ascii?Q?npJkVvHsQQfikJu1nXE8mLib4YUBJGXVt2ZJ64t3Pfib/kvkwGBsshai/w8R?=
- =?us-ascii?Q?80SeO/F4E9Z6NsjilaBUbJM4RvS5cubdt4FuYHcXPjv4ET2pMdvremBGunrP?=
- =?us-ascii?Q?IDVF5zX/TG/l/zy4WZFy9qW3qq/Pb03eKkX0vkKRR0+Reux5OxmXXRGw0tFX?=
- =?us-ascii?Q?qBUKeBjf+Km1Fp8jIiU7T5vOaGU4HQwTlP4q1GCG?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?v6+ZHZ8J60hrJ5fyZimZYO6Mezc+YVzqSEaxdHx4GPhe4gLVjtx1K/vqADo/?=
+ =?us-ascii?Q?7H8Bz7ej4CITDwFOTfXDnoOuwtZKFV1beaXr/03FnYwlH6tKpGZnQYA/YBhN?=
+ =?us-ascii?Q?M9hqppDq6pE8FrsSQoCn7CEij21RFFiA6CUVZoBEX7SNe7hCsP8+BdKP6DWp?=
+ =?us-ascii?Q?htBQ6wLPSqzsz+7yMcLWKzTVvowp2p2rtmKbK54Li98xAA9LG3KY1Sph4EO2?=
+ =?us-ascii?Q?sANCIYlKGg7H2WUhqAjgpaVGtVqM/ee9Scr4zMLqNWUpOvHnUqgOuC5+PHCo?=
+ =?us-ascii?Q?N1JrjLBSSVIuI6fi+OaKnMHQ5S8849SLnDTLZj28LE7HK8sGKonuRLv7KlZh?=
+ =?us-ascii?Q?cvlAyHvUt70Qy6kTXD9up+1HTIIgOjDyKgeWlZ1fNnkfWMfesWhgnp63NhCC?=
+ =?us-ascii?Q?mdJQwiMvgA9ZDaAmf8HCA4vgpUReL58Zng68IJDj3kQuIuYhB7yELFJWnhPR?=
+ =?us-ascii?Q?aVK1c31JclO7TlqCAL2XQ69KQ6O788UiSwqQdDFCHOhQlQXBH3bJ+Xn5TK3z?=
+ =?us-ascii?Q?c7I0j+hfYp54mUyKeT6vIqFE7LrhicnjBTYi4f1M42fbayihMsdQpkpVAPFC?=
+ =?us-ascii?Q?uuQsexu0PX0lNxOo+ugQ28g9O4uzlY71ES/woTi62Q6/4A5QudG6208wMKNl?=
+ =?us-ascii?Q?iLc+7Ir0+njDRa0XEqLfsdeb6Hn2ibT+WmtWWlRdXcSeIrdVuK8FeoqTmetN?=
+ =?us-ascii?Q?KyLycwpC0pdKiRM6uvOHQIpeB9SgKJwI4J8jXNl3wU6rUu7KcGcEsdGwOo37?=
+ =?us-ascii?Q?b/w88LKO5OW5jEy6CwbSVxWd+NmGW8Je3ja/yS51NXv6S5zjzX/EjgdspBd8?=
+ =?us-ascii?Q?UV+krQ4b/vTnEhc0Pq6HG70wlIdvP34pqDnrHvHLPBRCreS8QNl5Gm7M7rn5?=
+ =?us-ascii?Q?pQ1s0S9e+WJVXTsxkFFKKCOGIjERmH6rx5jbDkliLd93e5gtPFUx1lZaBMkF?=
+ =?us-ascii?Q?ZEqneVpuEFDUAaE7sJq+C9LYreyl/RxoPL55r3Ocz89H93G0I3sGO/eCyFX/?=
+ =?us-ascii?Q?pPVR+O3gUbc/moKRE89xB38MQyi+/Uaees4OUeC2oWcBn6Pmy+KnRrLeQmo3?=
+ =?us-ascii?Q?VvHCiUeIXzhnPtncfL7Vsvu4PPDxeujNoEwkELApjx6PBQEcJ5CIhHOCQwVA?=
+ =?us-ascii?Q?TE31z7MMfsqHU6w15hYYj/HpXrLUppyeON5y2vMjGzLkzTBpgcN39aV+nrH2?=
+ =?us-ascii?Q?TIQ13OTYI7pWWm8iFwG/Y9SHmDSd6JGqCebdhM05JzkHmCXO23BiAwCS8iE6?=
+ =?us-ascii?Q?LREwOpMb1iewaQ6feQ+p2DUzBj6/66hXnoVTSj0nSJ4NZ/FXQYWWAvZKgF88?=
+ =?us-ascii?Q?EwES1nEHd+AuETk2gkm6UwYWI5xfQxJpTDwK4SDwSBl9d7HxKP5rzPH97jCM?=
+ =?us-ascii?Q?SbcP3la8G8NvrZ8HCg6bSvWur9KIQU8TuO7yhSSkXPzZjxxvYlyHU0L6bxFs?=
+ =?us-ascii?Q?JcL6XEWiCSWwdqwXErRaGEMGYEc6DOP/fFSJft1r43Kf8GKlizhEv8ND9Pnm?=
+ =?us-ascii?Q?3UpmK2bEtTHGxK9k3b9CZ3Ahzajhz4xcHRT+C7MaxSDk8NKa0Q+rrSA8ZURb?=
+ =?us-ascii?Q?ZusnNlqhX/sKUjwvXjV8l4tMoK51aSVintVXUGrr?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d486eb41-d963-4c89-5aa6-08dde3ba93ef
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Aug 2025 09:34:24.1242 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc2c5a6e-c5a8-4a80-f069-08dde3bbc751
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Aug 2025 09:42:59.8451 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: BrVY25NPsntpaL0vAsht+kTuUY8eIi8kezLGuPwoHdZeEPz0MYdxtRoJ5WNQ5oyb4pHzMx0+WntgEDb/2RJADwVyoFThOIjglnFqHQL4Pfg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR03MB8237
+X-MS-Exchange-CrossTenant-userprincipalname: kyIc0XdiRNFXtyW/tK8woFIjU4BrHpaedyJuy6yDKJzKYUHXNie78fErWDOBy2mdOfGTSvRv6KFMppvRi59xsPlKLcb07d75r+/r8TxzVlI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS1PR03MB7944
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,255 +180,89 @@ Hi Naresh,
 > Ng, Boon Khai <boon.khai.ng@altera.com>; Yuslaimi, Alif Zakuan
 > <alif.zakuan.yuslaimi@altera.com>; Tom Rini <trini@konsulko.com>;
 > Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
-> Subject: [PATCH v2 1/3] arch: arm: socfpga: Add SMMU initialization and
-> setup
+> Subject: [PATCH v2 3/3] drivers: fpga: Check bitstream address doesn't
+> exceed 512MB
 >=20
-> SMMU initialization for SoC64 devices is added and stream IDs are setup f=
-or
-> SMMU peripheral matching. This allows non-secure accesses with SMMU
-> peripherals.
+> Secure Device Manager(SDM) has only 512MB window address space to HPS
+> over PSI BE link. The default access range is 0x0 to 0x1FFFFFFF.
+> To allow SDM accessing the address space more than 512MB, SMMU has to
+> be setup for address translation.
+>=20
+> A conditional check is added to not allow the fpga reconfiguration for an=
+y
+> bitstream data where address exceeds 512MB, unless PSI BE link address
+> translation is setup in SMMU.
 >=20
 > Signed-off-by: Naresh Kumar Ravulapalli
 > <nareshkumar.ravulapalli@altera.com>
 > ---
->  arch/arm/mach-socfpga/Makefile                |  3 +
->  arch/arm/mach-socfpga/include/mach/smmu_s10.h | 39 ++++++++++
->  .../include/mach/system_manager_soc64.h       |  3 +
->  arch/arm/mach-socfpga/smmu_s10.c              | 77 +++++++++++++++++++
->  arch/arm/mach-socfpga/spl_soc64.c             |  6 ++
->  5 files changed, 128 insertions(+)
->  create mode 100644 arch/arm/mach-socfpga/include/mach/smmu_s10.h
->  create mode 100644 arch/arm/mach-socfpga/smmu_s10.c
+>  arch/arm/mach-socfpga/include/mach/smmu_s10.h |  6 ++++++
+>  drivers/fpga/intel_sdm_mb.c                   | 13 +++++++++++++
+>  2 files changed, 19 insertions(+)
 >=20
-> diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-
-> socfpga/Makefile index c43fdee4a48..5b414c6e995 100644
-> --- a/arch/arm/mach-socfpga/Makefile
-> +++ b/arch/arm/mach-socfpga/Makefile
-> @@ -35,6 +35,7 @@ obj-y	+=3D mailbox_s10.o
->  obj-y	+=3D misc_soc64.o
->  obj-y	+=3D mmu-arm64_s10.o
->  obj-y	+=3D reset_manager_s10.o
-> +obj-y	+=3D smmu_s10.o
->  obj-y	+=3D system_manager_soc64.o
->  obj-y	+=3D timer_s10.o
->  obj-y	+=3D wrap_handoff_soc64.o
-> @@ -49,6 +50,7 @@ obj-y	+=3D misc_soc64.o
->  obj-y	+=3D mmu-arm64_s10.o
->  obj-y	+=3D reset_manager_s10.o
->  obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)	+=3D secure_vab.o
-> +obj-y	+=3D smmu_s10.o
->  obj-y	+=3D system_manager_soc64.o
->  obj-y	+=3D timer_s10.o
->  obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)	+=3D vab.o
-> @@ -80,6 +82,7 @@ obj-y	+=3D misc_soc64.o
->  obj-y	+=3D mmu-arm64_s10.o
->  obj-y	+=3D reset_manager_s10.o
->  obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)	+=3D secure_vab.o
-> +obj-y	+=3D smmu_s10.o
->  obj-y	+=3D system_manager_soc64.o
->  obj-y	+=3D timer_s10.o
->  obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)	+=3D vab.o
 > diff --git a/arch/arm/mach-socfpga/include/mach/smmu_s10.h
 > b/arch/arm/mach-socfpga/include/mach/smmu_s10.h
-> new file mode 100644
-> index 00000000000..4a28b109b0d
-> --- /dev/null
+> index 209caa86e38..d611664e227 100644
+> --- a/arch/arm/mach-socfpga/include/mach/smmu_s10.h
 > +++ b/arch/arm/mach-socfpga/include/mach/smmu_s10.h
-> @@ -0,0 +1,39 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (C) 2018 Intel Corporation <www.intel.com>
-> + * Copyright (C) 2025 Altera Corporation <www.altera.com>  */
+> @@ -30,6 +30,12 @@
+>=20
+>  #define SMMU_SID_SDM2HPS_PSI_BE		0
+>=20
+> +#define SDM2HPS_PSI_BE_ADDR_BASE	0
+> +/* PSI BE 512MB address window */
+> +#define SDM2HPS_PSI_BE_WINDOW_SZ	0x20000000
+> +#define SDM2HPS_PSI_BE_ADDR_END		\
+> +	(SDM2HPS_PSI_BE_ADDR_BASE + SDM2HPS_PSI_BE_WINDOW_SZ -
+> 1)
 > +
-> +void socfpga_init_smmu(void);
-> +
-> +#define SMMU_SET_STREAMID(x, r, w)	(((x) << (r)) | ((x) << (w)))
-> +
-> +#define SYSMGR_EMAC0_SID_ADDR	0xffd12050	/* EMAC0
-> (emac0_ace) */
-> +#define SYSMGR_EMAC1_SID_ADDR	0xffd12054	/* EMAC0
-> (emac1_ace) */
-> +#define SYSMGR_EMAC2_SID_ADDR	0xffd12058	/* EMAC0
-> (emac2_ace) */
-> +#define SYSMGR_NAND_SID_ADDR	0xffd1205c	/* NAND
-> (nand_axuser) */
-> +#define SYSMGR_SDMMC_SID_ADDR	0xffd1202c	/* SDMMC
-> (sdmmcgrp_l3master) */
-> +#define SYSMGR_USB0_SID_ADDR	0xffd12038	/* USB0
-> (usb0_l3master) */
-> +#define SYSMGR_USB1_SID_ADDR	0xffd1203c	/* USB0
-> (usb1_l3master) */
-> +#define SYSMGR_DMA_SID_ADDR	0xffd12074	/* DMA
-> (dma_l3master) */
-> +#define SYSMGR_ETR_SID_ADDR	0xffd12078	/* ETR (etr_l3master)
-> */
-> +
-> +/* Stream ID field offsets */
-> +#define EMAC_W_OFST	20
-> +#define EMAC_R_OFST	8
-> +#define NAND_W_OFST	0
-> +#define NAND_R_OFST	16
-> +#define SDMMC_OFST	16
-> +#define USB_OFST	16
-> +#define DMA_W_OFST	0
-> +#define DMA_R_OFST	16
-> +#define ETR_W_OFST	0
-> +#define ETR_R_OFST	16
-> +
-> +struct smmu_stream_id {
-> +	unsigned long addr;
-> +	u32 sid;
-> +	u32 r_bit_ofst;
-> +	u32 w_bit_ofst;
-> +	u32 secure_bit_offset;
-> +};
-> diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-> b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-> index 8a7d47bee44..3f91707ec49 100644
-> --- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-> +++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-> @@ -80,6 +80,9 @@ void populate_sysmgr_pinmux(void);
->  #define SYSMGR_SOC64_WDDBG			0x08
->  #define SYSMGR_SOC64_SDMMC			0x28
->  #define SYSMGR_SOC64_SDMMC_L3MASTER		0x2C
-> +#define SYSMGR_SOC64_NANDGRP_L3MASTER		0x34
-> +#define SYSMGR_SOC64_USB0_L3MASTER		0x38
-> +#define SYSMGR_SOC64_USB1_L3MASTER		0x3c
->  #define SYSMGR_SOC64_FPGAINTF_EN1		0x68
->  #define SYSMGR_SOC64_FPGAINTF_EN2		0x6C
->  #define SYSMGR_SOC64_FPGAINTF_EN3		0x70
-> diff --git a/arch/arm/mach-socfpga/smmu_s10.c b/arch/arm/mach-
-> socfpga/smmu_s10.c
-> new file mode 100644
-> index 00000000000..50be049538b
-> --- /dev/null
-> +++ b/arch/arm/mach-socfpga/smmu_s10.c
-> @@ -0,0 +1,77 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2018 Intel Corporation <www.intel.com>
-
-Remove Intel copyright
-
-> + * Copyright (C) 2025 Altera Corporation <www.altera.com>  */
-> +
-> +#include <asm/global_data.h>
-> +#include <asm/io.h>
-> +#include <asm/arch/firewall.h>
+>  void socfpga_init_smmu(void);
+>  int is_smmu_bypass(void);
+>  int is_smmu_stream_id_enabled(u32 stream_id); diff --git
+> a/drivers/fpga/intel_sdm_mb.c b/drivers/fpga/intel_sdm_mb.c index
+> 5f4aae47d6d..1bbb717015b 100644
+> --- a/drivers/fpga/intel_sdm_mb.c
+> +++ b/drivers/fpga/intel_sdm_mb.c
+> @@ -10,6 +10,7 @@
+>  #include <watchdog.h>
+>  #include <asm/arch/mailbox_s10.h>
+>  #include <asm/arch/smc_api.h>
 > +#include <asm/arch/smmu_s10.h>
-> +#include <asm/arch/system_manager.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +static const struct smmu_stream_id dev_stream_id[] =3D {
-> +	{SYSMGR_EMAC0_SID_ADDR, 0x01, EMAC_W_OFST,
-> EMAC_R_OFST},
-> +	{SYSMGR_EMAC1_SID_ADDR, 0x02, EMAC_W_OFST,
-> EMAC_R_OFST},
-> +	{SYSMGR_EMAC2_SID_ADDR, 0x03, EMAC_W_OFST,
-> EMAC_R_OFST},
-> +	{SYSMGR_NAND_SID_ADDR,  0x04, NAND_W_OFST, NAND_R_OFST},
-> +	{SYSMGR_SDMMC_SID_ADDR, 0x05, SDMMC_OFST, SDMMC_OFST},
-> +	{SYSMGR_USB0_SID_ADDR,  0x06, USB_OFST, USB_OFST},
-> +	{SYSMGR_USB1_SID_ADDR,  0x07, USB_OFST, USB_OFST},
-> +	{SYSMGR_DMA_SID_ADDR,   0x08, DMA_W_OFST, DMA_R_OFST},
-> +	{SYSMGR_ETR_SID_ADDR,   0x09, ETR_W_OFST, ETR_R_OFST},
-> +};
-> +
-> +static void set_smmu_streamid(void)
-> +{
-> +	int i;
-> +
-> +	for (i =3D 0; i < ARRAY_SIZE(dev_stream_id); i++) {
-> +		u32 mask =3D SMMU_SET_STREAMID(0x3FF,
-> +					 dev_stream_id[i].r_bit_ofst,
-> +					 dev_stream_id[i].w_bit_ofst);
-> +		u32 value =3D SMMU_SET_STREAMID(dev_stream_id[i].sid,
-> +					 dev_stream_id[i].r_bit_ofst,
-> +					 dev_stream_id[i].w_bit_ofst);
-> +
-> +		clrbits_le32(dev_stream_id[i].addr, mask);
-> +		setbits_le32(dev_stream_id[i].addr, value);
+>  #include <asm/cache.h>
+>  #include <cpu_func.h>
+>  #include <linux/delay.h>
+> @@ -1031,6 +1032,18 @@ int intel_sdm_mb_load(Altera_desc *desc, const
+> void *rbf_data, size_t rbf_size)
+>=20
+>  	flush_dcache_range((unsigned long)rbf_data, (unsigned
+> long)(rbf_data + rbf_size));
+>=20
+> +	/*
+> +	 * Don't start the FPGA reconfiguration if bitstream location exceed
+> the
+> +	 * PSI BE 512MB address window and SMMU is not setup for PSI BE
+> address
+> +	 * translation.
+> +	 */
+> +	if (((u64)rbf_data + rbf_size) >=3D SDM2HPS_PSI_BE_ADDR_END &&
+> +	    !is_smmu_stream_id_enabled(SMMU_SID_SDM2HPS_PSI_BE)) {
+> +		printf("Failed: Bitstream location must not exceed 0x%08x\n",
+> +		       SDM2HPS_PSI_BE_ADDR_END);
+> +		return -EINVAL;
 > +	}
-> +}
-> +
-> +/*
-> + * Need to set the Secure bit (to make it non-secure) on each
-> +peripheral
-> + * so that SMMU can access the peripheral  */ static void
-> +set_smmu_accessible_reg(void) {
-> +	setbits_le32(socfpga_get_sysmgr_addr() + SYSMGR_SOC64_EMAC0,
-> +		     BIT(27) | BIT(25));
-> +	setbits_le32(socfpga_get_sysmgr_addr() + SYSMGR_SOC64_EMAC1,
-> +		     BIT(27) | BIT(25));
-> +	setbits_le32(socfpga_get_sysmgr_addr() + SYSMGR_SOC64_EMAC2,
-> +		     BIT(27) | BIT(25));
-> +	setbits_le32(socfpga_get_sysmgr_addr() +
-> SYSMGR_SOC64_NANDGRP_L3MASTER,
-> +		     BIT(21) | BIT(17));
-> +	setbits_le32(socfpga_get_sysmgr_addr() +
-> SYSMGR_SOC64_SDMMC_L3MASTER,
-> +		     BIT(5));
-> +	setbits_le32(socfpga_get_sysmgr_addr() +
-> SYSMGR_SOC64_USB0_L3MASTER,
-> +		     BIT(9));
-> +	setbits_le32(socfpga_get_sysmgr_addr() +
-> SYSMGR_SOC64_USB1_L3MASTER,
-> +		     BIT(9));
-> +}
-> +
-> +static inline void setup_smmu_firewall(void) {
-> +	/* Enable nonsecure SMMU accesses */
-> +	writel(FIREWALL_L4_DISABLE_ALL, SOCFPGA_FIREWALL_TCU); }
-> +
-> +void socfpga_init_smmu(void)
-> +{
-> +	setup_smmu_firewall();
 
-This has already been set in dtreg at https://github.com/u-boot/u-boot/blob=
-/cb0b67fa49df836627230ba62fc718ea4afddf60/arch/arm/dts/socfpga_soc64_u-boot=
-.dtsi#L114, but Stratix 10 board
-need to be converted to OF_UPSTREAM first
+This function is common for all SoC64 devices, but above limitation is not =
+applicable to Agilex5
 
-> +	set_smmu_streamid();
-> +	set_smmu_accessible_reg();
-> +}
-> diff --git a/arch/arm/mach-socfpga/spl_soc64.c b/arch/arm/mach-
-> socfpga/spl_soc64.c
-> index 651d9fc9cb8..6b219fe140d 100644
-> --- a/arch/arm/mach-socfpga/spl_soc64.c
-> +++ b/arch/arm/mach-socfpga/spl_soc64.c
-> @@ -7,6 +7,8 @@
->=20
->  #include <hang.h>
->  #include <spl.h>
-> +#include <asm/arch/mailbox_s10.h>
-> +#include <asm/arch/smmu_s10.h>
->  #include <dm/uclass.h>
->=20
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -132,6 +134,7 @@ u32 spl_boot_mode(const u32 boot_device)
->  /* board specific function prior loading SSBL / U-Boot */  void
-> spl_perform_fixups(struct spl_image_info *spl_image)  {
-> +#if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5))
->  	int ret;
->  	struct udevice *dev;
->=20
-> @@ -140,4 +143,7 @@ void spl_perform_fixups(struct spl_image_info
-> *spl_image)
->  		printf("HPS SMMU secure settings init failed: %d\n", ret);
->  		hang();
->  	}
-> +#endif
 > +
-> +	socfpga_init_smmu();
-
-This's not applicable to Agilex5
-
->  }
+>  	debug("Sending MBOX_RECONFIG...\n");
+>  	ret =3D mbox_send_cmd(MBOX_ID_UBOOT, MBOX_RECONFIG,
+> MBOX_CMD_DIRECT, 0,
+>  			    NULL, 0, &resp_len, resp_buf);
 > --
 > 2.35.3
 
+Thanks.
+
 Best regards,
 Tien Fong
-
