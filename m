@@ -4,80 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45083CA0FE1
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 09:49:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0B5CCA0FE1
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 09:51:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FCDF81E13;
-	Mon, 25 Aug 2025 11:49:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 5780E81E13;
+	Mon, 25 Aug 2025 11:51:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0DX1/4YT";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7C8E82FC7; Mon, 25 Aug 2025 11:49:40 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 295208304A; Mon, 25 Aug 2025 11:51:28 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0087F808AF
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:49:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C26AD808AF
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:51:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0332a41ace=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57P8gPnO032702;
- Mon, 25 Aug 2025 11:49:26 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- rf/40zNg4FFfuat2V2XYw0sHr3uU/UFr/V0Er57WC60=; b=0DX1/4YT8O6/Ct0b
- 1/tKJjzCUiTIC81n6ypTexBb6EnYzkpPwVVkoAJ69W8VusTHatL9QgCaPN44jZhs
- CGFt43unMpaorUCiMHa3iy4HrRO2DJ9QmrEEAdEfZQKHd9CVvXxY/kgtjsZ+S35u
- S3rhYM4AWMjQ2J2FiAHhkjW7YEQNhghqjKg0YeWABKdt+yHULinS2hVls1DZLoGK
- G+/El6mv3CMtfNypYRh2tmKjfAJIP2953hVWrCIm9ZIzILvQy4UVZp/sv7/7vsql
- wLOZZVqBQZNK0CeaxpukvK0Si+W/OsGfsxwlwskEfQIWUycvsAq8M/XQtZcSU8uh
- yS6hbg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48q5tspaeb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 25 Aug 2025 11:49:26 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 974C54002D;
- Mon, 25 Aug 2025 11:48:30 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DBD325F0DA9;
- Mon, 25 Aug 2025 11:48:09 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Mon, 25 Aug
- 2025 11:48:09 +0200
-Message-ID: <d542e786-e52c-402b-8c53-ba84a38b452d@foss.st.com>
-Date: Mon, 25 Aug 2025 11:48:08 +0200
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.26.216])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 60735B4E000A;
+ Mon, 25 Aug 2025 11:51:24 +0200 (CEST)
+Message-ID: <c510213c-7b46-47f0-b153-dacb5d4a6408@freeshell.de>
+Date: Mon, 25 Aug 2025 02:51:22 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/8] video: stm32: ltdc: support new hardware version for
- STM32MP25 SoC
-To: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, Tom Rini
- <trini@konsulko.com>, Kamil Lulko <kamil.lulko@gmail.com>, Dillon Min
- <dillon.minfei@gmail.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>
-CC: <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250820-master-v1-0-fc76f18ab2fd@foss.st.com>
- <20250820-master-v1-4-fc76f18ab2fd@foss.st.com>
+Subject: Re: [PATCH v1] riscv: dts: starfive: prune redundant jh7110-common
+ overrides
+To: Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20250815050315.62956-1-e@freeshell.de>
+ <ZQ2PR01MB1307043F4B7527EA41FF1754E6312@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+ <84cd3c89-5f82-468c-a63f-9815909ad110@freeshell.de>
+ <ZQ2PR01MB1307C88B33C6124017A502D0E63D2@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250820-master-v1-4-fc76f18ab2fd@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <ZQ2PR01MB1307C88B33C6124017A502D0E63D2@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-25_04,2025-08-20_03,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,79 +60,241 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+On 8/22/25 02:48, Hal Feng wrote:
+>> On 20.08.25 10:45 E Shattow wrote:
+>> On 8/17/25 23:45, Hal Feng wrote:
+>>>> On 15.08.25 13:03, E Shattow wrote:
+>>>> Prune jh7110-common-u-boot.dtsi (clocks, qspi flash, eeprom, and
+>>>> bootph- pre-ram hints now upstream since devicetree-rebasing v6.16)
+>>>> and replace by remaining dependency jh7110-u-boot.dtsi (not yet
+>> upstream).
+>>>>
+>>>> Signed-off-by: E Shattow <e@freeshell.de>
+>>>> ---
+>>>>  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 99 -------------------
+>>>>  .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |  2 +-
+>>>> arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  2 +-
+>>>>  .../dts/jh7110-pine64-star64-u-boot.dtsi      |  2 +-
+>>>>  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |  2 +-
+>>>> ...10-starfive-visionfive- 2-v1.3b-u-boot.dtsi |  2 +-
+>>>>  6 files changed, 5 insertions(+), 104 deletions(-)  delete mode
+>>>> 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
+>>>>
+>>>> diff --git a/arch/riscv/dts/jh7110-common-u-boot.dtsi
+>>>> b/arch/riscv/dts/jh7110-common-u-boot.dtsi
+>>>> deleted file mode 100644
+>>>> index 049b0a7ce28..00000000000
+>>>> --- a/arch/riscv/dts/jh7110-common-u-boot.dtsi
+>>>> +++ /dev/null
+>>>> @@ -1,99 +0,0 @@
+>>>> -// SPDX-License-Identifier: GPL-2.0 OR MIT
+>>>> -/*
+>>>> - * Copyright (C) 2023 StarFive Technology Co., Ltd.
+>>>> - */
+>>>> -
+>>>> -#include "jh7110-u-boot.dtsi"
+>>>> -/ {
+>>>> -	aliases {
+>>>> -		spi0 = &qspi;
+>>>> -	};
+>>>> -
+>>>> -	chosen {
+>>>> -		bootph-pre-ram;
+>>>> -	};
+>>>> -
+>>>> -	firmware {
+>>>> -		spi0 = &qspi;
+>>>> -		bootph-pre-ram;
+>>>> -	};
+>>>> -
+>>>> -	memory@40000000 {
+>>>> -		bootph-pre-ram;
+>>>> -	};
+>>>> -};
+>>>> -
+>>>> -&uart0 {
+>>>> -	bootph-pre-ram;
+>>>> -	reg-offset = <0>;
+>>>> -	current-speed = <115200>;
+>>>> -};
+>>>> -
+>>>> -&mmc0 {
+>>>> -	bootph-pre-ram;
+>>>> -};
+>>>> -
+>>>> -&mmc1 {
+>>>> -	bootph-pre-ram;
+>>>> -};
+>>>> -
+>>>> -&qspi {
+>>>> -	bootph-pre-ram;
+>>>> -
+>>>> -	flash@0 {
+>>>> -		bootph-pre-ram;
+>>>> -		cdns,read-delay = <2>;
+>>>> -		spi-max-frequency = <100000000>;
+>>>> -	};
+>>>> -};
+>>>> -
+>>>> -&syscrg {
+>>>> -	assigned-clocks = <&syscrg JH7110_SYSCLK_CPU_ROOT>,
+>>>> -			  <&syscrg JH7110_SYSCLK_BUS_ROOT>,
+>>>> -			  <&syscrg JH7110_SYSCLK_PERH_ROOT>,
+>>>> -			  <&syscrg JH7110_SYSCLK_QSPI_REF>;
+>>>> -	assigned-clock-parents = <&pllclk JH7110_PLLCLK_PLL0_OUT>,
+>>>> -				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
+>>>> -				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
+>>>> -				 <&syscrg JH7110_SYSCLK_QSPI_REF_SRC>;
+>>>> -	assigned-clock-rates = <0>, <0>, <0>, <0>;
+>>>> -};
+>>>> -
+>>>> -&sysgpio {
+>>>> -	bootph-pre-ram;
+>>>> -};
+>>>> -
+>>>> -&mmc0_pins {
+>>>> -	bootph-pre-ram;
+>>>> -	rst-pins {
+>>>> -		bootph-pre-ram;
+>>>> -	};
+>>>> -};
+>>>> -
+>>>> -&mmc1_pins {
+>>>> -	bootph-pre-ram;
+>>>> -	clk-pins {
+>>>> -		bootph-pre-ram;
+>>>> -	};
+>>>> -
+>>>> -	mmc-pins {
+>>>> -		bootph-pre-ram;
+>>>> -	};
+>>>> -};
+>>>> -
+>>>> -&i2c5_pins {
+>>>> -	bootph-pre-ram;
+>>>> -	i2c-pins {
+>>>> -		bootph-pre-ram;
+>>>> -	};
+>>>> -};
+>>>> -
+>>>> -&i2c5 {
+>>>> -	bootph-pre-ram;
+>>>> -	eeprom@50 {
+>>>> -		bootph-pre-ram;
+>>>> -		compatible = "atmel,24c04";
+>>>> -		reg = <0x50>;
+>>>> -		pagesize = <16>;
+>>>> -	};
+>>>> -};
+>>>> diff --git a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+>>>> b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+>>>> index ab882d07f6f..b9202f2acce 100644
+>>>> --- a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+>>>> +++ b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+>>>> @@ -3,5 +3,5 @@
+>>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
+>>>>   */
+>>>>
+>>>> -#include "jh7110-common-u-boot.dtsi"
+>>>> +#include "jh7110-u-boot.dtsi"
+>>>>  #include "starfive-visionfive2-binman.dtsi"
+>>>> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>>>> b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>>>> index ab882d07f6f..b9202f2acce 100644
+>>>> --- a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>>>> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>>>> @@ -3,5 +3,5 @@
+>>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
+>>>>   */
+>>>>
+>>>> -#include "jh7110-common-u-boot.dtsi"
+>>>> +#include "jh7110-u-boot.dtsi"
+>>>>  #include "starfive-visionfive2-binman.dtsi"
+>>>> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>>>> b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>>>> index ab882d07f6f..b9202f2acce 100644
+>>>> --- a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>>>> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>>>> @@ -3,5 +3,5 @@
+>>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
+>>>>   */
+>>>>
+>>>> -#include "jh7110-common-u-boot.dtsi"
+>>>> +#include "jh7110-u-boot.dtsi"
+>>>>  #include "starfive-visionfive2-binman.dtsi"
+>>>> diff --git
+>>>> a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+>>>> b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+>>>> index ab882d07f6f..b9202f2acce 100644
+>>>> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+>>>> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+>>>> @@ -3,5 +3,5 @@
+>>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
+>>>>   */
+>>>>
+>>>> -#include "jh7110-common-u-boot.dtsi"
+>>>> +#include "jh7110-u-boot.dtsi"
+>>>>  #include "starfive-visionfive2-binman.dtsi"
+>>>> diff --git
+>>>> a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+>>>> b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+>>>> index 874074174ff..848ed8225ac 100644
+>>>> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+>>>> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+>>>> @@ -3,5 +3,5 @@
+>>>>   * Copyright (C) 2023 StarFive Technology Co., Ltd.
+>>>>   */
+>>>>
+>>>> -#include "jh7110-common-u-boot.dtsi"
+>>>> +#include "jh7110-u-boot.dtsi"
+>>>>  #include "starfive-visionfive2-binman.dtsi"
+>>>>
+>>>> base-commit: 0c558bbad9e7581808b358091d1fd979f860e8ac
+>>>
+>>> I find that there are no ''bootph-pre-ram'' in mmc0_pins and mmc1_pins
+>>> in dts/upstream/src/riscv/starfive/jh7110-common.dtsi.
+>>>
+>>> Is it ready now to drop jh7110-common-u-boot.dtsi?
+>>>
+>>> Best regards,
+>>> Hal
+>>
+>> Yes, thank you for your review.
+>>
+>> Currently the U-Boot SPL code path that requires eMMC and SD Card
+>> functionality is with these deprecated JH7110 loader modes, or some unlikely
+>> runtime change in RGPIO0 / RGPIO1 state before U-Boot SPL following the
+>> JH7110 loader.
+>>
+>> I will consider seriously to support the deprecated functionality if there is
+>> sufficient documentation in the form of a full source code listing for the
+>> JH7110 mask ROM loader. Otherwise I do not have time or interest to reverse-
+>> engineer these things lacking in documentation from StarFive.
+> 
+> You are right. It's suggested to only boot from flash on VF2 board. 
+> 
+> But it is weird that in dts/upstream/src/riscv/starfive/jh7110-common.dtsi,
+> there are "bootph-pre-ram" in mmc0/1 nodes and no "bootph-pre-ram"
+> in mmc0/1_pins nodes.
+> 
+> Best regards,
+> Hal
 
-On 8/20/25 18:17, Raphael Gallais-Pou wrote:
-> STM32MP2 SoCs feature a new version of the LTDC IP.  This new version
-> features a bus clock, as well as a 150MHz pad frequency.  Add its
-> compatible to the list of device to probe and handle quirks.  The new
-> hardware version features a bus clock.
-> 
-> Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
-> ---
->  drivers/video/stm32/stm32_ltdc.c | 21 +++++++++++++++++++--
->  1 file changed, 19 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
-> index 0a062c8939dbe49b11aa50f5ca9701bdbe5c5b0b..d9ba5c4ef53558fe8b5565d47b022699d9e4ea0e 100644
-> --- a/drivers/video/stm32/stm32_ltdc.c
-> +++ b/drivers/video/stm32/stm32_ltdc.c
-> @@ -262,6 +262,7 @@ static const u32 layer_regs_a2[] = {
->  #define HWVER_10300 0x010300
->  #define HWVER_20101 0x020101
->  #define HWVER_40100 0x040100
-> +#define HWVER_40101 0x040101
->  
->  enum stm32_ltdc_pix_fmt {
->  	PF_ARGB8888 = 0,	/* ARGB [32 bits] */
-> @@ -529,7 +530,7 @@ static int stm32_ltdc_probe(struct udevice *dev)
->  	struct udevice *bridge = NULL;
->  	struct udevice *panel = NULL;
->  	struct display_timing timings;
-> -	struct clk pclk;
-> +	struct clk pclk, bclk;
->  	struct reset_ctl rst;
->  	ulong rate;
->  	int ret;
-> @@ -540,7 +541,21 @@ static int stm32_ltdc_probe(struct udevice *dev)
->  		return -EINVAL;
->  	}
->  
-> -	ret = clk_get_by_index(dev, 0, &pclk);
-> +	ret = clk_get_by_name(dev, "bus", &bclk);
-> +	if (ret) {
-> +		if (ret != -ENODATA) {
-> +			dev_err(dev, "bus clock get error %d\n", ret);
-> +			return ret;
-> +		}
-> +	} else {
-> +		ret = clk_enable(&bclk);
-> +		if (ret) {
-> +			dev_err(dev, "bus clock enable error %d\n", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
-> +	ret = clk_get_by_name(dev, "lcd", &pclk);
->  	if (ret) {
->  		dev_err(dev, "peripheral clock get error %d\n", ret);
->  		return ret;
-> @@ -566,6 +581,7 @@ static int stm32_ltdc_probe(struct udevice *dev)
->  		priv->pix_fmt_hw = pix_fmt_a1;
->  		break;
->  	case HWVER_40100:
-> +	case HWVER_40101:
->  		priv->layer_regs = layer_regs_a2;
->  		priv->pix_fmt_hw = pix_fmt_a2;
->  		break;
-> @@ -688,6 +704,7 @@ static int stm32_ltdc_bind(struct udevice *dev)
->  
->  static const struct udevice_id stm32_ltdc_ids[] = {
->  	{ .compatible = "st,stm32-ltdc" },
-> +	{ .compatible = "st,stm32mp251-ltdc" },
->  	{ }
->  };
->  
-> 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Yes, the half-baked result is from code review and I asked for
+supporting documentation also on LKML some months ago ref. v2:
+https://lore.kernel.org/lkml/521e5549-de83-49a1-a0e5-e47a2cb275ef@freeshell.de/
 
-Thanks
+The test methodology I collected is detailed in the cover letter for v3:
+https://lore.kernel.org/lkml/20250502103101.957016-1-e@freeshell.de/
+
+Simply I applied what was requested in the code review v2 and posted the
+test methodology in v3 for others to improve, verify, and comment on.
+The series v3 was sent 2nd May and no further comment for two weeks
+until applied 15th May.
+
+It would be helpful to know if this mmc use at U-Boot SPL phase is
+actually broken or if it is working, as it is with the patch applied
+(absent the suggested mmc pins bootph-pre-ram hint). Documentation in
+doc/board/starfive/jh7110_common.rst will need to be updated.
+
+-E
