@@ -4,45 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0B5CCA0FE1
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 09:51:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5019CA0EFA
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 13:15:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5780E81E13;
-	Mon, 25 Aug 2025 11:51:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id E852782FC7;
+	Mon, 25 Aug 2025 15:15:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 295208304A; Mon, 25 Aug 2025 11:51:28 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C26AD808AF
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 11:51:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [98.97.26.216])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 60735B4E000A;
- Mon, 25 Aug 2025 11:51:24 +0200 (CEST)
-Message-ID: <c510213c-7b46-47f0-b153-dacb5d4a6408@freeshell.de>
-Date: Mon, 25 Aug 2025 02:51:22 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="erWQ2dEL";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5446D828A2; Mon, 25 Aug 2025 07:40:53 +0200 (CEST)
+Received: from mail-pl1-x662.google.com (mail-pl1-x662.google.com
+ [IPv6:2607:f8b0:4864:20::662])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D943E80077
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 07:40:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=broadcom.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=david.regan@broadcom.com
+Received: by mail-pl1-x662.google.com with SMTP id
+ d9443c01a7336-246180dc32cso5112215ad.0
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 22:40:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756100449; x=1756705249;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PcaYgE8eQ242+POQxJGpY1FEVDYc9rtfytK9giwPnGw=;
+ b=sdJiI5lyVZvj8TyRBBYg7coSp9R04OEC0DVEBwVrrX9qj6+3TgPzSl9+K2cPioj7W2
+ U618vFm4oQFB+Kl3O+of9iJdLSKj3Jsv6YuAaE+cypbYsAUjJIsSXDVrgHHwrMyZq1dc
+ AskyZcqi7dI6Mu4xoSSIFy7j0l9al71zgQUbRG60PmbE28q/xf6NoUeMdd9xtnL3gmm8
+ pl/0+tPjIk/tPKHI6lErRiynFo9azB1z8w7/npwRIfRVJflb1D/W28WrPT9naN/s7G9/
+ ZY32FtnRNfznazteBuu5vQZU2mcrtq3viVeqdWSA1k3OfZ+Ej2eLWTVGiPuTt48usCKo
+ SzNw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXutW1oozfY+nmQOpLoA2cDj0YPmn9YJKB695KPpqdDSGVMwwZfyKqtzgl8cNKUn0Gi+Bb65zo=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywj/Uu10ZEmxRmeRC4JG4JPucpNHlV/2J/ACA6wHLBMJ+K8Xuc3
+ D26ElRYrlA+E1cc/0M0h6N2xBbsZXSQ6sfFkTD1N6KaF+5ujSCuh589mG/4QteNeGGmX2Y2N3lf
+ jFNGEK9Ut6KHZeozwdkCpg4YrBefClkH/vHzfg8Q/VucLXMeR+/J9dAubMTb3mdCtN/4Kj+Jt60
+ pdA3EcSkaDLwIZRvmymrZBeeW8PZm2Nh9OhXiUecs/PigxzZgMYNn0Z51i4YZINM2VwZjRZXUWX
+ FOA46w=
+X-Gm-Gg: ASbGncsudPE83aRA5nJYe1KgiEN0bunBmc60mVxOCCvyPCKyQddGNdFiphDN+PX+tmX
+ NO2Q0SvT5dmKiKaFUKByFw0PvqQK7EgCgRWq2YjBODXgsg0JU0PzqyPWVFetg+ota/mpNPV6Bu+
+ jTaoqseMBfXULE7FonJuqHaOThng4fDmkS+DP1b+hTA9uuAEYPXSPSoR07RbkPuJwfcs4O6l4U1
+ 7Cy7YCSIOJtq8d9s/Zqfkqe00mTqbautTPtrwjq9FMJ8g6mDOGtCYcDJSGnT/S7YBtTa41tgUDf
+ 0DgXYVZe/Dl+2OgUcefCvdKH50bvaE1qyUIwRev4PQDLzvb9HOMhubzLe98DQFF4T5XRm1iQhKp
+ z/wpzBe4lO+ReRnx5LqsSbAXL+aciCQdknxRYq0BgX1AfE4VKMGCAAvkNhhIzigTZUKM6DX/W0G
+ Hp
+X-Google-Smtp-Source: AGHT+IHJnJX+E9UJtwSdFEIXty7kqQzdXOnVwwdoCew1OiDGkkUnyXMxV6MrHemjlNQwoS3rK9KLBynhUhvV
+X-Received: by 2002:a17:902:e888:b0:240:8717:e393 with SMTP id
+ d9443c01a7336-2462ee8e35dmr68453895ad.5.1756100449125; 
+ Sun, 24 Aug 2025 22:40:49 -0700 (PDT)
+Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com
+ (address-144-49-247-120.dlp.protect.broadcom.com. [144.49.247.120])
+ by smtp-relay.gmail.com with ESMTPS id
+ d9443c01a7336-246687919bbsm5591385ad.6.2025.08.24.22.40.48
+ for <u-boot@lists.denx.de>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Sun, 24 Aug 2025 22:40:49 -0700 (PDT)
+X-Relaying-Domain: broadcom.com
+X-CFilter-Loop: Reflected
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-245fbdc2546so8754535ad.0
+ for <u-boot@lists.denx.de>; Sun, 24 Aug 2025 22:40:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=broadcom.com; s=google; t=1756100448; x=1756705248; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PcaYgE8eQ242+POQxJGpY1FEVDYc9rtfytK9giwPnGw=;
+ b=erWQ2dELFLjdbNWbLOFTMa9rccNznc7hes/mFDs498eObqc24YDEmwlshGYy7mAKA5
+ AzqUW6bwydrawh/Wl1RJea4/TXOBxiDzTGJch90aLwFKB+ibUlXFYpMaLKoGt/r5qgRb
+ 4sNBsSUSxWIWUvi4aSDpWqs7hsnS1ERbkPUhc=
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAlZXzwvlFWFZbw2JWI8Fla6csQ3xmnW4Urm/tqhtvV5OpnAqHb1q71u4ZZpPuyQQGApKsIfU=@lists.denx.de
+X-Received: by 2002:a17:902:cecd:b0:246:a19d:c13 with SMTP id
+ d9443c01a7336-246a19d1686mr34031565ad.1.1756100447563; 
+ Sun, 24 Aug 2025 22:40:47 -0700 (PDT)
+X-Received: by 2002:a17:902:cecd:b0:246:a19d:c13 with SMTP id
+ d9443c01a7336-246a19d1686mr34031325ad.1.1756100447209; Sun, 24 Aug 2025
+ 22:40:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] riscv: dts: starfive: prune redundant jh7110-common
- overrides
-To: Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20250815050315.62956-1-e@freeshell.de>
- <ZQ2PR01MB1307043F4B7527EA41FF1754E6312@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
- <84cd3c89-5f82-468c-a63f-9815909ad110@freeshell.de>
- <ZQ2PR01MB1307C88B33C6124017A502D0E63D2@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <ZQ2PR01MB1307C88B33C6124017A502D0E63D2@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250814180647.1805196-1-dregan@broadcom.com>
+ <CAOf5uw=FF=fK1AqvoBhZUN0R2zy7sqRLUWZn=RvBat_W3zerhQ@mail.gmail.com>
+In-Reply-To: <CAOf5uw=FF=fK1AqvoBhZUN0R2zy7sqRLUWZn=RvBat_W3zerhQ@mail.gmail.com>
+From: David Regan <dregan@broadcom.com>
+Date: Sun, 24 Aug 2025 22:40:36 -0700
+X-Gm-Features: Ac12FXy9IQRTXAcsOjLPEfSgg6hn_s6-5Uv6XSZ2S6akdVHMH5GPSlUujhM1J84
+Message-ID: <CAA_RMS6_T7gcQh1pERUnno9jCMBH_fcmx-Ud-ePQGz5zu6UhXg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] cmd: nand: various updates
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: david regan <dregan@broadcom.com>, dregan@mail.com, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ William Zhang <william.zhang@broadcom.com>, 
+ Anand Gore <anand.gore@broadcom.com>, Tom Rini <trini@konsulko.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
+X-Mailman-Approved-At: Mon, 25 Aug 2025 15:15:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,242 +127,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Thank you very much Michael!
 
-On 8/22/25 02:48, Hal Feng wrote:
->> On 20.08.25 10:45 E Shattow wrote:
->> On 8/17/25 23:45, Hal Feng wrote:
->>>> On 15.08.25 13:03, E Shattow wrote:
->>>> Prune jh7110-common-u-boot.dtsi (clocks, qspi flash, eeprom, and
->>>> bootph- pre-ram hints now upstream since devicetree-rebasing v6.16)
->>>> and replace by remaining dependency jh7110-u-boot.dtsi (not yet
->> upstream).
->>>>
->>>> Signed-off-by: E Shattow <e@freeshell.de>
->>>> ---
->>>>  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 99 -------------------
->>>>  .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |  2 +-
->>>> arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  2 +-
->>>>  .../dts/jh7110-pine64-star64-u-boot.dtsi      |  2 +-
->>>>  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |  2 +-
->>>> ...10-starfive-visionfive- 2-v1.3b-u-boot.dtsi |  2 +-
->>>>  6 files changed, 5 insertions(+), 104 deletions(-)  delete mode
->>>> 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
->>>>
->>>> diff --git a/arch/riscv/dts/jh7110-common-u-boot.dtsi
->>>> b/arch/riscv/dts/jh7110-common-u-boot.dtsi
->>>> deleted file mode 100644
->>>> index 049b0a7ce28..00000000000
->>>> --- a/arch/riscv/dts/jh7110-common-u-boot.dtsi
->>>> +++ /dev/null
->>>> @@ -1,99 +0,0 @@
->>>> -// SPDX-License-Identifier: GPL-2.0 OR MIT
->>>> -/*
->>>> - * Copyright (C) 2023 StarFive Technology Co., Ltd.
->>>> - */
->>>> -
->>>> -#include "jh7110-u-boot.dtsi"
->>>> -/ {
->>>> -	aliases {
->>>> -		spi0 = &qspi;
->>>> -	};
->>>> -
->>>> -	chosen {
->>>> -		bootph-pre-ram;
->>>> -	};
->>>> -
->>>> -	firmware {
->>>> -		spi0 = &qspi;
->>>> -		bootph-pre-ram;
->>>> -	};
->>>> -
->>>> -	memory@40000000 {
->>>> -		bootph-pre-ram;
->>>> -	};
->>>> -};
->>>> -
->>>> -&uart0 {
->>>> -	bootph-pre-ram;
->>>> -	reg-offset = <0>;
->>>> -	current-speed = <115200>;
->>>> -};
->>>> -
->>>> -&mmc0 {
->>>> -	bootph-pre-ram;
->>>> -};
->>>> -
->>>> -&mmc1 {
->>>> -	bootph-pre-ram;
->>>> -};
->>>> -
->>>> -&qspi {
->>>> -	bootph-pre-ram;
->>>> -
->>>> -	flash@0 {
->>>> -		bootph-pre-ram;
->>>> -		cdns,read-delay = <2>;
->>>> -		spi-max-frequency = <100000000>;
->>>> -	};
->>>> -};
->>>> -
->>>> -&syscrg {
->>>> -	assigned-clocks = <&syscrg JH7110_SYSCLK_CPU_ROOT>,
->>>> -			  <&syscrg JH7110_SYSCLK_BUS_ROOT>,
->>>> -			  <&syscrg JH7110_SYSCLK_PERH_ROOT>,
->>>> -			  <&syscrg JH7110_SYSCLK_QSPI_REF>;
->>>> -	assigned-clock-parents = <&pllclk JH7110_PLLCLK_PLL0_OUT>,
->>>> -				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
->>>> -				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
->>>> -				 <&syscrg JH7110_SYSCLK_QSPI_REF_SRC>;
->>>> -	assigned-clock-rates = <0>, <0>, <0>, <0>;
->>>> -};
->>>> -
->>>> -&sysgpio {
->>>> -	bootph-pre-ram;
->>>> -};
->>>> -
->>>> -&mmc0_pins {
->>>> -	bootph-pre-ram;
->>>> -	rst-pins {
->>>> -		bootph-pre-ram;
->>>> -	};
->>>> -};
->>>> -
->>>> -&mmc1_pins {
->>>> -	bootph-pre-ram;
->>>> -	clk-pins {
->>>> -		bootph-pre-ram;
->>>> -	};
->>>> -
->>>> -	mmc-pins {
->>>> -		bootph-pre-ram;
->>>> -	};
->>>> -};
->>>> -
->>>> -&i2c5_pins {
->>>> -	bootph-pre-ram;
->>>> -	i2c-pins {
->>>> -		bootph-pre-ram;
->>>> -	};
->>>> -};
->>>> -
->>>> -&i2c5 {
->>>> -	bootph-pre-ram;
->>>> -	eeprom@50 {
->>>> -		bootph-pre-ram;
->>>> -		compatible = "atmel,24c04";
->>>> -		reg = <0x50>;
->>>> -		pagesize = <16>;
->>>> -	};
->>>> -};
->>>> diff --git a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->>>> b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->>>> index ab882d07f6f..b9202f2acce 100644
->>>> --- a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->>>> +++ b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->>>> @@ -3,5 +3,5 @@
->>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>>>   */
->>>>
->>>> -#include "jh7110-common-u-boot.dtsi"
->>>> +#include "jh7110-u-boot.dtsi"
->>>>  #include "starfive-visionfive2-binman.dtsi"
->>>> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->>>> b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->>>> index ab882d07f6f..b9202f2acce 100644
->>>> --- a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->>>> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->>>> @@ -3,5 +3,5 @@
->>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>>>   */
->>>>
->>>> -#include "jh7110-common-u-boot.dtsi"
->>>> +#include "jh7110-u-boot.dtsi"
->>>>  #include "starfive-visionfive2-binman.dtsi"
->>>> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->>>> b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->>>> index ab882d07f6f..b9202f2acce 100644
->>>> --- a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->>>> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->>>> @@ -3,5 +3,5 @@
->>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>>>   */
->>>>
->>>> -#include "jh7110-common-u-boot.dtsi"
->>>> +#include "jh7110-u-boot.dtsi"
->>>>  #include "starfive-visionfive2-binman.dtsi"
->>>> diff --git
->>>> a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->>>> b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->>>> index ab882d07f6f..b9202f2acce 100644
->>>> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->>>> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->>>> @@ -3,5 +3,5 @@
->>>>   * Copyright (C) 2024 StarFive Technology Co., Ltd.
->>>>   */
->>>>
->>>> -#include "jh7110-common-u-boot.dtsi"
->>>> +#include "jh7110-u-boot.dtsi"
->>>>  #include "starfive-visionfive2-binman.dtsi"
->>>> diff --git
->>>> a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->>>> b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->>>> index 874074174ff..848ed8225ac 100644
->>>> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->>>> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->>>> @@ -3,5 +3,5 @@
->>>>   * Copyright (C) 2023 StarFive Technology Co., Ltd.
->>>>   */
->>>>
->>>> -#include "jh7110-common-u-boot.dtsi"
->>>> +#include "jh7110-u-boot.dtsi"
->>>>  #include "starfive-visionfive2-binman.dtsi"
->>>>
->>>> base-commit: 0c558bbad9e7581808b358091d1fd979f860e8ac
->>>
->>> I find that there are no ''bootph-pre-ram'' in mmc0_pins and mmc1_pins
->>> in dts/upstream/src/riscv/starfive/jh7110-common.dtsi.
->>>
->>> Is it ready now to drop jh7110-common-u-boot.dtsi?
->>>
->>> Best regards,
->>> Hal
+-Dave
+
+
+On Sun, Aug 24, 2025 at 3:37=E2=80=AFAM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi
+>
+> On Thu, Aug 14, 2025 at 8:07=E2=80=AFPM david regan <dregan@broadcom.com>=
+ wrote:
 >>
->> Yes, thank you for your review.
+>> Bug fix of name changed OOB placement option
+>> Change ambiguous 'count' to 'pages' for read/write raw
+>> nand dump display update to show ASCII characters and data offset
+>>   into NAND
+>> Add option to nand dump with ECC corrected data
+>> ---
+>>  v2: applied MTD_OOB_AUTO to MTD_OPS_AUTO_OOB fix to env/nand.c
+>>      per Quentin request & added Fixes tag
 >>
->> Currently the U-Boot SPL code path that requires eMMC and SD Card
->> functionality is with these deprecated JH7110 loader modes, or some unlikely
->> runtime change in RGPIO0 / RGPIO1 state before U-Boot SPL following the
->> JH7110 loader.
+>> david regan (4):
+>>   cmd: nand: bug fix MTD_OOB_AUTO to MTD_OPS_AUTO_OOB
+>>   cmd: nand: more descriptive help info
+>>   cmd: nand: nand dump display update
+>>   cmd: nand: nand dump with ecc option
 >>
->> I will consider seriously to support the deprecated functionality if there is
->> sufficient documentation in the form of a full source code listing for the
->> JH7110 mask ROM loader. Otherwise I do not have time or interest to reverse-
->> engineer these things lacking in documentation from StarFive.
-> 
-> You are right. It's suggested to only boot from flash on VF2 board. 
-> 
-> But it is weird that in dts/upstream/src/riscv/starfive/jh7110-common.dtsi,
-> there are "bootph-pre-ram" in mmc0/1 nodes and no "bootph-pre-ram"
-> in mmc0/1_pins nodes.
-> 
-> Best regards,
-> Hal
-
-Yes, the half-baked result is from code review and I asked for
-supporting documentation also on LKML some months ago ref. v2:
-https://lore.kernel.org/lkml/521e5549-de83-49a1-a0e5-e47a2cb275ef@freeshell.de/
-
-The test methodology I collected is detailed in the cover letter for v3:
-https://lore.kernel.org/lkml/20250502103101.957016-1-e@freeshell.de/
-
-Simply I applied what was requested in the code review v2 and posted the
-test methodology in v3 for others to improve, verify, and comment on.
-The series v3 was sent 2nd May and no further comment for two weeks
-until applied 15th May.
-
-It would be helpful to know if this mmc use at U-Boot SPL phase is
-actually broken or if it is working, as it is with the patch applied
-(absent the suggested mmc pins bootph-pre-ram hint). Documentation in
-doc/board/starfive/jh7110_common.rst will need to be updated.
-
--E
+>>  cmd/nand.c | 56 +++++++++++++++++++++++++++---------------------------
+>>  env/nand.c |  2 +-
+>>  2 files changed, 29 insertions(+), 29 deletions(-)
+>>
+>> --
+>> 2.43.5
+>>
+>
+> Applied thanks
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
