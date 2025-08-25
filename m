@@ -4,150 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93DAECA0EFA
-	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 04:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8939CCA0FE1
+	for <u-boot@archiver.kernel.org>; Mon, 25 Aug 2025 06:22:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E346682DA1;
-	Mon, 25 Aug 2025 06:20:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A687081E13;
+	Mon, 25 Aug 2025 08:22:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="JJ3JulHL";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="WVOM1q+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43F0582E37; Mon, 25 Aug 2025 06:20:26 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20610.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::610])
+ id 5264F828A2; Mon, 25 Aug 2025 08:22:09 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20611.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::611])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14AE4802C1
- for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 06:20:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44A75808AF
+ for <u-boot@lists.denx.de>; Mon, 25 Aug 2025 08:22:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Q2+Sz6SxEuDfZZu+A8DWtfOo6vCgkLcj8X1D9fkMqDEY5ozvo4s+tG6trbd6Ss67Hz+qFzs9kZjfwcOvFwGsK+Qpi9RHaNUVXfEcnaQmIcdgMddVYsh0TClGH6cadBE5HS8suAu7/2eWwXjvawySdhBgeOMn0aqPB4Ltc67B5cWvDpzshtAs1PGrsiQ1WbV4zhOFLhoL7G6GMH1WATyU1VLp70+r1iLmoAT25wMrEapHFh0NT+AOBCpjyXooOQHragRWXH2MB4nqpUoHSF5BUHrvKYgIvL8ncj5NrVlgOdANwjwN5omGqejX+AJF2SbnYKtX5EN1pde0s3HBpi+bHA==
+ b=gK/Hc1hl0mGu/CdYIx6kRH5i3nOEkQUh/hJXLf4KTCOzzQBmpLcBcsTRlZiZBs59+nfBaKWFIbb6we7XVGRIDoph1uEWjyv2Fif3YVof26oczg7JO0dJU//AE4VD7DTXaFNf+r73sPeuLDEsgPffAR92Oc7rqnst5O4iHlmGe/46xLmm8H7DCFnmSStR1gaF0erXy2n5lVIC3XcHVv/5vqsvMhjmXbD5Xt3/Gt/YlZFpzYhyldJRq9q9+XYoTQ741knTbyISQ8EuanYC7peVlXDV/fKdeGuvcaIyRa9ke5aeHlwo327zUZimm7tCZvs7V82ged2XSIhcb4enBkWGqg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K8l5yPQtDW7i/e+2e/r+yPNYrPsvmVvm4KuhmTPB7sc=;
- b=rlOCefKfdTCt9Cm/HA9NpwvSRXzFQUcUyp0p5amixb4HOWNrI6gW0lQIkN9iez1CpHV/ZwxGKTPeMHMVf6CrbGvaYS5XhE4Q40Nw43tN4UxaO9fGRzndRnsY8QxIiyiouMLzI0cZycYRyyePngx/To++4oNE38cDJnClj/SVZxDMJfOZcNTOEpS6LIw3Y68OSNv9PvvLPwLEHRs7kbTlWGPuIPjCdBwhiQMkqkf7XZKIEZ/uDd0SrQf/oPehGZk4cEZpg1uQg52ZCnIMkU1Hw0Pj+Mt/TEXVSJawGR7O+X8bfnqCbVZxi0wddQDruSSQrtuL/Nc7dBweh0zwMiNZWQ==
+ bh=6V8RirJd5H2Xk0+iqiPOzKzdDTs4BWx0UrRQqWbarxo=;
+ b=TbDB3S5slYc+4CxAZMyxs+RtganuLQuahZYbgZRVKwbz/iS+tC56v7aXhZTVUN58OVgD+HrS3G74OKWRjhHGfe4IeYQlF5VfNhHLOMnZGEYYTjJHjHGlRmECF9QM/JEF6LhbwT5LpFj4xMT0ts/9aKn+KqbrDMCG0Q8+NG08z0bk0tmYs6rgawjtUPiu8DsIXJuTc1eSHMRJlpYlmWIVY2pVCVgNj1PkM1cbyvvemsWgpKAmiLNyflw1Usj1GmZh4lQP9PN+pbKRzL0ay/4IGUrBpDan0eTa3bKb+gNFv0Kz7951qraSSdQmXatihqutJwwxumirdY/cPxTtT9OTHg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K8l5yPQtDW7i/e+2e/r+yPNYrPsvmVvm4KuhmTPB7sc=;
- b=JJ3JulHLGtJGrioQlVVkP2r5xUc575ukWVe5krAzGcbqiIg7Wqb45rs9qdzc2VpuhdWW4u+/GhQR9SW6FMnfbxi5FzN94YM5d0lKalE3RGhEdp0YP+O+o5w92W8qqRPJPwglXNHvScMYQ2xzloPeX6qCIf50Z6NDWaL78VpXg4BwAXDejW0ueoG42az28ObJfbF2XEmz7SEwSzSp07TyclyKqyp2sCaZbgugl8+CbP2XoOsqdgPTnzJ/q4kI5H2SW6en0EeCs2yCQlY+Iwyp2JhVwyyEcqR+QyegZZimcRwGi+qG5tFECvbVm3lhu/YmxeO3MZfW2wwnJrGNG4FutA==
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by BY5PR03MB5298.namprd03.prod.outlook.com (2603:10b6:a03:221::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.12; Mon, 25 Aug
- 2025 04:20:20 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9073.010; Mon, 25 Aug 2025
- 04:20:20 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-To: "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH] arch: arm: socfpga: Remove speed and mode from flash probe
-Thread-Topic: [PATCH] arch: arm: socfpga: Remove speed and mode from flash
- probe
-Thread-Index: AQHcEMFfVzGtNmhJy0K1jPg0lfFjNrRyzYEg
-Date: Mon, 25 Aug 2025 04:20:19 +0000
-Message-ID: <LV8PR03MB81379E64C6579F5CDD0C8B01A73EA@LV8PR03MB8137.namprd03.prod.outlook.com>
-References: <20250819042555.28113-1-nareshkumar.ravulapalli@altera.com>
-In-Reply-To: <20250819042555.28113-1-nareshkumar.ravulapalli@altera.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
+ bh=6V8RirJd5H2Xk0+iqiPOzKzdDTs4BWx0UrRQqWbarxo=;
+ b=WVOM1q+VY5MfAJNTmkcjb+gOsLuJZbwDsu5A9m8LxVK/12Q0cgRnjefaHtwfVbdkiinYEhO+hm+VoAXPNwa7hNqRZ5xEbmuYNL/7t414yhzQgFCh3deuoTBDpuem0n1YS9etv6wQiQ/rDD6Jq98OkTbTZlHnfaGgodLi2xz0KlhKUhrUao+cbAXvfS+HlivMGcb0fr7FQ65c9UY/GkwsCOMwGkBm2HX3DoD0bN8kiUgMI76VLsFoPA9ufVPrM6lWZMvvuNL37y3lqzScpT5qZwq+hP9XCaImtVrlM2/PM0IN+UXsavP5u1r4XoV+8i16iqrm0edVHGmAX9r5+tjNQQ==
+Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|BY5PR03MB5298:EE_
-x-ms-office365-filtering-correlation-id: 70126901-162f-4a55-b23f-08dde38eb3e8
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|7053199007|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?rPbsW00reOtTQ+ENmdpbhMu4I7xJKS1557zDng6frL0LfyHBqhThTqLB3B7S?=
- =?us-ascii?Q?S6MpO8YQrGW9Qe1GfbDp2CBfPO2HsVwdyAVzLjKi9GuKGw6kejUg9lvd/EKp?=
- =?us-ascii?Q?70zK9iXr95Sqb6D79llbHuQ0xEjsHdhjfgMz0M+3Lrh7mkdANyVEdZfgivR/?=
- =?us-ascii?Q?kXPTWE+67W6S2/IPIqx7V4bRPhzn8niRfwZm0DoFVug1vBONa6Y2Xznth+TP?=
- =?us-ascii?Q?2nVZDWU8/CK3JcrmF0bSHm3K4TzqlPbsxjDIIYSm+6g/BSGtnm0o4vuxoq9l?=
- =?us-ascii?Q?Pd0vUJQvcMCGYDVG3s7nsv1xxx/siqdJ3mHmvI8nTVdUDQnj0Wdv+Ux2oVhr?=
- =?us-ascii?Q?5qTajjo2EgYnOVJ+wk47T2IRUFi1LIk4dTMSwgMaMuyfVL7Vc/jiyYuqpx7i?=
- =?us-ascii?Q?NnMiNBqbaI5tXSnmlXI1i/xuPvxmXPov7ZMe5StPN1nLh+x3bKI2ZYta3RCn?=
- =?us-ascii?Q?t7lU6QVILJ+vuFqpTA+wywEuOQPj4mH2lVh+M/kfEB8PPmPgvUubf8AAZjZB?=
- =?us-ascii?Q?UBdPDBp5mypCp6b6j9nxCtsUVHhja+JYEP2edRdt/wHSvfjdbQoiby5viA6U?=
- =?us-ascii?Q?lYBFmUsK1AiF+fSclfarCMxZowcnzHMOpy9W2cnBt3s/ADiSJpgj1RaknIaG?=
- =?us-ascii?Q?fcFCtIw685rUoEzm0gKO14qtBj8BKLLC5zEH/kACBCUGssxZLsq8jQ70kw+P?=
- =?us-ascii?Q?iASF7+2OhJvxlsBKGpRvHFi092umaAwUQxBiOp5ykO7XoYuwo+mJZQC+zVgJ?=
- =?us-ascii?Q?WPSd9NzE7LxHrAtPRs+gbdr5DJuqFZAqvTm4wEZWyoBDVsrnVegrpVHOT4Kj?=
- =?us-ascii?Q?FOyxyN/1fOcUUtBfzBbaN2ZfoC+4p/hSo56vQ/FEthO8UZtIrzwA3MWFkEyR?=
- =?us-ascii?Q?p7SF3QhKGtZ4+Tk5n/7deFYNIKqVqtIgB+oxrN5bGLgbU/xy62Bl4ECdZe4R?=
- =?us-ascii?Q?Ok0+3Ll/FLwOSkGJK8JfHBLGN1y26a1KsN0clN7yKXJd8Mf2YwN9QbqffcDY?=
- =?us-ascii?Q?DH6MWY5RnrMkiIPx1yzo/ntmZx8OnnITtMS3g6cjX/I+0l9rrResN+Yft3Pp?=
- =?us-ascii?Q?HptZLuHzeaVz/Lpu/YF6lq1hD5r7hi+Kt534Mqo88WiZnNyVNAEJjLhHr0vY?=
- =?us-ascii?Q?mt3X+uOgRoJfBSf72MKsqPxj73Y1IwqSkxe/uCSyviwSW5exiQWfruz1rgji?=
- =?us-ascii?Q?FbzxstoVj4Lgfj64PEpvgXqdRJIy51Yk/PMVZ+NEiQ0xgpvxUhgOFxWMOx5L?=
- =?us-ascii?Q?s9dZkNv09f1IbckjV0yXrLhCRWBE4/Sza2eY1zzXKpaq3hFe9rrSoX4uL0tP?=
- =?us-ascii?Q?tjZJZgF7BEFJ/jjhlYFaF4LBk1d4ARPxzqx8liHxqncAWdtOasAIUMrZnztt?=
- =?us-ascii?Q?TC4c5SDkr5tiYxiifVNuA1Y9FqxERE3er0smkwTzkzaCCB8/ge+jOnfDPbCU?=
- =?us-ascii?Q?zLgeDBVEUAvL+5MYdIupfo1lyjV1IjwV3gbWbPv/gTSGw9upzESjHw=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(7053199007)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?jHxAG6V0s2nGXUOsikLpVk71Q8NF3I6+Q2e/MeuXIn7vWeouN2kNmA/NmxTh?=
- =?us-ascii?Q?IXZMH4MGNGADVz23trRx6WUMetqO7yWTQxol1xuFhAGmSB3iB/bYBoZcLF+o?=
- =?us-ascii?Q?e4buv4L4Qj12mdcOQRJiw6b6VTmCU2f1B22x4sxkYOErLEryy6f1WNc/aIn6?=
- =?us-ascii?Q?U62H/VnmEVkbVEbElxJdw3fYBGtKODx1cCUP1c+dWFHNjzs0YFZUFkQ5yYhN?=
- =?us-ascii?Q?K7DVkrUwb/3UISeDrkoqqlBZ45tAjs+bExSA8uIitKoaBsE2VpDkvWMNv96i?=
- =?us-ascii?Q?z96nU+BjviQBOHLj5xWR5yx8Ir8xGzsMYGeU2fdtW5dA9gZyMbYd2fyAY74Q?=
- =?us-ascii?Q?CLB3EVRzB0WbtB1nH9u7WT9v65RWGw1wjh21CZXWwGnCiDOTfDW+wanroOgv?=
- =?us-ascii?Q?UtTBNPo6JXsVHWvPiunpf6Rj/BBMebPL2SmsmYtUX3jWxmqrTfLzbQpaqT98?=
- =?us-ascii?Q?qU15kOznzT918wJ5F//q4GD0LzSVaXrLhyszTiCh7jHaXAenOxW3YglayYOm?=
- =?us-ascii?Q?eAFejUFrozfvZHJORfe7xVe6DH+fan5E06UrBqCywYamFUH6i5BBms/K7Ug2?=
- =?us-ascii?Q?xBstWAlihUPHC9hfNKWQFxa5dnuK739RZ7+GnE87/HF6UcI4KGCtlK+wbUbm?=
- =?us-ascii?Q?EVfPqlMo6fQYz7vCClBmoiLVWbQ9XMykh0IXfOV96WLYdBdg3Ug2y/c5BPef?=
- =?us-ascii?Q?Y8laNbwmQr8yKUP9uh4vWtF1omYOKU6NcFcFL3b9dIR9CVV7RD/EzPSemQOi?=
- =?us-ascii?Q?7iGWDRX3pCUu349GjV4ak7jtC1IcpyoA7PwiFYajNNCfUNxGgxo6GBcLq02V?=
- =?us-ascii?Q?5jdHtA6Q+tDGOfrzTzLAu3D1BA2Kx6tqovk28e8u0TMqsdA2/7+0zbFvH0I/?=
- =?us-ascii?Q?bxoza55SCaNgAxcMHfvNkJczVdcgYDrUDzOqanb7j9mpK0qmYd8F3rA4N6dU?=
- =?us-ascii?Q?ahVpXjsnKD61ARfSa7sdeDWhBa25CaXvkz75PXbYMA54F8ohZ5dWyUbKLPlw?=
- =?us-ascii?Q?7OH6D2WV2l05hMzkaGHHfyrTnhykMbbTeQ8RmooY7/z/pJqi7/JNNuoPB07i?=
- =?us-ascii?Q?NBxEvr5IQPMVfX86N0jp+jfB9yJgYvCSMnH7mHmY+obWC0AnjrfYMI1l/nJ6?=
- =?us-ascii?Q?cV6So4eBVt9VmIaQuyhk4E7GC0aO8g1W6tWjzWnse7akovIQ161s1jXmSVZi?=
- =?us-ascii?Q?yrn86XpVdgsjChvrLVtWNKhl69UmgFwWD1FaTsVKK19JFp53hZDb6eUCkFtR?=
- =?us-ascii?Q?hTBiGvbPq37pXZmWpZ7whnNM95gFtHP5cVEuDZgVHziOrMWGRK3OBH5eUqgh?=
- =?us-ascii?Q?NCmxtJFlhHn6Kd+h75ktuuOAbWT9j8IDfaghA3dO+bgpsZ7xyxW+ihjoDnGZ?=
- =?us-ascii?Q?PGSRo1NmgR2fEdaMqsQAlHkSHDFxEgaWRu0T0N/sxooPAkj+NYTSuNsvDrtY?=
- =?us-ascii?Q?SDiGN8J3iK9YGA1iKrhngJLUZTGA2JVp0JXH3BsWySZrTE/BhZrkCCNeDUTw?=
- =?us-ascii?Q?sz+3S8veQJ8owK1kPXWIizjyZXxXh0CDjaRXwpbCFL2kl3FLcDSYbKEH2A3g?=
- =?us-ascii?Q?jVXuYsd/EZkCUgLnw9x0ZlX8vfsiXaTOhRgMczqU?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Received: from DS7PR03MB5542.namprd03.prod.outlook.com (2603:10b6:5:2c5::16)
+ by PH7PR03MB7337.namprd03.prod.outlook.com (2603:10b6:510:2f9::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.11; Mon, 25 Aug
+ 2025 06:22:02 +0000
+Received: from DS7PR03MB5542.namprd03.prod.outlook.com
+ ([fe80::c3b6:3b8d:4383:ab7c]) by DS7PR03MB5542.namprd03.prod.outlook.com
+ ([fe80::c3b6:3b8d:4383:ab7c%3]) with mapi id 15.20.9073.010; Mon, 25 Aug 2025
+ 06:22:02 +0000
+Message-ID: <9a458b2e-61cc-4a99-bc04-6180f2c0f624@altera.com>
+Date: Mon, 25 Aug 2025 11:51:58 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] arch: arm: socfpga: Configure USB3 System Manager
+ registers
+To: "Chee, Tien Fong" <tien.fong.chee@altera.com>,
+ "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
+ <20250808100412.9320-5-nareshkumar.ravulapalli@altera.com>
+ <LV8PR03MB81378100F4DD4F43A8F92ADBA73EA@LV8PR03MB8137.namprd03.prod.outlook.com>
+Content-Language: en-US
+From: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>
+In-Reply-To: <LV8PR03MB81378100F4DD4F43A8F92ADBA73EA@LV8PR03MB8137.namprd03.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA0PR01CA0076.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:ad::17) To DS7PR03MB5542.namprd03.prod.outlook.com
+ (2603:10b6:5:2c5::16)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR03MB5542:EE_|PH7PR03MB7337:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7c191cab-fd59-4af3-0c11-08dde39fb44f
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?THMzRTc3V0pXMmYydkVLak00OFlFVytRRWE3Zysrd1REWHF1L2FGU2Y3cW1F?=
+ =?utf-8?B?QktWdkNEeDlzU3V4Mk8zc1praHV6dkoveTIvWnljQW4vYlhGTTVOMG5kdUt4?=
+ =?utf-8?B?M2JnUE5EVDFNY3ROU1Ntc1FVWlZZUEV4ejdnbzJFQi90aWNmOW12Qmc0a2VJ?=
+ =?utf-8?B?YzFyU1drU25XL3pTOThLdlk3NmhMSmN1c3ZaSStkRjh1NnhwRXpYcTY3WEZj?=
+ =?utf-8?B?aEorc2hJV1A1d3RpR3JaVnB0OWRwSUhiay81c0pob2pkMVJqdERWS1Myelcr?=
+ =?utf-8?B?cWJMQVVCYkVrNS84ejBOT2pTMkFBN0VRS09MeU95ampUMlRFVTREem5HcWdT?=
+ =?utf-8?B?WmlPUzBjbGg3MGwvVGRtR1NpVEpKVG84QVBPdlhPWG9Pcm5iVDRTWWcxcHV5?=
+ =?utf-8?B?cWcwbmJvT05WOUloYnpWUXVzNWhXVGlhUUsvaGxUTDhzbjhHUjVyZ3hrbGNR?=
+ =?utf-8?B?WGhpWjJ3Nk5BdmM1ajFnN3BKdDFzZStPNGVUZVczcFpaaUZmNDBvbXVRdTht?=
+ =?utf-8?B?MUh1R0FqenhtK2JSMVd0ZUUwNFhrVUVtd0licG1oQ0V3NWR1MW9nRjRxbFhn?=
+ =?utf-8?B?eHFneEFUYkdZMmpsckxWekYzdzl4L2krcDltTDhDMy95eGovNVJ3SnZNOFZX?=
+ =?utf-8?B?OFc3Wjd3YlU3anMwR2pCVUE5S1F2Nmt2VUpzYTB3bVFNcUplWTJnZ0lSV3gw?=
+ =?utf-8?B?L05iUEljSmJyR3JlVCsxdjBENG9OQVpXTUxnQ0h2Z0JrQ0ZVdUhMZnc3ejJQ?=
+ =?utf-8?B?eHhWNlRNWk5QbmJWM1I2RTc2KzdkOVViMDlGYit1dkFpQ1hCbXM2dHM0dGVh?=
+ =?utf-8?B?ODQ1TVFuMkFGd1RDN09CbXlSZWNjdW1oK1NLNTYyQTM1OWlTbkJrVWt5V2xC?=
+ =?utf-8?B?NlVsTlBVRWl2M001dlArQUdnenZ3UFlQMFczRHFxWk9iNW5LV0VVUnVkRFNm?=
+ =?utf-8?B?TlRSV08rUk00QStQdXhZTVdtaXFVRE5LbVU5MW9EM045bzUyWHFaUVp2NjhP?=
+ =?utf-8?B?bjRIV0RPN2xRRFE3RUs2UFBCWE1DcEJ6UWVZeGluQzU5T3Y0TXBOWGZzenY5?=
+ =?utf-8?B?TW0vSW1tWllpL2RzR0lndXMvTHovRGdkaUY5SXVFcnBOamUwSGRMSWpyTFNU?=
+ =?utf-8?B?U0EwMVNCRjJJRzFBcTlyMi8yYXRpQ3lEZHVnTng3dUlPd1JtL3RDMUZOSVY2?=
+ =?utf-8?B?Nlk0dHc4UWNRWVBOb0N6STg2M0FBZkExeUlpeEtJbUJ3eXI2NUR4RW5tcjhX?=
+ =?utf-8?B?U1I4VEdUdzUwdFVCSmxTOWlEZDBUM3pUOFdCbEMvZStmam5oTm5tS3JCSy9G?=
+ =?utf-8?B?L0RGSGszODVScEUxOWRKaUhXWVRZYkF5T1lOTzlwY0pna3dZZm13VStkcWN4?=
+ =?utf-8?B?V2F6Z3JoeEJCMVQwRmZ5NXJEMnUzZEVQQis3bVJsOHJSMUhxOGJKb3pVMUFW?=
+ =?utf-8?B?RzhlZUE0d2R1Ti9pSm01VEFJWDlMY092V2RrdFlOVFVJaU0xbkdvTnM0b05M?=
+ =?utf-8?B?bHZ6dWt3ckxiWTdnWWJxaElIZFlkYUg1UUxRbXRUUHZsNm4xanR5WmZtQmVI?=
+ =?utf-8?B?b29ZdDhETDZxdmk1aHNNOWlXaXVacU9HUlFNNUJsalM1QjA1S0N2MUxZeEtl?=
+ =?utf-8?B?S2xtVW1SNnlBbm8zcDRKNjRuY1gyQklSdnMzWU5CQzgxZlFEek9KMWptNTBk?=
+ =?utf-8?B?MDQrZEJmMzVYVStQWjlnVm81RjNjdW1QaDBUdnZ3Y051T3IzNlRJdjhycWcw?=
+ =?utf-8?B?NFp2TExlQlYvZnQyemdiUDBKN0VNaHF4V2FmN1FJdm9Kdnd0UlZ2MUdTeHA4?=
+ =?utf-8?B?Uk5Oa1dxeEgvc3VSaWF2Q0IxVFJYWWE5MkhnWForZmpVbm1POW1qTEZZVkxO?=
+ =?utf-8?B?Y1lRa00wNTA2dkg5K01WQmRaaTNZTFdYQzZwTXVWRHZsWVE9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS7PR03MB5542.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eThENkNQOHJFdkp3WXJRNlIyTUZOVGpZZE5tb0NpVTB1czdRSnFLTjhOeElk?=
+ =?utf-8?B?Vzh3SGxwemlGVjNIWEx4cVRkSjN4ZXlDOHlqYkpXSTZlbEtEZWkzSU1OQWhH?=
+ =?utf-8?B?Uy8xZngrTytXS1VyRzZqdDlDNTlZdjArZ2dZVHl0dGtjR3EwYTVLR3NEcTY2?=
+ =?utf-8?B?a1RKSzgzVmJOSDdQQnRiTHRCM3pqdTM3Z1NwSVR0RXpTQ1pBeWVHNEFBaXFP?=
+ =?utf-8?B?d3BYOUZkeUxZV0xrc2pCc2REN2x2Q1d5Rjc5VDB2WUw3MjJtSzRCbUVmZzRj?=
+ =?utf-8?B?akI4QU1LOHVZTHlEekJsNFV2S3lqSTZCWEJ3TksweEhpaU0wM01oSjdvUUQx?=
+ =?utf-8?B?M1M5M1lLTnlEWWQ4NjVWSFQ3WkZPc3hJR28zbEFJL1N0YUJ6S05lRzdBR0JV?=
+ =?utf-8?B?Wkd3Y1B0WlNSbStxTTdSelBvbkptMHJEVHM0aC8vN3Q2L2lCZzVUUVltZVhP?=
+ =?utf-8?B?Vk8wcHB0WW10cUNWYU5NZTFBN0RpVnpkUGlMeThQd3FOdnNKTTdKZmdnZzN2?=
+ =?utf-8?B?WTRNOFZ6bFVjRlFPWnBqS2FZRVplS2JIQzJRYWFBNDlUWTROYTJUUXFGaG04?=
+ =?utf-8?B?TURGdUo3V2drK2ljYlZURlFNWi9yakx1Z3NqVWtVWDVQRFlUVHNTeTRPNnhI?=
+ =?utf-8?B?SHpoY1BJNlAxZEl3cTFsL2VRa3EzQ0FjbFFsTFdqREpCWDBlUjVjb0tTbVV0?=
+ =?utf-8?B?UGRsNHpGL0haREU2cisxV3I3MFFrWk9wSlVrR0I4Y2VkR2NTbGlQWXg1YVFY?=
+ =?utf-8?B?eXQ5ZFJFNE9UMVVsT0JMQlAxTlNzT256SzgzYWt2djM2ZFd1UVFGZ0p5OWk0?=
+ =?utf-8?B?WU51K3hYYms2UzlVUm95b0c2TjRKR2xEYVdad3J3VVQ2b2pNWUpuaTlRdWFj?=
+ =?utf-8?B?K2NlNDRNaURycjNFSVplRFVzUUxhY1ZWOCtuZ0JjSnludC9wZ1Y3NkpabThC?=
+ =?utf-8?B?N2VBZElDdldTemdJMXZWMkdYYzRnY2dwOEFRWFZlN2V4RDVMREpRUEw4dUlm?=
+ =?utf-8?B?OUljRjJabW5EMzdYR3ZINllqK1U1L2FvZnM0NXI4RFFQcm1xUFBhYi95RTdY?=
+ =?utf-8?B?cmRRK1NhakZxYTlIVlV5ak9sb1l4ZjZxRXdTMDRlTGtzNDJVR1VGQURNME1m?=
+ =?utf-8?B?SkVNSFdJV2x4NmI2WmZnTWtxUFl0WU5oRmlXU2hhb1JVamVEeVptVGhBTGF2?=
+ =?utf-8?B?SmhGUjZqMDNnU0lIYlBJaCtsQXhKd0IySDRGcnRBdlh2THcxZitLdmVjYW5Y?=
+ =?utf-8?B?RmRLRGNua0w4QVpTVVhNOFAvMUN6NlBYTlpQdHlCQ3BDK1QwaDJFUy8yanNi?=
+ =?utf-8?B?dnhYMDVncTlXN0owRUxuNzlDSzVSQ2ZBSG9yeVhwQXdoeFpIMEpVeVZQUnZQ?=
+ =?utf-8?B?VkFKM2c5SDJVd3Mzd0N6Zkw1NFhBdzJVL2Fva3BkWTFTQnlVZzlJSlJHUlpM?=
+ =?utf-8?B?enRib0ovNzVrb05tWWZ1OUV2eXpwNHVNYzRuNUR0L2psRFY0TDJxNFNlSmFF?=
+ =?utf-8?B?aUJJK3VXTGhUaXJ5eVptL0RvMkY1R29SeVhWTGtvYVBCMXgzZnNxKzFFVkdN?=
+ =?utf-8?B?RGJVbHIrYUxlSXYvK1NQNDBrM1ZqUGNQVVd3TmxIbXJjU3RIZ1dwQ2FUSmdq?=
+ =?utf-8?B?UVlPV21FUnJOZWpRZWxXSzI4Um5ndWxpYjlKWWx6SkcxNThkcDNzNVFYbXdw?=
+ =?utf-8?B?ZDByaG1oVmRpdlI4ZmczVVZHalhmMnFyU3RJME85b0xDalE4elZLUy9uY0w2?=
+ =?utf-8?B?SjdPK1hEaWdVS2d4eXYweENnMkZSYVlxbjVpUnRBZ2pUWW0yVkJkV2ZSYWNv?=
+ =?utf-8?B?V05wc1diNVZ2bDI4b0VXeHpFdjZaQUtyU2gwd3ZmNVVlNlB2K2ZTNVY2L3Rn?=
+ =?utf-8?B?WEFjeEt5S21lKzl5QXFBZWpTM0dBanlrVGIwQ3hhZkZvTEZZTWxOM0V5VC9t?=
+ =?utf-8?B?a3dJWU5pY054dnI3R0ZsMVBTREhzSGNRbUhTNC9IYitDT0Voemt0OWIzOTFY?=
+ =?utf-8?B?WERBZThpUDZIYW1KUTZyVFkwejJSQk5xaU5Gb0p1eitzVWNiZlRObHprTUpu?=
+ =?utf-8?B?ZzZxb0hTQ2dPSCtwL0tFWXM1TlVmSU1hVkNxd2dCa3lwYnJFWXJVNW8yTzE2?=
+ =?utf-8?B?S3FwZktobHlZdzR6YU5RZEVZNEUzYXlSS1BKR1NLZ2lpd0RKQTdJREsxempJ?=
+ =?utf-8?Q?Qbp4zHvLPmL7yvAeNlEiOL0=3D?=
 X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c191cab-fd59-4af3-0c11-08dde39fb44f
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5542.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70126901-162f-4a55-b23f-08dde38eb3e8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Aug 2025 04:20:19.9622 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: LYtR0CWocSMcbOuvniH0cU06uy1aegdleTnEUgosO9moVVZLeYhYQdhNQCvvKBZVBCiSiZfcuyQE9avaHiVJNmCGa1SFzq27YXYyJ9lhiuE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5298
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2025 06:22:02.5778 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0X0h2WdMLrcwA6wwO/KEpSc3FCKRFONnznnPC8J7Jx2l1ILOCweXOqE4LpXGRAEuctdTWrV5KUVuPv/8v105Bo4TxIi2RfBM+M78YK2V+Qq2lfGAryNnrTWoQldEVgll
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7337
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,50 +182,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi
 
+On 25-Aug-25 8:36 AM, Chee, Tien Fong wrote:
+> Hi,
+> 
+>> -----Original Message-----
+>> From: Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
+>> Sent: Friday, August 8, 2025 6:04 PM
+>> To: u-boot@lists.denx.de
+>> Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt
+>> <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong
+>> <tien.fong.chee@altera.com>; Tom Rini <trini@konsulko.com>; Ravulapalli,
+>> Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
+>> Subject: [PATCH 4/4] arch: arm: socfpga: Configure USB3 System Manager
+>> registers
+>>
+>> For successful reset staggering pulse operation, reset pulse override bit is set.
+>> Port overcurrent bit 1, which in reality reflects PIPE power present signal is
+>> set to avoid giving false information of Vbus status to HPS controller.
+>>
+>> Signed-off-by: Naresh Kumar Ravulapalli
+>> <nareshkumar.ravulapalli@altera.com>
+>> ---
+>>   .../include/mach/system_manager_soc64.h       | 12 +++++++++
+>>   arch/arm/mach-socfpga/system_manager_soc64.c  | 26
+>> ++++++++++++++++++-
+>>   2 files changed, 37 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+>> b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+>> index c2ca0a50e35..8a7d47bee44 100644
+>> --- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+>> +++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+>> @@ -33,6 +33,7 @@ void populate_sysmgr_pinmux(void);
+>>   #define SYSMGR_SOC64_ECC_INTMASK_CLR		0x98
+>>   #define SYSMGR_SOC64_ECC_INTMASK_SERR		0x9C
+>>   #define SYSMGR_SOC64_ECC_INTMASK_DERR		0xA0
+>> +#define SYSMGR_SOC64_USB3_MISC_CTRL_REG0	0x1F0
+>>   #define SYSMGR_SOC64_MPFE_CONFIG		0x228
+>>   #define SYSMGR_SOC64_BOOT_SCRATCH_POR0		0x258
+>>   #define SYSMGR_SOC64_BOOT_SCRATCH_POR1		0x25C
+>> @@ -47,6 +48,17 @@ void populate_sysmgr_pinmux(void);
+>>   #define ALT_SYSMGR_SCRATCH_REG_POR_0_DDR_PROGRESS_MASK
+>> 	BIT(0)
+>>   #define
+>> ALT_SYSMGR_SCRATCH_REG_POR_1_REVA_WORKAROUND_USER_MODE_
+>> MASK	BIT(0)
+>>   #define
+>> ALT_SYSMGR_SCRATCH_REG_POR_1_REVA_WORKAROUND_MASK	BIT(1)
+>> +
+>> +/*
+>> + * Bits for SYSMGR_SOC64_USB3_MISC_CTRL_REG0
+>> + * Bits[14:13] Port Overcurrent
+>> + * Bit[12] Reset Pulse Override
+>> + */
+>> +#define SYSMGR_SOC64_USB3_MISC_CTRL_REG0_PORT_OVR_CURR
+>> 	GENMASK(14, 13)
+>> +#define SYSMGR_SOC64_USB3_MISC_CTRL_REG0_RESET_PUL_OVR	BIT(12)
+>> +#define SET_USB3_MISC_CTRL_REG0_PORT_RESET_PUL_OVR	1
+>> +// BIT 1 actually reflects PIPE power present signal
+> 
+> Using /* ... */
+> 
 
-> -----Original Message-----
-> From: Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
-> Sent: Tuesday, August 19, 2025 12:26 PM
-> To: u-boot@lists.denx.de
-> Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt
-> <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong
-> <tien.fong.chee@altera.com>; Tom Rini <trini@konsulko.com>; Ravulapalli,
-> Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
-> Subject: [PATCH] arch: arm: socfpga: Remove speed and mode from flash
-> probe
->=20
-> Change is to allow the user to choose speed and mode values from dts or t=
-he
-> default ones.
->=20
-> Signed-off-by: Naresh Kumar Ravulapalli
-> <nareshkumar.ravulapalli@altera.com>
-> ---
->  arch/arm/mach-socfpga/misc_arria10.c | 3 ---
->  1 file changed, 3 deletions(-)
->=20
-> diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-
-> socfpga/misc_arria10.c
-> index c442af02888..7e0f3875b7c 100644
-> --- a/arch/arm/mach-socfpga/misc_arria10.c
-> +++ b/arch/arm/mach-socfpga/misc_arria10.c
-> @@ -214,10 +214,7 @@ int qspi_flash_software_reset(void)
->  	/* Get the flash info */
->  	ret =3D spi_flash_probe_bus_cs(CONFIG_SF_DEFAULT_BUS,
->  				     CONFIG_SF_DEFAULT_CS,
-> -				     CONFIG_SF_DEFAULT_SPEED,
-> -				     CONFIG_SF_DEFAULT_MODE,
->  				     &flash);
-> -
->  	if (ret) {
->  		debug("Failed to initialize SPI flash at ");
->  		debug("%u:%u (error %d)\n", CONFIG_SF_DEFAULT_BUS,
-> --
-> 2.35.3
+Noted, will make the change.
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
-
-Best regards,
-Tien Fong
-
+Kind Regards
+Naresh
