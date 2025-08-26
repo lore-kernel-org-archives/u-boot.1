@@ -4,163 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7EB6CA0EFA
-	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 14:33:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B57BCA0EFA
+	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 14:35:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29BFF830A0;
-	Tue, 26 Aug 2025 16:33:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2388D830A0;
+	Tue, 26 Aug 2025 16:35:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="4sSSJzq5";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="2bkBAoh1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3A1D83102; Tue, 26 Aug 2025 16:33:47 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 5C5508311B; Tue, 26 Aug 2025 16:35:34 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42D71828A2
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 16:33:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AF98828A2
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 16:35:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lF/Nr+/n6tPg15UXMrRhlbhaXURZfBiPBeEQpN0NJUaVjO2thqeCdpkZu7Yb3tGY+wblS1AYVuD8aibMB/WRCE9CzfLzC9ZA2lKq448th96537JvXkI8PAxcPNBqGzHsSjR50x9+eoBczFG4DoNIsUrTDq3IXSWzy1Aok0j6Zec37CnRVyxGDT6N1YosLjLTWpnFJINBCqjgvn7WxEuESWOtDoBlEExLtt7c5eSsir7haQs7K1mc2bJUnaDgFDe3WCuwhd43B7bh54tVSb4+KHTRRjvlU2B1p6ONATx8g5qBKD95ntAg36pHRlaBJLPQAnNhNJJtwHh1QXp+lPOoPw==
+ b=BFXP1+RoM0cpT1KOB79pf3LirZQPbRBb555mb57QQCP/PE2BB6Zj/dZxmrLXUOIkgQKhLu7YVGfxp2Yx8kzagdpyEWM18MBEQ4sq76M8TzKOKFPAZbJZYyCcYLSG5fcHs6cH9ZBmGCfRvdAZAyBpCBdf87F6qX7+NgMW5S33Px45VpTjv3eOb7NGiobyROzacKLfpCvlGVAb/xfSeBvbhmRcR9PUrt+a7GzeHoNZ3eo58SBF5RBXbsUeXZMkzbrMi7J5J2Gb1eqqIseiZRoboA4onp45K+K+nXc0WPXhvu5+aeC/2TyRNflKPURL8qnJ5CZTe0ovmZ1rcLbLBrv2Zg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P7PN+v2LjpQVh4o1R2DTbSjs84kjnlzCe9B93xtbjOQ=;
- b=w2PukFDMgkpRXfcRus1Lqjb+1nxye7dSJMnDUh59xg1Fc7dmZ3x4gLsIpmGfGtkb6Iuk+Y+47aRnPUGjrSg0ISh8uvudLgyHyry0FWzyEFQpHY4R5mq2VXuZZ89xeiWPoiTAiOZLvK2jgkdFTu5WiPMGAJbRJBenwy+G2bW3cgN+XImJ0pUnpML7Rkke8E6wQjv36mh8rhqmrsG4Z4Pf5Hi4s9TdLbAdIdrPlXt8kK4ySQvAgvGQlINBLlCLXpGOix4lfKBDefLbMpePLpjh8mVrgC7hcNphajj/mSLakSAYsyYiqvtwN8SG/UdLIE4tE2WiO9+1ARRO6CFLGo8+yA==
+ bh=6UtOvoJfQ8mVUjL2L02as/ZXv0zylDGlKA1Y0kJMrXU=;
+ b=OqHDA16MczwTgTJaYcxUuLspuQoL22G3l9sIuv91OS1n4+caadRm3l5I35iAL2mAHhWEEBf+VN1OHOcebvjZGFF9gPDQBp9WlRqSLJbNTy/sEk1HDXn45sMGqiFRCBM1KxU+mobBW5tT/fpDLuVIAAVDPXyFDGLdjoje+uKUx9OGAxVHz8+0ELUDkAH9ThkhD8ZxKKjylPxL0ATPlNBwfIPEYIDJL9pCL0Krh7uudlfQGiRr1obFtFI9x0UUERs7htaxtbY6hP8ftfzc2tiai7a4LEwBEMRfbe4C97xZpdSZEa20wCEKs+p4uvCBsKntxBLEKe5YfUH0nV16e+lt9g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P7PN+v2LjpQVh4o1R2DTbSjs84kjnlzCe9B93xtbjOQ=;
- b=4sSSJzq5XORILOjtWdGq7XOz3tM5JesS9puxiRS7R7x4b6D6pXddc166fEtg+M/24kSyhtjv78AymehLar1+OL2M6zyGNrKlcJSGhCUl8JGNegG3cy/ShXIAkff2ADwQE/uVNsz8HcxXQVlLUtM6Exgq1LeshRa0zGb1hccSdbkuKRCqUuZXoUJWV8nnpnmjFFXYYVie1pCvIysqYUH6cXisSFMO6iCf7xDEbzAHRrHgktde3T6hXHqNAZIbZUKFs2TCU/Wzix3Qf8+Ebl5vKvaP4k9VW28BtOvkRnmVP+nnqdiBYPsXP2dZokom/GiCEPb4+4DiwNxjy9Ajp+WBtg==
+ bh=6UtOvoJfQ8mVUjL2L02as/ZXv0zylDGlKA1Y0kJMrXU=;
+ b=2bkBAoh1enEOwnUIIDIw3+gT6XdDsg0IG89Fs0eOg9LCR5r8ZVKf56dMGtu3FxKyYxOoLWcRg2hSB/2yIY4p8Dv5SVKOollzF2NqTIIljK7+wYZcmzdVDFAUUn1w/cLbDZ0UPlFQ/+nOj1AhuFdcEWDqhVQJZeQRdnGqU6PLc1mANg+v6Q+B/XtjshvF1IU91SDh2yAjwsXzluJGKiN869AO3KEq7uiQzzDgZonEFJLt3ChFBy4ELAFjC3lc3da2dK+wDQdb53P58pORuLqTk0j5+yHC0EHWmEGNcaqUtZVPswGzip+x8cfyTxWvlC8eTnAqIyupINF+wP+gGW43TA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by AS2PR08MB10110.eurprd08.prod.outlook.com (2603:10a6:20b:62e::17)
+ by GV1PR08MB7913.eurprd08.prod.outlook.com (2603:10a6:150:8f::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.15; Tue, 26 Aug
- 2025 14:33:42 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.20; Tue, 26 Aug
+ 2025 14:35:27 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.9031.018; Tue, 26 Aug 2025
- 14:33:42 +0000
-Message-ID: <621f10e6-5264-4f24-b28a-272050c82e91@iopsys.eu>
-Date: Tue, 26 Aug 2025 17:33:40 +0300
+ 14:35:27 +0000
+Message-ID: <74e89720-a8b1-45f3-920a-ca9fd1aad776@iopsys.eu>
+Date: Tue, 26 Aug 2025 17:35:24 +0300
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] cmd: mtd: fix speed measurement in the speed benchmark
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de
 References: <20250825234829.155483-1-mikhail.kshevetskiy@iopsys.eu>
  <87h5xu2mcg.fsf@bootlin.com>
+ <CAOf5uwkOfGUmB9sfTuTBBVkuub9Ag1ahG5Si1XWuftPxc+_ZRQ@mail.gmail.com>
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Content-Language: en-US, ru-RU
-In-Reply-To: <87h5xu2mcg.fsf@bootlin.com>
+In-Reply-To: <CAOf5uwkOfGUmB9sfTuTBBVkuub9Ag1ahG5Si1XWuftPxc+_ZRQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0322.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:eb::15) To GV2PR08MB8121.eurprd08.prod.outlook.com
+X-ClientProxiedBy: FR4P281CA0317.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:eb::10) To GV2PR08MB8121.eurprd08.prod.outlook.com
  (2603:10a6:150:7d::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS2PR08MB10110:EE_
-X-MS-Office365-Filtering-Correlation-Id: 924ae5ec-a24b-41d5-4da5-08dde4ad8e02
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GV1PR08MB7913:EE_
+X-MS-Office365-Filtering-Correlation-Id: a88f236e-6a14-48b7-7a7a-08dde4adcc64
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bU9HTk5LOCszanlCcTh0WWJ2VFU0R0E0c2dGSFpBTmh0WUR6ekRTU0dDaDNM?=
- =?utf-8?B?KzVTejdkME1SZjZ1d3RZbTBRMHJWemZWZG1VcEQyVVFYREExdG40NTliZE9a?=
- =?utf-8?B?V2tiOTBCcFJJQnA5QndKTmpHMkZsSmxLeldyZnZoeDJmci9TRHpzcU5ad3Zv?=
- =?utf-8?B?RlpYYThHRFFncUQyblhpSy9SQ1BFbmE1THVYTTlaWTBJZ2xEa1R6dXdOU3pu?=
- =?utf-8?B?eUFDM2p0ckFoenRnU2dPcmdoTEgra090bGV1K0NIZXo3dDZRS3hjd2F3c3JD?=
- =?utf-8?B?OEtyK2Z4dHRteDFpUlFjTXNyYWtEOEVTR0dDc05WL1pHSExWaUZwdUovdDVF?=
- =?utf-8?B?NnZzeXcyNHFLODR0NjYvbkVPZGkvZHpBYzk3MXRNT1M4Z0tOZ1d4UFUwMGVJ?=
- =?utf-8?B?UWo1bkJlV3FwTzJzelYzN3hyVjgyb2g2dFBxTVhHTlg5YzJ5dXNuc0ZPK0Ew?=
- =?utf-8?B?bC9IVm5RZDQ3VGZ5ZlVlZkYyd3FTT0JhOUUxZjZUREM1RVA2dTJOUXJtaW81?=
- =?utf-8?B?dWhiOGF3TkFGcVRMYnd2S2lacVdmcHJZUVorM3cvWmV2bGJ6RUg4RFQvWldJ?=
- =?utf-8?B?Mm5yRG1Zdm9nTERESTlGTExtTTVxL3lVQ3NXZ2NyZTV2WmNvLzA4U1lVanFL?=
- =?utf-8?B?NVIzeE1Wc0NHK2lBeUhYRTAxWldaV0JNYTJYcmVvYWIxV1k1cHk0L0tQYXJq?=
- =?utf-8?B?S0U4TXlET21GUW0xK2hyUi9vbVJaTkJ2Nk5ucVZpajN5bEd5MFB5a1JEMFp2?=
- =?utf-8?B?SnJCeWNqZE5GSHk5T1hHbDhyOUpFR1ExeUl0Y2I4MDFNWjdIUFVXOEJFRy9V?=
- =?utf-8?B?TVBwMzk1bDRLV3hrQytNMEVYdENNTUp1STVxUkl1OWdFUUNUczNCWk9lcHVG?=
- =?utf-8?B?YitDMlg3dkRQaUc5M3NXeDBkSmcyZUxrcWNxR2J6SjNFRVd5K1FoaWtGUmJX?=
- =?utf-8?B?SWJuZmhxQU1vdU5sWUIvajRXeFFWeERpTWJ1OTFEckVpdEsyOUJDVm1OTnRP?=
- =?utf-8?B?N2NhdXRBRlVHTXVPWUl2NGgyK2FQUWtqNmR5aUpNWnVPeGdiS21adldacTho?=
- =?utf-8?B?cFFIczFmdm9LcHhHdndKQWFVZW53OVQrZUlLTnNHdFh0Zzh1QUpiclBVM0lO?=
- =?utf-8?B?TXQ2UGlDaWVoREsxVnRMSUhYcFlESUVwM3hoWlNwWGx1YU5vay8xN0d3Wkto?=
- =?utf-8?B?WHc3UGozNDVKeFNERFZvaCtYSUNDbWpsMUZvRzFFMVI5RzV1MkRING1GWmFM?=
- =?utf-8?B?b1VrYm1vaVUyc1paNDJtbTlBNXRPYXdEYU1UMUJCSXNwNzNJbG5CeXhQeGY5?=
- =?utf-8?B?ZS9WeFBIZUwvNWhtWk1PTmFEVzk4NlVmdFNxVnB6a0wxMnZDeERqeUl3Zi9E?=
- =?utf-8?B?cmEvRjkzZ1VHWDRjNFNqRDlJanNsbVV1UTF4dWxuZ3hHMEJvdC9yTGdraWph?=
- =?utf-8?B?T010OU1pQ2ttakRrYVR6T20yWTg5eEJLallhZG5Kck04STdJbi9qT1J6dEtI?=
- =?utf-8?B?V1l5azloVWpjelFTSVc2SWVmK2dhd1FydXdKQkQ4QnAvbjlxMXpnYzZGU01x?=
- =?utf-8?B?dnNmR08waFh3UnYvL05lbGJ0bFI1Mkc1R3E0TmdzbitzWDhaMHQ3MUo1RWpO?=
- =?utf-8?B?M1djVHhSYUowd0dMRGUveENuQk1neitHZnJ2dVROaEM5NTgwMGZMRWlhS1Z2?=
- =?utf-8?B?TlVRZUdWZGtzOGhPOVVNWDZPMVAzTnZXMnNhTkdjVWFBeHFGVEIwZmlIaG9C?=
- =?utf-8?B?eWtta2VndkUxeWFrTFVweGVpcHI3TTF5d2hTRDI3K0tzZzNJTEZtUS9nK1Jl?=
- =?utf-8?B?QjNoeFlFNDJSYTBDcG9XTzkyWXl2cmR5LytKUzF4bkc0Z0NRSjhZR2ErS2NB?=
- =?utf-8?B?QXcxUUd3SGJOM1NiSkVvMG9LVkxUK09mZG1RNjIraE1pQVE9PQ==?=
+X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|1800799024|366016|13003099007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MmNQNS8rQzRIQy9oL0JIMnpWZi9DQ3lxRHJnTURnTzl4WGFYSmZ2QkpibmNS?=
+ =?utf-8?B?bWZXdjNlRWY3c3JrSmVCc0VQeWlRT2RIbVF6TzBraTFUWEprMFFMQXZOTGs0?=
+ =?utf-8?B?NzBNaFZsK250OVhTZDhCNHR6eDNhVThNc0xsMFVKeDBFUVd2VnNPWUJwTFpI?=
+ =?utf-8?B?aTFVV0RXM3hHWFFUbDgzclA1eUtjVi8yR3RVcENXRUR2cHArWVFuNjYzZUZP?=
+ =?utf-8?B?czZ2QnVPbVVIV2tzUEZBYU1VZ0F0dUFmR0VmbXB6bDV6TXoyU1RGUEpNaDNT?=
+ =?utf-8?B?ZnczMVBSM0dncFZqa29hd2lNVEwrZHhtcVZZalNpOFhCcDBpakZvenRudEZQ?=
+ =?utf-8?B?V1ZqcDhjNk1rTnFJVEx4VDM3MlZIRVZMeWdOYTArU0lMZEJkOW1RanlmSEZw?=
+ =?utf-8?B?d2diVXNOMHQ1VHpEdkxUWmg4WjgwejhUVWl6TjdwRUx6K0x3RGFScDNWQzhC?=
+ =?utf-8?B?M1FnQ1dvMWM1bElLL3oxQWd0bC9qUFVhcVlUTlJkUkh0RFVvRjB4T2w2c2hj?=
+ =?utf-8?B?cVJUSS9NTVdNaTRGUVhXeGJseVR4M1FUdDdLaHVDKzRhSTI4MVEvdkpocERS?=
+ =?utf-8?B?Sm9hZHpsazkzZEVFMlEwY0o2U0Z1elFkRDVrWUlTaDVzZ3FuNGhzc1g4MjBh?=
+ =?utf-8?B?bmlpTTVQWUtwdnRUYm84Nmp1TGpYRWpoR0Q1VWJLK3ZRanFEeC91MzdoK0o1?=
+ =?utf-8?B?RVFLSVNWaWdxcUEwdkJrTGtDamdqdW9XL01Jelh3WTgvdWhaSllNK2picEtl?=
+ =?utf-8?B?ckFKVjR6UDJCWE02NVBKbWpPNFI3UjJ1dXFqUnVhY3R5bjlUVGMzbk1sa21V?=
+ =?utf-8?B?NWlHVHRIRE9vVitCTXZRZ3JibDVwNDlRbnhDSi9ranlyZmErd0xBM3ZFQkx0?=
+ =?utf-8?B?dlBURlA5T296OGJZdUd4bDl1OFhNVU53elRaSzBxVlZaUURvV09NUytsZzA2?=
+ =?utf-8?B?YVJ0a214V21zV2Fxbm1hRzg4dkY3RmduamJIVDc2YkxoWGN0U0xURDYxWFZq?=
+ =?utf-8?B?NU0zK0xDQ1FxNmhCcG1EVTlXZFErd2R3UVpYR1RXdEsrRklwa1NpbkFqbjZI?=
+ =?utf-8?B?QWFMRkdoL1FRVW9JVEFhWVFNMVZwc1o4TkdoSWp1cmtsOWs0Qm1MWWdRSmZi?=
+ =?utf-8?B?Mkdwd2NHVURsUjdXemFSL0M4K1VUNXVlam9OZ0w1T0lBVDhDT0k1b3IzMVR5?=
+ =?utf-8?B?NzJEWkpGOHhvb3pPQVYxQnBDbkIwVWMwZWw5aXNCTWV1N2E0Z0tLcFZ5anpU?=
+ =?utf-8?B?QlcwWG1DWkVGSHlOOS9rby9pMWp0ajU3NjFtc2dhVTNVeE0xaTdZeXZJb3Y0?=
+ =?utf-8?B?enJZTmVOakJveHovZmZIK0VPSnlSeXY5Mk1uYTUzcjVodDFEekVieUtHYVNo?=
+ =?utf-8?B?b0k0U1pXNHpQcFRlVWtldlBPUDNsNXBQMmxhWEdnbG82TWJXWG1nSERHUlht?=
+ =?utf-8?B?VmRKUmpwKzJ5RkxGQVpYb1F1T1lDeHlvbjRqRFZmbGwrdkVPS0FBZXZVOEhO?=
+ =?utf-8?B?S0xwU01kNkxodStEakpneXE2THp1cmtjZnRDa3FLem9ZWWl5Y1FKZWx1Qno5?=
+ =?utf-8?B?Ym5aSkI0OENka0tTY3E0WEltVUhBYTY2dDAvMEJoMm5lN04zTS90L3N1RDBG?=
+ =?utf-8?B?WG9qUkNnV0ZTOWpkL1M4cEtnUWQ5K1d6TWpKQ3JDTEtySEFsZ01FL24zK3hj?=
+ =?utf-8?B?czB1WGMxZ0Z1TittWTJqN25NeDEwZDNZWlNoNnljc0NCRzV4N3J1b252NjUy?=
+ =?utf-8?B?ekNxcjZPaTJoWXZwN1dyYnJZNUV5NWYyRWsrdDlVczduS0ZiQXFURno3VEsx?=
+ =?utf-8?Q?s9Pm1IY2Ueuq3sQWHzfFKtZkCEiEjgLfK2ZME=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(376014)(1800799024)(366016)(13003099007); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bXpqMi9TQWRmV2h3QlJnbE5IYm5yYk81T2tEeTE1RDVaMk9XWXVFMlJrc3pN?=
- =?utf-8?B?OWpNb1MrbmljaUJNUEpNZzI5RHRLZDZvM29jbG55RlF0ZHhHQVVkTTJ4bC9p?=
- =?utf-8?B?UnUxNnkyUCs1dUlBRkMzdVBsSzkrRE5JKytTTWF4eTRhVjQraVdjNXdlUEVV?=
- =?utf-8?B?N3d4ZmpmU1BSendDVk5CVk85Z3VQOTBNRDV1VGJyMkFpUUw4Qk8zeDdpL0JT?=
- =?utf-8?B?bXRleldoY1J1TGwzSmlpQ25KaHdrRERwUFFhdDArdVllYXVsRGh6aG55Qnd2?=
- =?utf-8?B?VU95bURaUmE1OWNpeC9ycGxaQ1VNajZsQi9kcmxSWE43RmFEbG1iZytmOHA3?=
- =?utf-8?B?b0VnZURaTUNFdmNyb3JHdDZmRmxoWmpxcGIyQ2RnbU45ZDdUSElWQWhWR3N5?=
- =?utf-8?B?a1JySnlPRVNqUm9KYjFMaHVINW85cklBcUhhZE1QeERXRC96b2Y5RnBuOVlV?=
- =?utf-8?B?eklDUit4L0V6bU1WRlBuV1VnTjR1TUVmSmU5bCt6ZVMySEFDL2dnRTkxbmpU?=
- =?utf-8?B?Z3FVRko5di8xemZZem5peDJiV0RSaFVYWkFnZllSR0lmeExqRVpQd1dtcEN4?=
- =?utf-8?B?YVA0cWI3aStsZ1RkM08zcG5seDNUc1VPcHNTQVdwTWh1VVR4NkZmYnRtZzd3?=
- =?utf-8?B?aGNkVjMrMVdRNUEwK0hiOG5qNVp0YlhjU0c3VFJjTytsZWdDS1dpcEVSRUlr?=
- =?utf-8?B?RnA3Z2t5UTIvVStuRGkvM1dTSXlRWnBjMGlqMlNnSkVrVVZxNEczSWJsTVlT?=
- =?utf-8?B?K2RFQlFpdXN4R0ExSTN3Y2l0NlNkelZjUlBWcjZsWEdlYm1wNFhHdkZWZmRk?=
- =?utf-8?B?U1FqeEZrOU8vRkdBNVVSNmkzdGd0VjlPQ0hORXA4dVRZM3diR0NKSnNpaTFp?=
- =?utf-8?B?c21iSU90MFJyMktNYzMyTTdrOXhtbTJtSjZ3UzlhOTJuU0VXUWhMVlR4VmhJ?=
- =?utf-8?B?a2JSSGljaEFocWt0TzZLMlZDWG9KVkFvOVdxY2tiL1BxMGlQNzFid29uVXlM?=
- =?utf-8?B?aFlMTjRNMlpJYzhzeDJiZUxNUU11VlJTV3ByVktnMHBKYzZkWkVEZ0Z5WUlY?=
- =?utf-8?B?RHEyNnM5TWQrK3NTNS9zdXltRG4xTUwwUklscnVmMVJRemIrYzN6NmRjNzhB?=
- =?utf-8?B?QVV2QVAvcVAwSG9pNGNTbXpQME5Bcll6SFhnTk00M2E3d0hJOWNOT3dRMyth?=
- =?utf-8?B?UGFRMkJmdXhBbVhNRUxoZDJrbnhwb01BYlQ3c2srTmF0M21oWUlTY1FYVGhD?=
- =?utf-8?B?clpXVlBOVEF1aHBzVUNjLzZMeDV5LzRHRlg3RFJnd2Z4L01QcXB1OE5oc0pl?=
- =?utf-8?B?bGw1MzdKNStkb2hhcXJqVWdCditweTVqZTNPREMxWU9NZ09jZFJGN3FYMDkr?=
- =?utf-8?B?SEE1dG41dks0MDZ1SXRxQ1c5RnNxSW56UWdxVnhkbzRFblQ5dktJVFJuZWhi?=
- =?utf-8?B?OEw0OFREVkM1eTFEUURkQ0hvVlFDZzV1SkJFREF2Vkc5cWJxZThUeVpmZnhX?=
- =?utf-8?B?emd3Q2NMVW1YWlY1MUlieEJLekdDMnZ2SDduclBjQnhMYld1Nk9FZlloeVhy?=
- =?utf-8?B?cWcyRm1RV0xwczdaYTVYRnRjbDhCbFB2eVRrK21lZGMxWTdKb1htL01CeXQv?=
- =?utf-8?B?NW9JaXJYcjFzbUNrWTg0WXJSQllCUjhTd0pmNVNXbTVVbFhEOThSU28rYVln?=
- =?utf-8?B?ZmJOVUhLUEMxU29ueVBOekhPWm1MZTZ0cHRCUFpRQkxqVCtGVjdaaFBxMGo0?=
- =?utf-8?B?V2ZrQzRDb3BYaHZHZmR3WTRKWFd1dHZiZ1RoK0Y4RE52RzFDdXdtS054VzIv?=
- =?utf-8?B?bWFMRC9sblZiUkZsV2Zid2kzMkVsaHJIUmZsMEQ2c0ExWHZTWGVrMHNRV1JY?=
- =?utf-8?B?cCt3UEI1TlVhZ2dpK25GOGdNdGttUjcyK0Q3R1Q1b25oVzROOHFpWndsRkwz?=
- =?utf-8?B?T1dqWmNHTEtLSXB1K2pnaUNSS2s0T1pMMFdxc254SFVMNW5oNzNQUWxydEdi?=
- =?utf-8?B?dVhKVzRQRXpTeDJGU0EvV3NlbTFqQyt2dTg1a0xDcUV5Mk9SZEtVK2tvVHR5?=
- =?utf-8?B?Wjl3Z0o1alFIYU10WXdLcGRVTWVHQUM1ZmJOb1JOZ0FGRjQrYmFTajZuTEVF?=
- =?utf-8?B?d0UyYzFFV1ZvM3V0cXlWS0FZUkt2VHBTNnV0cE9sRjY4SUVjc1dnSExoUDEx?=
- =?utf-8?Q?Cg0Jgx6GMeoy3AR5lqb2a3U=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OEo0WkhSSHpwN3htSWVIUzJROVlwczZkTmRxai96b0xad1o5MFprREFvUTYr?=
+ =?utf-8?B?UDY3eGs3QmQ4VlZGaXRLcGVOcXhWOGdXd3lWMlJnVHdPRFJsWFlWY2x6ZzlR?=
+ =?utf-8?B?LzhibFQxQ0FXTVViVzF0bW90OVcreVNYcmxoUDBTMnBQd1VOTDRUQVRJVEFO?=
+ =?utf-8?B?WmV5SHd1NjU1TnhIVTRic29JT2hEbXV1aEtFV0ZnMThzNjljYjR4SGtZUnA1?=
+ =?utf-8?B?Wkk1U3lwUzdqa2ErOTJFVUsvMU91NEtMdzhGK25tc1hiMFZ5YkxMMWt4cGRT?=
+ =?utf-8?B?M05QaUxtNlFqeXpSalVuUnY5S2tZMCsxVjZ4WUlSSlFGRmRJRHd0U0tZL21n?=
+ =?utf-8?B?czYzOXJaallOcFA1aUZyaEZJRkpZaGpGM3JJM2tkeTErVFR5aFB5amRWSUY5?=
+ =?utf-8?B?NjFrVGNhNndDL3dYM0R4MVF0NVdoZUZsNEsrNFZOYWZreE5vYzYvenhBalc1?=
+ =?utf-8?B?aVBuTnRrbitkcUpxTEZXbnhqNklWYUYwT0FQYml1R281ejFWU3B1anlVT3RU?=
+ =?utf-8?B?R0lkZWQraEN3WVJoSDZPd0EzQkJBMkdRMTM3Vkk1LzNKbFlxUDd6YnFab3Bi?=
+ =?utf-8?B?Ulp2U29RazE4ZWo0OG9jTjh1R1ppMEg2TnNVVDBkT2dCMDBhVnd3U2RiTjlw?=
+ =?utf-8?B?VUtNR0VnNG1YK2hqV0RibGQ3UEsvZE5jY1Z3OU45d04vM3dYQVFvTlVzcUpB?=
+ =?utf-8?B?T3dEUGwrZGovYXRCSUJ1VEZIbVpLZzU0WHBnbnFoSVRIVVhIclBBUFdHWS9X?=
+ =?utf-8?B?S2VHWFRiS3pnekt6ZkVtWG1vUU43THJrVVVUQnlpaXZYbGxVbERFV1pNUlNL?=
+ =?utf-8?B?OStIZHloTEhCTnNUWGxXY0NzRUxvQnNhNm1vOENUZ3hOZWMzaHZRa09aSXhC?=
+ =?utf-8?B?aE5vTi9wdGU4MnYwWGhxaEZwSGRra0FjZjNBWkNnY21XRndRQWwrUjhHR21V?=
+ =?utf-8?B?R2pkdXB0MkNVak9MV254bFZCbDNIUEdsUnlBWldzdjFGd0dUSklSZUFhL2NW?=
+ =?utf-8?B?S00vZ3ZwMDFBamtMMG9uekFvNU44WE0yaTZHbUpMMDhTVURhZ09hSGVtQlpW?=
+ =?utf-8?B?K3U1N2FTc3VRWEJWNkcvbnYvU2xYWGFWT2ZZWE5laE96a0VYWU5lT3k0MVR3?=
+ =?utf-8?B?ZkRFdHFiUWgzMThkUXFEZTRzT04vYzJqVkp1WnYvQUZ4cDFDT3o5WUhoTzMz?=
+ =?utf-8?B?VlVia2sya1pIWUp2bHFtL3VybkpTK0xSN0hvblRmRWZ5T0JLNFpxZm1FVUU2?=
+ =?utf-8?B?RWtCeDdibGZodWp5Sk1xTFlkN1pyUEVoTytHdTZCMGxrQ01iWGZOc2JNc3c1?=
+ =?utf-8?B?bExyNGd6aU5SV0tkZGY0djdLQVBwenBKUjBWQjdkVkFhamFDUHdpaWg3b3Zs?=
+ =?utf-8?B?TWFiZ0hNeTRqOXJ3enN3UVkwNXRWYlNUR2NNbmJnSlRSS3c3NU1STjI5M2pY?=
+ =?utf-8?B?b3dZdXRhU0FEYXMzdkFmaThweUNQY2w0a0pKUzFoTi9ueU9wb0VQcTFCdDI1?=
+ =?utf-8?B?cVV6MjdremM1K1dYYXUxL1AxZy81bnk2MlZBK20vSXZWRldKWEVOUTFUSGpK?=
+ =?utf-8?B?SUVZcS8wYXJBNTZ2NmhqakxJL2Y4VVBDZGx3dkdBakxUdDErNWgxZzdsaTg4?=
+ =?utf-8?B?SXZrcTRZaVB3d2toeGxEcXl1NFJZRkZwaHR1Qnp5RndtNEtlajdic3doOUZ3?=
+ =?utf-8?B?NnMzYkljRVE4SXZuVkV4VW43NDE1Ylg0RjFLM2NlVGs2T3VDeEVWODE3KzR6?=
+ =?utf-8?B?U0xUVlN6enFHeWw3MThSaHhPZTdDUnBsNVQ0SHowTW9wWkpnWitmT0wrcHNT?=
+ =?utf-8?B?MzV3Ly9WYzZCaTNHZ3VPdEVlMkxCZjIzU08vTW9TekhybllQTnN4VzlkOTBq?=
+ =?utf-8?B?c0RxYmlKdFB2ODJ0V05pbzNEbWVadWFIbHV1Qlc4aXIxQTc2VmpVZ0UrWTFN?=
+ =?utf-8?B?bXpNOUxnN2NXZytuTjh6aHFiSng4R08xYWk3R01lNk14dEM3V0VLazZPM0pK?=
+ =?utf-8?B?c0pzbFJJdk9lLzRISmp1UWxZNVNISUxMNlB6U1RiWWhoMlVxWUl1MlNJeFJs?=
+ =?utf-8?B?RjRrSTZXSjNydTBtSFFISFpqOVJHeFNHMUF4alp6emNtTlFyYnBuOE9TV3h4?=
+ =?utf-8?B?a0J5a3VYd0NzckJnUWIzbW5KTGtDOVg0aVJpUUxQYlEvakhjMVVUeU5JL0JV?=
+ =?utf-8?Q?XG7WJ/8vFlgp8EUrYmHEF+c=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 924ae5ec-a24b-41d5-4da5-08dde4ad8e02
+X-MS-Exchange-CrossTenant-Network-Message-Id: a88f236e-6a14-48b7-7a7a-08dde4adcc64
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2025 14:33:42.1552 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2025 14:35:27.3252 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: THgvJ44esr6qc3tXyHAoo0jgqsWMCo7SEBbykTmD9hewCwLi6pMkV2ZKWGjuhyQhDotriEg9wyQiVwVcHuBb+x6PsyJmOut6G0yrdEYE128=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB10110
+X-MS-Exchange-CrossTenant-UserPrincipalName: CKYbjdJe/0b30FgVBqVbD4g2vr6qZxSF5E0FRyoQKjrGy5KQHFSRZOnW5XWiSEQNw+v6vtxQ1O4EliBuR10JgHcW5q+y09ACQo7qSW2H69I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB7913
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,61 +176,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+and maybe benchmark feature should be documented
 
-On 26.08.2025 17:23, Miquel Raynal wrote:
-> Hello Mikhail,
+On 26.08.2025 17:32, Michael Nazzareno Trimarchi wrote:
+> Hi 
 >
-> On 26/08/2025 at 02:48:29 +03, Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu> wrote:
+> On Tue, Aug 26, 2025 at 4:23 PM Miquel Raynal
+> <miquel.raynal@bootlin.com> wrote:
 >
->> The shown speed inverse linearly depends on size of data.
->> See the output:
->>
->>   spi-nand: spi_nand nand@0: Micron SPI NAND was found.
->>   spi-nand: spi_nand nand@0: 256 MiB, block size: 128 KiB, page size: 2048, OOB size: 128
->>   ...
->>   => mtd read.benchmark spi-nand0 $loadaddr 0 0x40000
->>   Reading 262144 byte(s) (128 page(s)) at offset 0x00000000
->>   Read speed: 63kiB/s
->>   => mtd read.benchmark spi-nand0 $loadaddr 0 0x20000
->>   Reading 131072 byte(s) (64 page(s)) at offset 0x00000000
->>   Read speed: 127kiB/s
->>   => mtd read.benchmark spi-nand0 $loadaddr 0 0x10000
->>   Reading 65536 byte(s) (32 page(s)) at offset 0x00000000
->>   Read speed: 254kiB/s
->>
->> In the spi-nand case 'io_op.len' is not the same as 'len',
->> thus we divide a size of the single block on total time.
->> This is wrong, we should divide on the time for a single
->> block.
->>
->> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> Happy to see this is useful :-) But you're totally right, it didn't use
-> the correct length. Maybe I would rephrase a bit the last two sentences
-> to make the commit clearer:
+>     Hello Mikhail,
 >
-> "In the spi-nand case 'io_op.len' is not always the same as 'len', thus
-> we are using the wrong amount of data to derive the speed."
+>     On 26/08/2025 at 02:48:29 +03, Mikhail Kshevetskiy
+>     <mikhail.kshevetskiy@iopsys.eu> wrote:
 >
-> However, regarding the diff,
+>     > The shown speed inverse linearly depends on size of data.
+>     > See the output:
+>     >
+>     >   spi-nand: spi_nand nand@0: Micron SPI NAND was found.
+>     >   spi-nand: spi_nand nand@0: 256 MiB, block size: 128 KiB, page
+>     size: 2048, OOB size: 128
+>     >   ...
+>     >   => mtd read.benchmark spi-nand0 $loadaddr 0 0x40000
+>     >   Reading 262144 byte(s) (128 page(s)) at offset 0x00000000
+>     >   Read speed: 63kiB/s
+>     >   => mtd read.benchmark spi-nand0 $loadaddr 0 0x20000
+>     >   Reading 131072 byte(s) (64 page(s)) at offset 0x00000000
+>     >   Read speed: 127kiB/s
+>     >   => mtd read.benchmark spi-nand0 $loadaddr 0 0x10000
+>     >   Reading 65536 byte(s) (32 page(s)) at offset 0x00000000
+>     >   Read speed: 254kiB/s
+>     >
+>     > In the spi-nand case 'io_op.len' is not the same as 'len',
+>     > thus we divide a size of the single block on total time.
+>     > This is wrong, we should divide on the time for a single
+>     > block.
+>     >
+>     > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 >
->> @@ -594,9 +594,10 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
->>  
->>  	if (benchmark && bench_start) {
->>  		bench_end = timer_get_us();
->> +		block_time = (bench_end - bench_start) / (len / io_op.len);
->>  		printf("%s speed: %lukiB/s\n",
->>  		       read ? "Read" : "Write",
->> -		       ((io_op.len * 1000000) / (bench_end - bench_start)) / 1024);
->> +		       ((io_op.len * 1000000) / block_time) / 1024);
-> Why not just dividing the length by the benchmark time instead of
-> reducing and rounding the denominator in the first place, which I
-> believe makes the final result less precise?
-
-Do we use 64 bit math? If not we may easily get an overflow.
-Actually for 32-bit math it's better use a less precise formula:
-(io_op.len * (1000000/1024)) / block_time; thus we will have about 22
-bit for length.
-
 >
-> Thanks,
-> Miquèl
+> Add a fixes with commit reference, when you post v2 and address al the
+> other comments
+>
+> Michael
+>  
+>
+>     Happy to see this is useful :-) But you're totally right, it
+>     didn't use
+>     the correct length. Maybe I would rephrase a bit the last two
+>     sentences
+>     to make the commit clearer:
+>
+>     "In the spi-nand case 'io_op.len' is not always the same as 'len',
+>     thus
+>     we are using the wrong amount of data to derive the speed."
+>
+>     However, regarding the diff,
+>
+>     > @@ -594,9 +594,10 @@ static int do_mtd_io(struct cmd_tbl *cmdtp,
+>     int flag, int argc,
+>     > 
+>     >       if (benchmark && bench_start) {
+>     >               bench_end = timer_get_us();
+>     > +             block_time = (bench_end - bench_start) / (len /
+>     io_op.len);
+>     >               printf("%s speed: %lukiB/s\n",
+>     >                      read ? "Read" : "Write",
+>     > -                    ((io_op.len * 1000000) / (bench_end -
+>     bench_start)) / 1024);
+>     > +                    ((io_op.len * 1000000) / block_time) / 1024);
+>
+>     Why not just dividing the length by the benchmark time instead of
+>     reducing and rounding the denominator in the first place, which I
+>     believe makes the final result less precise?
+>
+>     Thanks,
+>     Miquèl
+>
+>
+>
+> -- 
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> http://www.amarulasolutions.com/
+> <http://www.amarulasolutions.com/>
