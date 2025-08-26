@@ -4,57 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3F5ACA0FE7
-	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 18:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF31CA0FF2
+	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 18:17:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40DF88309D;
+	by phobos.denx.de (Postfix) with ESMTP id 89BA98313B;
 	Tue, 26 Aug 2025 20:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="PYyXyqC4";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="xG3GrGWs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 503C6830B3; Tue, 26 Aug 2025 16:23:45 +0200 (CEST)
+ id 21D99830B3; Tue, 26 Aug 2025 17:00:21 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C22BB828A2
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 16:23:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1386828A2
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 17:00:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 39E8D4E40C4A;
- Tue, 26 Aug 2025 14:23:42 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 352CE4E40C07
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 15:00:18 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id F0D4F606A7;
- Tue, 26 Aug 2025 14:23:41 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 055E3606A7;
+ Tue, 26 Aug 2025 15:00:18 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E03AE1C22DABA; 
- Tue, 26 Aug 2025 16:23:27 +0200 (CEST)
+ with ESMTPSA id 718B91C22DA97; 
+ Tue, 26 Aug 2025 17:00:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1756218221; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1756220417; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=axWDNG0CAItg4q5+sBPGFEf7vDR/pEVQKXWhs9XoQa8=;
- b=PYyXyqC4ZgB6lWJYlYwfJoO1edaDNb4m87WNz/S6qB1d/ijVJFa0jB8aHupvlVrDZ6j/Fy
- SfIZaw0R1sel7hHlDhj0Vu1aD6OLhHuR1aagyyEWvjRH0mEU1PmC689s9D8GL5pxCNo5s2
- 8CF9ierlT24AVhezAMPnKg2B9UuFxo0NoMlJ9xNygU20qE1ylcCM9avq6p9PYd364N1xse
- nBABglGkQa5AGqMquNdFRX/ESx0/nsdX0a+/le8dYjwNHH+dPfhw5Mxk8inu6MRL7mFvo7
- Aqych1XYnVW4owvJR1PwB8Rma0WuTXBr4agSOg7a4F+FUt7AeigVZOLoDIzV6Q==
+ bh=G7xNMNBR2+N8ai3Ziyh5EgFHj8YEBEGRWNKajMtQilc=;
+ b=xG3GrGWsnJUPz1ht65Nb8mg46ZKN3rImmUHubCVckSG01w2lPjELAgoxXMgW/jNnh2RE36
+ D2lWmtXO24BKCnW5aKSEZPUVM2K8WuLdw6RIE4mbEqW6sJbhZTY8K/1wCeXw2rwN8oxS8u
+ BkSdWrvM+XRKEejfWHoq+ZRhZsrJ5/jz6nSHh0ftZ0E967xErcfn3Ug1iXhRl6xf7BV/u+
+ Y+qigSygBuVM92smc9n3Ud+gGGw8LNalLLnmB4HTp65OPBNuIrspL1SiPvItXTu5NSPFjU
+ TRRiqEBZtAdRsCIBnTOWFKE1sn7Mr1Qzf+oFtQRQ7sWCZkGCLyJ52y8sEac3aA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Cc: Tom Rini <trini@konsulko.com>,  Michael Trimarchi
  <michael@amarulasolutions.com>,  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Christian Marangi <ansuelsmth@gmail.com>,  u-boot@lists.denx.de
 Subject: Re: [PATCH] cmd: mtd: fix speed measurement in the speed benchmark
-In-Reply-To: <20250825234829.155483-1-mikhail.kshevetskiy@iopsys.eu> (Mikhail
- Kshevetskiy's message of "Tue, 26 Aug 2025 02:48:29 +0300")
+In-Reply-To: <621f10e6-5264-4f24-b28a-272050c82e91@iopsys.eu> (Mikhail
+ Kshevetskiy's message of "Tue, 26 Aug 2025 17:33:40 +0300")
 References: <20250825234829.155483-1-mikhail.kshevetskiy@iopsys.eu>
+ <87h5xu2mcg.fsf@bootlin.com>
+ <621f10e6-5264-4f24-b28a-272050c82e91@iopsys.eu>
 User-Agent: mu4e 1.12.7; emacs 30.1
-Date: Tue, 26 Aug 2025 16:23:27 +0200
-Message-ID: <87h5xu2mcg.fsf@bootlin.com>
+Date: Tue, 26 Aug 2025 16:59:59 +0200
+Message-ID: <87bjo22knk.fsf@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -76,58 +78,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Mikhail,
-
-On 26/08/2025 at 02:48:29 +03, Mikhail Kshevetskiy <mikhail.kshevetskiy@iop=
+On 26/08/2025 at 17:33:40 +03, Mikhail Kshevetskiy <mikhail.kshevetskiy@iop=
 sys.eu> wrote:
 
-> The shown speed inverse linearly depends on size of data.
-> See the output:
+> On 26.08.2025 17:23, Miquel Raynal wrote:
+>> Hello Mikhail,
+>>
+>> On 26/08/2025 at 02:48:29 +03, Mikhail Kshevetskiy <mikhail.kshevetskiy@=
+iopsys.eu> wrote:
+>>
+>>> The shown speed inverse linearly depends on size of data.
+>>> See the output:
+>>>
+>>>   spi-nand: spi_nand nand@0: Micron SPI NAND was found.
+>>>   spi-nand: spi_nand nand@0: 256 MiB, block size: 128 KiB, page size: 2=
+048, OOB size: 128
+>>>   ...
+>>>   =3D> mtd read.benchmark spi-nand0 $loadaddr 0 0x40000
+>>>   Reading 262144 byte(s) (128 page(s)) at offset 0x00000000
+>>>   Read speed: 63kiB/s
+>>>   =3D> mtd read.benchmark spi-nand0 $loadaddr 0 0x20000
+>>>   Reading 131072 byte(s) (64 page(s)) at offset 0x00000000
+>>>   Read speed: 127kiB/s
+>>>   =3D> mtd read.benchmark spi-nand0 $loadaddr 0 0x10000
+>>>   Reading 65536 byte(s) (32 page(s)) at offset 0x00000000
+>>>   Read speed: 254kiB/s
+>>>
+>>> In the spi-nand case 'io_op.len' is not the same as 'len',
+>>> thus we divide a size of the single block on total time.
+>>> This is wrong, we should divide on the time for a single
+>>> block.
+>>>
+>>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+>> Happy to see this is useful :-) But you're totally right, it didn't use
+>> the correct length. Maybe I would rephrase a bit the last two sentences
+>> to make the commit clearer:
+>>
+>> "In the spi-nand case 'io_op.len' is not always the same as 'len', thus
+>> we are using the wrong amount of data to derive the speed."
+>>
+>> However, regarding the diff,
+>>
+>>> @@ -594,9 +594,10 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int fl=
+ag, int argc,
+>>>=20=20
+>>>  	if (benchmark && bench_start) {
+>>>  		bench_end =3D timer_get_us();
+>>> +		block_time =3D (bench_end - bench_start) / (len / io_op.len);
+>>>  		printf("%s speed: %lukiB/s\n",
+>>>  		       read ? "Read" : "Write",
+>>> -		       ((io_op.len * 1000000) / (bench_end - bench_start)) / 1024);
+>>> +		       ((io_op.len * 1000000) / block_time) / 1024);
+>> Why not just dividing the length by the benchmark time instead of
+>> reducing and rounding the denominator in the first place, which I
+>> believe makes the final result less precise?
 >
->   spi-nand: spi_nand nand@0: Micron SPI NAND was found.
->   spi-nand: spi_nand nand@0: 256 MiB, block size: 128 KiB, page size: 204=
-8, OOB size: 128
->   ...
->   =3D> mtd read.benchmark spi-nand0 $loadaddr 0 0x40000
->   Reading 262144 byte(s) (128 page(s)) at offset 0x00000000
->   Read speed: 63kiB/s
->   =3D> mtd read.benchmark spi-nand0 $loadaddr 0 0x20000
->   Reading 131072 byte(s) (64 page(s)) at offset 0x00000000
->   Read speed: 127kiB/s
->   =3D> mtd read.benchmark spi-nand0 $loadaddr 0 0x10000
->   Reading 65536 byte(s) (32 page(s)) at offset 0x00000000
->   Read speed: 254kiB/s
->
-> In the spi-nand case 'io_op.len' is not the same as 'len',
-> thus we divide a size of the single block on total time.
-> This is wrong, we should divide on the time for a single
-> block.
->
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> Do we use 64 bit math? If not we may easily get an overflow.
+> Actually for 32-bit math it's better use a less precise formula:
+> (io_op.len * (1000000/1024)) / block_time; thus we will have about 22
+> bit for length.
 
-Happy to see this is useful :-) But you're totally right, it didn't use
-the correct length. Maybe I would rephrase a bit the last two sentences
-to make the commit clearer:
-
-"In the spi-nand case 'io_op.len' is not always the same as 'len', thus
-we are using the wrong amount of data to derive the speed."
-
-However, regarding the diff,
-
-> @@ -594,9 +594,10 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
-, int argc,
->=20=20
->  	if (benchmark && bench_start) {
->  		bench_end =3D timer_get_us();
-> +		block_time =3D (bench_end - bench_start) / (len / io_op.len);
->  		printf("%s speed: %lukiB/s\n",
->  		       read ? "Read" : "Write",
-> -		       ((io_op.len * 1000000) / (bench_end - bench_start)) / 1024);
-> +		       ((io_op.len * 1000000) / block_time) / 1024);
-
-Why not just dividing the length by the benchmark time instead of
-reducing and rounding the denominator in the first place, which I
-believe makes the final result less precise?
+I considered overflow out of topic (see the v1 of the benchmark
+introduction) as we do not run bootloaders for hours. Yes it is
+definitely reachable, but for a development/benchmarking tool, I didn't
+consider this as a problem.
 
 Thanks,
 Miqu=C3=A8l
