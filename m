@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA58ACA0FE9
-	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 10:10:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0105CCA0EFA
+	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 10:24:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 577B2830A0;
-	Tue, 26 Aug 2025 12:10:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EB7E1830A0;
+	Tue, 26 Aug 2025 12:24:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZNaO/YAj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v/7M+/hI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA083830B4; Tue, 26 Aug 2025 12:10:29 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 6304583102; Tue, 26 Aug 2025 12:24:33 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74A2A83071
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 12:10:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72B3083071
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 12:24:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-45a1b0c8867so44485075e9.3
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 03:10:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-45a1b0c82eeso46423845e9.3
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 03:24:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756203027; x=1756807827; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1756203870; x=1756808670; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:cc:to:from:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MYCApx3j1ExPeuFojegMA4Y9nVZhlPB6b7R/qY7R2x8=;
- b=ZNaO/YAjs26yQ+iW6VYpqhvWbC+RKaku+u/Vac5Eq5BLl2e70qTjnPUWnxvtyJgZO8
- igNnavXXJro3t3SBz6jVkzSbebPzMujj5xw/5Jtif3CjxJuCSiUDVkZYLETbWbMcJcQW
- K7i807XnmyQBNNGxYPfUrPxP/IQChM5gXhX3hnHcSB7NTtTxsguYUOgKj9C4EHkbYIQO
- JrQQ0h3AFi7xC231qmOgZW3MMxwz4NCymCm2oI3AVZgfkbI4v15b4CEOTfKR2HkGymLh
- i8Zz2zwzlecsIsBXtsrCY9bEgRw+1V1IDgVbIdzIBPU7Cj85FK0m86Nt36PFSeCwO0ed
- viAA==
+ bh=gOZAE0hVn5hjyX8EIHjaGDH+xM/iU2avvqJILXk9S/A=;
+ b=v/7M+/hIAj5Z4bWhbKuazqV/W12niipzrVf8Qc3xyZE2ZIsXKoYj1IiKzsatZsteYq
+ 9G3F3dMMeAB3rihD3mEV544w4HJzyyFyJFslRigVZ2WDYAdlN2PZKD2fuzJ0+866YvSw
+ R2CQq+PskHalliWfI2qeKBEj57YCtYwHIvdIVz/GUp5uPBK9CsYABC35lufZI8d4JSH6
+ kUMsctn2FcoujsQAASSotmocGpwmp4IcokGFYKB19VEs1rT6uxcaPJYnYlj5ZKhQaDTd
+ jsVzQifjwzd/Ju/W09mNYURj9+K/x4DIgvVCKKfqrLd016E34w24VGwCktAHFB6QHoCC
+ +FQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756203027; x=1756807827;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MYCApx3j1ExPeuFojegMA4Y9nVZhlPB6b7R/qY7R2x8=;
- b=dGsnhB1NfriOqzFpKUG8Yz8R+7+bkyL6IHUR1fNl13hB/2szFwLTpIcIn+trD9uRRe
- DJsleXjm6KC06bP8Bl8KwiyYuc/jGKWfmGClPJB4rFrCqhufOWNxolo0ysv59b6k46hJ
- Fwx5wu2sCijRVB5fbrwqVQJxn9kcyH7iaxEjW0InO5en657HYs7VsNH1/TlvAwruPCG7
- V6fwT5CilvU8PBFo8eUP1QOpvOpv8A1ly2Z3NLRMLvyrFugL9n+ZI1xtfh//2tITGHRB
- AIeOuf3s557jhk5YuQbUe9ldjdXnDneNU+KkaPUWW/uddzqBfRfcODHEtqMhTZ+KXAT6
- vLfg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNSMkrNroomuQYubBLWHRdCZakVRatbw6t5qqBMFikER2OzrPY18MgTrq+Kq/tvqyPZkyWvOU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzm+cAkg8L2p7oXBRjSTgetu+ezmvPrUsO6KKA4xZc7rAoiKhNm
- 7bxNhtNbV9LwaAHmBAHMfXddxIF4ba5c/p/uQ6NxMsmVkvu+xYFuLBmG0erd1iEfY1F7IT0Zxd7
- gZwYitgMZQ5ilfC4nYmbkKwvkTuxLTB++KA==
-X-Gm-Gg: ASbGncs5jZN3BpR5fRkGLxZED/1+pzasoOKwe6qChkHeQ3mDL9ondMRko7UCm/hlIli
- divpfZKsXRNsXKi7YMX1VRwNpDIrpDvrkIuuGFl7CiqmNIEGjAsk0Q7rg+R1Qoa9kNLJEmiIpXE
- Jt1l1dt5mbMCbcUqFK2ngTkZKQWyVJq2wjkK6rYSu0EHC8G0gHPr2ub7NF8o8EwIxMULWHQUfEL
- L/s3qho
-X-Google-Smtp-Source: AGHT+IGAw3CCs/nSbZdiWxykiLwCbwkIerCWVa2Fe/v3oxg16rEYD957g3v1Z8oKu+6DqXoNrWLjOqlDYIxCHjp0dUQ=
-X-Received: by 2002:a05:600c:a08d:b0:458:c059:7d86 with SMTP id
- 5b1f17b1804b1-45b57035c5fmr107855985e9.10.1756203026693; Tue, 26 Aug 2025
- 03:10:26 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1756203870; x=1756808670;
+ h=content-transfer-encoding:subject:cc:to:from:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=gOZAE0hVn5hjyX8EIHjaGDH+xM/iU2avvqJILXk9S/A=;
+ b=BzTwzDk9KPck9l3ZWITnSVbrT2mz8CUVD3zmmBbFbwFlYzLzum2ypqE76j7oLODWli
+ jQfhrBsV9fhESz+YTxTu7UpzF3vWM7CVL+b1pLPZZf3ml/FLWvfud+NA8lBQw05CaRew
+ kUoQz9u72x7hjCk/EgifzcnD6dA/HbKdEiieGom5BH+UzjYCCpfBdg5Svd+e78YpOVkf
+ O99vr+ynsijZU6+87zpbypojasP5xKHyK42LbUvUDU3SZThBpxp1k1PGsArQJuH0tLis
+ NYAbxRt/TVGDOYShOAsAhT++sEAVqhjyJfscJt6W5m+Z22IcUUJeCY3XGo7Vj95fQwfy
+ QnaA==
+X-Gm-Message-State: AOJu0YwZRsbuH2NYWXVZ1oxDwHTbCsw/zPren85miP65nufnCr78b9PM
+ qDUJvm+ASoob+NbfDM3+Q4aVy2WGZXh4aKSGX0AZPbPi8FT5Gr8UGnHo7gzkyTvdEbdHZLkUTLq
+ 49aLAPSg=
+X-Gm-Gg: ASbGnctLvPP8kqTuHl/ZQSL8volBN323iWQRUcag5OJLHovrG1pZ+q9HTnaYMaQRq5n
+ bbQ/xw1ixSYOp5kpW5iI5sr5U8yKjLbmSzXJWXjJAByv/v1jHC4umWG91+bGrZIKcPw2vNaqklO
+ K8m6mqkCGo59qI4KnEa35oiZI+oHOH5VTdYTBZ3fUzClHVIjXYBm16/QVpT3W8QLe23b/1FSBQ8
+ jXq1chW1EMTQB27UMzZmnbwob6JriGY6nrCll+DxYR1RY+mtbTuaB60jMCMvAbHwmmwYodlfTBz
+ HUZDnx3Ju5a4MBTM6l8xgHkHvdgnPeN6P1QVUdoDYJBiWwiSq1WB2BXZn46DvZQ5SJEGfMR00Sn
+ KDSfDEylFuE9AF176MlFT19ireig5X+kTzIesAbU9
+X-Google-Smtp-Source: AGHT+IHzqZCkR5OaQZU0kyR7YWp0o9JUlnRL02kObGSWp892l8TQXqvNIBdD8NGIIbX1nRtS37SfEA==
+X-Received: by 2002:a05:600c:46d3:b0:450:cabd:b4a9 with SMTP id
+ 5b1f17b1804b1-45b517d2733mr114003125e9.29.1756203869826; 
+ Tue, 26 Aug 2025 03:24:29 -0700 (PDT)
+Received: from [192.168.0.24] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45b57487c55sm144069265e9.16.2025.08.26.03.24.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 26 Aug 2025 03:24:29 -0700 (PDT)
+Message-ID: <c535ec44-81ad-4022-bb25-dd5f31fbe36b@linaro.org>
+Date: Tue, 26 Aug 2025 13:24:28 +0300
 MIME-Version: 1.0
-References: <20250826093936.3521235-1-lukma@nabladev.com>
-In-Reply-To: <20250826093936.3521235-1-lukma@nabladev.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 26 Aug 2025 13:10:14 +0300
-X-Gm-Features: Ac12FXzED1bHwJ5yAU3sxHcy6YIyzPOK5P1YmhFKRZyimLWpBtnxGD03dHSd7G8
-Message-ID: <CAPVz0n3wpLtXB=1ZS4WiihVkDPTza75dXDKMjD63OyeSQwACRQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] timer: tegra: Bind watchdog driver when timer node is
- processed
-To: Lukasz Majewski <lukma@nabladev.com>
-Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: open list <u-boot@lists.denx.de>
+Subject: [PULL] u-boot-at91-fixes-2025.10-a
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 26 =D1=81=D0=B5=D1=80=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 12:3=
-9 Lukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> The Tegra30 SoC is a bit special, as it doesn't have the separate IP bloc=
-k
-> to provide watchdog functionality.
->
-> Instead, timer IP block allows such functionality when properly configure=
-d.
->
-> As in the tegra30.dtsi there is a timer node, which "covers" all timers,
-> with 'nvidia,tegra30-timer' compatibility it was necessary to manually
-> bind U-Boot's WDT driver (based on WDT_UCLASS).
->
-> Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
-> ---
->  drivers/timer/tegra-timer.c | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->
+Hello Tom,
 
-What is the practical application for this diver in therms of Tegra
-and U-Boot overall? Where is can be used so that existing means of
-U-Boot cannot handle such case?
+Please pull tag u-boot-at91-fixes-2025.10-a , the first set of at91
+fixes for the 2025.10 cycle.
+
+This set includes smatch fixes for clocks and mmc and one QSPI fix.
+
+Thanks,
+Eugen
+
+
+The following changes since commit a8f20bb6650df56d2600cda2c66f9349df9e49c8:
+
+  Merge patch series "bios_emulator: Fix two issues found by Smatch"
+(2025-07-29 13:14:52 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-at91.git
+tags/u-boot-at91-fixes-2025.10-a
+
+for you to fetch changes up to c1168f99387b40f5e3323ff16c670427c2c8a66e:
+
+  mmc: gen_atmel_mci: NULL check variable before use (2025-08-13
+12:59:36 +0300)
+
+----------------------------------------------------------------
+First set of u-boot-at91 fixes for the 2025.10 cycle
+
+----------------------------------------------------------------
+Andrew Goodbody (5):
+      clk: at91: Fix testing of unsigned variable to be negative
+      clk: at91: Fix use of unsigned loop index
+      mfd: atmel-smc: Ensure match is initialised
+      mmc: gen_atmel_mci: Remove duplicate checks
+      mmc: gen_atmel_mci: NULL check variable before use
+
+Ramin Moussavi (1):
+      spi: atmel_qspi: fix race condition in transfer completion check
+
+ drivers/clk/at91/clk-main.c   |  3 ++-
+ drivers/clk/at91/clk-master.c |  4 ++--
+ drivers/clk/at91/sckc.c       |  8 +++++---
+ drivers/mfd/atmel-smc.c       |  2 +-
+ drivers/mmc/gen_atmel_mci.c   | 28 ++++++++++++++--------------
+ drivers/spi/atmel-quadspi.c   | 15 ++++++++++++---
+ 6 files changed, 36 insertions(+), 24 deletions(-)
