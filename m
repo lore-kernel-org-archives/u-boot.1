@@ -4,154 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F230BCA0EFA
-	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 08:27:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C0E3CA0FE9
+	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 09:07:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4949E82FC7;
-	Tue, 26 Aug 2025 10:27:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id C02E882FC7;
+	Tue, 26 Aug 2025 11:07:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="d2rwFv2H";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="hN4d1TuF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2901828A2; Tue, 26 Aug 2025 10:27:11 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::60d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EEBDA83071; Tue, 26 Aug 2025 11:07:54 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8102B830B4
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 10:27:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LAbrNJKg/INYfQTlWDHIB792hIZyyonaZQW2NJG+av/3Jn6Snde2YjL8ZDWBbKGgLF4vhu/3KcCa/UUqRb/6CGq9OpaHzPuxBQJmz6EUHmf/98zsky8W0VQWno6qcUPmjTUtNyoK5oDBsQpuVAHs+SVrpYiPin9E4YbGdy2BXSB0YL/KbRvgppVlIrSNqX6hfUk5nnXxiOaOrA5oQgRbctMH5NPlDfrGNimq038yvfpBBL2GHCbdAsrwcoHabGrKdaWZXAtq+PBnEr4P0DVUZ7inqXMn3iCkO5nT9xPgY216U4+EOaWfxc7LTeROT6irNdkRu/tWu8uY4fC8h5itmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cM8yJp5Zj4Wd0DNG20ZFLnBRO8EzlVmbsm/tEyLiIts=;
- b=gYS7OKZplWL/+lB4od/CZsI7NlkjO0Leg1Bb2sZAQqVBXfR9/EKKLMlutUWIlwzYLSysaYsqSmNIV67foQnMFIPkAU3WBeVHZyX7RVEfRVdakOYRShbI1ESk8I0qcI8n6On2gOZFV57v6toLeucFlVjBTBSN0pLJ841+Xrt+KPbHg6jCuxG0yxZ4u6yXofzzNI6/38ieQxfqJpT0mBp8QlzBfyMqgLsekK2Ln9GZKpPVsxpgk441VbIGL63BcSBvrng+p55gp+s6hGmeLtXgitHSVhWA8y1WQ3f4IKwrQc7vczIhxPKPLgHfKlrx64kw/DXU2FTitI435y4AWwub7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cM8yJp5Zj4Wd0DNG20ZFLnBRO8EzlVmbsm/tEyLiIts=;
- b=d2rwFv2HFcDVhLijFHZ6QqW6MEI8lPVfh5OenTbJOtpv7Zq2JTwFPfyzunKH/kGfz4XeQUkLZwuCVj1guaGZzgRbTsno3Joz2HLiStMknF5LWwvwet2+bCDspOkcvw93YM2sGviSrsz+DTxGHzbpZbpuU+3t7WSNn76yw15pcApr6rczZgPjknhbTRcuMkyN73O5PHcXcCCgra62HbGQs1v8Cz6hiFVp+BT4L4JkMrwnseXewDSgjselBj0AcFWplzc365mb3DwSXVyP4V2k3W6CkRi3bUV40q6J3rI5WgPejLNFl4sgTPySBKvNNVyDJ2ePEohD0W/Y7WHiSFkxXw==
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by SA3PR03MB7370.namprd03.prod.outlook.com (2603:10b6:806:37e::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.11; Tue, 26 Aug
- 2025 08:27:05 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9073.010; Tue, 26 Aug 2025
- 08:27:05 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-To: "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Marek Vasut <marek.vasut@mailbox.org>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Michal Simek <michal.simek@amd.com>, "Ng,
- Boon Khai" <boon.khai.ng@altera.com>, "Yuslaimi, Alif Zakuan"
- <alif.zakuan.yuslaimi@altera.com>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH v2 3/3] drivers: fpga: Check bitstream address doesn't
- exceed 512MB
-Thread-Topic: [PATCH v2 3/3] drivers: fpga: Check bitstream address doesn't
- exceed 512MB
-Thread-Index: AQHcEaSTwiJDwYP8OkCqo7/tKLpHMLR0oxCw
-Date: Tue, 26 Aug 2025 08:27:04 +0000
-Message-ID: <LV8PR03MB8137180E80095EAB1CED68A8A739A@LV8PR03MB8137.namprd03.prod.outlook.com>
-References: <20250820073201.8649-1-nareshkumar.ravulapalli@altera.com>
- <20250820073201.8649-4-nareshkumar.ravulapalli@altera.com>
-In-Reply-To: <20250820073201.8649-4-nareshkumar.ravulapalli@altera.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|SA3PR03MB7370:EE_
-x-ms-office365-filtering-correlation-id: a66090fc-d8cc-4c7f-fed3-08dde47a56cd
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|7053199007|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?a7438ry1UOZM4eXzRG8DvaOIfiFaeBUOel6zHdh9OKMoEQU+9HbzZshvJ6KJ?=
- =?us-ascii?Q?fmA4noezIzrG1rLTAMhNydjz1YKafmKFwwFhyyaEeneTcXHSGn/wT95hXjvE?=
- =?us-ascii?Q?zTGPTqD3cr88dms9FE7jC3WgV4FslkyRWxV5b99rzZKX+djBMhRUKQ0sCkPQ?=
- =?us-ascii?Q?K55xfnZmoHuddHJ3P3eMxsGcrbLBBYI+B23yDB75KcMgMIsK1q4P1ZZtnNUv?=
- =?us-ascii?Q?h3W0fMNYtF0M463JjLrD5vJiODIokxpjprKe7Ufr4+00b0R3IiTQZVSnacCO?=
- =?us-ascii?Q?X2Aw1NwKKgf9YA9lD87XVblej6AJFR4YonvgD/4mPJDc55sh8/OW69Uf8XOj?=
- =?us-ascii?Q?/ayC/cj2X7l7fQWBYDfqhtrRppv4JdpDrdKbpYoKHvd0OgigQ8b8LTJIlqZl?=
- =?us-ascii?Q?yI/g8XgrmtPbyrckDRoyclKzVlwV1IH4dHkM2MPUlMbBcTlqzqLGGcnkRhe7?=
- =?us-ascii?Q?JA3Z9F9oXJP7KkDb5ILzvOO39PGEwhmaLZaUd2FAaohXnk6KpLZpkK1M3gBB?=
- =?us-ascii?Q?xNQZDgu+UQAch5qkwGyS1sd/NLdjM88PuQG5f6w5LuRxJXoHSwEnQWjViqJN?=
- =?us-ascii?Q?ugxDE5FUn9X5Nn5zUhTOQ0090yLx8Viie/jSD2l8NXpKqH0gT4RX57cLQIR4?=
- =?us-ascii?Q?TeODHfn4UeiF4MwMHJ93bEYkNcv6/qyUEPeWt+yGLkgHcdFV5+xJ3Edm3H0T?=
- =?us-ascii?Q?WnSYUkqwC9uK4DJpclkJsLa602eF1Kl9558zWtJIE/Yl+iGW3BO0QmTlxLse?=
- =?us-ascii?Q?FImNzHnOTJjWBYNaicY6HBQ/QeCirxs5oR+c7w3wWMErYAYxw5yQsWSupfox?=
- =?us-ascii?Q?ebf7Z/xOWOpVEo7P0AVnRjNo4tYK5PDUOoR/OLYQPCsQevOsRlfelp0ROe3Y?=
- =?us-ascii?Q?OuiEVWFaxGL2w0GZw4ApH5cRgxWS+yt4aL000FeyOFDREJkJ29Gpm0vJaeri?=
- =?us-ascii?Q?fnRz8mZ3KGN51Lv/IEVbap2eDO4IOEFxFbewzfo4tNI9kI99pnawtPTAEli3?=
- =?us-ascii?Q?VFKe0UlQOr9BelSQhJ9TdRDbrriKzKucLADQS6yKOLksrErqr4j916sDPiyp?=
- =?us-ascii?Q?uAo/S8TEkkvpzukidtsJQlhBAndakngS6xcVLNzNo29p3+KPejALz6vBa3WD?=
- =?us-ascii?Q?98SeWch0HYeqah4w9j/jZlwT7/fgSVfTcRRJEozKN8R6zoBNyRp/QPBZbVJP?=
- =?us-ascii?Q?agIBA+EoTJNehlNNOsTHyN7g9gqvd0oBDp2C7ggCW/Ow1u1tWT0p+0JQ60r5?=
- =?us-ascii?Q?jCyq8CdMLveIFkkEnAHllbLdGFBDksIkfYCMfP9gWNYu8DuzfpoyIhH8QqvY?=
- =?us-ascii?Q?4UY/W9n6CFnSgAcOSfOiTfaE9+i+febvhGeup6m0PRUIkCPH5/ZK2dXiMYvj?=
- =?us-ascii?Q?q0P0R3dy9g9H10KJxQ2PAfEIKdS2EoCEV4zlnV1Iej647n498r52+7ff7I8w?=
- =?us-ascii?Q?w69p5+xAk9YMsQrH0u5FrzVlJBwD6Juzn4/Ml/yIfGXqYKCtcR2DSw=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?2wfQEA55MKrBroC+ZzDoxXk5b2d0i3J/2Cpln4SVxDPWkA6graHJy0BoVhoE?=
- =?us-ascii?Q?QR9tn3cDLneeLVOe8v5YWhiXYE4hmenOzVCT2Oa97B0mUuVoqL927iMopYL/?=
- =?us-ascii?Q?ZVBD0HCNxTk3Y/fZIAraSJ8BMSIKNx+7RJQl80WYhKZrPi82BpDq3GxBtN1f?=
- =?us-ascii?Q?USNpC3vO4rfh9oPO1OGaardkTACLnZRhn5FCtO2F2OpqmyCTQhXWSIJtp9iY?=
- =?us-ascii?Q?0S/OMtB9CT1XNe9zJBza80NFVnQgBiPCJT63A4MzkPPxu6f2leYh5qgbMuAJ?=
- =?us-ascii?Q?yQZiUfN0DvTK7P7er9qZOi3np4E7qpn7KfTzXe8qqo9Xde2fZ6sYQDh54PH2?=
- =?us-ascii?Q?KaN0WEZ7d/PD5OPU4ZwFXURAHkRu+ncmBPAxu+aFldzTQpY6hc7du6sQpVuB?=
- =?us-ascii?Q?lfh/i4ANbFnz/J+lGGJeza/qRnUSSXZU4/7UCRbg6C2dcRZ1qoOc4HpKrRYN?=
- =?us-ascii?Q?N0gJ93fqY+TpwO1fOlVvAjeoZVzCou28A0S1DxI1NoK8N1zJGeFFEE/8i4fn?=
- =?us-ascii?Q?yeHMEpAZtEzxUhB03GYF3i9qBp7LdhbSaM8q6bvUkz6+jYNhlo0c0dMz9gDl?=
- =?us-ascii?Q?qqjXBj2OVKtbz5YvSQ8K5Q2vPskyYBbawD00S9Bc5Za9lyCvMp9sgVJ0JcVl?=
- =?us-ascii?Q?7Bd+OJUNxexOk4JCuLpJ2EYllrfvoGOUVt3vuovqur401rdr3FnI9AAcctb+?=
- =?us-ascii?Q?c2H0K9fv0WVPOcv+4RDTuGoxp0oExAP2QQ86YOBZbonnR6V1Yc7+Ic/GEukH?=
- =?us-ascii?Q?9Hb5e0XCvQMWtrXro7nMFQuHMPSeyOzfjxYjm39LmMv/v1F0XGaJWUB4i0FF?=
- =?us-ascii?Q?hcVjnKlbq6tFEBfL5URJr7NYWk1rMmrLu6UjqHLigbqEAy1/gQ5WOt5/baMT?=
- =?us-ascii?Q?TFdNxsWy/RdeK4Plw7uJTuQupVdFxeJwCTAxH4Bt2dncqCaJY3j9LWo281B2?=
- =?us-ascii?Q?KgYZ4xZyjRylMHIOXtZm74Pv0j7EIBjKnjG7ODW7bQEvlzQKY5zOVqZ4vEiK?=
- =?us-ascii?Q?eegUkbluPdUbGmL7mzC4UzLezD4PGE2a6nunJkqS1gW2+RjdADwBogRJq8l5?=
- =?us-ascii?Q?yRhCHqklEnGAtlq7IiU6n8OODiPIaujFA6vKe6lqjMLG2R1g3ity8CxjQwbl?=
- =?us-ascii?Q?I3yPqac4mnO7xM4Hfep4X8zjMmaEYf8acaqo8Xh9lbrJ0UZps1A9mxERcNzq?=
- =?us-ascii?Q?ttUee2yjudWxLpoWHwvfuRIOS4F/NsqIooSJTYQ0XJ0YFyIuyts+aHTh5c01?=
- =?us-ascii?Q?ZYMjudPRjB8H4/BOQV0pKXpdf9mDJK87lXAL7ztjatHjTkE679rYT8JqiznS?=
- =?us-ascii?Q?j9VU1Ti2aR13VRw2o8HhJHohhBCmhCBrveu6YkzMiT8iKBTgpYUQo/G4TTuF?=
- =?us-ascii?Q?YlsKMEuJZDKL2PJe0DWGT7+dDcs1ZtgNyThwbfWgdVej3Mf4HWQysoZMUl2G?=
- =?us-ascii?Q?0ma7jvM4aR0R+PDEo77Y4XL67A2Etd3NpJA0b2c78kiVLXkUf4BS1zyMw9co?=
- =?us-ascii?Q?9yrDPYlszoPj0zfhLs1nMWq/ykMyWjMh8k3vOQDl48NoluAXT7AsskEiB8yk?=
- =?us-ascii?Q?uQPv2adjhQWSOQWV9nPIyVbY3t44K751IFzSTBPW?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ by phobos.denx.de (Postfix) with ESMTPS id A91EB8003E
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 11:07:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57Q31JQ8026983
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 09:07:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 6QhGSdXxeVOrTIUwWMSTkvpeFINJCIk+ZX9kgQ58pBI=; b=hN4d1TuFIE7+qeRW
+ L6Dr0eYR9RfFhfwutp7wvJw9eBka/E9GSJ/oE+PmP1SIx1Rzk7BkjV334pzp0adX
+ 1PuByUkMbgNFd1OPBxDvdjCUA9tQDSpya4G2S2g1y36MziQmaRr9DKwHuYRAFEKQ
+ Ev25gi9S49+2FVc1CM5F/IxbA8eKMpx5ecEUHFOzJkWnII2J5gz1RPcVT8YvjZkK
+ yMh9X1/OaG837GK+05Bio2vizFmFwf027BaOpPzWHAktsYifrakdJ5pL//F3eGgs
+ lHksGs1UzBWIvJJohPJzGwyz9adAH4cLLwQk1WPeWKqJvjjXf3ZkDN/odPmHNsOE
+ iBEVKA==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 48q6x887u6-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 09:07:50 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-b49de53348aso1514718a12.1
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 02:07:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756199270; x=1756804070;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6QhGSdXxeVOrTIUwWMSTkvpeFINJCIk+ZX9kgQ58pBI=;
+ b=kH0+fC4LhF/Ns5qNSw1QY+KY1Zf5pp9ePENpvHNIartlDpVYyxChqUMPmrM8jmbmZj
+ YpeyhLq4jv+ScY7Iyob2Xgbpv/dmgtckid3UraxtQvBp2zrJS7/z5LebDgTYe4SogW/i
+ +CvodEaVCTtKrpkxIGjFamxrRDMRAvSyK+fzWhmSLDPtS8FMqnm56RKOLFarz7r8lq8N
+ yeT2Ag0OPQcTZ0l7xdPAxMp3CqGFUTu8LPsJKtS4RV9Nv6FblkUgUGvfhJUyFj6mRpxt
+ q7iwW50ofeSP+vc0gRn08OsPZcvlwCZiJgI8XnCrMwy70ce3XMsIB6zgzTXFX/T/UdUB
+ LC/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCYPWNkiyw6uqmVTNtbNNiF1+djLWBfWoLVIdJiHMHrpuk9cCpinjzlzFam9wRAYfEJl0UMiI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyEfvXCaqwf6IbaT6g19kfizykVHqiXH/8KsRkXpb/lEGSPScm8
+ aYrQqtIasN+n+iD/QQMySiiRBxCAdhrvut0zV3l7it2hXoCi/jHJTGeCO7zzwhCbL0RVLwSY+8g
+ V+EugSjmAIXaSEV0fuj1YSNsMWRH15FtOHkb/RjOzaEMiNoEC9B98h8Dk
+X-Gm-Gg: ASbGncteEkTEX0SdQ6TR9THI+celFjdwbI9LcnteUKfN/iDRKS7xka3uv5ChRuYYb8S
+ vgE9UMSHCi+6u0AjdLZ73GNuOoUMCT6TVLBGO68tXfcIZvgKjHtj21x+yl+lscWJekpb01HwW5U
+ 7w91cgzUYEx+VmxvCXdhmKSrWRm0u9Yy3x4TM1yuGBfMD6TKEJhDZUQz0H/784o6HNJDasXmH2c
+ ZozDQCT5bhgRyFnI725fVEbhZHgsCXzxvJrDOkSRHbW6kYhZDXjIftFMaSDsePL+b5sJdVDl2DH
+ ixLtA0jKl0OHj24MG6fgeXD3uWtwP5SerqM3oXl2jVnmoM726CDdH4GoUDrZ1Ek1I39il9WJlAH
+ a
+X-Received: by 2002:a05:6a21:999d:b0:23f:ff4e:fcb0 with SMTP id
+ adf61e73a8af0-2438fad26cdmr1525244637.2.1756199269950; 
+ Tue, 26 Aug 2025 02:07:49 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGYNvEIW1qN5RrX6Zugz49C0hZNTq54EbkHKbb201UlPFRKDqeR1GVYrnGyD/dJ/h8198fvig==
+X-Received: by 2002:a05:6a21:999d:b0:23f:ff4e:fcb0 with SMTP id
+ adf61e73a8af0-2438fad26cdmr1525186637.2.1756199269426; 
+ Tue, 26 Aug 2025 02:07:49 -0700 (PDT)
+Received: from [10.151.40.76] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b49cb8af649sm8475852a12.22.2025.08.26.02.07.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 26 Aug 2025 02:07:49 -0700 (PDT)
+Message-ID: <8730e084-5541-4df5-b067-c97e540b5f37@oss.qualcomm.com>
+Date: Tue, 26 Aug 2025 14:37:41 +0530
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a66090fc-d8cc-4c7f-fed3-08dde47a56cd
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Aug 2025 08:27:04.9900 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: k2qIGGoec4I4xckwtwd6PsZau9+VpXSgoAoDG8YwXfY7x9gqst8nA0J70t+5IkUumkclTCNtlKXTed44uNIKXzxfxphWemewd/2w59jQEQQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR03MB7370
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/2] efi_loader: improve device path matching for
+ partition lookup
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, xypron.glpk@gmx.de, adrianox@gmail.com,
+ moritzf@google.com, sjg@chromium.org, maks.mishinfz@gmail.com,
+ javierm@redhat.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
+ <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
+ <CAC_iWjK5d7z-J=rbXa-_+2zjejWOuTJco87-yqJVXtuXmVjdNw@mail.gmail.com>
+Content-Language: en-US
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <CAC_iWjK5d7z-J=rbXa-_+2zjejWOuTJco87-yqJVXtuXmVjdNw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: ODudB011SRDu96hoSAhRpwF3j8PZHBfN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODIzMDA0NCBTYWx0ZWRfX0qjFpZ2Rxiju
+ EDWS1/aQqxoxNSZHdhIpvCjjaB71A29IiqP2XkqnYmVnad/otx7WEicGv6MiH04DVhx+asKwDag
+ dE3UzK2CwJImUkxk7poRn47VuGpqSv2N6nki5bJ2V3fg0TqGRiT+H0VxRTFc7o1pOwLpodFM3KP
+ hklrfpiNpYHGKD0HIUEb1yGURBfTXG+blxX7jQJ+y4XZf9xfeyo982DcLKeoV2EHNjV5EiSTu8o
+ lkiGhedsTq5QlH14sM3SERp6hzoJarIPAmzcaiwqofh0bOfeZ/zUw2WuhK/ZwsVEvdHl5a162aG
+ W+lGHfK6zTOslyZGB1SWFarNgQz1HihbtykGuokJjpFTtVIznH7u8So8WvCIfkQwaHCaYB0Ksfx
+ 3x6sCB76
+X-Proofpoint-GUID: ODudB011SRDu96hoSAhRpwF3j8PZHBfN
+X-Authority-Analysis: v=2.4 cv=Ep/SrTcA c=1 sm=1 tr=0 ts=68ad7966 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=2OwXVqhp2XgA:10 a=cfdTzeN2tWeyBRAf8O0A:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-26_02,2025-08-26_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 spamscore=0 adultscore=0 bulkscore=0 suspectscore=0
+ phishscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2507300000 definitions=main-2508230044
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,98 +138,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
+   Sorry for the late reply.
+   If i point to esp, then it should work.
+   But in the boot option generation, they are skipping if its a partition:
+             i.e., in lib/efi_loader/efi_bootmgr.c: 
+efi_bootmgr_enumerate_boot_options(), in this code (line 838):
+                 if (blkio->media->logical_partition)
+                         continue;
+   It seems that, by default, the boot option generation logic is not 
+designed to include partition as a boot option; Not sure if this is 
+intentional. If its not, then should we correct this logic? Your inputs 
+are appreciated.
 
-> -----Original Message-----
-> From: Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
-> Sent: Wednesday, August 20, 2025 3:32 PM
-> To: u-boot@lists.denx.de
-> Cc: Marek Vasut <marek.vasut@mailbox.org>; Simon Goldschmidt
-> <simon.k.r.goldschmidt@gmail.com>; Michal Simek
-> <michal.simek@amd.com>; Chee, Tien Fong <tien.fong.chee@altera.com>;
-> Ng, Boon Khai <boon.khai.ng@altera.com>; Yuslaimi, Alif Zakuan
-> <alif.zakuan.yuslaimi@altera.com>; Tom Rini <trini@konsulko.com>;
-> Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
-> Subject: [PATCH v2 3/3] drivers: fpga: Check bitstream address doesn't
-> exceed 512MB
->=20
-> Secure Device Manager(SDM) has only 512MB window address space to HPS
-> over PSI BE link. The default access range is 0x0 to 0x1FFFFFFF.
-> To allow SDM accessing the address space more than 512MB, SMMU has to
-> be setup for address translation.
->=20
-> A conditional check is added to not allow the fpga reconfiguration for an=
-y
-> bitstream data where address exceeds 512MB, unless PSI BE link address
-> translation is setup in SMMU.
->=20
-> Signed-off-by: Naresh Kumar Ravulapalli
-> <nareshkumar.ravulapalli@altera.com>
-> ---
->  arch/arm/mach-socfpga/include/mach/smmu_s10.h |  6 ++++++
->  drivers/fpga/intel_sdm_mb.c                   | 13 +++++++++++++
->  2 files changed, 19 insertions(+)
->=20
-> diff --git a/arch/arm/mach-socfpga/include/mach/smmu_s10.h
-> b/arch/arm/mach-socfpga/include/mach/smmu_s10.h
-> index 209caa86e38..d611664e227 100644
-> --- a/arch/arm/mach-socfpga/include/mach/smmu_s10.h
-> +++ b/arch/arm/mach-socfpga/include/mach/smmu_s10.h
-> @@ -30,6 +30,12 @@
->=20
->  #define SMMU_SID_SDM2HPS_PSI_BE		0
->=20
-> +#define SDM2HPS_PSI_BE_ADDR_BASE	0
-> +/* PSI BE 512MB address window */
-> +#define SDM2HPS_PSI_BE_WINDOW_SZ	0x20000000
-> +#define SDM2HPS_PSI_BE_ADDR_END		\
-> +	(SDM2HPS_PSI_BE_ADDR_BASE + SDM2HPS_PSI_BE_WINDOW_SZ -
-> 1)
-> +
->  void socfpga_init_smmu(void);
->  int is_smmu_bypass(void);
->  int is_smmu_stream_id_enabled(u32 stream_id); diff --git
-> a/drivers/fpga/intel_sdm_mb.c b/drivers/fpga/intel_sdm_mb.c index
-> 5f4aae47d6d..1bbb717015b 100644
-> --- a/drivers/fpga/intel_sdm_mb.c
-> +++ b/drivers/fpga/intel_sdm_mb.c
-> @@ -10,6 +10,7 @@
->  #include <watchdog.h>
->  #include <asm/arch/mailbox_s10.h>
->  #include <asm/arch/smc_api.h>
-> +#include <asm/arch/smmu_s10.h>
->  #include <asm/cache.h>
->  #include <cpu_func.h>
->  #include <linux/delay.h>
-> @@ -1031,6 +1032,18 @@ int intel_sdm_mb_load(Altera_desc *desc, const
-> void *rbf_data, size_t rbf_size)
->=20
->  	flush_dcache_range((unsigned long)rbf_data, (unsigned
-> long)(rbf_data + rbf_size));
->=20
-> +	/*
-> +	 * Don't start the FPGA reconfiguration if bitstream location exceed
-> the
-> +	 * PSI BE 512MB address window and SMMU is not setup for PSI BE
-> address
-> +	 * translation.
-> +	 */
-> +	if (((u64)rbf_data + rbf_size) >=3D SDM2HPS_PSI_BE_ADDR_END &&
-> +	    !is_smmu_stream_id_enabled(SMMU_SID_SDM2HPS_PSI_BE)) {
-> +		printf("Failed: Bitstream location must not exceed 0x%08x\n",
-> +		       SDM2HPS_PSI_BE_ADDR_END);
-> +		return -EINVAL;
-> +	}
-> +
->  	debug("Sending MBOX_RECONFIG...\n");
->  	ret =3D mbox_send_cmd(MBOX_ID_UBOOT, MBOX_RECONFIG,
-> MBOX_CMD_DIRECT, 0,
->  			    NULL, 0, &resp_len, resp_buf);
-> --
-> 2.35.3
-
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
-
-Best regards,
-Tien Fong
-
+On 8/5/2025 1:17 PM, Ilias Apalodimas wrote:
+> I am not sure this is a bug. The EFI spec says that in order to
+> trigger a capsule update you need to have an active boot option
+> pointing to the same ESP the capsule is installed.
+> Is your boot0000 automatically generated? If so it doesnt point to the
+> ESP and the capsule update doesn't trigger correctly. Does it work if
+> you manually add a boot option pointing to the ESP?
