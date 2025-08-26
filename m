@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7CF5CA0FE9
-	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 19:45:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D80E9CA0FE7
+	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 19:46:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C30C830F6;
-	Tue, 26 Aug 2025 21:45:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 337A08313F;
+	Tue, 26 Aug 2025 21:46:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gu1F2V7F";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PXjuWGDI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D65C8313B; Tue, 26 Aug 2025 21:45:16 +0200 (CEST)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id 5341C83145; Tue, 26 Aug 2025 21:46:13 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 987048309D
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 21:45:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40745830F6
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 21:46:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e96dd4bd847so1046657276.0
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 12:45:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e96dd4bd847so1047699276.0
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 12:46:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756237511; x=1756842311; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d7MKDgqD0ZUhNv15NVtz6VGb0kCh97QFfyC4K141MGg=;
- b=gu1F2V7FZ2ZQRyJ4kw6ablLGERE3zUO4X1sE0knpDmNquH/PG0q5sLvu1pMiPkSxzX
- TWPWCVFnxuL12HXSg65vY8lJ5vGUxX8le9W7HtvXh4MBcxbohprpqK7PgBmSFBRJ1hbD
- yEnABvcEipHtVqftBRRh1PGhHHyCYgiSPpI7dPxiWx/r1epuLf1w/lLQDdvnKKJelWOB
- PHD+xkDFSoqMbzZ0EowO10PC3MUTEa1srfjt5xw1xq4S78pX85LihOYs7dE9FT/DqWql
- Tdtoe4vnnGXaHQwsr4p+AtHraHME6LN9kwl1k/2QpmfPn+fHAQm2HFfkWkrfsplppFq7
- kWVQ==
+ d=gmail.com; s=20230601; t=1756237570; x=1756842370; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tpYpQBH17vzsBxON1MLvQIQgtg2jqkbnw8K/uxA7jjY=;
+ b=PXjuWGDImvQg41n6v/SuP3TliuSM3aIgKYtUYkgd+3M7j8j4tutNiRho32aT0suue1
+ ocFXeJGugRPlQoWU44pZwL14E44wUE42Fef99Obs1wCmF0Ydo9hGPJsGJ9SnNciPj+/c
+ G0I6FTUBXA6DYwBgNRoxpNK5PF2mJhPbYCJCiY/ZVtmu9ymAUiQ9nT7zRTw5S2leLDFE
+ wkhvErEab9F0TWnPT6zPqRm1GjE821EZ8yiVigRdgnj/eCyRYxVVQzaWZ5u9aQ4B2H/j
+ xfBBdIQ5qDpbA7KWPTJ3EFrhN6AIEZI1UyJbeeKYdVmMDBL4A9g5l0iZ2IAnpxq8i6Vv
+ jvGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756237511; x=1756842311;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=d7MKDgqD0ZUhNv15NVtz6VGb0kCh97QFfyC4K141MGg=;
- b=XQq7rXPYDf5vH/9yz5FF5mKIbXR9LUDKzlT73v0Ly5dRY4wJY5n8SmlWG8tNSbepmi
- MpVdqoFRaaPF8DFznq8936JurDSRdISWcyOywgb+YGqLrFjYa5T5lCBWrPost15HSFSP
- GI+8ekue/yMRrMnr/1AZihxN+t/G9g+s6kxv+5uB8WdS2U5taVPf9hSoXjz/RFLlOBU+
- H8XeCcVwGEPkCvLtTERlzT4Lj+Jin26czy4ReMBWOg9syTNH7zOKjYkWt3PcJ0MX+Qju
- InQBe8CkVXL/EZEav2jkgEVN3HayIsg70panWNQBBJEDd/vNgXjWi4QdIKWIRMbiSduv
- gzQQ==
+ d=1e100.net; s=20230601; t=1756237570; x=1756842370;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tpYpQBH17vzsBxON1MLvQIQgtg2jqkbnw8K/uxA7jjY=;
+ b=wpoEIjd6/nMf6iy/WThwdr3JfsivT5WXm3rlp4L27kSm/tier75UksVDYkDWBdNd6A
+ OAIvVSvZXy6EC0gpEN3izW35iNw2T7FN7PgMa2YbhP3wmIyrdvd5V0fR2e/5kn27xNeG
+ moeakPSv2TTFwbn2akJOSb0tEcxiFbgBVQXXyVaxlPp++d5WsBn6KWVv6nJn9LK5dYjB
+ RpALgUE5T31WFLuZHhxhJJ6zBARO+RYDoFeru8FPo1+YbF/b8mbk6GAW4qgPRf0BYgBa
+ RFMQ0s969tqqMgwQOu2yIVhJpGfI8+/7IJbkGREaKbx4aFz6sVnydgvNjrUhQstSNeHW
+ psMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXKR6LcbIGhW5qdu0RhbGyAf4q/byq/bybnqMlyVpMIq+onTQ6Rner8oXJYOLY8wVdy58IpyXw=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywc3o/BNMyiGHuxYldHw+dcFSulyCg++806s5SAnya76ZDqa5nY
- xsLqGAIkEQTAZq3XaxoljCk+NW0Bmkqu0rpySIJAEiy9bWAr72EebSP7ipAFXOhpUzCJV77jTLI
- cDLb/AvVFkhhGV66M+nhG4Fdr8Oc6q0dTQUqQCie+2w==
-X-Gm-Gg: ASbGncueSMiLevpbgrc4QwcrYf9OOHI8nMKv1mZQ2YsZLx1kUojTsM5hGDRe+njPz3j
- kOcmz4HvmKcPWkR8zahYs21TbztXt/Focqwg4osQTEX9HkkX9nDv71lDPUb8buLc7AzjVtyHc5c
- kJ5Y5MVvA4kfnaw2vV38EgJ82q28Q77LCfvP9ls4q1+nKdyHFYZwdy2TuLmttetpxsCJHX4vDvb
- 6hrIQ==
-X-Google-Smtp-Source: AGHT+IECwtm9pxK019FepkyEkI6qb/NZfvzWyX4xeVWGM5a360Vd4RRZsOn3KlRGTBDv+bW+0u1WycBQ7n5XImqMz/g=
-X-Received: by 2002:a05:6902:6010:b0:e94:e1e5:930a with SMTP id
- 3f1490d57ef6-e951c3e79c7mr16201060276.50.1756237511077; Tue, 26 Aug 2025
- 12:45:11 -0700 (PDT)
+ AJvYcCVS8g9anla+hbVKkVTjwaIGLRT/hddAEoeD58ebt4jzchCadZ5ysooQf1tZbxYwQBT33X6BLqk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFZmS8WshffhErzqMNJsFwbIUvggJFlpvNXt2taL6NnzrdXWrt
+ vp1ScEoO3CnVDF+cjyFAIfq5TaENYGagSqxoWAOpPhO+n1pEfJoRtbLRpKxiSg==
+X-Gm-Gg: ASbGncvVVAO0RF5NJ/1bY6sJLIebLgIDeMf2/uM9GYZIeQX6ZHswrfnV6KPGAx70aGo
+ nvHIQDiBOEL6WdmU+CQgXTTJDqjXwopcpou4TxHU6FiE/mzUfncfASC1PeIcf30a0cYlf8yJGVV
+ dNGyoIoK0s+zjtvx6fnz/PAodM+Ezliz1Hv/3r6vDpdrp8khbm1y43w92MQh36OFf3wB0vQM91C
+ yuFMiAcZCmqS6ZcPJSeZXmlbvHmMwgQolkt0wafVTmV4eo9L6dts2AyNalpjcrXeHDcBHd7gfps
+ fMwuliafPeCXsYlO/gdyv373U1foDnlkzgVk/+c9UaPFciLokvERdDLphYXqgB4tInViznY0JxK
+ d2neBXaX2x9faKDz06zrv3Jhulv+y66lhNAmSeLavDfqTqMsIT84KgQY3icfiEDT8UlfJYjkPkK
+ LFKnV7ZjX15Q==
+X-Google-Smtp-Source: AGHT+IEzqJWpIBV2xLfqHfiTYHP3VxkSzFKlN0SDu8LJ35SpMWdgRU7y+Em0LKV/1+4JRK1GutM7Gw==
+X-Received: by 2002:a05:690c:6704:b0:721:391d:8ede with SMTP id
+ 00721157ae682-721391d9f27mr27574857b3.23.1756237569824; 
+ Tue, 26 Aug 2025 12:46:09 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-7213998fedfsm3388197b3.32.2025.08.26.12.46.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Aug 2025 12:46:09 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: [PATCH] fs: ext4fs: add CONFIG_EXT4_MAX_JOURNAL_ENTRIES to Kconfig
+Date: Tue, 26 Aug 2025 12:45:37 -0700
+Message-Id: <20250826194537.20788-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250806222710.23773-1-semen.protsenko@linaro.org>
- <CANAwSgSC4Af-kO9sFjd9Xugh4SxBmC_cvLhAK=xX7kQvk4avTw@mail.gmail.com>
-In-Reply-To: <CANAwSgSC4Af-kO9sFjd9Xugh4SxBmC_cvLhAK=xX7kQvk4avTw@mail.gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 26 Aug 2025 14:44:59 -0500
-X-Gm-Features: Ac12FXwiE34ildHo0zBqXzOWK9yQ_D9YELRYpkaXztZXLVRiBvl6vi1pU4cFars
-Message-ID: <CAPLW+4nSNLNW8TWi5OSb-UZzYGbC1GBX3HbV-9C=FgqW6qO0Zg@mail.gmail.com>
-Subject: Re: [PATCH 00/10] samsung: e850-96: Enable USB host and Ethernet
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: Minkyu Kang <mk7.kang@samsung.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,84 +98,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Aug 24, 2025 at 8:22=E2=80=AFAM Anand Moon <linux.amoon@gmail.com> =
-wrote:
->
-> Hi Sam
->
+Add maximum ext4 journal entries to Kconfig. It is necessary since the
+number of journal entries is proportional to disk capacity. For example,
+an ext4 4TB HDD partition could require approximately 500 entries.
 
-Hi Anand,
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
+ fs/ext4/Kconfig        | 8 ++++++++
+ fs/ext4/ext4_journal.h | 2 +-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-> On Thu, 7 Aug 2025 at 03:57, Sam Protsenko <semen.protsenko@linaro.org> w=
-rote:
-> >
-> > The E850-96 board has a LAN9514 chip which acts as a USB hub and
-> > Ethernet controller. It's connected to the SoC via USB lines. In order
-> > to make this chip functional the USB controller in Exynos850 SoC has to
-> > be configured in the host role, and the corresponding power regulator
-> > has to be enabled as well.
-> >
-> > This patch series enables USB host and network support on the E850-96 b=
-y
-> > making use of the LAN9514 chip. While at it, enable all power regulator=
-s
-> > (LDO) in the PMIC chip which can be useful in the bootloader and kernel=
-,
-> > including the regulator used for LAN9514.
-> >
-> > Sam Protsenko (10):
-> >   usb: host: dwc3-of-simple: Add exynos850 compatible
-> >   board: samsung: e850-96: Set ethaddr
-> >   board: samsung: e850-96: Add ACPM code
-> >   board: samsung: e850-96: Add PMIC code
-> >   board: samsung: e850-96: Configure PMIC regulators
-> >   board: samsung: e850-96: Extract device info from fw loading code
-> >   board: samsung: e850-96: Add bootdev var to choose boot device
-> >   configs: e850-96: Disable CONFIG_DEFAULT_FDT_FILE
-> >   configs: e850-96: Enable USB host support
-> >   configs: e850-96: Enable Ethernet
-> >
-> >  board/samsung/e850-96/Makefile    |   2 +-
-> >  board/samsung/e850-96/acpm.c      | 169 ++++++++++++++++++++++++++++++
-> >  board/samsung/e850-96/acpm.h      |  27 +++++
-> >  board/samsung/e850-96/e850-96.c   |  97 +++++++++++++++--
-> >  board/samsung/e850-96/e850-96.env |   2 +-
-> >  board/samsung/e850-96/fw.c        |  45 ++++----
-> >  board/samsung/e850-96/fw.h        |   4 +-
-> >  board/samsung/e850-96/pmic.c      | 144 +++++++++++++++++++++++++
-> >  board/samsung/e850-96/pmic.h      |  14 +++
-> >  configs/e850-96_defconfig         |  10 +-
-> >  drivers/usb/host/dwc3-of-simple.c |   1 +
-> >  11 files changed, 482 insertions(+), 33 deletions(-)
-> >  create mode 100644 board/samsung/e850-96/acpm.c
-> >  create mode 100644 board/samsung/e850-96/acpm.h
-> >  create mode 100644 board/samsung/e850-96/pmic.c
-> >  create mode 100644 board/samsung/e850-96/pmic.h
-> >
-> Can you move pmic to drivers/power/pmic/ ?
->
+diff --git a/fs/ext4/Kconfig b/fs/ext4/Kconfig
+index 8ddaebebd48..a2faa9f878a 100644
+--- a/fs/ext4/Kconfig
++++ b/fs/ext4/Kconfig
+@@ -12,3 +12,11 @@ config EXT4_WRITE
+ 	help
+ 	  This provides support for creating and writing new files to an
+ 	  existing ext4 filesystem partition.
++
++config EXT4_MAX_JOURNAL_ENTRIES
++	int "Maximum numbers of journal entries for ext4 filesystem"
++	default 100
++	depends on EXT4_WRITE
++	help
++	  This provides support for allocating the maximum number of
++	  journal entries in disks formatted with ext4 filesysyem.
+diff --git a/fs/ext4/ext4_journal.h b/fs/ext4/ext4_journal.h
+index 43fb8e76641..a492df49fbe 100644
+--- a/fs/ext4/ext4_journal.h
++++ b/fs/ext4/ext4_journal.h
+@@ -38,7 +38,7 @@
+ #define EXT3_JOURNAL_FLAG_LAST_TAG	8
+ 
+ /* Maximum entries in 1 journal transaction */
+-#define MAX_JOURNAL_ENTRIES 100
++#define MAX_JOURNAL_ENTRIES CONFIG_EXT4_MAX_JOURNAL_ENTRIES
+ struct journal_log {
+ 	char *buf;
+ 	int blknr;
+-- 
+2.39.5
 
-Thank you for the review! This PMIC code is not really a driver, at
-least not yet. It's an ad-hoc solution, which is very specific to
-E850-96 board, and in its current form can't be used (even in theory)
-for different platforms. It also doesn't conform to U-Boot's Driver
-Model -- and I'd like to avoid reworking in such a way, please see the
-explanation below. At the moment it's very minimal and only needed to
-make Ethernet functional.
-
-The plan for proper PMIC enablement is to do that first in Linux kernel, i.=
-e.:
-  - implement S2MPU12 driver
-  - define ACPM bus in device tree
-  - define PMIC node in device tree and describe all needed LDO regulators
-
-and then porting all that into U-Boot. But that effort might take
-quite a long time to implement, as I'm the only engineer working on
-the E850-96 enablement at the moment. So I really think it's better to
-keep the PMIC code as a part of the board code for now, hope you're ok
-with that?
-
-Thanks!
-
-> Thanks
-> -Anand
