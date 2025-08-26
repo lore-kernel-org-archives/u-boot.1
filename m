@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B96F4CA0FE9
-	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 09:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA58ACA0FE9
+	for <u-boot@archiver.kernel.org>; Tue, 26 Aug 2025 10:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B62483071;
-	Tue, 26 Aug 2025 11:45:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 577B2830A0;
+	Tue, 26 Aug 2025 12:10:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="kf7IDdP2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZNaO/YAj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD8D8830B4; Tue, 26 Aug 2025 11:45:30 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AA083830B4; Tue, 26 Aug 2025 12:10:29 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1D6C82FC7
- for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 11:45:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74A2A83071
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 12:10:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0333e70c0e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57Q94xe6010392;
- Tue, 26 Aug 2025 11:45:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- swW2zHduk75ZVDiZekYLUJhrNes+UQpnKZWGq1SHezY=; b=kf7IDdP2buPEgF34
- Vnt3EU4C9QIDGkYqltEVRhgb8CQ0Z5rAE5qE1rlVFcx2jPUOg4gRaDNawxahyS+j
- uonfqK3XiH4lZfxVpw26alLWO/E8tYH2J/DTgkRoePccULX4cbXtZfw36hfSxJOK
- wpMzYW50DqW9tUQOs43F88XDN3RsDiM35djMhx35Vj2nG0wnxNYthbuqlgyizEdo
- Pj6xGhZelhpwei03SxpDC0u2V5EBxSahpt70zryzvookcB/nM1F8nNMYLDrrfkGt
- tknwmUeTV4ZJtH35GYblWNaax7LFcVjlsg/jXh3CZZMDIwgkmqWdCB+YbGOiIq23
- kcYpWg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48qq740eqy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Aug 2025 11:45:24 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B71F340049;
- Tue, 26 Aug 2025 11:44:33 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 670495F93B3;
- Tue, 26 Aug 2025 11:44:03 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 26 Aug
- 2025 11:44:02 +0200
-Message-ID: <cac6160d-fe45-47ca-b988-fdb9b0082194@foss.st.com>
-Date: Tue, 26 Aug 2025 11:44:02 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-45a1b0c8867so44485075e9.3
+ for <u-boot@lists.denx.de>; Tue, 26 Aug 2025 03:10:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1756203027; x=1756807827; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MYCApx3j1ExPeuFojegMA4Y9nVZhlPB6b7R/qY7R2x8=;
+ b=ZNaO/YAjs26yQ+iW6VYpqhvWbC+RKaku+u/Vac5Eq5BLl2e70qTjnPUWnxvtyJgZO8
+ igNnavXXJro3t3SBz6jVkzSbebPzMujj5xw/5Jtif3CjxJuCSiUDVkZYLETbWbMcJcQW
+ K7i807XnmyQBNNGxYPfUrPxP/IQChM5gXhX3hnHcSB7NTtTxsguYUOgKj9C4EHkbYIQO
+ JrQQ0h3AFi7xC231qmOgZW3MMxwz4NCymCm2oI3AVZgfkbI4v15b4CEOTfKR2HkGymLh
+ i8Zz2zwzlecsIsBXtsrCY9bEgRw+1V1IDgVbIdzIBPU7Cj85FK0m86Nt36PFSeCwO0ed
+ viAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756203027; x=1756807827;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MYCApx3j1ExPeuFojegMA4Y9nVZhlPB6b7R/qY7R2x8=;
+ b=dGsnhB1NfriOqzFpKUG8Yz8R+7+bkyL6IHUR1fNl13hB/2szFwLTpIcIn+trD9uRRe
+ DJsleXjm6KC06bP8Bl8KwiyYuc/jGKWfmGClPJB4rFrCqhufOWNxolo0ysv59b6k46hJ
+ Fwx5wu2sCijRVB5fbrwqVQJxn9kcyH7iaxEjW0InO5en657HYs7VsNH1/TlvAwruPCG7
+ V6fwT5CilvU8PBFo8eUP1QOpvOpv8A1ly2Z3NLRMLvyrFugL9n+ZI1xtfh//2tITGHRB
+ AIeOuf3s557jhk5YuQbUe9ldjdXnDneNU+KkaPUWW/uddzqBfRfcODHEtqMhTZ+KXAT6
+ vLfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWNSMkrNroomuQYubBLWHRdCZakVRatbw6t5qqBMFikER2OzrPY18MgTrq+Kq/tvqyPZkyWvOU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzm+cAkg8L2p7oXBRjSTgetu+ezmvPrUsO6KKA4xZc7rAoiKhNm
+ 7bxNhtNbV9LwaAHmBAHMfXddxIF4ba5c/p/uQ6NxMsmVkvu+xYFuLBmG0erd1iEfY1F7IT0Zxd7
+ gZwYitgMZQ5ilfC4nYmbkKwvkTuxLTB++KA==
+X-Gm-Gg: ASbGncs5jZN3BpR5fRkGLxZED/1+pzasoOKwe6qChkHeQ3mDL9ondMRko7UCm/hlIli
+ divpfZKsXRNsXKi7YMX1VRwNpDIrpDvrkIuuGFl7CiqmNIEGjAsk0Q7rg+R1Qoa9kNLJEmiIpXE
+ Jt1l1dt5mbMCbcUqFK2ngTkZKQWyVJq2wjkK6rYSu0EHC8G0gHPr2ub7NF8o8EwIxMULWHQUfEL
+ L/s3qho
+X-Google-Smtp-Source: AGHT+IGAw3CCs/nSbZdiWxykiLwCbwkIerCWVa2Fe/v3oxg16rEYD957g3v1Z8oKu+6DqXoNrWLjOqlDYIxCHjp0dUQ=
+X-Received: by 2002:a05:600c:a08d:b0:458:c059:7d86 with SMTP id
+ 5b1f17b1804b1-45b57035c5fmr107855985e9.10.1756203026693; Tue, 26 Aug 2025
+ 03:10:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] configs: stm32mp25: Enable OF_UPSTREAM_BUILD_VENDOR
-To: <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Cheick Traore
- <cheick.traore@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250814120938.1358059-1-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250814120938.1358059-1-patrice.chotard@foss.st.com>
+References: <20250826093936.3521235-1-lukma@nabladev.com>
+In-Reply-To: <20250826093936.3521235-1-lukma@nabladev.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Tue, 26 Aug 2025 13:10:14 +0300
+X-Gm-Features: Ac12FXzED1bHwJ5yAU3sxHcy6YIyzPOK5P1YmhFKRZyimLWpBtnxGD03dHSd7G8
+Message-ID: <CAPVz0n3wpLtXB=1ZS4WiihVkDPTza75dXDKMjD63OyeSQwACRQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] timer: tegra: Bind watchdog driver when timer node is
+ processed
+To: Lukasz Majewski <lukma@nabladev.com>
+Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-26_02,2025-08-26_01,2025-03-28_01
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,43 +96,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 8/14/25 14:09, Patrice Chotard wrote:
-> Initially, only one STM32MP25 based board was available, the
-> stm32mp257f-ev1 board which was set by default in stm32mp25_defconfig.
-> 
-> Since commit 79f3e77133bd ("Subtree merge tag 'v6.16-dts' of dts repo [1] into dts/upstream")
-> we inherited of a second MP25 based board which is the stm32mp257f-dk board.
-> 
-> Enable OF_UPSTREAM_BUILD_VENDOR and set OF_UPSTREAM_VENDOR to allow all
-> STMicroelectronics DT compilation.
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
+=D0=B2=D1=82, 26 =D1=81=D0=B5=D1=80=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 12:3=
+9 Lukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> The Tegra30 SoC is a bit special, as it doesn't have the separate IP bloc=
+k
+> to provide watchdog functionality.
+>
+> Instead, timer IP block allows such functionality when properly configure=
+d.
+>
+> As in the tegra30.dtsi there is a timer node, which "covers" all timers,
+> with 'nvidia,tegra30-timer' compatibility it was necessary to manually
+> bind U-Boot's WDT driver (based on WDT_UCLASS).
+>
+> Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
 > ---
-> 
-> Changes in v2:
->   - Update commit message with more details.
-> 
->  configs/stm32mp25_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index 14619ffd96c..2b02cd86d61 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -41,6 +41,8 @@ CONFIG_CMD_REGULATOR=y
->  CONFIG_CMD_LOG=y
->  CONFIG_CMD_UBI=y
->  CONFIG_OF_LIVE=y
-> +CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
-> +CONFIG_OF_UPSTREAM_VENDOR="st"
->  CONFIG_ENV_IS_NOWHERE=y
->  CONFIG_ENV_IS_IN_MMC=y
->  CONFIG_ENV_IS_IN_SPI_FLASH=y
+>  drivers/timer/tegra-timer.c | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>
 
-Applied to u-boot-stm32/master
-
-Thanks
-Patrice
+What is the practical application for this diver in therms of Tegra
+and U-Boot overall? Where is can be used so that existing means of
+U-Boot cannot handle such case?
