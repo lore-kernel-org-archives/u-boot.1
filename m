@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D81CDCA0EFF
-	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 18:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B9BCA0EFF
+	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 18:36:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D678831D3;
-	Wed, 27 Aug 2025 20:32:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6011831B4;
+	Wed, 27 Aug 2025 20:36:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QpHOaTVr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fniNxcqW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FEB0831B4; Wed, 27 Aug 2025 20:32:16 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 2FEA8831D3; Wed, 27 Aug 2025 20:36:32 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7F20831D3
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 20:32:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F11E83106
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 20:36:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-437d3cb58acso7464b6e.1
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 11:32:13 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-30cce5be7d0so90215fac.0
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 11:36:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756319532; x=1756924332; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1756319789; x=1756924589; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=D0mx9sZfbD2IB7TQovGData2lYozvgUa7jdSwzYCQjo=;
- b=QpHOaTVr6GSMwiHaNWkx5/Y6QAP9993+mHruif+rvRdbJ3t3QAps+shP6kU/4o1WfE
- YZ37pgPdS8hF7I+rmqhbIokJloYiUycYPhsFMwdHTjrHysChi5VWqfpN2JhJ9mX1e1Op
- +E1aOiKcmIqotGpy0nqRoF1BgxcbQNSymujlc=
+ bh=/AT4P3HW2MytULtr0m85bq3qBEqb7TqWNPFbQnsfAGY=;
+ b=fniNxcqWhq0Gy5d+GBjF9Ym7mNYiFVSWdi6N2skpbNeua0qEqo+nZxhIDgweVGX0iN
+ Yjq4l8S2vUHDncnH33xYewvyVeLaRIcAusDtrn1Qo7qDdCM9mgeYbmC+qQBMUk2GzNDL
+ b9PCjcDNlpNVXtJx2BbDuGw1OefwLCnGxGGLM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756319532; x=1756924332;
+ d=1e100.net; s=20230601; t=1756319789; x=1756924589;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D0mx9sZfbD2IB7TQovGData2lYozvgUa7jdSwzYCQjo=;
- b=lwsYRbx3Y3tfR/6dpQa94Y/5kz+cbpBwa5Kwv7MxVgXGMQyGsidJHyqFnkFblUJSx0
- rw6UeVS4WE/sLwzTcXLo7iYZPXXt/jxOoyqEQ5zzmqikXMTKtl+p57DvYjRN1GEDJ/8X
- 8AH0CbR/EhlMP7kVS8CNsG/RjDLlDezi2T5R11bxkFTB6KlQOuyPhMvJd8nOmU0SII68
- KRCznok8SeKd20OM0wvL23DUSuX1kdvsG5JF70fjcOlJJir91wYoFsnER06VGZ5Xuu+C
- uUgpBwE6F9wCt1Td2VBVkaUkwxePJynfaaqAVa1y6rrYLTUL0nYIm+e4oHbThjg5yBbG
- 4BOQ==
-X-Gm-Message-State: AOJu0Yz0UQtTFIiAXwtiSoE212PADcs8xN66IXpiCcJk9WCONSOceB+x
- 9CEc3moTNrdD5mD5IuBriypTOITnZJU7jMNesSBoUiHMFp39w6NcaufIyEpwvy59bfs=
-X-Gm-Gg: ASbGnctF5hQIvs9yZoRVKapQMJFG5pKGZwdKQLgPQGW7mj3cM4bmqADTf4OqVrwdEC1
- lPX04wWmBjqKZzQyAmEUnApbbN3fvEXVkvsPVtGjMw/5cHLbDn+bDR/hAm/Ot0AvWMn+0tp28Vd
- nzHCUx4Bmvo1+5nqVaF6jfwOxWuc7AzXeEE5V4iSZg9+Pn65d+ASetVkb210RPXARMVKEfiZhy4
- rjqsW+pI6ZfSKXWpUuwablNce4CbHD9rRyWRvs0c/Qu2Cz4FLWAIuuxGEheU7r5a7WrgnHUYho1
- PWq/PUGPufaXfQrrW++V5U1rF19Pd0g6XwGQYmBS1/cy8HZAA0q1DFFUYZTWnNaqtwFwejubdnz
- 9wjJVOvmPlBM2w907q761DlEkbk22d/aMy5OXMP2I/loEt0URYds3beNZ
-X-Google-Smtp-Source: AGHT+IEsKiXztvxNNWr21kN/yYLGLWvRNtjQtjpNO+0T+Go1D4HoPnUF74clRwIpC5A8smCS5cWJUA==
-X-Received: by 2002:a05:6808:191f:b0:41d:7d24:e328 with SMTP id
- 5614622812f47-437851906cdmr8799802b6e.9.1756319532128; 
- Wed, 27 Aug 2025 11:32:12 -0700 (PDT)
+ bh=/AT4P3HW2MytULtr0m85bq3qBEqb7TqWNPFbQnsfAGY=;
+ b=C3bAsyyqJlTntjf1+MPlv6wBu5B1Tlpo4ifwCbG4/SntouDYpOGUjTxVIZ2xgGpV7g
+ B1uLW71WMlZSGyt+3IG5bKG9Tm6j38KZHHJQHRHg9kJDcTxb86F3SH38/9LnNE9kEz1T
+ DSvgOeOEV+sz+uPem7+C0Hii715fqdQUKGGG5wgeC1fgmEPu+sMCxW7FsiuLqDvrzkPC
+ EzSJKtGwg4RLeEUqu2WQNGIYGzHqf7BS9EEKorcBkugPUAorHU3iWzuv7EvRn8opHDIW
+ kGk3MbSU6USCCq/17o5JIhXBYq8L3ysrMtpGrCv8HG3xkGZUCbRJykBdsRiWZFj7XUMQ
+ /DIA==
+X-Gm-Message-State: AOJu0Yzf/MpST2wUvvpBHtXj5YD92mtR9gxhKuqIYX8BNtE/vN6N1IOr
+ wx/+348jmtBHYONhntf2PgT7KAofyclYEUOzDKlNhwSGUHR9avlZOab1oVTe9pLKcmI=
+X-Gm-Gg: ASbGncvewOZb53Gtex4m7w9ZBR6Pkt5DwKZf92IHHb6H6j/yGtzdOQ19nftrZwOQYxf
+ /wlfqxUqfwXX+F5Txrlf0WTFatmlTdkPwUXwjTY6RZR+UPUa23yjchSYQnjwd3LGAv35UvACQwe
+ wW66gknu9YaVGnx0pguRsBGNji7eoBRFHd3sw7eaFUwCKMSFo0So8XWS34MMOcJ3eOz28vNKUfv
+ exPwbltp207IB2zXIIw6kmYbWpZ0O6hu1teWIEm0UPeVmaj2wtbzkoBb/jCzusxQpASm3WpLf5n
+ Bt4s7qs+/LCTAoeZuBWsN5EQAnYMwcFESCPVo1AMr9JRg+a5bPLtj38gloFqbIalOM2ph6/kxN3
+ Elpq9apVLml7fHa/uiDoEEAOC6vYBWYVD1M9S/mBrtaUyXP6lN6eEELAS
+X-Google-Smtp-Source: AGHT+IEPo0ZvTODGM4ki8gfrKH9H4vfw1IRgPkHZSrrQv1DyuZaiuhUhqk/lCh2ra+MaowWIq1CDpg==
+X-Received: by 2002:a05:6870:d693:b0:2d8:957a:5178 with SMTP id
+ 586e51a60fabf-314dcbb7fd6mr10238165fac.21.1756319788568; 
+ Wed, 27 Aug 2025 11:36:28 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-437968c7898sm2062163b6e.21.2025.08.27.11.32.11
+ 586e51a60fabf-314f79ab6ddsm3395016fac.6.2025.08.27.11.36.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Aug 2025 11:32:11 -0700 (PDT)
-Date: Wed, 27 Aug 2025 12:32:09 -0600
+ Wed, 27 Aug 2025 11:36:27 -0700 (PDT)
+Date: Wed, 27 Aug 2025 12:36:25 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
 Cc: u-boot@lists.denx.de, Heiko Schocher <hs@nabladev.com>
-Subject: Re: [PATCH] i2c: davinci: drop =?utf-8?Q?u?=
- =?utf-8?Q?nnecessary_parentheses_in_REG=28&=E2=80=A6=29?=
-Message-ID: <20250827183209.GM124814@bill-the-cat>
-References: <20250827110905.39725-1-bhimeswararao.matsa@gmail.com>
+Subject: Re: [PATCH] i2c: davinci: use mdelay() for multi-millisecond waits
+Message-ID: <20250827183625.GN124814@bill-the-cat>
+References: <20250827110846.39686-1-bhimeswararao.matsa@gmail.com>
+ <20250827183055.GL124814@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="M0ha6nN5qhVm2Dyn"
+ protocol="application/pgp-signature"; boundary="0hSKRtoW50Mq0u1L"
 Content-Disposition: inline
-In-Reply-To: <20250827110905.39725-1-bhimeswararao.matsa@gmail.com>
+In-Reply-To: <20250827183055.GL124814@bill-the-cat>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,34 +97,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---M0ha6nN5qhVm2Dyn
+--0hSKRtoW50Mq0u1L
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 27, 2025 at 04:39:04PM +0530, Bhimeswararao Matsa wrote:
+On Wed, Aug 27, 2025 at 12:30:55PM -0600, Tom Rini wrote:
+> On Wed, Aug 27, 2025 at 04:38:46PM +0530, Bhimeswararao Matsa wrote:
+>=20
+> > Signed-off-by: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
+> > ---
+> >  drivers/i2c/davinci_i2c.c | 14 +++++++-------
+> >  1 file changed, 7 insertions(+), 7 deletions(-)
+> >=20
+> > diff --git a/drivers/i2c/davinci_i2c.c b/drivers/i2c/davinci_i2c.c
+> > index 9bba0600e3e..ffd0dd0b282 100644
+> > --- a/drivers/i2c/davinci_i2c.c
+> > +++ b/drivers/i2c/davinci_i2c.c
+> > @@ -51,7 +51,7 @@ static int _wait_for_bus(struct i2c_regs *i2c_base)
+> >  		}
+> > =20
+> >  		REG(&(i2c_base->i2c_stat)) =3D stat;
+> > -		udelay(50000);
+> > +		mdelay(50);
+> >  	}
+> > =20
+> >  	REG(&(i2c_base->i2c_stat)) =3D 0xffff;
+>=20
+> What is the reason for this change? mdelay(x) is just an inline udelay(x =
+* 1000)
 
-> Signed-off-by: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
-> ---
->  drivers/i2c/davinci_i2c.c | 118 +++++++++++++++++++-------------------
->  1 file changed, 59 insertions(+), 59 deletions(-)
-
-You should at least have a commit message that mentions that
-checkpatch.pl complains about not needing these parenthesis and so
-remove them, thanks.
+Oh, I see, checkpatch.pl is complaining, but that's not relevant to us.
+I'll send a patch in a moment. Thanks!
 
 --=20
 Tom
 
---M0ha6nN5qhVm2Dyn
+--0hSKRtoW50Mq0u1L
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaK9PKQAKCRAr4qD1Cr/k
-CoU2AQCgcZIieL7hr6uYqE0z7ppkhB6zRAqTVO2TOShRtrdSiwEAtXq7kDxwV0nK
-niFTSwVNao1VBjc2pR+2XYZIFke2kQI=
-=DfRu
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaK9QKQAKCRAr4qD1Cr/k
+Cgg+AP9S86LqluO3WIHI872bWw08cky/koFvNOvH5L8FBPuV7gEAzwJFRfab+N7+
+OaQQwv4To3Ps6lS60W4b8Yzy2x0ygAo=
+=j+Ha
 -----END PGP SIGNATURE-----
 
---M0ha6nN5qhVm2Dyn--
+--0hSKRtoW50Mq0u1L--
