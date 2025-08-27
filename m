@@ -4,92 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542E3CA0EFF
-	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 14:32:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A36CA0FED
+	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 14:41:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B40E7831C6;
-	Wed, 27 Aug 2025 16:32:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6870D831D3;
+	Wed, 27 Aug 2025 16:41:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Fk8Gqy0G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lszOiAQ3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FDE2831C6; Wed, 27 Aug 2025 16:32:26 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 0B23B831B4; Wed, 27 Aug 2025 16:41:08 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BF8B83214
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 16:32:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8919D831B4
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 16:41:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7452b3a0b31so784117a34.0
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 07:32:23 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7454509f088so207490a34.1
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 07:41:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756305142; x=1756909942; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LssNDlbaILFNWI9m2GDRT1zk1QY/0gn8MNy91OlcHjs=;
- b=Fk8Gqy0Gd37LBrFEUxR2/fZTcyztsh/QbtkwEhPNFPcklzdSRCFUz2z8kUl6rQ2JWO
- GftI3Rvjw7mqZ0+G/fdi4P2Wl1r8ilRLe+RcZeTxCZi/+cTBPYQ2mBcIGvgUPXNnISR4
- o6szYIfX5MPJ6JxsrObNmj++guvo3QAr+tzyQ=
+ d=konsulko.com; s=google; t=1756305664; x=1756910464; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=JlPThANqdGD5nIAuQfGc6N1RisI9OWyYyyjS586l8rc=;
+ b=lszOiAQ3OIznEb9rjZjxDPqJDs5CF5ws6Wkf5QLo70KWqvKDLoQRXLIaPA1Q55beZ0
+ Gt2uODJI2/cPqWJdp0N0pqm3Np4z65B8un4tfbob4CnTvdpqX5aBCZyeYV5yY3sdz+r3
+ O44AwSzVPa6d2jfxtVSUmz9ga4Tyj8uWMxVik=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756305142; x=1756909942;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LssNDlbaILFNWI9m2GDRT1zk1QY/0gn8MNy91OlcHjs=;
- b=V1FTRuJSl/pW0Ze25gxFsqDas0PTIi+B8ohWQZ975GjrHPIoGE43MfEI9QX3FIwpDZ
- nosSw1TqcDWgj9+t4ZHAHumuEM8/tANm4TfwT+9zShPzkTYkfv4gmEq2Zz0LwMhSWeRu
- ZzDzMp+eNEM5G+HT3+H8bLhk9pnzuUjClYXQcMD0AisMlwe/6dBXm8PC2Vnk63sEMChp
- QQjOfg3lPoz9vOMui5iWhj7pIY++78jey4hQOCNl3bXG6KZpYvNVTOzz37fUsKqMIoNG
- NqgMRS/k/2UkMuPrcjD0qV+6BE6rEe98gB2PvuisTvRpcuv2zMjSAmb2pUjcXFhEsRMU
- DGzA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6eHbPhQxnNSbfiutbBHf1ppkWVw3T30pFVfUWTiI8gurqKUDkep6zOZsjRrWoN1ORcXX4/i0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfyUUnScDvIkjW4Y97Xa6PDduaucq5eyyOdhfB4GHtXJurowVa
- FQp43dRnEqtahzT7A1bDYteA362MmCxht6HeWCh6WFv/o9lQrN0wV7otu18LEEuTHmw=
-X-Gm-Gg: ASbGncs/i5ZOVmScQX46rwQuPDc0ISlOYfggvaiCd3yi4KAv/GJVwU+uDGHsvWnobv3
- W8y9ZH3WwX/GJZsadHuk/4kS3XLZEc09g74GTIcIn8G0NkDVJc4xNZ63U/CK/uytWQIuUaLmA8f
- F5uua5iUj8Jw3eXnCK43pDPLOzcBMhD5NoyGU/ISTvEbSNhHQ1Rp1nEdD7ujw3rUlt7L26UN+Xz
- Og1UeZPUiJaAUdQPyashhaIykymCIwRcxzNXkQtaif8/5lXcttkJpWSGSLeWGeLmbsr2MFem/WF
- HL2XuMLgNQD/c0EZulIlmyat3anMhluYGyaPSGb2Tcd3deMJRvbmoMwfSZV/F1PC3RVjgbYQ0dd
- qEyVl7vEIHqurMAmDZFFkxe6wpq/x5gxuMrYD/JAMest+P1Ctl+/z+G33
-X-Google-Smtp-Source: AGHT+IGhZmcr9RZduY1aW5Xs9nz6PV70ztuQJknQ1rKIL/f+PZF949RL3Q4oxx6VShxMuG71SafnBg==
-X-Received: by 2002:a05:6830:b91:b0:741:dffb:13fa with SMTP id
- 46e09a7af769-74500a515a6mr10109924a34.21.1756305142212; 
- Wed, 27 Aug 2025 07:32:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7450e49d363sm2993224a34.37.2025.08.27.07.32.20
+ d=1e100.net; s=20230601; t=1756305664; x=1756910464;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JlPThANqdGD5nIAuQfGc6N1RisI9OWyYyyjS586l8rc=;
+ b=pKqMIwd7StqVgHryqzKsX9/36M8j8hlt0geGhyUOb/V/xCMaEynuk/RH5278xSAsCG
+ Ba9Nd4GesD3UtwS7+2NtF2xxyCJQ8q2iiaVMAnJqoFxLZrF1bNnu5QArcWCn6uuPV2P6
+ A6sN4zhjS0yEp4ttDAPyXtuAq784I8quog86xZCjjIYGWg+24jA7xdwFf4UTrY7D3k/d
+ urrh87hHg62KM3ZcP1shU1Zy7tk/zgCgEwyXMEFwV3ALbL6lOPQkDCic0640gDcf/cmt
+ fpsKbf26Sd/GmsjKMz1IxSS8SDRoMWtewK51PxRF4UDCntE76+GwJl3aDL86oiIWWJ4w
+ KaNw==
+X-Gm-Message-State: AOJu0YypTFuOLWJEHmbAn7S2CJfj2A1OaW2ERWhGFMmIEC9TyhV2zV3X
+ kWedzwRScAhqbkqPQ7KP+1zZVOu5h/0Lrk0/gj1qNSHlOIwEwwqK4yRlGSwfP7vaczE=
+X-Gm-Gg: ASbGnctJH5SAr21QrKacK+0W4gkHMGefUGVcX+fDyXbrrw1gkyUObJPI7jvx+hYaaAl
+ PxywT2xV7y/Fcpsn7vHt6/BgaaOIbA9y1i469v9CXyYOqyCxYC7sXHDg1i0192jdRNsEefl4YMp
+ YTmEJmH2sH6nbcmVfEJwmi/5Wfc4prHJS5v2NyuRJVIcafxAG0W5F6qfG4uGYOF864vNBccH7IV
+ wLMUwg9a1Vj7ixDEScexaMlhpcr6AmNFScy5mZpVPrhuBjChP/rLy/w8bjluV2Fl2FRo5gceQzx
+ N6MT5yX8NP99+3kUT7uUs/YdiJRfb0pzPtTHwJaQEam5bjcrPxKyKq3fhP3ivYUHqCnNjyarokl
+ EopfsWfu1ReypZJLB57otlN94vTPhGfD0kCAVXJjE0X4ZfSSNh9ymNR/bs6pj/L1Zww==
+X-Google-Smtp-Source: AGHT+IGdYzXQvXq4htjaoCgtahjE5gnQ4plHT1LVqPRYwXcFc+f+c9cR7U4Ex1+/KEEg6Spfd0GsLQ==
+X-Received: by 2002:a05:6830:3787:b0:744:f113:fef4 with SMTP id
+ 46e09a7af769-74500b6b416mr11088997a34.31.1756305664035; 
+ Wed, 27 Aug 2025 07:41:04 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7450e11af87sm3029411a34.0.2025.08.27.07.41.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Aug 2025 07:32:21 -0700 (PDT)
-Date: Wed, 27 Aug 2025 08:32:18 -0600
+ Wed, 27 Aug 2025 07:41:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Frieder Schrempf <frieder.schrempf@kontron.de>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Joy Zou <joy.zou@nxp.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Fabio Estevam <festevam@denx.de>,
- Frieder Schrempf <frieder@fris.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- "u-boot@dh-electronics.com" <u-boot@dh-electronics.com>
-Subject: Re: [PATCH 0/6] Use correct LDO5 control registers for PCA9450
-Message-ID: <20250827143218.GH124814@bill-the-cat>
-References: <20250811131213.211124-1-frieder@fris.de>
- <42ae44e8-b368-44a9-a828-578c77d4d15c@kontron.de>
- <PAXPR04MB84595561F74B01EEA36C020C8838A@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <ffe365e5-2d0f-415e-a084-1926e3d4b2a8@kontron.de>
+To: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20250826073510.357157-1-ilias.apalodimas@linaro.org>
+References: <20250826073510.357157-1-ilias.apalodimas@linaro.org>
+Subject: Re: Pull request for tpm-next-25082025
+Message-Id: <175630566287.642307.17685377148033215512.b4-ty@konsulko.com>
+Date: Wed, 27 Aug 2025 08:41:02 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SRpBRIXCTJ7Rf5Hj"
-Content-Disposition: inline
-In-Reply-To: <ffe365e5-2d0f-415e-a084-1926e3d4b2a8@kontron.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,91 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 26 Aug 2025 10:35:10 +0300, Ilias Apalodimas wrote:
 
---SRpBRIXCTJ7Rf5Hj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> The following changes since commit 51214ffcc543dde83ad687c35cb2de61a34e0602:
+> 
+>   qemu_arm: Select CONFIG_SYS_EARLY_PCI_INIT (2025-08-21 13:27:59 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-next-25082025
+> 
+> [...]
 
-On Wed, Aug 27, 2025 at 09:37:24AM +0200, Frieder Schrempf wrote:
-> Am 27.08.25 um 07:46 schrieb Peng Fan:
-> >> Subject: Re: [PATCH 0/6] Use correct LDO5 control registers for
-> >> PCA9450
-> >>
-> >> Hi Jaehoon,
-> >>
-> >> Am 11.08.25 um 15:11 schrieb Frieder Schrempf:
-> >>> From: Frieder Schrempf <frieder.schrempf@kontron.de>
-> >>>
-> >>> This is a port for the following series in Linux, which is already
-> >>> available in mainline:
-> >>>
-> >>>
-> >> https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2F
-> >> patc
-> >>> hwork.kernel.org%2Fproject%2Flinux-arm-
-> >> kernel%2Fcover%2F20241218152842
-> >>> .97483-1-
-> >> frieder%40fris.de%2F&data=3D05%7C02%7Cpeng.fan%40nxp.com%7C51
-> >> 6d
-> >>>
-> >> 65c0706c4d71292d08dde3b31d9d%7C686ea1d3bc2b4c6fa92cd99c5c
-> >> 301635%7C0%7C
-> >>>
-> >> 0%7C638917080648452454%7CUnknown%7CTWFpbGZsb3d8eyJFbXB
-> >> 0eU1hcGkiOnRydWU
-> >>>
-> >> sIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%
-> >> 3D%3D%
-> >>>
-> >> 7C0%7C%7C%7C&sdata=3DneJx6WZU4iZWjSUcsnzOVQvFiaCTKLChE8srEx
-> >> 6cwEQ%3D&rese
-> >>> rved=3D0
-> >>>
-> >>> This aligns the PMIC driver with current Linux and allows to use
-> >>> upstream devicetrees in U-Boot.
-> >>>
-> >>> Frieder Schrempf (6):
-> >>>   Revert "pmic: pca9450: Add optional SD_VSEL GPIO for LDO5"
-> >>>   pmic: pca9450: Fix enable register for LDO5
-> >>>   pmic: pca9450: Fix control register for LDO5
-> >>>   pmic: pca9450: Handle hardware with fixed SD_VSEL for LDO5
-> >>>   arm: dts: imx8mp-data-modul-edm-sbc: Remove deprecated sd-
-> >> vsel-gpios
-> >>>   arm: dts: imx8mp-dhcom-som: Remove deprecated sd-vsel-gpios
-> >>>
-> >>>  arch/arm/dts/imx8mp-data-modul-edm-sbc.dts |  1 -
-> >>>  arch/arm/dts/imx8mp-dhcom-som.dtsi         |  1 -
-> >>>  drivers/power/pmic/pca9450.c               | 22 -------------
-> >>>  drivers/power/regulator/pca9450.c          | 37
-> >> ++++++++++++++++++++--
-> >>>  4 files changed, 34 insertions(+), 27 deletions(-)
-> >>>
-> >>
-> >> I saw that there are several patches on the mailing list for
-> >> /drivers/power that have received no reply from a maintainer for
-> >> several weeks (see [1]). I just wanted to make sure that you are aware
-> >> of this and kindly ask to have a look.
-> >=20
-> > I could help handle that via mmc tree, if Tom and you are ok.
->=20
-> I don't mind. If Tom agrees to take power patches through the mmc tree
-> from you that's fine.
+Merged into u-boot/next, thanks!
 
-This would be helpful, thanks!
-
---=20
+-- 
 Tom
 
---SRpBRIXCTJ7Rf5Hj
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaK8W8QAKCRAr4qD1Cr/k
-CjfcAP9o1QI6+3L6O3eag9L1Dh2uE3kTLXAfk5Ce6zYmT9/LsQD+K2RIMajsgcRN
-XrRA6juDUd/56G1LH4++VnpmyTru/AQ=
-=cUYi
------END PGP SIGNATURE-----
-
---SRpBRIXCTJ7Rf5Hj--
