@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3DFECA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 14:41:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5B5CA0FED
+	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 14:41:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0B81831BE;
-	Wed, 27 Aug 2025 16:41:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 385A9831C5;
+	Wed, 27 Aug 2025 16:41:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V5VqUNtN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PuKmUOlE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3025831EA; Wed, 27 Aug 2025 16:41:09 +0200 (CEST)
+ id 24DEC83236; Wed, 27 Aug 2025 16:41:11 +0200 (CEST)
 Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
  [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0CB7831BE
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 16:41:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0505E831B4
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 16:41:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-74523a19fb3so2335326a34.0
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 07:41:07 -0700 (PDT)
+ 46e09a7af769-74381fbd6f3so1599550a34.2
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 07:41:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756305666; x=1756910466; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1756305668; x=1756910468; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QLnk4nyxeSMyAafRQkIzdHn2CwutnkUNzIzG32nGLfU=;
- b=V5VqUNtNb3zzNxJSmbquRx8bsLAEatXJCiNw5qA8oYVm5GCgbN9punhtBu6zw3D68y
- dLvZIlk/5xl9B8MpXZmuyR4AeJBVmWQyJCHsfnVlZPIzdwmmXBGylgvA/L4jBIbvYtmR
- pHUNOqmW9tCBtWhu3TE5jdadej9sItG6wrblc=
+ bh=hdNd54wOtdiYIuKfzkR4h1bEdv3hp+6cnX3cTbbGrRU=;
+ b=PuKmUOlEcHzcbyQFw24zJGGDNsSzexYBBr8Tq3cbtexGFDfRtZLo4uyP1ewApiYnjq
+ dKG2pYooLs5j3Olbcw3/FB79GzlpL1BYKatL1i2byfINRfv6rOd338tjmOwqPRGx3w1Y
+ BB3IWr7MjyrKw0rwnF85k4ed2gJhkjCIq5tDs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756305666; x=1756910466;
+ d=1e100.net; s=20230601; t=1756305668; x=1756910468;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QLnk4nyxeSMyAafRQkIzdHn2CwutnkUNzIzG32nGLfU=;
- b=HEt2EoCQOEFjII4OFTMuR5l3NpKb/WX27DeZJLIIPtS223Hli8yDb1diuYzYWi7Iwz
- 8bWujMw/Ht+TMadO9q3ONG8T7WKC8hIxwPmtDZVsaGOKJlVCMABbHJtAOE1dIHbrawnm
- 26X5WH9hGFsqKx3R803awG9zwBTXoUjyKo5OgtHAOuS8c6CSw5+0azUaTV8gX1gYVhDA
- IESI+w6G8uLHCrBugPef+zrfAUldyTvhoyXN666ZdHlMgJ+R5UEmx2uZuJAsWh6/hvPj
- ngHQS5AFpxTFFbSKgOX+gXaS3L5Mj0bH6TvcikzNNQk08EZtbI13VJiUrIc4+/DZH/FC
- DD/w==
-X-Gm-Message-State: AOJu0YzOVmGXkMaoZG065LApgcelJVQzve18aKyiDfUsHZ1CXfD106u2
- 4xA9apFjXncCtF7TR+vlDJD85U5RtTOlECxeucuoQZELAqGReFbu1KB8pA53BmttgdE=
-X-Gm-Gg: ASbGncsxKw7bTWzmUwxyqr5umhcz0Z3W3x14Biwr+9FkZsSVsDKF9XtHYM/NMnJf3S0
- bnDXBNbrCBazYiT2VJFbX1dp/f+y7veMNuCfU9j/E2RjefNjmbVgaV2QXW5jpc9Y2Tm/fpmr3r5
- zsfvKI4O/L+cQouXRsMq9fqgWsW9HBWoresIU7ATmfSRibQRQ+BNXaEzhKuCrHCabYfsHO1HYmw
- ZSoD75eCWRKWJ5FhDUkvss7j/zjipeSnE/wFcQkvZIbwuzXQvp8W6GZLMn0TGqgeab3ARyNSLpX
- JqyFWp9lzcW1rGLdE4crcSPDr+0LptrKcqqKOU5KgMguixGalSDDutcVCB5aPt57FWajZMn4Azp
- PR5j2jYy23AhqgSsr0PsuDBn9P+xQN43gnjQqicEj/9DF5XMMG+7W+SQ=
-X-Google-Smtp-Source: AGHT+IGFBordYdJ6+aPi/F+zh5a2xcvXkxVmxbclNi9FKMi7qSIcdWBiIHKbo0qjouJmNayfWBWoHQ==
-X-Received: by 2002:a05:6830:4989:b0:741:aa6b:8afc with SMTP id
- 46e09a7af769-74500a6d2f2mr10163809a34.21.1756305666509; 
- Wed, 27 Aug 2025 07:41:06 -0700 (PDT)
+ bh=hdNd54wOtdiYIuKfzkR4h1bEdv3hp+6cnX3cTbbGrRU=;
+ b=SP9CwAkYfhHlZs/uHIsQzDWLXKgzJqrOEbFck/lVeLtSybsPC8nG7srT1+9L+iOHJE
+ LIpEmJoYcTHr8D9mghUGs99Ejc7LA+QBR5wm8do4bpl1UMp+quEZotnTS+FVcap4k/Mi
+ OWNQSS/YDyccqIjwzdRT8gW5iZKqEWEsetOterb5FwktwnrIPFEZIqvGLrgdCOQusPI8
+ qsoxEtLiwF3csFoejHZ5n5YW9tyA1Sf+Rc+eGpUT+5u+0uiDND0G4X/6Y5Vwc50ebVBD
+ 3WD68ABgoeX9OZ+NeYpNfzXOjeMKusU7qxgOY5fYIGm78QxdPTo6INPuRbqQFUtNKQ+C
+ jVmg==
+X-Gm-Message-State: AOJu0YxkcIHQFQKDvVu02S2+ilxr9C+mifo457NjKSYGlG2tkcZYuqyD
+ jQbpHpuj9MGWX7sh5/REFpnJ8Z29KIbYniRj2Ybvz1vklr+PpHdpa95z0saAsamW15mDsyPx4sR
+ W5kxOCwU=
+X-Gm-Gg: ASbGnctDqpIJSl/LQf/Gn+LrhmcrRz4HWIQ9MKGh8Pet0WiNhWGv1cWrkXpLISGFl2S
+ GnMGRTLoCKx1gBPkUuPxkU6nSXKaLbxzCB26NbhQQgS4shLyhQTDmAiCFs8goyJJgk6P1b1uLnD
+ rx9x5xrSQvDcQ4b3t/X6Ie+jPgeTC1cmJEiGR/TMRtZXsXIRNLpj0g8F89MJDpjVu4oyNj8D4gL
+ 2ESSK7lHloyWyMQaobSZbZ0tMyN1CmHOtIzNpcPMfr4jGu9oCLL9kCtwavNQm9ATsSzq/bwo998
+ fJgAzkpjnuPoMgePohaKIC+E51FGHtLGr6ydeTV/WTeFhGvSS5YUq+FfytO/WMiE3w4nUdsCo07
+ IXo+D4AOCJ7IWRZdEs06Ayf5DcjjYqyIeFFAx5W2v4d5L5L7Fx+BFyqUaIYBK9iXcPg==
+X-Google-Smtp-Source: AGHT+IEbSYMC0iI4eL3JavyoZ3L85hTCVyRdIIFTiWgLlKxTGuGX3vIsv5fBcUuwjtRSyEiVE5pp8Q==
+X-Received: by 2002:a05:6830:368e:b0:744:f112:e537 with SMTP id
+ 46e09a7af769-74500aface3mr9497390a34.30.1756305667724; 
+ Wed, 27 Aug 2025 07:41:07 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7450e11af87sm3029411a34.0.2025.08.27.07.41.04
+ 46e09a7af769-7450e11af87sm3029411a34.0.2025.08.27.07.41.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Aug 2025 07:41:05 -0700 (PDT)
+ Wed, 27 Aug 2025 07:41:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org, 
- tien.fong.chee@altera.com, sjg@chromium.org, xypron.glpk@gmx.de, 
- seanga2@gmail.com, daniel@makrotopia.org, 
- "Lucien.Jheng" <lucienzx159@gmail.com>
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de
-In-Reply-To: <20250817150203.52850-1-lucienzx159@gmail.com>
-References: <20250817150203.52850-1-lucienzx159@gmail.com>
-Subject: Re: [U-Boot, v6, 1/1] misc: fs_loader: Add
- request_firmware_into_buf_via_script() for flexible firmware loading via
- U-Boot script
-Message-Id: <175630566496.642307.11208800419864665082.b4-ty@konsulko.com>
-Date: Wed, 27 Aug 2025 08:41:04 -0600
+To: d.schultz@phytec.de, ggiordano@phytec.com, 
+ Wadim Egorov <w.egorov@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+In-Reply-To: <20250815111051.2277173-1-w.egorov@phytec.de>
+References: <20250815111051.2277173-1-w.egorov@phytec.de>
+Subject: Re: [PATCH 0/4] Update SoM detection related code and configs
+Message-Id: <175630566670.642307.6688071913577019152.b4-ty@konsulko.com>
+Date: Wed, 27 Aug 2025 08:41:06 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,21 +97,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 17 Aug 2025 23:02:03 +0800, Lucien.Jheng wrote:
+On Fri, 15 Aug 2025 13:10:47 +0200, Wadim Egorov wrote:
 
-> This commit introduces a new API,
-> request_firmware_into_buf_via_script(), to the fs_loader framework.
-> This function allows firmware to be loaded into memory using
-> a user-defined U-Boot script, providing greater flexibility for
-> firmware loading scenarios that cannot be handled by static file
-> paths or device/partition selection alone.
+> Update Kconfig options for phyCORE-AM62Ax to align with other boards and
+> prepare common board code for the upcoming phyCORE-AM62L which has the
+> SoM EEPROM connected on a different bus.
+> 
+> Dominik Haller (2):
+>   board: phytec: common: Add PHYTEC_EEPROM_BUS to Kconfig
+>   board: phytec: common: k3: Use CONFIG_PHYTEC_EEPROM_BUS
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] misc: fs_loader: Add request_firmware_into_buf_via_script() for flexible firmware loading via U-Boot script
-      commit: b5da53046c303d7cff586b366f225dc4c3b64686
+[1/4] board: phytec: common: Add PHYTEC_EEPROM_BUS to Kconfig
+      commit: 88a1816a9b4ef6a202a832c7f59099ddae903e6b
+[2/4] board: phytec: common: k3: Use CONFIG_PHYTEC_EEPROM_BUS
+      commit: 437f663e6c35bb210a115bbbd295efbd9d9c54a1
+[3/4] board: phytec: phycore-am62a: Update SoM detection Kconfig options
+      commit: 9cf4f522fc96e29df4ab23f5bcbbbe432ae32237
+[4/4] configs: phycore_am62ax_a53_defconfig: Resync after savedefconfig
+      commit: 7e86c8f1dc1dceb50294902f95b3ecf21f8af687
 -- 
 Tom
 
