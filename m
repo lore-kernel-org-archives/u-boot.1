@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33352CA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 10:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDE1CA0EFF
+	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 10:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34FC283145;
-	Wed, 27 Aug 2025 12:46:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B3EC583145;
+	Wed, 27 Aug 2025 12:59:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gPdF254q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xa3WrR+6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02033831BB; Wed, 27 Aug 2025 12:46:11 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 96C67831B4; Wed, 27 Aug 2025 12:59:41 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD0338304F
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 12:46:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D4198304F
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 12:59:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-afebe21a1c0so128235566b.1
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 03:46:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=ssunkkan@gmail.com
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-b49db86cac4so2405947a12.3
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 03:59:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756291567; x=1756896367; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3SzmVqXRypbT2x2JISd4y1+7Ixa9iDkjuoq7U1PK4hc=;
- b=gPdF254qUI8KAlFqTF6+Tt5z7j/g7QHi3IAIJhNB5PWoNAENEqFGSzGCRyceU/Ym1n
- IuFG1f/5mmG4ev/a3lTcUCP+Nq5EVkdVBrzKePyiJCRWRqtHr00Wf2qeaOFR0Tj8O5mj
- C1t9lDCApHWx+BR8NqWvjRIqFevO03Gs6Mfl+74qLjwu/gZBnFhQIySAgVPhnbzmF7w9
- zZ2K1e8g1FW7ZHRgSFxNB6kLSr651HfqiUdFFu4O3O6AeZNFUPIFppLTu8qs5hWbUPNY
- y/F3Oa03A4Q+fEx3GHskKAZF8xx/DVgeBKGxot3cTobqmqtF9Mwe1nE0vPazwH3HADTT
- QyBA==
+ d=gmail.com; s=20230601; t=1756292377; x=1756897177; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ru+PrtmiA4yGrzJpeoOCpvMfafnskQCXBnkZfBQzKsA=;
+ b=Xa3WrR+6AA4xRSZCKl3Ocmz3V+Umfgi8G80ob2c+pcWwpai6FGkir8x0IBksqWZhYh
+ ERQpI/WUBAHC3EcRQVfifAHY4LmbPm0lRxyQq03ZWqLLbd2OaMhVa0ghrCON+MH3f6CU
+ nRVaOnNMorLH2YPNQeiPCExnwwBaJ55/dk2biFSt9IgT6Mrfs2Sz/qfvOnrFouNkOzHr
+ m4M6HgyulRhKc8QOM7WvvaGAOKotJT41mDX6DXWKOf+GThG+ARzL9uAN+FqGBFd2xBSB
+ 2ArWI98KONAI8BmpbnEr+fOXE0rIo1GLTP99ZIUi5hIZDt5qCOf6xne6hLBK1fHCWb38
+ hQgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756291567; x=1756896367;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3SzmVqXRypbT2x2JISd4y1+7Ixa9iDkjuoq7U1PK4hc=;
- b=QVCSbJQOhYXMk2ujHadlSLn4XOaPw8A2XnE8ZGNWhVXQlYRMRJYGk0hnys+I32H+fR
- mIzCkI1Y+CGQNl8er37xt2LlXDhCDA3FZwVhGGRrEuQ9lR9QXiNocg50GUp2skbYZwf6
- e0wj1eH5Mwla1B7pVKJBDzTMF/qsoZM4zlSDaRcPtiycLynu252s4hapY8HDgCYfbpCK
- kk4Oa6f9Va6ZMc+QsdkfSpd8i75vO9T/75ODc0UDbr7DswQDM+R5F0cq6uZpqSnLc/gg
- fKLSUrISbV4474YALTvfJIBNgnx6YwgCdhm3W2dl31VqjQ9QhaJnF9iIdvcrSx5wOh3J
- o4pA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWc140AcJJgVaBVBMrUxXHc+VUQxPf3Sv/yTCKZCdaO33dbTm8E7uoCPM5lZieUutreYUilRJs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/7tMUjXLx+9jeuMDXpKsEjfUUD+O+xbDP0VoyWrcd9oeKWVkN
- Ph4LOqCAPJiiz/KWcTToIHmUrXmRUswtEftF2Q8ucsDRe0/sfKYuMyLmGIYxNC2bXFs=
-X-Gm-Gg: ASbGncv/2OFZm7HF3itlSCLp0tTRDy8GurF5A6eRrfpBdNhimEGahBBFriOJkiZOgiY
- AfQnQ9FIuCRdZIjVafN9/pkSAFu+9dNhn13P938R6V7VPnjnHTkrYon9fL4/zjKYyJ5IsE1s+gU
- 23MnHjjYUfOHVNHFpGRtC95Iik0UamV6SGo44+ipy65M+1nazlhLUIhArkTkqlQwkSm0cNhBSDN
- 5qaWz3XBjFbbbHoylft2Ep0P4Pzzv+C38bipq9mXCuvrtLgJwWVMhA3jN5H2C5NwmU6iYy8C7Cx
- sPZwiEd2XSlCx1bK59r6BrbGLQG5oRD63EwqTbX6lmj9vWDGm88KCss72uRZx8sbraj/2ZbVsKv
- U8dlxC+mJRpK+QYQOIUqVTgxv0dmeyjEJW7gAbj3fMrE0qGyXKU2PwTbsgIQYgWguwZg1Hg+oc5
- aO
-X-Google-Smtp-Source: AGHT+IFcD4Nzsj+syTfyxypaMe3Kses+zW2KtspmB2Oiy/xjtm3R6gBKUi/M4cCBcEjiXKCYgFL1sg==
-X-Received: by 2002:a17:907:76b0:b0:afe:764d:6b19 with SMTP id
- a640c23a62f3a-afe764d7251mr871257466b.2.1756291567329; 
- Wed, 27 Aug 2025 03:46:07 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd6f.dip0.t-ipconnect.de. [79.195.221.111])
+ d=1e100.net; s=20230601; t=1756292377; x=1756897177;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ru+PrtmiA4yGrzJpeoOCpvMfafnskQCXBnkZfBQzKsA=;
+ b=BfMeThkhNIfcft/p5m4ULsDJEGSQ3I5Ju6xlWwuPFY1r+gDLR9440TsaqaaCppMNE7
+ rRUNr8TfYp/8mPYWh+7RgxB0hY8xDhzwn7yfsgwgpj2s+CQs1paUW/EsnFUWnVAEnpyd
+ tTmw24RijLNxv2EE6e/FTx68q65czyRTbV14jk46Rj2xu7YkWOgpfkEWeqiEKj8++ghJ
+ 9zlOJJbQrgyhFyF9FMZkT/95uCOIVdK42Nj/HyJtbpHWdtb6iASVhPnkotkm/VzGmiHX
+ x09+AwVKOXg3HLLkr5ffj1he9M61hJUg3I3xoCA2fdYBc0zna5AuMnaP13ZHIZpRzsUP
+ f8CQ==
+X-Gm-Message-State: AOJu0YzkeZZWHEwj/a0/x4YKYjtqoGAFe/fKxYAnsSmxN0E5SDWm7RM+
+ nWZrH0cfr0IbtuPcuS5+3FQJas8A8/VPMpqZCFVEDsRfgtE7IcLMIv1hwo/5+7ENJE8=
+X-Gm-Gg: ASbGncvZtbXfq4Pwt2Vh7U9yHscOo+QdnDY+fPuFxaks+ggcqr25NVJx0Ht4fzVWx7n
+ dpWYio8rLVaq8qpumVpArLdBb6wfJGtbnFByM5TcK3FYfBNaO7uFQRtOe3ZXWI8zSXexQKvy2XJ
+ NmIfJfVFUqVvywCptFp7P+s8iapec05/vQyb3JhobmdytKBe+ZO2H4UWwz1ysQQuVPLzpX5z7x1
+ Py6+OOFaBbi/VwcB43yy1nECrLrUhhMYaWezS8M0sgfBQuwFfQLKn71JdqRIp0s5wdqzPOjw9w0
+ l00iTl1WCJgpCyIni6GpT7YJxWT9aGpzpZCSxGokKmT5ZpgFT7uok5c1VTElpwIOqsQSoRfykur
+ qUWBMvbPAfrF5IsZIyMVE0RIbZd42QeMHmaR9hwtEHniXI1ec2vT5V+KJdvPhvZxAiRB6
+X-Google-Smtp-Source: AGHT+IGS1fan/bbNgaXx7roOdebaGYj07l24w16AveTIMdm541JpQCe5P4IWZEoBUzjKk6LroWLanQ==
+X-Received: by 2002:a17:902:e78c:b0:248:a18e:200a with SMTP id
+ d9443c01a7336-248a19d6483mr14943095ad.10.1756292377015; 
+ Wed, 27 Aug 2025 03:59:37 -0700 (PDT)
+Received: from sun-virtual-machine.localdomain ([121.225.131.60])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-afeb167670esm290231866b.112.2025.08.27.03.46.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 27 Aug 2025 03:46:06 -0700 (PDT)
-Message-ID: <8ea04777-2251-49ca-9e3c-79c46d1cc870@linaro.org>
-Date: Wed, 27 Aug 2025 12:46:05 +0200
+ d9443c01a7336-2486fdc0ec8sm38835835ad.145.2025.08.27.03.59.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Aug 2025 03:59:36 -0700 (PDT)
+From: Ssunk <ssunkkan@gmail.com>
+To: u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
+ trini@konsulko.com, Takahiro.Kuwano@infineon.com,
+ marek.vasut+renesas@mailbox.org, pratyush@kernel.org,
+ Ssunk <ssunkkan@gmail.com>
+Subject: [PATCH] spi-nor: add support for XM25QH01D
+Date: Wed, 27 Aug 2025 18:58:54 +0800
+Message-Id: <20250827105854.10746-1-ssunkkan@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] power: qcom-rpmh-regulator: add support for pm6150l
-Content-Language: en-US
-To: Jens Reidel <adrian@mainlining.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250826233339.64077-1-adrian@mainlining.org>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250826233339.64077-1-adrian@mainlining.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,57 +97,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jens,
+Add support for the XMC XM25QH01D SPI NOR flash.
 
-On 27/08/2025 01:33, Jens Reidel wrote:
-> Provides the supplies for SD card on SM7150.
-> 
-> Signed-off-by: Jens Reidel <adrian@mainlining.org>
-> ---
->  drivers/power/regulator/qcom-rpmh-regulator.c | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
-> 
-> diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
-> index 954deca5ed7..ac63c50e1d4 100644
-> --- a/drivers/power/regulator/qcom-rpmh-regulator.c
-> +++ b/drivers/power/regulator/qcom-rpmh-regulator.c
-> @@ -493,6 +493,19 @@ static const struct rpmh_vreg_hw_data pmic5_pldo515_mv = {
->  	.supply_name	= _supply_name, \
->  }
->  
-> +static const struct rpmh_vreg_init_data pm6150l_vreg_data[] = {
-> +	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_pldo_lv,   "vdd-l1-l8"),
-> +	RPMH_VREG("ldo4",   "ldo%s4",  &pmic5_pldo,      "vdd-l4-l5-l6"),
+This device has 1Gbit (128MB) capacity, with 64KB sectors and
+supports 4KB erase, dual and quad read modes, and 4-byte opcodes.
+Datasheet link: https://www.xmcwh.com/uploads/958/XM25QH01D_Ver1.0.pdf
 
-Any reason you skipped ldo2/3? It would be nice to include them for
-completeness.
+Signed-off-by: Ssunk <ssunkkan@gmail.com>
+---
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Kind regards,> +	RPMH_VREG("ldo5",   "ldo%s5",  &pmic5_pldo,
-"vdd-l4-l5-l6"),
-> +	RPMH_VREG("ldo6",   "ldo%s6",  &pmic5_pldo,      "vdd-l4-l5-l6"),
-> +	RPMH_VREG("ldo7",   "ldo%s7",  &pmic5_pldo,      "vdd-l7-l11"),
-> +	RPMH_VREG("ldo8",   "ldo%s8",  &pmic5_pldo,      "vdd-l1-l8"),
-> +	RPMH_VREG("ldo9",   "ldo%s9",  &pmic5_pldo,      "vdd-l9-l10"),
-> +	RPMH_VREG("ldo10",  "ldo%s10", &pmic5_pldo,      "vdd-l9-l10"),
-> +	RPMH_VREG("ldo11",  "ldo%s11", &pmic5_pldo,      "vdd-l7-l11"),
-> +	{}
-> +};
-> +
->  static const struct rpmh_vreg_init_data pm8150_vreg_data[] = {
->  	RPMH_VREG("ldo13",  "ldo%s13", &pmic5_pldo,      "vdd-l13-l16-l17"),
->  	{}
-> @@ -705,6 +718,10 @@ static int rpmh_regulators_bind(struct udevice *dev)
->  }
->  
->  static const struct udevice_id rpmh_regulator_ids[] = {
-> +	{
-> +		.compatible = "qcom,pm6150l-rpmh-regulators",
-> +		.data = (ulong)pm6150l_vreg_data,
-> +	},
->  	{
->  		.compatible = "qcom,pm8150-rpmh-regulators",
->  		.data = (ulong)pm8150_vreg_data,
-
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 0383175beb5..330ab77ee5d 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -603,6 +603,7 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QH512C", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
++	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ #endif
+ #ifdef CONFIG_SPI_FLASH_XTX
+ 	/* XTX Technology Limited */
 -- 
-// Casey (she/her)
+2.34.1
 
