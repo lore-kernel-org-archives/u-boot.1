@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F702CA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 19:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1521CA0EFF
+	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 21:55:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7096D831B4;
-	Wed, 27 Aug 2025 21:13:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E8F3831B4;
+	Wed, 27 Aug 2025 23:55:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hefring.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mEcbuxgy";
+	dkim=pass (2048-bit key; unprotected) header.d=hefring-com.20230601.gappssmtp.com header.i=@hefring-com.20230601.gappssmtp.com header.b="hASnlZDD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE00B831BB; Wed, 27 Aug 2025 21:13:44 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 08456831BB; Wed, 27 Aug 2025 20:27:12 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9AED83106
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 21:13:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC04983106
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 20:27:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=hefring.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-55f3533fd05so221726e87.0
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 12:13:42 -0700 (PDT)
+ spf=none smtp.mailfrom=ben.wolsieffer@hefring.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7f722cb35c4so22428685a.3
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 11:27:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756322022; x=1756926822; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kCOPE8/4+2oRdmAtmUPNcEq1G/ntyiLj4HICRnu0L9Q=;
- b=mEcbuxgym9R8X72CMB1iDp//7R5C4pwPLZh/VDrmosLnlGPnlKObA1W+E5kq1ACT+j
- HGyglYfqM1bcUk5Hi5A2ftHT1Xs+JC81d9sTA5tW6diD2vX3DFz8uvhEpQ/UHrJ5Ivcp
- iV/91K7VrFgO/aLLwDocpD57BjRiTSI+azV5N7nFHfw6Go1S6i6xmcAvgjPTjPcwq6XH
- va3DaBLnefgD7sOE7dneRocjqI3xmy0srmGVF9Rj2P10syCovBS4XuLMX/n6I+UIyB3Y
- kknTIGF0J0jjZqMBK+oMLu3Cfs/RKB3Q43fY/d7QqX3UhGvMSMza9S+gHpZUo5vIDDjZ
- kVbQ==
+ d=hefring-com.20230601.gappssmtp.com; s=20230601; t=1756319228; x=1756924028;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KcLfShX/m63O0YfnHjaNbjT6mjA+CF/ks49OLrPS60g=;
+ b=hASnlZDDHxaRQpXzbpzLgIDRwG9VEeU3DJEsjfpfrHV7n7yP1E/z1Uqa5Ypm2ZTzeB
+ 4gR29/zU5aZbXt3R9TeDmGIthXsYWk35xFn2D2H7cMsuizq50VZdNoiG9lMLSBq1JswB
+ 8gvNPisgpROeGxMZJtnd9KGn9gdx+3Ulrume6/nKjHWZKZnxzA9JIPjGIym6NjkYFuj3
+ 1fp87XKXDIBg6OZ9Px1ks8dC4bQIAzrK6x+Z5VhZklzVhIPjUVdvY5l0zb3tJDvilaEP
+ nWFNgOqNn1gP4jKYbZGY35EXu8oKXLGP53FN2wAQ3wN10AaWMeYUiXV6A5q2RmK1BF+x
+ sRAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756322022; x=1756926822;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kCOPE8/4+2oRdmAtmUPNcEq1G/ntyiLj4HICRnu0L9Q=;
- b=FEcGu19Nnd8MdlchzPSVMP75C19mKhlfk9lj0pciURC6thnzIwCAlKW+f/DsomnEER
- jJg8NByWRTrmJTAuXyhB6+zP2PeAPKpoIHrjbUGeHMBtsngB0vVG6cfJPilTho7zCTib
- 2JnyKSDP9cfzReM1mgng3ohGklztCxHZ10Bx1AJJF4yUonSwQ91MihdZp6ofP/daCz3r
- vEbHwT4OBPycBbuHsqC6dlQBwg5cyUHIGg7ObDi8IVvaMgm8d8MI6zVp/BU7ecdHGVzU
- UD+62Q7gG/xGUvfP98wkZo0RMf4/mLU5yFFMNBgkaCtpwdEbF41lV+0mBqstgf+J7ifm
- drPQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjkrkUxiFyPHIVwoZCNX0Sh4B0lDUhr4O+sF0e8L5fng9W6zdGA205/S3kwRL+JoGZMgmm/dw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0v3YIv8dLUPbeFj79PJXSo8EYe2YFrFS32II81tJ3qP487tIX
- 4TXDdYd/+jIjO9bslozgJ3Me3WiSza5iTLa9uRFP7cPNovAkQRSVg3fZnCCtDLRgQ3qGd5SD/cP
- vZ7E+zi0cWXEVg1atbe2798LwlyRflX4=
-X-Gm-Gg: ASbGnctOGuw5JAFH7sygehD4e341lUCAIARkxICZsFpbywlTCy6pneNJe0n8RoLGpIB
- MYvS2Lu1iliC+VYVi4gGR0BnqWte8SGS/5MNL5qdbwhftsnCFRW66t3KQIs1ABI2Oaupnr4ZD1i
- 8vA8n6WaiZ0CKFqmb98x4waa4nH/RkL7HuNiOsr+Plofkle3ogjN1OgTcm3LtCcJEGH5inBdhPN
- kI6VsIO62LxVDDge2p8KP227UD1yiyKxhyu1LI=
-X-Google-Smtp-Source: AGHT+IE04e98icrH2tsjX/FYs5j4vWiOguj33yriR2vp/BA/cEJlUnKVyEtinUxazUTw7UlON8o1sXBMv9UO6eDKojI=
-X-Received: by 2002:a05:6512:3d9e:b0:55f:43ab:b20d with SMTP id
- 2adb3069b0e04-55f43abb648mr4259024e87.35.1756322021734; Wed, 27 Aug 2025
- 12:13:41 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1756319228; x=1756924028;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KcLfShX/m63O0YfnHjaNbjT6mjA+CF/ks49OLrPS60g=;
+ b=CT1IhcBgexDTsEOEvQZL9TpxU56Y/SY0lP72NAqRxNqM2CVUQxYDb217l4y778Bjn4
+ hAIwfR26WkAzobE4PhM77ixD3eampdzUKySXP9jchp+xtGyOM9cvyothnJU0RMlWUF5R
+ 2uLlZi326kpyMZl4tfxmSffPPHs5qvdy083Ds26mEDFZeXLwaxAoaTNKk/TEtXCbJeGJ
+ pvf8vH54SvOmAWafN/th9aE9MAl6w+kmn9mWd7YZT894MhD1ACrqHl9kqV82pAiHdKl4
+ C9zVYxJyL8yvrNgCnS4c0XqVHU7Y/BQhXw60tiJsUBsxE5mCxTL07Ac9Ri30I3fd4NGI
+ 7Vkw==
+X-Gm-Message-State: AOJu0YzWRxpldEYiad399yMRckWwBDyfNZ2gwqC0blNa6nTvF6qQCktm
+ 2OuyOItraHJYxqervGJnIZygGreLviZchwBMLTvXet4/lK1fTSKUsSqp30qj4bLAasRdk7wkDIP
+ VUQi6
+X-Gm-Gg: ASbGnctVZlhu+Pk21p8eSR1yRUnZNMi+a6c76+WwQLW0abjzMdjFT4gwWP8Z1V3QmmZ
+ 7HB9PldLuHl4MOu7fikqqJk4kaKhAlzruQGiyhHHUWUb2STt8E9FCjtiBvrGmdVAo9I4GOFLwKN
+ xJHUg0mgexCVTOiIYwOoMih/DrM8oFbeKYBQJIQ5U8JVB5FcSkQo0+6id3GllCwhjBPgJd43G8t
+ eLm8MXf3AE1/O7FNz62Oy6oY69ZGGhAvMOQlgXmMg2iMSjwQoDvWaGN8qXQrn4H1lOysoQFoiuu
+ fSn0epDj+UAlbSKDKtzN7Pq5fDe1UWjudvQQMVhbhhJfm+M3TfrW/qD0ushKw6bUd2kXKvCFqTm
+ pEaQJw1IPt9D5m9CIPB4O3yx2VFvPEcSER3vrc8gfiWzz6NZnpbfgGUnx6A==
+X-Google-Smtp-Source: AGHT+IEBiUK3mOHtDmZlN4xxN5C/EpmWZQgI0r3B3e94feSm+KJbblT7FMaEOyJxCXx4xsSAW50klw==
+X-Received: by 2002:a05:620a:414d:b0:7f9:d31c:784 with SMTP id
+ af79cd13be357-7f9d31c10camr6881785a.51.1756319228478; 
+ Wed, 27 Aug 2025 11:27:08 -0700 (PDT)
+Received: from dell-xps-15-9500.lan ([2601:18c:8002:3d40:f314:c442:b04f:971c])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7ebee415f6dsm930315185a.27.2025.08.27.11.27.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Aug 2025 11:27:07 -0700 (PDT)
+From: Ben Wolsieffer <ben.wolsieffer@hefring.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ben Wolsieffer <ben.wolsieffer@hefring.com>
+Subject: [PATCH] net: designware: avoid regulator enable failure
+Date: Wed, 27 Aug 2025 14:27:05 -0400
+Message-ID: <20250827182705.64488-1-ben.wolsieffer@hefring.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250827031156.109432-1-hal.feng@starfivetech.com>
-In-Reply-To: <20250827031156.109432-1-hal.feng@starfivetech.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 27 Aug 2025 16:13:30 -0300
-X-Gm-Features: Ac12FXxMjgWge6AWe_yKGbahPyBtPMRrUedLReWj2c_kuG3g6FnF0Ruf_8VQsEA
-Message-ID: <CAOMZO5C4bMcHWo576rFdJXtwXD_Ars7cQob_KS+3Xxof5-EMLg@mail.gmail.com>
-Subject: Re: [PATCH v1] pcie: starfive: Fix the incorrect use of dev_err()
-To: Hal Feng <hal.feng@starfivetech.com>
-Cc: Tom Rini <trini@konsulko.com>, Leo <ycliang@andestech.com>, 
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 27 Aug 2025 23:55:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,30 +99,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 27, 2025 at 11:26=E2=80=AFAM Hal Feng <hal.feng@starfivetech.co=
-m> wrote:
->
-> Use dev_info() instead of dev_err() when finishing the probe function.
->
-> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> ---
->  drivers/pci/pcie_starfive_jh7110.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/pci/pcie_starfive_jh7110.c b/drivers/pci/pcie_starfi=
-ve_jh7110.c
-> index 51aca7359ff..f2256307ab3 100644
-> --- a/drivers/pci/pcie_starfive_jh7110.c
-> +++ b/drivers/pci/pcie_starfive_jh7110.c
-> @@ -292,7 +292,7 @@ static int starfive_pcie_probe(struct udevice *dev)
->         if (ret)
->                 return ret;
->
-> -       dev_err(dev, "Starfive PCIe bus probed.\n");
-> +       dev_info(dev, "StarFive PCIe bus probed\n");
+Use regulator_set_enable_if_allowed() to avoid failure if regulator is
+shared between multiple devices.
 
-Or maybe remove this line.
+Signed-off-by: Ben Wolsieffer <ben.wolsieffer@hefring.com>
+---
+ drivers/net/designware.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-We don't need drivers stating that they probed successfully.
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index fce3ef910cb..b0979e621f6 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -894,7 +894,7 @@ int designware_eth_probe(struct udevice *dev)
+ 	if (ret) {
+ 		debug("%s: No phy supply\n", dev->name);
+ 	} else {
+-		ret = regulator_set_enable(phy_supply, true);
++		ret = regulator_set_enable_if_allowed(phy_supply, true);
+ 		if (ret) {
+ 			puts("Error enabling phy supply\n");
+ 			return ret;
+-- 
+2.50.1
 
-Probe errors are helpful to print; probe success is not.
