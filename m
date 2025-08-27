@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B56AACA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 17:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D947CA0EFF
+	for <u-boot@archiver.kernel.org>; Wed, 27 Aug 2025 18:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5F76831BB;
-	Wed, 27 Aug 2025 19:10:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id B11DA831B4;
+	Wed, 27 Aug 2025 20:28:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="eJmKJ2K4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cGjfGbeD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CCA2831BE; Wed, 27 Aug 2025 19:10:28 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8D1EA831B4; Wed, 27 Aug 2025 20:28:30 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7870A830F6
- for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 19:10:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 352CE83106
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 20:28:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0334b8dfa9=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57RFjqtH032180;
- Wed, 27 Aug 2025 19:10:02 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- avlwJY0WjF1QyXBDdB2q/Zkqabm6Evn+A0dvU006MIo=; b=eJmKJ2K4W/W73QV1
- e1bZXGpuzaj59I9DHfkwkjjPqsfnOjhHvGdAjL7EfnkBl8rDyw/xurOemUyWW4Z3
- 5oRw/KT/y3weNQyzCnnaY6oIc93xcSA0aUPjsMR7C0tpGJlsXdeMeLdhTSUXMUG7
- H/qMZc31gOEJmXsumBAC9lCWCu4iEVG+9qUEZgkuxkTGwTnUawNrNlKCvNxpDqma
- vgM2n+WWSaH+a+HP59X/b6cdDvzlej43xBoQyifIj6do4RI1jksFHhbhy6iUQQZz
- 5OpylT4HOuNBQn4ZhcPFxdEmdZDVsFqArPHf4zdsXVB8mDyDjigJRUxFt+J2moU8
- t3WiCw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48q5v098cd-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 27 Aug 2025 19:10:02 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 098EB4007A;
- Wed, 27 Aug 2025 19:08:44 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3BE44726F00;
- Wed, 27 Aug 2025 19:08:02 +0200 (CEST)
-Received: from [10.48.87.108] (10.48.87.108) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 27 Aug
- 2025 19:08:01 +0200
-Message-ID: <aa8d1d52-fe7e-4d67-a150-0d2b884f26f9@foss.st.com>
-Date: Wed, 27 Aug 2025 19:08:00 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-61c13125417so35697eaf.2
+ for <u-boot@lists.denx.de>; Wed, 27 Aug 2025 11:28:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1756319306; x=1756924106; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6igjtYF7G3/XEluEZ/ABRAwgOXvddv16ziwViwB+vR4=;
+ b=cGjfGbeDoQTqLUk7tCH8XySsIi9bi6GQ0Ob/R0MBarBAsJ6YCRQotD/Fpao53foCX9
+ 6xH6m7rqNKDkRK71xVt7X4tRznP0tRCoE3mX3D5BLTtHhK80q7hHl4h+hNPjRkVtDx5S
+ UFH3awBcMAQv8RWJUhm8s79LEP6lwU0mfJfvo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756319306; x=1756924106;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6igjtYF7G3/XEluEZ/ABRAwgOXvddv16ziwViwB+vR4=;
+ b=WP6Wh290uK0Y9s/GjMIJfzQ9ym8KFf6dg/0t8eAg3hkQbn0dxpNJS8dgqZhlSPMzLx
+ oTMjPpe6GKNbLhounLnd8k7b3sKJaeNNXWcSLfttdn7cvFiLpboXK179AXVoyRug2bXe
+ JKL5o45MoY9iru337xlG+IsCkB6lm9DQIg3t2TC7qkCvhMJsOr51gR13jlRL8BGwVZ5t
+ nhK5m9dsnHHPaNzFMefm7/AcCkiKJcCgQyd3MdMMe618Yu76NL3NICheKKckbVSXRvHI
+ IFbe61663zjT+AWvpgYOwq/el1Fh+BEYLHUXbj39wK4CccD4PYq9gNuoetDrsBvJfRps
+ jcBw==
+X-Gm-Message-State: AOJu0YwtVFlEdP2dc6E/+rAGTkcLe8TtiLNf+w64TEd4/81PxLTFDPYC
+ SqsXvQVh2ObcnsMFOID/ABur6zFOrI9bQNFUpJjvLBTVZ/AKDdyS8/l8IAjukssv+OY=
+X-Gm-Gg: ASbGnctMOHF5tPmj17revFSgi2pOgHq6SZ0i6Cw4U+/D1yKo8/6T6wTkGgqbnt6cXYS
+ T6ODMOdIofS5ew/K8QbwfQD4xzzQOsvHbkPrRYUfmg+wcF3Rs+feWCpfigB9RhfcubmwA1EJGcV
+ +2VpfrscRfIoHSZDvZM4nAdx4ufJrtfRqxzRpCN6MQGjUQiA9SiHRWOdg+KCgucyakSE7JWC0gx
+ 91gG01cAaqYzuv7M9hRjy6Fw+GEGqX5FfHskHXlorXDPjG2ae8LRHNJzIE/xIUFkuE9ZpQfgy5p
+ owAq8Yo9Rq5F1iiTyOyNJk+MF7j+RE6kr5eAB2iDocIHIdr0FdI4GYO6BjW4oxcKWAqdL6ZikEf
+ /pqJQqCAW6Al6tgCAXlgVxqc1MPq0RNNCT57fouux12yzlGdqUgI/IAG+
+X-Google-Smtp-Source: AGHT+IGUr/M+HXJ4aZSbrNzcjp3ECEqwH9V8H2IrG7cYKS9qj11jWXJz3pbD3bxXUH60DkxHjlNI4A==
+X-Received: by 2002:a05:6808:818f:20b0:437:b396:b931 with SMTP id
+ 5614622812f47-437b396cd45mr4035938b6e.20.1756319306230; 
+ Wed, 27 Aug 2025 11:28:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-314f7a24047sm3495656fac.9.2025.08.27.11.28.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Aug 2025 11:28:25 -0700 (PDT)
+Date: Wed, 27 Aug 2025 12:28:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Weijie Gao <weijie.gao@mediatek.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sky Huang <SkyLake.Huang@mediatek.com>
+Subject: Re: [PATCH v2 3/4] dt-bindings: mediatek: add doc for MediaTek
+ MT7987/MT7988 2.5Gb ethernrt PHY
+Message-ID: <20250827182822.GJ124814@bill-the-cat>
+References: <cover.1756283872.git.weijie.gao@mediatek.com>
+ <8c0d6997255a2bbc2e761ed457c51de653cc96c5.1756283872.git.weijie.gao@mediatek.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] clk: introduce of_clk_detect_critical helper
-To: Quentin Schulz <quentin.schulz@cherry.de>, Maxim Kochetkov
- <fido_max@inbox.ru>, Christian Marangi <ansuelsmth@gmail.com>
-CC: <u-boot@lists.denx.de>, <jonas@kwiboo.se>, <marex@denx.de>,
- <semen.protsenko@linaro.org>, <miquel.raynal@bootlin.com>,
- <patrice.chotard@foss.st.com>, <sjg@chromium.org>,
- <trini@konsulko.com>, <seanga2@gmail.com>, <lukma@denx.de>
-References: <20250812162946.892728-1-fido_max@inbox.ru>
- <689b6eb9.050a0220.d7261.4aab@mx.google.com>
- <9294dcae-42fa-45c2-962b-691fdaada13a@inbox.ru>
- <2ad54e51-96cb-4f42-85f3-6a9d606951dd@cherry.de>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <2ad54e51-96cb-4f42-85f3-6a9d606951dd@cherry.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.108]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-27_04,2025-08-26_01,2025-03-28_01
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BCznb8lXcIrkDi0x"
+Content-Disposition: inline
+In-Reply-To: <8c0d6997255a2bbc2e761ed457c51de653cc96c5.1756283872.git.weijie.gao@mediatek.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,291 +100,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 8/19/25 09:41, Quentin Schulz wrote:
-> Hi Maxim,
->
-> On 8/12/25 8:56 PM, Maxim Kochetkov wrote:
->> [You don't often get email from fido_max@inbox.ru. Learn why this is 
->> important at https://aka.ms/LearnAboutSenderIdentification ]
->>
->> 12.08.2025 19:41, Christian Marangi wrote:
->>> On Tue, Aug 12, 2025 at 07:29:46PM +0300, Maxim Kochetkov wrote:
->>>> This helper find clock-critiacl property in dts and assign
->>>
->>> clock-critiacl -> typo
->>
->>
->> Thanks. Will fix it in v2
->>
->>>
->>>> CLK_IS_CRITICAL flag to the clock.
->>>>
->>>> Signed-off-by: Maxim Kochetkov <fido_max@inbox.ru>
->>>> ---
->>>>   drivers/clk/clk-uclass.c | 17 +++++++++++++++++
->>>>   drivers/core/of_access.c | 22 ++++++++++++++++++++++
->>>>   include/clk.h            | 28 ++++++++++++++++++++++++++++
->>>>   include/dm/of_access.h   | 17 +++++++++++++++++
->>>>   4 files changed, 84 insertions(+)
->>>>
->>>> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
->>>> index 7262e89b512..4f35b90382f 100644
->>>> --- a/drivers/clk/clk-uclass.c
->>>> +++ b/drivers/clk/clk-uclass.c
->>>> @@ -835,6 +835,23 @@ struct clk *devm_clk_get(struct udevice *dev, 
->>>> const char *id)
->>>>      return clk;
->>>>   }
->>>>
->>>> +int of_clk_detect_critical(struct device_node *np, int index,
->>>> +                       unsigned long *flags)
->>>> +{
->>>> +    struct property *prop;
->>>> +    const __be32 *cur;
->>>> +    uint32_t idx;
->>>> +
->>>> +    if (!np || !flags)
->>>> +            return -EINVAL;
->>>> +
->>>> +    of_property_for_each_u32(np, "clock-critical", prop, cur, idx)
->>>> +            if (index == idx)
->>>> +                    *flags |= CLK_IS_CRITICAL;
->>>> +
->>>> +    return 0;
->>>> +}
->>>> +
->>>>   int clk_uclass_post_probe(struct udevice *dev)
->>>>   {
->>>>      /*
->>>> diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
->>>> index b11e36202c1..59dda3ae152 100644
->>>> --- a/drivers/core/of_access.c
->>>> +++ b/drivers/core/of_access.c
->>>> @@ -666,6 +666,28 @@ int of_property_read_string_helper(const 
->>>> struct device_node *np,
->>>>      return i <= 0 ? -ENODATA : i;
->>>>   }
->>>>
->>>> +const __be32 *of_prop_next_u32(struct property *prop, const __be32 
->>>> *cur,
->>>> +                           u32 *pu)
->>>> +{
->>>> +    const void *curv = cur;
->>>> +
->>>> +    if (!prop)
->>>> +            return NULL;
->>>> +
->>>> +    if (!cur) {
->>>> +            curv = prop->value;
->>>> +            goto out_val;
->>>> +    }
->>>> +
->>>> +    curv += sizeof(*cur);
->>>> +    if (curv >= prop->value + prop->length)
->>>> +            return NULL;
->>>> +
->>>> +out_val:
->>>> +    *pu = be32_to_cpup(curv);
->>>> +    return curv;
->>>> +}
->>>> +
->>>>   static int __of_root_parse_phandle_with_args(struct device_node 
->>>> *root,
->>>>                                           const struct device_node 
->>>> *np,
->>>>                                           const char *list_name,
->>>> diff --git a/include/clk.h b/include/clk.h
->>>> index f94135ff778..ea708f54fd5 100644
->>>> --- a/include/clk.h
->>>> +++ b/include/clk.h
->>>> @@ -589,6 +589,27 @@ bool clk_dev_binded(struct clk *clk);
->>>>    */
->>>>   ulong clk_get_id(const struct clk *clk);
->>>>
->>>> +/**
->>>> + * of_clk_detect_critical() - set CLK_IS_CRITICAL flag from Device 
->>>> Tree
->>>> + * @np: Device node pointer associated with clock provider
->>>> + * @index: clock index
->>>> + * @flags: pointer to top-level framework flags
->>>> + *
->>>> + * Detects if the clock-critical property exists and, if so, sets the
->>>> + * corresponding CLK_IS_CRITICAL flag.
->>>> + *
->>>> + * Do not use this function. It exists only for legacy Device Tree
->>>> + * bindings, such as the one-clock-per-node style that are outdated.
->>>> + * Those bindings typically put all clock data into .dts and the 
->>>> Linux
->>>> + * driver has no clock data, thus making it impossible to set this 
->>>> flag
->>>> + * correctly from the driver. Only those drivers may call
->>>> + * of_clk_detect_critical from their setup functions.
->>>> + *
->>>> + * Return: error code or zero on success
->>>> + */
->>>> +int of_clk_detect_critical(struct device_node *np, int index,
->>>> +                       unsigned long *flags);
->>>> +
->>>>   #else /* CONFIG_IS_ENABLED(CLK) */
->>>>
->>>>   static inline int clk_request(struct udevice *dev, struct clk *clk)
->>>> @@ -665,6 +686,13 @@ static inline ulong clk_get_id(const struct 
->>>> clk *clk)
->>>>   {
->>>>      return 0;
->>>>   }
->>>> +
->>>> +int of_clk_detect_critical(struct device_node *np, int index,
->>>> +                       unsigned long *flags)
->>>> +{
->>>> +    return 0;
->>>> +}
->>>> +
->>>>   #endif /* CONFIG_IS_ENABLED(CLK) */
->>>>
->>>>   /**
->>>> diff --git a/include/dm/of_access.h b/include/dm/of_access.h
->>>> index 44143a5a391..dba725498f5 100644
->>>> --- a/include/dm/of_access.h
->>>> +++ b/include/dm/of_access.h
->>>> @@ -405,6 +405,17 @@ int of_property_read_string_helper(const 
->>>> struct device_node *np,
->>>>                                 const char *propname, const char 
->>>> **out_strs,
->>>>                                 size_t sz, int index);
->>>>
->>>> +/*
->>>> + * struct property *prop;
->>>> + * const __be32 *p;
->>>> + * u32 u;
->>>> + *
->>>> + * of_property_for_each_u32(np, "propname", prop, p, u)
->>>> + *         printk("U32 value: %x\n", u);
->>>> + */
->>>> +const __be32 *of_prop_next_u32(struct property *prop, const __be32 
->>>> *cur,
->>>> +                           u32 *pu);
->>>> +
->>>>   /**
->>>>    * of_property_read_string_index() - Find and read a string from 
->>>> a multiple
->>>>    * strings property.
->>>> @@ -701,4 +712,10 @@ int of_remove_property(struct device_node *np, 
->>>> struct property *prop);
->>>>    */
->>>>   int of_remove_node(struct device_node *to_remove);
->>>>
->>>> +#define of_property_for_each_u32(np, propname, prop, p, u) \
->>>> +    for (prop = of_find_property(np, propname, NULL), \
->>>> +            p = of_prop_next_u32(prop, NULL, &u);           \
->>>> +            p; \
->>>> +            p = of_prop_next_u32(prop, p, &u))
->>>> +
->>>>   #endif
->>>> -- 
->>>
->>> I would split these of additional function to a separate commit also
->>> where they come from? They are ported from Linux Kernel?
->>
->> Ok, I will split it.
->> Yes these function are ported from Linux Kernel.
->>
->>>
->>> Also would be ideal to have some scenario where it's needed to 
->>> declare a
->>> clock in DT that is critical. Isn't that handled directly by the clock
->>> driver internally?
->>>
->>
->> Yes. Now we can use this property from DT by custom drivers to mark
->> critical clocks.
->>
->
-> How this is typically handled today is by hardcoding the clock that is 
-> critical in the SoC clock controller driver directly, c.f. 
-> https://lore.kernel.org/linux-rockchip/20241214224820.200665-1-heiko@sntech.de/ 
->
->
-> This is of course then forced-enabled for all boards based on this 
-> SoC. If that is something that isn't desirable, then we need to 
-> properly need to represent this clock in the Device Tree. You haven't 
-> really explained the real life example that would benefit from this. 
-> Is there one? What is it?
->
-> Finally, we do not accept Device Tree properties anymore if they 
-> aren't part of the Device Tree binding coming from the kernel, the 
-> Device Tree specification or the dt-schema. So it needs to go through 
-> those channels first before we can make use of this property here in 
-> U-Boot. Our ultimate goal is to have the exact same Device Tree for 
-> U-Boot than in the Linux kernel (and I assume even further than that, 
-> anything that requires DT use the same one across all SW stack).
->
-> Cheers,
-> Quentin
+--BCznb8lXcIrkDi0x
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Aug 27, 2025 at 04:55:54PM +0800, Weijie Gao wrote:
+> The MediaTek MT7987 and MT7988 platforms supports one built-in 2.5Gb
+> ethernet PHY through eth1 interface.
+>=20
+> This patch add documentation for configuring these PHYs.
+>=20
+> Signed-off-by: Sky Huang <SkyLake.Huang@mediatek.com>
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> ---
+> Changes in v2:
+> 1. rename "pd-disable" property to "half-en"
+> 2. rename "gbe-min-ipg-11-bytes" property to "gbe-min-ipg-11-bytes-en"
+> 3. rename "auto-downshift-disable" property to "auto-downshift-dis"
+> 4. add note for "retrain-dis" property
+> ---
+>  .../net/phy/mediatek,mt798x-i2p5ge-phy.txt    | 68 +++++++++++++++++++
+>  1 file changed, 68 insertions(+)
+>  create mode 100644 doc/device-tree-bindings/net/phy/mediatek,mt798x-i2p5=
+ge-phy.txt
 
-See Linux commit d56f8994b6fb
+What is the status of this binding in Linux? Thanks.
 
-it is a legacy feature for Linux side, not part of generic clock binding
+--=20
+Tom
 
-and no  used in Linux's device tree
+--BCznb8lXcIrkDi0x
+Content-Type: application/pgp-signature; name="signature.asc"
 
------------------------------------------------------------
+-----BEGIN PGP SIGNATURE-----
 
-Author: Lee Jones <lee@kernel.org>
-Date:   Thu Feb 11 13:19:11 2016 -0800
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaK9OQwAKCRAr4qD1Cr/k
+ClQ5APsF6yAsT065sHCoGS/rKFKm+pRdOOqMgPvUNzB/Mr9sigD+KqYzWuRwVujq
+2tgys6t2URYuCAkvBez1VkgmFY6cYwE=
+=qGPw
+-----END PGP SIGNATURE-----
 
-     clk: Provide OF helper to mark clocks as CRITICAL
-
-     This call matches clocks which have been marked as critical in DT
-     and sets the appropriate flag.  These flags can then be used to
-     mark the clock core flags appropriately prior to registration.
-
-     Legacy bindings requiring this feature must add the clock-critical
-     property to their binding descriptions, as it is not a part of
-     common-clock binding.
-
-     Cc: devicetree@vger.kernel.org
-     Signed-off-by: Lee Jones <lee.jones@linaro.org>
-     Reviewed-by: Stephen Boyd <sboyd@codeaurora.org>
-     Signed-off-by: Michael Turquette <mturquette@baylibre.com>
-     Link: 
-lkml.kernel.org/r/1455225554-13267-4-git-send-email-mturquette@baylibre.com
-
-Regards.
-
----------------------------------------------------------
-
-
-=> custom drivers never mark a clock critical ...
-
-       is a is a clock driver decision (common for all board, for 
-mandatory clock in SoC,
-
-       root clock or CPU clock for example = no need to be cutomized in 
-DT for each board)
-
-
-for information:  with CLK_CCF, this custom driver (device or board) can 
-enable a clock found
-
-in the device tree,  and its user counter become >1 (@enable_count),
-
-the clock is always enable for your use case (if enable/disabled are 
-correctly paired in other
-
-drivers and with activate CCF) .... and you have no need to set it 
-critical at SoC / Clock driver level
-
-
-Regards
-
-
-Patrick
-
-
-
-
-
+--BCznb8lXcIrkDi0x--
