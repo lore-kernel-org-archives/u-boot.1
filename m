@@ -4,70 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4594CA0EED
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 21:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84E26CA0EED
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 00:08:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CBD18328F;
-	Thu, 28 Aug 2025 23:45:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 93F8B83327;
+	Fri, 29 Aug 2025 02:08:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sima.ai
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JLkpeaqv";
+	dkim=pass (2048-bit key; unprotected) header.d=sima.ai header.i=@sima.ai header.b="YGUk4ItJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD32783327; Thu, 28 Aug 2025 23:44:58 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8F8E483327; Fri, 29 Aug 2025 00:55:41 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B993783192
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 23:44:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B47F8304F
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 00:55:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=sima.ai
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cCZgT5Mgfz9t3P;
- Thu, 28 Aug 2025 23:44:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756417493;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/ZYGGU6loOG5/nR3QhyE7w6TrW1Zh4zLTbAZsOdUKrY=;
- b=JLkpeaqv2Vo64ZTFsnXS330E5vrS+/QbL/p4sVV2AxyauPH73TSqmZ0GhqTyMyLgxOKyVj
- cShIVOy3SGeHatF+hoLq4hxoJKmCjP6I8R6t3rSiTCp1nfBwTB04CENpTaJr9tnZlt6geQ
- 0sYuORADqNxAJoGKuK6cjCh/56msnLIRYRmeIRs8ZvDJ2ECR1F3dPJ3iizCA49etwuX9SH
- QCpEt+8hdNkF3S55qKzl7JE3D7Ol2W7gy7gb+r++zptFU8amFkHi+OSaEflTE80BaBJflD
- MrDJ4tfDNs/BC3KbrMx9P9UkT0TaFQ3KUCIOzcgwKwpA164R26u/Pwxf5uuskQ==
-Message-ID: <83fd6db4-dc76-4f5d-9abf-9673b81eea14@mailbox.org>
-Date: Thu, 28 Aug 2025 23:44:50 +0200
+ spf=pass smtp.mailfrom=nikunj.kela@sima.ai
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-b4741e1cde5so258204a12.3
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 15:55:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sima.ai; s=google; t=1756421737; x=1757026537; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2R4wCHKBY3YQK43xzvfjWxSXRqB8MEqG2LSOUVELySo=;
+ b=YGUk4ItJZ+2p4cMkaWYhd8OH+nrlMhoKdAjcOBrYgQGRCTgJN7hXZMd3E/L/9TlWcv
+ 8INm1A2siVQsDyLZlft8ex4xIZe7whLijYLT0DhobXb0vFEDSF35bfvVMGS5sk7R0AZ8
+ Z27VNyVFsG7UffgKsQrGgme2plEfcXTFf//vNHSmRwPW3D7Ygb+z22Ops34FHKA0UaD5
+ ho9/Y37ttoBG8yLopVcolhosLQ5iVCg3FDW9BsxIX5zX3TwhYP8QDR6sVN2Zcxem6urL
+ e2egJ+bd29L37s/l/qMFrrmmiNLy8jxcO4gEP0KxoPfeN011YQJzRUg5mSx/fdbDhQry
+ Rz7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756421737; x=1757026537;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2R4wCHKBY3YQK43xzvfjWxSXRqB8MEqG2LSOUVELySo=;
+ b=BG2kYqxMib4TOxkc3hsD9bLJUzgP70z3hm1YPfqbJOl/T/ROOwdzZD5wvO9ARa4k6U
+ nXucB1yyQ8BN5lWUO/FMQtuwpTwSywTgryGC5y/N1oP7BCt2sx8S7k0tvkS/Af2Hdu1X
+ Nvii1GABCjSspAlDMEkCt1wkaVZ9Qe05yDGlKEdyVZdf/C8E/SSB2g3hzMG8z62uTnOM
+ EiBnrDpG8opXuIMg5WRVKarovuZ5LY7L4ZIcJrHVxKh3i/GoDCLjhKWi0F8wN/3eShrY
+ o70p9WPhY+9w4IJvDODf2jZjhuZ8xk7jtlm3lnDWCdxYOpdx8hO3pd7Uqyo1hOQJRBWh
+ w/KA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWX62obVXvAYUqMw6bpazOR9MFP0upl3AytH7+hMA6dDWVwcj7P7hYPjQFqEYA0UV80JQHTiyE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBs1g48/4w8Q6+ryDsUawWgIAWQzCoVtjKpdpLbr1+x0nvDhZL
+ 1LxxJliKZXm8eYc5wyYmbpfcDtljsU36cN0GJ7oOYvRBaRoP8QnzQgNlfxrTqIGJQ74=
+X-Gm-Gg: ASbGncvlV9q1hN9/jtXTtL7hBVmVWYN5G7H30A5hiJtxYxJ8Zz7HJQ+VvSGFrnXCYmX
+ 1/CStJEk21M7/23s9upZAyJ2A6GyK2sy1/qOuK1ks69nyYpWTI5Qsx5s31Si5dmwztkitB8OFwo
+ 6OlZf1w9FuSMlFOPhAz5DRWnKHLyf75P33qJNqpZGYyHc7yupGPDVjTQmhwUaL7E653CHuPy2vB
+ vMA2kluPc29iaSc7qHksgD+38uQj9LDipVjrE9qyXH9a5H76c1tHo/f2xcWxVxWApiguKIkCikq
+ YWNjpb6Wm5sMYbIziZOEpXhH0vKhiZI0m+BkYnUckB1mEAg7ZkdquOVSn0SxflYn0Z/W9CE8iJw
+ JZWrw66Ydkzqtet7feHl2otvO8qLJaEQT4F0sIEzH
+X-Google-Smtp-Source: AGHT+IFel4tClP6XCt0VXE6qqaRlAwIiwekSXzFa4njXMZr20o60OHaNTTTp50Q1yZf+YCRgKFZKtQ==
+X-Received: by 2002:a05:6a21:798f:b0:243:6cee:62a3 with SMTP id
+ adf61e73a8af0-2436cee6d16mr10818503637.6.1756421736784; 
+ Thu, 28 Aug 2025 15:55:36 -0700 (PDT)
+Received: from nikunj-kela-u22.eng.sima.ai ([205.234.21.7])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b4cd318d3d7sm444688a12.46.2025.08.28.15.55.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Aug 2025 15:55:36 -0700 (PDT)
+From: Nikunj Kela <nikunj.kela@sima.ai>
+To: joe.hershberger@ni.com,
+	rfried.dev@gmail.com
+Cc: boon.khai.ng@altera.com, u-boot@lists.denx.de,
+ Nikunj Kela <nikunj.kela@sima.ai>
+Subject: [PATCH v2] net: xgmac: Augment mdio read/write with cl-45 format
+ support
+Date: Thu, 28 Aug 2025 15:55:32 -0700
+Message-Id: <20250828225532.1147284-1-nikunj.kela@sima.ai>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
-To: Philip Oberfichtner <pro@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Walle <michael@walle.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-References: <20250807102436.452691-1-pro@denx.de>
- <20250807102436.452691-2-pro@denx.de>
- <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
- <20250807162115.GZ124814@bill-the-cat>
- <06dd9037-af3d-48a3-974e-80db481c7121@mailbox.org>
- <20250807201142.GC124814@bill-the-cat>
- <4813ce12-ad82-4170-999c-e5f816a42708@mailbox.org>
- <20250807232421.GD124814@bill-the-cat> <aJmuxlTEFT4R7HR_@antares>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <aJmuxlTEFT4R7HR_@antares>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: edd29c5172d5152f707
-X-MBO-RS-META: 5yskqo5ucwnptnhmraa8ct7ftcurejwk
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 29 Aug 2025 02:08:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,97 +100,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/11/25 10:50 AM, Philip Oberfichtner wrote:
-> On Thu, Aug 07, 2025 at 05:24:21PM -0600, Tom Rini wrote:
->> On Fri, Aug 08, 2025 at 01:15:45AM +0200, Marek Vasut wrote:
->>> On 8/7/25 10:11 PM, Tom Rini wrote:
->>>> On Thu, Aug 07, 2025 at 09:41:34PM +0200, Marek Vasut wrote:
->>>>> On 8/7/25 6:21 PM, Tom Rini wrote:
->>>>>> On Thu, Aug 07, 2025 at 03:41:38PM +0200, Marek Vasut wrote:
->>>>>>> On 8/7/25 12:24 PM, Philip Oberfichtner wrote:
->>>>>>>> CONFIG_HAS_BOARD_SIZE_LIMIT is obsolete, if we interpret the value
->>>>>>>> "zero" as "unlimited".
->>>>>>>
->>>>>>> This sentence makes no sense. Is the variable not obsolete if its value is
->>>>>>> non-zero ?
->>>>>>
->>>>>> This is phrased oddly, yes. How about:
->>>>>> By making the code treat a size limit of 0 as unlimited we no longer
->>>>>> need to guard asking about having a size limit on the platform.
->>>>>
->>>>> 0 shouldn't mean unlimited, that is just fragile ...
->>>>
->>>> That's a standard unix thing? ulimit -c 0 is unlimited.
->>>
->>> This is a really bad argument, because then the counter-argument is, that
->>> size = 0 is also a valid size and it shouldn't be conflated with SIZE_LIMIT
->>> validity.
->>>
->>> My take on this is, don't conflate size-limit "enabled/disabled" with
->>> size-limit "value" , these are two separate config options. Mixing them is
->>> not helping.
->>
->> I still think it's fine, but it's not worth arguing further over, and we
->> can just make sure to gate all of the symbols rather than 0-is-disabled.
-> 
-> The idea of treating a size limit of zero as unlimited has been common
-> practice in mainline U-Boot since 2019, where CONFIG_SPL_SIZE_LIMIT has
-> been introduced. The same logic has later been applied to TPL and VPL
-> size limits.
+Currently, clause-22 format is supported. This change adds
+support for clause-45 format.
 
-That still does not make it the correct approach.
+Signed-off-by: Nikunj Kela <nikunj.kela@sima.ai>
+---
+Changes in v2:
+	- Created separate function for configuring clause format
+[1]: https://patchwork.ozlabs.org/project/uboot/patch/20250510041200.2552981-1-nikunj.kela@sima.ai/
+---
+ drivers/net/dwc_eth_xgmac.c | 60 ++++++++++++++++++++++++-------------
+ drivers/net/dwc_eth_xgmac.h |  1 +
+ 2 files changed, 41 insertions(+), 20 deletions(-)
 
-> If we want to consistently stick to the HAS_*_SIZE_LIMIT approach, we'd
-> have to introduce four extra Kconfig options alongside
-> HAS_BOARD_SIZE_LIMIT:
-> 
-> 	CONFIG_HAS_UBOOT_WITH_SPL_SIZE_LIMIT
+diff --git a/drivers/net/dwc_eth_xgmac.c b/drivers/net/dwc_eth_xgmac.c
+index d29d871ea8c..ecb92d37ee0 100644
+--- a/drivers/net/dwc_eth_xgmac.c
++++ b/drivers/net/dwc_eth_xgmac.c
+@@ -140,9 +140,34 @@ static int xgmac_mdio_wait_idle(struct xgmac_priv *xgmac)
+ 				 XGMAC_TIMEOUT_100MS, true);
+ }
+ 
++static u32 xgmac_set_clause(struct xgmac_priv *xgmac, int mdio_addr, int mdio_devad,
++			    int mdio_reg, bool is_c45)
++{
++	u32 hw_addr;
++	u32 val;
++
++	if (is_c45) {
++		val = readl(&xgmac->mac_regs->mdio_clause_22_port);
++		val &= ~BIT(mdio_addr);
++		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
++		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
++			   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C45P_MASK);
++		hw_addr |= mdio_devad << XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
++	} else {
++		/* Set clause 22 format */
++		val = BIT(mdio_addr);
++		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
++		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
++			   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
++	}
++
++	return hw_addr;
++}
++
+ static int xgmac_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 			   int mdio_reg)
+ {
++	bool is_c45 = (mdio_devad != MDIO_DEVAD_NONE);
+ 	struct xgmac_priv *xgmac = bus->priv;
+ 	u32 val;
+ 	u32 hw_addr;
+@@ -159,19 +184,16 @@ static int xgmac_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 		return ret;
+ 	}
+ 
+-	/* Set clause 22 format */
+-	val = BIT(mdio_addr);
+-	writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+-
+-	hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+-		   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
++	hw_addr = xgmac_set_clause(xgmac, mdio_addr, mdio_devad, mdio_reg, is_c45);
+ 
+ 	val = xgmac->config->config_mac_mdio <<
+ 	      XGMAC_MAC_MDIO_ADDRESS_CR_SHIFT;
+ 
+-	val |= XGMAC_MAC_MDIO_ADDRESS_SADDR |
+-	       XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_READ |
+-	       XGMAC_MAC_MDIO_ADDRESS_SBUSY;
++	if (!is_c45)
++		val |= XGMAC_MAC_MDIO_ADDRESS_SADDR;
++
++	val |= XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_READ |
++		XGMAC_MAC_MDIO_ADDRESS_SBUSY;
+ 
+ 	ret = xgmac_mdio_wait_idle(xgmac);
+ 	if (ret) {
+@@ -203,6 +225,7 @@ static int xgmac_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ static int xgmac_mdio_write(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 			    int mdio_reg, u16 mdio_val)
+ {
++	bool is_c45 = (mdio_devad != MDIO_DEVAD_NONE);
+ 	struct xgmac_priv *xgmac = bus->priv;
+ 	u32 val;
+ 	u32 hw_addr;
+@@ -219,21 +242,18 @@ static int xgmac_mdio_write(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 		return ret;
+ 	}
+ 
+-	/* Set clause 22 format */
+-	val = BIT(mdio_addr);
+-	writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+-
+-	hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+-		   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
+-
+-	hw_addr |= (mdio_reg >> XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) <<
+-		    XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
++	hw_addr = xgmac_set_clause(xgmac, mdio_addr, mdio_devad, mdio_reg, is_c45);
+ 
+ 	val = (xgmac->config->config_mac_mdio <<
+ 	       XGMAC_MAC_MDIO_ADDRESS_CR_SHIFT);
+ 
+-	val |= XGMAC_MAC_MDIO_ADDRESS_SADDR |
+-		mdio_val | XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_WRITE |
++	if (!is_c45) {
++		hw_addr |= (mdio_reg >> XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) <<
++			    XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
++		val |= XGMAC_MAC_MDIO_ADDRESS_SADDR;
++	}
++
++	val |=	mdio_val | XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_WRITE |
+ 		XGMAC_MAC_MDIO_ADDRESS_SBUSY;
+ 
+ 	ret = xgmac_mdio_wait_idle(xgmac);
+diff --git a/drivers/net/dwc_eth_xgmac.h b/drivers/net/dwc_eth_xgmac.h
+index 259f815f3f2..90c2e22997c 100644
+--- a/drivers/net/dwc_eth_xgmac.h
++++ b/drivers/net/dwc_eth_xgmac.h
+@@ -109,6 +109,7 @@ struct xgmac_mac_regs {
+ #define XGMAC_MAC_MDIO_ADDRESS_SBUSY		BIT(22)
+ #define XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK	GENMASK(4, 0)
+ #define XGMAC_MAC_MDIO_DATA_GD_MASK		GENMASK(15, 0)
++#define XGMAC_MAC_MDIO_REG_ADDR_C45P_MASK	GENMASK(15, 0)
+ 
+ /* MTL Registers */
+ 
+-- 
+2.34.1
 
-What does this one do ?
-
-> 	CONFIG_HAS_SPL_SIZE_LIMIT
-> 	CONFIG_HAS_TPL_SIZE_LIMIT
-> 	CONFIG_HAS_VPL_SIZE_LIMIT
-
-This is fine by me.
-
-> Furthermore, the extra lines of code in the toplevel Makefile, which
-> could otherwise be removed:
-> 
-> 	ifneq ($(CONFIG_BOARD_SIZE_LIMIT),)
-> 	BOARD_SIZE_CHECK= @ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
-> 	else
-> 	BOARD_SIZE_CHECK =
-> 	endif
-> 
-> 	ifneq ($(CONFIG_HAS_UBOOT_WITH_SPL_SIZE_LIMIT),0x0)
-> 	UBOOT_WITH_SPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT)
-> 	else
-> 	UBOOT_WITH_SPL_SIZE_CHECK =
-> 	endif
-> 
-> 	ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
-> 	SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
-> 	else
-> 	SPL_SIZE_CHECK =
-> 	endif
-> 
-> 	ifneq ($(CONFIG_TPL_SIZE_LIMIT),0x0)
-> 	TPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
-> 	else
-> 	TPL_SIZE_CHECK =
-> 	endif
-> 
-> 	ifneq ($(CONFIG_VPL_SIZE_LIMIT),0x0)
-> 	VPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_VPL_SIZE_LIMIT))
-> 	else
-> 	VPL_SIZE_CHECK =
-> 	endif
-
-This code is already in the U-Boot Makefile .
-
-Maybe tools/spl_size_limit.c could be somehow extended to deduplicate 
-the above ?
-
-> Is it really worth adding this much of extra code?
-Yes, because 0 does not mean unlimited .
