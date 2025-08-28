@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 820A3CA0EED
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 14:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C48CA0EED
+	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 14:03:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D20C2833F1;
-	Thu, 28 Aug 2025 16:03:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 424A883403;
+	Thu, 28 Aug 2025 16:03:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="WppcC+Pa";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="WppcC+Pa";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="ogzM3K7u";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="ogzM3K7u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF43E83335; Thu, 28 Aug 2025 15:08:06 +0200 (CEST)
+ id 7260083327; Thu, 28 Aug 2025 15:08:08 +0200 (CEST)
 Received: from DU2PR03CU002.outbound.protection.outlook.com
  (mail-northeuropeazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F3B383323
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 15:08:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 662E08328F
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 15:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Said.Nasibov@arm.com
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=ayLdEIDsadq1afjmR4HXqGdYVpy6iHWv/qT6qiPZf6DvgFoSzHV+ubCtVghs2v0aaTiGHH5gOjfUUrO2a8rg/KeXpVDRtGE2VaHiQSW4mfHNgoYzC1IGM0lgvCkQSGR1u+qejBQ6xgc6SY/WFH5lPM9JZENVH9DNxAwvgm+NomhPwhVzAjeNN+60FettOmmQdwc7PcAmOYB4zx9970i6K8NvWYtVrEkFAAzbjd51klxhzbFFNnJPeDXJSCSQuvxZxZBTSJ/fUEAo7+1Fx6ZlshNJtWXprsVREZbl81NANLdG7okQ25kN7PI2U3ogQfcJAcw7dWXe1as1TETTesMWtw==
+ b=nYQydN5WvnUmABhQeruYav6l7VJlv+Hwxl94PKvZc0OjGrlYK7+bssSzVJyNg32V26bPMxX2bwC+jaQ/WFKMyJvUXNZfgCUV5PRdjq+5WgmwHQALjRyAWylVRrl/kNrEsc7fzGLaSaPXUvsJaysjBVq43Ag+mUEiWf4ebcpIlNH6k543uVUJCc741vaBnjPDE8dwBFxJEOUzhXpelqtKLWJjFkQ5c93Jl0YZZpVCeYy61etCdrBGb/ZHlgModhpFKUi102KgOsjVkRpN7Me4Ld9bYQiQOTn7xjVPbnBNJ2ETYTR5y1I7Cqve2QDvUjEIpwqfttgZSCoyn/UZHHMr4w==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dcpZm3RbwxE95lFL9Y7htgUa9iEJ3ih6wGYa14hgXIY=;
- b=YHyl2aVt44AXW3R0WRgT1GgiKvxLR34X48+Lo5H6mwIg/yLJjQkZM4qwPCDV/zCIqbAByI7TY4g8d/ia1HZcNA9tEy0+3gTKFiJdt0ch1chN7lZXt4sMJGT2LNoG2ZALjJPl2V5cKmPOoFaVQreZcDoWQurRuIm0XA8nVCneEUJUFeWQbkIN10d6w3KGyuEfVVkraR61u/0NgNhmahLhgzcu5LeMOZTQg+jESEKBLXQqpTvOQNA/0lG4N8Pu93cQv7XraDDGsSiu3G2H+/k6Bfyg2hNQiUtBw0v3+mvpz+Vg5Szn89ytY4QlKsyY+2Qv8KZWkCXlxkWuJEBS0z4eXQ==
+ bh=Plvc+PcfxbdWrXdrPsR6KI7duk7ELkVkqxbv+sC80Rg=;
+ b=PUSWLawVHqehfrgBrAqznqwpoII34xd+QIh0kWmL+m0Ind2FJ6xPCBogw9De943ecpB4LZDHMS3WWS+QfsLgcHCA9Elx0gpOnf1dr5Pe7XfnrojLUbmc5Xiz06WxixO4uYvf/iRQQMwt4Vi1F6JFvUHPxsMfj4Ab4jlvkoJEfPPXTgDsN5xFo6rqdYJKxI+tzvk5Rzjg+AukLxFXIXY+ONGhYJT1LbA306go6uRZIN0KYnYhj9NaVwvxBpwlKxvCM2fqAKp3Af/EpoYb43FMN6PGyEhSDrMWcrNHDPysA3Y5Zz5S/r+cMMvzKOOVvFX/2W6RK6DGaUvTyeSggIE0DA==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  4.158.2.129) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -42,18 +42,18 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  spf=[1,1,smtp.mailfrom=arm.com] dmarc=[1,1,header.from=arm.com])
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dcpZm3RbwxE95lFL9Y7htgUa9iEJ3ih6wGYa14hgXIY=;
- b=WppcC+Pa1jcKtZQoP1eoAnoQ9v2nHORqVDW52hZGaQddnFTugOY4kOVNKt4TDx2eu0FqSDm1cKhKyorHNb/1OEATYV0jVlXtgbl1AypX/+21yGm89RihV5fHxPgjhFJEDgugB0kvES5InCZeGu/SOEyEq+exkQ94hXk8SktEMdo=
-Received: from PR3P193CA0008.EURP193.PROD.OUTLOOK.COM (2603:10a6:102:50::13)
- by AS2PR08MB8746.eurprd08.prod.outlook.com (2603:10a6:20b:55e::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.20; Thu, 28 Aug
- 2025 13:07:59 +0000
-Received: from AMS0EPF000001AA.eurprd05.prod.outlook.com
- (2603:10a6:102:50:cafe::22) by PR3P193CA0008.outlook.office365.com
- (2603:10a6:102:50::13) with Microsoft SMTP Server (version=TLS1_3,
+ bh=Plvc+PcfxbdWrXdrPsR6KI7duk7ELkVkqxbv+sC80Rg=;
+ b=ogzM3K7utTaHIKXZZej4fS17hl+lgG39FCOA2u/ZXurIqnRKg/dOB4Qp74WpxTT734HWd32tPHoFEs3Pz4X0a2mpJTCDX0+FO29UiKX27o23CodBmE3HYIRyRa7TLx2a3PDprDwAbW6M+nnoMJDelCDk4WffSlH1uKwe+MXsgXI=
+Received: from AS4P190CA0018.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:5d0::11)
+ by AS8PR08MB6101.eurprd08.prod.outlook.com (2603:10a6:20b:29a::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.15; Thu, 28 Aug
+ 2025 13:08:04 +0000
+Received: from AM3PEPF0000A795.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5d0:cafe::b) by AS4P190CA0018.outlook.office365.com
+ (2603:10a6:20b:5d0::11) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.17 via Frontend Transport; Thu,
- 28 Aug 2025 13:07:59 +0000
+ 28 Aug 2025 13:08:04 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=arm.com;dmarc=pass action=none header.from=arm.com;
@@ -61,34 +61,34 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  4.158.2.129 as permitted sender) receiver=protection.outlook.com;
  client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS0EPF000001AA.mail.protection.outlook.com (10.167.16.150) with Microsoft
+ AM3PEPF0000A795.mail.protection.outlook.com (10.167.16.100) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.11
- via Frontend Transport; Thu, 28 Aug 2025 13:07:58 +0000
+ via Frontend Transport; Thu, 28 Aug 2025 13:08:03 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T58MMKDG99bt9RQMZV59RGwmqSsPZrnON1clXhjAY3Ab1xJjjaRLEZVlbjbdOQ0kvk54STpBPUseKT62yPakUdnAosYJPE4UauHz17FssqB+eDQG6mKvI01KKukfKl3jVJqgXG6ilBPJhSlu4kq9uwI2U1tMXoiGKZm5a8/5SnrUPuBJF9aT59xb8XFqgRnJSnVl/HJ8fC01EwGymsyz6IjIzTH5iBbkQgLXItnnZYclIG13KNpWYqE57vGYGPEi2JZTrkuv7iaunOULbXmoWC4VwOcyqUmbLAMmsINK35Xx0uuf8MOwMX3jeB/GLh5ZTkuX9PDmfQXtnfmxiSEBUQ==
+ b=p6WyiCDFpzSNZsjKyhyafIZ5GcT7R5ivGI+v3yElg6TRVck+OKPLfwPMezeDIbmlaWyWuLPIlR75G2LynhnaomKkv5AMP8f8zaByOmtV6aLpbUs55AcQ1+rPOWVhHbYbtpQo2RXbPB1gUXGqeN2Ehkd/Ur7PHSsYXby/MtpR7xyJN/XPkDQ4QKi8Xqb63AzadiDi/4gSwE/vnoDS+8cBqgDLRZ2f1AmgM3Ih9nAv9UvOqYFBKTNzWI2Z0qGCXrnKZS+dpS2PrmrBsMP0hrqS9NjCnX9cGs1R3cXtRJJrFe/PGt7yWqyxEBGRgrTQwsnR3AfNdztYIT8vwPqWLel8MA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dcpZm3RbwxE95lFL9Y7htgUa9iEJ3ih6wGYa14hgXIY=;
- b=km+hiCnP6ditVi3XBGvAdP7DJGhSLMQtHo93RBPcFbups6n0F+2mvNSP4ere8Hv9Buj5LHv9BA+TMVco/hGKsJxiDhqOYHkuz9MC3IO87a64f3uF21ljt0DVAj2X84bhZ6YMxML8iRjgoRDUZWFYv9KVajN7a2UrEDU3X9PfXHHlchuZsrMS+yh3EFAmTYPUoWyH5r/oX4oJfTEFhBEniaBPA71ky1H1rCG3wG7DLcc3EeSBnm/YcTuCudsnolPxX1aVgG3yYVCN2lc0JzefJ+3bQQ+H1iymGj23OELqJ5DhecuQcires6o//MnpbMznOVBrk1JZdqfPkw4B7Od/Ww==
+ bh=Plvc+PcfxbdWrXdrPsR6KI7duk7ELkVkqxbv+sC80Rg=;
+ b=bJPyHwHEBVzTe8XsR5xwr5fFzPNzGC/ysqZQ/CR+lG4xej9KRmtU387rrO5eJ9cbKq7ubAvPxaD7Sa3lD/+hHuB5ztBGDkVvu7ydwhPL/ZHRYmmQt7+d8Fay9Hrb6c4miEzOlaclkMARAeyD5jrgeqBTRvSENI2p+/w9WMtVikciEjJO9Ti10RFMf5iTZNSrLuUwzMcc6ndgw18zEuh8NQI1YTPXVTIDt1Oh1baBaODOxg8Wp+TtTko3/6a4FqvCssuBcbycAvVkpSdk/xD/jblGFs0EdHCpKL+s6MfK1ksbyJSq4f7IxnWYpO3aJBWKhQQ4bS9wslEPupn3dwc0ZQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  172.205.89.229) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dcpZm3RbwxE95lFL9Y7htgUa9iEJ3ih6wGYa14hgXIY=;
- b=WppcC+Pa1jcKtZQoP1eoAnoQ9v2nHORqVDW52hZGaQddnFTugOY4kOVNKt4TDx2eu0FqSDm1cKhKyorHNb/1OEATYV0jVlXtgbl1AypX/+21yGm89RihV5fHxPgjhFJEDgugB0kvES5InCZeGu/SOEyEq+exkQ94hXk8SktEMdo=
-Received: from AM6P193CA0086.EURP193.PROD.OUTLOOK.COM (2603:10a6:209:88::27)
- by AS8PR08MB7837.eurprd08.prod.outlook.com (2603:10a6:20b:528::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.21; Thu, 28 Aug
- 2025 13:07:26 +0000
-Received: from AM4PEPF00027A6C.eurprd04.prod.outlook.com
- (2603:10a6:209:88:cafe::6) by AM6P193CA0086.outlook.office365.com
- (2603:10a6:209:88::27) with Microsoft SMTP Server (version=TLS1_3,
+ bh=Plvc+PcfxbdWrXdrPsR6KI7duk7ELkVkqxbv+sC80Rg=;
+ b=ogzM3K7utTaHIKXZZej4fS17hl+lgG39FCOA2u/ZXurIqnRKg/dOB4Qp74WpxTT734HWd32tPHoFEs3Pz4X0a2mpJTCDX0+FO29UiKX27o23CodBmE3HYIRyRa7TLx2a3PDprDwAbW6M+nnoMJDelCDk4WffSlH1uKwe+MXsgXI=
+Received: from DB8PR06CA0056.eurprd06.prod.outlook.com (2603:10a6:10:120::30)
+ by AS8PR08MB9041.eurprd08.prod.outlook.com (2603:10a6:20b:5b1::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.14; Thu, 28 Aug
+ 2025 13:07:28 +0000
+Received: from DB3PEPF0000885D.eurprd02.prod.outlook.com
+ (2603:10a6:10:120:cafe::52) by DB8PR06CA0056.outlook.office365.com
+ (2603:10a6:10:120::30) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.17 via Frontend Transport; Thu,
- 28 Aug 2025 13:07:26 +0000
+ 28 Aug 2025 13:07:28 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 172.205.89.229)
  smtp.mailfrom=arm.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=arm.com;
@@ -96,17 +96,17 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  172.205.89.229 as permitted sender) receiver=protection.outlook.com;
  client-ip=172.205.89.229; helo=nebula.arm.com; pr=C
 Received: from nebula.arm.com (172.205.89.229) by
- AM4PEPF00027A6C.mail.protection.outlook.com (10.167.16.90) with Microsoft
+ DB3PEPF0000885D.mail.protection.outlook.com (10.167.242.8) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9073.11 via Frontend Transport; Thu, 28 Aug 2025 13:07:26 +0000
-Received: from AZ-NEU-EXJ01.Arm.com (10.240.25.132) by AZ-NEU-EX05.Arm.com
- (10.240.25.133) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9073.11 via Frontend Transport; Thu, 28 Aug 2025 13:07:28 +0000
+Received: from AZ-NEU-EXJ01.Arm.com (10.240.25.132) by AZ-NEU-EX06.Arm.com
+ (10.240.25.134) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 28 Aug
- 2025 13:07:25 +0000
+ 2025 13:07:27 +0000
 Received: from e121818.cambridge.arm.com (10.1.199.38) by AZ-NEU-EXJ01.Arm.com
  (10.240.25.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 28 Aug
- 2025 13:07:24 +0000
+ 2025 13:07:26 +0000
 From: Said Nasibov <said.nasibov@arm.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <andre.przywara@arm.com>,
@@ -119,9 +119,9 @@ CC: <trini@konsulko.com>, <sjg@chromium.org>, <andre.przywara@arm.com>,
  <boyan.karatotev@arm.com>, <Oliver.Gaskell@analog.com>,
  <duje@dujemihanovic.xyz>, <1425075683@qq.com>, Said Nasibov
  <said.nasibov@arm.com>
-Subject: [RFC PATCH 1/2] bootmeth: implement semihosting (smh) boot method
-Date: Thu, 28 Aug 2025 14:06:56 +0100
-Message-ID: <20250828130657.249153-2-said.nasibov@arm.com>
+Subject: [RFC PATCH 2/2] vexpress64: replace distro boot with standard boot
+Date: Thu, 28 Aug 2025 14:06:57 +0100
+Message-ID: <20250828130657.249153-3-said.nasibov@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250828130657.249153-1-said.nasibov@arm.com>
 References: <20250828130657.249153-1-said.nasibov@arm.com>
@@ -132,92 +132,92 @@ X-Originating-IP: [10.1.199.38]
 X-ClientProxiedBy: AZ-NEU-EX05.Arm.com (10.240.25.133) To AZ-NEU-EXJ01.Arm.com
  (10.240.25.132)
 X-EOPAttributedMessage: 1
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A6C:EE_|AS8PR08MB7837:EE_|AMS0EPF000001AA:EE_|AS2PR08MB8746:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9c9c327a-934b-448e-c56c-08dde633e954
+X-MS-TrafficTypeDiagnostic: DB3PEPF0000885D:EE_|AS8PR08MB9041:EE_|AM3PEPF0000A795:EE_|AS8PR08MB6101:EE_
+X-MS-Office365-Filtering-Correlation-Id: d873fcf4-d098-41ff-b4a8-08dde633ec15
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014|7416014; 
-X-Microsoft-Antispam-Message-Info-Original: =?us-ascii?Q?TvFz72WYwdAYVjGhxALRVktIdP0K0mNhX5lFi1aoMN/L4VaHzbyr6ZJzk9PT?=
- =?us-ascii?Q?cO5q1c4GGK/l9oW20Q/4xNGar3e5fozsOzWrE95n3VLTyGLukO9hFJkvJ1WB?=
- =?us-ascii?Q?9edMneB7NAk40qPcUhNy3m60d6YqFsVIBi5cgZBQeLIg2+IGVrwohTXzrzxj?=
- =?us-ascii?Q?fz4fClQOuSfxz104LCJxG500LBoUzvaT0th5F2gvj5QrwjjEw0W5dupvorr9?=
- =?us-ascii?Q?iUm0FZOmDMwlMai1YCE6aEiHUYhvOrqw0S+hvNhUejoXh5JcpIfG+llBnfHX?=
- =?us-ascii?Q?NIpVXcELp00N47E+z7uaF1SB7lfznRGfQjOc3iFx3N+5KTve2lts86l8LtGH?=
- =?us-ascii?Q?9pArxCsSeqIT/Wp/uqO9bX11J5tgoH77eSyPS868AUDSzuh9rRsIL8Q0SNUL?=
- =?us-ascii?Q?GzYHqMOcNcKFeqDF+zPpKS9b2eqDa9VyMgHwEFUxiM+7bWspzAgmHdkaxB+9?=
- =?us-ascii?Q?G6tRgIToUJrFMqHNS0e99ewsFiZ+joko75a1dGqc7QDpax5SkdoTZJLqOaGd?=
- =?us-ascii?Q?ZKg3Rg+asDbAEsvpFPZzOStmO49qlj/FV7fOyoewQU3aLl9yg2tmnJHLbTev?=
- =?us-ascii?Q?Y9AON5F5iJMg6mRvpWVO5KdV3IW2Nt44vYrhgGueQ/TXcROysaULNKHMJPUc?=
- =?us-ascii?Q?Nu/7dnta9M8avVv4PyEPDfhIGZWTZqYNC5jY8tlI66T0vmt4mKpTJPASMcU8?=
- =?us-ascii?Q?V+TVK8vPh3H5M7UaBF43NCQE2BX+CFmmESi7wwOl2HsGlHE+nLHq04QlcUs2?=
- =?us-ascii?Q?QNZEXtLIEWVWN8+eJsVwclqd+ats9GkWDWekdryHqwuNEmsNVGXJTcBQIADC?=
- =?us-ascii?Q?fi7GV4j8rKIvDlrneIfH+iwj1ylFLtxYkQMIKY0jvsWx8mj1gIop1b6VFJK2?=
- =?us-ascii?Q?7PsP8I0FybVLK31OkFqhNsGhlAqZiD5bkG2j9xFE5otqBXcM9riiApJ4vZ3a?=
- =?us-ascii?Q?V9z7DuwjPicuFCz1byY5/uhYOZtBWYIXogpXacA+vRzdaDoqClNQl1gXPMoh?=
- =?us-ascii?Q?HCRVrZxxBatP97zWvp2hTAW9PK5U13awCp8x7zvbN+zz4EIhqDHozE6stBXx?=
- =?us-ascii?Q?3W/wmQvlOao8yKffxrfQq2pm4u0/12pxSqzrWnNe1NXJixfrka1YL7CG3zpR?=
- =?us-ascii?Q?WGYlYBsmqAplcbWgKAMl+1hthEPyijxCNB4qflFKyOJEFkPtScv3toPznmcz?=
- =?us-ascii?Q?JRonLVAEdqxj7NtibbNrlax/zqPmmTKkdY2XasrCreqD+d2voFapCQjNhz/T?=
- =?us-ascii?Q?rhBQV2nXesMuCEIdPQf3mcwrH4wEuiWerIcw1+lOyfZdzhf9eFjDfijQjZ96?=
- =?us-ascii?Q?DM422qdP0qEGhSHITjj1FsxueOM82B2Biq+ZSaJTIecMBbkUypC3dVKyqato?=
- =?us-ascii?Q?om3RTK+6xmnxbCjchKzHCpVV2yie4yUj1CE81Y0H6cAx2W1Z1wAowU9HEZQH?=
- =?us-ascii?Q?A2vZxt33yPxIYrHsXQygU7A0OZtudc9KodjVNynczltjes8sTRcoSl5OdSyS?=
- =?us-ascii?Q?smPbOwFOH3RYzKdKHLdKqdZ2ni+YSwlcTVRF?=
+ ARA:13230040|36860700013|82310400026|1800799024|7416014|376014; 
+X-Microsoft-Antispam-Message-Info-Original: =?us-ascii?Q?gZcmcmlaivH9wJtwOZN3ziP7RDk/HbXKY/LW3iRl2KMoJ/DK6XKWw9lgOl/q?=
+ =?us-ascii?Q?ltQvzd5m684H3vKqsINpIqegDlLeC6Jh7D0x6/by8SEMHqhYgurYQbad429r?=
+ =?us-ascii?Q?9jVqQfsqXz3JwKC/N9QFN39JSR/ZuQgBS78LhaYclU9PiI2DaDffV0A0zcPA?=
+ =?us-ascii?Q?mFZkt9Z4al7++Y6VxffUXotUuLo8rORyT/kEF6EhsvlzdXshWGlnc+1S0wn2?=
+ =?us-ascii?Q?tUpUcEVJokdPWlXgsC3iER7lGTpN/pfnEPAG/99RgIVjjEiKlyFoKSuGtjiK?=
+ =?us-ascii?Q?4219WKIkN6ewNFw3BKhU0B9GdzFIVzsAPDlhWnTl88J7IRnFVSYzT+fZosic?=
+ =?us-ascii?Q?Tbgu4xGzvNpKQe4/p8pGpwvfmX2NA1mAj618Cq/JYJeJB2HtOYAP10Irkq87?=
+ =?us-ascii?Q?mZmKgDVz0sNqVbip2XkIxCG0ZBR081BqhaI/UAwF08A1c7VMbU1+cHqXy6yw?=
+ =?us-ascii?Q?6svmrAcxhdBss5+6XS/VhQdlTgdrO032BqUhWbC09FjTH0CwSaQvs3HMMlrj?=
+ =?us-ascii?Q?g81HY3JYTTJV+kUnB3CmvZ6ff71aAgpw1GMFdYTpAECXgfi7HRfujZ+ZQU4k?=
+ =?us-ascii?Q?9pXcnLpC0DUfIYT9Cp708VpAJkIZ0hDV3cxWrybuYYjmOuOeti8bIOdyGcoU?=
+ =?us-ascii?Q?9zSXjhbCOIifa4wjd8V7GuIJF2+HTSQw3UoaCMylXYA7CkDfsMfNoZbkGrAv?=
+ =?us-ascii?Q?IOiPWhFadPuFk8OsXzZ3k3C9eelebvOV4hIzF7BAtY2HIdctx5uK1VuW3Ady?=
+ =?us-ascii?Q?Iyh9GFnMCyzvqLJg/VP9qreJKotVC2wWSjXQf/OhB+hqpkwMDT8w/bsWRnbz?=
+ =?us-ascii?Q?v5Q8nJbDSaweWPcqgblyxXLI4LL7JUqGCi56qdlQXCEiUDpj6yjX60Fzy+J2?=
+ =?us-ascii?Q?zd5t/Jc1J/x59ry1V9Unj/cs/NvRM6nGu8iFX8Rs81WE9D1cZ1PH3bFIjkqp?=
+ =?us-ascii?Q?I0W/0RwSgZTpo5BMeac9ubU/7GlNqY2zXid8KnpID1PtBjHye3GJZSca9gf6?=
+ =?us-ascii?Q?vI7QaAz/bkQ1PVMvV2uQwBDEV7u1wEXdgmHkIZZQeenOr74v/04GfXQa0Eut?=
+ =?us-ascii?Q?Pw0lKMdKBq9p8Dn60Zzv0iZLICVrP8WNn8dSECS5AxjdfffVx4er8qw3tftv?=
+ =?us-ascii?Q?Di8k1UQ50XrXJy9u222qn4UTycZOziYXonukAC3QRYxegDGP2AhzCtA1swW0?=
+ =?us-ascii?Q?yE0NpxF+ER12QLAaT/nkDWyPyWmm5XOkhR8Ih5y8KWZqwJq3ajfl+ubEc8Qb?=
+ =?us-ascii?Q?T5ks98FBLIul0+M17M00b82ooE4tqjBVjSkClxg5wwyd/qqyWMVzclwyJCqZ?=
+ =?us-ascii?Q?XmhDqnmcoxoJrs9nzJUzDJRsWAMPcBCogzlOZfdeLj2CEiZfi3+jEBTeE9Hd?=
+ =?us-ascii?Q?RyjsChFsuKuxgHm18WL9z2aiKZv5YW4/uvDY4LnN19csXAziOkqdSe8zJ8Km?=
+ =?us-ascii?Q?xkaaF8fyDy/Ux4R3tl8Ip2M7ultObWDD6fx/o/8795ivGLCnnrYPPyVE+d0d?=
+ =?us-ascii?Q?rKed5h6yZmEJG+s/yPWhFyqqooN7Lv+qCaPg?=
 X-Forefront-Antispam-Report-Untrusted: CIP:172.205.89.229; CTRY:IE; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:nebula.arm.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014)(7416014); DIR:OUT;
+ SFS:(13230040)(36860700013)(82310400026)(1800799024)(7416014)(376014); DIR:OUT;
  SFP:1101; 
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB7837
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS0EPF000001AA.eurprd05.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB9041
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM3PEPF0000A795.eurprd04.prod.outlook.com
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: df3ba3de-273e-4fc4-8529-08dde633d5d3
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 23dc0aa8-95cc-45b3-de12-08dde633d6fb
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|35042699022|376014|36860700013|7416014|82310400026|1800799024|14060799003;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4v/kNDANYCq1otSqk9E/jleQL2d9LH2a+YA/iBC4gh258mDxn8vRojf6onq4?=
- =?us-ascii?Q?AUKLKPOJoxanjn/e1lcT9vAvVzrUz02Pn9uDZGmh4SDefx7X0dYHUeTB6egn?=
- =?us-ascii?Q?PN3aP8Zqry1+s8jHpuaah1rq9zgtz4/XAqD2xvG9XlG7ATacfuHeDz9SQdS2?=
- =?us-ascii?Q?o+/u5Q6Q2+5fHqWDa+dBeacpFsFA5NPprC4Tv3Wh1P6zWZqFPjfdjncMGDI4?=
- =?us-ascii?Q?WOPAcqVKPliJWhjkiJEoJBJKr9IWVgVhyTw/HfTu6DIytgMQ39P0+Iq6kfKX?=
- =?us-ascii?Q?OlGCJMWgPzIo9BIULF2u2Ozm5R4JGMGCXee8SYG9m0siXNkkHc5mNLtJIycC?=
- =?us-ascii?Q?7bd/i8nM6YZNvqnQhJSBLC18V+R0STnY/brOHfWV6rRZDluC2qh/6p/o9pT6?=
- =?us-ascii?Q?0NJf4uHhza0E8XSr+t3jgfbktqcUyAzblRQWKnW+LQyNftl+Wrp+rBCp2Y2N?=
- =?us-ascii?Q?r9SgbwKocbw99bnISkqi39jyjJArxIxGbdSNaPM2vpC7iepJUv/nIr7YZ9rR?=
- =?us-ascii?Q?7Jd8nAYuU5h7dKRsecHtKTy0LXb0F4Qc1gUT1vRjXhHEETIzRp2g+SAOLowF?=
- =?us-ascii?Q?19a52+nz7gLTeIZNJSImKHVrtnU2hhHGQ1iiiDtQEDGH7Eg11w29KBl4MZfi?=
- =?us-ascii?Q?uiHKY25qnpUKznVDzNpHJqBsWVbBHG+hTROQGb6YVKdea0NcAnvzEzydcoLY?=
- =?us-ascii?Q?cSE2vk/OI46Cadd3/5kuYGJ6o8jViu0h3+ighG1mdByzGEnej1jOkKRSN3Ax?=
- =?us-ascii?Q?9zxXFyv1iG++8/N7RWJK4uPOLFeK7IF9amguyDG8pEJBeHgN2Z8928/4JJsk?=
- =?us-ascii?Q?JJCHzSrbzipKfxutd7qUqCdy64SmqFXmbuvlti6TkNiMSZz4xvMqiJhqmk8C?=
- =?us-ascii?Q?bZhbZL3IPKGGyvV1kwdLrSM2jcOv/jBseLD6slGv6nBt6tCv1gtZGfjz91Yv?=
- =?us-ascii?Q?qaR56sI51QWIR0A+ja/n4F7xecqDBhBWgMb046WLTFrraQsQWmcJw7ONSWrj?=
- =?us-ascii?Q?FvkCjdv/bMCKBeg85udKlxVOAF+Fqf441J2LQzBSKF1OktSpZxuu94Y21Su1?=
- =?us-ascii?Q?7kHod5nI4jR6+G4hU0MGf4cC7SUTpQ3cOHLZ1lzhiTE1sKtO5rAVBoyAq2B6?=
- =?us-ascii?Q?5yCm7Q+KkJIr4j3+H7Bu1aQ6+LW0ISfSSJtZwOjH24BW6ZO3mNrTIH1Hy5Wh?=
- =?us-ascii?Q?TkiZlMpoXszRqoMAE8JEESGg3B7L3EitxjfJ7VjYdsxTOOWn6ZGLgrxRqt3v?=
- =?us-ascii?Q?uig+o0SuKvhdckeHZpzS8vTqVKRoYlYsmeqlgj07vudsU0CQPZCgSlHP05ut?=
- =?us-ascii?Q?eL65YTZ54Q13ntGa2bNuslD0kF7UHe81fPZtS7vFRR/xIPHX7Yw+av48sObd?=
- =?us-ascii?Q?Z6caKYae9Haep/E/PTU0HAV+Pq35Nb2vclRn+M646JuglV/0fFmG18D7kTDi?=
- =?us-ascii?Q?am2ghOQoCPpAswS0JQmxanU3QVZTyyhVncHk7ojgByIU83/YqF//P1PLlC79?=
- =?us-ascii?Q?/niSxleSGPeu3KYfJisjuD+4T9xuKdRcTkIO?=
+ ARA:13230040|82310400026|1800799024|7416014|376014|36860700013|14060799003|35042699022;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/XFnioMyooUSIi6wN1Tt10rq8eovCE3R95JcT+ALthqKIuGWO715u8J5aCdu?=
+ =?us-ascii?Q?gh41zjE8ThK0PJ6Q1tQrCXW8PXfzMBb45mx05Hn2M/djhHZ5n5ADes//JjqE?=
+ =?us-ascii?Q?1LWgBMCc0yqDxvCWzRac/jUtkavuFHj8yl2f47H9xjqT5vJLpxgK59PG3fGt?=
+ =?us-ascii?Q?/MnS4fbwStxrBPb4aB71PJbOwy3Vg450N9AyAp3CHPrZFUAMjk2BCQikqCSl?=
+ =?us-ascii?Q?wor3by0iB0W6BVOZNt00iv0tb9Q+W063EUTcaxTF0YNmUu8WQIqCy06jsnIE?=
+ =?us-ascii?Q?w/DqX9iEeMEzJ+EZLJjyv0ur4WCxwz9dBe5rbqfuey0ChkJMhx20cwluVaRz?=
+ =?us-ascii?Q?y2fsceQATPl2+Qo3il5Q2M/IUv9deo4wTzcPvFCrRh8ep+Opp54TAeRbiVms?=
+ =?us-ascii?Q?GhtmUZKNdlRuR8OZ2Qms1DXhYmOP/4x00eu7Oh7Gu31aZNGhlAKKoWoi2gQu?=
+ =?us-ascii?Q?PoAZota62CS80s0FNyGEnr1zMuhKO9ByVozaltKEB0eb9Vfoq6dQ2AauOaG1?=
+ =?us-ascii?Q?eceYCpUnHYGgjzAs9u2pnAxKDUE6qw+OszNFRyN37MxdRjxqRaJvakYRUpuJ?=
+ =?us-ascii?Q?I3tJUyQFasjOBzAlF/TVDkL/JWOFiSjLYoBK6npAVoCFXun3fPPHQULfna4x?=
+ =?us-ascii?Q?o14BvGFO9Of6DdtgLqFjb6dTnWzTpcpeljGa1ehRnUN+la5YJU5qDZQiRSEB?=
+ =?us-ascii?Q?l0m+sCNqoSEqtHpNzYlOOkHvDVjloo1AjyKQ8RX5rZk9j1caE1vMi/dCseMO?=
+ =?us-ascii?Q?MfSudrdf8YabFA1wzRmfushyutZbPUXT26WRdqcUbd71awRjJJOnX/a9Pz8/?=
+ =?us-ascii?Q?LgWaGyflu1NbOv/rFN2048Py6RA6d6fA2QT0XQskobqA0pA65e8s2SOwERjP?=
+ =?us-ascii?Q?y1g2IRQLtMgoEiG50tieTYZZ1mOk3y7DqJHJIuGva4O+jXEekbIXe9OV7E4O?=
+ =?us-ascii?Q?GqEX8aGVidDyM1oB123I7SkABUR+uhpOpDaBnJxdFkXd8qoHVgYnkwG9hZ77?=
+ =?us-ascii?Q?CMsjvWHPqe/gjAO4WAV+AvhDdBtzB/f5MRCc9rgz2FoUL6E2CYYkJKaoydnV?=
+ =?us-ascii?Q?HG8vP6sIljvL7zGeBs8tXOTttEFIVw0Aiw3FY80KD8cSb22rxsTbDm9akHqe?=
+ =?us-ascii?Q?YBfUHbZpGcWfN5lgQySuhm2TBIeUwoPyfIViqRnT8PQRRUfFLv/um5GmKjlU?=
+ =?us-ascii?Q?Qmjva4lX/HDSF/XHcNtsezF819C1ubNgTqwVFAj0WfoEMDOBavWD3h4j6Fk1?=
+ =?us-ascii?Q?Yj16kKGBSE5WJsbLz1VfPqgxmSxZ2zPUZXLrORycR6Whbi/16zhQw5g5FwZr?=
+ =?us-ascii?Q?qIZJfKUOe4ub2d+b8xVI7SJL9ZWasazxrvri5mn5QjZLuAtd42G8af3Sak10?=
+ =?us-ascii?Q?LiCKwQhDq33iipUy1peHIlC7vV5lCUzj0VWqa+I9Yo86UK7PKB8h/NLP20MH?=
+ =?us-ascii?Q?QrwKdC6XnMqU5ztEFV/C1konkTFwIrdjBMIt40hjonO3lSquBQTqrnfqrFSE?=
+ =?us-ascii?Q?hW1X/xv/R1DPKV67RMHSwrS6j1v7+pcSejEy?=
 X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(35042699022)(376014)(36860700013)(7416014)(82310400026)(1800799024)(14060799003);
+ SFS:(13230040)(82310400026)(1800799024)(7416014)(376014)(36860700013)(14060799003)(35042699022);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2025 13:07:58.7787 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9c9c327a-934b-448e-c56c-08dde633e954
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2025 13:08:03.4083 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d873fcf4-d098-41ff-b4a8-08dde633ec15
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
  Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001AA.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A795.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB8746
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6101
 X-Mailman-Approved-At: Thu, 28 Aug 2025 16:03:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -235,187 +235,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit introduces a new standard boot method that supports booting
-via semihosting as provided by ARM FVP platforms.
+This commit updates vexpress64 configs to default to standard boot, and
+explicitly select bootmeth_smh when standard boot is enabled.
 
-Semihosting enables the virtual platform to access host-side files as if
-they were block devices, which is particularly useful in early boot
-development and simulation environments. It removes the need for physical
-storage or networking when loading kernel components.
-
-This method mirrors the distroboot logic for semihosting, which is the
-default boot method for vexpress64 platform. The load_file_from_host
-helper function is implemented to mirror behaviour of "load hostfs" u-boot
-command, so it similarly sets filesize environment variable after loading a
-file - this is useful for later commands.
-
-This implementation is marked with BOOTMETH_GLOBAL so it is always
-considered during bootflow scan without requiring a boot device.
+The distro boot related variables are deliberately not removed to preserve
+compatibility with existing distro boot flows.
 
 Signed-off-by: Said Nasibov <said.nasibov@arm.com>
 ---
- boot/Kconfig        |  10 ++++
- boot/Makefile       |   1 +
- boot/bootmeth_smh.c | 113 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 124 insertions(+)
- create mode 100644 boot/bootmeth_smh.c
+ arch/arm/Kconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 2ff6f003738..fbd3f068908 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -936,6 +936,16 @@ config BOOTMETH_SCRIPT
-          This provides a way to try out standard boot on an existing boot =
-flow.
-          It is not enabled by default to save space.
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 5872455a0fe..527a865e4dc 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1413,7 +1413,8 @@ config ARCH_VEXPRESS64
+        select MTD_NOR_FLASH if MTD
+        select FLASH_CFI_DRIVER if MTD
+        select ENV_IS_IN_FLASH if MTD
+-       imply DISTRO_DEFAULTS
++       imply BOOTSTD_DEFAULTS
++       select BOOTMETH_SMH if BOOTSTD
 
-+config BOOTMETH_SMH
-+       bool "Bootdev support for semihosting"
-+       depends on SEMIHOSTING
-+       select CMD_FDT
-+       select BOOTMETH_GLOBAL
-+       help
-+         Enables support for booting via semihosting. This bootmeth reads
-+         files including the kernel, device tree and ramdisk directly from
-+         the host's filesystem.
-+
- config UPL
-        bool "upl - Universal Payload Specification"
-        imply CMD_UPL
-diff --git a/boot/Makefile b/boot/Makefile
-index 3da6f7a0914..5bed9e66507 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -37,6 +37,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_SANDBOX) +=3D bootmeth_san=
-dbox.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_SCRIPT) +=3D bootmeth_script.o
- obj-$(CONFIG_$(PHASE_)CEDIT) +=3D cedit.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_EFI_BOOTMGR) +=3D bootmeth_efi_mgr.o
-+obj-$(CONFIG_$(PHASE_)BOOTMETH_SMH) +=3D bootmeth_smh.o
-
- obj-$(CONFIG_$(PHASE_)OF_LIBFDT) +=3D fdt_support.o
- obj-$(CONFIG_$(PHASE_)FDT_SIMPLEFB) +=3D fdt_simplefb.o
-diff --git a/boot/bootmeth_smh.c b/boot/bootmeth_smh.c
-new file mode 100644
-index 00000000000..2ceb66900ed
---- /dev/null
-+++ b/boot/bootmeth_smh.c
-@@ -0,0 +1,113 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Bootmethod for booting using semihosting
-+ *
-+ * Copyright 2025 Arm Ltd.
-+ * Written by Said Nasibov <said.nasibov@arm.com>
-+ */
-+
-+#define LOG_CATEGORY UCLASS_BOOTSTD
-+
-+#include <bootmeth.h>
-+#include <dm.h>
-+#include <env.h>
-+#include <fs.h>
-+
-+static int script_check(struct udevice *dev, struct bootflow_iter *iter)
-+{
-+       return 0;
-+}
-+
-+static int load_file_from_host(const char *name_var, const char *addr_var)
-+{
-+       const char *filename =3D env_get(name_var);
-+       const char *addr_str =3D env_get(addr_var);
-+       ulong addr;
-+       loff_t len;
-+       int ret;
-+
-+       /* Mount hostfs (semihosting) */
-+       ret =3D fs_set_blk_dev("hostfs", NULL, FS_TYPE_ANY);
-+       if (ret)
-+               return log_msg_ret("hostfs", ret);
-+
-+       if (!filename || !addr_str)
-+               return log_msg_ret("env missing", -EINVAL);
-+
-+       addr =3D hextoul(addr_str, NULL);
-+       if (!addr)
-+               return log_msg_ret("invalid addr", -EINVAL);
-+
-+       /* Read file into memory */
-+       ret =3D fs_read(filename, addr, 0, 0, &len);
-+       if (ret)
-+               return log_msg_ret("fs_read", ret);
-+
-+       /* Set filesize environment variable in hex */
-+       char size_str[32];
-+       sprintf(size_str, "%lx", (unsigned long)len);
-+       env_set("filesize", size_str);
-+
-+       return 0;
-+}
-+
-+static int smh_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-+{
-+       int ret;
-+
-+       ret =3D load_file_from_host("kernel_name", "kernel_addr_r");
-+       if (ret)
-+               return log_msg_ret("kernel", ret);
-+
-+       env_set("fdt_high", "0xffffffffffffffff");
-+       env_set("initrd_high", "0xffffffffffffffff");
-+
-+       ret =3D load_file_from_host("fdtfile", "fdt_addr_r");
-+       if (ret) {
-+               ret =3D run_command("fdt move $fdtcontroladdr $fdt_addr_r;"=
-, 0);
-+               if (ret)
-+                       return log_msg_ret("fdt move", ret);
-+       }
-+
-+       load_file_from_host("ramdisk_name", "ramdisk_addr_r");
-+
-+       bflow->state =3D BOOTFLOWST_READY;
-+
-+       return 0;
-+}
-+
-+static int smh_boot(struct udevice *dev, struct bootflow *bflow)
-+{
-+       int ret =3D run_command("booti $kernel_addr_r ${ramdisk_addr_r}:${f=
-ilesize} ${fdt_addr_r};", 0);
-+
-+       return ret;
-+}
-+
-+static int smh_bootmeth_bind(struct udevice *dev)
-+{
-+       struct bootmeth_uc_plat *plat =3D dev_get_uclass_plat(dev);
-+
-+       plat->desc =3D "semihosting";
-+       plat->flags =3D BOOTMETHF_GLOBAL;
-+
-+       return 0;
-+}
-+
-+static struct bootmeth_ops smh_bootmeth_ops =3D {
-+       .check          =3D script_check,
-+       .read_bootflow  =3D smh_read_bootflow,
-+       .boot           =3D smh_boot,
-+};
-+
-+static const struct udevice_id smh_bootmeth_ids[] =3D {
-+       { .compatible =3D "u-boot,smh" },
-+       {}
-+};
-+
-+U_BOOT_DRIVER(bootmeth_0smh) =3D {
-+       .name           =3D "bootmeth_smh",
-+       .id             =3D UCLASS_BOOTMETH,
-+       .of_match       =3D smh_bootmeth_ids,
-+       .ops            =3D &smh_bootmeth_ops,
-+       .bind       =3D &smh_bootmeth_bind,
-+};
+ config TARGET_CORSTONE1000
+        bool "Support Corstone1000 Platform"
 --
 2.34.1
 
