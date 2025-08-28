@@ -4,86 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A73CA0EED
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 12:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74768CA0EED
+	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 13:03:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB38D831B4;
-	Thu, 28 Aug 2025 14:24:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A16118331B;
+	Thu, 28 Aug 2025 15:03:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gHWi6IE6";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Op6xcUp8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3719832C8; Thu, 28 Aug 2025 14:24:23 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 21D488331C; Thu, 28 Aug 2025 15:03:45 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F41B83192
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 14:24:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED36C8328F
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 15:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-71d5fb5e34cso8293197b3.0
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 05:24:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756383858; x=1756988658; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rnjlzXg/cOqtLl6Gubn35QZ8acatGKrPpzwavlussz8=;
- b=gHWi6IE6B8umwJJEVRGSOd/1un8rdp6mlVQgL3Ml1TIj38VoYx3t3ckTtVCocRqpVI
- EPZZcFGXElJW0qWM36DoG7AD8FxxbGC4J8P4K7ntUjYTVJZZnuts3xAFVCfwakqvrq6p
- ua5QjhP4slnOFVsCGeCARDL9RFfK42SF7QnLWw2e1Yp/lb0aANH3UQWmgeKXFqIPdQQQ
- Tgl8rmgCc0r9lMIraA4jXOkK0FrlElK+TPY0+//l7pMu9ha+a6v2lu1+u0s5c+Nsj6ar
- WOmzJnq6ZOafYPkpYK6GfwymvOB3TBAeFqeNruboMIiVuPhtBFV7IVqQ/jaS2hn6SrvJ
- rS+A==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 40A163F71E
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 13:03:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1756386222;
+ bh=ICeGV9TQXNOo/upeT4h+7gRnQ1VDvXJ7Rj/LFjxn2DA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Op6xcUp8BxS0lNa5IVMNOxRw9M15nRHR7FZxqiMbxpvSUv7Xh8h5melqxkufaLSta
+ XhfPNnewnMNEpbDh2C0LUXGF1cL7c51hWSg150sYqPBlDU8hjMD8rW57s8wl7Xd52p
+ GYz8UBe9VDy4K360WDGq8qiJD4QcJlcoG6BpiLMfKvKiKM8IrsYBVv/eovb69xKuBk
+ V2A669dKVW+JWNsZw2E3GtrjqeQe/TnpolIXpzDyVrC2N1ZkSRkZdfFZhQW6nDlJPY
+ ZRzLkoYoZuWCGyDlHSdFlXxbeDWfiV/uajMdgAVnHctFOMXBz6QOtpwoJKAAX4vuBd
+ FJtyQxLf7H8bA==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-45a1b0caae1so4808835e9.3
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 06:03:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756383858; x=1756988658;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1756386222; x=1756991022;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rnjlzXg/cOqtLl6Gubn35QZ8acatGKrPpzwavlussz8=;
- b=cZ1i6/42KGhNv81Duyyt/YB3tDf7Ytt8nvgl0khI5UZmE47IRunY5PRLCKPfEPucnt
- RqBz3BpO+ZlRXZM0sA7Q44QKpo1XJor9GEDkOnpLkzFr7eK2oP1cVzoXchnC78Ua0OUK
- JS7kn5TwLdcxpP6mCqqR17RUj7shBjJnjeTQh0E9RB68n3/ps2i68D5hsaaPnBFGracL
- GCGJCGPgeE2Z35lSwYhm0TWm71XCqyBRFeav/537iWfzx7B3P/LzIMuZj3HlrSza33Sg
- ep52Knb4bbmi4ANp6c5T5epakpMtSAsOLO5JssKbiIrqVnXJUMyoS9d1TaOmNw2bx61I
- pTaw==
+ bh=ICeGV9TQXNOo/upeT4h+7gRnQ1VDvXJ7Rj/LFjxn2DA=;
+ b=ThItWs4ua2tL0CaBQEwXM0U7CIbzX8knQAjP7z05vKQRRkC95kWvvLzntrDzah7tIG
+ vIlnmkovWknJxvyseDOJqnMQnk9cdiub/Fjy4Ins/fCQU7Tkd6VpWU8dSO/tZP/a/7Pj
+ fkZRoSkFSOS4gL01g8FapXffn7tncv31YTX+UC0zsrpbcMg0kyXAVjk/I5W77aj7D67D
+ aj33/VfyU9EWpp12lXBa3cZMVWBTw47SbSl6JX/4EFrmZKIRURkZopY24jajgKQD4j8t
+ bKldLjGWK1s6a8fNVI57fo+/RHvycoB9tLTCueRh12UvWkrNsX8/P+idlYpBrkxrp21k
+ By+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqzhHqMoN1g8LK9ZIeBBHeOnp0u08YLM5fPYGQxSOTC3hG7iQMz8alxQJuZ3G8bvXh27Mq+NI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2X7zGMpcamtkIwzrcmx9efXZl1J2G20BVQPOAx/CoEJgHmqvA
- bBX8I1EgjrR+jt5wAnhD37mQcRIHiwafAgoOEmiFiPs8TUqXllrYd/kalh8gRwHC6YFrU4hQl34
- zPrLxv4etCHLmNbLbfKI98+1RuL/+mOIecBVFlR+eWw==
-X-Gm-Gg: ASbGnctB+nVFP5cGndCZM12xcgDb4b0UvE2rKYS0GpsPvr6Z0e4ihVrr0mfGAfvT9ct
- aMqSJcD5aU+nPOPlVr+SUFci7ugMn3FxZGjrGjRiqMeOEgU1d/uzPo0alZJYAi6TTAFDZ/khHG2
- YNbux4DCO6FtChy190THBTiII0rxb6B4aLYi/dGr23CMKgUQC6aSB+RIzP7dYXcjHGeoJPvgb2u
- cCrouxBJ6DSiDumMZIXfuA/66nBR7PdYsfi8MJptBa5Xc/cj4Npt5wj/eADqI0MLTg40064pO7K
- IGWZ3csf+CVMWRgLecC1XVNP7O7NjRdnmBB1ThrSZO8z8ufyXZmMe46z2FlCtt+WXFvUB/w=
-X-Google-Smtp-Source: AGHT+IFqKgyzMApCU9dXDoJ2jY7z8bWtMsK95nNDYV4cMaxn4MiepahRKYT9zRHZsMUcF72Ei9mlV3mnp7k2wmf9tEc=
-X-Received: by 2002:a05:690c:2606:b0:721:2c21:3614 with SMTP id
- 00721157ae682-72132cd7378mr109524677b3.22.1756383858215; Thu, 28 Aug 2025
- 05:24:18 -0700 (PDT)
+ AJvYcCXkNRn2w/ETtUlR3qnedXHroNW9/eqtefvfO4v9zLy7m/qpxV94531NvKFFlAf/AKYumqj2H0Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSxcp+iIZ0TCoPYK+y5BHXCLqMY4qxk/D7JwgGlBa/ZFehQCLs
+ 4ybR2QJE8BDNO/0vMFIlxRlzMxiZvekqh7dZZ26rthQy8PoLhejkRT1spwxulxc35w0BDi+KUaV
+ av8/GYA7Sh4DXXJ2aQvuYpS9xs6/kxwlSIpqs9OOc8L6HGTgrBJsfh7Z405l2R3wmtnvbnCs=
+X-Gm-Gg: ASbGncsobewlcBecSGsN2b3kaiukrQICW66sDi8VGK+Xl9fbq2sah11byjCuuUrWXJ/
+ /z836580OWw9FdNvSDPaynDFbYAA+t4h3BPNWLuoPbG9OuKGQYxGTErU2hz5GyBujFei0bP+E45
+ 3tyIh11O4F3++zHJxnpKv4ZYorCLNcLvJ36hBNqkP5vgQUzG2vefaBSAqB+FcJ+WUsLMv1V4x1U
+ /ISXptrJlxDcDHD0h2pgijIXxH3A3zVC9L4fq1dnzuWt+lBc0VwYjplrPhBFEx4yEErNB++ntDb
+ 8u25Xab83VbKx57ZX3HtTEkq/JS9U7co/C2LMIE9x6DsK4gIuMzcF46IyUfoPtcra70GXvH0fuA
+ k0pSZQPiTCw26v8sMcOhcC9yhSsYzLUM=
+X-Received: by 2002:a05:600c:45c8:b0:45b:627a:60c7 with SMTP id
+ 5b1f17b1804b1-45b627a62e6mr134456225e9.6.1756386221782; 
+ Thu, 28 Aug 2025 06:03:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHaDsG7q6SRn/vwuOIImhi4Phsr8Rb0YswISShRkwhqxF6Ip0Jsbpl8HzZCA7YuAihFGxLf/w==
+X-Received: by 2002:a05:600c:45c8:b0:45b:627a:60c7 with SMTP id
+ 5b1f17b1804b1-45b627a62e6mr134455825e9.6.1756386221317; 
+ Thu, 28 Aug 2025 06:03:41 -0700 (PDT)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45b72c55c1bsm68894305e9.10.2025.08.28.06.03.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Aug 2025 06:03:40 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: E Shattow <e@freeshell.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] starfive: avoid NULL dereference in fdt_check_header()
+Date: Thu, 28 Aug 2025 15:03:35 +0200
+Message-ID: <20250828130335.24173-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
- <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
- <CAC_iWjK5d7z-J=rbXa-_+2zjejWOuTJco87-yqJVXtuXmVjdNw@mail.gmail.com>
- <8730e084-5541-4df5-b067-c97e540b5f37@oss.qualcomm.com>
-In-Reply-To: <8730e084-5541-4df5-b067-c97e540b5f37@oss.qualcomm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 28 Aug 2025 15:23:41 +0300
-X-Gm-Features: Ac12FXwIKs7Vhg8rVpGW_ESX791zrMEkuTkNTvtXVh6oaLA05PCouH8wpodOMko
-Message-ID: <CAC_iWjKTeNTwyQE0KoAApF_qbd1c6ftTnU8jx85sVNBTnYJoRg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] efi_loader: improve device path matching for
- partition lookup
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, xypron.glpk@gmx.de, adrianox@gmail.com, 
- moritzf@google.com, sjg@chromium.org, maks.mishinfz@gmail.com, 
- javierm@redhat.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +110,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Aug 2025 at 12:07, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
->
-> Hi Ilias,
->
->    Sorry for the late reply.
->    If i point to esp, then it should work.
->    But in the boot option generation, they are skipping if its a partition:
->              i.e., in:
-> efi_bootmgr_enumerate_boot_options(), in this code (line 838):
->                  if (blkio->media->logical_partition)
->                          continue;
->    It seems that, by default, the boot option generation logic is not
-> designed to include partition as a boot option; Not sure if this is
-> intentional. If its not, then should we correct this logic?
+If the u-boot.itb read from SD-card is invalid, fdt_check_header() may be
+called with a NULL pointer.
 
-Yes it was. In fact the original patches were adding the file instead
-of the disk [1], but we had concerns on scanning all partitions wrt to
-boot time. I don't remember if anyone tested the boot time though.
+This was observed on an StarFive VisionFive Lite when trying to revover the
+board via UART.
 
-[1] https://lore.kernel.org/u-boot/A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de/
+Add a missing check in the starfive board code.
 
-Thanks
-/Ilias
->  Your inputs
-> are appreciated.
->
-> On 8/5/2025 1:17 PM, Ilias Apalodimas wrote:
-> > I am not sure this is a bug. The EFI spec says that in order to
-> > trigger a capsule update you need to have an active boot option
-> > pointing to the same ESP the capsule is installed.
-> > Is your boot0000 automatically generated? If so it doesnt point to the
-> > ESP and the capsule update doesn't trigger correctly. Does it work if
-> > you manually add a boot option pointing to the ESP?
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ board/starfive/visionfive2/spl.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index 3dfa931b655..fe14b44ce28 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -23,7 +23,8 @@ DECLARE_GLOBAL_DATA_PTR;
+ void spl_perform_fixups(struct spl_image_info *spl_image)
+ {
+ 	/* Update the memory size which read from eeprom or DT */
+-	fdt_fixup_memory(spl_image->fdt_addr, 0x40000000, gd->ram_size);
++	if (spl_image->fdt_addr)
++		fdt_fixup_memory(spl_image->fdt_addr, 0x40000000, gd->ram_size);
+ }
+ 
+ static void jh7110_jtag_init(void)
+-- 
+2.43.0
+
