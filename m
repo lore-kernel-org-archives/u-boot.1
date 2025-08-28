@@ -4,55 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5D2CA0EED
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 11:24:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80EF6C8303F
+	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 12:15:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 328AE8331B;
-	Thu, 28 Aug 2025 13:24:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id CEADA832C8;
+	Thu, 28 Aug 2025 14:15:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d0O/+d88";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE768328F; Thu, 28 Aug 2025 13:24:12 +0200 (CEST)
-Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4D8B8832DD; Thu, 28 Aug 2025 14:15:50 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CF13832C8
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 13:24:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B78783192
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 14:15:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=primoz.fiser@norik.com
-Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:60790
- helo=localhost.localdomain)
- by cpanel.siel.si with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96.2)
- (envelope-from <primoz.fiser@norik.com>) id 1uraje-001yQy-2Z;
- Thu, 28 Aug 2025 13:24:06 +0200
-From: Primoz Fiser <primoz.fiser@norik.com>
-To: peng.fan@oss.nxp.com, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>
-Cc: paul.geurts@prodrive-technologies.com, u-boot@lists.denx.de,
- upstream@lists.phytec.de
-Subject: [PATCH v3 2/2] power: pmic: pca9450: Add support for reset status
-Date: Thu, 28 Aug 2025 13:24:05 +0200
-Message-Id: <20250828112405.3994748-2-primoz.fiser@norik.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250828112405.3994748-1-primoz.fiser@norik.com>
-References: <20250828112405.3994748-1-primoz.fiser@norik.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-55f4969c95aso932545e87.0
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 05:15:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1756383347; x=1756988147; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gtduvF+nF/9JuCuYb8gCUCarmAixOGNo1huLyqyIUfE=;
+ b=d0O/+d88kcr/5j1DPzGtiIonjptrHBrTcJZIwopZOdh/SkRTjg+INCplSlfaD961Cc
+ ZpFX/8AqFuWXR6OjwO1SUaK5vsFk0RdvX71WP7ROEcHJxZTJjiDr8ZxZb6atZPkdjKU0
+ 7i3Oq0g8RBblYJ1L7l6yU9jKfKtwrDY7ojx9qb6yzoozZ1stX+dJ4wI9Oza9zDfhkQ/L
+ fjOQvP3f6JyZDYfk7IbhEuJxVmCnonyg+wi4R+fOakcjSk2HKJti0v3Wpmo8YGw05y5z
+ 4+aqmACulFUPh5oTPEohteEXxxCLkjJ05OIKKnvOL+sFGZDI3rJVo6la0O5CubpZ6V2a
+ ZkGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756383347; x=1756988147;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gtduvF+nF/9JuCuYb8gCUCarmAixOGNo1huLyqyIUfE=;
+ b=fed2Roq5J1ih75LfMmjezC33yq7gn/sbBGgrqBdZyPuBzdvlt5TuZm92iSb1y6Z5UO
+ CxmlfhBj+IsTN+epoPq2w3S/30+bPmCOvIXSa9YMQkBw5hgzgdG/L6LP7sgsabNEDBc7
+ iW1mJ68kg3QjFu8al6eQu8//SXINwtcHoR8HugfOjWxqPHMvGIjjT3J4nor8ERG52G2c
+ 9pZVUMcQPHLP7rBg/MmUX33c2BahbyuAd5RZFFFsFcHaQ/6UXDtqce6trk6vuGEa04pX
+ yMy4kXmXJHwLyLWIoQclqbtmQYSsHkLvVwMMheVnV6sjVOF61FiqYI3Hb1VPumg7SXwH
+ 09Yg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVuxElPy1kWTjRmW7vk29D/vpIhIKyRRIx7m41Qg0hmPbbmcUB/WQtIIR0a/bvNnc6FuktP5bE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyqoXU/IBV6dpXq2s9DidXtIqnY/hae8snMt+kXeVU1IeTEX+i4
+ p2KtLCooxcCkXpDPRsAYoeILfvHX+9aFVXEUKS1MKaF/XHtGrWmP6GG8zDyBme0tgWXo5DkdwDY
+ 6ao5NPQ0Pt8U54NooVTwILkahTo7eyTRN15lo
+X-Gm-Gg: ASbGncuUvJLGBDlXFvPTliIulYI43nS516ViRmctRU7JuwovZXYuQVglm4Kj9GTwds+
+ wMYT4XFChE0eHigy6SJ9In8RVU4v1p0Lx/yQ15TXSQIALP5ZMgHwoN8UgUJBB7o2tLDoqu1S6IK
+ vgx27V2ienbKhFJEMVQZlr//60CzzquaZMtl/IrAT5oxtuoRtycQjMy2tY6CENbac1w9s+hMzoA
+ hYUYvMMbvtOShpxsQVs2UHloIfCa9uz5JQlBqM0WUGd49NhFw==
+X-Google-Smtp-Source: AGHT+IHcTTbbrZ5PuIuVktJVgVUpluVyWT+7JBmRwEh7Zs5IfQmQ+/iZ5i7OQb8J7ad8XKumUhgIwMGUO2hnDqoD5rU=
+X-Received: by 2002:a05:6512:4004:b0:55f:5b65:a3e3 with SMTP id
+ 2adb3069b0e04-55f5b65a4efmr879881e87.35.1756383347018; Thu, 28 Aug 2025
+ 05:15:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
- primoz.fiser@norik.com
-X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+References: <20250822-imx8mp-libra-fpsc-v3-1-50ba9cd2d474@phytec.de>
+ <2437d9efbf0121ef177f20b084ad19b54a0312f3.camel@phytec.de>
+In-Reply-To: <2437d9efbf0121ef177f20b084ad19b54a0312f3.camel@phytec.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 28 Aug 2025 09:15:34 -0300
+X-Gm-Features: Ac12FXwk__ywFyI2WDNMkdN01vKnBephmIRuqckWDTz3daExZeJx_T3v17BPmvM
+Message-ID: <CAOMZO5Br+s7HA9e+AXY6qgEhn5RvDkDVEv5xgO4w=cgH+4gZ=A@mail.gmail.com>
+Subject: Re: [PATCH v3] Add imx8mp-libra-fpsc board
+To: Teresa Remmet <t.remmet@phytec.de>
+Cc: "sbabic@nabladev.com" <sbabic@nabladev.com>,
+ "uboot-imx@nxp.com" <uboot-imx@nxp.com>, 
+ Yannic Moog <y.moog@phytec.de>, "trini@konsulko.com" <trini@konsulko.com>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ Wadim Egorov <w.egorov@phytec.de>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Benjamin Hahn <b.hahn@phytec.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,97 +100,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PCA9450 PMIC supports reading the reset status from the PWRON_STAT
-register. Bits 7-4 give indication of the PMIC reset cause:
+Hi Teresa,
 
- - PWRON (BIT7) - Power ON triggered by PMIC_ON_REQ input line,
- - WDOGB (BIT6) - Boot after cold reset by WDOGB pin (watchdog reset),
- - SW_RST (BIT5) - Boot after cold reset initiated by the software,
- - PMIC_RST (BIT4) - Boot after PMIC_RST_B input line trigger.
+On Tue, Aug 26, 2025 at 9:19=E2=80=AFAM Teresa Remmet <t.remmet@phytec.de> =
+wrote:
 
-Add support for reading reset status via the sysreset framework in a
-convenient printable format.
+> > +
+> > +/* ddr timing config params */
+> > +struct dram_timing_info dram_timing =3D {
+> > +       .ddrc_cfg =3D ddr_ddrc_cfg,
+> > +       .ddrc_cfg_num =3D ARRAY_SIZE(ddr_ddrc_cfg),
+> > +       .ddrphy_cfg =3D ddr_ddrphy_cfg,
+> > +       .ddrphy_cfg_num =3D ARRAY_SIZE(ddr_ddrphy_cfg),
+> > +       .fsp_msg =3D ddr_dram_fsp_msg,
+> > +       .fsp_msg_num =3D ARRAY_SIZE(ddr_dram_fsp_msg),
+> > +       .ddrphy_trained_csr =3D ddr_ddrphy_trained_csr,
+> > +       .ddrphy_trained_csr_num =3D ARRAY_SIZE(ddr_ddrphy_trained_csr),
+> > +       .ddrphy_pie =3D ddr_phy_pie,
+> > +       .ddrphy_pie_num =3D ARRAY_SIZE(ddr_phy_pie),
+> > +       .fsp_table =3D { 4000, },
+> > +};
+> > +
+>
+> please remove the empty line at EOF.
 
-Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
-Reviewed-by: Paul Geurts <paul.geurts@prodrive-technologies.com>
----
-Changes in v3:
-- rebase custodians/u-boot-mmc branch: next 
-- add Reviewed-by: tags
+Yes, this causes a warning while applying this patch.
 
-Link to v2: https://lore.kernel.org/all/20250814094741.4177431-1-primoz.fiser@norik.com/
+> > +Build U-Boot
+> > +^^^^^^^^^^^^
+> > +
+> > +.. code-block:: bash
+> > +
+> > +   $ make flash.bin
+>
+> looks like this should be removed.
 
- drivers/power/pmic/pca9450.c | 38 ++++++++++++++++++++++++++++++++++++
- include/power/pca9450.h      |  5 +++++
- 2 files changed, 43 insertions(+)
+Correct.
 
-diff --git a/drivers/power/pmic/pca9450.c b/drivers/power/pmic/pca9450.c
-index 8b98c2239e13..e5c1f037b613 100644
---- a/drivers/power/pmic/pca9450.c
-+++ b/drivers/power/pmic/pca9450.c
-@@ -146,8 +146,46 @@ static int pca9450_sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
-+int pca9450_sysreset_get_status(struct udevice *dev, char *buf, int size)
-+{
-+	const char *reason;
-+	int ret;
-+	u8 reg;
-+
-+	ret = pmic_read(dev->parent, PCA9450_PWRON_STAT, &reg, 1);
-+	if (ret)
-+		return ret;
-+
-+	switch (reg) {
-+	case PCA9450_PWRON_STAT_PWRON_MASK:
-+		reason = "PWRON";
-+		break;
-+	case PCA9450_PWRON_STAT_WDOG_MASK:
-+		reason = "WDOGB";
-+		break;
-+	case PCA9450_PWRON_STAT_SW_RST_MASK:
-+		reason = "SW_RST";
-+		break;
-+	case PCA9450_PWRON_STAT_PMIC_RST_MASK:
-+		reason = "PMIC_RST";
-+		break;
-+	default:
-+		reason = "UNKNOWN";
-+		break;
-+	}
-+
-+	ret = snprintf(buf, size, "Reset Status: %s\n", reason);
-+	if (ret < 0) {
-+		dev_err(dev, "Write reset status error (err = %d)\n", ret);
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
- static struct sysreset_ops pca9450_sysreset_ops = {
- 	.request	= pca9450_sysreset_request,
-+	.get_status	= pca9450_sysreset_get_status,
- };
- 
- U_BOOT_DRIVER(pca9450_sysreset) = {
-diff --git a/include/power/pca9450.h b/include/power/pca9450.h
-index 9119ef793b1f..41b7f95c0340 100644
---- a/include/power/pca9450.h
-+++ b/include/power/pca9450.h
-@@ -75,6 +75,11 @@ enum {
- #define PCA9450_PMIC_RESET_WDOG_B_CFG_WARM		0x40
- #define PCA9450_PMIC_RESET_WDOG_B_CFG_COLD_LDO12	0x80
- 
-+#define PCA9450_PWRON_STAT_PWRON_MASK		0x80
-+#define PCA9450_PWRON_STAT_WDOG_MASK		0x40
-+#define PCA9450_PWRON_STAT_SW_RST_MASK		0x20
-+#define PCA9450_PWRON_STAT_PMIC_RST_MASK		0x10
-+
- #define PCA9450_SW_RST_COLD_RST		0x14
- 
- #endif
--- 
-2.34.1
+> Teresa
+>
+>
+> > +   $ make -j $(nproc) \
+> > +          CROSS_COMPILE=3Daarch64-linux-gnu- \
+> > +          imx8mp-libra-fpsc_defconfig \
+> > +          flash.bin
 
+There is no need to pass "flash.bin"
+
+After running:
+
+make  imx8mp-libra-fpsc_defconfig
+make
+
+The flash.bin will be generated automatically.
+
+I'll wait for v4. Thanks
