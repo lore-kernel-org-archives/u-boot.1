@@ -4,78 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8761ECA0FF2
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 07:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCAEFCA0FF2
+	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 08:15:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFBEC8320C;
-	Thu, 28 Aug 2025 09:22:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F13E831BB;
+	Thu, 28 Aug 2025 10:15:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="PBvN0Em7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="I7A59U/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 173BC83252; Thu, 28 Aug 2025 09:22:26 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56AB2831D5
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 09:22:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ id 884FC831D5; Thu, 28 Aug 2025 10:15:09 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F3DDB83106
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 10:15:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: b9f14f4683df11f0bd5779446731db89-20250828
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=c1reNj0ZJvFDwYDZy2yNMFN0EjgsVHrttGml5xyRevQ=; 
- b=PBvN0Em76djHqP5HnHx7EPno7jMfJ+l6KA1IEg9L7tUMMr7Bb/2SQw150ZmLqUHGnwRptjqQNNElgJTHrrtrPIpFaUKhZ6iAG6iHuQ7dAc0gXfodLKZFRZvkcSUwB/i+sismQ5ny83bP/tJpGe/3QvyPRwVkbfkdcSFh/kLXkmY=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.3, REQID:6c8ecfe3-d61c-42a9-9ccb-c7d2c7bb4c2e, IP:0,
- UR
- L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
- elease,TS:0
-X-CID-META: VersionHash:f1326cf, CLOUDID:c70cb36d-c2f4-47a6-876f-59a53e9ecc6e,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102,TC:-5,Content:0|15|5
- 0,EDM:-3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,
- OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: b9f14f4683df11f0bd5779446731db89-20250828
-Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1104563866; Thu, 28 Aug 2025 15:22:16 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Thu, 28 Aug 2025 15:22:15 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Thu, 28 Aug 2025 15:22:14 +0800
-Message-ID: <e13e0dabf7b4adee9b987557c2c54803dcc6075e.camel@mediatek.com>
-Subject: Re: [PATCH v2 3/4] dt-bindings: mediatek: add doc for MediaTek
- MT7987/MT7988 2.5Gb ethernrt PHY
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Sky Huang
- <SkyLake.Huang@mediatek.com>
-Date: Thu, 28 Aug 2025 15:22:14 +0800
-In-Reply-To: <20250827182822.GJ124814@bill-the-cat>
-References: <cover.1756283872.git.weijie.gao@mediatek.com>
- <8c0d6997255a2bbc2e761ed457c51de653cc96c5.1756283872.git.weijie.gao@mediatek.com>
- <20250827182822.GJ124814@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57S8F3QM1939336;
+ Thu, 28 Aug 2025 03:15:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756368903;
+ bh=DU6nu7ofU+SpBH2sPLUnytQXRpMRHanBOTT4Fo9GnwM=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=I7A59U/xR6JqJCYyjzP6mRcHvG84XdXS8+imOed+QGANfy4+pd75vrfA7oCdf6npR
+ JLBZkipAQ4i4txnqV/NOzkKyP+aMxYMbzQYbxfcQZ2lZxq/A+EpgQL0YcHLQkfyQS7
+ 2+PxztOP/03gTixzptS7tgqpTr1H32I6882fbzZk=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57S8F3TA3091071
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 28 Aug 2025 03:15:03 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 28
+ Aug 2025 03:15:02 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 28 Aug 2025 03:15:02 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57S8F16P299238;
+ Thu, 28 Aug 2025 03:15:02 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-MTK: N
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 28 Aug 2025 13:43:47 +0530
+Message-ID: <DCDWSCFS5P5X.4UFZF82CB2NG@ti.com>
+Subject: Re: [PATCH v1 1/2] dma: ti: k3-udma: fix dma_addr_t typecasts
+From: Anshul Dalal <anshuld@ti.com>
+To: Anshul Dalal <anshuld@ti.com>, Prasanth Mantena <p-mantena@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <trini@konsulko.com>,
+ <u-kumar1@ti.com>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+References: <20250825133233.2475300-1-anshuld@ti.com>
+ <20250825133233.2475300-2-anshuld@ti.com>
+ <20250827161411.whvffhrbx4k7axnv@prasanth-server>
+ <DCDSOXGFIACA.15WKCWCLLFAEL@ti.com>
+In-Reply-To: <DCDSOXGFIACA.15WKCWCLLFAEL@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,35 +82,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2025-08-27 at 12:28 -0600, Tom Rini wrote:
-> On Wed, Aug 27, 2025 at 04:55:54PM +0800, Weijie Gao wrote:
-> > The MediaTek MT7987 and MT7988 platforms supports one built-in
-> > 2.5Gb
-> > ethernet PHY through eth1 interface.
-> > 
-> > This patch add documentation for configuring these PHYs.
-> > 
-> > Signed-off-by: Sky Huang <SkyLake.Huang@mediatek.com>
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > ---
-> > Changes in v2:
-> > 1. rename "pd-disable" property to "half-en"
-> > 2. rename "gbe-min-ipg-11-bytes" property to "gbe-min-ipg-11-bytes-
-> > en"
-> > 3. rename "auto-downshift-disable" property to "auto-downshift-dis"
-> > 4. add note for "retrain-dis" property
-> > ---
-> >  .../net/phy/mediatek,mt798x-i2p5ge-phy.txt    | 68
-> > +++++++++++++++++++
-> >  1 file changed, 68 insertions(+)
-> >  create mode 100644 doc/device-tree-
-> > bindings/net/phy/mediatek,mt798x-i2p5ge-phy.txt
-> 
-> What is the status of this binding in Linux? Thanks.
-> 
+On Thu Aug 28, 2025 at 10:31 AM IST, Anshul Dalal wrote:
+> Hi Prasanth,
+>
+> On Wed Aug 27, 2025 at 9:44 PM IST, Prasanth Mantena wrote:
+>> Hi Anshul,
+>> On 19:02, Anshul Dalal wrote:
+>>> With the change to dma_addr_t from u32 to u64 for the R5 SPL, the
+>>
+>> From above line, Does this patch meant to after patch 2/2 ?
+>>
+>>> existing typecasts from void* to int or vice-versa cause the compiler t=
+o
+>>> throw a "cast from pointer to integer of different size".
+>>>=20
+>>> Therefore this patch changes the casts to a uintptr_t which is
+>>> guaranteed to hold any pointer value, thus supressing the compiler
+>>> warning.
+>>>=20
+>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>>> ---
+>>>  drivers/dma/ti/k3-udma.c | 6 +++---
+>>>  1 file changed, 3 insertions(+), 3 deletions(-)
+>>>=20
+>>> diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+>>> index 723265ab2e5..01824310995 100644
+>>> --- a/drivers/dma/ti/k3-udma.c
+>>> +++ b/drivers/dma/ti/k3-udma.c
+>>> @@ -2327,7 +2327,7 @@ static int udma_send(struct dma *dma, void *src, =
+size_t len, void *metadata)
+>>>  {
+>>>  	struct udma_dev *ud =3D dev_get_priv(dma->dev);
+>>>  	struct cppi5_host_desc_t *desc_tx;
+>>> -	dma_addr_t dma_src =3D (dma_addr_t)src;
+>>> +	dma_addr_t dma_src =3D (uintptr_t)src;
+>>
+>> Considering after the dma_addr_t changed to u64, please help me understa=
+nd what
+>> warning does the above change fix.
+>>
+>
+> This patch was meant to prevent warnings from the last patch of the
+> series, though I understand the confusion here. I will reword the commit
+> description to be more clear in v2.
+>
 
-The driver in linux kernel is just a basic version supporting only
-mt7988, and of course none of these bindings are supported. The u-boot
-driver is actually the complete version. We also plan to update the
-linux driver later.
+To give further context:
 
+The fix would ideally be to use dma_addr_t for all dma-uclass
+APIs similar to how the linux kernel handles it. Though given what we
+have (using void* instead), a direct typecast to dma_addr_t with the
+second patch would essentially amount to casting a 32-bit pointer to u64
+hence the warning "cast from pointer to integer of different size".
+
+uintptr_t is u32 for the R5 SPL so the 32-bit pointer is casted to a u32
+first and then to dma_addr_t which is u64. Thus keeping the compiler
+happy :)
+
+And since K3's R5 SPL is the only case where dma_addr_t isn't the same
+size as void* but with the dma addresses guaranteed to fit in a 32-bit
+address space, I think a few typecasts are the easier solution than
+refactoring the dma APIs to use dma_addr_t.
+
+Regards,
+Anshul
