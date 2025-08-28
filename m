@@ -4,100 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7878CA0EED
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 13:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C25BC8303F
+	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 14:02:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D92C833C8;
-	Thu, 28 Aug 2025 15:52:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 04114832C8;
+	Thu, 28 Aug 2025 16:02:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=race-technology.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TWEmy3yg";
+	dkim=pass (2048-bit key; unprotected) header.d=race-technology.com header.i=@race-technology.com header.b="TTzuIbgA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31ABC831C2; Thu, 28 Aug 2025 15:52:47 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CEBAC8331C; Thu, 28 Aug 2025 14:32:03 +0200 (CEST)
+Received: from server.race-technology.com (mail.race-technology.com
+ [178.32.229.33])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C41A833C8
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 15:52:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AF97831B4
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 14:32:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=race-technology.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id ED3C93F7C7
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 13:52:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1756389163;
- bh=rnmDVvKLfEt+JQuQ0VJjpz2QxR5o6E0cFi+dEsf3w3I=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=TWEmy3ygtEIIbwGL1mNBXCHkbUYVr056COhg/FWbq6oPYQLl/Z8X+36TZEJvbsRMo
- w7YKiv6iUxy8WIEjBPWVFhkgtJkx1sXpjdUBIXJ6nxKf2Gu4EDCrKdg4dSnkiZBOw+
- 5R5IVdPwcRuId6M2m9hrOam/fAAhjY2BlSu5vmEndrzPqYR1bA80DDnQuVm1nLAJno
- ZI+NcomAc/+41EQE3Goil6hDIvHfmbWkynWnduyBTw98Br+EQcPuzNAFjyUbKKflMA
- Q3xjuhurJByU5GYOWDPNQBSefsqZwrZ37NQAlXbMQ9pTo/4zK0U6C5GYrHR96aODNG
- KvtUwR8TexKfA==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3c6ae25997cso597022f8f.0
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 06:52:43 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756389163; x=1756993963;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rnmDVvKLfEt+JQuQ0VJjpz2QxR5o6E0cFi+dEsf3w3I=;
- b=oIQSAmH9iW5fDo55ENIS8WW3k0g0lTO+CRJHrMg3Y3gYxkQryKdSHWygPNGHyBv7OC
- gVCqfRAAgTsRao4CnGuc0nmaBpcRY1t6diAk1FV9c3Rpm2asGDK3fS2fOpHanLahV7nM
- GusExRYzRjeIASpXZ11j6w27+jzuLL6rcpf3PgYfuW4wb7gCMkZ/6ZIgq/Apn58yB/MF
- SLUFqFkUWQKtowIqggJED3zcjXivf+VZ6l97a71s0f6oMPGKTWVr/0HOFi4FN+pGP0lH
- al65jkmhmodKpw74v4hDGZfSdN0Iw3RPP+JZVBL8np6U13WfpFNbiRnwTo5zZL8uEDWK
- DOqA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV98daqE2wzeyb2rEtWhV2jLujfIMmsdVw0OLIeVRolzgUVNBBqNUkWIoZ7jiel5yaUBKDELFo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2HIxU0uzdaQoxj13dMR0erTD6ScSPiYpl6ASAIiw+/2AWoNDN
- FoHi5lPkx2p2wz9AMN3XSBrQoqvwyYbOdWGSKAFp54/dVTbCZQiqms8gYNhrSniIRXwy8fD/zx4
- q0DNMsKBvNrEvOqmp1MRTN/EcYbtl8crcjFwuwJ4grqFt6mwqyHcaimoNu6f4R8AmVz1R+kU=
-X-Gm-Gg: ASbGncsZYIT8SemdZPFAf56Yy4r4OjnmOJBjy0itxLSqdRp0qTAIsVWGx15e9qIFbnm
- B9Gknfg0TF5KKuLFEzak3nTl4nfGpAAHQOowlXjnfWYLHefdkOvOIZNYYqCvmiZ8LrTw+N10VZY
- KYFGpi1KzYjsiyt0wuQiHfE9Z6HImu4cYRKVDthmkSGI+69HRAn8IdxSafa3gtUlHkxEPNt5kae
- f72frQ/u/+Wbqisu8wm5UlQOUfD1ij+wwM2BfGmTLcknCxbWB5sie1GwEChGxpOv+4dWc6dl8sU
- Q0bzZG5NzobB+0qbNdpD+CnmUhS/GUGLc5hpYAvJsuIFQSdXBBGCIPyqMD8Vc3sniKdMpog+hS2
- GU732A4qwT0jQiFlUf41yrzZUNsfFhf4=
-X-Received: by 2002:a05:6000:26c3:b0:3cd:f441:9217 with SMTP id
- ffacd0b85a97d-3cdf44196c8mr2133009f8f.3.1756389163450; 
- Thu, 28 Aug 2025 06:52:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHEh8eMimdQDHTkpBRJIpuM32tEDTLhFxkqQsj2NFxMylA00inEQ/JAorjT8cYXdWButh+q0Q==
-X-Received: by 2002:a05:6000:26c3:b0:3cd:f441:9217 with SMTP id
- ffacd0b85a97d-3cdf44196c8mr2132981f8f.3.1756389163003; 
- Thu, 28 Aug 2025 06:52:43 -0700 (PDT)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3cd5997658fsm5005439f8f.46.2025.08.28.06.52.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Aug 2025 06:52:41 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, Ye Li <ye.li@nxp.com>,
- Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] spl: SPL_DM_SPI_FLASH depends on SPL_DM_SPI
-Date: Thu, 28 Aug 2025 15:52:35 +0200
-Message-ID: <20250828135235.26711-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.50.1
+ spf=pass smtp.mailfrom=andrew@race-technology.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 server.race-technology.com C555671DFB
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=race-technology.com;
+ s=default; t=1756384319;
+ bh=Ds26a22Dq9IBgL7g86Btio7agDIpDshxJXWaflSNIO8=;
+ h=From:To:Cc:References:In-Reply-To:Subject:Date:From;
+ b=TTzuIbgAK4N9fmS9V6WWRtjZEOTPmfVbTpqqbHSp0lt7kLhq1t2uG8BEGWCWgGKDt
+ rreRuoghLs8pmqgrIRmLg3qo4TXAp/P5Sfv0YiXIWzU40L/b4022FK0aszzR+gXX4C
+ XI+bxXaXPVnLI+dNvr7QSv6xuffqlbO8vDoPzNo9hN5VFxgTwxBdBw/vWJDhiHJ2SZ
+ Xmh6VVObpAGuKalnRrXEmiqz4YeYCqU17cXKgb0nRCVAGQjKnV1sTpwYKy1Zvb0KgE
+ 5FpK58TTkULB8PIx1laIALESTNmzfoqEUE5ZUIdRzh5WEMmqVjIPZv5GSdOj9sPP7K
+ GtTk4fLLCRyXw==
+From: <andrew@race-technology.com>
+To: "'Peter Robinson'" <pbrobinson@gmail.com>
+Cc: <u-boot@lists.denx.de>
+References: <013401dc0165$67e6b5d0$37b42170$@race-technology.com>
+ <CALeDE9MYrxVVFEMXPzz4BOsLkSGRiv+hRdLFQcDvRZ7uBax1ww@mail.gmail.com>
+ <06c801dc1807$bb6c31e0$324495a0$@race-technology.com>
+ <367501dc1808$bf221880$3d664980$@race-technology.com>
+In-Reply-To: <367501dc1808$bf221880$3d664980$@race-technology.com>
+Subject: RE: RPI CM5 has 130s delay on boot
+Date: Thu, 28 Aug 2025 13:31:57 +0100
+Message-ID: <008101dc1817$beb96dd0$3c2c4970$@race-technology.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQI0Qol1GYjyOuXYppzaqV3UiQe/nwGLCiRNAgqZI5ECSHMiO7OYuSBg
+X-Mailman-Approved-At: Thu, 28 Aug 2025 16:02:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,27 +72,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SPI flash driver does not build without SPI support enabled.
+Hi Peter,
 
-Fixes: 4151f4f822bb ("spl: Rework and tighten some dependencies")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- common/spl/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks for talking the time to reply.
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index ab05536bd02..f34b96efc02 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1141,7 +1141,7 @@ config SPL_DM_SPI
- 
- config SPL_DM_SPI_FLASH
- 	bool "Support SPI DM FLASH drivers in SPL"
--	depends on SPL_DM
-+	depends on SPL_DM_SPI
- 	help
- 	  Enable support for SPI DM flash drivers in SPL.
- 
--- 
-2.43.0
+The boot delay went away after changing the kernel command line console =
+setting. Previously it was on ttyAMA0, setting it to serial0 (ttyAMA10?) =
+which is the debug uart.
+
+I'm not clear on why - but I was happy it resolved and we can continue!
+
+Kind regards, Andy
+
+-----Original Message-----
+From: Peter Robinson <pbrobinson@gmail.com>
+Sent: 28 August 2025 10:17
+To: andrew@race-technology.com
+Cc: u-boot@lists.denx.de
+Subject: Re: RPI CM5 has 130s delay on boot
+
+Hi Andrew,
+
+Sorry for the delayed reply.
+
+> I'm feeling a bit out my depth and hoping someone can help me. We've=20
+> been using uboot on the RPI CM4 with great success, it's been perfect.
+>
+> We are migrating some projects to the RPI CM5 but have hit a=20
+> roadblock. The boot process regularly (but not always) gets stuck for=20
+> exactly 130s, as shown here:
+
+So I don't have a CM5, only a couple of RPi5s, the early and later revs, =
+for U-Boot testing/development.
+
+
+
+> [ 3.403341] Waiting for root device /dev/mmcblk0p2...
+> [ 3.403453] usb 1-1.7: Product: WS170120 [ 3.403454] usb 1-1.7:=20
+> Manufacturer: WaveShare [ 3.403455] usb 1-1.7: SerialNumber: 220211 [=20
+> 3.429612] input: WaveShare WS170120 Touchscreen as=20
+> /devices/platform/axi/1000480000.usb/usb1/1-1/1-1.7/1-1.7:1.0/0003:0EE
+> F:0005
+> .0001/input/input0
+> [ 3.443253] hid-generic 0003:0EEF:0005.0001: input,hiddev96,hidraw0:=20
+> USB HID
+> v1.11 Device [WaveShare WS170120] on usb-1000480000.usb-1.7/input0 [=20
+> 134.202779] mmc0: Command Queue Engine enabled, 16 tags [ 134.208450]
+> mmc0: new HS400 Enhanced strobe MMC card at address 0001 [ 134.215432]
+> mmcblk0: mmc0:0001 BJTD4R 29.1 GiB [ 134.221178] mmcblk0: p1 p2 p3 p4=20
+> < p5 p6 > [ 134.226023] mmcblk0: mmc0:0001 BJTD4R 29.1 GiB [=20
+> 134.230952] mmcblk0boot0: mmc0:0001 BJTD4R 4.00 MiB
+>
+>
+>
+> After searching, this appears to be the same issue as reported here:
+>
+>
+>
+> https://lore.kernel.org/u-boot/421019670.5226453.1745000686387@mail.ya
+> hoo.co
+> m/
+>
+>
+>
+> but I cannot see any solution. Can anyone assist please?
+
+Is this the eMMC that's built into the SoM or is it external on a =
+carrier board? Can you provide more details.
+
+On the RPi5 the uSD slot is using the SoC built in controller, I presume =
+that's the case on the CM5 or whatever you're using as the RP1 needs to =
+be bought up first. We don't currently support the RP1 in U-Boot so I'm =
+not sure that's coming into play, I suspect purely the SDHCI =
+controllers.
+
+Unfortunately the details of most of the broadcom chips are closed and =
+even the RPi U-Boot maintainers don't have access to those so we might =
+be at a bit of a loss ATM.
+
+
 
