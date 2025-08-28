@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AFD9C8303F
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 15:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF38CA0EED
+	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 17:31:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A085D833E1;
-	Thu, 28 Aug 2025 17:47:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6F048832C8;
+	Thu, 28 Aug 2025 19:31:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NI4nlfWF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IaHIGXjr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3A15833ED; Thu, 28 Aug 2025 17:47:29 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D6EE983321; Thu, 28 Aug 2025 19:31:43 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5BA6833E1
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 17:47:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71581831D5
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 19:31:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cCQl16Pmsz9svm;
- Thu, 28 Aug 2025 17:47:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756396045;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tqQbJ0xx6BzQJ4drJTcJ9WlEshPnMPoxZjidCFUTvA4=;
- b=NI4nlfWFJeMq9mhnmiTWRWssjzjAxg9/8Zfjd6nP1fwIrm+OgE/ohWm/9bEiNMNJ7fF64s
- I+jDSoMNIlesYsKaQDp0h0XEuLE/vV+xW6pIpAlDYfVENqIIXUEyp9FyCrLtyJcvJa1Gno
- IiT2k0TN12J2czDANv3nR+olb+MafYwMz6YCUfxnxMPqnIPYVldhXloRjDgeFJB+b2hny6
- ter9keQy65tdMO8aab8nj/76Fd0wOobqC3o7Xg4aSprieNlt01MPsuUGRrdVU0u8vJLVY1
- DbonA3p8yZXVwOaiSsKAlRPoOdInRx4mlgcS2GMovXQrhEnU7MmWBtGiCRLJ5A==
-Message-ID: <4c1c3b40-f1c9-417c-9888-006cec353180@mailbox.org>
-Date: Thu, 28 Aug 2025 17:38:29 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7454a992f7dso731403a34.3
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 10:31:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1756402300; x=1757007100; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FwvT1sFwJbDzeBFxY1mcE8j1x1/8pZMd8ZTJ+3icgkY=;
+ b=IaHIGXjr+71oM/+QG3tEEu5KTRxB+fEgTtfAW15u28oKbzGOZs1lat2i2149iaaYVQ
+ FqbYafQ9r2r0kmEUTRerW803ZHb/CAu+eE+LA02pF63mk4xg/fKRYETPCqjrTqM6hlaQ
+ 2wUZA85Theue24JlLmblIMlKNtOXKO/fV//6g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756402300; x=1757007100;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FwvT1sFwJbDzeBFxY1mcE8j1x1/8pZMd8ZTJ+3icgkY=;
+ b=GGyVNnIcTOml8X5ZO93ODaUnu1JH1tG65ab6KKy/Cx3atsutVzZgU/29NVN69nx0JD
+ iG+/JaZHqlY7yAAbXnWS95UAcfEAXCuruXLb3LiYLgsJASxNdm1iG7EiJ/bJ8l8kjJIe
+ IB/l+mGXJgDJmYR6pAHEuVNwXZVPuZrwgOTPPxhztmBYZNPOef5Gy/pXvBQRupujbkcC
+ TXJ0mbB4KstJfM9IoIpOPETq99mrM+U28Riil6Na+LWvCaZcGcmX9frZCvoDi6eajHIS
+ o0AtiWPnXX27Fab1zbCJjEyslPJk2t/5kuEPA9j+WDPL0PpteA7hRTGWgiMyYjfyGpJb
+ XmXQ==
+X-Gm-Message-State: AOJu0YwKw8byQ3k+L1QpWJkHh9zO8kAiyUyvSyxPA2ZzS8s0Gv1Fy3MN
+ p2Zc/I0xY4y7asP5sQgNBomh1OZWuObudOW4F+mrPBgkusQZ6vN264xfrDeWyB3zivQ=
+X-Gm-Gg: ASbGncuWKb21esorVn16XNiYvrmUVkaQF8a/kv7ejOeDgWDuUw+t5uPTvF2Hk7GBwi7
+ 0Vst/bJSMMH3Cq9dwX5j3l7eTmpOsDGtepBiKiDBaWFQ82L4fiIk2HoAJTKyQFL6YMoS+nY5wWN
+ HxjABxzSgcZfEPWu1S/FPvEfZk67BKEC9+Qgebw4wQtQ0gagZS4HEB7KUvlckf8VQcoZxXk2xi6
+ lOPhnKIWRaNBciWfIlEhGjBpXz/zXm4Abv35j1rwPADn4sIIPGEaTjtXTJLtRePtSsrYnG7CWJy
+ p1vCcPTHXBGFe1ynN4EheB9AgZIMfFWP/wkk935v+ghC4D7Nh3ECaQvnDnaWGb9akVt+4xhRJw6
+ 8YWhebvlpfXhIdVm9dDOymObh1V7o9vhyZPDGesobnyGzGHxsfeEsgoio
+X-Google-Smtp-Source: AGHT+IF6k2Y6ZCSaVfLpTjvJxjXkkLu+oa8knOJdA+pYPR47T2EGO8mLlWMp/qDGisDRwDAxrS4fiA==
+X-Received: by 2002:a05:6808:1799:b0:435:f353:a648 with SMTP id
+ 5614622812f47-43785198087mr11342775b6e.2.1756402300037; 
+ Thu, 28 Aug 2025 10:31:40 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-61e1fd98f28sm39590eaf.23.2025.08.28.10.31.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Aug 2025 10:31:39 -0700 (PDT)
+Date: Thu, 28 Aug 2025 11:31:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: u-boot@lists.denx.de, nm@ti.com, n-francis@ti.com, vigneshr@ti.com,
+ Jared McArthur <j-mcarthur@ti.com>
+Subject: Re: [PATCH] arm: mach-k3: increase max resasg_entries
+Message-ID: <20250828173137.GQ124814@bill-the-cat>
+References: <20250823080615.1899597-1-u-kumar1@ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] misc: fs_loader: Add QSPI RAW partition loading support
-To: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>,
- Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- "Chee, Tien Fong" <tien.fong.chee@altera.com>
-References: <24b4a185-3575-46ae-8d5d-43fd0902a4f3@mailbox.org>
- <088604a7-3220-4158-a7aa-6e1528b9e38d@altera.com>
- <4f28a730-3952-4a6e-8f9b-506b588b43e6@mailbox.org>
- <6f4b1dbf-45ea-42d8-8f26-a611ed215d75@altera.com>
- <48d5afec-0508-46d6-b444-117d4a7bfe32@mailbox.org>
- <303a50e6-e670-4456-a23c-cb829bc1dd88@altera.com>
- <edcc50c3-4968-494e-9fb1-6acdefd26a53@mailbox.org>
- <c13ee750-2534-4cfa-ac6c-a6a51dec33b1@altera.com>
- <6935fd0b-8027-48a0-b9ec-076535d929b9@mailbox.org>
- <9879ace5-88e0-40be-8b49-4e3baee5c1ec@altera.com>
- <20250825135914.GR124814@bill-the-cat>
- <DS7PR03MB5542E8B85D8091B5C53A14D8BC3EA@DS7PR03MB5542.namprd03.prod.outlook.com>
- <e63533c9-2fd6-4eef-bbdc-324742a3c455@altera.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <e63533c9-2fd6-4eef-bbdc-324742a3c455@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: cw49u8ufpypy7d1spixmz8dpozeq5oge
-X-MBO-RS-ID: 72e68c48d093a2428fa
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="J9ejzajc/CPW9Mzd"
+Content-Disposition: inline
+In-Reply-To: <20250823080615.1899597-1-u-kumar1@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,62 +96,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/25/25 7:44 PM, Ravulapalli, Naresh Kumar wrote:
-> 
-> 
-> On 25-Aug-25 11:08 PM, Tom wrote:
->>
->> Subject: Re: [PATCH v2] misc: fs_loader: Add QSPI RAW partition 
->> loading support
->>
->> On Mon, Aug 25, 2025 at 01:14:59PM +0530, Ravulapalli, Naresh Kumar 
->> wrote:
->>> Hi Marek
->>>
->>> On 21-Aug-25 5:33 PM, Marek Vasut wrote:
->>>>
->>>> On 8/21/25 12:26 PM, Ravulapalli, Naresh Kumar wrote:
->>>>
->>>> [...]
->>>>
->>>>>> How big is the file ? crc32 is weak . Why not use e.g. fitImage
->>>>>> for this ?
->>>>>>
->>>>>> If this raw loading should be available to users, it should come
->>>>>> with a BIG WARNING about data integrity.
->>>>>
->>>>> User can use CRC32 and if they require SHA256/512, they can use
->>>>> that as well or any other algorithm as desired.
->>>>>
->>>>> RAW partition support is helpful for flash constraint devices
->>>>> especially in a use case where we need to store data as RAW during
->>>>> run-time and if data integrity is required, user has the
->>>>> flexibility to choose respective algorithms like CRC/SHA etc. The
->>>>> whole objective of this patch is to provide that flexibility to the 
->>>>> user.
->>>>>
->>>>> I don't think we need the BIG WARNING, as RAW data by definition
->>>>> will not have any built-in integrity features and users should
->>>>> exercise caution if data integrity is required. It is mentioned in
->>>>> the enum definition that choosing "DATA_RAW" flag will store data 
->>>>> as RAW.
->>>>
->>>> It is not a good idea to use RAW data in the first place, because it
->>>> gives the user false sense of safety, but in reality it can lead to
->>>> silent data corruption. Hence, please add big warning.
->>>>
->>>> Also, how big are your payloads ? You did not answer that question .
->>>
->>> Is adding "log_warning()" be sufficient, like "log_warning("%s: Chosen
->>> RAW data type DOESN'T have built-in data integrity support\n", 
->>> __func__);" ?
->>>
->>> Our typical payloads are of 3 KB size.
->>
->> I feel like documenting a reminder about this in the option help text 
->> should be enough.
->>
-> 
-> Thanks Tom, will add the help text in fs_loader.txt in addition to the 
-> log_warning() and the same being explicitly stated during enum definition.
-Kconfig help text should be updated. log_warning() is unnecessary.
+
+--J9ejzajc/CPW9Mzd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Aug 23, 2025 at 01:36:15PM +0530, Udit Kumar wrote:
+
+> Increase max resasg_entries to accommodate max size of
+> largest device J784S4[0].
+>=20
+> [0]: https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j784s4/resasg_=
+types.html
+>=20
+> Reported-by: Jared McArthur <j-mcarthur@ti.com>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+
+Is this for v2025.10 or v2026.01? Thanks.
+
+--=20
+Tom
+
+--J9ejzajc/CPW9Mzd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLCSdQAKCRAr4qD1Cr/k
+CoorAQD0LmaAsHojw2C7w7ZZlvazBxJB6yisrNHv/MTq13kglwEA8wPHSjQ/Wo1t
+eTRRIc0d/bhcSIRToeTbdD+hs5XCgAA=
+=n5dT
+-----END PGP SIGNATURE-----
+
+--J9ejzajc/CPW9Mzd--
