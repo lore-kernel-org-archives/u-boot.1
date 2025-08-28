@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80EF6C8303F
-	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 12:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A73CA0EED
+	for <u-boot@archiver.kernel.org>; Thu, 28 Aug 2025 12:24:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEADA832C8;
-	Thu, 28 Aug 2025 14:15:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DB38D831B4;
+	Thu, 28 Aug 2025 14:24:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d0O/+d88";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gHWi6IE6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D8B8832DD; Thu, 28 Aug 2025 14:15:50 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id E3719832C8; Thu, 28 Aug 2025 14:24:23 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B78783192
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 14:15:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F41B83192
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 14:24:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-55f4969c95aso932545e87.0
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 05:15:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-71d5fb5e34cso8293197b3.0
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 05:24:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756383347; x=1756988147; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gtduvF+nF/9JuCuYb8gCUCarmAixOGNo1huLyqyIUfE=;
- b=d0O/+d88kcr/5j1DPzGtiIonjptrHBrTcJZIwopZOdh/SkRTjg+INCplSlfaD961Cc
- ZpFX/8AqFuWXR6OjwO1SUaK5vsFk0RdvX71WP7ROEcHJxZTJjiDr8ZxZb6atZPkdjKU0
- 7i3Oq0g8RBblYJ1L7l6yU9jKfKtwrDY7ojx9qb6yzoozZ1stX+dJ4wI9Oza9zDfhkQ/L
- fjOQvP3f6JyZDYfk7IbhEuJxVmCnonyg+wi4R+fOakcjSk2HKJti0v3Wpmo8YGw05y5z
- 4+aqmACulFUPh5oTPEohteEXxxCLkjJ05OIKKnvOL+sFGZDI3rJVo6la0O5CubpZ6V2a
- ZkGg==
+ d=linaro.org; s=google; t=1756383858; x=1756988658; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rnjlzXg/cOqtLl6Gubn35QZ8acatGKrPpzwavlussz8=;
+ b=gHWi6IE6B8umwJJEVRGSOd/1un8rdp6mlVQgL3Ml1TIj38VoYx3t3ckTtVCocRqpVI
+ EPZZcFGXElJW0qWM36DoG7AD8FxxbGC4J8P4K7ntUjYTVJZZnuts3xAFVCfwakqvrq6p
+ ua5QjhP4slnOFVsCGeCARDL9RFfK42SF7QnLWw2e1Yp/lb0aANH3UQWmgeKXFqIPdQQQ
+ Tgl8rmgCc0r9lMIraA4jXOkK0FrlElK+TPY0+//l7pMu9ha+a6v2lu1+u0s5c+Nsj6ar
+ WOmzJnq6ZOafYPkpYK6GfwymvOB3TBAeFqeNruboMIiVuPhtBFV7IVqQ/jaS2hn6SrvJ
+ rS+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756383347; x=1756988147;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gtduvF+nF/9JuCuYb8gCUCarmAixOGNo1huLyqyIUfE=;
- b=fed2Roq5J1ih75LfMmjezC33yq7gn/sbBGgrqBdZyPuBzdvlt5TuZm92iSb1y6Z5UO
- CxmlfhBj+IsTN+epoPq2w3S/30+bPmCOvIXSa9YMQkBw5hgzgdG/L6LP7sgsabNEDBc7
- iW1mJ68kg3QjFu8al6eQu8//SXINwtcHoR8HugfOjWxqPHMvGIjjT3J4nor8ERG52G2c
- 9pZVUMcQPHLP7rBg/MmUX33c2BahbyuAd5RZFFFsFcHaQ/6UXDtqce6trk6vuGEa04pX
- yMy4kXmXJHwLyLWIoQclqbtmQYSsHkLvVwMMheVnV6sjVOF61FiqYI3Hb1VPumg7SXwH
- 09Yg==
+ d=1e100.net; s=20230601; t=1756383858; x=1756988658;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rnjlzXg/cOqtLl6Gubn35QZ8acatGKrPpzwavlussz8=;
+ b=cZ1i6/42KGhNv81Duyyt/YB3tDf7Ytt8nvgl0khI5UZmE47IRunY5PRLCKPfEPucnt
+ RqBz3BpO+ZlRXZM0sA7Q44QKpo1XJor9GEDkOnpLkzFr7eK2oP1cVzoXchnC78Ua0OUK
+ JS7kn5TwLdcxpP6mCqqR17RUj7shBjJnjeTQh0E9RB68n3/ps2i68D5hsaaPnBFGracL
+ GCGJCGPgeE2Z35lSwYhm0TWm71XCqyBRFeav/537iWfzx7B3P/LzIMuZj3HlrSza33Sg
+ ep52Knb4bbmi4ANp6c5T5epakpMtSAsOLO5JssKbiIrqVnXJUMyoS9d1TaOmNw2bx61I
+ pTaw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVuxElPy1kWTjRmW7vk29D/vpIhIKyRRIx7m41Qg0hmPbbmcUB/WQtIIR0a/bvNnc6FuktP5bE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyqoXU/IBV6dpXq2s9DidXtIqnY/hae8snMt+kXeVU1IeTEX+i4
- p2KtLCooxcCkXpDPRsAYoeILfvHX+9aFVXEUKS1MKaF/XHtGrWmP6GG8zDyBme0tgWXo5DkdwDY
- 6ao5NPQ0Pt8U54NooVTwILkahTo7eyTRN15lo
-X-Gm-Gg: ASbGncuUvJLGBDlXFvPTliIulYI43nS516ViRmctRU7JuwovZXYuQVglm4Kj9GTwds+
- wMYT4XFChE0eHigy6SJ9In8RVU4v1p0Lx/yQ15TXSQIALP5ZMgHwoN8UgUJBB7o2tLDoqu1S6IK
- vgx27V2ienbKhFJEMVQZlr//60CzzquaZMtl/IrAT5oxtuoRtycQjMy2tY6CENbac1w9s+hMzoA
- hYUYvMMbvtOShpxsQVs2UHloIfCa9uz5JQlBqM0WUGd49NhFw==
-X-Google-Smtp-Source: AGHT+IHcTTbbrZ5PuIuVktJVgVUpluVyWT+7JBmRwEh7Zs5IfQmQ+/iZ5i7OQb8J7ad8XKumUhgIwMGUO2hnDqoD5rU=
-X-Received: by 2002:a05:6512:4004:b0:55f:5b65:a3e3 with SMTP id
- 2adb3069b0e04-55f5b65a4efmr879881e87.35.1756383347018; Thu, 28 Aug 2025
- 05:15:47 -0700 (PDT)
+ AJvYcCVqzhHqMoN1g8LK9ZIeBBHeOnp0u08YLM5fPYGQxSOTC3hG7iQMz8alxQJuZ3G8bvXh27Mq+NI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2X7zGMpcamtkIwzrcmx9efXZl1J2G20BVQPOAx/CoEJgHmqvA
+ bBX8I1EgjrR+jt5wAnhD37mQcRIHiwafAgoOEmiFiPs8TUqXllrYd/kalh8gRwHC6YFrU4hQl34
+ zPrLxv4etCHLmNbLbfKI98+1RuL/+mOIecBVFlR+eWw==
+X-Gm-Gg: ASbGnctB+nVFP5cGndCZM12xcgDb4b0UvE2rKYS0GpsPvr6Z0e4ihVrr0mfGAfvT9ct
+ aMqSJcD5aU+nPOPlVr+SUFci7ugMn3FxZGjrGjRiqMeOEgU1d/uzPo0alZJYAi6TTAFDZ/khHG2
+ YNbux4DCO6FtChy190THBTiII0rxb6B4aLYi/dGr23CMKgUQC6aSB+RIzP7dYXcjHGeoJPvgb2u
+ cCrouxBJ6DSiDumMZIXfuA/66nBR7PdYsfi8MJptBa5Xc/cj4Npt5wj/eADqI0MLTg40064pO7K
+ IGWZ3csf+CVMWRgLecC1XVNP7O7NjRdnmBB1ThrSZO8z8ufyXZmMe46z2FlCtt+WXFvUB/w=
+X-Google-Smtp-Source: AGHT+IFqKgyzMApCU9dXDoJ2jY7z8bWtMsK95nNDYV4cMaxn4MiepahRKYT9zRHZsMUcF72Ei9mlV3mnp7k2wmf9tEc=
+X-Received: by 2002:a05:690c:2606:b0:721:2c21:3614 with SMTP id
+ 00721157ae682-72132cd7378mr109524677b3.22.1756383858215; Thu, 28 Aug 2025
+ 05:24:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250822-imx8mp-libra-fpsc-v3-1-50ba9cd2d474@phytec.de>
- <2437d9efbf0121ef177f20b084ad19b54a0312f3.camel@phytec.de>
-In-Reply-To: <2437d9efbf0121ef177f20b084ad19b54a0312f3.camel@phytec.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 28 Aug 2025 09:15:34 -0300
-X-Gm-Features: Ac12FXwk__ywFyI2WDNMkdN01vKnBephmIRuqckWDTz3daExZeJx_T3v17BPmvM
-Message-ID: <CAOMZO5Br+s7HA9e+AXY6qgEhn5RvDkDVEv5xgO4w=cgH+4gZ=A@mail.gmail.com>
-Subject: Re: [PATCH v3] Add imx8mp-libra-fpsc board
-To: Teresa Remmet <t.remmet@phytec.de>
-Cc: "sbabic@nabladev.com" <sbabic@nabladev.com>,
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>, 
- Yannic Moog <y.moog@phytec.de>, "trini@konsulko.com" <trini@konsulko.com>, 
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- Wadim Egorov <w.egorov@phytec.de>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Benjamin Hahn <b.hahn@phytec.de>
+References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
+ <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
+ <CAC_iWjK5d7z-J=rbXa-_+2zjejWOuTJco87-yqJVXtuXmVjdNw@mail.gmail.com>
+ <8730e084-5541-4df5-b067-c97e540b5f37@oss.qualcomm.com>
+In-Reply-To: <8730e084-5541-4df5-b067-c97e540b5f37@oss.qualcomm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 28 Aug 2025 15:23:41 +0300
+X-Gm-Features: Ac12FXwIKs7Vhg8rVpGW_ESX791zrMEkuTkNTvtXVh6oaLA05PCouH8wpodOMko
+Message-ID: <CAC_iWjKTeNTwyQE0KoAApF_qbd1c6ftTnU8jx85sVNBTnYJoRg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] efi_loader: improve device path matching for
+ partition lookup
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, xypron.glpk@gmx.de, adrianox@gmail.com, 
+ moritzf@google.com, sjg@chromium.org, maks.mishinfz@gmail.com, 
+ javierm@redhat.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,58 +100,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Teresa,
-
-On Tue, Aug 26, 2025 at 9:19=E2=80=AFAM Teresa Remmet <t.remmet@phytec.de> =
-wrote:
-
-> > +
-> > +/* ddr timing config params */
-> > +struct dram_timing_info dram_timing =3D {
-> > +       .ddrc_cfg =3D ddr_ddrc_cfg,
-> > +       .ddrc_cfg_num =3D ARRAY_SIZE(ddr_ddrc_cfg),
-> > +       .ddrphy_cfg =3D ddr_ddrphy_cfg,
-> > +       .ddrphy_cfg_num =3D ARRAY_SIZE(ddr_ddrphy_cfg),
-> > +       .fsp_msg =3D ddr_dram_fsp_msg,
-> > +       .fsp_msg_num =3D ARRAY_SIZE(ddr_dram_fsp_msg),
-> > +       .ddrphy_trained_csr =3D ddr_ddrphy_trained_csr,
-> > +       .ddrphy_trained_csr_num =3D ARRAY_SIZE(ddr_ddrphy_trained_csr),
-> > +       .ddrphy_pie =3D ddr_phy_pie,
-> > +       .ddrphy_pie_num =3D ARRAY_SIZE(ddr_phy_pie),
-> > +       .fsp_table =3D { 4000, },
-> > +};
-> > +
+On Tue, 26 Aug 2025 at 12:07, Balaji Selvanathan
+<balaji.selvanathan@oss.qualcomm.com> wrote:
 >
-> please remove the empty line at EOF.
-
-Yes, this causes a warning while applying this patch.
-
-> > +Build U-Boot
-> > +^^^^^^^^^^^^
-> > +
-> > +.. code-block:: bash
-> > +
-> > +   $ make flash.bin
+> Hi Ilias,
 >
-> looks like this should be removed.
+>    Sorry for the late reply.
+>    If i point to esp, then it should work.
+>    But in the boot option generation, they are skipping if its a partition:
+>              i.e., in:
+> efi_bootmgr_enumerate_boot_options(), in this code (line 838):
+>                  if (blkio->media->logical_partition)
+>                          continue;
+>    It seems that, by default, the boot option generation logic is not
+> designed to include partition as a boot option; Not sure if this is
+> intentional. If its not, then should we correct this logic?
 
-Correct.
+Yes it was. In fact the original patches were adding the file instead
+of the disk [1], but we had concerns on scanning all partitions wrt to
+boot time. I don't remember if anyone tested the boot time though.
 
-> Teresa
+[1] https://lore.kernel.org/u-boot/A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de/
+
+Thanks
+/Ilias
+>  Your inputs
+> are appreciated.
 >
->
-> > +   $ make -j $(nproc) \
-> > +          CROSS_COMPILE=3Daarch64-linux-gnu- \
-> > +          imx8mp-libra-fpsc_defconfig \
-> > +          flash.bin
-
-There is no need to pass "flash.bin"
-
-After running:
-
-make  imx8mp-libra-fpsc_defconfig
-make
-
-The flash.bin will be generated automatically.
-
-I'll wait for v4. Thanks
+> On 8/5/2025 1:17 PM, Ilias Apalodimas wrote:
+> > I am not sure this is a bug. The EFI spec says that in order to
+> > trigger a capsule update you need to have an active boot option
+> > pointing to the same ESP the capsule is installed.
+> > Is your boot0000 automatically generated? If so it doesnt point to the
+> > ESP and the capsule update doesn't trigger correctly. Does it work if
+> > you manually add a boot option pointing to the ESP?
