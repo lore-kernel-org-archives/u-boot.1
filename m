@@ -4,79 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB6FCA0FF7
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 10:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C69ACA0FF9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:23:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E44F835EA;
-	Fri, 29 Aug 2025 12:19:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A184B835EA;
+	Fri, 29 Aug 2025 16:23:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZwD7TG0z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dtzQhX2R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B1C9835FE; Fri, 29 Aug 2025 12:19:18 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 6B230835FE; Fri, 29 Aug 2025 16:23:34 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7997183542
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 12:19:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED515835D0
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 16:23:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-afe84202bc2so276534366b.2
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 03:19:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-30cce50dfb4so2176895fac.0
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 07:23:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756462756; x=1757067556; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1OL71Qx5RGbgwNuz97CMQEbF33prK8TJug9SHG8/ZD0=;
- b=ZwD7TG0zsy/pWXfqbyUF4tNIBQngxSo0ozPVjdikeLINpF8UMOs+AuEsrGjQNQo5HC
- tH21BPszhu1jqbyWlJfgeVYvvMo9XKYDYg17ssRIXa38s4Ted4ysLbaAPLUT5PTorTCH
- gxOpjeA88opjYQmKkFAAvrSH5CgPPw5eULytdduFBWWcHVGCH1gvhP26/MVdio3sVLHS
- 9l/A93nHhxke1Uy88hx8BkmIYXLa0EGRXki1NeNuj4vLA58Snrsf+Y2G/K1V8gUhKKxu
- eMsQXtwnTUvZJ98hfJggqXr6c4xixmDPZr1ckhY1h5fPo0h4W256SitsvrVHMgkOTr/+
- 6amw==
+ d=konsulko.com; s=google; t=1756477410; x=1757082210; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=AgIJHTSnQakiPpm3aBTMc/hV3OSNeu0MW3JVpW44yqc=;
+ b=dtzQhX2RYhDoNkZHnqa9Tdh11QjK/eyUtGGWeoW5BHsZMENfZtTG2onWVsdRXrLobP
+ qna7qbv6zbNm6C+m3qGbVjDyo4bDAy/zxIbPopOfOKR1GjLP8ibhF8FtYDLFbaa30dNQ
+ XrgexHyX5UNGVGgjwSXGFmiZ6SSnMHdCxjT2M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756462756; x=1757067556;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1OL71Qx5RGbgwNuz97CMQEbF33prK8TJug9SHG8/ZD0=;
- b=vYVpdwWqsO/8dFVBvoEaAcNLA7uGKWr+bCe3DFPWDcNy17KQfmdpi2yA3JpUfQtI6V
- TfKjyHbDsdYeYguhWh60VRjHbvOfqwpJ5ryti4fokYAX6HY3j8FdRIFgi3t8OdEpeQIz
- uzNv1R/vGp6vKcQCgNtjKd2kux+oZkenFXfYN82IfBUaIt+1yqmsI/+jYMV+HzB0iD4T
- 0LMhsE+hQTr+MX4deFcp+F8Qt25JWVs3BLD+3HfzoRTP0QD0gnavnn2Ofwlf4D5V/KEF
- lGlCWiRfarY8f+Yurh/enOxc/fuyeu7MLLmbTnIsHXbYuBZnhHq5HAPSi/nDo2G5aDiK
- X2qw==
-X-Gm-Message-State: AOJu0YwXB5koV+kM57CqPjxjrVwYczyDMOQhUyXEaWKQwb2qLQ6SD48s
- KnoYeJ83Jx7zaBb3w9+vl2FOV3FCE032LGIfMPSA/5hvq1l+HUxZyxqg4I2QWvdbClRw9VLKGXe
- ocl3IcaJT5bZGgSbuP/P6wmL3dKSD6PW1FhHt
-X-Gm-Gg: ASbGnctWb2v2OvXaS/TMobK3ecmwBNe3lqOdJrdwczXJa9uuzqql/5wfDaL9hgTUaHO
- izzPmSCl0LcNqz5Zyfhp6ksa+kt2Lnzl2jQ3BRF3iMS/bbUJVzJDviKZUQ3L5ZHkbQuPUk78wkX
- oN0cEWZzbqredVqWzNoJkGBBD3k1IrZhnwrH0zJXVpV8Jm2oRW+6Hy1aafRBTiN1INH6Z4L1MTy
- FljCUsaYg2M1g56lY7mNQt3Ys9jGjCTKQMkLNz6m7bjug==
-X-Google-Smtp-Source: AGHT+IFkbZ5NAQI2BNueHYGzG1CHrBfFDsAKdIVptv4oM12Eq+5+wc+igVlIGB4o6LfEc6d2SvyFjGLFR8G7FmyTF9g=
-X-Received: by 2002:a05:6402:40ca:b0:61c:8fe9:9423 with SMTP id
- 4fb4d7f45d1cf-61c8fe998e1mr11092206a12.17.1756462755745; Fri, 29 Aug 2025
- 03:19:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1756477410; x=1757082210;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AgIJHTSnQakiPpm3aBTMc/hV3OSNeu0MW3JVpW44yqc=;
+ b=bzII5Yronmsr/BkJAFfQa1N0YTFBXmTgRDNoQaWvu62uTK2IFJ82OdH7rJ1h+lWhxQ
+ SwDmRaOh6Y97LjOe1A3cOu124HS85Ynja+1dbPDluYHooBA94RjitxKNwpoBSxzu4O6D
+ Bbc5S1YuBsLH3M0OeTcrZEceM4rzAA/MCUfvbqt3kxW7wpqhHiXo0+koYDeeOqEiYsVn
+ JxXH0edQCerp/mgssBbifh4axbqySbaiM8jnsvTmHC3fHKcAx/6k5NsaRbkCsb5/Um4l
+ 6UCmsj/Hl3X2pWi7+H4/bdtdK9ouNksULp4Y2/kzoaj8I9zPd6YSQnNI4mLRJubaTGPG
+ Vcig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKlHrXPx7Elska88K0BM5+bb5SurF5yB9d/iBRzQ9yKjyKuuHZaFg1vfDZE4CQIcdT96jxt9A=@lists.denx.de
+X-Gm-Message-State: AOJu0YyGrXlRJUJDFknlAPH2gxs6wWeApCys61L2l5O4+PtWWLAGFCjX
+ otmuVBCXZSmlP6CnsN6BUEHxKpZiU+97HU471DB7qBrG5jQ9iOYpvkgdAT85IYBOk0E=
+X-Gm-Gg: ASbGncuQlxPHfnyj7WukuQwtsHU1jcaLtWEduI331/Si3WJb7p2NW7aiyZvma8i9ebB
+ 9L6X6qlZjN+oOMkDQFipEZT20lgtJ3nRIFqtC3XV2YihmuhSFybcEVsN8eChc6bgTQUxQcrl9k1
+ Dgy5vhHhIIRquUcUPaaq1XzzJ/w1uYLWfr2dbU44VCM8B8kSAmTqsnrgtpwotFKhuXo233dbT0V
+ f22tp0nU7vNMVcUvlj6vZixXKxuyeMlNpbzPcRrf6FbzhNN+ElkXAQHIDJ8t/oGvxriaBTmhJzB
+ 0zVFCOal7oG1TClkLrahMPxCWZzRzjf5TavIb9LFjJx8fWIk+yGzFnEempW15v4m1eACApGPZRX
+ TP9bVS6MEbwnlbyCCBjPkKt5TZAcmCpqA9aPjspCywwDY8CI5Eyq2XuCp
+X-Google-Smtp-Source: AGHT+IFFd2wwChzv1UlKHwPql2sbkTBD/uLchFsueIqaC9XCwc7xZLnxaJkuQ7JsmKNtk/MlStwCpA==
+X-Received: by 2002:a05:6870:304a:b0:314:b6a6:685a with SMTP id
+ 586e51a60fabf-314dcdf52dcmr11867336fac.40.1756477410531; 
+ Fri, 29 Aug 2025 07:23:30 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-315afc5b846sm1323066fac.13.2025.08.29.07.23.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 29 Aug 2025 07:23:29 -0700 (PDT)
+Date: Fri, 29 Aug 2025 08:23:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Weijie Gao =?utf-8?B?KOmrmOaDn+adsCk=?= <Weijie.Gao@mediatek.com>
+Cc: "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ SkyLake Huang =?utf-8?B?KOm7g+WVn+a+pCk=?= <SkyLake.Huang@mediatek.com>
+Subject: Re: [PATCH v2 3/4] dt-bindings: mediatek: add doc for MediaTek
+ MT7987/MT7988 2.5Gb ethernrt PHY
+Message-ID: <20250829142327.GT124814@bill-the-cat>
+References: <cover.1756283872.git.weijie.gao@mediatek.com>
+ <8c0d6997255a2bbc2e761ed457c51de653cc96c5.1756283872.git.weijie.gao@mediatek.com>
+ <20250827182822.GJ124814@bill-the-cat>
+ <e13e0dabf7b4adee9b987557c2c54803dcc6075e.camel@mediatek.com>
+ <20250828135231.GO124814@bill-the-cat>
+ <d2a5263ad99060c90f8b414db96d45f192c6f6db.camel@mediatek.com>
 MIME-Version: 1.0
-References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
- <CALeDE9M1gvJ1Z=vNr345V35QjgfGU_Q2Wki5dMF-zAqY-ko=BQ@mail.gmail.com>
- <f5074534-b565-460d-9943-6493174db3f9@epam.com>
- <1b82498b-73e0-4793-a320-b49828273fc7@munisense.com>
-In-Reply-To: <1b82498b-73e0-4793-a320-b49828273fc7@munisense.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 29 Aug 2025 11:19:04 +0100
-X-Gm-Features: Ac12FXzitxnkH3vvRR8LkJWgClmnyggQot7wEmYMueTysKgaACGkaLCuboGN1lc
-Message-ID: <CALeDE9Oks9P+ZGRUYOvEUg-1DD0OvsRsPYmNbakWUar2LVbN=A@mail.gmail.com>
-Subject: Re: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
-To: Gijs Peskens <gijs.peskens@munisense.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="terzhZMqiZjqU4Q7"
+Content-Disposition: inline
+In-Reply-To: <d2a5263ad99060c90f8b414db96d45f192c6f6db.camel@mediatek.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,38 +107,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 29 Aug 2025 at 11:10, Gijs Peskens <gijs.peskens@munisense.com> wrote:
->
-> On 20-02-2025 09:54, Oleksii Moisieiev wrote:
-> > Hi Peter,
-> >
-> > On 19/02/2025 21:37, Peter Robinson wrote:
-> >> Hi Oleksii,
-> >>
-> >> I've started to look at this.
-> >>
-> >> On Wed, 5 Feb 2025 at 10:15, Oleksii Moisieiev
-> >> <Oleksii_Moisieiev@epam.com> wrote:
-> >>
-> >>      This patch series provides generic support for Raspberry PI 5 in
-> >>      U-Boot with additional hardware drivers.
-> >>      The following features were implemented:
-> >>      1) add generic board config for Raspberry PI5 including device-tree
-> >>      files;
-> >>
-> >>
-> >> We already have basic support for the RPi5 since Jan last year, you
-> >> can see the patches [1]. This serious should build on that rather than
-> >> add new duplicated bits. It supports basic serial and mSD support.
-> > Thanks mentioning. I will do full rebase after upstreaming of the
-> > dt-bindings to the Linux Kernel.
-> >
-> > Oleksii
-> Thanks Oleksii!
->
-> With RP1 (seemingly) coming for 6.17 does this mean we can start testing
-> a V2 in he near(ish) future?
 
-It will be at least 6.18, but there's no reason patches can't come in,
-also they can be broken down into smaller series, thinks like reset
-and pcie can land before the rest.
+--terzhZMqiZjqU4Q7
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Aug 29, 2025 at 01:44:45AM +0000, Weijie Gao (=E9=AB=98=E6=83=9F=E6=
+=9D=B0) wrote:
+> On Thu, 2025-08-28 at 07:52 -0600, Tom Rini wrote:
+> > On Thu, Aug 28, 2025 at 03:22:14PM +0800, Weijie Gao wrote:
+> > > On Wed, 2025-08-27 at 12:28 -0600, Tom Rini wrote:
+> > > > On Wed, Aug 27, 2025 at 04:55:54PM +0800, Weijie Gao wrote:
+> > > > > The MediaTek MT7987 and MT7988 platforms supports one built-in
+> > > > > 2.5Gb
+> > > > > ethernet PHY through eth1 interface.
+> > > > >=20
+> > > > > This patch add documentation for configuring these PHYs.
+> > > > >=20
+> > > > > Signed-off-by: Sky Huang <SkyLake.Huang@mediatek.com>
+> > > > > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > > > > ---
+> > > > > Changes in v2:
+> > > > > 1. rename "pd-disable" property to "half-en"
+> > > > > 2. rename "gbe-min-ipg-11-bytes" property to "gbe-min-ipg-11-
+> > > > > bytes-
+> > > > > en"
+> > > > > 3. rename "auto-downshift-disable" property to "auto-downshift-
+> > > > > dis"
+> > > > > 4. add note for "retrain-dis" property
+> > > > > ---
+> > > > >  .../net/phy/mediatek,mt798x-i2p5ge-phy.txt    | 68
+> > > > > +++++++++++++++++++
+> > > > >  1 file changed, 68 insertions(+)
+> > > > >  create mode 100644 doc/device-tree-
+> > > > > bindings/net/phy/mediatek,mt798x-i2p5ge-phy.txt
+> > > >=20
+> > > > What is the status of this binding in Linux? Thanks.
+> > > >=20
+> > >=20
+> > > The driver in linux kernel is just a basic version supporting only
+> > > mt7988, and of course none of these bindings are supported. The u-
+> > > boot
+> > > driver is actually the complete version. We also plan to update the
+> > > linux driver later.
+> >=20
+> > To make using OF_UPSTREAM easier, among other things, I would prefer
+> > to
+> > get the binding finalized in the kernel and then implement things in
+> > U-Boot so that we don't end up having to deal with incompatibilities
+> > here. Thanks.
+> >=20
+>=20
+> I can resend this driver with all dt-binding related code removed as
+> they are not really used in normal case. No incompatibilitie will be
+> introduce in this case.
+
+Sounds good, thanks.
+
+--=20
+Tom
+
+--terzhZMqiZjqU4Q7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLG32wAKCRAr4qD1Cr/k
+CgvZAP9QVGJIvJhGGHSl1LQgEW2EenLGEMTskCo6h3PRGrVt8QEAt5EArRsirg9s
+XasoL92NYN9TH4eINaqwiCM4BTeRVg8=
+=/PIx
+-----END PGP SIGNATURE-----
+
+--terzhZMqiZjqU4Q7--
