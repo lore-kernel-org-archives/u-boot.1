@@ -4,84 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67115CA0FF0
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 23:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF754CA0FF0
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 23:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F1A383824;
-	Sat, 30 Aug 2025 01:40:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4100783622;
+	Sat, 30 Aug 2025 01:58:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jkmD6fgV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="M6avW/KK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A90078380F; Sat, 30 Aug 2025 01:40:00 +0200 (CEST)
-Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
- [IPv6:2607:f8b0:4864:20::930])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2790D83642; Sat, 30 Aug 2025 01:58:20 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95CAD837E2
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 01:39:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35158835EA
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 01:58:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-ua1-x930.google.com with SMTP id
- a1e0cc1a2514c-89434e44afcso1302140241.3
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 16:39:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756510797; x=1757115597; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EafLMbEkLM/zahQku3M0Wk0FyM36qwWWXx5zP0f9ySM=;
- b=jkmD6fgVfdbhxgMctIsfFAkhDk4h93QcdKuUW9ip7xfcg8B79f3eqzDRRLVQMyfocR
- n7qd4+9EjDBP+qRPK1vVqZqCslfRZwXfGpm4s2y2xZ18jDkIBynvPvd7uXOJzAGzdiAK
- P2Iz1EQdXUFSbpfXUxvjs22+U1L0sceXpeGmXKi2yghCLHSuBKoUA0QNyZglY1T74gld
- AksoUuzAOhUig0/zuAf/p025z+aaRHyEl4Px827rxOGT9FYpHP8QW0EfPdDkz2MmD3ys
- OWVsVFRgXpV94nhRGFQ6ysHcfgO/aSOz+XrebowX9KomdFEy/Mvw4oSF1IS6KjYQIgnL
- olHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756510797; x=1757115597;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EafLMbEkLM/zahQku3M0Wk0FyM36qwWWXx5zP0f9ySM=;
- b=DVQ90nxtHVqoqtUfmXB7pjvGHWLPENbvsp7OHVMA3ksJdugiOssIZKpXu7YN/tW5Pt
- 4qhXlIdmUfnII5CkFahQ766sf6Cxssgn/E0Sid28LZtdeCReGDfkX1VH3Fl5mgPaD5eL
- TziM8n41jHOC+b5J9EW/Xz2/neKK8xHS4zg8nK4G8XqEn3tDcR8WUP+fCdwDMLuK7te1
- VY+rpGbiEGMLHxU2Mlk9VFuAAgDRPw6ji9CLsTLC1DyirYMrcjqkOucJn/K+U3km8Vx4
- QVHjbuSpXRGF4FY7fEtD3l7He4HQMFcCx3UisVZA0MziU36tP/IL/QyoEnjP4xOswOo1
- n3xA==
-X-Gm-Message-State: AOJu0YwDJpN8EOqHdrWTUW+R30Gk2X1dWaMZDeIFV0IN8PAj8CH9hxMJ
- MGCOPSvd9ZovB2GImMT9O01G+RmFt6ssgDUtFNsdlonvrozJQP0Kx0bFiGNO6Qx1vBxmy4plrVf
- 35wl5
-X-Gm-Gg: ASbGncsG9uFJuhJNmhophVFKFzTRdHY6k7f05dBkCSq+tBz+KpN2BXMvx7zSWZSp5ud
- AvsD7pWeeV2B/d499yE6Y9IiGjq3G68eZjT8ST5pCTU1BfgoNa8hXSMyAANtmD7sxCPCcVuBsE8
- E59NdMVCWHti4cI3Ir1KIUP7IQ2FU+BnlpFUuVnP3Z0PMPkCXpX/OgDwK1gjw+2fkU/Exeu8odx
- WI+QtAEl14vdoHKRUCqRYB0JqFLX+vw10gD1J1xggFKmPhIlGQBa0GGs1xxDUUE1JGMmLeP99G/
- 7MYclvlqhOKcQv3H2pbYK/xRQgUHU9CtKkoKNN6Jd06nqFNCXMdSvBcbInG01SOpiao0JnJjIW5
- C778wg7quV0JyNT2LKjMuqsaOcYElJuKMA8z5tSdDihFqEKBO4Cn1EQvb/mo=
-X-Google-Smtp-Source: AGHT+IGOr32lGz12n1y9tRdglANUVRPGKa8WToEk2bZuiodRl0QbXwaWuozY/fzQVCV4xX8XgaLpSw==
-X-Received: by 2002:a05:6102:370b:b0:523:e010:df0f with SMTP id
- ada2fe7eead31-52b166d7d27mr131969137.0.1756510797302; 
- Fri, 29 Aug 2025 16:39:57 -0700 (PDT)
-Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.181])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-8943bb744fasm1360819241.15.2025.08.29.16.39.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Aug 2025 16:39:57 -0700 (PDT)
-From: Javier Tia <javier.tia@linaro.org>
-To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 4/4] tools: zynqmp_psu_init_minimize.sh: Switch to
- clang-format
-Date: Fri, 29 Aug 2025 17:39:49 -0600
-Message-ID: <20250829233951.547352-5-javier.tia@linaro.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250829233951.547352-1-javier.tia@linaro.org>
-References: <20250829233951.547352-1-javier.tia@linaro.org>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cDFZt2CLQz9tmC;
+ Sat, 30 Aug 2025 01:58:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1756511894;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9SmnCoCE1Stq8prjaM5bmJWnW/m7RUg7evZsqGoOCjY=;
+ b=M6avW/KKwFNrevpdyZQJVB/n5BVyKlK+sLi+fQqU5atLarQWc3dXk0uPFRdQx1S6tEgoxv
+ /d8DE+gcwi2HEmeJZrop2xNB4ceW3tO8WcSLguu6dXKuUVG/pv7+JYXlD9Fop3xMJV/J5u
+ 8s429pbpqaiFI7ntA36T8kSRJI7sY59aRz9SjPIdcTzOZRZOU9ZHySjbn7XGOtoppvC534
+ eNQ5FcSTEhIZj182N2RRcLFY4VkZSO1lrHdU5rkPx9kJSSpIf0delA/pDpQljSwqGeEOaH
+ 3/uvctW71f++FTd8zJLe0ow0OrFuumdjXIkf7pJaMY2w5EXp36FTy3xM+zwKjA==
+Message-ID: <59b3e8d4-3a00-4ddd-a23c-332ab7ec15ae@mailbox.org>
+Date: Sat, 30 Aug 2025 01:58:12 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2] drivers: clk: agilex: Correct EMAC clock source
+ selection
+To: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ u-boot@lists.denx.de
+Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
+References: <20250828135152.8680-1-nareshkumar.ravulapalli@altera.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250828135152.8680-1-nareshkumar.ravulapalli@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 75abb656b5675ec5ed5
+X-MBO-RS-META: 9wmxxxrc4qxhgubu3sy7tzdidqpm33sg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,29 +78,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the use of scripts/Lindent with clang-format in
-zynqmp_psu_init_minimize.sh. This change is made to align with the rest
-of the codebase that uses clang-format for code formatting. This ensures
-consistency across all scripts in terms of code style and formatting.
-
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
----
- tools/zynqmp_psu_init_minimize.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/tools/zynqmp_psu_init_minimize.sh b/tools/zynqmp_psu_init_minimize.sh
-index 5c8b73703bf..f8b729ebc97 100755
---- a/tools/zynqmp_psu_init_minimize.sh
-+++ b/tools/zynqmp_psu_init_minimize.sh
-@@ -82,7 +82,7 @@ for i in $FUNCS_TO_REMOVE; do
- sed -i "/$i/,/^}$/d" ${OUT}
- done
- 
--scripts/Lindent ${OUT}
-+clang-format -i -style=file ${OUT}
- 
- # Prepend 'static' to internal functions
- sed -i 's/^.*data(void)$/static &/g' ${OUT}
--- 
-2.51.0
-
+On 8/28/25 3:51 PM, Naresh Kumar Ravulapalli wrote:
+> Fix the incorrect bit masking and bit shift used to compute EMAC
+> control which in turn is used to select EMAC clock from EMAC
+> source A or B.
+> 
+> Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+> ---
+>   drivers/clk/altera/clk-agilex.c | 13 ++++++-------
+>   1 file changed, 6 insertions(+), 7 deletions(-)
+> 
+> diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agilex.c
+> index e1ddd02f356..2ad8cfd8856 100644
+> --- a/drivers/clk/altera/clk-agilex.c
+> +++ b/drivers/clk/altera/clk-agilex.c
+> @@ -1,6 +1,7 @@
+> -// SPDX-License-Identifier: GPL-2.0
+> +// SPDX-License-Identifier: GPL-2.0+
+>   /*
+>    * Copyright (C) 2019 Intel Corporation <www.intel.com>
+> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+>    */
+>   
+>   #include <log.h>
+> @@ -11,6 +12,7 @@
+>   #include <dm/lists.h>
+>   #include <dm/util.h>
+>   #include <dt-bindings/clock/agilex-clock.h>
+> +#include <linux/bitfield.h>
+>   #include <linux/bitops.h>
+>   
+>   #include <asm/arch/clock_manager.h>
+> @@ -515,14 +517,11 @@ static u32 clk_get_emac_clk_hz(struct socfpga_clk_plat *plat, u32 emac_id)
+>   	/* Get EMAC clock source */
+>   	ctl = CM_REG_READL(plat, CLKMGR_PERPLL_EMACCTL);
+>   	if (emac_id == AGILEX_EMAC0_CLK)
+> -		ctl = (ctl >> CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_OFFSET) &
+> -		       CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_MASK;
+> +		ctl = FIELD_GET(CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_MASK, ctl);
+>   	else if (emac_id == AGILEX_EMAC1_CLK)
+> -		ctl = (ctl >> CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_OFFSET) &
+> -		       CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_MASK;
+> +		ctl = FIELD_GET(CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_MASK, ctl);
+>   	else if (emac_id == AGILEX_EMAC2_CLK)
+> -		ctl = (ctl >> CLKMGR_PERPLLGRP_EMACCTL_EMAC2SELB_OFFSET) &
+> -		       CLKMGR_PERPLLGRP_EMACCTL_EMAC2SELB_MASK;
+> +		ctl = FIELD_GET(CLKMGR_PERPLLGRP_EMACCTL_EMAC2SELB_MASK, ctl);
+Please do the actual fix separately from FIELD_GET() conversion.
