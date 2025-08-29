@@ -4,83 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94DC4CA0FF7
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 08:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BAB7C8303F
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 08:30:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14B048354B;
-	Fri, 29 Aug 2025 10:27:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 942CC8354B;
+	Fri, 29 Aug 2025 10:30:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="LHsCz9QO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dz+ePdCB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 388C8835B3; Fri, 29 Aug 2025 10:27:53 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 1E4288359F; Fri, 29 Aug 2025 10:30:34 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D71883542
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 10:27:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1F4CE83542
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 10:30:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-7722e0ca299so263770b3a.1
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 01:27:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bigunclemax@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-55f4410f7c9so2207911e87.2
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 01:30:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1756456069; x=1757060869;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SZai1264xEjInOke0QrHE88Vudvud7xMfN4BWVdYWGw=;
- b=LHsCz9QObX7WsonHlvV6mWmlgEPKw43ugW4mA+6PDFHNS9oGwFvy55CYDX6r8cj9SQ
- xXN8fTzZbKOWFo5KOn867EADinUgQvHokRlF/n79hWyVGVx3/s2LFeHRAKKSNz1Yi6HH
- PQ/a1EZw5KUX08JV3uDL2cuQ7yDbixKl+GgFs=
+ d=gmail.com; s=20230601; t=1756456231; x=1757061031; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OhljXPWmoAimwu/ZhLGIMgSyBN8AZtMJAGJ0BGIxG3I=;
+ b=dz+ePdCBNv+MpFJJo1deSiL8VVxK/yPSz4ollHLVHgpQtmPnLZxD8wyeQv/hXmIOXB
+ BoOFPkLr9JmbielsJoMTAHkUlmrimvoq5w/z0U9/cjRIdjaBEzbQlZEvTyRSC4SzjZxV
+ S/BIHnv1GI6DdCrvWhLbcBXpGyFcLHKGm2ba3O/pHQExoF/Aj1QvwYkoBQFTbRm4eXQA
+ MHE922cdDjGFvukXBui2KNoB2w0EnShuI+wDAze53aXTad51Bn4WYJb06s3eLtZ7/IOl
+ MJUffDRsUwUdu9S/fOf0jjeTOjLAa8YTSw41kbWh+EqxUYV3oDNCOkc1AT0FTTyUs7Yt
+ UNgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756456069; x=1757060869;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1756456231; x=1757061031;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SZai1264xEjInOke0QrHE88Vudvud7xMfN4BWVdYWGw=;
- b=AXcd0SVrwVOo8N3XU506XYv+eNK8/jxLSzaai6kWBP1oYyQicpllC3rcbGsVMU2Q88
- wbW4ceWVW9Y80Bwu5truEvr0uF2wfnv2GhhsJwFEQUaX9vXJ/T3Vlr+9nzqy/BmJyT+N
- Bgt0t0lYYGHsIHwnO++B+KmsGHJoFxCHnKV6jFmProOGOcBPF9/4lR/g0v16jWukZhfo
- VNTGDCIaw4Tta9xjAIdX88FtQNAflFSPFxwMlE9MtZMuKqcoPO7qXUJw4I5owf/Z5mmX
- f68aYDh/17PMBCDjOGHYmZx5gsDLH3LHEJBQzMowcXrcoOVdqS0iTOYOBc6dIqSPFXYu
- 9bSw==
+ bh=OhljXPWmoAimwu/ZhLGIMgSyBN8AZtMJAGJ0BGIxG3I=;
+ b=ARGcnVc0tCHqTO3ydlOlx1v0C6GTBGzbQ7f2ixWYRLobXtum1ylDJlk4OzUcqEH88s
+ E/B+gia8prwavSwqu3IAgRYizdQt909ZPBXFoSTGulFfEMJDJJ3P6sX+8Vy76OwyZkIr
+ TnrqQED4FBJ53HwgNderchLUKXlUXOaNnMos98NRC9GkptncV881amDcofZlMxjJ+XPo
+ IATIkuMxwrMLaLDc21bPxEt2T+NXoXhO81uXl+zUo12tKgQ8Bt9tFkP+wOuQvTG6aX7m
+ yaDP1lOGDQEZIOVV8sF1ZqA6CettWtd5S8lSWoJtbQIVIExiE5FBirRB4ZL/w+3htaaq
+ 45ng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXcHjVD7XR+suvD/ZyPB0WQfQcTwsQt/Fh/Ut3fAvzJRUaJ98a304343Am9V/au7xpd+tqNXPg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZq7zszIQa3hx18sD7ohKQpxGPchik91kgPB9isRBFC7K56GVR
- mL00ynpscxjPXxJj2VsA6ahnCxJSxD1dmz/1nh0qBjOfKQt8R/ZheC/93tqomH5kYk94m+WQV2x
- 5ioKDfHZ/bDv5G6klSXVMxETbPwkjIjzipDBQ4FrkpA==
-X-Gm-Gg: ASbGncsGPiDxOvBi9Zq7JeVPxQbvYtbTIL3M5Kbc20DaNTIzRsqDAIG8SOQHscNtc+6
- KGL3ZxHsh5Xy0MqFy1cXpewQUfW1ZwTzCRSh4pNLzYEDYjY6wBjIhINajRf80tecDBuJKm8niC8
- jhdxrKZeaP7g80flDJxKEVJAmxa8MWUjcSJNsKujPlxnTahvOrW1U+zbm3McUAPI8qRdFU5ykhY
- GbTYohs/Mx/res0
-X-Google-Smtp-Source: AGHT+IHh6hnxoZoyZP6HajVWl6MSGmZVvY4QU5HzXHolJgqPccnid/VdvPTvGZUHfeQZzeFefcROqSnxmRXbFDWWMs0=
-X-Received: by 2002:a17:902:f605:b0:248:dec9:4d3c with SMTP id
- d9443c01a7336-248dec95006mr63863145ad.20.1756456068605; Fri, 29 Aug 2025
- 01:27:48 -0700 (PDT)
+ AJvYcCUe1Qac/7ZafF0AtiPepvCar/Q34MK8AXOcQe+3x41kUI4Uhfz59Ys2FlXWQvFP1hWqd+mvwm8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1+yXnZnW7WuK05W/7xpeBqd+E7c5Wu5QtkSuAjPFGTHkhjErD
+ ptYmQm3YXj+RmDaTq/WsCU1p6TM2rtxhW1s4sWcoNznCFOL8gdSvDCbE
+X-Gm-Gg: ASbGncsNSRlEWKFtwgH5+KfDsbsE1fuurMS9HhSuYfEvCwJ6Ys17Q+IEzmcrMaXlhlz
+ gPO+7857mRNHYVDnk8/X218TsgrZ1G9kh4paK/yqTTy05DgUyiAKswFmBCgQWUkeTg59WGSdhyz
+ f4NAGtdHzp8R8/a+l1MtXKdaMuNa49kB8dsZ1D7lBgKS738XiBJretoIsOMJz2RcuWM3IqDC4HS
+ 5pReZ5pE/piH3ttDOmiJw/Rbz1Y99fEJaS8kfBdpBiZloSp735LpHOmVcVNAq0s1dUwBu1+T3w+
+ rl1PofdZK5RbXS21197FfS3C1Teao0c3997i18BHVvAG7w0ZerUUXmqSZLU1Lb7cHUU/+6qJ4kW
+ be6Gw7doNlPVadHPySPyJQ2rJ48q6yOA8AMmDtL++xVsBQ1Oh9MuIhJoSOg==
+X-Google-Smtp-Source: AGHT+IG3YnW/rMypZlaiiMmlbMvuVZ02jyaNyDHAXhq+C8KozjIK8lSfWh/cYoOTgDrM93LP7XHLtQ==
+X-Received: by 2002:a05:6512:6509:b0:55f:53bd:b137 with SMTP id
+ 2adb3069b0e04-55f53bdb50bmr3100720e87.31.1756456230990; 
+ Fri, 29 Aug 2025 01:30:30 -0700 (PDT)
+Received: from wpc.yadro.com (host-95-152-52-178.dsl.sura.ru. [95.152.52.178])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-55f678451dasm451262e87.81.2025.08.29.01.30.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 29 Aug 2025 01:30:30 -0700 (PDT)
+From: bigunclemax@gmail.com
+To: 
+Cc: bigunclemax@gmail.com, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Marek Vasut <marex@denx.de>,
+ Maxim Kochetkov <m.kochetkov@yadro.com>, Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1] clk: Only enable the parent clock if the clock was enabled
+ before reparenting
+Date: Fri, 29 Aug 2025 11:25:00 +0300
+Message-ID: <20250829082628.623597-2-bigunclemax@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250703165841.1230515-1-miquel.raynal@bootlin.com>
- <CAOf5uwnju+Z4bY0Cx0fy05TOLtaQqikq3z51zqDf2nDgCzQyWw@mail.gmail.com>
- <87wm7jjvlr.fsf@bootlin.com>
-In-Reply-To: <87wm7jjvlr.fsf@bootlin.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 29 Aug 2025 10:27:35 +0200
-X-Gm-Features: Ac12FXyB6jkWyxJ84vX5GHVvKVG8kmrAvuepNPPLaR7jWJWxHxjobwpUKTKNWMw
-Message-ID: <CAOf5uwnZ5QRE+CdAhu33xRwDdygvV4mDRsVn2sZp9ts6SEy_LA@mail.gmail.com>
-Subject: Re: [PATCH] cmd: mtd: Enable speed benchmarking
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot-Denx <u-boot@lists.denx.de>, 
- Steam Lin <stlin2@winbond.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,109 +105,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+From: Maksim Kiselev <bigunclemax@gmail.com>
 
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+The current implementation of clk_set_parent() unconditionally enables
+the new parent clock, even if the target clock was not previously enabled.
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+To avoid this implicit behavior, this patch adds a check for whether
+the target clock has been enabled before parent enabling..
 
-Il lun 4 ago 2025, 11:15 Miquel Raynal <miquel.raynal@bootlin.com> ha
-scritto:
+Fixes: ac30d90f336 ("clk: Ensure the parent clocks are enabled while reparenting")
+Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+---
+ drivers/clk/clk-uclass.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-> Hello Michael,
->
-> >> MA35D1> mtd read nor0 0x81000000 0 0x10000
-> >> Reading 65536 byte(s) at offset 0x00000000
-> >> MA35D1> mtd read.benchmark nor0 0x81000000 0 0x10000
-> >> Reading 65536 byte(s) at offset 0x00000000
-> >> Read speed: 3752kiB/s
-> >>
-> >
-> > I was using time and reading but this looked much nicer. I will give it
-> a try
-> > and review.
->
-> Thanks! It turned out very useful for development purposes :-)
->
-> >> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> >> ---
->
-> [...]
->
-> >> -       bool dump, read, raw, woob, write_empty_pages, has_pages =3D
-> false;
-> >> +       bool dump, read, raw, woob, benchmark, write_empty_pages,
-> has_pages =3D false;
-> >>         u64 start_off, off, len, remaining, default_len;
-> >>         struct mtd_oob_ops io_op =3D {};
-> >>         uint user_addr =3D 0, npages;
-> >> +       u32 bench_start, bench_end;
-> >
-> > unsigned long
->
-> Okay.
->
-> >>         const char *cmd =3D argv[0];
-> >>         struct mtd_info *mtd;
-> >>         u32 oob_len;
-> >> @@ -490,6 +492,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int
-> flag, int argc,
-> >>         read =3D dump || !strncmp(cmd, "read", 4);
-> >>         raw =3D strstr(cmd, ".raw");
-> >>         woob =3D strstr(cmd, ".oob");
-> >> +       benchmark =3D strstr(cmd, ".benchmark");
-> >>         write_empty_pages =3D !has_pages || strstr(cmd, ".dontskipff")=
-;
-> >>
-> >>         argc -=3D 2;
-> >> @@ -559,6 +562,9 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int
-> flag, int argc,
-> >>
-> >>         led_activity_blink();
-> >>
-> >> +       if (benchmark)
-> >> +               bench_start =3D timer_get_us();
-> >> +
-> >>         /* Loop over the pages to do the actual read/write */
-> >>         while (remaining) {
-> >>                 /* Skip the block if it is bad */
-> >> @@ -586,6 +592,13 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int
-> flag, int argc,
-> >>                 io_op.oobbuf +=3D io_op.oobretlen;
-> >>         }
-> >>
-> >> +       if (benchmark && bench_start) {
-> >> +               bench_end =3D timer_get_us();
-> >> +               printf("%s speed: %lukiB/s\n",
-> >> +                      read ? "Read" : "Write",
-> >> +                      ((io_op.len * 1000000) / (bench_end -
-> bench_start)) / 1024);
-> >
-> > Did you check if it can not wrap?
->
-> That is a good question, if my calculations are correct, time capture
-> may wrap if one spends more than 1h12 in the Bootloader. So yes it is
-> 'doable' to make the time overlap.
->
-> But is this relevant? It really is a development feature at the moment
-> (developers comparing speeds would notice the overlap) and Bootloaders
-> in general are not supposed to run for that long anyway. So I would
-> argue that it is acceptable like that.
->
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index 4f35b90382f..0f6bf3e02ed 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -631,10 +631,12 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
+ 	if (!ops->set_parent)
+ 		return -ENOSYS;
+ 
+-	ret = clk_enable(parent);
+-	if (ret && ret != -ENOSYS) {
+-		printf("Cannot enable parent %s\n", parent->dev->name);
+-		return ret;
++	if (clk->enable_count) {
++		ret = clk_enable(parent);
++		if (ret && ret != -ENOSYS) {
++			printf("Cannot enable parent %s\n", parent->dev->name);
++			return ret;
++		}
+ 	}
+ 
+ 	ret = ops->set_parent(clk, parent);
+-- 
+2.48.1
 
-No was not. Because we run 10 seconds test
-
-Michael
-
->
-> Thanks,
-> Miqu=C3=A8l
->
