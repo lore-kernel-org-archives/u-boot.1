@@ -4,82 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F95CA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 21:11:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8074CA0FF9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 22:39:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ED3183642;
-	Fri, 29 Aug 2025 23:11:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E95EB835FE;
+	Sat, 30 Aug 2025 00:39:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p7/Knzg8";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="LpKXPRpZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AD30836D3; Fri, 29 Aug 2025 23:11:26 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 53DD0836D3; Fri, 29 Aug 2025 23:54:42 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A669835FE
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 23:11:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 999FA835FE
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 23:54:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-61bf9ef4cc0so1551148eaf.0
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 14:11:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756501883; x=1757106683; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hw980OQIZqoloWrz3jphWaRX9ukRVnYZeeY8zZdUhCk=;
- b=p7/Knzg8nnWE5KCNww9ecKYfQNt2fn1bkg6E1Et9BgflE/6vaYpnCdlP+SXOfmyxHU
- cfGpomjDHMmdqWZSib/7YAHsTAPEkSZc9riXIktC1FuTBd2XYkKC3yXa5j144drRKsYn
- VCLhAHl+SeKSOU91ikBYF2QlTJ7GPNQv5J5jw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756501883; x=1757106683;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hw980OQIZqoloWrz3jphWaRX9ukRVnYZeeY8zZdUhCk=;
- b=YDfRv4vqy3UBgEi2n4TDE8tAOUpG7ByOUNf3XyVxqMo9UYH8LJnwZo9SsmxMsMzKDM
- ekl2A/hGiv7ZD6AH4djKgJmq2nYD35OtTYwAdzeSQm0QcxqkQZ4vAniRZZCHPUd5yHzF
- mA5YahWxTBhn5sGR6i76wulWOojZz59AhcoEas6Ycx3es2C6hBNKydmL+G4enH6Sj38t
- 24RSXFQWwZXM6nNoqP9aNMk0FclHS3j+o5AxgdLNZ1NCUc2/YsyDxIEowdX3xnKoI20f
- atqkj2HbDHIL9PSzwnAFUcLSIJeC7zxOzUMUXTw9eTdjF5XpxxRmVVLzschaC/iaytYh
- qmPg==
-X-Gm-Message-State: AOJu0Yxf0c/eVrrHRkDQ51YSY1YJH5OQbOBDAyMKI/FBa15q7ZEijpQr
- h4FzrUMWpxuhuQ/Ndn8/dFBdLB8tssEFZcqz3aAAbaNQpTvos7E0ggpBLgYbQjCKX+U57y8oVQ2
- iSu6hpK4=
-X-Gm-Gg: ASbGncsvgmwEvq//gPw8xlRTY5JcpWfT6VMo7E8IKbhbJucApIuk5QAYJVMstZZEW7K
- rfxFhEDTMFYMx4vTCRhROAphuklxGVyGV4dZXsSdTfLKlVtTwIEzSbE7pStmhEPOTwY/Jbpq1Yk
- 9yroVuEb7svWJABwwdmBdvzLAPAu7ShhBbQkdc1jrhK+ZVJj2/iQuQ7z0GdAoymrnhSLRvBnNKC
- JgGrTCC430sf4eGHWDy2FlFKKgInqQyxKVuuMB7R6pz7iZZX5VZExEsSnGP1AVPwYbq07gpjjWL
- hkBKnxGSFwbyCV/C41eN16Ztti7qnEi6dJ2YnGdoBLgB9gMJClZlm+XRHbtySnknyaHLjj7pcH0
- QWCsJNCmxMO1fLEpMdMPyRU7CK9+HC0ZQom9KMV83oR0gyaycVbLhkbA=
-X-Google-Smtp-Source: AGHT+IHCS9Kere96OBdnzXU+YdLkhNAclXoTUJSgnkX1Z5+wkoRYjvJm0/i1Pjw3guXA40hWhog9Sw==
-X-Received: by 2002:a05:6808:250f:b0:435:6f4c:8b1e with SMTP id
- 5614622812f47-437f7cc00a9mr24004b6e.6.1756501882691; 
- Fri, 29 Aug 2025 14:11:22 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-315afc59e27sm1665401fac.12.2025.08.29.14.11.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Aug 2025 14:11:22 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20250829205203.281150-1-marek.vasut+usb@mailbox.org>
-References: <20250829205203.281150-1-marek.vasut+usb@mailbox.org>
-Subject: Re: [PULL] u-boot-usb/master
-Message-Id: <175650188177.2527057.1947762057749961491.b4-ty@konsulko.com>
-Date: Fri, 29 Aug 2025 15:11:21 -0600
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id F0DD04E40C2C;
+ Fri, 29 Aug 2025 21:54:38 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id C97C5605F1;
+ Fri, 29 Aug 2025 21:54:38 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 43BA51C22C97A; 
+ Fri, 29 Aug 2025 23:54:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1756504478; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=Vdgle1VxBZ5ZuV4u6klnZ0jk3frJP8bPwXyh4yvjhzI=;
+ b=LpKXPRpZUQvwiuLKHefdR+2Ov/R790vX9yrakWjs9cKNncwY4iUXjCjkzbt6oft/2tSAaq
+ USVdxyzCycusO1bhhmBv1iGOUfTle66IdiRx5eCz96XDpyoJjCpTcPE32xmewtcD/q73+N
+ 8EPzH/yU7e9TwUTvNcLRnkWnsa3xEbo9U5zSB0TPEU30FUw+H0RQVVGmL5Hd94bwvsEHij
+ 8tK+bEdV65PfuwgbUfYwi37VRffxTsg3oKIHAQNO5yqHyIrxSYti/hn48UUjDmKFDwefZT
+ kAoV5Y+7jXsmHrHu+DWZGGNDsJ0XBT5NqSUSWGXlOrl6k1Q+IcgDUQNz1AI+5w==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>,  Michael Trimarchi
+ <michael@amarulasolutions.com>,  Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Christian Marangi <ansuelsmth@gmail.com>,  u-boot@lists.denx.de
+Subject: Re: [PATCH v5 2/2] cmd: mtd: add benchmark option to the help
+In-Reply-To: <20250829075911.2895683-3-mikhail.kshevetskiy@iopsys.eu> (Mikhail
+ Kshevetskiy's message of "Fri, 29 Aug 2025 10:59:11 +0300")
+References: <87tt1r6api.fsf@bootlin.com>
+ <20250829075911.2895683-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250829075911.2895683-3-mikhail.kshevetskiy@iopsys.eu>
+User-Agent: mu4e 1.12.7; emacs 30.1
+Date: Fri, 29 Aug 2025 23:54:22 +0200
+Message-ID: <87plcd94kx.fsf@bootlin.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Sat, 30 Aug 2025 00:39:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +78,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 29 Aug 2025 22:51:46 +0200, Marek Vasut wrote:
+On 29/08/2025 at 10:59:11 +03, Mikhail Kshevetskiy <mikhail.kshevetskiy@iop=
+sys.eu> wrote:
 
-> The following changes since commit 3dc5e9a0108bb114175b6362f9cb22367402f624:
-> 
->   Merge tag 'u-boot-stm32-20250825' of https://source.denx.de/u-boot/custodians/u-boot-stm (2025-08-26 08:33:10 -0600)
-> 
-> are available in the Git repository at:
-> 
->   git://source.denx.de/u-boot-usb.git master
-> 
-> [...]
+> The patch adds benchmark option to the help of mtd command. For the
+> 'mtd write' case the help line exceed 80 characters. Ignore this issue
+> as modern terminals are capable to handle more characters.
+>
+> The patch also formats other command to make sure all device names
+> starts on the same collumn.
+>
+> Fixes: d246e70cf81d0 ("cmd: mtd: Enable speed benchmarking")
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> ---
+>  cmd/mtd.c | 18 +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
+>
+> diff --git a/cmd/mtd.c b/cmd/mtd.c
+> index 57f6c700f1d..f053dbadd78 100644
+> --- a/cmd/mtd.c
+> +++ b/cmd/mtd.c
+> @@ -782,18 +782,18 @@ static int mtd_name_complete(int argc, char *const =
+argv[], char last_char,
+>  U_BOOT_LONGHELP(mtd,
+>  	"- generic operations on memory technology devices\n\n"
+>  	"mtd list\n"
+> -	"mtd read[.raw][.oob]                  <name> <addr> [<off> [<size>]]\n"
+> -	"mtd dump[.raw][.oob]                  <name>        [<off> [<size>]]\n"
+> -	"mtd write[.raw][.oob][.dontskipff]    <name> <addr> [<off> [<size>]]\n"
+> -	"mtd erase[.dontskipbad]               <name>        [<off> [<size>]]\n"
+> +	"mtd read[.raw][.oob][.benchmark]                <name> <addr> [<off> [=
+<size>]]\n"
+> +	"mtd dump[.raw][.oob]                            <name>        [<off> [=
+<size>]]\n"
+> +	"mtd write[.raw][.oob][.dontskipff][.benchmark]  <name> <addr> [<off> [=
+<size>]]\n"
+> +	"mtd erase[.dontskipbad]                         <name>        [<off> [=
+<size>]]\n"
+>  	"\n"
+>  	"Specific functions:\n"
+> -	"mtd bad                               <name>\n"
+> +	"mtd bad                                         <name>\n"
+>  #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
+> -	"mtd otpread                           <name> [u|f] <off> <size>\n"
+> -	"mtd otpwrite                          <name> <off> <hex string>\n"
+> -	"mtd otplock                           <name> <off> <size>\n"
+> -	"mtd otpinfo                           <name> [u|f]\n"
+> +	"mtd otpread                                     <name> [u|f] <off> <si=
+ze>\n"
+> +	"mtd otpwrite                                    <name> <off> <hex stri=
+ng>\n"
+> +	"mtd otplock                                     <name> <off> <size>\n"
+> +	"mtd otpinfo                                     <name> [u|f]\n"
+>  #endif
+>  	"\n"
+>  	"With:\n"
 
-Merged into u-boot/master, thanks!
+I'll let the decision to other U-Boot reviewers, but I don't know if
+that is relevant to align all the parameters to the longest line.
 
--- 
-Tom
+Either ways, I'm fine,
 
+Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
+Thanks,
+Miqu=C3=A8l
