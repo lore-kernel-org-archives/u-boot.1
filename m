@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA9BCA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 15:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE20CA0FF9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 15:22:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D05EF83675;
-	Fri, 29 Aug 2025 17:14:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 93DC483695;
+	Fri, 29 Aug 2025 17:22:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Bx8r3FKz";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zQNDPbyk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6018D8367F; Fri, 29 Aug 2025 17:14:05 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4204283106
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 17:14:03 +0200 (CEST)
+ id 25C0483695; Fri, 29 Aug 2025 17:22:49 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9782D83689
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 17:22:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-61cc281171cso3767136a12.0
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 08:14:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756480443; x=1757085243; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pmnPoGXPIWHgfHquuYfYF++qpBWWQSK9Mt1Kz7ijTig=;
- b=Bx8r3FKzD6CZ4QPg5usykwtVmGCSsTyLRS/z2iUy02m8qvz4j4vCS2Ww3tyx32DDhA
- LGm8o2bOBR+xvSldDZA43Z27YcDR49P5EZmBn2mNgh/ShlQRAaD+rfURlAqDp+3Sm/uf
- PsJDa8oUS22Eg7Oh0ea2Ohf2WEePtgskPKvTTnanPKdI9gD1k1RB8moVJIYfXrvwxA9m
- rPoKJwW75NK5EdcTtAgdRv5ZffylefN55ndu4eQ/f86WVS2mmmsyo3d7J12J/Mgm+UJw
- klwJAwCg5xP0CJLYvgd6sFf8zgXC/zgeDmAvuDl7SOH7j6m3FXx90k+4q34kGTnNdiPf
- gR2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756480443; x=1757085243;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pmnPoGXPIWHgfHquuYfYF++qpBWWQSK9Mt1Kz7ijTig=;
- b=ab2VH3u9VnmR/qV+xgyAH9UJyhzfnT6zS0yHEccMINK24eXQhTdpY91lauDUsHgypt
- SPqAh/HJTlvuTXgEIXKmT3mey33uVgvHpEL+oN9U8axDgeP1JwttDlpJ1rRDmBVyKBgA
- Quvk3RGL2mcWBEAig013di88DhmvMaFZR5RFl81Y2qrhnrhU+Y/l0z8CFou1gTMsdkxr
- CEug3+FN0zCIC8RZixhPZWC5rmqqNi7yaN48Zh9SJYZ6cWWzRQO3zuSX7OwPdq1yaP2A
- jU/JKbkKF4appYMEOJjE/TGWYJcK4md5552l5fhCUYk1n69ynZBwLjzFj/ZtxVsrVHUt
- Gk4Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUVIC7jYJJD1wekRHGT5w5CmE+EF+MioFDuKfuQS8emfl7xtofVi5rQEIe1aC8LpSBxHlGnUa8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrDAyw7Y+6gfiRV6fUcd/bDeks/DJaJsHidFsXiYxt40BmfqM8
- JC0aA06sQxK96sZ4j/Ig/nQwZi7EbiQ4blff/w/TjsCGiqaMjuZa/u2gf2isx9WlI/dowiSHAyx
- 09vgIyfoCb5T2oiLgNDk4A24h7kKMNGY=
-X-Gm-Gg: ASbGncurOzun5THRcOigCz0w+yo4N1QD8n6q/G5gpF7c+y7fjxUUIpZTrIJBYhaqX71
- SW3Mb/PZZiUMyzrPZ+rUIxKZs/hpInlAOcS+IBCjXtINGJWXWH10gK5PJg4l3H3RaqV43ZFnfao
- xKsYCj1wJQtV/CFUcmb4XHsWl588yEvo5Dc/Pfeq0NcbFCJYrfkPiFNvMXWvQIJiJOaRDCrqOxd
- oAv74xjppLy+fcq6BYFb5eyJkAKPIn3YZVkLqLKUAE60g==
-X-Google-Smtp-Source: AGHT+IEYME9wl8VPG4xTG9w4FQGLgWinjYmz96uYKMRwHQSzGHXXDgTvHIfQHX/e9mm2PhCPzt5Fs0K+dOBgwsgPO7I=
-X-Received: by 2002:a05:6402:3589:b0:61c:5f9d:4b3f with SMTP id
- 4fb4d7f45d1cf-61c5f9d7e89mr15300681a12.29.1756480442590; Fri, 29 Aug 2025
- 08:14:02 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57TFMikR1780810;
+ Fri, 29 Aug 2025 10:22:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756480964;
+ bh=gRAnr/h/7zCL8I5xEEcoDtjsNAMBZ++53IqtB23O/hg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=zQNDPbykc5pvn+4vgXtpOz9gpMH+Azdx8RCLcqyhXdIYfNzVer+cyQcU0ZFsXXw/e
+ LYbrT2l5FqPKZ4DF3cm2mjltPGTjdZ11jRiMDKCnVTrP776b7EeP/ka6kFrh9zUGEz
+ p9d1+u0DfzNqcz6+IMv4YCijcBawJijWBqXTmpWc=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57TFMiuW3737161
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 29 Aug 2025 10:22:44 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 29
+ Aug 2025 10:22:44 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 29 Aug 2025 10:22:44 -0500
+Received: from [10.249.139.51] ([10.249.139.51])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57TFMet32546339;
+ Fri, 29 Aug 2025 10:22:41 -0500
+Message-ID: <105705f8-48ca-45ba-af34-b3955df29279@ti.com>
+Date: Fri, 29 Aug 2025 20:52:40 +0530
 MIME-Version: 1.0
-References: <20250827075017.1583168-1-pbrobinson@gmail.com>
- <20250829153124.55f35ac6@minigeek.lan>
-In-Reply-To: <20250829153124.55f35ac6@minigeek.lan>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 29 Aug 2025 16:13:51 +0100
-X-Gm-Features: Ac12FXx0Gk6H89I2u143AJBnpU6cYOFH09NAKLTAeVdgN6Xu7xfR6tQckUpj2J8
-Message-ID: <CALeDE9NQq+7yxEQ3v6KB=2OK58+MC-923nPr1tbxaw0vEcfMAA@mail.gmail.com>
-Subject: Re: [PATCH] Allwinner: fix booting on a number of devices
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] Revert "remoteproc: Tighten some remoteproc driver
+ dependencies"
+To: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>
+CC: <nm@ti.com>, <vigneshr@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <jm@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20250829053451.3615976-1-b-padhi@ti.com>
+ <20250829053451.3615976-2-b-padhi@ti.com>
+ <2937fb1b-1f40-4edc-af4a-e02946b5bf8f@ti.com>
+ <20250829145652.GV124814@bill-the-cat>
+Content-Language: en-US
+From: Beleswar Prasad Padhi <b-padhi@ti.com>
+In-Reply-To: <20250829145652.GV124814@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,61 +84,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+Hi Tom, Andrew,
 
-> > Revert "sunxi: enable MMU_PGPROT proper page table protection"
-> >
-> > This reverts commit 16cfccda4dbf0b53473b8212897f5c63bfbeb6e1.
-> >
-> > This causes the follow issue on the A64 boards I have including
-> > Pine64+, Pine64-LTS and the Pinephone. Revert until the issue
-> > can be properly investigated.
-> >
-> > CPU:   Allwinner A64 (SUN50I)
-> > Model: Pine64+
-> > DRAM:  2 GiB
-> > Insufficient RAM for page table: 0x5000 > 0x4000. Please increase the size in get_page_table_size()
+On 8/29/2025 8:26 PM, Tom Rini wrote:
+> On Fri, Aug 29, 2025 at 09:32:00AM -0500, Andrew Davis wrote:
+>> On 8/29/25 12:34 AM, Beleswar Padhi wrote:
+>>> This reverts commit 548ae9d1a537464254afac63f802179a24c645d6.
+>>>
+>>> The IPU remote processor is only present in TI OMAP SoCs. Remove the
+>>> ARCH_K3 dependency from Kconfig. This driver builds just fine without
+>>> ARCH_K3 config.
+>>>
+>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>>> ---
+>>>    drivers/remoteproc/Kconfig | 1 -
+>>>    1 file changed, 1 deletion(-)
+>>>
+>>> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+>>> index e9f19a69433..a3ecea05e20 100644
+>>> --- a/drivers/remoteproc/Kconfig
+>>> +++ b/drivers/remoteproc/Kconfig
+>>> @@ -125,7 +125,6 @@ config REMOTEPROC_TI_PRU
+>>>    config REMOTEPROC_TI_IPU
+>>>    	bool "Support for TI's K3 based IPU remoteproc driver"
+>>>    	select REMOTEPROC
+>>> -	depends on ARCH_K3
+>> The original commit seems to indicate there are some platforms
+>> were this does not build, maybe depend on ARCH_OMAP2PLUS
+> Yes, it fails to build on sandbox. If REMOTEPROC_TI_IPU only supports
+> OMAP SoCs and not K3 SoCs then the prompt text, and perhaps help text
+> (not in this patch context so I can't see) need to be fixed.
+
+
+Thanks, got it. This should depend on ARCH_OMAP2PLUS then. Will address
+in revision.
+
+Thanks,
+Beleswar
+
+> The driver
+> isn't enabled anywhere today, so I don't know that it even compiles,
+> actually. So it should probably get enabled somewhere, too.
 >
-> Mmh, how did you get this? I just ran mainline on a Pine64-LTS, and
-> didn't see any issues. Are you running on some specific setup? I am on
-> GCC 11.2.0, TF-A is some v2.12.0-724-gf745e004a, and that's with
-> pine64-lts_defconfig.
-
-Fedora 42/43, gcc 15.2, binutils 2.44, TF-A 2.13.
-
-I've seen it across Pine64+, Pine64-LTS and Pinephone.
-
-No special setup and I reproduced in on the vanilla upstream checkout
-from a couple of days ago when I had the time to do the bisect.
-
-> > resetting ...
-> > System reset not supported on this platform
-> >
-> > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> > ---
-> >  arch/arm/Kconfig | 1 -
-> >  1 file changed, 1 deletion(-)
-> >
-> > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > index 40368abc297..b8be270e4d7 100644
-> > --- a/arch/arm/Kconfig
-> > +++ b/arch/arm/Kconfig
-> > @@ -1207,7 +1207,6 @@ config ARCH_SUNXI
-> >       select DM_SPI_FLASH if SPI && MTD
-> >       select DM_KEYBOARD
-> >       select DM_SERIAL
-> > -     select MMU_PGPROT if ARM64
->
-> Regardless that's quite a sledgehammer. If that's a real issue, we
-> could surely provide our own get_page_table_size() implementation which
-> is more generous?
-
-You commit that reverts says "This might trigger runtime exceptions in
-misbehaving drivers, which should then be fixed." which shows that it
-might cause a problem, and I agree that any drivers should be fixed,
-but the above output tells me absolutely nothing about even where to
-begin to look so to use your sledgehammer analogy, if I knew whether I
-needed a ball-peen hammer or a claw hammer I could but I am basically
-blind and with my testing the sledge hammer solves the problem.
-
-Peter
