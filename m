@@ -4,42 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D825CA0FF0
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:32:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55DEFCA0FF0
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:32:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64536836A6;
-	Fri, 29 Aug 2025 16:31:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4064C837A7;
+	Fri, 29 Aug 2025 16:32:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KDxt9FLB";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A782836A6; Fri, 29 Aug 2025 16:31:50 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 66CB8836D2
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 16:31:48 +0200 (CEST)
+ id 03682836F0; Fri, 29 Aug 2025 16:32:07 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D41448367F
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 16:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5EB2119F0;
- Fri, 29 Aug 2025 07:31:39 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C25623F694;
- Fri, 29 Aug 2025 07:31:46 -0700 (PDT)
-Date: Fri, 29 Aug 2025 15:31:24 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] Allwinner: fix booting on a number of devices
-Message-ID: <20250829153124.55f35ac6@minigeek.lan>
-In-Reply-To: <20250827075017.1583168-1-pbrobinson@gmail.com>
-References: <20250827075017.1583168-1-pbrobinson@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57TEW1i82262230;
+ Fri, 29 Aug 2025 09:32:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756477921;
+ bh=s71sf6/5/Rgap/YZKeo3ZibYyH2ORvZF5Ju5M2W0oLM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=KDxt9FLBxlpAKLzkqlekHkSmMNxggrk7tooK5WclaSfdPe0cQ3UyeTy/ltIRHciSI
+ 6SR7BqKRuotXZsQQ0KcI96EZMjfwWdpQb8sZXKMbVA+Man/s0R2dBmKM3rXvz6drzk
+ 66aAQSLZg37AIBufTEnchvGZpLDiklua/rp4fnhY=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57TEW1cK613028
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 29 Aug 2025 09:32:01 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 29
+ Aug 2025 09:32:01 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 29 Aug 2025 09:32:01 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57TEW04t2485866;
+ Fri, 29 Aug 2025 09:32:00 -0500
+Message-ID: <2937fb1b-1f40-4edc-af4a-e02946b5bf8f@ti.com>
+Date: Fri, 29 Aug 2025 09:32:00 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] Revert "remoteproc: Tighten some remoteproc driver
+ dependencies"
+To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
+CC: <nm@ti.com>, <vigneshr@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <jm@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20250829053451.3615976-1-b-padhi@ti.com>
+ <20250829053451.3615976-2-b-padhi@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250829053451.3615976-2-b-padhi@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,57 +82,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 27 Aug 2025 08:50:14 +0100
-Peter Robinson <pbrobinson@gmail.com> wrote:
-
-Hi Peter,
-
-thanks for the report!
-
-> Revert "sunxi: enable MMU_PGPROT proper page table protection"
+On 8/29/25 12:34 AM, Beleswar Padhi wrote:
+> This reverts commit 548ae9d1a537464254afac63f802179a24c645d6.
 > 
-> This reverts commit 16cfccda4dbf0b53473b8212897f5c63bfbeb6e1.
+> The IPU remote processor is only present in TI OMAP SoCs. Remove the
+> ARCH_K3 dependency from Kconfig. This driver builds just fine without
+> ARCH_K3 config.
 > 
-> This causes the follow issue on the A64 boards I have including
-> Pine64+, Pine64-LTS and the Pinephone. Revert until the issue
-> can be properly investigated.
-> 
-> CPU:   Allwinner A64 (SUN50I)
-> Model: Pine64+
-> DRAM:  2 GiB
-> Insufficient RAM for page table: 0x5000 > 0x4000. Please increase the size in get_page_table_size()
-
-Mmh, how did you get this? I just ran mainline on a Pine64-LTS, and
-didn't see any issues. Are you running on some specific setup? I am on
-GCC 11.2.0, TF-A is some v2.12.0-724-gf745e004a, and that's with
-pine64-lts_defconfig.
-
-> resetting ...
-> System reset not supported on this platform
-> 
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 > ---
->  arch/arm/Kconfig | 1 -
->  1 file changed, 1 deletion(-)
+>   drivers/remoteproc/Kconfig | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 40368abc297..b8be270e4d7 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1207,7 +1207,6 @@ config ARCH_SUNXI
->  	select DM_SPI_FLASH if SPI && MTD
->  	select DM_KEYBOARD
->  	select DM_SERIAL
-> -	select MMU_PGPROT if ARM64
+> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+> index e9f19a69433..a3ecea05e20 100644
+> --- a/drivers/remoteproc/Kconfig
+> +++ b/drivers/remoteproc/Kconfig
+> @@ -125,7 +125,6 @@ config REMOTEPROC_TI_PRU
+>   config REMOTEPROC_TI_IPU
+>   	bool "Support for TI's K3 based IPU remoteproc driver"
+>   	select REMOTEPROC
+> -	depends on ARCH_K3
 
-Regardless that's quite a sledgehammer. If that's a real issue, we
-could surely provide our own get_page_table_size() implementation which
-is more generous?
+The original commit seems to indicate there are some platforms
+were this does not build, maybe depend on ARCH_OMAP2PLUS
 
-Cheers,
-Andre
+Andrew
 
->  	select OF_BOARD_SETUP
->  	select OF_CONTROL
->  	select PINCTRL
+>   	depends on DM
+>   	depends on SPL_DRIVERS_MISC
+>   	depends on SPL_FS_LOADER
 
