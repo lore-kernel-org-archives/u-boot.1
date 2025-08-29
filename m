@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE425CA0FF0
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 16:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B253ACA0FF0
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 16:44:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E2BE8366F;
-	Fri, 29 Aug 2025 18:30:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C0518366F;
+	Fri, 29 Aug 2025 18:44:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bLPQzer+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nIlwM2wJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEC4783675; Fri, 29 Aug 2025 18:30:48 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 2069083675; Fri, 29 Aug 2025 18:44:01 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C92AD83542
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 18:30:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E661483542
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 18:43:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-61cfabc02b8so2083611a12.2
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 09:30:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-437d6f776a4so13163b6e.3
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 09:43:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756485046; x=1757089846; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k9YbMBFYidZ4jfTmKPkvw72Yko29N0JQDGax2at6y5E=;
- b=bLPQzer+E9AH0ZN/ai7yTVwZLAzMUe9bR6i2EQvv7I4srIxnMXJl7w7eXAywXOwu+r
- UfdVDlI3+Kuy7O5Id79W93Gw4xJQw+KfeYKQVkbHALCV1VyhhQOIllLOwxYK/xs86qa/
- XlmurQyl0uA8JZoYDoj5D6bFni9ZxMnj3gU9lgV5MlBAsLlhNwWHCKL9Omo63Bj20NXs
- IEls5Fsjst1aZ8fI/AJAoT7ZBc3c0zG19NxWam2I1S1KWKQ6q3mqp4eJysKywePxkmBF
- pmeJnJzyTKV0x9LrLXSxs5ggbDE+xIIMrIlxjaltQtm+TZW5d7MHMev5fPSMLqRayLT4
- RYyA==
+ d=konsulko.com; s=google; t=1756485837; x=1757090637; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BUpaqFSmchTe2S1shtFfUmINpZpVTfmO6WqGFIpLET4=;
+ b=nIlwM2wJIQBS4Y1ucroTapNSJKufLbDLoDnLjxwUrSqBEf4FVwNnG+NOAWx2UWpGqx
+ OQr6dzXA3XffuOAiA3KYtsO89ZxzGX682FUu96GJk19Fpk2osr1p5RgCNVlMehaV+q7r
+ wHqICm69FXZdn6VjZzpevNAhadRv2XG/hpqDU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756485046; x=1757089846;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k9YbMBFYidZ4jfTmKPkvw72Yko29N0JQDGax2at6y5E=;
- b=AGJ/nawfsP9Mem6Ly5BF/ZOXWbYhRDiLbz9ss8UvFmt7quCUHPDxMxoh8AEYG/bbiW
- 3HVFSCOdhWaP5PiRirbpW6wpmrRn+R4ioVroLx+phVU7mWFZwQzwc+ab1hlcKQDsV+VU
- km6qtT9UAnG0YYRSpM0p7GcsNPYRCja82KR2OlVyyCD28Fk6gv5f6bSs3Kej1nm/mY8i
- TtvoPH3y8rCY+39uFBohIXUgu6NRw5x9UrhnvGmBfEChUbZfCuMVt4TDkGgIeFvYQmmC
- EpyGLm+GoyTsuzHfc4hAiIhMTDYBYuNhtzHoXkexdntRqR+FjBXyIJOGy92HPhxstl8m
- CZfg==
-X-Gm-Message-State: AOJu0Yz/ua6zN2FD8Rj0xo8qpGKe7rPQVjuz0RGSNNI9znljSYEit0zD
- m1uFNZyD06qF/YSjFxHr21ZGRYVXDKHR2ioe/HZQHPLohCCxGyrLs7Xf8yLj/9kf1f1/dgio8LD
- G19cco7+bRSX9FYmH79y6PJFJySL/qMY=
-X-Gm-Gg: ASbGnctatIYl3BHNiFAnKGMPaGF/quoOdq+gqyWX9X4ii8zGwwY8LCZP320krgphHLY
- FA03X3xBGucbQ2FCqEAjmnvZgaM8KOI6oZ5zUpEES9MRXmFo5YNnNAvUfxYVGfHDntaFN93sBU7
- gLoPIR3P2P01GreVGX6ZFjOBT/TBiKeo6MYEPyrW7VwJOJwYB3kmTVDjjiywQoP5iF8AaqbF8hV
- LIC2eYm
-X-Google-Smtp-Source: AGHT+IFNBtZFvYgKTbMnZEZWDHa5QtK5jb4/141AZPgFw1/E6LUBVbpLUGyYjhC+yhVLxLdbZ2qTdpvvyQESmxez7fQ=
-X-Received: by 2002:a05:6402:d0d:b0:615:5bec:1df with SMTP id
- 4fb4d7f45d1cf-61c1b7155bamr22368762a12.25.1756485045867; Fri, 29 Aug 2025
- 09:30:45 -0700 (PDT)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1756485837; x=1757090637;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BUpaqFSmchTe2S1shtFfUmINpZpVTfmO6WqGFIpLET4=;
+ b=G06/apj9jZ0g49PO/sEMT2x+nBKRfinLmgnk2OdvaQHq4UOh2WkRSSoSYLb7cvIVwI
+ xw+cCP25ZZfJX0E9zZQe1MMC2U2vsxmzuHrL4f6yrXoAPzdjLbhYEdNPDSbfQ6SXM5RP
+ /w7sJwAjvPD+i1OuciKj2kMocMTMbsBO88s3ETUj6Z1dNYGiJW7uJJOx4A4SiHMt9CRZ
+ TNT3WGamE4JCDfp/T+fY3VoK3HivWXeKTaPNdBNLVsK0Kte5S6xuSakzyWCjvNZPJ/Uo
+ p/EHMQNjCQMGWD8EDprOcTKU+bbrY+IxWf/mJxbT9Ujd30iw0zUVGmjR0ALf7cjACQiD
+ Gi8g==
+X-Gm-Message-State: AOJu0YzCCeE3YwNXRRZoH8n6EsUN3gGbLL2+bqi67Zm5580j8gzkdSfY
+ 7V+V3Fe+9rflrhwxshHth1GZlNwdfZY/9nJxQYPO6PIx9PXy0DrPA9oPfz+ruwfTY6E=
+X-Gm-Gg: ASbGncvnZ26PUrNuR06awLIqwyjXu8v+JUnB66R5MpaOz8VnS8NoO5y5gbvHq+dptYB
+ NWxuoGlGg95xvlfCf+LxxmLcaJTJuZ5J55c3kMflaGebBS6IfAXf06k/Jmj+jTlB9onojmfAPp1
+ 4Nnd6Q9KvxRXdd+Ylem2yxIRk4Rn8dCHRuCTgGDnyHcm/V50aDPyRSK2j+g9Fi2A3YLegcxNGFB
+ JFDluo2wZdjGKaZg7s8eSFhOBrgGl3oxQ0EynZq+sjGD5UpjFlbOZDiMk/FRUTaZcEC7BC4Ozrs
+ mEdsjLXwtRc7EhlwkajTlQwg+YycdStw1UNUh6QWWnYis9X/Ka6X8rjjCBzAf3OV1HdTMxw382r
+ ixZsNeiR4umwqtA8qDXKYv6QhOsWCjX9CetJ/4M/lCoDoFqZd3x0uAk1RNMVchztyM+4=
+X-Google-Smtp-Source: AGHT+IGVAko7hoJ14KPj5JCle5uMmjwopSYfVsfHe9BR5rFP4WObzlFYYKsxZjgKUvLAx+btkz4mgg==
+X-Received: by 2002:a05:6808:164c:b0:437:dd6e:6844 with SMTP id
+ 5614622812f47-437dd6e6b9emr3485742b6e.38.1756485837522; 
+ Fri, 29 Aug 2025 09:43:57 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-315afbe3b41sm1468513fac.5.2025.08.29.09.43.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 29 Aug 2025 09:43:56 -0700 (PDT)
+Date: Fri, 29 Aug 2025 10:43:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: tools: patman cannot find aiohttp module
+Message-ID: <20250829164354.GX124814@bill-the-cat>
 References: <CAJaLiFwxjWPg+SQ4VVO7Oay4OX-WcCTmNa7FPHCYW6JLQmd9Uw@mail.gmail.com>
  <20250825190224.GU124814@bill-the-cat>
  <CAJaLiFwO-d7ejv3POg6d+kxqwbZxcrHVfRRbtBg-=63mQjPdfg@mail.gmail.com>
-In-Reply-To: <CAJaLiFwO-d7ejv3POg6d+kxqwbZxcrHVfRRbtBg-=63mQjPdfg@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 29 Aug 2025 09:30:34 -0700
-X-Gm-Features: Ac12FXyqvXd7U6HqVcgtVMpGF5sxe2LcsNB09p_2Rn2OqOCT_Cn15Wa9Dqwd428
-Message-ID: <CAJaLiFwE+_FN=okhS4LcRaCeAi=Gz5p_2+M38R4w=+yYDAvmmA@mail.gmail.com>
-Subject: Re: tools: patman cannot find aiohttp module
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAJaLiFwE+_FN=okhS4LcRaCeAi=Gz5p_2+M38R4w=+yYDAvmmA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NWuc1dn5DXgK335H"
+Content-Disposition: inline
+In-Reply-To: <CAJaLiFwE+_FN=okhS4LcRaCeAi=Gz5p_2+M38R4w=+yYDAvmmA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,88 +98,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, Aug 25, 2025 at 12:32=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wrot=
-e:
->
-> On Mon, Aug 25, 2025 at 12:02=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
+--NWuc1dn5DXgK335H
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Aug 29, 2025 at 09:30:34AM -0700, Tony Dinh wrote:
+> Hi Tom,
+>=20
+> On Mon, Aug 25, 2025 at 12:32=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wr=
 ote:
 > >
-> > On Mon, Aug 25, 2025 at 11:49:35AM -0700, Tony Dinh wrote:
-> >
-> > > Hi Tom,
+> > On Mon, Aug 25, 2025 at 12:02=E2=80=AFPM Tom Rini <trini@konsulko.com> =
+wrote:
 > > >
-> > > I've just done a git pull on the master branch. And then ran patman
-> > > and got this error.
+> > > On Mon, Aug 25, 2025 at 11:49:35AM -0700, Tony Dinh wrote:
 > > >
-> > > ./tools/patman/patman  -c1 -s2 send -n
-> > > Traceback (most recent call last):
-> > >   File "/usr/src/u-boot-marvell/./tools/patman/patman", line 21, in <=
-module>
-> > >     from patman import control
-> > >   File "/usr/src/u-boot-marvell/tools/patman/../patman/control.py",
-> > > line 24, in <module>
-> > >     from patman import cseries
-> > >   File "/usr/src/u-boot-marvell/tools/patman/../patman/cseries.py",
-> > > line 19, in <module>
-> > >     from patman import cser_helper
-> > >   File "/usr/src/u-boot-marvell/tools/patman/../patman/cser_helper.py=
-",
-> > > line 18, in <module>
-> > >     import aiohttp
-> > > ModuleNotFoundError: No module named 'aiohttp'
+> > > > Hi Tom,
+> > > >
+> > > > I've just done a git pull on the master branch. And then ran patman
+> > > > and got this error.
+> > > >
+> > > > ./tools/patman/patman  -c1 -s2 send -n
+> > > > Traceback (most recent call last):
+> > > >   File "/usr/src/u-boot-marvell/./tools/patman/patman", line 21, in=
+ <module>
+> > > >     from patman import control
+> > > >   File "/usr/src/u-boot-marvell/tools/patman/../patman/control.py",
+> > > > line 24, in <module>
+> > > >     from patman import cseries
+> > > >   File "/usr/src/u-boot-marvell/tools/patman/../patman/cseries.py",
+> > > > line 19, in <module>
+> > > >     from patman import cser_helper
+> > > >   File "/usr/src/u-boot-marvell/tools/patman/../patman/cser_helper.=
+py",
+> > > > line 18, in <module>
+> > > >     import aiohttp
+> > > > ModuleNotFoundError: No module named 'aiohttp'
+> > > >
+> > > > I'm on Debian 12.11 and have Python 3.11.2. Is there something I mi=
+ght
+> > > > be missing?
 > > >
-> > > I'm on Debian 12.11 and have Python 3.11.2. Is there something I migh=
-t
-> > > be missing?
+> > > Ideally you should be using a virtualenv or whatever is recommended on
+> > > Debian 12 and then pip (or pipx?) install -r
+> > > tools/patman/requirements.txt
 > >
-> > Ideally you should be using a virtualenv or whatever is recommended on
-> > Debian 12 and then pip (or pipx?) install -r
-> > tools/patman/requirements.txt
->
-> Strange! I did not have to do anything extra like that before. I
-> always thought u-boot did that automatically. Also, I've just tested
-> it on u-boot-2025.07-rc5 on another u-boot git clone (on the same
-> system), and patman ran without this problem.
->
-> I'll dig some more, but if you have any idea please let me know.
->
-
-Debian 12.11 (bookworm) has quite a bit of version mismatches between
-aiohttp, pygit2 and their dependencies in u-boot. It's a struggle, ie.
-impossible, to try to resolve. So I had to upgrade to Debian 13.0
-(trixie) and used the versions provided by this distro version.
-
-Debian 13.0 (trixie)
-
-ii  libgit2-1.9:armel                       1.9.0+ds-2
-         armel        low-level Git library
-ii  libgit2-dev:armel                       1.9.0+ds-2
-         armel        low-level Git library (development files)
-ii  python3-aiohttp                         3.11.16-1
-         armel        http client/server for asyncio
-ii  python3-pygit2                          1.17.0-2
-         armel        Python bindings for libgit2 (Python 3 module)
-ii  python3-aiohttp                         3.11.16-1
-         armel        http client/server for asyncio
-
-# cat tools/patman/requirements.txt
-aiohttp=3D=3D3.11.16
-ConfigParser=3D=3D7.1.0
-importlib_resources=3D=3D6.5.2
-pygit2=3D=3D1.17.0
-requests=3D=3D2.32.4
-setuptools=3D=3D78.1.1
-
-Hope this helps others looking for it.
-
-All the best,
-Tony
-
-> Thanks,
-> Tony
->
+> > Strange! I did not have to do anything extra like that before. I
+> > always thought u-boot did that automatically. Also, I've just tested
+> > it on u-boot-2025.07-rc5 on another u-boot git clone (on the same
+> > system), and patman ran without this problem.
 > >
-> > --
-> > Tom
+> > I'll dig some more, but if you have any idea please let me know.
+> >
+>=20
+> Debian 12.11 (bookworm) has quite a bit of version mismatches between
+> aiohttp, pygit2 and their dependencies in u-boot. It's a struggle, ie.
+> impossible, to try to resolve. So I had to upgrade to Debian 13.0
+> (trixie) and used the versions provided by this distro version.
+
+Right. This, sadly IMHO, is why anything python related needs to be done
+in a virtual environment. That seems to really be a language best
+practice, even.
+
+--=20
+Tom
+
+--NWuc1dn5DXgK335H
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLHYxwAKCRAr4qD1Cr/k
+CiutAP9xk0s1oKIrUzz0ZulCSgUcr1Yq7YDDPcDWGhXBL73ovAEA5Gw/q6fYJQBX
+zl6xQh3wd42boZXFgJv3RkYnOtX6bg0=
+=UYDu
+-----END PGP SIGNATURE-----
+
+--NWuc1dn5DXgK335H--
