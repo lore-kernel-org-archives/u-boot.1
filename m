@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A021BC8303F
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 07:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A52CA0FF9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 07:47:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EE1483487;
-	Fri, 29 Aug 2025 09:44:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 338D383531;
+	Fri, 29 Aug 2025 09:47:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="A4ErykxG";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RZ0LaINO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC05B834AD; Fri, 29 Aug 2025 09:44:24 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 090738354B; Fri, 29 Aug 2025 09:47:29 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DA5783447
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 09:44:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E607A83487
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 09:47:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,62 +31,62 @@ Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 012DC3F7CB
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 07:44:21 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 575313F2CB
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 07:47:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1756453461;
- bh=eZHQuOT+sYMZRKb5h0uUkNdDD/E2a4J8FmdwMhbM7XI=;
+ s=20210705; t=1756453646;
+ bh=abnj6yfUQNnaV9WxHJYkwL5dFylf5lW/glZsdQFibsk=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=A4ErykxGODInfugDEJrm9xTD/iY/ykZbIkUWMDwvW2HzKUZeWnLS+hqxOLcT23N+u
- 3GoMr9b7YmeEvwOHs5nT7yF70m4ty7CIGZYdJJF823BVT3BkvP8WXaMiSOe/vnzs0J
- GeUWLDL5aY0TZUCGCxTKMNyAZHPOsOyGytTSv5NxHv6SH8YDUH1EqTAvxZQeNF1FLV
- eTceJditZ1B4rkjVsxdMZJaa2GmqxVIs09nLjzK13A1wAyW2a2oXpEodGRfHuNhYag
- FKaMC3C0VIuUgMmofG4oB/FEGpRR51nD7WJZs80wPvBWmRlwnBduFaplgBKsksHLEV
- pJT3h0jT19sMg==
+ b=RZ0LaINORAfgR2vKgFZ6KdwmI5uLwzOcg0E38tz/tDJ9scDzAuzLq3izmgupN/InD
+ 9WaP+ACFsCChVleKTo7mFe2vFAK7y+ZPP/kHjekOfi82IheMO4ftagbG1Vgver2ThQ
+ wOMfN/67vNDybuBnfHX/+MnxiKofqvcv+chE1fb6VPFB0ItD68j8wavuoTyxr8y8dm
+ fMvgLdERZ9G6I9WDvVHM3k1vfjH0tgBrFe568RLFhU00Oi/sgUqPFh0XR6LyclOIkK
+ nC/oWnrdmfR3jsb1YtKIBmBRnVWMdCJH3g41pSCMvwR1KINxVrMH0DJ8bj7AWq52H5
+ vkLczss8dzRAA==
 Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-45b7d497abbso6958045e9.0
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 00:44:20 -0700 (PDT)
+ 5b1f17b1804b1-45b7c4c738cso5691185e9.0
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 00:47:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756453455; x=1757058255;
+ d=1e100.net; s=20230601; t=1756453646; x=1757058446;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=eZHQuOT+sYMZRKb5h0uUkNdDD/E2a4J8FmdwMhbM7XI=;
- b=Vucc6hfy3dt7M13Yf8VRmH+zI3oR+Q80neWq9UOOy5/+3wR0+pUL7VRiVupsL2a2Wl
- E9niDXJV8oc0taQh2/hbgR42uQbY/KR+UOF9A+aJDIzx23obWE4O1LvS++oHe4lWl5xY
- EfLuvZCafd2lp1aaWrQq61kBssn9UmIvoZ9/R1qQlF8DqwM9qrlw+W+wW5WDX1ZPZQm+
- cPZ2uSK1kGBVZ1KiagobVD3nzLRuji2zna6ovU6k5sCxNBSbQB7t79a8ZWQWtf0m+f0s
- QQ/4RfypJ01+fUW0MCzzIl4XNMgWhDSjK3uBi8UKADw21lajFCIKGrqqKKZBk1zMSV8L
- iCOw==
-X-Gm-Message-State: AOJu0YyVshmR2UZtxzVZvw9mlIPD1MMQyURMyiQUSnfkpDvXYVRgQ/jg
- 9uq6F2Ukuak2Oodz9OfoJ7vjEzHXDyYBC7EWPMvLEBCyq7UaSQknUg0sAU+i4G8/ceJDZtkGaU/
- BnqRTuE1a3AvVqkCmM88UYEfLR7m4I3+7ceKD8GkNWfd4pKgRYnKlnQCX5S4SLwi1Lllws7I=
-X-Gm-Gg: ASbGncuytyRV6sxgBn0cLXHWk0BLbl5u6ycuMSpKa/zIuM152aKWBdHRGMEVWeJkGP4
- G2hIoxHg+zUTyGdftnDBMTS/uJdWjf54OyZg9D5DZ5nS1i0D7NIBznVJFU0MmUpFfdlBw135UVi
- HnC1hjbTY9kVioXaGYKV7JRDlMdSz7ijacXSGMW7r8wNO0JQrTGlGw+eYBFrW85+fYHEZpDX5E5
- Z0o1rzbGjQQ9Cdkz8qfyjMKijzDziDmiDFaJhPJ2S5WSZKxjDZtH3VNCg+0Atgyk6WIXJeKlnPG
- L8XolQ+pVFqEk9mjeuzOdNARJUfJ/Qau/XQYHJO8furBFQoE95xIQ+WA/gAjv9f0gOM/DTjPQtH
- H2MUU6bGwz9xpLBeR6mkFSVcbORXS
-X-Received: by 2002:a05:600c:4f09:b0:45b:6163:c031 with SMTP id
- 5b1f17b1804b1-45b627826c3mr166550065e9.24.1756453455418; 
- Fri, 29 Aug 2025 00:44:15 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHZhD1GT3QhuccWcV1uFRc9zP7Zk8HUOv7rSQewDQjxi/bLLV8lFMpZtp4Z/TlTya3PZUdDuw==
-X-Received: by 2002:a05:600c:4f09:b0:45b:6163:c031 with SMTP id
- 5b1f17b1804b1-45b627826c3mr166549685e9.24.1756453454864; 
- Fri, 29 Aug 2025 00:44:14 -0700 (PDT)
+ bh=abnj6yfUQNnaV9WxHJYkwL5dFylf5lW/glZsdQFibsk=;
+ b=iYy7mb8kItU1h0gw4Dll9hdkN20FJCTyNnml4QeJpAZegLu7TgfUY/oUBhU0Qp/2XC
+ 0IwdKQCWOWFi8dpIJ+rnYL7HxIgi+SOaC2U7zF56mPErsi27ClCpzJlTUzAFOj3JxS7X
+ kgm38IBd8zupuHIsuK6+agVCHuqKxh/Xfn1KVHeSErm5urcaY2HEh/lmqpZNmYvIgAwY
+ JhwvqxE0uOlaQJGSHtdBArW/zTsmSWg9yz22cnIvOjSQYynsDQKVbbCh1BfEEk+h2sY/
+ oDqcuTsVURBoctrcz/maQhSn2TOs1yoAT9RGIRWcU/w7gknMCLsWcxkxJYUTPnm2z99T
+ bNZw==
+X-Gm-Message-State: AOJu0Yzaom+4ahqKsrHDoDjlmybfodsLgkSyD72pof3rkxh0EjYaWagj
+ Nn4RdvcY/CYYglOvWNuPNXU8pUWrcRo7X5tFkjiz2ceEXtdJMmrTRBJnb2aZq1cWOfQJYBnSN/d
+ zMRyIugrgwy4JftqoeNppQnqwLCFCVEQdmtu8thZtZmtNzkXstqQp6+N6Xy6GoDUBO+f3GL8=
+X-Gm-Gg: ASbGncuFRleqs9CaPZLMvKybZKoK7TaVUuHeNZ8GSlI4LMNQJY58mz58zw4mIq5JO4T
+ WzJ/3Lqd2gW/HLXlZlOC6RYjHD0zifwdd6wCc4Y6Hiz9Y9CwewDoS32aKsQkyBB7cCT/Yf21OQx
+ DnIAeOds/Bcpk+R+AX4WBK//4kxhmDlD2oGfPP+4SxeOJhHLKAWMydbstYSOMAls40adKUeqlJ5
+ SlyuxmEIdJTEeNKbdCIAAusC44nMHJw2evTDN3V6bGaJIKaZ5wfEiG2/CSjHzPb9q6wXb1fCdUD
+ XQFgCUfIjXwS/Pn1UF2IX8Cyyz7eBwv+GXQ2KpXYQZBgI6nDEscQ/hhJoJ/ZmxN4zcGYdS3urJw
+ F5gSQ4vrJ5WAkZsmQQIWBW2WK9dlq
+X-Received: by 2002:a05:6000:2088:b0:3d0:64c1:1a39 with SMTP id
+ ffacd0b85a97d-3d064c11c42mr816297f8f.35.1756453645715; 
+ Fri, 29 Aug 2025 00:47:25 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGvUXe58Pzvu1suy/aDyofmBHtjQ9AW/eAkYuhvTs5Px88IcXaIKzmyvSF/mFmT5gvzkazCzA==
+X-Received: by 2002:a05:6000:2088:b0:3d0:64c1:1a39 with SMTP id
+ ffacd0b85a97d-3d064c11c42mr816272f8f.35.1756453645239; 
+ Fri, 29 Aug 2025 00:47:25 -0700 (PDT)
 Received: from ?IPV6:2a02:3035:6e0:88f7:ae8f:dfdc:303a:75d?
  ([2a02:3035:6e0:88f7:ae8f:dfdc:303a:75d])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b73cf86f4sm86112155e9.6.2025.08.29.00.44.13
+ ffacd0b85a97d-3cf276ccc13sm2273641f8f.22.2025.08.29.00.47.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Aug 2025 00:44:14 -0700 (PDT)
-Message-ID: <7c0bdef3-69df-4536-bddf-e2912ce71eed@canonical.com>
-Date: Fri, 29 Aug 2025 09:44:12 +0200
+ Fri, 29 Aug 2025 00:47:24 -0700 (PDT)
+Message-ID: <55f9201c-4083-48f3-a90b-89e625d96195@canonical.com>
+Date: Fri, 29 Aug 2025 09:47:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 04/10] eeprom: starfive: Correct
- get_pcb_revision_from_eeprom()
+Subject: Re: [RFC 05/10] eeprom: starfive: Update eeprom data format version
+ to 3
 To: Hal Feng <hal.feng@starfivetech.com>
 Cc: u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
@@ -94,10 +94,10 @@ Cc: u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
  Emil Renner Berthing <emil.renner.berthing@canonical.com>,
  E Shattow <e@freeshell.de>
 References: <20250829060931.79940-1-hal.feng@starfivetech.com>
- <20250829060931.79940-5-hal.feng@starfivetech.com>
+ <20250829060931.79940-6-hal.feng@starfivetech.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250829060931.79940-5-hal.feng@starfivetech.com>
+In-Reply-To: <20250829060931.79940-6-hal.feng@starfivetech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -117,128 +117,180 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 29.08.25 08:09, Hal Feng wrote:
-> pcb_revision is stored in the pcb_revision field of ATOM4. Correct it.
-> Move the function description to the header file.
-> Remove the function calls in board/starfive/visionfive2/.
+> Add eeprom data format v3 support.
+> Add wifi_bt field in ATOM4 and add "mac wifi_bt <?>" command to modify it.
+> Set or show eth0/1 MAC address only if the board has eth0/1.
 > 
-> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
 > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 > ---
->   arch/riscv/include/asm/arch-jh7110/eeprom.h   |  5 +++++
->   board/starfive/visionfive2/spl.c              | 18 ++++++-----------
->   .../visionfive2/starfive_visionfive2.c        | 20 ++++++-------------
->   .../visionfive2/visionfive2-i2c-eeprom.c      | 11 ++--------
->   4 files changed, 19 insertions(+), 35 deletions(-)
+>   .../visionfive2/visionfive2-i2c-eeprom.c      | 91 ++++++++++++++++---
+>   1 file changed, 78 insertions(+), 13 deletions(-)
 > 
-> diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h b/arch/riscv/include/asm/arch-jh7110/eeprom.h
-> index 6d0a0ba0c4a..025f1d32c49 100644
-> --- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
-> +++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
-> @@ -9,6 +9,11 @@
->   
->   #include <linux/types.h>
->   
-> +/**
-> + * get_pcb_revision_from_eeprom() - get the PCB revision
-> + *
-> + * @return: the PCB revision or 0xFF on error.
-> + */
->   u8 get_pcb_revision_from_eeprom(void);
->   
->   /**
-> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
-> index 3dfa931b655..901e7b58f36 100644
-> --- a/board/starfive/visionfive2/spl.c
-> +++ b/board/starfive/visionfive2/spl.c
-> @@ -126,19 +126,13 @@ int board_fit_config_name_match(const char *name)
->   		    !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
->   		return 0;
->   	} else if (!strcmp(name, "starfive/jh7110-starfive-visionfive-2-v1.2a") &&
-> -		    !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
-> -		switch (get_pcb_revision_from_eeprom()) {
-> -		case 'a':
-> -		case 'A':
-> -			return 0;
-> -		}
-> +		   (!strncmp(get_product_id_from_eeprom(), "VF7110A", 7) ||
-> +		    !strncmp(get_product_id_from_eeprom(), "VF7110a", 7))) {
-> +		return 0;
->   	} else if (!strcmp(name, "starfive/jh7110-starfive-visionfive-2-v1.3b") &&
-> -		    !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
-> -		switch (get_pcb_revision_from_eeprom()) {
-> -		case 'b':
-> -		case 'B':
-> -			return 0;
-> -		}
-> +		   (!strncmp(get_product_id_from_eeprom(), "VF7110B", 7) ||
-> +		    !strncmp(get_product_id_from_eeprom(), "VF7110b", 7))) {
-> +		return 0;
->   	}
->   
->   	return -EINVAL;
-> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
-> index bfbb11a2ee7..f38433e94ac 100644
-> --- a/board/starfive/visionfive2/starfive_visionfive2.c
-> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
-> @@ -59,20 +59,12 @@ static void set_fdtfile(void)
->   		fdtfile = "starfive/jh7110-milkv-mars.dtb";
->   	} else if (!strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
->   		fdtfile = "starfive/jh7110-pine64-star64.dtb";
-> -	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
-> -		switch (get_pcb_revision_from_eeprom()) {
-> -		case 'a':
-> -		case 'A':
-> -			fdtfile = "starfive/jh7110-starfive-visionfive-2-v1.2a.dtb";
-> -			break;
-> -		case 'b':
-> -		case 'B':
-> -			fdtfile = "starfive/jh7110-starfive-visionfive-2-v1.3b.dtb";
-> -			break;
-> -		default:
-> -			log_err("Unknown revision\n");
-> -			return;
-> -		}
-> +	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110A", 7) ||
-> +		   !strncmp(get_product_id_from_eeprom(), "VF7110a", 7)) {
-
-Where boards both with 'a' and 'b' ever shipped?
-I have only seen 'A' and 'B' in pbuf.eeprom.atom1.data.pstr[6].
-
-The change looks technically correct.
-
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-> +		fdtfile = "starfive/jh7110-starfive-visionfive-2-v1.2a.dtb";
-> +	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110B", 7) ||
-> +		   !strncmp(get_product_id_from_eeprom(), "VF7110b", 7)) {
-> +		fdtfile = "starfive/jh7110-starfive-visionfive-2-v1.3b.dtb";
->   	} else {
->   		log_err("Unknown product\n");
->   		return;
 > diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-> index 3866d07f9d4..43b8af4fc59 100644
+> index 43b8af4fc59..7352252c475 100644
 > --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
 > +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-> @@ -535,19 +535,12 @@ int mac_read_from_eeprom(void)
->   	return 0;
->   }
+> @@ -11,7 +11,7 @@
+>   #include <u-boot/crc.h>
+>   #include <linux/delay.h>
 >   
-> -/**
-> - * get_pcb_revision_from_eeprom - get the PCB revision
-> - *
-> - * 1.2A return 'A'/'a', 1.3B return 'B'/'b',other values are illegal
-> - */
->   u8 get_pcb_revision_from_eeprom(void)
+> -#define FORMAT_VERSION		0x2
+> +#define FORMAT_VERSION		0x3
+>   #define PCB_VERSION		0xB1
+>   #define BOM_VERSION		'A'
+>   /*
+> @@ -105,7 +105,8 @@ struct eeprom_atom4_data {
+>   	u8 bom_revision;		/* BOM version */
+>   	u8 mac0_addr[MAC_ADDR_BYTES];	/* Ethernet0 MAC */
+>   	u8 mac1_addr[MAC_ADDR_BYTES];	/* Ethernet1 MAC */
+> -	u8 reserved[2];
+> +	u8 wifi_bt;			/* WIFI/BT support flag */
+> +	u8 reserved;
+>   };
+>   
+>   struct starfive_eeprom_atom4 {
+> @@ -128,6 +129,35 @@ static union {
+>   /* Set to 1 if we've read EEPROM into memory */
+>   static int has_been_read __section(".data");
+>   
+> +static const char * const board_no_eth0_list[] = {
+> +	"FML13V01",
+> +};
+> +
+> +static const char * const board_no_eth1_list[] = {
+> +	"FML13V01",
+> +	"MARS",
+> +	"VF7110SL",
+> +};
+
+Do you know in which category the Milk-V Mars CM ("MARC") falls?
+
+Best regards
+
+Heinrich
+
+> +
+> +static bool board_have_eth(u8 eth)
+> +{
+> +	int i;
+> +
+> +	if (eth == 0) {
+> +		for (i = 0 ; i < ARRAY_SIZE(board_no_eth0_list); i++)
+> +			if (!strncmp(pbuf.eeprom.atom1.data.pstr, board_no_eth0_list[i],
+> +				     strlen(board_no_eth0_list[i])))
+> +				return false;
+> +	} else {
+> +		for (i = 0 ; i < ARRAY_SIZE(board_no_eth1_list); i++)
+> +			if (!strncmp(pbuf.eeprom.atom1.data.pstr, board_no_eth1_list[i],
+> +				     strlen(board_no_eth1_list[i])))
+> +				return false;
+> +	}
+> +
+> +	return true;
+> +}
+> +
+>   static inline int is_match_magic(void)
 >   {
-> -	u8 pv = 0xFF;
-> -
->   	if (read_eeprom())
-> -		return pv;
-> +		return 0xFF;
->   
-> -	return pbuf.eeprom.atom1.data.pstr[6];
-> +	return pbuf.eeprom.atom4.data.pcb_revision;
+>   	return strncmp(pbuf.eeprom.header.signature, STARFIVE_EEPROM_HATS_SIG,
+> @@ -176,17 +206,22 @@ static void show_eeprom(void)
+>   	printf("Vendor : %s\n", pbuf.eeprom.atom1.data.vstr);
+>   	printf("Product full SN: %s\n", pbuf.eeprom.atom1.data.pstr);
+>   	printf("data version: 0x%x\n", pbuf.eeprom.atom4.data.version);
+> -	if (pbuf.eeprom.atom4.data.version == 2) {
+> +	if (pbuf.eeprom.atom4.data.version >= 2 && pbuf.eeprom.atom4.data.version <= 3) {
+>   		printf("PCB revision: 0x%x\n", pbuf.eeprom.atom4.data.pcb_revision);
+>   		printf("BOM revision: %c\n", pbuf.eeprom.atom4.data.bom_revision);
+> -		printf("Ethernet MAC0 address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+> -		       pbuf.eeprom.atom4.data.mac0_addr[0], pbuf.eeprom.atom4.data.mac0_addr[1],
+> -		       pbuf.eeprom.atom4.data.mac0_addr[2], pbuf.eeprom.atom4.data.mac0_addr[3],
+> -		       pbuf.eeprom.atom4.data.mac0_addr[4], pbuf.eeprom.atom4.data.mac0_addr[5]);
+> -		printf("Ethernet MAC1 address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+> -		       pbuf.eeprom.atom4.data.mac1_addr[0], pbuf.eeprom.atom4.data.mac1_addr[1],
+> -		       pbuf.eeprom.atom4.data.mac1_addr[2], pbuf.eeprom.atom4.data.mac1_addr[3],
+> -		       pbuf.eeprom.atom4.data.mac1_addr[4], pbuf.eeprom.atom4.data.mac1_addr[5]);
+> +		if (board_have_eth(0))
+> +			printf("Ethernet MAC0 address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+> +			pbuf.eeprom.atom4.data.mac0_addr[0], pbuf.eeprom.atom4.data.mac0_addr[1],
+> +			pbuf.eeprom.atom4.data.mac0_addr[2], pbuf.eeprom.atom4.data.mac0_addr[3],
+> +			pbuf.eeprom.atom4.data.mac0_addr[4], pbuf.eeprom.atom4.data.mac0_addr[5]);
+> +
+> +		if (board_have_eth(1))
+> +			printf("Ethernet MAC1 address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+> +			pbuf.eeprom.atom4.data.mac1_addr[0], pbuf.eeprom.atom4.data.mac1_addr[1],
+> +			pbuf.eeprom.atom4.data.mac1_addr[2], pbuf.eeprom.atom4.data.mac1_addr[3],
+> +			pbuf.eeprom.atom4.data.mac1_addr[4], pbuf.eeprom.atom4.data.mac1_addr[5]);
+> +		if (pbuf.eeprom.atom4.data.version >= 3)
+> +			printf("WIFI/BT support: %x\n", pbuf.eeprom.atom4.data.wifi_bt);
+>   	} else {
+>   		printf("Custom data v%d is not Supported\n", pbuf.eeprom.atom4.data.version);
+>   		dump_raw_eeprom();
+> @@ -260,6 +295,7 @@ static void init_local_copy(void)
+>   	pbuf.eeprom.atom4.data.bom_revision = BOM_VERSION;
+>   	set_mac_address(STARFIVE_DEFAULT_MAC0, 0);
+>   	set_mac_address(STARFIVE_DEFAULT_MAC1, 1);
+> +	pbuf.eeprom.atom4.data.wifi_bt = 0;
 >   }
 >   
->   u8 get_ddr_size_from_eeprom(void)
+>   /**
+> @@ -385,6 +421,28 @@ static void set_bom_revision(char *string)
+>   	update_crc();
+>   }
+>   
+> +/**
+> + * set_wifi_bt() - stores a StarFive WIFI/BT support flag into the local EEPROM copy
+> + *
+> + * Takes a pointer to a string representing the numeric WIFI/BT support flag in
+> + * decimal ("0" or "1"), stores it in the wifi_bt field of the
+> + * EEPROM local copy, and updates the CRC of the local copy.
+> + */
+> +static void set_wifi_bt(char *string)
+> +{
+> +	u8 wifi_bt;
+> +
+> +	wifi_bt = simple_strtoul(string, &string, 16);
+> +	if (wifi_bt > 1) {
+> +		printf("WIFI/BT support flag must not be greater than 1");
+> +		return;
+> +	}
+> +
+> +	pbuf.eeprom.atom4.data.wifi_bt = wifi_bt;
+> +
+> +	update_crc();
+> +}
+> +
+>   /**
+>    * set_product_id() - stores a StarFive product ID into the local EEPROM copy
+>    *
+> @@ -478,6 +536,9 @@ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>   	} else if (!strcmp(cmd, "bom_revision")) {
+>   		set_bom_revision(argv[2]);
+>   		return 0;
+> +	} else if (!strcmp(cmd, "wifi_bt")) {
+> +		set_wifi_bt(argv[2]);
+> +		return 0;
+>   	} else if (!strcmp(cmd, "product_id")) {
+>   		set_product_id(argv[2]);
+>   		return 0;
+> @@ -513,8 +574,10 @@ int mac_read_from_eeprom(void)
+>   	}
+>   
+>   	// 1, setup ethaddr env
+> -	eth_env_set_enetaddr("ethaddr", pbuf.eeprom.atom4.data.mac0_addr);
+> -	eth_env_set_enetaddr("eth1addr", pbuf.eeprom.atom4.data.mac1_addr);
+> +	if (board_have_eth(0))
+> +		eth_env_set_enetaddr("ethaddr", pbuf.eeprom.atom4.data.mac0_addr);
+> +	if (board_have_eth(1))
+> +		eth_env_set_enetaddr("eth1addr", pbuf.eeprom.atom4.data.mac1_addr);
+>   
+>   	/**
+>   	 * 2, setup serial# env, reference to hifive-platform-i2c-eeprom.c,
+> @@ -585,6 +648,8 @@ U_BOOT_LONGHELP(mac,
+>   	"    - stores a StarFive PCB revision into the local EEPROM copy\n"
+>   	"mac bom_revision <A>\n"
+>   	"    - stores a StarFive BOM revision into the local EEPROM copy\n"
+> +	"mac wifi_bt <?>\n"
+> +	"    - stores a StarFive WIFI/BT support flag into the local EEPROM copy\n"
+>   	"mac product_id <VF7110A1-2228-D008E000-xxxxxxxx>\n"
+>   	"    - stores a StarFive product ID into the local EEPROM copy\n"
+>   	"mac vendor <Vendor Name>\n"
 
