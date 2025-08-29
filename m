@@ -4,96 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC192C8303F
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 08:17:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94DC4CA0FF7
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 08:27:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2691835C7;
-	Fri, 29 Aug 2025 10:17:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 14B048354B;
+	Fri, 29 Aug 2025 10:27:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NochwPUi";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="LHsCz9QO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F00F83447; Fri, 29 Aug 2025 10:17:02 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 388C8835B3; Fri, 29 Aug 2025 10:27:53 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5BD08364E
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 10:16:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D71883542
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 10:27:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3ce772ce0dbso967389f8f.0
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 01:16:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-7722e0ca299so263770b3a.1
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 01:27:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756455418; x=1757060218; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LIJpuOR7CYdxFQEqE6oyXLCYBfVsmaoE/vNR84YeqxY=;
- b=NochwPUiC7VUPxm9yQGQq9lAX+TOb4b2ArbdS6ypVgZW9R/Al81F24gFomoX0TBj7s
- +Cu85ZPnkvZ/piLJUaBS4tUwZrfExJM7N9AfTos8faIJ29msWtOHytyKVd5b6JeBpWnU
- SyfgL7vZpzwoAuHLmcbVSimWFi66cbyf8Woj4L8rduocoZ9TuLOz1/LlVt/HJeqSZA0l
- swTQGVqbWI+ubI4FsSnpEhrVGC8EzkZwnCOTSYbp7sMXgNfiOGfMHO3uLeb0ba+AIDhs
- Nw4JIj9FlIVUZfo7XSRXF237Ymf1rO8ffuz7Dq7jTzzhEkiIPxd5giJaf2eZQodIKAjN
- o6vA==
+ d=amarulasolutions.com; s=google; t=1756456069; x=1757060869;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SZai1264xEjInOke0QrHE88Vudvud7xMfN4BWVdYWGw=;
+ b=LHsCz9QObX7WsonHlvV6mWmlgEPKw43ugW4mA+6PDFHNS9oGwFvy55CYDX6r8cj9SQ
+ xXN8fTzZbKOWFo5KOn867EADinUgQvHokRlF/n79hWyVGVx3/s2LFeHRAKKSNz1Yi6HH
+ PQ/a1EZw5KUX08JV3uDL2cuQ7yDbixKl+GgFs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756455418; x=1757060218;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LIJpuOR7CYdxFQEqE6oyXLCYBfVsmaoE/vNR84YeqxY=;
- b=py1NVrSQAfXIjAyu8kUKw97nlZdwDK7Ps0SAK5kuxR/60hS1Lgiryh1+VOTiFaIUCS
- hc48YHoQjeLMe+esNn9f8bI+aeUUc/9vkHnQNfVmC6pLU2ZwbMx1HmuCZWRmyhkneCc/
- RWoM9meoe1gQG/zsOCRTHgQ6/NCfbJ7Atr090RfqH0oCUqtzVX5ZC6yMPGOWJoPpQjLn
- 3ddCZ67PbAvJ+lHgw9yI59BP5WwOFNuVB9flkmUj6vEYiRX3uWLPUQADNk/8tnBXGMRG
- K2J+DVdDQMojjHxsz0bCquhRBbgjG5HFbyPcyQDcK7s4R2GFQl8ULW7OajZePwbMfpKO
- FzDA==
+ d=1e100.net; s=20230601; t=1756456069; x=1757060869;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SZai1264xEjInOke0QrHE88Vudvud7xMfN4BWVdYWGw=;
+ b=AXcd0SVrwVOo8N3XU506XYv+eNK8/jxLSzaai6kWBP1oYyQicpllC3rcbGsVMU2Q88
+ wbW4ceWVW9Y80Bwu5truEvr0uF2wfnv2GhhsJwFEQUaX9vXJ/T3Vlr+9nzqy/BmJyT+N
+ Bgt0t0lYYGHsIHwnO++B+KmsGHJoFxCHnKV6jFmProOGOcBPF9/4lR/g0v16jWukZhfo
+ VNTGDCIaw4Tta9xjAIdX88FtQNAflFSPFxwMlE9MtZMuKqcoPO7qXUJw4I5owf/Z5mmX
+ f68aYDh/17PMBCDjOGHYmZx5gsDLH3LHEJBQzMowcXrcoOVdqS0iTOYOBc6dIqSPFXYu
+ 9bSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQfhvaUkbgjXEqEboRvZOphft93QJkwDmSC0j9mjclRhzQ8hTqzx6zhSsjXr7RM91MKK+79HU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwzKFkeeq/fol0sSUYIB7F8yUzFsM768y+3GuVOw9K1wTlPrzfq
- sECwpS1sp8X+kL38XirRtx+Ld6yq/jeJ3C0lH/9vPMuKBmDumbqOVNaokHKrVZYO+fs=
-X-Gm-Gg: ASbGncsq2NpNCtOY0bd3TiTT7jA4NbTPIQe9E9ZN+XFLtgwHancFGxcesHSxwW18iGL
- 8qyXzSIVXdvCQF6nF/GkiZnClhUkI3SEb//f0rwkm7gVzrmvctPRW6pFXRuXVo2M8ofILRCCoN7
- scV3jpzZsOQEOK8AKgxcLmNVHvSDq5dVIAKEn5TCbvPz4YRRQ0KWBxdmJ7KnAsAMCwqeICyjXcX
- TC5s9oIa4N8L89CIZ8WpWslvQsJWjZ5uTDyrOA6MEoKADLPrjPfy8XUAYAOhCpA50ObjHm7CID6
- aGSF+H3f52/1rfbEcYaf3uPTCOUvCzmmQMgv1Vlla20KHiqsJs3KhNiziB+J1K8Zwh08VXtX0RR
- vvg4v+YWl6Q82FFNIArQ4nEpKeNw2ZVpqiTlKfH+016Ra4DKMh3SlAUCkP1v99orJIT+ADzxLaC
- PXXuiuymD6/JArr3R8DjTJRy5menw46unGgX6XZrsD5k2LnAEyCdf8qB+B3prbqXTmAq9YgVW8p
- vrTbwRfH6euY3HUeGa2qXLsJYoHFXHtVitWVVB880PmLg==
-X-Google-Smtp-Source: AGHT+IE1ErC+qmOURbB64HhVEuExqQXGL9e+K6YxTFUwGRmY0GWrwSHeiI38cx4/kOTQq9ya8xDihg==
-X-Received: by 2002:a05:6000:2404:b0:3c0:5db6:aed with SMTP id
- ffacd0b85a97d-3c5dcefd13fmr22768254f8f.54.1756455418199; 
- Fri, 29 Aug 2025 01:16:58 -0700 (PDT)
-Received: from hera (ppp046103010177.access.hol.gr. [46.103.10.177])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3cf270fd01csm2449008f8f.12.2025.08.29.01.16.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Aug 2025 01:16:57 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Daniel Golle <daniel@makrotopia.org>,
- Maks Mishin <maks.mishinfz@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- =?UTF-8?q?Carlos=20L=C3=B3pez?= <carlos.lopezr4096@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Yifeng Zhao <yifeng.zhao@rock-chips.com>,
- Heiko Stuebner <heiko@sntech.de>, Xuhui Lin <xuhui.lin@rock-chips.com>,
- u-boot@lists.denx.de
-Subject: [PATCH 8/8] tools: imx8image: Mark imx8mimage_check_params() as static
-Date: Fri, 29 Aug 2025 11:16:22 +0300
-Message-ID: <20250829081628.2327372-8-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250829081628.2327372-1-ilias.apalodimas@linaro.org>
-References: <20250829081628.2327372-1-ilias.apalodimas@linaro.org>
+ AJvYcCXcHjVD7XR+suvD/ZyPB0WQfQcTwsQt/Fh/Ut3fAvzJRUaJ98a304343Am9V/au7xpd+tqNXPg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZq7zszIQa3hx18sD7ohKQpxGPchik91kgPB9isRBFC7K56GVR
+ mL00ynpscxjPXxJj2VsA6ahnCxJSxD1dmz/1nh0qBjOfKQt8R/ZheC/93tqomH5kYk94m+WQV2x
+ 5ioKDfHZ/bDv5G6klSXVMxETbPwkjIjzipDBQ4FrkpA==
+X-Gm-Gg: ASbGncsGPiDxOvBi9Zq7JeVPxQbvYtbTIL3M5Kbc20DaNTIzRsqDAIG8SOQHscNtc+6
+ KGL3ZxHsh5Xy0MqFy1cXpewQUfW1ZwTzCRSh4pNLzYEDYjY6wBjIhINajRf80tecDBuJKm8niC8
+ jhdxrKZeaP7g80flDJxKEVJAmxa8MWUjcSJNsKujPlxnTahvOrW1U+zbm3McUAPI8qRdFU5ykhY
+ GbTYohs/Mx/res0
+X-Google-Smtp-Source: AGHT+IHh6hnxoZoyZP6HajVWl6MSGmZVvY4QU5HzXHolJgqPccnid/VdvPTvGZUHfeQZzeFefcROqSnxmRXbFDWWMs0=
+X-Received: by 2002:a17:902:f605:b0:248:dec9:4d3c with SMTP id
+ d9443c01a7336-248dec95006mr63863145ad.20.1756456068605; Fri, 29 Aug 2025
+ 01:27:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250703165841.1230515-1-miquel.raynal@bootlin.com>
+ <CAOf5uwnju+Z4bY0Cx0fy05TOLtaQqikq3z51zqDf2nDgCzQyWw@mail.gmail.com>
+ <87wm7jjvlr.fsf@bootlin.com>
+In-Reply-To: <87wm7jjvlr.fsf@bootlin.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 29 Aug 2025 10:27:35 +0200
+X-Gm-Features: Ac12FXyB6jkWyxJ84vX5GHVvKVG8kmrAvuepNPPLaR7jWJWxHxjobwpUKTKNWMw
+Message-ID: <CAOf5uwnZ5QRE+CdAhu33xRwDdygvV4mDRsVn2sZp9ts6SEy_LA@mail.gmail.com>
+Subject: Re: [PATCH] cmd: mtd: Enable speed benchmarking
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot-Denx <u-boot@lists.denx.de>, 
+ Steam Lin <stlin2@winbond.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,27 +97,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function is only used locally. Enabling -Wmissing-prototypes
-triggers a warning. Mark it as static.
+Hi
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- tools/imx8mimage.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-diff --git a/tools/imx8mimage.c b/tools/imx8mimage.c
-index fe1aff35b4dd..3e974923652d 100644
---- a/tools/imx8mimage.c
-+++ b/tools/imx8mimage.c
-@@ -49,7 +49,7 @@ static uint32_t get_cfg_value(char *token, char *name,  int linenr)
- 	return value;
- }
- 
--int imx8mimage_check_params(struct image_tool_params *params)
-+static int imx8mimage_check_params(struct image_tool_params *params)
- {
- 	return 0;
- }
--- 
-2.50.1
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
 
+Il lun 4 ago 2025, 11:15 Miquel Raynal <miquel.raynal@bootlin.com> ha
+scritto:
+
+> Hello Michael,
+>
+> >> MA35D1> mtd read nor0 0x81000000 0 0x10000
+> >> Reading 65536 byte(s) at offset 0x00000000
+> >> MA35D1> mtd read.benchmark nor0 0x81000000 0 0x10000
+> >> Reading 65536 byte(s) at offset 0x00000000
+> >> Read speed: 3752kiB/s
+> >>
+> >
+> > I was using time and reading but this looked much nicer. I will give it
+> a try
+> > and review.
+>
+> Thanks! It turned out very useful for development purposes :-)
+>
+> >> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> >> ---
+>
+> [...]
+>
+> >> -       bool dump, read, raw, woob, write_empty_pages, has_pages =3D
+> false;
+> >> +       bool dump, read, raw, woob, benchmark, write_empty_pages,
+> has_pages =3D false;
+> >>         u64 start_off, off, len, remaining, default_len;
+> >>         struct mtd_oob_ops io_op =3D {};
+> >>         uint user_addr =3D 0, npages;
+> >> +       u32 bench_start, bench_end;
+> >
+> > unsigned long
+>
+> Okay.
+>
+> >>         const char *cmd =3D argv[0];
+> >>         struct mtd_info *mtd;
+> >>         u32 oob_len;
+> >> @@ -490,6 +492,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int
+> flag, int argc,
+> >>         read =3D dump || !strncmp(cmd, "read", 4);
+> >>         raw =3D strstr(cmd, ".raw");
+> >>         woob =3D strstr(cmd, ".oob");
+> >> +       benchmark =3D strstr(cmd, ".benchmark");
+> >>         write_empty_pages =3D !has_pages || strstr(cmd, ".dontskipff")=
+;
+> >>
+> >>         argc -=3D 2;
+> >> @@ -559,6 +562,9 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int
+> flag, int argc,
+> >>
+> >>         led_activity_blink();
+> >>
+> >> +       if (benchmark)
+> >> +               bench_start =3D timer_get_us();
+> >> +
+> >>         /* Loop over the pages to do the actual read/write */
+> >>         while (remaining) {
+> >>                 /* Skip the block if it is bad */
+> >> @@ -586,6 +592,13 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int
+> flag, int argc,
+> >>                 io_op.oobbuf +=3D io_op.oobretlen;
+> >>         }
+> >>
+> >> +       if (benchmark && bench_start) {
+> >> +               bench_end =3D timer_get_us();
+> >> +               printf("%s speed: %lukiB/s\n",
+> >> +                      read ? "Read" : "Write",
+> >> +                      ((io_op.len * 1000000) / (bench_end -
+> bench_start)) / 1024);
+> >
+> > Did you check if it can not wrap?
+>
+> That is a good question, if my calculations are correct, time capture
+> may wrap if one spends more than 1h12 in the Bootloader. So yes it is
+> 'doable' to make the time overlap.
+>
+> But is this relevant? It really is a development feature at the moment
+> (developers comparing speeds would notice the overlap) and Bootloaders
+> in general are not supposed to run for that long anyway. So I would
+> argue that it is acceptable like that.
+>
+
+No was not. Because we run 10 seconds test
+
+Michael
+
+>
+> Thanks,
+> Miqu=C3=A8l
+>
