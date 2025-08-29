@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42206CA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E7A0CA0FF9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:29:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB8FB83677;
-	Fri, 29 Aug 2025 16:29:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A49B83689;
+	Fri, 29 Aug 2025 16:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X18fTg/D";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HObaX0Yw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85A7C83448; Fri, 29 Aug 2025 04:11:50 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id ACE7883448; Fri, 29 Aug 2025 04:11:55 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1442D83443
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 04:11:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BAA483443
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 04:11:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhimeswararao.matsa@gmail.com
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-b4755f37c3eso1417951a12.3
- for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 19:11:48 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-248a61a27acso12455655ad.1
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 19:11:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756433506; x=1757038306; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1756433511; x=1757038311; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bkNIFhI4U6PGpvLpQLJNk9P0i1SQJRu/AHODYNBsNsM=;
- b=X18fTg/D8B/WVueYfjW/2q+S3ppcEN+xpPGmAygheBSpDu8Aw1pEWqX48+3oX+cD7B
- O1Fs5a9OPGjLZhtDROzBsII2qS0zw5W3RY6183CWZf23wkmws9enCPTvtKmm286k1jiR
- ofmNXw0aEhCjm67koeNGkxDzRktN6AgOwRTG5BOob/+NctzLTHDu5d0IeiF2mOyjd8zN
- 9TC8x8s/7Rzte1pHdOp4vTA5/GqUAktHncJYxzFtYKG/zKOdyJ2FFjbD5kTMEgn1RkO3
- 6yfrmp3BnAMpYriOaneBRphAcfy53NPYeYx4kmtwCfM0s3mV6ZwbCJjFuG89fKfvMjzK
- CfBg==
+ bh=wfGEKqmbn1Xnn/llwBaa7Dvqdeko8Li2AP+BXdBjCvg=;
+ b=HObaX0YwwDZXVc44SYjUWMyQ+3UgdcuMxARgiBQAxdBZ842Oe7Uj3HWCAor5z3WEHK
+ 8xbcbCW+QSsaBeMYGPZ570rPC3EawRzm8IyDzDJKTiHMC/KYwJ3RYBr9ei0aY3H7FGbl
+ INmcOCfHCwN75YmmyDtZt4jbST0o6jmOVh7T9m5lii23D6pUjF3wU2iP3A/tVxxigJmF
+ c1WpXiqB+MBBR0we8sff3Cwe1v3cbJxX7JsZltip3eF9UUZreRD/mnSfROC8B7vcQM0X
+ jtOnLCvbVf47UZGzmk8IZIkQiK4GmVFNOzNepflcKLa75lRDvOce4qHZ0VfYsBUU1gg/
+ QsAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756433506; x=1757038306;
+ d=1e100.net; s=20230601; t=1756433511; x=1757038311;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bkNIFhI4U6PGpvLpQLJNk9P0i1SQJRu/AHODYNBsNsM=;
- b=BrjXK0tOtoQgc5FRXWm8juRPJX5m04soEYYXwHamaVcf//D5RJBZ4oKzDcXLRmL352
- uuyfLZGStufFSdXruAZeG3oaQmJsoyUx04nLApyrQDtbgosWpjK/aU2aWFWHbgl/oBMN
- JNkm+xv38xW8bx1hLzhQJTdCv99y7eyBcbEx0U3eCXcLQ7qGislenwAm86ByQVMuD75n
- sMvNnj1wI93Vyt4qnYeuaT1GXpwPkG7zBchttiqInuqFrwYGsimB2jWWlpfCS2LQaLaI
- fuUfDntucuyPDcKjInhdDZzy6t2C/gVJ1gNq86xiZ/IFXkfraKygHAEL7z6msvZl/2vg
- 5vIw==
-X-Gm-Message-State: AOJu0YxPdoJOI026LWgFbwWTodUr97a+c1cmIMtEvIZibis/4AeUZuzL
- bNSShQpnJieM4qFz2Y+Jg0aPXuhBmYGWXiLgR8kVLGxG5k3AsJoCXN3XIsykky+r
-X-Gm-Gg: ASbGncsT4Q0l1J8kwpLqWC5K79vP8NusjVLdjubdSXcFH+F6R95qt570JBe0blNyLbL
- Qvy1+tVITNNU1tskBMv2nru1CqyyIfa+GA8xjxzE1gARrZ4/AGT3DUqvlM74KNb4ueN9pFxObHT
- Hr+tsxFcrMRAfp10H4Gyo9y/lR56ynMTtkD9onyySArE1SW41PRlrdzQg5uceH9rNB9XV0JgBZm
- x1+ya/3VgQMLypHUv1pst83osidf8PhY2SzOYWIPut0WD/wgEwJTSUZzXjeGUWjZMdy+AbbOXnX
- /mXNEfDxiMJwm9MytGglsufgVENnyQ0i+5eYUEBTN9MO6gNVqtJf99GgvajOMeSrpmeT7TP4XPK
- 2CNYMFyNEurRmR3jos/UTMHoczq29TiZX5Bwi2IZjlUT6R0N3Bjl1C8EZtmD/Xbf/5ZeQwl2VHT
- Nzm4GAlP+qGKPHv0wyYWNz
-X-Google-Smtp-Source: AGHT+IEwyCnYWtH/kgCCEKi4CNI6HVuY91wLTb6Mkqmvos9F2o5eC+r2ts6OBQwzsY5ZhFkwBztK6g==
-X-Received: by 2002:a17:903:2f44:b0:240:a222:2312 with SMTP id
- d9443c01a7336-2462eeeca94mr327470895ad.44.1756433506109; 
- Thu, 28 Aug 2025 19:11:46 -0700 (PDT)
+ bh=wfGEKqmbn1Xnn/llwBaa7Dvqdeko8Li2AP+BXdBjCvg=;
+ b=GwpRQuiYvoW5nr8cJjiSGZMemEX9TwYjeuqf5Vg8dnD3obddW/poJKhS1owsNWzstx
+ e5G/5UYYfwb7pMmtG5k4iCJt0PwrzoKXd5Od16S/CES+VSje9TWWBraUTxFMo6AxvmJc
+ siKafAYifJLWqHVFSQeX9hq3AhrNMaFiZdYL71NUGSn8vWSkfOZ3LeE71ucBLVmaAGXL
+ iF28ymdINSRkBh9opE/3VMcTUIFXDa+ahNts+eJhw43uEyytCLukXuG2tlu2tWqRlCQ2
+ qIxZgVdUt2e7/hIwiAYeCNLk1StjwKPdFvTUju2VeJwQnrmpdivbXpxPe8okpiSNPeE+
+ wowA==
+X-Gm-Message-State: AOJu0YxUwJjY354ZR7DG1wlTq53XXBUz/IdcCa7z/oDz1QsLcr8HBhiA
+ wEn52nOl+cO3AO69rndQQY3z0soAj9VpnMIw6migO4tsQkx1Q4c1HXHR/wtFjCZK
+X-Gm-Gg: ASbGncueq61wdRzOUH1HWTp4w+Jpr1H8y5lfOxanMDFaLqIgbGsvGgD9/TUtf46li5O
+ UO4RHHxTLqQit3qnLRDwRgSQ9J5/lXJWYUUYDrNajlFHin64zHvqVhM/AVck66eGNo5Da60xLYY
+ IELJpRbA5XkLMK19iFoAoVqxwGafwmseAjGD+SMDD+DmaSELT3uAdhisFWbfndsAYe6isT0nXOm
+ ubOGLrwRpuN7FJrvWOf+OH9Fe1xQbHgj0Rwgvg0emrbvzjL8ke0QTsq5zi+ZGCs/30VxSQvtBvL
+ +x0q+OEsZuILX/3LIex++JFoMaBb432N37+ItTFpciLWWnDeXxYU+9nqC4aHlkKPFOWkM5+wwB0
+ F3ZNSFN/sdIeIfDXIhH4opryTDbeqbKbOQwuygzJEyACR+QSuneiiheWwPu4P9eYltOu1oCuxA/
+ mmGPtu9MpG9gFsCkir+OOL
+X-Google-Smtp-Source: AGHT+IFjJ7DcJeqQAJ5ygoL3nqJJk0Xb+nQfjP8BCsSXYAQjNSIkV7phbDrZQIAFqYtmpoD+wehNMg==
+X-Received: by 2002:a17:903:238a:b0:245:f860:80b1 with SMTP id
+ d9443c01a7336-248753a264dmr150004145ad.11.1756433511193; 
+ Thu, 28 Aug 2025 19:11:51 -0700 (PDT)
 Received: from kumara-Inspiron-15-3530.. ([49.207.207.107])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2490cbc9cb9sm4694055ad.15.2025.08.28.19.11.44
+ d9443c01a7336-2490cbc9cb9sm4694055ad.15.2025.08.28.19.11.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Aug 2025 19:11:45 -0700 (PDT)
+ Thu, 28 Aug 2025 19:11:50 -0700 (PDT)
 From: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
-Subject: [PATCH] i2c: davinci: prefer kernel types (u8/u32)
-Date: Fri, 29 Aug 2025 07:41:29 +0530
-Message-ID: <20250829021131.28451-2-bhimeswararao.matsa@gmail.com>
+Subject: [PATCH] i2c: davinci: use mdelay() for multi-millisecond waits
+Date: Fri, 29 Aug 2025 07:41:30 +0530
+Message-ID: <20250829021131.28451-3-bhimeswararao.matsa@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250829021131.28451-1-bhimeswararao.matsa@gmail.com>
 References: <20250829021131.28451-1-bhimeswararao.matsa@gmail.com>
@@ -99,72 +99,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace uint8_t/uint32_t with u8/u32 to match U-Boot style
-(checkpatch PREFER_KERNEL_TYPES). No functional change.
-
 Signed-off-by: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
 ---
- drivers/i2c/davinci_i2c.c | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
+ drivers/i2c/davinci_i2c.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/i2c/davinci_i2c.c b/drivers/i2c/davinci_i2c.c
-index 39132747208..9bba0600e3e 100644
+index 9bba0600e3e..ffd0dd0b282 100644
 --- a/drivers/i2c/davinci_i2c.c
 +++ b/drivers/i2c/davinci_i2c.c
-@@ -19,6 +19,7 @@
- #include <asm/arch/i2c_defs.h>
- #include <asm/io.h>
- #include <linux/delay.h>
-+#include <linux/types.h>
- #include "davinci_i2c.h"
+@@ -51,7 +51,7 @@ static int _wait_for_bus(struct i2c_regs *i2c_base)
+ 		}
  
- /* Information about i2c controller */
-@@ -87,7 +88,7 @@ static void _flush_rx(struct i2c_regs *i2c_base)
- static uint _davinci_i2c_setspeed(struct i2c_regs *i2c_base,
- 				  uint speed)
- {
--	uint32_t	div, psc;
-+	u32	div, psc;
+ 		REG(&(i2c_base->i2c_stat)) = stat;
+-		udelay(50000);
++		mdelay(50);
+ 	}
  
- 	psc = 2;
- 	/* SCLL + SCLH */
-@@ -122,10 +123,10 @@ static void _davinci_i2c_init(struct i2c_regs *i2c_base,
- 	udelay(1000);
+ 	REG(&(i2c_base->i2c_stat)) = 0xffff;
+@@ -63,7 +63,7 @@ static int _poll_i2c_irq(struct i2c_regs *i2c_base, int mask)
+ 	int	stat, timeout;
+ 
+ 	for (timeout = 0; timeout < 10; timeout++) {
+-		udelay(1000);
++		mdelay(1);
+ 		stat = REG(&(i2c_base->i2c_stat));
+ 		if (stat & mask)
+ 			return stat;
+@@ -81,7 +81,7 @@ static void _flush_rx(struct i2c_regs *i2c_base)
+ 
+ 		REG(&(i2c_base->i2c_drr));
+ 		REG(&(i2c_base->i2c_stat)) = I2C_STAT_RRDY;
+-		udelay(1000);
++		mdelay(1);
+ 	}
  }
  
--static int _davinci_i2c_read(struct i2c_regs *i2c_base, uint8_t chip,
--			     uint32_t addr, int alen, uint8_t *buf, int len)
-+static int _davinci_i2c_read(struct i2c_regs *i2c_base, u8 chip,
-+			     u32 addr, int alen, u8 *buf, int len)
+@@ -105,7 +105,7 @@ static void _davinci_i2c_init(struct i2c_regs *i2c_base,
  {
--	uint32_t	tmp;
-+	u32	tmp;
- 	int		i;
+ 	if (REG(&(i2c_base->i2c_con)) & I2C_CON_EN) {
+ 		REG(&(i2c_base->i2c_con)) = 0;
+-		udelay(50000);
++		mdelay(50);
+ 	}
  
- 	if ((alen < 0) || (alen > 2)) {
-@@ -220,10 +221,10 @@ static int _davinci_i2c_read(struct i2c_regs *i2c_base, uint8_t chip,
- 	return 0;
+ 	_davinci_i2c_setspeed(i2c_base, speed);
+@@ -120,7 +120,7 @@ static void _davinci_i2c_init(struct i2c_regs *i2c_base,
+ 	/* Now enable I2C controller (get it out of reset) */
+ 	REG(&(i2c_base->i2c_con)) = I2C_CON_EN;
+ 
+-	udelay(1000);
++	mdelay(1);
  }
  
--static int _davinci_i2c_write(struct i2c_regs *i2c_base, uint8_t chip,
--			      uint32_t addr, int alen, uint8_t *buf, int len)
-+static int _davinci_i2c_write(struct i2c_regs *i2c_base, u8 chip,
-+			      u32 addr, int alen, u8 *buf, int len)
- {
--	uint32_t	tmp;
-+	u32	tmp;
- 	int		i;
+ static int _davinci_i2c_read(struct i2c_regs *i2c_base, u8 chip,
+@@ -319,7 +319,7 @@ static int _davinci_i2c_probe_chip(struct i2c_regs *i2c_base, u8 chip)
+ 	REG(&(i2c_base->i2c_sa))  = chip;
+ 	REG(&(i2c_base->i2c_con)) = (I2C_CON_EN | I2C_CON_MST | I2C_CON_STT |
+ 				     I2C_CON_STP);
+-	udelay(50000);
++	mdelay(50);
  
- 	if ((alen < 0) || (alen > 2)) {
-@@ -302,7 +303,7 @@ static int _davinci_i2c_write(struct i2c_regs *i2c_base, uint8_t chip,
- 	return 0;
- }
- 
--static int _davinci_i2c_probe_chip(struct i2c_regs *i2c_base, uint8_t chip)
-+static int _davinci_i2c_probe_chip(struct i2c_regs *i2c_base, u8 chip)
- {
- 	int	rc = 1;
- 
+ 	if (!(REG(&(i2c_base->i2c_stat)) & I2C_STAT_NACK)) {
+ 		rc = 0;
+@@ -328,7 +328,7 @@ static int _davinci_i2c_probe_chip(struct i2c_regs *i2c_base, u8 chip)
+ 	} else {
+ 		REG(&(i2c_base->i2c_stat)) = 0xffff;
+ 		REG(&(i2c_base->i2c_con)) |= I2C_CON_STP;
+-		udelay(20000);
++		mdelay(20);
+ 		if (_wait_for_bus(i2c_base))
+ 			return 1;
+ 	}
 -- 
 2.43.0
 
