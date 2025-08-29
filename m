@@ -4,82 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9672CA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 15:54:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C458CA0FF0
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 16:00:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C72B83675;
-	Fri, 29 Aug 2025 17:54:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A1AEC83675;
+	Fri, 29 Aug 2025 18:00:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GZcvv7xa";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="OnYnMWPn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F29A383689; Fri, 29 Aug 2025 17:54:30 +0200 (CEST)
-Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
- [IPv6:2607:f8b0:4864:20::e2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CAF8D836D3; Fri, 29 Aug 2025 18:00:44 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20624.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::624])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDF278365E
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 17:54:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C16AF8366F
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 18:00:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-528d157a48cso1072621137.0
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 08:54:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756482866; x=1757087666; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=8DFVrxfYJ7g5hHGJ/7bgFMe/9z9oM0yBfcP1FRPOio0=;
- b=GZcvv7xaido/8UvM/C1FAeTi644GkB39TeO1sFzR2iRlD5ErF9PsvM7CQIjkclW3oj
- vdLsPcTgI44PHizOaO7DnX5FNOnTY5UeFXeeqFAqjxQvxZyO3ZPsOrMQivLvMZZPc+r5
- s0fG4N5KCDpQbT72OLyYAsKwMbjPQerE2dyvwb4V+iiX4S+AyTU1KwUpDUmv79R/wdJS
- Z9o66fxEyVwptcA9/ZrqpCbZFCZPaKPqVd17JEEUT5ZQaRnx6UoNt1rXvqOyLTuA+bbK
- QyKpMZ/qhy0pylEQgxMk3n6MpTuhJTDw1SLTLmTVlTutyBxq7gPmHu9xqT+qNboUl/yK
- K9pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756482866; x=1757087666;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8DFVrxfYJ7g5hHGJ/7bgFMe/9z9oM0yBfcP1FRPOio0=;
- b=a13weOW0iOWtNdmEtI0wDZ44qUchKYRQ6ieSOBuKCI6u43HiyOgm5fPoLtqpZ5qCDD
- 97aIlc0uFzdpobCHVRA2Iz0GeIGCpgD6qMkUDW7Lr4/TO4zvO2sM1VUuJ5uGUQBA2QmU
- Nb4OBk3YcowET8+jGUCXKUc82hMVl20s1TBtIQ4p4RFeH9v7WyLvE/bLmkI0wRDhWvHF
- 7neEwSsElF4jEPaJdHpjGmkMDBa7Boxks04axrOAE2B4qPyVqZmitpxDoTvDwj3tgXjV
- 1mMJcMCyQ4NwaqHj4bYZH4HOQEWs6OlV+65NSW4q7Y7+AMRFh4UwtBPORMuX43vCt489
- tUIw==
-X-Gm-Message-State: AOJu0YyTjTYPrD513bdz3FfwMgvVxY2RPhNnI1A0E2CvQasEaTjCUBhI
- ILMCv8jSXDlZORLyj5ppq3o2QGchxMtl9TXfBIe9oJLWs2IIesCYV+DNDBGKrpoVgY/wIfVyk1K
- dy57L
-X-Gm-Gg: ASbGncubYlqv1xobZ8gZ59b2D0GhovyO2rxbjKojk4B8owlzAiGpn98ZjV7zcNNjo5D
- CiWPKKlSCcjXMzGaql38+XEiPL0oB1mMeTZEH892HS5/VFSTzPbvxmk7WYhPQf4UQRkTPyTz4eC
- QT5emJ0TtOtUYvGun5JzxpBgGCLfoo6zSieTEU/cGIoIIzotsOdZyJzNSbE8jS/C9uWCHuXNGVa
- ose/a7K5/OlmMd7hYzLxPTeINBLgTWMa9OwHzXpNTR/9CUBulxxMEk7wWUzfSzlX2vZjS5OT3XY
- 4FfX1ojW+SH5QKBDpMNkFCQu7R1Kfks2ga+Ih08f6zQB3eD+FKpd+RovZ4V7Czrs/gu+LxA2ufe
- s36QhnHWWPVAbL+/vrARf8E+7lfwD3RAKta1usKYkg7nlftwDTT0OL+SF3whivicuoSf+Fg==
-X-Google-Smtp-Source: AGHT+IGNpDsvDqTXB5giPfGhVwpnVfJKe6BXfKPybrGkD6qoBEm5r5WIoAjiNqlkOrM8jK+23bYQkw==
-X-Received: by 2002:a05:6102:d8e:b0:4e2:a235:24d1 with SMTP id
- ada2fe7eead31-5248bbc6aadmr4257203137.4.1756482866356; 
- Fri, 29 Aug 2025 08:54:26 -0700 (PDT)
-Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.181])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-529aee9a689sm1184505137.4.2025.08.29.08.54.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Aug 2025 08:54:25 -0700 (PDT)
-From: Javier Tia <javier.tia@linaro.org>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v3] disk: efi_loader: Improve disk image detection in
- efi_bootmgr
-Date: Fri, 29 Aug 2025 09:46:37 -0600
-Message-ID: <20250829155415.90634-1-javier.tia@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wxB/DwoS8R1U/AQ4QsVEM5Mt1XcxRu8WXsfv0wXBSXWWI+PE9zSeLVkq6pNpBqQxBkMzfcy+lUXBwO2V/rSfJHKC/84+wjEZ92HR5kAJjIjYHAkBsbT4SvSBPgu7ubJDAFEO1Gt4KiAlnS1rHI57YaIVfhWX2AZQ5pzKH6OUaJxasqqDPshmzazBB9uzfWxDPuBhamVOtFcN+4L4WqTgU/8Suxu4LvCxTvh5ildDuzoNvX6EbPPRWtzqw8D4qIQ1exoKRh1EjjXEfvmTAPaOdWCL0M1tgrtXlrGW6V+uzICeMBmXCEZ7dhnwFLiX4Uhcc5SfFK0e7ho7VBH7aZdhvw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Gll/helAu1DxU2EjaGvqplyv2LdnCpth96kT7zz+UpQ=;
+ b=pHPKUHQM2E6Pv4+anXPiyKmIC6ZP0wWg3TSSXlPta7gSHYqMSR0J55wRskObNHz/ByzFWnj2eDeABJB/81pYzkpwUTenyJs4AfZPpKnNW9Zs5iwSl+9ayHl30y/i63KrRm65AMciGExtJznB6GPhNf9ZwWa3d6Xyp4Nrz8Q/8mkAe2yTRwNwD6CuV9pKjq33NIoWv4omBJhaCXIHmKAsSZ/kS7Dj/8TmYuoUhEMuZqc8Zn2kROmN1l2dODSXtJDnVD0crZuZWQ3p14A3qkOYHwkICyeQd+GqWZEaXzDAyrJoalgz3IILJaZ6R0oLDN7FdkDRJsCN9HhL3Jr9ScKsbQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Gll/helAu1DxU2EjaGvqplyv2LdnCpth96kT7zz+UpQ=;
+ b=OnYnMWPnT86cwhck3/39EdmROWsOcIJhOmJUuPxIXvF63bT04tq4BjQMFJIKwztP8LwceEPvNJ9OhG28Cm9FgLT2bsZBaDDwmgtTRjrFIc7QZRPdc/GvZYoVuU+JVyDrcV18626G2ssN7SVKUrpkL3YUe3iqxU8DGayvcaq2WBBW3eycmAnF0uViGTwwVRdIlwGWvz+diVT0lUdhA7+IjiNNIbuNFXOsAksAWBpzNbinN9UrpKs9RgEVEukUJ6BOmHCRhTl2SBZpSTmyy3M8ApqnqblDRA0GPqrEn14Q39e8ysrGc7oWab3HoTA6FI3nLicOKa1r7OQe/oUJjwSyIg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DS7PR03MB5542.namprd03.prod.outlook.com (2603:10b6:5:2c5::16)
+ by PH7PR03MB7105.namprd03.prod.outlook.com (2603:10b6:510:2b8::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.16; Fri, 29 Aug
+ 2025 16:00:31 +0000
+Received: from DS7PR03MB5542.namprd03.prod.outlook.com
+ ([fe80::c3b6:3b8d:4383:ab7c]) by DS7PR03MB5542.namprd03.prod.outlook.com
+ ([fe80::c3b6:3b8d:4383:ab7c%3]) with mapi id 15.20.9073.014; Fri, 29 Aug 2025
+ 16:00:30 +0000
+Message-ID: <96e25f49-eedf-4b39-aba0-36178aa567b5@altera.com>
+Date: Fri, 29 Aug 2025 21:30:23 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] drivers: clk: agilex: Correct EMAC clock source
+ selection
+To: Tom Rini <trini@konsulko.com>, "Chee, Tien Fong"
+ <tien.fong.chee@altera.com>
+Cc: "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+References: <20250828135152.8680-1-nareshkumar.ravulapalli@altera.com>
+ <CY1PR03MB8121C31811D7EA295EE697C2A73AA@CY1PR03MB8121.namprd03.prod.outlook.com>
+ <20250829142640.GU124814@bill-the-cat>
+Content-Language: en-US
+From: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>
+In-Reply-To: <20250829142640.GU124814@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PN4P287CA0112.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:2ad::7) To DS7PR03MB5542.namprd03.prod.outlook.com
+ (2603:10b6:5:2c5::16)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR03MB5542:EE_|PH7PR03MB7105:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a542022-a5a8-413b-e910-08dde7152da9
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?V1NMbEtLRk05c3U4OE56RmpjQjk3Z3h3ekRxRzlsZFloTVF0amZwcG5pZ1NE?=
+ =?utf-8?B?cWpTN05NVXcvcmVHQlN3blR1Y0g3cTNOZWNsSGcwUWI4bWduK1BPY2t1cGhk?=
+ =?utf-8?B?UGZsU3FCL001UGk2NXdIdVZqSngxZkY5RVRnVnJoYVZyV1daMnlyQ2VVelF2?=
+ =?utf-8?B?NnJFVXczdCswbHpQYW1ONEQ5SUE2MGdaS05UWVZ2NjVwdHZXdE5uS0dJNzha?=
+ =?utf-8?B?VDBwSlVuQVN4aEVMd0pNdlNXU2VreElES2pHNHhvaWdKUlE5N1BtdWdhM0V3?=
+ =?utf-8?B?TWdoY1hUc1p4SnhKK3dXNFQrT296d1lvQ042VnpJQnNYTy81c0Nad09qRVQ5?=
+ =?utf-8?B?VnY4RnZrN3JJcDFIYkxabXgyZGhTRVFYZGgrRCs0OHJpQVVtdEdaN0xFeVZC?=
+ =?utf-8?B?Vk5Yck9nYzM3cElrVGIzV1ZseHY1QVpVUXVySFJIZW1IZlliR0RQNjdkaktz?=
+ =?utf-8?B?c0kvY0llWWRuRVZWTmRZV2ZURVYxQ2RVa0d0QkphQlRmMkl1eUZPaERzTEdB?=
+ =?utf-8?B?SW9nQVZEa2xtYWtMSmt4b0FObkpxN0wzZjN4dWlQeTJrQTR1WTdvejlFdlBR?=
+ =?utf-8?B?bXFkTlU2Z08zUTBLbHJqeis4NG16Q05mdGxqZnRmRUdySmR4SVN2VnRNR0VL?=
+ =?utf-8?B?OVQ5czlnbkZvU3RsNmVzZ0s3M1FFVUt0c1c2WlRYR0U0RktFdERaWHFsa3dq?=
+ =?utf-8?B?QUQ0YXFQcTNXVjJhbzFNQnBuajZSZG9jR1lSUlhJSTFYWVMxUlpxdG1qZ2Nr?=
+ =?utf-8?B?bXlBYWRiQXRHVlNicndwUE95aVgxTjRheUFaMXlzWmlhMzRIOURua3BhL1pm?=
+ =?utf-8?B?ZDF1MDlJUDlldWFhc0ZGMTEwd1J1Ym11S2RwZVMzT3RZV2ZER25kSTZCMjgz?=
+ =?utf-8?B?N2RsNi9Ralg4WlFmeGY4bGhic2NXSFYrQ00yM2szVHhNSTg2dEFkS1dRaFRV?=
+ =?utf-8?B?V0c5R2FPZlVRbEs4KzRjZEhMUWZFVWpEUmpQM0VwL1NiYjVIQVhBZmw3MU5Z?=
+ =?utf-8?B?Ui9XQURaSzhCVWtXcFV2QVpndmI1R0ZsdG84WFdpSzZZOEl0VTRIR1dHQlcv?=
+ =?utf-8?B?SzU5WXFHbm1uNHFLa1E3Tlh4R3pxNEFPWFJUTDlmRElCai9Qb2wwSy9XL0Vi?=
+ =?utf-8?B?Yy9Id2dPR2M1bkxiV3NCSDlDWG0rcjdpNDA5enFDbzNKdnBuOXVLV1NRdVVU?=
+ =?utf-8?B?ZlpNUUVZY2hKZVpFKzFRNzZnckxTWEhZUERxZnpLakJRYjMrOU4wUWxTaFJB?=
+ =?utf-8?B?U0M3ZDRCWXF1YzVwNldFUkdkTlY1M2RsS1Y0Qzl1cjU5ZUoyeEdEUDR5VitP?=
+ =?utf-8?B?ayt3YXorOWtXT1JHcFFqNDdpcURTQTdSZTFvNGV1QmROdUE0R2t2V0luNDZn?=
+ =?utf-8?B?ZmF5YXJEd0pDcy8wUkNCbnVyRDhTWFBORnoyL2c0MGpaazdBRVU0T01tdTg5?=
+ =?utf-8?B?YXcyRFBzMVdtdlMzdGUzQmQwTWs3RnlEYVJITklKL0Fncjlkb2NGZmJhRzdG?=
+ =?utf-8?B?V0ZDaEc3OEthR1MyR2U5VDNaRTgrWkVGUDAxdDBLTW1CMkNiV3lxU0ljV0Vw?=
+ =?utf-8?B?SEhueFJsemRvdVBpT0hhTnNoTXRBd2FwejNYU2hVSmh4QUJnaVpnVXZXa2hV?=
+ =?utf-8?B?UTg5b0QvTDBtTCtiM0pmdW11UVNiWllUMmkyWU5GSlJKN0xpQVNpMHc4dld2?=
+ =?utf-8?B?YUxVM08wS0tXYjJuMkM5Zkx3QitBWXBSMUo3SkdCcThLeklxRzh0MFF1a3dk?=
+ =?utf-8?B?MjJsM3pkUWlMMkxISlF6U0ZVK210SUZBb05QS3FqNStWWWxRQXJ6R2E2eTZZ?=
+ =?utf-8?Q?nrsHQiyR0W84bWSVzlf1tCYJF7a0oAKDiTu8g=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS7PR03MB5542.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WkxORzZsZ0VWbHhxT21rVGZvYUZVa3NTN050SVFwREtpcWxodlR3c1lIMit3?=
+ =?utf-8?B?OTBTN0QvSXNublRUbXcvZitBcnJxNG9nbzZIYUJKelBybk84WWQ4R0RaVEV3?=
+ =?utf-8?B?SHBOWFUwMUZVUzlTaFNXWXBXVXFkOEZkT1c3RlIzS0FPbm9yL1pKZkVDeTNN?=
+ =?utf-8?B?L0gzWEdXQzFmb2JXY1hUekRrTEoweS9zT2JJNDdzVWFjMWdMVFlEYzhSREpk?=
+ =?utf-8?B?YXNxdDNZbU40RU5FSmVEOVE1TlRCOUIxZzZaRHFxOEx6VVpRMjhKeDNRay9H?=
+ =?utf-8?B?V2tnT2xJdEo4a2dsZVJidCtqcllxUmJoT1NiMEFVNjVtWXVhS2c2bEhmd3ZW?=
+ =?utf-8?B?dG5lV2oyVTZVNnM5RndaNk9yc2VpbXk4bDZTRmpDUXBCVDBuc0YxQWdSR2kr?=
+ =?utf-8?B?REF0bmpQTGs5elRQcHVaeUR4ejZRc0x5eWQyZG9HNnBJRCtpZHpmSnZyM3F3?=
+ =?utf-8?B?U21OeUpnbkVvbDZSZ3dMMlJqQzgyOHZXNWt5d0VpbHFqa21YT1Vwc2FkR1ZQ?=
+ =?utf-8?B?ankyTmk0ZHRmcXJYWWFDcWQ1YlljNnp6a3VGSFU0TGVncjk3WnZLZ0UycXNB?=
+ =?utf-8?B?THl2aW9sS2g5Y0xjYng4MGYzVnRXbVByWVRuZGU3SlJweDd6UytxTGNEcFll?=
+ =?utf-8?B?OTlUTUJVL0liMXVHRmhqZU8vWmdXN1Ftc1ljRmNiNFJnbWw2RU53Z05OOTNv?=
+ =?utf-8?B?eVZBdHhTeU8rcS94c2grMERVc3dxL0E4V09RSk1YNEsrNFFMdGdzMFNjQ3hE?=
+ =?utf-8?B?Y1VTYWg5TkFqSXY4SEVyMjR3UFpqQWpjelFrY2kzNkFtbjZkSGd5aDc4bGpM?=
+ =?utf-8?B?RkJUdTRVY0hLWlIxUTNIbkJ3TkdENy81MHhiSHhSZElLR2Y5MTZrWis0SFBQ?=
+ =?utf-8?B?MHRtenN0Uk52UDdaM1djZzB3bmFHV2dPOWtWYVBkOTRtR043T2dUOVRFOXVm?=
+ =?utf-8?B?aDZLSGdYYU9GZUl3bWVYcllDR0I2VHloZzErckJ5UlNnNVNwanVCbTdQZVVM?=
+ =?utf-8?B?Z210NFhrQ2hIS3pWcy9zaHBOQUdXbTBudzR5N0JRY0ZyMkRqdU0xZ21lT3B6?=
+ =?utf-8?B?Q2U5Z3NMelhIaUdZdzcvYTNOVUxRYXVQbXhJWkNPbWw4MDhFMjNFdiswVjF2?=
+ =?utf-8?B?ZWZmYlVsS2RkK3hEZ0NUaTg4cWIwZmRpaGVUZFR4bk1icE9seHczaFo0cTNP?=
+ =?utf-8?B?L2hQQ3N0QUFnbmFNeGlWczNJTUh3dlVtN0hUSDI4ZW51bVhLb1VTR0M2RTY4?=
+ =?utf-8?B?ZkpQVjRITlNJRVhXajJCTjRiQ1daUHZ0S1UrK3d1Z21tVWVqNlg0d1lTUnVa?=
+ =?utf-8?B?cWxWa0gycnlLcEtmQVFPOGJVMkw0L0FHUDJSLzhQQkVGajZ1SHJuVGJrM1VE?=
+ =?utf-8?B?TnpVZCtYTW0xNTlaN0kxbmNZN2F2VjIybXVudzQrMFNId01ETlg5Wi9zMHQ2?=
+ =?utf-8?B?YkxpSkFWdUJXMGxzd2hhdTB3Rk00ZkFKeTkvYUpQYVpMRU1lc2x4aS82ZFVW?=
+ =?utf-8?B?bXF4TUM2QzZHMWFhck8rUDZGQlZING9rM1dVZnA5TnNEMGV4am5zQ3g3bG03?=
+ =?utf-8?B?aUswcitLRVhUL1VuVEhUK0ZxcTJBVkpJVXVqbzFJWGcvMXU4RURleVdDcDZk?=
+ =?utf-8?B?ZDBTZ2pHRlJoWDlxdHhwVWFOSEpuaFAzd2ppM2ViSC8xMU54bXRWN2dYV1g2?=
+ =?utf-8?B?KzdIeDFJUm1TdmYrUlgzd2dnQVpxYXlxbFpTdURZY2wybGJMaFV2OHhWUkhF?=
+ =?utf-8?B?TFdiUytHVEJjQTRMajgrNDBVaHdvdXNSZTd2WFlOMS9qZGtjc09HYkZlQ1ln?=
+ =?utf-8?B?QXlISW9Mdk45cEZTS1Q5czd6TXJ3b1U0aFB3UktSQmRnYnlnZi9IUExpSnRu?=
+ =?utf-8?B?WkRUWnVGaEJkbHh0ZlJIbVRwN2tjQ3B5L1RXdUZKSVlYcTh5Z0RWeDA2RGFM?=
+ =?utf-8?B?alRTQkNBT0pxWllUZ01COWFoVng3SzhNMjg0NUNoZHI4U3hyWVNaN25lTFA4?=
+ =?utf-8?B?UXNhSnZ0YVF5dEVWaDVianY1MVI2ZUtSRVBRQUpUTGZMOFpzemdOWnE4aGk2?=
+ =?utf-8?B?clhjbE1jZ2dpc0xzcEk1SDRCc0xhbGZDM2R3OWZKTGF4Z0xiYkVsVjZTZTkr?=
+ =?utf-8?B?b0gva1NtRS9HWkQ0VTJWMitaS0hpUE5xcmh3R2R6WmVaaGk2MHJUUk9YSEQy?=
+ =?utf-8?Q?ABrN/aFftKoSh/nzh+UI0Vs=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a542022-a5a8-413b-e910-08dde7152da9
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5542.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2025 16:00:30.7931 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9cLscDwn8TEig3GGQ5lZq8fK9IpDGYFB98updOSGGRZjn13OMUIWsG90Jt4LA30++sLAgLwQqBpvxQ7MS329Y1u9SEJdsoHumZ9rpkDIEisugpwGJCxYA7tbjFr3NVlf
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7105
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,240 +181,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enhances the process for identifying disk images within the EFI boot
-manager. Utilize part_driver_lookup_type() to verify the validity of a
-downloaded file as a disk image, rather than depending on file
-extensions.
+Hi Tom
 
-A temporary block device is created from the downloaded image and
-part_driver_lookup_type() is used for comprehensive partition detection.
-If a partition driver is found, the temporary device is reused instead
-of being destroyed and recreated.
+On 29-Aug-25 7:56 PM, Tom Rini wrote:
+> On Fri, Aug 29, 2025 at 04:58:07AM +0000, Chee, Tien Fong wrote:
+>>
+>>> -----Original Message-----
+>>> From: Ravulapalli, Naresh Kumar<naresh.kumar.ravulapalli@altera.com>
+>>> Sent: Thursday, August 28, 2025 9:52 PM
+>>> To:u-boot@lists.denx.de
+>>> Cc: Marek Vasut<marek.vasut@mailbox.org>; Simon Goldschmidt
+>>> <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong
+>>> <tien.fong.chee@altera.com>; Tom Rini<trini@konsulko.com>; Ravulapalli,
+>>> Naresh Kumar<naresh.kumar.ravulapalli@altera.com>
+>>> Subject: [PATCH v2] drivers: clk: agilex: Correct EMAC clock source selection
+>>>
+>>> Fix the incorrect bit masking and bit shift used to compute EMAC control
+>>> which in turn is used to select EMAC clock from EMAC source A or B.
+>>>
+>>> Signed-off-by: Naresh Kumar Ravulapalli
+>>> <nareshkumar.ravulapalli@altera.com>
+>>> ---
+>>>   drivers/clk/altera/clk-agilex.c | 13 ++++++-------
+>>>   1 file changed, 6 insertions(+), 7 deletions(-)
+>>>
+>>> diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agilex.c
+>>> index e1ddd02f356..2ad8cfd8856 100644
+>>> --- a/drivers/clk/altera/clk-agilex.c
+>>> +++ b/drivers/clk/altera/clk-agilex.c
+>>> @@ -1,6 +1,7 @@
+>>> -// SPDX-License-Identifier: GPL-2.0
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>>   /*
+>>>    * Copyright (C) 2019 Intel Corporation <www.intel.com>
+>>> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+>>>    */
+>>>
+>>>   #include <log.h>
+> This is a NAK here. You can't just change the license, especially
+> without calling it out in the commit message. And I'm not pleased with
+> "make a small change, add/extend copyright". I'm not going to run around
+> NAK'ing everything else you've sent but I'm going to ask you to stop
+> doing that for changes that are not significant in size or scope.
 
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
+Patch is about an important bug fix but I agree with your thoughts on 
+license extension. I will revert the changes.
 
----
-Changelog:
-- v3 changes:
-  Update prepare_loaded_image() to require a non-null blk_dev parameter,
-  eliminating the conditional branching logic and replacing it with
-  direct assignment. In try_load_from_uri_path(), variable declarations
-  were moved to follow U-Boot Coding convention, redundant cleanup calls
-  were consolidated into a single location, and control flow was
-  improved by replacing empty conditional blocks with logical else
-  clauses for debug logging.
-- v2 link: https://lore.kernel.org/u-boot/20250808213627.649669-1-javier.tia@linaro.org/
-- v1 link: https://lore.kernel.org/u-boot/20250805162158.117876-1-javier.tia@linaro.org/
-
----
- disk/part.c                  |  2 +-
- include/part.h               | 18 +++++++++
- lib/efi_loader/efi_bootmgr.c | 78 +++++++++++++++++++++++++++---------
- 3 files changed, 79 insertions(+), 19 deletions(-)
-
-diff --git a/disk/part.c b/disk/part.c
-index 66e2b3a7219..f0c6866e210 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -63,7 +63,7 @@ static struct part_driver *part_driver_get_type(int part_type)
-  * @dev_desc: Device descriptor
-  * Return: Driver found, or NULL if none
-  */
--static struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
-+struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
- {
- 	struct part_driver *drv =
- 		ll_entry_start(struct part_driver, part_driver);
-diff --git a/include/part.h b/include/part.h
-index b772fb34c8a..3fc3186f4c4 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -727,6 +727,24 @@ int part_get_type_by_name(const char *name);
-  */
- int part_get_bootable(struct blk_desc *desc);
- 
-+/**
-+ * part_driver_lookup_type() - Look up the partition driver for a blk device
-+ *
-+ * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each partition driver
-+ * against the blk device to see if there is a valid partition table acceptable
-+ * to that driver.
-+ *
-+ * If @desc->part_type is already set, it just returns the driver for that
-+ * type, without testing if the driver can find a valid partition on the
-+ * descriptor.
-+ *
-+ * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
-+ *
-+ * @desc: Device descriptor
-+ * Return: Driver found, or NULL if none
-+ */
-+struct part_driver *part_driver_lookup_type(struct blk_desc *desc);
-+
- #else
- static inline int part_driver_get_count(void)
- { return 0; }
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 662993fb809..60e8804b1da 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -17,6 +17,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <net.h>
-+#include <part.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <asm/unaligned.h>
-@@ -346,19 +347,26 @@ static efi_status_t fill_default_file_path(struct udevice *blk,
-  * @size:	image size
-  * @dp:		pointer to default file device path
-  * @blk:	pointer to created blk udevice
-+ * @blk_dev:	existing block device to use (must be non-NULL)
-  * Return:	status code
-+ *
-+ * Caller must pass a valid non-NULL blk_dev; cleanup of temporary devices
-+ * is caller's responsibility.
-  */
- static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
- 					 struct efi_device_path **dp,
--					 struct udevice **blk)
-+					 struct udevice **blk,
-+					 struct udevice *blk_dev)
- {
- 	u64 pages;
- 	efi_status_t ret;
- 	struct udevice *ramdisk_blk;
- 
--	ramdisk_blk = mount_image(label, addr, size);
--	if (!ramdisk_blk)
--		return EFI_LOAD_ERROR;
-+	if (!blk_dev)
-+		return EFI_INVALID_PARAMETER;
-+
-+	/* Use the provided block device */
-+	ramdisk_blk = blk_dev;
- 
- 	ret = fill_default_file_path(ramdisk_blk, dp);
- 	if (ret != EFI_SUCCESS) {
-@@ -387,9 +395,7 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
- 	return EFI_SUCCESS;
- 
- err:
--	if (blkmap_destroy(ramdisk_blk->parent))
--		log_err("Destroying blkmap failed\n");
--
-+	/* Cleanup is now the caller's responsibility */
- 	return ret;
- }
- 
-@@ -407,7 +413,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
- 	if (!ctx)
- 		return ret;
- 
--	/* cleanup for iso or img image */
-+	/* cleanup for disk image */
- 	if (ctx->ramdisk_blk_dev) {
- 		ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
- 					 EFI_CONVENTIONAL_MEMORY);
-@@ -452,6 +458,20 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
- 	EFI_EXIT(ret);
- }
- 
-+/**
-+ * cleanup_temp_blkdev() - Clean up temporary block device
-+ *
-+ * @temp_bdev: temporary block device to clean up
-+ */
-+static void cleanup_temp_blkdev(struct udevice *temp_bdev)
-+{
-+	if (!temp_bdev)
-+		return;
-+
-+	if (blkmap_destroy(temp_bdev->parent))
-+		log_err("Destroying temporary blkmap failed\n");
-+}
-+
- /**
-  * try_load_from_uri_path() - Handle the URI device path
-  *
-@@ -466,7 +486,6 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- {
- 	char *s;
- 	int err;
--	int uri_len;
- 	efi_status_t ret;
- 	void *source_buffer;
- 	efi_uintn_t source_size;
-@@ -476,6 +495,8 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 	efi_handle_t mem_handle = NULL;
- 	struct efi_device_path *loaded_dp;
- 	static ulong image_size, image_addr;
-+	struct udevice *temp_bdev;
-+	struct part_driver *part_drv = NULL;
- 
- 	ctx = calloc(1, sizeof(struct uridp_context));
- 	if (!ctx)
-@@ -516,17 +537,34 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 	image_size = ALIGN(image_size, SZ_2M);
- 
- 	/*
--	 * If the file extension is ".iso" or ".img", mount it and try to load
--	 * the default file.
--	 * If the file is PE-COFF image, load the downloaded file.
-+	 * Check if the downloaded file is a disk image or PE-COFF image.
-+	 * Use partition driver lookup for disk image detection.
- 	 */
--	uri_len = strlen(uridp->uri);
--	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
--	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
-+
-+	/* Create temporary block device from the downloaded image for testing */
-+	temp_bdev = mount_image(lo_label, image_addr, image_size);
-+	if (temp_bdev) {
-+		struct blk_desc *desc = dev_get_uclass_plat(temp_bdev);
-+		if (!desc) {
-+			cleanup_temp_blkdev(temp_bdev);
-+			temp_bdev = NULL; // prevent double cleanup later
-+		} else {
-+			/* Use part_driver_lookup_type for comprehensive partition detection */
-+			part_drv = part_driver_lookup_type(desc);
-+		}
-+	} else {
-+		log_debug("mount_image() failed, will attempt PE-COFF detection\n");
-+	}
-+
-+	if (part_drv) {
-+		/* Reuse the temporary device instead of destroying and recreating */
- 		ret = prepare_loaded_image(lo_label, image_addr, image_size,
--					   &loaded_dp, &blk);
--		if (ret != EFI_SUCCESS)
-+					   &loaded_dp, &blk, temp_bdev);
-+		if (ret != EFI_SUCCESS) {
-+			cleanup_temp_blkdev(temp_bdev);
-+			temp_bdev = NULL;
- 			goto err;
-+		}
- 
- 		source_buffer = NULL;
- 		source_size = 0;
-@@ -545,11 +583,15 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 		source_buffer = (void *)image_addr;
- 		source_size = image_size;
- 	} else {
--		log_err("Error: file type is not supported\n");
-+		log_err("Error: disk image is not supported\n");
- 		ret = EFI_UNSUPPORTED;
- 		goto err;
- 	}
- 
-+	/* Clean up temporary device if it was created but not used for disk image */
-+	if (!part_drv)
-+		cleanup_temp_blkdev(temp_bdev);
-+
- 	ctx->image_size = image_size;
- 	ctx->image_addr = image_addr;
- 	ctx->loaded_dp = loaded_dp;
--- 
-2.51.0
+Kind Regards
+Naresh
 
