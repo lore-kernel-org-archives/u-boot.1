@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B6ACA0EED
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 04:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5918DC8303F
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 04:53:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49CAC83443;
-	Fri, 29 Aug 2025 06:52:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D702383443;
+	Fri, 29 Aug 2025 06:53:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="iOslDlaA";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="dmUSGJiV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 152588341A; Fri, 29 Aug 2025 06:52:52 +0200 (CEST)
+ id 42800834E1; Fri, 29 Aug 2025 06:53:25 +0200 (CEST)
 Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::60b])
+ (mail-bn7nam10on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::626])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C06438341A
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 06:52:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32D628341A
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 06:53:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jrqXwnSGGkHUIktRVVJAl3efKTBUtvdRY0Yf1wTt2XYL0VkYWU41Ho3mkpVkB7ZF9gbE/lj6+D56+rXgtkQGi4HaTFOVH6vvfg77xbT5OqoYDKbr/z/u8QCX2VmMbpAFmqKvv/1VrVFtkuKs7wJWQ9Atak2vvzH7/YKXl6w5uglbgB/0gt1vR5gLyNmBwfhYeZGceTs+bGEg8FiIs1m417o9WAOiqstbUwCOnPtd9ilbSIeEs72V7+raIEYCjbxRl8Ah7tvDCBvGx5iWveWWqvnhY8eLiUSrvacQU81OIQoPhM5v7NsuB5FCqU/AbB5PHhzs588D+YPKk14SYL4w/g==
+ b=JURT1Zy3XrpShPsqnoxzgw45S0DAgXVC3jDGZ58KvJbFdtydjMHlC88XbqjT4/gGZIQf0nDrn3XuSz/JKT9CqQ5HUMlEiMFwwznqDTzfqQwoAS4Pz1nlHVV4BldfuB6iJb+F1RQjcgqEF6Qoq2yYuyj5FsHNxUyOEe4ir91CDQyXMoyYj+AaffWQS8kabfIepbPzxOVajXEkisO/6l9yuxRsWa/tIE/1o6qLO81VWVaWlWBW8+PffTcAYV/gMuUc4jvq1d8i8HRE9JmmSZzjrT0kBBiuTn1Xcy79oAf3jQQhdtQzpzBH8R+LMVrGiJluDEB3c99jhZOwzpbqBvZdKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Vila+U9+TE1CeCryir1UDSFXp7DZbVkDdHQTTJ931VE=;
- b=RBJ3m+1nlEFjFzyfEEEXuVuy6v2qRouM1d3cFIxZKVsOiWWFPTJ7ltzLAij3liAbBKbOiLDgThNn/Z6XXBvMFH0hsg7qbgOZMCMe6A7vdfg8mjoPPjpCXEIFadSCM9BFvHPz2DbiqjLbbi0d+qMgIRdvm8sons8YfKzHV39tgD7/EX+l+8fLTo3VBQXC2drUde+zbci4qT8zOMCVYuCEnCHAq0qaBwDSaSXawjT5A7LGAXczM7VBn9feTLUeAxfHI70o2Jp1vsZ0nMtzhAsAVlcQlgGkECLAYWPXCjLlun8xJh97hbpJEC2T6gppEJ2OhLQ4Am9hHxwHEGHulVRdbw==
+ bh=5KsyXMVcDzmS6tlnugWWczc5cnMWf0vZaUpN6bh0J9g=;
+ b=Efwilc75kPOFvZnhC1M5/frXvsu1AhLTDzircqtMnzVaN7HvEwKlvvTcCIy5+nBkk50T3KqvSChT29hJGR3Wkbf5ccNAsd1lDT1cdgOm1itvVQejlLiVG6wt1cTNXpiyL5jE+u34+UnS+IDOLGp5W+cShqWwxjYtzhoeK+JBSY/rw1yHyqL7CAvyYG/mvBsy5N8TPRUYyRuFoNbf5SXdtXYODWSibK81KTeZmNAB+GvjKmOUlPSNta/QezKGwlQxeZfqMuJArFbGDupuNEaoZM3n1W2MXksWn83HG3AwGZ124XNs6iLYvGj3RRftwBM7/MfbzobK0Lajo0+WpaBzEQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Vila+U9+TE1CeCryir1UDSFXp7DZbVkDdHQTTJ931VE=;
- b=iOslDlaA2MOgku5/jpWpufxdXscP7z7kbanE2vHm62Bis9ZOhWf9Rlrpip4YE4VDGIl/S55vUaQMdnqar2Qb/eyr8uXAYvU23rw+l3GNZ/vLnXnU8BQRi4opdKvY4U/KKCJRebr6yEqHv5VqGTus2Yqsp8I0Sl8jN0+dpZ8+0SM7iBoWMhk9d8rCWuE2xIhLBYqOSDpgIlBpd1e6kiX6AdR0oRj2NgOkmDFOB/MFZx3ohGbqgCOh7umk2UDMVTUQYAKDDJTYFdcjzeyK1qQr99LDANnIWOXt4hAlq+uSgqOxLP4r8wiS+AjhaqdFKi/RaUog0x3eOlWdlgyiON0cGw==
+ bh=5KsyXMVcDzmS6tlnugWWczc5cnMWf0vZaUpN6bh0J9g=;
+ b=dmUSGJiVfmLe3xWEKbBTho0Tg57B76v+5UhpzxjkYZiIBxcMfFJMpuPGBe16fyyShQxrvdvaCEt3hvz6Hc+vKm+Gmyapc7U3aCDpX6G/G7cf/M+b8bKWnVkHi72FZyVF0QvSg3EAaDvUZheCIj1HZVNA/1oFUIU5MhFvnTWUq7wemYdwGps/pKPyM8+yPL9fgtrBOBPUSgnOAMBmwn54P5h8Pzn2RimwZGoS5/0zBFU3uodLooAt0jucmSQ7Fx26ZQWlWelor5VwHoLTNPPnyW57teQ2ABtjhvkmxD1fSECBAF/W7BUwiMtmsMzf5HyEF1bg/K0giJyRGmZY1b9rhA==
 Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
  by DM6PR03MB5081.namprd03.prod.outlook.com (2603:10b6:5:1f1::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.19; Fri, 29 Aug
- 2025 04:52:47 +0000
+ 2025 04:53:21 +0000
 Received: from CY1PR03MB8121.namprd03.prod.outlook.com
  ([fe80::7b6d:7517:b2b0:bca0]) by CY1PR03MB8121.namprd03.prod.outlook.com
  ([fe80::7b6d:7517:b2b0:bca0%7]) with mapi id 15.20.9094.006; Fri, 29 Aug 2025
- 04:52:47 +0000
+ 04:53:21 +0000
 From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 To: "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Marek Vasut <marek.vasut@mailbox.org>, Simon Goldschmidt
+CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
  <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH v2 2/4] configs: Enable USB DWC3 host drivers for Agilex5
-Thread-Topic: [PATCH v2 2/4] configs: Enable USB DWC3 host drivers for Agilex5
-Thread-Index: AQHcF+RnD2z9YesDkEKepofjqSIJxbR5Eaog
-Date: Fri, 29 Aug 2025 04:52:47 +0000
-Message-ID: <CY1PR03MB812180A3F49EE49FE330C735A73AA@CY1PR03MB8121.namprd03.prod.outlook.com>
-References: <20250828062418.17945-1-nareshkumar.ravulapalli@altera.com>
- <20250828062418.17945-3-nareshkumar.ravulapalli@altera.com>
-In-Reply-To: <20250828062418.17945-3-nareshkumar.ravulapalli@altera.com>
+Subject: RE: [PATCH 3/4] configs: Increase USB Hub debounce timeout in Agilex5
+Thread-Topic: [PATCH 3/4] configs: Increase USB Hub debounce timeout in Agilex5
+Thread-Index: AQHcCEvTOtQcdbw2VU+UhXPmgY8WFLR5MQwA
+Date: Fri, 29 Aug 2025 04:53:20 +0000
+Message-ID: <CY1PR03MB81217107F3792B7D947FC26BA73AA@CY1PR03MB8121.namprd03.prod.outlook.com>
+References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
+ <20250808100412.9320-4-nareshkumar.ravulapalli@altera.com>
+In-Reply-To: <20250808100412.9320-4-nareshkumar.ravulapalli@altera.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -72,81 +72,81 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: CY1PR03MB8121:EE_|DM6PR03MB5081:EE_
-x-ms-office365-filtering-correlation-id: 3303b87f-e786-4cce-5252-08dde6b7e677
+x-ms-office365-filtering-correlation-id: 49f6e825-180a-4b78-39b9-08dde6b7fa55
 x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
  ARA:13230040|376014|1800799024|366016|7053199007|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?74QxF24ssLkprjHSzoxZYvoQtAA6gbiZ8ETCHvc7nFv+sdjCiPtaJk6DV0yi?=
- =?us-ascii?Q?2YUy+PL9KF3JDNw9PJTxiBjmxhVqQ4BY3DM3+zE+NogR5NGbr8ti6KXatB2r?=
- =?us-ascii?Q?dcjIh9bVghQVOeGh9+fIZ0Dt1JPpXVexnxjYsZottXpAVUomvb35hFhqKQGk?=
- =?us-ascii?Q?OQCwUKkhjTWa3DJa4YDfFZ9VC6DHfxeFfXFasODnj5n/lq1Xdl0reiAaoC+/?=
- =?us-ascii?Q?Z9tCdC39dUiebDTION1gypHpM8JS41Oi/H5++AgE0bEVD3T8Q0qGTfGYtmHJ?=
- =?us-ascii?Q?aMrS+25cv33H1cMgl30+mn3PQWEIMe+HTle860N7FiEq/sdJw8jub2P32tx3?=
- =?us-ascii?Q?fsdvfhS/XyAP3PaZypRfdfDiRf0Rt9CRti0nyRuQxkv8sEKlmcvSkZDcnfq0?=
- =?us-ascii?Q?CZJ6lK6EFCAO8XouScEUBqIeOvrvdbqV57phi3u4Llxoytdb6MyIe/tzelU5?=
- =?us-ascii?Q?EeCwFSGkrwxi2GK6v/pzB+oWQJwFdHM2ptHyZBhKy6bFrsOmRjbWbDlHHUyq?=
- =?us-ascii?Q?9dYpg5HsozIKInCvoK2UM7R47oVNpGZY5KwoKJIJLXKZpgPYfds3WOAdSKIq?=
- =?us-ascii?Q?RVfYMqn314mupJpiPDCmAv0cVqh7RMiCipOcZSqy8xdoC4aNEnbSAxyM6w0/?=
- =?us-ascii?Q?yqK+d6Nd6+r5lIBDchdj1nAq4RDbAEXUa9DaWHxIqJSV4NdkESkbyzxNaHqG?=
- =?us-ascii?Q?xGObGnX5O/1WDql2zU2vtJKBzFP8bJPbfy0v5AMoQhvizDnYirwRQ8kOyVDG?=
- =?us-ascii?Q?NbUmEkdEnqAJwd9NNGtCE1J6DiAu+hmdpSp7iySEU3XBLgkJQrfPlKgw7abH?=
- =?us-ascii?Q?02axG2v3gxvbViafIIlmRXK8Xn+rg1O4iYIO23jsFPaERX/MCtSYlo4Sigad?=
- =?us-ascii?Q?IZGKIdgmIGRhyCQFN5YyDH3b1CP7eLxR1/LZ196cj5n4Ti1C8uM2zTlRsXOD?=
- =?us-ascii?Q?dwZmA3uVgWFk5sCqjgNItOnUR2q5D0A4/BVWorcCyFc8nrbAaOkHLlgQpCEJ?=
- =?us-ascii?Q?etRuMP+oYKJ4KrXXcMDq9ql/LbNxd0VPU/81A5qN7FmbFpXJHvumHmzIW9Tn?=
- =?us-ascii?Q?8us/DxnF3Yd67o+dQPuawtbIRVFDZWUYR9qZwCHiSp90dLTyErcrS9SZPiaQ?=
- =?us-ascii?Q?6O7aSqWqIhirW9tN7Xcw8KhtdHlIqmRbbqbHda79mNIQz/uAivm2y3iFzzlW?=
- =?us-ascii?Q?aZeJdwK5WqEfrmBtiNCdn6LDqulPA4c5rTKNNQABFb1joT3Xs0i+oIXx6BOq?=
- =?us-ascii?Q?GiVF5HWrfFeo1SlQH+SffxwcnhKX7KoALTP2MpPoQ9zhgOUzKv3JVwTYj6qP?=
- =?us-ascii?Q?lB8N7kzGxOQ2TtxtTwjXlUxrdI5BO2zRJjVcovuLUCAtILwMy+7gmBzYq74o?=
- =?us-ascii?Q?CNHpA/JR/TwywHA8hSbT+IjRXux59y3BHvhaz4RU0MUy6YTaUwzS27Yy0VjT?=
- =?us-ascii?Q?2vPSDZuaYSkZDXOanGBpV6aEux4uLy6PewwoJIV0k1h/4YukdpZPpg=3D=3D?=
+x-microsoft-antispam-message-info: =?us-ascii?Q?0PVzkFsjzxpj2LHMKlxfaeIomZfyLpc10yid+s5AYF2MdNS+MLAyvDGl9GUS?=
+ =?us-ascii?Q?teH/b5DbwVqrgIuwKxgd5Io4/H7B6s6KNazzAPcJh3YI+oGpaGlsaeWUgwNj?=
+ =?us-ascii?Q?zyS+7Cuaw1JeKrJSeY0SOe2XHGfrMttYi70FPWN6Gp6OZ8lyTZMhmlNDlc9T?=
+ =?us-ascii?Q?qCGS6RCDzyGEFJOSu946Dzcf5G9CHaW0lJJBvCoEZcpQswmJ1KN5F5t/Z4r7?=
+ =?us-ascii?Q?DH6XF4DDApIqVmKriev3RRgompnqILBRGi8uUyoYa+2oT5Jd0MV7zECYvA0Y?=
+ =?us-ascii?Q?8Ld7mmkerqwPgmEjjHhWJi0dBdOSLBqWfB1JeYn7RrwOc+ChxwKDCdL7CqC/?=
+ =?us-ascii?Q?d+SmZ/P054gu5YwZMk+drClQSNM4FS1vwJiE6WgOBD5X11OWGchU0ZX+DQo0?=
+ =?us-ascii?Q?e87JVsztXaMrkAKGam+6BXSfx6x0yPWbK7TmeMavgM2IeaJ5n132LoF+E5FT?=
+ =?us-ascii?Q?Eeo6z932F8liL5yCoDdBc3vHBzDYbyLhQe2WwbfRqmmYIFQdGeOnAF2UClqy?=
+ =?us-ascii?Q?666LOm8ZZq3OXp7EJQGNnPPBebihdfEepcMhrrXWSNEngeGYZ1h0bNZZgqXl?=
+ =?us-ascii?Q?3OgAa6w5GgvVoM9+TzWK9VvzloFeSRYpPc+Jb3nKpLXHbpkKtSNgfk005otX?=
+ =?us-ascii?Q?4Iw+Clk48VUsAcuBTV118aZ96CMFIn7Is0BSJ6RzK5fqxcmoOgIZEHxfwCT2?=
+ =?us-ascii?Q?hh90H5YfahyUygKP/4dyi+9tfEGZQBVBvzzwRydMiuMdK5uHMjUHIZ5288R5?=
+ =?us-ascii?Q?3XVylJxLOnbl1mkMsrgzgWA3QOGGvtyqdObVyutSP6ZB7xAVOojF6IiobYnZ?=
+ =?us-ascii?Q?KEuiZ0vfrXcSKk2y9n+OZeSols+aqwm/2K/sgC0o9LQ9XEjrezas9JPLQFxc?=
+ =?us-ascii?Q?q+CBOTWWl4V87WCL1hvUIHAVpax/qetTHnlyEGkaRaXG+3s+rW8+cGLL2vaU?=
+ =?us-ascii?Q?s+9qqb3I67v6Mu0us8tweY/WUMGWyGdhQSNBS9k8AkU9OxPguuapLqLcgAQk?=
+ =?us-ascii?Q?PAI+M6cWFw2+vWt6waxib/yXz1dEuVAPYl4GHAK2aB6+SKP1EjVHSlrhK/jp?=
+ =?us-ascii?Q?LRE5pmVFWhFLYjLIjQqfkhGdlRCXlZJQ7mKFw8JgPZhA8GK3dSQNNG3cE3Uv?=
+ =?us-ascii?Q?AiDvHSwCDVPR5ASvN6hRtWmnPC+BVZLfCoft59GmtMyOyHcFrKdK2HR52n5n?=
+ =?us-ascii?Q?emUd8ahtyWQf/qWaQff5JcSaNGpeDz1e1zB1sQj6gJgcNAHJM1wMqp67m7Jd?=
+ =?us-ascii?Q?wvTKwX8kstgCTfdAr5a6h6TTUQYLQOxppJql0ULI4JcswOIAeW9GTMw8oghm?=
+ =?us-ascii?Q?Sy4qH/3bdE6LWoCtPhogGezjmKZQObzNCfpKxjbxX9xVb6iFhrJ1xI4jvLqp?=
+ =?us-ascii?Q?JuhocdXSH8ItUOmYjeoSEWZE4EerYWCvRubogb1w+8He2rRwWxVROKPUlJsY?=
+ =?us-ascii?Q?23qbMX9liE0/6PaM/BbuY8qRSrNPYo8NpMqtPZoFz653VgCMFDS0OQ=3D=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(38070700018); DIR:OUT;
  SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?8zzH1Q9CgWdEU4qrXvrFirLuNWhF9JlX3eblrUkAZNRCydStrtyEog19Ltd+?=
- =?us-ascii?Q?8qNOFWr3UEzknPAQznXnkr5QaquIUa4k0KNBCRnF0h7Y4DX3n8yex6pWdMYS?=
- =?us-ascii?Q?3qmO1v+tPU2Gq4YhWZTzqWMvljPLolwHkeWVYb/Z7djCpF1eJbCvnLKs7dER?=
- =?us-ascii?Q?ff6UGdj/1IIA8b9IaP9j1RXvRHZRlajSLPJXbTMgVK6srLO1G3qq3KubGeqH?=
- =?us-ascii?Q?PboJCSxyLjdu8GUTSTkvpTBBljMFg3DsNoLTXFTgSlx7+TTJp4G7ERLuKjWM?=
- =?us-ascii?Q?Ims9gVhIs048WJkA2Wc+P7fH44VpJZDNaY6lmrDX7G1z7DbETg6caGNNje6g?=
- =?us-ascii?Q?bScvaSZKd+GY4J3LsnmQTGwcQc34z5iA9gQjmX9jNHTiP/tf33KkPC3a4mYg?=
- =?us-ascii?Q?MWUo1Klu+vGmh8Dth55WxBAgcbu6wdnlJyjiDFAm4+qEyby88N5Hpo3OC3zr?=
- =?us-ascii?Q?HVf+75xM1Vy0zktT/cb+R3HmWJWkFGNAGsaWcswuEXJ2PTVC3j1HTi0itwi/?=
- =?us-ascii?Q?wCucsJ4ZJV5e61sQbdgw9Ivma2fiUyIU9fmtiRwzdh5BEG/STEk75m+Pd8n4?=
- =?us-ascii?Q?mVgCwYjhDU4obsLEu0tnYSzab08cCqLz1nUfEJe7DyYyDdYVEfvlDaJK/roa?=
- =?us-ascii?Q?zyRmM1JffTUF7yV5dAodZdgrfc/eZqD+3zoSA81/ruJja5wJCldXeLDtdeqB?=
- =?us-ascii?Q?QDomXOJpx3PFh5FMR2COPiZSsMf8NRjhxkjqnrLw8c1cfxxiSlYY6ALozqry?=
- =?us-ascii?Q?FizrUAy9JT/Uj+7PbycyG183P4lTaN/R2ozeGtViSc2BRJVG9//EVMakU/AN?=
- =?us-ascii?Q?pAc401YZ6dBBAc3q9ZqVKzXInBcqW8h5WdZ0lDb104gkPRloyKuC3VizBXAb?=
- =?us-ascii?Q?ZbOrLTtM9ooOCzmFJP7pKl0SKkUtWs0CoAtbLIGF6+RP90CvwbECPcWW/Kem?=
- =?us-ascii?Q?lxlh/ajtymfMjYO5adERdoXLhJ0L7pi9bg6tBO135stnhqETAaRURxQeoboA?=
- =?us-ascii?Q?e6EVaWDB65VMmgtWCZwyAi3UVVokwpt2Nsg0p6TF7etO2xapyA0ueu83QH98?=
- =?us-ascii?Q?HFxkOVI04XeJdrWD0eGODPf7g5f/CFIDclN4hs6WWR1VmGO1BE9DNTHK9BHN?=
- =?us-ascii?Q?fR2ivxp7seOwHi4DwxEAEquBLk6P2fkG17/Rp3z2SNcg/8ivYudH45ky6fsb?=
- =?us-ascii?Q?e+a3fav9cnUo+7SrCnxZjOYIM1GUDW/at9WjNFgB2IU/yDvmjeCmLvXGijDT?=
- =?us-ascii?Q?kollj9QEpmBXu6JFBWD78alXmnHcNroLSPR+SL/bDAwOsCQ9G/GuCLAdfzA0?=
- =?us-ascii?Q?C3HBXlD6WCZ48N8e3UJT8gqDA0xXQQbYXVtOGr6ARgfHyMWLxMnIN8FZf+Fe?=
- =?us-ascii?Q?fuOOhq/+p1Z84yWbxBbIRRyQwjCUUiaACOd9GXzil5Gbg/PpR8lXjkeJRRDo?=
- =?us-ascii?Q?eO0P+rNqSxmyPL+JcDvdZigLNxNU24hU1tH+e2DbqfyS9IAHziWrB8LcxsOV?=
- =?us-ascii?Q?R35ExHHHVY9BzmScgQqa1FS3hepWCFnvoiLFdHnb79nsKN/0Ss37bKoa4WKJ?=
- =?us-ascii?Q?RhYTxXCdi5AnqIdFBa37jkIqWuAriGhRfoYmjPKm?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?HLWbRFzTNgA8EtxCJ2I9CJhQfH3H2M5DsRl9Jpjvl1Lv4ZOnkJ3CrPRvypVO?=
+ =?us-ascii?Q?OLr6yTaeQSENTbmWN2ZIbdST+tiBcOp2Rcc8thRW1hHWw9SH1woQug53485K?=
+ =?us-ascii?Q?+gpxqlSSJj6q65RR2vK0k+43qHLRMFS7yBPyQADIgDhWTk50J0OpSx6jzI12?=
+ =?us-ascii?Q?tLpZ5ORje+z04p+meeLFjGoXCpknSlUQQ/F5Qv+uN+PgS9AOxKCBIIPs63Kq?=
+ =?us-ascii?Q?CqJZc6qkJyL9AHJaMYHpLwvETjdHHVa091G30QdGui9WpkOhDylJljv/mZ3p?=
+ =?us-ascii?Q?s/GnLkGMj6lLtoBQXlZxk/ZsKV4zBfc7T98KS4FPkzTQDA+EczzqH/DMPVtO?=
+ =?us-ascii?Q?Pgy1wUjk2j5T6KZ+orgXCzWYExF3fSR5lPHOddSf+zGLNDFTV+mkenRhEdYZ?=
+ =?us-ascii?Q?+IUwAQ7EO3TqHVDu+Ch9YRk1v0q+pWq1HfVF2axBbiXox2dLQzDnGR2F1EYF?=
+ =?us-ascii?Q?frz4cJ0aFdZNJy/QaJhaR3i10cs2r9e9W4Kq8sX4YV7FDMAAe/mRF56DEU5J?=
+ =?us-ascii?Q?XuiGB1JlykxpDPf6FAgI4oa8yEz7rDfaSxPdSh6ozExTKUhQKD9Qh6ue7AsV?=
+ =?us-ascii?Q?iwAc0CyfG/bE7BQMtT1wcvYUuFub8Csbq6WsYryH2hpZaDEZoaQhOLf42Qcn?=
+ =?us-ascii?Q?9B+TScxSo+hSBmpZFLI6N5alhOKUnuqATmBdyixhOvXnvJZRV1hh/1VqkhDW?=
+ =?us-ascii?Q?6AxfpWmcf5e8apMLkXMWYW6Nb7UF2xDI6Sx+t0pnrJt+UeTZnscxuEmFyVOU?=
+ =?us-ascii?Q?6jk7sUnChyxvekpEC5nyR6ISmGBx0xPhGXnZZCiKblr+eJqo2fONdnuhazbI?=
+ =?us-ascii?Q?Nl4smcQDm/7ISBL+1+/nW/5d9k6m+/il2Jku4w1ixwZ7VhDCk3MApPENxFQ9?=
+ =?us-ascii?Q?tl2BWq1M6kaZ55zQNU+70LAPEJIu+wupWYHKvjZOB3us6TwwFLSkkCZ9x6CQ?=
+ =?us-ascii?Q?6m+jFpm3UM0dUb+qBnTiADyA5pdwVp7klsOPTrYTwJTIfNf9DqWjyBUX0qwK?=
+ =?us-ascii?Q?y/wvl+1GdyXU2PPqKJwXFbJCiTRgUhc6/ab8ceIu+kk7XbPnsLjRBzmXOQ2C?=
+ =?us-ascii?Q?dZdGxaKbqWPtKssQXM9ACm7Qd0eq+pKHXYot+zZ7agC92v/tUJ42ES2VQj4G?=
+ =?us-ascii?Q?2l7bN2N8BcYFScjTvpqSQ7lvq10W8YkVT04Z8n0vTISzpTUbz3+GMRHp6MDx?=
+ =?us-ascii?Q?FAsZU0S9zhXIvfp3DnXSiG+IY/3cyWMOZjfxigXvia3/Tr4cuUR6icdm7Bz0?=
+ =?us-ascii?Q?xOH4gtxK/4wEtcN3Uri+1OambCFyn8HeGjNzTnPsDT+Nxgxd8HzOZfwTZiKI?=
+ =?us-ascii?Q?iFih1IY/GWaZpXNxSAYCpQS/hstn/K30xmYGWiIoL7a8ALhzquEET3UmcQav?=
+ =?us-ascii?Q?ff3f5zHcJi4N0/d0Odi777s7cFMH89/DeiGNYu0vIBxUgZLvdEUUu8DbmC3M?=
+ =?us-ascii?Q?NFns49jqGJQ84KX2rC2BS9uDE7/uTP5olYaOX9VrHueZHrZt7Y4rGhdOzV7e?=
+ =?us-ascii?Q?fSCAsnMLWnwhurynIsXv/T1XBws9M/JK95p3ngZxwYvoiT9p39iMjlHdUAsD?=
+ =?us-ascii?Q?fobYzin6fi7obEm7kpbZDAgC32FdatV0NNo8OKRf?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3303b87f-e786-4cce-5252-08dde6b7e677
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2025 04:52:47.5962 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49f6e825-180a-4b78-39b9-08dde6b7fa55
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2025 04:53:20.9409 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: TukCq1Hrk3RtrZkuDw1wXPKdkNhRsBzqhRiTNiaRozanIT7MARUe9Ly/b51XrTPJfUAl66rjFkFkfJqyziDE/2DP4beQ2YeU2Sd0sfrtxRs=
+X-MS-Exchange-CrossTenant-userprincipalname: CZfpwMOkR5hFk2K0t6hIYFdMbARGRSz2tAAgzY/Sbg2OG8HZHOok/wv66KDabPZEZzZh0XXOkIxIJYPtMc6qFsZlf8bbLGMJYR+zjN44814=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5081
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -168,34 +168,34 @@ X-Virus-Status: Clean
 
 > -----Original Message-----
 > From: Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
-> Sent: Thursday, August 28, 2025 2:24 PM
+> Sent: Friday, August 8, 2025 6:04 PM
 > To: u-boot@lists.denx.de
-> Cc: Marek Vasut <marek.vasut@mailbox.org>; Simon Goldschmidt
+> Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt
 > <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong
 > <tien.fong.chee@altera.com>; Tom Rini <trini@konsulko.com>; Ravulapalli,
 > Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
-> Subject: [PATCH v2 2/4] configs: Enable USB DWC3 host drivers for Agilex5
+> Subject: [PATCH 3/4] configs: Increase USB Hub debounce timeout in Agilex=
+5
 >=20
-> Required USB DWC3 host driver configurations are enabled for Agilex5.
+> Some USB devices need more time to be initialized. Hence, increasing the
+> default USB Hub debounce timeout value for devices to be discovered,
+> connected to Agilex5 boards.
 >=20
 > Signed-off-by: Naresh Kumar Ravulapalli
 > <nareshkumar.ravulapalli@altera.com>
 > ---
->  configs/socfpga_agilex5_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
+>  configs/socfpga_agilex5_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 >=20
 > diff --git a/configs/socfpga_agilex5_defconfig
 > b/configs/socfpga_agilex5_defconfig
-> index cc812c7008c..859750f02e7 100644
+> index 859750f02e7..6f7a2cb11a5 100644
 > --- a/configs/socfpga_agilex5_defconfig
 > +++ b/configs/socfpga_agilex5_defconfig
-> @@ -98,7 +98,9 @@ CONFIG_TIMER=3Dy
->  CONFIG_DESIGNWARE_APB_TIMER=3Dy
->  CONFIG_USB=3Dy
->  CONFIG_USB_XHCI_HCD=3Dy
-> +CONFIG_USB_XHCI_DWC3=3Dy
->  CONFIG_USB_DWC2=3Dy
-> +CONFIG_USB_DWC3=3Dy
+> @@ -101,6 +101,7 @@ CONFIG_USB_XHCI_HCD=3Dy
+> CONFIG_USB_XHCI_DWC3=3Dy  CONFIG_USB_DWC2=3Dy
+> CONFIG_USB_DWC3=3Dy
+> +CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=3D3000
 >  CONFIG_DESIGNWARE_WATCHDOG=3Dy
 >  CONFIG_WDT=3Dy
 >  # CONFIG_SPL_USE_TINY_PRINTF is not set
@@ -206,3 +206,4 @@ Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
 Best regards,
 Tien Fong
+
