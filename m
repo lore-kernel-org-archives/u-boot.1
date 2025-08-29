@@ -4,70 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE20CA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 15:22:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B12CA0FF0
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 15:48:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93DC483695;
-	Fri, 29 Aug 2025 17:22:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C4158365E;
+	Fri, 29 Aug 2025 17:48:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zQNDPbyk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bc9jd7x+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25C0483695; Fri, 29 Aug 2025 17:22:49 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9782D83689
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 17:22:46 +0200 (CEST)
+ id E30668367F; Fri, 29 Aug 2025 17:48:55 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DA42D83653
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 17:48:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57TFMikR1780810;
- Fri, 29 Aug 2025 10:22:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1756480964;
- bh=gRAnr/h/7zCL8I5xEEcoDtjsNAMBZ++53IqtB23O/hg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=zQNDPbykc5pvn+4vgXtpOz9gpMH+Azdx8RCLcqyhXdIYfNzVer+cyQcU0ZFsXXw/e
- LYbrT2l5FqPKZ4DF3cm2mjltPGTjdZ11jRiMDKCnVTrP776b7EeP/ka6kFrh9zUGEz
- p9d1+u0DfzNqcz6+IMv4YCijcBawJijWBqXTmpWc=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57TFMiuW3737161
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 29 Aug 2025 10:22:44 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 29
- Aug 2025 10:22:44 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 29 Aug 2025 10:22:44 -0500
-Received: from [10.249.139.51] ([10.249.139.51])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57TFMet32546339;
- Fri, 29 Aug 2025 10:22:41 -0500
-Message-ID: <105705f8-48ca-45ba-af34-b3955df29279@ti.com>
-Date: Fri, 29 Aug 2025 20:52:40 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-61cc281171cso3834379a12.0
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 08:48:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1756482533; x=1757087333; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yZBgbMjHGeN5spZnj7yeyi+GHc84F6Mr13Yivzthl+M=;
+ b=bc9jd7x+15bMaBc66Mfxd3uOBQFgFWIqqzrEbJUob5s4Dz73IAUafEQli+IdFbdDBr
+ DIi8vPnQtPZVeKshvde4Xzk291qRJJQ3GKi8LCW4rlCfcInKiUfd2+vKFN1aCUXLfU5B
+ OXujLueaCkLRPzUZ9tBFSvF+kIKo1XI6iXbwmK8BzZbvuYkMw5oTe0S/alLwu0vktiSa
+ bcujO9yxgnonzaujtrFepO9E5Z2ypqhBuPkMOIxd7LUHMb0Qs0CBa8iczisG7gJ4KDwg
+ uHUzUlzkWfSrsHWfaHBoaQn4iNlxCvbQfRz0Wb5SqI0ZstkEJvauQ/UqzYEdDGRRo6VD
+ 2WCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756482533; x=1757087333;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yZBgbMjHGeN5spZnj7yeyi+GHc84F6Mr13Yivzthl+M=;
+ b=kV1KaBBIHzIFdryJlOPJsjlJojKiOLk3Cf4ZB0D5NrrAVIQ7f+D574csW4ngNrsw05
+ LR/qNsUaQve56PsQdBtJpNv04ZU7oTVAacjGAj/fTMQp7tpTsavmRdu7CnE9YpkDoK+F
+ //fdk4g+E7iatC4sFUx+/8VleVsUrnnt32pOrtZFUgmTve3sNotUjfCqsYbftb0yd/2C
+ IHo6WPLS24Ti7rwByPK6JcKHm9zxGN89fk1lT9E8oZnNlfTUZGmIQ7JV1yFGF47Znwda
+ wzybUUf3Ap2WmQ11tn1iZ5zWCMKBsrw/nvRWtA6hpovhfBnlbARYknrrq32fCeOkP/pt
+ qdiA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVHEPh5QioppLN2M20jRV9TrsVBlflnZ398N17Hw27itlK6WBYEOxTJsgB1HqdZX95fHuWN0oE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzuaFcEgZdN0/OuR2LSmk4iJi8PKDkzlGLCtJGpc9mK+b/xoun7
+ PJlszJXBLQrp4Cltu461rl1gdkEFk8hvLtE6e/8FsM1HlGsmmbe9R0H4Wn6SaOpt/SuYHQuszFf
+ iu1p9qZdWiYzBj9ta932hgMiuFtVZypQ=
+X-Gm-Gg: ASbGncstoLB4UJrlsHU63BnMtXN+zZKf85RTrfaDByJyhmdd7r5Cs4iixIk3YEk6w9J
+ FY0ynZjPnblColYbAprcUpQR229loVs/1ct8WtCqzuunGBByXny7Glmy4MQAcePlTFlerRJiXGq
+ 1Y6bogY9HngkYRzO/t2vWA6AsYFCeg7OJluG1Z30lWx5wYOXe4Zjd8/7iLqJkN1w1mNCmmwi55X
+ jRDe5o8b273EKGs
+X-Google-Smtp-Source: AGHT+IHv95NjxUBDXRryivr08gyT6aK+Hgi33R5ywSNdZd/kvNVTTNUawyTClmAA03E98tGrnWLWpRDb8Fhi3nBfvqk=
+X-Received: by 2002:a05:6402:13c1:b0:608:f493:871c with SMTP id
+ 4fb4d7f45d1cf-61c1b40bdf3mr25321314a12.14.1756482532998; Fri, 29 Aug 2025
+ 08:48:52 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] Revert "remoteproc: Tighten some remoteproc driver
- dependencies"
-To: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>
-CC: <nm@ti.com>, <vigneshr@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
- <jm@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-References: <20250829053451.3615976-1-b-padhi@ti.com>
- <20250829053451.3615976-2-b-padhi@ti.com>
- <2937fb1b-1f40-4edc-af4a-e02946b5bf8f@ti.com>
- <20250829145652.GV124814@bill-the-cat>
-Content-Language: en-US
-From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <20250829145652.GV124814@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250806222710.23773-1-semen.protsenko@linaro.org>
+ <CANAwSgSC4Af-kO9sFjd9Xugh4SxBmC_cvLhAK=xX7kQvk4avTw@mail.gmail.com>
+ <CAPLW+4nSNLNW8TWi5OSb-UZzYGbC1GBX3HbV-9C=FgqW6qO0Zg@mail.gmail.com>
+In-Reply-To: <CAPLW+4nSNLNW8TWi5OSb-UZzYGbC1GBX3HbV-9C=FgqW6qO0Zg@mail.gmail.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Fri, 29 Aug 2025 21:18:36 +0530
+X-Gm-Features: Ac12FXxMAlR6UTmKbH_vAS5wscTu-MaFHihCPN6bVsXM9Mf53GTx3UP3hRmFF2g
+Message-ID: <CANAwSgTSuE8yg9YCxMLfCgdLVR0dxnvO=SaSTpCpRu0jG0GoHw@mail.gmail.com>
+Subject: Re: [PATCH 00/10] samsung: e850-96: Enable USB host and Ethernet
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Minkyu Kang <mk7.kang@samsung.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,45 +100,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Andrew,
-
-On 8/29/2025 8:26 PM, Tom Rini wrote:
-> On Fri, Aug 29, 2025 at 09:32:00AM -0500, Andrew Davis wrote:
->> On 8/29/25 12:34 AM, Beleswar Padhi wrote:
->>> This reverts commit 548ae9d1a537464254afac63f802179a24c645d6.
->>>
->>> The IPU remote processor is only present in TI OMAP SoCs. Remove the
->>> ARCH_K3 dependency from Kconfig. This driver builds just fine without
->>> ARCH_K3 config.
->>>
->>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->>> ---
->>>    drivers/remoteproc/Kconfig | 1 -
->>>    1 file changed, 1 deletion(-)
->>>
->>> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
->>> index e9f19a69433..a3ecea05e20 100644
->>> --- a/drivers/remoteproc/Kconfig
->>> +++ b/drivers/remoteproc/Kconfig
->>> @@ -125,7 +125,6 @@ config REMOTEPROC_TI_PRU
->>>    config REMOTEPROC_TI_IPU
->>>    	bool "Support for TI's K3 based IPU remoteproc driver"
->>>    	select REMOTEPROC
->>> -	depends on ARCH_K3
->> The original commit seems to indicate there are some platforms
->> were this does not build, maybe depend on ARCH_OMAP2PLUS
-> Yes, it fails to build on sandbox. If REMOTEPROC_TI_IPU only supports
-> OMAP SoCs and not K3 SoCs then the prompt text, and perhaps help text
-> (not in this patch context so I can't see) need to be fixed.
+Hi Sam,
 
 
-Thanks, got it. This should depend on ARCH_OMAP2PLUS then. Will address
-in revision.
-
-Thanks,
-Beleswar
-
-> The driver
-> isn't enabled anywhere today, so I don't know that it even compiles,
-> actually. So it should probably get enabled somewhere, too.
+On Wed, 27 Aug 2025 at 01:15, Sam Protsenko <semen.protsenko@linaro.org> wr=
+ote:
 >
+> On Sun, Aug 24, 2025 at 8:22=E2=80=AFAM Anand Moon <linux.amoon@gmail.com=
+> wrote:
+> >
+> > Hi Sam
+> >
+>
+> Hi Anand,
+>
+> > On Thu, 7 Aug 2025 at 03:57, Sam Protsenko <semen.protsenko@linaro.org>=
+ wrote:
+> > >
+> > > The E850-96 board has a LAN9514 chip which acts as a USB hub and
+> > > Ethernet controller. It's connected to the SoC via USB lines. In orde=
+r
+> > > to make this chip functional the USB controller in Exynos850 SoC has =
+to
+> > > be configured in the host role, and the corresponding power regulator
+> > > has to be enabled as well.
+> > >
+> > > This patch series enables USB host and network support on the E850-96=
+ by
+> > > making use of the LAN9514 chip. While at it, enable all power regulat=
+ors
+> > > (LDO) in the PMIC chip which can be useful in the bootloader and kern=
+el,
+> > > including the regulator used for LAN9514.
+> > >
+> > > Sam Protsenko (10):
+> > >   usb: host: dwc3-of-simple: Add exynos850 compatible
+> > >   board: samsung: e850-96: Set ethaddr
+> > >   board: samsung: e850-96: Add ACPM code
+> > >   board: samsung: e850-96: Add PMIC code
+> > >   board: samsung: e850-96: Configure PMIC regulators
+> > >   board: samsung: e850-96: Extract device info from fw loading code
+> > >   board: samsung: e850-96: Add bootdev var to choose boot device
+> > >   configs: e850-96: Disable CONFIG_DEFAULT_FDT_FILE
+> > >   configs: e850-96: Enable USB host support
+> > >   configs: e850-96: Enable Ethernet
+> > >
+> > >  board/samsung/e850-96/Makefile    |   2 +-
+> > >  board/samsung/e850-96/acpm.c      | 169 ++++++++++++++++++++++++++++=
+++
+> > >  board/samsung/e850-96/acpm.h      |  27 +++++
+> > >  board/samsung/e850-96/e850-96.c   |  97 +++++++++++++++--
+> > >  board/samsung/e850-96/e850-96.env |   2 +-
+> > >  board/samsung/e850-96/fw.c        |  45 ++++----
+> > >  board/samsung/e850-96/fw.h        |   4 +-
+> > >  board/samsung/e850-96/pmic.c      | 144 +++++++++++++++++++++++++
+> > >  board/samsung/e850-96/pmic.h      |  14 +++
+> > >  configs/e850-96_defconfig         |  10 +-
+> > >  drivers/usb/host/dwc3-of-simple.c |   1 +
+> > >  11 files changed, 482 insertions(+), 33 deletions(-)
+> > >  create mode 100644 board/samsung/e850-96/acpm.c
+> > >  create mode 100644 board/samsung/e850-96/acpm.h
+> > >  create mode 100644 board/samsung/e850-96/pmic.c
+> > >  create mode 100644 board/samsung/e850-96/pmic.h
+> > >
+> > Can you move pmic to drivers/power/pmic/ ?
+> >
+>
+> Thank you for the review! This PMIC code is not really a driver, at
+> least not yet. It's an ad-hoc solution, which is very specific to
+> E850-96 board, and in its current form can't be used (even in theory)
+> for different platforms. It also doesn't conform to U-Boot's Driver
+> Model -- and I'd like to avoid reworking in such a way, please see the
+> explanation below. At the moment it's very minimal and only needed to
+> make Ethernet functional.
+>
+> The plan for proper PMIC enablement is to do that first in Linux kernel, =
+i.e.:
+>   - implement S2MPU12 driver
+>   - define ACPM bus in device tree
+>   - define PMIC node in device tree and describe all needed LDO regulator=
+s
+>
+> and then porting all that into U-Boot. But that effort might take
+> quite a long time to implement, as I'm the only engineer working on
+> the E850-96 enablement at the moment. So I really think it's better to
+> keep the PMIC code as a part of the board code for now, hope you're ok
+> with that?
+>
+Ok, Thanks for this input.
+
+Thanks
+-Anand
