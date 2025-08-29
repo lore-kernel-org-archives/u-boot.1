@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A06CA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 19:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8421CA0FF9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 19:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B037683622;
-	Fri, 29 Aug 2025 21:27:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45E5B83622;
+	Fri, 29 Aug 2025 21:28:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S9BuCALi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eSkXang6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44B6783754; Fri, 29 Aug 2025 21:27:17 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 7361283767; Fri, 29 Aug 2025 21:28:28 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECB1883526
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 21:27:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36F9583526
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 21:28:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-7722c88fc5fso1006882b3a.2
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 12:27:14 -0700 (PDT)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-770530175a6so1651704b3a.3
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 12:28:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756495633; x=1757100433; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1756495705; x=1757100505; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=HwOXa2p1LAWK1BG6H3+ue+S21U/KFm9aI9ZHcQQQhd8=;
- b=S9BuCALi+3+PaaTecXpFNw8xJs2wQr1dqY97zeFhOqi52FsyknlG78U6AsG18Hvfur
- gsasGXVtwSa4rPUVT91GarL6GfXbN7JclZKdQ5u440Zmr/hEoRyI/H5vUPwsW94br9Dm
- i2uJOAyjQxyzW0uLqwApRBceF+AgB71gFw8leyDhBgUzAD3Pd0GixllNFmY70PoW8Pr3
- EqBXvXjH2K/3OOkWu0rPStDGvkyALFRQXTcbTiA+t8nv2hdkTg7aIbM8kv0zYtAhVTC4
- tllRNut0/Y09XmQDT3zROgr0dzlmD5GNlvLO8npdZBlpIe1pAitYcspdGH19my80mFmG
- 4Oww==
+ bh=O9lrFfTgb1/Oi1OtrA0jaH+oi6zKFt2TO62+yJiRkJ8=;
+ b=eSkXang6G/ucsr9R4lq/gBzuWtWkbDPERBj6dvRwY+xGga9OfApDAj4drdoVtAfJ/V
+ rTmIvTOAQncDer2apS1JpruCuigITH0vV73Iry0ptEE17AoBlBtMthksocD5jLNFpaYN
+ zWdh7+bWr6COxDq4QCNftAp4Sc4bC6cq+g1mTlUF5poEWRGQOYiq+SxKueRWiYlDWQwf
+ v0mEmLzwcWLQ0CSxJItKnhrfGT4g5j+FUz8FMHAyPxmJocxpfHRNE9FW1J8kkawjT9j0
+ 95Pn56wVUptjouhbFGI4kvDIF2ggxjgb7pOG+sPiHsLr3NNzZ1xP+5fUUPwila91zLa+
+ Niwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756495633; x=1757100433;
+ d=1e100.net; s=20230601; t=1756495705; x=1757100505;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HwOXa2p1LAWK1BG6H3+ue+S21U/KFm9aI9ZHcQQQhd8=;
- b=f3qYUI2GPQAh1wvR2FOb/pa0SLu7GPoqK9K2S2fIcebw13O3qNekrM3QFPVzGGKe0m
- xmCZpZjg8Ny9X+2nVJ0Pt9w/RHPTVN0w85LRSSl0YKmZK8AttJdUTfWibSAt4tOK239j
- wEAkQs+ZDH+YI9d58bhLYBSF9crd/v0OyeS+64uEdqboZLdGa4Ihr839qY2m6OtuwM2h
- U1cl+a7BHyFSHcnjBOJ+OsuriEreXkrlYrd8TFEepoRzEzUNwWca54tfxv1thVMS3phs
- OWItVEXf2lsrxCNFmO36RpiftL0qFYXCKffkaU5Ha/WekyXKCxzAlISJ+FlBK7jK5l9H
- Awqg==
-X-Gm-Message-State: AOJu0Yy2qjZoSo5L53fX7g9gG4cr7HXNgSdqhTjuDY90jAdAPqp6LHvk
- qoJEETjL3do83TW179I3RKjKiMKOXdcupEz8NAvCnFgtPQb/STrFjZder9VDqg==
-X-Gm-Gg: ASbGncud7O8yp0+jUFYY1S/bxCgdUNCgCgkUX3YbrLnMbSy5cHVRav6rA6bczWzX0bo
- cBLRkAjVd+LHcy2Vb3fu0YXuZWj88gqTxEb/7YjR+FLDRtO5Jmwu57LGRpUIP0IixQvMO47bi68
- KbbfktoG+CvTFhOubmwF2P9yGMqrsyVOOtjY4cgPPK5yba7lNPFwqFLMuiRLUKIn8qsqH+BxTTZ
- gEuSPo+tTiznA4hbt6oVU9hQvmoDDVUjnLk1dkONUXTCNTKIBngxchI6YaEaKzBxhsEaSZtTE4S
- kbpc2use+GjEBb02zC1/aRTJvXDrce/rMVhXDnj9yVpteqbZ+DlAj6Cq8zVriuJiIUEbH6hjCP3
- 1PuIATeh9Lrt47u/MWlfNplDxEb6kCckL9+mxjD/uCti3b2T6zwU8DVhglA==
-X-Google-Smtp-Source: AGHT+IGcujCYyzHaJRF2k76+N4r3xVyQdCOtb1NashHY/EOx0Ed9i0BC0y8NMbREiA3HURW2NjH+jQ==
-X-Received: by 2002:a17:903:38cf:b0:240:9dd8:219b with SMTP id
- d9443c01a7336-2462ef99b9amr397915825ad.49.1756495633225; 
- Fri, 29 Aug 2025 12:27:13 -0700 (PDT)
+ bh=O9lrFfTgb1/Oi1OtrA0jaH+oi6zKFt2TO62+yJiRkJ8=;
+ b=FlfOFhOIimlsWTWCg6VE30uXfl6pz0Zo5JabB6nDvcrBnnyNgSUaFT6RAvRqQ8k5db
+ feokko8CS1RIsqwz9ytSzLulgLVaHKX/C6SNrsynsrG1sPXfZgn1f8+6JYAgOx+v4PJ/
+ aDhrrstzQmuqA4To7jnseKT9MPQJizGL0m37gc+UW7FimHXieh5szTKCSvzgxL66sChL
+ dyQ7EGOb/XGniAogdxD/sDnDPwdTfkBy2a20huXGNnDnxLNIyby3Z1Br+0LHSwyp8Dd0
+ W2dkaXytU3c4TreqZHpz8uCNTAcrR2kPu9S9UIdHKAf1vQwUv7s1Up39OVf+S13mbyIX
+ Nopg==
+X-Gm-Message-State: AOJu0YzZ03B/A2uKgb8HiUMrenUheMRS+VFTu6FLRHUWP3dQ/btU/I/o
+ fP9fZsaCAYOWLhcVdPorM9GR/10Ula7coFvAsVVR2vio+5X+vVjCxh4yBUtXbA==
+X-Gm-Gg: ASbGncsuwfpX+G25JRBTEXD6sz7KgqakYpcZGfdSFrOrcsB+p8yzi3wf9+swyiyut0M
+ /hwwimf+V46QAoRWoq7Zw4OSLLg00TXpbDsf/HVMTnD8TXmJBA9X5eSje8mViogVYqiTbTnbVTk
+ 8LxJpZGZe1mqASTJj5ekb4xQHEYFkx9iiLzG6KHANP855QKk1C8UbUHHb+QeRNfu59ITBuJ9cf7
+ 5r5bXgeTTuLvfafA7oVTyoPTs8Vs/WKlFXwhI+T6n1ZSNC37mP2kTwq6cQ+YA2xc+kk3zcwhYoD
+ a/7A6U+rDRhtB4F8rPhKelY5fHHGd7AzDjdz/m198SlbRR7kDAYQXQJBV/kq2Hgzu33NdprOp0g
+ 4V6c/V62xwlQCg6V8R5uQm9QH3dlTdDYxZLFZSzpuPYYb91o=
+X-Google-Smtp-Source: AGHT+IFepmWIhrXjf8fhmpKQCLCjY/dAlIJxuyYM8RbG/3vRXLppDHX2Y69n8QR/Vzi95Mcrmaskdg==
+X-Received: by 2002:a05:6a20:6da0:b0:243:ab0c:f0ed with SMTP id
+ adf61e73a8af0-243ab0cf522mr9982658637.20.1756495704579; 
+ Fri, 29 Aug 2025 12:28:24 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:447b:4b45:1bf3:be16])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24903726d20sm32194095ad.36.2025.08.29.12.27.10
+ 41be03b00d2f7-b4cd38610edsm2814501a12.54.2025.08.29.12.28.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Aug 2025 12:27:12 -0700 (PDT)
+ Fri, 29 Aug 2025 12:28:24 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: peng.fan@nxp.com
 Cc: u-boot@lists.denx.de,
 	Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] imx8m[m,n,p]_evk: Add redundant environment support
-Date: Fri, 29 Aug 2025 16:26:56 -0300
-Message-Id: <20250829192656.2309247-1-festevam@gmail.com>
+Subject: [PATCH v2] imx8m[m,n,p]_evk: Add redundant environment support
+Date: Fri, 29 Aug 2025 16:28:15 -0300
+Message-Id: <20250829192815.2309584-1-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -98,12 +98,15 @@ X-Virus-Status: Clean
 For reliable Over The Air update, it is recommended that redundant
 environment is used.
 
-Add redundand environmen support for the i.MX8M EVK boards.
+Add redundant environment support for the i.MX8M EVK boards.
 
 While at it, increase the environment size and adjust the offset.
 
 Signed-off-by: Fabio Estevam <festevam@gmail.com>
 ---
+Changes since v1:
+- Fixed typos is commit log.
+
  configs/imx8mn_ddr4_evk_defconfig | 6 ++++--
  configs/imx8mn_evk_defconfig      | 6 ++++--
  configs/imx8mp_evk_defconfig      | 6 ++++--
