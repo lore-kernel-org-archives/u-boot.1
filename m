@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7531CA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C01ECA0FF0
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:30:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A0E7836AB;
+	by phobos.denx.de (Postfix) with ESMTP id B2EA8836D3;
 	Fri, 29 Aug 2025 16:29:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D07C83577; Fri, 29 Aug 2025 08:10:15 +0200 (CEST)
+ id 794B183487; Fri, 29 Aug 2025 08:10:15 +0200 (CEST)
 Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
  (mail-bjschn02on20728.outbound.protection.partner.outlook.cn
  [IPv6:2406:e500:4440:2::728])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4AE783447
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 08:10:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0376B834AD
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 08:10:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hal.feng@starfivetech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eN77FpqYVhDOY9vAA18M6ZxUx+q0xsDJGXn5ZJSuYfsHQhQbCOsNH7mfXz7QLzOLnjKhLQhNyvKuhtpHizbIfbNcSM/rg4SLDi/qoNHyDSDRjRAqMRSa/3DrILsIQZrG6LLyN3pIeSm/HklPhXYwaHqBhul/OPi2G69I/3Qx5Pxa4n2QKyUXjsao685DQzeyVjPdZvI5vNElMlPMe8+oDNZ1PEKRMdrMKiGZVSLgMohAryQYpJB58gS0iDh0ZTwgLzKQlwqIUmjfPFgnpvEglZDz2g6oCXl/nsTOacTw+ho9s6uRY5FX8kjOzlSvSH/ELXwdNWPX/DJzFMBqiA4wWg==
+ b=PW7KjKJMygWp7XiEgHTWmwOiVbeT3Rdy/K7/6v85zgvJ/RCuZ6OLTiPEMLh+v+WoekyfYADgGyNERSbuGM1Isul7XaTLtUTBg4CAhfz437dAQLH2l10DnXPrdXKtFwgc7kEgLcTYp2hz5UfCyAoStOyxzSd50zMcPnmZGLkJMo1say8cIECYMYY0DDsYuCuql0peWy0udq192f2kUdAvsf12eGmS9Yk71hU3sVVD/SBeAV5nsbod8xlQfuCLtGM+dQI/B0Qgay/pYK9YMyfTya9Qo5GHw5zPUWFWdIKTCG6JtG82maaHpLfnTE565weakkXuR7S3kZfQA9k/z9+/TA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l7TVkzUZBFu/kuHrCEXXWJf6Sg6jaA9ClluApjOLzVg=;
- b=l3j4dCFVEam/pQW4d6bFlVnZqDYndUqCFuqkPEVSu9colFUYtQv7GXYrxsQj97DVDjPNi2iDvWb25Mv8Ybo0lR95pCjZ/8vf2rJ1DzjdcvAtVT5OB9paYebxexd8nFROgO27uljMmfkvsgkcx6+MsUFXK0fQl6NKqC+AyPQ4+29OEFypQy8ygGkwLszVjDqDG654yBVlQm5v4N7veDlHQeV3+mj4EVurgNmNwCgUHuqSDty9un9+Ewbm0mMKM4W94sKXTesHvdWxqC4NxKKbsg96UwPPbkXsmT7GeyY0rfDYDrZCm0xmJhdiHKwf1ZYi7kKkhfNT7PdCUHTNP7Dwmw==
+ bh=Bxb/r26Hddvjc2WtqrIA9rqLzmVWn6o/a2dkbVhdcZo=;
+ b=fOc75okLo/wv9uUm/gA1tZ/a71CmJFYXLsUHU1GhHwrf2Tn83+0oxexRDNaP/XWUID5MOy+fmHyD2OpmlJs+JEQvHeGXpUC8yEZbruxpmpKy2n8QsLAGacIU6f+H6i6wdt+psply5g8FY65mxGFbGEqqi6p5zjR8P4fSc7zPaMqQLIZ18JXTE8qJi9JEiuXoaFqKwzAnJtkv2PJ93pqjocHTLCe6wr8eweBYme4UpLH06QHgtyUbtjLHJIL1o7yjUWxFfhXt5vn8+k4l6UL4/pfcVK4huLz1zGg4VBrGj0rfYLWm3zInbPJw73ofcOEWP8KJaEx2iRRrypUUOvSmBA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
@@ -40,11 +40,11 @@ Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c550:7::14) by ZQ2PR01MB1258.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c550:7::9) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.25; Fri, 29 Aug
- 2025 06:10:06 +0000
+ 2025 06:10:07 +0000
 Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7%6]) with mapi id 15.20.9052.024; Fri, 29 Aug 2025
- 06:10:06 +0000
+ 06:10:07 +0000
 From: Hal Feng <hal.feng@starfivetech.com>
 To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
  Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
@@ -53,10 +53,13 @@ To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
  E Shattow <e@freeshell.de>
 Cc: Hal Feng <hal.feng@starfivetech.com>,
 	u-boot@lists.denx.de
-Subject: [RFC 00/10] Add support for StarFive VisionFive 2 Lite board
-Date: Fri, 29 Aug 2025 14:09:21 +0800
-Message-ID: <20250829060931.79940-1-hal.feng@starfivetech.com>
+Subject: [RFC 01/10] riscv: dts: starfive: jh7110-common: Move out some nodes
+ to the board dts
+Date: Fri, 29 Aug 2025 14:09:22 +0800
+Message-ID: <20250829060931.79940-2-hal.feng@starfivetech.com>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20250829060931.79940-1-hal.feng@starfivetech.com>
+References: <20250829060931.79940-1-hal.feng@starfivetech.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: SHXPR01CA0018.CHNPR01.prod.partner.outlook.cn
@@ -65,54 +68,54 @@ X-ClientProxiedBy: SHXPR01CA0018.CHNPR01.prod.partner.outlook.cn
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1258:EE_
-X-MS-Office365-Filtering-Correlation-Id: 84cafe65-5dce-4609-2dff-08dde6c2b37e
+X-MS-Office365-Filtering-Correlation-Id: 73911dde-d2b1-44a8-ec30-08dde6c2b409
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|52116014|41320700013|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: LEsjmhVtN3atN3YDeJetLCGgzEsxGYN9nUivw7joX37h1y9n3lhEgBwNs6drGad97IRBi+6bCtUx/ef7ozYMBpvAMOunpwOo39NhmNBx8dl3xKLMjpZBXsAIXiSGOpC5mIt5JJen62oihbORKsgb8cchKZsAPf2LKJDvV8wTenQu4Dgr68mkQtmKedmwov+EJp7Rx17qWKXscfawAiDX+rKH7Of2+xCcdInf0wpB6A1Z6R/IQn5h+G4cYIv4CfCcykVEH0JeRFWY6GVlkClBpo1wsqUwT1NwhhKvkIMt1DXvWnSy+wbZxpGQ/JxEfCuStfkrhI4td5tm2sne7/UA5KJ0MgwIYIN0sz+xRJa5CYgHaaey9Nj9mV17UNgxqMp888a/nRRVcmoS6L1IJgkdOcLNFrzxDNsDeabTWDgEqzdGXjfjPHWKWSkqQKfm1wldQfLdJwCJhKy6rizrVF2snEqJJSj3SbVIFQdJwmPu240KHWRrVIFkWLzyiAHh7GyDt61Z7SIrsTlSw6Wpbept7ha425Bc3pFextg+g9r0svqsKv6TvNyQM94ENucUO9GoLQ54QtMMt8amxLon6fmmobyxVEvBDt94Fyza8h2eNoE=
+X-Microsoft-Antispam-Message-Info: kLWrxyIlRsAttVQZ1Pcoa2vYp8VqwINnmTrJutI337xECF0x9iFwM80r7hdcshfnD0FC14uHNCU8SKOvjDsRheQ9Pteu6efsCLNm1tbozmoTdNpHCR8w4eZH9+q14u5bzf1Xl0xcgofGpgJf2dO7qxXWsIB4ZyW8HMnm337ipRgPCF4MsMxC/dFVaD7Dr2yzbVfzMO03A4AVYAtbN3RSfcL34AegjCqznNAL/7j/r7NrjWT6AZ5Tze76zkzjBbI0LWFwio0dOsVGVfsizSBU/BzHRSwZ534pZyw3rXHj+NCoUHWMnwBp+QJ9RYcnlFwL+6wbmPMToN2LmKsDOu8UQTwKYOzk/OdsO/zZXveQB1xUyjlfxMmPZVjRJKJhVI1Rk+Rjamijj0ItphtQAaeCUTq9rFySaDsUPb5/8qYoIfig97nmNSbpJymXye07RMSsDQTevnym3t2Af7k7ZTZqRkq1FJYndRDtNus4nRZecw4h1eiUyNdg08QlcwN99o7pzAuoqoli1WVAY4UgnFkoOfN5S70D/yJpD4sRUqQhPBsyU3PFXyVYfqIXXgy8/m7jgWjgwgcq4zVLZCVW2JrI+w==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
  SFS:(13230040)(1800799024)(52116014)(41320700013)(366016)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?T+3JCPc95Bjnz4BYp+YuzseNN1TuA4F/447ONoRqsOjoiptWVcAluE4i6H6s?=
- =?us-ascii?Q?HWSQa8xl21/9BoSh4dhmxUhMLsv2SJClUcq8psxQxwOTzci+d97xt7Kn/ZxL?=
- =?us-ascii?Q?QKwXxPnqOocISqjCeoQWvw5hqhIT2mwYS9kaTXkUFXE5Dkms2HKeDxEGEwdq?=
- =?us-ascii?Q?ghcAiTHR6BtIlV68NRzg8k9WMUHQOcECBd5W2LRnc0AVGIgI8oyZlw1/4i78?=
- =?us-ascii?Q?FYn7rk2O6904x7Qf8BuqQXe8TqwtvbEAJCdRK/ekDjABDlocn5bJiILWDVtI?=
- =?us-ascii?Q?OC9YdxafPGLxlxInq9t8+8XITtRb+OiHoXxuLJbcfmj1XeYP02rRWjFJq67Q?=
- =?us-ascii?Q?nEx8fwcLEIfZasBBzFKKNUOvypFIpCC0DFqWWbAiZpbtn4MntWNg9kdaGlVo?=
- =?us-ascii?Q?/aTYMNWV8cu3QQ+pqVvcH7W1wyUcBtF6Vmz7CVMOO0mcPieENt7lW1YhDXiE?=
- =?us-ascii?Q?MBmNqVtF3IGytjgW3pe8S5YO6A3Cex047dLSsAxLKh49Cc6x2WE+11ck8fIG?=
- =?us-ascii?Q?3NmpqlnxzIJ+oqhLY572iLLoLJ9v/E1bWrExy5Ol+SksPkO8OZBBKGp04x98?=
- =?us-ascii?Q?ZgGgMV5Smju+wr7ekoIW+58RwH2QS9zkEZTW8lE2edjSozrNbYnmUg11E3tW?=
- =?us-ascii?Q?LlJ/sZcbDu/83U607TDX9XnMJLYN22MyB4hZR87Kmn3ma2hINmAMTHugnA2D?=
- =?us-ascii?Q?2cNe/XBiWBGdbpNgW3brO2L133LderAE5C8lnAKccAzIaas3eTJzGKIlldHl?=
- =?us-ascii?Q?2HX4ox99/XRhsf+Zqpq4FNtDmIDulB0ATqs7J6RwOneXRrHIzts50LCZ59jS?=
- =?us-ascii?Q?s5bS0rX3dhQnQALQRiqCaVEtYp/Wnm/fIvt1vWwdHKohRcGY4QN6oQpK7fLS?=
- =?us-ascii?Q?cFoExU+S8JyAo/KcSXZZQQOUMpgGrxJOpS6pl7nIl/yofShZs6CQFTOWX+dK?=
- =?us-ascii?Q?Um52lUi7F0JrLUUwAQBe6eNT3FaKwOs96yoBS/37kzudRCzolKK01W2MCUKB?=
- =?us-ascii?Q?mWvPolvhA4jz8MZjG5iKi12J/7cLtV+Jt+O48g+iMP3cm3OD7Y5vGY5ldp1+?=
- =?us-ascii?Q?kDxD76e05rs02+0zwzDtN/Bw3rGLqRrSXnC8paeB3V37JiTAttYYlLvlntyz?=
- =?us-ascii?Q?HK16yXtO0k+o1QzOGOszfrchZY8q6cjKIt//ULF6v38Uvm8SGnQGk9LKBttJ?=
- =?us-ascii?Q?SU3rx7/BY4xkQM7wTWz8UUDkSFzBw07E83iJrq+BPlnb0re2VQWL4/2gIBwh?=
- =?us-ascii?Q?Eet2qAiUb1JCsgaZLfSb30Dl+ckoGF30E7JkNiv8qQ6uXzW03mcxKWStngRh?=
- =?us-ascii?Q?DzPK/a9SCpu9ac5mQJUnsV5aew9YLOua0FDWfVMqr7tC84GmLdN2ypUWaMm9?=
- =?us-ascii?Q?zkZ0Lqn3tAzcmPAQQ/7cEb9joL2Cwzw32wq3zthjAkCusQ0cUkzLrOyw7qxN?=
- =?us-ascii?Q?I3QRlk8sggmEVEwj7b5uKkDKE4bSdojdsl9ZY/7LkLmzxVy6OteqRSdXAv2N?=
- =?us-ascii?Q?dt+hWBigNzoxO5FJdLJ14biw8N00rJEw6fkATNoNVUcBWOP3m70P/f6XruVZ?=
- =?us-ascii?Q?jFQmZ1j9AxCftro6vTgwIjTpxeToHOJXOQFSMeqdjrT+YiC0Eimn30IJbvZ1?=
- =?us-ascii?Q?uA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nCiTRe/g+8PbnT3rzCEQQOKhKidTmF75+zJM0Na0palqID0Zf4XwAz7rEoxu?=
+ =?us-ascii?Q?1O+Gljs/Dp0SIAIXa53v3GNxRW97oSrAX845Wi/9Q3LHdAqdOxcfi5H53kOD?=
+ =?us-ascii?Q?3Rm+kZ+SddM1xedM/wfryrDybxLc4dSgTNsrk9JpqO4DAI8sPBRpHd+dHuMv?=
+ =?us-ascii?Q?7B24z8VMxjedbzUBk5s+5/9T5Tjl1YgYNaU9ur9GNShyah9pGmBVZ7o8M+lO?=
+ =?us-ascii?Q?NHIhZiU7dlRpIqdqpU6qTCsNnunU/M/aoVqpzN4NcRhEC4wThovPKH1bQ9x8?=
+ =?us-ascii?Q?qn33ayzRSeiZw9o33rdsN+V4NvBuB/DDELzcos6k+qMk31FFZUpVFFy52/8R?=
+ =?us-ascii?Q?Gq9pyLJOh5VyfU8A8Nw/CZ93QDAaxHdd3yNlWiGIbq+RGvi6jfEjJzEln9h+?=
+ =?us-ascii?Q?344+K8eC1zQk9jP26wQyd9b3BR2/hEWhXeRh7Mwuf3hObb/OUc1baqFUugfM?=
+ =?us-ascii?Q?XiZintKhgyYVTeCL+OUwJi4bufo3fRWYAk2npm1mm3Mzu6lc+F0rzE1WQ6kQ?=
+ =?us-ascii?Q?zKHTlFqLS2pc+fRSwThdEN0YJRa8zIXjJOKNCmobllMLtdwIxFJzZG8AvMi1?=
+ =?us-ascii?Q?04HuidGzIOA9d7WVyhXVx91ft94xtwkqgRN//udX6m1f6DE45V6ALh8qa0jE?=
+ =?us-ascii?Q?tV6hKkvwJXQOkmgJUhLGKI6da/7xW7hET+qma/N7Fh8PbHJhaP/12+dJyKAy?=
+ =?us-ascii?Q?qbz2fbiQPahdkSohzC4HGrhYXTv4VFGTODfSGcavKvwxFW3Bpngtt/X0oHEY?=
+ =?us-ascii?Q?lNBi9pdNIkBHusVy9PsGzE3xdmvfCNSU9DWBx08EgsF/L5UWkg6IDHRiGeiO?=
+ =?us-ascii?Q?tgq13IVJI97Mp2q9jfqQfPB1kvLsJs3ltNW5rcFhjmL/opsSM6qp3DuMgrT+?=
+ =?us-ascii?Q?ISnJqxDCEVsTYE2HwLTlG0pbHcWm2y3O6+IGBMweABVdcAkUuBp21Q3exrOz?=
+ =?us-ascii?Q?qOihUBk0GtJ2h0EttrOzLeDooB0cAg3KlRjlyTOwqkFVj0JE4Cxgz3TM/grf?=
+ =?us-ascii?Q?M/guiqzXPwNnQtqCp4k1x6zjGrH0Prn+WUMquPWAHvC5KyTCDQ6gaCszEUOF?=
+ =?us-ascii?Q?8+viSBTirYssFsqBYKUGuDLMaFr1yP++J+1QfIvmP7ICI0+ppjpc6kmc3z/5?=
+ =?us-ascii?Q?yv5/h5Yxzs84atgwt2QdM/RAFYGzHeAKilWYymtaJ5h1ySqmzW6YUedJQy2Z?=
+ =?us-ascii?Q?i1eOsY7F4WrECy9ixCFNutuYkxYXFGLq//Qcm/PpNwfIveYt0a5VDaQae6wK?=
+ =?us-ascii?Q?qQDiCgUmJ1X/JSTyccabYMFueMRFELgwr2j21HkP2lQXOjHieLDSk0CQWihH?=
+ =?us-ascii?Q?sUppwco6l2UrJqnJImoUGB0Z6Bxxtx2+AMr24/toV6/6KJb/ygweKgVt4P/N?=
+ =?us-ascii?Q?ULoaVuES96CHzBCKxu8gmyUPVmu52t9cKMifmm6oarCTx/aD+NpqyChi6vVl?=
+ =?us-ascii?Q?AfqwFRqMYOfNcbDlDyGB45YWOvUrQ78OqthQDs2q1L4D+SsfL+QwYq3MTLz5?=
+ =?us-ascii?Q?qFwoAxYlgwcBdsRmprX1mWeG67qzP/uWH3G7Vd/1rTaU4ONwRcwVLhR+wmUy?=
+ =?us-ascii?Q?u57cP3XrSSKtgv+RfcKtZXD6lmV+KYAazhGhd9HBwna5StlM78CZmToTmFFI?=
+ =?us-ascii?Q?KA=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 84cafe65-5dce-4609-2dff-08dde6c2b37e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73911dde-d2b1-44a8-ec30-08dde6c2b409
 X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2025 06:10:06.7333 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2025 06:10:07.6317 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T8VL7QJVtJ0YZ4q8xsI1hAQl8DpGdyTtntKgCwGm4WV52wTkg1sMwrXm5gP4qcaqfsylPIitPDykTyBlMoL5VXBUB9md1ZatoapLRPPmjt8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: NjOEDqyH9CuXG6KCjPcvwL2jCeooaFSpUi8QAREUFvRK/qtp9iPB/Mczf/yTunq2zyQ451VmfF3JkI/DDXLwc9OEfv2D7kupyWGB1CtCxWY=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1258
 X-Mailman-Approved-At: Fri, 29 Aug 2025 16:29:12 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -131,68 +134,359 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-VisionFive 2 Lite is a mini SBC based on the StarFive JH7110S industrial
-SoC which can run at -40~85 degrees centigrade and up to 1.25GHz.
+Some node in this file are not used by the upcoming VisionFive 2 Lite
+board. Move them to the board dts to prepare for adding the new
+VisionFive 2 Lite device tree.
 
-Board features:
-- JH7110S SoC
-- 2/4/8 GiB LPDDR4 DRAM
-- AXP15060 PMIC
-- 40 pin GPIO header
-- 1x USB 3.0 host port
-- 3x USB 2.0 host port
-- 1x M.2 M-Key (size: 2242)
-- 1x MicroSD slot (optional non-removable eMMC)
-- 1x QSPI Flash
-- 1x I2C EEPROM
-- 1x 1Gbps Ethernet port
-- SDIO-based Wi-Fi & UART-based Bluetooth
-- 1x HDMI port
-- 1x 2-lane DSI
-- 1x 2-lane CSI
+Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+---
+ .../src/riscv/starfive/jh7110-common.dtsi     | 22 ---------
+ .../jh7110-deepcomputing-fml13v01.dts         | 49 +++++++++++++++++++
+ .../src/riscv/starfive/jh7110-milkv-mars.dts  | 49 +++++++++++++++++++
+ .../riscv/starfive/jh7110-pine64-star64.dts   | 49 +++++++++++++++++++
+ .../jh7110-starfive-visionfive-2.dtsi         | 46 +++++++++++++++++
+ dts/upstream/src/riscv/starfive/jh7110.dtsi   | 16 ------
+ 6 files changed, 193 insertions(+), 38 deletions(-)
 
-For more details, please see [1].
-
-Note: Patch 1 and 2 are the kernel device tree picked from [2]. If [2] is
-merged, they will be no more needed. Please ignore these two patches.
-
-[1] https://www.kickstarter.com/projects/starfive/visionfive-2-lite-unlock-risc-v-sbc-at-199
-[2] https://lore.kernel.org/all/20250821100930.71404-1-hal.feng@starfivetech.com/
-
-Hal Feng (10):
-  riscv: dts: starfive: jh7110-common: Move out some nodes to the board
-    dts
-  riscv: dts: starfive: Add VisionFive 2 Lite board device tree
-  eeprom: starfive: Simplify get_ddr_size_from_eeprom()
-  eeprom: starfive: Correct get_pcb_revision_from_eeprom()
-  eeprom: starfive: Update eeprom data format version to 3
-  pcie: starfive: Add a optional power gpio support
-  riscv: dts: jh7110: Add StarFive VisionFive 2 Lite u-boot device tree
-  configs: visionfive2: Add VisionFive 2 Lite DT to OF_LIST
-  board: starfive: spl: Support VisionFive 2 Lite
-  board: starfive: visionfive2: Add VisionFive 2 Lite fdt selection
-
- arch/riscv/cpu/jh7110/spl.c                   |   2 +-
- ...10s-starfive-visionfive-2-lite-u-boot.dtsi |   7 +
- arch/riscv/include/asm/arch-jh7110/eeprom.h   |  13 +-
- board/starfive/visionfive2/spl.c              |  21 ++-
- .../visionfive2/starfive_visionfive2.c        |  22 +--
- .../visionfive2/visionfive2-i2c-eeprom.c      | 119 +++++++++-----
- configs/starfive_visionfive2_defconfig        |   2 +-
- drivers/pci/pcie_starfive_jh7110.c            |   8 +
- .../src/riscv/starfive/jh7110-common.dtsi     |  22 ---
- .../jh7110-deepcomputing-fml13v01.dts         |  49 ++++++
- .../src/riscv/starfive/jh7110-milkv-mars.dts  |  49 ++++++
- .../riscv/starfive/jh7110-pine64-star64.dts   |  49 ++++++
- .../jh7110-starfive-visionfive-2.dtsi         |  46 ++++++
- dts/upstream/src/riscv/starfive/jh7110.dtsi   |  16 --
- .../jh7110s-starfive-visionfive-2-lite.dts    | 152 ++++++++++++++++++
- 15 files changed, 474 insertions(+), 103 deletions(-)
- create mode 100644 arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi
- create mode 100644 dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-
-
-base-commit: 3dc5e9a0108bb114175b6362f9cb22367402f624
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-common.dtsi b/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
+index 4baeb981d4d..9d3d03ad2ed 100644
+--- a/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
++++ b/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
+@@ -272,15 +272,9 @@
+ 	assigned-clock-rates = <50000000>;
+ 	bus-width = <8>;
+ 	bootph-pre-ram;
+-	cap-mmc-highspeed;
+-	mmc-ddr-1_8v;
+-	mmc-hs200-1_8v;
+-	cap-mmc-hw-reset;
+ 	post-power-on-delay-ms = <200>;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&mmc0_pins>;
+-	vmmc-supply = <&vcc_3v3>;
+-	vqmmc-supply = <&emmc_vdd>;
+ 	status = "okay";
+ };
+ 
+@@ -290,12 +284,7 @@
+ 	assigned-clock-rates = <50000000>;
+ 	bus-width = <4>;
+ 	bootph-pre-ram;
+-	no-sdio;
+-	no-mmc;
+-	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+-	disable-wp;
+ 	cap-sd-highspeed;
+-	post-power-on-delay-ms = <200>;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&mmc1_pins>;
+ 	status = "okay";
+@@ -439,17 +428,6 @@
+ 	};
+ 
+ 	mmc0_pins: mmc0-0 {
+-		 rst-pins {
+-			pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+-					      GPOEN_ENABLE,
+-					      GPI_NONE)>;
+-			bias-pull-up;
+-			drive-strength = <12>;
+-			input-disable;
+-			input-schmitt-disable;
+-			slew-rate = <0>;
+-		};
+-
+ 		mmc-pins {
+ 			pinmux = <PINMUX(PAD_SD0_CLK, 0)>,
+ 				 <PINMUX(PAD_SD0_CMD, 0)>,
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts b/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
+index f2857d021d6..5a2a41a7e8c 100644
+--- a/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
++++ b/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
+@@ -11,6 +11,55 @@
+ 	compatible = "deepcomputing,fml13v01", "starfive,jh7110";
+ };
+ 
++&cpu_opp {
++	opp-375000000 {
++		opp-hz = /bits/ 64 <375000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-500000000 {
++		opp-hz = /bits/ 64 <500000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-750000000 {
++		opp-hz = /bits/ 64 <750000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-1500000000 {
++		opp-hz = /bits/ 64 <1500000000>;
++		opp-microvolt = <1040000>;
++	};
++};
++
++&mmc0 {
++	cap-mmc-highspeed;
++	cap-mmc-hw-reset;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&emmc_vdd>;
++};
++
++&mmc0_pins {
++	rst-pins {
++		pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
++				      GPOEN_ENABLE,
++				      GPI_NONE)>;
++		bias-pull-up;
++		drive-strength = <12>;
++		input-disable;
++		input-schmitt-disable;
++		slew-rate = <0>;
++	};
++};
++
++&mmc1 {
++	no-sdio;
++	no-mmc;
++	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
++	disable-wp;
++	post-power-on-delay-ms = <200>;
++};
++
+ &pcie1 {
+ 	perst-gpios = <&sysgpio 21 GPIO_ACTIVE_LOW>;
+ 	phys = <&pciephy1>;
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts b/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+index 3bd62ab7852..0c90facc4ee 100644
+--- a/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
++++ b/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+@@ -11,6 +11,25 @@
+ 	compatible = "milkv,mars", "starfive,jh7110";
+ };
+ 
++&cpu_opp {
++	opp-375000000 {
++		opp-hz = /bits/ 64 <375000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-500000000 {
++		opp-hz = /bits/ 64 <500000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-750000000 {
++		opp-hz = /bits/ 64 <750000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-1500000000 {
++		opp-hz = /bits/ 64 <1500000000>;
++		opp-microvolt = <1040000>;
++	};
++};
++
+ &gmac0 {
+ 	starfive,tx-use-rgmii-clk;
+ 	assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
+@@ -22,6 +41,36 @@
+ 	status = "okay";
+ };
+ 
++&mmc0 {
++	cap-mmc-highspeed;
++	cap-mmc-hw-reset;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&emmc_vdd>;
++};
++
++&mmc0_pins {
++	rst-pins {
++		pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
++				      GPOEN_ENABLE,
++				      GPI_NONE)>;
++		bias-pull-up;
++		drive-strength = <12>;
++		input-disable;
++		input-schmitt-disable;
++		slew-rate = <0>;
++	};
++};
++
++&mmc1 {
++	no-sdio;
++	no-mmc;
++	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
++	disable-wp;
++	post-power-on-delay-ms = <200>;
++};
++
+ &pcie0 {
+ 	status = "okay";
+ };
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts b/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+index 31e825be206..c9677aef9ff 100644
+--- a/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
++++ b/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+@@ -14,6 +14,25 @@
+ 	};
+ };
+ 
++&cpu_opp {
++	opp-375000000 {
++		opp-hz = /bits/ 64 <375000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-500000000 {
++		opp-hz = /bits/ 64 <500000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-750000000 {
++		opp-hz = /bits/ 64 <750000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-1500000000 {
++		opp-hz = /bits/ 64 <1500000000>;
++		opp-microvolt = <1040000>;
++	};
++};
++
+ &gmac0 {
+ 	starfive,tx-use-rgmii-clk;
+ 	assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
+@@ -44,6 +63,36 @@
+ 	status = "okay";
+ };
+ 
++&mmc0 {
++	cap-mmc-highspeed;
++	cap-mmc-hw-reset;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&emmc_vdd>;
++};
++
++&mmc0_pins {
++	rst-pins {
++		pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
++				      GPOEN_ENABLE,
++				      GPI_NONE)>;
++		bias-pull-up;
++		drive-strength = <12>;
++		input-disable;
++		input-schmitt-disable;
++		slew-rate = <0>;
++	};
++};
++
++&mmc1 {
++	no-sdio;
++	no-mmc;
++	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
++	disable-wp;
++	post-power-on-delay-ms = <200>;
++};
++
+ &pcie1 {
+ 	status = "okay";
+ };
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi b/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+index 5f14afb2c24..d1e4206f125 100644
+--- a/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
++++ b/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+@@ -13,6 +13,25 @@
+ 	};
+ };
+ 
++&cpu_opp {
++	opp-375000000 {
++		opp-hz = /bits/ 64 <375000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-500000000 {
++		opp-hz = /bits/ 64 <500000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-750000000 {
++		opp-hz = /bits/ 64 <750000000>;
++		opp-microvolt = <800000>;
++	};
++	opp-1500000000 {
++		opp-hz = /bits/ 64 <1500000000>;
++		opp-microvolt = <1040000>;
++	};
++};
++
+ &gmac0 {
+ 	status = "okay";
+ };
+@@ -38,9 +57,36 @@
+ };
+ 
+ &mmc0 {
++	cap-mmc-highspeed;
++	cap-mmc-hw-reset;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&emmc_vdd>;
+ 	non-removable;
+ };
+ 
++&mmc0_pins {
++	rst-pins {
++		pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
++				      GPOEN_ENABLE,
++				      GPI_NONE)>;
++		bias-pull-up;
++		drive-strength = <12>;
++		input-disable;
++		input-schmitt-disable;
++		slew-rate = <0>;
++	};
++};
++
++&mmc1 {
++	no-sdio;
++	no-mmc;
++	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
++	disable-wp;
++	post-power-on-delay-ms = <200>;
++};
++
+ &pcie0 {
+ 	status = "okay";
+ };
+diff --git a/dts/upstream/src/riscv/starfive/jh7110.dtsi b/dts/upstream/src/riscv/starfive/jh7110.dtsi
+index 0ba74ef0467..d2463399b95 100644
+--- a/dts/upstream/src/riscv/starfive/jh7110.dtsi
++++ b/dts/upstream/src/riscv/starfive/jh7110.dtsi
+@@ -200,22 +200,6 @@
+ 	cpu_opp: opp-table-0 {
+ 			compatible = "operating-points-v2";
+ 			opp-shared;
+-			opp-375000000 {
+-					opp-hz = /bits/ 64 <375000000>;
+-					opp-microvolt = <800000>;
+-			};
+-			opp-500000000 {
+-					opp-hz = /bits/ 64 <500000000>;
+-					opp-microvolt = <800000>;
+-			};
+-			opp-750000000 {
+-					opp-hz = /bits/ 64 <750000000>;
+-					opp-microvolt = <800000>;
+-			};
+-			opp-1500000000 {
+-					opp-hz = /bits/ 64 <1500000000>;
+-					opp-microvolt = <1040000>;
+-			};
+ 	};
+ 
+ 	thermal-zones {
 -- 
 2.43.2
 
